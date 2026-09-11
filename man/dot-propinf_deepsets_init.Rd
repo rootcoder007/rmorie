@@ -37,3 +37,9 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+shapes <- list(c(3L, 2L), c(1L, 3L))
+m <- .propinf_deepsets_init(shapes, 8L, 4L, 8L, .propinf_rng(1L))
+length(m$psis)            # one entry per layer
+is.null(m$psis[[1]])      # the first layer has no incoming edge network
+}

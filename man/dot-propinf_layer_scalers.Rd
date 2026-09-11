@@ -17,3 +17,15 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+# a small fully connected net: three hidden units over two inputs,
+# then a single logistic output
+net <- list(
+  list(W = matrix(c(2, 3,
+                    1, 0,
+                    4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+  list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+)
+sets <- lapply(list(net, net), .propinf_set_representation_internal)
+.propinf_layer_scalers(sets)[[1]]
+}

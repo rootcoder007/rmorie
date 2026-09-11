@@ -21,3 +21,14 @@ A step of the propinf_native implementation. Called by \code{.propinf_sorted_rep
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+# a small fully connected net: three hidden units over two inputs,
+# then a single logistic output
+net <- list(
+  list(W = matrix(c(2, 3,
+                    1, 0,
+                    4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+  list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+)
+.propinf_permute_hidden_layer_internal(net, 0L, c(2L, 0L, 1L))[[1]]$b
+}

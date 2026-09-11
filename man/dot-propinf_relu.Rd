@@ -17,3 +17,7 @@ A step of the propinf_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+.propinf_relu(2.5)
+.propinf_relu(-2.5)
+}

@@ -19,3 +19,9 @@ A step of the propinf_native implementation. Called by \code{morie_propinf_prope
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+feats <- lapply(1:8, function(i) as.numeric(c(i, i^2 / 10, -i / 2, 1)))
+labs <- c(0, 0, 0, 0, 1, 1, 1, 1)
+meta <- .propinf_train_vector_meta(feats, labs, 8L, 50L, 0.05, 0L)
+.propinf_vector_meta_predict(meta, feats[[1]])
+}

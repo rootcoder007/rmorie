@@ -19,10 +19,14 @@ Numeric vector of predicted probabilities.
 }
 \keyword{internal}
 \examples{
-set.seed(1)
-X <- matrix(rnorm(60), 20, 3)
-y <- as.integer(X[, 1] + rnorm(20, 0, 0.3) > 0)
-net <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 5L,
-                                seed = 1L)
-morie_propinf_fcnn_predict(net, X[1:3, , drop = FALSE])
+# a small fully connected net: three hidden units over two inputs,
+# then a single logistic output
+net <- list(
+  list(W = matrix(c(2, 3,
+                    1, 0,
+                    4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+  list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+)
+X <- matrix(c(1, -2, 0.5, 3), nrow = 2, byrow = TRUE)
+morie_propinf_fcnn_predict(net, X)
 }

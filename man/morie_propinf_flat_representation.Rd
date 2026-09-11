@@ -18,10 +18,18 @@ Numeric vector.
 }
 \keyword{internal}
 \examples{
-set.seed(1)
-X <- matrix(rnorm(60), 20, 3)
-y <- as.integer(X[, 1] + rnorm(20, 0, 0.3) > 0)
-net <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 5L,
-                                seed = 1L)
-length(morie_propinf_flat_representation(net))
+# a small fully connected net: three hidden units over two inputs,
+# then a single logistic output
+net <- list(
+  list(W = matrix(c(2, 3,
+                    1, 0,
+                    4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+  list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+)
+# every row of W followed by that row's bias, layer by layer
+morie_propinf_flat_representation(net)
+# not invariant to relabelling, which is the weakness Ganju et al. report
+perm <- morie_propinf_permute_hidden_layer(net, 0L, c(2L, 0L, 1L))
+identical(morie_propinf_flat_representation(net),
+          morie_propinf_flat_representation(perm))
 }

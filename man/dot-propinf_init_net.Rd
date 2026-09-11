@@ -21,3 +21,7 @@ A step of the propinf_native implementation. Called by \code{morie_propinf_train
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+net <- .propinf_init_net(3L, c(4L, 2L), .propinf_rng(1L))
+vapply(net, function(L) dim(L$W), integer(2))
+}
