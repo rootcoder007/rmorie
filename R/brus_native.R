@@ -13,7 +13,9 @@
 #' @return List with total, mean, weights.
 #' @export
 #' @examples
-#' morie_ht_estimators(z = c(10, 20, 15), pi = c(0.1, 0.2, 0.15), n_population = 100)
+#' # equations 2.2 to 2.4: t_hat = sum z_k / pi_k
+#' morie_ht_estimators(z = c(10, 20, 30), pi = c(0.5, 0.25, 0.2),
+#'                     n_population = 100)
 morie_ht_estimators <- function(z, pi, n_population) {
   z <- as.numeric(z)
   pi <- as.numeric(pi)
@@ -37,7 +39,12 @@ morie_ht_estimators <- function(z, pi, n_population) {
 #'   whose inputs were supplied).
 #' @export
 #' @examples
-#' morie_si_estimators()
+#' # a proportion under simple random sampling, with its
+#' # finite-population correction
+#' morie_si_estimators(y = c(1, 0, 1, 1, 0, 1, 0, 1), n = 8,
+#'                     n_population = 200)
+#' # a normal-approximation interval
+#' morie_si_estimators(estimate = 10, variance = 4, u_crit = 1.96)$ci
 morie_si_estimators <- function(y = NULL, n = NA, n_population = NA,
                                 estimate = NA, variance = NA, u_crit = NA,
                                 zbar_hat = NA, area = NA, sample_area = NA,
@@ -183,8 +190,10 @@ morie_twostage_design <- function(s_w, s_b, c1, c2, v_max = NA,
 #' @return Numeric variance estimate.
 #' @export
 #' @examples
-#' morie_pps_variance(z = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8), t_hat
-#' = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' z <- c(12, 9, 15); p <- c(0.2, 0.3, 0.5)
+#' t_hat <- sum(z / p) / length(z)
+#' # the Hansen-Hurwitz variance estimator from the sample
+#' morie_pps_variance(z, p, t_hat)
 morie_pps_variance <- function(z, p, t_hat) {
   z <- as.numeric(z)
   p <- as.numeric(p)
@@ -553,7 +562,19 @@ morie_ospats <- function(gamma_bar_h = NULL, weights = NULL, n_h = NULL,
 #' @return List with lam, nu, v_ok_cov, v_ok_gamma, gamma_h, loglik.
 #' @export
 #' @examples
-#' morie_kriging()
+#' # an exponential covariance on four sites along a line
+#' sites <- c(0, 1, 2.5, 4)
+#' sigma2 <- 2; phi <- 1.5
+#' Cf <- function(h) sigma2 * exp(-h / phi)
+#' C <- outer(sites, sites, function(a, b) Cf(abs(a - b)))
+#' c0 <- Cf(abs(sites - 1.8))
+#' k <- morie_kriging(cov_ss = C, cov_s0 = c0)
+#' sum(k$lam)        # the weights sum to one
+#' # the prediction variance, in both of its forms
+#' morie_kriging(lam = k$lam, cov_s0 = c0, sigma2 = sigma2, nu = k$nu)$v_ok_cov
+#' morie_kriging(lam = k$lam, gamma_s0 = sigma2 - c0, nu = k$nu)$v_ok_gamma
+#' # the exponential semivariogram, gamma(0) = 0
+#' morie_kriging(h = c(0, 1, 2), c0 = 0.5, c1 = 1.5, phi = 2)$gamma_h
 morie_kriging <- function(cov_ss = NULL, cov_s0 = NULL, sigma2 = NA,
                           lam = NULL, nu = NA, gamma_s0 = NULL, h = NULL,
                           c0 = NA, c1 = NA, phi = NA, z = NULL,
@@ -573,7 +594,13 @@ morie_kriging <- function(cov_ss = NULL, cov_s0 = NULL, sigma2 = NA,
       nu
   }
   if (!is.null(lam) && !is.null(gamma_s0) && !is.na(nu)) {
-    out$v_ok_gamma <- sum(as.numeric(lam) * as.numeric(gamma_s0)) + nu
+    # Brus writes this form as lam' gamma + nu, where nu is the multiplier
+    # of the SEMIVARIANCE system. This function solves the covariance
+    # system above, and with gamma = sigma2 - C and sum(lam) = 1 the two
+    # multipliers are negatives of each other, so the nu returned here
+    # enters with a minus. Both forms then equal the definitional
+    # variance, sigma2 - 2 lam'c + lam' C lam.
+    out$v_ok_gamma <- sum(as.numeric(lam) * as.numeric(gamma_s0)) - nu
   }
   if (!is.null(h) && !is.na(c1)) {
     hv <- as.numeric(h)

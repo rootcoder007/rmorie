@@ -59,5 +59,17 @@ distance parameters) pins this form; the printed exp term is a display
 typo.
 }
 \examples{
-morie_kriging()
+# an exponential covariance on four sites along a line
+sites <- c(0, 1, 2.5, 4)
+sigma2 <- 2; phi <- 1.5
+Cf <- function(h) sigma2 * exp(-h / phi)
+C <- outer(sites, sites, function(a, b) Cf(abs(a - b)))
+c0 <- Cf(abs(sites - 1.8))
+k <- morie_kriging(cov_ss = C, cov_s0 = c0)
+sum(k$lam)        # the weights sum to one
+# the prediction variance, in both of its forms
+morie_kriging(lam = k$lam, cov_s0 = c0, sigma2 = sigma2, nu = k$nu)$v_ok_cov
+morie_kriging(lam = k$lam, gamma_s0 = sigma2 - c0, nu = k$nu)$v_ok_gamma
+# the exponential semivariogram, gamma(0) = 0
+morie_kriging(h = c(0, 1, 2), c0 = 0.5, c1 = 1.5, phi = 2)$gamma_h
 }
