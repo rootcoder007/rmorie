@@ -119,7 +119,7 @@ morie_tlseqsl_cv_folds <- function(n, V = 10, seed = 0) {
 morie_tlseqsl_cv_risk <- function(X, y, algorithm, V = 10, loss = "squared", seed = 0) {
   if (!(loss %in% .tlseqsl_LOSSES)) {
     stop(sprintf(
-      "tlseqsl: loss must be one of %s, got %r",
+      "tlseqsl: loss must be one of %s, got %s",
       paste(.tlseqsl_LOSSES, collapse = ", "), loss
     ))
   }

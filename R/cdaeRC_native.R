@@ -30,7 +30,7 @@
   }
   if (name == "identity") return(x)
   if (name == "tanh") return(tanh(x))
-  stop(sprintf("cdaeRC: activation must be one of %s, got %r",
+  stop(sprintf("cdaeRC: activation must be one of %s, got %s",
                paste(.cdae_acts, collapse = ", "), name))
 }
 
@@ -64,7 +64,7 @@
 corrupt <- function(y, q, rng) {
   qq <- as.numeric(q)
   if (!(qq >= 0.0 && qq < 1.0))
-    stop(sprintf("cdaeRC: q must lie in [0,1), got %r", q))
+    stop(sprintf("cdaeRC: q must lie in [0,1), got %s", q))
   d <- 1.0 / (1.0 - qq)
   u <- .ghc_unif(rng, length(y))
   ifelse(u < qq, 0.0, d * as.numeric(y))
@@ -133,7 +133,7 @@ decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
 #' @export
 loss <- function(y, y_hat, kind = "square") {
   if (!(kind %in% .cdae_losses))
-    stop(sprintf("cdaeRC: loss must be one of %s, got %r",
+    stop(sprintf("cdaeRC: loss must be one of %s, got %s",
                  paste(.cdae_losses, collapse = ", "), kind))
   yv <- as.numeric(y)
   yh <- as.numeric(y_hat)

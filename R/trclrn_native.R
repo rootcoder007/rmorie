@@ -141,7 +141,7 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
                               method = "ipw", outcome_model = NULL,
                               min_propensity = 0.01) {
   if (!(method %in% .trclrn_METHODS)) {
-    stop(sprintf("trclrn: method must be ipw or augmented, got %r",
+    stop(sprintf("trclrn: method must be ipw or augmented, got %s",
                  method))
   }
   chk <- .trclrn_check(Y, A, X, propensity, min_propensity)
@@ -233,7 +233,7 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
                             min_leaf = 10, n_thresholds = 20,
                             min_propensity = 0.01) {
   if (!(method %in% .trclrn_METHODS)) {
-    stop(sprintf("trclrn: method must be ipw or augmented, got %r",
+    stop(sprintf("trclrn: method must be ipw or augmented, got %s",
                  method))
   }
   if (method == "augmented" && is.null(outcome_model)) {

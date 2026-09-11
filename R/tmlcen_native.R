@@ -487,7 +487,7 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
                                  r = NULL, g = NULL, gc = NULL,
                                  trim = 1e-3) {
   if (!(kind %in% .tmlcen_KINDS)) {
-    stop(sprintf("tmle_censoring: kind must be 'right' or 'interval', got %r", kind))
+    stop(sprintf("tmle_censoring: kind must be 'right' or 'interval', got %s", kind))
   }
   if (kind == "interval") {
     psi <- morie_ipcw_interval(covariates, treatment, time, event, a = a, r = r,

@@ -115,7 +115,7 @@ morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
                           unit = "cluster", level = 0.95,
                           cluster_sampling = TRUE) {
   if (!(unit %in% c("cluster", "row")))
-    stop(sprintf("clrgrf: unit must be cluster or row, got %r", unit))
+    stop(sprintf("clrgrf: unit must be cluster or row, got %s", unit))
   yv <- as.numeric(y)
   n <- length(yv)
   Xm <- as.matrix(X)

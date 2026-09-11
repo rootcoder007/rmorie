@@ -299,7 +299,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
                     initial_basis = NULL) {
   if (!(rule %in% clpopt_pivots))
-    stop(sprintf("clpopt: rule must be one of %s, got %r",
+    stop(sprintf("clpopt: rule must be one of %s, got %s",
                  paste(clpopt_pivots, collapse = ", "), rule))
   cv <- as.numeric(c)
   n <- length(cv)

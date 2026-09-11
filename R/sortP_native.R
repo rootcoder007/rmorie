@@ -95,7 +95,7 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
   s <- sort(as.integer(graph_sizes))
   c <- as.numeric(coverage)
   if (c <= 0 || c > 1)
-    stop(sprintf("sortP: the coverage must lie in (0,1], got %r", coverage))
+    stop(sprintf("sortP: the coverage must lie in (0,1], got %s", coverage))
   if (length(s) == 0L) stop("sortP: no graph sizes given")
   idx <- min(length(s) - 1L, as.integer(ceiling(c * length(s))) - 1L)
   idx <- max(idx, 0L)

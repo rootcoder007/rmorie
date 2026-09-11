@@ -110,7 +110,7 @@ hindsr <- function(episodes, actions = NULL, goals = NULL,
                    reward_fn = NULL, state_to_goal = NULL, seed = 0L,
                    history = NULL) {
   if (!(strategy %in% ._STRATEGIES)) {
-    stop(sprintf("hindsr: strategy must be one of %s, got %r",
+    stop(sprintf("hindsr: strategy must be one of %s, got %s",
                  paste(sQuote(._STRATEGIES), collapse = ", "), strategy))
   }
   k <- as.integer(k)

@@ -47,7 +47,7 @@
     for (j in 1:n) {
       v <- Sm[i, j]
       if (!(0.0 <= v && v <= 1.0)) {
-        stop(sprintf("hiatus: sigma entries are probabilities and must lie in [0, 1], got %r", v))
+        stop(sprintf("hiatus: sigma entries are probabilities and must lie in [0, 1], got %s", v))
       }
     }
   }

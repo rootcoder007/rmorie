@@ -54,7 +54,7 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
       s <- sum((a - b) ^ 2)
       return(exp(-as.numeric(gamma) * s))
     }
-    stop(sprintf("svmopt: kernel must be linear, poly or rbf, got %r",
+    stop(sprintf("svmopt: kernel must be linear, poly or rbf, got %s",
                  kernel))
   }
   K <- matrix(0, n, n)

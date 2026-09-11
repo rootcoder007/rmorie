@@ -125,10 +125,10 @@ morie_mtr2sx <- function(beta_x, se_x, beta_y, se_y,
   MODELS <- c("multiplicative", "fixed", "additive")
   WEIGHTS <- c("first_order", "second_order")
   if (!(model %in% MODELS))
-    stop(sprintf("mtr2sx: model must be one of %s, got %r",
+    stop(sprintf("mtr2sx: model must be one of %s, got %s",
                  paste(MODELS, collapse = ", "), model))
   if (!(weights %in% WEIGHTS))
-    stop(sprintf("mtr2sx: weights must be one of %s, got %r",
+    stop(sprintf("mtr2sx: weights must be one of %s, got %s",
                  paste(WEIGHTS, collapse = ", "), weights))
   bx <- as.numeric(beta_x)
   by <- as.numeric(beta_y)

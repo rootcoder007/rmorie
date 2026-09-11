@@ -80,11 +80,11 @@ aipw_scores <- function(Y, W, mu1, mu0, e) {
     stop(sprintf("slvgrf: e has %d entries for %d units", length(ev), n))
   for (v in w)
     if (!(v == 0.0 || v == 1.0))
-      stop(sprintf("slvgrf: W must be 0/1, got %r", v))
+      stop(sprintf("slvgrf: W must be 0/1, got %s", v))
   for (v in ev)
     if (!(v > 0.0 && v < 1.0))
       stop(sprintf(paste0("slvgrf: the propensity must lie strictly ",
-                          "in (0, 1); got %r -- overlap fails"), v))
+                          "in (0, 1); got %s -- overlap fails"), v))
   out <- m1 - m0 + w * (y - m1) / ev - (1.0 - w) * (y - m0) / (1.0 - ev)
   as.numeric(out)
 }
@@ -133,7 +133,7 @@ toc_curve <- function(scores, priority) {
 #' @export
 rate <- function(scores, priority, weight = "autoc") {
   if (!(weight %in% .SLVGRF_WEIGHTS))
-    stop(sprintf("slvgrf: weight must be one of %s, got %r",
+    stop(sprintf("slvgrf: weight must be one of %s, got %s",
                  paste(.SLVGRF_WEIGHTS, collapse = ", "), weight))
   c <- toc_curve(scores, priority)
   n <- c$n
