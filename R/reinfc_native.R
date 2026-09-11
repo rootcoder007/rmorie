@@ -18,6 +18,11 @@
 #' @param s Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' .reinfc_logistic(0)
+#' # the two branches keep both tails from overflowing
+#' .reinfc_logistic(800)
+#' .reinfc_logistic(-800)
 .reinfc_logistic <- function(s) {
   if (s >= 0.0) {
     return(1.0 / (1.0 + exp(-s)))
@@ -72,6 +77,11 @@
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' rewards <- c(1, 0, 1, 1, 0)
+#' .reinfc_baseline_series(rewards, "none", 0.5)
+#' .reinfc_baseline_series(rewards, "mean", 0.5)
+#' .reinfc_baseline_series(rewards, "comparison", 0.5)
 .reinfc_baseline_series <- function(rewards, baseline, gamma) {
   n <- length(rewards)
   if (baseline == "none") {
@@ -355,6 +365,16 @@
     rate <- if (rate_scaling == "sigma2") alpha * sigma * sigma else alpha
     mu <- mu + rate * (r - b) * e_mu
     sigma <- sigma + rate * (r - b) * e_sig
+    if (!is.finite(mu) || !is.finite(sigma)) {
+      # Williams' results assume a bounded reward. With an unbounded one
+      # the mean update is quadratic in mu and runs away; say so at the
+      # trial it happens rather than comparing NA in the floor below and
+      # returning NaN parameters as if they were a fit.
+      stop(sprintf(paste0(
+        "reinfc: the gaussian unit diverged at trial %d (mu = %g, ",
+        "sigma = %g). Reduce alpha, or bound the reward: the ",
+        "convergence argument needs a bounded r."), trial_idx, mu, sigma))
+    }
     if (sigma <= 1e-12) {
       sigma <- 1e-12
     }
@@ -396,6 +416,19 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{.reinfc_run_logistic}.
 #' @export
+#' @examples
+#' # reward_fn is called as reward_fn(y, x); reward action 1
+#' reward <- function(y, x) if (as.numeric(y)[1] == 1) 1 else 0
+#' res <- morie_reinfc(reward, p = 0.5, unit = "bernoulli",
+#'                     trials = 300L, seed = 1L)
+#' round(unlist(res$estimate)[1], 3)          # the probability climbs to 1
+#' c(first = res$mean_reward_first, last = res$mean_reward_last)
+#' # a gaussian unit needs a bounded reward: the convergence argument
+#' # assumes one, and -(y - c)^2 makes the mean update run away
+#' bump <- function(y, x) exp(-0.5 * (as.numeric(y)[1] - 2)^2)
+#' g <- morie_reinfc(bump, mu = 0, sigma = 1, unit = "gaussian",
+#'                   trials = 400L, alpha = 0.2, seed = 1L)
+#' round(g$mu, 3)
 morie_reinfc <- function(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0.0, sigma = 1.0,
                          unit = "bernoulli-logistic", baseline = "comparison", mode = "immediate",
                          alpha = 0.1, gamma = 0.9, rho = 0.1, episode_length = 1, trials = 100,
@@ -487,6 +520,13 @@ morie_reinforce <- morie_reinfc
 #' @param b Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' # For a Bernoulli-logistic unit the expected update is
+#' # alpha * p * (1 - p) * (r1 - r0), which is alpha times the gradient of
+#' # expected reward, and does not depend on the baseline at all.
+#' morie_reinfc_expected_update(p = 0.5, r0 = 0, r1 = 1, alpha = 2)
+#' # the same update for any baseline (equation 10)
+#' morie_reinfc_expected_update(p = 0.5, r0 = 0, r1 = 1, alpha = 2, b = 100)
 morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
   p <- as.numeric(p)
   if (p <= 0 || p >= 1) {

@@ -21,3 +21,9 @@ A step of the reinfc_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+rewards <- c(1, 0, 1, 1, 0)
+.reinfc_baseline_series(rewards, "none", 0.5)
+.reinfc_baseline_series(rewards, "mean", 0.5)
+.reinfc_baseline_series(rewards, "comparison", 0.5)
+}
