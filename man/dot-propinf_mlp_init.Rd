@@ -19,3 +19,7 @@ A step of the propinf_native implementation. Called by \code{.propinf_deepsets_i
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+net <- .propinf_mlp_init(c(3L, 4L, 1L), .propinf_rng(1L))
+vapply(net, function(L) dim(L$W), integer(2))
+}

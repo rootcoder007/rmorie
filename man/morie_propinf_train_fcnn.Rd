@@ -26,9 +26,9 @@ A list of layers, each \code{list(W=, b=)}.
 \keyword{internal}
 \examples{
 set.seed(1)
-X <- matrix(rnorm(60), 20, 3)
-y <- as.integer(X[, 1] + rnorm(20, 0, 0.3) > 0)
-net <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 5L,
-                                seed = 1L)
-str(net, max.level = 1)
+X <- cbind(runif(60, -1, 1), runif(60, -1, 1))
+y <- as.numeric(X[, 1] + X[, 2] > 0)
+net <- morie_propinf_train_fcnn(X, y, hidden = c(6L), epochs = 60L,
+                                lr = 0.3, seed = 1L)
+mean((morie_propinf_fcnn_predict(net, X) >= 0.5) == (y == 1))
 }

@@ -19,3 +19,17 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+# a small fully connected net: three hidden units over two inputs,
+# then a single logistic output
+net <- list(
+  list(W = matrix(c(2, 3,
+                    1, 0,
+                    4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+  list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+)
+sets <- .propinf_set_representation_internal(net)
+shapes <- lapply(sets, function(L) c(length(L), length(L[[1]]) - 1L))
+m <- .propinf_deepsets_init(shapes, 6L, 3L, 6L, .propinf_rng(4L))
+.propinf_deepsets_forward(m, sets)[[1]]
+}

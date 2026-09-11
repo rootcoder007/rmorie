@@ -23,3 +23,10 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+net <- .propinf_mlp_init(c(3L, 2L, 1L), .propinf_rng(1L))
+g <- .propinf_zero_like(net)
+g[[1]]$b <- c(1, -1)
+stepped <- .propinf_sgd_step(net, g, lr = 0.1, scale = 1)
+stepped[[1]]$b - net[[1]]$b
+}

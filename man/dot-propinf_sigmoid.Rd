@@ -17,3 +17,9 @@ A step of the propinf_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+.propinf_sigmoid(0)
+# the two-branch form keeps the tails from overflowing
+.propinf_sigmoid(800)
+.propinf_sigmoid(-800)
+}

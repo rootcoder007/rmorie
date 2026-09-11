@@ -32,6 +32,13 @@
 #' @param seed Seed for the shared generator.
 #' @return A list of layers, each \code{list(W=, b=)}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- cbind(runif(60, -1, 1), runif(60, -1, 1))
+#' y <- as.numeric(X[, 1] + X[, 2] > 0)
+#' net <- morie_propinf_train_fcnn(X, y, hidden = c(6L), epochs = 60L,
+#'                                 lr = 0.3, seed = 1L)
+#' mean((morie_propinf_fcnn_predict(net, X) >= 0.5) == (y == 1))
 morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
                                     lr = 0.1, batch_size = 16L, seed = 0L) {
   rows <- .propinf_rows(X)
@@ -111,6 +118,17 @@ morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
 #' @param X Numeric matrix of inputs.
 #' @return Numeric vector of predicted probabilities.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' X <- matrix(c(1, -2, 0.5, 3), nrow = 2, byrow = TRUE)
+#' morie_propinf_fcnn_predict(net, X)
 morie_propinf_fcnn_predict <- function(net, X) {
   rows <- .propinf_rows(X)
   vapply(rows, function(r) {
@@ -130,6 +148,20 @@ morie_propinf_fcnn_predict <- function(net, X) {
 #' @param sigma Permutation of \code{seq_len(nrow(W[[t]]))}.
 #' @return A permuted copy of the network.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' X <- matrix(c(1, -2, 0.5, 3), nrow = 2, byrow = TRUE)
+#' perm <- morie_propinf_permute_hidden_layer(net, 0L, c(2L, 0L, 1L))
+#' # relabelling the units of a hidden layer changes nothing the net computes
+#' all.equal(morie_propinf_fcnn_predict(net, X),
+#'           morie_propinf_fcnn_predict(perm, X))
 morie_propinf_permute_hidden_layer <- function(net, t, sigma) {
   t <- as.integer(t)
   if (t < 0L || t >= length(net))
@@ -161,11 +193,26 @@ morie_propinf_permute_hidden_layer <- function(net, t, sigma) {
 #' @param net Network as returned by \code{morie_propinf_train_fcnn}.
 #' @return Numeric vector.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' # every row of W followed by that row's bias, layer by layer
+#' morie_propinf_flat_representation(net)
+#' # not invariant to relabelling, which is the weakness Ganju et al. report
+#' perm <- morie_propinf_permute_hidden_layer(net, 0L, c(2L, 0L, 1L))
+#' identical(morie_propinf_flat_representation(net),
+#'           morie_propinf_flat_representation(perm))
 morie_propinf_flat_representation <- function(net) {
   F <- numeric(0)
   for (L in net) {
-    for (i in seq_along(L$W)) {
-      F <- c(F, L$W[[i]], L$b[i])
+    for (i in seq_len(nrow(L$W))) {
+      F <- c(F, L$W[i, ], L$b[i])
     }
   }
   F
@@ -182,6 +229,21 @@ morie_propinf_flat_representation <- function(net) {
 #'   scalar. Defaults to the magnitude of the node's weight sum.
 #' @return Numeric vector.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' # Algorithm 1: units sorted by |sum of weights|, here 5, 1, 9, so the
+#' # canonical order of the rows is 3, 1, 2
+#' morie_propinf_sorted_representation(net)
+#' perm <- morie_propinf_permute_hidden_layer(net, 0L, c(2L, 0L, 1L))
+#' identical(morie_propinf_sorted_representation(net),
+#'           morie_propinf_sorted_representation(perm))
 morie_propinf_sorted_representation <- function(net, metric = NULL) {
   if (is.null(metric)) metric <- .propinf_node_metric
   # W stays a matrix: lapply over a matrix walks its ELEMENTS and
@@ -205,8 +267,20 @@ morie_propinf_sorted_representation <- function(net, metric = NULL) {
 #' @return List of layers, each a list of \code{c(weights, bias)}
 #'   numeric vectors.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' # Algorithm 2: each layer as a set of (weights, bias) vectors
+#' morie_propinf_set_representation(net)
 morie_propinf_set_representation <- function(net) {
-  lapply(net, function(L) lapply(seq_along(L$W), function(i) c(L$W[[i]], L$b[i])))
+  lapply(net, function(L) lapply(seq_len(nrow(L$W)),
+                                 function(i) c(L$W[i, ], L$b[i])))
 }
 
 #' Property inference on fully connected networks
@@ -240,6 +314,22 @@ morie_propinf_set_representation <- function(net) {
 #'   \code{n_target}, \code{architecture}, \code{meta_classifier},
 #'   \code{method}, \code{note}.
 #' @export
+#' @examples
+#' # six shadow models, half trained where the property holds
+#' set.seed(11)
+#' nets <- list(); labs <- numeric(0)
+#' for (i in 1:6) {
+#'   prop <- i %% 2L
+#'   X <- cbind(runif(40, -1, 1), runif(40, -1, 1))
+#'   y <- as.numeric(X[, prop + 1L] > 0)
+#'   nets[[i]] <- morie_propinf_train_fcnn(X, y, hidden = c(4L), epochs = 30L,
+#'                                         lr = 0.3, seed = as.integer(i))
+#'   labs <- c(labs, prop)
+#' }
+#' res <- morie_propinf_property_inference(nets, labs, representation = "set",
+#'                                         epochs = 20L, seed = 3L)
+#' res$train_accuracy
+#' res$representation
 morie_propinf_property_inference <- function(shadow_models, shadow_labels,
                                              target_models = NULL,
                                              target_labels = NULL,
@@ -364,6 +454,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param v Passed to \code{>}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' .propinf_relu(2.5)
+#' .propinf_relu(-2.5)
 .propinf_relu <- function(v) if (v > 0) v else 0
 
 #' .propinf_sigmoid
@@ -375,6 +468,11 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param z Numeric; passed to \code{exp}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' .propinf_sigmoid(0)
+#' # the two-branch form keeps the tails from overflowing
+#' .propinf_sigmoid(800)
+#' .propinf_sigmoid(-800)
 .propinf_sigmoid <- function(z) {
   if (z >= 0) 1 / (1 + exp(-z)) else {
     e <- exp(z)
@@ -393,16 +491,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @return The value of \code{e}, as built in the body.
 #' @export
 #' @examples
-#' res <- .propinf_rng(seed = 1L)
-#' res
+#' e <- .propinf_rng(1L)
+#' # the stream the Python arm produces for this seed
+#' replicate(3, .propinf_rng_next(e))
 .propinf_rng <- function(seed) {
-  st <- as.integer(seed)
-  # 2^31 exceeds .Machine$integer.max, so it cannot be an integer
-  # literal: with the L suffix R warns and silently uses the double
-  # anyway. Written as a double, which is what was always computed.
-  if (st < 0L) st <- st + 2147483648
+  # int(seed) & 0x7FFFFFFF or 1, as the Python arm reduces it. A modulus
+  # by 2^31 - 1 is not the same reduction: it sends 2^31 - 1 and -1 to 0.
+  st <- bitwAnd(as.integer(seed), 2147483647L)
   if (st == 0L) st <- 1L
-  st <- st %% 2147483647L
   e <- new.env(parent = emptyenv())
   e$st <- st
   e
@@ -417,9 +513,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param e A list; the body reads \code{$st} from it.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' e <- .propinf_rng(1L)
+#' replicate(3, .propinf_rng_next(e))
 .propinf_rng_next <- function(e) {
   e$st <- .ghc_lcg31(e$st)
-  e$st / 2147483647
+  # st / 2^31, matching the Python arm's st / float(1 << 31). Dividing by
+  # 2^31 - 1 instead diverged from it in the tenth significant digit.
+  e$st / 2147483648
 }
 
 #' .propinf_normal
@@ -432,11 +533,15 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' e <- .propinf_rng(7L)
+#' d <- replicate(1000, .propinf_normal(e))
+#' round(c(mean = mean(d), sd = sd(d)), 2)
 .propinf_normal <- function(rnd, scale = 1) {
-  # Box-Muller from the module LCG stream; the placeholder indirection
-  # through rnd$parent$dummy never held anything.
+  # Box-Muller from the module LCG stream, taking a second uniform for
+  # the angle the way the Python arm does.
   u <- max(.propinf_rng_next(rnd), 1e-12)
-  scale * sqrt(-2 * log(u)) * cos(2 * pi)
+  scale * sqrt(-2 * log(u)) * cos(2 * pi * .propinf_rng_next(rnd))
 }
 
 # The normal draws in the Python arm go through math.log and math.cos
@@ -452,9 +557,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param e A list; the body reads \code{$st} from it.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' e <- .propinf_rng(1L)
+#' replicate(3, .propinf_lcg_draw(e))
 .propinf_lcg_draw <- function(e) {
   e$st <- .ghc_lcg31(e$st)
-  e$st / 2147483647
+  e$st / 2147483648
 }
 
 #' .propinf_normal_lcg
@@ -468,6 +576,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' e <- .propinf_rng(11L)
+#' round(replicate(3, .propinf_normal_lcg(e, scale = 0.5)), 4)
 .propinf_normal_lcg <- function(e, scale = 1) {
   u <- max(.propinf_lcg_draw(e), 1e-12)
   scale * sqrt(-2 * log(u)) * cos(2 * pi * .propinf_lcg_draw(e))
@@ -484,6 +595,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param rnd Passed to \code{.propinf_normal_lcg}.
 #' @return The value of \code{net}, as built in the body.
 #' @export
+#' @examples
+#' net <- .propinf_init_net(3L, c(4L, 2L), .propinf_rng(1L))
+#' vapply(net, function(L) dim(L$W), integer(2))
 .propinf_init_net <- function(n_in, hidden, rnd) {
   sizes <- c(as.integer(n_in), as.integer(hidden), 1L)
   net <- list()
@@ -510,6 +624,19 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{acts}, \code{pre}.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' fp <- .propinf_forward(net, c(1, -2))
+#' fp$pre[[1]]        # pre-activations of the hidden layer
+#' fp$acts[[2]]       # after ReLU
+#' fp$acts[[3]]       # the logistic output
 .propinf_forward <- function(net, x) {
   acts <- list(as.numeric(x))
   pre <- list()
@@ -538,9 +665,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
-#' res <- .propinf_rows(X = x)
-#' res
+#' .propinf_rows(matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE))
 .propinf_rows <- function(X) {
   if (!is.matrix(X)) X <- as.matrix(X)
   out <- lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -567,6 +692,17 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param i See Usage.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' # |sum of the row's weights|, Algorithm 1's sorting key
+#' vapply(1:3, function(i) .propinf_node_metric(net[[1]], i), numeric(1))
 .propinf_node_metric <- function(layer, i) {
   abs(sum(layer$W[i, ]))
 }
@@ -584,6 +720,16 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param sigma Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' .propinf_permute_hidden_layer_internal(net, 0L, c(2L, 0L, 1L))[[1]]$b
 .propinf_permute_hidden_layer_internal <- function(net, t, sigma) {
   out <- lapply(net, function(L) list(W = L$W, b = as.numeric(L$b)))
   out[[t + 1L]]$W <- net[[t + 1L]]$W[sigma + 1L, , drop = FALSE]
@@ -603,6 +749,16 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param net See Usage.
 #' @return The value of \code{F}, as built in the body.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' .propinf_flat_representation_internal(net)
 .propinf_flat_representation_internal <- function(net) {
   F <- numeric(0)
   for (L in net) {
@@ -623,11 +779,21 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param metric Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{.propinf_flat_representation_internal}.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' .propinf_sorted_representation_internal(net)
 .propinf_sorted_representation_internal <- function(net, metric = NULL) {
   if (is.null(metric)) metric <- .propinf_node_metric
   cur <- lapply(net, function(L) list(W = L$W, b = as.numeric(L$b)))
   for (t in seq_len(length(cur) - 1L) - 1L) {
-    vals <- vapply(seq_len(nrow(cur[[t + 1L]]$W)) - 1L,
+    vals <- vapply(seq_len(nrow(cur[[t + 1L]]$W)),
                    function(i) metric(cur[[t + 1L]], i), numeric(1))
     sigma <- order(-vals) - 1L
     cur <- .propinf_permute_hidden_layer_internal(cur, t, sigma)
@@ -644,6 +810,16 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param net Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' .propinf_set_representation_internal(net)[[1]]
 .propinf_set_representation_internal <- function(net) {
   lapply(net, function(L) lapply(seq_len(nrow(L$W)),
                                  function(i) c(L$W[i, ], L$b[i])))
@@ -662,6 +838,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param rnd Passed to \code{.propinf_normal_lcg}.
 #' @return The value of \code{net}, as built in the body.
 #' @export
+#' @examples
+#' net <- .propinf_mlp_init(c(3L, 4L, 1L), .propinf_rng(1L))
+#' vapply(net, function(L) dim(L$W), integer(2))
 .propinf_mlp_init <- function(sizes, rnd) {
   net <- list()
   for (t in 2:length(sizes)) {
@@ -689,6 +868,10 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param hidden_act Compared against \code{"tanh"}. Defaults to \code{"relu"}.
 #' @return A list with \code{acts}, \code{pre}.
 #' @export
+#' @examples
+#' net <- .propinf_mlp_init(c(3L, 4L, 1L), .propinf_rng(1L))
+#' fp <- .propinf_mlp_forward(net, c(0.3, -0.7, 1.1), final = "sigmoid")
+#' fp$acts[[length(fp$acts)]]
 .propinf_mlp_forward <- function(net, x, final = "relu",
                                  hidden_act = "relu") {
   acts <- list(as.numeric(x))
@@ -727,8 +910,18 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param grads A vector; indexed elementwise.
 #' @param final One of \code{"linear"}, \code{"sigmoid"}, \code{"tanh"}. Defaults to \code{"relu"}.
 #' @param hidden_act Compared against \code{"tanh"}. Defaults to \code{"relu"}.
-#' @return The value of \code{delta}, as built in the body.
+#' @return A list with \code{delta}, the gradient with respect to this
+#' network's input, and \code{grads}, the accumulated parameter gradients.
 #' @export
+#' @examples
+#' net <- .propinf_mlp_init(c(3L, 4L, 1L), .propinf_rng(1L))
+#' x <- c(0.3, -0.7, 1.1)
+#' fp <- .propinf_mlp_forward(net, x, final = "sigmoid")
+#' p <- fp$acts[[length(fp$acts)]][[1L]]
+#' bw <- .propinf_mlp_backward(net, fp$acts, fp$pre, p - 1,
+#'                             .propinf_zero_like(net), final = "sigmoid")
+#' bw$delta                 # gradient with respect to x
+#' bw$grads[[1]]$b          # accumulated bias gradients of the first layer
 .propinf_mlp_backward <- function(net, acts, pre, dout, grads, final = "relu",
                                   hidden_act = "relu") {
   delta <- as.numeric(dout)
@@ -746,12 +939,17 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     a_in <- acts[[t]]
     grads[[t]]$b <- grads[[t]]$b + delta
     grads[[t]]$W <- grads[[t]]$W + delta %o% a_in
-    if (t > 1L) {
-      nxt <- as.numeric(t(delta) %*% net[[t]]$W)
-      delta <- nxt
-    }
+    # Propagate through every layer including the first: the contract is
+    # the gradient with respect to x, which the DeepSets chain then splits
+    # across a node's weights, bias and incoming representations. Stopping
+    # at t > 1 returned the first layer's pre-activation gradient instead,
+    # so phi and psi were handed a vector of the wrong length.
+    delta <- as.numeric(t(delta) %*% net[[t]]$W)
   }
-  delta
+  # The Python arm mutates its grads argument in place. R hands this
+  # function a copy, so the accumulated gradients have to travel back in
+  # the return value or they are lost with the frame.
+  list(delta = delta, grads = grads)
 }
 
 #' .propinf_zero_like
@@ -764,6 +962,10 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param net Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' net <- .propinf_mlp_init(c(3L, 4L, 1L), .propinf_rng(1L))
+#' z <- .propinf_zero_like(net)
+#' all(unlist(lapply(z, function(L) c(L$W, L$b))) == 0)
 .propinf_zero_like <- function(net) {
   lapply(net, function(L) list(W = matrix(0, nrow = nrow(L$W),
                                           ncol = ncol(L$W)),
@@ -783,6 +985,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param scale Numeric; combined arithmetically in the body.
 #' @return The value of \code{net}, as built in the body.
 #' @export
+#' @examples
+#' net <- .propinf_mlp_init(c(3L, 2L, 1L), .propinf_rng(1L))
+#' g <- .propinf_zero_like(net)
+#' g[[1]]$b <- c(1, -1)
+#' stepped <- .propinf_sgd_step(net, g, lr = 0.1, scale = 1)
+#' stepped[[1]]$b - net[[1]]$b
 .propinf_sgd_step <- function(net, grads, lr, scale) {
   for (k in seq_along(net)) {
     net[[k]]$W <- net[[k]]$W - lr * scale * grads[[k]]$W
@@ -805,6 +1013,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{net}, as built in the body.
 #' @export
+#' @examples
+#' feats <- lapply(1:8, function(i) as.numeric(c(i, i^2 / 10, -i / 2, 1)))
+#' labs <- c(0, 0, 0, 0, 1, 1, 1, 1)
+#' meta <- .propinf_train_vector_meta(feats, labs, 8L, 100L, 0.05, 0L)
+#' round(vapply(feats, function(f) .propinf_vector_meta_predict(meta, f),
+#'              numeric(1)), 2)
 .propinf_train_vector_meta <- function(feats, labels, hidden, epochs, lr,
                                         seed) {
   rnd <- .propinf_rng(as.integer(seed) + 7L)
@@ -824,10 +1038,11 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
       ap <- .propinf_mlp_forward(net, feats[[idx + 1L]], final = "sigmoid")
       acts <- ap$acts
       pre <- ap$pre
-      grads <- .propinf_zero_like(net)
-      .propinf_mlp_backward(net, acts, pre, acts[[length(acts)]][[1L]] -
-                              labels[idx + 1L], grads, final = "sigmoid")
-      net <- .propinf_sgd_step(net, grads, lr, 1)
+      bw <- .propinf_mlp_backward(net, acts, pre,
+                                  acts[[length(acts)]][[1L]] -
+                                    labels[idx + 1L],
+                                  .propinf_zero_like(net), final = "sigmoid")
+      net <- .propinf_sgd_step(net, bw$grads, lr, 1)
     }
   }
   net
@@ -843,6 +1058,11 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param f Passed to \code{.propinf_mlp_forward}.
 #' @return The value of \code{[[}.
 #' @export
+#' @examples
+#' feats <- lapply(1:8, function(i) as.numeric(c(i, i^2 / 10, -i / 2, 1)))
+#' labs <- c(0, 0, 0, 0, 1, 1, 1, 1)
+#' meta <- .propinf_train_vector_meta(feats, labs, 8L, 50L, 0.05, 0L)
+#' .propinf_vector_meta_predict(meta, feats[[1]])
 .propinf_vector_meta_predict <- function(net, f) {
   .propinf_mlp_forward(net, f, final = "sigmoid")$acts[[length(net) + 1L]][[1L]]
 }
@@ -856,6 +1076,17 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param sets_list A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' sets <- lapply(list(net, net), .propinf_set_representation_internal)
+#' .propinf_layer_scalers(sets)[[1]]
 .propinf_layer_scalers <- function(sets_list) {
   out <- list()
   for (t in seq_along(sets_list[[1L]])) {
@@ -891,6 +1122,11 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @return A list with \code{phis}, \code{psis}, \code{rho}, \code{repr_dim},
 #' \code{shapes}, \code{context}, \code{scalers}.
 #' @export
+#' @examples
+#' shapes <- list(c(3L, 2L), c(1L, 3L))
+#' m <- .propinf_deepsets_init(shapes, 8L, 4L, 8L, .propinf_rng(1L))
+#' length(m$psis)            # one entry per layer
+#' is.null(m$psis[[1]])      # the first layer has no incoming edge network
 .propinf_deepsets_init <- function(shapes, phi_hidden, repr_dim, rho_hidden,
                                    rnd, context = "paired",
                                    edge_hidden = NULL) {
@@ -915,7 +1151,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     } else {
       d_in <- n_in + 1L + prev_nodes * repr_dim
     }
-    psis[[length(psis) + 1L]] <- psi
+    # psis holds one entry per layer, NULL where the layer has no edge
+    # network. x[[i]] <- NULL deletes instead of appending, so the list
+    # stopped tracking the layer index and psis[[t]] ran off the end;
+    # single-bracket assignment of a length-one list appends the NULL,
+    # which is what the Python arm's psis.append(None) does.
+    psis[length(psis) + 1L] <- list(psi)
     phis[[length(phis) + 1L]] <- .propinf_mlp_init(c(d_in, phi_hidden,
                                                      repr_dim), rnd)
     prev_nodes <- n_nodes
@@ -938,6 +1179,19 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param sets A vector; its length is taken and its elements indexed.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' sets <- .propinf_set_representation_internal(net)
+#' shapes <- lapply(sets, function(L) c(length(L), length(L[[1]]) - 1L))
+#' m <- .propinf_deepsets_init(shapes, 6L, 3L, 6L, .propinf_rng(4L))
+#' .propinf_deepsets_forward(m, sets)[[1]]
 .propinf_deepsets_forward <- function(model, sets) {
   phis <- model$phis
   psis <- model$psis
@@ -1018,13 +1272,35 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param grads A list; the body reads \code{$phis}, \code{$psis}, \code{$rho} from it.
 #' @return The value of \code{for}.
 #' @export
+#' @examples
+#' # a small fully connected net: three hidden units over two inputs,
+#' # then a single logistic output
+#' net <- list(
+#'   list(W = matrix(c(2, 3,
+#'                     1, 0,
+#'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
+#'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
+#' )
+#' sets <- .propinf_set_representation_internal(net)
+#' shapes <- lapply(sets, function(L) c(length(L), length(L[[1]]) - 1L))
+#' m <- .propinf_deepsets_init(shapes, 6L, 3L, 6L, .propinf_rng(4L))
+#' fwd <- .propinf_deepsets_forward(m, sets)
+#' g <- .propinf_deepsets_backward(m, sets, fwd[[2]], fwd[[1]] - 1,
+#'                                 .propinf_zero_grads(m))
+#' g$rho[[1]]$b
 .propinf_deepsets_backward <- function(model, sets, cache, dout, grads) {
   r <- model$repr_dim
   ctx <- model$context
-  dF <- .propinf_mlp_backward(model$rho, cache$racts, cache$rpre, dout,
-                              grads$rho, final = "sigmoid", hidden_act = "tanh")
+  rho_bw <- .propinf_mlp_backward(model$rho, cache$racts, cache$rpre, dout,
+                                  grads$rho, final = "sigmoid",
+                                  hidden_act = "tanh")
+  dF <- rho_bw$delta
+  grads$rho <- rho_bw$grads
   dL <- lapply(seq_along(sets), function(t) dF[(t - 1L) * r + seq_len(r)])
-  d_from_next <- as.list(rep(NA, length(sets)))
+  # one NULL per layer, the way the Python arm's [None] * len(sets)
+  # starts out; an NA sentinel forced a guard that then had to ask
+  # is.na() of a gradient vector.
+  d_from_next <- vector("list", length(sets))
   for (t in rev(seq_along(sets))) {
     layer_cache <- cache$caches[[t]]
     n_prev <- if (t > 1L) length(cache$caches[[t - 1L]]) else 0L
@@ -1034,22 +1310,25 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
       lc <- layer_cache[[i]]
       dnode <- dL[[t]]
       extra <- d_from_next[[t]]
-      if (!is.null(extra) && length(extra) > 0L && !identical(extra, NA) &&
-          !is.na(extra[[1L]])) {
+      if (!is.null(extra)) {
         dnode <- dnode + extra[[i]]
       }
-      dx <- .propinf_mlp_backward(model$phis[[t]], lc$acts, lc$pre, dnode,
-                                  grads$phis[[t]], final = "tanh",
-                                  hidden_act = "tanh")
+      phi_bw <- .propinf_mlp_backward(model$phis[[t]], lc$acts, lc$pre, dnode,
+                                      grads$phis[[t]], final = "tanh",
+                                      hidden_act = "tanh")
+      dx <- phi_bw$delta
+      grads$phis[[t]] <- phi_bw$grads
       if (t == 1L || ctx == "none") next
       if (ctx == "paired") {
         dacc <- dx[2L:(1L + r)]
         for (j in seq_along(lc$edges)) {
           ea <- lc$edges[[j]]$acts
           ep <- lc$edges[[j]]$pre
-          de <- .propinf_mlp_backward(model$psis[[t]], ea, ep, dacc,
-                                      grads$psis[[t]], final = "tanh",
-                                      hidden_act = "tanh")
+          psi_bw <- .propinf_mlp_backward(model$psis[[t]], ea, ep, dacc,
+                                          grads$psis[[t]], final = "tanh",
+                                          hidden_act = "tanh")
+          de <- psi_bw$delta
+          grads$psis[[t]] <- psi_bw$grads
           d_prev[[j]] <- d_prev[[j]] + de[2L:(1L + r)]
         }
       } else {
@@ -1061,6 +1340,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     }
     if (t > 1L) d_from_next[[t - 1L]] <- d_prev
   }
+  grads
 }
 
 #' .propinf_zero_grads
@@ -1072,6 +1352,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param model A list; the body reads \code{$phis}, \code{$psis}, \code{$rho} from it.
 #' @return A list with \code{phis}, \code{psis}, \code{rho}.
 #' @export
+#' @examples
+#' shapes <- list(c(3L, 2L), c(1L, 3L))
+#' m <- .propinf_deepsets_init(shapes, 8L, 4L, 8L, .propinf_rng(1L))
+#' z <- .propinf_zero_grads(m)
+#' length(z$psis)
+#' is.null(z$psis[[1]])
 .propinf_zero_grads <- function(model) {
   list(phis = lapply(model$phis, .propinf_zero_like),
        psis = lapply(model$psis, function(p)
@@ -1096,6 +1382,19 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param context Passed to \code{.propinf_deepsets_init}. Defaults to \code{"paired"}.
 #' @return The value of \code{model}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(11)
+#' nets <- lapply(1:6, function(i) {
+#'   X <- cbind(runif(30, -1, 1), runif(30, -1, 1))
+#'   morie_propinf_train_fcnn(X, as.numeric(X[, (i %% 2L) + 1L] > 0),
+#'                            hidden = c(3L), epochs = 20L, lr = 0.3,
+#'                            seed = as.integer(i))
+#' })
+#' sets <- lapply(nets, .propinf_set_representation_internal)
+#' meta <- .propinf_train_set_meta(sets, c(0, 1, 0, 1, 0, 1), 6L, 3L, 6L,
+#'                                 20L, 0.05, 0L)
+#' round(vapply(sets, function(s)
+#'   .propinf_deepsets_forward(meta, s)[[1]], numeric(1)), 3)
 .propinf_train_set_meta <- function(sets_list, labels, phi_hidden, repr_dim,
                                     rho_hidden, epochs, lr, seed,
                                     context = "paired") {
@@ -1118,9 +1417,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
       fwd <- .propinf_deepsets_forward(model, sets_list[[idx + 1L]])
       out <- fwd[[1L]]
       cache <- fwd[[2L]]
-      grads <- .propinf_zero_grads(model)
-      .propinf_deepsets_backward(model, sets_list[[idx + 1L]], cache,
-                                 out - labels[idx + 1L], grads)
+      grads <- .propinf_deepsets_backward(model, sets_list[[idx + 1L]], cache,
+                                          out - labels[idx + 1L],
+                                          .propinf_zero_grads(model))
       for (k in seq_along(model$phis))
         model$phis[[k]] <- .propinf_sgd_step(model$phis[[k]], grads$phis[[k]],
                                              lr, 1)
@@ -1144,6 +1443,10 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param feats A vector; its length is taken and its elements indexed.
 #' @return A list with \code{feats}, \code{mu}, \code{sd}.
 #' @export
+#' @examples
+#' st <- .propinf_standardise(list(c(1, 10), c(3, 20), c(5, 30)))
+#' st$mu
+#' st$feats[[2]]     # the centre maps to zero
 .propinf_standardise <- function(feats) {
   d <- length(feats[[1L]])
   n <- as.numeric(length(feats))
@@ -1168,6 +1471,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param sd Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' st <- .propinf_standardise(list(c(1, 10), c(3, 20), c(5, 30)))
+#' .propinf_apply_standardise(c(3, 20), st$mu, st$sd)
 .propinf_apply_standardise <- function(f, mu, sd) {
   (f - mu) / sd
 }

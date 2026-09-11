@@ -19,3 +19,8 @@ A step of the propinf_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+e <- .propinf_rng(7L)
+d <- replicate(1000, .propinf_normal(e))
+round(c(mean = mean(d), sd = sd(d)), 2)
+}

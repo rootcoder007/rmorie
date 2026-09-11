@@ -19,3 +19,7 @@ A step of the propinf_native implementation. Called by \code{.propinf_init_net},
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+e <- .propinf_rng(11L)
+round(replicate(3, .propinf_normal_lcg(e, scale = 0.5)), 4)
+}

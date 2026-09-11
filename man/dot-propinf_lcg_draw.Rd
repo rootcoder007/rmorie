@@ -17,3 +17,7 @@ A step of the propinf_native implementation. Called by \code{.propinf_normal_lcg
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+e <- .propinf_rng(1L)
+replicate(3, .propinf_lcg_draw(e))
+}

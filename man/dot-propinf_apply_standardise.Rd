@@ -21,3 +21,7 @@ A step of the propinf_native implementation. Called by \code{morie_propinf_prope
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+st <- .propinf_standardise(list(c(1, 10), c(3, 20), c(5, 30)))
+.propinf_apply_standardise(c(3, 20), st$mu, st$sd)
+}

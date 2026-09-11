@@ -43,3 +43,17 @@ A step of the propinf_native implementation. Called by \code{morie_propinf_prope
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+set.seed(11)
+nets <- lapply(1:6, function(i) {
+  X <- cbind(runif(30, -1, 1), runif(30, -1, 1))
+  morie_propinf_train_fcnn(X, as.numeric(X[, (i \%\% 2L) + 1L] > 0),
+                           hidden = c(3L), epochs = 20L, lr = 0.3,
+                           seed = as.integer(i))
+})
+sets <- lapply(nets, .propinf_set_representation_internal)
+meta <- .propinf_train_set_meta(sets, c(0, 1, 0, 1, 0, 1), 6L, 3L, 6L,
+                                20L, 0.05, 0L)
+round(vapply(sets, function(s)
+  .propinf_deepsets_forward(meta, s)[[1]], numeric(1)), 3)
+}

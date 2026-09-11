@@ -18,6 +18,7 @@ See the file header for the source the module follows.
 the source it follows.
 }
 \examples{
-res <- .propinf_rng(seed = 1L)
-res
+e <- .propinf_rng(1L)
+# the stream the Python arm produces for this seed
+replicate(3, .propinf_rng_next(e))
 }
