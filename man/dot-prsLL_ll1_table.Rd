@@ -17,3 +17,23 @@ A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}, \code
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+# The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#   F -> ( E ) | id
+rules <- list(
+  list("E",  c("T", "Ep")),
+  list("Ep", c("+", "T", "Ep")),
+  list("Ep", character(0)),
+  list("T",  c("F", "Tp")),
+  list("Tp", c("*", "F", "Tp")),
+  list("Tp", character(0)),
+  list("F",  c("(", "E", ")")),
+  list("F",  "id")
+)
+g <- .prsLL_grammar(rules, start = "E")
+t <- .prsLL_ll1_table(g)
+length(t$conflicts)  # 0: one production per (nonterminal, lookahead) cell
+# cells are keyed by nonterminal and lookahead, joined by a CR
+t$table[[paste("F", "id", sep = intToUtf8(13))]]
+}

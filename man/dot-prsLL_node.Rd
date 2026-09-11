@@ -19,3 +19,6 @@ A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \co
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+.prsLL_node("T", list(.prsLL_leaf("id")))
+}
