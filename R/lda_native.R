@@ -135,7 +135,12 @@
     elog <- .morie_lda_e_log_theta(gam)
     new_phi <- matrix(0, nrow = N, ncol = K)
     for (n in seq_len(N)) {
-      row <- B[, w[n]] * exp(elog)
+      # w is validated as 0-based, 0 <= w < V, so it needs a +1 to
+      # index an R column. Used raw, word 0 selected B[, 0], an empty
+      # matrix, so z was 0 and the routine reported the word as having
+      # zero probability; every other word read the column belonging
+      # to its predecessor.
+      row <- B[, w[n] + 1L] * exp(elog)
       z <- sum(row)
       if (z <= .morie_lda_eps) {
         stop(sprintf("lda: word %d has zero probability under every topic", w[n]))
@@ -190,7 +195,7 @@
       p <- phi[n, i]
       if (p <= .morie_lda_eps) next
       val <- val + p * elog[i]
-      val <- val + p * log(max(B[i, w[n]], .morie_lda_eps))
+      val <- val + p * log(max(B[i, w[n] + 1L], .morie_lda_eps))
       val <- val - p * log(p)
     }
   }
@@ -244,7 +249,10 @@
       for (n in seq_along(d)) {
         wn <- d[n]
         for (i in seq_len(K)) {
-          counts[i, wn] <- counts[i, wn] + r$phi[n, i]
+          # same 0-based index, so the accumulation needs the +1 too:
+          # without it word 0's mass was dropped silently and column V
+          # was never incremented at all
+          counts[i, wn + 1L] <- counts[i, wn + 1L] + r$phi[n, i]
         }
       }
     }
@@ -284,7 +292,9 @@
     idx <- order(B[i, ], decreasing = TRUE)[seq_len(min(as.integer(n_top), ncol(B)))]
     out[[i]] <- lapply(idx, function(j) {
       if (is.null(vocab)) {
-        list(j, B[i, j])
+        # word indices are 0-based everywhere else in this module, so the
+        # reported one has to be too; j is an R column subscript
+        list(j - 1L, B[i, j])
       } else {
         list(vocab[j], B[i, j])
       }
