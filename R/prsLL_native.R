@@ -59,10 +59,8 @@
 #' @return The value of \code{unique}.
 #' @export
 #' @examples
-#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
-#' b <- c(1.5, 2.5, 3.5)
-#' res <- .prsLL_union(a = A, b = b)
-#' res
+#' # FIRST-set accumulation unions symbol sets and keeps first-seen order
+#' .prsLL_union(c("(", "id"), c("id", "+"))
 .prsLL_union <- function(a, b) unique(c(a, b))
 #' .prsLL_setdiff
 #'
@@ -76,10 +74,8 @@
 #' @return The value of \code{[}.
 #' @export
 #' @examples
-#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
-#' b <- c(1.5, 2.5, 3.5)
-#' res <- .prsLL_setdiff(a = A, b = b)
-#' res
+#' # epsilon is dropped from a FIRST set before the symbols after it are added
+#' .prsLL_setdiff(c("+", ""), "")
 .prsLL_setdiff <- function(a, b) a[!(a %in% b)]
 #' .prsLL_subset
 #'
@@ -93,10 +89,9 @@
 #' @return A logical value.
 #' @export
 #' @examples
-#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
-#' b <- c(1.5, 2.5, 3.5)
-#' res <- .prsLL_subset(a = A, b = b)
-#' res
+#' # the fixed-point loops stop when nothing new was added
+#' .prsLL_subset(c("(", "id"), c("(", "id", "+"))
+#' .prsLL_subset("*", c("(", "id"))
 .prsLL_subset <- function(a, b) all(a %in% b)
 
 # ----- Grammar construction and validation -----
@@ -112,6 +107,23 @@
 #' \code{as.character}.
 #' @return The value of \code{g}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' g$start
+#' length(g$rules)
 .prsLL_grammar <- function(rules, start = NULL) {
   R <- list()
   for (item in rules) {
@@ -157,6 +169,22 @@
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return The value of \code{seen}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' .prsLL_reachable(g)
 .prsLL_reachable <- function(g) {
   nts <- .prsLL_nonterminals(g)
   seen <- c(g$start)
@@ -187,6 +215,22 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' .prsLL_nonterminals(g)
 .prsLL_nonterminals <- function(g) {
   out <- character(0)
   for (rule in g$rules) {
@@ -207,6 +251,22 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' .prsLL_terminals(g)
 .prsLL_terminals <- function(g) {
   nts <- .prsLL_nonterminals(g)
   out <- character(0)
@@ -231,6 +291,24 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{first}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' first <- .prsLL_first_sets(g)
+#' first$E   # "(" and "id"
+#' first$Ep  # "+" and the empty string, which stands for epsilon
 .prsLL_first_sets <- function(g) {
   nts <- .prsLL_nonterminals(g)
   first <- list()
@@ -263,6 +341,25 @@
 #' @param nts Passed to \code{\%in\%}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' first <- .prsLL_first_sets(g)
+#' nts <- .prsLL_nonterminals(g)
+#' # T' can derive epsilon, so the walk continues into E'
+#' .prsLL_first_seq(c("Tp", "Ep"), first, nts)
 .prsLL_first_seq <- function(seq, first, nts) {
   out <- character(0)
   for (s in seq) {
@@ -290,6 +387,23 @@
 #' @param first Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{.prsLL_first_seq}.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' .prsLL_first_of(c("F", "Tp"), g)   # F cannot vanish: "(" and "id"
+#' .prsLL_first_of(c("Tp", "Ep"), g)  # both can: "*", "+", epsilon
 .prsLL_first_of <- function(seq, g, first = NULL) {
   f <- if (is.null(first)) .prsLL_first_sets(g) else first
   .prsLL_first_seq(as.character(seq), f, .prsLL_nonterminals(g))
@@ -305,6 +419,24 @@
 #' @param first Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{follow}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' follow <- .prsLL_follow_sets(g)
+#' follow$E  # ")" and "$", the end-of-input marker
+#' follow$F  # "+", "*", ")", "$"
 .prsLL_follow_sets <- function(g, first = NULL) {
   nts <- .prsLL_nonterminals(g)
   f <- if (is.null(first)) .prsLL_first_sets(g) else first
@@ -346,6 +478,25 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return A list with \code{table}, \code{conflicts}, \code{first}, \code{follow}.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' t <- .prsLL_ll1_table(g)
+#' length(t$conflicts)  # 0: one production per (nonterminal, lookahead) cell
+#' # cells are keyed by nonterminal and lookahead, joined by a CR
+#' t$table[[paste("F", "id", sep = intToUtf8(13))]]
 .prsLL_ll1_table <- function(g) {
   first <- .prsLL_first_sets(g)
   follow <- .prsLL_follow_sets(g, first)
@@ -387,6 +538,27 @@
 #' @return A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table},
 #' \code{first}, \code{follow}, \code{left_recursive}, \code{method}.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' .prsLL_is_ll1(g)$ll1
+#' # a grammar that is not LL(1): both productions are entered on "a"
+#' amb <- .prsLL_grammar(list(list("S", c("a", "S")), list("S", "a")))
+#' r <- .prsLL_is_ll1(amb)
+#' r$ll1
+#' r$conflicts[[1]][c("nonterminal", "lookahead")]
 .prsLL_is_ll1 <- function(g) {
   t <- .prsLL_ll1_table(g)
   list(
@@ -411,6 +583,14 @@
 #' @param g A list; the body reads \code{$rules} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' # E -> E + T competes with E -> T on every lookahead in FIRST(E)
+#' lr <- .prsLL_grammar(list(
+#'   list("E", c("E", "+", "T")),
+#'   list("E", "T"),
+#'   list("T", "id")
+#' ), start = "E")
+#' .prsLL_left_recursive(lr)
 .prsLL_left_recursive <- function(g) {
   nts <- .prsLL_nonterminals(g)
   first <- .prsLL_first_sets(g)
@@ -459,6 +639,17 @@
 #' @param g A list; the body reads \code{$rules}, \code{$start} from it.
 #' @return The value of \code{.prsLL_grammar}.
 #' @export
+#' @examples
+#' lr <- .prsLL_grammar(list(
+#'   list("E", c("E", "+", "T")),
+#'   list("E", "T"),
+#'   list("T", "id")
+#' ), start = "E")
+#' g2 <- .prsLL_remove_left_recursion(lr)
+#' .prsLL_left_recursive(g2)   # empty: the cycle is gone
+#' .prsLL_is_ll1(g2)$ll1
+#' # the transformation changes the tree shape, not the language
+#' morie_prsLL(g2, c("id", "+", "id"))$yield
 .prsLL_remove_left_recursion <- function(g) {
   rules <- list()
   nts <- .prsLL_nonterminals(g)
@@ -516,6 +707,8 @@
 #' @param sym Carried through into a list the body builds.
 #' @return A list with \code{symbol}, \code{children}.
 #' @export
+#' @examples
+#' .prsLL_leaf("id")
 .prsLL_leaf <- function(sym) {
   list(symbol = sym, children = NULL)
 }
@@ -531,6 +724,8 @@
 #' @param kids Carried through into a list the body builds.
 #' @return A list with \code{symbol}, \code{children}.
 #' @export
+#' @examples
+#' .prsLL_node("T", list(.prsLL_leaf("id")))
 .prsLL_node <- function(sym, kids) {
   list(symbol = sym, children = kids)
 }
@@ -548,6 +743,24 @@
 #' @param a Passed to \code{paste}.
 #' @return The value of \code{[[}.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' t <- .prsLL_ll1_table(g)
+#' # which production to expand F by when the lookahead is "id"
+#' .prsLL_pick(t$table, "F", "id")
 .prsLL_pick <- function(table, A, a) {
   key <- paste(A, a, sep = "\r")
   if (is.null(table[[key]])) {
@@ -569,6 +782,24 @@
 #' @param pos Numeric; combined arithmetically in the body.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' t <- .prsLL_ll1_table(g)
+#' res <- .prsLL_parse_rd(g, t$table, c("id", "*", "id", "$"), "E", 0L)
+#' .prsLL_linearise(res[[1]])
 .prsLL_parse_rd <- function(g, table, toks, A, pos) {
   i <- .prsLL_pick(table, A, toks[pos + 1L])
   rhs <- g$rules[[i]][[2]]
@@ -603,40 +834,67 @@
 #' @param toks A vector; indexed elementwise.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' t <- .prsLL_ll1_table(g)
+#' res <- .prsLL_parse_table(g, t$table, c("id", "+", "id", "$"))
+#' .prsLL_linearise(res[[1]])
+#' res[[2]]   # tokens consumed
 .prsLL_parse_table <- function(g, table, toks) {
   nts <- .prsLL_nonterminals(g)
-  root <- .prsLL_node(g$start, list())
-  stack <- list(list(g$start, root))
+  # Nodes are held flat and referred to by index. Assigning into a list
+  # element copies it in R, so writing children onto a node pulled off
+  # the stack would update a copy and leave the tree empty; indices make
+  # the parent-child link explicit instead.
+  nodes <- list(list(symbol = g$start, terminal = FALSE, children = integer(0)))
+  stack <- c(1L)
   pos <- 0L
   while (length(stack) > 0L) {
-    item <- stack[[length(stack)]]
-    stack[[length(stack)]] <- NULL
-    sym <- item[[1]]
-    node <- item[[2]]
-    if (sym %in% nts) {
-      i <- .prsLL_pick(table, sym, toks[pos + 1L])
-      rhs <- g$rules[[i]][[2]]
-      kids <- list()
-      for (s in rhs) {
-        if (s %in% nts) {
-          kids[[length(kids) + 1L]] <- .prsLL_node(s, list())
-        } else {
-          kids[[length(kids) + 1L]] <- .prsLL_leaf(s)
-        }
-      }
-      node$children <- kids
-      for (k in rev(seq_along(rhs))) {
-        stack[[length(stack) + 1L]] <- list(rhs[k], kids[[k]])
-      }
-    } else {
+    ni <- stack[length(stack)]
+    stack <- stack[-length(stack)]
+    sym <- nodes[[ni]]$symbol
+    if (nodes[[ni]]$terminal) {
       if (toks[pos + 1L] != sym) {
         stop(sprintf("prsLL: expected %s but found %s at token %d",
                      sym, toks[pos + 1L], pos))
       }
       pos <- pos + 1L
+      next
+    }
+    i <- .prsLL_pick(table, sym, toks[pos + 1L])
+    rhs <- g$rules[[i]][[2]]
+    kid_idx <- integer(0)
+    for (s in rhs) {
+      nodes[[length(nodes) + 1L]] <- list(
+        symbol = s, terminal = !(s %in% nts), children = integer(0))
+      kid_idx <- c(kid_idx, length(nodes))
+    }
+    nodes[[ni]]$children <- kid_idx
+    for (k in rev(seq_along(kid_idx))) {
+      stack <- c(stack, kid_idx[k])
     }
   }
-  list(root, pos)
+  assemble <- function(i) {
+    nd <- nodes[[i]]
+    if (nd$terminal) {
+      return(.prsLL_leaf(nd$symbol))
+    }
+    .prsLL_node(nd$symbol, lapply(nd$children, assemble))
+  }
+  list(assemble(1L), pos)
 }
 
 #' .prsLL_parse
@@ -650,6 +908,24 @@
 #' @param route Compared against \code{"table"}. Defaults to \code{"table"}.
 #' @return The value of \code{tree}, as built in the body.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' tree <- .prsLL_parse(g, c("id", "+", "id", "*", "id"))
+#' tree$symbol
+#' vapply(tree$children, function(k) k$symbol, character(1))
 .prsLL_parse <- function(g, tokens, route = "table") {
   if (!(route %in% .prsLL_ROUTES)) {
     stop(sprintf("prsLL: route must be one of %s, got %s",
@@ -687,6 +963,12 @@
 #' @param tree A list; the body reads \code{$children}, \code{$symbol} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' tree <- .prsLL_node("A", list(
+#'   .prsLL_leaf("x"),
+#'   .prsLL_node("B", list(.prsLL_leaf("y"), .prsLL_leaf("z")))
+#' ))
+#' .prsLL_linearise(tree)
 .prsLL_linearise <- function(tree) {
   if (is.null(tree$children)) {
     return(c(tree$symbol))
@@ -711,6 +993,27 @@
 #' @return A list with \code{estimate}, \code{tree}, \code{route}, \code{tokens},
 #' \code{yield}, \code{method}.
 #' @export
+#' @examples
+#' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):
+#' #   E -> T E';  E' -> + T E' | eps;  T -> F T';  T' -> * F T' | eps;
+#' #   F -> ( E ) | id
+#' rules <- list(
+#'   list("E",  c("T", "Ep")),
+#'   list("Ep", c("+", "T", "Ep")),
+#'   list("Ep", character(0)),
+#'   list("T",  c("F", "Tp")),
+#'   list("Tp", c("*", "F", "Tp")),
+#'   list("Tp", character(0)),
+#'   list("F",  c("(", "E", ")")),
+#'   list("F",  "id")
+#' )
+#' g <- .prsLL_grammar(rules, start = "E")
+#' res <- morie_prsLL(g, c("id", "+", "id", "*", "id"))
+#' res$yield
+#' # the table-driven and recursive-descent routes must agree
+#' rd <- morie_prsLL(g, c("id", "+", "id", "*", "id"),
+#'                   route = "recursive_descent")
+#' identical(res$tree, rd$tree)
 morie_prsLL <- function(grammar_, tokens, route = "table") {
   if (is.list(grammar_) && !is.null(grammar_$rules) && !is.null(grammar_$start)) {
     g <- grammar_

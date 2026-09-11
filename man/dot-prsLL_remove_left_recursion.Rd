@@ -17,3 +17,15 @@ A step of the prsLL_native implementation. No other function in the package call
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+lr <- .prsLL_grammar(list(
+  list("E", c("E", "+", "T")),
+  list("E", "T"),
+  list("T", "id")
+), start = "E")
+g2 <- .prsLL_remove_left_recursion(lr)
+.prsLL_left_recursive(g2)   # empty: the cycle is gone
+.prsLL_is_ll1(g2)$ll1
+# the transformation changes the tree shape, not the language
+morie_prsLL(g2, c("id", "+", "id"))$yield
+}

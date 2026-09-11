@@ -17,3 +17,10 @@ A step of the prsLL_native implementation. Called by \code{morie_prsLL}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+tree <- .prsLL_node("A", list(
+  .prsLL_leaf("x"),
+  .prsLL_node("B", list(.prsLL_leaf("y"), .prsLL_leaf("z")))
+))
+.prsLL_linearise(tree)
+}

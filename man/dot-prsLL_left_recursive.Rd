@@ -17,3 +17,12 @@ A step of the prsLL_native implementation. Called by \code{.prsLL_is_ll1}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+# E -> E + T competes with E -> T on every lookahead in FIRST(E)
+lr <- .prsLL_grammar(list(
+  list("E", c("E", "+", "T")),
+  list("E", "T"),
+  list("T", "id")
+), start = "E")
+.prsLL_left_recursive(lr)
+}
