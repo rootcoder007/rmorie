@@ -36,3 +36,17 @@ A step of the reinfc_native implementation. No other function in the package cal
 The value of \code{.reinfc_run_logistic}.
 }
 \keyword{internal}
+\examples{
+# reward_fn is called as reward_fn(y, x); reward action 1
+reward <- function(y, x) if (as.numeric(y)[1] == 1) 1 else 0
+res <- morie_reinfc(reward, p = 0.5, unit = "bernoulli",
+                    trials = 300L, seed = 1L)
+round(unlist(res$estimate)[1], 3)          # the probability climbs to 1
+c(first = res$mean_reward_first, last = res$mean_reward_last)
+# a gaussian unit needs a bounded reward: the convergence argument
+# assumes one, and -(y - c)^2 makes the mean update run away
+bump <- function(y, x) exp(-0.5 * (as.numeric(y)[1] - 2)^2)
+g <- morie_reinfc(bump, mu = 0, sigma = 1, unit = "gaussian",
+                  trials = 400L, alpha = 0.2, seed = 1L)
+round(g$mu, 3)
+}

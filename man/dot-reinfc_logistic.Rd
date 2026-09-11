@@ -17,3 +17,9 @@ A step of the reinfc_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+.reinfc_logistic(0)
+# the two branches keep both tails from overflowing
+.reinfc_logistic(800)
+.reinfc_logistic(-800)
+}
