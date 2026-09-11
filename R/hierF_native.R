@@ -143,7 +143,7 @@ shrink_covariance <- function(residuals, lam = NULL) {
 mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
                    ridge = 1e-10) {
   if (!(method %in% c("ols", "wls", "shrink", "custom"))) {
-    stop(sprintf("hierF: method must be ols, wls, shrink or custom, got %r", method))
+    stop(sprintf("hierF: method must be ols, wls, shrink or custom, got %s", method))
   }
   m <- nrow(S)
   n <- ncol(S)

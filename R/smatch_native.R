@@ -241,10 +241,10 @@ morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power =
     stop("smatch: the sample size is unbounded at a log relative incidence of 0")
   if (!(rr > 0.0 && rr < 1.0))
     stop(sprintf(paste0("smatch: r must lie strictly in (0, 1), got ",
-                        "%r -- it is the risk period as a fraction ",
+                        "%s -- it is the risk period as a fraction ",
                         "of the observation period"), r))
   if (!(p > 0.0 && p <= 1.0))
-    stop(sprintf("smatch: p_exposed must lie in (0, 1], got %r", p_exposed))
+    stop(sprintf("smatch: p_exposed must lie in (0, 1], got %s", p_exposed))
   if (!(as.numeric(alpha) > 0.0 && as.numeric(alpha) < 1.0))
     stop("smatch: alpha must lie in (0, 1)")
   if (!(as.numeric(power) > 0.0 && as.numeric(power) < 1.0))

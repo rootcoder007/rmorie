@@ -134,11 +134,11 @@ offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,
                    tol = 1e-12) {
   if (!(variant %in% .OFFLRL_VARIANTS))
     stop("offlrl: variant must be one of ",
-         paste(sprintf("%r", .OFFLRL_VARIANTS), collapse = ", "),
-         ", got ", sprintf("%r", variant))
+         paste(sprintf("%s", .OFFLRL_VARIANTS), collapse = ", "),
+         ", got ", sprintf("%s", variant))
   if (!(backup %in% .OFFLRL_BACKUPS))
     stop("offlrl: backup must be 'max' or 'pi', got ",
-         sprintf("%r", backup))
+         sprintf("%s", backup))
   alpha <- as.numeric(alpha)
   if (alpha < 0.0)
     stop("offlrl: alpha must be >= 0, got ", format(alpha))

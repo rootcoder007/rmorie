@@ -29,7 +29,7 @@
 .tqpack_pack_indices <- function(indices, bits) {
   b <- as.integer(bits)
   if (is.na(b) || b < 1L || b > 32L) {
-    stop(sprintf("pack_indices: bits must lie in 1..32, got %r", bits))
+    stop(sprintf("pack_indices: bits must lie in 1..32, got %s", bits))
   }
 
   if (is.null(indices)) {
@@ -50,7 +50,7 @@
       stop("pack_indices: index is NA")
     }
     if (v != floor(v)) {
-      stop(sprintf("pack_indices: index %r is not an integer", v))
+      stop(sprintf("pack_indices: index %s is not an integer", v))
     }
     if (v < 0 || v > limit) {
       stop(sprintf("pack_indices: index %d does not fit in %d bits (max %d)",
@@ -116,7 +116,7 @@
 .tqpack_unpack_indices <- function(data, bits, count) {
   b <- as.integer(bits)
   if (is.na(b) || b < 1L || b > 32L) {
-    stop(sprintf("unpack_indices: bits must lie in 1..32, got %r", bits))
+    stop(sprintf("unpack_indices: bits must lie in 1..32, got %s", bits))
   }
   n <- as.integer(count)
   if (is.na(n) || n < 0L) {

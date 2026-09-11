@@ -162,7 +162,7 @@ calibration_kl <- function(p, q, alpha = 0.01) {
                  length(pp), length(qq)))
   a <- as.numeric(alpha)
   if (!is.finite(a) || a <= 0.0 || a >= 1.0)
-    stop(sprintf("caltbR: alpha must lie in (0,1), got %r", alpha))
+    stop(sprintf("caltbR: alpha must lie in (0,1), got %s", alpha))
   tot <- 0.0
   for (g in seq_along(pp)) {
     if (pp[g] <= .CALTBR_EPS) next
@@ -212,7 +212,7 @@ diversity_prior <- function(p_u, p0, beta) {
   b <- as.numeric(p0)
   t <- as.numeric(beta)
   if (!is.finite(t) || t < 0.0 || t > 1.0)
-    stop(sprintf("caltbR: beta must lie in [0,1], got %r", beta))
+    stop(sprintf("caltbR: beta must lie in [0,1], got %s", beta))
   if (length(a) != length(b))
     stop(sprintf("caltbR: prior has %d genres, target %d",
                  length(b), length(a)))
@@ -264,7 +264,7 @@ calibrated_rerank <- function(scores, p_g_given_i, p_target, N = 10,
     stop("caltbR: N must be at least 1")
   lm <- as.numeric(lam)
   if (!is.finite(lm) || lm < 0.0 || lm > 1.0)
-    stop(sprintf("caltbR: lambda must lie in [0,1], got %r", lam))
+    stop(sprintf("caltbR: lambda must lie in [0,1], got %s", lam))
   pt <- .caltbR_norm(p_target)
 
   M <- .caltbR_to_pgi(p_g_given_i)

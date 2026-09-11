@@ -97,9 +97,9 @@
 chrf_score <- function(hypothesis, reference, n_char = 6L, beta = 2.0,
                        remove_whitespace = TRUE, word_order = 0L) {
   N <- as.integer(n_char)
-  if (N < 1L) stop(sprintf("chrf_score: n_char must be at least 1, got %r", n_char))
+  if (N < 1L) stop(sprintf("chrf_score: n_char must be at least 1, got %s", n_char))
   beta <- as.numeric(beta)
-  if (beta <= 0.0) stop(sprintf("chrf_score: beta must be positive, got %r", beta))
+  if (beta <= 0.0) stop(sprintf("chrf_score: beta must be positive, got %s", beta))
   w_order <- as.integer(word_order)
   if (w_order < 0L) stop("chrf_score: word_order must be >= 0")
 

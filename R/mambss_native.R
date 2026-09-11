@@ -39,9 +39,9 @@ softplus <- function(z) {
 #' @export
 discretize_zoh <- function(delta, A, B, rule = "zoh") {
   if (!(rule %in% c("zoh", "euler")))
-    stop(sprintf("mambss: rule must be zoh or euler, got %r", rule))
+    stop(sprintf("mambss: rule must be zoh or euler, got %s", rule))
   d <- as.numeric(delta)
-  if (d < 0.0) stop(sprintf("mambss: delta must be non-negative, got %r", delta))
+  if (d < 0.0) stop(sprintf("mambss: delta must be non-negative, got %s", delta))
   Av <- as.numeric(A)
   Bv <- as.numeric(B)
   if (length(Av) != length(Bv))

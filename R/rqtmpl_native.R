@@ -91,7 +91,7 @@ morie_haldane <- function(distance) {
 morie_inverse_haldane <- function(r) {
   r <- as.numeric(r)
   if (r < 0 || r >= 0.5)
-    stop(sprintf("rqtmpl: a recombination fraction must lie in [0, 0.5), got %r", r))
+    stop(sprintf("rqtmpl: a recombination fraction must lie in [0, 0.5), got %s", r))
   -0.5 * log(1 - 2 * r)
 }
 
@@ -113,9 +113,9 @@ morie_genotype_probabilities <- function(left, right, r_left, r_right) {
   rl <- as.numeric(r_left)
   rr <- as.numeric(r_right)
   if (rl < 0 || rl > 0.5)
-    stop(sprintf("rqtmpl: recombination fractions lie in [0, 0.5], got %r", r_left))
+    stop(sprintf("rqtmpl: recombination fractions lie in [0, 0.5], got %s", r_left))
   if (rr < 0 || rr > 0.5)
-    stop(sprintf("rqtmpl: recombination fractions lie in [0, 0.5], got %r", r_right))
+    stop(sprintf("rqtmpl: recombination fractions lie in [0, 0.5], got %s", r_right))
   q0 <- (if (0 != as.integer(left)) rl else 1 - rl) *
         (if (as.integer(right) != 0) rr else 1 - rr)
   q1 <- (if (1 != as.integer(left)) rl else 1 - rl) *

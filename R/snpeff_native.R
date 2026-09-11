@@ -62,10 +62,10 @@ translate <- function(seq, to_stop = FALSE) {
   s <- toupper(as.character(seq))
   s <- gsub("U", "T", s, fixed = TRUE)
   if (any(!strsplit(s, "")[[1L]] %in% c("A", "C", "G", "T", "N")))
-    stop(sprintf("snpeff: %r is not a nucleotide", seq))
+    stop(sprintf("snpeff: %s is not a nucleotide", seq))
   chars <- strsplit(s, "")[[1L]]
   if (any(!(chars %in% c("A", "C", "G", "T", "N"))))
-    stop(sprintf("snpeff: %r is not a nucleotide", seq))
+    stop(sprintf("snpeff: %s is not a nucleotide", seq))
   out <- character(0L)
   i <- 1L
   while (i + 2L <= length(chars)) {
@@ -161,8 +161,8 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
     stop(sprintf("snpeff: position %d is outside the sequence", pos))
   ref_at <- substr(seq, pos + 1L, pos + nchar(ref))
   if (ref_at != ref)
-    stop(sprintf(paste0("snpeff: the reference allele %r does not match ",
-                        "the sequence at position %d (%r)"),
+    stop(sprintf(paste0("snpeff: the reference allele %s does not match ",
+                        "the sequence at position %d (%s)"),
                  ref, pos, ref_at))
   end <- if (is.null(transcript_len)) nchar(seq)
   else cds_start + as.integer(transcript_len)

@@ -42,7 +42,7 @@
 #' @export
 term_weighting <- function(X, how = "log_entropy") {
   if (!(how %in% .WEIGHTS))
-    stop(sprintf("lsa: weighting must be one of %s, got %r",
+    stop(sprintf("lsa: weighting must be one of %s, got %s",
                  paste(.WEIGHTS, collapse = ", "), how))
   A <- apply(X, c(1, 2), as.numeric)
   t <- nrow(A)

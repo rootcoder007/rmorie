@@ -36,9 +36,9 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
                 huber_c = 1.0, behavior = NULL, tol = 1e-12) {
   tau <- as.numeric(tau)
   if (is.na(tau) || tau < 0.0 || tau > 1.0)
-    stop(sprintf("bcq: tau must lie in [0, 1], got %r", tau))
+    stop(sprintf("bcq: tau must lie in [0, 1], got %s", tau))
   if (!(loss %in% c("huber", "squared")))
-    stop(sprintf("bcq: loss must be 'huber' or 'squared', got %r", loss))
+    stop(sprintf("bcq: loss must be 'huber' or 'squared', got %s", loss))
   huber_c <- as.numeric(huber_c)
   if (huber_c <= 0.0)
     stop("bcq: huber_c must be > 0")
@@ -107,7 +107,7 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
     tot <- 0.0
     for (a in A) tot <- tot + G[[paste0(s, "|", a)]]
     if (tot <= 0.0)
-      stop(sprintf("bcq: G(.|%r) is all zero", s))
+      stop(sprintf("bcq: G(.|%s) is all zero", s))
   }
 
   allowed <- new.env(hash = TRUE, parent = emptyenv())
