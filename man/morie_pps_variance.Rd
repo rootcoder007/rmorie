@@ -21,6 +21,8 @@ Numeric variance estimate.
 Equation 8.2 of Brus (2022): sum((z_k/p_k - t_hat)^2)/(n(n-1)).
 }
 \examples{
-morie_pps_variance(z = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8),
-  t_hat = c(1, 2, 3, 4, 5, 6, 7, 8))
+z <- c(12, 9, 15); p <- c(0.2, 0.3, 0.5)
+t_hat <- sum(z / p) / length(z)
+# the Hansen-Hurwitz variance estimator from the sample
+morie_pps_variance(z, p, t_hat)
 }
