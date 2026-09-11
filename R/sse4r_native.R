@@ -93,6 +93,17 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{indices}, \code{replaced}, \code{p}, \code{rate}, \code{note}.
 #' @export
+#' @examples
+#' idx <- c(3L, 1L, 4L, 1L, 5L, 9L, 2L, 6L)
+#' # p = 0 is the identity
+#' unlist(.sse4r_sse_replace(idx, 10L, p = 0)$indices)
+#' # a positive p redraws a share of the positions from the same table
+#' res <- .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)
+#' unlist(res$indices)
+#' res$rate
+#' # the same seed reproduces the draw
+#' identical(res$indices,
+#'           .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)$indices)
 .sse4r_sse_replace <- function(indices, table_size, p = 0.0, seed = 0) {
   idx <- as.integer(indices)
   n <- as.integer(table_size)
@@ -118,9 +129,11 @@
     ))
   }
 
-  .ghc_rng(seed)
+  # .ghc_unif draws from the generator handed to it; the seeded stream has
+  # to be kept, and a bare 1.0 in that position is not a generator.
+  e <- .ghc_rng(seed)
   n_idx <- length(idx)
-  decisions <- .ghc_unif(1.0, n_idx)
+  decisions <- .ghc_unif(e, n_idx)
   pass <- decisions < pr
   n_pass <- sum(pass)
 
@@ -128,7 +141,9 @@
   rep_list <- list()
 
   if (n_pass > 0L) {
-    repls <- .ghc_unif(as.numeric(n), n_pass)
+    # n_pass draws spread over [0, n): the table size is the range, not the
+    # generator and not the count
+    repls <- .ghc_unif(e, n_pass, 0, as.numeric(n))
     j_vals <- as.integer(repls) %% n
     pass_idx <- which(pass)
     for (k in seq_along(pass_idx)) {

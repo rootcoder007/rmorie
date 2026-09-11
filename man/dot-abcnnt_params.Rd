@@ -10,9 +10,17 @@
 \item{flow}{A list; the body reads \code{$layers} from it.}
 }
 \value{
-The value of \code{out}, as built in the body.
+A list of addresses, each \code{list(layer=, field=, index=)},
+naming one trainable parameter of the flow.
 }
 \description{
 in the active set iff its mask entry is 1; theta columns are always
 unmasked, hidden units are masked by deg_in, output by deg_out.
+}
+\examples{
+flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+ps <- .abcnnt_params(flow)
+length(ps)
+# each entry addresses one trainable parameter
+ps[[1]]
 }

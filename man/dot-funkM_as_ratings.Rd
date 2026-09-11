@@ -16,3 +16,6 @@ Nothing; this branch always raises.
 Accepts a data.frame (with those columns) or a list of length-3
 vectors. Indices are kept 0-based, matching the Python source.
 }
+\examples{
+.funkM_as_ratings(data.frame(u = c(0L, 1L), i = c(2L, 3L), r = c(4, 5)))
+}

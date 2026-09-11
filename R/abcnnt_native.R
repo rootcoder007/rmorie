@@ -34,6 +34,12 @@
 #' @return A list with \code{W1}, \code{b1}, \code{Wm}, \code{bm}, \code{Wa}, \code{ba},
 #' \code{M1}, \code{M2}, \code{dim_x}, \code{dim_t}, \code{hidden}, \code{order}.
 #' @export
+#' @examples
+#' L <- .abcnnt_made_layer(dim_x = 3L, dim_t = 2L, hidden = 6L,
+#'                         e = .ghc_rng(1L), reverse = FALSE)
+#' dim(L$M1)   # hidden by dim_x + dim_t
+#' dim(L$M2)   # dim_x by hidden
+#' L$order
 .abcnnt_made_layer <- function(dim_x, dim_t, hidden, e, reverse = FALSE) {
   order <- seq_len(dim_x)
   if (reverse) order <- rev(order)
@@ -82,15 +88,24 @@
 #' @param t Passed to \code{c}.
 #' @return A list with \code{mu}, \code{al}, \code{h}.
 #' @export
+#' @examples
+#' L <- .abcnnt_made_layer(3L, 2L, 6L, .ghc_rng(2L), reverse = FALSE)
+#' st <- .abcnnt_layer_stats(L, x = c(0.5, -0.2, 0.9), t = c(0.1, -0.4))
+#' st$mu
+#' st$al       # the log-scale, clamped to [-5, 5]
 .abcnnt_layer_stats <- function(layer, x, t) {
   dx <- layer$dim_x
   dt <- layer$dim_t
   H <- layer$hidden
   inp <- c(x, t)
-  z <- layer$b1 + (layer$M1 * (layer$W1 %*% matrix(inp, ncol = 1)))[, 1]
+  # MADE masks the WEIGHTS: the autoregressive structure is (M * W) %*% x.
+  # Masking the product instead multiplies a hidden x (dim_x + dim_t) mask
+  # by a hidden x 1 vector, which is non-conformable for dim_x + dim_t > 1
+  # and, where rowSums hid it, computed rowSums(M) * (W %*% x).
+  z <- layer$b1 + as.numeric((layer$M1 * layer$W1) %*% matrix(inp, ncol = 1))
   h <- tanh(z)
-  mu <- layer$bm + rowSums(layer$M2 * (layer$Wm %*% matrix(h, ncol = 1)))
-  a <- layer$ba + rowSums(layer$M2 * (layer$Wa %*% matrix(h, ncol = 1)))
+  mu <- layer$bm + as.numeric((layer$M2 * layer$Wm) %*% matrix(h, ncol = 1))
+  a <- layer$ba + as.numeric((layer$M2 * layer$Wa) %*% matrix(h, ncol = 1))
   al <- pmin(pmax(a, -5), 5)
   list(mu = as.numeric(mu), al = as.numeric(al), h = as.numeric(h))
 }
@@ -100,6 +115,11 @@
 #' @param x See Usage.
 #' @param t See Usage.
 #' @export
+#' @examples
+#' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+#' fw <- flow_forward(flow, x = c(0.4, -0.7), t = c(0.1, 0.2))
+#' fw$u        # the latent point x maps to
+#' fw$total    # the log-Jacobian of the map
 flow_forward <- function(flow, x, t) {
   u <- as.numeric(x)
   total <- 0
@@ -116,6 +136,14 @@ flow_forward <- function(flow, x, t) {
 #' @param x See Usage.
 #' @param t See Usage.
 #' @export
+#' @examples
+#' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+#' flow_logprob(flow, x = c(0.4, -0.7), t = c(0.1, 0.2))
+#' # for one dimension the density integrates to one
+#' f1 <- MAF(dim_x = 1L, dim_t = 1L, n_layers = 3L, hidden = 5L, seed = 4L)
+#' g <- seq(-12, 12, length.out = 2001)
+#' d <- vapply(g, function(x) exp(flow_logprob(f1, x, 0.3)), numeric(1))
+#' round(sum((d[-1] + d[-length(d)]) / 2) * (g[2] - g[1]), 3)
 flow_logprob <- function(flow, x, t) {
   fw <- flow_forward(flow, x, t)
   d <- length(fw$u)
@@ -129,6 +157,12 @@ flow_logprob <- function(flow, x, t) {
 #' @param hidden See Usage.
 #' @param seed See Usage.
 #' @export
+#' @examples
+#' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 3L, hidden = 6L, seed = 1L)
+#' length(flow$layers)
+#' # the autoregressive ordering alternates between layers
+#' flow$layers[[1]]$order
+#' flow$layers[[2]]$order
 MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
   if (dim_x < 1L || dim_t < 1L) stop("abcnnt: dimensions must be positive")
   if (n_layers < 1L || hidden < 1L) {
@@ -153,29 +187,76 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' unmasked, hidden units are masked by deg_in, output by deg_out.
 #'
 #' @param flow A list; the body reads \code{$layers} from it.
-#' @return The value of \code{out}, as built in the body.
+#' @return A list of addresses, each \code{list(layer=, field=, index=)},
+#' naming one trainable parameter of the flow.
 #' @export
+#' @examples
+#' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+#' ps <- .abcnnt_params(flow)
+#' length(ps)
+#' # each entry addresses one trainable parameter
+#' ps[[1]]
 .abcnnt_params <- function(flow) {
+  # An address, not the value: R hands out a copy of L$W1, so perturbing
+  # what this returned could never reach the flow and every
+  # finite-difference gradient came out as exactly zero.
   out <- list()
-  for (L in flow$layers) {
+  at <- function(layer, field, index)
+    list(layer = layer, field = field, index = index)
+  for (li in seq_along(flow$layers)) {
+    L <- flow$layers[[li]]
     for (k in seq_len(L$hidden)) {
       for (j in seq_len(L$dim_x + L$dim_t)) {
-        if (L$M1[k, j] == 1) out[[length(out) + 1L]] <- list(L$W1, c(k, j))
+        if (L$M1[k, j] == 1) out[[length(out) + 1L]] <- at(li, "W1", c(k, j))
       }
-      out[[length(out) + 1L]] <- list(L$b1, c(k))
+      out[[length(out) + 1L]] <- at(li, "b1", k)
     }
     for (i in seq_len(L$dim_x)) {
       for (k in seq_len(L$hidden)) {
         if (L$M2[i, k] == 1) {
-          out[[length(out) + 1L]] <- list(L$Wm, c(i, k))
-          out[[length(out) + 1L]] <- list(L$Wa, c(i, k))
+          out[[length(out) + 1L]] <- at(li, "Wm", c(i, k))
+          out[[length(out) + 1L]] <- at(li, "Wa", c(i, k))
         }
       }
-      out[[length(out) + 1L]] <- list(L$bm, c(i))
-      out[[length(out) + 1L]] <- list(L$ba, c(i))
+      out[[length(out) + 1L]] <- at(li, "bm", i)
+      out[[length(out) + 1L]] <- at(li, "ba", i)
     }
   }
   out
+}
+
+#' Read the parameter an address points at
+#' @param flow A flow as built by \code{MAF}.
+#' @param a An address from \code{.abcnnt_params}.
+#' @return The scalar parameter value.
+#' @export
+#' @examples
+#' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+#' a <- .abcnnt_params(flow)[[1]]
+#' .abcnnt_param_get(flow, a)
+.abcnnt_param_get <- function(flow, a) {
+  x <- flow$layers[[a$layer]][[a$field]]
+  if (length(a$index) == 2L) x[a$index[1L], a$index[2L]] else x[a$index[1L]]
+}
+
+#' Write the parameter an address points at
+#' @param flow A flow as built by \code{MAF}.
+#' @param a An address from \code{.abcnnt_params}.
+#' @param v The replacement value.
+#' @return The flow, with that one parameter replaced.
+#' @export
+#' @examples
+#' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+#' a <- .abcnnt_params(flow)[[1]]
+#' moved <- .abcnnt_param_set(flow, a, 0.5)
+#' .abcnnt_param_get(moved, a)
+.abcnnt_param_set <- function(flow, a, v) {
+  if (length(a$index) == 2L) {
+    flow$layers[[a$layer]][[a$field]][a$index[1L], a$index[2L]] <- v
+  } else {
+    flow$layers[[a$layer]][[a$field]][a$index[1L]] <- v
+  }
+  flow
 }
 
 #' Train a MAF by central-difference SGD
@@ -190,6 +271,17 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' @param seed See Usage.
 #' @param batch See Usage.
 #' @export
+#' @examples
+#' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+#' set.seed(1)
+#' D <- lapply(1:30, function(k) {
+#'   th <- rnorm(2)
+#'   list(th, th * 0.5 + rnorm(2, 0, 0.2))
+#' })
+#' ll <- function(fl) mean(vapply(D, function(p)
+#'   flow_logprob(fl, p[[2]], p[[1]]), numeric(1)))
+#' trained <- train_flow(flow, D, epochs = 10L, lr = 0.02, seed = 1L)
+#' round(c(before = ll(flow), after = ll(trained)), 3)
 train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
                        batch = NULL) {
   if (length(D) == 0L) stop("abcnnt: no training pairs")
@@ -200,9 +292,9 @@ train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
   ps <- .abcnnt_params(flow)
   n <- length(D)
   bs <- if (is.null(batch)) n else max(1L, min(as.integer(batch), n))
-  total <- function(sample) {
+  total <- function(fl, sample) {
     sum(vapply(
-      sample, function(p) flow_logprob(flow, p[[2]], p[[1]]),
+      sample, function(p) flow_logprob(fl, p[[2]], p[[1]]),
       numeric(1)
     )) / length(sample)
   }
@@ -211,15 +303,12 @@ train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
     idx <- as.integer(.ghc_unif(e, bs) * n) + 1L
     idx <- pmin(idx, n)
     sample <- D[idx]
-    for (p in ps) {
-      arr <- p[[1]]
-      j <- p[[2]]
-      old <- arr[j]
-      arr[j] <- old + h
-      up <- total(sample)
-      arr[j] <- old - h
-      dn <- total(sample)
-      arr[j] <- old + lr * (up - dn) / (2 * h)
+    for (a in ps) {
+      old <- .abcnnt_param_get(flow, a)
+      up <- total(.abcnnt_param_set(flow, a, old + h), sample)
+      dn <- total(.abcnnt_param_set(flow, a, old - h), sample)
+      # ascend the log-likelihood
+      flow <- .abcnnt_param_set(flow, a, old + lr * (up - dn) / (2 * h))
     }
   }
   flow
@@ -233,6 +322,11 @@ train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
 #' @param step See Usage.
 #' @param seed See Usage.
 #' @export
+#' @examples
+#' # a standard normal target
+#' lp <- function(x) -0.5 * sum(x^2)
+#' mc <- mcmc_sample(lp, 0, 2000L, burn = 200L, step = 1.5, seed = 1L)
+#' round(c(mean = mean(mc$samples[, 1]), sd = sd(mc$samples[, 1])), 2)
 mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
                         seed = 0L) {
   if (n < 1L) stop("abcnnt: n must be positive")
@@ -271,6 +365,14 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
 #' @param seed See Usage.
 #' @param n_posterior See Usage.
 #' @export
+#' @examples
+#' simulator <- function(theta, e) theta * 0.5 + rnorm(length(theta), 0, 0.2)
+#' log_prior <- function(th) if (any(abs(th) > 5)) -Inf else -0.5 * sum(th^2)
+#' set.seed(1)
+#' res <- abcnnt(simulator, x_o = 0.25, log_prior = log_prior, theta0 = 0.5,
+#'               n_rounds = 2L, n_per_round = 25L, epochs = 5L, lr = 0.02,
+#'               seed = 1L, mcmc_burn = 50L, mcmc_step = 0.8)
+#' names(res)
 abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
                    n_per_round = 50L, n_layers = 5L, hidden = 20L,
                    epochs = 40L, lr = 0.01, mcmc_burn = 100L,
@@ -297,7 +399,7 @@ abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
       th <- mc$samples[k, ]
       D[[length(D) + 1L]] <- list(th, as.numeric(simulator(th, e_round)))
     }
-    train_flow(flow, D, epochs, lr, seed + r, batch = NULL)
+    flow <- train_flow(flow, D, epochs, lr, seed + r, batch = NULL)
     logpost <- function(th, f = flow) {
       lp <- log_prior(th)
       if (lp == -Inf) {

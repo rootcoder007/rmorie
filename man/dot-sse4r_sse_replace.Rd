@@ -23,3 +23,15 @@ A step of the sse4r_native implementation. No other function in the package call
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+idx <- c(3L, 1L, 4L, 1L, 5L, 9L, 2L, 6L)
+# p = 0 is the identity
+unlist(.sse4r_sse_replace(idx, 10L, p = 0)$indices)
+# a positive p redraws a share of the positions from the same table
+res <- .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)
+unlist(res$indices)
+res$rate
+# the same seed reproduces the draw
+identical(res$indices,
+          .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)$indices)
+}

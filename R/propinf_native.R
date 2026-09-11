@@ -1269,8 +1269,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param sets A vector; its length is taken.
 #' @param cache A list; the body reads \code{$caches}, \code{$racts}, \code{$rpre} from it.
 #' @param dout Passed to \code{.propinf_mlp_backward}.
-#' @param grads A list; the body reads \code{$phis}, \code{$psis}, \code{$rho} from it.
-#' @return The value of \code{for}.
+#' @param grads A zeroed gradient structure to accumulate into.
+#' @return The accumulated gradient structure, with the same shape as
+#' \code{grads}: \code{phis}, \code{psis} and \code{rho}.
 #' @export
 #' @examples
 #' # a small fully connected net: three hidden units over two inputs,

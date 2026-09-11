@@ -23,9 +23,8 @@ A list with \code{samples}, \code{acceptance}.
 }
 \keyword{internal}
 \examples{
-if (requireNamespace("ranger", quietly = TRUE)) {
-  samples <- mcmc_sample(function(x) -0.5 * sum(x^2), x0 = 0, n = 200,
-                         burn = 50, seed = 1L)
-  mean(samples)
-}
+# a standard normal target
+lp <- function(x) -0.5 * sum(x^2)
+mc <- mcmc_sample(lp, 0, 2000L, burn = 200L, step = 1.5, seed = 1L)
+round(c(mean = mean(mc$samples[, 1]), sd = sd(mc$samples[, 1])), 2)
 }

@@ -25,3 +25,8 @@ A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch}, \c
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+# the bias model plus the factor dot product
+.funkM_predict(3, 0.5, -0.25, matrix(c(1, 2), nrow = 1),
+               matrix(c(0.5, -1), nrow = 1))
+}
