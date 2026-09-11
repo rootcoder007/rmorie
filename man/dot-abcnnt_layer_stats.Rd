@@ -22,7 +22,9 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-L <- .abcnnt_made_layer(3L, 2L, 6L, .ghc_rng(2L), reverse = FALSE)
+# a layer straight out of a flow, so only exported functions are needed
+L <- MAF(dim_x = 3L, dim_t = 2L, n_layers = 1L, hidden = 6L,
+         seed = 2L)$layers[[1]]
 st <- .abcnnt_layer_stats(L, x = c(0.5, -0.2, 0.9), t = c(0.1, -0.4))
 st$mu
 st$al       # the log-scale, clamped to [-5, 5]

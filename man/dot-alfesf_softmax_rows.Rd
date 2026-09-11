@@ -19,3 +19,9 @@ A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 0, 0, 0), nrow = 2, byrow = TRUE)
+.alfesf_softmax_rows(M, temp = 1)
+# a higher temperature flattens the distribution
+.alfesf_softmax_rows(M, temp = 5)
+}

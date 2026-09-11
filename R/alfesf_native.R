@@ -20,6 +20,9 @@
 #' @param what Passed to \code{sprintf}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' .alfesf_rows(matrix(1:6, nrow = 2), "features")
+#' .alfesf_rows(list(c(1, 2, 3), c(4, 5, 6)), "features")
 .alfesf_rows <- function(x, what) {
   if (is.matrix(x)) {
     m <- x
@@ -45,6 +48,11 @@
 #' @param temp Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 0, 0, 0), nrow = 2, byrow = TRUE)
+#' .alfesf_softmax_rows(M, temp = 1)
+#' # a higher temperature flattens the distribution
+#' .alfesf_softmax_rows(M, temp = 5)
 .alfesf_softmax_rows <- function(M, temp) {
   out <- M
   for (i in seq_len(nrow(M))) {
@@ -65,6 +73,10 @@
 #' @param nb A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' # bin midpoints on the 0..100 pLDDT scale
+#' .alfesf_lddt_centres(5L)
+#' range(.alfesf_lddt_centres(50L))
 .alfesf_lddt_centres <- function(nb) ((seq_len(nb) - 1L) + 0.5) * 100.0 / nb
 
 #' .alfesf_pae_centres
@@ -77,6 +89,9 @@
 #' @param width Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' # bin midpoints in angstroms, at the given bin width
+#' .alfesf_pae_centres(4L, 0.5)
 .alfesf_pae_centres <- function(nb, width) ((seq_len(nb) - 1L) + 0.5) * width
 
 # Zhang-Skolnick normalisation. Below 16 residues the cube-root term goes
@@ -122,6 +137,16 @@
 #' @param lr Numeric; combined arithmetically in the body.
 #' @return A list with \code{W}, \code{b}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' n <- 80L
+#' X <- cbind(1, matrix(rnorm(n), n, 1))
+#' y <- pmin(as.integer((X[, 2] - min(X[, 2])) /
+#'                        (diff(range(X[, 2])) + 1e-9) * 10), 9L)
+#' fit <- .alfesf_fit_multinomial(X, y, n_bins = 10L, l2 = 1e-3,
+#'                                iters = 50L, lr = 0.5)
+#' dim(fit$W)
+#' length(fit$b)
 .alfesf_fit_multinomial <- function(X, y, n_bins, l2, iters, lr) {
   n <- nrow(X)
   d <- ncol(X)
@@ -166,6 +191,13 @@
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' # Guo et al. (2017) temperature scaling on overconfident logits
+#' set.seed(6)
+#' L <- matrix(rnorm(200 * 5, 0, 4), 200, 5)
+#' y <- apply(L, 1L, which.max) - 1L
+#' y[1:40] <- sample(0:4, 40L, TRUE)
+#' round(.alfesf_fit_temperature(L, y, iters = 200L), 3)
 .alfesf_fit_temperature <- function(L, y, iters = 200L, lr = 0.5) {
   logt <- 0.0
   n <- nrow(L)
@@ -207,6 +239,18 @@
 #' \code{iptm}, \code{pae}, \code{d0}, \code{temperature}, \code{weights}, \code{route},
 #' \code{n_lddt_bins}, \code{n_pae_bins}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' # decode pLDDT logits: the score is the binned expectation
+#' set.seed(2)
+#' lddt_logits <- matrix(rnorm(6 * 50), nrow = 6, ncol = 50)
+#' res <- morie_alfesf_esmfold_confidence(lddt_logits = lddt_logits)
+#' round(res$plddt, 2)
+#' round(res$plddt_mean, 2)
+#' # aligned-error logits, one row per residue pair, give PAE and pTM
+#' pae_logits <- matrix(rnorm(36 * 8), nrow = 36, ncol = 8)
+#' pae <- morie_alfesf_esmfold_confidence(pae_logits = pae_logits)
+#' dim(pae$pae)
+#' round(pae$ptm, 4)
 morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
                                             pae_logits = NULL,
                                             features = NULL, weights = NULL,
@@ -318,6 +362,7 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
   iptm <- NULL
   pae <- NULL
   d0 <- NULL
+  n_pae_bins_used <- NULL
   if (!is.null(pae_logits)) {
     flat <- .alfesf_rows(pae_logits, "alfesf pae_logits")
     n <- as.integer(round(sqrt(nrow(flat))))
@@ -328,6 +373,7 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
       ), nrow(flat)))
     }
     nb <- ncol(flat)
+    n_pae_bins_used <- nb
     cen <- .alfesf_pae_centres(nb, pae_bin_width)
     Pp <- .alfesf_softmax_rows(flat, temp_used)
     pae <- matrix(0.0, n, n)
@@ -384,7 +430,9 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
     } else {
       NULL
     },
-    n_pae_bins = if (!is.null(pae)) ncol(pae) else NULL,
+    # ncol(pae) is the residue count: pae is the n x n matrix of expected
+    # errors, not the binned distribution it was decoded from
+    n_pae_bins = n_pae_bins_used,
     method = paste0(
       "ESMFold/AlphaFold confidence: pLDDT as the ",
       "expectation of the binned LDDT distribution, pTM as ",

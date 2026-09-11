@@ -2394,6 +2394,8 @@ File,Line,Status,Version,Context
 ./src/siu_parser.cpp,38,STALE_OR_DEP,1.0.2,"morie/1.0.2 (+https://github.com/rootcoder007/morie);"
 ./tests/testthat/helper-network.R,6,STALE_OR_DEP,8.8.8.8,"skip_if_no_network <- function(host = 8.8.8.8; port = 53; timeout = 2) {"
 ./tests/testthat/test-aaa_exec_guard.R,40,STALE_OR_DEP,1.1.1,"expect_true(.morie_valid_git_ref(release/v1.1.1))"
+./tests/testthat/test-alfesf-native.R,9,STALE_OR_DEP,1.9.7,"#            (Zhang & Skolnick 2004; Jumper et al. 2021 SI 1.9.7)"
+./tests/testthat/test-alfesf-native.R,11,STALE_OR_DEP,1.9.6,"#            (Jumper et al. 2021 SI 1.9.6; a binned expectation)"
 ./tests/testthat/test-blasf-det-seed.R,3,STALE_OR_DEP,0.4.0,"# Verifies that the `deterministic_seed` argument added in morie v0.4.0:"
 ./tests/testthat/test-bysid-det-seed.R,4,STALE_OR_DEP,0.4.0,"# Verifies that the `deterministic_seed` argument added in morie v0.4.0:"
 ./tests/testthat/test-core-parity.R,1,STALE_OR_DEP,0.9.1,"# test-core-parity.R -- v0.9.1 Phase 3."

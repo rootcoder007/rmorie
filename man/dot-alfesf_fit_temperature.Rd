@@ -23,3 +23,11 @@ A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+# Guo et al. (2017) temperature scaling on overconfident logits
+set.seed(6)
+L <- matrix(rnorm(200 * 5, 0, 4), 200, 5)
+y <- apply(L, 1L, which.max) - 1L
+y[1:40] <- sample(0:4, 40L, TRUE)
+round(.alfesf_fit_temperature(L, y, iters = 200L), 3)
+}

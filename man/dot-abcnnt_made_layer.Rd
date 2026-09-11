@@ -26,8 +26,10 @@ connections, which is what the masked matrix product reduces to in
 any case.
 }
 \examples{
+# .ghc_rng is internal, so reach it the way the other examples in this
+# package do
 L <- .abcnnt_made_layer(dim_x = 3L, dim_t = 2L, hidden = 6L,
-                        e = .ghc_rng(1L), reverse = FALSE)
+                        e = rmorie:::.ghc_rng(1L), reverse = FALSE)
 dim(L$M1)   # hidden by dim_x + dim_t
 dim(L$M2)   # dim_x by hidden
 L$order
