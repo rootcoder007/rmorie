@@ -61,7 +61,11 @@
 #' @param epot Coerced to numeric by the body, with \code{as.numeric}.
 #' @param params A list; the body reads \code{$beta}, \code{$cfmax}, \code{$cfr},
 #' \code{$fc}, \code{$k0}, \code{$k1}, \code{$k2}, \code{$lp}, \code{$maxbas},
-#' \code{$perc}, \code{$tt}, \code{$uzl} from it.
+#' \code{$perc}, \code{$tt}, \code{$uzl} from it. \code{$cfr} (refreezing
+#' coefficient, default 0.05), \code{$sfcf} (snowfall correction factor,
+#' default 1, applied to precipitation falling as snow) and \code{$cwh}
+#' (water holding capacity of the snowpack as a fraction, default 0.1) are
+#' optional.
 #' @param init Optional; may be \code{NULL}. A list; the body reads \code{$slz},
 #' \code{$snow}, \code{$soil}, \code{$suz}, \code{$swater} from it.
 #' @return The value of \code{out}, as built in the body.
@@ -83,6 +87,8 @@ morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
   tt <- as.numeric(params[["tt"]])
   cfmax <- as.numeric(params[["cfmax"]])
   cfr <- if (!is.null(params[["cfr"]])) as.numeric(params[["cfr"]]) else 0.05
+  sfcf <- if (!is.null(params[["sfcf"]])) as.numeric(params[["sfcf"]]) else 1.0
+  cwh <- if (!is.null(params[["cwh"]])) as.numeric(params[["cwh"]]) else 0.1
   fc <- as.numeric(params[["fc"]])
   lp <- as.numeric(params[["lp"]])
   beta <- as.numeric(params[["beta"]])
@@ -103,6 +109,7 @@ morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
   slz    <- if (!is.null(init[["slz"]]))    as.numeric(init[["slz"]])    else 0.0
   s0 <- snow + swater + soil + suz + slz
 
+  in_tot <- 0.0
   w <- .hbvMod_maxbas_weights(maxbas)
   queue <- rep(0.0, length(w))
   out <- list(
@@ -118,10 +125,12 @@ morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
   for (i in seq_len(n)) {
     # snow routine (Eqs. 1-2); precipitation phase by TT
     if (t[i] <= tt) {
-      snow <- snow + p[i]
+      snow <- snow + sfcf * p[i]
+      in_tot <- in_tot + sfcf * p[i]
       rain <- 0.0
     } else {
       rain <- p[i]
+      in_tot <- in_tot + p[i]
     }
     if (t[i] > tt) {
       melt <- min(cfmax * (t[i] - tt), snow)
@@ -137,8 +146,8 @@ morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
     }
     swater <- swater - refreeze
     snow <- snow + refreeze
-    # liquid water above 10% of snowpack becomes soil input
-    hold <- 0.1 * snow
+    # liquid water above CWH of the snowpack becomes soil input
+    hold <- cwh * snow
     insoil <- rain + max(swater - hold, 0.0)
     swater <- min(swater, hold)
     # soil routine (Eqs. 3-4)
@@ -178,10 +187,11 @@ morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
   }
 
   s1 <- snow + swater + soil + suz + slz
-  mbe <- sum(p) - sum(out$e_act) - sum(out$q) - (s1 - s0) - sum(queue)
+  mbe <- in_tot - sum(out$e_act) - sum(out$q) - (s1 - s0) - sum(queue)
   out$mass_balance_error <- mbe
   out$n_days <- n
-  out$params_used <- list(tt = tt, cfmax = cfmax, cfr = cfr, fc = fc,
+  out$params_used <- list(tt = tt, cfmax = cfmax, cfr = cfr,
+                          sfcf = sfcf, cwh = cwh, fc = fc,
                           lp = lp, beta = beta, k0 = k0, k1 = k1, k2 = k2,
                           uzl = uzl, perc = perc, maxbas = maxbas)
   out$method <- "HBV (Seibert & Vis 2012, Eqs. 1-6)"
