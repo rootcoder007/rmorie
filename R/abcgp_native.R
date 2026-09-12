@@ -73,6 +73,7 @@
       m <- as.integer(entry$m_init)
       deg <- entry$degree
       coeff <- entry$coeff
+      if (bits <= deg) stop("sobol_dir: bits must exceed the polynomial degree")
       for (k in seq.int(deg, bits - 1L)) {
         val <- m[[k - deg + 1L]]
         term <- bitwXor(val, bitwShiftL(val, deg))
@@ -111,6 +112,10 @@
   }
   total <- n + as.integer(skip)
   bits <- max(1L, as.integer(ceiling(log(total + 1, 2))) + 1L)
+  degs <- vapply(.abcgp.sobol_poly[seq_len(dim)], function(e) {
+    if (is.null(e)) 0L else as.integer(e$degree)
+  }, integer(1))
+  bits <- max(bits, max(degs) + 1L)
   v <- .abcgp.sobol_dir(dim, bits)
   out <- matrix(0, nrow = n, ncol = dim)
   x <- integer(dim)
@@ -156,7 +161,9 @@
 #' @return The value of \code{L}, as built in the body.
 #' @export
 .abcgp.chol <- function(a, jitter = 1e-12) {
-  n <- length(a)
+  a <- as.matrix(a)
+  n <- nrow(a)
+  if (ncol(a) != n) stop("chol: matrix must be square")
   L <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
@@ -190,8 +197,9 @@
     y[i] <- (b[i] - sum(L[i, seq_len(i - 1L)] * y[seq_len(i - 1L)])) / L[i, i]
   }
   x <- numeric(n)
-  for (i in n:1L) {
-    x[i] <- (y[i] - sum(L[seq.int(i + 1L, n), i] * x[seq.int(i + 1L, n)])) / L[i, i]
+  for (i in seq.int(n, 1L)) {
+    above <- seq_len(n - i) + i
+    x[i] <- (y[i] - sum(L[above, i] * x[above])) / L[i, i]
   }
   x
 }
@@ -315,8 +323,8 @@
   Ainv_y <- .abcgp.chol_solve(L, y)
   Ainv_H <- matrix(0, q, n)
   for (k in seq_len(q)) Ainv_H[k, ] <- .abcgp.chol_solve(L, H[, k])
-  HtAinvH <- H %*% t(Ainv_H)
-  HtAinvy <- as.numeric(H %*% Ainv_y)
+  HtAinvH <- t(H) %*% t(Ainv_H)
+  HtAinvy <- as.numeric(t(H) %*% Ainv_y)
   beta <- tryCatch(.abcgp.chol_solve(.abcgp.chol(HtAinvH), HtAinvy),
     error = function(e) NULL
   )
@@ -423,8 +431,8 @@
   Ainv_y <- .abcgp.chol_solve(L, y)
   Ainv_H <- matrix(0, q, n)
   for (k in seq_len(q)) Ainv_H[k, ] <- .abcgp.chol_solve(L, H[, k])
-  HtAinvH <- H %*% t(Ainv_H)
-  HtAinvy <- as.numeric(H %*% Ainv_y)
+  HtAinvH <- t(H) %*% t(Ainv_H)
+  HtAinvy <- as.numeric(t(H) %*% Ainv_y)
   Lh <- .abcgp.chol(HtAinvH)
   beta <- .abcgp.chol_solve(Lh, HtAinvy)
   resid <- y - as.numeric(H %*% beta)
@@ -464,7 +472,7 @@
   mean <- sum(h * fit$beta) + sum(k * fit$Ainv_r)
   Ainv_k <- .abcgp.chol_solve(fit$chol, k)
   var <- 1 - sum(k * Ainv_k)
-  hh <- h - as.numeric(fit$H %*% Ainv_k)
+  hh <- h - as.numeric(t(fit$H) %*% Ainv_k)
   w <- .abcgp.chol_solve(fit$HtAinvH_chol, hh)
   var <- var + sum(hh * w)
   var <- fit$tau2 * max(var, 0)
@@ -501,8 +509,17 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .abcgp.design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1) {
-  if (is.numeric(prior_ppf) || is.matrix(prior_ppf)) {
-    prior_ppf <- list(prior_ppf) # treat as (lo, hi) below
+  if (is.matrix(prior_ppf)) {
+    # one row per parameter, columns (lo, hi)
+    if (ncol(prior_ppf) != 2L) {
+      stop("design_from_prior: a matrix prior needs two columns (lo, hi)")
+    }
+    prior_ppf <- list(prior_ppf[, 1], prior_ppf[, 2])
+  } else if (is.numeric(prior_ppf)) {
+    if (length(prior_ppf) != 2L) {
+      stop("design_from_prior: a numeric prior must be c(lo, hi)")
+    }
+    prior_ppf <- list(prior_ppf[[1]], prior_ppf[[2]])
   }
   if (is.list(prior_ppf) && length(prior_ppf) == 2 &&
     !is.function(prior_ppf[[1]])) {
@@ -772,7 +789,7 @@
   scaled <- cov / S
   L <- .abcgp.chol(scaled)
   z <- .ghc_norm(e, n)
-  as.numeric(mu) + L %*% z
+  as.numeric(as.numeric(mu) + L %*% z)
 }
 
 #' .abcgp.synthetic_abc
