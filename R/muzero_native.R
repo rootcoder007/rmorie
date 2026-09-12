@@ -59,8 +59,15 @@
 #' @keywords internal
 #' @noRd
 .ghc_muzero_node_new <- function(prior = 0) {
-  list(visits = 0L, value_sum = 0, prior = prior, children = list(),
-       state = NULL, reward = 0, expanded = FALSE)
+  nd <- new.env(parent = emptyenv())
+  nd$visits <- 0L
+  nd$value_sum <- 0
+  nd$prior <- prior
+  nd$children <- list()
+  nd$state <- NULL
+  nd$reward <- 0
+  nd$expanded <- FALSE
+  nd
 }
 
 #' @keywords internal
@@ -74,7 +81,9 @@
 .ghc_muzero_node_expand <- function(node, state, prior, A) {
   node$state <- state
   node$expanded <- TRUE
-  for (i in seq_along(A)) node$children[[A[i]]] <- .ghc_muzero_node_new(prior[i])
+  for (i in seq_along(A)) {
+    node$children[[A[[i]]]] <- .ghc_muzero_node_new(prior[i])
+  }
   node
 }
 
@@ -174,7 +183,7 @@ morie_muzero <- function(observation, actions, representation,
       path[[length(path) + 1L]] <- node
     }
     parent <- path[[length(path) - 1L]]
-    calls[1] <<- calls[1] + 1L
+    calls[1] <- calls[1] + 1L
     rd <- dynamics(parent$state, acts[[length(acts)]])
     node$reward <- as.numeric(rd[[1]])
     prp <- predict(rd[[2]])
