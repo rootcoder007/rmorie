@@ -542,15 +542,13 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   }
 
   .unpack <- function(v) {
-    i <- 1
-    phi <- v[i:(i + p - 1)]
-    i <- i + p
-    th <- v[i:(i + q - 1)]
-    i <- i + q
-    Ph <- v[i:(i + P - 1)]
-    i <- i + P
-    Th <- v[i:(i + Q - 1)]
-    list(phi = phi, th = th, Ph = Ph, Th = Th)
+    i <- 0L
+    take <- function(k) {
+      out <- if (k > 0L) v[i + seq_len(k)] else numeric(0)
+      i <<- i + k
+      out
+    }
+    list(phi = take(p), th = take(q), Ph = take(P), Th = take(Q))
   }
 
   .objective <- function(v) {
@@ -681,7 +679,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   psi <- c(1.0)
   for (j in 2:h) {
     v <- if (j - 1 <= length(ma)) -ma[j - 1] else 0
-    for (i in seq_along(ar)) if (j - i - 1 >= 1) v <- v + ar[i] * psi[j - i - 1]
+    for (i in seq_along(ar)) if (j - i >= 1) v <- v + ar[i] * psi[j - i]
     psi <- c(psi, v)
   }
   psi
@@ -709,7 +707,7 @@ forecast <- function(fitted, h = 12) {
   s <- fitted$s
   ar <- fitted$ar
   ma <- fitted$ma
-  dpoly <- .sarima_diff_poly(1, 1)
+  dpoly <- .sarima_diff_poly(d, 1)
   Dpoly <- .sarima_diff_poly(D, s)
   lhs <- .sarima_poly_mult(c(1, -ar), .sarima_poly_mult(dpoly, Dpoly))
   z_ar <- -lhs[-1]
@@ -720,9 +718,12 @@ forecast <- function(fitted, h = 12) {
   for (step in 1:h) {
     t <- length(zpad)
     val <- 0
-    for (i in seq_along(z_ar)) val <- val + z_ar[i] * zpad[t - i]
+    for (i in seq_along(z_ar)) {
+      idx <- t - i + 1L
+      if (idx >= 1) val <- val + z_ar[i] * zpad[idx]
+    }
     for (j in seq_along(ma)) {
-      idx <- t - j
+      idx <- t - j + 1L
       if (idx >= 1 && idx <= length(apad)) val <- val - ma[j] * apad[idx]
     }
     zpad <- c(zpad, val)
