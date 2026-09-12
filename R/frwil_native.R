@@ -134,7 +134,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
     row <- C[[i]]
     for (j in seq_along(cols)) {
       col <- cols[[j]]
-      if (row[col[1]] == col[2]) {
+      if (row[as.integer(col[1])] == col[2]) {
         M[i, j + 1L] <- 1.0
       }
     }
@@ -244,8 +244,8 @@ CONSTRAINTS <- c("reference", "sum_zero")
       row <- rep(0.0, length(names_vec))
       for (j in seq_along(D$columns)) {
         col <- D$columns[[j]]
-        if (col[1] == p) {
-          count <- sum(sapply(C, `[`, col[1]) == col[2])
+        if (as.integer(col[1]) == p) {
+          count <- sum(sapply(C, `[`, as.integer(col[1])) == col[2])
           row[j + 1L] <- as.numeric(count)
         }
       }
@@ -272,7 +272,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
   counts <- list()
   for (j in seq_along(D$columns)) {
     col <- D$columns[[j]]
-    count <- sum(sapply(C, `[`, col[1]) == col[2])
+    count <- sum(sapply(C, `[`, as.integer(col[1])) == col[2])
     counts[[names_vec[j + 1L]]] <- as.integer(count)
   }
   coef_list <- as.list(setNames(beta, names_vec))
