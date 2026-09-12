@@ -692,12 +692,12 @@
 #' @export
 .tf_support <- function(name) {
   nm <- tolower(trimws(as.character(name)))
-  v <- c(
+  tbl <- c(
     morlet = 4, mexh = 5, mexicanhat = 5, sombrero = 5, ricker = 5,
     haar = 1, db1 = 1
-  )[[nm]]
-  if (is.null(v)) stop(sprintf("unknown wavelet '%s'", nm))
-  v
+  )
+  if (!(nm %in% names(tbl))) stop(sprintf("unknown wavelet '%s'", nm))
+  tbl[[nm]]
 }
 
 #' .tf_cwt
