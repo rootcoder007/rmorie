@@ -146,16 +146,16 @@ offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,
   D <- list()
   for (t in dataset) {
     if (length(t) == 4L) {
-      s <- t[[1L]]
-      a <- t[[2L]]
+      s <- paste0(t[[1L]])
+      a <- paste0(t[[2L]])
       r <- as.numeric(t[[3L]])
-      s1 <- t[[4L]]
+      s1 <- paste0(t[[4L]])
       done <- FALSE
     } else if (length(t) == 5L) {
-      s <- t[[1L]]
-      a <- t[[2L]]
+      s <- paste0(t[[1L]])
+      a <- paste0(t[[2L]])
       r <- as.numeric(t[[3L]])
-      s1 <- t[[4L]]
+      s1 <- paste0(t[[4L]])
       done <- as.logical(t[[5L]])
     } else {
       stop("offlrl: each transition must be (s, a, r, s_next) or (s, a, r, s_next, done)")
@@ -167,14 +167,14 @@ offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,
     stop("offlrl: dataset must be non-empty")
 
   if (!is.null(states)) {
-    S <- as.list(states)
+    S <- as.list(paste0(states))
   } else {
     all_states <- unique(c(vapply(D, function(x) x$s, character(1L)),
                            vapply(D, function(x) x$s1, character(1L))))
     S <- as.list(all_states)
   }
   if (!is.null(actions)) {
-    A <- as.list(actions)
+    A <- as.list(paste0(actions))
   } else {
     all_a <- unique(vapply(D, function(x) x$a, character(1L)))
     A <- as.list(all_a)
