@@ -142,30 +142,31 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
       p1 <- max(min(m, 1 - 1e-12), 1e-12)
       return(rep(p1, n))
     }
+    # The penalty applies to the slopes only; the intercept stays free, so
+    # a large penalty drives the slopes to zero and leaves the marginal
+    # proportion, which is what makes the path interpretable.
     pen <- rep(0, p)
     pen[-1L] <- penalty
-    eta <- as.numeric(X[, -1L, drop = FALSE] %*%
-                      rep(0, p - 1L))
-    mu <- rep(mean(A), n)
-    for (it in seq_len(50L)) {
-      pi_ <- 1 / (1 + exp(-(X %*% c(log(mu / (1 - mu)), rep(0, p - 1L)) +
-                            eta)))
+    b <- rep(0, p)
+    m <- max(min(mean(A), 1 - 1e-12), 1e-12)
+    b[1L] <- log(m / (1 - m))
+    for (it in seq_len(100L)) {
+      pi_ <- 1 / (1 + exp(-as.numeric(X %*% b)))
       pi_ <- pmin(pmax(pi_, 1e-12), 1 - 1e-12)
-      # one Newton step with ridge
       W <- pi_ * (1 - pi_)
       XW <- sweep(X, 1, W, "*")
       H <- crossprod(XW, X) + diag(pen, p)
-      g <- crossprod(XW, (A - pi_)) - pen *
-        c(0, rep(0, p - 1L))
+      g <- crossprod(X, A - pi_) - pen * b
       step <- tryCatch(solve(H, g), error = function(e) rep(0, p))
-      b <- step
-      mu <- 1 / (1 + exp(-(X %*% b)))
+      b <- b + as.numeric(step)
+      if (max(abs(step)) < 1e-10) break
     }
-    mu
+    mu <- 1 / (1 + exp(-as.numeric(X %*% b)))
+    pmin(pmax(mu, 1e-12), 1 - 1e-12)
   }
 
   fit_at <- function(lm) {
-    w <- numeric(n)
+    w <- rep(1, n)
     per <- list()
     for (t in seq_along(A_hist)) {
       L_block <- if (length(L_hist) >= t) L_hist[[t]] else NULL
@@ -173,7 +174,7 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
       A <- .vec(A_hist[[t]])
       sw <- ifelse(A == 1, 1 / ps, 1 / (1 - ps))
       if (!is.null(trim)) sw <- pmin(sw, trim)
-      w <- w + sw
+      w <- w * sw
       per[[t]] <- ps
     }
     cum <- numeric(n)
@@ -185,12 +186,12 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
                 stop("shrinkage_msm: contrast must be 'cumulative', ",
                      "'final' or 'everexposed', got ",
                      deparse(contrast)))
-    X <- matrix(e, n, 1L)
+    X <- cbind(1, e)
     f <- .shdsmw_wls(X, yv, w)
     s1 <- sum(w)
     s2 <- sum(w * w)
-    list(lam = as.numeric(lm), estimate = f$coef[1L],
-         se = f$se[1L], weights = w,
+    list(lam = as.numeric(lm), estimate = f$coef[2L],
+         se = f$se[2L], intercept = f$coef[1L], weights = w,
          mean_weight = s1 / n, max_weight = max(w),
          effective_sample_size =
            if (s2 > 0) (s1 * s1 / s2) else 0,
@@ -208,10 +209,10 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
                                       effective_sample_size =
                                         r$effective_sample_size)
   }
-  unadj <- .shdsmw_wls(matrix(main$exposure, n, 1L), yv, rep(1, n))
+  unadj <- .shdsmw_wls(cbind(1, main$exposure), yv, rep(1, n))
   out <- main
   out$path <- rows
-  out$unadjusted <- unadj$coef[1L]
+  out$unadjusted <- unadj$coef[2L]
   out$n <- n
   out$n_times <- length(A_hist)
   out$contrast <- contrast
