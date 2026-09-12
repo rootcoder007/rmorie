@@ -49,11 +49,10 @@
                                       max_iter = 5000, tol = 1e-12,
                                       step = NULL) {
   X1 <- as.numeric(x_treated)
+  if (length(x_donors) == 0L) stop("plcbsc: the donor pool is empty")
   D <- do.call(rbind, lapply(x_donors, as.numeric))
   k <- length(X1)
   J <- nrow(D)
-
-  if (J == 0L) stop("plcbsc: the donor pool is empty")
   if (ncol(D) != k) {
     stop("plcbsc: every donor needs the same predictors as the treated unit")
   }
@@ -198,11 +197,10 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
                          x_donors = NULL, v = NULL,
                          statistic = "effect", ...) {
   y1 <- as.numeric(y_treated)
+  if (length(y_donors) == 0L) stop("plcbsc: the donor pool is empty")
   Y0 <- do.call(rbind, lapply(y_donors, as.numeric))
   T <- length(y1)
   J <- nrow(Y0)
-
-  if (J == 0L) stop("plcbsc: the donor pool is empty")
   if (ncol(Y0) != T) {
     stop("plcbsc: every donor needs the same number of periods as the treated unit")
   }
