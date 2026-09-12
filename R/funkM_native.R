@@ -131,14 +131,20 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
     for (f in seq_len(d) - 1L) {
       for (ep in seq_len(as.integer(epochs_per_factor))) {
         st <- .funkM_sgd_epoch(R, mu, bu, bi, P, Q, lr, reg, factor = f)
-        bu <- st$bu; bi <- st$bi; P <- st$P; Q <- st$Q
+        bu <- st$bu
+        bi <- st$bi
+        P <- st$P
+        Q <- st$Q
         hist <- c(hist, st$rmse)
       }
     }
   } else {
     for (ep in seq_len(as.integer(epochs))) {
       st <- .funkM_sgd_epoch(R, mu, bu, bi, P, Q, lr, reg)
-      bu <- st$bu; bi <- st$bi; P <- st$P; Q <- st$Q
+      bu <- st$bu
+      bi <- st$bi
+      P <- st$P
+      Q <- st$Q
       hist <- c(hist, st$rmse)
     }
   }
