@@ -170,13 +170,23 @@
 #'
 #' @param A_hist A vector; its length is taken and its elements indexed.
 #' @param L_hist A vector; indexed elementwise.
-#' @param kind Accepted by the signature and not used anywhere in the body.
+#' @param kind Exposure type; only \code{"binary"} is implemented and
+#' anything else is refused.
 #' @param stabilize A flag; the body branches on it.
 #' @param trim Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{w}, \code{per_time}.
 #' @export
 .polkrn_ip_weights_history <- function(A_hist, L_hist, kind, stabilize, trim) {
   # Compute inverse-probability weights for a treatment history.
+  # Only a binary exposure is implemented: the weights below are Bernoulli
+  # probabilities, so a continuous exposure would need a density instead.
+  # Saying so beats accepting the argument and ignoring it.
+  if (!identical(as.character(kind), "binary")) {
+    stop(sprintf(paste0("polkrn: kind must be 'binary'; a continuous ",
+                        "exposure needs a density rather than a Bernoulli ",
+                        "probability and is not implemented, got %s"),
+                 as.character(kind)))
+  }
   n <- length(A_hist[[1]])
   T <- length(A_hist)
   w <- rep(1, n)
