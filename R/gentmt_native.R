@@ -136,7 +136,9 @@
   fit <- .gentmt_ols_core(H, A)
   mu <- fit$fitted
   sigma2 <- fit$sigma2
-  if (sigma2 <= 0) {
+  marg <- stats::var(A)
+  if (!is.finite(sigma2) || sigma2 <= 0 ||
+      sigma2 < 1e-10 * max(marg, .Machine$double.eps)) {
     stop("treatment_density: the treatment model fits the dose exactly, ",
          "so f(A|X) is degenerate and no IP weight exists.",
          call. = FALSE)
@@ -188,15 +190,21 @@
 #' @return A list with \code{w}, \code{info}.
 #' @export
 .gentmt_ip_weights <- function(A, H, kind = "normal", stabilize = TRUE, trim = NULL) {
+  A <- .gentmt_vec(A)
   td <- .gentmt_treatment_density(A, H, kind)
-  mu <- td$info$mu
-  s2 <- td$info$sigma2
-  sigma <- sqrt(s2)
-  denom <- dnorm(A, mean = mu, sd = sigma)
+  # Use the density the treatment model actually reports: Gaussian for a
+  # continuous dose, Bernoulli for a binary one. Re-deriving it with dnorm
+  # here scored a binary dose with a Gaussian -- the very thing
+  # treatment_density was fixed to stop doing -- and read mu and sigma2,
+  # which the binary branch does not return, so the call errored outright.
+  denom <- td$dens
   if (isTRUE(stabilize)) {
-    marg_mean <- mean(A)
-    marg_sd <- sd(A)
-    num <- dnorm(A, mean = marg_mean, sd = marg_sd)
+    num <- if (identical(as.character(kind), "binary")) {
+      marg <- mean(A)
+      ifelse(A > 0.5, marg, 1 - marg)
+    } else {
+      dnorm(A, mean = mean(A), sd = stats::sd(A))
+    }
     w <- num / denom
   } else {
     w <- 1 / denom
@@ -209,9 +217,17 @@
   mean_w <- mean(w)
   max_w <- max(w)
   ess <- sum(w)^2 / sum(w^2)
-  marg_var <- var(A)
-  finite_var <- s2 > 0.5 * marg_var
-  var_ratio <- s2 / marg_var
+  # the variance diagnostic compares the conditional dose variance with the
+  # marginal one, which is only meaningful for a continuous dose
+  if (identical(as.character(kind), "binary")) {
+    finite_var <- NA
+    var_ratio <- NA_real_
+  } else {
+    s2 <- td$info$sigma2
+    marg_var <- stats::var(A)
+    finite_var <- s2 > 0.5 * marg_var
+    var_ratio <- s2 / marg_var
+  }
   list(w = w, info = list(
     mean_weight = mean_w,
     max_weight = max_w,
