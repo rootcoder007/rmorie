@@ -1600,18 +1600,29 @@ Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
 #' Exact null counts of U / shifted W by the (6.6.14) recursion
 #' @noRd
 .gbRankCounts <- function(m, n) {
+  m <- as.integer(m)
+  n <- as.integer(n)
   total <- m * n
   counts <- numeric(total + 1)
   counts[1] <- 1
+  # The number of arrangements giving U = u is the coefficient of q^u in
+  # the Gaussian binomial coefficient
+  #
+  #   [m+n choose m]_q = prod_{i=1}^{m} (1 - q^(n+i)) / (1 - q^i),
+  #
+  # so each factor divides by (1 - q^i) -- a prefix sum of STRIDE i --
+  # and multiplies by (1 - q^(n+i)). A single fixed-width window with
+  # unit stride would instead build prod (1 - q^(n+1)) / (1 - q), whose
+  # coefficients do not sum to choose(m + n, m).
   for (i in seq_len(m)) {
-    new <- numeric(total + 1)
-    run <- 0
-    for (k in 0:total) {
-      run <- run + counts[k + 1]
-      if (k - n - 1 >= 0) run <- run - counts[k - n]
-      new[k + 1] <- run
+    if (i <= total) {
+      for (u in i:total) counts[u + 1L] <- counts[u + 1L] + counts[u - i + 1L]
     }
-    counts <- new
+    k <- n + i
+    if (k <= total) {
+      # downward, so each subtraction uses the pre-multiplication value
+      for (u in total:k) counts[u + 1L] <- counts[u + 1L] - counts[u - k + 1L]
+    }
   }
   counts
 }
