@@ -565,6 +565,11 @@
 
 #' .limmav_t_sf
 #'
+#' Two-sided Student t tail probability P(|T| > |t|), computed as the
+#' regularised incomplete beta I_x(df/2, 1/2) with x = df / (df + t^2).
+#' Despite the name this is not the one-sided survival function: it is the
+#' quantity both call sites report as a p-value.
+#'
 #' A step of the limmav_native implementation. Called by \code{morie_limmav}.
 #' See the file header for the source the module follows.
 #' source it follows.
