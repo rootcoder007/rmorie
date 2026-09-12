@@ -447,8 +447,11 @@
   # Short-time RMS envelope, non-overlapping windows of win_s seconds.
   xs <- as.numeric(x)
   w <- max(1L, as.integer(round(win_s * fs)))
-  starts <- seq.int(0L, length(xs) - w, by = w)
-  if (length(xs) < w) starts <- integer(0)
+  starts <- if (length(xs) < w) {
+    integer(0)
+  } else {
+    seq.int(0L, length(xs) - w, by = w)
+  }
   list(
     env = vapply(
       starts, function(i) .bsarms(xs[(i + 1L):(i + w)]),
