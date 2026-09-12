@@ -54,19 +54,53 @@ NULL
 
 #' Internal helper: Hill Mle
 #' @noRd
-.hill_mle <- function(x, x_min) {
-  # Clauset-Shalizi-Newman discrete MLE: alpha = 1 + n / sum(log(x / (x_min - 0.5)))
-  # The -0.5 continuity correction matters when x_min is small.
-  # Continuous Hill (no correction) would use log(x / x_min), but morie's
-  # OTIS placement counts are integer-valued so the discrete form is right.
-  x <- x[x >= x_min]
+.hill_mle <- function(x, x_min, approx = FALSE) {
+  # Exponent of a discrete power law, by maximising the EXACT likelihood.
+  #
+  # The closed form usually quoted -- Clauset-Shalizi-Newman's
+  # alpha = 1 + n / sum(log(x / (x_min - 0.5))) -- is an asymptotic
+  # approximation IN x_min, not a correction that improves as x_min
+  # shrinks. At x_min = 1, which is where placement counts start and
+  # which is what both call sites pass, it is badly biased: on data
+  # drawn from a discrete power law with exponent 2.5 it returns about
+  # 2.0, and from 3.5 it returns about 2.26. An earlier comment here had
+  # this backwards.
+  #
+  # The exact likelihood for the zeta distribution truncated below at
+  # x_min is
+  #   p(k) = k^-alpha / zeta(alpha, x_min),   k = x_min, x_min + 1, ...
+  # so the log-likelihood is -n log zeta(alpha, x_min) - alpha sum log k,
+  # concave in alpha, and one univariate maximisation settles it. The
+  # Hurwitz zeta comes from rmoriebricklayer, which this package already
+  # links to, where it is verified against pi^2/6, pi^4/90 and Apery's
+  # constant.
+  x <- x[is.finite(x) & x >= x_min & x > 0]
   n <- length(x)
   if (n < 2L) {
     return(NA_real_)
   }
-  denom <- x_min - 0.5
-  if (denom <= 0) denom <- x_min  # safety guard for x_min < 0.5
-  1 + n / sum(log(x / denom))
+  if (isTRUE(approx)) {
+    denom <- x_min - 0.5
+    if (denom <= 0) denom <- x_min  # nothing left to correct toward
+    ssum <- sum(log(x / denom))
+    if (!is.finite(ssum) || ssum <= 0) return(NA_real_)
+    return(1 + n / ssum)
+  }
+  logsum <- sum(log(x))
+  if (!is.finite(logsum)) {
+    return(NA_real_)
+  }
+  nll <- function(a) {
+    z <- rmoriebricklayer::hurwitz_zeta(a, x_min)
+    if (!is.finite(z) || z <= 0) return(Inf)
+    n * log(z) + a * logsum
+  }
+  opt <- try(stats::optimize(nll, interval = c(1.0001, 25), tol = 1e-9),
+             silent = TRUE)
+  if (inherits(opt, "try-error") || !is.finite(opt$minimum)) {
+    return(NA_real_)
+  }
+  opt$minimum
 }
 
 #' Internal helper: Cramer V
