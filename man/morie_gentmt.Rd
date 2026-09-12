@@ -36,6 +36,13 @@ The value of \code{out}, as built in the body.
 }
 \keyword{internal}
 \examples{
-morie_gentmt(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
-  H = c(1, 2, 3, 4, 5, 6, 7, 8))
+# A continuous dose that depends on the covariate but is not a
+# deterministic function of it: the treatment model must retain some
+# residual variance, or f(A | X) is a point mass and no
+# inverse-probability weight exists.
+set.seed(1)
+H <- stats::rnorm(50)
+A <- 0.8 * H + stats::rnorm(50)
+y <- 0.5 * A + H + stats::rnorm(50)
+morie_gentmt(y = y, A = A, H = H)$estimate
 }

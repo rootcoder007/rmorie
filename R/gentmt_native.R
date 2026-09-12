@@ -403,6 +403,16 @@
 #' @param doses Passed to \code{.gentmt_dose_response_curve}.
 #' @param trim Passed to \code{.gentmt_ip_weights}.
 #' @return The value of \code{out}, as built in the body.
+#' @examples
+#' # A continuous dose that depends on the covariate but is not a
+#' # deterministic function of it: the treatment model must retain some
+#' # residual variance, or f(A | X) is a point mass and no
+#' # inverse-probability weight exists.
+#' set.seed(1)
+#' H <- stats::rnorm(50)
+#' A <- 0.8 * H + stats::rnorm(50)
+#' y <- 0.5 * A + H + stats::rnorm(50)
+#' morie_gentmt(y = y, A = A, H = H)$estimate
 #' @export
 morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
                          n_strata = 5, doses = NULL, trim = NULL) {
