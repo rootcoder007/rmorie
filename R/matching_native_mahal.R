@@ -26,7 +26,7 @@
 #'   control pool.
 #' @srrstats {G3.1} The covariance estimator (control-pool `stats::cov`
 #'   with a documented proportional diagonal ridge for near-singular
-#'   pools) is stated in the docs and BRANCH_PLAN entry; whitening via
+#'   pools) is stated in the docs; whitening via
 #'   Cholesky makes the metric explicit.
 #' @noRd
 .morie_match_mahalanobis_native <- function(data, treatment, covariates,
