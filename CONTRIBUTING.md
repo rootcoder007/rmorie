@@ -56,8 +56,7 @@ If you need a method currently living in one of those packages, the
 right path is to add it NATIVELY: its own `R/` engine file, unit
 tests, a cross-validation file under `tests/cross/` against the
 reference implementation, and a benchmark under `inst/benchmarks/`.
-See `BRANCH_PLAN.md` for the established per-module pattern, and
-include a short "what makes ours special" paragraph in the PR body —
+Include a short "what makes ours special" paragraph in the PR body —
 if that paragraph cannot be written, the module is not ready.
 
 Every PR must add a line to `NEWS.md`.
