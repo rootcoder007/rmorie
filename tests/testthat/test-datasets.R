@@ -65,30 +65,53 @@ test_that("tps_major_crime offline returns data.frame and respects max_features"
   expect_lte(nrow(res), 5L)
 })
 
-test_that("tps_shootings call routes through TPS PSDP helper (mocked)", {
-  set.seed(1)
+test_that("tps_shootings routes to the shootings layer, without a network call", {
+  # This test was labelled "(mocked)" and was not: it stubbed
+  # .morie_tps_psdp_feature_query, which the dispatch was migrated OFF
+  # (see the MHA test's 3TT+ note). The real path is
+  # .morie_dataset_tps_fetch -> .morie_dataset_http_json, so the stub
+  # never intercepted and every run fetched ArcGIS for real. It passed
+  # whenever the service answered and failed on macOS when the service
+  # returned an empty body. Mock the boundary that is actually on the
+  # path, and assert the routing the old test only claimed to check.
+  seen <- NULL
   testthat::local_mocked_bindings(
-    .morie_tps_psdp_feature_query = function(...) {
-      data.frame(EVENT_UNIQUE_ID = "MOCK-001", OCC_YEAR = 2024L,
-                  stringsAsFactors = FALSE)
+    .morie_dataset_http_json = function(url, query = NULL, ...) {
+      seen <<- list(url = url, query = query)
+      list(features = list(list(attributes = list(
+        EVENT_UNIQUE_ID = "MOCK-001", OCC_YEAR = 2024L))))
     },
     .package = "rmorie"
   )
   res <- morie_datasets_tps_shootings(year = 2024, max_features = 1L)
   expect_s3_class(res, "data.frame")
+  expect_identical(res$EVENT_UNIQUE_ID, "MOCK-001")
+  expect_identical(
+    seen$url,
+    paste0(rmorie:::.MORIE_TPS_LAYER_REGISTRY[["shooting-firearms"]], "/query"))
+  expect_identical(seen$query$where, "OCC_YEAR = 2024")
+  expect_identical(seen$query$resultRecordCount, 1L)
 })
 
-test_that("tps_homicide call routes through TPS PSDP helper (mocked)", {
-  set.seed(1)
+test_that("tps_homicide routes to the homicide layer, without a network call", {
+  # Same stale stub as the shootings test above.
+  seen <- NULL
   testthat::local_mocked_bindings(
-    .morie_tps_psdp_feature_query = function(...) {
-      data.frame(EVENT_UNIQUE_ID = "MOCK-H01", OCC_YEAR = 2024L,
-                  stringsAsFactors = FALSE)
+    .morie_dataset_http_json = function(url, query = NULL, ...) {
+      seen <<- list(url = url, query = query)
+      list(features = list(list(attributes = list(
+        EVENT_UNIQUE_ID = "MOCK-H01", OCC_YEAR = 2024L))))
     },
     .package = "rmorie"
   )
   res <- morie_datasets_tps_homicide(year = 2024, max_features = 1L)
   expect_s3_class(res, "data.frame")
+  expect_identical(res$EVENT_UNIQUE_ID, "MOCK-H01")
+  expect_identical(
+    seen$url,
+    paste0(rmorie:::.MORIE_TPS_LAYER_REGISTRY[["homicide"]], "/query"))
+  expect_identical(seen$query$where, "OCC_YEAR = 2024")
+  expect_identical(seen$query$resultRecordCount, 1L)
 })
 
 test_that("cpads loader returns the synthetic frame when no cache", {

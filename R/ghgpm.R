@@ -64,18 +64,37 @@ morie_ghosal_gp_matern <- function(x, y, nu = 1.5, length_scale = NULL,
   ## different BLAS, where it had succeeded elsewhere. So the jitter is
   ## scaled to the mean diagonal and escalated until the factorisation
   ## takes, rather than fixed at a value chosen in advance.
+  ## A kernel matrix is symmetric by construction, so say so: the Gram
+  ## form above is only symmetric up to rounding, and the factorisation
+  ## reads one triangle.
+  K <- (K + t(K)) / 2
+  if (!all(is.finite(K))) {
+    stop("the kernel matrix is not finite (", sum(!is.finite(K)),
+         " of ", length(K), " entries): check `length_scale` (",
+         format(length_scale, digits = 3), ") and `nu` (",
+         format(nu, digits = 3), ") against the scale of `x`",
+         call. = FALSE)
+  }
   jitter0 <- 1e-8 * max(mean(diag(K)), .Machine$double.eps)
   L <- NULL
+  last_err <- NULL
   for (k in 0:8) {
     L <- tryCatch(chol(K + (jitter0 * 10^k) * diag(n)),
-                  error = function(e) NULL)
+                  error = function(e) {
+                    last_err <<- conditionMessage(e)
+                    NULL
+                  })
     if (!is.null(L)) break
   }
   if (is.null(L)) {
+    ## Report what the factorisation actually said. The previous message
+    ## guessed at duplicated rows, which sent the diagnosis in the wrong
+    ## direction when the cause was elsewhere.
     stop("the kernel matrix could not be factorised even with a jitter of ",
-         format(jitter0 * 1e8, digits = 3),
-         ": check for duplicated rows in `x` or a length_scale far from the ",
-         "data's scale", call. = FALSE)
+         format(jitter0 * 1e8, digits = 3), " (mean diagonal ",
+         format(mean(diag(K)), digits = 3), ", n = ", n, "): ",
+         if (is.null(last_err)) "no error was reported" else last_err,
+         call. = FALSE)
   }
   alpha_ <- backsolve(L, forwardsolve(t(L), y))
   mu <- as.numeric(K_s %*% alpha_)
