@@ -290,9 +290,23 @@ test_that("a diagonal preconditioner is accepted and validated", {
   f <- function(x) 0.5 * as.numeric(t(x) %*% A %*% x) - sum(b * x)
   g <- function(x) as.numeric(A %*% x) - b
   xs <- as.numeric(solve(A, b))
-  e10 <- max(abs(unlist(morie_lbfgsm(f, rep(0, p), g, m = 10,
-                                     max_iter = 500, tol = 1e-7)$x) - xs))
-  e30 <- max(abs(unlist(morie_lbfgsm(f, rep(0, p), g, m = 30,
-                                     max_iter = 500, tol = 1e-7)$x) - xs))
-  expect_lte(e30, e10)
+  r10 <- morie_lbfgsm(f, rep(0, p), g, m = 10, max_iter = 500, tol = 1e-7)
+  r30 <- morie_lbfgsm(f, rep(0, p), g, m = 30, max_iter = 500, tol = 1e-7)
+  e10 <- max(abs(unlist(r10$x) - xs))
+  e30 <- max(abs(unlist(r30$x) - xs))
+
+  # The claim is about ITERATIONS, and that is what is asserted: the
+  # longer history models the inverse Hessian better, so it crosses the
+  # gradient threshold sooner -- 53 iterations against 149 here, a gap
+  # no platform's arithmetic closes.
+  expect_lt(as.numeric(r30$iterations), as.numeric(r10$iterations))
+
+  # The FINAL ERROR is deliberately not ordered between them. Both stop
+  # at the first iterate under the same gradient tolerance, so which one
+  # happens to land nearer the optimum is arbitrary: measured here e30
+  # is 1.2e-08 against e10 at 2.6e-07, and on Fedora it was the other
+  # way round, 1.1e-06 against 2.4e-07. What both owe is the accuracy
+  # the tolerance implies, and that holds with two orders of margin.
+  expect_lt(e10, 1e-4)
+  expect_lt(e30, 1e-4)
 })
