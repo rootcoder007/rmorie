@@ -1,11 +1,21 @@
 # MRM stock and flow across the OTIS strata.
 #
+# These need rmoriebricklayer (>= 0.4.8), where adp(), alos() and
+# stock_flow() live. Against an older copy they SKIP rather than fail: a
+# test failing because a dependency is older than it needs reports a
+# defect that is not there, and r-universe can serve an older build for
+# a while after a push.
+skip_unless_measures <- function() {
+  testthat::skip_if_not_installed("rmoriebricklayer", "0.4.8")
+}
+#
 # The anchors are of two kinds. The arithmetic is checked against
 # Lakner's published worked examples, and the multilevel behaviour is
 # checked on data built so that the strata DISAGREE, because a
 # reconciliation that only ever sees agreeing strata proves nothing.
 
 test_that("the measures match Lakner's worked example", {
+  skip_unless_measures()
   # p.15: 13,500 detention days over a year is an average daily
   # population of 36.986. Built here as one row per person.
   person <- data.frame(
@@ -21,6 +31,7 @@ test_that("the measures match Lakner's worked example", {
 })
 
 test_that("the strata are reconciled, and disagreement is reported", {
+  skip_unless_measures()
   # Three people at the person stratum; the placement stratum knows only
   # two of them, and the aggregate stratum states four. Nothing agrees,
   # which is what this has to notice.
@@ -49,6 +60,7 @@ test_that("the strata are reconciled, and disagreement is reported", {
 })
 
 test_that("agreeing strata are reported as agreeing", {
+  skip_unless_measures()
   person <- data.frame(
     EndFiscalYear = rep(2024, 2),
     UniqueIndividual_ID = c("a", "b"),
@@ -68,6 +80,7 @@ test_that("agreeing strata are reported as agreeing", {
 })
 
 test_that("the decomposition is exact, and opposite signs are possible", {
+  skip_unless_measures()
   # Fewer people held longer: the flow falls while the stock rises. The
   # published Ontario segregation figures, as one row per person would
   # give them.
@@ -94,6 +107,7 @@ test_that("the decomposition is exact, and opposite signs are possible", {
 })
 
 test_that("the period length is a parameter, not an assumption", {
+  skip_unless_measures()
   person <- data.frame(
     EndFiscalYear = rep(2024, 2),
     UniqueIndividual_ID = c("a", "b"),
@@ -103,6 +117,7 @@ test_that("the period length is a parameter, not an assumption", {
 })
 
 test_that("missing columns are named rather than guessed at", {
+  skip_unless_measures()
   person <- data.frame(EndFiscalYear = 2024, UniqueIndividual_ID = "a",
                        TotalAggregatedDays_Segregation = 5)
   expect_error(mrm_otis_stock_flow(person[, 1:2]), "missing column")
@@ -115,6 +130,7 @@ test_that("missing columns are named rather than guessed at", {
 })
 
 test_that("column names are configurable for another release's schema", {
+  skip_unless_measures()
   # A different jurisdiction naming the same quantities differently.
   d <- data.frame(fy = c(2024, 2024), pid = c("x", "y"), served = c(7, 14))
   out <- mrm_otis_stock_flow(d, year_col = "fy", id_col = "pid",

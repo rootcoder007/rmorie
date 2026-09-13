@@ -88,11 +88,14 @@ person, and a change in days decomposes exactly into a change in people
 and a change in stay.
 }
 \examples{
+# needs rmoriebricklayer (>= 0.4.8) for adp()/alos()/stock_flow()
+if (utils::packageVersion("rmoriebricklayer") >= "0.4.8") {
 person <- data.frame(
   EndFiscalYear = c(rep(2023, 3), rep(2025, 2)),
   UniqueIndividual_ID = c("a", "b", "c", "a", "d"),
   TotalAggregatedDays_Segregation = c(10, 20, 30, 40, 50))
 mrm_otis_stock_flow(person)$stock_flow
+}
 }
 \references{
 Lakner, E. (1976) A Manual of Statistical Sampling Methods for
