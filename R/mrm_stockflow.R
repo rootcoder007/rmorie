@@ -64,11 +64,14 @@
 #' Corrections Planners. University of Illinois at Urbana-Champaign.
 #'
 #' @examples
+#' # needs rmoriebricklayer (>= 0.4.8) for adp()/alos()/stock_flow()
+#' if (utils::packageVersion("rmoriebricklayer") >= "0.4.8") {
 #' person <- data.frame(
 #'   EndFiscalYear = c(rep(2023, 3), rep(2025, 2)),
 #'   UniqueIndividual_ID = c("a", "b", "c", "a", "d"),
 #'   TotalAggregatedDays_Segregation = c(10, 20, 30, 40, 50))
 #' mrm_otis_stock_flow(person)$stock_flow
+#' }
 #' @export
 mrm_otis_stock_flow <- function(person_days,
                                 placements = NULL,
@@ -89,6 +92,18 @@ mrm_otis_stock_flow <- function(person_days,
       stop(sprintf("`%s` is missing column(s): %s", what,
                    paste(miss, collapse = ", ")), call. = FALSE)
     invisible(TRUE)
+  }
+  ## The measures come from rmoriebricklayer, and an installed copy older
+  ## than 0.4.8 does not have them. Say so here rather than let a `::`
+  ## call fail with a message about an object not being exported.
+  for (.fn in c("adp", "alos", "stock_flow")) {
+    if (!exists(.fn, envir = asNamespace("rmoriebricklayer"),
+                inherits = FALSE)) {
+      stop("this needs rmoriebricklayer (>= 0.4.8) for ", .fn,
+           "(); the installed copy is ",
+           as.character(utils::packageVersion("rmoriebricklayer")),
+           call. = FALSE)
+    }
   }
   .need(person_days, c(year_col, id_col, days_col), "person_days")
   if (!is.null(placements))
