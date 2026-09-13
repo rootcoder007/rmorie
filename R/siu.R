@@ -954,6 +954,15 @@ morie_siu_audit_case <- function(case_number,
   nrid <- suppressWarnings(as.integer(row$nrid[1L]))
 
   fetch_one <- function(url) {
+    # A live fetch must not happen under R CMD check: CRAN's machines
+    # must not reach external services, and a request they cannot serve
+    # sits on its timeout and then retries. One test in test-siu.R spent
+    # 209 of that file's 215 seconds waiting here and raised the same
+    # error either way. Treated as a fetch that failed, which is what
+    # already happens, only without the wait.
+    if (!.siu_live_fetch_allowed()) {
+      return("")
+    }
     tryCatch(.siu_http_get(url), error = function(e) "")
   }
 
@@ -1647,6 +1656,13 @@ morie_siu_compare <- function(case_number, external,
   hit <- lookup()
   if (!is.null(hit)) return(hit)
   if (isTRUE(.morie_siu_state$live_index_complete)) return(NA_integer_)
+  # An exhaustive miss pages the WHOLE live index: about ninety requests
+  # at the rate limit, which is 209 of test-siu.R's 215 seconds spent
+  # resolving a case number that does not exist. CRAN's machines must
+  # not reach external services either, so under R CMD check report the
+  # miss rather than sweeping. Opt in with the switches the harvest
+  # paths already use.
+  if (!.siu_live_fetch_allowed()) return(NA_integer_)
   if (is.null(.morie_siu_state$live_index)) {
     .morie_siu_state$live_index <- new.env(parent = emptyenv())
   }
@@ -1849,6 +1865,17 @@ morie_siu_llm_extract <- function(case_number,
     tz = "UTC"
   )
   out
+}
+
+# Internal: may this session open a live connection to siu.on.ca?
+# The opt-ins are the ones the harvest paths already use, so a
+# deliberate network test still reaches the network.
+#' Internal helper: Siu Live Fetch Allowed
+#' @noRd
+.siu_live_fetch_allowed <- function() {
+  !nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_")) ||
+    isTRUE(getOption("morie.siu.allow_fetch")) ||
+    nzchar(Sys.getenv("RMORIE_NETWORK_TESTS"))
 }
 
 #' Per-field anomaly check: does the parser's extraction match the HTML?
