@@ -12,9 +12,44 @@ text pasted into the comment box at https://cran.r-project.org/submit.html
 
 ## R CMD check results
 
-One NOTE, described under "Rd line widths" below. The `\usage` sections
-of 190 topics wrap past 90 characters because the argument lists are
-long; nothing is truncated and the manual renders correctly.
+The local `--as-cran` run on this tarball reported no ERROR. It ended
+with one WARNING and six NOTEs:
+
+* WARNING, `checking CRAN incoming feasibility`: "New submission", the two
+  non-mainstream dependencies (rmoriedata, cmdstanr -- both resolvable via
+  the declared `Additional_repositories`), and the tarball size. All three
+  are addressed in their own sections below.
+* NOTE, `checking Rd line widths`: described below.
+* NOTE, `checking examples`: eleven examples exceed 5 seconds, the longest
+  38.6s. They are listed below.
+* Three NOTEs local to the checking machine rather than properties of the
+  package: `compilation flags used` (Fedora's default hardening flags
+  reach the compile), `non-standard things in the check directory`, and
+  `detritus in the temp directory`.
+* NOTE, `checking dependencies in R code`: emitted with no findings of its
+  own; the only text under it is an unrelated systemd RTC warning from the
+  host.
+
+`checking tests`, `checking examples with --run-donttest`, and both the
+PDF and HTML manual builds returned OK.
+
+## Examples that run longer than 5 seconds
+
+    spwkth                       38.6s
+    morie_bats                   22.5s
+    morie_hawkes_st_fit          13.7s
+    dot-schab_bessel_k1          10.5s (1.5s elapsed)
+    morie_btiseq                  8.3s
+    PcgEnvAvg                     8.2s
+    Ghosalsemiparabvm             7.3s
+    Ghosaldpbvm                   7.3s
+    clear_stat_commands           7.3s
+    morie_survvae_fit_competing   6.4s
+    VocalTract                    5.6s
+
+Each of these fits a model rather than illustrating syntax. We have kept
+them runnable rather than moving them behind `\donttest`, since an
+example that never executes is not checked.
 
 ## Rd line widths
 
