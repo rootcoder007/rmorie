@@ -56,7 +56,27 @@ morie_ghosal_gp_matern <- function(x, y, nu = 1.5, length_scale = NULL,
   K <- kernel(x, x) + noise^2 * diag(n)
   K_s <- kernel(x_star, x)
   K_ss_diag <- rep(sigma_f^2, nrow(x_star))
-  L <- chol(K + 1e-8 * diag(n))
+  ## A fixed absolute jitter is the wrong scale: it has to be small
+  ## RELATIVE to the kernel's own magnitude, not small in absolute
+  ## terms. With sigma_f and the data's spread free, K can be large
+  ## enough that 1e-8 is no nudge at all, and the factorisation fails --
+  ## "the leading minor of order 20 is not positive" on R 4.4 with a
+  ## different BLAS, where it had succeeded elsewhere. So the jitter is
+  ## scaled to the mean diagonal and escalated until the factorisation
+  ## takes, rather than fixed at a value chosen in advance.
+  jitter0 <- 1e-8 * max(mean(diag(K)), .Machine$double.eps)
+  L <- NULL
+  for (k in 0:8) {
+    L <- tryCatch(chol(K + (jitter0 * 10^k) * diag(n)),
+                  error = function(e) NULL)
+    if (!is.null(L)) break
+  }
+  if (is.null(L)) {
+    stop("the kernel matrix could not be factorised even with a jitter of ",
+         format(jitter0 * 1e8, digits = 3),
+         ": check for duplicated rows in `x` or a length_scale far from the ",
+         "data's scale", call. = FALSE)
+  }
   alpha_ <- backsolve(L, forwardsolve(t(L), y))
   mu <- as.numeric(K_s %*% alpha_)
   v <- forwardsolve(t(L), t(K_s))
