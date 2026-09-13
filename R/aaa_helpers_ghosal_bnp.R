@@ -13,7 +13,18 @@ NULL
 #' Internal helper: Gh Pairwise Sq
 #' @noRd
 .gh_pairwise_sq <- function(a, b = a) {
-  outer(rowSums(a^2), rowSums(b^2), "+") - 2 * a %*% t(b)
+  sq <- outer(rowSums(a^2), rowSums(b^2), "+") - 2 * a %*% t(b)
+  if (identical(a, b)) {
+    ## The Gram-matrix form is symmetric on paper and not in floating
+    ## point: BLAS computes (A A')[i, j] and [j, i] as different dot
+    ## products, so they can disagree in the last bits, and the diagonal
+    ## comes out slightly non-zero and sometimes negative. Impose the
+    ## structure the formula is supposed to have, so that a downstream
+    ## Cholesky does not depend on which BLAS happens to be installed.
+    sq <- (sq + t(sq)) / 2
+    diag(sq) <- 0
+  }
+  sq
 }
 
 #' Internal helper: Gh Bernstein
