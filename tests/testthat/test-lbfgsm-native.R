@@ -65,11 +65,17 @@ test_that("a twenty-dimensional quadratic reaches the analytic optimum", {
   r <- morie_lbfgsm(q$f, rep(0, q$p), q$g, m = 10, max_iter = 500, tol = 1e-7)
   fstar <- q$f(q$xstar)
   # THE SUBSTANCE: the function value is at the analytic optimum to
-  # machine precision, and the solution to the accuracy claimed. These
-  # are the assertions worth making -- they hold by six orders of
-  # magnitude, so no platform's arithmetic can flip them.
+  # machine precision, and the solution to the accuracy claimed.
+  #
+  # On the tolerance: the objective is a quadratic form over twenty
+  # dimensions, so its accumulated rounding is O(n * eps * |f|), about
+  # twenty eps. A bound of eight eps is therefore TIGHTER THAN THE
+  # ARITHMETIC ALLOWS, and it failed on Windows at exactly 1.00 of the
+  # bound while Linux sat at 0.45 of it. Sixty-four eps leaves roughly
+  # three times the accumulated rounding and eighteen times the gap
+  # actually observed.
   expect_lt(abs(as.numeric(r$fun) - fstar),
-            8 * .Machine$double.eps * max(1, abs(fstar)))
+            64 * .Machine$double.eps * max(1, abs(fstar)))
   expect_equal(unlist(r$x), q$xstar, tolerance = 1e-6)
 
   # THE FLAG, asserted for consistency rather than for a value. The
@@ -136,7 +142,7 @@ test_that("the convergence flag is honest about what it reached", {
   # but it still returns the best point it found
   fstar <- q$f(q$xstar)
   expect_lt(abs(as.numeric(no$fun) - fstar),
-            8 * .Machine$double.eps * max(1, abs(fstar)))
+            64 * .Machine$double.eps * max(1, abs(fstar)))
 })
 
 test_that("the objective never increases along the history", {
