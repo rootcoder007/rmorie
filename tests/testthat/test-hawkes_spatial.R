@@ -3,6 +3,11 @@
 .pars <- function() list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.4)
 
 test_that("intensity is background plus a positive, decaying trigger", {
+  # 5s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   ev <- data.frame(t = c(0.1, 0.5), x = c(0, 1), y = c(0, 1))
   p <- .pars()
   # No past events -> exactly the background rate.
@@ -19,6 +24,7 @@ test_that("intensity is background plus a positive, decaying trigger", {
 })
 
 test_that("log-likelihood is finite and peaks near the true parameters", {
+  skip_on_cran()
   ev <- morie_hawkes_st_simulate(.pars(), end_time = 40,
                                  region = c(0, 10, 0, 10), seed = 3)
   ll_true <- morie_hawkes_st_loglik(ev, .pars(), end_time = 40, area = 100)
@@ -31,6 +37,7 @@ test_that("log-likelihood is finite and peaks near the true parameters", {
 })
 
 test_that("simulation clusters: more offspring at higher branching ratio", {
+  skip_on_cran()
   lo <- morie_hawkes_st_simulate(
     list(mu = 0.2, alpha = 0.1, beta = 1, sigma = 0.4),
     end_time = 50, region = c(0, 10, 0, 10), seed = 11)
@@ -44,6 +51,7 @@ test_that("simulation clusters: more offspring at higher branching ratio", {
 })
 
 test_that("simulation rejects supercritical alpha", {
+  skip_on_cran()
   expect_error(
     morie_hawkes_st_simulate(list(mu = 1, alpha = 1.2, beta = 1, sigma = 1),
                              end_time = 10, region = c(0, 1, 0, 1)),
@@ -52,6 +60,7 @@ test_that("simulation rejects supercritical alpha", {
 })
 
 test_that("MLE returns a stable fit that maximises the in-sample likelihood", {
+  skip_on_cran()
   truth <- list(mu = 0.3, alpha = 0.5, beta = 1.2, sigma = 0.5)
   ev <- morie_hawkes_st_simulate(truth, end_time = 40,
                                  region = c(0, 6, 0, 6), seed = 5)
@@ -70,6 +79,7 @@ test_that("MLE returns a stable fit that maximises the in-sample likelihood", {
 })
 
 test_that("parameter validation", {
+  skip_on_cran()
   expect_error(morie_hawkes_st_loglik(data.frame(t = 1, x = 0, y = 0),
                                       list(mu = 0.1)), "mu, alpha, beta, sigma")
   expect_error(morie_hawkes_st_intensity(data.frame(t = 1, x = 0, y = 0),

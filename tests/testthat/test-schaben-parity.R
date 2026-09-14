@@ -16,18 +16,25 @@ EX_COORDS <- rbind(c(1, 1), c(1, 4), c(2, 2), c(3, 1), c(3, 4))
 EX_Z <- c(1, 4, 2, 3, 20)
 
 test_that("Matheron reproduces the book's Example 4.3", {
+  # 6s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   out <- morie_matheron_estimator(EX_COORDS, EX_Z, exact = TRUE)
   expect_equal(round(out$gamma, 1), c(0.5, 65, 82, 74.5, 90.5))
   expect_equal(out$n_pairs, rep(2L, 5L))
 })
 
 test_that("Cressie-Hawkins reproduces the book's Example 4.3", {
+  skip_on_cran()
   out <- morie_cressie_hawkins(EX_COORDS, EX_Z, exact = TRUE)
   # printed p. 161: 0.71, 38.14, 45.5, 52.2, 36.6
   expect_equal(round(out$gamma, 1), c(0.7, 38.1, 45.5, 52.2, 36.6))
 })
 
 test_that("the printed bias factor omits the third term", {
+  skip_on_cran()
   # the derivation on p. 160 carries 0.457 + 0.494/|N| + 0.045/|N|^2 and
   # equation (4.26) then drops the last term. The worked example's 0.704
   # at |N(h)| = 2 settles which one the book actually evaluates.
@@ -40,6 +47,7 @@ test_that("the printed bias factor omits the third term", {
 })
 
 test_that("the robust estimator suppresses but does not remove the outlier", {
+  skip_on_cran()
   ch <- morie_cressie_hawkins(EX_COORDS, EX_Z, exact = TRUE)
   mat <- morie_matheron_estimator(EX_COORDS, EX_Z, exact = TRUE)
   expect_true(all(ch$gamma[-1] < mat$gamma[-1]))
@@ -48,6 +56,7 @@ test_that("the robust estimator suppresses but does not remove the outlier", {
 })
 
 test_that("the Matheron variance is equation (4.25)", {
+  skip_on_cran()
   out <- morie_matheron_estimator(EX_COORDS, EX_Z, exact = TRUE)
   expect_equal(out$variance, 2 * out$gamma^2 / out$n_pairs)
 })
@@ -78,6 +87,7 @@ schaben_fixture <- function(n = 120L, seed = 20260728) {
 }
 
 test_that("the fixture is bit-identical across languages", {
+  skip_on_cran()
   fx <- schaben_fixture()
   # if any of these drift, every anchor below is meaningless and the
   # fault is in the generator, not in the estimator
@@ -87,6 +97,7 @@ test_that("the fixture is bit-identical across languages", {
 })
 
 test_that("morie_matheron_estimator matches the Python core exactly", {
+  skip_on_cran()
   fx <- schaben_fixture()
   out <- morie_matheron_estimator(fx$P, fx$z, bins = 8L)
   expect_equal(out$n_pairs, c(127L, 298L, 543L, 613L, 745L, 789L, 826L, 715L))
@@ -95,6 +106,7 @@ test_that("morie_matheron_estimator matches the Python core exactly", {
 })
 
 test_that("morie_cressie_hawkins matches the Python core exactly", {
+  skip_on_cran()
   fx <- schaben_fixture()
   out <- morie_cressie_hawkins(fx$P, fx$z, bins = 8L)
   expect_equal(out$gamma[1], 0.27612658128944412, tolerance = 1e-10)
@@ -102,6 +114,7 @@ test_that("morie_cressie_hawkins matches the Python core exactly", {
 })
 
 test_that("the composite likelihood agrees with the Python core", {
+  skip_on_cran()
   fx <- schaben_fixture()
   out <- morie_variogram_composite_likelihood(fx$P, fx$z)
   expect_true(out$converged)
@@ -114,6 +127,7 @@ test_that("the composite likelihood agrees with the Python core", {
 })
 
 test_that("the composite likelihood fits the cloud, not lag classes", {
+  skip_on_cran()
   fx <- schaben_fixture()
   a <- morie_variogram_composite_likelihood(fx$P, fx$z)
   # no binning argument exists to change, which is the point of (4.44)
@@ -121,6 +135,7 @@ test_that("the composite likelihood fits the cloud, not lag classes", {
 })
 
 test_that("an unbounded variogram is reported, not returned as a sill", {
+  skip_on_cran()
   # a pure linear trend makes the semivariance climb without settling
   # (eq 5.35), so no bounded model fits and the range runs away. Measured
   # on this design: range 1.02e11 against a largest separation of 13.
@@ -140,6 +155,7 @@ test_that("an unbounded variogram is reported, not returned as a sill", {
 })
 
 test_that("the Prasad-Rao correction only ever increases the error", {
+  skip_on_cran()
   fx <- schaben_fixture()
   out <- morie_kriging_pred_error(fx$P, fx$z,
                                   rbind(c(5, 5), c(2, 8)))
@@ -149,6 +165,7 @@ test_that("the Prasad-Rao correction only ever increases the error", {
 })
 
 test_that("known covariance parameters skip the estimation step", {
+  skip_on_cran()
   fx <- schaben_fixture()
   out <- morie_kriging_pred_error(fx$P, fx$z, rbind(c(5, 5)),
                                   nugget = 0.3, psill = 2.0, rng = 5.0)
@@ -158,6 +175,7 @@ test_that("known covariance parameters skip the estimation step", {
 })
 
 test_that("kriging honours the data at an observed location", {
+  skip_on_cran()
   fx <- schaben_fixture()
   out <- morie_kriging_pred_error(fx$P, fx$z, fx$P[4, , drop = FALSE],
                                   nugget = 1e-8, psill = 2.0, rng = 5.0)
@@ -166,6 +184,7 @@ test_that("kriging honours the data at an observed location", {
 })
 
 test_that("the two estimators agree when there is no contamination", {
+  skip_on_cran()
   fx <- schaben_fixture()
   mat <- morie_matheron_estimator(fx$P, fx$z, bins = 8L)
   ch <- morie_cressie_hawkins(fx$P, fx$z, bins = 8L)

@@ -21,6 +21,11 @@ FULL <- matrix(1L, 3, 3)
 diag(FULL) <- 0L
 
 test_that("motif counts are the hand-enumerated ones", {
+  # 8s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   ffl <- .motiff_triads(FFL, 3L)
   # exactly one feed-forward loop and no cycle
   expect_equal(ffl$ffl, 1L)
@@ -50,6 +55,7 @@ test_that("motif counts are the hand-enumerated ones", {
 })
 
 test_that("switching preserves both degree sequences and the edge count", {
+  skip_on_cran()
   set.seed(2)
   n <- 12
   A <- matrix(rbinom(n * n, 1, 0.25), n, n)
@@ -79,6 +85,7 @@ test_that("switching preserves both degree sequences and the edge count", {
 })
 
 test_that("the z-score and p-value follow from the null distribution", {
+  skip_on_cran()
   set.seed(4)
   n <- 10
   A <- matrix(rbinom(n * n, 1, 0.3), n, n)
@@ -111,6 +118,7 @@ test_that("the z-score and p-value follow from the null distribution", {
 })
 
 test_that("both motifs can be scored", {
+  skip_on_cran()
   set.seed(6)
   n <- 10
   A <- matrix(rbinom(n * n, 1, 0.3), n, n)
@@ -125,6 +133,7 @@ test_that("both motifs can be scored", {
 })
 
 test_that("a degenerate null gives a defined z-score", {
+  skip_on_cran()
   # a three-cycle has nothing to switch, so every replicate reproduces it
   # and the null has no spread; the score is zero rather than undefined
   r <- morie_motiff(CYC, motif = "cycle3", n_random = 5L, seed = 1L)
@@ -138,6 +147,7 @@ test_that("a degenerate null gives a defined z-score", {
 })
 
 test_that("motiff validates its input", {
+  skip_on_cran()
   expect_error(morie_motiff(matrix(0L, 2, 2)), "square, n >= 3")
   expect_error(morie_motiff(matrix(0L, 3, 4)), "square, n >= 3")
   expect_error(morie_motiff(FFL, motif = "bifan"),

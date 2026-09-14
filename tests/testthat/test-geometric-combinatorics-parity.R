@@ -14,6 +14,11 @@
 # rejects those rather than passing them.
 
 test_that("the lattice hull matches Python", {
+  # 8s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   out <- morie_lattice_convex_hull(rbind(c(0, 0), c(2, 0), c(1, 1),
                                          c(2, 2), c(0, 2)))
   expect_equal(out$hull, rbind(c(0, 0), c(2, 0), c(2, 2), c(0, 2)))
@@ -27,12 +32,14 @@ test_that("the lattice hull matches Python", {
 })
 
 test_that("collinear boundary points are dropped", {
+  skip_on_cran()
   out <- morie_lattice_convex_hull(rbind(c(0, 0), c(1, 0), c(2, 0),
                                          c(2, 2), c(0, 2)))
   expect_equal(out$n_vertices, 4)
 })
 
 test_that("the hull is idempotent and contains every point", {
+  skip_on_cran()
   set.seed(11)
   for (rep in seq_len(60L)) {
     p <- cbind(sample(-20:20, 30, replace = TRUE),
@@ -55,6 +62,7 @@ test_that("the hull is idempotent and contains every point", {
 })
 
 test_that("hull validation", {
+  skip_on_cran()
   expect_error(morie_lattice_convex_hull(rbind(c(0, 0), c(1, 1))),
                "at least 3 distinct")
   expect_error(morie_lattice_convex_hull(rbind(c(0, 0), c(1, 1), c(2, 2),
@@ -66,6 +74,7 @@ test_that("hull validation", {
 # ------------------------------------------------------------------
 
 test_that("Pick matches Python on worked polygons", {
+  skip_on_cran()
   p <- morie_pick_theorem(rbind(c(0, 0), c(4, 0), c(4, 3), c(0, 3)))
   expect_equal(p$interior, 6)
   expect_equal(p$boundary, 14)
@@ -81,6 +90,7 @@ test_that("Pick matches Python on worked polygons", {
 })
 
 test_that("the fundamental triangle has no interior points", {
+  skip_on_cran()
   p <- morie_pick_theorem(rbind(c(0, 0), c(1, 0), c(0, 1)))
   expect_equal(p$twice_area, 1)
   expect_equal(p$boundary, 3)
@@ -89,6 +99,7 @@ test_that("the fundamental triangle has no interior points", {
 })
 
 test_that("Pick verified by enumeration on star-shaped fuzz polygons", {
+  skip_on_cran()
   set.seed(7)
   tried <- 0L
   for (rep in seq_len(150L)) {
@@ -117,6 +128,7 @@ test_that("Pick verified by enumeration on star-shaped fuzz polygons", {
 })
 
 test_that("a self-intersecting polygon is caught, not passed", {
+  skip_on_cran()
   out <- morie_pick_theorem(rbind(c(0, 0), c(4, 0), c(4, 3), c(2, -2)))
   expect_false(out$verified)
   expect_equal(out$interior, -3)
@@ -124,6 +136,7 @@ test_that("a self-intersecting polygon is caught, not passed", {
 })
 
 test_that("the enumeration cap reports rather than passes", {
+  skip_on_cran()
   out <- morie_pick_theorem(rbind(c(0, 0), c(2000, 0), c(2000, 2000),
                                   c(0, 2000)), enumeration_cap = 100)
   expect_true(is.na(out$verified))
@@ -132,6 +145,7 @@ test_that("the enumeration cap reports rather than passes", {
 })
 
 test_that("orientation does not matter", {
+  skip_on_cran()
   cw <- morie_pick_theorem(rbind(c(0, 3), c(4, 3), c(4, 0), c(0, 0)))
   ccw <- morie_pick_theorem(rbind(c(0, 0), c(4, 0), c(4, 3), c(0, 3)))
   expect_equal(cw$interior, ccw$interior)
@@ -139,6 +153,7 @@ test_that("orientation does not matter", {
 })
 
 test_that("Pick validation", {
+  skip_on_cran()
   expect_error(morie_pick_theorem(rbind(c(0, 0), c(1, 1))), "at least 3")
   expect_error(morie_pick_theorem(rbind(c(0, 0), c(1, 1), c(2, 2))),
                "degenerate")
@@ -149,6 +164,7 @@ test_that("Pick validation", {
 # ------------------------------------------------------------------
 
 test_that("monotone lengths match Python on the worked sequence", {
+  skip_on_cran()
   out <- morie_erdos_szekeres_check(c(3, 1, 4, 1.5, 5, 9, 2, 6),
                                     r = 3, s = 4)
   expect_equal(out$longest_increasing, 4L)
@@ -159,6 +175,7 @@ test_that("monotone lengths match Python on the worked sequence", {
 })
 
 test_that("the guarantee holds on every permutation at threshold", {
+  skip_on_cran()
   perms <- function(v) {
     if (length(v) <= 1L) return(list(v))
     out <- list()
@@ -173,6 +190,7 @@ test_that("the guarantee holds on every permutation at threshold", {
 })
 
 test_that("the extremal sequence escapes at length below threshold", {
+  skip_on_cran()
   for (rs in list(c(3, 3), c(4, 4), c(3, 5), c(5, 3))) {
     r <- rs[1]
     s <- rs[2]
@@ -188,6 +206,7 @@ test_that("the extremal sequence escapes at length below threshold", {
 })
 
 test_that("the guarantee holds on random sequences at threshold", {
+  skip_on_cran()
   set.seed(3)
   for (rep in seq_len(120L)) {
     r <- sample(2:5, 1)
@@ -199,6 +218,7 @@ test_that("the guarantee holds on random sequences at threshold", {
 })
 
 test_that("Erdos-Szekeres validation", {
+  skip_on_cran()
   expect_error(morie_erdos_szekeres_check(numeric(0)), "empty")
   expect_error(morie_erdos_szekeres_check(c(1, 2, 1)), "distinct")
   expect_error(morie_erdos_szekeres_check(1:3, r = 1, s = 3), "at least 2")
@@ -209,6 +229,7 @@ test_that("Erdos-Szekeres validation", {
 # ------------------------------------------------------------------
 
 test_that("the witness quadrilateral matches Python", {
+  skip_on_cran()
   out <- morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2, 1),
                                                 c(1, 4), c(3, 5)))
   expect_true(out$found)
@@ -217,6 +238,7 @@ test_that("the witness quadrilateral matches Python", {
 })
 
 test_that("the witness really is convex", {
+  skip_on_cran()
   out <- morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2, 1),
                                                 c(1, 4), c(3, 5)))
   w <- out$witness
@@ -227,6 +249,7 @@ test_that("the witness really is convex", {
 })
 
 test_that("every 5-subset of random general-position points", {
+  skip_on_cran()
   set.seed(5)
   checked <- 0L
   for (rep in seq_len(60L)) {
@@ -244,6 +267,7 @@ test_that("every 5-subset of random general-position points", {
 })
 
 test_that("happy ending validation", {
+  skip_on_cran()
   expect_error(morie_happy_ending_quadrilateral(rbind(c(0, 0), c(1, 0),
                                                       c(0, 1), c(1, 1))),
                "5 or more")
@@ -262,6 +286,7 @@ test_that("happy ending validation", {
 # ------------------------------------------------------------------
 
 test_that("Helly matches Python", {
+  skip_on_cran()
   out <- morie_helly_intervals(rbind(c(0, 3), c(1, 5), c(2, 4)))
   expect_true(out$pairwise_intersecting)
   expect_true(out$common_point_exists)
@@ -273,6 +298,7 @@ test_that("Helly matches Python", {
 })
 
 test_that("the implication holds on random families", {
+  skip_on_cran()
   set.seed(9)
   saw <- 0L
   for (rep in seq_len(300L)) {
@@ -290,12 +316,14 @@ test_that("the implication holds on random families", {
 })
 
 test_that("touching intervals share exactly one point", {
+  skip_on_cran()
   out <- morie_helly_intervals(rbind(c(0, 2), c(2, 5)))
   expect_true(out$common_point_exists)
   expect_equal(out$witness, c(2, 2))
 })
 
 test_that("Helly validation", {
+  skip_on_cran()
   expect_error(morie_helly_intervals(matrix(numeric(0), ncol = 2)),
                "no intervals")
   expect_error(morie_helly_intervals(rbind(c(3, 1))), "a <= b")

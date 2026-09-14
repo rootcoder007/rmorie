@@ -13,6 +13,11 @@
 # grid search is expensive; the end-to-end fits here are deliberately small.
 
 test_that("the Cholesky factor agrees with base R", {
+  # 15s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(3)
   for (n in c(1, 2, 5, 12)) {
     A <- crossprod(matrix(rnorm(n * n), n)) + n * diag(n)
@@ -34,6 +39,7 @@ test_that("the Cholesky factor agrees with base R", {
 })
 
 test_that("the triangular solve agrees with base R", {
+  skip_on_cran()
   set.seed(5)
   for (n in c(1, 2, 4, 9)) {
     A <- crossprod(matrix(rnorm(n * n), n)) + n * diag(n)
@@ -49,6 +55,7 @@ test_that("the triangular solve agrees with base R", {
 })
 
 test_that("the grid search finds known maxima", {
+  skip_on_cran()
   # a smooth unimodal function on a bracket containing its peak
   expect_equal(.sxrhrt_gridmax(function(x) -(x - 1.234)^2, -5, 5), 1.234,
                tolerance = 1e-6)
@@ -69,6 +76,7 @@ test_that("the grid search finds known maxima", {
 })
 
 test_that("rows are coerced from whatever shape they arrive in", {
+  skip_on_cran()
   m <- matrix(1:6, 2, 3)
   expect_equal(.sxrhrt_rows(m), matrix(as.double(1:6), 2, 3))
   expect_equal(.sxrhrt_rows(as.data.frame(m)), matrix(as.double(1:6), 2, 3),
@@ -82,6 +90,7 @@ test_that("rows are coerced from whatever shape they arrive in", {
 })
 
 test_that("the restricted log-likelihood matches a longhand computation", {
+  skip_on_cran()
   set.seed(7)
   n <- 30
   male <- rep(c(TRUE, FALSE), each = n / 2)
@@ -125,6 +134,7 @@ test_that("the restricted log-likelihood matches a longhand computation", {
 })
 
 test_that("a small fit reports a coherent variance decomposition", {
+  skip_on_cran()
   set.seed(11)
   n <- 16
   male <- rep(c(TRUE, FALSE), each = n / 2)
@@ -174,6 +184,7 @@ test_that("a small fit reports a coherent variance decomposition", {
 })
 
 test_that("the fitted optimum is no worse than its starting point", {
+  skip_on_cran()
   set.seed(13)
   n <- 16
   male <- rep(c(TRUE, FALSE), each = n / 2)
@@ -191,6 +202,7 @@ test_that("the fitted optimum is no worse than its starting point", {
 })
 
 test_that("sxrhrt refuses input that identifies nothing", {
+  skip_on_cran()
   n <- 12
   K <- diag(n)
   y <- rnorm(n)

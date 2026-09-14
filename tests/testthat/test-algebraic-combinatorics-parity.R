@@ -12,12 +12,18 @@
 # them numerically would test the rounding, not the mathematics.
 
 test_that("partition counts match Python", {
+  # 8s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   expect_equal(vapply(0:8, function(n) length(morie_partitions_of(n)),
                       integer(1)),
                c(1L, 1L, 2L, 3L, 5L, 7L, 11L, 15L, 22L))
 })
 
 test_that("every partition is weakly decreasing and sums right", {
+  skip_on_cran()
   for (n in 1:9) {
     for (p in morie_partitions_of(n)) {
       expect_equal(sum(p), n)
@@ -27,6 +33,7 @@ test_that("every partition is weakly decreasing and sums right", {
 })
 
 test_that("partitions of 5 are in Python's order", {
+  skip_on_cran()
   got <- morie_partitions_of(5)
   expect_equal(got[[1]], 5L)
   expect_equal(got[[2]], c(4L, 1L))
@@ -39,6 +46,7 @@ test_that("partitions of 5 are in Python's order", {
 # ------------------------------------------------------------------
 
 test_that("hook lengths match Python", {
+  skip_on_cran()
   h <- morie_hook_lengths(c(3, 2))
   expect_equal(h$hooks[[1]], c(4L, 3L, 1L))
   expect_equal(h$hooks[[2]], c(2L, 1L))
@@ -54,12 +62,14 @@ test_that("hook lengths match Python", {
 })
 
 test_that("a single row and a single column count down", {
+  skip_on_cran()
   expect_equal(morie_hook_lengths(5)$hooks[[1]], 5:1)
   h <- morie_hook_lengths(c(1, 1, 1))
   expect_equal(unlist(h$hooks), 3:1)
 })
 
 test_that("hook lengths reject a non-partition", {
+  skip_on_cran()
   expect_error(morie_hook_lengths(c(2, 3)), "weakly decreasing")
   expect_error(morie_hook_lengths(c(3, 0)), "must be positive")
 })
@@ -69,6 +79,7 @@ test_that("hook lengths reject a non-partition", {
 # ------------------------------------------------------------------
 
 test_that("the hook length formula matches Python", {
+  skip_on_cran()
   ref <- list(list(c(3, 2), "5", "24"), list(c(2, 2), "2", "12"),
               list(c(3, 2, 1), "16", "45"), list(c(4, 3, 1), "70", "576"),
               list(c(5, 4, 3, 2, 1), "292864", "4465125"),
@@ -83,6 +94,7 @@ test_that("the hook length formula matches Python", {
 })
 
 test_that("counts far past 2^53 match Python exactly, as strings", {
+  skip_on_cran()
   # a double cannot hold these, so the comparison is decimal, not
   # numeric. This is the whole reason the bigint layer exists.
   out <- morie_standard_tableaux_count(10:1)
@@ -108,6 +120,7 @@ test_that("counts far past 2^53 match Python exactly, as strings", {
 })
 
 test_that("the hook product always divides n! exactly", {
+  skip_on_cran()
   for (n in 1:10) {
     for (shape in morie_partitions_of(n)) {
       out <- morie_standard_tableaux_count(shape)
@@ -118,6 +131,7 @@ test_that("the hook product always divides n! exactly", {
 })
 
 test_that("a single row or column has exactly one tableau", {
+  skip_on_cran()
   for (n in 1:8) {
     expect_equal(morie_standard_tableaux_count(n)$exact, "1")
     expect_equal(morie_standard_tableaux_count(rep(1L, n))$exact, "1")
@@ -125,6 +139,7 @@ test_that("a single row or column has exactly one tableau", {
 })
 
 test_that("the RSK corollary sum of squares is n factorial", {
+  skip_on_cran()
   # every permutation maps to a distinct (P, Q) pair of the same shape,
   # so the squares of the tableau counts must total n!
   for (n in 1:9) {
@@ -143,6 +158,7 @@ test_that("the RSK corollary sum of squares is n factorial", {
 # ------------------------------------------------------------------
 
 test_that("row insertion bumps as Python does", {
+  skip_on_cran()
   # NOTE the row index is 1-based here and 0-based in Python, by
   # design; the anchors below are Python's plus one
   a <- morie_rsk_insert(list(c(1, 3, 5)), 4)
@@ -162,6 +178,7 @@ test_that("row insertion bumps as Python does", {
 })
 
 test_that("RSK matches Python on worked permutations", {
+  skip_on_cran()
   o <- morie_rsk_correspondence(1:5)
   expect_equal(o$shape, 5L)
   expect_equal(o$longest_increasing, 5L)
@@ -190,6 +207,7 @@ test_that("RSK matches Python on worked permutations", {
 })
 
 test_that("RSK round-trips every permutation of n <= 6", {
+  skip_on_cran()
   perms <- function(v) {
     if (length(v) <= 1L) return(list(v))
     out <- list()
@@ -209,6 +227,7 @@ test_that("RSK round-trips every permutation of n <= 6", {
 })
 
 test_that("the shape gives the longest monotone subsequences", {
+  skip_on_cran()
   lm <- function(w, increasing) {
     best <- 0L
     for (r in seq_along(w)) {
@@ -236,6 +255,7 @@ test_that("the shape gives the longest monotone subsequences", {
 })
 
 test_that("RSK input validation", {
+  skip_on_cran()
   expect_error(morie_rsk_correspondence(c(1, 1, 2)), "expected a permutation")
   expect_error(morie_rsk_inverse(list(c(1, 2)), list(1)), "same shape")
 })
@@ -249,6 +269,7 @@ rot_group <- function(n) {
 }
 
 test_that("Burnside matches Python across cyclic groups", {
+  skip_on_cran()
   ref <- list(
     c(1, 2, 2, 2), c(1, 3, 3, 3), c(2, 2, 3, 6), c(2, 3, 6, 12),
     c(3, 2, 4, 12), c(3, 3, 11, 33), c(4, 2, 6, 24), c(4, 3, 24, 96),
@@ -262,6 +283,7 @@ test_that("Burnside matches Python across cyclic groups", {
 })
 
 test_that("fixed points and cycle counts match Python", {
+  skip_on_cran()
   out <- morie_burnside_orbit_count(rot_group(6), 2)
   expect_equal(out$cycle_counts, c(6L, 1L, 2L, 3L, 2L, 1L))
   expect_equal(out$fixed_points, c(64, 2, 4, 8, 4, 2))
@@ -269,6 +291,7 @@ test_that("fixed points and cycle counts match Python", {
 })
 
 test_that("Burnside matches orbits counted directly", {
+  skip_on_cran()
   for (n in 1:6) {
     for (k in 2:3) {
       g <- rot_group(n)
@@ -289,6 +312,7 @@ test_that("Burnside matches orbits counted directly", {
 })
 
 test_that("dividing by the group order is wrong", {
+  skip_on_cran()
   # the naive "divide by the symmetry" fails whenever some arrangements
   # have symmetry of their own
   out <- morie_burnside_orbit_count(rot_group(4), 2)
@@ -298,12 +322,14 @@ test_that("dividing by the group order is wrong", {
 })
 
 test_that("the trivial group leaves every colouring distinct", {
+  skip_on_cran()
   out <- morie_burnside_orbit_count(list(0:2), 3)
   expect_equal(out$orbits, 27)
   expect_false(out$naive_is_wrong)
 })
 
 test_that("Burnside rejects a non-permutation", {
+  skip_on_cran()
   expect_error(morie_burnside_orbit_count(list(c(0, 0)), 2),
                "not a permutation")
   expect_error(morie_burnside_orbit_count(list(0:1, 0:2), 2), "same set")
@@ -315,6 +341,7 @@ test_that("Burnside rejects a non-permutation", {
 # ------------------------------------------------------------------
 
 test_that("necklace counts match Python for k = 2, 3, 4", {
+  skip_on_cran()
   ref <- list(c(2, 3, 4), c(3, 6, 10), c(4, 11, 24), c(6, 24, 70),
               c(8, 51, 208), c(14, 130, 700), c(20, 315, 2344),
               c(36, 834, 8230), c(60, 2195, 29144), c(108, 5934, 104968),
@@ -330,6 +357,7 @@ test_that("necklace counts match Python for k = 2, 3, 4", {
 })
 
 test_that("the cyclic sum always divides by n", {
+  skip_on_cran()
   for (n in 1:14) {
     for (k in c(2, 3, 5)) {
       expect_true(morie_cycle_index_necklaces(n, k)$divides_exactly)
@@ -338,12 +366,14 @@ test_that("the cyclic sum always divides by n", {
 })
 
 test_that("one bead gives one orbit per colour", {
+  skip_on_cran()
   for (k in c(1, 2, 5)) {
     expect_equal(morie_cycle_index_necklaces(1, k)$count, k)
   }
 })
 
 test_that("necklace validation", {
+  skip_on_cran()
   expect_error(morie_cycle_index_necklaces(0, 2), "n must be positive")
   expect_error(morie_cycle_index_necklaces(3, 0), "k must be positive")
 })
