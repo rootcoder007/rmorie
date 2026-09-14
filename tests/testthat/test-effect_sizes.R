@@ -6,6 +6,11 @@ x_a <- rnorm(30, mean = 0)
 y_a <- rnorm(30, mean = 0.6)
 
 test_that("effect_size_result builds expected list", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   r <- effect_size_result("test", 0.5, 0.1, 0.9, 0.2, 50L,
                           extra = list(foo = 1))
   expect_s3_class(r, "morie_effect_size")
@@ -16,6 +21,7 @@ test_that("effect_size_result builds expected list", {
 })
 
 test_that("glass_delta x and y control work", {
+  skip_on_cran()
   ry <- glass_delta(x_a, y_a, control = "y")
   rx <- glass_delta(x_a, y_a, control = "x")
   expect_s3_class(ry, "morie_effect_size")
@@ -23,11 +29,13 @@ test_that("glass_delta x and y control work", {
 })
 
 test_that("cles returns probability of superiority", {
+  skip_on_cran()
   r <- cles(x_a, y_a)
   expect_true(r$estimate >= 0 && r$estimate <= 1)
 })
 
 test_that("r_effect_size and r_squared work", {
+  skip_on_cran()
   r <- r_effect_size(x_a, y_a)
   expect_s3_class(r, "morie_effect_size")
   r2 <- r_squared(x_a, y_a)
@@ -36,11 +44,13 @@ test_that("r_effect_size and r_squared work", {
 })
 
 test_that("r_effect_size handles n <= 3", {
+  skip_on_cran()
   r <- r_effect_size(c(1, 2, 3), c(2, 3, 4))
   expect_s3_class(r, "morie_effect_size")
 })
 
 test_that("partial_eta/omega/epsilon squared all work", {
+  skip_on_cran()
   expect_equal(partial_eta_squared(0, 0)$estimate, 0)
   expect_true(partial_eta_squared(5, 5)$estimate > 0)
   expect_equal(omega_squared(0, 0, 1, 1)$estimate, 0)
@@ -50,6 +60,7 @@ test_that("partial_eta/omega/epsilon squared all work", {
 })
 
 test_that("contingency-table effect sizes work", {
+  skip_on_cran()
   expect_true(is.finite(odds_ratio(10, 5, 5, 10)$estimate))
   expect_true(is.finite(risk_ratio(10, 5, 5, 10)$estimate))
   expect_true(is.finite(risk_difference(10, 5, 5, 10)$estimate))
@@ -67,6 +78,7 @@ test_that("contingency-table effect sizes work", {
 })
 
 test_that("rate_ratio and incidence_rate_difference", {
+  skip_on_cran()
   expect_true(is.finite(rate_ratio(10, 100, 5, 100)$estimate))
   expect_true(is.finite(incidence_rate_difference(10, 100, 5, 100)$estimate))
   # Edge: zero person-time
@@ -77,6 +89,7 @@ test_that("rate_ratio and incidence_rate_difference", {
 })
 
 test_that("association measures work", {
+  skip_on_cran()
   r <- cohens_w(c(20, 30, 50))
   expect_s3_class(r, "morie_effect_size")
   r2 <- cohens_w(c(20, 30, 50), expected = c(33, 33, 34))
@@ -90,6 +103,7 @@ test_that("association measures work", {
 })
 
 test_that("non-parametric effect sizes work", {
+  skip_on_cran()
   r <- rank_biserial_correlation(x_a, y_a)
   expect_s3_class(r, "morie_effect_size")
   r2 <- cliffs_delta(x_a, y_a)
@@ -99,6 +113,7 @@ test_that("non-parametric effect sizes work", {
 })
 
 test_that("standardized_coefficients works with data.frame and matrix", {
+  skip_on_cran()
   X <- data.frame(a = rnorm(30), b = rnorm(30))
   y <- 1 + 0.5 * X$a - 0.3 * X$b + rnorm(30)
   r <- standardized_coefficients(X, y)
@@ -110,6 +125,7 @@ test_that("standardized_coefficients works with data.frame and matrix", {
 })
 
 test_that("coefficient_of_variation and variance_ratio", {
+  skip_on_cran()
   expect_true(is.finite(coefficient_of_variation(c(1, 2, 3, 4, 5))$estimate))
   expect_true(is.infinite(coefficient_of_variation(c(0, 0, 0))$estimate))
   r <- variance_ratio(x_a, y_a)
@@ -117,6 +133,7 @@ test_that("coefficient_of_variation and variance_ratio", {
 })
 
 test_that("conversion functions are inverse-consistent in sign", {
+  skip_on_cran()
   d <- 0.5
   expect_true(d_to_r(d) > 0)
   expect_true(d_to_r(d, n1 = 30, n2 = 30) > 0)
@@ -133,6 +150,7 @@ test_that("conversion functions are inverse-consistent in sign", {
 })
 
 test_that("fixed_effects_meta and random_effects_meta", {
+  skip_on_cran()
   est <- c(0.4, 0.5, 0.6)
   se  <- c(0.1, 0.1, 0.1)
   fe <- fixed_effects_meta(est, se)
@@ -145,6 +163,7 @@ test_that("fixed_effects_meta and random_effects_meta", {
 })
 
 test_that("i_squared and prediction_interval", {
+  skip_on_cran()
   est <- c(0.4, 0.5, 0.6)
   se  <- c(0.1, 0.1, 0.1)
   i2 <- i_squared(est, se)
@@ -155,6 +174,7 @@ test_that("i_squared and prediction_interval", {
 })
 
 test_that("bootstrap_effect_size_ci wraps any function", {
+  skip_on_cran()
   r <- bootstrap_effect_size_ci(function(a, b) mean(a) - mean(b),
                                  x_a, y_a, n_boot = 50L)
   expect_s3_class(r, "morie_effect_size")

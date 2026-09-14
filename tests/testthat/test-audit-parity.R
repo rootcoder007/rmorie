@@ -27,6 +27,11 @@ audit_fixture <- function(n = 200L, seed = 20260728) {
 }
 
 test_that("the fixture is bit-identical across languages", {
+  # 4s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   fx <- audit_fixture()
   expect_equal(sum(fx$T), 2084)
   expect_equal(sum(fx$C), 2531)
@@ -34,6 +39,7 @@ test_that("the fixture is bit-identical across languages", {
 })
 
 test_that("native Kaplan-Meier matches the Python core exactly", {
+  skip_on_cran()
   fx <- audit_fixture()
   out <- morie_km_native(fx$time, fx$event)
   expect_equal(out$survival[1], 0.95999999999999996, tolerance = 1e-12)
@@ -45,6 +51,7 @@ test_that("native Kaplan-Meier matches the Python core exactly", {
 })
 
 test_that("the native estimator agrees with the survival-package wrapper", {
+  skip_on_cran()
   # morie_survival_km calls survival::survfit. The native one must agree
   # with it, which is the check that replacing the dependency changed
   # nothing about the answer.
@@ -62,6 +69,7 @@ test_that("the native estimator agrees with the survival-package wrapper", {
 })
 
 test_that("survival is monotone and the log-log interval stays in [0,1]", {
+  skip_on_cran()
   fx <- audit_fixture()
   out <- morie_km_native(fx$time, fx$event)
   expect_true(all(diff(out$survival) <= 1e-12))
@@ -70,12 +78,14 @@ test_that("survival is monotone and the log-log interval stays in [0,1]", {
 })
 
 test_that("censored observations leave the risk set without a drop", {
+  skip_on_cran()
   out <- morie_km_native(c(1, 2, 3), c(1, 0, 1))
   expect_equal(out$times, c(1, 3))
   expect_equal(out$n_censored, 1)
 })
 
 test_that("Kaplan-Meier recovers the exponential truth", {
+  skip_on_cran()
   set.seed(11)
   n <- 4000L
   T <- stats::rexp(n, 1 / 10)
@@ -87,6 +97,7 @@ test_that("Kaplan-Meier recovers the exponential truth", {
 })
 
 test_that("c - c' equals ab exactly for a continuous OLS outcome", {
+  skip_on_cran()
   set.seed(3)
   n <- 500L
   X <- stats::rnorm(n)
@@ -104,6 +115,7 @@ test_that("c - c' equals ab exactly for a continuous OLS outcome", {
 })
 
 test_that("the product estimator recovers the design", {
+  skip_on_cran()
   set.seed(5)
   ests <- vapply(seq_len(30L), function(i) {
     n <- 800L
@@ -118,6 +130,7 @@ test_that("the product estimator recovers the design", {
 })
 
 test_that("the Sobel interval is symmetric by construction", {
+  skip_on_cran()
   out <- morie_mediation_product(0.5, 0.4, se_a = 0.1, se_b = 0.1)
   expect_true(out$sobel_symmetric)
   expect_equal(out$indirect - out$sobel_ci[1],
@@ -125,6 +138,7 @@ test_that("the Sobel interval is symmetric by construction", {
 })
 
 test_that("k-NN entropy matches the Python core exactly", {
+  skip_on_cran()
   fx <- audit_fixture()
   out <- morie_knn_entropy(fx$X, k = 3L)
   expect_equal(out$entropy, 1.5110887074754791, tolerance = 1e-10)
@@ -133,6 +147,7 @@ test_that("k-NN entropy matches the Python core exactly", {
 })
 
 test_that("k-NN entropy recovers the Gaussian value", {
+  skip_on_cran()
   set.seed(7)
   x <- matrix(stats::rnorm(3000), ncol = 1L)
   expect_lt(abs(morie_knn_entropy(x, k = 4L)$entropy -
@@ -140,6 +155,7 @@ test_that("k-NN entropy recovers the Gaussian value", {
 })
 
 test_that("differential entropy shifts by exactly log(a) under rescaling", {
+  skip_on_cran()
   set.seed(9)
   x <- matrix(stats::rnorm(2000), ncol = 1L)
   h1 <- morie_knn_entropy(x, k = 4L)$entropy
@@ -149,6 +165,7 @@ test_that("differential entropy shifts by exactly log(a) under rescaling", {
 })
 
 test_that("the Wald standard error keeps the covariance term", {
+  skip_on_cran()
   # Y and D are measured on the same subjects, so the reduced form and
   # first stage are correlated. Dropping Cov(num, den) -- which most
   # textbook formulas do -- inflated the SE by 25 % on this design.

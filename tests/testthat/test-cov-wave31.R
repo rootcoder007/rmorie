@@ -26,6 +26,11 @@
 }
 
 test_that("the native DCC estimator reports a stationary DCC(1,1) fit", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   X <- .wave31_data()
   res <- morie_dcc_multivariate_garch(X)
 
@@ -44,6 +49,7 @@ test_that("the native DCC estimator reports a stationary DCC(1,1) fit", {
 })
 
 test_that("the fitted path tracks the correlation regime shift", {
+  skip_on_cran()
   X <- .wave31_data()
   res <- morie_dcc_multivariate_garch(X)
   r12 <- res$conditional_correlation[, 1, 2]
@@ -56,6 +62,7 @@ test_that("the fitted path tracks the correlation regime shift", {
 })
 
 test_that("the correlation path matches the recursion recomputed here", {
+  skip_on_cran()
   X <- .wave31_data()
   res <- morie_dcc_multivariate_garch(X)
 
@@ -84,6 +91,7 @@ test_that("the correlation path matches the recursion recomputed here", {
 })
 
 test_that("every reported correlation matrix is a correlation matrix", {
+  skip_on_cran()
   R <- morie_dcc_multivariate_garch(.wave31_data())$conditional_correlation
   for (t in seq_len(dim(R)[1])) {
     Rt <- R[t, , ]
@@ -94,6 +102,7 @@ test_that("every reported correlation matrix is a correlation matrix", {
 })
 
 test_that("the estimator rejects a sample it cannot fit", {
+  skip_on_cran()
   expect_error(morie_dcc_multivariate_garch(matrix(stats::rnorm(20), 10, 2)),
                "n>=30")
   expect_error(morie_dcc_multivariate_garch(matrix(stats::rnorm(40), 40, 1)),

@@ -6,6 +6,11 @@
 # rather than only the p = 0 early return.
 
 test_that("p = 0 is exactly the identity", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   idx <- c(3L, 1L, 4L, 1L, 5L)
   r <- .sse4r_sse_replace(idx, 10L, p = 0, seed = 1)
   expect_identical(unlist(r$indices), idx)
@@ -16,6 +21,7 @@ test_that("p = 0 is exactly the identity", {
 })
 
 test_that("a positive p runs the replacement branch at all", {
+  skip_on_cran()
   # the branch raised "$ operator is invalid for atomic vectors" because the
   # seeded generator was discarded and a bare number was handed to .ghc_unif
   expect_silent(r <- .sse4r_sse_replace(0:9, 10L, p = 0.5, seed = 1))
@@ -24,6 +30,7 @@ test_that("a positive p runs the replacement branch at all", {
 })
 
 test_that("every emitted index stays inside the table", {
+  skip_on_cran()
   set.seed(1)
   idx <- sample(0:99, 400, TRUE)
   for (p in c(0.1, 0.5, 0.9, 1.0)) {
@@ -35,6 +42,7 @@ test_that("every emitted index stays inside the table", {
 })
 
 test_that("the replacement rate tracks p, discounted by self-replacement", {
+  skip_on_cran()
   # a passing position is redrawn uniformly from the same table, so it lands
   # on its own value with probability 1/n: the observed rate of *change* is
   # p * (1 - 1/n), not p
@@ -48,6 +56,7 @@ test_that("the replacement rate tracks p, discounted by self-replacement", {
 })
 
 test_that("the draw is seeded, so runs are reproducible and seeds differ", {
+  skip_on_cran()
   idx <- rep(0:9, 20)
   a <- .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)
   b <- .sse4r_sse_replace(idx, 10L, p = 0.5, seed = 7)
@@ -59,6 +68,7 @@ test_that("the draw is seeded, so runs are reproducible and seeds differ", {
 })
 
 test_that("the replacement log records only positions that actually moved", {
+  skip_on_cran()
   set.seed(3)
   idx <- sample(0:49, 200, TRUE)
   r <- .sse4r_sse_replace(idx, 50L, p = 0.6, seed = 5)
@@ -74,6 +84,7 @@ test_that("the replacement log records only positions that actually moved", {
 })
 
 test_that("the arguments are validated", {
+  skip_on_cran()
   expect_error(.sse4r_sse_replace(0:4, 0L), "table is empty")
   expect_error(.sse4r_sse_replace(0:4, 10L, p = -0.1), "must lie in")
   expect_error(.sse4r_sse_replace(0:4, 10L, p = 1.5), "must lie in")
@@ -82,6 +93,7 @@ test_that("the arguments are validated", {
 })
 
 test_that("p = 1 replaces every position", {
+  skip_on_cran()
   idx <- rep(0:9, 10)
   r <- .sse4r_sse_replace(idx, 10L, p = 1, seed = 4)
   # every position was redrawn, so the rate is 1 - 1/n in expectation and

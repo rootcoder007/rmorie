@@ -34,6 +34,11 @@
 }
 
 test_that("entheo_analysis: beautiful_loop_metric / san_score run", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   rec <- .cov_entheo_record(seed = 11L)
   for (fn in c("beautiful_loop_metric", "san_score")) {
     f <- tryCatch(get(fn, envir = asNamespace("rmorie")),
@@ -54,6 +59,7 @@ test_that("entheo_analysis: beautiful_loop_metric / san_score run", {
 })
 
 test_that("entheo_data: load_dmt_imaging covers root / subject branches", {
+  skip_on_cran()
   res <- tryCatch(
     rmorie:::load_dmt_imaging(
       subject_id = "07",
@@ -73,6 +79,7 @@ test_that("entheo_data: load_dmt_imaging covers root / subject branches", {
 })
 
 test_that("entheo_preprocess: preprocess_eeg / preprocess_fmri run", {
+  skip_on_cran()
   rec <- .cov_entheo_record(seed = 21L)
   r1 <- tryCatch(
     rmorie:::preprocess_eeg(rec,
@@ -96,6 +103,7 @@ test_that("entheo_preprocess: preprocess_eeg / preprocess_fmri run", {
 })
 
 test_that("aaa_helpers_llm_arch: .softmax_last runs", {
+  skip_on_cran()
   f <- tryCatch(get(".softmax_last", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
@@ -112,6 +120,7 @@ test_that("aaa_helpers_llm_arch: .softmax_last runs", {
 })
 
 test_that("bpblm: bits_per_byte runs", {
+  skip_on_cran()
   f <- tryCatch(get("bits_per_byte", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
@@ -126,6 +135,7 @@ test_that("bpblm: bits_per_byte runs", {
 })
 
 test_that("regms: morie_regime_switching at k = 2 and k = 3", {
+  skip_on_cran()
   set.seed(41)
   x2 <- c(stats::rnorm(120, 0, 1), stats::rnorm(120, 5, 2))
   r2 <- tryCatch(suppressWarnings(morie_regime_switching(x2, k_regimes = 2)), error = function(e) e)
@@ -160,6 +170,7 @@ test_that("regms: morie_regime_switching at k = 2 and k = 3", {
 }
 
 test_that("mrm_kulldorff: full scan runs on clustered data", {
+  skip_on_cran()
   df <- .cov_kulldorff_df(seed = 52L)
   res <- tryCatch(
     mrm_tps_kulldorff_scan(df,
@@ -193,6 +204,7 @@ test_that("mrm_kulldorff: full scan runs on clustered data", {
 }
 
 test_that("mrm_tps: levy / moran / recurrence run on varied data", {
+  skip_on_cran()
   df <- .cov_tps_df(seed = 62L)
   r1 <- tryCatch(mrm_tps_levy_scaling(df), error = function(e) e)
   expect_true(inherits(r1, "error") || is.list(r1))
@@ -207,6 +219,7 @@ test_that("mrm_tps: levy / moran / recurrence run on varied data", {
 })
 
 test_that("fast: morie_fast_available + .cpp_available", {
+  skip_on_cran()
   fa <- morie_fast_available()
   expect_type(fa, "logical")
   ca <- tryCatch(rmorie:::.cpp_available(), error = function(e) e)
@@ -214,6 +227,7 @@ test_that("fast: morie_fast_available + .cpp_available", {
 })
 
 test_that("fzcvm: smoothed Cramer-von Mises runs", {
+  skip_on_cran()
   set.seed(71)
   x <- stats::rnorm(120)
   r <- tryCatch(fzcvm(x, cdf = "norm", args = list(0, 1)),
@@ -223,6 +237,7 @@ test_that("fzcvm: smoothed Cramer-von Mises runs", {
 })
 
 test_that("rgwav: wavelet denoise soft and hard modes", {
+  skip_on_cran()
   set.seed(81)
   t <- seq(0, 1, length.out = 200)
   x <- sin(2 * pi * 3 * t) + 0.3 * stats::rnorm(200)
@@ -233,6 +248,7 @@ test_that("rgwav: wavelet denoise soft and hard modes", {
 })
 
 test_that("ghsrv: morie_ghosal_survival_beta_process runs", {
+  skip_on_cran()
   set.seed(91)
   tt <- stats::rexp(60, rate = 0.5)
   ev <- stats::rbinom(60, 1, 0.8)
@@ -247,6 +263,7 @@ test_that("ghsrv: morie_ghosal_survival_beta_process runs", {
 })
 
 test_that("vrgft: variogram fitting for all three models", {
+  skip_on_cran()
   set.seed(101)
   coords <- matrix(stats::runif(60 * 2, 0, 10), ncol = 2)
   x <- coords[, 1] + coords[, 2] + stats::rnorm(60, 0, 0.5)
@@ -259,6 +276,7 @@ test_that("vrgft: variogram fitting for all three models", {
 })
 
 test_that("fzmrl: kernel MRL covers boundary branches", {
+  skip_on_cran()
   set.seed(111)
   x <- stats::rexp(400, rate = 1)
   r1 <- tryCatch(fzmrl(x, t = 0), error = function(e) e)
@@ -270,6 +288,7 @@ test_that("fzmrl: kernel MRL covers boundary branches", {
 })
 
 test_that("hrzt2: IV-Wald LATE estimator runs", {
+  skip_on_cran()
   set.seed(121)
   n <- 200
   z <- stats::rnorm(n)
@@ -286,6 +305,7 @@ test_that("hrzt2: IV-Wald LATE estimator runs", {
 })
 
 test_that("aaa_helpers_det_rng: morie_det_rng + sha helpers", {
+  skip_on_cran()
   s1 <- morie_det_rng("cov_internals", 42L)
   expect_true(is.numeric(s1))
   hx <- morie_det_rng_sha_hex("cov_internals", 7L)
@@ -297,6 +317,7 @@ test_that("aaa_helpers_det_rng: morie_det_rng + sha helpers", {
 })
 
 test_that("aaa_helpers_fauzi: .morie_silverman_h", {
+  skip_on_cran()
   f <- tryCatch(get(".morie_silverman_h", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
@@ -310,6 +331,7 @@ test_that("aaa_helpers_fauzi: .morie_silverman_h", {
 })
 
 test_that("aaa_helpers_time_series_advanced: beta weights", {
+  skip_on_cran()
   f <- tryCatch(get(".morie_beta_weights", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )

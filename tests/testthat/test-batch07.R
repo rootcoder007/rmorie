@@ -3,6 +3,11 @@
 # ghdir, ghdpm, ghebp, ghgpm, ghgps, ghhbp, ghlgd, ghmmt, ghntr.
 
 test_that("morie_genomic_cross_validation returns a well-formed list", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(15)
   X <- matrix(rnorm(200), 50, 4)
   b <- c(1, -1, 0.5, 0)
@@ -25,6 +30,7 @@ test_that("morie_genomic_cross_validation returns a well-formed list", {
 })
 
 test_that("morie_genomic_cross_validation works with a data.frame and 3 folds", {
+  skip_on_cran()
   set.seed(7)
   X <- as.data.frame(matrix(rnorm(120), 40, 3))
   y <- rnorm(40)
@@ -35,6 +41,7 @@ test_that("morie_genomic_cross_validation works with a data.frame and 3 folds", 
 })
 
 test_that("morie_genomic_cross_validation pooled correlation is plausible", {
+  skip_on_cran()
   set.seed(1)
   X <- matrix(rnorm(300), 60, 5)
   beta <- c(2, -1, 0, 1, 0.5)
@@ -44,6 +51,7 @@ test_that("morie_genomic_cross_validation pooled correlation is plausible", {
 })
 
 test_that("morie_ghosal_adaptation returns rates over a default beta grid", {
+  skip_on_cran()
   set.seed(2)
   x <- rnorm(100)
   res <- morie_ghosal_adaptation(x)
@@ -63,6 +71,7 @@ test_that("morie_ghosal_adaptation returns rates over a default beta grid", {
 })
 
 test_that("morie_ghosal_adaptation accepts a custom beta grid and dimension", {
+  skip_on_cran()
   x <- rnorm(50)
   betas <- c(0.5, 1, 2, 4)
   res <- morie_ghosal_adaptation(x, betas = betas, d = 3)
@@ -73,6 +82,7 @@ test_that("morie_ghosal_adaptation accepts a custom beta grid and dimension", {
 })
 
 test_that("morie_ghosal_bernstein_von_mises returns BvM diagnostics", {
+  skip_on_cran()
   set.seed(3)
   x <- rnorm(80)
   res <- morie_ghosal_bernstein_von_mises(x, B = 100, seed = 3)
@@ -95,6 +105,7 @@ test_that("morie_ghosal_bernstein_von_mises returns BvM diagnostics", {
 })
 
 test_that("morie_ghosal_bernstein_von_mises computes a Wald test when theta0 given", {
+  skip_on_cran()
   set.seed(4)
   x <- rnorm(60, mean = 1)
   res <- morie_ghosal_bernstein_von_mises(x, theta0 = 0, B = 80, seed = 4)
@@ -104,6 +115,7 @@ test_that("morie_ghosal_bernstein_von_mises computes a Wald test when theta0 giv
 })
 
 test_that("morie_ghosal_bernstein_von_mises handles n<2 gracefully", {
+  skip_on_cran()
   res <- morie_ghosal_bernstein_von_mises(c(1.0), B = 10)
   expect_true(is.na(res$estimate))
   expect_identical(res$n, 1L)
@@ -111,6 +123,7 @@ test_that("morie_ghosal_bernstein_von_mises handles n<2 gracefully", {
 })
 
 test_that("morie_ghosal_bernstein_von_mises supports deterministic_seed path", {
+  skip_on_cran()
   skip_if_not(
     exists("morie_det_rng",
       where = asNamespace("rmorie"), inherits = FALSE
@@ -125,6 +138,7 @@ test_that("morie_ghosal_bernstein_von_mises supports deterministic_seed path", {
 })
 
 test_that("morie_ghosal_np_classification returns probit-GP results", {
+  skip_on_cran()
   set.seed(6)
   x <- matrix(rnorm(80), 40, 2)
   y <- rbinom(40, 1, plogis(x[, 1]))
@@ -144,6 +158,7 @@ test_that("morie_ghosal_np_classification returns probit-GP results", {
 })
 
 test_that("morie_ghosal_np_classification honours a user length_scale", {
+  skip_on_cran()
   set.seed(8)
   x <- matrix(rnorm(60), 30, 2)
   y <- rbinom(30, 1, 0.5)
@@ -156,6 +171,7 @@ test_that("morie_ghosal_np_classification honours a user length_scale", {
 })
 
 test_that("morie_ghosal_posterior_consistency returns Schwartz diagnostics", {
+  skip_on_cran()
   set.seed(9)
   x <- rnorm(70)
   res <- morie_ghosal_posterior_consistency(x, K = 50, seed = 9)
@@ -175,6 +191,7 @@ test_that("morie_ghosal_posterior_consistency returns Schwartz diagnostics", {
 })
 
 test_that("morie_ghosal_posterior_consistency uses a parametric reference", {
+  skip_on_cran()
   set.seed(10)
   x <- rnorm(50)
   res <- morie_ghosal_posterior_consistency(x,
@@ -186,12 +203,14 @@ test_that("morie_ghosal_posterior_consistency uses a parametric reference", {
 })
 
 test_that("morie_ghosal_posterior_consistency handles empty input", {
+  skip_on_cran()
   res <- morie_ghosal_posterior_consistency(numeric(0))
   expect_true(is.na(res$estimate))
   expect_identical(res$n, 0)
 })
 
 test_that("morie_ghosal_contraction_rate returns minimax rate", {
+  skip_on_cran()
   res <- morie_ghosal_contraction_rate(rnorm(100))
   expect_true(is.list(res))
   expect_named(res, c(
@@ -208,6 +227,7 @@ test_that("morie_ghosal_contraction_rate returns minimax rate", {
 })
 
 test_that("morie_ghosal_contraction_rate honours beta and d arguments", {
+  skip_on_cran()
   res <- morie_ghosal_contraction_rate(rnorm(64), beta = 2.0, d = 3)
   expect_identical(res$beta, 2.0)
   expect_identical(res$d, 3)
@@ -215,12 +235,14 @@ test_that("morie_ghosal_contraction_rate honours beta and d arguments", {
 })
 
 test_that("morie_ghosal_contraction_rate handles n too small", {
+  skip_on_cran()
   res <- morie_ghosal_contraction_rate(c(1.0))
   expect_true(is.na(res$estimate))
   expect_match(res$method, "too small")
 })
 
 test_that("morie_ghosal_dirichlet_posterior returns conjugate DP posterior", {
+  skip_on_cran()
   set.seed(11)
   x <- rnorm(40)
   res <- morie_ghosal_dirichlet_posterior(x, alpha = 1.0)
@@ -241,6 +263,7 @@ test_that("morie_ghosal_dirichlet_posterior returns conjugate DP posterior", {
 })
 
 test_that("morie_ghosal_dirichlet_posterior accepts a custom grid", {
+  skip_on_cran()
   set.seed(12)
   x <- rnorm(30)
   g <- seq(-4, 4, length.out = 25)
@@ -253,6 +276,7 @@ test_that("morie_ghosal_dirichlet_posterior accepts a custom grid", {
 })
 
 test_that("morie_ghosal_dirichlet_posterior handles empty input", {
+  skip_on_cran()
   res <- morie_ghosal_dirichlet_posterior(numeric(0), alpha = 1)
   expect_identical(res$n, 0L)
   expect_length(res$cdf_grid, 51L)
@@ -260,6 +284,7 @@ test_that("morie_ghosal_dirichlet_posterior handles empty input", {
 })
 
 test_that("morie_ghosal_dpmixture_density returns a density estimate", {
+  skip_on_cran()
   set.seed(13)
   x <- rnorm(30)
   res <- morie_ghosal_dpmixture_density(x, n_iter = 30, burn = 10, seed = 13)
@@ -280,6 +305,7 @@ test_that("morie_ghosal_dpmixture_density returns a density estimate", {
 })
 
 test_that("morie_ghosal_dpmixture_density accepts custom sigma and grid", {
+  skip_on_cran()
   set.seed(14)
   x <- rnorm(25)
   g <- seq(-3, 3, length.out = 41)
@@ -293,12 +319,14 @@ test_that("morie_ghosal_dpmixture_density accepts custom sigma and grid", {
 })
 
 test_that("morie_ghosal_dpmixture_density handles empty input", {
+  skip_on_cran()
   res <- morie_ghosal_dpmixture_density(numeric(0))
   expect_true(is.na(res$estimate))
   expect_identical(res$n, 0)
 })
 
 test_that("morie_ghosal_dpmixture_density supports deterministic_seed path", {
+  skip_on_cran()
   skip_if_not(
     exists("morie_det_rng",
       where = asNamespace("rmorie"), inherits = FALSE
@@ -316,6 +344,7 @@ test_that("morie_ghosal_dpmixture_density supports deterministic_seed path", {
 })
 
 test_that("morie_ghosal_empirical_bayes returns alpha-hat via optimisation", {
+  skip_on_cran()
   set.seed(17)
   x <- round(rnorm(60), 1)
   res <- morie_ghosal_empirical_bayes(x)
@@ -332,6 +361,7 @@ test_that("morie_ghosal_empirical_bayes returns alpha-hat via optimisation", {
 })
 
 test_that("morie_ghosal_empirical_bayes accepts an alpha grid", {
+  skip_on_cran()
   set.seed(18)
   x <- round(rnorm(50), 1)
   grid <- seq(0.1, 10, length.out = 30)
@@ -341,12 +371,14 @@ test_that("morie_ghosal_empirical_bayes accepts an alpha grid", {
 })
 
 test_that("morie_ghosal_empirical_bayes handles n<2", {
+  skip_on_cran()
   res <- morie_ghosal_empirical_bayes(c(1.0))
   expect_true(is.na(res$estimate))
   expect_match(res$method, "n<2")
 })
 
 test_that("morie_ghosal_gp_matern returns GP posterior with default nu", {
+  skip_on_cran()
   set.seed(19)
   x <- sort(rnorm(30))
   y <- sin(x) + 0.1 * rnorm(30)
@@ -367,6 +399,7 @@ test_that("morie_ghosal_gp_matern returns GP posterior with default nu", {
 })
 
 test_that("morie_ghosal_gp_matern handles nu = 0.5 and 2.5 branches", {
+  skip_on_cran()
   set.seed(20)
   x <- sort(rnorm(25))
   y <- cos(x) + 0.1 * rnorm(25)
@@ -379,6 +412,7 @@ test_that("morie_ghosal_gp_matern handles nu = 0.5 and 2.5 branches", {
 })
 
 test_that("morie_ghosal_gp_matern handles the general besselK branch", {
+  skip_on_cran()
   set.seed(21)
   x <- sort(rnorm(20))
   y <- x^2 + 0.1 * rnorm(20)
@@ -393,6 +427,7 @@ test_that("morie_ghosal_gp_matern handles the general besselK branch", {
 })
 
 test_that("morie_ghosal_gp_matern accepts x_star prediction points and a matrix x", {
+  skip_on_cran()
   set.seed(22)
   x <- matrix(rnorm(40), 20, 2)
   y <- rowSums(x) + 0.1 * rnorm(20)
@@ -404,6 +439,7 @@ test_that("morie_ghosal_gp_matern accepts x_star prediction points and a matrix 
 })
 
 test_that("morie_ghosal_gp_squared_exponential returns GP posterior", {
+  skip_on_cran()
   set.seed(23)
   x <- sort(rnorm(30))
   y <- sin(x) + 0.1 * rnorm(30)
@@ -421,6 +457,7 @@ test_that("morie_ghosal_gp_squared_exponential returns GP posterior", {
 })
 
 test_that("morie_ghosal_gp_squared_exponential honours optional args", {
+  skip_on_cran()
   set.seed(24)
   x <- matrix(rnorm(40), 20, 2)
   y <- rowSums(x) + 0.1 * rnorm(20)
@@ -436,6 +473,7 @@ test_that("morie_ghosal_gp_squared_exponential honours optional args", {
 })
 
 test_that("morie_ghosal_hierarchical_bayes returns alpha posterior summary", {
+  skip_on_cran()
   set.seed(25)
   x <- round(rnorm(50), 1)
   res <- morie_ghosal_hierarchical_bayes(x, M = 120, seed = 25)
@@ -454,6 +492,7 @@ test_that("morie_ghosal_hierarchical_bayes returns alpha posterior summary", {
 })
 
 test_that("morie_ghosal_hierarchical_bayes accepts custom hyperpriors", {
+  skip_on_cran()
   set.seed(26)
   x <- round(rnorm(40), 1)
   res <- morie_ghosal_hierarchical_bayes(x,
@@ -465,12 +504,14 @@ test_that("morie_ghosal_hierarchical_bayes accepts custom hyperpriors", {
 })
 
 test_that("morie_ghosal_hierarchical_bayes handles n<2", {
+  skip_on_cran()
   res <- morie_ghosal_hierarchical_bayes(c(1.0))
   expect_true(is.na(res$estimate))
   expect_match(res$method, "n<2")
 })
 
 test_that("morie_ghosal_hierarchical_bayes supports deterministic_seed path", {
+  skip_on_cran()
   skip_if_not(
     exists("morie_det_rng",
       where = asNamespace("rmorie"), inherits = FALSE
@@ -485,6 +526,7 @@ test_that("morie_ghosal_hierarchical_bayes supports deterministic_seed path", {
 })
 
 test_that("morie_ghosal_log_density returns a log-spline density", {
+  skip_on_cran()
   set.seed(28)
   x <- rnorm(80)
   res <- morie_ghosal_log_density(x, K = 4)
@@ -504,6 +546,7 @@ test_that("morie_ghosal_log_density returns a log-spline density", {
 })
 
 test_that("morie_ghosal_log_density accepts a custom grid", {
+  skip_on_cran()
   set.seed(29)
   x <- rnorm(60)
   g <- seq(-3, 3, length.out = 50)
@@ -513,12 +556,14 @@ test_that("morie_ghosal_log_density accepts a custom grid", {
 })
 
 test_that("morie_ghosal_log_density handles n<5", {
+  skip_on_cran()
   res <- morie_ghosal_log_density(c(1, 2, 3))
   expect_true(is.na(res$estimate))
   expect_match(res$method, "n<5")
 })
 
 test_that("morie_ghosal_moment_matching returns DP moment-matching summary", {
+  skip_on_cran()
   set.seed(30)
   x <- rnorm(50)
   res <- morie_ghosal_moment_matching(x)
@@ -539,6 +584,7 @@ test_that("morie_ghosal_moment_matching returns DP moment-matching summary", {
 })
 
 test_that("morie_ghosal_moment_matching honours explicit set bounds", {
+  skip_on_cran()
   set.seed(31)
   x <- rnorm(40)
   res <- morie_ghosal_moment_matching(x,
@@ -552,12 +598,14 @@ test_that("morie_ghosal_moment_matching honours explicit set bounds", {
 })
 
 test_that("morie_ghosal_moment_matching handles empty input", {
+  skip_on_cran()
   res <- morie_ghosal_moment_matching(numeric(0))
   expect_identical(res$n, 0L)
   expect_identical(res$n_A, 0L)
 })
 
 test_that("morie_ghosal_neutral_right returns NTR posterior survival", {
+  skip_on_cran()
   set.seed(32)
   time <- rexp(50, rate = 0.5)
   res <- morie_ghosal_neutral_right(time)
@@ -578,6 +626,7 @@ test_that("morie_ghosal_neutral_right returns NTR posterior survival", {
 })
 
 test_that("morie_ghosal_neutral_right handles censoring and custom lam0", {
+  skip_on_cran()
   set.seed(33)
   time <- rexp(40, rate = 0.8)
   event <- rbinom(40, 1, 0.7)
@@ -588,6 +637,7 @@ test_that("morie_ghosal_neutral_right handles censoring and custom lam0", {
 })
 
 test_that("morie_ghosal_neutral_right handles empty input", {
+  skip_on_cran()
   res <- morie_ghosal_neutral_right(numeric(0))
   expect_true(is.na(res$estimate))
   expect_identical(res$n, 0)

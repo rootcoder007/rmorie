@@ -6,6 +6,11 @@
 tol <- 1e-6
 
 test_that("hmsdp: scaled dot-product attention matches anchor", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   r <- morie_geron_scaled_dot_product(matrix(c(0, 0), 1), matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE),
                                        matrix(c(1, 0, 0, 10), 2, 2, byrow = TRUE))
   expect_equal(as.numeric(r$attention[1, ]), A4d$hmsdp$attention_row0, tolerance = tol)
@@ -14,6 +19,7 @@ test_that("hmsdp: scaled dot-product attention matches anchor", {
 })
 
 test_that("hmsatt: self-attention row sums to 1", {
+  skip_on_cran()
   X <- matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE)
   I2 <- diag(2)
   r <- morie_geron_self_attention_modules(X, I2, I2, I2)
@@ -22,6 +28,7 @@ test_that("hmsatt: self-attention row sums to 1", {
 })
 
 test_that("hmsac: soft actor-critic converges to the paying arm", {
+  skip_on_cran()
   bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L,
                   step = function(a) list(0L, as.numeric(a), FALSE))
   r <- morie_geron_sac(bandit, epochs = 30, lr = 0.5, alpha = 0.05)
@@ -31,12 +38,14 @@ test_that("hmsac: soft actor-critic converges to the paying arm", {
 })
 
 test_that("hmsae: stacked autoencoder reconstructs a line exactly", {
+  skip_on_cran()
   X <- matrix(c(0, 0, 0.5, 0.5, 1, 1, 1.5, 1.5, 2, 2), ncol = 2, byrow = TRUE)
   r <- morie_geron_stacked_autoencoder_modules(X, hidden_sizes = c(1), epochs = 400, lr = 0.3)
   expect_equal(r$recon_error, A4d$hmsae$recon_error, tolerance = 1e-4)
 })
 
 test_that("hmself: self-supervised mask pretext solves the linear feature exactly", {
+  skip_on_cran()
   X <- matrix(c(1, 2, 3, 2, 1, 3, 3, 5, 8, 0, 4, 4), ncol = 3, byrow = TRUE)
   r <- morie_geron_self_supervised(X, "mask")
   expect_lt(r$task_losses[3], 1e-20)
@@ -44,12 +53,14 @@ test_that("hmself: self-supervised mask pretext solves the linear feature exactl
 })
 
 test_that("hmsem: semisupervised with alpha=0 reduces to OLS", {
+  skip_on_cran()
   r <- morie_geron_semisupervised(matrix(c(0, 1, 2), 3, 1), c(1, 2, 3), matrix(c(0.5, 1.5, 3), 3, 1), alpha = 0)
   expect_equal(r$theta, A4d$hmsem$theta, tolerance = 1e-6)
   expect_lt(r$sup_loss, 1e-15)
 })
 
 test_that("hmsenet: SE gate matches sigmoid(z) under identity weights", {
+  skip_on_cran()
   I2 <- diag(2)
   r <- morie_geron_senet(c(1, 0), r = 1, W1 = I2, W2 = I2)
   expect_equal(r$s, A4d$hmsenet$s, tolerance = tol)
@@ -57,6 +68,7 @@ test_that("hmsenet: SE gate matches sigmoid(z) under identity weights", {
 })
 
 test_that("hmsent: sentiment analysis predicts correctly and softmaxes", {
+  skip_on_cran()
   pos <- c("good", "great")
   neg <- c("bad", "awful")
   model <- function(toks) {
@@ -70,6 +82,7 @@ test_that("hmsent: sentiment analysis predicts correctly and softmaxes", {
 })
 
 test_that("hmseq2: seq2seq with uniform decoder gives loss log(V)", {
+  skip_on_cran()
   z_of <- function(s) sum(unlist(s))
   dec <- function(z, prefix) c(0, 0, 0)
   r <- morie_geron_seq2seq(c(1, 2), c(1L, 2L), z_of, dec)
@@ -78,6 +91,7 @@ test_that("hmseq2: seq2seq with uniform decoder gives loss log(V)", {
 })
 
 test_that("hmsft: SFT starts at log(2) and drives loss to accuracy 1", {
+  skip_on_cran()
   data <- list(list("translate hello", "bonjour"), list("summarise text", "resume"))
   r <- morie_geron_sft(NULL, data, epochs = 300, lr = 0.5)
   expect_equal(r$loss_curve[1], A4d$hmsft$loss_curve0, tolerance = 1e-8)
@@ -85,24 +99,28 @@ test_that("hmsft: SFT starts at log(2) and drives loss to accuracy 1", {
 })
 
 test_that("hmsgdc: one-step hinge update matches lr*y*x", {
+  skip_on_cran()
   r <- morie_geron_sgd_classifier(matrix(c(1, 0), 1, 2), 1, lr = 0.1, n_iter = 1, alpha = 0, shuffle = FALSE)
   expect_equal(r$w, A4d$hmsgdc$w, tolerance = tol)
   expect_equal(r$b, A4d$hmsgdc$b, tolerance = tol)
 })
 
 test_that("hmsil: silhouette matches the two-tight-pairs anchor", {
+  skip_on_cran()
   r <- morie_geron_silhouette(matrix(c(0, 0.1, 10, 10.1), 4, 1), c(0, 0, 1, 1))
   expect_equal(r$samples[1], A4d$hmsil$sample0, tolerance = tol)
   expect_equal(r$silhouette, A4d$hmsil$silhouette, tolerance = tol)
 })
 
 test_that("hmsslc: semisupervised cluster label propagation matches anchor", {
+  skip_on_cran()
   X <- matrix(c(0, 0.1, 0.2, 9.8, 9.9, 10.0), 6, 1)
   r <- morie_geron_semisupervised_cluster(X, matrix(c(0.05, 9.95), 2, 1), c(0L, 1L), n_clusters = 2)
   expect_equal(as.integer(r$labels), A4d$hmsslc$labels)
 })
 
 test_that("hmstk: stacking blender beats the mean model out-of-fold", {
+  skip_on_cran()
   X <- matrix(1:6, 6, 1)
   y <- c(2, 4, 6, 8, 10, 12)
   mean_model <- function(Xtr, ytr, Xte) rep(mean(ytr), nrow(as.matrix(Xte)))
@@ -118,6 +136,7 @@ test_that("hmstk: stacking blender beats the mean model out-of-fold", {
 })
 
 test_that("hmstr: stratified sampling largest-remainder allocation matches anchor", {
+  skip_on_cran()
   X <- matrix(0:5, 6, 1)
   r <- morie_geron_stratified_sampling(X, c(0, 0, 0, 0, 1, 1), n_total = 3)
   expect_equal(sort(as.integer(r$indices)), sort(A4d$hmstr$indices))
@@ -125,11 +144,13 @@ test_that("hmstr: stratified sampling largest-remainder allocation matches ancho
 })
 
 test_that("hmstr2: stride arithmetic (AlexNet layer 1)", {
+  skip_on_cran()
   r <- morie_geron_stride(227, 11, 0, 4)
   expect_equal(r$output_dim, A4d$hmstr2$output_dim)
 })
 
 test_that("hmsup: supervised learning recovers exact linear fit with zero LOO risk", {
+  skip_on_cran()
   X <- matrix(1:5, 5, 1)
   r <- morie_geron_supervised_learning(X, c(3, 5, 7, 9, 11))
   expect_equal(r$theta, A4d$hmsup$theta, tolerance = 1e-6)
@@ -137,12 +158,14 @@ test_that("hmsup: supervised learning recovers exact linear fit with zero LOO ri
 })
 
 test_that("hmsvdp: SVD pseudoinverse OLS matches anchor", {
+  skip_on_cran()
   r <- morie_geron_svd_pseudoinverse(matrix(c(1, 0, 0, 1, 1, 1), 3, 2, byrow = TRUE), c(1, 1, 2))
   expect_equal(r$theta, A4d$hmsvdp$theta, tolerance = tol)
   expect_equal(r$rank, A4d$hmsvdp$rank)
 })
 
 test_that("hmsvm2: state-dict round trip is exact", {
+  skip_on_cran()
   d <- tempfile("state_")
   dir.create(d)
   sd <- list(w1 = matrix(c(1, 2, 3, 4), 2, 2, byrow = TRUE), b1 = c(0.5, -0.5))
@@ -153,6 +176,7 @@ test_that("hmsvm2: state-dict round trip is exact", {
 })
 
 test_that("hmswin: Swin transformer window count and shift schedule match anchor", {
+  skip_on_cran()
   img <- matrix(0:15, 4, 4, byrow = TRUE)
   r <- morie_geron_swin(img, window_size = 2, n_layers = 1, d_model = 4)
   expect_equal(r$n_windows, A4d$hmswin$n_windows)
@@ -161,6 +185,7 @@ test_that("hmswin: Swin transformer window count and shift schedule match anchor
 })
 
 test_that("hmsymd: symbolic diff of x^2 is 2*x, chain rule checks vs finite diff", {
+  skip_on_cran()
   r <- morie_geron_symbolic_diff("x^2", "x")
   expect_equal(r$derivative, A4d$hmsymd$derivative)
   r2 <- morie_geron_symbolic_diff("exp(2*x)", "x", at = list(x = 0.5))
@@ -169,6 +194,7 @@ test_that("hmsymd: symbolic diff of x^2 is 2*x, chain rule checks vs finite diff
 })
 
 test_that("hmt5: span corruption is a lossless round trip", {
+  skip_on_cran()
   r <- morie_geron_t5(strsplit("the quick brown fox jumps over the lazy dog", " ")[[1]],
                        noise_density = 0.3, mean_span = 2, seed = 0)
   expect_true(r$lossless)
@@ -177,6 +203,7 @@ test_that("hmt5: span corruption is a lossless round trip", {
 })
 
 test_that("hmtd3: TD3 learns to prefer the paying action", {
+  skip_on_cran()
   bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L,
                   step = function(a) list(0L, as.numeric(a), FALSE))
   r <- morie_geron_td3(bandit, epochs = 40)
@@ -186,6 +213,7 @@ test_that("hmtd3: TD3 learns to prefer the paying action", {
 })
 
 test_that("hmtfl: transfer learning keeps the frozen layer bit-identical", {
+  skip_on_cran()
   W0 <- matrix(c(0.5, -0.5, 0.5, 0.5), 2, 2, byrow = TRUE)
   W1 <- matrix(c(1, 1), 2, 1)
   X <- matrix(c(1, 0, 0, 1, 1, 1, 2, 1), 4, 2, byrow = TRUE)
@@ -199,6 +227,7 @@ test_that("hmtfl: transfer learning keeps the frozen layer bit-identical", {
 })
 
 test_that("hmtsc: TorchScript trace/replay matches anchor and rejects wrong shapes", {
+  skip_on_cran()
   W <- diag(2)
   r <- morie_geron_torchscript(list(list(kind = "linear", param = W), list(kind = "relu")),
                                 matrix(c(1, -1), 1, 2))
@@ -208,6 +237,7 @@ test_that("hmtsc: TorchScript trace/replay matches anchor and rejects wrong shap
 })
 
 test_that("hmtfm: transformer encoder parameter count and attention rows sum to 1", {
+  skip_on_cran()
   X <- matrix(c(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0), 3, 4, byrow = TRUE)
   r <- morie_geron_transformer(X, n_heads = 2, n_layers = 1)
   expect_equal(r$total_params, A4d$hmtfm$total_params)
@@ -215,6 +245,7 @@ test_that("hmtfm: transformer encoder parameter count and attention rows sum to 
 })
 
 test_that("hmtpp: tensor parallelism column scheme matches unsharded reference", {
+  skip_on_cran()
   W <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8), 2, 4, byrow = TRUE)
   r <- morie_geron_tensor_parallelism(W, 2, x = matrix(c(1, 1), 1, 2))
   expect_equal(as.numeric(r$output[1, ]), A4d$hmtpp$output, tolerance = tol)
@@ -223,6 +254,7 @@ test_that("hmtpp: tensor parallelism column scheme matches unsharded reference",
 })
 
 test_that("hmtrlf: DPO loss starts at log(2) and margin grows", {
+  skip_on_cran()
   pairs <- list(list(c(1, 0), c(0, 1)), list(c(1, 1), c(0, 1)))
   r <- morie_geron_trl_finetune(NULL, pairs, method = "dpo", epochs = 300, lr = 0.5, beta = 1.0)
   expect_equal(r$loss_curve[1], A4d$hmtrlf$loss_curve0, tolerance = 1e-8)
@@ -231,6 +263,7 @@ test_that("hmtrlf: DPO loss starts at log(2) and margin grows", {
 })
 
 test_that("hmtcmp: torch.compile fuses linear chains and preserves output", {
+  skip_on_cran()
   A2 <- diag(2) * 2
   B2 <- diag(2) * 3
   C2 <- diag(2) * 5
@@ -244,6 +277,7 @@ test_that("hmtcmp: torch.compile fuses linear chains and preserves output", {
 })
 
 test_that("hmuns: unsupervised learning finds the two groups exactly", {
+  skip_on_cran()
   X <- matrix(c(0, 0, 0.2, 0.2, 5, 5, 5.2, 5.2), 4, 2, byrow = TRUE)
   r <- morie_geron_unsupervised_learning(X, n_clusters = 2, bottleneck = 1)
   expect_equal(as.integer(r$labels), A4d$hmuns$labels)
@@ -251,6 +285,7 @@ test_that("hmuns: unsupervised learning finds the two groups exactly", {
 })
 
 test_that("hmunsp: pretrained encoder reconstructs the line exactly", {
+  skip_on_cran()
   Xu <- matrix(c(0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5), 6, 2, byrow = TRUE)
   Xl <- matrix(c(0, 0, 2, 2, 4, 4, 5, 5), 4, 2, byrow = TRUE)
   r <- morie_geron_unsupervised_pretraining(Xu, Xl, c(0, 2, 4, 5), bottleneck = 1)
@@ -259,6 +294,7 @@ test_that("hmunsp: pretrained encoder reconstructs the line exactly", {
 })
 
 test_that("hmvgr: vanishing gradients geometric ratio matches anchor", {
+  skip_on_cran()
   r <- morie_geron_vanishing_gradients(list(1e-6, 1e-4, 1e-2, 1.0))
   expect_equal(r$ratios, A4d$hmvgr$ratios, tolerance = 1e-6)
   expect_equal(r$geometric_ratio, A4d$hmvgr$geometric_ratio, tolerance = 1e-6)
@@ -266,6 +302,7 @@ test_that("hmvgr: vanishing gradients geometric ratio matches anchor", {
 })
 
 test_that("hmvae: VAE loss falls and KL is non-negative", {
+  skip_on_cran()
   X <- matrix(c(0, 0, 1, 1, 2, 2, 3, 3, 4, 4), 5, 2, byrow = TRUE)
   r <- morie_geron_vae(X, latent_dim = 1, epochs = 300, lr = 0.05)
   expect_equal(r$loss_curve[1], A4d$hmvae$loss_curve0, tolerance = 1e-6)
@@ -274,6 +311,7 @@ test_that("hmvae: VAE loss falls and KL is non-negative", {
 })
 
 test_that("hmvbgm: VBGMM prunes the surplus component", {
+  skip_on_cran()
   X <- matrix(c(0, 0.1, 0.2, 9.8, 9.9, 10.0), 6, 1)
   r <- morie_geron_variational_bayes_gmm(X, n_components = 3, alpha0 = 1e-3, max_iter = 200)
   expect_equal(r$n_effective, A4d$hmvbgm$n_effective)
@@ -281,6 +319,7 @@ test_that("hmvbgm: VBGMM prunes the surplus component", {
 })
 
 test_that("hmvbrt: VideoBERT attention rows sum to 1 and shapes match", {
+  skip_on_cran()
   r <- morie_geron_videobert(c(0L, 1L, 2L, 1L), c(0L, 1L), d_model = 4)
   expect_equal(r$n_video, A4d$hmvbrt$n_video)
   expect_equal(r$n_text, A4d$hmvbrt$n_text)
@@ -288,6 +327,7 @@ test_that("hmvbrt: VideoBERT attention rows sum to 1 and shapes match", {
 })
 
 test_that("hmvilb: ViLBERT co-attention shapes and row sums match", {
+  skip_on_cran()
   img <- matrix(c(1, 0, 0, 1, 1, 1), 3, 2, byrow = TRUE)
   r <- morie_geron_vilbert(img, c(0L, 1L), d_model = 4)
   expect_equal(r$n_regions, A4d$hmvilb$n_regions)
@@ -296,6 +336,7 @@ test_that("hmvilb: ViLBERT co-attention shapes and row sums match", {
 })
 
 test_that("hmvit: ViT patch/sequence bookkeeping matches anchor", {
+  skip_on_cran()
   img <- matrix(0:15, 4, 4, byrow = TRUE)
   r <- morie_geron_vision_transformer(img, patch_size = 2, n_layers = 1, d_model = 4, n_heads = 2, n_classes = 3)
   expect_equal(r$n_patches, A4d$hmvit$n_patches)
@@ -305,6 +346,7 @@ test_that("hmvit: ViT patch/sequence bookkeeping matches anchor", {
 })
 
 test_that("hmvqv: VQ-VAE learns two distinct codes and reduces loss", {
+  skip_on_cran()
   X <- matrix(c(0, 0, 0.1, 0.1, 5, 5, 5.1, 5.1), 4, 2, byrow = TRUE)
   r <- morie_geron_vq_vae(X, codebook_size = 2, latent_dim = 1, epochs = 400, lr = 0.05)
   expect_equal(length(unique(r$indices)), A4d$hmvqv$n_codes_used)
@@ -313,24 +355,28 @@ test_that("hmvqv: VQ-VAE learns two distinct codes and reduces loss", {
 })
 
 test_that("hmwemb: word embedding table is a unit lookup with cosine diag 1", {
+  skip_on_cran()
   r <- morie_geron_word_embeddings(c("cat", "dog", "the"), d = 4)
   expect_equal(r$n_params, A4d$hmwemb$n_params)
   expect_equal(diag(r$similarity), A4d$hmwemb$sim_diag, tolerance = tol)
 })
 
 test_that("hmwpt: WordPiece learns '##u' early on the hug/hugs corpus", {
+  skip_on_cran()
   r <- morie_geron_wordpiece_tokenizer("hug hug hugs pug pun", vocab_size = 14)
   expect_equal("##u" %in% r$alphabet, A4d$hmwpt$has_double_u)
   expect_true(length(r$vocab) <= 14)
 })
 
 test_that("hmwrst: warm restarts cosine schedule matches anchor", {
+  skip_on_cran()
   r <- morie_geron_warm_restarts(c(0, 5, 10), T0 = 10, factor = 2.0, eta_max = 0.1)
   expect_equal(r$eta, A4d$hmwrst$eta, tolerance = tol)
   expect_equal(r$cycle, A4d$hmwrst$cycle)
 })
 
 test_that("hmxcpt: Xception parameter count matches the ImageNet reference", {
+  skip_on_cran()
   r <- morie_geron_xception(1000)
   expect_equal(r$trainable_params, A4d$hmxcpt$trainable_params)
   expect_equal(r$total_params, A4d$hmxcpt$total_params)
@@ -338,6 +384,7 @@ test_that("hmxcpt: Xception parameter count matches the ImageNet reference", {
 })
 
 test_that("hmxgb: XGBoost single stump recovers group means exactly", {
+  skip_on_cran()
   r <- morie_geron_xgboost(matrix(0:3, 4, 1), c(1, 1, 10, 10), n_estimators = 1, learning_rate = 1.0,
                             max_depth = 1, reg_lambda = 0.0)
   expect_equal(r$predicted, A4d$hmxgb$predicted, tolerance = tol)
@@ -347,6 +394,7 @@ test_that("hmxgb: XGBoost single stump recovers group means exactly", {
 })
 
 test_that("hmxgr: exploding gradients geometric ratio matches anchor", {
+  skip_on_cran()
   r <- morie_geron_exploding_gradients(list(1000, 100, 10, 1))
   expect_equal(r$ratios, A4d$hmxgr$ratios, tolerance = tol)
   expect_equal(r$geometric_ratio, A4d$hmxgr$geometric_ratio, tolerance = tol)
@@ -354,6 +402,7 @@ test_that("hmxgr: exploding gradients geometric ratio matches anchor", {
 })
 
 test_that("hmxln: XLNet permutation and masks satisfy the invariants", {
+  skip_on_cran()
   r <- morie_geron_xlnet(c(0L, 1L, 2L, 1L), n_layers = 1, vocab_size = 3)
   expect_equal(sort(as.integer(r$permutation)), A4d$hmxln$permutation_sorted)
   expect_equal(sum(diag(r$query_mask)), A4d$hmxln$query_diag_sum)
@@ -362,6 +411,7 @@ test_that("hmxln: XLNet permutation and masks satisfy the invariants", {
 })
 
 test_that("hmyolo: YOLO decode + NMS keeps two non-overlapping detections", {
+  skip_on_cran()
   model <- function(x) {
     p <- array(0.0, dim = c(2, 2, 7))
     p[1, 1, 1:5] <- c(0.5, 0.5, 0.5, 0.5, 1.0)
@@ -377,6 +427,7 @@ test_that("hmyolo: YOLO decode + NMS keeps two non-overlapping detections", {
 })
 
 test_that("hmzsl: zero-shot scoring matches the softmax anchor", {
+  skip_on_cran()
   scores <- c(negative = 0.0, positive = 1.0)
   r <- morie_geron_zero_shot(function(p) scores, "Review: it was great. Sentiment:")
   expect_equal(r$predicted_label, A4d$hmzsl$predicted_label)
@@ -384,6 +435,7 @@ test_that("hmzsl: zero-shot scoring matches the softmax anchor", {
 })
 
 test_that("hmspcl: spectral clustering finds 2 components and groups", {
+  skip_on_cran()
   X <- matrix(c(0, 0.2, 10, 10.2), 4, 1)
   r <- morie_geron_spectral_clustering(X, 2)
   expect_equal(r$n_components, A4d$hmspcl$n_components)
@@ -391,12 +443,14 @@ test_that("hmspcl: spectral clustering finds 2 components and groups", {
 })
 
 test_that("hmsrnn: simple RNN forward pass matches anchor", {
+  skip_on_cran()
   r <- morie_geron_simple_rnn(matrix(c(1, 0), 2, 1), matrix(1, 1, 1), matrix(1, 1, 1))
   expect_equal(as.numeric(r$H), A4d$hmsrnn$H, tolerance = tol)
   expect_equal(r$h_T, A4d$hmsrnn$h_T, tolerance = tol)
 })
 
 test_that("hmsrp: dense sparse-random-projection entries are +-1/sqrt(d_out)", {
+  skip_on_cran()
   X <- diag(3)
   r <- morie_geron_sparse_rand_projection(X, 2, density = 1.0, seed = 7)
   expect_equal(sort(unique(round(abs(as.numeric(r$R)), 12))), unique(A4d$hmsrp$R_flat), tolerance = tol)
@@ -404,6 +458,7 @@ test_that("hmsrp: dense sparse-random-projection entries are +-1/sqrt(d_out)", {
 })
 
 test_that("hmssg: semantic segmentation IoU/accuracy match the half-and-half anchor", {
+  skip_on_cran()
   model <- function(x) {
     s <- array(0.0, dim = c(2, 2, 2))
     s[, 1, 1] <- 1.0
@@ -417,12 +472,14 @@ test_that("hmssg: semantic segmentation IoU/accuracy match the half-and-half anc
 })
 
 test_that("hmtsf: lag-window forecast extrapolates the linear ramp exactly", {
+  skip_on_cran()
   r <- morie_geron_time_series_forecast(1:8, horizon = 3, window = 2)
   expect_equal(r$forecast, A4d$hmtsf$forecast, tolerance = 1e-4)
   expect_lt(r$train_mse, 1e-10)
 })
 
 test_that("hmtsne: t-SNE KL falls and P sums to 1", {
+  skip_on_cran()
   X <- matrix(c(0, 0.1, 0.2, 10, 10.1, 10.2), 6, 1)
   r <- morie_geron_tsne(X, n_components = 1, perplexity = 2.0, n_iter = 250)
   expect_equal(r$kl_curve[1], A4d$hmtsne$kl_curve0, tolerance = 1e-4)
@@ -431,6 +488,7 @@ test_that("hmtsne: t-SNE KL falls and P sums to 1", {
 })
 
 test_that("hmumap: UMAP cross-entropy falls and rho matches nearest-neighbour distance", {
+  skip_on_cran()
   X <- matrix(c(0, 0.1, 0.2, 10, 10.1, 10.2), 6, 1)
   r <- morie_geron_umap(X, n_components = 1, n_neighbors = 2, n_iter = 200)
   expect_equal(r$rho[1], A4d$hmumap$rho0, tolerance = tol)

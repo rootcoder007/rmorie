@@ -3,6 +3,11 @@
 # impsm, indkr, inference, inspector, investigation, ipw, ipw_weights
 
 test_that("morie_horowitz_plr_bandwidth returns positive bandwidth on adequate data", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(1)
   x <- rnorm(80)
   r <- morie_horowitz_plr_bandwidth(x)
@@ -14,6 +19,7 @@ test_that("morie_horowitz_plr_bandwidth returns positive bandwidth on adequate d
 })
 
 test_that("morie_horowitz_plr_bandwidth honours the c multiplier", {
+  skip_on_cran()
   set.seed(2)
   x <- rnorm(60)
   r1 <- morie_horowitz_plr_bandwidth(x, c = 1.06)
@@ -22,6 +28,7 @@ test_that("morie_horowitz_plr_bandwidth honours the c multiplier", {
 })
 
 test_that("morie_horowitz_plr_bandwidth flags insufficient data", {
+  skip_on_cran()
   r <- morie_horowitz_plr_bandwidth(c(1, 2, 3))
   expect_true(is.na(r$estimate))
   expect_match(r$method, "insufficient")
@@ -29,11 +36,13 @@ test_that("morie_horowitz_plr_bandwidth flags insufficient data", {
 })
 
 test_that("morie_horowitz_plr_bandwidth handles zero-IQR / constant data", {
+  skip_on_cran()
   r <- morie_horowitz_plr_bandwidth(rep(5, 30))
   expect_true(is.finite(r$estimate))
 })
 
 test_that("morie_horowitz_quantile_regression returns estimate and se", {
+  skip_on_cran()
   set.seed(3)
   x <- rnorm(120)
   y <- 1 + 2 * x + rnorm(120)
@@ -47,6 +56,7 @@ test_that("morie_horowitz_quantile_regression returns estimate and se", {
 })
 
 test_that("morie_horowitz_quantile_regression works at non-median tau", {
+  skip_on_cran()
   set.seed(4)
   x <- rnorm(100)
   y <- x + rnorm(100)
@@ -56,12 +66,14 @@ test_that("morie_horowitz_quantile_regression works at non-median tau", {
 })
 
 test_that("morie_horowitz_quantile_regression flags insufficient data", {
+  skip_on_cran()
   r <- morie_horowitz_quantile_regression(1:5, 1:5)
   expect_true(all(is.na(r$estimate)))
   expect_match(r$method, "insufficient")
 })
 
 test_that("morie_horowitz_quantile_regression flags invalid tau", {
+  skip_on_cran()
   set.seed(5)
   x <- rnorm(50)
   y <- x + rnorm(50)
@@ -70,6 +82,7 @@ test_that("morie_horowitz_quantile_regression flags invalid tau", {
 })
 
 test_that("morie_horowitz_quantile_regression handles a design matrix", {
+  skip_on_cran()
   set.seed(6)
   X <- cbind(rnorm(120), rnorm(120))
   y <- X[, 1] - X[, 2] + rnorm(120)
@@ -79,6 +92,7 @@ test_that("morie_horowitz_quantile_regression handles a design matrix", {
 })
 
 test_that("morie_horowitz_sample_selection returns coefficients", {
+  skip_on_cran()
   set.seed(7)
   n <- 200
   z <- rnorm(n)
@@ -94,12 +108,14 @@ test_that("morie_horowitz_sample_selection returns coefficients", {
 })
 
 test_that("morie_horowitz_sample_selection flags insufficient data", {
+  skip_on_cran()
   r <- morie_horowitz_sample_selection(1:5, 1:5, 1:5, c(1, 0, 1, 0, 1))
   expect_true(is.na(r$estimate))
   expect_match(r$method, "insufficient")
 })
 
 test_that("morie_horowitz_sample_selection flags too few selected", {
+  skip_on_cran()
   set.seed(8)
   n <- 60
   x <- rnorm(n)
@@ -112,6 +128,7 @@ test_that("morie_horowitz_sample_selection flags too few selected", {
 })
 
 test_that("morie_horowitz_treatment_effect returns ATE with bootstrap SE", {
+  skip_on_cran()
   set.seed(9)
   n <- 120
   x <- rnorm(n)
@@ -127,6 +144,7 @@ test_that("morie_horowitz_treatment_effect returns ATE with bootstrap SE", {
 })
 
 test_that("morie_horowitz_treatment_effect respects .bootstrap = FALSE", {
+  skip_on_cran()
   set.seed(10)
   n <- 100
   x <- rnorm(n)
@@ -138,6 +156,7 @@ test_that("morie_horowitz_treatment_effect respects .bootstrap = FALSE", {
 })
 
 test_that("morie_horowitz_treatment_effect accepts an explicit bandwidth", {
+  skip_on_cran()
   set.seed(11)
   n <- 90
   x <- rnorm(n)
@@ -148,12 +167,14 @@ test_that("morie_horowitz_treatment_effect accepts an explicit bandwidth", {
 })
 
 test_that("morie_horowitz_treatment_effect flags insufficient data", {
+  skip_on_cran()
   r <- morie_horowitz_treatment_effect(1:10, 1:10, rep(c(0, 1), 5))
   expect_true(is.na(r$estimate))
   expect_match(r$method, "insufficient")
 })
 
 test_that("morie_horowitz_local_ate returns a LATE estimate", {
+  skip_on_cran()
   set.seed(12)
   n <- 200
   z <- rbinom(n, 1, 0.5)
@@ -170,6 +191,7 @@ test_that("morie_horowitz_local_ate returns a LATE estimate", {
 })
 
 test_that("morie_horowitz_local_ate binarises a continuous instrument", {
+  skip_on_cran()
   set.seed(13)
   n <- 200
   z <- rnorm(n)
@@ -180,12 +202,14 @@ test_that("morie_horowitz_local_ate binarises a continuous instrument", {
 })
 
 test_that("morie_horowitz_local_ate flags insufficient data", {
+  skip_on_cran()
   r <- morie_horowitz_local_ate(NULL, 1:10, rep(c(0, 1), 5), rep(c(0, 1), 5))
   expect_true(is.na(r$estimate))
   expect_match(r$method, "insufficient")
 })
 
 test_that("morie_horowitz_local_ate flags a weak instrument", {
+  skip_on_cran()
   set.seed(14)
   n <- 100
   z <- rbinom(n, 1, 0.5)
@@ -196,6 +220,7 @@ test_that("morie_horowitz_local_ate flags a weak instrument", {
 })
 
 test_that("morie_horowitz_wild_bootstrap returns estimate and CI", {
+  skip_on_cran()
   set.seed(15)
   x <- rnorm(80)
   y <- 2 * x + rnorm(80)
@@ -212,6 +237,7 @@ test_that("morie_horowitz_wild_bootstrap returns estimate and CI", {
 })
 
 test_that("morie_horowitz_wild_bootstrap handles a multi-column design", {
+  skip_on_cran()
   set.seed(16)
   X <- cbind(1, rnorm(80), rnorm(80))
   y <- X %*% c(1, 2, -1) + rnorm(80)
@@ -221,6 +247,7 @@ test_that("morie_horowitz_wild_bootstrap handles a multi-column design", {
 })
 
 test_that("morie_horowitz_wild_bootstrap accepts precomputed residuals", {
+  skip_on_cran()
   set.seed(17)
   x <- rnorm(60)
   y <- x + rnorm(60)
@@ -230,12 +257,14 @@ test_that("morie_horowitz_wild_bootstrap accepts precomputed residuals", {
 })
 
 test_that("morie_horowitz_wild_bootstrap flags insufficient data", {
+  skip_on_cran()
   r <- morie_horowitz_wild_bootstrap(1:5, 1:5)
   expect_true(is.na(r$estimate))
   expect_match(r$method, "insufficient")
 })
 
 test_that("morie_horowitz_bandwidth_bootstrap selects a bandwidth", {
+  skip_on_cran()
   set.seed(18)
   x <- sort(rnorm(60))
   y <- sin(x) + rnorm(60, sd = 0.2)
@@ -252,12 +281,14 @@ test_that("morie_horowitz_bandwidth_bootstrap selects a bandwidth", {
 })
 
 test_that("morie_horowitz_bandwidth_bootstrap flags insufficient data", {
+  skip_on_cran()
   r <- morie_horowitz_bandwidth_bootstrap(1:10, 1:10)
   expect_true(is.na(r$estimate))
   expect_match(r$method, "insufficient")
 })
 
 test_that("idlpt recovers ideal points from a coordinate matrix", {
+  skip_on_cran()
   Xr <- matrix(c(0, 1, 2, 0, 1, 2), ncol = 2)
   r <- idlpt(Xr)
   expect_type(r, "list")
@@ -272,6 +303,7 @@ test_that("idlpt recovers ideal points from a coordinate matrix", {
 })
 
 test_that("idlpt computes mean_stim_dist when stimuli supplied", {
+  skip_on_cran()
   Xr <- matrix(c(0, 1, 0, 1), ncol = 2)
   Xs <- matrix(c(2, 3, 2, 3), ncol = 2)
   r <- idlpt(Xr, Xs)
@@ -279,17 +311,20 @@ test_that("idlpt computes mean_stim_dist when stimuli supplied", {
 })
 
 test_that("idlpt accepts a plain vector", {
+  skip_on_cran()
   r <- idlpt(c(1, 2, 3, 4))
   expect_equal(r$n_respondents, 4L)
   expect_equal(r$k, 1L)
 })
 
 test_that("morie_ideal_point_recovery and morie_ideal_point_model are aliases of idlpt", {
+  skip_on_cran()
   expect_identical(morie_ideal_point_recovery, idlpt)
   expect_identical(morie_ideal_point_model, idlpt)
 })
 
 test_that("morie_importance_sampling identity case returns near-zero mean", {
+  skip_on_cran()
   set.seed(19)
   x <- rnorm(2000)
   r <- morie_importance_sampling(x)
@@ -301,6 +336,7 @@ test_that("morie_importance_sampling identity case returns near-zero mean", {
 })
 
 test_that("morie_importance_sampling estimates E[X^2] under N(0,1)", {
+  skip_on_cran()
   set.seed(20)
   x <- rnorm(3000)
   r <- morie_importance_sampling(x, h = function(z) z^2)
@@ -308,6 +344,7 @@ test_that("morie_importance_sampling estimates E[X^2] under N(0,1)", {
 })
 
 test_that("morie_importance_sampling accepts custom p and q", {
+  skip_on_cran()
   set.seed(21)
   x <- rnorm(500)
   r <- morie_importance_sampling(x,
@@ -318,6 +355,7 @@ test_that("morie_importance_sampling accepts custom p and q", {
 })
 
 test_that("morie_importance_sampling handles empty input", {
+  skip_on_cran()
   r <- morie_importance_sampling(numeric(0))
   expect_true(is.na(r$estimate))
   expect_equal(r$n, 0L)
@@ -325,6 +363,7 @@ test_that("morie_importance_sampling handles empty input", {
 })
 
 test_that("morie_indicator_kriging returns probabilities in [0, 1]", {
+  skip_on_cran()
   set.seed(22)
   coords <- cbind(runif(15), runif(15))
   x <- rnorm(15)
@@ -336,6 +375,7 @@ test_that("morie_indicator_kriging returns probabilities in [0, 1]", {
 })
 
 test_that("morie_indicator_kriging evaluates at supplied target coords", {
+  skip_on_cran()
   set.seed(23)
   coords <- cbind(runif(12), runif(12))
   x <- rnorm(12)
@@ -345,6 +385,7 @@ test_that("morie_indicator_kriging evaluates at supplied target coords", {
 })
 
 test_that("morie_indicator_kriging single target returns a scalar", {
+  skip_on_cran()
   set.seed(24)
   coords <- cbind(runif(10), runif(10))
   x <- rnorm(10)
@@ -356,6 +397,7 @@ test_that("morie_indicator_kriging single target returns a scalar", {
 })
 
 test_that("morie_indicator_kriging errors on dimension mismatch", {
+  skip_on_cran()
   coords <- cbind(runif(10), runif(10))
   expect_error(
     morie_indicator_kriging(rnorm(8), coords, threshold = 0),
@@ -371,6 +413,7 @@ test_that("morie_indicator_kriging errors on dimension mismatch", {
 })
 
 test_that("morie_two_sample_t_test returns tidy fields", {
+  skip_on_cran()
   set.seed(25)
   r <- morie_two_sample_t_test(rnorm(50, 0.5), rnorm(50, 0))
   expect_named(r, c("t", "df", "p_value", "ci_diff", "cohens_d"))
@@ -380,6 +423,7 @@ test_that("morie_two_sample_t_test returns tidy fields", {
 })
 
 test_that("morie_two_sample_t_test supports equal_var and alternative", {
+  skip_on_cran()
   set.seed(26)
   r <- morie_two_sample_t_test(rnorm(40, 1), rnorm(40, 0),
     equal_var = TRUE, alternative = "greater"
@@ -388,6 +432,7 @@ test_that("morie_two_sample_t_test supports equal_var and alternative", {
 })
 
 test_that("morie_one_sample_t_test returns t, df, p, ci", {
+  skip_on_cran()
   set.seed(27)
   r <- morie_one_sample_t_test(rnorm(40, 0.3), mu0 = 0)
   expect_named(r, c("t", "df", "p_value", "ci"))
@@ -395,6 +440,7 @@ test_that("morie_one_sample_t_test returns t, df, p, ci", {
 })
 
 test_that("morie_paired_t_test returns mean_diff", {
+  skip_on_cran()
   set.seed(28)
   x1 <- rnorm(30)
   x2 <- x1 + rnorm(30, 0.5)
@@ -404,6 +450,7 @@ test_that("morie_paired_t_test returns mean_diff", {
 })
 
 test_that("morie_chi_square_test handles matrix (independence) input", {
+  skip_on_cran()
   m <- matrix(c(20, 30, 25, 25), nrow = 2)
   r <- morie_chi_square_test(m)
   expect_named(r, c("chi_sq", "df", "p_value", "cramers_v"))
@@ -411,12 +458,14 @@ test_that("morie_chi_square_test handles matrix (independence) input", {
 })
 
 test_that("morie_chi_square_test handles vector (GOF) input", {
+  skip_on_cran()
   r <- suppressWarnings(morie_chi_square_test(c(10, 12, 8, 15)))
   expect_true(is.na(r$cramers_v))
   expect_true(is.finite(r$chi_sq))
 })
 
 test_that("morie_fisher_exact_test returns odds ratio and CI", {
+  skip_on_cran()
   m <- matrix(c(10, 2, 3, 15), nrow = 2)
   r <- morie_fisher_exact_test(m)
   expect_named(r, c("odds_ratio", "ci", "p_value"))
@@ -424,6 +473,7 @@ test_that("morie_fisher_exact_test returns odds ratio and CI", {
 })
 
 test_that("morie_anova_one_way returns F and eta_squared", {
+  skip_on_cran()
   set.seed(29)
   r <- morie_anova_one_way(rnorm(30, 0), rnorm(30, 0.5), rnorm(30, 1))
   expect_named(r, c(
@@ -435,10 +485,12 @@ test_that("morie_anova_one_way returns F and eta_squared", {
 })
 
 test_that("morie_anova_one_way errors with fewer than two groups", {
+  skip_on_cran()
   expect_error(morie_anova_one_way(rnorm(10)), "two groups")
 })
 
 test_that("morie_kruskal_wallis_test returns H statistic", {
+  skip_on_cran()
   set.seed(30)
   r <- morie_kruskal_wallis_test(rnorm(20), rnorm(20, 1), rnorm(20, 2))
   expect_named(r, c("H", "df", "p_value"))
@@ -446,6 +498,7 @@ test_that("morie_kruskal_wallis_test returns H statistic", {
 })
 
 test_that("morie_mann_whitney_test returns W and effect size r", {
+  skip_on_cran()
   set.seed(31)
   r <- morie_mann_whitney_test(rnorm(30, 0.5), rnorm(30, 0))
   expect_named(r, c("W", "p_value", "r"))
@@ -453,6 +506,7 @@ test_that("morie_mann_whitney_test returns W and effect size r", {
 })
 
 test_that("morie_wilcoxon_signed_rank_test returns V", {
+  skip_on_cran()
   set.seed(32)
   x1 <- rnorm(25)
   x2 <- x1 + rnorm(25, 0.4)
@@ -462,6 +516,7 @@ test_that("morie_wilcoxon_signed_rank_test returns V", {
 })
 
 test_that("morie_shapiro_wilk_test returns is_normal flag", {
+  skip_on_cran()
   set.seed(33)
   r <- morie_shapiro_wilk_test(rnorm(50))
   expect_named(r, c("W", "p_value", "is_normal"))
@@ -469,6 +524,7 @@ test_that("morie_shapiro_wilk_test returns is_normal flag", {
 })
 
 test_that("morie_levene_test returns F and p_value", {
+  skip_on_cran()
   set.seed(34)
   r <- morie_levene_test(rnorm(30), rnorm(30, sd = 2), rnorm(30, sd = 3))
   expect_named(r, c("F", "p_value"))
@@ -476,6 +532,7 @@ test_that("morie_levene_test returns F and p_value", {
 })
 
 test_that("morie_proportion_ci wilson method returns ordered bounds", {
+  skip_on_cran()
   r <- morie_proportion_ci(35, 100)
   expect_named(r, c("p_hat", "ci_lower", "ci_upper"))
   expect_equal(r$p_hat, 0.35)
@@ -484,6 +541,7 @@ test_that("morie_proportion_ci wilson method returns ordered bounds", {
 })
 
 test_that("morie_proportion_ci exact and wald methods work", {
+  skip_on_cran()
   re <- morie_proportion_ci(35, 100, method = "exact")
   rw <- morie_proportion_ci(35, 100, method = "wald")
   expect_true(re$ci_lower <= re$ci_upper)
@@ -491,6 +549,7 @@ test_that("morie_proportion_ci exact and wald methods work", {
 })
 
 test_that("morie_odds_ratio_ci returns or and CI", {
+  skip_on_cran()
   m <- matrix(c(20, 10, 8, 22), nrow = 2)
   r <- morie_odds_ratio_ci(m)
   expect_named(r, c("odds_ratio", "ci_lower", "ci_upper", "p_value"))
@@ -498,6 +557,7 @@ test_that("morie_odds_ratio_ci returns or and CI", {
 })
 
 test_that("morie_risk_ratio_ci returns rr and ordered CI", {
+  skip_on_cran()
   m <- matrix(c(30, 70, 15, 85), nrow = 2, byrow = TRUE)
   r <- morie_risk_ratio_ci(m)
   expect_named(r, c("rr", "ci_lower", "ci_upper"))
@@ -506,6 +566,7 @@ test_that("morie_risk_ratio_ci returns rr and ordered CI", {
 })
 
 test_that("morie_risk_difference_ci returns rd and ordered CI", {
+  skip_on_cran()
   m <- matrix(c(30, 70, 15, 85), nrow = 2, byrow = TRUE)
   r <- morie_risk_difference_ci(m)
   expect_true(all(c("rd", "ci_lower", "ci_upper") %in% names(r)))
@@ -513,11 +574,13 @@ test_that("morie_risk_difference_ci returns rd and ordered CI", {
 })
 
 test_that("morie_omega_squared returns value in range", {
+  skip_on_cran()
   o <- morie_omega_squared(f_stat = 5.2, df_between = 2, df_within = 87, n = 90)
   expect_true(o >= 0 && o <= 1)
 })
 
 test_that("morie_spearman_rho and morie_kendall_tau return correlation + p", {
+  skip_on_cran()
   set.seed(37)
   x <- rnorm(50)
   y <- x + rnorm(50)
@@ -529,6 +592,7 @@ test_that("morie_spearman_rho and morie_kendall_tau return correlation + p", {
 })
 
 test_that("morie_point_biserial_r returns r and p", {
+  skip_on_cran()
   set.seed(38)
   b <- rbinom(50, 1, 0.5)
   cont <- b + rnorm(50)
@@ -538,36 +602,42 @@ test_that("morie_point_biserial_r returns r and p", {
 })
 
 test_that("morie_power_t_test solves for the missing parameter", {
+  skip_on_cran()
   r <- morie_power_t_test(n = NULL, delta = 0.5, power = 0.80)
   expect_s3_class(r, "power.htest")
   expect_true(is.finite(r$n) && r$n > 0)
 })
 
 test_that("morie_power_prop_test solves for sample size", {
+  skip_on_cran()
   r <- morie_power_prop_test(p1 = 0.30, p2 = 0.20, power = 0.80)
   expect_s3_class(r, "power.htest")
   expect_true(is.finite(r$n))
 })
 
 test_that("morie_sample_size_logistic returns a positive integer", {
+  skip_on_cran()
   n <- morie_sample_size_logistic(p0 = 0.2, or = 1.5)
   expect_type(n, "integer")
   expect_true(n > 0)
 })
 
 test_that("morie_sample_size_logistic one-sided differs from two-sided", {
+  skip_on_cran()
   n2 <- morie_sample_size_logistic(p0 = 0.2, or = 1.5, two_sided = TRUE)
   n1 <- morie_sample_size_logistic(p0 = 0.2, or = 1.5, two_sided = FALSE)
   expect_true(n1 <= n2)
 })
 
 test_that("morie_inspect_output reports missing files", {
+  skip_on_cran()
   r <- morie_inspect_output(tempfile(fileext = ".json"))
   expect_false(r$exists)
   expect_equal(r$status, "missing")
 })
 
 test_that("morie_inspect_output reads a JSON file", {
+  skip_on_cran()
   skip_if_not_installed("jsonlite")
   tmp <- tempfile(fileext = ".json")
   jsonlite::write_json(list(estimate = 0.123, se = 0.045), tmp,
@@ -581,6 +651,7 @@ test_that("morie_inspect_output reads a JSON file", {
 })
 
 test_that("morie_inspect_output reads a CSV file", {
+  skip_on_cran()
   tmp <- tempfile(fileext = ".csv")
   utils::write.csv(data.frame(a = 1:5, b = 6:10), tmp, row.names = FALSE)
   on.exit(unlink(tmp), add = TRUE)
@@ -590,6 +661,7 @@ test_that("morie_inspect_output reads a CSV file", {
 })
 
 test_that("morie_inspect_output reads an RDS file", {
+  skip_on_cran()
   tmp <- tempfile(fileext = ".rds")
   saveRDS(list(a = 1, b = 2), tmp)
   on.exit(unlink(tmp), add = TRUE)
@@ -598,6 +670,7 @@ test_that("morie_inspect_output reads an RDS file", {
 })
 
 test_that("morie_inspect_output flags an unsupported extension", {
+  skip_on_cran()
   tmp <- tempfile(fileext = ".xyz")
   writeLines("hello", tmp)
   on.exit(unlink(tmp), add = TRUE)
@@ -606,6 +679,7 @@ test_that("morie_inspect_output flags an unsupported extension", {
 })
 
 test_that("morie_verify_statistical_output passes a clean output", {
+  skip_on_cran()
   skip_if_not_installed("jsonlite")
   tmp <- tempfile(fileext = ".json")
   jsonlite::write_json(
@@ -620,6 +694,7 @@ test_that("morie_verify_statistical_output passes a clean output", {
 })
 
 test_that("morie_verify_statistical_output fails a bad CI ordering", {
+  skip_on_cran()
   skip_if_not_installed("jsonlite")
   tmp <- tempfile(fileext = ".json")
   jsonlite::write_json(
@@ -633,12 +708,14 @@ test_that("morie_verify_statistical_output fails a bad CI ordering", {
 })
 
 test_that("morie_verify_statistical_output reports a missing file", {
+  skip_on_cran()
   r <- morie_verify_statistical_output(tempfile(fileext = ".json"))
   expect_false(r$passed)
   expect_false(r$checks$file_exists)
 })
 
 test_that("morie_run_weighted_logistic_analysis fits a weighted glm", {
+  skip_on_cran()
   set.seed(39)
   df <- data.frame(
     y = rbinom(200, 1, 0.4),
@@ -659,6 +736,7 @@ test_that("morie_run_weighted_logistic_analysis fits a weighted glm", {
 })
 
 test_that("morie_run_weighted_logistic_analysis falls back to unweighted glm", {
+  skip_on_cran()
   set.seed(40)
   df <- data.frame(y = rbinom(150, 1, 0.5), x1 = rnorm(150))
   r <- morie_run_weighted_logistic_analysis(df,
@@ -669,6 +747,7 @@ test_that("morie_run_weighted_logistic_analysis falls back to unweighted glm", {
 })
 
 test_that("morie_compare_nested_logistic_models runs an LRT", {
+  skip_on_cran()
   set.seed(41)
   df <- data.frame(
     y = rbinom(200, 1, 0.4),
@@ -689,6 +768,7 @@ test_that("morie_compare_nested_logistic_models runs an LRT", {
 })
 
 test_that("morie_compare_nested_logistic_models errors on non-subset reduced model", {
+  skip_on_cran()
   df <- data.frame(y = rbinom(50, 1, 0.5), x1 = rnorm(50), x2 = rnorm(50))
   expect_error(
     morie_compare_nested_logistic_models(df,
@@ -701,6 +781,7 @@ test_that("morie_compare_nested_logistic_models errors on non-subset reduced mod
 })
 
 test_that("morie_run_treatment_effects_analysis returns ate with CI", {
+  skip_on_cran()
   set.seed(42)
   df <- data.frame(
     y = rnorm(200),
@@ -722,6 +803,7 @@ test_that("morie_run_treatment_effects_analysis returns ate with CI", {
 })
 
 test_that("morie_cpads_contract returns the data contract", {
+  skip_on_cran()
   r <- morie_cpads_contract()
   expect_true(all(c("source_kind", "expected_wrangled_path",
                     "required_variables", "note") %in% names(r)))
@@ -729,6 +811,7 @@ test_that("morie_cpads_contract returns the data contract", {
 })
 
 test_that("morie_validate_cpads_data returns missing variable names", {
+  skip_on_cran()
   df <- data.frame(weight = 1, alcohol_past12m = 1)
   missing <- morie_validate_cpads_data(df, strict = FALSE)
   expect_type(missing, "character")
@@ -736,6 +819,7 @@ test_that("morie_validate_cpads_data returns missing variable names", {
 })
 
 test_that("morie_validate_cpads_data errors in strict mode when fields missing", {
+  skip_on_cran()
   df <- data.frame(weight = 1)
   expect_error(
     morie_validate_cpads_data(df, strict = TRUE),
@@ -744,6 +828,7 @@ test_that("morie_validate_cpads_data errors in strict mode when fields missing",
 })
 
 test_that("morie_validate_cpads_data passes a complete frame", {
+  skip_on_cran()
   req <- morie_cpads_contract()$required_variables
   df <- as.data.frame(setNames(
     rep(list(rep(1, 3)), length(req)), req
@@ -752,6 +837,7 @@ test_that("morie_validate_cpads_data passes a complete frame", {
 })
 
 test_that("morie_run_propensity_ipw_analysis returns IPW tables", {
+  skip_on_cran()
   set.seed(43)
   n <- 300
   df <- data.frame(
@@ -775,6 +861,7 @@ test_that("morie_run_propensity_ipw_analysis returns IPW tables", {
 })
 
 test_that("morie_run_ebac_selection_ipw_analysis requires survey or errors", {
+  skip_on_cran()
   if (FALSE) {
     set.seed(44)
     morie_run_ebac_selection_ipw_analysis(data.frame())
@@ -783,6 +870,7 @@ test_that("morie_run_ebac_selection_ipw_analysis requires survey or errors", {
 })
 
 test_that("morie_calculate_ipw_weights returns standard IPTW weights", {
+  skip_on_cran()
   set.seed(45)
   df <- data.frame(
     t = rbinom(100, 1, 0.4),
@@ -795,6 +883,7 @@ test_that("morie_calculate_ipw_weights returns standard IPTW weights", {
 })
 
 test_that("morie_calculate_ipw_weights supports stabilized weights", {
+  skip_on_cran()
   set.seed(46)
   df <- data.frame(
     t = rbinom(100, 1, 0.4),
@@ -809,6 +898,7 @@ test_that("morie_calculate_ipw_weights supports stabilized weights", {
 })
 
 test_that("morie_calculate_ipw_weights applies trimming quantiles", {
+  skip_on_cran()
   set.seed(47)
   df <- data.frame(
     t = rbinom(200, 1, 0.4),
@@ -824,6 +914,7 @@ test_that("morie_calculate_ipw_weights applies trimming quantiles", {
 })
 
 test_that("morie_calculate_ipw_weights errors on bad trim_quantiles length", {
+  skip_on_cran()
   df <- data.frame(t = rbinom(20, 1, 0.5), ps = runif(20, 0.1, 0.9))
   expect_error(
     morie_calculate_ipw_weights(df,

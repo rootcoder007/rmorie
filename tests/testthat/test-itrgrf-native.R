@@ -18,6 +18,11 @@ dgp <- function(n = 30000, seed = 1) {
 }
 
 test_that("the rule treats exactly where the effect exceeds the cost", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   expect_equal(.itrgrf_policy_from_tau(c(-1, 0, 0.5), 0), c(0, 0, 1))
   # a cost raises the bar
   expect_equal(.itrgrf_policy_from_tau(c(-1, 0, 0.5), 0.6), c(0, 0, 0))
@@ -29,6 +34,7 @@ test_that("the rule treats exactly where the effect exceeds the cost", {
 })
 
 test_that("the doubly robust score is the AIPW form for the rule", {
+  skip_on_cran()
   # mu_d + 1{W = d}(y - mu_W)/P(W | X), written out here
   d <- dgp(n = 200)
   rule <- .itrgrf_policy_from_tau(d$tau, 0)
@@ -52,6 +58,7 @@ test_that("the doubly robust score is the AIPW form for the rule", {
 })
 
 test_that("the estimated value survives one wrong nuisance but not two", {
+  skip_on_cran()
   # the defining property, and the reason this estimator is used
   d <- dgp()
   rule <- .itrgrf_policy_from_tau(d$tau, 0)
@@ -74,6 +81,7 @@ test_that("the estimated value survives one wrong nuisance but not two", {
 })
 
 test_that("the value is the mean of the scores with its standard error", {
+  skip_on_cran()
   d <- dgp(n = 500)
   rule <- .itrgrf_policy_from_tau(d$tau, 0)
   v <- .itrgrf_rule_value(d$y, d$W, d$mu1, d$mu0, d$e, rule)
@@ -86,6 +94,7 @@ test_that("the value is the mean of the scores with its standard error", {
 })
 
 test_that("a degenerate propensity for the observed arm is refused", {
+  skip_on_cran()
   # the guard looks at the arm actually observed, so a propensity of zero
   # only matters for a treated row
   expect_error(.itrgrf_dr_scores(1, 1, 1, 0, 0, 1), "propensity of zero")
@@ -96,6 +105,7 @@ test_that("a degenerate propensity for the observed arm is refused", {
 })
 
 test_that("the fitted rule is worth more than treating everyone or no one", {
+  skip_on_cran()
   # what an individualised rule is for
   set.seed(2); n <- 600
   X <- cbind(runif(n, -1, 1), rnorm(n))
@@ -126,6 +136,7 @@ test_that("the fitted rule is worth more than treating everyone or no one", {
 })
 
 test_that("a cost shrinks the treated share", {
+  skip_on_cran()
   set.seed(3); n <- 500
   X <- cbind(runif(n, -1, 1), rnorm(n))
   tau <- 0.9 * X[, 1]

@@ -10,6 +10,11 @@ props <- c("a", "b", "c")
 all_subsets <- lapply(0:7, function(m) props[as.logical(bitwAnd(m, c(1, 2, 4)))])
 
 test_that("the formula compiler has the truth table it should", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   # a conjunction of positives with negatives excluded
   f <- .rmrl_compile(list(c("a", "b"), "c"))
   for (s in all_subsets) {
@@ -32,11 +37,13 @@ test_that("the formula compiler has the truth table it should", {
 })
 
 test_that("a malformed formula is refused", {
+  skip_on_cran()
   expect_error(.rmrl_compile(list("a", "b", "c")), "formula must be")
   expect_error(.rmrl_compile(42), "formula must be")
 })
 
 test_that("machine construction collects the states it mentions", {
+  skip_on_cran()
   m <- morie_rmrl_reward_machine(
     edges = list(list(0, "a", 1, 0), list(1, "b", 2, 1)),
     u0 = 0, terminal = c(2))
@@ -53,6 +60,7 @@ test_that("machine construction collects the states it mentions", {
 })
 
 test_that("a step takes the first matching edge", {
+  skip_on_cran()
   # two edges out of state 0 that both match on {a}: the first wins
   m <- morie_rmrl_reward_machine(
     edges = list(list(0, "a", 1, 5), list(0, "true", 9, -1)),
@@ -67,6 +75,7 @@ test_that("a step takes the first matching edge", {
 })
 
 test_that("a state with no matching edge stays put and pays nothing", {
+  skip_on_cran()
   m <- morie_rmrl_reward_machine(edges = list(list(0, "a", 1, 1)), u0 = 0)
   st <- morie_rmrl_machine_step(m, 0, "z")
   expect_identical(st$u, 0)
@@ -74,6 +83,7 @@ test_that("a state with no matching edge stays put and pays nothing", {
 })
 
 test_that("a terminal state absorbs", {
+  skip_on_cran()
   m <- morie_rmrl_reward_machine(
     edges = list(list(0, "a", 1, 1), list(1, "a", 0, 7)),
     u0 = 0, terminal = c(1))
@@ -83,6 +93,7 @@ test_that("a terminal state absorbs", {
 })
 
 test_that("a run emits the state and reward sequence the machine dictates", {
+  skip_on_cran()
   # reach a, then b; only the b pays
   m <- morie_rmrl_reward_machine(
     edges = list(list(0, "a", 1, 0), list(1, "b", 2, 1)),
@@ -125,6 +136,7 @@ corridor <- function() {
 }
 
 test_that("QRM finds the optimal return on the corridor", {
+  skip_on_cran()
   e <- corridor()
   q <- morie_rmrl(e$machine, e$states, e$actions, e$step, e$label,
                   episodes = 300L, horizon = 40L,
@@ -141,6 +153,7 @@ test_that("QRM finds the optimal return on the corridor", {
 })
 
 test_that("the flat baseline also reaches the optimum, on the product state", {
+  skip_on_cran()
   e <- corridor()
   f <- morie_rmrl_qlearn_flat(e$machine, e$states, e$actions, e$step, e$label,
                               episodes = 300L, horizon = 40L,
@@ -155,6 +168,7 @@ test_that("the flat baseline also reaches the optimum, on the product state", {
 })
 
 test_that("a machine that cannot be satisfied earns nothing", {
+  skip_on_cran()
   e <- corridor()
   # require a proposition no cell ever labels
   impossible <- morie_rmrl_reward_machine(
@@ -166,6 +180,7 @@ test_that("a machine that cannot be satisfied earns nothing", {
 })
 
 test_that("a learning run is reproducible from its seed", {
+  skip_on_cran()
   e <- corridor()
   a <- morie_rmrl(e$machine, e$states, e$actions, e$step, e$label,
                   episodes = 80L, horizon = 20L, start = function() 1L, seed = 3L)

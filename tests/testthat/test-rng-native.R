@@ -9,6 +9,11 @@
 philox_hex <- function(w) sprintf("%08x", as.integer(ifelse(w >= 2^31, w - 2^32, w)))
 
 test_that("Philox matches the published Known Answer Tests", {
+  # 3s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   # From the Random123 reference distribution accompanying Salmon et al.
   # (2011). The third vector is the leading hex digits of pi.
   cases <- list(
@@ -26,6 +31,7 @@ test_that("Philox matches the published Known Answer Tests", {
 })
 
 test_that("AS 241 reproduces the normal quantile function", {
+  skip_on_cran()
   # R's own qnorm IS AS 241, so this is a direct check against the reference
   # implementation of the algorithm being ported.
   p <- c(1e-10, 0.001, 0.025, 0.5, 0.975, 0.99, 1 - 1e-10)
@@ -33,6 +39,7 @@ test_that("AS 241 reproduces the normal quantile function", {
 })
 
 test_that("the normal quantile is antisymmetric", {
+  skip_on_cran()
   # Only where 1 - p is representable without cancellation. Below about
   # p = 1e-9, forming 1 - p loses the low digits of p outright -- for
   # p = 1e-8, 1 - p rounds to 0.99999999 and the tail recovered inside AS 241
@@ -45,6 +52,7 @@ test_that("the normal quantile is antisymmetric", {
 })
 
 test_that("the extreme upper tail is limited by representing 1 - p", {
+  skip_on_cran()
   # Documented, not hidden: ask for the tail through a value that IS exact
   # and the answer is exact; ask through 1 - p and it is not.
   expect_equal(.morie_normal_quantile(1e-8), qnorm(1e-8), tolerance = 1e-13)
@@ -53,6 +61,7 @@ test_that("the extreme upper tail is limited by representing 1 - p", {
 })
 
 test_that("uniforms never reach the endpoints", {
+  skip_on_cran()
   u <- .morie_random_uniform(100000, seed = 7)
   expect_gt(min(u), 0)
   expect_lt(max(u), 1)
@@ -60,6 +69,7 @@ test_that("uniforms never reach the endpoints", {
 })
 
 test_that("the moments are right", {
+  skip_on_cran()
   z <- .morie_random_normal(200000, seed = 42)
   expect_equal(mean(z), 0, tolerance = 0.01)
   expect_equal(sd(z), 1, tolerance = 0.01)
@@ -68,6 +78,7 @@ test_that("the moments are right", {
 })
 
 test_that("seeds and streams are independent handles", {
+  skip_on_cran()
   a <- .morie_random_uniform(1000, seed = 1, stream = 0)
   b <- .morie_random_uniform(1000, seed = 1, stream = 1)
   cc <- .morie_random_uniform(1000, seed = 2, stream = 0)
@@ -77,6 +88,7 @@ test_that("seeds and streams are independent handles", {
 })
 
 test_that("counter-based means any offset is reachable", {
+  skip_on_cran()
   # Philox is a bijection of the index, so a long draw contains the short
   # one as a prefix; there is no state to wind forward.
   expect_equal(.morie_random_uniform(64, seed = 99)[1:9],
@@ -84,6 +96,7 @@ test_that("counter-based means any offset is reachable", {
 })
 
 test_that("the stream agrees with the Python arm bit for bit", {
+  skip_on_cran()
   u <- .morie_random_uniform(7, seed = 12345, stream = 3)
   z <- .morie_random_normal(7, seed = 12345, stream = 3)
   # The uniform stream IS bit-exact: it comes out of integer state, so
@@ -100,6 +113,7 @@ test_that("the stream agrees with the Python arm bit for bit", {
 })
 
 test_that("the multivariate draw reproduces the target covariance", {
+  skip_on_cran()
   cov <- matrix(c(2.0, 0.8, 0.3, 0.8, 1.5, 0.2, 0.3, 0.2, 1.0), 3, 3)
   mu <- c(1, -2, 0.5)
   draws <- t(vapply(0:3999,
@@ -110,6 +124,7 @@ test_that("the multivariate draw reproduces the target covariance", {
 })
 
 test_that("the RNG rejects bad input", {
+  skip_on_cran()
   expect_error(.morie_random_uniform(-1))
   expect_error(.morie_normal_quantile(0))
   expect_error(.morie_normal_quantile(1))

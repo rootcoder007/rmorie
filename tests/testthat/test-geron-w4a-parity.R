@@ -2,6 +2,11 @@
 # Parity tests for geron_w4a_native.R against A4a (Python-generated anchors).
 
 test_that("hmcst: contrastive learning matches Python anchor", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   r <- morie_geron_contrastive_learning(matrix(c(1, 0, 1, 0, 0, 1), 3, 2, byrow = TRUE),
                                         c(1, 0, 0), tau = 1.0)
   expect_equal(r$loss, A4a$hmcst$loss, tolerance = 1e-9)
@@ -14,6 +19,7 @@ test_that("hmcst: contrastive learning matches Python anchor", {
 })
 
 test_that("hmdae: denoising autoencoder trains below the passthrough baseline", {
+  skip_on_cran()
   X <- matrix(c(1, 1, 2, 2, 3, 3, 4, 4), 4, 2, byrow = TRUE)
   r <- morie_geron_denoising_autoencoder_train(X, noise_std = 0.2, epochs = 800, lr = 0.02, hidden = 1, seed = 1)
   expect_equal(r$final_loss, A4a$hmdae$final_loss, tolerance = 1e-6)
@@ -23,6 +29,7 @@ test_that("hmdae: denoising autoencoder trains below the passthrough baseline", 
 })
 
 test_that("hmdale: DALL-E autoregressive generation matches Python", {
+  skip_on_cran()
   skewed <- function(ctx) c(0.0, 5.0)
   r <- morie_geron_dalle(0, skewed, n_image_tokens = 4)
   expect_equal(r$image_tokens, A4a$hmdale$image_tokens)
@@ -31,6 +38,7 @@ test_that("hmdale: DALL-E autoregressive generation matches Python", {
 })
 
 test_that("hmdbd: decision boundary matches Python, independent geometry check", {
+  skip_on_cran()
   r <- morie_geron_decision_boundary(c(-1, 1, 1), matrix(c(0, 0, 1, 1, 0.5, 0.5), 3, 2, byrow = TRUE))
   expect_equal(r$labels, A4a$hmdbd$labels)
   expect_equal(round(r$signed_distance, 9), A4a$hmdbd$signed_distance)
@@ -42,6 +50,7 @@ test_that("hmdbd: decision boundary matches Python, independent geometry check",
 })
 
 test_that("hmdbrt: DistilBERT triple loss matches Python", {
+  skip_on_cran()
   r <- morie_geron_distilbert(matrix(c(2, 0), 1, 2), matrix(c(2, 0), 1, 2), c(1, 2, 3),
                               alpha_mlm = 0, alpha_ce = 1)
   expect_equal(round(r$loss_ce, 12), A4a$hmdbrt$loss_ce_match)
@@ -54,6 +63,7 @@ test_that("hmdbrt: DistilBERT triple loss matches Python", {
 })
 
 test_that("hmdbs: DBSCAN clustering matches Python", {
+  skip_on_cran()
   r <- morie_geron_dbscan(matrix(c(0, 0.5, 10, 10.5, 50), 5, 1), eps = 1.0, min_samples = 2)
   expect_equal(r$labels, A4a$hmdbs$labels)
   expect_equal(r$n_clusters, A4a$hmdbs$n_clusters)
@@ -65,6 +75,7 @@ test_that("hmdbs: DBSCAN clustering matches Python", {
 })
 
 test_that("hmdcg: DCGAN architecture resolves to Python's exact shapes", {
+  skip_on_cran()
   r <- morie_geron_dcgan(array(0, dim = c(3, 16, 16)), z_dim = 8, filters = 4)
   expect_equal(r$n_layers, A4a$hmdcg$n_layers)
   expect_equal(r$generator_layers[[1]]$params, A4a$hmdcg$gen0_params)
@@ -78,6 +89,7 @@ test_that("hmdcg: DCGAN architecture resolves to Python's exact shapes", {
 })
 
 test_that("hmdctr: decoder-only transformer param/mask counts match Python", {
+  skip_on_cran()
   r <- morie_geron_decoder_only(c(1, 2, 3), n_layers = 1, n_heads = 2, d_model = 4, vocab_size = 10, max_len = 8)
   expect_equal(r$per_block$self_attention, A4a$hmdctr$self_attention)
   expect_equal(r$per_block$ffn, A4a$hmdctr$ffn)
@@ -92,11 +104,13 @@ test_that("hmdctr: decoder-only transformer param/mask counts match Python", {
 })
 
 test_that("hmdetr / hmdeit share hmdctr's block_params (used by three modules)", {
+  skip_on_cran()
   bp <- morie_geron_block_params(4, cross_attention = FALSE)
   expect_equal(bp$total, A4a$hmdctr$block_params)
 })
 
 test_that("hmddim: DDIM sub-sequence sampling matches Python", {
+  skip_on_cran()
   zero <- function(x, t) rep(0, length(x))
   r <- morie_geron_ddim(1.0, zero, T = 4, n_steps = 2, beta_schedule = rep(0.5, 4))
   expect_equal(r$timesteps, A4a$hmddim$timesteps)
@@ -110,6 +124,7 @@ test_that("hmddim: DDIM sub-sequence sampling matches Python", {
 })
 
 test_that("hmdfw: diffusion forward alpha_bar and SNR match Python", {
+  skip_on_cran()
   r <- morie_geron_diffusion_forward(1.0, T = 3, beta_schedule = c(0.5, 0.5, 0.5))
   expect_equal(round(r$alpha_bar, 12), A4a$hmdfw$alpha_bar)
   expect_equal(round(r$snr, 12), A4a$hmdfw$snr)
@@ -120,6 +135,7 @@ test_that("hmdfw: diffusion forward alpha_bar and SNR match Python", {
 })
 
 test_that("hmdqn: tabular DQN one-step update matches Python", {
+  skip_on_cran()
   r <- morie_geron_dqn(NULL, matrix(c(0, 0), 1, 2), matrix(c(0, 0), 1, 2),
                        list(list(0, 0, 1.0, 0, TRUE)), epochs = 1, lr = 0.5)
   expect_equal(round(r$Q[1, 1], 6), A4a$hmdqn$Q00)
@@ -127,6 +143,7 @@ test_that("hmdqn: tabular DQN one-step update matches Python", {
 })
 
 test_that("hmgmm: EM Gaussian mixture recovers the two clusters, matches Python", {
+  skip_on_cran()
   X <- matrix(c(0, 0.2, 0.1, 10, 10.2, 9.9), 6, 1)
   r <- morie_geron_gaussian_mixture(X, n_components = 2, seed = 1)
   expect_equal(sort(round(r$means[, 1], 1)), A4a$hmgmm$means_sorted)
@@ -138,6 +155,7 @@ test_that("hmgmm: EM Gaussian mixture recovers the two clusters, matches Python"
 })
 
 test_that("hmdrp: inverted dropout matches Python at p=0 and p=0.5", {
+  skip_on_cran()
   r <- morie_geron_dropout_alt(c(1, 2, 3), p = 0.0)
   expect_equal(r$y, A4a$hmdrp$y_p0)
   expect_equal(r$n_dropped, A4a$hmdrp$n_dropped_p0)
@@ -149,6 +167,7 @@ test_that("hmdrp: inverted dropout matches Python at p=0 and p=0.5", {
 })
 
 test_that("hmfa: FlashAttention tiling is exact, matches Python", {
+  skip_on_cran()
   r <- morie_geron_flash_attention(matrix(0, 1, 1), matrix(c(1, 3), 2, 1), matrix(c(1, 3), 2, 1))
   expect_equal(round(r$output[1, 1], 6), A4a$hmfa$output00)
   expect_equal(r$max_abs_error, A4a$hmfa$max_abs_error, tolerance = 1e-12)
@@ -162,6 +181,7 @@ test_that("hmfa: FlashAttention tiling is exact, matches Python", {
 })
 
 test_that("hmddpg: DDPG zero-noise action and Polyak averaging match Python", {
+  skip_on_cran()
   env <- function(s, a) list(s, -((a - 1.0)^2), FALSE)
   r <- morie_geron_ddpg(env, 0.5, c(0, 0), epochs = 1, lr = 0.0, ou_sigma = 0.0, s0 = 2.0)
   expect_equal(round(r$actions[1], 12), A4a$hmddpg$action0)
@@ -171,6 +191,7 @@ test_that("hmddpg: DDPG zero-noise action and Polyak averaging match Python", {
 })
 
 test_that("hmddpm: DDPM training loss decreases, matches Python", {
+  skip_on_cran()
   X <- matrix(c(1, 2, 3, 4), 4, 1)
   r <- morie_geron_ddpm(X, T = 4, epochs = 400, lr = 0.1, seed = 1)
   expect_equal(r$final_loss < r$loss_history[1], A4a$hmddpm$final_below_first)
@@ -180,6 +201,7 @@ test_that("hmddpm: DDPM training loss decreases, matches Python", {
 })
 
 test_that("hmddqn: Double DQN removes the overestimation gap, matches Python", {
+  skip_on_cran()
   r <- morie_geron_double_dqn(NULL, matrix(c(0, 1), 1, 2), matrix(c(10, -10), 1, 2),
                               list(list(0, 0, 0.0, 0, FALSE)), epochs = 1, lr = 1.0, gamma = 1.0)
   expect_equal(r$targets[1], A4a$hmddqn$target0)
@@ -191,6 +213,7 @@ test_that("hmddqn: Double DQN removes the overestimation gap, matches Python", {
 })
 
 test_that("hmdeit: DeiT architecture matches Python's patch/token counts", {
+  skip_on_cran()
   img <- array(0, dim = c(3, 32, 32))
   r <- morie_geron_deit(img, patch_size = 16, n_layers = 1, d_model = 8, n_heads = 2, n_classes = 4)
   expect_equal(r$n_patches, A4a$hmdeit$n_patches)
@@ -202,6 +225,7 @@ test_that("hmdeit: DeiT architecture matches Python's patch/token counts", {
 })
 
 test_that("hmdetr: DETR feature grid and query ceiling match Python", {
+  skip_on_cran()
   r <- morie_geron_detr(array(0, dim = c(3, 224, 224)), n_queries = 10, n_layers = 1, d_model = 8, n_heads = 2, n_classes = 3)
   expect_equal(as.numeric(r$feature_shape), A4a$hmdetr$feature_shape)
   expect_equal(r$n_tokens, A4a$hmdetr$n_tokens)
@@ -212,6 +236,7 @@ test_that("hmdetr: DETR feature grid and query ceiling match Python", {
 })
 
 test_that("hmdino: DINO uniform-logit loss and entropy match Python's log(2)", {
+  skip_on_cran()
   r <- morie_geron_dino(NULL, matrix(0, 2, 2), matrix(0, 2, 2))
   expect_equal(round(r$loss, 9), A4a$hmdino$loss)
   expect_equal(round(r$teacher_entropy, 9), A4a$hmdino$teacher_entropy)
@@ -220,6 +245,7 @@ test_that("hmdino: DINO uniform-logit loss and entropy match Python's log(2)", {
 })
 
 test_that("hmdld: DataLoader batch plan and Fisher-Yates shuffle match Python", {
+  skip_on_cran()
   r <- morie_geron_dataloader(7, batch_size = 3)
   expect_equal(r$batches, A4a$hmdld$batches)
   expect_equal(r$n_batches, A4a$hmdld$n_batches)
@@ -232,6 +258,7 @@ test_that("hmdld: DataLoader batch plan and Fisher-Yates shuffle match Python", 
 })
 
 test_that("hmdldqn: Dueling DQN gradient split matches Python", {
+  skip_on_cran()
   r <- morie_geron_dueling_dqn_alt(NULL, 0.0, matrix(c(0, 0), 1, 2), list(list(0, 0, 1.0, 0, TRUE)), epochs = 1, lr = 1.0)
   expect_equal(round(r$V[1], 6), A4a$hmdldqn$V0)
   expect_equal(round(r$A[1, ], 6), A4a$hmdldqn$A0)
@@ -241,6 +268,7 @@ test_that("hmdldqn: Dueling DQN gradient split matches Python", {
 })
 
 test_that("hmdpo: DPO loss matches Python", {
+  skip_on_cran()
   r <- morie_geron_dpo(matrix(c(-1, -2), 1, 2), matrix(c(-1, -2), 1, 2))
   expect_equal(round(r$loss, 9), A4a$hmdpo$loss_match_log2)
   expect_equal(round(r$prob_preferred[1], 9), A4a$hmdpo$prob0)
@@ -253,6 +281,7 @@ test_that("hmdpo: DPO loss matches Python", {
 })
 
 test_that("hmdqnt: dynamic quantization matches Python", {
+  skip_on_cran()
   r <- morie_geron_dynamic_quantization_alt(list(W = c(-1, 0, 1)))
   expect_equal(round(r$scales$W, 12), A4a$hmdqnt$scale_w)
   expect_equal(r$quantized$W, A4a$hmdqnt$quant_w)
@@ -266,6 +295,7 @@ test_that("hmdqnt: dynamic quantization matches Python", {
 })
 
 test_that("hmdrnn: stacked RNN forward pass matches Python", {
+  skip_on_cran()
   W <- list(list(matrix(1, 1, 1), matrix(1, 1, 1), 0))
   r <- morie_geron_deep_rnn(matrix(c(1, 1, 1), 3, 1), weights = W, activation = "relu")
   expect_equal(vapply(r$outputs, `[`, 0, 1), A4a$hmdrnn$outputs1)
@@ -280,6 +310,7 @@ test_that("hmdrnn: stacked RNN forward pass matches Python", {
 })
 
 test_that("hmdrv: DDPM ancestral reverse sampling matches Python", {
+  skip_on_cran()
   zero <- function(x, t) rep(0, length(x))
   r <- morie_geron_diffusion_reverse(1.0, zero, T = 1, beta_schedule = 0.75)
   expect_equal(round(r$x_0[1], 12), A4a$hmdrv$x0_1)
@@ -291,6 +322,7 @@ test_that("hmdrv: DDPM ancestral reverse sampling matches Python", {
 })
 
 test_that("hmdthv: tree variance via bootstrap matches Python", {
+  skip_on_cran()
   r <- morie_geron_tree_high_variance(matrix(c(1, 2, 8, 9), 4, 1), c(0, 0, 1, 1), n_resamples = 10, seed = 1)
   expect_equal(r$structural_instability, A4a$hmdthv$instability)
   expect_equal(round(r$variance, 6), A4a$hmdthv$variance)
@@ -298,6 +330,7 @@ test_that("hmdthv: tree variance via bootstrap matches Python", {
 })
 
 test_that("hmdtr: tree regularization matches Python", {
+  skip_on_cran()
   X <- matrix(c(1, 2, 3, 4), 4, 1)
   y <- c(0, 0, 1, 1)
   r <- morie_geron_tree_regularization(X, y, max_depth = 0)
@@ -312,6 +345,7 @@ test_that("hmdtr: tree regularization matches Python", {
 })
 
 test_that("hmdtst: tree scale invariance matches Python", {
+  skip_on_cran()
   X <- matrix(c(1, 5, 2, 4, 3, 9, 4, 1), 4, 2, byrow = TRUE)
   y <- c(0, 0, 1, 1)
   r <- morie_geron_tree_sensitivity_scale(X, y)
@@ -324,6 +358,7 @@ test_that("hmdtst: tree scale invariance matches Python", {
 })
 
 test_that("hmeaf: error analysis matches Python", {
+  skip_on_cran()
   r <- morie_geron_error_analysis(c(0, 0, 1, 1), c(0, 1, 1, 1))
   expect_equal(round(r$normalized, 6), A4a$hmeaf$normalized)
   expect_equal(as.numeric(r$top_confusions[[1]]), A4a$hmeaf$top0)
@@ -332,6 +367,7 @@ test_that("hmeaf: error analysis matches Python", {
 })
 
 test_that("hmearl: early stopping keeps the best snapshot, matches Python", {
+  skip_on_cran()
   Xt <- matrix(c(0, 1, 2, 3), 4, 1)
   yt <- c(0, 2, 4, 6)
   r <- morie_geron_early_stopping_alt(Xt, yt, matrix(c(4, 5), 2, 1), c(8, 10), n_iter = 200, eta = 0.05)
@@ -345,6 +381,7 @@ test_that("hmearl: early stopping keeps the best snapshot, matches Python", {
 })
 
 test_that("hmeg: epsilon-greedy distribution matches Python", {
+  skip_on_cran()
   r <- morie_geron_epsilon_greedy_alt(matrix(c(1, 5, 2), 1, 3), s = 0, epsilon = 0.3)
   expect_equal(round(r$probabilities, 12), A4a$hmeg$probs)
   expect_equal(r$greedy_action, A4a$hmeg$greedy)
@@ -353,6 +390,7 @@ test_that("hmeg: epsilon-greedy distribution matches Python", {
 })
 
 test_that("hmelb: VAE ELBO matches Python", {
+  skip_on_cran()
   r <- morie_geron_elbo(matrix(0, 1, 1), mu = matrix(0, 1, 1), log_sigma = matrix(0, 1, 1))
   expect_equal(round(r$kl, 12), A4a$hmelb$kl0)
   expect_equal(round(r$reconstruction_log_lik, 9), A4a$hmelb$rec0)
@@ -363,6 +401,7 @@ test_that("hmelb: VAE ELBO matches Python", {
 })
 
 test_that("hmencd: encoder-decoder transformer matches Python", {
+  skip_on_cran()
   r <- morie_geron_encoder_decoder_transformer(c(1, 2), c(3, 4, 5), n_layers = 1, n_heads = 2, d_model = 4,
                                                vocab_size = 10, max_len = 8, d_ff = 16)
   expect_equal(r$encoder_block_params, A4a$hmencd$enc_block)
@@ -374,6 +413,7 @@ test_that("hmencd: encoder-decoder transformer matches Python", {
 })
 
 test_that("hmenet: elastic net cost matches Python", {
+  skip_on_cran()
   r <- morie_geron_elastic_net(matrix(c(1, 2), 2, 1), c(2, 4), c(0, 2), alpha = 1.0, r = 0.5)
   expect_equal(round(r$mse, 12), A4a$hmenet$mse)
   expect_equal(round(r$l1_penalty, 12), A4a$hmenet$l1)
@@ -382,6 +422,7 @@ test_that("hmenet: elastic net cost matches Python", {
 })
 
 test_that("hmevr: explained variance ratio matches Python", {
+  skip_on_cran()
   r <- morie_geron_explained_variance_ratio_alt(matrix(c(1, 1, 2, 2, 3, 3), 3, 2, byrow = TRUE))
   expect_equal(round(r$explained_variance_ratio, 12), A4a$hmevr$evr1)
   Y <- matrix(c(-2, -1, 2, 1, -2, 1, 2, -1), 4, 2, byrow = TRUE)
@@ -393,12 +434,14 @@ test_that("hmevr: explained variance ratio matches Python", {
 })
 
 test_that("hmext: extra-trees ensemble matches Python", {
+  skip_on_cran()
   r <- morie_geron_extra_trees(matrix(c(1, 2, 8, 9), 4, 1), c(0, 0, 1, 1), n_estimators = 9, seed = 5)
   expect_equal(r$train_score, A4a$hmext$train_score)
   expect_equal(r$n_estimators, A4a$hmext$n_trees)
 })
 
 test_that("hmf1: F1 score matches Python", {
+  skip_on_cran()
   r <- morie_geron_f1_score_alt(c(0, 0, 1, 1), c(0, 1, 1, 1))
   expect_equal(round(r$precision, 6), A4a$hmf1$precision)
   expect_equal(round(r$recall, 6), A4a$hmf1$recall)
@@ -411,6 +454,7 @@ test_that("hmf1: F1 score matches Python", {
 })
 
 test_that("hmfcn: fully convolutional network forward pass matches Python", {
+  skip_on_cran()
   img <- matrix(c(1, -1, 2, 0), 2, 2, byrow = TRUE)
   model <- list(list(array(c(1, -1), dim = c(2, 1, 1, 1)), 0, 1))
   r <- morie_geron_fcn(img, model)
@@ -419,6 +463,7 @@ test_that("hmfcn: fully convolutional network forward pass matches Python", {
 })
 
 test_that("hmflmg: Flamingo gated cross-attention matches Python", {
+  skip_on_cran()
   r <- morie_geron_flamingo(matrix(c(1, 3), 2, 1), matrix(c(2, 4), 2, 1))
   expect_equal(r$output, A4a$hmflmg$output)
   expect_equal(r$is_identity_at_init, A4a$hmflmg$identity)
@@ -429,6 +474,7 @@ test_that("hmflmg: Flamingo gated cross-attention matches Python", {
 })
 
 test_that("hmfmap: feature map matches Python", {
+  skip_on_cran()
   X <- matrix(c(1, 2, 3, 4, 5, 6, 7, 8, 9), 3, 3, byrow = TRUE)
   r <- morie_geron_feature_map(X, matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE))
   expect_equal(r$feature_map, A4a$hmfmap$fmap)
@@ -439,6 +485,7 @@ test_that("hmfmap: feature map matches Python", {
 })
 
 test_that("hmfmn: FashionMNIST CNN architecture matches Python", {
+  skip_on_cran()
   r <- morie_geron_fashion_mnist()
   outs <- vapply(r$layers, function(l) if (l$kind %in% c("conv", "pool")) l$out else NA_integer_, 0L)
   expect_equal(outs[!is.na(outs)], A4a$hmfmn$conv_pool_outs)
@@ -449,6 +496,7 @@ test_that("hmfmn: FashionMNIST CNN architecture matches Python", {
 })
 
 test_that("hmfp16: IEEE-754 binary16 round trip matches Python", {
+  skip_on_cran()
   r <- morie_geron_fp16_quant(1.0)
   expect_equal(r$value, A4a$hmfp16$value1)
   expect_equal(r$rel_error, A4a$hmfp16$rel_error1)
@@ -463,6 +511,7 @@ test_that("hmfp16: IEEE-754 binary16 round trip matches Python", {
 })
 
 test_that("hmfp32: IEEE-754 binary32 field decomposition matches Python", {
+  skip_on_cran()
   r <- morie_geron_fp32(1.0)
   expect_equal(r$sign, A4a$hmfp32$sign1)
   expect_equal(r$exponent_field, A4a$hmfp32$exp_field1)
@@ -474,6 +523,7 @@ test_that("hmfp32: IEEE-754 binary32 field decomposition matches Python", {
 })
 
 test_that("hmfsf: few-shot prompting matches Python", {
+  skip_on_cran()
   copycat <- function(prompt) {
     lines <- Filter(function(l) grepl("->", l) && !grepl("-> $", l), strsplit(prompt, "\n")[[1]])
     if (length(lines)) trimws(strsplit(lines[length(lines)], "-> ")[[1]][2]) else "?"
@@ -488,6 +538,7 @@ test_that("hmfsf: few-shot prompting matches Python", {
 })
 
 test_that("hmfth: LM fine-tuning matches Python", {
+  skip_on_cran()
   task <- function(th, batch) list((th[1] - 3.0)^2, 2.0 * (th[1] - 3.0))
   r <- morie_geron_finetune_lm(task, list(1), epochs = 1, lr = 0.1, theta = 0.0)
   expect_equal(round(r$theta[1], 12), A4a$hmfth$theta1)
@@ -500,6 +551,7 @@ test_that("hmfth: LM fine-tuning matches Python", {
 })
 
 test_that("hmgan: GAN minimax equilibrium matches Python", {
+  skip_on_cran()
   X <- matrix(c(0, 1, 2, 3), 4, 1)
   r0 <- morie_geron_gan(X, G = list(matrix(0, 1, 1), 1.5), D = list(0.0, 0.0), epochs = 1, lr = 0.0)
   expect_equal(round(r0$value_history[1], 6), A4a$hmgan$value0)
@@ -509,6 +561,7 @@ test_that("hmgan: GAN minimax equilibrium matches Python", {
 })
 
 test_that("hmgand: GMM anomaly detection matches Python", {
+  skip_on_cran()
   X <- matrix(c(0, 0.1, 0.2, 10, 10.1, 10.2, 100, 0.05, 10.05, 0.15), 10, 1)
   r <- morie_geron_anomaly_gmm(X, n_components = 2, contamination = 0.1, seed = 1)
   expect_equal(r$anomaly_indices, A4a$hmgand$anomaly_indices)
@@ -516,6 +569,7 @@ test_that("hmgand: GMM anomaly detection matches Python", {
 })
 
 test_that("hmgbrt: gradient boosting matches Python", {
+  skip_on_cran()
   X <- matrix(c(1, 2, 3, 4), 4, 1)
   y <- c(0, 0, 10, 10)
   r <- morie_geron_gradient_boosting(X, y, n_estimators = 1, learning_rate = 0.1, max_depth = 1)
@@ -529,6 +583,7 @@ test_that("hmgbrt: gradient boosting matches Python", {
 })
 
 test_that("hmgoog: GoogLeNet architecture matches Python", {
+  skip_on_cran()
   r <- morie_geron_googlenet(1000)
   expect_equal(r$total_params, A4a$hmgoog$total_params)
   expect_equal(as.numeric(r$final_feature_map), A4a$hmgoog$final_feature_map)
@@ -538,6 +593,7 @@ test_that("hmgoog: GoogLeNet architecture matches Python", {
 })
 
 test_that("hmgpt1: GPT-1 architecture + LM loss matches Python", {
+  skip_on_cran()
   r <- morie_geron_gpt1(0:7)
   expect_equal(r$total_params, A4a$hmgpt1$total_params)
   r2 <- morie_geron_gpt1(c(0, 1, 0), logits = matrix(0, 3, 2), n_layers = 1, n_heads = 1, d_model = 2,
@@ -548,6 +604,7 @@ test_that("hmgpt1: GPT-1 architecture + LM loss matches Python", {
 })
 
 test_that("hmgpt2: GPT-2 released sizes match Python", {
+  skip_on_cran()
   r <- morie_geron_gpt2(c(1, 2, 3))
   expect_equal(r$total_params, A4a$hmgpt2$total_small)
   sizes <- vapply(c("medium", "large", "xl"), function(s) morie_geron_gpt2(1, size = s)$total_params, 0)
@@ -556,6 +613,7 @@ test_that("hmgpt2: GPT-2 released sizes match Python", {
 })
 
 test_that("hmgpt3: GPT-3 architecture accounting matches Python", {
+  skip_on_cran()
   r <- morie_geron_gpt3(c(1, 2, 3), n_tokens = 5)
   expect_equal(r$total_parameters, A4a$hmgpt3$total_parameters)
   expect_equal(r$d_head, A4a$hmgpt3$d_head)
@@ -569,6 +627,7 @@ test_that("hmgpt3: GPT-3 architecture accounting matches Python", {
 })
 
 test_that("hmgrp: Gaussian random projection matches Python's isometry-in-expectation identity", {
+  skip_on_cran()
   r <- morie_geron_gaussian_rand_projection(matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE), d_out = 3, seed = 0)
   expect_equal(r$d_in, A4a$hmgrp$d_in)
   expect_equal(r$d_out, A4a$hmgrp$d_out)
@@ -576,6 +635,7 @@ test_that("hmgrp: Gaussian random projection matches Python's isometry-in-expect
 })
 
 test_that("hmgrs: grid search selects on cross-validated score, matches Python", {
+  skip_on_cran()
   X <- matrix(c(1, 1, 1, 2, 1, 3, 1, 4), 4, 2, byrow = TRUE)
   y <- c(3, 5, 7, 9)
   r <- morie_geron_grid_search(list(alpha = c(0.0, 1.0, 100.0)), X, y, K = 2)
@@ -586,6 +646,7 @@ test_that("hmgrs: grid search selects on cross-validated score, matches Python",
 })
 
 test_that("hmfad: forward-mode autodiff recovers x^2 -> 2x by finite-difference cross-check", {
+  skip_on_cran()
   # Contract differs from Python's Dual class (documented in roxygen); verified
   # independently by finite differences rather than anchored against Python.
   f <- function(duals) {
@@ -599,6 +660,7 @@ test_that("hmfad: forward-mode autodiff recovers x^2 -> 2x by finite-difference 
 })
 
 test_that("hmencox: encoder-only transformer matches Python, block cost shared with hmdctr", {
+  skip_on_cran()
   r <- morie_geron_encoder_only(c(1, 2, 3), n_layers = 1, n_heads = 2, d_model = 4, vocab_size = 10, max_len = 8, n_segments = 2)
   expect_equal(r$block_params, A4a$hmencox$block_params)
   expect_equal(r$seq_len, A4a$hmencox$seq_len)

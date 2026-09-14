@@ -16,6 +16,11 @@ bnd_unif <- function(n, s = 888) {
 }
 
 test_that("the fixture matches the one Python anchored against", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   u <- bnd_unif(3)
   expect_equal(u, c(0.580214528250508, 0.823510373593308,
                     0.8404795977985486), tolerance = 1e-12)
@@ -25,6 +30,7 @@ test_that("the fixture matches the one Python anchored against", {
 })
 
 test_that("morie_bnd_manski matches morie.fn.bndest", {
+  skip_on_cran()
   u <- bnd_unif(1200L)
   y <- u[1:400]
   obs <- u[401:800] < 0.8
@@ -43,6 +49,7 @@ test_that("morie_bnd_manski matches morie.fn.bndest", {
 })
 
 test_that("no-assumption ATE bounds always contain zero", {
+  skip_on_cran()
   # Manski (1990): the worst-case ATE interval has width exactly
   # K1 - K0, so it can never sign an effect on its own. Bounds that
   # exclude zero have smuggled in an assumption.
@@ -58,6 +65,7 @@ test_that("no-assumption ATE bounds always contain zero", {
 })
 
 test_that("morie_bnd_manski validates the support", {
+  skip_on_cran()
   expect_error(morie_bnd_manski(c(0.5, 1.5), c(TRUE, TRUE), c(0, 1)),
                "outside the declared support")
   expect_error(morie_bnd_manski(c(0.5), TRUE, c(1, 0)), "K0 < K1")
@@ -66,6 +74,7 @@ test_that("morie_bnd_manski validates the support", {
 })
 
 test_that("morie_bnd_imbens_manski matches Python and hits both z limits", {
+  skip_on_cran()
   o <- morie_bnd_imbens_manski(0.5, 0.55, 1, 1, 400)
   expect_equal(o$c, 1.6814774423281535, tolerance = 1e-9)
   expect_equal(o$ci, c(0.4159261278835923, 0.6340738721164078),
@@ -85,6 +94,7 @@ test_that("morie_bnd_imbens_manski matches Python and hits both z limits", {
 })
 
 test_that("morie_bnd_imbens_manski validates inputs", {
+  skip_on_cran()
   expect_error(morie_bnd_imbens_manski(0.8, 0.2, 1, 1, 100),
                "at least lower_hat")
   expect_error(morie_bnd_imbens_manski(0.2, 0.8, 0, 1, 100), "positive")
@@ -93,6 +103,7 @@ test_that("morie_bnd_imbens_manski validates inputs", {
 })
 
 test_that("the CHT criterion is exactly zero on the identified set", {
+  skip_on_cran()
   # E[L] <= theta <= E[U] with the identified set [1, 3]: deep inside
   # every sample moment is negative, and with the positive-part
   # criterion Q_n is EXACTLY zero -- not small, zero.
@@ -119,6 +130,7 @@ test_that("the CHT criterion is exactly zero on the identified set", {
 })
 
 test_that("the CHT region covers the identified-set boundary", {
+  skip_on_cran()
   # the hard point for coverage is the BOUNDARY, where the
   # inequality binds; theta = 1 must be inside most of the time
   hits <- 0L
@@ -135,6 +147,7 @@ test_that("the CHT region covers the identified-set boundary", {
 })
 
 test_that("morie_bnd_moment_inequality validates inputs", {
+  skip_on_cran()
   d <- cbind(stats::qnorm(bnd_unif(20L)), stats::qnorm(bnd_unif(20L, 2)) + 3)
   g <- function(d, th) cbind(d[, 1] - th, th - d[, 2])
   expect_error(morie_bnd_moment_inequality(d, g, 1, alpha = 2), "alpha")
@@ -142,6 +155,7 @@ test_that("morie_bnd_moment_inequality validates inputs", {
 })
 
 test_that("morie_bnd_lp lands on the exact vertices Python found", {
+  skip_on_cran()
   o <- morie_bnd_lp(c(1, 1), A_eq = rbind(c(1, 2)), b_eq = 1)
   expect_equal(o$lower, 0.5, tolerance = 1e-9)
   expect_equal(o$upper, 1.0, tolerance = 1e-9)
@@ -151,6 +165,7 @@ test_that("morie_bnd_lp lands on the exact vertices Python found", {
 })
 
 test_that("LP bounds tighten as restrictions accumulate", {
+  skip_on_cran()
   # adding an assumption can only shrink the identified set --
   # the monotonicity the MST framework runs on
   free <- morie_bnd_lp(c(1, 1, 1))
@@ -163,6 +178,7 @@ test_that("LP bounds tighten as restrictions accumulate", {
 })
 
 test_that("LP infeasibility is a specification rejection", {
+  skip_on_cran()
   o <- morie_bnd_lp(1, A_eq = rbind(1), b_eq = 2, bounds = list(c(0, 1)))
   expect_false(o$feasible)
   expect_true(is.na(o$lower) && is.na(o$upper))
@@ -174,6 +190,7 @@ test_that("LP infeasibility is a specification rejection", {
 })
 
 test_that("morie_bnd_polya_tree matches morie.fn.bndpl", {
+  skip_on_cran()
   z <- stats::qnorm(bnd_unif(600L, 99))
   o <- morie_bnd_polya_tree(z, grid = c(-1, 0, 1), tree_depth = 6L,
                             alpha = 1, lo = -4, hi = 4)
@@ -183,6 +200,7 @@ test_that("morie_bnd_polya_tree matches morie.fn.bndpl", {
 })
 
 test_that("the Polya tree is a density that tracks the sample", {
+  skip_on_cran()
   z <- stats::qnorm(bnd_unif(1500L, 11))
   o <- morie_bnd_polya_tree(z, grid = seq(-4, 4, length.out = 400L),
                             tree_depth = 7L, lo = -5, hi = 5)
@@ -193,6 +211,7 @@ test_that("the Polya tree is a density that tracks the sample", {
 })
 
 test_that("alpha interpolates between base measure and histogram", {
+  skip_on_cran()
   # large alpha smooths toward the uniform base; small alpha follows
   # the data. Kraft's alpha_m = alpha m^2 is what buys absolute
   # continuity, and the rule is recorded in the output.
@@ -207,6 +226,7 @@ test_that("alpha interpolates between base measure and histogram", {
 })
 
 test_that("morie_bnd_polya_tree validates inputs", {
+  skip_on_cran()
   z <- stats::qnorm(bnd_unif(50L, 17))
   expect_error(morie_bnd_polya_tree(z, tree_depth = 0L), "tree_depth")
   expect_error(morie_bnd_polya_tree(z, alpha = -1), "alpha must be positive")
@@ -214,6 +234,7 @@ test_that("morie_bnd_polya_tree validates inputs", {
 })
 
 test_that("the moment-inequality bootstrap does not leak the RNG stream", {
+  skip_on_cran()
   z <- stats::qnorm(bnd_unif(800L, 5))
   d <- cbind(1 + 0.3 * z[1:400], 3 + 0.3 * z[401:800])
   g <- function(d, th) cbind(d[, 1] - th, th - d[, 2])

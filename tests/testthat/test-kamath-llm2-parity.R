@@ -20,6 +20,11 @@ TOL <- 1e-9
 # ------------------------------------------------------- Ch 3: prompting
 
 test_that("Ch 3 prompt plumbing matches Python", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   expect_equal(morie_kamath_ch3_prompt_label_mapping(
     c(great = 0.7, terrible = 0.3), "positive",
     list(positive = "great", negative = "terrible"))$estimate, 0.7,
@@ -77,6 +82,7 @@ test_that("Ch 3 prompt plumbing matches Python", {
 # ------------------------------------------------------------ Ch 4: PEFT
 
 test_that("Ch 4 adapters and low-rank updates match Python", {
+  skip_on_cran()
   o <- morie_kamath_ch4_series_adapter(matrix(c(1, 2), 1),
                                        matrix(c(1, 0), 2), matrix(c(1, 1), 1))
   expect_equal(as.numeric(o$output), c(2, 3))
@@ -147,6 +153,7 @@ test_that("Ch 4 adapters and low-rank updates match Python", {
 # ------------------------------------------------------- Ch 5: alignment
 
 test_that("Ch 5 preference and RLHF objectives match Python", {
+  skip_on_cran()
   o <- morie_kamath_ch5_reward_loss_pairwise(
     function(x, y) c(a = 2, b = 0.5)[[y]], list("p1", "p2"),
     list("a", "b"), list("b", "a"), c(0, 1))
@@ -215,6 +222,7 @@ test_that("Ch 5 preference and RLHF objectives match Python", {
 })
 
 test_that("the Bradley-Terry loss gradient matches finite differences", {
+  skip_on_cran()
   # d/dm of log(1 + exp(-m)) is -sigmoid(-m); check against the loss itself
   loss <- function(m) morie_kamath_reward_model_training_loss(m, 0)$estimate
   for (m in c(-1.3, 0.0, 0.7, 2.5)) {
@@ -228,6 +236,7 @@ test_that("the Bradley-Terry loss gradient matches finite differences", {
 # --------------------------------------------- Ch 6: bias, toxicity, PII
 
 test_that("Ch 6 bias and toxicity metrics match Python", {
+  skip_on_cran()
   expect_equal(morie_kamath_ch6_factscore(
     function(x) if (x == "p2") NULL else paste0("r", x),
     list("p1", "p2", "p3"), function(r) c("f1", "f2"), c("f1"))$estimate,
@@ -359,6 +368,7 @@ test_that("Ch 6 bias and toxicity metrics match Python", {
 # ------------------------------------------------------- Ch 7 and Ch 8
 
 test_that("Ch 7 RAG and Ch 8 generation metrics match Python", {
+  skip_on_cran()
   expect_equal(morie_kamath_ch7_faithfulness_metric(c(1, 0, 1, 1))$estimate,
                0.75)
   o <- morie_kamath_ch7_answer_relevance(diag(2), c(1, 1))
@@ -419,6 +429,7 @@ test_that("Ch 7 RAG and Ch 8 generation metrics match Python", {
 })
 
 test_that("the WMD optimum equals a Birkhoff brute-force search", {
+  skip_on_cran()
   C <- matrix(c(0, 3, 2, 1, 1, 4), 2, 3)
   o <- morie_kamath_ch8_wmd(c(0.5, 0.5), c(0.2, 0.5, 0.3), C)
   expect_equal(o$estimate, 0.8, tolerance = TOL)
@@ -458,6 +469,7 @@ test_that("the WMD optimum equals a Birkhoff brute-force search", {
 # ------------------------------------------------------ Ch 9: multimodal
 
 test_that("Ch 9 multimodal losses match Python", {
+  skip_on_cran()
   expect_equal(morie_kamath_ch9_modality_encoder(
     "img", function(i) matrix(c(3, 4), 1))$estimate, 5)
   expect_equal(morie_kamath_ch9_input_alignment_loss(
@@ -549,6 +561,7 @@ test_that("Ch 9 multimodal losses match Python", {
 # ------------------------------------------- named modules: 3H .. kmicl
 
 test_that("named alignment, PEFT and retrieval modules match Python", {
+  skip_on_cran()
   expect_equal(morie_kamath_3h_alignment(c(1, 0), c(0.5, 0.5),
                                          c(0, 1))$score,
                c(0.5, 0.5), tolerance = TOL)
@@ -729,6 +742,7 @@ test_that("named alignment, PEFT and retrieval modules match Python", {
 # ------------------------------------------ named modules: kmitc .. kmyarn
 
 test_that("named architecture, decoding and tokenizer modules match Python", {
+  skip_on_cran()
   I <- matrix(c(1, 0, 1, 0, 1, 1), 3)
   o <- morie_kamath_image_text_contrastive(I, I, 0.5)
   expect_equal(o$estimate, 0.6000313142487684, tolerance = TOL)
@@ -1046,6 +1060,7 @@ test_that("named architecture, decoding and tokenizer modules match Python", {
 })
 
 test_that("the LCG-driven T5 span corruption reproduces Python draw for draw", {
+  skip_on_cran()
   o <- morie_kamath_t5_span_corruption(letters[1:16], mean_span_len = 2,
                                        corruption_rate = 0.25, seed = 7)
   expect_equal(o$input, c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j",
@@ -1057,6 +1072,7 @@ test_that("the LCG-driven T5 span corruption reproduces Python draw for draw", {
 })
 
 test_that("the unigram EM tokenizers match Python", {
+  skip_on_cran()
   o <- morie_kamath_unigram_lm_tokenizer(c("abab"), c("a", "b", "ab"),
                                          max_iter = 20)
   expect_equal(o$log_likelihood, 0, tolerance = 1e-9)
@@ -1071,6 +1087,7 @@ test_that("the unigram EM tokenizers match Python", {
 })
 
 test_that("the reused Ch 2 and Alammar cores are the ones actually called", {
+  skip_on_cran()
   # km022's MLM loss is the SimVLM core, so both must agree exactly
   base <- morie_kamath_mlm_loss(c(0.5, 0.25, 0.5), c(0, 2))
   expect_equal(morie_kamath_ch9_simvlm_mlm(NULL, c(0.5, 0.25, 0.5),
@@ -1089,6 +1106,7 @@ test_that("the reused Ch 2 and Alammar cores are the ones actually called", {
 })
 
 test_that("km110 RRF and kmfait faithfulness match Python (lead ports)", {
+  skip_on_cran()
   o <- morie_kamath_rrf_score(c(1, 2, 7))
   expect_equal(o$estimate, 0.0474478480153437, tolerance = 1e-15)
   expect_equal(o$scores[1], 1 / 61, tolerance = 1e-15)

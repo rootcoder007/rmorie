@@ -37,6 +37,11 @@ NULL
 }
 
 test_that("native nearest matching returns the morie_match_result shape", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   d <- .dgp_confounded()
   r <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
   expect_s3_class(r, "morie_match_result")
@@ -49,12 +54,14 @@ test_that("native nearest matching returns the morie_match_result shape", {
 })
 
 test_that("without replacement no control is reused", {
+  skip_on_cran()
   d <- .dgp_confounded()
   r <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
   expect_false(any(duplicated(r$match_pairs$control_idx)))
 })
 
 test_that("1:2 matching yields up to two controls per treated", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 600L)
   r <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"),
                                        n_neighbors = 2L)
@@ -64,6 +71,7 @@ test_that("1:2 matching yields up to two controls per treated", {
 })
 
 test_that("matching improves covariate balance on a confounded DGP", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 4000L, seed = 7L)
   r <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
   md <- r$matched_data
@@ -74,6 +82,7 @@ test_that("matching improves covariate balance on a confounded DGP", {
 })
 
 test_that("caliper drops distant treated units", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 500L, seed = 3L)
   r_all <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
   r_cal <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"),
@@ -84,6 +93,7 @@ test_that("caliper drops distant treated units", {
 })
 
 test_that("with replacement controls may repeat and every treated matches", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 300L, seed = 9L)
   r <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"),
                                        replace = TRUE)
@@ -94,6 +104,7 @@ test_that("with replacement controls may repeat and every treated matches", {
 # --- Module 2: native Mahalanobis matching ---
 
 test_that("native mahalanobis matching returns the result shape", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 500L, seed = 21L)
   r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"))
   expect_s3_class(r, "morie_match_result")
@@ -103,6 +114,7 @@ test_that("native mahalanobis matching returns the result shape", {
 })
 
 test_that("mahalanobis matching improves balance on weak confounding", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 4000L, seed = 22L)
   r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"))
   md <- r$matched_data
@@ -112,6 +124,7 @@ test_that("mahalanobis matching improves balance on weak confounding", {
 })
 
 test_that("mahalanobis exact strata never cross", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 800L, seed = 23L)
   d$g <- sample(c("a", "b"), nrow(d), replace = TRUE)
   r <- morie_matching_mahalanobis(d, "d", c("x1", "x2"), exact = "g")
@@ -120,6 +133,7 @@ test_that("mahalanobis exact strata never cross", {
 })
 
 test_that("mahalanobis caliper bounds pair distances", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 800L, seed = 24L)
   r <- morie_matching_mahalanobis(d, "d", c("x1", "x2", "x3"),
                                   caliper = 0.3)
@@ -140,6 +154,7 @@ test_that("mahalanobis caliper bounds pair distances", {
 }
 
 test_that("native exact matching keeps only two-arm strata", {
+  skip_on_cran()
   df <- .dgp_discrete()
   res <- morie_matching_exact(df, "d", c("region", "year"))
   expect_s3_class(res$matched_data, "data.frame")
@@ -152,6 +167,7 @@ test_that("native exact matching keeps only two-arm strata", {
 })
 
 test_that("native exact matching weights follow the CEM convention", {
+  skip_on_cran()
   df <- .dgp_discrete()
   res <- morie_matching_exact(df, "d", c("region", "year"))
   md <- res$matched_data
@@ -162,6 +178,7 @@ test_that("native exact matching weights follow the CEM convention", {
 })
 
 test_that("native exact matching balances discrete covariates exactly (weighted)", {
+  skip_on_cran()
   df <- .dgp_discrete(n = 2000L)
   res <- morie_matching_exact(df, "d", c("region", "year"))
   md <- res$matched_data
@@ -177,6 +194,7 @@ test_that("native exact matching balances discrete covariates exactly (weighted)
 # ---- module 4: native CEM ------------------------------------------------
 
 test_that("native CEM returns the contract shape with L1 diagnostic", {
+  skip_on_cran()
   df <- .dgp_confounded(n = 800L)
   res <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 4L)
   expect_identical(res$method, "cem (rmorie native)")
@@ -189,6 +207,7 @@ test_that("native CEM returns the contract shape with L1 diagnostic", {
 })
 
 test_that("native CEM reduces covariate imbalance (weighted SMD < 0.1)", {
+  skip_on_cran()
   df <- .dgp_confounded(n = 4000L)
   res <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 5L)
   md <- res$matched_data
@@ -205,6 +224,7 @@ test_that("native CEM reduces covariate imbalance (weighted SMD < 0.1)", {
 })
 
 test_that("native CEM honours per-variable n_bins list with Sturges fallback", {
+  skip_on_cran()
   df <- .dgp_confounded(n = 600L)
   res <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = list(x1 = 3L))
   expect_identical(res$method, "cem (rmorie native)")
@@ -212,6 +232,7 @@ test_that("native CEM honours per-variable n_bins list with Sturges fallback", {
 })
 
 test_that("native CEM with coarser bins retains more units", {
+  skip_on_cran()
   df <- .dgp_confounded(n = 1000L)
   fine <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 8L)
   coarse <- morie_matching_cem(df, "d", c("x1", "x2", "x3"), n_bins = 2L)
@@ -221,6 +242,7 @@ test_that("native CEM with coarser bins retains more units", {
 # ---- module 5: native optimal pair matching ------------------------------
 
 test_that("native optimal matching returns the result shape (propensity)", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 500L, seed = 31L)
   r <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"))
   expect_s3_class(r, "morie_match_result")
@@ -233,6 +255,7 @@ test_that("native optimal matching returns the result shape (propensity)", {
 })
 
 test_that("optimal total distance <= greedy total distance", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 800L, seed = 32L)
   opt <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"))
   grd <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
@@ -243,6 +266,7 @@ test_that("optimal total distance <= greedy total distance", {
 })
 
 test_that("native optimal mahalanobis mode matches every treated unit", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 400L, seed = 33L)
   r <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"),
                                    distance = "mahalanobis")
@@ -252,6 +276,7 @@ test_that("native optimal mahalanobis mode matches every treated unit", {
 })
 
 test_that("native optimal improves balance on a confounded DGP", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 3000L, seed = 34L)
   r <- morie_matching_optimal_pair(d, "d", c("x1", "x2", "x3"))
   md <- r$matched_data
@@ -263,6 +288,7 @@ test_that("native optimal improves balance on a confounded DGP", {
 # ---- module 6: native genetic matching -----------------------------------
 
 test_that("native genetic matching returns the result shape", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 400L, seed = 51L)
   r <- morie_matching_genetic(d, "d", c("x1", "x2", "x3"),
                               pop_size = 12L, n_generations = 4L)
@@ -274,6 +300,7 @@ test_that("native genetic matching returns the result shape", {
 })
 
 test_that("native genetic matching is deterministic given a seed", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 300L, seed = 52L)
   r1 <- morie_matching_genetic(d, "d", c("x1", "x2"),
                                pop_size = 10L, n_generations = 3L, seed = 7L)
@@ -284,6 +311,7 @@ test_that("native genetic matching is deterministic given a seed", {
 })
 
 test_that("genetic balance is at least as good as plain mahalanobis", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 1500L, seed = 53L)
   gen <- morie_matching_genetic(d, "d", c("x1", "x2", "x3"),
                                 pop_size = 16L, n_generations = 6L)
@@ -298,6 +326,7 @@ test_that("genetic balance is at least as good as plain mahalanobis", {
 })
 
 test_that("native genetic matching honours n_neighbors", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 600L, seed = 54L)
   r <- morie_matching_genetic(d, "d", c("x1", "x2"), n_neighbors = 2L,
                               pop_size = 8L, n_generations = 2L)
@@ -309,6 +338,7 @@ test_that("native genetic matching honours n_neighbors", {
 # ---- module 7: cardinality matching (native caliper sweep) ---------------
 
 test_that("cardinality matching achieves the balance threshold when feasible", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 3000L, seed = 71L)
   r <- morie_matching_cardinality(d, "d", c("x1", "x2", "x3"),
                                   balance_threshold = 0.1)
@@ -320,6 +350,7 @@ test_that("cardinality matching achieves the balance threshold when feasible", {
 })
 
 test_that("cardinality matching flags an unachievable threshold honestly", {
+  skip_on_cran()
   set.seed(72)
   n <- 200L
   x1 <- rnorm(n)
@@ -331,6 +362,7 @@ test_that("cardinality matching flags an unachievable threshold honestly", {
 })
 
 test_that("cardinality keeps the largest passing sample across calipers", {
+  skip_on_cran()
   d <- .dgp_confounded(n = 2000L, seed = 73L)
   r10 <- morie_matching_cardinality(d, "d", c("x1", "x2"),
                                     balance_threshold = 0.1)
@@ -343,6 +375,7 @@ test_that("cardinality keeps the largest passing sample across calipers", {
 # ---- module 8: native design-based weighted GLM --------------------------
 
 test_that("native svyglm-equivalent returns a full coefficient table", {
+  skip_on_cran()
   set.seed(81)
   n <- 300L
   x <- rnorm(n)
@@ -359,6 +392,7 @@ test_that("native svyglm-equivalent returns a full coefficient table", {
 })
 
 test_that("ebac selection IPW runs without the survey package loaded", {
+  skip_on_cran()
   set.seed(82)
   n <- 300L
   cpads <- data.frame(
@@ -384,6 +418,7 @@ test_that("ebac selection IPW runs without the survey package loaded", {
 # ---- module 10: native DML (PLR + IRM) -----------------------------------
 
 test_that("native PLR recovers theta on a linear DGP and is deterministic", {
+  skip_on_cran()
   set.seed(101)
   n <- 1500L
   X <- matrix(rnorm(n * 4), n, 4)
@@ -400,6 +435,7 @@ test_that("native PLR recovers theta on a linear DGP and is deterministic", {
 })
 
 test_that("native PLR n_rep median aggregation is finite and stable", {
+  skip_on_cran()
   set.seed(102)
   n <- 600L
   X <- matrix(rnorm(n * 3), n, 3)
@@ -412,6 +448,7 @@ test_that("native PLR n_rep median aggregation is finite and stable", {
 })
 
 test_that("native IRM recovers theta with the AIPW score", {
+  skip_on_cran()
   set.seed(103)
   n <- 2000L
   X <- matrix(rnorm(n * 3), n, 3)
@@ -428,6 +465,7 @@ test_that("native IRM recovers theta with the AIPW score", {
 # ---- module 11: native causal forest (R-learner) --------------------------
 
 test_that("native dr_forest recovers a constant effect", {
+  skip_on_cran()
   set.seed(111)
   n <- 1500L
   X <- matrix(rnorm(n * 3), n, 3)
@@ -441,6 +479,7 @@ test_that("native dr_forest recovers a constant effect", {
 })
 
 test_that("native causal forest tau(x) tracks true heterogeneity", {
+  skip_on_cran()
   set.seed(112)
   n <- 3000L
   X <- matrix(rnorm(n * 3), n, 3)
@@ -456,6 +495,7 @@ test_that("native causal forest tau(x) tracks true heterogeneity", {
 })
 
 test_that("native dr_forest target_sample options all return finite results", {
+  skip_on_cran()
   set.seed(113)
   n <- 800L
   X <- matrix(rnorm(n * 2), n, 2)
@@ -472,6 +512,7 @@ test_that("native dr_forest target_sample options all return finite results", {
 # ---- module 12: native X- and DR-learners --------------------------------
 
 test_that("all four meta-learners agree on a constant effect", {
+  skip_on_cran()
   set.seed(121)
   n <- 1500L
   x1 <- rnorm(n)
@@ -489,6 +530,7 @@ test_that("all four meta-learners agree on a constant effect", {
 })
 
 test_that("X- and DR-learners track heterogeneous effects", {
+  skip_on_cran()
   set.seed(122)
   n <- 3000L
   x1 <- rnorm(n)
@@ -505,6 +547,7 @@ test_that("X- and DR-learners track heterogeneous effects", {
 })
 
 test_that("X-learner beats T-learner under heavy arm imbalance", {
+  skip_on_cran()
   set.seed(123)
   n <- 2500L
   x1 <- rnorm(n)
@@ -523,6 +566,7 @@ test_that("X-learner beats T-learner under heavy arm imbalance", {
 })
 
 test_that("meta-learners error clearly on single-arm input", {
+  skip_on_cran()
   df <- data.frame(y = rnorm(5), d = rep(1, 5), x = rnorm(5))
   expect_error(morie_estimate_cate(df, "d", "y", "x",
                                    meta_learner = "x_learner"),
@@ -532,6 +576,7 @@ test_that("meta-learners error clearly on single-arm input", {
 # ---- module 13: native DAG toolkit ---------------------------------------
 
 test_that("morie_dag validates structure and rejects cycles", {
+  skip_on_cran()
   g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
   expect_s3_class(g, "morie_dag")
   expect_setequal(g$nodes, c("z", "x", "y"))
@@ -541,6 +586,7 @@ test_that("morie_dag validates structure and rejects cycles", {
 })
 
 test_that("backdoor identification finds the confounder set", {
+  skip_on_cran()
   g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
   id <- morie_dag_identify(g)
   expect_true(id$identified)
@@ -557,6 +603,7 @@ test_that("backdoor identification finds the confounder set", {
 })
 
 test_that("dag estimation recovers the effect through all methods", {
+  skip_on_cran()
   set.seed(131)
   n <- 1200L
   z <- rnorm(n)
@@ -574,6 +621,7 @@ test_that("dag estimation recovers the effect through all methods", {
 })
 
 test_that("refutation: placebo kills the effect, subsets keep it", {
+  skip_on_cran()
   set.seed(132)
   n <- 900L
   z <- rnorm(n)
@@ -591,6 +639,7 @@ test_that("refutation: placebo kills the effect, subsets keep it", {
 })
 
 test_that("bundled MRM DAGs identify cleanly", {
+  skip_on_cran()
   dags <- morie_mrm_dags()
   expect_named(dags, c("placement", "use_of_force"))
   for (g in dags) {

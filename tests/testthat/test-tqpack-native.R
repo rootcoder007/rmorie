@@ -11,6 +11,11 @@
 bytes_of <- function(p) as.integer(unlist(p$bytes))
 
 test_that("the byte layout is big-endian bit order, hand-computed", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   # 4-bit indices 1, 2, 3: 0001 0010 0011 then four bits of padding,
   # so 0x12 0x30
   expect_identical(bytes_of(.tqpack_pack_indices(c(1, 2, 3), 4)),
@@ -29,6 +34,7 @@ test_that("the byte layout is big-endian bit order, hand-computed", {
 })
 
 test_that("unpacking inverts packing at every width", {
+  skip_on_cran()
   set.seed(1)
   for (b in 1:16) {
     for (n in c(1, 7, 8, 9, 37)) {
@@ -41,6 +47,7 @@ test_that("unpacking inverts packing at every width", {
 })
 
 test_that("the packed size is the ceiling of the bits required", {
+  skip_on_cran()
   for (b in c(1, 3, 4, 5, 8, 12, 16)) {
     for (n in c(1, 2, 7, 8, 37, 100)) {
       p <- .tqpack_pack_indices(rep(0, n), b)
@@ -57,6 +64,7 @@ test_that("the packed size is the ceiling of the bits required", {
 })
 
 test_that("only the final byte is padded, and it is padded with zeros", {
+  skip_on_cran()
   # indices that leave five bits spare: three 1-bit indices in one byte
   p <- .tqpack_pack_indices(c(1, 1, 1), 1)
   expect_identical(as.integer(p$padding_bits), 5L)
@@ -69,6 +77,7 @@ test_that("only the final byte is padded, and it is padded with zeros", {
 })
 
 test_that("the compression figure is the ratio actually achieved", {
+  skip_on_cran()
   # eight bytes per index as a double, against the packed size, which
   # includes the padding rather than pretending 64/bits
   for (spec in list(c(3, 4), c(37, 5), c(100, 12))) {
@@ -85,6 +94,7 @@ test_that("the compression figure is the ratio actually achieved", {
 })
 
 test_that("the widest index for a width is representable", {
+  skip_on_cran()
   for (b in c(1, 2, 3, 4, 7, 8, 12, 16)) {
     top <- 2^b - 1
     p <- .tqpack_pack_indices(c(0, top), b)
@@ -96,6 +106,7 @@ test_that("the widest index for a width is representable", {
 })
 
 test_that("an index or a width outside the format is refused", {
+  skip_on_cran()
   expect_error(.tqpack_pack_indices(16, 4), "does not fit in 4 bits")
   expect_error(.tqpack_pack_indices(-1, 4), "does not fit")
   expect_error(.tqpack_pack_indices(1, 0), "bits must lie in 1\\.\\.32")
@@ -106,6 +117,7 @@ test_that("an index or a width outside the format is refused", {
 })
 
 test_that("an empty index vector packs to nothing", {
+  skip_on_cran()
   p <- .tqpack_pack_indices(integer(0), 4)
   expect_identical(as.integer(p$n_bytes), 0L)
   expect_identical(as.integer(p$n_indices), 0L)
@@ -115,6 +127,7 @@ test_that("an empty index vector packs to nothing", {
 })
 
 test_that("reading with the wrong width does not silently agree", {
+  skip_on_cran()
   # the failure the header warns about: a reader using a different width
   # gets plausible numbers back, so the convention has to be pinned by
   # tests rather than trusted

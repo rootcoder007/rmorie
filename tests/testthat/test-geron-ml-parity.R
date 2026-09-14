@@ -20,6 +20,11 @@ tol <- 1e-9
 # ------------------------------------------------------------- optimisers
 
 test_that("Adam and AdamW match Python and their closed forms", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   r <- morie_geron_adam(c(1, -2), m = c(0.1, 0), v = c(0.04, 0), eta = 0.1, t = 3)
   expect_equal(r$m, c(0.19, -0.19999999999999996), tolerance = tol)
   expect_equal(r$v, c(0.04096, 0.0040000000000000036), tolerance = tol)
@@ -52,6 +57,7 @@ test_that("Adam and AdamW match Python and their closed forms", {
 })
 
 test_that("AdaMax and AdaGrad match Python", {
+  skip_on_cran()
   r <- morie_geron_adamax(0.5, m = 0.1, u = 1, b1 = 0.9, b2 = 0.999,
                           eta = 0.1, t = 2)
   expect_equal(r$u, 0.999, tolerance = tol)
@@ -75,6 +81,7 @@ test_that("AdaMax and AdaGrad match Python", {
 })
 
 test_that("1cycle schedule matches Python and its closed form", {
+  skip_on_cran()
   r <- morie_geron_1cycle_schedule(0.1, 0.5, t = 1, T = 7)
   expect_equal(r$lr_schedule,
                c(0.1, 0.23333333333333334, 0.3666666666666667, 0.5,
@@ -98,6 +105,7 @@ test_that("1cycle schedule matches Python and its closed form", {
 })
 
 test_that("batch-size heuristic matches Python", {
+  skip_on_cran()
   expect_equal(morie_geron_batch_size_heuristic(1000)$batch_size, 64)
   expect_equal(morie_geron_batch_size_heuristic(1000)$steps_per_epoch, 16L)
   expect_equal(morie_geron_batch_size_heuristic(50)$batch_size, 32)
@@ -108,6 +116,7 @@ test_that("batch-size heuristic matches Python", {
 # -------------------------------------------------------------- criteria
 
 test_that("AIC / BIC families match Python", {
+  skip_on_cran()
   r <- morie_geron_aic(c(-10, -9, -12), c(2, 4, 1), n = 20)
   expect_equal(r$aic, c(24, 26, 26), tolerance = tol)
   expect_equal(r$aicc,
@@ -140,6 +149,7 @@ test_that("AIC / BIC families match Python", {
 })
 
 test_that("both AUC routes agree with Python and with pair counting", {
+  skip_on_cran()
   yt <- c(0, 0, 1, 1, 0, 1)
   sc <- c(0.1, 0.4, 0.35, 0.8, 0.4, 0.4)
   m <- morie_geron_auc_roc(yt, sc)
@@ -167,6 +177,7 @@ test_that("both AUC routes agree with Python and with pair counting", {
 })
 
 test_that("confusion matrix, CART cost and binary classification match Python", {
+  skip_on_cran()
   r <- morie_geron_confusion_matrix(c(0, 0, 1, 1, 2, 2, 0), c(0, 1, 1, 1, 2, 0, 2))
   expect_equal(unname(r$matrix),
                matrix(c(1L, 1L, 1L, 0L, 2L, 0L, 1L, 0L, 1L), 3, 3, byrow = TRUE))
@@ -204,6 +215,7 @@ test_that("confusion matrix, CART cost and binary classification match Python", 
 })
 
 test_that("bias-variance, batch learning and gradient descent match Python", {
+  skip_on_cran()
   bv <- morie_geron_bias_variance_tradeoff(
     matrix(c(1, 2, 3, 4, 2, 1), 3, 2, byrow = TRUE), c(2, 2))
   expect_equal(bv$bias2, 0.05555555555555561, tolerance = tol)
@@ -240,6 +252,7 @@ test_that("bias-variance, batch learning and gradient descent match Python", {
 })
 
 test_that("convolution arithmetic matches Python", {
+  skip_on_cran()
   r <- morie_geron_conv_output_size(c(32, 28, 28), c(5, 3, 3),
                                     padding = c(2, 0, 1), stride = c(1, 2, 1))
   expect_equal(r$out_size, c(32L, 13L, 28L))
@@ -263,6 +276,7 @@ test_that("convolution arithmetic matches Python", {
 # -------------------------------------------- attention / RNN / networks
 
 test_that("Bahdanau attention serves both hmbdn and grbah", {
+  skip_on_cran()
   I2 <- diag(2)
   r <- morie_geron_bahdanau_attention(matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE),
                                       c(0.5, -0.5), I2, I2, c(1, 0.5),
@@ -285,6 +299,7 @@ test_that("Bahdanau attention serves both hmbdn and grbah", {
 })
 
 test_that("cross-attention matches Python", {
+  skip_on_cran()
   r <- morie_geron_cross_attention(
     matrix(c(1, 2, 0, 1), 2, 2, byrow = TRUE),
     matrix(c(1, 0, 0, 2, 1, 1), 3, 2, byrow = TRUE),
@@ -302,6 +317,7 @@ test_that("cross-attention matches Python", {
 })
 
 test_that("bidirectional RNN and its combiner match Python", {
+  skip_on_cran()
   r <- morie_geron_bidirectional_rnn(matrix(c(1, 1, 0.5), ncol = 1),
                                      matrix(1), matrix(0.5), matrix(1),
                                      matrix(-0.5))
@@ -321,6 +337,7 @@ test_that("bidirectional RNN and its combiner match Python", {
 })
 
 test_that("McCulloch-Pitts neuron and batch norms match Python", {
+  skip_on_cran()
   n <- morie_geron_biological_neuron(matrix(c(1, 2, 0, -1), 2, 2, byrow = TRUE),
                                      c(0.5, -1), 0.25, activation = "sigmoid")
   expect_equal(n$z, c(-1.25, 1.25), tolerance = tol)
@@ -355,6 +372,7 @@ test_that("McCulloch-Pitts neuron and batch norms match Python", {
 })
 
 test_that("backpropagation routes match Python", {
+  skip_on_cran()
   W1 <- matrix(c(1, -1), 1, 2)
   W2 <- matrix(c(2, 3), 2, 1)
   r <- morie_geron_backpropagation(matrix(c(1, 2), ncol = 1),
@@ -390,6 +408,7 @@ test_that("backpropagation routes match Python", {
 })
 
 test_that("BPTT and the Jacobian chain match Python", {
+  skip_on_cran()
   r <- morie_geron_backprop_through_time(
     matrix(c(1, 0.5, 0.5, 1), 2, 2, byrow = TRUE),
     matrix(c(0.2, -0.1, 0.4, 0.3), 2, 2, byrow = TRUE),
@@ -430,6 +449,7 @@ test_that("BPTT and the Jacobian chain match Python", {
 # --------------------------------------------- contrastive and multimodal
 
 test_that("CLIP and InfoNCE match Python", {
+  skip_on_cran()
   emb <- matrix(c(1, 0, 0, 1, 1, 1), 3, 2, byrow = TRUE)
   r <- morie_geron_clip_contrastive_loss(emb, emb, tau = 0.5)
   expect_equal(r$loss, 0.6000313142487683, tolerance = tol)
@@ -454,6 +474,7 @@ test_that("CLIP and InfoNCE match Python", {
 })
 
 test_that("BLIP objectives and the Q-Former match Python", {
+  skip_on_cran()
   r <- morie_geron_blip(matrix(c(1, 0, 0, 1, 1, 1), 3, 2, byrow = TRUE),
                         matrix(c(1, 0.1, 0.2, 1, 1, 0.9), 3, 2, byrow = TRUE),
                         temperature = 0.7, caption_logprobs = c(-0.5, -1, -0.25))
@@ -509,6 +530,7 @@ test_that("BLIP objectives and the Q-Former match Python", {
 })
 
 test_that("DeiT, DALL-E and DETR match Python", {
+  skip_on_cran()
   d <- morie_geron_deit_distillation_loss(
     matrix(c(1, 0, 0, 2), 2, 2, byrow = TRUE),
     matrix(c(0.5, 0.5, 1, 0), 2, 2, byrow = TRUE), c(0, 1),
@@ -574,6 +596,7 @@ test_that("DeiT, DALL-E and DETR match Python", {
 # ------------------------------------------------- RL and diffusion steps
 
 test_that("advantage, Double DQN and value iteration match Python", {
+  skip_on_cran()
   ac <- morie_geron_actor_critic_advantage(c(0, 1, 2), c(0, 1, 2), c(1, 2, 0),
                                            c(1, -1, 0.5), 0.9,
                                            done = c(FALSE, TRUE, FALSE))
@@ -627,6 +650,7 @@ test_that("advantage, Double DQN and value iteration match Python", {
 })
 
 test_that("A2C and A3C reproduce Python's LCG action stream exactly", {
+  skip_on_cran()
   env <- list(reset = function() 1,
               step = function(a) list(1, if (a == 0) 1 else 0, TRUE))
   r <- morie_geron_a2c(env, matrix(c(0, 0), 2, 1), 0, epochs = 25, lr = 0.5,
@@ -662,6 +686,7 @@ test_that("A2C and A3C reproduce Python's LCG action stream exactly", {
 # ------------------------------------------ clustering, trees, ensembles
 
 test_that("DBSCAN, agglomerative and BIRCH match Python", {
+  skip_on_cran()
   d <- morie_geron_dbscan_core_point(matrix(c(0, 0.5, 1.2, 10), ncol = 1),
                                      eps = 1, min_samples = 2)
   expect_equal(d$is_core, c(TRUE, TRUE, TRUE, FALSE))
@@ -690,6 +715,7 @@ test_that("DBSCAN, agglomerative and BIRCH match Python", {
 })
 
 test_that("AdaBoost, its weight update and bagging match Python", {
+  skip_on_cran()
   X <- matrix(c(1, 2, 3, 4, 5), ncol = 1)
   r <- morie_geron_adaboost(X, c(1, -1, 1, -1, 1), n_estimators = 3)
   expect_equal(r$alphas,
@@ -741,6 +767,7 @@ test_that("AdaBoost, its weight update and bagging match Python", {
 })
 
 test_that("K-fold cross-validation matches Python", {
+  skip_on_cran()
   r <- morie_geron_cross_validation_score(matrix(c(1, 2, 3, 4, 5), ncol = 1),
                                           c(2, 4, 6, 8, 10.5), K = 2)
   expect_equal(r$cv_score, 0.9567467281380131, tolerance = tol)
@@ -760,6 +787,7 @@ test_that("K-fold cross-validation matches Python", {
 # ------------------------------------------------------------ autoencoders
 
 test_that("autoencoder family matches Python", {
+  skip_on_cran()
   ae <- morie_geron_autoencoder(matrix(c(0, 0, 1, 1.1, 2, 2.3, 3, 2.9), 4, 2,
                                        byrow = TRUE), 1)
   expect_equal(ae$recon_error, 0.010936513573625468, tolerance = 1e-10)
@@ -810,6 +838,7 @@ test_that("autoencoder family matches Python", {
 })
 
 test_that("DCGAN generator, aux pretraining and head fine-tuning match Python", {
+  skip_on_cran()
   W0 <- matrix(c(1, 1, 1, 1, 0.5, -0.5, 0.25, 1), 2, 4, byrow = TRUE)
   K1 <- matrix(c(1, 0.5, 0.5, 1), 2, 2, byrow = TRUE)
   g <- morie_geron_dcgan_generator(c(1, 2), list(W0, K1), seed_shape = c(2, 2))
@@ -869,6 +898,7 @@ test_that("DCGAN generator, aux pretraining and head fine-tuning match Python", 
 # -------------------------------------------------------------------- BF16
 
 test_that("BF16 quantisation matches Python bit for bit", {
+  skip_on_cran()
   vals <- c(1, 1.1, -1.1, 1.00390625, 0, 1.0078125, 3.0e38, 1e-40)
   r <- morie_geron_bf16(vals)
   expect_equal(r$values,
@@ -904,6 +934,7 @@ test_that("BF16 quantisation matches Python bit for bit", {
 # --------------------------------------------------------- autograd tape
 
 test_that("reverse-mode autograd matches Python", {
+  skip_on_cran()
   f <- function(p) p[[1]] * p[[2]] + exp(p[[1]])
   r <- morie_geron_autograd(f, c(0, 3))
   expect_equal(r$value, 1, tolerance = tol)
@@ -932,6 +963,7 @@ test_that("reverse-mode autograd matches Python", {
 # ----------------------------------------------- time series and decoding
 
 test_that("ARIMA fitting and forecasting match Python", {
+  skip_on_cran()
   y <- c(1, 0.5, 0.25, 0.125, 0.0625, 0.03125)
   r <- morie_geron_arima(y, p = 1, d = 0, q = 0, include_mean = FALSE)
   expect_equal(r$ar, 0.49999999999999994, tolerance = 1e-9)
@@ -967,6 +999,7 @@ test_that("ARIMA fitting and forecasting match Python", {
 })
 
 test_that("beam search routes match Python", {
+  skip_on_cran()
   lp <- log(c(0.5, 0.3, 0.2))
   r <- morie_geron_beam_search(function(s, prefix) lp, NULL, beam_width = 2,
                                max_len = 3)
@@ -1003,6 +1036,7 @@ test_that("beam search routes match Python", {
 })
 
 test_that("both BPE tie-break rules match Python", {
+  skip_on_cran()
   corpus <- c(low = 5, lower = 2, newest = 6, widest = 3)
   r <- morie_geron_bpe_tokenizer(corpus, vocab_size = 20)
   expect_equal(r$merges,
@@ -1034,6 +1068,7 @@ test_that("both BPE tie-break rules match Python", {
 # ------------------------------------------------------------ transformers
 
 test_that("ALBERT reproduces Python's LCG weights and parameter accounting", {
+  skip_on_cran()
   ids <- c(1, 2, 3, 4, 5, 6, 0, 2)
   r <- morie_geron_albert(ids, n_layers = 3, n_heads = 2, d_model = 8,
                           d_embed = 4, vocab_size = 7, seed = 2)
@@ -1063,6 +1098,7 @@ test_that("ALBERT reproduces Python's LCG weights and parameter accounting", {
 })
 
 test_that("BERT and RoBERTa reproduce Python exactly", {
+  skip_on_cran()
   ids <- c(1, 2, 3, 4, 5, 6, 0, 2)
   r <- morie_geron_bert(ids, n_layers = 2, n_heads = 2, d_model = 8,
                         vocab_size = 7, seed = 1)
@@ -1109,6 +1145,7 @@ test_that("BERT and RoBERTa reproduce Python exactly", {
 })
 
 test_that("BART corruption and AlexNet accounting match Python", {
+  skip_on_cran()
   src <- c("the", "cat", "sat", "on", "the", "mat", "today", "ok")
   tgt <- c("the", "cat", "sat", "on", "the", "mat")
   r <- morie_geron_bart(src, tgt, mask_ratio = 0.35, mean_span = 2, seed = 2)

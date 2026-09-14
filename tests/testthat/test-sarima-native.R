@@ -9,6 +9,11 @@
 # optimised by Nelder-Mead over an interpreted Kalman filter.
 
 test_that("Series G is the published airline passenger series", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   g <- series_g()
   expect_length(g, 144L)
   expect_equal(as.numeric(g), as.numeric(AirPassengers))
@@ -17,6 +22,7 @@ test_that("Series G is the published airline passenger series", {
 })
 
 test_that("differencing agrees with base R", {
+  skip_on_cran()
   y <- as.numeric(AirPassengers)
   expect_equal(difference(y, d = 1), diff(y))
   expect_equal(difference(y, d = 2), diff(y, differences = 2))
@@ -32,6 +38,7 @@ test_that("differencing agrees with base R", {
 })
 
 test_that("polynomial multiplication and seasonal lifting are exact", {
+  skip_on_cran()
   # (1 - x)(1 - 2x) = 1 - 3x + 2x^2
   expect_equal(.sarima_poly_mult(c(1, -1), c(1, -2)), c(1, -3, 2))
   # multiplying by one changes nothing
@@ -51,6 +58,7 @@ test_that("polynomial multiplication and seasonal lifting are exact", {
 })
 
 test_that("the difference polynomial is the binomial expansion", {
+  skip_on_cran()
   # (1 - B)^k has binomial coefficients with alternating signs
   expect_equal(.sarima_diff_poly(1, 1), c(1, -1))
   expect_equal(.sarima_diff_poly(2, 1), c(1, -2, 1))
@@ -66,6 +74,7 @@ test_that("the difference polynomial is the binomial expansion", {
 })
 
 test_that("the multiplicative expansion multiplies the two polynomials", {
+  skip_on_cran()
   # a (1,0,0)x(1,0,0)_4 model expands to (1 - phi B)(1 - Phi B^4)
   em <- expand_polynomials(phi = 0.5, Phi = 0.3, s = 4)
   # the module returns the coefficients of the operator on the right side
@@ -88,6 +97,7 @@ test_that("the multiplicative expansion multiplies the two polynomials", {
 })
 
 test_that("sample autocorrelations agree with base R", {
+  skip_on_cran()
   set.seed(3)
   x <- rnorm(120)
   # the lags to report are given explicitly and come back keyed by lag
@@ -108,6 +118,7 @@ test_that("sample autocorrelations agree with base R", {
 })
 
 test_that("stationarity is judged by the roots of the polynomial", {
+  skip_on_cran()
   # an empty coefficient set is trivially fine
   expect_true(.sarima_roots_ok(numeric(0)))
   # |phi| < 1 is stationary for an order-one polynomial
@@ -121,6 +132,7 @@ test_that("stationarity is judged by the roots of the polynomial", {
 })
 
 test_that("the state-space form and its stationary covariance are consistent", {
+  skip_on_cran()
   ss <- .sarima_state_space(numeric(0), 0.5)
   expect_true(is.list(ss))
   # a pure moving average of order one needs two states
@@ -142,6 +154,7 @@ test_that("the state-space form and its stationary covariance are consistent", {
 })
 
 test_that("the psi weights are the impulse response", {
+  skip_on_cran()
   # a pure moving average of order one has psi = (1, theta) and then zero
   w <- .sarima_psi_weights(numeric(0), 0.5, 4)
   expect_length(w, 4L)
@@ -154,6 +167,7 @@ test_that("the psi weights are the impulse response", {
 })
 
 test_that("the conditional and exact likelihoods behave", {
+  skip_on_cran()
   set.seed(5)
   w <- as.numeric(arima.sim(list(ma = 0.5), 80))
   cs <- css(w, ma = 0.5, full = TRUE)
@@ -170,6 +184,7 @@ test_that("the conditional and exact likelihoods behave", {
 })
 
 test_that("standard errors follow the Box-Jenkins closed forms", {
+  skip_on_cran()
   n <- 144
   # Bartlett's large-lag variance for the airline model, Eq. (9.2.19):
   # var(r_k) = (1 + 2 (rho_1^2 + rho_11^2 + rho_12^2 + rho_13^2)) / n. The
@@ -205,6 +220,7 @@ test_that("standard errors follow the Box-Jenkins closed forms", {
 })
 
 test_that("the parameter unpacking gives each block its own slots", {
+  skip_on_cran()
   # A regression test for the block layout. i:(i + k - 1) counts down when
   # k is zero, which used to hand an absent autoregressive block the first
   # moving-average slot and leave the cursor unmoved, so a (0,d,q)x(0,D,Q)
@@ -252,6 +268,7 @@ test_that("the parameter unpacking gives each block its own slots", {
 })
 
 test_that("the moment route reproduces the book's preliminary estimates", {
+  skip_on_cran()
   w <- difference(log(as.numeric(AirPassengers)), d = 1, D = 1, s = 12)
   pe <- preliminary_estimates(w, s = 12)
   # Box et al. Sec. 9.2.3 report theta about 0.39 and Theta about 0.48
@@ -273,6 +290,7 @@ test_that("the moment route reproduces the book's preliminary estimates", {
 })
 
 test_that("forecasts match base R's predict.Arima", {
+  skip_on_cran()
   set.seed(3)
   y <- cumsum(rnorm(60)) + 10
   # an integrated moving average forecasts a flat line, and it must be the
@@ -295,6 +313,7 @@ test_that("forecasts match base R's predict.Arima", {
 })
 
 test_that("an autoregressive forecast decays geometrically", {
+  skip_on_cran()
   set.seed(5)
   z <- as.numeric(arima.sim(list(ar = 0.7), 200))
   f <- .sarima_fit(z, order = c(1, 0, 0), seasonal_order = c(0, 0, 0), s = 12)
@@ -312,6 +331,7 @@ test_that("an autoregressive forecast decays geometrically", {
 })
 
 test_that("second differencing is honoured in the forecast", {
+  skip_on_cran()
   # A regression test: the ordinary differencing order used to be hardcoded
   # to one in the forecast, so d was read from the fit and then ignored.
   set.seed(21)
@@ -333,6 +353,7 @@ test_that("second differencing is honoured in the forecast", {
 })
 
 test_that("the airline fit matches base R's arima", {
+  skip_on_cran()
   skip_if_not(nzchar(Sys.getenv("RMORIE_SLOW_TESTS")),
               "slow: set RMORIE_SLOW_TESTS=1 to run the full airline fit")
   y <- log(as.numeric(AirPassengers))

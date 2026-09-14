@@ -16,6 +16,11 @@
 }
 
 test_that("Sun-Abraham event study recovers the dynamic truth", {
+  # 3s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   df <- .dm_panel()
   es <- morie_did_sun_abraham(df, "y", "id", "t", "g",
                               leads = 3L, lags = 3L)
@@ -30,6 +35,7 @@ test_that("Sun-Abraham event study recovers the dynamic truth", {
 })
 
 test_that("Borusyak imputation recovers the ATT", {
+  skip_on_cran()
   df <- .dm_panel()
   fit <- morie_did_borusyak(df, "y", "id", "t", "g",
                             n_bootstrap = 59L)
@@ -39,6 +45,7 @@ test_that("Borusyak imputation recovers the ATT", {
 })
 
 test_that("did2s recovers the ATT and matches Borusyak closely", {
+  skip_on_cran()
   df <- .dm_panel()
   f1 <- morie_did_did2s(df, "y", "id", "t", "g", n_bootstrap = 59L)
   f2 <- morie_did_borusyak(df, "y", "id", "t", "g", n_bootstrap = 29L)
@@ -48,6 +55,7 @@ test_that("did2s recovers the ATT and matches Borusyak closely", {
 })
 
 test_that("cross-validation vs did2s package", {
+  skip_on_cran()
   skip_if_not_installed("did2s")
   skip_if_not_installed("fixest")
   df <- .dm_panel(n_id = 90L)
@@ -65,6 +73,7 @@ test_that("cross-validation vs did2s package", {
 })
 
 test_that("cross-validation vs didimputation package", {
+  skip_on_cran()
   skip_if_not_installed("didimputation")
   df <- .dm_panel(n_id = 90L)
   df$g0 <- ifelse(is.na(df$g), 0, df$g)
@@ -77,6 +86,7 @@ test_that("cross-validation vs didimputation package", {
 })
 
 test_that("degenerate inputs error cleanly", {
+  skip_on_cran()
   df <- .dm_panel()
   df_none <- df
   df_none$g <- NA

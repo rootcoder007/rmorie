@@ -7,6 +7,11 @@
 # programming duality for the transport plan).
 
 test_that("row cross-entropy is log-sum-exp less the diagonal", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   L <- matrix(c(1, 2, 3, 0, 1, 0, 2, 0, 1), nrow = 3, byrow = TRUE)
   expect_equal(.morie_km2_rowce(L), .morie_km2_lse_rows(L) - diag(L))
   # written out longhand for one row
@@ -19,6 +24,7 @@ test_that("row cross-entropy is log-sum-exp less the diagonal", {
 })
 
 test_that("probability vectors are validated", {
+  skip_on_cran()
   expect_equal(.morie_km2_dist(c(0.2, 0.8), "p"), c(0.2, 0.8))
   expect_equal(.morie_km2_dist(1, "p"), 1)
   expect_error(.morie_km2_dist(numeric(0), "pi"), "pi is empty")
@@ -30,6 +36,7 @@ test_that("probability vectors are validated", {
 })
 
 test_that("token n-grams and counts match direct enumeration", {
+  skip_on_cran()
   tk <- c("a", "b", "c", "d")
   expect_equal(.morie_km2_ngrams(tk, 1), tk)
   expect_equal(.morie_km2_ngrams(tk, 2),
@@ -50,6 +57,7 @@ test_that("token n-grams and counts match direct enumeration", {
 })
 
 test_that("the causal language-model loss is mean token cross-entropy", {
+  skip_on_cran()
   lg <- matrix(c(2, 1, 0, 0, 3, 1), nrow = 2, byrow = TRUE)
   got <- .morie_km2_causal_lm_loss(lg, c(0L, 1L))
   per <- c(-(2 - log(sum(exp(c(2, 1, 0))))),
@@ -80,6 +88,7 @@ test_that("the causal language-model loss is mean token cross-entropy", {
 })
 
 test_that("swish is z times the logistic of beta z", {
+  skip_on_cran()
   z <- c(-40, -3, -0.5, 0, 0.5, 3, 40)
   for (b in c(0.5, 1, 2)) {
     expect_equal(morie_kamath_swish(z, b), z / (1 + exp(-b * z)))
@@ -94,6 +103,7 @@ test_that("swish is z times the logistic of beta z", {
 })
 
 test_that("the normal quantile is qnorm on its domain", {
+  skip_on_cran()
   u <- c(0.001, 0.1, 0.5, 0.9, 0.999)
   expect_equal(morie_kamath_normal_quantile(u), qnorm(u))
   expect_equal(morie_kamath_normal_quantile(0.5), 0)
@@ -106,6 +116,7 @@ test_that("the normal quantile is qnorm on its domain", {
 })
 
 test_that("the GloVe weighting function saturates at x_max", {
+  skip_on_cran()
   x <- c(0, 1, 25, 99, 100, 500)
   xm <- 100
   al <- 0.75
@@ -121,6 +132,7 @@ test_that("the GloVe weighting function saturates at x_max", {
 })
 
 test_that("character n-grams of a word are enumerated with boundaries", {
+  skip_on_cran()
   # "<ab>" has the 2-grams <a, ab, b> and the 3-grams <ab, ab>, and the whole
   # marked word is always included as a token as well
   expect_equal(morie_kamath_word_ngrams("ab", 2, 3),
@@ -149,6 +161,7 @@ test_that("character n-grams of a word are enumerated with boundaries", {
 })
 
 test_that("row layer normalisation uses the population variance", {
+  skip_on_cran()
   x <- matrix(c(1, 2, 3, 10, 20, 30), nrow = 2, byrow = TRUE)
   g <- morie_kamath_layer_norm_rows(x)
   for (i in 1:2) {
@@ -170,6 +183,7 @@ test_that("row layer normalisation uses the population variance", {
 })
 
 test_that("the NF4 grid is symmetric and dequantisation is a scaled lookup", {
+  skip_on_cran()
   nf <- morie_kamath_nf4_datatype(16)
   gr <- nf$normalized
   expect_length(gr, 16L)
@@ -201,6 +215,7 @@ test_that("the NF4 grid is symmetric and dequantisation is a scaled lookup", {
 })
 
 test_that("the unigram forward and backward passes agree", {
+  skip_on_cran()
   probs <- list(a = 0.4, b = 0.3, ab = 0.2, c = 0.1)
   for (txt in c("a", "ab", "abc", "aba")) {
     f <- .morie_km2_forward(txt, probs, 2)
@@ -231,6 +246,7 @@ test_that("the unigram forward and backward passes agree", {
 })
 
 test_that("pieces are indexed by the position they end at", {
+  skip_on_cran()
   probs <- list(a = 0.4, b = 0.3, ab = 0.2)
   ends <- .morie_km2_pieces_by_end("ab", probs, 2)
   expect_length(ends, 3L)
@@ -246,6 +262,7 @@ test_that("pieces are indexed by the position they end at", {
 })
 
 test_that("Viterbi segmentation is the best segmentation", {
+  skip_on_cran()
   probs <- list(a = 0.4, b = 0.3, ab = 0.2, c = 0.1)
   # brute force over every segmentation of the text
   all_segs <- function(txt, vocab, maxlen) {
@@ -280,6 +297,7 @@ test_that("Viterbi segmentation is the best segmentation", {
 })
 
 test_that("the transport plan is feasible and provably optimal", {
+  skip_on_cran()
   C <- matrix(c(0, 2, 2, 2, 0, 2, 2, 2, 0), 3, byrow = TRUE)
   p <- c(0.5, 0.3, 0.2)
   q <- c(0.2, 0.5, 0.3)
@@ -313,6 +331,7 @@ test_that("the transport plan is feasible and provably optimal", {
 })
 
 test_that("the Bradley-Terry loss is the softplus of the negative margin", {
+  skip_on_cran()
   m <- c(2, 1, 0, -1, -3)
   bt <- .morie_km2_bt_loss(m)
   expect_equal(bt[[2]], log1p(exp(-m)))
@@ -330,6 +349,7 @@ test_that("the Bradley-Terry loss is the softplus of the negative margin", {
 })
 
 test_that("implicit rewards are beta times the log policy ratio", {
+  skip_on_cran()
   r <- .morie_km2_implicit_rewards(c(0.6, 0.4), c(0.5, 0.5), 2)
   expect_equal(r[1], 2 * log(0.6 / 0.5))
   expect_equal(r[2], 2 * log(0.4 / 0.5))
@@ -350,6 +370,7 @@ test_that("implicit rewards are beta times the log policy ratio", {
 })
 
 test_that("cosine means and the WEAT statistic follow their definitions", {
+  skip_on_cran()
   W1 <- rbind(c(1, 0), c(0, 1))
   W2 <- rbind(c(-1, 0), c(0, -1))
   a <- c(1, 0)
@@ -383,6 +404,7 @@ test_that("cosine means and the WEAT statistic follow their definitions", {
 })
 
 test_that("similarity matrices normalise rows before the inner product", {
+  skip_on_cran()
   X <- rbind(c(3, 0), c(0, 2))
   Y <- rbind(c(1, 0), c(1, 1))
   got <- .morie_km2_sim_matrix(X, Y, normalize = TRUE)
@@ -406,6 +428,7 @@ test_that("similarity matrices normalise rows before the inner product", {
 })
 
 test_that("log probabilities come from a vector or a scorer", {
+  skip_on_cran()
   expect_equal(.morie_km2_log_probs(c(0.5, 0.25), NULL, "p"),
                log(c(0.5, 0.25)))
   # a scorer is called with zero-based positions
@@ -423,6 +446,7 @@ test_that("log probabilities come from a vector or a scorer", {
 })
 
 test_that("word occurrences are counted across outputs", {
+  skip_on_cran()
   outs <- list("the cat sat", "the dog", "a cat")
   expect_equal(.morie_km2_count_word("the", outs), 2)
   expect_equal(.morie_km2_count_word("cat", outs), 2)
@@ -433,6 +457,7 @@ test_that("word occurrences are counted across outputs", {
 })
 
 test_that("paired embeddings are looked up and shape-checked", {
+  skip_on_cran()
   E <- list(king = c(1, 0), queen = c(0, 1), man = c(1, 1))
   out <- .morie_km2_pair_vectors(list(c("king", "queen")), E, "A")
   expect_length(out, 1L)
@@ -452,6 +477,7 @@ test_that("paired embeddings are looked up and shape-checked", {
 })
 
 test_that("toxicity scores accept a vector or a scorer and stay in range", {
+  skip_on_cran()
   Y <- list("a", "b", "c")
   got <- .morie_km2_tox_scores(Y, c(0.1, 0.5, 0.9))
   expect_equal(got[[1]], c(0.1, 0.5, 0.9))
@@ -468,6 +494,7 @@ test_that("toxicity scores accept a vector or a scorer and stay in range", {
 })
 
 test_that("hidden states come from a vector, a function, or the context", {
+  skip_on_cran()
   expect_equal(.morie_km2_hidden(NULL, c(1, 2, 3), "h"), c(1, 2, 3))
   expect_equal(.morie_km2_hidden(c(4, 5), c(1, 2, 3), "h"), c(4, 5))
   expect_equal(.morie_km2_hidden(function(c) c * 2, c(1, 2), "h"), c(2, 4))
@@ -477,6 +504,7 @@ test_that("hidden states come from a vector, a function, or the context", {
 })
 
 test_that("prompt templates fill their slots", {
+  skip_on_cran()
   t1 <- "Question: [x] Answer:"
   f1 <- .morie_km2_fill_template(t1, "why", NULL)
   expect_equal(f1[[1]], "Question: why Answer:")
@@ -508,6 +536,7 @@ test_that("prompt templates fill their slots", {
 })
 
 test_that("the adapter adds a low-rank delta to the frozen output", {
+  skip_on_cran()
   H_o <- matrix(c(1, 2, 3, 4), nrow = 2)
   H_in <- matrix(c(1, 0, 0, 1), nrow = 2)
   Wd <- matrix(c(1, 1), nrow = 2)          # 2 -> 1 bottleneck
@@ -533,6 +562,7 @@ test_that("the adapter adds a low-rank delta to the frozen output", {
 })
 
 test_that("the sequence objective sums conditional log-probabilities", {
+  skip_on_cran()
   mdl <- function(ctx, prefix, tok) 0.5
   got <- .morie_km2_seq_obj(mdl, list("c1", "c2"),
                             list(list("a", "b"), list("a")))
@@ -559,6 +589,7 @@ test_that("the sequence objective sums conditional log-probabilities", {
 })
 
 test_that("the merged adapter is the Kronecker product scaled by s", {
+  skip_on_cran()
   W <- matrix(0, 4, 4)
   A <- matrix(c(1, 0, 0, 1), 2)
   B <- matrix(c(1, 2, 3, 4), 2)
@@ -576,6 +607,7 @@ test_that("the merged adapter is the Kronecker product scaled by s", {
 })
 
 test_that("diagonal arguments are accepted as a vector or a matrix", {
+  skip_on_cran()
   expect_equal(.morie_km2_diag(c(1, 2, 3), "S", 3), c(1, 2, 3))
   expect_equal(.morie_km2_diag(diag(c(1, 2, 3)), "S", 3), c(1, 2, 3))
   expect_error(.morie_km2_diag(matrix(1, 2, 2), "S", 2), "S must be diagonal")

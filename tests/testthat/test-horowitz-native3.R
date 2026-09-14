@@ -6,6 +6,11 @@
 # RELATIVE, so a rounded anchor silently weakens the test.
 
 test_that("morie_deconvolution matches morie.fn.hrzdeconv", {
+  # 4s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   w <- seq(-3, 3, length.out = 300)
   out <- morie_deconvolution(w, 0.4, grid = c(0, 1))
   expect_equal(out$density[1], 0.16632308283809408, tolerance = 1e-8)
@@ -21,6 +26,7 @@ test_that("morie_deconvolution matches morie.fn.hrzdeconv", {
 })
 
 test_that("the deconvolution default bandwidth beats a naive KDE", {
+  skip_on_cran()
   # The point of the criterion-based default: a cut-off fixed at
   # n^{-1/8} over-smooths so badly that deconvolving is worse than
   # not deconvolving. Judged on integrated squared error over a grid,
@@ -41,6 +47,7 @@ test_that("the deconvolution default bandwidth beats a naive KDE", {
 })
 
 test_that("morie_deconv_rate and morie_deconv_normality match Python", {
+  skip_on_cran()
   dr <- morie_deconv_rate(1e6)
   expect_equal(dr$ratio, 5239213805.878165, tolerance = 1e-9)
   expect_equal(dr$logarithmic_rate, 0.005239213805878165, tolerance = 1e-12)
@@ -55,6 +62,7 @@ test_that("morie_deconv_rate and morie_deconv_normality match Python", {
 })
 
 test_that("morie_average_derivative matches morie.fn.hrzade", {
+  skip_on_cran()
   x <- seq(-2, 2, length.out = 200)
   y <- 2 * x + cos(x)
   ad <- morie_average_derivative(x, y)
@@ -69,6 +77,7 @@ test_that("morie_average_derivative matches morie.fn.hrzade", {
 })
 
 test_that("the average derivative recovers the density-weighted estimand", {
+  skip_on_cran()
   # E(Y|X) = 2X with X standard normal: the DENSITY-WEIGHTED
   # estimand is 2 * integral of phi^2 = 2 / (2 sqrt(pi)) = 0.5642,
   # not the unweighted 2. A sign slip in K' returns -0.5642 and would
@@ -81,6 +90,7 @@ test_that("the average derivative recovers the density-weighted estimand", {
 })
 
 test_that("morie_tikhonov_iv and morie_sieve_iv match Python", {
+  skip_on_cran()
   tm <- rbind(c(1, 0.5, 0.2), c(0.5, 1, 0.3), c(0.2, 0.3, 1), c(0.1, 0, 0.4))
   b <- c(1, 2, 0.5, 0.3)
   tk <- morie_tikhonov_iv(tm, b)
@@ -111,6 +121,7 @@ test_that("morie_tikhonov_iv and morie_sieve_iv match Python", {
 })
 
 test_that("morie_npiv_operator matches Python and shows the decay", {
+  skip_on_cran()
   t <- seq(0, 6, length.out = 150)
   op <- morie_npiv_operator(sin(t), cos(t), K = 4)
   expect_equal(op$singular_values,
@@ -123,6 +134,7 @@ test_that("morie_npiv_operator matches Python and shows the decay", {
 })
 
 test_that("morie_instrument_check matches Python and refuses to test exogeneity", {
+  skip_on_cran()
   z <- seq(-1, 1, length.out = 120)
   xe <- z * 0.8 + seq(0, 1, length.out = 120)^2
   ic <- morie_instrument_check(xe, z, U = seq(-0.5, 0.5, length.out = 120))

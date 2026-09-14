@@ -33,6 +33,11 @@ bounds_fixture <- function(n = 200L, seed = 20260729) {
 }
 
 test_that("the fixture is bit-identical across languages", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   fx <- bounds_fixture()
   expect_equal(sum(fx$D), 94)
   expect_equal(sum(fx$y), 290.843334046192, tolerance = 1e-12)
@@ -45,6 +50,7 @@ test_that("the fixture is bit-identical across languages", {
 # ------------------------------------------------------------------
 
 test_that("the permutation LM loss matches the Python core exactly", {
+  skip_on_cran()
   fx <- bounds_fixture()
   z <- c(3L, 0L, 5L, 1L, 4L, 2L)
   out <- morie_permutation_lm_loss(fx$logits, fx$targets, z)
@@ -55,6 +61,7 @@ test_that("the permutation LM loss matches the Python core exactly", {
 })
 
 test_that("partial prediction matches the Python core exactly", {
+  skip_on_cran()
   fx <- bounds_fixture()
   z <- c(3L, 0L, 5L, 1L, 4L, 2L)
   out <- morie_permutation_lm_loss(fx$logits, fx$targets, z, num_predict = 2L)
@@ -65,6 +72,7 @@ test_that("partial prediction matches the Python core exactly", {
 })
 
 test_that("the full-sequence loss is invariant to the factorization order", {
+  skip_on_cran()
   # reordering the terms of a sum does not change the sum; the
   # permutation acts on the model's conditioning, never on this
   # arithmetic
@@ -81,17 +89,20 @@ test_that("the full-sequence loss is invariant to the factorization order", {
 })
 
 test_that("a uniform model has perplexity equal to the vocabulary size", {
+  skip_on_cran()
   out <- morie_permutation_lm_loss(matrix(0, 5L, 17L), rep(0L, 5L), 0:4)
   expect_equal(out$perplexity, 17, tolerance = 1e-12)
 })
 
 test_that("the two attention masks differ exactly on the diagonal", {
+  skip_on_cran()
   m <- morie_permutation_attention_masks(c(2L, 0L, 3L, 1L))
   expect_equal(m$content & !m$query, diag(4L) == 1)
   expect_equal(m$query & !m$content, matrix(FALSE, 4L, 4L))
 })
 
 test_that("the identity and reversed orders give the causal masks", {
+  skip_on_cran()
   expect_equal(morie_permutation_attention_masks(0:5)$content,
                lower.tri(matrix(0, 6L, 6L), diag = TRUE))
   expect_equal(morie_permutation_attention_masks(5:0)$content,
@@ -99,11 +110,13 @@ test_that("the identity and reversed orders give the causal masks", {
 })
 
 test_that("each position attends to exactly its rank many predecessors", {
+  skip_on_cran()
   m <- morie_permutation_attention_masks(c(3L, 1L, 4L, 0L, 2L))
   expect_equal(as.integer(rowSums(m$query)), m$rank)
 })
 
 test_that("log-softmax stays finite at extreme logits", {
+  skip_on_cran()
   out <- morie_permutation_lm_loss(matrix(c(1e4, -1e4, 0, 0), 2L, 2L),
                                    c(0L, 1L), 0:1)
   expect_true(all(is.finite(out$token_nll)))
@@ -111,6 +124,7 @@ test_that("log-softmax stays finite at extreme logits", {
 })
 
 test_that("permutation LM input validation", {
+  skip_on_cran()
   fx <- bounds_fixture()
   expect_error(morie_permutation_lm_loss(fx$logits, fx$targets,
                                          c(0L, 0L, 1L, 2L, 3L, 4L)),
@@ -131,6 +145,7 @@ test_that("permutation LM input validation", {
 # ------------------------------------------------------------------
 
 test_that("the private mean's deterministic parts match Python exactly", {
+  skip_on_cran()
   # R and Python cannot be made to draw the same Laplace variate, so
   # the anchors are on everything the draw does not touch
   fx <- bounds_fixture()
@@ -144,12 +159,14 @@ test_that("the private mean's deterministic parts match Python exactly", {
 })
 
 test_that("supplying the noise makes the estimate exactly reproducible", {
+  skip_on_cran()
   fx <- bounds_fixture()
   a <- morie_dp_mean(fx$y, C = 4, lower = -1, epsilon = 0.5, noise = 0.25)
   expect_equal(a$estimate, a$clipped_mean + 0.25, tolerance = 1e-14)
 })
 
 test_that("the mechanism is unbiased about the clipped mean", {
+  skip_on_cran()
   set.seed(11)
   fx <- bounds_fixture()
   draws <- vapply(seq_len(4000L), function(i) {
@@ -161,6 +178,7 @@ test_that("the mechanism is unbiased about the clipped mean", {
 })
 
 test_that("the Laplace draw has the right scale", {
+  skip_on_cran()
   set.seed(12)
   fx <- bounds_fixture()
   d <- vapply(seq_len(6000L), function(i) {
@@ -170,6 +188,7 @@ test_that("the Laplace draw has the right scale", {
 })
 
 test_that("tighter privacy costs more noise and more data costs less", {
+  skip_on_cran()
   fx <- bounds_fixture()
   a <- morie_dp_mean(fx$y, C = 4, lower = -1, epsilon = 0.1, noise = 0)
   b <- morie_dp_mean(fx$y, C = 4, lower = -1, epsilon = 10, noise = 0)
@@ -182,6 +201,7 @@ test_that("tighter privacy costs more noise and more data costs less", {
 })
 
 test_that("the naive interval is narrower than the honest one", {
+  skip_on_cran()
   fx <- bounds_fixture()
   o <- morie_dp_mean(fx$y, C = 4, lower = -1, epsilon = 0.05, noise = 0)
   expect_gt(o$ci_upper - o$ci_lower,
@@ -189,6 +209,7 @@ test_that("the naive interval is narrower than the honest one", {
 })
 
 test_that("clipping bias is reported, signed and warned about", {
+  skip_on_cran()
   o <- morie_dp_mean(c(0, 0, 0, 100), C = 1, lower = 0, epsilon = 1,
                      noise = 0)
   expect_equal(o$n_clipped, 1)
@@ -197,12 +218,14 @@ test_that("clipping bias is reported, signed and warned about", {
 })
 
 test_that("choosing the width from the data is flagged as a leak", {
+  skip_on_cran()
   fx <- bounds_fixture()
   o <- morie_dp_mean(fx$y, epsilon = 1, noise = 0)
   expect_true(any(grepl("range of y", o$warnings)))
 })
 
 test_that("the Gaussian mechanism uses the Dwork-Roth sigma", {
+  skip_on_cran()
   fx <- bounds_fixture()
   o <- morie_dp_mean(fx$y, C = 4, lower = -1, epsilon = 0.5,
                      mechanism = "gaussian", delta = 1e-6, noise = 0)
@@ -214,6 +237,7 @@ test_that("the Gaussian mechanism uses the Dwork-Roth sigma", {
 })
 
 test_that("private mean input validation", {
+  skip_on_cran()
   expect_error(morie_dp_mean(c(1, 2), C = 1, epsilon = 0),
                "epsilon must be positive")
   expect_error(morie_dp_mean(c(1, 2), C = -1), "C must be positive")
@@ -227,6 +251,7 @@ test_that("private mean input validation", {
 # ------------------------------------------------------------------
 
 test_that("the efficiency bound matches the Python core exactly", {
+  skip_on_cran()
   fx <- bounds_fixture()
   out <- morie_efficiency_bound_ate(fx$y, fx$D, fx$X)
   expect_equal(out$estimate, 0.95298854036596292, tolerance = 1e-10)
@@ -245,6 +270,7 @@ test_that("the efficiency bound matches the Python core exactly", {
 })
 
 test_that("the minimax constant solves its own stationarity condition", {
+  skip_on_cran()
   mc <- morie_minimax_regret_constant()
   expect_lt(mc$stationarity_residual, 1e-12)
   # solved, not quoted: the two-figure 0.17 in the literature is not
@@ -254,12 +280,14 @@ test_that("the minimax constant solves its own stationarity condition", {
 })
 
 test_that("the constant really is the maximum of t * Phi(-t)", {
+  skip_on_cran()
   mc <- morie_minimax_regret_constant()
   t <- seq(0, 4, length.out = 40001L)
   expect_lte(max(t * stats::pnorm(-t)), mc$constant + 1e-9)
 })
 
 test_that("the two components sum to the bound", {
+  skip_on_cran()
   fx <- bounds_fixture()
   o <- morie_efficiency_bound_ate(fx$y, fx$D, fx$X)
   expect_equal(o$overlap_term + o$heterogeneity_term, o$efficiency_bound,
@@ -280,6 +308,7 @@ ate_design <- function(seed, n = 4000L, tau = 1, conf = 0.6, het = 0,
 }
 
 test_that("AIPW recovers the effect and sits at the bound; IPW does not", {
+  skip_on_cran()
   d <- ate_design(1L, n = 8000L)
   o <- morie_efficiency_bound_ate(d$y, d$D, d$X)
   expect_lt(abs(o$estimate - 1), 0.1)
@@ -288,6 +317,7 @@ test_that("AIPW recovers the effect and sits at the bound; IPW does not", {
 })
 
 test_that("worse overlap raises the bound", {
+  skip_on_cran()
   a <- ate_design(2L, conf = 0.2)
   b <- ate_design(2L, conf = 2.5)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
@@ -297,6 +327,7 @@ test_that("worse overlap raises the bound", {
 })
 
 test_that("heterogeneity adds to the bound and is isolated from overlap", {
+  skip_on_cran()
   a <- ate_design(3L, het = 0)
   b <- ate_design(3L, het = 1.5)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
@@ -307,6 +338,7 @@ test_that("heterogeneity adds to the bound and is isolated from overlap", {
 })
 
 test_that("a noisier outcome raises only the overlap term", {
+  skip_on_cran()
   a <- ate_design(4L, sd = 0.5)
   b <- ate_design(4L, sd = 2)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
@@ -316,6 +348,7 @@ test_that("a noisier outcome raises only the overlap term", {
 })
 
 test_that("the bound on the standard error scales as one over root n", {
+  skip_on_cran()
   a <- ate_design(5L, n = 1000L)
   b <- ate_design(5L, n = 16000L)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
@@ -324,6 +357,7 @@ test_that("the bound on the standard error scales as one over root n", {
 })
 
 test_that("the plug-in rule does not beat the minimax regret bound", {
+  skip_on_cran()
   # simulate the local experiment the bound is stated for
   set.seed(6)
   mc <- morie_minimax_regret_constant()
@@ -341,6 +375,7 @@ test_that("the plug-in rule does not beat the minimax regret bound", {
 })
 
 test_that("a binary outcome uses the Bernoulli variance", {
+  skip_on_cran()
   set.seed(7)
   n <- 6000L
   X <- matrix(stats::rnorm(2 * n), n, 2L)
@@ -354,6 +389,7 @@ test_that("a binary outcome uses the Bernoulli variance", {
 })
 
 test_that("trimming is reported when it binds and silent when it does not", {
+  skip_on_cran()
   d <- ate_design(8L, conf = 4, n = 3000L)
   o <- morie_efficiency_bound_ate(d$y, d$D, d$X, trim = 0.05)
   expect_gt(o$trim_binding, 0)
@@ -365,6 +401,7 @@ test_that("trimming is reported when it binds and silent when it does not", {
 })
 
 test_that("bounds input validation", {
+  skip_on_cran()
   fx <- bounds_fixture()
   expect_error(morie_efficiency_bound_ate(fx$y[1:100], fx$D, fx$X),
                "must agree in length")

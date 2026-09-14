@@ -29,6 +29,11 @@ sphere_complex <- function() {
 circle_complex <- function() list(c(0, 1), c(1, 2), c(0, 2))
 
 test_that("face closure of a triangle matches Python", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   faces <- morie_simplicial_complex_faces(list(c(0, 1, 2)))
   expect_equal(faces[["0"]], list(0L, 1L, 2L))
   expect_equal(faces[["1"]], list(c(0L, 1L), c(0L, 2L), c(1L, 2L)))
@@ -36,6 +41,7 @@ test_that("face closure of a triangle matches Python", {
 })
 
 test_that("Euler characteristics of the classics match Python", {
+  skip_on_cran()
   expect_equal(morie_euler_characteristic(list(0:3))$chi, 1)
   expect_equal(morie_euler_characteristic(sphere_complex())$chi, 2)
   expect_equal(morie_euler_characteristic(circle_complex())$chi, 0)
@@ -44,11 +50,13 @@ test_that("Euler characteristics of the classics match Python", {
 })
 
 test_that("the torus f-vector is the minimal one", {
+  skip_on_cran()
   expect_equal(morie_euler_characteristic(torus_complex())$f_vector,
                c(7L, 21L, 14L))
 })
 
 test_that("face validation", {
+  skip_on_cran()
   expect_error(morie_simplicial_complex_faces(list()), "no simplices")
   expect_error(morie_simplicial_complex_faces(list(integer(0))),
                "empty simplices")
@@ -59,6 +67,7 @@ test_that("face validation", {
 # ------------------------------------------------------------------
 
 test_that("Betti numbers of the classical surfaces match Python", {
+  skip_on_cran()
   expect_equal(morie_betti_numbers_gf2(circle_complex())$betti, c(1L, 1L))
   expect_equal(morie_betti_numbers_gf2(sphere_complex())$betti,
                c(1L, 0L, 1L))
@@ -71,21 +80,25 @@ test_that("Betti numbers of the classical surfaces match Python", {
 })
 
 test_that("a contractible complex has trivial homology", {
+  skip_on_cran()
   expect_equal(morie_betti_numbers_gf2(list(0:3))$betti, c(1L, 0L, 0L, 0L))
 })
 
 test_that("disconnected components add in b0", {
+  skip_on_cran()
   expect_equal(morie_betti_numbers_gf2(list(c(0, 1), c(2, 3)))$betti[1], 2L)
   two_circles <- c(circle_complex(), list(c(3, 4), c(4, 5), c(3, 5)))
   expect_equal(morie_betti_numbers_gf2(two_circles)$betti, c(2L, 2L))
 })
 
 test_that("a wedge of two circles has b1 of 2", {
+  skip_on_cran()
   wedge <- list(c(0, 1), c(1, 2), c(0, 2), c(0, 3), c(3, 4), c(0, 4))
   expect_equal(morie_betti_numbers_gf2(wedge)$betti, c(1L, 2L))
 })
 
 test_that("the boundary map squares to zero everywhere", {
+  skip_on_cran()
   for (cx in list(sphere_complex(), torus_complex(), rp2_complex(),
                   list(0:3), list(0:4))) {
     out <- morie_betti_numbers_gf2(cx)
@@ -95,6 +108,7 @@ test_that("the boundary map squares to zero everywhere", {
 })
 
 test_that("the Euler-Poincare identity holds on every fixture", {
+  skip_on_cran()
   for (cx in list(circle_complex(), sphere_complex(), torus_complex(),
                   rp2_complex(), list(0:3), list(c(0, 1), c(2, 3)))) {
     out <- morie_betti_numbers_gf2(cx)
@@ -104,12 +118,14 @@ test_that("the Euler-Poincare identity holds on every fixture", {
 })
 
 test_that("filling the circle kills b1", {
+  skip_on_cran()
   expect_equal(morie_betti_numbers_gf2(circle_complex())$betti, c(1L, 1L))
   expect_equal(morie_betti_numbers_gf2(list(c(0, 1, 2)))$betti,
                c(1L, 0L, 0L))
 })
 
 test_that("the RP2 fixture really is a closed surface", {
+  skip_on_cran()
   counts <- new.env(parent = emptyenv())
   for (t in rp2_complex()) {
     pr <- utils::combn(t, 2L)
@@ -129,6 +145,7 @@ test_that("the RP2 fixture really is a closed surface", {
 # ------------------------------------------------------------------
 
 test_that("the rainbow count is odd at every subdivision", {
+  skip_on_cran()
   for (k in 1:12) {
     out <- morie_sperner_lemma_triangle(k)
     expect_true(out$is_odd)
@@ -137,6 +154,7 @@ test_that("the rainbow count is odd at every subdivision", {
 })
 
 test_that("oddness survives 120 LCG-driven admissible labellings", {
+  skip_on_cran()
   lcg_labels <- function(k, seed) {
     s <- seed
     lab <- list()
@@ -160,6 +178,7 @@ test_that("oddness survives 120 LCG-driven admissible labellings", {
 })
 
 test_that("an improper labelling is refused, not computed", {
+  skip_on_cran()
   k <- 2L
   labels <- list()
   for (i in 0:k) {
@@ -176,10 +195,12 @@ test_that("an improper labelling is refused, not computed", {
 })
 
 test_that("a missing label is an error", {
+  skip_on_cran()
   expect_error(morie_sperner_lemma_triangle(2, list("0,0" = 0L)),
                "no label supplied")
 })
 
 test_that("Sperner validation", {
+  skip_on_cran()
   expect_error(morie_sperner_lemma_triangle(0), "must be positive")
 })
