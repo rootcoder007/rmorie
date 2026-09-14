@@ -12,14 +12,14 @@ test_that("morie_spatial_voting_ideal_point_recovery passes X_r through", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   X <- make_synthetic_ideal_points(20L, 2L)
   out <- morie_spatial_voting_ideal_point_recovery(X)
   expect_equal(dim(out), c(20L, 2L))
 })
 
 test_that("ideal_point_recovery also accepts X_s without crashing", {
-  skip_on_cran()
+  skip_heavy()
   X_r <- make_synthetic_ideal_points(20L, 2L, seed = 11L)
   X_s <- make_synthetic_ideal_points(5L, 2L, seed = 12L)
   out <- morie_spatial_voting_ideal_point_recovery(X_r, X_s)
@@ -29,7 +29,7 @@ test_that("ideal_point_recovery also accepts X_s without crashing", {
 # --------------------------------------------------------------- Cutting lines
 
 test_that("morie_spatial_voting_normal_vectors returns the normal + r^2 list", {
-  skip_on_cran()
+  skip_heavy()
   X <- make_synthetic_ideal_points(20L, 2L, seed = 21L)
   ext <- stats::rnorm(20L)
   out <- morie_spatial_voting_normal_vectors(X, ext)
@@ -40,7 +40,7 @@ test_that("morie_spatial_voting_normal_vectors returns the normal + r^2 list", {
 })
 
 test_that("morie_spatial_voting_cutting_lines returns endpoints per vote", {
-  skip_on_cran()
+  skip_heavy()
   # cutting_lines expects normals as an (n_votes x n_dims) matrix.
   normals <- matrix(stats::rnorm(6L), nrow = 3L, ncol = 2L)
   out <- morie_spatial_voting_cutting_lines(normals, c(0.1, -0.2, 0))
@@ -53,7 +53,7 @@ test_that("morie_spatial_voting_cutting_lines returns endpoints per vote", {
 # ------------------------------------------------------ Bayesian / IRT helpers
 
 test_that("morie_spatial_voting_bayesian_irt_likelihood returns ll + accuracy", {
-  skip_on_cran()
+  skip_heavy()
   votes <- make_synthetic_vote_matrix(20L, 10L, 1L, seed = 31L)
   x <- matrix(stats::rnorm(20L), 20L, 1L)
   alpha <- stats::rnorm(10L)
@@ -66,7 +66,7 @@ test_that("morie_spatial_voting_bayesian_irt_likelihood returns ll + accuracy", 
 })
 
 test_that("morie_spatial_voting_bayesian_irt_posterior summarises a chain array", {
-  skip_on_cran()
+  skip_heavy()
   # Per the docstring: chain is array (n_samples, n_leg, n_dims).
   ch <- array(stats::rnorm(100L * 5L * 2L), c(100L, 5L, 2L))
   out <- morie_spatial_voting_bayesian_irt_posterior(ch)
@@ -78,7 +78,7 @@ test_that("morie_spatial_voting_bayesian_irt_posterior summarises a chain array"
 # -------------------------------------------------------- Optimal classification
 
 test_that("morie_spatial_voting_optimal_classification returns ideal-point matrix", {
-  skip_on_cran()
+  skip_heavy()
   V <- make_synthetic_vote_matrix(25L, 20L, 1L, noise_p = 0.05, seed = 41L)
   out <- tryCatch(
     morie_spatial_voting_optimal_classification(V, n_dims = 1L,
@@ -94,7 +94,7 @@ test_that("morie_spatial_voting_optimal_classification returns ideal-point matri
 # ------------------------------------------------------------ Smacof unfolding
 
 test_that("morie_spatial_voting_smacof_unfolding returns finite stress", {
-  skip_on_cran()
+  skip_heavy()
   D <- make_synthetic_unfolding_matrix(15L, 5L, 2L, seed = 51L)
   out <- tryCatch(
     morie_spatial_voting_smacof_unfolding(D, n_dims = 2L,
@@ -108,7 +108,7 @@ test_that("morie_spatial_voting_smacof_unfolding returns finite stress", {
 })
 
 test_that("morie_spatial_voting_unfolding_stress is non-negative on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   D <- make_synthetic_unfolding_matrix(10L, 4L, 2L, seed = 52L)
   X_r <- attr(D, "true_X_r")
   X_s <- attr(D, "true_X_s")
@@ -120,7 +120,7 @@ test_that("morie_spatial_voting_unfolding_stress is non-negative on synthetic da
 # ------------------------------------------------------------------- INDSCAL
 
 test_that("morie_spatial_voting_indscal returns shared-coord matrix", {
-  skip_on_cran()
+  skip_heavy()
   stack <- make_synthetic_indscal_dissims(3L, 8L, 2L, seed = 61L)
   out <- tryCatch(
     morie_spatial_voting_indscal(stack, n_dims = 2L,
@@ -136,7 +136,7 @@ test_that("morie_spatial_voting_indscal returns shared-coord matrix", {
 # ------------------------------------------------------ DW-NOMINATE / bootstrap
 
 test_that("morie_spatial_voting_dw_nominate returns ideal-point matrix", {
-  skip_on_cran()
+  skip_heavy()
   V <- make_synthetic_vote_matrix(30L, 25L, 2L, seed = 71L)
   out <- tryCatch(
     morie_spatial_voting_dw_nominate(V, n_dims = 2L,
@@ -150,7 +150,7 @@ test_that("morie_spatial_voting_dw_nominate returns ideal-point matrix", {
 })
 
 test_that("morie_spatial_voting_nominate_bootstrap returns SE matrix", {
-  skip_on_cran()
+  skip_heavy()
   V <- make_synthetic_vote_matrix(20L, 15L, 1L, seed = 72L)
   # nominate_bootstrap bootstraps a pre-fitted W-NOMINATE; it does
   # NOT fit one itself. Run dw_nominate first to get
@@ -179,7 +179,7 @@ test_that("morie_spatial_voting_nominate_bootstrap returns SE matrix", {
 })
 
 test_that("morie_spatial_voting_alpha_nominate returns ideal-point matrix", {
-  skip_on_cran()
+  skip_heavy()
   V <- make_synthetic_vote_matrix(25L, 20L, 1L, seed = 73L)
   out <- tryCatch(
     morie_spatial_voting_alpha_nominate(V, n_dims = 1L),
@@ -194,7 +194,7 @@ test_that("morie_spatial_voting_alpha_nominate returns ideal-point matrix", {
 # ----------------------------------------------------------------- Ordinal IRT
 
 test_that("morie_spatial_voting_ordinal_irt runs on ordinal vote-like data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(81L)
   Y <- matrix(sample.int(4L, 20L * 15L, replace = TRUE), 20L, 15L)
   out <- tryCatch(
@@ -210,7 +210,7 @@ test_that("morie_spatial_voting_ordinal_irt runs on ordinal vote-like data", {
 # ----------------------------------------------------------------- Dynamic IRT
 
 test_that("morie_spatial_voting_dynamic_irt accepts per-period vote matrices", {
-  skip_on_cran()
+  skip_heavy()
   V <- make_synthetic_vote_matrix(20L, 12L, 1L, seed = 91L)
   # time_periods is one-period-per-VOTE (length == ncol(V)), NOT
   # per-legislator -- the 3MMM.27 port iterates votes within each
@@ -224,7 +224,7 @@ test_that("morie_spatial_voting_dynamic_irt accepts per-period vote matrices", {
 # ----------------------------------------------------------------------- EM-IRT
 
 test_that("morie_spatial_voting_em_irt converges to a finite log-likelihood", {
-  skip_on_cran()
+  skip_heavy()
   V <- make_synthetic_vote_matrix(30L, 25L, 1L, seed = 101L)
   out <- tryCatch(
     morie_spatial_voting_em_irt(V, n_dims = 1L, max_iter = 20L),
@@ -239,7 +239,7 @@ test_that("morie_spatial_voting_em_irt converges to a finite log-likelihood", {
 # ----------------------------------------------------- Non-parametric bootstrap
 
 test_that("morie_spatial_voting_nonparametric_bootstrap returns SE matrix", {
-  skip_on_cran()
+  skip_heavy()
   Z <- matrix(stats::rnorm(20L * 5L), 20L, 5L)
   out <- tryCatch(
     morie_spatial_voting_nonparametric_bootstrap(Z, n_boot = 5L),
@@ -254,7 +254,7 @@ test_that("morie_spatial_voting_nonparametric_bootstrap returns SE matrix", {
 # -------------------------------------------------------- Anchoring vignettes
 
 test_that("morie_spatial_voting_anchoring_vignettes returns DIF-adjusted ratings", {
-  skip_on_cran()
+  skip_heavy()
   fix <- make_synthetic_anchoring(40L, 5L, 5L, seed = 111L)
   out <- tryCatch(
     morie_spatial_voting_anchoring_vignettes(fix$Y, fix$V,
@@ -270,7 +270,7 @@ test_that("morie_spatial_voting_anchoring_vignettes returns DIF-adjusted ratings
 # --------------------------------------------------- Ordered optimal classific
 
 test_that("morie_spatial_voting_ordered_oc runs on ordinal vote matrix", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(121L)
   Y <- matrix(sample.int(3L, 25L * 20L, replace = TRUE), 25L, 20L)
   out <- tryCatch(
@@ -288,7 +288,7 @@ test_that("morie_spatial_voting_ordered_oc runs on ordinal vote matrix", {
 # may error cleanly when the optional dep is absent; skip gracefully.
 
 test_that("morie_spatial_voting_bayesian_am runs or skips on missing Stan", {
-  skip_on_cran()
+  skip_heavy()
   Z <- matrix(stats::rnorm(20L * 5L), 20L, 5L)
   out <- tryCatch(
     morie_spatial_voting_bayesian_am(Z, n_samples = 20L),
@@ -301,7 +301,7 @@ test_that("morie_spatial_voting_bayesian_am runs or skips on missing Stan", {
 })
 
 test_that("morie_spatial_voting_bayesian_mds runs or skips on missing Stan", {
-  skip_on_cran()
+  skip_heavy()
   D <- make_synthetic_distance_matrix(10L, 2L, seed = 131L)
   out <- tryCatch(
     morie_spatial_voting_bayesian_mds(D, n_dims = 2L),
@@ -314,7 +314,7 @@ test_that("morie_spatial_voting_bayesian_mds runs or skips on missing Stan", {
 })
 
 test_that("morie_spatial_voting_bayesian_unfolding runs or skips on missing Stan", {
-  skip_on_cran()
+  skip_heavy()
   D <- make_synthetic_unfolding_matrix(10L, 4L, 2L, seed = 132L)
   out <- tryCatch(
     morie_spatial_voting_bayesian_unfolding(D, n_dims = 2L),
@@ -327,7 +327,7 @@ test_that("morie_spatial_voting_bayesian_unfolding runs or skips on missing Stan
 })
 
 test_that("morie_spatial_voting_cjr_irt runs or skips on missing Stan", {
-  skip_on_cran()
+  skip_heavy()
   V <- make_synthetic_vote_matrix(20L, 10L, 1L, seed = 133L)
   out <- tryCatch(
     morie_spatial_voting_cjr_irt(V, n_dims = 1L),

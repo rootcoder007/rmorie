@@ -6,7 +6,7 @@ test_that("stat_command constructs a valid command", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   fn <- function(x) x + 1
   cmd <- stat_command(
     name = "test_cmd_alpha",
@@ -23,13 +23,13 @@ test_that("stat_command constructs a valid command", {
 })
 
 test_that("stat_command rejects invalid input", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(stat_command("", "C", "u", "d", function() 1))
   expect_error(stat_command("name", "C", "u", "d", "not_a_function"))
 })
 
 test_that("stat_command custom handler_stat preserved", {
-  skip_on_cran()
+  skip_heavy()
   hs <- function(parts, log, store) "custom"
   cmd <- stat_command("test_cmd_beta", "T", "u", "d",
                        handler_repl = function() 1,
@@ -38,7 +38,7 @@ test_that("stat_command custom handler_stat preserved", {
 })
 
 test_that("register/resolve work", {
-  skip_on_cran()
+  skip_heavy()
   cmd <- stat_command("test_cmd_reg", "TestCat", "u", "d",
                       handler_repl = function() 42,
                       aliases = c("tcr_alias"))
@@ -48,19 +48,19 @@ test_that("register/resolve work", {
 })
 
 test_that("register_stat_command rejects non-command", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(register_stat_command("not a cmd"), "morie_stat_command")
 })
 
 test_that("resolve_stat_command returns NULL for unknown", {
-  skip_on_cran()
+  skip_heavy()
   expect_null(resolve_stat_command("nonexistent_command_xyz"))
   expect_null(resolve_stat_command(c("a", "b")))  # not length-1
   expect_null(resolve_stat_command(123))
 })
 
 test_that("all_stat_command_names returns sorted unique names", {
-  skip_on_cran()
+  skip_heavy()
   v <- all_stat_command_names()
   expect_true(is.character(v))
   expect_true(length(v) >= 1L)
@@ -68,7 +68,7 @@ test_that("all_stat_command_names returns sorted unique names", {
 })
 
 test_that("commands_by_category returns grouped list", {
-  skip_on_cran()
+  skip_heavy()
   cmd <- stat_command("test_cmd_cat", "GroupTest", "u", "d",
                       handler_repl = function() 1)
   register_stat_command(cmd)
@@ -79,7 +79,7 @@ test_that("commands_by_category returns grouped list", {
 })
 
 test_that("run_stat_command invokes handler", {
-  skip_on_cran()
+  skip_heavy()
   cmd <- stat_command("test_cmd_run", "T", "u", "d",
                       handler_repl = function(x) x * 2)
   register_stat_command(cmd)
@@ -87,17 +87,17 @@ test_that("run_stat_command invokes handler", {
 })
 
 test_that("run_stat_command errors on unknown", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(run_stat_command("not_there"), "Unknown")
 })
 
 test_that("n_stat_commands returns count >= 1", {
-  skip_on_cran()
+  skip_heavy()
   expect_true(n_stat_commands() >= 1L)
 })
 
 test_that("print.morie_stat_command emits readable output", {
-  skip_on_cran()
+  skip_heavy()
   cmd <- stat_command("test_cmd_print", "PrintCat", "usage_str",
                       "Print desc", function() 1,
                       aliases = c("a1", "a2"))
@@ -108,7 +108,7 @@ test_that("print.morie_stat_command emits readable output", {
 })
 
 test_that("print.morie_stat_command with no aliases", {
-  skip_on_cran()
+  skip_heavy()
   cmd <- stat_command("test_cmd_no_alias", "NoAlias", "u", "Some desc",
                       function() 1)
   out <- capture.output(print(cmd))
@@ -116,7 +116,7 @@ test_that("print.morie_stat_command with no aliases", {
 })
 
 test_that("clear_stat_commands resets registry, then re-seed", {
-  skip_on_cran()
+  skip_heavy()
   n_before <- n_stat_commands()
   n_cleared <- clear_stat_commands()
   expect_equal(n_cleared, n_before)
@@ -128,7 +128,7 @@ test_that("clear_stat_commands resets registry, then re-seed", {
 })
 
 test_that(".morie_infer_category prefix lookup", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(rmorie:::.morie_infer_category("morie_did_event_study"), "DiD")
   expect_equal(rmorie:::.morie_infer_category("morie_tps_compute"), "TPS Spatial")
   expect_equal(rmorie:::.morie_infer_category("morie_otis_load"), "OTIS")
@@ -138,7 +138,7 @@ test_that(".morie_infer_category prefix lookup", {
 })
 
 test_that("custom handler_stat default wraps errors", {
-  skip_on_cran()
+  skip_heavy()
   cmd <- stat_command("test_cmd_err", "ErrCat", "u", "d",
                       handler_repl = function(x) stop("boom"))
   register_stat_command(cmd)
@@ -151,7 +151,7 @@ test_that("custom handler_stat default wraps errors", {
 })
 
 test_that("default handler_stat with successful result calls store", {
-  skip_on_cran()
+  skip_heavy()
   stored <- character(0)
   store_fn <- function(x) stored <<- c(stored, x)
   cmd <- stat_command("test_cmd_store", "StoreCat", "u", "d",

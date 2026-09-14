@@ -8,7 +8,7 @@ test_that("native encoder matches jsonlite::toJSON across the option grid", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("jsonlite")
   df <- data.frame(id = 1:3, v = c(1.5, NA, -2), s = c("a", NA, "c\"q\\\n\té"),
                    f = factor(c("x", "y", "x")), b = c(TRUE, NA, FALSE), stringsAsFactors = FALSE)
@@ -55,7 +55,7 @@ test_that("native encoder matches jsonlite::toJSON across the option grid", {
 })
 
 test_that("native parser + simplifier match jsonlite::fromJSON", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("jsonlite")
   texts <- c(
     '1', '"a"', 'true', 'null', '[]', '{}', '[1,2,3]', '[1,null,3]', '["a",null]', '[true,false,null]',
@@ -82,7 +82,7 @@ test_that("native parser + simplifier match jsonlite::fromJSON", {
 })
 
 test_that("prettify / minify / base64 / serialize agree with jsonlite", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("jsonlite")
   for (tx in c('{"a":[1,2,{"b":null}],"c":"x"}', "[]", "{}", "[1]", "[[]]", '{"a":{}}',
                '[{"a":[1,[2,3]],"b":"\\u00e9\\/<\\/x"}]', '"s"', "1", "null")) {
@@ -110,7 +110,7 @@ test_that("prettify / minify / base64 / serialize agree with jsonlite", {
 })
 
 test_that("read/write/stream round-trip through files and connections", {
-  skip_on_cran()
+  skip_heavy()
   x <- data.frame(id = 1:3, name = c("a", "b", NA), stringsAsFactors = FALSE)
   p <- tempfile(fileext = ".json")
   morie_jsonlt_write_json(x, p, pretty = TRUE)

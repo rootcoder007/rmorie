@@ -5,7 +5,7 @@ test_that("ARCH-LM detects GARCH and keeps nominal size", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   garch <- function(seed, n = 1200, omega = 0.1, alpha = 0.3, beta = 0.6) {
     set.seed(seed)
     s2 <- omega / (1 - alpha - beta)
@@ -41,7 +41,7 @@ test_that("ARCH-LM detects GARCH and keeps nominal size", {
 })
 
 test_that("multi-horizon KS separates short-horizon tail violations", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   r <- morie_multi_horizon_ks(rnorm(800), horizons = c(1, 5, 20), n_mc = 200)
   expect_equal(r$per_horizon$h, c(1L, 5L, 20L))
@@ -82,7 +82,7 @@ test_that("multi-horizon KS separates short-horizon tail violations", {
 })
 
 test_that("convex hull drops interior points and returns ordered vertices", {
-  skip_on_cran()
+  skip_heavy()
   sq <- rbind(c(0, 0), c(1, 0), c(1, 1), c(0, 1), c(0.5, 0.5))
   r <- morie_convex_hull(sq)
   expect_equal(r$n_vertices, 4L)
@@ -104,7 +104,7 @@ test_that("convex hull drops interior points and returns ordered vertices", {
 })
 
 test_that("adjacency matrix matches the hand-built path graph", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_adjacency_matrix(rbind(c("A", "B"), c("B", "C")))
   want <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
   expect_equal(unname(r$A), want)
@@ -123,7 +123,7 @@ test_that("adjacency matrix matches the hand-built path graph", {
 })
 
 test_that("non-backtracking matrix is a permutation on a cycle", {
-  skip_on_cran()
+  skip_heavy()
   n <- 5
   cyc <- cbind(0:(n - 1), c(1:(n - 1), 0))
   r <- morie_nonbacktracking_matrix(cyc)
@@ -157,7 +157,7 @@ test_that("non-backtracking matrix is a permutation on a cycle", {
 })
 
 test_that("dcc front-end delegates bit-for-bit", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   L <- chol(matrix(c(1, 0.5, 0.5, 1), 2))
   X <- matrix(rnorm(1200), ncol = 2) %*% L
@@ -168,7 +168,7 @@ test_that("dcc front-end delegates bit-for-bit", {
 })
 
 test_that("ARCH-M recovers parameters after the recursion guard", {
-  skip_on_cran()
+  skip_heavy()
   dgp <- function(seed, n = 2000, omega = 0.2, alpha = 0.4, delta = 0.8, mu = 0.1) {
     set.seed(seed)
     ep <- 0

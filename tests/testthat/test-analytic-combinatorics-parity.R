@@ -16,7 +16,7 @@ test_that("Fibonacci comes out of its generating function, exactly", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   out <- morie_rational_gf_coefficients(c(0, 1), c(1, -1, -1), 300)
   expect_true(out$is_exact)
   expect_true(out$all_integral)
@@ -29,7 +29,7 @@ test_that("Fibonacci comes out of its generating function, exactly", {
 })
 
 test_that("the recurrence agrees with direct addition at every index", {
-  skip_on_cran()
+  skip_heavy()
   ex <- morie_rational_gf_coefficients(c(0, 1), c(1, -1, -1), 120)
   s <- ex$exact_coefficients
   for (i in 3:120) {
@@ -40,7 +40,7 @@ test_that("the recurrence agrees with direct addition at every index", {
 })
 
 test_that("powers of two and unit-shifted Fibonacci expand exactly", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(
     morie_rational_gf_coefficients(1, c(1, -2), 10)$coefficients,
     2^(0:9))
@@ -50,7 +50,7 @@ test_that("powers of two and unit-shifted Fibonacci expand exactly", {
 })
 
 test_that("a non-unit leading denominator drops to doubles and says so", {
-  skip_on_cran()
+  skip_heavy()
   out <- morie_rational_gf_coefficients(1, c(2, -1), 5)
   expect_false(out$is_exact)
   expect_equal(out$coefficients, 1 / 2^(1:5))
@@ -58,7 +58,7 @@ test_that("a non-unit leading denominator drops to doubles and says so", {
 })
 
 test_that("generating function validation", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_rational_gf_coefficients(1, c(0, 1), 5),
                "constant term")
   expect_error(morie_rational_gf_coefficients(1, c(1, -1), 0),
@@ -70,14 +70,14 @@ test_that("generating function validation", {
 # ------------------------------------------------------------------
 
 test_that("the Fibonacci growth rate is the golden ratio", {
-  skip_on_cran()
+  skip_heavy()
   out <- morie_dominant_singularity_growth(c(1, -1, -1))
   expect_equal(out$growth_rate, 1.6180339887498947, tolerance = 1e-15)
   expect_equal(out$radius, (sqrt(5) - 1) / 2, tolerance = 1e-12)
 })
 
 test_that("the measured ratio approaches the predicted rate", {
-  skip_on_cran()
+  skip_heavy()
   fib <- morie_rational_gf_coefficients(c(0, 1), c(1, -1, -1),
                                         40)$coefficients
   out <- morie_dominant_singularity_growth(c(1, -1, -1), fib)
@@ -85,13 +85,13 @@ test_that("the measured ratio approaches the predicted rate", {
 })
 
 test_that("a simple pole is found exactly", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(morie_dominant_singularity_growth(c(1, -3))$growth_rate, 3,
                tolerance = 1e-12)
 })
 
 test_that("a denominator with no positive root is refused", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_dominant_singularity_growth(c(1, 0, 1)), "Pringsheim")
 })
 
@@ -100,7 +100,7 @@ test_that("a denominator with no positive root is refused", {
 # ------------------------------------------------------------------
 
 test_that("the transfer theorem matches Python", {
-  skip_on_cran()
+  skip_heavy()
   t1 <- morie_singularity_transfer(0.5, 10)
   expect_equal(t1$exact_coefficient, 0.17619705200195312, tolerance = 1e-15)
   expect_equal(t1$ratio, 0.9875829288261563, tolerance = 1e-12)
@@ -115,7 +115,7 @@ test_that("the transfer theorem matches Python", {
 })
 
 test_that("integer alpha reduces to binomials", {
-  skip_on_cran()
+  skip_heavy()
   for (n in c(1, 5, 20)) {
     expect_equal(morie_singularity_transfer(2, n)$exact_coefficient, n + 1,
                  tolerance = 1e-12)
@@ -125,7 +125,7 @@ test_that("integer alpha reduces to binomials", {
 })
 
 test_that("the transfer ratio converges to one", {
-  skip_on_cran()
+  skip_heavy()
   gaps <- vapply(c(10, 100, 1000), function(n) {
     abs(morie_singularity_transfer(0.5, n)$ratio - 1)
   }, numeric(1))
@@ -134,7 +134,7 @@ test_that("the transfer ratio converges to one", {
 })
 
 test_that("the first-order correction earns its name", {
-  skip_on_cran()
+  skip_heavy()
   for (n in c(10, 100)) {
     t <- morie_singularity_transfer(0.5, n)
     expect_lt(abs(t$corrected_ratio - 1), abs(t$ratio - 1) / 50)
@@ -142,7 +142,7 @@ test_that("the first-order correction earns its name", {
 })
 
 test_that("transfer validation", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_singularity_transfer(0, 10), "non-positive integer")
   expect_error(morie_singularity_transfer(0.5, 0), "n must be positive")
 })
@@ -152,7 +152,7 @@ test_that("transfer validation", {
 # ------------------------------------------------------------------
 
 test_that("the Stirling series matches Python", {
-  skip_on_cran()
+  skip_heavy()
   s <- morie_stirling_series_error(10, 3)
   expect_equal(s$series_value, 15.10441257313422, tolerance = 1e-14)
   expect_equal(s$error, 5.870504082849948e-11, tolerance = 1e-6)
@@ -163,7 +163,7 @@ test_that("the Stirling series matches Python", {
 })
 
 test_that("the error bound holds at every n and term count", {
-  skip_on_cran()
+  skip_heavy()
   for (n in c(1, 2, 5, 10, 50, 170, 1000)) {
     for (k in 0:4) {
       expect_true(morie_stirling_series_error(n, k)$error_within_bound)
@@ -172,7 +172,7 @@ test_that("the error bound holds at every n and term count", {
 })
 
 test_that("more terms help until the double floor", {
-  skip_on_cran()
+  skip_heavy()
   errs <- vapply(0:4, function(k) {
     morie_stirling_series_error(10, k)$error
   }, numeric(1))
@@ -180,13 +180,13 @@ test_that("more terms help until the double floor", {
 })
 
 test_that("the series is sharp, not just valid", {
-  skip_on_cran()
+  skip_heavy()
   s <- morie_stirling_series_error(5, 3)
   expect_gt(s$error, 0.5 * s$bound)
 })
 
 test_that("Stirling validation", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_stirling_series_error(0), "must be positive")
   expect_error(morie_stirling_series_error(10, 5), "B12")
 })
@@ -196,7 +196,7 @@ test_that("Stirling validation", {
 # ------------------------------------------------------------------
 
 test_that("derangement exact values match Python", {
-  skip_on_cran()
+  skip_heavy()
   ref <- list(c(0, "1"), c(1, "0"), c(4, "9"), c(10, "1334961"),
               c(20, "895014631192902121"))
   for (r in ref) {
@@ -208,7 +208,7 @@ test_that("derangement exact values match Python", {
 })
 
 test_that("the two exact routes agree for every n to 60", {
-  skip_on_cran()
+  skip_heavy()
   for (n in 0:60) {
     out <- morie_derangement_rounding(n)
     expect_true(out$routes_agree)
@@ -217,7 +217,7 @@ test_that("the two exact routes agree for every n to 60", {
 })
 
 test_that("the rounding claims match Python, including n = 0", {
-  skip_on_cran()
+  skip_heavy()
   # D_0 = 1 but 0!/e is about 0.37, so 1 is NOT its nearest integer;
   # the identity starts at n = 1 and both languages say so
   expect_false(morie_derangement_rounding(0)$is_nearest_integer)
@@ -229,7 +229,7 @@ test_that("the rounding claims match Python, including n = 0", {
 })
 
 test_that("the recurrence agrees with the enumerative shelf", {
-  skip_on_cran()
+  skip_heavy()
   # morie_derangements returns a morie_bigint; compare decimal strings
   for (n in 0:30) {
     expect_equal(morie_derangement_rounding(n)$exact,
@@ -238,7 +238,7 @@ test_that("the recurrence agrees with the enumerative shelf", {
 })
 
 test_that("derangement validation", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_derangement_rounding(-1), "non-negative")
 })
 
@@ -247,7 +247,7 @@ test_that("derangement validation", {
 # ------------------------------------------------------------------
 
 test_that("exact partition counts match Python as strings", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(morie_hardy_ramanujan_partitions(10)$exact, "42")
   expect_equal(morie_hardy_ramanujan_partitions(100)$exact, "190569292")
   expect_equal(morie_hardy_ramanujan_partitions(500)$exact,
@@ -257,7 +257,7 @@ test_that("exact partition counts match Python as strings", {
 })
 
 test_that("the asymptotic ratio matches Python", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(morie_hardy_ramanujan_partitions(10)$ratio,
                1.1453406861243047, tolerance = 1e-12)
   expect_equal(morie_hardy_ramanujan_partitions(100)$ratio,
@@ -265,7 +265,7 @@ test_that("the asymptotic ratio matches Python", {
 })
 
 test_that("the relative error decays but slowly, always positive", {
-  skip_on_cran()
+  skip_heavy()
   errs <- vapply(c(10, 100, 1000), function(n) {
     morie_hardy_ramanujan_partitions(n)$relative_error
   }, numeric(1))
@@ -275,6 +275,6 @@ test_that("the relative error decays but slowly, always positive", {
 })
 
 test_that("Hardy-Ramanujan validation", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_hardy_ramanujan_partitions(0), "must be positive")
 })

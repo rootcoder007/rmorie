@@ -42,7 +42,7 @@ test_that("morie_tps_sdb_turing_demo runs and returns a rich result", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   rr <- morie_tps_sdb_turing_demo(
     n_steps = 50L, n = 12L, dt = 0.005, save_fig = FALSE
   )
@@ -66,7 +66,7 @@ test_that("morie_tps_sdb_turing_demo runs and returns a rich result", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_tps_inspection_game_phase returns a 3-strategy steady state", {
-  skip_on_cran()
+  skip_heavy()
   rr <- morie_tps_inspection_game_phase(
     n_temptations = 4L, n_costs = 4L, n_steps = 60L, save_fig = FALSE
   )
@@ -85,7 +85,7 @@ test_that("morie_tps_inspection_game_phase returns a 3-strategy steady state", {
 # ---------------------------------------------------------------------------
 
 test_that("data-seeded routines stop with NotYetPorted when no loader (superseded)", {
-  skip_on_cran()
+  skip_heavy()
   # 3MMM.5/3MMM.6 shipped bundled TPS fixtures (inst/extdata/) that
   # satisfy .tps_loader_present() unconditionally. The NotYetPorted
   # stop-stub branch is no longer reachable from the public API.
@@ -120,7 +120,7 @@ test_that("data-seeded routines stop with NotYetPorted when no loader (supersede
 # ---------------------------------------------------------------------------
 
 test_that("Hill-MLE recovers a known Pareto tail exponent", {
-  skip_on_cran()
+  skip_heavy()
   # Hill estimator:  alpha-hat = 1 + n / sum(log(x_i / xmin))
   # For Pareto(alpha=2.5, xmin=1) of n=20000 draws, alpha-hat -> 2.5.
   set.seed(1L)
@@ -135,7 +135,7 @@ test_that("Hill-MLE recovers a known Pareto tail exponent", {
 })
 
 test_that("OLS log-log slope recovers Bettencourt beta on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   # y_i = Y0 * p_i^beta  =>  log y = log Y0 + beta log p, exactly.
   set.seed(1L)
   pop <- exp(stats::runif(158, log(1e3), log(5e5)))
@@ -151,7 +151,7 @@ test_that("OLS log-log slope recovers Bettencourt beta on synthetic data", {
 })
 
 test_that("Lotka-Volterra small-amplitude period equals 2 pi / sqrt(alpha gamma)", {
-  skip_on_cran()
+  skip_heavy()
   alpha <- 0.4
   gamma <- 0.6
   T_period <- 2 * pi / sqrt(alpha * gamma)
@@ -169,7 +169,7 @@ test_that("Lotka-Volterra small-amplitude period equals 2 pi / sqrt(alpha gamma)
 # ---------------------------------------------------------------------------
 
 test_that("morie_tps_sdb_reaction_diffusion returns a rich-result on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(.tps_loader_present(),
               "loader stub not registered")
   rr <- tryCatch(
@@ -188,7 +188,7 @@ test_that("morie_tps_sdb_reaction_diffusion returns a rich-result on synthetic d
 })
 
 test_that("morie_tps_levy_flight_alpha recovers a finite alpha on synthetic Toronto data", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(.tps_loader_present(),
               "loader stub not registered")
   rr <- morie_tps_levy_flight_alpha(
@@ -198,7 +198,7 @@ test_that("morie_tps_levy_flight_alpha recovers a finite alpha on synthetic Toro
 })
 
 test_that("morie_tps_urban_scaling_beta returns a rich-result on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(.tps_loader_present(),
               "loader stub not registered")
   rr <- tryCatch(
@@ -214,7 +214,7 @@ test_that("morie_tps_urban_scaling_beta returns a rich-result on synthetic data"
 })
 
 test_that("morie_tps_lotka_volterra_police_crime runs on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(.tps_loader_present(),
               "loader stub not registered")
   rr <- morie_tps_lotka_volterra_police_crime(
@@ -224,7 +224,7 @@ test_that("morie_tps_lotka_volterra_police_crime runs on synthetic data", {
 })
 
 test_that("morie_tps_criminal_network_graph runs on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(.tps_loader_present(),
               "loader stub not registered")
   rr <- morie_tps_criminal_network_graph(
@@ -234,7 +234,7 @@ test_that("morie_tps_criminal_network_graph runs on synthetic data", {
 })
 
 test_that("morie_tps_statphysics_analyze_all sweeps over multiple categories", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(.tps_loader_present(),
               "loader stub not registered")
   rr <- tryCatch(

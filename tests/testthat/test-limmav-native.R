@@ -13,7 +13,7 @@ test_that("trigamma matches base R", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   for (x in c(0.05, 0.5, 1, 2.5, 7, 19.5, 20, 50, 1000)) {
     expect_equal(.limmav_trigamma(x), trigamma(x), tolerance = 1e-12)
   }
@@ -32,7 +32,7 @@ test_that("trigamma matches base R", {
 })
 
 test_that("tetragamma matches base R psigamma", {
-  skip_on_cran()
+  skip_heavy()
   # a short asymptotic series: accurate to about one part in a thousand,
   # which is all the Newton step in trigamma_inverse needs
   for (x in c(0.5, 1, 2.5, 7, 19.5, 20, 60)) {
@@ -49,7 +49,7 @@ test_that("tetragamma matches base R psigamma", {
 })
 
 test_that("trigamma_inverse inverts trigamma", {
-  skip_on_cran()
+  skip_heavy()
   for (y in c(1e-4, 0.01, 0.2, 1, 3, 50)) {
     x <- .limmav_trigamma_inverse(y)
     expect_equal(trigamma(x), y, tolerance = 1e-9)
@@ -64,7 +64,7 @@ test_that("trigamma_inverse inverts trigamma", {
 })
 
 test_that("erf matches the normal integral", {
-  skip_on_cran()
+  skip_heavy()
   # erf(x) = 2 * pnorm(x * sqrt(2)) - 1. This is Abramowitz & Stegun 7.1.26,
   # whose absolute error is bounded by 1.5e-7, so the comparison has to be
   # absolute rather than relative.
@@ -79,7 +79,7 @@ test_that("erf matches the normal integral", {
 })
 
 test_that("the t tail routine is the two-sided p-value", {
-  skip_on_cran()
+  skip_heavy()
   # Despite its name this returns P(|T| > |t|), the incomplete beta
   # I_x(df/2, 1/2), not the one-sided survival function. Both call sites
   # assign it straight to a p-value, and the infinite-df branch beside it
@@ -102,7 +102,7 @@ test_that("the t tail routine is the two-sided p-value", {
 })
 
 test_that("log counts per million follow their definition", {
-  skip_on_cran()
+  skip_heavy()
   counts <- matrix(c(10, 20, 0, 5, 100, 3), nrow = 2, byrow = TRUE)
   got <- .limmav_log_cpm(counts)
   R <- colSums(counts)
@@ -130,7 +130,7 @@ test_that("log counts per million follow their definition", {
 })
 
 test_that("the weighted fit agrees with lm(weights=)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   n <- 12
   X <- cbind(1, c(rep(0, 6), rep(1, 6)))
@@ -160,7 +160,7 @@ test_that("the weighted fit agrees with lm(weights=)", {
 })
 
 test_that("empirical Bayes shrinks variances toward the fitted prior", {
-  skip_on_cran()
+  skip_heavy()
   # the genes need genuinely different true variances: a common scale would
   # leave the observed spread of log-variances at its own sampling variance
   # and no prior would be estimable
@@ -198,7 +198,7 @@ test_that("empirical Bayes shrinks variances toward the fitted prior", {
 })
 
 test_that("voom weights track the mean-variance trend", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(9)
   G <- 40
   m <- 6
@@ -224,7 +224,7 @@ test_that("voom weights track the mean-variance trend", {
 })
 
 test_that("the unmoderated unweighted route is an ordinary linear model", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   G <- 25
   m <- 8
@@ -261,7 +261,7 @@ test_that("the unmoderated unweighted route is an ordinary linear model", {
 })
 
 test_that("moderation borrows prior degrees of freedom and shrinks variances", {
-  skip_on_cran()
+  skip_heavy()
   # gene-specific overdispersion gives real variance heterogeneity, which is
   # what the empirical-Bayes step exists to exploit
   set.seed(2)
@@ -301,7 +301,7 @@ test_that("moderation borrows prior degrees of freedom and shrinks variances", {
 })
 
 test_that("homogeneous variances leave nothing to moderate", {
-  skip_on_cran()
+  skip_heavy()
   # with one common variance the observed spread of the log-variances does
   # not exceed its own sampling variance, so no prior is estimable and the
   # method reports that rather than inventing one
@@ -322,7 +322,7 @@ test_that("homogeneous variances leave nothing to moderate", {
 })
 
 test_that("a real group difference is detected among many null genes", {
-  skip_on_cran()
+  skip_heavy()
   # the differential gene has to sit in a realistic library: with only a
   # handful of genes one twenty-fold gene dominates the totals and drags
   # every other gene's counts per million down with it
@@ -347,7 +347,7 @@ test_that("a real group difference is detected among many null genes", {
 })
 
 test_that("p-values are calibrated when nothing is differential", {
-  skip_on_cran()
+  skip_heavy()
   # a test that reports too many discoveries on null data is worse than
   # useless, so this checks the null distribution itself rather than any
   # single gene
@@ -367,7 +367,7 @@ test_that("p-values are calibrated when nothing is differential", {
 })
 
 test_that("the design may be given as a matrix, a list, or group labels", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(19)
   G <- 20
   counts <- matrix(rpois(G * 6, 400), nrow = G)
@@ -391,7 +391,7 @@ test_that("the design may be given as a matrix, a list, or group labels", {
 })
 
 test_that("Benjamini-Hochberg adjustment matches p.adjust", {
-  skip_on_cran()
+  skip_heavy()
   p <- c(0.001, 0.008, 0.039, 0.041, 0.042, 0.06, 0.074, 0.205, 0.212, 0.216)
   expect_equal(.limmav_benjamini_hochberg(p), p.adjust(p, "BH"))
   # the step-up procedure enforces monotonicity

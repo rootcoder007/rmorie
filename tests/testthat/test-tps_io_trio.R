@@ -29,7 +29,7 @@ test_that("MORIE_TPS_REGISTRY exposes the expected 13 categories", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   expect_type(MORIE_TPS_REGISTRY, "list")
   nms <- names(MORIE_TPS_REGISTRY)
   expect_equal(length(nms), 13L)
@@ -43,7 +43,7 @@ test_that("MORIE_TPS_REGISTRY exposes the expected 13 categories", {
 })
 
 test_that("every registry entry carries description + primary_date + has_geometry", {
-  skip_on_cran()
+  skip_heavy()
   for (nm in names(MORIE_TPS_REGISTRY)) {
     r <- MORIE_TPS_REGISTRY[[nm]]
     expect_true(is.character(r$description) && nzchar(r$description),
@@ -55,7 +55,7 @@ test_that("every registry entry carries description + primary_date + has_geometr
 })
 
 test_that("morie_tps_list_datasets returns a tidy 3-column data.frame", {
-  skip_on_cran()
+  skip_heavy()
   df <- morie_tps_list_datasets()
   expect_s3_class(df, "data.frame")
   expect_named(df, c("name", "description", "primary_date"))
@@ -65,7 +65,7 @@ test_that("morie_tps_list_datasets returns a tidy 3-column data.frame", {
 })
 
 test_that(".morie_tps_canonical is case-insensitive and errors on bogus names", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(rmorie:::.morie_tps_canonical("assault"),  "Assault")
   expect_identical(rmorie:::.morie_tps_canonical("ASSAULT"),  "Assault")
   expect_identical(rmorie:::.morie_tps_canonical("Assault"),  "Assault")
@@ -74,7 +74,7 @@ test_that(".morie_tps_canonical is case-insensitive and errors on bogus names", 
 })
 
 test_that("morie_tps_data_dir honours the MORIE_TPS_DATA_DIR env override", {
-  skip_on_cran()
+  skip_heavy()
   old <- Sys.getenv("MORIE_TPS_DATA_DIR", unset = NA)
   on.exit({
     if (is.na(old)) Sys.unsetenv("MORIE_TPS_DATA_DIR")
@@ -88,7 +88,7 @@ test_that("morie_tps_data_dir honours the MORIE_TPS_DATA_DIR env override", {
 })
 
 test_that("morie_tps_load_dataset reads a synthetic CSV from a user-supplied path", {
-  skip_on_cran()
+  skip_heavy()
   tmp <- tempfile(fileext = ".csv")
   on.exit(unlink(tmp))
   utils::write.csv(
@@ -111,7 +111,7 @@ test_that("morie_tps_load_dataset reads a synthetic CSV from a user-supplied pat
 # ---------------------------------------------------------------------------
 
 test_that("MORIE_TPS_LAYER_URLS lists 9 ArcGIS REST endpoints", {
-  skip_on_cran()
+  skip_heavy()
   expect_type(MORIE_TPS_LAYER_URLS, "character")
   expect_gte(length(MORIE_TPS_LAYER_URLS), 9L)
   expect_true(all(grepl("^https://", MORIE_TPS_LAYER_URLS)))
@@ -119,13 +119,13 @@ test_that("MORIE_TPS_LAYER_URLS lists 9 ArcGIS REST endpoints", {
 })
 
 test_that("morie_tps_list_categories returns the URL table's keys, sorted", {
-  skip_on_cran()
+  skip_heavy()
   cats <- morie_tps_list_categories()
   expect_identical(cats, sort(names(MORIE_TPS_LAYER_URLS)))
 })
 
 test_that("morie_tps_fetch_category errors on an unknown category", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(
     morie_tps_fetch_category("DEFINITELY_NOT_A_CATEGORY"),
     "Unknown TPS category"
@@ -133,7 +133,7 @@ test_that("morie_tps_fetch_category errors on an unknown category", {
 })
 
 test_that("the ArcGIS helper surfaces a clean install message when httr2 is absent", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("httr2")
   skip_if_not(requireNamespace("httr2", quietly = TRUE),
               "httr2 present; install-message branch not exercisable")
@@ -151,7 +151,7 @@ test_that("the ArcGIS helper surfaces a clean install message when httr2 is abse
 # ---------------------------------------------------------------------------
 
 test_that("MORIE_TPS_SUPPORTED_FORMATS exposes the expected vocabulary", {
-  skip_on_cran()
+  skip_heavy()
   expected <- c("csv", "excel",
                 "geojson", "featurecollection",
                 "kml",
@@ -161,13 +161,13 @@ test_that("MORIE_TPS_SUPPORTED_FORMATS exposes the expected vocabulary", {
 })
 
 test_that("morie_tps_load errors on an unknown format", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_tps_load("Assault", format = "bogus"),
                "unknown format")
 })
 
 test_that("morie_tps_load(csv) reads a synthetic CSV under an MORIE_TPS_DATA_DIR override", {
-  skip_on_cran()
+  skip_heavy()
   tmp <- tempfile("tps_root_")
   dir.create(file.path(tmp, "Assault", "CSV"), recursive = TRUE)
   utils::write.csv(
@@ -191,7 +191,7 @@ test_that("morie_tps_load(csv) reads a synthetic CSV under an MORIE_TPS_DATA_DIR
 })
 
 test_that("excel reader surfaces a clean install message without readxl", {
-  skip_on_cran()
+  skip_heavy()
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "readxl")) FALSE
@@ -206,7 +206,7 @@ test_that("excel reader surfaces a clean install message without readxl", {
 })
 
 test_that("spatial readers surface a clean install message without sf (superseded)", {
-  skip_on_cran()
+  skip_heavy()
   # morie_tps_load resolves the on-disk fixture BEFORE the sf
   # requireNamespace guard fires. With no fixture in the test env,
   # the "no matching file" error short-circuits the sf branch we
@@ -217,7 +217,7 @@ test_that("spatial readers surface a clean install message without sf (supersede
 })
 
 test_that("morie_tps_available_formats always includes csv and is a sorted character", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("readxl")
   skip_if_not_installed("sf")
   out <- morie_tps_available_formats()
@@ -233,7 +233,7 @@ test_that("morie_tps_available_formats always includes csv and is a sorted chara
 })
 
 test_that("morie_tps_list_formats returns an empty vector for an unknown category", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_tps_list_formats("definitely_not_a_category"),
                    character(0))
 })

@@ -8,7 +8,7 @@ test_that("tps_layers returns a 3-row data.frame with name+url", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   df <- morie_datasets_tps_layers()
   expect_s3_class(df, "data.frame")
@@ -18,14 +18,14 @@ test_that("tps_layers returns a 3-row data.frame with name+url", {
 })
 
 test_that("year_where helper builds canonical SQL", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   expect_equal(rmorie:::.morie_dataset_year_where(NULL), "1=1")
   expect_equal(rmorie:::.morie_dataset_year_where(2024), "OCC_YEAR = 2024")
 })
 
 test_that("records_to_df handles empty, list, df", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   expect_equal(nrow(rmorie:::.morie_dataset_records_to_df(NULL)), 0L)
   expect_equal(nrow(rmorie:::.morie_dataset_records_to_df(list())), 0L)
@@ -38,14 +38,14 @@ test_that("records_to_df handles empty, list, df", {
 })
 
 test_that("pkg_csv resolves to NA or a real path", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   p <- rmorie:::.morie_dataset_pkg_csv("__no_such_synth__")
   expect_true(is.na(p) || file.exists(p))
 })
 
 test_that("read_synthetic with absent name + columns returns 0-row frame", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   out <- rmorie:::.morie_dataset_read_synthetic(
     "__never_existing__", "xx", columns = c("a", "b")
@@ -56,7 +56,7 @@ test_that("read_synthetic with absent name + columns returns 0-row frame", {
 })
 
 test_that("read_synthetic with absent name + no columns errors", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   expect_error(
     rmorie:::.morie_dataset_read_synthetic("__never_existing__", "xx"),
@@ -65,7 +65,7 @@ test_that("read_synthetic with absent name + no columns errors", {
 })
 
 test_that("tps_major_crime offline returns data.frame and respects max_features", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   res <- tryCatch(
     suppressWarnings(morie_datasets_tps_major_crime(offline = TRUE, max_features = 5L)),
@@ -77,7 +77,7 @@ test_that("tps_major_crime offline returns data.frame and respects max_features"
 })
 
 test_that("tps_shootings routes to the shootings layer, without a network call", {
-  skip_on_cran()
+  skip_heavy()
   # This test was labelled "(mocked)" and was not: it stubbed
   # .morie_tps_psdp_feature_query, which the dispatch was migrated OFF
   # (see the MHA test's 3TT+ note). The real path is
@@ -106,7 +106,7 @@ test_that("tps_shootings routes to the shootings layer, without a network call",
 })
 
 test_that("tps_homicide routes to the homicide layer, without a network call", {
-  skip_on_cran()
+  skip_heavy()
   # Same stale stub as the shootings test above.
   seen <- NULL
   testthat::local_mocked_bindings(
@@ -128,7 +128,7 @@ test_that("tps_homicide routes to the homicide layer, without a network call", {
 })
 
 test_that("cpads loader returns the synthetic frame when no cache", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   out <- tryCatch(
     suppressWarnings(morie_datasets_cpads()),
@@ -139,7 +139,7 @@ test_that("cpads loader returns the synthetic frame when no cache", {
 })
 
 test_that("otis_a01 offline returns frame; offline=FALSE goes to live CKAN", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   out <- tryCatch(
     suppressWarnings(morie_datasets_otis_a01(offline = TRUE)),
@@ -169,7 +169,7 @@ test_that("otis_a01 offline returns frame; offline=FALSE goes to live CKAN", {
 })
 
 test_that("siu_director_reports returns a data.frame (empty if no deps/network)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   out <- tryCatch(
     suppressWarnings(morie_datasets_siu_director_reports()),
@@ -180,7 +180,7 @@ test_that("siu_director_reports returns a data.frame (empty if no deps/network)"
 })
 
 test_that("siu_report_text offline reads bundled fixture or errors clean", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   res <- tryCatch(
     morie_datasets_siu_report_text(offline = TRUE),
@@ -191,13 +191,13 @@ test_that("siu_report_text offline reads bundled fixture or errors clean", {
 })
 
 test_that("siu_report_text validates argument", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   expect_error(morie_datasets_siu_report_text(), "url")
 })
 
 test_that("siu_report_fields extracts canonical fields from synthetic text", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   text <- paste0(
     "Report 24-OFD-001 incident dated January 5, 2024. ",
@@ -210,7 +210,7 @@ test_that("siu_report_fields extracts canonical fields from synthetic text", {
 })
 
 test_that("chicago_crime offline + year filter respects max_features", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   res <- tryCatch(
     suppressWarnings(morie_datasets_chicago_crime(offline = TRUE, max_features = 3L)),
@@ -221,7 +221,7 @@ test_that("chicago_crime offline + year filter respects max_features", {
 })
 
 test_that("chicago_crime call routes through socrata get (mocked)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   testthat::local_mocked_bindings(
     .morie_dataset_http_json = function(url, ...) {
@@ -236,7 +236,7 @@ test_that("chicago_crime call routes through socrata get (mocked)", {
 })
 
 test_that("nyc_stop_and_frisk offline returns frame", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   res <- tryCatch(
     suppressWarnings(morie_datasets_nyc_stop_and_frisk(offline = TRUE, max_features = 2L)),
@@ -247,7 +247,7 @@ test_that("nyc_stop_and_frisk offline returns frame", {
 })
 
 test_that("nyc_stop_and_frisk rejects unknown years", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   # Year-validation lives in the live (non-offline) branch; post-3LL
   # the default became offline=TRUE so we must opt back in explicitly
@@ -258,7 +258,7 @@ test_that("nyc_stop_and_frisk rejects unknown years", {
 })
 
 test_that("bigquery loader errors without bigrquery installed", {
-  skip_on_cran()
+  skip_heavy()
   testthat::local_mocked_bindings(
 
     requireNamespace = function(package, ...) {
@@ -277,7 +277,7 @@ test_that("bigquery loader errors without bigrquery installed", {
 })
 
 test_that("ckan_search routes through http_json helper (mocked)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   testthat::local_mocked_bindings(
     .morie_dataset_http_json = function(url, ...) {
@@ -292,7 +292,7 @@ test_that("ckan_search routes through http_json helper (mocked)", {
 })
 
 test_that("ckan_package routes through http helpers (mocked)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   testthat::local_mocked_bindings(
     .morie_dataset_http_json = function(url, ...) {
@@ -305,7 +305,7 @@ test_that("ckan_package routes through http helpers (mocked)", {
 })
 
 test_that("nibrs offline frame + year-required path", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   res <- tryCatch(
     suppressWarnings(morie_datasets_nibrs(offline = TRUE, max_features = 2L)),
@@ -317,7 +317,7 @@ test_that("nibrs offline frame + year-required path", {
 })
 
 test_that("namus_missing_persons offline returns frame", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   res <- tryCatch(
     suppressWarnings(morie_datasets_namus_missing_persons(offline = TRUE, max_features = 2L)),
@@ -328,7 +328,7 @@ test_that("namus_missing_persons offline returns frame", {
 })
 
 test_that("nist_rds offline returns frame", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   res <- tryCatch(
     suppressWarnings(morie_datasets_nist_rds(offline = TRUE, max_features = 2L)),
@@ -339,7 +339,7 @@ test_that("nist_rds offline returns frame", {
 })
 
 test_that("http_json errors cleanly with httr2 absent", {
-  skip_on_cran()
+  skip_heavy()
   # 3MMM.11 attempted to mock requireNamespace("httr2") -> FALSE so
   # the no-dep error path runs even when httr2 is installed. But
   # this test was already structurally obsolete: 3VV promoted the

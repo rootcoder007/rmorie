@@ -15,7 +15,7 @@ test_that("LaLonde: PS weighting moves the naive gap toward the exp benchmark", 
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   d <- .qx_file("lalonde_matchit.csv")
   d$treat <- as.integer(d$treat)
   covs <- c("age", "educ", "re74", "re75")
@@ -34,7 +34,7 @@ test_that("LaLonde: PS weighting moves the naive gap toward the exp benchmark", 
 })
 
 test_that("LaLonde: doubly-robust cross-fit PLR is positive-signed", {
-  skip_on_cran()
+  skip_heavy()
   d <- .qx_file("lalonde_matchit.csv")
   fit <- estimate_plr(d, treatment = "treat", outcome = "re78",
                       covariates = c("age", "educ", "re74", "re75"))
@@ -42,7 +42,7 @@ test_that("LaLonde: doubly-robust cross-fit PLR is positive-signed", {
 })
 
 test_that("Basque: synthetic control finds the terrorism GDP gap", {
-  skip_on_cran()
+  skip_heavy()
   d <- .qx_file("basque_synth.csv")
   d <- d[!is.na(d$gdpcap), c("regionname", "year", "gdpcap")]
   # optimize_v = FALSE keeps this replication CI-friendly (the full
@@ -61,7 +61,7 @@ test_that("Basque: synthetic control finds the terrorism GDP gap", {
 })
 
 test_that("Lee (2008) incumbency RDD replicates ~0.08 vote-share jump", {
-  skip_on_cran()
+  skip_heavy()
   d <- .qx_file("lee2008_house.csv")
   # rddtools::house: x = dem margin t, y = dem vote share t+1.
   fit <- morie_rdd(d, outcome = "y", running = "x", cutoff = 0)
@@ -71,7 +71,7 @@ test_that("Lee (2008) incumbency RDD replicates ~0.08 vote-share jump", {
 })
 
 test_that("CigarettesSW: IV price elasticity is negative and gated", {
-  skip_on_cran()
+  skip_heavy()
   d <- .qx_file("cigarettes_sw_aer.csv")
   d <- d[d$year == 1995, ]
   d$lprice <- log(d$price / d$cpi)
@@ -85,7 +85,7 @@ test_that("CigarettesSW: IV price elasticity is negative and gated", {
 })
 
 test_that("UKDriverDeaths ITS finds the 1983 seatbelt-law drop", {
-  skip_on_cran()
+  skip_heavy()
   # Real base-R data (no bundling needed): monthly GB driver deaths
   # 1969-1984; compulsory seatbelts Jan 31, 1983 (Harvey & Durbin
   # 1986 report a substantial immediate reduction).

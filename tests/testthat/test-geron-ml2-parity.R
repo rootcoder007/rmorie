@@ -31,7 +31,7 @@ test_that("ELU, SELU, GELU, leaky ReLU, sigmoid, tanh, swish match Python", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   zs <- c(-2, -1, -0.5, 0, 0.5, 1, 2, 3.5)
   r <- morie_geron_elu(zs, alpha = 1.5)
   expect_close(r$a, A[["elu.a"]])
@@ -74,7 +74,7 @@ test_that("ELU, SELU, GELU, leaky ReLU, sigmoid, tanh, swish match Python", {
 })
 
 test_that("activation derivatives survive central finite differences", {
-  skip_on_cran()
+  skip_heavy()
   # INDEPENDENT ROUTE: the analytic derivative each module returns is
   # checked against (f(z+h) - f(z-h)) / 2h, never against Python.
   h <- 1e-6
@@ -102,7 +102,7 @@ test_that("activation derivatives survive central finite differences", {
 })
 
 test_that("TLU, softmax and softmax scores match Python", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_tlu(matrix(c(1, -2, 0.5, 0.5, -1, -1), nrow = 3, byrow = TRUE),
                        c(1, 1), b = 0.25)
   expect_close(r$y, A[["tlu.y"]])
@@ -131,7 +131,7 @@ test_that("TLU, softmax and softmax scores match Python", {
 })
 
 test_that("Gini and entropy match Python and the hand formula", {
-  skip_on_cran()
+  skip_heavy()
   y <- c(0, 0, 1, 1, 1, 2)
   g <- morie_geron_gini_impurity(y)
   expect_close(g$gini, A[["gini.g"]])
@@ -153,7 +153,7 @@ test_that("Gini and entropy match Python and the hand formula", {
 })
 
 test_that("RMSE and MAE match Python and their own definitions", {
-  skip_on_cran()
+  skip_heavy()
   yt <- c(1, 2, 3, 4)
   yp <- c(1.5, 1, 3.2, 7)
   r <- morie_geron_rmse(yt, yp)
@@ -170,7 +170,7 @@ test_that("RMSE and MAE match Python and their own definitions", {
 })
 
 test_that("linear-model costs, OLS and ridge match Python", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(c(1, 0.5, 1, 1.5, 1, 2.5, 1, 4), nrow = 4, byrow = TRUE)
   y <- c(1, 2.2, 2.8, 4.4)
 
@@ -210,7 +210,7 @@ test_that("linear-model costs, OLS and ridge match Python", {
 })
 
 test_that("L1, max-norm and gradient clipping match Python", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_l1_regularization(c(1.5, -0.3, 0.05, 0), 0.2, skip_bias = TRUE)
   expect_close(r$penalty, A[["l1r.pen"]])
   expect_close(r$gradient, A[["l1r.grad"]])
@@ -240,7 +240,7 @@ test_that("L1, max-norm and gradient clipping match Python", {
 })
 
 test_that("learning-rate schedules match Python", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_lr_exponential(0.1, 0.9, c(0, 1, 5, 10))
   expect_close(r$eta, A[["lrex.eta"]])
   expect_close(r$steps_per_decade, A[["lrex.spd"]])
@@ -261,7 +261,7 @@ test_that("learning-rate schedules match Python", {
 })
 
 test_that("capacity heuristics match Python and layer algebra", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_neurons_per_layer(5, n_layers = 3, n_outputs = 2)
   expect_close(r$width, A[["npl.width"]])
   expect_close(r$n_parameters, A[["npl.params"]])
@@ -305,7 +305,7 @@ test_that("capacity heuristics match Python and layer algebra", {
 })
 
 test_that("standardization, encodings and imputation match Python", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(c(1, 10, 2, 20, 4, 25, 5, 45), nrow = 4, byrow = TRUE)
   r <- morie_geron_standardization(X)
   expect_close(r$X_std, A[["stz.Z"]])
@@ -339,7 +339,7 @@ test_that("standardization, encodings and imputation match Python", {
 })
 
 test_that("Glorot init reproduces the LCG stream draw for draw", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_glorot_init(3, 4, seed = 7)
   expect_close(r$W, A[["xav.W"]])
   expect_close(r$limit, A[["xav.limit"]])
@@ -351,7 +351,7 @@ test_that("Glorot init reproduces the LCG stream draw for draw", {
 })
 
 test_that("optimiser steps match Python", {
-  skip_on_cran()
+  skip_heavy()
   g <- c(0.5, -1.5, 0.25)
   r <- morie_geron_momentum(g, v = c(0.1, 0, -0.2), beta = 0.8, eta = 0.05,
                             theta = c(1, 1, 1))
@@ -382,7 +382,7 @@ test_that("optimiser steps match Python", {
 })
 
 test_that("SGD and mini-batch GD match Python", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(c(1, 0.5, 1, 1.5, 1, 2.5, 1, 4), nrow = 4, byrow = TRUE)
   y <- c(1, 2.2, 2.8, 4.4)
   r <- morie_geron_sgd_update(X, y, c(0.5, 0.8), eta = 0.05, seed = 11)
@@ -412,7 +412,7 @@ test_that("SGD and mini-batch GD match Python", {
 })
 
 test_that("logistic probability, cost and gradient match Python", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(c(1, 0, 1, 1, 1, 2, 1, 3), nrow = 4, byrow = TRUE)
   y <- c(0, 0, 1, 1)
   th <- c(-1.5, 1)
@@ -448,7 +448,7 @@ test_that("logistic probability, cost and gradient match Python", {
 })
 
 test_that("perceptron, Hebb and residual block match Python", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_perceptron(matrix(c(2, 1, 3, 2, -1, -2, -2, -1), nrow = 4,
                                      byrow = TRUE),
                               c(1, 1, 0, 0), eta = 0.5, n_iter = 20)
@@ -477,7 +477,7 @@ test_that("perceptron, Hebb and residual block match Python", {
 })
 
 test_that("positional encoding matches Python and its rotation identity", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_positional_encoding(c(0, 1, 2, 7), 6)
   expect_close(r$pe, A[["pe.pe"]])
   expect_close(r$rotation_check, A[["pe.rot"]], tol = 1e-12)
@@ -488,7 +488,7 @@ test_that("positional encoding matches Python and its rotation identity", {
 })
 
 test_that("value function matches Python and iterated policy evaluation", {
-  skip_on_cran()
+  skip_heavy()
   P <- A[["mdp.P"]]
   R <- A[["mdp.R"]]
   r <- morie_geron_value_function(1, c(0, 1, 0), 0.9, P = P, R = R)
@@ -510,7 +510,7 @@ test_that("value function matches Python and iterated policy evaluation", {
 })
 
 test_that("tabular RL replays draw for draw", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_td_learning(c(0, 0, 0), c(0, 1, 0, 2), c(1, 0, 2, -1),
                               c(1, 2, 1, 2), alpha = 0.5, gamma = 0.9,
                               terminal = c(FALSE, FALSE, FALSE, TRUE))
@@ -552,7 +552,7 @@ test_that("tabular RL replays draw for draw", {
 })
 
 test_that("hard voting matches Python with smallest-label tie-breaking", {
-  skip_on_cran()
+  skip_heavy()
   models <- list(function(X) c(0, 1, 1, 0),
                  function(X) c(0, 1, 0, 0),
                  function(X) c(1, 1, 0, 1))
@@ -571,7 +571,7 @@ test_that("hard voting matches Python with smallest-label tie-breaking", {
 })
 
 test_that("CART and the classification tree match Python", {
-  skip_on_cran()
+  skip_heavy()
   XT <- matrix(c(1, 2, 3, 4), ncol = 1)
   r <- morie_geron_cart_algorithm(XT, c(0, 0, 1, 1))
   expect_close(r$tree$feature, A[["cart.feature"]])
@@ -607,7 +607,7 @@ test_that("CART and the classification tree match Python", {
 })
 
 test_that("softmax cross-entropy, its gradient and the MLP match Python", {
-  skip_on_cran()
+  skip_heavy()
   XE <- matrix(c(1, 0.5, 0.5, 2, -1, 1, 2, -0.5), nrow = 4, byrow = TRUE)
   THE <- matrix(c(0.4, -0.3, 0.1, 0.2, 0.7, -0.6), nrow = 2, byrow = TRUE)
   YE <- c(0, 1, 2, 0)
@@ -654,7 +654,7 @@ test_that("softmax cross-entropy, its gradient and the MLP match Python", {
 })
 
 test_that("confusion matrix matches Python for integer and string labels", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_confusion_matrix_labeled(c(0, 1, 2, 1, 0, 2),
                                             c(0, 2, 2, 1, 0, 1))
   expect_close(r$matrix, A[["cfm.M"]])
@@ -675,7 +675,7 @@ test_that("confusion matrix matches Python for integer and string labels", {
 })
 
 test_that("cross-attention and CLIP match Python", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_cross_attention_report(A[["catt.D"]], A[["catt.E"]],
                                           A[["catt.WQ"]], A[["catt.WK"]],
                                           A[["catt.WV"]])
@@ -701,7 +701,7 @@ test_that("cross-attention and CLIP match Python", {
 })
 
 test_that("classification + localization matches Python", {
-  skip_on_cran()
+  skip_heavy()
   OUTM <- A[["clc.out"]]
   r <- morie_geron_classification_localization(NULL, function(im) OUTM,
                                                gt_class = c(0, 1),
@@ -720,7 +720,7 @@ test_that("classification + localization matches Python", {
 })
 
 test_that("computational graph matches Python and its own finite differences", {
-  skip_on_cran()
+  skip_heavy()
   expr <- list("mul", list("add", "x", 2), list("sin", "y"))
   r <- morie_geron_computational_graph(expr, list(x = 1.5, y = 0.7))
   expect_close(r$value, A[["cgrf.value"]])
@@ -745,7 +745,7 @@ test_that("computational graph matches Python and its own finite differences", {
 })
 
 test_that("character RNN matches Python draw for draw", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_char_rnn("abcabcabc", hidden = 4, epochs = 20, lr = 0.5,
                             seed = 2, generate = 4)
   expect_close(r$loss_history, A[["chrn.hist"]])
@@ -763,7 +763,7 @@ test_that("character RNN matches Python draw for draw", {
 })
 
 test_that("trained conv autoencoder matches Python", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_geron_conv_autoencoder_trained(A[["cae.img"]], filters = 2,
                                             epochs = 15, lr = 0.02, seed = 1,
                                             patch = 2)

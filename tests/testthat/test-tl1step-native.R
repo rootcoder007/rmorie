@@ -22,7 +22,7 @@ test_that("the logit and its inverse round-trip", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   # both are scalar helpers; the module applies them element by element
   p <- c(0.01, 0.3, 0.5, 0.7, 0.99)
   rt <- vapply(p, function(x) .tl1step_expit(.tl1step_logit(x)), numeric(1))
@@ -40,7 +40,7 @@ test_that("the logit and its inverse round-trip", {
 })
 
 test_that("the submodel path is built in both directions and sorted", {
-  skip_on_cran()
+  skip_heavy()
   H <- function(q) rep(1, length(q))
   b <- .tl1step_build_ulfm(Q0, H, YB, eps_max = 1, steps = 20L)
   # one entry per step each way, plus the origin
@@ -67,7 +67,7 @@ test_that("the submodel path is built in both directions and sorted", {
 })
 
 test_that("the submodel is universal and a local one is not", {
-  skip_on_cran()
+  skip_heavy()
   # a clever covariate that genuinely depends on the current fit, so the
   # distinction between recomputing the direction and freezing it bites
   H <- function(q) 1 - 2 * q
@@ -87,7 +87,7 @@ test_that("the submodel is universal and a local one is not", {
 })
 
 test_that("a constant clever covariate targets the mean of the outcome", {
-  skip_on_cran()
+  skip_heavy()
   # the score is mean(Y - Q), so the solution has mean(Q*) = mean(Y)
   H <- function(q) rep(1, length(q))
   r <- .tl1step_one_step_tmle(Q0, H, YB, eps_max = 4, steps = 400L)
@@ -111,7 +111,7 @@ test_that("a constant clever covariate targets the mean of the outcome", {
 })
 
 test_that("a fit that already solves the score equation does not move", {
-  skip_on_cran()
+  skip_heavy()
   # Q constant at the mean of Y with a constant clever covariate gives a
   # score of exactly zero at epsilon = 0
   H <- function(q) rep(1, length(q))
@@ -125,7 +125,7 @@ test_that("a fit that already solves the score equation does not move", {
 })
 
 test_that("the treatment-weighted covariate targets the weighted mean", {
-  skip_on_cran()
+  skip_heavy()
   # the clever covariate for E[Y(1)] is A / g(W); the score equation then
   # sets the weighted average of the residuals to zero
   set.seed(7)
@@ -143,7 +143,7 @@ test_that("the treatment-weighted covariate targets the weighted mean", {
 })
 
 test_that("the one-step and iterative routes agree", {
-  skip_on_cran()
+  skip_heavy()
   # both solve the same efficient score equation, which is the module's
   # premise for replacing the iteration with a single move
   H <- function(q) rep(1, length(q))
@@ -158,7 +158,7 @@ test_that("the one-step and iterative routes agree", {
 })
 
 test_that("a wider path can reach a solution a narrow one cannot", {
-  skip_on_cran()
+  skip_heavy()
   # a fit far from the solution needs room to move; capping epsilon too
   # tightly leaves the score unsolved, and the routine reports the best it
   # reached rather than claiming success

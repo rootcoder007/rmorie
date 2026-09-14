@@ -27,7 +27,7 @@ test_that("the Cholesky root is lower triangular and reconstructs Sigma", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   S <- sim_cov(sim_grid())
   L <- .schab_cholesky_root(S)
   expect_true(all(L[upper.tri(L)] == 0))
@@ -35,7 +35,7 @@ test_that("the Cholesky root is lower triangular and reconstructs Sigma", {
 })
 
 test_that("the spectral root is symmetric and reconstructs Sigma", {
-  skip_on_cran()
+  skip_heavy()
   # Sec 7.1.2: Sigma^(1/2) = P Delta^(1/2) P' is symmetric, so squaring it
   # without a transpose returns Sigma.
   S <- sim_cov(sim_grid())
@@ -45,7 +45,7 @@ test_that("the spectral root is symmetric and reconstructs Sigma", {
 })
 
 test_that("the two roots are genuinely different square roots", {
-  skip_on_cran()
+  skip_heavy()
   S <- sim_cov(sim_grid())
   n <- nrow(S)
   a <- .schab_simulate_unconditional(rep(0, n), S, "cholesky", seed = 1)
@@ -55,7 +55,7 @@ test_that("the two roots are genuinely different square roots", {
 })
 
 test_that("both methods reproduce the target covariance", {
-  skip_on_cran()
+  skip_heavy()
   S <- sim_cov(sim_grid(4))
   n <- nrow(S)
   for (meth in c("cholesky", "spectral")) {
@@ -69,7 +69,7 @@ test_that("both methods reproduce the target covariance", {
 })
 
 test_that("conditional simulation honors the data", {
-  skip_on_cran()
+  skip_heavy()
   # Sec 7.2.2 property (i): Zc(s0) = Z(s0) at the sampled locations, exactly.
   S <- sim_cov(sim_grid())
   n <- nrow(S)
@@ -79,7 +79,7 @@ test_that("conditional simulation honors the data", {
 })
 
 test_that("conditional simulation satisfies the 2 sigma_sk^2 identity", {
-  skip_on_cran()
+  skip_heavy()
   # Sec 7.2.2: E[(Zc(s) - Z(s))^2] = 2 sigma^2_sk. The expectation is over
   # BOTH the field and the simulation, so the truth is redrawn every
   # replicate; holding it fixed measures something else.
@@ -99,7 +99,7 @@ test_that("conditional simulation satisfies the 2 sigma_sk^2 identity", {
 })
 
 test_that("the simulated field matches the Python arm exactly", {
-  skip_on_cran()
+  skip_heavy()
   # The point of the native generator: the FIELD is shared, not just its
   # distribution.
   S <- sim_cov(sim_grid())
@@ -113,7 +113,7 @@ test_that("the simulated field matches the Python arm exactly", {
 })
 
 test_that("the simulation family rejects bad input", {
-  skip_on_cran()
+  skip_heavy()
   S <- sim_cov(sim_grid(3))
   expect_error(.schab_simulate_unconditional(rep(0, 3), S))
   expect_error(.schab_simulate_unconditional(rep(0, nrow(S)), S, "nope"))

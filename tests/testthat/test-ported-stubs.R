@@ -29,7 +29,7 @@ test_that("OTIS SuperLearner-AIPW recovers the simulated ATE", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   df <- .ported_df()
   r <- morie_otis_aipw_superlearner(df, "d", "y", c("x1", "x2"),
                                     n_folds = 3L)
@@ -38,21 +38,21 @@ test_that("OTIS SuperLearner-AIPW recovers the simulated ATE", {
 })
 
 test_that("OTIS PLR-DML recovers the simulated effect", {
-  skip_on_cran()
+  skip_heavy()
   df <- .ported_df()
   r <- morie_otis_plr(df, "d", "y", c("x1", "x2"))
   expect_lt(abs(r$ate - 2), 0.3)
 })
 
 test_that("OTIS PSM caliper matching recovers the ATT", {
-  skip_on_cran()
+  skip_heavy()
   df <- .ported_df()
   r <- morie_otis_psm(df, "d", "y", c("x1", "x2"))
   expect_lt(abs(r$ate - 2), 0.4)
 })
 
 test_that("OTIS PS-subclassification recovers the ATE", {
-  skip_on_cran()
+  skip_heavy()
   df <- .ported_df()
   r <- morie_otis_psm_subclass(df, "d", "y", c("x1", "x2"))
   expect_lt(abs(r$ate - 2), 0.4)
@@ -60,7 +60,7 @@ test_that("OTIS PS-subclassification recovers the ATE", {
 })
 
 test_that("optimal multiframe weights return an interior theta", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   w <- morie_weights_multiframe(runif(50, 1, 3), runif(60, 1, 3),
                                 c(rep(TRUE, 20), rep(FALSE, 30)),
@@ -71,7 +71,7 @@ test_that("optimal multiframe weights return an interior theta", {
 })
 
 test_that("native Turnbull EM is a proper NPMLE on interval-censored data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   L <- round(stats::rexp(60, 0.2), 1)
   R <- L + round(stats::runif(60, 0.5, 3), 1)
@@ -85,7 +85,7 @@ test_that("native Turnbull EM is a proper NPMLE on interval-censored data", {
 })
 
 test_that("native Bayesian AM recovers stimulus ordering", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   zeta_t <- seq(-2, 2, length.out = 6)
   Z <- t(replicate(40, 0.5 + 1.2 * zeta_t + rnorm(6, sd = 0.4)))
@@ -95,7 +95,7 @@ test_that("native Bayesian AM recovers stimulus ordering", {
 })
 
 test_that("native Bayesian MDS recovers the distance structure", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   Xt <- matrix(rnorm(20), 10, 2)
   Dt <- as.matrix(stats::dist(Xt))
@@ -106,7 +106,7 @@ test_that("native Bayesian MDS recovers the distance structure", {
 })
 
 test_that("native Bayesian unfolding returns finite configurations", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(5)
   P <- matrix(stats::runif(80, 1, 9), 20, 4)
   f <- .morie_sv_bayes_unfold(P, n_dims = 2L, n_samples = 150L,
@@ -116,7 +116,7 @@ test_that("native Bayesian unfolding returns finite configurations", {
 })
 
 test_that("native CJR IRT recovers latent ideal-point ordering", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(6)
   th <- rnorm(40)
   b <- stats::runif(12, 0.8, 1.6)
@@ -130,7 +130,7 @@ test_that("native CJR IRT recovers latent ideal-point ordering", {
 })
 
 test_that("native ordinal IRT recovers latent ideal-point ordering", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(7)
   th <- rnorm(40)
   b <- stats::runif(12, 0.8, 1.6)

@@ -13,7 +13,7 @@ test_that("optional-package guards stop() when the package is absent", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   pkgs <- c(
     "dbscan", "rpart", "caret", "glmnet", "pROC", "randomForest",
     "e1071", "Rtsne", "signal", "gbm", "xgboost"
@@ -50,7 +50,7 @@ test_that("optional-package guards stop() when the package is absent", {
 })
 
 test_that(".morie_sha256_hex uses digest (Imports) — FIPS 180-2 vector", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(
     rmorie:::.morie_sha256_hex("abc"),
     "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
@@ -58,7 +58,7 @@ test_that(".morie_sha256_hex uses digest (Imports) — FIPS 180-2 vector", {
 })
 
 test_that("jsonlite-dependent entrypoints stop without jsonlite", {
-  skip_on_cran()
+  skip_heavy()
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) !identical(package, "jsonlite"),
     .package = "base"
@@ -77,7 +77,7 @@ test_that("jsonlite-dependent entrypoints stop without jsonlite", {
 # ---- internal helpers: Horowitz / Ghosal / time-series -------------------
 
 test_that("Horowitz internal helpers cover their edge branches", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(rmorie:::.hrz_silverman(5), 1.0) # n < 2
   expect_true(rmorie:::.hrz_silverman(rep(3, 8)) > 0) # sigma <= 0
   expect_true(is.numeric(rmorie:::.hrz_gauss_kernel(0.3)))
@@ -86,19 +86,19 @@ test_that("Horowitz internal helpers cover their edge branches", {
 })
 
 test_that(".gh_haar_dwt zero-pads a non-power-of-two input", {
-  skip_on_cran()
+  skip_heavy()
   expect_true(is.list(rmorie:::.gh_haar_dwt(c(1, 2, 3))) ||
     is.numeric(rmorie:::.gh_haar_dwt(c(1, 2, 3))))
 })
 
 test_that("morie_grm_vanraden guards a zero allele-variance denominator", {
-  skip_on_cran()
+  skip_heavy()
   g <- rmorie:::morie_grm_vanraden(matrix(0L, 6, 4)) # denom <= 0
   expect_false(is.null(g))
 })
 
 test_that(".morie_beta_weights normalises MIDAS weights", {
-  skip_on_cran()
+  skip_heavy()
   w <- rmorie:::.morie_beta_weights(1, 5, 6)
   expect_length(w, 6)
 })
@@ -106,7 +106,7 @@ test_that(".morie_beta_weights normalises MIDAS weights", {
 # ---- entheo align / binding / san edge paths -----------------------------
 
 test_that("entheo align/binding/san cover empty + short-frame branches", {
-  skip_on_cran()
+  skip_heavy()
   expect_type(rmorie:::.entheo_align(numeric(0), numeric(0)), "list") # n == 0
   al <- rmorie:::.entheo_align(rnorm(10), rnorm(8)) # step <= 1
   expect_equal(length(al$e), length(al$f))
@@ -121,7 +121,7 @@ test_that("entheo align/binding/san cover empty + short-frame branches", {
 # ---- data_access remaining branches --------------------------------------
 
 test_that("data_access: download ext fallback + remaining format switch", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("readxl")
   expect_equal(rmorie:::.morie_detect_format("file:///x/y.tsv"), "tsv")
   expect_equal(rmorie:::.morie_detect_format("file:///x/y.xls"), "xlsx")
@@ -134,7 +134,7 @@ test_that("data_access: download ext fallback + remaining format switch", {
 # ---- database remaining branches -----------------------------------------
 
 test_that("morie_builtin_db / .fuzzy_match_key cover their tails", {
-  skip_on_cran()
+  skip_heavy()
   testthat::local_mocked_bindings(
     system.file = function(...) "",
     .package = "base"
@@ -146,7 +146,7 @@ test_that("morie_builtin_db / .fuzzy_match_key cover their tails", {
 })
 
 test_that("morie_load_dataset covers the local-xlsx, CKAN and final stop", {
-  skip_on_cran()
+  skip_heavy()
   cat <- morie_dataset_catalog()
   # CKAN datastore branch: a key with a ckan_resource_id, no local file
   ck <- cat$key[nzchar(cat$ckan_resource_id) & !file.exists(cat$local_path)]
@@ -167,7 +167,7 @@ test_that("morie_load_dataset covers the local-xlsx, CKAN and final stop", {
 })
 
 test_that("morie_download_bootstrap covers the unknown-key + CKAN-error path", {
-  skip_on_cran()
+  skip_heavy()
   testthat::local_mocked_bindings(
     morie_fetch_ckan = function(...) stop("simulated CKAN failure"),
     .package = "rmorie"
@@ -180,7 +180,7 @@ test_that("morie_download_bootstrap covers the unknown-key + CKAN-error path", {
 # ---- frns: metrics + predpol + temporal ----------------------------------
 
 test_that("fairness metrics cover the remaining interpretation branches", {
-  skip_on_cran()
+  skip_heavy()
   # no adverse impact -> the >= 0.80 interpretation line
   ok <- morie_fairness_disparate_impact(c(1, 1, 1, 0, 1, 1, 1, 0),
     c(rep("A", 4), rep("B", 4)),
@@ -202,12 +202,12 @@ test_that("fairness metrics cover the remaining interpretation branches", {
 })
 
 test_that(".frns_worst_abs_named returns NA on an all-non-finite input", {
-  skip_on_cran()
+  skip_heavy()
   expect_true(is.na(rmorie:::.frns_worst_abs_named(c(a = NA, b = Inf))))
 })
 
 test_that("morie_predpol_calibration_audit covers drop-to-<2, calibration tiers", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(20)
   ar <- paste0("A", 1:14)
   g <- rep(c("x", "y"), 7)
@@ -229,14 +229,14 @@ test_that("morie_predpol_calibration_audit covers drop-to-<2, calibration tiers"
 })
 
 test_that("morie_predpol_score_disparity covers the single-group-after-drop stop", {
-  skip_on_cran()
+  skip_heavy()
   sc <- c(rnorm(10, 3), rep(NaN, 10))
   gp <- c(rep("hi", 10), rep("lo", 10))
   expect_error(morie_predpol_score_disparity(sc, gp), "two groups")
 })
 
 test_that("morie_predpol_temporal_audit produces its instability interpretation", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(21)
   periods <- rep(1:4, each = 20)
   city <- rep(rep(c("C1", "C2"), each = 10), 4)
@@ -251,7 +251,7 @@ test_that("morie_predpol_temporal_audit produces its instability interpretation"
 # ---- hawkes remaining branches -------------------------------------------
 
 test_that("hawkes: lomax/gamma degenerate kernels + nll guards", {
-  skip_on_cran()
+  skip_heavy()
   expect_null(rmorie:::.hawkes_kernel_funs("lomax", c(0, 0.5, 1.0, 1)))
   expect_null(rmorie:::.hawkes_kernel_funs("gamma", c(0, 0.5, 0, 1)))
   set.seed(22)
@@ -268,7 +268,7 @@ test_that("hawkes: lomax/gamma degenerate kernels + nll guards", {
 # ---- study_core: data-wrangling output_dir block -------------------------
 
 test_that(".run_data_wrangling_module_internal writes into a project tree", {
-  skip_on_cran()
+  skip_heavy()
   proj <- tempfile("proj-")
   dir.create(file.path(proj, "docs", "source"),
     recursive = TRUE
@@ -286,7 +286,7 @@ test_that(".run_data_wrangling_module_internal writes into a project tree", {
 # ---- C++ guard branches --------------------------------------------------
 
 test_that("Rcpp kernels hit their argument guards", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(
     rmorie:::morie_normal_pdf_cpp(c(0, 1), 0, -1),
     "sd must be positive"
@@ -297,7 +297,7 @@ test_that("Rcpp kernels hit their argument guards", {
 # ---- inference / inspector ----------------------------------------------
 
 test_that("morie_chi_square_test runs with an explicit expected vector", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_chi_square_test(c(20, 30, 50), expected = c(0.2, 0.3, 0.5))
   expect_true(is.list(r) || inherits(r, "htest") || is.numeric(r$statistic))
 })
@@ -307,7 +307,7 @@ test_that("morie_chi_square_test runs with an explicit expected vector", {
 # tryCatch keeps the wave green irrespective of the numeric outcome.
 
 test_that("long-tail degenerate-input guard branches execute", {
-  skip_on_cran()
+  skip_heavy()
   call <- function(expr) {
     invisible(tryCatch(expr,
       error = function(e) NULL,
@@ -389,7 +389,7 @@ test_that("long-tail degenerate-input guard branches execute", {
 })
 
 test_that("workflow + synthetic + module-resolver guard branches execute", {
-  skip_on_cran()
+  skip_heavy()
   call <- function(expr) invisible(tryCatch(expr, error = function(e) NULL))
   expect_error(rmorie:::validate_workflow_map(c(a = "")), "empty")
   expect_error(
@@ -407,7 +407,7 @@ test_that("workflow + synthetic + module-resolver guard branches execute", {
 # ---- mrm + siu remaining branches ----------------------------------------
 
 test_that("mrm OTIS / TPS / SIU degenerate branches execute", {
-  skip_on_cran()
+  skip_heavy()
   call <- function(expr) {
     invisible(tryCatch(expr,
       error = function(e) NULL,
@@ -439,6 +439,6 @@ test_that("mrm OTIS / TPS / SIU degenerate branches execute", {
 })
 
 test_that("morie_sample stops cleanly on an unknown sample name", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_sample("not-a-sample"))
 })

@@ -159,7 +159,7 @@ test_that("morie_datasets_load_by_key with mocked HTTP routes through Socrata la
 # ============================================================
 
 test_that("LIVE: morie_datasets_nyc_nypd_arrests_ytd(offline=FALSE) returns rows from real Socrata", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_network("data.cityofnewyork.us")
   df <- tryCatch(
     morie_datasets_nyc_nypd_arrests_ytd(offline = FALSE,

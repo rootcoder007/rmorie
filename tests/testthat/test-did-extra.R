@@ -8,7 +8,7 @@ test_that("morie_did_staggered estimates staggered-adoption ATT", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_panel(n_units = 40L, n_periods = 6L,
                         tau = 0.6, seed = 2L)
   out <- tryCatch(
@@ -22,7 +22,7 @@ test_that("morie_did_staggered estimates staggered-adoption ATT", {
 })
 
 test_that("morie_did_synthetic returns synthetic-control fit", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_panel(n_units = 30L, n_periods = 8L,
                         tau = 0.5, seed = 3L)
   out <- tryCatch(
@@ -36,7 +36,7 @@ test_that("morie_did_synthetic returns synthetic-control fit", {
 })
 
 test_that("morie_did_placebo_test_group returns per-group placebo coefs", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 300, tau = 0.5, seed = 4L)
   df$g <- sample(letters[1:4], nrow(df), replace = TRUE)
   out <- tryCatch(
@@ -52,7 +52,7 @@ test_that("morie_did_placebo_test_group returns per-group placebo coefs", {
 })
 
 test_that("morie_did_heterogeneous returns CATE by moderator quintile", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 400, tau = 0.5, seed = 5L)
   df$m <- stats::rnorm(nrow(df))
   out <- tryCatch(
@@ -67,7 +67,7 @@ test_that("morie_did_heterogeneous returns CATE by moderator quintile", {
 })
 
 test_that("morie_did_chaisemartin_dhaultfoeuille returns de Chaisemartin-D'Haultfoeuille DID-M", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_panel(n_units = 30L, n_periods = 6L,
                         tau = 0.5, seed = 6L)
   out <- tryCatch(
@@ -83,7 +83,7 @@ test_that("morie_did_chaisemartin_dhaultfoeuille returns de Chaisemartin-D'Hault
 })
 
 test_that("morie_did_sensitivity_analysis sweeps over unobserved-confounding parameters", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 300, tau = 0.5, seed = 7L)
   out <- tryCatch(
     morie_did_sensitivity_analysis(df, "y", "d", "post"),
@@ -97,7 +97,7 @@ test_that("morie_did_sensitivity_analysis sweeps over unobserved-confounding par
 })
 
 test_that("morie_did_diagnostics returns DID assumptions summary", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 300, tau = 0.5, seed = 8L)
   out <- tryCatch(
     morie_did_diagnostics(df, "y", "d", "post"),

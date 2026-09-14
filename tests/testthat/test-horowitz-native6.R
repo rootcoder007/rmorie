@@ -33,7 +33,7 @@ test_that("morie_transform_T_F matches morie.fn.hrzhot", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   f <- hrz6_fixture()
   o <- morie_transform_T_F(f$x, f$y, c(0.5, 0.5), f$beta)
   expect_equal(o$T_hat[1], -6.141353387948381, tolerance = 1e-8)
@@ -51,7 +51,7 @@ test_that("morie_transform_T_F matches morie.fn.hrzhot", {
 })
 
 test_that("morie_transform_T_F imposes the scale normalisation", {
-  skip_on_cran()
+  skip_heavy()
   f <- hrz6_fixture()
   a <- morie_transform_T_F(f$x, f$y, 0.6, f$beta)$beta
   b <- morie_transform_T_F(f$x, f$y, 0.6, 2 * f$beta)$beta
@@ -64,7 +64,7 @@ test_that("morie_transform_T_F imposes the scale normalisation", {
 })
 
 test_that("morie_transform_asymptotics matches Python and reads HT9", {
-  skip_on_cran()
+  skip_heavy()
   f <- hrz6_fixture()
   a <- morie_transform_asymptotics(f$x, f$y, c(200^(-1 / 3), 200^(-1 / 10)))
   expect_equal(a$rate, 0.07071067811865475, tolerance = 1e-12)
@@ -82,7 +82,7 @@ test_that("morie_transform_asymptotics matches Python and reads HT9", {
 })
 
 test_that("morie_chen_transform matches morie.fn.hrzchet", {
-  skip_on_cran()
+  skip_heavy()
   f <- hrz6_fixture()
   c6 <- morie_chen_transform(f$x, f$y, beta_hat = f$beta)
   expect_equal(c6$T_hat[1], -1.7228918439054448, tolerance = 1e-9)
@@ -98,7 +98,7 @@ test_that("morie_chen_transform matches morie.fn.hrzchet", {
 })
 
 test_that("morie_baseline_hazard matches morie.fn.hrzlam", {
-  skip_on_cran()
+  skip_heavy()
   f <- hrz6_fixture()
   n <- f$n
   tt <- abs(f$z[(3 * n + 1):(4 * n)]) + 0.05
@@ -118,7 +118,7 @@ test_that("morie_baseline_hazard matches morie.fn.hrzlam", {
 })
 
 test_that("morie_transform_prediction matches Python", {
-  skip_on_cran()
+  skip_heavy()
   yg <- seq(0.5, 8, length.out = 60)
   ug <- seq(-4, 4, length.out = 81)
   p <- morie_transform_prediction(c(0.3, 0.2), 2, log(yg), stats::plogis(ug),
@@ -136,7 +136,7 @@ test_that("morie_transform_prediction matches Python", {
 })
 
 test_that("morie_transform_prediction validates its inputs", {
-  skip_on_cran()
+  skip_heavy()
   yg <- seq(0.5, 8, length.out = 40)
   ug <- seq(-4, 4, length.out = 41)
   b <- c(1, -0.5)

@@ -50,7 +50,7 @@ test_that("morie_did_2x2 returns expected fields on simple DGP", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2()
   res <- morie_did_2x2(df, "y", "d", "post")
   expect_true(all(c("estimate", "std_error", "t_stat", "p_value",
@@ -63,14 +63,14 @@ test_that("morie_did_2x2 returns expected fields on simple DGP", {
 })
 
 test_that("morie_did_2x2 recovers true effect tau = 0.5", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 800, tau = 0.5, seed = 2)
   res <- morie_did_2x2(df, "y", "d", "post")
   expect_equal(res$estimate, 0.5, tolerance = 0.2)
 })
 
 test_that("morie_did_2x2 handles covariates", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2()
   res <- morie_did_2x2(df, "y", "d", "post", covariates = "x")
   expect_true(is.finite(res$estimate))
@@ -78,7 +78,7 @@ test_that("morie_did_2x2 handles covariates", {
 })
 
 test_that("morie_did_2x2 drops NA rows", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 100)
   df$y[1:5] <- NA
   res <- morie_did_2x2(df, "y", "d", "post")
@@ -91,7 +91,7 @@ test_that("morie_did_2x2 drops NA rows", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_repeated_cross_section works with weights", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2()
   df$w <- runif(nrow(df), 0.5, 2)
   res <- morie_did_repeated_cross_section(df, "y", "d", "post",
@@ -106,7 +106,7 @@ test_that("morie_did_repeated_cross_section works with weights", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_panel_fe recovers tau on panel DGP", {
-  skip_on_cran()
+  skip_heavy()
   # Module 14: native TWFE engine.
   df <- make_did_panel(n_units = 40, n_periods = 6, tau = 0.7, seed = 3)
   res <- morie_did_panel_fe(df, "y", "d", "unit", "time")
@@ -121,7 +121,7 @@ test_that("morie_did_panel_fe recovers tau on panel DGP", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_event_study returns coefficients with reference period", {
-  skip_on_cran()
+  skip_heavy()
   # Module 14: native event-study engine.
   df <- make_did_panel()
   res <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
@@ -140,7 +140,7 @@ test_that("morie_did_event_study returns coefficients with reference period", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_test_parallel_trends returns expected fields", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_panel()
   # build a binary treatment col & restrict to pre-treatment for the test
   df$treat <- as.integer(is.finite(df$treat_time))
@@ -157,7 +157,7 @@ test_that("morie_did_test_parallel_trends returns expected fields", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_parallel_trends_data returns group-by-time means", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_panel()
   df$treat <- as.integer(is.finite(df$treat_time))
   out <- morie_did_parallel_trends_data(df, "y", "treat", "time")
@@ -173,7 +173,7 @@ test_that("morie_did_parallel_trends_data returns group-by-time means", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_group_time_att returns a data frame with att", {
-  skip_on_cran()
+  skip_heavy()
   # Module 14: native Callaway-Sant'Anna engine.
   df <- make_did_panel(n_units = 50, n_periods = 6, tau = 0.6, seed = 4)
   out <- tryCatch(
@@ -187,7 +187,7 @@ test_that("morie_did_group_time_att returns a data frame with att", {
 })
 
 test_that("morie_did_aggregate_gt_att overall summary returns one-row df", {
-  skip_on_cran()
+  skip_heavy()
   fake_gt <- data.frame(cohort = c(4, 4, 4),
                         time = c(4, 5, 6),
                         att = c(0.5, 0.6, 0.7),
@@ -199,7 +199,7 @@ test_that("morie_did_aggregate_gt_att overall summary returns one-row df", {
 })
 
 test_that("morie_did_aggregate_gt_att event_time aggregation splits by rel time", {
-  skip_on_cran()
+  skip_heavy()
   fake_gt <- data.frame(cohort = c(4, 4, 4, 5, 5),
                         time = c(4, 5, 6, 5, 6),
                         att = c(0.5, 0.6, 0.7, 0.4, 0.5),
@@ -215,7 +215,7 @@ test_that("morie_did_aggregate_gt_att event_time aggregation splits by rel time"
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_doubly_robust returns finite ATT", {
-  skip_on_cran()
+  skip_heavy()
   # Module 14: native Sant'Anna-Zhao engine.
   df <- make_did_2x2(n = 300)
   res <- morie_did_doubly_robust(df, "y", "d", "post",
@@ -231,7 +231,7 @@ test_that("morie_did_doubly_robust returns finite ATT", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_triple_difference returns finite estimate", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   n <- 400
   d <- rbinom(n, 1, 0.5)
@@ -250,7 +250,7 @@ test_that("morie_did_triple_difference returns finite estimate", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_bacon_decomposition returns components and overall", {
-  skip_on_cran()
+  skip_heavy()
   # Module 14: native Goodman-Bacon engine.
   # bacondecomp::bacon requires (a) weakly-increasing treatment per
   # unit and (b) genuine staggered timing (>=2 treatment cohorts) to
@@ -287,7 +287,7 @@ test_that("morie_did_bacon_decomposition returns components and overall", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_wild_cluster_bootstrap returns finite p", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 300)
   res <- morie_did_wild_cluster_bootstrap(
     df, "y", "d", "post", cluster = "clust",
@@ -303,7 +303,7 @@ test_that("morie_did_wild_cluster_bootstrap returns finite p", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_continuous_treatment estimates dose effect", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   n <- 300
   dose <- runif(n, 0, 3)
@@ -321,7 +321,7 @@ test_that("morie_did_continuous_treatment estimates dose effect", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_fuzzy returns first-stage F and estimate", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   n <- 400
   z <- rbinom(n, 1, 0.5)
@@ -340,7 +340,7 @@ test_that("morie_did_fuzzy returns first-stage F and estimate", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_placebo_test_time returns one row per placebo", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   df <- data.frame(
     y = rnorm(500), d = rbinom(500, 1, 0.5),
@@ -356,7 +356,7 @@ test_that("morie_did_placebo_test_time returns one row per placebo", {
 })
 
 test_that("morie_did_placebo_test_outcome returns one row per placebo outcome", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2()
   df$y_pl1 <- rnorm(nrow(df))
   df$y_pl2 <- rnorm(nrow(df))
@@ -367,7 +367,7 @@ test_that("morie_did_placebo_test_outcome returns one row per placebo outcome", 
 })
 
 test_that("morie_did_placebo_test_group returns one row per group", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2()
   df$grp <- sample(c("A", "B"), nrow(df), replace = TRUE)
   out <- morie_did_placebo_test_group(df, "y", "d", "post",
@@ -383,7 +383,7 @@ test_that("morie_did_placebo_test_group returns one row per group", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_heterogeneous returns one row per stratum", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 600)
   df$mod <- rnorm(nrow(df))
   out <- morie_did_heterogeneous(df, "y", "d", "post",
@@ -398,7 +398,7 @@ test_that("morie_did_heterogeneous returns one row per stratum", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_chaisemartin_dhaultfoeuille returns a finite estimate", {
-  skip_on_cran()
+  skip_heavy()
   # Module 14: native DID-M engine.
   df <- make_did_panel(n_units = 30, n_periods = 5, tau = 0.5, seed = 9)
   res <- morie_did_chaisemartin_dhaultfoeuille(
@@ -415,7 +415,7 @@ test_that("morie_did_chaisemartin_dhaultfoeuille returns a finite estimate", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_sensitivity_analysis returns one row per delta", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 300)
   out <- morie_did_sensitivity_analysis(df, "y", "d", "post",
                                         delta_range = c(0, 0.5, 1))
@@ -434,7 +434,7 @@ test_that("morie_did_sensitivity_analysis returns one row per delta", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_did_diagnostics returns sample sizes and outcome stats", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2()
   res <- morie_did_diagnostics(df, "y", "d", "post", covariates = "x")
   expect_true(all(c("sample_sizes", "outcome_stats",

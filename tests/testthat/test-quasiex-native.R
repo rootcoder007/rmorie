@@ -23,7 +23,7 @@ test_that("morie_did auto-detects staggered adoption and warns", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   df <- .qx_panel(staggered = TRUE)
   expect_warning(fit <- morie_did(df, "y", "id", "t", "g"),
                  "Staggered adoption")
@@ -35,7 +35,7 @@ test_that("morie_did auto-detects staggered adoption and warns", {
 })
 
 test_that("morie_did uses TWFE for uniform timing (no warning)", {
-  skip_on_cran()
+  skip_heavy()
   df <- .qx_panel(staggered = FALSE)
   expect_no_warning(fit <- morie_did(df, "y", "id", "t", "g"))
   expect_match(fit$method, "TWFE")
@@ -44,7 +44,7 @@ test_that("morie_did uses TWFE for uniform timing (no warning)", {
 })
 
 test_that("morie_did staggered overall ATT matches did::att_gt aggregation", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("did")
   df <- .qx_panel(staggered = TRUE, n_id = 90L)
   df$g_did <- ifelse(is.na(df$g), 0L, df$g)
@@ -60,7 +60,7 @@ test_that("morie_did staggered overall ATT matches did::att_gt aggregation", {
 })
 
 test_that("morie_iv_2sls matches AER::ivreg on strong instruments", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   n <- 400
   z <- rnorm(n)
@@ -82,7 +82,7 @@ test_that("morie_iv_2sls matches AER::ivreg on strong instruments", {
 })
 
 test_that("morie_iv_2sls refuses the point estimate on weak instruments", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(12)
   n <- 300
   z <- rnorm(n)
@@ -99,7 +99,7 @@ test_that("morie_iv_2sls refuses the point estimate on weak instruments", {
 })
 
 test_that("morie_rdd bundles estimate + manipulation + placebo (sharp)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(13)
   n <- 800
   x <- runif(n, -1, 1)
@@ -116,7 +116,7 @@ test_that("morie_rdd bundles estimate + manipulation + placebo (sharp)", {
 })
 
 test_that("morie_rdd sharp estimate is near rdrobust's conventional", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("rdrobust")
   set.seed(14)
   n <- 1000
@@ -130,7 +130,7 @@ test_that("morie_rdd sharp estimate is near rdrobust's conventional", {
 })
 
 test_that("morie_rdd fuzzy path routes and scales the jump", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(15)
   n <- 900
   x <- runif(n, -1, 1)

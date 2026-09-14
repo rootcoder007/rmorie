@@ -25,7 +25,7 @@ test_that("the penalty path is reported at its default grid", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   d <- sim(200, 2)
   r <- shrinkage_msm(d$y, d$A, d$L)
   expect_length(r$path, 7L)
@@ -53,7 +53,7 @@ test_that("the penalty path is reported at its default grid", {
 })
 
 test_that("no penalty is an ordinary logistic propensity model", {
-  skip_on_cran()
+  skip_heavy()
   d <- sim(300, 3)
   r <- shrinkage_msm(d$y, d$A, d$L, lam = 0)
   # With no penalty each treatment model is an ordinary logistic
@@ -84,7 +84,7 @@ test_that("no penalty is an ordinary logistic propensity model", {
 })
 
 test_that("a large penalty shrinks the propensity to the sample proportion", {
-  skip_on_cran()
+  skip_heavy()
   d <- sim(300, 5)
   small <- shrinkage_msm(d$y, d$A, d$L, lam = 0)
   big <- shrinkage_msm(d$y, d$A, d$L, lam = 1e8)
@@ -104,7 +104,7 @@ test_that("a large penalty shrinks the propensity to the sample proportion", {
 })
 
 test_that("weighting reduces confounding bias", {
-  skip_on_cran()
+  skip_heavy()
   # with treatment assigned on a covariate that also drives the outcome,
   # the unweighted regression is biased for the true effect of two and the
   # weighted one should be closer
@@ -121,7 +121,7 @@ test_that("weighting reduces confounding bias", {
 })
 
 test_that("a covariate history may be absent", {
-  skip_on_cran()
+  skip_heavy()
   d <- sim(200, 11)
   # with nothing to condition on, the propensity at each time is the
   # marginal proportion, so the weight is the product of two marginal
@@ -138,7 +138,7 @@ test_that("a covariate history may be absent", {
 })
 
 test_that("shrinkage_msm validates its arguments", {
-  skip_on_cran()
+  skip_heavy()
   d <- sim(80, 13)
   expect_error(shrinkage_msm(d$y, d$A, d$L, lam = -1),
                "lam must be non-negative")

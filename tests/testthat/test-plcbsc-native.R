@@ -30,7 +30,7 @@ test_that("the simplex projection lands on the simplex", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   for (v in list(c(0.2, 0.5, 0.9), c(-1, 2, 3), c(5, 5, 5), c(-3, -2, -1),
                  c(1, 0, 0))) {
     p <- .plcbsc_simplex_project(v)
@@ -54,7 +54,7 @@ test_that("the simplex projection lands on the simplex", {
 })
 
 test_that("an exact convex combination is recovered", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case()
   x1 <- d$y1[seq_len(d$t0)]
   xd <- lapply(d$donors, function(o) o[seq_len(d$t0)])
@@ -89,7 +89,7 @@ test_that("an exact convex combination is recovered", {
 })
 
 test_that("gaps and errors are their formulas", {
-  skip_on_cran()
+  skip_heavy()
   y1 <- c(5, 6, 7)
   don <- list(c(1, 2, 3), c(9, 8, 7))
   w <- c(0.5, 0.5)
@@ -105,7 +105,7 @@ test_that("gaps and errors are their formulas", {
 })
 
 test_that("the effect statistic averages the post-period gaps", {
-  skip_on_cran()
+  skip_heavy()
   gaps <- c(0, 0, 0, 2, 4, 6)
   expect_equal(.plcbsc_effect(gaps, 3, "effect"), mean(c(2, 4, 6)))
   # the ratio statistic compares post-period error to pre-period error
@@ -124,7 +124,7 @@ test_that("the effect statistic averages the post-period gaps", {
 })
 
 test_that("a known treatment effect is recovered with a small p-value", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case(effect = 8)
   r <- morie_plcbsc(d$y1, d$donors, d$t0, statistic = "effect",
                     max_iter = 20000, tol = 1e-14)
@@ -152,7 +152,7 @@ test_that("a known treatment effect is recovered with a small p-value", {
 })
 
 test_that("no treatment effect gives no significant estimate", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case(effect = 0)
   r <- morie_plcbsc(d$y1, d$donors, d$t0, statistic = "effect",
                     max_iter = 20000, tol = 1e-14)
@@ -166,7 +166,7 @@ test_that("no treatment effect gives no significant estimate", {
 })
 
 test_that("the permutation p-value cannot go below one over J plus one", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case(effect = 50)
   r <- morie_plcbsc(d$y1, d$donors, d$t0, max_iter = 5000)
   # five donors means six units in the permutation, so the floor is 1/6
@@ -179,7 +179,7 @@ test_that("the permutation p-value cannot go below one over J plus one", {
 })
 
 test_that("the ratio statistic is also available", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case(effect = 8)
   r <- morie_plcbsc(d$y1, d$donors, d$t0, statistic = "rmspe_ratio",
                     max_iter = 20000, tol = 1e-14)
@@ -190,7 +190,7 @@ test_that("the ratio statistic is also available", {
 })
 
 test_that("separate predictors may be supplied", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case(effect = 5)
   # match on the pre-period means rather than the whole pre-period path
   x1 <- mean(d$y1[seq_len(d$t0)])
@@ -203,7 +203,7 @@ test_that("separate predictors may be supplied", {
 })
 
 test_that("the in-time placebo moves the intervention date", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case(effect = 8)
   # pretending the intervention happened earlier, while no effect was
   # present then, should find little
@@ -214,7 +214,7 @@ test_that("the in-time placebo moves the intervention date", {
 })
 
 test_that("plcbsc validates its arguments", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_case()
   expect_error(morie_plcbsc(d$y1, list(), d$t0), "donor pool is empty")
   expect_error(morie_plcbsc(d$y1, list(c(1, 2)), d$t0),

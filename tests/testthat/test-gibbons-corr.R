@@ -14,7 +14,7 @@ test_that("the exact null distribution of S is the inversion count", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   # Enumerate every permutation and count its inversions. The number of
   # permutations of n with k inversions (the Mahonian numbers) IS the
   # null distribution of Kendall's S, so this is the definition rather
@@ -67,7 +67,7 @@ test_that("the exact null distribution of S is the inversion count", {
 })
 
 test_that("the tau trend test matches Kendall's tau against the index", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(61)
   for (i in 1:5) {
     y <- stats::rnorm(14) + i * seq_len(14) / 14
@@ -117,7 +117,7 @@ test_that("the tau trend test matches Kendall's tau against the index", {
 })
 
 test_that("Spearman's rho matches stats::cor and its shortcut", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(62)
   x <- stats::rnorm(20)
   y <- stats::rnorm(20)
@@ -154,7 +154,7 @@ test_that("Spearman's rho matches stats::cor and its shortcut", {
 })
 
 test_that("the zero-correlation tests are their two approximations", {
-  skip_on_cran()
+  skip_heavy()
   for (n in c(10L, 30L)) {
     for (r in c(-0.6, 0, 0.35, 0.9)) {
       h <- rmorie:::Rhotest(r, n)
@@ -196,7 +196,7 @@ test_that("the zero-correlation tests are their two approximations", {
 })
 
 test_that("the normal-scores correlation uses the expected order statistics", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(64)
   n <- 12
   x <- stats::rnorm(n)
@@ -237,7 +237,7 @@ test_that("the normal-scores correlation uses the expected order statistics", {
 })
 
 test_that("the partial tau is built from the concordance table", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(65)
   n <- 15
   z <- stats::rnorm(n)

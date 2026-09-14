@@ -34,7 +34,7 @@ test_that("the honest causal forest tracks true heterogeneity", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   s <- .hetero()
   out <- morie_causal_forest(s$y, s$d, s$X, n_trees = 80L, min_leaf = 15L,
                              seed = 0L)
@@ -46,7 +46,7 @@ test_that("the honest causal forest tracks true heterogeneity", {
 })
 
 test_that("the BLP test finds heterogeneity and rejects its absence", {
-  skip_on_cran()
+  skip_heavy()
   s <- .hetero()
   f <- morie_causal_forest(s$y, s$d, s$X, n_trees = 80L, min_leaf = 15L,
                            seed = 0L)
@@ -65,7 +65,7 @@ test_that("the BLP test finds heterogeneity and rejects its absence", {
 })
 
 test_that("bootstrap CATE intervals bracket the point estimate", {
-  skip_on_cran()
+  skip_heavy()
   s <- .hetero(n = 700)
   out <- morie_causal_forest_bootstrap(s$y, s$d, s$X, B = 8L, n_trees = 30L,
                                        min_leaf = 15L, seed = 0L)
@@ -76,7 +76,7 @@ test_that("bootstrap CATE intervals bracket the point estimate", {
 })
 
 test_that("the quantile forest reports the shift direction", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   n <- 1200
   X <- matrix(stats::rnorm(n * 2), ncol = 2)
@@ -91,7 +91,7 @@ test_that("the quantile forest reports the shift direction", {
 })
 
 test_that("the isotonic constraint removes every monotonicity violation", {
-  skip_on_cran()
+  skip_heavy()
   s <- .hetero(n = 900)
   out <- morie_monotone_causal_forest(s$y, s$d, s$X, monotone_feature = 1L,
                                       n_trees = 50L, min_leaf = 20L, seed = 0L)
@@ -108,7 +108,7 @@ test_that("the isotonic constraint removes every monotonicity violation", {
 })
 
 test_that("the causal survival forest gives a positive RMST difference", {
-  skip_on_cran()
+  skip_heavy()
   s <- .surv()
   out <- morie_causal_survival_forest(s$time, s$event, s$d, s$X,
                                       n_trees = 50L, min_leaf = 20L, seed = 0L)
@@ -123,7 +123,7 @@ test_that("the causal survival forest gives a positive RMST difference", {
 })
 
 test_that("the DR-learner recovers the ATE and the CATE slope", {
-  skip_on_cran()
+  skip_heavy()
   s <- .hetero()
   out <- morie_dr_learner(s$y, s$d, s$X, n_folds = 5L, seed = 0L)
   expect_equal(out$ate, 1, tolerance = 0.3)
@@ -132,7 +132,7 @@ test_that("the DR-learner recovers the ATE and the CATE slope", {
 })
 
 test_that("interventional effects sum to the overall effect", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(5)
   n <- 3000
   cv <- stats::rnorm(n)
@@ -148,7 +148,7 @@ test_that("interventional effects sum to the overall effect", {
 })
 
 test_that("TMLE removes confounding that the naive contrast keeps", {
-  skip_on_cran()
+  skip_heavy()
   hits <- 0
   for (seed in 1:6) {
     s <- .confounded(seed)
@@ -162,7 +162,7 @@ test_that("TMLE removes confounding that the naive contrast keeps", {
 })
 
 test_that("propensity-only TMLE stays consistent with a null outcome model", {
-  skip_on_cran()
+  skip_heavy()
   s <- .confounded()
   out <- morie_tmle_propensity_only(s$y, s$a, s$W)
   expect_equal(out$ate, 2, tolerance = 0.35)
@@ -170,7 +170,7 @@ test_that("propensity-only TMLE stays consistent with a null outcome model", {
 })
 
 test_that("the truncation sweep is monotone in units affected", {
-  skip_on_cran()
+  skip_heavy()
   s <- .confounded()
   out <- morie_tmle_truncation_sweep(s$y, s$a, s$W)
   expect_equal(length(out$ate), length(out$eps))
@@ -180,7 +180,7 @@ test_that("the truncation sweep is monotone in units affected", {
 })
 
 test_that("sensitivity bounds widen with Gamma and pinch at Gamma = 1", {
-  skip_on_cran()
+  skip_heavy()
   s <- .confounded()
   out <- morie_tmle_sensitivity(s$y, s$a, s$W, gamma_grid = c(1, 1.5, 3))
   widths <- out$upper - out$lower
@@ -192,7 +192,7 @@ test_that("sensitivity bounds widen with Gamma and pinch at Gamma = 1", {
 })
 
 test_that("quantile TMLE recovers a location shift", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(9)
   n <- 2000
   W <- matrix(stats::rnorm(n * 2), ncol = 2)
@@ -205,7 +205,7 @@ test_that("quantile TMLE recovers a location shift", {
 })
 
 test_that("TMLE mediation decomposes exactly", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   n <- 3000
   W <- matrix(stats::rnorm(n * 2), ncol = 2)
@@ -218,7 +218,7 @@ test_that("TMLE mediation decomposes exactly", {
 })
 
 test_that("TMLE LATE recovers the complier effect", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(13)
   n <- 4000
   W <- matrix(stats::rnorm(n * 2), ncol = 2)
@@ -235,7 +235,7 @@ test_that("TMLE LATE recovers the complier effect", {
 })
 
 test_that("sequential TMLE handles treatment-confounder feedback", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(17)
   n <- 3000
   L1 <- stats::rnorm(n)
@@ -254,7 +254,7 @@ test_that("sequential TMLE handles treatment-confounder feedback", {
 })
 
 test_that("TMLE RMST gives a positive difference when treatment helps", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(19)
   n <- 2000
   W <- matrix(stats::rnorm(n * 2), ncol = 2)
@@ -270,7 +270,7 @@ test_that("TMLE RMST gives a positive difference when treatment helps", {
 })
 
 test_that("TMLE matches the Python core to 10 decimals on a fixed dataset", {
-  skip_on_cran()
+  skip_heavy()
   # Cross-language anchor. These values were produced by
   # morie.fn._tmle.tmle_ate on this exact dataset (verified 2026-07-27);
   # a drift in either implementation breaks this test.

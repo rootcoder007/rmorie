@@ -25,7 +25,7 @@ test_that("rndsr deterministic_seed is reproducible", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("caret")
   skip_if_no_hash()
   d <- xy_fixture()
@@ -38,7 +38,7 @@ test_that("rndsr deterministic_seed is reproducible", {
 })
 
 test_that("rndsr default (deterministic_seed = NULL) path is unchanged", {
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("caret")
   d <- xy_fixture()
   r1 <- morie_random_search_cv(d$x, d$y, n_iter = 5L, cv = 3L, seed = 42L)

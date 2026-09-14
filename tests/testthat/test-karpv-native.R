@@ -17,7 +17,7 @@ test_that("the function set is ordinary arithmetic, division protected", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   expect_equal(.karpv_apply("+", c(2, 3)), 5)
   expect_equal(.karpv_apply("-", c(2, 3)), -1)
   expect_equal(.karpv_apply("*", c(2, 3)), 6)
@@ -31,7 +31,7 @@ test_that("the function set is ordinary arithmetic, division protected", {
 })
 
 test_that("nodes carry either an operator or a terminal", {
-  skip_on_cran()
+  skip_heavy()
   f <- .karpv_fnode("+", list(.karpv_tnode("x"), .karpv_tnode(1)))
   t <- .karpv_tnode("x")
   expect_false(.karpv_is_term(f))
@@ -45,7 +45,7 @@ test_that("nodes carry either an operator or a terminal", {
 })
 
 test_that("evaluation walks the tree", {
-  skip_on_cran()
+  skip_heavy()
   for (x in c(-2, 0, 1, 3)) {
     expect_equal(morie_karpV_evaluate(TREE, list(x = x)), x * x + x)
   }
@@ -59,7 +59,7 @@ test_that("evaluation walks the tree", {
 })
 
 test_that("raw fitness is the summed absolute error", {
-  skip_on_cran()
+  skip_heavy()
   cases <- lapply(c(-2, -1, 0, 1, 2),
                   function(x) list(x, x * x + x))
   # the exact program has no error at all
@@ -77,7 +77,7 @@ test_that("raw fitness is the summed absolute error", {
 })
 
 test_that("collecting a tree enumerates every node once", {
-  skip_on_cran()
+  skip_heavy()
   nodes <- .karpv_collect(TREE, integer(0), list())
   # the tree has five nodes: +, *, x, x, x
   expect_length(nodes, 5L)
@@ -96,7 +96,7 @@ test_that("collecting a tree enumerates every node once", {
 })
 
 test_that("getting and replacing a subtree are inverse", {
-  skip_on_cran()
+  skip_heavy()
   # the left child of the root is (x * x)
   sub <- .karpv_get(TREE, 1L)
   expect_equal(sub$op, "*")
@@ -127,7 +127,7 @@ test_that("getting and replacing a subtree are inverse", {
 })
 
 test_that("copying a tree preserves it", {
-  skip_on_cran()
+  skip_heavy()
   cp <- .karpv_copy(TREE)
   for (x in c(-3, 0, 4)) {
     expect_equal(morie_karpV_evaluate(cp, list(x = x)),
@@ -140,7 +140,7 @@ test_that("copying a tree preserves it", {
 })
 
 test_that("the random stream is deterministic and in range", {
-  skip_on_cran()
+  skip_heavy()
   e1 <- .karpv_rng(12345)
   a <- vapply(1:50, function(i) .karpv_u32(e1), numeric(1))
   expect_true(all(a >= 0 & a < 2^32))
@@ -168,7 +168,7 @@ test_that("the random stream is deterministic and in range", {
 })
 
 test_that("roulette selection follows the fitness shares", {
-  skip_on_cran()
+  skip_heavy()
   e <- .karpv_rng(5)
   # all the mass on the third entry, so it is always chosen; the index is
   # reported zero-based
@@ -190,7 +190,7 @@ test_that("roulette selection follows the fitness shares", {
 })
 
 test_that("grown trees respect their depth budget", {
-  skip_on_cran()
+  skip_heavy()
   e <- .karpv_rng(21)
   depth <- function(nd) {
     if (.karpv_is_term(nd)) return(1L)
@@ -225,7 +225,7 @@ test_that("grown trees respect their depth budget", {
 })
 
 test_that("the crossover point respects the internal-node bias", {
-  skip_on_cran()
+  skip_heavy()
   e <- .karpv_rng(31)
   # a bias of one always picks an internal node when the tree has any
   for (i in 1:20) {
@@ -244,7 +244,7 @@ test_that("the crossover point respects the internal-node bias", {
 })
 
 test_that("the search finds a program it can express exactly", {
-  skip_on_cran()
+  skip_heavy()
   # the target is the identity, for which the bare terminal is a perfect
   # program, so the search must reach zero error
   cases <- lapply(seq(-3, 3, by = 0.5), function(x) list(x, x))
@@ -278,7 +278,7 @@ test_that("the search finds a program it can express exactly", {
 })
 
 test_that("a harder target improves over the generations", {
-  skip_on_cran()
+  skip_heavy()
   cases <- lapply(seq(-2, 2, by = 0.25), function(x) list(x, x * x + x))
   r <- morie_karpV(cases = cases, terminals = "x", gens = 8L,
                    pop_size = 60L, max_depth_init = 4L, seed = 7L)
@@ -293,7 +293,7 @@ test_that("a harder target improves over the generations", {
 })
 
 test_that("karpV needs something to optimise", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_karpV(gens = 2L),
                "give either a fitness function or fitness cases")
   expect_error(morie_karpV(cases = list(), gens = 2L),

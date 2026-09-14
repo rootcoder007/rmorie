@@ -8,7 +8,7 @@ test_that("recursions match the Python core and the Tsay equations", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   g <- morie_garch_recursion(.E, list(omega = 0.05, alpha = 0.1, beta = 0.85), "garch")
   expect_equal(g[1:4], c(0.5481, 0.540885, 0.65375225, 0.6146894125), tolerance = 1e-10)
   # IGARCH, Tsay p.141: the two variance weights sum to exactly one
@@ -32,7 +32,7 @@ test_that("recursions match the Python core and the Tsay equations", {
 })
 
 test_that("garch_spec_fit recovers parameters and extends morie_garch_fit", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(7)
   n <- 1500
   e <- numeric(n)
@@ -56,7 +56,7 @@ test_that("garch_spec_fit recovers parameters and extends morie_garch_fit", {
 })
 
 test_that("BEKK keeps every conditional covariance positive definite", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(8)
   R <- matrix(stats::rnorm(600), ncol = 3)
   out <- morie_bekk_garch(R)
@@ -71,7 +71,7 @@ test_that("BEKK keeps every conditional covariance positive definite", {
 })
 
 test_that("VaR and expected shortfall match Python and order correctly", {
-  skip_on_cran()
+  skip_heavy()
   v <- morie_garch_var_es(0, 1, 0.05)
   expect_equal(v$var, 1.6448536269514729, tolerance = 1e-12)
   expect_equal(v$es, 2.0627128075074253, tolerance = 1e-12)
@@ -89,7 +89,7 @@ test_that("VaR and expected shortfall match Python and order correctly", {
 })
 
 test_that("Holt extrapolates a linear trend and damping flattens it", {
-  skip_on_cran()
+  skip_heavy()
   y <- seq_len(40) * 2 + 5
   out <- morie_holt_linear(y, horizon = 5)
   expect_equal(out$forecast, y[40] + seq_len(5) * 2, tolerance = 0.02)
@@ -103,7 +103,7 @@ test_that("Holt extrapolates a linear trend and damping flattens it", {
 })
 
 test_that("Holt-Winters recovers the seasonal shape", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(9)
   m <- 12
   season <- c(3, 1, -2, -4, -1, 2, 5, 4, 1, -1, -3, -5)
@@ -120,7 +120,7 @@ test_that("Holt-Winters recovers the seasonal shape", {
 })
 
 test_that("hierarchical reconciliation is coherent", {
-  skip_on_cran()
+  skip_heavy()
   S <- rbind(c(1, 1), c(1, 0), c(0, 1))
   expect_equal(morie_reconcile_hierarchy(c(3, 4), S)$reconciled, c(7, 3, 4))
   # an incoherent base vector is repaired, and the aggregate is used
@@ -137,7 +137,7 @@ test_that("hierarchical reconciliation is coherent", {
 })
 
 test_that("Aalen-Johansen rows are probabilities", {
-  skip_on_cran()
+  skip_heavy()
   out <- morie_aalen_johansen(1:6, c(0, 0, 0, 1, 0, 1), c(1, 1, 2, 2, 1, 2), 3)
   expect_equal(dim(out$P), c(3L, 3L))
   expect_equal(rowSums(out$P), rep(1, 3), tolerance = 1e-12)

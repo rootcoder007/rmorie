@@ -26,7 +26,7 @@ test_that("morie_otis_analyzers returns a named list/vector of fns", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   res <- tryCatch(morie_otis_analyzers(), error = function(e) NULL)
   skip_if(is.null(res), "not exported in this build")
   expect_true(is.list(res) || is.character(res))
@@ -38,7 +38,7 @@ test_that("morie_otis_analyzers returns a named list/vector of fns", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_otis_analyze_all runs over a datasets list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   ds <- make_datasets_list()
   res <- tryCatch(morie_otis_analyze_all(ds), error = function(e) NULL)
@@ -47,7 +47,7 @@ test_that("morie_otis_analyze_all runs over a datasets list", {
 })
 
 test_that("morie_otis_analyze_all handles empty datasets list", {
-  skip_on_cran()
+  skip_heavy()
   res <- tryCatch(morie_otis_analyze_all(list()),
                   error = function(e) NULL,
                   warning = function(w) NULL)
@@ -206,7 +206,7 @@ for (nm in ruhela_singleton_fns) {
 # ---------------------------------------------------------------------------
 
 test_that("morie_otis_analyze_b05_mandela_classification runs", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(40)
   df <- make_otis_panel(150, seed = 40)
   res <- tryCatch(
@@ -218,7 +218,7 @@ test_that("morie_otis_analyze_b05_mandela_classification runs", {
 })
 
 test_that("morie_otis_analyze_c11_mandela_classification runs", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(41)
   df <- make_otis_panel(150, seed = 41)
   res <- tryCatch(
@@ -230,7 +230,7 @@ test_that("morie_otis_analyze_c11_mandela_classification runs", {
 })
 
 test_that("morie_otis_analyze_otis_mandela_provincial_vs_federal runs", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(42)
   # The provincial-vs-federal cross-comparison delegates to the c11
   # Mandela classifier; pass a c11-shaped synthetic frame (the helper
@@ -250,7 +250,7 @@ test_that("morie_otis_analyze_otis_mandela_provincial_vs_federal runs", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_otis_analyze_c_chi2 runs over datasets list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(50)
   ds <- make_datasets_list(seed = 50)
   res <- tryCatch(morie_otis_analyze_c_chi2(ds), error = function(e) NULL)
@@ -259,7 +259,7 @@ test_that("morie_otis_analyze_c_chi2 runs over datasets list", {
 })
 
 test_that("morie_otis_analyze_d_chi2 runs over datasets list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(51)
   ds <- make_datasets_list(seed = 51)
   res <- tryCatch(morie_otis_analyze_d_chi2(ds), error = function(e) NULL)
@@ -268,7 +268,7 @@ test_that("morie_otis_analyze_d_chi2 runs over datasets list", {
 })
 
 test_that("morie_otis_analyze_ruhela_grid runs over datasets list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(52)
   ds <- make_datasets_list(seed = 52)
   res <- tryCatch(morie_otis_analyze_ruhela_grid(ds),
@@ -278,7 +278,7 @@ test_that("morie_otis_analyze_ruhela_grid runs over datasets list", {
 })
 
 test_that("morie_otis_analyze_ruhela_master runs over datasets list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(53)
   ds <- make_datasets_list(seed = 53)
   # .otis_aggregate_glm now detects degenerate GEE sandwich covariance
@@ -298,7 +298,7 @@ test_that("morie_otis_analyze_ruhela_master runs over datasets list", {
 # ---------------------------------------------------------------------------
 
 test_that("residual morie_otis_analyze_* exports each enter cleanly", {
-  skip_on_cran()
+  skip_heavy()
   ns <- tryCatch(asNamespace("rmorie"), error = function(e) NULL)
   skip_if(is.null(ns), "morie namespace unavailable")
   candidates <- ls(ns, pattern = "^morie_otis_analyze_")

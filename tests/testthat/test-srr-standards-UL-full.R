@@ -96,7 +96,7 @@ test_that("UL7.4 predicting new data is faster than a full re-fit", {
   # (this measured 2.6s vs 1.1s once). Skip on CRAN and use a generous
   # multiplicative margin: we only guard against prediction being
   # pathologically slower than a refit, not a tight ratio.
-  skip_on_cran()
+  skip_heavy()
   big <- as.data.frame(matrix(rnorm(4000 * 5), 4000, 5))
   rownames(big) <- paste0("r", 1:4000)
   cl <- morie_cluster(big, k = 5)

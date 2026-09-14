@@ -28,7 +28,7 @@ test_that("the heating schedule is the MrBayes geometric ladder", {
   # alone are eight minutes of a sixty minute check budget that was
   # being exceeded. Heavy numerics belong off the reference machines
   # and in our own CI, which sets NOT_CRAN so they still run there.
-  skip_on_cran()
+  skip_heavy()
   for (lam in c(0, 0.1, 0.2, 1)) {
     for (j in 0:4) {
       expect_equal(morie_phylby_chain_temperature(j, lam), 1 / (1 + lam * j))
@@ -49,7 +49,7 @@ test_that("the heating schedule is the MrBayes geometric ladder", {
 })
 
 test_that("the true split is recovered, whichever pair it separates", {
-  skip_on_cran()
+  skip_heavy()
   r1 <- morie_phylby(ALN_AB, n_iter = 150, n_chains = 2, n_runs = 2,
                      sample_every = 5, seed = 1)
   expect_equal(r1$map_topology, "A,B")
@@ -67,7 +67,7 @@ test_that("the true split is recovered, whichever pair it separates", {
 })
 
 test_that("the reported diagnostics are recomputable from the samples", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_phylby(ALN_AB, n_iter = 150, n_chains = 2, n_runs = 2,
                     sample_every = 5, seed = 3)
   # the posterior probability of the MAP tree is its share of the samples
@@ -97,7 +97,7 @@ test_that("the reported diagnostics are recomputable from the samples", {
 })
 
 test_that("a single chain and a single run still sample", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_phylby(ALN_AB, n_iter = 100, n_chains = 1, n_runs = 1,
                     sample_every = 5, seed = 5)
   expect_equal(r$n_chains, 1L)
@@ -115,7 +115,7 @@ test_that("a single chain and a single run still sample", {
 })
 
 test_that("site partitions are accepted per site", {
-  skip_on_cran()
+  skip_heavy()
   n_site <- nchar(ALN_AB$A)
   part <- rep(c("first", "second"), each = n_site / 2)
   r <- morie_phylby(ALN_AB, n_iter = 100, n_chains = 1, n_runs = 1,
@@ -128,7 +128,7 @@ test_that("site partitions are accepted per site", {
 })
 
 test_that("phylby refuses alignments it cannot analyse", {
-  skip_on_cran()
+  skip_heavy()
   # fewer than four taxa leaves no unrooted topology free to vary
   expect_error(morie_phylby(ALN_AB[1:3], n_iter = 50),
                "at least four taxa")

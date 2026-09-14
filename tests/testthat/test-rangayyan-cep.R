@@ -23,7 +23,7 @@ test_that("the complex cepstrum of an echo is the train of eq (4.80)", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   a <- 0.5
   n0 <- 8
   c0 <- CCepstrum(echo_sig(a, n0))$cepstrum
@@ -35,14 +35,14 @@ test_that("the complex cepstrum of an echo is the train of eq (4.80)", {
 })
 
 test_that("a pure delay is removed as the z^r factor of eq (4.68)", {
-  skip_on_cran()
+  skip_heavy()
   x <- numeric(N)
   x[6] <- 1
   expect_equal(CCepstrum(x)$delay_removed, -5L)
 })
 
 test_that("the complex log needs a nonzero spectrum", {
-  skip_on_cran()
+  skip_heavy()
   x <- numeric(N)
   x[1] <- 1
   x[2] <- -1
@@ -50,7 +50,7 @@ test_that("the complex log needs a nonzero spectrum", {
 })
 
 test_that("EchoSeries matches the printed series and the cepstrum", {
-  skip_on_cran()
+  skip_heavy()
   r <- EchoSeries(0.5, 8, terms = 4)
   expect_equal(r$amplitudes, c(0.5, -0.125, 1 / 24, -0.015625))
   expect_equal(r$quefrencies, c(8, 16, 24, 32))
@@ -64,7 +64,7 @@ test_that("EchoSeries matches the printed series and the cepstrum", {
 })
 
 test_that("MultModel, LogSep and ConvModel implement eqs (4.58)-(4.61)", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(MultModel(c(2, 3, 4), c(5, 0.5, 2))$y, c(10, 1.5, 8))
   r <- LogSep(c(2, 3, 4), c(5, 0.5, 2))
   expect_true(r$additive)
@@ -74,13 +74,13 @@ test_that("MultModel, LogSep and ConvModel implement eqs (4.58)-(4.61)", {
 })
 
 test_that("CCepSum leaves only a truncation residual (eq 4.66)", {
-  skip_on_cran()
+  skip_heavy()
   expect_lt(CCepSum(wavelet(16), echo_sig(0.5, 4, 16))$relative_residual,
             0.05)
 })
 
 test_that("CCepClosed implements eq (4.72) and its phase properties", {
-  skip_on_cran()
+  skip_heavy()
   r <- CCepClosed(2, zeros_in = 0.5, zeros_out = complex(0),
                   poles_in = 0.3, poles_out = complex(0), nmax = 6)
   expect_true(r$causal)
@@ -97,7 +97,7 @@ test_that("CCepClosed implements eq (4.72) and its phase properties", {
 })
 
 test_that("CCepClosed agrees with the numerical cepstrum", {
-  skip_on_cran()
+  skip_heavy()
   x <- numeric(N)
   x[1] <- 1
   x[2] <- -0.5
@@ -109,7 +109,7 @@ test_that("CCepClosed agrees with the numerical cepstrum", {
 })
 
 test_that("RatZ checks root membership and evaluates the product form", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(RatZ(1, 0, 1.5, complex(0), complex(0), complex(0)),
                "inside the unit circle")
   r <- RatZ(2, 0, 0.5, complex(0), 0.25, complex(0), z = 2)
@@ -118,7 +118,7 @@ test_that("RatZ checks root membership and evaluates the product form", {
 })
 
 test_that("CCepDecay bounds the numerical cepstrum (eq 4.73)", {
-  skip_on_cran()
+  skip_heavy()
   x <- numeric(N)
   x[1] <- 1
   x[2] <- -0.5
@@ -133,7 +133,7 @@ test_that("CCepDecay bounds the numerical cepstrum (eq 4.73)", {
 })
 
 test_that("the power cepstrum follows eqs (4.81)-(4.83)", {
-  skip_on_cran()
+  skip_heavy()
   x <- echo_sig(0.5, 8)
   sq <- PCepstrum(x, square = TRUE)
   raw <- PCepstrum(x, square = FALSE)
@@ -151,7 +151,7 @@ test_that("the power cepstrum follows eqs (4.81)-(4.83)", {
 })
 
 test_that("the real cepstrum is not invertible but shows the echo", {
-  skip_on_cran()
+  skip_heavy()
   c0 <- Cepstrum(echo_sig(0.5, 8))
   expect_false(c0$invertible)
   rng <- 2:(N %/% 2L)
@@ -159,7 +159,7 @@ test_that("the real cepstrum is not invertible but shows the echo", {
 })
 
 test_that("Lifter is symmetric and its halves partition the cepstrum", {
-  skip_on_cran()
+  skip_heavy()
   cc <- as.numeric(0:(N - 1))
   r <- Lifter(cc, high = 3, keep = "low")
   kept <- which(r$liftered != 0) - 1L
@@ -174,7 +174,7 @@ test_that("Lifter is symmetric and its halves partition the cepstrum", {
 })
 
 test_that("HomoFilt separates a slow-times-fast product", {
-  skip_on_cran()
+  skip_heavy()
   n <- 128
   i <- 0:(n - 1)
   slow <- 2 + sin(2 * pi * i / n)
@@ -186,7 +186,7 @@ test_that("HomoFilt separates a slow-times-fast product", {
 })
 
 test_that("HomDeconv suppresses the echo by low-time liftering", {
-  skip_on_cran()
+  skip_heavy()
   h <- wavelet()
   y <- h + 0.5 * c(numeric(12), h[1:(N - 12)])
   est <- HomDeconv(y, cutoff = 6, keep = "low")$y
@@ -197,7 +197,7 @@ test_that("HomDeconv suppresses the echo by low-time liftering", {
 })
 
 test_that("HomPred components convolve circularly back to the signal", {
-  skip_on_cran()
+  skip_heavy()
   h <- wavelet()
   y <- h + 0.5 * c(numeric(12), h[1:(N - 12)])
   r <- HomPred(y, cutoff = 6)
@@ -207,7 +207,7 @@ test_that("HomPred components convolve circularly back to the signal", {
 })
 
 test_that("VocalTract finds the pitch inside the plausible range", {
-  skip_on_cran()
+  skip_heavy()
   fs <- 8000
   n <- 512
   period <- 64
@@ -225,7 +225,7 @@ test_that("VocalTract finds the pitch inside the plausible range", {
 })
 
 test_that("MinPhase preserves the magnitude spectrum", {
-  skip_on_cran()
+  skip_heavy()
   x <- numeric(32)
   x[1] <- 1
   x[6] <- -1.5
@@ -236,7 +236,7 @@ test_that("MinPhase preserves the magnitude spectrum", {
 })
 
 test_that("Mfcc warps the axis and separates gain from shape", {
-  skip_on_cran()
+  skip_heavy()
   fs <- 8000
   i <- 0:511
   x <- sin(2 * pi * 440 * i / fs)
@@ -257,14 +257,14 @@ test_that("Mfcc warps the axis and separates gain from shape", {
 })
 
 test_that("CCepX reports the unwrapping diagnostics", {
-  skip_on_cran()
+  skip_heavy()
   r <- CCepX(echo_sig(0.5, 8))
   expect_true(r$well_conditioned)
   expect_equal(r$cepstrum, CCepstrum(echo_sig(0.5, 8))$cepstrum)
 })
 
 test_that("pre-policy spellings still resolve", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(morie_cepstrum(echo_sig(0.5, 8))$n, N)
   expect_equal(morie_ch4_complex_cepstrum(echo_sig(0.5, 8))$cepstrum[9],
                0.5, tolerance = 2e-3)

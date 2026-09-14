@@ -25,7 +25,7 @@ test_that("statistical callables run end to end on valid data", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(101)
   v <- rnorm(120)
   vp <- abs(rnorm(120)) + 0.2
@@ -83,7 +83,7 @@ test_that("statistical callables run end to end on valid data", {
 })
 
 test_that("Horowitz semiparametric callables run on adequate samples", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(102)
   n <- 80L
   X <- matrix(rnorm(n * 2), n, 2)
@@ -109,7 +109,7 @@ test_that("Horowitz semiparametric callables run on adequate samples", {
 # ---- 2. dim-normalisation guards (vector x -> matrix) --------------------
 
 test_that("ensemble/search callables normalise a vector-valued x", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(103)
   xv <- rnorm(80)
   yb <- rbinom(80, 1, 0.5)
@@ -129,7 +129,7 @@ test_that("ensemble/search callables normalise a vector-valued x", {
 # ---- 3. degenerate-input return / stop branches --------------------------
 
 test_that("degenerate inputs reach the documented guard branches", {
-  skip_on_cran()
+  skip_heavy()
   # algnm: all-NA single-party vote vector -> n == 0 return
   expect_equal(algnm(c(NA_real_, NA_real_, NA_real_))$n, 0L)
   # fzmrb: every x below the threshold -> "no x>t" return
@@ -157,7 +157,7 @@ test_that("degenerate inputs reach the documented guard branches", {
 })
 
 test_that("fwpas covers both transpose branches", {
-  skip_on_cran()
+  skip_heavy()
   w <- matrix(rnorm(12), 3, 4)
   b <- rnorm(3)
   ok("fwpas_29", morie_fwpas_forward_pass_dense(matrix(rnorm(6), 6, 1), w, b))
@@ -166,7 +166,7 @@ test_that("fwpas covers both transpose branches", {
 })
 
 test_that(".morie_cvm_pvalue mid-range + dataset_profile fallbacks", {
-  skip_on_cran()
+  skip_heavy()
   expect_true(is.numeric(rmorie:::.morie_cvm_pvalue(0.2)))
   expect_equal(rmorie:::morie_infer_measurement_level(
     factor(sample(letters[1:4], 40, TRUE))
@@ -179,7 +179,7 @@ test_that(".morie_cvm_pvalue mid-range + dataset_profile fallbacks", {
 # ---- 4. modules / paths / rng helpers ------------------------------------
 
 test_that(".cpads_default_csv + .resolve_cpads_csv cover their search paths", {
-  skip_on_cran()
+  skip_heavy()
   wd <- tempfile("cpads-")
   dir.create(wd)
   withr::local_dir(wd)
@@ -192,7 +192,7 @@ test_that(".cpads_default_csv + .resolve_cpads_csv cover their search paths", {
 })
 
 test_that("RNG sync helpers cover the .Random.seed branches", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   invisible(runif(1)) # ensure .Random.seed exists
   morie_sync_rng(42L)
@@ -204,7 +204,7 @@ test_that("RNG sync helpers cover the .Random.seed branches", {
 # ---- 5. study_reporting power-design degenerate-gender branch ------------
 
 test_that(".run_power_design_module_extended handles a single-gender frame", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_canonical_cpads()
   d$gender <- 1L # collapse to one gender level
   ok("power_design_1gender", suppressWarnings(
@@ -216,7 +216,7 @@ test_that(".run_power_design_module_extended handles a single-gender frame", {
 # ---- 6. database remaining branches --------------------------------------
 
 test_that("morie_load_dataset covers the unsupported-format stop", {
-  skip_on_cran()
+  skip_heavy()
   cat <- morie_dataset_catalog()
   local_dir <- tempfile("ld-")
   dir.create(local_dir)
@@ -242,7 +242,7 @@ test_that("morie_load_dataset covers the unsupported-format stop", {
 # ---- 7. frns remaining interpretation branches ---------------------------
 
 test_that("predpol weak-calibration + ANOVA-failure branches execute", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(104)
   ar <- paste0("A", 1:16)
   g <- rep(c("x", "y"), 8)
@@ -260,7 +260,7 @@ test_that("predpol weak-calibration + ANOVA-failure branches execute", {
 # ---- 8. entheo binding/san short-window 'next' branches ------------------
 
 test_that("entheo per-frame helpers hit the short-window skip", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(105)
   eeg <- matrix(rnorm(2 * 12), 2, 12)
   fmri <- matrix(rnorm(2 * 4), 2, 4)

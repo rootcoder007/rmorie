@@ -12,7 +12,7 @@ test_that("mrm_two_treatment_test returns the documented structure", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   a <- rnorm(40, mean = 5, sd = 1.2)
   b <- rnorm(40, mean = 5.5, sd = 1.5)
@@ -42,7 +42,7 @@ test_that("mrm_two_treatment_test returns the documented structure", {
 })
 
 test_that("mrm_two_treatment_test honours a non-default alpha and drops non-finite values", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(7)
   a <- c(rnorm(30, 0, 1), NA, Inf)
   b <- c(rnorm(30, 0.4, 1), NaN)
@@ -57,7 +57,7 @@ test_that("mrm_two_treatment_test honours a non-default alpha and drops non-fini
 # ---------------------------------------------------------------------------
 
 test_that("mrm_anova_oneway returns F-test plus Tukey HSD", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 30L
   df <- data.frame(
@@ -85,7 +85,7 @@ test_that("mrm_anova_oneway returns F-test plus Tukey HSD", {
 })
 
 test_that("mrm_anova_oneway tolerates incomplete rows", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   n <- 20L
   df <- data.frame(
@@ -103,7 +103,7 @@ test_that("mrm_anova_oneway tolerates incomplete rows", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_factorial_2k computes main and interaction effects", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   lvl <- c(-1, 1)
   df <- expand.grid(A = lvl, B = lvl, C = lvl)
@@ -138,7 +138,7 @@ test_that("mrm_factorial_2k computes main and interaction effects", {
 })
 
 test_that("mrm_factorial_2k re-codes non-(-1,1) factor columns", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(5)
   df <- expand.grid(A = c(0, 1), B = c(0, 1))
   df <- df[rep(seq_len(4), 3), ]
@@ -152,7 +152,7 @@ test_that("mrm_factorial_2k re-codes non-(-1,1) factor columns", {
 })
 
 test_that("mrm_factorial_2k errors when fewer than 2 factors", {
-  skip_on_cran()
+  skip_heavy()
   df <- data.frame(A = c(-1, 1), y = c(0, 1))
   expect_error(mrm_factorial_2k(df, response_col = "y", factor_cols = "A"))
 })
@@ -162,7 +162,7 @@ test_that("mrm_factorial_2k errors when fewer than 2 factors", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_causal_design IPW estimator returns documented fields", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 200L
   x <- rnorm(n)
@@ -193,7 +193,7 @@ test_that("mrm_causal_design IPW estimator returns documented fields", {
 })
 
 test_that("mrm_causal_design diff_in_means estimator works", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 200L
   x <- rnorm(n)
@@ -211,7 +211,7 @@ test_that("mrm_causal_design diff_in_means estimator works", {
 })
 
 test_that("mrm_causal_design with ipw but no covariates falls back to diff path", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   n <- 120L
   D <- rbinom(n, 1, 0.5)
@@ -226,7 +226,7 @@ test_that("mrm_causal_design with ipw but no covariates falls back to diff path"
 })
 
 test_that("mrm_causal_design rejects an unknown estimator", {
-  skip_on_cran()
+  skip_heavy()
   df <- data.frame(D = c(0, 1, 0, 1), y = c(1, 2, 1.5, 2.5))
   expect_error(mrm_causal_design(df,
     treatment_col = "D", outcome_col = "y",
@@ -239,7 +239,7 @@ test_that("mrm_causal_design rejects an unknown estimator", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_anova_bonferroni returns ANOVA plus pairwise table", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 30L
   df <- data.frame(
@@ -270,7 +270,7 @@ test_that("mrm_anova_bonferroni returns ANOVA plus pairwise table", {
 })
 
 test_that("mrm_anova_bonferroni honours a custom alpha", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(9)
   n <- 25L
   df <- data.frame(
@@ -290,7 +290,7 @@ test_that("mrm_anova_bonferroni honours a custom alpha", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_rcbd fits a randomised complete block design", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   df <- expand.grid(
     treatment = c("A", "B", "C"),
@@ -321,7 +321,7 @@ test_that("mrm_rcbd fits a randomised complete block design", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_latin_square fits a three-way Latin-square ANOVA", {
-  skip_on_cran()
+  skip_heavy()
   sq <- mrm_random_latin(k = 4, seed = 2026)
   df <- expand.grid(row = paste0("R", 1:4), col = paste0("C", 1:4))
   df$treatment <- LETTERS[as.integer(as.vector(sq)) + 1L]
@@ -346,7 +346,7 @@ test_that("mrm_latin_square fits a three-way Latin-square ANOVA", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_graeco_latin fits a four-way Graeco-Latin ANOVA", {
-  skip_on_cran()
+  skip_heavy()
   L <- matrix(c(
     "A", "B", "C", "D",
     "B", "A", "D", "C",
@@ -383,7 +383,7 @@ test_that("mrm_graeco_latin fits a four-way Graeco-Latin ANOVA", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_fractional_factorial computes main effects without a generator", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   df <- data.frame(
     A = c(-1, 1, -1, 1),
@@ -409,7 +409,7 @@ test_that("mrm_fractional_factorial computes main effects without a generator", 
 })
 
 test_that("mrm_fractional_factorial parses a generator string into aliases", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(13)
   df <- data.frame(
     A = c(-1, 1, -1, 1),
@@ -432,7 +432,7 @@ test_that("mrm_fractional_factorial parses a generator string into aliases", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_response_surface fits a second-order model and a stationary point", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   df <- expand.grid(
     x1 = c(-1.4, -1, 0, 1, 1.4),
@@ -467,7 +467,7 @@ test_that("mrm_response_surface fits a second-order model and a stationary point
 # ---------------------------------------------------------------------------
 
 test_that("mrm_anova_power computes a valid power value", {
-  skip_on_cran()
+  skip_heavy()
   res <- mrm_anova_power(
     k_groups = 4, n_per_group = 30,
     effect_size_f = 0.25, alpha = 0.05
@@ -490,7 +490,7 @@ test_that("mrm_anova_power computes a valid power value", {
 })
 
 test_that("mrm_anova_power is monotone increasing in sample size", {
-  skip_on_cran()
+  skip_heavy()
   powers <- vapply(c(10, 20, 30, 50, 100), function(n) {
     mrm_anova_power(
       k_groups = 3, n_per_group = n,
@@ -506,7 +506,7 @@ test_that("mrm_anova_power is monotone increasing in sample size", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_mc_power estimates empirical power from a simulator", {
-  skip_on_cran()
+  skip_heavy()
   my_sim <- function(seed) {
     set.seed(seed)
     x <- rnorm(30, mean = 0.4, sd = 1)
@@ -528,7 +528,7 @@ test_that("mrm_mc_power estimates empirical power from a simulator", {
 })
 
 test_that("mrm_mc_power is reproducible for a fixed outer seed", {
-  skip_on_cran()
+  skip_heavy()
   sim <- function(seed) {
     set.seed(seed)
     stats::t.test(rnorm(20, 0.5))$p.value
@@ -543,7 +543,7 @@ test_that("mrm_mc_power is reproducible for a fixed outer seed", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_perm_block runs a within-block permutation test", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   df <- expand.grid(
     block = paste0("B", 1:6),
@@ -570,7 +570,7 @@ test_that("mrm_perm_block runs a within-block permutation test", {
 })
 
 test_that("mrm_perm_block is reproducible for a fixed seed", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   df <- expand.grid(
     block = paste0("B", 1:5),
@@ -587,7 +587,7 @@ test_that("mrm_perm_block is reproducible for a fixed seed", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_random_latin produces a valid Latin square", {
-  skip_on_cran()
+  skip_heavy()
   sq <- mrm_random_latin(k = 4, seed = 42L)
   expect_true(is.matrix(sq))
   expect_equal(dim(sq), c(4L, 4L))
@@ -601,7 +601,7 @@ test_that("mrm_random_latin produces a valid Latin square", {
 })
 
 test_that("mrm_random_latin is reproducible across runs with the same seed", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(
     mrm_random_latin(5, seed = 7),
     mrm_random_latin(5, seed = 7)
@@ -613,7 +613,7 @@ test_that("mrm_random_latin is reproducible across runs with the same seed", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_oneprop_test returns exact and Wald results", {
-  skip_on_cran()
+  skip_heavy()
   res <- mrm_oneprop_test(x = 58, n = 100, p0 = 0.5)
   expect_true(is.list(res))
   expect_named(res, c(
@@ -635,7 +635,7 @@ test_that("mrm_oneprop_test returns exact and Wald results", {
 })
 
 test_that("mrm_oneprop_test handles boundary success counts", {
-  skip_on_cran()
+  skip_heavy()
   res0 <- mrm_oneprop_test(x = 0, n = 50, p0 = 0.3)
   expect_equal(res0$p_hat, 0)
   expect_true(is.finite(res0$p_value_exact))
@@ -644,7 +644,7 @@ test_that("mrm_oneprop_test handles boundary success counts", {
 })
 
 test_that("mrm_oneprop_test rejects invalid x or n", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(mrm_oneprop_test(x = 60, n = 50, p0 = 0.5))
   expect_error(mrm_oneprop_test(x = -1, n = 50, p0 = 0.5))
   expect_error(mrm_oneprop_test(x = 5, n = 0, p0 = 0.5))
@@ -655,7 +655,7 @@ test_that("mrm_oneprop_test rejects invalid x or n", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_twoprop_test returns chi-square, Fisher and Wald results", {
-  skip_on_cran()
+  skip_heavy()
   res <- mrm_twoprop_test(x1 = 47, n1 = 100, x2 = 31, n2 = 100)
   expect_true(is.list(res))
   expect_named(res, c(
@@ -679,7 +679,7 @@ test_that("mrm_twoprop_test returns chi-square, Fisher and Wald results", {
 })
 
 test_that("mrm_twoprop_test rejects invalid sample sizes", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(mrm_twoprop_test(x1 = 5, n1 = 0, x2 = 3, n2 = 10))
   expect_error(mrm_twoprop_test(x1 = -1, n1 = 10, x2 = 3, n2 = 10))
 })
@@ -689,7 +689,7 @@ test_that("mrm_twoprop_test rejects invalid sample sizes", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_var_test runs a chi-square test for variance", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   x <- rnorm(50, mean = 0, sd = 1.2)
   res <- mrm_var_test(sample = x, sigma0_sq = 1)
@@ -713,7 +713,7 @@ test_that("mrm_var_test runs a chi-square test for variance", {
 })
 
 test_that("mrm_var_test errors with fewer than two observations", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(mrm_var_test(sample = 5, sigma0_sq = 1))
   expect_error(mrm_var_test(sample = c(NA, Inf), sigma0_sq = 1))
 })
@@ -723,7 +723,7 @@ test_that("mrm_var_test errors with fewer than two observations", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_qq_plot returns Q-Q coordinates for the normal reference", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   x <- rnorm(100)
   qq <- mrm_qq_plot(x, dist = "norm")
@@ -740,7 +740,7 @@ test_that("mrm_qq_plot returns Q-Q coordinates for the normal reference", {
 })
 
 test_that("mrm_qq_plot accepts other reference distributions and parameters", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(31)
   x <- rexp(60, rate = 2)
   qq <- mrm_qq_plot(x, dist = "exp", rate = 2)
@@ -751,7 +751,7 @@ test_that("mrm_qq_plot accepts other reference distributions and parameters", {
 })
 
 test_that("mrm_qq_plot errors with fewer than two observations", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(mrm_qq_plot(3, dist = "norm"))
 })
 
@@ -760,7 +760,7 @@ test_that("mrm_qq_plot errors with fewer than two observations", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_clt_demo generates standardised sample means", {
-  skip_on_cran()
+  skip_heavy()
   res <- mrm_clt_demo(
     base_distribution = "exp", n_samples = 1000L,
     sample_size = 30L, seed = 42L, rate = 1
@@ -774,7 +774,7 @@ test_that("mrm_clt_demo generates standardised sample means", {
 })
 
 test_that("mrm_clt_demo is reproducible and supports a uniform base", {
-  skip_on_cran()
+  skip_heavy()
   r1 <- mrm_clt_demo(
     base_distribution = "unif", n_samples = 200L,
     sample_size = 20L, seed = 7L
@@ -791,7 +791,7 @@ test_that("mrm_clt_demo is reproducible and supports a uniform base", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_pit applies the probability integral transform", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   x <- rnorm(200)
   pit <- mrm_pit(x, dist = "norm")
@@ -809,7 +809,7 @@ test_that("mrm_pit applies the probability integral transform", {
 })
 
 test_that("mrm_pit accepts a misspecified reference distribution", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   x <- rnorm(200)
   pit_wrong <- mrm_pit(x, dist = "t", df = 3)
@@ -823,7 +823,7 @@ test_that("mrm_pit accepts a misspecified reference distribution", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_standardised_difference returns one row per covariate", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 200L
   df <- data.frame(
@@ -853,7 +853,7 @@ test_that("mrm_standardised_difference returns one row per covariate", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_check_balancing yields a composite balance verdict", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 200L
   df <- data.frame(
@@ -879,7 +879,7 @@ test_that("mrm_check_balancing yields a composite balance verdict", {
 })
 
 test_that("mrm_check_balancing honours a custom threshold", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(8)
   n <- 150L
   df <- data.frame(D = rbinom(n, 1, 0.5), x = rnorm(n))
@@ -895,7 +895,7 @@ test_that("mrm_check_balancing honours a custom threshold", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_check_overlap reports propensity-score support diagnostics", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 300L
   x <- rnorm(n)
@@ -923,7 +923,7 @@ test_that("mrm_check_overlap reports propensity-score support diagnostics", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_median_causal_effect estimates a matched median effect", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 200L
   x <- rnorm(n)
@@ -951,7 +951,7 @@ test_that("mrm_median_causal_effect estimates a matched median effect", {
 # ---------------------------------------------------------------------------
 
 test_that("mrm_assumptions_check returns the three identifiability sub-lists", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2026)
   n <- 300L
   x <- rnorm(n)
@@ -974,7 +974,7 @@ test_that("mrm_assumptions_check returns the three identifiability sub-lists", {
 })
 
 test_that("mrm_assumptions_check works with multiple covariates", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   n <- 250L
   x1 <- rnorm(n)

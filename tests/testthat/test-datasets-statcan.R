@@ -119,7 +119,7 @@ test_that("morie_datasets_statcan_full_csv_url respects language=fr", {
 # ---------------------------------------------------------------------------
 
 test_that("live: cube_metadata reaches the real WDS for 35100002", {
-  skip_on_cran()
+  skip_heavy()
   skip_on_ci()
   skip_if_no_network("www150.statcan.gc.ca")
   m <- tryCatch(
@@ -132,7 +132,7 @@ test_that("live: cube_metadata reaches the real WDS for 35100002", {
 })
 
 test_that("live: full_csv_url reaches the real WDS for 35100002", {
-  skip_on_cran()
+  skip_heavy()
   skip_on_ci()
   skip_if_no_network("www150.statcan.gc.ca")
   u <- tryCatch(

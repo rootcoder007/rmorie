@@ -27,14 +27,14 @@ test_that("the fixture matches the one Python anchored against", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   z <- esl_fixture()
   expect_equal(z[1:3], c(-2.044054423671674, 1.0938408101620691,
                          0.4373658471384318), tolerance = 1e-12)
 })
 
 test_that("morie_esl_residual_variance matches morie.fn.eslsig", {
-  skip_on_cran()
+  skip_heavy()
   z <- esl_fixture()
   # numpy reshape fills rows; matrix() fills columns
   X <- matrix(z[1:240], nrow = 80L, byrow = TRUE)
@@ -53,7 +53,7 @@ test_that("morie_esl_residual_variance matches morie.fn.eslsig", {
 })
 
 test_that("morie_esl_residual_variance counts the intercept once", {
-  skip_on_cran()
+  skip_heavy()
   z <- esl_fixture()
   # numpy reshape fills rows; matrix() fills columns
   X <- matrix(z[1:240], nrow = 80L, byrow = TRUE)
@@ -66,7 +66,7 @@ test_that("morie_esl_residual_variance counts the intercept once", {
 })
 
 test_that("morie_esl_residual_variance refuses an undefined estimate", {
-  skip_on_cran()
+  skip_heavy()
   z <- esl_fixture(40L)
   # N = 5, p = 4 leaves zero residual degrees of freedom and (3.8)
   # divides by it; returning Inf would be worse than refusing
@@ -77,7 +77,7 @@ test_that("morie_esl_residual_variance refuses an undefined estimate", {
 })
 
 test_that("morie_esl_kernel_density matches morie.fn.eslkrn", {
-  skip_on_cran()
+  skip_heavy()
   z <- esl_fixture()
   g <- seq(-3, 3, length.out = 7L)
   o <- morie_esl_kernel_density(g, z[1:200], 0.5)
@@ -94,7 +94,7 @@ test_that("morie_esl_kernel_density matches morie.fn.eslkrn", {
 })
 
 test_that("the kernel density really is the convolution (6.23) claims", {
-  skip_on_cran()
+  skip_heavy()
   z <- esl_fixture()
   g <- seq(-4, 4, length.out = 300L)
   o <- morie_esl_kernel_density(g, z[1:200], 0.4)
@@ -108,7 +108,7 @@ test_that("the kernel density really is the convolution (6.23) claims", {
 })
 
 test_that("the normaliser exponent is p/2, not p", {
-  skip_on_cran()
+  skip_heavy()
   # (6.24). In two dimensions an exponent of p rather than p/2 leaves
   # the estimate short by a factor of 2 lambda^2 pi, which only a
   # mass check catches
@@ -126,7 +126,7 @@ test_that("the normaliser exponent is p/2, not p", {
 })
 
 test_that("morie_esl_oob_632 matches morie.fn.eslo63", {
-  skip_on_cran()
+  skip_heavy()
   o <- morie_esl_oob_632(0.2, 0.5, gamma = 0.9)
   expect_equal(o$err_632, 0.3896, tolerance = 1e-12)
   expect_equal(o$err_632_plus, 0.4251017639077341, tolerance = 1e-12)
@@ -137,7 +137,7 @@ test_that("morie_esl_oob_632 matches morie.fn.eslo63", {
 })
 
 test_that("the .632 estimator reproduces the book's worked failure", {
-  skip_on_cran()
+  skip_heavy()
   # ESL p.252 verbatim: a 1-nearest-neighbour rule on two equal
   # classes with labels independent of the inputs gives err_bar = 0
   # and Err^(1) = 0.5, so Err^(.632) = .632 x 0.5 = 0.316 while the
@@ -151,7 +151,7 @@ test_that("the .632 estimator reproduces the book's worked failure", {
 })
 
 test_that("the .632+ weight runs from .632 to 1 and brackets the estimate", {
-  skip_on_cran()
+  skip_heavy()
   et <- 0.2
   e1 <- 0.5
   plain <- morie_esl_oob_632(et, e1)$err_632
@@ -169,7 +169,7 @@ test_that("the .632+ weight runs from .632 to 1 and brackets the estimate", {
 })
 
 test_that("gamma from the double sum and the dichotomous formula agree", {
-  skip_on_cran()
+  skip_heavy()
   # (7.58) and (7.59) are the same quantity
   z <- esl_fixture()
   y <- as.numeric(z[1:200] > 0.5)
@@ -183,7 +183,7 @@ test_that("gamma from the double sum and the dichotomous formula agree", {
 })
 
 test_that("morie_esl_bootstrap_err puts Err_boot below the honest estimate", {
-  skip_on_cran()
+  skip_heavy()
   # (7.54) tests on points it also trained on, so it must land below
   # (7.56), which does not -- and both above the training error.
   # Language RNGs differ, so this is the structural claim rather than
@@ -203,7 +203,7 @@ test_that("morie_esl_bootstrap_err puts Err_boot below the honest estimate", {
 })
 
 test_that("feeding Err_boot to the .632 estimator makes it worse", {
-  skip_on_cran()
+  skip_heavy()
   # the distinction the section is about: err_boot is already biased
   # downward, so correcting it downward again compounds the error
   z <- esl_fixture()
@@ -217,7 +217,7 @@ test_that("feeding Err_boot to the .632 estimator makes it worse", {
 })
 
 test_that("morie_esl_random_forest uses the regression mtry rule", {
-  skip_on_cran()
+  skip_heavy()
   # floor(p/3) for regression, floor(sqrt(p)) for classification.
   # They cross at p = 9, where both give 3; above it the regression
   # rule is the larger of the two.
@@ -238,7 +238,7 @@ test_that("morie_esl_random_forest uses the regression mtry rule", {
 })
 
 test_that("out-of-bag error exceeds training error and still beats the mean", {
-  skip_on_cran()
+  skip_heavy()
   # OOB predictions come only from trees that never saw the
   # observation, so they must be worse than the in-bag fit. If they
   # are not, the out-of-bag bookkeeping is wrong.
@@ -253,7 +253,7 @@ test_that("out-of-bag error exceeds training error and still beats the mean", {
 })
 
 test_that("averaging more trees reduces prediction variance", {
-  skip_on_cran()
+  skip_heavy()
   # Ch. 15's thesis: bagged trees are identically distributed, so
   # averaging cannot move the bias -- the only gain is variance
   # reduction, and it must show as a more stable prediction.
@@ -271,7 +271,7 @@ test_that("averaging more trees reduces prediction variance", {
 })
 
 test_that("morie_esl_random_forest is reproducible and validates inputs", {
-  skip_on_cran()
+  skip_heavy()
   z <- esl_fixture(600L)
   X <- matrix(z[1:240], ncol = 4L)
   y <- X[, 1L] + 0.4 * z[241:300]
@@ -289,7 +289,7 @@ test_that("morie_esl_random_forest is reproducible and validates inputs", {
 })
 
 test_that("the forest does not leak the global RNG stream", {
-  skip_on_cran()
+  skip_heavy()
   # set.seed inside a modelling function is a trap: it silently
   # reseeds the caller's stream. This one restores it.
   z <- esl_fixture(400L)

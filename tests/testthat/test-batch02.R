@@ -7,7 +7,7 @@ test_that("morie_bayes_cpi_genomic returns a well-formed list", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   X <- matrix(rnorm(180), 30, 6)
   b <- c(1, 0, 0, -1, 0, 0)
@@ -29,7 +29,7 @@ test_that("morie_bayes_cpi_genomic returns a well-formed list", {
 })
 
 test_that("morie_bayes_cpi_genomic respects pi_init and is finite", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(5)
   X <- matrix(rnorm(120), 20, 6)
   y <- as.numeric(X %*% c(0.8, -0.6, 0, 0, 0, 0) + 0.2 * rnorm(20))
@@ -46,7 +46,7 @@ test_that("morie_bayes_cpi_genomic respects pi_init and is finite", {
 })
 
 test_that("morie_bkprp_backpropagation sigmoid path returns gradients", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   x <- matrix(rnorm(12), 3, 4)
   y <- matrix(rnorm(6), 3, 2)
@@ -67,7 +67,7 @@ test_that("morie_bkprp_backpropagation sigmoid path returns gradients", {
 })
 
 test_that("morie_bkprp_backpropagation supports all activations", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   x <- matrix(rnorm(6), 3, 2)
   y <- matrix(rnorm(6), 3, 2)
@@ -79,7 +79,7 @@ test_that("morie_bkprp_backpropagation supports all activations", {
 })
 
 test_that("morie_bkprp_backpropagation uses default w and b", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   x <- matrix(rnorm(6), 3, 2)
   y <- matrix(rnorm(6), 3, 2)
@@ -89,19 +89,19 @@ test_that("morie_bkprp_backpropagation uses default w and b", {
 })
 
 test_that("morie_bkprp_backpropagation errors on unknown activation", {
-  skip_on_cran()
+  skip_heavy()
   x <- matrix(rnorm(6), 3, 2)
   y <- matrix(rnorm(6), 3, 2)
   expect_error(morie_bkprp_backpropagation(x, y, activation = "bogus"))
 })
 
 test_that("morie_backpropagation alias is identical to morie_bkprp_backpropagation", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_backpropagation, morie_bkprp_backpropagation)
 })
 
 test_that("morie_bayesian_lasso_full returns a well-formed list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   X <- matrix(rnorm(100), 20, 5)
   y <- as.numeric(X %*% c(1, -1, 0, 0, 0) + 0.2 * rnorm(20))
@@ -119,7 +119,7 @@ test_that("morie_bayesian_lasso_full returns a well-formed list", {
 })
 
 test_that("morie_bayesian_lasso_full accepts a fixed lambda", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(8)
   X <- matrix(rnorm(80), 20, 4)
   y <- as.numeric(X %*% c(0.5, -0.5, 0, 0) + 0.2 * rnorm(20))
@@ -133,7 +133,7 @@ test_that("morie_bayesian_lasso_full accepts a fixed lambda", {
 })
 
 test_that("morie_bnfwd_batch_norm_forward normalizes per feature", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   x <- matrix(rnorm(40), 10, 4)
   res <- morie_bnfwd_batch_norm_forward(x)
@@ -149,7 +149,7 @@ test_that("morie_bnfwd_batch_norm_forward normalizes per feature", {
 })
 
 test_that("morie_bnfwd_batch_norm_forward applies gamma and beta", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   x <- matrix(rnorm(30), 10, 3)
   res <- morie_bnfwd_batch_norm_forward(x,
@@ -162,12 +162,12 @@ test_that("morie_bnfwd_batch_norm_forward applies gamma and beta", {
 })
 
 test_that("morie_batch_norm_forward alias is identical", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_batch_norm_forward, morie_bnfwd_batch_norm_forward)
 })
 
 test_that("morie_bayes_ridge_gibbs returns a well-formed list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   X <- matrix(rnorm(100), 20, 5)
   y <- as.numeric(X %*% c(1, -1, 0.5, 0, 0) + 0.2 * rnorm(20))
@@ -186,7 +186,7 @@ test_that("morie_bayes_ridge_gibbs returns a well-formed list", {
 })
 
 test_that("morie_bayes_ridge_gibbs accepts custom df0 and S0", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(9)
   X <- matrix(rnorm(80), 20, 4)
   y <- as.numeric(X %*% c(0.7, -0.3, 0, 0) + 0.2 * rnorm(20))
@@ -199,7 +199,7 @@ test_that("morie_bayes_ridge_gibbs accepts custom df0 and S0", {
 })
 
 test_that("brdgr with single logical vector counts non-empty entries", {
-  skip_on_cran()
+  skip_heavy()
   v <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
   res <- brdgr(v)
   expect_named(res, c(
@@ -213,7 +213,7 @@ test_that("brdgr with single logical vector counts non-empty entries", {
 })
 
 test_that("brdgr with two ID vectors returns intersection", {
-  skip_on_cran()
+  skip_heavy()
   res <- brdgr(c(1, 2, 3, 4), c(3, 4, 5, 6))
   expect_equal(res$n_bridges, 2)
   expect_equal(res$bridge_ids, c(3, 4))
@@ -222,7 +222,7 @@ test_that("brdgr with two ID vectors returns intersection", {
 })
 
 test_that("brdgr with two matrices counts rows non-empty in both", {
-  skip_on_cran()
+  skip_heavy()
   x <- matrix(c(1, NA, 3, NA, 5, 6), 3, 2)
   y <- matrix(c(NA, 2, 3, 4, NA, 6), 3, 2)
   res <- brdgr(x, y)
@@ -232,19 +232,19 @@ test_that("brdgr with two matrices counts rows non-empty in both", {
 })
 
 test_that("brdgr errors on mismatched matrix rows", {
-  skip_on_cran()
+  skip_heavy()
   x <- matrix(rnorm(6), 3, 2)
   y <- matrix(rnorm(8), 4, 2)
   expect_error(brdgr(x, y))
 })
 
 test_that("morie_bridge_observations alias is identical", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_bridge_observations, brdgr)
 })
 
 test_that("morie_bayesian_ridge_regression returns a well-formed list", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   X <- matrix(rnorm(100), 20, 5)
   y <- as.numeric(X %*% c(1, -1, 0.5, 0, 0) + 0.1 * rnorm(20))
@@ -262,7 +262,7 @@ test_that("morie_bayesian_ridge_regression returns a well-formed list", {
 })
 
 test_that("morie_bayesian_ridge_regression accepts a fixed lambda", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(12)
   X <- matrix(rnorm(60), 15, 4)
   y <- as.numeric(X %*% c(0.5, 0, -0.5, 0) + 0.1 * rnorm(15))
@@ -272,7 +272,7 @@ test_that("morie_bayesian_ridge_regression accepts a fixed lambda", {
 })
 
 test_that("btsrp percentile method brackets the estimate", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   x <- rnorm(100)
   res <- btsrp(x, B = 400, seed = 0, method = "percentile")
@@ -288,7 +288,7 @@ test_that("btsrp percentile method brackets the estimate", {
 })
 
 test_that("btsrp bca method returns finite CI", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   x <- rnorm(60)
   res <- btsrp(x, B = 300, seed = 1, method = "bca")
@@ -298,7 +298,7 @@ test_that("btsrp bca method returns finite CI", {
 })
 
 test_that("btsrp studentized method returns finite CI", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   x <- rnorm(50)
   res <- btsrp(x, B = 100, seed = 2, method = "studentized")
@@ -308,7 +308,7 @@ test_that("btsrp studentized method returns finite CI", {
 })
 
 test_that("btsrp accepts a custom statistic", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   x <- rnorm(80)
   res <- btsrp(x, statistic = stats::median, B = 200, seed = 3)
@@ -316,19 +316,19 @@ test_that("btsrp accepts a custom statistic", {
 })
 
 test_that("btsrp handles degenerate short input", {
-  skip_on_cran()
+  skip_heavy()
   res <- btsrp(c(1.5), B = 50)
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 1L)
 })
 
 test_that("morie_bootstrap_ci alias is identical", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_bootstrap_ci, btsrp)
 })
 
 test_that("bysid returns ideal-point estimates from a vote matrix", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   M <- matrix(rbinom(120, 1, 0.5), 20, 6)
   res <- bysid(M, n_iter = 120, burn = 40, seed = 1)
@@ -345,14 +345,14 @@ test_that("bysid returns ideal-point estimates from a vote matrix", {
 })
 
 test_that("bysid handles degenerate single-row input", {
-  skip_on_cran()
+  skip_heavy()
   res <- bysid(matrix(c(1, 0, 1), 1, 3), n_iter = 20, burn = 5)
   expect_true(all(is.na(res$x_mean)))
   expect_equal(res$method, "morie_bayesian_ideal_points")
 })
 
 test_that("bysid handles all-burn-in (no samples) gracefully", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   M <- matrix(rbinom(60, 1, 0.5), 10, 6)
   res <- bysid(M, n_iter = 5, burn = 10, seed = 4)
@@ -361,12 +361,12 @@ test_that("bysid handles all-burn-in (no samples) gracefully", {
 })
 
 test_that("morie_bayesian_ideal_points alias is identical", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_bayesian_ideal_points, bysid)
 })
 
 test_that("morie_estimate_propensity_scores returns clipped scores", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
   ps <- morie_estimate_propensity_scores(df, "t", "x")
@@ -376,7 +376,7 @@ test_that("morie_estimate_propensity_scores returns clipped scores", {
 })
 
 test_that("morie_estimate_ate returns ATE with CI", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
   res <- morie_estimate_ate(df, "t", "y", "x")
@@ -388,7 +388,7 @@ test_that("morie_estimate_ate returns ATE with CI", {
 })
 
 test_that("morie_estimate_ate accepts a pre-computed propensity column", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   df <- data.frame(t = rbinom(120, 1, 0.5), y = rnorm(120), x = rnorm(120))
   df$ps <- morie_estimate_propensity_scores(df, "t", "x")
@@ -397,7 +397,7 @@ test_that("morie_estimate_ate accepts a pre-computed propensity column", {
 })
 
 test_that("morie_estimate_att returns ATT with CI", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
   res <- morie_estimate_att(df, "t", "y", "x")
@@ -407,7 +407,7 @@ test_that("morie_estimate_att returns ATT with CI", {
 })
 
 test_that("morie_estimate_atc returns ATC with CI", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
   res <- morie_estimate_atc(df, "t", "y", "x")
@@ -417,7 +417,7 @@ test_that("morie_estimate_atc returns ATC with CI", {
 })
 
 test_that("morie_estimate_aipw returns doubly-robust ATE (linear)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
   res <- morie_estimate_aipw(df, "t", "y", "x", outcome_model = "linear")
@@ -427,7 +427,7 @@ test_that("morie_estimate_aipw returns doubly-robust ATE (linear)", {
 })
 
 test_that("morie_estimate_aipw supports a logistic outcome model", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(5)
   df <- data.frame(
     t = rbinom(200, 1, 0.4),
@@ -439,7 +439,7 @@ test_that("morie_estimate_aipw supports a logistic outcome model", {
 })
 
 test_that("morie_estimate_gate returns one row per group", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   df <- data.frame(
     t = rbinom(300, 1, 0.4), y = rnorm(300), x = rnorm(300),
@@ -453,7 +453,7 @@ test_that("morie_estimate_gate returns one row per group", {
 })
 
 test_that("morie_estimate_cate t-learner returns per-unit effects", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(6)
   df <- data.frame(t = rbinom(200, 1, 0.5), y = rnorm(200), x = rnorm(200))
   cate <- morie_estimate_cate(df, "t", "y", "x", meta_learner = "t_learner")
@@ -462,7 +462,7 @@ test_that("morie_estimate_cate t-learner returns per-unit effects", {
 })
 
 test_that("morie_estimate_cate s-learner returns per-unit effects", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(7)
   df <- data.frame(t = rbinom(200, 1, 0.5), y = rnorm(200), x = rnorm(200))
   cate <- morie_estimate_cate(df, "t", "y", "x", meta_learner = "s_learner")
@@ -471,7 +471,7 @@ test_that("morie_estimate_cate s-learner returns per-unit effects", {
 })
 
 test_that("morie_estimate_late returns Wald estimate without covariates", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(8)
   n <- 300
   z <- rbinom(n, 1, 0.5)
@@ -489,7 +489,7 @@ test_that("morie_estimate_late returns Wald estimate without covariates", {
 })
 
 test_that("morie_estimate_late with covariates runs (ivreg or fallback)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(9)
   n <- 300
   z <- rbinom(n, 1, 0.5)
@@ -503,7 +503,7 @@ test_that("morie_estimate_late with covariates runs (ivreg or fallback)", {
 })
 
 test_that("morie_e_value computes E-value and CI bound", {
-  skip_on_cran()
+  skip_heavy()
   res <- morie_e_value(rr = 3.9, rr_lower = 2.4)
   expect_named(res, c("morie_e_value", "e_value_ci"))
   expect_true(res$morie_e_value > 1)
@@ -512,14 +512,14 @@ test_that("morie_e_value computes E-value and CI bound", {
 })
 
 test_that("morie_e_value without CI bound returns NA for e_value_ci", {
-  skip_on_cran()
+  skip_heavy()
   res <- morie_e_value(rr = 2.0)
   expect_true(res$morie_e_value > 1)
   expect_true(is.na(res$e_value_ci))
 })
 
 test_that("morie_sensitivity_rosenbaum returns a gamma grid data frame", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(10)
   treated <- rnorm(20, mean = 1)
   control <- rnorm(25, mean = 0)
@@ -534,7 +534,7 @@ test_that("morie_sensitivity_rosenbaum returns a gamma grid data frame", {
 })
 
 test_that("morie_estimate_g_computation returns outcome-regression ATE", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
   res <- morie_estimate_g_computation(df, "t", "y", "x")
@@ -544,7 +544,7 @@ test_that("morie_estimate_g_computation returns outcome-regression ATE", {
 })
 
 test_that("morie_estimate_g_computation supports a logistic outcome model", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(12)
   df <- data.frame(
     t = rbinom(200, 1, 0.4),
@@ -558,7 +558,7 @@ test_that("morie_estimate_g_computation supports a logistic outcome model", {
 })
 
 test_that("morie_concordance_incomplete returns W for complete rankings", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(c(
     1, 2, 3, 4,
     1, 2, 3, 4,
@@ -577,7 +577,7 @@ test_that("morie_concordance_incomplete returns W for complete rankings", {
 })
 
 test_that("morie_concordance_incomplete handles incomplete rankings with NA", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(c(
     1, 2, 3, 4,
     NA, 1, 2, 3,
@@ -588,7 +588,7 @@ test_that("morie_concordance_incomplete handles incomplete rankings with NA", {
 })
 
 test_that("morie_concordance_incomplete handles degenerate small input", {
-  skip_on_cran()
+  skip_heavy()
   res <- morie_concordance_incomplete(matrix(1, 1, 1))
   expect_true(is.na(res$statistic))
   expect_equal(res$n, 1)
@@ -596,7 +596,7 @@ test_that("morie_concordance_incomplete handles degenerate small input", {
 })
 
 test_that("cndrc detects a Condorcet winner", {
-  skip_on_cran()
+  skip_heavy()
   M <- matrix(c(
     0, 60, 70,
     40, 0, 55,
@@ -610,7 +610,7 @@ test_that("cndrc detects a Condorcet winner", {
 })
 
 test_that("cndrc reports no winner for a cycle", {
-  skip_on_cran()
+  skip_heavy()
   M <- matrix(c(
     0, 60, 40,
     40, 0, 60,
@@ -622,12 +622,12 @@ test_that("cndrc reports no winner for a cycle", {
 })
 
 test_that("morie_condorcet_winner alias is identical", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_condorcet_winner, cndrc)
 })
 
 test_that("morie_cnn1d_conv1d_forward computes valid cross-correlation", {
-  skip_on_cran()
+  skip_heavy()
   x <- c(1, 2, 3, 4, 5)
   w <- c(1, 0, -1)
   res <- morie_cnn1d_conv1d_forward(x, w, b = 0)
@@ -638,7 +638,7 @@ test_that("morie_cnn1d_conv1d_forward computes valid cross-correlation", {
 })
 
 test_that("morie_cnn1d_conv1d_forward respects stride and padding", {
-  skip_on_cran()
+  skip_heavy()
   x <- c(1, 2, 3, 4, 5, 6)
   w <- c(0.5, 0.5)
   res <- morie_cnn1d_conv1d_forward(x, w, b = 1, stride = 2L, padding = 1L)
@@ -647,17 +647,17 @@ test_that("morie_cnn1d_conv1d_forward respects stride and padding", {
 })
 
 test_that("morie_cnn1d_conv1d_forward errors when input shorter than kernel", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_cnn1d_conv1d_forward(c(1, 2), c(1, 2, 3)))
 })
 
 test_that("morie_conv1d_forward alias is identical", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_conv1d_forward, morie_cnn1d_conv1d_forward)
 })
 
 test_that("morie_cnn2d_conv2d_forward computes valid 2D cross-correlation", {
-  skip_on_cran()
+  skip_heavy()
   x <- matrix(1:16, 4, 4)
   w <- matrix(c(1, 0, 0, -1), 2, 2)
   res <- morie_cnn2d_conv2d_forward(x, w, b = 0)
@@ -668,7 +668,7 @@ test_that("morie_cnn2d_conv2d_forward computes valid 2D cross-correlation", {
 })
 
 test_that("morie_cnn2d_conv2d_forward respects stride and padding", {
-  skip_on_cran()
+  skip_heavy()
   x <- matrix(rnorm(36), 6, 6)
   w <- matrix(rnorm(9), 3, 3)
   res <- morie_cnn2d_conv2d_forward(x, w, b = 0.5, stride = 2L, padding = 1L)
@@ -677,7 +677,7 @@ test_that("morie_cnn2d_conv2d_forward respects stride and padding", {
 })
 
 test_that("morie_cnn2d_conv2d_forward errors when input smaller than kernel", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_cnn2d_conv2d_forward(
     matrix(1:4, 2, 2),
     matrix(1:9, 3, 3)
@@ -685,6 +685,6 @@ test_that("morie_cnn2d_conv2d_forward errors when input smaller than kernel", {
 })
 
 test_that("morie_conv2d_forward alias is identical", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_conv2d_forward, morie_cnn2d_conv2d_forward)
 })
