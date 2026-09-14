@@ -29,7 +29,7 @@ test_that("the LCG reproduces the Python arm's stream exactly", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   e <- .propinf_rng(1L)
   got <- replicate(5, .propinf_rng_next(e))
   expect_equal(got,
@@ -44,7 +44,7 @@ test_that("the LCG reproduces the Python arm's stream exactly", {
 })
 
 test_that("the seed is reduced by keeping the low 31 bits", {
-  skip_on_cran()
+  skip_heavy()
   # int(seed) & 0x7FFFFFFF or 1
   expect_identical(.propinf_rng(1L)$st, 1L)
   expect_identical(.propinf_rng(0L)$st, 1L)          # 0 is replaced by 1
@@ -59,7 +59,7 @@ test_that("the seed is reduced by keeping the low 31 bits", {
 })
 
 test_that("the normal draws are Box-Muller, not a half-normal", {
-  skip_on_cran()
+  skip_heavy()
   # cos(2 * pi * u2) needs the second uniform: with a constant cosine
   # every draw comes back non-negative, which is what this catches
   e <- .propinf_rng(7L)
@@ -80,7 +80,7 @@ test_that("the normal draws are Box-Muller, not a half-normal", {
 })
 
 test_that("the activations are the closed forms, and stable at the tails", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(.propinf_relu(2.5), 2.5)
   expect_identical(.propinf_relu(-2.5), 0)
   expect_identical(.propinf_relu(0), 0)
@@ -94,7 +94,7 @@ test_that("the activations are the closed forms, and stable at the tails", {
 })
 
 test_that("the forward pass computes what the weights say it does", {
-  skip_on_cran()
+  skip_heavy()
   net <- list(
     list(W = matrix(c(1, 0, 0, 1), nrow = 2, byrow = TRUE), b = c(0, 0)),
     list(W = matrix(c(1, 1), nrow = 1), b = 0)
@@ -111,7 +111,7 @@ test_that("the forward pass computes what the weights say it does", {
 })
 
 test_that("the flat representation pairs each row of W with its own bias", {
-  skip_on_cran()
+  skip_heavy()
   f <- morie_propinf_flat_representation(fixed_net())
   # row, then bias, layer by layer
   expect_identical(f, c(2, 3, 10, 1, 0, 20, 4, 5, 30, 0.5, -0.5, 0.25, 7))
@@ -122,7 +122,7 @@ test_that("the flat representation pairs each row of W with its own bias", {
 })
 
 test_that("the set representation is one (weights, bias) vector per unit", {
-  skip_on_cran()
+  skip_heavy()
   s <- morie_propinf_set_representation(fixed_net())
   expect_length(s, 2L)                  # one entry per layer
   expect_length(s[[1]], 3L)             # three units in the hidden layer
@@ -134,7 +134,7 @@ test_that("the set representation is one (weights, bias) vector per unit", {
 })
 
 test_that("the sorted representation orders units by descending metric", {
-  skip_on_cran()
+  skip_heavy()
   # metrics are 5, 1, 9, so the canonical order of the rows is 3, 1, 2
   expect_identical(
     morie_propinf_sorted_representation(fixed_net()),
@@ -151,7 +151,7 @@ test_that("the sorted representation orders units by descending metric", {
 })
 
 test_that("the public representations and their internal twins agree", {
-  skip_on_cran()
+  skip_heavy()
   net <- fixed_net()
   expect_identical(morie_propinf_flat_representation(net),
                    .propinf_flat_representation_internal(net))
@@ -164,7 +164,7 @@ test_that("the public representations and their internal twins agree", {
 })
 
 test_that("permuting a hidden layer leaves the network's function unchanged", {
-  skip_on_cran()
+  skip_heavy()
   net <- fixed_net()
   X <- matrix(c(1, -2, 0.5, 3, 2, -1, 0, 0), nrow = 4, byrow = TRUE)
   before <- morie_propinf_fcnn_predict(net, X)
@@ -175,7 +175,7 @@ test_that("permuting a hidden layer leaves the network's function unchanged", {
 })
 
 test_that("only the permutation-invariant representations survive a permutation", {
-  skip_on_cran()
+  skip_heavy()
   net <- fixed_net()
   perm <- morie_propinf_permute_hidden_layer(net, 0L, c(2L, 0L, 1L))
   # the baseline moves -- this is the weakness the paper reports
@@ -192,7 +192,7 @@ test_that("only the permutation-invariant representations survive a permutation"
 })
 
 test_that("permutation rejects indices that are not a permutation", {
-  skip_on_cran()
+  skip_heavy()
   net <- fixed_net()
   expect_error(morie_propinf_permute_hidden_layer(net, 0L, c(0L, 1L)), "not a permutation")
   expect_error(morie_propinf_permute_hidden_layer(net, 0L, c(0L, 1L, 1L)), "not a permutation")
@@ -202,7 +202,7 @@ test_that("permutation rejects indices that are not a permutation", {
 })
 
 test_that("training separates a linearly separable problem and is reproducible", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   n <- 60L
   X <- cbind(runif(n, -1, 1), runif(n, -1, 1))
@@ -225,7 +225,7 @@ test_that("training separates a linearly separable problem and is reproducible",
 })
 
 test_that("training rejects malformed input", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(runif(20), nrow = 10)
   y <- rep(c(0, 1), 5)
   expect_error(morie_propinf_train_fcnn(X, y[1:5]), "different lengths")
@@ -255,7 +255,7 @@ shadow_pair <- function(k = 6L) {
 }
 
 test_that("property inference runs on all three representations", {
-  skip_on_cran()
+  skip_heavy()
   sp <- shadow_pair()
   for (repr in c("baseline", "sorting", "set")) {
     r <- morie_propinf_property_inference(sp$nets, sp$labs, representation = repr,
@@ -274,7 +274,7 @@ test_that("property inference runs on all three representations", {
 })
 
 test_that("property inference scores held-out targets and reports accuracy", {
-  skip_on_cran()
+  skip_heavy()
   sp <- shadow_pair()
   r <- morie_propinf_property_inference(sp$nets, sp$labs,
                                         target_models = sp$nets[1:2],
@@ -293,7 +293,7 @@ test_that("property inference scores held-out targets and reports accuracy", {
 })
 
 test_that("property inference rejects malformed input", {
-  skip_on_cran()
+  skip_heavy()
   sp <- shadow_pair()
   expect_error(
     morie_propinf_property_inference(sp$nets, sp$labs, representation = "nope"),
@@ -329,7 +329,7 @@ test_that("property inference rejects malformed input", {
 })
 
 test_that("standardisation centres and scales the feature matrix", {
-  skip_on_cran()
+  skip_heavy()
   feats <- list(c(1, 10), c(3, 20), c(5, 30))
   st <- .propinf_standardise(feats)
   expect_equal(st$mu, c(3, 20))
@@ -344,14 +344,14 @@ test_that("standardisation centres and scales the feature matrix", {
 })
 
 test_that("rows() accepts a matrix or a data frame and keeps row order", {
-  skip_on_cran()
+  skip_heavy()
   X <- matrix(c(1, 2, 3, 4), nrow = 2, byrow = TRUE)
   expect_identical(.propinf_rows(X), list(c(1, 2), c(3, 4)))
   expect_identical(.propinf_rows(as.data.frame(X)), list(c(1, 2), c(3, 4)))
 })
 
 test_that("mlp_backward returns the gradients it accumulated", {
-  skip_on_cran()
+  skip_heavy()
   net <- .propinf_mlp_init(c(3L, 4L, 2L), .propinf_rng(1L))
   fp <- .propinf_mlp_forward(net, c(1, 2, 3), final = "linear")
   bw <- .propinf_mlp_backward(net, fp$acts, fp$pre, c(1, 1),
@@ -370,7 +370,7 @@ test_that("mlp_backward returns the gradients it accumulated", {
 })
 
 test_that("the analytic gradients match finite differences", {
-  skip_on_cran()
+  skip_heavy()
   # final = "sigmoid" means dout is already dL/dz, which is the
   # cross-entropy convention; the reference objective has to match it
   h <- 1e-6
@@ -419,7 +419,7 @@ test_that("the analytic gradients match finite differences", {
 })
 
 test_that("mlp_backward returns the gradient with respect to its input", {
-  skip_on_cran()
+  skip_heavy()
   # the documented contract of the Python arm it mirrors: the returned
   # delta is dL/dx, so its length is the input dimension. Stopping the
   # propagation at the second layer returned dL/dz for the first layer
@@ -446,7 +446,7 @@ test_that("mlp_backward returns the gradient with respect to its input", {
 })
 
 test_that("the vector meta-classifier actually trains", {
-  skip_on_cran()
+  skip_heavy()
   feats <- lapply(1:8, function(i) as.numeric(c(i, i^2 / 10, -i / 2, 1)))
   labs <- c(0, 0, 0, 0, 1, 1, 1, 1)
   init <- .propinf_mlp_init(c(4L, 8L, 1L), .propinf_rng(7L))
@@ -459,7 +459,7 @@ test_that("the vector meta-classifier actually trains", {
 })
 
 test_that("the DeepSets meta-classifier actually trains", {
-  skip_on_cran()
+  skip_heavy()
   sp <- shadow_pair()
   sets <- lapply(sp$nets, .propinf_set_representation_internal)
   shapes <- lapply(sets[[1]], function(L) c(length(L), length(L[[1]]) - 1L))
@@ -477,7 +477,7 @@ test_that("the DeepSets meta-classifier actually trains", {
 })
 
 test_that("psis keeps one entry per layer, NULL where there is no edge network", {
-  skip_on_cran()
+  skip_heavy()
   shapes <- list(c(3L, 2L), c(1L, 3L))
   m <- .propinf_deepsets_init(shapes, 8L, 4L, 8L, .propinf_rng(1L),
                               context = "paired")
@@ -499,7 +499,7 @@ test_that("psis keeps one entry per layer, NULL where there is no edge network",
 })
 
 test_that("all three contexts run end to end", {
-  skip_on_cran()
+  skip_heavy()
   sp <- shadow_pair()
   for (ctx in c("paired", "as_printed", "none")) {
     r <- morie_propinf_property_inference(sp$nets, sp$labs, representation = "set",

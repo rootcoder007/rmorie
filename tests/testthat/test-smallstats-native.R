@@ -147,7 +147,7 @@ test_that("rewired public functions run end-to-end without the old packages", {
 })
 
 test_that("benchmark: natives are within sane speed of the packages", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(identical(Sys.getenv("MORIE_RUN_BENCH"), "1"),
               "set MORIE_RUN_BENCH=1 to run benchmarks")
   bench <- function(thunk, times = 5L) {

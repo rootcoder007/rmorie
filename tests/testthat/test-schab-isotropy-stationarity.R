@@ -19,7 +19,7 @@ test_that("spiso passes an isotropic field", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   coords <- lattice(24, 2.4)
   res <- spiso(coords, smooth_field(coords))
   expect_true(res$is_isotropic)
@@ -27,7 +27,7 @@ test_that("spiso passes an isotropic field", {
 })
 
 test_that("spiso detects geometric anisotropy", {
-  skip_on_cran()
+  skip_heavy()
   coords <- lattice(24, 2.4)
   z <- smooth_field(coords)
   stretched <- coords
@@ -38,7 +38,7 @@ test_that("spiso detects geometric anisotropy", {
 })
 
 test_that("spiso does not depend on the order the points are listed in", {
-  skip_on_cran()
+  skip_heavy()
   # A lag and its negation are the same direction. Before the lags were
   # oriented into one half-space this moved the answer in the third decimal:
   # atan2 of a reversed pair folds back one ulp away, and on a regular lattice
@@ -52,7 +52,7 @@ test_that("spiso does not depend on the order the points are listed in", {
 })
 
 test_that("spiso does not let rounding split the diagonal lags", {
-  skip_on_cran()
+  skip_heavy()
   # Every 45-degree lag here lies exactly on the pi/4 sector boundary.
   # Rescaling changes the floating-point offsets but not the geometry.
   coords <- lattice(24, 2.4)
@@ -63,14 +63,14 @@ test_that("spiso does not let rounding split the diagonal lags", {
 })
 
 test_that("spiso agrees with the Python arm on a fixed lattice", {
-  skip_on_cran()
+  skip_heavy()
   coords <- lattice(24, 2.4)
   expect_equal(spiso(coords, smooth_field(coords))$relative_spread,
                0.173760543267416, tolerance = 1e-12)
 })
 
 test_that("spiso rejects bad input", {
-  skip_on_cran()
+  skip_heavy()
   coords <- lattice(4, 2.4)
   expect_error(spiso(coords, rep(1, 3)))
   expect_error(spiso(matrix(1, 16, 3), rep(1, 16)))
@@ -86,7 +86,7 @@ test_that("spiso rejects bad input", {
 stat_coords <- function() lattice(40, 2.0)
 
 test_that("sprfss passes a stationary field at every level", {
-  skip_on_cran()
+  skip_heavy()
   coords <- stat_coords()
   set.seed(11)
   res <- sprfss(coords, rnorm(nrow(coords)))
@@ -97,7 +97,7 @@ test_that("sprfss passes a stationary field at every level", {
 })
 
 test_that("sprfss rejects a linear trend as non-intrinsic", {
-  skip_on_cran()
+  skip_heavy()
   # A linear trend leaves the increment VARIANCE flat, so a variance-drift
   # screen passes it for the wrong reason. The book's condition is on the
   # increment MEAN, which a trend violates outright.
@@ -110,7 +110,7 @@ test_that("sprfss rejects a linear trend as non-intrinsic", {
 })
 
 test_that("sprfss needs oriented lags to see a trend at all", {
-  skip_on_cran()
+  skip_heavy()
   # Binning on lag DISTANCE alone averages the +x and -x pairs together, so a
   # trend cancels itself exactly and passes.
   coords <- stat_coords()
@@ -122,7 +122,7 @@ test_that("sprfss needs oriented lags to see a trend at all", {
 })
 
 test_that("sprfss detects heteroscedasticity as variance drift", {
-  skip_on_cran()
+  skip_heavy()
   coords <- stat_coords()
   set.seed(11)
   z <- rnorm(nrow(coords))
@@ -133,7 +133,7 @@ test_that("sprfss detects heteroscedasticity as variance drift", {
 })
 
 test_that("sprfss keeps the hierarchy nested", {
-  skip_on_cran()
+  skip_heavy()
   coords <- stat_coords()
   for (s in 1:5) {
     set.seed(s)
@@ -143,7 +143,7 @@ test_that("sprfss keeps the hierarchy nested", {
 })
 
 test_that("sprfss agrees with the Python arm on a fixed lattice", {
-  skip_on_cran()
+  skip_heavy()
   coords <- lattice(24, 2.4)
   res <- sprfss(coords, smooth_field(coords))
   expect_equal(res$increment_bias, 0.250275519620559, tolerance = 1e-12)
@@ -152,6 +152,6 @@ test_that("sprfss agrees with the Python arm on a fixed lattice", {
 })
 
 test_that("sprfss rejects bad input", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(sprfss(lattice(4, 2.4), rep(1, 3)))
 })

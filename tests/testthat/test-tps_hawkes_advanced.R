@@ -30,7 +30,7 @@ test_that(".tps_hwka_kernel_density(exponential) matches dexp", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   beta <- 0.7
   u <- c(0.1, 0.5, 1.0, 2.5, 5.0)
   got <- rmorie:::.tps_hwka_kernel_density(u, "exponential", c(beta))
@@ -39,7 +39,7 @@ test_that(".tps_hwka_kernel_density(exponential) matches dexp", {
 })
 
 test_that(".tps_hwka_kernel_density(gamma) matches dgamma", {
-  skip_on_cran()
+  skip_heavy()
   psi <- c(2.0, 1.5)  # shape, rate
   u <- c(0.1, 0.5, 1, 2, 4)
   got <- rmorie:::.tps_hwka_kernel_density(u, "gamma", psi)
@@ -48,7 +48,7 @@ test_that(".tps_hwka_kernel_density(gamma) matches dgamma", {
 })
 
 test_that(".tps_hwka_kernel_density(weibull) matches dweibull", {
-  skip_on_cran()
+  skip_heavy()
   psi <- c(1.5, 2.0)  # shape, scale
   u <- c(0.1, 0.5, 1, 2, 4)
   got <- rmorie:::.tps_hwka_kernel_density(u, "weibull", psi)
@@ -57,7 +57,7 @@ test_that(".tps_hwka_kernel_density(weibull) matches dweibull", {
 })
 
 test_that(".tps_hwka_kernel_density(lomax) matches its analytic form", {
-  skip_on_cran()
+  skip_heavy()
   # v0.9.5.6+ scipy form: f(u) = alpha * c^alpha * (u + c)^{-(alpha+1)}
   alpha <- 3.0
   c_ <- 1.0
@@ -73,7 +73,7 @@ test_that(".tps_hwka_kernel_density(lomax) matches its analytic form", {
 # ---------------------------------------------------------------------------
 
 test_that(".tps_hwka_kernel_cdf(exponential) matches pexp", {
-  skip_on_cran()
+  skip_heavy()
   beta <- 0.7
   u <- c(0.1, 0.5, 1, 2, 5)
   got <- rmorie:::.tps_hwka_kernel_cdf(u, "exponential", c(beta))
@@ -82,7 +82,7 @@ test_that(".tps_hwka_kernel_cdf(exponential) matches pexp", {
 })
 
 test_that(".tps_hwka_kernel_cdf(gamma) matches pgamma", {
-  skip_on_cran()
+  skip_heavy()
   psi <- c(2.0, 1.5)
   u <- c(0.1, 1, 4)
   got <- rmorie:::.tps_hwka_kernel_cdf(u, "gamma", psi)
@@ -91,7 +91,7 @@ test_that(".tps_hwka_kernel_cdf(gamma) matches pgamma", {
 })
 
 test_that(".tps_hwka_kernel_cdf(weibull) matches pweibull", {
-  skip_on_cran()
+  skip_heavy()
   psi <- c(1.5, 2.0)
   u <- c(0.1, 1, 4)
   got <- rmorie:::.tps_hwka_kernel_cdf(u, "weibull", psi)
@@ -100,7 +100,7 @@ test_that(".tps_hwka_kernel_cdf(weibull) matches pweibull", {
 })
 
 test_that(".tps_hwka_kernel_cdf(lomax) hits closed-form anchor", {
-  skip_on_cran()
+  skip_heavy()
   # v0.9.5.6+ scipy form: F(u) = 1 - (c / (u + c))^alpha.
   # At alpha=3, c=1, u=1: F = 1 - (1/2)^3 = 0.875 exactly.
   got <- rmorie:::.tps_hwka_kernel_cdf(1, "lomax", c(3, 1))
@@ -113,21 +113,21 @@ test_that(".tps_hwka_kernel_cdf(lomax) hits closed-form anchor", {
 # ---------------------------------------------------------------------------
 
 test_that("baseline(constant) is just exp(a0) everywhere", {
-  skip_on_cran()
+  skip_heavy()
   vals <- rmorie:::.tps_hwka_baseline(c(0, 1, 100), "constant",
                                       c(log(0.3)), T_ = 100)
   expect_equal(vals, rep(0.3, 3L), tolerance = 1e-12)
 })
 
 test_that("baseline_integral(constant) is exp(a0) * T exactly", {
-  skip_on_cran()
+  skip_heavy()
   T_ <- 250
   got <- rmorie:::.tps_hwka_baseline_integral(T_, "constant", c(log(2.0)))
   expect_equal(got, 2.0 * T_, tolerance = 1e-12)
 })
 
 test_that("baseline_integral(sinusoidal, no seasonal/trend) ~ exp(a0)*T", {
-  skip_on_cran()
+  skip_heavy()
   # With a1 = a2 = a3 = 0 the sinusoidal baseline collapses to exp(a0).
   T_ <- 365
   a0 <- log(0.5)
@@ -138,7 +138,7 @@ test_that("baseline_integral(sinusoidal, no seasonal/trend) ~ exp(a0)*T", {
 })
 
 test_that("baseline(sinusoidal) is positive and 365.25-periodic-ish", {
-  skip_on_cran()
+  skip_heavy()
   alpha <- c(log(1.0), 0, 0.3, -0.2)
   t <- seq(0, 365.25 * 2, length.out = 50)
   vals <- rmorie:::.tps_hwka_baseline(t, "sinusoidal", alpha,
@@ -158,7 +158,7 @@ test_that("baseline(sinusoidal) is positive and 365.25-periodic-ish", {
 # ---------------------------------------------------------------------------
 
 test_that("kernel param count is 1 for exp and 2 otherwise", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(rmorie:::.tps_hwka_n_kernel_params("exponential"), 1L)
   expect_identical(rmorie:::.tps_hwka_n_kernel_params("gamma"), 2L)
   expect_identical(rmorie:::.tps_hwka_n_kernel_params("weibull"), 2L)
@@ -166,13 +166,13 @@ test_that("kernel param count is 1 for exp and 2 otherwise", {
 })
 
 test_that("baseline param count is 1 for constant and 4 for sinusoidal", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(rmorie:::.tps_hwka_n_baseline_params("constant"), 1L)
   expect_identical(rmorie:::.tps_hwka_n_baseline_params("sinusoidal"), 4L)
 })
 
 test_that(".tps_hwka_split_theta partitions a parameter vector cleanly", {
-  skip_on_cran()
+  skip_heavy()
   # exp + sinusoidal => 4 baseline + 1 eta + 1 kernel = 6
   th <- seq_len(6L) * 0.1
   out <- rmorie:::.tps_hwka_split_theta(th, "exponential", "sinusoidal")
@@ -196,7 +196,7 @@ test_that(".tps_hwka_split_theta partitions a parameter vector cleanly", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_tps_hawkes_advanced_fit returns rich-result on synthetic Assault", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1L)
   df <- make_synthetic_tps("Assault", n = 200L, seed = 5L)
   rr <- morie_tps_hawkes_advanced_fit(
@@ -207,7 +207,7 @@ test_that("morie_tps_hawkes_advanced_fit returns rich-result on synthetic Assaul
 })
 
 test_that("morie_tps_hawkes_advanced_fit handles too-few events gracefully", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_synthetic_tps("Assault", n = 50L, seed = 6L)
   rr <- morie_tps_hawkes_advanced_fit(
     df, kernel = "exponential", baseline = "constant", max_n = 50L
@@ -216,7 +216,7 @@ test_that("morie_tps_hawkes_advanced_fit handles too-few events gracefully", {
 })
 
 test_that("morie_tps_hawkes_advanced_fit rejects unknown kernel/baseline", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_synthetic_tps("Assault", n = 50L, seed = 7L)
   expect_error(
     morie_tps_hawkes_advanced_fit(df, kernel = "bogus"),
@@ -229,14 +229,14 @@ test_that("morie_tps_hawkes_advanced_fit rejects unknown kernel/baseline", {
 })
 
 test_that("morie_tps_hawkes_advanced_fit warns when no OCC/REPORT_DATE", {
-  skip_on_cran()
+  skip_heavy()
   df <- data.frame(x = 1:10)
   rr <- morie_tps_hawkes_advanced_fit(df, ds_name = "no-date")
   expect_s3_class(rr, "morie_tps_hawkes_advanced_result")
 })
 
 test_that("morie_tps_compare_hawkes_kernels sweeps kernel x baseline grid", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2L)
   df <- make_synthetic_tps("Assault", n = 200L, seed = 8L)
   rr <- morie_tps_compare_hawkes_kernels(
@@ -247,7 +247,7 @@ test_that("morie_tps_compare_hawkes_kernels sweeps kernel x baseline grid", {
 })
 
 test_that("morie_tps_hawkes_markovian_vs_nonmarkovian compares 2x2 grid", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3L)
   df <- make_synthetic_tps("Assault", n = 200L, seed = 9L)
   rr <- morie_tps_hawkes_markovian_vs_nonmarkovian(

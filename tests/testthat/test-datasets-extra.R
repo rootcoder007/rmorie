@@ -13,7 +13,7 @@ test_that("morie_datasets_siu_director_reports returns a non-empty data.frame", 
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   out <- tryCatch(morie_datasets_siu_director_reports(),
                   error = function(e) e)
   if (inherits(out, "error")) {
@@ -26,7 +26,7 @@ test_that("morie_datasets_siu_director_reports returns a non-empty data.frame", 
 # ----------------------------------------------------- siu_report_text offline
 
 test_that("morie_datasets_siu_report_text offline=TRUE returns empty string", {
-  skip_on_cran()
+  skip_heavy()
   out <- tryCatch(
     morie_datasets_siu_report_text(url = "https://example.com/x",
                                     offline = TRUE),
@@ -39,7 +39,7 @@ test_that("morie_datasets_siu_report_text offline=TRUE returns empty string", {
 })
 
 test_that("morie_datasets_siu_report_text errors on NULL url + offline=FALSE", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(
     morie_datasets_siu_report_text(url = NULL, offline = FALSE)
   )
@@ -48,7 +48,7 @@ test_that("morie_datasets_siu_report_text errors on NULL url + offline=FALSE", {
 # ----------------------------------------------------- siu_report_fields
 
 test_that("morie_datasets_siu_report_fields parses a minimal SIU text blob", {
-  skip_on_cran()
+  skip_heavy()
   txt <- paste0(
     "Case Number: 23-OFD-001\n",
     "Date of Incident: 2023-08-04\n",
@@ -67,7 +67,7 @@ test_that("morie_datasets_siu_report_fields parses a minimal SIU text blob", {
 # ---------------------------------------------- network-gated loaders, smokey
 
 test_that("morie_datasets_chicago_crime is invokable", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_network("data.cityofchicago.org")
   out <- tryCatch(
     morie_datasets_chicago_crime(year = 2023L, max_features = 5L),
@@ -80,7 +80,7 @@ test_that("morie_datasets_chicago_crime is invokable", {
 })
 
 test_that("morie_datasets_nyc_stop_and_frisk is invokable", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_network("opendata.cityofnewyork.us")
   out <- tryCatch(
     morie_datasets_nyc_stop_and_frisk(year = 2023L, max_features = 5L),
@@ -93,7 +93,7 @@ test_that("morie_datasets_nyc_stop_and_frisk is invokable", {
 })
 
 test_that("morie_datasets_ckan_search errors cleanly on unreachable portal", {
-  skip_on_cran()
+  skip_heavy()
   # Use a clearly-unreachable host so we hit the error path without
   # relying on test_if_offline timing.
   out <- tryCatch(
@@ -107,7 +107,7 @@ test_that("morie_datasets_ckan_search errors cleanly on unreachable portal", {
 })
 
 test_that("morie_datasets_namus_missing_persons errors without an API key + offline", {
-  skip_on_cran()
+  skip_heavy()
   # NamUs requires an API key + a working network. We only need the
   # error-path to be reachable for coverage.
   out <- tryCatch(
@@ -118,7 +118,7 @@ test_that("morie_datasets_namus_missing_persons errors without an API key + offl
 })
 
 test_that("morie_datasets_nibrs errors cleanly without FBI_API_KEY", {
-  skip_on_cran()
+  skip_heavy()
   withr::with_envvar(
     c(FBI_API_KEY = ""),
     out <- tryCatch(morie_datasets_nibrs(year = 2023L,
@@ -129,7 +129,7 @@ test_that("morie_datasets_nibrs errors cleanly without FBI_API_KEY", {
 })
 
 test_that("morie_datasets_nist_rds is invokable", {
-  skip_on_cran()
+  skip_heavy()
   out <- tryCatch(
     morie_datasets_nist_rds(dataset_id = "some_id", query = "test"),
     error = function(e) e

@@ -9,7 +9,7 @@ test_that("DotProd implements eqs (4.24)-(4.25)", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   r <- DotProd(c(1, 2, 3), c(4, 5, 6))
   expect_equal(r$dot_product, 32)
   expect_equal(r$gamma, 32 / sqrt(14 * 77))
@@ -21,14 +21,14 @@ test_that("DotProd implements eqs (4.24)-(4.25)", {
 })
 
 test_that("ContProj carries the dt of eq (4.26)", {
-  skip_on_cran()
+  skip_heavy()
   r <- ContProj(rep(1, 5), rep(2, 5), dt = 0.5)
   expect_equal(r$discrete_sum, 10)
   expect_equal(r$theta, 4)
 })
 
 test_that("CcfOuter measures the Toeplitz structure of eq (4.29)", {
-  skip_on_cran()
+  skip_heavy()
   flat <- CcfOuter(sine_c(600, 17), sine_c(600, 17), order = 4)
   expect_true(flat$toeplitz)
   expect_equal(dim(flat$theta), c(4L, 4L))
@@ -40,7 +40,7 @@ test_that("CcfOuter measures the Toeplitz structure of eq (4.29)", {
 })
 
 test_that("Csd computes eqs (4.30)-(4.31) two ways", {
-  skip_on_cran()
+  skip_heavy()
   r <- Csd(sine_c(64, 5), sine_c(64, 5, phase = 0.4))
   expect_true(r$agrees)
   expect_equal(r$max_difference, 0, tolerance = 1e-6)
@@ -48,13 +48,13 @@ test_that("Csd computes eqs (4.30)-(4.31) two ways", {
 })
 
 test_that("Cohere refuses a single segment (eq 4.32 caveat)", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(Cohere(sine_c(64, 5), sine_c(64, 5, phase = 0.3),
                       nperseg = 64), "AVERAGED")
 })
 
 test_that("Cohere is 1 for a linearly related pair", {
-  skip_on_cran()
+  skip_heavy()
   n <- 1024
   x <- sine_c(n, 13) + 0.2 * sine_c(n, 97)
   r <- Cohere(x, 2 * x, fs = 128, nperseg = 128)
@@ -63,7 +63,7 @@ test_that("Cohere is 1 for a linearly related pair", {
 })
 
 test_that("Cohere reports the phase difference", {
-  skip_on_cran()
+  skip_heavy()
   n <- 1024
   fs <- 128
   cyc <- 16
@@ -74,7 +74,7 @@ test_that("Cohere reports the phase difference", {
 })
 
 test_that("Msc is the square of the magnitude coherence", {
-  skip_on_cran()
+  skip_heavy()
   n <- 1024
   x <- sine_c(n, 11) + 0.5 * sine_c(n, 53)
   y <- sine_c(n, 11) + 0.5 * sine_c(n, 71)
@@ -84,7 +84,7 @@ test_that("Msc is the square of the magnitude coherence", {
 })
 
 test_that("Template finds the planted copy and resists a plateau", {
-  skip_on_cran()
+  skip_heavy()
   ref <- c(0, 1, 3, 1, 0)
   x <- numeric(20)
   x[9:13] <- ref
@@ -106,7 +106,7 @@ test_that("Template finds the planted copy and resists a plateau", {
 REF <- c(3, 2, 1)
 
 test_that("RefPattern implements eqs (4.53)-(4.54)", {
-  skip_on_cran()
+  skip_heavy()
   r <- RefPattern()
   expect_equal(r$g, c(3, 2, 1))
   expect_equal(r$h, c(1, 2, 3))
@@ -116,7 +116,7 @@ test_that("RefPattern implements eqs (4.53)-(4.54)", {
 })
 
 test_that("MfImpulse reverses, scales and delays (eq 4.49)", {
-  skip_on_cran()
+  skip_heavy()
   r <- MfImpulse(REF)
   expect_equal(r$h[1:4], c(0, 1, 2, 3))
   expect_equal(r$shift_samples, 3L)
@@ -125,7 +125,7 @@ test_that("MfImpulse reverses, scales and delays (eq 4.49)", {
 })
 
 test_that("MfAcf output is the reference ACF", {
-  skip_on_cran()
+  skip_heavy()
   r <- MfAcf(REF)
   expect_true(r$equals_acf)
   expect_equal(r$peak_value, r$expected_peak)
@@ -133,7 +133,7 @@ test_that("MfAcf output is the reference ACF", {
 })
 
 test_that("MfTf conjugates the spectrum (eq 4.48)", {
-  skip_on_cran()
+  skip_heavy()
   X <- c(complex(real = 1, imaginary = 2), complex(real = -0.5, imaginary = 0.25))
   r <- MfTf(X, c(0, 1), t0 = 0)
   expect_equal(r$H[1], complex(real = 1, imaginary = -2))
@@ -144,7 +144,7 @@ test_that("MfTf conjugates the spectrum (eq 4.48)", {
 })
 
 test_that("the EEG forms delegate to the general ones", {
-  skip_on_cran()
+  skip_heavy()
   X <- c(complex(real = 1, imaginary = 2), complex(real = -0.5, imaginary = 0.25))
   expect_equal(MfTfEeg(X, c(0, 1), t0 = 0.5)$H, MfTf(X, c(0, 1), t0 = 0.5)$H)
   expect_true(grepl("N-1", MfTfEeg(X, c(0, 1), t0 = 0.5)$dft_shift_caveat))
@@ -153,7 +153,7 @@ test_that("the EEG forms delegate to the general ones", {
 })
 
 test_that("the matched-filter chain eqs (4.33)-(4.39)", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(Re(MfInput(c(1, 1), omega = 0, dt = 0.5)$X), 1)
   o <- MfOutput(REF, rev(REF))
   expect_equal(o$peak_index, 2L)
@@ -172,7 +172,7 @@ test_that("the matched-filter chain eqs (4.33)-(4.39)", {
 })
 
 test_that("SigEnergy integrates, and reports a mismatch", {
-  skip_on_cran()
+  skip_heavy()
   r <- SigEnergy(c(4, 0, 0, 0), dt = 1)
   expect_equal(r$energy, 8)          # trapezoid: 0.5 * (16 + 0)
   f <- SigEnergy(NULL, X = rep(complex(real = sqrt(2)), 4),
@@ -185,7 +185,7 @@ test_that("SigEnergy integrates, and reports a mismatch", {
 })
 
 test_that("MfRatio reaches its bound only at the optimum (eq 4.41)", {
-  skip_on_cran()
+  skip_heavy()
   freqs <- (0:8) / 8
   X <- complex(real = cos(0:8), imaginary = sin(2 * (0:8)))
   opt <- MfTf(X, freqs, t0 = 0)$H
@@ -198,7 +198,7 @@ test_that("MfRatio reaches its bound only at the optimum (eq 4.41)", {
 })
 
 test_that("the Schwarz family, eqs (4.42)-(4.45)", {
-  skip_on_cran()
+  skip_heavy()
   grid <- (0:8) / 8
   B <- complex(real = cos(0:8), imaginary = sin(0:8))
   r <- SchwarzC(3 * Conj(B), B, grid)
@@ -226,7 +226,7 @@ test_that("the Schwarz family, eqs (4.42)-(4.45)", {
 })
 
 test_that("MfPsd output is real and nonnegative (eq 4.57)", {
-  skip_on_cran()
+  skip_heavy()
   r <- MfPsd(c(REF, numeric(5)))
   expect_true(r$is_psd)
   expect_lt(r$max_imaginary, 1e-9)
@@ -234,7 +234,7 @@ test_that("MfPsd output is real and nonnegative (eq 4.57)", {
 })
 
 test_that("MfMaxSnr is 2E/N0 and depends only on energy (eq 4.46)", {
-  skip_on_cran()
+  skip_heavy()
   r <- MfMaxSnr(rep(1, 4), 2)
   expect_equal(r$snr, 2 * r$energy / 2)
   expect_true(r$depends_only_on_energy)
@@ -247,7 +247,7 @@ test_that("MfMaxSnr is 2E/N0 and depends only on energy (eq 4.46)", {
 })
 
 test_that("MatchedFilt designs, runs and whitens", {
-  skip_on_cran()
+  skip_heavy()
   ref <- c(1, 2, 3)
   x <- numeric(20)
   x[8:10] <- ref
@@ -262,7 +262,7 @@ test_that("MatchedFilt designs, runs and whitens", {
 })
 
 test_that("Idft, Parseval and SyncSum, eqs (3.81), (3.91), (3.96)", {
-  skip_on_cran()
+  skip_heavy()
   x <- c(1, 2, 3, 4)
   expect_equal(Idft(Dft(x)$X)$x, x, tolerance = 1e-12)
   p <- Parseval(x)
@@ -274,7 +274,7 @@ test_that("Idft, Parseval and SyncSum, eqs (3.81), (3.91), (3.96)", {
 })
 
 test_that("SpecMoments implements eqs (6.32)-(6.43)", {
-  skip_on_cran()
+  skip_heavy()
   n <- 512
   fs <- 256
   cyc <- 32
@@ -294,7 +294,7 @@ test_that("SpecMoments implements eqs (6.32)-(6.43)", {
 })
 
 test_that("EmgFreq separates the mean from the median", {
-  skip_on_cran()
+  skip_heavy()
   n <- 1024
   fs <- 1000
   x <- sine_c(n, 40) + 0.25 * sine_c(n, 300)
@@ -307,7 +307,7 @@ test_that("EmgFreq separates the mean from the median", {
 })
 
 test_that("SpecRes depends on record length and trades with the window", {
-  skip_on_cran()
+  skip_heavy()
   a <- SpecRes(256, fs = 256)
   b <- SpecRes(512, fs = 256)
   expect_equal(a$delta_f, 1)
@@ -321,7 +321,7 @@ test_that("SpecRes depends on record length and trades with the window", {
 })
 
 test_that("PsdHz band powers carry the bin width", {
-  skip_on_cran()
+  skip_heavy()
   r <- PsdHz(rep(1, 9), fs = 16,
              bands = list(low = c(0, 4), high = c(4, 8)))
   expect_equal(r$bin_width, 1)
@@ -333,7 +333,7 @@ test_that("PsdHz band powers carry the bin width", {
 })
 
 test_that("PcgSyncAvg keeps murmur power waveform averaging cancels", {
-  skip_on_cran()
+  skip_heavy()
   n <- 128
   m <- 12
   cycles <- lapply(0:(m - 1), function(k)
@@ -344,7 +344,7 @@ test_that("PcgSyncAvg keeps murmur power waveform averaging cancels", {
 })
 
 test_that("ErpArtifact rejects the contaminated epochs", {
-  skip_on_cran()
+  skip_heavy()
   good <- replicate(9, sine_c(32, 2), simplify = FALSE)
   bad <- 50 * sine_c(32, 2)
   r <- ErpArtifact(c(good, list(bad)), reject = 5)
@@ -359,7 +359,7 @@ test_that("ErpArtifact rejects the contaminated epochs", {
 })
 
 test_that("SeizCohere tracks bands over a moving window", {
-  skip_on_cran()
+  skip_heavy()
   n <- 2048
   fs <- 128
   a <- sine_c(n, 100) + 0.3 * sine_c(n, 13)
@@ -377,7 +377,7 @@ test_that("SeizCohere tracks bands over a moving window", {
 })
 
 test_that("CardioResp separates PLV from coherence", {
-  skip_on_cran()
+  skip_heavy()
   n <- 512
   fs <- 8
   resp <- sin(2 * pi * 0.25 * (0:(n - 1)) / fs)
@@ -391,7 +391,7 @@ test_that("CardioResp separates PLV from coherence", {
 })
 
 test_that("pre-policy spellings still resolve", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(morie_ch4_dot_product(c(1, 2), c(3, 4))$dot_product, 11)
   expect_true(morie_ch3_parseval(c(1, 2))$holds)
   expect_gt(morie_matched_filter_snr(c(1, 1), 2)$snr, 0)

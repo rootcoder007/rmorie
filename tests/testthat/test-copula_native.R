@@ -7,7 +7,7 @@ test_that("copula CDFs match the Python core to 10 significant digits", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   anchors <- list(
     list(f = "gaussian", th = 0.6, cdf = 0.27723374892439, tau = 0.409665529398267),
     list(f = "clayton", th = 2.0, cdf = 0.286864902505703, tau = 0.5),
@@ -26,7 +26,7 @@ test_that("copula CDFs match the Python core to 10 significant digits", {
 })
 
 test_that("every family satisfies the copula axioms", {
-  skip_on_cran()
+  skip_heavy()
   u <- c(0.1, 0.35, 0.5, 0.77, 0.9)
   pars <- list(
     independence = list(NULL, NULL), gaussian = list(0.6, NULL),
@@ -49,7 +49,7 @@ test_that("every family satisfies the copula axioms", {
 })
 
 test_that("tau relations invert and degenerate correctly", {
-  skip_on_cran()
+  skip_heavy()
   for (fam in c("gaussian", "clayton", "gumbel", "frank", "joe", "plackett")) {
     for (tau in c(0.15, 0.45, 0.7)) {
       th <- morie_tau_to_theta(fam, tau)
@@ -66,7 +66,7 @@ test_that("tau relations invert and degenerate correctly", {
 })
 
 test_that("copula_native extends copul rather than duplicating it", {
-  skip_on_cran()
+  skip_heavy()
   # copul inverts tau for three families from DATA; this file evaluates
   # the copulas and covers frank/joe/plackett, which copul cannot.
   set.seed(0)
@@ -80,7 +80,7 @@ test_that("copula_native extends copul rather than duplicating it", {
 })
 
 test_that("dependence measures rise with the parameter and vanish at independence", {
-  skip_on_cran()
+  skip_heavy()
   taus <- vapply(c(1.2, 2, 5), function(t) morie_copula_tau("gumbel", t), 0)
   rhos <- vapply(c(1.2, 2, 5), function(t) morie_copula_spearman("gumbel", t)$rho_s, 0)
   betas <- vapply(c(1.2, 2, 5), function(t) morie_blomqvist_beta("gumbel", t)$beta, 0)
@@ -102,7 +102,7 @@ test_that("dependence measures rise with the parameter and vanish at independenc
 })
 
 test_that("the extreme-value copula is max-stable", {
-  skip_on_cran()
+  skip_heavy()
   for (a in list(list("gumbel", 2), list("galambos", 1.5))) {
     cc <- morie_extreme_value_copula(0.4, 0.7, a[[1]], a[[2]])
     expect_true(cc$valid_pickands)
@@ -121,7 +121,7 @@ test_that("the extreme-value copula is max-stable", {
 })
 
 test_that("the survival copula recovers the pair dependence", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   n <- 200
   theta <- 2
@@ -140,7 +140,7 @@ test_that("the survival copula recovers the pair dependence", {
 })
 
 test_that("COPOD flags the planted outlier and is scale-free", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   X <- matrix(stats::rnorm(600), ncol = 3)
   X[1, ] <- 8

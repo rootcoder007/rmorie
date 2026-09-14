@@ -16,7 +16,7 @@ test_that("mrm_otis callables run on the bundled OTIS samples", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   b09 <- tryCatch(morie_sample("otis_b09"), error = function(e) NULL)
   b01 <- tryCatch(morie_sample("otis_b01"), error = function(e) NULL)
   if (!is.null(b09)) .cw19_run(mrm_otis_placement_concentration(b09))
@@ -30,7 +30,7 @@ test_that("mrm_otis callables run on the bundled OTIS samples", {
 })
 
 test_that("mrm_tps_kulldorff_scan runs on TPS lat/long data", {
-  skip_on_cran()
+  skip_heavy()
   tps <- tryCatch(morie_sample("tps_assault"), error = function(e) NULL)
   if (!is.null(tps)) .cw19_run(mrm_tps_kulldorff_scan(tps))
   # synthetic fallback
@@ -43,7 +43,7 @@ test_that("mrm_tps_kulldorff_scan runs on TPS lat/long data", {
 })
 
 test_that("mrm_siu_case_to_decision_km runs on a synthetic SIU frame", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   n <- 120
   base <- as.Date("2023-01-01") + sample(0:600, n, replace = TRUE)
@@ -62,7 +62,7 @@ test_that("mrm_siu_case_to_decision_km runs on a synthetic SIU frame", {
 })
 
 test_that("mrm diagnostics + DoE callables run on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   d <- make_canonical_cpads(n = 400L, seed = 9L)
   d$treat <- d$cannabis_any_use
   .cw19_run(mrm_assumptions_check(

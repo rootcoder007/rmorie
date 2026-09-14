@@ -13,7 +13,7 @@ test_that("the runs pmf is its closed form and a distribution", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   for (m in 2:7) {
     for (n in 2:7) {
       nn <- m + n
@@ -55,7 +55,7 @@ test_that("the runs pmf is its closed form and a distribution", {
 })
 
 test_that("the Wald-Wolfowitz runs statistic counts the alternations", {
-  skip_on_cran()
+  skip_heavy()
   x <- c(1, 2, 3)
   y <- c(4, 5, 6)
   # fully separated: one run of x then one of y
@@ -90,7 +90,7 @@ test_that("the Wald-Wolfowitz runs statistic counts the alternations", {
 })
 
 test_that("the exact runs test reports both tails", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(42)
   x <- stats::rnorm(6)
   y <- stats::rnorm(7)
@@ -119,7 +119,7 @@ test_that("the exact runs test reports both tails", {
 })
 
 test_that("the tie bounds bracket the attainable run counts", {
-  skip_on_cran()
+  skip_heavy()
   # no ties: the bounds coincide, so nothing is ambiguous
   clean <- rmorie:::Wwties(c(1, 2, 3), c(4, 5, 6))
   expect_equal(clean$nties, 0L)
@@ -150,7 +150,7 @@ test_that("the tie bounds bracket the attainable run counts", {
 })
 
 test_that("the two-sample KS statistic matches stats::ks.test", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(43)
   for (i in 1:6) {
     x <- stats::rnorm(11)
@@ -185,7 +185,7 @@ test_that("the two-sample KS statistic matches stats::ks.test", {
 })
 
 test_that("the exact Smirnov distributions match stats::psmirnov", {
-  skip_on_cran()
+  skip_heavy()
   for (m in c(4L, 7L)) {
     for (n in c(5L, 9L)) {
       for (d in c(0.3, 0.5, 0.75, 1)) {
@@ -227,7 +227,7 @@ test_that("the exact Smirnov distributions match stats::psmirnov", {
 })
 
 test_that("the asymptotic two-sample tail uses the effective size", {
-  skip_on_cran()
+  skip_heavy()
   for (m in c(20L, 50L)) {
     for (n in c(30L, 80L)) {
       for (d in c(0.1, 0.25, 0.4)) {

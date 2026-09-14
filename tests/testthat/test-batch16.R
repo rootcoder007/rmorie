@@ -9,7 +9,7 @@ test_that("morie_build_prompt returns the bare question without context", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   out <- morie_build_prompt("What is the U statistic?")
   expect_type(out, "character")
   expect_length(out, 1L)
@@ -17,12 +17,12 @@ test_that("morie_build_prompt returns the bare question without context", {
 })
 
 test_that("morie_build_prompt trims whitespace around the question", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_build_prompt("  hello world  "), "hello world")
 })
 
 test_that("morie_build_prompt composes a Context/Question block when context given", {
-  skip_on_cran()
+  skip_heavy()
   out <- morie_build_prompt("Why?", context = "Because.")
   expect_type(out, "character")
   expect_length(out, 1L)
@@ -33,20 +33,20 @@ test_that("morie_build_prompt composes a Context/Question block when context giv
 })
 
 test_that("morie_build_prompt ignores empty / blank context", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(morie_build_prompt("Q", context = ""), "Q")
   expect_identical(morie_build_prompt("Q", context = "   "), "Q")
   expect_identical(morie_build_prompt("Q", context = NULL), "Q")
 })
 
 test_that("morie_build_prompt errors on an empty question", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_build_prompt(""), "non-empty")
   expect_error(morie_build_prompt("   "), "non-empty")
 })
 
 test_that("build_assistant_prompt alias mirrors morie_build_prompt", {
-  skip_on_cran()
+  skip_heavy()
   expect_identical(
     rmorie:::build_assistant_prompt("Q", context = "C"),
     morie_build_prompt("Q", context = "C")
@@ -54,7 +54,7 @@ test_that("build_assistant_prompt alias mirrors morie_build_prompt", {
 })
 
 test_that("morie_ask_percy is an exported function with the documented args", {
-  skip_on_cran()
+  skip_heavy()
   expect_true(is.function(morie_ask_percy))
   expect_true(all(c("question", "context", "python_bin") %in%
     names(formals(morie_ask_percy))))
@@ -65,7 +65,7 @@ test_that("morie_ask_percy is an exported function with the documented args", {
 })
 
 test_that("morie_rank_placements returns the documented structure", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   x <- rnorm(15)
   y <- rnorm(12)
@@ -82,7 +82,7 @@ test_that("morie_rank_placements returns the documented structure", {
 })
 
 test_that("morie_rank_placements computes U as the sum of placements", {
-  skip_on_cran()
+  skip_heavy()
   x <- c(1, 2, 3, 4)
   y <- c(2.5, 3.5)
   r <- morie_rank_placements(x, y)
@@ -92,7 +92,7 @@ test_that("morie_rank_placements computes U as the sum of placements", {
 })
 
 test_that("morie_rank_placements handles empty input gracefully", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_rank_placements(numeric(0), c(1, 2))
   expect_length(r$placements, 0L)
   expect_true(is.na(r$U_y))
@@ -100,7 +100,7 @@ test_that("morie_rank_placements handles empty input gracefully", {
 })
 
 test_that("morie_polynomial_regression fits a degree-2 model on a vector", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   x <- rnorm(40)
   y <- 1 + 2 * x + 0.5 * x^2 + rnorm(40, sd = 0.1)
@@ -115,7 +115,7 @@ test_that("morie_polynomial_regression fits a degree-2 model on a vector", {
 })
 
 test_that("morie_polynomial_regression honours a custom degree", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   x <- rnorm(30)
   y <- rnorm(30)
@@ -125,7 +125,7 @@ test_that("morie_polynomial_regression honours a custom degree", {
 })
 
 test_that("morie_polynomial_regression accepts a multi-column matrix with cross-terms", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   X <- matrix(rnorm(60), ncol = 2)
   y <- X[, 1] + X[, 2] + rnorm(30, sd = 0.1)
@@ -135,7 +135,7 @@ test_that("morie_polynomial_regression accepts a multi-column matrix with cross-
 })
 
 test_that("polrz computes a polarization index with median split", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(5)
   x <- c(rnorm(20, -1), rnorm(20, 1))
   r <- polrz(x)
@@ -149,7 +149,7 @@ test_that("polrz computes a polarization index with median split", {
 })
 
 test_that("polrz accepts an explicit two-level grouping vector", {
-  skip_on_cran()
+  skip_heavy()
   x <- c(1, 2, 3, 8, 9, 10)
   g <- c("a", "a", "a", "b", "b", "b")
   r <- polrz(x, group = g)
@@ -158,27 +158,27 @@ test_that("polrz accepts an explicit two-level grouping vector", {
 })
 
 test_that("polrz returns NA for too-short input", {
-  skip_on_cran()
+  skip_heavy()
   r <- polrz(c(1))
   expect_true(is.na(r$estimate))
   expect_identical(r$n, 1L)
 })
 
 test_that("polrz errors on bad grouping vectors", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(polrz(c(1, 2, 3), group = c("a", "b")), "length")
   expect_error(polrz(c(1, 2, 3), group = c("a", "b", "c")), "2 levels")
 })
 
 test_that("morie_polarization_index alias matches polrz", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(6)
   x <- rnorm(30)
   expect_equal(morie_polarization_index(x)$estimate, polrz(x)$estimate)
 })
 
 test_that("morie_posab_positional_encoding_abs returns a PE matrix of the right shape", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_posab_positional_encoding_abs(seq_len = 8L, d_model = 4L)
   expect_type(r, "list")
   expect_named(r, c("PE", "estimate", "seq_len", "d_model", "method"))
@@ -189,26 +189,26 @@ test_that("morie_posab_positional_encoding_abs returns a PE matrix of the right 
 })
 
 test_that("morie_posab_positional_encoding_abs honours a custom base", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_posab_positional_encoding_abs(6L, 6L, base = 100)
   expect_identical(dim(r$PE), c(6L, 6L))
 })
 
 test_that("morie_posab_positional_encoding_abs errors on non-positive dimensions", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_posab_positional_encoding_abs(0L, 4L), "> 0")
   expect_error(morie_posab_positional_encoding_abs(4L, 0L), "> 0")
 })
 
 test_that("morie_positional_encoding_abs alias matches the primary function", {
-  skip_on_cran()
+  skip_heavy()
   a <- morie_positional_encoding_abs(5L, 4L)
   b <- morie_posab_positional_encoding_abs(5L, 4L)
   expect_equal(a$PE, b$PE)
 })
 
 test_that("perplexity_metric computes perplexity from log-probs (base e)", {
-  skip_on_cran()
+  skip_heavy()
   r <- rmorie:::perplexity_metric(c(-1, -1, -1))
   expect_type(r, "list")
   expect_named(r, c("value", "nll", "n", "method"))
@@ -218,13 +218,13 @@ test_that("perplexity_metric computes perplexity from log-probs (base e)", {
 })
 
 test_that("perplexity_metric accepts base 2", {
-  skip_on_cran()
+  skip_heavy()
   r <- rmorie:::perplexity_metric(c(-1, -2), base = "2")
   expect_true(is.finite(r$value) && r$value > 0)
 })
 
 test_that("perplexity_metric errors on empty input and bad base", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(rmorie:::perplexity_metric(numeric(0)), "at least one")
   expect_error(
     rmorie:::perplexity_metric(c(-1, -1), base = "10"),
@@ -233,7 +233,7 @@ test_that("perplexity_metric errors on empty input and bad base", {
 })
 
 test_that("morie_prophet_components decomposes a seasonal series", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(7)
   t <- 0:47
   x <- 0.1 * t + sin(2 * pi * t / 12) + rnorm(48, sd = 0.1)
@@ -251,7 +251,7 @@ test_that("morie_prophet_components decomposes a seasonal series", {
 })
 
 test_that("morie_prophet_components reconstructs the series additively", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(8)
   t <- 0:35
   x <- 0.05 * t + cos(2 * pi * t / 12) + rnorm(36, sd = 0.05)
@@ -260,12 +260,12 @@ test_that("morie_prophet_components reconstructs the series additively", {
 })
 
 test_that("morie_prophet_components errors on a too-short series", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_prophet_components(1:4, period = 12), "too short|short")
 })
 
 test_that("pspln fits a penalised spline and reports r2", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("splines")
   set.seed(9)
   x <- seq(0, 1, length.out = 60)
@@ -283,14 +283,14 @@ test_that("pspln fits a penalised spline and reports r2", {
 })
 
 test_that("pspln returns NA for a too-short series", {
-  skip_on_cran()
+  skip_heavy()
   r <- rmorie:::pspln(c(1, 2, 3), c(1, 2, 3), degree = 3L)
   expect_true(is.na(r$estimate))
   expect_true(grepl("too small", r$method))
 })
 
 test_that("morie_penalized_spline alias matches pspln", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("splines")
   set.seed(10)
   x <- seq(0, 1, length.out = 50)
@@ -301,7 +301,7 @@ test_that("morie_penalized_spline alias matches pspln", {
 })
 
 test_that("quntf computes quantiles with asymptotic SEs (default taus)", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   x <- rnorm(300)
   r <- rmorie:::quntf(x)
@@ -319,7 +319,7 @@ test_that("quntf computes quantiles with asymptotic SEs (default taus)", {
 })
 
 test_that("quntf accepts a custom single tau", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(12)
   x <- rnorm(200)
   r <- rmorie:::quntf(x, taus = 0.5)
@@ -328,14 +328,14 @@ test_that("quntf accepts a custom single tau", {
 })
 
 test_that("quntf returns NA for n < 2", {
-  skip_on_cran()
+  skip_heavy()
   r <- rmorie:::quntf(c(3))
   expect_true(is.na(r$estimate))
   expect_identical(r$n, 1L)
 })
 
 test_that("morie_quantile_function alias matches quntf", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(13)
   x <- rnorm(150)
   expect_equal(
@@ -345,7 +345,7 @@ test_that("morie_quantile_function alias matches quntf", {
 })
 
 test_that("rcall summarises a 0/1 vote matrix", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(14)
   V <- matrix(sample(c(0, 1), 60, replace = TRUE), nrow = 10)
   r <- rcall(V)
@@ -362,7 +362,7 @@ test_that("rcall summarises a 0/1 vote matrix", {
 })
 
 test_that("rcall remaps Poole-Rosenthal codes automatically", {
-  skip_on_cran()
+  skip_heavy()
   V <- matrix(c(1, 2, 3, 4, 5, 6, 0, 7, 9), nrow = 3)
   r <- rcall(V)
   expect_true(r$n_yea > 0)
@@ -371,20 +371,20 @@ test_that("rcall remaps Poole-Rosenthal codes automatically", {
 })
 
 test_that("rcall handles NA absences", {
-  skip_on_cran()
+  skip_heavy()
   V <- matrix(c(1, 0, NA, 1, NA, 0), nrow = 3)
   r <- rcall(V)
   expect_identical(r$n_abs, 2L)
 })
 
 test_that("morie_roll_call_analysis alias matches rcall", {
-  skip_on_cran()
+  skip_heavy()
   V <- matrix(c(1, 0, 1, 0), nrow = 2)
   expect_equal(morie_roll_call_analysis(V)$n_yea, rcall(V)$n_yea)
 })
 
 test_that("morie_regime_switching fits a 2-regime model via base-R EM", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(15)
   x <- c(rnorm(100, 0, 0.5), rnorm(100, 0, 2))
   r <- morie_regime_switching(x, k_regimes = 2)
@@ -402,12 +402,12 @@ test_that("morie_regime_switching fits a 2-regime model via base-R EM", {
 })
 
 test_that("morie_regime_switching errors on a too-short series", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_regime_switching(rnorm(5), k_regimes = 2), "too short|short")
 })
 
 test_that("retlv estimates a GEV return level", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(16)
   x <- rnorm(200, mean = 10, sd = 2)
   r <- retlv(x, return_period = 100)
@@ -422,7 +422,7 @@ test_that("retlv estimates a GEV return level", {
 })
 
 test_that("retlv accepts a custom return period", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(17)
   x <- rnorm(150, mean = 5, sd = 1)
   r <- retlv(x, return_period = 50)
@@ -431,7 +431,7 @@ test_that("retlv accepts a custom return period", {
 })
 
 test_that("morie_return_level alias matches retlv", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(18)
   x <- rnorm(120, mean = 8, sd = 2)
   a <- morie_return_level(x, return_period = 100)
@@ -440,7 +440,7 @@ test_that("morie_return_level alias matches retlv", {
 })
 
 test_that("morie_random_forest_ensemble runs a small regression forest", {
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("randomForest")
   set.seed(19)
   X <- matrix(rnorm(120), ncol = 3)
@@ -463,7 +463,7 @@ test_that("morie_random_forest_ensemble runs a small regression forest", {
 })
 
 test_that("morie_random_forest_ensemble auto-detects a classification task", {
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("randomForest")
   set.seed(20)
   X <- matrix(rnorm(120), ncol = 3)
@@ -477,7 +477,7 @@ test_that("morie_random_forest_ensemble auto-detects a classification task", {
 })
 
 test_that("morie_random_forest_ensemble accepts a max_depth argument", {
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("randomForest")
   set.seed(21)
   X <- matrix(rnorm(120), ncol = 3)
@@ -491,7 +491,7 @@ test_that("morie_random_forest_ensemble accepts a max_depth argument", {
 })
 
 test_that("morie_random_forest_genomic predicts from a marker matrix", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(22)
   M <- matrix(rnorm(200), 40, 5)
   y <- M[, 1] + 0.5 * M[, 2]^2 + 0.2 * rnorm(40)
@@ -508,7 +508,7 @@ test_that("morie_random_forest_genomic predicts from a marker matrix", {
 })
 
 test_that("morie_random_forest_genomic works with NULL fixed features", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(23)
   M <- matrix(rnorm(150), 30, 5)
   y <- M[, 1] + 0.2 * rnorm(30)
@@ -518,7 +518,7 @@ test_that("morie_random_forest_genomic works with NULL fixed features", {
 })
 
 test_that("morie_random_forest_genomic accepts a custom mtry", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(24)
   M <- matrix(rnorm(160), 32, 5)
   y <- M[, 2] + 0.2 * rnorm(32)
@@ -530,7 +530,7 @@ test_that("morie_random_forest_genomic accepts a custom mtry", {
 })
 
 test_that("rgadp runs the LMS adaptive noise canceller", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(25)
   noise <- rnorm(200)
   x <- sin(2 * pi * seq_len(200) / 20) + noise
@@ -546,7 +546,7 @@ test_that("rgadp runs the LMS adaptive noise canceller", {
 })
 
 test_that("rgadp uses the default order of 16", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(26)
   noise <- rnorm(120)
   x <- cos(seq_len(120) / 10) + noise
@@ -556,12 +556,12 @@ test_that("rgadp uses the default order of 16", {
 })
 
 test_that("rgadp errors when x and reference differ in length", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(rgadp(rnorm(50), reference = rnorm(40)), "equal length")
 })
 
 test_that("morie_rangayyan_adaptive_filter alias matches rgadp", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(27)
   noise <- rnorm(100)
   x <- sin(seq_len(100) / 8) + noise

@@ -8,7 +8,7 @@
 # in the URL.
 
 test_that("the zip reader streams the CSV member back unchanged", {
-  skip_on_cran()
+  skip_heavy()
   dir <- file.path(tempdir(), "tap_zip_test")
   dir.create(dir, showWarnings = FALSE)
   on.exit(unlink(dir, recursive = TRUE), add = TRUE)

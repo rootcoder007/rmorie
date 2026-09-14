@@ -5,7 +5,7 @@ test_that("ATE recovers a known shift and separates paired from independent", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(11)
   n <- 400
   base <- rnorm(n)
@@ -28,7 +28,7 @@ test_that("ATE recovers a known shift and separates paired from independent", {
 })
 
 test_that("back-door adjustment reweights strata by the population, not the treated", {
-  skip_on_cran()
+  skip_heavy()
   # Z is a confounder: it drives both X and Y, and is far more common
   # among the treated. The crude conditional and the adjusted one must
   # therefore differ.
@@ -55,7 +55,7 @@ test_that("back-door adjustment reweights strata by the population, not the trea
 })
 
 test_that("back-door criterion applies the collider rule in both directions", {
-  skip_on_cran()
+  skip_heavy()
   # Confounder: Z -> X, Z -> Y, X -> Y. Adjusting for Z is required.
   conf <- list(Z = c("X", "Y"), X = "Y")
   expect_true(morie_backdoor_criterion(conf, "X", "Y", "Z")$satisfied)
@@ -87,7 +87,7 @@ test_that("back-door criterion applies the collider rule in both directions", {
 })
 
 test_that("Baron-Kenny recovers the paths and reports each step separately", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   n <- 800
   x <- rnorm(n)
@@ -112,7 +112,7 @@ test_that("Baron-Kenny recovers the paths and reports each step separately", {
 })
 
 test_that("Sobel skips the test rather than faking it without standard errors", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_indirect_effect_sobel(0.5, 0.4, 0.1, 0.08)
   expect_equal(r$estimate, 0.2)
   expect_equal(r$se, sqrt(0.4^2 * 0.1^2 + 0.5^2 * 0.08^2))
@@ -127,7 +127,7 @@ test_that("Sobel skips the test rather than faking it without standard errors", 
 })
 
 test_that("doubly robust DiD stays consistent when either model is misspecified", {
-  skip_on_cran()
+  skip_heavy()
   # The defining property, tested directly: break one nuisance model at a
   # time and the ATT must survive; that is what "doubly robust" claims.
   att_true <- 2
@@ -161,7 +161,7 @@ test_that("doubly robust DiD stays consistent when either model is misspecified"
 })
 
 test_that("binary mediation recovers a mediated effect on the log-odds scale", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(7)
   n <- 3000
   x <- rbinom(n, 1, 0.5)
@@ -190,7 +190,7 @@ test_that("binary mediation recovers a mediated effect on the log-odds scale", {
 })
 
 test_that("HSIC separates dependence from zero correlation", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   n <- 200
   a <- rnorm(n)
@@ -207,7 +207,7 @@ test_that("HSIC separates dependence from zero correlation", {
 })
 
 test_that("ANM recovers the direction under a cubic link, both orientations", {
-  skip_on_cran()
+  skip_heavy()
   # Measured 6/6 in each orientation at these settings; a saturating link
   # would score 0/6, which is why the docs name that limit.
   fwd <- vapply(1:6, function(s) {

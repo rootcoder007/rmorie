@@ -19,14 +19,14 @@ test_that("WienerOut is eq (3.154), a convolution", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   r <- WienerOut(c(1, 0.5), c(1, 2, 3))
   expect_equal(r$d_hat, c(1, 2.5, 4))
   expect_equal(r$settled_from, 1L)
 })
 
 test_that("WienerDot eq (3.155) matches the convolution form", {
-  skip_on_cran()
+  skip_heavy()
   w <- c(1, 0.5)
   x <- c(1, 2, 3)
   conv <- WienerOut(w, x)$d_hat
@@ -36,7 +36,7 @@ test_that("WienerDot eq (3.155) matches the convolution form", {
 })
 
 test_that("MseGrad eq (3.167) vanishes at the optimum", {
-  skip_on_cran()
+  skip_heavy()
   Phi <- matrix(c(2, 1, 1, 2), 2, 2)
   Theta <- c(3, 3)
   w <- WienerOpt(Phi, Theta)$w_o
@@ -47,7 +47,7 @@ test_that("MseGrad eq (3.167) vanishes at the optimum", {
 })
 
 test_that("WienerHopf eq (3.168) solves the normal equation", {
-  skip_on_cran()
+  skip_heavy()
   r <- WienerHopf(matrix(c(2, 1, 1, 2), 2, 2), c(3, 3))
   expect_equal(r$w, c(1, 1))
   expect_equal(r$max_residual, 0, tolerance = 1e-12)
@@ -55,14 +55,14 @@ test_that("WienerHopf eq (3.168) solves the normal equation", {
 })
 
 test_that("WienerOpt eq (3.169) solves rather than inverting", {
-  skip_on_cran()
+  skip_heavy()
   r <- WienerOpt(matrix(c(2, 1, 1, 2), 2, 2), c(3, 3))
   expect_equal(r$w_o, c(1, 1))
   expect_true(r$solved_not_inverted)
 })
 
 test_that("WienerMin eq (3.172) is the variance less the explained part", {
-  skip_on_cran()
+  skip_heavy()
   Phi <- matrix(c(2, 1, 1, 2), 2, 2)
   Theta <- c(3, 3)
   r <- WienerMin(Phi, Theta, 10)
@@ -76,7 +76,7 @@ test_that("WienerMin eq (3.172) is the variance less the explained part", {
 })
 
 test_that("WienerConv eq (3.174) holds at the solution", {
-  skip_on_cran()
+  skip_heavy()
   phi <- c(2, 1, 0.5)
   theta <- c(3, 3)
   Phi <- matrix(c(phi[1], phi[2], phi[2], phi[1]), 2, 2)
@@ -86,14 +86,14 @@ test_that("WienerConv eq (3.174) holds at the solution", {
 })
 
 test_that("WienerFreqR eq (3.175) flags undetermined bins", {
-  skip_on_cran()
+  skip_heavy()
   r <- WienerFreqR(c(1, 0.5, 0), c(2, 4, 0), c(2, 2, 0))
   expect_true(r$holds)
   expect_equal(r$undetermined_bins, 2L)
 })
 
 test_that("WienerFreq eq (3.176) is the CSD over the PSD", {
-  skip_on_cran()
+  skip_heavy()
   r <- WienerFreq(c(2, 4), c(1, 2))
   expect_equal(Re(r$W), c(0.5, 0.5))
   z <- WienerFreq(c(1, 0), c(1, 5))
@@ -103,7 +103,7 @@ test_that("WienerFreq eq (3.176) is the CSD over the PSD", {
 })
 
 test_that("WienerSnr eq (3.186) has the three stated properties", {
-  skip_on_cran()
+  skip_heavy()
   r <- WienerSnr(c(0, 1, 4, 1), c(1, 0, 1, 9))
   expect_equal(r$W[1], 0)                 # nothing to restore
   expect_equal(r$W[2], 1)                 # noiseless
@@ -116,7 +116,7 @@ test_that("WienerSnr eq (3.186) has the three stated properties", {
 })
 
 test_that("Whopf builds a Toeplitz system from data", {
-  skip_on_cran()
+  skip_heavy()
   n <- 400
   x <- sine_a(n, 7)
   d <- 0.5 * x
@@ -129,7 +129,7 @@ test_that("Whopf builds a Toeplitz system from data", {
 })
 
 test_that("WienerFilt needs exactly one route", {
-  skip_on_cran()
+  skip_heavy()
   x <- sine_a(64, 3)
   expect_error(WienerFilt(x), "not both and not neither")
   expect_error(WienerFilt(x, desired = x, sd = 1, seta = 1),
@@ -138,7 +138,7 @@ test_that("WienerFilt needs exactly one route", {
 })
 
 test_that("WienerFilt time route recovers a scaled signal", {
-  skip_on_cran()
+  skip_heavy()
   n <- 400
   x <- sine_a(n, 7)
   d <- 0.5 * x
@@ -148,7 +148,7 @@ test_that("WienerFilt time route recovers a scaled signal", {
 })
 
 test_that("WienerFilt frequency route suppresses a noisy band", {
-  skip_on_cran()
+  skip_heavy()
   n <- 64
   x <- sine_a(n, 4)
   half <- n %/% 2 + 1
@@ -159,7 +159,7 @@ test_that("WienerFilt frequency route suppresses a noisy band", {
 })
 
 test_that("AncInput checks the independence premise", {
-  skip_on_cran()
+  skip_heavy()
   v <- sine_a(256, 3)
   m <- sine_a(256, 41)
   r <- AncInput(v, m)
@@ -171,7 +171,7 @@ test_that("AncInput checks the independence premise", {
 })
 
 test_that("AncOut eq (3.196) makes the error the output", {
-  skip_on_cran()
+  skip_heavy()
   r <- AncOut(c(1, 2, 3), c(0.5, 0.5, 0.5))
   expect_equal(r$e, c(0.5, 1.5, 2.5))
   expect_equal(r$v_hat, r$e)
@@ -179,14 +179,14 @@ test_that("AncOut eq (3.196) makes the error the output", {
 })
 
 test_that("LmsOut eq (3.195) filters the reference", {
-  skip_on_cran()
+  skip_heavy()
   r <- LmsOut(c(1, 0.5), c(2, 4))
   expect_equal(r$y, c(2, 5))
   expect_true(r$filters_the_reference)
 })
 
 test_that("LmsSqErr eq (3.200) expands the square", {
-  skip_on_cran()
+  skip_heavy()
   r <- LmsSqErr(3, c(1, 2), c(0.5, 0.25))
   expect_equal(r$e, 2)
   expect_true(r$agrees)
@@ -195,7 +195,7 @@ test_that("LmsSqErr eq (3.200) expands the square", {
 })
 
 test_that("LmsDescent eqs (3.201)-(3.202) equal Widrow-Hoff", {
-  skip_on_cran()
+  skip_heavy()
   w <- c(0.1, -0.2)
   e <- 0.7
   r <- c(1, 2)
@@ -205,7 +205,7 @@ test_that("LmsDescent eqs (3.201)-(3.202) equal Widrow-Hoff", {
 })
 
 test_that("WidrowHoff eq (3.203) keeps the factor of two", {
-  skip_on_cran()
+  skip_heavy()
   r <- WidrowHoff(c(0, 0), 1, c(1, 2), 0.1)
   expect_equal(r$w_next, c(0.2, 0.4))
   expect_true(r$factor_of_two_is_in_the_equation)
@@ -214,14 +214,14 @@ test_that("WidrowHoff eq (3.203) keeps the factor of two", {
 })
 
 test_that("LmsVarStep eq (3.204) is eq (3.203) with a moving mu", {
-  skip_on_cran()
+  skip_heavy()
   a <- LmsVarStep(c(0, 0), 1, c(1, 2), 0.1)
   expect_equal(a$w_next, WidrowHoff(c(0, 0), 1, c(1, 2), 0.1)$w_next)
   expect_true(a$time_varying)
 })
 
 test_that("LmsZhang eq (3.205) normalizes by the running power", {
-  skip_on_cran()
+  skip_heavy()
   r <- LmsZhang(0.5, 4, 2, alpha = 0.02)
   expect_gt(r$power, 0)
   expect_equal(r$mu, 0.5 / (5 * r$power))
@@ -231,7 +231,7 @@ test_that("LmsZhang eq (3.205) normalizes by the running power", {
 })
 
 test_that("LmsFilt cancels a correlated interference", {
-  skip_on_cran()
+  skip_heavy()
   n <- 2000
   v <- sine_a(n, 5)
   ref <- sine_a(n, 61)
@@ -252,7 +252,7 @@ test_that("LmsFilt cancels a correlated interference", {
 })
 
 test_that("LMS misadjustment grows with the step size", {
-  skip_on_cran()
+  skip_heavy()
   n <- 2000
   v <- sine_a(n, 5)
   ref <- sine_a(n, 61)
@@ -265,7 +265,7 @@ test_that("LMS misadjustment grows with the step size", {
 })
 
 test_that("LmsFilt variable step survives a reference starting at zero", {
-  skip_on_cran()
+  skip_heavy()
   ref <- sine_a(256, 41)
   expect_equal(ref[1], 0)
   r <- LmsFilt(sine_a(256, 5), ref, order = 4, mu = 0.5, variable = TRUE)
@@ -275,7 +275,7 @@ test_that("LmsFilt variable step survives a reference starting at zero", {
 })
 
 test_that("RlsObj eq (3.206) weights recent errors more", {
-  skip_on_cran()
+  skip_heavy()
   r <- RlsObj(c(1, 1, 1), 0.5)
   expect_equal(r$weights, c(0.25, 0.5, 1))
   expect_equal(r$xi, 1.75)
@@ -286,7 +286,7 @@ test_that("RlsObj eq (3.206) weights recent errors more", {
 })
 
 test_that("RlsNormal eq (3.207) has the Wiener-Hopf form", {
-  skip_on_cran()
+  skip_heavy()
   r <- RlsNormal(matrix(c(2, 1, 1, 2), 2, 2), c(3, 3))
   expect_equal(r$w_tilde, c(1, 1))
   expect_true(r$same_form_as_wiener_hopf)
@@ -294,7 +294,7 @@ test_that("RlsNormal eq (3.207) has the Wiener-Hopf form", {
 })
 
 test_that("AbcdLemma eq (3.213) matches the direct inverse", {
-  skip_on_cran()
+  skip_heavy()
   r <- AbcdLemma(matrix(c(4, 1, 1, 3), 2, 2), matrix(c(1, 2), 2, 1),
                  matrix(1, 1, 1), matrix(c(1, 2), 1, 2))
   expect_true(r$holds)
@@ -303,7 +303,7 @@ test_that("AbcdLemma eq (3.213) matches the direct inverse", {
 })
 
 test_that("RlsUpdate eq (3.224) uses the plus form", {
-  skip_on_cran()
+  skip_heavy()
   r <- RlsUpdate(c(1, 2), c(0.5, 0.25), 2)
   expect_equal(r$w_next, c(2, 2.5))
   expect_equal(r$sign, "+")
@@ -311,7 +311,7 @@ test_that("RlsUpdate eq (3.224) uses the plus form", {
 })
 
 test_that("RlsApriori eq (3.225) uses the previous weights", {
-  skip_on_cran()
+  skip_heavy()
   r <- RlsApriori(5, c(1, 2), c(0.5, 1))
   expect_equal(r$prediction, 2.5)
   expect_equal(r$alpha, 2.5)
@@ -319,7 +319,7 @@ test_that("RlsApriori eq (3.225) uses the previous weights", {
 })
 
 test_that("RlsFilt converges faster than LMS", {
-  skip_on_cran()
+  skip_heavy()
   n <- 600
   ref <- sine_a(n, 31)
   x <- 0.8 * ref
@@ -329,7 +329,7 @@ test_that("RlsFilt converges faster than LMS", {
 })
 
 test_that("RlsFilt keeps P symmetric", {
-  skip_on_cran()
+  skip_heavy()
   r <- RlsFilt(sine_a(400, 11), sine_a(400, 29), order = 4, lam = 0.99)
   expect_true(r$p_symmetrized)
   expect_lt(r$p_symmetry_error, 1e-6)
@@ -338,7 +338,7 @@ test_that("RlsFilt keeps P symmetric", {
 })
 
 test_that("RlsLattice reports every order and its stability", {
-  skip_on_cran()
+  skip_heavy()
   r <- RlsLattice(sine_a(500, 13), order = 4)
   expect_equal(length(r$reflection), 4L)
   expect_true(r$stable)
@@ -347,7 +347,7 @@ test_that("RlsLattice reports every order and its stability", {
 })
 
 test_that("RlsMonitor excludes the convergence transient", {
-  skip_on_cran()
+  skip_heavy()
   n <- 800
   x <- c(sine_a(n, 7)[1:(n / 2)], sine_a(n, 61)[(n / 2 + 1):n])
   r <- RlsMonitor(x, order = 4, settle = 100, window = 40)
@@ -357,7 +357,7 @@ test_that("RlsMonitor excludes the convergence transient", {
 })
 
 test_that("RlsMonitor finds a change of statistics", {
-  skip_on_cran()
+  skip_heavy()
   n <- 800
   x <- c(sine_a(n, 5)[1:(n / 2)], sine_a(n, 71)[(n / 2 + 1):n])
   expect_gte(RlsMonitor(x, order = 4, settle = 80, window = 30,
@@ -365,7 +365,7 @@ test_that("RlsMonitor finds a change of statistics", {
 })
 
 test_that("Kalman tracks a constant state", {
-  skip_on_cran()
+  skip_heavy()
   z <- lapply(3 + lcg_a(200, seed = 11), function(v) v)
   r <- Kalman(z, matrix(1), matrix(1), matrix(1e-6), matrix(0.5),
               x0 = 0, P0 = matrix(10))
@@ -376,7 +376,7 @@ test_that("Kalman tracks a constant state", {
 })
 
 test_that("Kalman covariance shrinks monotonically for a static state", {
-  skip_on_cran()
+  skip_heavy()
   r <- Kalman(rep(list(1), 40), matrix(1), matrix(1), matrix(0), matrix(1),
               x0 = 0, P0 = matrix(5))
   p <- vapply(r$covariances, function(m) m[1, 1], numeric(1))
@@ -386,7 +386,7 @@ test_that("Kalman covariance shrinks monotonically for a static state", {
 })
 
 test_that("Riccati is the fixed point of the Kalman recursion", {
-  skip_on_cran()
+  skip_heavy()
   F <- matrix(0.9)
   H <- matrix(1)
   Q <- matrix(0.1)
@@ -404,7 +404,7 @@ test_that("Riccati is the fixed point of the Kalman recursion", {
 })
 
 test_that("Sem is scale free", {
-  skip_on_cran()
+  skip_heavy()
   a <- c(1, 2, 4, 8)
   expect_equal(Sem(a, a)$sem, 0)
   g <- Sem(3 * a, a)
@@ -416,7 +416,7 @@ test_that("Sem is scale free", {
 })
 
 test_that("Acfseg eq (8.27): the power distance sees a gain change", {
-  skip_on_cran()
+  skip_heavy()
   a <- sine_a(200, 7)
   r <- Acfseg(5 * a, a)
   # the square roots of the powers are in the ratio 5, so d_P = 4
@@ -426,7 +426,7 @@ test_that("Acfseg eq (8.27): the power distance sees a gain change", {
 })
 
 test_that("Acfseg eq (8.28) vanishes on an identical window", {
-  skip_on_cran()
+  skip_heavy()
   a <- sine_a(200, 7)
   r <- Acfseg(a, a)
   expect_equal(r$power_distance, 0, tolerance = 1e-12)
@@ -437,14 +437,14 @@ test_that("Acfseg eq (8.28) vanishes on an identical window", {
 })
 
 test_that("Acfseg eq (8.29) weights the two distances by the thresholds", {
-  skip_on_cran()
+  skip_heavy()
   r <- Acfseg(sine_a(200, 47), sine_a(200, 5), thp = 2, thf = 4)
   expect_equal(r$distance, r$power_distance / 2 + r$spectral_distance / 4)
   expect_equal(r$boundary, r$distance > 1)
 })
 
 test_that("Acfseg picks q where the ACFs first turn negative", {
-  skip_on_cran()
+  skip_heavy()
   a <- sine_a(400, 8)
   r <- Acfseg(a, a)
   expect_true(r$lags_auto)
@@ -459,7 +459,7 @@ test_that("Acfseg picks q where the ACFs first turn negative", {
 })
 
 test_that("PcgSeg restarts the reference at each boundary", {
-  skip_on_cran()
+  skip_heavy()
   n <- 1200
   x <- c(sine_a(n, 20)[1:(n / 2)], sine_a(n, 120)[(n / 2 + 1):n])
   r <- PcgSeg(x, fs = 1000, window = 100, step = 50, order = 4)
@@ -469,14 +469,14 @@ test_that("PcgSeg restarts the reference at each boundary", {
 })
 
 test_that("PsdAcf eq (4.30) agrees with the circular ACF", {
-  skip_on_cran()
+  skip_heavy()
   r <- PsdAcf(sine_a(64, 5))
   expect_true(r$holds)
   expect_true(r$linear_acf_is_smoothed)
 })
 
 test_that("Anc and FetalEcg report reference leakage", {
-  skip_on_cran()
+  skip_heavy()
   n <- 1000
   v <- sine_a(n, 3)
   ref <- sine_a(n, 57)

@@ -9,7 +9,7 @@ test_that("RE2.2 predictor and response missing values are handled separately", 
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   d <- mtcars
   d$hp[1] <- NA
   d$mpg[2] <- NA
@@ -19,7 +19,7 @@ test_that("RE2.2 predictor and response missing values are handled separately", 
 })
 
 test_that("RE2.3 predictors can be centred / scaled with documented effect", {
-  skip_on_cran()
+  skip_heavy()
   m0 <- morie_lm(mpg ~ hp, mtcars)
   mc <- morie_lm(mpg ~ hp, mtcars, center = TRUE, scale = TRUE)
   # intercept changes under centring; predictions stay on the original scale
@@ -30,48 +30,48 @@ test_that("RE2.3 predictors can be centred / scaled with documented effect", {
 })
 
 test_that("RE2.4b perfect predictor-response collinearity is detected", {
-  skip_on_cran()
+  skip_heavy()
   d <- data.frame(x = 1:20)
   d$y <- 2 * d$x           # exact linear dependence
   expect_error(morie_lm(y ~ x, d), "perfectly collinear")
 })
 
 test_that("RE4.1 a model can be specified without fitting", {
-  skip_on_cran()
+  skip_heavy()
   spec <- morie_lm(mpg ~ hp + wt, mtcars, nofit = TRUE)
   expect_s3_class(spec, "morie_lm_spec")
   expect_null(spec$coefficients)
 })
 
 test_that("RE4.7 convergence statistics are available", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(am ~ hp, mtcars, family = "binomial")
   expect_true(is.logical(m$converged))
   expect_true(m$iterations >= 1L)
 })
 
 test_that("RE4.8 response variable + metadata are returned", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   expect_equal(m$response, "mpg")
   expect_length(m$response_values, m$n_obs)
 })
 
 test_that("RE4.9 modelled (fitted) response values are returned", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   expect_length(fitted(m), m$n_obs)
   expect_true(is.numeric(fitted(m)))
 })
 
 test_that("RE4.13 predictor variables + metadata are returned", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp + wt, mtcars)
   expect_setequal(m$predictors, c("hp", "wt"))
 })
 
 test_that("RE4.14 prediction returns forecast (interval) errors", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   pr <- predict(m, mtcars[1:5, ], interval = "prediction")
   expect_true(all(c("fit", "lwr", "upr") %in% names(pr)))
@@ -79,7 +79,7 @@ test_that("RE4.14 prediction returns forecast (interval) errors", {
 })
 
 test_that("RE4.15 prediction intervals behave correctly (wider than confidence)", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   ci <- predict(m, mtcars[1:5, ], interval = "confidence")
   pi <- predict(m, mtcars[1:5, ], interval = "prediction")
@@ -87,21 +87,21 @@ test_that("RE4.15 prediction intervals behave correctly (wider than confidence)"
 })
 
 test_that("RE4.16 prediction accepts new data with new predictor values", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   nd <- data.frame(hp = c(90, 250, 400))             # values outside training
   expect_length(predict(m, nd), 3L)
 })
 
 test_that("RE4.17/RE4.18 default print + summary methods exist", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   expect_true(any(grepl("morie_lm", capture.output(print(m)))))
   expect_true(inherits(summary(m), c("summary.lm", "summary.glm")))
 })
 
 test_that("RE5.0 fit scaling with data size can be measured", {
-  skip_on_cran()
+  skip_heavy()
   sc <- morie_lm_scaling(mpg ~ hp + wt, mtcars, sizes = c(10, 20, 32))
   expect_equal(nrow(sc), 3L)
   expect_true(all(c("n", "seconds", "n_coef") %in% names(sc)))
@@ -109,7 +109,7 @@ test_that("RE5.0 fit scaling with data size can be measured", {
 })
 
 test_that("RE6.0/RE6.1/RE6.2 model object has a default plot method", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   expect_true(exists("plot.morie_lm"))
   tmp <- tempfile(fileext = ".png")
@@ -120,21 +120,21 @@ test_that("RE6.0/RE6.1/RE6.2 model object has a default plot method", {
 })
 
 test_that("RE6.3 forecasts can be generated + visualised", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   pr <- predict(m, mtcars, interval = "prediction")
   expect_true(is.data.frame(pr) && nrow(pr) == nrow(mtcars))
 })
 
 test_that("RE7.2 output retains row / case names", {
-  skip_on_cran()
+  skip_heavy()
   d <- mtcars[1:6, ]
   m <- morie_lm(mpg ~ hp, d)
   expect_equal(m$case_names, rownames(d))            # case names preserved
 })
 
 test_that("RE7.4 forecast (prediction interval) errors are tested", {
-  skip_on_cran()
+  skip_heavy()
   m <- morie_lm(mpg ~ hp, mtcars)
   pr <- predict(m, mtcars, interval = "prediction")
   # forecast standard errors are strictly positive and finite
@@ -142,7 +142,7 @@ test_that("RE7.4 forecast (prediction interval) errors are tested", {
 })
 
 test_that("RE7.1a noiseless data fits at least as fast as noisy data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   n <- 500L
   x <- rnorm(n)

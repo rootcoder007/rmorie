@@ -8,7 +8,7 @@ test_that("survnnr fits from a list of rows (backprop no longer sees a nested li
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   n <- 40
   X <- lapply(seq_len(n), function(i) rnorm(3))
@@ -21,7 +21,7 @@ test_that("survnnr fits from a list of rows (backprop no longer sees a nested li
 })
 
 test_that("rjmcmc: the uniform stream advances and births are accepted from k = 0", {
-  skip_on_cran()
+  skip_heavy()
   u <- .unif_stream(1L)
   expect_length(unique(c(u(), u(), u(), u())), 4L)
   set.seed(2)
@@ -36,7 +36,7 @@ test_that("rjmcmc: the uniform stream advances and births are accepted from k = 
 })
 
 test_that("mqtmpl EM scan matches the Python arm on a fixed backcross (cM positions)", {
-  skip_on_cran()
+  skip_heavy()
   y  <- c(1.9, 0.3, 2.4, 0.1, 2.2, 0.6, 1.7, 0.4, 2.0, 0.2, 2.6, 0.5)
   mk <- list(c(1,0,1,0,1,0,1,0,1,0,1,0), c(1,0,1,0,1,1,1,0,0,0,1,0), c(0,0,1,0,1,1,0,0,0,1,1,0))
   f <- if (exists("mqtmpl_scanone")) mqtmpl_scanone else morie_mqtmpl_scanone
@@ -47,7 +47,7 @@ test_that("mqtmpl EM scan matches the Python arm on a fixed backcross (cM positi
 })
 
 test_that("native Parquet reader handles an OPTIONAL string column (no arrow needed)", {
-  skip_on_cran()
+  skip_heavy()
   df <- data.frame(i = 1:50L, v = seq(0.5, 25, by = 0.5), s = paste0("row", 1:50), stringsAsFactors = FALSE)
   fp <- tempfile(fileext = ".parquet")
   morie_write_parquet(df, fp, compression = NULL)

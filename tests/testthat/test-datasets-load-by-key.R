@@ -49,7 +49,7 @@ test_that("targeted-fixture dispatch hits TO ASR misc", {
 # network + upstream gating as the CKAN tests below. Fedora CI caught it
 # when opendata.vancouver.ca answered with an empty body.
 test_that("live dispatch hits Vancouver graffiti sample", {
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("rmoriedata")
   skip_if_no_network("opendata.vancouver.ca")
   df <- .skip_on_upstream_error(morie_datasets_load_by_key("graffiti"))
@@ -59,7 +59,7 @@ test_that("live dispatch hits Vancouver graffiti sample", {
 })
 
 test_that("live dispatch hits Vancouver fire halls", {
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("rmoriedata")
   skip_if_no_network("opendata.vancouver.ca")
   df <- .skip_on_upstream_error(morie_datasets_load_by_key("fire-halls"))
@@ -100,7 +100,7 @@ test_that("unknown dataset_key raises clear error", {
 })
 
 test_that("3FFF1: MTL CKAN generic dispatch auto-resolves first CSV resource", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_network("donnees.montreal.ca")
   df <- .skip_on_upstream_error(
     morie_datasets_load_by_key("communique-presse", max_features = 5L)
@@ -112,7 +112,7 @@ test_that("3FFF1: MTL CKAN generic dispatch auto-resolves first CSV resource", {
 })
 
 test_that("3FFF1: TO CKAN generic dispatch auto-resolves first CSV resource", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_network("ckan0.cf.opendata.inter.prod-toronto.ca")
   df <- .skip_on_upstream_error(
     morie_datasets_load_by_key(

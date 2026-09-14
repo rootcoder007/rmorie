@@ -9,7 +9,7 @@ test_that("morie_tgarch_model fits T-GARCH on a synthetic series", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(1L)
   x <- arima.sim(list(ar = 0.6), n = 200L)
   out <- tryCatch(morie_tgarch_model(as.numeric(x)),
@@ -20,7 +20,7 @@ test_that("morie_tgarch_model fits T-GARCH on a synthetic series", {
 })
 
 test_that("morie_egarch_model fits E-GARCH on a synthetic series", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2L)
   x <- arima.sim(list(ar = 0.5), n = 200L)
   out <- tryCatch(morie_egarch_model(as.numeric(x)),
@@ -31,7 +31,7 @@ test_that("morie_egarch_model fits E-GARCH on a synthetic series", {
 })
 
 test_that("morie_regime_switching fits a k=2 regime-switching model", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3L)
   x <- c(stats::rnorm(100, 0, 1), stats::rnorm(100, 3, 0.5))
   out <- tryCatch(morie_regime_switching(x, k_regimes = 2L),
@@ -44,7 +44,7 @@ test_that("morie_regime_switching fits a k=2 regime-switching model", {
 # ----------------------------------------------------- Quantile / fit tests
 
 test_that("hrzt1 runs Horowitz one-shot CATE on synthetic treatment data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(4L)
   n <- 100L
   x <- stats::rnorm(n)
@@ -58,7 +58,7 @@ test_that("hrzt1 runs Horowitz one-shot CATE on synthetic treatment data", {
 })
 
 test_that("hrzb1 runs Horowitz semi-parametric estimator", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(5L)
   n <- 80L
   x <- stats::rnorm(n)
@@ -70,7 +70,7 @@ test_that("hrzb1 runs Horowitz semi-parametric estimator", {
 })
 
 test_that("fzcvm returns the fuzzy Cramer-von-Mises statistic", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(6L)
   x <- stats::rnorm(80)
   out <- tryCatch(fzcvm(x, cdf = "norm"), error = function(e) e)
@@ -80,7 +80,7 @@ test_that("fzcvm returns the fuzzy Cramer-von-Mises statistic", {
 })
 
 test_that("fzhdc returns Headrick (2010) Hilbert-distance correlation", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(7L)
   x <- matrix(stats::rnorm(60 * 2), 60L, 2L)
   out <- tryCatch(fzhdc(x), error = function(e) e)
@@ -92,7 +92,7 @@ test_that("fzhdc returns Headrick (2010) Hilbert-distance correlation", {
 # ----------------------------------------------------- ML aliases
 
 test_that("morie_grid_search_cv runs on a small synthetic dataset", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(8L)
   x <- matrix(stats::rnorm(60 * 4), 60L, 4L)
   y <- x[, 1] + stats::rnorm(60, sd = 0.3)
@@ -106,7 +106,7 @@ test_that("morie_grid_search_cv runs on a small synthetic dataset", {
 })
 
 test_that("morie_decision_tree_split runs on a small classification frame", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(9L)
   x <- matrix(stats::rnorm(80 * 3), 80L, 3L)
   y <- as.integer(x[, 1] + x[, 2] > 0)
@@ -120,7 +120,7 @@ test_that("morie_decision_tree_split runs on a small classification frame", {
 })
 
 test_that("morie_rnn_genomic runs a tiny RNN on synthetic genomic data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(10L)
   x <- stats::rnorm(40)
   y <- stats::rnorm(40)
@@ -135,7 +135,7 @@ test_that("morie_rnn_genomic runs a tiny RNN on synthetic genomic data", {
 })
 
 test_that("morie_transformer_genomic runs a tiny transformer on markers", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(11L)
   x <- stats::rnorm(40)
   y <- stats::rnorm(40)
@@ -150,7 +150,7 @@ test_that("morie_transformer_genomic runs a tiny transformer on markers", {
 })
 
 test_that("morie_random_forest_genomic runs RF on synthetic markers", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(12L)
   x <- stats::rnorm(60)
   y <- stats::rnorm(60)
@@ -165,7 +165,7 @@ test_that("morie_random_forest_genomic runs RF on synthetic markers", {
 })
 
 test_that("morie_mhatf_multi_head_attention_full runs on a small tensor", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(13L)
   x <- matrix(stats::rnorm(40 * 8), 40L, 8L)
   out <- tryCatch(
@@ -177,7 +177,7 @@ test_that("morie_mhatf_multi_head_attention_full runs on a small tensor", {
 })
 
 test_that("morie_penalized_regression runs ridge/lasso on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(14L)
   x <- matrix(stats::rnorm(60 * 5), 60L, 5L)
   y <- x[, 1] + stats::rnorm(60, sd = 0.3)
@@ -190,7 +190,7 @@ test_that("morie_penalized_regression runs ridge/lasso on synthetic data", {
 })
 
 test_that("morie_bayes_ridge_gibbs runs Bayesian ridge regression", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(15L)
   x <- matrix(stats::rnorm(60 * 4), 60L, 4L)
   y <- x[, 1] + stats::rnorm(60, sd = 0.3)
@@ -206,7 +206,7 @@ test_that("morie_bayes_ridge_gibbs runs Bayesian ridge regression", {
 # ----------------------------------------------------- Spatial
 
 test_that("sglm fits a spatial GLM on coords + outcome", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(16L)
   n <- 60L
   coords <- matrix(stats::runif(n * 2), n, 2)
@@ -220,7 +220,7 @@ test_that("sglm fits a spatial GLM on coords + outcome", {
 })
 
 test_that("okrig fits ordinary kriging on a target grid", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(17L)
   n <- 40L
   coords <- matrix(stats::runif(n * 2), n, 2)
@@ -236,7 +236,7 @@ test_that("okrig fits ordinary kriging on a target grid", {
 })
 
 test_that("vrgft fits a variogram via Cressie-Hawkins on synthetic data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(18L)
   n <- 60L
   coords <- matrix(stats::runif(n * 2), n, 2)
@@ -249,7 +249,7 @@ test_that("vrgft fits a variogram via Cressie-Hawkins on synthetic data", {
 })
 
 test_that("smixd runs spatial mixture on coords + outcomes", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(19L)
   n <- 60L
   coords <- matrix(stats::runif(n * 2), n, 2)
@@ -265,7 +265,7 @@ test_that("smixd runs spatial mixture on coords + outcomes", {
 # ----------------------------------------------------- Misc
 
 test_that("sptau returns Spearman tau on (x, w) vectors", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(20L)
   x <- stats::rnorm(60)
   W <- matrix(stats::rnorm(60 * 60, sd = 0.1), 60L, 60L)
@@ -278,7 +278,7 @@ test_that("sptau returns Spearman tau on (x, w) vectors", {
 })
 
 test_that("unfdl runs an unfolding-distance latent model", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(21L)
   D <- as.matrix(stats::dist(matrix(stats::rnorm(20 * 2), 20, 2)))
   out <- tryCatch(unfdl(D, k = 2L, n_iter = 30L),
@@ -289,7 +289,7 @@ test_that("unfdl runs an unfolding-distance latent model", {
 })
 
 test_that("morie_diffu_heat_diffusion advances a heat-equation system", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(22L)
   T0 <- c(0, 0, 1, 0, 0)
   out <- tryCatch(

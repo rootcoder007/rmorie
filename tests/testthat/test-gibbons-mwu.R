@@ -14,7 +14,7 @@ test_that("the exact null distribution of U is stats::dwilcox", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   for (m in 2:7) {
     for (n in 2:7) {
       total <- m * n
@@ -38,7 +38,7 @@ test_that("the exact null distribution of U is stats::dwilcox", {
 })
 
 test_that("U matches stats::wilcox.test and its own moments", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(21)
   for (i in 1:6) {
     x <- stats::rnorm(9, mean = i / 3)
@@ -75,7 +75,7 @@ test_that("U matches stats::wilcox.test and its own moments", {
 })
 
 test_that("the rank sum is U shifted by m(m+1)/2", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(22)
   x <- stats::rnorm(8)
   y <- stats::rnorm(10)
@@ -107,7 +107,7 @@ test_that("the rank sum is U shifted by m(m+1)/2", {
 })
 
 test_that("the rank-sum normal approximation carries the tie correction", {
-  skip_on_cran()
+  skip_heavy()
   m <- 10L
   n <- 12L
   nn <- 22
@@ -151,7 +151,7 @@ test_that("the rank-sum normal approximation carries the tie correction", {
 })
 
 test_that("the shift interval is built from the pairwise differences", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(23)
   x <- stats::rnorm(7, mean = 1)
   y <- stats::rnorm(9)
@@ -193,7 +193,7 @@ test_that("the shift interval is built from the pairwise differences", {
 })
 
 test_that("the sample-size formula splits the total by the allocation", {
-  skip_on_cran()
+  skip_heavy()
   s <- rmorie:::Mwun(0.7, c = 0.5, alpha = 0.05, beta = 0.10)
   raw <- (stats::qnorm(0.95) + stats::qnorm(0.90))^2 /
     (12 * 0.5 * 0.5 * (0.7 - 0.5)^2)

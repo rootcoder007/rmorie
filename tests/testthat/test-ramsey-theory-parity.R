@@ -38,7 +38,7 @@ test_that("the nine known values match DS1 Table Ia exactly", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   known <- list(c(3, 3, 6), c(3, 4, 9), c(3, 5, 14), c(3, 6, 18),
                 c(3, 7, 23), c(3, 8, 28), c(3, 9, 36), c(4, 4, 18),
                 c(4, 5, 25))
@@ -50,7 +50,7 @@ test_that("the nine known values match DS1 Table Ia exactly", {
 })
 
 test_that("Ramsey numbers are symmetric in their arguments", {
-  skip_on_cran()
+  skip_heavy()
   for (p in list(c(3, 4), c(3, 7), c(4, 5), c(5, 5))) {
     a <- morie_ramsey_number(p[1], p[2])
     b <- morie_ramsey_number(p[2], p[1])
@@ -61,13 +61,13 @@ test_that("Ramsey numbers are symmetric in their arguments", {
 })
 
 test_that("the trivial cases are exact", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(morie_ramsey_number(1, 9)$value, 1L)
   for (l in 2:7) expect_equal(morie_ramsey_number(2, l)$value, as.integer(l))
 })
 
 test_that("unknown values return an interval, never a number", {
-  skip_on_cran()
+  skip_heavy()
   for (p in list(c(5, 5), c(6, 6), c(4, 6), c(3, 10))) {
     out <- morie_ramsey_number(p[1], p[2])
     expect_null(out$value)
@@ -78,14 +78,14 @@ test_that("unknown values return an interval, never a number", {
 })
 
 test_that("the circulating wrong value for R(5,5) is flagged", {
-  skip_on_cran()
+  skip_heavy()
   out <- morie_ramsey_number(5, 5)
   expect_equal(c(out$lower, out$upper), c(43L, 46L))
   expect_true(any(grepl("50 is incorrect", out$warnings)))
 })
 
 test_that("Goodman's identity matches brute force on random colourings", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   for (i in seq_len(60L)) {
     n <- sample(3:9, 1)
@@ -103,7 +103,7 @@ test_that("Goodman's identity matches brute force on random colourings", {
 })
 
 test_that("monochromatic plus bichromatic is every triangle", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   for (n in c(4L, 6L, 9L)) {
     C <- matrix(0L, n, n)
@@ -119,7 +119,7 @@ test_that("monochromatic plus bichromatic is every triangle", {
 })
 
 test_that("an all-red graph is entirely monochromatic", {
-  skip_on_cran()
+  skip_heavy()
   n <- 7L
   C <- matrix(1L, n, n)
   diag(C) <- 0L
@@ -127,12 +127,12 @@ test_that("an all-red graph is entirely monochromatic", {
 })
 
 test_that("the five-cycle has no monochromatic triangle", {
-  skip_on_cran()
+  skip_heavy()
   expect_equal(morie_goodman_triangles(cycle_colouring(5))$monochromatic, 0)
 })
 
 test_that("every colouring of K6 has at least two monochromatic triangles", {
-  skip_on_cran()
+  skip_heavy()
   # the exhaustive half of R(3,3) <= 6: all 2^15 colourings
   worst <- Inf
   for (C in all_colourings(6L)) {
@@ -143,7 +143,7 @@ test_that("every colouring of K6 has at least two monochromatic triangles", {
 })
 
 test_that("Goodman's minimum is attained exhaustively for small n", {
-  skip_on_cran()
+  skip_heavy()
   for (n in 3:6) {
     obs <- Inf
     for (C in all_colourings(n)) {
@@ -154,13 +154,13 @@ test_that("Goodman's minimum is attained exhaustively for small n", {
 })
 
 test_that("Goodman's minimum is zero below six and positive from six", {
-  skip_on_cran()
+  skip_heavy()
   for (n in 3:5) expect_equal(morie_goodman_minimum(n)$minimum, 0)
   for (n in 6:10) expect_gte(morie_goodman_minimum(n)$minimum, 1)
 })
 
 test_that("the five-cycle witness certifies the lower bound", {
-  skip_on_cran()
+  skip_heavy()
   w <- morie_ramsey_witness(cycle_colouring(5), 3, 3)
   expect_true(w$valid)
   expect_null(w$red_clique)
@@ -169,7 +169,7 @@ test_that("the five-cycle witness certifies the lower bound", {
 })
 
 test_that("a bad witness is rejected with the offending clique", {
-  skip_on_cran()
+  skip_heavy()
   C <- matrix(1L, 6, 6)
   diag(C) <- 0L
   w <- morie_ramsey_witness(C, 3, 3)
@@ -178,7 +178,7 @@ test_that("a bad witness is rejected with the offending clique", {
 })
 
 test_that("the party problem is proved at six and fails at five", {
-  skip_on_cran()
+  skip_heavy()
   six <- morie_party_problem(6)
   expect_true(six$guaranteed)
   expect_equal(six$minimum_monochromatic, 2)
@@ -189,7 +189,7 @@ test_that("the party problem is proved at six and fails at five", {
 })
 
 test_that("the pure recursion derives the classical values tightly", {
-  skip_on_cran()
+  skip_heavy()
   # Greenwood and Gleason, with nothing looked up
   for (kv in list(c(3, 3, 6), c(3, 4, 9), c(3, 5, 14), c(4, 4, 18))) {
     b <- morie_ramsey_upper_bound(kv[1], kv[2], use_known = FALSE)
@@ -199,14 +199,14 @@ test_that("the pure recursion derives the classical values tightly", {
 })
 
 test_that("the recursion is not tight everywhere", {
-  skip_on_cran()
+  skip_heavy()
   b <- morie_ramsey_upper_bound(4, 5, use_known = FALSE)
   expect_equal(b$recursive, 31)
   expect_equal(morie_ramsey_number(4, 5)$value, 25L)
 })
 
 test_that("the binomial bound is weaker than the recursion", {
-  skip_on_cran()
+  skip_heavy()
   for (p in list(c(3, 4), c(4, 4), c(4, 5), c(5, 5), c(6, 6))) {
     b <- morie_ramsey_upper_bound(p[1], p[2], use_known = FALSE)
     expect_gte(b$binomial, b$recursive)
@@ -215,7 +215,7 @@ test_that("the binomial bound is weaker than the recursion", {
 })
 
 test_that("every upper bound actually bounds the known value", {
-  skip_on_cran()
+  skip_heavy()
   for (p in list(c(3, 3), c(3, 4), c(3, 5), c(3, 6), c(4, 4), c(4, 5))) {
     v <- morie_ramsey_number(p[1], p[2])$value
     b <- morie_ramsey_upper_bound(p[1], p[2], use_known = FALSE)
@@ -225,7 +225,7 @@ test_that("every upper bound actually bounds the known value", {
 })
 
 test_that("the probabilistic bound sits below every known value", {
-  skip_on_cran()
+  skip_heavy()
   for (k in 3:4) {
     lb <- morie_ramsey_lower_bound_probabilistic(k)$bound
     expect_lt(lb, morie_ramsey_number(k, k)$value)
@@ -233,7 +233,7 @@ test_that("the probabilistic bound sits below every known value", {
 })
 
 test_that("the probabilistic bound beats the 2^(k/2) form", {
-  skip_on_cran()
+  skip_heavy()
   for (k in c(10L, 15L, 20L)) {
     b <- morie_ramsey_lower_bound_probabilistic(k)
     expect_gt(b$bound, b$asymptotic_2_to_k_over_2)
@@ -242,7 +242,7 @@ test_that("the probabilistic bound beats the 2^(k/2) form", {
 })
 
 test_that("these values match the Python core exactly", {
-  skip_on_cran()
+  skip_heavy()
   # integer arithmetic on exactly-known quantities, so parity is exact
   expect_equal(morie_ramsey_number(3, 3)$value, 6L)
   expect_equal(morie_ramsey_number(4, 5)$value, 25L)
@@ -257,7 +257,7 @@ test_that("these values match the Python core exactly", {
 })
 
 test_that("Ramsey theory input validation", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_ramsey_number(0, 3), "at least 1")
   expect_error(morie_goodman_triangles(matrix(0L, 2, 2)),
                "at least three vertices")

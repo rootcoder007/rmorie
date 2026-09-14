@@ -12,7 +12,7 @@ test_that("the compensated matrix product agrees with %*%", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(4)
   for (d in list(c(3, 4, 5), c(1, 1, 1), c(6, 2, 3))) {
     A <- matrix(rnorm(d[1] * d[2]), d[1], d[2])
@@ -28,7 +28,7 @@ test_that("the compensated matrix product agrees with %*%", {
 })
 
 test_that("cyclic Jacobi recovers the spectrum that eigen() reports", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(6)
   for (n in c(2, 3, 5, 8)) {
     M <- matrix(rnorm(n * n), n)
@@ -58,7 +58,7 @@ test_that("cyclic Jacobi recovers the spectrum that eigen() reports", {
 })
 
 test_that("the row-major fill draws in order", {
-  skip_on_cran()
+  skip_heavy()
   vals <- c(1, 2, 3, 4, 5, 6)
   i <- 0L
   u <- function() {
@@ -77,7 +77,7 @@ test_that("the row-major fill draws in order", {
 })
 
 test_that("confusion counts and scores follow their definitions", {
-  skip_on_cran()
+  skip_heavy()
   true <- c(1, 1, 1, 0, 0, 0, 0, 1)
   pred <- c(1, 1, 0, 0, 0, 1, 0, 1)
   cm <- .morie_bx_confusion(true, pred)
@@ -104,7 +104,7 @@ test_that("confusion counts and scores follow their definitions", {
 })
 
 test_that("the nonnegative factorisation descends and can be exact", {
-  skip_on_cran()
+  skip_heavy()
   # a matrix that is exactly rank two and nonnegative must be recoverable
   set.seed(8)
   W0 <- matrix(runif(6 * 2, 0.5, 1.5), 6, 2)
@@ -140,7 +140,7 @@ test_that("the nonnegative factorisation descends and can be exact", {
 })
 
 test_that("matching pursuit recovers an exactly sparse signal", {
-  skip_on_cran()
+  skip_heavy()
   n <- 24
   # an orthonormal dictionary makes the greedy choice provably right
   set.seed(10)
@@ -174,7 +174,7 @@ test_that("matching pursuit recovers an exactly sparse signal", {
 })
 
 test_that("the Gabor dictionary is unit-norm and reproducible", {
-  skip_on_cran()
+  skip_heavy()
   n <- 32
   g <- .morie_bx_gabor(n, 12L)
   expect_equal(dim(g$atoms), c(12L, n))
@@ -195,7 +195,7 @@ test_that("the Gabor dictionary is unit-norm and reproducible", {
 })
 
 test_that("the short-time transform reconstructs the signal it analysed", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(12)
   x <- sin(2 * pi * 5 * (0:127) / 64) + 0.1 * rnorm(128)
   for (cfg in list(c(32, 16), c(32, 8), c(64, 16))) {
@@ -228,7 +228,7 @@ test_that("the short-time transform reconstructs the signal it analysed", {
 })
 
 test_that("channel selection ranks by deviation from the mid-point", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(14)
   nch <- 5
   # three channels carry structure, two are near-constant noise

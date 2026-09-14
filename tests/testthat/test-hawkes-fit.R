@@ -5,7 +5,7 @@ test_that("morie_hawkes_fit returns a fit for each kernel", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(42)
   ev <- cumsum(rexp(250, rate = 2))
   for (k in c("exponential", "weibull", "lomax", "gamma")) {
@@ -25,7 +25,7 @@ test_that("morie_hawkes_fit returns a fit for each kernel", {
 })
 
 test_that("the C++ and pure-R Hawkes likelihoods agree", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not(morie_fast_available(), "compiled core not available")
   set.seed(7)
   ev <- cumsum(rexp(200, rate = 2))
@@ -44,14 +44,14 @@ test_that("the C++ and pure-R Hawkes likelihoods agree", {
 })
 
 test_that("morie_hawkes_fit validates its inputs", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_hawkes_fit(c(3, 1, 2)), "sorted")
   expect_error(morie_hawkes_fit(c(1)), "at least 2")
   expect_error(morie_hawkes_fit(c(1, 2), end_time = 1.5), "end_time")
 })
 
 test_that("morie_hawkes_fit reports the Poisson baseline and degeneracy", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(99)
   ev <- cumsum(rexp(300, rate = 3))
   fit <- morie_hawkes_fit(ev, kernel = "exponential")
@@ -73,7 +73,7 @@ test_that("morie_hawkes_fit reports the Poisson baseline and degeneracy", {
 })
 
 test_that("the unconstrained reparameterisation round-trips", {
-  skip_on_cran()
+  skip_heavy()
   for (theta in list(c(-1, 0.4, 1.5), c(0.5, 0.8, 2.0, 1.3))) {
     phi <- rmorie:::.hawkes_to_phi(theta)
     expect_equal(rmorie:::.hawkes_to_theta(phi), theta, tolerance = 1e-12)

@@ -21,7 +21,7 @@ test_that("BS1.2a README documents prior specification with example", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   # The README lives in the package source, not the installed/check tree;
   # this documentation check runs from a source checkout and skips otherwise.
   skip_if_not(file.exists("../../README.md"), "README not in test tree")
@@ -31,7 +31,7 @@ test_that("BS1.2a README documents prior specification with example", {
 })
 
 test_that("BS1.2b a vignette gives prior guidance with example code", {
-  skip_on_cran()
+  skip_heavy()
   vg_path <- "../../vignettes/bayesian-priors.Rmd"
   skip_if_not(file.exists(vg_path), "vignette source not in test tree")
   vg <- readLines(vg_path, warn = FALSE)
@@ -40,7 +40,7 @@ test_that("BS1.2b a vignette gives prior guidance with example code", {
 })
 
 test_that("BS1.3a/BS2.8 a run continues from a previous run's final state", {
-  skip_on_cran()
+  skip_heavy()
   f1 <- .bfit(iter = 300L, warmup = 200L, chains = 2L)
   f2 <- morie_bayes_continue(f1, iter = 300L)
   expect_s3_class(f2, "morie_bayes_fit")
@@ -48,7 +48,7 @@ test_that("BS1.3a/BS2.8 a run continues from a previous run's final state", {
 })
 
 test_that("BS1.4 convergence checking can be enabled or skipped", {
-  skip_on_cran()
+  skip_heavy()
   with_c <- .bfit(iter = 200L, warmup = 100L)
   without <- .bfit(iter = 200L, warmup = 100L, check_convergence = FALSE)
   expect_false(is.null(with_c$rhat))
@@ -56,7 +56,7 @@ test_that("BS1.4 convergence checking can be enabled or skipped", {
 })
 
 test_that("BS1.5 multiple convergence checkers exist and differ", {
-  skip_on_cran()
+  skip_heavy()
   f <- .bfit()
   d <- morie_bayes_diagnostics(f)
   expect_true(all(c("rhat", "ess", "geweke") %in% names(d)))
@@ -64,21 +64,21 @@ test_that("BS1.5 multiple convergence checkers exist and differ", {
 })
 
 test_that("BS2.1a design-matrix pre-processing is correct", {
-  skip_on_cran()
+  skip_heavy()
   des <- .bayes_design(y ~ x, .bayes_data(50L))
   expect_equal(ncol(des$X), 2L)                    # intercept + x
   expect_equal(length(des$y), 50L)
 })
 
 test_that("BS2.3/BS2.4 over-length prior vectors are rejected", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_bayes_lm(y ~ x, .bayes_data(), prior_sd = c(1, 2, 3),
                               chains = 1L, iter = 50L, warmup = 10L),
                "length")
 })
 
 test_that("BS2.10 identical seeds for distinct chains are flagged", {
-  skip_on_cran()
+  skip_heavy()
   d <- .bayes_data()
   expect_warning(
     morie_bayes_lm(y ~ x, d, chains = 2L, iter = 50L, warmup = 10L,
@@ -89,19 +89,19 @@ test_that("BS2.10 identical seeds for distinct chains are flagged", {
 })
 
 test_that("BS2.11 the vector starting argument is named plurally", {
-  skip_on_cran()
+  skip_heavy()
   expect_true("starting_values" %in% names(formals(morie_bayes_lm)))
 })
 
 test_that("BS2.14 warnings can be suppressed with quiet=", {
-  skip_on_cran()
+  skip_heavy()
   d <- .bayes_data()
   expect_silent(morie_bayes_lm(y ~ x, d, chains = 2L, iter = 40L, warmup = 5L,
                                converge_threshold = 1.0001, quiet = TRUE))
 })
 
 test_that("BS2.15 sampler errors are caught + returned, not thrown", {
-  skip_on_cran()
+  skip_heavy()
   d <- .bayes_data()
   d$y[1] <- Inf                # makes the log-posterior NaN
   fit <- morie_bayes_lm(y ~ x, d, chains = 1L, iter = 50L, warmup = 10L,
@@ -111,7 +111,7 @@ test_that("BS2.15 sampler errors are caught + returned, not thrown", {
 })
 
 test_that("BS3.2 perfectly collinear predictors are detected", {
-  skip_on_cran()
+  skip_heavy()
   d <- .bayes_data()
   d$x2 <- d$x                  # duplicate column
   expect_error(morie_bayes_lm(y ~ x + x2, d, chains = 1L, iter = 50L,
@@ -119,20 +119,20 @@ test_that("BS3.2 perfectly collinear predictors are detected", {
 })
 
 test_that("BS4.1 posterior means are comparable to an external (OLS) fit", {
-  skip_on_cran()
+  skip_heavy()
   cmp <- morie_bayes_compare(.bfit())
   expect_true(all(abs(cmp$posterior_mean - cmp$ols) < 0.3))
 })
 
 test_that("BS4.4 sampling can stop on convergence", {
-  skip_on_cran()
+  skip_heavy()
   expect_true("stop_on_convergence" %in% names(formals(morie_bayes_lm)))
   f <- .bfit(stop_on_convergence = TRUE)
   expect_s3_class(f, "morie_bayes_fit")
 })
 
 test_that("BS4.5/BS5.5 non-convergence is flagged + warned, samples returned", {
-  skip_on_cran()
+  skip_heavy()
   # a tiny run under a strict threshold will not converge
   expect_warning(
     f <- morie_bayes_lm(y ~ x, .bayes_data(), chains = 2L, iter = 30L,
@@ -143,14 +143,14 @@ test_that("BS4.5/BS5.5 non-convergence is flagged + warned, samples returned", {
 })
 
 test_that("BS4.6 convergence-checked run ~ equals a fixed-length run", {
-  skip_on_cran()
+  skip_heavy()
   a <- .bfit()
   b <- .bfit(check_convergence = FALSE)
   expect_equal(unname(a$coefficients), unname(b$coefficients), tolerance = 0.2)
 })
 
 test_that("BS4.7 a stricter threshold makes convergence harder to declare", {
-  skip_on_cran()
+  skip_heavy()
   loose <- .bfit(iter = 150L, warmup = 80L, converge_threshold = 1.5)
   strict <- .bfit(iter = 150L, warmup = 80L, converge_threshold = 1.0001)
   # under an almost-unattainable threshold, convergence is (at most) as often
@@ -158,14 +158,14 @@ test_that("BS4.7 a stricter threshold makes convergence harder to declare", {
 })
 
 test_that("BS5.4 diagnostics report the details of each checker", {
-  skip_on_cran()
+  skip_heavy()
   d <- morie_bayes_diagnostics(.bfit())
   expect_named(d, c("rhat", "ess", "geweke"))
   expect_true(all(is.finite(d$rhat)))
 })
 
 test_that("BS6.0/BS6.1 default plot method exists + dispatches", {
-  skip_on_cran()
+  skip_heavy()
   expect_true(exists("plot.morie_bayes_fit"))
   f <- .bfit(iter = 200L, warmup = 100L)
   tmp <- tempfile(fileext = ".png")
@@ -176,7 +176,7 @@ test_that("BS6.0/BS6.1 default plot method exists + dispatches", {
 })
 
 test_that("BS6.2 posterior sample sequences (trace) can be plotted", {
-  skip_on_cran()
+  skip_heavy()
   f <- .bfit(iter = 200L, warmup = 100L)
   tmp <- tempfile(fileext = ".png")
   grDevices::png(tmp)
@@ -186,7 +186,7 @@ test_that("BS6.2 posterior sample sequences (trace) can be plotted", {
 })
 
 test_that("BS6.3 posterior densities can be plotted", {
-  skip_on_cran()
+  skip_heavy()
   f <- .bfit(iter = 200L, warmup = 100L)
   tmp <- tempfile(fileext = ".png")
   grDevices::png(tmp)
@@ -196,7 +196,7 @@ test_that("BS6.3 posterior densities can be plotted", {
 })
 
 test_that("BS6.4/BS6.5 plot type selects trace, density, or both", {
-  skip_on_cran()
+  skip_heavy()
   f <- .bfit(iter = 200L, warmup = 100L)
   expect_true("type" %in% names(formals(morie_bayes_plot)))
   tmp <- tempfile(fileext = ".png")
@@ -207,7 +207,7 @@ test_that("BS6.4/BS6.5 plot type selects trace, density, or both", {
 })
 
 test_that("BS7.0 the generating parameters are recovered", {
-  skip_on_cran()
+  skip_heavy()
   f <- .bfit(iter = 1500L, warmup = 700L)
   # true intercept 1, slope 2
   expect_equal(f$coefficients[["(Intercept)"]], 1, tolerance = 0.3)
@@ -215,7 +215,7 @@ test_that("BS7.0 the generating parameters are recovered", {
 })
 
 test_that("BS7.1 a tight prior with little data recovers the prior", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   d <- data.frame(x = rnorm(6))
   d$y <- rnorm(6)  # weak data
@@ -226,14 +226,14 @@ test_that("BS7.1 a tight prior with little data recovers the prior", {
 })
 
 test_that("BS7.2 the posterior matches the analytic (OLS) estimate", {
-  skip_on_cran()
+  skip_heavy()
   f <- .bfit(iter = 1500L, warmup = 700L)
   ols <- stats::coef(stats::lm(y ~ x, .bayes_data()))
   expect_equal(unname(f$coefficients), unname(ols), tolerance = 0.25)
 })
 
 test_that("BS7.3 more iterations reduce Monte Carlo error", {
-  skip_on_cran()
+  skip_heavy()
   # independent sampler seeds; longer chains give a tighter estimate of
   # the same posterior mean (lower between-run standard deviation).
   est <- function(iter, warmup, seed) {
@@ -247,7 +247,7 @@ test_that("BS7.3 more iterations reduce Monte Carlo error", {
 })
 
 test_that("BS7.4/BS7.4a fitted values are on the response scale", {
-  skip_on_cran()
+  skip_heavy()
   f <- .bfit()
   fv <- fitted(f)
   expect_length(fv, nrow(.bayes_data()))

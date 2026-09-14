@@ -7,7 +7,7 @@ test_that("hash kernels reproduce the published test vectors", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   h <- function(s, algo) morie_digest(s, algo = algo, serialize = FALSE)
   expect_identical(h("", "md5"), "d41d8cd98f00b204e9800998ecf8427e")
   expect_identical(h("abc", "md5"), "900150983cd24fb0d6963f7d28e17f72")
@@ -46,7 +46,7 @@ test_that("hash kernels reproduce the published test vectors", {
 })
 
 test_that("morie_digest matches digest::digest across algorithms and inputs", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("digest")
   algos <- c("md5", "sha1", "crc32", "sha256", "sha512", "xxhash32", "xxhash64", "murmur32", "crc32c")
   set.seed(7)
@@ -84,7 +84,7 @@ test_that("morie_digest matches digest::digest across algorithms and inputs", {
 })
 
 test_that("morie_hmac, morie_digest2int, morie_sha1 and morie_aes match digest", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("digest")
   for (algo in c("md5", "sha1", "sha256", "sha512", "crc32")) {
     expect_identical(morie_hmac("key", "message", algo = algo), digest::hmac("key", "message", algo = algo), label = algo)

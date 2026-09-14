@@ -27,14 +27,14 @@ test_that("the fixture matches the one Python anchored against", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   expect_equal(wsm_fixture()[1:3],
                c(1.1753136328651195, -1.706701964389945,
                  -0.37985904382553287), tolerance = 1e-12)
 })
 
 test_that("the window-width rules match morie.fn._wsm", {
-  skip_on_cran()
+  skip_heavy()
   z <- wsm_fixture()
   expect_equal(.wsm_bandwidth(z, "3.31"), 0.24791895164026487,
                tolerance = 1e-12)
@@ -51,7 +51,7 @@ test_that("the window-width rules match morie.fn._wsm", {
 })
 
 test_that("the adaptive spread resists an outlier that moves the sd", {
-  skip_on_cran()
+  skip_heavy()
   # (3.30) is why (3.31) beats (3.28) off the normal model: one
   # contaminating point moves the standard deviation a long way and
   # the interquartile range hardly at all
@@ -65,7 +65,7 @@ test_that("the adaptive spread resists an outlier that moves the sd", {
 })
 
 test_that("morie_wsm_kde matches morie.fn.wsmkdn", {
-  skip_on_cran()
+  skip_heavy()
   z <- wsm_fixture()
   g <- seq(-3, 3, length.out = 7L)
   o <- morie_wsm_kde(g, z, h = 0.4)
@@ -80,7 +80,7 @@ test_that("morie_wsm_kde matches morie.fn.wsmkdn", {
 })
 
 test_that("the kernel density is a density and matches (2.2a) directly", {
-  skip_on_cran()
+  skip_heavy()
   z <- wsm_fixture()
   g <- seq(-4, 4, length.out = 300L)
   o <- morie_wsm_kde(g, z, h = 0.35)
@@ -93,7 +93,7 @@ test_that("the kernel density is a density and matches (2.2a) directly", {
 })
 
 test_that("morie_wsm_importance_sampling matches morie.fn.wsmiis", {
-  skip_on_cran()
+  skip_heavy()
   xs <- stats::qcauchy(wsm_unif(5000L, 999))
   o <- morie_wsm_importance_sampling(function(x) x^2, stats::dnorm,
                                      stats::dcauchy, xs)
@@ -106,7 +106,7 @@ test_that("morie_wsm_importance_sampling matches morie.fn.wsmiis", {
 })
 
 test_that("the self-normalised estimator ignores normalising constants", {
-  skip_on_cran()
+  skip_heavy()
   # (29.22) divides by sum(w), so scaling P* or Q* by any constant
   # leaves the estimate alone. That is the whole point, and the
   # unnormalised alternative cannot do it.
@@ -126,7 +126,7 @@ test_that("the self-normalised estimator ignores normalising constants", {
 })
 
 test_that("importance sampling refuses a sampler with no support", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(
     morie_wsm_importance_sampling(function(x) x, function(x) rep(1, length(x)),
                                   function(x) rep(0, length(x)), c(0, 1, 2)),
@@ -134,7 +134,7 @@ test_that("importance sampling refuses a sampler with no support", {
 })
 
 test_that("morie_wsm_bootstrap divides by B - 1", {
-  skip_on_cran()
+  skip_heavy()
   # ESL (7.53), for the same reason a sample variance carries n - 1
   z <- wsm_fixture()
   o <- morie_wsm_bootstrap(z, mean, B = 200L, seed = 1)
@@ -147,7 +147,7 @@ test_that("morie_wsm_bootstrap divides by B - 1", {
 })
 
 test_that("the bootstrap recovers the closed-form variance of a mean", {
-  skip_on_cran()
+  skip_heavy()
   # Var(Xbar) = sigma^2/n is the one case where the answer is known
   # before the bootstrap is run
   z <- wsm_fixture(400L, 77)
@@ -156,7 +156,7 @@ test_that("the bootstrap recovers the closed-form variance of a mean", {
 })
 
 test_that("morie_wsm_plug_in reports T(F_n) and a bootstrap standard error", {
-  skip_on_cran()
+  skip_heavy()
   z <- wsm_fixture()
   o <- morie_wsm_plug_in(z, mean, B = 600L, seed = 5)
   expect_equal(o$estimate, mean(z), tolerance = 1e-12)
@@ -168,7 +168,7 @@ test_that("morie_wsm_plug_in reports T(F_n) and a bootstrap standard error", {
 })
 
 test_that("the plug-in principle is not special to the mean", {
-  skip_on_cran()
+  skip_heavy()
   # the median's asymptotic SE is 1/(2 f(m) sqrt(n)), which for a
   # standard normal is sqrt(pi/2)/sqrt(n)
   z <- wsm_fixture()
@@ -178,7 +178,7 @@ test_that("the plug-in principle is not special to the mean", {
 })
 
 test_that("morie_wsm_mle recovers normal parameters with textbook SEs", {
-  skip_on_cran()
+  skip_heavy()
   # for a normal sample the MLE of the mean has SE sigma/sqrt(n) and
   # the MLE of the standard deviation has sigma/sqrt(2n)
   n <- 800L
@@ -193,7 +193,7 @@ test_that("morie_wsm_mle recovers normal parameters with textbook SEs", {
 })
 
 test_that("morie_wsm_mle reports no SE when it did not find a maximum", {
-  skip_on_cran()
+  skip_heavy()
   z <- wsm_fixture(200L, 17)
   ok <- morie_wsm_mle(z, function(d, t) stats::dnorm(d, t[1L], 1), 0)
   expect_true(ok$is_maximum)
@@ -209,7 +209,7 @@ test_that("morie_wsm_mle reports no SE when it did not find a maximum", {
 })
 
 test_that("bagging does essentially nothing for a linear procedure", {
-  skip_on_cran()
+  skip_heavy()
   # ESL Sec. 8.7's sharp corollary: the replicates are identically
   # distributed so only variance can move, and for a fit linear in y
   # the bootstrap average converges back to the original fit
@@ -223,7 +223,7 @@ test_that("bagging does essentially nothing for a linear procedure", {
 })
 
 test_that("bagging moves a deep tree far more than a linear fit", {
-  skip_on_cran()
+  skip_heavy()
   # the contrast that makes the previous test mean something
   z <- wsm_fixture(1000L, 29)
   X <- matrix(z[1:450], ncol = 3L)
@@ -240,7 +240,7 @@ test_that("bagging moves a deep tree far more than a linear fit", {
 })
 
 test_that("the resampling functions do not leak the global RNG stream", {
-  skip_on_cran()
+  skip_heavy()
   z <- wsm_fixture(200L, 31)
   set.seed(4242)
   before <- stats::runif(3L)
@@ -253,7 +253,7 @@ test_that("the resampling functions do not leak the global RNG stream", {
 })
 
 test_that("morie_wsm_admissible decides dominance over the whole table", {
-  skip_on_cran()
+  skip_heavy()
   o <- morie_wsm_admissible(rbind(c(1, 5), c(2, 2), c(3, 6)),
                             names = c("A", "B", "C"))
   expect_equal(o$admissible, c(TRUE, TRUE, FALSE))
@@ -268,7 +268,7 @@ test_that("morie_wsm_admissible decides dominance over the whole table", {
 })
 
 test_that("identical rules do not dominate each other", {
-  skip_on_cran()
+  skip_heavy()
   # the definition needs STRICT improvement somewhere; a tie is not
   # dominance, so both stay admissible
   o <- morie_wsm_admissible(rbind(c(1, 2), c(1, 2)))
@@ -278,7 +278,7 @@ test_that("identical rules do not dominate each other", {
 })
 
 test_that("a rule can be admissible without being any good", {
-  skip_on_cran()
+  skip_heavy()
   # admissibility is not optimality: a rule superb at one state and
   # dreadful everywhere else survives as long as nothing beats it there
   o <- morie_wsm_admissible(rbind(c(0, 99), c(1, 1)),
@@ -288,7 +288,7 @@ test_that("a rule can be admissible without being any good", {
 })
 
 test_that("morie_wsm_admissible validates its table", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(morie_wsm_admissible(rbind(c(1, NA), c(2, 2))), "finite")
   expect_error(morie_wsm_admissible(rbind(c(1, 2), c(2, 1)),
                                     names = "only-one"), "names has")

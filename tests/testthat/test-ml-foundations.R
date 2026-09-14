@@ -8,7 +8,7 @@ test_that("morie_linear_regression_ols recovers known coefficients", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   X <- matrix(rnorm(400), 200, 2)
   y <- 0.5 + X %*% c(1.5, -2.0) + rnorm(200, sd = 0.1)
@@ -19,7 +19,7 @@ test_that("morie_linear_regression_ols recovers known coefficients", {
 })
 
 test_that("morie_gradient_descent_vanilla converges to OLS", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   X <- matrix(rnorm(400), 200, 2)
   y <- 0.5 + X %*% c(1.5, -2.0) + rnorm(200, sd = 0.1)
@@ -28,7 +28,7 @@ test_that("morie_gradient_descent_vanilla converges to OLS", {
 })
 
 test_that("morie_mini_batch_gradient roughly matches OLS", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   X <- matrix(rnorm(1500), 500, 3)
   y <- X %*% c(1.0, -0.5, 2.0) + 0.25 + rnorm(500, sd = 0.1)
@@ -37,7 +37,7 @@ test_that("morie_mini_batch_gradient roughly matches OLS", {
 })
 
 test_that("morie_polynomial_regression recovers known polynomial", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   x <- seq(-2, 2, length.out = 200)
   y <- 1 - 0.5 * x + 2 * x^2 + rnorm(200, sd = 0.1)
@@ -46,7 +46,7 @@ test_that("morie_polynomial_regression recovers known polynomial", {
 })
 
 test_that("morie_regularization_path returns a path matrix", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("glmnet")
   set.seed(0)
   X <- matrix(rnorm(1000), 200, 5)
@@ -60,7 +60,7 @@ test_that("morie_regularization_path returns a path matrix", {
 })
 
 test_that("morie_learning_curve produces sensible curves", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   X <- matrix(rnorm(600), 200, 3)
   y <- X %*% c(1.0, -0.5, 2.0) + rnorm(200, sd = 0.5)
@@ -70,7 +70,7 @@ test_that("morie_learning_curve produces sensible curves", {
 })
 
 test_that("morie_svm_hinge_primal fits a linear SVM", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("e1071")
   set.seed(0)
   X <- matrix(rnorm(400), 200, 2)
@@ -80,7 +80,7 @@ test_that("morie_svm_hinge_primal fits a linear SVM", {
 })
 
 test_that("morie_svm_kernel_trick fits an RBF SVM", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("e1071")
   set.seed(0)
   X <- matrix(rnorm(400), 200, 2)
@@ -90,7 +90,7 @@ test_that("morie_svm_kernel_trick fits an RBF SVM", {
 })
 
 test_that("morie_decision_tree_split builds a tree", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("rpart")
   set.seed(0)
   X <- matrix(rnorm(600), 200, 3)
@@ -100,7 +100,7 @@ test_that("morie_decision_tree_split builds a tree", {
 })
 
 test_that("morie_random_forest_ensemble fits a random forest", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("randomForest")
   set.seed(0)
   X <- matrix(rnorm(1200), 300, 4)
@@ -110,7 +110,7 @@ test_that("morie_random_forest_ensemble fits a random forest", {
 })
 
 test_that("morie_gradient_boosting_ensemble fits a GBM", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("gbm")
   skip_if_not_installed("xgboost")
   testthat::skip_if(!requireNamespace("gbm", quietly = TRUE) &&
@@ -123,7 +123,7 @@ test_that("morie_gradient_boosting_ensemble fits a GBM", {
 })
 
 test_that("morie_xgboost_objective fits boosted trees", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("gbm")
   skip_if_not_installed("xgboost")
   testthat::skip_if(!requireNamespace("xgboost", quietly = TRUE) &&
@@ -136,7 +136,7 @@ test_that("morie_xgboost_objective fits boosted trees", {
 })
 
 test_that("morie_pca_dimension_reduction decomposes data", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   z <- matrix(rnorm(200), 200, 1)
   X <- z %*% t(c(1.0, 2.0, -1.0)) + 0.1 * matrix(rnorm(600), 200, 3)
@@ -145,7 +145,7 @@ test_that("morie_pca_dimension_reduction decomposes data", {
 })
 
 test_that("morie_tsne_reduction embeds points", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("Rtsne")
   set.seed(0)
   X <- rbind(
@@ -157,7 +157,7 @@ test_that("morie_tsne_reduction embeds points", {
 })
 
 test_that("morie_kmeans_clustering finds three clusters", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(0)
   centres <- rbind(c(0, 0), c(5, 5), c(-5, 5))
   X <- do.call(rbind, lapply(seq_len(3), function(i) {
@@ -168,7 +168,7 @@ test_that("morie_kmeans_clustering finds three clusters", {
 })
 
 test_that("morie_dbscan_clustering separates clusters from noise", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("dbscan")
   set.seed(0)
   blob1 <- matrix(rnorm(80, sd = 0.3), 40, 2)
@@ -180,7 +180,7 @@ test_that("morie_dbscan_clustering separates clusters from noise", {
 })
 
 test_that("morie_grid_search_cv finds best params", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("caret")
   set.seed(0)
   X <- matrix(rnorm(600), 200, 3)
@@ -190,7 +190,7 @@ test_that("morie_grid_search_cv finds best params", {
 })
 
 test_that("morie_random_search_cv samples and scores", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("caret")
   set.seed(0)
   X <- matrix(rnorm(600), 200, 3)
@@ -200,7 +200,7 @@ test_that("morie_random_search_cv samples and scores", {
 })
 
 test_that("morie_confusion_matrix_metrics matches sklearn semantics", {
-  skip_on_cran()
+  skip_heavy()
   y_true <- c(0, 0, 1, 1, 1, 0, 1, 0, 1, 1)
   y_pred <- c(0, 1, 1, 1, 0, 0, 1, 0, 1, 1)
   r <- morie_confusion_matrix_metrics(y_true, y_pred)
@@ -210,7 +210,7 @@ test_that("morie_confusion_matrix_metrics matches sklearn semantics", {
 })
 
 test_that("morie_roc_auc_score computes AUC", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_no_pkg("pROC")
   set.seed(0)
   y <- sample(0:1, 200, replace = TRUE)

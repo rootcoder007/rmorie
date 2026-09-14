@@ -14,7 +14,7 @@ test_that("the sign statistic counts positive differences and drops zeros", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   x <- c(3, 5, 0, -2, 7, 0, 1, -4)
   s <- rmorie:::Signk(x)
   expect_equal(s$statistic, 4L)
@@ -40,7 +40,7 @@ test_that("the sign statistic counts positive differences and drops zeros", {
 })
 
 test_that("the exact sign-test p-value is stats::binom.test", {
-  skip_on_cran()
+  skip_heavy()
   for (n in c(6L, 11L, 20L)) {
     for (k in 0:n) {
       p <- rmorie:::Signp(k, n)
@@ -75,7 +75,7 @@ test_that("the exact sign-test p-value is stats::binom.test", {
 })
 
 test_that("the normal approximation is the continuity-corrected z", {
-  skip_on_cran()
+  skip_heavy()
   n <- 40L
   for (k in c(10L, 18L, 20L, 25L, 33L)) {
     z <- rmorie:::Signz(k, n)
@@ -107,7 +107,7 @@ test_that("the normal approximation is the continuity-corrected z", {
 })
 
 test_that("the three zero-handling conventions differ as documented", {
-  skip_on_cran()
+  skip_heavy()
   x <- c(2, 3, 0, 0, 0, -1, -4, -5, -6)
   # discarding the zeros is the usual convention
   d <- rmorie:::Signzero(x, method = "discard")
@@ -142,7 +142,7 @@ test_that("the three zero-handling conventions differ as documented", {
 })
 
 test_that("sign-test power rises with n and with the departure from 1/2", {
-  skip_on_cran()
+  skip_heavy()
   p <- rmorie:::Signpow(20L, 0.75, alpha = 0.05)
   # the critical value is the smallest k whose upper tail is within alpha
   expect_equal(p$k_alpha, stats::qbinom(1 - 0.05, 20, 0.5) + 1L)
@@ -181,7 +181,7 @@ test_that("sign-test power rises with n and with the departure from 1/2", {
 })
 
 test_that("simulated power counts the rejections in the supplied samples", {
-  skip_on_cran()
+  skip_heavy()
   # three samples, with 4, 1 and 5 values above the hypothesised median
   m <- rbind(c(1, 2, 3, 4, -1), c(-1, -2, -3, -4, 1), c(1, 2, 3, 4, 5))
   r <- rmorie:::Signsimpow(m, m0 = 0, kcrit = 4L)
@@ -209,7 +209,7 @@ test_that("simulated power counts the rejections in the supplied samples", {
 })
 
 test_that("the sample-size formulas invert the normal power statement", {
-  skip_on_cran()
+  skip_heavy()
   for (theta in c(0.6, 0.7, 0.25)) {
     one <- rmorie:::Signn(theta, alpha = 0.05, beta = 0.10)
     za <- stats::qnorm(0.95)
@@ -240,7 +240,7 @@ test_that("the sample-size formulas invert the normal power statement", {
 })
 
 test_that("the median interval inverts the sign test at its stated level", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   x <- sort(stats::rnorm(15))
   ci <- rmorie:::Signmedci(x, alpha = 0.05)

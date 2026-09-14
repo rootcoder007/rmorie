@@ -5,7 +5,7 @@ test_that("morie_taphonomy_schema is a typed zero-row template (no fabricated ro
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   s <- morie_taphonomy_schema()
   expect_s3_class(s, "data.frame")
   expect_identical(nrow(s), 0L)
@@ -17,7 +17,7 @@ test_that("morie_taphonomy_schema is a typed zero-row template (no fabricated ro
 })
 
 test_that("preservation_delta refuses empty data", {
-  skip_on_cran()
+  skip_heavy()
   expect_error(
     morie_taphonomy_preservation_delta(morie_taphonomy_schema()),
     "never fabricates"
@@ -25,7 +25,7 @@ test_that("preservation_delta refuses empty data", {
 })
 
 test_that("CATE path: 'none' reports no SE; 'bootstrap' gives a valid SE + CI", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   n <- 100L
   arid <- stats::rbinom(n, 1, 0.5)
@@ -54,7 +54,7 @@ test_that("CATE path: 'none' reports no SE; 'bootstrap' gives a valid SE + CI", 
 })
 
 test_that("decay chain is a valid absorbing DTMC (rows sum to 1)", {
-  skip_on_cran()
+  skip_heavy()
   ch <- morie_taphonomy_decay_chain(preservation = 0.6)
   expect_true(all(abs(rowSums(ch$P) - 1) < 1e-12))       # row-stochastic
   expect_identical(ch$absorbing, c("skeletal", "mummified"))
@@ -64,7 +64,7 @@ test_that("decay chain is a valid absorbing DTMC (rows sum to 1)", {
 })
 
 test_that("absorption probabilities sum to 1 and rise with preservation", {
-  skip_on_cran()
+  skip_heavy()
   a0 <- morie_taphonomy_decay_absorption(morie_taphonomy_decay_chain(0.0))
   a1 <- morie_taphonomy_decay_absorption(morie_taphonomy_decay_chain(0.8))
   expect_equal(sum(a0$absorption), 1, tolerance = 1e-10)
@@ -75,7 +75,7 @@ test_that("absorption probabilities sum to 1 and rise with preservation", {
 })
 
 test_that("decay delta is positive and simulate reaches an absorbing state", {
-  skip_on_cran()
+  skip_heavy()
   d <- morie_taphonomy_decay_delta(0.8)
   expect_gt(d$delta, 0)
   expect_equal(d$p_mummified_treated - d$p_mummified_natural, d$delta,
@@ -86,14 +86,14 @@ test_that("decay delta is positive and simulate reaches an absorbing state", {
 })
 
 test_that("evidence log-likelihood matches dnorm and rejects bad sd", {
-  skip_on_cran()
+  skip_heavy()
   ll <- morie_taphonomy_evidence_loglik(c(1200, 1310), mean = 1250, sd = 80)
   expect_equal(ll, sum(dnorm(c(1200, 1310), 1250, 80, log = TRUE)))
   expect_error(morie_taphonomy_evidence_loglik(1, 0, sd = 0), "sd")
 })
 
 test_that("likelihood ratio is stable in log space with correct verbal band", {
-  skip_on_cran()
+  skip_heavy()
   r <- morie_taphonomy_likelihood_ratio(loglik_h1 = -3.1, loglik_h2 = -12.7)
   expect_equal(r$log_lr, -3.1 - (-12.7))
   expect_equal(r$lr, exp(-3.1 + 12.7))
@@ -105,7 +105,7 @@ test_that("likelihood ratio is stable in log space with correct verbal band", {
 })
 
 test_that("preservation LR favours the model the evidence resembles", {
-  skip_on_cran()
+  skip_heavy()
   # evidence near the 'natural' (lime) mean -> LR supports H1
   out <- morie_taphonomy_preservation_lr(
     evidence = c(1200, 1310, 1180),
@@ -117,7 +117,7 @@ test_that("preservation LR favours the model the evidence resembles", {
 })
 
 test_that("BHM recovers a known effect and the informative prior pulls it", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(1)
   n <- 200L
   lime <- stats::rbinom(n, 1, 0.5)
@@ -140,7 +140,7 @@ test_that("BHM recovers a known effect and the informative prior pulls it", {
 })
 
 test_that("BHM cmdstanr HMC backend recovers the effect (needs CmdStan)", {
-  skip_on_cran()
+  skip_heavy()
   skip_if_not_installed("cmdstanr")
   skip_if(!nzchar(Sys.getenv("CMDSTAN")) &&
             inherits(try(cmdstanr::cmdstan_path(), silent = TRUE), "try-error"),
@@ -192,7 +192,7 @@ for (be in c("brms", "rstanarm")) {
 }
 
 test_that("BHM partial-pools group intercepts with shrinkage in [0,1]", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(2)
   n <- 150L
   grp <- sample(letters[1:5], n, replace = TRUE)
@@ -208,7 +208,7 @@ test_that("BHM partial-pools group intercepts with shrinkage in [0,1]", {
 })
 
 test_that("simulated pXRF is a valid closed composition, lime skews to calcium", {
-  skip_on_cran()
+  skip_heavy()
   ctl <- morie_taphonomy_simulate_pxrf(200, "control", seed = 1)
   trt <- morie_taphonomy_simulate_pxrf(200, "treatment", seed = 1)
   elts <- attr(ctl, "elements")
@@ -219,7 +219,7 @@ test_that("simulated pXRF is a valid closed composition, lime skews to calcium",
 })
 
 test_that("CLR sums to zero per row; ILR is full-rank (D-1) and finite", {
-  skip_on_cran()
+  skip_heavy()
   comp <- morie_taphonomy_simulate_pxrf(10, "treatment", seed = 2)[, 1:6]
   clr <- morie_taphonomy_clr(comp)
   expect_true(all(abs(rowSums(clr)) < 1e-9))       # CLR closure
@@ -229,7 +229,7 @@ test_that("CLR sums to zero per row; ILR is full-rank (D-1) and finite", {
 })
 
 test_that("end-to-end: simulate -> ilr -> bhm recovers the lime signal", {
-  skip_on_cran()
+  skip_heavy()
   set.seed(3)
   ctl <- morie_taphonomy_simulate_pxrf(120, "control", seed = 10)
   trt <- morie_taphonomy_simulate_pxrf(120, "treatment", seed = 11)
@@ -246,7 +246,7 @@ test_that("end-to-end: simulate -> ilr -> bhm recovers the lime signal", {
 })
 
 test_that("USGS soil zip parser reads the CSV member (no network)", {
-  skip_on_cran()
+  skip_heavy()
   # fixture: a tiny zipped CSV mimicking the ngdb schema
   tmp <- tempfile(fileext = ".zip")
   csv <- tempfile(fileext = ".csv")
@@ -262,7 +262,7 @@ test_that("USGS soil zip parser reads the CSV member (no network)", {
 })
 
 test_that("PMI schema is a typed zero-row STO-2022 template", {
-  skip_on_cran()
+  skip_heavy()
   s <- morie_taphonomy_pmi_schema()
   expect_identical(nrow(s), 0L)
   expect_true(all(c("accumulated_deg_days", "burial_depth_cm", "pmi_days") %in%
@@ -271,7 +271,7 @@ test_that("PMI schema is a typed zero-row STO-2022 template", {
 })
 
 test_that("MorphoSource key resolves arg > env, errors when required + absent", {
-  skip_on_cran()
+  skip_heavy()
   withr::local_envvar(MORPHOSOURCE_API_KEY = "")
   expect_identical(.morie_morphosource_key("explicit"), "explicit")     # arg wins
   withr::local_envvar(MORPHOSOURCE_API_KEY = "from_env")
@@ -282,7 +282,7 @@ test_that("MorphoSource key resolves arg > env, errors when required + absent", 
 })
 
 test_that("MorphoSource search params encode query + facets + paging", {
-  skip_on_cran()
+  skip_heavy()
   p <- .morie_morphosource_search_params(query = "cranium", media_type = "Mesh",
                                          per_page = 25L, page = 2L)
   expect_identical(p[["q"]], "cranium")
@@ -293,7 +293,7 @@ test_that("MorphoSource search params encode query + facets + paging", {
 })
 
 test_that("MorphoSource download refuses a missing use_statement", {
-  skip_on_cran()
+  skip_heavy()
   withr::local_envvar(MORPHOSOURCE_API_KEY = "k")
   expect_error(morie_taphonomy_morphosource_fetch(media_id = 1, use_statement = ""),
                "use_statement")

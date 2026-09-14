@@ -15,7 +15,7 @@ test_that("morie_matching_rosenbaum_bounds returns multiple Gamma rows", {
   # about 1.8 times slower. The check there is killed at sixty minutes
   # and the suite alone was twenty-six of them. The heavy files run in
   # our own CI, which sets NOT_CRAN, where the clock is ours.
-  skip_on_cran()
+  skip_heavy()
   testthat::skip_if_not_installed("MatchIt")
   # rosenbaum_bounds takes match_pairs (a data.frame with treated_idx /
   # control_idx), NOT raw covariates. Build the pairs first via
@@ -35,7 +35,7 @@ test_that("morie_matching_rosenbaum_bounds returns multiple Gamma rows", {
 })
 
 test_that("morie_matching_doubly_robust returns a finite ATT_DR with overlap (balanced)", {
-  skip_on_cran()
+  skip_heavy()
   # Balanced data so the MatchIt "Fewer control" warning doesn't fire
   # in most bootstrap resamples; sanity-check the happy path.
   df <- make_match_df_balanced(n = 300L, tau = 0.5, seed = 2L)
@@ -49,14 +49,14 @@ test_that("morie_matching_doubly_robust returns a finite ATT_DR with overlap (ba
 })
 
 test_that("morie_matching_balance_table returns a per-covariate SMD table", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_match_df(n = 200L, tau = 0.4, seed = 3L)
   out <- morie_matching_balance_table(df, "d", c("x1", "x2"))
   expect_true(is.data.frame(out) || is.list(out))
 })
 
 test_that("morie_matching_subclassify returns subclass-tagged data", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_match_df(n = 200L, tau = 0.4, seed = 4L)
   out <- tryCatch(
     morie_matching_subclassify(df, "d", c("x1", "x2"),
@@ -69,7 +69,7 @@ test_that("morie_matching_subclassify returns subclass-tagged data", {
 })
 
 test_that("morie_matching_entropy_balance returns per-row balancing weights", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_match_df(n = 200L, tau = 0.4, seed = 5L)
   out <- tryCatch(
     morie_matching_entropy_balance(df, "d", c("x1", "x2")),
@@ -85,7 +85,7 @@ test_that("morie_matching_entropy_balance returns per-row balancing weights", {
 # ================================================================== did.R
 
 test_that("morie_did_2x2 with cluster arg returns clustered SE", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 400L, tau = 0.5, seed = 6L)
   out <- tryCatch(
     morie_did_2x2(df, "y", "d", "post", cluster = "clust"),
@@ -97,7 +97,7 @@ test_that("morie_did_2x2 with cluster arg returns clustered SE", {
 })
 
 test_that("morie_did_panel_fe with covariates + cluster runs without erroring", {
-  skip_on_cran()
+  skip_heavy()
   # morie_did_panel_fe does not take a weights= arg (R/did.R:256-258).
   # Exercise the covariate + custom-cluster branch instead, which IS
   # in the signature and was previously uncovered.
@@ -111,7 +111,7 @@ test_that("morie_did_panel_fe with covariates + cluster runs without erroring", 
 })
 
 test_that("morie_did_event_study with custom reference period runs", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_panel(n_units = 30L, n_periods = 6L,
                         tau = 0.5, seed = 8L)
   out <- tryCatch(
@@ -126,7 +126,7 @@ test_that("morie_did_event_study with custom reference period runs", {
 })
 
 test_that("morie_did_bacon_decomposition handles a balanced 2-group panel", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_panel(n_units = 40L, n_periods = 6L,
                         tau = 0.5, seed = 9L)
   out <- tryCatch(
@@ -139,7 +139,7 @@ test_that("morie_did_bacon_decomposition handles a balanced 2-group panel", {
 })
 
 test_that("morie_did_placebo_test_outcome handles a single placebo outcome", {
-  skip_on_cran()
+  skip_heavy()
   df <- make_did_2x2(n = 300L, tau = 0.5, seed = 10L)
   df$y_placebo <- stats::rnorm(nrow(df))
   out <- tryCatch(
@@ -156,7 +156,7 @@ test_that("morie_did_placebo_test_outcome handles a single placebo outcome", {
 # ================================================================== siu.R
 
 test_that("morie_siu_audit_case errors gracefully without staged SIU.csv", {
-  skip_on_cran()
+  skip_heavy()
   tmp <- tempfile("siu_no_csv_")
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
   out <- tryCatch(
@@ -168,7 +168,7 @@ test_that("morie_siu_audit_case errors gracefully without staged SIU.csv", {
 })
 
 test_that("morie_siu_audit_case reads from a staged SIU.csv + finds case", {
-  skip_on_cran()
+  skip_heavy()
   tmp <- tempfile("siu_audit_")
   dir.create(tmp, recursive = TRUE)
   on.exit(unlink(tmp, recursive = TRUE), add = TRUE)
@@ -192,7 +192,7 @@ test_that("morie_siu_audit_case reads from a staged SIU.csv + finds case", {
 })
 
 test_that("morie_siu_translate self-materializes the cache when none is staged", {
-  skip_on_cran()
+  skip_heavy()
   d <- tempfile("siu_xlate_")
   # Contract since the open-path sweep: a missing cache is built via
   # morie_fetch_siu (corpus-first) instead of erroring.
@@ -205,7 +205,7 @@ test_that("morie_siu_translate self-materializes the cache when none is staged",
 })
 
 test_that("morie_siu_index canonical_only result is a subset of unfiltered", {
-  skip_on_cran()
+  skip_heavy()
   full <- tryCatch(morie_siu_index(lang = "all"),
                    error = function(e) NULL)
   canon <- tryCatch(morie_siu_index(canonical_only = TRUE),
