@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
+      NOT_CRAN: true
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
     steps:
@@ -103,6 +104,7 @@ jobs:
     container: r-base:4.5.1
     timeout-minutes: 90
     env:
+      NOT_CRAN: true
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
     steps:
@@ -162,6 +164,7 @@ jobs:
     container: fedora:42
     timeout-minutes: 90
     env:
+      NOT_CRAN: true
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
     steps:
