@@ -61,7 +61,7 @@ jobs:
         run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
 
-      - uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
+      - uses: r-lib/actions/setup-r-dependencies@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           # ECOSolveR SuiteSparse/AMD Makefile races under parallel make on
