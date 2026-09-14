@@ -17,12 +17,18 @@ rob_fixture <- function(n = 300L, s = 555) {
 }
 
 test_that("the fixture matches the one Python anchored against", {
+  # 17s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   expect_equal(rob_fixture(3L),
                c(-0.12273223115773894, 0.30326639813224104,
                  0.9645900546976356), tolerance = 1e-12)
 })
 
 test_that("the calibration constants solve their defining equations", {
+  skip_on_cran()
   # Qn's d = 1/(sqrt(2) qnorm(5/8)), recomputed
   expect_equal(.rob_qn_d, 1 / (sqrt(2) * stats::qnorm(5 / 8)),
                tolerance = 1e-12)
@@ -39,6 +45,7 @@ test_that("the calibration constants solve their defining equations", {
 })
 
 test_that("morie_rob_qn and morie_rob_sn match morie.fn", {
+  skip_on_cran()
   z <- rob_fixture()
   expect_equal(morie_rob_qn(z[1:100])$value, 0.9341813235597836,
                tolerance = 1e-10)
@@ -54,6 +61,7 @@ test_that("morie_rob_qn and morie_rob_sn match morie.fn", {
 })
 
 test_that("Qn and Sn are consistent and survive 40% contamination", {
+  skip_on_cran()
   set.seed(3)
   for (f in list(morie_rob_qn, morie_rob_sn)) {
     vals <- replicate(150, f(stats::rnorm(200, sd = 2))$value)
@@ -71,6 +79,7 @@ test_that("Qn and Sn are consistent and survive 40% contamination", {
 })
 
 test_that("the small-sample corrections keep both unbiased at n = 8", {
+  skip_on_cran()
   set.seed(9)
   qn <- replicate(3000, morie_rob_qn(stats::rnorm(8))$value)
   sn <- replicate(3000, morie_rob_sn(stats::rnorm(8))$value)
@@ -79,6 +88,7 @@ test_that("the small-sample corrections keep both unbiased at n = 8", {
 })
 
 test_that("morie_rob_huber matches morie.fn.hubrr", {
+  skip_on_cran()
   z <- rob_fixture()
   x <- z[1:120]
   y <- 2 + 3 * x + 0.5 * z[121:240]
@@ -93,6 +103,7 @@ test_that("morie_rob_huber matches morie.fn.hubrr", {
 })
 
 test_that("Huber survives vertical outliers and breaks under leverage", {
+  skip_on_cran()
   z <- rob_fixture()
   x <- z[1:120]
   y <- 2 + 3 * x + 0.5 * z[121:240]
@@ -118,6 +129,7 @@ test_that("Huber survives vertical outliers and breaks under leverage", {
 })
 
 test_that("the S-estimator seeds MM and the scale is frozen", {
+  skip_on_cran()
   z <- rob_fixture()
   x <- z[1:150]
   y <- 2 + 3 * x + 0.5 * z[151:300]
@@ -133,6 +145,7 @@ test_that("the S-estimator seeds MM and the scale is frozen", {
 })
 
 test_that("MM is more efficient than S on clean data", {
+  skip_on_cran()
   set.seed(19)
   s_err <- mm_err <- numeric(40)
   for (i in 1:40) {
@@ -145,6 +158,7 @@ test_that("MM is more efficient than S on clean data", {
 })
 
 test_that("the MM alias shares the implementation exactly", {
+  skip_on_cran()
   z <- rob_fixture()
   x <- z[1:100]
   y <- 2 + 3 * x + 0.5 * z[101:200]
@@ -156,6 +170,7 @@ test_that("the MM alias shares the implementation exactly", {
 })
 
 test_that("morie_rob_m distinguishes monotone from redescending", {
+  skip_on_cran()
   z <- rob_fixture()
   x <- z[1:120]
   y <- 2 + 3 * x + 0.5 * z[121:240]
@@ -171,6 +186,7 @@ test_that("morie_rob_m distinguishes monotone from redescending", {
 })
 
 test_that("morie_rob_theil_sen matches morie.fn.theils", {
+  skip_on_cran()
   z <- rob_fixture()
   x <- z[1:120]
   y <- 2 + 3 * x + 0.5 * z[121:240]
@@ -184,6 +200,7 @@ test_that("morie_rob_theil_sen matches morie.fn.theils", {
 })
 
 test_that("Theil-Sen excludes tied x pairs and validates", {
+  skip_on_cran()
   o <- morie_rob_theil_sen(c(1, 1, 2, 3, 4), c(1, 1.2, 2, 3, 4))
   expect_equal(o$n_tied_x, 1L)
   expect_equal(o$n_pairs, 9L)
@@ -192,6 +209,7 @@ test_that("Theil-Sen excludes tied x pairs and validates", {
 })
 
 test_that("Sen's slope is Theil-Sen on the time index", {
+  skip_on_cran()
   z <- rob_fixture(100L)
   y <- 0.5 * (0:59) + z[1:60]
   o <- morie_rob_sens_slope(y)
@@ -205,6 +223,7 @@ test_that("Sen's slope is Theil-Sen on the time index", {
 })
 
 test_that("the subset searches do not leak the global RNG stream", {
+  skip_on_cran()
   z <- rob_fixture()
   x <- z[1:80]
   y <- 2 + 3 * x + 0.5 * z[81:160]

@@ -9,6 +9,11 @@
 # sat at 30.8% with no test naming any of its functions.
 
 test_that("Gauss-Legendre integrates exactly to degree 2n-1 and no further", {
+  # 24s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   for (n in c(2L, 3L, 5L, 8L)) {
     gl <- .schab_gauss_legendre(n)
     x <- gl[[1]]; w <- gl[[2]]
@@ -32,6 +37,7 @@ test_that("Gauss-Legendre integrates exactly to degree 2n-1 and no further", {
 })
 
 test_that("the quadrature J0 agrees with base R's besselJ", {
+  skip_on_cran()
   for (x in c(0, 0.25, 0.5, 1, 2, 2.404825557695773, 3, 5, 8, 10)) {
     expect_equal(.schab_bessel_j0(x), besselJ(x, 0), tolerance = 1e-12)
   }
@@ -44,6 +50,7 @@ test_that("the quadrature J0 agrees with base R's besselJ", {
 })
 
 test_that("the quadrature K1 agrees with base R's besselK", {
+  skip_on_cran()
   for (z in c(0.05, 0.1, 0.5, 1, 2, 3, 5)) {
     expect_equal(.schab_bessel_k1(z), besselK(z, 1), tolerance = 1e-10)
   }
@@ -54,6 +61,7 @@ test_that("the quadrature K1 agrees with base R's besselK", {
 })
 
 test_that("the chi-square survival function agrees with pchisq", {
+  skip_on_cran()
   for (df in c(1, 2, 3, 5, 10)) {
     for (q in c(0.01, 0.5, 1, 2, 5, 8, 20)) {
       expect_equal(.schab_st_chi2_sf(q, df),
@@ -69,6 +77,7 @@ test_that("the chi-square survival function agrees with pchisq", {
 })
 
 test_that("a separable covariance is the product of its margins", {
+  skip_on_cran()
   cs <- function(h) exp(-h / 2)
   ct <- function(k) exp(-k / 3)
   for (h in c(0, 0.5, 2)) {
@@ -82,6 +91,7 @@ test_that("a separable covariance is the product of its margins", {
 })
 
 test_that("the separable exponential is parameterised by decay, not range", {
+  skip_on_cran()
   # equation 9.4: exp(-theta_s h) exp(-theta_t k), so theta multiplies the
   # lag rather than dividing it
   expect_equal(.schab_st_exponential_separable(1, 2, 2, 3),
@@ -95,6 +105,7 @@ test_that("the separable exponential is parameterised by decay, not range", {
 })
 
 test_that("the anisotropic correlation uses squared lags, equation 9.3", {
+  skip_on_cran()
   corr <- function(u) exp(-u)
   expect_equal(.schab_st_anisotropic_correlation(2, 3, 0.5, 0.25, corr),
                exp(-(0.5 * 4 + 0.25 * 9)), tolerance = 1e-12)
@@ -105,6 +116,7 @@ test_that("the anisotropic correlation uses squared lags, equation 9.3", {
 })
 
 test_that("the semivariogram is the sill minus the covariance", {
+  skip_on_cran()
   cf <- function(h, k) 2 * exp(-h / 2) * exp(-k / 3)
   for (h in c(0, 1, 3)) {
     for (k in c(0, 2, 5)) {
@@ -119,6 +131,7 @@ test_that("the semivariogram is the sill minus the covariance", {
 })
 
 test_that("Gneiting's covariance starts at the variance and decreases", {
+  skip_on_cran()
   expect_equal(.schab_st_gneiting(0, 0, sigma2 = 3), 3, tolerance = 1e-12)
   # monotone in the spatial lag at a fixed temporal lag, and conversely
   hs <- vapply(c(0, 0.5, 1, 2, 4, 8), function(h)
@@ -135,6 +148,7 @@ test_that("Gneiting's covariance starts at the variance and decreases", {
 })
 
 test_that("the Whittle covariance starts at the variance", {
+  skip_on_cran()
   expect_equal(.schab_whittle_covariance(0, sigma2 = 2.5), 2.5, tolerance = 1e-10)
   v <- vapply(c(0, 0.5, 1, 2, 4), .schab_whittle_covariance, numeric(1),
               sigma2 = 1, theta = 1)
@@ -143,6 +157,7 @@ test_that("the Whittle covariance starts at the variance", {
 })
 
 test_that("the covariance matrix is symmetric and non-negative definite", {
+  skip_on_cran()
   cf <- function(h, k) 2 * exp(-h / 2) * exp(-k / 3)
   coords <- cbind(c(0, 1, 2, 0.5), c(0, 0, 1, 2))
   times <- c(0, 1, 2, 3)
@@ -160,6 +175,7 @@ test_that("the covariance matrix is symmetric and non-negative definite", {
 })
 
 test_that("an invalid covariance is rejected", {
+  skip_on_cran()
   # a function that is not a covariance: it grows with the lag, so the
   # matrix it builds has a negative eigenvalue
   bad <- function(h, k) h + k
@@ -170,6 +186,7 @@ test_that("an invalid covariance is rejected", {
 })
 
 test_that("the intensity is a count per unit area per unit time", {
+  skip_on_cran()
   set.seed(1)
   pts <- cbind(runif(50, 0, 10), runif(50, 0, 5))
   tms <- runif(50, 0, 4)
@@ -185,11 +202,13 @@ test_that("the intensity is a count per unit area per unit time", {
 })
 
 test_that("the region box is the bounding rectangle it was given", {
+  skip_on_cran()
   b <- .schab_st_region_box(c(0, 10, 0, 5))
   expect_equal(as.numeric(unlist(b))[1:4], c(0, 10, 0, 5), tolerance = 1e-12)
 })
 
 test_that("the separability test is a likelihood ratio on the -2 logL scale", {
+  skip_on_cran()
   s <- .schab_st_separability_test(neg2_unrestricted = 100, neg2_separable = 112)
   expect_equal(as.numeric(s$statistic), 12, tolerance = 1e-12)
   # a p-value, and the naive one-degree-of-freedom reference alongside it
@@ -206,12 +225,14 @@ test_that("the separability test is a likelihood ratio on the -2 logL scale", {
 })
 
 test_that("the complete-spatial-randomness reference is the Poisson mean", {
+  skip_on_cran()
   r <- .schab_cstr_reference(area = 50, duration = 4, lam = 0.25)
   # the expected count in a space-time volume is lambda times that volume
   expect_equal(as.numeric(r[[1]]), 0.25 * 50 * 4, tolerance = 1e-12)
 })
 
 test_that("lag coercion pairs the spatial and temporal lags", {
+  skip_on_cran()
   lg <- .schab_st_as_lags(c(1, 2, 3), c(4, 5, 6))
   expect_equal(lg$h, c(1, 2, 3), tolerance = 1e-12)
   expect_equal(lg$k, c(4, 5, 6), tolerance = 1e-12)
@@ -221,6 +242,7 @@ test_that("lag coercion pairs the spatial and temporal lags", {
 })
 
 test_that("the lag matrices are the pairwise distances in space and time", {
+  skip_on_cran()
   coords <- cbind(c(0, 3, 0), c(0, 4, 0))
   times <- c(0, 1, 5)
   lm <- .schab_st_lag_matrices(coords, times)

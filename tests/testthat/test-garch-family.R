@@ -9,6 +9,11 @@
 # ---------------------------------------------------------------------------
 
 test_that("EGARCH recovers size and sign effects from a simulated series", {
+  # 6s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(7)
   n <- 1500
   om <- -0.1
@@ -37,6 +42,7 @@ test_that("EGARCH recovers size and sign effects from a simulated series", {
 })
 
 test_that("GARCH(1,1) recovers persistence from a simulated series", {
+  skip_on_cran()
   set.seed(13)
   n <- 3000
   om <- 0.02
@@ -57,6 +63,7 @@ test_that("GARCH(1,1) recovers persistence from a simulated series", {
 })
 
 test_that("GJR-GARCH recovers a positive leverage term", {
+  skip_on_cran()
   set.seed(11)
   n <- 3000
   om <- 0.02
@@ -81,6 +88,7 @@ test_that("GJR-GARCH recovers a positive leverage term", {
 })
 
 test_that("DCC tracks a correlation regime shift", {
+  skip_on_cran()
   set.seed(21)
   n <- 800
   rho <- c(rep(0.1, n / 2), rep(0.85, n / 2))
