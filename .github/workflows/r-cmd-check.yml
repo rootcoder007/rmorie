@@ -88,6 +88,11 @@ jobs:
       # themselves; ours skip them, and the full example sweep runs on
       # L14 instead.
       _R_CHECK_DONTTEST_EXAMPLES_: false
+      # The heavy numerics files carry skip_on_cran(), so that
+      # r-universe's slowest builder stays inside its sixty minute
+      # check budget. They must still run HERE, where the clock is
+      # ours -- without this they would silently stop being tested.
+      NOT_CRAN: true
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
