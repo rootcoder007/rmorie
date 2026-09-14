@@ -36,7 +36,9 @@ Named list whose element names match the Python payload   keys, including \code{
 }
 \keyword{internal}
 \examples{
+\donttest{
 f <- function(x) -sum((x - c(0.3, 0.7))^2)
 morie_bayoptr(f, bounds = list(c(0, 1), c(0, 1)), n_iter = 8L, n_init = 5L,
               seed = 1L)
+}
 }

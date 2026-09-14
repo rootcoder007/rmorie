@@ -28,5 +28,7 @@ The value of \code{.hiatus_simulate}.
 }
 \keyword{internal}
 \examples{
+\donttest{
 morie_hiatus(beta = 0.5, nu = 0.5, mu = 5L, sigma = 0.5)
+}
 }

@@ -28,6 +28,8 @@ have heterogeneous per-portal schemas and don't parse cleanly).
 Idempotent: regenerate after any change to the catalog registry.
 }
 \examples{
+\donttest{
 out <- morie_cli_dump_catalog(out_path = tempfile(fileext = ".csv"))
 file.exists(out)
+}
 }

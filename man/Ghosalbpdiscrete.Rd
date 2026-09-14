@@ -28,7 +28,9 @@ committing to a strength.  The simulated means recover h_k.
 Formula: E Be(c h, c(1 - h)) = h.
 }
 \examples{
+\donttest{
 Ghosalbpdiscrete()
+}
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of

@@ -25,7 +25,9 @@ A list with mu, tau, the betas and the log-likelihood.
 }
 \keyword{internal}
 \examples{
+\donttest{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 morie_bnsadt_fit(M, V)
+}
 }

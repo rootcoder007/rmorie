@@ -28,6 +28,12 @@ sim_lc <- function(n = 400, seed = 1, dep = FALSE) {
 }
 
 test_that("the EM log-likelihood never decreases", {
+  # 14 seconds of the suite on a fast machine, and r-universe's
+  # macOS x86_64 builder is about 1.8 times slower: these seven files
+  # alone are eight minutes of a sixty minute check budget that was
+  # being exceeded. Heavy numerics belong off the reference machines
+  # and in our own CI, which sets NOT_CRAN so they still run there.
+  skip_on_cran()
   d <- sim_lc(300, 2)
   for (K in 1:4) {
     r <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, K, max_iter = 200L)
@@ -66,6 +72,7 @@ test_that("the EM log-likelihood never decreases", {
 })
 
 test_that("one class reduces to independent Bernoulli item means", {
+  skip_on_cran()
   d <- sim_lc(200, 3)
   r <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, 1L)
   expect_equal(r$class_prevalence, 1)
@@ -88,6 +95,7 @@ test_that("one class reduces to independent Bernoulli item means", {
 })
 
 test_that("a two-class design recovers its item probabilities", {
+  skip_on_cran()
   d <- sim_lc(1200, 5)
   r <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, 2L)
   expect_equal(dim(r$item_probabilities), c(2L, 4L))
@@ -107,6 +115,7 @@ test_that("a two-class design recovers its item probabilities", {
 })
 
 test_that("the reported summaries are recomputable from the output", {
+  skip_on_cran()
   d <- sim_lc(400, 7)
   r <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, 2L)
   n <- 400
@@ -140,6 +149,7 @@ test_that("the reported summaries are recomputable from the output", {
 })
 
 test_that("weighting matters exactly when treatment depends on the indicators", {
+  skip_on_cran()
   # the module's own claim: the weighted and unweighted class effects
   # coincide when assignment was unrelated to the indicators, and separate
   # when it was not
@@ -161,6 +171,7 @@ test_that("weighting matters exactly when treatment depends on the indicators", 
 })
 
 test_that("the class-specific effects recover a class-specific truth", {
+  skip_on_cran()
   d <- sim_lc(2000, 13)
   r <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, 2L)
   # class 1 of the simulation has effect 3, class 0 has effect 1; the
@@ -175,6 +186,7 @@ test_that("the class-specific effects recover a class-specific truth", {
 })
 
 test_that("stabilisation and trimming change the weights as documented", {
+  skip_on_cran()
   d <- sim_lc(600, 17, dep = TRUE)
   st <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, 2L, stabilize = TRUE)
   un <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, 2L, stabilize = FALSE)
@@ -198,6 +210,7 @@ test_that("stabilisation and trimming change the weights as documented", {
 })
 
 test_that("the propensity model is a logistic fit on the indicators", {
+  skip_on_cran()
   d <- sim_lc(500, 19, dep = TRUE)
   r <- morie_lcwphr_latent_class_weighted(d$y, d$A, d$H, 2L)
   ref <- glm(d$A ~ d$H, family = binomial())
@@ -208,6 +221,7 @@ test_that("the propensity model is a logistic fit on the indicators", {
 })
 
 test_that("lcwphr rejects input it cannot use", {
+  skip_on_cran()
   d <- sim_lc(80, 23)
   expect_error(morie_lcwphr_latent_class_weighted(numeric(0), numeric(0),
                                                   matrix(0, 0, 2), 2L),
@@ -238,6 +252,7 @@ test_that("lcwphr rejects input it cannot use", {
 })
 
 test_that("the initial partition does not collapse into one class", {
+  skip_on_cran()
   # the operator precedence note in the source: (rank - 1L) * K %/% n would
   # be (rank - 1L) * (K %/% n) = 0 for K < n, putting every subject in one
   # class and leaving EM with nothing to separate. If that happened the

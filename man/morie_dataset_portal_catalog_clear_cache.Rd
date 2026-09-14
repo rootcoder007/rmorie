@@ -15,9 +15,11 @@ from the per-portal registries. Useful after editing or extending
 a registry in an interactive session.
 }
 \examples{
+\donttest{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_dataset_portal_catalog_clear_cache()
 catalog <- morie_dataset_portal_catalog()
 nrow(catalog)
 \dontshow{\}) # examplesIf}
+}
 }

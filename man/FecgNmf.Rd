@@ -28,6 +28,7 @@ A list with \code{fetal}, \code{maternal}, \code{fetalrow}, \code{maternalrow}, 
 }
 \keyword{internal}
 \examples{
+\donttest{
 set.seed(2)
 fs <- 250
 tv <- seq(0, 4, by = 1 / fs)
@@ -43,4 +44,5 @@ for (b in seq(0.3, 3.9, by = 0.45)) {
 x <- mat + fet + 0.02 * rnorm(n)
 r <- FecgNmf(x, fs = fs, nwin = 64, rank = 4)
 str(r, max.level = 1)
+}
 }

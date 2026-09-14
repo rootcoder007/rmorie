@@ -43,6 +43,7 @@ predictions inside every outer training fold, so no fold ever
 sees its own outcome.
 }
 \examples{
+\donttest{
 set.seed(1)
 n <- 200
 x1 <- rnorm(n); x2 <- rnorm(n)
@@ -52,4 +53,5 @@ df <- data.frame(y, d, x1, x2)
 morie_otis_aipw_superlearner(df, treatment = "d", outcome = "y",
                              covariates = c("x1", "x2"),
                              n_folds = 3L)
+}
 }

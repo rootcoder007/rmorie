@@ -56,6 +56,12 @@ make_data <- function(reps = list("A\rL" = 10, "A\rR" = 30,
 }
 
 test_that("log-sum-exp and softmax match their closed forms", {
+  # 71 seconds of the suite on a fast machine, and r-universe's
+  # macOS x86_64 builder is about 1.8 times slower: these seven files
+  # alone are eight minutes of a sixty minute check budget that was
+  # being exceeded. Heavy numerics belong off the reference machines
+  # and in our own CI, which sets NOT_CRAN so they still run there.
+  skip_on_cran()
   v <- c(-2, 0.5, 1, 3)
   expect_equal(.offlrl_logsumexp(v), log(sum(exp(v))))
   # the shifted form survives arguments that would overflow
@@ -76,6 +82,7 @@ test_that("log-sum-exp and softmax match their closed forms", {
 })
 
 test_that("conditional distributions are validated per state", {
+  skip_on_cran()
   Sl <- as.list(SS)
   Al <- as.list(AA)
   expect_null(.offlrl_as_dist(NULL, Sl, Al, "policy"))
@@ -99,6 +106,7 @@ test_that("conditional distributions are validated per state", {
 })
 
 test_that("alpha = 0 reproduces the value-iteration fixed point", {
+  skip_on_cran()
   qs <- q_star()
   # sanity: the independent solution is the hand-computable one
   expect_equal(as.numeric(qs[KS]), c(17.1, 19, 17.1, 20), tolerance = 1e-9)
@@ -123,6 +131,7 @@ test_that("alpha = 0 reproduces the value-iteration fixed point", {
 })
 
 test_that("a different discount moves the fixed point as value iteration does", {
+  skip_on_cran()
   for (g in c(0.5, 0.8, 0.95)) {
     qs <- q_star(g)
     r <- offlrl(make_data(), states = SS, actions = AA, alpha = 0, gamma = g,
@@ -133,6 +142,7 @@ test_that("a different discount moves the fixed point as value iteration does", 
 })
 
 test_that("backup = 'pi' solves the policy-evaluation system", {
+  skip_on_cran()
   pol <- list("A\rL" = 0.25, "A\rR" = 0.75, "B\rL" = 0.25, "B\rR" = 0.75)
   want <- q_pi(pol)
   r <- offlrl(make_data(), states = SS, actions = AA, alpha = 0, gamma = GAM,
@@ -153,6 +163,7 @@ test_that("backup = 'pi' solves the policy-evaluation system", {
 })
 
 test_that("the penalty lower-bounds Q and grows the conservatism gap", {
+  skip_on_cran()
   qs <- q_star()
   prev <- NULL
   pens <- numeric(0)
@@ -186,6 +197,7 @@ test_that("the penalty lower-bounds Q and grows the conservatism gap", {
 })
 
 test_that("terminal transitions stop the backup", {
+  skip_on_cran()
   # (A,R) ends the episode, so its value is the immediate reward alone
   d <- list(list("A", "R", 5, "B", TRUE), list("A", "L", 0, "A", FALSE),
             list("B", "L", 1, "A", FALSE), list("B", "R", 0, "B", FALSE))
@@ -210,6 +222,7 @@ test_that("terminal transitions stop the backup", {
 })
 
 test_that("the behaviour policy is the empirical action frequency", {
+  skip_on_cran()
   r <- offlrl(make_data(), states = SS, actions = AA, alpha = 0, gamma = GAM,
               iters = 10)
   expect_equal(r$behavior[["A\rL"]], 10 / 40)
@@ -226,6 +239,7 @@ test_that("the behaviour policy is the empirical action frequency", {
 })
 
 test_that("the mu variant applies the Eq. 2 push-down/push-up asymmetry", {
+  skip_on_cran()
   # The general CQL penalty is E_mu[Q] - E_pi_beta[Q]. Its sign, and so the
   # direction Q moves, is decided by how mu compares with the behaviour
   # policy, and the Theorem 3.1 lower bound only follows when mu favours the
@@ -280,6 +294,7 @@ test_that("the mu variant applies the Eq. 2 push-down/push-up asymmetry", {
 })
 
 test_that("the rho variant reduces to CQL(H) and to mu at its extremes", {
+  skip_on_cran()
   unif <- list("A\rL" = 0.5, "A\rR" = 0.5, "B\rL" = 0.5, "B\rR" = 0.5)
   bad <- list("A\rL" = 1, "A\rR" = 0, "B\rL" = 1, "B\rR" = 0)
   # with a uniform rho the pi-weighted soft maximum is the plain softmax, so
@@ -310,6 +325,7 @@ test_that("the rho variant reduces to CQL(H) and to mu at its extremes", {
 })
 
 test_that("labels need not be character", {
+  skip_on_cran()
   # numeric labels index name-keyed tallies and must not be taken positionally
   d <- list(list(1, 10, 0, 1), list(1, 20, 1, 2),
             list(2, 10, 0, 1), list(2, 20, 2, 2))
@@ -329,6 +345,7 @@ test_that("labels need not be character", {
 })
 
 test_that("unobserved state-action pairs are pushed down, not left alone", {
+  skip_on_cran()
   # B,L never appears in the data, so conservatism must not credit it
   d <- list(list("A", "L", 0, "A"), list("A", "R", 1, "B"),
             list("B", "R", 2, "B"))
@@ -345,6 +362,7 @@ test_that("unobserved state-action pairs are pushed down, not left alone", {
 })
 
 test_that("offlrl validates its arguments", {
+  skip_on_cran()
   d <- make_data()
   expect_error(offlrl(d, variant = "Z"), "variant must be one of")
   expect_error(offlrl(d, backup = "Z"), "backup must be")
@@ -359,6 +377,7 @@ test_that("offlrl validates its arguments", {
 })
 
 test_that("the aliases and cheatsheet are intact", {
+  skip_on_cran()
   d <- make_data()
   a <- offlrl(d, states = SS, actions = AA, alpha = 0.3, iters = 500)
   for (f in list(offline_rl_cql, offlinerlcql, conservative_q_learning)) {

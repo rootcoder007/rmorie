@@ -10,6 +10,12 @@
 # order, and that training moves the likelihood.
 
 test_that("the MADE masks follow the degree rule", {
+  # 54 seconds of the suite on a fast machine, and r-universe's
+  # macOS x86_64 builder is about 1.8 times slower: these seven files
+  # alone are eight minutes of a sixty minute check budget that was
+  # being exceeded. Heavy numerics belong off the reference machines
+  # and in our own CI, which sets NOT_CRAN so they still run there.
+  skip_on_cran()
   L <- .abcnnt_made_layer(dim_x = 3L, dim_t = 2L, hidden = 6L,
                           e = .ghc_rng(1L), reverse = FALSE)
   expect_identical(dim(L$M1), c(6L, 5L))
@@ -32,6 +38,7 @@ test_that("the MADE masks follow the degree rule", {
 })
 
 test_that("the layer statistics are conformable and masked correctly", {
+  skip_on_cran()
   L <- .abcnnt_made_layer(dim_x = 3L, dim_t = 2L, hidden = 6L,
                           e = .ghc_rng(2L), reverse = FALSE)
   st <- .abcnnt_layer_stats(L, c(0.5, -0.2, 0.9), c(0.1, -0.4))
@@ -53,6 +60,7 @@ test_that("the layer statistics are conformable and masked correctly", {
 })
 
 test_that("a single layer respects its autoregressive order", {
+  skip_on_cran()
   # deg_out[i] > deg_h[k] >= deg_in[j] means unit i sees only inputs of
   # strictly lower degree; the lowest-degree output sees none of x
   L <- .abcnnt_made_layer(dim_x = 3L, dim_t = 2L, hidden = 9L,
@@ -75,6 +83,7 @@ test_that("a single layer respects its autoregressive order", {
 })
 
 test_that("flow_logprob is a normalised density", {
+  skip_on_cran()
   # the decisive check on the forward pass: a change of variables with a
   # triangular Jacobian integrates to one
   flow <- MAF(dim_x = 1L, dim_t = 1L, n_layers = 3L, hidden = 5L, seed = 4L)
@@ -86,6 +95,7 @@ test_that("flow_logprob is a normalised density", {
 })
 
 test_that("the forward map is invertible in the sense the density needs", {
+  skip_on_cran()
   flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 3L, hidden = 5L, seed = 5L)
   fw <- flow_forward(flow, c(0.4, -0.7), c(0.1, 0.2))
   expect_length(fw$u, 2L)
@@ -97,6 +107,7 @@ test_that("the forward map is invertible in the sense the density needs", {
 })
 
 test_that("parameter addresses point into the flow and round-trip", {
+  skip_on_cran()
   flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
   ps <- .abcnnt_params(flow)
   expect_gt(length(ps), 0L)
@@ -116,6 +127,7 @@ test_that("parameter addresses point into the flow and round-trip", {
 })
 
 test_that("the finite-difference gradient is not identically zero", {
+  skip_on_cran()
   # it was: the perturbation went into a copy, so up and dn were equal for
   # every parameter and every step multiplied the gradient by zero
   flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
@@ -134,6 +146,7 @@ test_that("the finite-difference gradient is not identically zero", {
 })
 
 test_that("training moves the flow and raises the log-likelihood", {
+  skip_on_cran()
   flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
   set.seed(1)
   D <- lapply(1:40, function(k) { th <- rnorm(2); list(th, th * 0.5 + rnorm(2, 0, 0.2)) })
@@ -149,6 +162,7 @@ test_that("training moves the flow and raises the log-likelihood", {
 })
 
 test_that("training is seeded and validates its arguments", {
+  skip_on_cran()
   flow <- MAF(dim_x = 2L, dim_t = 1L, n_layers = 1L, hidden = 3L, seed = 2L)
   D <- lapply(1:10, function(k) list(rnorm(1), rnorm(2)))
   a <- train_flow(flow, D, epochs = 3L, lr = 0.01, seed = 3L)
@@ -160,6 +174,7 @@ test_that("training is seeded and validates its arguments", {
 })
 
 test_that("MAF validates its shape", {
+  skip_on_cran()
   expect_error(MAF(0L, 1L), "dimensions must be positive")
   expect_error(MAF(1L, 0L), "dimensions must be positive")
   expect_error(MAF(2L, 2L, n_layers = 0L), "must be positive")
@@ -173,6 +188,7 @@ test_that("MAF validates its shape", {
 })
 
 test_that("the Metropolis sampler moves and respects the target", {
+  skip_on_cran()
   # a standard normal target: the chain's mean and spread should be close
   lp <- function(x) -0.5 * sum(x^2)
   mc <- mcmc_sample(lp, 0, 4000L, burn = 500L, step = 1.5, seed = 1L)
@@ -185,6 +201,7 @@ test_that("the Metropolis sampler moves and respects the target", {
 })
 
 test_that("sequential neural likelihood runs end to end and trains its flow", {
+  skip_on_cran()
   set.seed(1)
   simulator <- function(theta, e) theta * 0.5 + rnorm(length(theta), 0, 0.2)
   log_prior <- function(th) if (any(abs(th) > 5)) -Inf else -0.5 * sum(th^2)

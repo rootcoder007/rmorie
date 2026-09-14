@@ -49,10 +49,12 @@ A list of posterior summaries: the mean density on the grid,   the distribution 
 }
 \keyword{internal}
 \examples{
+\donttest{
 N <- 50L
 ii <- 0:(N - 1L)
 Y <- ifelse(ii\%\%2L == 0L, -2, 3) + 0.6 * sin(2.1 * ii) + 0.25 * 
     cos(0.9 * ii)
 morie_slbpdg(Y, alpha = 1, n_iter = 100L, burn = 40L, route = "walker", 
     seed = 7)
+}
 }

@@ -32,9 +32,11 @@ Nonparametric ideal-point estimation from binary roll-call votes that
 minimises the number of classification errors (Poole 2000).
 }
 \examples{
+\donttest{
 set.seed(1)
 v <- matrix(stats::rbinom(20 * 30, 1, 0.5), 20, 30)
 morie_spatial_voting_optimal_classification(v)
+}
 }
 \references{
 Poole, K. T. (2000). "Non-Parametric Unfolding of Binary Choice

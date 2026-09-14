@@ -24,5 +24,7 @@ A list with \code{max_shortfall}, \code{at_cut}, \code{subset_coverage}, \code{s
 }
 \keyword{internal}
 \examples{
+\donttest{
 morie_bet_violation(theta = 0.3, draws = 2000L)
+}
 }

@@ -23,6 +23,7 @@ The value of \code{flow}, as built in the body.
 }
 \keyword{internal}
 \examples{
+\donttest{
 flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
 set.seed(1)
 D <- lapply(1:30, function(k) {
@@ -33,4 +34,5 @@ ll <- function(fl) mean(vapply(D, function(p)
   flow_logprob(fl, p[[2]], p[[1]]), numeric(1)))
 trained <- train_flow(flow, D, epochs = 10L, lr = 0.02, seed = 1L)
 round(c(before = ll(flow), after = ll(trained)), 3)
+}
 }

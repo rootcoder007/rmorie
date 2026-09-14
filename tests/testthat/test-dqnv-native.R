@@ -42,6 +42,12 @@ q_star <- function(m) {
 as_list_Q <- function(M) lapply(seq_len(nrow(M)), function(s) as.numeric(M[s, ]))
 
 test_that("reward clipping is the documented scalar clamp", {
+  # 42 seconds of the suite on a fast machine, and r-universe's
+  # macOS x86_64 builder is about 1.8 times slower: these seven files
+  # alone are eight minutes of a sixty minute check budget that was
+  # being exceeded. Heavy numerics belong off the reference machines
+  # and in our own CI, which sets NOT_CRAN so they still run there.
+  skip_on_cran()
   expect_equal(.dqnv_clip_reward(7), 1)
   expect_equal(.dqnv_clip_reward(-5), -1)
   expect_equal(.dqnv_clip_reward(0.5), 0.5)
@@ -55,6 +61,7 @@ test_that("reward clipping is the documented scalar clamp", {
 })
 
 test_that("the TD target reads the next state 0-based", {
+  skip_on_cran()
   Qt <- list(c(1, 5), c(2, 3))
   expect_equal(.dqnv_td_target(2, 0, Qt, 0.9), 2 + 0.9 * 5, tolerance = 1e-12)
   expect_equal(.dqnv_td_target(2, 1, Qt, 0.9), 2 + 0.9 * 3, tolerance = 1e-12)
@@ -66,6 +73,7 @@ test_that("the TD target reads the next state 0-based", {
 })
 
 test_that("the Bellman residual is zero at the optimal Q", {
+  skip_on_cran()
   m <- mdp()
   Q <- q_star(m)
   expect_lt(.dqnv_bellman_residual(as_list_Q(Q), m$P, m$R, m$gamma), 1e-12)
@@ -82,6 +90,7 @@ test_that("the Bellman residual is zero at the optimal Q", {
 })
 
 test_that("the replay buffer is a ring of its capacity", {
+  skip_on_cran()
   buf <- .dqnv_replay_buffer_new(3)
   expect_identical(as.integer(.dqnv_replay_buffer_len(buf)), 0L)
   for (k in 1:2) buf <- .dqnv_replay_buffer_add(buf, k, 1, k, k + 1, FALSE)
@@ -95,6 +104,7 @@ test_that("the replay buffer is a ring of its capacity", {
 })
 
 test_that("sampling the buffer returns transitions it holds", {
+  skip_on_cran()
   # this raised on every call: the draw was read as res$v with the state
   # taken from res$s, neither of which .ghc_unif returns
   buf <- .dqnv_replay_buffer_new(5)
@@ -132,6 +142,7 @@ trained <- local({
 })
 
 test_that("the learner recovers the optimal action values and policy", {
+  skip_on_cran()
   tr <- trained()
   Q <- tr$q
   # the optimal policy differs across states here, so a constant answer
@@ -151,6 +162,7 @@ test_that("the learner recovers the optimal action values and policy", {
 })
 
 test_that("the residual falls over training", {
+  skip_on_cran()
   tr <- trained()
   h <- as.numeric(unlist(tr$fit$residual_history))
   expect_gt(length(h), 1L)
@@ -163,6 +175,7 @@ test_that("the residual falls over training", {
 })
 
 test_that("replay and the target network can each be switched off", {
+  skip_on_cran()
   m <- mdp()
   Q <- q_star(m)
   for (rep_ in c(TRUE, FALSE)) {
@@ -182,6 +195,7 @@ test_that("replay and the target network can each be switched off", {
 })
 
 test_that("the state and action counts are validated", {
+  skip_on_cran()
   m <- mdp()
   expect_error(morie_dqnv(m$P, m$R, 0, m$A), "at least one state and action")
   expect_error(morie_dqnv(m$P, m$R, m$S, 0), "at least one state and action")

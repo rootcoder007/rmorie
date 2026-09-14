@@ -35,11 +35,13 @@ The two are answers to different questions, not an estimate and a
 better estimate.
 }
 \examples{
+\donttest{
 set.seed(4)
 X <- matrix(rnorm(120), ncol = 1)
 cl <- rep(1:20, each = 6)
 tt <- rexp(120, exp(X * 0.5))
 round(morie_gamma_frailty_cox(tt, rep(1, 120), X, cl)$theta, 3)
+}
 }
 \references{
 Clayton, D. G. (1978). A model for association in

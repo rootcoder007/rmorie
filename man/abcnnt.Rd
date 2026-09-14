@@ -38,6 +38,7 @@ A list with \code{estimate}, \code{posterior_mean}, \code{posterior_sd}, \code{p
 }
 \keyword{internal}
 \examples{
+\donttest{
 simulator <- function(theta, e) theta * 0.5 + rnorm(length(theta), 0, 0.2)
 log_prior <- function(th) if (any(abs(th) > 5)) -Inf else -0.5 * sum(th^2)
 set.seed(1)
@@ -45,4 +46,5 @@ res <- abcnnt(simulator, x_o = 0.25, log_prior = log_prior, theta0 = 0.5,
               n_rounds = 2L, n_per_round = 25L, epochs = 5L, lr = 0.02,
               seed = 1L, mcmc_burn = 50L, mcmc_step = 0.8)
 names(res)
+}
 }

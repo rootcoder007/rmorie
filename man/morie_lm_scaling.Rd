@@ -22,5 +22,7 @@ sizes, so the scaling relationship between input size and
 computational cost can be inspected and tested (RE5.0).
 }
 \examples{
+\donttest{
 morie_lm_scaling(mpg ~ hp + wt, mtcars, sizes = c(10, 20, 32))
+}
 }

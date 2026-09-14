@@ -26,6 +26,8 @@ A list with the fit, the corrected estimate under it, and the   adversarial inte
 }
 \keyword{internal}
 \examples{
+\donttest{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_bnsadt(V, V)
+}
 }

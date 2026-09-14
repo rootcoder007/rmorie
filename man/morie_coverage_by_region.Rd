@@ -24,5 +24,7 @@ A list with \code{marginal_coverage}, \code{subset_coverage}, \code{subset_share
 }
 \keyword{internal}
 \examples{
+\donttest{
 morie_coverage_by_region(theta = 0.5)
+}
 }
