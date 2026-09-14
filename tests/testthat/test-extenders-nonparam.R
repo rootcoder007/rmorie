@@ -12,6 +12,11 @@
 # ---------------------------------------------------------------------------
 
 test_that("morie_locfdr_estimate wraps locfdr::locfdr", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   skip_if_not_installed("locfdr")
   set.seed(1L)
   zz <- c(stats::rnorm(900L), stats::rnorm(100L, mean = 3))
@@ -28,6 +33,7 @@ test_that("morie_locfdr_estimate wraps locfdr::locfdr", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fdr_qvalues wraps fdrtool::fdrtool", {
+  skip_on_cran()
   skip_if_not_installed("fdrtool")
   set.seed(2L)
   x <- c(stats::rnorm(900L), stats::rnorm(100L, mean = 3))
@@ -46,6 +52,7 @@ test_that("morie_fdr_qvalues wraps fdrtool::fdrtool", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_quantile_reg wraps quantreg::rq", {
+  skip_on_cran()
   skip_if_not_installed("quantreg")
   set.seed(3L)
   n  <- 100L
@@ -64,6 +71,7 @@ test_that("morie_quantile_reg wraps quantreg::rq", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_np_kernel_reg wraps np::npregbw + np::npreg", {
+  skip_on_cran()
   skip_if_not_installed("np")
   set.seed(4L)
   n  <- 50L
@@ -88,6 +96,7 @@ test_that("morie_np_kernel_reg wraps np::npregbw + np::npreg", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_dp_gaussian_mixture wraps DirichletProcessGaussian + Fit", {
+  skip_on_cran()
   skip_if_not_installed("dirichletprocess")
   set.seed(5L)
   y <- c(stats::rnorm(50L, -2), stats::rnorm(50L, 2))
@@ -110,6 +119,7 @@ test_that("morie_dp_gaussian_mixture wraps DirichletProcessGaussian + Fit", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_lcmm_latent_class wraps lcmm::lcmm", {
+  skip_on_cran()
   skip_if_not_installed("lcmm")
   set.seed(6L)
   n_id <- 40L

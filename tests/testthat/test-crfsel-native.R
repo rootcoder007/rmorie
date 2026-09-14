@@ -16,6 +16,11 @@ TREE <- list(
 )
 
 test_that("split counts are tallied by depth and feature", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   cc <- .depth_counts(TREE, max_depth = 3L, d = 3L)
   expect_length(cc, 3L)
   # one split on feature 1 at the root
@@ -35,6 +40,7 @@ test_that("split counts are tallied by depth and feature", {
 })
 
 test_that("importance is a distribution over the covariates", {
+  skip_on_cran()
   imp <- .split_frequency_importance(list(TREE), d = 3L, max_depth = 3L,
                                      decay = 2)
   expect_length(imp, 3L)
@@ -70,6 +76,7 @@ test_that("importance is a distribution over the covariates", {
 })
 
 test_that("permutation importance rises for a variable the forest uses", {
+  skip_on_cran()
   set.seed(5)
   n <- 60
   X <- cbind(runif(n), runif(n))
@@ -92,6 +99,7 @@ test_that("permutation importance rises for a variable the forest uses", {
 })
 
 test_that("the covariate driving the treatment effect ranks first", {
+  skip_on_cran()
   set.seed(9)
   n <- 80
   X <- cbind(runif(n), runif(n), runif(n))
@@ -126,6 +134,7 @@ test_that("the covariate driving the treatment effect ranks first", {
 })
 
 test_that("names and the permutation pass are honoured", {
+  skip_on_cran()
   set.seed(11)
   n <- 60
   X <- cbind(runif(n), runif(n))
@@ -145,6 +154,7 @@ test_that("names and the permutation pass are honoured", {
 })
 
 test_that("crfsel validates its arguments", {
+  skip_on_cran()
   set.seed(13)
   n <- 60
   X <- cbind(runif(n), runif(n))

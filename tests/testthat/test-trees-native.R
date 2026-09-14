@@ -18,6 +18,11 @@ make_xy <- function(seed = 2024, n = 400, p = 6) {
 }
 
 test_that("random forest concentrates importance on the signal columns", {
+  # 3s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   d <- make_xy()
   fit <- .morie_rf_fit(d$X, d$y, "regression", n_estimators = 100L)
   den <- sum((d$y - mean(d$y))^2)
@@ -30,12 +35,14 @@ test_that("random forest concentrates importance on the signal columns", {
 })
 
 test_that("out-of-bag error exceeds training error", {
+  skip_on_cran()
   d <- make_xy()
   fit <- .morie_rf_fit(d$X, d$y, "regression", n_estimators = 100L)
   expect_gt(sum((fit$oob - d$y)^2), sum((fit$fitted - d$y)^2))
 })
 
 test_that("gradient boosting drives training loss down monotonically", {
+  skip_on_cran()
   d <- make_xy()
   fit <- .morie_gb_fit(d$X, d$y, "regression", n_estimators = 100L,
                        learning_rate = 0.1, max_depth = 3L)
@@ -46,6 +53,7 @@ test_that("gradient boosting drives training loss down monotonically", {
 })
 
 test_that("shrinkage slows fitting exactly as ESL eq. (10.41) implies", {
+  skip_on_cran()
   d <- make_xy()
   slow <- .morie_gb_fit(d$X, d$y, "regression", n_estimators = 30L,
                         learning_rate = 0.01, max_depth = 3L)
@@ -55,6 +63,7 @@ test_that("shrinkage slows fitting exactly as ESL eq. (10.41) implies", {
 })
 
 test_that("L2 leaf penalty shrinks predictions toward the intercept", {
+  skip_on_cran()
   d <- make_xy()
   none <- .morie_gb_fit(d$X, d$y, "regression", n_estimators = 40L, lambda = 0)
   heavy <- .morie_gb_fit(d$X, d$y, "regression", n_estimators = 40L, lambda = 50)
@@ -62,6 +71,7 @@ test_that("L2 leaf penalty shrinks predictions toward the intercept", {
 })
 
 test_that("classification forest and booster separate a logistic signal", {
+  skip_on_cran()
   d <- make_xy()
   cls <- rbinom(nrow(d$X), 1, 1 / (1 + exp(-(1.5 * d$X[, 1] - 1.5 * d$X[, 3]))))
   rf <- .morie_rf_fit(d$X, cls, "classification", n_estimators = 100L)
@@ -73,6 +83,7 @@ test_that("classification forest and booster separate a logistic signal", {
 })
 
 test_that("a pure node and a constant feature do not break tree growth", {
+  skip_on_cran()
   X <- cbind(rep(1, 40), rnorm(40))          # column 1 is constant
   expect_silent(f <- .morie_rf_fit(X, rnorm(40), "regression", n_estimators = 5L))
   expect_equal(length(f$fitted), 40)
@@ -82,6 +93,7 @@ test_that("a pure node and a constant feature do not break tree growth", {
 })
 
 test_that("the six public front-ends run and report the native backend", {
+  skip_on_cran()
   d <- make_xy(n = 200)
   r <- morie_random_forest_ensemble(d$X, d$y, n_estimators = 20L)
   expect_gt(r$train_score, 0.8)

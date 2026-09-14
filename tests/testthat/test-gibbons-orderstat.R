@@ -12,6 +12,11 @@
 # orderings.
 
 test_that("the EDF count is binomial (Theorem 2.3.1)", {
+  # 3s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   n <- 12L
   fx <- 0.3
   for (i in 0:n) {
@@ -41,6 +46,7 @@ test_that("the EDF count is binomial (Theorem 2.3.1)", {
 })
 
 test_that("the EDF is the step function stats::ecdf builds", {
+  skip_on_cran()
   x <- c(3, 1, 4, 1, 5, 9, 2, 6)
   t <- c(0, 1, 1.5, 4, 9, 10)
   r <- rmorie:::Edfstep(x, t)
@@ -60,6 +66,7 @@ test_that("the EDF is the step function stats::ecdf builds", {
 })
 
 test_that("the r-th order statistic CDF is the binomial tail (eq. 2.4.1)", {
+  skip_on_cran()
   n <- 10L
   p <- 0.4
   for (r in seq_len(n)) {
@@ -87,6 +94,7 @@ test_that("the r-th order statistic CDF is the binomial tail (eq. 2.4.1)", {
 })
 
 test_that("the order-statistic density is the beta density under uniform", {
+  skip_on_cran()
   n <- 8L
   for (r in seq_len(n)) {
     for (x in c(0.1, 0.5, 0.9)) {
@@ -111,6 +119,7 @@ test_that("the order-statistic density is the beta density under uniform", {
 })
 
 test_that("the probability-integral transform is Beta(r, n - r + 1)", {
+  skip_on_cran()
   n <- 7L
   for (r in seq_len(n)) {
     for (u in c(0.05, 0.5, 0.95)) {
@@ -133,6 +142,7 @@ test_that("the probability-integral transform is Beta(r, n - r + 1)", {
 })
 
 test_that("the sample-quantile variance is the asymptotic p(1-p)/(n f^2)", {
+  skip_on_cran()
   a <- rmorie:::Ostatasymp(0.5, 100L, 0, stats::dnorm(0))
   expect_equal(a$mean, 0)
   expect_equal(a$var, 0.25 / (100 * stats::dnorm(0)^2))
@@ -154,6 +164,7 @@ test_that("the sample-quantile variance is the asymptotic p(1-p)/(n f^2)", {
 })
 
 test_that("uniform order-statistic moments are the beta moments", {
+  skip_on_cran()
   n <- 9L
   for (r in seq_len(n)) {
     m <- rmorie:::Ostatmom(r, n, k = 1L)
@@ -178,6 +189,7 @@ test_that("uniform order-statistic moments are the beta moments", {
 })
 
 test_that("order statistics are positively correlated, decaying with the gap", {
+  skip_on_cran()
   n <- 10L
   for (r in 1:4) {
     for (s in (r + 1):n) {
@@ -213,6 +225,7 @@ test_that("order statistics are positively correlated, decaying with the gap", {
 })
 
 test_that("the joint density of two order statistics integrates to one", {
+  skip_on_cran()
   # eq. (2.4.6) on the uniform: the coefficient times x^(r-1) (y-x)^(s-r-1)
   # (1-y)^(n-s). For n = 2, r = 1, s = 2 that is the constant 2 on the
   # triangle x < y, whose area is 1/2.
@@ -250,6 +263,7 @@ test_that("the joint density of two order statistics integrates to one", {
 })
 
 test_that("the joint density of the whole ordered sample is n! prod f", {
+  skip_on_cran()
   f <- function(z) stats::dexp(z, rate = 2)
   x <- c(0.2, 0.5, 1.1)
   j <- rmorie:::Ostatjall(x, f)
@@ -272,6 +286,7 @@ test_that("the joint density of the whole ordered sample is n! prod f", {
 })
 
 test_that("the sample quantile is the ceiling order statistic", {
+  skip_on_cran()
   x <- c(5, 1, 4, 2, 3)
   for (p in c(0.05, 0.2, 0.35, 0.5, 0.75, 0.95)) {
     q <- rmorie:::Sampquant(x, p)
@@ -293,6 +308,7 @@ test_that("the sample quantile is the ceiling order statistic", {
 })
 
 test_that("the exceedance distribution matches an exhaustive enumeration", {
+  skip_on_cran()
   # With m Y values and n X values all distinct and exchangeable, every one
   # of the choose(m + n, n) rank arrangements is equally likely. Count the
   # Y values above the i-th largest X in each.
@@ -341,6 +357,7 @@ test_that("the exceedance distribution matches an exhaustive enumeration", {
 })
 
 test_that("a distribution-free quantile interval has binomial coverage", {
+  skip_on_cran()
   set.seed(2)
   x <- sort(stats::rnorm(20))
   for (p in c(0.25, 0.5, 0.75)) {
@@ -372,6 +389,7 @@ test_that("a distribution-free quantile interval has binomial coverage", {
 })
 
 test_that("the quantile test is the binomial sign test on the threshold", {
+  skip_on_cran()
   x <- c(2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
   n <- 10L
   q0 <- 9

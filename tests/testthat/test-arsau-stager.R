@@ -10,6 +10,11 @@
 # real CEW-cartridge layout).
 
 test_that("make_synthetic_arsau dispatches to all 10 (year, kind) entries", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   for (year in c("2024", "2023")) {
     for (kind in c("main_records", "individual_records",
                    "probe_cycle_records", "weapon_records")) {
@@ -29,6 +34,7 @@ test_that("make_synthetic_arsau dispatches to all 10 (year, kind) entries", {
 })
 
 test_that("make_synthetic_arsau errors on an unregistered (year, kind)", {
+  skip_on_cran()
   expect_error(
     make_synthetic_arsau("9999", "main_records"),
     regexp = "no synthetic ARSAU fixture"
@@ -36,6 +42,7 @@ test_that("make_synthetic_arsau errors on an unregistered (year, kind)", {
 })
 
 test_that("2024 main_records carries real Toronto-OPP-Halton vocabulary", {
+  skip_on_cran()
   df <- make_synthetic_arsau("2024", "main_records", n = 200L, seed = 1L)
   # 45 real Ontario police services in the dictionary; sampling 200
   # times reliably draws Toronto + OPP + Halton Regional (3 of the
@@ -47,6 +54,7 @@ test_that("2024 main_records carries real Toronto-OPP-Halton vocabulary", {
 })
 
 test_that("stage_synthetic_arsau writes all 10 CSVs to the expected layout", {
+  skip_on_cran()
   root <- stage_synthetic_arsau(n = 20L, seed = 1L)
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
 
@@ -77,6 +85,7 @@ test_that("stage_synthetic_arsau writes all 10 CSVs to the expected layout", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_arsau_analyze_main_records runs on dictionary-staged 2024", {
+  skip_on_cran()
   root <- stage_synthetic_arsau(n = 60L, seed = 2L)
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
   res <- suppressWarnings(
@@ -88,6 +97,7 @@ test_that("morie_arsau_analyze_main_records runs on dictionary-staged 2024", {
 })
 
 test_that("morie_arsau_analyze_individual_records runs on dictionary-staged 2024", {
+  skip_on_cran()
   root <- stage_synthetic_arsau(n = 100L, seed = 3L)
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
   res <- suppressWarnings(
@@ -100,6 +110,7 @@ test_that("morie_arsau_analyze_individual_records runs on dictionary-staged 2024
 })
 
 test_that("morie_arsau_analyze_weapon_records 2023 needs allow_invalid on stager", {
+  skip_on_cran()
   root <- stage_synthetic_arsau(n = 60L, seed = 4L)
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
   expect_error(suppressWarnings(
@@ -115,6 +126,7 @@ test_that("morie_arsau_analyze_weapon_records 2023 needs allow_invalid on stager
 })
 
 test_that("morie_arsau_analyze_aggregate_summary runs on dictionary-staged 2020-2022", {
+  skip_on_cran()
   root <- stage_synthetic_arsau(n = 60L, seed = 5L)
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
   res <- suppressWarnings(
@@ -127,6 +139,7 @@ test_that("morie_arsau_analyze_aggregate_summary runs on dictionary-staged 2020-
 })
 
 test_that("morie_arsau_analyze_detailed_dataset runs on dictionary-staged 2020-2022", {
+  skip_on_cran()
   root <- stage_synthetic_arsau(n = 60L, seed = 6L)
   on.exit(unlink(root, recursive = TRUE), add = TRUE)
   res <- suppressWarnings(

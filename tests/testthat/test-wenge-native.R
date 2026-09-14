@@ -41,6 +41,11 @@ hand_theta <- function(Y, E, M, X) {
 }
 
 test_that("cell keys are stable under equal numeric values", {
+  # 5s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   expect_equal(.wenge_key(c(1, 2)), .wenge_key(c(1, 2)))
   expect_equal(.wenge_key(1), .wenge_key(1L))
   expect_false(.wenge_key(c(1, 2)) == .wenge_key(c(2, 1)))
@@ -51,6 +56,7 @@ test_that("cell keys are stable under equal numeric values", {
 })
 
 test_that("the saturated models are the empirical cell frequencies", {
+  skip_on_cran()
   E <- c(0, 0, 1, 1, 1, 0, 1, 1)
   M <- c(0, 1, 0, 1, 1, 0, 0, 1)
   X <- c(0, 0, 0, 0, 1, 1, 1, 1)
@@ -82,6 +88,7 @@ test_that("the saturated models are the empirical cell frequencies", {
 })
 
 test_that("the three strategies agree exactly on a saturated model", {
+  skip_on_cran()
   d <- gen(600, 4)
   a <- morie_wenge_mediation_functional(d$Y, d$E, d$M, d$X, strategy = "all")
   expect_named(a, c("ye", "em", "ym"), ignore.order = TRUE)
@@ -96,6 +103,7 @@ test_that("the three strategies agree exactly on a saturated model", {
 })
 
 test_that("the agreement survives sparse cells and several confounders", {
+  skip_on_cran()
   # a tiny design in which some (E, M, X) cells are empty
   X <- c(0, 0, 0, 0, 1, 1, 1, 1, 0, 1)
   E <- c(0, 0, 1, 1, 0, 0, 1, 1, 1, 0)
@@ -124,6 +132,7 @@ test_that("the agreement survives sparse cells and several confounders", {
 })
 
 test_that("the plug-in is the empirical mediation formula", {
+  skip_on_cran()
   for (sd in c(4, 11, 21)) {
     d <- gen(500, sd)
     got <- morie_wenge_mediation_functional(d$Y, d$E, d$M, d$X, strategy = "ym")
@@ -132,6 +141,7 @@ test_that("the plug-in is the empirical mediation formula", {
 })
 
 test_that("the functional recovers the known theta_0", {
+  skip_on_cran()
   d <- gen(4000, 99)
   for (s in c("ye", "em", "ym")) {
     got <- morie_wenge_mediation_functional(d$Y, d$E, d$M, d$X, strategy = s)
@@ -145,6 +155,7 @@ test_that("the functional recovers the known theta_0", {
 })
 
 test_that("working models estimate the same target but need not agree", {
+  skip_on_cran()
   d <- gen(2000, 7)
   p <- morie_wenge_mediation_functional(d$Y, d$E, d$M, d$X, strategy = "all",
                                         saturated = FALSE)
@@ -158,6 +169,7 @@ test_that("working models estimate the same target but need not agree", {
 })
 
 test_that("the effect decomposition holds identically", {
+  skip_on_cran()
   d <- gen(600, 4)
   w <- morie_wenge_weight_based_mediation(d$E, d$M, d$X, d$Y, strategy = "all")
   # ey1 and ey0 are inverse-probability weighted, so they match the
@@ -182,6 +194,7 @@ test_that("the effect decomposition holds identically", {
 })
 
 test_that("the effects recover their closed-form values", {
+  skip_on_cran()
   d <- gen(4000, 99)
   w <- morie_wenge_weight_based_mediation(d$E, d$M, d$X, d$Y)
   expect_equal(w$nde, 2.0, tolerance = 0.2)
@@ -196,6 +209,7 @@ test_that("the effects recover their closed-form values", {
 })
 
 test_that("a mediator unaffected by the exposure has no indirect effect", {
+  skip_on_cran()
   set.seed(31)
   n <- 4000
   X <- rbinom(n, 1, 0.5)
@@ -209,6 +223,7 @@ test_that("a mediator unaffected by the exposure has no indirect effect", {
 })
 
 test_that("an outcome unaffected by the exposure has no direct effect", {
+  skip_on_cran()
   set.seed(32)
   n <- 4000
   X <- rbinom(n, 1, 0.5)
@@ -222,6 +237,7 @@ test_that("an outcome unaffected by the exposure has no direct effect", {
 })
 
 test_that("absent mediators and confounders are handled", {
+  skip_on_cran()
   d <- gen(600, 4)
   # with no mediator there is nothing to hold fixed, so theta_0 collapses to
   # the weighted mean of the exposed outcomes
@@ -237,6 +253,7 @@ test_that("absent mediators and confounders are handled", {
 })
 
 test_that("the functional refuses inputs it cannot identify", {
+  skip_on_cran()
   d <- gen(200, 4)
   expect_error(morie_wenge_mediation_functional(d$Y, d$E, d$M, d$X,
                                                 strategy = "zz"),
@@ -256,11 +273,13 @@ test_that("the functional refuses inputs it cannot identify", {
 })
 
 test_that("the cheatsheet is present", {
+  skip_on_cran()
   expect_type(morie_wenge_cheatsheet(), "character")
   expect_match(morie_wenge_cheatsheet(), "wenge")
 })
 
 test_that("an empty conditioning cell gives zero density, not an error", {
+  skip_on_cran()
   # nobody at X = 1 is unexposed, so f(M | E = 0, X = 1) conditions on a cell
   # that has no observations at all
   E <- c(0, 0, 1, 1)
@@ -276,6 +295,7 @@ test_that("an empty conditioning cell gives zero density, not an error", {
 })
 
 test_that("a mediator that is an exact function of E and X still estimates", {
+  skip_on_cran()
   # M = E + 2X leaves the Gaussian mediator model with only rounding-level
   # residuals, so its density becomes extremely peaked. The estimate must stay
   # finite rather than dividing through by a vanishing variance.
@@ -296,6 +316,7 @@ test_that("a mediator that is an exact function of E and X still estimates", {
 })
 
 test_that("the effect route also runs on working models", {
+  skip_on_cran()
   d <- gen(2000, 7)
   w <- morie_wenge_weight_based_mediation(d$E, d$M, d$X, d$Y, strategy = "all",
                                           saturated = FALSE)

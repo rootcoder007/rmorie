@@ -3,6 +3,11 @@
 # gpfit, grdcl, grdds, grpqa, grucl, gsrch, gwreg, gxemd.
 
 test_that("morie_ghosal_np_regression returns a well-formed GP posterior list", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(1)
   x <- sort(rnorm(40))
   y <- sin(x) + rnorm(40, sd = 0.1)
@@ -28,6 +33,7 @@ test_that("morie_ghosal_np_regression returns a well-formed GP posterior list", 
 })
 
 test_that("morie_ghosal_np_regression honours explicit hyperparameters", {
+  skip_on_cran()
   set.seed(2)
   x <- sort(rnorm(30))
   y <- 2 * x + rnorm(30, sd = 0.2)
@@ -43,6 +49,7 @@ test_that("morie_ghosal_np_regression honours explicit hyperparameters", {
 })
 
 test_that("morie_ghosal_np_regression accepts a matrix of inputs", {
+  skip_on_cran()
   set.seed(3)
   X <- matrix(rnorm(60), ncol = 2)
   y <- X[, 1] - X[, 2] + rnorm(30, sd = 0.1)
@@ -53,6 +60,7 @@ test_that("morie_ghosal_np_regression accepts a matrix of inputs", {
 })
 
 test_that("morie_ghosal_survival_beta_process returns a posterior survival list", {
+  skip_on_cran()
   set.seed(10)
   time <- rexp(50, rate = 0.5)
   event <- rbinom(50, 1, 0.7)
@@ -73,6 +81,7 @@ test_that("morie_ghosal_survival_beta_process returns a posterior survival list"
 })
 
 test_that("morie_ghosal_survival_beta_process works without an event vector", {
+  skip_on_cran()
   set.seed(11)
   time <- rexp(40, rate = 1)
   res <- morie_ghosal_survival_beta_process(time, c = 2.0)
@@ -82,6 +91,7 @@ test_that("morie_ghosal_survival_beta_process works without an event vector", {
 })
 
 test_that("morie_ghosal_survival_beta_process handles an explicit baseline hazard", {
+  skip_on_cran()
   set.seed(12)
   time <- rexp(30, rate = 0.8)
   event <- rep(1L, 30)
@@ -91,6 +101,7 @@ test_that("morie_ghosal_survival_beta_process handles an explicit baseline hazar
 })
 
 test_that("morie_ghosal_stick_breaking_trunc returns a truncated DP draw", {
+  skip_on_cran()
   set.seed(20)
   x <- rnorm(60)
   res <- morie_ghosal_stick_breaking_trunc(x, alpha = 1.0, K = 30, seed = 7)
@@ -113,6 +124,7 @@ test_that("morie_ghosal_stick_breaking_trunc returns a truncated DP draw", {
 })
 
 test_that("morie_ghosal_stick_breaking_trunc honours explicit base measure", {
+  skip_on_cran()
   set.seed(21)
   x <- rnorm(40, mean = 5)
   res <- morie_ghosal_stick_breaking_trunc(x,
@@ -124,6 +136,7 @@ test_that("morie_ghosal_stick_breaking_trunc honours explicit base measure", {
 })
 
 test_that("morie_ghosal_stick_breaking_trunc handles an empty input", {
+  skip_on_cran()
   res <- morie_ghosal_stick_breaking_trunc(numeric(0), K = 10)
   expect_true(is.list(res))
   expect_equal(res$n, 0L)
@@ -131,6 +144,7 @@ test_that("morie_ghosal_stick_breaking_trunc handles an empty input", {
 })
 
 test_that("morie_ghosal_stick_breaking_trunc supports deterministic_seed", {
+  skip_on_cran()
   set.seed(22)
   x <- rnorm(30)
   res <- morie_ghosal_stick_breaking_trunc(x, K = 15, deterministic_seed = 99L)
@@ -139,6 +153,7 @@ test_that("morie_ghosal_stick_breaking_trunc supports deterministic_seed", {
 })
 
 test_that("morie_ghosal_sieve_prior fits a Bernstein-polynomial sieve density", {
+  skip_on_cran()
   set.seed(30)
   x <- rbeta(80, 2, 3)
   res <- morie_ghosal_sieve_prior(x)
@@ -157,6 +172,7 @@ test_that("morie_ghosal_sieve_prior fits a Bernstein-polynomial sieve density", 
 })
 
 test_that("morie_ghosal_sieve_prior accepts an explicit sieve degree", {
+  skip_on_cran()
   set.seed(31)
   x <- rbeta(50, 1, 1)
   res <- morie_ghosal_sieve_prior(x, K = 6)
@@ -166,6 +182,7 @@ test_that("morie_ghosal_sieve_prior accepts an explicit sieve degree", {
 })
 
 test_that("morie_ghosal_sieve_prior short-circuits when n < 3", {
+  skip_on_cran()
   res <- morie_ghosal_sieve_prior(c(0.2, 0.8))
   expect_true(is.list(res))
   expect_equal(res$n, 2L)
@@ -173,6 +190,7 @@ test_that("morie_ghosal_sieve_prior short-circuits when n < 3", {
 })
 
 test_that("morie_ghosal_np_testing returns a Polya-tree Bayes factor", {
+  skip_on_cran()
   set.seed(40)
   x <- rnorm(100)
   res <- morie_ghosal_np_testing(x)
@@ -192,6 +210,7 @@ test_that("morie_ghosal_np_testing returns a Polya-tree Bayes factor", {
 })
 
 test_that("morie_ghosal_np_testing honours reference and depth arguments", {
+  skip_on_cran()
   set.seed(41)
   x <- rnorm(60, mean = 3, sd = 2)
   res <- morie_ghosal_np_testing(x, ref_loc = 3, ref_scale = 2, depth = 4, c = 2.0)
@@ -201,6 +220,7 @@ test_that("morie_ghosal_np_testing honours reference and depth arguments", {
 })
 
 test_that("morie_ghosal_np_testing short-circuits when n < 2", {
+  skip_on_cran()
   res <- morie_ghosal_np_testing(c(0.5))
   expect_true(is.list(res))
   expect_equal(res$n, 1L)
@@ -209,6 +229,7 @@ test_that("morie_ghosal_np_testing short-circuits when n < 2", {
 })
 
 test_that("morie_ghosal_wavelet_prior denoises a signal via Haar wavelets", {
+  skip_on_cran()
   set.seed(50)
   n <- 64
   x <- sin(seq(0, 2 * pi, length.out = n)) + rnorm(n, sd = 0.2)
@@ -229,6 +250,7 @@ test_that("morie_ghosal_wavelet_prior denoises a signal via Haar wavelets", {
 })
 
 test_that("morie_ghosal_wavelet_prior honours explicit sigma and noise", {
+  skip_on_cran()
   set.seed(51)
   x <- rnorm(32)
   res <- morie_ghosal_wavelet_prior(x, pi = 0.3, sigma = 0.5, noise = 0.4)
@@ -238,6 +260,7 @@ test_that("morie_ghosal_wavelet_prior honours explicit sigma and noise", {
 })
 
 test_that("morie_ghosal_wavelet_prior short-circuits when n < 4", {
+  skip_on_cran()
   res <- morie_ghosal_wavelet_prior(c(1, 2, 3))
   expect_true(is.list(res))
   expect_equal(res$n, 3L)
@@ -245,6 +268,7 @@ test_that("morie_ghosal_wavelet_prior short-circuits when n < 4", {
 })
 
 test_that("morie_generalized_pareto fits a GP to threshold exceedances", {
+  skip_on_cran()
   set.seed(60)
   x <- rexp(2000, rate = 1)
   res <- morie_generalized_pareto(x, threshold = 0.5)
@@ -265,6 +289,7 @@ test_that("morie_generalized_pareto fits a GP to threshold exceedances", {
 })
 
 test_that("morie_generalized_pareto uses the 90th percentile by default", {
+  skip_on_cran()
   set.seed(61)
   x <- rexp(500, rate = 2)
   res <- morie_generalized_pareto(x)
@@ -273,6 +298,7 @@ test_that("morie_generalized_pareto uses the 90th percentile by default", {
 })
 
 test_that("morie_generalized_pareto short-circuits on tiny samples", {
+  skip_on_cran()
   res <- morie_generalized_pareto(c(1, 2, 3))
   expect_true(is.list(res))
   expect_true(is.na(res$estimate))
@@ -280,6 +306,7 @@ test_that("morie_generalized_pareto short-circuits on tiny samples", {
 })
 
 test_that("morie_generalized_pareto short-circuits with too few exceedances", {
+  skip_on_cran()
   set.seed(62)
   x <- c(rep(0.1, 50), 100, 101)
   res <- morie_generalized_pareto(x, threshold = 50)
@@ -288,6 +315,7 @@ test_that("morie_generalized_pareto short-circuits with too few exceedances", {
 })
 
 test_that("morie_gradient_descent_vanilla recovers OLS coefficients", {
+  skip_on_cran()
   set.seed(70)
   x <- matrix(rnorm(200), ncol = 2)
   y <- 1 + 2 * x[, 1] - 1.5 * x[, 2] + rnorm(100, sd = 0.05)
@@ -308,6 +336,7 @@ test_that("morie_gradient_descent_vanilla recovers OLS coefficients", {
 })
 
 test_that("morie_gradient_descent_vanilla accepts a plain vector predictor", {
+  skip_on_cran()
   set.seed(71)
   x <- rnorm(50)
   y <- 3 + 0.5 * x + rnorm(50, sd = 0.05)
@@ -318,6 +347,7 @@ test_that("morie_gradient_descent_vanilla accepts a plain vector predictor", {
 })
 
 test_that("morie_gradient_descent_vanilla stops early on tight tolerance", {
+  skip_on_cran()
   set.seed(72)
   x <- matrix(rnorm(60), ncol = 2)
   y <- x[, 1] + x[, 2]
@@ -327,6 +357,7 @@ test_that("morie_gradient_descent_vanilla stops early on tight tolerance", {
 })
 
 test_that("gwreg fits local regressions at every site", {
+  skip_on_cran()
   set.seed(80)
   n <- 30
   coords <- matrix(runif(2 * n), ncol = 2)
@@ -348,6 +379,7 @@ test_that("gwreg fits local regressions at every site", {
 })
 
 test_that("gwreg supports the bisquare kernel and explicit bandwidth", {
+  skip_on_cran()
   set.seed(81)
   n <- 25
   coords <- matrix(runif(2 * n), ncol = 2)
@@ -364,6 +396,7 @@ test_that("gwreg supports the bisquare kernel and explicit bandwidth", {
 })
 
 test_that("gwreg canonical 1-D example yields finite fits", {
+  skip_on_cran()
   res <- gwreg(cbind(1, 0:4), 0:4, matrix(0:4, ncol = 1))
   expect_true(is.list(res))
   expect_equal(dim(res$estimate), c(5L, 2L))
@@ -371,6 +404,7 @@ test_that("gwreg canonical 1-D example yields finite fits", {
 })
 
 test_that("morie_gxe_interaction_model computes GxE variance components", {
+  skip_on_cran()
   x <- c(1, 1, 2, 2, 3, 3, 1, 1, 2, 2, 3, 3)
   env <- c(1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2)
   y <- c(1, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 7)
@@ -395,6 +429,7 @@ test_that("morie_gxe_interaction_model computes GxE variance components", {
 })
 
 test_that("morie_gxe_interaction_model handles a larger replicated design", {
+  skip_on_cran()
   set.seed(90)
   g <- rep(1:4, each = 6)
   env <- rep(rep(1:3, each = 2), times = 4)
@@ -409,6 +444,7 @@ test_that("morie_gxe_interaction_model handles a larger replicated design", {
 })
 
 test_that("morie_grucl_gru_cell runs a forward pass with default weights", {
+  skip_on_cran()
   set.seed(100)
   x <- rnorm(5)
   res <- morie_grucl_gru_cell(x, hidden_size = 4L, seed = 1L)
@@ -427,6 +463,7 @@ test_that("morie_grucl_gru_cell runs a forward pass with default weights", {
 })
 
 test_that("morie_gru_cell alias accepts supplied weights and previous state", {
+  skip_on_cran()
   set.seed(101)
   n_in <- 3L
   H <- 4L
@@ -442,6 +479,7 @@ test_that("morie_gru_cell alias accepts supplied weights and previous state", {
 })
 
 test_that("morie_grucl_gru_cell infers hidden size from h_prev", {
+  skip_on_cran()
   set.seed(102)
   x <- rnorm(3)
   h_prev <- rnorm(6)
@@ -451,6 +489,7 @@ test_that("morie_grucl_gru_cell infers hidden size from h_prev", {
 })
 
 test_that("morie_grucl_gru_cell supports deterministic_seed", {
+  skip_on_cran()
   set.seed(103)
   x <- rnorm(4)
   res <- morie_grucl_gru_cell(x, hidden_size = 4L, deterministic_seed = 55L)
@@ -459,6 +498,7 @@ test_that("morie_grucl_gru_cell supports deterministic_seed", {
 })
 
 test_that("morie_grid_search_cv runs a regression grid search", {
+  skip_on_cran()
   set.seed(110)
   x <- matrix(rnorm(120), ncol = 3)
   y <- x[, 1] - x[, 2] + rnorm(40, sd = 0.2)
@@ -478,6 +518,7 @@ test_that("morie_grid_search_cv runs a regression grid search", {
 })
 
 test_that("morie_grid_search_cv errors clearly when caret is missing", {
+  skip_on_cran()
   skip_if_not_installed("caret")
   if (!requireNamespace("caret", quietly = TRUE)) {
     expect_error(
@@ -490,6 +531,7 @@ test_that("morie_grid_search_cv errors clearly when caret is missing", {
 })
 
 test_that("gradient_clipping rescales gradients to the max norm", {
+  skip_on_cran()
   fn <- tryCatch(get("gradient_clipping", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
@@ -507,6 +549,7 @@ test_that("gradient_clipping rescales gradients to the max norm", {
 })
 
 test_that("gradient_clipping leaves small gradients unchanged", {
+  skip_on_cran()
   fn <- tryCatch(get("gradient_clipping", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
@@ -519,6 +562,7 @@ test_that("gradient_clipping leaves small gradients unchanged", {
 })
 
 test_that("grouped_query_attention produces attention weights", {
+  skip_on_cran()
   fn <- tryCatch(get("grouped_query_attention", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )
@@ -540,6 +584,7 @@ test_that("grouped_query_attention produces attention weights", {
 })
 
 test_that("grouped_query_attention rejects incompatible head counts", {
+  skip_on_cran()
   fn <- tryCatch(get("grouped_query_attention", envir = asNamespace("rmorie")),
     error = function(e) NULL
   )

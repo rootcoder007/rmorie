@@ -2,6 +2,11 @@
 # Batch 17 tests: rgapn rgarb rgcoh rgcrl rgdfa rgeeg rgemg rgenv rgfir rghfd rghrv rgiir rglyp rgpsd rgqrs
 
 test_that("rgapn returns named list with documented fields", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(1)
   r <- rgapn(rnorm(80), m = 2L)
   expect_type(r, "list")
@@ -13,6 +18,7 @@ test_that("rgapn returns named list with documented fields", {
 })
 
 test_that("rgapn honours explicit tolerance r and template length m", {
+  skip_on_cran()
   set.seed(2)
   x <- rnorm(60)
   r <- rgapn(x, m = 3L, r = 0.5)
@@ -22,14 +28,17 @@ test_that("rgapn honours explicit tolerance r and template length m", {
 })
 
 test_that("rgapn errors on series too short for template", {
+  skip_on_cran()
   expect_error(rgapn(c(1, 2, 3), m = 2L), "m \\+ 1")
 })
 
 test_that("morie_rangayyan_approximate_entropy alias is identical to rgapn", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_approximate_entropy, rgapn)
 })
 
 test_that("rgarb returns AR coefficients of requested order", {
+  skip_on_cran()
   set.seed(3)
   r <- rgarb(rnorm(300), order = 4L)
   expect_type(r, "list")
@@ -41,6 +50,7 @@ test_that("rgarb returns AR coefficients of requested order", {
 })
 
 test_that("rgarb default order path runs", {
+  skip_on_cran()
   set.seed(4)
   r <- rgarb(rnorm(200))
   expect_length(r$ar_coeffs, 10L)
@@ -48,21 +58,25 @@ test_that("rgarb default order path runs", {
 })
 
 test_that("rgarb reflection coefficients are bounded for a stable model", {
+  skip_on_cran()
   set.seed(5)
   r <- rgarb(rnorm(250), order = 6L)
   expect_true(all(abs(r$reflection) <= 1 + 1e-8))
 })
 
 test_that("rgarb errors on invalid order", {
+  skip_on_cran()
   expect_error(rgarb(rnorm(20), order = 0L), "order")
   expect_error(rgarb(rnorm(20), order = 20L), "order")
 })
 
 test_that("morie_rangayyan_ar_burg alias is identical to rgarb", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_ar_burg, rgarb)
 })
 
 test_that("rgcoh returns morie_coherence bounded in [0, 1]", {
+  skip_on_cran()
   set.seed(6)
   n <- 512
   tt <- seq(0, 5, length.out = n)
@@ -80,6 +94,7 @@ test_that("rgcoh returns morie_coherence bounded in [0, 1]", {
 })
 
 test_that("rgcoh honours explicit nperseg", {
+  skip_on_cran()
   set.seed(7)
   n <- 400
   x <- rnorm(n)
@@ -90,14 +105,17 @@ test_that("rgcoh honours explicit nperseg", {
 })
 
 test_that("rgcoh errors on unequal length inputs", {
+  skip_on_cran()
   expect_error(rgcoh(1:10, 1:8), "equal length")
 })
 
 test_that("morie_rangayyan_coherence alias is identical to rgcoh", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_coherence, rgcoh)
 })
 
 test_that("rgcrl returns D2 and scaling vectors", {
+  skip_on_cran()
   set.seed(8)
   r <- rgcrl(rnorm(200), m = 3L, tau = 1L, n_r = 15L)
   expect_type(r, "list")
@@ -108,20 +126,24 @@ test_that("rgcrl returns D2 and scaling vectors", {
 })
 
 test_that("rgcrl default arguments path runs", {
+  skip_on_cran()
   set.seed(9)
   r <- rgcrl(rnorm(150))
   expect_true(is.na(r$D2) || is.finite(r$D2))
 })
 
 test_that("rgcrl errors on series too short for embedding", {
+  skip_on_cran()
   expect_error(rgcrl(rnorm(8), m = 3L, tau = 2L), "too short")
 })
 
 test_that("morie_rangayyan_correlation_dimension alias is identical to rgcrl", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_correlation_dimension, rgcrl)
 })
 
 test_that("rgdfa returns alpha exponent and scaling vectors", {
+  skip_on_cran()
   set.seed(10)
   r <- rgdfa(rnorm(400))
   expect_type(r, "list")
@@ -131,6 +153,7 @@ test_that("rgdfa returns alpha exponent and scaling vectors", {
 })
 
 test_that("rgdfa honours explicit scales and order", {
+  skip_on_cran()
   set.seed(11)
   r <- rgdfa(rnorm(300), scales = c(8L, 16L, 32L, 64L), order = 2L)
   expect_true(all(c(8L, 16L, 32L, 64L) %in% r$scales))
@@ -138,14 +161,17 @@ test_that("rgdfa honours explicit scales and order", {
 })
 
 test_that("rgdfa errors on series shorter than 32 samples", {
+  skip_on_cran()
   expect_error(rgdfa(rnorm(20)), "32 samples")
 })
 
 test_that("morie_rangayyan_dfa alias is identical to rgdfa", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_dfa, rgdfa)
 })
 
 test_that("rgeeg returns absolute and relative band power", {
+  skip_on_cran()
   set.seed(12)
   fs <- 128
   tt <- seq(0, 8, length.out = 1024)
@@ -161,6 +187,7 @@ test_that("rgeeg returns absolute and relative band power", {
 })
 
 test_that("rgeeg honours custom bands and nperseg", {
+  skip_on_cran()
   set.seed(13)
   fs <- 100
   x <- rnorm(800)
@@ -171,10 +198,12 @@ test_that("rgeeg honours custom bands and nperseg", {
 })
 
 test_that("morie_rangayyan_eeg_bands alias is identical to rgeeg", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_eeg_bands, rgeeg)
 })
 
 test_that("rgemg returns RMS envelope of length(x)", {
+  skip_on_cran()
   set.seed(14)
   x <- rnorm(300)
   r <- rgemg(x, window = 32L)
@@ -190,6 +219,7 @@ test_that("rgemg returns RMS envelope of length(x)", {
 })
 
 test_that("rgemg default window and fs reporting", {
+  skip_on_cran()
   set.seed(15)
   r <- rgemg(rnorm(200))
   expect_equal(r$window, 64L)
@@ -197,14 +227,17 @@ test_that("rgemg default window and fs reporting", {
 })
 
 test_that("rgemg errors on window < 1", {
+  skip_on_cran()
   expect_error(rgemg(rnorm(50), window = 0L), "window")
 })
 
 test_that("morie_rangayyan_emg_rms alias is identical to rgemg", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_emg_rms, rgemg)
 })
 
 test_that("rgenv returns envelope and instantaneous quantities (even N)", {
+  skip_on_cran()
   tt <- seq(0, 1, length.out = 200)
   x <- cos(2 * pi * 5 * tt) * (1 + 0.3 * cos(2 * pi * 0.5 * tt))
   r <- rgenv(x)
@@ -221,6 +254,7 @@ test_that("rgenv returns envelope and instantaneous quantities (even N)", {
 })
 
 test_that("rgenv handles odd-length input", {
+  skip_on_cran()
   set.seed(16)
   x <- rnorm(101)
   r <- rgenv(x)
@@ -229,10 +263,12 @@ test_that("rgenv handles odd-length input", {
 })
 
 test_that("morie_rangayyan_envelope alias is identical to rgenv", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_envelope, rgenv)
 })
 
 test_that("rgfir filters a signal when 'signal' is available", {
+  skip_on_cran()
   testthat::skip_if_not_installed("signal")
   set.seed(17)
   tt <- seq(0, 1, length.out = 400)
@@ -246,6 +282,7 @@ test_that("rgfir filters a signal when 'signal' is available", {
 })
 
 test_that("rgfir coerces even order to odd and clamps small orders", {
+  skip_on_cran()
   testthat::skip_if_not_installed("signal")
   set.seed(18)
   x <- sin(2 * pi * 5 * seq(0, 1, length.out = 300))
@@ -256,6 +293,7 @@ test_that("rgfir coerces even order to odd and clamps small orders", {
 })
 
 test_that("rgfir supports alternative windows and short-signal path", {
+  skip_on_cran()
   testthat::skip_if_not_installed("signal")
   set.seed(19)
   x <- sin(2 * pi * 3 * seq(0, 1, length.out = 90))
@@ -266,10 +304,12 @@ test_that("rgfir supports alternative windows and short-signal path", {
 })
 
 test_that("morie_rangayyan_fir_filter alias is identical to rgfir", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_fir_filter, rgfir)
 })
 
 test_that("rghfd returns HFD and scaling vectors", {
+  skip_on_cran()
   set.seed(20)
   r <- rghfd(rnorm(400), kmax = 8L)
   expect_type(r, "list")
@@ -279,21 +319,25 @@ test_that("rghfd returns HFD and scaling vectors", {
 })
 
 test_that("rghfd default kmax path runs", {
+  skip_on_cran()
   set.seed(21)
   r <- rghfd(rnorm(300))
   expect_true(is.finite(r$HFD))
 })
 
 test_that("rghfd errors on too-short input or tiny kmax", {
+  skip_on_cran()
   expect_error(rghfd(c(1, 2, 3), kmax = 8L), "kmax")
   expect_error(rghfd(rnorm(50), kmax = 1L), "kmax")
 })
 
 test_that("morie_rangayyan_higuchi_fd alias is identical to rghfd", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_higuchi_fd, rghfd)
 })
 
 test_that("rghrv returns documented time-domain indices", {
+  skip_on_cran()
   set.seed(22)
   rr <- 800 + rnorm(200, sd = 40)
   r <- rghrv(rr)
@@ -311,20 +355,24 @@ test_that("rghrv returns documented time-domain indices", {
 })
 
 test_that("rghrv handles minimal length-2 input", {
+  skip_on_cran()
   r <- rghrv(c(800, 850))
   expect_equal(r$n, 2L)
   expect_true(is.finite(r$RMSSD))
 })
 
 test_that("rghrv errors on fewer than 2 intervals", {
+  skip_on_cran()
   expect_error(rghrv(800), "2 RR")
 })
 
 test_that("morie_rangayyan_hrv alias is identical to rghrv", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_hrv, rghrv)
 })
 
 test_that("rgiir lowpass filters a signal when 'signal' is available", {
+  skip_on_cran()
   testthat::skip_if_not_installed("signal")
   set.seed(23)
   tt <- seq(0, 1, length.out = 500)
@@ -338,6 +386,7 @@ test_that("rgiir lowpass filters a signal when 'signal' is available", {
 })
 
 test_that("rgiir supports highpass and bandpass btypes", {
+  skip_on_cran()
   testthat::skip_if_not_installed("signal")
   set.seed(24)
   tt <- seq(0, 1, length.out = 500)
@@ -350,14 +399,17 @@ test_that("rgiir supports highpass and bandpass btypes", {
 })
 
 test_that("rgiir rejects an invalid btype", {
+  skip_on_cran()
   expect_error(rgiir(rnorm(100), cutoff = 10, fs = 100, btype = "bogus"))
 })
 
 test_that("morie_rangayyan_iir_filter alias is identical to rgiir", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_iir_filter, rgiir)
 })
 
 test_that("rglyp returns lyapunov exponent and divergence curve", {
+  skip_on_cran()
   set.seed(25)
   r <- rglyp(rnorm(200), m = 3L, tau = 1L, max_t = 20L)
   expect_type(r, "list")
@@ -368,6 +420,7 @@ test_that("rglyp returns lyapunov exponent and divergence curve", {
 })
 
 test_that("rglyp default max_t path runs", {
+  skip_on_cran()
   set.seed(26)
   r <- rglyp(rnorm(150))
   expect_true(is.na(r$lyapunov) || is.finite(r$lyapunov))
@@ -375,14 +428,17 @@ test_that("rglyp default max_t path runs", {
 })
 
 test_that("rglyp errors on series too short for embedding", {
+  skip_on_cran()
   expect_error(rglyp(rnorm(8), m = 3L, tau = 2L), "too short")
 })
 
 test_that("morie_rangayyan_lyapunov alias is identical to rglyp", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_lyapunov, rglyp)
 })
 
 test_that("rgpsd returns one-sided PSD with documented fields", {
+  skip_on_cran()
   set.seed(27)
   fs <- 100
   tt <- seq(0, 10, length.out = 1000)
@@ -401,6 +457,7 @@ test_that("rgpsd returns one-sided PSD with documented fields", {
 })
 
 test_that("rgpsd supports alternative windows and default nperseg", {
+  skip_on_cran()
   set.seed(28)
   x <- rnorm(600)
   for (w in c("hann", "hamming", "boxcar", "unknown")) {
@@ -411,10 +468,12 @@ test_that("rgpsd supports alternative windows and default nperseg", {
 })
 
 test_that("morie_rangayyan_psd alias is identical to rgpsd", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_psd, rgpsd)
 })
 
 test_that("rgqrs detects R-peaks on a synthetic ECG", {
+  skip_on_cran()
   testthat::skip_if_not_installed("signal")
   set.seed(29)
   fs <- 360
@@ -436,6 +495,7 @@ test_that("rgqrs detects R-peaks on a synthetic ECG", {
 })
 
 test_that("rgqrs default fs argument path runs", {
+  skip_on_cran()
   testthat::skip_if_not_installed("signal")
   set.seed(30)
   tt <- seq(0, 3, length.out = 3 * 360)
@@ -449,5 +509,6 @@ test_that("rgqrs default fs argument path runs", {
 })
 
 test_that("morie_rangayyan_qrs_detect alias is identical to rgqrs", {
+  skip_on_cran()
   expect_identical(morie_rangayyan_qrs_detect, rgqrs)
 })

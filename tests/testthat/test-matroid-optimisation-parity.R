@@ -20,6 +20,11 @@ K4E <- list(c(1, 2), c(2, 3), c(3, 4), c(4, 1), c(1, 3))
 # ------------------------------------------------------------------
 
 test_that("uniform matroids satisfy both axioms", {
+  # 3s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   for (n in 1:5) {
     for (k in 0:n) {
       u <- morie_uniform_matroid(n, k)
@@ -29,6 +34,7 @@ test_that("uniform matroids satisfy both axioms", {
 })
 
 test_that("graphic matroids satisfy both axioms", {
+  skip_on_cran()
   g <- morie_graphic_matroid(K4E, 4)
   expect_true(morie_is_matroid(g$ground, g$independent)$is_matroid)
   g2 <- morie_graphic_matroid(list(c(1, 2), c(3, 4)), 4)
@@ -36,6 +42,7 @@ test_that("graphic matroids satisfy both axioms", {
 })
 
 test_that("a non-matroid is identified with its witness", {
+  skip_on_cran()
   out <- morie_is_matroid(NON_MAT_GROUND, NON_MAT_IND)
   expect_false(out$is_matroid)
   expect_true(out$hereditary)
@@ -46,6 +53,7 @@ test_that("a non-matroid is identified with its witness", {
 })
 
 test_that("a non-hereditary system is rejected before exchange", {
+  skip_on_cran()
   out <- morie_is_matroid(c(1L, 2L), list(integer(0), c(1L, 2L)))
   expect_false(out$hereditary)
   expect_false(out$is_matroid)
@@ -57,6 +65,7 @@ test_that("a non-hereditary system is rejected before exchange", {
 # ------------------------------------------------------------------
 
 test_that("U(2,4) structure matches Python", {
+  skip_on_cran()
   u <- morie_uniform_matroid(4, 2)
   expect_equal(morie_matroid_rank(u$ground, u$independent), 2L)
   expect_equal(length(morie_matroid_bases(u$ground, u$independent)), 6L)
@@ -66,6 +75,7 @@ test_that("U(2,4) structure matches Python", {
 })
 
 test_that("the graphic matroid on K4 minus an edge matches Python", {
+  skip_on_cran()
   g <- morie_graphic_matroid(K4E, 4)
   expect_equal(length(g$ground), 5L)
   expect_equal(length(g$independent), 24L)
@@ -74,6 +84,7 @@ test_that("the graphic matroid on K4 minus an edge matches Python", {
 })
 
 test_that("all bases have the same size", {
+  skip_on_cran()
   g <- morie_graphic_matroid(K4E, 4)
   sizes <- unique(vapply(morie_matroid_bases(g$ground, g$independent),
                          length, integer(1)))
@@ -81,6 +92,7 @@ test_that("all bases have the same size", {
 })
 
 test_that("duality is an involution", {
+  skip_on_cran()
   for (p in list(c(3, 1), c(4, 2), c(4, 3), c(5, 2))) {
     u <- morie_uniform_matroid(p[1], p[2])
     d <- morie_matroid_dual(u$ground, u$independent)
@@ -93,6 +105,7 @@ test_that("duality is an involution", {
 })
 
 test_that("the dual of a uniform matroid has complementary rank", {
+  skip_on_cran()
   for (p in list(c(4, 1), c(4, 2), c(5, 3), c(6, 2))) {
     u <- morie_uniform_matroid(p[1], p[2])
     d <- morie_matroid_dual(u$ground, u$independent)
@@ -101,6 +114,7 @@ test_that("the dual of a uniform matroid has complementary rank", {
 })
 
 test_that("the dual of a matroid is a matroid", {
+  skip_on_cran()
   for (p in list(c(3, 1), c(4, 2), c(5, 2))) {
     u <- morie_uniform_matroid(p[1], p[2])
     d <- morie_matroid_dual(u$ground, u$independent)
@@ -113,6 +127,7 @@ test_that("the dual of a matroid is a matroid", {
 # ------------------------------------------------------------------
 
 test_that("greedy is optimal on uniform matroids", {
+  skip_on_cran()
   set.seed(11)
   for (p in list(c(4, 2), c(5, 2), c(5, 3), c(6, 3))) {
     u <- morie_uniform_matroid(p[1], p[2])
@@ -126,6 +141,7 @@ test_that("greedy is optimal on uniform matroids", {
 })
 
 test_that("greedy is optimal on the graphic matroid", {
+  skip_on_cran()
   set.seed(12)
   g <- morie_graphic_matroid(K4E, 4)
   for (i in seq_len(80L)) {
@@ -137,6 +153,7 @@ test_that("greedy is optimal on the graphic matroid", {
 })
 
 test_that("greedy FAILS on a system that is not a matroid", {
+  skip_on_cran()
   # the converse half of Rado-Edmonds; a test of only the forward
   # direction would pass on code with no notion of a matroid
   set.seed(13)
@@ -152,6 +169,7 @@ test_that("greedy FAILS on a system that is not a matroid", {
 })
 
 test_that("the concrete losing weighting matches Python", {
+  skip_on_cran()
   g <- morie_greedy_independent_set(NON_MAT_GROUND, NON_MAT_IND, c(5, 3, 3))
   b <- morie_brute_force_max_weight(NON_MAT_GROUND, NON_MAT_IND, c(5, 3, 3))
   expect_equal(g$set, 1L)          # Python [0], shifted
@@ -161,6 +179,7 @@ test_that("the concrete losing weighting matches Python", {
 })
 
 test_that("greedy never takes a negative-weight element", {
+  skip_on_cran()
   u <- morie_uniform_matroid(4, 3)
   g <- morie_greedy_independent_set(u$ground, u$independent,
                                     c(-1, -2, 5, -3))
@@ -172,6 +191,7 @@ test_that("greedy never takes a negative-weight element", {
 # ------------------------------------------------------------------
 
 test_that("the MST matches Python on the reference graph", {
+  skip_on_cran()
   m <- morie_minimum_spanning_tree(K4E, 4, c(4, 1, 3, 2, 5))
   expect_equal(m$weight, 6)
   expect_true(m$connected)
@@ -180,6 +200,7 @@ test_that("the MST matches Python on the reference graph", {
 })
 
 test_that("the MST equals exhaustive search over spanning trees", {
+  skip_on_cran()
   set.seed(14)
   brute <- function(edges, n, w) {
     best <- Inf
@@ -219,6 +240,7 @@ test_that("the MST equals exhaustive search over spanning trees", {
 })
 
 test_that("the MST is exactly greedy on the cycle matroid", {
+  skip_on_cran()
   set.seed(15)
   g <- morie_graphic_matroid(K4E, 4)
   for (i in seq_len(80L)) {
@@ -231,6 +253,7 @@ test_that("the MST is exactly greedy on the cycle matroid", {
 })
 
 test_that("a disconnected graph gives a forest and says so", {
+  skip_on_cran()
   out <- morie_minimum_spanning_tree(list(c(1, 2), c(3, 4)), 4, c(1, 1))
   expect_false(out$connected)
   expect_equal(out$n_components, 2L)
@@ -242,6 +265,7 @@ test_that("a disconnected graph gives a forest and says so", {
 # ------------------------------------------------------------------
 
 test_that("Konig matches Python on the reference graph", {
+  skip_on_cran()
   E <- list(c(1, 1), c(1, 2), c(2, 2), c(3, 1), c(3, 3))
   out <- morie_konig_theorem(3, 3, E)
   expect_equal(out$matching_size, 3L)
@@ -251,6 +275,7 @@ test_that("Konig matches Python on the reference graph", {
 })
 
 test_that("Konig holds on random bipartite graphs", {
+  skip_on_cran()
   set.seed(16)
   for (i in seq_len(80L)) {
     ln <- sample.int(5, 1)
@@ -266,6 +291,7 @@ test_that("Konig holds on random bipartite graphs", {
 })
 
 test_that("the Konig cover really covers every edge", {
+  skip_on_cran()
   E <- list(c(1, 1), c(1, 2), c(2, 2), c(3, 1), c(3, 3))
   out <- morie_konig_theorem(3, 3, E)
   for (e in E) {
@@ -275,6 +301,7 @@ test_that("the Konig cover really covers every edge", {
 })
 
 test_that("Hall matches Python on the failing example", {
+  skip_on_cran()
   out <- morie_hall_condition(3, 2, list(c(1, 1), c(2, 1), c(3, 2)))
   expect_false(out$holds)
   expect_equal(out$violating_set, c(1L, 2L))   # Python [0,1] shifted
@@ -283,6 +310,7 @@ test_that("Hall matches Python on the failing example", {
 })
 
 test_that("Hall agrees with the matching everywhere", {
+  skip_on_cran()
   set.seed(17)
   for (i in seq_len(100L)) {
     ln <- sample.int(5, 1)
@@ -296,6 +324,7 @@ test_that("Hall agrees with the matching everywhere", {
 })
 
 test_that("Hall holds on a complete bipartite graph", {
+  skip_on_cran()
   E <- list()
   for (a in 1:3) for (b in 1:3) E[[length(E) + 1L]] <- c(a, b)
   out <- morie_hall_condition(3, 3, E)
@@ -309,6 +338,7 @@ test_that("Hall holds on a complete bipartite graph", {
 # ------------------------------------------------------------------
 
 test_that("the classic network matches Python", {
+  skip_on_cran()
   C <- matrix(c(0, 3, 2, 0,
                 0, 0, 5, 2,
                 0, 0, 0, 3,
@@ -322,6 +352,7 @@ test_that("the classic network matches Python", {
 })
 
 test_that("max flow equals min cut on random networks", {
+  skip_on_cran()
   set.seed(18)
   for (i in seq_len(80L)) {
     n <- sample(3:5, 1)
@@ -338,6 +369,7 @@ test_that("max flow equals min cut on random networks", {
 })
 
 test_that("the cut capacity is recomputed from the original capacities", {
+  skip_on_cran()
   set.seed(19)
   n <- 5L
   C <- matrix(0, n, n)
@@ -351,6 +383,7 @@ test_that("the cut capacity is recomputed from the original capacities", {
 })
 
 test_that("a disconnected sink has zero flow", {
+  skip_on_cran()
   C <- matrix(c(0, 5, 0, 0, 0, 0, 0, 0, 0), 3, 3, byrow = TRUE)
   out <- morie_max_flow_min_cut(C, 1, 3)
   expect_equal(out$flow, 0)
@@ -358,6 +391,7 @@ test_that("a disconnected sink has zero flow", {
 })
 
 test_that("matroid and optimisation input validation", {
+  skip_on_cran()
   expect_error(morie_uniform_matroid(-1, 2), "non-negative")
   expect_error(morie_minimum_spanning_tree(list(c(1, 2)), 2, c(1, 2)),
                "weights has length")

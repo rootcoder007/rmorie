@@ -1259,6 +1259,11 @@ eqd <- function(actual, expected)
   testthat::expect_equal(dim(as.matrix(actual)), dim(as.matrix(expected)))
 
 test_that("distillation and diffusion losses match Python", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   p <- PY$grdino
   r <- morie_geron_dino_self_distillation(p$in_S, p$in_Tl, 1, 0.5)
   eqn(r$loss, p$loss)
@@ -1308,6 +1313,7 @@ test_that("distillation and diffusion losses match Python", {
 })
 
 test_that("preference and RL objectives match Python", {
+  skip_on_cran()
   p <- PY$grdpo
   r <- morie_geron_dpo_loss(p$in_lw, p$in_ll, p$in_rw, p$in_rl, beta = 0.3)
   eqn(r$loss, p$loss)
@@ -1402,6 +1408,7 @@ test_that("preference and RL objectives match Python", {
 })
 
 test_that("MDP value functions match Python", {
+  skip_on_cran()
   p <- PY$grvpi
   r <- morie_geron_state_value_function(1, p$in_pol, p$in_P, p$in_R, 0.9)
   eqn(r$value, p$v)
@@ -1416,6 +1423,7 @@ test_that("MDP value functions match Python", {
 })
 
 test_that("regularised regression costs share the MSE core", {
+  skip_on_cran()
   X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
   y <- c(2, 3, 6, 9)
   th <- c(0.5, 1.1)
@@ -1543,6 +1551,7 @@ test_that("regularised regression costs share the MSE core", {
 })
 
 test_that("linear and logistic prediction heads match Python", {
+  skip_on_cran()
   p <- PY$grn002
   eqn(morie_geron_ch4_linear_regression_prediction(
     c(1, 2, -0.5), matrix(c(1, 4, 2, 0), 2, byrow = TRUE))$prediction, p$batch)
@@ -1620,6 +1629,7 @@ test_that("linear and logistic prediction heads match Python", {
 })
 
 test_that("softmax chain matches Python end to end", {
+  skip_on_cran()
   p <- PY$grn021
   r <- morie_geron_ch4_softmax_function(c(2, 1, 0.1), 1)
   eqn(r$probability, p$p)
@@ -1702,6 +1712,7 @@ test_that("softmax chain matches Python end to end", {
 })
 
 test_that("classification metrics match Python and brute force", {
+  skip_on_cran()
   p <- PY$grf1
   r <- morie_geron_f1_score(p$in_yt, p$in_yp, positive_class = 1)
   eqn(r$f1, p$f1)
@@ -1810,6 +1821,7 @@ test_that("classification metrics match Python and brute force", {
 })
 
 test_that("tree, forest and boosting routines match Python", {
+  skip_on_cran()
   p <- PY$grent
   r <- morie_geron_shannon_entropy(c(0, 0, 1, 1, 1, 2))
   eqn(r$entropy, p$entropy)
@@ -1893,6 +1905,7 @@ test_that("tree, forest and boosting routines match Python", {
 })
 
 test_that("preprocessing and encoders match Python", {
+  skip_on_cran()
   p <- PY$grimp
   Xi <- matrix(c(1, NA, 3, 2, NA, 2, 5, 8), 4, byrow = TRUE)
   r <- morie_geron_simple_imputer(Xi, "mean")
@@ -1946,6 +1959,7 @@ test_that("preprocessing and encoders match Python", {
 })
 
 test_that("unsupervised routines match Python", {
+  skip_on_cran()
   p <- PY$grevr
   r <- morie_geron_explained_variance_ratio(p$in_sv, 0.95)
   eqn(r$explained_variance_ratio, p$evr)
@@ -2052,6 +2066,7 @@ test_that("unsupervised routines match Python", {
 })
 
 test_that("neural layers, cells and blocks match Python", {
+  skip_on_cran()
   p <- PY$grlinf
   r <- morie_geron_linear_layer_forward(matrix(c(1, 2, 3, 0, 1, -1), 2, byrow = TRUE),
                                         p$in_W, c(0.5, -0.5))
@@ -2197,6 +2212,7 @@ test_that("neural layers, cells and blocks match Python", {
 })
 
 test_that("attention family matches Python and FlashAttention is exact", {
+  skip_on_cran()
   p <- PY$grsdpa
   r <- morie_geron_scaled_dot_product_attention(p$in_Q, p$in_K, p$in_V)
   eqn(r$output, p$output)
@@ -2316,6 +2332,7 @@ test_that("attention family matches Python and FlashAttention is exact", {
 })
 
 test_that("language-model losses and tokenizer scores match Python", {
+  skip_on_cran()
   p <- PY$grgptl
   r <- morie_geron_gpt_autoregressive_loss(p$in_Z, c(0, 2, 1))
   eqn(r$loss, p$loss)
@@ -2400,6 +2417,7 @@ test_that("language-model losses and tokenizer scores match Python", {
 })
 
 test_that("optimizers, schedules and initializers match Python", {
+  skip_on_cran()
   p <- PY$grmom
   r <- morie_geron_momentum_update(c(1, -2), c(0.5, 0.25), c(0.1, -0.1), 0.05, 0.8)
   eqn(r$theta_new, p$theta)
@@ -2573,6 +2591,7 @@ test_that("optimizers, schedules and initializers match Python", {
 })
 
 test_that("autodiff routines match Python", {
+  skip_on_cran()
   p <- PY$grfad
   r <- morie_geron_forward_mode_autodiff(1.3, 1, function(z) (z * z + 3) / (z + 1))
   eqn(r$value, p$value)
@@ -2617,6 +2636,7 @@ test_that("autodiff routines match Python", {
 })
 
 test_that("autoencoder, VAE and GAN objectives match Python", {
+  skip_on_cran()
   p <- PY$grkldg
   r <- morie_geron_kl_divergence_gaussian(p$in_mu, p$in_lv)
   eqn(r$kl, p$kl)
@@ -2687,6 +2707,7 @@ test_that("autoencoder, VAE and GAN objectives match Python", {
 })
 
 test_that("quantization, pruning and precision routines match Python", {
+  skip_on_cran()
   p <- PY$grq8
   r <- morie_geron_int8_quantization(p$in_x)
   eqn(r$q, p$q)
@@ -2750,6 +2771,7 @@ test_that("quantization, pruning and precision routines match Python", {
 })
 
 test_that("detection, overfitting and misc routines match Python", {
+  skip_on_cran()
   p <- PY$gryol
   r <- morie_geron_yolo_grid_loss(p$in_P, p$in_T)
   eqn(r$loss, p$loss)

@@ -1,9 +1,15 @@
 test_that("morie_list_morie_modules exposes implemented module names", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   mods <- morie_list_morie_modules()
   expect_true(all(c("power-design", "propensity-scores", "ebac-selection-adjustment-ipw") %in% mods$name))
 })
 
 test_that("morie_fetch_ckan pulls CPADS PUMF from the open.canada.ca datastore", {
+  skip_on_cran()
   # CPADS 2021-2022 PUMF is a public open-data release queried through
   # the CKAN datastore_search API. Network-dependent, so skipped on CRAN
   # and offline machines per policy; runs wherever the API is reachable.
@@ -20,6 +26,7 @@ test_that("morie_fetch_ckan pulls CPADS PUMF from the open.canada.ca datastore",
 })
 
 test_that("morie_list_datasets shows all catalog entries", {
+  skip_on_cran()
   skip_if_not_installed("DBI")
   skip_if_not_installed("RSQLite")
   skip_if_not(requireNamespace("DBI", quietly = TRUE), "DBI not installed")
@@ -30,12 +37,14 @@ test_that("morie_list_datasets shows all catalog entries", {
 })
 
 test_that("dataset catalog has expected structure", {
+  skip_on_cran()
   cat <- morie_dataset_catalog()
   expect_true(nrow(cat) >= 20)
   expect_true(all(c("key", "name", "source", "survey", "table_name") %in% names(cat)))
 })
 
 test_that("catalog exposes download-url columns with well-formed entries", {
+  skip_on_cran()
   cat <- morie_dataset_catalog()
   expect_true(all(c("download_url", "zip_member") %in% names(cat)))
   dl <- cat[nzchar(cat$download_url), ]

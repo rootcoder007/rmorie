@@ -4,6 +4,11 @@
 # fzedg, fzhdc, fzhok.
 
 test_that("load_dmt_imaging returns synthetic fallback structure", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   res <- rmorie:::load_dmt_imaging(
     subject_id = 1L,
     root = tempfile("no_such_root_")
@@ -20,6 +25,7 @@ test_that("load_dmt_imaging returns synthetic fallback structure", {
 })
 
 test_that("load_dmt_imaging synthetic record has eeg/fmri/behavioural", {
+  skip_on_cran()
   res <- rmorie:::load_dmt_imaging(
     subject_id = 3L,
     root = tempfile("missing_")
@@ -35,6 +41,7 @@ test_that("load_dmt_imaging synthetic record has eeg/fmri/behavioural", {
 })
 
 test_that("load_dmt_imaging handles NULL subject_id (all subjects)", {
+  skip_on_cran()
   res <- rmorie:::load_dmt_imaging(
     subject_id = NULL,
     root = tempfile("absent_")
@@ -45,6 +52,7 @@ test_that("load_dmt_imaging handles NULL subject_id (all subjects)", {
 })
 
 test_that("load_dmt_imaging accepts multiple subject ids", {
+  skip_on_cran()
   res <- rmorie:::load_dmt_imaging(
     subject_id = c(1L, 2L),
     root = tempfile("absent_")
@@ -75,6 +83,7 @@ test_that("load_dmt_imaging accepts multiple subject ids", {
 }
 
 test_that("preprocess_eeg returns cleaned record with expected names", {
+  skip_on_cran()
   rec <- .batch05_record()
   res <- rmorie:::preprocess_eeg(rec)
   expect_true(is.list(res))
@@ -91,6 +100,7 @@ test_that("preprocess_eeg returns cleaned record with expected names", {
 })
 
 test_that("preprocess_eeg respects custom bandpass/notch/threshold", {
+  skip_on_cran()
   rec <- .batch05_record(seed = 2L)
   res <- rmorie:::preprocess_eeg(rec,
     bandpass = c(2, 30), notch = 50,
@@ -103,6 +113,7 @@ test_that("preprocess_eeg respects custom bandpass/notch/threshold", {
 })
 
 test_that("preprocess_eeg warns when eeg matrices absent", {
+  skip_on_cran()
   rec <- .batch05_record()
   rec$eeg$data_dmt <- NULL
   rec$eeg$data_pcb <- NULL
@@ -112,6 +123,7 @@ test_that("preprocess_eeg warns when eeg matrices absent", {
 })
 
 test_that("preprocess_fmri returns cleaned record with expected names", {
+  skip_on_cran()
   rec <- .batch05_record()
   res <- rmorie:::preprocess_fmri(rec)
   expect_true(is.list(res))
@@ -126,6 +138,7 @@ test_that("preprocess_fmri returns cleaned record with expected names", {
 })
 
 test_that("preprocess_fmri respects custom threshold and component count", {
+  skip_on_cran()
   rec <- .batch05_record(seed = 3L)
   res <- rmorie:::preprocess_fmri(rec,
     motion_threshold_mm = 0.1,
@@ -137,6 +150,7 @@ test_that("preprocess_fmri respects custom threshold and component count", {
 })
 
 test_that("preprocess_fmri warns when motion absent and matrices missing", {
+  skip_on_cran()
   rec <- .batch05_record()
   rec$fmri$motion_fd_mm <- NULL
   res1 <- rmorie:::preprocess_fmri(rec)
@@ -151,6 +165,7 @@ test_that("preprocess_fmri warns when motion absent and matrices missing", {
 })
 
 test_that("morie_ewma_volatility returns the documented structure", {
+  skip_on_cran()
   set.seed(10)
   x <- stats::rnorm(200)
   res <- morie_ewma_volatility(x)
@@ -170,6 +185,7 @@ test_that("morie_ewma_volatility returns the documented structure", {
 })
 
 test_that("morie_ewma_volatility honours a custom lambda", {
+  skip_on_cran()
   set.seed(11)
   x <- stats::rnorm(50)
   res <- morie_ewma_volatility(x, lambda = 0.8)
@@ -178,12 +194,14 @@ test_that("morie_ewma_volatility honours a custom lambda", {
 })
 
 test_that("morie_ewma_volatility errors on bad input", {
+  skip_on_cran()
   expect_error(morie_ewma_volatility(1))
   expect_error(morie_ewma_volatility(stats::rnorm(10), lambda = 0))
   expect_error(morie_ewma_volatility(stats::rnorm(10), lambda = 1))
 })
 
 test_that("morie_extreme_value_gev fits a GEV and returns SEs", {
+  skip_on_cran()
   set.seed(20)
   x <- stats::rnorm(300, mean = 10, sd = 2)
   res <- morie_extreme_value_gev(x)
@@ -201,6 +219,7 @@ test_that("morie_extreme_value_gev fits a GEV and returns SEs", {
 })
 
 test_that("morie_extreme_value_gev returns NA path for too-few obs", {
+  skip_on_cran()
   res <- morie_extreme_value_gev(c(1, 2, 3))
   expect_true(is.list(res))
   expect_true(is.na(res$estimate))
@@ -208,6 +227,7 @@ test_that("morie_extreme_value_gev returns NA path for too-few obs", {
 })
 
 test_that("morie_fast_available returns a logical scalar", {
+  skip_on_cran()
   res <- morie_fast_available()
   expect_type(res, "logical")
   expect_length(res, 1L)
@@ -215,6 +235,7 @@ test_that("morie_fast_available returns a logical scalar", {
 })
 
 test_that("internal fast kernels match base-R results", {
+  skip_on_cran()
   set.seed(30)
   x <- stats::rnorm(40)
   y <- stats::rnorm(40)
@@ -234,11 +255,13 @@ test_that("internal fast kernels match base-R results", {
 })
 
 test_that("internal morie_var handles degenerate ddof", {
+  skip_on_cran()
   res <- rmorie:::morie_var(c(1), ddof = 1)
   expect_true(is.na(res))
 })
 
 test_that("flash_attention self-attention returns expected shape", {
+  skip_on_cran()
   set.seed(40)
   Q <- matrix(stats::rnorm(10 * 4), 10, 4)
   res <- rmorie:::flash_attention(Q)
@@ -250,6 +273,7 @@ test_that("flash_attention self-attention returns expected shape", {
 })
 
 test_that("flash_attention accepts separate K, V and a mask", {
+  skip_on_cran()
   set.seed(41)
   Q <- matrix(stats::rnorm(6 * 3), 6, 3)
   K <- matrix(stats::rnorm(8 * 3), 8, 3)
@@ -265,6 +289,7 @@ test_that("flash_attention accepts separate K, V and a mask", {
 })
 
 test_that("morie_fairness_disparate_impact detects adverse impact", {
+  skip_on_cran()
   pred <- c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0)
   race <- c(rep("A", 5), rep("B", 5))
   res <- morie_fairness_disparate_impact(pred, race, privileged = "A")
@@ -281,6 +306,7 @@ test_that("morie_fairness_disparate_impact detects adverse impact", {
 })
 
 test_that("morie_fairness_disparate_impact infers privileged group with warning", {
+  skip_on_cran()
   pred <- c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0)
   race <- c(rep("A", 5), rep("B", 5))
   res <- morie_fairness_disparate_impact(pred, race)
@@ -289,6 +315,7 @@ test_that("morie_fairness_disparate_impact infers privileged group with warning"
 })
 
 test_that("morie_fairness_disparate_impact errors on bad inputs", {
+  skip_on_cran()
   expect_error(morie_fairness_disparate_impact(c(1, 0), c("A", "A")))
   expect_error(morie_fairness_disparate_impact(c(1, 0, 1),
     c("A", "B", "B"),
@@ -298,6 +325,7 @@ test_that("morie_fairness_disparate_impact errors on bad inputs", {
 })
 
 test_that("morie_fairness_demographic_parity reports the parity gap", {
+  skip_on_cran()
   pred <- c(1, 1, 1, 1, 0, 0, 0, 1, 0, 0)
   race <- c(rep("A", 5), rep("B", 5))
   res <- morie_fairness_demographic_parity(pred, race, privileged = "A")
@@ -311,6 +339,7 @@ test_that("morie_fairness_demographic_parity reports the parity gap", {
 })
 
 test_that("morie_fairness_equalized_odds flags a TPR/FPR violation", {
+  skip_on_cran()
   truth <- c(1, 0, 1, 0, 1, 0, 1, 0)
   pred <- c(1, 0, 1, 0, 1, 1, 0, 1)
   race <- c(rep("A", 4), rep("B", 4))
@@ -325,6 +354,7 @@ test_that("morie_fairness_equalized_odds flags a TPR/FPR violation", {
 })
 
 test_that("morie_fairness_equalized_odds errors on mismatched lengths", {
+  skip_on_cran()
   expect_error(morie_fairness_equalized_odds(
     c(1, 0), c(1, 0, 1),
     c("A", "B", "A")
@@ -332,6 +362,7 @@ test_that("morie_fairness_equalized_odds errors on mismatched lengths", {
 })
 
 test_that("morie_fairness_average_odds_difference returns AOD breakdown", {
+  skip_on_cran()
   truth <- c(1, 0, 1, 0, 1, 0, 1, 0)
   pred <- c(1, 0, 1, 0, 1, 1, 0, 1)
   race <- c(rep("A", 4), rep("B", 4))
@@ -348,6 +379,7 @@ test_that("morie_fairness_average_odds_difference returns AOD breakdown", {
 })
 
 test_that("morie_fairness_gini ranges from 0 to near 1", {
+  skip_on_cran()
   eq <- morie_fairness_gini(c(5, 5, 5, 5))
   expect_true(is.list(eq))
   expect_true(all(c(
@@ -362,6 +394,7 @@ test_that("morie_fairness_gini ranges from 0 to near 1", {
 })
 
 test_that("morie_fairness_gini supports per-group breakdown and negatives", {
+  skip_on_cran()
   res <- morie_fairness_gini(c(1, 2, 3, 4, 5, 6),
     group = c("A", "A", "A", "B", "B", "B")
   )
@@ -373,10 +406,12 @@ test_that("morie_fairness_gini supports per-group breakdown and negatives", {
 })
 
 test_that("morie_fairness_gini errors on empty input", {
+  skip_on_cran()
   expect_error(morie_fairness_gini(numeric(0)))
 })
 
 test_that("morie_fairness_bias_amplification returns composite score", {
+  skip_on_cran()
   pred <- c(1, 1, 1, 1, 0, 0, 0, 0)
   race <- c(rep("A", 4), rep("B", 4))
   res <- morie_fairness_bias_amplification(pred, race, privileged = "A")
@@ -392,6 +427,7 @@ test_that("morie_fairness_bias_amplification returns composite score", {
 })
 
 test_that("morie_predpol_aggregate_areas rolls records up per area", {
+  skip_on_cran()
   agg <- morie_predpol_aggregate_areas(
     area = c("a", "a", "b", "b"), risk = c(10, 20, 30, 40),
     outcome = c(1, 0, 1, 1)
@@ -409,6 +445,7 @@ test_that("morie_predpol_aggregate_areas rolls records up per area", {
 })
 
 test_that("morie_predpol_aggregate_areas handles group and named population", {
+  skip_on_cran()
   agg <- morie_predpol_aggregate_areas(
     area = c("a", "a", "b", "b"), risk = c(10, 20, 30, 40),
     outcome = c(2, 1, 5, 4),
@@ -420,6 +457,7 @@ test_that("morie_predpol_aggregate_areas handles group and named population", {
 })
 
 test_that("morie_predpol_aggregate_areas accepts per-record population", {
+  skip_on_cran()
   agg <- morie_predpol_aggregate_areas(
     area = c("a", "a", "b", "b"), risk = c(10, 20, 30, 40),
     outcome = c(2, 1, 5, 4),
@@ -429,6 +467,7 @@ test_that("morie_predpol_aggregate_areas accepts per-record population", {
 })
 
 test_that("morie_predpol_aggregate_areas errors on misaligned inputs", {
+  skip_on_cran()
   expect_error(morie_predpol_aggregate_areas(
     c("a", "b"), c(1, 2, 3),
     c(1, 0)
@@ -442,6 +481,7 @@ test_that("morie_predpol_aggregate_areas errors on misaligned inputs", {
 })
 
 test_that("morie_predpol_calibration_audit reports Spearman and rank gaps", {
+  skip_on_cran()
   res <- morie_predpol_calibration_audit(
     areas = c("d1", "d2", "d3", "d4", "d5", "d6"),
     mean_risk = c(90, 80, 70, 30, 20, 10),
@@ -460,6 +500,7 @@ test_that("morie_predpol_calibration_audit reports Spearman and rank gaps", {
 })
 
 test_that("morie_predpol_calibration_audit drops non-finite areas", {
+  skip_on_cran()
   res <- morie_predpol_calibration_audit(
     areas = c("d1", "d2", "d3", "d4"),
     mean_risk = c(90, 80, NA, 30),
@@ -470,6 +511,7 @@ test_that("morie_predpol_calibration_audit drops non-finite areas", {
 })
 
 test_that("morie_predpol_calibration_audit errors on bad input", {
+  skip_on_cran()
   expect_error(morie_predpol_calibration_audit(c("d1"), c(1), c(1), c("X")))
   expect_error(morie_predpol_calibration_audit(
     c("d1", "d2"), c(1, 2),
@@ -478,6 +520,7 @@ test_that("morie_predpol_calibration_audit errors on bad input", {
 })
 
 test_that("morie_predpol_score_disparity returns ANOVA-backed summary", {
+  skip_on_cran()
   res <- morie_predpol_score_disparity(
     score = c(9, 10, 11, 19, 20, 21),
     group = c("A", "A", "A", "B", "B", "B")
@@ -495,6 +538,7 @@ test_that("morie_predpol_score_disparity returns ANOVA-backed summary", {
 })
 
 test_that("morie_predpol_score_disparity honours explicit reference", {
+  skip_on_cran()
   res <- morie_predpol_score_disparity(
     score = c(9, 10, 11, 19, 20, 21),
     group = c("A", "A", "A", "B", "B", "B"),
@@ -504,6 +548,7 @@ test_that("morie_predpol_score_disparity honours explicit reference", {
 })
 
 test_that("morie_predpol_score_disparity errors on bad input", {
+  skip_on_cran()
   expect_error(morie_predpol_score_disparity(c(1, 2, 3), c("A", "A")))
   expect_error(morie_predpol_score_disparity(
     c(1, 2, 3),
@@ -516,6 +561,7 @@ test_that("morie_predpol_score_disparity errors on bad input", {
 })
 
 test_that("morie_predpol_temporal_audit audits cells across periods", {
+  skip_on_cran()
   period <- c(rep("p1", 10), rep("p2", 10))
   city <- rep("A", 20)
   pred <- rep(c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0), 2)
@@ -535,6 +581,7 @@ test_that("morie_predpol_temporal_audit audits cells across periods", {
 })
 
 test_that("morie_predpol_temporal_audit infers privileged group with warning", {
+  skip_on_cran()
   period <- c(rep("p1", 10), rep("p2", 10))
   city <- rep("A", 20)
   pred <- rep(c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0), 2)
@@ -545,6 +592,7 @@ test_that("morie_predpol_temporal_audit infers privileged group with warning", {
 })
 
 test_that("morie_predpol_temporal_audit errors on misaligned/empty input", {
+  skip_on_cran()
   expect_error(morie_predpol_temporal_audit(
     c("p1", "p2"), c("A"),
     c(1, 0), c("X", "Y")
@@ -556,6 +604,7 @@ test_that("morie_predpol_temporal_audit errors on misaligned/empty input", {
 })
 
 test_that("morie_fwpas_forward_pass_dense computes a matrix forward pass", {
+  skip_on_cran()
   set.seed(50)
   x <- matrix(stats::rnorm(6 * 4), 6, 4)
   w <- matrix(stats::rnorm(3 * 4), 3, 4)
@@ -569,6 +618,7 @@ test_that("morie_fwpas_forward_pass_dense computes a matrix forward pass", {
 })
 
 test_that("morie_fwpas_forward_pass_dense supports all activations", {
+  skip_on_cran()
   set.seed(51)
   x <- matrix(stats::rnorm(5 * 4), 5, 4)
   w <- matrix(stats::rnorm(3 * 4), 3, 4)
@@ -588,6 +638,7 @@ test_that("morie_fwpas_forward_pass_dense supports all activations", {
 })
 
 test_that("morie_fwpas_forward_pass_dense errors on unknown activation", {
+  skip_on_cran()
   x <- matrix(stats::rnorm(8), 2, 4)
   w <- matrix(stats::rnorm(12), 3, 4)
   b <- stats::rnorm(3)
@@ -595,6 +646,7 @@ test_that("morie_fwpas_forward_pass_dense errors on unknown activation", {
 })
 
 test_that("morie_forward_pass_dense alias matches morie_fwpas_forward_pass_dense", {
+  skip_on_cran()
   set.seed(52)
   x <- matrix(stats::rnorm(4 * 3), 4, 3)
   w <- matrix(stats::rnorm(2 * 3), 2, 3)
@@ -606,6 +658,7 @@ test_that("morie_forward_pass_dense alias matches morie_fwpas_forward_pass_dense
 })
 
 test_that("fzbrd returns a bias-reduced KDFE estimate", {
+  skip_on_cran()
   set.seed(60)
   x <- stats::rnorm(400)
   res <- fzbrd(x, t = 0)
@@ -621,6 +674,7 @@ test_that("fzbrd returns a bias-reduced KDFE estimate", {
 })
 
 test_that("fzbrd uses default t/h and custom c", {
+  skip_on_cran()
   set.seed(61)
   x <- stats::rnorm(120)
   res <- fzbrd(x, c = 3)
@@ -630,6 +684,7 @@ test_that("fzbrd uses default t/h and custom c", {
 })
 
 test_that("fzbrd handles too-few obs and invalid c", {
+  skip_on_cran()
   res <- fzbrd(c(1))
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 1L)
@@ -637,12 +692,14 @@ test_that("fzbrd handles too-few obs and invalid c", {
 })
 
 test_that("morie_fauzi_bias_reduced_kdfe alias matches fzbrd", {
+  skip_on_cran()
   set.seed(62)
   x <- stats::rnorm(80)
   expect_equal(morie_fauzi_bias_reduced_kdfe(x, t = 0), fzbrd(x, t = 0))
 })
 
 test_that("fzcvm computes a smoothed Cramer-von Mises statistic", {
+  skip_on_cran()
   set.seed(70)
   x <- stats::rnorm(300)
   res <- fzcvm(x, cdf = "norm", args = list(0, 1))
@@ -655,6 +712,7 @@ test_that("fzcvm computes a smoothed Cramer-von Mises statistic", {
 })
 
 test_that("fzcvm accepts a function CDF and default args", {
+  skip_on_cran()
   set.seed(71)
   x <- stats::runif(150)
   res_fun <- fzcvm(x, cdf = function(t) punif(t))
@@ -665,6 +723,7 @@ test_that("fzcvm accepts a function CDF and default args", {
 })
 
 test_that("fzcvm handles too-few obs and bad cdf", {
+  skip_on_cran()
   res <- fzcvm(c(1, 2, 3))
   expect_true(is.na(res$statistic))
   expect_equal(res$n, 3L)
@@ -672,6 +731,7 @@ test_that("fzcvm handles too-few obs and bad cdf", {
 })
 
 test_that("morie_fauzi_cvm_smoothed alias matches fzcvm", {
+  skip_on_cran()
   set.seed(72)
   x <- stats::rnorm(60)
   expect_equal(
@@ -681,6 +741,7 @@ test_that("morie_fauzi_cvm_smoothed alias matches fzcvm", {
 })
 
 test_that("fzedg returns Edgeworth correction components", {
+  skip_on_cran()
   res <- fzedg(1:50, z = 1.96, p = 0.5)
   expect_true(is.list(res))
   expect_named(res, c(
@@ -695,6 +756,7 @@ test_that("fzedg returns Edgeworth correction components", {
 })
 
 test_that("fzedg handles a skewed quantile probability", {
+  skip_on_cran()
   res <- fzedg(1:80, z = 1.64, p = 0.9)
   expect_true(is.finite(res$skew))
   expect_true(res$skew != 0)
@@ -702,16 +764,19 @@ test_that("fzedg handles a skewed quantile probability", {
 })
 
 test_that("fzedg handles too-few obs", {
+  skip_on_cran()
   res <- fzedg(c(1, 2, 3))
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 3L)
 })
 
 test_that("morie_fauzi_edgeworth_quantile alias matches fzedg", {
+  skip_on_cran()
   expect_equal(morie_fauzi_edgeworth_quantile(1:30), fzedg(1:30))
 })
 
 test_that("fzhdc computes a Hoeffding decomposition", {
+  skip_on_cran()
   set.seed(80)
   x <- stats::rnorm(150)
   res <- fzhdc(x)
@@ -728,6 +793,7 @@ test_that("fzhdc computes a Hoeffding decomposition", {
 })
 
 test_that("fzhdc subsamples pairs when above max_pairs", {
+  skip_on_cran()
   set.seed(81)
   x <- stats::rnorm(200)
   res <- fzhdc(x, max_pairs = 300L, seed = 1L)
@@ -736,6 +802,7 @@ test_that("fzhdc subsamples pairs when above max_pairs", {
 })
 
 test_that("fzhdc accepts a custom kernel and handles too-few obs", {
+  skip_on_cran()
   set.seed(82)
   x <- stats::rnorm(60)
   res <- fzhdc(x, kernel = function(a, b) abs(a - b))
@@ -747,12 +814,14 @@ test_that("fzhdc accepts a custom kernel and handles too-few obs", {
 })
 
 test_that("morie_fauzi_h_decomposition alias matches fzhdc", {
+  skip_on_cran()
   set.seed(83)
   x <- stats::rnorm(40)
   expect_equal(morie_fauzi_h_decomposition(x), fzhdc(x))
 })
 
 test_that("fzhok computes an order-4 kernel density estimate", {
+  skip_on_cran()
   set.seed(90)
   x <- stats::rnorm(2000)
   res <- fzhok(x, t = 0)
@@ -768,6 +837,7 @@ test_that("fzhok computes an order-4 kernel density estimate", {
 })
 
 test_that("fzhok uses default t/h and rejects non-4 orders", {
+  skip_on_cran()
   set.seed(91)
   x <- stats::rnorm(100)
   res <- fzhok(x)
@@ -777,12 +847,14 @@ test_that("fzhok uses default t/h and rejects non-4 orders", {
 })
 
 test_that("fzhok handles too-few obs", {
+  skip_on_cran()
   res <- fzhok(c(1))
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 1L)
 })
 
 test_that("morie_fauzi_higher_order_kernel alias matches fzhok", {
+  skip_on_cran()
   set.seed(92)
   x <- stats::rnorm(80)
   expect_equal(morie_fauzi_higher_order_kernel(x, t = 0), fzhok(x, t = 0))

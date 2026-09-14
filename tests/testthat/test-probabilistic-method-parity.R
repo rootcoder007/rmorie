@@ -11,6 +11,11 @@
 # grade.
 
 test_that("the first-moment Ramsey bound matches Python", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   for (kv in list(c(4, 6), c(6, 17), c(10, 100), c(15, 792), c(20, 5817))) {
     expect_equal(morie_first_moment_ramsey(kv[1])$bound, kv[2])
   }
@@ -19,12 +24,14 @@ test_that("the first-moment Ramsey bound matches Python", {
 })
 
 test_that("the expected count at the bound is below one", {
+  skip_on_cran()
   for (k in c(4, 6, 10, 20)) {
     expect_lt(morie_first_moment_ramsey(k)$expected_at_bound, 1)
   }
 })
 
 test_that("a capped search reports the cap rather than a bound", {
+  skip_on_cran()
   expect_false(morie_first_moment_ramsey(20)$search_capped)
   big <- morie_first_moment_ramsey(30)
   expect_true(big$search_capped)
@@ -32,6 +39,7 @@ test_that("a capped search reports the cap rather than a bound", {
 })
 
 test_that("the alteration bound matches Python exactly", {
+  skip_on_cran()
   ref <- list(c(4, 5, 6, -1), c(6, 17, 17, 0), c(10, 115, 100, 15),
               c(15, 979, 792, 187), c(20, 7446, 5817, 1629))
   for (r in ref) {
@@ -43,6 +51,7 @@ test_that("the alteration bound matches Python exactly", {
 })
 
 test_that("alteration beats the union bound for moderate k", {
+  skip_on_cran()
   for (k in c(8, 10, 15, 20)) {
     a <- morie_alteration_ramsey(k)
     expect_gt(a$bound, a$first_moment_bound)
@@ -50,6 +59,7 @@ test_that("alteration beats the union bound for moderate k", {
 })
 
 test_that("alteration is NOT uniformly better and reports the maximum", {
+  skip_on_cran()
   a4 <- morie_alteration_ramsey(4)
   expect_equal(a4$improvement, -1)
   expect_equal(a4$best_bound, 6)
@@ -61,6 +71,7 @@ test_that("alteration is NOT uniformly better and reports the maximum", {
 })
 
 test_that("both Ramsey bounds lie below the truth where it is known", {
+  skip_on_cran()
   for (k in c(3, 4)) {
     expect_lt(morie_first_moment_ramsey(k)$bound,
               morie_ramsey_number(k, k)$value)
@@ -74,6 +85,7 @@ test_that("both Ramsey bounds lie below the truth where it is known", {
 # ------------------------------------------------------------------
 
 test_that("the Local Lemma condition matches Python", {
+  skip_on_cran()
   l <- morie_lovasz_local_lemma(0.01, 20)
   expect_equal(l$condition_value, 0.57083918397639954, tolerance = 1e-12)
   expect_true(l$applies)
@@ -84,6 +96,7 @@ test_that("the Local Lemma condition matches Python", {
 })
 
 test_that("the Local Lemma succeeds where the union bound cannot", {
+  skip_on_cran()
   # the union bound scales with the NUMBER of events; the Local Lemma
   # does not care how many there are, only how entangled each is
   expect_false(morie_union_bound_exists(100000, 0.01)$exists)
@@ -91,6 +104,7 @@ test_that("the Local Lemma succeeds where the union bound cannot", {
 })
 
 test_that("the reported maximum degree is the largest that works", {
+  skip_on_cran()
   for (p in c(0.001, 0.01, 0.05)) {
     dmax <- morie_lovasz_local_lemma(p, 1)$max_degree_at_p
     expect_true(morie_lovasz_local_lemma(p, dmax)$applies)
@@ -99,6 +113,7 @@ test_that("the reported maximum degree is the largest that works", {
 })
 
 test_that("the reported maximum probability is the boundary", {
+  skip_on_cran()
   for (d in c(5, 20, 100)) {
     pmax <- morie_lovasz_local_lemma(0.001, d)$max_probability_at_d
     expect_true(morie_lovasz_local_lemma(pmax, d)$applies)
@@ -111,6 +126,7 @@ test_that("the reported maximum probability is the boundary", {
 # ------------------------------------------------------------------
 
 test_that("the Chernoff bounds match Python", {
+  skip_on_cran()
   # The BOUNDS are closed-form exponentials and agree to 1e-12. The
   # exact tails are summed by different routes -- R's dbinom against
   # Python's explicit comb * p^i * (1-p)^(n-i) -- so they agree to
@@ -132,6 +148,7 @@ test_that("the Chernoff bounds match Python", {
 })
 
 test_that("the upper bound is never violated", {
+  skip_on_cran()
   set.seed(21)
   for (i in seq_len(200L)) {
     n <- sample.int(191, 1) + 9L
@@ -144,6 +161,7 @@ test_that("the upper bound is never violated", {
 })
 
 test_that("the lower bound is never violated", {
+  skip_on_cran()
   set.seed(22)
   for (i in seq_len(200L)) {
     n <- sample.int(191, 1) + 9L
@@ -154,12 +172,14 @@ test_that("the lower bound is never violated", {
 })
 
 test_that("a vacuous bound is flagged rather than reported as useful", {
+  skip_on_cran()
   out <- morie_chernoff_bound(100, 0.5, 50)
   expect_true(out$vacuous)
   expect_true(any(grepl("says nothing", out$warnings)))
 })
 
 test_that("the bound tightens as the deviation grows", {
+  skip_on_cran()
   bounds <- vapply(c(0.1, 0.2, 0.3, 0.4), function(d) {
     morie_chernoff_bound(200, 0.5, 100 * (1 + d))$bound
   }, numeric(1))
@@ -171,11 +191,13 @@ test_that("the bound tightens as the deviation grows", {
 # ------------------------------------------------------------------
 
 test_that("the Azuma bound matches Python", {
+  skip_on_cran()
   expect_equal(morie_azuma_bound(100, 1, 30)$bound, 0.022217993076484612,
                tolerance = 1e-12)
 })
 
 test_that("Azuma bounds a simulated random walk", {
+  skip_on_cran()
   set.seed(23)
   n <- 100L
   reps <- 4000L
@@ -189,6 +211,7 @@ test_that("Azuma bounds a simulated random walk", {
 })
 
 test_that("Azuma is conservative, as a step-size-only bound must be", {
+  skip_on_cran()
   set.seed(24)
   n <- 100L
   reps <- 4000L
@@ -202,6 +225,7 @@ test_that("Azuma is conservative, as a step-size-only bound must be", {
 })
 
 test_that("the typical deviation is c root n", {
+  skip_on_cran()
   out <- morie_azuma_bound(100, 2, 40)
   expect_equal(out$typical_deviation, 20)
   expect_equal(out$deviations_out, 2)
@@ -212,12 +236,14 @@ test_that("the typical deviation is c root n", {
 # ------------------------------------------------------------------
 
 test_that("the second moment bound matches Python", {
+  skip_on_cran()
   out <- morie_second_moment_threshold(100, 50)
   expect_equal(out$p_zero_bound, 0.005, tolerance = 1e-15)
   expect_true(out$positive_whp)
 })
 
 test_that("a large relative variance gives nothing", {
+  skip_on_cran()
   out <- morie_second_moment_threshold(10, 200)
   expect_equal(out$p_zero_bound, 1)
   expect_true(out$vacuous)
@@ -225,12 +251,14 @@ test_that("a large relative variance gives nothing", {
 })
 
 test_that("the bound never exceeds one", {
+  skip_on_cran()
   for (p in list(c(1, 1e6), c(10, 1000), c(100, 1))) {
     expect_lte(morie_second_moment_threshold(p[1], p[2])$p_zero_bound, 1)
   }
 })
 
 test_that("probabilistic method input validation", {
+  skip_on_cran()
   expect_error(morie_union_bound_exists(-1, 0.5), "non-negative")
   expect_error(morie_union_bound_exists(10, 1.5), "must lie")
   expect_error(morie_first_moment_ramsey(1), "at least 2")

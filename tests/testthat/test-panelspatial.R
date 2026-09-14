@@ -1,4 +1,9 @@
 test_that("covariate balance recovers a known shift and equal weights are neutral", {
+  # 3s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(2)
   n <- 4000
   tr <- rbinom(n, 1, 0.5)
@@ -11,6 +16,7 @@ test_that("covariate balance recovers a known shift and equal weights are neutra
 })
 
 test_that("inverse-probability weights restore balance", {
+  skip_on_cran()
   set.seed(4)
   n <- 4000
   xx <- rnorm(n)
@@ -24,6 +30,7 @@ test_that("inverse-probability weights restore balance", {
 })
 
 test_that("Jacquez finds space-time clustering but not space-only", {
+  skip_on_cran()
   set.seed(3)
   centres <- matrix(runif(12), 6, 2)
   times <- runif(6, 0, 10)
@@ -42,11 +49,13 @@ test_that("Jacquez finds space-time clustering but not space-only", {
 })
 
 test_that("Jacquez saturates when space and time orderings agree", {
+  skip_on_cran()
   x <- matrix(seq_len(30), ncol = 1)
   expect_equal(morie_jacquez_knn(x, as.numeric(x), k = 2, B = 19)$statistic, 60)
 })
 
 test_that("Ripley K is non-decreasing and the CSR test separates the cases", {
+  skip_on_cran()
   set.seed(6)
   P <- matrix(runif(240), 120, 2)
   r <- morie_ripley_csr_test(P, nsim = 99)

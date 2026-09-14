@@ -12,6 +12,11 @@
 # module's own lookup).
 
 test_that("the KS statistic matches stats::ks.test", {
+  # 1s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   set.seed(31)
   for (i in 1:6) {
     x <- stats::runif(25)
@@ -50,6 +55,7 @@ test_that("the KS statistic matches stats::ks.test", {
 })
 
 test_that("the exact distribution of D agrees with ks.test's exact tail", {
+  skip_on_cran()
   set.seed(32)
   for (n in c(5L, 12L, 25L)) {
     x <- stats::runif(n)
@@ -78,6 +84,7 @@ test_that("the exact distribution of D agrees with ks.test's exact tail", {
 })
 
 test_that("the one-sided tail is the Birnbaum-Tingey formula", {
+  skip_on_cran()
   for (n in c(5L, 10L, 20L)) {
     for (c in c(0.1, 0.2, 0.35, 0.5)) {
       got <- rmorie:::Ksplusdist(c, n)
@@ -114,6 +121,7 @@ test_that("the one-sided tail is the Birnbaum-Tingey formula", {
 })
 
 test_that("the Kolmogorov limit is its alternating series", {
+  skip_on_cran()
   q <- rmorie:::.gbKsQ
   for (k in c(0.4, 0.8, 1.0, 1.36, 2.0)) {
     want <- 2 * sum((-1)^(seq_len(100) - 1) *
@@ -139,6 +147,7 @@ test_that("the Kolmogorov limit is its alternating series", {
 })
 
 test_that("the critical value inverts the exact distribution", {
+  skip_on_cran()
   for (n in c(8L, 20L)) {
     for (alpha in c(0.10, 0.05, 0.01)) {
       k <- rmorie:::Kscrit(n, alpha)
@@ -169,6 +178,7 @@ test_that("the critical value inverts the exact distribution", {
 })
 
 test_that("the confidence band is the EDF displaced by the critical value", {
+  skip_on_cran()
   x <- c(0.1, 0.3, 0.6, 0.9)
   b <- rmorie:::Ksband(x, dcrit = 0.2)
   expect_equal(b$at, sort(x))
@@ -192,6 +202,7 @@ test_that("the confidence band is the EDF displaced by the critical value", {
 })
 
 test_that("the sample size attains the requested uniform accuracy", {
+  skip_on_cran()
   for (c in c(0.2, 0.3)) {
     s <- rmorie:::Ksn(c, alpha = 0.05)
     # the asymptotic figure is (k_alpha / c)^2
@@ -212,6 +223,7 @@ test_that("the sample size attains the requested uniform accuracy", {
 })
 
 test_that("the Cramer-von Mises criterion is its closed form", {
+  skip_on_cran()
   set.seed(35)
   x <- stats::runif(20)
   z <- sort(stats::punif(sort(x)))
@@ -243,6 +255,7 @@ test_that("the Cramer-von Mises criterion is its closed form", {
 })
 
 test_that("the Lilliefors tests use their published tables", {
+  skip_on_cran()
   set.seed(36)
   x <- stats::rnorm(20)
   l <- rmorie:::Lillienorm(x, alpha = 0.05)

@@ -16,6 +16,11 @@ BS_A <- matrix(c(2, 0, 0, 1), 2, byrow = TRUE)
 BS_B <- matrix(c(1, 0, 0, 2), 2, byrow = TRUE)
 
 test_that("the Prisoner's Dilemma has one equilibrium, mutual defection", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   e <- nash_equilibria_bimatrix(PD_A, PD_B)
   expect_length(e, 1L)
   expect_equal(e[[1]]$p, c(0, 1))
@@ -26,6 +31,7 @@ test_that("the Prisoner's Dilemma has one equilibrium, mutual defection", {
 })
 
 test_that("Matching Pennies has one equilibrium, and it is mixed", {
+  skip_on_cran()
   e <- nash_equilibria_bimatrix(MP_A, MP_B)
   expect_length(e, 1L)
   expect_equal(e[[1]]$p, c(0.5, 0.5))
@@ -48,6 +54,7 @@ test_that("Matching Pennies has one equilibrium, and it is mixed", {
 })
 
 test_that("Battle of the Sexes has both pure profiles and the mixed one", {
+  skip_on_cran()
   e <- nash_equilibria_bimatrix(BS_A, BS_B)
   expect_length(e, 3L)
   ps <- lapply(e, function(z) z$p)
@@ -74,6 +81,7 @@ test_that("Battle of the Sexes has both pure profiles and the mixed one", {
 })
 
 test_that("expected payoffs are the bilinear form", {
+  skip_on_cran()
   p <- c(0.3, 0.7)
   q <- c(0.6, 0.4)
   expect_equal(.nashq_payoff(PD_A, p, q),
@@ -88,6 +96,7 @@ test_that("expected payoffs are the bilinear form", {
 })
 
 test_that("the linear solve agrees with base R", {
+  skip_on_cran()
   set.seed(3)
   for (n in c(1, 2, 4)) {
     A <- crossprod(matrix(rnorm(n * n), n)) + diag(n)
@@ -98,6 +107,7 @@ test_that("the linear solve agrees with base R", {
 })
 
 test_that("payoff matrices are coerced to double", {
+  skip_on_cran()
   expect_equal(.nashq_mat(matrix(1:4, 2), "A"), matrix(as.double(1:4), 2))
   expect_equal(storage.mode(.nashq_mat(matrix(1:4, 2), "A")), "double")
   # a one-by-one game is a degenerate but legal payoff matrix
@@ -105,6 +115,7 @@ test_that("payoff matrices are coerced to double", {
 })
 
 test_that("the stage game is classified by its equilibria", {
+  skip_on_cran()
   # the Prisoner's Dilemma equilibrium is a saddle: neither player can gain
   # by deviating and the opponent cannot be made worse off unilaterally
   pd <- stage_game_type(PD_A, PD_B)
@@ -141,6 +152,7 @@ test_that("the stage game is classified by its equilibria", {
 })
 
 test_that("saddle and global-optimal tests agree with their definitions", {
+  skip_on_cran()
   expect_true(.nashq_is_saddle(MP_A, MP_B, c(0.5, 0.5), c(0.5, 0.5), 1e-9))
   expect_true(.nashq_is_saddle(PD_A, PD_B, c(0, 1), c(0, 1), 1e-9))
   # a profile that is not an equilibrium cannot be a saddle
@@ -148,6 +160,7 @@ test_that("saddle and global-optimal tests agree with their definitions", {
 })
 
 test_that("Nash Q-learning on a repeated game finds the stage equilibrium", {
+  skip_on_cran()
   # one state, so the stochastic game is the Prisoner's Dilemma played
   # repeatedly and the Nash Q values must rank mutual defection first
   step <- function(s, a1, a2) "s"
@@ -180,6 +193,7 @@ test_that("Nash Q-learning on a repeated game finds the stage equilibrium", {
 })
 
 test_that("nashq validates its arguments", {
+  skip_on_cran()
   step <- function(s, a1, a2) "s"
   rewards <- function(s, a1, a2, s1) c(0, 0)
   ok <- list(states = list("s"),

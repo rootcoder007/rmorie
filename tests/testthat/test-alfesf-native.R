@@ -11,6 +11,11 @@
 #            (Jumper et al. 2021 SI 1.9.6, a binned expectation)
 
 test_that("d0 follows Zhang and Skolnick, with its floor", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   for (n in c(30L, 50L, 100L, 200L, 500L)) {
     expect_equal(.alfesf_d0(n), 1.24 * (n - 15)^(1 / 3) - 1.8, tolerance = 1e-12)
   }
@@ -31,6 +36,7 @@ test_that("d0 follows Zhang and Skolnick, with its floor", {
 })
 
 test_that("the bin centres are the midpoints of their bins", {
+  skip_on_cran()
   # pLDDT lives on 0..100, so nb bins of width 100/nb
   expect_equal(.alfesf_lddt_centres(5L), c(10, 30, 50, 70, 90))
   expect_equal(.alfesf_lddt_centres(2L), c(25, 75))
@@ -43,6 +49,7 @@ test_that("the bin centres are the midpoints of their bins", {
 })
 
 test_that("the row softmax is a distribution and honours the temperature", {
+  skip_on_cran()
   M <- matrix(c(1, 2, 3, 0, 0, 0), nrow = 2, byrow = TRUE)
   S <- .alfesf_softmax_rows(M, 1)
   expect_equal(rowSums(S), c(1, 1), tolerance = 1e-12)
@@ -62,6 +69,7 @@ test_that("the row softmax is a distribution and honours the temperature", {
 })
 
 test_that("pLDDT is the binned expectation of the logits", {
+  skip_on_cran()
   set.seed(2)
   nb <- 50L
   lg <- matrix(rnorm(6L * nb), 6L, nb)
@@ -80,6 +88,7 @@ test_that("pLDDT is the binned expectation of the logits", {
 })
 
 test_that("the temperature reaches the decoded pLDDT", {
+  skip_on_cran()
   set.seed(3)
   nb <- 50L
   lg <- matrix(rnorm(4L * nb), 4L, nb)
@@ -92,6 +101,7 @@ test_that("the temperature reaches the decoded pLDDT", {
 })
 
 test_that("the PAE route reshapes to a square matrix and reports pTM", {
+  skip_on_cran()
   set.seed(4)
   nres <- 6L; nb <- 8L
   pae_lg <- matrix(rnorm(nres * nres * nb), nres * nres, nb)
@@ -108,6 +118,7 @@ test_that("the PAE route reshapes to a square matrix and reports pTM", {
 })
 
 test_that("a fitted multinomial head reproduces the observations it saw", {
+  skip_on_cran()
   set.seed(1)
   n <- 60L
   X <- cbind(1, matrix(rnorm(n * 2), n, 2))
@@ -127,6 +138,7 @@ test_that("a fitted multinomial head reproduces the observations it saw", {
 })
 
 test_that("a supplied head is applied as given", {
+  skip_on_cran()
   set.seed(5)
   n <- 8L; p <- 3L; nb <- 50L
   X <- matrix(rnorm(n * p), n, p)
@@ -140,6 +152,7 @@ test_that("a supplied head is applied as given", {
 })
 
 test_that("temperature scaling lowers the negative log-likelihood", {
+  skip_on_cran()
   # Guo et al. (2017): a single scalar fitted on held-out logits
   set.seed(6)
   n <- 200L; k <- 5L
@@ -160,6 +173,7 @@ test_that("temperature scaling lowers the negative log-likelihood", {
 })
 
 test_that("the multinomial fit drives its own loss down", {
+  skip_on_cran()
   set.seed(7)
   n <- 80L; p <- 3L; nb <- 10L
   X <- cbind(1, matrix(rnorm(n * (p - 1)), n, p - 1))
@@ -178,6 +192,7 @@ test_that("the multinomial fit drives its own loss down", {
 })
 
 test_that("row coercion accepts the shapes it documents", {
+  skip_on_cran()
   m <- matrix(1:6, nrow = 2)
   expect_equal(.alfesf_rows(m, "x"), m, ignore_attr = FALSE)
   expect_equal(.alfesf_rows(as.data.frame(m), "x"), m, ignore_attr = TRUE)
@@ -186,6 +201,7 @@ test_that("row coercion accepts the shapes it documents", {
 })
 
 test_that("the inputs are validated", {
+  skip_on_cran()
   X <- matrix(rnorm(20), 10, 2)
   expect_error(morie_alfesf_esmfold_confidence(features = X, lddt = rnorm(3)),
                "feature rows but")

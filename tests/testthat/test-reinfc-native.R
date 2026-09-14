@@ -11,6 +11,11 @@
 # equation 10. reward_fn is called as reward_fn(y, x).
 
 test_that("the expected update is the closed form and ignores the baseline", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   for (p in c(0.05, 0.1, 0.5, 0.9, 0.95)) {
     for (b in c(0, -5, 10, 1e3)) {
       for (rr in list(c(0, 1), c(1, 0), c(-2, 3), c(4, 4))) {
@@ -27,6 +32,7 @@ test_that("the expected update is the closed form and ignores the baseline", {
 })
 
 test_that("Theorem 1 holds: the update never opposes the gradient", {
+  skip_on_cran()
   for (p in c(0.1, 0.4, 0.6, 0.9)) {
     for (b in c(-3, 0, 7)) {
       for (rr in list(c(0, 1), c(1, 0), c(-5, -1), c(2, -2))) {
@@ -42,6 +48,7 @@ test_that("Theorem 1 holds: the update never opposes the gradient", {
 })
 
 test_that("the expected update rejects a degenerate probability", {
+  skip_on_cran()
   expect_error(morie_reinfc_expected_update(0, 0, 1), "strictly in")
   expect_error(morie_reinfc_expected_update(1, 0, 1), "strictly in")
   expect_error(morie_reinfc_expected_update(-0.1, 0, 1), "strictly in")
@@ -49,6 +56,7 @@ test_that("the expected update rejects a degenerate probability", {
 })
 
 test_that("the logistic is the closed form and does not overflow", {
+  skip_on_cran()
   expect_equal(.reinfc_logistic(0), 0.5)
   expect_equal(.reinfc_logistic(2), 1 / (1 + exp(-2)), tolerance = 1e-15)
   expect_equal(.reinfc_logistic(-2), 1 - .reinfc_logistic(2), tolerance = 1e-14)
@@ -66,6 +74,7 @@ reward_one <- function(y, x) if (as.numeric(y)[1] == 1) 1 else 0
 reward_zero <- function(y, x) if (as.numeric(y)[1] == 0) 1 else 0
 
 test_that("a Bernoulli unit climbs toward the rewarded action", {
+  skip_on_cran()
   up <- morie_reinfc(reward_one, p = 0.5, unit = "bernoulli",
                      trials = 300L, seed = 1L)
   expect_gt(unlist(up$estimate)[1], 0.9)
@@ -83,6 +92,7 @@ test_that("a Bernoulli unit climbs toward the rewarded action", {
 })
 
 test_that("a Bernoulli unit already at the optimum stays there", {
+  skip_on_cran()
   r <- morie_reinfc(reward_one, p = 0.98, unit = "bernoulli",
                     trials = 200L, seed = 2L)
   expect_gt(unlist(r$estimate)[1], 0.9)
@@ -90,6 +100,7 @@ test_that("a Bernoulli unit already at the optimum stays there", {
 })
 
 test_that("a Gaussian unit moves its mean toward the reward's optimum", {
+  skip_on_cran()
   # The reward has to be bounded: Williams' convergence argument assumes
   # it, and with -(y - c)^2 the mean update is quadratic in mu and runs
   # away. A Gaussian bump is bounded and peaks where we want it.
@@ -110,6 +121,7 @@ test_that("a Gaussian unit moves its mean toward the reward's optimum", {
 })
 
 test_that("an unbounded reward is reported as divergence, not returned as NaN", {
+  skip_on_cran()
   runaway <- function(y, x) -(as.numeric(y)[1] + 3)^2
   expect_error(
     morie_reinfc(runaway, mu = 0, sigma = 1, unit = "gaussian",
@@ -119,6 +131,7 @@ test_that("an unbounded reward is reported as divergence, not returned as NaN", 
 })
 
 test_that("a logistic unit fits weights over its inputs", {
+  skip_on_cran()
   set.seed(3)
   X <- matrix(rnorm(40), 20, 2)
   # reward the action only when the first feature is positive
@@ -136,6 +149,7 @@ test_that("a logistic unit fits weights over its inputs", {
 })
 
 test_that("every baseline and mode runs and learns", {
+  skip_on_cran()
   for (b in c("none", "comparison", "mean")) {
     for (m in c("immediate", "episodic")) {
       r <- morie_reinfc(reward_one, p = 0.5, unit = "bernoulli", baseline = b,
@@ -150,6 +164,7 @@ test_that("every baseline and mode runs and learns", {
 })
 
 test_that("a run is reproducible from its seed", {
+  skip_on_cran()
   a <- morie_reinfc(reward_one, p = 0.5, unit = "bernoulli", trials = 100L, seed = 5L)
   b <- morie_reinfc(reward_one, p = 0.5, unit = "bernoulli", trials = 100L, seed = 5L)
   d <- morie_reinfc(reward_one, p = 0.5, unit = "bernoulli", trials = 100L, seed = 6L)
@@ -159,6 +174,7 @@ test_that("a run is reproducible from its seed", {
 })
 
 test_that("the baseline series follows its rule", {
+  skip_on_cran()
   rewards <- c(1, 0, 1, 1, 0)
   # no baseline is a zero series
   expect_equal(.reinfc_baseline_series(rewards, "none", 0.5), rep(0, 5))
@@ -174,6 +190,7 @@ test_that("the baseline series follows its rule", {
 })
 
 test_that("matrix coercion accepts the documented shapes", {
+  skip_on_cran()
   m <- matrix(c(1, 2, 3, 4), nrow = 2)
   expect_equal(.reinfc_as_matrix(m, "x"), m)
   expect_equal(.reinfc_as_matrix(as.data.frame(m), "x"), m, ignore_attr = TRUE)

@@ -19,6 +19,11 @@ toy <- function(n_users = 24L, n_items = 18L, n = 500L, seed = 1) {
 }
 
 test_that("the epoch returns the parameters it updated", {
+  # 2s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   d <- toy()
   R <- .funkM_as_ratings(d$ratings)
   mu <- .funkM_global_mean(R)
@@ -39,6 +44,7 @@ test_that("the epoch returns the parameters it updated", {
 })
 
 test_that("training reduces the error, epoch after epoch", {
+  skip_on_cran()
   d <- toy()
   fit <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 3,
                      epochs = 40, lr = 0.02, reg = 0.02, seed = 1)
@@ -54,6 +60,7 @@ test_that("training reduces the error, epoch after epoch", {
 })
 
 test_that("the fitted factors beat the bias-only baseline", {
+  skip_on_cran()
   d <- toy()
   fit <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 3,
                      epochs = 60, lr = 0.02, reg = 0.02, seed = 1)
@@ -73,6 +80,7 @@ test_that("the fitted factors beat the bias-only baseline", {
 })
 
 test_that("the returned factors are not the initialisation", {
+  skip_on_cran()
   d <- toy()
   one <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 3,
                      epochs = 1, lr = 0.02, seed = 1)
@@ -83,6 +91,7 @@ test_that("the returned factors are not the initialisation", {
 })
 
 test_that("the same seed reproduces the fit and a different one does not", {
+  skip_on_cran()
   d <- toy()
   a <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 3,
                    epochs = 20, lr = 0.02, seed = 5)
@@ -96,6 +105,7 @@ test_that("the same seed reproduces the fit and a different one does not", {
 })
 
 test_that("the incremental route trains one factor at a time and learns", {
+  skip_on_cran()
   d <- toy()
   fit <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 3,
                      lr = 0.02, reg = 0.02, seed = 1,
@@ -108,6 +118,7 @@ test_that("the incremental route trains one factor at a time and learns", {
 })
 
 test_that("a single factor still fits the marginal structure", {
+  skip_on_cran()
   d <- toy()
   f1 <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 1,
                     epochs = 40, lr = 0.02, seed = 1)
@@ -119,6 +130,7 @@ test_that("a single factor still fits the marginal structure", {
 })
 
 test_that("regularisation shrinks the factors", {
+  skip_on_cran()
   d <- toy()
   loose <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 3,
                        epochs = 40, lr = 0.02, reg = 0.0, seed = 1)
@@ -128,6 +140,7 @@ test_that("regularisation shrinks the factors", {
 })
 
 test_that("prediction is the bias model plus the factor dot product", {
+  skip_on_cran()
   expect_equal(
     .funkM_predict(3, 0.5, -0.25, matrix(c(1, 2), nrow = 1),
                    matrix(c(0.5, -1), nrow = 1)),
@@ -141,12 +154,14 @@ test_that("prediction is the bias model plus the factor dot product", {
 })
 
 test_that("the global mean is the mean of the observed ratings only", {
+  skip_on_cran()
   R <- .funkM_as_ratings(data.frame(u = c(0L, 1L, 2L), i = c(0L, 1L, 2L),
                                     r = c(1, 2, 6)))
   expect_equal(.funkM_global_mean(R), 3, tolerance = 1e-12)
 })
 
 test_that("the inputs are validated", {
+  skip_on_cran()
   d <- toy()
   expect_error(morie_funkM(d$ratings[0, ], 5L, 5L), "no ratings given")
   expect_error(morie_funkM(d$ratings, 0L, 5L), "counts must be positive")
@@ -158,6 +173,7 @@ test_that("the inputs are validated", {
 })
 
 test_that("the reported density and observation count describe the input", {
+  skip_on_cran()
   d <- toy(n = 300L)
   fit <- morie_funkM(d$ratings, d$n_users, d$n_items, factors = 2,
                      epochs = 5, seed = 1)

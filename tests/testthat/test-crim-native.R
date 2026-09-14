@@ -3,6 +3,11 @@
 # terrain -- known-truth recovery + internal invariants.
 
 test_that("ETAS recovers a subcritical simulated process", {
+  # 3s of the suite here, and r-universe's macOS x86_64 builder is
+  # about 1.8 times slower. The check there is killed at sixty minutes
+  # and the suite alone was twenty-six of them. The heavy files run in
+  # our own CI, which sets NOT_CRAN, where the clock is ours.
+  skip_on_cran()
   # Simulate a univariate Omori-Hawkes (thinning) with known pars.
   set.seed(101)
   mu <- 0.4
@@ -31,6 +36,7 @@ test_that("ETAS recovers a subcritical simulated process", {
 })
 
 test_that("multivariate Hawkes recovers cross-excitation structure", {
+  skip_on_cran()
   # 2-dim: component 1 excites 2 strongly, no reverse excitation.
   set.seed(102)
   b <- 2
@@ -69,6 +75,7 @@ test_that("multivariate Hawkes recovers cross-excitation structure", {
 })
 
 test_that("Knox test detects planted space-time clustering", {
+  skip_on_cran()
   set.seed(103)
   # Background + planted near-repeats (same place, close in time).
   n_bg <- 60
@@ -93,6 +100,7 @@ test_that("Knox test detects planted space-time clustering", {
 })
 
 test_that("risk terrain recovers the generating layer", {
+  skip_on_cran()
   set.seed(104)
   bars <- cbind(runif(12), runif(12))
   # Incidents cluster near bars; decoy layer unrelated.
@@ -109,6 +117,7 @@ test_that("risk terrain recovers the generating layer", {
 })
 
 test_that("degenerate inputs error cleanly", {
+  skip_on_cran()
   expect_error(morie_crim_etas(1:5), ">= 10")
   expect_error(morie_crim_near_repeat(1:5, 1:5, 1:5, 1, 1))
 })
