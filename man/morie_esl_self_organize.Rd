@@ -39,9 +39,11 @@ If the neighbourhood width decays too fast the SOM degenerates into online
 k-means, which is the usual cause of a map showing no topological ordering.
 }
 \examples{
+\donttest{
 set.seed(1)
 X <- matrix(runif(600), ncol = 2)
 morie_esl_self_organize(X, grid = c(5, 5), seed = 1L)$topographic_error < 0.25
+}
 }
 \references{
 Kohonen, T. (1990). The self-organizing map. Proc. IEEE 78(9),

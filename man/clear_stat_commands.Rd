@@ -13,10 +13,12 @@ The number of commands removed, invisibly.
 Reset the registry (test / debugging helper)
 }
 \examples{
+\donttest{
 n_cleared <- clear_stat_commands()
 n_stat_commands()
 rmorie:::.morie_seed_stat_commands()
 rmorie:::.morie_auto_register_stat_commands()
 n_stat_commands()
+}
 }
 \keyword{internal}

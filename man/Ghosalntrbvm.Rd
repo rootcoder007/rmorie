@@ -29,7 +29,9 @@ Formula: F_post(1) = (2 F0(1) + N_1) / (2 + n);
 Var(sqrt(n)(F_post(1) - F0(1))) -> F0(1)(1 - F0(1)).
 }
 \examples{
+\donttest{
 Ghosalntrbvm()
+}
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of

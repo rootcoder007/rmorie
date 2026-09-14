@@ -29,9 +29,11 @@ Spearman closed form lambda_i^2 = s_ij s_ik / s_jk, reported
 alongside as an independent read of the same data.
 }
 \examples{
+\donttest{
 set.seed(1)
 X <- matrix(rnorm(200), 50, 4)
 Cfaftr(X)
+}
 }
 \references{
 Joreskog (1969), Psychometrika 34(2):183-202;

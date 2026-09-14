@@ -34,7 +34,9 @@ the limit reported; \code{integrated_density} must equal C(0), and the
 shortfall is the tail truncated away.
 }
 \examples{
+\donttest{
 spwkth(function(h) exp(-2 * abs(h)), omega = c(0, 1, 3))$spectral_density
+}
 }
 \references{
 Schabenberger & Gotway (2005), Sec 2.5.3, eq (2.27), pp. 66-68.

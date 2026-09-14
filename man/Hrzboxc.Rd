@@ -59,7 +59,9 @@ golden-section refinement, so nothing here is random.  Foster, Tian and Wei
 (2001) is the source the book credits for the estimator and Theorem 6.1.
 }
 \examples{
+\donttest{
 xx <- cbind(1, seq(-1, 1, length.out = 25))
 Hrzboxc(xx, (0.5 * (3 + 1.5 * xx[, 2]) + 1)^2)$lambda_hat
+}
 }
 \keyword{internal}

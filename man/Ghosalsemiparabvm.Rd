@@ -32,8 +32,10 @@ Formula: psi(G_post) = (alpha/2 + sum_i X_i) / (alpha + n);
 Var(sqrt(n)(psi(G_post) - 1/2)) -> 1/12.
 }
 \examples{
+\donttest{
 set.seed(1)
 r <- Ghosalsemiparabvm(); TRUE
+}
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of

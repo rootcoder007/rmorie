@@ -54,6 +54,7 @@ reassigns treatment to every donor and compares post/pre RMSPE
 ratios (Abadie, Diamond & Hainmueller 2010).
 }
 \examples{
+\donttest{
 set.seed(1)
 pan <- expand.grid(unit = letters[1:6], time = 1:10)
 pan$y <- rnorm(nrow(pan)) + as.integer(pan$time) * 0.2 +
@@ -61,6 +62,7 @@ pan$y <- rnorm(nrow(pan)) + as.integer(pan$time) * 0.2 +
 fit <- morie_synth_control(pan, "y", "unit", "time",
                            treated_unit = "a", treatment_time = 7)
 fit$att
+}
 }
 \references{
 Abadie, A., Diamond, A., & Hainmueller, J. (2010).

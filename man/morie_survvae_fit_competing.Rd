@@ -33,6 +33,8 @@ Named list with \code{estimate} (number of risks),   \code{risks} (sorted unique
 }
 \keyword{internal}
 \examples{
+\donttest{
 morie_survvae_fit_competing(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
   causes = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 }

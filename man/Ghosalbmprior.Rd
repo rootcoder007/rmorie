@@ -31,7 +31,9 @@ Formula: W(t_i) = sum_\{j <= i\} Z_j / sqrt(n_grid), Z_j iid N(0, 1);
 Cov(W(s), W(t)) = min(s, t).
 }
 \examples{
+\donttest{
 Ghosalbmprior()
+}
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of

@@ -23,7 +23,9 @@ A list with \code{response}, \code{cepstrum}, \code{cutoff}, \code{pitch_period}
 }
 \keyword{internal}
 \examples{
+\donttest{
 set.seed(1)
 y <- sin(2 * pi * 120 * (0:1599) / 8000) + rnorm(1600) * 0.01
 VocalTract(y, fs = 8000)
+}
 }

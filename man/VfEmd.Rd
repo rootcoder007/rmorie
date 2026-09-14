@@ -21,10 +21,12 @@ A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{features}, \code{
 }
 \keyword{internal}
 \examples{
+\donttest{
 set.seed(2)
 fs <- 250
 tv <- seq(0, 2, by = 1 / fs)
 vf <- sin(2 * pi * 5 * tv + 2 * sin(2 * pi * 0.5 * tv)) +
   0.1 * rnorm(length(tv))
 str(VfEmd(vf, fs = fs), max.level = 1)
+}
 }

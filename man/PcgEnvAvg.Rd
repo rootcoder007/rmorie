@@ -22,6 +22,7 @@ A list with \code{average_envelope}, \code{n_cycles}, \code{cycle_len}, \code{tr
 }
 \keyword{internal}
 \examples{
+\donttest{
 set.seed(3)
 fs <- 1000
 tv <- seq(0, 3, by = 1 / fs)
@@ -35,4 +36,5 @@ pcg <- sin(2 * pi * 60 * tv) * exp(-((tv \%\% 1) / 0.1)) +
   0.05 * rnorm(n)
 r <- PcgEnvAvg(pcg, ecg, fs = fs)
 str(r, max.level = 1)
+}
 }

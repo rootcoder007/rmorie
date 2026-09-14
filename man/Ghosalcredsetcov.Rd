@@ -33,7 +33,9 @@ Formula: interval = m +/- z sd with m = a/(a+b) and
 sd^2 = ab / ((a+b)^2 (a+b+1)) for the Beta(1+S, 1+n-S) posterior.
 }
 \examples{
+\donttest{
 Ghosalcredsetcov()
+}
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of

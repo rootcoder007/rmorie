@@ -35,9 +35,11 @@ points inside a tight diagonal band score as anomalous even though
 they sit exactly on the data's own manifold.
 }
 \examples{
+\donttest{
 set.seed(1)
 X <- rbind(matrix(rnorm(200), ncol = 2), c(8, 8))
 which.max(morie_isolation_forest(X, n_trees = 50, seed = 1)$score)
+}
 }
 \references{
 Liu, F. T., Ting, K. M. and Zhou, Z.-H. (2008).

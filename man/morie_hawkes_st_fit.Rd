@@ -33,9 +33,11 @@ attributed to background). Interpret \eqn{\mu} vs \eqn{\alpha} cautiously and
 prefer large regions relative to \eqn{\sigma} and long records.
 }
 \examples{
+\donttest{
 ev <- morie_hawkes_st_simulate(
   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.4),
   end_time = 40, region = c(0, 10, 0, 10), seed = 7
 )
 morie_hawkes_st_fit(ev, end_time = 40, area = 100)$params
+}
 }

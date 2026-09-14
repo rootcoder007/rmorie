@@ -48,9 +48,11 @@ n_starts, so both language arms visit the same candidates in the same
 sequence and return the same numbers, not merely numbers of equal quality.
 }
 \examples{
+\donttest{
 set.seed(1)
 X <- cbind(rnorm(40), rnorm(40))
 X[1:4, ] <- X[1:4, ] + 8   # four outliers
 Fastm(X)$estimate
+}
 }
 \keyword{internal}

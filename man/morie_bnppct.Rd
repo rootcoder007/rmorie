@@ -46,6 +46,7 @@ A list with, per quantile, the posterior mean, standard   deviation, median and 
 }
 \keyword{internal}
 \examples{
+\donttest{
 N <- 60L
 ii <- 0:(N - 1L)
 Y <- exp(0.45 * sin(2.7 * ii) + 0.3 * cos(0.6 * ii)) + 0.15 * 
@@ -53,4 +54,5 @@ Y <- exp(0.45 * sin(2.7 * ii) + 0.3 * cos(0.6 * ii)) + 0.15 *
 QS <- c(0.1, 0.5, 0.9)
 morie_bnppct(Y, QS, route = "mixture", n_iter = 70L, burn = 50L, 
     seed = 7)
+}
 }

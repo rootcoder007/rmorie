@@ -28,8 +28,10 @@ p_B1 is the fraction of outer resamples whose inner-prepivoted
 statistic H*_b(T*_b) is at least H_n(T_n) (double prepivoting).
 }
 \examples{
+\donttest{
 set.seed(1)
 r <- morie_btiseq(x = rnorm(10)); TRUE
+}
 }
 \references{
 Beran, R. (1988). Prepivoting test statistics: a

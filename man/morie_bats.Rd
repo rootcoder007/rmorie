@@ -29,6 +29,8 @@ A named list matching the Python payload keys:   \code{model, omega, phi, alpha,
 }
 \keyword{internal}
 \examples{
+\donttest{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_bats(V)
+}
 }

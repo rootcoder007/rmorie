@@ -54,11 +54,13 @@ direction that produces false findings. Kendall's tau for this model
 is \code{theta / (theta + 2)}.
 }
 \examples{
+\donttest{
 set.seed(4)
 X <- matrix(rnorm(120), ncol = 1)
 cl <- rep(1:20, each = 6)
 tt <- rexp(120, exp(X * 0.5) * rep(rgamma(20, 2, 2), each = 6))
 round(morie_cox_frailty(tt, rep(1, 120), X, cl)$kendall_tau, 3)
+}
 }
 \references{
 Therneau, T. M. and Grambsch, P. M. (2000). \emph{Modeling

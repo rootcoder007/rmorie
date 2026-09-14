@@ -22,9 +22,11 @@ A list with \code{plv}, \code{mean_phase_difference}, \code{phase_difference}, \
 }
 \keyword{internal}
 \examples{
+\donttest{
 n <- 1024
 fs <- 128
 resp <- sin(2 * pi * 0.25 * (0:(n - 1))/fs)
 ecg <- sin(2 * pi * 0.25 * (0:(n - 1))/fs + 0.7)
 CardioResp(ecg, resp, fs = fs)
+}
 }

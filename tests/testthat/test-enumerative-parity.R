@@ -11,6 +11,12 @@
 # objects themselves rather than against Python.
 
 test_that("the exact integer layer agrees with Python to the last digit", {
+  # 19 seconds of the suite on a fast machine, and r-universe's
+  # macOS x86_64 builder is about 1.8 times slower: these seven files
+  # alone are eight minutes of a sixty minute check budget that was
+  # being exceeded. Heavy numerics belong off the reference machines
+  # and in our own CI, which sets NOT_CRAN so they still run there.
+  skip_on_cran()
   expect_equal(as.character(morie_big_factorial(20)), "2432902008176640000")
   expect_equal(morie_big_ndigits(morie_big_factorial(100)), 158L)
   expect_equal(as.character(morie_big_binom(100, 50)),
@@ -20,6 +26,7 @@ test_that("the exact integer layer agrees with Python to the last digit", {
 })
 
 test_that("base R's own choose() is wrong where the exact layer is right", {
+  skip_on_cran()
   # not a style preference: choose(100, 50) is off by more than 1e15
   # and says nothing about it
   expect_false(format(choose(100, 50), scientific = FALSE) ==
@@ -29,6 +36,7 @@ test_that("base R's own choose() is wrong where the exact layer is right", {
 })
 
 test_that("2^53 is where R stops counting", {
+  skip_on_cran()
   expect_true(morie_big_fits_double("9007199254740992"))
   expect_false(morie_big_fits_double("9007199254740993"))
   expect_true(2^53 + 1 == 2^53)          # the defect itself
@@ -39,6 +47,7 @@ test_that("2^53 is where R stops counting", {
 # ------------------------------------------------------------------
 
 test_that("Stirling numbers of the second kind match Python", {
+  skip_on_cran()
   expect_equal(as.character(morie_stirling_second(5, 3)), "25")
   expect_equal(vapply(morie_stirling_second(4), as.character, character(1)),
                c("0", "1", "7", "6", "1"))
@@ -49,6 +58,7 @@ test_that("Stirling numbers of the second kind match Python", {
 })
 
 test_that("Stirling numbers of the first kind match Python", {
+  skip_on_cran()
   expect_equal(as.character(morie_stirling_first(5, 3)), "35")
   expect_equal(vapply(morie_stirling_first(4), as.character, character(1)),
                c("0", "6", "11", "6", "1"))
@@ -56,6 +66,7 @@ test_that("Stirling numbers of the first kind match Python", {
 })
 
 test_that("the first-kind row sums to n factorial", {
+  skip_on_cran()
   for (n in 1:10) {
     tot <- morie_bigint(0)
     for (v in morie_stirling_first(n)) tot <- morie_big_add(tot, v)
@@ -64,6 +75,7 @@ test_that("the first-kind row sums to n factorial", {
 })
 
 test_that("the signed first kind alternates in sign", {
+  skip_on_cran()
   for (n in 1:7) {
     for (k in 0:n) {
       s <- morie_stirling_first(n, k, signed = TRUE)
@@ -75,6 +87,7 @@ test_that("the signed first kind alternates in sign", {
 })
 
 test_that("the two Stirling matrices are mutually inverse", {
+  skip_on_cran()
   # sum_k s(n,k) S(k,m) = [n == m], the defining relation
   for (n in 1:7) {
     for (m in 1:n) {
@@ -94,6 +107,7 @@ test_that("the two Stirling matrices are mutually inverse", {
 # ------------------------------------------------------------------
 
 test_that("Bell numbers match Python and stay exact past 2^53", {
+  skip_on_cran()
   expect_equal(vapply(0:10, function(i) as.character(morie_bell_number(i)),
                       character(1)),
                c("1", "1", "2", "5", "15", "52", "203", "877", "4140",
@@ -103,6 +117,7 @@ test_that("Bell numbers match Python and stay exact past 2^53", {
 })
 
 test_that("Bell is the row sum of the second-kind Stirling numbers", {
+  skip_on_cran()
   for (n in 0:20) {
     tot <- morie_bigint(0)
     for (v in morie_stirling_second(n)) tot <- morie_big_add(tot, v)
@@ -111,6 +126,7 @@ test_that("Bell is the row sum of the second-kind Stirling numbers", {
 })
 
 test_that("Catalan numbers match Python", {
+  skip_on_cran()
   expect_equal(vapply(0:8, function(i) as.character(morie_catalan_number(i)),
                       character(1)),
                c("1", "1", "2", "5", "14", "42", "132", "429", "1430"))
@@ -119,6 +135,7 @@ test_that("Catalan numbers match Python", {
 })
 
 test_that("Catalan satisfies its own convolution", {
+  skip_on_cran()
   for (n in 0:10) {
     tot <- morie_bigint(0)
     for (i in 0:n) {
@@ -131,6 +148,7 @@ test_that("Catalan satisfies its own convolution", {
 })
 
 test_that("derangements match Python and the brute-force count", {
+  skip_on_cran()
   expect_equal(vapply(0:6, function(i) as.character(morie_derangements(i)),
                       character(1)),
                c("1", "0", "1", "2", "9", "44", "265"))
@@ -139,6 +157,7 @@ test_that("derangements match Python and the brute-force count", {
 })
 
 test_that("derangements match inclusion-exclusion", {
+  skip_on_cran()
   for (n in 1:12) {
     tot <- morie_bigint(0)
     for (i in 0:n) {
@@ -156,6 +175,7 @@ test_that("derangements match inclusion-exclusion", {
 # ------------------------------------------------------------------
 
 test_that("partition counts match Python and published landmarks", {
+  skip_on_cran()
   expect_equal(vapply(0:10, function(i)
     as.character(morie_partition_count(i)), character(1)),
     c("1", "1", "2", "3", "5", "7", "11", "15", "22", "30", "42"))
@@ -165,6 +185,7 @@ test_that("partition counts match Python and published landmarks", {
 })
 
 test_that("p(1000) is exact at 32 digits", {
+  skip_on_cran()
   p <- morie_partition_count(1000)
   expect_equal(as.character(p), "24061467864032622473692149727991")
   expect_equal(morie_big_ndigits(p), 32L)
@@ -172,6 +193,7 @@ test_that("p(1000) is exact at 32 digits", {
 })
 
 test_that("Euler's theorem holds at every n, not on average", {
+  skip_on_cran()
   for (n in 0:45) {
     expect_equal(as.character(morie_partition_count(n, distinct = TRUE)),
                  as.character(morie_partition_count(n, odd_only = TRUE)))
@@ -179,6 +201,7 @@ test_that("Euler's theorem holds at every n, not on average", {
 })
 
 test_that("partitions by part count sum to the total", {
+  skip_on_cran()
   for (n in 1:30) {
     tot <- morie_bigint(0)
     for (k in seq_len(n)) {
@@ -189,6 +212,7 @@ test_that("partitions by part count sum to the total", {
 })
 
 test_that("partitions into k parts match Python", {
+  skip_on_cran()
   expect_equal(as.character(morie_partitions_into_parts(7, 3)), "4")
   expect_equal(as.character(morie_partitions_into_parts(0, 0)), "1")
   expect_equal(as.character(morie_partitions_into_parts(5, 0)), "0")
@@ -201,6 +225,7 @@ test_that("partitions into k parts match Python", {
 # ------------------------------------------------------------------
 
 test_that("the labelled cells match direct enumeration", {
+  skip_on_cran()
   for (n in 0:4) {
     for (k in 1:4) {
       expect_equal(as.character(morie_twelvefold_way(n, k)$count),
@@ -219,6 +244,7 @@ test_that("the labelled cells match direct enumeration", {
 })
 
 test_that("unlabelled balls count multisets", {
+  skip_on_cran()
   for (n in 0:5) {
     for (k in 1:4) {
       expect_equal(as.character(morie_twelvefold_way(
@@ -229,6 +255,7 @@ test_that("unlabelled balls count multisets", {
 })
 
 test_that("unlabelled boxes give Stirling and partition counts", {
+  skip_on_cran()
   for (n in 1:6) {
     for (k in 1:n) {
       expect_equal(as.character(morie_twelvefold_way(
@@ -243,6 +270,7 @@ test_that("unlabelled boxes give Stirling and partition counts", {
 })
 
 test_that("all twelve cells are distinct and report a formula", {
+  skip_on_cran()
   cells <- character(0)
   for (b in c("labelled", "unlabelled")) {
     for (x in c("labelled", "unlabelled")) {
@@ -263,12 +291,14 @@ test_that("all twelve cells are distinct and report a formula", {
 # ------------------------------------------------------------------
 
 test_that("Mobius inversion matches Python exactly", {
+  skip_on_cran()
   out <- morie_mobius_inversion(c(1, 2, 2, 3, 2, 4))
   expect_equal(out$g, rep(1, 6))
   expect_equal(out$reconstruction_residual, 0)
 })
 
 test_that("the Mobius identity has residual zero", {
+  skip_on_cran()
   out <- morie_mobius_inversion(rep(1, 40))
   expect_equal(out$mobius_identity_residual, 0)
   expect_equal(out$divisor_sums[1], 1)
@@ -276,16 +306,19 @@ test_that("the Mobius identity has residual zero", {
 })
 
 test_that("the Mobius function takes its known values", {
+  skip_on_cran()
   out <- morie_mobius_inversion(rep(1, 12))
   expect_equal(out$mobius, c(1, -1, -1, 0, -1, 1, -1, 0, 0, 1, -1, 0))
 })
 
 test_that("inverting the divisor count gives the all-ones function", {
+  skip_on_cran()
   f <- vapply(seq_len(20), function(m) sum(m %% seq_len(m) == 0), numeric(1))
   expect_equal(morie_mobius_inversion(f)$g, rep(1, 20))
 })
 
 test_that("enumerative input validation", {
+  skip_on_cran()
   expect_error(morie_partition_count(-1), "non-negative")
   expect_error(morie_partition_count(5, distinct = TRUE, odd_only = TRUE),
                "alternatives")
