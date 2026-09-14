@@ -162,7 +162,7 @@ jobs:
       # from source, which needs the libcurl headers.
       - id: deps
         continue-on-error: true
-        uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
+        uses: r-lib/actions/setup-r-dependencies@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
@@ -185,7 +185,7 @@ jobs:
       # built. One clean second attempt (warm cache, so it is cheap)
       # clears it.
       - if: steps.deps.outcome == 'failure'
-        uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
+        uses: r-lib/actions/setup-r-dependencies@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
