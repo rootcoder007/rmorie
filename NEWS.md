@@ -1,3 +1,44 @@
+# rmorie 1.2.4 - 2026-09-14
+
+## morie_otis_stock_flow, and the Lakner stock/flow measures
+
+The MRM OTIS family gained the Lakner (1976) decomposition: average daily
+population as a stock (`sum(x_i)/t`, days per day), average length of stay
+as a flow (`sum(x_i)/N`, days per person), and the identity that ties them
+(`adp = N_a * alos / t`). Flow and stock rates can carry opposite signs
+over the same period, so reporting one as if it were the other reverses the
+finding -- it did for an OTIS headline before this landed.
+
+## No test in the package had ever skipped
+
+`tests/testthat/setup.R` decided whether it was running under `R CMD check`
+by reading `R_TESTS`. R sources that file at startup and then unsets it, so
+the variable is always empty by the time the setup file runs: every
+`skip_on_cran()` in the package was inert, on CRAN included. The
+discriminator is now `_R_CHECK_PACKAGE_NAME_`, which survives. With the
+gates actually firing, the tests stage dropped from 956s to 192s and the
+whole check from over an hour to about 39 minutes -- which is what brought
+it back inside r-universe's sixty-minute budget.
+
+## The SIU index is no longer swept under R CMD check
+
+`.siu_resolve_drid()` and its fetch path reached the live index on every
+check run. They now return `NA_integer_` unless live fetches are explicitly
+allowed, so a check no longer depends on a third party being up.
+
+## Kernel symmetry is imposed, not assumed
+
+`.gh_pairwise_sq()` built its Gram matrix from a BLAS call whose result is
+only symmetric up to rounding, and the Cholesky downstream rejected it on
+some platforms. The matrix is now symmetrized explicitly. `morie_ghgpm()`
+also checks finiteness first and preserves the real `chol()` error instead
+of replacing it.
+
+## rmoriebricklayer floor
+
+`rmoriebricklayer (>= 0.4.8)` is required for the native decimal
+conversion; older copies are skipped rather than failed.
+
 # rmorie 1.2.3 - 2026-09-09
 
 ## morie_digest2int matches digest on arm
