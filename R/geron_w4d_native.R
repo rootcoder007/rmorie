@@ -1416,7 +1416,7 @@ morie_geron_svd_pseudoinverse <- function(X, y, rcond = NULL, fit_intercept = FA
 #' estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_save_load_pytorch(model = c(1, 2, 3, 4, 5, 6, 7, 8), path = 5L)
+#' morie_geron_save_load_pytorch(model = c(1, 2, 3, 4, 5, 6, 7, 8), path = tempfile())
 morie_geron_save_load_pytorch <- function(model, path, verify = TRUE) {
   if (!is.null(names(model)) && all(nzchar(names(model)))) {
     state <- model

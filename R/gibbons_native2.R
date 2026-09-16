@@ -3978,7 +3978,7 @@ Linbylin <- function(table, scores = NULL) {
 }
 
 #' Odds ratio by Woolf's logit method (Woolf 1955) -- NOT from Gibbons
-#' @rdname Oddsrat-gibbons
+#' @rdname Oddsrat
 Oddsrat <- function(table, alpha = 0.05, cc = 0) {
   tb <- as.matrix(table)
   storage.mode(tb) <- "double"
