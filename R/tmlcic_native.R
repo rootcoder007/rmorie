@@ -231,7 +231,7 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' @return A list with \code{q}, \code{b}.
 #' @export
 .tmlcic_fit_working_model <- function(y, A, W, cand, rows, ridge) {
-  # logit\[Qbar(A,W)\] on the candidate's terms, fitted on rows.
+  # logit[Qbar(A,W)] on the candidate's terms, fitted on rows.
   rowf <- .tmlcic_row_fun(W, cand)
   X <- do.call(rbind, lapply(rows, function(i) rowf(A[i], i)))
   b <- .tmlcic_wlogit(X, y[rows], ridge = max(ridge, 1e-10))
@@ -886,7 +886,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
   out <- numeric(length(groups))
   for (t in seq_along(groups)) {
     g <- groups[[t]]
-    first <- v[g\[1\]]
+    first <- v[g[1]]
     if (any(v[g] != first)) {
       stop(sprintf(
         "tmlcic: %s varies within a cluster; it is a %s", name,
@@ -1075,7 +1075,7 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
   }
   if (any(yv < 0.0 | yv > 1.0)) {
     stop(paste0(
-      "tmlcic: individual outcomes must lie in \[0, 1\]; rescale ",
+      "tmlcic: individual outcomes must lie in [0, 1]; rescale ",
       "them first"
     ))
   }
@@ -1108,7 +1108,7 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
     }
   }
   yc <- vapply(groups, function(g) sum(alpha[g] * yv[g]), numeric(1))
-  Ej <- do.call(rbind, lapply(groups, function(g) Em[g\[1\], , drop = FALSE]))
+  Ej <- do.call(rbind, lapply(groups, function(g) Em[g[1], , drop = FALSE]))
   nWc <- ncol(Wm)
   Wbar <- do.call(rbind, lapply(groups, function(g) {
     if (nWc > 0L) {
@@ -1119,7 +1119,7 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
   }))
   Zj <- cbind(Ej, Wbar)
   Zi <- cbind(Em, Wm)
-  kg_c <- if (!is.null(known_g)) known_g[\[1\]] else NULL
+  kg_c <- if (!is.null(known_g)) known_g[[1]] else NULL
   kg_i <- if (!is.null(known_g)) known_g[[2]] else NULL
   out <- list()
   z <- .s03qnorm(0.5 + 0.5 * as.numeric(level))

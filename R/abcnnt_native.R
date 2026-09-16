@@ -66,7 +66,7 @@
   M2 <- matrix(0, dim_x, hidden)
   for (i in seq_len(dim_x)) {
     for (k in seq_len(hidden)) {
-      M2\[i, k\] <- if (deg_out[i] > deg_h[k]) 1 else 0
+      M2[i, k] <- if (deg_out[i] > deg_h[k]) 1 else 0
     }
   }
   list(
@@ -217,7 +217,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
     }
     for (i in seq_len(L$dim_x)) {
       for (k in seq_len(L$hidden)) {
-        if (L$M2\[i, k\] == 1) {
+        if (L$M2[i, k] == 1) {
           out[[length(out) + 1L]] <- at(li, "Wm", c(i, k))
           out[[length(out) + 1L]] <- at(li, "Wa", c(i, k))
         }
@@ -300,7 +300,7 @@ train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
   bs <- if (is.null(batch)) n else max(1L, min(as.integer(batch), n))
   total <- function(fl, sample) {
     sum(vapply(
-      sample, function(p) flow_logprob(fl, p[[2]], p[\[1\]]),
+      sample, function(p) flow_logprob(fl, p[[2]], p[[1]]),
       numeric(1)
     )) / length(sample)
   }
@@ -417,7 +417,7 @@ abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
     }
     tail_ll <- sum(vapply(
       D[max(1L, length(D) - 9L):length(D)],
-      function(p) flow_logprob(flow, x_o, p[\[1\]]),
+      function(p) flow_logprob(flow, x_o, p[[1]]),
       numeric(1)
     )) / 10
     history[[length(history) + 1L]] <- list(

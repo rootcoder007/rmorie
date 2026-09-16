@@ -38,7 +38,7 @@ Kabsch <- function(coords1, coords2) {
   idx <- rev(seq_len(d))
   V <- ei$vectors[, idx, drop = FALSE]
   sing <- sqrt(pmax(ei$values[idx], 0))
-  if (sing[d] <= 1e-12 * max(sing\[1\], 1e-300))
+  if (sing[d] <= 1e-12 * max(sing[1], 1e-300))
     stop("kabsch_superpose: degenerate configuration, the cross-covariance is rank deficient")
   U <- matrix(0, d, d)
   for (j in seq_len(d)) U[, j] <- as.numeric(H %*% V[, j]) / sing[j]

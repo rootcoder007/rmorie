@@ -214,7 +214,7 @@ k02gh <- function(n) {
     } else if (i == 2L) {
       z <- z - 1.14 * n^0.426 / z
     } else if (i == 3L) {
-      z <- 1.86 * z - 0.86 * x\[1\]
+      z <- 1.86 * z - 0.86 * x[1]
     } else if (i == 4L) {
       z <- 1.91 * z - 0.91 * x[2]
     } else {
@@ -263,7 +263,7 @@ k02mod <- function(A, comm) {
   if (m2 <= 0) return(0)
   q <- 0
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    if (comm[i] == comm[j]) q <- q + (a\[i, j\] - k[i] * k[j] / m2)
+    if (comm[i] == comm[j]) q <- q + (a[i, j] - k[i] * k[j] / m2)
   }
   q / m2
 }

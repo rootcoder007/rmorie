@@ -42,11 +42,11 @@ Seirep <- function(S, E, I, R, beta, sigma, gamma, t_max = 160, dt = 0.1) {
   if (any(y < 0)) stop("seir_compartmental: compartment sizes must be non-negative")
   if (beta < 0 || sigma < 0 || gamma < 0) stop("seir_compartmental: rates must be non-negative")
   if (dt <= 0 || t_max < 0) stop("seir_compartmental: need dt > 0 and t_max >= 0")
-  N <- y\[1\] + y[2] + y[3] + y[4]
+  N <- y[1] + y[2] + y[3] + y[4]
   if (N <= 0) stop("seir_compartmental: total population must be positive")
 
   deriv <- function(v) {
-    f <- beta * v\[1\] * v[3] / N
+    f <- beta * v[1] * v[3] / N
     c(-f, f - sigma * v[2], sigma * v[2] - gamma * v[3], gamma * v[3])
   }
 
@@ -64,12 +64,12 @@ Seirep <- function(S, E, I, R, beta, sigma, gamma, t_max = 160, dt = 0.1) {
   }
 
   r0 <- if (gamma > 0) beta / gamma else Inf
-  .t1_result(estimate = y[4], S = y\[1\], E = y[2], I = y[3], R = y[4], N = N,
+  .t1_result(estimate = y[4], S = y[1], E = y[2], I = y[3], R = y[4], N = N,
              R0 = r0,
              latent_period = if (sigma > 0) 1 / sigma else Inf,
              infectious_period = if (gamma > 0) 1 / gamma else Inf,
              peak_I = peak_I, peak_time = peak_time, final_size = y[4],
-             conservation_error = abs(y\[1\] + y[2] + y[3] + y[4] - N),
+             conservation_error = abs(y[1] + y[2] + y[3] + y[4] - N),
              beta = beta, sigma = sigma, gamma = gamma,
              t_max = t_max, dt = dt,
              method = "SEIR compartmental model (Hethcote 2000)")

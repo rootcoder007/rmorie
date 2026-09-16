@@ -37,7 +37,7 @@ causal_mask <- function(n) {
   m <- as.integer(n)
   if (m < 1L) stop("sasRec: the sequence must be non-empty")
   mask <- matrix(0, nrow = m, ncol = m)
-  for (i in 1:m) for (j in 1:m) mask\[i, j\] <- if (j <= i) 1.0 else 0.0
+  for (i in 1:m) for (j in 1:m) mask[i, j] <- if (j <= i) 1.0 else 0.0
   mask
 }
 

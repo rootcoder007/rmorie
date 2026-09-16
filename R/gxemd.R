@@ -28,8 +28,8 @@ morie_gxe_interaction_model <- function(x, y, env) {
   for (i in seq_along(g_levels)) {
     for (j in seq_along(e_levels)) {
       msk <- g_id == g_levels[i] & e_id == e_levels[j]
-      cell_count\[i, j\] <- sum(msk)
-      if (any(msk)) cell_mean\[i, j\] <- mean(yv[msk])
+      cell_count[i, j] <- sum(msk)
+      if (any(msk)) cell_mean[i, j] <- mean(yv[msk])
     }
   }
   ge_eff <- cell_mean - mu - outer(g_eff, e_eff, "+") + 0
@@ -44,7 +44,7 @@ morie_gxe_interaction_model <- function(x, y, env) {
   for (i in seq_along(g_levels)) {
     for (j in seq_along(e_levels)) {
       msk <- g_id == g_levels[i] & e_id == e_levels[j]
-      if (any(msk)) resid[msk] <- yv[msk] - cell_mean\[i, j\]
+      if (any(msk)) resid[msk] <- yv[msk] - cell_mean[i, j]
     }
   }
   ss_eps <- sum(resid^2)

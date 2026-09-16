@@ -25,7 +25,7 @@ Otbarfree <- function(X_list, weights, n_supp, max_iter = 20) {
   clouds <- lapply(X_list, as.matrix)
   K <- length(clouds)
   if (K == 0L) stop("no input clouds")
-  d <- ncol(clouds[\[1\]])
+  d <- ncol(clouds[[1]])
   for (Xk in clouds) if (ncol(Xk) != d)
     stop("all clouds must share a dimension")
   w <- .ot_hist(weights, normalise = TRUE)

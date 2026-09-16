@@ -79,7 +79,7 @@ morie_timesfm_causal_mask <- function(n_patches) {
   m <- matrix(0, nrow = n, ncol = n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      if (j <= i) m\[i, j\] <- 1
+      if (j <= i) m[i, j] <- 1
     }
   }
   list(mask = m, n_patches = n, training_signals = n)

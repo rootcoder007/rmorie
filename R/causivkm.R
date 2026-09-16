@@ -116,7 +116,7 @@ Morieclrp <- function(m, qT, L, df2) {
   val <- stats::pchisq(arg, L) * cos(th)^(L - 2)
   w <- rep(2, N + 1)
   w[seq(2, N, by = 2)] <- 4
-  w\[1\] <- 1
+  w[1] <- 1
   w[N + 1] <- 1
   integral <- sum(w * val) * h / 3
   min(1, max(0, 1 - 2 * K * integral))

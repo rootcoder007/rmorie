@@ -75,7 +75,7 @@ gail_occupancy_measure <- function(states, actions) {
   counts <- list()
   for (p in pr) {
     key <- paste0(
-      "(", paste(p[\[1\]], collapse = ","), ")",
+      "(", paste(p[[1]], collapse = ","), ")",
       "x", "(", paste(p[[2]], collapse = ","), ")"
     )
     counts[[key]] <- if (is.null(counts[[key]])) {
@@ -143,7 +143,7 @@ gail <- function(expert_states, expert_actions,
     ord <- order(vapply(
       keys, function(k) {
         paste0(
-          "(", paste(k[\[1\]], collapse = ","), ")",
+          "(", paste(k[[1]], collapse = ","), ")",
           "x", "(", paste(k[[2]], collapse = ","), ")"
         )
       },
@@ -153,7 +153,7 @@ gail <- function(expert_states, expert_actions,
     index <- list()
     for (i in seq_along(keys)) {
       index[[paste0(
-        "(", paste(keys[[i]][\[1\]], collapse = ","), ")",
+        "(", paste(keys[[i]][[1]], collapse = ","), ")",
         "x", "(", paste(keys[[i]][[2]], collapse = ","), ")"
       )]] <- i
     }
@@ -162,7 +162,7 @@ gail <- function(expert_states, expert_actions,
     feat <- function(p) {
       v <- rep(0.0, nf)
       key <- paste0(
-        "(", paste(p[\[1\]], collapse = ","), ")",
+        "(", paste(p[[1]], collapse = ","), ")",
         "x", "(", paste(p[[2]], collapse = ","), ")"
       )
       v[index[[key]]] <- 1.0
@@ -174,13 +174,13 @@ gail <- function(expert_states, expert_actions,
       stop("gail: features must be callable")
     }
     feat <- function(p) {
-      as.numeric(features(p[\[1\]], p[[2]]))
+      as.numeric(features(p[[1]], p[[2]]))
     }
     # probe dimensionality from the first policy sample, then append a
     # bias column to mirror the Python arm
-    nf <- length(feat(P[\[1\]])) + 1L
+    nf <- length(feat(P[[1]])) + 1L
     feat <- function(p) {
-      v <- as.numeric(features(p[\[1\]], p[[2]]))
+      v <- as.numeric(features(p[[1]], p[[2]]))
       c(v, 1.0)
     }
   }
@@ -240,7 +240,7 @@ gail <- function(expert_states, expert_actions,
   q <- list()
   for (i in seq_along(P)) {
     key <- paste0(
-      "(", paste(P[[i]][\[1\]], collapse = ","), ")",
+      "(", paste(P[[i]][[1]], collapse = ","), ")",
       "x", "(", paste(P[[i]][[2]], collapse = ","), ")"
     )
     if (is.null(q[[key]])) q[[key]] <- numeric(0)

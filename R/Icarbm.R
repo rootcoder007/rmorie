@@ -47,14 +47,14 @@ Icarbm <- function(adjacency, tau = 1, u = NULL) {
     cmean <- as.numeric(W %*% uv) / deg
     quad <- 0
     for (i in seq_len(n)) if (i < n) for (j in seq(i + 1L, n))
-      if (W\[i, j\] != 0) quad <- quad + W\[i, j\] * (uv[i] - uv[j])^2
+      if (W[i, j] != 0) quad <- quad + W[i, j] * (uv[i] - uv[j])^2
     quad <- quad / (t * t)
     centred <- mean(uv)
   }
   vals <- .s03jacobi(Q)$values
-  .t1_result(estimate = vals\[1\], precision = Q, conditional_mean = cmean,
+  .t1_result(estimate = vals[1], precision = Q, conditional_mean = cmean,
              conditional_var = cvar, pairwise_quadratic = quad,
              log_density_kernel = if (is.nan(quad)) NaN else -0.5 * quad,
-             smallest_eigenvalue = vals\[1\], mean_u = centred, n = n,
+             smallest_eigenvalue = vals[1], mean_u = centred, n = n,
              method = "u_i | u_-i ~ N(mean of neighbours, tau^2/n_i); Q = (D - W)/tau^2, Besag (1974)")
 }

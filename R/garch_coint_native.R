@@ -43,7 +43,7 @@ morie_garch_recursion <- function(eps, params, spec = "garch") {
   # stats::var uses the n - 1 denominator, which would make the
   # recursion differ from the Python core by a factor n/(n-1) from the
   # very first step.
-  s2\[1\] <- max(mean((eps - mean(eps))^2), 1e-12)
+  s2[1] <- max(mean((eps - mean(eps))^2), 1e-12)
   if (spec == "garch") {
     for (t in 2:n) {
       s2[t] <- params$omega + params$alpha * eps[t - 1]^2 + params$beta * s2[t - 1]
@@ -63,7 +63,7 @@ morie_garch_recursion <- function(eps, params, spec = "garch") {
   } else {
     d <- params$delta
     sd <- numeric(n)
-    sd\[1\] <- s2\[1\]^(d / 2)
+    sd[1] <- s2[1]^(d / 2)
     for (t in 2:n) {
       sd[t] <- params$omega +
         params$alpha * (abs(eps[t - 1]) - params$gamma * eps[t - 1])^d +
@@ -87,11 +87,11 @@ morie_garch_recursion <- function(eps, params, spec = "garch") {
 .morie_garch_pack <- function(spec, x) {
   sig <- function(z) 1 / (1 + exp(-pmax(pmin(z, 30), -30)))
   if (spec == "igarch") {
-    return(list(omega = exp(min(x\[1\], 5)), beta = sig(x[2]) * 0.999))
+    return(list(omega = exp(min(x[1], 5)), beta = sig(x[2]) * 0.999))
   }
   tot <- sig(x[2]) * 0.999
   fr <- sig(x[3])
-  p <- list(omega = exp(min(x\[1\], 5)), alpha = tot * fr, beta = tot * (1 - fr))
+  p <- list(omega = exp(min(x[1], 5)), alpha = tot * fr, beta = tot * (1 - fr))
   if (spec %in% c("gjr", "aparch")) p$gamma <- tanh(x[4]) * 0.5
   if (spec == "aparch") p$delta <- 0.5 + 2.5 * sig(x[5])
   p
@@ -206,7 +206,7 @@ morie_bekk_garch <- function(R) {
     H
   }
   neg <- function(x) {
-    a <- 0.999 / (1 + exp(-max(min(x\[1\], 30), -30)))
+    a <- 0.999 / (1 + exp(-max(min(x[1], 30), -30)))
     b <- (0.999 - a) / (1 + exp(-max(min(x[2], 30), -30)))
     H <- recur(a, b)
     ll <- 0
@@ -224,7 +224,7 @@ morie_bekk_garch <- function(R) {
     method = "Nelder-Mead",
     control = list(maxit = 800)
   )
-  a <- 0.999 / (1 + exp(-max(min(res$par\[1\], 30), -30)))
+  a <- 0.999 / (1 + exp(-max(min(res$par[1], 30), -30)))
   b <- (0.999 - a) / (1 + exp(-max(min(res$par[2], 30), -30)))
   list(
     H = recur(a, b), a = a, b = b, persistence = a + b, H_bar = Hbar,
@@ -308,9 +308,9 @@ morie_holt_linear <- function(y, alpha = NULL, beta = NULL, horizon = 1L,
 
   run <- function(a, b) {
     lev <- tr <- fit <- numeric(n)
-    lev\[1\] <- y\[1\]
-    tr\[1\] <- y[2] - y\[1\]
-    fit\[1\] <- y\[1\]
+    lev[1] <- y[1]
+    tr[1] <- y[2] - y[1]
+    fit[1] <- y[1]
     for (t in 2:n) {
       p <- lev[t - 1] + d * tr[t - 1]
       fit[t] <- p
@@ -324,11 +324,11 @@ morie_holt_linear <- function(y, alpha = NULL, beta = NULL, horizon = 1L,
   sq <- function(z) 1e-6 + (1 - 2e-6) / (1 + exp(-pmax(pmin(z, 30), -30)))
   if (is.null(alpha) || is.null(beta)) {
     sse <- function(x) {
-      o <- run(sq(x\[1\]), sq(x[2]))
+      o <- run(sq(x[1]), sq(x[2]))
       sum((y[-1] - o$fit[-1])^2)
     }
     par <- stats::optim(c(0, -1), sse, method = "Nelder-Mead")$par
-    if (is.null(alpha)) alpha <- sq(par\[1\])
+    if (is.null(alpha)) alpha <- sq(par[1])
     if (is.null(beta)) beta <- sq(par[2])
   }
   for (nm in c("alpha", "beta")) {
@@ -409,9 +409,9 @@ morie_holt_winters <- function(y, alpha = NULL, beta = NULL, gamma = NULL,
     lev <- tr <- fit <- numeric(n)
     se <- numeric(n + m)
     se[seq_len(m)] <- s0
-    lev\[1\] <- overall
-    tr\[1\] <- (mean(periods[k, ]) - mean(periods[1, ])) / max((k - 1) * m, 1)
-    fit\[1\] <- if (mult) lev\[1\] * se\[1\] else lev\[1\] + se\[1\]
+    lev[1] <- overall
+    tr[1] <- (mean(periods[k, ]) - mean(periods[1, ])) / max((k - 1) * m, 1)
+    fit[1] <- if (mult) lev[1] * se[1] else lev[1] + se[1]
     for (t in 2:n) {
       p <- lev[t - 1] + tr[t - 1]
       fit[t] <- if (mult) p * se[t] else p + se[t]
@@ -429,7 +429,7 @@ morie_holt_winters <- function(y, alpha = NULL, beta = NULL, gamma = NULL,
   sq <- function(z) 1e-6 + (1 - 2e-6) / (1 + exp(-pmax(pmin(z, 30), -30)))
   if (is.null(alpha) || is.null(beta) || is.null(gamma)) {
     sse <- function(x) {
-      o <- run(sq(x\[1\]), sq(x[2]), sq(x[3]))
+      o <- run(sq(x[1]), sq(x[2]), sq(x[3]))
       r <- y[-seq_len(m)] - o$fit[-seq_len(m)]
       if (all(is.finite(r))) sum(r^2) else 1e18
     }
@@ -437,7 +437,7 @@ morie_holt_winters <- function(y, alpha = NULL, beta = NULL, gamma = NULL,
       method = "Nelder-Mead",
       control = list(maxit = 800)
     )$par
-    if (is.null(alpha)) alpha <- sq(par\[1\])
+    if (is.null(alpha)) alpha <- sq(par[1])
     if (is.null(beta)) beta <- sq(par[2])
     if (is.null(gamma)) gamma <- sq(par[3])
   }

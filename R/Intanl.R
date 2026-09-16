@@ -57,8 +57,8 @@ Intanl <- function(y, A, V, H) {
   }
   vcv <- .s03matmul(.s03matmul(inv, meat), inv)
   se <- sqrt(diag(vcv))
-  .t1_result(estimate = beta[3], beta0 = beta\[1\], beta_a = beta[2],
+  .t1_result(estimate = beta[3], beta0 = beta[1], beta_a = beta[2],
              beta_av = beta[3], beta_v = beta[4], se = se[3], se_a = se[2],
-             se0 = se\[1\], se_v = se[4], n = n,
-             method = "E\[Y^a|V\] = b0 + b1 a + b2 V a + b3 V by IP-weighted least squares, Hernan & Robins (2020) s.12.5")
+             se0 = se[1], se_v = se[4], n = n,
+             method = "E[Y^a|V] = b0 + b1 a + b2 V a + b3 V by IP-weighted least squares, Hernan & Robins (2020) s.12.5")
 }

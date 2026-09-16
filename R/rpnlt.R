@@ -45,7 +45,7 @@ Rpnlt <- function(basis, lam, a = 0, b = 1, p = 2) {
   D <- matrix(0, m, L)
   for (i in seq_len(m)) {
     for (j in seq_len(L)) {
-      D\[i, j\] <- if (pp == 1L) {
+      D[i, j] <- if (pp == 1L) {
         if (i == 1L) (-3 * B[1L, j] + 4 * B[2L, j] - B[3L, j]) / (2 * h)
         else if (i == m) (3 * B[m, j] - 4 * B[m - 1L, j] + B[m - 2L, j]) / (2 * h)
         else (B[i + 1L, j] - B[i - 1L, j]) / (2 * h)
@@ -53,7 +53,7 @@ Rpnlt <- function(basis, lam, a = 0, b = 1, p = 2) {
         if (i == 1L) (2 * B[1L, j] - 5 * B[2L, j] + 4 * B[3L, j] - B[4L, j]) / (h * h)
         else if (i == m) {
           (2 * B[m, j] - 5 * B[m - 1L, j] + 4 * B[m - 2L, j] - B[m - 3L, j]) / (h * h)
-        } else (B[i + 1L, j] - 2 * B\[i, j\] + B[i - 1L, j]) / (h * h)
+        } else (B[i + 1L, j] - 2 * B[i, j] + B[i - 1L, j]) / (h * h)
       }
     }
   }
@@ -65,11 +65,11 @@ Rpnlt <- function(basis, lam, a = 0, b = 1, p = 2) {
         wgt <- if (r == 1L || r == m) 0.5 else 1
         s <- s + wgt * D[r, i] * D[r, j]
       }
-      P\[i, j\] <- s * h
+      P[i, j] <- s * h
     }
   }
   J <- 0
-  for (i in seq_len(L)) for (j in seq_len(L)) J <- J + P\[i, j\]
+  for (i in seq_len(L)) for (j in seq_len(L)) J <- J + P[i, j]
   list(estimate = lam * J, penalty = lam * J, J = J, P = P, n = m,
        method = "J = integral (D^p f)^2 dt = c'Pc, Chapter 14 eqs. (14.10)-(14.11)")
 }

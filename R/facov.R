@@ -61,7 +61,7 @@ Facov <- function(n_env, n_factors, loadings = NULL, psi = NULL) {
     if (kk > 0L) {
       for (i in seq_len(m)) {
         for (j in seq_len(kk)) {
-          if (j <= i) L\[i, j\] <- .s03vdc((i - 1L) * kk + (j - 1L), 2L + (j - 1L)) + 0.5
+          if (j <= i) L[i, j] <- .s03vdc((i - 1L) * kk + (j - 1L), 2L + (j - 1L)) + 0.5
         }
       }
     }
@@ -85,7 +85,7 @@ Facov <- function(n_env, n_factors, loadings = NULL, psi = NULL) {
     for (b in seq_len(m)) {
       s <- 0
       if (kk > 0L) for (j in seq_len(kk)) s <- s + L[a, j] * L[b, j]
-      S\[a, b\] <- s + (if (a == b) P[a] else 0)
+      S[a, b] <- s + (if (a == b) P[a] else 0)
     }
   }
   list(estimate = S[1L, 1L], Sigma = S, Lambda = L, Psi = P,

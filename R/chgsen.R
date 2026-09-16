@@ -24,7 +24,7 @@ chgsen <- function(psi, x = NULL, dpsi = NULL, w = NULL) {
   if (is.null(dpsi)) {
     dp <- numeric(n)
     for (i in seq_len(n)) {
-      if (i == 1) dp[i] <- (psi[2] - psi\[1\]) / (xg[2] - xg\[1\])
+      if (i == 1) dp[i] <- (psi[2] - psi[1]) / (xg[2] - xg[1])
       else if (i == n) dp[i] <- (psi[n] - psi[n - 1]) / (xg[n] - xg[n - 1])
       else dp[i] <- (psi[i + 1] - psi[i - 1]) / (xg[i + 1] - xg[i - 1])
     }

@@ -167,9 +167,9 @@ morie_likemc <- function(model, data, priors, n_iter, seed = 1,
     stop("likemc: the burn-in consumed the whole chain")
   }
   nb <- length(kept)
-  mb <- mean(vapply(kept, function(r) r\[1\], numeric(1)))
+  mb <- mean(vapply(kept, function(r) r[1], numeric(1)))
   mg <- mean(vapply(kept, function(r) r[2], numeric(1)))
-  r0 <- vapply(kept, function(r) r\[1\] / r[2], numeric(1))
+  r0 <- vapply(kept, function(r) r[1] / r[2], numeric(1))
   sr <- sort(r0)
   q <- function(p) sr[min(nb, max(1L, as.integer(p * (nb - 1)) + 1L))]
 

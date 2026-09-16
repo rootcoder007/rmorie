@@ -25,7 +25,7 @@
   n <- sqrt(sum(v * v))
   if (n <= .GSPLAT_EPS)
     stop("gsplat: the rotation quaternion is zero")
-  w <- v\[1\] / n
+  w <- v[1] / n
   x <- v[2] / n
   y <- v[3] / n
   z <- v[4] / n

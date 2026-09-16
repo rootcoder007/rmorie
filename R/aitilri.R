@@ -48,7 +48,7 @@ Aitilri <- function(y, V = NULL, kappa = 1) {
   for (v in e) tot <- tot + v
   x <- kappa * e / tot
   list(
-    x = x, estimate = x\[1\], logx_unclosed = lx, total = kappa, D = D,
+    x = x, estimate = x[1], logx_unclosed = lx, total = kappa, D = D,
     method = "x = C(exp(V y)), V the Egozcue et al. (2003) SBP basis"
   )
 }

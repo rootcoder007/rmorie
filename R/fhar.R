@@ -37,7 +37,7 @@ Fhar <- function(t, K, period = NULL) {
       Phi[i, 2L * r + 1L] <- cos(r * w * tt[i])
     }
   }
-  list(estimate = Phi\[1, 1\], Phi = Phi, omega = w, period = P, n = n,
+  list(estimate = Phi[1, 1], Phi = Phi, omega = w, period = P, n = n,
        nbasis = 2L * KK + 1L,
        method = "Ramsay-Silverman (2005) Sect. 3.3.1 Fourier basis, 1, sin(r w t), cos(r w t)")
 }

@@ -54,8 +54,8 @@ Dpsbm <- function(adjacency, alpha = 1, n_iter = 30, seed = 42) {
       if (i == j) next
       a <- z[i]
       b <- z[j]
-      tt\[a, b\] <- tt\[a, b\] + 1
-      if (A\[i, j\] > 0.5) e\[a, b\] <- e\[a, b\] + 1
+      tt[a, b] <- tt[a, b] + 1
+      if (A[i, j] > 0.5) e[a, b] <- e[a, b] + 1
     }
     s <- 0
     for (r in seq_len(K)) for (c in seq_len(K))

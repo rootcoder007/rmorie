@@ -328,14 +328,14 @@ morie_otis_tps_analyze_all <- function(otis_b01, tps_datasets,
         title = "overlay region_rollup (failed)",
         summary_lines = list(),
         warnings = sprintf("%s: %s",
-                            class(e)\[1\], conditionMessage(e)))),
+                            class(e)[1], conditionMessage(e)))),
     yoy_correlation = tryCatch(
       morie_otis_tps_yoy_correlation(otis_b01, tps_datasets),
       error = function(e) .otis_overlay_wrap(
         title = "overlay yoy_correlation (failed)",
         summary_lines = list(),
         warnings = sprintf("%s: %s",
-                            class(e)\[1\], conditionMessage(e))))
+                            class(e)[1], conditionMessage(e))))
   )
   if (!is.null(out_dir)) {
     dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)

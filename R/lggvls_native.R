@@ -228,7 +228,7 @@
   if (is.null(X) || length(X) == 0L) {
     Xa <- matrix(1, nrow = n, ncol = 1L)
   } else {
-    p <- length(X[\[1\]])
+    p <- length(X[[1]])
     Xm <- matrix(0, nrow = n, ncol = p)
     for (i in seq_len(n)) Xm[i, ] <- X[[i]]
     Xa <- cbind(1, Xm)
@@ -279,7 +279,7 @@
     return(list())
   }
   if (is.list(obj) && length(obj) > 0L) {
-    first <- obj[\[1\]]
+    first <- obj[[1]]
     if (is.null(first) || is.matrix(first) || is.numeric(first) ||
         is.data.frame(first)) {
       return(obj)
@@ -463,7 +463,7 @@ morie_lggvls <- function(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE,
   list(
     estimate                = fit$coef[2],
     se                      = fit$se[2],
-    intercept               = fit$coef\[1\],
+    intercept               = fit$coef[1],
     coef                    = fit$coef,
     vcov                    = fit$vcov,
     weights                 = w,

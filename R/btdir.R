@@ -60,7 +60,7 @@ Btdir <- function(n, B = 200, rng = 1) {
     next }
     v <- sort(vapply(seq_len(n - 1L), function(i) g$unif(), 0))
     row <- numeric(n)
-    row\[1\] <- v\[1\]
+    row[1] <- v[1]
     if (n > 2L) for (i in 2:(n - 1L)) row[i] <- v[i] - v[i - 1L]
     row[n] <- 1 - v[n - 1L]
     W[[b]] <- row

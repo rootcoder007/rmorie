@@ -72,7 +72,7 @@ Varest <- function(Y, p = 1, intercept = TRUE) {
     for (j in seq_len(K)) {
       s <- 0
       for (t in seq_len(n)) s <- s + resid[t, i] * resid[t, j]
-      S\[i, j\] <- s
+      S[i, j] <- s
     }
   }
   sigma_ml <- S / n

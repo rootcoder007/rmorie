@@ -308,7 +308,7 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       if (j > i) {
-        M\[i, j\] <- M[j, i] <- f(F[[i]], F[[j]])
+        M[i, j] <- M[j, i] <- f(F[[i]], F[[j]])
       }
     }
   }

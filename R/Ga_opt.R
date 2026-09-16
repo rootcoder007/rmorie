@@ -40,7 +40,7 @@ Ga_opt <- function(f, population, generations = 20, mutation = 0.1) {
     fit <- vapply(seq_len(m), function(i) as.numeric(f(P[i, ])), 0)
     ord <- order(fit, seq_len(m))
     keep <- P[ord[seq_len(h)], , drop = FALSE]
-    best_path <- c(best_path, fit[ord\[1\]])
+    best_path <- c(best_path, fit[ord[1]])
     kids <- matrix(0, m - h, d)
     if (m - h > 0L) for (i in seq_len(m - h) - 1L) {
       a <- keep[i %% h + 1L, ]
@@ -57,9 +57,9 @@ Ga_opt <- function(f, population, generations = 20, mutation = 0.1) {
   }
   fit <- vapply(seq_len(m), function(i) as.numeric(f(P[i, ])), 0)
   ord <- order(fit, seq_len(m))
-  best_path <- c(best_path, fit[ord\[1\]])
-  .t1_result(estimate = fit[ord\[1\]], best = P[ord\[1\], ],
-             best_fitness = fit[ord\[1\]], best_path = best_path,
+  best_path <- c(best_path, fit[ord[1]])
+  .t1_result(estimate = fit[ord[1]], best = P[ord[1], ],
+             best_fitness = fit[ord[1]], best_path = best_path,
              generations = ng, n = m,
              method = "elitist truncation selection, one-point crossover, van der Corput mutation; Holland (1975)")
 }

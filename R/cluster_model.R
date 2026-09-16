@@ -224,7 +224,7 @@ plot.morie_cluster <- function(x, ...) {
     return(invisible(NULL))
   }
   plot(ctr[, 1], ctr[, 2],
-    xlab = x$feature_names\[1\], ylab = x$feature_names[2],
+    xlab = x$feature_names[1], ylab = x$feature_names[2],
     pch = 19, main = "morie_cluster centroids", ...
   )
   if (x$k <= 20L) {

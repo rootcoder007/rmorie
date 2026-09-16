@@ -143,8 +143,8 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
   ramp <- ((d_max - d) * (.w3_ncdf(z2) - .w3_ncdf(z1)) -
              sigma * (.w3_npdf(z1) - .w3_npdf(z2))) / (d_max - d_ideal)
   v <- flat + ramp
-  # The convolution of a function bounded in \[0, 1\] is bounded in
-  # \[0, 1\]; only rounding can put it outside, and letting that leak into
+  # The convolution of a function bounded in [0, 1] is bounded in
+  # [0, 1]; only rounding can put it outside, and letting that leak into
   # a product of three terms would be a slow poison.
   if (v < 0) return(0)
   if (v > 1) return(1)
@@ -301,7 +301,7 @@ morie_chemsc_rot <- function(fractions) {
   n <- length(fractions)
   if (n == 0L) return(0)
   s <- .w3_csum(vapply(fractions, function(ab)
-    0.5 * (as.numeric(ab\[1\]) + as.numeric(ab[2])), numeric(1)))
+    0.5 * (as.numeric(ab[1]) + as.numeric(ab[2])), numeric(1)))
   1 + (1 - 1 / n) * s
 }
 
@@ -398,7 +398,7 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
   cp <- if (is.null(par)) NULL else par$clash
 
   hb <- vapply(hbonds, function(h)
-    morie_chemsc_hbond(h[\[1\]], h[[2]], h[[3]], smoothing, hp), numeric(1))
+    morie_chemsc_hbond(h[[1]], h[[2]], h[[3]], smoothing, hp), numeric(1))
   mt <- vapply(metals, function(r)
     morie_chemsc_metal(r, smoothing, mp), numeric(1))
   lpv <- vapply(lipophilic, function(r)
@@ -409,9 +409,9 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
   h_rot <- morie_chemsc_rot(rotatable)
 
   cl <- vapply(clashes, function(cc)
-    morie_chemsc_clash(cc[\[1\]], cc[[2]], clash_slope, cp), numeric(1))
+    morie_chemsc_clash(cc[[1]], cc[[2]], clash_slope, cp), numeric(1))
   to <- vapply(torsions, function(t)
-    morie_chemsc_torsion(t\[1\], t[2], t[3], t[4]), numeric(1))
+    morie_chemsc_torsion(t[1], t[2], t[3], t[4]), numeric(1))
   s_cl <- if (length(cl)) .w3_csum(cl) else 0
   s_to <- if (length(to)) .w3_csum(to) else 0
 
@@ -502,7 +502,7 @@ morie_chemsc <- function(receptor, ligand, smoothing = "gaussian",
                          rotatable = list(), torsions = list(),
                          coefficients = NULL, par = NULL) {
   parse <- function(rows) lapply(rows, function(r) {
-    xyz <- c(as.numeric(r[\[1\]]), as.numeric(r[[2]]), as.numeric(r[[3]]))
+    xyz <- c(as.numeric(r[[1]]), as.numeric(r[[2]]), as.numeric(r[[3]]))
     role <- as.character(r[[4]])
     att <- NULL
     if (length(r) >= 7L && !is.na(r[[5]]))

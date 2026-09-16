@@ -66,7 +66,7 @@ Arimaxhr <- function(y, X, p = 1, q = 1, d = 0, m = NULL) {
   k <- p + q + 1L + r
   .t1_result(beta = f1$beta[-1], phi = if (p > 0L) b[2:(1L + p)] else numeric(0),
              theta = if (q > 0L) b[(2L + p):(1L + p + q)] else numeric(0),
-             intercept = f1$beta\[1\],
+             intercept = f1$beta[1],
              sigma2 = sum(res^2) / max(nobs - k, 1L), noise = nz,
              resid = res, p = p, q = q, d = d, r = r, nobs = nobs,
              method = "ARIMAX by OLS plus Hannan-Rissanen errors (Box-Jenkins 1976)")

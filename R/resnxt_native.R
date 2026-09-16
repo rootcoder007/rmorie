@@ -148,7 +148,7 @@
 #' @export
 .resnxt_block_equivalence <- function(x, Wins, Wmids, Wouts, tol = 1e-9) {
   a <- .resnxt_aggregated_block(x, Wins, Wmids, Wouts)
-  n_outs <- length(Wouts[\[1\]])
+  n_outs <- length(Wouts[[1]])
   cat_mat <- vector("list", n_outs)
   for (o in seq_len(n_outs)) {
     cat_mat[[o]] <- unlist(lapply(Wouts, function(W) W[[o]]))

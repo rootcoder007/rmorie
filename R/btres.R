@@ -78,7 +78,7 @@ Btres <- function(X, y, B = 200, seed = 1, alpha = 0.05, rescale = FALSE) {
   }
   list(beta_b = reps, beta_hat = bh, resid = res, se = se, lo = lo, hi = hi,
        var_closed = vc, sigma2_tilde = s2, n = n, p = p, B = as.integer(B),
-       estimate = bh\[1\],
+       estimate = bh[1],
        method = "Freedman (1981) Ann. Statist. 9(6):1218-1228, residual resampling")
 }
 

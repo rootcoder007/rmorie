@@ -384,7 +384,7 @@ confusion_error <- function(C, labels = NULL) {
   for (i in seq_len(nr)) {
     tot <- sum(rows[[i]])
     for (j in seq_len(nr))
-      norm\[i, j\] <- if (tot > 0) rows[[i]][j] / tot else 0
+      norm[i, j] <- if (tot > 0) rows[[i]][j] / tot else 0
   }
 
   err <- function(y, yp) {

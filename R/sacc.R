@@ -37,9 +37,9 @@ Sacc <- function(P, R, gamma, temp = 1, tol = 1e-12, max_eval = 100000L,
   Rm <- ar$R
   S <- ar$S
   A <- ar$A
-  gamma <- as.numeric(gamma)\[1\]
-  temp <- as.numeric(temp)\[1\]
-  tol <- as.numeric(tol)\[1\]
+  gamma <- as.numeric(gamma)[1]
+  temp <- as.numeric(temp)[1]
+  tol <- as.numeric(tol)[1]
   if (temp <= 0) stop("temp must be positive", call. = FALSE)
   Q <- matrix(0, S, A)
   pi_ <- matrix(1 / A, S, A)

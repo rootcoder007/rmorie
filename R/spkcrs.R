@@ -51,7 +51,7 @@ spkcrs <- function(points1, points2, lambda1 = NULL, lambda2 = NULL,
     region <- c(min(all_[, 1]), min(all_[, 2]), max(all_[, 1]), max(all_[, 2]))
   }
   if (is.null(r)) {
-    r <- seq(0, 0.25 * min(region[3] - region\[1\], region[4] - region[2]),
+    r <- seq(0, 0.25 * min(region[3] - region[1], region[4] - region[2]),
              length.out = 11L)[-1L]
   }
   r <- as.numeric(r)

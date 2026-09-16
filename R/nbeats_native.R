@@ -140,7 +140,7 @@ nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
   total <- rep(0, as.integer(horizon))
   trace <- list()
   for (b in blocks) {
-    kind <- b[\[1\]]
+    kind <- b[[1]]
     deg <- as.integer(b[[2]])
     harm <- as.integer(b[[3]])
     res <- nbeats_block(resid, horizon, kind = kind, degree = deg,

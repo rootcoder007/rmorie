@@ -82,7 +82,7 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
   gram <- 0
   for (i in seq_len(n)) for (j in seq_len(n)) {
     s <- 0
-    for (k in seq_len(n)) s <- s + W\[i, k\] * W[j, k]
+    for (k in seq_len(n)) s <- s + W[i, k] * W[j, k]
     gram <- max(gram, abs(s - (if (i == j) 1 else 0)))
   }
   co <- .s03matvec(W, x)

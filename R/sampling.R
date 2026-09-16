@@ -25,7 +25,7 @@ NULL
 #' srs_sample <- morie_simple_random_sample(df, 20)
 morie_simple_random_sample <- function(df, n, replace = FALSE, seed = 42L) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
@@ -62,7 +62,7 @@ morie_simple_random_sample <- function(df, n, replace = FALSE, seed = 42L) {
 morie_stratified_sample <- function(df, strata_col, n_per_stratum,
                                     proportional = FALSE, seed = 42L) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
@@ -123,7 +123,7 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
 #' @export
 morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
@@ -159,7 +159,7 @@ morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
 morie_pps_sample <- function(df, size_col, n, seed = 42L,
                               replace = FALSE) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
@@ -203,7 +203,7 @@ morie_pps_sample <- function(df, size_col, n, seed = 42L,
 #' }
 morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42L) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
@@ -219,7 +219,7 @@ morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42
   list(
     estimate = est,
     se = se,
-    ci_lower = ci\[1\],
+    ci_lower = ci[1],
     ci_upper = ci[2],
     distribution = boot_stats
   )
@@ -241,7 +241,7 @@ morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42
 #' @export
 morie_jackknife_estimate <- function(df, statistic) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
@@ -294,7 +294,7 @@ morie_design_effect <- function(weights) {
 #' @export
 morie_compute_design_weights <- function(df, strata_col, population_sizes) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
@@ -339,7 +339,7 @@ morie_calibration_weights <- function(df, aux_vars, population_totals,
                                 initial_weights = NULL,
                                 max_iter = 50L, tol = 1e-6) {
   if (!is.data.frame(df)) {
-    stop("`df` must be a data.frame -- got a ", class(df)\[1\],
+    stop("`df` must be a data.frame -- got a ", class(df)[1],
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }

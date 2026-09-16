@@ -396,8 +396,8 @@ morie_sample_acf <- function(y, max_lag = 20) {
   max_lag <- min(as.integer(max_lag), n - 1L)
   if (max_lag < 1L) stop("max_lag must be at least 1.", call. = FALSE)
   cc <- .morie_k05_acvf(v, n, max_lag)
-  if (!(cc\[1\] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
-  list(acf = cc / cc\[1\], acvf = cc, lags = 0:max_lag, n = n, max_lag = max_lag,
+  if (!(cc[1] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
+  list(acf = cc / cc[1], acvf = cc, lags = 0:max_lag, n = n, max_lag = max_lag,
        ci_bound = 1.96 / sqrt(n),
        method = "Sample autocorrelation function (divide-by-n convention)")
 }
@@ -413,7 +413,7 @@ morie_sample_acf <- function(y, max_lag = 20) {
 #' @return The value of \code{phi}, as built in the body.
 #' @export
 .morie_k05_durbin_levinson <- function(r, max_lag) {
-  # r is indexed from 1 for lag 0, so r\[k + 1\] is lag k.
+  # r is indexed from 1 for lag 0, so r[k + 1] is lag k.
   phi <- numeric(max_lag)
   prev <- numeric(0)
   for (k in seq_len(max_lag)) {
@@ -458,8 +458,8 @@ morie_sample_pacf <- function(y, max_lag = 20) {
   max_lag <- min(as.integer(max_lag), n - 1L)
   if (max_lag < 1L) stop("max_lag must be at least 1.", call. = FALSE)
   cc <- .morie_k05_acvf(v, n, max_lag)
-  if (!(cc\[1\] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
-  r <- cc / cc\[1\]
+  if (!(cc[1] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
+  r <- cc / cc[1]
   list(pacf = .morie_k05_durbin_levinson(r, max_lag), lags = seq_len(max_lag),
        acf = r, n = n, max_lag = max_lag, ci_bound = 1.96 / sqrt(n),
        method = "Sample PACF via the Durbin-Levinson recursion")

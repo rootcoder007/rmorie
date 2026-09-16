@@ -490,7 +490,7 @@ morie_vol_parkinson <- function(high, low, periods_per_year = NULL) {
     },
     constant = const,
     constant_note = paste(
-      "1/(4 log 2): E\[(log range)^2\] = 4 log2",
+      "1/(4 log 2): E[(log range)^2] = 4 log2",
       "sigma^2 for driftless Brownian motion"
     ),
     efficiency_vs_close = 4.9,

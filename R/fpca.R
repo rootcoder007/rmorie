@@ -88,7 +88,7 @@ Fpca <- function(data_functions, n_components, a = 0, b = 1) {
     for (j in seq_len(kk)) {
       s <- 0
       for (r in seq_len(m)) s <- s + w[r] * C[i, r] * phi[j, r]
-      scores\[i, j\] <- s
+      scores[i, j] <- s
     }
   }
   tot <- sum(pmax(ev, 0))

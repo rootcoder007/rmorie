@@ -90,9 +90,9 @@ moments <- function(distribution = "rademacher") {
   } else {
     support <- list(c(s, 1 / 6), c(0.0, 2 / 3), c(-s, 1 / 6))
   }
-  m1 <- sum(vapply(support, function(v) v\[1\] * v[2], numeric(1)))
-  m2 <- sum(vapply(support, function(v) v\[1\] ^ 2 * v[2], numeric(1)))
-  m4 <- sum(vapply(support, function(v) v\[1\] ^ 4 * v[2], numeric(1)))
+  m1 <- sum(vapply(support, function(v) v[1] * v[2], numeric(1)))
+  m2 <- sum(vapply(support, function(v) v[1] ^ 2 * v[2], numeric(1)))
+  m4 <- sum(vapply(support, function(v) v[1] ^ 4 * v[2], numeric(1)))
   list(mean = m1, variance = m2, fourth_moment = m4,
        support = support,
        density = if (distribution == "rademacher") 1.0 else 1 / 3,

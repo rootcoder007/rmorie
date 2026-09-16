@@ -55,10 +55,10 @@ LuvR <- function(A, resolution = 1, max_levels = 20L) {
         tot[ci + 1L] <- tot[ci + 1L] - kdeg[i]
         links <- new.env(parent = emptyenv())
         for (j in seq_len(nn)) {
-          if (j != i && w\[i, j\] != 0) {
+          if (j != i && w[i, j] != 0) {
             key <- as.character(comm[j])
             prev <- if (is.null(links[[key]])) 0 else links[[key]]
-            links[[key]] <- prev + w\[i, j\]
+            links[[key]] <- prev + w[i, j]
           }
         }
         if (is.null(links[[as.character(ci)]])) links[[as.character(ci)]] <- 0
@@ -104,7 +104,7 @@ LuvR <- function(A, resolution = 1, max_levels = 20L) {
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
         if (lab[i] == lab[j]) {
-          q <- q + (a\[i, j\] - gamma * deg[i] * deg[j] / m2) / m2
+          q <- q + (a[i, j] - gamma * deg[i] * deg[j] / m2) / m2
         }
       }
     }
@@ -127,7 +127,7 @@ LuvR <- function(A, resolution = 1, max_levels = 20L) {
     agg <- matrix(0, k, k)
     for (i in seq_len(nn)) {
       for (j in seq_len(nn)) {
-        agg[comm[i] + 1L, comm[j] + 1L] <- agg[comm[i] + 1L, comm[j] + 1L] + cur\[i, j\]
+        agg[comm[i] + 1L, comm[j] + 1L] <- agg[comm[i] + 1L, comm[j] + 1L] + cur[i, j]
       }
     }
     cur <- agg

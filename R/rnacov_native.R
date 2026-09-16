@@ -113,7 +113,7 @@ morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
   terms <- numeric(0)
   seen <- 0L
   for (a in 1:4) for (b in 1:4) {
-    c0 <- cc$joint\[a, b\]
+    c0 <- cc$joint[a, b]
     if (c0 == 0L) next
     seen <- seen + 1L
     pab <- c0 / n
@@ -148,7 +148,7 @@ morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
 #' STRUCT <- "(((((...))))).."
 #' morie_rnacov_parse(STRUCT)
 morie_rnacov_parse <- function(s) {
-  chars <- strsplit(s, "", fixed = TRUE)[\[1\]]
+  chars <- strsplit(s, "", fixed = TRUE)[[1]]
   stack <- integer(0)
   pi <- integer(0)
   pj <- integer(0)
@@ -167,7 +167,7 @@ morie_rnacov_parse <- function(s) {
     }
   }
   if (length(stack))
-    stop(length(stack), " bracket(s) never closed, first at ", stack\[1\])
+    stop(length(stack), " bracket(s) never closed, first at ", stack[1])
   if (!length(pi)) return(matrix(integer(0), 0L, 2L))
   ord <- order(pi, pj)
   cbind(pi[ord], pj[ord])
@@ -184,7 +184,7 @@ morie_rnacov_parse <- function(s) {
 #' @return A logical value.
 #' @export
 .rnacov_can_pair <- function(a, b) {
-  for (p in .RNACOV_PAIRS) if (a == p\[1\] && b == p[2]) return(TRUE)
+  for (p in .RNACOV_PAIRS) if (a == p[1] && b == p[2]) return(TRUE)
   FALSE
 }
 
@@ -203,7 +203,7 @@ morie_rnacov_parse <- function(s) {
 #' S <- c("a", "b", "c")
 #' morie_rnacov_nussinov(S)
 morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
-  ch <- strsplit(seq, "", fixed = TRUE)[\[1\]]
+  ch <- strsplit(seq, "", fixed = TRUE)[[1]]
   n <- length(ch)
   m <- matrix(0L, max(n, 1L), max(n, 1L))
   if (n > min_loop + 1L) for (span in (min_loop + 1L):(n - 1L))
@@ -215,10 +215,10 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
         if (inner + 1L > best) best <- inner + 1L
       }
       for (k in i:(j - 1L)) {
-        v <- m\[i, k\] + m[k + 1L, j]
+        v <- m[i, k] + m[k + 1L, j]
         if (v > best) best <- v
       }
-      m\[i, j\] <- best
+      m[i, j] <- best
     }
   pi <- integer(0)
   pj <- integer(0)
@@ -226,17 +226,17 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
   while (length(stack)) {
     cur <- stack[[length(stack)]]
     stack <- stack[-length(stack)]
-    i <- cur\[1\]
+    i <- cur[1]
     j <- cur[2]
     if (j - i <= min_loop) next
-    if (m\[i, j\] == m[i, j - 1L]) {
+    if (m[i, j] == m[i, j - 1L]) {
       stack[[length(stack) + 1L]] <- c(i, j - 1L)
       next
     }
     done <- FALSE
     if (.rnacov_can_pair(ch[i], ch[j])) {
       inner <- if (i + 1L <= j - 1L) m[i + 1L, j - 1L] else 0L
-      if (m\[i, j\] == inner + 1L) {
+      if (m[i, j] == inner + 1L) {
         pi <- c(pi, i - 1L)
         pj <- c(pj, j - 1L)
         stack[[length(stack) + 1L]] <- c(i + 1L, j - 1L)
@@ -244,7 +244,7 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
       }
     }
     if (!done) for (k in i:(j - 1L))
-      if (m\[i, j\] == m\[i, k\] + m[k + 1L, j]) {
+      if (m[i, j] == m[i, k] + m[k + 1L, j]) {
         stack[[length(stack) + 1L]] <- c(i, k)
         stack[[length(stack) + 1L]] <- c(k + 1L, j)
         break
@@ -295,7 +295,7 @@ morie_rnacov <- function(alignment, structure = NULL,
     stop("mode must be one of ", paste(.RNACOV_STRUCTURES, collapse = ", "))
   seqs <- toupper(gsub("T", "U", as.character(alignment), fixed = TRUE))
   if (!length(seqs)) stop("the alignment is empty")
-  L <- nchar(seqs\[1\])
+  L <- nchar(seqs[1])
   if (any(nchar(seqs) != L))
     stop("every sequence must have the same length")
 
@@ -307,7 +307,7 @@ morie_rnacov <- function(alignment, structure = NULL,
     # Fold the first ungapped sequence: the dynamic program works on a
     # sequence, not an alignment, and using the first one is a stated
     # choice rather than a silent consensus nobody defined.
-    base <- gsub("[-.]", "", seqs\[1\])
+    base <- gsub("[-.]", "", seqs[1])
     nu <- morie_rnacov_nussinov(base, min_loop)
     pairs <- nu$pairs
     folded <- nu$total

@@ -50,8 +50,8 @@ stvar <- function(x, coords, times,
       m <- sd_f > s_edges[i] & sd_f <= s_edges[i + 1] &
         td_f > t_edges[j] & td_f <= t_edges[j + 1]
       k <- sum(m)
-      counts\[i, j\] <- as.integer(k)
-      if (k > 0) gamma\[i, j\] <- 0.5 * mean(diffs2[m])
+      counts[i, j] <- as.integer(k)
+      if (k > 0) gamma[i, j] <- 0.5 * mean(diffs2[m])
     }
   }
   s_mids <- 0.5 * (s_edges[-1] + s_edges[-(n_spatial_bins + 1)])

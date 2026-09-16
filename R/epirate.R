@@ -36,7 +36,7 @@
   hit <- which(abs(as.numeric(names(tab)) - as.numeric(confidence)) < 1e-12)
   if (!length(hit)) stop("confidence must be one of 0.90, 0.95, 0.99",
                          call. = FALSE)
-  unname(tab[hit\[1\]])
+  unname(tab[hit[1]])
 }
 
 #' Incidence rate ratio
@@ -110,7 +110,7 @@ Mhrate <- function(strata, confidence = 0.95) {
         as.numeric(s[["b"]]), as.numeric(s[["T0"]]))
     } else as.numeric(unlist(s))
     if (length(v) != 4) stop("each stratum needs (a, T1, b, T0)", call. = FALSE)
-    a <- v\[1\]
+    a <- v[1]
     T1 <- v[2]
     b <- v[3]
     T0 <- v[4]
@@ -152,7 +152,7 @@ Riskdf <- function(p_exposed, p_unexposed, n_exposed = NULL,
   pe <- as.numeric(p_exposed)
   pu <- as.numeric(p_unexposed)
   if (pe < 0 || pe > 1 || pu < 0 || pu > 1)
-    stop("risks must lie in \[0, 1\]", call. = FALSE)
+    stop("risks must lie in [0, 1]", call. = FALSE)
   rd <- pe - pu
   se <- lo <- hi <- NULL
   if (!is.null(n_exposed) && !is.null(n_unexposed)) {
@@ -191,7 +191,7 @@ Riskrt <- function(p_exposed, p_unexposed, n_exposed = NULL,
   pe <- as.numeric(p_exposed)
   pu <- as.numeric(p_unexposed)
   if (pe < 0 || pe > 1 || pu < 0 || pu > 1)
-    stop("risks must lie in \[0, 1\]", call. = FALSE)
+    stop("risks must lie in [0, 1]", call. = FALSE)
   if (pu == 0) stop("unexposed risk must be non-zero", call. = FALSE)
   rr <- pe / pu
   se <- lo <- hi <- NULL

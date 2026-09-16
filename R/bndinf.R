@@ -35,7 +35,7 @@
 Bndinf <- function(theta, moments, alpha = 0.05) {
   grid <- as.numeric(unlist(theta))
   if (length(grid) == 0L) stop("Bndinf: theta grid is empty")
-  a <- as.numeric(alpha)\[1\]
+  a <- as.numeric(alpha)[1]
   if (!(a > 0 && a < 1)) stop("Bndinf: alpha must lie in (0, 1)")
   iv <- .bnd_interval(moments, "Bndinf")
   st <- .bnd_mistats(iv$yl, iv$yu)

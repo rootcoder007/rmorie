@@ -30,7 +30,7 @@ Itinft <- function(theta, a, b) {
   info <- matrix(0, length(th), length(av))
   for (i in seq_along(th)) for (j in seq_along(av)) {
     p <- .s03sigmoid(av[j] * (th[i] - bv[j]))
-    info\[i, j\] <- av[j] * av[j] * p * (1 - p)
+    info[i, j] <- av[j] * av[j] * p * (1 - p)
   }
   ti <- rowSums(info)
   se <- ifelse(ti <= 0, Inf, 1 / sqrt(ti))

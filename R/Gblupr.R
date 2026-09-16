@@ -61,7 +61,7 @@ Gblupr <- function(y, X, Z, G, var_u = 1, var_e = 1, ridge = 1e-8) {
   u <- sol[p + seq_len(q)]
   fitted <- as.numeric(Xm %*% beta + Zm %*% u)
   resid <- yv - fitted
-  .t1_result(estimate = u\[1\], beta = beta, u = u, fitted = fitted,
+  .t1_result(estimate = u[1], beta = beta, u = u, fitted = fitted,
              residual_ss = sum(resid * resid), lambda = k, n = n,
              method = "Henderson mixed model equations with G from VanRaden (2008)")
 }

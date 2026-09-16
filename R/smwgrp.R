@@ -33,7 +33,7 @@ smwgrp <- function(A) {
   tot <- 0
   cnt <- 0L
   for (i in seq_len(n)) for (j in seq_len(n))
-    if (i != j && d\[i, j\] >= 0L) { tot <- tot + d\[i, j\]
+    if (i != j && d[i, j] >= 0L) { tot <- tot + d[i, j]
     cnt <- cnt + 1L }
   lbar <- if (cnt > 0L) tot / cnt else NA_real_
   kbar <- mean(deg)

@@ -42,11 +42,11 @@ Infobtl <- function(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14,
   m <- ncol(J)
   px <- numeric(n)
   for (i in seq_len(n)) { s <- 0
-  for (j in seq_len(m)) s <- s + J\[i, j\]
+  for (j in seq_len(m)) s <- s + J[i, j]
   px[i] <- s }
   pygx <- matrix(0, n, m)
   for (i in seq_len(n)) for (j in seq_len(m)) {
-    pygx\[i, j\] <- if (px[i] > 0) J\[i, j\] / px[i] else 0
+    pygx[i, j] <- if (px[i] > 0) J[i, j] / px[i] else 0
   }
   Tn <- as.integer(T)
   Q <- matrix(0, n, Tn)
@@ -67,7 +67,7 @@ Infobtl <- function(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14,
     }
     for (t in seq_len(Tn)) for (j in seq_len(m)) {
       s <- 0
-      for (i in seq_len(n)) s <- s + pygx\[i, j\] * Q[i, t] * px[i]
+      for (i in seq_len(n)) s <- s + pygx[i, j] * Q[i, t] * px[i]
       pygt[t, j] <- if (pt[t] > 0) s / pt[t] else 0
     }
     delta <- 0
@@ -76,10 +76,10 @@ Infobtl <- function(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14,
       for (t in seq_len(Tn)) {
         kl <- 0
         for (j in seq_len(m)) {
-          if (pygx\[i, j\] > 0 && pygt[t, j] > 0) {
-            kl <- kl + pygx\[i, j\] * log(pygx\[i, j\] / pygt[t, j])
-          } else if (pygx\[i, j\] > 0) {
-            kl <- kl + pygx\[i, j\] * 700
+          if (pygx[i, j] > 0 && pygt[t, j] > 0) {
+            kl <- kl + pygx[i, j] * log(pygx[i, j] / pygt[t, j])
+          } else if (pygx[i, j] > 0) {
+            kl <- kl + pygx[i, j] * 700
           }
         }
         lw[t] <- log(if (pt[t] > 1e-300) pt[t] else 1e-300) - as.numeric(beta) * kl
@@ -99,7 +99,7 @@ Infobtl <- function(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14,
   }
   py <- numeric(m)
   for (j in seq_len(m)) { s <- 0
-  for (i in seq_len(n)) s <- s + J\[i, j\]
+  for (i in seq_len(n)) s <- s + J[i, j]
   py[j] <- s }
   ity <- 0
   for (t in seq_len(Tn)) for (j in seq_len(m)) {

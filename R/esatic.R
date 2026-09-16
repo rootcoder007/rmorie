@@ -58,7 +58,7 @@ Eapinfo <- function(items, x, D = 1, prior_mean = 0, prior_sd = 1,
     den[i] <- pr * L
     num[i] <- grid[i] * pr * L
   }
-  trap <- function(v) h * (0.5 * v\[1\] + sum(v[-c(1, length(v))]) +
+  trap <- function(v) h * (0.5 * v[1] + sum(v[-c(1, length(v))]) +
                            0.5 * v[length(v)])
   d0 <- trap(den)
   if (d0 <= 0) stop("the posterior integrated to zero; check the grid")

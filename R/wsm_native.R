@@ -470,7 +470,7 @@ morie_wsm_mle <- function(data, f, theta0, se = TRUE) {
       ei[i] <- step[i]
       ej <- numeric(k)
       ej[j] <- step[j]
-      H\[i, j\] <- (negll(th + ei + ej) - negll(th + ei - ej) -
+      H[i, j] <- (negll(th + ei + ej) - negll(th + ei - ej) -
                     negll(th - ei + ej) + negll(th - ei - ej)) /
         (4 * step[i] * step[j])
     }

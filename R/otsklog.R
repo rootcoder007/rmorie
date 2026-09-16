@@ -44,21 +44,21 @@ Sinkhlog <- function(a, b, C, epsilon = 0.1, max_iter = 200, tol = 1e-13,
     }
     for (j in seq_len(m)) {
       f_minus <- numeric(n)
-      for (i in seq_len(n)) f_minus[i] <- (f[i] - Cm\[i, j\]) / e
+      for (i in seq_len(n)) f_minus[i] <- (f[i] - Cm[i, j]) / e
       g[j] <- e * lb[j] - e * .s03logsumexp(f_minus)
     }
     err <- 0
     for (i in seq_len(n)) {
       s <- 0
-      for (j in seq_len(m)) s <- s + exp((f[i] + g[j] - Cm\[i, j\]) / e)
+      for (j in seq_len(m)) s <- s + exp((f[i] + g[j] - Cm[i, j]) / e)
       err <- err + abs(s - av[i])
     }
     if (err < tol) break
   }
   T <- matrix(0, n, m)
-  for (i in seq_len(n)) for (j in seq_len(m)) T\[i, j\] <- exp((f[i] + g[j] - Cm\[i, j\]) / e)
+  for (i in seq_len(n)) for (j in seq_len(m)) T[i, j] <- exp((f[i] + g[j] - Cm[i, j]) / e)
   cost <- 0
-  for (i in seq_len(n)) for (j in seq_len(m)) cost <- cost + T\[i, j\] * Cm\[i, j\]
+  for (i in seq_len(n)) for (j in seq_len(m)) cost <- cost + T[i, j] * Cm[i, j]
   list(T = T, cost = cost, f = f, g = g, estimate = cost, err = err,
        n_iter = it,
        method = "Log-domain Sinkhorn for entropic OT (Cuturi 2013; Schmitzer 2019)")

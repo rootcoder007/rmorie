@@ -22,10 +22,10 @@
 .hapblk_ci <- function(h, grid = 200) {
   n <- sum(h)
   if (n == 0) return(c(0, 0, 0))
-  pA <- (h\[1\] + h[2]) / n
-  pB <- (h\[1\] + h[3]) / n
+  pA <- (h[1] + h[2]) / n
+  pB <- (h[1] + h[3]) / n
   if (pA %in% c(0, 1) || pB %in% c(0, 1)) return(c(0, 0, 0))
-  p00 <- h\[1\] / n
+  p00 <- h[1] / n
   D <- p00 - pA * pB
   dmax <- if (D > 0) min(pA * (1 - pB), (1 - pA) * pB) else
     min(pA * pB, (1 - pA) * (1 - pB))
@@ -43,8 +43,8 @@
   }, numeric(1))
   w <- exp(logl - max(logl))
   cdf <- cumsum(w / sum(w))
-  lo <- gs[which(cdf >= 0.05)\[1\]] / grid
-  hi <- gs[which(cdf >= 0.95)\[1\]] / grid
+  lo <- gs[which(cdf >= 0.05)[1]] / grid
+  hi <- gs[which(cdf >= 0.95)[1]] / grid
   c(dprime, lo, hi)
 }
 
@@ -83,12 +83,12 @@ morie_hapblk <- function(H, strong_hi = 0.98, strong_lo = 0.70,
              sum(H[, a] == 1 & H[, b] == 0),
              sum(H[, a] == 1 & H[, b] == 1))
       ci <- .hapblk_ci(h)
-      dp\[a, b\] <- dp[b, a] <- ci\[1\]
-      lo_m\[a, b\] <- lo_m[b, a] <- ci[2]
-      hi_m\[a, b\] <- hi_m[b, a] <- ci[3]
+      dp[a, b] <- dp[b, a] <- ci[1]
+      lo_m[a, b] <- lo_m[b, a] <- ci[2]
+      hi_m[a, b] <- hi_m[b, a] <- ci[3]
       c_ <- if (ci[3] > strong_hi && ci[2] > strong_lo) "S"
         else if (ci[3] < recomb_hi) "R" else "U"
-      cls\[a, b\] <- cls[b, a] <- c_
+      cls[a, b] <- cls[b, a] <- c_
     }
   }
   blocks <- list()
@@ -99,8 +99,8 @@ morie_hapblk <- function(H, strong_hi = 0.98, strong_lo = 0.70,
       ns <- nr <- 0
       for (a in start:(end - 1)) {
         for (b in (a + 1):end) {
-          if (cls\[a, b\] == "S") ns <- ns + 1
-          else if (cls\[a, b\] == "R") nr <- nr + 1
+          if (cls[a, b] == "S") ns <- ns + 1
+          else if (cls[a, b] == "R") nr <- nr + 1
         }
       }
       inf <- ns + nr

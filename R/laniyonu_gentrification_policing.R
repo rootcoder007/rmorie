@@ -66,7 +66,7 @@ NULL
   gent_idx <- which(vapply(decompositions, function(d) {
     grepl("^gent", d$coefficient %||% "")
   }, logical(1)))
-  gent_d <- if (length(gent_idx) > 0L) decompositions[[gent_idx\[1\]]] else NULL
+  gent_d <- if (length(gent_idx) > 0L) decompositions[[gent_idx[1]]] else NULL
 
   head <- sprintf(
     "Year %s, N=%d tracts, rho=%+.4f, Moran's I (OLS residuals)=%+.4f. ",

@@ -155,7 +155,7 @@
 #' @return A numeric value.
 #' @export
 .schab_simple_kriging_variance <- function(cov_all, n_obs) {
-  # sigma^2_sk at every location, for the E\[(Zc - Z)^2\] = 2 sigma^2_sk
+  # sigma^2_sk at every location, for the E[(Zc - Z)^2] = 2 sigma^2_sk
   # identity that closes Sec. 7.2.2.
   cov_all <- as.matrix(cov_all)
   n_obs <- as.integer(n_obs)

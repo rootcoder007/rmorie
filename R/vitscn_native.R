@@ -32,7 +32,7 @@ Vitscn <- function(q, k, v, tau = 0.1, B = NULL) {
   storage.mode(Qa) <- "double"
   storage.mode(Ka) <- "double"
   storage.mode(Va) <- "double"
-  t <- as.numeric(tau)\[1\]
+  t <- as.numeric(tau)[1]
   if (!(t > 0.01)) stop(sprintf("Vitscn: tau must exceed 0.01 (paper constraint), got %g", t), call. = FALSE)
   if (ncol(Qa) != ncol(Ka)) stop(sprintf("Vitscn: q width %d != k width %d", ncol(Qa), ncol(Ka)), call. = FALSE)
   if (nrow(Ka) != nrow(Va)) stop(sprintf("Vitscn: k has %d rows but v has %d", nrow(Ka), nrow(Va)), call. = FALSE)
@@ -65,6 +65,6 @@ Vitscn <- function(q, k, v, tau = 0.1, B = NULL) {
   if (nk == 1L) W <- matrix(W, nrow = nq)
   out <- W %*% Va
   list(output = out, weights = W, similarities = S, tau = t,
-       estimate = out\[1, 1\], n = nq,
+       estimate = out[1, 1], n = nq,
        method = "scaled cosine attention cos(q,k)/tau + B (Liu et al. 2022, Sec 3.2)")
 }

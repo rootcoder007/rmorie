@@ -50,7 +50,7 @@ Bnssel <- function(y, D, X) {
     p1 <- n1 / ng
     m1 <- if (n1 > 0L) sum(yg[dg == 1]) / n1 else 0
     a <- .bnd_wc_arm(m1, p1, y0, y1)
-    lo <- lo + (ng / n) * a\[1\]
+    lo <- lo + (ng / n) * a[1]
     hi <- hi + (ng / n) * a[2]
   }
   .t1_result(lower = lo, upper = hi, width = hi - lo,

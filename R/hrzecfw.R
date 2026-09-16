@@ -50,7 +50,7 @@ Hrzecfw <- function(w, tau) {
     ag[k] <- atan2(b, a)
     cf[[k]] <- c(a, b)
   }
-  list(estimate = md\[1\], characteristic_function = cf, re = re, im = im,
+  list(estimate = md[1], characteristic_function = cf, re = re, im = im,
        modulus = md, argument = ag, tau = tt, n = n,
        method = paste0("Horowitz (2009) Section 5.1 p.137, ",
                        "psi_nW(tau) = n^-1 sum exp(i tau W_j)"))

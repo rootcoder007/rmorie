@@ -43,8 +43,8 @@ Olsfit <- function(X, y, intercept = TRUE) {
   dfres <- n - q
   sigma2 <- if (dfres > 0L) rss / dfres else NaN
   r2 <- if (tss > 0) 1 - rss / tss else NaN
-  list(estimate = beta\[1\], coefficients = beta,
-       intercept = if (intercept) beta\[1\] else NaN,
+  list(estimate = beta[1], coefficients = beta,
+       intercept = if (intercept) beta[1] else NaN,
        fitted = fitted, residuals = resid, rss = rss, tss = tss, r2 = r2,
        sigma2 = sigma2, df = dfres, n = n, p = p,
        method = "Hastie-Tibshirani-Friedman (2009) ESL eqs. (2.1)-(2.6), normal equations")

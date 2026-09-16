@@ -75,7 +75,7 @@ Vitatt <- function(q, k, v, mask = NULL) {
     if (!is.null(M)) {
       allowed <- 0L
       for (j in seq_len(m)) {
-        if (M\[i, j\] != 0) allowed <- allowed + 1L else logits[j] <- -Inf
+        if (M[i, j] != 0) allowed <- allowed + 1L else logits[j] <- -Inf
       }
       if (allowed == 0L) {
         stop("vit_self_attention: a mask row excludes every key")
@@ -87,7 +87,7 @@ Vitatt <- function(q, k, v, mask = NULL) {
   for (i in seq_len(n)) {
     for (c in seq_len(dv)) {
       s <- 0
-      for (j in seq_len(m)) s <- s + A\[i, j\] * V[j, c]
+      for (j in seq_len(m)) s <- s + A[i, j] * V[j, c]
       out[i, c] <- s
     }
   }

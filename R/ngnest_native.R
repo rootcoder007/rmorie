@@ -123,7 +123,7 @@
         error = function(e) NULL
       )
       if (is.null(result)) next
-      fc <- result[\[1\]]
+      fc <- result[[1]]
       resid <- result[[2]]
       out[[length(out) + 1L]] <- list(
         lookback = lb,
@@ -157,7 +157,7 @@
   how <- match.arg(how, c("median", "mean"))
   if (length(members) == 0L) stop("ngnest: no members to aggregate")
 
-  H <- length(members[\[1\]]$forecast)
+  H <- length(members[[1]]$forecast)
   for (m in members) {
     if (length(m$forecast) != H) {
       stop("ngnest: members disagree on the horizon")
@@ -211,7 +211,7 @@ morie_ngnest <- function(y, horizon,
     if (is.null(by_lb[[key]])) {
       by_lb[[key]] <- numeric(0)
     }
-    by_lb[[key]] <- c(by_lb[[key]], m$forecast\[1\])
+    by_lb[[key]] <- c(by_lb[[key]], m$forecast[1])
   }
 
   by_set <- list()
@@ -220,7 +220,7 @@ morie_ngnest <- function(y, horizon,
     if (is.null(by_set[[key]])) {
       by_set[[key]] <- numeric(0)
     }
-    by_set[[key]] <- c(by_set[[key]], m$forecast\[1\])
+    by_set[[key]] <- c(by_set[[key]], m$forecast[1])
   }
 
   lb_means <- vapply(by_lb, mean, numeric(1))

@@ -30,7 +30,7 @@ Krfgrp <- function(seed, k) {
   n0 <- nrow(T)
   if (n0 == 0L) stop("kronecker_graph: seed is empty")
   if (ncol(T) != n0) stop("kronecker_graph: seed must be square")
-  if (any(T < 0 | T > 1)) stop("kronecker_graph: seed entries must lie in \[0, 1\]")
+  if (any(T < 0 | T > 1)) stop("kronecker_graph: seed entries must lie in [0, 1]")
   kk <- as.integer(k)
   if (kk < 1L) stop("kronecker_graph: k must be at least 1")
   N <- n0^kk
@@ -45,7 +45,7 @@ Krfgrp <- function(seed, k) {
       a <- a %/% n0
       b <- b %/% n0
     }
-    P\[i, j\] <- v
+    P[i, j] <- v
   }
   deg <- rowSums(P)
   flat <- if (N <= 64L) as.numeric(t(P)) else numeric(0)

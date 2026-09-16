@@ -62,8 +62,8 @@ Opttre <- function(y, A, W, pi = NULL, max_depth = 2L, min_leaf = 1L) {
   best_const <- function(idx) {
     q1 <- leaf_score(idx, 1)
     q0 <- leaf_score(idx, 0)
-    v1 <- if (q1[2] > 0) q1\[1\] / q1[2] else -Inf
-    v0 <- if (q0[2] > 0) q0\[1\] / q0[2] else -Inf
+    v1 <- if (q1[2] > 0) q1[1] / q1[2] else -Inf
+    v0 <- if (q0[2] > 0) q0[1] / q0[2] else -Inf
     if (v1 > v0) c(1, q1) else c(0, q0)
   }
   rule <- numeric(n)
@@ -78,7 +78,7 @@ Opttre <- function(y, A, W, pi = NULL, max_depth = 2L, min_leaf = 1L) {
     if (depth < md && length(idx) >= 2L * ml) {
       for (j in seq_len(p)) {
         for (i in idx) {
-          thr <- Wm\[i, j\]
+          thr <- Wm[i, j]
           left <- idx[Wm[idx, j] <= thr]
           right <- idx[Wm[idx, j] > thr]
           if (length(left) < ml || length(right) < ml) next
@@ -105,7 +105,7 @@ Opttre <- function(y, A, W, pi = NULL, max_depth = 2L, min_leaf = 1L) {
       if (depth + 1L > depth_used) depth_used <<- depth + 1L
       return(build(left, depth + 1L, FALSE) + build(right, depth + 1L, FALSE))
     }
-    rule[idx] <<- bc\[1\]
+    rule[idx] <<- bc[1]
     1L
   }
   n_leaves <- build(seq_len(n), 0L, TRUE)

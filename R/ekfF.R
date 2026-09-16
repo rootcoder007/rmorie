@@ -62,10 +62,10 @@ EkfF <- function(y, f, h, F, H, Q, R, x0 = NULL, P0 = NULL) {
     Fk <- .ekf_mat(.ekf_apply(F, x))
     FP <- matrix(0, d, d)
     for (i in seq_len(d)) for (j in seq_len(d))
-      FP\[i, j\] <- sum(Fk[i, ] * P[, j])
+      FP[i, j] <- sum(Fk[i, ] * P[, j])
     Pp <- matrix(0, d, d)
     for (i in seq_len(d)) for (j in seq_len(d))
-      Pp\[i, j\] <- sum(FP[i, ] * Fk[j, ]) + Q\[i, j\]
+      Pp[i, j] <- sum(FP[i, ] * Fk[j, ]) + Q[i, j]
     hx <- as.numeric(.ekf_apply(h, xp))
     Hk <- as.numeric(.ekf_apply(H, xp))
     if (length(Hk) != d) stop("H must return a length-d row")
@@ -76,10 +76,10 @@ EkfF <- function(y, f, h, F, H, Q, R, x0 = NULL, P0 = NULL) {
     v <- y[t] - hx
     x <- xp + K * v
     for (i in seq_len(d)) for (j in seq_len(d))
-      Pp\[i, j\] <- Pp\[i, j\] - K[i] * S * K[j]
+      Pp[i, j] <- Pp[i, j] - K[i] * S * K[j]
     P <- Pp
     loglik <- loglik - 0.5 * (log(2 * pi * S) + v * v / S)
   }
-  .t1_result(estimate = x\[1\], state = x, cov = as.numeric(t(P)),
+  .t1_result(estimate = x[1], state = x, cov = as.numeric(t(P)),
              loglik = loglik, n = n, method = "Extended Kalman filter")
 }

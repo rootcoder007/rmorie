@@ -44,7 +44,7 @@ Gpcla <- function(X, y, X_test = NULL, kernel = NULL, lengthscale = 1,
   kf <- function(P, Q) {
     out <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      out\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      out[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     out
   }
   dphi <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
@@ -79,7 +79,7 @@ Gpcla <- function(X, y, X_test = NULL, kernel = NULL, lengthscale = 1,
     sd[j] <- max(var - sum(Ks[j, ] * v), 0)
   }
   p <- vapply(mu / sqrt(1 + sd), .s03pnorm, 0)
-  .t1_result(estimate = p\[1\], p = p, predicted = as.integer(p >= 0.5), f_mode = f,
+  .t1_result(estimate = p[1], p = p, predicted = as.integer(p >= 0.5), f_mode = f,
              latent_mean = mu, latent_var = sd, objective = obj, n = n,
              method = "Newton mode of Psi(f) with probit likelihood; averaged prediction R&W eq. (3.82)")
 }

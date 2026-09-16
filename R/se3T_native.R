@@ -107,7 +107,7 @@
     if (n == 0) {
       return(matrix(numeric(0), nrow = 0, ncol = 3))
     }
-    m <- length(x[\[1\]])
+    m <- length(x[[1]])
     result <- matrix(0, nrow = n, ncol = m)
     for (i in seq_len(n)) {
       result[i, ] <- as.numeric(x[[i]])
@@ -132,9 +132,9 @@
 .se3T_apply <- function(R, v) {
   v <- as.numeric(v)
   c(
-    R\[1, 1\] * v\[1\] + R\[1, 2\] * v[2] + R[1, 3] * v[3],
-    R[2, 1] * v\[1\] + R[2, 2] * v[2] + R[2, 3] * v[3],
-    R[3, 1] * v\[1\] + R[3, 2] * v[2] + R[3, 3] * v[3]
+    R[1, 1] * v[1] + R[1, 2] * v[2] + R[1, 3] * v[3],
+    R[2, 1] * v[1] + R[2, 2] * v[2] + R[2, 3] * v[3],
+    R[3, 1] * v[1] + R[3, 2] * v[2] + R[3, 3] * v[3]
   )
 }
 
@@ -155,7 +155,7 @@ morie_se3T_rotation_matrix <- function(axis, angle) {
   a <- .se3T_vec(axis)
   n <- sqrt(sum(a * a))
   if (n <= .se3T_EPS) stop("se3T: the rotation axis is zero")
-  x <- a\[1\] / n
+  x <- a[1] / n
   y <- a[2] / n
   z <- a[3] / n
   cc <- cos(as.numeric(angle))

@@ -177,11 +177,11 @@ Dnnmt <- function(X, Y, layers, heads = NULL, activation = "relu",
     for (k in seq_len(nlay)) {
       zk <- matrix(0, n, dims[k + 1L])
       for (i in seq_len(n)) {
-        for (j in seq_len(dims[k + 1L])) zk\[i, j\] <- sum(A[[k]][i, ] * W[[k]][, j])
+        for (j in seq_len(dims[k + 1L])) zk[i, j] <- sum(A[[k]][i, ] * W[[k]][, j])
       }
       gk <- matrix(0, n, dims[k + 1L])
       for (i in seq_len(n)) {
-        for (j in seq_len(dims[k + 1L])) gk\[i, j\] <- .dnnact(acts[k], zk\[i, j\])
+        for (j in seq_len(dims[k + 1L])) gk[i, j] <- .dnnact(acts[k], zk[i, j])
       }
       Z[[k]] <- zk
       if (k < nlay) A[[k + 1L]] <- cbind(rep(1, n), gk) else Yhat <- gk

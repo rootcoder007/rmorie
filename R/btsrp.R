@@ -45,7 +45,7 @@ btsrp <- function(x, statistic = NULL, B = 2000L, alpha = 0.05,
       probs = c(alpha / 2, 1 - alpha / 2),
       names = FALSE
     )
-    lo <- ci\[1\]
+    lo <- ci[1]
     hi <- ci[2]
   } else if (method == "bca") {
     z0 <- stats::qnorm(mean(boot < theta_hat))
@@ -59,7 +59,7 @@ btsrp <- function(x, statistic = NULL, B = 2000L, alpha = 0.05,
     a1 <- stats::pnorm(z0 + (z0 + z_lo) / (1 - a * (z0 + z_lo)))
     a2 <- stats::pnorm(z0 + (z0 + z_hi) / (1 - a * (z0 + z_hi)))
     ci <- stats::quantile(boot, probs = c(a1, a2), names = FALSE)
-    lo <- ci\[1\]
+    lo <- ci[1]
     hi <- ci[2]
   } else { # studentized
     B2 <- max(50, B %/% 10)
@@ -80,7 +80,7 @@ btsrp <- function(x, statistic = NULL, B = 2000L, alpha = 0.05,
       names = FALSE
     )
     lo <- theta_hat - qs[2] * se
-    hi <- theta_hat - qs\[1\] * se
+    hi <- theta_hat - qs[1] * se
   }
   list(
     estimate = as.numeric(theta_hat), se = as.numeric(se),

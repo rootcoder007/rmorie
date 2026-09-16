@@ -38,7 +38,7 @@ Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
   theta <- matrix(0, N, d)
   for (i in seq_len(N)) {
     for (a in seq_len(d)) {
-      theta[i, a] <- pr[[a]]\[1\] + (pr[[a]][2] - pr[[a]]\[1\]) * .s03vdc(i - 1L, 1L + a)
+      theta[i, a] <- pr[[a]][1] + (pr[[a]][2] - pr[[a]][1]) * .s03vdc(i - 1L, 1L + a)
     }
   }
   w <- rep(1 / N, N)
@@ -54,8 +54,8 @@ Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
       cand <- numeric(d)
       for (a in seq_len(d)) {
         off <- (.s03vdc(tries * d + (a - 1L), 1L + a) - 0.5) * 2 *
-          as.numeric(kernel_sd) * (pr[[a]][2] - pr[[a]]\[1\])
-        cand[a] <- min(max(src[a] + off, pr[[a]]\[1\]), pr[[a]][2])
+          as.numeric(kernel_sd) * (pr[[a]][2] - pr[[a]][1])
+        cand[a] <- min(max(src[a] + off, pr[[a]][1]), pr[[a]][2])
       }
       sim <- .s03vec(model(cand))
       dist <- 0
@@ -68,7 +68,7 @@ Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
         for (j in seq_len(N)) {
           q <- 1
           for (a in seq_len(d)) {
-            h <- as.numeric(kernel_sd) * (pr[[a]][2] - pr[[a]]\[1\])
+            h <- as.numeric(kernel_sd) * (pr[[a]][2] - pr[[a]][1])
             if (h > 0) {
               u <- (cand[a] - theta[j, a]) / h
               q <- q * exp(-0.5 * u * u) / (h * sqrt(2 * pi))

@@ -84,10 +84,10 @@ Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
   peak_time <- 0
   for (step in seq_len(nsteps)) {
     k1 <- deriv(sv, iv, rv)
-    k2 <- deriv(sv + 0.5 * dt * k1[\[1\]], iv + 0.5 * dt * k1[[2]], rv + 0.5 * dt * k1[[3]])
-    k3 <- deriv(sv + 0.5 * dt * k2[\[1\]], iv + 0.5 * dt * k2[[2]], rv + 0.5 * dt * k2[[3]])
-    k4 <- deriv(sv + dt * k3[\[1\]], iv + dt * k3[[2]], rv + dt * k3[[3]])
-    sv <- sv + (dt / 6) * (k1[\[1\]] + 2 * k2[\[1\]] + 2 * k3[\[1\]] + k4[\[1\]])
+    k2 <- deriv(sv + 0.5 * dt * k1[[1]], iv + 0.5 * dt * k1[[2]], rv + 0.5 * dt * k1[[3]])
+    k3 <- deriv(sv + 0.5 * dt * k2[[1]], iv + 0.5 * dt * k2[[2]], rv + 0.5 * dt * k2[[3]])
+    k4 <- deriv(sv + dt * k3[[1]], iv + dt * k3[[2]], rv + dt * k3[[3]])
+    sv <- sv + (dt / 6) * (k1[[1]] + 2 * k2[[1]] + 2 * k3[[1]] + k4[[1]])
     iv <- iv + (dt / 6) * (k1[[2]] + 2 * k2[[2]] + 2 * k3[[2]] + k4[[2]])
     rv <- rv + (dt / 6) * (k1[[3]] + 2 * k2[[3]] + 2 * k3[[3]] + k4[[3]])
     cur <- sum(iv) / Ntot
@@ -97,7 +97,7 @@ Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
 
   K <- matrix(0, m, m)
   for (a in seq_len(m)) for (b in seq_len(m))
-    K\[a, b\] <- if (gamma > 0) S0[a] * C\[a, b\] / (gamma * N[b]) else Inf
+    K[a, b] <- if (gamma > 0) S0[a] * C[a, b] / (gamma * N[b]) else Inf
   if (gamma > 0) {
     v <- rep(1 / m, m)
     lam <- 0
@@ -105,7 +105,7 @@ Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
       w <- numeric(m)
       for (a in seq_len(m)) {
         acc <- 0
-        for (b in seq_len(m)) acc <- acc + K\[a, b\] * v[b]
+        for (b in seq_len(m)) acc <- acc + K[a, b] * v[b]
         w[a] <- acc
       }
       nrm <- sum(abs(w))

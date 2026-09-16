@@ -40,9 +40,9 @@ Tfidf <- function(docs, smooth = FALSE, sublinear = FALSE) {
     tf <- 0
     for (t in D[[i]]) if (t == vocab[j]) tf <- tf + 1
     if (sublinear && tf > 0) tf <- 1 + log(tf)
-    W\[i, j\] <- tf * idf[j]
+    W[i, j] <- tf * idf[j]
   }
-  list(estimate = if (N && V) W\[1, 1\] else NaN, W = W, vocab = vocab,
+  list(estimate = if (N && V) W[1, 1] else NaN, W = W, vocab = vocab,
        idf = idf, df = df, n = N,
        method = "TF-IDF weighting (Sparck Jones 1972; Salton and Buckley 1988)")
 }

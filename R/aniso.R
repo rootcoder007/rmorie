@@ -64,9 +64,9 @@ morie_aniso <- function(x, coords, n_dirs = 4, tol_deg = 22.5) {
   combined <- unlist(abs_dev)
   grp_idx <- rep(seq_along(abs_dev), vapply(abs_dev, length, integer(1)))
   fit <- stats::aov(combined ~ factor(grp_idx))
-  s <- summary(fit)[\[1\]]
+  s <- summary(fit)[[1]]
   list(
-    statistic = s$`F value`\[1\], p_value = s$`Pr(>F)`\[1\],
+    statistic = s$`F value`[1], p_value = s$`Pr(>F)`[1],
     directional_gamma = means, directions_deg = kept_angles,
     n = n,
     method = sprintf("Anisotropy test (Levene across %d directions)", n_dirs)

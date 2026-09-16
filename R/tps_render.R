@@ -141,13 +141,13 @@ morie_tps_district_for_centroid <- function(lat, lon) {
 #' morie_tps_pretty_label("ASSAULT_RATE_2024")
 #' @export
 morie_tps_pretty_label <- function(s) {
-  parts <- strsplit(s, "_", fixed = TRUE)[\[1\]]
+  parts <- strsplit(s, "_", fixed = TRUE)[[1]]
   out <- vapply(parts, function(p) {
     if (grepl("^[0-9]{4}$", p)) p else tolower(p)
   }, character(1), USE.NAMES = FALSE)
   if (length(out) == 0L) return(s)
-  out\[1\] <- paste0(toupper(substr(out\[1\], 1, 1)),
-                   substr(out\[1\], 2, nchar(out\[1\])))
+  out[1] <- paste0(toupper(substr(out[1], 1, 1)),
+                   substr(out[1], 2, nchar(out[1])))
   last <- out[length(out)]
   if (length(out) > 1L && grepl("^[0-9]{4}$", last)) {
     head_str <- trimws(paste(out[-length(out)], collapse = " "))
@@ -316,10 +316,10 @@ morie_tps_render_choropleth <- function(polys,
   for (i in seq_len(nrow(polys))) {
     geom <- polys$geometry[[i]]
     if (is.null(geom)) next
-    rings <- if (is.list(geom[\[1\]][\[1\]])) geom else list(geom)
+    rings <- if (is.list(geom[[1]][[1]])) geom else list(geom)
     for (ri in seq_along(rings)) {
       ring <- rings[[ri]]
-      m <- do.call(rbind, lapply(ring, function(p) c(p[\[1\]], p[[2]])))
+      m <- do.call(rbind, lapply(ring, function(p) c(p[[1]], p[[2]])))
       if (is.null(m) || nrow(m) < 3L) next
       lons <- m[, 1]
       lats <- m[, 2]
@@ -593,10 +593,10 @@ morie_tps_render_yearly_grid <- function(polys,
   for (i in seq_len(nrow(polys))) {
     geom <- polys$geometry[[i]]
     if (is.null(geom)) next
-    rings <- if (is.list(geom[\[1\]][\[1\]])) geom else list(geom)
+    rings <- if (is.list(geom[[1]][[1]])) geom else list(geom)
     for (ri in seq_along(rings)) {
       ring <- rings[[ri]]
-      m <- do.call(rbind, lapply(ring, function(p) c(p[\[1\]], p[[2]])))
+      m <- do.call(rbind, lapply(ring, function(p) c(p[[1]], p[[2]])))
       if (is.null(m) || nrow(m) < 3L) next
       lons <- m[, 1]
       lats <- m[, 2]
@@ -762,7 +762,7 @@ morie_tps_render_quad <- function(data, outfile = NULL, ...) {
     return(combined)
   }
   # Base fallback: just print first available panel.
-  if (length(panels) > 0L) return(panels[\[1\]])
+  if (length(panels) > 0L) return(panels[[1]])
   invisible(NULL)
 }
 

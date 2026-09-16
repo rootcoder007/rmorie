@@ -160,9 +160,9 @@
   pairs <- 0L
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      if (S\[i, j\] == 0.0 || i == j) next
+      if (S[i, j] == 0.0 || i == j) next
       pairs <- pairs + 1L
-      tot <- tot + S\[i, j\] * sum((Y[i, ] - Y[j, ])^2)
+      tot <- tot + S[i, j] * sum((Y[i, ] - Y[j, ])^2)
     }
   }
   list(loss = tot,
@@ -188,7 +188,7 @@
   if (n >= 2L) {
     for (i in 1:(n - 1L)) {
       for (j in (i + 1L):n) {
-        if (A\[i, j\] != 0.0) first <- first + 1L
+        if (A[i, j] != 0.0) first <- first + 1L
         shared <- sum((A[i, ] != 0.0) & (A[j, ] != 0.0))
         if (shared > 0L) second <- second + 1L
       }

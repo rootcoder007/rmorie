@@ -29,7 +29,7 @@ Deftef <- function(design_var, srs_var) {
   if (any(!(s > 0))) stop("srs_var must be strictly positive")
   deff <- d / s
   deft <- ifelse(deff >= 0, sqrt(abs(deff)), NaN)
-  .t1_result(estimate = if (m == 1L) deff\[1\] else sum(deff) / m,
+  .t1_result(estimate = if (m == 1L) deff[1] else sum(deff) / m,
              deff = deff, deft = deft, n = m,
              method = "Kish design effect DEFF = Var_design / Var_SRS")
 }

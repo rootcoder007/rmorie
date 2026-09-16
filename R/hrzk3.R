@@ -45,15 +45,15 @@ hrzk3 <- function(x, y, bandwidth = NULL, grid = NULL) {
     beta <- tryCatch(solve(XtWX, t(WX) %*% y),
       error = function(e) .morie_ginv(XtWX) %*% (t(WX) %*% y)
     )
-    m_hat[i] <- beta\[1\]
+    m_hat[i] <- beta[1]
     r <- y - X %*% beta
     sigma2 <- sum(w * r^2) / max(sum(w), 1e-12)
     f_hat <- sum(w) / (n * h * sqrt(2 * pi))
     se[i] <- sqrt(max(sigma2, 0) * .hrz_R_K_gaussian / (n * h * max(f_hat, 1e-12)))
   }
   list(
-    estimate = if (length(m_hat) == 1) m_hat\[1\] else m_hat,
-    se = if (length(se) == 1) se\[1\] else se,
+    estimate = if (length(m_hat) == 1) m_hat[1] else m_hat,
+    se = if (length(se) == 1) se[1] else se,
     bandwidth = h, n = n,
     method = "Local-linear regression (Gaussian kernel)"
   )

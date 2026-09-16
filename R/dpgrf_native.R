@@ -23,7 +23,7 @@
 # same validity checks, the same coclustering estimator (a count of
 # draws where two regions share a label, divided by the number of
 # draws), and the same posterior boundary probabilities
-# 1 - coclustering\[i, j\] for adjacent pairs, ranked by descending
+# 1 - coclustering[i, j] for adjacent pairs, ranked by descending
 # probability.
 
 #' Adjacent pairs of regions
@@ -48,7 +48,7 @@
   pairs <- list()
   for (i in seq_len(n - 1L)) {
     for (j in seq.int(i + 1L, n)) {
-      if (A\[i, j\] != 0) pairs[[length(pairs) + 1L]] <- c(i, j)
+      if (A[i, j] != 0) pairs[[length(pairs) + 1L]] <- c(i, j)
     }
   }
   list(pairs = pairs, n_pairs = length(pairs), n_regions = n,

@@ -46,7 +46,7 @@ quntf <- function(x, taus = NULL) {
 # CANONICAL TEST
 # set.seed(0); x <- rnorm(2000)
 # r <- quntf(x, taus = 0.5)
-# stopifnot(abs(r$quantiles\[1\]) < 0.1)
+# stopifnot(abs(r$quantiles[1]) < 0.1)
 
 #' @rdname quntf
 #' @keywords internal

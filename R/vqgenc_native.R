@@ -82,7 +82,7 @@
   if (is.list(x)) {
     n <- length(x)
     if (n == 0L) return(matrix(0, nrow = 0L, ncol = 0L))
-    first <- x[\[1\]]
+    first <- x[[1]]
     d <- length(first)
     result <- matrix(0, nrow = n, ncol = d)
     for (i in seq_len(n)) {

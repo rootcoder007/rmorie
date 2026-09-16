@@ -114,7 +114,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' res <- .varcal_chars(x = x)
 #' res
 .varcal_chars <- function(x) {
-  if (is.character(x) && length(x) == 1L) strsplit(x, "")[\[1\]] else x
+  if (is.character(x) && length(x) == 1L) strsplit(x, "")[[1]] else x
 }
 
 #' .varcal_norm_reads
@@ -199,7 +199,7 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
   reads <- .varcal_norm_reads(reads)
   reference <- .varcal_chars(reference)
   if (min_alt_fraction < 0.0 || min_alt_fraction > 1.0) {
-    stop("varcal: min_alt_fraction must lie in \[0, 1\]")
+    stop("varcal: min_alt_fraction must lie in [0, 1]")
   }
   if (min_alt_count < 1) {
     stop("varcal: min_alt_count must be at least 1")
@@ -362,7 +362,7 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
     mid <- image$width %/% 2
     for (row in image$read_rows) {
       cell <- row[[mid + 1]]
-      if (cell\[1\] > 0.0) {
+      if (cell[1] > 0.0) {
         tot <- tot + 1.0
         if (cell[4] <= 0.5) {
           alt <- alt + 1.0

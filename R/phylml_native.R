@@ -113,7 +113,7 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   M <- matrix(0.0, nrow = 4, ncol = 4)
   for (i in 1:4) {
     for (j in 1:4) {
-      M\[i, j\] <- e * (if (i == j) 1.0 else 0.0) + (1.0 - e) * p[j]
+      M[i, j] <- e * (if (i == j) 1.0 else 0.0) + (1.0 - e) * p[j]
     }
   }
   return(M)
@@ -165,7 +165,7 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   idx <- seq(1, length(node), by = 2)
   for (k in idx) {
     child <- node[[k]]
-    v <- node[\[k + 1\]]
+    v <- node[[k + 1]]
     below <- .phylml_prune(child, site, pi, u, seqs)
     P <- substitution_matrix(v, pi, u)
     for (s in 1:4) {
@@ -226,7 +226,7 @@ morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
     stop(sprintf("phylml: sequences must be aligned to a common length, got %s",
                  paste(sort(unique(lens)), collapse = ", ")))
   }
-  n_sites <- unique(lens)\[1\]
+  n_sites <- unique(lens)[1]
   if (n_sites == 0) {
     stop("phylml: sequences are empty")
   }

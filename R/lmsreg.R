@@ -69,7 +69,7 @@ Lmsreg <- function(y, X, c_np = 1, max_subsets = 200000) {
       part <- numeric(n)
       for (i in seq_len(n)) {
         s <- yy[i]
-        for (j in seq_len(p)) if (j != ic) s <- s - th[j] * Xm\[i, j\]
+        for (j in seq_len(p)) if (j != ic) s <- s - th[j] * Xm[i, j]
         part[i] <- s
       }
       sh <- .rsshortesthalf(part, hloc)
@@ -78,7 +78,7 @@ Lmsreg <- function(y, X, c_np = 1, max_subsets = 200000) {
     res <- numeric(n)
     for (i in seq_len(n)) {
       s <- yy[i]
-      for (j in seq_len(p)) s <- s - th[j] * Xm\[i, j\]
+      for (j in seq_len(p)) s <- s - th[j] * Xm[i, j]
       res[i] <- s
     }
     obj <- .rsmedsq(res)

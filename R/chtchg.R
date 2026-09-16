@@ -43,7 +43,7 @@ Drchange <- function(y, D, period = NULL, unit = NULL, X = NULL) {
     i0 <- NA_integer_
     i1 <- NA_integer_
     for (i in idx) {
-      if (p[i] == pers\[1\]) i0 <- i else if (p[i] == pers[2]) i1 <- i
+      if (p[i] == pers[1]) i0 <- i else if (p[i] == pers[2]) i1 <- i
     }
     if (is.na(i0) || is.na(i1)) next
     if (d[i0] > d[i1]) {

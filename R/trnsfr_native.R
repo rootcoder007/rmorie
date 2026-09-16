@@ -433,7 +433,7 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target = 0, e = NULL,
   }
   fit <- .trnsfr_wls(rows, ys, ws)
   list(
-    estimate = fit$coef[2], intercept = fit$coef\[1\], coef = fit$coef,
+    estimate = fit$coef[2], intercept = fit$coef[1], coef = fit$coef,
     weights = tot, transport_weights = tw, msm_weights = msm_w,
     target = tgt, cohorts = sort(unique(lab)), n = n,
     method = paste0(

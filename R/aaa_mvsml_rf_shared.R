@@ -3,7 +3,7 @@
 #
 # The algorithm is the one printed in Montesinos Lopez, Montesinos Lopez and
 # Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic
-# Prediction, Springer, volume \[Pages 633-681\], Chapter 15, Section 15.4,
+# Prediction, Springer, volume [Pages 633-681], Chapter 15, Section 15.4,
 # pp. 639-640, read as rendered page images: for b = 1, ..., B bootstrap
 # samples, draw a bootstrap sample of size N_train; grow a tree by recursively,
 # for each terminal node, (a) randomly drawing mtry of the p independent
@@ -410,7 +410,7 @@
 }
 
 # Mean decrease in impurity: Imp(X_j) = (1/B) sum_b sum_{t: split on X_j}
-# (n_t/n) \[ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) \], i the within-node
+# (n_t/n) [ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) ], i the within-node
 # sum of squares.  The stored drop is already in raw sum-of-squares units.
 #' Mean decrease in impurity: Imp(X_j) = (1/B) sum_b sum_\{t: split on
 #' X_j\}

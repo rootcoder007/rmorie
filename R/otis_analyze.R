@@ -142,7 +142,7 @@ morie_otis_all_analyses <- function(df, year,
     r <- tryCatch(fns[[nm]](), error = function(e) {
       out <- list(title = sprintf("otis.%s (failed)", nm),
                   warnings = sprintf("%s: %s",
-                                      class(e)\[1\], conditionMessage(e)))
+                                      class(e)[1], conditionMessage(e)))
       class(out) <- c("morie_otis_result", "morie_rich_result", "list")
       out
     })

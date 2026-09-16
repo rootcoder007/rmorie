@@ -82,8 +82,8 @@ Augmn <- function(y_bin, X, Z = NULL, sigma_g2 = 1, max_iter = 200L, tol = 1e-13
     prev <- lat
     for (i in seq_len(n)) {
       eta <- 0
-      for (j in seq_len(p)) eta <- eta + XX\[i, j\] * beta[j]
-      for (j in seq_len(q)) eta <- eta + ZZ\[i, j\] * b[j]
+      for (j in seq_len(p)) eta <- eta + XX[i, j] * beta[j]
+      for (j in seq_len(q)) eta <- eta + ZZ[i, j] * b[j]
       d <- inv2pi * exp(-0.5 * eta * eta)
       P <- .s03pnorm(eta)
       if (yy[i] == 1) {

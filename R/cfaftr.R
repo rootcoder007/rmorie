@@ -41,9 +41,9 @@ Cfaftr <- function(X, factor_structure = NULL) {
   f <- .cfa_em(S, mask)
   load <- f$lam[, 1]
   comm <- load * load
-  num <- S\[1, 2\] * S[1, 3]
+  num <- S[1, 2] * S[1, 3]
   sp <- if (S[2, 3] != 0) sqrt(abs(num / S[2, 3])) else NaN
-  if (load\[1\] < 0) sp <- -sp
+  if (load[1] < 0) sp <- -sp
   .t1_result(estimate = sum(comm) / sum(diag(S)), loadings = load,
              uniquenesses = f$psi, fml = f$fml, max_resid = f$resid,
              communality = comm, spearman = sp, n_iter = f$it, p = p,

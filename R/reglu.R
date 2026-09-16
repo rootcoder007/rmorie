@@ -34,7 +34,7 @@ Reglu <- function(y, x = NULL, W = NULL, V = NULL, b = NULL, c = NULL,
   dead <- 0L
   for (z in gate) if (z == 0) dead <- dead + 1L
   ffn <- if (!is.null(W2)) .s03matvec(t(.s03mat(W2)), out) else numeric(0)
-  list(estimate = if (length(out)) out\[1\] else NaN, out = out, gate = gate,
+  list(estimate = if (length(out)) out[1] else NaN, out = out, gate = gate,
        ffn = ffn, n_dead = dead,
        method = "ReGLU gated activation (Shazeer 2020)")
 }

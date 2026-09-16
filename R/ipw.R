@@ -80,7 +80,7 @@ morie_run_propensity_ipw_analysis <- function(
   ps_model <- stats::glm(ps_formula, data = frame, family = stats::binomial())
   frame$ps <- pmin(pmax(stats::predict(ps_model, type = "response"), 0.01), 0.99)
   frame$ipw <- ifelse(frame[[treatment]] == 1, 1 / frame$ps, 1 / (1 - frame$ps))
-  q01 <- as.numeric(stats::quantile(frame$ipw, trim[\[1\]], na.rm = TRUE))
+  q01 <- as.numeric(stats::quantile(frame$ipw, trim[[1]], na.rm = TRUE))
   q99 <- as.numeric(stats::quantile(frame$ipw, trim[[2]], na.rm = TRUE))
   frame$ipw_trimmed <- pmin(pmax(frame$ipw, q01), q99)
 
@@ -223,10 +223,10 @@ morie_run_ebac_selection_ipw_analysis <- function(
   ebac_final_ipw_or <- data.frame(
     model = "selection_adjusted_ipw",
     term = treatment,
-    log_odds = as.numeric(bin_coef\[1, 1\]),
-    se = as.numeric(bin_coef\[1, 2\]),
-    or = exp(as.numeric(bin_coef\[1, 1\])),
-    or_lower95 = exp(as.numeric(bin_ci\[1\])),
+    log_odds = as.numeric(bin_coef[1, 1]),
+    se = as.numeric(bin_coef[1, 2]),
+    or = exp(as.numeric(bin_coef[1, 1])),
+    or_lower95 = exp(as.numeric(bin_ci[1])),
     or_upper95 = exp(as.numeric(bin_ci[2])),
     p_value = as.numeric(bin_coef[1, ncol(bin_coef)]),
     significant = ifelse(as.numeric(bin_coef[1, ncol(bin_coef)]) < 0.05, "*", ""),
@@ -236,9 +236,9 @@ morie_run_ebac_selection_ipw_analysis <- function(
   ebac_final_ipw_linear <- data.frame(
     model = "selection_adjusted_ipw",
     term = treatment,
-    estimate = as.numeric(lin_coef\[1, 1\]),
-    se = as.numeric(lin_coef\[1, 2\]),
-    ci_lower95 = as.numeric(lin_ci\[1\]),
+    estimate = as.numeric(lin_coef[1, 1]),
+    se = as.numeric(lin_coef[1, 2]),
+    ci_lower95 = as.numeric(lin_ci[1]),
     ci_upper95 = as.numeric(lin_ci[2]),
     p_value = as.numeric(lin_coef[1, ncol(lin_coef)]),
     significant = ifelse(as.numeric(lin_coef[1, ncol(lin_coef)]) < 0.05, "*", ""),

@@ -159,7 +159,7 @@ NULL
 .tps_sp_roll <- function(M, shift, axis) {
   d <- dim(M)
   if (axis == 1L) {
-    idx <- ((seq_len(d\[1\]) - 1L - shift) %% d\[1\]) + 1L
+    idx <- ((seq_len(d[1]) - 1L - shift) %% d[1]) + 1L
     M[idx, , drop = FALSE]
   } else {
     idx <- ((seq_len(d[2]) - 1L - shift) %% d[2]) + 1L
@@ -447,8 +447,8 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
   grid <- .tps_sp_toronto_grid(nx, ny)
   gx <- grid$gx
   gy <- grid$gy
-  dx <- gx[2] - gx\[1\]
-  dy <- gy[2] - gy\[1\]
+  dx <- gx[2] - gx[1]
+  dy <- gy[2] - gy[1]
 
   H <- .tps_sp_hist2d(prj$x, prj$y, gx, gy)
   Hmax <- max(H, 1)
@@ -727,7 +727,7 @@ morie_tps_urban_scaling_beta <- function(category = "Assault",
   yy <- substr(as.character(year), 3L, 4L)
   pop_idx <- which(grepl("POP", upper_cols) & grepl(yy, upper_cols))
   if (length(pop_idx) == 0L) pop_idx <- which(grepl("POP", upper_cols))
-  pop_col <- if (length(pop_idx) > 0L) colnames(df)[pop_idx\[1\]] else NULL
+  pop_col <- if (length(pop_idx) > 0L) colnames(df)[pop_idx[1]] else NULL
   prefix_map <- c(Assault = "ASSAULT", AutoTheft = "AUTOTHEFT",
                   BicycleTheft = "BIKETHEFT",
                   BreakandEnter = "BREAKENTER",
@@ -1107,7 +1107,7 @@ morie_tps_inspection_game_phase <- function(n_temptations = 20L,
         ssum <- sum(x)
         x <- if (ssum > 0) x / ssum else c(0.34, 0.33, 0.33)
       }
-      crime\[i, j\] <- x[2]
+      crime[i, j] <- x[2]
     }
   }
 
@@ -1194,7 +1194,7 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
   }
   candidate <- c("PREMISES_TYPE", "LOCATION_TYPE",
                  "HOMICIDE_TYPE", "OFFENCE", "DIVISION")
-  node_col <- intersect(candidate, colnames(df))\[1\]
+  node_col <- intersect(candidate, colnames(df))[1]
   if (is.na(node_col) || is.null(node_col)) {
     return(.tps_sp_result(
       title = sprintf("Criminal network -- %s", category),
@@ -1237,11 +1237,11 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
       mw <- max(co[upper.tri(co)], 1)
       for (i in seq_len(n_nodes - 1L)) {
         for (j in seq(i + 1L, n_nodes)) {
-          if (co\[i, j\] > 0) {
+          if (co[i, j] > 0) {
             graphics::segments(px[i], py[i], px[j], py[j],
               col = grDevices::adjustcolor("#3584e4",
-                alpha.f = 0.15 + 0.6 * co\[i, j\] / mw),
-              lwd = 0.5 + 2.5 * co\[i, j\] / mw)
+                alpha.f = 0.15 + 0.6 * co[i, j] / mw),
+              lwd = 0.5 + 2.5 * co[i, j] / mw)
           }
         }
       }

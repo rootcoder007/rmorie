@@ -314,7 +314,7 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
   labs <- unique(g)
   if (length(labs) != 2L)
     stop(sprintf("need exactly 2 groups; got %d.", length(labs)), call. = FALSE)
-  a <- labs\[1\]
+  a <- labs[1]
   ut <- sort(unique(t[e == 1]))
   if (length(ut) == 0L) stop("no events.", call. = FALSE)
   n <- vapply(ut, function(tt) sum(t >= tt), numeric(1))

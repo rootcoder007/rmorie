@@ -40,7 +40,7 @@ Gpkern <- function(X, Y = NULL, kernel_spec = NULL) {
   rbf <- function(P, Q, ell, var) {
     out <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      out\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      out[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     out
   }
   warp <- function(P) {
@@ -62,9 +62,9 @@ Gpkern <- function(X, Y = NULL, kernel_spec = NULL) {
       stop(paste("gp_kernel_compose: unknown kernel type", typ))
     K <- if (is.null(K)) Kp else if (op == "sum") K + Kp else K * Kp
   }
-  lo <- if (is.null(Y)) .s03jacobi(K)$values\[1\] else NaN
+  lo <- if (is.null(Y)) .s03jacobi(K)$values[1] else NaN
   d <- diag(K[seq_len(min(nrow(A), nrow(B))), seq_len(min(nrow(A), nrow(B))), drop = FALSE])
-  .t1_result(estimate = K\[1, 1\], K = K, diagonal = d, min_eigenvalue = lo,
+  .t1_result(estimate = K[1, 1], K = K, diagonal = d, min_eigenvalue = lo,
              is_psd = as.integer(is.nan(lo) || lo > -1e-10), n = nrow(A),
              method = "sum/product/warp composition of RBF kernels, Duvenaud et al. (2013); Rasmussen & Williams (2006) sect. 4.2.4")
 }

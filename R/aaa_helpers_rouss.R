@@ -84,7 +84,7 @@
   n <- nrow(A)
   M <- matrix(as.numeric(A), n, n)
   amax <- 0
-  for (i in seq_len(n)) for (j in seq_len(n)) if (abs(M\[i, j\]) > amax) amax <- abs(M\[i, j\])
+  for (i in seq_len(n)) for (j in seq_len(n)) if (abs(M[i, j]) > amax) amax <- abs(M[i, j])
   thresh <- .RS_SINGULAR_TOL * amax
   piv <- seq_len(n)
   sgn <- 1
@@ -207,13 +207,13 @@
   y <- numeric(n)
   for (i in seq_len(n)) {
     s <- b[piv[i]]
-    if (i > 1L) for (j in seq_len(i - 1L)) s <- s - M\[i, j\] * y[j]
+    if (i > 1L) for (j in seq_len(i - 1L)) s <- s - M[i, j] * y[j]
     y[i] <- s
   }
   x <- numeric(n)
   for (i in seq(n, 1L)) {
     s <- y[i]
-    if (i < n) for (j in seq(i + 1L, n)) s <- s - M\[i, j\] * x[j]
+    if (i < n) for (j in seq(i + 1L, n)) s <- s - M[i, j] * x[j]
     x[i] <- s / M[i, i]
   }
   x
@@ -235,13 +235,13 @@
   m <- length(idx)
   p <- ncol(X)
   mu <- numeric(p)
-  for (i in idx) for (j in seq_len(p)) mu[j] <- mu[j] + X\[i, j\]
+  for (i in idx) for (j in seq_len(p)) mu[j] <- mu[j] + X[i, j]
   mu <- mu / m
   S <- matrix(0, p, p)
   for (i in idx) {
     for (a in seq_len(p)) {
       da <- X[i, a] - mu[a]
-      for (b in seq_len(p)) S\[a, b\] <- S\[a, b\] + da * (X[i, b] - mu[b])
+      for (b in seq_len(p)) S[a, b] <- S[a, b] + da * (X[i, b] - mu[b])
     }
   }
   den <- if (m > 1L) m - 1 else 1
@@ -391,7 +391,7 @@
   list(idx = sort(ord[seq_len(h)]), det = d0)
 }
 
-# The maximal-breakdown h of Rousseeuw (1984) Remark 1, \[n/2\] + \[(p+1)/2\].
+# The maximal-breakdown h of Rousseeuw (1984) Remark 1, [n/2] + [(p+1)/2].
 #' The maximal-breakdown h of Rousseeuw (1984) Remark 1, \[n/2\] +
 #' \[(p+1)/2\]
 #'
@@ -408,7 +408,7 @@
 #' res
 .rstrimmedh <- function(n, p) n %/% 2L + (p + 1L) %/% 2L
 
-# The most robust MCD subset size, \[(n + p + 1) / 2\].
+# The most robust MCD subset size, [(n + p + 1) / 2].
 #' The most robust MCD subset size, \[(n + p + 1) / 2\]
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Fastm}, \code{Mcdcv},
@@ -447,7 +447,7 @@
   s <- sort(v)
   n <- length(s)
   best <- 1L
-  bw <- s[h] - s\[1\]
+  bw <- s[h] - s[1]
   if (n > h) {
     for (a in 2:(n - h + 1L)) {
       w <- s[a + h - 1L] - s[a]
@@ -520,7 +520,7 @@
   for (j in seq_len(p)) {
     allone <- TRUE
     for (i in seq_len(n)) {
-      if (Xm\[i, j\] != 1) {
+      if (Xm[i, j] != 1) {
         allone <- FALSE
         break
       }
@@ -576,7 +576,7 @@
   sq <- numeric(n)
   for (i in seq_len(n)) {
     s <- yy[i]
-    for (j in seq_len(p)) s <- s - th[j] * Xm\[i, j\]
+    for (j in seq_len(p)) s <- s - th[j] * Xm[i, j]
     sq[i] <- s * s
   }
   ord <- .rsosort(sq)

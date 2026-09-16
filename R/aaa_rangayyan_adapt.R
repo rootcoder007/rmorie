@@ -52,7 +52,7 @@
 #' res <- .morie_rg_ccf(x = x, d = g, lags = 3L)
 #' res
 .morie_rg_ccf <- function(x, d, lags) {
-  # theta(k) = E\[x(n-k) d(n)\], the right-hand side of eq. (3.168)
+  # theta(k) = E[x(n-k) d(n)], the right-hand side of eq. (3.168)
   n <- min(length(x), length(d))
   vapply(seq_len(lags) - 1L, function(k) {
     i <- seq.int(k + 1L, n)
@@ -160,7 +160,7 @@ WienerDot <- function(w, xvec) {
   if (length(ws) != length(xv)) {
     stop(
       "w and x(n) must have the same length; x(n) runs backwards in ",
-      "time, x\[1\] being the current sample"
+      "time, x[1] being the current sample"
     )
   }
   if (!length(ws)) stop("need at least one tap")
@@ -1287,8 +1287,8 @@ RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
   for (i in seq_len(n)) {
     f <- numeric(m + 1L)
     b <- numeric(m + 1L)
-    f\[1\] <- xs[i]
-    b\[1\] <- xs[i]
+    f[1] <- xs[i]
+    b[1] <- xs[i]
     for (s in seq_len(m) + 1L) {
       cross[s] <- lv * cross[s] + f[s - 1L] * bprev[s - 1L]
       fe[s] <- lv * fe[s] + f[s - 1L] * f[s - 1L]
@@ -1633,10 +1633,10 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
   nmax <- min(length(a), length(b))
   rt <- .morie_rg_acf(a, nmax)
   rr <- .morie_rg_acf(b, nmax)
-  if (rt\[1\] <= 0 || rr\[1\] <= 0) stop("a window has zero energy")
+  if (rt[1] <= 0 || rr[1] <= 0) stop("a window has zero energy")
   first_neg <- function(r) {
     neg <- which(r[-1] < 0)
-    if (!length(neg)) length(r) else neg\[1\]
+    if (!length(neg)) length(r) else neg[1]
   }
   auto <- min(first_neg(rt), first_neg(rr)) - 1L
   if (is.null(lags)) {
@@ -1654,8 +1654,8 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
   if (q < 1L) {
     stop("both ACFs turn negative at lag 1; no lags to compare")
   }
-  st <- sqrt(rt\[1\])
-  sr <- sqrt(rr\[1\])
+  st <- sqrt(rt[1])
+  sr <- sqrt(rr[1])
   dp <- abs(st - sr) / min(st, sr)
   k <- seq_len(q) + 1L
   num <- .morie_fsum(abs(rt[k] - rr[k]))
@@ -1665,8 +1665,8 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
   list(
     distance = d, power_distance = dp, spectral_distance = df,
     lags = q, lags_auto = is.null(lags), acf_test = rt[seq_len(q + 1L)],
-    acf_reference = rr[seq_len(q + 1L)], power_test = rt\[1\],
-    power_reference = rr\[1\], boundary = d > 1,
+    acf_reference = rr[seq_len(q + 1L)], power_test = rt[1],
+    power_reference = rr[1], boundary = d > 1,
     th_power = as.numeric(thp), th_spectral = as.numeric(thf),
     amplitude_invariant = FALSE,
     method = paste(
@@ -1728,7 +1728,7 @@ PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
   if (w <= p) stop("the window must hold more samples than the order")
   spectrum <- function(seg) {
     acf <- .morie_rg_acf(seg, p + 1L)
-    if (acf\[1\] <= 0) {
+    if (acf[1] <= 0) {
       return(NULL)
     }
     idx <- outer(seq_len(p), seq_len(p), function(i, j) abs(i - j) + 1L)
@@ -1745,11 +1745,11 @@ PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
       re <- 1 + .morie_fsum(a * cos(-om * j))
       im <- .morie_fsum(a * sin(-om * j))
       den <- re * re + im * im
-      if (den > 0) acf\[1\] / den else 1e-300
+      if (den > 0) acf[1] / den else 1e-300
     }, numeric(1))
   }
   starts <- seq.int(1L, n - w + 1L, by = hop)
-  ref0 <- spectrum(xs[starts\[1\]:(starts\[1\] + w - 1L)])
+  ref0 <- spectrum(xs[starts[1]:(starts[1] + w - 1L)])
   if (is.null(ref0)) stop("the first window has no usable AR spectrum")
   values <- vapply(starts, function(s) {
     sp <- spectrum(xs[s:(s + w - 1L)])

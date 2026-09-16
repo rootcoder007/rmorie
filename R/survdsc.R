@@ -62,7 +62,7 @@ Disctime <- function(time_discrete, event, X = NULL, max_iter = 100,
       wgt <- dh * dh / (h * (1 - h))
       for (a in seq_len(q)) {
         gr[a] <- gr[a] + Rm[r, a] * s
-        for (b in seq_len(q)) H\[a, b\] <- H\[a, b\] + Rm[r, a] * wgt * Rm[r, b]
+        for (b in seq_len(q)) H[a, b] <- H[a, b] + Rm[r, a] * wgt * Rm[r, b]
       }
     }
     step <- .s03ridgesolve(H, gr, ridge)

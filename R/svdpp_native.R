@@ -62,7 +62,7 @@
   if (length(N) == 0) {
     width <- 0L
     if (length(y) > 0) {
-      width <- length(y[\[1\]])
+      width <- length(y[[1]])
     }
     return(list(
       term = rep(0.0, width),
@@ -70,7 +70,7 @@
       note = "a user with no ratings gets no implicit signal"
     ))
   }
-  first_j <- as.character(N[\[1\]])
+  first_j <- as.character(N[[1]])
   d <- length(y[[first_j]])
   s <- numeric(d)
   for (j in N) {
@@ -215,7 +215,7 @@
                       exponent = -0.5, seed = 0,
                       implicit = TRUE) {
   R <- lapply(ratings, function(x) {
-    list(as.integer(x[\[1\]]), as.integer(x[[2]]), as.numeric(x[[3]]))
+    list(as.integer(x[[1]]), as.integer(x[[2]]), as.numeric(x[[3]]))
   })
   if (length(R) == 0) {
     stop("svdpp: no ratings given")
@@ -237,7 +237,7 @@
   names(Y) <- as.character(seq_len(ni) - 1L)
   N <- list()
   for (rating in R) {
-    u <- as.character(rating[\[1\]])
+    u <- as.character(rating[[1]])
     i <- rating[[2]]
     N[[u]] <- c(N[[u]], i)
   }
@@ -245,7 +245,7 @@
   for (epoch in seq_len(epochs)) {
     se <- 0.0
     for (rating in R) {
-      u <- rating[\[1\]]
+      u <- rating[[1]]
       i <- rating[[2]]
       r <- rating[[3]]
       items <- if (implicit) N[[as.character(u)]] else NULL

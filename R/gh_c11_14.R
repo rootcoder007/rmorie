@@ -44,9 +44,9 @@ Ghosalgplaplace <- function(x = NULL, y = NULL, length = 0.5, seed = 42) {
   W <- p * (1 - p)
   B <- solve(K) + diag(W, n)
   e0 <- c(1, numeric(n - 1))
-  var0 <- solve(B, e0)\[1\]
+  var0 <- solve(B, e0)[1]
   .t1_result(estimate = p[n], mode_probs = p,
              laplace_var_site0 = var0,
-             separates = p[n] > 0.5 && 0.5 > p\[1\],
+             separates = p[n] > 0.5 && 0.5 > p[1],
              method = "GP Laplace approximation (GvdV 2017 sec. 11.7.5)")
 }

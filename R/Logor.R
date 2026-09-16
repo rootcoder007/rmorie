@@ -29,9 +29,9 @@
 #' Logor(-0.2322, 0, 10)$or
 #' @export
 Logor <- function(beta1, a = 0, b = 1, se = NULL, level = 0.95) {
-  beta1 <- as.numeric(beta1)\[1\]
-  a <- as.numeric(a)\[1\]
-  b <- as.numeric(b)\[1\]
+  beta1 <- as.numeric(beta1)[1]
+  a <- as.numeric(a)[1]
+  b <- as.numeric(b)[1]
   if (!is.finite(beta1) || !is.finite(a) || !is.finite(b)) {
     stop("beta1, a and b must be finite")
   }
@@ -40,7 +40,7 @@ Logor <- function(beta1, a = 0, b = 1, se = NULL, level = 0.95) {
   lor <- beta1 * span
   out <- list(or = exp(lor), logor = lor, span = span)
   if (!is.null(se)) {
-    se <- as.numeric(se)\[1\]
+    se <- as.numeric(se)[1]
     if (!is.finite(se) || se <= 0) stop("se must be a finite positive number")
     se_lor <- abs(span) * se
     z <- stats::qnorm(0.5 + level / 2)

@@ -32,13 +32,13 @@ Lineembed <- function(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0,
   if (is.null(U)) {
     U <- matrix(0, n, d)
     for (i in seq_len(n)) for (j in seq_len(d)) {
-      U\[i, j\] <- .s03vdc((i - 1L) * d + (j - 1L), 2L) - 0.5
+      U[i, j] <- .s03vdc((i - 1L) * d + (j - 1L), 2L) - 0.5
     }
   } else U <- .s03mat(U)
   if (is.null(Uc)) {
     Uc <- matrix(0, n, d)
     for (i in seq_len(n)) for (j in seq_len(d)) {
-      Uc\[i, j\] <- .s03vdc((i - 1L) * d + (j - 1L), 3L) - 0.5
+      Uc[i, j] <- .s03vdc((i - 1L) * d + (j - 1L), 3L) - 0.5
     }
   } else Uc <- .s03mat(Uc)
   obj <- function() {
@@ -54,14 +54,14 @@ Lineembed <- function(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0,
         lse <- .s03logsumexp(logits)
       }
       for (j in seq_len(n)) {
-        if (W\[i, j\] == 0) next
+        if (W[i, j] == 0) next
         if (as.integer(order) == 2L) {
-          o <- o - W\[i, j\] * (logits[j] - lse)
+          o <- o - W[i, j] * (logits[j] - lse)
         } else {
           s <- 0
           for (a in seq_len(d)) s <- s + U[i, a] * U[j, a]
           p <- .s03sigmoid(s)
-          o <- o - W\[i, j\] * log(if (p > 1e-300) p else 1e-300)
+          o <- o - W[i, j] * log(if (p > 1e-300) p else 1e-300)
         }
       }
     }
@@ -71,10 +71,10 @@ Lineembed <- function(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0,
   for (st in seq_len(as.integer(steps))) {
     gU <- matrix(0, n, d)
     for (i in seq_len(n)) for (j in seq_len(n)) {
-      if (W\[i, j\] == 0 || as.integer(order) != 1L) next
+      if (W[i, j] == 0 || as.integer(order) != 1L) next
       s <- 0
       for (a in seq_len(d)) s <- s + U[i, a] * U[j, a]
-      cc <- W\[i, j\] * (.s03sigmoid(s) - 1)
+      cc <- W[i, j] * (.s03sigmoid(s) - 1)
       for (a in seq_len(d)) {
         gU[i, a] <- gU[i, a] + cc * U[j, a]
         gU[j, a] <- gU[j, a] + cc * U[i, a]

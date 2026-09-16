@@ -309,8 +309,8 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
     tot <- tot + lgamma(b) - lgamma(njk + b)
   }
   for (k1 in ls(N_ijk)) {
-    parts <- strsplit(k1, "\r", fixed = TRUE)[\[1\]]
-    i <- as.integer(parts\[1\])
+    parts <- strsplit(k1, "\r", fixed = TRUE)[[1]]
+    i <- as.integer(parts[1])
     c <- N_ijk[[k1]]
     tot <- tot + lgamma(c + b * mm[i + 1]) - lgamma(b * mm[i + 1])
   }

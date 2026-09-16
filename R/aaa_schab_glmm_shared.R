@@ -625,7 +625,7 @@
 .schab_lcar_precision <- function(R, rho, sigma2 = 1) {
   R <- as.matrix(R)
   rho <- as.numeric(rho) # eq (6)
-  if (rho < 0 || rho > 1) stop("`rho` must lie in \[0, 1\]", call. = FALSE)
+  if (rho < 0 || rho > 1) stop("`rho` must lie in [0, 1]", call. = FALSE)
   if (sigma2 <= 0) stop("`sigma2` must be positive", call. = FALSE)
   rho * R + (1 - rho) * diag(nrow(R))
 }
@@ -646,7 +646,7 @@
   u <- as.numeric(u)
   A <- as.matrix(adjacency)
   rho <- as.numeric(rho)
-  if (rho < 0 || rho > 1) stop("`rho` must lie in \[0, 1\]", call. = FALSE)
+  if (rho < 0 || rho > 1) stop("`rho` must lie in [0, 1]", call. = FALSE)
   n_i <- rowSums(A) # eq (7)
   denom <- (1 - rho) + n_i * rho
   list(

@@ -28,12 +28,12 @@ Aicar <- function(x, max_p = 10, demean = TRUE) {
   mu <- if (isTRUE(demean)) mean(x) else 0
   z <- x - mu
   g <- vapply(0:P, function(k) sum(z[(k + 1):T] * z[1:(T - k)]) / T, numeric(1))
-  if (g\[1\] <= 0) stop("series has zero variance")
-  sig <- g\[1\]
+  if (g[1] <= 0) stop("series has zero variance")
+  sig <- g[1]
   phi <- numeric(0)
   pacf <- numeric(0)
   for (k in seq_len(P)) {
-    num <- g\[k + 1\] - if (k > 1) sum(phi * g[k:2]) else 0
+    num <- g[k + 1] - if (k > 1) sum(phi * g[k:2]) else 0
     kk <- num / sig[k]
     pacf <- c(pacf, kk)
     phi <- c(if (k > 1) phi - kk * rev(phi) else numeric(0), kk)

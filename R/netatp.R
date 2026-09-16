@@ -61,7 +61,7 @@ Netattack <- function(A, strategy = "attack", k = 1, seed = 1) {
     }
   }
   sizes <- sort(as.integer(table(comp)), decreasing = TRUE)
-  giant <- if (length(sizes)) sizes\[1\] else 0L
+  giant <- if (length(sizes)) sizes[1] else 0L
   rest <- if (length(sizes) > 1) sizes[-1] else integer(0)
   tot <- 0
   pairs <- 0L

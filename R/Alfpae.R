@@ -21,15 +21,15 @@
 #' @export
 Alfpae <- function(z, w, bins = NULL) {
   if (is.null(bins)) bins <- 0.25 + 0.5 * (seq_len(64) - 1)
-  n <- dim(z)\[1\]
+  n <- dim(z)[1]
   nb <- length(bins)
   pae <- matrix(0, n, n)
   ps <- array(0, c(n, n, nb))
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      p <- alfSmax(alfLin(z\[i, j, \], w))
-      ps\[i, j, \] <- p
-      pae\[i, j\] <- sum(p * bins)
+      p <- alfSmax(alfLin(z[i, j, ], w))
+      ps[i, j, ] <- p
+      pae[i, j] <- sum(p * bins)
     }
   }
   list(

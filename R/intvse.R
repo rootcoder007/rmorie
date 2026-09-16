@@ -28,7 +28,7 @@
 Intvse <- function(Y, X, M, Cc = NULL, a = 1, astar = 0) {
   mm <- .s4_medmodels(Y, X, M, Cc)
   d <- a - astar
-  bc <- mm$beta\[1\] + mm$beta[2] * astar
+  bc <- mm$beta[1] + mm$beta[2] * astar
   if (length(mm$cbar)) bc <- bc + sum(mm$beta[2 + seq_along(mm$cbar)] * mm$cbar)
   ide <- (mm$theta[2] + mm$theta[4] * bc) * d
   iie <- (mm$theta[3] + mm$theta[4] * a) * mm$beta[2] * d

@@ -53,11 +53,11 @@ Itrct1 <- function(y, D, V, X) {
   }
   K <- length(levels)
   if (K >= 2L) {
-    est <- atts[K] - atts\[1\]
-    se <- sqrt(ses[K]^2 + ses\[1\]^2)
+    est <- atts[K] - atts[1]
+    se <- sqrt(ses[K]^2 + ses[1]^2)
   } else {
-    est <- atts\[1\]
-    se <- ses\[1\]
+    est <- atts[1]
+    se <- ses[1]
   }
   full <- .s03drdid(dy, d, rows)
   .t1_result(estimate = est, se = se, att = atts, att_se = ses,

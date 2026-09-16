@@ -64,13 +64,13 @@ Hrzph <- function(t, x, event = NULL, max_iter = 100L, tol = 1e-12) {
         s0 <- s0 + w
         for (a in seq_len(p)) {
           s1[a] <- s1[a] + w * XX[j, a]
-          for (b in seq_len(p)) s2\[a, b\] <- s2\[a, b\] + w * XX[j, a] * XX[j, b]
+          for (b in seq_len(p)) s2[a, b] <- s2[a, b] + w * XX[j, a] * XX[j, b]
         }
       }
       for (a in seq_len(p)) {
         g[a] <- g[a] - XX[i, a] + s1[a] / s0
         for (b in seq_len(p)) {
-          H\[a, b\] <- H\[a, b\] - (s2\[a, b\] / s0 - (s1[a] / s0) * (s1[b] / s0))
+          H[a, b] <- H[a, b] - (s2[a, b] / s0 - (s1[a] / s0) * (s1[b] / s0))
         }
       }
     }
@@ -103,7 +103,7 @@ Hrzph <- function(t, x, event = NULL, max_iter = 100L, tol = 1e-12) {
     col <- .s03ridgesolve(-H, e, 1e-12)
     se[a] <- if (col[a] > 0) sqrt(col[a]) else NA_real_
   }
-  list(estimate = beta\[1\], beta_hat = beta, se = se, h0_hat = jumps,
+  list(estimate = beta[1], beta_hat = beta, se = se, h0_hat = jumps,
        event_times = times, Lambda0 = cum, n = n, n_events = length(times),
        method = paste0("Horowitz (2009) eq. (6.32) partial likelihood with ",
                        "exp(-x b); baseline by (6.36)"))

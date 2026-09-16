@@ -154,7 +154,7 @@
 .draw_unif <- function(e, bounds, n) {
   nn <- as.integer(n)
   vapply(bounds,
-         function(b) .ghc_unif(e, nn, b\[1\], b[2]),
+         function(b) .ghc_unif(e, nn, b[1], b[2]),
          numeric(nn))
 }
 
@@ -178,7 +178,7 @@
   if (!identical(kernel, "matern52"))
     stop("bayoptr: kernel must be 'matern52'")
   b <- lapply(bounds, as.numeric)
-  if (any(vapply(b, function(r) r[2] <= r\[1\], logical(1))))
+  if (any(vapply(b, function(r) r[2] <= r[1], logical(1))))
     stop("bayoptr: each bound must satisfy low < high")
   e <- .ghc_rng(seed)
   if (is.null(X0)) {

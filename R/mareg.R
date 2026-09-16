@@ -53,7 +53,7 @@ Mareg <- function(yi, vi, X) {
   ll <- -0.5 * sum(log(2 * pi * (v + tau2)) + (y - fit)^2 / (v + tau2))
   one <- matrix(1, n, 1)
   fn <- .ma_wls(one, y, w0)
-  r1 <- y - fn$beta\[1\]
+  r1 <- y - fn$beta[1]
   Q1 <- sum(w0 * r1^2)
   d1 <- sum(w0) - sum(w0^2) / sum(w0)
   tau2_null <- 0

@@ -16,7 +16,7 @@ PoisPeak <- function(n, p) {
   n <- as.integer(n)
   p <- as.numeric(p)
   if (is.na(n) || n < 0L || is.na(p) || p < 0 || p > 1) {
-    stop("need n >= 0 integer and p in \[0, 1\].", call. = FALSE)
+    stop("need n >= 0 integer and p in [0, 1].", call. = FALSE)
   }
   k <- as.integer(round(p * n))
   list(k = k, PP = PoisPmf(k, p * n)$probability)

@@ -32,7 +32,7 @@ madMov <- function(x, window, constant = 1.4826) {
 
 # CANONICAL TEST
 # r <- madMov(c(1,2,3,4,5,6), 3)
-# stopifnot(length(r$values) == 4L, abs(r$values\[1\] - 1.4826) < 1e-12)
+# stopifnot(length(r$values) == 4L, abs(r$values[1] - 1.4826) < 1e-12)
 
 #' @rdname madMov
 #' @keywords internal

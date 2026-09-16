@@ -67,8 +67,8 @@ cokrg <- function(x, y, coords, target,
     ses[k] <- sqrt(max(var0 - sum(w * c_vec), 0))
   }
   list(
-    estimate = if (m == 1) ests\[1\] else ests,
-    se = if (m == 1) ses\[1\] else ses, n = n,
+    estimate = if (m == 1) ests[1] else ests,
+    se = if (m == 1) ses[1] else ses, n = n,
     method = "Simple morie_cokriging (linear coregionalization, exp. cov)"
   )
 }

@@ -27,17 +27,17 @@ Fiedlercut <- function(A, normalized = TRUE) {
   n <- nrow(W)
   d <- numeric(n)
   for (i in seq_len(n)) { s <- 0
-  for (j in seq_len(n)) s <- s + W\[i, j\]
+  for (j in seq_len(n)) s <- s + W[i, j]
   d[i] <- s }
   L <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    L\[i, j\] <- (if (i == j) d[i] else 0) - W\[i, j\]
+    L[i, j] <- (if (i == j) d[i] else 0) - W[i, j]
   }
   if (normalized) {
     for (i in seq_len(n)) for (j in seq_len(n)) {
       di <- if (d[i] > 0) sqrt(d[i]) else 0
       dj <- if (d[j] > 0) sqrt(d[j]) else 0
-      L\[i, j\] <- if (di > 0 && dj > 0) L\[i, j\] / (di * dj) else 0
+      L[i, j] <- if (di > 0 && dj > 0) L[i, j] / (di * dj) else 0
     }
   }
   eg <- .s03jacobi(L)

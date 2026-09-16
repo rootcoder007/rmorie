@@ -70,7 +70,7 @@ caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
   for (i in 1:(m_count - 1L)) {
     for (j in (i + 1L):m_count) {
       v <- .ca_rms(mods[[i]], mods[[j]])
-      s\[i, j\] <- v
+      s[i, j] <- v
       s[j, i] <- v
     }
   }

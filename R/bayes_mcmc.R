@@ -248,8 +248,8 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
 #' @export
 morie_bayes_rhat <- function(chains) {
   m <- length(chains)
-  n <- nrow(chains[\[1\]])
-  r <- vapply(seq_len(ncol(chains[\[1\]])), function(j) {
+  n <- nrow(chains[[1]])
+  r <- vapply(seq_len(ncol(chains[[1]])), function(j) {
     xs <- vapply(chains, function(c) c[, j], numeric(n))
     chain_means <- colMeans(xs)
     grand <- mean(chain_means)
@@ -260,7 +260,7 @@ morie_bayes_rhat <- function(chains) {
     }
     sqrt(((n - 1) / n * W + B / n) / W)
   }, numeric(1))
-  stats::setNames(r, colnames(chains[\[1\]]))
+  stats::setNames(r, colnames(chains[[1]]))
 }
 
 #' Effective sample size (per parameter, autocorrelation-based)
@@ -275,7 +275,7 @@ morie_bayes_ess <- function(chains) {
   n <- nrow(post)
   e <- vapply(seq_len(ncol(post)), function(j) {
     a <- stats::acf(post[, j], plot = FALSE, lag.max = min(50L, n - 1L))$acf[-1]
-    a <- a[seq_len(which(c(a, -1) < 0)\[1\] - 1)] # sum positive autocorr
+    a <- a[seq_len(which(c(a, -1) < 0)[1] - 1)] # sum positive autocorr
     n / (1 + 2 * sum(a, na.rm = TRUE))
   }, numeric(1))
   stats::setNames(pmax(e, 1), colnames(post))
@@ -337,7 +337,7 @@ morie_bayes_continue <- function(fit, iter = 1000L, ...) {
   stopifnot(inherits(fit, "morie_bayes_fit"))
   starts <- lapply(fit$chains, function(c) c[nrow(c), ]) # last state per chain
   data <- as.data.frame(cbind(fit$y, fit$X[, -1, drop = FALSE]))
-  names(data)\[1\] <- all.vars(fit$formula)\[1\]
+  names(data)[1] <- all.vars(fit$formula)[1]
   morie_bayes_lm(fit$formula, data,
     chains = fit$n_chains, iter = iter,
     warmup = 0L, starting_values = starts, ...

@@ -123,11 +123,11 @@ NULL
   u <- as.numeric(u)
   switch(kind,
     exponential = {
-      beta <- psi\[1\]
+      beta <- psi[1]
       beta * exp(-beta * u)
     },
     gamma = {
-      alpha <- psi\[1\]
+      alpha <- psi[1]
       beta <- psi[2]
       log_d <- alpha * log(beta) +
                (alpha - 1) * log(pmax(u, 1e-300)) -
@@ -135,14 +135,14 @@ NULL
       exp(log_d)
     },
     weibull = {
-      alpha <- psi\[1\]
+      alpha <- psi[1]
       lam <- psi[2]
       x <- u / lam
       (alpha / lam) * pmax(x, 1e-300) ^ (alpha - 1) *
         exp(-x ^ alpha)
     },
     lomax = {
-      alpha <- psi\[1\]
+      alpha <- psi[1]
       c_ <- psi[2]
       # v0.9.5.6+: scipy.stats.lomax convention.
       # log-space: alpha * c^alpha * (u + c)^{-(alpha+1)}
@@ -163,10 +163,10 @@ NULL
   }
   u <- as.numeric(u)
   switch(kind,
-    exponential = 1 - exp(-psi\[1\] * u),
-    gamma = stats::pgamma(u, shape = psi\[1\], rate = psi[2]),
-    weibull = 1 - exp(-(u / psi[2]) ^ psi\[1\]),
-    lomax = 1 - (psi[2] / (u + psi[2])) ^ psi\[1\],  # v0.9.5.6+: scipy
+    exponential = 1 - exp(-psi[1] * u),
+    gamma = stats::pgamma(u, shape = psi[1], rate = psi[2]),
+    weibull = 1 - exp(-(u / psi[2]) ^ psi[1]),
+    lomax = 1 - (psi[2] / (u + psi[2])) ^ psi[1],  # v0.9.5.6+: scipy
     stop(sprintf("unknown kernel kind: %s", kind))
   )
 }
@@ -181,8 +181,8 @@ NULL
 .tps_hwka_baseline <- function(t, kind, alpha, T_) {
   t <- as.numeric(t)
   switch(kind,
-    constant = rep(exp(alpha\[1\]), length(t)),
-    sinusoidal = exp(alpha\[1\] +
+    constant = rep(exp(alpha[1]), length(t)),
+    sinusoidal = exp(alpha[1] +
                      alpha[2] * (t / max(T_, 1)) +
                      alpha[3] * sin(2 * pi * t / 365.25) +
                      alpha[4] * cos(2 * pi * t / 365.25)),
@@ -193,7 +193,7 @@ NULL
 #' Internal helper: Tps Hwka Baseline Integral
 #' @noRd
 .tps_hwka_baseline_integral <- function(T_, kind, alpha) {
-  if (identical(kind, "constant")) return(exp(alpha\[1\]) * T_)
+  if (identical(kind, "constant")) return(exp(alpha[1]) * T_)
   if (identical(kind, "sinusoidal") && .tps_hwka_cpp_ok()) {
     n_grid <- max(64L, as.integer(T_) + 1L)
     return(morie_hawkes_baseline_integral_cpp(as.numeric(T_),
@@ -243,7 +243,7 @@ NULL
 
   if (eta <= 1e-6 || eta >= 0.999) return(1e12)
   if (any(psi <= 1e-6)) return(1e12)
-  if (identical(kernel_kind, "lomax") && psi\[1\] <= 1.001) {
+  if (identical(kernel_kind, "lomax") && psi[1] <= 1.001) {
     return(1e12)  # need alpha > 1 for finite mean (scipy convention)
   }
 
@@ -261,7 +261,7 @@ NULL
     log_sum <- 0
     for (i in seq_len(n)) {
       if (i == 1L) {
-        lam_i <- nu_at_t\[1\]
+        lam_i <- nu_at_t[1]
       } else {
         lags <- t[i] - t[seq_len(i - 1L)]
         lam_i <- nu_at_t[i] +
@@ -417,7 +417,7 @@ NULL
 #' Internal helper: Tps Hwka Events To Days
 #' @noRd
 .tps_hwka_events_to_days <- function(df, max_n) {
-  date_col <- intersect(c("OCC_DATE", "REPORT_DATE"), colnames(df))\[1\]
+  date_col <- intersect(c("OCC_DATE", "REPORT_DATE"), colnames(df))[1]
   if (is.na(date_col)) {
     stop("NotYetPorted: no OCC_DATE or REPORT_DATE column found")
   }
@@ -644,7 +644,7 @@ morie_tps_compare_hawkes_kernels <- function(df,
   fitted <- fitted[order(vapply(fitted,
                                  function(r) r$aic,
                                  numeric(1)))]
-  best <- if (length(fitted) > 0L) fitted[\[1\]] else NULL
+  best <- if (length(fitted) > 0L) fitted[[1]] else NULL
   summary_lines <- list(
     combinations_fitted = length(fitted),
     combinations_failed = length(rows) - length(fitted)
@@ -655,7 +655,7 @@ morie_tps_compare_hawkes_kernels <- function(df,
                           identical(r$baseline, "constant"),
                           fitted)
     delta <- if (length(markov_row) > 0L) {
-      round(markov_row[\[1\]]$aic - best$aic, 1)
+      round(markov_row[[1]]$aic - best$aic, 1)
     } else NA_real_
     summary_lines$best_lowest_aic <-
       sprintf("%s / %s", best$kernel, best$baseline)

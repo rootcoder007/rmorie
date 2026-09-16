@@ -30,9 +30,9 @@ pmiwd <- function(x, y, window = NULL) {
   pmis <- numeric(length(nm))
   mi <- 0
   for (i in seq_along(nm)) {
-    parts <- strsplit(nm[i], "|", fixed = TRUE)[\[1\]]
+    parts <- strsplit(nm[i], "|", fixed = TRUE)[[1]]
     pxy <- as.numeric(fxy[[nm[i]]]) / nn
-    px <- as.numeric(fx[[parts\[1\]]]) / nn
+    px <- as.numeric(fx[[parts[1]]]) / nn
     py <- as.numeric(fy[[parts[2]]]) / nn
     v <- log2(pxy / (px * py)) - adj
     pmis[i] <- v

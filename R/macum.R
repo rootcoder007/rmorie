@@ -49,7 +49,7 @@ macum <- function(yi, vi, order = NULL, level = 0.95) {
 
 # CANONICAL TEST
 # r <- macum(c(0.10,0.30,-0.20,0.45,0.05,0.22), c(0.02,0.05,0.03,0.08,0.01,0.04))
-# stopifnot(abs(r$cumulative\[1\] - 0.10) < 1e-15)
+# stopifnot(abs(r$cumulative[1] - 0.10) < 1e-15)
 
 #' @rdname macum
 #' @keywords internal

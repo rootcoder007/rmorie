@@ -172,7 +172,7 @@ morie_ess_autocorrelation <- function(x, max_lag = NULL) {
   }
   m <- if (is.null(max_lag)) n %/% 2L else min(as.integer(max_lag), n - 1L)
   rho <- numeric(m + 1L)
-  rho\[1\] <- 1
+  rho[1] <- 1
   for (k in seq_len(m)) {
     rho[k + 1L] <- sum(cc[seq_len(n - k)] * cc[(k + 1L):n]) / denom
   }
@@ -419,7 +419,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   if (is.null(lambdas)) lambdas <- 10^seq(-6, 4, length.out = 21L)
 
   best_gcv <- Inf
-  lam <- lambdas\[1\]
+  lam <- lambdas[1]
   S <- NULL
   for (L in lambdas) {
     A <- crossprod(B) + L * P
@@ -443,7 +443,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   for (i in seq_len(p)) {
     j <- c(i - 1L, i + 1L)
     j <- j[j >= 1L & j <= p]
-    nb[i] <- mean(raw\[i, j\])
+    nb[i] <- mean(raw[i, j])
   }
   filled[idx] <- nb
   C <- S %*% filled %*% t(S)
@@ -510,7 +510,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   seen <- integer(0)
   stack <- start
   while (length(stack)) {
-    u <- stack\[1\]
+    u <- stack[1]
     stack <- stack[-1]
     ch <- which(A[u, ])
     new <- setdiff(ch, seen)
@@ -535,7 +535,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   anc <- integer(0)
   stack <- Z
   while (length(stack)) {
-    u <- stack\[1\]
+    u <- stack[1]
     stack <- stack[-1]
     if (u %in% anc) next
     anc <- c(anc, u)
@@ -545,7 +545,7 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
   reach <- integer(0)
   frontier <- list(list(u = x, d = "up"))
   while (length(frontier)) {
-    st <- frontier[\[1\]]
+    st <- frontier[[1]]
     frontier <- frontier[-1]
     key <- paste(st$u, st$d)
     if (key %in% seen) next
@@ -702,7 +702,7 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
     Z <- sort(as.integer(adjustment))
     identified <- morie_is_backdoor_admissible(A, t, y, Z)
   } else if (length(sets)) {
-    Z <- sets[\[1\]]
+    Z <- sets[[1]]
     identified <- TRUE
   } else {
     Z <- integer(0)
@@ -724,7 +724,7 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
     unname(c(b[2], sqrt(max(s2 * XtXi[2, 2], 0))))
   }
   ef <- fit(D, t, Z)
-  eff <- ef\[1\]
+  eff <- ef[1]
   se <- ef[2]
 
   set.seed(seed)
@@ -734,11 +734,11 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
   for (i in seq_len(n_refute)) {
     Dp <- D
     Dp[, t] <- sample(D[, t])
-    placebo[i] <- fit(Dp, t, Z)\[1\]
+    placebo[i] <- fit(Dp, t, Z)[1]
     Dc <- cbind(D, stats::rnorm(n))
-    common[i] <- fit(Dc, t, c(Z, p + 1L))\[1\]
+    common[i] <- fit(Dc, t, c(Z, p + 1L))[1]
     idx <- sample.int(n, max(as.integer(0.8 * n), p + 3L))
-    subset[i] <- fit(D[idx, , drop = FALSE], t, Z)\[1\]
+    subset[i] <- fit(D[idx, , drop = FALSE], t, Z)[1]
   }
   pm <- mean(placebo)
   psd <- stats::sd(placebo)
@@ -1086,7 +1086,7 @@ morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
       if (sum(oj) < n_dims + 2L) next
       Dm <- cbind(1, x[oj, , drop = FALSE])
       bj <- pfit(Dm, Y[oj, j], c(a[j], w[j, ]))
-      a[j] <- bj\[1\]
+      a[j] <- bj[1]
       w[j, ] <- bj[-1]
     }
     ll <- loglik(matrix(a, n, m, byrow = TRUE) + x %*% t(w))

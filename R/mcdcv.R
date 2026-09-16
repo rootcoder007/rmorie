@@ -67,5 +67,5 @@ Mcdcv <- function(y, X, h = NULL, max_subsets = 200000) {
   list(estimate = best_det, coef = beta, intercept = alpha, center = mu,
        cov_raw = S, cov = S * c0, factor = c0,
        subset = as.numeric(best_idx - 1L), h = hh, n = n, p = p,
-       method = "MCD of \[X | y\] by exhaustive enumeration; beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X")
+       method = "MCD of [X | y] by exhaustive enumeration; beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X")
 }

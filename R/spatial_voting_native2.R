@@ -58,7 +58,7 @@ morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
     }
     sizes <- vapply(parties, function(p) sum(pid == p), numeric(1))
     big2 <- parties[order(-sizes)][1:2]
-    a <- maj[[big2\[1\]]]
+    a <- maj[[big2[1]]]
     b <- maj[[big2[2]]]
     scored <- !is.na(a) & !is.na(b) & a != b
   }

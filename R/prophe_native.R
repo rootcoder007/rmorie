@@ -82,7 +82,7 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
       acc <- 0.0
       for (j in seq_along(names)) {
         key <- paste0("holiday_", names[j])
-        acc <- acc + coef[[key]] * Hmat\[i, j\]
+        acc <- acc + coef[[key]] * Hmat[i, j]
       }
       vals[i] <- acc
     }

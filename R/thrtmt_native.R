@@ -157,7 +157,7 @@ thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
     p <- 0
   }
 
-  # Build design matrix: [1, a, W\[1\], ..., W[p], a*W\[1\], ..., a*W[p]]
+  # Build design matrix: [1, a, W[1], ..., W[p], a*W[1], ..., a*W[p]]
   rows <- vector("list", n)
   for (i in seq_len(n)) {
     row <- c(1.0, av[i])

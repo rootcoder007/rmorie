@@ -87,14 +87,14 @@ Tmlmpi <- function(y, D, X) {
   psi <- 0
   ic <- numeric(n)
   for (j in seq_len(K)) {
-    f0p <- if (j > 1L) F[\[1\]][j - 1L] else 0
+    f0p <- if (j > 1L) F[[1]][j - 1L] else 0
     f1p <- if (j > 1L) F[[2]][j - 1L] else 0
-    bar <- 0.5 * (f0p + F[\[1\]][j])
+    bar <- 0.5 * (f0p + F[[1]][j])
     d1 <- F[[2]][j] - f1p
     psi <- psi + bar * d1
     prev1 <- if (j > 1L) IC[[2]][j - 1L, ] else numeric(n)
-    prev0 <- if (j > 1L) IC[\[1\]][j - 1L, ] else numeric(n)
-    ic <- ic + bar * (IC[[2]][j, ] - prev1) + 0.5 * (IC[\[1\]][j, ] + prev0) * d1
+    prev0 <- if (j > 1L) IC[[1]][j - 1L, ] else numeric(n)
+    ic <- ic + bar * (IC[[2]][j, ] - prev1) + 0.5 * (IC[[1]][j, ] + prev0) * d1
   }
   se <- if (n > 1L) sqrt(sum((ic - mean(ic))^2) / (n - 1) / n) else NaN
   .t1_result(estimate = psi, se = se, n_grid = K, n = n,

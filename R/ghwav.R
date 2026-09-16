@@ -23,7 +23,7 @@ morie_ghosal_wavelet_prior <- function(x, pi = 0.5, sigma = NULL, noise = NULL) 
   dw <- .gh_haar_dwt(x)
   coeffs <- dw$coeffs
   L <- dw$L
-  finest <- coeffs[\[1\]]
+  finest <- coeffs[[1]]
   if (is.null(noise)) noise <- max(stats::mad(finest) / 0.6745, 1e-6)
   if (is.null(sigma)) {
     all_d <- unlist(coeffs[-length(coeffs)])

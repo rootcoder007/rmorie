@@ -30,8 +30,8 @@ DensProb <- function(grid, density, a, b) {
   }
   a <- as.numeric(a)
   b <- as.numeric(b)
-  if (!(grid\[1\] <= a && a <= b && b <= grid\[length(grid)\])) {
-    stop("need grid\[1\] <= a <= b <= grid[n].", call. = FALSE)
+  if (!(grid[1] <= a && a <= b && b <= grid[length(grid)])) {
+    stop("need grid[1] <= a <= b <= grid[n].", call. = FALSE)
   }
   xs <- seq(a, b, length.out = 513)
   ys <- stats::approx(grid, density, xout = xs, rule = 2)$y

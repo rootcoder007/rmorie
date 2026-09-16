@@ -195,7 +195,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
       a <- sum(cs < u) # 0-based action index: count of cumulative bins strictly below u
       a <- min(a, n_a - 1L)
       step_out <- env$step(a)
-      s2 <- as.integer(step_out[\[1\]])
+      s2 <- as.integer(step_out[[1]])
       rew <- as.numeric(step_out[[2]])
       done <- isTRUE(step_out[[3]])
       batch[[t]] <- list(s = s, a = a, r = rew, s2 = s2, done = done)
@@ -304,7 +304,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 .morie_w4d_sae_forward <- function(A, Ws, bs, cs) {
   L <- length(Ws)
   hs <- vector("list", L + 1)
-  hs[\[1\]] <- A
+  hs[[1]] <- A
   H <- A
   for (i in seq_len(L)) {
     H <- tanh(sweep(H %*% Ws[[i]], 2, bs[[i]], "+"))
@@ -341,7 +341,7 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
   dW <- lapply(Ws, function(w) matrix(0.0, nrow(w), ncol(w)))
   db <- lapply(bs, function(v) numeric(length(v)))
   dc <- lapply(cs, function(v) numeric(length(v)))
-  gm <- 2.0 * (rs[\[1\]] - A) / (n * d)
+  gm <- 2.0 * (rs[[1]] - A) / (n * d)
   for (i in seq_len(L)) {
     du <- if (i == 1) gm else gm * (1.0 - rs[[i]] * rs[[i]])
     dc[[i]] <- dc[[i]] + colSums(du)
@@ -399,7 +399,7 @@ morie_geron_stacked_autoencoder_modules <- function(X, hidden_sizes = c(2), epoc
   }
 
   fr <- .morie_w4d_sae_forward(A, Ws, bs, cs)
-  ft <- mean((fr$rs[\[1\]] - A)^2)
+  ft <- mean((fr$rs[[1]] - A)^2)
   if (isTRUE(finetune)) {
     for (e in seq_len(E)) {
       fr <- .morie_w4d_sae_forward(A, Ws, bs, cs)
@@ -410,15 +410,15 @@ morie_geron_stacked_autoencoder_modules <- function(X, hidden_sizes = c(2), epoc
         cs[[i]] <- cs[[i]] - step * bk$dc[[i]]
       }
       fr <- .morie_w4d_sae_forward(A, Ws, bs, cs)
-      ft <- c(ft, mean((fr$rs[\[1\]] - A)^2))
+      ft <- c(ft, mean((fr$rs[[1]] - A)^2))
     }
   }
 
   fr <- .morie_w4d_sae_forward(A, Ws, bs, cs)
-  err <- mean((fr$rs[\[1\]] - A)^2)
+  err <- mean((fr$rs[[1]] - A)^2)
 
   list(
-    codes = fr$hs[[length(fr$hs)]], reconstruction = fr$rs[\[1\]], recon_error = err,
+    codes = fr$hs[[length(fr$hs)]], reconstruction = fr$rs[[1]], recon_error = err,
     layer_losses = layer_losses, finetune_losses = ft, weights = Ws, biases = bs,
     decoder_biases = cs, widths = widths, estimate = err, n = nrow(A),
     method = "Tied-weight stacked autoencoder: greedy layer-wise pretraining then end-to-end fine-tuning"
@@ -467,7 +467,7 @@ morie_geron_self_supervised <- function(X, pretext = "mask", noise = 0.1, seed =
 
   if (is.function(pretext)) {
     out <- pretext(A)
-    Xp <- as.matrix(out[\[1\]])
+    Xp <- as.matrix(out[[1]])
     yp <- as.matrix(out[[2]])
     preds <- matrix(0.0, nrow(yp), ncol(yp))
     losses <- numeric(ncol(yp))
@@ -686,7 +686,7 @@ morie_geron_senet <- function(x, r = 16, W1 = NULL, W2 = NULL, seed = 0) {
 #' str(r, max.level = 1)
 morie_geron_sentiment_analysis <- function(texts, model, tokenizer = NULL, y_true = NULL, labels = NULL) {
   docs <- as.list(texts)
-  tok <- if (is.null(tokenizer)) function(t) strsplit(tolower(as.character(t)), "\\s+")[\[1\]] else tokenizer
+  tok <- if (is.null(tokenizer)) function(t) strsplit(tolower(as.character(t)), "\\s+")[[1]] else tokenizer
 
   token_lists <- vector("list", length(docs))
   K <- NULL
@@ -780,7 +780,7 @@ morie_geron_seq2seq <- function(src, tgt, encoder, decoder, max_len = NULL, eos 
     sc <- if (s == 1) first else scores_at(greedy)
     p <- .morie_gr_softmax(sc)
     k <- which.max(sc) - 1L
-    greedy_lp <- greedy_lp + log(max(p\[k + 1\], .Machine$double.xmin))
+    greedy_lp <- greedy_lp + log(max(p[k + 1], .Machine$double.xmin))
     greedy <- c(greedy, k)
     if (!is.null(eos) && k == as.integer(eos)) break
   }
@@ -817,8 +817,8 @@ morie_geron_sft <- function(model = NULL, instruction_data, epochs = 200, lr = 0
   prompts <- lapply(instruction_data, `[[`, 1)
   responses <- lapply(instruction_data, `[[`, 2)
 
-  if (is.character(prompts[\[1\]])) {
-    toks_list <- lapply(prompts, function(p) strsplit(tolower(p), "\\s+")[\[1\]])
+  if (is.character(prompts[[1]])) {
+    toks_list <- lapply(prompts, function(p) strsplit(tolower(p), "\\s+")[[1]])
     vocab <- sort(unique(unlist(toks_list)))
     idx <- setNames(seq_along(vocab) - 1L, vocab)
     X <- matrix(0.0, length(prompts), length(vocab))
@@ -829,7 +829,7 @@ morie_geron_sft <- function(model = NULL, instruction_data, epochs = 200, lr = 0
     X <- do.call(rbind, lapply(prompts, as.numeric))
     vocab <- NULL
   }
-  if (is.character(responses[\[1\]])) {
+  if (is.character(responses[[1]])) {
     labels <- sort(unique(unlist(responses)))
     lidx <- setNames(seq_along(labels) - 1L, labels)
     y <- as.integer(sapply(responses, function(r) lidx[[r]]))
@@ -947,7 +947,7 @@ morie_geron_sgd_classifier <- function(X, y, lr = 0.1, n_iter = 10, alpha = 0.00
 
   f <- as.numeric(Xa %*% w) + b
   pred_pm <- ifelse(f >= 0, 1.0, -1.0)
-  pred <- if (length(classes) == 2) ifelse(pred_pm > 0, classes[length(classes)], classes\[1\]) else pred_pm
+  pred <- if (length(classes) == 2) ifelse(pred_pm > 0, classes[length(classes)], classes[1]) else pred_pm
   acc <- mean(pred_pm == t)
 
   list(
@@ -1384,14 +1384,14 @@ morie_geron_svd_pseudoinverse <- function(X, y, rcond = NULL, fit_intercept = FA
   sv <- sv_out$d
   Vt <- t(sv_out$v)
   cut <- if (is.null(rcond)) max(dim(Xa)) * .Machine$double.eps else as.numeric(rcond)
-  keep <- sv > cut * sv\[1\]
+  keep <- sv > cut * sv[1]
   rank <- sum(keep)
   s_inv <- rep(0.0, length(sv))
   s_inv[keep] <- 1.0 / sv[keep]
   theta <- as.numeric(t(Vt) %*% (s_inv * as.numeric(t(U) %*% ya)))
   resid <- as.numeric(Xa %*% theta) - ya
   rss <- sum(resid^2)
-  cond <- sv\[1\] / sv[keep][sum(keep)]
+  cond <- sv[1] / sv[keep][sum(keep)]
 
   list(
     theta = theta, singular_values = sv, rank = rank, condition_number = cond, residuals = resid,
@@ -1482,7 +1482,7 @@ morie_geron_save_load_pytorch <- function(model, path, verify = TRUE) {
 morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed = 0) {
   img <- as.array(image)
   if (length(dim(img)) == 2) dim(img) <- c(dim(img), 1)
-  Hh <- dim(img)\[1\]
+  Hh <- dim(img)[1]
   Ww <- dim(img)[2]
   Cc <- dim(img)[3]
   w <- as.integer(window_size)
@@ -1496,7 +1496,7 @@ morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed
   r <- 1
   for (i in seq_len(Hh)) {
     for (j in seq_len(Ww)) {
-      flat[r, ] <- img\[i, j, \]
+      flat[r, ] <- img[i, j, ]
       r <- r + 1
     }
   }
@@ -1505,7 +1505,7 @@ morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed
   r <- 1
   for (i in seq_len(Hh)) {
     for (j in seq_len(Ww)) {
-      X\[i, j, \] <- Xt[r, ]
+      X[i, j, ] <- Xt[r, ]
       r <- r + 1
     }
   }
@@ -1513,7 +1513,7 @@ morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed
   shift <- w %/% 2
   shifted_layers <- 0L
   roll2 <- function(arr, sh1, sh2) {
-    d1 <- dim(arr)\[1\]
+    d1 <- dim(arr)[1]
     d2 <- dim(arr)[2]
     idx1 <- ((seq_len(d1) - 1 - sh1) %% d1) + 1
     idx2 <- ((seq_len(d2) - 1 - sh2) %% d2) + 1
@@ -1563,7 +1563,7 @@ morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed
   r <- 1
   for (i in seq_len(Hh)) {
     for (j in seq_len(Ww)) {
-      Xflat[r, ] <- X\[i, j, \]
+      Xflat[r, ] <- X[i, j, ]
       r <- r + 1
     }
   }
@@ -1596,7 +1596,7 @@ morie_geron_swin <- function(image, window_size, n_layers = 2, d_model = 4, seed
 #' @export
 .morie_w4d_symd_tokenize <- function(src) {
   s <- as.character(src)
-  chars <- strsplit(s, "")[\[1\]]
+  chars <- strsplit(s, "")[[1]]
   n <- length(chars)
   out <- list()
   i <- 1
@@ -1638,7 +1638,7 @@ morie_geron_symd_parse <- function(src) {
   peek <- function() if (pos <= ntoks) toks[[pos]] else NULL
   eat <- function(kind, val = NULL) {
     t <- peek()
-    if (is.null(t) || t[\[1\]] != kind || (!is.null(val) && t[[2]] != val)) stop("parse: unexpected token")
+    if (is.null(t) || t[[1]] != kind || (!is.null(val) && t[[2]] != val)) stop("parse: unexpected token")
     pos <<- pos + 1L
     t
   }
@@ -1649,7 +1649,7 @@ morie_geron_symd_parse <- function(src) {
   atom <- NULL
   expr <- function() {
     node <- term()
-    while (!is.null(peek()) && peek()[\[1\]] == "op" && peek()[[2]] %in% c("+", "-")) {
+    while (!is.null(peek()) && peek()[[1]] == "op" && peek()[[2]] %in% c("+", "-")) {
       op <- eat("op")[[2]]
       node <- list(op, node, term())
     }
@@ -1657,7 +1657,7 @@ morie_geron_symd_parse <- function(src) {
   }
   term <- function() {
     node <- unary()
-    while (!is.null(peek()) && peek()[\[1\]] == "op" && peek()[[2]] %in% c("*", "/")) {
+    while (!is.null(peek()) && peek()[[1]] == "op" && peek()[[2]] %in% c("*", "/")) {
       op <- eat("op")[[2]]
       node <- list(op, node, unary())
     }
@@ -1665,7 +1665,7 @@ morie_geron_symd_parse <- function(src) {
   }
   unary <- function() {
     t <- peek()
-    if (!is.null(t) && t[\[1\]] == "op" && t[[2]] == "-") {
+    if (!is.null(t) && t[[1]] == "op" && t[[2]] == "-") {
       eat("op", "-")
       return(list("neg", unary()))
     }
@@ -1674,7 +1674,7 @@ morie_geron_symd_parse <- function(src) {
   power <- function() {
     base <- atom()
     t <- peek()
-    if (!is.null(t) && t[\[1\]] == "op" && t[[2]] == "^") {
+    if (!is.null(t) && t[[1]] == "op" && t[[2]] == "^") {
       eat("op", "^")
       return(list("^", base, unary()))
     }
@@ -1683,14 +1683,14 @@ morie_geron_symd_parse <- function(src) {
   atom <- function() {
     t <- peek()
     if (is.null(t)) stop("parse: unexpected end of expression")
-    if (t[\[1\]] == "num") {
+    if (t[[1]] == "num") {
       eat("num")
       return(list("num", t[[2]]))
     }
-    if (t[\[1\]] == "name") {
+    if (t[[1]] == "name") {
       eat("name")
       nt <- peek()
-      if (!is.null(nt) && nt[\[1\]] == "op" && nt[[2]] == "(") {
+      if (!is.null(nt) && nt[[1]] == "op" && nt[[2]] == "(") {
         if (!(t[[2]] %in% .morie_w4d_symd_funcs)) stop(sprintf("parse: unknown function %s", t[[2]]))
         eat("op", "(")
         arg <- expr()
@@ -1699,7 +1699,7 @@ morie_geron_symd_parse <- function(src) {
       }
       return(list("var", t[[2]]))
     }
-    if (t[\[1\]] == "op" && t[[2]] == "(") {
+    if (t[[1]] == "op" && t[[2]] == "(") {
       eat("op", "(")
       node <- expr()
       eat("op", ")")
@@ -1737,7 +1737,7 @@ morie_geron_symd_parse <- function(src) {
 #' @param v Passed to \code{all.equal}.
 #' @return A logical value.
 #' @export
-.morie_w4d_symd_eqnum <- function(t, v) length(t) == 2 && t[\[1\]] == "num" && isTRUE(all.equal(t[[2]], v, tolerance = 0))
+.morie_w4d_symd_eqnum <- function(t, v) length(t) == 2 && t[[1]] == "num" && isTRUE(all.equal(t[[2]], v, tolerance = 0))
 
 #' .morie_w4d_symd_simplify
 #'
@@ -1749,13 +1749,13 @@ morie_geron_symd_parse <- function(src) {
 #' @return The value of \code{list}.
 #' @export
 .morie_w4d_symd_simplify <- function(t) {
-  k <- t[\[1\]]
+  k <- t[[1]]
   if (k %in% c("num", "var")) {
     return(t)
   }
   if (k == "neg") {
     a <- .morie_w4d_symd_simplify(t[[2]])
-    if (a[\[1\]] == "num") {
+    if (a[[1]] == "num") {
       return(.morie_w4d_symd_num(-a[[2]]))
     }
     return(list("neg", a))
@@ -1766,7 +1766,7 @@ morie_geron_symd_parse <- function(src) {
   a <- .morie_w4d_symd_simplify(t[[2]])
   b <- .morie_w4d_symd_simplify(t[[3]])
   op <- k
-  if (a[\[1\]] == "num" && b[\[1\]] == "num") {
+  if (a[[1]] == "num" && b[[1]] == "num") {
     if (op == "+") {
       return(.morie_w4d_symd_num(a[[2]] + b[[2]]))
     }
@@ -1835,7 +1835,7 @@ morie_geron_symd_parse <- function(src) {
 #' @return Nothing; this branch always raises.
 #' @export
 .morie_w4d_symd_diff <- function(t, var) {
-  kind <- t[\[1\]]
+  kind <- t[[1]]
   if (kind == "num") {
     return(.morie_w4d_symd_num(0))
   }
@@ -1867,10 +1867,10 @@ morie_geron_symd_parse <- function(src) {
   if (kind == "^") {
     u <- t[[2]]
     v <- t[[3]]
-    if (v[\[1\]] == "num") {
+    if (v[[1]] == "num") {
       return(list("*", list("*", v, list("^", u, .morie_w4d_symd_num(v[[2]] - 1))), .morie_w4d_symd_diff(u, var)))
     }
-    if (u[\[1\]] == "num") {
+    if (u[[1]] == "num") {
       return(list("*", list("*", list("^", u, v), list("call", "log", u)), .morie_w4d_symd_diff(v, var)))
     }
     inner <- list("*", v, list("call", "log", u))
@@ -1910,7 +1910,7 @@ morie_geron_symd_parse <- function(src) {
 #' @examples
 #' morie_geron_symd_to_string(list("add", list("var", "x"), list("num", 2)))
 morie_geron_symd_to_string <- function(t) {
-  k <- t[\[1\]]
+  k <- t[[1]]
   if (k == "num") {
     v <- t[[2]]
     return(if (v == floor(v)) as.character(as.integer(v)) else as.character(v))
@@ -1927,8 +1927,8 @@ morie_geron_symd_to_string <- function(t) {
   left <- morie_geron_symd_to_string(t[[2]])
   right <- morie_geron_symd_to_string(t[[3]])
   if (k %in% c("*", "/", "^")) {
-    if (t[[2]][\[1\]] %in% c("+", "-")) left <- paste0("(", left, ")")
-    if (t[[3]][\[1\]] %in% c("+", "-", "*", "/")) right <- paste0("(", right, ")")
+    if (t[[2]][[1]] %in% c("+", "-")) left <- paste0("(", left, ")")
+    if (t[[3]][[1]] %in% c("+", "-", "*", "/")) right <- paste0("(", right, ")")
   }
   paste(left, k, right)
 }
@@ -1942,7 +1942,7 @@ morie_geron_symd_to_string <- function(t) {
 #' t <- list("call", "sin", list("var", "x"))
 #' morie_geron_symd_evaluate(t, list(x = pi / 2))
 morie_geron_symd_evaluate <- function(t, env) {
-  k <- t[\[1\]]
+  k <- t[[1]]
   if (k == "num") {
     return(as.numeric(t[[2]]))
   }
@@ -1985,13 +1985,13 @@ morie_geron_symd_evaluate <- function(t, env) {
 #' @return A numeric value.
 #' @export
 .morie_w4d_symd_count <- function(t) {
-  if (t[\[1\]] %in% c("num", "var")) {
+  if (t[[1]] %in% c("num", "var")) {
     return(1L)
   }
-  if (t[\[1\]] == "neg") {
+  if (t[[1]] == "neg") {
     return(1L + .morie_w4d_symd_count(t[[2]]))
   }
-  if (t[\[1\]] == "call") {
+  if (t[[1]] == "call") {
     return(1L + .morie_w4d_symd_count(t[[3]]))
   }
   1L + .morie_w4d_symd_count(t[[2]]) + .morie_w4d_symd_count(t[[3]])
@@ -2061,7 +2061,7 @@ morie_geron_symbolic_diff <- function(expr, var = "x", at = NULL) {
 #' res <- .morie_w4d_tokens(x = x)
 #' res
 .morie_w4d_tokens <- function(x) {
-  if (is.character(x) && length(x) == 1) strsplit(x, "\\s+")[\[1\]] else as.character(x)
+  if (is.character(x) && length(x) == 1) strsplit(x, "\\s+")[[1]] else as.character(x)
 }
 
 #' T5 span-corruption masking (encoder input / decoder target / spans)
@@ -2107,7 +2107,7 @@ morie_geron_span_corrupt <- function(tokens, noise_density = 0.15, mean_span = 3
   i <- 0
   k <- 0
   for (sp in chosen) {
-    start <- sp\[1\]
+    start <- sp[1]
     length_ <- sp[2]
     if (start > i) inputs <- c(inputs, tokens[(i + 1):start])
     sentinel <- sprintf("<extra_id_%d>", k)
@@ -2249,7 +2249,7 @@ morie_geron_td3 <- function(env, policy = NULL, Q1 = NULL, Q2 = NULL, epochs = 3
       a <- if (u1 < 0.3) as.integer(u_draw() * n_a) else mu[s + 1]
       a <- min(max(a, 0L), n_a - 1L)
       step_out <- env$step(a)
-      s2 <- as.integer(step_out[\[1\]])
+      s2 <- as.integer(step_out[[1]])
       rew <- as.numeric(step_out[[2]])
       done <- isTRUE(step_out[[3]])
       batch[[t]] <- list(s = s, a = a, r = rew, s2 = s2, done = done)
@@ -2351,7 +2351,7 @@ morie_geron_transfer_learning <- function(pretrained_model, X, y, n_frozen = 1, 
   trainable <- sum(sapply(Ws[(nf + 1):L], length))
 
   list(
-    weights = Ws, frozen = nf, loss_curve = losses, initial_loss = losses\[1\], final_loss = losses[length(losses)],
+    weights = Ws, frozen = nf, loss_curve = losses, initial_loss = losses[1], final_loss = losses[length(losses)],
     trainable_params = trainable, total_params = total, estimate = losses[length(losses)], n = n,
     method = "Fine-tuning the unfrozen tail by backpropagation; frozen layers forward-only"
   )
@@ -2597,7 +2597,7 @@ morie_geron_tensor_parallelism <- function(model, n_devices = 2, x = NULL, schem
   N <- as.integer(n_devices)
   sch <- tolower(scheme)
 
-  a <- if (is.null(x)) matrix(1.0, 1, nrow(mats[\[1\]])) else as.matrix(x)
+  a <- if (is.null(x)) matrix(1.0, 1, nrow(mats[[1]])) else as.matrix(x)
 
   ref <- a
   for (w in mats) ref <- ref %*% w
@@ -2625,12 +2625,12 @@ morie_geron_tensor_parallelism <- function(model, n_devices = 2, x = NULL, schem
       x_sh <- split_cols(hmat, N)
       partials <- Map(function(xi, si) xi %*% si, x_sh, shards)
       hmat <- Reduce(`+`, partials)
-      comm <- comm + N * length(partials[\[1\]])
+      comm <- comm + N * length(partials[[1]])
     }
   }
 
   diff <- max(abs(hmat - ref))
-  per_dev <- sum(sapply(shards_all, function(s) length(s[\[1\]])))
+  per_dev <- sum(sapply(shards_all, function(s) length(s[[1]])))
 
   list(
     output = hmat, reference = ref, max_diff = diff, shards = shards_all, params_per_device = per_dev,
@@ -2697,7 +2697,7 @@ morie_geron_trl_finetune <- function(model = NULL, dataset, method = "sft", epoc
 
   if (m == "dpo") {
     b <- as.numeric(beta)
-    chosen <- lapply(data, function(it) as.numeric(it[\[1\]]))
+    chosen <- lapply(data, function(it) as.numeric(it[[1]]))
     rejected <- lapply(data, function(it) as.numeric(it[[2]]))
     C <- do.call(rbind, chosen)
     R <- do.call(rbind, rejected)
@@ -2724,7 +2724,7 @@ morie_geron_trl_finetune <- function(model = NULL, dataset, method = "sft", epoc
   }
 
   eps <- as.numeric(clip_eps)
-  feats <- lapply(data, function(it) as.numeric(it[\[1\]]))
+  feats <- lapply(data, function(it) as.numeric(it[[1]]))
   Xp <- do.call(rbind, feats)
   lo <- as.numeric(sapply(data, `[[`, 2))
   Av <- as.numeric(sapply(data, `[[`, 3))
@@ -2777,17 +2777,17 @@ morie_geron_matmul_order <- function(dims) {
         j <- i + length_ - 1
         best <- NULL
         for (k in i:(j - 1)) {
-          cost <- m\[i, k\] + m[k + 1, j] + dims[i] * dims\[k + 1\] * dims[j + 1]
+          cost <- m[i, k] + m[k + 1, j] + dims[i] * dims[k + 1] * dims[j + 1]
           if (is.null(best) || cost < best) {
             best <- cost
-            split\[i, j\] <- k
+            split[i, j] <- k
           }
         }
-        m\[i, j\] <- best
+        m[i, j] <- best
       }
     }
   }
-  list(cost = m\[1, n\], split = split)
+  list(cost = m[1, n], split = split)
 }
 
 #' torch.compile: graph-capturing JIT for forward and backward passes
@@ -2835,23 +2835,23 @@ morie_geron_torch_compile <- function(model, mode = "default", example_inputs) {
       mats[[length(mats) + 1]] <- as.matrix(graph[[j]]$op$param)
       j <- j + 1L
     }
-    rows <- graph[[i]]$in_shape\[1\]
+    rows <- graph[[i]]$in_shape[1]
     dims <- c(rows, sapply(mats, ncol))
     for (k in seq_along(mats)) flops_eager <- flops_eager + dims[k] * nrow(mats[[k]]) * ncol(mats[[k]])
     if (length(mats) == 1) {
       compiled[[length(compiled) + 1]] <- graph[[i]]
-      flops_comp <- flops_comp + dims\[1\] * nrow(mats[\[1\]]) * ncol(mats[\[1\]])
+      flops_comp <- flops_comp + dims[1] * nrow(mats[[1]]) * ncol(mats[[1]])
     } else {
       fused_runs <- fused_runs + 1L
       if (m == "max-autotune") {
         mo <- morie_geron_matmul_order(dims)
         flops_comp <- flops_comp + mo$cost
       } else {
-        W <- mats[\[1\]]
+        W <- mats[[1]]
         for (w in mats[-1]) W <- W %*% w
-        flops_comp <- flops_comp + dims\[1\] * nrow(W) * ncol(W)
+        flops_comp <- flops_comp + dims[1] * nrow(W) * ncol(W)
       }
-      W <- mats[\[1\]]
+      W <- mats[[1]]
       for (w in mats[-1]) W <- W %*% w
       compiled[[length(compiled) + 1]] <- list(
         index = length(compiled), kind = "linear", in_shape = graph[[i]]$in_shape,
@@ -3016,7 +3016,7 @@ morie_geron_vanishing_gradients <- function(grads, tol = 0.5) {
 
   ratios <- norms[-1] / norms[-length(norms)]
   geo <- exp(mean(log(norms[-length(norms)] / norms[-1])))
-  atten <- norms\[1\] / norms[length(norms)]
+  atten <- norms[1] / norms[length(norms)]
 
   list(
     norms = norms, ratios = ratios, geometric_ratio = geo, attenuation = atten,
@@ -3073,7 +3073,7 @@ morie_geron_vanishing_gradients <- function(grads, tol = 0.5) {
 #' r <- morie_geron_vae_loss_and_grads(X, params, eps)
 #' c(r$loss, r$recon, r$kl)
 morie_geron_vae_loss_and_grads <- function(X, params, eps, beta = 1.0) {
-  Wmu <- params[\[1\]]
+  Wmu <- params[[1]]
   bmu <- params[[2]]
   Wlv <- params[[3]]
   blv <- params[[4]]
@@ -3136,7 +3136,7 @@ morie_geron_vae <- function(X, latent_dim = 2, epochs = 200, lr = 0.05, beta = 1
     for (i in 1:6) params[[i]] <- params[[i]] - step * r$grads[[i]]
   }
 
-  Wmu <- params[\[1\]]
+  Wmu <- params[[1]]
   bmu <- params[[2]]
   Wlv <- params[[3]]
   blv <- params[[4]]
@@ -3431,7 +3431,7 @@ morie_geron_vision_transformer <- function(image, patch_size, n_layers = 2, d_mo
                                            n_classes = 2, seed = 0) {
   img <- as.array(image)
   if (length(dim(img)) == 2) dim(img) <- c(dim(img), 1)
-  Hh <- dim(img)\[1\]
+  Hh <- dim(img)[1]
   Ww <- dim(img)[2]
   Cc <- dim(img)[3]
   p <- as.integer(patch_size)
@@ -3673,8 +3673,8 @@ morie_geron_word_embeddings <- function(vocab, d = 8, E = NULL, seed = 0) {
 #' @return A vector, from \code{c}.
 #' @export
 .morie_w4d_wp_split <- function(word) {
-  chars <- strsplit(word, "")[\[1\]]
-  c(chars\[1\], paste0("##", chars[-1]))
+  chars <- strsplit(word, "")[[1]]
+  c(chars[1], paste0("##", chars[-1]))
 }
 
 #' WordPiece tokenizer: maximum likelihood subword segmentation
@@ -3723,8 +3723,8 @@ morie_geron_wordpiece_tokenizer <- function(corpus, vocab_size = 50) {
     best <- NULL
     best_score <- -1.0
     for (key in keys) {
-      ab <- strsplit(key, "", fixed = TRUE)[\[1\]]
-      a <- ab\[1\]
+      ab <- strsplit(key, "", fixed = TRUE)[[1]]
+      a <- ab[1]
       b <- ab[2]
       sc <- pair_freq[[key]] / (piece_freq[[a]] * piece_freq[[b]])
       if (sc > best_score) {
@@ -3732,7 +3732,7 @@ morie_geron_wordpiece_tokenizer <- function(corpus, vocab_size = 50) {
         best_score <- sc
       }
     }
-    a <- best\[1\]
+    a <- best[1]
     b <- best[2]
     new <- if (startsWith(b, "##")) paste0(a, substring(b, 3)) else paste0(a, b)
     if (new %in% vocab) break
@@ -3760,7 +3760,7 @@ morie_geron_wordpiece_tokenizer <- function(corpus, vocab_size = 50) {
 
   tokenize <- function(word) {
     w <- as.character(word)
-    chars <- strsplit(w, "")[\[1\]]
+    chars <- strsplit(w, "")[[1]]
     n <- length(chars)
     out <- character(0)
     start <- 1
@@ -4162,7 +4162,7 @@ morie_geron_exploding_gradients <- function(grads, tol = 2.0, clip_norm = NULL) 
 
   ratios <- norms[-1] / norms[-length(norms)]
   geo <- exp(mean(log(norms[-length(norms)] / norms[-1])))
-  amp <- norms\[1\] / norms[length(norms)]
+  amp <- norms[1] / norms[length(norms)]
   global_norm <- sqrt(sum(norms * norms))
 
   clipped <- NULL
@@ -4286,10 +4286,10 @@ morie_geron_xlnet <- function(X, n_layers = 1, vocab_size = NULL, d_model = 8, s
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_box_iou(V, V)
 morie_geron_box_iou <- function(a, b) {
-  iw <- max(0.0, min(a[3], b[3]) - max(a\[1\], b\[1\]))
+  iw <- max(0.0, min(a[3], b[3]) - max(a[1], b[1]))
   ih <- max(0.0, min(a[4], b[4]) - max(a[2], b[2]))
   inter <- iw * ih
-  ua <- (a[3] - a\[1\]) * (a[4] - a[2]) + (b[3] - b\[1\]) * (b[4] - b[2]) - inter
+  ua <- (a[3] - a[1]) * (a[4] - a[2]) + (b[3] - b[1]) * (b[4] - b[2]) - inter
   if (ua > 0) inter / ua else 0.0
 }
 
@@ -4320,7 +4320,7 @@ morie_geron_yolo <- function(image, model, n_boxes = 1, conf_threshold = 0.5, io
   it <- as.numeric(iou_threshold)
 
   P <- as.array(model(image))
-  S <- dim(P)\[1\]
+  S <- dim(P)[1]
   C <- dim(P)[3] - 5 * B
 
   cand <- list()
@@ -4330,12 +4330,12 @@ morie_geron_yolo <- function(image, model, n_boxes = 1, conf_threshold = 0.5, io
       k <- which.max(cls) - 1L
       for (b in 0:(B - 1)) {
         vals <- P[i + 1, j + 1, (5 * b + 1):(5 * b + 5)]
-        tx <- vals\[1\]
+        tx <- vals[1]
         ty <- vals[2]
         tw <- vals[3]
         th <- vals[4]
         conf <- vals[5]
-        score <- conf * cls\[k + 1\]
+        score <- conf * cls[k + 1]
         if (score < ct || tw <= 0 || th <= 0) next
         cx <- (j + tx) / S
         cy <- (i + ty) / S
@@ -4422,14 +4422,14 @@ morie_geron_zero_shot <- function(model, prompt, labels = NULL, null_prompt = NU
 
   p <- .morie_gr_softmax(s)
   ord <- order(-p)
-  k <- ord\[1\] - 1L # 0-based
-  margin <- p[ord\[1\]] - p[ord[2]]
+  k <- ord[1] - 1L # 0-based
+  margin <- p[ord[1]] - p[ord[2]]
   ent <- -sum(p * log(pmax(p, .Machine$double.xmin)))
 
   list(
     probabilities = p, scores = s, raw_scores = raw, labels = names_, predicted = k,
-    predicted_label = names_\[k + 1\], margin = margin, entropy = ent, calibrated = calibrated,
-    estimate = p\[k + 1\], n = length(names_),
+    predicted_label = names_[k + 1], margin = margin, entropy = ent, calibrated = calibrated,
+    estimate = p[k + 1], n = length(names_),
     method = paste0(
       "Zero-shot label scoring with softmax normalisation",
       if (calibrated) " and null-prompt contextual calibration" else ""
@@ -4491,7 +4491,7 @@ morie_geron_spectral_clustering <- function(X, n_clusters = 2, affinity = "rbf",
   labels <- lloyd$labels
   centers <- lloyd$centers
 
-  eigengap <- if (k < n) vals\[k + 1\] - vals[k] else NA_real_
+  eigengap <- if (k < n) vals[k + 1] - vals[k] else NA_real_
 
   list(
     labels = labels, embedding = U, centers = centers, eigenvalues = vals, affinity_matrix = W,
@@ -4535,7 +4535,7 @@ morie_geron_simple_rnn <- function(X, Wx, Wh, b = NULL, h0 = NULL) {
     H[t, ] <- h
     G[t, ] <- 1.0 - h * h
   }
-  wh_spec <- svd(Wha)$d\[1\]
+  wh_spec <- svd(Wha)$d[1]
   gain <- if (Tn > 1) prod(apply(G, 1, max)) * wh_spec^(Tn - 1) else max(G)
 
   list(
@@ -4579,8 +4579,8 @@ morie_geron_sparse_rand_projection <- function(X, d_out, density = NULL, seed = 
       rng <- (1664525 * rng + 1013904223) %% 2^32
       u <- (rng + 0.5) / 2^32
       if (u < 0.5 * dens) {
-        R\[i, j\] <- scale
-      } else if (u < dens) R\[i, j\] <- -scale
+        R[i, j] <- scale
+      } else if (u < dens) R[i, j] <- -scale
     }
   }
   Xp <- A %*% R
@@ -4640,14 +4640,14 @@ morie_geron_sparse_rand_projection <- function(X, d_out, density = NULL, seed = 
 #' str(r, max.level = 1)
 morie_geron_semantic_segmentation <- function(image, model, y_true = NULL) {
   img <- as.array(image)
-  Hh <- dim(img)\[1\]
+  Hh <- dim(img)[1]
   Ww <- dim(img)[2]
 
   scores <- as.array(model(image))
   K <- dim(scores)[3]
 
   labels <- matrix(0L, Hh, Ww)
-  for (i in seq_len(Hh)) for (j in seq_len(Ww)) labels\[i, j\] <- which.max(scores\[i, j, \]) - 1L
+  for (i in seq_len(Hh)) for (j in seq_len(Ww)) labels[i, j] <- which.max(scores[i, j, ]) - 1L
   counts <- sapply(0:(K - 1), function(k) sum(labels == k))
 
   iou <- NULL
@@ -4657,7 +4657,7 @@ morie_geron_semantic_segmentation <- function(image, model, y_true = NULL) {
   if (!is.null(y_true)) {
     G <- matrix(as.integer(y_true), Hh, Ww)
     conf <- matrix(0L, K, K)
-    for (i in seq_len(Hh)) for (j in seq_len(Ww)) conf[G\[i, j\] + 1, labels\[i, j\] + 1] <- conf[G\[i, j\] + 1, labels\[i, j\] + 1] + 1L
+    for (i in seq_len(Hh)) for (j in seq_len(Ww)) conf[G[i, j] + 1, labels[i, j] + 1] <- conf[G[i, j] + 1, labels[i, j] + 1] + 1L
     inter <- diag(conf)
     union_ <- rowSums(conf) + colSums(conf) - diag(conf)
     iou <- ifelse(union_ > 0, inter / ifelse(union_ > 0, union_, 1), NA_real_)
@@ -4954,7 +4954,7 @@ morie_geron_umap <- function(X, n_components = 2, n_neighbors = 3, min_dist = 0.
   for (i in seq_len(n)) {
     ord <- order(D[i, ])[2:(k + 1)]
     di <- D[i, ord]
-    rho[i] <- di\[1\]
+    rho[i] <- di[1]
     lo <- 0.0
     hi <- Inf
     s_ <- 1.0

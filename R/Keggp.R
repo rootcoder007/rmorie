@@ -74,7 +74,7 @@ Keggp <- function(genes, kegg_pathways, alpha = 0.05) {
     qv[i] <- val
     prev <- val
   }
-  best <- ord\[1\]
+  best <- ord[1]
   .t1_result(estimate = pv[best], pvalue = pv, qvalue = qv, overlap = ov,
              pathway_size = sizes, top_pathway = best - 1L,
              n_significant = sum(qv <= alpha),

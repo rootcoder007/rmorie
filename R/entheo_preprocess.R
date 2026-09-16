@@ -35,7 +35,7 @@ preprocess_eeg <- function(record,
       next
     }
     n_chan <- max(n_chan, nrow(arr))
-    arr <- .entheo_bandpass(arr, sfreq, bandpass\[1\], bandpass[2])
+    arr <- .entheo_bandpass(arr, sfreq, bandpass[1], bandpass[2])
     arr <- .entheo_notch(arr, sfreq, notch)
     tr <- .entheo_asr_trim(arr, asr_threshold)
     arr <- tr$arr
@@ -54,7 +54,7 @@ preprocess_eeg <- function(record,
     warnings = warnings_vec,
     interpretation = sprintf(
       "EEG bandpass-filtered (%g-%g Hz) and notch-filtered at %g Hz; %d sample(s) reconstructed by toy ASR.",
-      bandpass\[1\], bandpass[2], notch, n_bad_total
+      bandpass[1], bandpass[2], notch, n_bad_total
     )
   )
 }

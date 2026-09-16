@@ -463,7 +463,7 @@ morie_iv_cragg_donald <- function(data, endogenous, instruments,
   # compatibility but is ignored.
   fs <- morie_iv_first_stage_diagnostics(data, endogenous, instruments,
                                           exogenous)
-  f_stat <- unname(fs$F\[1\])
+  f_stat <- unname(fs$F[1])
   k_ins <- length(instruments)
   k_exo <- length(exogenous)
   df1 <- k_ins

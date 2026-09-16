@@ -7,7 +7,7 @@
 #' Internal helper: Extvm Log Gev
 #' @noRd
 .extvm_log_gev <- function(par, x) {
-  mu <- par\[1\]
+  mu <- par[1]
   sigma <- exp(par[2])
   xi <- par[3]
   z <- (x - mu) / sigma
@@ -47,7 +47,7 @@ extvm <- function(x) {
   nll <- function(par) -sum(.extvm_log_gev(par, x))
   init <- c(mean(x), log(stats::sd(x)), 0.1)
   fit <- stats::optim(init, nll, method = "BFGS", hessian = TRUE)
-  mu <- fit$par\[1\]
+  mu <- fit$par[1]
   sigma <- exp(fit$par[2])
   xi <- fit$par[3]
   loglik <- -fit$value
@@ -59,10 +59,10 @@ extvm <- function(x) {
   ses <- sqrt(pmax(diag(cov_mat), 0))
   list(
     mu = as.numeric(mu), sigma = as.numeric(sigma), xi = as.numeric(xi),
-    se_mu = as.numeric(ses\[1\]), se_sigma = as.numeric(ses[2]),
+    se_mu = as.numeric(ses[1]), se_sigma = as.numeric(ses[2]),
     se_xi = as.numeric(ses[3]),
     loglik = as.numeric(loglik),
-    estimate = as.numeric(mu), se = as.numeric(ses\[1\]),
+    estimate = as.numeric(mu), se = as.numeric(ses[1]),
     n = as.integer(n),
     method = "GEV MLE (Coles 2001)"
   )

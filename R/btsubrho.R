@@ -78,7 +78,7 @@ Btsubrho <- function(x, stat = NULL, m_grid = NULL, B = 200, seed = 1, q = 0.75)
   vol <- vapply(seq_len(length(m_grid) - 1L),
                 function(i) .btsubrho_ks(laws[[i]], laws[[i + 1L]]), 0)
   best <- min(vol)
-  k <- which(vol <= best)\[1\]
+  k <- which(vol <= best)[1]
   ms <- m_grid[k]
   list(m_star = ms, vol_curve = vol, m_grid = m_grid, min_ks = best,
        theta_hat = th, se_star = .s03sd(laws[[k]], 1L) / sqrt(n),

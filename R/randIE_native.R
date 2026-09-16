@@ -68,17 +68,17 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
   for (k in names(cells)) {
     vals <- cells[[k]]
     tot <- length(vals) + laplace * length(levels.v)
-    parts <- strsplit(k, "\r", fixed = TRUE)[\[1\]]
-    key2 <- c(parts\[1\], parts[2])
+    parts <- strsplit(k, "\r", fixed = TRUE)[[1]]
+    key2 <- c(parts[1], parts[2])
     out[[length(out) + 1L]] <- list(key = key2,
                                     p = vapply(levels.v, function(lv)
                                       (sum(vals == lv) + laplace) / tot,
                                       numeric(1)))
   }
   out.p <- list()
-  for (e in out) out.p[[paste0(e$key\[1\], "\r", e$key[2])]] <- e$p
+  for (e in out) out.p[[paste0(e$key[1], "\r", e$key[2])]] <- e$p
   names(out.p) <- paste0(
-    vapply(out, function(e) e$key\[1\], character(1)), "\r",
+    vapply(out, function(e) e$key[1], character(1)), "\r",
     vapply(out, function(e) e$key[2], character(1)))
   list(p = out.p, levels = levels.v,
        strata = sort(unique(c)),
@@ -176,7 +176,7 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
   if (length(missing) > 0L)
     stop(paste0("randIE: ", length(missing),
                 " cell(s) needed by the g-formula are empty, e.g. ",
-                paste(unlist(missing[\[1\]]), collapse = ","),
+                paste(unlist(missing[[1]]), collapse = ","),
                 " -- psi(", a, ", ", a.star,
                 ") is not identified from this sample"))
   if (route == "weighting") {

@@ -87,7 +87,7 @@ pool <- function(token_vectors, mode = "mean", mask = NULL) {
     stop(sprintf("sbert: %d mask entries for %d tokens", length(m), nrow(T)))
   keep <- which(m)
   if (length(keep) == 0) stop("sbert: the mask excludes every token")
-  if (mode == "cls") return(as.numeric(T[keep\[1\], ]))
+  if (mode == "cls") return(as.numeric(T[keep[1], ]))
   if (mode == "max") {
     out <- numeric(d)
     for (j in 1:d) out[j] <- max(T[keep, j])
@@ -218,7 +218,7 @@ sts_score <- function(pairs, embed) {
   calls <- 0L
   for (i in seq_along(pairs)) {
     pr <- pairs[[i]]
-    a <- pr\[1\]
+    a <- pr[1]
     b <- pr[2]
     if (!exists(a, envir = cache, inherits = FALSE)) {
       assign(a, as.numeric(embed(a)), envir = cache)

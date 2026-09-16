@@ -39,12 +39,12 @@ Lgobj <- function(y, X, beta) {
   grad <- numeric(p_)
   for (i in seq_len(n)) {
     eta <- 0
-    for (j in seq_len(p_)) eta <- eta + XX\[i, j\] * bb[j]
+    for (j in seq_len(p_)) eta <- eta + XX[i, j] * bb[j]
     ll <- ll + yy[i] * eta - log1pexp(eta)
     pi_ <- .s03sigmoid(eta)
     p[i] <- pi_
     r <- yy[i] - pi_
-    for (j in seq_len(p_)) grad[j] <- grad[j] + XX\[i, j\] * r
+    for (j in seq_len(p_)) grad[j] <- grad[j] + XX[i, j] * r
   }
   list(estimate = ll, loglik = ll, p = p, gradient = grad, n = n,
        method = "l(beta;y) = sum y_i eta_i - sum log(1+exp(eta_i)), Chapter 3 Sect. 3.7")

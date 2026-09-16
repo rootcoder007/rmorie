@@ -90,7 +90,7 @@ morie_didfst_did_estimate <- function(delta, D, weights = NULL) {
                  n, length(Dv)))
   bad <- Dv[!(Dv == 0 | Dv == 1)]
   if (length(bad) > 0L)
-    stop(sprintf("didfst: D must be 0/1, got %s", format(bad\[1\])))
+    stop(sprintf("didfst: D must be 0/1, got %s", format(bad[1])))
   w <- if (is.null(weights)) rep(1, n) else as.numeric(weights)
   if (length(w) != n)
     stop(sprintf("didfst: %d weights for %d units", length(w), n))
@@ -319,8 +319,8 @@ morie_didfst_aggregate_att <- function(gt, scheme = "simple",
   keyed <- list()
   for (k in names(cells)) {
     v <- cells[[k]]
-    parts <- strsplit(k, "_")[\[1\]]
-    g <- as.integer(parts\[1\])
+    parts <- strsplit(k, "_")[[1]]
+    g <- as.integer(parts[1])
     t <- as.integer(parts[2])
     key <- if (scheme == "event") t - g else g
     if (scheme == "event" && !is.null(horizon) && key > horizon) next

@@ -68,7 +68,7 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
   if (m == 0L) stop("prsclm: no variants")
   if (length(pv) != m)
     stop(sprintf("prsclm: %d effect sizes but %d p-values", m, length(pv)))
-  if (any(pv < 0.0 | pv > 1.0)) stop("prsclm: a p-value outside \[0, 1\]")
+  if (any(pv < 0.0 | pv > 1.0)) stop("prsclm: a p-value outside [0, 1]")
   pos <- if (is.null(sumstats$position)) as.numeric(seq_len(m) - 1L) else
     as.numeric(sumstats$position)
   if (length(pos) != m)
@@ -90,14 +90,14 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
     stop(sprintf("prsclm: ld_ref is not symmetric (largest asymmetry %.3g)",
                  asym))
   r2t <- as.numeric(r2)
-  if (!(r2t >= 0.0 && r2t <= 1.0)) stop("prsclm: r2 must be in \[0, 1\]")
+  if (!(r2t >= 0.0 && r2t <= 1.0)) stop("prsclm: r2 must be in [0, 1]")
   win <- as.numeric(window)
   if (win < 0.0) stop("prsclm: the window cannot be negative")
 
   thr <- if (is.null(p_threshold)) .prsclm_DEFAULT_THRESHOLDS else
     as.numeric(p_threshold)
   if (any(thr < 0.0 | thr > 1.0))
-    stop("prsclm: a threshold outside \[0, 1\]")
+    stop("prsclm: a threshold outside [0, 1]")
   thr <- sort(unique(thr))
 
   # ---- PLINK clumping: most significant first, ties by position then index
@@ -111,7 +111,7 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
     grp <- i
     for (j in seq_len(m)) {
       if (clump_of[j] != -1L || j == i) next
-      if (abs(pos[j] - pos[i]) <= win && R\[i, j\] > r2t) {
+      if (abs(pos[j] - pos[i]) <= win && R[i, j] > r2t) {
         clump_of[j] <- i
         grp <- c(grp, j)
       }

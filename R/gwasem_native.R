@@ -44,7 +44,7 @@ morie_gwasem_kinship <- function(genotypes) {
     if (i < n) for (k in (i + 1L):n) {
       d <- sum(abs(G[i, ] - G[k, ]))
       v <- 1.0 - d / (2.0 * m)
-      S\[i, k\] <- S[k, i] <- v
+      S[i, k] <- S[k, i] <- v
     }
   }
   S
@@ -168,7 +168,7 @@ morie_gwasem_gower <- function(S) {
   p <- ncol(Xt)
   M <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p))
-    M\[a, b\] <- sum(Xt[, a] * Xt[, b] / d)
+    M[a, b] <- sum(Xt[, a] * Xt[, b] / d)
   v <- numeric(p)
   for (a in seq_len(p)) v[a] <- sum(Xt[, a] * yt / d)
   ms <- .gwasem_slogdet(M)
@@ -237,7 +237,7 @@ morie_gwasem_gower <- function(S) {
   d <- evals + delta
   M <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p))
-    M\[a, b\] <- sum(Xt[, a] * Xt[, b] / d)
+    M[a, b] <- sum(Xt[, a] * Xt[, b] / d)
   v <- numeric(p)
   for (a in seq_len(p)) v[a] <- sum(Xt[, a] * yt / d)
   beta <- .gwasem_solve(M, v)
@@ -472,7 +472,7 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
     p <- ncol(rot)
     M <- matrix(0, p, p)
     for (a in seq_len(p)) for (b in seq_len(p))
-      M\[a, b\] <- sum(rot[, a] * rot[, b] / d)
+      M[a, b] <- sum(rot[, a] * rot[, b] / d)
     v <- numeric(p)
     for (a in seq_len(p)) v[a] <- sum(rot[, a] * yr / d)
     bb <- tryCatch(.gwasem_solve(M, v), error = function(e) NULL)

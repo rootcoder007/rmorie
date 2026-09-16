@@ -665,7 +665,7 @@ morie_tps_analyze_all <- function(dfs, out_dir = NULL) {
         .tps_result(
           title = sprintf("TPS %s (failed)", name),
           warnings = sprintf("%s: %s",
-                             class(e)\[1\], conditionMessage(e)),
+                             class(e)[1], conditionMessage(e)),
           interpretation = sprintf(
             "Analysis failed for %s: %s", name, conditionMessage(e)
           )
@@ -685,7 +685,7 @@ morie_tps_analyze_all <- function(dfs, out_dir = NULL) {
       .tps_result(
         title = "TPS cross-compare (failed)",
         warnings = sprintf("%s: %s",
-                           class(e)\[1\], conditionMessage(e)),
+                           class(e)[1], conditionMessage(e)),
         interpretation = sprintf(
           "Cross-compare failed: %s", conditionMessage(e)
         )

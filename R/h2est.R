@@ -43,6 +43,6 @@ H2est <- function(sigma_g2, sigma_e2) {
     sp[i] <- p
     h2[i] <- a / p
   }
-  list(estimate = h2\[1\], h2 = h2, sigma_p2 = sp, n = n,
+  list(estimate = h2[1], h2 = h2, sigma_p2 = sp, n = n,
        method = "h2 = sigma_g^2/(sigma_g^2+sigma_e^2); Ch 5 eq. (5.3) decomposition, ratio from de los Campos et al. (2015)")
 }

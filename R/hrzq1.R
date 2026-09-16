@@ -42,7 +42,7 @@ hrzq1 <- function(x, y, tau = 0.5) {
   if (!has_int) {
     beta_out <- if (ncol(Xp) > 1) beta[-1] else beta
     se_out <- if (ncol(Xp) > 1) se_all[-1] else se_all
-    intercept <- as.numeric(beta\[1\])
+    intercept <- as.numeric(beta[1])
   } else {
     beta_out <- beta
     se_out <- se_all

@@ -148,7 +148,7 @@ NULL
     for (i in seq_len(nrow(mm))) {
       t_id <- treated_rn[i]
       for (j in seq_len(ncol(mm))) {
-        c_id <- mm\[i, j\]
+        c_id <- mm[i, j]
         if (is.na(c_id) || identical(as.character(c_id), "")) next
         recs[[length(recs) + 1L]] <- data.frame(
           treated_idx = t_id,
@@ -1537,7 +1537,7 @@ morie_matching_longitudinal <- function(data, treatment, covariates, unit,
   for (u in unique(df[[unit]])) {
     u_data <- df[df[[unit]] == u, , drop = FALSE]
     u_data <- u_data[order(u_data[[time]]), , drop = FALSE]
-    treat_t <- u_data[["._treat_time"]]\[1\]
+    treat_t <- u_data[["._treat_time"]][1]
     if (is.finite(treat_t)) {
       pre_data <- u_data[u_data[[time]] < treat_t, , drop = FALSE]
       pre_data <- utils::tail(pre_data, n_pre_periods)

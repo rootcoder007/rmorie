@@ -6,7 +6,7 @@
 # counterpart, which is what lets the parity harness assert agreement at 1e-9.
 #
 # The integration rule here always runs over the WHOLE grid.  A sibling module
-# once integrated over \[a+h, b-h\], dropping both end intervals, and returned
+# once integrated over [a+h, b-h], dropping both end intervals, and returned
 # 3.8667 where the closed form is 4; both arms had the same defect, so parity
 # was green and only a closed-form anchor caught it.  Nothing in this file may
 # narrow the interval.
@@ -60,6 +60,6 @@
 #' @export
 .fdcolmeans <- function(A, nr, nc) {
   m <- numeric(nc)
-  for (i in seq_len(nr)) for (j in seq_len(nc)) m[j] <- m[j] + A\[i, j\]
+  for (i in seq_len(nr)) for (j in seq_len(nc)) m[j] <- m[j] + A[i, j]
   m / nr
 }

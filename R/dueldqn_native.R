@@ -44,7 +44,7 @@
   if (mode == "mean") {
     sum(a) / length(a)
   } else if (mode == "max") {
-    mx <- a\[1\]
+    mx <- a[1]
     for (i in seq_along(a)[-1L]) if (a[i] > mx) mx <- a[i]
     mx
   } else {

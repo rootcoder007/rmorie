@@ -71,7 +71,7 @@ Ocmtmd <- function(y, A, H, Q = NULL) {
     break }
   }
   nkeep <- sum(ps >= alpha & ps <= 1 - alpha)
-  .t1_result(estimate = fit$beta[2], b0 = fit$beta\[1\], b1 = fit$beta[2],
+  .t1_result(estimate = fit$beta[2], b0 = fit$beta[1], b1 = fit$beta[2],
              t_stat = tstat, resid_sd = sd, mean_resid_treated = mrt,
              mean_resid_control = mrc, alpha_crump = alpha, n_kept = nkeep,
              min_ps = min(ps), max_ps = max(ps), n = n,

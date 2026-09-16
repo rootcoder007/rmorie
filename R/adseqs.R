@@ -31,7 +31,7 @@ Admixq <- function(G, K = 2, steps = 50, Q0 = NULL, P0 = NULL) {
   steps <- as.integer(steps)
   if (I == 0 || J == 0) stop("G must be non-empty")
   if (K < 1) stop("K must be at least 1")
-  if (any(Gm < 0 | Gm > 2)) stop("genotype counts must lie in \[0, 2\]")
+  if (any(Gm < 0 | Gm > 2)) stop("genotype counts must lie in [0, 2]")
   if (is.null(Q0)) {
     Q <- outer(
       seq_len(I) - 1L, seq_len(K) - 1L,

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # Native causal forest (feat/native-specializations, module 11).
-# R-learner decomposition (Nie & Wager 2021): cross-fit m(x) = E\[Y|X\]
+# R-learner decomposition (Nie & Wager 2021): cross-fit m(x) = E[Y|X]
 # and e(x) = E[W|X] with the module-10 nuisance engines, then fit a
 # weighted subsampled regression forest (C++ kernel) on the pseudo-
 # outcome (Y - m)/(W - e) with weights (W - e)^2. ATE via the AIPW

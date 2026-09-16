@@ -47,7 +47,7 @@ Fevdc <- function(var_coefficients, sigma_u, periods = 20) {
     }
     tot <- rowSums(contrib)
     for (j in seq_len(k)) for (i in seq_len(k)) {
-      decomp[h, i, j] <- if (tot[i] > 0) contrib\[i, j\] / tot[i] else 0
+      decomp[h, i, j] <- if (tot[i] > 0) contrib[i, j] / tot[i] else 0
     }
     mse[h, , ] <- contrib
   }

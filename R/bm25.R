@@ -43,7 +43,7 @@ Bm25 <- function(docs, query, k1 = 1.2, b = 0.75) {
   kk <- as.numeric(k1)
   if (kk < 0) stop("bm25: k1 must be non-negative")
   bb <- as.numeric(b)
-  if (!(bb >= 0 && bb <= 1)) stop("bm25: b must lie in \[0, 1\]")
+  if (!(bb >= 0 && bb <= 1)) stop("bm25: b must lie in [0, 1]")
   lens <- vapply(dl, length, 0L)
   tot <- 0
   for (v in lens) tot <- tot + v
@@ -76,7 +76,7 @@ Bm25 <- function(docs, query, k1 = 1.2, b = 0.75) {
     scores_s[i] <- ss
   }
   order0 <- order(-scores, seq_len(N)) - 1L
-  list(scores = scores, estimate = scores\[1\], ranking = order0,
+  list(scores = scores, estimate = scores[1], ranking = order0,
        score_smooth_idf = scores_s, idf = idf, idf_smooth = idf_s, terms = terms,
        avgdl = avgdl, doc_len = lens, k1 = kk, b = bb, N = N,
        method = "Robertson et al. (1995) Okapi BM25 with Robertson-Sparck Jones IDF")
@@ -85,7 +85,7 @@ Bm25 <- function(docs, query, k1 = 1.2, b = 0.75) {
 #' @noRd
 .bm25_tok <- function(s) {
   if (is.character(s) && length(s) == 1L) {
-    t <- strsplit(tolower(s), "[[:space:]]+")[\[1\]]
+    t <- strsplit(tolower(s), "[[:space:]]+")[[1]]
     t[nzchar(t)]
   } else tolower(as.character(s))
 }

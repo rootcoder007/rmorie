@@ -46,7 +46,7 @@ morie_wasserman_variance <- function(x) {
     estimate = var_pop,
     sample_variance = if (n > 1L) stats::var(x) else 0,
     mean = mu, second_moment = mean(x^2), sd = sqrt(var_pop), n = n,
-    method = "Variance Var(X) = E\[X^2\] - E[X]^2"
+    method = "Variance Var(X) = E[X^2] - E[X]^2"
   )
 }
 
@@ -62,12 +62,12 @@ morie_wasserman_chebyshev_ineq <- function(k) {
   k <- as.numeric(k)
   .morie_wsm_need(
     all(k > 0),
-    sprintf("Chebyshev inequality needs k > 0; got %s.", k[k <= 0]\[1\])
+    sprintf("Chebyshev inequality needs k > 0; got %s.", k[k <= 0][1])
   )
   raw <- 1 / k^2
   capped <- pmin(raw, 1)
   list(
-    estimate = capped\[1\], bounds = capped, raw_bounds = raw, k = k,
+    estimate = capped[1], bounds = capped, raw_bounds = raw, k = k,
     n = length(k), method = "Chebyshev bound 1/k^2 (capped at 1)"
   )
 }
@@ -87,7 +87,7 @@ morie_wasserman_empirical_cdf <- function(x, data) {
   n <- length(data)
   vals <- vapply(x, function(xi) sum(data <= xi) / n, numeric(1))
   list(
-    estimate = vals\[1\], values = vals, x = x, n = n,
+    estimate = vals[1], values = vals, x = x, n = n,
     method = "eCDF F_n(x) = (1/n) sum I(X_i <= x)"
   )
 }
@@ -166,8 +166,8 @@ morie_wasserman_covariance <- function(x, y) {
 #' morie_wasserman_markov_ineq(1, 4)$estimate
 #' @export
 morie_wasserman_markov_ineq <- function(mean, a) {
-  mean <- as.numeric(mean)\[1\]
-  a <- as.numeric(a)\[1\]
+  mean <- as.numeric(mean)[1]
+  a <- as.numeric(a)[1]
   .morie_wsm_need(mean >= 0, sprintf(
     "Markov's inequality needs E[X] >= 0 (X non-negative); got %s.", mean
   ))
@@ -191,9 +191,9 @@ morie_wasserman_markov_ineq <- function(mean, a) {
 #' @export
 morie_wasserman_hoeffding <- function(n, t, a, b) {
   n <- as.integer(n)
-  t <- as.numeric(t)\[1\]
-  a <- as.numeric(a)\[1\]
-  b <- as.numeric(b)\[1\]
+  t <- as.numeric(t)[1]
+  a <- as.numeric(a)[1]
+  b <- as.numeric(b)[1]
   .morie_wsm_need(n >= 1L, sprintf("Hoeffding needs n >= 1; got %d.", n))
   .morie_wsm_need(t > 0, sprintf("Hoeffding needs t > 0; got %s.", t))
   .morie_wsm_need(a < b, sprintf("Hoeffding needs a < b; got a=%s, b=%s.", a, b))
@@ -220,7 +220,7 @@ morie_wasserman_mgf <- function(x, t) {
   .morie_wsm_need(length(x) > 0, "the MGF of an empty sample is undefined.")
   vals <- vapply(t, function(ti) mean(exp(ti * x)), numeric(1))
   list(
-    estimate = vals\[1\], values = vals, t = t, n = length(x),
+    estimate = vals[1], values = vals, t = t, n = length(x),
     method = "empirical MGF (1/n) sum e^{tX_i}"
   )
 }
@@ -245,7 +245,7 @@ morie_wasserman_char_fn <- function(x, t) {
   im <- vapply(t, function(ti) mean(sin(ti * x)), numeric(1))
   mod <- sqrt(re^2 + im^2)
   list(
-    estimate = mod\[1\], real = re, imag = im, modulus = mod, t = t,
+    estimate = mod[1], real = re, imag = im, modulus = mod, t = t,
     n = length(x), method = "empirical phi(t) = mean cos(tX) + i mean sin(tX)"
   )
 }
@@ -304,9 +304,9 @@ morie_wasserman_lln <- function(data) {
 #' morie_wasserman_delta_method(3, 0.5, 6)$estimate
 #' @export
 morie_wasserman_delta_method <- function(theta_hat, se, g_prime) {
-  theta_hat <- as.numeric(theta_hat)\[1\]
-  se <- as.numeric(se)\[1\]
-  g_prime <- as.numeric(g_prime)\[1\]
+  theta_hat <- as.numeric(theta_hat)[1]
+  se <- as.numeric(se)[1]
+  g_prime <- as.numeric(g_prime)[1]
   .morie_wsm_need(se > 0, sprintf("the delta method needs se > 0; got %s.", se))
   .morie_wsm_need(
     g_prime != 0,
@@ -334,11 +334,11 @@ morie_wasserman_empirical_quantile <- function(data, p) {
   n <- length(data)
   .morie_wsm_need(n > 0, "the quantile of an empty sample is undefined.")
   .morie_wsm_need(all(p > 0 & p <= 1), sprintf(
-    "quantile levels must lie in (0, 1]; got %s.", p[p <= 0 | p > 1]\[1\]
+    "quantile levels must lie in (0, 1]; got %s.", p[p <= 0 | p > 1][1]
   ))
   vals <- data[ceiling(p * n)]
   list(
-    estimate = vals\[1\], values = vals, p = p, n = n,
+    estimate = vals[1], values = vals, p = p, n = n,
     method = "type-1 quantile q_p = X_(ceil(np))"
   )
 }
@@ -354,7 +354,7 @@ morie_wasserman_empirical_quantile <- function(data, p) {
 #' @export
 morie_wasserman_dkw_cb <- function(data, alpha) {
   data <- sort(as.numeric(data))
-  alpha <- as.numeric(alpha)\[1\]
+  alpha <- as.numeric(alpha)[1]
   n <- length(data)
   .morie_wsm_need(n > 0, "the DKW band of an empty sample is undefined.")
   .morie_wsm_need(
@@ -478,7 +478,7 @@ morie_wasserman_nonparametric_boot <- function(data, T, B, seed = 13) {
 morie_wasserman_bootstrap_percentile <- function(data, T, B, alpha, seed = 13) {
   data <- as.numeric(data)
   B <- as.integer(B)
-  alpha <- as.numeric(alpha)\[1\]
+  alpha <- as.numeric(alpha)[1]
   .morie_wsm_need(length(data) > 0, "the bootstrap of an empty sample is undefined.")
   .morie_wsm_need(B >= 2L, sprintf("the bootstrap needs B >= 2; got %d.", B))
   .morie_wsm_need(
@@ -510,7 +510,7 @@ morie_wasserman_bootstrap_percentile <- function(data, T, B, alpha, seed = 13) {
 morie_wasserman_bootstrap_pivotal <- function(data, T, B, alpha, seed = 13) {
   data <- as.numeric(data)
   B <- as.integer(B)
-  alpha <- as.numeric(alpha)\[1\]
+  alpha <- as.numeric(alpha)[1]
   .morie_wsm_need(length(data) > 0, "the bootstrap of an empty sample is undefined.")
   .morie_wsm_need(B >= 2L, sprintf("the bootstrap needs B >= 2; got %d.", B))
   .morie_wsm_need(
@@ -608,7 +608,7 @@ morie_wasserman_influence_function <- function(data, T) {
 #' @export
 morie_wasserman_likelihood <- function(data, f, theta) {
   data <- as.numeric(data)
-  theta <- as.numeric(theta)\[1\]
+  theta <- as.numeric(theta)[1]
   .morie_wsm_need(length(data) > 0, "the likelihood on an empty sample is undefined.")
   if (is.null(f)) {
     .morie_wsm_need(
@@ -640,7 +640,7 @@ morie_wasserman_likelihood <- function(data, f, theta) {
 morie_wasserman_log_likelihood <- function(data, f, theta) {
   core <- morie_wasserman_likelihood(data, f, theta)
   data <- as.numeric(data)
-  theta <- as.numeric(theta)\[1\]
+  theta <- as.numeric(theta)[1]
   if (is.null(f)) f <- function(x, th) ifelse(x >= 0, exp(-x / th) / th, 0)
   per <- suppressWarnings(log(as.numeric(f(data, theta))))
   list(
@@ -661,9 +661,9 @@ morie_wasserman_log_likelihood <- function(data, f, theta) {
 #' morie_wasserman_cramer_rao(0, 25, 0.25)$estimate
 #' @export
 morie_wasserman_cramer_rao <- function(theta, n, I) {
-  theta <- as.numeric(theta)\[1\]
+  theta <- as.numeric(theta)[1]
   n <- as.integer(n)
-  I <- as.numeric(I)\[1\]
+  I <- as.numeric(I)[1]
   .morie_wsm_need(n >= 1L, sprintf("the Cramer-Rao bound needs n >= 1; got %d.", n))
   .morie_wsm_need(
     I > 0,
@@ -693,8 +693,8 @@ morie_wasserman_cramer_rao <- function(theta, n, I) {
 #' round(morie_wasserman_fisher_info(NULL, 2)$estimate, 4)
 #' @export
 morie_wasserman_fisher_info <- function(f, theta, x_grid = NULL, h = 1e-5) {
-  theta <- as.numeric(theta)\[1\]
-  h <- as.numeric(h)\[1\]
+  theta <- as.numeric(theta)[1]
+  h <- as.numeric(h)[1]
   if (is.null(f)) {
     .morie_wsm_need(
       theta > 0,
@@ -743,7 +743,7 @@ morie_wasserman_mle_asymptotic <- function(data, f, theta_hat, x_grid = NULL) {
   data <- as.numeric(data)
   n <- length(data)
   .morie_wsm_need(n > 0, "asymptotics for an empty sample are undefined.")
-  theta_hat <- as.numeric(theta_hat)\[1\]
+  theta_hat <- as.numeric(theta_hat)[1]
   info <- morie_wasserman_fisher_info(f, theta_hat, x_grid = x_grid)$estimate
   se <- 1 / sqrt(n * info)
   z <- 1.959963984540054
@@ -789,7 +789,7 @@ morie_wasserman_white_huber <- function(X, y, f = NULL) {
   V <- Ainv %*% B %*% Ainv / n
   rse <- sqrt(diag(V))
   list(
-    estimate = rse\[1\], beta = beta, robust_se = rse,
+    estimate = rse[1], beta = beta, robust_se = rse,
     covariance = as.numeric(t(V)), bread = as.numeric(t(A)),
     meat = as.numeric(t(B)), n = n, p = p,
     method = "White-Huber HC0 sandwich A^-1 B A^-1 / n"
@@ -817,7 +817,7 @@ morie_wasserman_em_algorithm <- function(X, theta0, max_iter = 200L, tol = 1e-8)
   n <- length(X)
   .morie_wsm_need(n >= 2L, "EM on fewer than 2 points is undefined.")
   th <- as.numeric(theta0)
-  pi_ <- th\[1\]
+  pi_ <- th[1]
   mu1 <- th[2]
   mu2 <- th[3]
   sd1 <- th[4]
@@ -937,7 +937,7 @@ morie_wasserman_chi_sq_gof <- function(observed, expected) {
 morie_wasserman_posterior <- function(data, f, prior) {
   data <- as.numeric(data)
   .morie_wsm_need(length(data) > 0, "a posterior needs data.")
-  grid <- as.numeric(prior[\[1\]])
+  grid <- as.numeric(prior[[1]])
   pd <- as.numeric(prior[[2]])
   .morie_wsm_need(
     length(grid) == length(pd) && length(grid) >= 2L,
@@ -976,9 +976,9 @@ morie_wasserman_posterior <- function(data, f, prior) {
 #' round(morie_wasserman_credible_interval(list(g, rep(1, 10001)), 0.1)$lower, 4)
 #' @export
 morie_wasserman_credible_interval <- function(posterior, alpha) {
-  grid <- as.numeric(posterior[\[1\]])
+  grid <- as.numeric(posterior[[1]])
   dens <- as.numeric(posterior[[2]])
-  alpha <- as.numeric(alpha)\[1\]
+  alpha <- as.numeric(alpha)[1]
   .morie_wsm_need(
     alpha > 0 && alpha < 1,
     sprintf("alpha must lie in (0, 1); got %s.", alpha)
@@ -1011,7 +1011,7 @@ morie_wasserman_credible_interval <- function(posterior, alpha) {
 #' round(morie_wasserman_posterior_mean(list(g, rep(1, 10001)))$estimate, 6)
 #' @export
 morie_wasserman_posterior_mean <- function(posterior) {
-  grid <- as.numeric(posterior[\[1\]])
+  grid <- as.numeric(posterior[[1]])
   dens <- as.numeric(posterior[[2]])
   .morie_wsm_need(
     length(grid) == length(dens) && length(grid) >= 2L,
@@ -1053,19 +1053,19 @@ morie_bayes_factor_savage_dickey <- function(samples, prior, theta0 = 0,
     n >= 10L,
     "the Savage-Dickey KDE needs at least 10 posterior draws."
   )
-  theta0 <- as.numeric(theta0)\[1\]
-  p0 <- if (is.function(prior)) as.numeric(prior(theta0)) else as.numeric(prior)\[1\]
+  theta0 <- as.numeric(theta0)[1]
+  p0 <- if (is.function(prior)) as.numeric(prior(theta0)) else as.numeric(prior)[1]
   .morie_wsm_need(p0 > 0, sprintf(
     "the prior density at theta0 must be positive; got %s.", p0
   ))
   if (is.null(bandwidth)) {
     s <- stats::sd(samples)
     q <- stats::quantile(samples, c(0.25, 0.75), type = 7, names = FALSE)
-    spread <- if (q[2] > q\[1\]) min(s, (q[2] - q\[1\]) / 1.34) else s
+    spread <- if (q[2] > q[1]) min(s, (q[2] - q[1]) / 1.34) else s
     .morie_wsm_need(spread > 0, "degenerate posterior draws; KDE bandwidth is zero.")
     bandwidth <- 0.9 * spread * n^(-0.2)
   }
-  bandwidth <- as.numeric(bandwidth)\[1\]
+  bandwidth <- as.numeric(bandwidth)[1]
   .morie_wsm_need(bandwidth > 0, sprintf(
     "the KDE bandwidth must be positive; got %s.", bandwidth
   ))
@@ -1237,7 +1237,7 @@ morie_wasserman_odds_ratio <- function(table) {
     "a zero cell makes the odds ratio degenerate;",
     "apply a continuity correction explicitly if intended."
   ))
-  or_ <- (T\[1, 1\] * T[2, 2]) / (T\[1, 2\] * T[2, 1])
+  or_ <- (T[1, 1] * T[2, 2]) / (T[1, 2] * T[2, 1])
   log_or <- log(or_)
   se <- sqrt(sum(1 / T))
   z <- 1.959963984540054
@@ -1264,18 +1264,18 @@ morie_wasserman_relative_risk <- function(table) {
     sprintf("the table must be 2x2; got %dx%d.", nrow(T), ncol(T))
   )
   .morie_wsm_need(all(T >= 0), "counts cannot be negative.")
-  r1 <- T\[1, 1\] + T\[1, 2\]
+  r1 <- T[1, 1] + T[1, 2]
   r0 <- T[2, 1] + T[2, 2]
   .morie_wsm_need(r1 > 0 && r0 > 0, "both exposure rows need at least one subject.")
   .morie_wsm_need(
-    T\[1, 1\] > 0 && T[2, 1] > 0,
+    T[1, 1] > 0 && T[2, 1] > 0,
     "zero event counts make the relative risk degenerate."
   )
-  p1 <- T\[1, 1\] / r1
+  p1 <- T[1, 1] / r1
   p0 <- T[2, 1] / r0
   rr <- p1 / p0
   log_rr <- log(rr)
-  se <- sqrt((1 - p1) / T\[1, 1\] + (1 - p0) / T[2, 1])
+  se <- sqrt((1 - p1) / T[1, 1] + (1 - p0) / T[2, 1])
   z <- 1.959963984540054
   list(
     estimate = rr, risk_exposed = p1, risk_unexposed = p0, log_rr = log_rr,
@@ -1358,7 +1358,7 @@ morie_sgt_closeness_centrality <- function(A) {
     far <- which(dist < 0L)
     .morie_wsm_need(length(far) == 0L, sprintf(
       "closeness needs a connected graph; vertex %d cannot reach vertex %d.",
-      v - 1L, far\[1\] - 1L
+      v - 1L, far[1] - 1L
     ))
     clos[v] <- (n - 1) / sum(dist)
   }
@@ -1404,7 +1404,7 @@ morie_wasserman_least_squares <- function(X, y) {
   se <- sqrt(diag(sigma2 * solve(crossprod(X))))
   tss <- sum((y - mean(y))^2)
   list(
-    estimate = beta\[1\], beta = beta, se = se, sigma2 = sigma2, rss = rss,
+    estimate = beta[1], beta = beta, se = se, sigma2 = sigma2, rss = rss,
     r_squared = if (tss > 0) 1 - rss / tss else NaN, n = n, p = p,
     method = "OLS via QR; classical se sigma2 (X'X)^-1"
   )
@@ -1423,7 +1423,7 @@ morie_wasserman_least_squares <- function(X, y) {
 morie_wasserman_ridge <- function(X, y, lambda_) {
   X <- as.matrix(X)
   y <- as.numeric(y)
-  lam <- as.numeric(lambda_)\[1\]
+  lam <- as.numeric(lambda_)[1]
   n <- nrow(X)
   p <- ncol(X)
   .morie_wsm_need(
@@ -1444,7 +1444,7 @@ morie_wasserman_ridge <- function(X, y, lambda_) {
   H <- X %*% Ginv %*% t(X)
   resid <- y - as.numeric(X %*% beta)
   list(
-    estimate = beta\[1\], beta = beta, effective_df = sum(diag(H)),
+    estimate = beta[1], beta = beta, effective_df = sum(diag(H)),
     rss = sum(resid^2), lambda = lam, n = n, p = p,
     method = "ridge (X'X + lambda I)^-1 X'y; edf = tr(H)"
   )
@@ -1467,7 +1467,7 @@ morie_wasserman_ridge <- function(X, y, lambda_) {
 morie_wasserman_lasso <- function(X, y, lambda_, max_iter = 10000L, tol = 1e-12) {
   X <- as.matrix(X)
   y <- as.numeric(y)
-  lam <- as.numeric(lambda_)\[1\]
+  lam <- as.numeric(lambda_)[1]
   n <- nrow(X)
   p <- ncol(X)
   .morie_wsm_need(
@@ -1505,7 +1505,7 @@ morie_wasserman_lasso <- function(X, y, lambda_, max_iter = 10000L, tol = 1e-12)
     }
   }
   list(
-    estimate = beta\[1\], beta = beta, n_nonzero = sum(beta != 0),
+    estimate = beta[1], beta = beta, n_nonzero = sum(beta != 0),
     objective = 0.5 * sum(r^2) + lam * sum(abs(beta)),
     iterations = it, converged = converged, lambda = lam, n = n, p = p,
     method = "lasso cyclic coordinate descent, soft threshold"
@@ -1558,7 +1558,7 @@ morie_wasserman_logistic_regression <- function(X, y, max_iter = 100L, tol = 1e-
   ll <- sum(y * log(mu) + (1 - y) * log(1 - mu))
   se <- sqrt(diag(solve(crossprod(X * (mu * (1 - mu)), X))))
   list(
-    estimate = beta\[1\], beta = beta, se = se, log_likelihood = ll,
+    estimate = beta[1], beta = beta, se = se, log_likelihood = ll,
     iterations = it, converged = converged, n = n, p = p,
     method = "logistic MLE by Newton-Raphson; separation refused"
   )
@@ -1591,7 +1591,7 @@ morie_wasserman_poisson_regression <- function(X, y, max_iter = 100L, tol = 1e-1
     "Poisson counts must be non-negative integers."
   )
   beta <- numeric(p)
-  beta\[1\] <- if (mean(y) > 0) log(mean(y)) else 0
+  beta[1] <- if (mean(y) > 0) log(mean(y)) else 0
   converged <- FALSE
   it <- 0L
   for (it in seq_len(as.integer(max_iter))) {
@@ -1614,7 +1614,7 @@ morie_wasserman_poisson_regression <- function(X, y, max_iter = 100L, tol = 1e-1
   dev_terms <- ifelse(y > 0, y * log(y / mu), 0) - (y - mu)
   se <- sqrt(diag(solve(crossprod(X * mu, X))))
   list(
-    estimate = beta\[1\], beta = beta, se = se, log_likelihood = ll,
+    estimate = beta[1], beta = beta, se = se, log_likelihood = ll,
     deviance = 2 * sum(dev_terms), iterations = it, converged = converged,
     n = n, p = p, method = "Poisson GLM Newton; ll includes lgamma constant"
   )
@@ -1631,7 +1631,7 @@ morie_wasserman_poisson_regression <- function(X, y, max_iter = 100L, tol = 1e-1
 #' morie_wasserman_aic(-100, 3)$estimate
 #' @export
 morie_wasserman_aic <- function(loglik, k) {
-  loglik <- as.numeric(loglik)\[1\]
+  loglik <- as.numeric(loglik)[1]
   k <- as.integer(k)
   .morie_wsm_need(
     k >= 0L,
@@ -1657,7 +1657,7 @@ morie_wasserman_aic <- function(loglik, k) {
 #' }
 #' @export
 morie_wasserman_bic <- function(loglik, k, n) {
-  loglik <- as.numeric(loglik)\[1\]
+  loglik <- as.numeric(loglik)[1]
   k <- as.integer(k)
   n <- as.integer(n)
   .morie_wsm_need(
@@ -1742,7 +1742,7 @@ morie_wasserman_kernel_regression <- function(x, x_data, y_data, h) {
   x <- as.numeric(x)
   xd <- as.numeric(x_data)
   yd <- as.numeric(y_data)
-  h <- as.numeric(h)\[1\]
+  h <- as.numeric(h)[1]
   .morie_wsm_need(length(xd) == length(yd), sprintf(
     "x_data (%d) and y_data (%d) lengths differ.", length(xd), length(yd)
   ))
@@ -1757,7 +1757,7 @@ morie_wasserman_kernel_regression <- function(x, x_data, y_data, h) {
     vals[i] <- if (s > 0) sum(w * yd) / s else NaN
   }
   list(
-    estimate = vals\[1\], values = vals, effective_n = eff, h = h,
+    estimate = vals[1], values = vals, effective_n = eff, h = h,
     n = length(xd),
     method = "Nadaraya-Watson, Gaussian kernel; zero-weight -> nan"
   )
@@ -1781,7 +1781,7 @@ morie_wasserman_local_polynomial <- function(x, x_data, y_data, h, p = 1L) {
   x <- as.numeric(x)
   xd <- as.numeric(x_data)
   yd <- as.numeric(y_data)
-  h <- as.numeric(h)\[1\]
+  h <- as.numeric(h)[1]
   p <- as.integer(p)
   .morie_wsm_need(length(xd) == length(yd), sprintf(
     "x_data (%d) and y_data (%d) lengths differ.", length(xd), length(yd)
@@ -1804,11 +1804,11 @@ morie_wasserman_local_polynomial <- function(x, x_data, y_data, h, p = 1L) {
       next
     }
     b <- as.numeric(qr.coef(qrx, yd * sw))
-    vals[i] <- b\[1\]
+    vals[i] <- b[1]
     ders[i] <- if (p >= 1L) b[2] else NaN
   }
   list(
-    estimate = vals\[1\], values = vals, derivatives = ders, h = h, p = p,
+    estimate = vals[1], values = vals, derivatives = ders, h = h, p = p,
     n = length(xd),
     method = "local polynomial WLS, Gaussian kernel; b0 = fit, b1 = slope"
   )
@@ -1832,7 +1832,7 @@ morie_wasserman_local_polynomial <- function(x, x_data, y_data, h, p = 1L) {
 morie_wasserman_smoothing_spline <- function(x, y, lambda_) {
   x <- as.numeric(x)
   y <- as.numeric(y)
-  lam <- as.numeric(lambda_)\[1\]
+  lam <- as.numeric(lambda_)[1]
   n <- length(x)
   .morie_wsm_need(
     length(y) == n,
@@ -1879,7 +1879,7 @@ morie_wasserman_pca <- function(X, k) {
   .morie_wsm_need(n >= 2L, "PCA needs at least 2 observations.")
   .morie_wsm_need(
     k >= 1L && k <= d,
-    sprintf("k must lie in \[1, d\]; got k=%d, d=%d.", k, d)
+    sprintf("k must lie in [1, d]; got k=%d, d=%d.", k, d)
   )
   Xc <- sweep(X, 2, colMeans(X))
   S <- crossprod(Xc) / (n - 1)
@@ -1888,12 +1888,12 @@ morie_wasserman_pca <- function(X, k) {
   vecs <- eg$vectors[, seq_len(k), drop = FALSE]
   for (j in seq_len(k)) {
     i <- which.max(abs(vecs[, j]))
-    if (vecs\[i, j\] < 0) vecs[, j] <- -vecs[, j]
+    if (vecs[i, j] < 0) vecs[, j] <- -vecs[, j]
   }
   scores <- Xc %*% vecs
   total <- sum(diag(S))
   list(
-    estimate = vals\[1\], eigenvalues = vals,
+    estimate = vals[1], eigenvalues = vals,
     components = as.numeric(t(vecs)),
     explained_ratio = if (total > 0) sum(vals) / total else NaN,
     scores = as.numeric(t(scores)), n = n, d = d, k = k,
@@ -2036,9 +2036,9 @@ morie_wasserman_hmm_forward <- function(obs, A, B, pi) {
   )
   .morie_wsm_need(all(obs >= 0 & obs < M), sprintf(
     "observation index %d is outside the emission alphabet of size %d.",
-    obs[obs < 0 | obs >= M]\[1\], M
+    obs[obs < 0 | obs >= M][1], M
   ))
-  alpha <- pi * B[, obs\[1\] + 1L]
+  alpha <- pi * B[, obs[1] + 1L]
   ll <- 0
   c1 <- sum(alpha)
   if (c1 == 0) {
@@ -2100,12 +2100,12 @@ morie_wasserman_viterbi <- function(obs, A, B, pi) {
   .morie_wsm_need(Tn > 0, "Viterbi needs at least one observation.")
   .morie_wsm_need(all(obs >= 0 & obs < M), sprintf(
     "observation index %d is outside the emission alphabet of size %d.",
-    obs[obs < 0 | obs >= M]\[1\], M
+    obs[obs < 0 | obs >= M][1], M
   ))
   lA <- suppressWarnings(log(A))
   lB <- suppressWarnings(log(B))
   lpi <- suppressWarnings(log(pi))
-  delta <- lpi + lB[, obs\[1\] + 1L]
+  delta <- lpi + lB[, obs[1] + 1L]
   back <- matrix(0L, Tn, S)
   if (Tn > 1L) {
     for (t in 2:Tn) {
@@ -2159,17 +2159,17 @@ morie_wasserman_viterbi <- function(obs, A, B, pi) {
   vapply(u, function(ui) {
     if (ui < plow) {
       q <- sqrt(-2 * log(ui))
-      (((((cc\[1\] * q + cc[2]) * q + cc[3]) * q + cc[4]) * q + cc[5]) * q + cc[6]) /
-        ((((d\[1\] * q + d[2]) * q + d[3]) * q + d[4]) * q + 1)
+      (((((cc[1] * q + cc[2]) * q + cc[3]) * q + cc[4]) * q + cc[5]) * q + cc[6]) /
+        ((((d[1] * q + d[2]) * q + d[3]) * q + d[4]) * q + 1)
     } else if (ui > phigh) {
       q <- sqrt(-2 * log(1 - ui))
-      -(((((cc\[1\] * q + cc[2]) * q + cc[3]) * q + cc[4]) * q + cc[5]) * q + cc[6]) /
-        ((((d\[1\] * q + d[2]) * q + d[3]) * q + d[4]) * q + 1)
+      -(((((cc[1] * q + cc[2]) * q + cc[3]) * q + cc[4]) * q + cc[5]) * q + cc[6]) /
+        ((((d[1] * q + d[2]) * q + d[3]) * q + d[4]) * q + 1)
     } else {
       q <- ui - 0.5
       r <- q * q
-      (((((a\[1\] * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * r + a[6]) * q /
-        (((((b\[1\] * r + b[2]) * r + b[3]) * r + b[4]) * r + b[5]) * r + 1)
+      (((((a[1] * r + a[2]) * r + a[3]) * r + a[4]) * r + a[5]) * r + a[6]) * q /
+        (((((b[1] * r + b[2]) * r + b[3]) * r + b[4]) * r + b[5]) * r + 1)
     }
   }, numeric(1))
 }
@@ -2190,13 +2190,13 @@ morie_wasserman_viterbi <- function(obs, A, B, pi) {
 #' round(morie_wasserman_gibbs_sampler(0.9, c(0, 0), 200)$estimate, 3)
 #' @export
 morie_wasserman_gibbs_sampler <- function(target, x0, n, seed = 13) {
-  rho <- as.numeric(target)\[1\]
+  rho <- as.numeric(target)[1]
   n <- as.integer(n)
   .morie_wsm_need(rho > -1 && rho < 1, sprintf(
     "the correlation must satisfy |rho| < 1; got %s.", rho
   ))
   .morie_wsm_need(n >= 1L, sprintf("the sampler needs n >= 1 sweeps; got %d.", n))
-  x <- as.numeric(x0)\[1\]
+  x <- as.numeric(x0)[1]
   y <- as.numeric(x0)[2]
   s <- sqrt(1 - rho^2)
   u <- .morie_wsm_lcg_u(2 * n, seed)
@@ -2232,11 +2232,11 @@ morie_wasserman_gibbs_sampler <- function(target, x0, n, seed = 13) {
 #' round(morie_wasserman_mcmc_metropolis(p, 1, 0, 200)$acceptance_rate, 3)
 #' @export
 morie_wasserman_mcmc_metropolis <- function(target, proposal, x0, n, seed = 13) {
-  step <- as.numeric(proposal)\[1\]
+  step <- as.numeric(proposal)[1]
   n <- as.integer(n)
   .morie_wsm_need(step > 0, sprintf("the proposal sd must be positive; got %s.", step))
   .morie_wsm_need(n >= 1L, sprintf("the sampler needs n >= 1; got %d.", n))
-  x <- as.numeric(x0)\[1\]
+  x <- as.numeric(x0)[1]
   px <- as.numeric(target(x))
   .morie_wsm_need(px > 0, "the chain must start where the target is positive.")
   u <- .morie_wsm_lcg_u(2 * n, seed)
@@ -2290,7 +2290,7 @@ morie_wasserman_directed_graph <- function(dag, x) {
       paste(
         "node %d has parent %d not earlier in the ordering;",
         "supply a topological order."
-      ), i - 1L, bad\[1\]
+      ), i - 1L, bad[1]
     ))
     # A root node has no parent key to look up -- R cannot name a list
     # element "" -- so it takes the single CPT entry.
@@ -2299,7 +2299,7 @@ morie_wasserman_directed_graph <- function(dag, x) {
         length(dag[[i]]$cpt) == 1L,
         sprintf("root node %d needs exactly one CPT entry.", i - 1L)
       )
-      p1 <- as.numeric(dag[[i]]$cpt[\[1\]])
+      p1 <- as.numeric(dag[[i]]$cpt[[1]])
     } else {
       key <- paste(x[parents + 1L], collapse = "")
       .morie_wsm_need(!is.null(dag[[i]]$cpt[[key]]), sprintf(
@@ -2337,7 +2337,7 @@ morie_wasserman_directed_graph <- function(dag, x) {
 #' morie_wasserman_undirected_graph(list(2, list(c(0, 1))), list(agree))$estimate
 #' @export
 morie_wasserman_undirected_graph <- function(graph, psi) {
-  n <- as.integer(graph[\[1\]])
+  n <- as.integer(graph[[1]])
   cliques <- graph[[2]]
   .morie_wsm_need(n >= 1L && n <= 20L, sprintf(
     "the exact version handles 1 <= n <= 20 nodes; got %d.", n
@@ -2533,7 +2533,7 @@ morie_wasserman_svm <- function(X, y, C = 1e6, max_iter = 1000L, tol = 1e-12) {
   y <- as.numeric(y)
   n <- nrow(X)
   d <- ncol(X)
-  C <- as.numeric(C)\[1\]
+  C <- as.numeric(C)[1]
   .morie_wsm_need(
     length(y) == n,
     sprintf("X has %d rows but y has %d labels.", n, length(y))
@@ -2547,7 +2547,7 @@ morie_wasserman_svm <- function(X, y, C = 1e6, max_iter = 1000L, tol = 1e-12) {
     u <- as.numeric(K %*% (a * y))
     for (i in seq_len(n - 1L)) {
       for (j in (i + 1L):n) {
-        kappa <- K[i, i] - 2 * K\[i, j\] + K[j, j]
+        kappa <- K[i, i] - 2 * K[i, j] + K[j, j]
         if (kappa <= 1e-300) next
         tstar <- (y[i] - y[j] - u[i] + u[j]) / kappa
         b1 <- -a[i] * y[i]

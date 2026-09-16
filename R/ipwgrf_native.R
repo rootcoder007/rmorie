@@ -88,7 +88,7 @@
       forest_result <- grow_forest(Xa, ya, n_trees = n_trees,
                                    min_leaf = min_leaf,
                                    seed = seed + as.integer(arm))
-      trees <- forest_result[\[1\]]
+      trees <- forest_result[[1]]
 
       for (i in val) {
         w <- forest_weights(trees, Xa, X[i, , drop = FALSE])
@@ -106,7 +106,7 @@
     forest_result <- grow_forest(Xt, Wt, n_trees = n_trees,
                                  min_leaf = min_leaf,
                                  seed = seed + 7)
-    trees <- forest_result[\[1\]]
+    trees <- forest_result[[1]]
 
     for (i in val) {
       w <- forest_weights(trees, Xt, X[i, , drop = FALSE])

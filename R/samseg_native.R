@@ -65,7 +65,7 @@
 #'                          labels = c(1, 0), dim = 8)
 #' is.list(e) || is.matrix(e) || is.numeric(e)
 encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL) {
-  P <- lapply(points, function(p) c(as.numeric(p\[1\]), as.numeric(p[2])))
+  P <- lapply(points, function(p) c(as.numeric(p[1]), as.numeric(p[2])))
   L <- as.integer(unlist(labels))
   if (length(P) != length(L))
     stop(sprintf("samseg: %d points but %d labels", length(P), length(L)))
@@ -75,7 +75,7 @@ encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL)
   if (is.null(te)) te <- list()
   out <- list()
   for (i in seq_along(P)) {
-    e <- .samseg_pos_enc(P[[i]]\[1\], P[[i]][2], dim)
+    e <- .samseg_pos_enc(P[[i]][1], P[[i]][2], dim)
     name <- if (L[i] == 1L) "foreground" else "background"
     t <- if (!is.null(te[[name]])) as.numeric(te[[name]]) else rep(0, length(e))
     if (length(t) != length(e))
@@ -103,7 +103,7 @@ encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL)
 #' encode_box_prompt(V)
 encode_box_prompt <- function(box, dim = 8, type_embeddings = NULL) {
   v <- as.numeric(unlist(box))
-  x0 <- v\[1\]
+  x0 <- v[1]
   y0 <- v[2]
   x1 <- v[3]
   y1 <- v[4]
@@ -201,7 +201,7 @@ promptable_segment <- function(image_embedding, prompt_tokens, decoder,
   masks <- decoder(image_embedding, prompt_tokens, multimask)
   if (length(masks) == 0)
     stop("samseg: the decoder returned no mask; the task requires a valid mask for ANY prompt")
-  list(estimate = masks[\[1\]], masks = masks, n_masks = length(masks),
+  list(estimate = masks[[1]], masks = masks, n_masks = length(masks),
        multimask = as.logical(multimask),
        method = "promptable segmentation; Kirillov et al. (2023)",
        note = paste("a valid mask for any prompt, and for an ",

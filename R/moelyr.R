@@ -55,10 +55,10 @@ Moelayer <- function(y, x = NULL, W_g = NULL, experts = NULL, top_k = 2,
     outs[[i]] <- if (is.function(experts[[i]])) .s03vec(experts[[i]](v)) else
       if (is.matrix(experts)) as.numeric(experts[i, ]) else .s03vec(experts[[i]])
   }
-  d <- length(outs[\[1\]])
+  d <- length(outs[[1]])
   out <- numeric(d)
   for (i in chosen) for (j in seq_len(d)) out[j] <- out[j] + gate[i] * outs[[i]][j]
-  list(estimate = if (d) out\[1\] else NaN, out = out, gate = gate,
+  list(estimate = if (d) out[1] else NaN, out = out, gate = gate,
        chosen = chosen - 1L, h = h, keep = keep,
        method = "Sparsely-gated MoE layer (Shazeer et al. 2017, eqs. 3-6)")
 }

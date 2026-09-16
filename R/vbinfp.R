@@ -95,5 +95,5 @@ Vbinfp <- function(X, Y, q = NULL) {
   .t1_result(estimate = bound, bound = bound, entropy_x = hx, entropy_y = hy,
              expected_log_q = elq, plugin_mi = mi, gap = mi - bound,
              conditional_entropy = hxy, n = n, nx = nx, ny = ny,
-             method = "I(X;Y) >= H(X) + E\[log q(x|y)\] (Barber and Agakov 2003)")
+             method = "I(X;Y) >= H(X) + E[log q(x|y)] (Barber and Agakov 2003)")
 }

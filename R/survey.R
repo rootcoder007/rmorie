@@ -176,7 +176,7 @@ morie_survey_mean <- function(design, variable) {
     fml <- stats::as.formula(paste("~", variable))
     sm <- survey::svymean(fml, design)
     return(list(mean = as.numeric(sm),
-                se = sqrt(diag(stats::vcov(sm)))[\[1\]]))
+                se = sqrt(diag(stats::vcov(sm)))[[1]]))
   }
   # fallback
   morie_survey_hajek_mean(design$data[[variable]], design$weights)

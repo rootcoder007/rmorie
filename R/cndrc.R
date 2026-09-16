@@ -21,7 +21,7 @@ cndrc <- function(preference_matrix) {
   for (i in seq_len(n)) {
     beats_all <- TRUE
     for (j in seq_len(n)) {
-      if (i != j && M\[i, j\] <= M[j, i]) {
+      if (i != j && M[i, j] <= M[j, i]) {
         beats_all <- FALSE
         break
       }

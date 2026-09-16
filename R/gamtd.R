@@ -51,7 +51,7 @@ Nsteptd <- function(traj, V, n = 1, gamma = 0.99, alpha = 0.1, states = NULL) {
     si <- if (t < length(idx)) idx[t + 1L] else t
     if (si < length(vn)) vn[si + 1L] <- vn[si + 1L] + as.numeric(alpha) * (G[t + 1L] - vn[si + 1L])
   }
-  list(estimate = if (Tn) G\[1\] else NaN, returns = G, v_new = vn,
+  list(estimate = if (Tn) G[1] else NaN, returns = G, v_new = vn,
        bootstrapped = booted, n = Tn,
        method = "n-step TD return and update (Sutton and Barto 2018, eqs. 7.1-7.2)")
 }

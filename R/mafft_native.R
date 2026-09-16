@@ -371,7 +371,7 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
     for (j in 1L:(i - 1L)) {
       k <- k + 1L
       v <- .MAFFT_JTT_COUNTS[k] / (400.0 * f[i] * f[j])
-      S\[i, j\] <- v
+      S[i, j] <- v
       S[j, i] <- v
     }
   }
@@ -403,16 +403,16 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
     off <- 0.0
     for (j in 1L:20L) {
       if (i == j) next
-      Q\[i, j\] <- S\[i, j\] * f[j]
-      off <- off + Q\[i, j\]
+      Q[i, j] <- S[i, j] * f[j]
+      off <- off + Q[i, j]
     }
     Q[i, i] <- -off
   }
   mu <- -sum(f * diag(Q))
-  for (i in 1L:20L) for (j in 1L:20L) Q\[i, j\] <- Q\[i, j\] / (mu * 100.0)
+  for (i in 1L:20L) for (j in 1L:20L) Q[i, j] <- Q[i, j] / (mu * 100.0)
   rt <- sqrt(f)
   A <- matrix(0, 20L, 20L)
-  for (i in 1L:20L) for (j in 1L:20L) A\[i, j\] <- Q\[i, j\] * rt[i] / rt[j]
+  for (i in 1L:20L) for (j in 1L:20L) A[i, j] <- Q[i, j] * rt[i] / rt[j]
   es <- eigen(A, symmetric = TRUE)
   w <- es$values
   V <- es$vectors
@@ -421,7 +421,7 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
   for (i in 1L:20L) {
     for (j in 1L:20L) {
       tot <- sum(V[i, ] * e * V[j, ])
-      P\[i, j\] <- tot * rt[j] / rt[i]
+      P[i, j] <- tot * rt[j] / rt[i]
     }
   }
   M <- list()
@@ -429,7 +429,7 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
     for (j in seq_along(.MAFFT_AA)) {
       a <- .MAFFT_AA[i]
       b <- .MAFFT_AA[j]
-      p <- max(P\[i, j\], 1e-300)
+      p <- max(P[i, j], 1e-300)
       M[[paste(a, b, sep = "|")]] <- scale * log10(p / f[j])
     }
   }
@@ -694,8 +694,8 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
           best_b <- list(kind = "D", pi = i - 2L, pj = y)
         }
       }
-      P\[i, j\] <- h + best_v
-      back[\[i, j\]] <- best_b
+      P[i, j] <- h + best_v
+      back[[i, j]] <- best_b
     }
   }
   cols <- list()
@@ -1027,7 +1027,7 @@ sixtuple_distance <- function(seqs) {
         shared(tuple_tab[[j]], tuple_tab[[j]])
       )
       t <- shared(tuple_tab[[i]], tuple_tab[[j]])
-      D\[i, j\] <- 1.0 - if (denom) t / denom else 0
+      D[i, j] <- 1.0 - if (denom) t / denom else 0
     }
   }
   D
@@ -1056,7 +1056,7 @@ guide_tree <- function(D) {
   # pair loop must not run when k is already the last active id (the
   # descending colon indexed active[length+1] = NA)
   dist <- matrix(0, 2L * n, 2L * n)
-  for (i in seq_len(n)) for (j in seq_len(n)) dist\[i, j\] <- D\[i, j\]
+  for (i in seq_len(n)) for (j in seq_len(n)) dist[i, j] <- D[i, j]
   merges <- list()
   nxt <- n + 1L
   active <- seq_len(n)
@@ -1068,8 +1068,8 @@ guide_tree <- function(D) {
       i <- active[k]
       for (kk in seq_len(length(active) - k) + k) {
         j <- active[kk]
-        if (dist\[i, j\] < best_d) {
-          best_d <- dist\[i, j\]
+        if (dist[i, j] < best_d) {
+          best_d <- dist[i, j]
           bi <- i
           bj <- j
         }

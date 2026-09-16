@@ -55,4 +55,4 @@ Lftrt <- function(entry, time, event, alpha = 0.05) {
 
 # CANONICAL TEST
 # r <- Lftrt(rep(0, 4), c(5, 6, 7, 8), c(1, 1, 1, 1))
-# stopifnot(abs(r$survival\[1\] - 0.75) < 1e-12)
+# stopifnot(abs(r$survival[1] - 0.75) < 1e-12)

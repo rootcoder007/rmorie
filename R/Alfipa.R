@@ -30,9 +30,9 @@ Alfipa <- function(s, z, frames, wq, wk, wv, wqp, wkp, wvp, wb, gamma, wo) {
   n <- nrow(s)
   cz <- dim(z)[3]
   nh <- length(wq)
-  cc <- nrow(wq[\[1\]])
-  nqp <- length(wqp[\[1\]])
-  npv <- length(wvp[\[1\]])
+  cc <- nrow(wq[[1]])
+  nqp <- length(wqp[[1]])
+  npv <- length(wvp[[1]])
   scale <- 1 / sqrt(cc)
   wC <- sqrt(2 / (9 * nqp))
   wL <- sqrt(1 / 3)
@@ -59,7 +59,7 @@ Alfipa <- function(s, z, frames, wq, wk, wv, wqp, wkp, wvp, wb, gamma, wo) {
     b[[h]] <- matrix(0, n, n)
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        b[[h]]\[i, j\] <- alfVdot(as.numeric(wb[h, ]), z\[i, j, \])
+        b[[h]][i, j] <- alfVdot(as.numeric(wb[h, ]), z[i, j, ])
       }
     }
   }
@@ -77,7 +77,7 @@ Alfipa <- function(s, z, frames, wq, wk, wv, wqp, wkp, wvp, wb, gamma, wo) {
           dsq <- dsq + alfVn2(gq[[h]][i, p, ] - gk[[h]][j, p, ])
         }
         logits[j] <- wL * (scale * alfVdot(q[[h]][i, ], k[[h]][j, ]) +
-          b[[h]]\[i, j\] - 0.5 * gamma[h] * wC * dsq)
+          b[[h]][i, j] - 0.5 * gamma[h] * wC * dsq)
       }
       a <- alfSmax(logits)
       attn[[h]][i, ] <- a

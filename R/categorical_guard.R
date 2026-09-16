@@ -98,7 +98,7 @@ morie_safe_factor <- function(x, levels, reference = NULL) {
   }
   if (!is.null(reference) && !identical(reference, levels[1L])) {
     stop("morie_safe_factor: declared reference ", sQuote(reference),
-      " is not levels\[1\] (", sQuote(levels[1L]), "); reorder ",
+      " is not levels[1] (", sQuote(levels[1L]), "); reorder ",
       "`levels` so the reference is explicit and first.",
       call. = FALSE
     )
@@ -200,7 +200,7 @@ morie_audit_categories <- function(data, cols = NULL) {
       storage = paste(class(data[[cn]]), collapse = "/"),
       n_levels = length(lv),
       levels = paste(utils::head(lv, 8), collapse = "|"),
-      reference = if (length(lv)) lv\[1\] else NA_character_,
+      reference = if (length(lv)) lv[1] else NA_character_,
       hazards = if (length(hazards)) {
         paste(hazards, collapse = " ;; ")
       } else {
@@ -246,7 +246,7 @@ print.morie_category_audit <- function(x, ...) {
       sQuote(x$reference[i])
     ))
     if (nzchar(x$hazards[i])) {
-      for (h in strsplit(x$hazards[i], " ;; ", fixed = TRUE)[\[1\]]) {
+      for (h in strsplit(x$hazards[i], " ;; ", fixed = TRUE)[[1]]) {
         cat("    !! HAZARD:", h, "\n")
       }
     }

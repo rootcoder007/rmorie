@@ -490,8 +490,8 @@
   ky <- smooth[ord]
 
   lo <- function(t) {
-    if (t <= kx\[1\]) {
-      return(ky\[1\])
+    if (t <= kx[1]) {
+      return(ky[1])
     }
     if (t >= kx[length(kx)]) {
       return(ky[length(kx)])
@@ -554,7 +554,7 @@
   v_un <- 0
   for (a in seq_len(p)) {
     for (b in seq_len(p)) {
-      v_un <- v_un + c_vec[a] * inv\[a, b\] * c_vec[b]
+      v_un <- v_un + c_vec[a] * inv[a, b] * c_vec[b]
     }
   }
   var <- v_un * sd * sd
@@ -655,7 +655,7 @@ morie_limmav <- function(counts, design, contrast = NULL, lib_sizes = NULL,
     X <- design
     storage.mode(X) <- "double"
   } else if (is.list(design)) {
-    first <- design[\[1\]]
+    first <- design[[1]]
     if (is.list(first) || (is.atomic(first) && length(first) > 1)) {
       X <- matrix(as.numeric(unlist(design)),
         nrow = length(design),

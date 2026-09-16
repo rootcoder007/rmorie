@@ -34,8 +34,8 @@ splgk <- function(coords, z, target, cov_model = NULL, mu = NULL) {
   y <- log(z)
   kr <- .sp_simple_kriging(coords, y, matrix(as.numeric(target), nrow = 1),
                            cov_model = cov_model, mu = mu)
-  pred_y <- as.numeric(kr$prediction)\[1\]
-  var_y <- as.numeric(kr$variance)\[1\]
+  pred_y <- as.numeric(kr$prediction)[1]
+  var_y <- as.numeric(kr$variance)[1]
   naive <- exp(pred_y)
   list(prediction = exp(pred_y + 0.5 * var_y), naive_prediction = naive,
        log_prediction = pred_y, log_variance = var_y,

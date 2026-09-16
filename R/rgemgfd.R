@@ -56,7 +56,7 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
   fd <- numeric(0)
   ivs <- list()
   for (r in .rgisint_runs(f)) {
-    a <- r\[1\]
+    a <- r[1]
     b <- r[2]
     if (f[a] <= rest_level) next
     stop_i <- min(b, a + seglen - 1L)
@@ -70,7 +70,7 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
   r2 <- .rgemgf_r2(lev, fd)
   fit <- .rgemgf_linfit(lev, fd)
   list(estimate = r2, levels = lev, fd = fd, intervals = ivs,
-       slope = fit\[1\], intercept = fit[2], r2 = r2, kmax = as.integer(kmax),
+       slope = fit[1], intercept = fit[2], r2 = r2, kmax = as.integer(kmax),
        segment_samples = seglen, n_levels = length(lev), n = n, fs = fsv,
        method = "Rangayyan (2024) eqs. (5.39)-(5.41) p.304 Higuchi FD per 1 s segment, Sect. 5.13.4 p.305; eq. (5.28) for r^2")
 }
@@ -111,5 +111,5 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
   }
   keep <- Lk > 0
   if (sum(keep) < 2L) stop("higuchi_fd: the signal has no measurable length")
-  .rgemgf_linfit(log(1 / ks[keep]), log(Lk[keep]))\[1\]
+  .rgemgf_linfit(log(1 / ks[keep]), log(Lk[keep]))[1]
 }

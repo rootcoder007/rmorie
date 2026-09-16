@@ -80,7 +80,7 @@ morie_turan_graph <- function(n, r) {
     for (i in seq_len(n - 1L)) {
       for (j in seq.int(i + 1L, n)) {
         if (part_of[i] != part_of[j]) {
-          A\[i, j\] <- 1L
+          A[i, j] <- 1L
           A[j, i] <- 1L
         }
       }
@@ -250,7 +250,7 @@ morie_dilworth_decomposition <- function(leq) {
   }
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      if (i != j && M\[i, j\] && M[j, i]) {
+      if (i != j && M[i, j] && M[j, i]) {
         stop(sprintf(paste(
           "leq must be antisymmetric; %d and %d are mutually",
           "below one another."
@@ -261,7 +261,7 @@ morie_dilworth_decomposition <- function(leq) {
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       for (k in seq_len(n)) {
-        if (M\[i, j\] && M[j, k] && !M\[i, k\]) {
+        if (M[i, j] && M[j, k] && !M[i, k]) {
           stop(sprintf(paste(
             "leq must be transitive; %d <= %d <= %d but not",
             "%d <= %d."
@@ -463,7 +463,7 @@ morie_steiner_triple_system <- function(v, construct = TRUE) {
     seen <- new.env(parent = emptyenv())
     for (t in tl) {
       s <- sort(t)
-      for (p in list(c(s\[1\], s[2]), c(s\[1\], s[3]), c(s[2], s[3]))) {
+      for (p in list(c(s[1], s[2]), c(s[1], s[3]), c(s[2], s[3]))) {
         key <- paste(p, collapse = "-")
         seen[[key]] <- (if (is.null(seen[[key]])) 0L else seen[[key]]) + 1L
       }

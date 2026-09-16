@@ -63,6 +63,6 @@ Btbg <- function(models, X_new = NULL, kind = "regression") {
       share[j] <- cnt[w] / B
     }
   }
-  list(y_pred = yp, estimate = yp\[1\], vote_share = share, B = B, m = m, kind = kd,
+  list(y_pred = yp, estimate = yp[1], vote_share = share, B = B, m = m, kind = kd,
        method = "Breiman (1996) bagging: average for regression, plurality vote for classification")
 }

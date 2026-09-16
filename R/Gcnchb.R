@@ -38,7 +38,7 @@ Gcnchb <- function(L, X, K = 3, theta = NULL) {
   if (lmax <= 0) stop("chebnet: Laplacian has no positive eigenvalue")
   Lt <- 2 * M / lmax - diag(1, n)
   Tprev <- H
-  out <- th\[1\] * Tprev
+  out <- th[1] * Tprev
   if (order > 1L) {
     Tcur <- Lt %*% H
     out <- out + th[2] * Tcur

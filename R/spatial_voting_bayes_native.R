@@ -8,7 +8,7 @@
 # posterior means plus acceptance/trace diagnostics.
 
 # --- Aldrich-McKelvey (Hare et al. 2015) ------------------------------------
-# Z\[i, j\] = a_i + b_i * zeta_j + eps_ij, eps ~ N(0, sigma2).
+# Z[i, j] = a_i + b_i * zeta_j + eps_ij, eps ~ N(0, sigma2).
 # Gibbs: (a_i, b_i) | zeta conjugate normal per respondent;
 # zeta_j | a, b conjugate normal per stimulus; sigma2 inverse gamma.
 #' Internal helper: native Bayesian Aldrich-McKelvey sampler
@@ -31,21 +31,21 @@
       if (length(j) < 2L) next
       Xr <- cbind(1, zeta[j])
       V <- solve(crossprod(Xr) / sigma2 + diag(tau0, 2))
-      mu <- V %*% (crossprod(Xr, Z\[i, j\]) / sigma2)
+      mu <- V %*% (crossprod(Xr, Z[i, j]) / sigma2)
       ab <- as.numeric(mu + t(chol(V)) %*% stats::rnorm(2))
-      a[i] <- ab\[1\]
+      a[i] <- ab[1]
       b[i] <- ab[2]
     }
     for (j in seq_len(m)) {
       i <- which(obs[, j])
       if (!length(i)) next
       prec <- sum(b[i]^2) / sigma2 + tau0
-      mu <- sum(b[i] * (Z\[i, j\] - a[i])) / sigma2 / prec
+      mu <- sum(b[i] * (Z[i, j] - a[i])) / sigma2 / prec
       zeta[j] <- stats::rnorm(1, mu, sqrt(1 / prec))
     }
     # identification: centre and scale zeta, fix polarity
     zeta <- as.numeric(scale(zeta))
-    if (zeta\[1\] > 0) zeta <- -zeta
+    if (zeta[1] > 0) zeta <- -zeta
     resid <- Z - (a + outer(b, zeta))
     sigma2 <- 1 / stats::rgamma(1, sum(obs) / 2 + 2,
                                 sum(resid[obs]^2) / 2 + 1)
@@ -244,16 +244,16 @@
       i <- which(obs[, j])
       Xr <- cbind(-1, x[i])
       V <- solve(crossprod(Xr) + diag(0.04, 2))
-      mu_j <- V %*% crossprod(Xr, Ystar\[i, j\])
+      mu_j <- V %*% crossprod(Xr, Ystar[i, j])
       ab <- as.numeric(mu_j + t(chol(V)) %*% stats::rnorm(2))
-      alpha[j] <- ab\[1\]
+      alpha[j] <- ab[1]
       beta[j] <- ab[2]
     }
     # ideal points x_i | items
     for (i in seq_len(n)) {
       j <- which(obs[i, ])
       prec <- sum(beta[j]^2) + 1
-      mu_i <- sum(beta[j] * (Ystar\[i, j\] + alpha[j])) / prec
+      mu_i <- sum(beta[j] * (Ystar[i, j] + alpha[j])) / prec
       x[i] <- stats::rnorm(1, mu_i, sqrt(1 / prec))
     }
     x <- as.numeric(scale(x))
@@ -280,7 +280,7 @@
                    call. = FALSE)
   # shared cutpoints c_1 < ... < c_{K-1}; c_1 fixed at 0 for scale
   cuts <- stats::qnorm(seq_len(K - 1L) / K)
-  cuts <- cuts - cuts\[1\]
+  cuts <- cuts - cuts[1]
   x <- as.numeric(scale(rowMeans(Y, na.rm = TRUE)))
   x[!is.finite(x)] <- 0
   alpha <- rep(0, m)
@@ -305,15 +305,15 @@
       i <- which(obs[, j])
       Xr <- cbind(-1, x[i])
       V <- solve(crossprod(Xr) + diag(0.04, 2))
-      mu_j <- V %*% crossprod(Xr, Ystar\[i, j\])
+      mu_j <- V %*% crossprod(Xr, Ystar[i, j])
       ab <- as.numeric(mu_j + t(chol(V)) %*% stats::rnorm(2))
-      alpha[j] <- ab\[1\]
+      alpha[j] <- ab[1]
       beta[j] <- ab[2]
     }
     for (i in seq_len(n)) {
       j <- which(obs[i, ])
       prec <- sum(beta[j]^2) + 1
-      mu_i <- sum(beta[j] * (Ystar\[i, j\] + alpha[j])) / prec
+      mu_i <- sum(beta[j] * (Ystar[i, j] + alpha[j])) / prec
       x[i] <- stats::rnorm(1, mu_i, sqrt(1 / prec))
     }
     x <- as.numeric(scale(x))

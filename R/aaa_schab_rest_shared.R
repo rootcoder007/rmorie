@@ -193,7 +193,7 @@
 .schab_ripley_weights <- function(points, region, radii) {
   p <- matrix(as.numeric(points), ncol = 2)
   t_ <- as.numeric(radii)
-  xmin <- region\[1\]
+  xmin <- region[1]
   ymin <- region[2]
   xmax <- region[3]
   ymax <- region[4]
@@ -258,7 +258,7 @@
   if (n1 == 0L || n2 == 0L) {
     stop("both patterns must contain at least one event")
   }
-  area <- (region[3] - region\[1\]) * (region[4] - region[2])
+  area <- (region[3] - region[1]) * (region[4] - region[2])
   lam1 <- n1 / area
   lam2 <- n2 / area
   d <- sqrt(outer(p1[, 1], p2[, 1], "-")^2 + outer(p1[, 2], p2[, 2], "-")^2)
@@ -292,7 +292,7 @@
 .schab_cross_k_combined <- function(p1, p2, region, r, correction = "ripley") {
   p1 <- matrix(as.numeric(p1), ncol = 2)
   p2 <- matrix(as.numeric(p2), ncol = 2)
-  area <- (region[3] - region\[1\]) * (region[4] - region[2])
+  area <- (region[3] - region[1]) * (region[4] - region[2])
   lam1 <- nrow(p1) / area
   lam2 <- nrow(p2) / area
   k12 <- .schab_cross_k(p1, p2, region, r, correction)
@@ -321,12 +321,12 @@
 .schab_k_border <- function(p, region, r) {
   p <- matrix(as.numeric(p), ncol = 2)
   n <- nrow(p)
-  area <- (region[3] - region\[1\]) * (region[4] - region[2])
+  area <- (region[3] - region[1]) * (region[4] - region[2])
   lam <- n / area
   d <- sqrt(outer(p[, 1], p[, 1], "-")^2 + outer(p[, 2], p[, 2], "-")^2)
   diag(d) <- Inf
   db <- pmin(
-    pmin(p[, 1] - region\[1\], region[3] - p[, 1]),
+    pmin(p[, 1] - region[1], region[3] - p[, 1]),
     pmin(p[, 2] - region[2], region[4] - p[, 2])
   )
   vapply(r, function(h) {
@@ -432,7 +432,7 @@
       right <- d[(u0 + jj + 1):(u1 + jj), (v0 + kk + 1):(v1 + kk),
         drop = FALSE
       ]
-      out\[a, b\] <- sum(left * right) / (r * c_)
+      out[a, b] <- sum(left * right) / (r * c_)
     }
   }
   list(cov = out, lags_j = lags_j, lags_k = lags_k)
@@ -505,7 +505,7 @@
   for (a in seq_along(f$w1)) {
     for (b in seq_along(f$w2)) {
       ang <- outer(f$w1[a] * sc$lags_j, f$w2[b] * sc$lags_k, "+")
-      out\[a, b\] <- sum(sc$cov * cos(ang)) / (2 * pi)^2
+      out[a, b] <- sum(sc$cov * cos(ang)) / (2 * pi)^2
     }
   }
   list(
@@ -734,7 +734,7 @@
   if (is.null(best)) {
     return(list(sill = NA_real_, range = NA_real_, converged = FALSE))
   }
-  list(sill = best\[1\], range = best[2], converged = TRUE, wls = loss)
+  list(sill = best[1], range = best[2], converged = TRUE, wls = loss)
 }
 
 #' .schab_krige_at

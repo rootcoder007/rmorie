@@ -25,7 +25,7 @@ morie_confusion_matrix_metrics <- function(y_true, y_pred, labels = NULL) {
   for (i in seq_along(yt)) {
     a <- match(yt[i], labels)
     b <- match(yp[i], labels)
-    cm\[a, b\] <- cm\[a, b\] + 1L
+    cm[a, b] <- cm[a, b] + 1L
   }
   diag_ <- diag(cm)
   col_sums <- colSums(cm)

@@ -652,7 +652,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
     meta <- .morie_from_json(paste(meta_raw, collapse = ""))
     resources <- meta$result$resources
     csv_idx <- which(toupper(resources$format) == "CSV")
-    rid <- if (length(csv_idx) > 0) resources$id[csv_idx\[1\]] else resources$id\[1\]
+    rid <- if (length(csv_idx) > 0) resources$id[csv_idx[1]] else resources$id[1]
   }
 
   # CKAN datastore_search caps a single request at 32000 rows, so page

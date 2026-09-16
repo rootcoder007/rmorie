@@ -160,7 +160,7 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
   if (is.matrix(sizes)) {
     S <- lapply(seq_len(nrow(sizes)), function(i) c(as.numeric(sizes[i, 1]), as.numeric(sizes[i, 2])))
   } else if (is.list(sizes)) {
-    S <- lapply(sizes, function(x) c(as.numeric(x\[1\]), as.numeric(x[2])))
+    S <- lapply(sizes, function(x) c(as.numeric(x[1]), as.numeric(x[2])))
   } else {
     stop("sdxlcd: sizes must be a list of pairs or a 2-column matrix")
   }
@@ -170,7 +170,7 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
   m <- as.numeric(minimum)
   lost <- 0
   for (pair in S) {
-    h <- pair\[1\]
+    h <- pair[1]
     w <- pair[2]
     if (h < m || w < m) {
       lost <- lost + 1

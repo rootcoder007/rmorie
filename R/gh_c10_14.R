@@ -30,7 +30,7 @@ Ghosalparamnpbf <- function(n = 1500, parametric_truth = TRUE, seed = 42) {
   counts <- integer(4)
   for (i in seq_len(n)) {
     u <- .ghc_unif(e, 1L)
-    j <- which(u <= acc)\[1\]
+    j <- which(u <= acc)[1]
     if (!is.na(j)) counts[j] <- counts[j] + 1L
   }
   l0 <- sum(counts * log(0.25))

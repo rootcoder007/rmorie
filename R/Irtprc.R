@@ -39,7 +39,7 @@ Irtprc <- function(y, theta, delta_j) {
   }
   pobs <- vapply(seq_along(ys), function(i) pr(th[i])[ys[i] + 1L], 0)
   .t1_result(estimate = mean(pobs), p_observed = pobs,
-             probs_first = pr(th\[1\]), loglik = sum(log(pobs)),
+             probs_first = pr(th[1]), loglik = sum(log(pobs)),
              categories = ncat, n = length(ys),
              method = "P(X=k) = exp(sum_{v<=k}(theta - delta_v)) / normaliser, Masters (1982) eq. (7)")
 }

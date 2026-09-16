@@ -40,7 +40,7 @@ morie_cnn2d_conv2d_forward <- function(x, w, b = 0, stride = 1L, padding = 0L) {
     for (j in seq_len(out_w)) {
       i0 <- (i - 1L) * stride + 1L
       j0 <- (j - 1L) * stride + 1L
-      y\[i, j\] <- sum(w * x[i0:(i0 + Kh - 1L), j0:(j0 + Kw - 1L)]) + b
+      y[i, j] <- sum(w * x[i0:(i0 + Kh - 1L), j0:(j0 + Kw - 1L)]) + b
     }
   }
   list(

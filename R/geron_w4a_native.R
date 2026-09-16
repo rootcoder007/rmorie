@@ -102,7 +102,7 @@ morie_beta_schedule_values <- function(T, beta_schedule = "linear", beta_start =
       s <- 0.008
       t <- (0:T) / T
       f <- cos((t + s) / (1 + s) * pi / 2)^2
-      ab <- f / f\[1\]
+      ab <- f / f[1]
       b <- 1 - ab[-1] / ab[-length(ab)]
       return(pmin(pmax(b, 1e-8), 0.999))
     }
@@ -139,7 +139,7 @@ morie_geron_diffusion_forward <- function(x0, T, beta_schedule = "linear", t = N
   abar <- cumprod(alphas)
 
   chain <- vector("list", Ti + 1L)
-  chain[\[1\]] <- x
+  chain[[1]] <- x
   cur <- x
   for (k in seq_len(Ti)) {
     z <- morie_lcg_normal(length(x), seed + k)
@@ -200,7 +200,7 @@ morie_geron_contrastive_learning <- function(embeddings, positives, tau = 0.1, n
 
   P <- E[pi_ + 1L, , drop = FALSE]
   neg_idx <- lapply(seq_len(B), function(i) setdiff(seq_len(B) - 1L, c(i - 1L, pi_[i])))
-  n_neg <- length(neg_idx[\[1\]])
+  n_neg <- length(neg_idx[[1]])
   .w4a_need(all(vapply(neg_idx, length, 0L) == n_neg), "every anchor must have the same negative count.")
   N <- array(0, dim = c(B, n_neg, d))
   for (i in seq_len(B)) N[i, , ] <- E[neg_idx[[i]] + 1L, , drop = FALSE]
@@ -301,7 +301,7 @@ morie_geron_decision_boundary <- function(theta, X_grid, fit_intercept = TRUE) {
   .w4a_need(length(th) > 0 && nrow(G) > 0, "theta and X_grid must be non-empty.")
   if (fit_intercept) {
     .w4a_need(length(th) == ncol(G) + 1L, "theta length must be ncol(X_grid) + 1.")
-    b <- th\[1\]
+    b <- th[1]
     w <- th[-1]
   } else {
     .w4a_need(length(th) == ncol(G), "theta length must equal ncol(X_grid).")
@@ -317,7 +317,7 @@ morie_geron_decision_boundary <- function(theta, X_grid, fit_intercept = TRUE) {
   probs <- 1 / (1 + exp(-scores))
   line <- NULL
   if (length(w) == 2L) {
-    line <- if (w[2] != 0) c(-w\[1\] / w[2], -b / w[2]) else c(Inf, -b / w\[1\])
+    line <- if (w[2] != 0) c(-w[1] / w[2], -b / w[2]) else c(Inf, -b / w[1])
   }
   list(
     scores = scores, signed_distance = dist, labels = labels, probabilities = probs,
@@ -353,8 +353,8 @@ morie_geron_distilbert <- function(teacher, student, X, temperature = 2.0,
   .w4a_need(min(a_ce, a_mlm, a_cos) >= 0 && (a_ce + a_mlm + a_cos) > 0, "loss weights must be non-negative and not all zero.")
 
   unpack <- function(v) {
-    if (is.list(v) && !is.data.frame(v) && length(v) == 2 && is.null(dim(v[\[1\]]))) {
-      list(logits = .morie_gr_mat(v[\[1\]], "logits"), hidden = .morie_gr_mat(v[[2]], "hidden"))
+    if (is.list(v) && !is.data.frame(v) && length(v) == 2 && is.null(dim(v[[1]]))) {
+      list(logits = .morie_gr_mat(v[[1]], "logits"), hidden = .morie_gr_mat(v[[2]], "hidden"))
     } else {
       list(logits = .morie_gr_mat(v, "logits"), hidden = NULL)
     }
@@ -436,7 +436,7 @@ morie_geron_dbscan <- function(X, eps, min_samples, metric = "euclidean") {
     labels[i] <- cid
     queue <- i
     while (length(queue) > 0) {
-      p <- queue\[1\]
+      p <- queue[1]
       queue <- queue[-1]
       for (q in neighbors[[p]] + 1L) {
         if (labels[q] == -1L) {
@@ -477,7 +477,7 @@ morie_geron_dbscan <- function(X, eps, min_samples, metric = "euclidean") {
 morie_geron_dcgan <- function(X, z_dim = 100, filters = 64, epochs = 50, lr = 0.0002,
                               seed_shape = c(4, 4), stride = 2) {
   A <- if (length(dim(X)) == 2) array(as.numeric(X), dim = c(1, dim(X))) else array(as.numeric(X), dim = dim(X))
-  m <- dim(A)\[1\]
+  m <- dim(A)[1]
   H <- dim(A)[2]
   W <- dim(A)[3]
   .w4a_need(H == W, "DCGAN assumes square images.")
@@ -485,7 +485,7 @@ morie_geron_dcgan <- function(X, z_dim = 100, filters = 64, epochs = 50, lr = 0.
   f <- as.integer(filters)
   st <- as.integer(stride)
   .w4a_need(st >= 2L, "stride must be >= 2.")
-  h0 <- as.integer(seed_shape\[1\])
+  h0 <- as.integer(seed_shape[1])
   w0 <- as.integer(seed_shape[2])
   ratio <- H / h0
   L <- if (ratio >= 1) as.integer(round(log(ratio) / log(st))) else -1L
@@ -726,11 +726,11 @@ morie_geron_dalle <- function(text, model, n_image_tokens = 4, temperature = 1.0
     gr <- if (side * side == N) c(side, side) else c(1L, N)
   } else {
     gr <- as.integer(grid)
-    .w4a_need(gr\[1\] * gr[2] == N, "grid does not hold n_image_tokens.")
+    .w4a_need(gr[1] * gr[2] == N, "grid does not hold n_image_tokens.")
   }
   ll <- sum(logprobs)
   list(
-    image_tokens = tokens, token_grid = matrix(tokens, gr\[1\], gr[2], byrow = TRUE),
+    image_tokens = tokens, token_grid = matrix(tokens, gr[1], gr[2], byrow = TRUE),
     log_likelihood = ll, token_logprobs = logprobs, perplexity = exp(-ll / N),
     context = c(prompt, tokens), prompt = prompt, n_steps = N, vocab_size = vocab, grid = gr,
     temperature = as.numeric(temperature), estimate = ll, n = N,
@@ -763,7 +763,7 @@ morie_geron_ddim <- function(x_T, model, T, n_steps, beta_schedule = "linear", c
   .w4a_need(K >= 1L && K <= Ti, "n_steps must lie in 1..T.")
   betas <- morie_beta_schedule_values(Ti, beta_schedule)
   .w4a_need(!any(betas <= 0 | betas >= 1), "every beta must lie strictly in (0, 1).")
-  abar <- c(1.0, cumprod(1 - betas)) # abar\[1\] = t=0 (clean), abar[k+1] = t=k
+  abar <- c(1.0, cumprod(1 - betas)) # abar[1] = t=0 (clean), abar[k+1] = t=k
 
   steps <- sort(unique(as.integer(round(seq(Ti, 1, length.out = K)))), decreasing = TRUE)
   seq_t <- c(steps, 0L)
@@ -808,7 +808,7 @@ morie_check_buffer <- function(buffer, n_states, n_actions, name) {
   d <- logical(0)
   for (tr in buffer) {
     .w4a_need(length(tr) %in% c(4L, 5L), paste0(name, ": transition must have 4 or 5 fields."))
-    s <- c(s, as.integer(tr[\[1\]]))
+    s <- c(s, as.integer(tr[[1]]))
     a <- c(a, as.integer(tr[[2]]))
     r <- c(r, as.numeric(tr[[3]]))
     s2 <- c(s2, as.integer(tr[[4]]))
@@ -1138,7 +1138,7 @@ morie_geron_ddpg <- function(env, actor, critic, epochs = 20, lr = 0.01, gamma =
     noise <- noise + ou_theta * (0 - noise) + ou_sigma * normal1()
     a <- mu + noise
     out <- env(s, a)
-    s2 <- as.numeric(out[\[1\]])
+    s2 <- as.numeric(out[[1]])
     rew <- as.numeric(out[[2]])
     done <- as.logical(out[[3]])
     feat <- c(s, a)
@@ -1316,7 +1316,7 @@ morie_geron_deit <- function(image, patch_size = 16, n_layers = 12, teacher = NU
                              d_model = 384, n_heads = 6, n_classes = 1000, in_channels = 3,
                              logits_cls = NULL, logits_dist = NULL, y = NULL, alpha = 0.5) {
   dims <- if (length(dim(image)) == 2) c(1, dim(image)) else dim(image)
-  C_in <- dims\[1\]
+  C_in <- dims[1]
   H <- dims[2]
   W <- dims[3]
   P <- as.integer(patch_size)
@@ -1498,7 +1498,7 @@ morie_geron_dataloader <- function(dataset, batch_size, shuffle = FALSE, drop_la
     m <- as.integer(dataset)
   } else {
     data <- dataset
-    m <- if (is.matrix(data) || is.array(data)) dim(data)\[1\] else length(data)
+    m <- if (is.matrix(data) || is.array(data)) dim(data)[1] else length(data)
   }
   .w4a_need(m >= 1L, "dataset must contain at least one item.")
 
@@ -1599,7 +1599,7 @@ morie_geron_dynamic_quantization_alt <- function(model, dtype = "int8", activati
   ranges <- list(int8 = c(-128, 127, TRUE), uint8 = c(0, 255, FALSE), int16 = c(-32768, 32767, TRUE))
   .w4a_need(dtype %in% names(ranges), "dtype must be int8, uint8 or int16.")
   rg <- ranges[[dtype]]
-  qmin <- rg\[1\]
+  qmin <- rg[1]
   qmax <- rg[2]
   symmetric <- as.logical(rg[3])
   bits <- if (dtype %in% c("int8", "uint8")) 8 else 16
@@ -1670,7 +1670,7 @@ morie_geron_deep_rnn <- function(X, hidden_sizes = 4, n_layers = NULL, weights =
     layers <- list()
     fan <- d
     for (trio in weights) {
-      Wx <- .morie_gr_mat(trio[\[1\]], "Wx")
+      Wx <- .morie_gr_mat(trio[[1]], "Wx")
       Wh <- .morie_gr_mat(trio[[2]], "Wh")
       bb <- as.numeric(trio[[3]])
       layers[[length(layers) + 1L]] <- list(Wx = Wx, Wh = Wh, b = bb)
@@ -1759,7 +1759,7 @@ morie_geron_diffusion_reverse <- function(x_T, model, T, beta_schedule = "linear
     a <- alphas[t]
     ab <- abar[t]
     if (!is.null(clip_x0)) {
-      lo <- clip_x0\[1\]
+      lo <- clip_x0[1]
       hi <- clip_x0[2]
       x0_hat <- pmin(pmax((cur - sqrt(1 - ab) * eps) / sqrt(ab), lo), hi)
       ab_prev <- if (t > 1) abar[t - 1] else 1.0
@@ -1819,7 +1819,7 @@ morie_geron_tree_high_variance <- function(X, y, n_resamples = 20, seed = 0, cri
     idx <- pmin(idx, m - 1L)
     yb <- ya[idx + 1L]
     if (criterion != "mse" && length(unique(yb)) < 2L) {
-      tree <- list(leaf = TRUE, value = yb\[1\], n = m, impurity = 0, depth = 0L)
+      tree <- list(leaf = TRUE, value = yb[1], n = m, impurity = 0, depth = 0L)
       roots[[b]] <- NULL
     } else {
       res <- morie_geron_cart_algorithm(Xa[idx + 1L, , drop = FALSE], yb, criterion = criterion, max_depth = max_depth)
@@ -1929,12 +1929,12 @@ morie_geron_tree_sensitivity_scale <- function(X, y, a = 100.0, b = -7.0, featur
   t0 <- thresholds(base$tree, list())
   t1 <- thresholds(scaled$tree, list())
   expected <- lapply(t0, function(kv) {
-    k <- kv\[1\]
+    k <- kv[1]
     tt <- kv[2]
     if ((k + 1L) %in% cols) c(k, af * tt + bf) else kv
   })
   t_match <- length(t0) == length(t1) &&
-    all(mapply(function(e, o) e\[1\] == o\[1\] && abs(e[2] - o[2]) < 1e-9 * max(1, abs(e[2])), expected, t1))
+    all(mapply(function(e, o) e[1] == o[1] && abs(e[2] - o[2]) < 1e-9 * max(1, abs(e[2])), expected, t1))
   p_match <- identical(base$predictions, scaled$predictions)
 
   knn <- function(Xtr) {
@@ -1943,7 +1943,7 @@ morie_geron_tree_sensitivity_scale <- function(X, y, a = 100.0, b = -7.0, featur
       d <- rowSums(sweep(Xtr, 2, Xtr[i, ], "-")^2)
       d[i] <- Inf
       ya[which.min(d)]
-    }, ya\[1\])
+    }, ya[1])
   }
   k0 <- knn(Xa)
   k1 <- knn(Xs)
@@ -1985,8 +1985,8 @@ morie_geron_error_analysis <- function(y_true, y_pred, top_k = 5) {
   pairs <- list()
   for (i in seq_len(nrow(err))) {
     for (j in seq_len(ncol(err))) {
-      if (err\[i, j\] > 0) {
-        pairs[[length(pairs) + 1L]] <- c(i - 1L, j - 1L, err\[i, j\])
+      if (err[i, j] > 0) {
+        pairs[[length(pairs) + 1L]] <- c(i - 1L, j - 1L, err[i, j])
       }
     }
   }
@@ -2030,7 +2030,7 @@ morie_geron_early_stopping_alt <- function(X_train, y_train, X_val, y_val, n_ite
   rmse <- function(D, t, target) sqrt(mean((D %*% t - target)^2))
   tr_hist <- rmse(A, theta, yt)
   va_hist <- rmse(Bm, theta, yv)
-  best <- list(val = va_hist\[1\], iter = 0L, theta = theta)
+  best <- list(val = va_hist[1], iter = 0L, theta = theta)
   stopped <- NULL
   since <- 0L
   for (it in seq_len(T_)) {
@@ -2080,7 +2080,7 @@ morie_geron_epsilon_greedy_alt <- function(Q, s, epsilon, seed = 0) {
   u <- (st + 0.5) / 2^32
   a <- min(sum(cumsum(p) < u) + 1L, A)
   list(
-    action = a - 1L, probabilities = p, greedy_action = best\[1\] - 1L, greedy_actions = best - 1L,
+    action = a - 1L, probabilities = p, greedy_action = best[1] - 1L, greedy_actions = best - 1L,
     q_values = q, is_exploratory = !((a) %in% best), epsilon = eps, estimate = max(p), n = A,
     method = "epsilon-greedy action distribution with deterministic LCG sampling"
   )
@@ -2118,7 +2118,7 @@ morie_geron_elbo <- function(x, mu, log_sigma, x_recon = NULL, likelihood = "gau
   list(
     elbo = elbo, loss = -elbo, kl = kl, reconstruction_log_lik = rec, per_sample_kl = kl_i,
     per_sample_elbo = elbo_i, latent_dim = ncol(M), likelihood = likelihood, estimate = elbo, n = nrow(X),
-    method = "ELBO = E_q\[log p(x|z)\] - KL(q||p) with closed-form Gaussian KL"
+    method = "ELBO = E_q[log p(x|z)] - KL(q||p) with closed-form Gaussian KL"
   )
 }
 
@@ -2186,7 +2186,7 @@ morie_geron_elastic_net <- function(X, y, theta, alpha, r, fit_intercept = TRUE)
   resid <- as.numeric(Xd %*% th) - yv
   mse <- mean(resid^2)
   pen <- th
-  if (fit_intercept) pen\[1\] <- 0
+  if (fit_intercept) pen[1] <- 0
   l1 <- ratio * a * sum(abs(pen))
   l2 <- 0.5 * (1 - ratio) * a * sum(pen^2)
   cost <- mse + l1 + l2
@@ -2223,7 +2223,7 @@ morie_geron_explained_variance_ratio_alt <- function(X, n_components = NULL, cen
     explained_variance_ratio = evr[seq_len(k)], explained_variance = var_[seq_len(k)],
     singular_values = sv$d[seq_len(k)], cumulative = cum[seq_len(k)], total_variance = total,
     n_for_95 = sum(cum < 0.95) + 1L, components = t(sv$v[, seq_len(k), drop = FALSE]), centered = center,
-    estimate = evr\[1\], n = m, method = "EVR from the SVD of the centred data matrix"
+    estimate = evr[1], n = m, method = "EVR from the SVD of the centred data matrix"
   )
 }
 
@@ -2259,7 +2259,7 @@ morie_geron_extra_trees <- function(X, y, n_estimators = 10, max_features = NULL
 
   grow <- function(Xs, ys, depth) {
     n_classes <- length(unique(ys))
-    pure <- if (criterion != "mse") n_classes < 2L else all(ys == ys\[1\])
+    pure <- if (criterion != "mse") n_classes < 2L else all(ys == ys[1])
     if (pure || (!is.null(max_depth) && depth >= max_depth) || length(ys) < 2L * msl) {
       val <- if (criterion == "mse") {
         mean(ys)
@@ -2462,7 +2462,7 @@ morie_geron_fcn <- function(image, model, upsample = 1, activation = "relu") {
   for (li in seq_along(model)) {
     layer <- model[[li]]
     if (is.list(layer) && length(layer) == 3) {
-      K <- layer[\[1\]]
+      K <- layer[[1]]
       bias <- layer[[2]]
       stride <- layer[[3]]
     } else {
@@ -2471,7 +2471,7 @@ morie_geron_fcn <- function(image, model, upsample = 1, activation = "relu") {
       stride <- 1
     }
     Kd <- if (length(dim(K)) == 3) dim(K) else dim(K)
-    nF <- Kd\[1\]
+    nF <- Kd[1]
     b <- as.numeric(bias)
     if (length(b) == 1) b <- rep(b, nF)
     st <- as.integer(stride)
@@ -2481,8 +2481,8 @@ morie_geron_fcn <- function(image, model, upsample = 1, activation = "relu") {
       out <- morie_geron_conv2d_forward(cur, Kf, b = b[f], stride = st, padding = 0)
       maps[[f]] <- out$Y
     }
-    oh <- dim(maps[\[1\]])\[1\]
-    ow <- dim(maps[\[1\]])[2]
+    oh <- dim(maps[[1]])[1]
+    ow <- dim(maps[[1]])[2]
     cur <- array(0, dim = c(nF, oh, ow))
     for (f in seq_len(nF)) cur[f, , ] <- maps[[f]]
     rf <- rf + (Kd[length(Kd) - 1L] - 1L) * stride_total
@@ -2500,7 +2500,7 @@ morie_geron_fcn <- function(image, model, upsample = 1, activation = "relu") {
   up_seg <- apply(up_map, c(2, 3), which.max) - 1L
   list(
     class_map = scores, scores = scores, segmentation = up_seg, coarse_segmentation = seg,
-    out_shape = dim(scores), upsampled_shape = dim(up_map), n_classes = dim(scores)\[1\],
+    out_shape = dim(scores), upsampled_shape = dim(up_map), n_classes = dim(scores)[1],
     receptive_field = rf, stride_total = stride_total, upsample = up, estimate = mean(scores), n = length(scores[1, , ]),
     method = "fully convolutional forward pass; each convolution delegated to grcvf"
   )
@@ -2574,17 +2574,17 @@ morie_geron_feature_map <- function(x, K, b = 0.0, activation = "relu", stride =
   Xa <- if (length(dim(x)) == 2) array(as.numeric(x), dim = c(1, dim(x))) else array(as.numeric(x), dim = dim(x))
   Ka <- K
   Kdim <- if (is.matrix(K)) c(1L, dim(K)) else dim(K)
-  filters <- if (is.matrix(K) || (length(Kdim) == 3 && dim(Xa)\[1\] > 1 && Kdim\[1\] == dim(Xa)\[1\])) {
+  filters <- if (is.matrix(K) || (length(Kdim) == 3 && dim(Xa)[1] > 1 && Kdim[1] == dim(Xa)[1])) {
     list(array(as.numeric(K), dim = if (is.matrix(K)) c(1, dim(K)) else dim(K)))
   } else {
-    lapply(seq_len(Kdim\[1\]), function(i) if (length(Kdim) == 4) array(K[i, , , ], dim = Kdim[2:4]) else array(K[i, , ], dim = c(1, Kdim[2], Kdim[3])))
+    lapply(seq_len(Kdim[1]), function(i) if (length(Kdim) == 4) array(K[i, , , ], dim = Kdim[2:4]) else array(K[i, , ], dim = c(1, Kdim[2], Kdim[3])))
   }
   Fn <- length(filters)
   bias <- as.numeric(b)
   if (length(bias) == 1) bias <- rep(bias, Fn)
   maps <- lapply(seq_len(Fn), function(i) morie_geron_conv2d_forward(Xa, filters[[i]], b = bias[i], stride = stride, padding = padding)$Y)
-  oh <- dim(maps[\[1\]])\[1\]
-  ow <- dim(maps[\[1\]])[2]
+  oh <- dim(maps[[1]])[1]
+  ow <- dim(maps[[1]])[2]
   Z <- array(0, dim = c(Fn, oh, ow))
   for (i in seq_len(Fn)) Z[i, , ] <- maps[[i]]
   A_ <- acts[[activation]](Z)
@@ -2877,7 +2877,7 @@ morie_geron_few_shot <- function(model, examples, query, k = NULL, separator = "
     sub("\\{y\\}", yy, s)
   }
   shots <- if (kk > 0) examples[seq_len(kk)] else list()
-  prefix <- paste(vapply(shots, function(e) fmt(e[\[1\]], e[[2]]), ""), collapse = separator)
+  prefix <- paste(vapply(shots, function(e) fmt(e[[1]], e[[2]]), ""), collapse = separator)
   tail_ <- paste0(trimws(fmt(query, ""), which = "right"), " ")
   prompt <- if (length(shots)) paste0(prefix, separator, tail_) else tail_
   zero_prompt <- tail_
@@ -2926,7 +2926,7 @@ morie_geron_finetune_lm <- function(model, dataset, epochs = 10, lr = 0.01, thet
     batch <- dataset[(pos + seq_len(bs) - 1L) %% N + 1L]
     pos <- (pos + bs) %% N
     out <- model(th, batch)
-    loss <- as.numeric(out[\[1\]])
+    loss <- as.numeric(out[[1]])
     grad <- as.numeric(out[[2]])
     step <- step + 1L
     cur_lr <- if (W && step <= W) base_lr * (step / W) else base_lr
@@ -2967,14 +2967,14 @@ morie_geron_gan <- function(X, G = NULL, D = NULL, z_dim = 1, epochs = 200, lr =
     Wg <- matrix(0, k, d)
     bg <- rep(0, d)
   } else {
-    Wg <- .morie_gr_mat(G[\[1\]], "Wg")
+    Wg <- .morie_gr_mat(G[[1]], "Wg")
     bg <- as.numeric(G[[2]])
   }
   if (is.null(D)) {
     wd_ <- rep(0, d)
     bd <- 0.0
   } else {
-    wd_ <- as.numeric(D[\[1\]])
+    wd_ <- as.numeric(D[[1]])
     bd <- as.numeric(D[[2]])
   }
   Z <- matrix(morie_lcg_normal(m * k, seed + 1), m, k, byrow = TRUE)
@@ -3178,7 +3178,7 @@ morie_geron_googlenet <- function(n_classes = 1000, input_size = 224, in_channel
   for (i in seq_along(incep)) {
     p <- incep[[i]]
     name <- names_[i]
-    mod <- morie_inception_module(ch, p\[1\], p[2], p[3], p[4], p[5], p[6])
+    mod <- morie_inception_module(ch, p[1], p[2], p[3], p[4], p[5], p[6])
     mod$name <- name
     mod$in_channels <- ch
     mod$out <- size

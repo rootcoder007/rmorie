@@ -6,7 +6,7 @@
 # model misspecification using super learner", AJE 181(2), 108-119,
 # doi:10.1093/aje/kwu253.
 #
-# Z\[i, j\] = candidate j's held-out prediction for i; meta-learner is
+# Z[i, j] = candidate j's held-out prediction for i; meta-learner is
 # fit on Z; refit candidates on all data and combine.  IPTW: A/g + (1-A)/(1-g).
 
 .flxipt_EPS <- 1e-9
@@ -448,7 +448,7 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
   if (binary) fitted <- pmin(pmax(fitted, 0), 1)
   ens <- as.numeric(Z %*% weights)
   if (binary) ens <- pmin(pmax(ens, .flxipt_EPS), 1 - .flxipt_EPS)
-  ens_risk <- cv_risk(yv, matrix(ens, ncol = 1), loss)\[1\]
+  ens_risk <- cv_risk(yv, matrix(ens, ncol = 1), loss)[1]
   list(
     fitted = fitted, estimate = ens_risk,
     weights = setNames(as.numeric(weights),
@@ -613,7 +613,7 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
 #' res <- .flxipt_cheatsheet()
 #' res
 .flxipt_cheatsheet <- function() {
-  paste0("flxipt: Super Learner. Z\[i,j\] = candidate j's HELD-OUT ",
+  paste0("flxipt: Super Learner. Z[i,j] = candidate j's HELD-OUT ",
          "prediction for i; fit the meta-learner of y on Z (nnls ",
          "convex combination, or discrete = the CV selector); apply ",
          "it to the candidates refitted on all the data (vdL-Polley-",

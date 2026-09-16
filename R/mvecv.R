@@ -54,5 +54,5 @@ Mvecv <- function(y, X, h = NULL, n_starts = 100000L) {
   list(estimate = r$estimate, coef = beta, intercept = alpha, center = mu,
        cov = S, cov_raw = r$cov_raw, m2 = r$m2, subset = r$subset,
        covered = r$covered, h = r$h, n = n, p = p,
-       method = "Rousseeuw (1985) MVE of \[X | y\]; beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X")
+       method = "Rousseeuw (1985) MVE of [X | y]; beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X")
 }

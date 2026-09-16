@@ -40,8 +40,8 @@ dwnmn <- function(x, sigma_w = 0.1) {
   s2_obs <- stats::var(raw) + 1e-6
   m <- numeric(n_t)
   P <- numeric(n_t)
-  m\[1\] <- raw\[1\]
-  P\[1\] <- s2_obs
+  m[1] <- raw[1]
+  P[1] <- s2_obs
   for (t in 2:n_t) {
     mp <- m[t - 1]
     Pp <- P[t - 1] + sigma_w^2

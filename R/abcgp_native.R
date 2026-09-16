@@ -167,12 +167,12 @@
   L <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
-      s <- a\[i, j\] - sum(L[i, seq_len(j - 1L)] * L[j, seq_len(j - 1L)])
+      s <- a[i, j] - sum(L[i, seq_len(j - 1L)] * L[j, seq_len(j - 1L)])
       if (i == j) {
         if (s <= 0) s <- jitter
-        L\[i, j\] <- sqrt(s)
+        L[i, j] <- sqrt(s)
       } else {
-        L\[i, j\] <- s / L[j, j]
+        L[i, j] <- s / L[j, j]
       }
     }
   }
@@ -310,7 +310,7 @@
   A <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      A\[i, j\] <- .abcgp.corr(X[i, ], X[j, ], ls, kernel) +
+      A[i, j] <- .abcgp.corr(X[i, ], X[j, ], ls, kernel) +
         (if (i == j) nug[i] else 0)
     }
   }
@@ -420,7 +420,7 @@
   A <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      A\[i, j\] <- .abcgp.corr(X[i, ], X[j, ], ls, kernel) +
+      A[i, j] <- .abcgp.corr(X[i, ], X[j, ], ls, kernel) +
         (if (i == j) nug[i] else 0)
     }
   }
@@ -493,7 +493,7 @@
 #' @export
 .abcgp.implausible <- function(fit, theta, threshold = 10, n_sd = 3) {
   pr <- .abcgp.gp_predict(fit, theta)
-  pr\[1\] + n_sd * pr[2] < max(fit$values) - threshold
+  pr[1] + n_sd * pr[2] < max(fit$values) - threshold
 }
 
 #' .abcgp.design_from_prior
@@ -519,11 +519,11 @@
     if (length(prior_ppf) != 2L) {
       stop("design_from_prior: a numeric prior must be c(lo, hi)")
     }
-    prior_ppf <- list(prior_ppf[\[1\]], prior_ppf[[2]])
+    prior_ppf <- list(prior_ppf[[1]], prior_ppf[[2]])
   }
   if (is.list(prior_ppf) && length(prior_ppf) == 2 &&
-    !is.function(prior_ppf[\[1\]])) {
-    lo <- as.numeric(prior_ppf[\[1\]])
+    !is.function(prior_ppf[[1]])) {
+    lo <- as.numeric(prior_ppf[[1]])
     hi <- as.numeric(prior_ppf[[2]])
     if (length(lo) != length(hi)) {
       stop("design_from_prior: lo and hi differ in length")
@@ -539,7 +539,7 @@
   }
   u <- .abcgp.sobol_sequence(n, length(fns), skip = skip)
   out <- matrix(0, n, length(fns))
-  for (i in seq_len(n)) for (j in seq_along(fns)) out\[i, j\] <- fns[[j]](u\[i, j\])
+  for (i in seq_len(n)) for (j in seq_along(fns)) out[i, j] <- fns[[j]](u[i, j])
   out
 }
 
@@ -620,7 +620,7 @@
   rows <- lapply(draws, function(x) .abcgp.summarise(x, summary))
   S <- length(rows)
   if (S < 2) stop("synthetic_log_likelihood: need at least 2 simulations")
-  J <- length(rows[\[1\]])
+  J <- length(rows[[1]])
   y <- .abcgp.summarise(obs, summary)
   if (length(y) != J) {
     stop("synthetic_log_likelihood: summary length mismatch")
@@ -687,9 +687,9 @@
         kernel = accept_kernel,
         seed = as.integer(seed) + 1000L * (w - 1L) + (i - 1L)
       )
-      if (out\[1\] > -Inf) {
+      if (out[1] > -Inf) {
         ex[[length(ex) + 1L]] <- rows[i, ]
-        ey <- c(ey, out\[1\])
+        ey <- c(ey, out[1])
         ev <- c(ev, out[2])
       }
     }
@@ -1002,7 +1002,7 @@ morie_abcgp <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
     }
     means <- sapply(
       seq_len(nrow(grid)),
-      function(i) .abcgp.gp_predict(fit, grid[i, ])\[1\]
+      function(i) .abcgp.gp_predict(fit, grid[i, ])[1]
     )
     sds <- sapply(
       seq_len(nrow(grid)),

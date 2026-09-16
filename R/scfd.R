@@ -43,11 +43,11 @@ Scfd <- function(X, Y, basis, t = NULL) {
   if (length(tt) != T_) stop("scalar_on_function: t must match the number of argument values")
   J <- matrix(0, N, K)
   for (i in seq_len(N)) for (j in seq_len(K)) {
-    J\[i, j\] <- .fdtrapz(tt, B[, j] * Xm[i, ])
+    J[i, j] <- .fdtrapz(tt, B[, j] * Xm[i, ])
   }
   Z <- cbind(1, J)
   ab <- .s03lstsq(Z, yy, 0)
-  alpha <- ab\[1\]
+  alpha <- ab[1]
   b <- ab[-1]
   fit <- .s03matvec(Z, ab)
   res <- yy - fit

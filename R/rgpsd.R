@@ -50,7 +50,7 @@ rgpsd <- function(x, fs = 1.0, nperseg = NULL, window = "hann") {
   }
   psd <- psd_acc / length(starts)
   peak <- which.max(psd)
-  total <- sum(psd) * (freqs[2] - freqs\[1\])
+  total <- sum(psd) * (freqs[2] - freqs[1])
   list(
     freqs = freqs, psd = psd, fs = fs, nperseg = nperseg,
     peak_freq = freqs[peak], total_power = total

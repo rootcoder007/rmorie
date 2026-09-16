@@ -41,7 +41,7 @@ Seiarp <- function(S, E, I, A, R, params, t_max = 160, dt = 0.1) {
   pr <- .s03vec(params)
   if (length(pr) != 6L)
     stop("seira_asymptomatic: params must be (beta, sigma, gamma, p, kappa, gamma_a)")
-  beta <- pr\[1\]
+  beta <- pr[1]
   sigma <- pr[2]
   gamma <- pr[3]
   p <- pr[4]
@@ -49,17 +49,17 @@ Seiarp <- function(S, E, I, A, R, params, t_max = 160, dt = 0.1) {
   gamma_a <- pr[6]
   if (beta < 0 || sigma < 0 || gamma < 0 || kappa < 0 || gamma_a < 0)
     stop("seira_asymptomatic: rates must be non-negative")
-  if (p < 0 || p > 1) stop("seira_asymptomatic: p must lie in \[0, 1\]")
+  if (p < 0 || p > 1) stop("seira_asymptomatic: p must lie in [0, 1]")
   y <- c(as.numeric(S), as.numeric(E), as.numeric(I), as.numeric(A), as.numeric(R))
   if (any(y < 0)) stop("seira_asymptomatic: compartment sizes must be non-negative")
   t_max <- as.numeric(t_max)
   dt <- as.numeric(dt)
   if (dt <= 0 || t_max < 0) stop("seira_asymptomatic: need dt > 0 and t_max >= 0")
-  N <- y\[1\] + y[2] + y[3] + y[4] + y[5]
+  N <- y[1] + y[2] + y[3] + y[4] + y[5]
   if (N <= 0) stop("seira_asymptomatic: total population must be positive")
 
   deriv <- function(v) {
-    f <- v\[1\] * (beta * v[3] + kappa * beta * v[4]) / N
+    f <- v[1] * (beta * v[3] + kappa * beta * v[4]) / N
     c(-f,
       f - sigma * v[2],
       p * sigma * v[2] - gamma * v[3],
@@ -84,11 +84,11 @@ Seiarp <- function(S, E, I, A, R, params, t_max = 160, dt = 0.1) {
   asym <- if (gamma_a > 0) kappa * (1 - p) / gamma_a else Inf
   r0 <- beta * (sym + asym)
 
-  .t1_result(estimate = y[5], S = y\[1\], E = y[2], I = y[3], A = y[4], R = y[5],
+  .t1_result(estimate = y[5], S = y[1], E = y[2], I = y[3], A = y[4], R = y[5],
              N = N, R0 = r0, R0_symptomatic = beta * sym,
              R0_asymptomatic = beta * asym, asymptomatic_fraction = 1 - p,
              peak_I = peak_I, peak_time = peak_time, final_size = y[5],
-             conservation_error = abs(y\[1\] + y[2] + y[3] + y[4] + y[5] - N),
+             conservation_error = abs(y[1] + y[2] + y[3] + y[4] + y[5] - N),
              beta = beta, sigma = sigma, gamma = gamma, p = p,
              kappa = kappa, gamma_a = gamma_a, t_max = t_max, dt = dt,
              method = "SEIRA with asymptomatic compartment (Anderson & May 1991)")

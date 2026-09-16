@@ -73,8 +73,8 @@ Aitcap <- function(X, y, x_new, k) {
     if (t == 1L) d0 <- dist
   }
   list(
-    yhat = if (many) yhat else yhat\[1\], estimate = yhat\[1\],
-    yhat_majority = if (many) ymaj else ymaj\[1\], dist = d0,
+    yhat = if (many) yhat else yhat[1], estimate = yhat[1],
+    yhat_majority = if (many) ymaj else ymaj[1], dist = d0,
     k = kk, n = nrow(rows), D = D,
     method = "argmin_g sum_{i in N_k, y_i = g} d_a(x*, x_i), Aitchison distance"
   )

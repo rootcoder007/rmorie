@@ -156,7 +156,7 @@
 
 .JSONLT_B64 <- strsplit(paste0("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                                "abcdefghijklmnopqrstuvwxyz",
-                               "0123456789+/"), "")[\[1\]]
+                               "0123456789+/"), "")[[1]]
 
 #' Base64 encode a raw vector or character string
 #'
@@ -197,7 +197,7 @@ morie_jsonlt_base64_dec <- function(input) {
   if (is.character(input)) input <- charToRaw(paste(input, collapse = "\n"))
   stopifnot(is.raw(input))
   s <- rawToChar(input)
-  ch <- strsplit(gsub("[^A-Za-z0-9+/]", "", s), "")[\[1\]]
+  ch <- strsplit(gsub("[^A-Za-z0-9+/]", "", s), "")[[1]]
   if (!length(ch)) return(raw(0))
   v <- match(ch, .JSONLT_B64) - 1L
   if (anyNA(v)) stop("Error in base64 decode", call. = FALSE)
@@ -228,7 +228,7 @@ morie_jsonlt_base64url_enc <- function(input) {
 #' @rdname morie_jsonlt_base64_dec
 #' @export
 morie_jsonlt_base64url_dec <- function(input) {
-  text <- gsub("[\r\n]", "", chartr("-_", "+/", input))[\[1\]]
+  text <- gsub("[\r\n]", "", chartr("-_", "+/", input))[[1]]
   mod <- nchar(text) %% 4L
   if (mod > 0L) text <- paste0(text, strrep("=", 4L - mod))
   morie_jsonlt_base64_dec(text)
@@ -674,7 +674,7 @@ print.json <- function(x, ...) {
     s <- substring(s, 2L)
   }
   if (startsWith(s, "\x1e")) s <- substring(s, 2L)
-  ch <- strsplit(s, "", fixed = TRUE)[\[1\]]
+  ch <- strsplit(s, "", fixed = TRUE)[[1]]
   n <- length(ch)
   i <- 1L
   bad <- function(msg) stop(sprintf("%s at character %d", msg, i), call. = FALSE)
@@ -1109,7 +1109,7 @@ morie_jsonlt_validate <- function(txt) {
 .jsonlt_reformat <- function(txt, pretty, indent_string = "    ") {
   s <- paste(txt, collapse = "\n")
   if (startsWith(s, "\ufeff")) s <- substring(s, 2L)
-  ch <- strsplit(s, "", fixed = TRUE)[\[1\]]
+  ch <- strsplit(s, "", fixed = TRUE)[[1]]
   n <- length(ch)
   i <- 1L
   out <- character(0)

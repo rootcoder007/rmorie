@@ -108,7 +108,7 @@ morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
 
   list(grid = g, m_hat = m_hat, mu_hat = mu, component = jj,
        h1 = h1, h2 = h2,
-       normalisation = "E\[m_j(X^j)\] = 0 for every j, so mu = E(Y)",
+       normalisation = "E[m_j(X^j)] = 0 for every j, so mu = E(Y)",
        mean_of_m_hat = mean(m_hat, na.rm = TRUE),
        smoothness_required = d,   # Theorem 3.1(b): q > d - 1
        curse_of_dimensionality = TRUE, n = n, d = d,

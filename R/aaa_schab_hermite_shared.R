@@ -109,7 +109,7 @@
   # Hermite system); weights are the squared first eigenvector components.
   # Written out rather than taken from a package so this arm runs the same
   # arithmetic as the Python one -- both need only a symmetric eigensolver.
-  # The weights sum to 1, so sum(w * g(x)) is E\[g(X)\] for X ~ N(0, 1).
+  # The weights sum to 1, so sum(w * g(x)) is E[g(X)] for X ~ N(0, 1).
   n <- as.integer(n)
   if (n < 1L) stop("`n` must be positive", call. = FALSE)
   jac <- matrix(0, n, n)
@@ -168,7 +168,7 @@
   h <- as.numeric(.schab_hermite_e(z_k, degree))
   fz <- exp(-0.5 * z_k^2) / sqrt(2 * pi)
   b <- numeric(degree + 1L)
-  b\[1\] <- stats::pnorm(z_k)
+  b[1] <- stats::pnorm(z_k)
   for (p in seq_len(degree)) {
     b[p + 1L] <- ((-1)^p) * h[p] * fz / sqrt(.schab_factorial(p))
   }
@@ -208,7 +208,7 @@
   rho_mat <- matrix(correlation_fn(as.numeric(d_mat)), nrow(d_mat), ncol(d_mat))
   rho_vec <- as.numeric(correlation_fn(d_vec))
   eta <- .schab_hermite_orthonormal(y, degree)
-  pred <- b\[1\]
+  pred <- b[1]
   var <- 0
   comp <- numeric(degree + 1L)
   for (p in seq_len(degree)) {

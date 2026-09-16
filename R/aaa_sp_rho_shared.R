@@ -44,7 +44,7 @@
 #' @noRd
 .sp_rho_interval <- function(W, form = "identity", pad = 1e-6) {
   b <- .sp_rho_bounds(W, form)
-  lo <- if (is.finite(b\[1\])) max(b\[1\], -1e6) else -1e6
+  lo <- if (is.finite(b[1])) max(b[1], -1e6) else -1e6
   hi <- if (is.finite(b[2])) min(b[2], 1e6) else 1e6
   eps <- pad * max(hi - lo, 1e-12)
   # Snap the endpoints inward onto a 1e-8 lattice. The bound comes from an

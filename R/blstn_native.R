@@ -28,12 +28,12 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
   if (is.null(matrix)) {
     sc <- function(a, b) if (a == b) match else mismatch
   } else {
-    idx <- setNames(seq_along(strsplit(alphabet, "")[\[1\]]),
-                    strsplit(alphabet, "")[\[1\]])
+    idx <- setNames(seq_along(strsplit(alphabet, "")[[1]]),
+                    strsplit(alphabet, "")[[1]])
     sc <- function(a, b) matrix[[idx[[a]], idx[[b]]]]
   }
-  qchars <- strsplit(q, "")[\[1\]]
-  schars <- strsplit(s, "")[\[1\]]
+  qchars <- strsplit(q, "")[[1]]
+  schars <- strsplit(s, "")[[1]]
   best <- c(0, 0, 0, 0)
   for (d in (-(length(qchars) - 1L)):(length(schars) - 1L)) {
     qi <- max(0L, -d)
@@ -49,13 +49,13 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
       } else {
         run <- run + v
       }
-      if (run > best\[1\]) {
+      if (run > best[1]) {
         best <- c(run, qi + run_start, si + run_start, t - run_start + 1L)
       }
       t <- t + 1L
     }
   }
-  list(score = best\[1\], qstart = best[2], sstart = best[3], length = best[4])
+  list(score = best[1], qstart = best[2], sstart = best[3], length = best[4])
 }
 
 #' morie_word_hits
@@ -91,12 +91,12 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
   if (is.null(matrix)) {
     sc <- function(a, b) if (a == b) match else mismatch
   } else {
-    idx <- setNames(seq_along(strsplit(alphabet, "")[\[1\]]),
-                    strsplit(alphabet, "")[\[1\]])
+    idx <- setNames(seq_along(strsplit(alphabet, "")[[1]]),
+                    strsplit(alphabet, "")[[1]])
     sc <- function(a, b) matrix[[idx[[a]], idx[[b]]]]
   }
-  qchars <- strsplit(q, "")[\[1\]]
-  schars <- strsplit(s, "")[\[1\]]
+  qchars <- strsplit(q, "")[[1]]
+  schars <- strsplit(s, "")[[1]]
   table <- list()
   for (i in seq_len(length(qchars) - w + 1L)) {
     key <- paste(qchars[i:(i + w - 1L)], collapse = "")
@@ -117,7 +117,7 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
   for (j in seq_len(length(schars) - w + 1L)) {
     word <- schars[j:(j + w - 1L)]
     for (qword in names(table)) {
-      qw <- strsplit(qword, "")[\[1\]]
+      qw <- strsplit(qword, "")[[1]]
       tot <- 0
       for (tt in seq_len(w)) tot <- tot + sc(qw[tt], word[tt])
       if (tot >= threshold)
@@ -222,13 +222,13 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
   if (w < 1L) stop("blstn: w must be >= 1")
   X <- as.numeric(X)
   if (X < 0) stop("blstn: X must be >= 0")
-  qchars <- strsplit(q, "")[\[1\]]
-  schars_all <- lapply(subs, function(x) strsplit(x, "")[\[1\]])
+  qchars <- strsplit(q, "")[[1]]
+  schars_all <- lapply(subs, function(x) strsplit(x, "")[[1]])
   if (is.null(matrix)) {
     sc <- function(a, b) if (a == b) match else mismatch
   } else {
-    idx <- setNames(seq_along(strsplit(alphabet, "")[\[1\]]),
-                    strsplit(alphabet, "")[\[1\]])
+    idx <- setNames(seq_along(strsplit(alphabet, "")[[1]]),
+                    strsplit(alphabet, "")[[1]])
     sc <- function(a, b) matrix[[idx[[a]], idx[[b]]]]
   }
   if (is.null(cutoff)) {
@@ -247,7 +247,7 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
     n_hits <- n_hits + length(hits)
     seen <- list()
     for (h in hits) {
-      qi <- h\[1\] - 1L
+      qi <- h[1] - 1L
       sj <- h[2] - 1L
       ext <- extend_one(qchars, schars, qi, sj, w, sc, X)
       key <- paste(si, qi - sj, ext$qs, ext$length, sep = "|")
@@ -637,7 +637,7 @@ morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
     state <<- .ghc_lcg31(state)
     state / (1L * 2^31)
   }
-  achars <- strsplit(alphabet, "")[\[1\]]
+  achars <- strsplit(alphabet, "")[[1]]
   draw <- function(length) {
     out <- character(length)
     for (i in seq_len(length)) {
@@ -656,7 +656,7 @@ morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
   }
   scores <- sort(scores)
   N <- length(scores)
-  lo <- max(1L, as.integer(quantiles\[1\] * N))
+  lo <- max(1L, as.integer(quantiles[1] * N))
   hi <- min(N - 1L, as.integer(quantiles[2] * N))
   xs <- numeric()
   ys <- numeric()

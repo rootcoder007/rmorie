@@ -49,7 +49,7 @@ Gibbsm <- function(conditionals, x0, n_iter = 100, burn = 0) {
   }
   kept <- draws[seq(bn + 1L, it), , drop = FALSE]
   means <- colMeans(kept)
-  .t1_result(estimate = means\[1\], mean = means, draws = draws, last = x,
+  .t1_result(estimate = means[1], mean = means, draws = draws, last = x,
              n = it,
              method = "componentwise full-conditional updates with van der Corput uniforms, Geman & Geman (1984)")
 }

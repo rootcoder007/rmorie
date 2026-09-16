@@ -65,7 +65,7 @@ Vaean <- function(X, vae = NULL, latent_dim = 1, n_samples = 32, alpha = 0.1,
   L <- as.integer(n_samples)
   if (is.na(L) || L < 1L) stop("vae_anomaly: n_samples must be positive")
   alpha <- as.numeric(alpha)
-  if (!(alpha >= 0 && alpha <= 1)) stop("vae_anomaly: alpha must lie in \[0, 1\]")
+  if (!(alpha >= 0 && alpha <= 1)) stop("vae_anomaly: alpha must lie in [0, 1]")
   esd <- as.numeric(encoder_sd)
   if (esd < 0) stop("vae_anomaly: encoder_sd must be non-negative")
   skip <- as.integer(skip)
@@ -73,14 +73,14 @@ Vaean <- function(X, vae = NULL, latent_dim = 1, n_samples = 32, alpha = 0.1,
   cen <- numeric(d)
   for (j in seq_len(d)) {
     s <- 0
-    for (i in seq_len(n)) s <- s + A\[i, j\]
+    for (i in seq_len(n)) s <- s + A[i, j]
     cen[j] <- s / n
   }
   C <- matrix(0, d, d)
   for (a in seq_len(d)) for (b in seq_len(d)) {
     s <- 0
     for (i in seq_len(n)) s <- s + (A[i, a] - cen[a]) * (A[i, b] - cen[b])
-    C\[a, b\] <- s / n
+    C[a, b] <- s / n
   }
   je <- .s03jacobi(C)
   ev <- je$values
@@ -117,7 +117,7 @@ Vaean <- function(X, vae = NULL, latent_dim = 1, n_samples = 32, alpha = 0.1,
     mz <- numeric(k)
     for (t in seq_len(k)) {
       v <- 0
-      for (j in seq_len(d)) v <- v + W[j, t] * (A\[i, j\] - cen[j])
+      for (j in seq_len(d)) v <- v + W[j, t] * (A[i, j] - cen[j])
       mz[t] <- v
     }
     ll <- numeric(L)
@@ -129,7 +129,7 @@ Vaean <- function(X, vae = NULL, latent_dim = 1, n_samples = 32, alpha = 0.1,
       for (j in seq_len(d)) {
         r <- cen[j]
         for (t in seq_len(k)) r <- r + W[j, t] * z[t]
-        q <- q + cc + (A\[i, j\] - r) * (A\[i, j\] - r) / (s * s)
+        q <- q + cc + (A[i, j] - r) * (A[i, j] - r) / (s * s)
       }
       ll[l] <- -0.5 * q
       if (is.na(best) || ll[l] > best) best <- ll[l]

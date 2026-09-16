@@ -186,7 +186,7 @@ morie_cthrgr <- function(y, D, M, X, route = "gcomputed", n_trees = 8L,
        overlap_min = min(ps), overlap_max = max(ps),
        n_extreme = sum(ps < 0.05 | ps > 0.95), n_draw = length(draws),
        residual_spread = if (length(resid))
-         resid[length(resid)] - resid\[1\] else 0,
+         resid[length(resid)] - resid[1] else 0,
        n = n, n_treated = as.integer(sum(d)), n_query = q, route = route,
        method = "three-layer causal forest with a mediator")
 }

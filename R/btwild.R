@@ -88,7 +88,7 @@ Btwild <- function(X, y, B = 200, seed = 1, alpha = 0.05, weights = "mammen") {
   vm <- s1 / N
   list(beta_b = reps, beta_hat = bh, se = se, lo = lo, hi = hi, var_hc0 = hc0,
        v_mean = vm, v_var = s2 / N - vm * vm, v_m3 = s3 / N,
-       n = n, p = p, B = as.integer(B), estimate = bh\[1\],
+       n = n, p = p, B = as.integer(B), estimate = bh[1],
        method = "Mammen (1993) Ann. Statist. 21(1):255-285, two-point multiplier")
 }
 

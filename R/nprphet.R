@@ -29,7 +29,7 @@ Nprphet <- function(ds, y, ar_layers = 0, n_changepoints = 3, seasonality = c(36
   yv <- as.numeric(y)
   n <- length(yv)
   p <- as.integer(ar_layers)
-  period <- as.numeric(seasonality\[1\])
+  period <- as.numeric(seasonality[1])
   nf <- as.integer(seasonality[2])
   ncp <- as.integer(n_changepoints)
   cps <- if (ncp > 0L) vapply(seq_len(ncp), function(k) .s4_quantile7(t, k / (ncp + 1)), 0) else numeric(0)

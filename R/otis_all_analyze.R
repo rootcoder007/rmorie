@@ -563,9 +563,9 @@ morie_otis_analyze_c03 <- function(data) {
       by = list(Race = data[["Race"]]),
       FUN = function(x) sum(as.numeric(x), na.rm = TRUE)
     )
-    agg <- agg[order(-agg[[cols\[1\]]]), , drop = FALSE]
+    agg <- agg[order(-agg[[cols[1]]]), , drop = FALSE]
     rows <- lapply(seq_len(nrow(agg)), function(i) {
-      cust <- .otis_to_int(agg[[cols\[1\]]][i])
+      cust <- .otis_to_int(agg[[cols[1]]][i])
       rc   <- .otis_to_int(agg[[cols[2]]][i])
       seg  <- .otis_to_int(agg[[cols[3]]][i])
       c(as.character(agg$Race[i]), cust, rc, seg,
@@ -1053,10 +1053,10 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
     "Person-years (after MatchIt)" = fit$n,
     "ATE" = round(fit$ate, 4),
     "ATE 95% CI" = sprintf("[%.4f, %.4f]",
-                            fit$ate_ci95\[1\], fit$ate_ci95[2]),
+                            fit$ate_ci95[1], fit$ate_ci95[2]),
     "ATTE" = round(fit$atte, 4),
     "ATTE 95% CI" = sprintf("[%.4f, %.4f]",
-                              fit$atte_ci95\[1\], fit$atte_ci95[2]),
+                              fit$atte_ci95[1], fit$atte_ci95[2]),
     "Standard error type" = fit$se_kind
   )
   .otis_emit(
@@ -1286,7 +1286,7 @@ morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
       return(list(label = fam_label, fail = TRUE,
                   msg = "no coef matched treatment"))
     }
-    t_key <- rn[t_idx\[1\]]
+    t_key <- rn[t_idx[1]]
     beta <- co[t_key, "Estimate"]
     se   <- co[t_key, "Std. Error"]
     pval <- co[t_key, ncol(co)]
@@ -1390,9 +1390,9 @@ morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
             treatment, "no coef", "--", "--", "--", "--")
           next
         }
-        t_key <- rn[t_idx\[1\]]
-        beta <- res_g$coefficients[t_idx\[1\]]
-        se   <- sqrt(diag(vb))[t_idx\[1\]]
+        t_key <- rn[t_idx[1]]
+        beta <- res_g$coefficients[t_idx[1]]
+        se   <- sqrt(diag(vb))[t_idx[1]]
         pval <- 2 * stats::pnorm(-abs(beta / se))
         irr <- exp(beta)
         rows[[length(rows) + 1L]] <- c(
@@ -2757,12 +2757,12 @@ morie_otis_analyze_otis_mandela_provincial_vs_federal <- function(
                      all_rows)
   for (r in seg_rows) {
     rows[[length(rows) + 1L]] <- c("Ontario Provincial Segregation",
-      as.character(r\[1\]), "Individuals",
+      as.character(r[1]), "Individuals",
       r[4], r[6], r[7])
   }
   for (r in rc_rows) {
     rows[[length(rows) + 1L]] <- c("Ontario Provincial RC (broader)",
-      as.character(r\[1\]), "Individuals",
+      as.character(r[1]), "Individuals",
       r[4], r[6], r[7])
   }
 
@@ -2770,7 +2770,7 @@ morie_otis_analyze_otis_mandela_provincial_vs_federal <- function(
     tor_pcts <- vapply(seg_rows, function(r)
       as.numeric(sub("%", "", r[6])), numeric(1))
     max_tor_pct <- max(tor_pcts, na.rm = TRUE)
-    max_tor_year <- seg_rows[[which(abs(tor_pcts - max_tor_pct) < 0.01)\[1\]]]\[1\]
+    max_tor_year <- seg_rows[[which(abs(tor_pcts - max_tor_pct) < 0.01)[1]]][1]
     gap_pp <- max_tor_pct - fed_tor_pct
   } else {
     max_tor_pct <- NA_real_
@@ -3173,18 +3173,18 @@ morie_otis_analyze_ruhela_grid <- function(datasets,
                   })
     if (length(r$warnings) > 0L && length(r$tables) == 0L) {
       rows[[length(rows) + 1L]] <- c(ds_id, "--", "warn",
-        substr(r$warnings[\[1\]], 1, 50), "--", "--", "--")
+        substr(r$warnings[[1]], 1, 50), "--", "--", "--")
       next
     }
-    if (length(r$tables) == 0L || length(r$tables[\[1\]]$rows) == 0L) {
+    if (length(r$tables) == 0L || length(r$tables[[1]]$rows) == 0L) {
       rows[[length(rows) + 1L]] <- c(ds_id, "--", "no rows",
                                        "--", "--", "--", "--")
       next
     }
-    tab_rows <- r$tables[\[1\]]$rows
+    tab_rows <- r$tables[[1]]$rows
     .find <- function(substr_label) {
       for (row in tab_rows) {
-        if (grepl(substr_label, as.character(row\[1\]), fixed = TRUE) &&
+        if (grepl(substr_label, as.character(row[1]), fixed = TRUE) &&
             !identical(row[3], "fit failed")) return(row)
       }
       NULL
@@ -3198,7 +3198,7 @@ morie_otis_analyze_ruhela_grid <- function(datasets,
     }
     if (is.null(primary)) {
       for (row in tab_rows) {
-        if (identical(as.character(row\[1\]), "NB") &&
+        if (identical(as.character(row[1]), "NB") &&
             !identical(row[3], "fit failed")) {
           primary <- row
           primary_type <- "NB GLM"
@@ -3208,7 +3208,7 @@ morie_otis_analyze_ruhela_grid <- function(datasets,
     }
     if (is.null(primary)) {
       for (row in tab_rows) {
-        if (identical(as.character(row\[1\]), "Poisson") &&
+        if (identical(as.character(row[1]), "Poisson") &&
             !identical(row[3], "fit failed")) {
           primary <- row
           primary_type <- "Poisson GLM"
@@ -3292,8 +3292,8 @@ morie_otis_analyze_ruhela_master <- function(datasets,
     sections[[length(sections) + 1L]] <- list(
       title = paste0("section 1 Aggregate Ruhela formulations -- ",
                        "primary IRR per dataset:"),
-      headers = grid$tables[\[1\]]$headers,
-      rows = grid$tables[\[1\]]$rows
+      headers = grid$tables[[1]]$headers,
+      rows = grid$tables[[1]]$rows
     )
   }
 
@@ -3316,7 +3316,7 @@ morie_otis_analyze_ruhela_master <- function(datasets,
                                               tables = list()))
       if (length(r$warnings) > 0L) {
         per_row_rows[[length(per_row_rows) + 1L]] <- c(arm$id, "warn",
-          substr(r$warnings[\[1\]], 1, 50), "--", "--", "--")
+          substr(r$warnings[[1]], 1, 50), "--", "--", "--")
         next
       }
       if (length(r$tables) == 0L) {
@@ -3346,7 +3346,7 @@ morie_otis_analyze_ruhela_master <- function(datasets,
                     list(lbl = "d-series", r = d_chi))) {
     if (is.null(pair$r)) next
     if (length(pair$r$tables) > 0L) {
-      for (row in utils::head(pair$r$tables[\[1\]]$rows, 3L)) {
+      for (row in utils::head(pair$r$tables[[1]]$rows, 3L)) {
         chi_rows[[length(chi_rows) + 1L]] <- c(pair$lbl,
           utils::head(row, 5L))
       }
@@ -3370,8 +3370,8 @@ morie_otis_analyze_ruhela_master <- function(datasets,
       sections[[length(sections) + 1L]] <- list(
         title = paste0("section 4 Mandela-RF -- Ontario provincial ",
                          "vs federal SIU cross-comparison:"),
-        headers = cmp$tables[\[1\]]$headers,
-        rows = cmp$tables[\[1\]]$rows
+        headers = cmp$tables[[1]]$headers,
+        rows = cmp$tables[[1]]$rows
       )
     }
   }

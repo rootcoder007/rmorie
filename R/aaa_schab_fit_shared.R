@@ -39,7 +39,7 @@
     return(list(lags = lags, gamma = gamma, counts = counts))
   }
   if (is.list(ev) && is.null(names(ev)) && length(ev) %in% c(2L, 3L)) {
-    lags <- as.numeric(ev[\[1\]])
+    lags <- as.numeric(ev[[1]])
     gamma <- as.numeric(ev[[2]])
     counts <- if (length(ev) == 3L) as.numeric(ev[[3]]) else rep(1, length(lags))
     return(list(lags = lags, gamma = gamma, counts = counts))
@@ -100,7 +100,7 @@
   g <- ghat[ok]
   n <- counts[ok]
   function(theta) {
-    nugget <- theta\[1\]
+    nugget <- theta[1]
     sill <- theta[2]
     rng <- theta[3]
     if (nugget < 0 || sill < 0 || rng <= 0) {
@@ -159,7 +159,7 @@
     kind = kind
   )
   list(
-    nugget = fit$theta\[1\], partial_sill = fit$theta[2],
+    nugget = fit$theta[1], partial_sill = fit$theta[2],
     range = fit$theta[3], objective = fit$objective,
     converged = fit$converged
   )
@@ -218,7 +218,7 @@
   n <- nrow(X)
   p <- ncol(X)
   s <- svd(X, nu = n, nv = p)
-  tol <- max(n, p) * .Machine$double.eps * (if (length(s$d)) s$d\[1\] else 1)
+  tol <- max(n, p) * .Machine$double.eps * (if (length(s$d)) s$d[1] else 1)
   rank <- sum(s$d > tol)
   if (rank >= n) stop("design matrix leaves no error contrasts")
   t(s$u[, (rank + 1L):n, drop = FALSE])

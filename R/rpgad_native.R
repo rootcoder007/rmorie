@@ -19,9 +19,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rdp_gaussian(V, V)
 morie_rdp_gaussian <- function(alpha, sigma, sensitivity = 1) {
-  a <- as.numeric(alpha)\[1\]
-  s <- as.numeric(sigma)\[1\]
-  d <- as.numeric(sensitivity)\[1\]
+  a <- as.numeric(alpha)[1]
+  s <- as.numeric(sigma)[1]
+  d <- as.numeric(sensitivity)[1]
   if (s <= 0) stop("morie_rdp_gaussian: sigma must be positive")
   if (d < 0) stop("morie_rdp_gaussian: sensitivity must be non-negative")
   a * d * d / (2 * s * s)
@@ -41,9 +41,9 @@ morie_rdp_gaussian <- function(alpha, sigma, sensitivity = 1) {
 #' @examples
 #' morie_rdp_laplace(2, 1.0)
 morie_rdp_laplace <- function(alpha, lam, sensitivity = 1) {
-  a <- as.numeric(alpha)\[1\]
-  sens <- as.numeric(sensitivity)\[1\]
-  lm <- if (sens != 0) as.numeric(lam)\[1\] / sens else Inf
+  a <- as.numeric(alpha)[1]
+  sens <- as.numeric(sensitivity)[1]
+  lm <- if (sens != 0) as.numeric(lam)[1] / sens else Inf
   if (a <= 1) stop("morie_rdp_laplace: alpha must exceed 1")
   if (lm <= 0) stop("morie_rdp_laplace: lambda must be positive")
   log_t1 <- log(a / (2 * a - 1)) + (a - 1) / lm
@@ -84,10 +84,10 @@ morie_rpgad <- function(alpha, epsilon_R = NULL, delta = 1e-5,
   if (any(orders <= 1))
     stop("morie_rpgad: every alpha must exceed 1 (Proposition 3 divides ",
          "by alpha - 1)")
-  d <- as.numeric(delta)\[1\]
+  d <- as.numeric(delta)[1]
   if (!(d > 0 && d < 1))
     stop("morie_rpgad: delta must lie strictly in (0, 1)")
-  k <- as.integer(n_compositions)\[1\]
+  k <- as.integer(n_compositions)[1]
   if (k < 1) stop("morie_rpgad: n_compositions must be at least 1")
 
   if (!is.null(epsilon_R)) {
@@ -101,7 +101,7 @@ morie_rpgad <- function(alpha, epsilon_R = NULL, delta = 1e-5,
   } else {
     if (is.null(mechanism))
       stop("morie_rpgad: give either epsilon_R or a mechanism")
-    mech <- tolower(as.character(mechanism)\[1\])
+    mech <- tolower(as.character(mechanism)[1])
     if (!mech %in% c("gaussian", "laplace"))
       stop("morie_rpgad: mechanism must be gaussian or laplace")
     if (mech == "gaussian") {
@@ -131,7 +131,7 @@ morie_rpgad <- function(alpha, epsilon_R = NULL, delta = 1e-5,
        rdp_epsilons = eps_r,
        delta = d,
        mechanism = mech,
-       sensitivity = as.numeric(sensitivity)\[1\],
+       sensitivity = as.numeric(sensitivity)[1],
        n_compositions = k,
        method = "RDP -> (eps, delta)-DP, Mironov (2017) Proposition 3")
 }

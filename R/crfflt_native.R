@@ -52,7 +52,7 @@ morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
   } else {
     B <- c(B)
   }
-  list(B = B, a = a, b = b, p_low = pl, p_high = pu, B0 = B\[1\],
+  list(B = B, a = a, b = b, p_low = pl, p_high = pu, B0 = B[1],
        note = paste("the ideal filter is infinite; these weights die",
                     "out only slowly (Fig. 1a: still non-zero at j=120)"))
 }
@@ -72,7 +72,7 @@ morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
   v <- as.numeric(x)
   T <- length(v)
   if (T < 2L) stop("crfflt: need at least 2 observations")
-  mu <- (v[T] - v\[1\]) / (T - 1L)
+  mu <- (v[T] - v[1]) / (T - 1L)
   list(adjusted = v - (seq_len(T) - 1L) * mu, drift = mu)
 }
 
@@ -87,8 +87,8 @@ morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
 #' @keywords internal
 #' @noRd
 .tail <- function(B, m) {
-  if (m <= 0L) return(-0.5 * B\[1\])
-  -0.5 * B\[1\] - sum(B[seq_len(m) + 1L - 1L])
+  if (m <= 0L) return(-0.5 * B[1])
+  -0.5 * B[1] - sum(B[seq_len(m) + 1L - 1L])
 }
 
 #' Extract the band by one of three routes
@@ -133,13 +133,13 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
     end <- .tail(B, pp)
     out <- rep(NA_real_, T)
     for (t in (pp + 1L):(T - pp)) {
-      s <- w\[1\] * v[t]
+      s <- w[1] * v[t]
       if (pp >= 2L)
         for (j in 2:pp) s <- s + w[j] * (v[t + j - 1L] + v[t - j + 1L])
       s <- s + end * (v[t + pp - 1L] + v[t - pp - 1L + 1L])
       out[t] <- s
     }
-    wts <- c(end, w[seq.int(pp - 1L, 2L)], w\[1\], w[seq.int(2L, pp)], end)
+    wts <- c(end, w[seq.int(pp - 1L, 2L)], w[1], w[seq.int(2L, pp)], end)
     return(list(estimate = out, cycle = out, method = "symmetric",
                 p = pp, weights = wts, weight_sum = sum(wts),
                 n_missing = 2L * pp, drift_removed = 0.0,
@@ -154,10 +154,10 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
     for (t in seq_len(T)) {
       back <- t - 1L
       if (back < 2L) next
-      s <- 0.5 * B\[1\] * v[t]
+      s <- 0.5 * B[1] * v[t]
       if (back >= 2L)
         for (j in 1:(back - 1L)) s <- s + B[j + 1L] * v[t - j]
-      s <- s + .tail(B, back) * v\[1\]
+      s <- s + .tail(B, back) * v[1]
       out[t] <- s
     }
     return(list(estimate = out, cycle = out, method = "one_sided",
@@ -173,13 +173,13 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
     f <- T - t
     b <- t - 1L
     w <- numeric(T)
-    w[t] <- w[t] + if (f >= 1L && b >= 1L) B\[1\] else 0.5 * B\[1\]
+    w[t] <- w[t] + if (f >= 1L && b >= 1L) B[1] else 0.5 * B[1]
     if (f >= 1L)
       for (j in 1:(f - 1L)) w[t + j] <- w[t + j] + B[j + 1L]
     if (b >= 1L)
       for (j in 1:(b - 1L)) w[t - j] <- w[t - j] + B[j + 1L]
     if (f >= 1L) w[T] <- w[T] + .tail(B, f)
-    if (b >= 1L) w\[1\] <- w\[1\] + .tail(B, b)
+    if (b >= 1L) w[1] <- w[1] + .tail(B, b)
     out[t] <- sum(w * v)
     sums[t] <- sum(w)
   }

@@ -167,7 +167,7 @@ ridge_fit <- function(X, y, lam) {
   n <- length(y)
   if (!is.matrix(X)) {
     if (n != length(X)) stop("regmlm: X and y must have the same length")
-    p <- length(X[\[1\]])
+    p <- length(X[[1]])
     X <- do.call(rbind, X)
   } else {
     if (n != nrow(X)) stop("regmlm: X and y must have the same length")
@@ -315,7 +315,7 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 #' r <- loco_predictions(l0$predictors, l0$meta, l1$weights)
 #' str(r, max.level = 1)
 loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
-  n <- length(preds[\[1\]])
+  n <- length(preds[[1]])
 
   if (is.null(chromosomes)) {
     chroms <- sort(unique(sapply(meta, function(m) m$chromosome)))

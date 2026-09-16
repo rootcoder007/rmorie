@@ -72,10 +72,10 @@ Ghosalcoxbvm <- function(x, time = NULL, event = NULL, beta_grid = NULL) {
   info <- nll_grad_hess(b)$he
   se <- sqrt(pmax(diag(.ghc_pinv(info)), 0))
   bg <- if (is.null(beta_grid))
-    seq(b\[1\] - 4 * se\[1\], b\[1\] + 4 * se\[1\], length.out = 101) else
+    seq(b[1] - 4 * se[1], b[1] + 4 * se[1], length.out = 101) else
       as.numeric(beta_grid)
-  s1 <- max(se\[1\], 1e-12)
-  post <- exp(-0.5 * ((bg - b\[1\]) / s1)^2) / (s1 * sqrt(2 * pi))
+  s1 <- max(se[1], 1e-12)
+  post <- exp(-0.5 * ((bg - b[1]) / s1)^2) / (s1 * sqrt(2 * pi))
   .t1_result(beta = b, se = se, efficient_information = info,
              beta_grid = bg, posterior_normal = post,
              efficient = TRUE, credible_equals_confidence = TRUE,

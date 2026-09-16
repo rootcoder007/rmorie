@@ -28,7 +28,7 @@ Kpmsmp <- function(fit, alpha) {
   m <- rt$m
   nr <- rt$nr
   d <- rt$d
-  n <- nr\[1\]
+  n <- nr[1]
   h <- .kpm_hw_crit(a)
   S <- numeric(m)
   sig2 <- numeric(m)

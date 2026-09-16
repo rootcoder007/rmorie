@@ -62,12 +62,12 @@ Pseudo <- function(B, x, y, edges = NULL) {
     Bg <- matrix(0, k, k)
     used <- 0L
     for (e in edges) {
-      i <- as.integer(e[\[1\]])
+      i <- as.integer(e[[1]])
       j <- as.integer(e[[2]])
       if (i < 1L || i > k || j < 1L || j > k) {
         stop(sprintf("edge (%d, %d) out of range", i, j), call. = FALSE)
       }
-      Bg\[i, j\] <- Bm\[i, j\]
+      Bg[i, j] <- Bm[i, j]
       used <- used + 1L
     }
   }

@@ -77,10 +77,10 @@ Htebias <- function(y, D, tau_hat, y_hat = NULL, w_hat = NULL) {
     if (t < 0) 1 - two / 2 else two / 2
   }
   list(
-    coef_mean = beta\[1\], coef_differential = beta[2],
-    se_mean = se\[1\], se_differential = se[2],
-    t_mean = tstat\[1\], t_differential = tstat[2],
-    p_mean = onesided(tstat\[1\]), p_differential = onesided(tstat[2]),
+    coef_mean = beta[1], coef_differential = beta[2],
+    se_mean = se[1], se_differential = se[2],
+    t_mean = tstat[1], t_differential = tstat[2],
+    p_mean = onesided(tstat[1]), p_differential = onesided(tstat[2]),
     n = n,
     method = paste(
       "BLP calibration test, HC3",

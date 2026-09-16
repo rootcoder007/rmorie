@@ -57,9 +57,9 @@
 .alfomg_shape <- function(msa) {
   s <- length(msa)
   if (s == 0L) stop("an alignment with no sequences has nothing to say")
-  r <- length(msa[\[1\]])
+  r <- length(msa[[1]])
   if (r == 0L) stop("an alignment with no positions has nothing to say")
-  cc <- length(msa[\[1\]][\[1\]])
+  cc <- length(msa[[1]][[1]])
   for (row in msa) {
     if (length(row) != r) stop("every sequence must have the same length")
     for (v in row) {
@@ -84,7 +84,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_alfomg_softmax(V)
 morie_alfomg_softmax <- function(logits) {
-  m <- logits\[1\]
+  m <- logits[1]
   for (v in logits) if (v > m) m <- v
   ex <- exp(logits - m)
   ex / .w3_csum(ex)
@@ -111,7 +111,7 @@ morie_alfomg_softmax <- function(logits) {
 #' morie_alfomg_opm(V)
 morie_alfomg_opm <- function(msa) {
   sh <- .alfomg_shape(msa)
-  s <- sh\[1\]
+  s <- sh[1]
   r <- sh[2]
   cc <- sh[3]
   out <- vector("list", r)
@@ -160,7 +160,7 @@ morie_alfomg_bias <- function(pair, w = NULL) {
   for (i in seq_len(r)) {
     for (j in seq_len(r)) {
       z <- pair[[i]][[j]]
-      out\[i, j\] <- if (is.null(w)) .w3_csum(z) / length(z) else .w3_dot(z, w)
+      out[i, j] <- if (is.null(w)) .w3_csum(z) / length(z) else .w3_dot(z, w)
     }
   }
   out
@@ -202,7 +202,7 @@ morie_alfomg_bias <- function(pair, w = NULL) {
 morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
                                        gate = NULL) {
   sh <- .alfomg_shape(msa)
-  s <- sh\[1\]
+  s <- sh[1]
   r <- sh[2]
   cc <- sh[3]
   if (is.null(scale)) scale <- 1 / sqrt(as.numeric(cc))
@@ -224,7 +224,7 @@ morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
         seq_len(r),
         function(j) {
           .w3_dot(sq[[i]], sq[[j]]) * scale +
-            bias\[i, j\]
+            bias[i, j]
         }, numeric(1)
       )
       a <- morie_alfomg_softmax(logits)
@@ -265,7 +265,7 @@ morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
 morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
                          scale = NULL, gate = NULL) {
   sh <- .alfomg_shape(msa)
-  s <- sh\[1\]
+  s <- sh[1]
   r <- sh[2]
   cc <- sh[3]
   if (length(pair) != r || any(vapply(pair, length, integer(1)) != r)) {
@@ -274,7 +274,7 @@ morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
       "positions"
     )
   }
-  cz <- length(pair[\[1\]][\[1\]])
+  cz <- length(pair[[1]][[1]])
 
   opm <- morie_alfomg_opm(msa)
   b <- morie_alfomg_bias(pair, w_bias)

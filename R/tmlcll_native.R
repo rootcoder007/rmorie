@@ -413,7 +413,7 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
     lo <- min(yv)
     hi <- max(yv)
   } else {
-    lo <- bounds\[1\]
+    lo <- bounds[1]
     hi <- bounds[2]
   }
   if (hi <= lo) {

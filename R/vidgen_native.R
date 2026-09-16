@@ -124,7 +124,7 @@
     }
     if (!is.null(mask)) {
       for (j in seq_len(n)) {
-        if (!mask\[i, j\]) sc[j] <- -1e30
+        if (!mask[i, j]) sc[j] <- -1e30
       }
     }
     m <- max(sc)
@@ -176,10 +176,10 @@ morie_vidgen_space_only_conv <- function(video, kernel) {
         s <- 0.0
         for (a in seq_len(kh)) {
           for (b in seq_len(kw)) {
-            s <- s + fr[i + a - 1, j + b - 1] * K\[a, b\]
+            s <- s + fr[i + a - 1, j + b - 1] * K[a, b]
           }
         }
-        o\[i, j\] <- s
+        o[i, j] <- s
       }
     }
     out[[fi]] <- o
@@ -236,8 +236,8 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
   V <- lapply(video, .vidgen_mat)
   F <- length(V)
   if (F < 1) stop("vidgen: the video has no frames")
-  H <- nrow(V[\[1\]])
-  W <- ncol(V[\[1\]])
+  H <- nrow(V[[1]])
+  W <- ncol(V[[1]])
   for (f in seq_len(F)) {
     if (nrow(V[[f]]) != H || ncol(V[[f]]) != W) {
       stop("vidgen: the frames differ in shape")
@@ -248,17 +248,17 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
     for (j in seq_len(W)) {
       series <- matrix(0.0, nrow = F, ncol = 1)
       for (t in seq_len(F)) {
-        series[t, 1] <- V[[t]]\[i, j\]
+        series[t, 1] <- V[[t]][i, j]
       }
       if (isTRUE(identity)) {
         for (t in seq_len(F)) {
-          out[[t]]\[i, j\] <- series[t, 1]
+          out[[t]][i, j] <- series[t, 1]
         }
       } else {
         res <- .vidgen_softmax_attend(series)
         o <- res$out
         for (t in seq_len(F)) {
-          out[[t]]\[i, j\] <- o[t, 1]
+          out[[t]][i, j] <- o[t, 1]
         }
       }
     }
@@ -282,7 +282,7 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
 #' @export
 morie_vidgen_as_image_model <- function(video, block) {
   list(
-    video = lapply(video, function(fr) block(list(fr))$video[\[1\]]),
+    video = lapply(video, function(fr) block(list(fr))$video[[1]]),
     note = "frames processed alone; the masked video model must equal this exactly"
   )
 }

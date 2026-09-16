@@ -46,7 +46,7 @@ Causrddh <- function(x, y, cutoff = 0) {
   ya <- as.numeric(y)
   n <- length(xa)
   if (n < 10L) stop("need at least 10 observations", call. = FALSE)
-  c0 <- as.numeric(cutoff)\[1\]
+  c0 <- as.numeric(cutoff)[1]
   d <- xa - c0
   sx <- stats::sd(xa)
   h1 <- 1.84 * sx * n^(-0.2)
@@ -162,9 +162,9 @@ Causrddh <- function(x, y, cutoff = 0) {
 Causrdd <- function(x, y, cutoff = 0, h = NULL, kernel = "triangular") {
   xa <- as.numeric(x)
   ya <- as.numeric(y)
-  c0 <- as.numeric(cutoff)\[1\]
+  c0 <- as.numeric(cutoff)[1]
   if (is.null(h)) h <- Causrddh(xa, ya, cutoff = c0)$estimate
-  h <- as.numeric(h)\[1\]
+  h <- as.numeric(h)[1]
   if (h <= 0) stop("bandwidth must be positive", call. = FALSE)
   d <- xa - c0
   u <- d / h
@@ -230,7 +230,7 @@ Causrddf <- function(x, y, treat, cutoff = 0, h = NULL, h_treat = NULL,
   xa <- as.numeric(x)
   ya <- as.numeric(y)
   wa <- as.numeric(treat)
-  c0 <- as.numeric(cutoff)\[1\]
+  c0 <- as.numeric(cutoff)[1]
   if (is.null(h)) h <- Causrddh(xa, ya, cutoff = c0)$estimate
   if (is.null(h_treat)) h_treat <- Causrddh(xa, wa, cutoff = c0)$estimate
   fy <- Causrdd(xa, ya, cutoff = c0, h = h, kernel = kernel)

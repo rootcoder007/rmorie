@@ -550,7 +550,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   r[12] <- bitwAnd(r[12], 0x0f)
   r[16] <- bitwAnd(r[16], 0x0f)
   r[5] <- bitwAnd(r[5], 0xfc)
-  r\[9\] <- bitwAnd(r\[9\], 0xfc)
+  r[9] <- bitwAnd(r[9], 0xfc)
   r[13] <- bitwAnd(r[13], 0xfc)
   r
 }
@@ -592,7 +592,7 @@ morie_secaead_poly1305_mac <- function(message, key) {
     blk <- m[i:min(i + 15L, length(m))]
     n <- .secaead_limbs_from_bytes(c(blk, 1L)) # append the high bit
     acc <- .secaead_p_add(
-      if (length(acc) == 1L && acc\[1\] == 0) 0 else acc,
+      if (length(acc) == 1L && acc[1] == 0) 0 else acc,
       n
     )
     acc <- .secaead_p_mulmod(acc, r)

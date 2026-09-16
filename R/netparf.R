@@ -42,7 +42,7 @@ Netparf <- function(y, exposure, network) {
   nu <- ifelse(den > 0, num / den, 0)
   Xd <- cbind(1, ev, nu)
   beta <- .t1_lstsq(Xd, yv)$beta
-  b0 <- beta\[1\]
+  b0 <- beta[1]
   b1 <- beta[2]
   b2 <- beta[3]
   my <- mean(yv)

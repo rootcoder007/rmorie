@@ -44,7 +44,7 @@
 .schab_correlation_matrix <- function(coords, nugget_ratio, rng, model) {
   # Sigma(theta*) = xi I + (1 - xi) R(h; a). Factoring
   # sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in
-  # \[0, 1\] -- the reparameterisation Sec. 5.5.2 calls for.
+  # [0, 1] -- the reparameterisation Sec. 5.5.2 calls for.
   coords <- as.matrix(coords)
   d <- as.matrix(stats::dist(coords))
   r <- matrix(.sp_correlogram(as.numeric(d), rng, model), nrow(d), ncol(d))
@@ -212,11 +212,11 @@
     start_range <- max(max(as.matrix(stats::dist(coords))) / 4, 1e-6)
   }
 
-  # Unconstrained scale: xi = logistic(u1) keeps the nugget ratio in \[0, 1\]
+  # Unconstrained scale: xi = logistic(u1) keeps the nugget ratio in [0, 1]
   # and a = exp(u2) keeps the range positive, so the constraints of Sec. 4.3
   # hold by construction rather than by clipping.
   wrapped <- function(u) {
-    xi <- .schab_logistic(u\[1\])
+    xi <- .schab_logistic(u[1])
     a <- exp(u[2])
     res <- .schab_profiled_reml(coords, z, X, xi, a, model)
     if (!is.finite(res$value)) {
@@ -270,7 +270,7 @@
     cur <- tr
   }
 
-  xi <- .schab_logistic(x\[1\])
+  xi <- .schab_logistic(x[1])
   a <- exp(x[2])
   list(
     nugget_ratio = xi, range = a, sigma2 = cur$sigma2,

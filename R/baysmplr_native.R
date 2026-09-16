@@ -522,7 +522,7 @@ morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
 #' morie_baysmplr_ess(V)
 morie_baysmplr_ess <- function(chain, max_lag = 200L) {
   n <- length(chain)
-  d <- length(chain[\[1\]])
+  d <- length(chain[[1]])
   vapply(seq_len(d), function(cc) {
     v <- vapply(chain, function(row) row[cc], numeric(1))
     mu <- .w3_csum(v) / n
@@ -647,7 +647,7 @@ morie_baysmplr <- function(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L,
        ess = ess, min_ess = min(ess), ess_per_draw = min(ess) / m,
        accept_rate = r$accept, draws = kept, kept = m, dim = d,
        n_iter = n_iter, burn = burn, info = r$info,
-       seed = as.integer(seed), estimate = means\[1\],
+       seed = as.integer(seed), estimate = means[1],
        method = "MCMC sampler dispatch")
 }
 

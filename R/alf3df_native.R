@@ -257,7 +257,7 @@ morie_alf3df_sample <- function(shape_n, score_fn, n_steps = 8L,
   x <- matrix(0, n, 3L)
   for (i in seq_len(n)) {
     for (c0 in 1:3) {
-      x[i, c0] <- sig\[1\] * .ghc_norm(e, 1L)
+      x[i, c0] <- sig[1] * .ghc_norm(e, 1L)
     }
   }
   traj <- numeric(0)

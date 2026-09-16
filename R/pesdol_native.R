@@ -104,7 +104,7 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
               "4" = c(2.86, 4.01), "5" = c(2.62, 3.79))
   bd <- TAB[[as.character(m)]]
   if (is.null(bd)) bd <- c(NaN, NaN)
-  lo <- bd\[1\]
+  lo <- bd[1]
   hi <- bd[2]
   verdict <- if (is.nan(F) || is.nan(lo)) "unavailable" else
     if (F > hi) "cointegrated" else

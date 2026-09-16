@@ -34,8 +34,8 @@ spkfnn <- function(coords, z, cov_model = NULL, mu = NULL) {
     keep <- seq_len(n) != i
     r <- .sp_simple_kriging(coords[keep, , drop = FALSE], z[keep],
                             coords[i, , drop = FALSE], cov_model, mu)
-    resid[i] <- z[i] - r$prediction\[1\]
-    sdv[i] <- sqrt(max(r$variance\[1\], 1e-300))
+    resid[i] <- z[i] - r$prediction[1]
+    sdv[i] <- sqrt(max(r$variance[1], 1e-300))
   }
   std <- resid / sdv
   list(mspe = mean(resid^2), rmspe = sqrt(mean(resid^2)), me = mean(resid),

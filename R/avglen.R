@@ -32,7 +32,7 @@ Avgpathlen <- function(G, directed = FALSE) {
     nb <- integer(0)
     for (j in seq_len(n)) {
       if (i == j) next
-      if (A\[i, j\] != 0 || (!directed && A[j, i] != 0)) nb <- c(nb, j)
+      if (A[i, j] != 0 || (!directed && A[j, i] != 0)) nb <- c(nb, j)
     }
     adj[[i]] <- nb
   }

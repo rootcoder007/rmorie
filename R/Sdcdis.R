@@ -67,7 +67,7 @@ Sdcdis <- function(coords, noise_radius, seed = 1) {
   centre <- function(Q) c(sum(Q[, 1L]) / n, sum(Q[, 2L]) / n)
   c0 <- centre(P)
   c1 <- centre(masked)
-  centre_shift <- sqrt((c1\[1\] - c0\[1\])^2 + (c1[2] - c0[2])^2)
+  centre_shift <- sqrt((c1[1] - c0[1])^2 + (c1[2] - c0[2])^2)
 
   mean_pair <- function(Q) {
     if (n < 2L) return(NaN)

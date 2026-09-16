@@ -50,7 +50,7 @@ mrm_oneprop_test <- function(x, n, p0, alpha = 0.05) {
     p_value_wald = p_wald, p_value_exact = p_exact,
     ci95_wald_lower = round(max(0, p_hat - z_a * se), 6),
     ci95_wald_upper = round(min(1, p_hat + z_a * se), 6),
-    ci95_exact_lower = round(cp\[1\], 6),
+    ci95_exact_lower = round(cp[1], 6),
     ci95_exact_upper = round(cp[2], 6),
     interpretation = sprintf(
       "p_hat = %.4f, H0: p = %g; exact p = %.3g (%s H0 at alpha=%g).",

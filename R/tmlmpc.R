@@ -61,7 +61,7 @@ Tmlmpc <- function(time, state, D, X) {
   hz <- function(b, a) {
     M <- matrix(0, n, K)
     for (i in seq_len(n)) for (k in seq_len(K))
-      M\[i, k\] <- .s4_clip(.s4_expit(sum(c(1, grid[k], a, Xm[i, ]) * b)), 1e-8, 1 - 1e-8)
+      M[i, k] <- .s4_clip(.s4_expit(sum(c(1, grid[k], a, Xm[i, ]) * b)), 1e-8, 1 - 1e-8)
     M
   }
   H1 <- lapply(seq_along(causes), function(ci) hz(hb[[ci]], 1))
@@ -73,10 +73,10 @@ Tmlmpc <- function(time, state, D, X) {
     for (i in seq_len(n)) {
       p <- 1
       for (k in seq_len(K)) {
-        R\[i, k\] <- p
+        R[i, k] <- p
         tot <- 0
-        for (ci in seq_along(causes)) tot <- tot + HL[[ci]]\[i, k\]
-        p <- p * (1 - .s4_clip(tot, 1e-8, 1 - 1e-8)) * (1 - Cz\[i, k\])
+        for (ci in seq_along(causes)) tot <- tot + HL[[ci]][i, k]
+        p <- p * (1 - .s4_clip(tot, 1e-8, 1 - 1e-8)) * (1 - Cz[i, k])
       }
     }
     R
@@ -86,14 +86,14 @@ Tmlmpc <- function(time, state, D, X) {
   ti <- which(causes == target)
   hobs <- matrix(0, n, K)
   for (i in seq_len(n)) for (k in seq_len(K))
-    hobs\[i, k\] <- if (Dv[i] > 0.5) H1[[ti]]\[i, k\] else H0[[ti]]\[i, k\]
+    hobs[i, k] <- if (Dv[i] > 0.5) H1[[ti]][i, k] else H0[[ti]][i, k]
   ybin <- ifelse(abs(sv[ii] - target) < 1e-9 & grid[kk] == tv[ii], 1, 0)
   arm <- function(a, Rp, HA) {
     ga <- if (a > 0.5) g else 1 - g
     hit <- ifelse(abs(Dv - a) < 0.5, 1, 0)
     Hf <- matrix(0, n, K)
     for (i in seq_len(n)) for (k in seq_len(K))
-      Hf\[i, k\] <- hit[i] / ga[i] / max(Rp\[i, k\], 1e-8)
+      Hf[i, k] <- hit[i] / ga[i] / max(Rp[i, k], 1e-8)
     hv <- Hf[cbind(ii, kk)]
     ho <- hobs[cbind(ii, kk)]
     eps <- 0
@@ -108,7 +108,7 @@ Tmlmpc <- function(time, state, D, X) {
     }
     lam <- numeric(n)
     for (i in seq_len(n)) for (k in seq_len(K))
-      lam[i] <- lam[i] + .s4_clip(.s4_expit(.s4_logit(HA[[ti]]\[i, k\]) + eps * Hf\[i, k\]),
+      lam[i] <- lam[i] + .s4_clip(.s4_expit(.s4_logit(HA[[ti]][i, k]) + eps * Hf[i, k]),
                                   1e-12, 1 - 1e-12)
     psi <- sum(lam) / n
     p <- .s4_clip(.s4_expit(.s4_logit(ho) + eps * hv), 1e-12, 1 - 1e-12)

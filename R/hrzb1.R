@@ -39,7 +39,7 @@ hrzb1 <- function(x, y) {
   beta0 <- as.numeric(stats::coef(stats::lm.fit(X, ys)))
   nrm <- sqrt(sum(beta0^2))
   if (nrm > 1e-12) beta0 <- beta0 / nrm
-  if (beta0\[1\] < 0) beta0 <- -beta0
+  if (beta0[1] < 0) beta0 <- -beta0
   best <- beta0
   best_l <- score(best)
   # Pick an optimiser appropriate to p: Brent (1-D bracketing) for the
@@ -63,7 +63,7 @@ hrzb1 <- function(x, y) {
     s <- s / sqrt(sum(s^2))
     r <- .hrzb1_optim(s, score, maxit = 300)
     b <- r$par / max(sqrt(sum(r$par^2)), 1e-12)
-    if (b\[1\] < 0) b <- -b
+    if (b[1] < 0) b <- -b
     l <- score(b)
     if (l < best_l) {
       best_l <- l
@@ -82,7 +82,7 @@ hrzb1 <- function(x, y) {
     sc <- function(b) .hrzb1_score(b, yb, Xb)
     r <- .hrzb1_optim(best + 0.05 * stats::rnorm(p), sc, maxit = 150)
     bb <- r$par / max(sqrt(sum(r$par^2)), 1e-12)
-    if (bb\[1\] < 0) bb <- -bb
+    if (bb[1] < 0) bb <- -bb
     boot[b_idx, ] <- bb
   }
   se <- apply(boot, 2, stats::sd) * (m / n)^(1 / 3)

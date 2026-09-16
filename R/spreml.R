@@ -52,7 +52,7 @@ spreml <- function(coords, z, X = NULL, variogram_model = "exponential") {
   list(nugget = fit$nugget, partial_sill = fit$partial_sill,
        sill = fit$nugget + fit$partial_sill, range = fit$range,
        nugget_ratio = fit$nugget_ratio,
-       mean = if (length(fit$beta) > 1) fit$beta else fit$beta\[1\],
+       mean = if (length(fit$beta) > 1) fit$beta else fit$beta[1],
        neg2_restricted_loglik = fit$neg2_restricted_loglik,
        converged = fit$converged, n = n, n_contrasts = n - ncol(X),
        model = variogram_model, method = "restricted maximum likelihood")

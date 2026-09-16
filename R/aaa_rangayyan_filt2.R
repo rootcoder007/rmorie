@@ -81,7 +81,7 @@ Ma8Tf <- function(z) {
   # 125, 250, 375 and 500 Hz.
   H <- .morie_rg_polyz(rep(0.125, 8), z)
   list(
-    H = if (length(H) == 1L) H[\[1\]] else H, z = z, n_taps = 8L,
+    H = if (length(H) == 1L) H[[1]] else H, z = z, n_taps = 8L,
     n_zeros = 7L, zeros_at_multiples_of_fs_over_8 = TRUE,
     dc_gain = 1, always_stable = TRUE,
     method = "Rangayyan (2024) eq. (3.110)"
@@ -125,10 +125,10 @@ Ma8Fr <- function(omega) {
   gap <- max(Mod(direct - factored))
   scalar <- length(direct) == 1L
   list(
-    H = if (scalar) direct[\[1\]] else direct,
-    factored = if (scalar) factored[\[1\]] else factored,
+    H = if (scalar) direct[[1]] else direct,
+    factored = if (scalar) factored[[1]] else factored,
     omega = omega,
-    magnitude = if (scalar) Mod(direct[\[1\]]) else Mod(direct),
+    magnitude = if (scalar) Mod(direct[[1]]) else Mod(direct),
     max_difference = gap, factored_form_agrees = gap <= 1e-12,
     bracket_is_inside_the_product = TRUE,
     method = "Rangayyan (2024) eq. (3.111)"
@@ -216,7 +216,7 @@ Ma8RecTf <- function(z) {
     }
   }, complex(1))
   list(
-    H = if (length(H) == 1L) H[\[1\]] else H, z = z,
+    H = if (length(H) == 1L) H[[1]] else H, z = z,
     pole_at_dc_cancelled_by_a_zero = TRUE, still_fir = TRUE,
     dc_gain = 1, removable_singularity_at_z_equals_one = TRUE,
     method = "Rangayyan (2024) eq. (3.121)"
@@ -263,8 +263,8 @@ Ma8Sinc <- function(omega) {
   gap <- max(Mod(closed - direct))
   scalar <- length(closed) == 1L
   list(
-    H = if (scalar) closed[\[1\]] else closed, omega = omega,
-    direct_sum = if (scalar) direct[\[1\]] else direct,
+    H = if (scalar) closed[[1]] else closed, omega = omega,
+    direct_sum = if (scalar) direct[[1]] else direct,
     max_difference = gap, agrees_with_eq_3_111 = gap <= 1e-9,
     group_delay = 3.5, delay_is_not_an_integer = TRUE,
     method = "Rangayyan (2024) eq. (3.122)"
@@ -304,8 +304,8 @@ RunInt <- function(x, t, tau) {
   out <- numeric(length(ts))
   for (i in seq_along(ts)) {
     lo <- ts[i] - tv
-    if (lo < ts\[1\]) {
-      lo <- ts\[1\]
+    if (lo < ts[1]) {
+      lo <- ts[1]
       clipped <- clipped + 1L
     }
     acc <- 0
@@ -364,7 +364,7 @@ RunIntAll <- function(x, t) {
   out <- c(0, cumsum(0.5 * (xs[-length(xs)] + xs[-1]) * diff(ts)))
   list(
     y = out, n = length(out), total = out[length(out)],
-    lower_limit = ts\[1\],
+    lower_limit = ts[1],
     constant_of_integration_is_arbitrary = TRUE,
     discrete_pole_on_the_unit_circle = TRUE,
     seldom_used_for_filtering = TRUE,
@@ -411,9 +411,9 @@ IntFt <- function(X, omega, X0 = NULL) {
   }
   scalar <- length(w) == 1L
   list(
-    Y = if (scalar) Y[\[1\]] else Y, omega = omega,
+    Y = if (scalar) Y[[1]] else Y, omega = omega,
     delta_weight = if (is.null(X0)) NULL else pi * as.complex(X0),
-    at_dc = if (scalar) at_dc[\[1\]] else at_dc,
+    at_dc = if (scalar) at_dc[[1]] else at_dc,
     dc_term_carried_by_the_delta = TRUE,
     undefined_at_zero_without_the_delta = TRUE,
     method = "Rangayyan (2024) eq. (3.115)"
@@ -445,7 +445,7 @@ IntFr <- function(omega) {
   }
   H <- 1 / complex(real = 0, imaginary = w)
   list(
-    H = if (length(H) == 1L) H[\[1\]] else H, omega = omega,
+    H = if (length(H) == 1L) H[[1]] else H, omega = omega,
     lowpass = TRUE, dc_term_set_aside = TRUE,
     gain_falls_nonlinearly_with_frequency = TRUE,
     method = "Rangayyan (2024) eq. (3.116)"
@@ -474,7 +474,7 @@ IntMag <- function(omega) {
   }
   mag <- 1 / abs(w)
   list(
-    magnitude = if (length(mag) == 1L) mag[\[1\]] else mag,
+    magnitude = if (length(mag) == 1L) mag[[1]] else mag,
     omega = omega, book_prints_one_over_omega = TRUE,
     absolute_value_needed_for_negative_omega = TRUE,
     method = "Rangayyan (2024) eq. (3.117)"
@@ -502,7 +502,7 @@ IntPh <- function(omega) {
   if (any(abs(w) <= 1e-300)) stop("the phase is undefined at w = 0")
   ph <- ifelse(w > 0, -pi / 2, pi / 2)
   list(
-    phase = if (length(ph) == 1L) ph[\[1\]] else ph, omega = omega,
+    phase = if (length(ph) == 1L) ph[[1]] else ph, omega = omega,
     constant = TRUE, group_delay = 0,
     constant_phase_is_not_constant_delay = TRUE,
     sign_flips_for_negative_omega = TRUE,
@@ -572,7 +572,7 @@ FDiffTf <- function(z, T = 1) {
   if (Tv <= 0) stop("the sampling interval T must be positive")
   H <- .morie_rg_polyz(c(1 / Tv, -1 / Tv), z)
   list(
-    H = if (length(H) == 1L) H[\[1\]] else H, z = z, T = Tv,
+    H = if (length(H) == 1L) H[[1]] else H, z = z, T = Tv,
     zeros = 1, zero_at_dc = TRUE, dc_gain = 0,
     method = "Rangayyan (2024) eq. (3.124)"
   )
@@ -605,8 +605,8 @@ FDiffFr <- function(omega, T = 1) {
   gap <- max(Mod(raw - split))
   scalar <- length(raw) == 1L
   list(
-    H = if (scalar) raw[\[1\]] else raw, omega = omega, T = Tv,
-    split_form = if (scalar) split[\[1\]] else split,
+    H = if (scalar) raw[[1]] else raw, omega = omega, T = Tv,
+    split_form = if (scalar) split[[1]] else split,
     max_difference = gap, forms_agree = gap <= 1e-12,
     half_sample_delay = 0.5,
     method = "Rangayyan (2024) eq. (3.125)"
@@ -638,7 +638,7 @@ FDiffMag <- function(omega, T = 1) {
   w <- as.numeric(omega)
   mag <- 2 * abs(sin(w / 2)) / Tv
   list(
-    magnitude = if (length(mag) == 1L) mag[\[1\]] else mag,
+    magnitude = if (length(mag) == 1L) mag[[1]] else mag,
     omega = omega, T = Tv, dc_gain = 0, nyquist_gain = 2 / Tv,
     roughly_proportional_to_frequency = TRUE,
     book_omits_the_absolute_value = TRUE,
@@ -665,7 +665,7 @@ FDiffPh <- function(omega) {
   w <- as.numeric(omega)
   ph <- pi / 2 - w / 2
   list(
-    phase = if (length(ph) == 1L) ph[\[1\]] else ph, omega = omega,
+    phase = if (length(ph) == 1L) ph[[1]] else ph, omega = omega,
     group_delay = 0.5, slope = -0.5, quarter_turn_offset = pi / 2,
     linear_phase = TRUE,
     method = "Rangayyan (2024) eq. (3.127)"
@@ -747,8 +747,8 @@ CDiff3Tf <- function(z, T = 1) {
   gap <- max(Mod(direct - cascade))
   scalar <- length(direct) == 1L
   list(
-    H = if (scalar) direct[\[1\]] else direct, z = z, T = Tv,
-    cascade = if (scalar) cascade[\[1\]] else cascade,
+    H = if (scalar) direct[[1]] else direct, z = z, T = Tv,
+    cascade = if (scalar) cascade[[1]] else cascade,
     max_difference = gap, cascade_agrees = gap <= 1e-12,
     zeros = c(1, -1), bandpass = TRUE,
     is_first_difference_times_two_point_ma = TRUE,
@@ -778,7 +778,7 @@ CDiff3Mag <- function(omega, T = 1) {
   w <- as.numeric(omega)
   mag <- abs(sin(w)) / Tv
   list(
-    magnitude = if (length(mag) == 1L) mag[\[1\]] else mag,
+    magnitude = if (length(mag) == 1L) mag[[1]] else mag,
     omega = omega, T = Tv, dc_gain = 0, nyquist_gain = 0,
     peak_at = pi / 2, bandpass = TRUE,
     method = "Rangayyan (2024) eq. (3.130)"
@@ -805,7 +805,7 @@ CDiff3Ph <- function(omega) {
   w <- as.numeric(omega)
   ph <- pi / 2 - w
   list(
-    phase = if (length(ph) == 1L) ph[\[1\]] else ph, omega = omega,
+    phase = if (length(ph) == 1L) ph[[1]] else ph, omega = omega,
     group_delay = 1, slope = -1, quarter_turn_offset = pi / 2,
     integer_delay_can_be_undone_by_shifting = TRUE,
     method = "Rangayyan (2024) eq. (3.131)"
@@ -924,7 +924,7 @@ BWander <- function(z, T = 1, pole = 0.995) {
   if (any(Mod(den) <= 1e-300)) stop("z is the pole of H(z)")
   H <- (1 - zc^-1) / (Tv * den)
   list(
-    H = if (length(H) == 1L) H[\[1\]] else H, z = z, T = Tv, pole = p,
+    H = if (length(H) == 1L) H[[1]] else H, z = z, T = Tv, pole = p,
     zeros = 1, poles = p, dc_gain = 0,
     pole_nearly_cancels_the_zero_away_from_dc = TRUE,
     no_longer_fir = TRUE,
@@ -965,7 +965,7 @@ BWanderZ <- function(z, T = 1, pole = 0.995) {
   other <- BWander(z, T = Tv, pole = p)$H
   gap <- max(Mod(H - other))
   list(
-    H = if (length(H) == 1L) H[\[1\]] else H, z = z, T = Tv, pole = p,
+    H = if (length(H) == 1L) H[[1]] else H, z = z, T = Tv, pole = p,
     max_difference_from_eq_3_132 = gap, forms_agree = gap <= 1e-9,
     numerator_is_the_distance_to_the_zero = TRUE,
     denominator_is_the_distance_to_the_pole = TRUE,
@@ -1056,8 +1056,8 @@ BwSqMag <- function(Omega, Omega_c, N) {
   sq <- 1 / (1 + (abs(w) / Wc)^(2 * n))
   scalar <- length(sq) == 1L
   list(
-    squared_magnitude = if (scalar) sq[\[1\]] else sq,
-    magnitude = if (scalar) sqrt(sq[\[1\]]) else sqrt(sq),
+    squared_magnitude = if (scalar) sq[[1]] else sq,
+    magnitude = if (scalar) sqrt(sq[[1]]) else sqrt(sq),
     Omega = Omega, Omega_c = Wc, N = n, half_power_at_cutoff = 0.5,
     monotonic = TRUE, no_ripple = TRUE,
     cutoff_is_half_power_for_every_order = TRUE,
@@ -1092,7 +1092,7 @@ BwSqLap <- function(s, Omega_c, N) {
   }
   H <- 1 / den
   list(
-    H = if (length(H) == 1L) H[\[1\]] else H, s = s, Omega_c = Wc, N = n,
+    H = if (length(H) == 1L) H[[1]] else H, s = s, Omega_c = Wc, N = n,
     n_poles = 2L * n, half_are_right_half_plane = TRUE,
     not_a_filter_until_the_poles_are_selected = TRUE,
     method = "Rangayyan (2024) eq. (3.136)"
@@ -1183,7 +1183,7 @@ BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
   coefs <- .morie_rg_polyroots(poles)
   resid <- max(abs(Im(coefs)))
   den <- Re(coefs)
-  gain <- if (is.null(G)) den\[1\] else as.numeric(G)
+  gain <- if (is.null(G)) den[1] else as.numeric(G)
   Hs <- NULL
   if (!is.null(s)) {
     sc <- as.complex(s)
@@ -1192,7 +1192,7 @@ BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
     }, complex(1))
     if (any(Mod(d) <= 1e-300)) stop("s is a pole of H_a(s)")
     Hs <- gain / d
-    if (length(Hs) == 1L) Hs <- Hs[\[1\]]
+    if (length(Hs) == 1L) Hs <- Hs[[1]]
   }
   list(
     poles = poles, denominator = den, gain = gain, H = Hs,
@@ -1240,7 +1240,7 @@ Bilinear <- function(z, T = 1) {
   if (any(Mod(den) <= 1e-300)) stop("z = -1 maps to s = infinity")
   s <- (2 / Tv) * (1 - zc^-1) / den
   list(
-    s = if (length(s) == 1L) s[\[1\]] else s, z = z, T = Tv,
+    s = if (length(s) == 1L) s[[1]] else s, z = z, T = Tv,
     maps_lhp_into_the_unit_disc = TRUE,
     stability_is_preserved = TRUE, no_aliasing = TRUE,
     warps_the_frequency_axis = TRUE,
@@ -1281,8 +1281,8 @@ BilinUnit <- function(omega, T = 1) {
   sigma <- max(abs(Re(direct)))
   scalar <- length(direct) == 1L
   list(
-    s = if (scalar) direct[\[1\]] else direct, omega = omega, T = Tv,
-    closed_form = if (scalar) closed[\[1\]] else closed,
+    s = if (scalar) direct[[1]] else direct, omega = omega, T = Tv,
+    closed_form = if (scalar) closed[[1]] else closed,
     max_difference = gap, forms_agree = gap <= 1e-9,
     max_real_part = sigma, sigma_vanishes = sigma <= 1e-9,
     method = "Rangayyan (2024) eq. (3.140)"
@@ -1321,7 +1321,7 @@ BilinWarp <- function(omega, T = 1) {
   }
   W <- (2 / Tv) * tan(w / 2)
   list(
-    Omega = if (length(W) == 1L) W[\[1\]] else W, omega = omega, T = Tv,
+    Omega = if (length(W) == 1L) W[[1]] else W, omega = omega, T = Tv,
     nonlinear = TRUE, prewarping_is_required = TRUE,
     compression_is_severe_near_nyquist = TRUE,
     method = "Rangayyan (2024) eq. (3.141)"
@@ -1356,7 +1356,7 @@ BilinUnwarp <- function(Omega, T = 1) {
   back <- (2 / Tv) * tan(w / 2)
   gap <- if (length(W)) max(abs(W - back)) else 0
   list(
-    omega = if (length(w) == 1L) w[\[1\]] else w, Omega = Omega, T = Tv,
+    omega = if (length(w) == 1L) w[[1]] else w, Omega = Omega, T = Tv,
     round_trip_error = gap, inverts_eq_3_141 = gap <= 1e-9,
     always_inside_the_open_interval = all(abs(w) < pi),
     method = "Rangayyan (2024) eq. (3.142)"
@@ -1434,14 +1434,14 @@ BwDigital <- function(Omega_c = NULL, N = NULL, T = 1, fc = NULL,
     dd <- .morie_rg_polyz(a, z)
     if (any(Mod(dd) <= 1e-300)) stop("z is a pole of H(z)")
     Hz <- .morie_rg_polyz(b, z) / dd
-    if (length(Hz) == 1L) Hz <- Hz[\[1\]]
+    if (length(Hz) == 1L) Hz <- Hz[[1]]
   }
   list(
     b = b, a = a, gain = Gp, poles_z = pz, H = Hz, N = n,
     Omega_c = Wc, T = Tv, prewarped_here = prewarped,
     zeros_at_minus_one = n,
     zeros_are_forced_by_the_bilinear_transform = TRUE,
-    dc_gain = 1, leading_a_is_one = abs(a\[1\] - 1) < 1e-12,
+    dc_gain = 1, leading_a_is_one = abs(a[1] - 1) < 1e-12,
     method = "Rangayyan (2024) eq. (3.143)"
   )
 }
@@ -1495,8 +1495,8 @@ BwDirect <- function(omega, omega_c, N) {
   sq <- 1 / (1 + (abs(w) / wc)^(2 * n))
   scalar <- length(sq) == 1L
   list(
-    squared_magnitude = if (scalar) sq[\[1\]] else sq,
-    magnitude = if (scalar) sqrt(sq[\[1\]]) else sqrt(sq),
+    squared_magnitude = if (scalar) sq[[1]] else sq,
+    magnitude = if (scalar) sqrt(sq[[1]]) else sqrt(sq),
     omega = omega, omega_c = wc, N = n, half_power_at_cutoff = 0.5,
     no_warping = TRUE, zero_phase = TRUE, not_causal = TRUE,
     method = "Rangayyan (2024) eq. (3.145)"
@@ -1657,7 +1657,7 @@ Notch60 <- function(fs, f0 = 60, z = NULL) {
   Hz <- NULL
   if (!is.null(z)) {
     Hz <- .morie_rg_polyz(b, z)
-    if (length(Hz) == 1L) Hz <- Hz[\[1\]]
+    if (length(Hz) == 1L) Hz <- Hz[[1]]
   }
   zc <- complex(real = cos(w0), imaginary = sin(w0))
   list(
@@ -1740,7 +1740,7 @@ Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
     dd <- .morie_rg_polyz(aa, z)
     if (any(Mod(dd) <= 1e-300)) stop("z is a pole of H(z)")
     Hz <- .morie_rg_polyz(bb, z) / dd
-    if (length(Hz) == 1L) Hz <- Hz[\[1\]]
+    if (length(Hz) == 1L) Hz <- Hz[[1]]
   }
   zc <- complex(real = cos(w0), imaginary = sin(w0))
   list(
@@ -1779,12 +1779,12 @@ Comb <- function(period_samples, fs = 1000, z = NULL) {
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("fs must be positive")
   b <- numeric(N + 1L)
-  b\[1\] <- 0.5
+  b[1] <- 0.5
   b[N + 1L] <- -0.5
   Hz <- NULL
   if (!is.null(z)) {
     Hz <- .morie_rg_polyz(b, z)
-    if (length(Hz) == 1L) Hz <- Hz[\[1\]]
+    if (length(Hz) == 1L) Hz <- Hz[[1]]
   }
   list(
     b = b, a = 1, H = Hz, period_samples = N, fs = fsv,
@@ -1821,7 +1821,7 @@ FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
   if (!length(bs)) stop("need at least one numerator coefficient")
   az <- if (is.null(a)) 1 else as.numeric(a)
   if (!length(az)) stop("the denominator needs at least one coefficient")
-  if (abs(az\[1\]) <= 1e-300) stop("a_0 must not be zero")
+  if (abs(az[1]) <= 1e-300) stop("a_0 must not be zero")
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("fs must be positive")
   m <- as.integer(n_freqs)
@@ -1972,7 +1972,7 @@ GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
       tau[i] <- NA_real_
       defined[i] <- FALSE
     } else {
-      tau[i] <- Re(bb\[1\] / bb[2]) - Re(aa\[1\] / aa[2])
+      tau[i] <- Re(bb[1] / bb[2]) - Re(aa[1] / aa[2])
       defined[i] <- TRUE
     }
   }
@@ -2084,7 +2084,7 @@ BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
     dd <- .morie_rg_polyz(a, z)
     if (any(Mod(dd) <= 1e-300)) stop("z is a pole of H(z)")
     Hz <- .morie_rg_polyz(b, z) / dd
-    if (length(Hz) == 1L) Hz <- Hz[\[1\]]
+    if (length(Hz) == 1L) Hz <- Hz[[1]]
   }
   list(
     b = b, a = a, gain = G, H = Hz, N = n, cutoff_hz = fcv, fs = fsv,
@@ -2126,7 +2126,7 @@ HammingW <- function(N) {
   i <- seq_len(n) - 1L
   w <- 0.54 - 0.46 * cos(2 * pi * i / (n - 1L))
   list(
-    w = w, N = n, sum = .morie_fsum(w), endpoints = c(w\[1\], w[n]),
+    w = w, N = n, sum = .morie_fsum(w), endpoints = c(w[1], w[n]),
     reaches_zero_at_the_ends = FALSE,
     coherent_gain = .morie_fsum(w) / n,
     symmetric = all(abs(w - rev(w)) < 1e-12),
@@ -2167,7 +2167,7 @@ HannW <- function(N) {
   i <- seq_len(n) - 1L
   w <- 0.5 * (1 - cos(2 * pi * i / (n - 1L)))
   list(
-    w = w, N = n, sum = .morie_fsum(w), endpoints = c(w\[1\], w[n]),
+    w = w, N = n, sum = .morie_fsum(w), endpoints = c(w[1], w[n]),
     reaches_zero_at_the_ends = TRUE,
     coherent_gain = .morie_fsum(w) / n,
     not_the_hann_filter_of_eq_3_100 = TRUE,
@@ -2209,7 +2209,7 @@ BlackmanW <- function(N) {
   w <- 0.42 - 0.5 * cos(2 * pi * i / (n - 1L)) +
     0.08 * cos(4 * pi * i / (n - 1L))
   list(
-    w = w, N = n, sum = .morie_fsum(w), endpoints = c(w\[1\], w[n]),
+    w = w, N = n, sum = .morie_fsum(w), endpoints = c(w[1], w[n]),
     coherent_gain = .morie_fsum(w) / n,
     widest_main_lobe_of_the_three = TRUE,
     resolution_traded_for_leakage = TRUE,

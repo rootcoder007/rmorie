@@ -51,14 +51,14 @@
   jit <- rel_jitter * max(abs(sum(diag(A)) / n), 1.0)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
-      s <- A\[i, j\]
+      s <- A[i, j]
       if (j > 1L) s <- s - sum(L[i, seq_len(j - 1L)] * L[j, seq_len(j - 1L)])
       if (i == j) {
         s <- s + jit
         if (s <= 0.0) return(NULL)
         L[i, i] <- sqrt(s)
       } else {
-        L\[i, j\] <- s / L[j, j]
+        L[i, j] <- s / L[j, j]
       }
     }
   }
@@ -391,7 +391,7 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
     for (j in seq_len(n)) {
       s <- 0.0
       for (a in seq_len(ncol(C))) s <- s + (C[i, a] - C[j, a])^2
-      D\[i, j\] <- sqrt(s)
+      D[i, j] <- sqrt(s)
     }
   }
   dmax <- max(D)
@@ -403,7 +403,7 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
   corrmat <- function(ph) {
     R <- matrix(0.0, n, n)
     for (i in seq_len(n)) for (j in seq_len(n))
-      R\[i, j\] <- .sgflrt_corr(D\[i, j\], model, ph, as.numeric(kappa))
+      R[i, j] <- .sgflrt_corr(D[i, j], model, ph, as.numeric(kappa))
     diag(R) <- diag(R) + nug
     R
   }

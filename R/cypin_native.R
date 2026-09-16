@@ -115,7 +115,7 @@ morie_cypin_descriptors <- function(smiles) {
   rot <- 0L
   for (bd in bonds) {
     if (bd[3] != 1) next
-    a <- bd\[1\]
+    a <- bd[1]
     b <- bd[2]
     key <- if (a < b) sprintf("%d-%d", a, b) else sprintf("%d-%d", b, a)
     if (key %in% ringbond) next
@@ -202,7 +202,7 @@ morie_cypin_fit <- function(X, y, ridge = 1e-6, iters = 50L,
   n <- length(X)
   if (n == 0L) stop("a fit needs data")
   if (length(y) != n) stop("one label per compound")
-  p <- length(X[\[1\]]) + 1L
+  p <- length(X[[1]]) + 1L
   D <- lapply(X, function(row) c(1, as.numeric(row)))
   yy <- as.numeric(ifelse(as.numeric(y) != 0, 1, 0))
   b <- numeric(p)
@@ -258,7 +258,7 @@ morie_cypin_predict <- function(x, coefficients) {
   if (length(coefficients) != length(x) + 1L)
     stop("the model must have one coefficient per descriptor plus an ",
          "intercept")
-  morie_cypin_logistic(coefficients\[1\] +
+  morie_cypin_logistic(coefficients[1] +
                          .w3_dot(coefficients[-1], as.numeric(x)))
 }
 

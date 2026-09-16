@@ -25,10 +25,10 @@ Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
   if (mode == "row" && (is.null(z) || is.null(wb))) {
     stop("mode='row' needs the pair representation z and wb")
   }
-  s <- dim(m)\[1\]
+  s <- dim(m)[1]
   n <- dim(m)[2]
   nh <- length(wq)
-  cc <- nrow(wq[\[1\]])
+  cc <- nrow(wq[[1]])
   scale <- 1 / sqrt(cc)
 
   mn <- array(0, dim(m))
@@ -58,7 +58,7 @@ Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
       bias[[h]] <- matrix(0, n, n)
       for (i in seq_len(n)) {
         for (j in seq_len(n)) {
-          bias[[h]]\[i, j\] <- alfVdot(as.numeric(wb[h, ]), alfLnorm(z\[i, j, \]))
+          bias[[h]][i, j] <- alfVdot(as.numeric(wb[h, ]), alfLnorm(z[i, j, ]))
         }
       }
     }
@@ -75,7 +75,7 @@ Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
         if (mode == "row") {
           for (j in seq_len(n)) {
             logits[j] <- scale * alfVdot(q[[h]][si, i, ], k[[h]][si, j, ]) +
-              bias[[h]]\[i, j\]
+              bias[[h]][i, j]
           }
         } else {
           for (t2 in seq_len(s)) {

@@ -64,9 +64,9 @@ Erstst <- function(x, lags = 1, trend = FALSE) {
     XtX[a, c] <- sum(rows[, a] * rows[, c])
   e1 <- c(1, rep(0, kk - 1L))
   inv <- .s03cholsolve(XtX, e1)
-  se <- sqrt(s2 * inv\[1\])
-  stat <- b\[1\] / se
-  .t1_result(estimate = stat, statistic = stat, rho = b\[1\], se = se,
+  se <- sqrt(s2 * inv[1])
+  stat <- b[1] / se
+  .t1_result(estimate = stat, statistic = stat, rho = b[1], se = se,
              abar = abar, lags = p, nobs = nobs, n = n,
              method = "Elliott-Rothenberg-Stock GLS-detrended ADF")
 }

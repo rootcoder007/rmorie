@@ -20,7 +20,7 @@ Pareff <- function(pe, RR, se_RR = NULL, alpha = 0.05) {
   p <- as.numeric(pe)
   r <- as.numeric(RR)
   if (r <= 0) stop("Pareff: RR must be positive")
-  if (!(p >= 0 && p <= 1)) stop("Pareff: pe must lie in \[0, 1\]")
+  if (!(p >= 0 && p <= 1)) stop("Pareff: pe must lie in [0, 1]")
   paf <- p * (r - 1) / (p * (r - 1) + 1)
   se <- NaN
   lo <- NaN

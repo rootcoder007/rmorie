@@ -45,5 +45,5 @@ Tmlevar <- function(ic, level = 0.95) {
              se_psi_upper = sqrt(hi / n),
              kurtosis = (sum(d^4) / n) / s2^2, ic_mean = m,
              n = as.numeric(n),
-             method = "Variance targeting: sigma^2 = E\[D*^2\] with its own IC")
+             method = "Variance targeting: sigma^2 = E[D*^2] with its own IC")
 }

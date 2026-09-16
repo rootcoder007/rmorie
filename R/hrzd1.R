@@ -56,7 +56,7 @@ hrzd1 <- function(t, x, event) {
       }
     }
     info <- matrix(0, p, p)
-    for (i in 1:p) for (j in 1:p) info\[i, j\] <- sum(ev * var_X[, i, j])
+    for (i in 1:p) for (j in 1:p) info[i, j] <- sum(ev * var_X[, i, j])
     step <- tryCatch(solve(info + 1e-8 * diag(p), score),
       error = function(e) .morie_ginv(info) %*% score
     )

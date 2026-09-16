@@ -637,7 +637,7 @@ Ppois <- function(q, lambda, lower_tail = TRUE) {
 Qpois <- function(p, lambda) {
   # smallest k with cdf(k) >= p, as R defines it
   vapply(p, function(pp) {
-    if (pp < 0 || pp > 1) stop("p must lie in \[0, 1\]")
+    if (pp < 0 || pp > 1) stop("p must lie in [0, 1]")
     k <- 0
     while (Ppois(k, lambda) < pp - 1e-10) k <- k + 1
     k
@@ -659,7 +659,7 @@ Qpois <- function(p, lambda) {
 #' @examples
 #' Dbinom(x = c(1, 2, 3, 4, 5, 6, 7, 8), size = 5L, prob = 0.5)
 Dbinom <- function(x, size, prob, log = FALSE) {
-  if (prob < 0 || prob > 1) stop("prob must lie in \[0, 1\]")
+  if (prob < 0 || prob > 1) stop("prob must lie in [0, 1]")
   k <- round(x)
   lg <- vapply(k, function(kk) {
     if (kk < 0 || kk > size) {
@@ -721,7 +721,7 @@ Pbinom <- function(q, size, prob, lower_tail = TRUE) {
 #' Qbinom(p = 0.5, size = 5L, prob = 0.5)
 Qbinom <- function(p, size, prob) {
   vapply(p, function(pp) {
-    if (pp < 0 || pp > 1) stop("p must lie in \[0, 1\]")
+    if (pp < 0 || pp > 1) stop("p must lie in [0, 1]")
     k <- 0
     while (k < size && Pbinom(k, size, prob) < pp - 1e-10) k <- k + 1
     k

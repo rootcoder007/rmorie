@@ -219,7 +219,7 @@ morie_two_way_mundlak <- function(Y, unit, period, X) {
   for (g in names(map_u)) {
     idx <- map_u[[g]]
     s <- numeric(px)
-    for (i in idx) for (j in seq_len(px)) s[j] <- s[j] + Xm\[i, j\]
+    for (i in idx) for (j in seq_len(px)) s[j] <- s[j] + Xm[i, j]
     ubar[[g]] <- s / length(idx)
   }
   tbar <- vector("list", length(map_t))
@@ -227,7 +227,7 @@ morie_two_way_mundlak <- function(Y, unit, period, X) {
   for (g in names(map_t)) {
     idx <- map_t[[g]]
     s <- numeric(px)
-    for (i in idx) for (j in seq_len(px)) s[j] <- s[j] + Xm\[i, j\]
+    for (i in idx) for (j in seq_len(px)) s[j] <- s[j] + Xm[i, j]
     tbar[[g]] <- s / length(idx)
   }
   rows <- matrix(0, p$n, 3L * px)
@@ -321,7 +321,7 @@ morie_etwfe <- function(Y, unit, period, first_treated, X = NULL) {
   att_values <- beta[seq_len(n_cells) + 1L]
   att <- setNames(att_values, cell_keys)
   cells_list <- lapply(cell_keys,
-                       function(k) strsplit(k, "\r", fixed = TRUE)[\[1\]])
+                       function(k) strsplit(k, "\r", fixed = TRUE)[[1]])
 
   list(
     estimate = mean(att_values),

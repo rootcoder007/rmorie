@@ -84,7 +84,7 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
     for (j in seq_len(d)) {
       s <- b[j]
       for (a in seq_len(p)) s <- s + XX[i, a] * W[a, j]
-      Z\[i, j\] <- cc * cos(s)
+      Z[i, j] <- cc * cos(s)
     }
   }
   Ka <- matrix(0, n, n)
@@ -93,9 +93,9 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
   for (i in seq_len(n)) {
     for (k in seq_len(n)) {
       s <- sum(Z[i, ] * Z[k, ])
-      Ka\[i, k\] <- s
-      Ke\[i, k\] <- exp(-g * sum((XX[i, ] - XX[k, ])^2))
-      err <- err + abs(s - Ke\[i, k\])
+      Ka[i, k] <- s
+      Ke[i, k] <- exp(-g * sum((XX[i, ] - XX[k, ])^2))
+      err <- err + abs(s - Ke[i, k])
     }
   }
   list(estimate = err / (n * n), Z = Z, K_approx = Ka, K_exact = Ke, W = W,

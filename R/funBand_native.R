@@ -167,7 +167,7 @@ morie_funBand <- function(Y, alpha = 0.05, x = NULL, lam = NULL,
   }
 
   if (is.null(lam)) {
-    lo <- as.numeric(log_lambda_range\[1\])
+    lo <- as.numeric(log_lambda_range[1])
     hi <- as.numeric(log_lambda_range[2])
     nl <- as.integer(n_lambda)
     grid <- 10 ^ (lo + (hi - lo) * (seq_len(nl) - 1L) / (nl - 1))

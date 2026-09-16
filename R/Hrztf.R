@@ -4,7 +4,7 @@
 
 # T_n evaluated at an observation.  Page 219: T_n(y) "is replaced with
 # an arbitrarily large negative number if y < y2 and an arbitrarily
-# large positive number if y > y1".  Inside \[y2, y1\] the grid values
+# large positive number if y > y1".  Inside [y2, y1] the grid values
 # are interpolated.
 #' T_n evaluated at an observation.  Page 219: T_n(y) "is replaced with
 #'
@@ -105,7 +105,7 @@ Hrztf <- function(x, y, ny = 21L, nz = 21L, nu = 25L, bandwidth = NULL) {
 
   fin <- U[abs(U) < .hrztf_big / 2]
   if (length(fin) < 2L) {
-    stop(paste("no observation of Y falls inside \[y2, y1\], so F is not",
+    stop(paste("no observation of Y falls inside [y2, y1], so F is not",
                "estimable; widen the interval."))
   }
   ulo <- min(fin)

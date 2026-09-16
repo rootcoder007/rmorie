@@ -218,13 +218,13 @@ ngcf_stack_layers <- function(E0, adjacency, Ws, affinity = TRUE, slope = 0.2) {
   n <- nrow(E)
   layers <- list(E)
   for (W_pair in Ws) {
-    W1 <- as.matrix(W_pair[\[1\]])
+    W1 <- as.matrix(W_pair[[1]])
     W2 <- as.matrix(W_pair[[2]])
     E <- ngcf_propagate(E, adjacency, W1, W2, affinity, slope)
     layers[[length(layers) + 1L]] <- E
   }
   L_total <- length(layers)
-  d_emb <- ncol(layers[\[1\]])
+  d_emb <- ncol(layers[[1]])
   final <- matrix(0, nrow = n, ncol = d_emb * L_total)
   for (v in seq_len(n)) {
     final[v, ] <- unlist(lapply(layers, function(layer) layer[v, ]))

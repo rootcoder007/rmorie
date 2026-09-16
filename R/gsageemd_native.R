@@ -65,7 +65,7 @@ morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
     for (i in seq_len(nrow(V)))
       for (o in seq_len(nrow(W))) {
         s <- 0
-        for (j in seq_len(d)) s <- s + W[o, j] * V\[i, j\]
+        for (j in seq_len(d)) s <- s + W[o, j] * V[i, j]
         H[i, o] <- max(0, s)
       }
     apply(H, 2, max)

@@ -23,7 +23,7 @@
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 6
 #' @export
 Alfevo <- function(m, z, w, nblock = 1, drop = NULL) {
-  s <- dim(m)\[1\]
+  s <- dim(m)[1]
   n <- dim(m)[2]
 
   # Two-layer transition MLP -- Algorithms 9 and 15.
@@ -84,7 +84,7 @@ Alfevo <- function(m, z, w, nblock = 1, drop = NULL) {
     u <- array(0, dim(z))
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        u\[i, j, \] <- trans(z\[i, j, \], w$pt1, w$pt2)
+        u[i, j, ] <- trans(z[i, j, ], w$pt1, w$pt2)
       }
     }
     z <- z + u

@@ -63,7 +63,7 @@ Autoint <- function(X, y = NULL, K = 1, Wq = NULL, Wk = NULL, Wv = NULL,
       }
       a <- .s03softmax(logits)
       if (h == 0L) att0[[length(att0) + 1L]] <- a
-      for (j in seq_along(vv[\[1\]])) {
+      for (j in seq_along(vv[[1]])) {
         t <- 0
         for (l in seq_len(M)) t <- t + a[l] * vv[[l]][j]
         acc[m, j] <- acc[m, j] + t

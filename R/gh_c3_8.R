@@ -24,7 +24,7 @@ Momprior <- function(moments) {
   m <- .t1_vec(moments)
   N <- length(m)
   if (N < 1L) stop("at least the zeroth moment is required")
-  if (abs(m\[1\] - 1) > 1e-12)
+  if (abs(m[1] - 1) > 1e-12)
     stop("m_0 must equal 1 for a probability measure")
   tri <- list(m)
   cur <- m

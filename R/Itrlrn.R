@@ -46,7 +46,7 @@ Itrlrn <- function(state, action, reward, time, gamma = 1) {
   T <- length(stages)
   if (T == 0L) stop("iterative_q_learning: no stages")
   idx <- lapply(stages, function(s) which(tm == s))
-  m <- length(idx[\[1\]])
+  m <- length(idx[[1]])
   if (any(vapply(idx, length, 0L) != m)) stop("iterative_q_learning: stages have different numbers of records")
   p <- 2L + 2L * k
   if (m <= p) stop("iterative_q_learning: too few records per stage for the Q-model")
@@ -67,7 +67,7 @@ Itrlrn <- function(state, action, reward, time, gamma = 1) {
     shares[t] <- sum(q1 > q0) / m
     values[t] <- sum(Vnext) / m
   }
-  .t1_result(estimate = values\[1\], value = values\[1\], stage_value = values,
+  .t1_result(estimate = values[1], value = values[1], stage_value = values,
              coef = unlist(betas), share_treated = shares, n_stages = T,
              n_subjects = m, gamma = gamma, n = n,
              method = "Q_t(s,a) <- R_t + gamma max_a' Q_{t+1}(s',a') by least squares, Murphy (2003)")

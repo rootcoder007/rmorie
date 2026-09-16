@@ -45,7 +45,7 @@ Warpedgp <- function(X, y, X_test = NULL, warp = "identity", lam = 1e-2,
     d <- der(v)
     lj <- lj + (if (d > 0) log(d) else -Inf)
   }
-  list(estimate = if (length(med)) med\[1\] else NaN, median = med,
+  list(estimate = if (length(med)) med[1] else NaN, median = med,
        warped_mean = fit$pred, var = fit$var, log_jacobian = lj,
        warp = as.character(warp),
        method = "Warped GP: fit in the warped space, invert for the predictive median (Snelson et al. 2004)")

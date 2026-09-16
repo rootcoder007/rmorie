@@ -26,7 +26,7 @@ Marba <- function(g, n, rho) {
   nn <- as.numeric(n)
   r <- as.numeric(rho)
   if (nn < 2) stop("n must be at least two")
-  if (r < -1 || r > 1) stop("rho must lie in \[-1, 1\]")
+  if (r < -1 || r > 1) stop("rho must lie in [-1, 1]")
   df <- nn - 1
   J <- 1 - 3 / (4 * df - 1)
   gg <- as.numeric(g)

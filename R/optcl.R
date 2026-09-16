@@ -33,7 +33,7 @@ optcl <- function(x, votes = NULL) {
   }
   y <- as.integer(votes)
   xs <- sort(x)
-  cand <- c(xs\[1\] - 1, (xs[-length(xs)] + xs[-1]) / 2, xs[length(xs)] + 1)
+  cand <- c(xs[1] - 1, (xs[-length(xs)] + xs[-1]) / 2, xs[length(xs)] + 1)
   best_cc <- -1L
   best_cut <- stats::median(x)
   best_pol <- 1L

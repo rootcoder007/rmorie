@@ -60,14 +60,14 @@ Snpblr <- function(y, M, lam = NULL, h2 = NULL, freq = NULL) {
   if (lam <= 0) stop("lam must be positive", call. = FALSE)
   Z <- sweep(Mm, 2, 2 * p, "-")
   C <- matrix(0, m + 1, m + 1)
-  C\[1, 1\] <- n
+  C[1, 1] <- n
   zsum <- colSums(Z)
   C[1, -1] <- zsum
-  C\[-1, 1\] <- zsum
+  C[-1, 1] <- zsum
   C[-1, -1] <- crossprod(Z) + lam * diag(m)
   rhs <- c(sum(y), as.numeric(crossprod(Z, y)))
   sol <- solve(C, rhs)
-  mu <- sol\[1\]
+  mu <- sol[1]
   u <- sol[-1]
   gebv <- as.numeric(Z %*% u)
   list(

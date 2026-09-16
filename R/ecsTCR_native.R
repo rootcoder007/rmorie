@@ -136,16 +136,16 @@
 #' @export
 .ecstcr_rk4 <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   k1 <- .ecstcr_deriv(T, TD, F, lam, gam, eps, C, CD)
-  k2 <- .ecstcr_deriv(T + 0.5 * h * k1\[1\], TD + 0.5 * h * k1[2], F, lam,
+  k2 <- .ecstcr_deriv(T + 0.5 * h * k1[1], TD + 0.5 * h * k1[2], F, lam,
                       gam, eps, C, CD)
-  k3 <- .ecstcr_deriv(T + 0.5 * h * k2\[1\], TD + 0.5 * h * k2[2], F, lam,
+  k3 <- .ecstcr_deriv(T + 0.5 * h * k2[1], TD + 0.5 * h * k2[2], F, lam,
                       gam, eps, C, CD)
-  k4 <- .ecstcr_deriv(T + h * k3\[1\], TD + h * k3[2], F, lam, gam, eps,
+  k4 <- .ecstcr_deriv(T + h * k3[1], TD + h * k3[2], F, lam, gam, eps,
                       C, CD)
   # The four-term combination goes through the compensated sum for the
   # same reason the dot products do: it is the one accumulation left in
   # the step, and a single differing bit here compounds over the run.
-  c(T + h * .ecstcr_csum(c(k1\[1\], 2 * k2\[1\], 2 * k3\[1\], k4\[1\])) / 6,
+  c(T + h * .ecstcr_csum(c(k1[1], 2 * k2[1], 2 * k3[1], k4[1])) / 6,
     TD + h * .ecstcr_csum(c(k1[2], 2 * k2[2], 2 * k3[2], k4[2])) / 6)
 }
 
@@ -168,7 +168,7 @@
 #' @export
 .ecstcr_euler <- function(T, TD, F, lam, gam, eps, C, CD, h) {
   d <- .ecstcr_deriv(T, TD, F, lam, gam, eps, C, CD)
-  c(T + h * d\[1\], TD + h * d[2])
+  c(T + h * d[1], TD + h * d[2])
 }
 
 # One step of the exact solution for a forcing held constant over the
@@ -273,13 +273,13 @@ morie_ecsTCR_integrate <- function(forcing, lam, gamma = 0.7,
   Ts <- numeric(n + 1L)
   TDs <- numeric(n + 1L)
   N <- numeric(n)
-  Ts\[1\] <- T
-  TDs\[1\] <- TD
+  Ts[1] <- T
+  TDs[1] <- TD
   for (i in seq_len(n)) {
     F <- as.numeric(forcing[i])
     N[i] <- F - lam * T - (epsilon - 1) * gamma * (T - TD)
     st <- step(T, TD, F, lam, gamma, epsilon, C, C_deep, dt)
-    T <- st\[1\]
+    T <- st[1]
     TD <- st[2]
     Ts[i + 1L] <- T
     TDs[i + 1L] <- TD
@@ -383,7 +383,7 @@ morie_ecsTCR <- function(model_run = NULL, CO2_traj = NULL,
       stop(sprintf("ecsTCR: temperature has %d entries and imbalance %d",
                    length(Tv), length(Nv)), call. = FALSE)
     si <- .ecstcr_ols(Tv, Nv)
-    lam_fit <- -si\[1\]
+    lam_fit <- -si[1]
     if (lam_fit <= 0)
       stop(sprintf(paste("ecsTCR: the regression gives a non-positive",
                          "feedback parameter (%g), so the system has no",
@@ -391,7 +391,7 @@ morie_ecsTCR <- function(model_run = NULL, CO2_traj = NULL,
     scale <- log(forcing_multiple) / log(2)
     f2x <- si[2] / scale
     lam <- lam_fit
-    fitted <- list(slope = si\[1\], intercept = si[2],
+    fitted <- list(slope = si[1], intercept = si[2],
                    forcing_multiple = forcing_multiple)
   }
 
@@ -425,7 +425,7 @@ morie_ecsTCR <- function(model_run = NULL, CO2_traj = NULL,
   # pre-industrial.
   idx <- length(traj)
   hit <- which(traj >= 2)
-  if (length(hit)) idx <- hit\[1\]
+  if (length(hit)) idx <- hit[1]
   tcr <- run$temperature[idx + 1L]
 
   list(ecs = ecs, tcr = tcr,
@@ -437,7 +437,7 @@ morie_ecsTCR <- function(model_run = NULL, CO2_traj = NULL,
        imbalance = run$imbalance,
        fitted = fitted,
        charney_range = .ECSTCR_CHARNEY,
-       within_charney = (ecs >= .ECSTCR_CHARNEY\[1\] &&
+       within_charney = (ecs >= .ECSTCR_CHARNEY[1] &&
                          ecs <= .ECSTCR_CHARNEY[2]),
        route = route, solver = solver,
        method = sprintf(paste("two-layer energy balance (Held et al.",

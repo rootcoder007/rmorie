@@ -110,7 +110,7 @@ Hrzphv <- function(t, x, event = NULL, frailty_dist = "gamma", theta = NULL,
     A
   }
   negll <- function(par, A, dA) {
-    tau <- par\[1\]
+    tau <- par[1]
     b <- par[-1]
     th <- exp(min(max(tau, -30), 30))
     tot <- 0
@@ -119,7 +119,7 @@ Hrzphv <- function(t, x, event = NULL, frailty_dist = "gamma", theta = NULL,
     }
     for (i in seq_len(n)) {
       e <- 0
-      for (k in seq_len(p)) e <- e + XX\[i, k\] * b[k]
+      for (k in seq_len(p)) e <- e + XX[i, k] * b[k]
       w <- exp(min(max(-e, -300), 300))
       if (ev[i] != 0) tot <- tot - e
       tot <- tot - (1 + 1 / th) * log(1 + th * A[i] * w)
@@ -174,11 +174,11 @@ Hrzphv <- function(t, x, event = NULL, frailty_dist = "gamma", theta = NULL,
         }
       }
     }
-    th <- exp(min(max(par\[1\], -30), 30))
+    th <- exp(min(max(par[1], -30), 30))
     b <- par[-1]
     for (i in seq_len(n)) {
       e <- 0
-      for (k in seq_len(p)) e <- e + XX\[i, k\] * b[k]
+      for (k in seq_len(p)) e <- e + XX[i, k] * b[k]
       w <- exp(min(max(-e, -300), 300))
       Z[i] <- (1 + th * (if (ev[i] != 0) 1 else 0)) / (1 + th * A[i] * w)
     }

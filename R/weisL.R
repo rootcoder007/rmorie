@@ -32,7 +32,7 @@ Wlkernel <- function(G1, G2, K = 3, labels1 = NULL, labels2 = NULL,
     nb <- vector("list", n)
     for (i in seq_len(n)) {
       v <- integer(0)
-      for (j in seq_len(n)) if (i != j && A\[i, j\] != 0) v <- c(v, j)
+      for (j in seq_len(n)) if (i != j && A[i, j] != 0) v <- c(v, j)
       nb[[i]] <- v
     }
     nb

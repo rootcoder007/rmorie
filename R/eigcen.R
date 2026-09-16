@@ -23,6 +23,6 @@ Eigcent <- function(A) {
   if (sum(v) < 0) v <- -v
   mx <- max(abs(v))
   .t1_result(centrality = if (mx > 0) v / mx else v, unit = v,
-             eigenvalue = e$values\[1\], n = n,
+             eigenvalue = e$values[1], n = n,
              method = "Eigenvector centrality (principal eigenvector)")
 }

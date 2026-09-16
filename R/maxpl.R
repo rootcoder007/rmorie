@@ -42,6 +42,6 @@ Maxpl <- function(x, kernel, stride) {
     pooled[i] <- v[best]
     where[i] <- best - 1L
   }
-  list(estimate = pooled\[1\], pooled = pooled, argmax = where, n = m,
+  list(estimate = pooled[1], pooled = pooled, argmax = where, n = m,
        method = "y[i] = max(x[i*S : i*S+P]), Chapter 13 Sect. 13.4 with L' = (L-P)/S + 1")
 }

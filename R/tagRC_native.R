@@ -29,7 +29,7 @@ tripartite_graph <- function(triples) {
   nodes <- character(0)
   edges <- list()
   for (tr in triples) {
-    u <- tr[\[1\]]
+    u <- tr[[1]]
     t <- tr[[2]]
     r <- tr[[3]]
     nu <- paste0("u:", u)
@@ -38,7 +38,7 @@ tripartite_graph <- function(triples) {
     nodes <- c(nodes, nu, nt, nr)
     pairs <- list(c(nu, nt), c(nt, nr), c(nu, nr))
     for (pr in pairs) {
-      a <- pr\[1\]
+      a <- pr[1]
       b <- pr[2]
       key <- paste(a, b, sep = "\r")
       if (is.null(edges[[key]])) edges[[key]] <- 0
@@ -51,8 +51,8 @@ tripartite_graph <- function(triples) {
   nodes <- sort(unique(nodes))
   adj <- list()
   for (k in names(edges)) {
-    parts <- strsplit(k, "\r", fixed = TRUE)[\[1\]]
-    a <- parts\[1\]
+    parts <- strsplit(k, "\r", fixed = TRUE)[[1]]
+    a <- parts[1]
     b <- parts[2]
     if (is.null(adj[[a]])) adj[[a]] <- list()
     adj[[a]][[b]] <- as.numeric(edges[[k]])

@@ -62,7 +62,7 @@
 #' @export
 .pibmd_quantile <- function(sorted_v, u) {
   n <- length(sorted_v)
-  if (n == 1L) return(sorted_v\[1\])
+  if (n == 1L) return(sorted_v[1])
   h <- (n - 1L) * u
   lo <- floor(h)
   hi <- min(lo + 1, n - 1)
@@ -208,12 +208,12 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
                   "list(mean = ..., sd = ...) for a normal prior known only ",
                   "by its moments"))
     mm <- .pibmd_moments(p)
-    mp <- mm\[1\]
+    mp <- mm[1]
     sp2 <- mm[2]
   }
 
   mq2 <- .pibmd_moments(q)
-  mq <- mq2\[1\]
+  mq <- mq2[1]
   sq2 <- mq2[2]
   if (sp2 <= .pibmd_EPS)
     stop(paste0("pibmd: the prior has no spread, so every divergence from ",

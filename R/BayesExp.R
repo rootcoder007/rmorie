@@ -18,7 +18,7 @@
 BayesExp <- function(p_a = 0.02, p_z_given_a = 0.95, p_z_given_not_a = 0.1) {
   for (p in c(p_a, p_z_given_a, p_z_given_not_a)) {
     if (length(p) != 1L || is.na(p) || p < 0 || p > 1) {
-      stop("probabilities must be single values in \[0, 1\].", call. = FALSE)
+      stop("probabilities must be single values in [0, 1].", call. = FALSE)
     }
   }
   num <- p_z_given_a * p_a

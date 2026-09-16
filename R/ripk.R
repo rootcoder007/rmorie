@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Internal: proportion of the circle of radius `rad` centred at (x, y)
-# that lies inside the rectangle \[x0, x1\] x \[y0, y1\] -- Ripley's edge
+# that lies inside the rectangle [x0, x1] x [y0, y1] -- Ripley's edge
 # correction weight w(s_i, s_j) (Schabenberger & Gotway 2005, p. 102).
 # Two opposite sides can never both be crossed by the same angle, so the
 # only overlaps between the four "outside" arcs are the four corners and
@@ -32,7 +32,7 @@
   outside <- 2 * sum(a)
   # (left, bottom), (left, top), (right, bottom), (right, top)
   for (p in list(c(1L, 3L), c(1L, 4L), c(2L, 3L), c(2L, 4L))) {
-    v <- a[p\[1\]] + a[p[2]] - pi / 2
+    v <- a[p[1]] + a[p[2]] - pi / 2
     if (v > 0) outside <- outside - v
   }
   w <- 1 - outside / (2 * pi)
@@ -77,7 +77,7 @@ Ripk <- function(points, window, r) {
   if (n < 2L) stop("`points` needs at least 2 events")
   w <- as.numeric(window)
   if (length(w) != 4L) stop("`window` must be (xmin, xmax, ymin, ymax)")
-  x0 <- w\[1\]
+  x0 <- w[1]
   x1 <- w[2]
   y0 <- w[3]
   y1 <- w[4]
@@ -100,8 +100,8 @@ Ripk <- function(points, window, r) {
     for (j in seq_len(n)) {
       if (i == j) next
       dij <- sqrt((px[i] - px[j])^2 + (py[i] - py[j])^2)
-      d\[i, j\] <- dij
-      wt\[i, j\] <- .ripk_weight(px[i], py[i], dij, x0, x1, y0, y1)
+      d[i, j] <- dij
+      wt[i, j] <- .ripk_weight(px[i], py[i], dij, x0, x1, y0, y1)
     }
   }
 
@@ -115,7 +115,7 @@ Ripk <- function(points, window, r) {
     acc <- 0
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        if (i != j && d\[i, j\] <= h) acc <- acc + 1 / wt\[i, j\]
+        if (i != j && d[i, j] <= h) acc <- acc + 1 / wt[i, j]
       }
     }
     kh <- area * acc / (n * n)
@@ -128,7 +128,7 @@ Ripk <- function(points, window, r) {
       if (bdist[i] > h) {
         m <- m + 1L
         for (j in seq_len(n)) {
-          if (i != j && d\[i, j\] <= h) cnt <- cnt + 1
+          if (i != j && d[i, j] <= h) cnt <- cnt + 1
         }
       }
     }

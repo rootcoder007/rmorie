@@ -237,7 +237,7 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
     is.atomic(e) && length(e) == 1L && !is.list(e)
   }, logical(1))
   if (all(scal)) {
-    types <- vapply(x, function(e) class(e)\[1\], character(1))
+    types <- vapply(x, function(e) class(e)[1], character(1))
     u <- unique(types[types != "logical" | !vapply(x, function(e) {
       length(e) == 1 && is.na(e)
     }, logical(1))])
@@ -260,8 +260,8 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
   }, logical(1))
   if (all(is_vec) && length(x) > 1L) {
     lens <- vapply(x, length, integer(1))
-    typs <- vapply(x, function(e) class(e)\[1\], character(1))
-    if (length(unique(lens)) == 1L && lens\[1\] > 1L &&
+    typs <- vapply(x, function(e) class(e)[1], character(1))
+    if (length(unique(lens)) == 1L && lens[1] > 1L &&
       length(unique(typs)) == 1L) {
       return(do.call(rbind, x))
     }
@@ -354,7 +354,7 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
       paste0("\"", esc(as.character(e)), "\"")
     }
     if (length(v) == 1L && auto_unbox) {
-      return(atom(v[\[1\]]))
+      return(atom(v[[1]]))
     }
     paste0(
       "[", paste(vapply(v, atom, character(1)), collapse = ","),
@@ -433,8 +433,8 @@ morie_xml_sax <- function(txt, on_start = NULL, on_text = NULL,
     )
   }
   n_elem <- 0L
-  pos <- gregexpr("<[^>]+>", txt, perl = TRUE)[\[1\]]
-  if (pos\[1\] == -1L) {
+  pos <- gregexpr("<[^>]+>", txt, perl = TRUE)[[1]]
+  if (pos[1] == -1L) {
     return(invisible(0L))
   }
   lens <- attr(pos, "match.length")
@@ -470,8 +470,8 @@ morie_xml_sax <- function(txt, on_start = NULL, on_text = NULL,
     am <- gregexpr(
       "([A-Za-z_][A-Za-z0-9_.:-]*)\\s*=\\s*\"([^\"]*)\"", rest,
       perl = TRUE
-    )[\[1\]]
-    if (am\[1\] != -1L) {
+    )[[1]]
+    if (am[1] != -1L) {
       alen <- attr(am, "match.length")
       for (j in seq_along(am)) {
         kv <- substr(rest, am[j], am[j] + alen[j] - 1L)

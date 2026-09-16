@@ -48,7 +48,7 @@ Catnext <- function(items, theta, administered = NULL, exposure = NULL,
   }
   ex <- if (is.null(exposure)) rep(1, J) else .t1_vec(exposure)
   if (length(ex) != J) stop("exposure must have one entry per item")
-  if (any(ex < 0 | ex > 1)) stop("exposure multipliers must lie in \[0, 1\]")
+  if (any(ex < 0 | ex > 1)) stop("exposure multipliers must lie in [0, 1]")
   e <- exp(D * It[, 1] * (theta - It[, 2]))
   p <- It[, 3] + (It[, 4] - It[, 3]) * e / (1 + e)
   p <- pmin(1 - 1e-10, pmax(1e-10, p))

@@ -107,7 +107,7 @@ smfd_bspline_basis <- function(x, knots, degree = 3L) {
   B <- matrix(0, nrow = n, ncol = p)
   for (k in seq_len(p))
     for (i in seq_len(n))
-      B\[i, k\] <- smfd_bspline_one(x[i], k, degree, knots)
+      B[i, k] <- smfd_bspline_one(x[i], k, degree, knots)
   B
 }
 

@@ -37,7 +37,7 @@ Erdosg <- function(n, p) {
   n <- as.integer(n)
   p <- as.numeric(p)
   if (n < 1L) stop("n must be positive")
-  if (!(p >= 0 && p <= 1)) stop("p must lie in \[0, 1\]")
+  if (!(p >= 0 && p <= 1)) stop("p must lie in [0, 1]")
   m <- (n * (n - 1L)) %/% 2L
   adj <- matrix(0L, n, n)
   k <- 0L
@@ -45,7 +45,7 @@ Erdosg <- function(n, p) {
   if (n > 1L) for (i in seq_len(n)) {
     if (i < n) for (j in (i + 1L):n) {
       if (.uu(k) < p) {
-        adj\[i, j\] <- 1L
+        adj[i, j] <- 1L
         adj[j, i] <- 1L
         edges <- edges + 1L
       }
@@ -61,7 +61,7 @@ Erdosg <- function(n, p) {
     q <- s
     size <- 0L
     while (length(q)) {
-      v <- q\[1\]
+      v <- q[1]
       q <- q[-1]
       size <- size + 1L
       for (w in seq_len(n)) if (adj[v, w] == 1L && !seen[w]) {

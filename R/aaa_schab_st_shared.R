@@ -184,7 +184,7 @@
   if (a <= 0 || c <= 0) stop("`a` and `c` must be positive", call. = FALSE)
   if (!(gamma > 0 && gamma <= 1)) stop("`gamma` must lie in (0, 1]", call. = FALSE)
   if (!(alpha > 0 && alpha <= 1)) stop("`alpha` must lie in (0, 1]", call. = FALSE)
-  if (!(beta >= 0 && beta <= 1)) stop("`beta` must lie in \[0, 1\]", call. = FALSE)
+  if (!(beta >= 0 && beta <= 1)) stop("`beta` must lie in [0, 1]", call. = FALSE)
   if (sigma2 < 0) stop("`sigma2` must be non-negative", call. = FALSE)
   psi <- a * lg$k^(2 * alpha) + 1 # eq (9.8)
   (sigma2 / psi^(beta * d / 2)) * exp(-c * lg$h^(2 * gamma) / psi^(beta * gamma))
@@ -271,7 +271,7 @@
   rt <- as.numeric(rt)
   p <- list(...)
   if (any(abs(rs) > 1 + 1e-12) || any(abs(rt) > 1 + 1e-12)) {
-    stop("`rs` and `rt` must be correlations in \[-1, 1\]", call. = FALSE)
+    stop("`rs` and `rt` must be correlations in [-1, 1]", call. = FALSE)
   }
   w <- rs * rt # eq (9.14): the pgf evaluated at w = Rs(h) Rt(k)
   if (identical(distribution, "poisson")) {
@@ -283,7 +283,7 @@
     n <- if (is.null(p$n)) 1L else as.integer(p$n)
     pi_ <- if (is.null(p$pi)) 0.5 else as.numeric(p$pi)
     if (n < 1 || pi_ < 0 || pi_ > 1) {
-      stop("`n` >= 1 and `pi` in \[0, 1\] required", call. = FALSE)
+      stop("`n` >= 1 and `pi` in [0, 1] required", call. = FALSE)
     }
     return((pi_ * (w - 1) + 1)^n)
   }
@@ -315,8 +315,8 @@
   out <- numeric(n) # eq (9.13)
   for (i in seq_len(nrow(pmf))) {
     for (j in seq_len(ncol(pmf))) {
-      if (pmf\[i, j\] == 0) next
-      out <- out + rs^(i - 1) * rt^(j - 1) * pmf\[i, j\]
+      if (pmf[i, j] == 0) next
+      out <- out + rs^(i - 1) * rt^(j - 1) * pmf[i, j]
     }
   }
   out
@@ -378,7 +378,7 @@
   # Schabenberger & Gotway result. Nodes are the eigenvalues of the Jacobi
   # matrix; weights are mu_0 times the squared first eigenvector components,
   # with mu_0 the ZEROTH MOMENT of the weight function -- 2 for Legendre on
-  # \[-1, 1\]. The Hermite rule elsewhere carries no such factor because there
+  # [-1, 1]. The Hermite rule elsewhere carries no such factor because there
   # the Gaussian weight integrates to 1.
   n <- as.integer(n)
   if (n < 1L) stop("`n` must be positive", call. = FALSE)
@@ -416,7 +416,7 @@
   x <- as.numeric(x)
   theta <- seq(0, pi, length.out = as.integer(n_quad) + 1L)
   wt <- rep(1, length(theta))
-  wt\[1\] <- 0.5
+  wt[1] <- 0.5
   wt[length(wt)] <- 0.5
   step <- pi / as.integer(n_quad)
   vapply(x, function(xi) sum(wt * cos(xi * sin(theta))) * step / pi, numeric(1))
@@ -676,7 +676,7 @@
 #' @export
 .schab_st_semivariogram_from_cov <- function(h, k, cov_fn) {
   lg <- .schab_st_as_lags(h, k) # gamma = C(0,0) - C(h,k)
-  c0 <- as.numeric(cov_fn(0, 0))\[1\]
+  c0 <- as.numeric(cov_fn(0, 0))[1]
   c0 - as.numeric(cov_fn(lg$h, lg$k))
 }
 
@@ -845,7 +845,7 @@
 .schab_st_region_box <- function(region) {
   r <- as.numeric(region)
   if (length(r) != 4L) stop("`region` must be (xmin, xmax, ymin, ymax)", call. = FALSE)
-  if (r[2] <= r\[1\] || r[4] <= r[3]) {
+  if (r[2] <= r[1] || r[4] <= r[3]) {
     stop("`region` must have positive extent", call. = FALSE)
   }
   r
@@ -870,8 +870,8 @@
     stop("`points` and `times` must have the same length", call. = FALSE)
   }
   r <- .schab_st_region_box(region)
-  area <- (r[2] - r\[1\]) * (r[4] - r[3])
-  span <- as.numeric(time_interval[2]) - as.numeric(time_interval\[1\])
+  area <- (r[2] - r[1]) * (r[4] - r[3])
+  span <- as.numeric(time_interval[2]) - as.numeric(time_interval[1])
   if (span <= 0) stop("`time_interval` must have positive length", call. = FALSE)
   list(
     intensity = length(t) / (area * span), n = length(t), # eq (9.20)
@@ -900,15 +900,15 @@
   pts <- as.matrix(points)
   t <- as.numeric(times)
   r <- .schab_st_region_box(region)
-  t0 <- as.numeric(time_interval\[1\])
+  t0 <- as.numeric(time_interval[1])
   t1 <- as.numeric(time_interval[2])
   ns <- as.integer(n_space_bins)
   nt <- as.integer(n_time_bins)
-  xe <- seq(r\[1\], r[2], length.out = ns + 1L)
+  xe <- seq(r[1], r[2], length.out = ns + 1L)
   ye <- seq(r[3], r[4], length.out = ns + 1L)
   te <- seq(t0, t1, length.out = nt + 1L)
-  cell_area <- (xe[2] - xe\[1\]) * (ye[2] - ye\[1\])
-  bin_width <- te[2] - te\[1\]
+  cell_area <- (xe[2] - xe[1]) * (ye[2] - ye[1])
+  bin_width <- te[2] - te[1]
   xi <- pmin(pmax(findInterval(pts[, 1], xe), 1L), ns)
   yi <- pmin(pmax(findInterval(pts[, 2], ye), 1L), ns)
   ti <- pmin(pmax(findInterval(t, te), 1L), nt)
@@ -978,11 +978,11 @@
   pts <- as.matrix(points)
   t <- as.numeric(times)
   r <- .schab_st_region_box(region)
-  t0 <- as.numeric(time_interval\[1\])
+  t0 <- as.numeric(time_interval[1])
   t1 <- as.numeric(time_interval[2])
   ns <- as.integer(n_space_bins)
   nt <- as.integer(n_time_bins)
-  xe <- seq(r\[1\], r[2], length.out = ns + 1L)
+  xe <- seq(r[1], r[2], length.out = ns + 1L)
   ye <- seq(r[3], r[4], length.out = ns + 1L)
   te <- seq(t0, t1, length.out = nt + 1L)
   xi <- pmin(pmax(findInterval(pts[, 1], xe), 1L), ns)

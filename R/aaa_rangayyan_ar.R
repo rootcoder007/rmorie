@@ -44,9 +44,9 @@ Levinson <- function(acf, order = NULL) {
       length(r) - 1L
     ))
   }
-  if (r\[1\] <= 0) stop("phi(0) must be positive")
+  if (r[1] <= 0) stop("phi(0) must be positive")
   a <- numeric(0)
-  eps <- r\[1\]
+  eps <- r[1]
   errors <- eps
   gammas <- numeric(0)
   for (i in seq_len(p)) {
@@ -64,7 +64,7 @@ Levinson <- function(acf, order = NULL) {
     gain = if (eps > 0) sqrt(eps) else 0, order = p,
     stable = all(abs(gammas) < 1),
     monotone = all(diff(errors) <= 1e-12),
-    normalized_error = eps / r\[1\],
+    normalized_error = eps / r[1],
     sign_convention = "A(z) = 1 + sum a_k z^-k, per eq. (7.18)",
     method = "Rangayyan (2024) eqs. (7.37)-(7.39)"
   )
@@ -102,7 +102,7 @@ Lpc <- function(x, order, method = "autocorrelation") {
   acf <- vapply(0:p, function(m) {
     .morie_fsum(xs[seq_len(n - m)] * xs[seq_len(n - m) + m]) / n
   }, numeric(1))
-  if (acf\[1\] <= 0) stop("the signal has zero energy")
+  if (acf[1] <= 0) stop("the signal has zero energy")
   lev <- Levinson(acf, order = p)
   a <- lev$a
   resid <- vapply(seq_len(n), function(i) {
@@ -328,8 +328,8 @@ PzForm <- function(zeros, poles, z = NULL, gain = 1) {
     num / den
   }, complex(1))
   one <- length(pts) == 1L
-  out$H <- if (one) vals[\[1\]] else vals
-  out$z <- if (one) pts[\[1\]] else pts
+  out$H <- if (one) vals[[1]] else vals
+  out$z <- if (one) pts[[1]] else pts
   out
 }
 
@@ -383,11 +383,11 @@ PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
   scale <- max(Mod(vals))
   if (scale == 0) scale <- 1
   one <- length(pts) == 1L
-  out$H <- if (one) vals[\[1\]] else vals
-  out$H_from_eq369 <- if (one) other[\[1\]] else other
+  out$H <- if (one) vals[[1]] else vals
+  out$H_from_eq369 <- if (one) other[[1]] else other
   out$max_difference <- gap
   out$agrees_with_eq369 <- gap <= 1e-9 * scale
-  out$z <- if (one) pts[\[1\]] else pts
+  out$z <- if (one) pts[[1]] else pts
   out
 }
 
@@ -444,12 +444,12 @@ PzResp <- function(zeros, poles, omega, gain = 1) {
   gap <- max(abs(Mod(H) - mags))
   one <- length(ws) == 1L
   list(
-    H = if (one) H[\[1\]] else H,
-    magnitude = if (one) mags[\[1\]] else mags,
-    phase = if (one) phases[\[1\]] else phases,
-    zero_distances = if (one) dist_z[\[1\]] else dist_z,
-    pole_distances = if (one) dist_p[\[1\]] else dist_p,
-    omega = if (one) ws[\[1\]] else ws,
+    H = if (one) H[[1]] else H,
+    magnitude = if (one) mags[[1]] else mags,
+    phase = if (one) phases[[1]] else phases,
+    zero_distances = if (one) dist_z[[1]] else dist_z,
+    pole_distances = if (one) dist_p[[1]] else dist_p,
+    omega = if (one) ws[[1]] else ws,
     magnitude_matches_product = gap <= 1e-9 * (1 + max(mags)),
     method = "Rangayyan (2024) eqs. (3.71)-(3.73)"
   )
@@ -586,7 +586,7 @@ PcgAr <- function(x, fs, order = NULL, segment = NULL) {
   xs <- as.numeric(x)
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("fs must be positive")
-  if (!is.null(segment)) xs <- xs[(segment\[1\] + 1L):segment[2]]
+  if (!is.null(segment)) xs <- xs[(segment[1] + 1L):segment[2]]
   if (length(xs) < 16L) stop("need at least sixteen samples in the segment")
   p <- if (!is.null(order)) {
     as.integer(order)
@@ -645,19 +645,19 @@ HrvAr <- function(rr, order = 16, fs = 4, nfreq = 512) {
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("fs must be positive")
   beats <- cumsum(intervals)
-  duration <- beats[length(beats)] - beats\[1\]
+  duration <- beats[length(beats)] - beats[1]
   if (duration <= 0) stop("the RR series has zero duration")
   n <- max(16L, as.integer(duration * fsv))
-  grid <- beats\[1\] + (0:(n - 1L)) / fsv
+  grid <- beats[1] + (0:(n - 1L)) / fsv
   series <- stats_free_interp(beats, intervals, grid)
   mu <- .morie_fsum(series) / length(series)
   series <- series - mu
   p <- min(as.integer(order), length(series) - 1L)
   fit <- ArFit(series, p, fs = fsv, nfreq = as.integer(nfreq))
   bands <- list(vlf = c(0.003, 0.04), lf = c(0.04, 0.15), hf = c(0.15, 0.40))
-  df <- if (length(fit$freqs) > 1L) fit$freqs[2] - fit$freqs\[1\] else 0
+  df <- if (length(fit$freqs) > 1L) fit$freqs[2] - fit$freqs[1] else 0
   power <- lapply(bands, function(b) {
-    .morie_fsum(fit$psd[fit$freqs >= b\[1\] & fit$freqs < b[2]] * df)
+    .morie_fsum(fit$psd[fit$freqs >= b[1] & fit$freqs < b[2]] * df)
   })
   total <- power$vlf + power$lf + power$hf
   fit$mean_rr <- mu

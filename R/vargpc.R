@@ -88,7 +88,7 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   ltri <- function(p, M) {
     L <- matrix(0, M, M)
     t0 <- 1L
-    for (i in seq_len(M)) for (j in seq_len(i)) { L\[i, j\] <- p[t0]
+    for (i in seq_len(M)) for (j in seq_len(i)) { L[i, j] <- p[t0]
     t0 <- t0 + 1L }
     L
   }
@@ -100,7 +100,7 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   }
   Kmm <- matrix(0, M, M)
   for (i in seq_len(M)) for (j in seq_len(M)) {
-    Kmm\[i, j\] <- rbf(Z[i, ], Z[j, ]) + (if (i == j) jitter else 0)
+    Kmm[i, j] <- rbf(Z[i, ], Z[j, ]) + (if (i == j) jitter else 0)
   }
   Lk <- .s03chol(Kmm)
   logdetK <- 0
@@ -170,7 +170,7 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   }
   p <- numeric(npar)
   t0 <- M + 1L
-  for (i in seq_len(M)) for (j in seq_len(i)) { p[t0] <- Lk\[i, j\]
+  for (i in seq_len(M)) for (j in seq_len(i)) { p[t0] <- Lk[i, j]
   t0 <- t0 + 1L }
   e0 <- elbo_of(p)
   cur <- e0$v

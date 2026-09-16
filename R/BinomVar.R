@@ -18,7 +18,7 @@ BinomVar <- function(n, p) {
   }
   p <- as.numeric(p)
   if (length(p) != 1L || is.na(p) || p < 0 || p > 1) {
-    stop("p must be a single value in \[0, 1\].", call. = FALSE)
+    stop("p must be a single value in [0, 1].", call. = FALSE)
   }
   n <- as.integer(n)
   value <- (p^2 * n * (n - 1) + p * n) - (n * p)^2

@@ -129,7 +129,7 @@ morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
                       weights = NULL, offset = NULL, max_iter = 25L,
                       tol = 1e-8) {
   fams <- .morie_glm_families()
-  fl <- tolower(as.character(family)\[1\])
+  fl <- tolower(as.character(family)[1])
   if (!fl %in% names(fams)) {
     stop("family must be one of ", paste(sort(names(fams)), collapse = ", "))
   }
@@ -148,7 +148,7 @@ morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
   pw <- if (is.null(weights)) rep(1, n) else as.numeric(weights)
   off <- if (is.null(offset)) rep(0, n) else as.numeric(offset)
   if (fl == "binomial" && any(y < 0 | y > 1)) {
-    stop("binomial response must lie in \[0, 1\]")
+    stop("binomial response must lie in [0, 1]")
   }
   if (fl == "poisson" && any(y < 0)) {
     stop("Poisson response must be non-negative")

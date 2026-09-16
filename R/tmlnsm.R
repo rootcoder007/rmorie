@@ -65,10 +65,10 @@ Tmlnsm <- function(y, D, X, bw) {
       stop("Tmlnsm: kernel density at the median is zero; widen bw")
     out[[a]] <- list(m = m, dens = dens, ic = -icf / dens)
   }
-  est <- out[[2]]$m - out[\[1\]]$m
-  ic <- out[[2]]$ic - out[\[1\]]$ic
+  est <- out[[2]]$m - out[[1]]$m
+  ic <- out[[2]]$ic - out[[1]]$ic
   se <- if (n > 1L) sqrt(sum((ic - mean(ic))^2) / (n - 1) / n) else NaN
-  .t1_result(estimate = est, se = se, m1 = out[[2]]$m, m0 = out[\[1\]]$m,
-             f1 = out[[2]]$dens, f0 = out[\[1\]]$dens, n = n,
+  .t1_result(estimate = est, se = se, m1 = out[[2]]$m, m0 = out[[1]]$m,
+             f1 = out[[2]]$dens, f0 = out[[1]]$dens, n = n,
              method = "TMLE for the counterfactual median difference")
 }

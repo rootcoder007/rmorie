@@ -28,7 +28,7 @@ Compvar <- function(X) {
     for (j in seq_len(D)) {
       if (j > i) {
         v <- stats::var(L[, i] - L[, j])
-        tau\[i, j\] <- v
+        tau[i, j] <- v
         tau[j, i] <- v
         tot <- tot + v
       }

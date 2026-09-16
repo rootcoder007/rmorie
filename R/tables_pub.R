@@ -231,7 +231,7 @@ table1 <- function(data, group_col = NULL,
       if (continuous_summary == "mean_sd") {
         ms <- weighted_mean_sd(sub[[var]], w_vals)
         cell <- sprintf("%s (%s)",
-          .tbl_fmt_num(ms\[1\], digits), .tbl_fmt_num(ms[2], digits))
+          .tbl_fmt_num(ms[1], digits), .tbl_fmt_num(ms[2], digits))
       } else if (continuous_summary == "median_iqr") {
         cell <- sprintf("%s [%s, %s]",
           .tbl_fmt_num(stats::median(vals), digits),
@@ -243,9 +243,9 @@ table1 <- function(data, group_col = NULL,
         n <- length(vals)
         se <- if (n > 0) ms[2] / sqrt(n) else 0
         cell <- sprintf("%s (%s, %s)",
-          .tbl_fmt_num(ms\[1\], digits),
-          .tbl_fmt_num(ms\[1\] - 1.96 * se, digits),
-          .tbl_fmt_num(ms\[1\] + 1.96 * se, digits))
+          .tbl_fmt_num(ms[1], digits),
+          .tbl_fmt_num(ms[1] - 1.96 * se, digits),
+          .tbl_fmt_num(ms[1] + 1.96 * se, digits))
       }
       row[[group_label(g)]] <- cell
       group_stats[[length(group_stats) + 1L]] <- ms
@@ -256,7 +256,7 @@ table1 <- function(data, group_col = NULL,
         v[!is.na(v)]
       })
       if (length(groups) == 2L) {
-        wt <- suppressWarnings(stats::wilcox.test(gv[\[1\]], gv[[2]]))
+        wt <- suppressWarnings(stats::wilcox.test(gv[[1]], gv[[2]]))
         p <- wt$p.value
       } else {
         vals <- unlist(gv)
@@ -267,8 +267,8 @@ table1 <- function(data, group_col = NULL,
       row[[" "]] <- .tbl_stars(p)
     }
     if (show_smd && length(groups) == 2L) {
-      smd <- .tbl_smd(group_stats[\[1\]]\[1\], group_stats[[2]]\[1\],
-                      group_stats[\[1\]][2], group_stats[[2]][2])
+      smd <- .tbl_smd(group_stats[[1]][1], group_stats[[2]][1],
+                      group_stats[[1]][2], group_stats[[2]][2])
       row[["SMD"]] <- .tbl_fmt_num(abs(smd), 3L)
     }
     if (show_missing) {
@@ -619,7 +619,7 @@ correlation_table <- function(data, method = "pearson", show_stars = TRUE,
   result <- matrix("", n_v, n_v, dimnames = list(cols, cols))
   for (i in seq_len(n_v)) for (j in seq_len(n_v)) {
     if (i == j) {
-      result\[i, j\] <- if (mask_diagonal) "-" else .tbl_fmt_num(1, digits)
+      result[i, j] <- if (mask_diagonal) "-" else .tbl_fmt_num(1, digits)
       next
     }
     valid <- stats::complete.cases(numeric_df[, c(i, j)])
@@ -629,7 +629,7 @@ correlation_table <- function(data, method = "pearson", show_stars = TRUE,
       p <- ct$p.value
     } else p <- NA_real_
     star <- if (show_stars) .tbl_stars(p) else ""
-    result\[i, j\] <- paste0(.tbl_fmt_num(corr\[i, j\], digits), star)
+    result[i, j] <- paste0(.tbl_fmt_num(corr[i, j], digits), star)
   }
   out_df <- as.data.frame(result, stringsAsFactors = FALSE)
   reg <- .tbl_footnotes_new()
@@ -765,11 +765,11 @@ anova_table <- function(model, typ = 2L, digits = 3L,
   }
   pcol <- intersect(c("Pr(>F)", "Pr(>Chisq)"), colnames(formatted))
   if (length(pcol) > 0L) {
-    formatted[["p-value"]] <- vapply(tab[[pcol\[1\]]],
+    formatted[["p-value"]] <- vapply(tab[[pcol[1]]],
       function(x) if (is.finite(x)) .tbl_fmt_pval(x, 3L) else "", "")
-    formatted[[" "]] <- vapply(tab[[pcol\[1\]]],
+    formatted[[" "]] <- vapply(tab[[pcol[1]]],
       function(x) if (is.finite(x)) .tbl_stars(x) else "", "")
-    formatted[[pcol\[1\]]] <- NULL
+    formatted[[pcol[1]]] <- NULL
   }
   if ("Df" %in% colnames(formatted))
     formatted[["Df"]] <- vapply(formatted[["Df"]],

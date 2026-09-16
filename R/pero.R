@@ -66,7 +66,7 @@ Persample <- function(buffer, alpha = 0.6, beta = 0.4, eps = 1e-6,
       sample_ <- c(sample_, as.integer(idx))
     }
   }
-  list(estimate = if (n) prob\[1\] else NaN, prob = prob, weight = w,
+  list(estimate = if (n) prob[1] else NaN, prob = prob, weight = w,
        priority = p, beta_t = b, sample = sample_, n = n,
        method = "Prioritized experience replay (Schaul et al. 2016, eqs. 1-2)")
 }

@@ -31,7 +31,7 @@ lvrgh <- function(X, intercept = TRUE) {
 
 # CANONICAL TEST
 # r <- lvrgh(cbind(1:10, c(2,1,4,3,6,5,8,7,10,9)))
-# stopifnot(abs(r$leverage\[1\] - 0.4) < 1e-12, abs(r$trace - 3) < 1e-12)
+# stopifnot(abs(r$leverage[1] - 0.4) < 1e-12, abs(r$trace - 3) < 1e-12)
 
 #' @rdname lvrgh
 #' @keywords internal

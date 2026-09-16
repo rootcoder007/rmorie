@@ -200,7 +200,7 @@
         Mi <- M[[i]]
         for (k in seq_len(p)) {
             U[k] <- U[k] + w[i] * (Mi[k] - xbar[k])
-            resid\[i, k\] <- resid\[i, k\] + Mi[k] - xbar[k]
+            resid[i, k] <- resid[i, k] + Mi[k] - xbar[k]
         }
         for (k in seq_len(p)) {
             for (l in seq_len(p)) {
@@ -319,7 +319,7 @@
     cell_totals <- matrix(0.0, nrow = length(unique_keys), ncol = p)
     for (ki in seq_along(unique_keys)) {
         idx <- which(keys == unique_keys[ki])
-        cell_h[ki] <- h[idx\[1\]]
+        cell_h[ki] <- h[idx[1]]
         for (i in idx) {
             cell_totals[ki, ] <- cell_totals[ki, ] + w[i] * contrib[i, ]
         }

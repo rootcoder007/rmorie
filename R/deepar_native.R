@@ -246,7 +246,7 @@ morie_deepar_sample <- function(fit, z_history, horizon, n_samples = 200L,
     st <- as.numeric(hist)
     path <- numeric(H)
     for (h in seq_len(H)) {
-      mu_s <- beta\[1\] + sum(beta[seq_len(p) + 1L] * rev(st)[seq_len(p)])
+      mu_s <- beta[1] + sum(beta[seq_len(p) + 1L] * rev(st)[seq_len(p)])
       mu_s <- max(mu_s, 0)
       if (fit$likelihood == "negative-binomial") {
         draw <- .sample_neg_bin(mu_s * nu, alpha, e) / nu

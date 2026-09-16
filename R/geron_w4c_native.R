@@ -348,7 +348,7 @@ morie_geron_mixed_precision <- function(model, loss_scale = 1024.0, grads = NULL
   }
   rec <- if (is.finite(max_safe) && max_safe >= 1.0) 2^floor(log2(max_safe)) else if (is.finite(max_safe)) max_safe else scale
   nbytes <- sum(vapply(tensors, length, integer(1)))
-  fp16_out <- if (is_map) stats::setNames(tensors, keys) else tensors[\[1\]]
+  fp16_out <- if (is_map) stats::setNames(tensors, keys) else tensors[[1]]
   list(
     fp16_weights = fp16_out, overflow = overflow, weight_overflow = w_over,
     n_underflow = as.integer(n_under), loss_scale = scale, max_safe_loss_scale = max_safe,
@@ -421,7 +421,7 @@ morie_geron_ncsn <- function(X, sigmas = 1.0, epochs = 400, lr = 0.5, n_noise = 
   samples <- matrix(numeric(0), 0, d)
   if (S > 0L) {
     s_rng <- seed + 991
-    x <- matrix(mu, S, d, byrow = TRUE) + sg\[1\] * matrix(.morie_w4c_lcg_normal(S * d, s_rng), nrow = S, ncol = d, byrow = TRUE)
+    x <- matrix(mu, S, d, byrow = TRUE) + sg[1] * matrix(.morie_w4c_lcg_normal(S * d, s_rng), nrow = S, ncol = d, byrow = TRUE)
     sig_min <- sg[length(sg)]
     for (si in seq_along(sg)) {
       sigma <- sg[si]
@@ -462,7 +462,7 @@ morie_geron_numerical_diff <- function(f, x, h = 1e-5) {
   calls <- 0L
   fcall <- function(v) {
     calls <<- calls + 1L
-    out <- as.numeric(f(if (scalar) v\[1\] else v))
+    out <- as.numeric(f(if (scalar) v[1] else v))
     .morie_gr_need(length(out) == 1L, "geron_numerical_diff: f must return a scalar")
     .morie_gr_need(is.finite(out), "geron_numerical_diff: f returned non-finite")
     out
@@ -482,10 +482,10 @@ morie_geron_numerical_diff <- function(f, x, h = 1e-5) {
   d2 <- grad_at(step / 2.0)
   rich <- (4.0 * d2 - d1) / 3.0
   err <- abs(rich - d1)
-  out <- if (scalar) d1\[1\] else d1
-  rout <- if (scalar) rich\[1\] else rich
+  out <- if (scalar) d1[1] else d1
+  rout <- if (scalar) rich[1] else rich
   list(
-    derivative = out, richardson = rout, error_estimate = if (scalar) err\[1\] else err,
+    derivative = out, richardson = rout, error_estimate = if (scalar) err[1] else err,
     n_evals = calls, h = step, estimate = out, n = length(xv),
     method = "Central difference with Richardson error estimate"
   )
@@ -590,7 +590,7 @@ morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
     d <- ncol(train)
     Sg <- (t(Xc) %*% Xc) / max(nrow(train) - 1L, 1) + 1e-9 * diag(d)
     Si <- solve(Sg)
-    ld_ <- determinant(Sg, logarithm = TRUE)$modulus\[1\]
+    ld_ <- determinant(Sg, logarithm = TRUE)$modulus[1]
     log_density <- function(Anew) {
       Bn <- .morie_gr_mat(Anew, "A")
       zc <- sweep(Bn, 2, mu)
@@ -708,7 +708,7 @@ morie_geron_one_class_svm <- function(X, nu = 0.5, gamma = 1.0, max_iter = 2000,
     j <- dn[which.max(grad[dn])]
     gap <- grad[j] - grad[i]
     if (gap <= tol) break
-    denom <- K[i, i] + K[j, j] - 2 * K\[i, j\]
+    denom <- K[i, i] + K[j, j] - 2 * K[i, j]
     step <- if (denom <= 1e-15) min(C - alpha[i], alpha[j]) else min(gap / denom, C - alpha[i], alpha[j])
     if (step <= 0) break
     alpha[i] <- alpha[i] + step
@@ -805,7 +805,7 @@ morie_geron_onnx_export <- function(model, args, file = NULL) {
       bias <- if (is.null(spec$bias)) TRUE else isTRUE(spec$bias)
       params <- params + nin * nout + (if (bias) nout else 0L)
     } else if (low == "flatten") {
-      if (length(shape) > 1L) shape <- c(shape\[1\], prod(shape[-1]))
+      if (length(shape) > 1L) shape <- c(shape[1], prod(shape[-1]))
     } else if (low %in% shape_preserving) {
       # no-op
     } else {
@@ -865,7 +865,7 @@ morie_geron_oob_score <- function(X, y, models, task = "auto") {
   total <- numeric(n)
   votes <- numeric(n)
   for (entry in models) {
-    pred_fn <- if (!is.null(names(entry)) && "predict" %in% names(entry)) entry$predict else entry[\[1\]]
+    pred_fn <- if (!is.null(names(entry)) && "predict" %in% names(entry)) entry$predict else entry[[1]]
     bag <- if (!is.null(names(entry)) && "in_bag" %in% names(entry)) entry$in_bag else entry[[2]]
     bag <- unlist(bag)
     if (is.logical(bag)) {
@@ -995,7 +995,7 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
     x1 <- example$input
     y1 <- example$label
   } else {
-    x1 <- example[\[1\]]
+    x1 <- example[[1]]
     y1 <- example[[2]]
   }
   .morie_gr_need(!is.null(y1), "geron_one_shot: the demonstration needs a label")
@@ -1067,7 +1067,7 @@ morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL)
       f <- models[[idx]]
       p <- as.numeric(f(B))
       tally[, pr[2]] <- tally[, pr[2]] + p
-      tally[, pr\[1\]] <- tally[, pr\[1\]] + (1 - p)
+      tally[, pr[1]] <- tally[, pr[1]] + (1 - p)
     }
     tally
   }
@@ -1289,7 +1289,7 @@ morie_geron_pca_variance <- function(X, n_components = NULL, threshold = 0.95, n
   }
   list(
     explained_variance = var_, explained_variance_ratio = ratio, cumulative = cum,
-    n_components_for_threshold = reach, top_variance = var_\[1\], probe_max = best, covariance = Sigma,
+    n_components_for_threshold = reach, top_variance = var_[1], probe_max = best, covariance = Sigma,
     estimate = ratio, n = nrow(A), method = "Variance accounting over principal components with a random-direction check"
   )
 }
@@ -1318,7 +1318,7 @@ morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NUL
   }
   if (!is.null(kernel_size)) {
     kv <- pair(kernel_size)
-    kh <- kv\[1\]
+    kh <- kv[1]
     kw <- kv[2]
     ph <- c((kh - 1L) %/% 2L, kh - 1L - ((kh - 1L) %/% 2L))
     pw <- c((kw - 1L) %/% 2L, kw - 1L - ((kw - 1L) %/% 2L))
@@ -1328,8 +1328,8 @@ morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NUL
   }
   # 2-D only (the shapes exercised by tests); higher dims pad the same two axes.
   out <- if (nd == 2L) {
-    o <- matrix(0, H + ph\[1\] + ph[2], W + pw\[1\] + pw[2])
-    o[(ph\[1\] + 1L):(ph\[1\] + H), (pw\[1\] + 1L):(pw\[1\] + W)] <- a
+    o <- matrix(0, H + ph[1] + ph[2], W + pw[1] + pw[2])
+    o[(ph[1] + 1L):(ph[1] + H), (pw[1] + 1L):(pw[1] + W)] <- a
     o
   } else {
     stop("geron_padding: only 2-D input ported in this shard", call. = FALSE)
@@ -1337,8 +1337,8 @@ morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NUL
   s_ <- as.integer(stride)
   if (!is.null(kernel_size)) {
     kv <- pair(kernel_size)
-    oh <- (H + ph\[1\] + ph[2] - kv\[1\]) %/% s_ + 1L
-    ow <- (W + pw\[1\] + pw[2] - kv[2]) %/% s_ + 1L
+    oh <- (H + ph[1] + ph[2] - kv[1]) %/% s_ + 1L
+    ow <- (W + pw[1] + pw[2] - kv[2]) %/% s_ + 1L
   } else {
     oh <- nrow(out)
     ow <- ncol(out)
@@ -1365,7 +1365,7 @@ morie_geron_pretrained_embeddings <- function(vocab, pretrained, freeze = TRUE, 
   words <- as.character(vocab)
   dims <- unique(vapply(pretrained, function(v) length(as.numeric(v)), integer(1)))
   .morie_gr_need(length(dims) == 1L, "geron_pretrained_embeddings: mixed pretrained widths")
-  dim_ <- dims\[1\]
+  dim_ <- dims[1]
   sc <- as.numeric(oov_scale)
   E <- matrix(0, length(words), dim_)
   oov <- character(0)
@@ -1408,7 +1408,7 @@ morie_geron_pretrained_embeddings <- function(vocab, pretrained, freeze = TRUE, 
 morie_geron_prioritized_replay <- function(buffer, alpha = 0.6, beta = 0.4, eps = 1e-6, batch_size = NULL, seed = 0) {
   items <- buffer
   deltas <- vapply(items, function(it) {
-    if (is.list(it) && !is.null(it$td_error)) as.numeric(it$td_error) else as.numeric(it)\[1\]
+    if (is.list(it) && !is.null(it$td_error)) as.numeric(it$td_error) else as.numeric(it)[1]
   }, numeric(1))
   d <- abs(deltas)
   a <- as.numeric(alpha)
@@ -1460,7 +1460,7 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
       if (!is.null(names(st)) && all(c("action", "reward") %in% names(st))) {
         list(st$state, st$action, as.numeric(st$reward))
       } else {
-        list(st[\[1\]], st[[2]], as.numeric(st[[3]]))
+        list(st[[1]], st[[2]], as.numeric(st[[3]]))
       }
     })
     .morie_gr_need(length(steps) > 0L, "geron_policy_gradient: an episode has no steps")
@@ -1479,7 +1479,7 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
   for (i in seq_along(all_steps)) {
     st <- all_steps[[i]]
     Gr <- returns[i]
-    out <- policy(st[\[1\]], st[[2]])
+    out <- policy(st[[1]], st[[2]])
     if (is.list(out) && length(out) == 2L && is.numeric(out[[2]])) out <- out[[2]]
     gv <- as.numeric(out)
     if (is.null(grad)) grad <- numeric(length(gv))
@@ -1572,11 +1572,11 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
     }
   }
   powers <- matrix(0L, length(combos), n)
-  for (i in seq_along(combos)) for (j in combos[[i]]) powers\[i, j\] <- powers\[i, j\] + 1L
+  for (i in seq_along(combos)) for (j in combos[[i]]) powers[i, j] <- powers[i, j] + 1L
   feats <- matrix(1.0, nrow(A), length(combos))
   for (i in seq_len(nrow(powers))) {
     col <- rep(1.0, nrow(A))
-    for (j in seq_len(n)) if (powers\[i, j\] > 0) col <- col * A[, j]^powers\[i, j\]
+    for (j in seq_len(n)) if (powers[i, j] > 0) col <- col * A[, j]^powers[i, j]
     feats[, i] <- col
   }
   names_ <- vapply(seq_len(nrow(powers)), function(i) {
@@ -1777,7 +1777,7 @@ morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, 
         u <- (rng + 0.5) / 2^32
         a <- min(sum(cumsum(p) < u), nA - 1L)
         out <- eb$step(a)
-        s <- out[\[1\]]
+        s <- out[[1]]
         rew <- out[[2]]
         done <- isTRUE(out[[3]])
         traj_s <- c(traj_s, si)
@@ -1796,7 +1796,7 @@ morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, 
       states <- c(states, traj_s)
       actions <- c(actions, traj_a)
       rets <- c(rets, gs)
-      ep_returns <- c(ep_returns, if (length(gs)) gs\[1\] else 0.0)
+      ep_returns <- c(ep_returns, if (length(gs)) gs[1] else 0.0)
     }
     S <- states
     Aa <- actions
@@ -1978,7 +1978,7 @@ morie_geron_pvt <- function(image, stage_cfgs, seed = 0) {
     dim_ <- as.integer(cfg$dim)
     heads <- if (is.null(cfg$heads)) 1L else as.integer(cfg$heads)
     r <- if (is.null(cfg$sr_ratio)) 1L else as.integer(cfg$sr_ratio)
-    Hd <- dim(x)\[1\]
+    Hd <- dim(x)[1]
     Wd <- dim(x)[2]
     C <- dim(x)[3]
     gh <- Hd %/% p
@@ -2120,8 +2120,8 @@ morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
     pruned <- stats::setNames(out, keys)
     mask <- stats::setNames(masks, keys)
   } else {
-    pruned <- out[\[1\]]
-    mask <- masks[\[1\]]
+    pruned <- out[[1]]
+    mask <- masks[[1]]
   }
   sched <- vapply(seq_len(Rr), function(i) sp * (1.0 - (1.0 - i / Rr)^3), numeric(1))
   list(
@@ -2172,8 +2172,8 @@ morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 
     qout <- stats::setNames(qw, keys)
     dout <- stats::setNames(dqw, keys)
   } else {
-    qout <- qw[\[1\]]
-    dout <- dqw[\[1\]]
+    qout <- qw[[1]]
+    dout <- dqw[[1]]
   }
   list(
     quantized_weights = qout, dequantized_weights = dout, weight_scale = w_scale,
@@ -2201,7 +2201,7 @@ morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_pytorch_tensor(V)
 morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
-  dev <- tolower(strsplit(as.character(device), ":")[\[1\]]\[1\])
+  dev <- tolower(strsplit(as.character(device), ":")[[1]][1])
   .morie_gr_need(dev %in% c("cpu", "cuda", "mps"), "geron_pytorch_tensor: unknown device")
   a <- x
   src_float <- is.double(a) && !is.integer(a)
@@ -2260,7 +2260,7 @@ morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200
   scale <- 0.0
   for (it in seq_len(E)) {
     fq <- .morie_w4c_fake_quant(w, b)
-    wq <- fq[\[1\]]
+    wq <- fq[[1]]
     scale <- fq[[2]]
     resid <- as.numeric(A %*% wq) - yv
     hist <- c(hist, mean(resid^2))
@@ -2268,7 +2268,7 @@ morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200
     w <- w - eta * grad
   }
   fq <- .morie_w4c_fake_quant(w, b)
-  wq <- fq[\[1\]]
+  wq <- fq[[1]]
   scale <- fq[[2]]
   resid <- as.numeric(A %*% wq) - yv
   loss <- mean(resid^2)
@@ -2758,7 +2758,7 @@ morie_geron_reinforcement_learning <- function(env, pi, gamma = 0.99, n_episodes
         action <- min(sum(cumsum(arr) < u), length(arr) - 1L)
       }
       res <- eb$step(action)
-      state <- res[\[1\]]
+      state <- res[[1]]
       reward <- as.numeric(res[[2]])
       done <- isTRUE(res[[3]])
       total <- total + disc * reward
@@ -2800,7 +2800,7 @@ morie_geron_rlhf <- function(policy, reward_model, prompts = NULL, beta = 0.1, l
   keys <- if (is.null(prompts)) seq_len(Pn) - 1L else prompts
   if (is.function(reward_model)) {
     rew <- matrix(0, Pn, R)
-    for (i in seq_len(Pn)) for (j in seq_len(R)) rew\[i, j\] <- as.numeric(reward_model(keys[i], j - 1L))
+    for (i in seq_len(Pn)) for (j in seq_len(R)) rew[i, j] <- as.numeric(reward_model(keys[i], j - 1L))
   } else {
     rew <- .morie_gr_mat(reward_model, "reward_model")
   }
@@ -3075,7 +3075,7 @@ morie_geron_randomized_search <- function(param_dist, n_iter, X, y, estimator = 
       if (is.function(spec)) {
         params[[nm]] <- spec(u)
       } else if (is.list(spec) && length(spec) == 2L) {
-        params[[nm]] <- spec[\[1\]] + u * (spec[[2]] - spec[\[1\]])
+        params[[nm]] <- spec[[1]] + u * (spec[[2]] - spec[[1]])
       } else {
         opts <- spec
         params[[nm]] <- opts[[min(as.integer(u * length(opts)) + 1L, length(opts))]]
@@ -3165,7 +3165,7 @@ morie_geron_rnn_visual_attention <- function(features, h, W, U, v) {
   grid <- NULL
   if (length(dim(F_)) == 3L) {
     grid <- dim(F_)[1:2]
-    Ff <- matrix(aperm(F_, c(2, 1, 3)), nrow = dim(F_)\[1\] * dim(F_)[2], byrow = TRUE)
+    Ff <- matrix(aperm(F_, c(2, 1, 3)), nrow = dim(F_)[1] * dim(F_)[2], byrow = TRUE)
   } else {
     Ff <- .morie_gr_mat(F_, "features")
   }
@@ -3182,7 +3182,7 @@ morie_geron_rnn_visual_attention <- function(features, h, W, U, v) {
   nz <- alpha[alpha > 0]
   entropy <- -sum(nz * log(nz))
   list(
-    context = context, alpha = alpha, alpha_map = if (!is.null(grid)) matrix(alpha, grid\[1\], grid[2], byrow = TRUE) else alpha,
+    context = context, alpha = alpha, alpha_map = if (!is.null(grid)) matrix(alpha, grid[1], grid[2], byrow = TRUE) else alpha,
     scores = scores, entropy = entropy, estimate = context, n = nrow(Ff),
     method = "Additive (Bahdanau-style) attention over a spatial feature map"
   )
@@ -3256,8 +3256,8 @@ morie_geron_reward_function <- function(s, a, s_next, R = NULL, gamma = 1.0) {
     returns[t_] <- acc
   }
   list(
-    rewards = rewards, total_reward = sum(rewards), returns = returns, discounted_return = returns\[1\],
-    gamma = g, estimate = returns\[1\], n = length(rewards),
+    rewards = rewards, total_reward = sum(rewards), returns = returns, discounted_return = returns[1],
+    gamma = g, estimate = returns[1], n = length(rewards),
     method = "R(s, a, s') evaluated per transition with backward discounted returns"
   )
 }

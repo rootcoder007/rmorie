@@ -48,10 +48,10 @@
   bj <- integer(0)
   bo <- numeric(0)
   if (a > 1L) for (i in seq_len(a - 1L)) for (j in (i + 1L):a) {
-    if (A\[i, j\] != A[j, i]) stop("adjacency must be symmetric", call. = FALSE)
-    if (A\[i, j\] != 0) { bi <- c(bi, i)
+    if (A[i, j] != A[j, i]) stop("adjacency must be symmetric", call. = FALSE)
+    if (A[i, j] != 0) { bi <- c(bi, i)
     bj <- c(bj, j)
-    bo <- c(bo, A\[i, j\]) }
+    bo <- c(bo, A[i, j]) }
   }
   list(a = a, i = bi, j = bj, o = as.numeric(as.integer(bo)))
 }

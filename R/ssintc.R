@@ -50,7 +50,7 @@ Ssintc <- function(L, R, event = NULL, n_iter = 200) {
   }
   alpha <- matrix(0, n, m)
   for (i in seq_len(n)) for (j in seq_len(m)) {
-    if (Lv[i] <= qs[j] && rs[j] <= Rv[i]) alpha\[i, j\] <- 1
+    if (Lv[i] <= qs[j] && rs[j] <= Rv[i]) alpha[i, j] <- 1
   }
   p <- rep(1 / m, m)
   for (it in seq_len(as.integer(n_iter))) {
@@ -66,7 +66,7 @@ Ssintc <- function(L, R, event = NULL, n_iter = 200) {
   surv <- 1 - cumsum(p)
   med <- NaN
   hit <- which(surv <= 0.5)
-  if (length(hit)) med <- rs[hit\[1\]]
+  if (length(hit)) med <- rs[hit[1]]
   .t1_result(estimate = med, p = p, surv = surv, q = qs, r = rs, n = n, m = m,
              method = "Turnbull NPMLE, interval censoring")
 }

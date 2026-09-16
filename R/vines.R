@@ -34,7 +34,7 @@ vines <- function(x) {
         idx <- c(i, i + jj, cond)
         sub <- R[idx, idx]
         inv <- .morie_ginv(sub)
-        pc <- -inv\[1, 2\] / sqrt(inv\[1, 1\] * inv[2, 2])
+        pc <- -inv[1, 2] / sqrt(inv[1, 1] * inv[2, 2])
         P[i, i + jj] <- pc
       }
       P[i + jj, i] <- P[i, i + jj]

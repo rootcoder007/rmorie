@@ -37,7 +37,7 @@ rgvmg <- function(vmg, fs, band = NULL) {
   if (N < 2L) stop("rangayyan_vmg: need at least two samples")
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("rangayyan_vmg: fs must be positive")
-  lo <- if (is.null(band)) 3 else as.numeric(band\[1\])
+  lo <- if (is.null(band)) 3 else as.numeric(band[1])
   hi <- if (is.null(band)) 100 else as.numeric(band[2])
   if (!(hi > lo) || lo < 0)
     stop("rangayyan_vmg: the band must be an increasing nonnegative pair")

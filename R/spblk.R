@@ -44,11 +44,11 @@ spblk <- function(x, coords, blocks, n_quad = 25,
       lo <- b[1, ]
       hi <- b[2, ]
       if (d == 1) {
-        return(matrix(seq(lo\[1\], hi\[1\], length.out = n_quad), ncol = 1))
+        return(matrix(seq(lo[1], hi[1], length.out = n_quad), ncol = 1))
       }
       if (d == 2) {
         k <- round(sqrt(n_quad))
-        g1 <- seq(lo\[1\], hi\[1\], length.out = k)
+        g1 <- seq(lo[1], hi[1], length.out = k)
         g2 <- seq(lo[2], hi[2], length.out = k)
         return(as.matrix(expand.grid(g1, g2)))
       }

@@ -47,7 +47,7 @@ Clbuvc <- function(x, y, q = NULL) {
   } else {
     qq <- .s03vec(q)
     if (length(qq) != 3L) stop("q must be (a, b, sigma2)")
-    a <- qq\[1\]
+    a <- qq[1]
     b <- qq[2]
     s2 <- qq[3]
   }

@@ -50,7 +50,7 @@ Llgsq <- function(observed, expected = NULL, df = NULL, alpha = 0.05) {
     if (nrow(e) != k1 || ncol(e) != k2) stop("observed and expected must have the same shape")
     if (is.null(df)) stop("df is required when expected is supplied")
   }
-  df <- as.integer(df)\[1\]
+  df <- as.integer(df)[1]
   if (is.na(df) || df < 1L) stop("df must be at least 1")
   if (!(alpha > 0 && alpha < 1)) stop("alpha must be strictly between 0 and 1")
   if (any(!is.finite(e)) || any(e <= 0)) {

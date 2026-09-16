@@ -156,7 +156,7 @@ morie_compare_nested_logistic_models <- function(data, outcome,
   list(ate = y1 - y0, y1 = y1, y0 = y0)
 }
 
-# Internal: fit a logistic propensity model and clip to \[0.01, 0.99\].
+# Internal: fit a logistic propensity model and clip to [0.01, 0.99].
 #' Internal helper: Morie Fit Propensity
 #' @noRd
 .morie_fit_propensity <- function(data, treatment, covariates) {

@@ -35,7 +35,7 @@ Hetero <- function(X, construct_assignment, threshold = 0.85) {
   if (length(groups) < 2L) stop("htmt_ratio: need at least two constructs")
   for (lab in groups) if (sum(g == lab) < 2L) stop("htmt_ratio: every construct needs at least two indicators")
   R <- matrix(0, p, p)
-  for (i in seq_len(p)) for (j in seq_len(p)) R\[i, j\] <- .s03corr(M[, i], M[, j])
+  for (i in seq_len(p)) for (j in seq_len(p)) R[i, j] <- .s03corr(M[, i], M[, j])
   ratios <- numeric(0)
   flags <- integer(0)
   pair1 <- NULL

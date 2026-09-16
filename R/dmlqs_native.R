@@ -217,7 +217,7 @@
   }
   H <- list()
   for (i in seq_along(h0)) {
-    parts <- strsplit(nm[i], ",", fixed = TRUE)[\[1\]]
+    parts <- strsplit(nm[i], ",", fixed = TRUE)[[1]]
     if (length(parts) != 2L) {
       stop(sprintf("dmlqs: h0 key '%s' is not 'v,w'", nm[i]))
     }
@@ -252,7 +252,7 @@
     new <- list()
     keys <- names(H)
     for (k in seq_along(keys)) {
-      parts <- strsplit(keys[k], ",", fixed = TRUE)[\[1\]]
+      parts <- strsplit(keys[k], ",", fixed = TRUE)[[1]]
       v <- as.integer(parts[1L])
       w <- as.integer(parts[2L])
       m <- rep(0.0, d)

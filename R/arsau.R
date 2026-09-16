@@ -136,7 +136,7 @@ NULL
     if (length(candidates) == 0L) {
       return(NA_character_)
     }
-    return(candidates[\[1\]])
+    return(candidates[[1]])
   }
 
   for (lbl in names(candidates)) {

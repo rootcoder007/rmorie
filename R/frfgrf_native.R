@@ -122,7 +122,7 @@
 .frfgrf_honesty_test <- function(X, y, kind = "double-sample", min_leaf = 5,
                                  seed = 11, n_permutations = 3) {
   ht_out <- honest_tree(X, y, kind = kind, min_leaf = min_leaf, seed = seed)
-  tree <- ht_out[\[1\]]
+  tree <- ht_out[[1]]
   info <- ht_out[[2]]
   base <- .frfgrf_structure(tree)
 
@@ -149,7 +149,7 @@
       }
       tp_out <- honest_tree(X, yp, kind = kind, min_leaf = min_leaf,
                             seed = seed)
-      tp <- tp_out[\[1\]]
+      tp <- tp_out[[1]]
       if (!identical(.frfgrf_structure(tp), base)) {
         stable <- FALSE
         break
@@ -170,7 +170,7 @@
     yj[J] <- y[perm_J]
   }
   tj_out <- honest_tree(X, yj, kind = kind, min_leaf = min_leaf, seed = seed)
-  tj <- tj_out[\[1\]]
+  tj <- tj_out[[1]]
   responsive <- !identical(.frfgrf_structure(tj), base)
 
   n_splits <- 0
@@ -329,14 +329,14 @@
                         min_leaf = min_leaf,
                         subsample_frac = subsample_frac,
                         alpha = alpha, pi = pi, seed = seed)
-  trees <- gf_out[\[1\]]
+  trees <- gf_out[[1]]
   bags <- gf_out[[2]]
   s <- gf_out[[3]]
 
   hon <- .frfgrf_honesty_test(Xm, yv, kind = kind, min_leaf = min_leaf,
                                seed = seed + 11)
   share_counts <- .frfgrf_split_share(trees, d)
-  share <- share_counts[\[1\]]
+  share <- share_counts[[1]]
   counts <- share_counts[[2]]
   floor <- pi / d
   reg <- .frfgrf_regularity(trees)

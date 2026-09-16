@@ -93,7 +93,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Kernel functions (vectorised, support \[-1, 1\])
+# Kernel functions (vectorised, support [-1, 1])
 # ---------------------------------------------------------------------------
 
 #' RDD kernel functions
@@ -196,7 +196,7 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
   s2 <- sum(w[use] * resid^2) / sum(w[use])
   vcov_ <- s2 * solve(XtWX)
   list(beta = beta, se = sqrt(diag(vcov_)), n = sum(use),
-       fit_value = beta\[1\])
+       fit_value = beta[1])
 }
 
 
@@ -227,7 +227,7 @@ morie_rdd_local_polynomial <- function(x, y, eval_points, h, p = 1,
   rows <- lapply(eval_points, function(x0) {
     f <- .morie_rdd_local_poly_fit(x, y, x0, h, p, kernel)
     data.frame(eval_point = x0, fit = f$fit_value,
-               se = f$se\[1\], n_effective = f$n)
+               se = f$se[1], n_effective = f$n)
   })
   do.call(rbind, rows)
 }
@@ -280,7 +280,7 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
   sd_x  <- sqrt(sum((x - mean(x))^2) / n)
   # np.percentile's default interpolation is R's quantile type 7.
   qs    <- stats::quantile(x, c(0.25, 0.75), names = FALSE, type = 7)
-  iqr_x <- qs[2] - qs\[1\]
+  iqr_x <- qs[2] - qs[1]
   # Silverman's rule: the robust scale keeps a heavy tail from
   # inflating the window.
   h     <- 0.9 * min(sd_x, iqr_x / 1.349) * n^(-1 / 5)
@@ -380,7 +380,7 @@ morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
   var_side <- function(xs, ys, h) {
     if (length(xs) < p + 2L)
       return(if (length(ys)) sum((ys - mean(ys))^2) / length(ys) else 1)
-    .morie_rdd_local_poly(xs, ys, cutoff, h, p = p, kernel = kernel)$V\[1, 1\]
+    .morie_rdd_local_poly(xs, ys, cutoff, h, p = p, kernel = kernel)$V[1, 1]
   }
 
   b_left  <- curvature(x[left], y[left], h_pilot)

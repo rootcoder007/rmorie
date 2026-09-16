@@ -1179,8 +1179,8 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 
   uniq_y <- unique(y)
   if (length(uniq_y) <= 2L) {
-    p <- mean(y == uniq_y\[1\])
-    q <- mean(y_pred_full == uniq_y\[1\])
+    p <- mean(y == uniq_y[1])
+    q <- mean(y_pred_full == uniq_y[1])
     gamma <- p * (1 - q) + (1 - p) * q
   } else {
     counts <- as.numeric(table(y))

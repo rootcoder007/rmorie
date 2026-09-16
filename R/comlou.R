@@ -20,7 +20,7 @@
   if (m2 <= 0) return(0)
   q <- 0
   for (i in seq_len(n)) for (j in seq_len(n))
-    if (z[i] == z[j]) q <- q + A\[i, j\] - resolution * k[i] * k[j] / m2
+    if (z[i] == z[j]) q <- q + A[i, j] - resolution * k[i] * k[j] / m2
   q / m2
 }
 
@@ -73,8 +73,8 @@ Comlou <- function(G, resolution = 1, max_pass = 20) {
         lk <- rep(0, n)
         has <- rep(FALSE, n)
         for (j in seq_len(n)) {
-          if (j == i || A\[i, j\] == 0) next
-          lk[z[j]] <- lk[z[j]] + A\[i, j\]
+          if (j == i || A[i, j] == 0) next
+          lk[z[j]] <- lk[z[j]] + A[i, j]
           has[z[j]] <- TRUE
         }
         best_c <- ci
@@ -99,7 +99,7 @@ Comlou <- function(G, resolution = 1, max_pass = 20) {
     if (K == n) break
     B <- matrix(0, K, K)
     for (i in seq_len(n)) for (j in seq_len(n))
-      B[z[i], z[j]] <- B[z[i], z[j]] + A\[i, j\]
+      B[z[i], z[j]] <- B[z[i], z[j]] + A[i, j]
     A <- B
   }
   labs <- sort(unique(member))

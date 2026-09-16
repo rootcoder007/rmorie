@@ -68,7 +68,7 @@ Kalmf <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL) {
     xp[[t]] <- xpred
     Pp[[t]] <- Ppred
   }
-  .t1_result(estimate = xs[[n]]\[1\], state = xs, cov = Ps, predicted = xp,
+  .t1_result(estimate = xs[[n]][1], state = xs, cov = Ps, predicted = xp,
              predicted_cov = Pp, loglik = ll, n = n,
              method = "predict/update recursion of Kalman (1960) with the prediction error decomposition")
 }

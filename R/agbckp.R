@@ -42,7 +42,7 @@ Mctsbackup <- function(leaf, value, path, N = NULL, W = NULL, rewards = NULL,
   q <- numeric(L)
   if (L > 0L) for (i in seq_len(L)) q[i] <- if (n[i] > 0) w[i] / n[i] else 0
   list(
-    estimate = if (L > 0L) q\[1\] else NaN, n = n, w = w, q = q, g = g,
+    estimate = if (L > 0L) q[1] else NaN, n = n, w = w, q = q, g = g,
     leaf = leaf,
     method = "AlphaZero MCTS backup along the simulation path"
   )

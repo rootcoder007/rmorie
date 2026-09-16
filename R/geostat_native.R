@@ -95,7 +95,7 @@ morie_spatial_variogram_fit <- function(coords, values,
   v0 <- stats::var(y)
   r0 <- max(D) / 4
   negll <- function(p) {
-    nug <- exp(p\[1\])
+    nug <- exp(p[1])
     ps <- exp(p[2])
     rg <- exp(p[3])
     # covariance = (nug+ps) - gamma(h)
@@ -116,7 +116,7 @@ morie_spatial_variogram_fit <- function(coords, values,
   )
   p <- exp(opt$par)
   list(
-    model = model, nugget = p\[1\], psill = p[2], range = p[3],
+    model = model, nugget = p[1], psill = p[2], range = p[3],
     loglik = -opt$value, converged = opt$convergence == 0,
     method = "variogram ML (rmorie native)"
   )
@@ -148,7 +148,7 @@ morie_spatial_variogram_fit <- function(coords, values,
   w <- w[ok]
   v0 <- max(g, na.rm = TRUE)
   obj <- function(p) {
-    nug <- exp(p\[1\])
+    nug <- exp(p[1])
     ps <- exp(p[2])
     rg <- exp(p[3])
     fit <- .morie_vgm_gamma(h, model, nug, ps, rg)
@@ -163,7 +163,7 @@ morie_spatial_variogram_fit <- function(coords, values,
     control = list(maxit = 500L)
   )
   list(
-    model = model, nugget = exp(opt$par\[1\]),
+    model = model, nugget = exp(opt$par[1]),
     psill = exp(opt$par[2]), range = exp(opt$par[3]),
     method = "WLS (Cressie weights)"
   )

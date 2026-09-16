@@ -191,7 +191,7 @@ morie_tps_csi_weight <- function(category, variant = c("total", "violent"),
               stats::setNames(c(key_col, "category", "count")))
     }
     df <- do.call(rbind, rows)
-    names(df)\[1\] <- key_col
+    names(df)[1] <- key_col
     return(df)
   }
   stop("counts input must be a data.frame or a nested list.", call. = FALSE)
