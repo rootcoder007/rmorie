@@ -229,7 +229,7 @@ hfd <- function(x, kmax = 10L) {
 #' @param fs Sampling frequency (Hz, default 2000).
 #' @param low Lower cutoff (Hz, default 25).
 #' @param high Upper cutoff (Hz, default 400).
-#' @return List with filtered signal (see [buttbp()]).
+#' @return List with filtered signal (see \[buttbp()\]).
 #' @export
 #' @examples
 #' \donttest{

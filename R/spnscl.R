@@ -7,7 +7,7 @@
 #' stationary with intensity lambda = rho E\[N\], and the second-order
 #' intensity is
 #'
-#'   lambda_2(h) = rho^2 E[N]^2 + rho E\[N(N-1)\] f(h)
+#'   lambda_2(h) = rho^2 E\[N\]^2 + rho E\[N(N-1)\] f(h)
 #'
 #' For N ~ Poisson(mu) with Gaussian displacements of standard deviation
 #' sigma in the plane this integrates to

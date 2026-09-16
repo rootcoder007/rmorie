@@ -33,7 +33,7 @@ patch_grid <- function(latent_size, patch) {
 
 #' Forward-pass Gflops for a DiT stack
 #'
-#' attention: 4*T*d^2 + 2*T^2*d. mlp: 2*mlp_ratio*T*d^2. Per block
+#' attention: 4&#42;T&#42;d^2 + 2&#42;T^2&#42;d. mlp: 2&#42;mlp_ratio&#42;T*d^2. Per block
 #' doubled (multiply-adds), scaled by depth L, in Gflops.
 #'
 #' @param tokens    integer T, number of tokens.

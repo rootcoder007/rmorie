@@ -591,7 +591,7 @@ morie_bnd_lp <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'   n, method.
 #' @references Lavine (1992), *Annals of Statistics* 20:1222-1235;
 #'   Ferguson (1974), *Annals of Statistics* 2:615-629; Kraft (1964),
-#'   *J. Applied Probability* 1:385-388; Hanson (2006), *JASA*
+#'   *J. Applied Probability* 1:385-388; Hanson (2006), &#42;JASA&#42;
 #'   101:1548-1565.
 #' @examples
 #' set.seed(1)
