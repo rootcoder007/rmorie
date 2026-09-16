@@ -113,8 +113,7 @@
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .nashq_payoff(M = X, p = 0.5, q = 0.5)
 #' res
 .nashq_payoff <- function(M, p, q) {
@@ -167,6 +166,9 @@
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' nash_equilibria_bimatrix(V, V)
 nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
   B <- .nashq_mat(B, "B")
@@ -257,6 +259,9 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 #' \code{has_global_optimal}, \code{has_saddle}, \code{global_optimal}, \code{saddle},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' stage_game_type(V, V)
 stage_game_type <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
   B <- .nashq_mat(B, "B")

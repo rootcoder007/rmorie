@@ -324,20 +324,22 @@ mrm_fractional_factorial <- function(data, response_col, factor_cols,
 #' @return Named list with coefficients, stationary_point,
 #'   stationary_y, stationary_nature, eigenvalues, n, interpretation.
 #' @examples
-#' # Central composite design on (x1, x2) with quadratic response.
-#' set.seed(2026)
-#' df <- expand.grid(
-#'   x1 = c(-1.4, -1, 0, 1, 1.4),
-#'   x2 = c(-1.4, -1, 0, 1, 1.4)
-#' )
-#' df$y <- 10 + 2 * df$x1 + 1.5 * df$x2 -
-#'   df$x1^2 - 1.2 * df$x2^2 + rnorm(nrow(df), 0, 0.2)
-#' res <- mrm_response_surface(df,
-#'   response_col = "y",
-#'   factor_cols = c("x1", "x2")
-#' )
-#' res$stationary_point
-#' res$stationary_nature
+#' if (morie_crypto_liboqs_available()) {
+#'   # Central composite design on (x1, x2) with quadratic response.
+#'   set.seed(2026)
+#'   df <- expand.grid(
+#'     x1 = c(-1.4, -1, 0, 1, 1.4),
+#'     x2 = c(-1.4, -1, 0, 1, 1.4)
+#'   )
+#'   df$y <- 10 + 2 * df$x1 + 1.5 * df$x2 -
+#'     df$x1^2 - 1.2 * df$x2^2 + rnorm(nrow(df), 0, 0.2)
+#'   res <- mrm_response_surface(df,
+#'     response_col = "y",
+#'     factor_cols = c("x1", "x2")
+#'   )
+#'   res$stationary_point
+#'   res$stationary_nature
+#' }
 #' @export
 mrm_response_surface <- function(data, response_col, factor_cols) {
   d <- data[, c(response_col, factor_cols), drop = FALSE]

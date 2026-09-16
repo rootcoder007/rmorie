@@ -49,6 +49,8 @@
 #' \code{gwp_from_agwp}, \code{lifetime}, \code{radiative_efficiency}, \code{gas},
 #' \code{horizon}, \code{method}.
 #' @export
+#' @examples
+#' morie_gwPot("CO2")
 morie_gwPot <- function(gas, horizon = 100) {
   key <- toupper(gsub("_", "-", trimws(as.character(gas))))
   aliases <- c("CFC11" = "CFC-11", "CFC12" = "CFC-12",

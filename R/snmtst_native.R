@@ -84,6 +84,10 @@
 #' \code{pre_max_change}, \code{bound}, \code{M}, \code{family}, \code{width},
 #' \code{note}.
 #' @export
+#' @examples
+#' beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
+#' r <- identified_set(beta, n_pre = 2, n_post = 3, M = 0.1)
+#' str(r, max.level = 1)
 identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
                            l_vec = NULL, grid = NULL) {
   if (!(family %in% .SNMTST_FAMILIES))
@@ -218,6 +222,11 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 #' @param l_vec Passed to \code{identified_set}.
 #' @return A list with \code{curve}, \code{family}, \code{M}, \code{width}.
 #' @export
+#' @examples
+#' beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
+#' r <- sensitivity_curve(beta, n_pre = 2, n_post = 3,
+#'                        Ms = c(0, 0.05, 0.1))
+#' str(r, max.level = 1)
 sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
                               l_vec = NULL) {
   curve <- lapply(Ms, function(M) {
@@ -246,6 +255,10 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
 #' @param tol Passed to \code{>}. Defaults to \code{1e-09}.
 #' @return A list with \code{breakdown}, \code{family}, \code{sign}, \code{status}.
 #' @export
+#' @examples
+#' beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
+#' r <- breakdown_value(beta, n_pre = 2, n_post = 3)
+#' str(r, max.level = 1)
 breakdown_value <- function(beta, n_pre, n_post, family = "SD",
                             l_vec = NULL, sign = "positive",
                             M_max = 10.0, tol = 1e-9) {
@@ -291,6 +304,10 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
 #' \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family},
 #' \code{level}, \code{conservative}, \code{method}.
 #' @export
+#' @examples
+#' beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
+#' r <- fixed_length_ci(beta, sigma = 0.1, n_pre = 2, n_post = 3, M = 0.1)
+#' str(r, max.level = 1)
 fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
                             family = "SD", l_vec = NULL, level = 0.95) {
   s <- identified_set(beta, n_pre, n_post, M = M, family = family,

@@ -36,6 +36,9 @@ wrap_angle <- function(theta) {
 #' @param b Second angle.
 #' @return Wrapped difference in [-pi, pi).
 #' @export
+#' @examples
+#' d <- angular_difference(0.1, 2 * pi + 0.4)
+#' abs(d - (-0.3)) < 1e-9
 angular_difference <- function(a, b) wrap_angle(as.numeric(a) - as.numeric(b))
 
 #' Quantise angles to 2^bits uniform sectors
@@ -47,6 +50,9 @@ angular_difference <- function(a, b) wrap_angle(as.numeric(a) - as.numeric(b))
 #'   \code{half_delta}, \code{mse_bound}, \code{bits}, \code{levels},
 #'   \code{method}.
 #' @export
+#' @examples
+#' q <- morie_tqang(c(0.1, 0.5, 1.0, -2.0), bits = 8)
+#' is.list(q) || is.numeric(q)
 morie_tqang <- function(theta, bits = 4) {
   b <- as.integer(bits)
   if (!(b >= 1L && b <= 30L))

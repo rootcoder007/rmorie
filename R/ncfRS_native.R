@@ -89,6 +89,9 @@
 #' @param activation Passed to \code{identical}. Defaults to \code{"sigmoid"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ncfRS_gmf(V, V)
 morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
   p <- as.numeric(p_u)
   q <- as.numeric(q_i)
@@ -122,6 +125,14 @@ morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
 #' @param bs A vector; indexed elementwise.
 #' @return The value of \code{z}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' p_u <- rnorm(4); q_i <- rnorm(4)
+#' Ws <- list(matrix(rnorm(4 * 8, 0, 0.3), 4, 8),
+#'            matrix(rnorm(2 * 4, 0, 0.3), 2, 4))
+#' bs <- list(rep(0, 4), rep(0, 2))
+#' z <- morie_ncfRS_mlp_layers(p_u, q_i, Ws, bs)
+#' length(z) == 2L
 morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
   z <- c(as.numeric(p_u), as.numeric(q_i))
   for (l in seq_along(Ws)) {
@@ -149,6 +160,16 @@ morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{score}, \code{gmf_part}, \code{mlp_part}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' p_gmf <- rnorm(4); q_gmf <- rnorm(4)
+#' p_mlp <- rnorm(4); q_mlp <- rnorm(4)
+#' Ws <- list(matrix(rnorm(4 * 8, 0, 0.3), 4, 8),
+#'            matrix(rnorm(2 * 4, 0, 0.3), 2, 4))
+#' bs <- list(rep(0, 4), rep(0, 2))
+#' h <- rnorm(6, 0, 0.3)
+#' s <- morie_ncfRS_neumf(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h)
+#' is.numeric(s)
 morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
   g <- as.numeric(p_gmf) * as.numeric(q_gmf)
   m <- morie_ncfRS_mlp_layers(p_mlp, q_mlp, Ws, bs)
@@ -175,6 +196,9 @@ morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
 #' @param y_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ncfRS_log_loss(V, V)
 morie_ncfRS_log_loss <- function(y, y_hat) {
   p <- min(max(as.numeric(y_hat), .ncfRS_EPS), 1.0 - .ncfRS_EPS)
   yv <- as.numeric(y)
@@ -199,6 +223,12 @@ morie_ncfRS_log_loss <- function(y, y_hat) {
 #' @return A list with \code{estimate}, \code{P}, \code{Q}, \code{h},
 #' \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' pos <- list(`1` = c(1, 2), `2` = c(1, 3), `3` = c(2, 3))
+#' fit <- morie_ncfRS_fit_gmf(pos, n_users = 3, n_items = 3, k_dim = 4,
+#'                            iters = 200, seed = 1)
+#' is.list(fit)
 morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
                                 iters = 2000, n_neg = 4, seed = 0, learn_h = TRUE) {
   U <- as.integer(n_users)
@@ -306,6 +336,8 @@ morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_ncfRS_cheatsheet()
 morie_ncfRS_cheatsheet <- function() {
   paste0("ncfRS: the inner product is an ASSUMPTION, not a ",
          "necessity. GMF = a_out(h' (p_u * q_i)) elementwise, which ",

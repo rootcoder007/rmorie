@@ -41,6 +41,8 @@
 #' @param quaternion Length-4 rotation quaternion.
 #' @return List with covariance, rotation, scale, note.
 #' @export
+#' @examples
+#' covariance_from_scale_rotation(c(1, 2, 0.5), c(1, 0, 0, 0))
 covariance_from_scale_rotation <- function(scale, quaternion) {
   s <- as.numeric(scale)
   if (length(s) != 3L || any(s <= 0))
@@ -58,6 +60,8 @@ covariance_from_scale_rotation <- function(scale, quaternion) {
 #' @param tol Numerical tolerance.
 #' @return List with eigenvalues, min_eigenvalue, psd.
 #' @export
+#' @examples
+#' is_positive_semidefinite(S = 5L)
 is_positive_semidefinite <- function(S, tol = -1e-9) {
   M <- as.matrix(S)
   storage.mode(M) <- "double"
@@ -73,6 +77,8 @@ is_positive_semidefinite <- function(S, tol = -1e-9) {
 #' @param J Jacobian of the perspective projection.
 #' @return List with projected, dim, note.
 #' @export
+#' @examples
+#' project_covariance(S = 5L, W = 5L, J = c(1, 2, 3, 4, 5, 6, 7, 8))
 project_covariance <- function(S, W, J) {
   C <- as.matrix(S)
   storage.mode(C) <- "double"
@@ -94,6 +100,9 @@ project_covariance <- function(S, W, J) {
 #' @param depths Optional depth vector; absent means input order.
 #' @return List with colour, transmittance, coverage, note.
 #' @export
+#' @examples
+#' set.seed(1)
+#' alpha_composite(matrix(runif(6), 2, 3), c(0.5, 0.7))
 alpha_composite <- function(colours, alphas, depths = NULL) {
   C <- as.matrix(colours)
   storage.mode(C) <- "double"
@@ -128,6 +137,9 @@ alpha_composite <- function(colours, alphas, depths = NULL) {
 #' @return List with clone, split, prune, n_before, n_after, method,
 #'   note.
 #' @export
+#' @examples
+#' adaptive_density_control(gradients = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   scales = c(1, 2, 3, 4, 5, 6, 7, 8), opacities = c(1, 2, 3, 4, 5, 6, 7, 8))
 adaptive_density_control <- function(gradients, scales, opacities,
                                      grad_threshold = 0.0002,
                                      scale_threshold = 0.01,

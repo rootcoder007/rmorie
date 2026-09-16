@@ -59,6 +59,9 @@
 #' @param tau See Usage.
 #' @param rho See Usage.
 #' @export
+#' @examples
+#' W <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
+#' morie_poissp_car_precision(W, tau = 1.0, rho = 0.5)
 morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
   A <- .poissp_adjacency(W)
   n <- nrow(A)
@@ -72,6 +75,9 @@ morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
 #' The propriety interval for rho
 #' @param W See Usage.
 #' @export
+#' @examples
+#' W <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
+#' morie_poissp_rho_bounds(W)
 morie_poissp_rho_bounds <- function(W) {
   A <- .poissp_adjacency(W)
   n <- nrow(A)
@@ -98,8 +104,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @return A numeric value.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .poissp_constraint_weight(m = X)
 #' res
 .poissp_constraint_weight <- function(m) {
@@ -219,8 +224,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @export
 #' @examples
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .poissp_loglik(y = y, m = X)
 #' res
 .poissp_loglik <- function(y, m) {
@@ -308,6 +312,9 @@ morie_poissp_rho_bounds <- function(W) {
 #' Banerjee, S., Carlin, B. P. and Gelfand, A. E. (2014) Hierarchical
 #' Modeling and Analysis for Spatial Data, 2nd edn, Chapman and Hall/CRC.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_poissp(V)
 morie_poissp <- function(counts, X = NULL, offset = NULL, W = NULL,
                          rho = 1.0, tau = NULL, constrain = NULL,
                          iters = 100L, tol = 1e-11, ridge = 1e-10,
@@ -433,6 +440,8 @@ morie_poisson_spatial_glm <- morie_poissp
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_poissp_cheatsheet()
 morie_poissp_cheatsheet <- function() {
   paste0("poissp: Poisson areal regression, log mu = X beta + u with a ",
          "known offset E entering at coefficient one, and u ~ CAR with ",

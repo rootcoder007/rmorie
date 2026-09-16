@@ -89,6 +89,8 @@
 #' @param temperature Kelvin.
 #' @return The binding free energy.
 #' @export
+#' @examples
+#' morie_frgrow_dg(kd = 5L)
 morie_frgrow_dg <- function(kd, temperature = .FRGROW_T_STANDARD) {
   kd <- as.numeric(kd)
   if (kd <= 0) stop("a dissociation constant must be positive")
@@ -109,6 +111,8 @@ morie_frgrow_dg <- function(kd, temperature = .FRGROW_T_STANDARD) {
 #' @param temperature Kelvin.
 #' @return The ligand efficiency.
 #' @export
+#' @examples
+#' morie_frgrow_le(kd = 5L, hac = 5L)
 morie_frgrow_le <- function(kd, hac, route = "rt",
                             temperature = .FRGROW_T_STANDARD) {
   if (!(route %in% .FRGROW_ENERGY_ROUTES))
@@ -168,6 +172,8 @@ morie_frgrow_ge <- function(kd_parent, hac_parent, kd_grown, hac_grown,
 #' @param temperature Kelvin.
 #' @return A list with pKd, the free energy and the five metrics.
 #' @export
+#' @examples
+#' morie_frgrow_metrics(kd = 5L, hac = 5L)
 morie_frgrow_metrics <- function(kd, hac, logp = NULL, mw = NULL,
                                  psa = NULL, route = "rt",
                                  temperature = .FRGROW_T_STANDARD) {
@@ -213,6 +219,14 @@ morie_frgrow_metrics <- function(kd, hac, logp = NULL, mw = NULL,
 #'   group efficiency, the ranking by group efficiency, and which
 #'   additions actually improved the ligand efficiency they inherited.
 #' @export
+#' @examples
+#' PARENT <- list(0.001, 12, 0.9, 165, 42, "frag")
+#' LIB <- list(list(2e-04, 15, 1.6, 205, 51, "methylamide"), list(1e-05,
+#'     20, 2.8, 268, 60, "biaryl"), list(5e-04, 27, 4.4, 360, 66,
+#'     "greasy_tail"), list(0.001, 14, 1, 190, 45, "inert_stub"),
+#'     list(0.004, 18, 2.2, 240, 58, "worse"), list(8e-07, 22, NULL,
+#'         NULL, NULL, "no_descriptors"))
+#' morie_frgrow(PARENT, LIB)
 morie_frgrow <- function(fragment, linker_lib, route = "rt",
                          temperature = .FRGROW_T_STANDARD) {
   unpack <- function(row) {
@@ -297,6 +311,8 @@ morie_frgrow <- function(fragment, linker_lib, route = "rt",
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_frgrow_cheatsheet()
 morie_frgrow_cheatsheet <- function()
   paste0("frgrow: fragment growing by ligand and group efficiency. ",
          "routes ", paste(.FRGROW_ENERGY_ROUTES, collapse = ", "),

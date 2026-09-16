@@ -216,8 +216,8 @@ Otsinkh <- function(a, b, C, epsilon, max_iter = 200L) {
 #' @references Cuturi (2013), Sec. 4.1.
 #' @export
 #' @examples
-#' Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon
-#' = 5L, tol = 0.5)
+#' Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L,
+#'   tol = 0.5)
 Otsinkit <- function(a, b, C, epsilon, tol, max_iter = 200L) {
   tol <- as.numeric(tol)
   if (!(tol > 0)) stop("tol must be positive", call. = FALSE)
@@ -493,7 +493,7 @@ Otlogpot <- function(u, v, epsilon) {
 #' @export
 #' @examples
 #' Otpushfw(mu_grid = c(1, 2, 3, 4, 5, 6, 7, 8), T_jac = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' T_inv_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+#'   T_inv_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 Otpushfw <- function(mu_grid, T_jac, T_inv_grid) {
   mu <- as.numeric(mu_grid)
   jac <- as.numeric(T_jac)

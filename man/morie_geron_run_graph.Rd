@@ -18,8 +18,8 @@ Matrix output.
 Re-execute a traced graph, enforcing recorded shapes (ncol must match)
 }
 \examples{
-r <- morie_geron_scaled_dot_product(matrix(c(0, 0), 1), matrix(c(1, 
-    0, 0, 1), 2, 2, byrow = TRUE), matrix(c(1, 0, 0, 10), 2, 
+r <- morie_geron_scaled_dot_product(matrix(c(0, 0), 1), matrix(c(1,
+    0, 0, 1), 2, 2, byrow = TRUE), matrix(c(1, 0, 0, 10), 2,
     2, byrow = TRUE))
 morie_geron_run_graph(r$graph, matrix(c(1, 2, 3), 1, 3))
 }

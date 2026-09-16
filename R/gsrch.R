@@ -14,12 +14,15 @@
 #' @param seed RNG seed.
 #' @return Named list: estimate (best CV score), best_params, best_score,
 #'   cv_results_params, cv_results_mean_score, task, n, method.
-#' @examplesIf requireNamespace("caret", quietly = TRUE)
+#' @examples
+#' set.seed(1)
+#' \dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_grid_search_cv(
 #'   x = matrix(rnorm(150), 50, 3), y = rnorm(50),
 #'   method = "lm", tune_grid = data.frame(intercept = c(TRUE, FALSE)),
 #'   cv = 3L, task = "regression", seed = 1L
 #' )
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
                                  cv = 5L, task = "auto", seed = 0L) {

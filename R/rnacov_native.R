@@ -72,6 +72,9 @@
 #' @param j Second column, one-based.
 #' @return A list with the joint counts, both margins and the count.
 #' @export
+#' @examples
+#' morie_rnacov_counts(alignment = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   j = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rnacov_counts <- function(alignment, i, j) {
   joint <- matrix(0L, 4L, 4L)
   n <- 0L
@@ -100,6 +103,9 @@ morie_rnacov_counts <- function(alignment, i, j) {
 #' @param correction "none" or "miller_madow".
 #' @return A list with the information, the support and the cells seen.
 #' @export
+#' @examples
+#' morie_rnacov_mi(alignment = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   j = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
   cc <- morie_rnacov_counts(alignment, i, j)
   n <- cc$n
@@ -138,6 +144,9 @@ morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
 #' @param s A dot-bracket string.
 #' @return A two-column matrix of zero-based pair positions.
 #' @export
+#' @examples
+#' STRUCT <- "(((((...))))).."
+#' morie_rnacov_parse(STRUCT)
 morie_rnacov_parse <- function(s) {
   chars <- strsplit(s, "", fixed = TRUE)[[1]]
   stack <- integer(0)
@@ -190,6 +199,9 @@ morie_rnacov_parse <- function(s) {
 #' @param min_loop The minimum hairpin loop.
 #' @return A list with the zero-based pair matrix and the pair count.
 #' @export
+#' @examples
+#' S <- c("a", "b", "c")
+#' morie_rnacov_nussinov(S)
 morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
   ch <- strsplit(seq, "", fixed = TRUE)[[1]]
   n <- length(ch)
@@ -258,6 +270,24 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
 #'   total, the pairs used, and how many were too sparsely covered to
 #'   judge.
 #' @export
+#' @examples
+#' STRUCT <- "(((((...))))).."
+#' PSET <- list(c("G", "C"), c("C", "G"), c("A", "U"), c("U", "A"))
+#' STEM <- list(c(0L, 12L), c(1L, 11L), c(2L, 10L), c(3L, 9L), c(4L,
+#'     8L))
+#' ALN <- vapply(0:7, function(sq) {
+#'     row <- rep(".", 15L)
+#'     for (k in seq_along(STEM)) {
+#'         ab <- PSET[[(sq + k - 1L)%%4L + 1L]]
+#'         row[STEM[[k]][1] + 1L] <- ab[1]
+#'         row[STEM[[k]][2] + 1L] <- ab[2]
+#'     }
+#'     row[6] <- "A"
+#'     row[7] <- substr("ACGU", sq%%4L + 1L, sq%%4L + 1L)
+#'     row[8] <- "G"
+#'     paste(row, collapse = "")
+#' }, character(1))
+#' morie_rnacov(ALN, STRUCT)
 morie_rnacov <- function(alignment, structure = NULL,
                          correction = "none", mode = "given",
                          min_loop = 3L, min_sequences = 4L) {
@@ -319,6 +349,8 @@ morie_rnacov <- function(alignment, structure = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_rnacov_cheatsheet()
 morie_rnacov_cheatsheet <- function()
   paste0("rnacov: RNA covariance model scoring. modes ",
          paste(.RNACOV_STRUCTURES, collapse = ", "),

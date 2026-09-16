@@ -21,7 +21,9 @@
 #'   Nonparametric Bayesian Inference, CUP, section 12.5.
 #' @export
 #' @examples
+#' \donttest{
 #' Ghosalcredsetcov()
+#' }
 Ghosalcredsetcov <- function(theta0 = 0.5, n = 400, level = 0.9,
                              n_sim = 400, seed = 42) {
   n <- as.integer(n)

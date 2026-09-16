@@ -277,6 +277,9 @@
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{fit}, \code{coef}.
 #' @export
+#' @examples
+#' local_nuisance(target = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 local_nuisance <- function(target, W, weights, exclude = NULL,
                           ridge = 1e-8) {
   Wm <- as.matrix(W)
@@ -312,6 +315,9 @@ local_nuisance <- function(target, W, weights, exclude = NULL,
 #' @param weights A vector; its length is taken.
 #' @return A list with \code{theta}, \code{den}.
 #' @export
+#' @examples
+#' orthogonal_moment(y_res = c(1, 2, 3, 4, 5, 6, 7, 8), t_res = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 orthogonal_moment <- function(y_res, t_res, weights) {
   n <- length(y_res)
   if (length(t_res) != n || length(weights) != n)
@@ -409,6 +415,10 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #' \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features},
 #' \code{orthogonal}, \code{method}.
 #' @export
+#' @examples
+#' orthogonal_random_forest(Y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   T = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   W = c(1, 2, 3, 4, 5, 6, 7, 8))
 orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                                      n_trees = 100, min_leaf = 5,
                                      alpha = 0.05, max_depth = 12,

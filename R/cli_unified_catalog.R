@@ -18,8 +18,10 @@
 #'   (or the dev tree if running under `devtools::load_all()`).
 #' @return Invisibly, the path written.
 #' @examples
+#' \donttest{
 #' out <- morie_cli_dump_catalog(out_path = tempfile(fileext = ".csv"))
 #' file.exists(out)
+#' }
 #' @export
 morie_cli_dump_catalog <- function(out_path = NULL) {
   if (is.null(out_path)) {

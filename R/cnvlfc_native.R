@@ -345,6 +345,9 @@
 #' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1}.
 #' @return A list with \code{points}, \code{index}, \code{E}, \code{tau}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' cnvlfc_embed(V)
 cnvlfc_embed <- function(series, E = 2, tau = 1) {
     em <- .cnvlfc_embed(series, E, tau)
     list(points = lapply(seq_len(nrow(em$points)),
@@ -368,6 +371,9 @@ cnvlfc_embed <- function(series, E = 2, tau = 1) {
 #' @param exclude Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.
 #' @return The value of \code{.cnvlfc_cross_map}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' cnvlfc_cross_map(V, V)
 cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
                              library = NULL, seed = 1L, exclude = 0L) {
     .cnvlfc_cross_map(driver, response, E, tau, library, seed, exclude)
@@ -388,6 +394,9 @@ cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
 #' @param exclude Passed to \code{.cnvlfc_ccm}. Defaults to \code{0L}.
 #' @return The value of \code{.cnvlfc_ccm}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' cnvlfc_ccm(V, V)
 cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
                        seed = 1L, exclude = 0L) {
     .cnvlfc_ccm(x, y, E, tau, lib_sizes, seed, exclude)
@@ -409,6 +418,8 @@ cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
 #' @param burn Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{300L}.
 #' @return The value of \code{.cnvlfc_coupled_logistic}.
 #' @export
+#' @examples
+#' cnvlfc_coupled_logistic(n = 5L)
 cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
                                     byx = 0.1, x0 = 0.4, y0 = 0.2,
                                     burn = 300L) {
@@ -428,6 +439,9 @@ cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
 #' @param ... Passed through.
 #' @return The value of \code{do.call}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' cnvlfc_convergent_cross_mapping(V, V)
 cnvlfc_convergent_cross_mapping <- function(x, y, E = 2L, tau = 1L, ...) {
     dots <- list(...)
     do.call(.cnvlfc_ccm,

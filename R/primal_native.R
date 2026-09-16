@@ -154,6 +154,9 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
 #' @param theta Passed to \code{morie_primal}. Defaults to \code{1}.
 #' @return The value of \code{res}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tv_denoise_1d(V)
 morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
                                 tol = 1e-12, theta = 1.0) {
   b <- as.numeric(signal)

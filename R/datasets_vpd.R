@@ -37,9 +37,11 @@
 #' web UI is not the same as the script user.
 #'
 #' @return A character vector (one element per line).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' d <- morie_datasets_vpd_legal_disclaimer()
 #' head(d)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_vpd_legal_disclaimer <- function() {
   path <- .rmorie_extdata("vpd_legal_disclaimer.txt")
@@ -155,11 +157,13 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #' @return A `data.frame` with 10 columns.
 #' @references VPD GeoDASH Open Data,
 #'   \url{https://geodash.vpd.ca/opendata/}.
-#' @examplesIf nzchar(.rmorie_extdata("vpd_crime_sample.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_vpd_crime(offline = TRUE)
 #' nrow(df) # 550
 #' table(df$TYPE)
 #' table(df$NEIGHBOURHOOD)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_vpd_crime <- function(offline = TRUE,
                                      zip_path = NULL,

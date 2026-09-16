@@ -135,9 +135,11 @@ NULL
 #'   "Neighbourhood Improvement Areas"
 #'   (\url{https://open.toronto.ca/dataset/neighbourhood-improvement-areas/});
 #'   licensed under the Open Government Licence -- Toronto.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_to_neighbourhoods("158", offline = TRUE)
 #' head(df[, c("AREA_SHORT_CODE", "AREA_NAME")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_to_neighbourhoods <- function(version = c("158", "140", "nia"),
                                      offline = TRUE,
@@ -209,10 +211,12 @@ morie_tps_resolve_hood_col <- function(df, prefer = c("158", "140"),
 #' @param df A TPS crime `data.frame`.
 #' @param expected Either `"158"` or `"140"`.
 #' @return Invisibly `TRUE` on success.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cw <- morie_to_hood_crosswalk()
 #' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
 #' res <- try(morie_tps_assert_hood_version(df, expected = "158"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_assert_hood_version <- function(df,
                                             expected = c("158", "140")) {
@@ -249,8 +253,10 @@ morie_tps_assert_hood_version <- function(df,
 #' @param year Integer year (or vector of years).
 #' @return Character vector of `"158"` / `"140"` recommendations,
 #'   parallel to `year`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_tps_year_to_hood_version(2019)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_year_to_hood_version <- function(year) {
   y <- suppressWarnings(as.integer(year))
@@ -296,8 +302,10 @@ morie_tps_year_to_hood_version <- function(year) {
 #'
 #' @return A `data.frame` with the columns above. `hood_140` and
 #'   `hood_158` are character (zero-padded to 3 chars).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' head(morie_to_hood_crosswalk())
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_to_hood_crosswalk <- function() {
   path <- .rmorie_extdata("to_hood_158_140_crosswalk.csv")
@@ -359,9 +367,11 @@ morie_to_hood_crosswalk <- function() {
 #' @param crosswalk Optional pre-loaded crosswalk; defaults to
 #'   `morie_to_hood_crosswalk()`.
 #' @return `df` with the equivalent-code column appended.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- data.frame(EVENT_ID = 1:3, HOOD_140 = c("082", "001", "075"))
 #' morie_tps_add_hood_158_from_140(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_add_hood_158_from_140 <- function(df, col_in = NULL,
                                               col_out = "HOOD_158_equiv",
@@ -394,11 +404,13 @@ morie_tps_add_hood_158_from_140 <- function(df, col_in = NULL,
 #' @param col_in Name of the input HOOD_158 column.
 #' @param col_out Name of the new column. Default `"HOOD_140_equiv"`.
 #' @return `df` with the equivalent-code column appended.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cw <- morie_to_hood_crosswalk()
 #' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
 #' res <- try(morie_tps_add_hood_140_from_158(df))
 #' if (!inherits(res, "try-error")) head(res)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_add_hood_140_from_158 <- function(df, col_in = NULL,
                                               col_out = "HOOD_140_equiv",
@@ -449,10 +461,12 @@ morie_tps_add_hood_140_from_158 <- function(df, col_in = NULL,
 #' @return A `data.frame` with columns `hood_158`, `name_158`,
 #'   `hood_140`, all chosen `count_cols` (now per-158 fractional
 #'   counts), and `pct_140_in_158` (the cake-cut weight applied).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- data.frame(HOOD_140 = c("075", "001"),
 #'                  incidents = c(100, 42))
 #' morie_tps_disaggregate_140_to_158(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_disaggregate_140_to_158 <- function(df,
                                                 hood_140_col = "HOOD_140",
@@ -511,10 +525,12 @@ morie_tps_disaggregate_140_to_158 <- function(df,
 #' @param crosswalk Optional pre-loaded crosswalk.
 #' @return A `data.frame` with one row per 140-hood, columns
 #'   `hood_140`, `name_140`, and the summed `count_cols`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- data.frame(HOOD_158 = c("167", "168", "001"),
 #'                  incidents = c(40, 60, 42))
 #' morie_tps_aggregate_158_to_140(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_aggregate_158_to_140 <- function(df,
                                              hood_158_col = "HOOD_158",

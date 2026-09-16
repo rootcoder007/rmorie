@@ -24,6 +24,10 @@
 #' @return A list with batch, meta, n_series, n_patches, patch_len,
 #'   note.
 #' @export
+#' @examples
+#' set.seed(1)
+#' series_list <- list(rnorm(20), rnorm(24), rnorm(18))
+#' morie_momento_harmonise(series_list, patch_len = 4)
 morie_momento_harmonise <- function(series_list, patch_len,
                                      normalise = TRUE) {
   P <- as.integer(patch_len)
@@ -75,6 +79,10 @@ morie_momento_harmonise <- function(series_list, patch_len,
 #' @param fill Fill value.
 #' @return A list with masked, mask, mask_idx, mask_rate, n_patches.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_momento_mask_patches(V, M)
 morie_momento_mask_patches <- function(patches, mask_idx, fill = 0) {
   P <- lapply(patches, as.numeric)
   n <- length(P)
@@ -103,6 +111,9 @@ morie_momento_mask_patches <- function(patches, mask_idx, fill = 0) {
 #' @param mask Boolean vector of length n_patches.
 #' @return A list with mse, n_scored, scored.
 #' @export
+#' @examples
+#' morie_momento_masked_loss(truth = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   reconstruction = c(1, 2, 3, 4, 5, 6, 7, 8), mask = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_momento_masked_loss <- function(truth, reconstruction, mask) {
   T <- lapply(truth, as.numeric)
   R <- lapply(reconstruction, as.numeric)
@@ -137,6 +148,8 @@ morie_momento_masked_loss <- function(truth, reconstruction, mask) {
 #' @param start Starting patch (for impute).
 #' @return Integer vector of mask indices.
 #' @export
+#' @examples
+#' morie_momento_task_mask(n_patches = 5L)
 morie_momento_task_mask <- function(n_patches, task = "forecast",
                                      span = 1, start = NULL) {
   n <- as.integer(n_patches)
@@ -166,6 +179,11 @@ morie_momento_task_mask <- function(n_patches, task = "forecast",
 #' @param seed Seed for the shared generator.
 #' @return A list with curve, n_patches, rates, mse.
 #' @export
+#' @examples
+#' set.seed(1)
+#' patches <- lapply(1:6, function(i) rnorm(8))
+#' recon <- function(masked, mask) masked
+#' morie_momento_reconstruction_curve(patches, recon, rates = c(0.2, 0.5, 0.8))
 morie_momento_reconstruction_curve <- function(patches, reconstructor,
                                                 rates, seed = 0) {
   P <- lapply(patches, as.numeric)

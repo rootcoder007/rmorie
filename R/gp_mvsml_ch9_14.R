@@ -23,6 +23,9 @@
 #' @param B A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_khatri_rao_rows(V, V)
 morie_khatri_rao_rows <- function(A, B) {
   A <- as.matrix(A)
   B <- as.matrix(B)
@@ -68,6 +71,8 @@ Apxkern <- function(X, m_index, Z_u1, Z_E, kernel = "linear",
 #' side < 0 satisfies (9.3) and puts the point on one side, > 0 satisfies
 #' (9.4) and puts it on the other.
 #' @noRd
+#' @examples
+#' rmorie:::Hyperpl(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Hyperpl <- function(X, beta0, beta) {
   X <- as.matrix(X)
   b <- as.numeric(beta)
@@ -90,6 +95,9 @@ Hyperpl <- function(X, beta0, beta) {
 #' fixed, that is equivalent to minimizing (1/2)||beta||^2 (9.7) subject
 #' to y_i(beta_0 + x_i beta) >= 1 (9.8); the street is 2 / ||beta||.
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Hardsvm(V, V)
 Hardsvm <- function(X, y, ...) {
   fit <- morie_svm_fit_dual(X, y, C = NULL, ...)
   X <- as.matrix(X)
@@ -119,6 +127,9 @@ Hardsvm <- function(X, y, ...) {
 #' the inequality term is crucial; its own worked examples supply the
 #' constraint in the >= form and subtract it, the convention used here.
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wolfedual(V, V)
 Wolfedual <- function(f, grad_f, h = NULL, grad_h = NULL, g = NULL,
                       grad_g = NULL, lam = NULL, alpha = NULL) {
   hv <- if (is.null(h)) numeric(0) else as.numeric(h)
@@ -165,6 +176,9 @@ Wolfedual <- function(f, grad_f, h = NULL, grad_h = NULL, g = NULL,
 #' Example 9.1 is a = 1, c = 1; Illustrative Example 9.2 is a = (1, 1),
 #' c = 2.  The two are the same problem, so one routine answers both.
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Qplincon(V, V)
 Qplincon <- function(a, c) {
   av <- as.numeric(a)
   aa <- sum(av^2)
@@ -188,6 +202,9 @@ Qplincon <- function(a, c) {
 #' Its derivatives with respect to beta and beta_0 are (9.28) and (9.29),
 #' both zero at the optimum.
 #' @noRd
+#' @examples
+#' rmorie:::Svmlagr(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, alpha = 0.5)
 Svmlagr <- function(X, y, beta0, beta, alpha) {
   X <- as.matrix(X)
   b <- as.numeric(beta)
@@ -214,6 +231,9 @@ Svmlagr <- function(X, y, beta0, beta, alpha) {
 #' only (9.45) is directly solvable, so T is the box bound here and the
 #' realized sum of slacks is returned as slack_sum.
 #' @noRd
+#' @examples
+#' rmorie:::Softsvm(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   T = c(1, 2, 3, 4, 5, 6, 7, 8))
 Softsvm <- function(X, y, T, ...) {
   fit <- morie_svm_fit_dual(X, y, C = as.numeric(T), ...)
   X <- as.matrix(X)
@@ -247,6 +267,11 @@ Softsvm <- function(X, y, T, ...) {
 #' book's own (9.41), which states dL/dzeta_i = T - alpha_i - delta_i;
 #' that requires the term to enter with a minus, and it does so here.
 #' @noRd
+#' @examples
+#' set.seed(1)
+#' r <- rmorie:::Svmkkt(X = rnorm(10), y = rnorm(10), beta0 = 0.5, beta = 0.5, alpha = 0.5,
+#'   delta = rnorm(10), zeta = rnorm(10), T = rnorm(10))
+#' TRUE
 Svmkkt <- function(X, y, beta0, beta, alpha, delta, zeta, T) {
   X <- as.matrix(X)
   b <- as.numeric(beta)
@@ -281,6 +306,9 @@ Svmkkt <- function(X, y, beta0, beta, alpha, delta, zeta, T) {
 #' 0 <= alpha_i <= T and sum_i alpha_i y_i = 0.  It differs from the hard
 #' margin dual (9.32)-(9.33) only by the upper bound T.
 #' @noRd
+#' @examples
+#' rmorie:::Svmsdual(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   T = c(1, 2, 3, 4, 5, 6, 7, 8))
 Svmsdual <- function(X, y, T, K = NULL, ...) {
   Tv <- as.numeric(T)
   fit <- morie_svm_fit_dual(X, y, C = Tv, K = K, ...)
@@ -305,6 +333,9 @@ Svmsdual <- function(X, y, T, K = NULL, ...) {
 #' enlarged feature space.  That substitution is the whole difference
 #' between (9.44) and (9.46); the constraints (9.47) are unchanged.
 #' @noRd
+#' @examples
+#' rmorie:::Ksvmdual(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   T = c(1, 2, 3, 4, 5, 6, 7, 8))
 Ksvmdual <- function(X, y, T, kernel = "linear", gamma = NULL,
                      K = NULL, ...) {
   Km <- if (is.null(K)) {
@@ -327,6 +358,9 @@ Ksvmdual <- function(X, y, T, kernel = "linear", gamma = NULL,
 #' the trapezoid rule on the observation grid, the same quadrature the
 #' chapter uses for its inner products on p.581.
 #' @noRd
+#' @examples
+#' rmorie:::Flmint(t = c(1, 2, 3, 4, 5, 6, 7, 8), x_values = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   beta_values = c(1, 2, 3, 4, 5, 6, 7, 8))
 Flmint <- function(t, x_values, beta_values, mu = 0) {
   tt <- as.numeric(t)
   xs <- as.numeric(x_values)
@@ -347,6 +381,9 @@ Flmint <- function(t, x_values, beta_values, mu = 0) {
 #' estimable: an infinite-dimensional unknown function is replaced by L1
 #' scalars, after which (14.1) collapses to the linear model (14.3).
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Basexp(V, V)
 Basexp <- function(t, beta_coef, kind = "fourier", period = NULL) {
   coefs <- as.numeric(beta_coef)
   list(
@@ -364,6 +401,8 @@ Basexp <- function(t, beta_coef, kind = "fourier", period = NULL) {
 #' L2 basis functions.  It is what turns a discretely sampled curve into
 #' basis coefficients through (14.7).
 #' @noRd
+#' @examples
+#' rmorie:::Basmat(t = c(1, 2, 3, 4, 5, 6, 7, 8), n_basis = 5L)
 Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
   Psi <- morie_fda_basis(t, n_basis, kind, period)
   list(
@@ -396,6 +435,9 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 #' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_fda_basis_deriv(V, V)
 morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
                                   period = NULL) {
   tt <- as.numeric(t)
@@ -441,6 +483,9 @@ morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
 #' P_ij = int_0^T phi_i^(p)(t) phi_j^(p)(t) dt.  The chapter says p is
 #' typically 1 or 2.  Integrals by the trapezoid rule on the grid t.
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Penmat(V, V)
 Penmat <- function(t, L1, p = 2L, kind = "fourier", period = NULL,
                    beta = NULL) {
   tt <- as.numeric(t)
@@ -473,6 +518,9 @@ Penmat <- function(t, L1, p = 2L, kind = "fourier", period = NULL,
 #' against smoothness: at lambda = 0 it is least squares, and as lambda
 #' grows beta(t) is driven towards a constant.
 #' @noRd
+#' @examples
+#' rmorie:::Pensse(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5,
+#'   lam = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5)
 Pensse <- function(y, X, beta, lam, P, mu = 0) {
   ys <- as.numeric(y)
   X <- as.matrix(X)
@@ -500,6 +548,9 @@ Pensse <- function(y, X, beta, lam, P, mu = 0) {
 #' with beta = Gamma beta*.  Zero eigenvalues of a rank-deficient P
 #' contribute nothing, the reduction the book notes.
 #' @noRd
+#' @examples
+#' rmorie:::Penfreg(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5,
+#'   lam = c(1, 2, 3, 4, 5, 6, 7, 8))
 Penfreg <- function(y, X, P, lam, mu = NULL, tol = 1e-10) {
   ys <- as.numeric(y)
   X <- as.matrix(X)
@@ -559,6 +610,9 @@ Penfreg <- function(y, X, P, lam, mu = NULL, tol = 1e-10) {
 #' @return A list with \code{X_EF}, \code{levels}, \code{kept_levels}, \code{reference},
 #' \code{n_columns}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_fda_env_interaction(V, V)
 morie_fda_env_interaction <- function(X, env, reference = TRUE) {
   X <- as.matrix(X)
   levels_ <- sort(unique(env))
@@ -584,6 +638,9 @@ morie_fda_env_interaction <- function(X, env, reference = TRUE) {
 #' NULL gives (14.13) and passing it gives (14.14); the two differ by
 #' that block alone, which is why one routine covers both.
 #' @noRd
+#' @examples
+#' rmorie:::Fregenv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X_E = c(1, 2, 3, 4, 5, 6, 7, 8))
 Fregenv <- function(y, X, X_E, X_EF = NULL, lam = 0, P = NULL) {
   ys <- as.numeric(y)
   X <- as.matrix(X)
@@ -631,6 +688,9 @@ Fregenv <- function(y, X, X_E, X_EF = NULL, lam = 0, P = NULL) {
 #' environment label of each record, to have the block-diagonal X_EF of
 #' p.610 built, or pass X_EF directly.
 #' @noRd
+#' @examples
+#' rmorie:::Fregint(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X_E = c(1, 2, 3, 4, 5, 6, 7, 8))
 Fregint <- function(y, X, X_E, X_EF = NULL, env = NULL, lam = 0,
                     P = NULL, reference = TRUE) {
   if (is.null(X_EF) && !is.null(env)) {

@@ -14,11 +14,13 @@
 #' @return list: estimate, se, c_coef, var_ratio_cv_over_crude, n, method.
 #' @keywords internal
 #' @examples
-#' set.seed(5)
-#' y <- rnorm(100, mean = 2)
-#' cc <- y + rnorm(100, sd = 0.5)
-#' res <- rmorie:::cntrl_estimator(y, cc, mean(cc))
-#' res$estimate
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(5)
+#'   y <- rnorm(100, mean = 2)
+#'   cc <- y + rnorm(100, sd = 0.5)
+#'   res <- rmorie:::cntrl_estimator(y, cc, mean(cc))
+#'   res$estimate
+#' }
 #' @export
 cntrl_estimator <- function(y, c_var, mu_c) {
   y <- as.numeric(y)

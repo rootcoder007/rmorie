@@ -907,7 +907,8 @@ morie_siu_refresh_manifest <- function(
 #'   frame for this case), \code{drid}, \code{nrid},
 #'   \code{report_html}, \code{news_html}, \code{report_text}
 #'   (HTML-stripped plain text of the report) and \code{news_text}.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
@@ -917,6 +918,7 @@ morie_siu_refresh_manifest <- function(
 #' )
 #' cat(substr(a$report_text, 1, 1000), "\n")
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_audit_case <- function(case_number,
                                  cache_dir = file.path(tempdir(), "morie", "siu"),
@@ -1072,7 +1074,8 @@ morie_siu_audit_case <- function(case_number,
 #'   occurrence of either value in the cleaned report text). When
 #'   parser and external disagree, the \code{html_excerpt} is the
 #'   tie-breaker.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
@@ -1087,6 +1090,7 @@ morie_siu_audit_case <- function(case_number,
 #' )
 #' subset(cmp, !agree)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_compare <- function(case_number, external,
                               field_map = NULL,
@@ -1761,7 +1765,8 @@ morie_siu_compare <- function(case_number, external,
 #' @return A one-row data frame with the 64 morie SIU columns. Any
 #'   field the model could not extract is the empty string
 #'   (matching the C++ parser's convention).
-#' @examplesIf morie_llm_probe_ollama()
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
 #' # Local Ollama is the default provider (free, no key); Gemini and
 #' # other cloud providers are optional fallbacks via model=.
 #' r <- morie_siu_llm_extract("17-OVI-201", model = "ollama")
@@ -1772,6 +1777,7 @@ morie_siu_compare <- function(case_number, external,
 #'   field_map = setNames(as.list(names(r)), names(r)),
 #'   external_case_col = "case_number"
 #' )
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_llm_extract <- function(case_number,
                                   model = c("ollama", "gemini"),
@@ -1894,13 +1900,15 @@ morie_siu_llm_extract <- function(case_number,
 #'   \code{field}, \code{parser_value}, \code{verdict} (one of
 #'   \code{"agree"} / \code{"disagree"} / \code{"unclear"}), and
 #'   \code{reason} (a short sentence pointing to the report passage).
-#' @examplesIf morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Local Ollama is the default provider (free, no key); the report
 #' # HTML is fetched live, so try() keeps offline checks graceful.
 #' a <- try(morie_siu_anomaly_check("17-OVI-201", model = "ollama"))
 #' if (!inherits(a, "try-error")) subset(a, verdict == "disagree")
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_anomaly_check <- function(case_number,
                                     model = c("ollama",
@@ -2253,7 +2261,8 @@ morie_siu_sanity_check <- function(df) {
 #' @param progress Print per-case progress.
 #' @return Invisibly, a data frame of newly-recorded
 #'   (case_number, field, verified_value) translations.
-#' @examplesIf morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Uses the local Ollama server (OLLAMA_HOST, default
 #' # http://localhost:11434; model via OLLAMA_MODEL, e.g.
 #' # translategemma:latest). Corpus cache first:
@@ -2261,6 +2270,7 @@ morie_siu_sanity_check <- function(df) {
 #' # Translate every non-English row to English:
 #' morie_siu_translate(target_lang = "en",
 #'                     cache_dir = file.path(tempdir(), "morie", "siu"))
+#' \dontshow{\}) # examplesIf}
 #' \donttest{
 #' # Needs the SIU HTML cache plus a configured LLM provider (e.g. local
 #' # ollama); translates the French-only directors reports field-by-field.
@@ -2516,7 +2526,8 @@ morie_siu_translate_fr_to_en <- function(
 #'   \code{agree_rate}. Sorted ascending by \code{agree_rate} so the
 #'   most-broken fields land at the top. The \code{"examples"}
 #'   attribute holds nested data frames of flagged cases per field.
-#' @examplesIf morie_llm_probe_ollama()
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
 #' # Uses the local Ollama server (OLLAMA_HOST / OLLAMA_MODEL).
 #' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' df <- utils::read.csv(csv, colClasses = "character")
@@ -2527,6 +2538,7 @@ morie_siu_translate_fr_to_en <- function(
 #' head(audit, 8)
 #' # See concrete disagreements for the worst field:
 #' attr(audit, "examples")[[audit$field[1L]]]
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),

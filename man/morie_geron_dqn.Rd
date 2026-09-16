@@ -37,6 +37,6 @@ List with \code{Q}, \code{Q_target}, \code{loss_history}, \code{greedy_policy}, 
 Tabular DQN: replay mini-batches + periodically synced target net (hmdqn)
 }
 \examples{
-morie_geron_dqn(NULL, matrix(c(0, 0), 1, 2), matrix(c(0, 0), 
+morie_geron_dqn(NULL, matrix(c(0, 0), 1, 2), matrix(c(0, 0),
     1, 2), list(list(0, 0, 1, 0, TRUE)), epochs = 1, lr = 0.5)
 }

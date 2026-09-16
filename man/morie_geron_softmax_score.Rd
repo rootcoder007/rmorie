@@ -20,7 +20,7 @@ X theta normalised row by row through \code{morie_geron_softmax_function},
 the same delegation the Python module makes to hmsftm.
 }
 \examples{
-morie_geron_softmax_score(matrix(c(1, 2, 0.5, -1), nrow = 2, 
-    byrow = TRUE), matrix(c(0.3, -0.2, 0.5, 1, 0.4, -0.7), nrow = 2, 
+morie_geron_softmax_score(matrix(c(1, 2, 0.5, -1), nrow = 2,
+    byrow = TRUE), matrix(c(0.3, -0.2, 0.5, 1, 0.4, -0.7), nrow = 2,
     byrow = TRUE))
 }

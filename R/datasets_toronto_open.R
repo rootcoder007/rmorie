@@ -26,9 +26,11 @@
 #' @param offline If `TRUE` (default), reads the included CSV.
 #' @return A `data.frame` with `package_name`, `title`,
 #'   `num_resources`, `metadata_modified`, `search_keyword`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
 #' head(d[, c("package_name", "title")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
@@ -83,9 +85,11 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' @param offline If `TRUE` (default), reads included CSV.
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with full station address + EMS metadata.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
 #' head(df[, c("EMS_NAME", "EMS_ADDRESS")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
                                                       max_features = NULL) {
@@ -125,9 +129,11 @@ morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `YEAR`, `SECTION`, `CATEGORY`,
 #'   `SUBTYPE`, `COUNT_`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_toronto_asr_miscellaneous(offline = TRUE)
 #' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
                                                      max_features = NULL) {
@@ -163,7 +169,8 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
 #' @param resource_id CKAN resource UUID (from `package_show`).
 #' @param limit Page size (max 32000 per CKAN; sane default 100).
 #' @return A `data.frame` of records.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
 #' df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],
@@ -171,6 +178,7 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
 #' ))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_toronto_open_ckan_resource <- function(resource_id,
                                                       limit = 100L) {

@@ -157,8 +157,7 @@ NULL
 #' @return The value of \code{X}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .mor_ps_standardize(X = X)
 #' res
 .mor_ps_standardize <- function(X) {
@@ -186,8 +185,7 @@ NULL
 #' @return A numeric value.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .mor_ps_irls(X = X, y = y)
 #' res
@@ -211,8 +209,7 @@ NULL
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .mor_ps_irls_beta(X = X, y = y)
 #' res
@@ -493,6 +490,12 @@ NULL
 #' @param ridge_lambda Passed to \code{.fit_propensity}. Defaults to \code{1}.
 #' @return The value of \code{.mor_trim_ps}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' if (requireNamespace("WeightIt", quietly = TRUE)) {
+#'   df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
+#'   morie_estimate_propensity_scores(df, "t", "x")
+#' }
 morie_estimate_propensity_scores <- function(data, treatment, covariates,
                                              trim = c(0.01, 0.99),
                                              trim_type = "value",
@@ -680,9 +683,11 @@ morie_estimate_att <- function(data, treatment, outcome, covariates,
 #' @inheritParams morie_estimate_ate
 #' @return Named list: `atc`, `se`, `ci_lower`, `ci_upper`, `n_control`.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-#' morie_estimate_atc(df, "t", "y", "x")
+#' if (requireNamespace("AIPW", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+#'   morie_estimate_atc(df, "t", "y", "x")
+#' }
 #' @export
 morie_estimate_atc <- function(data, treatment, outcome, covariates,
                                propensity_col = NULL) {
@@ -807,8 +812,8 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' @return Named list: `ate`, `se`, `ci_lower`, `ci_upper`, `n`.
 #' @examples
 #' set.seed(1)
-#' df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-#' morie_estimate_aipw(df, "t", "y", "x")
+#' df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
+#' morie_estimate_aipw(df, "t", "y", "x", outcome_model = "linear")
 #' @export
 morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
@@ -1090,12 +1095,14 @@ morie_estimate_cate <- function(data, treatment, outcome, covariates,
 #'   Imbens GW, Angrist JD (1994). Identification and estimation of
 #'   local average treatment effects. *Econometrica*, 62(2), 467-475.
 #' @examples
-#' set.seed(1)
-#' n <- 300L
-#' z <- rbinom(n, 1, 0.5)
-#' t <- rbinom(n, 1, plogis(-0.2 + 1.5 * z))
-#' y <- 0.8 * t + rnorm(n)
-#' morie_estimate_late(data.frame(t = t, y = y, z = z), "t", "y", "z")
+#' if (requireNamespace("EValue", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 300L
+#'   z <- rbinom(n, 1, 0.5)
+#'   t <- rbinom(n, 1, plogis(-0.2 + 1.5 * z))
+#'   y <- 0.8 * t + rnorm(n)
+#'   morie_estimate_late(data.frame(t = t, y = y, z = z), "t", "y", "z")
+#' }
 morie_estimate_late <- function(data, treatment, outcome, instrument,
                                 covariates = NULL) {
   t <- as.numeric(data[[treatment]])
@@ -1215,7 +1222,9 @@ morie_e_value <- function(rr, rr_lower = NULL) {
 #' @return Data frame with columns: `gamma`, `p_lower`, `p_upper`.
 #' @examples
 #' set.seed(1)
-#' morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
+#' if (requireNamespace("rbounds", quietly = TRUE) && requireNamespace("stdReg", quietly = TRUE)) {
+#'   morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
+#' }
 #' @export
 #' @references
 #'   Rosenbaum PR (2002). *Observational Studies* (2nd ed.). Springer.
@@ -1283,9 +1292,11 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 #' @inheritParams morie_estimate_aipw
 #' @return Named list: `ate`, `se`, `ci_lower`, `ci_upper`.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-#' morie_estimate_g_computation(df, "t", "y", "x")
+#' if (requireNamespace("stdReg", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+#'   morie_estimate_g_computation(df, "t", "y", "x")
+#' }
 #' @export
 morie_estimate_g_computation <- function(data, treatment, outcome,
                                          covariates,
@@ -1510,8 +1521,10 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   models. *Annals of Applied Statistics*, 9(1):247-274.
 #' @examples
 #' set.seed(1)
-#' morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
-#'     pre_period = c(1, 5), post_period = c(6, 10))
+#' if (requireNamespace("CausalImpact", quietly = TRUE) && requireNamespace("WeightIt", quietly = TRUE) && requireNamespace("cobalt", quietly = TRUE) && requireNamespace("survey", quietly = TRUE)) {
+#'   morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
+#'       pre_period = c(1, 5), post_period = c(6, 10))
+#' }
 morie_causal_impact <- function(data, pre_period, post_period,
                                 model_args = NULL, alpha = 0.05) {
   if (!.causal_have_causalimpact()) {
@@ -1578,8 +1591,10 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #'   Observational Studies. R package version 1.4.0.
 #' @examples
 #' set.seed(1)
-#' morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4),
-#'     x = rnorm(20)), treatment = "t", covariates = "x")
+#' if (requireNamespace("WeightIt", quietly = TRUE) && requireNamespace("sandwich", quietly = TRUE)) {
+#'   morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4),
+#'       x = rnorm(20)), treatment = "t", covariates = "x")
+#' }
 morie_causal_weighting <- function(data, treatment, covariates,
                                    method = "glm",
                                    estimand = c("ATE", "ATT", "ATC"),

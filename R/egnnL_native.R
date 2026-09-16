@@ -59,6 +59,9 @@
 #' @param a_ij Passed to \code{phi_e}.
 #' @return The value of \code{phi_e}.
 #' @export
+#' @examples
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' edge_message(c(0.2, -0.1), c(0.4, 0.3), c(1, 0, 0), c(0, 1, 0), phi_e)
 edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
   # Eq. (3). Positions enter ONLY as ||x_i - x_j||^2, which is what
   # makes the message invariant.
@@ -77,6 +80,16 @@ edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
 #' @param C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- lapply(1:3, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' M <- lapply(seq_len(3), function(i) vector("list", 3))
+#' for (i in 1:3) for (j in 1:3) if (i != j)
+#'   M[[i]][[j]] <- edge_message(rnorm(2), rnorm(2), X[[i]], X[[j]], phi_e)
+#' Xn <- coord_update(X, M, phi_x)
+#' length(Xn)
 coord_update <- function(X, M, phi_x, C = NULL) {
   # Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_{ij}).
   n <- length(X)
@@ -117,6 +130,15 @@ coord_update <- function(X, M, phi_x, C = NULL) {
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{H}, \code{X}, \code{V}, \code{messages}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- egcl(H, X, phi_e, phi_x, phi_h)
+#' names(r)
 egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
                  V = NULL, mode = "position", phi_v = NULL,
                  dt = 1) {
@@ -191,6 +213,15 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
 #' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- run_egnn(H, X, 2L, phi_e, phi_x, phi_h)
+#' str(r, max.level = 1)
 run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                      C = NULL) {
   # Compose layers; equivariance is preserved inductively.
@@ -225,6 +256,20 @@ run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' @return A list with \code{coordinate_error}, \code{feature_error}, \code{equivariant},
 #' \code{invariant}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' th <- pi / 5
+#' Qm <- matrix(c(cos(th), -sin(th), 0, sin(th), cos(th), 0, 0, 0, 1), 3, 3)
+#' Q <- lapply(seq_len(3), function(i) Qm[i, ])
+#' g <- c(0.5, -0.2, 0.1)
+#' r <- morie_egnnL_equivariance_error(H, X, phi_e, phi_x, phi_h, Q, g,
+#'                                     layers = 2L)
+#' c(r$equivariant, r$invariant)
 morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
                                layers = 2, C = NULL) {
   # Transform the input, run, and compare against transforming the
@@ -303,6 +348,15 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
 #' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- equivariantgnn(H, X, layers = 2L, phi_e, phi_x, phi_h)
+#' length(r$X)
 equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                            C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -325,6 +379,15 @@ equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- egnn_layer(H, X, layers = 1L, phi_e, phi_x, phi_h)
+#' length(r$H)
 egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                        C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -345,6 +408,15 @@ egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- egnnlayer(H, X, layers = 1L, phi_e, phi_x, phi_h)
+#' length(r$X)
 egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                       C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -367,6 +439,15 @@ egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- morie_egnnL(H, X, layers = 2L, phi_e, phi_x, phi_h)
+#' length(r$H)
 morie_egnnL <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                         C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)

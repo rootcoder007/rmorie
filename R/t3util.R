@@ -16,6 +16,8 @@
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80L}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' t3golden(function(x) (x - 2)^2, 0, 5)
 t3golden <- function(f, lo, hi, iters = 80L) {
   a <- as.numeric(lo)
   b <- as.numeric(hi)
@@ -51,6 +53,8 @@ t3golden <- function(f, lo, hi, iters = 80L) {
 #' @param lim Numeric; combined arithmetically in the body. Defaults to \code{8}.
 #' @return A list with \code{u}, \code{w}.
 #' @export
+#' @examples
+#' t3nodes()
 t3nodes <- function(m = 401L, lim = 8.0) {
   m <- as.integer(m)
   u <- seq(-lim, lim, length.out = m)
@@ -69,6 +73,12 @@ t3nodes <- function(m = 401L, lim = 8.0) {
 #' @param s See Usage.
 #' @return The value of \code{d}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(0, 4, 4)
+#' A[1, 2] <- A[2, 1] <- 1
+#' A[2, 3] <- A[3, 2] <- 1
+#' A[3, 4] <- A[4, 3] <- 1
+#' t3bfs(A, 1)
 t3bfs <- function(A, s) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -95,6 +105,9 @@ t3bfs <- function(A, s) {
 #' @param x Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' t3relu(V)
 t3relu <- function(x) ifelse(x > 0, x, 0)
 
 #' t3expit
@@ -106,6 +119,9 @@ t3relu <- function(x) ifelse(x > 0, x, 0)
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' t3expit(V)
 t3expit <- function(x) 1 / (1 + exp(-x))
 
 #' t3ols
@@ -118,6 +134,9 @@ t3expit <- function(x) 1 / (1 + exp(-x))
 #' @param y A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' t3ols(V, V)
 t3ols <- function(X, y) {
   X <- as.matrix(X)
   y <- as.numeric(y)

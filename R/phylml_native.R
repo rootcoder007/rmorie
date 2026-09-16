@@ -101,6 +101,8 @@
 #' @param u Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @examples
+#' substitution_matrix(t = 5L)
 substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   t <- as.numeric(t)
@@ -186,6 +188,9 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 #' @param u Passed to \code{.phylml_prune}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' site_likelihood(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"),
+#'   site = c(1, 2, 3, 4, 5, 6, 7, 8))
 site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   L <- .phylml_prune(tree, site, p, u, seqs)
@@ -205,6 +210,8 @@ site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
 #' @param u Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' morie_phylml(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"))
 morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   if (!(is.list(seqs) || is.character(seqs)) || length(seqs) == 0) {

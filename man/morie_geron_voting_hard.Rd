@@ -24,8 +24,8 @@ Plurality vote with deterministic smallest-label tie-breaking
 voting only helps when the members err on DIFFERENT rows.
 }
 \examples{
-models <- list(function(X) c(0, 1, 1, 0), function(X) c(0, 1, 
+models <- list(function(X) c(0, 1, 1, 0), function(X) c(0, 1,
     0, 0), function(X) c(1, 1, 0, 1))
-morie_geron_voting_hard(models, matrix(c(0, 1, 2, 3), ncol = 1), 
+morie_geron_voting_hard(models, matrix(c(0, 1, 2, 3), ncol = 1),
     y_true = c(0, 1, 0, 0))
 }

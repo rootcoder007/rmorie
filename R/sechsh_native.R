@@ -28,6 +28,11 @@
 #'   when keyed).
 #' @references Schneier & Kelsey (1999).
 #' @export
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_sechsh_chain_entry(V, V)
+#' }
 morie_sechsh_chain_entry <- function(previous_hash, entry, key = NULL) {
   p <- as.raw(previous_hash)
   e <- as.raw(entry)
@@ -46,6 +51,11 @@ morie_sechsh_chain_entry <- function(previous_hash, entry, key = NULL) {
 #'   \code{head_hex}, \code{keyed}.
 #' @references Schneier & Kelsey (1999).
 #' @export
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_sechsh_build_chain(V)
+#' }
 morie_sechsh_build_chain <- function(entries, key = NULL,
                                      genesis = .SECH_GEN) {
   prev <- as.raw(genesis)
@@ -74,6 +84,11 @@ morie_sechsh_build_chain <- function(entries, key = NULL,
 #'   \code{first_bad}, \code{verified_through}, \code{n}, \code{method},
 #'   \code{note}.
 #' @export
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_sechsh_verify_chain(V, V)
+#' }
 morie_sechsh_verify_chain <- function(entries, hashes, key = NULL,
                                       genesis = .SECH_GEN) {
   if (length(entries) != length(hashes))
@@ -109,6 +124,11 @@ morie_sechsh_verify_chain <- function(entries, hashes, key = NULL,
 #' @return Raw 32-byte root.
 #' @references RFC 6962 Sec. 2.
 #' @export
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_sechsh_merkle_root(V)
+#' }
 morie_sechsh_merkle_root <- function(leaves) {
   L <- lapply(leaves, as.raw)
   if (length(L) == 0L) return(.sech_sha256(raw()))
@@ -131,6 +151,10 @@ morie_sechsh_merkle_root <- function(leaves) {
 #'   \code{index}, \code{size}, \code{note}.
 #' @references RFC 6962 Sec. 2.
 #' @export
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   morie_sechsh_inclusion_proof(leaves = c(1, 2, 3, 4, 5, 6, 7, 8), index = 5L)
+#' }
 morie_sechsh_inclusion_proof <- function(leaves, index) {
   L <- lapply(leaves, as.raw)
   m <- as.integer(index)

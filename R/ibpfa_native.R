@@ -21,6 +21,8 @@
 #' @return A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n},
 #' \code{features_per_object}, \code{note}.
 #' @export
+#' @examples
+#' sample_ibp(n = 5L, alpha = 0.5)
 sample_ibp <- function(n, alpha, seed = 0L) {
   N <- as.integer(n)
   a <- as.numeric(alpha)
@@ -82,6 +84,8 @@ sample_ibp <- function(n, alpha, seed = 0L) {
 #' @return A list with \code{expected_total_features}, \code{harmonic},
 #' \code{expected_per_object}, \code{expected_nonzeros}, \code{note}.
 #' @export
+#' @examples
+#' expected_features(n = 5L, alpha = 0.5)
 expected_features <- function(n, alpha) {
   N <- as.integer(n)
   a <- as.numeric(alpha)
@@ -103,6 +107,8 @@ expected_features <- function(n, alpha) {
 #' @param Z A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{Z}, \code{order}, \code{note}.
 #' @export
+#' @examples
+#' left_ordered_form(Z = 5L)
 left_ordered_form <- function(Z) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -133,6 +139,8 @@ left_ordered_form <- function(Z) {
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{lp}, as built in the body.
 #' @export
+#' @examples
+#' ibp_log_probability(Z = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
 ibp_log_probability <- function(Z, alpha) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -199,6 +207,8 @@ indian_buffet_factor <- sample_ibp
 #' @param seed Passed to \code{sample_ibp}. Defaults to \code{0L}.
 #' @return The value of \code{sample_ibp}.
 #' @export
+#' @examples
+#' morie_ibpfa(n = 5L, alpha = 0.5)
 morie_ibpfa <- function(n, alpha, seed = 0L) {
   sample_ibp(n, alpha, seed)
 }

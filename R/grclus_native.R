@@ -44,6 +44,12 @@
 #'   Multilevel Scheme for Partitioning Irregular Graphs. SIAM Journal
 #'   on Scientific Computing, 20(1), 359-392.
 #' @export
+#' @examples
+#' set.seed(1)
+#' A <- matrix(rbinom(900, 1, 0.2), 30, 30)
+#' A <- (A + t(A) > 0) * 1
+#' diag(A) <- 0
+#' morie_grclus(A, k = 2L)
 morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
                          initial = "gggp", refinement = "bkl",
                          tolerance = 0.03, coarsest = 20L, seed = 17) {

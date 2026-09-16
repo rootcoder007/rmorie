@@ -23,9 +23,9 @@ A list with \code{counterfactual}, \code{factual}, \code{abducted}, \code{n_comp
 }
 \keyword{internal}
 \examples{
-.pearl_eqs <- list(x = list(parents = "u1", fn = function(u1) u1), 
-    y = list(parents = c("x", "u2"), fn = function(x, u2) if (abs(x - 
+.pearl_eqs <- list(x = list(parents = "u1", fn = function(u1) u1),
+    y = list(parents = c("x", "u2"), fn = function(x, u2) if (abs(x -
         u2) < 0.5) 1 else 0))
-Counterfactual(evidence = list(x = 1, y = 1), equations = .pearl_eqs, 
+Counterfactual(evidence = list(x = 1, y = 1), equations = .pearl_eqs,
     exogenous = c("u1", "u2"), do = list(x = 0), query = "y")
 }

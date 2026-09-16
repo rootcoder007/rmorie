@@ -116,6 +116,9 @@
 #' @return A list with \code{prompt_tokens}, \code{image_tokens}, \code{prompt_to_image},
 #' \code{image_to_prompt}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' two_way_block(V, V)
 two_way_block <- function(prompt_tokens, image_tokens) {
   P <- .samdec_mat(prompt_tokens)
   I <- .samdec_mat(image_tokens)
@@ -150,6 +153,9 @@ two_way_block <- function(prompt_tokens, image_tokens) {
 #' @param factor Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' upsample(V)
 upsample <- function(grid, factor = 2) {
   G <- .samdec_mat(grid)
   f <- as.integer(factor)
@@ -192,6 +198,10 @@ upsample <- function(grid, factor = 2) {
 #' @param mlp Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{logits}, \code{probability}, \code{weights}, \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' S <- c("a", "b", "c")
+#' dynamic_mask_head(S, M)
 dynamic_mask_head <- function(output_token, image_grid_vectors,
                               mlp = NULL) {
   w <- .samdec_vec(output_token)
@@ -250,6 +260,9 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @return A list with \code{loss}, \code{modulating}, \code{gamma}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' focal_loss(V, V)
 focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
   p <- as.numeric(prob)
   t <- as.numeric(target)
@@ -283,6 +296,9 @@ focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
 #' @param target Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{loss}, \code{dice}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' dice_loss(V, V)
 dice_loss <- function(prob, target) {
   p <- as.numeric(prob)
   t <- as.numeric(target)

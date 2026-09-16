@@ -255,11 +255,13 @@ morie_dsp_teager_energy <- function(x) {
 #' @return Numeric vector, length(x).
 #' @references Rangayyan & Krishnan (2015), Ch. 4, sec. 4.6.
 #' @examples
-#' fs <- 1024
-#' t <- seq.int(0, 1023) / fs
-#' x <- 2 * sin(2 * pi * 64 * t)
-#' env <- morie_dsp_hilbert_envelope(x)
-#' mean(env[20:1004]) # ~2 (the amplitude)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   fs <- 1024
+#'   t <- seq.int(0, 1023) / fs
+#'   x <- 2 * sin(2 * pi * 64 * t)
+#'   env <- morie_dsp_hilbert_envelope(x)
+#'   mean(env[20:1004]) # ~2 (the amplitude)
+#' }
 #' @export
 morie_dsp_hilbert_envelope <- function(x) {
   # Module 20: native analytic signal in the FFT domain.

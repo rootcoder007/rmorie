@@ -431,8 +431,10 @@ morie_geron_gini_impurity <- function(y) {
 #'   `classes`, `counts`, `n_classes`, `max_possible`, `estimate`, `n`.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_entropy_impurity(V)
+#' if (morie_crypto_liboqs_available()) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_geron_entropy_impurity(V)
+#' }
 morie_geron_entropy_impurity <- function(y) {
   y <- as.vector(y)
   .morie_gr_need(
@@ -461,8 +463,10 @@ morie_geron_entropy_impurity <- function(y) {
 #' @return List with `rmse`, `mse`, `mae`, `residuals`, `estimate`, `n`.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_rmse(V, V)
+#' if (morie_crypto_liboqs_available()) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_geron_rmse(V, V)
+#' }
 morie_geron_rmse <- function(y_true, y_pred) {
   a <- as.numeric(y_true)
   b <- as.numeric(y_pred)
@@ -491,8 +495,10 @@ morie_geron_rmse <- function(y_true, y_pred) {
 #'   `median_absolute_error`, `ratio`, `residuals`, `estimate`, `n`.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_mae(V, V)
+#' if (morie_crypto_liboqs_available()) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_geron_mae(V, V)
+#' }
 morie_geron_mae <- function(y_true, y_pred) {
   yt <- as.numeric(y_true)
   yp <- as.numeric(y_pred)
@@ -528,8 +534,8 @@ morie_geron_mae <- function(y_true, y_pred) {
 #'   `residuals`, `predictions`, `estimate`, `n`.
 #' @export
 #' @examples
-#' morie_geron_linreg_mse_cost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7,
-#' 8), theta = 0.5)
+#' morie_geron_linreg_mse_cost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   theta = 0.5)
 morie_geron_linreg_mse_cost <- function(X, y, theta) {
   A <- if (is.matrix(X)) X else matrix(as.numeric(X), ncol = 1)
   storage.mode(A) <- "double"
@@ -621,7 +627,7 @@ morie_geron_normal_equation <- function(X, y, fit_intercept = FALSE) {
 #' @export
 #' @examples
 #' morie_geron_ridge_cost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' theta = 0.5, alpha = 0.5)
+#'   theta = 0.5, alpha = 0.5)
 morie_geron_ridge_cost <- function(X, y, theta, alpha, intercept_index = 0) {
   A <- if (is.matrix(X)) X else matrix(as.numeric(X), ncol = 1)
   storage.mode(A) <- "double"
@@ -669,8 +675,7 @@ morie_geron_ridge_cost <- function(X, y, theta, alpha, intercept_index = 0) {
 #'   `alpha`, `estimate`, `n`.
 #' @export
 #' @examples
-#' morie_geron_ridge_normal(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' alpha = 0.5)
+#' morie_geron_ridge_normal(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
 morie_geron_ridge_normal <- function(X, y, alpha, intercept_index = 0) {
   A <- if (is.matrix(X)) X else matrix(as.numeric(X), ncol = 1)
   storage.mode(A) <- "double"

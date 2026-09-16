@@ -15,6 +15,9 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gelu(V)
 gelu <- function(x) {
   # GELU exact using erf; avoid pnorm dependency for portability
   x <- as.numeric(x)
@@ -45,6 +48,9 @@ gelu <- function(x) {
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' layer_norm(V)
 layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
   x <- as.numeric(x)
   d <- length(x)
@@ -99,6 +105,12 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{heads}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Q <- matrix(rnorm(12), 3, 4)
+#' K <- matrix(rnorm(12), 3, 4)
+#' w <- attention_weights(Q, K, n_heads = 2)
+#' str(w, max.level = 1)
 attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
   Q <- as.matrix(Q)
   storage.mode(Q) <- "double"
@@ -146,6 +158,13 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
 #' @param causal Passed to \code{attention_weights}. Defaults to \code{FALSE}.
 #' @return A list with \code{out}, \code{weights}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Q <- matrix(rnorm(12), 3, 4)
+#' K <- matrix(rnorm(12), 3, 4)
+#' V <- matrix(rnorm(12), 3, 4)
+#' r <- multi_head_attention(Q, K, V, n_heads = 2)
+#' str(r, max.level = 1)
 multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
                                  causal = FALSE) {
   Q <- as.matrix(Q)
@@ -188,6 +207,15 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
 #' @param pre_norm A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{out}, \code{weights}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' X <- matrix(rnorm(12), 3, 4)
+#' W <- function() matrix(rnorm(16, 0, 0.4), 4, 4)
+#' r <- encoder_block(X, W(), W(), W(), W(),
+#'                    W1 = matrix(rnorm(32, 0, 0.4), 8, 4), b1 = rep(0, 8),
+#'                    W2 = matrix(rnorm(32, 0, 0.4), 4, 8), b2 = rep(0, 4),
+#'                    n_heads = 2)
+#' str(r, max.level = 1)
 encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
                           pad_mask = NULL, gain1 = NULL, bias1 = NULL,
                           gain2 = NULL, bias2 = NULL, pre_norm = FALSE) {
@@ -235,6 +263,15 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #' \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm},
 #' \code{bidirectional}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' X <- matrix(rnorm(12), 3, 4)
+#' W <- function() matrix(rnorm(16, 0, 0.4), 4, 4)
+#' blk <- list(Wq = W(), Wk = W(), Wv = W(), Wo = W(),
+#'             W1 = matrix(rnorm(32, 0, 0.4), 8, 4), b1 = rep(0, 8),
+#'             W2 = matrix(rnorm(32, 0, 0.4), 4, 8), b2 = rep(0, 4))
+#' r <- bert_encoder(X, list(blk), n_heads = 2)
+#' str(r, max.level = 1)
 bert_encoder <- function(X, blocks, n_heads, pad_mask = NULL,
                          pre_norm = FALSE) {
   cur <- as.matrix(X)

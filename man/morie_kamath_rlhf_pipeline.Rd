@@ -31,7 +31,7 @@ List with \code{policy}, \code{policy_sft}, \code{reward_model}, \code{stages}.
 The KL reference is the SFT policy, and that identity is reported.
 }
 \examples{
-morie_kamath_rlhf_pipeline(list("d"), list(c("a", "b")), "pi0", 
-    sft = function(p, d) "sft", train_rm = function(p) function(y) 1, 
+morie_kamath_rlhf_pipeline(list("d"), list(c("a", "b")), "pi0",
+    sft = function(p, d) "sft", train_rm = function(p) function(y) 1,
     ppo = function(p, r, ref) "rlhf")
 }

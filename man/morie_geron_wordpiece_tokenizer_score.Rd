@@ -21,7 +21,7 @@ WordPiece takes surprise. Ties in the ranking break on the string
 form of the pair.
 }
 \examples{
-morie_geron_wordpiece_tokenizer_score(list(a = 10, b = 4, c = 6), 
-    list(list("a", "b", 3), list("b", "c", 4), list("a", "c", 
+morie_geron_wordpiece_tokenizer_score(list(a = 10, b = 4, c = 6),
+    list(list("a", "b", 3), list("b", "c", 4), list("a", "c",
         5)))
 }

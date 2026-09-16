@@ -60,7 +60,8 @@
 #'   is unique (the common case); pass when an ambiguous-key error
 #'   is raised to pick the intended portal.
 #' @return A `data.frame` (or, for StatCan, the WDS metadata list).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # All three calls below resolve to offline fixtures from the
 #' # rmoriedata companion package (no network). The first call warms
 #' # the cross-portal catalog cache
@@ -69,6 +70,7 @@
 #' df2 <- morie_datasets_load_by_key("nypd_arrests_ytd") # 5 rows
 #' df3 <- morie_datasets_load_by_key("assault") # 5 rows
 #' c(vpd = nrow(df1), nypd = nrow(df2), tps_assault = nrow(df3))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_load_by_key <- function(dataset_key,
                                        offline = TRUE,

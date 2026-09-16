@@ -43,8 +43,7 @@ NULL
 #' @return A numeric value.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_hurst_rs(x = X)
 #' res
 .morie_hurst_rs <- function(x, d = 50L) {
@@ -384,8 +383,10 @@ NULL
 #' @return The value of \code{.morie_sobol_cpp}.
 #' @export
 #' @examples
-#' res <- .morie_sobol(n = 3L, d = 3L)
-#' res
+#' if (requireNamespace("geepack", quietly = TRUE)) {
+#'   res <- .morie_sobol(n = 3L, d = 3L)
+#'   res
+#' }
 .morie_sobol <- function(n, d) {
   n <- as.integer(n)
   d <- as.integer(d)

@@ -80,6 +80,8 @@ ROOT_TOL <- 1.001
 #' @return A list with \code{beta}, \code{ssq}, \code{v}, \code{f}, \code{information},
 #' \code{sum_log_f}.
 #' @export
+#' @examples
+#' profile_beta(wy = 5L, wX = 5L)
 profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
                          filter = "exact") {
   n <- length(wy)
@@ -284,6 +286,11 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' @param n_par Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   aic(V, V)
+#' }
 aic <- function(loglik, n_par) {
   -2.0 * as.numeric(loglik) + 2.0 * as.integer(n_par)
 }
@@ -299,6 +306,8 @@ aic <- function(loglik, n_par) {
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' aicc(loglik = c(1, 2, 3, 4, 5, 6, 7, 8), n_par = 5L, n = 5L)
 aicc <- function(loglik, n_par, n) {
   k <- as.integer(n_par)
   n <- as.integer(n)
@@ -347,6 +356,10 @@ starting_models <- function(d, D, s) {
 #' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- neighbours(order = rnorm(10), seasonal_order = rnorm(10), constant = rnorm(10), s = rnorm(10))
+#' TRUE
 neighbours <- function(order, seasonal_order, constant, s) {
   p <- order[1]
   d <- order[2]
@@ -417,6 +430,12 @@ neighbours <- function(order, seasonal_order, constant, s) {
 #' \code{seasonal_order}, \code{constant}, \code{steps}, \code{n_models_tried},
 #' \code{tried}, \code{s}, \code{search_method}, \code{differencing_note}, \code{method}.
 #' @export
+#' @examples
+#' \donttest{
+#' set.seed(3)
+#' y <- as.numeric(stats::arima.sim(list(ar = 0.6), n = 60))
+#' auto_order(y, max_steps = 4)$order
+#' }
 auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
                        max_steps = 20) {
   d <- as.integer(d)

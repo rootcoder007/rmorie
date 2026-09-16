@@ -130,6 +130,12 @@
 #' \code{n_compatible_u}, \code{counterfactual_unique}, \code{residual}, \code{do},
 #' \code{query}, \code{method}.
 #' @export
+#' @examples
+#' .pearl_eqs <- list(x = list(parents = "u1", fn = function(u1) u1),
+#'     y = list(parents = c("x", "u2"), fn = function(x, u2) if (abs(x -
+#'         u2) < 0.5) 1 else 0))
+#' Counterfactual(evidence = list(x = 1, y = 1), equations = .pearl_eqs,
+#'     exogenous = c("u1", "u2"), do = list(x = 0), query = "y")
 Counterfactual <- function(evidence, equations, exogenous, do, query,
                            u_support = NULL) {
   if (!length(exogenous)) stop("need at least one exogenous variable")

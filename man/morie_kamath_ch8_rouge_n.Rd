@@ -20,6 +20,6 @@ List with \code{estimate}, \code{matched}, \code{total_reference_ngrams}.
 Clipped reference n-gram overlap divided by the reference n-gram total.
 }
 \examples{
-morie_kamath_ch8_rouge_n(list(c("a", "b", "c"), c("a", "b", "d")), 
+morie_kamath_ch8_rouge_n(list(c("a", "b", "c"), c("a", "b", "d")),
     2, candidate = c("a", "b", "c", "a"))
 }

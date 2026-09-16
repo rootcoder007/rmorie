@@ -71,6 +71,8 @@
 #' @param rho The schedule exponent.
 #' @return The levels, with a zero appended.
 #' @export
+#' @examples
+#' morie_alf3df_schedule(n_steps = 5L)
 morie_alf3df_schedule <- function(n_steps, sigma_min = 0.002,
                                   sigma_max = 80, rho = 7) {
   n <- as.integer(n_steps)
@@ -95,6 +97,10 @@ morie_alf3df_schedule <- function(n_steps, sigma_min = 0.002,
 #' @param e A random stream from the shared generator.
 #' @return A three by three rotation matrix.
 #' @export
+#' @examples
+#' e <- rmorie:::.ghc_rng(5)
+#' e <- rmorie:::.ghc_rng(5)
+#' morie_alf3df_rotation(e)
 morie_alf3df_rotation <- function(e) {
   u1 <- .ghc_unif(e, 1L)
   u2 <- .ghc_unif(e, 1L)
@@ -129,6 +135,12 @@ morie_alf3df_rotation <- function(e) {
 #' @param e A random stream.
 #' @return A list with the augmented coordinates and the old centroid.
 #' @export
+#' @examples
+#' NA_ <- 6L
+#' TRUEX <- matrix(0, NA_, 3L)
+#' e <- rmorie:::.ghc_rng(5)
+#' e <- rmorie:::.ghc_rng(5)
+#' morie_alf3df_augment(TRUEX, e)
 morie_alf3df_augment <- function(x, e) {
   n <- nrow(x)
   if (!n) {
@@ -163,6 +175,12 @@ morie_alf3df_augment <- function(x, e) {
 #' @return A list with the stepped coordinates, the churned level and
 #'   the direction.
 #' @export
+#' @examples
+#' NA_ <- 6L
+#' TRUEX <- matrix(0, NA_, 3L)
+#' oracle <- function(x, sigma) TRUEX
+#' start <- matrix(0, NA_, 3L)
+#' morie_alf3df_step(start, 4, oracle, 1, order = "euler")
 morie_alf3df_step <- function(x, t, score_fn, sigma_next = NULL,
                               gamma = 0, noise_scale = 1,
                               step_scale = 1, order = "heun", e = NULL,
@@ -224,6 +242,10 @@ morie_alf3df_step <- function(x, t, score_fn, sigma_next = NULL,
 #' @return A list with the final coordinates, the schedule and the
 #'   churned levels visited.
 #' @export
+#' @examples
+#' NA_ <- 6L
+#' shrink <- function(x, sigma) (1/(1 + sigma)) * x
+#' morie_alf3df_sample(NA_, shrink, 5L, seed = 3)
 morie_alf3df_sample <- function(shape_n, score_fn, n_steps = 8L,
                                 sigma_min = 0.002, sigma_max = 80,
                                 rho = 7, gamma = 0, noise_scale = 1,
@@ -258,6 +280,11 @@ morie_alf3df_sample <- function(shape_n, score_fn, n_steps = 8L,
 #' @param ... Passed to the step function.
 #' @return A list with the stepped coordinates and summary geometry.
 #' @export
+#' @examples
+#' NA_ <- 6L
+#' shrink <- function(x, sigma) (1/(1 + sigma)) * x
+#' NOISY <- matrix(0, NA_, 3L)
+#' morie_alf3df(NOISY, 4, shrink, sigma_next = 1)
 morie_alf3df <- function(x, t, score_fn, ...) {
   r <- morie_alf3df_step(x, t, score_fn, ...)
   nx <- r$x
@@ -288,6 +315,8 @@ morie_alf3df <- function(x, t, score_fn, ...) {
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_alf3df_cheatsheet()
 morie_alf3df_cheatsheet <- function() {
   paste0(
     "alf3df: AlphaFold-3 style diffusion step. orders ",

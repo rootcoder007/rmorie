@@ -24,6 +24,9 @@
 #' \code{gain}, \code{order}, \code{stable}, \code{monotone}, \code{normalized_error},
 #' \code{sign_convention}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Levinson(V)
 Levinson <- function(acf, order = NULL) {
   # eqs (7.37)-(7.39).  Init eps_0 = phi(0); for i = 1..P:
   #   gamma_i = -(1/eps_{i-1})[phi(i) + sum_j a_{i-1,j} phi(i-j)]
@@ -79,6 +82,8 @@ Levinson <- function(acf, order = NULL) {
 #' \code{acf}, \code{order}, \code{residual}, \code{residual_energy}, \code{stable},
 #' \code{normalized_error}, \code{sign_convention}, \code{method}.
 #' @export
+#' @examples
+#' Lpc(x = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
 Lpc <- function(x, order, method = "autocorrelation") {
   # eqs (7.17)-(7.18), (7.25), (7.35).  The ACF is the BIASED estimator
   # (divide by N): that is what makes the Toeplitz system
@@ -129,6 +134,9 @@ Lpc <- function(x, order, method = "autocorrelation") {
 #' @return A list with \code{y}, \code{n}, \code{order}, \code{gain}, \code{diverged},
 #' \code{sign_convention}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' LpcSynth(V, V)
 LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
   # Inverting eq (7.18): y(n) = G e(n) - sum a_k y(n-k).  The minus
   # follows from A(z) = 1 + sum a_k z^-k.  Coefficients from the other
@@ -173,6 +181,8 @@ LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
 #' @param nfreq Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
+#' @examples
+#' ArFit(x = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
 ArFit <- function(x, order, fs = 1, nfreq = 256) {
   # Section 7.5: S(f) = G^2 / |A(exp(-j 2 pi f / fs))|^2, a smooth
   # spectrum from P+1 parameters.  That smoothness is also the trap: the
@@ -211,6 +221,8 @@ ArFit <- function(x, order, fs = 1, nfreq = 256) {
 #' @param n_samples Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{order}, \code{criterion}, \code{n}, \code{start_order}, \code{method}.
 #' @export
+#' @examples
+#' FpeOrder(errors = 5L, n_samples = 5L)
 FpeOrder <- function(errors, n_samples) {
   # Akaike (1970): FPE(p) = sigma_p^2 (N+p+1)/(N-p-1).  The residual
   # variance falls monotonically with p (eq 7.39), so without a penalty
@@ -246,6 +258,8 @@ FpeOrder <- function(errors, n_samples) {
 #' \code{n}, \code{start_order}, \code{penalty_per_parameter}, \code{stricter_than_aic},
 #' \code{method}.
 #' @export
+#' @examples
+#' MdlOrder(errors = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
 MdlOrder <- function(errors, n_samples) {
   # Rissanen (1978): MDL(p) = N log(sigma_p^2) + p log(N).  The penalty
   # per parameter is log(N), larger than AIC's 2 for any N > 7, so MDL
@@ -281,6 +295,9 @@ MdlOrder <- function(errors, n_samples) {
 #' @param gain Coerced to complex by the body, with \code{as.complex}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PzForm(V, V)
 PzForm <- function(zeros, poles, z = NULL, gain = 1) {
   # eq (3.69): H(z) = prod (1 - z_k z^-1) / prod (1 - p_k z^-1).  A pole
   # on the unit circle makes H undefined there; outside it, a causal
@@ -328,6 +345,9 @@ PzForm <- function(zeros, poles, z = NULL, gain = 1) {
 #' @param gain Coerced to complex by the body, with \code{as.complex}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PzFormZ(V, V)
 PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
   # eq (3.70): H(z) = z^(M-N) prod (z - z_k) / prod (z - p_k), the same
   # function as eq (3.69) rewritten in z.  The z^(M-N) factor is exactly
@@ -386,6 +406,9 @@ PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
 #' @return A list with \code{H}, \code{magnitude}, \code{phase}, \code{zero_distances},
 #' \code{pole_distances}, \code{omega}, \code{magnitude_matches_product}, \code{method}.
 #' @export
+#' @examples
+#' PzResp(zeros = c(1, 2, 3, 4, 5, 6, 7, 8), poles = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   omega = c(1, 2, 3, 4, 5, 6, 7, 8))
 PzResp <- function(zeros, poles, omega, gain = 1) {
   # eqs (3.71)-(3.73): on the unit circle the magnitude is the product
   # of distances to the zeros over the product of distances to the
@@ -442,6 +465,9 @@ PzResp <- function(zeros, poles, omega, gain = 1) {
 #' @return A list with \code{zeros}, \code{poles}, \code{n_zeros}, \code{n_poles},
 #' \code{stable}, \code{minimum_phase}, \code{zeros_on_unit_circle}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PoleZero(V)
 PoleZero <- function(b, a = NULL) {
   # eqs (3.67), (3.69): zeros are the roots of the numerator, poles the
   # roots of the denominator.  The denominator is in the book's
@@ -485,6 +511,8 @@ PoleZero <- function(b, a = NULL) {
 #' @return A list with \code{a}, \code{b}, \code{p}, \code{q}, \code{gain}, \code{poles},
 #' \code{zeros}, \code{stable}, \code{ar_error}, \code{two_stage}, \code{method}.
 #' @export
+#' @examples
+#' ArmaFit(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 1, q = 0.5)
 ArmaFit <- function(x, p, q, fs = 1) {
   # Section 7.7: H(z) = B(z)/A(z), needed when the signal has spectral
   # nulls as well as resonances -- an all-pole model can only make
@@ -545,6 +573,10 @@ ArmaFit <- function(x, p, q, fs = 1) {
 #' @param segment Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- sin(2 * pi * 40 * (1:500) / 1000) + rnorm(500) * 0.1
+#' PcgAr(x, fs = 1000)
 PcgAr <- function(x, fs, order = NULL, segment = NULL) {
   # Chapter 7: the poles of an all-pole PCG model track the resonances
   # of S1 and S2.  A pole p gives a resonance at (fs/2pi) Arg(p) with
@@ -596,6 +628,9 @@ PcgAr <- function(x, fs, order = NULL, segment = NULL) {
 #' @param nfreq Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512}.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HrvAr(V)
 HrvAr <- function(rr, order = 16, fs = 4, nfreq = 512) {
   # The RR series is unevenly sampled by construction, so it is
   # resampled onto a uniform grid (4 Hz, comfortably above the 0.4 Hz
@@ -656,6 +691,9 @@ HrvAr <- function(rr, order = 16, fs = 4, nfreq = 512) {
 #' @param grid A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' stats_free_interp(beats = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 stats_free_interp <- function(beats, values, grid) {
   # piecewise-linear interpolation onto `grid`, written out rather than
   # delegated so the R and Python arms resample identically
@@ -689,6 +727,9 @@ stats_free_interp <- function(beats, values, grid) {
 #' \code{total_power}, \code{lf_nu}, \code{hf_nu}, \code{order}, \code{bands},
 #' \code{interpretation_caveat}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HrvRatio(V)
 HrvRatio <- function(rr, order = 16, fs = 4) {
   # LF/HF from the AR model PSD.  Often called a sympathovagal balance;
   # that reading is contested -- HF is reasonably vagal, but LF reflects

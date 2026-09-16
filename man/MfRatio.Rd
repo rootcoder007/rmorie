@@ -22,7 +22,7 @@ A list with \code{ratio}, \code{bound}, \code{optimality}, \code{numerator}, \co
 }
 \keyword{internal}
 \examples{
-sine_c <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 * 
+sine_c <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
     pi * cycles * (0:(n - 1))/n + phase)
 r <- DotProd(c(1, 2, 3), c(4, 5, 6))
 n <- 1024
@@ -33,7 +33,7 @@ k <- which.min(abs(r$freqs - cyc * fs/n))
 y <- sine_c(n, 11) + 0.5 * sine_c(n, 71)
 freqs <- (0:8)/8
 m <- 12
-cycles <- lapply(0:(m - 1), function(k) sine_c(n, 3) + 0.8 * 
+cycles <- lapply(0:(m - 1), function(k) sine_c(n, 3) + 0.8 *
     sin(2 * pi * 30 * (0:(n - 1))/n + k * 1.7))
 Msc(x, y, nperseg = 128)
 MfRatio(X = freqs, H = freqs, freqs = freqs, t0 = cyc, noise_power = cyc)

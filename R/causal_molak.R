@@ -450,7 +450,7 @@ morie_bicdag <- function(data, dag, names = NULL) {
 #' @export
 #' @examples
 #' morie_bowarc(dag = c(1, 2, 3, 4, 5, 6, 7, 8), bidirected = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#'   x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_bowarc <- function(dag, bidirected, x, y) {
   edges <- .morie_ml_edges(dag)
   bid <- as.matrix(bidirected)
@@ -794,8 +794,8 @@ morie_poschk <- function(treat, stratum, tol = 0) {
 #' @return list(tau, ate, loss, n, k)
 #' @export
 #' @examples
-#' morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0,
-#' 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5),
+#'   m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rlearn <- function(y, t, m, e, x = NULL) {
   y <- as.numeric(y)
   t <- as.numeric(t)

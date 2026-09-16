@@ -28,6 +28,9 @@
 #' @param genotypes n x m matrix of minor-allele counts.
 #' @return n x n symmetric matrix.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gwasem_kinship(V)
 morie_gwasem_kinship <- function(genotypes) {
   G <- as.matrix(genotypes)
   storage.mode(G) <- "double"
@@ -55,6 +58,9 @@ morie_gwasem_kinship <- function(genotypes) {
 #' @param S n x n matrix.
 #' @return Centred matrix.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_gwasem_gower(M)
 morie_gwasem_gower <- function(S) {
   S <- as.matrix(S)
   storage.mode(S) <- "double"
@@ -134,8 +140,7 @@ morie_gwasem_gower <- function(S) {
 #' @return A list with \code{sign}, \code{logdet}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .gwasem_slogdet(M = X)
 #' res
 .gwasem_slogdet <- function(M) {
@@ -368,6 +373,9 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #' @param df Degrees of freedom.
 #' @return Scalar.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gwasem_gc(V)
 morie_gwasem_gc <- function(stats, df = 1) {
   s <- sort(as.numeric(stats))
   if (length(s) == 0L) stop("gwasem: no statistics")
@@ -400,6 +408,9 @@ morie_gwasem_gc <- function(stats, df = 1) {
 #' @references Kang, H. M. et al. (2010). Nature Genetics 42(4),
 #'   348-354.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gwasem(V, V)
 morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
                          trait = "quantitative", test = "f", ml = FALSE,
                          per_marker_reml = FALSE, min_maf = 0) {

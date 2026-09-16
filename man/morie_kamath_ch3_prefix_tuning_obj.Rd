@@ -25,6 +25,6 @@ A SUM of log p_phi(z_i | h_<i) over the target index set. \code{Y_idx} is
 0-BASED, as in Python.
 }
 \examples{
-morie_kamath_ch3_prefix_tuning_obj(function(z, hp) 0.5, "s:", 
+morie_kamath_ch3_prefix_tuning_obj(function(z, hp) 0.5, "s:",
     list("a", "b"), list(0, 1))
 }

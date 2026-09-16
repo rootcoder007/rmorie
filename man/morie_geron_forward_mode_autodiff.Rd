@@ -21,6 +21,6 @@ Evaluates \code{f} at the dual number x + x' eps and reports the exact
 derivative alongside a central-difference cross-check.
 }
 \examples{
-morie_geron_forward_mode_autodiff(1.3, 1, function(z) (z * z + 
+morie_geron_forward_mode_autodiff(1.3, 1, function(z) (z * z +
     3)/(z + 1))
 }

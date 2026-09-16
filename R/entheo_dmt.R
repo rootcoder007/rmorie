@@ -53,7 +53,7 @@
 #' @keywords internal
 #' @return A character scalar: the resolved DMT-data root directory.
 #' @examples
-#' rmorie:::.morie_entheo_dmt_root()
+#' tryCatch(rmorie:::.morie_entheo_dmt_root(), error = function(e) NULL)
 .morie_entheo_dmt_root <- function() {
   cand <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", "")
   if (!nzchar(cand)) {
@@ -66,7 +66,7 @@
 #' @keywords internal
 #' @return A character scalar: the DMT-data root directory (errors if it cannot be resolved).
 #' @examples
-#' rmorie:::.morie_entheo_require_root()
+#' tryCatch(rmorie:::.morie_entheo_require_root(), error = function(e) NULL)
 .morie_entheo_require_root <- function() {
   root <- .morie_entheo_dmt_root()
   if (is.null(root)) {
@@ -109,7 +109,7 @@
 #' @return integer vector of subject IDs sorted ascending. Empty if the
 #'   dataset root is missing or the \code{fMRI/} folder is absent.
 #' @examples
-#' morie_entheo_available_subjects()
+#' tryCatch(morie_entheo_available_subjects(), error = function(e) NULL)
 #' @export
 #' @references
 #' Timmermann, C. et al. (2023). Human brain effects of DMT assessed

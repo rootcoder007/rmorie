@@ -149,6 +149,13 @@
 #' \code{model}, \code{range}, \code{n_primary}, \code{n_secondary}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' coords <- matrix(runif(20), 10, 2)
+#' y <- rnorm(10)
+#' z <- rnorm(10)
+#' s_predict <- matrix(runif(4), 2, 2)
+#' morie_crkbsg_cokriging(coords, y, z, s_predict)
 morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
                                    cross_variogram = NULL, coords_z = NULL) {
   C1 <- .crkbsg_rows(coords)

@@ -28,6 +28,8 @@
 #' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{alpha},
 #' \code{beta}, \code{post_mean}, \code{counts}, \code{total_reward}, \code{method}.
 #' @export
+#' @examples
+#' morie_thomp(p = 0.5, T = 5L)
 morie_thomp <- function(p, T, alpha0 = NULL, beta0 = NULL, seed = 0) {
   p <- as.numeric(p)
   K <- length(p)

@@ -88,9 +88,11 @@ morie_aitchison_balance <- function(x, numerator, denominator) {
 #'   and cryptic relatedness in genetic association studies.
 #'   \emph{Statistical Science}, 24(4), 451-471.
 #' @examples
-#' set.seed(1)
-#' M <- matrix(rbinom(200, 2, 0.3), nrow = 20)
-#' round(mean(diag(morie_astle_balding_grm(M)$G)), 3)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   M <- matrix(rbinom(200, 2, 0.3), nrow = 20)
+#'   round(mean(diag(morie_astle_balding_grm(M)$G)), 3)
+#' }
 #' @export
 morie_astle_balding_grm <- function(marker_matrix, freq = NULL) {
   X <- as.matrix(marker_matrix)

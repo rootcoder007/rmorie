@@ -30,9 +30,11 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
-#' res <- .morie_t2_inv(A = A)
-#' res
+#' if (requireNamespace("metafor", quietly = TRUE)) {
+#'   A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#'   res <- .morie_t2_inv(A = A)
+#'   res
+#' }
 .morie_t2_inv <- function(A) {
   k <- nrow(A)
   M <- cbind(A, diag(1, k))
@@ -102,6 +104,8 @@
 #' \code{j_approx}, \code{hedges_g}, \code{var_g}, \code{se_g}, \code{df}, \code{n},
 #' \code{method}.
 #' @export
+#' @examples
+#' CohensD(m1 = 10, m2 = 8, s1 = 2, s2 = 2.5, n1 = 30, n2 = 28)
 CohensD <- function(m1, m2, s1, s2, n1, n2) {
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
@@ -164,6 +168,9 @@ CohensD <- function(m1, m2, s1, s2, n1, n2) {
 #' @return A list with \code{bound}, \code{variance}, \code{se}, \code{information},
 #' \code{k}, \code{efficiency}, \code{attained}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CramerRao(V)
 CramerRao <- function(fisher_info, var_estimate = NULL) {
   if (is.matrix(fisher_info)) {
     info <- matrix(as.numeric(fisher_info), nrow(fisher_info))
@@ -313,6 +320,9 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #' \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event},
 #' \code{iterations}, \code{converged}, \code{method}.
 #' @export
+#' @examples
+#' CoxPL(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   X = c(1, 2, 3, 4, 5, 6, 7, 8))
 CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
                   tol = 1e-10) {
   time <- as.numeric(time)
@@ -478,6 +488,11 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner},
 #' \code{method}.
 #' @export
+#' @examples
+#' f <- function(x) sum(x^2)
+#' cons <- list(function(x) 1 - x[1])
+#' r <- PenaltyMin(f, cons, x0 = c(2, 0), mu = 1)
+#' str(r, max.level = 1)
 PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
                        growth = 10, n_inner = 200L, step0 = 1,
                        h = 1e-6, armijo = 1e-4, max_halving = 40L) {
@@ -564,6 +579,13 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #' @return A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr},
 #' \code{relaxation}, \code{step_norm}, \code{method}.
 #' @export
+#' @examples
+#' f <- function(x) 0.5 * sum((x - c(2, -1))^2)
+#' gf <- function(x) x - c(2, -1)
+#' soft <- function(x, t) sign(x) * pmax(abs(x) - t, 0)
+#' prox <- function(x, t) soft(x, 0.5 * t)
+#' r <- ProxGrad(f, gf, prox, x0 = c(0, 0), lr = 0.5)
+#' str(r, max.level = 1)
 ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
                      relaxation = 1) {
   x <- as.numeric(x0)
@@ -631,6 +653,12 @@ ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
 #' \code{transport_cost}, \code{row_error}, \code{col_error}, \code{ns}, \code{nt},
 #' \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' Xs <- matrix(rnorm(20), 10, 2)
+#' Xt <- matrix(rnorm(24, 2), 12, 2)
+#' r <- OtAdapt(Xs, Xt, epsilon = 0.5, n_iter = 200)
+#' str(r, max.level = 1)
 OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {
   Xs <- as.matrix(Xs)
   Xt <- as.matrix(Xt)

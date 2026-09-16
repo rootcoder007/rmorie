@@ -19,6 +19,6 @@ A list with \code{gradient}, \code{grad}, \code{value}, \code{tape_size}, \code{
 }
 \keyword{internal}
 \examples{
-morie_geron_reverse_autodiff(function(v) v[[1]] * v[[2]], c(3, 
+morie_geron_reverse_autodiff(function(v) v[[1]] * v[[2]], c(3,
     4))
 }

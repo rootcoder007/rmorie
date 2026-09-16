@@ -20,6 +20,6 @@ List with \code{estimate}, \code{n_hurtful}, \code{per_prompt}.
 Hurtful completions / (prompts x k).
 }
 \examples{
-morie_kamath_ch6_honest_score(list(c("a", "b"), c("c", "d")), 
+morie_kamath_ch6_honest_score(list(c("a", "b"), c("c", "d")),
     2, hurtlex = c("b", "d"))
 }

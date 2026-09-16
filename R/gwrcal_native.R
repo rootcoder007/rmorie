@@ -383,6 +383,9 @@
 #' @param X See Usage.
 #' @param coords See Usage.
 #' @export
+#' @examples
+#' morie_gwrcal_prepare(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_gwrcal_prepare <- function(y, X, coords) {
   yv <- as.numeric(y)
   n <- length(yv)
@@ -404,6 +407,12 @@ morie_gwrcal_prepare <- function(y, X, coords) {
 #' @param y See Usage.
 #' @param X See Usage.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 50
+#' X <- cbind(1, rnorm(n))
+#' y <- X %*% c(1, 2) + rnorm(n)
+#' morie_gwrcal_global_aicc(y, X)
 morie_gwrcal_global_aicc <- function(y, X) {
   pr <- morie_gwrcal_prepare(y, X, matrix(0, length(y), 1))
   beta <- as.numeric(qr.solve(pr$X, pr$y))
@@ -437,6 +446,13 @@ morie_gwrcal_global_aicc <- function(y, X) {
 #'   \code{ols_aicc}, \code{aicc_improvement}, \code{method},
 #'   \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 30
+#' X <- cbind(1, rnorm(n))
+#' coords <- matrix(runif(2 * n), n, 2)
+#' y <- X %*% c(1, 2) + rnorm(n)
+#' morie_gwrcal(y, X, coords, n_points = 8L)
 morie_gwrcal <- function(y, X, coords, kernel = "gaussian", criterion = "aicc",
                          adaptive = FALSE, bounds = NULL,
                          search = NULL, n_points = 30L, tol = 1e-4) {

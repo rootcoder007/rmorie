@@ -110,6 +110,13 @@
 #' @return A list with \code{weights}, \code{pi}, \code{max_weight}, \code{ess},
 #' \code{ess_fraction}, \code{n_source}, \code{coef}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 60
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' S <- rbinom(n, 1, plogis(0.3 * X[, 1]))
+#' r <- morie_trnsfr_transport_weights(X, S)
+#' str(r, max.level = 1)
 morie_trnsfr_transport_weights <- function(X, S, trim = 1e-3, ridge = 1e-6) {
   # Odds-of-membership weights for the source cohort. Fits pi(x) by
   # logistic regression on the pooled data and returns, for each
@@ -167,6 +174,13 @@ morie_trnsfr_transport_weights <- function(X, S, trim = 1e-3, ridge = 1e-6) {
 #' @return A list with \code{weights}, \code{target_moments}, \code{achieved},
 #' \code{max_imbalance}, \code{n_negative}, \code{positive_mass}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 60
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' S <- rbinom(n, 1, plogis(0.3 * X[, 1]))
+#' r <- morie_trnsfr_balancing_weights(X, S)
+#' str(r, max.level = 1)
 morie_trnsfr_balancing_weights <- function(X, S, ridge = 1e-8) {
   # Minimum-variance weights that match the target's X means: solve
   # min sum w_i^2 over source units subject to sum w_i Xtilde_i =
@@ -226,6 +240,15 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge = 1e-8) {
 #' \code{n_source}, \code{n_target}, \code{method}, \code{diagnostics},
 #' \code{assumption}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 100
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' S <- rbinom(n, 1, plogis(0.3 * X[, 1]))
+#' W <- rbinom(n, 1, 0.5)
+#' Y <- 1 + 0.8 * W + X[, 1] + rnorm(n, 0, 0.3)
+#' r <- morie_trnsfr_transport_ate(Y, W, X, S)
+#' str(r, max.level = 1)
 morie_trnsfr_transport_ate <- function(Y, W, X, S, method = "dr", e = NULL,
                                        trim = 1e-3, ridge = 1e-6) {
   # The source-cohort effect, transported to the target cohort.
@@ -347,6 +370,15 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method = "dr", e = NULL,
 #' \code{transport_weights}, \code{msm_weights}, \code{target}, \code{cohorts}, \code{n},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 100
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- rbinom(n, 1, 0.5)
+#' cohort <- rbinom(n, 1, plogis(0.3 * H[, 1]))
+#' Y <- 1 + 0.8 * A + H[, 1] + rnorm(n, 0, 0.3)
+#' r <- morie_trnsfr_transfer_msm(Y, A, H, cohort, target = 0)
+#' str(r, max.level = 1)
 morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target = 0, e = NULL,
                                       trim = 1e-3, ridge = 1e-6) {
   # A marginal structural model fitted with transported weights. Every
@@ -420,6 +452,8 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target = 0, e = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_trnsfr_cheatsheet()
 morie_trnsfr_cheatsheet <- function() {
   paste0(
     "trnsfr: move an effect between cohorts by reweighting. ",

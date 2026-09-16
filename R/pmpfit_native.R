@@ -31,6 +31,8 @@
 #' @references Pitman, J. & Yor, M. (1997). The Annals of
 #'   Probability, 25(2), 855-900.
 #' @export
+#' @examples
+#' morie_pmpfit(alpha = 0.5, theta = 0.5, K = 5L)
 morie_pmpfit <- function(alpha, theta, K, seed = 0L) {
   params <- morie_pmpfit_check(alpha, theta)
   a <- params$alpha
@@ -66,6 +68,8 @@ morie_pmpfit <- function(alpha, theta, K, seed = 0L) {
 #' @return A list with `alpha`, `theta`, `is_dirichlet`, `note`.
 #' @references Pitman, J. & Yor, M. (1997). Proposition 4.
 #' @export
+#' @examples
+#' morie_pmpfit_check(alpha = 0.5, theta = 0.5)
 morie_pmpfit_check <- function(alpha, theta) {
   a <- as.numeric(alpha)
   th <- as.numeric(theta)
@@ -91,6 +95,8 @@ morie_pmpfit_check <- function(alpha, theta) {
 #'   `discount_transferred`, `note`.
 #' @references Pitman, J. & Yor, M. (1997).
 #' @export
+#' @examples
+#' morie_pmpfit_predictive(counts = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, theta = 0.5)
 morie_pmpfit_predictive <- function(counts, alpha, theta) {
   c_ <- as.numeric(counts)
   params <- morie_pmpfit_check(alpha, theta)
@@ -124,6 +130,8 @@ morie_pmpfit_predictive <- function(counts, alpha, theta) {
 #'   `note`.
 #' @references Pitman, J. & Yor, M. (1997).
 #' @export
+#' @examples
+#' morie_pmpfit_expected(n = 5L, alpha = 0.5, theta = 0.5)
 morie_pmpfit_expected <- function(n, alpha, theta) {
   params <- morie_pmpfit_check(alpha, theta)
   a <- params$alpha
@@ -152,6 +160,8 @@ morie_pmpfit_expected <- function(n, alpha, theta) {
 #'   `monotone_in_alpha`, `method`, `note`.
 #' @references Pitman, J. & Yor (1997). Definition 1.
 #' @export
+#' @examples
+#' morie_pmpfit_tail(n = 5L)
 morie_pmpfit_tail <- function(n, theta = 1.0, alphas = c(0.0, 0.3, 0.6)) {
   th <- as.numeric(theta)
   N <- as.integer(n)
@@ -182,6 +192,8 @@ morie_pmpfit_tail <- function(n, theta = 1.0, alphas = c(0.0, 0.3, 0.6)) {
 #'
 #' @return A character string.
 #' @export
+#' @examples
+#' morie_pmpfit_cheatsheet()
 morie_pmpfit_cheatsheet <- function() {
   paste("pmpfit: the DP breaks its stick with Beta(1, theta)",
         "at EVERY index; Pitman-Yor lets the parameters DRIFT --",

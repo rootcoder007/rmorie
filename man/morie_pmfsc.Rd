@@ -59,16 +59,16 @@ LT <- c("c", "n", "o")
 OBS <- lapply(0:399, function(i) {
     a <- PT[(i\%\%3) + 1L]
     b <- LT[((i\%/\%3)\%\%3) + 1L]
-    r <- if (a == "C" && b == "c") 
+    r <- if (a == "C" && b == "c")
         3 + ((i * 7)\%\%20)/10
-    else if (a == "O" && b == "n") 
+    else if (a == "O" && b == "n")
         7 + ((i * 11)\%\%40)/10
     else 1 + ((i * 13)\%\%110)/10
     list(a, b, r)
 })
-REC <- list(list(0, 0, 0, "C"), list(4, 0, 0, "N"), list(0, 4.5, 
+REC <- list(list(0, 0, 0, "C"), list(4, 0, 0, "N"), list(0, 4.5,
     0, "O"), list(20, 0, 0, "C"))
-LIG <- list(list(3.4, 0, 0, "c"), list(1, 3, 0, "n"), list(5, 
+LIG <- list(list(3.4, 0, 0, "c"), list(1, 3, 0, "n"), list(5,
     5, 1, "o"), list(2, 2, 2, "x"))
 morie_pmfsc(REC, LIG, observations = OBS, r_max = RMAX, n_bins = NB)
 }

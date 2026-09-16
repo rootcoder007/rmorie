@@ -192,7 +192,7 @@ morie_emd <- function(p, q, ground = "ordered", hierarchy = NULL,
 #' @export
 #' @examples
 #' morie_tcls(X = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+#'   sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tcls <- function(X, quasi_ids, sensitive, t, ground = "ordered",
                        hierarchy = NULL, domain = NULL) {
   n <- length(X)

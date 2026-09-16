@@ -140,6 +140,13 @@
 #' @param age_breaks Passed to \code{.sccsno_cuts}.
 #' @return The value of \code{cells}, as built in the body.
 #' @export
+#' @examples
+#' cells <- morie_sccsno_build_intervals(start = 0, end = 365,
+#'                                       exposure = 100,
+#'                                       event_times = c(110, 250),
+#'                                       risk_periods = list(c(0, 30)),
+#'                                       age_breaks = c(180))
+#' cells
 morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
                                          risk_periods, age_breaks) {
   # One individual's follow-up, cut into (age band, risk period) cells
@@ -243,6 +250,14 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 #' @param n_age Numeric; combined arithmetically in the body.
 #' @return The value of \code{ll}, as built in the body.
 #' @export
+#' @examples
+#' cases <- list(
+#'   list(start = 0, end = 365, exposure = 100, events = c(110, 250)),
+#'   list(start = 0, end = 365, exposure = 200, events = c(215)))
+#' cbp <- lapply(cases, function(c)
+#'   morie_sccsno_build_intervals(c$start, c$end, c$exposure, c$events,
+#'                                list(c(0, 30)), c()))
+#' morie_sccsno_loglik(c(0.5), cbp, n_risk = 1L, n_age = 1L)
 morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
   # The conditional log-likelihood of Sec. 3. params is
   # (beta_1..beta_s, alpha_1..alpha_{m-1}) with beta_0 = alpha_0 = 0.
@@ -363,6 +378,17 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 #' \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations},
 #' \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' cases <- lapply(1:12, function(i) {
+#'   expo <- runif(1, 60, 300)
+#'   n_ev <- 1 + rbinom(1, 2, 0.5)
+#'   ev <- sort(c(runif(max(n_ev - 1, 0), 0, 365),
+#'                expo + runif(1, 0, 30)))
+#'   list(start = 0, end = 365, exposure = expo, events = ev)
+#' })
+#' r <- morie_sccsno_fit(cases, risk_periods = list(c(0, 30)))
+#' str(r, max.level = 1)
 morie_sccsno_fit <- function(cases, risk_periods, age_breaks = c(),
                              iters = 100, tol = 1e-10, ridge = 1e-10) {
   # Maximise the conditional likelihood by Newton-Raphson. cases is a
@@ -464,6 +490,9 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks = c(),
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{intervals}, \code{level}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_sccsno_relative_incidence(D)
 morie_sccsno_relative_incidence <- function(fit, level = 0.95) {
   # Point estimates and Wald intervals on the incidence scale.
   z <- stats::qnorm(0.5 + as.numeric(level) / 2.0)
@@ -491,6 +520,19 @@ morie_sccsno_relative_incidence <- function(fit, level = 0.95) {
 #' @return A list with \code{pre_exposure_ri}, \code{consistent_with_design},
 #' \code{tolerance_log}, \code{interpretation}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' cases <- lapply(1:12, function(i) {
+#'   expo <- runif(1, 60, 300)
+#'   n_ev <- 1 + rbinom(1, 2, 0.5)
+#'   ev <- sort(c(runif(max(n_ev - 1, 0), 0, 365),
+#'                expo + runif(1, 0, 30)))
+#'   list(start = 0, end = 365, exposure = expo, events = ev)
+#' })
+#' fit <- morie_sccsno_fit(cases,
+#'                         risk_periods = list(c(-30, 0), c(0, 30)))
+#' r <- morie_sccsno_check_assumptions(fit, pre_index = 0)
+#' str(r, max.level = 1)
 morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index = 0,
                                            tol = 0.25) {
   # Read the pre-exposure window as a design diagnostic. A relative
@@ -519,6 +561,8 @@ morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index = 0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_sccsno_cheatsheet()
 morie_sccsno_cheatsheet <- function() {
   paste0(
     "sccsno: SCCS. Cases ONLY. Conditioning on each person's ",

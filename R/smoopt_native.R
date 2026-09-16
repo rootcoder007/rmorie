@@ -70,6 +70,12 @@
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(20), 10, 2)
+#' y <- sign(X[, 1])
+#' K <- X %*% t(X)
+#' error_cache(rep(0, 10), y, K, 0)
 error_cache <- function(alpha, y, K, b) {
   a <- as.numeric(alpha)
   yy <- as.numeric(y)
@@ -96,6 +102,9 @@ error_cache <- function(alpha, y, K, b) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' violates_kkt(i = 5L, alpha = 0.5, y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   C = c(1, 2, 3, 4, 5, 6, 7, 8))
 violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
   a <- as.numeric(alpha[i])
   r <- as.numeric(y[i]) * as.numeric(E[i])
@@ -114,6 +123,9 @@ violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
 #' @param examine_all A flag; the body branches on it.
 #' @return A list with \code{indices}, \code{kind}, \code{n_non_bound}, \code{note}.
 #' @export
+#' @examples
+#' outer_loop_schedule(alpha = 0.5, C = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   examine_all = c(1, 2, 3, 4, 5, 6, 7, 8))
 outer_loop_schedule <- function(alpha, C, examine_all) {
   a <- as.numeric(alpha)
   if (isTRUE(examine_all)) {
@@ -141,6 +153,10 @@ outer_loop_schedule <- function(alpha, C, examine_all) {
 #' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{0.001}.
 #' @return A list with \code{index}, \code{level}, \code{note}.
 #' @export
+#' @examples
+#' second_choice(i1 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), alpha = 0.5,
+#'   y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   rng = c(1, 2, 3, 4, 5, 6, 7, 8))
 second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
   a <- as.numeric(alpha)
   n <- length(a)
@@ -229,6 +245,12 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
 #' \code{n_sv}, \code{equality_residual}, \code{kkt_violations}, \code{objective},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(20), 10, 2)
+#' y <- sign(X[, 1])
+#' K <- X %*% t(X)
+#' smo_platt(y, K, C = 1.0)
 smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
                       max_passes = 200, seed = 0) {
   yy <- as.numeric(y)

@@ -20,6 +20,9 @@
 # van Lieshout & Baddeley (1996).
 
 #' @noRd
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' rmorie:::morie_ripley_j_function(M)
 morie_ripley_j_function <- function(points, window = NULL, r = NULL,
                                     n_grid = 40) {
   p <- as.matrix(points)

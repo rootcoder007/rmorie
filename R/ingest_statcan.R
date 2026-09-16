@@ -84,8 +84,9 @@
 #'   \code{\link[readr]{read_csv}} (or
 #'   \code{\link[utils]{read.csv}} if \pkg{readr} is unavailable).
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \dontrun{
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
 #' # Requires network access.
 #' url <- paste0(
 #'   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",
@@ -94,6 +95,7 @@
 #' df <- morie_ingest_statcan_csv(url)
 #' head(df)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_ingest_statcan_cansim}},
 #'   \code{\link{morie_cache_dir}}
 #' @examples
@@ -183,12 +185,14 @@ morie_ingest_statcan_csv <- function(url,
 #' @param ... Further arguments forwarded to
 #'   \code{\link[cansim]{get_cansim}}.
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \dontrun{
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
 #' # Requires the 'cansim' package and network access.
 #' df <- morie_ingest_statcan_cansim("35-10-0177")
 #' head(df)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_ingest_statcan_csv}}
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -264,10 +268,14 @@ morie_ingest_statcan_cansim <- function(table_id,
 #' @return A base R \code{data.frame}, one row per (vector, period):
 #'   \code{vector}, \code{ref_date}, \code{value}, \code{decimals},
 #'   \code{scalar_factor}, \code{symbol_code}, \code{release_time}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
+#' @examples
+#' \dontrun{
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \dontrun{
 #' # Two CPI series, last 3 periods each -- no API key needed.
 #' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' }
 #' @seealso \code{\link{morie_ingest_statcan_cansim}}
 #' @examples

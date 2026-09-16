@@ -24,6 +24,9 @@
 #' @return A list with \code{estimate}, \code{total}, \code{losses}, \code{theta},
 #' \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_qrF(V, V)
 morie_qrF <- function(y_true, y_pred, theta = 0.5) {
   yt <- as.numeric(y_true)
   yp <- as.numeric(y_pred)

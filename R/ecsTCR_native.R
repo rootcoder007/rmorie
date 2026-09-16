@@ -256,6 +256,8 @@
 #' @param TD0 initial deep anomaly.
 #' @return a list with temperature, deep_temperature and imbalance.
 #' @export
+#' @examples
+#' morie_ecsTCR_integrate(forcing = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 morie_ecsTCR_integrate <- function(forcing, lam, gamma = 0.7,
                                    epsilon = 1, C = 8, C_deep = 100,
                                    solver = "analytic", dt = 1, T0 = 0,
@@ -291,6 +293,9 @@ morie_ecsTCR_integrate <- function(forcing, lam, gamma = 0.7,
 #' @param f2x forcing from doubling; defaults to AR6's 3.93 W m-2.
 #' @return the forcing in W m-2.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ecsTCR_co2_forcing(V)
 # The grouping matters. Written as f2x * log(r) / log(2) the division
 # happens after the multiplication and a doubling comes back as
 # 3.9299999999999997 rather than 3.93 -- close enough for climate, not

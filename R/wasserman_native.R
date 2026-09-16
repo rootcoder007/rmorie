@@ -277,7 +277,9 @@ morie_wasserman_clt <- function(data) {
 #' @return List with `estimate` (final running mean), `running_means`,
 #'   `last_gap`, `n`, `method`.
 #' @examples
-#' morie_wasserman_lln(c(2, 4, 6))$running_means
+#' if (morie_crypto_liboqs_available()) {
+#'   morie_wasserman_lln(c(2, 4, 6))$running_means
+#' }
 #' @export
 morie_wasserman_lln <- function(data) {
   data <- as.numeric(data)
@@ -1650,7 +1652,9 @@ morie_wasserman_aic <- function(loglik, k) {
 #' @return List with `estimate` (classical BIC), `bic_wasserman`,
 #'   `loglik`, `k`, `n`, `method`.
 #' @examples
-#' round(morie_wasserman_bic(-100, 3, 50)$estimate, 6)
+#' if (morie_crypto_liboqs_available()) {
+#'   round(morie_wasserman_bic(-100, 3, 50)$estimate, 6)
+#' }
 #' @export
 morie_wasserman_bic <- function(loglik, k, n) {
   loglik <- as.numeric(loglik)[1]

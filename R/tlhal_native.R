@@ -47,6 +47,12 @@
 #' @param mode One of \code{"cv"}, \code{"norm"}, \code{"predict"}.
 #' @return The value of \code{hal_fit}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(60), 30, 2)
+#' y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
+#' r <- morie_tlhal(X, y, lam = 1, iters = 300L)
+#' str(r, max.level = 1)
 morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
                         lam = 1.0, iters = 2000L, step = 0.05,
                         max_order = 2L, knots = NULL,
@@ -78,6 +84,11 @@ morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
 #' @param max_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @return A list with \code{design}, \code{columns}, \code{n_basis}, \code{max_order}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(20), 10, 2)
+#' b <- indicator_basis(X, max_order = 1L)
+#' str(b, max.level = 1)
 indicator_basis <- function(X, knots = NULL, max_order = 2L) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
@@ -133,6 +144,9 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' variation_norm(V)
 variation_norm <- function(beta) {
   b <- as.numeric(beta)
   sum(abs(b))
@@ -156,6 +170,12 @@ variation_norm <- function(beta) {
 #' \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history},
 #' \code{max_order}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(60), 30, 2)
+#' y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
+#' r <- hal_fit(X, y, lam = 1, iters = 300L)
+#' str(r, max.level = 1)
 hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
                     max_order = 2L, knots = NULL, intercept = TRUE) {
   B <- indicator_basis(X, knots, max_order)
@@ -236,6 +256,10 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' hal_predict(D, V)
 hal_predict <- function(model, X) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
@@ -272,6 +296,12 @@ hal_predict <- function(model, X) {
 #' @param ... Passed through.
 #' @return A list with \code{lambda}, \code{cv_risks}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(60), 30, 2)
+#' y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
+#' r <- cv_select_lambda(X, y, lambdas = c(0.5, 1, 2), V = 3L, iters = 150L)
+#' str(r, max.level = 1)
 cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
                              ...) {
   rows <- as.matrix(X)

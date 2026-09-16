@@ -126,6 +126,9 @@
 #' @param seed The FNV offset basis.
 #' @return A number below two to the thirty-second.
 #' @export
+#' @examples
+#' S <- c("a", "b", "c")
+#' morie_avalon_fnv(S)
 morie_avalon_fnv <- function(s, seed = 2166136261) {
   h <- seed
   b <- utf8ToInt(s)
@@ -152,6 +155,9 @@ morie_avalon_fnv <- function(s, seed = 2166136261) {
 #' @param smiles The molecule, in the subset the parser accepts.
 #' @return A list with el, arom, chg, hexp, bonds and closures.
 #' @export
+#' @examples
+#' p <- morie_avalon_parse("c1ccccc1O")
+#' str(p, max.level = 1)
 morie_avalon_parse <- function(smiles) {
   s <- as.character(smiles)
   el <- character(0)
@@ -355,6 +361,9 @@ morie_avalon_parse <- function(smiles) {
 #' @param bonds The bond list.
 #' @return One count per atom.
 #' @export
+#' @examples
+#' p <- morie_avalon_parse("CCO")
+#' morie_avalon_h(p$el, p$arom, p$chg, p$hexp, p$bonds)
 morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
   n <- length(el)
   used <- rep(0, n)
@@ -424,6 +433,10 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 #' @param closures Which bonds were ring closures.
 #' @return A list with the rings and a per-atom ring-membership flag.
 #' @export
+#' @examples
+#' p <- morie_avalon_parse("c1ccccc1")
+#' r <- morie_avalon_rings(length(p$el), p$bonds, p$closures)
+#' str(r, max.level = 1)
 morie_avalon_rings <- function(n, bonds, closures) {
   adj <- .avalon_adj(n, bonds)
   rings <- list()
@@ -550,6 +563,8 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #' @param classes Which feature classes to use, or NULL for all five.
 #' @return A sorted character vector.
 #' @export
+#' @examples
+#' morie_avalon_features("CCC", 5L, "path")
 morie_avalon_features <- function(smiles, maxpath = 5L, classes = NULL) {
   if (is.null(classes)) classes <- .avalon_classes
   for (cl in classes) if (!(cl %in% .avalon_classes))
@@ -611,6 +626,9 @@ morie_avalon_features <- function(smiles, maxpath = 5L, classes = NULL) {
 #' @param a,b Bit vectors.
 #' @return A number between zero and one.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_avalon_tanimoto(V, V)
 morie_avalon_tanimoto <- function(a, b) {
   if (length(a) != length(b))
     stop("two fingerprints of different widths cannot be compared")
@@ -631,6 +649,9 @@ morie_avalon_tanimoto <- function(a, b) {
 #' @return A list with the bits, the features that set them, and the
 #'   collision count.
 #' @export
+#' @examples
+#' fp <- morie_avalon("c1ccccc1O", n_bits = 128L)
+#' str(fp, max.level = 1)
 morie_avalon <- function(smiles, n_bits = 512L, maxpath = 5L,
                          classes = NULL) {
   n_bits <- as.integer(n_bits)
@@ -662,6 +683,8 @@ morie_avalon <- function(smiles, n_bits = 512L, maxpath = 5L,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_avalon_cheatsheet()
 morie_avalon_cheatsheet <- function()
   paste0("avalon: Avalon-style feature fingerprint. Atom, bond, path, ",
          "ring and atom-pair features hashed with FNV-1a into a folded ",

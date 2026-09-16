@@ -21,8 +21,10 @@
 #'   Nonparametric Bayesian Inference, CUP, section 12.3.
 #' @export
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' r <- Ghosalsemiparabvm(); TRUE
+#' }
 Ghosalsemiparabvm <- function(n = 2000, alpha = 2, n_sim = 400,
                               seed = 42) {
   n <- as.integer(n)

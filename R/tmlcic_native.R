@@ -169,6 +169,9 @@
 #' @param interactions A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{lib}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tmlcic_default_library(V)
 morie_tmlcic_default_library <- function(p, interactions = TRUE) {
   # The chapter's example library: the unadjusted model, one main term
   # per covariate, and optionally one treatment interaction each. cols
@@ -277,6 +280,15 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' @param target_step A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{q1}, \code{q0}, \code{qa}, \code{info}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 40
+#' W <- matrix(rnorm(n * 2), n, 2)
+#' A <- rbinom(n, 1, 0.5)
+#' y <- plogis(-0.3 + 0.8 * A + 0.5 * W[, 1] + rnorm(n, 0, 0.5))
+#' cand <- list(name = "W1", cols = 0L, interact = FALSE)
+#' r <- morie_tmlcic_candidate_tmle(y, A, W, cand, g1 = function(i) 0.5)
+#' str(r, max.level = 1)
 morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows = NULL,
                                         eval_rows = NULL, ridge = 1e-8,
                                         target_step = TRUE) {
@@ -333,6 +345,20 @@ morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows = NULL,
 #' @param target Compared against \code{"SATE"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 40
+#'   W <- matrix(rnorm(n * 2), n, 2)
+#'   A <- rbinom(n, 1, 0.5)
+#'   y <- plogis(-0.3 + 0.8 * A + 0.5 * W[, 1] + rnorm(n, 0, 0.5))
+#'   cand <- list(name = "W1", cols = 0L, interact = FALSE)
+#'   ct <- morie_tmlcic_candidate_tmle(y, A, W, cand, g1 = function(i) 0.5)
+#'   psi <- mean(ct$q1 - ct$q0)
+#'   D <- morie_tmlcic_influence_curve(y, A, ct$q1, ct$q0, ct$qa,
+#'                                     rep(0.5, n), seq_len(n), psi, "SATE")
+#'   head(D)
+#' }
 morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
                                          target) {
   # Eq. (13.3) for the PATE and eq. (13.4) for the SATE.
@@ -400,6 +426,16 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 #' @param target Compared against \code{"PATE"}.
 #' @return A list with \code{var}, \code{info}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' D <- rnorm(n, 0, 0.6)
+#' y <- runif(n)
+#' qa <- runif(n)
+#' groups <- split(seq_len(n), rep(1:8, each = 5))
+#' r <- morie_tmlcic_variance_estimate(D, y, qa, groups, n,
+#'                                     design = "unmatched", target = "SATE")
+#' str(r, max.level = 1)
 morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
                                            target) {
   # The design's variance estimator. Returns list(var, info).
@@ -533,6 +569,17 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' @return A list with \code{q_candidate}, \code{q_risks}, \code{q_names},
 #' \code{g_candidate}, \code{g_risks}, \code{g_names}, \code{gfit}, \code{n_folds}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 40
+#' W <- matrix(rnorm(n * 2), n, 2)
+#' A <- rep(c(0, 1), 20)
+#' y <- plogis(-0.3 + 0.8 * A + 0.5 * W[, 1] + rnorm(n, 0, 0.5))
+#' groups <- split(seq_len(n), rep(1:8, each = 5))
+#' r <- morie_tmlcic_adaptive_prespecification(y, A, W, groups,
+#'                                             design = "unmatched",
+#'                                             target = "SATE")
+#' str(r, max.level = 1)
 morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
                                                    target, library = NULL,
                                                    g_library = NULL,
@@ -628,6 +675,14 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
 #' \code{unit}, \code{design}, \code{target}, \code{n_folds}, \code{adapt},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' n <- 40
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' D <- rep(c(0, 1), 20)
+#' y <- plogis(-0.3 + 0.8 * D + 0.5 * X[, 1] + rnorm(n, 0, 0.5))
+#' r <- morie_tmlcic_tmle_cluster_ic(y, D, X)
+#' str(r, max.level = 1)
 morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster = NULL,
                                          target = "SATE", design = NULL,
                                          library = NULL, g_library = NULL,
@@ -769,6 +824,9 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster = NULL,
 #' \code{as.numeric}.
 #' @return A list with \code{alpha}, \code{groups}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tmlcic_cluster_weights(V)
 morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
   # The per-individual weights alpha_ij and the cluster groups. Balzer
   # et al. (2019) require sum_i alpha_ij = 1 within each cluster. The
@@ -982,6 +1040,17 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(5)
+#' nc <- 10
+#' sz <- 4
+#' cluster <- rep(seq_len(nc), each = sz)
+#' E <- rep(rep(c(0, 1), nc / 2), each = sz)
+#' W <- matrix(rnorm(nc * sz * 2), nc * sz, 2)
+#' A <- E
+#' y <- plogis(-0.3 + 0.8 * E + 0.4 * W[, 1] + rnorm(nc * sz, 0, 0.5))
+#' r <- morie_tmlcic_tmle_hierarchical(y, A, E, W, cluster)
+#' str(r, max.level = 1)
 morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
                                            weights = NULL, known_g = NULL,
                                            trim = 0.01, ridge = 1e-8,
@@ -1122,6 +1191,8 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_tmlcic_cheatsheet()
 morie_tmlcic_cheatsheet <- function() {
   paste0(
     "tmlcic: cluster randomized trial. Pre-specify a LIBRARY of ",

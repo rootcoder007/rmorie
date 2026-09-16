@@ -21,6 +21,6 @@ A list with \code{direct}, \code{lemma}, \code{max_difference}, \code{holds}, \c
 }
 \keyword{internal}
 \examples{
-AbcdLemma(matrix(c(4, 1, 1, 3), 2, 2), matrix(c(1, 2), 2, 1), 
+AbcdLemma(matrix(c(4, 1, 1, 3), 2, 2), matrix(c(1, 2), 2, 1),
     matrix(1, 1, 1), matrix(c(1, 2), 1, 2))
 }

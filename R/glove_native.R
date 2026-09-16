@@ -95,6 +95,8 @@
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.75}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' glove_weight(x = 5L)
 glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
   x <- as.numeric(x)
   x_max <- as.numeric(x_max)
@@ -123,6 +125,9 @@ glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
 #' @param min_count Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{X}, \code{vocab}, \code{index}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' cooccurrence(V)
 cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
   docs <- .glove_as_docs(corpus)
   all_tokens <- unlist(docs, use.names = FALSE)
@@ -189,6 +194,14 @@ cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
 #' @param alpha Passed to \code{glove_weight}. Defaults to \code{0.75}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- data.frame(i = c(1, 2, 1), j = c(2, 1, 3), count = c(5, 3, 2))
+#' W <- matrix(rnorm(6), 3, 2)
+#' Wt <- matrix(rnorm(6), 3, 2)
+#' b <- rnorm(3)
+#' bt <- rnorm(3)
+#' glove_loss(X, W, Wt, b, bt)
 glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
   total <- 0.0
   n <- nrow(X)
@@ -232,6 +245,9 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max},
 #' \code{alpha}, \code{combine}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_glove(D)
 morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
                         x_max = 100.0, alpha = 0.75, harmonic = TRUE,
                         min_count = 1, seed = 0, combine = "sum") {

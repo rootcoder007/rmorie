@@ -25,6 +25,9 @@
 #' @param V A vector; indexed elementwise.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @examples
+#' predict_naive(x = c(1, 2, 3, 4, 5, 6, 7, 8), w0 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   w = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 predict_naive <- function(x, w0, w, V) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -82,6 +85,10 @@ predict_naive <- function(x, w0, w, V) {
 #' @param i See Usage.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(1)
+#' V <- matrix(rnorm(12, 0, 0.3), 6, 2)
+#' gradient(x = c(1, 0, 1, 0, 0, 0), V, f = 1, i = 1)
 gradient <- function(x, V, f, i) {
   xs <- as.numeric(x)
   a <- sum(vapply(seq_along(xs), function(j) V[[j]][f] * xs[j],
@@ -103,6 +110,9 @@ gradient <- function(x, V, f, i) {
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @examples
+#' r <- design_mf(u = 0L, i = 1L, n_users = 3, n_items = 4)
+#' r
 design_mf <- function(u, i, n_users, n_items) {
   x <- rep(0, as.integer(n_users) + as.integer(n_items))
   x[as.integer(u) + 1L] <- 1
@@ -127,6 +137,13 @@ design_mf <- function(u, i, n_users, n_items) {
 #' @return A list with \code{estimate}, \code{w0}, \code{w}, \code{V},
 #' \code{mse_history}, \code{final_mse}, \code{k}, \code{n_features}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 40
+#' X <- matrix(rbinom(n * 6, 1, 0.3), n, 6)
+#' y <- X[, 1] + X[, 3] - X[, 5] + rnorm(n, 0, 0.2)
+#' r <- fit_fm(X, y, k_dim = 2, iters = 100)
+#' str(r, max.level = 1)
 fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
                    lam = 0.01, seed = 0) {
   rows <- as.matrix(X)

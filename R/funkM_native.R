@@ -388,6 +388,12 @@ morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
 #' @param fill Carried through into a list the body builds. Defaults to \code{"zero"}.
 #' @return A list with \code{rmse_on_observed}, \code{fill}, \code{rank}, \code{note}.
 #' @export
+#' @examples
+#' ratings <- list(c(0, 0, 5), c(0, 1, 3), c(1, 0, 4), c(1, 2, 2),
+#'                 c(2, 1, 5), c(2, 2, 1))
+#' e <- morie_funkM_imputed_svd_error(ratings, n_users = 3, n_items = 3,
+#'                                    rank = 2, fill = "mean")
+#' is.numeric(e) || is.list(e)
 morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
                                           rank = 2, fill = "zero") {
   R  <- .funkM_as_ratings(ratings)

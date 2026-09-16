@@ -104,6 +104,11 @@
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{.logabsdet}.
 #' @export
+#' @examples
+#' j <- numeric_log_jacobian(function(z) c(z[1] + z[2], z[1] - z[2]),
+#'                           c(0.4, 0.2))
+#' stopifnot(abs(j - log(2)) < 1e-5)
+#' j
 numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
   z <- as.numeric(z)
   n <- length(z)
@@ -141,6 +146,18 @@ numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
 #' @param moves See Usage.
 #' @return The value of \code{by_pair}, as built in the body.
 #' @export
+#' @examples
+#' models <- list(m1 = list(dim = 1L, logpost = function(th) -sum(th^2)),
+#'                m2 = list(dim = 2L, logpost = function(th) -sum(th^2)))
+#' moves <- list(
+#'   list(frm = "m1", to = "m2", n_u = 1L, n_u_rev = 0L,
+#'        propose = function(theta, uni) qnorm(uni()),
+#'        transform = function(theta, u) list(c(theta, u), numeric(0))),
+#'   list(frm = "m2", to = "m1", n_u = 0L, n_u_rev = 1L,
+#'        propose = function(theta, uni) numeric(0),
+#'        transform = function(theta, u) list(theta[1], theta[2]))
+#' )
+#' names(check_dimension_matching(models, moves))
 check_dimension_matching <- function(models, moves) {
   if (length(models) == 0) stop("bayrjmcmc: no models given")
   for (nm in names(models)) {
@@ -210,6 +227,10 @@ check_dimension_matching <- function(models, moves) {
 #' @param log_jacobian Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' rj_log_acceptance(logpost_from = -4.2, logpost_to = -3.1,
+#'                   log_j_from = log(0.5), log_j_to = log(0.5),
+#'                   logq_u = -0.9, logq_u_rev = 0, log_jacobian = 0)
 rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
                               log_j_to, logq_u, logq_u_rev, log_jacobian) {
   (logpost_to - logpost_from) + (log_j_to - log_j_from) +
@@ -269,6 +290,24 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #' @return A list with \code{model_freq}, \code{visits}, \code{n_kept}, \code{accept},
 #' \code{tried}, \code{chain}, \code{jacobian}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' models <- list(m1 = list(dim = 1L, logpost = function(th) -sum(th^2) / 2),
+#'                m2 = list(dim = 2L, logpost = function(th) -sum(th^2) / 2 - 1))
+#' moves <- list(
+#'   list(frm = "m1", to = "m2", n_u = 1L, n_u_rev = 0L,
+#'        propose = function(theta, uni) qnorm(uni()),
+#'        transform = function(theta, u) list(c(theta, u), numeric(0)),
+#'        logjac = function(theta, u, theta2, u2) 0,
+#'        logq = function(theta, u) dnorm(u, log = TRUE)),
+#'   list(frm = "m2", to = "m1", n_u = 0L, n_u_rev = 1L,
+#'        propose = function(theta, uni) numeric(0),
+#'        transform = function(theta, u) list(theta[1], theta[2]),
+#'        logjac = function(theta, u, theta2, u2) 0,
+#'        logq_rev = function(theta2, u2) dnorm(u2, log = TRUE))
+#' )
+#' r <- reversible_jump_mcmc(models, moves, "m1", init_theta = 0.2,
+#'                           n_iter = 60L, seed = 1L, keep_chain = FALSE)
+#' r$visits
 reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
                                  n_iter = 10000L, burn_in = 0L, thin = 1L,
                                  seed = 0L, within = NULL,
@@ -446,6 +485,9 @@ bayrjmcmc <- reversible_jump_mcmc
 #' @param L Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' y <- c(0.1, 0.15, 0.2, 0.7, 0.75, 0.85)
+#' step_function_loglik(y, s = 0.5, h = c(3, 4), L = 1)
 step_function_loglik <- function(y, s, h, L) {
   edges <- c(0, as.numeric(s), as.numeric(L))
   if (length(h) != length(edges) - 1)
@@ -481,6 +523,8 @@ step_function_loglik <- function(y, s, h, L) {
 #' @param cap Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @return A list with \code{eta}, \code{pi}, \code{b}, \code{d}, \code{c}.
 #' @export
+#' @examples
+#' changepoint_move_probabilities(lam = 5L, k_max = 5L)
 changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
   lam <- as.numeric(lam)
   k_max <- as.integer(k_max)
@@ -518,6 +562,9 @@ changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
 #' @param s_right Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' birth_split_heights(h_j = 2, u = 0.6, s_left = 0, s_star = 0.5,
+#'                     s_right = 1)
 birth_split_heights <- function(h_j, u, s_left, s_star, s_right) {
   span <- as.numeric(s_right) - as.numeric(s_left)
   if (span <= 0) stop("bayrjmcmc: empty interval in a birth move")
@@ -540,6 +587,9 @@ birth_split_heights <- function(h_j, u, s_left, s_star, s_right) {
 #' @param h_new_right Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' birth_log_jacobian(h_j = c(1, 2, 3, 4, 5, 6, 7, 8), h_new_left = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   h_new_right = c(1, 2, 3, 4, 5, 6, 7, 8))
 birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
   2 * log(as.numeric(h_new_left) + as.numeric(h_new_right)) -
     log(as.numeric(h_j))
@@ -603,6 +653,15 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' \code{pi}, \code{mean_s1_given_k1}, \code{var_s1_given_k1}, \code{mean_height},
 #' \code{chain}, \code{n_kept}, \code{use_likelihood}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' u <- .unif_stream(1L)
+#' unique(c(u(), u(), u(), u()))
+#' set.seed(2); y <- sort(c(runif(30, 0, .4), runif(60, .4, 1)))
+#' r <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
+#' r$k_mean
+#' r$k_posterior[1]
+#' r2 <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
+#' r$k_posterior
 changepoint_rjmcmc <- function(y = numeric(0), L = 1.0, n_iter = 40000,
                                burn_in = 4000, lam = 3.0, k_max = 30,
                                alpha = 1.0, beta = 200.0, seed = 0, cap = 0.9,

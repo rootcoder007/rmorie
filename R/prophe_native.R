@@ -34,6 +34,11 @@
 #' \code{residual}, \code{reconstruction_error}, \code{reconstructs}, \code{coef},
 #' \code{changepoints}, \code{sigma}, \code{n}, \code{component_names}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' t <- 1:60
+#' y <- sin(2 * pi * t / 12) + 0.05 * t + rnorm(60) * 0.1
+#' prophe_additive_components(t, y)
 prophe_additive_components <- function(t, y, seasonalities = NULL,
                                        holidays = NULL,
                                        holiday_window = c(0, 0), ...) {
@@ -112,6 +117,9 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
 #' @param components A vector; indexed elementwise.
 #' @return A list with \code{sd}, \code{relative}, \code{ranked}, \code{note}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' prophe_component_shares(D)
 prophe_component_shares <- function(components) {
   out <- list()
   for (nm in names(components)) {
@@ -142,6 +150,8 @@ prophe_component_shares <- function(components) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' prophe_cheatsheet()
 prophe_cheatsheet <- function() {
   paste0("prophe: same model and source as prphet (Taylor & Letham ",
          "2018 eq. 1) -- this is the DECOMPOSITION view. Fit once, ",
@@ -165,6 +175,11 @@ prophe_cheatsheet <- function() {
 #' @param ... Passed through.
 #' @return The value of \code{prophe_additive_components}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' t <- 1:60
+#' y <- sin(2 * pi * t / 12) + 0.05 * t + rnorm(60) * 0.1
+#' morie_prophe(t, y)
 morie_prophe <- function(t, y, seasonalities = NULL, holidays = NULL,
                          holiday_window = c(0, 0), ...) {
   prophe_additive_components(t, y, seasonalities = seasonalities,

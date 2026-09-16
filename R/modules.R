@@ -145,7 +145,8 @@ morie_canonicalize_cpads_data <- function(data) {
 #'
 #' @param cpads_csv Path to the CPADS CSV.
 #' @return Canonicalized CPADS data frame.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Reads and canonicalises the CPADS PUMF CSV. The default CSV lives in
 #' # a morie project tree; the CKAN-fetched PUMF works identically (see
@@ -153,6 +154,7 @@ morie_canonicalize_cpads_data <- function(data) {
 #' # render cleanly on machines without the CSV checked out locally.
 #' tryCatch(morie_load_cpads_data(), error = function(e) message(conditionMessage(e)))
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
   cpads_csv <- .resolve_cpads_csv(cpads_csv)
@@ -185,7 +187,8 @@ morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
 #' @param cpads_csv Path to the CPADS CSV.
 #' @param output_dir Optional directory for CSV outputs.
 #' @return Named list of data-frame outputs.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Dispatch one MORIE module against the canonical CPADS CSV. The CSV
 #' # ships with a morie project tree, or is fetched via the CKAN endpoint
@@ -196,6 +199,7 @@ morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
 #'   error = function(e) message(conditionMessage(e))
 #' )
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv(), output_dir = NULL) {
   data <- morie_load_cpads_data(cpads_csv)

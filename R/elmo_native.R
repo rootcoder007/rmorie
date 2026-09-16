@@ -27,6 +27,9 @@
 #' @param raw A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' layer_weights(V)
 layer_weights <- function(raw) {
   # Softmax-normalised s^{task}. A simplex, not free weights: these
   # choose WHICH layers to read and cannot alter the magnitude, which
@@ -53,6 +56,10 @@ layer_weights <- function(raw) {
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{h}, \code{c}.
 #' @export
+#' @examples
+#' lstm_step(x = c(1, 2, 3, 4, 5, 6, 7, 8), h = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   c = c(1, 2, 3, 4, 5, 6, 7, 8), Wx = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   Wh = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 lstm_step <- function(x, h, c, Wx, Wh, b) {
   # One LSTM cell step, gates in the order i, f, g, o.
   d <- length(h)
@@ -88,6 +95,15 @@ lstm_step <- function(x, h, c, Wx, Wh, b) {
 #' @param layers See Usage.
 #' @return The value of \code{reps}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 2
+#' X <- matrix(rnorm(6, 0, 0.5), 3, d)
+#' mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+#' layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+#'               Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+#' r <- bilm_forward(X, list(layer))
+#' str(r, max.level = 1)
 bilm_forward <- function(X, layers) {
   # Run the biLM and return every layer's representation.
   # layers is a list of (Wxf, Whf, bf, Wxb, Whb, bb). The token
@@ -165,6 +181,16 @@ bilm_forward <- function(X, layers) {
 #' \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 2
+#' X <- matrix(rnorm(6, 0, 0.5), 3, d)
+#' mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+#' layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+#'               Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+#' reps <- bilm_forward(X, list(layer))
+#' r <- elmo_mix(reps, raw_weights = c(0.5, -0.5))
+#' str(r, max.level = 1)
 elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
   # Eq. (1): gamma * sum_j s_j h_{k,j}.
   n_layers <- length(reps)
@@ -201,6 +227,15 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
 #' @return A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights},
 #' \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' d <- 2
+#' X <- matrix(rnorm(6, 0, 0.5), 3, d)
+#' mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+#' layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+#'               Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+#' r <- elmo_representation(X, list(layer))
+#' str(r, max.level = 1)
 elmo_representation <- function(X, layers, raw_weights = NULL,
                                 gamma = 1) {
   # The biLM plus the task-specific mix, end to end.
@@ -250,6 +285,15 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 #' @param gamma Passed to \code{elmo_representation}. Defaults to \code{1}.
 #' @return The value of \code{elmo_representation}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' d <- 2
+#' X <- matrix(rnorm(6, 0, 0.5), 3, d)
+#' mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+#' layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+#'               Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+#' r <- elmorepresentation(X, list(layer))
+#' str(r, max.level = 1)
 elmorepresentation <- function(X, layers, raw_weights = NULL,
                                gamma = 1) {
   elmo_representation(X, layers, raw_weights, gamma)
@@ -268,6 +312,15 @@ elmorepresentation <- function(X, layers, raw_weights = NULL,
 #' @param gamma Passed to \code{elmo_representation}. Defaults to \code{1}.
 #' @return The value of \code{elmo_representation}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' d <- 2
+#' X <- matrix(rnorm(6, 0, 0.5), 3, d)
+#' mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+#' layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+#'               Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+#' r <- elmo(X, list(layer))
+#' str(r, max.level = 1)
 elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
   elmo_representation(X, layers, raw_weights, gamma)
 }
@@ -285,6 +338,15 @@ elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
 #' @param gamma Passed to \code{elmo_representation}. Defaults to \code{1}.
 #' @return The value of \code{elmo_representation}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' d <- 2
+#' X <- matrix(rnorm(6, 0, 0.5), 3, d)
+#' mkw <- function() matrix(rnorm(d * 4 * d, 0, 0.3), d, 4 * d)
+#' layer <- list(Wxf = mkw(), Whf = mkw(), bf = rep(0, 4 * d),
+#'               Wxb = mkw(), Whb = mkw(), bb = rep(0, 4 * d))
+#' r <- morie_elmo(X, list(layer))
+#' str(r, max.level = 1)
 morie_elmo <- function(X, layers, raw_weights = NULL, gamma = 1) {
   elmo_representation(X, layers, raw_weights, gamma)
 }

@@ -114,8 +114,8 @@ Gpreg <- function(X, y, X_test, kernel = NULL, noise = 0) {
 #' @references Rasmussen & Williams (2006), eq. (2.25).
 #' @export
 #' @examples
-#' Gppost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_star = c(1, 2,
-#' 3, 4, 5, 6, 7, 8))
+#' Gppost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X_star = c(1, 2, 3, 4, 5, 6, 7, 8))
 Gppost <- function(X, y, X_star, kernel = NULL, noise = 0) {
   A <- .b2mat(X)
   B <- .b2mat(X_star)
@@ -177,8 +177,8 @@ Gpvar <- function(X, X_star, kernel = NULL, sigma2 = 0) {
 #' @references Rasmussen & Williams (2006), Sec. 2.7.
 #' @export
 #' @examples
-#' Gpresid(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), y_pred = c(1, 2,
-#' 3, 4, 5, 6, 7, 8))
+#' Gpresid(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y_pred = c(1, 2, 3, 4, 5, 6, 7, 8))
 Gpresid <- function(X, y, y_pred, kernel = NULL, noise = 0) {
   A <- .b2mat(X)
   yv <- as.numeric(y)
@@ -217,8 +217,8 @@ Gpresid <- function(X, y, y_pred, kernel = NULL, noise = 0) {
 #' @references Rasmussen & Williams (2006), eq. (2.23)-(2.24).
 #' @export
 #' @examples
-#' Srfintp(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8), grid =
-#' c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Srfintp(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 Srfintp <- function(coords, values, grid, method = "gp", kernel = NULL, noise = 0) {
   if (!(method %in% c("gp", "kriging"))) stop("method must be 'gp' or 'kriging'", call. = FALSE)
   g <- Gpreg(coords, values, grid, kernel, noise)

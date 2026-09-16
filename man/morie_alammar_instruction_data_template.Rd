@@ -19,6 +19,6 @@ A list with \code{texts}, \code{output_spans}, \code{estimate}, \code{n}, \code{
 }
 \keyword{internal}
 \examples{
-morie_alammar_instruction_data_template(list(list(instruction = "add", 
+morie_alammar_instruction_data_template(list(list(instruction = "add",
     input = "2 2", output = "four")))
 }

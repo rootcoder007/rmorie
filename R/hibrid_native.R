@@ -222,6 +222,9 @@
 #' \code{sca_fixed}, \code{prediction_new}, \code{residuals}, \code{n}, \code{m},
 #' \code{p}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' morie_hibrid_hibrid_prediction(y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   p1_geno = c(1, 2, 3, 4, 5, 6, 7, 8), p2_geno = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
                                            sigma2_sca = NULL, X = NULL,
                                            p1_new = NULL, p2_new = NULL,

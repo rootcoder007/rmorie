@@ -135,6 +135,10 @@
 #' \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain},
 #' \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' merge_panels(D, V)
 merge_panels <- function(panels, study_snps) {
   if (length(panels) == 0L) {
     stop("impfun: no reference panels given")
@@ -185,6 +189,9 @@ merge_panels <- function(panels, study_snps) {
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{posterior}, \code{n_templates}, \code{n_sites}, \code{log_likelihood}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' copying_model(V, V)
 copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) {
   h <- as.integer(study_hap)
   R_list <- .impfun_as_int_list(reference_haps)
@@ -276,6 +283,9 @@ impute_dosage <- function(posterior, reference_haps, site) {
 #' @param dosages Passed to \code{.impfun_as_double_vec}.
 #' @return A list with \code{info}, \code{theta}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' info_score(V)
 info_score <- function(dosages) {
   d <- .impfun_as_double_vec(dosages)
   n <- length(d)
@@ -312,6 +322,9 @@ info_score <- function(dosages) {
 #' @return A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error},
 #' \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' concordance(V, V)
 concordance <- function(imputed, truth) {
   a <- .impfun_as_double_vec(imputed)
   b <- .impfun_as_double_vec(truth)

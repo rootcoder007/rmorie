@@ -92,6 +92,8 @@ teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{arg}, as built in the body.
 #' @export
+#' @examples
+#' noisy_argmax(counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
 noisy_argmax <- function(counts, gamma, seed = 0) {
   gamma <- as.numeric(gamma)
   if (gamma <= 0)
@@ -121,6 +123,8 @@ noisy_argmax <- function(counts, gamma, seed = 0) {
 #' @param delta Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' epsilon_data_independent(T = 5L, gamma = 0.5, delta = 0.5)
 epsilon_data_independent <- function(T, gamma, delta) {
   T <- as.numeric(T)
   gamma <- as.numeric(gamma)
@@ -143,6 +147,8 @@ epsilon_data_independent <- function(T, gamma, delta) {
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' lemma4_bound(counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
 lemma4_bound <- function(counts, gamma) {
   gamma <- as.numeric(gamma)
   if (gamma <= 0)
@@ -171,6 +177,8 @@ lemma4_bound <- function(counts, gamma) {
 #' @param l Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' theorem3_moment(q = 0.5, gamma = 0.5, l = c(1, 2, 3, 4, 5, 6, 7, 8))
 theorem3_moment <- function(q, gamma, l) {
   q <- as.numeric(q)
   gamma <- as.numeric(gamma)
@@ -201,6 +209,8 @@ theorem3_moment <- function(q, gamma, l) {
 #' @return A list with \code{epsilon}, \code{lambda}, \code{alpha}, \code{delta},
 #' \code{queries}, \code{used}.
 #' @export
+#' @examples
+#' moments_accountant(vote_counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5, delta = 0.5)
 moments_accountant <- function(vote_counts, gamma, delta,
                                lambdas = NULL,
                                data_dependent = TRUE) {

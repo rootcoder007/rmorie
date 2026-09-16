@@ -15,6 +15,8 @@
 #' @param structure "independent" or "paired".
 #' @return A list of per-task arm-probability vectors.
 #' @export
+#' @examples
+#' morie_mtdrl_bandit_tasks()
 morie_mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100,
                                       seed = 0,
                                       structure = "independent") {
@@ -45,6 +47,9 @@ morie_mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100,
 #' @return Numeric feature vector of length n_arms + 2: one-hot
 #'   previous action, previous reward, step index.
 #' @export
+#' @examples
+#' morie_mtdrl_history_features(history = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   n_arms = 5L)
 morie_mtdrl_history_features <- function(history, n_arms) {
   feat <- rep(0, n_arms + 2L)
   if (length(history) > 0L) {

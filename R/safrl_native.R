@@ -341,6 +341,10 @@
 #' @param max_iter Passed to \code{.safrl_dual}. Defaults to \code{5000}.
 #' @return The value of \code{.safrl_finish}.
 #' @export
+#' @examples
+#' g <- c(1, -1)
+#' H <- diag(2)
+#' morie_safrl(g, H)
 morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
                          tol = 1e-12, max_iter = 5000) {
   gv <- .safrl_vec(g, "g")
@@ -553,6 +557,8 @@ morie_safrl_cmdp_returns <- function(policy, states, actions, step,
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_safrl_worst_case_violation(delta = 0.5, gamma = 0.5, epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_safrl_worst_case_violation <- function(delta, gamma, epsilon) {
   delta <- as.numeric(delta)
   gamma <- as.numeric(gamma)

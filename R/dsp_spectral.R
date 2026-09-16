@@ -83,11 +83,13 @@ morie_dsp_psd_bartlett <- function(x, fs = 1, n_segments = 8L) {
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4;
 #'   Welch (1967).
 #' @examples
-#' fs <- 1024
-#' t <- seq.int(0, 2047) / fs
-#' x <- cos(2 * pi * 50 * t)
-#' out <- morie_dsp_psd_welch(x, fs = fs, nperseg = 256L)
-#' out$freqs[which.max(out$psd)]
+#' if (requireNamespace("signal", quietly = TRUE)) {
+#'   fs <- 1024
+#'   t <- seq.int(0, 2047) / fs
+#'   x <- cos(2 * pi * 50 * t)
+#'   out <- morie_dsp_psd_welch(x, fs = fs, nperseg = 256L)
+#'   out$freqs[which.max(out$psd)]
+#' }
 #' @export
 morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
                                 noverlap = NULL) {
@@ -452,7 +454,9 @@ morie_dsp_coherence <- function(x, y, fs = 1, nperseg = 256L) {
 #' @return Numeric vector of length `N`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.5.
 #' @examples
-#' morie_dsp_window(64L, "hamming")
+#' if (requireNamespace("signal", quietly = TRUE)) {
+#'   morie_dsp_window(64L, "hamming")
+#' }
 #' @export
 morie_dsp_window <- function(N, wtype = "hamming") {
   N <- as.integer(N)

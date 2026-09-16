@@ -17,6 +17,8 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' bartlett_kernel(x = 5L)
 bartlett_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 1) 1 - ax else 0
@@ -31,6 +33,8 @@ bartlett_kernel <- function(x) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' parzen_kernel(x = 5L)
 parzen_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 0.5) {
@@ -50,6 +54,8 @@ parzen_kernel <- function(x) {
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' quadratic_spectral_kernel(x = 5L)
 quadratic_spectral_kernel <- function(x) {
   x <- as.numeric(x)
   if (x == 0) {
@@ -68,6 +74,8 @@ quadratic_spectral_kernel <- function(x) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' tukey_hanning_kernel(x = 5L)
 tukey_hanning_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 1) 0.5 * (1 + cos(pi * ax)) else 0
@@ -125,6 +133,9 @@ tukey_hanning_kernel <- function(x) {
 #' @param X A matrix; passed to \code{nrow}.
 #' @return The value of \code{V}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' moment_vectors(V, V)
 moment_vectors <- function(e, X) {
   e <- as.numeric(e)
   X <- as.matrix(X)
@@ -234,6 +245,9 @@ moment_vectors <- function(e, X) {
 #' @param adjust A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{A}, \code{residuals}, \code{D}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' prewhiten_var(V)
 prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
   rows <- as.matrix(v)
   storage.mode(rows) <- "double"
@@ -341,6 +355,9 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ar1_fit(V)
 ar1_fit <- function(x) {
   x <- as.numeric(x)
   n <- length(x)
@@ -363,6 +380,9 @@ ar1_fit <- function(x) {
 #' @param weights Optional; may be \code{NULL}. Compared against \code{"drop_first"}.
 #' @return A list with \code{alpha}, \code{fits}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alpha_ar1(V)
 alpha_ar1 <- function(v, q = 2, weights = NULL) {
   rows <- as.matrix(v)
   storage.mode(rows) <- "double"
@@ -419,6 +439,9 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{bandwidth}, \code{alpha}, \code{fits}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' automatic_bandwidth(V)
 automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
   ck <- .check_kernel(kernel)
   q <- ck$const[1]
@@ -449,6 +472,8 @@ automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' kernel_hac(v = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
 kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
   ck <- .check_kernel(kernel)
   kfun <- ck$fun
@@ -523,6 +548,9 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 #' @param adjust Passed to \code{prewhiten_var}. Defaults to \code{TRUE}.
 #' @return The value of \code{structure}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' andrews_monahan_hac(V)
 andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,
                                 var_order = 1, kernel = "qs",
                                 bandwidth = NULL, weights = NULL,
@@ -614,6 +642,9 @@ andmnh <- andrews_monahan_hac
 #' @param ... Passed through.
 #' @return Invisibly,the value of \code{x}, as built in the body.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::print.andmnh(D)
 print.andmnh <- function(x, ...) {
   cat(sprintf("Andrews-Monahan VAR prewhitened kernel HAC\n"))
   cat(sprintf("  kernel        : %s\n", x$kernel))

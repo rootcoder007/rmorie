@@ -44,6 +44,9 @@
 #' @param laplace Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{p}, \code{levels}, \code{strata}, \code{arms}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_randIE_mediator_distribution(V, V)
 morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
   a <- .labels(A, "A")
   m <- .labels(M, "M")
@@ -101,6 +104,15 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
 #' @return A list with \code{estimate}, \code{a}, \code{a.star}, \code{route},
 #' \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 200
+#' C <- as.character(rbinom(n, 1, 0.5))
+#' A <- as.character(rbinom(n, 1, plogis(0.5 * (C == "1"))))
+#' M <- as.character(rbinom(n, 1, plogis(0.6 * (A == "1") + 0.3 * (C == "1"))))
+#' Y <- 1 + 0.8 * (A == "1") + 0.5 * (M == "1") + 0.4 * (C == "1") + rnorm(n)
+#' im <- morie_randIE_interventional_mean(Y, A, M, C = C)
+#' is.list(im)
 morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
                                              a.star = "0",
                                              route = "gformula",
@@ -215,6 +227,15 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
 #' \code{direct.control.arm}, \code{psi}, \code{route}, \code{treated}, \code{control},
 #' \code{identity}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 200
+#' C <- as.character(rbinom(n, 1, 0.5))
+#' A <- as.character(rbinom(n, 1, plogis(0.5 * (C == "1"))))
+#' M <- as.character(rbinom(n, 1, plogis(0.6 * (A == "1") + 0.3 * (C == "1"))))
+#' Y <- 1 + 0.8 * (A == "1") + 0.5 * (M == "1") + 0.4 * (C == "1") + rnorm(n)
+#' rie <- morie_randIE_randomized_interventional_effect(Y, A, M, C = C)
+#' abs(rie$total - (rie$direct + rie$indirect)) < 1e-8
 morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
                                                          treated = "1",
                                                          control = "0",
@@ -250,6 +271,16 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
 #' @return A list with \code{total}, \code{direct}, \code{indirect}, \code{residual},
 #' \code{proportion.mediated}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 200
+#' C <- as.character(rbinom(n, 1, 0.5))
+#' A <- as.character(rbinom(n, 1, plogis(0.5 * (C == "1"))))
+#' M <- as.character(rbinom(n, 1, plogis(0.6 * (A == "1") + 0.3 * (C == "1"))))
+#' Y <- 1 + 0.8 * (A == "1") + 0.5 * (M == "1") + 0.4 * (C == "1") + rnorm(n)
+#' rie <- morie_randIE_randomized_interventional_effect(Y, A, M, C = C)
+#' dec <- morie_randIE_decompose(rie)
+#' abs(dec$residual) < 1e-8
 morie_randIE_decompose <- function(result) {
   tot <- result$total
   d <- result$direct

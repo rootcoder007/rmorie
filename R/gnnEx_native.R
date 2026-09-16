@@ -91,6 +91,9 @@
 #' @param L Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{nodes}, \code{edges}, \code{hops}, \code{size}.
 #' @export
+#' @examples
+#' gnnEx_computation_graph(adj = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   L = c(1, 2, 3, 4, 5, 6, 7, 8))
 gnnEx_computation_graph <- function(adj, v, L) {
   # The L-hop neighbourhood -- everything the prediction could depend on.
   v_int <- as.integer(v)
@@ -134,6 +137,9 @@ gnnEx_computation_graph <- function(adj, v, L) {
 #' @param probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gnnEx_conditional_entropy(V)
 gnnEx_conditional_entropy <- function(probs) {
   # H(Y | .) for a predicted distribution.
   p <- as.numeric(probs)
@@ -281,6 +287,8 @@ gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' gnnEx_cheatsheet()
 gnnEx_cheatsheet <- function() {
   paste("gnnEx: explanation = a SMALL SUBGRAPH plus a SMALL FEATURE",
         "SUBSET, chosen by maximising MI(Y, (G_S, X_S)). Since H(Y) is",

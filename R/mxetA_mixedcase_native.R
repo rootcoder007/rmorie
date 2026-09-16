@@ -30,6 +30,9 @@
 #' @return A list with \code{fields}, \code{scales}, \code{n_points},
 #' \code{frechet_uniform}, \code{seed}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mxetA(V)
 morie_mxetA <- function(F, n_sim = 1, seed = 0, max_points = 100000L) {
   Fm <- as.matrix(F)
   nt <- nrow(Fm)

@@ -169,6 +169,9 @@
 #'   n_unpaired, n_rows, n_chains, chain_source, n_filtered, mode,
 #'   pairing_rule and method.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alfmpv_msa_pairing(V)
 morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
                                      min_coverage = 0.5, max_gap = 0.9,
                                      copies = NULL, max_pairs = NULL) {

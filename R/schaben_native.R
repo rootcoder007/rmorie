@@ -294,8 +294,8 @@ morie_variogram_composite_likelihood <- function(coords, z,
 #'   Prasad NGN, Rao JNK (1990).
 #' @export
 #' @examples
-#' morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6,
-#' 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   target = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kriging_pred_error <- function(coords, z, target,
                                      model = "exponential",
                                      nugget = NULL, psill = NULL,

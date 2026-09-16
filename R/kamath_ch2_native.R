@@ -56,6 +56,9 @@
 #' @param h_t_1,x_t Previous state and input.
 #' @param f Optional cell.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_encoder_state(V, V)
 morie_kamath_encoder_state <- function(h_t_1, x_t, f = NULL) {
   h <- as.numeric(h_t_1)
   x <- as.numeric(x_t)
@@ -77,6 +80,9 @@ morie_kamath_encoder_state <- function(h_t_1, x_t, f = NULL) {
 #' @param mapping
 #'   "mean", "last", "max" or a function.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_context_vector(V)
 morie_kamath_context_vector <- function(h_1_h_T, mapping = "mean") {
   H <- as.matrix(h_1_h_T)
   if (nrow(H) == 0L) stop("no hidden states supplied.", call. = FALSE)
@@ -105,6 +111,9 @@ morie_kamath_context_vector <- function(h_1_h_T, mapping = "mean") {
 #' @param h_T Final state.
 #' @param all_states Optional full stack.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_context_simplest(V)
 morie_kamath_context_simplest <- function(h_T, all_states = NULL) {
   h <- as.numeric(h_T)
   agrees <- NULL
@@ -125,6 +134,9 @@ morie_kamath_context_simplest <- function(h_T, all_states = NULL) {
 #' @param s_t_1,y_t_1,c Decoder inputs.
 #' @param g Optional cell.
 #' @export
+#' @examples
+#' morie_kamath_decoder_state(s_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_decoder_state <- function(s_t_1, y_t_1, c, g = NULL) {
   s <- as.numeric(s_t_1)
   y <- as.numeric(y_t_1)
@@ -145,6 +157,9 @@ morie_kamath_decoder_state <- function(s_t_1, y_t_1, c, g = NULL) {
 #' @rdname morie_kamath_encoder_state
 #' @param W Optional vocab x 3d score projection.
 #' @export
+#' @examples
+#' morie_kamath_decoder_token_distribution(s_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_decoder_token_distribution <- function(s_t_1, y_t_1, c,
                                                     W = NULL) {
   feats <- c(as.numeric(s_t_1), as.numeric(y_t_1), as.numeric(c))
@@ -168,6 +183,9 @@ morie_kamath_decoder_token_distribution <- function(s_t_1, y_t_1, c,
 #' @param y Target token indices, 0-based.
 #' @param U Optional length pin.
 #' @export
+#' @examples
+#' morie_kamath_seq2seq_cross_entropy(c(0, 1), rbind(c(0.5, 0.5),
+#'     c(0.25, 0.75)))
 morie_kamath_seq2seq_cross_entropy <- function(y, c, U = NULL) {
   idx <- as.integer(y)
   P <- as.matrix(c)
@@ -197,6 +215,9 @@ morie_kamath_seq2seq_cross_entropy <- function(y, c, U = NULL) {
 #' @param q,k_i Query and key.
 #' @param alpha Score family or function.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_attention_score(V, V)
 morie_kamath_attention_score <- function(q, k_i, alpha = "scaled_dot") {
   q <- as.numeric(q)
   k <- as.numeric(k_i)
@@ -230,6 +251,9 @@ morie_kamath_attention_score <- function(q, k_i, alpha = "scaled_dot") {
 #' @rdname morie_kamath_attention_score
 #' @param a Score vector.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_attention_softmax(V)
 morie_kamath_attention_softmax <- function(a) {
   a <- as.numeric(a)
   if (length(a) == 0L) stop("no scores supplied.", call. = FALSE)
@@ -241,6 +265,9 @@ morie_kamath_attention_softmax <- function(a) {
 #' @rdname morie_kamath_attention_score
 #' @param a_i One score that must appear in a.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_softmax_element(V, V)
 morie_kamath_softmax_element <- function(a_i, a) {
   a <- as.numeric(a)
   hit <- which(abs(a - as.numeric(a_i)) < 1e-12)
@@ -258,6 +285,9 @@ morie_kamath_softmax_element <- function(a_i, a) {
 #' @param b Weights.
 #' @param v Value matrix, one row per weight.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_attention_output(V, V)
 morie_kamath_attention_output <- function(b, v) {
   b <- as.numeric(b)
   V <- as.matrix(v)
@@ -276,6 +306,9 @@ morie_kamath_attention_output <- function(b, v) {
 #' @param k Key.
 #' @param d_k Optional dimension pin.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_scaled_dot_score(V, V)
 morie_kamath_scaled_dot_score <- function(q, k, d_k = NULL) {
   q <- as.numeric(q)
   k <- as.numeric(k)
@@ -294,6 +327,9 @@ morie_kamath_scaled_dot_score <- function(q, k, d_k = NULL) {
 #' @rdname morie_kamath_attention_score
 #' @param Q,K,V Matrices.
 #' @export
+#' @examples
+#' morie_kamath_scaled_dot_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   V = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_scaled_dot_attention <- function(Q, K, V, d_k = NULL) {
   Q <- as.matrix(Q)
   if (!is.null(d_k) && as.integer(d_k) != ncol(Q)) {
@@ -309,6 +345,11 @@ morie_kamath_scaled_dot_attention <- function(Q, K, V, d_k = NULL) {
 #' @rdname morie_kamath_attention_score
 #' @param W_Qi,W_Ki,W_Vi Per-head projections.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(stats::rnorm(6), 3, 2)
+#' W <- lapply(1:3, function(i) matrix(stats::rnorm(4), 2, 2))
+#' morie_kamath_multihead_head_i(X, X, X, W[[1]], W[[2]], W[[3]])
 morie_kamath_multihead_head_i <- function(Q, K, V, W_Qi, W_Ki, W_Vi) {
   Q <- as.matrix(Q)
   K <- as.matrix(K)
@@ -334,6 +375,9 @@ morie_kamath_multihead_head_i <- function(Q, K, V, W_Qi, W_Ki, W_Vi) {
 #' @param heads List of head outputs.
 #' @param W_O Output projection.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_multihead_concat(V, V)
 morie_kamath_multihead_concat <- function(heads, W_O) {
   hs <- lapply(heads, as.matrix)
   if (length(hs) == 0L) stop("no heads supplied.", call. = FALSE)
@@ -356,6 +400,8 @@ morie_kamath_multihead_concat <- function(heads, W_O) {
 #' @param M Additive mask, applied INSIDE the scaling (the book's
 #'   convention; differs from Vaswani's for finite masks).
 #' @export
+#' @examples
+#' morie_kamath_masked_attention(Q = 0.5, K = 5L, V = 5L, M = 5L)
 morie_kamath_masked_attention <- function(Q, K, V, M, d_k = NULL) {
   Q <- as.matrix(Q)
   K <- as.matrix(K)
@@ -386,6 +432,8 @@ morie_kamath_masked_attention <- function(Q, K, V, M, d_k = NULL) {
 #' @param j Frequency index.
 #' @param d Model width.
 #' @export
+#' @examples
+#' morie_kamath_positional_sin(5, 0, 16)
 morie_kamath_positional_sin <- function(i, j, d) {
   i <- as.integer(i)
   j <- as.integer(j)
@@ -406,6 +454,8 @@ morie_kamath_positional_sin <- function(i, j, d) {
 
 #' @rdname morie_kamath_positional_sin
 #' @export
+#' @examples
+#' morie_kamath_positional_cos(5, 1, 16)
 morie_kamath_positional_cos <- function(i, j, d) {
   i <- as.integer(i)
   j <- as.integer(j)
@@ -427,6 +477,9 @@ morie_kamath_positional_cos <- function(i, j, d) {
 #' @param z Input rows.
 #' @param W_1,W_2,b_1,b_2 FFN parameters.
 #' @export
+#' @examples
+#' morie_kamath_ffn_relu(rbind(c(1, -1)), rbind(c(1, 0), c(0, 1)),
+#'     rbind(1, 1), c(0, 0), 0.5)
 morie_kamath_ffn_relu <- function(z, W_1, W_2, b_1, b_2) {
   Z <- as.matrix(z)
   W1 <- as.matrix(W_1)
@@ -455,6 +508,9 @@ morie_kamath_ffn_relu <- function(z, W_1, W_2, b_1, b_2) {
 #' @param g Gain.
 #' @param eps Unused stabiliser kept for the signature.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_layer_norm(V)
 morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
                                     eps = 1e-12) {
   h <- as.numeric(h_i)
@@ -488,6 +544,9 @@ morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
 #' @param L_PTi Pretext losses.
 #' @param lambda_i Optional weights.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_ssl_loss(V)
 morie_kamath_ssl_loss <- function(L_PTi, lambda_i = NULL) {
   L <- as.numeric(L_PTi)
   if (length(L) == 0L) stop("no pretext losses supplied.", call. = FALSE)
@@ -507,6 +566,8 @@ morie_kamath_ssl_loss <- function(L_PTi, lambda_i = NULL) {
 #' @rdname morie_kamath_ssl_loss
 #' @param x Per-position probabilities of the true token.
 #' @export
+#' @examples
+#' morie_kamath_clm_loss(c(0.5, 0.25))
 morie_kamath_clm_loss <- function(x) {
   p <- .morie_km_probs(x, "x")
   losses <- -log(p)
@@ -517,6 +578,9 @@ morie_kamath_clm_loss <- function(x) {
 #' @rdname morie_kamath_ssl_loss
 #' @param M_x 0-based scored positions, no duplicates.
 #' @export
+#' @examples
+#' p <- c(0.5, 1, 0.25, 1)
+#' morie_kamath_mlm_loss(p, c(0, 2))
 morie_kamath_mlm_loss <- function(x, M_x) {
   p <- .morie_km_probs(x, "x")
   idx <- as.integer(M_x)
@@ -540,6 +604,8 @@ morie_kamath_mlm_loss <- function(x, M_x) {
 #' @param xhat Per-token probability of ORIGINAL.
 #' @param d Labels.
 #' @export
+#' @examples
+#' morie_kamath_rtd_loss(c(0.9, 0.9), c(1, 0))
 morie_kamath_rtd_loss <- function(xhat, d) {
   p <- .morie_km_probs(xhat, "xhat")
   d <- as.integer(d)
@@ -559,6 +625,8 @@ morie_kamath_rtd_loss <- function(xhat, d) {
 #' @param y Target-side probabilities.
 #' @param M_y Target mask.
 #' @export
+#' @examples
+#' morie_kamath_tlm_loss(c(0.5, 1), 0.25, 0, 0)
 morie_kamath_tlm_loss <- function(x, y, M_x, M_y) {
   lx <- morie_kamath_mlm_loss(x, M_x)
   ly <- morie_kamath_mlm_loss(y, M_y)
@@ -570,6 +638,8 @@ morie_kamath_tlm_loss <- function(x, y, M_x, M_y) {
 
 #' @rdname morie_kamath_ssl_loss
 #' @export
+#' @examples
+#' morie_kamath_nsp_loss(0.8, "y", 0)
 morie_kamath_nsp_loss <- function(x, y, d) {
   p <- as.numeric(x)
   if (p < 0 || p > 1) {
@@ -586,6 +656,8 @@ morie_kamath_nsp_loss <- function(x, y, d) {
 #' @rdname morie_kamath_ssl_loss
 #' @param i,j 0-based inclusive span bounds.
 #' @export
+#' @examples
+#' morie_kamath_span_loss(c(1e-09, 0.5, 0.25, 1e-09), "x", 1, 2)
 morie_kamath_span_loss <- function(x, xhat, i, j) {
   p <- as.numeric(x)
   if (any(p < 0 | p > 1)) {
@@ -608,6 +680,8 @@ morie_kamath_span_loss <- function(x, xhat, i, j) {
 #' @param k Context size (recorded).
 #' @param Theta Unused, kept for the signature.
 #' @export
+#' @examples
+#' morie_kamath_gpt_unsupervised(c(0.5, 0.5))
 morie_kamath_gpt_unsupervised <- function(U, k = NULL, Theta = NULL) {
   p <- .morie_km_probs(U, "U")
   if (!is.null(k) && as.integer(k) < 1L) {
@@ -623,6 +697,9 @@ morie_kamath_gpt_unsupervised <- function(U, k = NULL, Theta = NULL) {
 #' @rdname morie_kamath_gpt_unsupervised
 #' @param L_1,L_2,lam Objective values and weight.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_gpt_combined(V, V)
 morie_kamath_gpt_combined <- function(L_1, L_2, lam = 0.5) {
   l <- as.numeric(lam)
   if (l < 0) {
@@ -639,6 +716,9 @@ morie_kamath_gpt_combined <- function(L_1, L_2, lam = 0.5) {
 #' @param G Gate weights or function.
 #' @param E_i Expert functions or precomputed outputs.
 #' @export
+#' @examples
+#' morie_kamath_moe_output(x = c(1, 2, 3, 4, 5, 6, 7, 8), G = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   E_i = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_moe_output <- function(x, G, E_i) {
   x <- as.numeric(x)
   g <- as.numeric(if (is.function(G)) G(x) else G)
@@ -670,6 +750,8 @@ morie_kamath_moe_output <- function(x, G, E_i) {
 #' @param W_g Gate projection, d x n.
 #' @param k Experts kept.
 #' @export
+#' @examples
+#' morie_kamath_moe_topk_gating(1, rbind(c(3, 1, 2, 0.5)), k = 2)
 morie_kamath_moe_topk_gating <- function(x, W_g, k = 2) {
   x <- as.numeric(x)
   W <- as.matrix(W_g)
@@ -698,6 +780,8 @@ morie_kamath_moe_topk_gating <- function(x, W_g, k = 2) {
 #' @param expert_weights Optional list of (W1, W3, W2) per expert;
 #'   NULL isolates the gate with identity experts.
 #' @export
+#' @examples
+#' morie_kamath_mixtral_moe(1, rbind(c(3, 1, 2)))
 morie_kamath_mixtral_moe <- function(x, W_g, expert_weights = NULL) {
   x <- as.numeric(x)
   gate <- morie_kamath_moe_topk_gating(x, W_g, k = 2)

@@ -20,6 +20,6 @@ A list with \code{components}, \code{scores}, \code{singular_values}, \code{expl
 }
 \keyword{internal}
 \examples{
-morie_geron_randomized_pca(matrix(c(1, 2, 3, 1, 2, 3), ncol = 2), 
+morie_geron_randomized_pca(matrix(c(1, 2, 3, 1, 2, 3), ncol = 2),
     1)
 }

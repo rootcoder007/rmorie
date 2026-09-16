@@ -21,7 +21,9 @@
 #'   integrated_density, nyquist_omega.
 #' @references Schabenberger & Gotway (2005), Sec 2.5.3, eq (2.27), pp. 66-68.
 #' @examples
+#' \donttest{
 #' spwkth(function(h) exp(-2 * abs(h)), omega = c(0, 1, 3))$spectral_density
+#' }
 #' @export
 spwkth <- function(cov_func, omega = NULL, h_max = 200, n = 40001) {
   if (!is.function(cov_func)) stop("`cov_func` must be a function C(h)")

@@ -103,6 +103,9 @@
 #' @param b See Usage.
 #' @param seed See Usage.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Kvmse(V)
 Kvmse <- function(K, b = 2, seed = 1) {
   K <- as.matrix(K)
   n <- nrow(K)

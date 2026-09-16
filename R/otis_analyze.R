@@ -56,8 +56,10 @@ NULL
 #' @return data.frame.
 #' @seealso \code{\link{morie_cache_dir}}.
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   df <- morie_otis_load()
+#'   }
 #' }
 #' @export
 morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
@@ -114,9 +116,11 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
 #'   directory is created if missing.
 #' @return Named list of \code{morie_otis_result}s.
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   df <- morie_otis_load()
-#'   res <- morie_otis_all_analyses(df, year = 2024)
+#'     res <- morie_otis_all_analyses(df, year = 2024)
+#'   }
 #' }
 #' @export
 morie_otis_all_analyses <- function(df, year,
@@ -175,10 +179,12 @@ morie_otis_all_analyses <- function(df, year,
 #' @param ... Ignored; accepted for S3 consistency.
 #' @return A character string.
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   df <- morie_otis_load()
-#'   res <- morie_otis_all_analyses(df, year = 2024)
-#' cat(format(res))
+#'     res <- morie_otis_all_analyses(df, year = 2024)
+#'   cat(format(res))
+#'   }
 #' }
 #' @export
 format.morie_otis_result <- function(x, ...) {
@@ -220,10 +226,12 @@ format.morie_otis_result <- function(x, ...) {
 #' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   df <- morie_otis_load()
-#'   res <- morie_otis_all_analyses(df, year = 2024)
-#' print(res)
+#'     res <- morie_otis_all_analyses(df, year = 2024)
+#'   print(res)
+#'   }
 #' }
 #' @export
 print.morie_otis_result <- function(x, ...) {

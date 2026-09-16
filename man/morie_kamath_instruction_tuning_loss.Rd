@@ -20,6 +20,6 @@ List with \code{estimate}, \code{perplexity}, \code{n_response_tokens}.
 Causal-LM cross entropy with the instruction masked out (-100).
 }
 \examples{
-morie_kamath_instruction_tuning_loss(matrix(c(1, 0, 2, 0, 1, 
+morie_kamath_instruction_tuning_loss(matrix(c(1, 0, 2, 0, 1,
     0), 3), c(0, 1, 1), c(0, 1, 0))
 }

@@ -23,8 +23,10 @@
 #'
 #' @return List with `pk` (raw, 32 B) and `sk` (raw, 64 B).
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+#'   }
 #' }
 #' @export
 morie_crypto_slhdsa_keygen <- function() {
@@ -36,11 +38,13 @@ morie_crypto_slhdsa_keygen <- function() {
 #' @param message Raw vector or single string.
 #' @return Raw signature (about 7856 B for the 128s parameter set).
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
-#'   if (!inherits(kp, "try-error")) {
-#'     sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
-#'     print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+#'     if (!inherits(kp, "try-error")) {
+#'       sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
+#'       print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
+#'     }
 #'   }
 #' }
 #' @export
@@ -56,12 +60,14 @@ morie_crypto_slhdsa_sign <- function(sk, message) {
 #' @param signature Raw signature.
 #' @return TRUE if the signature verifies.
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
-#'   if (!inherits(kp, "try-error")) {
-#'     sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
-#'     print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
-#'     print(morie_crypto_slhdsa_verify(kp$pk, "tampered", sig))
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+#'     if (!inherits(kp, "try-error")) {
+#'       sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
+#'       print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
+#'       print(morie_crypto_slhdsa_verify(kp$pk, "tampered", sig))
+#'     }
 #'   }
 #' }
 #' @export
@@ -80,11 +86,13 @@ morie_crypto_slhdsa_verify <- function(pk, message, signature) {
 #'
 #' @return List with `pk` and `sk` raw vectors.
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-#'   if (!inherits(kp, "try-error")) {
-#'     length(kp$pk)
-#'     length(kp$sk)
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+#'     if (!inherits(kp, "try-error")) {
+#'       length(kp$pk)
+#'       length(kp$sk)
+#'     }
 #'   }
 #' }
 #' @export
@@ -96,11 +104,13 @@ morie_crypto_hqc_keygen <- function() {
 #' @param pk Recipient's HQC-128 public key.
 #' @return List with `ct` and `shared_secret` (raw, 64 B).
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-#'   if (!inherits(kp, "try-error")) {
-#'     enc <- morie_crypto_hqc_encaps(kp$pk)
-#'     str(enc)
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+#'     if (!inherits(kp, "try-error")) {
+#'       enc <- morie_crypto_hqc_encaps(kp$pk)
+#'       str(enc)
+#'     }
 #'   }
 #' }
 #' @export
@@ -114,12 +124,14 @@ morie_crypto_hqc_encaps <- function(pk) {
 #' @param ct Ciphertext from \code{\link{morie_crypto_hqc_encaps}}.
 #' @return Raw shared secret.
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-#'   if (!inherits(kp, "try-error")) {
-#'     enc <- morie_crypto_hqc_encaps(kp$pk)
-#'     ss <- morie_crypto_hqc_decaps(kp$sk, enc$ct)
-#'     print(identical(ss, enc$shared_secret))
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+#'     if (!inherits(kp, "try-error")) {
+#'       enc <- morie_crypto_hqc_encaps(kp$pk)
+#'       ss <- morie_crypto_hqc_decaps(kp$sk, enc$ct)
+#'       print(identical(ss, enc$shared_secret))
+#'     }
 #'   }
 #' }
 #' @export
@@ -148,10 +160,12 @@ morie_crypto_hqc_decaps <- function(sk, ct) {
 #'   (2 x 256 list matrix of raw secrets).
 #' @references Lamport, L. (1979). Constructing digital signatures
 #'   from a one-way function. SRI CSL-98.
-#' @examplesIf isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))
+#' @examples
+#' \dontshow{if (isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) withAutoprint(\{ # examplesIf}
 #' kp <- morie_crypto_lamport_keygen()
 #' sig <- morie_crypto_lamport_sign(kp, "hello")
 #' morie_crypto_lamport_verify(kp$pk, "hello", sig)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_crypto_lamport_keygen <- function() {
   sk <- matrix(vector("list", 512L), nrow = 2L)
@@ -242,7 +256,9 @@ morie_crypto_lamport_verify <- function(pk, message, signature) {
 #'   hash-based / code-based), primitive, standard, and whether the
 #'   current build provides it.
 #' @examples
-#' morie_crypto_pqc_inventory()
+#' if (morie_crypto_sodium_available()) {
+#'   morie_crypto_pqc_inventory()
+#' }
 #' @export
 morie_crypto_pqc_inventory <- function() {
   oqs <- isTRUE(tryCatch(morie_crypto_liboqs_available(),

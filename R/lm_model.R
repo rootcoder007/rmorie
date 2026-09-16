@@ -350,7 +350,9 @@ print.morie_lm_spec <- function(x, ...) {
 #' @param sizes Integer vector of row counts to time.
 #' @return A data.frame with `n`, `seconds`, and `n_coef`.
 #' @examples
+#' \donttest{
 #' morie_lm_scaling(mpg ~ hp + wt, mtcars, sizes = c(10, 20, 32))
+#' }
 #' @export
 morie_lm_scaling <- function(formula, data, sizes) {
   data <- .morie_check_data(data, arg = "data")

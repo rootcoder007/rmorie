@@ -65,6 +65,8 @@
 #' @param n_strata Number of strata.
 #' @return A zero-based stratum index per observation.
 #' @export
+#' @examples
+#' morie_qbcfgs_strata(e = c(1, 2, 3, 4, 5, 6, 7, 8), n_strata = 5L)
 morie_qbcfgs_strata <- function(e, n_strata) {
   n <- length(e)
   ord <- order(e, seq_len(n))
@@ -89,6 +91,9 @@ morie_qbcfgs_strata <- function(e, n_strata) {
 #' @param w Weights, or NULL for unweighted.
 #' @return The standardised mean difference.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_qbcfgs_smd(V, V)
 morie_qbcfgs_smd <- function(x, d, w = NULL) {
   n <- length(x)
   if (is.null(w)) w <- rep(1, n)
@@ -126,6 +131,16 @@ morie_qbcfgs_smd <- function(x, d, w = NULL) {
 #'   effect, the balance before and after weighting, and the focal
 #'   stratum.
 #' @export
+#' @examples
+#' N <- 48L
+#' X <- matrix(0, N, 2)
+#' D <- vapply(0:(N - 1L), function(i) if ((((i * 7)%%11)/10) +
+#'     (((i * 5)%%13)/12) + ((i * 3)%%5) * 0.1 > 1.1) 1L else 0L,
+#'     integer(1))
+#' Y <- vapply(0:(N - 1L), function(i) round(2 + 1.5 * D[i + 1L] +
+#'     2 * (((i * 7)%%11)/10) - 1 * (((i * 5)%%13)/12) + ((i * 11)%%7) *
+#'     0.1, 4), numeric(1))
+#' morie_qbcfgs(Y, D, X, 0.5, 4L, "ate", 6L, 3L, 3L, 6)
 morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
                          weight = "ate", n_trees = 8L, min_leaf = 3L,
                          max_depth = 3L, seed = 0, clip = 0.01) {
@@ -240,6 +255,8 @@ morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_qbcfgs_cheatsheet()
 morie_qbcfgs_cheatsheet <- function()
   paste0("qbcfgs: quantile-balanced score for forests. weightings ",
          paste(.QBCFGS_WEIGHTS, collapse = ", "),

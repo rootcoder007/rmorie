@@ -262,6 +262,9 @@
 #' @param b Passed to \code{.rouge_lcs_length}.
 #' @return The value of \code{.rouge_lcs_length}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_lcs_length(V, V)
 morie_lcs_length <- function(a, b) {
   .rouge_lcs_length(a, b)
 }
@@ -278,6 +281,9 @@ morie_lcs_length <- function(a, b) {
 #' @param beta Passed to \code{.rouge_prf}. Defaults to \code{1}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rouge_n(V, V)
 morie_rouge_n <- function(candidate, reference, n = 1, beta = 1.0) {
   n <- as.integer(n)
   if (n < 1L) {
@@ -333,6 +339,9 @@ morie_rouge_n <- function(candidate, reference, n = 1, beta = 1.0) {
 #' @param beta Passed to \code{.rouge_prf}. Defaults to \code{1}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rouge_l(V, V)
 morie_rouge_l <- function(candidate, reference, beta = 1.0) {
   c_toks <- .rouge_toks(candidate)
   refs <- .rouge_get_refs_simple(reference)
@@ -371,6 +380,9 @@ morie_rouge_l <- function(candidate, reference, beta = 1.0) {
 #' @param beta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rouge_w(V, V)
 morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
   alpha <- as.numeric(alpha)
   if (alpha < 1.0) {
@@ -428,6 +440,9 @@ morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
 #' @param beta Passed to \code{morie_rouge_l}. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rouge(V, V)
 morie_rouge <- function(candidate, reference, variant = "L",
                         n = 1, alpha = 1.2, beta = 1.0) {
   v <- toupper(as.character(variant))
@@ -451,6 +466,8 @@ morie_rouge <- function(candidate, reference, variant = "L",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_rouge_cheatsheet()
 morie_rouge_cheatsheet <- function() {
   "rouge: ROUGE-N clipped n-gram recall; ROUGE-L LCS F with R=LCS/m, P=LCS/n; ROUGE-W weighted LCS f(k)=k^alpha with f^-1 before the ratios; best over multiple references."
 }

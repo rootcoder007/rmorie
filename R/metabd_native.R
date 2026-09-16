@@ -70,6 +70,8 @@
 #' @return A list with \code{frequency}, \code{vector}, \code{kmers}, \code{n_kmers},
 #' \code{canonical}.
 #' @export
+#' @examples
+#' tetranucleotide_frequency("ACGTACGTACGTTGCAACGT")
 tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
   s <- toupper(as.character(seq))
   K <- as.integer(kk)
@@ -110,6 +112,9 @@ tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
 #' @param cov_b Passed to \code{.metabd_vec}.
 #' @return A list with \code{correlation}, \code{n_samples}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' abundance_correlation(V, V)
 abundance_correlation <- function(cov_a, cov_b) {
   a <- .metabd_vec(cov_a)
   b <- .metabd_vec(cov_b)
@@ -137,6 +142,8 @@ abundance_correlation <- function(cov_a, cov_b) {
 #' @param l_ref Numeric; combined arithmetically in the body. Defaults to \code{1e+05}.
 #' @return A list with \code{weight}, \code{length}, \code{below_minimum}.
 #' @export
+#' @examples
+#' length_weight(length = 5L)
 length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
   L <- as.numeric(length)
   if (L <= 0) stop("metabd: the contig length must be positive")
@@ -164,6 +171,9 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
 #' @return A list with \code{distance}, \code{composition}, \code{abundance},
 #' \code{abundance_usable}, \code{confidence}, \code{effective_weight}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' composite_distance(V, V)
 composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
                                len_a = NULL, len_b = NULL,
                                w_abundance = 0.5) {
@@ -207,6 +217,9 @@ composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
 #' @return A list with \code{estimate}, \code{bins}, \code{unbinned}, \code{n_bins},
 #' \code{n_unbinned}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' bin_contigs(V)
 bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
                         threshold = 0.15, min_bin_size = 200000.0) {
   T <- .metabd_mat(tnfs)
@@ -254,6 +267,9 @@ bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
 #' @param truth Passed to \code{unlist}.
 #' @return A list with \code{per_bin}, \code{mean_purity}, \code{mean_completeness}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' purity_completeness(V, V)
 purity_completeness <- function(bins, truth) {
   t <- as.list(unlist(truth))
   per_bin <- list()

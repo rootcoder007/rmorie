@@ -615,6 +615,9 @@
 #' @param g Passed to \code{.prsLR_augment}.
 #' @return The value of \code{.prsLR_augment}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_augment(D)
 morie_augment <- function(g) {
   .prsLR_augment(g)
 }
@@ -664,6 +667,9 @@ morie_goto <- function(state, sym, ag, first, nts, k = 1) {
 #' @param k Passed to \code{.prsLR_canonical_collection}. Defaults to \code{1}.
 #' @return The value of \code{.prsLR_canonical_collection}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_canonical_collection(D)
 morie_canonical_collection <- function(ag, k = 1) {
   .prsLR_canonical_collection(ag, k)
 }
@@ -678,6 +684,13 @@ morie_canonical_collection <- function(ag, k = 1) {
 #' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
 #' @return The value of \code{.prsLR_build_tables}.
 #' @export
+#' @examples
+#' g <- list(rules = list(list("E", list("E", "+", "T")),
+#'                        list("E", list("T")),
+#'                        list("T", list("id"))),
+#'           start = "E")
+#' r <- morie_build_tables(g)
+#' str(r, max.level = 1)
 morie_build_tables <- function(g, method = "lr1") {
   .prsLR_build_tables(g, method)
 }
@@ -693,6 +706,13 @@ morie_build_tables <- function(g, method = "lr1") {
 #' @return A list with \code{estimate}, \code{conflicts}, \code{n_conflicts},
 #' \code{method}, \code{n_states}, \code{ok}.
 #' @export
+#' @examples
+#' g <- list(rules = list(list("E", list("E", "+", "T")),
+#'                        list("E", list("T")),
+#'                        list("T", list("id"))),
+#'           start = "E")
+#' r <- morie_conflicts(g)
+#' str(r, max.level = 1)
 morie_conflicts <- function(g, method = "lr1") {
   t <- .prsLR_build_tables(g, method)
   list(
@@ -717,6 +737,13 @@ morie_conflicts <- function(g, method = "lr1") {
 #' @param tables Passed to \code{.prsLR_parse}.
 #' @return The value of \code{.prsLR_parse}.
 #' @export
+#' @examples
+#' g <- list(rules = list(list("E", list("E", "+", "T")),
+#'                        list("E", list("T")),
+#'                        list("T", list("id"))),
+#'           start = "E")
+#' r <- morie_parse(g, c("id", "+", "id"))
+#' str(r, max.level = 1)
 morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
   .prsLR_parse(g, tokens, method, tables)
 }
@@ -733,6 +760,13 @@ morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
 #' @return A list with \code{estimate}, \code{tree}, \code{method}, \code{n_states},
 #' \code{conflicts}, \code{tokens}, \code{yield}.
 #' @export
+#' @examples
+#' g <- list(rules = list(list("E", list("E", "+", "T")),
+#'                        list("E", list("T")),
+#'                        list("T", list("id"))),
+#'           start = "E")
+#' r <- morie_prsLR(g, c("id", "+", "id"))
+#' str(r, max.level = 1)
 morie_prsLR <- function(grammar_, tokens, method = "lr1") {
   g <- .prsLR_grammar(grammar_)
   t <- .prsLR_build_tables(g, method)

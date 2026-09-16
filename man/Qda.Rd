@@ -21,7 +21,7 @@ A list with \code{g}, \code{assigned}, \code{assigned_index}, \code{classes}, \c
 }
 \keyword{internal}
 \examples{
-XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3, 
+XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3,
     2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
 YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
 Qda(XC, YC, c(1.1, 1))

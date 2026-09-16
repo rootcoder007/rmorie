@@ -401,6 +401,8 @@
 #' @references Rendle, S. et al. (2009) UAI 2009, 452-461,
 #'   arXiv:1205.2618, Sec. 4.1.
 #' @export
+#' @examples
+#' bpr_sigmoid(x = 5L)
 bpr_sigmoid <- function(x) .bprMF_sigmoid(x)
 
 #' Predict x_hat_ui = <w_u, h_i>
@@ -415,6 +417,11 @@ bpr_sigmoid <- function(x) .bprMF_sigmoid(x)
 #' @param i 0-based item index.
 #' @return Scalar inner product.
 #' @export
+#' @examples
+#' set.seed(1)
+#' W <- lapply(1:4, function(i) rnorm(3, 0, 0.3))
+#' H <- lapply(1:5, function(i) rnorm(3, 0, 0.3))
+#' bpr_predict(W, H, u = 0L, i = 2L)
 bpr_predict <- function(W, H, u, i) .bprMF_predict(W, H, u, i)
 
 #' BPR-Opt and its loglik / penalty pieces
@@ -430,6 +437,9 @@ bpr_predict <- function(W, H, u, i) .bprMF_predict(W, H, u, i)
 #' @return A list with \code{bpr_opt}, \code{loglik}, \code{penalty},
 #'   \code{n_triples}.
 #' @export
+#' @examples
+#' bpr_opt_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, pos = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
 bpr_opt_R <- function(W, H, pos, n_items, lam = 0.01)
   .bprMF_bpr_opt(W, H, pos, n_items, lam)
 
@@ -441,6 +451,14 @@ bpr_opt_R <- function(W, H, pos, n_items, lam = 0.01)
 #' @inheritParams bpr_opt_R
 #' @return List with \code{auc}, \code{per_user}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' W <- lapply(1:4, function(i) rnorm(3, 0, 0.3))
+#' H <- lapply(1:5, function(i) rnorm(3, 0, 0.3))
+#' pos <- list("0" = c(0L, 1L), "1" = c(1L, 2L), "2" = c(0L, 3L),
+#'             "3" = c(2L, 4L))
+#' r <- bpr_auc_R(W, H, pos, n_items = 5)
+#' str(r, max.level = 1)
 bpr_auc_R <- function(W, H, pos, n_items)
   .bprMF_auc(W, H, pos, n_items)
 
@@ -468,6 +486,13 @@ bpr_auc_R <- function(W, H, pos, n_items)
 #' @references Rendle, S. et al. (2009) UAI 2009, 452-461,
 #'   arXiv:1205.2618, Sec. 4.2 / Fig. 4.
 #' @export
+#' @examples
+#' set.seed(1)
+#' pos <- list("0" = c(0L, 1L), "1" = c(1L, 2L), "2" = c(0L, 3L),
+#'             "3" = c(2L, 4L))
+#' r <- bpr_learn_bpr_R(pos, n_users = 4, n_items = 5, k_dim = 3,
+#'                      iters = 200L)
+#' str(r, max.level = 1)
 bpr_learn_bpr_R <- function(pos, n_users, n_items, k_dim = 8L,
                             alpha = 0.05, lam = 0.01, iters = 2000L,
                             seed = 0L, regularizer_sign = "correct",
@@ -486,6 +511,8 @@ bpr_learn_bpr_R <- function(pos, n_users, n_items, k_dim = 8L,
 #' @return List with \code{ranking} (list of \code{list(i=, s=)} up to
 #'   \code{top_k}) and \code{n_scored}.
 #' @export
+#' @examples
+#' bpr_recommend_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, u = 5L, n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
 bpr_recommend_R <- function(W, H, u, n_items, top_k = 5L,
                             exclude = integer(0))
   .bprMF_recommend(W, H, u, n_items, top_k, exclude)

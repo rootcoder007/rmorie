@@ -21,6 +21,6 @@ A list with \code{theta}, \code{theta_next}, \code{step}, \code{gradient}, \code
 \keyword{internal}
 \examples{
 gs <- function(s, a) if (a == 0) c(1, 0) else c(0, 1)
-morie_geron_reinforce(list(list(list(0, 0, 1), list(1, 1, 1))), 
+morie_geron_reinforce(list(list(list(0, 0, 1), list(1, 1, 1))),
     gs, gamma = 0.5, eta = 0.1)
 }

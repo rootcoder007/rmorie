@@ -119,6 +119,8 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' @param activation Passed to \code{.survnnr_act}. Defaults to \code{"tanh"}.
 #' @return A list with \code{output}, \code{pre}, \code{acts}.
 #' @export
+#' @examples
+#' morie_survnnr_forward(W = 5L, b = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
   a <- as.numeric(x)
   pre <- list()
@@ -147,6 +149,9 @@ morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
 #' @param risk A vector; its length is taken and its elements indexed.
 #' @return A list with \code{loglik}, \code{average}, \code{n_events}, \code{ties}.
 #' @export
+#' @examples
+#' morie_survnnr_partial_loglik(times = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   events = c(1, 2, 3, 4, 5, 6, 7, 8), risk = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_survnnr_partial_loglik <- function(times, events, risk) {
   n <- length(times)
   if (!(n == length(events) && n == length(risk))) {
@@ -217,6 +222,12 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 #' \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties},
 #' \code{scale_note}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1); n <- 40
+#' X <- lapply(seq_len(n), function(i) rnorm(3)); tm <- rexp(n); ev <- rbinom(n, 1, .7)
+#' fit <- morie_survnnr_fit(X, tm, ev, hidden = c(4L), n_epochs = 20)
+#' fit$risk
+#' fit$epochs >= 2
 morie_survnnr_fit <- function(X, times, events, hidden = c(),
                               activation = "tanh", l2 = 0.0, lr = 0.1,
                               n_epochs = 400, seed = 0, tol = 1e-10) {
@@ -300,6 +311,10 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
 #' @param X Iterated over elementwise, with \code{sapply}.
 #' @return A vector, from \code{sapply}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_survnnr_risk_score(D, V)
 morie_survnnr_risk_score <- function(fit_result, X) {
   sapply(X, function(x) morie_survnnr_forward(fit_result$W, fit_result$b, x,
                                               fit_result$activation)$output)
@@ -412,6 +427,10 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
 #' @param events Passed to \code{.survnnr_c_index}.
 #' @return The value of \code{.survnnr_c_index}.
 #' @export
+#' @examples
+#' morie_survnnr_concordance(fit_result = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   events = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_survnnr_concordance <- function(fit_result, X, times, events) {
   .survnnr_c_index(times, events, morie_survnnr_risk_score(fit_result, X))
 }
@@ -424,6 +443,8 @@ morie_survnnr_concordance <- function(fit_result, X, times, events) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_survnnr_cheatsheet()
 morie_survnnr_cheatsheet <- function() {
   paste("survnnr: DeepSurv = Cox's partial likelihood with the linear",
         "predictor replaced by an MLP output. Loss is the AVERAGE negative",

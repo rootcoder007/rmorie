@@ -70,6 +70,9 @@
 #'   for Deep Reinforcement Learning. ICML / PMLR 48, 1995-2003,
 #'   arXiv:1511.06581, eq. (7)-(9).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' dueling_aggregate(V, V)
 dueling_aggregate <- function(value, advantage, mode = "mean") {
   .dueldqn_check_mode(mode)
   a <- as.numeric(advantage)
@@ -89,6 +92,9 @@ dueling_aggregate <- function(value, advantage, mode = "mean") {
 #' @param mode One of \code{"mean"}, \code{"max"}, \code{"naive"}.
 #' @return List of numeric Q(s, .) vectors.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' dueling_q(V, V)
 dueling_q <- function(values, advantages, mode = "mean") {
   if (length(values) != length(advantages))
     stop(sprintf("duel: %d values but %d advantage rows",
@@ -151,6 +157,9 @@ duelingdqn <- dueling_q
 #'   Reinforcement Learning with Double Q-learning. AAAI 30(1),
 #'   arXiv:1509.06461.
 #' @export
+#' @examples
+#' double_q_target(reward = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5,
+#'   q_online_next = c(1, 2, 3, 4, 5, 6, 7, 8), q_target_next = c(1, 2, 3, 4, 5, 6, 7, 8))
 double_q_target <- function(reward, gamma, q_online_next, q_target_next,
                             done = FALSE) {
   if (length(q_online_next) != length(q_target_next))
@@ -169,6 +178,9 @@ double_q_target <- function(reward, gamma, q_online_next, q_target_next,
 #' @param target Scalar TD target.
 #' @return Scalar difference \code{target - q_sa}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' td_error(V, V)
 td_error <- function(q_sa, target) {
   as.numeric(target) - as.numeric(q_sa)
 }

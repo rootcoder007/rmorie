@@ -36,6 +36,6 @@ bytes = ceil(seq * L * H * d * 2 * batch * bits / 8); note the
 parenthesised floor-division plus remainder bump, exactly as Python.
 }
 \examples{
-morie_geron_kv_cache_compression(2048, 32, 32, 128, bits = 8, 
+morie_geron_kv_cache_compression(2048, 32, 32, 128, bits = 8,
     batch_size = 2)
 }

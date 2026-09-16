@@ -61,6 +61,8 @@
 #' @param tau The horizon.
 #' @return The restricted mean.
 #' @export
+#' @examples
+#' morie_crsfst_rmst(curve = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), tau = 0.5)
 morie_crsfst_rmst <- function(curve, tau) {
   tau <- as.numeric(tau)
   if (tau <= 0) stop("the horizon must be positive")
@@ -87,6 +89,8 @@ morie_crsfst_rmst <- function(curve, tau) {
 #' @param seed The random stream.
 #' @return A zero-based fold index per observation.
 #' @export
+#' @examples
+#' morie_crsfst_folds(n = 5L, k = 5L)
 morie_crsfst_folds <- function(n, k, seed = 0) {
   k <- as.integer(k)
   if (k < 2L) stop("cross-fitting needs at least two folds")
@@ -125,6 +129,17 @@ morie_crsfst_folds <- function(n, k, seed = 0) {
 #'   average effect, the two arms' restricted means, the fold
 #'   assignment, and the leakage count -- which must be zero.
 #' @export
+#' @examples
+#' N <- 36L
+#' X <- matrix(0, N, 2)
+#' D <- vapply(0:(N - 1L), function(i) if (i%%2 == 1) 1L else 0L,
+#'     integer(1))
+#' T <- vapply(0:(N - 1L), function(i) round(3 + 6 * (1 - ((i *
+#'     7)%%11)/10) + 4 * (if (i%%2 == 1) 1 else 0) + ((i * 3)%%5) *
+#'     0.3, 4), numeric(1))
+#' E <- vapply(0:(N - 1L), function(i) if (i%%5 == 0) 0L else 1L,
+#'     integer(1))
+#' morie_crsfst(T, E, D, X, 3L, NULL, 4L, 3L, 2L, TRUE, 2)
 morie_crsfst <- function(time, event, D, X, K = 3L, tau = NULL,
                          n_trees = 8L, min_leaf = 3L, max_depth = 3L,
                          honest = TRUE, seed = 0, rule = "logrank") {
@@ -206,6 +221,8 @@ morie_crsfst <- function(time, event, D, X, K = 3L, tau = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_crsfst_cheatsheet()
 morie_crsfst_cheatsheet <- function()
   paste0("crsfst: cross-fitted random survival forest. K-fold ",
          "out-of-fold prediction, effect on restricted mean survival ",

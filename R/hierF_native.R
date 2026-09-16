@@ -23,6 +23,9 @@
 #' @param n_bottom A matrix; passed to \code{diag}.
 #' @return The value of \code{rbind}.
 #' @export
+#' @examples
+#' S <- summing_matrix(list(c(0L, 1L, 2L, 3L), c(0L, 1L), c(2L, 3L)), 4L)
+#' S
 summing_matrix <- function(groups, n_bottom) {
   if (n_bottom < 1L) stop("hierF: need at least one bottom series")
   S <- matrix(0.0, length(groups), n_bottom)
@@ -49,6 +52,10 @@ summing_matrix <- function(groups, n_bottom) {
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-09}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' S <- summing_matrix(list(c(0L, 1L)), 2L)
+#' b <- c(1, 2)
+#' is_coherent(c(sum(b), b), S)
 is_coherent <- function(y, S, tol = 1e-9) {
   m <- nrow(S)
   n <- ncol(S)
@@ -66,6 +73,9 @@ is_coherent <- function(y, S, tol = 1e-9) {
 #' @param lam Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A list with \code{cov}, \code{lambda}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' shrink_covariance(M)
 shrink_covariance <- function(residuals, lam = NULL) {
   T <- nrow(residuals)
   if (T < 2L) {
@@ -140,6 +150,11 @@ shrink_covariance <- function(residuals, lam = NULL) {
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A list with \code{P}, \code{lambda}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' S <- summing_matrix(list(c(0L, 1L)), 2L)
+#' res <- matrix(rnorm(30), 10, 3)
+#' str(mint_P(S, method = "shrink", residuals = res), max.level = 1)
 mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
                    ridge = 1e-10) {
   if (!(method %in% c("ols", "wls", "shrink", "custom"))) {
@@ -201,6 +216,14 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 #' \code{coherent}, \code{ps_identity_error}, \code{adjustment}, \code{cite},
 #' \code{method_detail}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' S <- summing_matrix(list(c(0L, 1L)), 2L)
+#' res <- matrix(rnorm(30), 10, 3)
+#' base <- c(10.5, 4.9, 5.4)
+#' r <- mint_reconcile(base, S, residuals = res)
+#' stopifnot(r$coherent)
+#' r$reconciled
 mint_reconcile <- function(base, S, method = "shrink", residuals = NULL,
                            W = NULL, ridge = 1e-10) {
   Sm <- as.matrix(S)
@@ -245,6 +268,12 @@ hierarchical_forecast <- mint_reconcile
 #' @param ridge Passed to \code{mint_reconcile}. Defaults to \code{1e-10}.
 #' @return The value of \code{mint_reconcile}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' S <- summing_matrix(list(c(0L, 1L)), 2L)
+#' res <- matrix(rnorm(30), 10, 3)
+#' r <- morie_hierF(c(10.5, 4.9, 5.4), S, residuals = res)
+#' str(r, max.level = 1)
 morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
                         W = NULL, ridge = 1e-10) {
   mint_reconcile(base, S, method, residuals, W, ridge)

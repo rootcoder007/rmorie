@@ -486,6 +486,9 @@
 #' @param ... Passed through.
 #' @return The value of \code{.svycox_svycoxph}.
 #' @export
+#' @examples
+#' morie_svycox(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5),
+#'   event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_svycox <- function(time, event, X, weights = NULL, strata = NULL,
                          cluster = NULL, ...) {
     .svycox_svycoxph(time, event, X, weights = weights, strata = strata,

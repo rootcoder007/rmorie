@@ -415,13 +415,15 @@ loocv_bandwidth <- function(x, y, bw_min = NULL, bw_max = NULL,
 #' @return Either a numeric vector (mean only) or a list with
 #'   \code{mean} and \code{variance}.
 #' @examples
-#' set.seed(1)
-#' x <- sort(runif(40, -2, 2))
-#' y <- sin(x) + 0.2 * rnorm(40)
-#' x_eval <- seq(-1.5, 1.5, length.out = 20)
-#' r <- kernel_cond_moments(x, y, x_eval, bandwidth = 0.5,
-#'                          return_variance = TRUE)
-#' r$mean
+#' if (requireNamespace("mgcv", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- sort(runif(40, -2, 2))
+#'   y <- sin(x) + 0.2 * rnorm(40)
+#'   x_eval <- seq(-1.5, 1.5, length.out = 20)
+#'   r <- kernel_cond_moments(x, y, x_eval, bandwidth = 0.5,
+#'                            return_variance = TRUE)
+#'   r$mean
+#' }
 #' @export
 kernel_cond_moments <- function(x, y, x_eval, bandwidth,
                                  return_variance = TRUE) {

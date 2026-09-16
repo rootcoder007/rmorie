@@ -42,7 +42,7 @@ A list with the value estimate or estimates, the visitation,   the ranking metri
 }
 \keyword{internal}
 \examples{
-P <- list(list(c(0.7, 0.3), c(0.5, 0.5), c(0.2, 0.8)), list(c(0.6, 
+P <- list(list(c(0.7, 0.3), c(0.5, 0.5), c(0.2, 0.8)), list(c(0.6,
     0.4), c(0.3, 0.7), c(0.9, 0.1)))
 R <- list(c(0.1, 0.4, 1), c(1.2, 0.3, 0.2))
 ENV <- list(transition = P, reward = R, start = 0L)

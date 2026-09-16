@@ -41,7 +41,7 @@ A list with per-pair mutual information and support, the   total, the pairs used
 \examples{
 STRUCT <- "(((((...))))).."
 PSET <- list(c("G", "C"), c("C", "G"), c("A", "U"), c("U", "A"))
-STEM <- list(c(0L, 12L), c(1L, 11L), c(2L, 10L), c(3L, 9L), c(4L, 
+STEM <- list(c(0L, 12L), c(1L, 11L), c(2L, 10L), c(3L, 9L), c(4L,
     8L))
 ALN <- vapply(0:7, function(sq) {
     row <- rep(".", 15L)

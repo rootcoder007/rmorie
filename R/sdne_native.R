@@ -220,6 +220,10 @@
 #' \code{first_order}, \code{regulariser}, \code{alpha}, \code{beta}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' morie_sdne(adjacency = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+#'   reconstruction = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+#'   embeddings = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
                        alpha = 0.1, nu = 0.0, parameters = NULL) {
   s2 <- .sdne_second_order_loss(adjacency, reconstruction, beta)
@@ -249,6 +253,8 @@ morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_sdne_cheatsheet()
 morie_sdne_cheatsheet <- function() {
   paste0("sdne: shallow embeddings (IsoMap, Laplacian Eigenmaps, ",
          "LINE) cannot capture a highly NON-LINEAR network, so go ",

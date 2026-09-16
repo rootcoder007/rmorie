@@ -43,6 +43,8 @@
 #' @param batch_size Number of parallel slots.
 #' @return List with steps, n_steps, batch_size, n_sessions, note.
 #' @export
+#' @examples
+#' session_parallel_batches(list(c(1, 2, 3), c(4, 5), c(6, 7, 8, 9)), 2)
 session_parallel_batches <- function(sessions, batch_size) {
   S <- lapply(sessions, as.integer)
   if (any(vapply(S, length, integer(1)) < 2L))
@@ -98,6 +100,8 @@ session_parallel_batches <- function(sessions, batch_size) {
 #' @param r_negatives Vector of negative scores.
 #' @return Scalar loss.
 #' @export
+#' @examples
+#' bpr_loss(r_target = 5L, r_negatives = 5L)
 bpr_loss <- function(r_target, r_negatives) {
   neg <- as.numeric(r_negatives)
   if (length(neg) == 0L)
@@ -112,6 +116,8 @@ bpr_loss <- function(r_target, r_negatives) {
 #' @param regularize If TRUE, include the sigma(r_neg^2) term.
 #' @return Scalar loss.
 #' @export
+#' @examples
+#' top1_loss(r_target = 5L, r_negatives = 5L)
 top1_loss <- function(r_target, r_negatives, regularize = TRUE) {
   neg <- as.numeric(r_negatives)
   if (length(neg) == 0L)
@@ -133,6 +139,12 @@ top1_loss <- function(r_target, r_negatives, regularize = TRUE) {
 #' @param Uh Candidate recurrent weight matrix.
 #' @return New hidden state.
 #' @export
+#' @examples
+#' set.seed(1)
+#' h <- c(0, 0)
+#' x <- c(1, -1)
+#' W <- matrix(rnorm(4), 2, 2)
+#' gru_step(x, h, W, W, W, W, W, W)
 gru_step <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
   n <- length(h)
   xv <- as.numeric(x)
@@ -155,6 +167,8 @@ gru_step <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
 #' @param kk Cutoff.
 #' @return 1 if target in top kk, else 0.
 #' @export
+#' @examples
+#' recall_at_k(ranked = c(1, 2, 3, 4, 5, 6, 7, 8), target = 5L)
 recall_at_k <- function(ranked, target, kk = 20L) {
   kk <- as.integer(kk)
   top <- as.integer(ranked)[seq_len(min(kk, length(ranked)))]
@@ -165,6 +179,8 @@ recall_at_k <- function(ranked, target, kk = 20L) {
 #' @inheritParams recall_at_k
 #' @return Reciprocal rank, 0 if not in top k.
 #' @export
+#' @examples
+#' mrr_at_k(ranked = c(1, 2, 3, 4, 5, 6, 7, 8), target = 5L)
 mrr_at_k <- function(ranked, target, kk = 20L) {
   kk <- as.integer(kk)
   top <- as.integer(ranked)[seq_len(min(kk, length(ranked)))]

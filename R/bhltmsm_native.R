@@ -16,6 +16,8 @@
 #' \code{.STATES}.
 #' @return A list with \code{cumulative}, \code{states}, \code{periods}, \code{note}.
 #' @export
+#' @examples
+#' cumulative_episodes(histories = list(a = 1, b = 2))
 cumulative_episodes <- function(histories, states = .STATES) {
   S <- as.character(states)
   idx <- setNames(seq_along(S), S)
@@ -76,6 +78,10 @@ cumulative_episodes <- function(histories, states = .STATES) {
 #' @return A list with \code{weights}, \code{raw}, \code{stabilised}, \code{truncated},
 #' \code{n_truncated}, \code{note}.
 #' @export
+#' @examples
+#' histories <- list(c(1, 0, 1), c(0, 1, 1))
+#' propensities <- list(c(0.5, 0.5, 0.5), c(0.4, 0.6, 0.5))
+#' treatment_weights(histories, propensities, stabilise = FALSE)
 treatment_weights <- function(histories, propensities, stabilise = TRUE,
                               marginal = NULL, truncate = NULL) {
   W <- numeric(length(histories))
@@ -129,6 +135,9 @@ treatment_weights <- function(histories, propensities, stabilise = TRUE,
 #' @return A list with \code{mean}, \code{max}, \code{min}, \code{effective_n}, \code{n},
 #' \code{efficiency}, \code{mean_near_one}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' weight_diagnostics(V)
 weight_diagnostics <- function(weights) {
   w <- as.numeric(weights)
   n <- length(w)
@@ -182,6 +191,9 @@ weight_diagnostics <- function(weights) {
 #' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' confounding_check(M, M)
 confounding_check <- function(covariate_history, treatment_history,
                               outcome = NULL) {
   L <- as.matrix(covariate_history)
@@ -253,6 +265,9 @@ confounding_check <- function(covariate_history, treatment_history,
 #' @return A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se},
 #' \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' fit_msm(V, V)
 fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   y <- as.numeric(outcome)
   X <- as.matrix(cumulative)

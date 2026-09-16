@@ -18,7 +18,9 @@
 #'   Nonparametric Bayesian Inference, CUP, section 13.3.1.
 #' @export
 #' @examples
+#' \donttest{
 #' Ghosalbpdiscrete()
+#' }
 Ghosalbpdiscrete <- function(hazards0 = c(0.1, 0.2, 0.3), c = 4,
                              seed = 42) {
   h0 <- as.numeric(hazards0)

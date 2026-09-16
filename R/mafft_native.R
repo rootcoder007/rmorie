@@ -109,6 +109,9 @@ names(.MAFFT_PHAT) <- .MAFFT_AA
 #' @param seq_type Compared against \code{"nt"}. Defaults to \code{"aa"}.
 #' @return A list with \code{vol}, \code{pol}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' residue_vectors(V)
 residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
   rows <- vapply(group, function(s) toupper(as.character(s)), character(1))
   if (length(rows) == 0L) {
@@ -272,6 +275,9 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' @param method One of \code{"direct"}, \code{"fft"}. Defaults to \code{"fft"}.
 #' @return A list with \code{lags}, \code{c}, \code{size}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' correlation(V, V)
 correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
                         seq_type = "aa", method = "fft") {
   if (!(method %in% c("fft", "direct"))) {
@@ -383,6 +389,8 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @return A list with \code{matrix}, \code{freqs}, \code{P}, \code{Q}, \code{pam}, \code{rate}.
 #' @export
+#' @examples
+#' jtt_matrix()
 jtt_matrix <- function(pam = 200L, scale = 10.0) {
   if (pam <= 0) {
     stop("mafft: pam must be positive")
@@ -498,6 +506,8 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
 #' @return A list with \code{matrix}, \code{s_a}, \code{alphabet}, \code{average1},
 #' \code{average2}, \code{freqs}, \code{mode}.
 #' @export
+#' @examples
+#' normalized_similarity_matrix()
 normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
                                          s_a = 0.06, seq_type = "aa",
                                          mode = "normalized",
@@ -737,6 +747,10 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' @param anchors Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{.mafft_nw}.
 #' @export
+#' @examples
+#' sc <- normalized_similarity_matrix(seq_type = "aa")
+#' r <- group_align(list("MKVLA"), list("MKVLG"), sc)
+#' str(r, max.level = 1)
 group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NULL,
                         s_op = 2.4, anchors = NULL) {
   g1 <- vapply(group1, function(s) toupper(as.character(s)), character(1))
@@ -818,6 +832,9 @@ group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NUL
 #' @param corr_method Passed to \code{correlation}. Defaults to \code{"fft"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' find_homologous_segments(group1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   group2 = c(1, 2, 3, 4, 5, 6, 7, 8), scoring = c(1, 2, 3, 4, 5, 6, 7, 8))
 find_homologous_segments <- function(group1, group2, scoring,
                                      weights1 = NULL, weights2 = NULL,
                                      seq_type = "aa", window = 30L,
@@ -901,6 +918,9 @@ find_homologous_segments <- function(group1, group2, scoring,
 #' @param segments A vector; indexed elementwise.
 #' @return A vector, from \code{rev}.
 #' @export
+#' @examples
+#' segs <- list(c(0L, 0L, 4L, 5L), c(5L, 6L, 3L, 3L), c(2L, 1L, 2L, 4L))
+#' arrange_segments(segs)
 arrange_segments <- function(segments) {
   segs <- segments[order(vapply(segments, `[`, integer(1), 1L))]
   n <- length(segs)
@@ -961,6 +981,9 @@ arrange_segments <- function(segments) {
 #' @param seqs A vector; its length is taken.
 #' @return The value of \code{D}, as built in the body.
 #' @export
+#' @examples
+#' seqs <- c("MKVLA", "MKVLG", "MRVLA")
+#' sixtuple_distance(seqs)
 sixtuple_distance <- function(seqs) {
   coded <- c()
   for (s in seqs) {
@@ -1020,6 +1043,9 @@ sixtuple_distance <- function(seqs) {
 #' @param D A matrix; indexed by row and column.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' seqs <- c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA")
+#' guide_tree(sixtuple_distance(seqs))
 guide_tree <- function(D) {
   n <- nrow(D)
   if (n < 2L) stop("mafft: a guide tree needs at least two sequences")
@@ -1104,6 +1130,10 @@ guide_tree <- function(D) {
 #' @param ... Passed through.
 #' @return A vector, from \code{unlist}.
 #' @export
+#' @examples
+#' sc <- normalized_similarity_matrix(seq_type = "aa")
+#' progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA"),
+#'                   sc, use_fft = FALSE)
 progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
                               s_op = 2.4, use_fft = TRUE, ...) {
   seqs <- vapply(seqs, function(s) toupper(as.character(s)), character(1))
@@ -1177,6 +1207,11 @@ progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
 #' @param weights Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
+#' @examples
+#' sc <- normalized_similarity_matrix(seq_type = "aa")
+#' aln <- progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG",
+#'                            "MRVLATGLPLAA"), sc, use_fft = FALSE)
+#' wsp_score(aln, sc)
 wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
   aln <- vapply(alignment, function(s) toupper(as.character(s)), character(1))
   if (length(unique(vapply(aln, nchar, integer(1)))) != 1L) {
@@ -1255,6 +1290,12 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
 #' @param ... Passed through.
 #' @return A list with \code{aln}, \code{score}, \code{rounds}.
 #' @export
+#' @examples
+#' sc <- normalized_similarity_matrix(seq_type = "aa")
+#' aln <- progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG",
+#'                            "MRVLATGLPLAA"), sc, use_fft = FALSE)
+#' r <- iterative_refine(aln, sc, max_iterate = 2L)
+#' str(r, max.level = 1)
 iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
                              max_iterate = 16L, seq_type = "aa",
                              use_fft = TRUE, ...) {
@@ -1344,6 +1385,10 @@ iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
 #' \code{seq_type}, \code{length}, \code{n}, \code{s_a}, \code{s_op}, \code{matrix_mode},
 #' \code{tree}, \code{refine_rounds}, \code{note}.
 #' @export
+#' @examples
+#' r <- mafft_alignment(c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA"),
+#'                      method = "FFT-NS-2")
+#' str(r, max.level = 1)
 mafft_alignment <- function(sequences, method = "FFT-NS-2", seq_type = NULL,
                             raw_matrix = NULL, freqs = NULL, s_a = 0.06,
                             s_op = 2.4, matrix = "normalized",
@@ -1445,6 +1490,11 @@ mafftalignment <- mafft_alignment
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export
+#' @examples
+#' r <- morie_mafft("guide_tree",
+#'                  sixtuple_distance(c("MKVLATLLPLAA", "MKVLATLLPLAG",
+#'                                      "MRVLATGLPLAA")))
+#' str(r, max.level = 1)
 morie_mafft <- function(op, ...) {
   if (missing(op) || length(op) != 1L) {
     stop(paste0(

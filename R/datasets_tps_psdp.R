@@ -489,9 +489,11 @@ morie_datasets_tps_theft_over <- function(year = NULL,
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with `DIV`, `UNIT_NAME`, `ADDRESS`,
 #'   `CITY`, `AREA_SQKM`, plus shape area / perimeter fields.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_tps_police_divisions(offline = TRUE)
 #' nrow(df) # 16
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_police_divisions <- function(offline = TRUE,
                                                 max_features = NULL) {
@@ -561,9 +563,11 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #'   Default joins all five.
 #' @return A wide `data.frame`: PSDP columns first, then prefixed
 #'   resolver columns.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_tps_psdp_resolved("assault", offline = TRUE)
 #' names(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_psdp_resolved <- function(
   layer_key,

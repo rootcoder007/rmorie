@@ -173,7 +173,8 @@ morie_ingest_tps_layers <- function() {
 #' @param max_features Optional hard cap on total returned rows.
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' df <- morie_ingest_tps_feature_layer(
 #'   morie_ingest_tps_layers()$url[
@@ -184,6 +185,7 @@ morie_ingest_tps_layers <- function() {
 #' )
 #' nrow(df)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_tps_feature_layer <- function(
     layer_url,
@@ -263,8 +265,10 @@ morie_ingest_tps_feature_layer <- function(
 #' @param max_features Optional hard cap on rows.
 #' @param ... Forwarded to \code{\link{morie_ingest_tps_feature_layer}}.
 #' @return A base R \code{data.frame}.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_tps_fetch <- function(layer,
                                    year = NULL,

@@ -35,6 +35,8 @@
 #' @param step Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @return The value of \code{seq}.
 #' @export
+#' @examples
+#' cutoffs(45, step = 10)
 cutoffs <- function(N, step = 10) {
   n <- as.integer(N)
   s <- as.integer(step)
@@ -105,6 +107,9 @@ cutoffs <- function(N, step = 10) {
 #' @param step Passed to \code{.raw}. Defaults to \code{10}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' set.seed(1)
+#' normalizer(rep(c(1L, 0L), 25), measure = "rND", step = 10)
 normalizer <- function(protected, measure = "rND", step = 10) {
   # Z: the value of the worst arrangement. The protected group placed
   # entirely last maximises the deviation at every cut-off.
@@ -171,6 +176,9 @@ normalizer <- function(protected, measure = "rND", step = 10) {
 #' @param normalize Passed to \code{.measure}. Defaults to \code{TRUE}.
 #' @return The value of \code{.measure}.
 #' @export
+#' @examples
+#' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
+#' rND(prot, step = 10)
 rND <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted difference.
   .measure(protected, "rND", step, normalize)
@@ -187,6 +195,9 @@ rND <- function(protected, step = 10, normalize = TRUE) {
 #' @param normalize Passed to \code{.measure}. Defaults to \code{TRUE}.
 #' @return The value of \code{.measure}.
 #' @export
+#' @examples
+#' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
+#' rKL(prot, step = 10)
 rKL <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted KL divergence.
   .measure(protected, "rKL", step, normalize)
@@ -202,6 +213,9 @@ rKL <- function(protected, step = 10, normalize = TRUE) {
 #' @param normalize Passed to \code{.measure}. Defaults to \code{TRUE}.
 #' @return The value of \code{.measure}.
 #' @export
+#' @examples
+#' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
+#' rRD(prot, step = 10)
 rRD <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted ratio. Only meaningful when the protected
   # group is the minority -- it does not treat the two groups
@@ -259,6 +273,9 @@ fairnessrec <- rND
 #' @param normalize Passed to \code{rND}. Defaults to \code{TRUE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
+#' morie_fairRC(prot, measure = "rND", step = 10)
 morie_fairRC <- function(protected, measure = "rND", step = 10,
                          normalize = TRUE) {
   if (!(measure %in% .FAIRRC_MEASURES))

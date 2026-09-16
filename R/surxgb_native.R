@@ -77,6 +77,9 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_surxgb_pdf(V)
 morie_surxgb_pdf <- function(z, dist = "normal") {
   # Table 2: the density of Z.
   .surxgb_check_dist(dist)
@@ -103,6 +106,8 @@ morie_surxgb_pdf <- function(z, dist = "normal") {
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_surxgb_cdf(z = 5L)
 morie_surxgb_cdf <- function(z, dist = "normal") {
   # Table 2: the distribution function of Z.
   .surxgb_check_dist(dist)
@@ -133,6 +138,9 @@ morie_surxgb_cdf <- function(z, dist = "normal") {
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_surxgb_dpdf(V)
 morie_surxgb_dpdf <- function(z, dist = "normal") {
   # Table 2: f_Z'(z).
   .surxgb_check_dist(dist)
@@ -157,6 +165,9 @@ morie_surxgb_dpdf <- function(z, dist = "normal") {
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_surxgb_ddpdf(V)
 morie_surxgb_ddpdf <- function(z, dist = "normal") {
   # Table 2: f_Z''(z).
   .surxgb_check_dist(dist)
@@ -209,6 +220,8 @@ morie_surxgb_ddpdf <- function(z, dist = "normal") {
 #' @param dist Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_surxgb_aft_loss(y_lower = 5L, y_upper = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma = 1.0,
                                   dist = "normal") {
   # Definition 2, covering all four label types of Table 1.
@@ -257,6 +270,8 @@ morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma = 1.0,
 #' @return A list with \code{gradient}, \code{hessian}, \code{loss},
 #' \code{hessian_floored}, \code{derivative_method}.
 #' @export
+#' @examples
+#' morie_surxgb_aft_gradient_hessian(y_lower = 5L, y_upper = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
                                               sigma = 1.0, dist = "normal",
                                               method = "analytic",
@@ -319,6 +334,8 @@ morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_surxgb_leaf_weight(G = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)
 morie_surxgb_leaf_weight <- function(G, H, lam = 1.0) {
   # Equation (5): w* = -G/(H+lambda).
   if (H + lam <= 0.0) {
@@ -341,6 +358,9 @@ morie_surxgb_leaf_weight <- function(G, H, lam = 1.0) {
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_surxgb_split_gain(GL = c(1, 2, 3, 4, 5, 6, 7, 8), HL = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   GR = c(1, 2, 3, 4, 5, 6, 7, 8), HR = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
   # Equation (7): the loss reduction, net of the leaf price.
   term <- function(g, h) g * g / (h + lam)
@@ -464,6 +484,9 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
 #' \code{loss_history}, \code{prediction}, \code{n_rounds}, \code{max_depth},
 #' \code{method}.
 #' @export
+#' @examples
+#' morie_surxgb_boost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y_lower = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y_upper = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds = 50, eta = 0.1,
                                max_depth = 3, lam = 1.0, gamma = 0.0,
                                min_child = 5, sigma = 1.0, dist = "normal",
@@ -583,6 +606,8 @@ morie_surxgb_concordance <- function(fit, X, times, events) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_surxgb_cheatsheet()
 morie_surxgb_cheatsheet <- function() {
   paste0(
     "surxgb: AFT loss (Barnwal et al. Definition 2) driven by ",

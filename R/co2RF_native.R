@@ -29,6 +29,8 @@
 #' \code{method_used}, \code{C}, \code{C0}, \code{N}, \code{erf_adjustment},
 #' \code{method}.
 #' @export
+#' @examples
+#' radiative_forcing_co2(C = 420)
 radiative_forcing_co2 <- function(C, C0 = .C0_FIT, N = 273.87,
                                   method = "ar6",
                                   erf_adjustment = FALSE) {
@@ -80,6 +82,8 @@ morie_co2RF <- radiative_forcing_co2
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' co2RF_cheatsheet()
 co2RF_cheatsheet <- function() {
   "co2RF(C, C0, N) -> AR6/Meinshausen-2020 CO2 SARF (Table 7.SM.1); method=myhre1998 for 5.35 ln(C/C0)"
 }

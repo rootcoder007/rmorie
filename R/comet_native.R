@@ -48,6 +48,9 @@
 #' @return A list with \code{features}, \code{dim}, \code{hyp_ref_diff},
 #' \code{hyp_src_diff}, \code{note}.
 #' @export
+#' @examples
+#' pooled_features(hyp = c(1, 2, 3, 4, 5, 6, 7, 8), src = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   ref = c(1, 2, 3, 4, 5, 6, 7, 8))
 pooled_features <- function(hyp, src, ref) {
   h <- .comet_vec(hyp)
   s <- .comet_vec(src)
@@ -80,6 +83,11 @@ pooled_features <- function(hyp, src, ref) {
 #' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' hyp <- rnorm(4); src <- rnorm(4); ref <- rnorm(4)
+#' W <- matrix(rnorm(24, 0, 0.3), 1, 24)
+#' estimator_score(hyp, src, ref, W)
 estimator_score <- function(hyp, src, ref, W, b = NULL) {
   W <- as.matrix(W)
   storage.mode(W) <- "double"
@@ -127,6 +135,9 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #' @return A list with \code{loss}, \code{source_term}, \code{reference_term},
 #' \code{satisfied}, \code{note}.
 #' @export
+#' @examples
+#' triplet_loss(better = c(1, 2, 3, 4, 5, 6, 7, 8), worse = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   src = c(1, 2, 3, 4, 5, 6, 7, 8), ref = c(1, 2, 3, 4, 5, 6, 7, 8))
 triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
   m <- as.numeric(margin)
   if (m <= 0) stop("comet: the margin must be positive")
@@ -148,6 +159,9 @@ triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
 #' @param human Passed to \code{.comet_vec}.
 #' @return A list with \code{tau}, \code{concordant}, \code{discordant}, \code{n_segments}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' kendall_tau(V, V)
 kendall_tau <- function(scores, human) {
   a <- .comet_vec(scores)
   b <- .comet_vec(human)
@@ -184,6 +198,11 @@ kendall_tau <- function(scores, human) {
 #' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{score}, \code{reference_used}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' hyp <- rnorm(4); src <- rnorm(4)
+#' W <- matrix(rnorm(16, 0, 0.3), 1, 16)
+#' reference_free(hyp, src, W)
 reference_free <- function(hyp, src, W, b = NULL) {
   h <- .comet_vec(hyp)
   s <- .comet_vec(src)
@@ -219,6 +238,11 @@ comet <- estimator_score
 #' @param b Passed to \code{estimator_score}.
 #' @return The value of \code{estimator_score}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' hyp <- rnorm(4); src <- rnorm(4); ref <- rnorm(4)
+#' W <- matrix(rnorm(24, 0, 0.3), 1, 24)
+#' morie_comet(hyp, src, ref, W)
 morie_comet <- function(hyp, src, ref, W, b = NULL) {
   estimator_score(hyp, src, ref, W, b = b)
 }

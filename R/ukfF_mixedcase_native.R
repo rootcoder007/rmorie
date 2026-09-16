@@ -248,6 +248,8 @@ morie_unscented_kalman <- morie_ukfF
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_ukfF_cheatsheet()
 morie_ukfF_cheatsheet <- function() {
   "ukfF: 2n+1 sigma points, UT predict + Kalman gain update"
 }

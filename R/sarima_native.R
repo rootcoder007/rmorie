@@ -45,6 +45,8 @@
 #' @param log A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' series_g()
 series_g <- function(log = FALSE) {
   out <- numeric(144)
   idx <- 0
@@ -68,6 +70,9 @@ series_g <- function(log = FALSE) {
 #' @param s Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' difference(V)
 difference <- function(y, d = 0, D = 0, s = 1) {
   d <- as.integer(d)
   D <- as.integer(D)
@@ -139,6 +144,8 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' @param s Passed to \code{.sarima_seasonal_lift}. Defaults to \code{12}.
 #' @return A list with \code{ar}, \code{ma}.
 #' @export
+#' @examples
+#' expand_polynomials()
 expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
                                 theta = numeric(0), Theta = numeric(0), s = 12) {
   s <- as.integer(s)
@@ -161,6 +168,10 @@ expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
 #' @param lags Passed to \code{unlist}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' sample_acf(V, M)
 sample_acf <- function(x, lags) {
   n <- length(x)
   if (n < 2) stop("sarima: need at least two observations")
@@ -186,6 +197,9 @@ sample_acf <- function(x, lags) {
 #' @param sigma2 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{gamma}, \code{rho}, \code{rho_1}, \code{rho_12}, \code{nonzero_lags}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' airline_autocovariances(V, V)
 airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
   th <- as.numeric(theta)
   TH <- as.numeric(Theta)
@@ -232,6 +246,8 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
 #' @param rho Passed to \code{.sarima_invert_rho}.
 #' @return The value of \code{.sarima_invert_rho}.
 #' @export
+#' @examples
+#' moment_estimate(rho = 0.5)
 moment_estimate <- function(rho) .sarima_invert_rho(rho)
 
 #' preliminary_estimates
@@ -245,6 +261,11 @@ moment_estimate <- function(rho) .sarima_invert_rho(rho)
 #' @return A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1},
 #' \code{r_s}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' w <- rnorm(120)
+#' pe <- preliminary_estimates(w, s = 12)
+#' is.list(pe)
 preliminary_estimates <- function(w, s = 12) {
   r <- sample_acf(w, c(1, as.integer(s)))
   th <- .sarima_invert_rho(r[["1"]])
@@ -267,6 +288,9 @@ preliminary_estimates <- function(w, s = 12) {
 #' @param full A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{ssq}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' css(V)
 css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
   ar <- as.numeric(ar)
   ma <- as.numeric(ma)
@@ -346,6 +370,9 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #' @param ma Passed to \code{.sarima_state_space}. Defaults to \code{numeric(0)}.
 #' @return A list with \code{loglik}, \code{sigma2}, \code{n}, \code{exact_ssq}, \code{sum_log_f}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' loglik(V)
 loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   ar <- as.numeric(ar)
   ma <- as.numeric(ma)
@@ -698,6 +725,32 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @return A list with \code{estimate}, \code{forecast}, \code{variance}, \code{se},
 #' \code{psi}, \code{method}.
 #' @export
+#' @examples
+#' y <- c(1, 0.5, 0.25, 0.125, 0.0625, 0.03125)
+#' r <- morie_geron_arima(y, p = 1, d = 0, q = 0, include_mean = FALSE)
+#' r$ar
+#' r$sigma2
+#' r$forecast(2)
+#' d1 <- morie_geron_arima(c(1, 3, 5, 7), p = 0, d = 1, q = 0)
+#' d1$intercept
+#' d1$forecast(2)
+#' d1$sigma2
+#' y2 <- c(1, 2, 1.5, 2.5, 2, 3, 2.5, 3.5, 3, 4, 3.5, 4.5)
+#' ar <- morie_geron_arima(y2, p = 1, d = 0, q = 1)
+#' ar$ar
+#' ar$ma
+#' ar$intercept
+#' ar$sigma2
+#' ar$aic
+#' ar$forecast(2)
+#' f <- morie_geron_arima_forecast(c(1, 2, 3, 4.5), phi = 0.5, theta = 0.25, d = 1)
+#' f$forecast
+#' f$forecast_differenced
+#' f$residuals
+#' f$differenced
+#' f$sigma2
+#' f$forecast_differenced
+#' f$forecast
 forecast <- function(fitted, h = 12) {
   h <- as.integer(h)
   if (h < 1) stop("sarima: h must be at least 1")
@@ -750,6 +803,8 @@ forecast <- function(fitted, h = 12) {
 #' @return A list with \code{var_theta}, \code{var_Theta}, \code{se_theta},
 #' \code{se_Theta}, \code{cov}, \code{off_diagonal_term}.
 #' @export
+#' @examples
+#' large_sample_se(theta = 0.5, Theta = 0.5, n = 5L)
 large_sample_se <- function(theta, Theta, n) {
   th <- as.numeric(theta)
   TH <- as.numeric(Theta)
@@ -773,6 +828,11 @@ large_sample_se <- function(theta, Theta, n) {
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A list with \code{variance}, \code{se}, \code{white_noise_se}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' rho <- sample_acf(rnorm(150), c(1, 11, 12, 13))
+#' se <- bartlett_se(rho, 150)
+#' is.numeric(se) || is.list(se)
 bartlett_se <- function(rho, n) {
   n <- as.integer(n)
   if (n < 1) stop("sarima: n must be positive")
@@ -797,6 +857,9 @@ bartlett_se <- function(rho, n) {
 #' @return A list with \code{ma}, \code{sma}, \code{ar}, \code{sar}, \code{sigma2},
 #' \code{loglik}, \code{aic}, \code{note}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' r_convention(D)
 r_convention <- function(fitted) {
   list(ma = -as.numeric(fitted$theta), sma = -as.numeric(fitted$Theta),
        ar = as.numeric(fitted$phi), sar = as.numeric(fitted$Phi),

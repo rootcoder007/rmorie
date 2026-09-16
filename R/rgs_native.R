@@ -43,6 +43,9 @@
 #' \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve},
 #' \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rgs_functional_regression(V, V)
 morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"

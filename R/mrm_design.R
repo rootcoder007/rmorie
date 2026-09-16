@@ -37,13 +37,15 @@ NULL
 #'   p_welch, p_student, p_mannwhitney, ci_lower, ci_upper,
 #'   n_a, n_b, interpretation.
 #' @examples
-#' set.seed(2026)
-#' a <- rnorm(40, mean = 5, sd = 1.2)
-#' b <- rnorm(40, mean = 5.5, sd = 1.5)
-#' res <- mrm_two_treatment_test(a, b)
-#' res$estimate # mean(a) - mean(b)
-#' res$p_welch # canonical p-value
-#' res$p_mannwhitney # rank-based sensitivity check
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(2026)
+#'   a <- rnorm(40, mean = 5, sd = 1.2)
+#'   b <- rnorm(40, mean = 5.5, sd = 1.5)
+#'   res <- mrm_two_treatment_test(a, b)
+#'   res$estimate # mean(a) - mean(b)
+#'   res$p_welch # canonical p-value
+#'   res$p_mannwhitney # rank-based sensitivity check
+#' }
 #' @export
 mrm_two_treatment_test <- function(a, b, alpha = 0.05) {
   a <- as.numeric(a)

@@ -34,6 +34,6 @@ km056's \verb{_sequence_objective}: km056 ->
 Larger is better -- this is the objective, not a loss.
 }
 \examples{
-morie_kamath_ch4_full_finetune_obj(function(xi, p, t) 0.5, list("doc"), 
+morie_kamath_ch4_full_finetune_obj(function(xi, p, t) 0.5, list("doc"),
     list(list("a", "b")))
 }

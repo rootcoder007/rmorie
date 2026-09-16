@@ -111,6 +111,8 @@
 #'   bit, independent of b) or "lower_bound" (Theorem 3).
 #' @return A single numeric constant.
 #' @keywords internal
+#' @examples
+#' rmorie:::morie_tqipb_constant(bits = 5L, d = 5L)
 morie_tqipb_constant <- function(bits, d, route = "table") {
   b <- as.integer(bits)
   d <- as.integer(d)
@@ -161,6 +163,8 @@ morie_tqipb_constant <- function(bits, d, route = "table") {
 #' @param route See morie_tqipb_constant.
 #' @return A single numeric variance bound.
 #' @keywords internal
+#' @examples
+#' rmorie:::morie_tqipb_variance(bits = 5L, d = 5L)
 morie_tqipb_variance <- function(bits, d, norm_sq = 1, x_norm_sq = 1,
                                  n_blocks = 1, route = "table") {
   d <- as.integer(d)
@@ -188,6 +192,8 @@ morie_tqipb_variance <- function(bits, d, norm_sq = 1, x_norm_sq = 1,
 #' @return A probability bound, clamped at 1 since a bound above 1 says
 #'   nothing.
 #' @keywords internal
+#' @examples
+#' rmorie:::morie_tqipb_tail(var = 5L, eps = 0.5)
 morie_tqipb_tail <- function(var, eps, norm_sq = 1, x_norm_sq = 1,
                              tail = "chebyshev") {
   if (eps <= 0) stop("eps must be positive")
@@ -217,6 +223,8 @@ morie_tqipb_tail <- function(var, eps, norm_sq = 1, x_norm_sq = 1,
 #' @param max_bits Largest bit-width searched.
 #' @return The bit-width, or NULL if none within max_bits.
 #' @keywords internal
+#' @examples
+#' rmorie:::morie_tqipb_bits_required(eps = 0.5, delta = 0.5, d = 5L)
 morie_tqipb_bits_required <- function(eps, delta, d, norm_sq = 1,
                                       x_norm_sq = 1, n_blocks = 1,
                                       route = "table",
@@ -249,6 +257,8 @@ morie_tqipb_bits_required <- function(eps, delta, d, norm_sq = 1,
 #'   the constant, the block dimensions, and the route, tail and
 #'   assumption each carries. bits_needed is present when delta is given.
 #' @export
+#' @examples
+#' morie_tqipb(4L, norm_sq = 9, d = 512L, eps = 0.05, delta = 0.01)
 morie_tqipb <- function(bits, norm_sq = 1, d = NULL, eps = 0.1,
                         delta = NULL, x_norm_sq = 1, n_blocks = 1,
                         route = "table", tail = "chebyshev") {
@@ -288,6 +298,8 @@ morie_tqipb <- function(bits, norm_sq = 1, d = NULL, eps = 0.1,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_tqipb_cheatsheet()
 morie_tqipb_cheatsheet <- function()
   paste0("tqipb: TurboQuant inner-product distortion bounds. routes ",
          paste(.TQIPB_ROUTES, collapse = ", "), "; tails ",

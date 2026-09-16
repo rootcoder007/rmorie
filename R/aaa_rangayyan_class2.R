@@ -54,8 +54,7 @@
 #' @return The value of \code{M}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_bx_mat(M = X)
 #' res
 .morie_bx_mat <- function(M, name = "X") {
@@ -411,8 +410,7 @@
 #' @return A list with \code{mu}, \code{C}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_bx_cov(X = X)
 #' res
 .morie_bx_cov <- function(X, unbiased = TRUE) {
@@ -797,6 +795,9 @@
 #' \code{outputs}, \code{classes}, \code{accuracy}, \code{mse}, \code{iterations},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MlpBp(V, V)
 MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
                   tol = 1e-4, seed = 1) {
   # Section 10.8, Figure 10.5.  Forward pass eqs (10.79)-(10.81), weight
@@ -920,6 +921,8 @@ MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
 #' @return A list with \code{blocktype}, \code{qrsdur}, \code{wide}, \code{left},
 #' \code{right}, \code{satisfied}, \code{method}.
 #' @export
+#' @examples
+#' Bbb(qrsdur = 5L)
 Bbb <- function(qrsdur, criteria = NULL) {
   # Section 10.2.1.  Bundle-branch block desynchronises ventricular
   # contraction and shows as a wider-than-normal QRS; the published logic
@@ -997,6 +1000,11 @@ Bbb <- function(qrsdur, criteria = NULL) {
 #' \code{means}, \code{covariances}, \code{scale}, \code{confusion}, \code{accuracy},
 #' \code{sensitivity}, \code{specificity}, \code{priors}, \code{classes}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' f <- rbind(matrix(rnorm(40, 0), 20, 2), matrix(rnorm(40, 2), 20, 2))
+#' lab <- rep(c(0L, 1L), each = 20)
+#' PvcBayes(f, lab)
 PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
   # Section 10.11.2 with the normal-pattern Bayes classifier of 10.6.2.
   # The linear rule of 10.11.1 commits to a hard boundary; the Bayes rule
@@ -1180,6 +1188,12 @@ PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
 #' @return A list with \code{selected}, \code{weights}, \code{rmsd}, \code{normalized},
 #' \code{weighted}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' trials <- matrix(rnorm(6 * 200), 6, 200)
+#' trials[2, ] <- trials[2, ] + sin(2 * pi * (1:200) / 20)
+#' r <- BciChSel(trials, nselect = 3, rank = 3)
+#' r$selected
 BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
   # Section 9.12.1 in full: a BCI runs under hardware complexity limits and
@@ -1218,6 +1232,8 @@ BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
 #' @return A list with \code{alpha}, \code{support}, \code{reconstruction},
 #' \code{residual}, \code{l1norm}, \code{objective}, \code{iterations}, \code{method}.
 #' @export
+#' @examples
+#' BPursuit(x = 5L, D = 5L)
 BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
   # NOT from Rangayyan: the book covers matching pursuit (9.3) and EMD
   # dictionary learning (9.5), not basis pursuit.  Chen, Donoho and
@@ -1299,6 +1315,12 @@ BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
 #' \code{weightedaccuracy}, \code{confusion}, \code{predictions}, \code{folds},
 #' \code{prevalence}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' F <- rbind(matrix(rnorm(60, 0), 30, 2), matrix(rnorm(60, 1.5), 30, 2))
+#' y <- rep(c(0L, 1L), each = 30)
+#' r <- CadPipe(F, y, k = 5)
+#' str(r, max.level = 1)
 CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
   # Chapter 10: a CAD system is a chain, not a classifier, and the accuracy
   # quoted for it means nothing unless the test patterns were unseen.
@@ -1393,6 +1415,9 @@ CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
 #' @return A list with \code{maps}, \code{pooled}, \code{features}, \code{scores},
 #' \code{predicted}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CnnSig(V, V)
 CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
   # Section 10.8.2 names CNNs as the common deep model but gives no layer
   # equations; the convolution, rectifier and pooling used here are those
@@ -1484,6 +1509,24 @@ CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
 #' @return A list with \code{fetal}, \code{maternal}, \code{fetalrow},
 #' \code{maternalrow}, \code{peaks}, \code{W}, \code{H}, \code{error}, \code{method}.
 #' @export
+#' @examples
+#' \donttest{
+#' set.seed(2)
+#' fs <- 250
+#' tv <- seq(0, 4, by = 1 / fs)
+#' n <- length(tv)
+#' mat <- rep(0, n)
+#' for (b in seq(0.4, 3.8, by = 0.8)) {
+#'   i <- round(b * fs); mat[i:(i + 4)] <- c(0.3, 1.2, -0.4, 0.1, 0)
+#' }
+#' fet <- rep(0, n)
+#' for (b in seq(0.3, 3.9, by = 0.45)) {
+#'   i <- round(b * fs); fet[i:(i + 2)] <- c(0.2, 0.5, 0)
+#' }
+#' x <- mat + fet + 0.02 * rnorm(n)
+#' r <- FecgNmf(x, fs = fs, nwin = 64, rank = 4)
+#' str(r, max.level = 1)
+#' }
 FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
                     maxiter = 150, taum = 0.6, tauf = 0.45, seed = 1) {
   # Section 9.11.  The fetal and maternal ECG overlap in the spectrum so no
@@ -1588,6 +1631,9 @@ FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
 #' @return A list with \code{labels}, \code{discriminant}, \code{coefficients},
 #' \code{prototypes}, \code{source}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PvcLinDf(V, V)
 PvcLinDf <- function(rr, ff, train = NULL) {
   # Section 10.11.1, eq (10.131).  A PVC has both a shorter preceding RR
   # interval and a more complex waveshape, and the form factor of eq (5.26)
@@ -1658,6 +1704,11 @@ PvcLinDf <- function(rr, ff, train = NULL) {
 #' @return A list with \code{power}, \code{fraction}, \code{dominant}, \code{totalpower},
 #' \code{frequencies}, \code{bands}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' fs <- 100
+#' eeg <- sin(2 * pi * 10 * seq(0, 4, by = 1 / fs)) + 0.3 * rnorm(401)
+#' EegBands(eeg, fs = fs)
 EegBands <- function(x, fs, bands = NULL) {
   # Band limits from Section 1.2.6, fractional power by eq (6.44) as used
   # in Section 10.2.3.  The clinical question -- is there an alpha rhythm
@@ -1736,6 +1787,13 @@ EegBands <- function(x, fs, bands = NULL) {
 #' \code{predictions}, \code{isseizure}, \code{testclass}, \code{accuracy},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' S <- rbind(matrix(rnorm(4 * 64, 0, 1), 4, 64),
+#'            matrix(rnorm(4 * 64, 0, 3), 4, 64))
+#' y <- rep(c(0L, 1L), each = 4)
+#' r <- SeizDict(S, y, iterations = 3)
+#' str(r, max.level = 1)
 SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
                      test = NULL) {
   # Section 9.8 with the framework of 9.5, Algorithm 9.2 verbatim.  The EEG
@@ -1883,6 +1941,13 @@ SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
 #' @return A list with \code{sources}, \code{unmixing}, \code{mixing}, \code{whitening},
 #' \code{mean}, \code{iterations}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' S <- rbind(sin(2 * pi * (1:300) / 25), sign(sin(2 * pi * (1:300) / 60)))
+#' A <- matrix(c(1, 0.5, 0.4, 1), 2, 2)
+#' X <- A %*% S + 0.02 * matrix(rnorm(600), 2, 300)
+#' r <- IcaFix(X)
+#' str(r, max.level = 1)
 IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
   # Section 9.7.2: model eq (9.43), unmixing eq (9.44).  PCA can only make
   # components uncorrelated, which is independence only for Gaussians, and
@@ -1998,6 +2063,13 @@ IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
 #' @return A list with \code{clean}, \code{components}, \code{kurtosis},
 #' \code{artifacts}, \code{mixing}, \code{removedpower}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' S <- rbind(sin(2 * pi * (1:300) / 25), rnorm(300))
+#' A <- matrix(c(1, 0.5, 0.4, 1), 2, 2)
+#' X <- A %*% S
+#' r <- IcaClean(X)
+#' str(r, max.level = 1)
 IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
                      maxiter = 200, seed = 1) {
   # Section 9.7.2 with the kurtosis excess of eq (3.5).  Blinks, muscle and
@@ -2065,6 +2137,13 @@ IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
 #' @return A list with \code{sources}, \code{unmixing}, \code{whitening}, \code{mean},
 #' \code{iterations}, \code{change}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' S <- rbind(sin(2 * pi * (1:300) / 25), sign(sin(2 * pi * (1:300) / 60)))
+#' A <- matrix(c(1, 0.5, 0.4, 1), 2, 2)
+#' X <- A %*% S
+#' r <- Infomax(X, maxiter = 100)
+#' str(r, max.level = 1)
 Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
                     seed = 1) {
   # NOT from Rangayyan: Section 9.7.2 gives only the generic gradient rule
@@ -2154,6 +2233,9 @@ Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
 #' \code{normalfraction}, \code{decision}, \code{stage}, \code{abnormal},
 #' \code{durations}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' VagClass(V)
 VagClass <- function(segments, durations = NULL, segclass = NULL,
                      arthro = NULL) {
   # Section 10.12.  VAG signals are nonstationary so each locally
@@ -2253,6 +2335,11 @@ VagClass <- function(segments, durations = NULL, segclass = NULL,
 #' @return A list with \code{dictionary}, \code{coefficients}, \code{error},
 #' \code{iterations}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' Y <- matrix(rnorm(16 * 30), 16, 30)
+#' r <- KsvdFit(Y, natoms = 8, sparsity = 3, maxiter = 4)
+#' str(r, max.level = 1)
 KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
                     seed = 1) {
   # NOT from Rangayyan: Section 9.5 gives EMD-based dictionary learning
@@ -2371,6 +2458,8 @@ KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
 #' @return A list with \code{coefficients}, \code{support}, \code{reconstruction},
 #' \code{residual}, \code{error}, \code{method}.
 #' @export
+#' @examples
+#' DictCode(Y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), sparsity = 5L)
 DictCode <- function(Y, D, sparsity, tol = 1e-12) {
   # Section 9.5 for the greedy stage and 9.8 for the use of the resulting
   # coefficients and reconstruction error as features; the least-squares
@@ -2431,6 +2520,9 @@ DictCode <- function(Y, D, sparsity, tol = 1e-12) {
 #' @return A list with \code{hidden}, \code{cell}, \code{predictions}, \code{accuracy},
 #' \code{readout}, \code{classes}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Lstm(D)
 Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
                  seed = 1, weights = NULL) {
   # NOT from Rangayyan: Section 10.8.2 discusses deep learning in prose and
@@ -2560,6 +2652,9 @@ Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
 #' \code{residual}, \code{reconstruction}, \code{decay}, \code{energyratio},
 #' \code{parameters}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MPursuit(V)
 MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
                      decaystop = NULL) {
   # Section 9.3, eqs (9.1)-(9.7) with the Gabor dictionary of (9.2)-(9.3).
@@ -2652,6 +2747,10 @@ MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
 #' @return A list with \code{states}, \code{innovations}, \code{gain}, \code{predicted},
 #' \code{method}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' BmiDec(D, M)
 BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
                    p0 = 1e-2) {
   # Section 8.18 with the filter of 8.7: a BMI has no ground truth about
@@ -2757,6 +2856,11 @@ BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
 #' @return A list with \code{W}, \code{H}, \code{submatrices}, \code{error},
 #' \code{iterations}, \code{cost}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' V <- matrix(runif(48, 0.1, 1), 8, 6)
+#' r <- NmfMu(V, r = 3, maxiter = 50)
+#' str(r, max.level = 1)
 NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
   # Section 9.7.3, eqs (9.46), (9.49)-(9.50) and (9.53)-(9.55).  PCA and
   # ICA are free to use negative coefficients so their components cancel;
@@ -2808,6 +2912,12 @@ NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
 #' @return A list with \code{selected}, \code{rmsd}, \code{ranking}, \code{normalized},
 #' \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' trials <- matrix(rnorm(6 * 200), 6, 200)
+#' trials[2, ] <- trials[2, ] + sin(2 * pi * (1:200) / 20)
+#' r <- NmfChSel(trials, nselect = 3, rank = 3)
+#' r$selected
 NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
   # Section 9.12.1, eqs (9.94)-(9.96).  Channel relevance varies strongly
@@ -2845,6 +2955,8 @@ NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
 #' @return A list with \code{coefficients}, \code{support}, \code{reconstruction},
 #' \code{residual}, \code{error}, \code{energyratio}, \code{method}.
 #' @export
+#' @examples
+#' OmpFit(x = 5L, D = 5L)
 OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
   # NOT from Rangayyan: Section 9.3 gives plain matching pursuit, not the
   # orthogonalised variant.  Pati, Rezaiifar and Krishnaprasad, Proc. 27th
@@ -2891,6 +3003,9 @@ OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
 #' @return A list with \code{components}, \code{eigenvalues}, \code{eigenvectors},
 #' \code{mean}, \code{covariance}, \code{varexplained}, \code{mse}, \code{method}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' PcaSig(M)
 PcaSig <- function(X, ncomp = NULL) {
   # Section 9.7.1, eqs (9.37)-(9.41).  Multichannel recordings pick up the
   # same sources through different paths, so the channels are redundant;
@@ -2950,6 +3065,13 @@ PcaSig <- function(X, ncomp = NULL) {
 #' @param seed Passed to \code{IcaFix}. Defaults to \code{1}.
 #' @return A list with \code{error}, \code{best}, \code{components}, \code{rank}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' S <- rbind(sin(2 * pi * (1:300) / 25), sign(sin(2 * pi * (1:300) / 60)))
+#' A <- matrix(c(1, 0.5, 0.4, 1), 2, 2)
+#' X <- A %*% S + 0.05 * matrix(rnorm(600), 2, 300)
+#' r <- MixCmp(X, ncomp = 2, maxiter = 50)
+#' str(r, max.level = 1)
 MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
   # Section 9.7.4.  The three decompositions answer different questions of
   # the same data -- uncorrelated, independent, nonnegative-parts -- and
@@ -3013,6 +3135,9 @@ MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
 #' @return A list with \code{centers}, \code{weights}, \code{bias}, \code{predictions},
 #' \code{queryvalues}, \code{mse}, \code{spread}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Rbfn(V, V)
 Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
                  ridge = 1e-8, query = NULL) {
   # Section 10.8.1, eqs (10.86)-(10.87).  Cover's theorem: a set that is
@@ -3139,6 +3264,8 @@ Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
 #' \code{events}, \code{hours}, \code{baseline}, \code{envsec}, \code{oxygenchecked},
 #' \code{method}.
 #' @export
+#' @examples
+#' Ahi(airflow = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
                 hypofrac = 0.50, minsec = 10, desat = 0, envsec = 1) {
   # Section 10.13.  Severity is reported as one number, so the whole
@@ -3248,6 +3375,13 @@ Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
 #' @return A list with \code{alpha}, \code{support}, \code{reconstruction},
 #' \code{residual}, \code{error}, \code{energyratio}, \code{mode}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' D <- matrix(rnorm(16 * 8), 16, 8)
+#' D <- sweep(D, 1, sqrt(rowSums(D^2)), "/")
+#' x <- D[3, ] * 1.5 - D[10, ] * 0.7
+#' r <- SparseCode(x, D, sparsity = 2)
+#' str(r, max.level = 1)
 SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
                        tol = 1e-10) {
   # Section 9.5 for the greedy framing -- the book calls it a greedy
@@ -3319,6 +3453,8 @@ SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
 #' @return A list with \code{tfd}, \code{times}, \code{frequencies}, \code{ep},
 #' \code{esp}, \code{fp}, \code{fsp}, \code{coefficients}, \code{method}.
 #' @export
+#' @examples
+#' VagTfd(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 VagTfd <- function(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12) {
   # Section 9.6 applied to VAG in Section 9.9.  Bilinear TFDs buy
   # resolution with cross-terms; decompose first and the interaction is

@@ -550,15 +550,17 @@ morie_tps_dbscan_clusters <- function(df,
 #' @return A named list with \code{moran_I}, \code{z_score},
 #'   \code{p_value}, \code{n}.
 #' @examples
-#' set.seed(2026)
-#' polys <- data.frame(
-#'   HOOD_ID = letters[1:16],
-#'   lat = rep(43.6 + (0:3) * 0.02, 4),
-#'   lon = rep(-79.4 + (0:3) * 0.02, each = 4),
-#'   ASSAULT_RATE_2024 = rpois(16, 30)
-#' )
-#' morie_tps_polygon_morans_i(polys, value_col = "ASSAULT_RATE_2024",
-#'   centroid_lat_col = "lat", centroid_lon_col = "lon")
+#' if (requireNamespace("sf", quietly = TRUE)) {
+#'   set.seed(2026)
+#'   polys <- data.frame(
+#'     HOOD_ID = letters[1:16],
+#'     lat = rep(43.6 + (0:3) * 0.02, 4),
+#'     lon = rep(-79.4 + (0:3) * 0.02, each = 4),
+#'     ASSAULT_RATE_2024 = rpois(16, 30)
+#'   )
+#'   morie_tps_polygon_morans_i(polys, value_col = "ASSAULT_RATE_2024",
+#'     centroid_lat_col = "lat", centroid_lon_col = "lon")
+#' }
 #' @export
 morie_tps_polygon_morans_i <- function(polygons,
                                         value_col,
@@ -727,18 +729,20 @@ morie_tps_polygon_morans_i <- function(polygons,
 #' @return A named list with \code{I_xy}, \code{n}, \code{x_col},
 #'   \code{y_col}.
 #' @examples
-#' set.seed(2026)
-#' polys <- data.frame(
-#'   HOOD_ID = letters[1:16],
-#'   lat = rep(43.6 + (0:3) * 0.02, 4),
-#'   lon = rep(-79.4 + (0:3) * 0.02, each = 4),
-#'   ASSAULT_RATE_2024 = rpois(16, 30),
-#'   HOMICIDE_RATE_2024 = rpois(16, 2)
-#' )
-#' morie_tps_bivariate_moran(polys,
-#'   x_col = "ASSAULT_RATE_2024",
-#'   y_col = "HOMICIDE_RATE_2024",
-#'   centroid_lat_col = "lat", centroid_lon_col = "lon")
+#' if (requireNamespace("sf", quietly = TRUE)) {
+#'   set.seed(2026)
+#'   polys <- data.frame(
+#'     HOOD_ID = letters[1:16],
+#'     lat = rep(43.6 + (0:3) * 0.02, 4),
+#'     lon = rep(-79.4 + (0:3) * 0.02, each = 4),
+#'     ASSAULT_RATE_2024 = rpois(16, 30),
+#'     HOMICIDE_RATE_2024 = rpois(16, 2)
+#'   )
+#'   morie_tps_bivariate_moran(polys,
+#'     x_col = "ASSAULT_RATE_2024",
+#'     y_col = "HOMICIDE_RATE_2024",
+#'     centroid_lat_col = "lat", centroid_lon_col = "lon")
+#' }
 #' @export
 morie_tps_bivariate_moran <- function(polygons,
                                        x_col,

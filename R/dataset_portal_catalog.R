@@ -91,10 +91,14 @@
 #' a registry in an interactive session.
 #'
 #' @return Invisibly `NULL`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \donttest{
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_dataset_portal_catalog_clear_cache()
 #' catalog <- morie_dataset_portal_catalog()
 #' nrow(catalog)
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 morie_dataset_portal_catalog_clear_cache <- function() {
   rm(
@@ -128,7 +132,8 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #'   warning when the companion is absent.
 #' @return A `data.frame` with columns `dataset_key`, `source`,
 #'   `id`, `api_modes`, `loader`, `dict_url`, `n_rows_bundled`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Per-portal slice: registry lives in code, fastest path.
 #' nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
 #' nrow(nypd)
@@ -139,6 +144,7 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #' # contribute zero rows with a one-time warning per portal.
 #' cat_df <- morie_dataset_portal_catalog()
 #' table(cat_df$source)
+#' \dontshow{\}) # examplesIf}
 #' @seealso [morie_dataset_portal_catalog_clear_cache()],
 #'   [morie_datasets_load_by_key()], [morie_datasets_browse()]
 #' @examples

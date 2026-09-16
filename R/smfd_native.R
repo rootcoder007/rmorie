@@ -34,6 +34,8 @@
 #' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3L}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' smfd_knot_sequence(0, 1, nseg = 10L, degree = 3L)
 smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
   nseg   <- as.integer(nseg)
   degree <- as.integer(degree)
@@ -60,6 +62,8 @@ smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
 #' @param knots A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' smfd_bspline_one(x = 5L, k = 3L, degree = 3L, knots = c(1, 2, 3, 4, 5, 6, 7, 8))
 smfd_bspline_one <- function(x, k, degree, knots) {
   if (degree == 0L) {
     last <- k == length(knots) - 1L
@@ -90,6 +94,9 @@ smfd_bspline_one <- function(x, k, degree, knots) {
 #' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3L}.
 #' @return The value of \code{B}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' smfd_bspline_basis(V, V)
 smfd_bspline_basis <- function(x, knots, degree = 3L) {
   degree <- as.integer(degree)
   p <- length(knots) - degree - 1L
@@ -116,6 +123,8 @@ smfd_bspline_basis <- function(x, knots, degree = 3L) {
 #' @param order A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.
 #' @return The value of \code{D}, as built in the body.
 #' @export
+#' @examples
+#' smfd_difference_matrix(10L, order = 2L)
 smfd_difference_matrix <- function(p, order = 2L) {
   p     <- as.integer(p)
   order <- as.integer(order)
@@ -160,6 +169,9 @@ smfd_difference_matrix <- function(p, order = 2L) {
 #'   smoothing with B-splines and penalties. Statistical Science,
 #'   11(2), 89-121.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_smfd(V, V)
 morie_smfd <- function(x, y, nseg = 10L, degree = 3L, lam = 1.0,
                        order = 2L, weights = NULL) {
   x <- as.numeric(x)

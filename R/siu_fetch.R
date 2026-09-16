@@ -561,10 +561,12 @@ morie_siu_fetch_dataframe <- function(...) {
 #'   path to a saved report file.
 #' @return A named character vector: the 16 schema fields plus
 #'   \code{_language}.
-#' @examplesIf requireNamespace("rmoriebricklayer", quietly = TRUE) && exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer"))
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriebricklayer", quietly = TRUE) && exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer"))) withAutoprint(\{ # examplesIf}
 #' f <- morie_siu_parse_report(system.file("extdata",
 #'   "siu_synthetic_report.html", package = "rmoriebricklayer"))
 #' f[["number_of_subject_officers"]]
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_parse_report <- function(html) {
   if (!requireNamespace("rmoriebricklayer", quietly = TRUE) ||
@@ -601,10 +603,12 @@ morie_siu_parse_report <- function(html) {
 #' @param quiet Suppress progress messages.
 #' @return A data.frame in the 65-column reviewed-corpus schema. New rows
 #'   (if any) carry \code{panel_reviewed = FALSE}.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_siu_reports()
 #' nrow(df)
 #' table(df$panel_reviewed)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
   if (!requireNamespace("rmoriedata", quietly = TRUE)) {
@@ -714,8 +718,10 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' @param drid Report id; supply whenever known.
 #' @return A list with `count` (integer, `NA` only when both corpus and
 #'   rules are silent -- run the panel) and `reason`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_siu_resolve_so(drid = 5038)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_resolve_so <- function(text = NULL, drid = NULL) {
   if (!is.null(drid) && requireNamespace("rmoriedata", quietly = TRUE)) {

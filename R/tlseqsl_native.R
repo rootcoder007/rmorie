@@ -77,6 +77,8 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{folds}, as built in the body.
 #' @export
+#' @examples
+#' morie_tlseqsl_cv_folds(50, V = 5, seed = 1)
 morie_tlseqsl_cv_folds <- function(n, V = 10, seed = 0) {
   if (V < 2 || V > n) {
     stop(sprintf("tlseqsl: V must lie in 2..%d, got %d", n, V))
@@ -116,6 +118,15 @@ morie_tlseqsl_cv_folds <- function(n, V = 10, seed = 0) {
 #' @param seed Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{0}.
 #' @return A list with \code{risk}, \code{cv_predictions}, \code{V}, \code{loss}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(100), 50, 2)
+#' y <- X %*% c(1, -1) + rnorm(50)
+#' algo <- function(Xtr, ytr) {
+#'   b <- qr.solve(cbind(1, Xtr), ytr)
+#'   function(xrow) sum(c(1, xrow) * b)
+#' }
+#' morie_tlseqsl_cv_risk(X, y, algo, V = 5, seed = 1)$risk
 morie_tlseqsl_cv_risk <- function(X, y, algorithm, V = 10, loss = "squared", seed = 0) {
   if (!(loss %in% .tlseqsl_LOSSES)) {
     stop(sprintf(
@@ -164,6 +175,9 @@ morie_tlseqsl_cv_risk <- function(X, y, algorithm, V = 10, loss = "squared", see
 #' @param seed Passed to \code{morie_tlseqsl_cv_risk}. Defaults to \code{0}.
 #' @return A list with \code{selected}, \code{risks}, \code{cv_predictions}, \code{note}.
 #' @export
+#' @examples
+#' morie_tlseqsl_discrete_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y = c(1, 2, 3, 4, 5, 6, 7, 8), library = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tlseqsl_discrete_super_learner <- function(X, y, library, V = 10,
                                                  loss = "squared", seed = 0) {
   if (length(library) == 0) {
@@ -209,6 +223,9 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V = 10,
 #' \code{discrete_risks}, \code{discrete_choice}, \code{best_single}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' morie_tlseqsl_ensemble_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y = c(1, 2, 3, 4, 5, 6, 7, 8), library = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V = 10,
                                                  loss = "squared", seed = 0,
                                                  grid = 21) {
@@ -357,6 +374,8 @@ morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_tlseqsl_cheatsheet()
 morie_tlseqsl_cheatsheet <- function() {
   paste0(
     "tlseqsl: no algorithm is best everywhere, so choose by ",

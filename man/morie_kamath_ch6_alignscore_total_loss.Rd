@@ -20,6 +20,6 @@ List with \code{estimate}, \code{contributions}.
 lam1 L_3way + lam2 L_bin + lam3 L_reg.
 }
 \examples{
-morie_kamath_ch6_alignscore_total_loss(1, 2, 3, c(0.5, 0.25, 
+morie_kamath_ch6_alignscore_total_loss(1, 2, 3, c(0.5, 0.25,
     0.25))
 }

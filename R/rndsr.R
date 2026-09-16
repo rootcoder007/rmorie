@@ -17,9 +17,11 @@
 #'   is unchanged: `seed` drives `set.seed()` directly.
 #' @return Named list: estimate, best_params, best_score, sampled_params,
 #'   sampled_scores, n_iter, task, n, method.
-#' @examplesIf requireNamespace("caret", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_random_search_cv <- function(x, y, method = NULL, n_iter = 20L, cv = 5L,
                              task = "auto", seed = 0L,

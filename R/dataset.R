@@ -367,9 +367,11 @@ morie_dataset_profile_to_list <- function(profile) {
 #' @param profile A `morie_dataset_profile`.
 #' @return Character scalar with embedded newlines.
 #' @examples
-#' df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
-#' p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
-#' cat(morie_dataset_profile_summary_table(p))
+#' if (requireNamespace("readxl", quietly = TRUE)) {
+#'   df <- data.frame(x = c(0, 1, 0, 1), y = c(1, 2, 3, 4))
+#'   p <- morie_dataset_profile(df, hint_treatment = "x", hint_outcome = "y")
+#'   cat(morie_dataset_profile_summary_table(p))
+#' }
 #' @export
 morie_dataset_profile_summary_table <- function(profile) {
   header <- sprintf(
@@ -408,12 +410,14 @@ morie_dataset_profile_summary_table <- function(profile) {
 #' @param ... Forwarded to the underlying reader
 #'   (`utils::read.csv`, `readxl::read_excel`, etc.).
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("readxl", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' tmp <- tempfile(fileext = ".csv")
 #' write.csv(data.frame(a = 1:3, b = c("x", "y", "z")), tmp, row.names = FALSE)
 #' df <- morie_dataset_load(tmp)
 #' head(df)
 #' unlink(tmp)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
   if (!file.exists(path)) {

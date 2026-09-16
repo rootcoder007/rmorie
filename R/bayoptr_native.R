@@ -273,6 +273,12 @@
 #'   "ucb"/"lcb" suffix appended).
 #' @references Mockus (1975); Snoek, Larochelle & Adams (2012).
 #' @export
+#' @examples
+#' \donttest{
+#' f <- function(x) -sum((x - c(0.3, 0.7))^2)
+#' morie_bayoptr(f, bounds = list(c(0, 1), c(0, 1)), n_iter = 8L, n_init = 5L,
+#'               seed = 1L)
+#' }
 morie_bayoptr <- function(f, bounds, acquisition = "ei", n_iter = 20L,
                           n_init = 5L, kernel = "matern52",
                           amplitude = 1, length_scale = 1,

@@ -36,6 +36,6 @@ is the POPULATION variance, matching numpy's \code{var}.
 \examples{
 att <- function(v) v * 0.5
 ffn <- function(v) v * 0.25
-morie_kamath_post_ln_transformer(matrix(c(1, 2, 3), 1), att, 
+morie_kamath_post_ln_transformer(matrix(c(1, 2, 3), 1), att,
     ffn)
 }

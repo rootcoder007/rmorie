@@ -19,7 +19,9 @@
 #'   Nonparametric Bayesian Inference, CUP, section 13.4.2.
 #' @export
 #' @examples
+#' \donttest{
 #' Ghosalntrbvm()
+#' }
 Ghosalntrbvm <- function(n = 1500, n_sim = 300, seed = 42) {
   n <- as.integer(n)
   n_sim <- as.integer(n_sim)

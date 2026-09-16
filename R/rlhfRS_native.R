@@ -60,6 +60,8 @@
 #' @param k The cut-off.
 #' @return A number between zero and one.
 #' @export
+#' @examples
+#' morie_rlhfRS_precision(relevance = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_rlhfRS_precision <- function(relevance, k) {
   k <- as.integer(k)
   if (k < 1L) stop("a cut-off below one ranks nothing")
@@ -83,6 +85,8 @@ morie_rlhfRS_precision <- function(relevance, k) {
 #' @param k The cut-off.
 #' @return A number between zero and one.
 #' @export
+#' @examples
+#' morie_rlhfRS_ndcg(relevance = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_rlhfRS_ndcg <- function(relevance, k) {
   k <- as.integer(k)
   if (k < 1L) stop("a cut-off below one ranks nothing")
@@ -102,6 +106,9 @@ morie_rlhfRS_ndcg <- function(relevance, k) {
 #' @param relevance The graded relevance of the ranked list.
 #' @return A number between zero and one.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rlhfRS_mrr(V)
 morie_rlhfRS_mrr <- function(relevance) {
   for (i in seq_along(relevance)) if (relevance[i] > 0) return(1 / i)
   0
@@ -273,6 +280,13 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
 #' @return A list with the value estimate or estimates, the visitation,
 #'   the ranking metrics, and the off-policy diagnostics.
 #' @export
+#' @examples
+#' P <- list(list(c(0.7, 0.3), c(0.5, 0.5), c(0.2, 0.8)), list(c(0.6,
+#'     0.4), c(0.3, 0.7), c(0.9, 0.1)))
+#' R <- list(c(0.1, 0.4, 1), c(1.2, 0.3, 0.2))
+#' ENV <- list(transition = P, reward = R, start = 0L)
+#' GREEDY <- matrix(c(0, 1, 0, 0, 1, 0), 2L, 3L)
+#' morie_rlhfRS(ENV, GREEDY, 25L, 8L, 0.9, 7)
 morie_rlhfRS <- function(env, policy, n_episodes = 20L, horizon = 10L,
                          gamma = 0.9, seed = 0, estimator = "ips",
                          reward_model = NULL, clip = NULL,
@@ -347,6 +361,8 @@ morie_rlhfRS <- function(env, policy, n_episodes = 20L, horizon = 10L,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_rlhfRS_cheatsheet()
 morie_rlhfRS_cheatsheet <- function()
   paste0("rlhfRS: recommendation as a session MDP. Discounted rollout ",
          "plus IPS, self-normalised IPS or doubly robust off-policy ",

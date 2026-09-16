@@ -21,10 +21,10 @@ A list with \code{scores}, \code{judge_sd}, \code{best_response}, \code{estimate
 }
 \keyword{internal}
 \examples{
-s <- morie_alammar_sampling_decoding(matrix(rep(c(1, 0), 10), 
+s <- morie_alammar_sampling_decoding(matrix(rep(c(1, 0), 10),
     10, 2, byrow = TRUE), seed = 7)
 judge <- function(r, resp, s) {
-    if (resp == "a") 
+    if (resp == "a")
         c(1, 3)[s + 1]
     else c(2, 2)[s + 1]
 }

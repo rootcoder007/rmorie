@@ -97,6 +97,9 @@
 #' @return A list with \code{cepstrum}, \code{log_magnitude}, \code{n}, \code{zero_bins},
 #' \code{invertible}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Cepstrum(V)
 Cepstrum <- function(x) {
   # real cepstrum: c(n) = IDFT(log|DFT(x)|).  Keeps only the magnitude,
   # so it discards the phase and is NOT invertible -- the whole
@@ -128,6 +131,9 @@ Cepstrum <- function(x) {
 #' \code{detrended_phase}, \code{linear_phase_removed}, \code{delay_removed}, \code{n},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CCepstrum(V)
 CCepstrum <- function(x) {
   # eqs (4.63)-(4.64): the inverse transform of log|X| + j angle(X).
   # The phase is unwrapped over k = 0..N/2 and mirrored by odd symmetry;
@@ -167,6 +173,9 @@ CCepstrum <- function(x) {
 #' @param x Passed to \code{CCepstrum}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CCepX(V)
 CCepX <- function(x) {
   # eqs (4.63)-(4.64) with the unwrapping diagnostics the book calls "an
   # important consideration": a 2-pi jump at nearly every bin means the
@@ -193,6 +202,9 @@ CCepX <- function(x) {
 #' @return A list with \code{y}, \code{x}, \code{p}, \code{n}, \code{separable_by_log},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MultModel(V, V)
 MultModel <- function(x, p) {
   # eq (4.58): y(t) = x(t) p(t), the model a multiplicative homomorphic
   # system addresses.
@@ -217,6 +229,9 @@ MultModel <- function(x, p) {
 #' @return A list with \code{log_y}, \code{log_x}, \code{log_p}, \code{sum},
 #' \code{max_difference}, \code{additive}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' LogSep(V, V)
 LogSep <- function(x, p) {
   # eq (4.59): log[y] = log[x] + log[p], for x != 0 and p != 0.  The
   # book states that side condition, so a zero is rejected rather than
@@ -249,6 +264,9 @@ LogSep <- function(x, p) {
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ConvModel(V, V)
 ConvModel <- function(x, h) {
   # eq (4.61): y(t) = x(t) * h(t), the model homomorphic DEconvolution
   # addresses.
@@ -275,6 +293,9 @@ ConvModel <- function(x, h) {
 #' \code{residual}, \code{max_residual}, \code{relative_residual},
 #' \code{truncation_note}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CCepSum(V, V)
 CCepSum <- function(x, h) {
   # eq (4.66): y_hat = x_hat + h_hat.  The residual is not exactly zero
   # because the cepstrum is of infinite duration (eq 4.73) and the DFT
@@ -389,6 +410,10 @@ RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
 #' \code{negative}, \code{causal}, \code{anticausal}, \code{infinite_duration},
 #' \code{nmax}, \code{method}.
 #' @export
+#' @examples
+#' CCepClosed(gain = 5L, zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8), poles_in = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
 CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
                        nmax = 32) {
   # eq (4.72): x_hat(0) = log|A|; for n > 0, -sum a^n/n + sum c^n/n; for
@@ -438,6 +463,9 @@ CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
 #' @return A list with \code{alpha}, \code{K}, \code{bound}, \code{quefrency},
 #' \code{decays_at_least_as_one_over_n}, \code{near_unit_circle}, \code{method}.
 #' @export
+#' @examples
+#' CCepDecay(zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8), zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   poles_in = c(1, 2, 3, 4, 5, 6, 7, 8), poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
 CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
                       constant = NULL) {
   # eq (4.73): |x_hat(n)| < K |alpha^n / n| with alpha the largest root
@@ -475,6 +503,8 @@ CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
 #' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' EchoSeries(0.5, 8, terms = 4)
 EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
   # eqs (4.79)-(4.80): the complex cepstrum of a wavelet plus one echo
   # is the wavelet's cepstrum plus impulses at n0 and its multiples,
@@ -528,6 +558,9 @@ EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
 #' \code{squared}, \code{zero_bins}, \code{retains_phase}, \code{additivity_exact},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PCepstrum(V)
 PCepstrum <- function(x, square = TRUE) {
   # eq (4.81).  The book notes the final squaring is omitted in some
   # definitions, and that it matters: WITH the square, eq (4.82) holds
@@ -563,6 +596,9 @@ PCepstrum <- function(x, square = TRUE) {
 #' \code{residual}, \code{max_residual}, \code{relative_residual}, \code{squared},
 #' \code{exact}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PCepSum(V, V)
 PCepSum <- function(x, h, square = FALSE) {
   # eq (4.82): the power cepstra of a convolution add, exactly when the
   # squaring of eq (4.81) is omitted.  square defaults to FALSE here for
@@ -601,6 +637,9 @@ PCepSum <- function(x, h, square = FALSE) {
 #' \code{max_residual}, \code{relative_residual}, \code{phase_lost}, \code{n},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PCepRel(V)
 PCepRel <- function(x) {
   # eq (4.83): y_hat_p(n) = [y_hat(n) + y_hat(-n)]^2 -- the squared even
   # part of the complex cepstrum.  The odd part, where the phase lives,
@@ -639,6 +678,9 @@ PCepRel <- function(x) {
 #' @return A list with \code{liftered}, \code{n}, \code{low}, \code{high}, \code{keep},
 #' \code{symmetric}, \code{n_kept}, \code{energy_kept}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Lifter(V)
 Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
   # Section 4.7.3: the vocal tract lives at LOW quefrency, the glottal
   # excitation at the pitch period and its multiples.  The window is
@@ -684,6 +726,8 @@ Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
 #' @return A list with \code{y}, \code{log_domain}, \code{log_input}, \code{cutoff},
 #' \code{keep}, \code{n}, \code{stages}, \code{method}.
 #' @export
+#' @examples
+#' HomoFilt(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5)
 HomoFilt <- function(y, cutoff, keep = "low") {
   # Section 4.7.1, Figure 4.23: log -> linear filter -> exp.  The signal
   # must be strictly positive (eq 4.59's side condition); a signal that
@@ -726,6 +770,8 @@ HomoFilt <- function(y, cutoff, keep = "low") {
 #' \code{keep}, \code{n}, \code{linear_phase_removed}, \code{imaginary_energy},
 #' \code{stages}, \code{method}.
 #' @export
+#' @examples
+#' HomDeconv(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5)
 HomDeconv <- function(y, cutoff, keep = "low") {
   # Section 4.7.2: DFT -> complex log -> IDFT -> lifter -> DFT -> exp ->
   # IDFT.  Low quefrency estimates the slowly varying component (the
@@ -766,6 +812,8 @@ HomDeconv <- function(y, cutoff, keep = "low") {
 #' \code{reconstruction}, \code{reconstruction_error}, \code{relative_error},
 #' \code{separation_premise}, \code{method}.
 #' @export
+#' @examples
+#' HomPred(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 1)
 HomPred <- function(y, cutoff) {
   # Section 4.7.3.  The two lifters must PARTITION the quefrency axis
   # (|q| <= k and |q| > k); sharing the cutoff keeps q = 0 and q = k in
@@ -816,6 +864,12 @@ HomPred <- function(y, cutoff) {
 #' \code{pitch_period}, \code{pitch_hz}, \code{peak_quefrency}, \code{fs}, \code{n},
 #' \code{method}.
 #' @export
+#' @examples
+#' \donttest{
+#' set.seed(1)
+#' y <- sin(2 * pi * 120 * (0:1599) / 8000) + rnorm(1600) * 0.01
+#' VocalTract(y, fs = 8000)
+#' }
 VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
                        pitch_range = c(0.002, 0.020)) {
   # Section 4.7.3: the vocal tract contributes only below the pitch
@@ -871,6 +925,9 @@ VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
 #' @return A list with \code{y}, \code{cepstrum}, \code{n}, \code{magnitude_error},
 #' \code{magnitude_preserved}, \code{energy_front_loaded}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MinPhase(V)
 MinPhase <- function(x) {
   # Section 4.7.2, after eq (4.73): a minimum-phase signal has a CAUSAL
   # complex cepstrum.  Folding the anticausal half onto the causal half
@@ -926,6 +983,8 @@ MinPhase <- function(x) {
 #' \code{edges}, \code{n_filters}, \code{n_coeffs}, \code{fs}, \code{empty_filters},
 #' \code{c0_is_energy}, \code{method}.
 #' @export
+#' @examples
+#' Mfcc(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 Mfcc <- function(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0,
                  fmax = NULL) {
   # Davis and Mermelstein (1980): power spectrum, triangular mel

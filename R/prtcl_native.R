@@ -20,6 +20,9 @@
 #' @param weights Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prtcl_effective_sample_size(V)
 morie_prtcl_effective_sample_size <- function(weights) {
   s1 <- sum(weights)
   s2 <- sum(weights^2)
@@ -38,6 +41,9 @@ morie_prtcl_effective_sample_size <- function(weights) {
 #' @param e Optional; may be \code{NULL}. Passed to \code{.ghc_unif}.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prtcl_systematic_resample(V)
 morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
   J <- length(weights)
   tot <- sum(weights)
@@ -179,6 +185,9 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
 #' @param p0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{means}, \code{loglik}.
 #' @export
+#' @examples
+#' morie_prtcl_kalman_filter_1d(y = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   q = 0.5, c = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_prtcl_kalman_filter_1d <- function(y, a, q, c, r, m0 = 0, p0 = 1) {
   m <- as.numeric(m0)
   p <- as.numeric(p0)

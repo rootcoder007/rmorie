@@ -124,6 +124,9 @@
 #' @return A list with \code{N}, \code{degrees}, \code{max_degree}, \code{mean_degree},
 #' \code{max_share}, \code{sparse}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tlnetlg_network_summary(V)
 morie_tlnetlg_network_summary <- function(friends) {
   N <- length(friends)
   if (N < 2) stop("tlnetlg: at least 2 units are needed")
@@ -160,6 +163,9 @@ morie_tlnetlg_network_summary <- function(friends) {
 #' \code{"fraction"}.
 #' @return A list with \code{summary}, \code{kind}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tlnetlg_exposure_summary(V, V)
 morie_tlnetlg_exposure_summary <- function(A, friends, kind = "fraction") {
   a <- .tlnetlg_vec(A)
   N <- length(a)
@@ -250,6 +256,9 @@ morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {
 #' @return A list with \code{se}, \code{se_naive}, \code{n_dependent_pairs},
 #' \code{ratio}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tlnetlg_network_variance(V, V)
 morie_tlnetlg_network_variance <- function(ic, friends) {
   v <- .tlnetlg_vec(ic)
   N <- length(v)
@@ -343,6 +352,8 @@ morie_tlnetlg_longitudinal_network_gcomp <- function(Q_seq, friends, W, policy, 
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_tlnetlg_cheatsheet()
 morie_tlnetlg_cheatsheet <- function() {
   paste("tlnetlg: standard causal inference assumes n independent,",
         "causally unconnected units -- useless when you observe",

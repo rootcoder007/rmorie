@@ -19,8 +19,7 @@
 #' @export
 #' @examples
 #' set.seed(1)
-#' r <- Logrank(time = sort(runif(10)), event = rbinom(10, 1, 0.5), group = rbinom(10, 1,
-#' 0.5)); TRUE
+#' r <- Logrank(time = sort(runif(10)), event = rbinom(10, 1, 0.5), group = rbinom(10, 1, 0.5)); TRUE
 Logrank <- function(time, event, group) {
   time <- .t4_vec(time)
   event <- .t4_vec(event)

@@ -194,12 +194,14 @@ morie_dsp_wiener_filter <- function(x, noise_psd = NULL,
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;
 #'   Widrow & Stearns (1985).
 #' @examples
-#' set.seed(1)
-#' n <- 1000
-#' x <- rnorm(n)
-#' d <- 0.5 * c(0, x[-n]) + 0.01 * rnorm(n) # delayed, scaled target
-#' out <- morie_dsp_lms(x, d, order = 4L, mu = 0.05)
-#' mean(out$e[801:1000]^2) # post-convergence error is small
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 1000
+#'   x <- rnorm(n)
+#'   d <- 0.5 * c(0, x[-n]) + 0.01 * rnorm(n) # delayed, scaled target
+#'   out <- morie_dsp_lms(x, d, order = 4L, mu = 0.05)
+#'   mean(out$e[801:1000]^2) # post-convergence error is small
+#' }
 #' @export
 morie_dsp_lms <- function(x, d, order = 16L, mu = 0.01) {
   x <- as.numeric(x)
@@ -234,11 +236,13 @@ morie_dsp_lms <- function(x, d, order = 16L, mu = 0.01) {
 #' @return List with `y`, `e`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6.
 #' @examples
-#' set.seed(1L)
-#' x <- rnorm(4000)
-#' d <- x + 0.01 * rnorm(4000)
-#' out <- morie_dsp_nlms(x, d, order = 8L, mu = 1.0)
-#' mean(out$e[3001:4000]^2)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1L)
+#'   x <- rnorm(4000)
+#'   d <- x + 0.01 * rnorm(4000)
+#'   out <- morie_dsp_nlms(x, d, order = 8L, mu = 1.0)
+#'   mean(out$e[3001:4000]^2)
+#' }
 #' @export
 morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
   x <- as.numeric(x)
@@ -275,11 +279,13 @@ morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;
 #'   Haykin (2002).
 #' @examples
-#' set.seed(1L)
-#' x <- rnorm(1000)
-#' d <- x + 0.01 * rnorm(1000)
-#' out <- morie_dsp_rls(x, d, order = 8L, lam = 0.99)
-#' mean(out$e[200:400]^2)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1L)
+#'   x <- rnorm(1000)
+#'   d <- x + 0.01 * rnorm(1000)
+#'   out <- morie_dsp_rls(x, d, order = 8L, lam = 0.99)
+#'   mean(out$e[200:400]^2)
+#' }
 #' @export
 morie_dsp_rls <- function(x, d, order = 16L, lam = 0.99, delta = 100) {
   x <- as.numeric(x)

@@ -360,6 +360,12 @@
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' ratings <- cbind(sample(0:4, 60, TRUE), sample(0:5, 60, TRUE),
+#'                  runif(60, 0, 2000), sample(1:5, 60, TRUE))
+#' r <- morie_timeRS(ratings, n_users = 5, n_items = 6, epochs = 10)
+#' str(r, max.level = 1)
 morie_timeRS <- function(ratings, n_users, n_items, bin_days = 70,
                          n_bins = 30, epochs = 40, lr = 0.005, reg = 0.02,
                          beta = .timeRS_BETA) {
@@ -379,6 +385,8 @@ morie_timeRS <- function(ratings, n_users, n_items, bin_days = 70,
 #' @param beta Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_deviation}.
 #' @export
+#' @examples
+#' morie_timeRS_deviation(t = 5L, t_user = 5L)
 morie_timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
   .timeRS_deviation(t, t_user, beta)
 }
@@ -394,6 +402,9 @@ morie_timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
 #' @param n_bins Passed to \code{.timeRS_time_bin}. Defaults to \code{30}.
 #' @return The value of \code{.timeRS_time_bin}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_timeRS_time_bin(V)
 morie_timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
   .timeRS_time_bin(t, bin_days, n_bins)
 }
@@ -412,6 +423,8 @@ morie_timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
 #' @param beta Passed to \code{.timeRS_user_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_user_bias}.
 #' @export
+#' @examples
+#' morie_timeRS_user_bias(b_u = 0.2, alpha_u = 0.05, t = 300, t_user = 200)
 morie_timeRS_user_bias <- function(b_u, alpha_u, t, t_user, per_day = NULL,
                                    beta = .timeRS_BETA) {
   .timeRS_user_bias(b_u, alpha_u, t, t_user, per_day, beta)
@@ -430,6 +443,8 @@ morie_timeRS_user_bias <- function(b_u, alpha_u, t, t_user, per_day = NULL,
 #' @param n_bins Passed to \code{.timeRS_item_bias}. Defaults to \code{30}.
 #' @return The value of \code{.timeRS_item_bias}.
 #' @export
+#' @examples
+#' morie_timeRS_item_bias(b_i = c(1, 2, 3, 4, 5, 6, 7, 8), bins = 5L, t = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
   .timeRS_item_bias(b_i, bins, t, bin_days, n_bins)
 }
@@ -454,6 +469,15 @@ morie_timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
 #' @param beta Passed to \code{.timeRS_predict_time}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_predict_time}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' ratings <- cbind(sample(0:4, 60, TRUE), sample(0:5, 60, TRUE),
+#'                  runif(60, 0, 2000), sample(1:5, 60, TRUE))
+#' fit <- morie_timeRS_fit_time_bias(ratings, n_users = 5, n_items = 6,
+#'                                   epochs = 10)
+#' morie_timeRS_predict_time(fit$mu, fit$b_u[1], fit$alpha_u[1],
+#'                           fit$t_user[1], fit$b_i[2], fit$item_bins[[2]],
+#'                           t = 500)
 morie_timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins,
                                       t, p_u = NULL, q_i = NULL,
                                       per_day = NULL, bin_days = 70,
@@ -479,6 +503,13 @@ morie_timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins,
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' ratings <- cbind(sample(0:4, 60, TRUE), sample(0:5, 60, TRUE),
+#'                  runif(60, 0, 2000), sample(1:5, 60, TRUE))
+#' r <- morie_timeRS_fit_time_bias(ratings, n_users = 5, n_items = 6,
+#'                                 epochs = 10)
+#' str(r, max.level = 1)
 morie_timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
                                        n_bins = 30, epochs = 40, lr = 0.005,
                                        reg = 0.02, beta = .timeRS_BETA) {
@@ -504,6 +535,13 @@ morie_timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' ratings <- cbind(sample(0:4, 60, TRUE), sample(0:5, 60, TRUE),
+#'                  runif(60, 0, 2000), sample(1:5, 60, TRUE))
+#' r <- morie_timeRS_timesvdpp(ratings, n_users = 5, n_items = 6,
+#'                             epochs = 5)
+#' str(r, max.level = 1)
 morie_timeRS_timesvdpp <- function(ratings, n_users, n_items, bin_days = 70,
                                    n_bins = 30, epochs = 40, lr = 0.005,
                                    reg = 0.02, beta = .timeRS_BETA) {
@@ -528,6 +566,12 @@ morie_timeRS_timesvdpp <- function(ratings, n_users, n_items, bin_days = 70,
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' ratings <- cbind(sample(0:4, 60, TRUE), sample(0:5, 60, TRUE),
+#'                  runif(60, 0, 2000), sample(1:5, 60, TRUE))
+#' r <- morie_timeRS_timesvd(ratings, n_users = 5, n_items = 6, epochs = 5)
+#' str(r, max.level = 1)
 morie_timeRS_timesvd <- function(ratings, n_users, n_items, bin_days = 70,
                                  n_bins = 30, epochs = 40, lr = 0.005,
                                  reg = 0.02, beta = .timeRS_BETA) {
@@ -543,6 +587,8 @@ morie_timeRS_timesvd <- function(ratings, n_users, n_items, bin_days = 70,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_timeRS_cheatsheet()
 morie_timeRS_cheatsheet <- function() {
   paste0(
     "timeRS: preferences DRIFT -- the Netflix mean rating ",

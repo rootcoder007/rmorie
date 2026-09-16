@@ -80,6 +80,9 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #' elements indexed.
 #' @return The value of \code{pmin}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' project_box(V)
 project_box <- function(x, lower = NULL, upper = NULL) {
   v <- as.numeric(x)
   n <- length(v)
@@ -117,6 +120,9 @@ project_box <- function(x, lower = NULL, upper = NULL) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' project_nonneg(V)
 project_nonneg <- function(x) {
   pmax(0.0, as.numeric(x))
 }
@@ -133,6 +139,9 @@ project_nonneg <- function(x) {
 #' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' project_ball(V)
 project_ball <- function(x, radius = 1.0, centre = NULL) {
   r <- as.numeric(radius)
   if (r <= 0) {

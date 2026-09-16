@@ -27,6 +27,6 @@ which calibrates the detector on the data being scored.
 }
 \examples{
 zero <- function(A) matrix(0, nrow(as.matrix(A)), ncol(as.matrix(A)))
-morie_geron_anomaly_autoencoder(zero, matrix(c(0, 3, 1, 5), ncol = 1), 
+morie_geron_anomaly_autoencoder(zero, matrix(c(0, 3, 1, 5), ncol = 1),
     quantile = 0.6)
 }

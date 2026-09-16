@@ -27,6 +27,6 @@ min(1, p_t/p_d) acceptance with residual resampling; \code{proposed} is a
 0-BASED token id.
 }
 \examples{
-morie_kamath_speculative_decoding(c(0.6, 0.3, 0.1), c(0.3, 0.5, 
+morie_kamath_speculative_decoding(c(0.6, 0.3, 0.1), c(0.3, 0.5,
     0.2), proposed = 0)
 }

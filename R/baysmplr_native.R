@@ -83,6 +83,8 @@
 #' @param nuts_threshold Dimension at or above which NUTS is preferred.
 #' @return A list with the sampler name and the reason.
 #' @export
+#' @examples
+#' morie_baysmplr_choose(dim = 5L, has_grad = 5L)
 morie_baysmplr_choose <- function(dim, has_grad, has_conditionals = FALSE,
                                   nuts_threshold = 20L) {
   if (has_grad && dim >= nuts_threshold)
@@ -132,6 +134,27 @@ morie_baysmplr_choose <- function(dim, has_grad, has_conditionals = FALSE,
 #' @param target_accept Target acceptance rate.
 #' @return A list with the draws, the acceptance rate and the settings.
 #' @export
+#' @examples
+#' MU3 <- c(1, -0.5, 2)
+#' Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2),
+#'     3, 3, byrow = TRUE)
+#' lp3 <- function(x) {
+#'     dv <- x - MU3
+#'     terms <- numeric(9)
+#'     k <- 1L
+#'     for (i in 1:3) for (j in 1:3) {
+#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         k <- k + 1L
+#'     }
+#'     -0.5 * .w3_csum(terms)
+#' }
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' morie_baysmplr_mh(lp3, c(0, 0, 0), 60L, e)
 morie_baysmplr_mh <- function(log_p, x0, n_iter, e, scale = NULL,
                               adapt = FALSE, target_accept = 0.234) {
   d <- length(x0)
@@ -176,6 +199,17 @@ morie_baysmplr_mh <- function(log_p, x0, n_iter, e, scale = NULL,
 #' @param e A generator environment from .ghc_rng.
 #' @return A list with the draws, the acceptance rate and the settings.
 #' @export
+#' @examples
+#' MU3 <- c(1, -0.5, 2)
+#' Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2),
+#'     3, 3, byrow = TRUE)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' morie_baysmplr_gibbs(MU3, Q3, c(0, 0, 0), 60L, e)
 morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
   d <- length(x0)
   x <- as.numeric(x0)
@@ -239,6 +273,32 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #' @param steps Leapfrog steps per iteration.
 #' @return A list with the draws, the acceptance rate and the settings.
 #' @export
+#' @examples
+#' MU3 <- c(1, -0.5, 2)
+#' Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2),
+#'     3, 3, byrow = TRUE)
+#' lp3 <- function(x) {
+#'     dv <- x - MU3
+#'     terms <- numeric(9)
+#'     k <- 1L
+#'     for (i in 1:3) for (j in 1:3) {
+#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         k <- k + 1L
+#'     }
+#'     -0.5 * .w3_csum(terms)
+#' }
+#' gr3 <- function(x) {
+#'     dv <- x - MU3
+#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
+#'         j] * dv[j], numeric(1))), numeric(1))
+#' }
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' morie_baysmplr_hmc(lp3, gr3, c(0, 0, 0), 60L, e, 0.25, 8L)
 morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
                                steps = 10L) {
   d <- length(x0)
@@ -343,6 +403,32 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 #' @return A list with the draws, the mean acceptance statistic and the
 #'   settings.
 #' @export
+#' @examples
+#' MU3 <- c(1, -0.5, 2)
+#' Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2),
+#'     3, 3, byrow = TRUE)
+#' lp3 <- function(x) {
+#'     dv <- x - MU3
+#'     terms <- numeric(9)
+#'     k <- 1L
+#'     for (i in 1:3) for (j in 1:3) {
+#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         k <- k + 1L
+#'     }
+#'     -0.5 * .w3_csum(terms)
+#' }
+#' gr3 <- function(x) {
+#'     dv <- x - MU3
+#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
+#'         j] * dv[j], numeric(1))), numeric(1))
+#' }
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' e <- rmorie:::.ghc_rng(13)
+#' morie_baysmplr_nuts(lp3, gr3, c(0, 0, 0), 40L, e, 0.3, 6L)
 morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
                                 max_depth = 8L, dual_average = FALSE,
                                 target_accept = 0.8, warmup = NULL) {
@@ -431,6 +517,9 @@ morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
 #' @param max_lag Largest lag computed.
 #' @return One effective sample size per coordinate.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_baysmplr_ess(V)
 morie_baysmplr_ess <- function(chain, max_lag = 200L) {
   n <- length(chain)
   d <- length(chain[[1]])
@@ -481,6 +570,27 @@ morie_baysmplr_ess <- function(chain, max_lag = 200L) {
 #'   mean and standard deviation per coordinate, the acceptance rate,
 #'   the effective sample size and the retained draws.
 #' @export
+#' @examples
+#' MU3 <- c(1, -0.5, 2)
+#' Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2),
+#'     3, 3, byrow = TRUE)
+#' lp3 <- function(x) {
+#'     dv <- x - MU3
+#'     terms <- numeric(9)
+#'     k <- 1L
+#'     for (i in 1:3) for (j in 1:3) {
+#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         k <- k + 1L
+#'     }
+#'     -0.5 * .w3_csum(terms)
+#' }
+#' gr3 <- function(x) {
+#'     dv <- x - MU3
+#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
+#'         j] * dv[j], numeric(1))), numeric(1))
+#' }
+#' morie_baysmplr(lp3, gr3, c(0, 0, 0), n_iter = 80L, burn = 30L,
+#'     seed = 5, eps = 0.25, steps = 8L)
 morie_baysmplr <- function(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L,
                            burn = NULL, seed = 1, sampler = NULL,
                            cov_inv = NULL, mean = NULL, eps = 0.1,
@@ -545,6 +655,8 @@ morie_baysmplr <- function(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_baysmplr_cheatsheet()
 morie_baysmplr_cheatsheet <- function()
   paste0("baysmplr: MCMC sampler dispatch and the samplers themselves. ",
          paste(.BAYSMPLR_SAMPLERS, collapse = ", "))

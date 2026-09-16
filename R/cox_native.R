@@ -384,11 +384,13 @@ morie_cox_breslow_step <- function(time, event, X, beta = NULL,
 #'   (1990). Martingale-based residuals for survival models.
 #'   \emph{Biometrika}, 77(1), 147-160.
 #' @examples
-#' set.seed(1)
-#' X <- matrix(rnorm(60), ncol = 1)
-#' tt <- rexp(60, exp(X * 0.5))
-#' f <- morie_efron_tie_correction(tt, rep(1, 60), X)
-#' round(mean(morie_cox_martingale_residuals(f)$residuals), 8)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   X <- matrix(rnorm(60), ncol = 1)
+#'   tt <- rexp(60, exp(X * 0.5))
+#'   f <- morie_efron_tie_correction(tt, rep(1, 60), X)
+#'   round(mean(morie_cox_martingale_residuals(f)$residuals), 8)
+#' }
 #' @export
 morie_cox_martingale_residuals <- function(fit) {
   for (k in c("time", "event", "X", "beta")) {

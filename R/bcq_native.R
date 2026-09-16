@@ -31,6 +31,9 @@
 #' \code{behavior}, \code{value}, \code{n_eliminated}, \code{bellman_error}, \code{tau},
 #' \code{gamma}, \code{n_transitions}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' bcq(D)
 bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
                 gamma = 0.99, lr = 0.5, iters = 2000, loss = "huber",
                 huber_c = 1.0, behavior = NULL, tol = 1e-12) {

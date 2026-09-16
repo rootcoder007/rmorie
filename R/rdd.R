@@ -567,10 +567,12 @@ morie_rdd_mccrary <- function(x, cutoff = 0, n_bins = 50,
 #' @inheritParams morie_rdd_params
 #' @return A named \code{list} (see Details).
 #' @examples
-#' set.seed(1)
-#' x <- runif(300, -1, 1)
-#' res <- morie_rdd_cattaneo_density(x)
-#' res$name
+#' if (requireNamespace("rddensity", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- runif(300, -1, 1)
+#'   res <- morie_rdd_cattaneo_density(x)
+#'   res$name
+#' }
 #' @export
 morie_rdd_cattaneo_density <- function(x, cutoff = 0, p = 2,
                                        kernel = "triangular",

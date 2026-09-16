@@ -105,6 +105,8 @@
 #' @return A list with the total and the plasma, extracellular and
 #'   tissue terms.
 #' @export
+#' @examples
+#' morie_vdcal_oie_tozer(0.10, 0.05)
 morie_vdcal_oie_tozer <- function(fu, fut, par = NULL) {
   p <- .vdcal_phys(par)
   fu <- as.numeric(fu)
@@ -132,6 +134,8 @@ morie_vdcal_oie_tozer <- function(fu, fut, par = NULL) {
 #' @param par Overrides for the physiological constants, or NULL.
 #' @return The implied tissue free fraction.
 #' @export
+#' @examples
+#' morie_vdcal_fut(0.7, 0.10)
 morie_vdcal_fut <- function(vss, fu, par = NULL) {
   p <- .vdcal_phys(par)
   fu <- as.numeric(fu)
@@ -206,6 +210,8 @@ morie_vdcal_fut <- function(vss, fu, par = NULL) {
 #' @return A list with the volume in both units, the three terms, the
 #'   tissue free fraction used or solved for, and the route taken.
 #' @export
+#' @examples
+#' morie_vdcal("CCO", 0.02, fut = 0.005)
 morie_vdcal <- function(smiles, ppb, fut = NULL, vss = NULL,
                         direction = "vss", weight = 70, par = NULL,
                         elogd = NULL, fi = NULL, coefficients = NULL) {
@@ -245,6 +251,8 @@ morie_vdcal <- function(smiles, ppb, fut = NULL, vss = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_vdcal_cheatsheet()
 morie_vdcal_cheatsheet <- function()
   paste0("vdcal: Oie-Tozer steady-state volume of distribution. ",
          "directions ", paste(.VDCAL_DIRECTIONS, collapse = ", "),

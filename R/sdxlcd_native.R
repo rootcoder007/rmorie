@@ -45,6 +45,9 @@
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_sdxlcd_fourier_embedding(V)
 morie_sdxlcd_fourier_embedding <- function(value, dim = 8, scale = 0.001) {
   v <- as.numeric(value)
   n <- as.integer(dim)
@@ -71,6 +74,8 @@ morie_sdxlcd_fourier_embedding <- function(value, dim = 8, scale = 0.001) {
 #' @param dim Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.
 #' @return A list with \code{c_size}, \code{embedding}, \code{note}.
 #' @export
+#' @examples
+#' morie_sdxlcd_size_conditioning(h_original = 5L, w_original = 5L)
 morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
   h <- as.numeric(h_original)
   w <- as.numeric(w_original)
@@ -94,6 +99,8 @@ morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
 #' @param dim Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.
 #' @return A list with \code{c_crop}, \code{embedding}, \code{object_centred}, \code{note}.
 #' @export
+#' @examples
+#' morie_sdxlcd_crop_conditioning()
 morie_sdxlcd_crop_conditioning <- function(c_top = 0, c_left = 0, dim = 8) {
   top <- as.numeric(c_top)
   left <- as.numeric(c_left)
@@ -146,6 +153,9 @@ morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
 #' @return A list with \code{discarded}, \code{total}, \code{fraction},
 #' \code{kept_with_conditioning}, \code{minimum}, \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_sdxlcd_discarded_fraction(M)
 morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
   if (is.matrix(sizes)) {
     S <- lapply(seq_len(nrow(sizes)), function(i) c(as.numeric(sizes[i, 1]), as.numeric(sizes[i, 2])))
@@ -186,6 +196,9 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
 #' @param multiple Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
 #' @return A list with \code{buckets}, \code{max_pixel_error}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_sdxlcd_aspect_ratio_buckets(V)
 morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, multiple = 64) {
   out <- list()
   for (r in ratios) {
@@ -225,6 +238,8 @@ morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, mult
 #' @return A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size},
 #' \code{c_crop}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' morie_sdxlcd_condition_vector(h_original = 5L, w_original = 5L)
 morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_left = 0,
                                           timestep_embedding = NULL, dim = 8) {
   s <- morie_sdxlcd_size_conditioning(h_original, w_original, dim)
@@ -254,6 +269,8 @@ morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_l
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_sdxlcd_cheatsheet()
 morie_sdxlcd_cheatsheet <- function() {
   paste0(
     "sdxlcd: two improvements that add NO supervision -- they con",

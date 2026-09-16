@@ -17,8 +17,7 @@
 #' @return The value of \code{X}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .robpca_matrix(X = X)
 #' res
 .robpca_matrix <- function(X, name = "X") {
@@ -107,6 +106,9 @@
 #' @param consistent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' univariate_mcd(V)
 univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
   v <- sort(as.numeric(values))
   n <- length(v)
@@ -195,6 +197,9 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
 #' @param seed Passed to \code{.robpca_directions}. Defaults to \code{17L}.
 #' @return A list with \code{outl}, \code{exact_fit_direction}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' outlyingness(M)
 outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
   rows <- .robpca_matrix(X)
   n <- nrow(rows)
@@ -505,6 +510,9 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' \code{orthogonal_distance}, \code{sd_cutoff}, \code{od_cutoff}, \code{classification},
 #' \code{n_outliers}, \code{n}, \code{p}, \code{reweighted}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_robpca(D)
 morie_robpca <- function(X, k = NULL, alpha = 0.75, kmax = 10L,
                          n_dirs = 250L, n_start = 250L,
                          seed = 17L, reweight = TRUE) {

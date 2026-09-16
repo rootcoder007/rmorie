@@ -73,6 +73,8 @@
 #' @param lags Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' lag_summary(series = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L)
 lag_summary <- function(series, t, lags = 2) {
   v <- as.numeric(series)
   L <- as.integer(lags)
@@ -108,6 +110,10 @@ lag_summary <- function(series, t, lags = 2) {
 #' @param prob Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{intervened}, \code{nodes}, \code{n_intervened}, \code{kind}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' A <- rnorm(10)
+#' stochastic_intervention(A, nodes = c(0, 1, 2), shift = 0.5)
 stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
   a <- as.numeric(A)
   idx <- as.integer(nodes)
@@ -146,6 +152,9 @@ stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
 #' @param D Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{variance}, \code{se}, \code{T}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' martingale_variance(V)
 martingale_variance <- function(D) {
   v <- as.numeric(D)
   T_len <- length(v)
@@ -171,6 +180,9 @@ martingale_variance <- function(D) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.
 #' @return A list with \code{correlation}, \code{is_martingale}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' martingale_check(V, V)
 martingale_check <- function(D, past, tol = 0.2) {
   d <- as.numeric(D)
   p <- as.numeric(past)

@@ -73,6 +73,8 @@
 #' @param Fs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' sdpwts_lmi(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
 sdpwts_lmi <- function(x, F0, Fs) {
   v <- as.numeric(x)
   A <- as.matrix(F0)
@@ -104,6 +106,8 @@ sdpwts_lmi <- function(x, F0, Fs) {
 #' @return A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd},
 #' \code{strictly_feasible}.
 #' @export
+#' @examples
+#' sdpwts_is_psd(M = 5L)
 sdpwts_is_psd <- function(M, tol = -1e-10) {
   A <- as.matrix(M)
   ev <- eigen(A, symmetric = TRUE, only.values = TRUE)$values
@@ -126,6 +130,8 @@ sdpwts_is_psd <- function(M, tol = -1e-10) {
 #' @param Fs Passed to \code{sdpwts_lmi}.
 #' @return A list with \code{value}, \code{feasible}, \code{min_eigenvalue}, \code{eigenvalues}.
 #' @export
+#' @examples
+#' sdpwts_barrier(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
 sdpwts_barrier <- function(x, F0, Fs) {
   M <- sdpwts_lmi(x, F0, Fs)
   ev <- eigen(M, symmetric = TRUE, only.values = TRUE)$values
@@ -153,6 +159,8 @@ sdpwts_barrier <- function(x, F0, Fs) {
 #' @param m Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{gap}, \code{t}, \code{m}, \code{note}.
 #' @export
+#' @examples
+#' sdpwts_central_path_gap(t = 5L, m = 5L)
 sdpwts_central_path_gap <- function(t, m) {
   tt <- as.numeric(t)
   mm <- as.integer(m)
@@ -263,6 +271,9 @@ sdpwts_central_path_gap <- function(t, m) {
 #' \code{outer_iterations}, \code{path}, \code{m}, \code{min_eigenvalue}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' sdpwts_solve_sdp(c = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   x0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
                              tol = 1e-8, max_outer = 60) {
   cc <- as.numeric(c)
@@ -316,6 +327,10 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 #' @return A list with \code{estimate}, \code{t}, \code{lambda_min}, \code{error},
 #' \code{outer_iterations}, \code{gap}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- sdpwts_min_eigenvalue_sdp(A = A)
+#' res
 sdpwts_min_eigenvalue_sdp <- function(A, t0 = 1.0, mu = 10.0,
                                       tol = 1e-9) {
   M <- as.matrix(A)
@@ -348,6 +363,8 @@ morie_sdpwts <- sdpwts_solve_sdp
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' sdpwts_cheatsheet()
 sdpwts_cheatsheet <- function() {
   paste0("sdpwts: minimise c'x subject to a LINEAR MATRIX ",
          "INEQUALITY F0 + sum x_i F_i >= 0. The feasible set is the ",

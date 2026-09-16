@@ -30,6 +30,6 @@ List with \code{estimate}, \code{log_prob}, \code{prompt}, \code{K}.
 P(y | [ex_1..ex_K, x]) from a caller-supplied LM.
 }
 \examples{
-morie_kamath_in_context_learning_prob(c("e1", "e2"), "q", function(p, 
+morie_kamath_in_context_learning_prob(c("e1", "e2"), "q", function(p,
     a) 0.25)
 }

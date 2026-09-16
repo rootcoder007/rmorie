@@ -97,6 +97,8 @@
 #' @param min_scale Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @return A list with \code{sigma}, \code{rho}.
 #' @export
+#' @examples
+#' morie_scumap_smooth_knn_dist(distances = c(1, 2, 3, 4, 5, 6, 7, 8), n_neighbors = 5L)
 morie_scumap_smooth_knn_dist <- function(distances, n_neighbors,
                                          rho = NULL, tol = 1e-5, max_iter = 64,
                                          min_scale = 1e-3) {
@@ -154,6 +156,10 @@ morie_scumap_smooth_knn_dist <- function(distances, n_neighbors,
 #' @param symmetrize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{A}, \code{B}, \code{rho}, \code{sigma}, \code{neighbours}, \code{n}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(60), 30, 2)
+#' morie_scumap_fuzzy_simplicial_set(X, n_neighbors = 5)
 morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors = 15,
                                               symmetrize = TRUE) {
   # Algorithms 2 and 3 plus the t-conorm: the weighted UMAP graph.
@@ -209,6 +215,9 @@ morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors = 15,
 #' \code{"normalised"}.
 #' @return The value of \code{Y}, as built in the body.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_scumap_spectral_layout(M)
 morie_scumap_spectral_layout <- function(B, n_components = 2,
                                          laplacian = "normalised") {
   # Algorithm 4: initialise from the graph Laplacian's eigenvectors.
@@ -266,6 +275,8 @@ morie_scumap_spectral_layout <- function(B, n_components = 2,
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @return A list with \code{a}, \code{b}.
 #' @export
+#' @examples
+#' morie_scumap_fit_ab()
 morie_scumap_fit_ab <- function(min_dist = 0.1, spread = 1.0, n_grid = 300,
                                 iters = 200) {
   # Fit a, b so that (1 + a d^(2b))^-1 matches the target curve
@@ -529,6 +540,8 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors = 15, min_dist = 0.1,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_scumap_cheatsheet()
 morie_scumap_cheatsheet <- function() {
   paste0(
     "scumap: UMAP (McInnes, Healy & Melville 2018). Membership ",

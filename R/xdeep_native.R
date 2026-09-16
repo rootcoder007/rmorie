@@ -78,8 +78,7 @@
 #' @return The value of \code{m}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .xdeep_to_mat(M = X)
 #' res
 .xdeep_to_mat <- function(M) {
@@ -98,6 +97,9 @@
 #' @param b Passed to \code{.xdeep_to_vec}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' xdeep_hadamard(V, V)
 xdeep_hadamard <- function(a, b) {
   x <- .xdeep_to_vec(a)
   y <- .xdeep_to_vec(b)
@@ -119,6 +121,8 @@ xdeep_hadamard <- function(a, b) {
 #' @param W A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' xdeep_cin_layer(X_prev = 5L, X0 = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
 xdeep_cin_layer <- function(X_prev, X0, W) {
   P <- .xdeep_to_mat(X_prev)
   Z <- .xdeep_to_mat(X0)
@@ -156,6 +160,8 @@ xdeep_cin_layer <- function(X_prev, X0, W) {
 #' @return A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees},
 #' \code{n_layers}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' xdeep_cin(X0 = 5L, Ws = c(1, 2, 3, 4, 5, 6, 7, 8))
 xdeep_cin <- function(X0, Ws) {
   Z <- .xdeep_to_mat(X0)
   cur <- Z
@@ -189,6 +195,8 @@ xdeep_cin <- function(X0, Ws) {
 #' @param layer_index Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{layer}, \code{degree}, \code{note}.
 #' @export
+#' @examples
+#' xdeep_interaction_degree(layer_index = 5L)
 xdeep_interaction_degree <- function(layer_index) {
   i <- as.integer(layer_index)
   if (i < 0L) {
@@ -257,6 +265,8 @@ xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' xdeep_cheatsheet()
 xdeep_cheatsheet <- function() {
   paste("xdeep: a DNN represents interactions IMPLICITLY and",
         "BIT-WISE -- mixing individual embedding coordinates",

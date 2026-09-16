@@ -228,6 +228,9 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' trclrn_fit_tree(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X = c(1, 2, 3, 4, 5, 6, 7, 8))
 trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
                             outcome_model = NULL, max_depth = 3,
                             min_leaf = 10, n_thresholds = 20,
@@ -420,6 +423,8 @@ trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' trclrn_cheatsheet()
 trclrn_cheatsheet <- function() {
   return(paste0(
     "trclrn: tree-based ITR. Value V(pi) = mean of Y * ",

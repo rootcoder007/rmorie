@@ -25,6 +25,9 @@
 #' @param eps Numerical guard.
 #' @return The normalised vector.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mistr_rms_norm(V)
 morie_mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
   d <- length(x)
   if (d == 0L) stop("mistr: empty vector")
@@ -46,6 +49,12 @@ morie_mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
 #' @param W1,W2,W3 Projection matrices.
 #' @return The gated projection.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(4)
+#' morie_mistr_swiglu(x, W1 = matrix(rnorm(32, 0, 0.3), 4, 8),
+#'                    W2 = matrix(rnorm(32, 0, 0.3), 8, 4),
+#'                    W3 = matrix(rnorm(32, 0, 0.3), 4, 8))
 morie_mistr_swiglu <- function(x, W1, W2, W3) {
   W1 <- as.matrix(W1)
   W2 <- as.matrix(W2)
@@ -68,6 +77,8 @@ morie_mistr_swiglu <- function(x, W1, W2, W3) {
 #' @param base Frequency base.
 #' @return Length d/2 vector of angles.
 #' @export
+#' @examples
+#' morie_mistr_rope_angles(d = 8)
 morie_mistr_rope_angles <- function(d, base = 10000) {
   if (d %% 2 != 0L) stop(paste0("mistr: RoPE needs an even dimension, ",
                                 "got ", d))
@@ -84,6 +95,9 @@ morie_mistr_rope_angles <- function(d, base = 10000) {
 #' @param base Frequency base.
 #' @return The rotated vector.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mistr_apply_rope(V, V)
 morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
   x <- as.numeric(x)
   d <- length(x)
@@ -111,6 +125,8 @@ morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
 #' @param causal Apply causal mask.
 #' @return An L x L logical matrix.
 #' @export
+#' @examples
+#' morie_mistr_sliding_window_mask(L = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
 morie_mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
   if (window < 1L)
     stop(paste0("mistr: window must be at least 1, got ", window))
@@ -130,6 +146,9 @@ morie_mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
 #' @param n_layers Number of layers.
 #' @return The span (window * n_layers).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mistr_attention_span(V, V)
 morie_mistr_attention_span <- function(window, n_layers) {
   as.integer(window) * as.integer(n_layers)
 }
@@ -145,6 +164,15 @@ morie_mistr_attention_span <- function(window, n_layers) {
 #' @param base RoPE base.
 #' @return An L x d matrix of per-token output.
 #' @export
+#' @examples
+#' set.seed(2)
+#' L <- 4
+#' Q <- matrix(rnorm(L * 8), L, 8)
+#' K <- matrix(rnorm(L * 4), L, 4)
+#' V <- matrix(rnorm(L * 4), L, 4)
+#' r <- morie_mistr_grouped_query_attention(Q, K, V, n_heads = 2,
+#'                                          n_kv_heads = 1)
+#' str(r, max.level = 1)
 morie_mistr_grouped_query_attention <- function(Q, K, V, n_heads,
                                                 n_kv_heads, mask = NULL,
                                                 positions = NULL,
@@ -214,6 +242,18 @@ morie_mistr_grouped_query_attention <- function(Q, K, V, n_heads,
 #' @param base RoPE base.
 #' @return A list with output, attention_mask, and bookkeeping.
 #' @export
+#' @examples
+#' set.seed(3)
+#' L <- 4; d <- 8
+#' X <- matrix(rnorm(L * d, 0, 0.5), L, d)
+#' W <- function(o) matrix(rnorm(d * o, 0, 0.3), d, o)
+#' r <- morie_mistr_mistral_block(X, Wq = W(8), Wk = W(4), Wv = W(4),
+#'                                Wo = matrix(rnorm(8 * d, 0, 0.3), 8, d),
+#'                                W1 = W(16),
+#'                                W2 = matrix(rnorm(16 * d, 0, 0.3), 16, d),
+#'                                W3 = W(16),
+#'                                n_heads = 2, n_kv_heads = 1, window = 3)
+#' str(r, max.level = 1)
 morie_mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
                                        n_heads, n_kv_heads, window,
                                        norm1 = NULL, norm2 = NULL,

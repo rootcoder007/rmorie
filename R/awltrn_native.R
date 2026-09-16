@@ -123,6 +123,13 @@
 #' @references Zhao, Y., Zeng, D., Rush, A. J. & Kosorok, M. R.
 #'   (2012), JASA 107(499), 1106-1118.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 40
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- sample(c(-1, 1), n, replace = TRUE)
+#' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+#' owl_weights(R, A, H)
 owl_weights <- function(R, A, H, propensity = NULL, shift = NULL) {
   chk <- .awltrn_check(R, A, H, propensity)
   r <- chk$r
@@ -171,6 +178,13 @@ owl_weights <- function(R, A, H, propensity = NULL, shift = NULL) {
 #' @references Liu, Y., Wang, Y., Kosorok, M. R., Zhao, Y. & Zeng,
 #'   D. (2018), Statistics in Medicine, doi:10.1002/sim.7844.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 40
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- sample(c(-1, 1), n, replace = TRUE)
+#' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+#' aol_weights(R, A, H)
 aol_weights <- function(R, A, H, propensity = NULL, prognostic = NULL,
                         ridge = 1e-8) {
   chk <- .awltrn_check(R, A, H, propensity)
@@ -217,6 +231,8 @@ aol_weights <- function(R, A, H, propensity = NULL, prognostic = NULL,
 #'   to -1/+1) and \code{coef} (intercept followed by feature
 #'   coefficients).
 #' @export
+#' @examples
+#' weighted_rule(H = 0.5, labels = 5L, weights = 5L)
 weighted_rule <- function(H, labels, weights, ridge = 1e-6) {
   Hm <- .awltrn_to_Hm(H, length(labels))
   n <- nrow(Hm)
@@ -246,6 +262,13 @@ weighted_rule <- function(H, labels, weights, ridge = 1e-6) {
 #' @param propensity Randomisation probabilities.
 #' @return Numeric scalar, the estimated value of the rule.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- sample(c(-1, 1), n, replace = TRUE)
+#' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+#' regimen_value(R, A, H, rule = function(h) if (h[1] > 0) 1 else -1)
 regimen_value <- function(R, A, H, rule, propensity = NULL) {
   chk <- .awltrn_check(R, A, H, propensity)
   r <- chk$r
@@ -286,6 +309,14 @@ regimen_value <- function(R, A, H, rule, propensity = NULL) {
 #' @references Liu, Y., Wang, Y., Kosorok, M. R., Zhao, Y. & Zeng,
 #'   D. (2018), Statistics in Medicine, doi:10.1002/sim.7844.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- sample(c(-1, 1), n, replace = TRUE)
+#' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+#' r <- fit_aol(R, A, H)
+#' str(r, max.level = 1)
 fit_aol <- function(R, A, H, propensity = NULL, method = "aol",
                     prognostic = NULL, shift = NULL, ridge = 1e-6) {
   if (!(method %in% c("aol", "owl")))
@@ -323,6 +354,17 @@ fit_aol <- function(R, A, H, propensity = NULL, method = "aol",
 #'   \code{n_stages}, \code{n_used_per_stage}, \code{n},
 #'   \code{method} and \code{note}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 40
+#' H1 <- matrix(rnorm(n * 2), n, 2)
+#' A1 <- sample(c(-1, 1), n, replace = TRUE)
+#' R1 <- 1 + A1 * H1[, 1] + rnorm(n, 0, 0.3)
+#' H2 <- matrix(rnorm(n * 2), n, 2)
+#' A2 <- sample(c(-1, 1), n, replace = TRUE)
+#' R2 <- 1 + A2 * H2[, 1] + rnorm(n, 0, 0.3)
+#' r <- fit_stages(list(list(R1, A1, H1), list(R2, A2, H2)))
+#' str(r, max.level = 1)
 fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
   if (length(stages) == 0L)
     stop("awltrn: no stages given")
@@ -411,6 +453,14 @@ fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
 #'   (2012); Zhao, Y.-Q., Zeng, D., Laber, E. B. & Kosorok, M. R.
 #'   (2015).
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 40
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- sample(c(-1, 1), n, replace = TRUE)
+#' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
+#' r <- morie_awltrn(R, A, H, method = "aol")
+#' str(r, max.level = 1)
 morie_awltrn <- function(R = NULL, A = NULL, H = NULL,
                           propensity = NULL, method = "aol",
                           prognostic = NULL, shift = NULL,

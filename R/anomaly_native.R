@@ -237,9 +237,11 @@ morie_hbos <- function(X, bins = 10, mode = c("static", "dynamic")) {
 #' @references Liu, F. T., Ting, K. M. and Zhou, Z.-H. (2008).
 #'   Isolation forest. \emph{ICDM}, 413-422.
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' X <- rbind(matrix(rnorm(200), ncol = 2), c(8, 8))
 #' which.max(morie_isolation_forest(X, n_trees = 50, seed = 1)$score)
+#' }
 #' @export
 morie_isolation_forest <- function(X, n_trees = 100, sample_size = 256,
                                    seed = 0) {

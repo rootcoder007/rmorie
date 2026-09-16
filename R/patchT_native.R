@@ -42,8 +42,7 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .patcht_mat(M = X)
 #' res
 .patcht_mat <- function(M) {
@@ -69,6 +68,8 @@
 #' @return A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{stride},
 #' \code{L}, \code{covers}.
 #' @export
+#' @examples
+#' patchify(x = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
 patchify <- function(x, patch_len, stride = NULL) {
   v <- .patcht_vec(x)
   L <- length(v)
@@ -109,6 +110,8 @@ patchify <- function(x, patch_len, stride = NULL) {
 #' @return A list with \code{tokens}, \code{D}, \code{n_patches}, \code{patch_len},
 #' \code{n_tokens_total}, \code{design}, \code{note}.
 #' @export
+#' @examples
+#' channel_independent_tokens(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
 channel_independent_tokens <- function(X, patch_len, stride = NULL) {
   Xm <- .patcht_mat(X)
   if (nrow(Xm) == 0L)
@@ -143,6 +146,8 @@ channel_independent_tokens <- function(X, patch_len, stride = NULL) {
 #' @return A list with \code{tokens}, \code{n_patches}, \code{n_tokens_total},
 #' \code{design}, \code{note}.
 #' @export
+#' @examples
+#' channel_mixed_tokens(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
 channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
   Xm <- .patcht_mat(X)
   if (nrow(Xm) == 0L)
@@ -167,6 +172,9 @@ channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
 #' @param x Passed to \code{.patcht_vec}.
 #' @return A list with \code{normalised}, \code{mean}, \code{sd}, \code{degenerate}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' instance_norm(V)
 instance_norm <- function(x) {
   v <- .patcht_vec(x)
   if (length(v) < 2L)
@@ -201,6 +209,8 @@ instance_norm <- function(x) {
 #' @return A list with \code{n_patches}, \code{pointwise}, \code{patched},
 #' \code{reduction}, \code{stride}, \code{patch_len}, \code{note}.
 #' @export
+#' @examples
+#' attention_cost(L = 5L, patch_len = 5L)
 attention_cost <- function(L, patch_len, stride = NULL, D = 1,
                             channel_independent = TRUE) {
   P <- as.integer(patch_len)
@@ -236,6 +246,8 @@ attention_cost <- function(L, patch_len, stride = NULL, D = 1,
 #' \code{n_tokens_total}, \code{norm_stats}, \code{normalised}, \code{cost},
 #' \code{method}.
 #' @export
+#' @examples
+#' patchtst_encode(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
 patchtst_encode <- function(X, patch_len, stride = NULL,
                             normalise = TRUE) {
   Xm <- .patcht_mat(X)

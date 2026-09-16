@@ -1020,8 +1020,7 @@ morie_geron_dropout_alt <- function(x, p, training = TRUE, seed = 0) {
 #' @return List with `output`, `direct_output`, `max_abs_error`, `n_blocks`, `peak_score_memory`.
 #' @export
 #' @examples
-#' morie_geron_flash_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4,
-#' 5, 6, 7, 8))
+#' morie_geron_flash_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_flash_attention <- function(Q, K, V, block_size = 2, causal = FALSE) {
   Qa <- .morie_gr_mat(Q, "Q")
   Ka <- .morie_gr_mat(K, "K")
@@ -1435,8 +1434,8 @@ morie_geron_detr <- function(image, n_queries = 100, n_layers = 6, d_model = 256
 #' @return List with `loss`, `teacher_probs`, `student_probs`, `teacher_entropy`, `teacher_next`.
 #' @export
 #' @examples
-#' morie_geron_dino(images = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7,
-#' 8), teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_dino(images = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_dino <- function(images, student, teacher, center = NULL, tau_s = 0.1, tau_t = 0.04,
                              momentum = 0.996, center_momentum = 0.9) {
   S <- .morie_gr_mat(if (is.function(student)) student(images) else student, "student")
@@ -1487,8 +1486,7 @@ morie_geron_dino <- function(images, student, teacher, center = NULL, tau_s = 0.
 #' @return List with `batches` (0-based indices), `order`, `n_batches`, `dropped`.
 #' @export
 #' @examples
-#' morie_geron_dataloader(dataset = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
-#' batch_size = 5L)
+#' morie_geron_dataloader(dataset = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), batch_size = 5L)
 morie_geron_dataloader <- function(dataset, batch_size, shuffle = FALSE, drop_last = FALSE,
                                    seed = 0, num_workers = 0) {
   bs <- as.integer(batch_size)
@@ -2013,9 +2011,9 @@ morie_geron_error_analysis <- function(y_true, y_pred, top_k = 5) {
 #' @return List with `theta`, `best_iter`, `best_val_rmse`, `stopped_iter`, `is_u_shaped`.
 #' @export
 #' @examples
-#' morie_geron_early_stopping_alt(X_train = c(1, 2, 3, 4, 5, 6, 7, 8), y_train = c(1, 2,
-#' 3, 4, 5, 6, 7, 8), X_val = c(1, 2, 3, 4, 5, 6, 7, 8), y_val = c(1, 2, 3, 4, 5, 6, 7,
-#' 8))
+#' morie_geron_early_stopping_alt(X_train = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y_train = c(1, 2, 3, 4, 5, 6, 7, 8), X_val = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y_val = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_early_stopping_alt <- function(X_train, y_train, X_val, y_val, n_iter = 100, eta = 0.01,
                                            patience = NULL, fit_intercept = TRUE) {
   Xt <- .morie_gr_mat(X_train, "X_train")
@@ -2098,7 +2096,7 @@ morie_geron_epsilon_greedy_alt <- function(Q, s, epsilon, seed = 0) {
 #' @export
 #' @examples
 #' morie_geron_elbo(x = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' log_sigma = c(1, 2, 3, 4, 5, 6, 7, 8))
+#'   log_sigma = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_elbo <- function(x, mu, log_sigma, x_recon = NULL, likelihood = "gaussian", sigma_x = 1.0) {
   X <- .morie_gr_mat(x, "x")
   M <- .morie_gr_mat(mu, "mu")

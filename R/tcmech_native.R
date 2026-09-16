@@ -77,6 +77,8 @@
 #' @param omega The truncation order, or NULL for untruncated zCDP.
 #' @return The epsilon achieved.
 #' @export
+#' @examples
+#' morie_tcmech_eps(rho = 0.5, delta = 0.5)
 morie_tcmech_eps <- function(rho, delta, omega = NULL) {
   rho <- as.numeric(rho)
   delta <- as.numeric(delta)
@@ -111,6 +113,9 @@ morie_tcmech_eps <- function(rho, delta, omega = NULL) {
 #' @param omega The truncation order, or NULL.
 #' @return The floor, zero when untruncated.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tcmech_floor(V)
 morie_tcmech_floor <- function(delta, omega = NULL) {
   if (is.null(omega)) return(0)
   w <- as.numeric(omega)
@@ -131,6 +136,8 @@ morie_tcmech_floor <- function(delta, omega = NULL) {
 #' @param iters Bisection steps.
 #' @return The affordable rho.
 #' @export
+#' @examples
+#' morie_tcmech_rho(epsilon = 5L, delta = 0.5)
 morie_tcmech_rho <- function(epsilon, delta, omega = NULL, iters = 200L) {
   epsilon <- as.numeric(epsilon)
   if (epsilon <= 0) stop("epsilon must be positive")
@@ -163,6 +170,8 @@ morie_tcmech_rho <- function(epsilon, delta, omega = NULL, iters = 200L) {
 #' @param rho The budget.
 #' @return The Gaussian noise scale.
 #' @export
+#' @examples
+#' morie_tcmech_sigma(sensitivity = 5L, rho = 0.5)
 morie_tcmech_sigma <- function(sensitivity, rho) {
   s <- as.numeric(sensitivity)
   r <- as.numeric(rho)
@@ -177,6 +186,8 @@ morie_tcmech_sigma <- function(sensitivity, rho) {
 #' @param sigma The noise scale.
 #' @return The implied rho.
 #' @export
+#' @examples
+#' morie_tcmech_rho_from_sigma(sensitivity = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
 morie_tcmech_rho_from_sigma <- function(sensitivity, sigma) {
   s <- as.numeric(sensitivity)
   g <- as.numeric(sigma)
@@ -189,6 +200,8 @@ morie_tcmech_rho_from_sigma <- function(sensitivity, sigma) {
 #' @param epsilon The pure differential privacy parameter.
 #' @return The implied rho.
 #' @export
+#' @examples
+#' morie_tcmech_rho_from_pure(epsilon = 5L)
 morie_tcmech_rho_from_pure <- function(epsilon) {
   e <- as.numeric(epsilon)
   if (e < 0) stop("epsilon cannot be negative")
@@ -207,6 +220,9 @@ morie_tcmech_rho_from_pure <- function(epsilon) {
 #' @param omegas The per-release truncations, or NULL.
 #' @return A list with the total rho and the composed truncation.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tcmech_compose(V)
 morie_tcmech_compose <- function(rhos, omegas = NULL) {
   total <- if (length(rhos)) .w3_csum(as.numeric(rhos)) else 0
   if (is.null(omegas)) return(list(rho = total, omega = NULL))
@@ -229,6 +245,10 @@ morie_tcmech_compose <- function(rhos, omegas = NULL) {
 #'   in rho, how many records the clipping bound, and the guarantee
 #'   actually achieved.
 #' @export
+#' @examples
+#' Y <- vapply(0:29, function(i) round(((i * 13)%%41) - 20 + ((i *
+#'     7)%%3) * 0.5, 4), numeric(1))
+#' morie_tcmech(Y, 12.5, 10, 1, 1e-05, NULL, 3)
 morie_tcmech <- function(y, f_value, C, epsilon, delta, omega = NULL,
                          seed = 0, n_release = 1L) {
   vals <- as.numeric(y)
@@ -270,6 +290,8 @@ morie_tcmech <- function(y, f_value, C, epsilon, delta, omega = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_tcmech_cheatsheet()
 morie_tcmech_cheatsheet <- function()
   paste0("tcmech: truncated CDP Gaussian mechanism. clip to bound the ",
          "sensitivity, rho from the target (eps, delta), sigma from ",

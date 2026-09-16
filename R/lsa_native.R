@@ -40,6 +40,9 @@
 #' @param how One of \code{"raw"}, \code{"tfidf"}. Defaults to \code{"log_entropy"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' term_weighting(M)
 term_weighting <- function(X, how = "log_entropy") {
   if (!(how %in% .WEIGHTS))
     stop(sprintf("lsa: weighting must be one of %s, got %s",
@@ -86,6 +89,9 @@ term_weighting <- function(X, how = "log_entropy") {
 #' @return A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k},
 #' \code{full_rank}, \code{weighting}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' lsa_decompose(M)
 lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
   A <- term_weighting(X, how = how)
   sv <- .ghc_svd(A)
@@ -114,6 +120,11 @@ lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
 #' @param model A list; the body reads \code{$D}, \code{$S}, \code{$T} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' X <- matrix(c(2, 0, 1, 0, 3, 1, 1, 1, 0, 0, 2, 1), nrow = 3, byrow = TRUE)
+#' model <- lsa_decompose(X, k_dim = 2)
+#' approx <- reconstruct(model)
+#' dim(approx)
 reconstruct <- function(model) {
   T <- model$T
   S <- model$S
@@ -142,6 +153,11 @@ reconstruct <- function(model) {
 #' @param model A list; the body reads \code{$S}, \code{$T} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' X <- matrix(c(2, 0, 1, 0, 3, 1, 1, 1, 0, 0, 2, 1), nrow = 3, byrow = TRUE)
+#' model <- lsa_decompose(X, k_dim = 2)
+#' q_hat <- fold_in(c(1, 0, 2), model)
+#' length(q_hat)
 fold_in <- function(query, model) {
   q <- as.numeric(query)
   T <- model$T
@@ -170,6 +186,12 @@ fold_in <- function(query, model) {
 #' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @return A list with \code{ranking}, \code{scores}, \code{n_documents}.
 #' @export
+#' @examples
+#' X <- matrix(c(2, 0, 1, 0, 3, 1, 1, 1, 0, 0, 2, 1), nrow = 3, byrow = TRUE)
+#' model <- lsa_decompose(X, k_dim = 2)
+#' q_hat <- fold_in(c(1, 0, 2), model)
+#' r <- cosine_ranking(q_hat, model, top_k = 3)
+#' r$n_documents
 cosine_ranking <- function(q_hat, model, top_k = 5) {
   D <- model$D
   S <- model$S
@@ -238,6 +260,9 @@ lsa <- lsa_decompose
 #' @param top_k Passed to \code{cosine_ranking}. Defaults to \code{5L}.
 #' @return The value of \code{lsa_decompose}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_lsa(M)
 morie_lsa <- function(X, k_dim = NULL, how = "log_entropy", query = NULL,
                       top_k = 5L) {
   if (!is.null(query)) {

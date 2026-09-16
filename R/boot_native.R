@@ -20,9 +20,11 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
-#' res <- .boot_n(data = x)
-#' res
+#' if (requireNamespace("boot", quietly = TRUE)) {
+#'   x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#'   res <- .boot_n(data = x)
+#'   res
+#' }
 .boot_n <- function(data) if (is.null(dim(data))) length(data) else nrow(data)
 
 # boot:::ordinary.array -- single- or multi-stratum R x n index matrix.
@@ -75,9 +77,11 @@
 #' @references Davison, A. C., & Hinkley, D. V. (1997).
 #'   \emph{Bootstrap Methods and their Application}. Cambridge.
 #' @examples
-#' set.seed(1)
-#' b <- morie_boot(mtcars$mpg, function(d, i) mean(d[i]), R = 200)
-#' morie_boot_ci(b, type = "perc")
+#' if (requireNamespace("boot", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   b <- morie_boot(mtcars$mpg, function(d, i) mean(d[i]), R = 200)
+#'   morie_boot_ci(b, type = "perc")
+#' }
 #' @export
 morie_boot <- function(data, statistic, R, strata = NULL, ...) {
   n <- .boot_n(data)
@@ -268,9 +272,11 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' @references DiCiccio, T. J., & Efron, B. (1996). Bootstrap
 #'   confidence intervals. \emph{Statistical Science}, 11(3), 189-228.
 #' @examples
-#' set.seed(1)
-#' b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
-#' morie_boot_ci(b)
+#' if (requireNamespace("boot", quietly = TRUE)) {
+#'   set.seed(1)
+#'   b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+#'   morie_boot_ci(b)
+#' }
 #' @export
 morie_boot_ci <- function(boot_obj, conf = 0.95,
                           type = c("perc", "norm", "basic", "bca"),
@@ -340,9 +346,11 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #' @return A numeric value.
 #' @export
 #' @examples
-#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
-#' res <- .morie_make_ends(a = A, n = 3L)
-#' res
+#' if (requireNamespace("boot", quietly = TRUE)) {
+#'   A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#'   res <- .morie_make_ends(a = A, n = 3L)
+#'   res
+#' }
 .morie_make_ends <- function(a, n) {
   if (a[2L] == 0) {
     return(numeric())
@@ -368,12 +376,14 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #' @references Politis, D. N., & Romano, J. P. (1994). The stationary
 #'   bootstrap. \emph{JASA}, 89(428), 1303-1313.
 #' @examples
-#' set.seed(1)
-#' b <- morie_tsboot(stats::as.ts(rnorm(60)),
-#'   statistic = mean,
-#'   R = 100L, l = 5
-#' )
-#' str(b, max.level = 1)
+#' if (requireNamespace("simpleboot", quietly = TRUE)) {
+#'   set.seed(1)
+#'   b <- morie_tsboot(stats::as.ts(rnorm(60)),
+#'     statistic = mean,
+#'     R = 100L, l = 5
+#'   )
+#'   str(b, max.level = 1)
+#' }
 #' @export
 morie_tsboot <- function(tseries, statistic, R, l, sim = "fixed",
                          endcorr = TRUE, n.sim = NROW(tseries), ...) {

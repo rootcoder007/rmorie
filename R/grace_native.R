@@ -277,6 +277,11 @@
 #' @param rng Passed to \code{.grace_drop_edges}.
 #' @return The value of \code{.grace_drop_edges}.
 #' @export
+#' @examples
+#' rng <- rmorie:::.ghc_rng(1L)
+#' edges <- list(c(0, 1), c(1, 2), c(2, 3), c(3, 0))
+#' kept <- morie_drop_edges(edges, p = 0.3, rng)
+#' length(kept) <= length(edges)
 morie_drop_edges <- function(edges, p, rng) {
   .grace_drop_edges(edges, p, rng)
 }
@@ -292,6 +297,12 @@ morie_drop_edges <- function(edges, p, rng) {
 #' @param rng Passed to \code{.grace_mask_features}.
 #' @return The value of \code{.grace_mask_features}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' rng <- rmorie:::.ghc_rng(1L)
+#' X <- matrix(runif(12), nrow = 4, ncol = 3)
+#' m <- morie_mask_features(X, p = 0.3, rng)
+#' c(nrow(m$X), m$n_masked <= 3)
 morie_mask_features <- function(X, p, rng) {
   .grace_mask_features(X, p, rng)
 }
@@ -309,6 +320,13 @@ morie_mask_features <- function(X, p, rng) {
 #' @param rng Passed to \code{.grace_generate_view}.
 #' @return The value of \code{.grace_generate_view}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' rng <- rmorie:::.ghc_rng(2L)
+#' X <- matrix(runif(12), 4, 3)
+#' edges <- list(c(0, 1), c(1, 2), c(2, 3), c(3, 0))
+#' v <- morie_generate_view(X, edges, p_edge = 0.2, p_feature = 0.2, rng)
+#' names(v)
 morie_generate_view <- function(X, edges, p_edge, p_feature, rng) {
   .grace_generate_view(X, edges, p_edge, p_feature, rng)
 }
@@ -326,6 +344,8 @@ morie_generate_view <- function(X, edges, p_edge, p_feature, rng) {
 #' @param intra Passed to \code{.grace_pair_loss}. Defaults to \code{TRUE}.
 #' @return The value of \code{.grace_pair_loss}.
 #' @export
+#' @examples
+#' morie_pair_loss(U = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8), i = 5L)
 morie_pair_loss <- function(U, V, i, tau = 0.5, intra = TRUE) {
   U <- as.matrix(U)
   V <- as.matrix(V)
@@ -344,6 +364,9 @@ morie_pair_loss <- function(U, V, i, tau = 0.5, intra = TRUE) {
 #' @param intra Passed to \code{.grace_objective}. Defaults to \code{TRUE}.
 #' @return The value of \code{.grace_objective}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_grace(V, V)
 morie_grace <- function(U, V, tau = 0.5, intra = TRUE) {
   .grace_objective(U, V, tau, intra)
 }
@@ -360,6 +383,9 @@ morie_grace <- function(U, V, tau = 0.5, intra = TRUE) {
 #' @param intra Passed to \code{.grace_objective}. Defaults to \code{TRUE}.
 #' @return The value of \code{.grace_objective}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_graphcontrastive(V, V)
 morie_graphcontrastive <- function(U, V, tau = 0.5, intra = TRUE) {
   .grace_objective(U, V, tau, intra)
 }

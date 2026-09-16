@@ -80,6 +80,8 @@
 #'   \code{lambda}.
 #' @references Belloni, A. & Chernozhukov, V. (2013).
 #' @export
+#' @examples
+#' lasso_path(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 lasso_path <- function(X, y, lam, iters = 500, tol = 1e-9) {
   rows <- as.matrix(X)
   storage.mode(rows) <- "double"
@@ -118,6 +120,8 @@ lasso_path <- function(X, y, lam, iters = 500, tol = 1e-9) {
 #'   \code{note}.
 #' @references Belloni, A. & Chernozhukov, V. (2013).
 #' @export
+#' @examples
+#' post_lasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 post_lasso <- function(X, y, lam) {
   rows <- as.matrix(X)
   storage.mode(rows) <- "double"
@@ -158,6 +162,8 @@ post_lasso <- function(X, y, lam) {
 #' @return A list with \code{epsilon}, \code{Q_star}, \code{score},
 #'   \code{caveat}.
 #' @export
+#' @examples
+#' shrunk_targeting_unsafe(Q = 0.5, H = 0.5, Y = 5L)
 shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1) {
   q <- as.numeric(Q)
   h <- as.numeric(H)

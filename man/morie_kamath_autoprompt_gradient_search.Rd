@@ -35,7 +35,7 @@ Coordinate-wise search over the vocabulary for every NULL slot. Without
 score is MAXIMISED, exactly as in Python.
 }
 \examples{
-morie_kamath_autoprompt_gradient_search(list(NULL, "x", NULL), 
-    "D", function(t, d) sum(nchar(unlist(t))), vocab = list("aa", 
+morie_kamath_autoprompt_gradient_search(list(NULL, "x", NULL),
+    "D", function(t, d) sum(nchar(unlist(t))), vocab = list("aa",
         "b"))
 }

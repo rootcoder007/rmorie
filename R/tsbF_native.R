@@ -215,6 +215,9 @@
 #' @param burn_in Passed to \code{.tsbF_burn}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tsbF_tsb_forecast(V)
 morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
                                     init = "global", z0 = NULL, p0 = NULL,
                                     burn_in = 0) {
@@ -288,6 +291,9 @@ morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
 #' @param burn_in Passed to \code{.tsbF_burn}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tsbF_croston_forecast(V)
 morie_tsbF_croston_forecast <- function(y, alpha = 0.1, horizon = 1,
                                         init = "global", z0 = NULL, x0 = NULL,
                                         burn_in = 0) {
@@ -350,6 +356,9 @@ morie_tsbF_croston_forecast <- function(y, alpha = 0.1, horizon = 1,
 #' @param burn_in Passed to \code{morie_tsbF_croston_forecast}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tsbF_sba_forecast(V)
 morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
                                     init = "global", z0 = NULL, x0 = NULL,
                                     burn_in = 0) {
@@ -383,6 +392,9 @@ morie_tsbF_sba_forecast <- function(y, alpha = 0.1, horizon = 1,
 #' @param cv2_cut Passed to \code{<=}. Defaults to \code{0.49}.
 #' @return A list with \code{class}, \code{adi}, \code{cv2}, \code{n_positive}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tsbF_demand_classification(V)
 morie_tsbF_demand_classification <- function(y, adi_cut = 1.32, cv2_cut = 0.49) {
   yv <- as.numeric(y)
   pos <- yv[yv > 0]
@@ -421,6 +433,9 @@ morie_tsbF_demand_classification <- function(y, adi_cut = 1.32, cv2_cut = 0.49) 
 #' @param burn_in Passed to \code{morie_tsbF_tsb_forecast}. Defaults to \code{0}.
 #' @return The value of \code{morie_tsbF_sba_forecast}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tsbF_intermittent_forecast(V)
 morie_tsbF_intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
                                              beta = 0.05, horizon = 1,
                                              init = "global", z0 = NULL,
@@ -453,6 +468,8 @@ morie_tsbF_intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_tsbF_cheatsheet()
 morie_tsbF_cheatsheet <- function() {
   return(paste0(
     "tsbF: TSB updates the PROBABILITY every period (p' += ",
@@ -488,6 +505,9 @@ morie_tsbF_cheatsheet <- function() {
 #' @param burn_in Passed to \code{morie_tsbF_intermittent_forecast}. Defaults to \code{0}.
 #' @return The value of \code{morie_tsbF_intermittent_forecast}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tsbF(V)
 morie_tsbF <- function(y, method = "tsb", alpha = 0.1, beta = 0.05,
                        horizon = 1, init = "global", z0 = NULL,
                        x0 = NULL, p0 = NULL, burn_in = 0) {

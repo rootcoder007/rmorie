@@ -655,12 +655,14 @@ correlation_table <- function(data, method = "pearson", show_stars = TRUE,
 #' @param title Title.
 #' @return A character string.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(x = rnorm(30))
-#' df$y <- df$x + rnorm(30)
-#' m1 <- lm(y ~ 1, data = df)
-#' m2 <- lm(y ~ x, data = df)
-#' model_comparison_table(list(null = m1, fit = m2))
+#' if (requireNamespace("car", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(x = rnorm(30))
+#'   df$y <- df$x + rnorm(30)
+#'   m1 <- lm(y ~ 1, data = df)
+#'   m2 <- lm(y ~ x, data = df)
+#'   model_comparison_table(list(null = m1, fit = m2))
+#' }
 #' @export
 model_comparison_table <- function(models, nested = FALSE, digits = 3L,
                                      output_format = "dataframe",
@@ -736,12 +738,14 @@ model_comparison_table <- function(models, nested = FALSE, digits = 3L,
 #' @param output_format Output target.
 #' @param title Title.
 #' @return A character string.
-#' @examplesIf requireNamespace("car", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("car", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' set.seed(1)
 #' df <- data.frame(x = rnorm(30))
 #' df$y <- df$x + rnorm(30)
 #' m <- lm(y ~ x, data = df)
 #' anova_table(m, typ = 1L)
+#' \dontshow{\}) # examplesIf}
 #' @export
 anova_table <- function(model, typ = 2L, digits = 3L,
                           output_format = "dataframe",

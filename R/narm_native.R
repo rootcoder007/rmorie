@@ -12,6 +12,9 @@
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' narm_softmax(V)
 narm_softmax <- function(z) {
   v <- as.numeric(z)
   m <- max(v)
@@ -32,6 +35,9 @@ narm_softmax <- function(z) {
 #' @param v Numeric; combined arithmetically in the body.
 #' @return The value of \code{narm_softmax}.
 #' @export
+#' @examples
+#' narm_attention_weights(h_t = 5L, H = 0.5, A1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   A2 = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 narm_attention_weights <- function(h_t, H, A1, A2, v) {
   ht <- as.numeric(h_t)
   Hm <- as.matrix(H)
@@ -58,6 +64,9 @@ narm_attention_weights <- function(h_t, H, A1, A2, v) {
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' narm_local_encoder(V, V)
 narm_local_encoder <- function(H, alpha) {
   Hm <- as.matrix(H)
   a <- as.numeric(alpha)
@@ -77,6 +86,9 @@ narm_local_encoder <- function(H, alpha) {
 #' @param c_local Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' narm_session_repr(V, V)
 narm_session_repr <- function(h_t_global, c_local) {
   c(as.numeric(h_t_global), as.numeric(c_local))
 }
@@ -93,6 +105,8 @@ narm_session_repr <- function(h_t_global, c_local) {
 #' @return A list with \code{estimate}, \code{scores}, \code{probabilities},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' narm_bilinear_scores(embeddings = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L, c_t = 5L)
 narm_bilinear_scores <- function(embeddings, B, c_t) {
   E <- as.matrix(embeddings)
   B <- as.matrix(B)
@@ -123,6 +137,9 @@ narm_bilinear_scores <- function(embeddings, B, c_t) {
 #' @param emb_dim Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{fully_connected}, \code{bilinear}, \code{ratio}, \code{note}.
 #' @export
+#' @examples
+#' narm_decoder_parameters(n_items = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   hidden = c(1, 2, 3, 4, 5, 6, 7, 8), emb_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
 narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
   N <- as.integer(n_items)
   H <- as.integer(hidden)
@@ -141,6 +158,8 @@ narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' narm_cheatsheet()
 narm_cheatsheet <- function() {
   paste(paste0(
     "narm: a purely sequential session model recommends trousers ",

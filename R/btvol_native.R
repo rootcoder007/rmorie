@@ -263,11 +263,13 @@ morie_bt_632 <- function(err_app, err_oob, gamma = NULL) {
 #'   Breiman (1996), "Out-of-bag estimation", UC Berkeley.
 #' @examples
 #' set.seed(1)
-#' x <- matrix(stats::rnorm(60), 30)
-#' y <- x[, 1] + stats::rnorm(30)
-#' fit <- function(Xa, ya) qr.coef(qr(cbind(1, Xa)), ya)
-#' prd <- function(b, Xn) as.numeric(cbind(1, Xn) %*% b)
-#' morie_bt_oob(x, y, fit, prd, B = 20)$err_oob
+#' if (morie_crypto_liboqs_available()) {
+#'   x <- matrix(stats::rnorm(60), 30)
+#'   y <- x[, 1] + stats::rnorm(30)
+#'   fit <- function(Xa, ya) qr.coef(qr(cbind(1, Xa)), ya)
+#'   prd <- function(b, Xn) as.numeric(cbind(1, Xn) %*% b)
+#'   morie_bt_oob(x, y, fit, prd, B = 20)$err_oob
+#' }
 #' @export
 morie_bt_oob <- function(x, y, fit_fn, predict_fn, B = 100L, loss = NULL,
                          seed = 0) {

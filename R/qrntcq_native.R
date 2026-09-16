@@ -27,6 +27,8 @@
 #' @param n Passed to \code{seq}. Defaults to \code{3001L}.
 #' @return A list with \code{t}, \code{density}.
 #' @export
+#' @examples
+#' morie_qrntcq_gamma_generation_time()
 morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
                                               grid = NULL, t.max = 30,
                                               n = 3001L) {
@@ -94,6 +96,8 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #' @return A list with \code{efficacy}, \code{prevented.mass}, \code{remaining.mass},
 #' \code{t.Q}, \code{t.R}, \code{max.attainable}, \code{pre.quarantine.mass}.
 #' @export
+#' @examples
+#' morie_qrntcq_quarantine_efficacy(t.Q = 5L, t.R = 5L)
 morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
                                               generation.time = NULL,
                                               t.E = 0) {
@@ -169,6 +173,8 @@ morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
 #' @param days.in.quarantine Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_qrntcq_utility(efficacy = c(1, 2, 3, 4, 5, 6, 7, 8), days.in.quarantine = 5L)
 morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
   d <- as.numeric(days.in.quarantine)
   if (d <= 0) stop("qrntcq: the time in quarantine must be positive")
@@ -190,6 +196,8 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 #' \code{efficacy.a}, \code{efficacy.b}, \code{independent.of.infected.fraction},
 #' \code{note}.
 #' @export
+#' @examples
+#' morie_qrntcq_relative_utility(t.R.a = 5L, t.R.b = 5L)
 morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
                                           generation.time = NULL,
                                           infected.fraction = NULL) {
@@ -221,6 +229,8 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
 #' @return A list with \code{estimate}, \code{optimal.t.R}, \code{efficacy.at.optimum},
 #' \code{utility.at.optimum}, \code{curve}, \code{t.Q}, \code{method}.
 #' @export
+#' @examples
+#' morie_qrntcq_optimal_duration()
 morie_qrntcq_optimal_duration <- function(t.Q = 3, generation.time = NULL,
                                           t.max = 20, step = 0.25) {
   g <- if (is.null(generation.time))

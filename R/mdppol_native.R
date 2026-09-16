@@ -60,6 +60,11 @@
 #' @return A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve},
 #' \code{n_eval}, \code{policy_stable}, \code{method}.
 #' @export
+#' @examples
+#' P <- list(matrix(c(0.7, 0.3, 0.4, 0.6), nrow = 2, byrow = TRUE),
+#'           matrix(c(0.2, 0.8, 0.5, 0.5), nrow = 2, byrow = TRUE))
+#' R <- matrix(c(1, 0, 0, 2), nrow = 2)
+#' morie_mdppol(P = P, R = R, gamma = 0.9)
 morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
                          max_improve = 1000, pi0 = NULL) {
   args <- .mdppol_args(P, R)

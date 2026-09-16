@@ -101,6 +101,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
+#' @examples
+#' explor(states = c(1, 2, 3, 4, 5, 6, 7, 8), actions = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   next_states = c(1, 2, 3, 4, 5, 6, 7, 8))
 explor <- function(states, actions, next_states, n_actions = NULL,
                    n_features = 8, eta = 1, beta = 0.2, lr = 0.05,
                    epochs = 1, features = "inverse", discrete = TRUE,
@@ -324,6 +327,9 @@ icm <- explor
 #' @param seed Passed to \code{explor}. Defaults to \code{0}.
 #' @return The value of \code{explor}.
 #' @export
+#' @examples
+#' morie_explor(states = c(1, 2, 3, 4, 5, 6, 7, 8), actions = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   next_states = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_explor <- function(states, actions, next_states, n_actions = NULL,
                          n_features = 8, eta = 1, beta = 0.2,
                          lr = 0.05, epochs = 1, features = "inverse",

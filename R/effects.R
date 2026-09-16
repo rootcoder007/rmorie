@@ -213,16 +213,18 @@ estimate_plr <- function(data, treatment, outcome, covariates,
 #' @return Named list with `late`, `se`, `ci_lower`, `ci_upper`,
 #'   `pval`, `n_obs`, `method`.
 #' @examples
-#' set.seed(1)
-#' n <- 80
-#' x1 <- rnorm(n)
-#' x2 <- rnorm(n)
-#' z <- rbinom(n, 1, 0.5)
-#' d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
-#' y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
-#' df <- data.frame(y, d, z, x1, x2)
-#' res <- suppressWarnings(estimate_pliv(df, "d", "y", "z", c("x1", "x2")))
-#' res$late
+#' if (requireNamespace("stdReg", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 80
+#'   x1 <- rnorm(n)
+#'   x2 <- rnorm(n)
+#'   z <- rbinom(n, 1, 0.5)
+#'   d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
+#'   y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
+#'   df <- data.frame(y, d, z, x1, x2)
+#'   res <- suppressWarnings(estimate_pliv(df, "d", "y", "z", c("x1", "x2")))
+#'   res$late
+#' }
 #' @export
 estimate_pliv <- function(data, treatment, outcome, instrument,
                           covariates, n_folds = 5L,
@@ -306,17 +308,19 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
 #' @return Named list with `ate`, `se`, `ci_lower`, `ci_upper`,
 #'   `n_obs`, `outcome_model`.
 #' @examples
-#' set.seed(1)
-#' n <- 300
-#' X <- matrix(rnorm(n * 3), n, 3)
-#' tr <- rbinom(n, 1, plogis(X[, 1]))
-#' y <- 2.5 * tr + drop(X %*% c(1, 0.5, -0.7)) + rnorm(n)
-#' d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
-#' res <- estimate_ate_gcomputation(d,
-#'   treatment = "d", outcome = "y",
-#'   covariates = c("x1", "x2", "x3")
-#' )
-#' res$ate
+#' if (requireNamespace("stdReg", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 300
+#'   X <- matrix(rnorm(n * 3), n, 3)
+#'   tr <- rbinom(n, 1, plogis(X[, 1]))
+#'   y <- 2.5 * tr + drop(X %*% c(1, 0.5, -0.7)) + rnorm(n)
+#'   d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
+#'   res <- estimate_ate_gcomputation(d,
+#'     treatment = "d", outcome = "y",
+#'     covariates = c("x1", "x2", "x3")
+#'   )
+#'   res$ate
+#' }
 #' @export
 estimate_ate_gcomputation <- function(data, treatment, outcome,
                                       covariates,
@@ -482,11 +486,13 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
 #' @param n_gamma    Number of Gamma values. Default 20.
 #' @return Data frame with `Gamma`, `p_lower`, `p_upper`.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
-#' df$y <- df$d * 0.5 + df$x1 + rnorm(60)
-#' res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
-#' if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' if (requireNamespace("EValue", quietly = TRUE) && requireNamespace("rbounds", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
+#'   df$y <- df$d * 0.5 + df$x1 + rnorm(60)
+#'   res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
+#'   if (!inherits(res, "try-error")) str(res, max.level = 1)
+#' }
 #' @export
 sensitivity_rosenbaum <- function(data, treatment, outcome,
                                   covariates,

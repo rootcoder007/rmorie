@@ -33,6 +33,6 @@ km054's \verb{_adapter_core}: km054 -> \code{morie_kamath_ch4_series_adapter}
 adapter exactly.
 }
 \examples{
-morie_kamath_ch4_series_adapter(matrix(c(1, 2), 1), matrix(c(1, 
+morie_kamath_ch4_series_adapter(matrix(c(1, 2), 1), matrix(c(1,
     0), 2), matrix(c(1, 1), 1))
 }

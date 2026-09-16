@@ -125,6 +125,9 @@
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' strec_trilinear(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   c = c(1, 2, 3, 4, 5, 6, 7, 8))
 strec_trilinear <- function(a, b, c) {
   A <- as.numeric(a)
   B <- as.numeric(b)
@@ -146,6 +149,9 @@ strec_trilinear <- function(a, b, c) {
 #' @param embeddings Passed to \code{.strec_as_rows}.
 #' @return A list with \code{m_s}, \code{m_t}, \code{length}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' strec_session_average(V)
 strec_session_average <- function(embeddings) {
   X <- .strec_as_rows(embeddings)
   t <- length(X)
@@ -177,6 +183,10 @@ strec_session_average <- function(embeddings) {
 #' @param activation One of \code{"identity"}, \code{"tanh"}. Defaults to \code{"tanh"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' S <- c("a", "b", "c")
+#' strec_mlp_cell(S, M)
 strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
   v <- as.numeric(m)
   W <- as.matrix(W)
@@ -213,6 +223,10 @@ strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
 #' @param b_a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{alpha}, \code{m_a}, \code{sum_alpha}, \code{m_s}, \code{note}.
 #' @export
+#' @examples
+#' strec_attention_weights(embeddings = 5L, W1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   W2 = c(1, 2, 3, 4, 5, 6, 7, 8), W3 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   W0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
   X <- .strec_as_rows(embeddings)
   t <- length(X)
@@ -283,6 +297,9 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
 #' \code{h_s}, \code{h_t}, \code{attention_used}, \code{model}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' strec_stamp_scores(embeddings = 5L, item_table = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   Ws = c(1, 2, 3, 4, 5, 6, 7, 8), Wt = c(1, 2, 3, 4, 5, 6, 7, 8))
 strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL,
                                 attention = NULL) {
   X <- .strec_as_rows(embeddings)
@@ -333,6 +350,8 @@ strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = N
 #' @param target_index Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' strec_cross_entropy(probability = c(1, 2, 3, 4, 5, 6, 7, 8), target_index = 5L)
 strec_cross_entropy <- function(probability, target_index) {
   p <- as.numeric(probability)
   j <- as.integer(target_index)
@@ -356,6 +375,8 @@ strec_cross_entropy <- function(probability, target_index) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' strec_cheatsheet()
 strec_cheatsheet <- function() {
   paste0(
     "strec: a session recommender has no profile, only the clicks",

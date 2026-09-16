@@ -18,6 +18,9 @@
 #' @param n_equality Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' S_function(V)
 S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   v <- as.numeric(std_moments)
   J <- length(v)
@@ -44,6 +47,9 @@ S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mean}, \code{sd}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' weighted_moments(V, V)
 weighted_moments <- function(m, g) {
   if (is.matrix(m)) M <- split(m, row(m)) else M <- m
   M <- lapply(M, as.numeric)
@@ -75,6 +81,9 @@ weighted_moments <- function(m, g) {
 #' @param n_levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @return A list with \code{instruments}, \code{n_instruments}, \code{n_levels}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' hypercube_instruments(M)
 hypercube_instruments <- function(X, n_levels = 3L) {
   if (!is.list(X) && !is.matrix(X)) stop("bnskmt: X must be a matrix or list of rows")
   if (is.matrix(X)) Xm <- split(X, row(X)) else Xm <- X
@@ -125,6 +134,12 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 #' @return A list with \code{statistic}, \code{argmax}, \code{per_instrument},
 #' \code{form}, \code{n_instruments}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(60), 30, 2)
+#' inst <- hypercube_instruments(X, n_levels = 2L)
+#' r <- ks_statistic(X[, 1] - 0.4, inst)
+#' str(r, max.level = 1)
 ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
     instruments$instruments else instruments
@@ -164,6 +179,12 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
 #' \code{as.numeric}.
 #' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' X <- matrix(runif(60), 30, 2)
+#' inst <- hypercube_instruments(X, n_levels = 2L)
+#' r <- ks_critical_value(X[, 1] - 0.4, inst)
+#' str(r, max.level = 1)
 ks_critical_value <- function(m, instruments, form = "sum",
                               n_equality = 0L, level = 0.95,
                               reps = 200L, seed = 0L, kappa = NULL) {
@@ -218,6 +239,12 @@ ks_critical_value <- function(m, instruments, form = "sum",
 #' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds},
 #' \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' X <- matrix(runif(40), 20, 2)
+#' mfn <- function(theta) X[, 1] - theta
+#' r <- ks_confidence_set(mfn, theta_grid = seq(0.2, 0.8, by = 0.1), X)
+#' str(r, max.level = 1)
 ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                               n_equality = 0L, level = 0.95,
                               n_levels = 2L, reps = 100L, seed = 0L) {
@@ -254,6 +281,12 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
 #' @return A list with \code{statistic}, \code{per_instrument}, \code{form},
 #' \code{n_instruments}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(60), 30, 2)
+#' inst <- hypercube_instruments(X, n_levels = 2L)
+#' r <- cvm_statistic(X[, 1] - 0.4, inst)
+#' str(r, max.level = 1)
 cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
                           weights = NULL) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
@@ -293,6 +326,12 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
 #' @return A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm},
 #' \code{argmax_instrument}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(60), 30, 2)
+#' inst <- hypercube_instruments(X, n_levels = 2L)
+#' r <- compare_forms(X[, 1] - 0.4, inst)
+#' str(r, max.level = 1)
 compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
   cv <- cvm_statistic(m, instruments, form = form, n_equality = n_equality)
   ks <- ks_statistic(m, instruments, form = form, n_equality = n_equality)

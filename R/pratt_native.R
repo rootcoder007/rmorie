@@ -206,6 +206,9 @@ morie_pratt_classify <- morie_pratt
 #' @param alpha Passed to \code{.pratt_vec}.
 #' @return A list with \code{entropy}, \code{max_entropy}, \code{concentration}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_pratt_attention_entropy(V)
 morie_pratt_attention_entropy <- function(alpha) {
   a <- .pratt_vec(alpha)
   s <- sum(a)
@@ -229,6 +232,8 @@ morie_pratt_attention_entropy <- function(alpha) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_pratt_cheatsheet()
 morie_pratt_cheatsheet <- function() {
   paste("pratt: mirror the document's own structure -- words to sentences",
         "to document -- with attention at BOTH levels, because which word",

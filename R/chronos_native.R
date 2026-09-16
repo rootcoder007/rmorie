@@ -42,6 +42,9 @@
 #' @return A list with \code{scaled}, \code{scale}, \code{degenerate}, \code{context},
 #' \code{preserves_zero}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' mean_scale(V)
 mean_scale <- function(x, context = NULL) {
   v <- .chronos_vec(x)
   if (length(v) == 0L) stop("chronos: the series is empty")
@@ -78,6 +81,8 @@ mean_scale <- function(x, context = NULL) {
 #' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4096L}.
 #' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}.
 #' @export
+#' @examples
+#' uniform_bins()
 uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
   B <- as.integer(n_bins)
   if (B < 2L) stop(sprintf("chronos: need at least 2 bins, got %d", B))
@@ -100,6 +105,9 @@ uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
 #' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme},
 #' \code{range}, \code{caveat}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' quantile_bins(rnorm(500), n_bins = 16L)
 quantile_bins <- function(samples, n_bins = 4096L) {
   v <- sort(.chronos_vec(samples))
   B <- as.integer(n_bins)
@@ -129,6 +137,10 @@ quantile_bins <- function(samples, n_bins = 4096L) {
 #' @return A list with \code{tokens}, \code{n_clipped}, \code{clipped_fraction},
 #' \code{in_range}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' b <- uniform_bins(-3, 3, n_bins = 16L)
+#' quantize(c(-2.5, 0, 1.7), b)
 quantize <- function(x, bins) {
   v <- .chronos_vec(x)
   c <- bins$centers
@@ -166,6 +178,9 @@ quantize <- function(x, bins) {
 #' @param bins A list; the body reads \code{$centers} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' b <- uniform_bins(-3, 3, n_bins = 16L)
+#' dequantize(quantize(c(-2.5, 0, 1.7), b)$tokens, b)
 dequantize <- function(tokens, bins) {
   c <- bins$centers
   out <- numeric(0)
@@ -194,6 +209,10 @@ dequantize <- function(tokens, bins) {
 #' @return A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped},
 #' \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' b <- uniform_bins(-3, 3, n_bins = 16L)
+#' tokenize(rnorm(10), b)
 tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
   sc <- mean_scale(x, context = context)
   qz <- quantize(sc$scaled, bins)
@@ -221,6 +240,12 @@ tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(2)
+#' b <- uniform_bins(-3, 3, n_bins = 16L)
+#' x <- rnorm(10)
+#' tk <- tokenize(x, b, add_eos = FALSE)
+#' detokenize(tk$tokens, b, tk$scale)
 detokenize <- function(tokens, bins, scale) {
   q <- dequantize(tokens, bins)
   q * as.numeric(scale)
@@ -237,6 +262,9 @@ detokenize <- function(tokens, bins, scale) {
 #' @param quantiles Defaults to \code{c(0.1, 0.5, 0.9)}.
 #' @return A list with \code{mean}, \code{quantiles}, \code{mode}, \code{note}.
 #' @export
+#' @examples
+#' b <- uniform_bins(-3, 3, n_bins = 8L)
+#' forecast_summary(rep(1 / 8, 8), b)
 forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
   p <- .chronos_vec(token_probs)
   c <- bins$centers
@@ -280,6 +308,10 @@ forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
 #' @param pad_to Passed to \code{tokenize}.
 #' @return The value of \code{tokenize}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' r <- morie_chronos(rnorm(20), uniform_bins(-3, 3, n_bins = 16L))
+#' str(r, max.level = 1)
 morie_chronos <- function(x, bins, context = NULL, add_eos = TRUE,
                           pad_to = NULL) {
   tokenize(x, bins, context, add_eos, pad_to)

@@ -76,6 +76,9 @@
 #' @rdname sgtcoml
 #' @keywords internal
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' sgtcoml(M)
 sgtcoml <- function(A) {
   a <- as.matrix(A)
   dimnames(a) <- NULL

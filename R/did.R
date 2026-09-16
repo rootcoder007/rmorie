@@ -420,19 +420,21 @@ morie_did_2x2 <- function(data, outcome, treatment, post,
 #' @param weights Optional column of (sampling / survey) weights.
 #' @return A list of class results; see \code{\link{morie_did_2x2}}.
 #' @examples
-#' set.seed(1)
-#' n <- 400
-#' d <- rbinom(n, 1, 0.5)
-#' p <- rbinom(n, 1, 0.5)
-#' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-#' df <- data.frame(
-#'   y = y, d = d, post = p,
-#'   w = runif(n, 0.5, 2)
-#' )
-#' res <- morie_did_repeated_cross_section(df, "y", "d", "post",
-#'   weights = "w"
-#' )
-#' res$estimate
+#' if (requireNamespace("fixest", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 400
+#'   d <- rbinom(n, 1, 0.5)
+#'   p <- rbinom(n, 1, 0.5)
+#'   y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
+#'   df <- data.frame(
+#'     y = y, d = d, post = p,
+#'     w = runif(n, 0.5, 2)
+#'   )
+#'   res <- morie_did_repeated_cross_section(df, "y", "d", "post",
+#'     weights = "w"
+#'   )
+#'   res$estimate
+#' }
 #' @export
 morie_did_repeated_cross_section <- function(data, outcome, treatment, post,
                                              covariates = NULL, weights = NULL,
@@ -488,13 +490,15 @@ morie_did_repeated_cross_section <- function(data, outcome, treatment, post,
 #' @param time Time period column.
 #' @return A result list; see \code{\link{morie_did_2x2}}.
 #' @examples
-#' set.seed(2)
-#' df <- expand.grid(unit = 1:60, time = 1:6)
-#' df$treat_time <- ifelse(df$unit <= 30, 4, Inf)
-#' df$d <- as.integer(df$time >= df$treat_time)
-#' df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
-#' res <- morie_did_panel_fe(df, "y", "d", "unit", "time")
-#' res$estimate
+#' if (requireNamespace("fixest", quietly = TRUE)) {
+#'   set.seed(2)
+#'   df <- expand.grid(unit = 1:60, time = 1:6)
+#'   df$treat_time <- ifelse(df$unit <= 30, 4, Inf)
+#'   df$d <- as.integer(df$time >= df$treat_time)
+#'   df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
+#'   res <- morie_did_panel_fe(df, "y", "d", "unit", "time")
+#'   res$estimate
+#' }
 #' @export
 morie_did_panel_fe <- function(data, outcome, treatment, unit, time,
                                covariates = NULL, cluster = NULL,
@@ -758,13 +762,15 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
 #' @return A data frame with columns \code{time}, \code{group},
 #'   \code{mean_outcome}, \code{se}, \code{n}.
 #' @examples
-#' set.seed(1)
-#' df <- expand.grid(unit = 1:30, time = 1:6)
-#' df$treat <- as.integer(df$unit <= 15)
-#' df$d <- as.integer(df$treat == 1L & df$time >= 4)
-#' df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
-#' out <- morie_did_parallel_trends_data(df, "y", "treat", "time")
-#' head(out)
+#' if (requireNamespace("did", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- expand.grid(unit = 1:30, time = 1:6)
+#'   df$treat <- as.integer(df$unit <= 15)
+#'   df$d <- as.integer(df$treat == 1L & df$time >= 4)
+#'   df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
+#'   out <- morie_did_parallel_trends_data(df, "y", "treat", "time")
+#'   head(out)
+#' }
 #' @export
 morie_did_parallel_trends_data <- function(data, outcome, treatment, time,
                                            weights = NULL) {
@@ -1010,15 +1016,19 @@ morie_did_aggregate_gt_att <- function(gt_results,
 #' @return A list with \code{group_time}, \code{overall}, \code{by_cohort},
 #'   \code{by_event_time}.
 #' @examples
-#' set.seed(2)
-#' df <- expand.grid(unit = 1:40, time = 1:6)
-#' df$treat_time <- ifelse(df$unit <= 20, 4, Inf)
-#' df$d <- as.integer(df$time >= df$treat_time)
-#' df$y <- 0.1 * df$time + 0.6 * df$d + rnorm(nrow(df), sd = 0.4)
-#' out <- morie_did_staggered(df, "y", "unit", "time", "treat_time",
-#'   n_bootstrap = 50L, seed = 2
-#' )
-#' str(out, max.level = 1)
+#' if (morie_crypto_liboqs_available()) {
+#'   if (requireNamespace("DRDID", quietly = TRUE)) {
+#'     set.seed(2)
+#'     df <- expand.grid(unit = 1:40, time = 1:6)
+#'     df$treat_time <- ifelse(df$unit <= 20, 4, Inf)
+#'     df$d <- as.integer(df$time >= df$treat_time)
+#'     df$y <- 0.1 * df$time + 0.6 * df$d + rnorm(nrow(df), sd = 0.4)
+#'     out <- morie_did_staggered(df, "y", "unit", "time", "treat_time",
+#'       n_bootstrap = 50L, seed = 2
+#'     )
+#'     str(out, max.level = 1)
+#'   }
+#' }
 #' @export
 morie_did_staggered <- function(data, outcome, unit, time, treatment_time,
                                 covariates = NULL,
@@ -1158,15 +1168,17 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
 #'   group.
 #' @return A result list; see \code{\link{morie_did_2x2}}.
 #' @examples
-#' set.seed(1)
-#' n <- 400
-#' d <- rbinom(n, 1, 0.5)
-#' p <- rbinom(n, 1, 0.5)
-#' s <- rbinom(n, 1, 0.5)
-#' y <- 0.2 * d + 0.3 * p + 0.4 * s + 0.5 * d * p * s + rnorm(n, sd = 0.5)
-#' df <- data.frame(y = y, d = d, post = p, group = s)
-#' res <- morie_did_triple_difference(df, "y", "d", "post", "group")
-#' res$estimate
+#' if (requireNamespace("bacondecomp", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 400
+#'   d <- rbinom(n, 1, 0.5)
+#'   p <- rbinom(n, 1, 0.5)
+#'   s <- rbinom(n, 1, 0.5)
+#'   y <- 0.2 * d + 0.3 * p + 0.4 * s + 0.5 * d * p * s + rnorm(n, sd = 0.5)
+#'   df <- data.frame(y = y, d = d, post = p, group = s)
+#'   res <- morie_did_triple_difference(df, "y", "d", "post", "group")
+#'   res$estimate
+#' }
 #' @export
 morie_did_triple_difference <- function(data, outcome, treatment, post,
                                         third_diff,
@@ -1745,16 +1757,18 @@ morie_did_placebo_test_group <- function(data, outcome, treatment, post,
 #'   continuous.
 #' @return A data frame with one row per stratum.
 #' @examples
-#' set.seed(1)
-#' n <- 600
-#' d <- rbinom(n, 1, 0.5)
-#' p <- rbinom(n, 1, 0.5)
-#' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-#' df <- data.frame(y = y, d = d, post = p, mod = rnorm(n))
-#' out <- morie_did_heterogeneous(df, "y", "d", "post",
-#'   moderator = "mod", n_quantiles = 3L
-#' )
-#' out
+#' if (morie_crypto_liboqs_available()) {
+#'   set.seed(1)
+#'   n <- 600
+#'   d <- rbinom(n, 1, 0.5)
+#'   p <- rbinom(n, 1, 0.5)
+#'   y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
+#'   df <- data.frame(y = y, d = d, post = p, mod = rnorm(n))
+#'   out <- morie_did_heterogeneous(df, "y", "d", "post",
+#'     moderator = "mod", n_quantiles = 3L
+#'   )
+#'   out
+#' }
 #' @export
 morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
                                     covariates = NULL,
@@ -1951,16 +1965,18 @@ morie_did_sensitivity_analysis <- function(data, outcome, treatment, post,
 #' @seealso \code{\link{morie_did_sensitivity_analysis}} for the 2x2
 #'   \eqn{\delta \hat\sigma}{delta sigma-hat} parameterization.
 #' @examples
-#' set.seed(20)
-#' df <- expand.grid(unit = 1:60, time = 1:8)
-#' df$treat_time <- ifelse(df$unit <= 30, 5, Inf)
-#' df$d <- as.integer(df$time >= df$treat_time)
-#' df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
-#' es <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
-#'   leads = 3L, lags = 3L
-#' )
-#' out <- morie_did_honest_sensitivity(es, m_bar_range = c(0, 1, 5))
-#' out
+#' if (requireNamespace("cobalt", quietly = TRUE)) {
+#'   set.seed(20)
+#'   df <- expand.grid(unit = 1:60, time = 1:8)
+#'   df$treat_time <- ifelse(df$unit <= 30, 5, Inf)
+#'   df$d <- as.integer(df$time >= df$treat_time)
+#'   df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
+#'   es <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
+#'     leads = 3L, lags = 3L
+#'   )
+#'   out <- morie_did_honest_sensitivity(es, m_bar_range = c(0, 1, 5))
+#'   out
+#' }
 #' @export
 morie_did_honest_sensitivity <- function(event_study,
                                          m_bar_range = seq(0, 2, 0.5),

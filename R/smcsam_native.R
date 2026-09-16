@@ -28,6 +28,9 @@
 #' @param weights Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ess(V)
 ess <- function(weights) {
   tot <- sum(weights)
   if (tot <= 0)
@@ -73,6 +76,8 @@ ess <- function(weights) {
 #' \code{"systematic"}. Defaults to \code{"systematic"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' resample(weights = 5L, rng = list(a = 1, b = 2))
 resample <- function(weights, rng, scheme = "systematic") {
   tot <- sum(weights)
   if (tot <= 0)
@@ -138,6 +143,8 @@ resample <- function(weights, rng, scheme = "systematic") {
 #' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' temperature_ladder(n_steps = 5L)
 temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
   n <- as.integer(n_steps)
   if (n < 2L)
@@ -199,6 +206,8 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 #' @param n_moves Passed to \code{.smcsam_rwk}. Defaults to \code{1L}.
 #' @return The value of \code{.smcsam_rwk}.
 #' @export
+#' @examples
+#' random_walk_kernel()
 random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
   .smcsam_rwk(scale, n_moves)
 }

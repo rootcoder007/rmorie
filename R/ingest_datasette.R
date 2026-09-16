@@ -67,9 +67,11 @@
 #' @param timeout HTTP timeout in seconds.
 #' @return A \code{data.frame} with one row per database (name, path,
 #'   size, table count as provided by the instance).
-#' @examplesIf nzchar(Sys.getenv("MORIE_DATASETTE_URL"))
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("MORIE_DATASETTE_URL"))) withAutoprint(\{ # examplesIf}
 #' dbs <- morie_datasette_databases()
 #' head(dbs$name)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasette_databases <- function(base_url = NULL, timeout = 60) {
   base <- .morie_datasette_base(base_url)
@@ -97,12 +99,14 @@ morie_datasette_databases <- function(base_url = NULL, timeout = 60) {
 #'   \code{MORIE_DATASETTE_URL} environment variable.
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
-#' @examplesIf nzchar(Sys.getenv("MORIE_DATASETTE_URL"))
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("MORIE_DATASETTE_URL"))) withAutoprint(\{ # examplesIf}
 #' dbs <- morie_datasette_databases()
 #' # Peek at the first table of the first database:
 #' tabs <- morie_datasette_read(dbs$name[1],
 #'   sql = "SELECT name FROM sqlite_master WHERE type='table' LIMIT 5")
 #' tabs
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasette_read <- function(db, table = NULL, sql = NULL,
                                  limit = 1000L, base_url = NULL,

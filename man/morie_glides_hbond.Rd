@@ -37,8 +37,8 @@ A list with the total, the per-bond contributions and the   three class subtotal
 }
 \keyword{internal}
 \examples{
-HBN <- list(list("neutral_neutral", 1), list("neutral_charged", 
-    0.8), list("charged_charged", 0.6), list("neutral_neutral", 
+HBN <- list(list("neutral_neutral", 1), list("neutral_charged",
+    0.8), list("charged_charged", 0.6), list("neutral_neutral",
     0.4))
 morie_glides_hbond(HBN)
 }

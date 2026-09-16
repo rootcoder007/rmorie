@@ -128,7 +128,9 @@ morie_make_raw <- function(object) {
 #' @param serialize,raw,... as in digest.
 #' @return hex digest, or raw with `raw = TRUE`.
 #' @examples
-#' morie_hmac("key", "The quick brown fox jumps over the lazy dog", algo = "sha256")
+#' if (requireNamespace("digest", quietly = TRUE)) {
+#'   morie_hmac("key", "The quick brown fox jumps over the lazy dog", algo = "sha256")
+#' }
 #' @export
 morie_hmac <- function(key, object, algo = c("md5", "sha1", "crc32", "sha256", "sha512", "sha224", "sha384"),
                        serialize = FALSE, raw = FALSE, ...) {
@@ -156,7 +158,9 @@ morie_hmac <- function(key, object, algo = c("md5", "sha1", "crc32", "sha256", "
 #' @param seed integer seed.
 #' @return an integer vector.
 #' @examples
-#' morie_digest2int(c("abc", "def"))
+#' if (requireNamespace("digest", quietly = TRUE)) {
+#'   morie_digest2int(c("abc", "def"))
+#' }
 #' @export
 morie_digest2int <- function(x, seed = 0L) {
   if (!is.character(x)) stop("invalid input - should be character vector", call. = FALSE)

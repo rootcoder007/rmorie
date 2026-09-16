@@ -22,6 +22,6 @@ A list with \code{w}, \code{b}, \code{alpha}, \code{support_vectors}, \code{n_su
 }
 \keyword{internal}
 \examples{
-Svm(matrix(c(1, 1, 2, 2, 4, 4, 5, 5), ncol = 2, byrow = TRUE), 
+Svm(matrix(c(1, 1, 2, 2, 4, 4, 5, 5), ncol = 2, byrow = TRUE),
     c(-1, -1, 1, 1))
 }

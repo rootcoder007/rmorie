@@ -21,6 +21,6 @@ List with \code{loss}, \code{per_pair_loss}, \code{margin}, \code{reward_chosen}
 Direct preference optimization (DPO) loss (hmdpo)
 }
 \examples{
-morie_geron_dpo(matrix(c(-1, -2), 1, 2), matrix(c(-1, -2), 1, 
+morie_geron_dpo(matrix(c(-1, -2), 1, 2), matrix(c(-1, -2), 1,
     2))
 }

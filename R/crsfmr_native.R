@@ -41,6 +41,8 @@
 #' @param V Numeric matrix (rows are values).
 #' @return A list with \code{out} and \code{weights}.
 #' @export
+#' @examples
+#' morie_crsfmr_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_crsfmr_attention <- function(Q, K, V) {
   Qm <- as.matrix(Q)
   Km <- as.matrix(K)
@@ -81,6 +83,10 @@ morie_crsfmr_attention <- function(Q, K, V) {
 #'   \code{seg_len} and \code{shape}.
 #' @references Zhang, Y. & Yan, J. (2023). Crossformer. ICLR 2023.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(40), 20, 2)
+#' morie_crsfmr_dsw_embed(X, seg_len = 4)
 morie_crsfmr_dsw_embed <- function(X, seg_len, E = NULL, pos = NULL) {
   Xm <- as.matrix(X)
   T <- nrow(Xm)
@@ -130,6 +136,8 @@ morie_crsfmr_dsw_embed <- function(X, seg_len, E = NULL, pos = NULL) {
 #' @param Z A length-L list of length-D lists of d_model vectors.
 #' @return A 3D array indexed as \code{out[[i]][[d]]}.
 #' @export
+#' @examples
+#' morie_crsfmr_cross_time_stage(Z = 5L)
 morie_crsfmr_cross_time_stage <- function(Z) {
   L <- length(Z)
   if (L == 0L) stop("crsfmr: the input array is empty")
@@ -199,6 +207,8 @@ morie_crsfmr_cross_dimension_stage <- function(Z, router = NULL,
 #' @return A list with \code{output}, \code{cross_time} and the
 #'   operation counts.
 #' @export
+#' @examples
+#' morie_crsfmr_two_stage_attention(Z = 5L)
 morie_crsfmr_two_stage_attention <- function(Z, n_router = NULL,
                                              router = NULL) {
   zt <- morie_crsfmr_cross_time_stage(Z)
@@ -221,6 +231,9 @@ morie_crsfmr_two_stage_attention <- function(Z, n_router = NULL,
 #' @param factor Integer merge factor.
 #' @return A length-(L/factor) list.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_crsfmr_segment_merge(V)
 morie_crsfmr_segment_merge <- function(Z, factor = 2L) {
   f <- as.integer(factor)
   if (f < 2L)
@@ -254,6 +267,8 @@ morie_crsfmr_segment_merge <- function(Z, factor = 2L) {
 #' @param c Integer, number of router vectors.
 #' @return A list of named integer counts.
 #' @export
+#' @examples
+#' morie_crsfmr_complexity(L = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_crsfmr_complexity <- function(L, D, c) {
   Lv <- as.integer(L)
   Dv <- as.integer(D)

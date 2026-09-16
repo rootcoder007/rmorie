@@ -149,6 +149,8 @@
 #' @param angle Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' morie_se3T_rotation_matrix(axis = c(0, 0, 1), angle = pi / 4)
 morie_se3T_rotation_matrix <- function(axis, angle) {
   a <- .se3T_vec(axis)
   n <- sqrt(sum(a * a))
@@ -179,6 +181,9 @@ morie_se3T_rotation_matrix <- function(axis, angle) {
 #' @param j See Usage.
 #' @return A list with \code{distance}, \code{direction}, \code{note}.
 #' @export
+#' @examples
+#' morie_se3T_invariant_features(positions = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   i = c(1, 2, 3, 4, 5, 6, 7, 8), j = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_se3T_invariant_features <- function(positions, i, j) {
   P <- .se3T_mat(positions)
   d <- P[j, ] - P[i, ]
@@ -202,6 +207,8 @@ morie_se3T_invariant_features <- function(positions, i, j) {
 #' @param sigma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_se3T_radial_kernel(distance = 5L)
 morie_se3T_radial_kernel <- function(distance, weights = NULL, sigma = 1.0) {
   r <- as.numeric(distance)
   if (r < 0.0) stop("se3T: a distance cannot be negative")
@@ -231,6 +238,12 @@ morie_se3T_radial_kernel <- function(distance, weights = NULL, sigma = 1.0) {
 #' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{type1}, \code{type0}, \code{weights}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' positions <- matrix(rnorm(12), 4, 3)
+#' type0 <- rnorm(4)
+#' type1 <- matrix(rnorm(12), 4, 3)
+#' morie_se3T_se3_attention(positions, type0, type1)
 morie_se3T_se3_attention <- function(positions, type0, type1, weights = NULL,
                                      sigma = 1.0, temperature = 1.0) {
   P <- .se3T_mat(positions)
@@ -297,6 +310,12 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights = NULL,
 #' \code{weight_deviation}, \code{equivariant}, \code{weights_invariant}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' positions <- matrix(rnorm(12), 4, 3)
+#' type0 <- rnorm(4)
+#' type1 <- matrix(rnorm(12), 4, 3)
+#' morie_se3T_check_equivariance(positions, type0, type1)
 morie_se3T_check_equivariance <- function(positions, type0, type1, layer = NULL,
                                           axis = c(0.3, -0.7, 0.4), angle = 1.1,
                                           translation = c(2.0, -1.0, 0.5),
@@ -354,6 +373,8 @@ morie_se3T_check_equivariance <- function(positions, type0, type1, layer = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_se3T_cheatsheet()
 morie_se3T_cheatsheet <- function() {
   paste0(
     "se3T: a point cloud has no canonical orientation, so ",

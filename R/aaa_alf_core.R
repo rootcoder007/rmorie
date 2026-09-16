@@ -22,6 +22,9 @@
 #' @param x Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfSigm(V)
 alfSigm <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)), exp(x) / (1 + exp(x)))
 
 #' alfRelu
@@ -33,6 +36,9 @@ alfSigm <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)), exp(x) / (1 + exp(x)))
 #' @param x Passed to \code{ifelse}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfRelu(V)
 alfRelu <- function(x) ifelse(x > 0, x, 0)
 
 # Softmax with max subtraction.  The stabilisation is part of the contract:
@@ -45,6 +51,9 @@ alfRelu <- function(x) ifelse(x > 0, x, 0)
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfSmax(V)
 alfSmax <- function(v) {
   e <- exp(v - max(v))
   e / sum(e)
@@ -61,6 +70,9 @@ alfSmax <- function(v) {
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfVdot(V, V)
 alfVdot <- function(a, b) sum(a * b)
 
 #' alfVn2
@@ -72,6 +84,9 @@ alfVdot <- function(a, b) sum(a * b)
 #' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfVn2(V)
 alfVn2 <- function(a) sum(a * a)
 
 # Dense projection of a vector; W is (n_out x n_in).
@@ -87,6 +102,9 @@ alfVn2 <- function(a) sum(a * a)
 #' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{o}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfLin(V, V)
 alfLin <- function(v, W, b = NULL) {
   o <- as.numeric(W %*% as.numeric(v))
   if (!is.null(b)) o <- o + as.numeric(b)
@@ -105,6 +123,9 @@ alfLin <- function(v, W, b = NULL) {
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{o}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfLnorm(V)
 alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
   v <- as.numeric(v)
   n <- length(v)
@@ -127,6 +148,9 @@ alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' Tf <- list(R = diag(2), t = c(1, -1))
+#' alfRap(Tf, c(2, 3))
 alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
 
 #' alfRinv
@@ -138,6 +162,12 @@ alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
 #' @param Tf A list; the body reads \code{$R}, \code{$t} from it.
 #' @return A list with \code{R}, \code{t}.
 #' @export
+#' @examples
+#' th <- pi / 6
+#' Tf <- list(R = rbind(c(cos(th), -sin(th)), c(sin(th), cos(th))),
+#'            t = c(1, -1))
+#' inv <- alfRinv(Tf)
+#' alfRap(inv, alfRap(Tf, c(2, 3)))
 alfRinv <- function(Tf) {
   Rt <- t(Tf$R)
   list(R = Rt, t = -as.numeric(Rt %*% as.numeric(Tf$t)))
@@ -154,6 +184,11 @@ alfRinv <- function(Tf) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' th <- pi / 6
+#' Tf <- list(R = rbind(c(cos(th), -sin(th)), c(sin(th), cos(th))),
+#'            t = c(1, -1))
+#' alfRinvap(Tf, alfRap(Tf, c(2, 3)))
 alfRinvap <- function(Tf, x) {
   as.numeric(t(Tf$R) %*% (as.numeric(x) - as.numeric(Tf$t)))
 }
@@ -169,6 +204,11 @@ alfRinvap <- function(Tf, x) {
 #' @param B A list; the body reads \code{$R}, \code{$t} from it.
 #' @return A list with \code{R}, \code{t}.
 #' @export
+#' @examples
+#' A <- list(R = diag(2), t = c(1, 0))
+#' B <- list(R = diag(2), t = c(0, 2))
+#' C <- alfRcomp(A, B)
+#' alfRap(C, c(0, 0))
 alfRcomp <- function(A, B) list(R = A$R %*% B$R, t = alfRap(A, B$t))
 
 # Non-unit quaternion (1, b, c, d) to a rotation matrix -- Algorithm 23
@@ -185,6 +225,8 @@ alfRcomp <- function(A, B) list(R = A$R %*% B$R, t = alfRap(A, B$t))
 #' @param d Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' alfQ2rot(b = 0.2, c = 0.3, d = 0.4)
 alfQ2rot <- function(b, c, d) {
   n <- sqrt(1 + b * b + c * c + d * d)
   a <- 1 / n
@@ -206,6 +248,8 @@ alfQ2rot <- function(b, c, d) {
 #'
 #' @return A list with \code{R}, \code{t}.
 #' @export
+#' @examples
+#' alfIdent()
 alfIdent <- function() list(R = diag(3), t = c(0, 0, 0))
 
 # One-hot encoding with nearest bin -- Algorithm 5.  Ties go to the lowest
@@ -219,6 +263,9 @@ alfIdent <- function() list(R = diag(3), t = c(0, 0, 0))
 #' @param bins A vector; its length is taken.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfOnehot(V, V)
 alfOnehot <- function(x, bins) {
   p <- numeric(length(bins))
   p[which.min(abs(x - bins))] <- 1
@@ -237,6 +284,9 @@ alfOnehot <- function(x, bins) {
 #' @param eps Passed to \code{pmax}. Defaults to \code{1e-12}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' alfXent(V, V)
 alfXent <- function(y, p, eps = 1e-12) {
   -sum(y * log(pmax(p, eps)))
 }

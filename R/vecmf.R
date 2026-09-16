@@ -17,7 +17,9 @@
 #'   loglik, n, k, rank, method}.
 #' @examples
 #' set.seed(1)
-#' morie_vecm(Y = matrix(rnorm(100), 50, 2))
+#' if (requireNamespace("urca", quietly = TRUE)) {
+#'   morie_vecm(Y = matrix(rnorm(100), 50, 2))
+#' }
 #' @export
 morie_vecm <- function(Y, k_ar = 1, coint_rank = 1) {
   Y <- as.matrix(Y)

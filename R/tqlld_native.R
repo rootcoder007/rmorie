@@ -79,6 +79,8 @@
 #'   only), \code{method}.
 #' @references Lloyd, S. P. (1982); Max, J. (1960).
 #' @export
+#' @examples
+#' morie_tqlld()
 morie_tqlld <- function(levels = 4, source = "gaussian", data = NULL,
                          lo = NULL, hi = NULL, max_iter = 200,
                          tol = 1e-12, n_grid = 20000) {
@@ -168,6 +170,9 @@ morie_tqlld <- function(levels = 4, source = "gaussian", data = NULL,
 #' @return A list with \code{estimate}, \code{indices}, \code{values},
 #'   \code{mse}, \code{levels}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_quantize_with_codebook(V, V)
 morie_quantize_with_codebook <- function(x, codebook) {
   cb <- as.numeric(codebook)
   if (length(cb) == 0L) stop("quantize_with_codebook: codebook is empty")

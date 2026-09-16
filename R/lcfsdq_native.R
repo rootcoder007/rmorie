@@ -89,6 +89,9 @@
 #' @return A list with the distances and the neighbour indices, the
 #'   latter zero-based to match the Python arm.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_lcfsdq_nn(M)
 morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
   n <- nrow(coords)
   k <- as.integer(k)
@@ -140,6 +143,9 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 #' @return A list with R, the observed and expected means, the standard
 #'   error, z and p.
 #' @export
+#' @examples
+#' morie_lcfsdq_clark_evans(dists = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, area = 5L,
+#'   perimeter = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_lcfsdq_clark_evans <- function(dists, n, area, perimeter,
                                      edge = "none") {
   if (!(edge %in% .LCFSDQ_EDGE))
@@ -184,6 +190,11 @@ morie_lcfsdq_clark_evans <- function(dists, n, area, perimeter,
 #'   counts, the points flagged as locally clustered or isolated, and
 #'   the G function against its complete-spatial-randomness expectation.
 #' @export
+#' @examples
+#' ii <- 0:35
+#' LAT <- cbind(ii%%6L, ii%/%6L)
+#' XATT <- sin(0.7 * ii) + 0.4 * (ii%%4L)
+#' morie_lcfsdq(XATT, LAT)
 morie_lcfsdq <- function(x, coords, k = 1L, metric = "euclidean",
                          edge = "none", sd_multiplier = 1, area = NULL,
                          perimeter = NULL, grid = NULL) {
@@ -271,6 +282,8 @@ morie_lcfsdq <- function(x, coords, k = 1L, metric = "euclidean",
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_lcfsdq_cheatsheet()
 morie_lcfsdq_cheatsheet <- function()
   paste0("lcfsdq: first-order nearest-neighbour cluster query. metrics ",
          paste(.LCFSDQ_METRICS, collapse = ", "), "; edge ",

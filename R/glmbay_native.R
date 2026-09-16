@@ -55,6 +55,9 @@
 #' \code{log_det_hessian}, \code{iterations}, \code{converged}, \code{family},
 #' \code{prior_sd}, \code{n}, \code{p}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_glmbay_bayesian_glm(V, V)
 morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
                                       prior_sd = 2.5, add_intercept = TRUE,
                                       max_iter = 100, tol = 1e-10) {

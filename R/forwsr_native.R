@@ -166,6 +166,8 @@
 #'   Journal of the Royal Statistical Society Series B 71(2), 447-466,
 #'   doi:10.1111/j.1467-9868.2008.00692.x, equation (12).
 #' @export
+#' @examples
+#' morie_forwsr_consistency_factor(m = 5L, n = 5L)
 morie_forwsr_consistency_factor <- function(m, n) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -185,6 +187,9 @@ morie_forwsr_consistency_factor <- function(m, n) {
 #' @return List with \code{beta}, \code{residuals} (all rows),
 #'   \code{s2}, \code{sigma}, \code{subset}, \code{df}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_forwsr_ols_fit(V, V)
 morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
   pr <- .forwsr_prep(X, y)
   M <- pr$M
@@ -226,6 +231,9 @@ morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
 #' @return List with \code{subset} (0-based, sorted) and
 #'   \code{median_sq_residual}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_forwsr_lms_start(V, V)
 morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
   pr <- .forwsr_prep(X, y)
   n <- pr$n
@@ -263,6 +271,9 @@ morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
 #'   \code{s2}, \code{consistency_factor}, \code{sigma_corrected},
 #'   \code{min_deletion_residual} and \code{subset}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_forwsr_forward_search(V, V)
 morie_forwsr_forward_search <- function(X, y, start = NULL,
                                         n_draw = 500L, seed = 1L) {
   pr <- .forwsr_prep(X, y)
@@ -337,6 +348,9 @@ morie_forwsr_forward_plot <- function(steps,
 #' @references Atkinson and Riani (2000); Riani, Atkinson and Cerioli
 #'   (2009) doi:10.1111/j.1467-9868.2008.00692.x.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_forwsr(V, V)
 morie_forwsr <- function(X, y, start = NULL, n_draw = 500L, seed = 1L,
                          threshold = 3.0, min_df = 5L) {
   pr <- .forwsr_prep(X, y)

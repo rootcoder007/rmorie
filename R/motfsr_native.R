@@ -148,6 +148,12 @@
 #'   log_likelihood, log_likelihood_trace, n_iter, converged, alphabet,
 #'   w.
 #' @export
+#' @examples
+#' set.seed(1)
+#' seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT",
+#'           "ACGTAACCGG", "TTACGTACGT")
+#' fit <- morie_motfsr_mm_fit(seqs, w = 4)
+#' is.list(fit)
 morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
                                  theta0 = NULL, lambda0 = NULL,
                                  beta = 0.01, erasing = NULL,
@@ -261,6 +267,9 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
 #' @param motif,background Frequency matrices.
 #' @return spec with spec[i][k] = log(motif[i][k] / background[k]).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_motfsr_log_odds_matrix(V, V)
 morie_motfsr_log_odds_matrix <- function(motif, background) {
   out <- vector("list", length(motif))
   for (i in seq_along(motif)) {
@@ -283,6 +292,8 @@ morie_motfsr_log_odds_matrix <- function(motif, background) {
 #' @param loss Optional 2x2 loss matrix.
 #' @return The threshold t.
 #' @export
+#' @examples
+#' morie_motfsr_bayes_threshold(lambda1 = 0.3)
 morie_motfsr_bayes_threshold <- function(lambda1, loss = NULL) {
   lambda1 <- as.numeric(lambda1)
   if (lambda1 <= 0 || lambda1 >= 1)
@@ -309,6 +320,9 @@ morie_motfsr_bayes_threshold <- function(lambda1, loss = NULL) {
 #' @param threshold Optional threshold; if given, also returns hits.
 #' @return Vector of scores, or list(scores, hits).
 #' @export
+#' @examples
+#' morie_motfsr_score_sequence(spec = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   sequence = c(1, 2, 3, 4, 5, 6, 7, 8), alphabet = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_motfsr_score_sequence <- function(spec, sequence, alphabet,
                                          threshold = NULL) {
   alpha <- as.character(alphabet)
@@ -367,6 +381,12 @@ morie_motfsr_score_sequence <- function(spec, sequence, alphabet,
 #' @return A list with estimate / motifs, alphabet, w, n_subsequences,
 #'   erasing, method.
 #' @export
+#' @examples
+#' set.seed(1)
+#' seqs <- c("ACGTACGTAC", "TGCAACGTTG", "ACGTTGCAAC", "GGACGTACGT",
+#'           "ACGTAACCGG", "TTACGTACGT")
+#' r <- morie_motfsr(seqs, w = 4, n_motifs = 1)
+#' is.list(r)
 morie_motfsr <- function(sequences, w, alphabet = NULL, n_motifs = 1,
                           beta = 0.01, lambda0 = NULL,
                           max_iter = 1000, tol = 1e-6,

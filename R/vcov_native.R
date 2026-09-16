@@ -109,11 +109,13 @@ morie_vcov_hc <- function(model, type = "HC3") {
 #'   semi-definite, heteroskedasticity and autocorrelation consistent
 #'   covariance matrix. \emph{Econometrica}, 55(3), 703-708.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(y = rnorm(60), x = rnorm(60),
-#'                  cl = rep(1:6, each = 10))
-#' fit <- stats::lm(y ~ x, data = df)
-#' morie_vcov_hac(fit, lag = 2L)
+#' if (requireNamespace("sandwich", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60),
+#'                    cl = rep(1:6, each = 10))
+#'   fit <- stats::lm(y ~ x, data = df)
+#'   morie_vcov_hac(fit, lag = 2L)
+#' }
 #' @export
 morie_vcov_hac <- function(model, lag = NULL, prewhite = FALSE,
                            adjust = TRUE) {
@@ -149,11 +151,13 @@ morie_vcov_hac <- function(model, lag = NULL, prewhite = FALSE,
 #'   guide to cluster-robust inference. \emph{Journal of Human
 #'   Resources}, 50(2), 317-372.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(y = rnorm(60), x = rnorm(60),
-#'                  cl = rep(1:6, each = 10))
-#' fit <- stats::lm(y ~ x, data = df)
-#' morie_vcov_cl(fit, cluster = df$cl)
+#' if (requireNamespace("sandwich", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(60), x = rnorm(60),
+#'                    cl = rep(1:6, each = 10))
+#'   fit <- stats::lm(y ~ x, data = df)
+#'   morie_vcov_cl(fit, cluster = df$cl)
+#' }
 #' @export
 morie_vcov_cl <- function(model, cluster, type = "HC1") {
   p <- .morie_vcov_pieces(model)

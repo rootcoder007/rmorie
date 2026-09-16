@@ -26,6 +26,8 @@
 #' @return A scalar.
 #' @references Dwork, C. et al. (2006).
 #' @export
+#' @examples
+#' laplace_noise(scale = 0.5, e = rmorie:::.ghc_rng(1))
 laplace_noise <- function(scale, e) {
   b <- as.numeric(scale)
   if (b <= 0) stop("tmldyk: the noise scale must be positive")
@@ -46,6 +48,8 @@ laplace_noise <- function(scale, e) {
 #'   \code{inflation}, \code{g_min}, \code{n}, \code{note}.
 #' @references Dwork, C. et al. (2006).
 #' @export
+#' @examples
+#' ate_sensitivity(n = 100, g_min = 0.05)
 ate_sensitivity <- function(n, g_min, y_range = 1) {
   nn <- as.integer(n)
   if (nn < 1L) stop("tmldyk: n must be at least 1")
@@ -68,6 +72,9 @@ ate_sensitivity <- function(n, g_min, y_range = 1) {
 #'   \code{epsilon}, \code{noise_variance}, \code{note}.
 #' @references Dwork, C. et al. (2006).
 #' @export
+#' @examples
+#' r <- private_release(value = 0.4, sensitivity = 0.02, epsilon = 1)
+#' str(r, max.level = 1)
 private_release <- function(value, sensitivity, epsilon, seed = 0) {
   eps <- as.numeric(epsilon)
   if (eps <= 0) stop("tmldyk: epsilon must be positive")
@@ -96,6 +103,9 @@ private_release <- function(value, sensitivity, epsilon, seed = 0) {
 #'   \code{epsilon}.
 #' @references Dwork, C. et al. (2006).
 #' @export
+#' @examples
+#' r <- private_ci(value = 0.4, sensitivity = 0.02, epsilon = 1, se = 0.05)
+#' str(r, max.level = 1)
 private_ci <- function(value, sensitivity, epsilon, se,
                        seed = 0, level = 1.96) {
   r <- private_release(value, sensitivity, epsilon, seed)
@@ -116,6 +126,9 @@ private_ci <- function(value, sensitivity, epsilon, se,
 #'   \code{note}.
 #' @references Dwork, C. et al. (2006).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' composition_budget(V)
 composition_budget <- function(epsilons) {
   e <- as.numeric(epsilons)
   if (any(e <= 0)) stop("tmldyk: every epsilon must be positive")
@@ -144,6 +157,14 @@ composition_budget <- function(epsilons) {
 #'   \code{width_ratio}, \code{method}, \code{note}.
 #' @references Dwork, C. et al. (2006); Niu, F. et al. (2022).
 #' @export
+#' @examples
+#' set.seed(4)
+#' n <- 60
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' D <- rbinom(n, 1, 0.5)
+#' y <- plogis(-0.3 + 0.8 * D + 0.5 * X[, 1] + rnorm(n, 0, 0.5))
+#' r <- morie_tmldyk(y, D, X, epsilon = 1)
+#' str(r, max.level = 1)
 morie_tmldyk <- function(y, D, X, epsilon = 1, g_min = 0.05,
                          seed = 0, g = NULL, Q1 = NULL, Q0 = NULL) {
   yv <- as.numeric(y)

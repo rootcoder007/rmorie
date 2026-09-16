@@ -13,6 +13,9 @@
 #' @param types Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' bio_labels(V)
 bio_labels <- function(types) {
   ts <- as.character(types)
   if (length(ts) == 0) stop("benRea: no entity types given")
@@ -62,6 +65,9 @@ bio_labels <- function(types) {
 #' @param labels A vector; its length is taken and its elements indexed.
 #' @return The value of \code{T}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' valid_transitions(V)
 valid_transitions <- function(labels) {
   n <- length(labels)
   T <- matrix(TRUE, n, n)
@@ -87,6 +93,9 @@ valid_transitions <- function(labels) {
 #' @param labels Character; passed to \code{substr}.
 #' @return The value of \code{!=}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' start_allowed(V)
 start_allowed <- function(labels) {
   substr(labels, 1, 1) != "I"
 }
@@ -100,6 +109,9 @@ start_allowed <- function(labels) {
 #' @param path See Usage.
 #' @return A logical value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' is_valid_bio(V)
 is_valid_bio <- function(path) {
   prev <- "O"
   prev_t <- NA
@@ -124,6 +136,9 @@ is_valid_bio <- function(path) {
 #' @param labels A vector; indexed elementwise.
 #' @return The value of \code{apply}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' greedy_decode(V, V)
 greedy_decode <- function(emissions, labels) {
   em <- as.matrix(emissions)
   storage.mode(em) <- "double"
@@ -142,6 +157,10 @@ greedy_decode <- function(emissions, labels) {
 #' @param transition_scores Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{path}, \code{score}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' S <- c("a", "b", "c")
+#' viterbi_decode(M, S)
 viterbi_decode <- function(emissions, labels, transitions = NULL,
                            transition_scores = NULL) {
   em <- as.matrix(emissions)
@@ -191,6 +210,9 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
 #' @param path A vector; its length is taken and its elements indexed.
 #' @return The value of \code{spans}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' extract_spans(V)
 extract_spans <- function(path) {
   spans <- list()
   cur_t <- NA
@@ -238,6 +260,9 @@ extract_spans <- function(path) {
 #' @return A list with \code{precision}, \code{recall}, \code{f1}, \code{true_positives},
 #' \code{n_pred}, \code{n_gold}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' span_f1(V, V)
 span_f1 <- function(pred, gold) {
   p <- extract_spans(pred)
   g <- extract_spans(gold)
@@ -265,6 +290,8 @@ span_f1 <- function(pred, gold) {
 #' \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' ner_decode(emissions = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), types = 5L)
 ner_decode <- function(emissions, types, decoder = "viterbi",
                        transition_scores = NULL, gold = NULL) {
   if (!(decoder %in% c("viterbi", "greedy")))

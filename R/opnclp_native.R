@@ -43,8 +43,7 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .opnclp_mat(m = X)
 #' res
 .opnclp_mat <- function(m) {
@@ -66,6 +65,8 @@
 #' @param model_params Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{compute}, \code{samples_seen}, \code{params}, \code{gmac_scale}.
 #' @export
+#' @examples
+#' total_compute(samples_seen = 5L, model_params = 5L)
 total_compute <- function(samples_seen, model_params) {
   s <- as.numeric(samples_seen)
   p <- as.numeric(model_params)
@@ -90,6 +91,9 @@ total_compute <- function(samples_seen, model_params) {
 #' @return A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared},
 #' \code{range}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' fit_power_law(V, V)
 fit_power_law <- function(x, y) {
   X <- .opnclp_vec(x)
   Y <- .opnclp_vec(y)
@@ -170,6 +174,9 @@ fit_power_law <- function(x, y) {
 #' @param label_b Defaults to \code{"B"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' compare_scaling(x_a = c(1, 2, 3, 4, 5, 6, 7, 8), y_a = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   x_b = c(1, 2, 3, 4, 5, 6, 7, 8), y_b = c(1, 2, 3, 4, 5, 6, 7, 8))
 compare_scaling <- function(x_a, y_a, x_b, y_b,
                             label_a = "A", label_b = "B") {
   fa <- fit_power_law(x_a, y_a)
@@ -200,6 +207,9 @@ compare_scaling <- function(x_a, y_a, x_b, y_b,
 #' @return A list with \code{loss}, \code{image_to_text}, \code{text_to_image},
 #' \code{logits}, \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' infonce(M, M)
 infonce <- function(image_embeddings, text_embeddings,
                     temperature = 0.07) {
   I <- .opnclp_mat(image_embeddings)

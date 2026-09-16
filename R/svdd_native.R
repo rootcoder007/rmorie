@@ -41,8 +41,7 @@
 #' @return The value of \code{K}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_svdd_kernel_matrix(X = X)
 #' res
 .morie_svdd_kernel_matrix <- function(X, Y = NULL, kernel = "rbf",
@@ -187,6 +186,9 @@
 #' \code{decision}, \code{predict}, \code{C}, \code{kernel}, \code{gamma}, \code{n},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_svdd(V)
 morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
                         gamma = NULL, degree = 3, coef0 = 1.0,
                         tol = 1e-10, max_iter = 20000) {

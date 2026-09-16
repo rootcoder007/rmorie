@@ -199,6 +199,9 @@
 #' @param solver "simplex" or "interior".
 #' @return A list with feasible, x, value, note.
 #' @export
+#' @examples
+#' morie_miprgr_solve_relaxation(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   c = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
                                           n = NULL,
                                           maximise = TRUE,
@@ -272,6 +275,9 @@ morie_miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
 #' @param tol Tolerance.
 #' @return A list with index, fractionality, integral.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_miprgr_fractional_variable(V, V)
 morie_miprgr_fractional_variable <- function(x, integer_vars,
                                               tol = .GHC_MIP_EPS) {
   best <- NA_integer_
@@ -295,6 +301,9 @@ morie_miprgr_fractional_variable <- function(x, integer_vars,
 #' @param integer_vars Indices that must be integral.
 #' @return A list with x, feasible, violations, note.
 #' @export
+#' @examples
+#' morie_miprgr_round_relaxation(x = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   b = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_miprgr_round_relaxation <- function(x, A, b, integer_vars) {
   xr <- as.numeric(x)
   for (j in as.integer(integer_vars)) xr[j] <- round(xr[j])
@@ -360,6 +369,9 @@ morie_miprgr_enumerate_integer <- function(A, b, c, integer_vars,
 #'   number of nodes pruned, the maximum length of the marked list,
 #'   and the root relaxation value.
 #' @export
+#' @examples
+#' morie_miprgr_branch_and_bound(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   c = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c("a", "b", "c"))
 morie_miprgr_branch_and_bound <- function(A, b, c, integer_vars,
                                           maximise = TRUE,
                                           prune = TRUE,

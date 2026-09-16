@@ -176,29 +176,31 @@ NULL
 #' @return A \code{morie_rich_result} list (see
 #'   \code{morie_multiple_testing}).
 #' @examples
-#' set.seed(1)
-#' # 60 tests: 50 null (uniform p) + 10 strong signals near zero.
-#' p <- c(runif(50), runif(10, 0, 0.005))
+#' if (requireNamespace("mutoss", quietly = TRUE)) {
+#'   set.seed(1)
+#'   # 60 tests: 50 null (uniform p) + 10 strong signals near zero.
+#'   p <- c(runif(50), runif(10, 0, 0.005))
 #'
-#' res <- bonferroni(p, alpha = 0.05)
-#' res                       # rich print: method, alpha, tests, rejected
+#'   res <- bonferroni(p, alpha = 0.05)
+#'   res                       # rich print: method, alpha, tests, rejected
 #'
-#' # The result carries the full adjusted-p and rejection vectors.
-#' head(res$adjusted)        # each raw p multiplied by n (capped at 1)
-#' res$n_rejected            # how many survive alpha after correction
-#' which(res$rejected)       # indices declared significant
+#'   # The result carries the full adjusted-p and rejection vectors.
+#'   head(res$adjusted)        # each raw p multiplied by n (capped at 1)
+#'   res$n_rejected            # how many survive alpha after correction
+#'   which(res$rejected)       # indices declared significant
 #'
-#' # `alpha` sets the rejection threshold; stricter alpha rejects fewer.
-#' bonferroni(p, alpha = 0.01)$n_rejected
+#'   # `alpha` sets the rejection threshold; stricter alpha rejects fewer.
+#'   bonferroni(p, alpha = 0.01)$n_rejected
 #'
-#' # `labels` names each test so the output is self-documenting.
-#' bonferroni(c(0.001, 0.02, 0.3),
-#'            labels = c("geneA", "geneB", "geneC"))$labels
+#'   # `labels` names each test so the output is self-documenting.
+#'   bonferroni(c(0.001, 0.02, 0.3),
+#'              labels = c("geneA", "geneB", "geneC"))$labels
 #'
-#' # Bonferroni is the most conservative FWER method -- compare to Holm/BH.
-#' c(bonferroni = bonferroni(p)$n_rejected,
-#'   holm       = holm(p)$n_rejected,
-#'   BH         = benjamini_hochberg(p)$n_rejected)
+#'   # Bonferroni is the most conservative FWER method -- compare to Holm/BH.
+#'   c(bonferroni = bonferroni(p)$n_rejected,
+#'     holm       = holm(p)$n_rejected,
+#'     BH         = benjamini_hochberg(p)$n_rejected)
+#' }
 #' @export
 bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -216,18 +218,20 @@ bonferroni <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' if (requireNamespace("mutoss", quietly = TRUE)) {
+#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#' res <- sidak(p)
-#' res$adjusted              # 1 - (1 - p)^m, slightly below Bonferroni
-#' res$n_rejected
+#'   res <- sidak(p)
+#'   res$adjusted              # 1 - (1 - p)^m, slightly below Bonferroni
+#'   res$n_rejected
 #'
-#' # Less conservative than Bonferroni under independence:
-#' rbind(sidak      = sidak(p)$adjusted,
-#'       bonferroni = bonferroni(p)$adjusted)
+#'   # Less conservative than Bonferroni under independence:
+#'   rbind(sidak      = sidak(p)$adjusted,
+#'         bonferroni = bonferroni(p)$adjusted)
 #'
-#' # alpha + labels behave as in bonferroni().
-#' sidak(p, alpha = 0.01, labels = paste0("H", seq_along(p)))$rejected
+#'   # alpha + labels behave as in bonferroni().
+#'   sidak(p, alpha = 0.01, labels = paste0("H", seq_along(p)))$rejected
+#' }
 #' @export
 sidak <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -244,20 +248,22 @@ sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' set.seed(1)
-#' p <- c(runif(30), runif(5, 0, 0.005))
+#' if (requireNamespace("mutoss", quietly = TRUE)) {
+#'   set.seed(1)
+#'   p <- c(runif(30), runif(5, 0, 0.005))
 #'
-#' res <- holm(p)
-#' res$n_rejected
-#' head(res$adjusted)
+#'   res <- holm(p)
+#'   res$n_rejected
+#'   head(res$adjusted)
 #'
-#' # Holm is uniformly more powerful than Bonferroni (rejects at least as
-#' # many), while still controlling the family-wise error rate:
-#' c(holm = holm(p)$n_rejected, bonferroni = bonferroni(p)$n_rejected)
+#'   # Holm is uniformly more powerful than Bonferroni (rejects at least as
+#'   # many), while still controlling the family-wise error rate:
+#'   c(holm = holm(p)$n_rejected, bonferroni = bonferroni(p)$n_rejected)
 #'
-#' # alpha + labels as usual.
-#' holm(c(0.001, 0.01, 0.04), alpha = 0.05,
-#'      labels = c("A", "B", "C"))$rejected
+#'   # alpha + labels as usual.
+#'   holm(c(0.001, 0.01, 0.04), alpha = 0.05,
+#'        labels = c("A", "B", "C"))$rejected
+#' }
 #' @export
 holm <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -298,18 +304,20 @@ hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' set.seed(1)
-#' p <- c(runif(30), runif(5, 0, 0.005))
+#' if (requireNamespace("mutoss", quietly = TRUE)) {
+#'   set.seed(1)
+#'   p <- c(runif(30), runif(5, 0, 0.005))
 #'
-#' res <- hommel(p)
-#' res$n_rejected
-#' head(res$adjusted)
+#'   res <- hommel(p)
+#'   res$n_rejected
+#'   head(res$adjusted)
 #'
-#' # Hommel is the most powerful of the stats::p.adjust FWER methods
-#' # (>= Hochberg), at higher computational cost.
-#' c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
+#'   # Hommel is the most powerful of the stats::p.adjust FWER methods
+#'   # (>= Hochberg), at higher computational cost.
+#'   c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
 #'
-#' hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
+#'   hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
+#' }
 #' @export
 hommel <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -366,24 +374,26 @@ holm_sidak <- function(p_values, alpha = 0.05, labels = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' set.seed(1)
-#' # 100 tests, 20 true effects: FDR control keeps more power than FWER.
-#' p <- c(runif(80), runif(20, 0, 0.005))
+#' if (requireNamespace("mutoss", quietly = TRUE)) {
+#'   set.seed(1)
+#'   # 100 tests, 20 true effects: FDR control keeps more power than FWER.
+#'   p <- c(runif(80), runif(20, 0, 0.005))
 #'
-#' res <- benjamini_hochberg(p)
-#' res$n_rejected
-#' head(res$adjusted)          # BH-adjusted q-values
-#' sum(res$rejected)           # discoveries at the default alpha = 0.05
+#'   res <- benjamini_hochberg(p)
+#'   res$n_rejected
+#'   head(res$adjusted)          # BH-adjusted q-values
+#'   sum(res$rejected)           # discoveries at the default alpha = 0.05
 #'
-#' # BH controls the false discovery rate, so it rejects far more than the
-#' # FWER methods on the same data:
-#' c(BH = benjamini_hochberg(p)$n_rejected,
-#'   holm = holm(p)$n_rejected,
-#'   bonferroni = bonferroni(p)$n_rejected)
+#'   # BH controls the false discovery rate, so it rejects far more than the
+#'   # FWER methods on the same data:
+#'   c(BH = benjamini_hochberg(p)$n_rejected,
+#'     holm = holm(p)$n_rejected,
+#'     bonferroni = bonferroni(p)$n_rejected)
 #'
-#' # `bh()` is a shorthand alias; `alpha` sets the FDR level.
-#' identical(bh(p)$adjusted, benjamini_hochberg(p)$adjusted)
-#' benjamini_hochberg(p, alpha = 0.10)$n_rejected
+#'   # `bh()` is a shorthand alias; `alpha` sets the FDR level.
+#'   identical(bh(p)$adjusted, benjamini_hochberg(p)$adjusted)
+#'   benjamini_hochberg(p, alpha = 0.10)$n_rejected
+#' }
 #' @export
 benjamini_hochberg <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -402,20 +412,22 @@ bh <- benjamini_hochberg
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' set.seed(1)
-#' p <- c(runif(80), runif(20, 0, 0.005))
+#' if (requireNamespace("qvalue", quietly = TRUE)) {
+#'   set.seed(1)
+#'   p <- c(runif(80), runif(20, 0, 0.005))
 #'
-#' res <- benjamini_yekutieli(p)
-#' res$n_rejected
-#' head(res$adjusted)
+#'   res <- benjamini_yekutieli(p)
+#'   res$n_rejected
+#'   head(res$adjusted)
 #'
-#' # BY controls FDR under ARBITRARY dependence, so it is more conservative
-#' # than BH (which assumes independence / positive dependence):
-#' c(BY = benjamini_yekutieli(p)$n_rejected,
-#'   BH = benjamini_hochberg(p)$n_rejected)
+#'   # BY controls FDR under ARBITRARY dependence, so it is more conservative
+#'   # than BH (which assumes independence / positive dependence):
+#'   c(BY = benjamini_yekutieli(p)$n_rejected,
+#'     BH = benjamini_hochberg(p)$n_rejected)
 #'
-#' benjamini_yekutieli(p, alpha = 0.10,
-#'                     labels = paste0("t", seq_along(p)))$n_rejected
+#'   benjamini_yekutieli(p, alpha = 0.10,
+#'                       labels = paste0("t", seq_along(p)))$n_rejected
+#' }
 #' @export
 benjamini_yekutieli <- function(p_values, alpha = 0.05, labels = NULL) {
   p <- .mt_check_p(p_values)
@@ -440,20 +452,22 @@ by_fdr <- benjamini_yekutieli
 #'   estimator.
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' set.seed(1)
-#' p <- c(runif(80), runif(20, 0, 0.005))
+#' if (requireNamespace("qvalue", quietly = TRUE)) {
+#'   set.seed(1)
+#'   p <- c(runif(80), runif(20, 0, 0.005))
 #'
-#' res <- storey_q(p)
-#' res$pi0                     # estimated proportion of true nulls
-#' head(res$adjusted)          # q-values
-#' res$n_rejected
+#'   res <- storey_q(p)
+#'   res$pi0                     # estimated proportion of true nulls
+#'   head(res$adjusted)          # q-values
+#'   res$n_rejected
 #'
-#' # `lambda_param` tunes the pi0 estimator; different lambda, different pi0.
-#' storey_q(p, lambda_param = 0.5)$pi0
-#' storey_q(p, lambda_param = 0.8)$pi0
+#'   # `lambda_param` tunes the pi0 estimator; different lambda, different pi0.
+#'   storey_q(p, lambda_param = 0.5)$pi0
+#'   storey_q(p, lambda_param = 0.8)$pi0
 #'
-#' # Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
-#' c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
+#'   # Adaptive FDR rejects at least as many as BH (pi0 <= 1 tightens BH):
+#'   c(storey = storey_q(p)$n_rejected, BH = benjamini_hochberg(p)$n_rejected)
+#' }
 #' @export
 storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
                      labels = NULL) {
@@ -539,17 +553,19 @@ storey_q <- function(p_values, alpha = 0.05, lambda_param = 0.5,
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' # Combine several independent tests into one global p-value.
-#' res <- fisher_combined(c(0.001, 0.6, 0.5))
-#' res                          # rich print: statistic, df, combined p
-#' res$p_value                  # the combined p-value
-#' res$statistic                # chi-square = -2 * sum(log p)
+#' if (requireNamespace("poolr", quietly = TRUE)) {
+#'   # Combine several independent tests into one global p-value.
+#'   res <- fisher_combined(c(0.001, 0.6, 0.5))
+#'   res                          # rich print: statistic, df, combined p
+#'   res$p_value                  # the combined p-value
+#'   res$statistic                # chi-square = -2 * sum(log p)
 #'
-#' # One small p can drive the combination significant.
-#' fisher_combined(c(0.0001, 0.9, 0.8, 0.7))$p_value
+#'   # One small p can drive the combination significant.
+#'   fisher_combined(c(0.0001, 0.9, 0.8, 0.7))$p_value
 #'
-#' # All-null inputs stay non-significant.
-#' fisher_combined(c(0.4, 0.5, 0.6))$p_value
+#'   # All-null inputs stay non-significant.
+#'   fisher_combined(c(0.4, 0.5, 0.6))$p_value
+#' }
 #' @export
 fisher_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -587,19 +603,21 @@ fisher_combined <- function(p_values) {
 #' @param weights Optional non-negative weights (any scale).
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' if (requireNamespace("poolr", quietly = TRUE)) {
+#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#' res <- stouffer_combined(p)
-#' res$statistic                # combined Z
-#' res$p_value
+#'   res <- stouffer_combined(p)
+#'   res$statistic                # combined Z
+#'   res$p_value
 #'
-#' # `weights` up-weights more trustworthy / larger studies.
-#' w <- c(10, 8, 5, 5, 2, 1)
-#' stouffer_combined(p, weights = w)$p_value
+#'   # `weights` up-weights more trustworthy / larger studies.
+#'   w <- c(10, 8, 5, 5, 2, 1)
+#'   stouffer_combined(p, weights = w)$p_value
 #'
-#' # Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
-#' c(stouffer = stouffer_combined(p)$p_value,
-#'   fisher   = fisher_combined(p)$p_value)
+#'   # Compare Fisher (log-based) vs Stouffer (z-based) on the same inputs.
+#'   c(stouffer = stouffer_combined(p)$p_value,
+#'     fisher   = fisher_combined(p)$p_value)
+#' }
 #' @export
 stouffer_combined <- function(p_values, weights = NULL) {
   p <- .mt_check_p(p_values)
@@ -639,16 +657,18 @@ stouffer_combined <- function(p_values, weights = NULL) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' if (requireNamespace("poolr", quietly = TRUE)) {
+#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#' res <- tippett_combined(p)
-#' res$statistic                # the minimum p-value
-#' res$p_value                  # 1 - (1 - min p)^m
+#'   res <- tippett_combined(p)
+#'   res$statistic                # the minimum p-value
+#'   res$p_value                  # 1 - (1 - min p)^m
 #'
-#' # Tippett is powerful when a single strong signal is enough (min-p);
-#' # contrast with Fisher, which aggregates evidence across all tests.
-#' c(tippett = tippett_combined(p)$p_value,
-#'   fisher  = fisher_combined(p)$p_value)
+#'   # Tippett is powerful when a single strong signal is enough (min-p);
+#'   # contrast with Fisher, which aggregates evidence across all tests.
+#'   c(tippett = tippett_combined(p)$p_value,
+#'     fisher  = fisher_combined(p)$p_value)
+#' }
 #' @export
 tippett_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -679,17 +699,19 @@ tippett_combined <- function(p_values) {
 #' @inheritParams bonferroni
 #' @return An object of class \code{"morie_multiple_testing_result"}.
 #' @examples
-#' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+#' if (requireNamespace("mutoss", quietly = TRUE)) {
+#'   p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 #'
-#' res <- simes_combined(p)
-#' res$p_value                  # Simes global-null p (min of sorted p * m/i)
+#'   res <- simes_combined(p)
+#'   res$p_value                  # Simes global-null p (min of sorted p * m/i)
 #'
-#' # Simes is a less conservative global-null test than Bonferroni's min:
-#' c(simes = simes_combined(p)$p_value,
-#'   bonferroni_min = min(bonferroni(p)$adjusted))
+#'   # Simes is a less conservative global-null test than Bonferroni's min:
+#'   c(simes = simes_combined(p)$p_value,
+#'     bonferroni_min = min(bonferroni(p)$adjusted))
 #'
-#' # A single very small p makes the global null significant.
-#' simes_combined(c(0.0005, 0.4, 0.6, 0.8))$p_value
+#'   # A single very small p makes the global null significant.
+#'   simes_combined(c(0.0005, 0.4, 0.6, 0.8))$p_value
+#' }
 #' @export
 simes_combined <- function(p_values) {
   p <- .mt_check_p(p_values)
@@ -879,8 +901,10 @@ fallback_procedure <- function(p_values, weights, alpha = 0.05,
 #' @return A \code{morie_rich_result} list with one stage entry per
 #'   family and an \code{overall_rejected} logical vector.
 #' @examples
-#' res <- hierarchical_bonferroni(list(c(0.4, 0.5), c(0.001, 0.002)))
-#' str(res)
+#' if (requireNamespace("qvalue", quietly = TRUE)) {
+#'   res <- hierarchical_bonferroni(list(c(0.4, 0.5), c(0.001, 0.002)))
+#'   str(res)
+#' }
 #' @export
 hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
                                     propagate_alpha = TRUE) {
@@ -980,9 +1004,11 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
 #'   \code{"two_step"}.
 #' @return A scalar pi0 estimate in `[0, 1]`.
 #' @examples
-#' set.seed(1)
-#' p <- c(runif(80), runif(20, 0, 0.005))
-#' estimate_pi0(p, method = "storey")
+#' if (requireNamespace("qvalue", quietly = TRUE)) {
+#'   set.seed(1)
+#'   p <- c(runif(80), runif(20, 0, 0.005))
+#'   estimate_pi0(p, method = "storey")
+#' }
 #' @export
 estimate_pi0 <- function(p_values,
                          method = c("storey", "bootstrap", "two_step")) {
@@ -1057,10 +1083,12 @@ estimate_pi0 <- function(p_values,
 #' @return A named \code{list} of adjusted p-values with method metadata (as built by the
 #' selected adjustment method).
 #' @examples
-#' set.seed(1)
-#' p <- c(runif(20), runif(5, 0, 0.005))
-#' res <- adjust_p_values(p, method = "bh")
-#' res$n_rejected
+#' if (requireNamespace("poolr", quietly = TRUE)) {
+#'   set.seed(1)
+#'   p <- c(runif(20), runif(5, 0, 0.005))
+#'   res <- adjust_p_values(p, method = "bh")
+#'   res$n_rejected
+#' }
 #' @export
 adjust_p_values <- function(p_values, method = "bh", alpha = 0.05,
                             labels = NULL) {
@@ -1099,9 +1127,11 @@ adjust_p_values <- function(p_values, method = "bh", alpha = 0.05,
 #'   \code{"li_ji"} (Li and Ji 2005), or \code{"nyholt"} (Nyholt 2004).
 #' @return Effective number of tests (>= 1).
 #' @examples
-#' set.seed(1)
-#' X <- matrix(rnorm(200), ncol = 5)
-#' n_effective_tests(stats::cor(X))
+#' if (requireNamespace("poolr", quietly = TRUE)) {
+#'   set.seed(1)
+#'   X <- matrix(rnorm(200), ncol = 5)
+#'   n_effective_tests(stats::cor(X))
+#' }
 #' @export
 n_effective_tests <- function(correlation_matrix,
                               method = c("galwey", "li_ji", "nyholt")) {

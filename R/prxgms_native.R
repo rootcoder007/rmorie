@@ -18,6 +18,9 @@
 #' @param tau Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prxgms_soft_threshold(V, V)
 morie_prxgms_soft_threshold <- function(v, tau) {
   v <- as.numeric(v)
   tau <- as.numeric(tau)
@@ -117,6 +120,8 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
 #' @param accelerate Passed to \code{morie_prxgms_prox_gradient}. Defaults to \code{TRUE}.
 #' @return The value of \code{res}, as built in the body.
 #' @export
+#' @examples
+#' morie_prxgms_lasso_fista(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, lam = 5L)
 morie_prxgms_lasso_fista <- function(A, b, lam, max.iter = 500L, tol = 1e-10,
                                      accelerate = TRUE) {
   Am <- as.matrix(A)

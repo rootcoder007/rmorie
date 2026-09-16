@@ -414,6 +414,9 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' \code{n_replicates}, \code{method}, \code{dropped}, \code{hadamard_order}, \code{fay},
 #' \code{seed}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_replwt(D)
 morie_replwt <- function(d, method = "jkn", R = 200, fay = 0.0, seed = 1) {
   if (!method %in% METHODS) {
     stop(sprintf("replwt: method must be one of %s, got %s",

@@ -318,11 +318,13 @@ morie_aft_generalized_gamma <- function(time, event, X, ...) {
 #' @references Cox, D. R. and Snell, E. J. (1968). A general definition
 #'   of residuals. \emph{JRSS-B}, 30(2), 248-265.
 #' @examples
-#' set.seed(2)
-#' X <- matrix(rnorm(200), ncol = 2)
-#' tt <- exp(0.5 + X %*% c(0.8, -0.4) - 0.7 * log(rexp(100)))
-#' f <- morie_aft_weibull(tt, rep(1, 100), X)
-#' round(mean(morie_aft_residuals(f)$cox_snell), 2)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(2)
+#'   X <- matrix(rnorm(200), ncol = 2)
+#'   tt <- exp(0.5 + X %*% c(0.8, -0.4) - 0.7 * log(rexp(100)))
+#'   f <- morie_aft_weibull(tt, rep(1, 100), X)
+#'   round(mean(morie_aft_residuals(f)$cox_snell), 2)
+#' }
 #' @export
 morie_aft_residuals <- function(fit) {
   for (k in c("time", "event", "X", "beta", "log_sigma", "family")) {

@@ -144,9 +144,11 @@
 #' @references Ontario Open Data Catalogue, "Police Use of Force"
 #'   (\url{https://data.ontario.ca/dataset/police-use-of-force-race-based-data});
 #'   Open Government Licence -- Ontario.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
 #' head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_uof_main_records <- function(year = "2024",
                                                   offline = TRUE,
@@ -262,9 +264,11 @@ morie_datasets_otis_d01_deaths_in_custody <- function(offline = TRUE,
 #' @references TPS Public Safety Data Portal, "Mental Health Act
 #'   Apprehensions Open Data"
 #'   (\url{https://data.tps.ca/datasets/333c4e1c96314741a83425045b6a7642_0/explore}).
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_tps_mha_apprehensions(offline = TRUE)
 #' table(df$APPREHENSION_TYPE)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_mha_apprehensions <- function(year = NULL,
                                                  max_features = NULL,
@@ -396,9 +400,11 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 #' @param year Reporting year (`"2023"` or `"2024"`).
 #' @inheritParams morie_datasets_arsau_uof_main_records
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
 #' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_uof_individual_records <- function(year = "2024",
                                                         offline = TRUE,
@@ -458,9 +464,11 @@ morie_datasets_arsau_uof_weapon_records <- function(year = "2024",
 #'   fixture. If `FALSE`, hit Ontario CKAN.
 #' @param resource_id Optional override.
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
 #' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
                                                    resource_id = NULL) {
@@ -473,9 +481,11 @@ morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
 #' Ontario Use-of-Force detailed dataset (5-year 2020-2022, pre-RBDS)
 #' @inheritParams morie_datasets_arsau_aggregate_summary
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
 #' dim(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
                                                   resource_id = NULL) {
@@ -1380,11 +1390,13 @@ morie_datasets_otis_c12_aggregate_durations_by_region <- function(
 #'   endpoint.
 #' @param resource_id Optional CKAN resource_id override.
 #' @return A `data.frame`.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_ontario_ckan_by_key("arsau_uof_main_records_2024",
 #'   offline = TRUE
 #' )
 #' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_ontario_ckan_by_key <- function(dataset_key,
                                                offline = TRUE,

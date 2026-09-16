@@ -69,6 +69,9 @@
 #' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{epsilon}, \code{p}, \code{n}, \code{rng}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_locdp(V)
 morie_locdp <- function(x, epsilon = 1.0, seed = NULL) {
   if (!is.numeric(epsilon) || length(epsilon) != 1L ||
       is.na(epsilon) || epsilon < 0) {
@@ -116,6 +119,8 @@ morie_localdp  <- morie_locdp
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_locdp_cheatsheet()
 morie_locdp_cheatsheet <- function() {
   "locdp: local DP randomized response (alias of rrand.randomized_response)."
 }

@@ -258,6 +258,9 @@
 #' \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form},
 #' \code{solver}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_remlfn(y = rnorm(10), group = rbinom(10, 1, 0.5)); TRUE
 morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto") {
   y <- as.numeric(y)
 

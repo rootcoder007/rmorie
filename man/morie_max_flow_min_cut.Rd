@@ -24,7 +24,7 @@ matrix rather than assumed equal, so the theorem is a check rather
 than a restatement.
 }
 \examples{
-C <- matrix(c(0, 3, 2, 0, 0, 0, 5, 2, 0, 0, 0, 3, 0, 0, 0, 0), 
+C <- matrix(c(0, 3, 2, 0, 0, 0, 5, 2, 0, 0, 0, 3, 0, 0, 0, 0),
     4, 4, byrow = TRUE)
 morie_max_flow_min_cut(C, 1, 4)
 }

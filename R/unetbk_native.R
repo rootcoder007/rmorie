@@ -96,6 +96,8 @@
 #' @return A list with \code{output}, \code{input}, \code{border_lost},
 #' \code{skip_sizes}, \code{note}.
 #' @export
+#' @examples
+#' valid_output_size(572L, depth = 4L)
 valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L) {
   s <- as.integer(input_size)
   kk <- as.integer(kernel) - 1L
@@ -146,6 +148,8 @@ valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kern
 #' @param pad Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' mirror_pad(matrix(as.numeric(1:16), 4, 4), pad = 2L)
 mirror_pad <- function(image, pad) {
   img <- .unetbk_as_matrix(image)
   p <- as.integer(pad)
@@ -181,6 +185,8 @@ mirror_pad <- function(image, pad) {
 #' @param border Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{tiles}, \code{n_tiles}, \code{output_size}, \code{note}.
 #' @export
+#' @examples
+#' overlap_tiles(height = 100L, width = 100L, tile = 32L, border = 8L)
 overlap_tiles <- function(height, width, tile, border) {
   t <- as.integer(tile)
   b <- as.integer(border)
@@ -224,6 +230,9 @@ overlap_tiles <- function(height, width, tile, border) {
 #' @param contracting Passed to \code{.unetbk_as_matrix}.
 #' @return A list with \code{concatenated}, \code{crop_offset}, \code{channels}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' skip_concat(V, V)
 skip_concat <- function(upsampled, contracting) {
   up <- .unetbk_as_matrix(upsampled)
   co <- .unetbk_as_matrix(contracting)
@@ -262,6 +271,9 @@ skip_concat <- function(upsampled, contracting) {
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A list with \code{weights}, \code{n_instances}, \code{max_weight}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' separation_weight_map(V)
 separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
   lab <- .unetbk_as_matrix(labels)
   h <- nrow(lab)

@@ -24,6 +24,6 @@ A <- matrix(c(1, 0, 2, 1), 2)
 B <- diag(2)
 x <- c(1, 2, 3, 4)
 y <- morie_kamath_ch4_krona_efficient(A, B, x)$y
-morie_kamath_constitutional_ai_loop("r0", list("p1", "p2"), function(st, 
+morie_kamath_constitutional_ai_loop("r0", list("p1", "p2"), function(st,
     p, y, cr) paste(st, p, y, sep = ":"))
 }

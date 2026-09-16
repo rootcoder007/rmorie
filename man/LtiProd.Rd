@@ -22,6 +22,6 @@ A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{s}, \code{m
 }
 \keyword{internal}
 \examples{
-LtiProd(c(1, 2, 1), c(1, -1), s = complex(real = 0.3, imaginary = 1.1), 
+LtiProd(c(1, 2, 1), c(1, -1), s = complex(real = 0.3, imaginary = 1.1),
     dt = 0.5)
 }

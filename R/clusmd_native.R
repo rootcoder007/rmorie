@@ -339,6 +339,9 @@
 #' @references Butina, D. (1999) J. Chem. Inf. Comput. Sci. 39(4),
 #'   747-750. doi:10.1021/ci9803381.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_clusmd_neighbour_lists(V)
 morie_clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
   .clusmd_neighbour_lists(fps, threshold)
 }
@@ -365,6 +368,9 @@ morie_clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
 #' @references Butina, D. (1999) J. Chem. Inf. Comput. Sci. 39(4),
 #'   747-750. doi:10.1021/ci9803381.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_clusmd_butina_clusters(V)
 morie_clusmd_butina_clusters <- function(fps, threshold = 0.8,
                                          recount = FALSE) {
   .clusmd_butina_clusters(fps, threshold, recount)
@@ -404,6 +410,9 @@ morie_clusmd_cluster_summary <- function(clusters) {
 #' @references Butina, D. (1999) J. Chem. Inf. Comput. Sci. 39(4),
 #'   747-750. doi:10.1021/ci9803381.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_clusmd_butina_clustering(V)
 morie_clusmd_butina_clustering <- function(fps, threshold = 0.8,
                                            recount = FALSE) {
   cl <- .clusmd_butina_clusters(fps, threshold, recount)

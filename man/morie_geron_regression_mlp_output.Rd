@@ -26,7 +26,7 @@ List with \code{prediction}, \code{preactivation}, \code{out_features}.
 Regression MLP output head (Geron Ch 10, morie.fn grmlr)
 }
 \examples{
-morie_geron_regression_mlp_output(matrix(c(1, 2, -1, 0.5), 2, 
-    byrow = TRUE), matrix(c(1, -1, 0.5, 2), 2, byrow = TRUE), 
+morie_geron_regression_mlp_output(matrix(c(1, 2, -1, 0.5), 2,
+    byrow = TRUE), matrix(c(1, -1, 0.5, 2), 2, byrow = TRUE),
     c(0.1, 0.2), activation = "softplus")
 }

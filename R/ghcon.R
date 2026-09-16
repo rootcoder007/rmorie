@@ -11,7 +11,9 @@
 #' @return Named list with estimate, ks_mean, ks_se, schwartz_bound, n, eps, method.
 #' @examples
 #' set.seed(1)
-#' morie_ghosal_posterior_consistency(x = rnorm(50))
+#' if (requireNamespace("MCMCpack", quietly = TRUE)) {
+#'   morie_ghosal_posterior_consistency(x = rnorm(50))
+#' }
 #' @export
 morie_ghosal_posterior_consistency <- function(x, ref_loc = NULL, ref_scale = NULL,
                                                eps = 0.1, K = 200, seed = 0) {

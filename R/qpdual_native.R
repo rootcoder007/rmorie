@@ -137,6 +137,8 @@ qpdual <- morie_qpdual
 quadratic_program <- morie_qpdual
 
 #' @export
+#' @examples
+#' qpdual_cheatsheet()
 qpdual_cheatsheet <- function() {
   paste0("qpdual: Frank-Wolfe, s = argmin_C <grad, s>, ",
          "x += gamma (s - x); ",

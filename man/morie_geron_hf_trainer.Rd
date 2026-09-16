@@ -24,9 +24,9 @@ the result is exact and shuffle-independent.
 }
 \examples{
 if (requireNamespace("ranger", quietly = TRUE)) {
-  W <- list(W_z = matrix(0, 2, 2), U_z = matrix(0, 2, 2), b_z = c(0, 
-      0), W_r = matrix(0, 2, 2), U_r = matrix(0, 2, 2), b_r = c(0, 
-      0), W_h = matrix(0, 2, 2), U_h = matrix(0, 2, 2), b_h = c(0, 
+  W <- list(W_z = matrix(0, 2, 2), U_z = matrix(0, 2, 2), b_z = c(0,
+      0), W_r = matrix(0, 2, 2), U_r = matrix(0, 2, 2), b_r = c(0,
+      0), W_h = matrix(0, 2, 2), U_h = matrix(0, 2, 2), b_h = c(0,
       0))
   r <- morie_geron_gru(c(0, 0), c(4, -2), W)
   X <- matrix(c(1, 2, 3, 4), ncol = 1)
@@ -36,7 +36,7 @@ if (requireNamespace("ranger", quietly = TRUE)) {
       list(mean(r^2), (2/length(yb)) * as.numeric(t(Xb) \%*\% r))
   }
   m0 <- list(params = 0, loss_and_grad = lg)
-  morie_geron_hf_trainer(m0, list(epochs = 50, batch_size = 4, 
+  morie_geron_hf_trainer(m0, list(epochs = 50, batch_size = 4,
       learning_rate = 0.05), list(X, y), list(X, y))
 }
 }

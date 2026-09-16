@@ -116,6 +116,15 @@
 #' \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged},
 #' \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.
 #' @export
+#' @examples
+#' n <- 40
+#' x1 <- sapply(0:(n - 1), function(i) ((i * 7)%%11)/5 - 1)
+#' x2 <- sapply(0:(n - 1), function(i) ((i * 5)%%7)/3 - 1)
+#' X <- cbind(x1, x2)
+#' yb <- c(0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1,
+#'     0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1,
+#'     0, 1, 1)
+#' morie_glm(yb, X, "binomial")
 morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
                       weights = NULL, offset = NULL, max_iter = 25L,
                       tol = 1e-8) {
@@ -240,6 +249,16 @@ morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
 #' \code{as.numeric}.
 #' @return The value of \code{.morie_glm_families()[[fit$family]]$linkinv}.
 #' @export
+#' @examples
+#' n <- 40
+#' x1 <- sapply(0:(n - 1), function(i) ((i * 7)%%11)/5 - 1)
+#' x2 <- sapply(0:(n - 1), function(i) ((i * 5)%%7)/3 - 1)
+#' X <- cbind(x1, x2)
+#' yb <- c(0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1,
+#'     0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1,
+#'     0, 1, 1)
+#' f <- morie_glm(yb, X, "binomial")
+#' morie_glm_predict(f, X, type = "link")
 morie_glm_predict <- function(fit, X, add_intercept = TRUE,
                               type = c("response", "link"), offset = NULL) {
   type <- match.arg(type)
@@ -270,6 +289,16 @@ morie_glm_predict <- function(fit, X, add_intercept = TRUE,
 #' @param y Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' n <- 40
+#' x1 <- sapply(0:(n - 1), function(i) ((i * 7)%%11)/5 - 1)
+#' x2 <- sapply(0:(n - 1), function(i) ((i * 5)%%7)/3 - 1)
+#' X <- cbind(x1, x2)
+#' yb <- c(0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1,
+#'     0, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1,
+#'     0, 1, 1)
+#' f <- morie_glm(yb, X, "binomial")
+#' morie_deviance_residuals(f, yb)
 morie_deviance_residuals <- function(fit, y) {
   y <- as.numeric(y)
   d <- pmax(.morie_glm_families()[[fit$family]]$dev_resid(y, fit$fitted), 0)

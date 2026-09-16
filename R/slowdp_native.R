@@ -46,6 +46,8 @@
 #' @return A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass},
 #' \code{K}, \code{alpha}, \code{note}.
 #' @export
+#' @examples
+#' stick_breaking(alpha = 0.5, K = 5L)
 stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
   a <- as.numeric(alpha)
   n <- as.integer(K)
@@ -82,6 +84,8 @@ stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
 #' @return A list with \code{expected_tail}, \code{kept}, \code{alpha}, \code{K},
 #' \code{per_stick_factor}, \code{note}.
 #' @export
+#' @examples
+#' truncation_error(alpha = 0.5, K = 5L)
 truncation_error <- function(alpha, K) {
   a <- as.numeric(alpha)
   n <- as.integer(K)
@@ -103,6 +107,8 @@ truncation_error <- function(alpha, K) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return A list with \code{K}, \code{expected_tail}, \code{tolerance}, \code{note}.
 #' @export
+#' @examples
+#' sticks_for_tolerance(alpha = 0.5)
 sticks_for_tolerance <- function(alpha, tol = 1e-3) {
   a <- as.numeric(alpha)
   t <- as.numeric(tol)
@@ -129,6 +135,8 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
 #' @return A list with \code{realised_tail}, \code{expected_tail}, \code{ratio},
 #' \code{largest_index}, \code{monotone}, \code{note}.
 #' @export
+#' @examples
+#' decay_diagnostics(weights = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
 decay_diagnostics <- function(weights, alpha) {
   p <- as.numeric(weights)
   K <- length(p)
@@ -167,6 +175,8 @@ decay_diagnostics <- function(weights, alpha) {
 #' \code{discarded_mass}, \code{expected_discarded}, \code{renormalised}, \code{K},
 #' \code{alpha}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' truncated_dp(alpha = 0.5, K = 5L)
 truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
                          seed = 0, renormalise = TRUE) {
   if (!is.null(rng)) e <- rng else e <- .ghc_rng(seed)

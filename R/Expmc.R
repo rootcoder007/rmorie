@@ -22,6 +22,9 @@
 #' order does not matter at load time; the body is a single call to the
 #' target, so outputs are exactly identical.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Expmc(V, V)
 Expmc <- function(candidates, utility, epsilon = 1, sensitivity = 1,
                   seed = NULL) {
   morie_dp_exponential_mechanism(candidates, utility,

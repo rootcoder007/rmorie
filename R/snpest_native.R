@@ -77,6 +77,10 @@
 #' @param scale2 Squared scale.
 #' @return The log density.
 #' @export
+#' @examples
+#' morie_snpest_t_logpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   df = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), loc = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   scale2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_snpest_t_logpdf <- function(x, df, loc, scale2) {
   z <- (x - loc) * (x - loc) / (df * scale2)
   .w3_lgamma(0.5 * (df + 1)) - .w3_lgamma(0.5 * df) -
@@ -99,6 +103,11 @@ morie_snpest_t_logpdf <- function(x, df, loc, scale2) {
 #' @param b0 Inverse-gamma scale.
 #' @return The log predictive density.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_snpest_predictive(x = rnorm(10), n = 8L, s = rnorm(10), ss = rnorm(10),
+#'   m0 = rnorm(10), kappa0 = rnorm(10), a0 = rnorm(10), b0 = rnorm(10))
+#' TRUE
 morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
   if (n > 0) {
     ybar <- s / n
@@ -197,6 +206,9 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #'   number of clusters after each point, the ESS trace, the resampling
 #'   times, and the filtered predictive density on the grid.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_snpest(V)
 morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
                          proposal = "optimal", resampler = "systematic",
                          ess_threshold = 0.5, m0 = NULL, kappa0 = 0.01,
@@ -356,6 +368,8 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_snpest_cheatsheet()
 morie_snpest_cheatsheet <- function()
   paste0("snpest: on-line DP-mixture particle filter. proposals ",
          paste(.SNPEST_PROPOSALS, collapse = ", "), "; resamplers ",

@@ -425,7 +425,7 @@ morie_sexfsol <- function(t, g, f0, eta = NULL, c = NULL) {
 #' @export
 #' @examples
 #' morie_gllsuff(xbar = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L,
-#' mu = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+#'   mu = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
 morie_gllsuff <- function(xbar, s, n, mu, sigma) {
   n <- as.integer(n)
   sigma <- as.numeric(sigma)

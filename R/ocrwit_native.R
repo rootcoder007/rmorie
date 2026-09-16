@@ -48,6 +48,8 @@
 #' @param scale Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' normalise_bbox(box = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, height = 5L)
 normalise_bbox <- function(box, width, height, scale = 1000) {
   if (length(box) < 4L)
     stop("ocrwit: the box must have four coordinates")
@@ -81,6 +83,9 @@ normalise_bbox <- function(box, width, height, scale = 1000) {
 #' @param scale Passed to \code{normalise_bbox}. Defaults to \code{1000}.
 #' @return A list with \code{segment_boxes}, \code{per_token}, \code{n_segments}, \code{note}.
 #' @export
+#' @examples
+#' boxes <- matrix(c(10, 10, 60, 30, 70, 10, 110, 30), 2, 4, byrow = TRUE)
+#' segment_layout_boxes(boxes, c(0, 1), width = 200, height = 100)
 segment_layout_boxes <- function(boxes, segment_ids, width, height,
                                  scale = 1000) {
   segs <- as.list(segment_ids)
@@ -126,6 +131,8 @@ segment_layout_boxes <- function(boxes, segment_ids, width, height,
 #' @param block Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{masked}, \code{kept}, \code{rate}, \code{block}, \code{note}.
 #' @export
+#' @examples
+#' mask_units(n_units = 5L)
 mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
   n <- as.integer(n_units)
   r <- as.numeric(rate)
@@ -170,6 +177,8 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 #' @param patch_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{14}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' patch_of_box(box = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, height = 5L)
 patch_of_box <- function(box, width, height, patch_grid = 14) {
   g <- as.integer(patch_grid)
   nb <- normalise_bbox(box, width, height, g)
@@ -199,6 +208,9 @@ patch_of_box <- function(box, width, height, patch_grid = 14) {
 #' @return A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples},
 #' \code{positive_rate}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' text_boxes <- list(c(10, 10, 60, 30), c(70, 10, 120, 30))
+#' word_patch_alignment(text_boxes, list(0, 5), width = 200, height = 100)
 word_patch_alignment <- function(text_boxes, masked_patches, width,
                                  height, patch_grid = 14,
                                  masked_text = list()) {

@@ -41,6 +41,8 @@
 #' @param mode One of \code{"combine"}, \code{"reuse"}, \code{"split"}.
 #' @return The value of \code{variable_importance}.
 #' @export
+#' @examples
+#' str(morie_tldapar(30, V = 5, mode = "split"), max.level = 1)
 morie_tldapar <- function(n, V = 10L, seed = 0L,
                           define_on_training = NULL,
                           estimate_on_holdout = NULL,
@@ -71,6 +73,8 @@ morie_tldapar <- function(n, V = 10L, seed = 0L,
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @return A list with \code{estimation}, \code{training}, \code{V}.
 #' @export
+#' @examples
+#' str(split_sample(30, V = 5), max.level = 1)
 split_sample <- function(n, V = 10L, seed = 0L) {
   n <- as.integer(n)
   V <- as.integer(V)
@@ -108,6 +112,18 @@ split_sample <- function(n, V = 10L, seed = 0L) {
 #' @return A list with \code{estimate}, \code{psi}, \code{fold_estimates},
 #' \code{fold_parameters}, \code{se}, \code{ci}, \code{V}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- rnorm(50, 1)
+#'   def <- function(train) mean(x[train]) > 1
+#'   est <- function(p, hold) {
+#'     v <- if (p) x[hold] else -x[hold]
+#'     list(estimate = mean(v), ic = v - mean(v))
+#'   }
+#'   r <- data_adaptive_parameter(def, est, n = 50, V = 5)
+#'   str(r, max.level = 1)
+#' }
 data_adaptive_parameter <- function(define_on_training,
                                    estimate_on_holdout,
                                    n, V = 10L, seed = 0L) {
@@ -146,6 +162,12 @@ data_adaptive_parameter <- function(define_on_training,
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{psi}, \code{se}, \code{ci}, \code{mean_ic}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' ests <- rnorm(5, 1, 0.1)
+#' ics <- lapply(1:5, function(v) rnorm(10, 0, 0.5))
+#' r <- cv_tmle(ests, ics, n = 50)
+#' str(r, max.level = 1)
 cv_tmle <- function(fold_estimates, fold_ics, n) {
   e <- as.numeric(fold_estimates)
   if (length(e) == 0L)
@@ -177,6 +199,16 @@ cv_tmle <- function(fold_estimates, fold_ics, n) {
 #' @param seed Passed to \code{split_sample}. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{importance}, \code{V}, \code{method}.
 #' @export
+#' @examples
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(3)
+#'   X <- matrix(rnorm(100), 50, 2)
+#'   scr <- function(train) 1:2
+#'   eff <- function(j, hold) list(estimate = mean(X[hold, j]),
+#'                                 ic = X[hold, j] - mean(X[hold, j]))
+#'   r <- variable_importance(X, NULL, scr, eff, V = 5)
+#'   str(r, max.level = 1)
+#' }
 variable_importance <- function(X, Y, screen, effect, V = 5L,
                                 seed = 0L) {
   rows <- as.matrix(X)
@@ -221,6 +253,11 @@ variable_importance <- function(X, Y, screen, effect, V = 5L,
 #' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{0L}.
 #' @return A list with \code{estimate}, \code{warning}.
 #' @export
+#' @examples
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   r <- naive_reuse(function(idx) list(estimate = mean(idx)), n = 50)
+#'   str(r, max.level = 1)
+#' }
 naive_reuse <- function(define_and_estimate, n, seed = 0L) {
   r <- define_and_estimate(seq_len(as.integer(n)))
   list(estimate = as.numeric(r$estimate),

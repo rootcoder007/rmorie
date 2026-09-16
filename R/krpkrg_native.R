@@ -52,6 +52,9 @@
 #' \code{std_error}, \code{weights}, \code{n}, \code{n_targets}, \code{model},
 #' \code{nugget}, \code{sill}, \code{range}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' morie_krpkrg_ordinary_kriging(coords = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   values = c(1, 2, 3, 4, 5, 6, 7, 8), targets = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
                                           model = "spherical", nugget = 0.0,
                                           sill = 1.0, rng = 1.0) {

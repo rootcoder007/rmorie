@@ -212,6 +212,18 @@
 #'   degrees of freedom, sigma2, the unscaled covariance and the fitted
 #'   values.
 #' @keywords internal
+#' @examples
+#' N <- 60L
+#' ii <- 0:(N - 1L)
+#' ARM <- ifelse(ii%%2L == 0L, 1, 0)
+#' COV <- cbind((ii%%5L) - 2, cos(0.7 * ii))
+#' BASE <- 2 + 0.8 * COV[, 1] + 0.4 * COV[, 2] + 0.9 * ARM + 0.5 *
+#'     sin(3 * ii) + 0.3 * cos(7 * ii)
+#' MISS <- as.integer((ARM == 1 & ii%%7L == 3L) | (ARM == 0 & ii%%11L ==
+#'     5L))
+#' DES <- cbind(1, ARM, COV[, 1], COV[, 2])[MISS == 0L, , drop = FALSE]
+#' YO <- BASE[MISS == 0L]
+#' rmorie:::morie_tipsne_ancova(YO, DES)
 morie_tipsne_ancova <- function(y, design) {
   n <- length(y)
   p <- ncol(design)
@@ -433,6 +445,9 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' @return A list with the pooled estimate, standard error, degrees of
 #'   freedom, t statistic, p-value and the variance decomposition.
 #' @keywords internal
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::morie_tipsne_pool(V, V)
 morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
                               df_complete = NULL) {
   m <- length(ests)
@@ -506,6 +521,10 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 #' @return A list with the MAR analysis, the grid, the tipping point for
 #'   each control-arm delta, and whether the result tipped at all.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_tipsne(V, M)
 morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
                          delta_treat = NULL, delta_control = NULL,
                          n_imputations = 20L, seed = 1, alpha = 0.05,
@@ -608,6 +627,8 @@ morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_tipsne_cheatsheet()
 morie_tipsne_cheatsheet <- function()
   paste0("tipsne: delta-adjusted tipping-point sensitivity analysis for ",
          "MNAR missingness. mi routes ", paste(.TIPSNE_MI, collapse = ", "),

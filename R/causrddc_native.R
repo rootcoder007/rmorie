@@ -274,6 +274,11 @@
 #' @return A list with \code{h}, \code{h_unclamped}, \code{at_bound}, \code{C}, \code{B},
 #' \code{V}, \code{f}, \code{mu_plus}, \code{mu_minus}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(200, -1, 1)
+#' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+#' morie_causrddc_rd_bandwidth(x, y)
 morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, prelim_order = NULL) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -382,6 +387,11 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 #' \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(200, -1, 1)
+#' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+#' morie_causrddc(y, x)
 morie_causrddc <- function(y, x, treatment = NULL, cutoff = 0.0, nu = 0, p = 1, q = NULL, h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", J = 3) {
   y <- as.numeric(y)
   x <- as.numeric(x) - as.numeric(cutoff)
@@ -518,6 +528,8 @@ morie_causrddc_local_poly_weights <- .causrddc_local_poly_weights
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_causrddc_cheatsheet()
 morie_causrddc_cheatsheet <- function() {
   paste0(
     "causrddc: robust bias-corrected RD inference (Calonico, Catt",

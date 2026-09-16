@@ -31,6 +31,9 @@
 #' @return A list with \code{center}, \code{radius}, \code{estimate}, \code{distances},
 #' \code{n_within}, \code{metric}, \code{alpha}, \code{B}, \code{seed}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_funBoot(D)
 morie_funBoot <- function(curves, statistic = NULL, alpha = 0.05, B = 500L,
                           metric = "l2", smooth = 0.0, seed = 0) {
   X <- lapply(seq_len(nrow(curves)),

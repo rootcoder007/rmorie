@@ -39,6 +39,9 @@
 #' @param g_old Passed to \code{.cgnonl_dot}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' beta_fletcher_reeves(V, V)
 beta_fletcher_reeves <- function(g_new, g_old) {
   den <- .cgnonl_dot(g_old, g_old)
   if (den <= 0.0) return(0.0)
@@ -56,6 +59,9 @@ beta_fletcher_reeves <- function(g_new, g_old) {
 #' @param plus A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' beta_polak_ribiere(V, V)
 beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
   den <- .cgnonl_dot(g_old, g_old)
   if (den <= 0.0) return(0.0)
@@ -97,6 +103,8 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #' @param db Numeric; combined arithmetically in the body.
 #' @return The value of \code{t}, as built in the body.
 #' @export
+#' @examples
+#' cubic_interpolate(ta = 0, fa = 1, da = -1, tb = 1, fb = 0.5, db = 0.2)
 cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
   h <- tb - ta
   if (h == 0.0) return(ta)
@@ -129,6 +137,12 @@ cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
 #' @return A list with \code{t}, \code{x_new}, \code{f_new}, \code{g_new}, \code{n_eval}.
 #' @export
+#' @examples
+#' f <- function(x) sum((x - c(1, 2))^2)
+#' g <- function(x) 2 * (x - c(1, 2))
+#' x0 <- c(0, 0)
+#' r <- line_search_fr(f, g, x0, p = -g(x0), f0 = f(x0), g0 = g(x0))
+#' str(r, max.level = 1)
 line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
                            max_double = 60L, max_cubic = 40L,
                            tol = 1e-12) {
@@ -261,6 +275,12 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #' \code{beta_rule}, \code{line_search}, \code{restart_every}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' f <- function(x) sum((x - c(1, 2))^2) + 0.5 * x[1]^2 * x[2]^2
+#' g <- function(x) c(2 * (x[1] - 1) + x[1] * x[2]^2,
+#'                    2 * (x[2] - 2) + x[1]^2 * x[2])
+#' r <- nonlinear_cg(f, g, x0 = c(0, 0))
+#' str(r, max.level = 1)
 nonlinear_cg <- function(f, grad, x0, beta = "fletcher-reeves",
                          restart = NULL, max_iter = NULL, tol = 1e-10,
                          est = NULL, line_search = "fletcher-reeves",
@@ -375,6 +395,11 @@ cgnonl <- nonlinear_cg
 #' @param keep_path Passed to \code{nonlinear_cg}. Defaults to \code{FALSE}.
 #' @return The value of \code{nonlinear_cg}.
 #' @export
+#' @examples
+#' f <- function(x) sum((x - c(1, 2))^2)
+#' g <- function(x) 2 * (x - c(1, 2))
+#' r <- morie_cgnonl(f, g, x0 = c(0, 0))
+#' str(r, max.level = 1)
 morie_cgnonl <- function(f, grad, x0, beta = "fletcher-reeves",
                          restart = NULL, max_iter = NULL, tol = 1e-10,
                          est = NULL, line_search = "fletcher-reeves",

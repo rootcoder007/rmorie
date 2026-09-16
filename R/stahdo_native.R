@@ -89,8 +89,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @return A list with \code{M}, \code{n}, \code{p}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .stahdo_prep(X = X)
 #' res
 .stahdo_prep <- function(X) {
@@ -495,6 +494,9 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param cutoff Passed to \code{.stahdo_stahel_donoho}.
 #' @return The value of \code{.stahdo_stahel_donoho}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_stahdo(D)
 morie_stahdo <- function(X, directions = "subsample",
                         n_directions = 500, seed = 1,
                         cutoff = NULL) {

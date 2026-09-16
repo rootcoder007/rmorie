@@ -340,6 +340,9 @@
 #' @param seed Passed to \code{.farmcpu}. Defaults to \code{0L}.
 #' @return The value of \code{.farmcpu}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_farmlmm(V, V)
 morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
   .farmcpu(y = y, G = G, max_iter = max_iter, threshold = threshold, seed = seed)
 }
@@ -353,4 +356,7 @@ morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
 #' @param x Passed to \code{pnorm}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' erf(V)
 erf <- function(x) 2 * pnorm(x) - 1

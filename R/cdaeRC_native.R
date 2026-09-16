@@ -61,6 +61,9 @@
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' rng <- rmorie:::.ghc_rng(1)
+#' corrupt(c(1, 0, 1, 1, 0), q = 0.4, rng)
 corrupt <- function(y, q, rng) {
   qq <- as.numeric(q)
   if (!(qq >= 0.0 && qq < 1.0))
@@ -83,6 +86,9 @@ corrupt <- function(y, q, rng) {
 #' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
 #' @return The value of \code{z}, as built in the body.
 #' @export
+#' @examples
+#' encode(y_tilde = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   V_u = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
   K <- length(b)
   z <- numeric(K)
@@ -111,6 +117,9 @@ encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
 #' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
 #' @return A vector, from \code{sapply}.
 #' @export
+#' @examples
+#' decode(z = c(1, 2, 3, 4, 5, 6, 7, 8), Wp = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   bp = c(1, 2, 3, 4, 5, 6, 7, 8))
 decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
   if (is.null(items)) idx <- seq_along(bp) else idx <- as.integer(items)
   sapply(idx, function(i) {
@@ -131,6 +140,9 @@ decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
 #' @param kind One of \code{"hinge"}, \code{"log"}, \code{"square"}. Defaults to \code{"square"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' loss(V, V)
 loss <- function(y, y_hat, kind = "square") {
   if (!(kind %in% .cdae_losses))
     stop(sprintf("cdaeRC: loss must be one of %s, got %s",
@@ -172,6 +184,11 @@ loss <- function(y, y_hat, kind = "square") {
 #' \code{b_prime}, \code{loss_history}, \code{final_loss}, \code{k}, \code{q},
 #' \code{n_neg}, \code{activation}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
+#' m <- fit_cdae(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
+#' str(m, max.level = 1)
 fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                      alpha = 0.05, lam = 0.01, iters = 30L,
                      n_neg = 5L, seed = 0, activation = "sigmoid",
@@ -270,6 +287,11 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #' @param activation Passed to \code{encode}. Defaults to \code{"sigmoid"}.
 #' @return A list with \code{ranking}, \code{n_scored}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
+#' m <- fit_cdae(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
+#' recommend(m, pos, u = 0L, n_items = 4, top_k = 2)
 recommend <- function(model, pos, u, n_items, top_k = 5L,
                       activation = "sigmoid") {
   W <- model$W
@@ -312,6 +334,11 @@ recommend <- function(model, pos, u, n_items, top_k = 5L,
 #' @param init_scale Passed to \code{fit_cdae}. Defaults to \code{0.1}.
 #' @return The value of \code{fit_cdae}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
+#' r <- morie_cdaeRC(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
+#' str(r, max.level = 1)
 morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                          alpha = 0.05, lam = 0.01, iters = 30L,
                          n_neg = 5L, seed = 0, activation = "sigmoid",

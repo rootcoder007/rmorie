@@ -85,6 +85,9 @@
 #' @param e Passed to \code{.gamma_draw}.
 #' @return The value of \code{.poisson_draw}.
 #' @export
+#' @examples
+#' e <- rmorie:::.ghc_rng(1)
+#' replicate(5, negbinom_offspring(R0 = 2.5, dispersion = 0.16, e))
 negbinom_offspring <- function(R0, dispersion, e) {
   r0 <- as.numeric(R0)
   kk <- as.numeric(dispersion)
@@ -114,6 +117,9 @@ negbinom_offspring <- function(R0, dispersion, e) {
 #' @param allow_presymptomatic A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' e <- rmorie:::.ghc_rng(1)
+#' replicate(3, serial_interval_draw(mean = 5, sd = 1.9, e))
 serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
   m <- as.numeric(mean)
   s <- as.numeric(sd)
@@ -148,6 +154,8 @@ serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
 #' @return A list with \code{controlled}, \code{total_cases}, \code{weekly},
 #' \code{hit_cap}, \code{extinct}.
 #' @export
+#' @examples
+#' simulate_outbreak()
 simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
                               n_initial = 20, trace_prob = 0.8,
                               delay_mean = 3.83, delay_sd = 2.4,
@@ -239,6 +247,10 @@ simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
 #' \code{reps}, \code{median_size}, \code{max_size}, \code{max_cases}, \code{max_weeks},
 #' \code{definition}, \code{method}.
 #' @export
+#' @examples
+#' r <- probability_of_control(reps = 20, seed = 1, R0 = 1.5,
+#'                             trace_prob = 0.8)
+#' str(r, max.level = 1)
 probability_of_control <- function(reps = 200, seed = 0, ...) {
   ok <- 0L
   sizes <- integer(as.integer(reps))
@@ -284,6 +296,11 @@ probability_of_control <- function(reps = 200, seed = 0, ...) {
 #' @return A list with \code{R_eff}, \code{R0}, \code{fraction_before_isolation},
 #' \code{controlled_in_expectation}, \code{note}.
 #' @export
+#' @examples
+#' r <- effective_reproduction_number(R0 = 2.5, si_mean = 5, si_sd = 1.9,
+#'                                    delay_mean = 2, delay_sd = 1,
+#'                                    trace_prob = 0.7, draws = 2000)
+#' str(r, max.level = 1)
 effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
                                           delay_sd, trace_prob,
                                           subclinical = 0.0, draws = 20000,
@@ -348,6 +365,9 @@ contact_tracing_yield <- probability_of_control
 #' @param ... Passed through.
 #' @return The value of \code{probability_of_control}.
 #' @export
+#' @examples
+#' r <- morie_ttrace(reps = 20, seed = 1, R0 = 1.5, trace_prob = 0.8)
+#' str(r, max.level = 1)
 morie_ttrace <- function(reps = 200, seed = 0, ...) {
   probability_of_control(reps = reps, seed = seed, ...)
 }

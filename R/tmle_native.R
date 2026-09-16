@@ -369,8 +369,8 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
 #'   International Journal of Biostatistics} 8(1), Article 3.
 #' @export
 #' @examples
-#' morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1,
-#' 0), mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tmle_mediation <- function(y, treatment, mediator, covariates = NULL,
                                  trunc = 0.01) {
   y <- as.numeric(y)

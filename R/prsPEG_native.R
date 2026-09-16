@@ -37,6 +37,9 @@ FAIL <- NA_integer_
 #' @param s A vector; its length is taken.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prsPEG_lit(V)
 morie_prsPEG_lit <- function(s) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -55,6 +58,8 @@ morie_prsPEG_lit <- function(s) {
 #' @param ... Passed through.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
+#' @examples
+#' morie_prsPEG_seq()
 morie_prsPEG_seq <- function(...) {
   es <- list(...)
   fn <- function(text, pos, ctx) {
@@ -79,6 +84,8 @@ morie_prsPEG_seq <- function(...) {
 #' @param ... Passed through.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
+#' @examples
+#' morie_prsPEG_choice()
 morie_prsPEG_choice <- function(...) {
   es <- list(...)
   fn <- function(text, pos, ctx) {
@@ -102,6 +109,9 @@ morie_prsPEG_choice <- function(...) {
 #' @param e Passed to \code{.probe}.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prsPEG_star(V)
 morie_prsPEG_star <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -125,6 +135,9 @@ morie_prsPEG_star <- function(e) {
 #' @param e Passed to \code{morie_prsPEG_seq}.
 #' @return The value of \code{morie_prsPEG_seq}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prsPEG_plus(V)
 morie_prsPEG_plus <- function(e) morie_prsPEG_seq(e, morie_prsPEG_star(e))
 
 #' morie_prsPEG_opt
@@ -136,6 +149,9 @@ morie_prsPEG_plus <- function(e) morie_prsPEG_seq(e, morie_prsPEG_star(e))
 #' @param e Passed to \code{morie_prsPEG_choice}.
 #' @return The value of \code{morie_prsPEG_choice}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prsPEG_opt(V)
 morie_prsPEG_opt <- function(e) morie_prsPEG_choice(e, morie_prsPEG_lit(""))
 
 #' morie_prsPEG_and_
@@ -147,6 +163,9 @@ morie_prsPEG_opt <- function(e) morie_prsPEG_choice(e, morie_prsPEG_lit(""))
 #' @param e Passed to \code{.probe}.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prsPEG_and_(V)
 morie_prsPEG_and_ <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -165,6 +184,9 @@ morie_prsPEG_and_ <- function(e) {
 #' @param e Passed to \code{.probe}.
 #' @return The value of \code{fn}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prsPEG_not_(V)
 morie_prsPEG_not_ <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L

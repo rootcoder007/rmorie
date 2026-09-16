@@ -94,8 +94,7 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .twoT_as_mat(m = X)
 #' res
 .twoT_as_mat <- function(m) {
@@ -120,6 +119,8 @@
 #' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{embedding}, \code{norm}, \code{normalised}.
 #' @export
+#' @examples
+#' morie_twoT_tower_embedding(features = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) {
   x <- .twoT_as_vec(features)
   Wm <- .twoT_as_mat(W)
@@ -208,6 +209,9 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #' @param init Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_twoT_streaming_frequency(V, V)
 morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
                                           init = NULL) {
   a <- as.numeric(alpha)
@@ -253,6 +257,9 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
 #' \code{0.05}.
 #' @return A list with \code{loss}, \code{per_example}, \code{corrected}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_twoT_batch_softmax_loss(V, V)
 morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
                                           probabilities = NULL,
                                           temperature = 0.05) {
@@ -301,6 +308,9 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
 #' @return A list with \code{estimate}, \code{top_k}, \code{uncorrected_top_k},
 #' \code{scores}, \code{corrected_scores}, \code{changed}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_twoT_retrieve(V, V)
 morie_twoT_retrieve <- function(query_embedding, item_embeddings,
                                 probabilities = NULL, top_k = 5,
                                 temperature = 1.0) {
@@ -336,6 +346,8 @@ morie_twoT_retrieve <- function(query_embedding, item_embeddings,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_twoT_cheatsheet()
 morie_twoT_cheatsheet <- function() {
   paste("twoT: a softmax over millions of items is impossible, so ",
         "use IN-BATCH negatives -- which are drawn from the ",

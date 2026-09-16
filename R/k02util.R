@@ -13,6 +13,9 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A list with \code{mu}, \code{var}, \code{sw}, \code{Q}, \code{df}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02fe(V, V)
 k02fe <- function(y, v) {
   y <- as.numeric(y)
   v <- as.numeric(v)
@@ -34,6 +37,9 @@ k02fe <- function(y, v) {
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A list with \code{tau2}, \code{mu}, \code{var}, \code{Q}, \code{df}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02dl(V, V)
 k02dl <- function(y, v) {
   y <- as.numeric(y)
   v <- as.numeric(v)
@@ -57,6 +63,9 @@ k02dl <- function(y, v) {
 #' @param tau0 Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' k02mm(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   tau0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 k02mm <- function(y, v, tau0) {
   y <- as.numeric(y)
   v <- as.numeric(v)
@@ -79,6 +88,9 @@ k02mm <- function(y, v, tau0) {
 #' @param p See Usage.
 #' @return The value of \code{stats::qnorm}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02z(V)
 k02z <- function(p) stats::qnorm(p)
 #' k02tq
 #'
@@ -90,6 +102,9 @@ k02z <- function(p) stats::qnorm(p)
 #' @param df See Usage.
 #' @return The value of \code{stats::qt}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02tq(V, V)
 k02tq <- function(p, df) stats::qt(p, df)
 #' k02p2z
 #'
@@ -100,6 +115,9 @@ k02tq <- function(p, df) stats::qt(p, df)
 #' @param z Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02p2z(V)
 k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
 #' k02p2t
 #'
@@ -111,6 +129,9 @@ k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
 #' @param df See Usage.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02p2t(V, V)
 k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
 #' k02pchi
 #'
@@ -123,6 +144,9 @@ k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
 #' @param df See Usage.
 #' @return The value of \code{stats::pchisq}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02pchi(V, V)
 k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 
 .k02invphi <- 0.6180339887498949
@@ -173,6 +197,8 @@ k02gold <- function(f, lo, hi, iters = 80L) {
 #' @param n A count; the body uses it as \code{numeric(...)}.
 #' @return A list with \code{x}, \code{w}.
 #' @export
+#' @examples
+#' k02gh(n = 5L)
 k02gh <- function(n) {
   n <- as.integer(n)
   pim4 <- 0.7511255444649425
@@ -225,6 +251,10 @@ k02gh <- function(n) {
 #' @param comm A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' k02mod(M, V)
 k02mod <- function(A, comm) {
   a <- as.matrix(A)
   n <- nrow(a)
@@ -247,6 +277,9 @@ k02mod <- function(A, comm) {
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' k02bfs(V)
 k02bfs <- function(A) {
   a <- as.matrix(A)
   n <- nrow(a)

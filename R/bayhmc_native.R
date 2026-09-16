@@ -64,6 +64,10 @@
 #'   Calculations by Fast Computing Machines. Journal of Chemical
 #'   Physics, 21(6), 1087-1092.
 #' @export
+#' @examples
+#' logp <- function(t) -0.5 * sum(t^2)
+#' r <- morie_bayhmc(logp, c(1, -1), n_iter = 200L, seed = 1)
+#' str(r, max.level = 1)
 morie_bayhmc <- function(logp, theta0, n_iter = 1000L, warmup = NULL,
                           grad = NULL, sampler = "nuts", delta = 0.65,
                           eps = NULL, n_steps = 10L, max_depth = 10L,
@@ -272,6 +276,10 @@ DELTA_MAX <- 1000.0
 #' @param grad Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{theta}, \code{r}.
 #' @export
+#' @examples
+#' logp <- function(t) -0.5 * sum(t^2)
+#' grad <- function(t) -t
+#' leapfrog(c(1, -1), r = c(0.2, 0.1), eps = 0.1, grad)
 leapfrog <- function(theta, r, eps, grad) {
   g <- grad(theta)
   r_half <- r + 0.5 * eps * g
@@ -299,6 +307,12 @@ leapfrog <- function(theta, r, eps, grad) {
 #' to \code{100}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
+#' @examples
+#' logp <- function(t) -0.5 * sum(t^2)
+#' grad <- function(t) -t
+#' e <- rmorie:::.ghc_rng(1)
+#' find_reasonable_epsilon(c(1, -1), logp, grad,
+#'                         rnd = function() rmorie:::.ghc_norm(e, 1L))
 find_reasonable_epsilon <- function(theta, logp, grad, rnd,
                                      eps = 1.0,
                                      max_doublings = 100) {
@@ -337,6 +351,10 @@ find_reasonable_epsilon <- function(theta, logp, grad, rnd,
 #' @param kappa Numeric; combined arithmetically in the body. Defaults to \code{0.75}.
 #' @return A list with \code{eps}, \code{h_bar}, \code{log_eps_bar}.
 #' @export
+#' @examples
+#' dual_averaging_update(t = 5L, h_bar = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   log_eps_bar = c(1, 2, 3, 4, 5, 6, 7, 8), h_new = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   mu = c(1, 2, 3, 4, 5, 6, 7, 8))
 dual_averaging_update <- function(t, h_bar, log_eps_bar, h_new, mu,
                                   gamma = 0.05, t0 = 10.0,
                                   kappa = 0.75) {
@@ -367,6 +385,9 @@ dual_averaging_update <- function(t, h_bar, log_eps_bar, h_new, mu,
 #' @param r_plus Numeric; combined arithmetically in the body.
 #' @return A logical value.
 #' @export
+#' @examples
+#' no_u_turn(theta_minus = c(1, 2, 3, 4, 5, 6, 7, 8), theta_plus = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   r_minus = c(1, 2, 3, 4, 5, 6, 7, 8), r_plus = c(1, 2, 3, 4, 5, 6, 7, 8))
 no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
   d <- theta_plus - theta_minus
   sum(d * r_minus) >= 0 && sum(d * r_plus) >= 0
@@ -396,6 +417,16 @@ no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
 #' names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s},
 #' \code{alpha}, \code{na}.
 #' @export
+#' @examples
+#' logp <- function(t) -0.5 * sum(t^2)
+#' grad <- function(t) -t
+#' e <- rmorie:::.ghc_rng(1)
+#' rnd <- function() rmorie:::.ghc_unif(e, 1L)
+#' th <- c(1, -1); rr <- c(0.2, 0.1)
+#' j0 <- .joint(logp, th, rr)
+#' r <- build_tree(th, rr, logu = j0 - 1, v = 1L, j = 2L, eps = 0.1,
+#'                 logp, grad, rnd, j0)
+#' str(r, max.level = 1)
 build_tree <- function(theta, r, logu, v, j, eps, logp, grad, rnd,
                        joint0) {
   if (j == 0L) {

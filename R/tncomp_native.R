@@ -100,6 +100,9 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #' @param fps Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{D}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' distance_matrix(V)
 distance_matrix <- function(fps) {
   F <- lapply(fps, .tncomp_fingerprint)
   n <- length(F)
@@ -191,6 +194,8 @@ distance_matrix <- function(fps) {
 #' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{$}.
 #' @export
+#' @examples
+#' maxmin_selection(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 maxmin_selection <- function(fps, k, seed = NULL) {
   .tncomp_select(fps, k, "maxmin", seed)$chosen
 }
@@ -206,6 +211,8 @@ maxmin_selection <- function(fps, k, seed = NULL) {
 #' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{$}.
 #' @export
+#' @examples
+#' maxsum_selection(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 maxsum_selection <- function(fps, k, seed = NULL) {
   .tncomp_select(fps, k, "maxsum", seed)$chosen
 }
@@ -222,6 +229,9 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 #' @return A list with \code{min_distance}, \code{mean_distance}, \code{max_distance},
 #' \code{n_pairs}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' diversity(V, V)
 diversity <- function(fps, subset, D = NULL) {
   M <- if (is.null(D)) distance_matrix(fps) else D
   S <- as.integer(subset)
@@ -258,6 +268,8 @@ diversity <- function(fps, subset, D = NULL) {
 #' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' morie_tncomp(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_tncomp <- function(fps, k, objective = "maxmin", seed = NULL) {
   result <- .tncomp_select(fps, k, objective, seed)
   chosen <- result$chosen

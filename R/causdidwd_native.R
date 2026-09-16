@@ -144,6 +144,9 @@
 #'   \code{n_columns}, \code{method}.
 #' @references Wooldridge (2025) Sec. 3.
 #' @export
+#' @examples
+#' morie_two_way_fixed_effects(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   period = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_two_way_fixed_effects <- function(Y, unit, period, X) {
   p <- .causdidwd_panel(Y, unit, period)
   Xm <- .s03mat(X)
@@ -191,6 +194,9 @@ morie_two_way_fixed_effects <- function(Y, unit, period, X) {
 #'   \code{method}, \code{identical_to}.
 #' @references Wooldridge (2025) Sec. 3.
 #' @export
+#' @examples
+#' morie_two_way_mundlak(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   period = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_two_way_mundlak <- function(Y, unit, period, X) {
   p <- .causdidwd_panel(Y, unit, period)
   Xm <- .s03mat(X)
@@ -254,6 +260,9 @@ morie_two_way_mundlak <- function(Y, unit, period, X) {
 #'   \code{method}, \code{note}.
 #' @references Wooldridge (2025) Sec. 5.
 #' @export
+#' @examples
+#' morie_etwfe(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   period = c(1, 2, 3, 4, 5, 6, 7, 8), first_treated = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_etwfe <- function(Y, unit, period, first_treated, X = NULL) {
   p <- .causdidwd_panel(Y, unit, period)
   if (length(first_treated) != p$n)
@@ -341,6 +350,16 @@ morie_etwfe <- function(Y, unit, period, first_treated, X = NULL) {
 #'   \code{method}, \code{identical_to}.
 #' @references Wooldridge (2025) Sec. 4.
 #' @export
+#' @examples
+#' set.seed(1)
+#' nu <- 4; T <- 5
+#' unit <- rep(1:nu, each = T)
+#' period <- rep(1:T, nu)
+#' ft_unit <- c(NA, NA, 4, 4)
+#' first_treated <- rep(ft_unit, each = T)
+#' treated_now <- !is.na(first_treated) & period >= first_treated
+#' Y <- rnorm(nu * T) + treated_now * 2
+#' morie_imputation(Y, unit, period, first_treated)
 morie_imputation <- function(Y, unit, period, first_treated, X = NULL) {
   p <- .causdidwd_panel(Y, unit, period)
   if (length(first_treated) != p$n)
@@ -439,6 +458,16 @@ morie_imputation <- function(Y, unit, period, first_treated, X = NULL) {
 #'   \code{"cohort"} \code{profile}, \code{scheme}, \code{estimate}.
 #' @references Wooldridge (2025) Sec. 7.
 #' @export
+#' @examples
+#' set.seed(1)
+#' nu <- 4; T <- 5
+#' unit <- rep(1:nu, each = T)
+#' period <- rep(1:T, nu)
+#' first_treated <- rep(c(NA, NA, 4, 4), each = T)
+#' treated_now <- !is.na(first_treated) & period >= first_treated
+#' Y <- rnorm(nu * T) + treated_now * 2
+#' res <- morie_imputation(Y, unit, period, first_treated)
+#' morie_aggregate(res, scheme = "simple")
 morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
   if (!(scheme %in% c("simple", "event", "cohort")))
     stop(sprintf("causdidwd: scheme must be simple, event or cohort, got %s",

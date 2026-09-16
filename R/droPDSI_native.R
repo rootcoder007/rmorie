@@ -21,6 +21,9 @@
 #' \code{runoff}, \code{loss}, \code{soil_surface_capacity}, \code{soil_under_capacity},
 #' \code{n}, \code{duration_factor}, \code{duration_divisor}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_droPDSI_palmer_pdsi(V, V)
 morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
                                       month = NULL) {
   P <- as.numeric(precip)

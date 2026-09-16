@@ -22,6 +22,6 @@ List with \code{estimate}, \code{probabilities}, \code{score_points}.
 sum_s s * softmax(judge logits)_s over the rubric.
 }
 \examples{
-morie_kamath_g_eval("x", "y", c(1, 2, 3), function(x, y, r) c(0, 
+morie_kamath_g_eval("x", "y", c(1, 2, 3), function(x, y, r) c(0,
     1, 0))
 }

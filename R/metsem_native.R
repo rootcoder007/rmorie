@@ -58,6 +58,8 @@
 #' @param k The k-mer length.
 #' @return A character vector.
 #' @export
+#' @examples
+#' morie_metsem_kmers(seq = 5L, k = 5L)
 morie_metsem_kmers <- function(seq, k) {
   k <- as.integer(k)
   if (k < 2L) stop("a de Bruijn graph needs k of at least two")
@@ -104,6 +106,8 @@ morie_metsem_kmers <- function(seq, k) {
 #' @return A list with the edge weights, the adjacency, the nodes and
 #'   the read counts.
 #' @export
+#' @examples
+#' morie_metsem_graph(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
 morie_metsem_graph <- function(reads, k) {
   k <- as.integer(k)
   edges <- list()
@@ -198,6 +202,13 @@ morie_metsem_graph <- function(reads, k) {
 #' @param g A graph from the graph builder.
 #' @return A list of unitigs, longest first.
 #' @export
+#' @examples
+#' ABUNDANT <- "ACGTACGGTCAGTTGCAAGT"
+#' RARE <- "TTGCCATGAACCGGTTAACA"
+#' READS <- c(rep(ABUNDANT, 4L), RARE)
+#' K <- 7L
+#' g <- morie_metsem_graph(READS, K)
+#' morie_metsem_unitigs(g)
 morie_metsem_unitigs <- function(g) {
   seen <- character(0)
   paths <- list()
@@ -243,6 +254,9 @@ morie_metsem_unitigs <- function(g) {
 #' @param lengths The contig lengths.
 #' @return An integer.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_metsem_n50(V)
 morie_metsem_n50 <- function(lengths) {
   ls <- sort(as.integer(lengths), decreasing = TRUE)
   total <- sum(ls)
@@ -292,6 +306,8 @@ morie_metsem_n50 <- function(lengths) {
 #' @return A list with the contigs longest first, their coverage, the
 #'   N50, and what the cleaning removed.
 #' @export
+#' @examples
+#' morie_metsem(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
 morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
                          bubble_ratio = 0.5, rounds = 2L,
                          min_length = NULL) {
@@ -388,6 +404,8 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_metsem_cheatsheet()
 morie_metsem_cheatsheet <- function()
   paste0("metsem: metagenome assembly. de Bruijn graph, maximal ",
          "non-branching unitigs, tips and bubbles removed on RELATIVE ",

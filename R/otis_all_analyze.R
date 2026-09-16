@@ -1211,7 +1211,9 @@ morie_otis_analyze_a01_ruhela_per_year <- function(data = NULL,
 #' @return \code{morie_otis_analysis_result}.
 #' @export
 #' @examples
-#' \donttest{ morie_otis_analyze_b01_ruhela_per_year() }
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   \donttest{ morie_otis_analyze_b01_ruhela_per_year() }
+#' }
 morie_otis_analyze_b01_ruhela_per_year <- function(data = NULL,
                                                      out_dir = NULL) {
   .otis_not_yet_ported("morie_otis_analyze_b01_ruhela_per_year",

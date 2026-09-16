@@ -91,6 +91,9 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @param policy A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.solve}.
 #' @export
+#' @examples
+#' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
+#' policy_values(T, R = c(1, 0), gamma = 0.9, policy = c(1L, 2L))
 policy_values <- function(T, R, gamma, policy) {
   m <- .mdp(T, gamma)
   nS <- m$nS
@@ -114,6 +117,10 @@ policy_values <- function(T, R, gamma, policy) {
 #' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{Q}, as built in the body.
 #' @export
+#' @examples
+#' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
+#' V <- policy_values(T, R = c(1, 0), gamma = 0.9, policy = c(1L, 2L))
+#' q_values(T, R = c(1, 0), gamma = 0.9, V)
 q_values <- function(T, R, gamma, V) {
   m <- .mdp(T, gamma)
   nS <- m$nS
@@ -139,6 +146,10 @@ q_values <- function(T, R, gamma, V) {
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
 #' @export
+#' @examples
+#' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
+#' r <- policy_iteration(T, R = c(1, 0), gamma = 0.9)
+#' str(r, max.level = 1)
 policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   m <- .mdp(T, gamma)
   nS <- m$nS
@@ -205,6 +216,9 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 #' @param neighbours Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' log_prior(V)
 log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
                       J = 0.1, H = 0, neighbours = NULL) {
   if (!(prior %in% PRIORS))
@@ -268,6 +282,11 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' @return A list with \code{samples}, \code{acceptance}, \code{policy_iterations},
 #' \code{n_proposals}, \code{final_policy}.
 #' @export
+#' @examples
+#' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
+#' obs <- list(c(1L, 1L), c(2L, 2L), c(1L, 1L))
+#' r <- policy_walk(T, obs, gamma = 0.9, n_iter = 100, seed = 1)
+#' str(r, max.level = 1)
 policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
                         alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                         J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
@@ -364,6 +383,11 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 #' \code{policy_iterations}, \code{n_proposals}, \code{n_samples}, \code{prior},
 #' \code{alpha}, \code{delta}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
+#' obs <- list(c(1L, 1L), c(2L, 2L), c(1L, 1L))
+#' r <- birl(T, obs, gamma = 0.9, n_iter = 100, seed = 1)
+#' str(r, max.level = 1)
 birl <- function(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25,
                  alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                  J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {

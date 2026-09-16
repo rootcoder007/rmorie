@@ -36,6 +36,6 @@ last max(2, floor(n/3)) points; \code{converged} compares it against
 1 percent of the final training error.
 }
 \examples{
-morie_geron_underfitting(c(0.9, 0.85, 0.84, 0.84), threshold = 0.2, 
+morie_geron_underfitting(c(0.9, 0.85, 0.84, 0.84), threshold = 0.2,
     val_err = c(0.95, 0.9, 0.87, 0.86))
 }

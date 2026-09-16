@@ -14,6 +14,9 @@
 # Helpers live in aaa_helpers_irt.R.
 
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::morie_rating_scale_andrich(V)
 morie_rating_scale_andrich <- function(theta, b = 0, tau = 0) {
   th <- as.numeric(theta)
   n <- length(th)

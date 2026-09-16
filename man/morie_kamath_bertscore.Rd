@@ -19,6 +19,6 @@ List with \code{estimate}, \code{f1}, \code{precision}, \code{recall}.
 Embeds both token lists, then delegates to km119/km120/km121.
 }
 \examples{
-morie_kamath_bertscore(c("a", "b"), c("a", "c"), list(a = c(1, 
+morie_kamath_bertscore(c("a", "b"), c("a", "c"), list(a = c(1,
     0), b = c(0, 1), c = c(1, 1)))
 }

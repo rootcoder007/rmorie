@@ -11,6 +11,9 @@
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' logmeanexp(V)
 logmeanexp <- function(values) {
   v <- as.numeric(values)
   if (length(v) == 0L) stop("pftrep: nothing to average")
@@ -33,6 +36,14 @@ logmeanexp <- function(values) {
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A list with \code{loglik}, \code{min_ess}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- cumsum(rnorm(20, 0, 0.5)) + rnorm(20, 0, 1)
+#' init <- function(n) rnorm(n, 0, 2)
+#' step <- function(parts, t) parts + rnorm(length(parts), 0, 0.5)
+#' loglik <- function(p, obs) dnorm(obs, p, 1, log = TRUE)
+#' pf <- particle_filter_simple(y, 200L, init, step, loglik, seed = 1)
+#' is.list(pf)
 particle_filter_simple <- function(y, n_particles, init, step, loglik,
                                    seed = 0L) {
   set.seed(as.integer(seed))
@@ -76,6 +87,14 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 #' \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps},
 #' \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- cumsum(rnorm(20, 0, 0.5)) + rnorm(20, 0, 1)
+#' init <- function(n) rnorm(n, 0, 2)
+#' step <- function(parts, t) parts + rnorm(length(parts), 0, 0.5)
+#' loglik <- function(p, obs) dnorm(obs, p, 1, log = TRUE)
+#' r <- replicated_pfilter(y, 200L, init, step, loglik, n_reps = 5L, seed = 1)
+#' is.list(r)
 replicated_pfilter <- function(y, n_particles, init, step, loglik,
                                n_reps = 10L, seed = 0L) {
   R <- as.integer(n_reps)
@@ -115,6 +134,16 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #' @return A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik},
 #' \code{se}, \code{max_loglik}, \code{n_particles}, \code{n_reps}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- cumsum(rnorm(20, 0, 0.5)) + rnorm(20, 0, 1)
+#' make_model <- function(theta) list(
+#'   init = function(n) rnorm(n, 0, 2),
+#'   step = function(parts, t) parts + rnorm(length(parts), 0, 0.5),
+#'   loglik = function(p, obs) dnorm(obs, p, theta, log = TRUE))
+#' lp <- loglik_profile(y, grid = c(0.5, 1, 2), make_model,
+#'                      n_particles = 150L, n_reps = 3L, seed = 1)
+#' is.list(lp)
 loglik_profile <- function(y, grid, make_model, n_particles = 200L,
                            n_reps = 5L, seed = 0L) {
   g <- as.numeric(grid)

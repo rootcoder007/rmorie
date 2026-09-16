@@ -21,6 +21,9 @@
 #' @param metapath Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{neighbours}, \code{metapath}, \code{note}.
 #' @export
+#' @examples
+#' metapath_neighbours(edges = c(1, 2, 3, 4, 5, 6, 7, 8), types = c("a", "b", "c"),
+#'   metapath = c(1, 2, 3, 4, 5, 6, 7, 8))
 metapath_neighbours <- function(edges, types, metapath) {
   mp <- as.character(metapath)
   if (length(mp) < 2L) {
@@ -65,6 +68,14 @@ metapath_neighbours <- function(edges, types, metapath) {
 #' @param slope Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @return A list with \code{embedding}, \code{alpha}, \code{neighbours}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 3; hid <- 4
+#' W <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
+#' a_vec <- rnorm(hid, 0, 0.3)
+#' H <- list(`1` = rnorm(d), `2` = rnorm(d), `3` = rnorm(d))
+#' r <- node_attention(H[["1"]], c("2", "3"), H, a_vec, W)
+#' c(length(r$embedding), length(r$alpha))
 node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
   proj <- function(x) as.numeric(W %*% as.numeric(x))
   hi <- proj(h_i)
@@ -107,6 +118,9 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
 #' @param q Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{scores}, \code{metapaths}, \code{note}.
 #' @export
+#' @examples
+#' semantic_attention(Z_per_metapath = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), W = 5L,
+#'   b = 5L, q = 0.5)
 semantic_attention <- function(Z_per_metapath, W, b, q) {
   names_v <- sort(names(Z_per_metapath))
   if (length(names_v) == 0L) {
@@ -153,6 +167,20 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 #' @return A list with \code{estimate}, \code{embeddings}, \code{semantic_weights},
 #' \code{per_metapath}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 3; hid <- 4; sem <- 2
+#' W_node <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
+#' a_vec <- rnorm(hid, 0, 0.3)
+#' H <- matrix(rnorm(9), 3, 3)
+#' edges <- list(`1` = c("3"), `2` = c("3"), `3` = c("1", "2"))
+#' types <- list(`1` = "movie", `2` = "movie", `3` = "actor")
+#' metapaths <- list(MAM = c("movie", "actor", "movie"))
+#' W_sem <- matrix(rnorm(sem * hid, 0, 0.3), sem, hid)
+#' b_sem <- rnorm(sem); q_sem <- rnorm(sem)
+#' r <- han_forward(H, edges, types, metapaths, a_vec, W_node,
+#'                  W_sem, b_sem, q_sem)
+#' dim(r$embeddings)
 han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
                         W_sem, b_sem, q_sem, slope = 0.2) {
   if (is.matrix(H)) {
@@ -218,6 +246,20 @@ heterogeneous_gnn <- han_forward
 #' @param slope Passed to \code{han_forward}. Defaults to \code{0.2}.
 #' @return The value of \code{han_forward}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 3; hid <- 4; sem <- 2
+#' W_node <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
+#' a_vec <- rnorm(hid, 0, 0.3)
+#' H <- matrix(rnorm(9), 3, 3)
+#' edges <- list(`1` = c("3"), `2` = c("3"), `3` = c("1", "2"))
+#' types <- list(`1` = "movie", `2` = "movie", `3` = "actor")
+#' metapaths <- list(MAM = c("movie", "actor", "movie"))
+#' W_sem <- matrix(rnorm(sem * hid, 0, 0.3), sem, hid)
+#' b_sem <- rnorm(sem); q_sem <- rnorm(sem)
+#' r <- morie_hetgnn(H, edges, types, metapaths, a_vec, W_node,
+#'                   W_sem, b_sem, q_sem)
+#' nrow(r$embeddings)
 morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
                          W_sem, b_sem, q_sem, slope = 0.2) {
   han_forward(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem,

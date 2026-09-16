@@ -43,6 +43,8 @@
 #' @return A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum},
 #' \code{finite}, \code{equal_weights}, \code{attenuation_is_poor}, \code{method}.
 #' @export
+#' @examples
+#' Ma8Imp()
 Ma8Imp <- function(n = NULL) {
   # eq (3.109): eight equal taps.  Equal weighting is why the stopband
   # attenuation is poor -- the book notes no more than about -20 dB at
@@ -70,6 +72,9 @@ Ma8Imp <- function(n = NULL) {
 #' \code{zeros_at_multiples_of_fs_over_8}, \code{dc_gain}, \code{always_stable},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ma8Tf(V)
 Ma8Tf <- function(z) {
   # eq (3.110): seven zeros spaced evenly round the unit circle, at every
   # multiple of fs/8 except DC.  For fs = 1000 Hz the book puts them at
@@ -96,6 +101,9 @@ Ma8Tf <- function(z) {
 #' \code{max_difference}, \code{factored_form_agrees},
 #' \code{bracket_is_inside_the_product}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ma8Fr(V)
 Ma8Fr <- function(omega) {
   # eq (3.111).  The book's factored form is EXACT: the bracket is the sum
   # over lags -3..3, and exp(-j4w) shifts that to lags 1..7, which with
@@ -140,6 +148,9 @@ Ma8Fr <- function(omega) {
 #' \code{max_difference}, \code{agrees_with_direct_form}, \code{additions_per_sample},
 #' \code{direct_form_additions}, \code{error_accumulates}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ma8Rec(V)
 Ma8Rec <- function(x, n = NULL) {
   # eq (3.120): y(n) = y(n-1) + (1/8)x(n) - (1/8)x(n-8).  Two additions a
   # sample instead of eight, and it "clearly depicts the integration
@@ -185,6 +196,9 @@ Ma8Rec <- function(x, n = NULL) {
 #' \code{still_fir}, \code{dc_gain}, \code{removable_singularity_at_z_equals_one},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ma8RecTf(V)
 Ma8RecTf <- function(z) {
   # eq (3.121): a pole at z = 1 cancelled by one of the numerator's zeros,
   # so the filter is still FIR despite the recursive implementation.  At
@@ -220,6 +234,9 @@ Ma8RecTf <- function(z) {
 #' \code{agrees_with_eq_3_111}, \code{group_delay}, \code{delay_is_not_an_integer},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ma8Sinc(V)
 Ma8Sinc <- function(omega) {
   # eq (3.122): the Dirichlet kernel, a real sinc-like envelope times a
   # pure delay of 7/2 samples.  The book states it "is equivalent to that
@@ -268,6 +285,8 @@ Ma8Sinc <- function(omega) {
 #' @return A list with \code{y}, \code{n}, \code{tau}, \code{clipped_windows},
 #' \code{trapezoidal}, \code{continuous_counterpart_of_the_ma_filter}, \code{method}.
 #' @export
+#' @examples
+#' RunInt(x = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 RunInt <- function(x, t, tau) {
   # eq (3.112): the continuous counterpart of the moving-average sum.  The
   # window is clipped at the start of the record, and how many windows
@@ -327,6 +346,9 @@ RunInt <- function(x, t, tau) {
 #' \code{constant_of_integration_is_arbitrary}, \code{discrete_pole_on_the_unit_circle},
 #' \code{seldom_used_for_filtering}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' RunIntAll(V, V)
 RunIntAll <- function(x, t) {
   # eq (3.113).  Over a finite record the lower limit is the first sample,
   # so any mass before it is unobserved and the constant of integration is
@@ -363,6 +385,9 @@ RunIntAll <- function(x, t) {
 #' \code{dc_term_carried_by_the_delta}, \code{undefined_at_zero_without_the_delta},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IntFt(V, V)
 IntFt <- function(X, omega, X0 = NULL) {
   # eq (3.115): Y(w) = X(w)/(jw) + pi X(0) delta(w).  The delta carries
   # the DC content, which 1/(jw) cannot represent because it blows up
@@ -404,6 +429,9 @@ IntFt <- function(X, omega, X0 = NULL) {
 #' @return A list with \code{H}, \code{omega}, \code{lowpass}, \code{dc_term_set_aside},
 #' \code{gain_falls_nonlinearly_with_frequency}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IntFr(V)
 IntFr <- function(omega) {
   # eq (3.116): H(w) = 1/(jw), the DC term of eq (3.115) set aside as the
   # book does.  The gain falls as frequency rises, so it is a lowpass, and
@@ -433,6 +461,9 @@ IntFr <- function(omega) {
 #' @return A list with \code{magnitude}, \code{omega}, \code{book_prints_one_over_omega},
 #' \code{absolute_value_needed_for_negative_omega}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IntMag(V)
 IntMag <- function(omega) {
   # eq (3.117).  The book prints 1/w, which is right for w > 0 and is how
   # the response is plotted; a magnitude cannot be negative, so the
@@ -460,6 +491,9 @@ IntMag <- function(omega) {
 #' \code{constant_phase_is_not_constant_delay}, \code{sign_flips_for_negative_omega},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IntPh(V)
 IntPh <- function(omega) {
   # eq (3.118): a constant -pi/2, because 1/(jw) is a fixed quarter turn.
   # A constant phase is NOT a constant delay: the group delay is the
@@ -492,6 +526,9 @@ IntPh <- function(omega) {
 #' \code{scale_factor_gives_true_time_rate}, \code{highpass}, \code{amplifies_noise},
 #' \code{removes_dc}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FDiff(V)
 FDiff <- function(x, T = 1, n = NULL) {
   # eq (3.123).  The 1/T is not cosmetic: the book is explicit that it "is
   # required in order to obtain the rate of change of the signal with
@@ -525,6 +562,9 @@ FDiff <- function(x, T = 1, n = NULL) {
 #' @return A list with \code{H}, \code{z}, \code{T}, \code{zeros}, \code{zero_at_dc},
 #' \code{dc_gain}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FDiffTf(V)
 FDiffTf <- function(z, T = 1) {
   # eq (3.124): one zero, at z = 1, the DC point -- that single zero is
   # the whole of the operator's highpass character.
@@ -549,6 +589,9 @@ FDiffTf <- function(z, T = 1) {
 #' @return A list with \code{H}, \code{omega}, \code{T}, \code{split_form},
 #' \code{max_difference}, \code{forms_agree}, \code{half_sample_delay}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FDiffFr(V)
 FDiffFr <- function(omega, T = 1) {
   # eq (3.125).  The second form separates a half-sample delay from a real
   # gain; the factor of j is what puts the phase a quarter turn ahead, the
@@ -582,6 +625,9 @@ FDiffFr <- function(omega, T = 1) {
 #' \code{nyquist_gain}, \code{roughly_proportional_to_frequency},
 #' \code{book_omits_the_absolute_value}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FDiffMag(V)
 FDiffMag <- function(omega, T = 1) {
   # eq (3.126).  The book prints (2/T) sin(w/2) without bars, right on
   # 0 <= w <= pi, the range plotted; the absolute value is needed outside
@@ -609,6 +655,9 @@ FDiffMag <- function(omega, T = 1) {
 #' @return A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope},
 #' \code{quarter_turn_offset}, \code{linear_phase}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FDiffPh(V)
 FDiffPh <- function(omega) {
   # eq (3.127): slope -1/2, so half a sample of group delay plus the
   # quarter turn from the j of eq (3.125).  A half-sample delay cannot be
@@ -635,6 +684,9 @@ FDiffPh <- function(omega) {
 #' \code{as_averaged_first_differences}, \code{max_difference}, \code{derivation_agrees},
 #' \code{controls_noise_amplification}, \code{poor_above_fs_over_10}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CDiff3(V)
 CDiff3 <- function(x, T = 1, n = NULL) {
   # eq (3.128): the mean of two successive first differences, which
   # controls the noise amplification.  The book warns the price is
@@ -676,6 +728,9 @@ CDiff3 <- function(x, T = 1, n = NULL) {
 #' \code{max_difference}, \code{cascade_agrees}, \code{zeros}, \code{bandpass},
 #' \code{is_first_difference_times_two_point_ma}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CDiff3Tf(V)
 CDiff3Tf <- function(z, T = 1) {
   # eq (3.129).  The factored form is the point: the operator IS a
   # first-order difference in series with a two-point moving average, so
@@ -711,6 +766,9 @@ CDiff3Tf <- function(z, T = 1) {
 #' @return A list with \code{magnitude}, \code{omega}, \code{T}, \code{dc_gain},
 #' \code{nyquist_gain}, \code{peak_at}, \code{bandpass}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CDiff3Mag(V)
 CDiff3Mag <- function(omega, T = 1) {
   # eq (3.130): (1/T)|sin w|.  Nought at BOTH ends -- at DC from the
   # highpass factor, at Nyquist from the moving-average factor -- peaking
@@ -737,6 +795,9 @@ CDiff3Mag <- function(omega, T = 1) {
 #' \code{quarter_turn_offset}, \code{integer_delay_can_be_undone_by_shifting},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CDiff3Ph(V)
 CDiff3Ph <- function(omega) {
   # eq (3.131): slope -1, so a WHOLE sample of group delay against the
   # half sample of the plain difference.  An integer delay can be undone
@@ -759,6 +820,9 @@ CDiff3Ph <- function(omega) {
 #' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Diff1(V)
 Diff1 <- function(x, T = 1) {
   # eq (3.123) run over a record, with the coefficients reported so the
   # highpass character is visible.
@@ -785,6 +849,9 @@ Diff1 <- function(x, T = 1) {
 #' \code{b}, \code{a}, \code{zeros}, \code{double_zero_at_dc},
 #' \code{gain_rises_quadratically}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Diff2(V)
 Diff2 <- function(x, T = 1, n = NULL) {
   # The second derivative has response (jw)(jw) = -w^2, a QUADRATIC rise
   # with frequency, and the book notes it "may be realized as a cascade of
@@ -832,6 +899,9 @@ Diff2 <- function(x, T = 1, n = NULL) {
 #' @return A list with the transfer function \code{H} at the requested
 #'   points and the parameters it was built from.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' BWander(V)
 BWander <- function(z, T = 1, pole = 0.995) {
   # eq (3.132): the first difference with a pole just inside the unit
   # circle at DC.  The pole nearly cancels the zero away from DC, so the
@@ -876,6 +946,9 @@ BWander <- function(z, T = 1, pole = 0.995) {
 #' \code{numerator_is_the_distance_to_the_zero},
 #' \code{denominator_is_the_distance_to_the_pole}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' BWanderZ(V)
 BWanderZ <- function(z, T = 1, pole = 0.995) {
   # eq (3.133): the same filter in positive powers of z.  The book keeps
   # this form because the graphical method reads it directly -- numerator
@@ -917,6 +990,9 @@ BWanderZ <- function(z, T = 1, pole = 0.995) {
 #' @return A list with the filtered record \code{y}, the value at the
 #'   requested index if one was asked for, and the parameters used.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' BWanderEq(V)
 BWanderEq <- function(x, T = 1, pole = 0.995, n = NULL) {
   # eq (3.134).  Note the PLUS on the feedback: the pole's coefficient is
   # already on the right-hand side, so this does NOT carry the minus of
@@ -965,6 +1041,8 @@ BWanderEq <- function(x, T = 1, pole = 0.995, n = NULL) {
 #' \code{Omega_c}, \code{N}, \code{half_power_at_cutoff}, \code{monotonic},
 #' \code{no_ripple}, \code{cutoff_is_half_power_for_every_order}, \code{method}.
 #' @export
+#' @examples
+#' BwSqMag(Omega = c(1, 2, 3, 4, 5, 6, 7, 8), Omega_c = 5L, N = 5L)
 BwSqMag <- function(Omega, Omega_c, N) {
   # eq (3.135): monotonic in both bands, no ripple anywhere -- the
   # defining Butterworth property.  At the cutoff the squared magnitude is
@@ -998,6 +1076,8 @@ BwSqMag <- function(Omega, Omega_c, N) {
 #' \code{half_are_right_half_plane}, \code{not_a_filter_until_the_poles_are_selected},
 #' \code{method}.
 #' @export
+#' @examples
+#' BwSqLap(s = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), Omega_c = 5L, N = 5L)
 BwSqLap <- function(s, Omega_c, N) {
   # eq (3.136): 2N poles, half in the right half-plane, so this is NOT a
   # filter until the N left-half-plane ones are selected by eq (3.138).
@@ -1033,6 +1113,8 @@ BwSqLap <- function(s, Omega_c, N) {
 #' \code{n_left_half_plane}, \code{none_on_the_imaginary_axis},
 #' \code{real_pole_for_odd_order}, \code{method}.
 #' @export
+#' @examples
+#' BwPoles(Omega_c = 5L, N = 5L)
 BwPoles <- function(Omega_c, N, k = NULL) {
   # eq (3.137): all 2N poles on a circle of radius Omega_c, spaced pi/N
   # apart, symmetric about the imaginary axis and never on it.  For odd N
@@ -1083,6 +1165,8 @@ BwPoles <- function(Omega_c, N, k = NULL) {
 #'   gain, the transfer function where it was asked for, and the
 #'   imaginary residue that shows the coefficients really are real.
 #' @export
+#' @examples
+#' BwAnalog(Omega_c = 5L, N = 5L)
 BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
   # eq (3.138): built from the N LEFT-half-plane poles only.  With no gain
   # given, G normalizes the DC gain to unity, which makes it Omega_c^N.
@@ -1138,6 +1222,9 @@ BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
 #'   the left half-plane into the unit disc, that stability is preserved
 #'   and that nothing aliases.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bilinear(V)
 Bilinear <- function(z, T = 1) {
   # eq (3.139): maps the whole left half-plane into the unit disc, so a
   # stable analog filter always yields a stable digital one -- unlike
@@ -1175,6 +1262,9 @@ Bilinear <- function(z, T = 1) {
 #'   and the gap between the direct evaluation and the closed form, so a
 #'   reader can see how exactly the two agree.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' BilinUnit(V)
 BilinUnit <- function(omega, T = 1) {
   # eq (3.140): on the unit circle sigma vanishes exactly, so the
   # imaginary axis maps onto the unit circle and nowhere else.  The
@@ -1214,6 +1304,8 @@ BilinUnit <- function(omega, T = 1) {
 #'   recording that the map is nonlinear, that prewarping is required and
 #'   that the compression is severe near Nyquist.
 #' @export
+#' @examples
+#' BilinWarp(omega = list(a = 1, b = 2))
 BilinWarp <- function(omega, T = 1) {
   # eq (3.141): the prewarping step.  Nonlinear, so a digital cutoff
   # cannot be handed to an analog design unchanged; skipping it puts the
@@ -1250,6 +1342,9 @@ BilinWarp <- function(omega, T = 1) {
 #'   error against equation (3.141), and whether every result fell
 #'   strictly inside the open interval.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' BilinUnwarp(V)
 BilinUnwarp <- function(Omega, T = 1) {
   # eq (3.142): the inverse of eq (3.141); the two compose to the
   # identity, which is checked.  Every finite analog frequency lands
@@ -1286,6 +1381,8 @@ BilinUnwarp <- function(Omega, T = 1) {
 #' \code{zeros_are_forced_by_the_bilinear_transform}, \code{dc_gain},
 #' \code{leading_a_is_one}, \code{method}.
 #' @export
+#' @examples
+#' BwDigital(N = 4, fc = 100, fs = 1000)
 BwDigital <- function(Omega_c = NULL, N = NULL, T = 1, fc = NULL,
                       fs = NULL, z = NULL) {
   # eq (3.143).  The N zeros at z = -1 are not a design choice: the
@@ -1360,6 +1457,9 @@ BwDigital <- function(Omega_c = NULL, N = NULL, T = 1, fc = NULL,
 #' @param n Passed to \code{IirDiff}.
 #' @return The value of \code{IirDiff}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IirDiffGen(V, V)
 IirDiffGen <- function(x, b_k, a_k = NULL, n = NULL) {
   # eq (3.144): the time-domain form of eq (3.143), and how a designed
   # filter is actually run over data.  The feedback is SUBTRACTED, as in
@@ -1380,6 +1480,8 @@ IirDiffGen <- function(x, b_k, a_k = NULL, n = NULL) {
 #' \code{omega_c}, \code{N}, \code{half_power_at_cutoff}, \code{no_warping},
 #' \code{zero_phase}, \code{not_causal}, \code{method}.
 #' @export
+#' @examples
+#' BwDirect(omega = c(1, 2, 3, 4, 5, 6, 7, 8), omega_c = 5L, N = 5L)
 BwDirect <- function(omega, omega_c, N) {
   # eq (3.145): specified on the discrete-frequency axis outright, so
   # there is no warping to prewarp for.  The filter so defined has zero
@@ -1415,6 +1517,8 @@ BwDirect <- function(omega, omega_c, N) {
 #' \code{K}, \code{kc}, \code{N}, \code{dc_gain}, \code{reflected},
 #' \code{cutoff_index_uses_a_ceiling}, \code{method}.
 #' @export
+#' @examples
+#' BwLpDft(16, kc = 4, N = 2)
 BwLpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
   # eq (3.146), valid for k = 0..K/2 with the upper half a reflection,
   # H(k) = H(K-k).  The book defines kc = ceil(K wc/ws) and that CEILING
@@ -1470,6 +1574,8 @@ BwLpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #' \code{K}, \code{kc}, \code{N}, \code{dc_gain}, \code{reflected},
 #' \code{leaves_high_frequency_noise_untouched}, \code{method}.
 #' @export
+#' @examples
+#' BwHpDft(16, kc = 4, N = 2)
 BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
   # eq (3.149): the lowpass with the ratio inverted.  At k = 0 the ratio
   # is unbounded and the response is exactly nought -- the filter the book
@@ -1525,6 +1631,8 @@ BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #' \code{f0}, \code{fs}, \code{omega_0}, \code{gain_at_the_notch}, \code{dc_gain},
 #' \code{fir}, \code{linear_phase}, \code{notch_is_wide_without_poles}, \code{method}.
 #' @export
+#' @examples
+#' Notch60(1000, 60)
 Notch60 <- function(fs, f0 = 60, z = NULL) {
   # A conjugate pair of zeros AT the interference frequency, so the gain
   # there is exactly nought.  With zeros alone the notch is wide, which is
@@ -1579,6 +1687,8 @@ Notch60 <- function(fs, f0 = 60, z = NULL) {
 #' \code{gain_at_the_notch}, \code{dc_gain}, \code{iir}, \code{poles_narrow_the_notch},
 #' \code{method}.
 #' @export
+#' @examples
+#' Notch(notch_freq = 60, bandwidth = 5, fs = 1000)
 Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
                   z = NULL) {
   # Zeros ON the unit circle at the interference frequency and poles just
@@ -1657,6 +1767,8 @@ Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
 #' \code{notch_frequencies_hz}, \code{n_zeros}, \code{notch_spacing_hz}, \code{dc_gain},
 #' \code{removes_dc_as_well}, \code{fir}, \code{linear_phase}, \code{method}.
 #' @export
+#' @examples
+#' Comb(period_samples = 5L)
 Comb <- function(period_samples, fs = 1000, z = NULL) {
   # H(z) = (1/2)(1 - z^-N): N zeros spaced evenly round the unit circle,
   # so it notches DC and every harmonic of fs/N at once -- which is what
@@ -1697,6 +1809,9 @@ Comb <- function(period_samples, fs = 1000, z = NULL) {
 #' \code{phase}, \code{fs}, \code{n_freqs}, \code{one_sided}, \code{includes_nyquist},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FreqResp(V)
 FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
   # Evaluated on a uniform grid from DC to NYQUIST inclusive -- the
   # one-sided response, since for real coefficients the other half is the
@@ -1764,6 +1879,9 @@ FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 #' \code{phase_undefined_where_the_response_vanishes},
 #' \code{wrapping_is_an_arctangent_artifact}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PhaseResp(V)
 PhaseResp <- function(b, a = NULL, fs = 1000, n_freqs = 512,
                       unwrap = TRUE) {
   # The principal value jumps by 2 pi at the branch cut, an artifact of
@@ -1820,6 +1938,9 @@ PhaseResp <- function(b, a = NULL, fs = 1000, n_freqs = 512,
 #' \code{n_undefined}, \code{from_the_coefficients},
 #' \code{phase_differentiation_breaks_at_unit_circle_zeros}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' GrpDelay(V)
 GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
   # Computed from the COEFFICIENTS, not by differentiating a numerical
   # phase.  Differentiating is wrong at any zero on the unit circle, where
@@ -1887,6 +2008,8 @@ GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 #' @param z Passed to \code{BwDigital}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' BwLp(cutoff_hz = 5L)
 BwLp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
   # The book's route end to end: prewarp by eq (3.141), place poles by
   # eq (3.137), keep the left-half-plane ones by eq (3.138), apply the
@@ -1929,6 +2052,8 @@ BwLp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' \code{dc_gain}, \code{nyquist_gain}, \code{prewarped}, \code{normalized_at_nyquist},
 #' \code{method}.
 #' @export
+#' @examples
+#' BwHp(cutoff_hz = 5L)
 BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
   # The lowpass poles are reused -- a Butterworth highpass has the same
   # pole radius -- and the N zeros move from z = -1 to z = +1.  The gain
@@ -1982,6 +2107,8 @@ BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' \code{reaches_zero_at_the_ends}, \code{coherent_gain}, \code{symmetric},
 #' \code{method}.
 #' @export
+#' @examples
+#' HammingW(N = 5L)
 HammingW <- function(N) {
   # w(n) = 0.54 - 0.46 cos(2 pi n/(N-1)).  The 0.54/0.46 split cancels the
   # rectangle's largest sidelobe, about -43 dB, at the cost of a wider
@@ -2020,6 +2147,8 @@ HammingW <- function(N) {
 #' \code{reaches_zero_at_the_ends}, \code{coherent_gain},
 #' \code{not_the_hann_filter_of_eq_3_100}, \code{symmetric}, \code{method}.
 #' @export
+#' @examples
+#' HannW(N = 5L)
 HannW <- function(N) {
   # w(n) = 0.5[1 - cos(2 pi n/(N-1))].  Reaches exactly zero at both ends,
   # so overlapped Hann windows add to a constant at 50 per cent overlap --
@@ -2061,6 +2190,8 @@ HannW <- function(N) {
 #'   endpoints and its coherent gain, together with the note that it has
 #'   the widest main lobe of the three classical windows.
 #' @export
+#' @examples
+#' BlackmanW(N = 5L)
 BlackmanW <- function(N) {
   # w(n) = 0.42 - 0.5 cos(2 pi n/(N-1)) + 0.08 cos(4 pi n/(N-1)).  A third
   # cosine buys much deeper sidelobes than the Hamming, about -58 dB, at
@@ -2099,6 +2230,8 @@ BlackmanW <- function(N) {
 #' @param window_type Passed to \code{\%in\%}. Defaults to \code{"hamming"}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' WindowFn(N = 5L)
 WindowFn <- function(N, window_type = "hamming") {
   # Section 3.4.  Truncating a record IS multiplying it by a rectangle,
   # whose transform has sidelobes that leak energy from strong components
@@ -2145,6 +2278,8 @@ WindowFn <- function(N, window_type = "hamming") {
 #' \code{truncation_causes_gibbs_ripple}, \code{ripple_height_does_not_shrink_with_M},
 #' \code{method}.
 #' @export
+#' @examples
+#' SincKern(fc = 5L)
 SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {
   # The inverse transform of a rectangular passband, truncated to M+1 taps
   # and delayed by M/2 to make it causal.  Truncation is multiplying by a
@@ -2195,6 +2330,9 @@ SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {
 #' \code{normalized}, \code{peak_index}, \code{time_reversed},
 #' \code{output_is_the_cross_correlation}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MfiltH(V)
 MfiltH <- function(g, normalize = FALSE) {
   # h(n) = g(N-1-n): the template reversed in time, which makes the
   # filter's output the cross-correlation with the template.  Reversal is

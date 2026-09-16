@@ -171,13 +171,15 @@
 #'   causal effects. \emph{PNAS} 113(27), 7353-7360.
 #' @export
 #' @examples
-#' set.seed(1)
-#' n <- 120
-#' X <- matrix(rnorm(n * 2), n, 2)
-#' d <- rbinom(n, 1, 0.5)
-#' y <- 1 + X[, 1] + d * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
-#' fit <- morie_causal_forest(y, d, X, n_trees = 30L, min_leaf = 10L)
-#' mean(fit$cate)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 120
+#'   X <- matrix(rnorm(n * 2), n, 2)
+#'   d <- rbinom(n, 1, 0.5)
+#'   y <- 1 + X[, 1] + d * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
+#'   fit <- morie_causal_forest(y, d, X, n_trees = 30L, min_leaf = 10L)
+#'   mean(fit$cate)
+#' }
 morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
                                 max_depth = 6L, mtry = NULL,
                                 subsample = 0.5, imbalance_penalty = 0,

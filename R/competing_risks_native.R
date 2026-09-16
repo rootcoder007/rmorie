@@ -294,11 +294,13 @@ morie_fine_gray_subdistribution_hazard <- function(time, cause, X,
 #' @references Therneau, T. M. and Grambsch, P. M. (2000). \emph{Modeling
 #'   Survival Data}, Ch. 9. Springer.
 #' @examples
+#' \donttest{
 #' set.seed(4)
 #' X <- matrix(rnorm(120), ncol = 1)
 #' cl <- rep(1:20, each = 6)
 #' tt <- rexp(120, exp(X * 0.5) * rep(rgamma(20, 2, 2), each = 6))
 #' round(morie_cox_frailty(tt, rep(1, 120), X, cl)$kendall_tau, 3)
+#' }
 #' @export
 morie_cox_frailty <- function(time, event, X, cluster, theta = NULL,
                               max_iter = 30L, tol = 1e-6, ties = "efron") {

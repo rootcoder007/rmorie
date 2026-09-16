@@ -94,6 +94,9 @@
 #' @param word_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return The value of \code{best}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' chrf_score(V, V)
 chrf_score <- function(hypothesis, reference, n_char = 6L, beta = 2.0,
                        remove_whitespace = TRUE, word_order = 0L) {
   N <- as.integer(n_char)
@@ -174,6 +177,9 @@ chrF <- chrf_score
 #' @param word_order Passed to \code{chrf_score}. Defaults to \code{0L}.
 #' @return The value of \code{chrf_score}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_chrF(V, V)
 morie_chrF <- function(hypothesis, reference, n_char = 6L, beta = 2.0,
                        remove_whitespace = TRUE, word_order = 0L) {
   chrf_score(hypothesis, reference, n_char, beta, remove_whitespace, word_order)

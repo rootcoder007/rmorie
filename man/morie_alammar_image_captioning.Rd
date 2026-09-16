@@ -22,6 +22,6 @@ A list with \code{caption}, \code{projected}, \code{feature_dim}, \code{projecte
 }
 \keyword{internal}
 \examples{
-morie_alammar_image_captioning("img", function(im) c(1, 2), rbind(c(1, 
+morie_alammar_image_captioning("img", function(im) c(1, 2), rbind(c(1,
     0)), function(z, p) "cap")
 }

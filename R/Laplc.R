@@ -22,6 +22,9 @@
 #' order does not matter at load time; the body is a single call to the
 #' target, so outputs are exactly identical.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Laplc(V)
 Laplc <- function(y, sensitivity = 1, epsilon = 1, seed = NULL) {
   morie_dp_laplace_mechanism(y, sensitivity = sensitivity,
                              epsilon = epsilon, seed = seed)

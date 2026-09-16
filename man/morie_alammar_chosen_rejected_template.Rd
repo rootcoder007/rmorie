@@ -22,7 +22,7 @@ set.seed(1)
 Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
 Ks <- matrix(stats::rnorm(6), 3, 2)
 Vs <- matrix(stats::rnorm(6), 3, 2)
-morie_alammar_grouped_query_attention(Qh, list(Ks), list(Vs), 
+morie_alammar_grouped_query_attention(Qh, list(Ks), list(Vs),
     4, 1)
 morie_alammar_chosen_rejected_template(prompts = Ks, chosen = Vs, rejected = Ks)
 }

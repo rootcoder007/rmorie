@@ -13,6 +13,8 @@
 #' @param window Character; passed to \code{tolower}. Defaults to \code{"hamming"}.
 #' @return A list with \code{order}, \code{criterion}, \code{n_effective}, \code{method}.
 #' @export
+#' @examples
+#' AICorder(prediction_errors = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
 AICorder <- function(prediction_errors, n_samples, window = "hamming") {
   # Rangayyan eq. (7.60):  I(P) = log(eps_P) + 2P/Ne,  Ne = 0.4 N for a
   # Hamming window -- the EFFECTIVE sample count after windowing, which
@@ -77,6 +79,12 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 #' @return A list with \code{psd}, \code{freqs}, \code{n_segments},
 #' \code{segment_length}, \code{method}.
 #' @export
+#' @examples
+#' n <- 100
+#' fs <- 64
+#' f0 <- 8
+#' x <- sin(2 * pi * f0 * (0:(n - 1))/fs)
+#' BartlettPSD(x, fs = fs, n_segments = 4)
 BartlettPSD <- function(x, fs = 1, n_segments = NULL,
                         segment_length = NULL) {
   # Rangayyan eqs. (6.14)-(6.16): split into K DISJOINT segments of M
@@ -124,6 +132,9 @@ BartlettPSD <- function(x, fs = 1, n_segments = NULL,
 #' @param gain Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{cepstrum}, \code{c0}, \code{order}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ARtoCepstrum(V)
 ARtoCepstrum <- function(a_coeffs, gain = NULL) {
   # Rangayyan eq. (7.65):
   #   h(1) = -a1;  h(n) = -a_n - sum_{k=1}^{n-1} (1 - k/n) a_k h(n-k)

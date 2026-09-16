@@ -19,7 +19,7 @@ A list with \code{h}, \code{c}, \code{i}, \code{f}, \code{g}, \code{o}, \code{es
 }
 \keyword{internal}
 \examples{
-W <- list(W_x = matrix(c(0, 0, 1, 0), ncol = 1), W_h = matrix(0, 
+W <- list(W_x = matrix(c(0, 0, 1, 0), ncol = 1), W_h = matrix(0,
     4, 1), b = rep(0, 4))
 morie_geron_peephole_lstm(1, 0, 0, W)
 }
