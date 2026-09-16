@@ -1,4 +1,4 @@
-# rmorie 1.2.5 - 2026-09-16
+# rmorie 1.2.4 - 2026-09-16
 
 ## Eighty-eight documented functions are now exported
 
@@ -15,7 +15,6 @@ directly.
 `DESCRIPTION` lists the pkgdown site URL, which `pkgdown::check_pkgdown()`
 requires.
 
-# rmorie 1.2.4 - 2026-09-14
 
 ## morie_otis_stock_flow, and the Lakner stock/flow measures
 
