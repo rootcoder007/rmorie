@@ -18,6 +18,7 @@
 #' @return A list with the MSA update \code{m}, the attention \code{attn},
 #'   \code{estimate}, \code{n}, \code{s}, \code{mode} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 7-8
+#' @export
 Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
                      mode = "row") {
   if (!mode %in% c("row", "column")) stop("mode must be 'row' or 'column'")

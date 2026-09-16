@@ -27,6 +27,7 @@
 #' @return A list with \code{z}, \code{m1}, the distance matrix \code{d},
 #'   \code{estimate}, \code{n}, \code{ncycle} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 30, 32
+#' @export
 Alfrecyc <- function(m1, z, x, wd, bins = NULL, ncycle = 1) {
   if (is.null(bins)) bins <- 3.375 + (21.375 - 3.375) / 14 * (seq_len(15) - 1)
   n <- dim(z)[1]

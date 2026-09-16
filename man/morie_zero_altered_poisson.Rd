@@ -54,5 +54,5 @@ tests in \code{tests/testthat/}.
 set.seed(11)
 yp <- rpois(60, 2.5)
 yp <- yp[yp > 0]
-rmorie:::morie_zap_mle(yp)
+morie_zap_mle(yp)
 }

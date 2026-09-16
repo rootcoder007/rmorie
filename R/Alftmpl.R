@@ -17,6 +17,7 @@
 #' @return A list with \code{z}, \code{attn}, \code{estimate}, \code{n},
 #'   \code{ntempl} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 17
+#' @export
 Alftmpl <- function(t, z, wq, wk, wv, wo) {
   nt <- dim(t)[1]
   n <- dim(z)[1]

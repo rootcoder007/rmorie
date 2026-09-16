@@ -70,6 +70,6 @@ tests in \code{tests/testthat/}.
 }
 \keyword{models}
 \examples{
-rmorie:::morie_ordinal_probs(eta = c(-0.5, 0.2, 1.1),
+morie_ordinal_probs(eta = c(-0.5, 0.2, 1.1),
                     thresholds = c(-1, 0, 1))
 }

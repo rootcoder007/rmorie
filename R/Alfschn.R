@@ -23,6 +23,7 @@
 #' @return A list with atom coordinates \code{x}, the composed torsion
 #'   \code{frames}, \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 24-25
+#' @export
 Alfschn <- function(frames, angles, littf, parent, litx, frameof) {
   n <- length(frames)
   nf <- length(littf)

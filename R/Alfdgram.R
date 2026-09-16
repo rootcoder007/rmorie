@@ -17,6 +17,7 @@
 #'   \code{dist}, the \code{loss}, \code{estimate}, \code{n} and
 #'   \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. section 1.9.8
+#' @export
 Alfdgram <- function(z, w, bins = NULL, dtrue = NULL) {
   if (is.null(bins)) {
     nbins <- 64L
