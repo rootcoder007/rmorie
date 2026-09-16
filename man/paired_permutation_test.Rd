@@ -23,7 +23,6 @@ paired_permutation_test(
 \item{alternative}{\code{"two-sided"}, \code{"greater"}, \code{"less"}.}
 
 \item{seed}{Random seed.}
-
 }
 \value{
 A \code{morie_permutation_test_result}.

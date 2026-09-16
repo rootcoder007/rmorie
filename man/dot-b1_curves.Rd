@@ -11,13 +11,15 @@
 
 \item{A}{Numeric; combined arithmetically in the body.}
 
-\item{fit}{A list; the body reads \code{$g0}, \code{$g1}, \code{$Q0star}, \code{$Q1star}, \code{$QAstar} from it.}
+\item{fit}{A list; the body reads \code{$g0}, \code{$g1}, \code{$Q0star},
+\code{$Q1star}, \code{$QAstar} from it.}
 }
 \value{
 A list with \code{mu1}, \code{mu0}, \code{ic1}, \code{ic0}.
 }
 \description{
-A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot}, \code{Tmleor} and 3 others in the module.
+A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot},
+\code{Tmleor} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

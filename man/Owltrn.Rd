@@ -35,12 +35,33 @@ which the outcome is the weight and the observed treatment is the
 label. The surrogate is theirs -- the weighted HINGE loss with a
 ridge penalty, a linear-kernel weighted SVM,
 \eqn{in_b (1/n) sum w_i max(0, 1 - A_i x_i primeb) + lam ||b_slope||^2},
+minimized by full-batch subgradient descent on the Pegasos step
+schedule \code{eta_t = 1 / (lam t)}: a fixed iteration count, no
+sampling and no tolerance test. The intercept is not penalized.
+}
+\details{
+The cheaper surrogate -- weighted least squares of the label on the
+covariates -- has the right population minimiser but is not robust
+to leverage. On a design where the high-weight units sit near the
+decision boundary and the low-weight ones sit far from it, the
+squared loss lets the far units outvote the informative ones and
+returns the exactly INVERTED rule. That happened on this module primes
+own anchor fixture, which is why the hinge is used.
+
+The rule is \code{d(x) = 1{x primeb > 0}}. NEGATIVE outcomes break the
 equivalence, because a negative weight rewards misclassification;
 the standard fix is to shift \code{Y} by its minimum. That shift is
 NOT innocuous -- it changes the relative weights and so can change
 the learned rule, which is exactly the objection that motivated
 residual weighted learning -- so the amount shifted is RETURNED in
 \code{shift} rather than applied silently.
+}
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- Owltrn(y = y, D = g, W = x)
+res
 }
 \references{
 Zhao, Y., Zeng, D., Rush, A. J. & Kosorok, M. R. (2012).
@@ -50,11 +71,4 @@ learning. Journal of the American Statistical Association,
 Shalev-Shwartz, S., Singer, Y., Srebro, N. & Cotter, A. (2011).
 Pegasos: primal estimated sub-gradient solver for SVM.
 Mathematical Programming, 127(1), 3-30.
-}
-\examples{
-y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
-g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
-x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
-res <- Owltrn(y = y, D = g, W = x)
-res
 }

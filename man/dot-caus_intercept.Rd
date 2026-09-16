@@ -13,7 +13,8 @@
 The value of \code{cbind}.
 }
 \description{
-A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}.
+A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
+\code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}.
 See the file header for the source the module follows.
 source it follows.
 }

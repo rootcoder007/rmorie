@@ -13,7 +13,8 @@
 The value of \code{ifelse}.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{.morie_gr_f32}, \code{morie_geron_bf16}, \code{morie_geron_bf16_range}.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_f32},
+\code{morie_geron_bf16}, \code{morie_geron_bf16_range}.
 See the file header for the source the module follows.
 the source it follows.
 }

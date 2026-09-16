@@ -10,7 +10,7 @@ morie_egarch_model(x)
 \item{x}{Numeric return series.}
 }
 \value{
-Named list with \code{omega, alpha, gamma, beta, loglik,
+Named list with \eqn{omega, alpha, gamma, beta, loglik,
   conditional_variance, n, method}.
 }
 \description{

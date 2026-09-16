@@ -9,7 +9,8 @@
 \arguments{
 \item{u}{A vector; its length is taken.}
 
-\item{bandwidth}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{bandwidth}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 A numeric value.

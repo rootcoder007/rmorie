@@ -18,7 +18,9 @@
 \item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \value{
-A list with \code{estimate}, \code{se}, \code{stratum_slopes}, \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n}, \code{degree}.
+A list with \code{estimate}, \code{se}, \code{stratum_slopes},
+\code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n},
+\code{degree}.
 }
 \description{
 A step of the gentmt_native implementation. Called by \code{morie_gentmt}.

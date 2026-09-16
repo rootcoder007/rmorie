@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the b2info implementation. Called by \code{Cndent}, \code{Cndmi}, \code{Compshan} and 8 others in the module.
+A step of the b2info implementation. Called by \code{Cndent}, \code{Cndmi},
+\code{Compshan} and 8 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

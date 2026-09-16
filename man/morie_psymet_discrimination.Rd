@@ -9,7 +9,8 @@ morie_psymet_discrimination(data, pct = 0.27)
 \arguments{
 \item{data}{Numeric matrix or data.frame of items.}
 
-\item{pct}{Numeric in (0, 0.5); proportion for the upper/lower group split (default 0.27, the Kelley-Cureton rule).}
+\item{pct}{Numeric in (0, 0.5); proportion for the upper/lower group split (default
+0.27, the Kelley-Cureton rule).}
 }
 \value{
 data.frame with \code{item}, \code{d}.

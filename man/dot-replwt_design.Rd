@@ -9,12 +9,15 @@
 \arguments{
 \item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}
 
-\item{strata}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{strata}{Optional; may be \code{NULL}. Coerced to character by the body, with
+\code{as.character}.}
 
-\item{psu}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{psu}{Optional; may be \code{NULL}. Coerced to character by the body, with
+\code{as.character}.}
 }
 \value{
-A list with \code{weights}, \code{strata}, \code{psu}, \code{n}, \code{psu_order}, \code{psu_units}, \code{stratum_psus}, \code{stratum_order}.
+A list with \code{weights}, \code{strata}, \code{psu}, \code{n},
+\code{psu_order}, \code{psu_units}, \code{stratum_psus}, \code{stratum_order}.
 }
 \description{
 A step of the replwt_native implementation. No other function in the package calls it.

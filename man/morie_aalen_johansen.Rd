@@ -21,8 +21,6 @@ morie_aalen_johansen(
 \item{n_states}{total number of states; inferred if NULL.}
 
 \item{s, t}{interval endpoints; t defaults to the last event time.}
-
-
 }
 \value{
 list: P, event_times, increments, at_risk, n_states,

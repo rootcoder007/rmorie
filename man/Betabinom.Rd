@@ -14,7 +14,6 @@ Betabinom(y, n, alpha = 1, beta = 1, m = NULL)
 \item{alpha, beta}{Prior shapes, strictly positive.}
 
 \item{m}{Future trials for the posterior predictive; NULL uses n.}
-
 }
 \value{
 List with postalpha, postbeta, postmean, postvar, postmode,

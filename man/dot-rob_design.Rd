@@ -15,7 +15,8 @@
 A list with \code{X}, \code{y}.
 }
 \description{
-A step of the robust_native implementation. Called by \code{morie_rob_huber}, \code{morie_rob_m}, \code{morie_rob_mm} and 2 others in the module.
+A step of the robust_native implementation. Called by \code{morie_rob_huber},
+\code{morie_rob_m}, \code{morie_rob_mm} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -29,15 +29,14 @@ morie_spatial_block_kriging(
 \item{n_quad}{Default 25.}
 
 \item{nugget, sill, range_}{Exponential-covariance parameters.}
-
-
 }
 \value{
 Named list: estimate, se, n, method.
 }
 \description{
 Solve the OK system with point-to-block averaged covariances:
-\deqn{C_{\text{bar}}(s_i, B) = (1/|B|) \int_B C(s_i, u) du.}{C_bar(s_i, B) = (1/|B|) int_B C(s_i, u) du.}
+\deqn{C_{\text{bar}}(s_i, B) = (1/|B|) \int_B C(s_i, u) du.}{C_bar(s_i, B) = (1/|B|)
+int_B C(s_i, u) du.}
 }
 \examples{
 # See the package vignettes for usage examples:

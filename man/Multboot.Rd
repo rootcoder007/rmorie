@@ -8,9 +8,19 @@
 \usage{
 Multboot(x, B = 200, seed = 1, deterministic_seed = NULL)
 
-morie_ksr08_kosorok_multiplier_bootstrap(x, B = 200, seed = 1, deterministic_seed = NULL)
+morie_ksr08_kosorok_multiplier_bootstrap(
+  x,
+  B = 200,
+  seed = 1,
+  deterministic_seed = NULL
+)
 
-morie_kosorok_multiplier_bootstrap(x, B = 200, seed = 1, deterministic_seed = NULL)
+morie_kosorok_multiplier_bootstrap(
+  x,
+  B = 200,
+  seed = 1,
+  deterministic_seed = NULL
+)
 }
 \arguments{
 \item{x}{The sample.}
@@ -23,7 +33,6 @@ morie_kosorok_multiplier_bootstrap(x, B = 200, seed = 1, deterministic_seed = NU
 LCG is seeded from SHA-256("ksr08_multiplier:<deterministic_seed>")
 via \code{morie_det_rng} instead of \code{seed}, which is the
 cross-arm reproducible path.}
-
 }
 \value{
 List with \code{estimate}, \code{boot_mean}, \code{boot_sd},

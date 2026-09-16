@@ -14,7 +14,7 @@ morie_midas_regression(x, y, K = NULL)
 \item{K}{Number of high-frequency lags (required when x is flat).}
 }
 \value{
-Named list with \code{beta0, beta1, theta1, theta2, weights,
+Named list with \eqn{beta0, beta1, theta1, theta2, weights,
   r2, n, K, method}.
 }
 \description{

@@ -22,14 +22,13 @@ morie_mrm_estimate_causal_effect(
 
 \item{covariates}{Character vector of adjustment covariates.}
 
-\item{methods}{Subset of \code{c("matching", "ate", "aipw",
+\item{methods}{Subset of \eqn{c("matching", "ate", "aipw",
 "dml")} (default all four).}
 
 \item{correction}{Multiple-testing correction passed to
 \code{stats::p.adjust} (default \code{"holm"}).}
 
 \item{seed}{RNG seed forwarded to the stochastic estimators.}
-
 }
 \value{
 An object of class \code{morie_mrm_effect}: list with

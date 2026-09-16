@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_exposure_summary}, \code{morie_tlnetlg_network_variance}.
+A step of the tlnetlg_native implementation. Called by
+\code{morie_tlnetlg_exposure_summary}, \code{morie_tlnetlg_network_variance}.
 See the file header for the source the module follows.
 the source it follows.
 }

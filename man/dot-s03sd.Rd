@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{Btbayes}, \code{Btcbb}, \code{Btcicor} and 28 others in the module.
+A step of the helpers_s03 implementation. Called by \code{Btbayes}, \code{Btcbb},
+\code{Btcicor} and 28 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

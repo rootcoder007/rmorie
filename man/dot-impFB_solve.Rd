@@ -15,7 +15,8 @@
 The value of \code{[}.
 }
 \description{
-A step of the impFB_native implementation. Called by \code{.impFB_als_step}, \code{.impFB_explain}.
+A step of the impFB_native implementation. Called by \code{.impFB_als_step},
+\code{.impFB_explain}.
 See the file header for the source the module follows.
 source it follows.
 }

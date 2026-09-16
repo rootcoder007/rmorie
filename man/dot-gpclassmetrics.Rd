@@ -12,7 +12,8 @@
 \item{i}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \value{
-A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all}, \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
+A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all},
+\code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}.

@@ -27,7 +27,8 @@
 \item{significance}{Passed to \code{.ucfR_neighbours}. Defaults to \code{FALSE}.}
 }
 \value{
-A list with \code{estimate}, \code{prediction}, \code{naive_weighted_mean}, \code{user_mean}, \code{n_neighbours}, \code{fell_back}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{prediction}, \code{naive_weighted_mean},
+\code{user_mean}, \code{n_neighbours}, \code{fell_back}, \code{method}, \code{note}.
 }
 \description{
 A step of the ucfR_native implementation. No other function in the package calls it.

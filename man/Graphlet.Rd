@@ -12,7 +12,6 @@ Graphlet(G1, G2, k_size = 3, normalize = TRUE)
 \item{k_size}{the graphlet size.}
 
 \item{normalize}{divide the counts by C(n, k).}
-
 }
 \value{
 list: estimate, types, f1, f2, n_types, method.

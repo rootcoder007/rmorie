@@ -12,7 +12,7 @@ morie_johansen_cointegration(x, k_ar_diff = 1)
 \item{k_ar_diff}{Number of lagged differences. Default 1.}
 }
 \value{
-Named list with \code{eigenvalues, trace_stat, crit_values,
+Named list with \eqn{eigenvalues, trace_stat, crit_values,
   rank, n, k, method}.
 }
 \description{

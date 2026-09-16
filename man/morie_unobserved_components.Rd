@@ -14,7 +14,7 @@ morie_unobserved_components(x, period = 12, trend = "local linear")
 \item{trend}{Trend specification, "local level" or "local linear".}
 }
 \value{
-Named list with \code{trend, seasonal, irregular, loglik, n,
+Named list with \eqn{trend, seasonal, irregular, loglik, n,
   period, method}.
 }
 \description{

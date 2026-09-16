@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
+A step of the tdcvar_native implementation. Called by
+\code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
 See the file header for the source the module follows.
 source it follows.
 }

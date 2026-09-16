@@ -13,7 +13,8 @@
 A list with \code{U}, \code{s}, \code{Vt}.
 }
 \description{
-A step of the meglt_native implementation. Called by \code{coherence}, \code{nuclear_norm}, \code{svt}.
+A step of the meglt_native implementation. Called by \code{coherence},
+\code{nuclear_norm}, \code{svt}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -13,7 +13,8 @@
 A vector, from \code{c}.
 }
 \description{
-A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth}, \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth},
+\code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 See the file header for the source the module follows.
 source it follows.
 }

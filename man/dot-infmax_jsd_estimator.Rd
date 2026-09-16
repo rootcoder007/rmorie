@@ -12,7 +12,8 @@
 \item{marginal_scores}{Passed to \code{unlist}.}
 }
 \value{
-A list with \code{estimate}, \code{positive}, \code{negative}, \code{bounded}, \code{note}.
+A list with \code{estimate}, \code{positive}, \code{negative}, \code{bounded},
+\code{note}.
 }
 \description{
 A step of the infmax_native implementation. No other function in the package calls it.

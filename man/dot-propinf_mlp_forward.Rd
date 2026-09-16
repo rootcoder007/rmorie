@@ -19,7 +19,9 @@
 A list with \code{acts}, \code{pre}.
 }
 \description{
-A step of the propinf_native implementation. Called by \code{.propinf_deepsets_forward}, \code{.propinf_train_vector_meta}, \code{.propinf_vector_meta_predict}.
+A step of the propinf_native implementation. Called by
+\code{.propinf_deepsets_forward}, \code{.propinf_train_vector_meta},
+\code{.propinf_vector_meta_predict}.
 See the file header for the source the module follows.
 the source it follows.
 }

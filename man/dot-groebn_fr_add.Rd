@@ -15,7 +15,8 @@
 The value of \code{.groebn_fr}.
 }
 \description{
-A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{.groebn_mul}, \code{.groebn_poly}.
+A step of the groebn_native implementation. Called by \code{.groebn_add},
+\code{.groebn_mul}, \code{.groebn_poly}.
 See the file header for the source the module follows.
 source it follows.
 }

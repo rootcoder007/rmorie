@@ -15,7 +15,9 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the geron_w4a_native implementation. Called by \code{morie_beta_schedule_values}, \code{morie_check_buffer}, \code{morie_dueling_q} and 35 others in the module.
+A step of the geron_w4a_native implementation. Called by
+\code{morie_beta_schedule_values}, \code{morie_check_buffer}, \code{morie_dueling_q}
+and 35 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the alammar_llm_native implementation. Called by \code{.morie_gr_lcg_normals}, \code{.morie_gr_lcg_perm}, \code{.morie_gr_lcg_u} and 21 others in the module.
+A step of the alammar_llm_native implementation. Called by
+\code{.morie_gr_lcg_normals}, \code{.morie_gr_lcg_perm}, \code{.morie_gr_lcg_u} and 21
+others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

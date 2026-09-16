@@ -27,8 +27,6 @@ morie_indicator_kriging(
 \item{target}{Optional target coords; defaults to sample coords.}
 
 \item{nugget, sill, range_}{Indicator-covariance parameters.}
-
-
 }
 \value{
 Named list: estimate, threshold, n, method.

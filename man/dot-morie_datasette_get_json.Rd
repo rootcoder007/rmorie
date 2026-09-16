@@ -9,13 +9,15 @@
 \arguments{
 \item{url}{Passed to \code{url}.}
 
-\item{timeout}{Accepted by the signature and not used anywhere in the body. Defaults to \code{60}.}
+\item{timeout}{Accepted by the signature and not used anywhere in the body. Defaults
+to \code{60}.}
 }
 \value{
 The value of \code{.s03json_fromJSON}.
 }
 \description{
-A step of the ingest_datasette implementation. Called by \code{morie_datasette_databases}, \code{morie_datasette_read}.
+A step of the ingest_datasette implementation. Called by
+\code{morie_datasette_databases}, \code{morie_datasette_read}.
 See the file header for the source the module follows.
 the source it follows.
 }

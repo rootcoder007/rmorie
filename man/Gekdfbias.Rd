@@ -17,14 +17,15 @@ morie_fauzi_thm2_2_bias_brdkdfe(h, a, b2, b4, fx)
 \item{b2, b4}{The coefficients (2.7) and (2.8) at \code{x}.}
 
 \item{fx}{\code{F_X(x)}, strictly between 0 and 1.}
-
 }
 \value{
 Named list with \code{bias}, \code{leading}, \code{h}, \code{a}, \code{method}.
 }
 \description{
 Theorem 2.2, Eq. (2.6):
-\deqn{\mathrm{Bias}[\tilde F_X(x)] = h^4 a^2 \frac{b_2^2(x) - 2 b_4(x) F_X(x)}{2 F_X(x)} + o(h^4) + O(n^{-1}),}{Bias[Ftilde(x)] = h^4 a^2 (b2(x)^2 - 2 b4(x) F(x)) / (2 F(x)) + o(h^4) + O(1/n),}
+\deqn{\mathrm{Bias}[\tilde F_X(x)] = h^4 a^2 \frac{b_2^2(x) - 2 b_4(x) F_X(x)}{2
+F_X(x)} + o(h^4) + O(n^{-1}),}{Bias[Ftilde(x)] = h^4 a^2 (b2(x)^2 - 2 b4(x) F(x)) /
+(2 F(x)) + o(h^4) + O(1/n),}
 with \code{b2} from (2.7) and \code{b4} from (2.8).
 }
 \details{

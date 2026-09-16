@@ -17,7 +17,8 @@ morie_datasets_chicago_socrata_by_id(soda_id, limit = 1000L)
 \value{
 A \code{data.frame} of records.
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 }
 \description{
 Fetch a NYC OpenData Socrata dataset by ID
@@ -28,6 +29,11 @@ Fetch a Chicago Open Data Socrata dataset by ID
 \donttest{
 # NYPD arrests dataset (SODA id verified live 2026-07)
 df <- try(morie_datasets_nyc_socrata_by_id("8h9b-rp9u", limit = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
+\donttest{
+# Chicago crimes dataset (SODA id verified live 2026-07)
+df <- try(morie_datasets_chicago_socrata_by_id("ijzp-q8t2", limit = 5L))
 if (!inherits(df, "try-error")) head(df)
 }
 \donttest{

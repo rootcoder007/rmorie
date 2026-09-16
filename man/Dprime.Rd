@@ -10,7 +10,6 @@ Dprime(geno1, geno2)
 \item{geno1, geno2}{Genotypes coded as the allele count 0, 1, 2.
 Individuals miscoded or missing at either locus are dropped
 pairwise.}
-
 }
 \value{
 List with \code{estimate} (D'), \code{D}, \code{pAB},
@@ -42,5 +41,10 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Dprime(V, V)
 }
 \references{
-Lewontin (1964), Genetics 49:49-67.  The Genetics PDF at PMC could not be retrieved from this host (the fetch returned a 1.8 kB error page), so the coded form was read from Warnes and Leisch's CRAN package genetics, R/LD.R, which gives Dmin, Dmax and estDp verbatim.  genetics maximises the same likelihood with optimize(); a fixed-iteration EM is used here because a golden-section search is not reproducible across language arms.
+Lewontin (1964), Genetics 49:49-67.  The Genetics PDF at PMC could not be
+retrieved from this host (the fetch returned a 1.8 kB error page), so the coded form
+was read from Warnes and Leisch's CRAN package genetics, R/LD.R, which gives Dmin,
+Dmax and estDp verbatim.  genetics maximises the same likelihood with optimize(); a
+fixed-iteration EM is used here because a golden-section search is not reproducible
+across language arms.
 }

@@ -14,7 +14,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the rng_native implementation. Called by \code{.morie_random_normal}, \code{morie_anamorphosis}, \code{morie_normal_scores} and 3 others in the module.
+A step of the rng_native implementation. Called by \code{.morie_random_normal},
+\code{morie_anamorphosis}, \code{morie_normal_scores} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

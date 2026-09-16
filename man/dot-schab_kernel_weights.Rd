@@ -24,7 +24,8 @@
 The value of \code{.schab_reshape_like}.
 }
 \description{
-A step of the schab_gwr_shared implementation. Called by \code{.schab_local_weights}, \code{spgwrk}.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_local_weights},
+\code{spgwrk}.
 See the file header for the source the module follows.
 the source it follows.
 }

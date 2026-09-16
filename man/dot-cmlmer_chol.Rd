@@ -13,7 +13,8 @@
 The value of \code{L}, as built in the body.
 }
 \description{
-A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}, \code{morie_cmlmer_compressed_lmm}.
+A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at},
+\code{morie_cmlmer_compressed_lmm}.
 See the file header for the source the module follows.
 source it follows.
 }

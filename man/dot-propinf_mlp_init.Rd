@@ -15,7 +15,8 @@
 The value of \code{net}, as built in the body.
 }
 \description{
-A step of the propinf_native implementation. Called by \code{.propinf_deepsets_init}, \code{.propinf_train_vector_meta}.
+A step of the propinf_native implementation. Called by \code{.propinf_deepsets_init},
+\code{.propinf_train_vector_meta}.
 See the file header for the source the module follows.
 the source it follows.
 }

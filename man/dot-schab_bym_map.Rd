@@ -22,7 +22,9 @@
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-11}.}
 }
 \value{
-A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted}, \code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total}, \code{observed_total}, \code{log_posterior}.
+A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted},
+\code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total},
+\code{observed_total}, \code{log_posterior}.
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbym}.

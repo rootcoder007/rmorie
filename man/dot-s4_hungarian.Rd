@@ -3,7 +3,6 @@
 \name{.s4_hungarian}
 \alias{.s4_hungarian}
 \title{Optimal assignment, Kuhn-Munkres shortest-augmenting-path form.
-
 Exact,}
 \usage{
 .s4_hungarian(cost)
@@ -16,7 +15,6 @@ The value of \code{ans}, as built in the body.
 }
 \description{
 Optimal assignment, Kuhn-Munkres shortest-augmenting-path form.
-
 Exact,
 }
 \section{O(n^3). Ties broken by the first strictly improving index so both}{

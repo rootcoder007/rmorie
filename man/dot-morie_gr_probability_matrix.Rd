@@ -15,7 +15,9 @@
 A list with \code{X}, \code{theta}, \code{probabilities}, \code{scores}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{.morie_gr_gradient_matrix}, \code{morie_geron_softmax_cross_entropy_cost}, \code{morie_geron_softmax_probability}.
+A step of the geron_train_native implementation. Called by
+\code{.morie_gr_gradient_matrix}, \code{morie_geron_softmax_cross_entropy_cost},
+\code{morie_geron_softmax_probability}.
 See the file header for the source the module follows.
 for the source it follows.
 }

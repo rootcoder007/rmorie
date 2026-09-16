@@ -16,7 +16,8 @@
 \item{seed}{Passed to \code{.ghc_rng}.}
 }
 \value{
-A list with \code{vector}, \code{descriptors}, \code{length}, \code{null_mean}, \code{null_sd}, \code{z}.
+A list with \code{vector}, \code{descriptors}, \code{length},
+\code{null_mean}, \code{null_sd}, \code{z}.
 }
 \description{
 A step of the toptor_native implementation. Called by \code{morie_toptor}.

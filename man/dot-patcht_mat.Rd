@@ -13,7 +13,9 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the patchT_native implementation. Called by \code{channel_independent_tokens}, \code{channel_mixed_tokens}, \code{patchtst_encode}.
+A step of the patchT_native implementation. Called by
+\code{channel_independent_tokens}, \code{channel_mixed_tokens},
+\code{patchtst_encode}.
 See the file header for the source the module follows.
 source it follows.
 }

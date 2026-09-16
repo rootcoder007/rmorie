@@ -35,8 +35,6 @@ morie_spatiotemporal_variogram(
 \item{n_spatial_bins, n_temporal_bins}{Integer bin counts.}
 
 \item{max_spatial, max_temporal}{Upper cutoffs.}
-
-
 }
 \value{
 Named list: estimate (gamma, spatial_bins, temporal_bins,
@@ -44,7 +42,8 @@ counts), n, method.
 }
 \description{
 \deqn{\hat\gamma(h, u) = \frac{1}{2|N(h, u)|}
-      \sum_{(i,j)\in N(h,u)} (Z(s_i, t_i) - Z(s_j, t_j))^2}{hatgamma(h, u) = (1)/(2|N(h, u)|) sum_(i,j)in N(h,u) (Z(s_i, t_i) - Z(s_j, t_j))^2}.
+      \sum_{(i,j)\in N(h,u)} (Z(s_i, t_i) - Z(s_j, t_j))^2}{hatgamma(h, u) =
+(1)/(2|N(h, u)|) sum_(i,j)in N(h,u) (Z(s_i, t_i) - Z(s_j, t_j))^2}.
 }
 \examples{
 set.seed(1)

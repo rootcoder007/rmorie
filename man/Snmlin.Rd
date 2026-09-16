@@ -21,7 +21,6 @@ Snmlin(
 
 \item{propensity}{\eqn{E[A|H]} for cumulative treatment; sample mean
 if omitted (correct only under randomization).}
-
 }
 \value{
 Named list with \code{estimate}, \code{psi}, \code{se}, \code{ci_lower},
@@ -30,7 +29,8 @@ Named list with \code{estimate}, \code{psi}, \code{se}, \code{ci_lower},
 \description{
 The blipped-down outcome \eqn{Y - \psi \sum_t A_t} must be
 conditionally independent of treatment given history, giving
-\deqn{\psi = \frac{\sum_i (A_i - \bar A_i) Y_i}{\sum_i (A_i - \bar A_i) A_i}}{psi = sum (A-Abar)Y / sum (A-Abar)A}
+\deqn{\psi = \frac{\sum_i (A_i - \bar A_i) Y_i}{\sum_i (A_i - \bar A_i) A_i}}{psi =
+sum (A-Abar)Y / sum (A-Abar)A}
 Solved in one step -- the linear case needs no grid search over psi.
 Under randomization with the sample mean as the propensity, psi
 equals the OLS slope of Y on cumulative treatment exactly, which is

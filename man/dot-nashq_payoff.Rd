@@ -17,7 +17,8 @@
 The value of \code{tot}, as built in the body.
 }
 \description{
-A step of the nashq_native implementation. Called by \code{.nashq_is_equilibrium}, \code{.nashq_is_saddle}, \code{.nashq_select} and 2 others in the module.
+A step of the nashq_native implementation. Called by \code{.nashq_is_equilibrium},
+\code{.nashq_is_saddle}, \code{.nashq_select} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

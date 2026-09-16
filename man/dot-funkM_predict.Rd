@@ -21,7 +21,8 @@
 A numeric value.
 }
 \description{
-A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch}, \code{morie_funkM_rmse}.
+A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch},
+\code{morie_funkM_rmse}.
 See the file header for the source the module follows.
 source it follows.
 }

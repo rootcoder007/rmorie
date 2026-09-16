@@ -35,6 +35,12 @@ fetchers.
 morie_cache_clear("siu", confirm = FALSE)
 }
 \dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\donttest{
+# Non-interactive: skip the confirmation prompt.
+morie_cache_clear("siu", confirm = FALSE)
+}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_cache_dir}}

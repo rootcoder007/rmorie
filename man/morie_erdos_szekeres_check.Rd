@@ -11,7 +11,6 @@ morie_erdos_szekeres_check(sequence, r = NULL, s = NULL)
 
 \item{r, s}{Target lengths, both at least 2; omit both to just get
 the longest monotone lengths.}
-
 }
 \value{
 A list with \code{longest_increasing}, \code{longest_decreasing},

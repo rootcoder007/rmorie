@@ -15,7 +15,8 @@
 The value of \code{x}, as built in the body.
 }
 \description{
-A step of the helpers_rouss implementation. Called by \code{.rsltsfit}, \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
+A step of the helpers_rouss implementation. Called by \code{.rsltsfit}, \code{Lmsreg},
+\code{Ltsreg} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

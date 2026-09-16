@@ -15,7 +15,8 @@
 A list with \code{p1}, \code{m1}, \code{p0}, \code{m0}.
 }
 \description{
-A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt}, \code{Bndnvg} and 2 others in the module.
+A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt},
+\code{Bndnvg} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{morie_geron_credit_assignment}, \code{morie_geron_dcgan_generator}, \code{morie_geron_randomized_search_cv}.
+A step of the geron_ml_native implementation. Called by
+\code{morie_geron_credit_assignment}, \code{morie_geron_dcgan_generator},
+\code{morie_geron_randomized_search_cv}.
 See the file header for the source the module follows.
 the source it follows.
 }

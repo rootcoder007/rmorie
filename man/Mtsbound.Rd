@@ -14,7 +14,6 @@ Mtsbound(y, z, d, ymin, ymax)
 \item{d}{Level whose mean counterfactual is bounded.}
 
 \item{ymin, ymax}{A priori support of the outcome.}
-
 }
 \value{
 List with lower, upper, width, condmean, pbelow, pat, pabove,

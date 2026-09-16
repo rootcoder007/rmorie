@@ -12,7 +12,8 @@
 \item{user_embedding}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \value{
-A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width}, \code{length}, \code{note}.
+A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width},
+\code{length}, \code{note}.
 }
 \description{
 A step of the sse4r_native implementation. Called by \code{morie_sse4r}.

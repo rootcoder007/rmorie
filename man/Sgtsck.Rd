@@ -26,13 +26,13 @@ orthogonal directions rather than clusters of different radius.
 Formula: \code{L_sym = I - D^-1/2 A D^-1/2}; \code{U} = its \code{k}
 lowest eigenvectors; \code{T_ij = U_ij / ||U_i||}; k-means on rows of T.
 }
-\references{
-Ng, A. Y., Jordan, M. I. & Weiss, Y. (2002). On spectral
-clustering: analysis and an algorithm. Advances in Neural
-Information Processing Systems 14, pages 849-856, MIT Press.
-}
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 res <- Sgtsck(A = A)
 res
+}
+\references{
+Ng, A. Y., Jordan, M. I. & Weiss, Y. (2002). On spectral
+clustering: analysis and an algorithm. Advances in Neural
+Information Processing Systems 14, pages 849-856, MIT Press.
 }

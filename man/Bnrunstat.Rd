@@ -24,8 +24,6 @@ Bnrunstat(
 \item{eps}{Numerical floor inside the square root.}
 
 \item{gamma, beta}{Learned scale and shift.}
-
-
 }
 \value{
 List with runmean, runvar, batchmean, batchvar, batchvarunb,

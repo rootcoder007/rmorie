@@ -22,8 +22,8 @@ name, same body).
 
 All three return a \code{morie_otis_analysis_result} (the shared
 RichResult-shaped list from \code{otis_all_analyze.R}).
-\subsection{Cross-year invariants}{
 
+Cross-year invariants
 \itemize{
 \item OTIS \code{UniqueIndividual_ID} is reassigned every fiscal
 year (see \code{variable_taxonomy.R}); the overlay therefore
@@ -34,6 +34,5 @@ here is computed on the year-aligned intersection -- there is
 a small fiscal/calendar misalignment that is documented in the
 interpretation but not corrected. Toronto OTIS data covers only
 2023-2025, so common-year samples are necessarily small.
-}
 }
 }

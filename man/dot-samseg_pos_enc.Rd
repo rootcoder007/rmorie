@@ -19,7 +19,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the samseg_native implementation. Called by \code{encode_box_prompt}, \code{encode_point_prompt}.
+A step of the samseg_native implementation. Called by \code{encode_box_prompt},
+\code{encode_point_prompt}.
 See the file header for the source the module follows.
 source it follows.
 }

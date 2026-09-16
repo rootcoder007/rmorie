@@ -13,7 +13,8 @@
 The value of \code{w}, as built in the body.
 }
 \description{
-A step of the schab_rest_shared implementation. Called by \code{.schab_geary_c}, \code{.schab_moran_i}, \code{.schab_weight_sums}.
+A step of the schab_rest_shared implementation. Called by \code{.schab_geary_c},
+\code{.schab_moran_i}, \code{.schab_weight_sums}.
 See the file header for the source the module follows.
 the source it follows.
 }

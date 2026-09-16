@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle}.
+A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm},
+\code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -20,7 +20,8 @@
 \item{degree}{A count; the body uses it as \code{seq_len(...)}.}
 }
 \value{
-A list with \code{prediction}, \code{variance}, \code{coefficients}, \code{component_variances}.
+A list with \code{prediction}, \code{variance}, \code{coefficients},
+\code{component_variances}.
 }
 \description{
 A step of the schab_hermite_shared implementation. No other function in the package calls it.

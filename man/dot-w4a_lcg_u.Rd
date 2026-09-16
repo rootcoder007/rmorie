@@ -15,7 +15,9 @@
 The value of \code{u}, as built in the body.
 }
 \description{
-A step of the geron_w4a_native implementation. Called by \code{morie_geron_dataloader}, \code{morie_geron_dropout_alt}, \code{morie_lcg_normal}.
+A step of the geron_w4a_native implementation. Called by
+\code{morie_geron_dataloader}, \code{morie_geron_dropout_alt},
+\code{morie_lcg_normal}.
 See the file header for the source the module follows.
 the source it follows.
 }

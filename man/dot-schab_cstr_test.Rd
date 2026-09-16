@@ -22,12 +22,14 @@
 
 \item{time_interval}{A vector; indexed elementwise.}
 
-\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
+\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults
+to \code{3L}.}
 
 \item{n_time_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
 }
 \value{
-A list with \code{index_of_dispersion}, \code{df}, \code{p_value}, \code{counts}, \code{mean_count}, \code{var_count}.
+A list with \code{index_of_dispersion}, \code{df}, \code{p_value},
+\code{counts}, \code{mean_count}, \code{var_count}.
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstp}.

@@ -33,7 +33,6 @@ morie_fauzi_g_theta_distribution(
 \item{lo, hi}{Quadrature limits.}
 
 \item{ngrid}{Number of nodes; fixed, never adapted.}
-
 }
 \value{
 Named list with \code{estimate}, \code{theta}, \code{method}.

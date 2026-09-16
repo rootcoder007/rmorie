@@ -23,7 +23,8 @@
 The value of \code{.prsLR_closure}.
 }
 \description{
-A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{morie_goto}.
+A step of the prsLR_native implementation. Called by
+\code{.prsLR_canonical_collection}, \code{morie_goto}.
 See the file header for the source the module follows.
 source it follows.
 }

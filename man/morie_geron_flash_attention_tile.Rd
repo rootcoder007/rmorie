@@ -10,8 +10,6 @@ morie_geron_flash_attention_tile(Q, K, V, block_size = 2)
 \item{Q, K, V}{Attention inputs.}
 
 \item{block_size}{Positive tile height over the key axis.}
-
-
 }
 \value{
 List with \code{output}, \code{reference_output}, \code{max_abs_error},

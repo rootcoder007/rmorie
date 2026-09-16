@@ -12,7 +12,8 @@
 \item{y}{A matrix; passed to \code{crossprod}.}
 }
 \value{
-A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
+A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted},
+\code{residuals}, \code{sigma2}.
 }
 \description{
 A step of the gentmt_native implementation. Called by \code{.gentmt_treatment_density}.

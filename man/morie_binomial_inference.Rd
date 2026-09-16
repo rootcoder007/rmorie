@@ -7,6 +7,7 @@
 morie_binomial_inference(w, n, p = NA, z = 1.96, interval_fn = NULL)
 }
 \arguments{
+\item{w}{Successes. @param n Trials. @param p Probability.}
 
 \item{n}{See Usage.}
 
@@ -16,8 +17,6 @@ morie_binomial_inference(w, n, p = NA, z = 1.96, interval_fn = NULL)
 
 \item{interval_fn}{Function(w, n) returning c(lower, upper) for the
 true-confidence-level sum; NULL skips it.}
-
-\item{w}{Argument \code{w}; see Usage.}
 }
 \value{
 List with pmf, var_mle, wilson (estimate/lower/upper), and

@@ -17,7 +17,8 @@
 A list with \code{X}, \code{kept}, \code{n_masked}.
 }
 \description{
-A step of the grace_native implementation. Called by \code{.grace_generate_view}, \code{morie_mask_features}.
+A step of the grace_native implementation. Called by \code{.grace_generate_view},
+\code{morie_mask_features}.
 See the file header for the source the module follows.
 source it follows.
 }

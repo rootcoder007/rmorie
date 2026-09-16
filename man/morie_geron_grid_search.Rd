@@ -2,7 +2,8 @@
 % Please edit documentation in R/geron_w4a_native.R
 \name{morie_geron_grid_search}
 \alias{morie_geron_grid_search}
-\title{Exhaustive grid search scored by K-fold CV, delegated to \code{morie_geron_cross_validation_score} (hmgrs)}
+\title{Exhaustive grid search scored by K-fold CV, delegated to
+\code{morie_geron_cross_validation_score} (hmgrs)}
 \usage{
 morie_geron_grid_search(
   param_grid,
@@ -23,13 +24,13 @@ morie_geron_grid_search(
 \item{K}{Folds.}
 
 \item{score}{Optional function(y_true, y_pred) -> score.}
-
 }
 \value{
 List with \code{best_params}, \code{best_score}, \code{results}, \code{n_candidates}, \code{n_fits}.
 }
 \description{
-Exhaustive grid search scored by K-fold CV, delegated to \code{morie_geron_cross_validation_score} (hmgrs)
+Exhaustive grid search scored by K-fold CV, delegated to
+\code{morie_geron_cross_validation_score} (hmgrs)
 }
 \examples{
 set.seed(3)

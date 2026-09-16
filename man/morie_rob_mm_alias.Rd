@@ -9,16 +9,14 @@ morie_rob_mm_alias(X, y, n_subsets = 200L, seed = 0)
 \arguments{
 \item{X, y}{design and response.}
 
-\item{n_subsets, seed}{as in \code{morie_rob_mm()}.}
-
-
+\item{n_subsets, seed}{as in \code{\link[=morie_rob_mm]{morie_rob_mm()}}.}
 }
 \value{
-the \code{morie_rob_mm()} list plus \code{alias_of}.
+the \code{\link[=morie_rob_mm]{morie_rob_mm()}} list plus \code{alias_of}.
 }
 \description{
 One estimator, two catalogue entries: the computation is
-\code{morie_rob_mm()}, invoked directly so the two cannot drift apart.
+\code{\link[=morie_rob_mm]{morie_rob_mm()}}, invoked directly so the two cannot drift apart.
 }
 \examples{
 set.seed(1)

@@ -7,12 +7,14 @@
 morie_geron_model_parallelism(model, n_devices)
 }
 \arguments{
-\item{model}{Sequence/list of per-layer parameter counts, arrays, or mappings with a "params" entry.}
+\item{model}{Sequence/list of per-layer parameter counts, arrays, or mappings with a
+"params" entry.}
 
 \item{n_devices}{Devices.}
 }
 \value{
-List with assignment, device_loads, max_load, imbalance, naive_utilisation, cut_points, estimate, n, method.
+List with assignment, device_loads, max_load, imbalance, naive_utilisation,
+cut_points, estimate, n, method.
 }
 \description{
 Optimal contiguous model-parallel layer partition (Geron Ch 17, morie.fn hmmpp)

@@ -31,12 +31,6 @@ Llamablock(
 \item{g1, g2}{RMSNorm gains.}
 
 \item{rope_base}{the RoPE base.}
-
-
-
-
-
-
 }
 \value{
 list: estimate, out, attn, h, method.

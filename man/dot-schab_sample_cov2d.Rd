@@ -13,7 +13,8 @@
 A list with \code{cov}, \code{lags_j}, \code{lags_k}.
 }
 \description{
-A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram_from_cov}, \code{spperiod}.
+A step of the schab_rest_shared implementation. Called by
+\code{.schab_periodogram_from_cov}, \code{spperiod}.
 See the file header for the source the module follows.
 the source it follows.
 }

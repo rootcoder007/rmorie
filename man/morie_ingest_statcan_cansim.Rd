@@ -48,6 +48,13 @@ df <- morie_ingest_statcan_cansim("35-10-0177")
 head(df)
 }
 \dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontrun{
+# Requires the 'cansim' package and network access.
+df <- morie_ingest_statcan_cansim("35-10-0177")
+head(df)
+}
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_ingest_statcan_csv}}

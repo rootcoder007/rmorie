@@ -31,8 +31,6 @@ spnst(
 
 \item{anisotropy, source_anisotropy}{Optional d by d matrices A and A_c of
 p. 423.}
-
-
 }
 \value{
 A list with \code{nonstationary_cov}, \code{correlation},

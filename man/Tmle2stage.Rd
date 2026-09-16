@@ -14,8 +14,6 @@ Tmle2stage(y, D1, D2, X1 = NULL, X2 = NULL, alpha = 0.05)
 \item{X1, X2}{stage-1 and stage-2 covariates.}
 
 \item{alpha}{interval level.}
-
-
 }
 \value{
 list: estimate, se, ci_lo, ci_hi, ey11, ey10, ey01, ey00, n,

@@ -13,7 +13,8 @@
 A character value.
 }
 \description{
-A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_chain}, \code{morie_sechsh_verify_inclusion}.
+A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_chain},
+\code{morie_sechsh_verify_inclusion}.
 See the file header for the source the module follows.
 source it follows.
 }

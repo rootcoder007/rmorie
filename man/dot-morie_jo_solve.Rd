@@ -15,7 +15,8 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the ts_joseph implementation. Called by \code{.morie_jo_ols}, \code{morie_adfur}, \code{morie_quantreg}.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_ols},
+\code{morie_adfur}, \code{morie_quantreg}.
 See the file header for the source the module follows.
 source it follows.
 }

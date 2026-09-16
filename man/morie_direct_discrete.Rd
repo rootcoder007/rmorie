@@ -29,7 +29,6 @@ morie_direct_discrete(
 \item{bandwidth}{bandwidth for the within-stratum regressions.}
 
 \item{n_grid}{points for the integral defining J.}
-
 }
 \value{
 list: beta, alpha, support_z, J, c0, c1, identified,

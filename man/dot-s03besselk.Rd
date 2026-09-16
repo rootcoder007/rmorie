@@ -11,13 +11,15 @@
 
 \item{x}{Numeric; combined arithmetically in the body.}
 
-\item{terms}{Accepted by the signature and not used anywhere in the body. Defaults to \code{160L}.}
+\item{terms}{Accepted by the signature and not used anywhere in the body. Defaults to
+\code{160L}.}
 }
 \value{
 A numeric value.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.s03maternk}, \code{.sgflrt_corr}, \code{Maternvg}.
+A step of the helpers_s03 implementation. Called by \code{.s03maternk},
+\code{.sgflrt_corr}, \code{Maternvg}.
 See the file header for the source the module follows.
 source it follows.
 }

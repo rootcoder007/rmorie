@@ -12,7 +12,6 @@ Jarow(s1, s2, p = 0.1, max_prefix = 4)
 \item{p}{Prefix scaling factor.}
 
 \item{max_prefix}{Longest prefix that earns a boost.}
-
 }
 \value{
 List with \code{estimate}, \code{jaro}, \code{matches},

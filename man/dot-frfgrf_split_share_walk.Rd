@@ -7,7 +7,8 @@
 .frfgrf_split_share_walk(nd, counts)
 }
 \arguments{
-\item{nd}{A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right} from it.}
+\item{nd}{A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
+\code{$right} from it.}
 
 \item{counts}{A vector; indexed elementwise.}
 }

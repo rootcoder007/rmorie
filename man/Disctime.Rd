@@ -21,8 +21,6 @@ Disctime(
 \item{X}{covariates.}
 
 \item{max_iter, tol, ridge}{Newton controls.}
-
-
 }
 \value{
 list: estimate, alpha, beta, hazard, loglik, intervals, n,

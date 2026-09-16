@@ -9,15 +9,18 @@
 \arguments{
 \item{ps}{Coerced to numeric by the body, with \code{as.numeric}.}
 
-\item{trim}{Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.01, 0.99)}.}
+\item{trim}{Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to
+\code{c(0.01, 0.99)}.}
 
-\item{trim_type}{One of \code{"discard"}, \code{"quantile"}, \code{"value"}. Defaults to \code{"value"}.}
+\item{trim_type}{One of \code{"discard"}, \code{"quantile"}, \code{"value"}. Defaults
+to \code{"value"}.}
 }
 \value{
 The value of \code{pmin}.
 }
 \description{
-A step of the causal implementation. Called by \code{morie_estimate_aipw}, \code{morie_estimate_ate}, \code{morie_estimate_propensity_scores}.
+A step of the causal implementation. Called by \code{morie_estimate_aipw},
+\code{morie_estimate_ate}, \code{morie_estimate_propensity_scores}.
 See the file header for the source the module follows.
 it follows.
 }

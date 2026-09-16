@@ -32,9 +32,6 @@ the SDID regularisation from the data).}
 \item{seed}{RNG seed.}
 
 \item{alpha}{Significance level.}
-
-
-
 }
 \value{
 A result list; see \code{\link{morie_did_2x2}}.

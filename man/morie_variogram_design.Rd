@@ -46,10 +46,6 @@ pieces. @param dlam_dtheta,a_mat Tau2 pieces. @param akv,vkv EAC.}
 \item{akv}{See Usage.}
 
 \item{vkv}{See Usage.}
-
-
-
-
 }
 \value{
 List with nested, fisher_info, vkv, akv, e_tau2, eac.

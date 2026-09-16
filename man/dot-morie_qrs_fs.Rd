@@ -13,7 +13,8 @@
 The value of \code{fs}, as built in the body.
 }
 \description{
-A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 20 others in the module.
+A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr},
+\code{CPulseFeat}, \code{DicNotch} and 20 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

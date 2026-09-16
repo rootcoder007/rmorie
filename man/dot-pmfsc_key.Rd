@@ -15,7 +15,8 @@
 A character value.
 }
 \description{
-A step of the pmfsc_native implementation. Called by \code{morie_pmfsc_derive}, \code{morie_pmfsc_score}.
+A step of the pmfsc_native implementation. Called by \code{morie_pmfsc_derive},
+\code{morie_pmfsc_score}.
 See the file header for the source the module follows.
 source it follows.
 }

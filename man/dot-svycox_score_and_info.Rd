@@ -25,7 +25,8 @@
 A list with \code{U}, \code{I}, \code{resid}.
 }
 \description{
-A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}.
+A step of the svycox_native implementation. Called by \code{.svycox_score_residuals},
+\code{.svycox_svycoxph}.
 See the file header for the source the module follows.
 source it follows.
 }

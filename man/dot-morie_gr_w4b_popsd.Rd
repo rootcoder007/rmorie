@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the geron_w4b_native implementation. Called by \code{morie_geron_he_init_hmhei}, \code{morie_geron_learning_curves_hmlcv}.
+A step of the geron_w4b_native implementation. Called by
+\code{morie_geron_he_init_hmhei}, \code{morie_geron_learning_curves_hmlcv}.
 See the file header for the source the module follows.
 the source it follows.
 }

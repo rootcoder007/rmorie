@@ -23,8 +23,6 @@ morie_kamath_dequantize_nf4(codes, absmax, n_bins = 16)
 \item{codes}{0-based NF4 codes.}
 
 \item{absmax}{Scalar or per-row scale.}
-
-
 }
 \value{
 List with \code{h}, \code{W0_dequantized}, \code{n_frozen_4bit}.

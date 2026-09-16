@@ -10,15 +10,19 @@ Evtrecords(x)
 \item{x}{See Usage.}
 }
 \value{
-List with \code{count}, \code{times} (indices of records), \code{values}, \code{expected}, \code{variance}, \code{z}, \code{n}.
+List with \code{count}, \code{times} (indices of records), \code{values}, \code{expected},
+\code{variance}, \code{z}, \code{n}.
 }
 \description{
-Formula: R_n = sum_i 1\{X_i > max(X_1..X_\{i-1\})\}; E[R_n] = sum_i 1/i; Var[R_n] = sum_i (1/i - 1/i^2)
+Formula: R_n = sum_i 1\{X_i > max(X_1..X_\{i-1\})\}; E[R_n] = sum_i 1/i; Var[R_n]
+= sum_i (1/i - 1/i^2)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Evtrecords(V)
 }
 \references{
-Arnold, Balakrishnan and Nagaraja (1998), Records, Wiley. Not held locally; the indicator representation and the resulting harmonic mean and variance are standard published results for iid continuous data.
+Arnold, Balakrishnan and Nagaraja (1998), Records, Wiley. Not held
+locally; the indicator representation and the resulting harmonic mean and variance are
+standard published results for iid continuous data.
 }

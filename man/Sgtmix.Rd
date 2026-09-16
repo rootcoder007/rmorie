@@ -25,13 +25,13 @@ symmetric eigenproblem. The bound uses the ABSOLUTE spectral gap
 \details{
 Formula: \code{tau_mix(eps) <= log(1 / eps) / gamma*}.
 }
-\references{
-Levin, D. A., Peres, Y. & Wilmer, E. L. (2017). Markov
-Chains and Mixing Times, 2nd edition, American Mathematical Society;
-Theorem 12.4.
-}
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 res <- Sgtmix(A = A)
 res
+}
+\references{
+Levin, D. A., Peres, Y. & Wilmer, E. L. (2017). Markov
+Chains and Mixing Times, 2nd edition, American Mathematical Society;
+Theorem 12.4.
 }

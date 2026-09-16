@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the perfat_native implementation. Called by \code{draw_projections}, \code{favor_attention}, \code{kernel_estimate}.
+A step of the perfat_native implementation. Called by \code{draw_projections},
+\code{favor_attention}, \code{kernel_estimate}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -19,9 +19,6 @@ morie_neural_kantorovich_map(
 \item{n_iter, lr, n_basis}{fit controls.}
 
 \item{seed}{RNG seed.}
-
-
-
 }
 \value{
 list with \code{map_at_source}, \code{monotone}, \code{rmse}.

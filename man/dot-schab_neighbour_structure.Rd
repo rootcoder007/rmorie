@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the schab_glmm_shared implementation. Called by \code{.schab_bym_icar_log_prior}, \code{.schab_bym_map}, \code{spbayr}.
+A step of the schab_glmm_shared implementation. Called by
+\code{.schab_bym_icar_log_prior}, \code{.schab_bym_map}, \code{spbayr}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -19,7 +19,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}, \code{morie_dseptest}.
+A step of the causal_molak implementation. Called by \code{.morie_ml_dsep},
+\code{morie_dseptest}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_ch4_softmax_function}, \code{morie_geron_temperature_sampling}, \code{morie_geron_topk_sampling}.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_ch4_softmax_function}, \code{morie_geron_temperature_sampling},
+\code{morie_geron_topk_sampling}.
 See the file header for the source the module follows.
 for the source it follows.
 }

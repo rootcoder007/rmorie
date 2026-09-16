@@ -8,7 +8,6 @@ morie_gr_dual(value, deriv = 0)
 }
 \arguments{
 \item{value, deriv}{Value and derivative components.}
-
 }
 \value{
 Object of class \code{morie_gr_dual}.

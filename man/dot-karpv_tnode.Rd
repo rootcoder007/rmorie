@@ -13,7 +13,8 @@
 A list with \code{term}.
 }
 \description{
-A step of the karpV_native implementation. Called by \code{.karpv_copy}, \code{.karpv_random_terminal}.
+A step of the karpV_native implementation. Called by \code{.karpv_copy},
+\code{.karpv_random_terminal}.
 See the file header for the source the module follows.
 source it follows.
 }

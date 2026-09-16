@@ -13,7 +13,8 @@
 A list with \code{h}, \code{g}, \code{rec_lo}, \code{rec_hi}.
 }
 \description{
-A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_idwt}, \code{.tf_swt} and 3 others in the module.
+A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_idwt},
+\code{.tf_swt} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -18,7 +18,8 @@
 \item{steps}{Passed to \code{.tl1step_build_ulfm}. Defaults to \code{600}.}
 }
 \value{
-A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star}, \code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star},
+\code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.
 }
 \description{
 A step of the tl1step_native implementation. Called by \code{morie_tl1step}.

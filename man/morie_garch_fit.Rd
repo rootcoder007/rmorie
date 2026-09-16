@@ -10,11 +10,12 @@ morie_garch_fit(x)
 \item{x}{Numeric return series.}
 }
 \value{
-Named list with \code{omega, alpha, beta, persistence, loglik,
+Named list with \eqn{omega, alpha, beta, persistence, loglik,
   conditional_variance, n, method}.
 }
 \description{
-\deqn{\sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2.}{sigma_t^2 = omega + alpha epsilon_t-1^2 + beta sigma_t-1^2.}
+\deqn{\sigma_t^2 = \omega + \alpha \epsilon_{t-1}^2 + \beta \sigma_{t-1}^2.}{sigma_t^2
+= omega + alpha epsilon_t-1^2 + beta sigma_t-1^2.}
 }
 \details{
 Native Gaussian quasi-maximum-likelihood fit; no GARCH package is

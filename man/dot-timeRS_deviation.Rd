@@ -11,13 +11,15 @@
 
 \item{t_user}{Coerced to numeric by the body, with \code{as.numeric}.}
 
-\item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{.timeRS_BETA}.}
+\item{beta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+\code{.timeRS_BETA}.}
 }
 \value{
 A numeric value.
 }
 \description{
-A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias}, \code{.timeRS_user_bias}, \code{morie_timeRS_deviation}.
+A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias},
+\code{.timeRS_user_bias}, \code{morie_timeRS_deviation}.
 See the file header for the source the module follows.
 source it follows.
 }

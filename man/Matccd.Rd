@@ -45,7 +45,7 @@ cancels the nuisance parameters exactly, leaving a likelihood in the
 exposure effect alone.
 }
 \details{
-Formula: for a set with one case, \code{L_s(beta) = exp(beta x_case) /
+Formula: for a set with one case, \eqn{L_s(beta) = exp(beta x_case) /
 sum_j exp(beta x_j)}; the maximum is found by Newton-Raphson --
 Breslow and Day (1980), Chapter 7.
 }

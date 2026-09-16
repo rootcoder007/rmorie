@@ -12,7 +12,8 @@
 \item{neg2_separable}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \value{
-A list with \code{statistic}, \code{p_value}, \code{p_value_naive_chi2_1}, \code{reference}.
+A list with \code{statistic}, \code{p_value}, \code{p_value_naive_chi2_1},
+\code{reference}.
 }
 \description{
 space the statistic is a mixture of a degenerate distribution at zero

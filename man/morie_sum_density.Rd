@@ -20,10 +20,6 @@ morie_sum_density(
 \item{z}{evaluation point.}
 
 \item{sigma_x, sigma_y}{optional Gaussian sigmas for the closed form.}
-
-
-
-
 }
 \value{
 list(density, gaussian_closed_form).

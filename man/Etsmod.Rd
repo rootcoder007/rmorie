@@ -24,8 +24,6 @@ Etsmod(
 \item{season}{Seasonal period m; 0 or 1 means no seasonal component.}
 
 \item{alpha, beta, gamma}{Fixed smoothing parameters (bypass the grid).}
-
-
 }
 \value{
 List with \code{estimate}, \code{alpha}, \code{beta},

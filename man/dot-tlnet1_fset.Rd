@@ -15,7 +15,8 @@
 The value of \code{setdiff}.
 }
 \description{
-A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges}, \code{check_network_assumption}, \code{friend_summary} and 1 others in the module.
+A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges},
+\code{check_network_assumption}, \code{friend_summary} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

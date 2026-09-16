@@ -20,7 +20,8 @@ calibrate to.}
 \item{tol}{Convergence tolerance for calibration.}
 }
 \value{
-A named list with elements \code{weights}, \code{converged}, \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
+A named list with elements \code{weights}, \code{converged},
+\code{iterations}, \code{max_adjustment}, \code{diagnostics}.
 }
 \description{
 Closed-form linear calibration to match population totals on auxiliary X.

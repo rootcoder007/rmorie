@@ -10,7 +10,6 @@ Bnscrf(lower, upper, alpha = 0.05)
 \item{lower, upper}{Replicated estimates of the two bounds.}
 
 \item{alpha}{Miss probability, default 0.05.}
-
 }
 \value{
 The payload of \code{Bndfre}, with \code{method} naming this

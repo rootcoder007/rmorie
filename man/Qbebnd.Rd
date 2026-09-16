@@ -24,7 +24,8 @@ Named list with \code{estimate}, \code{bound}, \code{rate}, \code{m}, \code{n}, 
 }
 \description{
 Eq. (3.5) and Remark 3.1:
-\deqn{P(\sqrt{n}|\hat Q_{p,h} - Q(p)| \le x\sigma_n) = 2\Phi(x) - 1 + O(n^{-r}).}{P(sqrt(n)|Qhat - Q(p)| <= x sigma_n) = 2 Phi(x) - 1 + O(n^-r).}
+\deqn{P(\sqrt{n}|\hat Q_{p,h} - Q(p)| \le x\sigma_n) = 2\Phi(x) - 1 +
+O(n^{-r}).}{P(sqrt(n)|Qhat - Q(p)| <= x sigma_n) = 2 Phi(x) - 1 + O(n^-r).}
 }
 \details{
 The rate \code{r} depends on the ORDER of the kernel, not on the sample:

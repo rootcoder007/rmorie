@@ -23,7 +23,8 @@ The global Moran's I test is computed natively from the Cliff-Ord
 moments under either the randomisation (default) or normality null,
 and both branches are validated against \pkg{spdep} at the matching
 setting in tests/cross/.
-\subsection{Functions}{
+
+Functions
 
 \itemize{
 \item \code{\link{morie_tps_morans_i_neighbourhood}}: global
@@ -33,6 +34,5 @@ Moran's Ii) per neighbourhood with HH/LL/HL/LH quadrant
 classification.
 \item \code{\link{morie_tps_kde_density}}: 2-D kernel density
 estimate of geocoded incident points.
-}
 }
 }

@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.dnnact}, \code{.dw_skipgram}, \code{.s03swish} and 21 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.dnnact},
+\code{.dw_skipgram}, \code{.s03swish} and 21 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

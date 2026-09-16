@@ -58,6 +58,7 @@ Uniform(0, 1).
                                         ds_name = "Assault")
   print(rr$summary_lines)
 }
+
 }
 \references{
 Kwan TKJ, Chen F, Dunsmuir WTM (2024). Likelihood inference for

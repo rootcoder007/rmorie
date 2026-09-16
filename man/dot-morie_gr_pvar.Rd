@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{.morie_gr_psd}, \code{.morie_w4c_pca_svd}, \code{morie_geron_glorot_xavier_init} and 3 others in the module.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_psd},
+\code{.morie_w4c_pca_svd}, \code{morie_geron_glorot_xavier_init} and 3 others in the
+module.
 See the file header for the source the module follows.
 the source it follows.
 }

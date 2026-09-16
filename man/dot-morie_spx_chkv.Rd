@@ -15,7 +15,8 @@
 The value of \code{v}, as built in the body.
 }
 \description{
-A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{LisaClust}, \code{LisaI} and 16 others in the module.
+A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{LisaClust},
+\code{LisaI} and 16 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

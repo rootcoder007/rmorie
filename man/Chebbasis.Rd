@@ -15,12 +15,15 @@ Chebbasis(x, K = 5)
 List with \code{basis} (n by K+1), \code{degree}, \code{trig} (cos form where |x| <= 1), \code{n}.
 }
 \description{
-Formula: T_0 = 1, T_1 = x, T_\{n+1\}(x) = 2 x T_n(x) - T_\{n-1\}(x); equivalently T_n(x) = cos(n arccos x)
+Formula: T_0 = 1, T_1 = x, T_\{n+1\}(x) = 2 x T_n(x) - T_\{n-1\}(x); equivalently
+T_n(x) = cos(n arccos x)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Chebbasis(V)
 }
 \references{
-Chebyshev (1853). The original is not held locally; the recurrence T_\{n+1\} = 2 x T_n - T_\{n-1\} with T_0 = 1, T_1 = x and the identity T_n(cos t) = cos(n t) are the standard published definitions.
+Chebyshev (1853). The original is not held locally; the recurrence
+T_\{n+1\} = 2 x T_n - T_\{n-1\} with T_0 = 1, T_1 = x and the identity T_n(cos t) =
+cos(n t) are the standard published definitions.
 }

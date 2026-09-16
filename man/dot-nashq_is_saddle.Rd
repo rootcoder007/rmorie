@@ -21,7 +21,8 @@
 A logical value.
 }
 \description{
-A step of the nashq_native implementation. Called by \code{.nashq_select}, \code{stage_game_type}.
+A step of the nashq_native implementation. Called by \code{.nashq_select},
+\code{stage_game_type}.
 See the file header for the source the module follows.
 source it follows.
 }

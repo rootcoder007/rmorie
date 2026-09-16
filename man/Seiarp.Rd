@@ -15,10 +15,6 @@ gamma_a.}
 \item{t_max}{Integration horizon. Default 160.}
 
 \item{dt}{Runge-Kutta step. Default 0.1.}
-
-
-
-
 }
 \value{
 List with \code{estimate} (final size), \code{S}, \code{E},

@@ -18,7 +18,8 @@ Named list with \code{estimate}, \code{alpha}, \code{base},
 \code{probabilities}, \code{support}, \code{method}.
 }
 \description{
-\deqn{H_\alpha(p) = \frac{1}{1-\alpha}\log\sum_k p_k^\alpha}{H_alpha = (1/(1-alpha)) log sum p^alpha}
+\deqn{H_\alpha(p) = \frac{1}{1-\alpha}\log\sum_k p_k^\alpha}{H_alpha = (1/(1-alpha))
+log sum p^alpha}
 with the removable cases taken as limits: \eqn{\alpha \to 1} gives
 Shannon entropy, \eqn{\alpha \to \infty} the min-entropy
 \eqn{-\log\max_k p_k}, and \eqn{\alpha = 0} the log support size.

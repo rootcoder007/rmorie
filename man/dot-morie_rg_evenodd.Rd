@@ -15,7 +15,8 @@
 A list with \code{n}, \code{even}, \code{odd}, \code{x}, \code{reconstruction_error}.
 }
 \description{
-A step of the rangayyan_xfrm implementation. Called by \code{EvenOdd}, \code{EvenPart}, \code{OddPart}.
+A step of the rangayyan_xfrm implementation. Called by \code{EvenOdd},
+\code{EvenPart}, \code{OddPart}.
 See the file header for the source the module follows.
 the source it follows.
 }

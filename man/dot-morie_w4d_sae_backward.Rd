@@ -23,7 +23,8 @@
 A list with \code{dW}, \code{db}, \code{dc}.
 }
 \description{
-A step of the geron_w4d_native implementation. Called by \code{morie_geron_stacked_autoencoder_modules}.
+A step of the geron_w4d_native implementation. Called by
+\code{morie_geron_stacked_autoencoder_modules}.
 See the file header for the source the module follows.
 the source it follows.
 }

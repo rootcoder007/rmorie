@@ -24,7 +24,8 @@
 \item{kind}{One of \code{"ols"}, \code{"wls"}. Defaults to \code{"wls"}.}
 }
 \value{
-A list with \code{nugget}, \code{partial_sill}, \code{range}, \code{objective}, \code{converged}.
+A list with \code{nugget}, \code{partial_sill}, \code{range},
+\code{objective}, \code{converged}.
 }
 \description{
 A step of the schab_fit_shared implementation. Called by \code{spols}, \code{spwls}.

@@ -28,13 +28,11 @@ mrm_otis_mandela_spectrum(
 \item{contact_proxies}{Subset of
 \code{c("none","any_alert","no_alert")}.}
 
-\item{denominators}{Subset of \code{c("row","individual_any",
+\item{denominators}{Subset of \eqn{c("row","individual_any",
 "individual_cumulative","c11_aggregate")}.}
 
 \item{c11_data}{Optional c11 aggregate frame for the
 \code{c11_aggregate} denominator.}
-
-
 }
 \value{
 Tidy long-format data.frame with one row per

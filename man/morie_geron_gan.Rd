@@ -23,10 +23,6 @@ morie_geron_gan(
 \item{D}{Optional (w_d, b_d).}
 
 \item{z_dim, epochs, lr, seed, non_saturating}{Config.}
-
-
-
-
 }
 \value{
 List with \code{G}, \code{D}, \code{value_history}, \code{samples}, \code{equilibrium_value}, \code{mean_gap}.

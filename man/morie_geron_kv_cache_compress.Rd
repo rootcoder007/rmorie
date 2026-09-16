@@ -20,10 +20,10 @@ morie_geron_kv_cache_compress(
 \item{per_head}{Per-head scales.}
 
 \item{dtype_bytes}{Bytes per element before compression.}
-
 }
 \value{
-List with K_dequantized, V_dequantized, bytes_before, bytes_after, compression_ratio, max_error, estimate, n, method.
+List with K_dequantized, V_dequantized, bytes_before, bytes_after,
+compression_ratio, max_error, estimate, n, method.
 }
 \description{
 KV-cache quantization (Geron Ch 17, morie.fn hmkvc)

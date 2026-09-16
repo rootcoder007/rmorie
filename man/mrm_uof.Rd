@@ -12,7 +12,7 @@ plain-language \code{interpretation}, so the result can be printed
 to a notebook without further post-processing.
 }
 \details{
-\subsection{Functions}{
+Functions
 
 \itemize{
 \item \code{\link{mrm_uof_force_concentration}}: Hill-MLE Pareto
@@ -27,12 +27,11 @@ side does not require \pkg{ruptures}).
 \item \code{\link{mrm_uof_region_locality}}: region-at-time vs.
 region-now contingency: diagonal share, chi-square, Cramer's V.
 \item \code{\link{mrm_uof_demographic_disparity}}: per-category
-outcome rates with Wilson 95\% intervals, risk-ratio versus a
+outcome rates with Wilson 95\\% intervals, risk-ratio versus a
 baseline group, optional non-parametric bootstrap percentile
 interval on the risk ratio.
 \item \code{\link{mrm_uof_data_quality_audit}}: per-column null
 and dtype audit, with optional schema-comparison against a
 supplied CKAN sidecar list or column-spec list.
-}
 }
 }

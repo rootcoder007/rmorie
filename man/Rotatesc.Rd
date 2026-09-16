@@ -28,8 +28,6 @@ components are not given separately.}
 \item{t_re, t_im}{tail embedding.}
 
 \item{gamma}{optional margin; the score gamma - d is then returned.}
-
-
 }
 \value{
 list: estimate, distance, score, per_dim, dim, method.

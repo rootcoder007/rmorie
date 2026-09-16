@@ -22,12 +22,10 @@ morie_geron_kfold(
 \item{seed}{Optional shuffle seed.}
 
 \item{fit, predict, score}{Optional callables.}
-
-
-
 }
 \value{
-List with cv_score, fold_scores, train_indices, test_indices, fold_sizes, estimate, n, method.
+List with cv_score, fold_scores, train_indices, test_indices, fold_sizes,
+estimate, n, method.
 }
 \description{
 K-fold partition plus CV score (Geron Ch 2, morie.fn hmkfd)

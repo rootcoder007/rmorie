@@ -12,7 +12,8 @@
 \item{group}{Passed to \code{.remlfn_groups}.}
 }
 \value{
-A list with \code{msa}, \code{mse}, \code{sigma2_a_raw}, \code{sigma2_a}, \code{balanced}, \code{dfa}, \code{dfe}, \code{ssa}, \code{sse}.
+A list with \code{msa}, \code{mse}, \code{sigma2_a_raw}, \code{sigma2_a},
+\code{balanced}, \code{dfa}, \code{dfe}, \code{ssa}, \code{sse}.
 }
 \description{
 A step of the remlfn_native implementation. Called by \code{morie_remlfn}.

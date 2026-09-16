@@ -13,7 +13,6 @@ morie_lord_chisq(b_R, b_F, V_R, V_F = NULL)
 V_F is omitted.}
 
 \item{V_F}{covariance of b_F, optional.}
-
 }
 \value{
 list: statistic, pvalue, df, difference, method.

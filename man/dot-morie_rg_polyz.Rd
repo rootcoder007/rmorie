@@ -15,7 +15,8 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{BwHp}, \code{Comb} and 6 others in the module.
+A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{BwHp},
+\code{Comb} and 6 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

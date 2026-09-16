@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls}, \code{morie_linwlr}.
+A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls},
+\code{morie_linwlr}.
 See the file header for the source the module follows.
 source it follows.
 }

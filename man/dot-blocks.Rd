@@ -7,7 +7,8 @@
 .blocks(covariate_history, n)
 }
 \arguments{
-\item{covariate_history}{Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.}
+\item{covariate_history}{Optional; may be \code{NULL}. Coerced to list by the body,
+with \code{as.list}.}
 
 \item{n}{Passed to \code{!=}.}
 }

@@ -11,9 +11,6 @@ Mapeto(a, b, c, d, level = 0.95)
 arm, then in the control arm.}
 
 \item{level}{Confidence level.}
-
-
-
 }
 \value{
 List with \code{OR}, \code{log_OR}, \code{se_log}, \code{ci},

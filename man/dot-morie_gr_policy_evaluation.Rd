@@ -16,10 +16,12 @@
 \item{gamma}{Passed to \code{.morie_gr_check_mdp}.}
 }
 \value{
-A list with \code{V}, \code{pi}, \code{P}, \code{R}, \code{r_sa}, \code{gamma}, \code{S}, \code{A}.
+A list with \code{V}, \code{pi}, \code{P}, \code{R}, \code{r_sa},
+\code{gamma}, \code{S}, \code{A}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_action_value_function}, \code{morie_geron_state_value_function}.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_action_value_function}, \code{morie_geron_state_value_function}.
 See the file header for the source the module follows.
 for the source it follows.
 }

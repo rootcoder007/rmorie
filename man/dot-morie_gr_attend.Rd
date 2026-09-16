@@ -19,7 +19,10 @@
 A list with \code{output}, \code{weights}, \code{scores}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_block_multi_head_attention}, \code{morie_geron_flash_attention_tile}, \code{morie_geron_multi_head_attention} and 5 others in the module.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_block_multi_head_attention},
+\code{morie_geron_flash_attention_tile}, \code{morie_geron_multi_head_attention} and 5
+others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

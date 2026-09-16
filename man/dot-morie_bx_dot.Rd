@@ -15,7 +15,8 @@
 The value of \code{.morie_fsum}.
 }
 \description{
-A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp}, \code{IcaFix}, \code{KsvdFit} and 2 others in the module.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp},
+\code{IcaFix}, \code{KsvdFit} and 2 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

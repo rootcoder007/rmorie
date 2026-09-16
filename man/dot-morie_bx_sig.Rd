@@ -13,7 +13,8 @@
 The value of \code{ifelse}.
 }
 \description{
-A step of the rangayyan_class2 implementation. Called by \code{Infomax}, \code{Lstm}, \code{MlpBp}.
+A step of the rangayyan_class2 implementation. Called by \code{Infomax}, \code{Lstm},
+\code{MlpBp}.
 See the file header for the source the module follows.
 the source it follows.
 }

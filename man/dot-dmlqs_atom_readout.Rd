@@ -7,7 +7,8 @@
 .dmlqs_atom_readout(edge_states, adj, n)
 }
 \arguments{
-\item{edge_states}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{edge_states}{Optional; may be \code{NULL}. A vector; its length is taken and its
+elements indexed.}
 
 \item{adj}{Passed to \code{.dmlqs_norm_adj}.}
 

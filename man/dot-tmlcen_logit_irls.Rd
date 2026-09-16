@@ -19,7 +19,8 @@
 The value of \code{.tmlcen_weighted_logit}.
 }
 \description{
-A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}.
+A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+\code{morie_ipcw_interval}.
 See the file header for the source the module follows.
 source it follows.
 }

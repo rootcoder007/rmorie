@@ -27,11 +27,6 @@ morie_geron_adamw_decoupled_weight_decay(
 \item{b1, b2, eps}{Adam hyperparameters.}
 
 \item{lam}{Non-negative decoupled decay.}
-
-
-
-
-
 }
 \value{
 List with \code{theta_new}, \code{m_new}, \code{s_new}, \code{adam_step},
@@ -40,7 +35,7 @@ List with \code{theta_new}, \code{m_new}, \code{s_new}, \code{adam_step},
 \description{
 theta -= eta (m_hat/(sqrt(s_hat)+eps) + lam theta); the decay sits
 OUTSIDE the adaptive normalisation. The Adam part comes from
-\code{morie_geron_adam_update()}.
+\code{\link[=morie_geron_adam_update]{morie_geron_adam_update()}}.
 }
 \examples{
 morie_geron_adamw_decoupled_weight_decay(c(1, -2), c(0.5, 0.25),

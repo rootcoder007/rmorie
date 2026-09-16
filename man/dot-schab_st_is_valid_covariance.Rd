@@ -17,7 +17,8 @@ eigendecomposition,}
 \item{tol}{Optional; may be \code{NULL}. Carried through into a list the body builds.}
 }
 \value{
-A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue}, \code{tolerance}, \code{reason}.
+A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue},
+\code{tolerance}, \code{reason}.
 }
 \description{
 not by sampling random coefficient vectors: the minimum eigenvalue IS

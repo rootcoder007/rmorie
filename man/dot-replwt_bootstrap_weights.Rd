@@ -7,14 +7,16 @@
 .replwt_bootstrap_weights(d, R = 200, seed = 1)
 }
 \arguments{
-\item{d}{A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.}
+\item{d}{A list; the body reads \code{$psu_units}, \code{$stratum_order},
+\code{$stratum_psus}, \code{$weights} from it.}
 
 \item{R}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.}
 
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \value{
-A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed}, \code{method}.
+A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed},
+\code{method}.
 }
 \description{
 A step of the replwt_native implementation. Called by \code{morie_replwt}.

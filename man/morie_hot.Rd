@@ -9,7 +9,7 @@ morie_hot(x, window, alphabet = 3L, word_length = NULL)
 \arguments{
 \item{x}{Numeric series.}
 
-\item{window}{Subsequence length; needs \code{2 <= window <=
+\item{window}{Subsequence length; needs \eqn{2 <= window <=
 length(x)/2}.}
 
 \item{alphabet}{SAX alphabet size for the ordering heuristic,

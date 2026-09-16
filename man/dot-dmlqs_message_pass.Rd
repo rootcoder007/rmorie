@@ -22,9 +22,11 @@
 
 \item{W}{Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.}
 
-\item{activation}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"relu"}.}
+\item{activation}{Coerced to character by the body, with \code{as.character}. Defaults
+to \code{"relu"}.}
 
-\item{exclude_reverse}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
+\item{exclude_reverse}{Coerced to logical by the body, with \code{as.logical}.
+Defaults to \code{TRUE}.}
 }
 \value{
 A list with \code{edge_states}, \code{T}, \code{excluded_reverse}, \code{note}.

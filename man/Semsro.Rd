@@ -24,7 +24,7 @@ The raw residual matrix is the model misfit in the covariance metric,
 lower triangle including the diagonal, \code{p (p + 1) / 2} distinct
 elements:
 \code{RMR = sqrt(2 / (p (p + 1)) * sum_{i <= j} (s_ij - sigma_ij)^2)} and
-\code{SRMR = sqrt(2 / (p (p + 1)) * sum_{i <= j}
+\eqn{SRMR = sqrt(2 / (p (p + 1)) * sum_{i <= j}
 ((s_ij - sigma_ij) / sqrt(s_ii s_jj))^2)}.
 }
 \details{

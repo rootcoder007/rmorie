@@ -10,7 +10,6 @@ Adgpd(y, sigma = 1, xi = 0)
 \item{y}{Numeric threshold excesses, all positive.}
 
 \item{sigma, xi}{Scale and shape.  Supplied, not fitted.}
-
 }
 \value{
 list: statistic, u, sigma, xi, n, method.

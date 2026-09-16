@@ -14,7 +14,6 @@ morie_dp_sum(x, a, b, epsilon = 1, seed = NULL)
 \item{epsilon}{privacy budget.}
 
 \item{seed}{optional integer seed.}
-
 }
 \value{
 list with \code{release}, \code{true_sum} (of the clipped

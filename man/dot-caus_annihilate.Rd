@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module.
+A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
+\code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -11,7 +11,8 @@
 
 \item{D}{A matrix; indexed by row and column.}
 
-\item{sparsity}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{sparsity}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 
 \item{tol}{Passed to \code{<=}.}
 }
@@ -19,7 +20,8 @@
 A list with \code{coefficients}, \code{support}, \code{residual}.
 }
 \description{
-A step of the rangayyan_class2 implementation. Called by \code{DictCode}, \code{KsvdFit}, \code{OmpFit}.
+A step of the rangayyan_class2 implementation. Called by \code{DictCode},
+\code{KsvdFit}, \code{OmpFit}.
 See the file header for the source the module follows.
 the source it follows.
 }

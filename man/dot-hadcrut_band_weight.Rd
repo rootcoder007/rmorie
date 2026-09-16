@@ -15,7 +15,8 @@
 The value of \code{cos}.
 }
 \description{
-A step of the hadcrut_native implementation. Called by \code{.hadcrut_region_mean}, \code{morie_hadcrut}.
+A step of the hadcrut_native implementation. Called by \code{.hadcrut_region_mean},
+\code{morie_hadcrut}.
 See the file header for the source the module follows.
 the source it follows.
 }

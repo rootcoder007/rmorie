@@ -15,7 +15,9 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler}, \code{.abcgp.synthetic_log_likelihood}.
+A step of the abcgp_native implementation. Called by
+\code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler},
+\code{.abcgp.synthetic_log_likelihood}.
 See the file header for the source the module follows.
 source it follows.
 }

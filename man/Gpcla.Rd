@@ -26,7 +26,6 @@ Gpcla(
 \item{lengthscale, variance}{RBF kernel hyperparameters.}
 
 \item{iters}{Newton iterations.}
-
 }
 \value{
 List with \code{estimate}, \code{p}, \code{predicted},

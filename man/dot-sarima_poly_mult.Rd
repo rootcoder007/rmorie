@@ -15,7 +15,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the sarima_native implementation. Called by \code{.sarima_diff_poly}, \code{expand_polynomials}, \code{forecast}.
+A step of the sarima_native implementation. Called by \code{.sarima_diff_poly},
+\code{expand_polynomials}, \code{forecast}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -29,7 +29,6 @@ Mctsbackup(
 \item{gamma}{discount per ply.}
 
 \item{alternate}{negate the value each ply (two-player zero-sum).}
-
 }
 \value{
 list: estimate, n, w, q, g, leaf, method.

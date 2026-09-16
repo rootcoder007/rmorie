@@ -13,7 +13,8 @@
 A logical value.
 }
 \description{
-A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once}, \code{.unifAlg_check}, \code{morie_unifAlg_disagreement} and 4 others in the module.
+A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once},
+\code{.unifAlg_check}, \code{morie_unifAlg_disagreement} and 4 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

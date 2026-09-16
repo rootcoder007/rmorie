@@ -18,7 +18,7 @@ morie_fauzi_thm5_3_bdfree_normality(
 \arguments{
 \item{estimate}{\code{Ftilde(x)}.}
 
-\item{variance}{\verb{Var[Ftilde(x)]}, e.g. from \code{Bfkdfbv}.}
+\item{variance}{\code{Var[Ftilde(x)]}, e.g. from \code{Bfkdfbv}.}
 
 \item{null}{The value of \code{F_X(x)} to test against.}
 
@@ -27,11 +27,13 @@ morie_fauzi_thm5_3_bdfree_normality(
 \item{level}{Confidence level for the interval.}
 }
 \value{
-Named list with \code{statistic}, \code{p_value}, \code{lower}, \code{upper}, \code{se}, \code{level}, \code{method}.
+Named list with \code{statistic}, \code{p_value}, \code{lower}, \code{upper}, \code{se},
+\code{level}, \code{method}.
 }
 \description{
 Theorem 5.3: under D1-D5,
-\deqn{\frac{\tilde F_X(x) - F_X(x)}{\sqrt{\mathrm{Var}[\tilde F_X(x)]}} \to_D N(0,1).}{(Ftilde(x) - F(x)) / sqrt(Var[Ftilde(x)]) ->_D N(0,1).}
+\deqn{\frac{\tilde F_X(x) - F_X(x)}{\sqrt{\mathrm{Var}[\tilde F_X(x)]}} \to_D
+N(0,1).}{(Ftilde(x) - F(x)) / sqrt(Var[Ftilde(x)]) ->_D N(0,1).}
 }
 \details{
 The proof is a Lyapunov argument, easy for a reason worth keeping: because
@@ -44,7 +46,7 @@ to \verb{[0,1]}: the estimand is a probability, and an unclipped Wald interval
 routinely leaves the unit interval near the boundary -- precisely the region
 this construction exists to handle.
 
-The CENTRING is \code{F_X(x)}, not \verb{E[Ftilde(x)]}. The theorem standardises by
+The CENTRING is \code{F_X(x)}, not \code{E[Ftilde(x)]}. The theorem standardises by
 the variance alone, so the interval inherits the \code{O(h^2)} bias of Theorem
 5.2 and is not bias-corrected; supply \code{bias} to subtract it.
 }

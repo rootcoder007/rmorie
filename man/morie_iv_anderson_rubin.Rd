@@ -37,7 +37,8 @@ value(s) to test under H0. Length must match \code{length(endogenous)}.}
 confidence-set / acceptance-region cut-off.}
 }
 \value{
-A named list with elements \code{statistic}, \code{F_statistic}, \code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
+A named list with elements \code{statistic}, \code{F_statistic},
+\code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
 }
 \description{
 Anderson-Rubin (AR) weak-IV-robust test

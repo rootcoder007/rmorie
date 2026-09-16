@@ -15,7 +15,8 @@
 The value of \code{\%*\%}.
 }
 \description{
-A step of the tail1_core implementation. Called by \code{.schab_disjunctive_kriging}, \code{t3ols}.
+A step of the tail1_core implementation. Called by \code{.schab_disjunctive_kriging},
+\code{t3ols}.
 See the file header for the source the module follows.
 source it follows.
 }

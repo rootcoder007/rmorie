@@ -14,7 +14,7 @@ morie_spectral_density(x, fs = 1, nperseg = NULL)
 \item{nperseg}{Segment length. Default max(n/4, 8).}
 }
 \value{
-Named list with \code{frequencies, psd, n_segments, nperseg,
+Named list with \eqn{frequencies, psd, n_segments, nperseg,
   fs, n, method}.
 }
 \description{

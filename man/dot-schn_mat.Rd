@@ -13,7 +13,8 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the schN_native implementation. Called by \code{cfconv}, \code{forces_from_energy}, \code{invariance_error}.
+A step of the schN_native implementation. Called by \code{cfconv},
+\code{forces_from_energy}, \code{invariance_error}.
 See the file header for the source the module follows.
 source it follows.
 }

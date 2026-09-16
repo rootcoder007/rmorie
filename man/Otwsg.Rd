@@ -11,8 +11,6 @@ Otwsg(mu1, Sigma1, mu2, Sigma2)
 
 \item{Sigma1, Sigma2}{Covariance matrices, symmetric positive
 semi-definite.}
-
-
 }
 \value{
 List with \code{W2}, \code{W2_sq}, \code{mean_part},
@@ -26,7 +24,7 @@ with a closed form, which makes it the natural anchor for every
 numerical transport solver.
 }
 \details{
-Formula: \code{W_2^2 = ||m1 - m2||^2 + tr(S1 + S2 - 2 (S1^{1/2} S2
+Formula: \eqn{W_2^2 = ||m1 - m2||^2 + tr(S1 + S2 - 2 (S1^{1/2} S2
 S1^{1/2})^{1/2})} -- Peyre and Cuturi (2019) eq. (2.41)-(2.42), p. 34;
 Olkin and Pukelsheim (1982).
 }

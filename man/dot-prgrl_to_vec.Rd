@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the prgrl_native implementation. Called by \code{curriculum_schedule}, \code{easy_only_fit}, \code{prgrl}.
+A step of the prgrl_native implementation. Called by \code{curriculum_schedule},
+\code{easy_only_fit}, \code{prgrl}.
 See the file header for the source the module follows.
 source it follows.
 }

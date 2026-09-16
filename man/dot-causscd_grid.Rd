@@ -17,7 +17,8 @@
 A list with \code{rows}, \code{n}, \code{T}, \code{tr}, \code{t_post}.
 }
 \description{
-A step of the causscd_native implementation. Called by \code{sdid}, \code{time_weights}, \code{unit_weights}.
+A step of the causscd_native implementation. Called by \code{sdid},
+\code{time_weights}, \code{unit_weights}.
 See the file header for the source the module follows.
 the source it follows.
 }

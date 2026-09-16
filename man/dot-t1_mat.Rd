@@ -13,7 +13,8 @@
 A matrix, from \code{matrix}.
 }
 \description{
-A step of the tail1_core implementation. Called by \code{.ecfp_bonds}, \code{Admmlasso}, \code{Advielbo} and 45 others in the module.
+A step of the tail1_core implementation. Called by \code{.ecfp_bonds},
+\code{Admmlasso}, \code{Advielbo} and 45 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

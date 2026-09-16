@@ -16,7 +16,8 @@
 \item{maxiter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.}
 }
 \value{
-A list with \code{theta}, \code{x0}, \code{resid}, \code{fitted}, \code{loglik}, \code{omega}, \code{aic}, \code{n_par}.
+A list with \code{theta}, \code{x0}, \code{resid}, \code{fitted},
+\code{loglik}, \code{omega}, \code{aic}, \code{n_par}.
 }
 \description{
 A step of the bats_native implementation. Called by \code{morie_bats}.

@@ -20,7 +20,8 @@ adjust_p_values(p_values, method = "bh", alpha = 0.05, labels = NULL)
 \item{labels}{Optional character vector of test labels.}
 }
 \value{
-A named \code{list} of adjusted p-values with method metadata (as built by the selected adjustment method).
+A named \code{list} of adjusted p-values with method metadata (as built by the
+selected adjustment method).
 }
 \description{
 Front-end over \code{stats::p.adjust} and the rmorie wrappers

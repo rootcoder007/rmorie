@@ -32,21 +32,13 @@ Variance pieces. @param gamma_s0 Semivariance form pieces.}
 
 \item{gamma_s0}{See Usage.}
 
+\item{h, c0, c1, phi}{Semivariogram pieces. @param z,mu,cov Likelihood.}
 
 \item{z}{See Usage.}
 
 \item{mu}{See Usage.}
 
 \item{cov}{See Usage.}
-
-
-\item{h}{Argument \code{h}; see Usage.}
-
-\item{c0}{Argument \code{c0}; see Usage.}
-
-\item{c1}{Argument \code{c1}; see Usage.}
-
-\item{phi}{Argument \code{phi}; see Usage.}
 }
 \value{
 List with lam, nu, v_ok_cov, v_ok_gamma, gamma_h, loglik.

@@ -10,7 +10,6 @@ d_to_r(d, n1 = NULL, n2 = NULL)
 \item{d}{Cohen's d.}
 
 \item{n1, n2}{Sample sizes (or NULL).}
-
 }
 \value{
 Numeric r.

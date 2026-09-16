@@ -15,7 +15,8 @@
 The value of \code{L}, as built in the body.
 }
 \description{
-A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
+A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace},
+\code{morie_sgflrt_spatial_glmm_fit}.
 See the file header for the source the module follows.
 source it follows.
 }

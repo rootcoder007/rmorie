@@ -44,9 +44,6 @@ morie_lstm_cell(
 seed from \code{\link{morie_det_rng}("lstmc", deterministic_seed)} is
 installed before sampling so Py<->R streams agree.  Overrides
 \code{seed} when set.}
-
-
-
 }
 \value{
 Named list \code{(h, c, estimate, i, f, g, o, method)}.
@@ -58,7 +55,8 @@ R parity for \code{morie.fn.lstmc.lstm_cell}.  Gates stacked as
 \details{
 \deqn{f, i, o = \sigma(\ldots); \quad g = \tanh(\ldots); \quad
       c = f \odot c_\text{prev} + i \odot g; \quad
-      h = o \odot \tanh(c)}{f, i, o = sigma(...); g = tanh(...); c = f odot c_prev + i odot g; h = o odot tanh(c)}
+      h = o \odot \tanh(c)}{f, i, o = sigma(...); g = tanh(...); c = f odot c_prev + i
+odot g; h = o odot tanh(c)}
 }
 \examples{
 set.seed(1)

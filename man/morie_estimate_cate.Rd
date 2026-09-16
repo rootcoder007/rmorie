@@ -41,7 +41,8 @@ Numeric vector of per-unit CATE estimates.
 \description{
 The \strong{T-learner} fits separate outcome models on treated and
 control units, then predicts the counterfactual for each unit:
-\eqn{\widehat{CATE}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)}{CATE_hat_i = mu_hat_1(X_i) - mu_hat_0(X_i)}.
+\eqn{\widehat{CATE}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)}{CATE_hat_i =
+mu_hat_1(X_i) - mu_hat_0(X_i)}.
 }
 \details{
 The \strong{S-learner} fits one model with treatment as a feature.

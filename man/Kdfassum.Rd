@@ -39,8 +39,6 @@ morie_fauzi_assumptions_b1_b5(
 \item{tol}{Tolerance for the B1 symmetry and unit-mass checks.}
 
 \item{lo, hi, ngrid}{Fixed quadrature window and node count.}
-
-
 }
 \value{
 Named list with \code{b1}, \code{b2}, \code{b3}, \code{b4}, \code{b5}, \code{mu4}, \code{mass}, \code{method}.
@@ -58,7 +56,7 @@ form, \verb{0 < h < 1} and \verb{n h > 1}.
 \item B4: \code{f_X} three times continuously differentiable with \code{f^(4)} existing --
 a smoothness claim about the unknown density that NO routine can verify
 from data. Reported as \code{NA}; assert it via \code{smooth}.
-\item B5: \verb{int [f\'(x)]^2 / F(x) dx} and \verb{int f(x) dx} finite.
+\item B5: \verb{int [f'(x)]^2 / F(x) dx} and \verb{int f(x) dx} finite.
 }
 
 The book is explicit about the division of labour: B1 and B3 are the usual

@@ -15,7 +15,6 @@ morie_bound_missing_outcome(y, R, y_min, y_max)
 \item{R}{Response indicator, 1 for observed and 0 for missing.}
 
 \item{y_min, y_max}{A priori lower and upper limits of the support of Y.}
-
 }
 \value{
 list: estimate, lower, upper, width, p_observed, mean_observed, n,

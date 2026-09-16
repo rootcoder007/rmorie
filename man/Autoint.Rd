@@ -27,8 +27,6 @@ Autoint(
 \item{Wres}{the residual projection of eq. (6).}
 
 \item{v}{field embedding vectors, used with a 1-D X.}
-
-
 }
 \value{
 list: estimate, e_res, attention, loss, method.

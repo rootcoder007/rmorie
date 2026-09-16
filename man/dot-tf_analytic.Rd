@@ -13,7 +13,8 @@
 The value of \code{.tf_idft}.
 }
 \description{
-A step of the rangayyan_tf implementation. Called by \code{.tf_wvd}, \code{AtomTfd}, \code{EmdSpec} and 4 others in the module.
+A step of the rangayyan_tf implementation. Called by \code{.tf_wvd}, \code{AtomTfd},
+\code{EmdSpec} and 4 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

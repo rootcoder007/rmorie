@@ -24,8 +24,6 @@ morie_face_smooth(
 \item{lambdas}{Smoothing parameters to search.}
 
 \item{pve}{Proportion of variance explained.}
-
-
 }
 \value{
 A list with \code{covariance}, \code{eigenvalues}, \code{eigenfunctions},

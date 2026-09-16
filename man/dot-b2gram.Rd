@@ -17,7 +17,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \code{Gpresid} and 1 others in the module.
+A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg},
+\code{Gpresid} and 1 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

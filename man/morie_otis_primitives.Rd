@@ -64,8 +64,8 @@ OTIS names the upstream system, not the download. The canonical
 table has 76,934 rows (FY 2022/23 -- 2024/25). See
 \code{\link{morie_otis_load}} in \code{otis_analyze.R} for the
 canonical loader.
-\subsection{Year-lock invariant}{
 
+Year-lock invariant
 OTIS \code{UniqueIndividual_ID} (format \code{YYYY-XXXXX-AA}) is
 randomly reassigned every fiscal year and re-randomized per dataset
 file even within a year. The \code{variable_taxonomy.R} registry
@@ -73,8 +73,37 @@ enforces \code{cross_year_safe = FALSE} for this column. Every
 aggregation below operates within \code{EndFiscalYear}; cross-year
 joins on the ID are forbidden by design.
 }
-}
 \examples{
+\donttest{
+b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- try(morie_otis_regional_placement(b01))
+class(res)
+}
+\donttest{
+b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- try(morie_otis_alert_state_combo(b01))
+class(res)
+}
+\donttest{
+b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- try(morie_otis_volatility(b01))
+class(res)
+}
+\donttest{
+b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- try(morie_otis_rc_trends(b01))
+class(res)
+}
+\donttest{
+b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- try(morie_otis_descriptives(b01))
+class(res)
+}
+\donttest{
+b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+res <- try(morie_otis_dml(b01))
+class(res)
+}
 \donttest{
 b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
 res <- try(morie_otis_regional_placement(b01))

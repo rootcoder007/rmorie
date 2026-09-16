@@ -15,7 +15,7 @@ by \code{performance::check_outliers}.}
 \code{threshold}).}
 }
 \value{
-A list with \code{$method =
+A list with \eqn{$method =
   "performance::check_outliers"} and \code{$raw} (the upstream
 outlier-check object).
 }

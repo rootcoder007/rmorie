@@ -18,7 +18,8 @@ Nprphet(ds, y, ar_layers = 0, n_changepoints = 3, seasonality = c(365.25, 3))
 \item{seasonality}{Length-2 vector: period and number of Fourier terms.}
 }
 \value{
-List with \code{estimate}, \code{coef}, \code{fitted}, \code{resid}, \code{rmse}, \code{n}.
+List with \code{estimate}, \code{coef}, \code{fitted}, \code{resid},
+\code{rmse}, \code{n}.
 }
 \description{
 NeuralProphet keeps the Prophet decomposition but fits it, and adds an

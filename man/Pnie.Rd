@@ -12,16 +12,15 @@ Pnie(X, M, Y, C = NULL, a = 1, astar = 0)
 \item{C}{Optional covariates.}
 
 \item{a, astar}{Exposure contrast.}
-
-
-
 }
 \value{
 list: estimate (PNIE), pnde, tnde, tnie, te, mediated_interaction,
 beta, theta, a, astar, n, method.
 }
 \description{
-\deqn{PNIE = E[Y(a^*, M(a)) - Y(a^*, M(a^*))] = (\theta_2\beta_1 + \theta_3\beta_1 a^*)(a - a^*).}{PNIE = E[Y(a*, M(a)) - Y(a*, M(a*))] = (theta2 beta1 + theta3 beta1 a*)(a - a*).}
+\deqn{PNIE = E[Y(a^*, M(a)) - Y(a^*, M(a^*))] = (\theta_2\beta_1 + \theta_3\beta_1
+a^*)(a - a^*).}{PNIE = E[Y(a*, M(a)) - Y(a*, M(a*))] = (theta2 beta1 + theta3 beta1
+a*)(a - a*).}
 }
 \details{
 Robins, J. M. and Greenland, S. (1992), \emph{Epidemiology} 3(2), 143-155,

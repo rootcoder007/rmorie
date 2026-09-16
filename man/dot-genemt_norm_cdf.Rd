@@ -13,7 +13,8 @@
 The value of \code{pnorm}.
 }
 \description{
-A step of the genemt_native implementation. Called by \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
+A step of the genemt_native implementation. Called by
+\code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
 See the file header for the source the module follows.
 source it follows.
 }

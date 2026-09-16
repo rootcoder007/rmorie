@@ -19,7 +19,8 @@
 A list with \code{Y}, \code{D}, \code{g}, \code{t}, \code{n}.
 }
 \description{
-A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m}, \code{.causdiddc_twfe}.
+A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m},
+\code{.causdiddc_twfe}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -16,8 +16,6 @@ Pwpgt(start, stop, event, X, occurrence, max_iter = 50L, tol = 1e-09)
 \item{occurrence}{Occurrence number of each interval (stratum).}
 
 \item{max_iter, tol}{Newton-Raphson controls.}
-
-
 }
 \value{
 List as in \code{\link{Agrec}}.

@@ -8,7 +8,6 @@ morie_recommended_pair_test(tax_a, tax_b)
 }
 \arguments{
 \item{tax_a, tax_b}{Two \code{morie_variable_taxonomy} objects.}
-
 }
 \value{
 Character scalar -- recommended test name.

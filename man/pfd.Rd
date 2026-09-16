@@ -14,7 +14,8 @@ List with \code{value} (D), \code{name}, and \code{extra} (\code{n_delta}, \code
 }
 \description{
 Petrosian fractal dimension \eqn{D = \\log_{10}(N) / (\\log_{10}(N) +
-\\log_{10}(N / (N + 0.4 N_\delta)))}{D = log_10(N) / ( log_10(N) + log_10(N / (N + 0.4 N_delta)))}, where \eqn{N_\delta}{N_delta} counts sign
+\\log_{10}(N / (N + 0.4 N_\delta)))}{D = log_10(N) / ( log_10(N) + log_10(N / (N + 0.4
+N_delta)))}, where \eqn{N_\delta}{N_delta} counts sign
 changes of the first difference. A fast complexity proxy for EEG/ECG.
 }
 \details{

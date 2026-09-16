@@ -10,7 +10,8 @@
 The value of \code{.morie_env_true}.
 }
 \description{
-A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed}, \code{.morie_safe_readRDS}.
+A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed},
+\code{.morie_safe_readRDS}.
 See the file header for the source the module follows.
 source it follows.
 }

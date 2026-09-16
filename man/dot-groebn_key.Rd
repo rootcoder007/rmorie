@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_monomials}, \code{.groebn_reduce_basis}.
+A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
+\code{.groebn_monomials}, \code{.groebn_reduce_basis}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -27,7 +27,6 @@ KernelCusum(
 \item{bandwidth}{Gaussian bandwidth; default median heuristic.}
 
 \item{kmin, kmax}{Scan interval, 1 < k < n.}
-
 }
 \value{
 List with \code{estimate} (k_hat), \code{statistic}

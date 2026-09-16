@@ -14,7 +14,8 @@
 \item{kind}{The body requires: \code{kind} must be one of I, II, III, IV.}
 }
 \value{
-A list with \code{structure}, \code{kind}, \code{rank}, \code{rank_deficiency}, \code{n_constraints_required}.
+A list with \code{structure}, \code{kind}, \code{rank},
+\code{rank_deficiency}, \code{n_constraints_required}.
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{spbayr}.

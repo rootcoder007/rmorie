@@ -12,7 +12,8 @@
 \item{descriptors}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \value{
-A list with \code{estimate}, \code{representation}, \code{learned_dim}, \code{descriptor_dim}, \code{method}.
+A list with \code{estimate}, \code{representation}, \code{learned_dim},
+\code{descriptor_dim}, \code{method}.
 }
 \description{
 A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.

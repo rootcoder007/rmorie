@@ -24,7 +24,9 @@ Named list with \code{estimate}, \code{se}, \code{ci_lower}, \code{ci_upper},
 }
 \description{
 Handbook eq. (23.4) p.512:
-\deqn{\frac{1}{n}\sum_i \left\{ \frac{W_i(Y_i-m_{1i})}{p_{1i}} + m_{1i} - \frac{(1-W_i)(Y_i-m_{0i})}{p_{0i}} - m_{0i} \right\}}{mean( W(Y-m1)/p1 + m1 - (1-W)(Y-m0)/p0 - m0 )}
+\deqn{\frac{1}{n}\sum_i \left\{ \frac{W_i(Y_i-m_{1i})}{p_{1i}} + m_{1i} -
+\frac{(1-W_i)(Y_i-m_{0i})}{p_{0i}} - m_{0i} \right\}}{mean( W(Y-m1)/p1 + m1 -
+(1-W)(Y-m0)/p0 - m0 )}
 Consistent if either the outcome model or the propensity model is
 correct.  With \code{m1 = m0 = 0} it collapses to the Horvitz-Thompson
 IPW difference, which is a useful check on a call.

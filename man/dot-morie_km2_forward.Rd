@@ -17,7 +17,8 @@
 A list with \code{alpha}, \code{ends}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_unigram_lm_tokenizer}, \code{morie_kamath_unigram_loglik}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_unigram_lm_tokenizer}, \code{morie_kamath_unigram_loglik}.
 See the file header for the source the module follows.
 for the source it follows.
 }

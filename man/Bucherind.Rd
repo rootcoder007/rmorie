@@ -18,11 +18,16 @@ Bucherind(d_AB, v_AB, d_CB, v_CB, alpha = 0.05)
 \item{alpha}{See Usage.}
 }
 \value{
-List with \code{estimate}, \code{variance}, \code{se}, \code{z}, \code{p_value}, \code{ci_lower}, \code{ci_upper}.
+List with \code{estimate}, \code{variance}, \code{se}, \code{z}, \code{p_value},
+\code{ci_lower}, \code{ci_upper}.
 }
 \description{
 Formula: d_AC = d_AB - d_CB; var(d_AC) = v_AB + v_CB
 }
 \references{
-Bucher, Guyatt, Griffith and Walter (1997), The results of direct and indirect treatment comparisons in meta-analysis of randomized controlled trials, Journal of Clinical Epidemiology 50:683-691. Paywalled; d_AC = d_AB - d_CB with variances added is the standard published form, restated identically in every network meta-analysis source consulted.
+Bucher, Guyatt, Griffith and Walter (1997), The results of direct and
+indirect treatment comparisons in meta-analysis of randomized controlled trials,
+Journal of Clinical Epidemiology 50:683-691. Paywalled; d_AC = d_AB - d_CB with
+variances added is the standard published form, restated identically in every network
+meta-analysis source consulted.
 }

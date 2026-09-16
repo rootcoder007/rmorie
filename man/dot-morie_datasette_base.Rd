@@ -13,7 +13,8 @@
 The value of \code{sub}.
 }
 \description{
-A step of the ingest_datasette implementation. Called by \code{morie_datasette_databases}, \code{morie_datasette_read}.
+A step of the ingest_datasette implementation. Called by
+\code{morie_datasette_databases}, \code{morie_datasette_read}.
 See the file header for the source the module follows.
 the source it follows.
 }

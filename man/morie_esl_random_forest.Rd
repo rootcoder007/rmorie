@@ -29,7 +29,6 @@ morie_esl_random_forest(
 \item{newdata}{optional points to predict.}
 
 \item{seed}{seed for the bootstrap and per-node draws.}
-
 }
 \value{
 list: prediction, oob_prediction, oob_mse, train_mse,

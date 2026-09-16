@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the crpcol implementation. Called by \code{.crp_collapsed_sweep}, \code{Crpcol}, \code{Crpgib} and 1 others in the module.
+A step of the crpcol implementation. Called by \code{.crp_collapsed_sweep},
+\code{Crpcol}, \code{Crpgib} and 1 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

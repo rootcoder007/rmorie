@@ -10,7 +10,6 @@ Gpdcdf(y, sigma = 1, xi = 0)
 \item{y}{Numeric threshold excesses.}
 
 \item{sigma, xi}{Scale and shape.}
-
 }
 \value{
 Numeric vector of probabilities.

@@ -13,7 +13,8 @@
 The value of \code{p}, as built in the body.
 }
 \description{
-A step of the phylml_native implementation. Called by \code{morie_phylml}, \code{site_likelihood}, \code{substitution_matrix}.
+A step of the phylml_native implementation. Called by \code{morie_phylml},
+\code{site_likelihood}, \code{substitution_matrix}.
 See the file header for the source the module follows.
 source it follows.
 }

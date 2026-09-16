@@ -12,7 +12,9 @@
 \item{omit_zero_frequency}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{j}, \code{k}, \code{zero_index}, \code{nonzero_mask}, \code{mean_invariant}, \code{r}, \code{c}.
+A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{j},
+\code{k}, \code{zero_index}, \code{nonzero_mask}, \code{mean_invariant}, \code{r},
+\code{c}.
 }
 \description{
 A step of the schab_rest_shared implementation. Called by \code{spperiod}.

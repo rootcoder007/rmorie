@@ -12,7 +12,8 @@
 \item{constraint}{Compared against \code{"reference"}. Defaults to \code{"reference"}.}
 }
 \value{
-A list with \code{matrix}, \code{names}, \code{groups}, \code{columns}, \code{constraint}, \code{n_positions}, \code{reference}.
+A list with \code{matrix}, \code{names}, \code{groups}, \code{columns},
+\code{constraint}, \code{n_positions}, \code{reference}.
 }
 \description{
 A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.

@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the comet_native implementation. Called by \code{.comet_dist}, \code{kendall_tau}, \code{pooled_features} and 1 others in the module.
+A step of the comet_native implementation. Called by \code{.comet_dist},
+\code{kendall_tau}, \code{pooled_features} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

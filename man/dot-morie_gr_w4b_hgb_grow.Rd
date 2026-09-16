@@ -36,7 +36,8 @@
 A list with \code{feature}, \code{bin0}, \code{gain}, \code{left}, \code{right}.
 }
 \description{
-A step of the geron_w4b_native implementation. Called by \code{morie_geron_histogram_gradient_boosting}.
+A step of the geron_w4b_native implementation. Called by
+\code{morie_geron_histogram_gradient_boosting}.
 See the file header for the source the module follows.
 the source it follows.
 }

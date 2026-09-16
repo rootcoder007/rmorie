@@ -15,7 +15,8 @@
 A list with \code{acts}, \code{pre}.
 }
 \description{
-A step of the propinf_native implementation. Called by \code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}.
+A step of the propinf_native implementation. Called by
+\code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}.
 See the file header for the source the module follows.
 the source it follows.
 }

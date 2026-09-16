@@ -21,4 +21,5 @@ matching on the filename stem if the extension differs.
 }
 \examples{
 cat(explain_file("power_summary.csv"))
+
 }

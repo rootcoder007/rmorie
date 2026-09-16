@@ -23,11 +23,13 @@ morie_survival_schoenfeld(time, event, X, beta, vcov = NULL, scaled = TRUE)
 \item{scaled}{whether to return the scaled residuals.}
 }
 \value{
-list with the residuals, the event times, and the proportional-hazards test statistic and p-value.
+list with the residuals, the event times, and the proportional-hazards test
+statistic and p-value.
 }
 \description{
 s_i = x_i minus the weighted risk-set mean at each event time.
-Grambsch and Therneau's scaled version tests proportional hazards by regressing the residuals on time.
+Grambsch and Therneau's scaled version tests proportional hazards by regressing the
+residuals on time.
 }
 \examples{
 ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
@@ -36,5 +38,6 @@ SX <- matrix((seq_along(ST) - 1)\%\%2, ncol = 1)
 Schoenfeld(ST, SE, SX, 0.3, vcov = matrix(0.25, 1, 1))
 }
 \references{
-Grambsch, P. M. and Therneau, T. M. (1994). Proportional hazards tests and diagnostics based on weighted residuals. Biometrika 81(3), 515-526.
+Grambsch, P. M. and Therneau, T. M. (1994). Proportional hazards tests and
+diagnostics based on weighted residuals. Biometrika 81(3), 515-526.
 }

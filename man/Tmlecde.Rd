@@ -26,7 +26,6 @@ Tmlecde(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1, gbound = 0.025, level = 0.95)
 \item{gbound}{Truncation on both nuisance probabilities.}
 
 \item{level}{Confidence level.}
-
 }
 \value{
 List with \code{estimate}, \code{se}, \code{ci_lower},

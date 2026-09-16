@@ -17,7 +17,8 @@
 A list with \code{freqs}, \code{power}.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{InfantCry}, \code{SpeechFeat} and 1 others in the module.
+A step of the rangayyan_phys implementation. Called by \code{CadAcou},
+\code{InfantCry}, \code{SpeechFeat} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

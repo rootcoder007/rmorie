@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{morie_geron_dalle_autoregressive_token}.
+A step of the geron_ml_native implementation. Called by
+\code{morie_geron_dalle_autoregressive_token}.
 See the file header for the source the module follows.
 the source it follows.
 }

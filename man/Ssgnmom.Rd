@@ -35,15 +35,15 @@ morie_fauzi_sign_moments(
 \item{f0, fpp0}{\code{f(0)} and \verb{f''(0)}.}
 
 \item{a11, a13}{\verb{A_\{1,1\}} and \verb{A_\{1,3\}}.}
-
-
 }
 \value{
 Named list with \code{mean}, \code{variance}, \code{se}, \code{refined}, \code{n}, \code{method}.
 }
 \description{
 Sec. 5.3.1. With \verb{Stilde = n - sum_i K(-X_i/h)},
-\deqn{E_\theta(\tilde S) = n\{F(\theta) + O(h^2)\},\quad V_\theta(\tilde S) = n[\{1-F(\theta)\}F(\theta) + O(h)].}{E(Stilde) = n{F(theta) + O(h^2)}, V(Stilde) = n[{1 - F(theta)} F(theta) + O(h)].}
+\deqn{E_\theta(\tilde S) = n\{F(\theta) + O(h^2)\},\quad V_\theta(\tilde S) =
+n[\{1-F(\theta)\}F(\theta) + O(h)].}{E(Stilde) = n{F(theta) + O(h^2)}, V(Stilde) =
+n[{1 - F(theta)} F(theta) + O(h)].}
 }
 \details{
 Under \code{H0} these reduce to \code{n/2} and \code{n/4}, and Theorem 5.10 refines the
@@ -69,6 +69,7 @@ Verified against Maesono, Moriyama and Lu (2018), AISM 70(5):969-982
 Ssgnmom(n = 100)
 }
 \references{
-Fauzi and Maesono (2023), Sec. 5.3.1 and Theorem 5.10; Maesono, Moriyama and Lu (2018), AISM 70:969-982.
+Fauzi and Maesono (2023), Sec. 5.3.1 and Theorem 5.10; Maesono, Moriyama
+and Lu (2018), AISM 70:969-982.
 }
 \keyword{internal}

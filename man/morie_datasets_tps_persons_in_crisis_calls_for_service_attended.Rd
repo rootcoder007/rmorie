@@ -38,17 +38,18 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
+\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
+\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
 hub item_id \verb{79c8e950bfe54ce39334ba108e1b325f}.
 }
 \details{
 Persons in crisis calls for service attended.
 
-Tags: Persons in Crisis; PIC; Crisis; Apprehensions; MHA; Calls; Calls for Service; Toronto; TPS; Toronto Police
+Tags: Persons in Crisis; PIC; Crisis; Apprehensions; MHA; Calls; Calls for Service;
+Toronto; TPS; Toronto Police
 }
 \examples{
 \donttest{

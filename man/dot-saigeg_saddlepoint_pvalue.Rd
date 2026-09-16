@@ -16,7 +16,8 @@
 \item{two_sided}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K}, \code{K2}, \code{method}.
+A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K},
+\code{K2}, \code{method}.
 }
 \description{
 A step of the saigeg_native implementation. Called by \code{morie_saigeg}.

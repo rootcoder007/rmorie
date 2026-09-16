@@ -16,7 +16,8 @@ morie_geron_multioutput(X, Y, k = 1, X_new = NULL)
 \item{X_new}{Optional rows to predict.}
 }
 \value{
-List with predictions, predict, accuracy_per_output, accuracy, n_outputs, estimate, n, method.
+List with predictions, predict, accuracy_per_output, accuracy, n_outputs,
+estimate, n, method.
 }
 \description{
 Multioutput classification by k-NN vote (Geron Ch 3, morie.fn hmmto)

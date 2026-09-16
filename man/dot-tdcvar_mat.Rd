@@ -13,7 +13,8 @@
 The value of \code{M}, as built in the body.
 }
 \description{
-A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
+A step of the tdcvar_native implementation. Called by
+\code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
 See the file header for the source the module follows.
 source it follows.
 }

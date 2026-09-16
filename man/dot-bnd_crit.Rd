@@ -9,7 +9,8 @@
 \arguments{
 \item{theta}{Numeric; combined arithmetically in the body.}
 
-\item{st}{A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL}, \code{$sU} from it.}
+\item{st}{A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL},
+\code{$sU} from it.}
 }
 \value{
 A numeric value.

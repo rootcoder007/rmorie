@@ -18,7 +18,8 @@ morie_fauzi_b4_coefficient(fppp, mu4 = 3)
 Named list with \code{estimate}, \code{mu4}, \code{method}.
 }
 \description{
-Eq. (2.8): \deqn{b_4(x) = \frac{f_X^{(3)}(x)}{24}\int w^4 K(w)\,dw.}{b4(x) = (f3(x)/24) int w^4 K(w) dw.}
+Eq. (2.8): \deqn{b_4(x) = \frac{f_X^{(3)}(x)}{24}\int w^4 K(w)\,dw.}{b4(x) =
+(f3(x)/24) int w^4 K(w) dw.}
 }
 \details{
 The second bias coefficient in

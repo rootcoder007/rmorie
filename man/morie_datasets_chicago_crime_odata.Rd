@@ -60,10 +60,14 @@ When to reach for which API mode:
 
 \tabular{lll}{
 \strong{Mode}      \tab \strong{morie wrapper}                       \tab \strong{best for} \cr
-SODA2              \tab \code{morie_datasets_chicago_crime()}            \tab base-feed pulls + \verb{$where} filtering \cr
-SODA3 (SoQL)       \tab \code{morie_datasets_chicago_crime_soql()}       \tab arbitrary \verb{SELECT ... WHERE} \cr
-SODA3 (map view)   \tab \code{morie_datasets_chicago_crime_map()}        \tab derived/filtered views (ahwe-kpsy) \cr
-OData v4           \tab \code{morie_datasets_chicago_crime_odata()}      \tab third-party tool ingestion \cr
+SODA2              \tab \code{\link[=morie_datasets_chicago_crime]{morie_datasets_chicago_crime()}}            \tab base-feed
+pulls + \verb{$where} filtering \cr
+SODA3 (SoQL)       \tab \code{\link[=morie_datasets_chicago_crime_soql]{morie_datasets_chicago_crime_soql()}}       \tab arbitrary
+\verb{SELECT ... WHERE} \cr
+SODA3 (map view)   \tab \code{\link[=morie_datasets_chicago_crime_map]{morie_datasets_chicago_crime_map()}}        \tab
+derived/filtered views (ahwe-kpsy) \cr
+OData v4           \tab \code{morie_datasets_chicago_crime_odata()}      \tab third-party
+tool ingestion \cr
 }
 
 \strong{Known Socrata limitation.} \verb{$filter} is unreliable on Socrata's

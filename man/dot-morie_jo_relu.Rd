@@ -13,7 +13,8 @@
 The value of \code{ifelse}.
 }
 \description{
-A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock}, \code{morie_itrans}, \code{morie_tsmixer}.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock},
+\code{morie_itrans}, \code{morie_tsmixer}.
 See the file header for the source the module follows.
 source it follows.
 }

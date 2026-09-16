@@ -50,7 +50,6 @@ observed Y.}
 (1/(2q) - 3/2, 1).}
 
 \item{bandwidth}{Numeric or NULL; common bandwidth.}
-
 }
 \value{
 Named list with beta_hat, alpha_hat, sigma, sigma_y1,
@@ -86,7 +85,7 @@ negative and every downstream quantity inverts.  Note also that
 (6.80) uses the kernel argument (z - Z_nj)/h_n, the OPPOSITE
 orientation to (6.61) in Section 6.3.1; each section is implemented
 as printed, which is why the two derivative terms differ in sign
-here and in \code{Hrztmod()}.
+here and in \code{\link[=Hrztmod]{Hrztmod()}}.
 
 The plain estimator sigma_n(y_n) converges no faster than n^(-1/3).
 Under E exp(-3V) < Inf (PHU3(ii)) the Schucany-Sommers bias

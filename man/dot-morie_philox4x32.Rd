@@ -12,7 +12,8 @@ numeric}
 
 \item{key}{A vector; indexed elementwise.}
 
-\item{rounds}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{.MORIE_PHILOX_ROUNDS}.}
+\item{rounds}{A count; the body uses it as \code{seq_len(...)}. Defaults to
+\code{.MORIE_PHILOX_ROUNDS}.}
 }
 \value{
 The value of \code{ctr}, as built in the body.

@@ -7,15 +7,16 @@
 morie_geron_dpo(pi, pi_ref, preferences = NULL, beta = 0.1)
 }
 \arguments{
-\item{pi, pi_ref}{Log-probs (B, 2) under policy / reference; col 0 = chosen unless \code{preferences} given.}
+\item{pi, pi_ref}{Log-probs (B, 2) under policy / reference; col 0 = chosen unless
+\code{preferences} given.}
 
 \item{preferences}{0/1 winner index per row (default all 0).}
 
 \item{beta}{Inverse temperature (>0).}
-
 }
 \value{
-List with \code{loss}, \code{per_pair_loss}, \code{margin}, \code{reward_chosen}, \code{reward_rejected}, \code{accuracy}.
+List with \code{loss}, \code{per_pair_loss}, \code{margin}, \code{reward_chosen},
+\code{reward_rejected}, \code{accuracy}.
 }
 \description{
 Direct preference optimization (DPO) loss (hmdpo)

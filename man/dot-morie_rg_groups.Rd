@@ -15,7 +15,8 @@
 A list with \code{order}, \code{groups}.
 }
 \description{
-A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{Qda}, \code{SepIndex}.
+A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{Qda},
+\code{SepIndex}.
 See the file header for the source the module follows.
 the source it follows.
 }

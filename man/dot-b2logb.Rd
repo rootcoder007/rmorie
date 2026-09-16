@@ -9,13 +9,15 @@
 \arguments{
 \item{v}{Coerced to numeric by the body, with \code{as.numeric}.}
 
-\item{base}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.}
+\item{base}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}. Defaults to \code{2}.}
 }
 \value{
 A numeric value.
 }
 \description{
-A step of the b2info implementation. Called by \code{.b2kl}, \code{.b2xlogx}, \code{Compshan} and 5 others in the module.
+A step of the b2info implementation. Called by \code{.b2kl}, \code{.b2xlogx},
+\code{Compshan} and 5 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

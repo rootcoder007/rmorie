@@ -16,7 +16,8 @@ morie_geron_kernel_pca_sigmoid(X, n_components, gamma = NULL, coef0 = 1)
 \item{coef0}{Offset.}
 }
 \value{
-List with X_projected, eigenvalues, alphas, K, n_negative_eigenvalues, is_psd, estimate, n, method.
+List with X_projected, eigenvalues, alphas, K, n_negative_eigenvalues, is_psd,
+estimate, n, method.
 }
 \description{
 Kernel PCA with sigmoid kernel (Geron Ch 7, morie.fn hmkpsg)

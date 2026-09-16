@@ -33,7 +33,8 @@
 \item{exponent}{Passed to \code{.svdpp_implicit_term}. Defaults to \code{-0.5}.}
 }
 \value{
-A list with \code{prediction}, \code{effective_user_factor}, \code{implicit}, \code{n_rated}, \code{note}.
+A list with \code{prediction}, \code{effective_user_factor}, \code{implicit},
+\code{n_rated}, \code{note}.
 }
 \description{
 A step of the svdpp_native implementation. Called by \code{.svdpp_sgd_step}.

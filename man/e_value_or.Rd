@@ -12,7 +12,6 @@ e_value_or(odds_ratio, ci_lower = NULL, ci_upper = NULL, prevalence = NULL)
 \item{ci_lower, ci_upper}{Optional 95\% CI.}
 
 \item{prevalence}{Outcome prevalence (optional).}
-
 }
 \value{
 A \code{morie_evalue} named-list.

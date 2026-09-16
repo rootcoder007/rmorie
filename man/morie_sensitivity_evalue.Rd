@@ -39,7 +39,6 @@ for OLS / MD, 1 for ratio scales).}
 
 \item{...}{Additional arguments forwarded to the underlying
 \code{EValue::evalues.*} function.}
-
 }
 \value{
 A list of class \code{morie_sensitivity_evalue} with

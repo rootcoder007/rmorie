@@ -20,7 +20,6 @@ Alsmf(R, f = 2, lam = 0.1, alpha = 40, steps = 10, X0 = NULL, Y0 = NULL)
 \item{X0, Y0}{Starting factors; NULL uses the deterministic defaults
 x_uk = ((u+k) mod 5 + 1)/10 and y_ik = ((i+2k) mod 7 + 1)/10 with
 zero-based u, i, k.}
-
 }
 \value{
 List with X, Y, loss, fitted, m, n, f, steps.

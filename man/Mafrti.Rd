@@ -24,7 +24,7 @@ arithmetic mean instead is a known way to get a proportion outside
 \code{[0, 1]}.
 }
 \details{
-Formula: \code{p = 0.5 (1 - sgn(cos t) sqrt(1 - (sin t + (sin t - 1/sin
+Formula: \eqn{p = 0.5 (1 - sgn(cos t) sqrt(1 - (sin t + (sin t - 1/sin
 t)/n)^2))} for \code{t} the double-arcsine value and \code{n} the
 harmonic mean sample size -- Miller (1978).
 }

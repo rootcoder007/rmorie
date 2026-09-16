@@ -12,7 +12,6 @@ morie_manski(y, D, y_min, y_max)
 \item{D}{Binary 0/1 treatment.}
 
 \item{y_min, y_max}{Assumed outcome support.}
-
 }
 \value{
 The ATE list of \code{\link{morie_bndest}}.

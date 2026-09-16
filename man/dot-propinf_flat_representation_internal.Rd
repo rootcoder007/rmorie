@@ -13,7 +13,9 @@
 The value of \code{F}, as built in the body.
 }
 \description{
-A step of the propinf_native implementation. Called by \code{.propinf_sorted_representation_internal}, \code{morie_propinf_sorted_representation}.
+A step of the propinf_native implementation. Called by
+\code{.propinf_sorted_representation_internal},
+\code{morie_propinf_sorted_representation}.
 See the file header for the source the module follows.
 the source it follows.
 }

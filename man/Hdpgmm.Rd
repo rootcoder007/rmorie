@@ -24,8 +24,6 @@ Hdpgmm(
 \item{truncation}{number of components.}
 
 \item{max_iter, tol}{EM controls.}
-
-
 }
 \value{
 list: estimate, loglik, mu, sigma, pi, beta, n, method.

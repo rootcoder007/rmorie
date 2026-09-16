@@ -14,7 +14,8 @@
 \item{robust_floor}{Passed to \code{>}. Defaults to \code{1e-12}.}
 }
 \value{
-A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total}, \code{no_gene_variation}.
+A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total},
+\code{no_gene_variation}.
 }
 \description{
 A step of the limmav_native implementation. Called by \code{morie_limmav}.

@@ -15,7 +15,9 @@
 A numeric value.
 }
 \description{
-A step of the wasserman_native implementation. Called by \code{morie_wasserman_entropy}, \code{morie_wasserman_kullback_leibler}, \code{morie_wasserman_posterior} and 1 others in the module.
+A step of the wasserman_native implementation. Called by
+\code{morie_wasserman_entropy}, \code{morie_wasserman_kullback_leibler},
+\code{morie_wasserman_posterior} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

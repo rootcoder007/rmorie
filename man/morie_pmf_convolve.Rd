@@ -8,9 +8,6 @@ morie_pmf_convolve(values_x, probs_x, values_y, probs_y)
 }
 \arguments{
 \item{values_x, probs_x, values_y, probs_y}{the two pmfs.}
-
-
-
 }
 \value{
 list(values, probs) sorted by value.

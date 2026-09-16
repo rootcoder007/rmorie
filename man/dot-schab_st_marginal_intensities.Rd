@@ -22,12 +22,14 @@
 
 \item{time_interval}{A vector; indexed elementwise.}
 
-\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
+\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults
+to \code{4L}.}
 
 \item{n_time_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.}
 }
 \value{
-A list with \code{marginal_spatial}, \code{marginal_temporal}, \code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
+A list with \code{marginal_spatial}, \code{marginal_temporal},
+\code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstp}.

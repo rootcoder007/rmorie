@@ -15,7 +15,8 @@
 The value of \code{choose}.
 }
 \description{
-A step of the ramsey_theory_native implementation. Called by \code{morie_ramsey_number}, \code{morie_ramsey_upper_bound}.
+A step of the ramsey_theory_native implementation. Called by
+\code{morie_ramsey_number}, \code{morie_ramsey_upper_bound}.
 See the file header for the source the module follows.
 for the source it follows.
 }

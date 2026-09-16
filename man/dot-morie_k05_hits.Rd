@@ -13,7 +13,8 @@
 A list with \code{h}, \code{t}, \code{n}.
 }
 \description{
-A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}.
+A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc},
+\code{morie_kupiec_var_test}.
 See the file header for the source the module follows.
 source it follows.
 }

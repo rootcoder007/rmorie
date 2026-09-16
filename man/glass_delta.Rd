@@ -12,7 +12,6 @@ glass_delta(x, y, control = "y", confidence = 0.95)
 \item{control}{Which group is the control: \code{"x"} or \code{"y"} (default).}
 
 \item{confidence}{Confidence level for CI. Default 0.95.}
-
 }
 \value{
 A \code{morie_effect_size}.

@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the fauzi_native implementation. Called by \code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2}, \code{morie_fauzi_mrl_naive}.
+A step of the fauzi_native implementation. Called by
+\code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2},
+\code{morie_fauzi_mrl_naive}.
 See the file header for the source the module follows.
 source it follows.
 }

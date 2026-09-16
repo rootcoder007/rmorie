@@ -19,7 +19,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the saigeg_native implementation. Called by \code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}.
+A step of the saigeg_native implementation. Called by
+\code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}.
 See the file header for the source the module follows.
 source it follows.
 }

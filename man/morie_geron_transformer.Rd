@@ -18,11 +18,6 @@ morie_geron_transformer(
 \item{X}{Input sequence (T, d_model).}
 
 \item{n_heads, d_model, n_layers, d_ff, seed, mask}{As in Python original.}
-
-
-
-
-
 }
 \value{
 list with Y, attention, total_params, d_model, d_ff, n_heads,

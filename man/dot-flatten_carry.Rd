@@ -9,7 +9,8 @@
 \arguments{
 \item{spec}{A list; the body reads \code{$harmonics}, \code{$periods}, \code{$use_trend} from it.}
 
-\item{carry}{A list; the body reads \code{$buf}, \code{$dlag}, \code{$elag}, \code{$level}, \code{$s}, \code{$sstar}, \code{$trend} from it.}
+\item{carry}{A list; the body reads \code{$buf}, \code{$dlag}, \code{$elag},
+\code{$level}, \code{$s}, \code{$sstar}, \code{$trend} from it.}
 }
 \value{
 A vector, from \code{c}.

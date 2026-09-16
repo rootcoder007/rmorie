@@ -21,7 +21,8 @@
 A list with \code{q1}, \code{b}.
 }
 \description{
-A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}, \code{rule_value_seq}, \code{sequential_blips}.
+A step of the tmldyn_native implementation. Called by \code{morie_tmldyn},
+\code{rule_value_seq}, \code{sequential_blips}.
 See the file header for the source the module follows.
 source it follows.
 }

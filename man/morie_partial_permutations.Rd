@@ -8,7 +8,6 @@ morie_partial_permutations(N, n)
 }
 \arguments{
 \item{N, n}{pool size and subgroup size, 0 <= n <= N.}
-
 }
 \value{
 the exact count as a double.

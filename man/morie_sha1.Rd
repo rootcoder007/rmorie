@@ -10,8 +10,6 @@ morie_sha1(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1")
 \item{x}{the object.}
 
 \item{digits, zapsmall, algo, ...}{as in digest.}
-
-
 }
 \value{
 the hex digest.

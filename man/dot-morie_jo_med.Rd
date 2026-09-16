@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the ts_joseph implementation. Called by \code{morie_mapets}, \code{morie_smape}, \code{morie_stldecomp}.
+A step of the ts_joseph implementation. Called by \code{morie_mapets},
+\code{morie_smape}, \code{morie_stldecomp}.
 See the file header for the source the module follows.
 source it follows.
 }

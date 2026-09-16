@@ -57,18 +57,6 @@ SDM outputs.  Pass these to bypass lite-mode.}
 
 \item{log_outcome}{If \code{TRUE} (default), outcome is
 \code{log(stops / population)}.}
-
-
-
-
-
-
-
-
-
-
-
-
 }
 \value{
 A \code{list} of class \code{morie_laniyonu_gp_result}, one
@@ -86,7 +74,7 @@ year level via a Spatial Durbin Model (SDM) decomposition.
 \details{
 The paper's headline finding: gentrification has roughly zero
 \emph{direct} effect on stops/capita inside the gentrifying tract,
-but a +51\% to +90\% \emph{indirect} (spillover) effect on
+but a +51\\% to +90\\% \emph{indirect} (spillover) effect on
 stops/capita in neighbouring tracts.
 
 Two modes are supported:
@@ -102,6 +90,20 @@ only.
 }
 }
 \examples{
+set.seed(1)
+df <- expand.grid(tract_id = sprintf("T\%02d", 1:40), year = 2010:2012,
+                  stringsAsFactors = FALSE)
+df$median_inc_2000 <- runif(nrow(df), 3e4, 7e4)
+df$median_inc_2014 <- df$median_inc_2000 * 1.2
+df$median_rent_2000 <- runif(nrow(df), 700, 1500)
+df$median_rent_2014 <- df$median_rent_2000 * 1.2
+df$pct_ba_2000 <- runif(nrow(df), 0.05, 0.45)
+df$pct_ba_2014 <- pmin(df$pct_ba_2000 * 1.3, 0.95)
+df$population <- sample(800:5000, nrow(df), TRUE)
+df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
+df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
+res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
+res[[1]]$rho
 set.seed(1)
 df <- expand.grid(tract_id = sprintf("T\%02d", 1:40), year = 2010:2012,
                   stringsAsFactors = FALSE)

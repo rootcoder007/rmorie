@@ -19,7 +19,8 @@
 The value of \code{beta}, as built in the body.
 }
 \description{
-A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn}, \code{Medmsm} and 19 others in the module.
+A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn},
+\code{Medmsm} and 19 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

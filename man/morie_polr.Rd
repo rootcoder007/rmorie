@@ -12,7 +12,6 @@ morie_polr(formula, data, weights, method = "logistic")
 \item{weights}{Optional prior weights.}
 
 \item{method}{\code{"logistic"} (default) or \code{"probit"}.}
-
 }
 \value{
 A \code{morie_polr} object (with \code{$deviance},

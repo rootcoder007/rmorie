@@ -13,7 +13,9 @@
 The value of \code{[}.
 }
 \description{
-A step of the phylby_native implementation. Called by \code{.phylby_clade_credibility}, \code{.phylby_topology_key}, \code{morie_phylby_splits_of}.
+A step of the phylby_native implementation. Called by
+\code{.phylby_clade_credibility}, \code{.phylby_topology_key},
+\code{morie_phylby_splits_of}.
 See the file header for the source the module follows.
 source it follows.
 }

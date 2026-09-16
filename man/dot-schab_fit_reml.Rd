@@ -33,7 +33,8 @@
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-10}.}
 }
 \value{
-A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget}, \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
+A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget},
+\code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
 }
 \description{
 A step of the schab_reml_shared implementation. Called by \code{spreml}.

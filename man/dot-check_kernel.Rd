@@ -13,7 +13,8 @@
 A list with \code{fun}, \code{const}, \code{name}.
 }
 \description{
-A step of the andmnh_native implementation. Called by \code{automatic_bandwidth}, \code{kernel_hac}.
+A step of the andmnh_native implementation. Called by \code{automatic_bandwidth},
+\code{kernel_hac}.
 See the file header for the source the module follows.
 source it follows.
 }

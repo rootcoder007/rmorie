@@ -21,11 +21,11 @@ preserves_derivative_relation (\code{TRUE}), bias_coefficient,
 mirror_note, n, method.
 }
 \description{
-\verb{V_\{1,h\}(x, y) = int_x^Inf g\'(z) V((z - y)/h) dz}. This variant is
+\verb{V_\{1,h\}(x, y) = int_x^Inf g'(z) V((z - y)/h) dz}. This variant is
 built so that \code{d/dt} of the cumulative survival is exactly minus
 the survival estimator -- the structural identity of the
 population quantities is preserved by the estimators.
-\code{morie_fauzi_cumulative_survival_2()} is the mirror construction
+\code{\link[=morie_fauzi_cumulative_survival_2]{morie_fauzi_cumulative_survival_2()}} is the mirror construction
 and does not preserve it; the two differ in bias coefficient
 (\code{b_2} here, \code{b_3} there) and share the same covariance.
 }

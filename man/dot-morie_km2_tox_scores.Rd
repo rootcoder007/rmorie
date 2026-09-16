@@ -17,7 +17,9 @@
 The value of \code{list}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_emt_metric}, \code{morie_kamath_ch6_toxic_fraction}, \code{morie_kamath_ch6_toxicity_probability}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch6_emt_metric}, \code{morie_kamath_ch6_toxic_fraction},
+\code{morie_kamath_ch6_toxicity_probability}.
 See the file header for the source the module follows.
 for the source it follows.
 }

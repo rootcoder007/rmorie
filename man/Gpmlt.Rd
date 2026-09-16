@@ -24,8 +24,6 @@ Gpmlt(
 \item{task_cov}{Inter-task covariance; the identity by default.}
 
 \item{lengthscale, variance, noise}{GP hyperparameters.}
-
-
 }
 \value{
 List with \code{estimate}, \code{mean}, \code{loglik},

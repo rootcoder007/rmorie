@@ -15,8 +15,8 @@ Entries are stored in the package-level environment
 \code{.morie_stat_commands} so that the registry is shared across
 sessions within a single R process and can be appended by extension
 packages.
-\subsection{Functions}{
 
+Functions
 \itemize{
 \item \code{\link{stat_command}}: constructor for a single command.
 \item \code{\link{register_stat_command}}: add an entry to the
@@ -29,6 +29,5 @@ names + aliases.
 by category.
 \item \code{\link{run_stat_command}}: invoke a command's REPL
 handler with the supplied arguments.
-}
 }
 }

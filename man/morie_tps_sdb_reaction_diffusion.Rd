@@ -39,11 +39,6 @@ morie_tps_sdb_reaction_diffusion(
 \item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
 default) skips writing and says so in the result.
 (seed / A(x,t) / rho(x,t)) to the manifest figure directory.}
-
-
-
-
-
 }
 \value{
 A \code{morie_rich_result} list with the steady-state
@@ -52,9 +47,11 @@ integration parameters.
 }
 \description{
 Solves the coupled reaction-diffusion system
-\deqn{\partial_t A = \eta \nabla^2 A - \omega A + \theta \rho,}{partial_t A = eta grad^2 A - omega A + theta rho,}
+\deqn{\partial_t A = \eta \nabla^2 A - \omega A + \theta \rho,}{partial_t A = eta
+grad^2 A - omega A + theta rho,}
 \deqn{\partial_t \rho = \nabla \cdot (D \nabla \rho - 2 \rho \nabla
-  \log A) - \rho A + \gamma,}{partial_t rho = grad * (D grad rho - 2 rho grad log A) - rho A + gamma,}
+  \log A) - \rho A + \gamma,}{partial_t rho = grad * (D grad rho - 2 rho grad log A) -
+rho A + gamma,}
 on a cosine-corrected Toronto grid seeded by the observed incident
 histogram. Localised attractiveness spikes emerge whenever
 \eqn{(\eta, \omega, \theta, D, \gamma)}{(eta, omega, theta, D, gamma)} place the system in the

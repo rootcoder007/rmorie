@@ -13,7 +13,8 @@
 The value of \code{ifelse}.
 }
 \description{
-A step of the mienco_native implementation. Called by \code{.mienco_jsd_estimate}, \code{.mienco_prior_matching_loss}.
+A step of the mienco_native implementation. Called by \code{.mienco_jsd_estimate},
+\code{.mienco_prior_matching_loss}.
 See the file header for the source the module follows.
 source it follows.
 }

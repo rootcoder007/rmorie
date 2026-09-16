@@ -12,7 +12,6 @@ spwkth(cov_func, omega = NULL, h_max = 200, n = 40001)
 \item{omega}{Frequencies at which to return the density.}
 
 \item{h_max, n}{Half-width and node count of the quadrature grid.}
-
 }
 \value{
 Named list: omega, spectral_density, variance,

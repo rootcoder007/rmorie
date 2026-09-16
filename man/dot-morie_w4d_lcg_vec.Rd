@@ -17,7 +17,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the geron_w4d_native implementation. Called by \code{morie_geron_senet}, \code{morie_geron_swin}, \code{morie_geron_transformer} and 5 others in the module.
+A step of the geron_w4d_native implementation. Called by \code{morie_geron_senet},
+\code{morie_geron_swin}, \code{morie_geron_transformer} and 5 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

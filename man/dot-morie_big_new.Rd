@@ -15,7 +15,9 @@
 The value of \code{structure}.
 }
 \description{
-A step of the bigint_native implementation. Called by \code{morie_big_add}, \code{morie_big_divmod_small}, \code{morie_big_fits_double} and 3 others in the module.
+A step of the bigint_native implementation. Called by \code{morie_big_add},
+\code{morie_big_divmod_small}, \code{morie_big_fits_double} and 3 others in the
+module.
 See the file header for the source the module follows.
 source it follows.
 }

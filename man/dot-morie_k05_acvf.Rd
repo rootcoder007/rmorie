@@ -17,7 +17,8 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf}, \code{morie_sample_pacf}.
+A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf},
+\code{morie_sample_pacf}.
 See the file header for the source the module follows.
 source it follows.
 }

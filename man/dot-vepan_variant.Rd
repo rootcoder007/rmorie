@@ -7,7 +7,8 @@
 .vepan_variant(v)
 }
 \arguments{
-\item{v}{A list; the body reads \code{$alt}, \code{$chrom}, \code{$id}, \code{$pos}, \code{$ref} from it.}
+\item{v}{A list; the body reads \code{$alt}, \code{$chrom}, \code{$id}, \code{$pos},
+\code{$ref} from it.}
 }
 \value{
 A list with \code{chrom}, \code{pos}, \code{ref}, \code{alt}, \code{id}.

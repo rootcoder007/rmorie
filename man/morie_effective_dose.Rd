@@ -26,7 +26,6 @@ morie_effective_dose(
 \item{link}{"probit" or "logit".}
 
 \item{log_scale}{Were the doses logged?}
-
 }
 \value{
 A list with \code{ed}, \code{lower}, \code{upper}, \code{fieller_g}, \code{bounded},

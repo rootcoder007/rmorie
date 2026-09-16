@@ -15,7 +15,8 @@
 A list with \code{G}, \code{ts}, \code{order}.
 }
 \description{
-A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}.
+A step of the causdidwd_native implementation. Called by \code{morie_etwfe},
+\code{morie_imputation}.
 See the file header for the source the module follows.
 the source it follows.
 }

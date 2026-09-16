@@ -26,7 +26,6 @@ morie_geron_bart(
 \item{model}{Optional function(corrupted, tgt) -> per-token log-probs.}
 
 \item{seed}{LCG seed.}
-
 }
 \value{
 List with \code{corrupted}, \code{spans}, \code{n_masked}, \code{n_spans}, \code{loss},

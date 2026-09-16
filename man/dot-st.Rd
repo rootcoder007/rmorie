@@ -25,7 +25,8 @@
 A list with \code{s}, \code{t}.
 }
 \description{
-A step of the flow_an_native implementation. Called by \code{.coupling_forward}, \code{.coupling_inverse}.
+A step of the flow_an_native implementation. Called by \code{.coupling_forward},
+\code{.coupling_inverse}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -13,7 +13,8 @@
 The value of \code{do.call}.
 }
 \description{
-A step of the vidgen_native implementation. Called by \code{morie_vidgen_space_only_conv}, \code{morie_vidgen_spatial_attention}.
+A step of the vidgen_native implementation. Called by
+\code{morie_vidgen_space_only_conv}, \code{morie_vidgen_spatial_attention}.
 See the file header for the source the module follows.
 source it follows.
 }

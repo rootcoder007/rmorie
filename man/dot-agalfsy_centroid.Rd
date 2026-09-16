@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the agalfsy_native implementation. Called by \code{.agalfsy_rotate}, \code{morie_agalfsy_rl_pose_search}.
+A step of the agalfsy_native implementation. Called by \code{.agalfsy_rotate},
+\code{morie_agalfsy_rl_pose_search}.
 See the file header for the source the module follows.
 the source it follows.
 }

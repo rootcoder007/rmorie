@@ -13,7 +13,8 @@
 The value of \code{writeBin}.
 }
 \description{
-A step of the secarg_native implementation. Called by \code{morie_secarg_prehash}, \code{morie_secarg_variable_hash}.
+A step of the secarg_native implementation. Called by \code{morie_secarg_prehash},
+\code{morie_secarg_variable_hash}.
 See the file header for the source the module follows.
 source it follows.
 }

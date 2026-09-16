@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma2}, \code{.causrddc_kernel_constants}, \code{.causrddc_local_poly_weights}.
+A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma2},
+\code{.causrddc_kernel_constants}, \code{.causrddc_local_poly_weights}.
 See the file header for the source the module follows.
 the source it follows.
 }

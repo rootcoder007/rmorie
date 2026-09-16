@@ -14,7 +14,8 @@ morie_geron_kernel_pca_rbf_hmkprbf(X, n_components, gamma = NULL)
 \item{gamma}{Kernel width (default 1/n_features).}
 }
 \value{
-List with X_projected, eigenvalues, alphas, K, explained_variance_ratio, gamma, estimate, n, method.
+List with X_projected, eigenvalues, alphas, K, explained_variance_ratio,
+gamma, estimate, n, method.
 }
 \description{
 Kernel PCA with RBF kernel (Geron Ch 7, morie.fn hmkprbf)

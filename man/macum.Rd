@@ -15,7 +15,6 @@ morie_macum(yi, vi, order = NULL, level = 0.95)
 \item{order}{optional sort key (e.g. year).}
 
 \item{level}{confidence level for each cumulative interval.}
-
 }
 \value{
 list: estimate, cumulative, se, ci_lower, ci_upper, tau2,

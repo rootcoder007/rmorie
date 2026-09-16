@@ -17,7 +17,10 @@
 The value of \code{list}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_cloze_prompt_template}, \code{morie_kamath_ch3_prefix_prompt_template}, \code{morie_kamath_ch3_translate_prefix_prompt}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch3_cloze_prompt_template},
+\code{morie_kamath_ch3_prefix_prompt_template},
+\code{morie_kamath_ch3_translate_prefix_prompt}.
 See the file header for the source the module follows.
 for the source it follows.
 }

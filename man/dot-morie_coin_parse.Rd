@@ -15,7 +15,8 @@
 A list with \code{y}, \code{x}.
 }
 \description{
-A step of the coin_native implementation. Called by \code{morie_indep_test}, \code{morie_oneway_test}, \code{morie_wilcox_test}.
+A step of the coin_native implementation. Called by \code{morie_indep_test},
+\code{morie_oneway_test}, \code{morie_wilcox_test}.
 See the file header for the source the module follows.
 source it follows.
 }

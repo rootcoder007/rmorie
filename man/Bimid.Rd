@@ -22,7 +22,7 @@ A robust measure of dispersion.  With \code{M} the sample median and
 \code{MAD} the unscaled median absolute deviation, set
 \code{Y = (x - M) / (9 MAD)} and \code{a = 1} when \code{|Y| < 1} and
 \code{0} otherwise.  Then
-\code{zeta = sqrt(n) sqrt(sum(a (x - M)^2 (1 - Y^2)^4)) /
+\eqn{zeta = sqrt(n) sqrt(sum(a (x - M)^2 (1 - Y^2)^4)) /
 |sum(a (1 - Y^2)(1 - 5 Y^2))|}, and the biweight midvariance is
 \code{zeta^2}.
 }

@@ -15,7 +15,8 @@
 The value of \code{v}, as built in the body.
 }
 \description{
-A step of the ts_joseph implementation. Called by \code{.morie_jo_pair}, \code{morie_adfur}, \code{morie_autocorf} and 23 others in the module.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_pair},
+\code{morie_adfur}, \code{morie_autocorf} and 23 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

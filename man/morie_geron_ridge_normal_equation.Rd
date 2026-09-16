@@ -12,7 +12,6 @@ morie_geron_ridge_normal_equation(X, y, alpha, intercept = TRUE)
 \item{alpha}{Non-negative penalty.}
 
 \item{intercept}{Zero the first diagonal entry.}
-
 }
 \value{
 List with \code{theta}, \code{fitted}, \code{residuals}, \code{rss}, \code{penalty}.

@@ -18,7 +18,8 @@ open-data categories (Assault, Auto Theft, Bicycle Theft, Break and
 Enter, Homicide, Robbery, Shooting and Firearm Discharges, Theft
 from Motor Vehicle, Theft Over) and provides per-year +
 per-neighbourhood CSI aggregates.
-\subsection{Important caveats}{
+
+Important caveats
 \enumerate{
 \item TPS open-data categories aggregate over multiple Criminal Code
 sub-offences.  The weights here are representative blends
@@ -30,17 +31,15 @@ the CCJS UCR microdata, which is not in TPS open data.
 update (\emph{Reweighting the Crime Severity Index}, Catalogue
 85-004-X) and the Toronto-specific override tables in the CCJS
 Annual Statistics 2023.  Newer revisions (StatsCan revises every
-5 years) may shift values by 5-15\% without changing relative
+5 years) may shift values by 5-15\\% without changing relative
 ordering.  Override via the \code{weights} argument.
 \item Statistics Canada itself reports two CSI variants ("Total CSI"
 and "Violent CSI").  Functions here default to Total but accept
 \code{variant = "violent"} to use violent-only weights, where
 non-violent categories (B&E, theft) are zeroed.
 }
-}
 
-\subsection{References}{
-
+References
 Wallace, M., Turner, J., Babyak, C., & Matarazzo, A. (2009).
 Measuring Crime in Canada: Introducing the Crime Severity Index
 and Improvements to the Uniform Crime Reporting Survey.
@@ -48,5 +47,4 @@ Statistics Canada Catalogue 85-004-X.
 
 Statistics Canada (2024).  Crime Severity Index, Census Metropolitan
 Areas, 2023.  Catalogue 35-10-0190-01.
-}
 }

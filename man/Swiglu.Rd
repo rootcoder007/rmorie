@@ -27,8 +27,6 @@ Swiglu(
 \item{beta}{the Swish parameter.}
 
 \item{W2}{optional output projection.}
-
-
 }
 \value{
 list: estimate, out, gate, ffn, beta, method.

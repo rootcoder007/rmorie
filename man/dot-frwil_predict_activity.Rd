@@ -7,7 +7,8 @@
 .frwil_predict_activity(fit, compound)
 }
 \arguments{
-\item{fit}{A list; the body reads \code{$coefficients}, \code{$groups}, \code{$n_positions} from it.}
+\item{fit}{A list; the body reads \code{$coefficients}, \code{$groups},
+\code{$n_positions} from it.}
 
 \item{compound}{Passed to \code{unlist}.}
 }

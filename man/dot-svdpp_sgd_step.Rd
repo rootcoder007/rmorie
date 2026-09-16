@@ -42,7 +42,8 @@
 \item{exponent}{Passed to \code{.svdpp_predict}. Defaults to \code{-0.5}.}
 }
 \value{
-A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u}, \code{q_i}, \code{y}, \code{note}.
+A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u},
+\code{q_i}, \code{y}, \code{note}.
 }
 \description{
 A step of the svdpp_native implementation. Called by \code{.svdpp_fit}.

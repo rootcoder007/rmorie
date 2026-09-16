@@ -28,9 +28,11 @@ Treats yearly category counts as the prey \eqn{x(t)} and a 3-year
 rolling mean as a placeholder predator \eqn{y(t)} (TPS does not yet
 expose a public mass-stop / use-of-force time series). Under the
 classical Lotka-Volterra system,
-\deqn{\dot x = \alpha x - \beta x y, \quad \dot y = \delta x y - \gamma y,}{dot x = alpha x - beta x y, dot y = delta x y - gamma y,}
+\deqn{\dot x = \alpha x - \beta x y, \quad \dot y = \delta x y - \gamma y,}{dot x =
+alpha x - beta x y, dot y = delta x y - gamma y,}
 the small-amplitude oscillation around the equilibrium has period
-\eqn{T = 2 \pi / \sqrt{\alpha \gamma}}{T = 2 pi / sqrt(alpha gamma)}. Growth rate \eqn{\alpha}{alpha} is
+\eqn{T = 2 \pi / \sqrt{\alpha \gamma}}{T = 2 pi / sqrt(alpha gamma)}. Growth rate
+\eqn{\alpha}{alpha} is
 estimated from log-differences of \code{x}; \eqn{\gamma}{gamma} symmetrically
 from \code{y}; the interaction rates \eqn{\beta, \delta}{beta, delta} follow by
 the equilibrium relations.

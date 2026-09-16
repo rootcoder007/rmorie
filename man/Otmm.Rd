@@ -14,7 +14,6 @@ Otmm(X, Y, batch_size, n_batches, epsilon)
 \item{n_batches}{Number of batches.}
 
 \item{epsilon}{Entropic strength, positive.}
-
 }
 \value{
 List with \code{loss}, \code{per_batch}, \code{batch_size},

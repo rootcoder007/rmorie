@@ -13,7 +13,8 @@
 A matrix, from \code{as.matrix}.
 }
 \description{
-A step of the linwlr_native implementation. Called by \code{morie_linwlr}, \code{morie_linwlr_blip}.
+A step of the linwlr_native implementation. Called by \code{morie_linwlr},
+\code{morie_linwlr_blip}.
 See the file header for the source the module follows.
 source it follows.
 }

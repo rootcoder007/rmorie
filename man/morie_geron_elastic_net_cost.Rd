@@ -14,8 +14,6 @@ morie_geron_elastic_net_cost(X, y, theta, alpha, r, penalize_intercept = FALSE)
 \item{r}{L1 mix ratio in [0, 1].}
 
 \item{penalize_intercept}{Include theta[1] in both penalties.}
-
-
 }
 \value{
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty},
@@ -23,7 +21,7 @@ List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty},
 }
 \description{
 J = MSE + r alpha L1 + ((1-r)/2) alpha L2, stacked on
-\code{morie_geron_lasso_cost()} at \code{r * alpha}.
+\code{\link[=morie_geron_lasso_cost]{morie_geron_lasso_cost()}} at \code{r * alpha}.
 }
 \examples{
 X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)

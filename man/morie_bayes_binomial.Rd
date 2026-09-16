@@ -23,13 +23,6 @@ morie_bayes_binomial(
 \item{pi, w, n, a, b}{Beta posterior pieces.}
 
 \item{logliks, log_priors}{Grid posterior pieces.}
-
-
-
-
-
-
-
 }
 \value{
 List with posterior_prob, posterior_density, bayes_estimate,

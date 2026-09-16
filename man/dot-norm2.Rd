@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the perfat_native implementation. Called by \code{draw_projections}, \code{favor_features}.
+A step of the perfat_native implementation. Called by \code{draw_projections},
+\code{favor_features}.
 See the file header for the source the module follows.
 source it follows.
 }

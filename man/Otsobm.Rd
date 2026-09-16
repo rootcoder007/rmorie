@@ -11,14 +11,21 @@ Otsobm(mu, nu, Laplace_inv)
 
 \item{Laplace_inv}{Inverse (or pseudo-inverse) of the Laplacian,
 symmetric positive semi-definite.}
-
 }
 \value{
 List with \code{W1_sob}, \code{quad_form}, \code{mass_gap},
 \code{n}.
 }
 \description{
-Replace W_1 by a Hilbert norm on the difference of the measures
+\eqn{_1} linearised around a common reference measure is exactly the
+\code{H^{-1}} norm of the difference, and unlike \eqn{_1} that norm
+is quadratic: it needs one linear solve, not a linear program, and it
+embeds into a Hilbert space so kernel methods apply directly. The price
+is that it is only a first-order approximation.
+}
+\details{
+Formula: \eqn{W_1(mu,nu) ~ ||mu - nu||_{H^{-1}} = sqrt((mu-nu)'
+(-Delta)^\{-1\} (mu-nu))} -- Peyre (2018), Section 2
 }
 \references{
 Peyre, G. (2018). ESAIM: Control, Optimisation and Calculus

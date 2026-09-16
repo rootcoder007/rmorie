@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_top_p}, \code{morie_kamath_ch3_prompt_softmax_label}, \code{morie_kamath_ch6_affect_lm} and 7 others in the module.
+A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_top_p},
+\code{morie_kamath_ch3_prompt_softmax_label}, \code{morie_kamath_ch6_affect_lm} and 7
+others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

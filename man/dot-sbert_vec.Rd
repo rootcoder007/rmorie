@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the sbert_native implementation. Called by \code{classification_features}, \code{cosine_similarity}.
+A step of the sbert_native implementation. Called by \code{classification_features},
+\code{cosine_similarity}.
 See the file header for the source the module follows.
 source it follows.
 }

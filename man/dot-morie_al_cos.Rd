@@ -15,7 +15,9 @@
 A numeric value.
 }
 \description{
-A step of the alammar_llm_native implementation. Called by \code{morie_alammar_cosine_similarity_loss}, \code{morie_alammar_infonce_loss}, \code{morie_alammar_multiple_negatives_ranking} and 1 others in the module.
+A step of the alammar_llm_native implementation. Called by
+\code{morie_alammar_cosine_similarity_loss}, \code{morie_alammar_infonce_loss},
+\code{morie_alammar_multiple_negatives_ranking} and 1 others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

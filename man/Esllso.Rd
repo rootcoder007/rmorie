@@ -30,6 +30,17 @@ coordinate descent exploits the fact that each one-dimensional
 subproblem has the closed-form soft-threshold solution, so no
 quadratic program is needed.
 }
+\details{
+Columns with no variation are left unpenalised: shrinking an intercept
+towards zero is a statement about the origin of the response scale, not
+about model complexity.
+
+Formula: \code{min_beta 0.5 ||y - X beta||^2 + lambda ||beta||_1},
+cycled as \eqn{beta_j <- S(x_j primer + ||x_j||^2 beta_j, lambda) /
+||x_j||^2} with \code{S} the soft-threshold -- Tibshirani (1996);
+Hastie, Tibshirani and Friedman, The Elements of Statistical Learning,
+section 3.4.2. The penalty is on the same scale as n times glmnet's
+}
 \examples{
 Esllso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda_ = 5L)
 }

@@ -11,7 +11,8 @@
 
 \item{rt}{Numeric; passed to \code{abs}.}
 
-\item{distribution}{The body requires: \code{distribution} must be 'poisson' or 'binomial'. Defaults to \code{"poisson"}.}
+\item{distribution}{The body requires: \code{distribution} must be 'poisson' or 'binomial'.
+Defaults to \code{"poisson"}.}
 
 \item{...}{Passed through.}
 }

@@ -18,7 +18,6 @@ G = I_n.}
 \item{sigma_g2}{the chapter's sigma_g^2, the prior variance of those effects.}
 
 \item{max_iter, tol}{fixed-point controls.}
-
 }
 \value{
 list: estimate, z_samples, beta_samples, b, n, method.

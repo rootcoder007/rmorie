@@ -10,8 +10,6 @@ Ototk(a, b, f, g)
 \item{a, b}{Source and target marginals.}
 
 \item{f, g}{Kantorovich potentials.}
-
-
 }
 \value{
 List with \code{dual_val}, \code{estimate}, \code{n}, \code{m}.

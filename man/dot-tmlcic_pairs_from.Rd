@@ -7,7 +7,8 @@
 .tmlcic_pairs_from(cluster, n)
 }
 \arguments{
-\item{cluster}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{cluster}{Optional; may be \code{NULL}. Coerced to character by the body, with
+\code{as.character}.}
 
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}
 }

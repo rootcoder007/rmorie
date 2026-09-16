@@ -10,9 +10,6 @@ Editdist(s1, s2, insert = 1, delete = 1, substitute = 1)
 \item{s1, s2}{Sequences to compare (character strings or vectors).}
 
 \item{insert, delete, substitute}{Edit costs.}
-
-
-
 }
 \value{
 The edit distance.
@@ -20,7 +17,7 @@ The edit distance.
 \description{
 Formula: the Wagner-Fischer dynamic program, \eqn{D[0,0]=0},
 \eqn{D[i,0] = i c_{del}}, \eqn{D[0,j] = j c_{ins}},
-\eqn{D[i,j] = \min(D[i-1,j]+c_{del},\, D[i,j-1]+c_{ins},\,
+\eqn{D\[i,j\] = \min(D[i-1,j]+c_{del},\, D[i,j-1]+c_{ins},\,
 D[i-1,j-1] + c_{sub}[s_1[i] \ne s_2[j]])}, answer at \eqn{D[m,n]}.
 Only the previous row is kept, so memory is O(n); the recurrence is
 unchanged.  Inputs are compared element by element, so token vectors
@@ -32,5 +29,8 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Editdist(V, V)
 }
 \references{
-Levenshtein (1966), Soviet Physics Doklady 10:707-710 (the metric); Wagner and Fischer (1974), JACM 21:168-173 (the dynamic program).  Neither was fetchable -- Doklady is not online and JACM is paywalled -- so this is the standard published recurrence, anchored in the harness against R's own utils::adist.
+Levenshtein (1966), Soviet Physics Doklady 10:707-710 (the metric); Wagner
+and Fischer (1974), JACM 21:168-173 (the dynamic program).  Neither was fetchable --
+Doklady is not online and JACM is paywalled -- so this is the standard published
+recurrence, anchored in the harness against R's own utils::adist.
 }

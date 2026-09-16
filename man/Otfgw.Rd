@@ -18,7 +18,6 @@ Otfgw(M, Cx, Cy, a, b, alpha = 0.5, max_iter = 20)
 \item{alpha}{Trade-off in [0, 1].}
 
 \item{max_iter}{Conditional-gradient steps.}
-
 }
 \value{
 List with \code{T}, \code{cost}, \code{wass_part},
@@ -33,7 +32,7 @@ evidence dominates. Solved by conditional gradient with an exact
 transport step, so no entropic blur enters the plan.
 }
 \details{
-Formula: \code{min_T (1-alpha) <T, M> + alpha sum_ijkl |Cx_ik -
+Formula: \eqn{min_T (1-alpha) <T, M> + alpha sum_ijkl |Cx_ik -
 Cy_jl|^2 T_ij T_kl} -- Vayer et al. (2020) eq. (3). The linearised cost
 is \code{(1-alpha) M - 4 alpha Cx T Cy} and the step is
 \code{gamma = 2/(k+2)}.

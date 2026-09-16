@@ -15,7 +15,9 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the causrddc_native implementation. Called by \code{.causrddc_global_derivative}, \code{.causrddc_hc_sigma2}, \code{.causrddc_local_poly_weights} and 1 others in the module.
+A step of the causrddc_native implementation. Called by
+\code{.causrddc_global_derivative}, \code{.causrddc_hc_sigma2},
+\code{.causrddc_local_poly_weights} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

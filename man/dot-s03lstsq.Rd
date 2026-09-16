@@ -17,7 +17,8 @@
 The value of \code{.s03ridgesolve}.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.btnpqr_fit}, \code{.btsieve_arfit}, \code{.dssoot_ols} and 36 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.btnpqr_fit},
+\code{.btsieve_arfit}, \code{.dssoot_ols} and 36 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

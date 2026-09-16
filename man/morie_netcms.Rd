@@ -14,7 +14,6 @@ morie_netcms(data = NULL, S = NULL, lam = 0.1, tol = 1e-08, maxit = 500)
 \item{lam}{L1 penalty lambda >= 0.}
 
 \item{tol, maxit}{Coordinate-descent controls.}
-
 }
 \value{
 A list with elements \code{precision},

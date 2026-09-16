@@ -17,8 +17,6 @@ morie_malrr(ai, bi, ci, di, add = 0.5, level = 0.95)
 \item{add}{continuity correction for zero cells.}
 
 \item{level}{confidence level.}
-
-
 }
 \value{
 list: estimate, se, variance, risk_ratio, ci_lower, ci_upper,

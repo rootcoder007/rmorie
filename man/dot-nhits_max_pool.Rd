@@ -11,7 +11,8 @@
 
 \item{kernel}{Coerced to integer by the body, with \code{as.integer}.}
 
-\item{stride}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{stride}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 A vector, from \code{vapply}.

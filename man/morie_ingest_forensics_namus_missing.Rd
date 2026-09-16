@@ -21,7 +21,6 @@ national feed.}
 \item{page_size}{Records per request (default 200).}
 
 \item{user_agent, timeout}{Standard request knobs.}
-
 }
 \value{
 A base R \code{data.frame}.

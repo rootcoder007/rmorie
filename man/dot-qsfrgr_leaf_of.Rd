@@ -7,7 +7,8 @@
 .qsfrgr_leaf_of(node, x)
 }
 \arguments{
-\item{node}{A list; the body reads \code{$f}, \code{$l}, \code{$leaf}, \code{$r}, \code{$rows}, \code{$thr} from it.}
+\item{node}{A list; the body reads \code{$f}, \code{$l}, \code{$leaf}, \code{$r},
+\code{$rows}, \code{$thr} from it.}
 
 \item{x}{A vector; indexed elementwise.}
 }

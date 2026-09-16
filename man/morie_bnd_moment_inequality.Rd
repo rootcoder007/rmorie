@@ -17,7 +17,7 @@ morie_bnd_moment_inequality(
 \item{data}{observations, rows passed to \code{g}.}
 
 \item{g}{\verb{function(data, theta)} returning an (n, J) matrix
-oriented so the model says \verb{E[g_j] <= 0}.}
+oriented so the model says \code{E[g_j] <= 0}.}
 
 \item{theta_grid}{candidate parameter values.}
 

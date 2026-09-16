@@ -16,10 +16,12 @@
 \item{gbound}{Numeric; combined arithmetically in the body. Defaults to \code{0.025}.}
 }
 \value{
-A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1}, \code{Q0}, \code{ic}, \code{n}.
+A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1},
+\code{Q0}, \code{ic}, \code{n}.
 }
 \description{
-A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte}, \code{Tmlper} and 2 others in the module.
+A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte},
+\code{Tmlper} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

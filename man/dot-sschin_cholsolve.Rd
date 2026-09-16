@@ -15,7 +15,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow}, \code{.sschin_ols}.
+A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow},
+\code{.sschin_ols}.
 See the file header for the source the module follows.
 source it follows.
 }

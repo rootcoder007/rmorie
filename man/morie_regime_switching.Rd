@@ -12,7 +12,7 @@ morie_regime_switching(x, k_regimes = 2)
 \item{k_regimes}{Number of latent regimes. Default 2.}
 }
 \value{
-Named list with \code{mu, sigma, transition,
+Named list with \eqn{mu, sigma, transition,
   smoothed_probabilities, loglik, n, k_regimes, method}.
 }
 \description{

@@ -29,13 +29,6 @@ morie_itrans(
 \item{wffn1, bffn1, wffn2, bffn2}{the feed-forward network}
 
 \item{wproj, bproj}{the output projection}
-
-
-
-
-
-
-
 }
 \value{
 list(forecast, attn, tokens, nvariates, T, D, horizon,

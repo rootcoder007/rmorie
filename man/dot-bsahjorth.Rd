@@ -14,7 +14,8 @@
 A list with \code{activity}, \code{mobility}, \code{form_factor}.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{PdMonitor}, \code{SeizDet}, \code{VagFeat}.
+A step of the rangayyan_phys implementation. Called by \code{PdMonitor},
+\code{SeizDet}, \code{VagFeat}.
 See the file header for the source the module follows.
 the source it follows.
 }

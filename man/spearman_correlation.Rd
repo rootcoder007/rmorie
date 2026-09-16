@@ -10,7 +10,6 @@ spearman_correlation(x, y, confidence = 0.95)
 \item{x, y}{Numeric vectors.}
 
 \item{confidence}{Confidence level.}
-
 }
 \value{
 An object of class \code{"morie_test_result"}.

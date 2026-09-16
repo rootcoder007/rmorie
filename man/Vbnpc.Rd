@@ -29,7 +29,6 @@ Vbnpc(
 \item{max_iter}{Maximum coordinate sweeps.}
 
 \item{tol}{Stop when the ELBO moves by less than this.}
-
 }
 \value{
 List with \code{phi}, \code{m}, \code{s2}, \code{gamma1},

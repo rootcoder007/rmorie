@@ -22,10 +22,12 @@
 \item{columns_fn}{Passed to \code{.morie_w4c_grow}.}
 }
 \value{
-A list with \code{leaf}, \code{feature}, \code{threshold}, \code{n}, \code{left}, \code{right}.
+A list with \code{leaf}, \code{feature}, \code{threshold}, \code{n},
+\code{left}, \code{right}.
 }
 \description{
-A step of the geron_w4c_native implementation. Called by \code{morie_geron_random_forest}, \code{morie_geron_regression_tree}.
+A step of the geron_w4c_native implementation. Called by
+\code{morie_geron_random_forest}, \code{morie_geron_regression_tree}.
 See the file header for the source the module follows.
 the source it follows.
 }

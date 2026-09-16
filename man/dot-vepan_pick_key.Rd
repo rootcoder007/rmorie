@@ -7,7 +7,8 @@
 .vepan_pick_key(r)
 }
 \arguments{
-\item{r}{A list; the body reads \code{$biotype}, \code{$canonical}, \code{$most_severe}, \code{$transcript} from it.}
+\item{r}{A list; the body reads \code{$biotype}, \code{$canonical},
+\code{$most_severe}, \code{$transcript} from it.}
 }
 \value{
 The value of \code{list}.

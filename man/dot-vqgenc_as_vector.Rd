@@ -13,7 +13,8 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the vqgenc_native implementation. Called by \code{.vqgenc_codebook_loss}, \code{.vqgenc_commitment_loss}, \code{.vqgenc_straight_through}.
+A step of the vqgenc_native implementation. Called by \code{.vqgenc_codebook_loss},
+\code{.vqgenc_commitment_loss}, \code{.vqgenc_straight_through}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -21,7 +21,8 @@ morie_survival_rmst_diff(time, event, group, tau = NULL, alpha = 0.05)
 \item{alpha}{significance level for the interval.}
 }
 \value{
-list with the difference, its standard error, the confidence interval and each group's RMST.
+list with the difference, its standard error, the confidence interval and each
+group's RMST.
 }
 \description{
 RMST_1 - RMST_2 with standard error sqrt(V1 + V2), the two groups treated as independent.

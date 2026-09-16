@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the trupek_native implementation. Called by \code{.trupek_cauchy}, \code{.trupek_dogleg}, \code{.trupek_exact} and 2 others in the module.
+A step of the trupek_native implementation. Called by \code{.trupek_cauchy},
+\code{.trupek_dogleg}, \code{.trupek_exact} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

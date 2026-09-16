@@ -18,8 +18,6 @@ morie_twelvefold_way(
 \item{balls, boxes}{"labelled" or "unlabelled".}
 
 \item{condition}{"any", "injective" or "surjective".}
-
-
 }
 \value{
 A list with \code{count} (a \code{morie_bigint}), \code{formula}, \code{cell}.

@@ -20,5 +20,9 @@ List with \code{penalized_loss}, \code{penalty}, \code{ep}, \code{lambda}, \code
 Formula: L(w, lambda) = L(w) + 0.5 * lambda * w'w
 }
 \references{
-Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7.3 p. 403: L(w, lambda) = L(w) + 0.5 * lambda * E_P, with E_P = w'w for the ridge (weight decay, L2) penalty.  Read from the chapter PDF, not recalled.
+Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+Statistical Machine Learning Methods for Genomic Prediction, Springer,
+doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7.3 p. 403: L(w, lambda) = L(w) +
+0.5 * lambda * E_P, with E_P = w'w for the ridge (weight decay, L2) penalty.  Read
+from the chapter PDF, not recalled.
 }

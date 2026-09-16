@@ -17,7 +17,8 @@
 The value of \code{.morie_bx_solve}.
 }
 \description{
-A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp}, \code{Lstm}, \code{Rbfn}.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp},
+\code{Lstm}, \code{Rbfn}.
 See the file header for the source the module follows.
 the source it follows.
 }

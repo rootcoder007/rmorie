@@ -16,7 +16,6 @@ Arimaxhr(y, X, p = 1, q = 1, d = 0, m = NULL)
 \item{d}{Order of differencing.}
 
 \item{m}{Stage-one long-autoregression order, or NULL.}
-
 }
 \value{
 List with beta, phi, theta, intercept, sigma2, noise, resid,

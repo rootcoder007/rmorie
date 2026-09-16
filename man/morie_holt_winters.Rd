@@ -26,8 +26,6 @@ when NULL.}
 
 \item{seasonal}{"additive" or "multiplicative"; the latter requires
 strictly positive data.}
-
-
 }
 \value{
 list: forecast, level, trend, season, fitted, residuals,

@@ -16,17 +16,13 @@ morie_causal_forest_bootstrap(
 )
 }
 \arguments{
-\item{y, d, x}{As in \code{morie_causal_forest()}.}
+\item{y, d, x}{As in \code{\link[=morie_causal_forest]{morie_causal_forest()}}.}
 
 \item{B}{Bootstrap replicates.}
 
 \item{n_trees, min_leaf, seed}{Per-forest hyperparameters.}
 
 \item{alpha}{Two-sided interval level.}
-
-
-
-
 }
 \value{
 List with \code{cate}, \code{ci_low}, \code{ci_high}, \code{se}, \code{ate},

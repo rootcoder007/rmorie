@@ -15,7 +15,8 @@
 The value of \code{bounds}, as built in the body.
 }
 \description{
-A step of the csrnn implementation. Called by \code{morie_csr_nn_test}, \code{morie_ripley_csr_test}.
+A step of the csrnn implementation. Called by \code{morie_csr_nn_test},
+\code{morie_ripley_csr_test}.
 See the file header for the source the module follows.
 it follows.
 }

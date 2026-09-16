@@ -3,7 +3,6 @@
 \name{.tmlphd_lasso}
 \alias{.tmlphd_lasso}
 \title{Cyclic coordinate descent for a weighted lasso; column 1
-
 unpenalised}
 \usage{
 .tmlphd_lasso(X, y, lam, w = NULL, sweeps = 400L)
@@ -24,7 +23,6 @@ The value of \code{beta}, as built in the body.
 }
 \description{
 Cyclic coordinate descent for a weighted lasso; column 1
-
 unpenalised
 }
 \section{Fixed sweep count and fixed cyclic order, so both language arms}{

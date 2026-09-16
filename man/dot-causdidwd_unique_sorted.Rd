@@ -13,7 +13,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects}.
+A step of the causdidwd_native implementation. Called by \code{morie_etwfe},
+\code{morie_imputation}, \code{morie_two_way_fixed_effects}.
 See the file header for the source the module follows.
 the source it follows.
 }

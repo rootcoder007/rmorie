@@ -26,15 +26,15 @@ make that visible.
 \details{
 Formula: Yhat = N ybar; v(Yhat) = N^2 (1 - f) s^2 / n, f = n/N
 }
+\examples{
+b <- c(1.5, 2.5, 3.5)
+res <- Srstotal(y = b, N = 3L)
+res
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 2: Yhat = N ybar with V(Yhat) = N^2 (N - n)/N S^2/n for simple random
 sampling without replacement. Cross-checked against the CRAN package
 samplingbook 1.2.4, whose Smean uses the same finite-population-
 corrected variance for the mean.
-}
-\examples{
-b <- c(1.5, 2.5, 3.5)
-res <- Srstotal(y = b, N = 3L)
-res
 }

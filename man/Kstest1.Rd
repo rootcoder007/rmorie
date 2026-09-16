@@ -10,7 +10,6 @@ Kstest1(x, y, terms = 200)
 \item{x, y}{The two samples, each of length at least 1.}
 
 \item{terms}{Terms of the alternating series used for H(t).}
-
 }
 \value{
 List with \code{statistic}, \code{scaled}, \code{p_value},

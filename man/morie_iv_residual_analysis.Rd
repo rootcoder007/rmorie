@@ -29,7 +29,8 @@ regressors included in both the structural equation and the
 first stage. \code{NULL} (default) for a just-identified design.}
 }
 \value{
-A \code{data.frame} with columns \code{fitted}, \code{residual}, \code{abs_resid}, \code{sq_resid}.
+A \code{data.frame} with columns \code{fitted}, \code{residual},
+\code{abs_resid}, \code{sq_resid}.
 }
 \description{
 IV residual analysis

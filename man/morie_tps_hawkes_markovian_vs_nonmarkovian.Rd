@@ -31,6 +31,7 @@ suitable for dashboard surfaces.
   rr <- morie_tps_hawkes_markovian_vs_nonmarkovian(df,
                                                     ds_name = "Assault")
 }
+
 }
 \references{
 Kwan TKJ, Chen F, Dunsmuir WTM (2024). arXiv:2408.09710.

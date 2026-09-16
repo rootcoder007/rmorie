@@ -22,14 +22,16 @@ morie_fauzi_thm2_3_var_brdkdfe(n, h, a, fx, density, r1 = NULL, r2 = NULL)
 
 \item{r1, r2}{Kernel constants; default to the Gaussian \code{r1} and the \code{r2}
 evaluated at this \code{a}.}
-
 }
 \value{
 Named list with \code{variance}, \code{se}, \code{edfvar}, \code{gain}, \code{r1}, \code{r2}, \code{method}.
 }
 \description{
 Theorem 2.3:
-\deqn{\mathrm{Var}[\tilde F_X(x)] = \frac{F(1-F)}{n} - \frac{h}{n}\Big[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big]f_X(x) + o(h/n),}{Var[Ftilde(x)] = F(1-F)/n - (h/n)[2(a^4+1)/(a^2-1)^2 r1 + r2] f(x) + o(h/n),}
+\deqn{\mathrm{Var}[\tilde F_X(x)] = \frac{F(1-F)}{n} -
+\frac{h}{n}\Big[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big]f_X(x) +
+o(h/n),}{Var[Ftilde(x)] = F(1-F)/n - (h/n)[2(a^4+1)/(a^2-1)^2 r1 + r2] f(x) +
+o(h/n),}
 with \code{r1} from (2.9) and \code{r2} from (2.10).
 }
 \details{

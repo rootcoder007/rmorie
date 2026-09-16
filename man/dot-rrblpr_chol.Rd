@@ -13,7 +13,8 @@
 The value of \code{L}, as built in the body.
 }
 \description{
-A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}, \code{morie_rrblpr_rr_blup}.
+A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at},
+\code{morie_rrblpr_rr_blup}.
 See the file header for the source the module follows.
 source it follows.
 }

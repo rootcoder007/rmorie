@@ -16,7 +16,8 @@
 \item{C}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10000}.}
 }
 \value{
-A list, whose contents depend on the branch taken; across the branches its names are \code{target}, \code{copied}.
+A list, whose contents depend on the branch taken; across the branches its
+names are \code{target}, \code{copied}.
 }
 \description{
 A step of the polyak_native implementation. No other function in the package calls it.

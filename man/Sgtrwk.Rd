@@ -25,14 +25,14 @@ not an optimisation: a truncation at K terms is a different kernel.
 \details{
 Formula: \code{K = sum_{k>=0} lam^k A^k = (I - lam A)^{-1}}.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- Sgtrwk(A = A)
+res
+}
 \references{
 Gaertner, T., Flach, P. & Wrobel, S. (2003). On graph
 kernels: hardness results and efficient alternatives. Learning
 Theory and Kernel Machines, LNCS 2777, pages 129-143.
 \doi{10.1007/978-3-540-45167-9_11}.
-}
-\examples{
-A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
-res <- Sgtrwk(A = A)
-res
 }

@@ -17,9 +17,6 @@ list(w1, b1, w2, b2, wskip)}
 \item{wglobal}{global linear map from lookback to horizon}
 
 \item{horizon}{forecast length}
-
-
-
 }
 \value{
 list(forecast, temporal, global, horizon, p, encdim, nfeat,

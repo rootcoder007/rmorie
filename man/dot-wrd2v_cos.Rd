@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy}, \code{morie_wrd2v_wrd2v}.
+A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy},
+\code{morie_wrd2v_wrd2v}.
 See the file header for the source the module follows.
 source it follows.
 }

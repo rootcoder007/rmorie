@@ -13,13 +13,16 @@
 
 \item{ridge}{Numeric; passed to \code{max}. Defaults to \code{1e-10}.}
 
-\item{obs_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{obs_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
 The value of \code{beta}, as built in the body.
 }
 \description{
-A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_g}, \code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the module.
+A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_g},
+\code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the
+module.
 See the file header for the source the module follows.
 source it follows.
 }

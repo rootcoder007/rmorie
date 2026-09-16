@@ -51,13 +51,16 @@
 
 \item{n_alpha}{Coerced to integer by the body, with \code{as.integer}.}
 
-\item{max_sim}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{max_sim}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
-A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations}, \code{unresolved_steps}.
+A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations},
+\code{unresolved_steps}.
 }
 \description{
-A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc}, \code{.abcgp.synthetic_abc}.
+A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc},
+\code{.abcgp.synthetic_abc}.
 See the file header for the source the module follows.
 source it follows.
 }

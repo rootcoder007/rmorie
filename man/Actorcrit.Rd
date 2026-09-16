@@ -38,10 +38,6 @@ Actorcrit(
 \item{theta, w}{starting parameters.}
 
 \item{discount_actor}{carry the book's I factor.}
-
-
-
-
 }
 \value{
 list: estimate, deltas, theta, w, n, method.

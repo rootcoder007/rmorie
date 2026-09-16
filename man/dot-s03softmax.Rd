@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{Bertrec}, \code{Deitkd} and 7 others in the module.
+A step of the helpers_s03 implementation. Called by \code{Autoint}, \code{Bertrec},
+\code{Deitkd} and 7 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

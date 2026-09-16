@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the tail1_core implementation. Called by \code{.ecfp_percol}, \code{Admmlasso}, \code{Advielbo} and 154 others in the module.
+A step of the tail1_core implementation. Called by \code{.ecfp_percol},
+\code{Admmlasso}, \code{Advielbo} and 154 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

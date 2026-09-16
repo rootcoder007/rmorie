@@ -20,7 +20,6 @@ morie_geron_convolutional_autoencoder(
 \item{stride}{Shared stride.}
 
 \item{output_activation}{"identity", "tanh", "sigmoid".}
-
 }
 \value{
 List with \code{x_hat}, \code{code}, \code{code_shape}, \code{loss}, \code{mse_per_pixel},

@@ -15,7 +15,8 @@
 The value of \code{Z}, as built in the body.
 }
 \description{
-A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
+A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+\code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
 See the file header for the source the module follows.
 source it follows.
 }

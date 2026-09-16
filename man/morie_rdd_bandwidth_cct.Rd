@@ -15,7 +15,6 @@ morie_rdd_bandwidth_cct(x, y, cutoff = 0, kernel = "triangular", p = 1)
 \code{"uniform"}, \code{"gaussian"}.}
 
 \item{p}{Polynomial order for the local fit.}
-
 }
 \value{
 A named list with \code{bandwidth}, \code{method} and

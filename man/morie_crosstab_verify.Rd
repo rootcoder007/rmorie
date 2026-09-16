@@ -12,7 +12,6 @@ morie_crosstab_verify(original, recoded, declared)
 \item{declared}{Named character vector: the mapping the analyst
 CLAIMS was applied (\code{c(old = "new", ...)}). Identity is
 assumed for old values absent from \code{declared}.}
-
 }
 \value{
 Invisibly, the cross-tabulation (as a data frame), if and

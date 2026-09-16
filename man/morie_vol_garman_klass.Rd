@@ -10,9 +10,6 @@ morie_vol_garman_klass(open_, high, low, close, periods_per_year = NULL)
 \item{open_, high, low, close}{per-bar OHLC.}
 
 \item{periods_per_year}{optional annualisation factor.}
-
-
-
 }
 \value{
 list: variance, sigma, sigma_annualised, range_term,

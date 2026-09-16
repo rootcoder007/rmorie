@@ -14,10 +14,13 @@
 \item{ignore_index}{Passed to \code{!=}. Defaults to \code{-100L}.}
 }
 \value{
-A list with \code{loss}, \code{perplexity}, \code{token_losses}, \code{n_tokens}, \code{vocab_size}.
+A list with \code{loss}, \code{perplexity}, \code{token_losses},
+\code{n_tokens}, \code{vocab_size}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_instruction_tuning_loss}, \code{morie_kamath_llava_visual_instruction}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_instruction_tuning_loss},
+\code{morie_kamath_llava_visual_instruction}.
 See the file header for the source the module follows.
 for the source it follows.
 }

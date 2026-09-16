@@ -15,7 +15,8 @@
 The value of \code{x}, as built in the body.
 }
 \description{
-A step of the bayopt_native implementation. Called by \code{gp_posterior}, \code{gp_posterior_gradient}.
+A step of the bayopt_native implementation. Called by \code{gp_posterior},
+\code{gp_posterior_gradient}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -12,7 +12,6 @@ morie_chernoff_bound(n, p, t, tail = c("upper", "lower"))
 \item{t}{Threshold.}
 
 \item{tail}{"upper" or "lower".}
-
 }
 \value{
 A list with \code{bound}, \code{exact_tail}, \code{holds}, \code{vacuous},

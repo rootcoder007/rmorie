@@ -16,14 +16,19 @@ Crp(n, alpha = 1, u = NULL, seed = 1)
 \item{seed}{See Usage.}
 }
 \value{
-List with \code{table} (assignment per customer), \code{counts}, \code{n_tables}, \code{expected_tables}, \code{alpha}, \code{n}.
+List with \code{table} (assignment per customer), \code{counts}, \code{n_tables},
+\code{expected_tables}, \code{alpha}, \code{n}.
 }
 \description{
-Formula: P(z_i = k) = n_k / (i - 1 + alpha) for an occupied table k, and alpha / (i - 1 + alpha) for a new one
+Formula: P(z_i = k) = n_k / (i - 1 + alpha) for an occupied table k, and alpha / (i -
+1 + alpha) for a new one
 }
 \examples{
 Crp(n = 5L)
 }
 \references{
-Aldous (1985), Exchangeability and related topics, Ecole d'Ete de Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes. Neither is held locally; the seating rule and the E[K] = sum_i alpha/(alpha + i - 1) identity are the standard published forms.
+Aldous (1985), Exchangeability and related topics, Ecole d'Ete de
+Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes.
+Neither is held locally; the seating rule and the E[K] = sum_i alpha/(alpha + i - 1)
+identity are the standard published forms.
 }

@@ -10,7 +10,8 @@
 \item{g}{Passed to \code{.prsLL_ll1_table}.}
 }
 \value{
-A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table}, \code{first}, \code{follow}, \code{left_recursive}, \code{method}.
+A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table},
+\code{first}, \code{follow}, \code{left_recursive}, \code{method}.
 }
 \description{
 A step of the prsLL_native implementation. No other function in the package calls it.

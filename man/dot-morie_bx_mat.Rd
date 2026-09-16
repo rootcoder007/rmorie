@@ -15,7 +15,8 @@
 The value of \code{M}, as built in the body.
 }
 \description{
-A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel}, \code{BmiDec}, \code{BPursuit} and 18 others in the module.
+A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel},
+\code{BmiDec}, \code{BPursuit} and 18 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

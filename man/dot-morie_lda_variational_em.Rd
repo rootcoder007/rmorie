@@ -33,7 +33,9 @@
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.}
 }
 \value{
-A list with \code{estimate}, \code{beta}, \code{elbo_history}, \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations}, \code{method}.
+A list with \code{estimate}, \code{beta}, \code{elbo_history},
+\code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations},
+\code{method}.
 }
 \description{
 A step of the lda_native implementation. No other function in the package calls it.

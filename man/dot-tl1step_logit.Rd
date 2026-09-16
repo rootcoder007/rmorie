@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}.
+A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm},
+\code{.tl1step_is_universal}.
 See the file header for the source the module follows.
 the source it follows.
 }

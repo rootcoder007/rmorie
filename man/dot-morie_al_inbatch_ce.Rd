@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the alammar_llm_native implementation. Called by \code{morie_alammar_multiple_negatives_ranking}, \code{morie_alammar_openclip_contrastive}, \code{morie_alammar_simcse_dropout_aug}.
+A step of the alammar_llm_native implementation. Called by
+\code{morie_alammar_multiple_negatives_ranking},
+\code{morie_alammar_openclip_contrastive}, \code{morie_alammar_simcse_dropout_aug}.
 See the file header for the source the module follows.
 for the source it follows.
 }

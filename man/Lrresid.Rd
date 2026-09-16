@@ -30,7 +30,7 @@ Pearson residuals (8.67):
 
 Model deviance and deviance residuals (8.68):
 \code{D = sum d_i^2} with
-\code{d_i = sign(y_i - n_i p_i) sqrt(2 [y_i log(y_i / (n_i p_i)) +
+\eqn{d_i = sign(y_i - n_i p_i) sqrt(2 [y_i log(y_i / (n_i p_i)) +
 (n_i - y_i) log((n_i - y_i) / (n_i (1 - p_i)))])}.
 
 BOOK ERRATUM in (8.68): the printed radicand is
@@ -47,7 +47,7 @@ leading +/-.
 
 Influence measure (8.69):
 \code{Delta D_i = d_i^2 + r_i^2 h_ii / (1 - h_ii)}, given on page 838
-as R code \code{idev <- deviance.resid^2 + pearson.resid^2 *
+as R code \eqn{idev <- deviance.resid^2 + pearson.resid^2 *
 hats/(1-hats)}.
 
 Terms \code{0 log 0} arising when y_i = 0 or y_i = n_i are taken as 0.

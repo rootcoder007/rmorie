@@ -14,10 +14,13 @@
 \item{w}{Numeric; passed to \code{sqrt}.}
 }
 \value{
-A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
+A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted},
+\code{residuals}, \code{sigma2}.
 }
 \description{
-A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{morie_gentmt}.
+A step of the gentmt_native implementation. Called by
+\code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
+\code{morie_gentmt}.
 See the file header for the source the module follows.
 source it follows.
 }

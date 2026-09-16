@@ -7,10 +7,14 @@
 .vepan_transcript(tr)
 }
 \arguments{
-\item{tr}{A list; the body reads \code{$biotype}, \code{$canonical}, \code{$cds_end}, \code{$cds_start}, \code{$chrom}, \code{$exons}, \code{$gene}, \code{$id}, \code{$strand} from it.}
+\item{tr}{A list; the body reads \code{$biotype}, \code{$canonical}, \code{$cds_end},
+\code{$cds_start}, \code{$chrom}, \code{$exons}, \code{$gene}, \code{$id},
+\code{$strand} from it.}
 }
 \value{
-A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons}, \code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start}, \code{end}.
+A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons},
+\code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start},
+\code{end}.
 }
 \description{
 A step of the vepan_native implementation. Called by \code{morie_vepan_transcript_sequence}.

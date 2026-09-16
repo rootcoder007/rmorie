@@ -39,7 +39,9 @@
 \item{hgvs_p}{Carried through into a list the body builds.}
 }
 \value{
-A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon}, \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c}, \code{pos}, \code{ref}, \code{alt}.
+A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon},
+\code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c},
+\code{pos}, \code{ref}, \code{alt}.
 }
 \description{
 A step of the snpeff_native implementation. Called by \code{annotate_variant}.

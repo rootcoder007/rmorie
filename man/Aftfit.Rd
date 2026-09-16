@@ -21,16 +21,19 @@ morie_survival_aft(time, event, X, dist = "weibull", alpha = 0.05)
 \item{alpha}{significance level for the intervals.}
 }
 \value{
-list with the coefficients, standard errors, time ratios, the scale and the log-likelihood.
+list with the coefficients, standard errors, time ratios, the scale and the
+log-likelihood.
 }
 \description{
 log T = x'beta + sigma W.
-Coefficients act MULTIPLICATIVELY ON TIME rather than on the hazard, so exp(beta) is a time ratio and not a hazard ratio.
+Coefficients act MULTIPLICATIVELY ON TIME rather than on the hazard, so exp(beta) is a
+time ratio and not a hazard ratio.
 }
 \examples{
 Aftfit(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
   X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
-Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley, Chapter 3.
+Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of
+Failure Time Data, 2nd ed., Wiley, Chapter 3.
 }

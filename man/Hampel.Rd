@@ -10,8 +10,6 @@ Hampel(r, a = 2, b = 4, c = 8)
 \item{r}{Residuals, usually already scaled by a robust sigma.}
 
 \item{a, b, c}{The three bend points, 0 < a <= b < c.}
-
-
 }
 \value{
 list: estimate (mean psi), psi, psi_deriv, n_reject, n, a, b, c,
@@ -29,7 +27,10 @@ was printed in this session.  MASS returns the weight psi(u)/u; multiplying
 it back by u gives
 }
 \details{
-\deqn{\psi(r) = r,\ |r| \le a; \quad a\,\mathrm{sign}(r),\ a < |r| \le b; \quad a(c-|r|)\mathrm{sign}(r)/(c-b),\ b < |r| \le c; \quad 0,\ |r| > c,}{psi(r) = r for |r| <= a; a sign(r) for a < |r| <= b; a (c - |r|) sign(r)/(c - b) for b < |r| <= c; 0 for |r| > c,}
+\deqn{\psi(r) = r,\ |r| \le a; \quad a\,\mathrm{sign}(r),\ a < |r| \le b; \quad
+a(c-|r|)\mathrm{sign}(r)/(c-b),\ b < |r| \le c; \quad 0,\ |r| > c,}{psi(r) = r for |r|
+<= a; a sign(r) for a < |r| <= b; a (c - |r|) sign(r)/(c - b) for b < |r| <= c; 0 for
+|r| > c,}
 
 linear, then flat, then descending to zero, then zero.  Its derivative,
 which MASS returns for deriv = 1, is 1, 0, -a/(c-b), 0 on the same four

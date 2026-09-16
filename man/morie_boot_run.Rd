@@ -19,7 +19,7 @@ morie_boot_run(data, statistic, R = 2000L, strata = NULL, ...)
 }
 \value{
 A \code{morie_boot} object (native; consumable by
-\code{morie_boot_basic_ci()}).
+\code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}).
 }
 \description{
 Thin pass-through that adapts an rmorie-style
@@ -37,5 +37,5 @@ if (requireNamespace("boot", quietly = TRUE)) {
 }
 }
 \seealso{
-\code{morie_boot()}, \code{morie_boot_basic_ci()}.
+\code{\link[=morie_boot]{morie_boot()}}, \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
 }

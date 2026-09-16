@@ -26,7 +26,6 @@ morie_horowitz_both_nonpar_transform(
 \item{nu}{Integer, grid points for F.}
 
 \item{bandwidth}{Numeric or NULL, passed to the estimator of T.}
-
 }
 \value{
 Named list with T_hat, F_hat, beta_hat, u_grid, A_n, B_n,
@@ -35,7 +34,7 @@ y_grid, y0, index, F_in_unit, A_le_B, n, method.
 \description{
 Horowitz (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Section 6.3, pages 215-219.  Adds the estimator of F
-to the estimator of T implemented in \code{Hrztmod()}.  Because U is
+to the estimator of T implemented in \code{\link[=Hrztmod]{Hrztmod()}}.  Because U is
 independent of X, P(U <= u | a < Z <= b) = F(u) for any a, b in the
 support of Z, so for any y2 < y1
 }

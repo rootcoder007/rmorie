@@ -18,7 +18,6 @@ Ctde(X, M, Y, m, C = NULL, a = 1, astar = 0)
 \item{C}{Optional matrix of covariates, one row per observation.}
 
 \item{a, astar}{Exposure contrast; the default is 1 versus 0.}
-
 }
 \value{
 list: estimate (CDE(m)), pnde, tnde, tnie, pnie, te,
@@ -41,7 +40,7 @@ doi:10.1037/a0031034, open access at PMC3659198, equation (0.3), with a the
 new exposure level and a* the baseline one:
 
 \preformatted{CDE = (theta1 + theta3 m)(a - a*)
-NDE = {theta1 + theta3 (beta0 + beta1 a* + beta2\' c)}(a - a*)
+NDE = {theta1 + theta3 (beta0 + beta1 a* + beta2' c)}(a - a*)
 NIE = (theta2 beta1 + theta3 beta1 a)(a - a*)}
 
 from the mediator model E[M|a,c] = beta0 + beta1 a + beta2' c and the

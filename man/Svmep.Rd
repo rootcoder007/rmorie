@@ -28,9 +28,6 @@ Svmep(
 \item{n_iter}{Projected-gradient steps.}
 
 \item{kernel, gamma, degree, coef0}{Passed to the shared Gram builder.}
-
-
-
 }
 \value{
 Named list with \code{estimate} (mean epsilon-insensitive loss),

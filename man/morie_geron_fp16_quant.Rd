@@ -10,7 +10,8 @@ morie_geron_fp16_quant(x)
 \item{x}{Values to cast.}
 }
 \value{
-List with \code{value}, \code{sign}, \code{exponent}, \code{mantissa_field}, \code{rel_error}, \code{overflowed}, \code{underflowed}.
+List with \code{value}, \code{sign}, \code{exponent}, \code{mantissa_field}, \code{rel_error},
+\code{overflowed}, \code{underflowed}.
 }
 \description{
 Real bit manipulation: round-to-nearest-even via R's storage.mode

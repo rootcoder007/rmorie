@@ -15,7 +15,8 @@
 A logical value.
 }
 \description{
-A step of the prsLL_native implementation. Called by \code{.prsLL_first_sets}, \code{.prsLL_follow_sets}.
+A step of the prsLL_native implementation. Called by \code{.prsLL_first_sets},
+\code{.prsLL_follow_sets}.
 See the file header for the source the module follows.
 source it follows.
 }

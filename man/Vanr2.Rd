@@ -18,7 +18,8 @@ Named list with \code{estimate}, \code{G}, \code{freq}, \code{weights},
 \code{denominator}, \code{n_lines}, \code{n_markers}, \code{method}.
 }
 \description{
-\deqn{G = \sum_j w_j z_j z_j^T / (2 \sum_j w_j p_j(1-p_j))}{G = sum_j w_j z_j z_j' / (2 sum_j w_j p_j(1-p_j))}
+\deqn{G = \sum_j w_j z_j z_j^T / (2 \sum_j w_j p_j(1-p_j))}{G = sum_j w_j z_j z_j' /
+(2 sum_j w_j p_j(1-p_j))}
 The default weights are VanRaden's reciprocal marker variances,
 \eqn{w_j = 1/(2p_j(1-p_j))}, which give rare markers more influence.
 Unit weights reproduce method 1 exactly.

@@ -15,7 +15,8 @@
 The value of \code{structure}.
 }
 \description{
-A step of the rangayyan_class implementation. Called by \code{.morie_rg_asfrac}, \code{.morie_rg_fadd}, \code{.morie_rg_fmul} and 2 others in the module.
+A step of the rangayyan_class implementation. Called by \code{.morie_rg_asfrac},
+\code{.morie_rg_fadd}, \code{.morie_rg_fmul} and 2 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

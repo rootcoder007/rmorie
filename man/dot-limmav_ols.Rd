@@ -17,7 +17,8 @@
 A list with \code{beta}, \code{fit}, \code{sd}, \code{inv}, \code{df}.
 }
 \description{
-A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}, \code{.limmav_weighted_lm}.
+A step of the limmav_native implementation. Called by \code{.limmav_voom_weights},
+\code{.limmav_weighted_lm}.
 See the file header for the source the module follows.
 source it follows.
 }

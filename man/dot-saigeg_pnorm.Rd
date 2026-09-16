@@ -13,7 +13,8 @@
 The value of \code{pnorm}.
 }
 \description{
-A step of the saigeg_native implementation. Called by \code{.saigeg_normal_pvalue}, \code{.saigeg_saddlepoint_pvalue}.
+A step of the saigeg_native implementation. Called by \code{.saigeg_normal_pvalue},
+\code{.saigeg_saddlepoint_pvalue}.
 See the file header for the source the module follows.
 source it follows.
 }

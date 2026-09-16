@@ -7,7 +7,8 @@
 .schab_st_wls_objective(emp, model_fn)
 }
 \arguments{
-\item{emp}{A list; the body reads \code{$counts}, \code{$gamma}, \code{$space_lags}, \code{$time_lags} from it.}
+\item{emp}{A list; the body reads \code{$counts}, \code{$gamma}, \code{$space_lags},
+\code{$time_lags} from it.}
 
 \item{model_fn}{Accepted by the signature and not used anywhere in the body.}
 }

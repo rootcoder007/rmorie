@@ -7,7 +7,8 @@
 .predict_tree(tree, x)
 }
 \arguments{
-\item{tree}{A list; the body reads \code{$cut}, \code{$j}, \code{$leaf}, \code{$left}, \code{$right}, \code{$value} from it.}
+\item{tree}{A list; the body reads \code{$cut}, \code{$j}, \code{$leaf}, \code{$left},
+\code{$right}, \code{$value} from it.}
 
 \item{x}{A vector; indexed elementwise.}
 }

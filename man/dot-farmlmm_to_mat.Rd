@@ -13,7 +13,8 @@
 The value of \code{X}, as built in the body.
 }
 \description{
-A step of the farmlmm_native implementation. Called by \code{.confounding}, \code{.farmcpu}, \code{.farmlmm_wls} and 2 others in the module.
+A step of the farmlmm_native implementation. Called by \code{.confounding},
+\code{.farmcpu}, \code{.farmlmm_wls} and 2 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

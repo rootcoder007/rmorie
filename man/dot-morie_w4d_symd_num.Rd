@@ -13,7 +13,8 @@
 The value of \code{list}.
 }
 \description{
-A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_symd_diff}, \code{.morie_w4d_symd_simplify}.
+A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_symd_diff},
+\code{.morie_w4d_symd_simplify}.
 See the file header for the source the module follows.
 the source it follows.
 }

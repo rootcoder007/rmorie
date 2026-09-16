@@ -14,7 +14,8 @@
 \item{target_parameters}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \value{
-A list with \code{bottleneck}, \code{rounded}, \code{parameters}, \code{target}, \code{cardinality}.
+A list with \code{bottleneck}, \code{rounded}, \code{parameters},
+\code{target}, \code{cardinality}.
 }
 \description{
 A step of the resnxt_native implementation. No other function in the package calls it.

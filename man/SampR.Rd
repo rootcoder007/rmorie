@@ -8,7 +8,6 @@ SampR(x, y)
 }
 \arguments{
 \item{x, y}{equal-length data vectors, n >= 2, neither constant.}
-
 }
 \value{
 list(r, cov).

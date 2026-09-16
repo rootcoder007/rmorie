@@ -20,14 +20,17 @@
 
 \item{nugget}{Passed to \code{.abcgp.mle_lengthscale}.}
 
-\item{lengthscale}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lengthscale}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
 \item{kernel}{Passed to \code{.abcgp.mle_lengthscale}. Defaults to \code{"sqexp"}.}
 
 \item{tau2}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \value{
-A list with \code{design}, \code{values}, \code{beta}, \code{tau2}, \code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r}, \code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
+A list with \code{design}, \code{values}, \code{beta}, \code{tau2},
+\code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r},
+\code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
 }
 \description{
 A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.

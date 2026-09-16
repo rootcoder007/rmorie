@@ -25,7 +25,6 @@ permutation_test(
 or \code{"less"}.}
 
 \item{seed}{Random seed.}
-
 }
 \value{
 A \code{morie_permutation_test_result}.

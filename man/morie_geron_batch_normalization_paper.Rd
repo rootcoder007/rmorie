@@ -24,15 +24,13 @@ morie_geron_batch_normalization_paper(
 \item{momentum}{Optional EMA factor in [0, 1).}
 
 \item{running_mean, running_var}{Optional statistics to update.}
-
-
 }
 \value{
 List with \code{Y}, \code{x_hat}, \code{batch_mean}, \code{batch_var},
 \code{running_mean}, \code{running_var}.
 }
 \description{
-Same normalisation as \code{morie_geron_batch_normalization()} but grbn's
+Same normalisation as \code{\link[=morie_geron_batch_normalization]{morie_geron_batch_normalization()}} but grbn's
 running-statistic convention: defaults are zeros/ones, the update is
 optional (only when \code{momentum} is given), and it uses the BIASED batch
 variance rather than the unbiased one.

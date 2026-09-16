@@ -15,7 +15,8 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{.bsalpc}, \code{InfantCry}, \code{PdMonitor} and 1 others in the module.
+A step of the rangayyan_phys implementation. Called by \code{.bsalpc},
+\code{InfantCry}, \code{PdMonitor} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -26,10 +26,12 @@
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-12}.}
 }
 \value{
-A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star}, \code{g1}, \code{g0}, \code{H1}, \code{H0}.
+A list with \code{epsilon}, \code{QAstar}, \code{Q1star}, \code{Q0star},
+\code{g1}, \code{g0}, \code{H1}, \code{H0}.
 }
 \description{
-A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot}, \code{Tmleor} and 3 others in the module.
+A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot},
+\code{Tmleor} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

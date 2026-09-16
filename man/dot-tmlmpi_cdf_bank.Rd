@@ -21,7 +21,10 @@
 A list with \code{F}, \code{IC}.
 }
 \description{
-Targeted counterfactual CDFs and their influence curves on a grid.
+SPDX-License-Identifier: AGPL-3.0-or-later
+}
+\section{Targeted counterfactual CDFs and their influence curves on a grid.}{
+
 }
 
 \section{One point-treatment TMLE per threshold on the binary outcome # I(Y}{

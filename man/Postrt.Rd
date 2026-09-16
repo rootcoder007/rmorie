@@ -23,6 +23,10 @@ List with \code{estimate}, \code{weights}, \code{factors},
 The same method as \eqn{link{Poststs}} seen from the weight side:
 with unit design weights the two return the same number. The adjusted
 weights sum to \eqn{_h} within every stratum exactly, which is the
+calibration property that makes the adjustment worth doing.
+}
+\details{
+Formula: \eqn{w_i' = w_i N_h / sum_{j in h} w_j}; the estimate is the
 weighted mean
 }
 \examples{

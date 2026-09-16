@@ -24,7 +24,7 @@ The mirror image of \code{Bndpos}. Assuming treatment never helps,
 only the lower bound is estimated, and it uses every \code{(y, D)} pair.
 }
 \details{
-Formula: \code{lower = [E(y | D = 1) P(D = 1) + y_min P(D = 0)] -
+Formula: \eqn{lower = [E(y | D = 1) P(D = 1) + y_min P(D = 0)] -
 [E(y | D = 0) P(D = 0) + y_max P(D = 1)]}, \code{upper = 0}, with
 \code{y_max = max(y)}.
 }

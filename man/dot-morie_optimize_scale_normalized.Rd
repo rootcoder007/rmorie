@@ -21,7 +21,9 @@
 A list with \code{beta}, \code{value}.
 }
 \description{
-A step of the horowitz_native4 implementation. Called by \code{morie_choice_based_max_score}, \code{morie_ordered_max_score}, \code{morie_panel_max_score}.
+A step of the horowitz_native4 implementation. Called by
+\code{morie_choice_based_max_score}, \code{morie_ordered_max_score},
+\code{morie_panel_max_score}.
 See the file header for the source the module follows.
 the source it follows.
 }

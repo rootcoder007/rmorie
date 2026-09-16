@@ -14,8 +14,6 @@ morie_twostage_design(s_w, s_b, c1, c2, v_max = NA, c_max = NA)
 \item{v_max}{Target variance.}
 
 \item{c_max}{Budget.}
-
-
 }
 \value{
 List with m_opt, n_for_variance, n_for_budget.

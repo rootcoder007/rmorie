@@ -7,9 +7,11 @@
 .vepan_hgvs_p(info, terms)
 }
 \arguments{
-\item{info}{A list; the body reads \code{$alt_aa}, \code{$protein_position}, \code{$ref_aa} from it.}
+\item{info}{A list; the body reads \code{$alt_aa}, \code{$protein_position},
+\code{$ref_aa} from it.}
 
-\item{terms}{One of \code{"frameshift_variant"}, \code{"start_retained_variant"}, \code{"stop_retained_variant"}, \code{"synonymous_variant"}.}
+\item{terms}{One of \code{"frameshift_variant"}, \code{"start_retained_variant"},
+\code{"stop_retained_variant"}, \code{"synonymous_variant"}.}
 }
 \value{
 A character value.

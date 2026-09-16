@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_dpo_loss}, \code{morie_geron_regression_mlp_output}.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_dpo_loss}, \code{morie_geron_regression_mlp_output}.
 See the file header for the source the module follows.
 for the source it follows.
 }

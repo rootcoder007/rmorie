@@ -25,12 +25,12 @@ link from \code{i} to \code{j}, the sweep is
 \eqn{a \leftarrow A^\top h}, \eqn{h \leftarrow A a}, each
 normalised to unit L2 length.
 }
-\references{
-Kleinberg, J. M. (1999). Authoritative sources in a
-hyperlinked environment. Journal of the ACM, 46(5), 604-632.
-}
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 res <- morie_hits(A = A)
 res
+}
+\references{
+Kleinberg, J. M. (1999). Authoritative sources in a
+hyperlinked environment. Journal of the ACM, 46(5), 604-632.
 }

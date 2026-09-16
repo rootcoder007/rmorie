@@ -15,7 +15,9 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the wasserman_native implementation. Called by \code{.morie_wsm_boot_reps}, \code{morie_wasserman_gibbs_sampler}, \code{morie_wasserman_mcmc_metropolis} and 1 others in the module.
+A step of the wasserman_native implementation. Called by \code{.morie_wsm_boot_reps},
+\code{morie_wasserman_gibbs_sampler}, \code{morie_wasserman_mcmc_metropolis} and 1
+others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

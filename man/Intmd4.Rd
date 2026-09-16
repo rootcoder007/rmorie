@@ -18,7 +18,6 @@ Intmd4(X, M, Y, Cc = NULL, a = 1, astar = 0, m = 0)
 \item{a, astar}{Exposure contrast levels.}
 
 \item{m}{Level the mediator is controlled at for the CDE.}
-
 }
 \value{
 List with \code{estimate}, \code{cde}, \code{intref},
@@ -35,8 +34,8 @@ could name on its own.
 }
 \details{
 Formula: \code{TE = CDE + INTref + INTmed + PIE} from
-\code{Y = th0 + th1 a + th2 m + th3 a m + th4\'c} and
-\code{M = b0 + b1 a + b2\'c}.
+\eqn{Y = th0 + th1 a + th2 m + th3 a m + th4\'c} and
+\eqn{M = b0 + b1 a + b2\'c}.
 }
 \examples{
 Intmd4(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))

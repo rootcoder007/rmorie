@@ -12,7 +12,6 @@ morie_kamath_ch8_wmd(x_n, y_n, C, F = NULL)
 \item{C}{Cost matrix.}
 
 \item{F}{Optional transport plan.}
-
 }
 \value{
 List with \code{estimate}, \code{flow}, \code{dual_objective}, \code{optimal}.

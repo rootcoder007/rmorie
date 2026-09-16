@@ -15,7 +15,8 @@
 The value of \code{as.integer}.
 }
 \description{
-A step of the warpL_native implementation. Called by \code{.warpL_sample_violation}, \code{morie_warpL_estimate_rank}.
+A step of the warpL_native implementation. Called by \code{.warpL_sample_violation},
+\code{morie_warpL_estimate_rank}.
 See the file header for the source the module follows.
 source it follows.
 }

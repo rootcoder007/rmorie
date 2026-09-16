@@ -14,7 +14,8 @@ morie_geron_int8_quant(x, n_bits = 8, symmetric = TRUE)
 \item{symmetric}{Symmetric or asymmetric scheme.}
 }
 \value{
-List with q, dequantized, scale, zero_point, max_error, rel_error, compression, estimate, n, method.
+List with q, dequantized, scale, zero_point, max_error, rel_error,
+compression, estimate, n, method.
 }
 \description{
 Post-training integer quantization (Geron Ch 17, morie.fn hmint8)

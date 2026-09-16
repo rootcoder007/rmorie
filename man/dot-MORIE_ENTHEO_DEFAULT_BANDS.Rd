@@ -4,7 +4,9 @@
 \alias{.MORIE_ENTHEO_DEFAULT_BANDS}
 \title{Canonical band edges (Hz). Matches Rangayyan & Krishnan (2024) Ch. 5
 and the Timmermann 2023 Methods}
-
+\usage{
+.MORIE_ENTHEO_DEFAULT_BANDS
+}
 \description{
 Canonical band edges (Hz). Matches Rangayyan & Krishnan (2024) Ch. 5
 and the Timmermann 2023 Methods

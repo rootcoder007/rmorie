@@ -3,7 +3,9 @@
 \name{MORIE_SIUIAP_REPORTS}
 \alias{MORIE_SIUIAP_REPORTS}
 \title{SIU IAP panel reports (Public Safety Canada, 2022-2024)}
-
+\usage{
+MORIE_SIUIAP_REPORTS
+}
 \description{
 SIU IAP panel reports (Public Safety Canada, 2022-2024)
 }

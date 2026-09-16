@@ -10,7 +10,7 @@ morie_state_space_model(x)
 \item{x}{Numeric univariate series.}
 }
 \value{
-Named list with \code{filtered_state, filtered_state_variance,
+Named list with \eqn{filtered_state, filtered_state_variance,
   smoothed_state, loglik, Q, R, n, method}.
 }
 \description{

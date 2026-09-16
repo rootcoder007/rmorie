@@ -18,7 +18,8 @@
 
 \item{Z}{Optional; may be \code{NULL}. A matrix; passed to \code{ncol}.}
 
-\item{kernel}{One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}. Defaults to \code{"rbf"}.}
+\item{kernel}{One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}.
+Defaults to \code{"rbf"}.}
 
 \item{gamma}{Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.}
 
@@ -30,7 +31,8 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
+A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
+\code{morie_esl_svm_kernel}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY}, \code{DeltaDecomp} and 10 others in the module.
+A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY},
+\code{DeltaDecomp} and 10 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

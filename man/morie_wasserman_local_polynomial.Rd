@@ -14,7 +14,6 @@ morie_wasserman_local_polynomial(x, x_data, y_data, h, p = 1L)
 \item{h}{Positive bandwidth.}
 
 \item{p}{Polynomial degree (>= 0) with n > p.}
-
 }
 \value{
 List with \code{estimate}, \code{values}, \code{derivatives}, \code{h}, \code{p},

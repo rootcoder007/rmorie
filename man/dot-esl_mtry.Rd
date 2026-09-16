@@ -9,7 +9,8 @@
 \arguments{
 \item{p}{Numeric; passed to \code{sqrt}.}
 
-\item{task}{The body requires: task must be 'regression' or 'classification'. Defaults to \code{"regression"}.}
+\item{task}{The body requires: task must be 'regression' or 'classification'. Defaults
+to \code{"regression"}.}
 }
 \value{
 Nothing; this branch always raises.

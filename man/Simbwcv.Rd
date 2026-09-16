@@ -50,7 +50,6 @@ morie_horowitz_bw_cv_sim(
 form h_opt = h_0 n^(-2/(2P+d+2)).}
 
 \item{d}{Optional integer dimension for that same formula.}
-
 }
 \value{
 Named list with bandwidth, cv, grid, cvcurve, hreference,

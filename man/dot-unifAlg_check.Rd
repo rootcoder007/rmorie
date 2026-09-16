@@ -13,7 +13,9 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once}, \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose} and 5 others in the module.
+A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once},
+\code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose} and 5 others in the
+module.
 See the file header for the source the module follows.
 the source it follows.
 }

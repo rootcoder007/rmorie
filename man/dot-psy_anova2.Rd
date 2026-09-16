@@ -14,7 +14,8 @@
 \item{rater}{Coerced to vector by the body, with \code{as.vector}.}
 }
 \value{
-A list with \code{MSR}, \code{MSC}, \code{MSE}, \code{MSW}, \code{n}, \code{k}, \code{matrix}.
+A list with \code{MSR}, \code{MSC}, \code{MSE}, \code{MSW}, \code{n},
+\code{k}, \code{matrix}.
 }
 \description{
 table. An unbalanced table makes the mean squares non-orthogonal and

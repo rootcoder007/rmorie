@@ -12,7 +12,6 @@ morie_bdtrns(y_obs, p_obs, y_lo, y_hi)
 \item{p_obs}{Observation probability in [0, 1].}
 
 \item{y_lo, y_hi}{Logical outcome bounds.}
-
 }
 \value{
 A list with elements \code{lower}, \code{upper},

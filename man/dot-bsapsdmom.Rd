@@ -12,10 +12,12 @@
 \item{power}{Numeric; passed to \code{cumsum}.}
 }
 \value{
-A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz}, \code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.
+A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz},
+\code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec}, \code{EggFeat} and 4 others in the module.
+A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec},
+\code{EggFeat} and 4 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

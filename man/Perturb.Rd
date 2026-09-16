@@ -10,7 +10,6 @@ Perturb(x, y, total = 1)
 \item{x, y}{Strictly positive vectors of parts, the same length.}
 
 \item{total}{Constant the result sums to.}
-
 }
 \value{
 List with \code{composition}, \code{total}, \code{D}.

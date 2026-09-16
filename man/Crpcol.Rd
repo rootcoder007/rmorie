@@ -18,7 +18,6 @@ Crpcol(y, alpha = 1, n_iter = 50, mu0 = 0, tau2 = 10, sigma2 = 1, seed = 42)
 \item{sigma2}{Known within-cluster variance.}
 
 \item{seed}{Seed of the deterministic stream.}
-
 }
 \value{
 List with \code{estimate} (number of clusters), \code{z},

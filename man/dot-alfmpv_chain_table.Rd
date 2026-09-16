@@ -12,7 +12,8 @@
 \item{idx}{Passed to \code{sprintf}.}
 }
 \value{
-A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps}, \code{coverage}, \code{n}.
+A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps},
+\code{coverage}, \code{n}.
 }
 \description{
 A step of the alfmpv_native implementation. Called by \code{morie_alfmpv_msa_pairing}.

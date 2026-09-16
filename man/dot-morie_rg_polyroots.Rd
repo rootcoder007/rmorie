@@ -13,7 +13,8 @@
 The value of \code{coefs}, as built in the body.
 }
 \description{
-A step of the rangayyan_filt2 implementation. Called by \code{BwAnalog}, \code{BwDigital}, \code{BwHp}.
+A step of the rangayyan_filt2 implementation. Called by \code{BwAnalog},
+\code{BwDigital}, \code{BwHp}.
 See the file header for the source the module follows.
 the source it follows.
 }

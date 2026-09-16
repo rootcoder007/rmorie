@@ -14,7 +14,8 @@
 \item{beta}{Numeric; combined arithmetically in the body.}
 }
 \value{
-A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards}, \code{beta}, \code{n}, \code{model}, \code{method}.
+A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards},
+\code{beta}, \code{n}, \code{model}, \code{method}.
 }
 \description{
 A step of the dpoF_native implementation. Called by \code{morie_dpoF}.

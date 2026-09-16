@@ -39,7 +39,11 @@
 \item{sizes}{Accepted by the signature and not used anywhere in the body.}
 }
 \value{
-A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty}, \code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share}, \code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity}, \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d}, \code{n_trees}, \code{kind}, \code{failed}, \code{method}.
+A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty},
+\code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share},
+\code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity},
+\code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d},
+\code{n_trees}, \code{kind}, \code{failed}, \code{method}.
 }
 \description{
 A step of the frfgrf_native implementation. Called by \code{morie_frfgrf}.

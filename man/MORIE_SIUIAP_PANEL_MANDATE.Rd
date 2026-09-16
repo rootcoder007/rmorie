@@ -3,7 +3,9 @@
 \name{MORIE_SIUIAP_PANEL_MANDATE}
 \alias{MORIE_SIUIAP_PANEL_MANDATE}
 \title{SIU IAP panel mandate (long-form prose)}
-
+\usage{
+MORIE_SIUIAP_PANEL_MANDATE
+}
 \description{
 SIU IAP panel mandate (long-form prose)
 }

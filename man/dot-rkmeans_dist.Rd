@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}, \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
+A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate},
+\code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
 See the file header for the source the module follows.
 the source it follows.
 }

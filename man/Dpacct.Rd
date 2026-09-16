@@ -18,11 +18,16 @@ Dpacct(sigma, sample_rate, steps, delta = 1e-05, max_order = 64)
 \item{max_order}{See Usage.}
 }
 \value{
-List with \code{epsilon}, \code{order}, \code{logmgf}, \code{delta}, \code{sigma}, \code{sample_rate}, \code{steps}.
+List with \code{epsilon}, \code{order}, \code{logmgf}, \code{delta}, \code{sigma},
+\code{sample_rate}, \code{steps}.
 }
 \description{
-Formula: alpha(lam) <= T q^2 lam(lam+1)/((1-q) sigma^2); delta = min_lam exp(alpha(lam) - lam eps)
+Formula: alpha(lam) <= T q^2 lam(lam+1)/((1-q) sigma^2); delta = min_lam
+exp(alpha(lam) - lam eps)
 }
 \references{
-Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar and Zhang (2016), Deep Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the sampled-Gaussian log moment, Theorem 2 for composability and the tail bound. Verified against the paper.
+Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar and Zhang (2016), Deep
+Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the
+sampled-Gaussian log moment, Theorem 2 for composability and the tail bound. Verified
+against the paper.
 }

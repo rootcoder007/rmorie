@@ -13,7 +13,8 @@
 A list with \code{a}, \code{i}, \code{j}, \code{o}.
 }
 \description{
-A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4} and 1 others in the module.
+A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4}
+and 1 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

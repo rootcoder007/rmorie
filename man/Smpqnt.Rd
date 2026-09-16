@@ -37,6 +37,7 @@ strict infimum, so this is \code{stats::quantile(type = 1)} and NOT the default
 Smpqnt(c(1, 2, 3, 4), p = 0.5)
 }
 \references{
-Fauzi and Maesono (2023), Eq. (3.1) and the display defining the sample quantile in Sec. 3.2.
+Fauzi and Maesono (2023), Eq. (3.1) and the display defining the sample
+quantile in Sec. 3.2.
 }
 \keyword{internal}

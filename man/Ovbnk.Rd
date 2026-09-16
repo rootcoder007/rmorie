@@ -33,9 +33,9 @@ together through \code{delta}, the ratio of selection on
 unobservables to selection on observables.
 }
 \details{
-Formula: \code{beta* = beta_long - delta (beta_short - beta_long)
+Formula: \eqn{beta* = beta_long - delta (beta_short - beta_long)
 (R_max - R_long) / (R_long - R_short)}. Also returned is
-\code{delta_star = beta_long (R_long - R_short) /
+\eqn{delta_star = beta_long (R_long - R_short) /
 ((beta_short - beta_long) (R_max - R_long))}, the value of
 \code{delta} at which \code{beta*} is exactly zero.
 }

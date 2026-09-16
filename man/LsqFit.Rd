@@ -8,7 +8,6 @@ LsqFit(x = NULL, y = NULL)
 }
 \arguments{
 \item{x, y}{equal-length data vectors, n >= 2.}
-
 }
 \value{
 list(A, B, S).

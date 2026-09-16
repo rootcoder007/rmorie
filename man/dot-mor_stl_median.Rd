@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}, \code{morie_stlAn}.
+A step of the stlAn_native implementation. Called by \code{morie_stl_decompose},
+\code{morie_stlAn}.
 See the file header for the source the module follows.
 source it follows.
 }

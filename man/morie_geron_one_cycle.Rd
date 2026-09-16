@@ -14,11 +14,10 @@ morie_geron_one_cycle(t, T, lr_max, lr_min, mom_max = 0.95, mom_min = 0.85)
 \item{lr_max, lr_min}{Rate bounds.}
 
 \item{mom_max, mom_min}{Momentum bounds.}
-
-
 }
 \value{
-List with lr, momentum, lr_schedule, momentum_schedule, peak_step, phase, estimate, n, method.
+List with lr, momentum, lr_schedule, momentum_schedule, peak_step, phase,
+estimate, n, method.
 }
 \description{
 1cycle learning-rate policy (Geron Ch 11, morie.fn hml1c)

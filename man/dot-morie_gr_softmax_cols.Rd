@@ -13,7 +13,8 @@
 A matrix, from \code{t}.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{morie_geron_blip}, \code{morie_geron_softmax_function}.
+A step of the geron_ml_native implementation. Called by \code{morie_geron_blip},
+\code{morie_geron_softmax_function}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -15,7 +15,8 @@
 A list with \code{t}, \code{e}.
 }
 \description{
-A step of the survival_more implementation. Called by \code{.ms_baseline}, \code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module.
+A step of the survival_more implementation. Called by \code{.ms_baseline},
+\code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

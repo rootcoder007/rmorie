@@ -25,8 +25,6 @@ morie_geron_grid_search_cv(
 higher is better.}
 
 \item{shuffle, seed}{Passed to the fold generator.}
-
-
 }
 \value{
 List with \code{best_params}, \code{best_score}, \code{best_index},
@@ -35,7 +33,7 @@ List with \code{best_params}, \code{best_score}, \code{best_index},
 }
 \description{
 Cartesian product of \code{param_grid} (first name varies slowest, matching
-itertools.product) crossed with \code{morie_geron_kfold_cv()} splits.
+itertools.product) crossed with \code{\link[=morie_geron_kfold_cv]{morie_geron_kfold_cv()}} splits.
 \code{best_index} is 0-based; \code{std_scores} uses ddof = 1.
 }
 \examples{

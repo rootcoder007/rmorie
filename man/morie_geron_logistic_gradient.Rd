@@ -10,8 +10,6 @@ morie_geron_logistic_gradient(X, y, theta, add_bias = FALSE)
 \item{X, y, theta}{Design, 0/1 labels, coefficients.}
 
 \item{add_bias}{Prepend a ones column.}
-
-
 }
 \value{
 List with \code{gradient}, \code{hessian}, \code{p_hat}, \code{residuals},

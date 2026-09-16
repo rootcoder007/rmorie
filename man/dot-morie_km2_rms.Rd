@@ -9,7 +9,8 @@
 \arguments{
 \item{x}{A matrix; the body checks with \code{is.matrix}.}
 
-\item{gamma}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{gamma}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
 \item{eps}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }

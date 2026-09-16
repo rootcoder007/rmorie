@@ -17,7 +17,8 @@
 A list with \code{bandwidth_hz}, \code{q}.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{CadSpec}, \code{SpeechFeat}, \code{ValvePcg}.
+A step of the rangayyan_phys implementation. Called by \code{CadSpec},
+\code{SpeechFeat}, \code{ValvePcg}.
 See the file header for the source the module follows.
 the source it follows.
 }

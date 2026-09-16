@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the tail4_core implementation. Called by \code{Beggtest}, \code{Boxpierce}, \code{Dprime} and 11 others in the module.
+A step of the tail4_core implementation. Called by \code{Beggtest}, \code{Boxpierce},
+\code{Dprime} and 11 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

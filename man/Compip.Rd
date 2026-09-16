@@ -8,7 +8,6 @@ Compip(x, y)
 }
 \arguments{
 \item{x, y}{Strictly positive vectors of parts, the same length.}
-
 }
 \value{
 List with \code{inner}, \code{inner_pairwise}, \code{cos_angle},

@@ -9,7 +9,8 @@
 \arguments{
 \item{post}{A vector; its length is taken.}
 
-\item{l_vec}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{l_vec}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
 The value of \code{lv}, as built in the body.

@@ -13,7 +13,8 @@
 )
 }
 \arguments{
-\item{tokenizer}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"13a"}.}
+\item{tokenizer}{Coerced to character by the body, with \code{as.character}. Defaults
+to \code{"13a"}.}
 
 \item{lowercase}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 

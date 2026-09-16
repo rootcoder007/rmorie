@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the dp_native implementation. Called by \code{morie_dp_covariance}, \code{morie_dp_gaussian_mechanism}.
+A step of the dp_native implementation. Called by \code{morie_dp_covariance},
+\code{morie_dp_gaussian_mechanism}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -17,7 +17,9 @@
 A list with \code{y}, \code{u}, \code{t}, \code{n}.
 }
 \description{
-A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects} and 1 others in the module.
+A step of the causdidwd_native implementation. Called by \code{morie_etwfe},
+\code{morie_imputation}, \code{morie_two_way_fixed_effects} and 1 others in the
+module.
 See the file header for the source the module follows.
 the source it follows.
 }

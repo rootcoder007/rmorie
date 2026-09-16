@@ -15,7 +15,8 @@
 A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 }
 \description{
-A step of the tail4_core implementation. Called by \code{.t4_poly4}, \code{.t4_wls_int}, \code{Lctest} and 1 others in the module.
+A step of the tail4_core implementation. Called by \code{.t4_poly4},
+\code{.t4_wls_int}, \code{Lctest} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

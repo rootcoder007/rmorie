@@ -18,7 +18,8 @@
 \item{correction}{Passed to \code{.schab_cross_k}. Defaults to \code{"ripley"}.}
 }
 \value{
-A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star}, \code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.
+A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star},
+\code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.
 }
 \description{
 A step of the schab_rest_shared implementation. Called by \code{spkcrs}.

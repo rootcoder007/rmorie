@@ -21,7 +21,7 @@ morie_vae_elbo(x, x_recon, mu, log_var, reduction = "mean")
 \item{reduction}{\code{"mean"} (default) or \code{"sum"}.}
 }
 \value{
-Named list \code{(elbo, estimate, loss, recon_loss,
+Named list \eqn{(elbo, estimate, loss, recon_loss,
   kl_divergence, method)}.
 }
 \description{
@@ -30,7 +30,8 @@ R parity for \code{morie.fn.vaenc.vae_elbo}.
 \details{
 Gaussian encoder + standard-normal prior closed-form KL:
 \deqn{D_\mathrm{KL}(q\|p) = -\tfrac{1}{2}\sum_j
-      (1 + \log\sigma_j^2 - \mu_j^2 - \sigma_j^2)}{D_KL(q\|p) = -(1)/(2)sum_j (1 + logsigma_j^2 - mu_j^2 - sigma_j^2)}
+      (1 + \log\sigma_j^2 - \mu_j^2 - \sigma_j^2)}{D_KL(q\|p) = -(1)/(2)sum_j (1 +
+logsigma_j^2 - mu_j^2 - sigma_j^2)}
 
 ELBO uses Gaussian (MSE) reconstruction term.
 }

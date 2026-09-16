@@ -20,7 +20,7 @@ List with \code{estimate} (the selected order), \code{order},
 Schwarz, G. (1978), "Estimating the dimension of a model", The Annals of
 Statistics 6(2), 461-464, doi:10.1214/aos/1176344136. The paper was opened
 directly (Project Euclid) and its Proposition, page 462, read off a rendered
-page image: \code{S(Y, n, j) = n sup(Y . theta - b(theta)) - (1/2) k_j log n
+page image: \eqn{S(Y, n, j) = n sup(Y . theta - b(theta)) - (1/2) k_j log n
 + R} with R bounded in n. The Bayes solution maximises S, so on the
 log-likelihood scale the penalty is \code{(1/2) k log n} and on the usual
 deviance scale it is \code{BIC = -2 log L_max + k log n}.

@@ -33,8 +33,8 @@ Econometrics 138, 46-81; Kleibergen, F. (2002), Econometrica 70,
 projection on the partialled-out instruments and
 \code{sigmaHat = crossprod(M_Z [Y D]) / (n - k - L)},
 \code{a0 = (beta0, 1)}, \code{b0 = (1, -beta0)}:
-\code{QS = ||P_Z [Y D] b0||^2 / (b0\' sigmaHat b0)},
-\code{QT = ||P_Z [Y D] sigmaHat^-1 a0||^2 / (a0\' sigmaHat^-1 a0)},
+\eqn{QS = ||P_Z [Y D] b0||^2 / (b0\' sigmaHat b0)},
+\eqn{QT = ||P_Z [Y D] sigmaHat^-1 a0||^2 / (a0\' sigmaHat^-1 a0)},
 \code{QTS} the corresponding normalised cross term, and
 \code{LR = (QS - QT + sqrt((QS+QT)^2 - 4(QS QT - QTS^2)))/2}.
 }
@@ -44,7 +44,7 @@ For \code{L >= 2} the package source integrates
 \code{2 K int_0^1 pchisq((QT+LR)/(1 + QT x^2/LR), L) (1-x^2)^((L-3)/2) dx}
 with \code{K = gamma(L/2)/(sqrt(pi) gamma((L-1)/2))}; the
 substitution \code{x = sin(theta)} used here turns that into
-\code{2 K int_0^{pi/2} pchisq((QT+LR)/(1 + QT sin^2(theta)/LR), L)
+\eqn{2 K int_0^{pi/2} pchisq((QT+LR)/(1 + QT sin^2(theta)/LR), L)
 cos^(L-2)(theta) dtheta}, whose integrand is bounded and smooth for
 every \code{L >= 2}, so the epsilon-regularised \code{L = 4} special
 case in the package is not needed.  A fixed 4096-interval composite

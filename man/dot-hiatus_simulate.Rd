@@ -36,10 +36,13 @@
 
 \item{mutation}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 
-\item{record_every}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.}
+\item{record_every}{Coerced to integer by the body, with \code{as.integer}. Defaults
+to \code{100L}.}
 }
 \value{
-A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj}, \code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables}, \code{n_variables_history_based}, \code{surviving}, \code{method}.
+A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj},
+\code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables},
+\code{n_variables_history_based}, \code{surviving}, \code{method}.
 }
 \description{
 A step of the hiatus_native implementation. Called by \code{morie_hiatus}.

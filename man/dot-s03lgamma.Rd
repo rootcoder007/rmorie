@@ -13,7 +13,8 @@
 The value of \code{lgamma}.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.sgflrt_corr}, \code{Vbnpc}, \code{Vinfer}.
+A step of the helpers_s03 implementation. Called by \code{.sgflrt_corr}, \code{Vbnpc},
+\code{Vinfer}.
 See the file header for the source the module follows.
 source it follows.
 }

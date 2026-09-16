@@ -3,7 +3,6 @@
 \name{.s4_triinv}
 \alias{.s4_triinv}
 \title{Upper-triangular inverse by back substitution. Floors the pivot
-
 rather}
 \usage{
 .s4_triinv(R, p)
@@ -18,7 +17,6 @@ The value of \code{out}, as built in the body.
 }
 \description{
 Upper-triangular inverse by back substitution. Floors the pivot
-
 rather
 }
 \section{than testing a condition number, so a rank-deficient design gives}{

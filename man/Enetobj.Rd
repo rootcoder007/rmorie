@@ -17,13 +17,23 @@ Enetobj(X, y, beta, lam, alpha, add_intercept = TRUE)
 
 \item{alpha}{Mixing parameter in [0, 1]: 0 is the ridge penalty, 1 is the lasso penalty.}
 
-\item{add_intercept}{Treat the first entry of beta as an unpenalized intercept and prepend a column of ones to X.}
+\item{add_intercept}{Treat the first entry of beta as an unpenalized intercept and
+prepend a column of ones to X.}
 }
 \value{
-List with \code{prss}, \code{rss}, \code{penalty}, \code{l1}, \code{l2}, \code{lambda}, \code{alpha}, \code{n}, \code{p}.
+List with \code{prss}, \code{rss}, \code{penalty}, \code{l1}, \code{l2}, \code{lambda},
+\code{alpha}, \code{n}, \code{p}.
 }
 \description{
-Formula: PRSS(beta, lambda, alpha) = RSS(beta) + lambda [ (1 - alpha)/2 * sum_j b_j^2 + alpha * sum_j |b_j| ]
+Formula: PRSS(beta, lambda, alpha) = RSS(beta) + lambda [ (1 - alpha)/2 * sum_j b_j^2
+\itemize{
+\item alpha * sum_j |b_j| ]
+}
+
+[ (1 - alpha)/2 * sum_j b_j^2
+\itemize{
+\item alpha * sum_j |b_j| ]: R:\%20(1\%20-\%20alpha)/2\%20*\%20sum_j\%20b_j\%5E2\%0A+\%20alpha\%20*\%20sum_j\%20\%7Cb_j\%7C\%20
+}
 }
 \examples{
 set.seed(1)
@@ -32,5 +42,18 @@ y <- rnorm(10)
 Enetobj(X, y, beta = c(0, 0.5, -0.3), lam = 0.1, alpha = 0.5)
 }
 \references{
-Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.2 p. 94 describes the elastic net as the combination of the ridge and lasso penalties implemented by glmnet, and Chapter 7 p. 230 defines its mixing parameter alpha: alpha = 0 gives the ridge penalty, alpha = 1 the lasso, and values in between the elastic net.  The book names those two endpoints but does not print the mixed objective itself; the (1 - alpha)/2 and alpha weights are the glmnet parameterization of Friedman, Hastie and Tibshirani (2010), Regularization Paths for Generalized Linear Models via Coordinate Descent, Journal of Statistical Software 33(1):1-22, doi:10.18637/jss.v033.i01, which is the package the book cites for this penalty.  Both chapters read from the PDFs; the mixing weights come from the cited paper, and the endpoints agree with the book: alpha = 0 reproduces MVSML Sect. 3.6.1 up to the factor 1/2 on the ridge term, alpha = 1 reproduces Sect. 3.6.2 exactly.
+Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+Statistical Machine Learning Methods for Genomic Prediction, Springer,
+doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.2 p. 94 describes the elastic net
+as the combination of the ridge and lasso penalties implemented by glmnet, and Chapter
+7 p. 230 defines its mixing parameter alpha: alpha = 0 gives the ridge penalty, alpha
+= 1 the lasso, and values in between the elastic net.  The book names those two
+endpoints but does not print the mixed objective itself; the (1 - alpha)/2 and alpha
+weights are the glmnet parameterization of Friedman, Hastie and Tibshirani (2010),
+Regularization Paths for Generalized Linear Models via Coordinate Descent, Journal of
+Statistical Software 33(1):1-22, doi:10.18637/jss.v033.i01, which is the package the
+book cites for this penalty.  Both chapters read from the PDFs; the mixing weights
+come from the cited paper, and the endpoints agree with the book: alpha = 0 reproduces
+MVSML Sect. 3.6.1 up to the factor 1/2 on the ridge term, alpha = 1 reproduces Sect.
+3.6.2 exactly.
 }

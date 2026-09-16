@@ -3,7 +3,9 @@
 \name{MORIE_SIUIAP_CRIMSL_REPORTS}
 \alias{MORIE_SIUIAP_CRIMSL_REPORTS}
 \title{CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021)}
-
+\usage{
+MORIE_SIUIAP_CRIMSL_REPORTS
+}
 \description{
 CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021)
 }

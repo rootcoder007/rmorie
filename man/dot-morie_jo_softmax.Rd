@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the ts_joseph implementation. Called by \code{morie_autoform}, \code{morie_itrans}, \code{morie_tftnet}.
+A step of the ts_joseph implementation. Called by \code{morie_autoform},
+\code{morie_itrans}, \code{morie_tftnet}.
 See the file header for the source the module follows.
 source it follows.
 }

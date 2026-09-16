@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the rangayyan_class2 implementation. Called by \code{CadPipe}, \code{PvcBayes}, \code{VagClass}.
+A step of the rangayyan_class2 implementation. Called by \code{CadPipe},
+\code{PvcBayes}, \code{VagClass}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -13,7 +13,8 @@
 The value of \code{switch}.
 }
 \description{
-A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseudo_likelihood}, \code{spglmm}, \code{sppql}.
+A step of the schab_glmm_shared implementation. Called by
+\code{.schab_fit_pseudo_likelihood}, \code{spglmm}, \code{sppql}.
 See the file header for the source the module follows.
 the source it follows.
 }

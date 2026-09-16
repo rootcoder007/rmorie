@@ -30,5 +30,9 @@ unweighted -- a non-zero entry means an edge, not a length.
 Avgpathlen(matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE))
 }
 \references{
-Newman (2010), Networks: An Introduction, OUP, sec. 7.6, and the harmonic-mean repair for disconnected graphs.  The book is not in the local corpus and is not fetchable, so this is the standard published form rather than a quoted equation; the two conventions that are genuinely in dispute -- self-pairs and unreachable pairs -- are stated above and reported separately.
+Newman (2010), Networks: An Introduction, OUP, sec. 7.6, and the
+harmonic-mean repair for disconnected graphs.  The book is not in the local corpus and
+is not fetchable, so this is the standard published form rather than a quoted
+equation; the two conventions that are genuinely in dispute -- self-pairs and
+unreachable pairs -- are stated above and reported separately.
 }

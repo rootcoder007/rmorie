@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the helpers_w3num implementation. Called by \code{morie_snpest}, \code{morie_varqc1_logpdf}, \code{morie_varqc1_mixture}.
+A step of the helpers_w3num implementation. Called by \code{morie_snpest},
+\code{morie_varqc1_logpdf}, \code{morie_varqc1_mixture}.
 See the file header for the source the module follows.
 source it follows.
 }

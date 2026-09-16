@@ -25,7 +25,6 @@ morie_tps_ripley_k(
 distance matrix tractable.}
 
 \item{lat_col, lon_col}{WGS84 column names.}
-
 }
 \value{
 A named list with the per-radius table, intensity, and

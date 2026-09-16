@@ -15,7 +15,6 @@ log target and the log proposal density.}
 \item{m}{Number of resampled draws.}
 
 \item{seed}{Seed for the generator shared with the Python arm.}
-
 }
 \value{
 A list with \code{resample}, \code{indices} (0-based),

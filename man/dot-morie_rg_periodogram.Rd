@@ -15,7 +15,8 @@
 A list with \code{psd}, \code{freqs}.
 }
 \description{
-A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdVag}, \code{SigFeatures}.
+A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdVag},
+\code{SigFeatures}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -15,7 +15,8 @@
 
 \item{rows}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 
-\item{obs_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{obs_weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
 The value of \code{eps}, as built in the body.

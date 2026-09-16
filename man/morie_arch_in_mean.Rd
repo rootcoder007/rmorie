@@ -10,7 +10,7 @@ morie_arch_in_mean(x)
 \item{x}{Numeric return series.}
 }
 \value{
-Named list with \code{mu, delta, omega, alpha, loglik,
+Named list with \eqn{mu, delta, omega, alpha, loglik,
   conditional_variance, n, method}.
 }
 \description{

@@ -31,7 +31,6 @@ aligned to the rows that survive the NA drop.}
 \item{seed}{Random seed.}
 
 \item{alpha}{Significance level.}
-
 }
 \value{
 A list of class \code{morie_te_result} with estimand

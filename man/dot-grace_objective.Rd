@@ -16,10 +16,12 @@
 \item{intra}{Passed to \code{.grace_pair_loss}. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{estimate}, \code{loss}, \code{tau}, \code{intra_view_negatives}, \code{n_nodes}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{loss}, \code{tau},
+\code{intra_view_negatives}, \code{n_nodes}, \code{method}, \code{note}.
 }
 \description{
-A step of the grace_native implementation. Called by \code{morie_grace}, \code{morie_graphcontrastive}.
+A step of the grace_native implementation. Called by \code{morie_grace},
+\code{morie_graphcontrastive}.
 See the file header for the source the module follows.
 source it follows.
 }

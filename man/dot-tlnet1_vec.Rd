@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the tlnet1_native implementation. Called by \code{friend_summary}, \code{network_influence_variance}.
+A step of the tlnet1_native implementation. Called by \code{friend_summary},
+\code{network_influence_variance}.
 See the file header for the source the module follows.
 source it follows.
 }

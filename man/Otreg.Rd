@@ -14,7 +14,6 @@ Otreg(a, b, C, epsilon, max_iter = 200)
 \item{epsilon}{Regularisation strength, positive.}
 
 \item{max_iter}{Sinkhorn sweeps; fixed count.}
-
 }
 \value{
 List with \code{f}, \code{g}, \code{dual_value},
@@ -28,7 +27,7 @@ potentials are computed in the log domain, so the result survives small
 \code{epsilon} where the exponentiated form underflows.
 }
 \details{
-Formula: \code{max_{f,g} <a,f> + <b,g> - eps sum_ij exp((f_i + g_j -
+Formula: \eqn{max_{f,g} <a,f> + <b,g> - eps sum_ij exp((f_i + g_j -
 C_ij)/eps)} -- Genevay et al. (2016) eq. (2); Peyre and Cuturi (2019)
 eq. (4.30). At the optimum the exponential sum is the total mass, so
 the dual value reduces to \code{<a,f> + <b,g> - eps}.

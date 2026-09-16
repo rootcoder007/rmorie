@@ -19,7 +19,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
+\code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 See the file header for the source the module follows.
 source it follows.
 }

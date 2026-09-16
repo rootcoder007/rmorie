@@ -14,7 +14,8 @@
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \value{
-A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
+A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss},
+\code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{Msm042}, \code{Msm332}.

@@ -14,7 +14,8 @@
 \item{risk_score}{A vector; indexed elementwise.}
 }
 \value{
-A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.
+A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper},
+\code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.
 }
 \description{
 A step of the Cstat implementation. Called by \code{Cstat}.

@@ -13,7 +13,8 @@
 The value of \code{cbind}.
 }
 \description{
-A step of the tail1_core implementation. Called by \code{Bayeslogit}, \code{Dfbetas}, \code{Dffitsols} and 9 others in the module.
+A step of the tail1_core implementation. Called by \code{Bayeslogit}, \code{Dfbetas},
+\code{Dffitsols} and 9 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

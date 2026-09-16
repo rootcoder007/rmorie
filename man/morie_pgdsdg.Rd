@@ -4,24 +4,18 @@
 \alias{morie_pgdsdg}
 \title{Projected gradient descent}
 \usage{
-morie_pgdsdg(x, lower = NULL, upper = NULL)
+morie_pgdsdg(f, grad, x0, project, ...)
 }
 \arguments{
+\item{f}{Objective function.}
 
+\item{grad}{Its gradient.}
 
+\item{x0}{Starting point.}
 
+\item{project}{Projection onto the feasible set.}
 
-
-
-
-
-
-
-\item{x}{Argument \code{x}; see Usage.}
-
-\item{lower}{Argument \code{lower}; see Usage.}
-
-\item{upper}{Argument \code{upper}; see Usage.}
+\item{...}{Further arguments: step size, rule, iteration and tolerance controls; see the source.}
 }
 \value{
 A list with the iterate, objective value and convergence trace.
@@ -31,7 +25,8 @@ Minimise \code{f} over a convex set by gradient steps followed by projection.
 \code{morie_pgdsdg} is the module alias of \code{projected_gradient_descent}.
 }
 \examples{
-x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
-res <- morie_pgdsdg(x = x)
-res
+f <- function(v) sum((v - c(2, -1))^2)
+g <- function(v) 2 * (v - c(2, -1))
+res <- morie_pgdsdg(f, g, x0 = c(0, 0), project = project_nonneg)
+res$x
 }

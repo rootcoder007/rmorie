@@ -15,7 +15,8 @@
 The value of \code{m}, as built in the body.
 }
 \description{
-A step of the alfbnp_native implementation. Called by \code{.alfbnp_clean_list}, \code{morie_alfbnp_af3_sample}.
+A step of the alfbnp_native implementation. Called by \code{.alfbnp_clean_list},
+\code{morie_alfbnp_af3_sample}.
 See the file header for the source the module follows.
 source it follows.
 }

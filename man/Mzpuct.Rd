@@ -16,8 +16,6 @@ Mzpuct(Q, N, P, c1 = 1.25, c2 = 19652, qmin = NULL, qmax = NULL)
 \item{c1, c2}{Exploration constants; 1.25 and 19652 in the paper.}
 
 \item{qmin, qmax}{Tree-wide value bounds; NULL uses range(Q).}
-
-
 }
 \value{
 List with score, qbar, exploration, best, sumn, k.  best is a

@@ -21,7 +21,8 @@
 A vector, from \code{sort}.
 }
 \description{
-A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{.prsLR_goto}, \code{morie_closure}.
+A step of the prsLR_native implementation. Called by
+\code{.prsLR_canonical_collection}, \code{.prsLR_goto}, \code{morie_closure}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -9,7 +9,8 @@
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}
 
-\item{candidate_strata}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{candidate_strata}{Optional; may be \code{NULL}. Coerced to numeric by the body,
+with \code{as.numeric}.}
 }
 \value{
 The value of \code{lv}, as built in the body.

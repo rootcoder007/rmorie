@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock}, \code{morie_itrans}, \code{morie_tftnet} and 1 others in the module.
+A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock},
+\code{morie_itrans}, \code{morie_tftnet} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

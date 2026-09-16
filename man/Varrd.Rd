@@ -17,7 +17,8 @@ Named list with \code{estimate}, \code{delta_var}, \code{sse_weighted},
 \code{n_left}, \code{n_right}, \code{omega_left}, \code{omega_right}, \code{method}.
 }
 \description{
-\deqn{\Delta = Var(t) - (n_L/n)Var(t_L) - (n_R/n)Var(t_R)}{Delta = Var(t) - (nL/n)Var(tL) - (nR/n)Var(tR)}
+\deqn{\Delta = Var(t) - (n_L/n)Var(t_L) - (n_R/n)Var(t_R)}{Delta = Var(t) -
+(nL/n)Var(tL) - (nR/n)Var(tR)}
 with population variances -- the CART impurity decrease.  MVSML
 (2022) sec. 15.4.1 p.642 prints the same criterion in its weighted
 sum-of-squares form, \eqn{SSE_L\Omega_L + SSE_R\Omega_R}, which is

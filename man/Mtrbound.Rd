@@ -14,7 +14,6 @@ Mtrbound(y, z, d, ymin, ymax)
 \item{d}{Treatment level whose mean counterfactual is bounded.}
 
 \item{ymin, ymax}{A priori support of the outcome.}
-
 }
 \value{
 List with lower, upper, width, nfixed, n, d.

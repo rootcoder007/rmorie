@@ -10,8 +10,6 @@ Areratio(var1, var2, n1 = 1, n2 = 1)
 \item{var1, var2}{Asymptotic variances, strictly positive.}
 
 \item{n1, n2}{Sample sizes the variances refer to.}
-
-
 }
 \value{
 List with are, logare, var1, var2, normalmedian, normalhl.

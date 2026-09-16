@@ -9,7 +9,8 @@
 \arguments{
 \item{groups}{See Usage.}
 
-\item{n_folds}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{n_folds}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 
 \item{design}{Compared against \code{"unmatched"}.}
 
@@ -19,7 +20,8 @@
 The value of \code{Filter}.
 }
 \description{
-A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}.
+A step of the tmlcic_native implementation. Called by
+\code{morie_tmlcic_adaptive_prespecification}.
 See the file header for the source the module follows.
 source it follows.
 }

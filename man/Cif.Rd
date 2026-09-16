@@ -19,7 +19,8 @@ morie_survival_cif(time, cause, code = 1, alpha = 0.05)
 \item{alpha}{significance level for the interval.}
 }
 \value{
-list with the cumulative incidence, its standard error, the confidence interval and the event times.
+list with the cumulative incidence, its standard error, the confidence
+interval and the event times.
 }
 \description{
 Aalen-Johansen: CIF_k(t) = sum S(t_\{i-1\}) d_ki / n_i, where S is the ALL-CAUSE Kaplan-Meier.
@@ -30,5 +31,7 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Cif(V, V)
 }
 \references{
-Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for non-homogeneous Markov chains based on censored observations. Scandinavian Journal of Statistics 5(3), 141-150.
+Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for
+non-homogeneous Markov chains based on censored observations. Scandinavian Journal of
+Statistics 5(3), 141-150.
 }

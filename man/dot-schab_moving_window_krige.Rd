@@ -33,7 +33,9 @@
 \item{local_variogram}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{prediction}, \code{local_sill}, \code{local_range}, \code{window_sizes}, \code{converged}, \code{theta_is_global}, \code{global_sill}, \code{global_range}, \code{caveats}.
+A list with \code{prediction}, \code{local_sill}, \code{local_range},
+\code{window_sizes}, \code{converged}, \code{theta_is_global}, \code{global_sill},
+\code{global_range}, \code{caveats}.
 }
 \description{
 A step of the schab_rest_shared implementation. Called by \code{spmwst}.

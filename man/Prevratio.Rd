@@ -30,5 +30,8 @@ List with \code{pr}, \code{log_pr}, \code{se_log}, \code{ci_lower}, \code{ci_upp
 Formula: PR = p_e / p_u; se(log PR) = sqrt((1-p_e)/(p_e n_e) + (1-p_u)/(p_u n_u))
 }
 \references{
-Barros and Hirakata (2003), Alternatives for logistic regression in cross-sectional studies: an empirical comparison of models that directly estimate the prevalence ratio, BMC Medical Research Methodology 3:21. Open access; the delta-method standard error for log PR used here is the standard binomial one.
+Barros and Hirakata (2003), Alternatives for logistic regression in
+cross-sectional studies: an empirical comparison of models that directly estimate the
+prevalence ratio, BMC Medical Research Methodology 3:21. Open access; the delta-method
+standard error for log PR used here is the standard binomial one.
 }

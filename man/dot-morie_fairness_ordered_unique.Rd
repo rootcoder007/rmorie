@@ -13,7 +13,9 @@
 The value of \code{unique}.
 }
 \description{
-A step of the frns_metrics implementation. Called by \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels}, \code{morie_fairness_gini} and 1 others in the module.
+A step of the frns_metrics implementation. Called by
+\code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels},
+\code{morie_fairness_gini} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

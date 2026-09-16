@@ -15,7 +15,8 @@
 A list with \code{out}, \code{W}.
 }
 \description{
-A step of the vidgen_native implementation. Called by \code{morie_vidgen_spatial_attention}, \code{morie_vidgen_temporal_attention}.
+A step of the vidgen_native implementation. Called by
+\code{morie_vidgen_spatial_attention}, \code{morie_vidgen_temporal_attention}.
 See the file header for the source the module follows.
 source it follows.
 }

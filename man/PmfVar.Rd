@@ -8,7 +8,6 @@ PmfVar(values, probs)
 }
 \arguments{
 \item{values, probs}{the pmf; probs must be >= 0 and sum to 1.}
-
 }
 \value{
 list(variance, mean, e_x2, sd, forms_agree).

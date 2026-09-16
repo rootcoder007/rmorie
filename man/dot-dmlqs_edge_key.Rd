@@ -15,7 +15,8 @@
 A character value.
 }
 \description{
-A step of the dmlqs_native implementation. Called by \code{.dmlqs_atom_readout}, \code{.dmlqs_message_pass}.
+A step of the dmlqs_native implementation. Called by \code{.dmlqs_atom_readout},
+\code{.dmlqs_message_pass}.
 See the file header for the source the module follows.
 source it follows.
 }

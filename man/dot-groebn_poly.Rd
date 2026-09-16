@@ -9,7 +9,8 @@
 \arguments{
 \item{terms}{A vector; its length is taken and its elements indexed.}
 
-\item{nvars}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{nvars}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 The value of \code{out}, as built in the body.

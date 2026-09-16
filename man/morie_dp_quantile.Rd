@@ -17,7 +17,6 @@ morie_dp_quantile(x, q = 0.5, epsilon = 1, a = NULL, b = NULL, seed = NULL)
 non-private query -- the function warns.}
 
 \item{seed}{optional integer seed.}
-
 }
 \value{
 list with \code{release}, \code{true_quantile},

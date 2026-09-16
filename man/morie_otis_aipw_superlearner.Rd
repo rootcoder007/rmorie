@@ -24,8 +24,6 @@ morie_otis_aipw_superlearner(
 \item{seed}{RNG seed. Default 123.}
 
 \item{eps}{Propensity clipping bound. Default 0.02.}
-
-
 }
 \value{
 An OTIS causal-estimate list (same shape as

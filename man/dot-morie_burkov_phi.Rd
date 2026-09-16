@@ -13,7 +13,8 @@
 The value of \code{switch}.
 }
 \description{
-A step of the burkov_lm_native implementation. Called by \code{morie_burkov_layer1_output}, \code{morie_burkov_layer2_output}.
+A step of the burkov_lm_native implementation. Called by
+\code{morie_burkov_layer1_output}, \code{morie_burkov_layer2_output}.
 See the file header for the source the module follows.
 the source it follows.
 }

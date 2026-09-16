@@ -15,7 +15,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the gwasem_native implementation. Called by \code{.gwasem_loglik}, \code{.gwasem_reml_delta}, \code{morie_gwasem} and 1 others in the module.
+A step of the gwasem_native implementation. Called by \code{.gwasem_loglik},
+\code{.gwasem_reml_delta}, \code{morie_gwasem} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

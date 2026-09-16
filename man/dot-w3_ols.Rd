@@ -12,10 +12,12 @@
 \item{design}{A matrix; indexed by row and column.}
 }
 \value{
-A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv}, \code{fitted}, \code{chol}.
+A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv},
+\code{fitted}, \code{chol}.
 }
 \description{
-A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}, \code{morie_sdcfst}.
+A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan},
+\code{morie_blinkg_select}, \code{morie_sdcfst}.
 See the file header for the source the module follows.
 source it follows.
 }

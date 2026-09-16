@@ -21,12 +21,12 @@ in \code{[0, 1]} and is comparable across graphs of different size: the
 hub of a star scores exactly 1 and an isolate exactly 0. Weighted
 adjacency matrices are summed rather than counted.
 }
-\references{
-Freeman (1979), Social Networks 1(3), 215-239,
-\doi{10.1016/0378-8733(78)90021-7}.
-}
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 res <- Netdeg(A = A)
 res
+}
+\references{
+Freeman (1979), Social Networks 1(3), 215-239,
+\doi{10.1016/0378-8733(78)90021-7}.
 }

@@ -32,7 +32,6 @@ pooled sample, 1 / median squared pairwise distance. Ignored by the
 linear kernel.}
 
 \item{unbiased}{Use equation (3) rather than the biased estimate.}
-
 }
 \value{
 Named list with \code{statistic}, \code{p_value},

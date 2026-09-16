@@ -12,8 +12,7 @@ functions make predictions; they only measure disparity in
 predictions that already exist.
 }
 \details{
-\subsection{Functions}{
-
+Functions
 \itemize{
 \item \code{\link{morie_fairness_disparate_impact}}: the four-fifths
 rule.
@@ -34,5 +33,4 @@ fairness audit in pbiecek's \emph{XAI Stories} and IBM's AI Fairness
 360 definitions; the predictive-policing disparity framing of the
 SciencesPo \emph{Predictive-policing-Chicago} project (Lacherade,
 Szabo, Krikava & Aeby, 2021) and Barman & Barman, arXiv:2603.18987.
-}
 }

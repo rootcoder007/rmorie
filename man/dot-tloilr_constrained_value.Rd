@@ -14,7 +14,9 @@
 \item{kappa}{Passed to \code{.tloilr_constrained_rule}.}
 }
 \value{
-A list with \code{estimate}, \code{value}, \code{unconstrained_value}, \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa}, \code{binding}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{value}, \code{unconstrained_value},
+\code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa},
+\code{binding}, \code{method}, \code{note}.
 }
 \description{
 A step of the tloilr_native implementation. Called by \code{morie_tloilr}.

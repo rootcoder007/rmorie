@@ -16,7 +16,8 @@
 \item{values}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \value{
-A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error}, \code{replicates}, \code{n_replicates}, \code{method}.
+A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error},
+\code{replicates}, \code{n_replicates}, \code{method}.
 }
 \description{
 A step of the replwt_native implementation. No other function in the package calls it.

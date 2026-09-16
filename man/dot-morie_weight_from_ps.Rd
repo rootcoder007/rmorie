@@ -17,7 +17,8 @@
 The value of \code{switch}.
 }
 \description{
-A step of the weight_native implementation. Called by \code{morie_weight_cbps}, \code{morie_weight_ps}, \code{morie_weight_super}.
+A step of the weight_native implementation. Called by \code{morie_weight_cbps},
+\code{morie_weight_ps}, \code{morie_weight_super}.
 See the file header for the source the module follows.
 source it follows.
 }

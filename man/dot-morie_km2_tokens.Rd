@@ -13,7 +13,9 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_count_word}, \code{morie_kamath_ch6_demographic_representation}, \code{morie_kamath_ch6_stereotypical_assoc}.
+A step of the kamath_llm2_native implementation. Called by
+\code{.morie_km2_count_word}, \code{morie_kamath_ch6_demographic_representation},
+\code{morie_kamath_ch6_stereotypical_assoc}.
 See the file header for the source the module follows.
 for the source it follows.
 }

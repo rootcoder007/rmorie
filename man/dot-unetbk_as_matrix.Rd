@@ -13,7 +13,8 @@
 A matrix, from \code{as.matrix}.
 }
 \description{
-A step of the unetbk_native implementation. Called by \code{mirror_pad}, \code{separation_weight_map}, \code{skip_concat}.
+A step of the unetbk_native implementation. Called by \code{mirror_pad},
+\code{separation_weight_map}, \code{skip_concat}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -21,7 +21,8 @@
 A list with \code{beta}, \code{fitted}, \code{separated}.
 }
 \description{
-A step of the bounds_native implementation. Called by \code{morie_efficiency_bound_ate}, \code{morie_text_ate}.
+A step of the bounds_native implementation. Called by
+\code{morie_efficiency_bound_ate}, \code{morie_text_ate}.
 See the file header for the source the module follows.
 source it follows.
 }

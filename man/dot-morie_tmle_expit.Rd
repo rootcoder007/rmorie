@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code{morie_tmle_time_varying}.
+A step of the tmle_native implementation. Called by \code{morie_tmle_ate},
+\code{morie_tmle_time_varying}.
 See the file header for the source the module follows.
 source it follows.
 }

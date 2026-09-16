@@ -27,8 +27,6 @@ morie_did_did2s(
 \item{seed}{RNG seed.}
 
 \item{alpha}{CI tail.}
-
-
 }
 \value{
 List of class \code{"morie_did"}.

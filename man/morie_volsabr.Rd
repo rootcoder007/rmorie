@@ -18,7 +18,6 @@ morie_volsabr(K, f, T, alpha, beta, rho, nu)
 \item{rho}{Correlation in (-1, 1).}
 
 \item{nu}{Vol-of-vol (>= 0).}
-
 }
 \value{
 A list with elements \code{estimate}, \code{z},

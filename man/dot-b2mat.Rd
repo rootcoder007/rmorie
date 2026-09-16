@@ -13,7 +13,8 @@
 The value of \code{m}, as built in the body.
 }
 \description{
-A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup}, \code{Gppost} and 13 others in the module.
+A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup},
+\code{Gppost} and 13 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

@@ -34,7 +34,8 @@ R parity for \code{morie.fn.diffu.diffusion_forward}.
 }
 \details{
 \deqn{x_t = \sqrt{\bar\alpha_t}\, x_0 +
-      \sqrt{1 - \bar\alpha_t}\, \varepsilon}{x_t = sqrt(baralpha_t) x_0 + sqrt(1 - baralpha_t) epsilon}
+      \sqrt{1 - \bar\alpha_t}\, \varepsilon}{x_t = sqrt(baralpha_t) x_0 + sqrt(1 -
+baralpha_t) epsilon}
 
 with linear \eqn{\beta}{beta} schedule from \code{1e-4} to \code{0.02}.
 }

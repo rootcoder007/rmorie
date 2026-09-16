@@ -26,13 +26,13 @@ component -- the method behaving correctly, not a defect.
 Formula: \code{L_sym = I - D^-1/2 A D^-1/2}; \code{Y} is columns
 2..k+1 of its eigenvectors, ordered by ascending eigenvalue.
 }
-\references{
-Belkin, M. & Niyogi, P. (2003). Laplacian eigenmaps for
-dimensionality reduction and data representation. Neural
-Computation 15(6):1373-1396. \doi{10.1162/089976603321780317}.
-}
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 res <- Sgtlap2(A = A)
 res
+}
+\references{
+Belkin, M. & Niyogi, P. (2003). Laplacian eigenmaps for
+dimensionality reduction and data representation. Neural
+Computation 15(6):1373-1396. \doi{10.1162/089976603321780317}.
 }

@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the tipsne_native implementation. Called by \code{.tipsne_chol}, \code{.tipsne_draw_beta}, \code{.tipsne_solve_chol} and 2 others in the module.
+A step of the tipsne_native implementation. Called by \code{.tipsne_chol},
+\code{.tipsne_draw_beta}, \code{.tipsne_solve_chol} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

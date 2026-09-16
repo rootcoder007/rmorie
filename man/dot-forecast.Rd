@@ -7,7 +7,8 @@
 .forecast(spec, theta, x0, z, h, long_run_b = 0)
 }
 \arguments{
-\item{spec}{A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_trend} from it.}
+\item{spec}{A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods},
+\code{$q}, \code{$use_trend} from it.}
 
 \item{theta}{Passed to \code{.unpack}.}
 

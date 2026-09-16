@@ -12,10 +12,12 @@
 \item{k}{Passed to \code{.prsLR_closure}.}
 }
 \value{
-A list with \code{states}, \code{index}, \code{transitions}, \code{first}, \code{nonterminals}.
+A list with \code{states}, \code{index}, \code{transitions}, \code{first},
+\code{nonterminals}.
 }
 \description{
-A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}, \code{morie_canonical_collection}.
+A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables},
+\code{morie_canonical_collection}.
 See the file header for the source the module follows.
 source it follows.
 }

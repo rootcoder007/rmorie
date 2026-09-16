@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the netsts_native implementation. Called by \code{.netsts_lstm_cell}, \code{morie_netsts}.
+A step of the netsts_native implementation. Called by \code{.netsts_lstm_cell},
+\code{morie_netsts}.
 See the file header for the source the module follows.
 source it follows.
 }

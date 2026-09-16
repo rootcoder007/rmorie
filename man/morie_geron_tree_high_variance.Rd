@@ -21,11 +21,10 @@ morie_geron_tree_high_variance(
 \item{seed}{LCG seed.}
 
 \item{criterion, max_depth}{CART controls.}
-
-
 }
 \value{
-List with \code{variance}, \code{bias2}, \code{root_splits}, \code{structural_instability}, \code{ensemble_prediction}.
+List with \code{variance}, \code{bias2}, \code{root_splits}, \code{structural_instability},
+\code{ensemble_prediction}.
 }
 \description{
 Growth delegated to \code{morie_geron_cart_algorithm}/\code{morie_geron_predict_tree}.

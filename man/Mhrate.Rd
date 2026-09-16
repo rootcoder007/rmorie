@@ -19,9 +19,12 @@ Named list with \code{estimate}, \code{ln_estimate}, \code{se_ln},
 \code{confidence}, \code{method}.
 }
 \description{
-\deqn{IRR_{MH} = \sum_i a_i T_{0i}/T_i \big/ \sum_i b_i T_{1i}/T_i}{IRR_MH = sum_i a_i T0_i/T_i / sum_i b_i T1_i/T_i}
+\deqn{IRR_{MH} = \sum_i a_i T_{0i}/T_i \big/ \sum_i b_i T_{1i}/T_i}{IRR_MH = sum_i a_i
+T0_i/T_i / sum_i b_i T1_i/T_i}
 with the Greenland & Robins (1985) standard error
-\deqn{SE = \sqrt{\sum_i m_i T_{1i}T_{0i}/T_i^2} \big/ \sqrt{(\sum_i a_i T_{0i}/T_i)(\sum_i b_i T_{1i}/T_i)}}{SE = sqrt(sum m_i T1_i T0_i / T_i^2) / sqrt(num * den)}
+\deqn{SE = \sqrt{\sum_i m_i T_{1i}T_{0i}/T_i^2} \big/ \sqrt{(\sum_i a_i
+T_{0i}/T_i)(\sum_i b_i T_{1i}/T_i)}}{SE = sqrt(sum m_i T1_i T0_i / T_i^2) / sqrt(num *
+den)}
 Person-time weighting lets sparse strata contribute instead of being
 dropped.
 }

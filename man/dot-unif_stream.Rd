@@ -15,7 +15,8 @@
 The value of \code{uni}, as built in the body.
 }
 \description{
-A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}, \code{reversible_jump_mcmc}.
+A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc},
+\code{reversible_jump_mcmc}.
 See the file header for the source the module follows.
 the source it follows.
 }

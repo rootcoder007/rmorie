@@ -19,7 +19,8 @@
 A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.
 }
 \description{
-A step of the k05_tranche2 implementation. Called by \code{morie_tcc}, \code{morie_test_information}.
+A step of the k05_tranche2 implementation. Called by \code{morie_tcc},
+\code{morie_test_information}.
 See the file header for the source the module follows.
 source it follows.
 }

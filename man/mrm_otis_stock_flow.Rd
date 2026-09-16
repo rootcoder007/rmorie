@@ -21,20 +21,19 @@ mrm_otis_stock_flow(
 }
 \arguments{
 \item{person_days}{Data frame at the PERSON stratum: one row per
-individual per period, with a period column, an identifier column and a
-column of days served.}
+individual per period, with a period column, an identifier column
+and a column of days served.}
 
 \item{placements}{Optional data frame at the PLACEMENT stratum, used
 only for reconciliation: rows per individual per spell, with the
 consecutive-days and placement-count columns.}
 
-\item{totals}{Optional data frame at the AGGREGATE stratum, one or more
-rows per period carrying a stated total of individuals.}
+\item{totals}{Optional data frame at the AGGREGATE stratum, one or
+more rows per period carrying a stated total of individuals.}
 
 \item{year_col}{Period column name, present in every stratum given.}
 
-\item{id_col}{Identifier column in \code{person_days} and
-\code{placements}.}
+\item{id_col}{Identifier column in \code{person_days} and \code{placements}.}
 
 \item{days_col}{Days column in \code{person_days}.}
 
@@ -46,46 +45,54 @@ rows per period carrying a stated total of individuals.}
 
 \item{t}{Length of each period in days. Default 365.}
 
-\item{exposure}{Optional population to express rates against, one value
-or one per period.}
+\item{exposure}{Optional population to express rates against, one
+value or one per period.}
 
-\item{per}{Rate denominator when \code{exposure} is given. Default
-100000.}
+\item{per}{Rate denominator when \code{exposure} is given. Default 100000.}
 }
 \value{
-A list with \code{stock_flow} (the measures per period, from
-\code{rmoriebricklayer::stock_flow()}), \code{reconciliation} (one row
-per period comparing the strata: people at the person and placement
-strata, the stated aggregate total, whether they agree, and the ratio of
-summed consecutive days to person-days), \code{strata_agree} and
-\code{decomposition_exact}.
+A list with:
+\itemize{
+\item \code{stock_flow}: the measures per period, from
+\code{rmoriebricklayer::stock_flow()}.
+\item \code{reconciliation}: one row per period comparing the strata --
+people at the person and placement strata, the stated aggregate
+total, whether they agree, and the ratio of summed consecutive
+days to person-days.
+\item \code{strata_agree}: \code{TRUE} when every stratum given agrees on
+the number of people in every period.
+\item \code{decomposition_exact}: \code{TRUE} when the change in days is
+recovered by the changes in people and stay.
+}
 }
 \description{
-MRM (Multilevel Reconciliation Methodology) applied to person-days: the
-same confinement appears at three strata in the OTIS release and they do
-not automatically agree.
+MRM (Multilevel Reconciliation Methodology) applied to person-days:
+the same confinement appears at three strata in the OTIS release and
+they do not automatically agree.
 }
 \details{
 \itemize{
-\item PERSON stratum (b02): one row per individual per year, carrying
-the days that person served across the year. This is the additive
+\item PERSON stratum (b02): one row per individual per year, carrying the
+days that person served across the year. This is the additive
 quantity, and the one Lakner's measures need.
 \item PLACEMENT stratum (b01): several rows per individual, carrying the
-consecutive days of a spell and the count of placements. Spell lengths
-are NOT an additive share of the year.
+consecutive days of a spell and the count of placements. Spell
+lengths are NOT an additive share of the year.
 \item AGGREGATE stratum (c01): the yearly totals stated directly.
 }
 
 Reconciling them is the point. Summing the placement stratum's
-consecutive days as though they were person-days understates the total by
-about a third on the published release, and the two strata can disagree
-about how many people there even were. Both are reported rather than
-assumed away.
+consecutive days as though they were person-days understates the
+total by about a third on the published release, and the two strata
+can disagree about how many people there even were. Both are reported
+rather than assumed away.
 
 The measures themselves come from \code{rmoriebricklayer}: the average
-daily population is days per day, the average length of stay is days per
-person, and a change in days decomposes exactly into a change in people
-and a change in stay.
+daily population is days per day, the average length of stay is days
+per person, and a change in days decomposes exactly into a change in
+people and a change in stay. After Lakner, A Manual of Statistical
+Sampling Methods for Corrections Planners (University of Illinois at
+Urbana-Champaign, 1976), p.15-18.
 }
 \examples{
 # needs rmoriebricklayer (>= 0.4.8) for adp()/alos()/stock_flow()

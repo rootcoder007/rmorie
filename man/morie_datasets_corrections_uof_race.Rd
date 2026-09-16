@@ -23,7 +23,8 @@ real CKAN sample at
 \code{offline} when supplied.}
 }
 \value{
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 }
 \description{
 Inmate-participant race

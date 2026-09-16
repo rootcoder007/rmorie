@@ -27,11 +27,10 @@ morie_geron_flamingo(
 \item{gate}{Pre-tanh gate value (default 0).}
 
 \item{image_index}{Optional per-position image index (0 or -1).}
-
-
 }
 \value{
-List with \code{output}, \code{visual_tokens}, \code{cross_attention}, \code{gate_value}, \code{is_identity_at_init}.
+List with \code{output}, \code{visual_tokens}, \code{cross_attention}, \code{gate_value},
+\code{is_identity_at_init}.
 }
 \description{
 Both attention stages delegated to \code{morie_geron_cross_attention}.

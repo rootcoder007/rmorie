@@ -7,9 +7,11 @@
 .lggvls_lagged_design(L_hist, Y_hist = NULL, k_time = 0, lag = 1)
 }
 \arguments{
-\item{L_hist}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{L_hist}{Optional; may be \code{NULL}. A vector; its length is taken and its
+elements indexed.}
 
-\item{Y_hist}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{Y_hist}{Optional; may be \code{NULL}. A vector; its length is taken and its
+elements indexed.}
 
 \item{k_time}{Numeric; combined arithmetically in the body. Defaults to \code{0}.}
 

@@ -17,7 +17,8 @@ Each callable consumes one TPS category and returns a multi-section
 delegation are deferred to companion modules (\code{tps_render},
 \code{tps_spatial_advanced}); when those collaborators are not
 available the routines fall back to a stop-stub explaining the gap.
-\subsection{Functions}{
+
+Functions
 
 \itemize{
 \item \code{\link{morie_tps_sdb_reaction_diffusion}} -- Short,
@@ -38,7 +39,6 @@ strategy replicator phase diagram (Helbing, Szolnoki & Perc
 \item \code{\link{morie_tps_criminal_network_graph}} -- premise x
 neighbourhood co-occurrence network (Diviak \emph{et al.}
 2019-style projection from public TPS data).
-}
 }
 }
 \references{

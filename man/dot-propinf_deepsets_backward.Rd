@@ -7,7 +7,8 @@
 .propinf_deepsets_backward(model, sets, cache, dout, grads)
 }
 \arguments{
-\item{model}{A list; the body reads \code{$context}, \code{$phis}, \code{$psis}, \code{$repr_dim}, \code{$rho} from it.}
+\item{model}{A list; the body reads \code{$context}, \code{$phis}, \code{$psis},
+\code{$repr_dim}, \code{$rho} from it.}
 
 \item{sets}{A vector; its length is taken.}
 

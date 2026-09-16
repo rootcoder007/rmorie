@@ -18,10 +18,12 @@
 
 \item{target_name}{Coerced to character by the body, with \code{as.character}.}
 
-\item{estimator}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"TMLE"}.}
+\item{estimator}{Coerced to character by the body, with \code{as.character}. Defaults
+to \code{"TMLE"}.}
 }
 \value{
-A list with \code{steps}, \code{data}, \code{model}, \code{target}, \code{estimator}, \code{note}.
+A list with \code{steps}, \code{data}, \code{model}, \code{target},
+\code{estimator}, \code{note}.
 }
 \description{
 A step of the tlroad_native implementation. No other function in the package calls it.

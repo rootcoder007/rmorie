@@ -17,7 +17,8 @@
 A list with \code{freqs}, \code{power}.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{CadSpec}, \code{EggFeat} and 7 others in the module.
+A step of the rangayyan_phys implementation. Called by \code{ApneaDet},
+\code{CadSpec}, \code{EggFeat} and 7 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

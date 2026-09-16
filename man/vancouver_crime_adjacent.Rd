@@ -50,30 +50,39 @@ morie_datasets_vancouver_public_art(offline = TRUE, max_features = NULL)
 \item{max_features}{Optional row cap.}
 }
 \value{
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 }
 \description{
 Phase 3DDD1. Five small fixtures harvested live from
 opendata.vancouver.ca for offline reproducibility -- chosen to
 surface neighbourhood-level civic context useful in carceral /
 policing analysis even though VPD itself publishes crime data
-separately (see \code{morie_datasets_vpd_crime()}).
+separately (see \code{\link[=morie_datasets_vpd_crime]{morie_datasets_vpd_crime()}}).
 
 Phase 3EEE3. Included 27-row snapshot of City-run community
 centres. Useful as an "anchor institutions" overlay for analyses
@@ -97,7 +106,8 @@ neighbourhood, primary material. Useful as a CPTED-style
 \code{morie_datasets_vancouver_graffiti()} \tab \code{graffiti} \tab 100 (of 7683) \cr
 \code{morie_datasets_vancouver_noise_control_areas()} \tab \code{noise-control-areas} \tab 3 \cr
 \code{morie_datasets_vancouver_homeless_shelters()} \tab \code{homeless-shelter-locations} \tab 17 \cr
-\code{morie_datasets_vancouver_property_use_inspection_districts()} \tab \code{property-use-inspection-districts} \tab 23 \cr
+\code{morie_datasets_vancouver_property_use_inspection_districts()} \tab
+\code{property-use-inspection-districts} \tab 23 \cr
 \code{morie_datasets_vancouver_fire_halls()} \tab \code{fire-halls} \tab 20 \cr
 }
 
@@ -105,6 +115,32 @@ All loaders accept the same \code{offline = TRUE} (default) /
 \code{max_features} interface as the other morie dataset wrappers.
 }
 \examples{
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+df <- morie_datasets_vancouver_graffiti()
+head(df)
+\dontshow{\}) # examplesIf}
+df <- morie_datasets_vancouver_noise_control_areas()
+head(df)
+df <- morie_datasets_vancouver_homeless_shelters()
+head(df)
+df <- morie_datasets_vancouver_property_use_inspection_districts()
+head(df)
+df <- morie_datasets_vancouver_fire_halls()
+head(df)
+df <- morie_datasets_vancouver_community_centres()
+head(df)
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+df <- morie_datasets_vancouver_community_food_markets()
+head(df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+df <- morie_datasets_vancouver_disability_parking()
+head(df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+df <- morie_datasets_vancouver_public_art()
+head(df)
+\dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_vancouver_graffiti()
 head(df)

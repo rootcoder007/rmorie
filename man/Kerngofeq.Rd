@@ -21,15 +21,14 @@ morie_fauzi_thm5_1_naive_kernel_equiv(
 \item{cvm_emp, cvm_kernel}{The empirical and naive-kernel CvM statistics.}
 
 \item{tol}{Tolerance against which the differences are reported.}
-
-
 }
 \value{
 Named list with \code{ksdiff}, \code{cvmdiff}, \code{close}, \code{tol}, \code{method}.
 }
 \description{
 Theorem 5.1: under \code{H0: F_X = F},
-\deqn{|KS_n - \widehat{KS}| \to_p 0\quad\text{and}\quad |CvM_n - \widehat{CvM}| \to_p 0,}{|KS_n - KShat| ->_p 0 and |CvM_n - CvMhat| ->_p 0,}
+\deqn{|KS_n - \widehat{KS}| \to_p 0\quad\text{and}\quad |CvM_n - \widehat{CvM}| \to_p
+0,}{|KS_n - KShat| ->_p 0 and |CvM_n - CvMhat| ->_p 0,}
 where the hatted statistics use the NAIVE kernel distribution function
 estimator of (5.3)-(5.4).
 }

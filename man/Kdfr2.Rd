@@ -17,14 +17,14 @@ morie_fauzi_r2_integral(a, kernel = "gaussian", lo = -8, hi = 8, ngrid = 4001L)
 \item{lo, hi}{Quadrature limits.}
 
 \item{ngrid}{Number of nodes; fixed, never adapted.}
-
 }
 \value{
 Named list with \code{estimate}, \code{a}, \code{method}.
 }
 \description{
 Eq. (2.10):
-\deqn{r_2 = \int y K(y)[W(y/a) + a^{-1}W(y)K(y/a)]\,dy.}{r2 = int y [K(y) W(y/a) + (1/a) W(y) K(y/a)] dy.}
+\deqn{r_2 = \int y K(y)[W(y/a) + a^{-1}W(y)K(y/a)]\,dy.}{r2 = int y [K(y) W(y/a) +
+(1/a) W(y) K(y/a)] dy.}
 }
 \details{
 Read the bracket carefully: the two terms differ in WHICH factor is

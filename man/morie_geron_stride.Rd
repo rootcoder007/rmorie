@@ -16,7 +16,8 @@ morie_geron_stride(in_dim, k, p = 0, s = 1)
 \item{s}{Stride.}
 }
 \value{
-list with output_dim, dropped, same_padding, padded_dim, in_dim, k, p, s, estimate, n, method.
+list with output_dim, dropped, same_padding, padded_dim, in_dim, k, p, s,
+estimate, n, method.
 }
 \description{
 output_dim = floor((in_dim + 2p - k)/s) + 1.

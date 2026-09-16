@@ -8,7 +8,6 @@ morie_kamath_bradley_terry_preference(r_w, r_l)
 }
 \arguments{
 \item{r_w, r_l}{Winner and loser scores.}
-
 }
 \value{
 List with \code{estimate}, \code{p_pref}, \code{reward_difference}.

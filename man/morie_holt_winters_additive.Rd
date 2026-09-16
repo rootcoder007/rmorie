@@ -21,8 +21,6 @@ morie_holt_winters_additive(
 \item{alpha, beta, gamma}{smoothing parameters in \eqn{[0, 1]}.}
 
 \item{horizon}{steps ahead; defaults to one full period.}
-
-
 }
 \value{
 list with \code{forecast}, \code{level}, \code{trend},

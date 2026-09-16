@@ -15,7 +15,8 @@
 The value of \code{base}, as built in the body.
 }
 \description{
-A step of the glides_native implementation. Called by \code{morie_glides_hbond}, \code{morie_glides_score}.
+A step of the glides_native implementation. Called by \code{morie_glides_hbond},
+\code{morie_glides_score}.
 See the file header for the source the module follows.
 source it follows.
 }

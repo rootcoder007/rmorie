@@ -11,15 +11,18 @@
 
 \item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
 
-\item{lower}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{lower}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
-\item{upper}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{upper}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
 A list with \code{shifted}, \code{delta}, \code{n_clipped}, \code{fraction_clipped}.
 }
 \description{
-A step of the tlstoch_native implementation. Called by \code{.tlstoch_shift_tmle}, \code{.tlstoch_stochastic_estimand}.
+A step of the tlstoch_native implementation. Called by \code{.tlstoch_shift_tmle},
+\code{.tlstoch_stochastic_estimand}.
 See the file header for the source the module follows.
 the source it follows.
 }

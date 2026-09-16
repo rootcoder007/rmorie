@@ -12,8 +12,6 @@ morie_otis_psm_subclass(df, treatment, outcome, covariates, n_strata = 5L)
 \item{treatment, outcome, covariates}{Column names.}
 
 \item{n_strata}{Number of PS strata. Default 5.}
-
-
 }
 \value{
 An OTIS causal-estimate list (ATE).

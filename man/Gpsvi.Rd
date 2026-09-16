@@ -30,8 +30,6 @@ Gpsvi(
 \item{lengthscale, variance, noise}{GP hyperparameters.}
 
 \item{jitter}{Ridge added to K_mm.}
-
-
 }
 \value{
 List with \code{estimate}, \code{mean}, \code{variance},

@@ -29,7 +29,6 @@ Crpgib(
 \item{sigma2}{Known within-cluster variance.}
 
 \item{seed}{Seed of the deterministic stream.}
-
 }
 \value{
 List with \code{estimate} (number of clusters), \code{z},

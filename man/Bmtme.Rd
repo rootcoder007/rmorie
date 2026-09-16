@@ -38,11 +38,6 @@ a value, but that value means nothing.}
 6 and 7.}
 
 \item{tol}{fixed-point tolerance.}
-
-
-
-
-
 }
 \value{
 list: estimate, gebv, b1, b2, sigma_g, Sigma_T, Sigma_E, R, mu,

@@ -27,7 +27,7 @@ if you fit a SAR (lag-only) model.}
 weight matrix.}
 
 \item{coefficient_names}{Optional character vector of length K with
-human-readable covariate names; defaults to \code{c("x1", ...,
+human-readable covariate names; defaults to \eqn{c("x1", ...,
 "xK")}.}
 }
 \value{

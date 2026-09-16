@@ -13,7 +13,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the gibbons_native implementation. Called by \code{morie_rank_exact_null}, \code{morie_runs_updown}.
+A step of the gibbons_native implementation. Called by \code{morie_rank_exact_null},
+\code{morie_runs_updown}.
 See the file header for the source the module follows.
 the source it follows.
 }

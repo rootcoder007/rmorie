@@ -13,7 +13,8 @@
 The value of \code{unname}.
 }
 \description{
-A step of the epirate implementation. Called by \code{Incrtio}, \code{Mhrate}, \code{Riskdf} and 1 others in the module.
+A step of the epirate implementation. Called by \code{Incrtio}, \code{Mhrate},
+\code{Riskdf} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }
