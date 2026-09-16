@@ -80,13 +80,6 @@
 #'
 #' @param smiles The compound.
 #' @return A numeric vector in the order given by the module's names.
-#' @references Veith, H. et al. (2009) "Comprehensive characterization of
-#'       cytochrome P450 isozyme selectivity across chemical libraries."
-#'       Nature Biotechnology 27(11), 1050-1055. doi:10.1038/nbt.1581.
-#'     Meija, J. et al. (2016) "Atomic weights of the elements 2013."
-#'       Pure and Applied Chemistry 88(3), 265-291.
-#'     McCullagh, P. and Nelder, J.A. (1989) "Generalized Linear Models",
-#'       2nd edition, Chapman and Hall.
 #' @export
 #' @examples
 #' r <- morie_cypin_descriptors("c1ccccc1O")
@@ -172,13 +165,6 @@ morie_cypin_descriptors <- function(smiles) {
 #'
 #' @param z A numeric scalar.
 #' @return A number strictly between zero and one.
-#' @references Veith, H. et al. (2009) "Comprehensive characterization of
-#'       cytochrome P450 isozyme selectivity across chemical libraries."
-#'       Nature Biotechnology 27(11), 1050-1055. doi:10.1038/nbt.1581.
-#'     Meija, J. et al. (2016) "Atomic weights of the elements 2013."
-#'       Pure and Applied Chemistry 88(3), 265-291.
-#'     McCullagh, P. and Nelder, J.A. (1989) "Generalized Linear Models",
-#'       2nd edition, Chapman and Hall.
 #' @export
 #' @examples
 #' morie_cypin_logistic(z = 5L)
@@ -211,13 +197,6 @@ morie_cypin_logistic <- function(z) {
 #' @param tol The convergence tolerance on the coefficient step.
 #' @return A list with the coefficients, the deviance, the iteration
 #'   count and the score.
-#' @references Veith, H. et al. (2009) "Comprehensive characterization of
-#'       cytochrome P450 isozyme selectivity across chemical libraries."
-#'       Nature Biotechnology 27(11), 1050-1055. doi:10.1038/nbt.1581.
-#'     Meija, J. et al. (2016) "Atomic weights of the elements 2013."
-#'       Pure and Applied Chemistry 88(3), 265-291.
-#'     McCullagh, P. and Nelder, J.A. (1989) "Generalized Linear Models",
-#'       2nd edition, Chapman and Hall.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -275,13 +254,6 @@ morie_cypin_fit <- function(X, y, ridge = 1e-6, iters = 50L,
 #' @param coefficients The intercept followed by one slope per
 #'   descriptor.
 #' @return A probability.
-#' @references Veith, H. et al. (2009) "Comprehensive characterization of
-#'       cytochrome P450 isozyme selectivity across chemical libraries."
-#'       Nature Biotechnology 27(11), 1050-1055. doi:10.1038/nbt.1581.
-#'     Meija, J. et al. (2016) "Atomic weights of the elements 2013."
-#'       Pure and Applied Chemistry 88(3), 265-291.
-#'     McCullagh, P. and Nelder, J.A. (1989) "Generalized Linear Models",
-#'       2nd edition, Chapman and Hall.
 #' @export
 #' @examples
 #' x <- morie_cypin_descriptors("c1ccccc1O")
@@ -304,13 +276,6 @@ morie_cypin_predict <- function(x, coefficients) {
 #'   NULL means no prediction is made and the reason says so.
 #' @return A list with the descriptors, named; the probability if a
 #'   model was given; and otherwise the reason there is none.
-#' @references Veith, H. et al. (2009) "Comprehensive characterization of
-#'       cytochrome P450 isozyme selectivity across chemical libraries."
-#'       Nature Biotechnology 27(11), 1050-1055. doi:10.1038/nbt.1581.
-#'     Meija, J. et al. (2016) "Atomic weights of the elements 2013."
-#'       Pure and Applied Chemistry 88(3), 265-291.
-#'     McCullagh, P. and Nelder, J.A. (1989) "Generalized Linear Models",
-#'       2nd edition, Chapman and Hall.
 #' @export
 #' @examples
 #' x <- morie_cypin_descriptors("c1ccccc1O")
@@ -352,13 +317,6 @@ morie_cypin <- function(smiles, isozyme, model = NULL) {
 #' One-line summary of the cypin module
 #'
 #' @return A character scalar.
-#' @references Veith, H. et al. (2009) "Comprehensive characterization of
-#'       cytochrome P450 isozyme selectivity across chemical libraries."
-#'       Nature Biotechnology 27(11), 1050-1055. doi:10.1038/nbt.1581.
-#'     Meija, J. et al. (2016) "Atomic weights of the elements 2013."
-#'       Pure and Applied Chemistry 88(3), 265-291.
-#'     McCullagh, P. and Nelder, J.A. (1989) "Generalized Linear Models",
-#'       2nd edition, Chapman and Hall.
 #' @export
 #' @examples
 #' morie_cypin_cheatsheet()

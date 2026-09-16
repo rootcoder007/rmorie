@@ -76,21 +76,6 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' @param z Numeric; passed to \code{abs}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return One of two values, depending on the branch taken.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -121,21 +106,6 @@ morie_surxgb_pdf <- function(z, dist = "normal") {
 #' @param z Numeric; passed to \code{exp}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' morie_surxgb_cdf(z = 5L)
@@ -169,21 +139,6 @@ morie_surxgb_cdf <- function(z, dist = "normal") {
 #' @param z Passed to \code{morie_surxgb_pdf}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -212,21 +167,6 @@ morie_surxgb_dpdf <- function(z, dist = "normal") {
 #' @param z Passed to \code{morie_surxgb_pdf}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -283,21 +223,6 @@ morie_surxgb_ddpdf <- function(z, dist = "normal") {
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param dist Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.
 #' @return A numeric value.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' morie_surxgb_aft_loss(y_lower = 5L, y_upper = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -349,21 +274,6 @@ morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma = 1.0,
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A list with \code{gradient}, \code{hessian}, \code{loss},
 #' \code{hessian_floored}, \code{derivative_method}.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' morie_surxgb_aft_gradient_hessian(y_lower = 5L, y_upper = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -429,21 +339,6 @@ morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
 #' @param H Numeric; combined arithmetically in the body.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' morie_surxgb_leaf_weight(G = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)
@@ -469,21 +364,6 @@ morie_surxgb_leaf_weight <- function(G, H, lam = 1.0) {
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' morie_surxgb_split_gain(GL = c(1, 2, 3, 4, 5, 6, 7, 8), HL = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -611,21 +491,6 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
 #' \code{gamma}, \code{sigma}, \code{dist}, \code{base_score}, \code{derivatives},
 #' \code{loss_history}, \code{prediction}, \code{n_rounds}, \code{max_depth},
 #' \code{method}.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' morie_surxgb_boost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y_lower = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -709,21 +574,6 @@ morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds = 50, eta = 0.1,
 #' @param fit A list; the body reads \code{$base_score}, \code{$eta}, \code{$trees} from it.
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @keywords internal
 morie_surxgb_predict <- function(fit, X) {
@@ -750,21 +600,6 @@ morie_surxgb_predict <- function(fit, X) {
 #' @param times Passed to \code{morie_survrsf_c_index}.
 #' @param events Passed to \code{morie_survrsf_c_index}.
 #' @return The value of \code{morie_survrsf_c_index}.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @keywords internal
 morie_surxgb_concordance <- function(fit, X, times, events) {
@@ -781,21 +616,6 @@ morie_surxgb_concordance <- function(fit, X, times, events) {
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Chen, T. & Guestrin, C. (2016) "XGBoost: A Scalable Tree Boosting
-#'   System", KDD \'16, 785-794, doi:10.1145/2939672.2939785. Secs. 2.1
-#'   and 2.2, eqs (5)-(7).
-#'   
-#'   Barnwal, A., Cho, H. & Hocking, T. (2022) "Survival Regression with
-#'   Accelerated Failure Time Model in XGBoost", Journal of Computational
-#'   and Graphical Statistics 31(4), 1292-1302,
-#'   doi:10.1080/10618600.2022.2067548 (arXiv:2006.04920). Table 1,
-#'   Definitions 1-2, Table 2, Sec. 4.
-#'   
-#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
-#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
-#'   841-860, doi:10.1214/08-AOAS169, Sec. 5.1, for the concordance index
-#'   reused here from survrsf.
 #' @export
 #' @examples
 #' morie_surxgb_cheatsheet()

@@ -88,25 +88,6 @@
 #' @param kd The dissociation constant, in molar.
 #' @param temperature Kelvin.
 #' @return The binding free energy.
-#' @references Hopkins, A.L., Groom, C.R. and Alex, A. (2004) "Ligand efficiency: a
-#'       useful metric for lead selection." Drug Discovery Today 9(10),
-#'       430-431. doi:10.1016/S1359-6446(04)03069-7.
-#'     Verdonk, M.L. and Rees, D.C. (2008) "Group efficiency: a guideline
-#'       for hits-to-leads chemistry." ChemMedChem 3(8), 1179-1180.
-#'     Murray, C.W. and Rees, D.C. (2009) "The rise of fragment-based drug
-#'       discovery." Nature Chemistry 1(3), 187-192.
-#'     Shuker, S.B., Hajduk, P.J., Meadows, R.P. and Fesik, S.W. (1996)
-#'       "Discovering high-affinity ligands for proteins: SAR by NMR."
-#'       Science 274(5292), 1531-1534.
-#'     Leeson, P.D. and Springthorpe, B. (2007) "The influence of drug-like
-#'       concepts on decision-making in medicinal chemistry." Nature
-#'       Reviews Drug Discovery 6(11), 881-890.
-#'     Keseru, G.M. and Makara, G.M. (2009) "The influence of lead
-#'       discovery strategies on the properties of drug candidates."
-#'       Nature Reviews Drug Discovery 8(3), 203-212.
-#'     Abad-Zapatero, C. and Metz, J.T. (2005) "Ligand efficiency indices
-#'       as guideposts for drug discovery." Drug Discovery Today 10(7),
-#'       464-469.
 #' @export
 #' @examples
 #' morie_frgrow_dg(kd = 5L)
@@ -130,25 +111,6 @@ morie_frgrow_dg <- function(kd, temperature = .FRGROW_T_STANDARD) {
 #' @param route A member of the energy-route list.
 #' @param temperature Kelvin.
 #' @return The ligand efficiency.
-#' @references Hopkins, A.L., Groom, C.R. and Alex, A. (2004) "Ligand efficiency: a
-#'       useful metric for lead selection." Drug Discovery Today 9(10),
-#'       430-431. doi:10.1016/S1359-6446(04)03069-7.
-#'     Verdonk, M.L. and Rees, D.C. (2008) "Group efficiency: a guideline
-#'       for hits-to-leads chemistry." ChemMedChem 3(8), 1179-1180.
-#'     Murray, C.W. and Rees, D.C. (2009) "The rise of fragment-based drug
-#'       discovery." Nature Chemistry 1(3), 187-192.
-#'     Shuker, S.B., Hajduk, P.J., Meadows, R.P. and Fesik, S.W. (1996)
-#'       "Discovering high-affinity ligands for proteins: SAR by NMR."
-#'       Science 274(5292), 1531-1534.
-#'     Leeson, P.D. and Springthorpe, B. (2007) "The influence of drug-like
-#'       concepts on decision-making in medicinal chemistry." Nature
-#'       Reviews Drug Discovery 6(11), 881-890.
-#'     Keseru, G.M. and Makara, G.M. (2009) "The influence of lead
-#'       discovery strategies on the properties of drug candidates."
-#'       Nature Reviews Drug Discovery 8(3), 203-212.
-#'     Abad-Zapatero, C. and Metz, J.T. (2005) "Ligand efficiency indices
-#'       as guideposts for drug discovery." Drug Discovery Today 10(7),
-#'       464-469.
 #' @export
 #' @examples
 #' morie_frgrow_le(kd = 5L, hac = 5L)
@@ -179,25 +141,6 @@ morie_frgrow_le <- function(kd, hac, route = "rt",
 #' @param route A member of the energy-route list.
 #' @param temperature Kelvin.
 #' @return The group efficiency.
-#' @references Hopkins, A.L., Groom, C.R. and Alex, A. (2004) "Ligand efficiency: a
-#'       useful metric for lead selection." Drug Discovery Today 9(10),
-#'       430-431. doi:10.1016/S1359-6446(04)03069-7.
-#'     Verdonk, M.L. and Rees, D.C. (2008) "Group efficiency: a guideline
-#'       for hits-to-leads chemistry." ChemMedChem 3(8), 1179-1180.
-#'     Murray, C.W. and Rees, D.C. (2009) "The rise of fragment-based drug
-#'       discovery." Nature Chemistry 1(3), 187-192.
-#'     Shuker, S.B., Hajduk, P.J., Meadows, R.P. and Fesik, S.W. (1996)
-#'       "Discovering high-affinity ligands for proteins: SAR by NMR."
-#'       Science 274(5292), 1531-1534.
-#'     Leeson, P.D. and Springthorpe, B. (2007) "The influence of drug-like
-#'       concepts on decision-making in medicinal chemistry." Nature
-#'       Reviews Drug Discovery 6(11), 881-890.
-#'     Keseru, G.M. and Makara, G.M. (2009) "The influence of lead
-#'       discovery strategies on the properties of drug candidates."
-#'       Nature Reviews Drug Discovery 8(3), 203-212.
-#'     Abad-Zapatero, C. and Metz, J.T. (2005) "Ligand efficiency indices
-#'       as guideposts for drug discovery." Drug Discovery Today 10(7),
-#'       464-469.
 #' @export
 #' @keywords internal
 morie_frgrow_ge <- function(kd_parent, hac_parent, kd_grown, hac_grown,
@@ -231,25 +174,6 @@ morie_frgrow_ge <- function(kd_parent, hac_parent, kd_grown, hac_grown,
 #' @param route A member of the energy-route list.
 #' @param temperature Kelvin.
 #' @return A list with pKd, the free energy and the five metrics.
-#' @references Hopkins, A.L., Groom, C.R. and Alex, A. (2004) "Ligand efficiency: a
-#'       useful metric for lead selection." Drug Discovery Today 9(10),
-#'       430-431. doi:10.1016/S1359-6446(04)03069-7.
-#'     Verdonk, M.L. and Rees, D.C. (2008) "Group efficiency: a guideline
-#'       for hits-to-leads chemistry." ChemMedChem 3(8), 1179-1180.
-#'     Murray, C.W. and Rees, D.C. (2009) "The rise of fragment-based drug
-#'       discovery." Nature Chemistry 1(3), 187-192.
-#'     Shuker, S.B., Hajduk, P.J., Meadows, R.P. and Fesik, S.W. (1996)
-#'       "Discovering high-affinity ligands for proteins: SAR by NMR."
-#'       Science 274(5292), 1531-1534.
-#'     Leeson, P.D. and Springthorpe, B. (2007) "The influence of drug-like
-#'       concepts on decision-making in medicinal chemistry." Nature
-#'       Reviews Drug Discovery 6(11), 881-890.
-#'     Keseru, G.M. and Makara, G.M. (2009) "The influence of lead
-#'       discovery strategies on the properties of drug candidates."
-#'       Nature Reviews Drug Discovery 8(3), 203-212.
-#'     Abad-Zapatero, C. and Metz, J.T. (2005) "Ligand efficiency indices
-#'       as guideposts for drug discovery." Drug Discovery Today 10(7),
-#'       464-469.
 #' @export
 #' @examples
 #' morie_frgrow_metrics(kd = 5L, hac = 5L)
@@ -298,25 +222,6 @@ morie_frgrow_metrics <- function(kd, hac, logp = NULL, mw = NULL,
 #' @return A list with the parent's metrics, each analogue's metrics and
 #'   group efficiency, the ranking by group efficiency, and which
 #'   additions actually improved the ligand efficiency they inherited.
-#' @references Hopkins, A.L., Groom, C.R. and Alex, A. (2004) "Ligand efficiency: a
-#'       useful metric for lead selection." Drug Discovery Today 9(10),
-#'       430-431. doi:10.1016/S1359-6446(04)03069-7.
-#'     Verdonk, M.L. and Rees, D.C. (2008) "Group efficiency: a guideline
-#'       for hits-to-leads chemistry." ChemMedChem 3(8), 1179-1180.
-#'     Murray, C.W. and Rees, D.C. (2009) "The rise of fragment-based drug
-#'       discovery." Nature Chemistry 1(3), 187-192.
-#'     Shuker, S.B., Hajduk, P.J., Meadows, R.P. and Fesik, S.W. (1996)
-#'       "Discovering high-affinity ligands for proteins: SAR by NMR."
-#'       Science 274(5292), 1531-1534.
-#'     Leeson, P.D. and Springthorpe, B. (2007) "The influence of drug-like
-#'       concepts on decision-making in medicinal chemistry." Nature
-#'       Reviews Drug Discovery 6(11), 881-890.
-#'     Keseru, G.M. and Makara, G.M. (2009) "The influence of lead
-#'       discovery strategies on the properties of drug candidates."
-#'       Nature Reviews Drug Discovery 8(3), 203-212.
-#'     Abad-Zapatero, C. and Metz, J.T. (2005) "Ligand efficiency indices
-#'       as guideposts for drug discovery." Drug Discovery Today 10(7),
-#'       464-469.
 #' @export
 #' @examples
 #' PARENT <- list(0.001, 12, 0.9, 165, 42, "frag")
@@ -410,25 +315,6 @@ morie_frgrow <- function(fragment, linker_lib, route = "rt",
 #' One-line summary of the frgrow module
 #'
 #' @return A character scalar.
-#' @references Hopkins, A.L., Groom, C.R. and Alex, A. (2004) "Ligand efficiency: a
-#'       useful metric for lead selection." Drug Discovery Today 9(10),
-#'       430-431. doi:10.1016/S1359-6446(04)03069-7.
-#'     Verdonk, M.L. and Rees, D.C. (2008) "Group efficiency: a guideline
-#'       for hits-to-leads chemistry." ChemMedChem 3(8), 1179-1180.
-#'     Murray, C.W. and Rees, D.C. (2009) "The rise of fragment-based drug
-#'       discovery." Nature Chemistry 1(3), 187-192.
-#'     Shuker, S.B., Hajduk, P.J., Meadows, R.P. and Fesik, S.W. (1996)
-#'       "Discovering high-affinity ligands for proteins: SAR by NMR."
-#'       Science 274(5292), 1531-1534.
-#'     Leeson, P.D. and Springthorpe, B. (2007) "The influence of drug-like
-#'       concepts on decision-making in medicinal chemistry." Nature
-#'       Reviews Drug Discovery 6(11), 881-890.
-#'     Keseru, G.M. and Makara, G.M. (2009) "The influence of lead
-#'       discovery strategies on the properties of drug candidates."
-#'       Nature Reviews Drug Discovery 8(3), 203-212.
-#'     Abad-Zapatero, C. and Metz, J.T. (2005) "Ligand efficiency indices
-#'       as guideposts for drug discovery." Drug Discovery Today 10(7),
-#'       464-469.
 #' @export
 #' @examples
 #' morie_frgrow_cheatsheet()

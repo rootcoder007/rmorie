@@ -134,31 +134,6 @@
 #' @return A list with \code{scaffold}, \code{targets}, \code{union},
 #' \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain},
 #' \code{note}.
-#' @references ----------
-#'   Howie, B. N., Donnelly, P. & Marchini, J. (2009) "A Flexible and
-#'   Accurate Genotype Imputation Method for the Next Generation of
-#'   Genome-Wide Association Studies", *PLoS Genetics* 5(6), e1000529,
-#'   doi:10.1371/journal.pgen.1000529. The main innovation as a flexible
-#'   modelling framework that increases accuracy and combines information
-#'   across MULTIPLE REFERENCE PANELS while remaining computationally
-#'   feasible; higher accuracy than other methods when HapMap provides the
-#'   sole reference panel, with the panel size constraining the
-#'   improvements possible; greatly enhanced accuracy from expanding the
-#'   panel to thousands of chromosomes, outperforming other methods at both
-#'   rare and common SNPs with error rates 15-20% lower than the closest
-#'   competitor; and the practical advantages of this approach to
-#'   integrating information across panels genotyped on different sets of
-#'   SNPs.
-#'   
-#'   Li, N. & Stephens, M. (2003) "Modeling Linkage Disequilibrium and
-#'   Identifying Recombination Hotspots Using Single-Nucleotide
-#'   Polymorphism Data", *Genetics* 165(4), 2213-2233,
-#'   doi:10.1093/genetics/165.4.2213. The copying model.
-#'   
-#'   Browning, S. R. & Browning, B. L. (2007) "Rapid and Accurate Haplotype
-#'   Phasing and Missing-Data Inference for Whole-Genome Association
-#'   Studies by Use of Localized Haplotype Clustering", *American Journal
-#'   of Human Genetics* 81(5), 1084-1097, doi:10.1086/521987.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -214,31 +189,6 @@ merge_panels <- function(panels, study_snps) {
 #' @param rho Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @return A list with \code{posterior}, \code{n_templates}, \code{n_sites}, \code{log_likelihood}.
-#' @references ----------
-#'   Howie, B. N., Donnelly, P. & Marchini, J. (2009) "A Flexible and
-#'   Accurate Genotype Imputation Method for the Next Generation of
-#'   Genome-Wide Association Studies", *PLoS Genetics* 5(6), e1000529,
-#'   doi:10.1371/journal.pgen.1000529. The main innovation as a flexible
-#'   modelling framework that increases accuracy and combines information
-#'   across MULTIPLE REFERENCE PANELS while remaining computationally
-#'   feasible; higher accuracy than other methods when HapMap provides the
-#'   sole reference panel, with the panel size constraining the
-#'   improvements possible; greatly enhanced accuracy from expanding the
-#'   panel to thousands of chromosomes, outperforming other methods at both
-#'   rare and common SNPs with error rates 15-20% lower than the closest
-#'   competitor; and the practical advantages of this approach to
-#'   integrating information across panels genotyped on different sets of
-#'   SNPs.
-#'   
-#'   Li, N. & Stephens, M. (2003) "Modeling Linkage Disequilibrium and
-#'   Identifying Recombination Hotspots Using Single-Nucleotide
-#'   Polymorphism Data", *Genetics* 165(4), 2213-2233,
-#'   doi:10.1093/genetics/165.4.2213. The copying model.
-#'   
-#'   Browning, S. R. & Browning, B. L. (2007) "Rapid and Accurate Haplotype
-#'   Phasing and Missing-Data Inference for Whole-Genome Association
-#'   Studies by Use of Localized Haplotype Clustering", *American Journal
-#'   of Human Genetics* 81(5), 1084-1097, doi:10.1086/521987.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -306,31 +256,6 @@ copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
 #' @param reference_haps Passed to \code{.impfun_as_double_matrix}.
 #' @param site Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{dosage}, \code{allele_freq}, \code{certainty}, \code{note}.
-#' @references ----------
-#'   Howie, B. N., Donnelly, P. & Marchini, J. (2009) "A Flexible and
-#'   Accurate Genotype Imputation Method for the Next Generation of
-#'   Genome-Wide Association Studies", *PLoS Genetics* 5(6), e1000529,
-#'   doi:10.1371/journal.pgen.1000529. The main innovation as a flexible
-#'   modelling framework that increases accuracy and combines information
-#'   across MULTIPLE REFERENCE PANELS while remaining computationally
-#'   feasible; higher accuracy than other methods when HapMap provides the
-#'   sole reference panel, with the panel size constraining the
-#'   improvements possible; greatly enhanced accuracy from expanding the
-#'   panel to thousands of chromosomes, outperforming other methods at both
-#'   rare and common SNPs with error rates 15-20% lower than the closest
-#'   competitor; and the practical advantages of this approach to
-#'   integrating information across panels genotyped on different sets of
-#'   SNPs.
-#'   
-#'   Li, N. & Stephens, M. (2003) "Modeling Linkage Disequilibrium and
-#'   Identifying Recombination Hotspots Using Single-Nucleotide
-#'   Polymorphism Data", *Genetics* 165(4), 2213-2233,
-#'   doi:10.1093/genetics/165.4.2213. The copying model.
-#'   
-#'   Browning, S. R. & Browning, B. L. (2007) "Rapid and Accurate Haplotype
-#'   Phasing and Missing-Data Inference for Whole-Genome Association
-#'   Studies by Use of Localized Haplotype Clustering", *American Journal
-#'   of Human Genetics* 81(5), 1084-1097, doi:10.1086/521987.
 #' @export
 #' @keywords internal
 impute_dosage <- function(posterior, reference_haps, site) {
@@ -360,31 +285,6 @@ impute_dosage <- function(posterior, reference_haps, site) {
 #'
 #' @param dosages Passed to \code{.impfun_as_double_vec}.
 #' @return A list with \code{info}, \code{theta}, \code{note}.
-#' @references ----------
-#'   Howie, B. N., Donnelly, P. & Marchini, J. (2009) "A Flexible and
-#'   Accurate Genotype Imputation Method for the Next Generation of
-#'   Genome-Wide Association Studies", *PLoS Genetics* 5(6), e1000529,
-#'   doi:10.1371/journal.pgen.1000529. The main innovation as a flexible
-#'   modelling framework that increases accuracy and combines information
-#'   across MULTIPLE REFERENCE PANELS while remaining computationally
-#'   feasible; higher accuracy than other methods when HapMap provides the
-#'   sole reference panel, with the panel size constraining the
-#'   improvements possible; greatly enhanced accuracy from expanding the
-#'   panel to thousands of chromosomes, outperforming other methods at both
-#'   rare and common SNPs with error rates 15-20% lower than the closest
-#'   competitor; and the practical advantages of this approach to
-#'   integrating information across panels genotyped on different sets of
-#'   SNPs.
-#'   
-#'   Li, N. & Stephens, M. (2003) "Modeling Linkage Disequilibrium and
-#'   Identifying Recombination Hotspots Using Single-Nucleotide
-#'   Polymorphism Data", *Genetics* 165(4), 2213-2233,
-#'   doi:10.1093/genetics/165.4.2213. The copying model.
-#'   
-#'   Browning, S. R. & Browning, B. L. (2007) "Rapid and Accurate Haplotype
-#'   Phasing and Missing-Data Inference for Whole-Genome Association
-#'   Studies by Use of Localized Haplotype Clustering", *American Journal
-#'   of Human Genetics* 81(5), 1084-1097, doi:10.1086/521987.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -425,31 +325,6 @@ info_score <- function(dosages) {
 #' @param truth Passed to \code{.impfun_as_double_vec}.
 #' @return A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error},
 #' \code{n}, \code{method}.
-#' @references ----------
-#'   Howie, B. N., Donnelly, P. & Marchini, J. (2009) "A Flexible and
-#'   Accurate Genotype Imputation Method for the Next Generation of
-#'   Genome-Wide Association Studies", *PLoS Genetics* 5(6), e1000529,
-#'   doi:10.1371/journal.pgen.1000529. The main innovation as a flexible
-#'   modelling framework that increases accuracy and combines information
-#'   across MULTIPLE REFERENCE PANELS while remaining computationally
-#'   feasible; higher accuracy than other methods when HapMap provides the
-#'   sole reference panel, with the panel size constraining the
-#'   improvements possible; greatly enhanced accuracy from expanding the
-#'   panel to thousands of chromosomes, outperforming other methods at both
-#'   rare and common SNPs with error rates 15-20% lower than the closest
-#'   competitor; and the practical advantages of this approach to
-#'   integrating information across panels genotyped on different sets of
-#'   SNPs.
-#'   
-#'   Li, N. & Stephens, M. (2003) "Modeling Linkage Disequilibrium and
-#'   Identifying Recombination Hotspots Using Single-Nucleotide
-#'   Polymorphism Data", *Genetics* 165(4), 2213-2233,
-#'   doi:10.1093/genetics/165.4.2213. The copying model.
-#'   
-#'   Browning, S. R. & Browning, B. L. (2007) "Rapid and Accurate Haplotype
-#'   Phasing and Missing-Data Inference for Whole-Genome Association
-#'   Studies by Use of Localized Haplotype Clustering", *American Journal
-#'   of Human Genetics* 81(5), 1084-1097, doi:10.1086/521987.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

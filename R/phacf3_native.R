@@ -74,17 +74,6 @@
 #' @param d The distance.
 #' @param edges The bin edges.
 #' @return The zero-based bin index, or -1.
-#' @references Gund, P. (1977) "Three-dimensional pharmacophoric pattern
-#'       searching." Progress in Molecular and Subcellular Biology 5,
-#'       117-143.
-#'     Mason, J.S., Good, A.C. and Martin, E.J. (2001) "3-D pharmacophores
-#'       in drug discovery." Current Pharmaceutical Design 7(7), 567-597.
-#'     Mason, J.S., Morize, I., Menard, P.R., Cheney, D.L., Hulme, C. and
-#'       Labaudiniere, R.F. (1999) "New 4-point pharmacophore method for
-#'       molecular similarity and diversity applications." Journal of
-#'       Medicinal Chemistry 42(17), 3251-3264.
-#'     Tanimoto, T.T. (1958) "An elementary mathematical theory of
-#'       classification and prediction." IBM internal report.
 #' @export
 #' @examples
 #' morie_phacf3_bin(d = 5L, edges = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -140,17 +129,6 @@ morie_phacf3_bin <- function(d, edges) {
 #' @param d13 Bin of the edge between vertices one and three.
 #' @param d23 Bin of the edge between vertices two and three.
 #' @return A length-six integer vector, the canonical key.
-#' @references Gund, P. (1977) "Three-dimensional pharmacophoric pattern
-#'       searching." Progress in Molecular and Subcellular Biology 5,
-#'       117-143.
-#'     Mason, J.S., Good, A.C. and Martin, E.J. (2001) "3-D pharmacophores
-#'       in drug discovery." Current Pharmaceutical Design 7(7), 567-597.
-#'     Mason, J.S., Morize, I., Menard, P.R., Cheney, D.L., Hulme, C. and
-#'       Labaudiniere, R.F. (1999) "New 4-point pharmacophore method for
-#'       molecular similarity and diversity applications." Journal of
-#'       Medicinal Chemistry 42(17), 3251-3264.
-#'     Tanimoto, T.T. (1958) "An elementary mathematical theory of
-#'       classification and prediction." IBM internal report.
 #' @export
 #' @keywords internal
 morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
@@ -208,17 +186,6 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 #' @param edges The bin edges.
 #' @return A list with the key matrix, their string forms and a lookup
 #'   environment from string to zero-based bit index.
-#' @references Gund, P. (1977) "Three-dimensional pharmacophoric pattern
-#'       searching." Progress in Molecular and Subcellular Biology 5,
-#'       117-143.
-#'     Mason, J.S., Good, A.C. and Martin, E.J. (2001) "3-D pharmacophores
-#'       in drug discovery." Current Pharmaceutical Design 7(7), 567-597.
-#'     Mason, J.S., Morize, I., Menard, P.R., Cheney, D.L., Hulme, C. and
-#'       Labaudiniere, R.F. (1999) "New 4-point pharmacophore method for
-#'       molecular similarity and diversity applications." Journal of
-#'       Medicinal Chemistry 42(17), 3251-3264.
-#'     Tanimoto, T.T. (1958) "An elementary mathematical theory of
-#'       classification and prediction." IBM internal report.
 #' @export
 #' @examples
 #' FS <- c("donor", "acceptor", "hydrophobic", "aromatic")
@@ -278,17 +245,6 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 #' @param a The first fingerprint.
 #' @param b The second fingerprint.
 #' @return The Tanimoto coefficient.
-#' @references Gund, P. (1977) "Three-dimensional pharmacophoric pattern
-#'       searching." Progress in Molecular and Subcellular Biology 5,
-#'       117-143.
-#'     Mason, J.S., Good, A.C. and Martin, E.J. (2001) "3-D pharmacophores
-#'       in drug discovery." Current Pharmaceutical Design 7(7), 567-597.
-#'     Mason, J.S., Morize, I., Menard, P.R., Cheney, D.L., Hulme, C. and
-#'       Labaudiniere, R.F. (1999) "New 4-point pharmacophore method for
-#'       molecular similarity and diversity applications." Journal of
-#'       Medicinal Chemistry 42(17), 3251-3264.
-#'     Tanimoto, T.T. (1958) "An elementary mathematical theory of
-#'       classification and prediction." IBM internal report.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -326,17 +282,6 @@ morie_phacf3_tanimoto <- function(a, b) {
 #' @return A list with the fingerprint, the bits set, the triangles that
 #'   produced them, and the counts of triangles rejected for falling
 #'   outside the distance range or for failing the triangle inequality.
-#' @references Gund, P. (1977) "Three-dimensional pharmacophoric pattern
-#'       searching." Progress in Molecular and Subcellular Biology 5,
-#'       117-143.
-#'     Mason, J.S., Good, A.C. and Martin, E.J. (2001) "3-D pharmacophores
-#'       in drug discovery." Current Pharmaceutical Design 7(7), 567-597.
-#'     Mason, J.S., Morize, I., Menard, P.R., Cheney, D.L., Hulme, C. and
-#'       Labaudiniere, R.F. (1999) "New 4-point pharmacophore method for
-#'       molecular similarity and diversity applications." Journal of
-#'       Medicinal Chemistry 42(17), 3251-3264.
-#'     Tanimoto, T.T. (1958) "An elementary mathematical theory of
-#'       classification and prediction." IBM internal report.
 #' @export
 #' @examples
 #' FS <- c("donor", "acceptor", "hydrophobic", "aromatic")
@@ -416,17 +361,6 @@ morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
 #' One-line summary of the phacf3 module
 #'
 #' @return A character scalar.
-#' @references Gund, P. (1977) "Three-dimensional pharmacophoric pattern
-#'       searching." Progress in Molecular and Subcellular Biology 5,
-#'       117-143.
-#'     Mason, J.S., Good, A.C. and Martin, E.J. (2001) "3-D pharmacophores
-#'       in drug discovery." Current Pharmaceutical Design 7(7), 567-597.
-#'     Mason, J.S., Morize, I., Menard, P.R., Cheney, D.L., Hulme, C. and
-#'       Labaudiniere, R.F. (1999) "New 4-point pharmacophore method for
-#'       molecular similarity and diversity applications." Journal of
-#'       Medicinal Chemistry 42(17), 3251-3264.
-#'     Tanimoto, T.T. (1958) "An elementary mathematical theory of
-#'       classification and prediction." IBM internal report.
 #' @export
 #' @examples
 #' morie_phacf3_cheatsheet()

@@ -465,10 +465,9 @@ abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
   )
 }
 
-#' @rdname abcnnt
 #' Compact alias for abcnnt
+#' @rdname abcnnt
 #' @export
-#' @noRd
 sequential_neural_likelihood <- abcnnt
 
 # house entry point: the package exports one morie_<module>

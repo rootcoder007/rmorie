@@ -79,20 +79,6 @@
 #' @return A list with per-point direct, indirect and total effects,
 #'   their averages, the fitted propensity and its overlap, and the
 #'   mediator models.
-#' @references Cui, Y. and Tchetgen Tchetgen, E.J. (2024) "Machine intelligence for
-#'       individualized decision making under a counterfactual world: a
-#'       rejoinder." Journal of the American Statistical Association
-#'       119(545), 97-102.
-#'     Pearl, J. (2001) "Direct and indirect effects." Proceedings of the
-#'       Seventeenth Conference on Uncertainty in Artificial Intelligence,
-#'       411-420.
-#'     Imai, K., Keele, L. and Yamamoto, T. (2010) "Identification,
-#'       inference and sensitivity analysis for causal mediation effects."
-#'       Statistical Science 25(1), 51-71.
-#'     Athey, S., Tibshirani, J. and Wager, S. (2019) "Generalized random
-#'       forests." The Annals of Statistics 47(2), 1148-1178.
-#'     VanderWeele, T.J. (2015) "Explanation in Causal Inference: Methods
-#'       for Mediation and Interaction." Oxford University Press.
 #' @export
 #' @examples
 #' N <- 40L
@@ -209,20 +195,6 @@ morie_cthrgr <- function(y, D, M, X, route = "gcomputed", n_trees = 8L,
 #' One-line summary of the cthrgr module
 #'
 #' @return A character scalar.
-#' @references Cui, Y. and Tchetgen Tchetgen, E.J. (2024) "Machine intelligence for
-#'       individualized decision making under a counterfactual world: a
-#'       rejoinder." Journal of the American Statistical Association
-#'       119(545), 97-102.
-#'     Pearl, J. (2001) "Direct and indirect effects." Proceedings of the
-#'       Seventeenth Conference on Uncertainty in Artificial Intelligence,
-#'       411-420.
-#'     Imai, K., Keele, L. and Yamamoto, T. (2010) "Identification,
-#'       inference and sensitivity analysis for causal mediation effects."
-#'       Statistical Science 25(1), 51-71.
-#'     Athey, S., Tibshirani, J. and Wager, S. (2019) "Generalized random
-#'       forests." The Annals of Statistics 47(2), 1148-1178.
-#'     VanderWeele, T.J. (2015) "Explanation in Causal Inference: Methods
-#'       for Mediation and Interaction." Oxford University Press.
 #' @export
 #' @examples
 #' morie_cthrgr_cheatsheet()

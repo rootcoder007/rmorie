@@ -85,28 +85,6 @@
 #' @param u0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param s0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{u}, \code{s}, \code{tau}.
-#' @references ----------
-#'   Bergen, V., Lange, M., Peidli, S., Wolf, F. A. & Theis, F. J. (2019)
-#'   "Generalizing RNA velocity to transient cell states through dynamical
-#'   modeling", bioRxiv 820936, doi:10.1101/820936; published as Bergen
-#'   et al. (2020) Nature Biotechnology 38(12), 1408-1414,
-#'   doi:10.1038/s41587-020-0591-3. The splicing ODEs reproduced above,
-#'   the two assumptions the steady-state model needs (full dynamics
-#'   observed per gene, one shared splicing rate) and why transient or
-#'   heterogeneous populations violate them, the explicit solution of
-#'   the kinetics, the latent variables (a discrete state ki and
-#'   continuous time ti per cell), the EM scheme assigning ti by minimum
-#'   distance to the phase trajectory and ki by segment likelihood, and
-#'   velocity as the derivative of spliced abundance.
-#'   
-#'   La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-#'   Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
-#'   Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-#'   He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
-#'   Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
-#'   velocity of single cells", Nature 560(7719), 494-498,
-#'   doi:10.1038/s41586-018-0414-6, for the steady-state model this
-#'   generalises.
 #' @export
 #' @examples
 #' morie_solve_kinetics(tau = 0.5, alpha = 0.5, beta = 0.5, gamma = 0.5)
@@ -145,28 +123,6 @@ morie_solve_kinetics <- function(tau, alpha, beta, gamma,
 #' @param beta Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return A numeric value.
-#' @references ----------
-#'   Bergen, V., Lange, M., Peidli, S., Wolf, F. A. & Theis, F. J. (2019)
-#'   "Generalizing RNA velocity to transient cell states through dynamical
-#'   modeling", bioRxiv 820936, doi:10.1101/820936; published as Bergen
-#'   et al. (2020) Nature Biotechnology 38(12), 1408-1414,
-#'   doi:10.1038/s41587-020-0591-3. The splicing ODEs reproduced above,
-#'   the two assumptions the steady-state model needs (full dynamics
-#'   observed per gene, one shared splicing rate) and why transient or
-#'   heterogeneous populations violate them, the explicit solution of
-#'   the kinetics, the latent variables (a discrete state ki and
-#'   continuous time ti per cell), the EM scheme assigning ti by minimum
-#'   distance to the phase trajectory and ki by segment likelihood, and
-#'   velocity as the derivative of spliced abundance.
-#'   
-#'   La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-#'   Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
-#'   Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-#'   He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
-#'   Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
-#'   velocity of single cells", Nature 560(7719), 494-498,
-#'   doi:10.1038/s41586-018-0414-6, for the steady-state model this
-#'   generalises.
 #' @export
 #' @examples
 #' morie_velocity(u = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5,
@@ -192,28 +148,6 @@ morie_velocity <- function(u, s, beta, gamma) {
 #' @param t_switch Numeric; combined arithmetically in the body.
 #' @param times A vector; its length is taken and its elements indexed.
 #' @return A list with \code{observations}, \code{switch}, \code{steady_on}.
-#' @references ----------
-#'   Bergen, V., Lange, M., Peidli, S., Wolf, F. A. & Theis, F. J. (2019)
-#'   "Generalizing RNA velocity to transient cell states through dynamical
-#'   modeling", bioRxiv 820936, doi:10.1101/820936; published as Bergen
-#'   et al. (2020) Nature Biotechnology 38(12), 1408-1414,
-#'   doi:10.1038/s41587-020-0591-3. The splicing ODEs reproduced above,
-#'   the two assumptions the steady-state model needs (full dynamics
-#'   observed per gene, one shared splicing rate) and why transient or
-#'   heterogeneous populations violate them, the explicit solution of
-#'   the kinetics, the latent variables (a discrete state ki and
-#'   continuous time ti per cell), the EM scheme assigning ti by minimum
-#'   distance to the phase trajectory and ki by segment likelihood, and
-#'   velocity as the derivative of spliced abundance.
-#'   
-#'   La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-#'   Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
-#'   Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-#'   He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
-#'   Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
-#'   velocity of single cells", Nature 560(7719), 494-498,
-#'   doi:10.1038/s41586-018-0414-6, for the steady-state model this
-#'   generalises.
 #' @export
 #' @examples
 #' sim <- morie_simulate_gene(alpha = 5, beta = 0.3, gamma = 0.2,
@@ -257,28 +191,6 @@ morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
 #' @param quantile Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @return A list with \code{gamma_over_beta}, \code{velocity}, \code{n_fitted},
 #' \code{assumptions}, \code{method}.
-#' @references ----------
-#'   Bergen, V., Lange, M., Peidli, S., Wolf, F. A. & Theis, F. J. (2019)
-#'   "Generalizing RNA velocity to transient cell states through dynamical
-#'   modeling", bioRxiv 820936, doi:10.1101/820936; published as Bergen
-#'   et al. (2020) Nature Biotechnology 38(12), 1408-1414,
-#'   doi:10.1038/s41587-020-0591-3. The splicing ODEs reproduced above,
-#'   the two assumptions the steady-state model needs (full dynamics
-#'   observed per gene, one shared splicing rate) and why transient or
-#'   heterogeneous populations violate them, the explicit solution of
-#'   the kinetics, the latent variables (a discrete state ki and
-#'   continuous time ti per cell), the EM scheme assigning ti by minimum
-#'   distance to the phase trajectory and ki by segment likelihood, and
-#'   velocity as the derivative of spliced abundance.
-#'   
-#'   La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-#'   Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
-#'   Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-#'   He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
-#'   Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
-#'   velocity of single cells", Nature 560(7719), 494-498,
-#'   doi:10.1038/s41586-018-0414-6, for the steady-state model this
-#'   generalises.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -324,28 +236,6 @@ morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
 #' @param grid Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @param t_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Bergen, V., Lange, M., Peidli, S., Wolf, F. A. & Theis, F. J. (2019)
-#'   "Generalizing RNA velocity to transient cell states through dynamical
-#'   modeling", bioRxiv 820936, doi:10.1101/820936; published as Bergen
-#'   et al. (2020) Nature Biotechnology 38(12), 1408-1414,
-#'   doi:10.1038/s41587-020-0591-3. The splicing ODEs reproduced above,
-#'   the two assumptions the steady-state model needs (full dynamics
-#'   observed per gene, one shared splicing rate) and why transient or
-#'   heterogeneous populations violate them, the explicit solution of
-#'   the kinetics, the latent variables (a discrete state ki and
-#'   continuous time ti per cell), the EM scheme assigning ti by minimum
-#'   distance to the phase trajectory and ki by segment likelihood, and
-#'   velocity as the derivative of spliced abundance.
-#'   
-#'   La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-#'   Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
-#'   Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-#'   He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
-#'   Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
-#'   velocity of single cells", Nature 560(7719), 494-498,
-#'   doi:10.1038/s41586-018-0414-6, for the steady-state model this
-#'   generalises.
 #' @export
 #' @examples
 #' sim <- morie_simulate_gene(alpha = 5, beta = 0.3, gamma = 0.2,
@@ -426,28 +316,6 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 #' @return A list with \code{estimate}, \code{alpha}, \code{beta}, \code{gamma},
 #' \code{t_switch}, \code{rss}, \code{rss_history}, \code{latent}, \code{velocity},
 #' \code{steady_on}, \code{method}.
-#' @references ----------
-#'   Bergen, V., Lange, M., Peidli, S., Wolf, F. A. & Theis, F. J. (2019)
-#'   "Generalizing RNA velocity to transient cell states through dynamical
-#'   modeling", bioRxiv 820936, doi:10.1101/820936; published as Bergen
-#'   et al. (2020) Nature Biotechnology 38(12), 1408-1414,
-#'   doi:10.1038/s41587-020-0591-3. The splicing ODEs reproduced above,
-#'   the two assumptions the steady-state model needs (full dynamics
-#'   observed per gene, one shared splicing rate) and why transient or
-#'   heterogeneous populations violate them, the explicit solution of
-#'   the kinetics, the latent variables (a discrete state ki and
-#'   continuous time ti per cell), the EM scheme assigning ti by minimum
-#'   distance to the phase trajectory and ki by segment likelihood, and
-#'   velocity as the derivative of spliced abundance.
-#'   
-#'   La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-#'   Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
-#'   Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-#'   He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
-#'   Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
-#'   velocity of single cells", Nature 560(7719), 494-498,
-#'   doi:10.1038/s41586-018-0414-6, for the steady-state model this
-#'   generalises.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -540,28 +408,6 @@ morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
 #'
 #' @param fits A vector; its length is taken and its elements indexed.
 #' @return A list with \code{latent_time}, \code{n_genes}, \code{n_cells}, \code{note}.
-#' @references ----------
-#'   Bergen, V., Lange, M., Peidli, S., Wolf, F. A. & Theis, F. J. (2019)
-#'   "Generalizing RNA velocity to transient cell states through dynamical
-#'   modeling", bioRxiv 820936, doi:10.1101/820936; published as Bergen
-#'   et al. (2020) Nature Biotechnology 38(12), 1408-1414,
-#'   doi:10.1038/s41587-020-0591-3. The splicing ODEs reproduced above,
-#'   the two assumptions the steady-state model needs (full dynamics
-#'   observed per gene, one shared splicing rate) and why transient or
-#'   heterogeneous populations violate them, the explicit solution of
-#'   the kinetics, the latent variables (a discrete state ki and
-#'   continuous time ti per cell), the EM scheme assigning ti by minimum
-#'   distance to the phase trajectory and ki by segment likelihood, and
-#'   velocity as the derivative of spliced abundance.
-#'   
-#'   La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-#'   Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
-#'   Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-#'   He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
-#'   Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
-#'   velocity of single cells", Nature 560(7719), 494-498,
-#'   doi:10.1038/s41586-018-0414-6, for the steady-state model this
-#'   generalises.
 #' @export
 #' @examples
 #' mk <- function(v) lapply(v, function(x) list(t = x))

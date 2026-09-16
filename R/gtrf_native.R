@@ -137,9 +137,6 @@ random_sign_flip <- function(pe, rng) {
 #' @param WV Value projection.
 #' @param edge_bias Optional list of edge biases keyed by (i, j).
 #' @return List with output, note.
-#' @references Sources: Dwivedi, V. P. and Bresson, X. (2020), A Generalization of
-#'   Vaswani, A. et al. (2017), Attention Is All You Need, NIPS 2017 --
-#'   (2003), Laplacian Eigenmaps for Dimensionality Reduction and Data
 #' @export
 #' @examples
 #' set.seed(1)

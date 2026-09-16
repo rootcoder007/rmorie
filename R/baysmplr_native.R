@@ -82,17 +82,6 @@
 #' @param has_conditionals Whether exact conditionals are available.
 #' @param nuts_threshold Dimension at or above which NUTS is preferred.
 #' @return A list with the sampler name and the reason.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' morie_baysmplr_choose(dim = 5L, has_grad = 5L)
@@ -145,17 +134,6 @@ morie_baysmplr_choose <- function(dim, has_grad, has_conditionals = FALSE,
 #' @param adapt Tune the scale during the first half.
 #' @param target_accept Target acceptance rate.
 #' @return A list with the draws, the acceptance rate and the settings.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' MU3 <- c(1, -0.5, 2)
@@ -222,17 +200,6 @@ morie_baysmplr_mh <- function(log_p, x0, n_iter, e, scale = NULL,
 #' @param n_iter Iterations.
 #' @param e A generator environment from .ghc_rng.
 #' @return A list with the draws, the acceptance rate and the settings.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' MU3 <- c(1, -0.5, 2)
@@ -308,17 +275,6 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #' @param eps Step size.
 #' @param steps Leapfrog steps per iteration.
 #' @return A list with the draws, the acceptance rate and the settings.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' MU3 <- c(1, -0.5, 2)
@@ -450,17 +406,6 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 #' @param warmup Warm-up iterations; half of n_iter by default.
 #' @return A list with the draws, the mean acceptance statistic and the
 #'   settings.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' MU3 <- c(1, -0.5, 2)
@@ -576,17 +521,6 @@ morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
 #' @param chain A list of draws.
 #' @param max_lag Largest lag computed.
 #' @return One effective sample size per coordinate.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -641,17 +575,6 @@ morie_baysmplr_ess <- function(chain, max_lag = 200L) {
 #' @return A list with the chosen sampler and the reason, the posterior
 #'   mean and standard deviation per coordinate, the acceptance rate,
 #'   the effective sample size and the retained draws.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' MU3 <- c(1, -0.5, 2)
@@ -738,17 +661,6 @@ morie_baysmplr <- function(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L,
 #' One-line summary of the baysmplr module
 #'
 #' @return A character scalar.
-#' @references Metropolis, N. et al. (1953) J. Chem. Phys. 21(6), 1087-1092.
-#'     Hastings, W.K. (1970) Biometrika 57(1), 97-109.
-#'     Geman, S. and Geman, D. (1984) IEEE PAMI 6(6), 721-741.
-#'     Duane, S. et al. (1987) Physics Letters B 195(2), 216-222.
-#'     Neal, R.M. (2011) "MCMC using Hamiltonian dynamics." Handbook of
-#'       Markov Chain Monte Carlo, chapter 5.
-#'     Hoffman, M.D. and Gelman, A. (2014) "The No-U-Turn Sampler." JMLR
-#'       15, 1593-1623. Algorithms 3 and 6.
-#'     Roberts, G.O., Gelman, A. and Gilks, W.R. (1997) Ann. Appl. Probab.
-#'       7(1), 110-120.
-#'     Geyer, C.J. (1992) Statist. Sci. 7(4), 473-483.
 #' @export
 #' @examples
 #' morie_baysmplr_cheatsheet()

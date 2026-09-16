@@ -25,6 +25,15 @@
 
 #' KrigFDA
 #'
+#' @param coords Argument `coords`; see Usage.
+#' @param values Argument `values`; see Usage.
+#' @param new_coords Argument `new_coords`; see Usage.
+#' @param model Argument `model`; see Usage.
+#' @param nugget Argument `nugget`; see Usage.
+#' @param sill Argument `sill`; see Usage.
+#' @param range_ Argument `range_`; see Usage.
+#' @param trend_order Argument `trend_order`; see Usage.
+#' @return A list with `estimate`, `se`, `beta`, `residuals`, `weights`, `n`, `p`, `method`.
 #' @examples
 #' rmorie:::KrigFDA(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   new_coords = c(1, 2, 3, 4, 5, 6, 7, 8))

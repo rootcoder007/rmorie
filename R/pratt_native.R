@@ -159,17 +159,6 @@
 #' @return A list with \code{estimate}, \code{probabilities}, \code{document_vector},
 #' \code{sentence_attention}, \code{word_attention}, \code{n_sentences}, \code{method},
 #' \code{note}.
-#' @references ----------
-#'   Yang, Z., Yang, D., Dyer, C., He, X., Smola, A. & Hovy, E. (2016)
-#'   "Hierarchical Attention Networks for Document Classification",
-#'   NAACL-HLT 2016, 1480-1489, doi:10.18653/v1/N16-1174.
-#'   
-#'   Bahdanau, D., Cho, K. & Bengio, Y. (2015) "Neural Machine Translation
-#'   by Jointly Learning to Align and Translate", ICLR 2015,
-#'   arXiv:1409.0473.
-#'   
-#'   Sukhbaatar, S., Szlam, A., Weston, J. & Fergus, R. (2015)
-#'   "End-To-End Memory Networks", NIPS 2015, 2440-2448, arXiv:1503.08895.
 #' @export
 #' @keywords internal
 morie_pratt <- function(word_states, Ww, bw, u_w, Ws, bs, u_s, Wc, bc) {
@@ -217,17 +206,6 @@ morie_pratt_classify <- morie_pratt
 #'
 #' @param alpha Passed to \code{.pratt_vec}.
 #' @return A list with \code{entropy}, \code{max_entropy}, \code{concentration}.
-#' @references ----------
-#'   Yang, Z., Yang, D., Dyer, C., He, X., Smola, A. & Hovy, E. (2016)
-#'   "Hierarchical Attention Networks for Document Classification",
-#'   NAACL-HLT 2016, 1480-1489, doi:10.18653/v1/N16-1174.
-#'   
-#'   Bahdanau, D., Cho, K. & Bengio, Y. (2015) "Neural Machine Translation
-#'   by Jointly Learning to Align and Translate", ICLR 2015,
-#'   arXiv:1409.0473.
-#'   
-#'   Sukhbaatar, S., Szlam, A., Weston, J. & Fergus, R. (2015)
-#'   "End-To-End Memory Networks", NIPS 2015, 2440-2448, arXiv:1503.08895.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -255,17 +233,6 @@ morie_pratt_attention_entropy <- function(alpha) {
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Yang, Z., Yang, D., Dyer, C., He, X., Smola, A. & Hovy, E. (2016)
-#'   "Hierarchical Attention Networks for Document Classification",
-#'   NAACL-HLT 2016, 1480-1489, doi:10.18653/v1/N16-1174.
-#'   
-#'   Bahdanau, D., Cho, K. & Bengio, Y. (2015) "Neural Machine Translation
-#'   by Jointly Learning to Align and Translate", ICLR 2015,
-#'   arXiv:1409.0473.
-#'   
-#'   Sukhbaatar, S., Szlam, A., Weston, J. & Fergus, R. (2015)
-#'   "End-To-End Memory Networks", NIPS 2015, 2440-2448, arXiv:1503.08895.
 #' @export
 #' @examples
 #' morie_pratt_cheatsheet()

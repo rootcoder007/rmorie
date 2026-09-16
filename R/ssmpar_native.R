@@ -57,17 +57,6 @@
 #' @param pairs A vector; its length is taken.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{states}, \code{steps}, \code{depth}, \code{note}.
-#' @references ----------
-#'   Smith, J. T. H., Warrington, A. & Linderman, S. W. (2023)
-#'   "Simplified State Space Layers for Sequence Modeling",
-#'   International Conference on Learning Representations (ICLR 2023),
-#'   arXiv:2208.04933.
-#'   Gu, A. & Dao, T. (2024) "Mamba: Linear-Time Sequence Modeling with
-#'   Selective State Spaces", Conference on Language Modeling (COLM 2024),
-#'   arXiv:2312.00752.
-#'   Blelloch, G. E. (1990) "Prefix Sums and Their Applications",
-#'   Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
-#'   Mellon University.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -136,17 +125,6 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 #' @param pairs Iterated over elementwise, with \code{lapply}.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{states}, \code{prefix}, \code{depth}, \code{work}, \code{note}.
-#' @references ----------
-#'   Smith, J. T. H., Warrington, A. & Linderman, S. W. (2023)
-#'   "Simplified State Space Layers for Sequence Modeling",
-#'   International Conference on Learning Representations (ICLR 2023),
-#'   arXiv:2208.04933.
-#'   Gu, A. & Dao, T. (2024) "Mamba: Linear-Time Sequence Modeling with
-#'   Selective State Spaces", Conference on Language Modeling (COLM 2024),
-#'   arXiv:2312.00752.
-#'   Blelloch, G. E. (1990) "Prefix Sums and Their Applications",
-#'   Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
-#'   Mellon University.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -213,17 +191,6 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 #' @param c Passed to \code{.ssmpar_compose}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{left}, \code{right}, \code{deviation}, \code{associative}, \code{note}.
-#' @references ----------
-#'   Smith, J. T. H., Warrington, A. & Linderman, S. W. (2023)
-#'   "Simplified State Space Layers for Sequence Modeling",
-#'   International Conference on Learning Representations (ICLR 2023),
-#'   arXiv:2208.04933.
-#'   Gu, A. & Dao, T. (2024) "Mamba: Linear-Time Sequence Modeling with
-#'   Selective State Spaces", Conference on Language Modeling (COLM 2024),
-#'   arXiv:2312.00752.
-#'   Blelloch, G. E. (1990) "Prefix Sums and Their Applications",
-#'   Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
-#'   Mellon University.
 #' @export
 #' @examples
 #' check_associativity(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -248,17 +215,6 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 #' @param length Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth},
 #' \code{work}, \code{speedup}, \code{method}, \code{note}.
-#' @references ----------
-#'   Smith, J. T. H., Warrington, A. & Linderman, S. W. (2023)
-#'   "Simplified State Space Layers for Sequence Modeling",
-#'   International Conference on Learning Representations (ICLR 2023),
-#'   arXiv:2208.04933.
-#'   Gu, A. & Dao, T. (2024) "Mamba: Linear-Time Sequence Modeling with
-#'   Selective State Spaces", Conference on Language Modeling (COLM 2024),
-#'   arXiv:2312.00752.
-#'   Blelloch, G. E. (1990) "Prefix Sums and Their Applications",
-#'   Technical Report CMU-CS-90-190, School of Computer Science, Carnegie
-#'   Mellon University.
 #' @export
 #' @examples
 #' scan_depth(length = 5L)

@@ -68,30 +68,6 @@
 #' @param task Coerced to character by the body, with \code{as.character}.
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @return A character value.
-#' @references ----------
-#'   Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M.,
-#'   Zhou, Y., Li, W. & Liu, P. J. (2020) "Exploring the Limits of Transfer
-#'   Learning with a Unified Text-to-Text Transformer", *Journal of Machine
-#'   Learning Research* 21(140), 1-67, arXiv:1910.10683. The text-to-text
-#'   framework in which every task is fed text and produces text, with task
-#'   prefixes; the treatment of classification by emitting the label text
-#'   and of regression by emitting a rounded number as a string, with
-#'   outputs that do not match any label counted as wrong; the span
-#'   corruption pre-training objective with sentinels and the ablations
-#'   selecting 15% corruption and mean span length 3; and the simplified
-#'   relative position embeddings shared across layers, bucketed by
-#'   relative offset with logarithmically growing buckets.
-#'   
-#'   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-#'   Gomez, A. N., Kaiser, L. & Polosukhin, I. (2017) "Attention Is All You
-#'   Need", *NIPS 2017*, 5998-6008, arXiv:1706.03762. The encoder-decoder
-#'   being modified.
-#'   
-#'   Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019) "BERT:
-#'   Pre-training of Deep Bidirectional Transformers for Language
-#'   Understanding", *NAACL-HLT 2019*, 4171-4186,
-#'   doi:10.18653/v1/N19-1423. The single-token masking objective span
-#'   corruption replaces.
 #' @export
 #' @examples
 #' t5enc_task_prefix(task = 5L, text = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -118,30 +94,6 @@ t5enc_task_prefix <- function(task, text) {
 #' @return A list with \code{input}, \code{target}, \code{n_spans},
 #' \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by},
 #' \code{note}.
-#' @references ----------
-#'   Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M.,
-#'   Zhou, Y., Li, W. & Liu, P. J. (2020) "Exploring the Limits of Transfer
-#'   Learning with a Unified Text-to-Text Transformer", *Journal of Machine
-#'   Learning Research* 21(140), 1-67, arXiv:1910.10683. The text-to-text
-#'   framework in which every task is fed text and produces text, with task
-#'   prefixes; the treatment of classification by emitting the label text
-#'   and of regression by emitting a rounded number as a string, with
-#'   outputs that do not match any label counted as wrong; the span
-#'   corruption pre-training objective with sentinels and the ablations
-#'   selecting 15% corruption and mean span length 3; and the simplified
-#'   relative position embeddings shared across layers, bucketed by
-#'   relative offset with logarithmically growing buckets.
-#'   
-#'   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-#'   Gomez, A. N., Kaiser, L. & Polosukhin, I. (2017) "Attention Is All You
-#'   Need", *NIPS 2017*, 5998-6008, arXiv:1706.03762. The encoder-decoder
-#'   being modified.
-#'   
-#'   Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019) "BERT:
-#'   Pre-training of Deep Bidirectional Transformers for Language
-#'   Understanding", *NAACL-HLT 2019*, 4171-4186,
-#'   doi:10.18653/v1/N19-1423. The single-token masking objective span
-#'   corruption replaces.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -236,30 +188,6 @@ t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
 #' @param max_distance Coerced to numeric by the body, with \code{as.numeric}. Defaults
 #' to \code{128}.
 #' @return A numeric value.
-#' @references ----------
-#'   Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M.,
-#'   Zhou, Y., Li, W. & Liu, P. J. (2020) "Exploring the Limits of Transfer
-#'   Learning with a Unified Text-to-Text Transformer", *Journal of Machine
-#'   Learning Research* 21(140), 1-67, arXiv:1910.10683. The text-to-text
-#'   framework in which every task is fed text and produces text, with task
-#'   prefixes; the treatment of classification by emitting the label text
-#'   and of regression by emitting a rounded number as a string, with
-#'   outputs that do not match any label counted as wrong; the span
-#'   corruption pre-training objective with sentinels and the ablations
-#'   selecting 15% corruption and mean span length 3; and the simplified
-#'   relative position embeddings shared across layers, bucketed by
-#'   relative offset with logarithmically growing buckets.
-#'   
-#'   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-#'   Gomez, A. N., Kaiser, L. & Polosukhin, I. (2017) "Attention Is All You
-#'   Need", *NIPS 2017*, 5998-6008, arXiv:1706.03762. The encoder-decoder
-#'   being modified.
-#'   
-#'   Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019) "BERT:
-#'   Pre-training of Deep Bidirectional Transformers for Language
-#'   Understanding", *NAACL-HLT 2019*, 4171-4186,
-#'   doi:10.18653/v1/N19-1423. The single-token masking objective span
-#'   corruption replaces.
 #' @export
 #' @examples
 #' t5enc_relative_bucket(relative_position = 5L)
@@ -300,30 +228,6 @@ t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
 #' @param lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return A character value.
-#' @references ----------
-#'   Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M.,
-#'   Zhou, Y., Li, W. & Liu, P. J. (2020) "Exploring the Limits of Transfer
-#'   Learning with a Unified Text-to-Text Transformer", *Journal of Machine
-#'   Learning Research* 21(140), 1-67, arXiv:1910.10683. The text-to-text
-#'   framework in which every task is fed text and produces text, with task
-#'   prefixes; the treatment of classification by emitting the label text
-#'   and of regression by emitting a rounded number as a string, with
-#'   outputs that do not match any label counted as wrong; the span
-#'   corruption pre-training objective with sentinels and the ablations
-#'   selecting 15% corruption and mean span length 3; and the simplified
-#'   relative position embeddings shared across layers, bucketed by
-#'   relative offset with logarithmically growing buckets.
-#'   
-#'   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-#'   Gomez, A. N., Kaiser, L. & Polosukhin, I. (2017) "Attention Is All You
-#'   Need", *NIPS 2017*, 5998-6008, arXiv:1706.03762. The encoder-decoder
-#'   being modified.
-#'   
-#'   Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019) "BERT:
-#'   Pre-training of Deep Bidirectional Transformers for Language
-#'   Understanding", *NAACL-HLT 2019*, 4171-4186,
-#'   doi:10.18653/v1/N19-1423. The single-token masking objective span
-#'   corruption replaces.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -348,30 +252,6 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
 #' @param labels Optional; may be \code{NULL}. Coerced to character by the body, with
 #' \code{as.character}.
 #' @return A list with \code{label}, \code{valid}, \code{note}.
-#' @references ----------
-#'   Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M.,
-#'   Zhou, Y., Li, W. & Liu, P. J. (2020) "Exploring the Limits of Transfer
-#'   Learning with a Unified Text-to-Text Transformer", *Journal of Machine
-#'   Learning Research* 21(140), 1-67, arXiv:1910.10683. The text-to-text
-#'   framework in which every task is fed text and produces text, with task
-#'   prefixes; the treatment of classification by emitting the label text
-#'   and of regression by emitting a rounded number as a string, with
-#'   outputs that do not match any label counted as wrong; the span
-#'   corruption pre-training objective with sentinels and the ablations
-#'   selecting 15% corruption and mean span length 3; and the simplified
-#'   relative position embeddings shared across layers, bucketed by
-#'   relative offset with logarithmically growing buckets.
-#'   
-#'   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-#'   Gomez, A. N., Kaiser, L. & Polosukhin, I. (2017) "Attention Is All You
-#'   Need", *NIPS 2017*, 5998-6008, arXiv:1706.03762. The encoder-decoder
-#'   being modified.
-#'   
-#'   Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019) "BERT:
-#'   Pre-training of Deep Bidirectional Transformers for Language
-#'   Understanding", *NAACL-HLT 2019*, 4171-4186,
-#'   doi:10.18653/v1/N19-1423. The single-token masking objective span
-#'   corruption replaces.
 #' @export
 #' @examples
 #' t5enc_parse_prediction(text = 5L)
@@ -402,30 +282,6 @@ t5enc_parse_prediction <- function(text, labels = NULL) {
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M.,
-#'   Zhou, Y., Li, W. & Liu, P. J. (2020) "Exploring the Limits of Transfer
-#'   Learning with a Unified Text-to-Text Transformer", *Journal of Machine
-#'   Learning Research* 21(140), 1-67, arXiv:1910.10683. The text-to-text
-#'   framework in which every task is fed text and produces text, with task
-#'   prefixes; the treatment of classification by emitting the label text
-#'   and of regression by emitting a rounded number as a string, with
-#'   outputs that do not match any label counted as wrong; the span
-#'   corruption pre-training objective with sentinels and the ablations
-#'   selecting 15% corruption and mean span length 3; and the simplified
-#'   relative position embeddings shared across layers, bucketed by
-#'   relative offset with logarithmically growing buckets.
-#'   
-#'   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-#'   Gomez, A. N., Kaiser, L. & Polosukhin, I. (2017) "Attention Is All You
-#'   Need", *NIPS 2017*, 5998-6008, arXiv:1706.03762. The encoder-decoder
-#'   being modified.
-#'   
-#'   Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019) "BERT:
-#'   Pre-training of Deep Bidirectional Transformers for Language
-#'   Understanding", *NAACL-HLT 2019*, 4171-4186,
-#'   doi:10.18653/v1/N19-1423. The single-token masking objective span
-#'   corruption replaces.
 #' @export
 #' @examples
 #' t5enc_cheatsheet()
@@ -463,30 +319,6 @@ t5 <- t5enc_span_corruption
 #' @param method Passed to \code{match.arg}.
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
-#' @references ----------
-#'   Raffel, C., Shazeer, N., Roberts, A., Lee, K., Narang, S., Matena, M.,
-#'   Zhou, Y., Li, W. & Liu, P. J. (2020) "Exploring the Limits of Transfer
-#'   Learning with a Unified Text-to-Text Transformer", *Journal of Machine
-#'   Learning Research* 21(140), 1-67, arXiv:1910.10683. The text-to-text
-#'   framework in which every task is fed text and produces text, with task
-#'   prefixes; the treatment of classification by emitting the label text
-#'   and of regression by emitting a rounded number as a string, with
-#'   outputs that do not match any label counted as wrong; the span
-#'   corruption pre-training objective with sentinels and the ablations
-#'   selecting 15% corruption and mean span length 3; and the simplified
-#'   relative position embeddings shared across layers, bucketed by
-#'   relative offset with logarithmically growing buckets.
-#'   
-#'   Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L.,
-#'   Gomez, A. N., Kaiser, L. & Polosukhin, I. (2017) "Attention Is All You
-#'   Need", *NIPS 2017*, 5998-6008, arXiv:1706.03762. The encoder-decoder
-#'   being modified.
-#'   
-#'   Devlin, J., Chang, M.-W., Lee, K. & Toutanova, K. (2019) "BERT:
-#'   Pre-training of Deep Bidirectional Transformers for Language
-#'   Understanding", *NAACL-HLT 2019*, 4171-4186,
-#'   doi:10.18653/v1/N19-1423. The single-token masking objective span
-#'   corruption replaces.
 #' @export
 #' @keywords internal
 morie_t5enc <- function(method = c("task_prefix", "span_corruption",

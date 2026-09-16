@@ -88,21 +88,6 @@
 #' @param h Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param activation Passed to \code{identical}. Defaults to \code{"sigmoid"}.
 #' @return Nothing; this branch always raises.
-#' @references ----------
-#'   He, X., Liao, L., Zhang, H., Nie, L., Hu, X. & Chua, T.-S. (2017)
-#'   "Neural Collaborative Filtering", *Proceedings of the 26th
-#'   International Conference on World Wide Web (WWW \'17)*, 173-182,
-#'   doi:10.1145/3038912.3052569. Sec. 3.1 (the general NCF framework and
-#'   the log loss with sampled negatives for implicit data), Sec. 3.2
-#'   (GMF: eq. (9), and the demonstration that MF is recovered when a_out
-#'   is the identity and h is uniform), Sec. 3.3 (MLP over the
-#'   concatenation), and Sec. 3.4 (NeuMF: separate GMF and MLP embeddings
-#'   fused in the last layer, and why sharing one embedding would limit
-#'   the fused model).
-#'   
-#'   Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization
-#'   Techniques for Recommender Systems", *Computer* 42(8), 30-37,
-#'   doi:10.1109/MC.2009.263. The inner-product model being generalised.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -140,21 +125,6 @@ morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
 #' @param Ws A vector; its length is taken and its elements indexed.
 #' @param bs A vector; indexed elementwise.
 #' @return The value of \code{z}, as built in the body.
-#' @references ----------
-#'   He, X., Liao, L., Zhang, H., Nie, L., Hu, X. & Chua, T.-S. (2017)
-#'   "Neural Collaborative Filtering", *Proceedings of the 26th
-#'   International Conference on World Wide Web (WWW \'17)*, 173-182,
-#'   doi:10.1145/3038912.3052569. Sec. 3.1 (the general NCF framework and
-#'   the log loss with sampled negatives for implicit data), Sec. 3.2
-#'   (GMF: eq. (9), and the demonstration that MF is recovered when a_out
-#'   is the identity and h is uniform), Sec. 3.3 (MLP over the
-#'   concatenation), and Sec. 3.4 (NeuMF: separate GMF and MLP embeddings
-#'   fused in the last layer, and why sharing one embedding would limit
-#'   the fused model).
-#'   
-#'   Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization
-#'   Techniques for Recommender Systems", *Computer* 42(8), 30-37,
-#'   doi:10.1109/MC.2009.263. The inner-product model being generalised.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -191,21 +161,6 @@ morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
 #' @param bs Passed to \code{morie_ncfRS_mlp_layers}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{score}, \code{gmf_part}, \code{mlp_part}, \code{note}.
-#' @references ----------
-#'   He, X., Liao, L., Zhang, H., Nie, L., Hu, X. & Chua, T.-S. (2017)
-#'   "Neural Collaborative Filtering", *Proceedings of the 26th
-#'   International Conference on World Wide Web (WWW \'17)*, 173-182,
-#'   doi:10.1145/3038912.3052569. Sec. 3.1 (the general NCF framework and
-#'   the log loss with sampled negatives for implicit data), Sec. 3.2
-#'   (GMF: eq. (9), and the demonstration that MF is recovered when a_out
-#'   is the identity and h is uniform), Sec. 3.3 (MLP over the
-#'   concatenation), and Sec. 3.4 (NeuMF: separate GMF and MLP embeddings
-#'   fused in the last layer, and why sharing one embedding would limit
-#'   the fused model).
-#'   
-#'   Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization
-#'   Techniques for Recommender Systems", *Computer* 42(8), 30-37,
-#'   doi:10.1109/MC.2009.263. The inner-product model being generalised.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -243,21 +198,6 @@ morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
-#' @references ----------
-#'   He, X., Liao, L., Zhang, H., Nie, L., Hu, X. & Chua, T.-S. (2017)
-#'   "Neural Collaborative Filtering", *Proceedings of the 26th
-#'   International Conference on World Wide Web (WWW \'17)*, 173-182,
-#'   doi:10.1145/3038912.3052569. Sec. 3.1 (the general NCF framework and
-#'   the log loss with sampled negatives for implicit data), Sec. 3.2
-#'   (GMF: eq. (9), and the demonstration that MF is recovered when a_out
-#'   is the identity and h is uniform), Sec. 3.3 (MLP over the
-#'   concatenation), and Sec. 3.4 (NeuMF: separate GMF and MLP embeddings
-#'   fused in the last layer, and why sharing one embedding would limit
-#'   the fused model).
-#'   
-#'   Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization
-#'   Techniques for Recommender Systems", *Computer* 42(8), 30-37,
-#'   doi:10.1109/MC.2009.263. The inner-product model being generalised.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -286,21 +226,6 @@ morie_ncfRS_log_loss <- function(y, y_hat) {
 #' @param learn_h A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{estimate}, \code{P}, \code{Q}, \code{h},
 #' \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.
-#' @references ----------
-#'   He, X., Liao, L., Zhang, H., Nie, L., Hu, X. & Chua, T.-S. (2017)
-#'   "Neural Collaborative Filtering", *Proceedings of the 26th
-#'   International Conference on World Wide Web (WWW \'17)*, 173-182,
-#'   doi:10.1145/3038912.3052569. Sec. 3.1 (the general NCF framework and
-#'   the log loss with sampled negatives for implicit data), Sec. 3.2
-#'   (GMF: eq. (9), and the demonstration that MF is recovered when a_out
-#'   is the identity and h is uniform), Sec. 3.3 (MLP over the
-#'   concatenation), and Sec. 3.4 (NeuMF: separate GMF and MLP embeddings
-#'   fused in the last layer, and why sharing one embedding would limit
-#'   the fused model).
-#'   
-#'   Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization
-#'   Techniques for Recommender Systems", *Computer* 42(8), 30-37,
-#'   doi:10.1109/MC.2009.263. The inner-product model being generalised.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -415,21 +340,6 @@ morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   He, X., Liao, L., Zhang, H., Nie, L., Hu, X. & Chua, T.-S. (2017)
-#'   "Neural Collaborative Filtering", *Proceedings of the 26th
-#'   International Conference on World Wide Web (WWW \'17)*, 173-182,
-#'   doi:10.1145/3038912.3052569. Sec. 3.1 (the general NCF framework and
-#'   the log loss with sampled negatives for implicit data), Sec. 3.2
-#'   (GMF: eq. (9), and the demonstration that MF is recovered when a_out
-#'   is the identity and h is uniform), Sec. 3.3 (MLP over the
-#'   concatenation), and Sec. 3.4 (NeuMF: separate GMF and MLP embeddings
-#'   fused in the last layer, and why sharing one embedding would limit
-#'   the fused model).
-#'   
-#'   Koren, Y., Bell, R. & Volinsky, C. (2009) "Matrix Factorization
-#'   Techniques for Recommender Systems", *Computer* 42(8), 30-37,
-#'   doi:10.1109/MC.2009.263. The inner-product model being generalised.
 #' @export
 #' @examples
 #' morie_ncfRS_cheatsheet()

@@ -117,13 +117,6 @@
 #' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
 #' @return A numeric value.
-#' @references ----------
-#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
-#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
-#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
-#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
-#'   Vaswani, A. et al. (2017) "Attention is all you need", Advances in
-#'   Neural Information Processing Systems 30, arXiv:1706.03762.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -164,13 +157,6 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
 #' @param K Passed to \code{morie_informer_sparsity_measure}.
 #' @param scale Passed to \code{morie_informer_sparsity_measure}.
 #' @return A numeric value.
-#' @references ----------
-#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
-#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
-#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
-#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
-#'   Vaswani, A. et al. (2017) "Attention is all you need", Advances in
-#'   Neural Information Processing Systems 30, arXiv:1706.03762.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -200,13 +186,6 @@ morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{top}, \code{u}, \code{scores}, \code{L_Q}, \code{L_K},
 #' \code{n_sample}, \code{measure}.
-#' @references ----------
-#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
-#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
-#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
-#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
-#'   Vaswani, A. et al. (2017) "Attention is all you need", Advances in
-#'   Neural Information Processing Systems 30, arXiv:1706.03762.
 #' @export
 #' @examples
 #' set.seed(2)
@@ -260,13 +239,6 @@ morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
 #' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
-#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
-#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
-#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
-#'   Vaswani, A. et al. (2017) "Attention is all you need", Advances in
-#'   Neural Information Processing Systems 30, arXiv:1706.03762.
 #' @export
 #' @examples
 #' set.seed(2)
@@ -313,13 +285,6 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
 #' \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{output}, \code{selected}, \code{u},
 #' \code{L_Q}, \code{L_K}, \code{measure}, \code{complexity}, \code{method}, \code{note}.
-#' @references ----------
-#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
-#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
-#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
-#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
-#'   Vaswani, A. et al. (2017) "Attention is all you need", Advances in
-#'   Neural Information Processing Systems 30, arXiv:1706.03762.
 #' @export
 #' @examples
 #' set.seed(3)
@@ -382,13 +347,6 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
 #' @param factor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return A list with \code{full}, \code{probsparse}, \code{u}, \code{ratio},
 #' \code{memory_full}, \code{memory_probsparse}.
-#' @references ----------
-#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
-#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
-#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
-#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
-#'   Vaswani, A. et al. (2017) "Attention is all you need", Advances in
-#'   Neural Information Processing Systems 30, arXiv:1706.03762.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -415,13 +373,6 @@ morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
 #' the source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
-#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
-#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
-#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
-#'   Vaswani, A. et al. (2017) "Attention is all you need", Advances in
-#'   Neural Information Processing Systems 30, arXiv:1706.03762.
 #' @export
 #' @examples
 #' morie_informer_cheatsheet()

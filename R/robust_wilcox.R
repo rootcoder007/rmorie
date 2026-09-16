@@ -13,6 +13,9 @@
 
 #' morie_robust_trim_counts
 #'
+#' @param n Argument `n`; see Usage.
+#' @param tr Argument `tr`; see Usage.
+#' @return The value of `floor`.
 #' @examples
 #' rmorie:::morie_robust_trim_counts(n = 20, tr = 0.2)
 #' @keywords internal

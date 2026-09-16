@@ -76,17 +76,6 @@
 #' @param V A count; the body uses it as \code{vector(...)}. Defaults to \code{10}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{folds}, as built in the body.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 3.
-#'   
-#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
-#'   Learner", Statistical Applications in Genetics and Molecular Biology
-#'   6(1), Article 25, doi:10.2202/1544-6115.1309.
-#'   
-#'   Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
-#'   data and causal inference models", Biometrics 61(4), 962-973,
-#'   doi:10.1111/j.1541-0420.2005.00377.x.
 #' @export
 #' @examples
 #' morie_tlseqsl_cv_folds(50, V = 5, seed = 1)
@@ -129,17 +118,6 @@ morie_tlseqsl_cv_folds <- function(n, V = 10, seed = 0) {
 #' @param loss Passed to \code{.tlseqsl_loss}. Defaults to \code{"squared"}.
 #' @param seed Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{0}.
 #' @return A list with \code{risk}, \code{cv_predictions}, \code{V}, \code{loss}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 3.
-#'   
-#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
-#'   Learner", Statistical Applications in Genetics and Molecular Biology
-#'   6(1), Article 25, doi:10.2202/1544-6115.1309.
-#'   
-#'   Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
-#'   data and causal inference models", Biometrics 61(4), 962-973,
-#'   doi:10.1111/j.1541-0420.2005.00377.x.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -198,17 +176,6 @@ morie_tlseqsl_cv_risk <- function(X, y, algorithm, V = 10, loss = "squared", see
 #' @param loss Passed to \code{morie_tlseqsl_cv_risk}. Defaults to \code{"squared"}.
 #' @param seed Passed to \code{morie_tlseqsl_cv_risk}. Defaults to \code{0}.
 #' @return A list with \code{selected}, \code{risks}, \code{cv_predictions}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 3.
-#'   
-#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
-#'   Learner", Statistical Applications in Genetics and Molecular Biology
-#'   6(1), Article 25, doi:10.2202/1544-6115.1309.
-#'   
-#'   Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
-#'   data and causal inference models", Biometrics 61(4), 962-973,
-#'   doi:10.1111/j.1541-0420.2005.00377.x.
 #' @export
 #' @examples
 #' morie_tlseqsl_discrete_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -258,17 +225,6 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V = 10,
 #' @return A list with \code{estimate}, \code{weights}, \code{cv_risk},
 #' \code{discrete_risks}, \code{discrete_choice}, \code{best_single}, \code{method},
 #' \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 3.
-#'   
-#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
-#'   Learner", Statistical Applications in Genetics and Molecular Biology
-#'   6(1), Article 25, doi:10.2202/1544-6115.1309.
-#'   
-#'   Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
-#'   data and causal inference models", Biometrics 61(4), 962-973,
-#'   doi:10.1111/j.1541-0420.2005.00377.x.
 #' @export
 #' @examples
 #' morie_tlseqsl_ensemble_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -357,17 +313,6 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V = 10,
 #' @param seed Passed to \code{morie_tlseqsl_ensemble_super_learner}. Defaults to \code{0}.
 #' @return A list with \code{estimate}, \code{mean}, \code{sequential_fits}, \code{T},
 #' \code{method}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 3.
-#'   
-#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
-#'   Learner", Statistical Applications in Genetics and Molecular Biology
-#'   6(1), Article 25, doi:10.2202/1544-6115.1309.
-#'   
-#'   Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
-#'   data and causal inference models", Biometrics 61(4), 962-973,
-#'   doi:10.1111/j.1541-0420.2005.00377.x.
 #' @export
 #' @keywords internal
 morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
@@ -433,17 +378,6 @@ morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
 #' the source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 3.
-#'   
-#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
-#'   Learner", Statistical Applications in Genetics and Molecular Biology
-#'   6(1), Article 25, doi:10.2202/1544-6115.1309.
-#'   
-#'   Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
-#'   data and causal inference models", Biometrics 61(4), 962-973,
-#'   doi:10.1111/j.1541-0420.2005.00377.x.
 #' @export
 #' @examples
 #' morie_tlseqsl_cheatsheet()

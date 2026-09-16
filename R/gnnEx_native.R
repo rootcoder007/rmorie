@@ -90,18 +90,6 @@
 #' @param v Coerced to integer by the body, with \code{as.integer}.
 #' @param L Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{nodes}, \code{edges}, \code{hops}, \code{size}.
-#' @references ----------
-#'   Ying, R., Bourgeois, D., You, J., Zitnik, M. & Leskovec, J. (2019)
-#'   "GNNExplainer: Generating Explanations for Graph Neural Networks",
-#'   Advances in Neural Information Processing Systems 32 (NeurIPS 2019),
-#'   9240-9251, arXiv:1903.03894. Sec. 4.1 (the MI objective, H(Y) being
-#'   constant for a trained GNN so the problem reduces to minimising
-#'   conditional entropy, and the mean-field variational approximation
-#'   learning a real-valued graph mask). Sec. 4.2 (the feature mask).
-#'   
-#'   Kipf, T. N. & Welling, M. (2017) "Semi-Supervised Classification with
-#'   Graph Convolutional Networks", ICLR 2017, arXiv:1609.02907. The model
-#'   class being explained.
 #' @export
 #' @examples
 #' gnnEx_computation_graph(adj = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -149,18 +137,6 @@ gnnEx_computation_graph <- function(adj, v, L) {
 #'
 #' @param probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
-#' @references ----------
-#'   Ying, R., Bourgeois, D., You, J., Zitnik, M. & Leskovec, J. (2019)
-#'   "GNNExplainer: Generating Explanations for Graph Neural Networks",
-#'   Advances in Neural Information Processing Systems 32 (NeurIPS 2019),
-#'   9240-9251, arXiv:1903.03894. Sec. 4.1 (the MI objective, H(Y) being
-#'   constant for a trained GNN so the problem reduces to minimising
-#'   conditional entropy, and the mean-field variational approximation
-#'   learning a real-valued graph mask). Sec. 4.2 (the feature mask).
-#'   
-#'   Kipf, T. N. & Welling, M. (2017) "Semi-Supervised Classification with
-#'   Graph Convolutional Networks", ICLR 2017, arXiv:1609.02907. The model
-#'   class being explained.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -192,18 +168,6 @@ gnnEx_conditional_entropy <- function(probs) {
 #' @param entropy_coef Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A list with \code{loss}, \code{fit}, \code{size}, \code{entropy},
 #' \code{edge_mask}, \code{feature_mask}, \code{prediction}.
-#' @references ----------
-#'   Ying, R., Bourgeois, D., You, J., Zitnik, M. & Leskovec, J. (2019)
-#'   "GNNExplainer: Generating Explanations for Graph Neural Networks",
-#'   Advances in Neural Information Processing Systems 32 (NeurIPS 2019),
-#'   9240-9251, arXiv:1903.03894. Sec. 4.1 (the MI objective, H(Y) being
-#'   constant for a trained GNN so the problem reduces to minimising
-#'   conditional entropy, and the mean-field variational approximation
-#'   learning a real-valued graph mask). Sec. 4.2 (the feature mask).
-#'   
-#'   Kipf, T. N. & Welling, M. (2017) "Semi-Supervised Classification with
-#'   Graph Convolutional Networks", ICLR 2017, arXiv:1609.02907. The model
-#'   class being explained.
 #' @export
 #' @keywords internal
 gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
@@ -251,18 +215,6 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
 #' @return A list with \code{estimate}, \code{edges_ranked}, \code{edge_mask},
 #' \code{feature_mask}, \code{loss_history}, \code{final}, \code{computation_graph},
 #' \code{penalized}, \code{method}, \code{note}.
-#' @references ----------
-#'   Ying, R., Bourgeois, D., You, J., Zitnik, M. & Leskovec, J. (2019)
-#'   "GNNExplainer: Generating Explanations for Graph Neural Networks",
-#'   Advances in Neural Information Processing Systems 32 (NeurIPS 2019),
-#'   9240-9251, arXiv:1903.03894. Sec. 4.1 (the MI objective, H(Y) being
-#'   constant for a trained GNN so the problem reduces to minimising
-#'   conditional entropy, and the mean-field variational approximation
-#'   learning a real-valued graph mask). Sec. 4.2 (the feature mask).
-#'   
-#'   Kipf, T. N. & Welling, M. (2017) "Semi-Supervised Classification with
-#'   Graph Convolutional Networks", ICLR 2017, arXiv:1609.02907. The model
-#'   class being explained.
 #' @export
 #' @keywords internal
 gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
@@ -338,18 +290,6 @@ gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Ying, R., Bourgeois, D., You, J., Zitnik, M. & Leskovec, J. (2019)
-#'   "GNNExplainer: Generating Explanations for Graph Neural Networks",
-#'   Advances in Neural Information Processing Systems 32 (NeurIPS 2019),
-#'   9240-9251, arXiv:1903.03894. Sec. 4.1 (the MI objective, H(Y) being
-#'   constant for a trained GNN so the problem reduces to minimising
-#'   conditional entropy, and the mean-field variational approximation
-#'   learning a real-valued graph mask). Sec. 4.2 (the feature mask).
-#'   
-#'   Kipf, T. N. & Welling, M. (2017) "Semi-Supervised Classification with
-#'   Graph Convolutional Networks", ICLR 2017, arXiv:1609.02907. The model
-#'   class being explained.
 #' @export
 #' @examples
 #' gnnEx_cheatsheet()

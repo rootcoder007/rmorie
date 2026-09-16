@@ -75,18 +75,6 @@
 #' @param a,b Two points defining the axis.
 #' @param degrees The turn.
 #' @return The rotated point.
-#' @references Sherman, W., Day, T., Jacobson, M.P., Friesner, R.A. and Farid, R.
-#'       (2006) "Novel procedure for modeling ligand/receptor induced fit
-#'       effects." Journal of Medicinal Chemistry 49(2), 534-553.
-#'       doi:10.1021/jm050540c.
-#'     Sherman, W., Beard, H.S. and Farid, R. (2006) "Use of an induced fit
-#'       receptor structure in virtual screening." Chemical Biology and
-#'       Drug Design 67(1), 83-84.
-#'     Jones, J.E. (1924) "On the determination of molecular fields. II."
-#'       Proceedings of the Royal Society A 106(738), 463-477.
-#'     Rodrigues, O. (1840) "Des lois geometriques qui regissent les
-#'       deplacements d'un systeme solide." Journal de Mathematiques Pures
-#'       et Appliquees 5, 380-440.
 #' @export
 #' @examples
 #' morie_flexrd_rotate(p = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L,
@@ -117,18 +105,6 @@ morie_flexrd_rotate <- function(p, a, b, degrees) {
 #' @param chi A list with a, b and moves, all zero-based.
 #' @param degrees The turn.
 #' @return The receptor with that side chain moved.
-#' @references Sherman, W., Day, T., Jacobson, M.P., Friesner, R.A. and Farid, R.
-#'       (2006) "Novel procedure for modeling ligand/receptor induced fit
-#'       effects." Journal of Medicinal Chemistry 49(2), 534-553.
-#'       doi:10.1021/jm050540c.
-#'     Sherman, W., Beard, H.S. and Farid, R. (2006) "Use of an induced fit
-#'       receptor structure in virtual screening." Chemical Biology and
-#'       Drug Design 67(1), 83-84.
-#'     Jones, J.E. (1924) "On the determination of molecular fields. II."
-#'       Proceedings of the Royal Society A 106(738), 463-477.
-#'     Rodrigues, O. (1840) "Des lois geometriques qui regissent les
-#'       deplacements d'un systeme solide." Journal de Mathematiques Pures
-#'       et Appliquees 5, 380-440.
 #' @export
 #' @examples
 #' morie_flexrd_chi(coords = c(1, 2, 3, 4, 5, 6, 7, 8), chi = list(a = 1, b = 2),
@@ -161,18 +137,6 @@ morie_flexrd_chi <- function(coords, chi, degrees) {
 #' @param epsilon The well depth.
 #' @param cutoff The neighbourhood.
 #' @return The energy.
-#' @references Sherman, W., Day, T., Jacobson, M.P., Friesner, R.A. and Farid, R.
-#'       (2006) "Novel procedure for modeling ligand/receptor induced fit
-#'       effects." Journal of Medicinal Chemistry 49(2), 534-553.
-#'       doi:10.1021/jm050540c.
-#'     Sherman, W., Beard, H.S. and Farid, R. (2006) "Use of an induced fit
-#'       receptor structure in virtual screening." Chemical Biology and
-#'       Drug Design 67(1), 83-84.
-#'     Jones, J.E. (1924) "On the determination of molecular fields. II."
-#'       Proceedings of the Royal Society A 106(738), 463-477.
-#'     Rodrigues, O. (1840) "Des lois geometriques qui regissent les
-#'       deplacements d'un systeme solide." Journal de Mathematiques Pures
-#'       et Appliquees 5, 380-440.
 #' @export
 #' @examples
 #' morie_flexrd_energy(rec = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
@@ -238,18 +202,6 @@ morie_flexrd_energy <- function(rec, lig, rec_r, lig_r, scale = 1,
 #' @param n_keep How many stage-one poses go forward.
 #' @return A list with the chosen pose, the chosen chi angles, the
 #'   softened and hard energies at each stage, and the refined receptor.
-#' @references Sherman, W., Day, T., Jacobson, M.P., Friesner, R.A. and Farid, R.
-#'       (2006) "Novel procedure for modeling ligand/receptor induced fit
-#'       effects." Journal of Medicinal Chemistry 49(2), 534-553.
-#'       doi:10.1021/jm050540c.
-#'     Sherman, W., Beard, H.S. and Farid, R. (2006) "Use of an induced fit
-#'       receptor structure in virtual screening." Chemical Biology and
-#'       Drug Design 67(1), 83-84.
-#'     Jones, J.E. (1924) "On the determination of molecular fields. II."
-#'       Proceedings of the Royal Society A 106(738), 463-477.
-#'     Rodrigues, O. (1840) "Des lois geometriques qui regissent les
-#'       deplacements d'un systeme solide." Journal de Mathematiques Pures
-#'       et Appliquees 5, 380-440.
 #' @export
 #' @examples
 #' REC <- list(c(0, 0, 0), c(1.5, 0, 0), c(2.2, 1.2, 0), c(3, 1.2,
@@ -379,18 +331,6 @@ morie_flexrd <- function(receptor, ligand, flex_residues, angles = NULL,
 #' One-line summary of the flexrd module
 #'
 #' @return A character scalar.
-#' @references Sherman, W., Day, T., Jacobson, M.P., Friesner, R.A. and Farid, R.
-#'       (2006) "Novel procedure for modeling ligand/receptor induced fit
-#'       effects." Journal of Medicinal Chemistry 49(2), 534-553.
-#'       doi:10.1021/jm050540c.
-#'     Sherman, W., Beard, H.S. and Farid, R. (2006) "Use of an induced fit
-#'       receptor structure in virtual screening." Chemical Biology and
-#'       Drug Design 67(1), 83-84.
-#'     Jones, J.E. (1924) "On the determination of molecular fields. II."
-#'       Proceedings of the Royal Society A 106(738), 463-477.
-#'     Rodrigues, O. (1840) "Des lois geometriques qui regissent les
-#'       deplacements d'un systeme solide." Journal de Mathematiques Pures
-#'       et Appliquees 5, 380-440.
 #' @export
 #' @examples
 #' morie_flexrd_cheatsheet()

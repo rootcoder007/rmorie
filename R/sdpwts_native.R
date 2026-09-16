@@ -72,27 +72,6 @@
 #' @param F0 A matrix; passed to \code{as.matrix}.
 #' @param Fs A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Boyd, S. & Vandenberghe, L. (2004) *Convex Optimization*, Cambridge
-#'   University Press, doi:10.1017/CBO9780511804441. Sec. 4.6.2 (the
-#'   semidefinite program with its linear matrix inequality constraint,
-#'   and LP as the case of diagonal matrices); Sec. 9.6 and 11.1 (the
-#'   logarithmic barrier -log det X for the PSD cone, its self-concordance,
-#'   and the central path); Sec. 11.2-11.3 (the barrier method: solve the
-#'   centring problem for a sequence of increasing t, with the duality gap
-#'   at a central point equal to m/t, and the trade-off in the choice of
-#'   the multiplier mu between the number of outer iterations and the
-#'   difficulty of each centring step); and Sec. 5.5 (the KKT conditions
-#'   and complementary slackness used for the optimality check).
-#'   
-#'   Vandenberghe, L. & Boyd, S. (1996) "Semidefinite Programming",
-#'   *SIAM Review* 38(1), 49-95, doi:10.1137/1038003. The survey
-#'   treatment, including the eigenvalue problems that reduce to SDP.
-#'   
-#'   Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
-#'   Algorithms in Convex Programming*, SIAM,
-#'   doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-#'   the barrier method\'s complexity claim hold.
 #' @export
 #' @examples
 #' sdpwts_lmi(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -127,27 +106,6 @@ sdpwts_lmi <- function(x, F0, Fs) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1e-10}.
 #' @return A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd},
 #' \code{strictly_feasible}.
-#' @references ----------
-#'   Boyd, S. & Vandenberghe, L. (2004) *Convex Optimization*, Cambridge
-#'   University Press, doi:10.1017/CBO9780511804441. Sec. 4.6.2 (the
-#'   semidefinite program with its linear matrix inequality constraint,
-#'   and LP as the case of diagonal matrices); Sec. 9.6 and 11.1 (the
-#'   logarithmic barrier -log det X for the PSD cone, its self-concordance,
-#'   and the central path); Sec. 11.2-11.3 (the barrier method: solve the
-#'   centring problem for a sequence of increasing t, with the duality gap
-#'   at a central point equal to m/t, and the trade-off in the choice of
-#'   the multiplier mu between the number of outer iterations and the
-#'   difficulty of each centring step); and Sec. 5.5 (the KKT conditions
-#'   and complementary slackness used for the optimality check).
-#'   
-#'   Vandenberghe, L. & Boyd, S. (1996) "Semidefinite Programming",
-#'   *SIAM Review* 38(1), 49-95, doi:10.1137/1038003. The survey
-#'   treatment, including the eigenvalue problems that reduce to SDP.
-#'   
-#'   Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
-#'   Algorithms in Convex Programming*, SIAM,
-#'   doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-#'   the barrier method\'s complexity claim hold.
 #' @export
 #' @examples
 #' sdpwts_is_psd(M = 5L)
@@ -173,27 +131,6 @@ sdpwts_is_psd <- function(M, tol = -1e-10) {
 #' @param F0 Passed to \code{sdpwts_lmi}.
 #' @param Fs Passed to \code{sdpwts_lmi}.
 #' @return A list with \code{value}, \code{feasible}, \code{min_eigenvalue}, \code{eigenvalues}.
-#' @references ----------
-#'   Boyd, S. & Vandenberghe, L. (2004) *Convex Optimization*, Cambridge
-#'   University Press, doi:10.1017/CBO9780511804441. Sec. 4.6.2 (the
-#'   semidefinite program with its linear matrix inequality constraint,
-#'   and LP as the case of diagonal matrices); Sec. 9.6 and 11.1 (the
-#'   logarithmic barrier -log det X for the PSD cone, its self-concordance,
-#'   and the central path); Sec. 11.2-11.3 (the barrier method: solve the
-#'   centring problem for a sequence of increasing t, with the duality gap
-#'   at a central point equal to m/t, and the trade-off in the choice of
-#'   the multiplier mu between the number of outer iterations and the
-#'   difficulty of each centring step); and Sec. 5.5 (the KKT conditions
-#'   and complementary slackness used for the optimality check).
-#'   
-#'   Vandenberghe, L. & Boyd, S. (1996) "Semidefinite Programming",
-#'   *SIAM Review* 38(1), 49-95, doi:10.1137/1038003. The survey
-#'   treatment, including the eigenvalue problems that reduce to SDP.
-#'   
-#'   Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
-#'   Algorithms in Convex Programming*, SIAM,
-#'   doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-#'   the barrier method\'s complexity claim hold.
 #' @export
 #' @examples
 #' sdpwts_barrier(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -224,27 +161,6 @@ sdpwts_barrier <- function(x, F0, Fs) {
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param m Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{gap}, \code{t}, \code{m}, \code{note}.
-#' @references ----------
-#'   Boyd, S. & Vandenberghe, L. (2004) *Convex Optimization*, Cambridge
-#'   University Press, doi:10.1017/CBO9780511804441. Sec. 4.6.2 (the
-#'   semidefinite program with its linear matrix inequality constraint,
-#'   and LP as the case of diagonal matrices); Sec. 9.6 and 11.1 (the
-#'   logarithmic barrier -log det X for the PSD cone, its self-concordance,
-#'   and the central path); Sec. 11.2-11.3 (the barrier method: solve the
-#'   centring problem for a sequence of increasing t, with the duality gap
-#'   at a central point equal to m/t, and the trade-off in the choice of
-#'   the multiplier mu between the number of outer iterations and the
-#'   difficulty of each centring step); and Sec. 5.5 (the KKT conditions
-#'   and complementary slackness used for the optimality check).
-#'   
-#'   Vandenberghe, L. & Boyd, S. (1996) "Semidefinite Programming",
-#'   *SIAM Review* 38(1), 49-95, doi:10.1137/1038003. The survey
-#'   treatment, including the eigenvalue problems that reduce to SDP.
-#'   
-#'   Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
-#'   Algorithms in Convex Programming*, SIAM,
-#'   doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-#'   the barrier method\'s complexity claim hold.
 #' @export
 #' @examples
 #' sdpwts_central_path_gap(t = 5L, m = 5L)
@@ -358,27 +274,6 @@ sdpwts_central_path_gap <- function(t, m) {
 #' @return A list with \code{estimate}, \code{x}, \code{objective}, \code{gap},
 #' \code{outer_iterations}, \code{path}, \code{m}, \code{min_eigenvalue}, \code{method},
 #' \code{note}.
-#' @references ----------
-#'   Boyd, S. & Vandenberghe, L. (2004) *Convex Optimization*, Cambridge
-#'   University Press, doi:10.1017/CBO9780511804441. Sec. 4.6.2 (the
-#'   semidefinite program with its linear matrix inequality constraint,
-#'   and LP as the case of diagonal matrices); Sec. 9.6 and 11.1 (the
-#'   logarithmic barrier -log det X for the PSD cone, its self-concordance,
-#'   and the central path); Sec. 11.2-11.3 (the barrier method: solve the
-#'   centring problem for a sequence of increasing t, with the duality gap
-#'   at a central point equal to m/t, and the trade-off in the choice of
-#'   the multiplier mu between the number of outer iterations and the
-#'   difficulty of each centring step); and Sec. 5.5 (the KKT conditions
-#'   and complementary slackness used for the optimality check).
-#'   
-#'   Vandenberghe, L. & Boyd, S. (1996) "Semidefinite Programming",
-#'   *SIAM Review* 38(1), 49-95, doi:10.1137/1038003. The survey
-#'   treatment, including the eigenvalue problems that reduce to SDP.
-#'   
-#'   Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
-#'   Algorithms in Convex Programming*, SIAM,
-#'   doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-#'   the barrier method\'s complexity claim hold.
 #' @export
 #' @examples
 #' sdpwts_solve_sdp(c = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -436,27 +331,6 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 #' @param tol Passed to \code{sdpwts_solve_sdp}. Defaults to \code{1e-09}.
 #' @return A list with \code{estimate}, \code{t}, \code{lambda_min}, \code{error},
 #' \code{outer_iterations}, \code{gap}, \code{method}, \code{note}.
-#' @references ----------
-#'   Boyd, S. & Vandenberghe, L. (2004) *Convex Optimization*, Cambridge
-#'   University Press, doi:10.1017/CBO9780511804441. Sec. 4.6.2 (the
-#'   semidefinite program with its linear matrix inequality constraint,
-#'   and LP as the case of diagonal matrices); Sec. 9.6 and 11.1 (the
-#'   logarithmic barrier -log det X for the PSD cone, its self-concordance,
-#'   and the central path); Sec. 11.2-11.3 (the barrier method: solve the
-#'   centring problem for a sequence of increasing t, with the duality gap
-#'   at a central point equal to m/t, and the trade-off in the choice of
-#'   the multiplier mu between the number of outer iterations and the
-#'   difficulty of each centring step); and Sec. 5.5 (the KKT conditions
-#'   and complementary slackness used for the optimality check).
-#'   
-#'   Vandenberghe, L. & Boyd, S. (1996) "Semidefinite Programming",
-#'   *SIAM Review* 38(1), 49-95, doi:10.1137/1038003. The survey
-#'   treatment, including the eigenvalue problems that reduce to SDP.
-#'   
-#'   Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
-#'   Algorithms in Convex Programming*, SIAM,
-#'   doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-#'   the barrier method\'s complexity claim hold.
 #' @export
 #' @examples
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
@@ -494,27 +368,6 @@ morie_sdpwts <- sdpwts_solve_sdp
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Boyd, S. & Vandenberghe, L. (2004) *Convex Optimization*, Cambridge
-#'   University Press, doi:10.1017/CBO9780511804441. Sec. 4.6.2 (the
-#'   semidefinite program with its linear matrix inequality constraint,
-#'   and LP as the case of diagonal matrices); Sec. 9.6 and 11.1 (the
-#'   logarithmic barrier -log det X for the PSD cone, its self-concordance,
-#'   and the central path); Sec. 11.2-11.3 (the barrier method: solve the
-#'   centring problem for a sequence of increasing t, with the duality gap
-#'   at a central point equal to m/t, and the trade-off in the choice of
-#'   the multiplier mu between the number of outer iterations and the
-#'   difficulty of each centring step); and Sec. 5.5 (the KKT conditions
-#'   and complementary slackness used for the optimality check).
-#'   
-#'   Vandenberghe, L. & Boyd, S. (1996) "Semidefinite Programming",
-#'   *SIAM Review* 38(1), 49-95, doi:10.1137/1038003. The survey
-#'   treatment, including the eigenvalue problems that reduce to SDP.
-#'   
-#'   Nesterov, Y. & Nemirovskii, A. (1994) *Interior-Point Polynomial
-#'   Algorithms in Convex Programming*, SIAM,
-#'   doi:10.1137/1.9781611970791. Self-concordance, which is what makes
-#'   the barrier method\'s complexity claim hold.
 #' @export
 #' @examples
 #' sdpwts_cheatsheet()

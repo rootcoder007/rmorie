@@ -201,17 +201,6 @@
 #' @param saturated A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param ridge Passed to \code{.wenge_parametric_models}. Defaults to \code{1e-08}.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Tchetgen Tchetgen, E. J. & Shpitser, I. (2012) "Semiparametric theory
-#'   for causal mediation analysis", The Annals of Statistics 40(3),
-#'   1816-1845, doi:10.1214/12-AOS990; arXiv:1210.4654. Equation (2), Sec.
-#'   3.
-#'   
-#'   Imai, K., Keele, L. & Tingley, D. (2010) "A general approach to
-#'   causal mediation analysis", Psychological Methods 15(4), 309-334,
-#'   doi:10.1037/a0020761.
-#'   
-#'   Pearl, J. (2001) "Direct and indirect effects", UAI 17, 411-420.
 #' @export
 #' @keywords internal
 morie_wenge_mediation_functional <- function(Y, E, M, X, strategy = "em",
@@ -334,17 +323,6 @@ morie_wenge_mediation_functional <- function(Y, E, M, X, strategy = "em",
 #' @param strategy Passed to \code{morie_wenge_mediation_functional}. Defaults to \code{"em"}.
 #' @param saturated A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Tchetgen Tchetgen, E. J. & Shpitser, I. (2012) "Semiparametric theory
-#'   for causal mediation analysis", The Annals of Statistics 40(3),
-#'   1816-1845, doi:10.1214/12-AOS990; arXiv:1210.4654. Equation (2), Sec.
-#'   3.
-#'   
-#'   Imai, K., Keele, L. & Tingley, D. (2010) "A general approach to
-#'   causal mediation analysis", Psychological Methods 15(4), 309-334,
-#'   doi:10.1037/a0020761.
-#'   
-#'   Pearl, J. (2001) "Direct and indirect effects", UAI 17, 411-420.
 #' @export
 #' @keywords internal
 morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy = "em",
@@ -408,17 +386,6 @@ morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy = "em",
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Tchetgen Tchetgen, E. J. & Shpitser, I. (2012) "Semiparametric theory
-#'   for causal mediation analysis", The Annals of Statistics 40(3),
-#'   1816-1845, doi:10.1214/12-AOS990; arXiv:1210.4654. Equation (2), Sec.
-#'   3.
-#'   
-#'   Imai, K., Keele, L. & Tingley, D. (2010) "A general approach to
-#'   causal mediation analysis", Psychological Methods 15(4), 309-334,
-#'   doi:10.1037/a0020761.
-#'   
-#'   Pearl, J. (2001) "Direct and indirect effects", UAI 17, 411-420.
 #' @export
 #' @examples
 #' morie_wenge_cheatsheet()

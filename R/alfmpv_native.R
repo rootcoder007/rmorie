@@ -168,15 +168,6 @@
 #' @return a list with paired, species_paired, unpaired, n_paired,
 #'   n_unpaired, n_rows, n_chains, chain_source, n_filtered, mode,
 #'   pairing_rule and method.
-#' @references Evans, R. et al. (2022) "Protein complex prediction with
-#'       AlphaFold-Multimer." bioRxiv 2021.10.04.463034v2, section 2.1,
-#'       doi:10.1101/2021.10.04.463034
-#'     Mirdita, M. et al. (2022) "ColabFold: making protein folding
-#'       accessible to all." Nature Methods 19(6), 679-682,
-#'       doi:10.1038/s41592-022-01488-1
-#'     Bryant, P., Pozzati, G. & Elofsson, A. (2022) "Improved prediction of
-#'       protein-protein interactions using AlphaFold2." Nature
-#'       Communications 13, 1265, doi:10.1038/s41467-022-28865-w
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -345,15 +336,6 @@ morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
 #' @param mode multimer, colabfold or folddock.
 #' @param ... passed to morie_alfmpv_msa_pairing.
 #' @return see morie_alfmpv_msa_pairing.
-#' @references Evans, R. et al. (2022) "Protein complex prediction with
-#'       AlphaFold-Multimer." bioRxiv 2021.10.04.463034v2, section 2.1,
-#'       doi:10.1101/2021.10.04.463034
-#'     Mirdita, M. et al. (2022) "ColabFold: making protein folding
-#'       accessible to all." Nature Methods 19(6), 679-682,
-#'       doi:10.1038/s41592-022-01488-1
-#'     Bryant, P., Pozzati, G. & Elofsson, A. (2022) "Improved prediction of
-#'       protein-protein interactions using AlphaFold2." Nature
-#'       Communications 13, 1265, doi:10.1038/s41467-022-28865-w
 #' @export
 #' @keywords internal
 morie_alfmpv <- function(chains = NULL, msas = NULL, mode = "multimer",

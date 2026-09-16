@@ -349,15 +349,6 @@
 #' @param k_time Passed to \code{.lggvls_lagged_design}. Defaults to \code{0}.
 #' @param lag Passed to \code{.lggvls_lagged_design}. Defaults to \code{1}.
 #' @return The value of \code{.lggvls_lagged_design}.
-#' @references ----------
-#'   Robins, J. (1986) "A new approach to causal inference in mortality
-#'   studies with a sustained exposure period -- application to control of
-#'   the healthy worker survivor effect", Mathematical Modelling 7(9-12),
-#'   1393-1512, doi:10.1016/0270-0255(86)90088-6.
-#'   
-#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
-#'   Raton: Chapman & Hall/CRC, Sec. 21.2 for the product-over-time weights
-#'   and Ch. 20 for why conditioning fails where weighting works.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -389,15 +380,6 @@ lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
 #' \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight},
 #' \code{effective_sample_size}, \code{cumulative_exposure}, \code{per_time},
 #' \code{n_times}, \code{lag}, \code{n}, \code{contrast}, \code{method}.
-#' @references ----------
-#'   Robins, J. (1986) "A new approach to causal inference in mortality
-#'   studies with a sustained exposure period -- application to control of
-#'   the healthy worker survivor effect", Mathematical Modelling 7(9-12),
-#'   1393-1512, doi:10.1016/0270-0255(86)90088-6.
-#'   
-#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
-#'   Raton: Chapman & Hall/CRC, Sec. 21.2 for the product-over-time weights
-#'   and Ch. 20 for why conditioning fails where weighting works.
 #' @export
 #' @examples
 #' morie_lggvls(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)

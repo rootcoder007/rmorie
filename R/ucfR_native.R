@@ -39,7 +39,7 @@
 # (1994) "GroupLens: An Open Architecture for Collaborative Filtering of
 # Netnews", *Proceedings of the 1994 ACM Conference on Computer
 # Supported Cooperative Work (CSCW '94)*, 175-186,
-# doi:10.1145/192844.192905. [PDF supplied by Vee.] The premise that
+# doi:10.1145/192844.192905. (PDF supplied by Vee.) The premise that
 # people who agreed in the past are likely to agree again and that
 # predictions can therefore be made from correlated users' ratings with
 # no content analysis; the Pearson correlation computed over co-rated

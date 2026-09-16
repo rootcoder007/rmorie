@@ -992,16 +992,6 @@
 #' @param route Passed to \code{.prsLL_parse}. Defaults to \code{"table"}.
 #' @return A list with \code{estimate}, \code{tree}, \code{route}, \code{tokens},
 #' \code{yield}, \code{method}.
-#' @references ----------
-#'   Knuth, D. E. (1971) "Top-down syntax analysis", Acta Informatica
-#'   1(2), 79-110, doi:10.1007/BF00289517. Top-down (LL) analysis, the
-#'   role of one-symbol lookahead, and the failure of top-down methods on
-#'   left-recursive grammars.
-#'   
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2, for the LR(k) classes against
-#'   which the LL(1) restriction is measured.
 #' @export
 #' @examples
 #' # The expression grammar of Aho, Lam, Sethi & Ullman (2nd ed., 4.4.2):

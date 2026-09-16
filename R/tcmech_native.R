@@ -76,19 +76,6 @@
 #' @param delta The failure probability.
 #' @param omega The truncation order, or NULL for untruncated zCDP.
 #' @return The epsilon achieved.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' morie_tcmech_eps(rho = 0.5, delta = 0.5)
@@ -126,19 +113,6 @@ morie_tcmech_eps <- function(rho, delta, omega = NULL) {
 #' @param delta The failure probability.
 #' @param omega The truncation order, or NULL.
 #' @return The floor, zero when untruncated.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -163,19 +137,6 @@ morie_tcmech_floor <- function(delta, omega = NULL) {
 #' @param omega The truncation order, or NULL.
 #' @param iters Bisection steps.
 #' @return The affordable rho.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' morie_tcmech_rho(epsilon = 5L, delta = 0.5)
@@ -211,19 +172,6 @@ morie_tcmech_rho <- function(epsilon, delta, omega = NULL, iters = 200L) {
 #' @param sensitivity The query sensitivity.
 #' @param rho The budget.
 #' @return The Gaussian noise scale.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' morie_tcmech_sigma(sensitivity = 5L, rho = 0.5)
@@ -241,19 +189,6 @@ morie_tcmech_sigma <- function(sensitivity, rho) {
 #' @param sensitivity The query sensitivity.
 #' @param sigma The noise scale.
 #' @return The implied rho.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' morie_tcmech_rho_from_sigma(sensitivity = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
@@ -269,19 +204,6 @@ morie_tcmech_rho_from_sigma <- function(sensitivity, sigma) {
 #'
 #' @param epsilon The pure differential privacy parameter.
 #' @return The implied rho.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' morie_tcmech_rho_from_pure(epsilon = 5L)
@@ -303,19 +225,6 @@ morie_tcmech_rho_from_pure <- function(epsilon) {
 #' @param rhos The per-release budgets.
 #' @param omegas The per-release truncations, or NULL.
 #' @return A list with the total rho and the composed truncation.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -342,19 +251,6 @@ morie_tcmech_compose <- function(rhos, omegas = NULL) {
 #' @return A list with the private answer, the noise scale, the budget
 #'   in rho, how many records the clipping bound, and the guarantee
 #'   actually achieved.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' Y <- vapply(0:29, function(i) round(((i * 13)%%41) - 20 + ((i *
@@ -401,19 +297,6 @@ morie_tcmech <- function(y, f_value, C, epsilon, delta, omega = NULL,
 #' One-line summary of the tcmech module
 #'
 #' @return A character scalar.
-#' @references Bun, M., Dwork, C., Rothblum, G.N. and Steinke, T. (2018)
-#'       "Composable and versatile privacy via truncated CDP." Proceedings
-#'       of the 50th Annual ACM SIGACT Symposium on Theory of Computing
-#'       (STOC), 74-86. doi:10.1145/3188745.3188946.
-#'     Bun, M. and Steinke, T. (2016) "Concentrated differential privacy:
-#'       simplifications, extensions, and lower bounds." Theory of
-#'       Cryptography Conference (TCC), 635-658. arXiv:1605.02065.
-#'       Definition 1.1, Proposition 1.3, Proposition 1.4, Definition 1.5
-#'       and Proposition 1.6.
-#'     Mironov, I. (2017) "Renyi differential privacy." IEEE Computer
-#'       Security Foundations Symposium (CSF), 263-275.
-#'     Dwork, C. and Rothblum, G.N. (2016) "Concentrated differential
-#'       privacy." arXiv:1603.01887.
 #' @export
 #' @examples
 #' morie_tcmech_cheatsheet()

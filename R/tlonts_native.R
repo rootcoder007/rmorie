@@ -72,30 +72,6 @@
 #' @param t Numeric; passed to \code{min}.
 #' @param lags Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return A vector, from \code{c}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 19 (van der
-#'   Laan, Chambaz & Lendle): a time series in which one observes in
-#'   chronological order a covariate vector, a treatment and an outcome;
-#'   the conditional distribution given the past depending on the past
-#'   through a fixed-dimensional summary measure, described by a
-#'   time-invariant mechanism in a model space that may be unspecified; a
-#'   compatible causal model with a family of causal effects defined by
-#'   STOCHASTIC INTERVENTIONS on a subset of the treatment nodes on a
-#'   future outcome, and their identifiability from the observed data
-#'   distribution; and the observation that empty summary measures recover
-#'   i.i.d. targeted learning, parametric conditional densities recover
-#'   classical time series models, and group sequential adaptive designs
-#'   are included.
-#'   
-#'   Chambaz, A., Zheng, W. & van der Laan, M. J. (2017) "Targeted
-#'   sequential design for targeted learning inference of the optimal
-#'   treatment rule and its mean reward", Annals of Statistics 45(6),
-#'   2537-2564, doi:10.1214/16-AOS1534.
-#'   
-#'   van der Laan, M. J., Rose, S. & Lendle, S. (2018) "Online Targeted
-#'   Learning for Time Series", in Targeted Learning in Data Science,
-#'   Springer, doi:10.1007/978-3-319-65304-4_19.
 #' @export
 #' @examples
 #' lag_summary(series = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L)
@@ -134,30 +110,6 @@ lag_summary <- function(series, t, lags = 2) {
 #' \code{as.numeric}.
 #' @param prob Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{intervened}, \code{nodes}, \code{n_intervened}, \code{kind}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 19 (van der
-#'   Laan, Chambaz & Lendle): a time series in which one observes in
-#'   chronological order a covariate vector, a treatment and an outcome;
-#'   the conditional distribution given the past depending on the past
-#'   through a fixed-dimensional summary measure, described by a
-#'   time-invariant mechanism in a model space that may be unspecified; a
-#'   compatible causal model with a family of causal effects defined by
-#'   STOCHASTIC INTERVENTIONS on a subset of the treatment nodes on a
-#'   future outcome, and their identifiability from the observed data
-#'   distribution; and the observation that empty summary measures recover
-#'   i.i.d. targeted learning, parametric conditional densities recover
-#'   classical time series models, and group sequential adaptive designs
-#'   are included.
-#'   
-#'   Chambaz, A., Zheng, W. & van der Laan, M. J. (2017) "Targeted
-#'   sequential design for targeted learning inference of the optimal
-#'   treatment rule and its mean reward", Annals of Statistics 45(6),
-#'   2537-2564, doi:10.1214/16-AOS1534.
-#'   
-#'   van der Laan, M. J., Rose, S. & Lendle, S. (2018) "Online Targeted
-#'   Learning for Time Series", in Targeted Learning in Data Science,
-#'   Springer, doi:10.1007/978-3-319-65304-4_19.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -201,30 +153,6 @@ stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
 #'
 #' @param D Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{variance}, \code{se}, \code{T}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 19 (van der
-#'   Laan, Chambaz & Lendle): a time series in which one observes in
-#'   chronological order a covariate vector, a treatment and an outcome;
-#'   the conditional distribution given the past depending on the past
-#'   through a fixed-dimensional summary measure, described by a
-#'   time-invariant mechanism in a model space that may be unspecified; a
-#'   compatible causal model with a family of causal effects defined by
-#'   STOCHASTIC INTERVENTIONS on a subset of the treatment nodes on a
-#'   future outcome, and their identifiability from the observed data
-#'   distribution; and the observation that empty summary measures recover
-#'   i.i.d. targeted learning, parametric conditional densities recover
-#'   classical time series models, and group sequential adaptive designs
-#'   are included.
-#'   
-#'   Chambaz, A., Zheng, W. & van der Laan, M. J. (2017) "Targeted
-#'   sequential design for targeted learning inference of the optimal
-#'   treatment rule and its mean reward", Annals of Statistics 45(6),
-#'   2537-2564, doi:10.1214/16-AOS1534.
-#'   
-#'   van der Laan, M. J., Rose, S. & Lendle, S. (2018) "Online Targeted
-#'   Learning for Time Series", in Targeted Learning in Data Science,
-#'   Springer, doi:10.1007/978-3-319-65304-4_19.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -254,30 +182,6 @@ martingale_variance <- function(D) {
 #' @param past Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.
 #' @return A list with \code{correlation}, \code{is_martingale}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 19 (van der
-#'   Laan, Chambaz & Lendle): a time series in which one observes in
-#'   chronological order a covariate vector, a treatment and an outcome;
-#'   the conditional distribution given the past depending on the past
-#'   through a fixed-dimensional summary measure, described by a
-#'   time-invariant mechanism in a model space that may be unspecified; a
-#'   compatible causal model with a family of causal effects defined by
-#'   STOCHASTIC INTERVENTIONS on a subset of the treatment nodes on a
-#'   future outcome, and their identifiability from the observed data
-#'   distribution; and the observation that empty summary measures recover
-#'   i.i.d. targeted learning, parametric conditional densities recover
-#'   classical time series models, and group sequential adaptive designs
-#'   are included.
-#'   
-#'   Chambaz, A., Zheng, W. & van der Laan, M. J. (2017) "Targeted
-#'   sequential design for targeted learning inference of the optimal
-#'   treatment rule and its mean reward", Annals of Statistics 45(6),
-#'   2537-2564, doi:10.1214/16-AOS1534.
-#'   
-#'   van der Laan, M. J., Rose, S. & Lendle, S. (2018) "Online Targeted
-#'   Learning for Time Series", in Targeted Learning in Data Science,
-#'   Springer, doi:10.1007/978-3-319-65304-4_19.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -318,30 +222,6 @@ martingale_check <- function(D, past, tol = 0.2) {
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci},
 #' \code{T_scored}, \code{method}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
-#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 19 (van der
-#'   Laan, Chambaz & Lendle): a time series in which one observes in
-#'   chronological order a covariate vector, a treatment and an outcome;
-#'   the conditional distribution given the past depending on the past
-#'   through a fixed-dimensional summary measure, described by a
-#'   time-invariant mechanism in a model space that may be unspecified; a
-#'   compatible causal model with a family of causal effects defined by
-#'   STOCHASTIC INTERVENTIONS on a subset of the treatment nodes on a
-#'   future outcome, and their identifiability from the observed data
-#'   distribution; and the observation that empty summary measures recover
-#'   i.i.d. targeted learning, parametric conditional densities recover
-#'   classical time series models, and group sequential adaptive designs
-#'   are included.
-#'   
-#'   Chambaz, A., Zheng, W. & van der Laan, M. J. (2017) "Targeted
-#'   sequential design for targeted learning inference of the optimal
-#'   treatment rule and its mean reward", Annals of Statistics 45(6),
-#'   2537-2564, doi:10.1214/16-AOS1534.
-#'   
-#'   van der Laan, M. J., Rose, S. & Lendle, S. (2018) "Online Targeted
-#'   Learning for Time Series", in Targeted Learning in Data Science,
-#'   Springer, doi:10.1007/978-3-319-65304-4_19.
 #' @export
 #' @keywords internal
 online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {

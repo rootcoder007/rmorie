@@ -20,6 +20,11 @@
 #' morie_theta_mle
 #'
 #' @keywords internal
+#' @param x Argument `x`; see Usage.
+#' @param a Argument `a`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @return A list with `theta`, `se`, `loglik`, `score`, `information`, `raw_score`, `n_items`, `converged`, `method`.
 morie_theta_mle <- function(x, a = 1, b = 0, c = 0) {
   xs <- as.numeric(x)
   n <- length(xs)

@@ -19,6 +19,11 @@
 
 #' morie_item_information
 #'
+#' @param theta Argument `theta`; see Usage.
+#' @param a Argument `a`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @return A list with `info`, `p`, `dp`, `theta`, `a`, `b`, `c`, `n`, `total`, `method`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_item_information(V)

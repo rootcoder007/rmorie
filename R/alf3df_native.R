@@ -70,19 +70,6 @@
 #' @param sigma_max The starting level.
 #' @param rho The schedule exponent.
 #' @return The levels, with a zero appended.
-#' @references Abramson, J., Adler, J., Dunger, J., Evans, R., Green, T., Pritzel,
-#'       A., Ronneberger, O., Willmore, L., Ballard, A.J., Bambrick, J. et
-#'       al. (2024) "Accurate structure prediction of biomolecular
-#'       interactions with AlphaFold 3." Nature 630(8016), 493-500.
-#'       doi:10.1038/s41586-024-07487-w.
-#'     Karras, T., Aittala, M., Aila, T. and Laine, S. (2022) "Elucidating
-#'       the design space of diffusion-based generative models." Advances
-#'       in Neural Information Processing Systems 35, 26565-26577.
-#'       arXiv:2206.00364. Equation 5 and Algorithm 2.
-#'     Song, Y. et al. (2021) "Score-based generative modeling through
-#'       stochastic differential equations." ICLR.
-#'     Shoemake, K. (1992) "Uniform random rotations." Graphics Gems III,
-#'       124-132.
 #' @export
 #' @examples
 #' morie_alf3df_schedule(n_steps = 5L)
@@ -110,19 +97,6 @@ morie_alf3df_schedule <- function(n_steps, sigma_min = 0.002,
 #'
 #' @param e A random stream from the shared generator.
 #' @return A three by three rotation matrix.
-#' @references Abramson, J., Adler, J., Dunger, J., Evans, R., Green, T., Pritzel,
-#'       A., Ronneberger, O., Willmore, L., Ballard, A.J., Bambrick, J. et
-#'       al. (2024) "Accurate structure prediction of biomolecular
-#'       interactions with AlphaFold 3." Nature 630(8016), 493-500.
-#'       doi:10.1038/s41586-024-07487-w.
-#'     Karras, T., Aittala, M., Aila, T. and Laine, S. (2022) "Elucidating
-#'       the design space of diffusion-based generative models." Advances
-#'       in Neural Information Processing Systems 35, 26565-26577.
-#'       arXiv:2206.00364. Equation 5 and Algorithm 2.
-#'     Song, Y. et al. (2021) "Score-based generative modeling through
-#'       stochastic differential equations." ICLR.
-#'     Shoemake, K. (1992) "Uniform random rotations." Graphics Gems III,
-#'       124-132.
 #' @export
 #' @examples
 #' e <- rmorie:::.ghc_rng(5)
@@ -162,19 +136,6 @@ morie_alf3df_rotation <- function(e) {
 #' @param x A coordinate matrix, one row per atom.
 #' @param e A random stream.
 #' @return A list with the augmented coordinates and the old centroid.
-#' @references Abramson, J., Adler, J., Dunger, J., Evans, R., Green, T., Pritzel,
-#'       A., Ronneberger, O., Willmore, L., Ballard, A.J., Bambrick, J. et
-#'       al. (2024) "Accurate structure prediction of biomolecular
-#'       interactions with AlphaFold 3." Nature 630(8016), 493-500.
-#'       doi:10.1038/s41586-024-07487-w.
-#'     Karras, T., Aittala, M., Aila, T. and Laine, S. (2022) "Elucidating
-#'       the design space of diffusion-based generative models." Advances
-#'       in Neural Information Processing Systems 35, 26565-26577.
-#'       arXiv:2206.00364. Equation 5 and Algorithm 2.
-#'     Song, Y. et al. (2021) "Score-based generative modeling through
-#'       stochastic differential equations." ICLR.
-#'     Shoemake, K. (1992) "Uniform random rotations." Graphics Gems III,
-#'       124-132.
 #' @export
 #' @examples
 #' NA_ <- 6L
@@ -216,19 +177,6 @@ morie_alf3df_augment <- function(x, e) {
 #' @param augment Whether to centre and rotate first.
 #' @return A list with the stepped coordinates, the churned level and
 #'   the direction.
-#' @references Abramson, J., Adler, J., Dunger, J., Evans, R., Green, T., Pritzel,
-#'       A., Ronneberger, O., Willmore, L., Ballard, A.J., Bambrick, J. et
-#'       al. (2024) "Accurate structure prediction of biomolecular
-#'       interactions with AlphaFold 3." Nature 630(8016), 493-500.
-#'       doi:10.1038/s41586-024-07487-w.
-#'     Karras, T., Aittala, M., Aila, T. and Laine, S. (2022) "Elucidating
-#'       the design space of diffusion-based generative models." Advances
-#'       in Neural Information Processing Systems 35, 26565-26577.
-#'       arXiv:2206.00364. Equation 5 and Algorithm 2.
-#'     Song, Y. et al. (2021) "Score-based generative modeling through
-#'       stochastic differential equations." ICLR.
-#'     Shoemake, K. (1992) "Uniform random rotations." Graphics Gems III,
-#'       124-132.
 #' @export
 #' @examples
 #' NA_ <- 6L
@@ -297,19 +245,6 @@ morie_alf3df_step <- function(x, t, score_fn, sigma_next = NULL,
 #' @param augment Whether to centre and rotate at each step.
 #' @return A list with the final coordinates, the schedule and the
 #'   churned levels visited.
-#' @references Abramson, J., Adler, J., Dunger, J., Evans, R., Green, T., Pritzel,
-#'       A., Ronneberger, O., Willmore, L., Ballard, A.J., Bambrick, J. et
-#'       al. (2024) "Accurate structure prediction of biomolecular
-#'       interactions with AlphaFold 3." Nature 630(8016), 493-500.
-#'       doi:10.1038/s41586-024-07487-w.
-#'     Karras, T., Aittala, M., Aila, T. and Laine, S. (2022) "Elucidating
-#'       the design space of diffusion-based generative models." Advances
-#'       in Neural Information Processing Systems 35, 26565-26577.
-#'       arXiv:2206.00364. Equation 5 and Algorithm 2.
-#'     Song, Y. et al. (2021) "Score-based generative modeling through
-#'       stochastic differential equations." ICLR.
-#'     Shoemake, K. (1992) "Uniform random rotations." Graphics Gems III,
-#'       124-132.
 #' @export
 #' @examples
 #' NA_ <- 6L
@@ -349,19 +284,6 @@ morie_alf3df_sample <- function(shape_n, score_fn, n_steps = 8L,
 #' @param score_fn The denoiser.
 #' @param ... Passed to the step function.
 #' @return A list with the stepped coordinates and summary geometry.
-#' @references Abramson, J., Adler, J., Dunger, J., Evans, R., Green, T., Pritzel,
-#'       A., Ronneberger, O., Willmore, L., Ballard, A.J., Bambrick, J. et
-#'       al. (2024) "Accurate structure prediction of biomolecular
-#'       interactions with AlphaFold 3." Nature 630(8016), 493-500.
-#'       doi:10.1038/s41586-024-07487-w.
-#'     Karras, T., Aittala, M., Aila, T. and Laine, S. (2022) "Elucidating
-#'       the design space of diffusion-based generative models." Advances
-#'       in Neural Information Processing Systems 35, 26565-26577.
-#'       arXiv:2206.00364. Equation 5 and Algorithm 2.
-#'     Song, Y. et al. (2021) "Score-based generative modeling through
-#'       stochastic differential equations." ICLR.
-#'     Shoemake, K. (1992) "Uniform random rotations." Graphics Gems III,
-#'       124-132.
 #' @export
 #' @examples
 #' NA_ <- 6L
@@ -398,19 +320,6 @@ morie_alf3df <- function(x, t, score_fn, ...) {
 #' One-line summary of the alf3df module
 #'
 #' @return A character scalar.
-#' @references Abramson, J., Adler, J., Dunger, J., Evans, R., Green, T., Pritzel,
-#'       A., Ronneberger, O., Willmore, L., Ballard, A.J., Bambrick, J. et
-#'       al. (2024) "Accurate structure prediction of biomolecular
-#'       interactions with AlphaFold 3." Nature 630(8016), 493-500.
-#'       doi:10.1038/s41586-024-07487-w.
-#'     Karras, T., Aittala, M., Aila, T. and Laine, S. (2022) "Elucidating
-#'       the design space of diffusion-based generative models." Advances
-#'       in Neural Information Processing Systems 35, 26565-26577.
-#'       arXiv:2206.00364. Equation 5 and Algorithm 2.
-#'     Song, Y. et al. (2021) "Score-based generative modeling through
-#'       stochastic differential equations." ICLR.
-#'     Shoemake, K. (1992) "Uniform random rotations." Graphics Gems III,
-#'       124-132.
 #' @export
 #' @examples
 #' morie_alf3df_cheatsheet()

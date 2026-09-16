@@ -108,15 +108,6 @@ ROUTES <- c("km", "empirical")
 #' @param events Passed to \code{.survroc_clean}.
 #' @param at Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{val}, as built in the body.
-#' @references ----------
-#'   Heagerty, P. J., Lumley, T. & Pepe, M. S. (2000) "Time-dependent ROC
-#'   curves for censored survival data and a diagnostic marker",
-#'   Biometrics 56(2), 337-344,
-#'   doi:10.1111/j.0006-341X.2000.00337.x. Sec. 2 (the cumulative
-#'   case / dynamic control definitions above), Sec. 2.1 (the
-#'   Kaplan-Meier estimator of sensitivity and specificity reproduced
-#'   here, and its reduction to the empirical estimator without
-#'   censoring), and the time-dependent area under the curve.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -280,15 +271,6 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' @param t Passed to \code{.survroc_pair}.
 #' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[[}.
-#' @references ----------
-#'   Heagerty, P. J., Lumley, T. & Pepe, M. S. (2000) "Time-dependent ROC
-#'   curves for censored survival data and a diagnostic marker",
-#'   Biometrics 56(2), 337-344,
-#'   doi:10.1111/j.0006-341X.2000.00337.x. Sec. 2 (the cumulative
-#'   case / dynamic control definitions above), Sec. 2.1 (the
-#'   Kaplan-Meier estimator of sensitivity and specificity reproduced
-#'   here, and its reduction to the empirical estimator without
-#'   censoring), and the time-dependent area under the curve.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -315,15 +297,6 @@ morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
 #' @param t Passed to \code{.survroc_pair}.
 #' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[[}.
-#' @references ----------
-#'   Heagerty, P. J., Lumley, T. & Pepe, M. S. (2000) "Time-dependent ROC
-#'   curves for censored survival data and a diagnostic marker",
-#'   Biometrics 56(2), 337-344,
-#'   doi:10.1111/j.0006-341X.2000.00337.x. Sec. 2 (the cumulative
-#'   case / dynamic control definitions above), Sec. 2.1 (the
-#'   Kaplan-Meier estimator of sensitivity and specificity reproduced
-#'   here, and its reduction to the empirical estimator without
-#'   censoring), and the time-dependent area under the curve.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -350,15 +323,6 @@ morie_survroc_specificity <- function(times, events, marker, threshold, t,
 #' @param t Passed to \code{.survroc_pair}.
 #' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[}.
-#' @references ----------
-#'   Heagerty, P. J., Lumley, T. & Pepe, M. S. (2000) "Time-dependent ROC
-#'   curves for censored survival data and a diagnostic marker",
-#'   Biometrics 56(2), 337-344,
-#'   doi:10.1111/j.0006-341X.2000.00337.x. Sec. 2 (the cumulative
-#'   case / dynamic control definitions above), Sec. 2.1 (the
-#'   Kaplan-Meier estimator of sensitivity and specificity reproduced
-#'   here, and its reduction to the empirical estimator without
-#'   censoring), and the time-dependent area under the curve.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -399,15 +363,6 @@ morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
 #' @param t Passed to \code{morie_survroc_roc_at}.
 #' @param route Passed to \code{morie_survroc_roc_at}. Defaults to \code{"km"}.
 #' @return The value of \code{a}, as built in the body.
-#' @references ----------
-#'   Heagerty, P. J., Lumley, T. & Pepe, M. S. (2000) "Time-dependent ROC
-#'   curves for censored survival data and a diagnostic marker",
-#'   Biometrics 56(2), 337-344,
-#'   doi:10.1111/j.0006-341X.2000.00337.x. Sec. 2 (the cumulative
-#'   case / dynamic control definitions above), Sec. 2.1 (the
-#'   Kaplan-Meier estimator of sensitivity and specificity reproduced
-#'   here, and its reduction to the empirical estimator without
-#'   censoring), and the time-dependent area under the curve.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -442,15 +397,6 @@ morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
 #' @return A list with \code{estimate}, \code{auc}, \code{roc}, \code{horizon},
 #' \code{route}, \code{n}, \code{n_events_by_t}, \code{n_at_risk_after_t},
 #' \code{n_censored_before_t}, \code{survival_at_t}, \code{out_of_range}, \code{method}.
-#' @references ----------
-#'   Heagerty, P. J., Lumley, T. & Pepe, M. S. (2000) "Time-dependent ROC
-#'   curves for censored survival data and a diagnostic marker",
-#'   Biometrics 56(2), 337-344,
-#'   doi:10.1111/j.0006-341X.2000.00337.x. Sec. 2 (the cumulative
-#'   case / dynamic control definitions above), Sec. 2.1 (the
-#'   Kaplan-Meier estimator of sensitivity and specificity reproduced
-#'   here, and its reduction to the empirical estimator without
-#'   censoring), and the time-dependent area under the curve.
 #' @export
 #' @examples
 #' set.seed(1)

@@ -139,14 +139,6 @@
 #' @param risk_periods Passed to \code{.sccsno_rp}.
 #' @param age_breaks Passed to \code{.sccsno_cuts}.
 #' @return The value of \code{cells}, as built in the body.
-#' @references ----------
-#'   Farrington, C. P. (1995) "Relative Incidence Estimation from Case
-#'   Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235.
-#'   JSTOR stable URL https://www.jstor.org/stable/2533328. Secs. 2-3.
-#'   
-#'   Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
-#'   (2006) "Tutorial in biostatistics: The self-controlled case series
-#'   method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 #' @export
 #' @examples
 #' cells <- morie_sccsno_build_intervals(start = 0, end = 365,
@@ -258,14 +250,6 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 #' @param n_risk A count; the body uses it as \code{seq_len(...)}.
 #' @param n_age Numeric; combined arithmetically in the body.
 #' @return The value of \code{ll}, as built in the body.
-#' @references ----------
-#'   Farrington, C. P. (1995) "Relative Incidence Estimation from Case
-#'   Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235.
-#'   JSTOR stable URL https://www.jstor.org/stable/2533328. Secs. 2-3.
-#'   
-#'   Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
-#'   (2006) "Tutorial in biostatistics: The self-controlled case series
-#'   method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 #' @export
 #' @examples
 #' cases <- list(
@@ -395,14 +379,6 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 #' \code{se_log_ri}, \code{age_effects}, \code{se_age}, \code{coef}, \code{se},
 #' \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations},
 #' \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.
-#' @references ----------
-#'   Farrington, C. P. (1995) "Relative Incidence Estimation from Case
-#'   Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235.
-#'   JSTOR stable URL https://www.jstor.org/stable/2533328. Secs. 2-3.
-#'   
-#'   Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
-#'   (2006) "Tutorial in biostatistics: The self-controlled case series
-#'   method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -516,14 +492,6 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks = c(),
 #' @param fit A list; the body reads \code{$log_ri}, \code{$se_log_ri} from it.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{intervals}, \code{level}.
-#' @references ----------
-#'   Farrington, C. P. (1995) "Relative Incidence Estimation from Case
-#'   Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235.
-#'   JSTOR stable URL https://www.jstor.org/stable/2533328. Secs. 2-3.
-#'   
-#'   Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
-#'   (2006) "Tutorial in biostatistics: The self-controlled case series
-#'   method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -555,14 +523,6 @@ morie_sccsno_relative_incidence <- function(fit, level = 0.95) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
 #' @return A list with \code{pre_exposure_ri}, \code{consistent_with_design},
 #' \code{tolerance_log}, \code{interpretation}.
-#' @references ----------
-#'   Farrington, C. P. (1995) "Relative Incidence Estimation from Case
-#'   Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235.
-#'   JSTOR stable URL https://www.jstor.org/stable/2533328. Secs. 2-3.
-#'   
-#'   Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
-#'   (2006) "Tutorial in biostatistics: The self-controlled case series
-#'   method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -605,14 +565,6 @@ morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index = 0,
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Farrington, C. P. (1995) "Relative Incidence Estimation from Case
-#'   Series for Vaccine Safety Evaluation", Biometrics 51(1), 228-235.
-#'   JSTOR stable URL https://www.jstor.org/stable/2533328. Secs. 2-3.
-#'   
-#'   Whitaker, H. J., Farrington, C. P., Spiessens, B. & Musonda, P.
-#'   (2006) "Tutorial in biostatistics: The self-controlled case series
-#'   method", Statistics in Medicine 25, 1768-1797, doi:10.1002/sim.2302.
 #' @export
 #' @examples
 #' morie_sccsno_cheatsheet()
