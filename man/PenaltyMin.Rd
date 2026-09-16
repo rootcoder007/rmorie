@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_tail2_t03.R
 \name{PenaltyMin}
 \alias{PenaltyMin}
-\title{\' Minimise f subject to g_i(x) <= 0 by Courant\'s quadratic
+\title{' Minimise f subject to g_i(x) <= 0 by Courant's quadratic
 penalty}
 \usage{
 PenaltyMin(
@@ -45,21 +45,21 @@ PenaltyMin(
 }
 \value{
 list(x, f, penalty, violation, max_violation, q, mu, n_outer,
-\' n_inner, method) \' @export
+' n_inner, method) ' @export
 
 A list with \code{x}, \code{f}, \code{penalty}, \code{violation},
 \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner},
 \code{method}.
 }
 \description{
-\' \' Q(x; mu) = f(x) + mu sum_i max(0, g_i(x))^2, minimised for an
-\' increasing sequence of mu.  The inner solve is steepest descent
-with \' an Armijo backtracking line search on central finite
-differences, run \' for a fixed budget. \' \' @param f objective,
-taking a numeric vector \' @param constraints list of functions;
-g_i(x) <= 0 is the constraint \' @param x0 starting point \' @param
-mu initial penalty weight \' @param
-n_outer,growth,n_inner,step0,h,armijo,max_halving fixed budget \'
+' ' Q(x; mu) = f(x) + mu sum_i max(0, g_i(x))^2, minimised for an
+' increasing sequence of mu.  The inner solve is steepest descent
+with ' an Armijo backtracking line search on central finite
+differences, run ' for a fixed budget. ' ' @param f objective,
+taking a numeric vector ' @param constraints list of functions;
+g_i(x) <= 0 is the constraint ' @param x0 starting point ' @param
+mu initial penalty weight ' @param
+n_outer,growth,n_inner,step0,h,armijo,max_halving fixed budget '
 }
 \examples{
 f <- function(x) sum(x^2)

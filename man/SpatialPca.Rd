@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_sp_fill.R
 \name{SpatialPca}
 \alias{SpatialPca}
-\title{MULTISPATI: diagonalise H = (1/n) X\' ((W + W\')/2) X on the centred,}
+\title{MULTISPATI: diagonalise H = (1/n) X' ((W + W')/2) X on the centred,}
 \usage{
 SpatialPca(x, w, naxes = 2L)
 }

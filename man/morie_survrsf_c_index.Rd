@@ -2,7 +2,7 @@
 % Please edit documentation in R/survrsf_native.R
 \name{morie_survrsf_c_index}
 \alias{morie_survrsf_c_index}
-\title{Harrell\'s C by the paper\'s four steps. predicted is a}
+\title{Harrell's C by the paper's four steps. predicted is a}
 \usage{
 morie_survrsf_c_index(times, events, predicted)
 }

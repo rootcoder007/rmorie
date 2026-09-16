@@ -16,7 +16,7 @@ A list with \code{action} (1-based R index) and \code{q_values}
 (the per-action means).
 }
 \description{
-\eqn{a* = argmax_a sum_i z_i p_i(x\', a)}.
+\eqn{a* = argmax_a sum_i z_i p_i(x', a)}.
 }
 \examples{
 greedy_action(next_probs_by_action = c(1, 2, 3, 4, 5, 6, 7, 8), z = 5L)

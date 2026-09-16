@@ -2,7 +2,7 @@
 % Please edit documentation in R/tqipb_native.R
 \name{.tqipb_pow4}
 \alias{.tqipb_pow4}
-\title{4^b by repeated multiplication. Written out because R\'s \code{^} on an}
+\title{4^b by repeated multiplication. Written out because R's \code{^} on an}
 \usage{
 .tqipb_pow4(b)
 }
@@ -13,7 +13,7 @@
 The value of \code{p}, as built in the body.
 }
 \description{
-integer exponent is repeated squaring while Python\'s \verb{**} calls libm
+integer exponent is repeated squaring while Python's \verb{**} calls libm
 pow(); the module does not rely on the two agreeing.
 }
 \examples{

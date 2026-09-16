@@ -19,5 +19,5 @@
 A numeric value.
 }
 \description{
-form Czado\'s Table 3.2 does not give.
+form Czado's Table 3.2 does not give.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/crpcol.R
 \name{.crp_collapsed_sweep}
 \alias{.crp_collapsed_sweep}
-\title{Neal\'s algorithm 3 for a conjugate normal DP mixture.  theta is}
+\title{Neal's algorithm 3 for a conjugate normal DP mixture.  theta is}
 \usage{
 .crp_collapsed_sweep(y, alpha, n_iter, mu0, tau2, sigma2, seed)
 }

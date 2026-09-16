@@ -2,7 +2,7 @@
 % Please edit documentation in R/tipsne_native.R
 \name{.tipsne_t_sf}
 \alias{.tipsne_t_sf}
-\title{Upper tail of Student\'s t, from the regularised incomplete beta}
+\title{Upper tail of Student's t, from the regularised incomplete beta}
 \usage{
 .tipsne_t_sf(t, df)
 }

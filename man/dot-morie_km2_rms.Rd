@@ -2,7 +2,7 @@
 % Please edit documentation in R/kamath_llm2_native.R
 \name{.morie_km2_rms}
 \alias{.morie_km2_rms}
-\title{Rmsnr\'s core}
+\title{Rmsnr's core}
 \usage{
 .morie_km2_rms(x, gamma = NULL, eps = 1e-06)
 }

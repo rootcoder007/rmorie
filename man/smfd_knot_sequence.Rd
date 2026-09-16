@@ -2,7 +2,7 @@
 % Please edit documentation in R/smfd_native.R
 \name{smfd_knot_sequence}
 \alias{smfd_knot_sequence}
-\title{Internal: evenly spaced knots, extended by \'degree\' at each end}
+\title{Internal: evenly spaced knots, extended by 'degree' at each end}
 \usage{
 smfd_knot_sequence(xmin, xmax, nseg = 10L, degree = 3L)
 }

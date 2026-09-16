@@ -2,7 +2,7 @@
 % Please edit documentation in R/dnvtwo_native.R
 \name{.dnvtwo_norm_vec}
 \alias{.dnvtwo_norm_vec}
-\title{L2-normalise a single row vector.  Mirrors Python\'s _norm()}
+\title{L2-normalise a single row vector.  Mirrors Python's _norm()}
 \usage{
 .dnvtwo_norm_vec(v)
 }

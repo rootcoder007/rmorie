@@ -2,7 +2,7 @@
 % Please edit documentation in R/algebraic_combinatorics_native.R
 \name{.morie_legendre}
 \alias{.morie_legendre}
-\title{Helper: exponent of prime p in n!, by Legendre\'s formula}
+\title{Helper: exponent of prime p in n!, by Legendre's formula}
 \usage{
 .morie_legendre(n, p)
 }

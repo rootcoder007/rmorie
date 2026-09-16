@@ -2,7 +2,7 @@
 % Please edit documentation in R/esl_native0.R
 \name{.esl_var_p}
 \alias{.esl_var_p}
-\title{Population variance, matching numpy\'s np.var default (ddof = 0);}
+\title{Population variance, matching numpy's np.var default (ddof = 0);}
 \usage{
 .esl_var_p(y)
 }

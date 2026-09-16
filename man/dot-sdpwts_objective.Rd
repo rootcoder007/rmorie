@@ -2,7 +2,7 @@
 % Please edit documentation in R/sdpwts_native.R
 \name{.sdpwts_objective}
 \alias{.sdpwts_objective}
-\title{Private: the centring objective t * c\'x - log det F(x)}
+\title{Private: the centring objective t * c'x - log det F(x)}
 \usage{
 .sdpwts_objective(x, c_vec, F0, Fs, t)
 }

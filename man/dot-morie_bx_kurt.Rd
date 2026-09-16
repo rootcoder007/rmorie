@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_class2.R
 \name{.morie_bx_kurt}
 \alias{.morie_bx_kurt}
-\title{Kurtosis EXCESS K\' = K - 3, eq (3.5) and the note below it: zero for
+\title{Kurtosis EXCESS K' = K - 3, eq (3.5) and the note below it: zero for
 a}
 \usage{
 .morie_bx_kurt(v)

@@ -25,7 +25,7 @@ A list with \code{h}, \code{n_taps}, \code{fc}, \code{fs}, \code{M},
 \description{
 and delayed by M/2 to make it causal.  Truncation is multiplying by a
 rectangle, whose sidelobes decay slowly, so the realized stopband
-ripples: Gibbs\' phenomenon, and it does not improve with M -- only
+ripples: Gibbs' phenomenon, and it does not improve with M -- only
 the ripples narrow, they do not shrink.  A window fixes it.
 }
 \examples{

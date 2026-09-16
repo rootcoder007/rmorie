@@ -2,7 +2,7 @@
 % Please edit documentation in R/horowitz_native3.R
 \name{.hrz_gauss_kernel_deriv}
 \alias{.hrz_gauss_kernel_deriv}
-\title{K\'(u) for the Gaussian kernel; the sign lives in the derivative}
+\title{K'(u) for the Gaussian kernel; the sign lives in the derivative}
 \usage{
 .hrz_gauss_kernel_deriv(u)
 }
@@ -14,7 +14,7 @@ A numeric value.
 }
 \description{
 itself, and adding a second leading minus flips the average
-derivative\'s sign (measured -0.548 against a theoretical +0.564).
+derivative's sign (measured -0.548 against a theoretical +0.564).
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/kamath_llm2_native.R
 \name{.morie_km2_causal_lm_loss}
 \alias{.morie_km2_causal_lm_loss}
-\title{Kmclm\'s core: causal-LM cross entropy over non-ignored positions}
+\title{Kmclm's core: causal-LM cross entropy over non-ignored positions}
 \usage{
 .morie_km2_causal_lm_loss(logits, targets, ignore_index = -100L)
 }

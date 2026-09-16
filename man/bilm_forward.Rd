@@ -2,7 +2,7 @@
 % Please edit documentation in R/elmo_native.R
 \name{bilm_forward}
 \alias{bilm_forward}
-\title{Run the biLM and return every layer\'s representation}
+\title{Run the biLM and return every layer's representation}
 \usage{
 bilm_forward(X, layers)
 }

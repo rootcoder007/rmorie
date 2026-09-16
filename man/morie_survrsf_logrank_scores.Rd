@@ -2,7 +2,7 @@
 % Please edit documentation in R/survrsf_native.R
 \name{morie_survrsf_logrank_scores}
 \alias{morie_survrsf_logrank_scores}
-\title{Lausen\'s log-rank scores, Hothorn & Lausen (2003) eq. (13)}
+\title{Lausen's log-rank scores, Hothorn & Lausen (2003) eq. (13)}
 \usage{
 morie_survrsf_logrank_scores(times, events)
 }

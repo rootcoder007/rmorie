@@ -2,7 +2,7 @@
 % Please edit documentation in R/vepan_native.R
 \name{.vepan_pick_key}
 \alias{.vepan_pick_key}
-\title{Table 7\'s order: canonical, then protein coding, then severity}
+\title{Table 7's order: canonical, then protein coding, then severity}
 \usage{
 .vepan_pick_key(r)
 }

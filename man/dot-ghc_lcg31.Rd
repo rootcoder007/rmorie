@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_ghc_rng.R
 \name{.ghc_lcg31}
 \alias{.ghc_lcg31}
-\title{Glibc\'s LCG, exactly. Several modules mirror a Python arm that does}
+\title{Glibc's LCG, exactly. Several modules mirror a Python arm that does}
 \usage{
 .ghc_lcg31(st)
 }

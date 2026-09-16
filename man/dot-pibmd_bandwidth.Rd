@@ -2,7 +2,7 @@
 % Please edit documentation in R/pibmd_native.R
 \name{.pibmd_bandwidth}
 \alias{.pibmd_bandwidth}
-\title{Silverman\'s rule of thumb, robustified by the interquartile range}
+\title{Silverman's rule of thumb, robustified by the interquartile range}
 \usage{
 .pibmd_bandwidth(v)
 }

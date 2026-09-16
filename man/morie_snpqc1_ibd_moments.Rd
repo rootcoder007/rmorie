@@ -2,7 +2,7 @@
 % Please edit documentation in R/snpqc1_native.R
 \name{morie_snpqc1_ibd_moments}
 \alias{morie_snpqc1_ibd_moments}
-\title{PLINK\'s method-of-moments IBD estimates for every pair. Returns}
+\title{PLINK's method-of-moments IBD estimates for every pair. Returns}
 \usage{
 morie_snpqc1_ibd_moments(genotypes, correction = TRUE)
 }
@@ -16,7 +16,7 @@ A list with \code{Z}, \code{pihat}.
 }
 \description{
 list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2)) after
-the paper\'s bounding rules and pihat[i, k] = P(Z=2) + P(Z=1)/2.
+the paper's bounding rules and pihat[i, k] = P(Z=2) + P(Z=1)/2.
 }
 \examples{
 if (morie_crypto_sodium_available()) {

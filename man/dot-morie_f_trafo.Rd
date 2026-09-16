@@ -2,7 +2,7 @@
 % Please edit documentation in R/coin_native.R
 \name{.morie_f_trafo}
 \alias{.morie_f_trafo}
-\title{Factor -> indicator design matching coin\'s f_trafo: k>2 gives k
+\title{Factor -> indicator design matching coin's f_trafo: k>2 gives k
 columns,}
 \usage{
 .morie_f_trafo(f)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tipsne_native.R
 \name{.tipsne_betacf}
 \alias{.tipsne_betacf}
-\title{Lentz\'s algorithm for the beta continued fraction}
+\title{Lentz's algorithm for the beta continued fraction}
 \usage{
 .tipsne_betacf(a, b, x)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_s03.R
 \name{.s03qnorm}
 \alias{.s03qnorm}
-\title{R\'s qnorm IS Wichura AS 241, the same algorithm the Python arm codes}
+\title{R's qnorm IS Wichura AS 241, the same algorithm the Python arm codes}
 \usage{
 .s03qnorm(p)
 }

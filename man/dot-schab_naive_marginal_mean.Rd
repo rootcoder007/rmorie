@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_glmm_shared.R
 \name{.schab_naive_marginal_mean}
 \alias{.schab_naive_marginal_mean}
-\title{G^-1(x\'beta) -- what the marginal mean is NOT, in a GLMM}
+\title{G^-1(x'beta) -- what the marginal mean is NOT, in a GLMM}
 \usage{
 .schab_naive_marginal_mean(X, beta, link_kind = "log")
 }

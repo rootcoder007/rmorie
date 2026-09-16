@@ -2,7 +2,7 @@
 % Please edit documentation in R/attrInf_native.R
 \name{.leaf}
 \alias{.leaf}
-\title{Private helper (mirrors Python\'s _leaf: a node is a leaf exactly
+\title{Private helper (mirrors Python's _leaf: a node is a leaf exactly
 when}
 \usage{
 .leaf(node)

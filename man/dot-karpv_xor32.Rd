@@ -2,7 +2,7 @@
 % Please edit documentation in R/karpV_native.R
 \name{.karpv_xor32}
 \alias{.karpv_xor32}
-\title{32-bit operations on doubles. R\'s bitwXor is defined over the signed}
+\title{32-bit operations on doubles. R's bitwXor is defined over the signed}
 \usage{
 .karpv_xor32(a, b)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_adapt.R
 \name{AncOut}
 \alias{AncOut}
-\title{Eq. (3.196): e = x - y, and the ERROR is the canceller\'s output.
+\title{Eq. (3.196): e = x - y, and the ERROR is the canceller's output.
 This}
 \usage{
 AncOut(x, y)

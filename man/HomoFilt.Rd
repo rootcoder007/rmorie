@@ -18,7 +18,7 @@ A list with \code{y}, \code{log_domain}, \code{log_input}, \code{cutoff},
 \code{keep}, \code{n}, \code{stages}, \code{method}.
 }
 \description{
-must be strictly positive (eq 4.59\'s side condition); a signal that
+must be strictly positive (eq 4.59's side condition); a signal that
 crosses zero needs the complex-log route of HomDeconv.  Rejected
 rather than clipped, since clipping changes the factorization.
 }

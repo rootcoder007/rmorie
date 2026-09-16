@@ -13,6 +13,6 @@
 A logical value.
 }
 \description{
-Rejects option-injection (leading \'-\', e.g. "--upload-pack=...")
+Rejects option-injection (leading '-', e.g. "--upload-pack=...")
 and any whitespace/metacharacters, while allowing normal ref names.
 }

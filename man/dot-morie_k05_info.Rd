@@ -2,7 +2,7 @@
 % Please edit documentation in R/k05_tranche2.R
 \name{.morie_k05_info}
 \alias{.morie_k05_info}
-\title{General two-category Fisher information I = (P\')^2/(PQ);
+\title{General two-category Fisher information I = (P')^2/(PQ);
 substituting}
 \usage{
 .morie_k05_info(theta, a, b, c, u, D = 1)

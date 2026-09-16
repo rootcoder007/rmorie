@@ -23,7 +23,7 @@ means is optimal only for equal priors AND equal variances, so the
 error-minimizing cut is the default and the midpoint is reported
 beside it.  Both errors are resubstitution errors -- measured on the
 data that chose the cut -- so they are optimistic; Section 10.10.3 is
-the book\'s warning, and KFoldCv or LooCv gives an honest figure.
+the book's warning, and KFoldCv or LooCv gives an honest figure.
 }
 \examples{
 XC <- matrix(c(1, 1, 1.4, 0.8, 0.7, 1.3, 1.1, 1.6, 3, 3, 3.3,

@@ -14,7 +14,7 @@ The value of \code{K}, as built in the body.
 }
 \description{
 K_ik = (1/M) sum_j (g_ij - 2p_j)(g_kj - 2p_j) / (2 p_j (1 - p_j)). On
-the same scale as pi-hat but NOT PLINK\'s pi-hat.
+the same scale as pi-hat but NOT PLINK's pi-hat.
 }
 \examples{
 if (morie_crypto_sodium_available()) {

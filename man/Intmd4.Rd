@@ -34,8 +34,8 @@ could name on its own.
 }
 \details{
 Formula: \code{TE = CDE + INTref + INTmed + PIE} from
-\eqn{Y = th0 + th1 a + th2 m + th3 a m + th4\'c} and
-\eqn{M = b0 + b1 a + b2\'c}.
+\eqn{Y = th0 + th1 a + th2 m + th3 a m + th4'c} and
+\eqn{M = b0 + b1 a + b2'c}.
 }
 \examples{
 Intmd4(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))

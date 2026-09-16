@@ -2,7 +2,7 @@
 % Please edit documentation in R/panelspatial.R
 \name{.ripley_k}
 \alias{.ripley_k}
-\title{Internal: Ripley\'s K without edge correction. The bias is shared
+\title{Internal: Ripley's K without edge correction. The bias is shared
 with}
 \usage{
 .ripley_k(P, radii, area)

@@ -21,7 +21,7 @@ A list with \code{w}, \code{converged}, \code{max_imbalance}.
 \description{
 Entropy balancing (Hainmueller 2012), ATT flavour: reweight controls
 so their covariate means equal the treated means. Solves the convex
-dual min_l log(sum_c exp(-Xc l)) + mbar\' l via BFGS with an analytic
+dual min_l log(sum_c exp(-Xc l)) + mbar' l via BFGS with an analytic
 gradient; weights are the softmax of -Xc l, rescaled to sum to the
 number of controls (the ebal::ebalance convention).
 }

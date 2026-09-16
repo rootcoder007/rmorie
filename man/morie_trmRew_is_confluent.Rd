@@ -2,7 +2,7 @@
 % Please edit documentation in R/trmRew_native.R
 \name{morie_trmRew_is_confluent}
 \alias{morie_trmRew_is_confluent}
-\title{Confluence via Newman\'s lemma: terminating and locally confluent}
+\title{Confluence via Newman's lemma: terminating and locally confluent}
 \usage{
 morie_trmRew_is_confluent(rules, precedence, max_steps = 10000)
 }

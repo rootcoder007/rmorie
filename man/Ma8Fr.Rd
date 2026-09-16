@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_filt2.R
 \name{Ma8Fr}
 \alias{Ma8Fr}
-\title{Eq (3.111).  The book\'s factored form is EXACT: the bracket is the
+\title{Eq (3.111).  The book's factored form is EXACT: the bracket is the
 sum}
 \usage{
 Ma8Fr(omega)

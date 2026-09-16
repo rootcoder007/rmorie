@@ -2,7 +2,7 @@
 % Please edit documentation in R/vepan_native.R
 \name{.vepan_hgvs_c}
 \alias{.vepan_hgvs_c}
-\title{C. notation, with an indel shifted to its most 3\' position}
+\title{C. notation, with an indel shifted to its most 3' position}
 \usage{
 .vepan_hgvs_c(t, v, seq, gpos, cds_first)
 }

@@ -15,7 +15,7 @@
 A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 }
 \description{
-and so the Python arm\'s _lstsq.
+and so the Python arm's _lstsq.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

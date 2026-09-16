@@ -2,7 +2,7 @@
 % Please edit documentation in R/karpV_native.R
 \name{.karpv_csum}
 \alias{.karpv_csum}
-\title{Compensated accumulation, so both arms agree bit for bit: R\'s sum()}
+\title{Compensated accumulation, so both arms agree bit for bit: R's sum()}
 \usage{
 .karpv_csum(v)
 }
@@ -13,7 +13,7 @@
 A numeric value.
 }
 \description{
-accumulates in long double, CPython\'s compensates, and neither is
+accumulates in long double, CPython's compensates, and neither is
 the plain loop the other one is.
 }
 \examples{

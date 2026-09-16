@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_sim_shared.R
 \name{.schab_spectral_root}
 \alias{.schab_spectral_root}
-\title{Symmetric square root P Delta^(1/2) P\'. Negative eigenvalues can
+\title{Symmetric square root P Delta^(1/2) P'. Negative eigenvalues can
 only}
 \usage{
 .schab_spectral_root(cov, tol = NULL)

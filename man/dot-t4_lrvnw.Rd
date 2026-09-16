@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_tail4_core.R
 \name{.t4_lrvnw}
 \alias{.t4_lrvnw}
-\title{Newey-West long-run variance with Bartlett weights -- tseries\'
+\title{Newey-West long-run variance with Bartlett weights -- tseries'
 pp_sum}
 \usage{
 .t4_lrvnw(u, lag)

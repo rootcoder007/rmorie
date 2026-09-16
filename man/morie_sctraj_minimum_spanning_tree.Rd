@@ -2,7 +2,7 @@
 % Please edit documentation in R/sctraj_native.R
 \name{morie_sctraj_minimum_spanning_tree}
 \alias{morie_sctraj_minimum_spanning_tree}
-\title{Prim\'s MST, with the paper\'s optional terminal-state constraint}
+\title{Prim's MST, with the paper's optional terminal-state constraint}
 \usage{
 morie_sctraj_minimum_spanning_tree(D, clusters, ends = NULL)
 }

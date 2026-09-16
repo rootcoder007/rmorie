@@ -21,7 +21,7 @@ A list with \code{windows}, \code{n_windows}, \code{covers_everything},
 \code{context}, \code{note}.
 }
 \description{
-transformer\'s context.
+transformer's context.
 }
 \examples{
 morie_vqgdec_sliding_windows(height = 5L, width = 5L, window = 5L)

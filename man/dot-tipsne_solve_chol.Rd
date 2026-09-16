@@ -2,7 +2,7 @@
 % Please edit documentation in R/tipsne_native.R
 \name{.tipsne_solve_chol}
 \alias{.tipsne_solve_chol}
-\title{Solve L L\' x = b by forward then back substitution}
+\title{Solve L L' x = b by forward then back substitution}
 \usage{
 .tipsne_solve_chol(lo, b)
 }

@@ -20,8 +20,8 @@ A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h},
 }
 \description{
 squaring of eq (4.81) is omitted.  square defaults to FALSE here for
-that reason; TRUE reproduces the book\'s definition and shows how
-large the neglected cross-term is on the caller\'s own data.
+that reason; TRUE reproduces the book's definition and shows how
+large the neglected cross-term is on the caller's own data.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_gn_shared.R
 \name{.schab_gn_weights}
 \alias{.schab_gn_weights}
-\title{OLS is R = phi I, so the weights are 1. WLS uses Cressie\'s (1985)}
+\title{OLS is R = phi I, so the weights are 1. WLS uses Cressie's (1985)}
 \usage{
 .schab_gn_weights(kind, fitted, counts)
 }

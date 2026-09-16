@@ -19,7 +19,7 @@ morie_spatial_voting_ordinal_irt(
 
 \item{n_samples}{MCMC samples.}
 
-\item{burn_in}{Integer; MCMC burn-in iterations.}
+\item{burn_in}{Burn-in length.}
 
 \item{seed}{RNG seed.}
 }

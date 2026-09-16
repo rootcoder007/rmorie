@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_glmm_shared.R
 \name{.schab_mu_eta}
 \alias{.schab_mu_eta}
-\title{D mu / d eta, the diagonal of Psi; the reciprocal of g\'(mu), as the
+\title{D mu / d eta, the diagonal of Psi; the reciprocal of g'(mu), as the
 text}
 \usage{
 .schab_mu_eta(mu, kind)

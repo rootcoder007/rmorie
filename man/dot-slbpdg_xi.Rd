@@ -15,8 +15,8 @@
 A numeric value.
 }
 \description{
-repeated multiplication rather than kappa^(k-1): R\'s \code{^} on an
-integer exponent is repeated squaring and Python\'s \verb{**} calls pow(),
+repeated multiplication rather than kappa^(k-1): R's \code{^} on an
+integer exponent is repeated squaring and Python's \verb{**} calls pow(),
 and the two part company in the last bit exactly where the comparison
 xi_k > u_i decides how many components to carry.
 }

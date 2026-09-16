@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_stat.R
 \name{FormFactor}
 \alias{FormFactor}
-\title{Eqs (5.25)-(5.26): activity = var(x); mobility = sd(x\')/sd(x);}
+\title{Eqs (5.25)-(5.26): activity = var(x); mobility = sd(x')/sd(x);}
 \usage{
 FormFactor(x)
 }
@@ -14,8 +14,8 @@ A list with \code{form_factor}, \code{complexity}, \code{mobility},
 \code{activity}, \code{mobility_of_derivative}, \code{n}, \code{method}.
 }
 \description{
-form factor = mobility(x\')/mobility(x) =
-(sd(x\'\')/sd(x\'))/(sd(x\')/sd(x)). The book states a sinusoid has
+form factor = mobility(x')/mobility(x) =
+(sd(x'')/sd(x'))/(sd(x')/sd(x)). The book states a sinusoid has
 complexity 1 and that more variable waveforms give larger values.
 Ratios are dimensionless, so no fs.
 }

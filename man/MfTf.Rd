@@ -20,7 +20,7 @@ A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude},
 \code{conjugate_of_signal}, \code{method}.
 }
 \description{
-cancels the signal\'s phase so every component arrives in step at t0
+cancels the signal's phase so every component arrives in step at t0
 -- that coherent addition is the whole gain of the method.
 }
 \examples{

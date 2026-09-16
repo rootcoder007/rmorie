@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_sp_fill.R
 \name{SpKappa}
 \alias{SpKappa}
-\title{Cohen\'s kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than}
+\title{Cohen's kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than}
 \usage{
 SpKappa(x, y, w)
 }
@@ -19,7 +19,7 @@ A list with \code{kappa}, \code{p_observed}, \code{p_expected},
 \code{method}.
 }
 \description{
-same-site pairs; the pairing is Mantel\'s M2, eq (1.5), with U_ij =
+same-site pairs; the pairing is Mantel's M2, eq (1.5), with U_ij =
 I\{x_i = y_j\}.  The kappa coefficient itself is NOT in the book.
 }
 \examples{

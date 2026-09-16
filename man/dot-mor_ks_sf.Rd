@@ -2,7 +2,7 @@
 % Please edit documentation in R/over_native.R
 \name{.mor_ks_sf}
 \alias{.mor_ks_sf}
-\title{Two-sided asymptotic Kolmogorov series with Stephens\' correction}
+\title{Two-sided asymptotic Kolmogorov series with Stephens' correction}
 \usage{
 .mor_ks_sf(d, n)
 }

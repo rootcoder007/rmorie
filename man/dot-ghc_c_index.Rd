@@ -2,7 +2,7 @@
 % Please edit documentation in R/survvae_native.R
 \name{.ghc_c_index}
 \alias{.ghc_c_index}
-\title{Internal: Harrell\'s concordance index in base R, mirroring}
+\title{Internal: Harrell's concordance index in base R, mirroring}
 \usage{
 .ghc_c_index(times, events, risks)
 }

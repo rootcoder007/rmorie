@@ -23,6 +23,6 @@
 A list with \code{T}, \code{u}, \code{v}, \code{a}, \code{b}, \code{trace}.
 }
 \description{
-Cuturi\'s exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v)
-then v <- b/(K\' u), started from v = 1.
+Cuturi's exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v)
+then v <- b/(K' u), started from v = 1.
 }

@@ -21,7 +21,7 @@ A list with \code{labels}, \code{local}, \code{z}, \code{p_value},
 \description{
 (simple random sampling without replacement of the other n-1
 deviations into the neighbour slots).  The HH/LL/HL/LH labels are
-Anselin (1996)\'s Moran scatterplot, NOT in Schabenberger & Gotway; a
+Anselin (1996)'s Moran scatterplot, NOT in Schabenberger & Gotway; a
 fixed-string search of the book for "quadrant" and "Moran scatter"
 finds only an unrelated kriging search neighbourhood.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/hyper2_native.R
 \name{.hyper2_elliptical}
 \alias{.hyper2_elliptical}
-\title{Elliptical slice sampling for a latent with prior N(0, L L\'). The}
+\title{Elliptical slice sampling for a latent with prior N(0, L L'). The}
 \usage{
 .hyper2_elliptical(logl, f, L, e)
 }

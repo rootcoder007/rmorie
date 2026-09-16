@@ -16,7 +16,7 @@ A list with \code{epsilon_in}, \code{rho},
 \code{epsilon_out}, \code{inflation}, \code{delta}.
 }
 \description{
-\eqn{epsilon -> rho -> (epsilon\', delta)} does not return
+\eqn{epsilon -> rho -> (epsilon', delta)} does not return
 \code{epsilon}; the gap is reported as \code{inflation} rather
 than quietly absorbed. When the input is \code{epsilon = 0} the
 \code{to_approx_dp} step is skipped (it would refuse rho = 0) and

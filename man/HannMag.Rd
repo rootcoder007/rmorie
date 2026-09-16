@@ -15,7 +15,7 @@ A list with \code{magnitude}, \code{omega}, \code{dc_gain},
 \code{method}.
 }
 \description{
-between.  The book\'s absolute value is redundant -- 1 + cos is never
+between.  The book's absolute value is redundant -- 1 + cos is never
 negative -- and is kept only because the book writes it.
 }
 \examples{

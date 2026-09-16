@@ -2,7 +2,7 @@
 % Please edit documentation in R/attrInf_native.R
 \name{.attrInf_argmax}
 \alias{.attrInf_argmax}
-\title{Mirror Python\'s max(sorted(scores, key=str),
+\title{Mirror Python's max(sorted(scores, key=str),
 key=scores.\strong{getitem}):}
 \usage{
 .attrInf_argmax(scored)

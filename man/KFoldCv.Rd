@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_class.R
 \name{KFoldCv}
 \alias{KFoldCv}
-\title{Section 10.10.3.  The book\'s point is that the training and test}
+\title{Section 10.10.3.  The book's point is that the training and test}
 \usage{
 KFoldCv(X, y, k = 5, classifier = NULL, stratified = TRUE)
 }

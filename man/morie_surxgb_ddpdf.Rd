@@ -2,7 +2,7 @@
 % Please edit documentation in R/surxgb_native.R
 \name{morie_surxgb_ddpdf}
 \alias{morie_surxgb_ddpdf}
-\title{Table 2: f_Z\'\'(z)}
+\title{Table 2: f_Z''(z)}
 \usage{
 morie_surxgb_ddpdf(z, dist = "normal")
 }

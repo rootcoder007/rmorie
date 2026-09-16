@@ -30,6 +30,6 @@ A list with \code{estimate}, \code{psi}, \code{se_estimator}, \code{n_used},
 }
 \description{
 estimator on the sample. Reports both error sources: the sampling
-variance from using n of N, and the estimator\'s own standard error.
+variance from using n of N, and the estimator's own standard error.
 }
 \keyword{internal}

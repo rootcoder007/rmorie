@@ -22,7 +22,7 @@ The value of \code{out}, as built in the body.
 \description{
 text immediately after states the output was divided by the sum of
 all values of h(n) -- the normalization is part of the method; the
-raw taps sum to 626.25 for the book\'s constants.
+raw taps sum to 626.25 for the book's constants.
 }
 \examples{
 RampFilt()

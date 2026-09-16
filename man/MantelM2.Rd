@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_sp_fill.R
 \name{MantelM2}
 \alias{MantelM2}
-\title{Eqs (1.4) and (1.5) with the book\'s own default choices,}
+\title{Eqs (1.4) and (1.5) with the book's own default choices,}
 \usage{
 MantelM2(coords, x, w = NULL, u = NULL)
 }

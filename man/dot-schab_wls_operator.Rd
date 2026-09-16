@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_gwr_shared.R
 \name{.schab_wls_operator}
 \alias{.schab_wls_operator}
-\title{The cutoff is numpy.linalg.pinv\'s default: max(dim) * eps * largest}
+\title{The cutoff is numpy.linalg.pinv's default: max(dim) * eps * largest}
 \usage{
 .schab_wls_operator(X, w)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mediation_ipw_native.R
 \name{.morie_wmean}
 \alias{.morie_wmean}
-\title{Normalised weighted mean: sum(y * w) / sum(w). Huber\'s Section 3}
+\title{Normalised weighted mean: sum(y * w) / sum(w). Huber's Section 3}
 \usage{
 .morie_wmean(y, w)
 }

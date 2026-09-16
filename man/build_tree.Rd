@@ -2,7 +2,7 @@
 % Please edit documentation in R/bayhmc_native.R
 \name{build_tree}
 \alias{build_tree}
-\title{The recursion of Algorithm 3, returning the paper\'s nine values:}
+\title{The recursion of Algorithm 3, returning the paper's nine values:}
 \usage{
 build_tree(theta, r, logu, v, j, eps, logp, grad, rnd, joint0)
 }
@@ -34,7 +34,7 @@ names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \cod
 }
 \description{
 the new trajectory ends (theta_minus, r_minus, theta_plus, r_plus),
-the candidate sample t_p, and the tree\'s bookkeeping (count,
+the candidate sample t_p, and the tree's bookkeeping (count,
 indicator, summed alpha, alpha normaliser).
 }
 \examples{

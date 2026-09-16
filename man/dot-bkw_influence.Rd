@@ -2,7 +2,7 @@
 % Please edit documentation in R/dffit.R
 \name{.bkw_influence}
 \alias{.bkw_influence}
-\title{Hat values, residuals and (X\'X)^-1 for the OLS fit of y on X.
+\title{Hat values, residuals and (X'X)^-1 for the OLS fit of y on X.
 Returns}
 \usage{
 .bkw_influence(y, X, intercept = TRUE)

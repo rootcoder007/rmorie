@@ -2,7 +2,7 @@
 % Please edit documentation in R/geron_w4c_native.R
 \name{.morie_w4c_lcg_normal}
 \alias{.morie_w4c_lcg_normal}
-\title{Box-Muller normals from the integer LCG, draw for draw with Python\'s}
+\title{Box-Muller normals from the integer LCG, draw for draw with Python's}
 \usage{
 .morie_w4c_lcg_normal(n, seed)
 }

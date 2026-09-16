@@ -22,7 +22,7 @@ A list with \code{y}, \code{value}, \code{index}, \code{T},
 \description{
 required in order to obtain the rate of change of the signal with
 respect to the true time".  Highpass, and it amplifies noise -- eq
-(3.128) is the book\'s remedy.
+(3.128) is the book's remedy.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

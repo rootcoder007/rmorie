@@ -16,6 +16,6 @@ reference}
 The value of \code{e}, as built in the body.
 }
 \description{
-the way the Python reader\'s self.pos does; passing it around by
+the way the Python reader's self.pos does; passing it around by
 value would need every helper to return (value, pos) pairs.
 }

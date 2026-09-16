@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_ch3.R
 \name{.morie_rg_quad}
 \alias{.morie_rg_quad}
-\title{Adaptive Simpson, the same rule the Python arm\'s quad() uses, so the}
+\title{Adaptive Simpson, the same rule the Python arm's quad() uses, so the}
 \usage{
 .morie_rg_quad(f, a, b, tol = 1.49e-08, maxdepth = 50L)
 }

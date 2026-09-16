@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_filt2.R
 \name{Ma8RecTf}
 \alias{Ma8RecTf}
-\title{Eq (3.121): a pole at z = 1 cancelled by one of the numerator\'s
+\title{Eq (3.121): a pole at z = 1 cancelled by one of the numerator's
 zeros,}
 \usage{
 Ma8RecTf(z)

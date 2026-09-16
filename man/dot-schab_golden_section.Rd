@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_gwr_shared.R
 \name{.schab_golden_section}
 \alias{.schab_golden_section}
-\title{Golden section rather than R\'s optimize (Brent): deterministic and
+\title{Golden section rather than R's optimize (Brent): deterministic and
 with no}
 \usage{
 .schab_golden_section(func, lower, upper, tol = 1e-04, max_iter = 200L)

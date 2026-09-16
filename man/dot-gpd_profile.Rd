@@ -2,7 +2,7 @@
 % Please edit documentation in R/evpot.R
 \name{.gpd_profile}
 \alias{.gpd_profile}
-\title{Grimshaw\'s reparametrisation: given t = xi/sigma, xi and sigma
+\title{Grimshaw's reparametrisation: given t = xi/sigma, xi and sigma
 follow}
 \usage{
 .gpd_profile(y, t)

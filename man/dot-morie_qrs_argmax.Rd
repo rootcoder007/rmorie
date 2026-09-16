@@ -17,5 +17,5 @@
 A numeric value.
 }
 \description{
-exactly as Python\'s max(range(...), key=...).
+exactly as Python's max(range(...), key=...).
 }

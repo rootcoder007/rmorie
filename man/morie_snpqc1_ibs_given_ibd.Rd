@@ -2,7 +2,7 @@
 % Please edit documentation in R/snpqc1_native.R
 \name{morie_snpqc1_ibs_given_ibd}
 \alias{morie_snpqc1_ibs_given_ibd}
-\title{PLINK\'s Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with}
+\title{PLINK's Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with}
 \usage{
 morie_snpqc1_ibs_given_ibd(x_count, y_count, correction = TRUE)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/baysmplr_native.R
 \name{.baysmplr_build_tree}
 \alias{.baysmplr_build_tree}
-\title{Hoffman and Gelman\'s recursive doubling, Algorithm 3}
+\title{Hoffman and Gelman's recursive doubling, Algorithm 3}
 \usage{
 .baysmplr_build_tree(log_p, grad, q, p, u, v, j, eps, e, h0, dmax = 1000)
 }

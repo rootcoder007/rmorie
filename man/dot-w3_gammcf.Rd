@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_w3num.R
 \name{.w3_gammcf}
 \alias{.w3_gammcf}
-\title{Q(a, x) by Lentz\'s continued fraction}
+\title{Q(a, x) by Lentz's continued fraction}
 \usage{
 .w3_gammcf(a, x)
 }

@@ -60,7 +60,7 @@ over a set of targets and scores it. For each target it scores
 every candidate value of the sensitive feature, multiplies the
 error-model probability by the marginal priors, and returns the
 maximum a posteriori estimate. The black-box route uses
-\eqn{err(y, y\')} from a confusion matrix; the white-box route
+\eqn{err(y, y')} from a confusion matrix; the white-box route
 additionally weights each root-to-leaf path by its training
 count, which carries joint-distribution information the marginals
 cannot reach on their own.

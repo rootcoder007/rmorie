@@ -17,7 +17,7 @@ A vector, from \code{vapply}.
 }
 \description{
 smooth and periodic so the trapezoid rule converges geometrically;
-base R\'s besselJ() is deliberately not used, see the file header.
+base R's besselJ() is deliberately not used, see the file header.
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

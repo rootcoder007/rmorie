@@ -13,7 +13,7 @@
 The value of \code{e}, as built in the body.
 }
 \description{
-to the Python 64-bit generator is not required -- the forest\'s
+to the Python 64-bit generator is not required -- the forest's
 randomness only needs to be reproducible.)
 }
 \examples{

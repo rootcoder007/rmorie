@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_w3num.R
 \name{.w3_t_sf}
 \alias{.w3_t_sf}
-\title{Upper tail of Student\'s t}
+\title{Upper tail of Student's t}
 \usage{
 .w3_t_sf(t, df)
 }
