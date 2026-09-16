@@ -37,8 +37,9 @@ ratio.}
 
 \item{or_value}{Odds ratio.}
 
-\item{r}{Point-biserial r.
-@param se_r Its standard error.}
+\item{r}{Point-biserial r.}
+
+\item{se_r}{Its standard error.}
 }
 \value{
 List of every conversion whose inputs were supplied.

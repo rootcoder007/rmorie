@@ -27,33 +27,9 @@ morie_jsonlt_to_json(
 
 \item{dataframe, matrix, Date, POSIXt, factor, complex, raw, null, na, auto_unbox, digits, pretty, force, ...}{as in jsonlite.}
 
-\item{matrix}{Argument \code{matrix}; see Usage.}
-
-\item{Date}{Argument \code{Date}; see Usage.}
-
-\item{POSIXt}{Argument \code{POSIXt}; see Usage.}
-
-\item{factor}{Argument \code{factor}; see Usage.}
-
-\item{complex}{Argument \code{complex}; see Usage.}
-
-\item{raw}{Argument \code{raw}; see Usage.}
-
-\item{null}{Argument \code{null}; see Usage.}
-
-\item{na}{Argument \code{na}; see Usage.}
-
-\item{auto_unbox}{Argument \code{auto_unbox}; see Usage.}
-
-\item{digits}{Argument \code{digits}; see Usage.}
-
 \item{pretty}{FALSE, TRUE, or an indent width.}
 
-\item{force}{Argument \code{force}; see Usage.}
-
 \item{...}{toJSON options: dataframe (rows, columns, values), matrix (rowmajor, columnmajor), Date (ISO8601, epoch), POSIXt (string, ISO8601, epoch, mongo), factor (string, integer), complex (string, list), raw (base64, hex, int, mongo), null (list, null), na (NULL, null, string), auto_unbox, digits, force.}
-
-\item{dataframe}{Argument \code{dataframe}; see Usage.}
 }
 \value{
 a length-one character vector of class \code{json}.

@@ -13,6 +13,8 @@ morie_winsorized_correlation(x, y, tr = 0.2)
 \item{x, y}{numeric vectors}
 
 \item{beta}{bending constant}
+
+\item{tr}{amount of Winsorizing, per tail (default 0.2)}
 }
 \value{
 list with \code{cor}, \code{statistic}, \code{p_value} and, for the
