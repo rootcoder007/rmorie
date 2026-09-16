@@ -272,7 +272,7 @@ NULL
   }
 }
 
-#' Python\'s "first-seen" order; unique() in R is already first-seen
+#' Python's "first-seen" order; unique() in R is already first-seen
 #'
 #' A step of the frns_metrics implementation. Called by
 #' \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels},

@@ -26,7 +26,7 @@
 }
 
 # Grimshaw's reparametrisation: given t = xi/sigma, xi and sigma follow.
-#' Grimshaw\'s reparametrisation: given t = xi/sigma, xi and sigma
+#' Grimshaw's reparametrisation: given t = xi/sigma, xi and sigma
 #' follow
 #'
 #' A step of the evpot implementation. Called by \code{Evpot}.

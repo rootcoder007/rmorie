@@ -165,7 +165,7 @@
 #   complexity       : full vs probsparse flop accounting
 #' Main entry point: morie_infmer
 #'
-#' Informer\'s ProbSparse self-attention (Zhou et al. 2021). q: numeric
+#' Informer's ProbSparse self-attention (Zhou et al. 2021). q: numeric
 #' matrix \[L_Q, d\] (queries) k: numeric matrix \[L_K, d\] (keys) v:
 #' numeric matrix \[L_K, d_v\] (values) c: numeric sparsity constant
 #' (default 5) Returns named list: output : \[L_Q, d_v\] attended values

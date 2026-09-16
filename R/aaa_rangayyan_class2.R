@@ -194,7 +194,7 @@
   sqrt(.morie_fsum((v - m)^2) / (n - ddof))
 }
 
-#' Kurtosis EXCESS K\' = K - 3, eq (3.5) and the note below it: zero for
+#' Kurtosis EXCESS K' = K - 3, eq (3.5) and the note below it: zero for
 #' a
 #'
 #' Gaussian, positive for a peaked heavy-tailed PDF
@@ -338,7 +338,7 @@
 #' below
 #'
 #' 2^53, so the double arithmetic here is exact and matches the Python
-#' arm\'s 32-bit masked integer step for step.
+#' arm's 32-bit masked integer step for step.
 #'
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.

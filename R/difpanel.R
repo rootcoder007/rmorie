@@ -212,7 +212,7 @@ morie_sibtest <- function(x, group, matching = NULL, min_per_cell = 2L,
 
 # Internal: Pedroni's steps 2-4 nuisance terms for one panel unit.
 # Returns L11^2, lambda_i and sigma^2_i.
-#' Internal: Pedroni\'s steps 2-4 nuisance terms for one panel unit
+#' Internal: Pedroni's steps 2-4 nuisance terms for one panel unit
 #'
 #' Returns L11^2, lambda_i and sigma^2_i.
 #'

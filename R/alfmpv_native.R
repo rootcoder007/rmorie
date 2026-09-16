@@ -106,7 +106,7 @@
 }
 
 # Which hits survive the route's own filter, in order.
-#' Which hits survive the route\'s own filter, in order
+#' Which hits survive the route's own filter, in order
 #'
 #' A step of the alfmpv_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
@@ -130,7 +130,7 @@
 
 # Lower sorts first. Ties break on the hit's position in the alignment,
 # so the order is total and neither arm can wander off on a tie.
-#' Lower sorts first. Ties break on the hit\'s position in the
+#' Lower sorts first. Ties break on the hit's position in the
 #' alignment,
 #'
 #' so the order is total and neither arm can wander off on a tie.

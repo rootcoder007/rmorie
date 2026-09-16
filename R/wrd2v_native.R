@@ -540,7 +540,7 @@ morie_wrd2v_wrd2v <- function(corpus, size = 16, window = 5,
   )
 }
 
-#' Section 4\'s offset query: b - a + c. The three question words are
+#' Section 4's offset query: b - a + c. The three question words are
 #'
 #' excluded from the answer.
 #'

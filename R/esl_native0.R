@@ -58,7 +58,7 @@
 # classification rule is larger, above it the regression rule is, by
 # a widening margin (33 against 10 at p = 100). Both are tuning
 # parameters, not laws.
-#' The book\'s defaults for the number of variables sampled at each
+#' The book's defaults for the number of variables sampled at each
 #'
 #' split. They cross at p = 9, where both give 3: below it the
 #' classification rule is larger, above it the regression rule is, by a
@@ -157,7 +157,7 @@
 # population variance, matching numpy's np.var default (ddof = 0);
 # stats::var uses ddof = 1 and would weight the split criterion
 # differently
-#' Population variance, matching numpy\'s np.var default (ddof = 0);
+#' Population variance, matching numpy's np.var default (ddof = 0);
 #'
 #' stats::var uses ddof = 1 and would weight the split criterion
 #' differently

@@ -74,7 +74,7 @@
 
 #' Print the pedagogical narrative for a morie callable
 #'
-#' Loads the describe_<name>.md narrative shipped in the package's
+#' Loads the `describe_<name>.md` narrative shipped in the package's
 #' \code{inst/extdata/describe_corpus.Rds} capsule and prints it to
 #' the console. This is the R-side mirror of the Python
 #' \code{morie.describe()} function (closing the v0.9.5.4 parity

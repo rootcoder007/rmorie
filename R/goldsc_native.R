@@ -108,8 +108,8 @@
 # two arms.
 #' X to a small non-negative integer power, by repeated multiplication
 #'
-#' Not the language\'s power operator: R raises to an integer exponent
-#' by repeated squaring while Python calls the C library\'s pow, and the
+#' Not the language's power operator: R raises to an integer exponent
+#' by repeated squaring while Python calls the C library's pow, and the
 #' two disagree in the last bit. A potential that is about to be summed
 #' over thousands of contacts cannot afford to be a different function
 #' in the two arms.

@@ -226,7 +226,7 @@
 #' Forest kernel weights alpha_i(x) for a single evaluation point
 #'
 #' Each unit that lands in the same leaf as x in tree t contributes 1 /
-#' (#units from tree t\'s leaf-sample in that leaf).
+#' (#units from tree t's leaf-sample in that leaf).
 #'
 #' @param trees A list; the body reads \code{$trees} from it.
 #' @param X A matrix; indexed by row and column.

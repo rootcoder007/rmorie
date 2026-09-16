@@ -81,7 +81,7 @@
 #'
 #' cuts are midpoints between consecutive DISTINCT values -- the only
 #' set that can produce different partitions, and putting a cut exactly
-#' on a data point is where the two arms\' comparisons could part
+#' on a data point is where the two arms' comparisons could part
 #' company.
 #'
 #' @param X A matrix; indexed by row and column.

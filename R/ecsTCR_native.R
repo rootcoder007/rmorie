@@ -59,7 +59,7 @@
 # unfaithful in the same way.
 #' Compensated accumulation, so both language arms agree bit for bit
 #'
-#' Neither language\'s sum() is a plain double loop -- R accumulates in
+#' Neither language's sum() is a plain double loop -- R accumulates in
 #' long double, CPython 3.12 and later compensate -- and they are not
 #' unfaithful in the same way.
 #'

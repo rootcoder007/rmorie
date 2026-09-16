@@ -357,7 +357,7 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
 #' CSV for a table id ("NN-MM-XXXX" or "NN-MM-XXXX-NN" cansim style, or
 #' a bare 8-digit PID) via the getFullTableDownloadCSV endpoint. Base R
 #' only (download.file + unzip + read.csv); replaces cansim::get_cansim.
-#' Column set is StatCan\'s raw CSV schema (REF_DATE, GEO, VALUE, ...),
+#' Column set is StatCan's raw CSV schema (REF_DATE, GEO, VALUE, ...),
 #' which is the subset of get_cansim() output the callers use.
 #'
 #' @param table_id Character; passed to \code{gsub}.

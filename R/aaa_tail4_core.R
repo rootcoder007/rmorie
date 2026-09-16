@@ -105,7 +105,7 @@ NULL
 }
 
 # Newey-West long-run variance with Bartlett weights -- tseries' pp_sum.
-#' Newey-West long-run variance with Bartlett weights -- tseries\'
+#' Newey-West long-run variance with Bartlett weights -- tseries'
 #' pp_sum
 #'
 #' A step of the tail4_core implementation. Called by \code{Pptest}.

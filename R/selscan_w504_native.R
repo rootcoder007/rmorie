@@ -45,7 +45,7 @@
 #' Integrated haplotype score (iHS) for one core SNP
 #'
 #' EHH decay curves for the ancestral (0) and derived (1) core-allele
-#' carriers (\code{\link{Ehhdec}}), each integrated by the trapezoid
+#' carriers (\code{Ehhdec}), each integrated by the trapezoid
 #' rule outward from the core until EHH < \code{min_ehh} (0.05 in the
 #' paper), giving iHH_A and iHH_D; unstandardized iHS =
 #' ln(iHH_A / iHH_D) (Voight et al. 2006, eq. 1). Pass
@@ -112,7 +112,7 @@ Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
 #' Cross-population extended haplotype homozygosity (XP-EHH)
 #'
 #' Site-wise EHH curves over all chromosomes of each population
-#' (\code{\link{Ehhdec}} \code{ehhs}) integrated outward from the core
+#' (\code{Ehhdec} \code{ehhs}) integrated outward from the core
 #' by the same trapezoid rule as iHS; XP-EHH = ln(I_A / I_B)
 #' (Sabeti et al. 2007, Methods). Local recombination cancels in the
 #' ratio. Pass \code{standardize = c(mean, sd)} to normalize.

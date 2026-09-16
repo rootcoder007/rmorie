@@ -88,7 +88,7 @@
 # message, mirroring the Python arm's .check().
 #' Internal: validate the primitive argument. Single source of the error
 #'
-#' message, mirroring the Python arm\'s .check().
+#' message, mirroring the Python arm's .check().
 #'
 #' @param primitive A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -107,7 +107,7 @@
 # K, shapes and scales are length K (positives, recovered via exp()).
 #' Internal: unpack the flat parameter vector v = (W | bias |
 #'
-#' log_shapes | log_scales) into named pieces. Mirrors the Python arm\'s
+#' log_shapes | log_scales) into named pieces. Mirrors the Python arm's
 #' .unpack(): W is a list of K length-d vectors, bias is length K,
 #' shapes and scales are length K (positives, recovered via exp()).
 #'
@@ -145,7 +145,7 @@
 #' _sci_core.minimize with method="Nelder-Mead"; optim(method=
 #' "Nelder-Mead") in base R runs the same algorithm and gives
 #' numerically equivalent results on smooth objectives like this one.
-#' The Python arm\'s six-inner-iteration structure is preserved by the
+#' The Python arm's six-inner-iteration structure is preserved by the
 #' outer loop in morie_survvae(), which calls this helper up to six
 #' times per restart, each time from the current point -- exactly
 #' mirroring the "for _ in range(6)" loop in fit().
@@ -171,7 +171,7 @@
 # where the earlier observation is an event; non-events at the
 # shorter time do not contribute because their true event time is
 # unknown.
-#' Internal: Harrell\'s concordance index in base R, mirroring
+#' Internal: Harrell's concordance index in base R, mirroring
 #'
 #' morie.fn.survrsf.c_index. Counts over comparable pairs (i, j) where
 #' the earlier observation is an event; non-events at the shorter time

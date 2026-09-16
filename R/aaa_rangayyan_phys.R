@@ -2370,7 +2370,7 @@ OaeFeat <- function(oae, fs, noise_floor = NULL, bands = NULL) {
 
 
 # -- PdMonitor: Parkinson's disease monitoring via multimodal signals.
-#' PdMonitor: Parkinson\'s disease monitoring via multimodal signals
+#' PdMonitor: Parkinson's disease monitoring via multimodal signals
 #'
 #' A step of the rangayyan_phys implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

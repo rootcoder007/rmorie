@@ -81,8 +81,8 @@
 # the last bit.
 #' X to a small integer power, by repeated multiplication. Not the
 #'
-#' language\'s power operator: R uses repeated squaring for an integer
-#' exponent and Python calls the C library\'s pow, and they disagree in
+#' language's power operator: R uses repeated squaring for an integer
+#' exponent and Python calls the C library's pow, and they disagree in
 #' the last bit.
 #'
 #' @param x Numeric; combined arithmetically in the body.

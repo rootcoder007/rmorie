@@ -321,7 +321,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
   )
 }
 
-#' The spliced transcript, 5\' to 3\', and the genomic position of each
+#' The spliced transcript, 5' to 3', and the genomic position of each
 #'
 #' of its bases (returns list(seq, gpos)).
 #'
@@ -696,7 +696,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   list(terms = unique(terms), info = info)
 }
 
-#' C. notation, with an indel shifted to its most 3\' position
+#' C. notation, with an indel shifted to its most 3' position
 #'
 #' A step of the vepan_native implementation. Called by \code{morie_vepan_annotate}.
 #' See the file header for the source the module follows.
@@ -995,7 +995,7 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
   out[order(keys_rank, keys_tr)]
 }
 
-#' Table 7\'s order: canonical, then protein coding, then severity
+#' Table 7's order: canonical, then protein coding, then severity
 #'
 #' A step of the vepan_native implementation. Called by \code{morie_vepan_pick}.
 #' See the file header for the source the module follows.

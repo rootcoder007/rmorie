@@ -62,7 +62,7 @@
   .morie_fsum(0.5 * (y[-n] + y[-1]) * h)
 }
 
-#' Adaptive Simpson, the same rule the Python arm\'s quad() uses, so the
+#' Adaptive Simpson, the same rule the Python arm's quad() uses, so the
 #'
 #' two languages agree to their shared tolerance rather than to whatever
 #' a black-box integrator happens to do.
@@ -285,7 +285,7 @@ PdfSkew <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' Eq (3.5): K = (1/sigma^4) integral (eta - mu)^4 p(eta) d eta.  The
 #' book
 #'
-#' gives 3 for a Gaussian and defines the excess K\' = K - 3.
+#' gives 3 for a Gaussian and defines the excess K' = K - 3.
 #'
 #' @param pdf Passed to \code{.morie_rg_pdfint}.
 #' @param x Passed to \code{.morie_rg_pdfint}.
@@ -1011,7 +1011,7 @@ StepSeq <- function(n, shift = 0) {
 #'
 #' text immediately after states the output was divided by the sum of
 #' all values of h(n) -- the normalization is part of the method; the
-#' raw taps sum to 626.25 for the book\'s constants.
+#' raw taps sum to 626.25 for the book's constants.
 #'
 #' @param x Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{2000}.

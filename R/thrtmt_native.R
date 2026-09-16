@@ -77,7 +77,7 @@
 
 #' Z: n x p, y: length n
 #'
-#' Returns b solving (Z\'Z + ridge I) b = Z\' y
+#' Returns b solving (Z'Z + ridge I) b = Z' y
 #'
 #' @param Z A matrix; passed to \code{ncol}.
 #' @param y A matrix; passed to \code{crossprod}.

@@ -53,7 +53,7 @@
 #' W(u) = psi(u)/u: (1 - (u/c)^2)^2 inside, ZERO outside. The
 #'
 #' redescending part is what buys breakdown -- a gross outlier gets no
-#' vote at all, where Huber\'s psi still gives it a bounded one.
+#' vote at all, where Huber's psi still gives it a bounded one.
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @param cc Numeric; combined arithmetically in the body.

@@ -49,7 +49,7 @@
 
 # Box-Muller normals from the integer LCG, draw for draw with Python's
 # morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
-#' Box-Muller normals from the integer LCG, draw for draw with Python\'s
+#' Box-Muller normals from the integer LCG, draw for draw with Python's
 #'
 #' morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
 #'

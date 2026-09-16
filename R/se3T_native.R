@@ -139,7 +139,7 @@
 }
 
 # Rodrigues' formula -- a genuine element of SO(3)
-#' Rodrigues\' formula -- a genuine element of SO(3)
+#' Rodrigues' formula -- a genuine element of SO(3)
 #'
 #' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}.
 #' See the file header for the source the module follows.

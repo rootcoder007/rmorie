@@ -231,7 +231,7 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
 # proposal is an exact ellipse through the current point and a fresh
 # prior draw, so the prior term cancels and only the likelihood enters
 # the acceptance test. No rejection and no step size.
-#' Elliptical slice sampling for a latent with prior N(0, L L\'). The
+#' Elliptical slice sampling for a latent with prior N(0, L L'). The
 #'
 #' proposal is an exact ellipse through the current point and a fresh
 #' prior draw, so the prior term cancels and only the likelihood enters

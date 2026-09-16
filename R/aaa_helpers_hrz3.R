@@ -174,7 +174,7 @@ NULL
 # toward zero.
 #' Density-weighted average derivative, Horowitz Sec. 2.6.1:
 #'
-#' delta = E\[f_X(X) dE(Y|X)/dX\] = -2 E\[f_X\'(X) Y\]. In a single-index
+#' delta = E\[f_X(X) dE(Y|X)/dX\] = -2 E\[f_X'(X) Y\]. In a single-index
 #' model delta is proportional to beta, so it fixes the index DIRECTION
 #' without optimising over it.  The leave-one-out form is used: the
 #' own-observation term of a kernel density derivative is identically
@@ -252,7 +252,7 @@ NULL
 #' Default bandwidth on the mid-rank \[0, 1\] scale.  After .hrz3_u01 the
 #'
 #' marginals are exactly uniform on \[0, 1\], whose standard deviation is
-#' 1/sqrt(12), so Silverman\'s constant gives a scale rather than only a
+#' 1/sqrt(12), so Silverman's constant gives a scale rather than only a
 #' rate.  n^(-1/6) alone is a rate and on the unit interval is far too
 #' wide: at n = 40 it puts two thirds of the kernel mass outside
 #' support.

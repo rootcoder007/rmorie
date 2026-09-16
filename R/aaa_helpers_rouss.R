@@ -467,7 +467,7 @@
 #' quantile
 #'
 #' Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045,
-#' "Definition". Pchisq and Qchisq are the package\'s own native
+#' "Definition". Pchisq and Qchisq are the package's own native
 #' mirrors, not stats::.
 #'
 #' @param h Numeric; combined arithmetically in the body.

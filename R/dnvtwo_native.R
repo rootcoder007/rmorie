@@ -31,7 +31,7 @@
 .dnvtwo_eps <- 1e-12
 
 # L2-normalise a single row vector.  Mirrors Python's _norm().
-#' L2-normalise a single row vector.  Mirrors Python\'s _norm()
+#' L2-normalise a single row vector.  Mirrors Python's _norm()
 #'
 #' A step of the dnvtwo_native implementation. Called by \code{.dnvtwo_cos_raw}.
 #' See the file header for the source the module follows.

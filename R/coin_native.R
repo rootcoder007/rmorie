@@ -24,9 +24,9 @@
 #' Strasser-Weber conditional moments of the linear statistic
 #'
 #' g : n x p transformation of the covariate (e.g. group indicators) h :
-#' n x q influence (transformation) of the response Returns the vec\'d
+#' n x q influence (transformation) of the response Returns the vec'd
 #' statistic T (pq), its conditional mean mu and covariance Sigma,
-#' matching coin\'s `expectation()` / `covariance()`.
+#' matching coin's `expectation()` / `covariance()`.
 #'
 #' @param g A matrix; passed to \code{nrow}.
 #' @param h A matrix; passed to \code{crossprod}.
@@ -50,7 +50,7 @@
 }
 
 # Quadratic-form statistic c = (T-mu)' Sigma^+ (T-mu) ~ chi-square(df).
-#' Quadratic-form statistic c = (T-mu)\' Sigma^+ (T-mu) ~ chi-square(df)
+#' Quadratic-form statistic c = (T-mu)' Sigma^+ (T-mu) ~ chi-square(df)
 #'
 #' A step of the coin_native implementation. Called by \code{morie_oneway_test}.
 #' See the file header for the source the module follows.
@@ -110,7 +110,7 @@
 
 # Factor -> indicator design matching coin's f_trafo: k>2 gives k columns,
 # k==2 gives a single column (indicator of the second level).
-#' Factor -> indicator design matching coin\'s f_trafo: k>2 gives k
+#' Factor -> indicator design matching coin's f_trafo: k>2 gives k
 #' columns,
 #'
 #' k==2 gives a single column (indicator of the second level).

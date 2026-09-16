@@ -54,7 +54,7 @@ morie_survrsf_SPLIT_RULES <- c(
 )
 .survrsf_UNSOURCED <- list()
 
-#' Which of the paper\'s four splitting rules are implemented
+#' Which of the paper's four splitting rules are implemented
 #'
 #' A step of the survrsf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
@@ -119,7 +119,7 @@ morie_survrsf_rule_status <- function(rule = NULL) {
 # randomness only needs to be reproducible.)
 #' Small deterministic generator: a float-safe 32-bit LCG. (Exact match
 #'
-#' to the Python 64-bit generator is not required -- the forest\'s
+#' to the Python 64-bit generator is not required -- the forest's
 #' randomness only needs to be reproducible.)
 #'
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
@@ -332,7 +332,7 @@ morie_survrsf_logrank_statistic <- function(times, events, group) {
   abs(num) / sqrt(var_)
 }
 
-#' Lausen\'s log-rank scores, Hothorn & Lausen (2003) eq. (13)
+#' Lausen's log-rank scores, Hothorn & Lausen (2003) eq. (13)
 #'
 #' Without censoring or ties these are the Savage scores and sum to
 #' zero.
@@ -846,7 +846,7 @@ morie_survrsf_mortality <- function(fit, X, oob = TRUE,
   out
 }
 
-#' Harrell\'s C by the paper\'s four steps. predicted is a
+#' Harrell's C by the paper's four steps. predicted is a
 #'
 #' worse-outcome score: larger means the case is expected to fail
 #' sooner.

@@ -7,7 +7,7 @@
 #' Unnormalised second-order weights out of cur, having come from prev
 #'
 #' 1/p to step back, 1 to a neighbour of prev, 1/q otherwise.  At p = q
-#' = 1 every weight is 1, so the walk is exactly DeepWalk\'s uniform
+#' = 1 every weight is 1, so the walk is exactly DeepWalk's uniform
 #' walk -- the reduction that pins this function.
 #'
 #' @param nb A vector; indexed elementwise.

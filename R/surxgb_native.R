@@ -130,7 +130,7 @@ morie_surxgb_cdf <- function(z, dist = "normal") {
   1.0 - exp(-exp(z))
 }
 
-#' Table 2: f_Z\'(z)
+#' Table 2: f_Z'(z)
 #'
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}.
 #' See the file header for the source the module follows.
@@ -158,7 +158,7 @@ morie_surxgb_dpdf <- function(z, dist = "normal") {
   f * (1.0 - exp(zc))
 }
 
-#' Table 2: f_Z\'\'(z)
+#' Table 2: f_Z''(z)
 #'
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}.
 #' See the file header for the source the module follows.
@@ -591,7 +591,7 @@ morie_surxgb_predict <- function(fit, X) {
   out
 }
 
-#' Harrell\'s C for the fit; a larger prediction is a longer life, so
+#' Harrell's C for the fit; a larger prediction is a longer life, so
 #'
 #' the score is negated before it is ranked.
 #'

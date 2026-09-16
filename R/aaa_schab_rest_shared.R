@@ -311,7 +311,7 @@
 #' Single-pattern K with the border ("reduced sample") correction, as in
 #' the
 #'
-#' Python arm\'s k_function; needed by Diggle-Chetwynd\'s D(h).
+#' Python arm's k_function; needed by Diggle-Chetwynd's D(h).
 #'
 #' @param p A matrix; indexed by row and column.
 #' @param region A vector; indexed elementwise.

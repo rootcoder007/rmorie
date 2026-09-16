@@ -170,7 +170,7 @@
 # REPORTED quantity (it appears in the trajectory).
 #' The twelve actions: 0-5 translations, 6-11 rotations. Indexing stays
 #'
-#' 0-based here to match the Python arm\'s action numbering, which is a
+#' 0-based here to match the Python arm's action numbering, which is a
 #' REPORTED quantity (it appears in the trajectory).
 #'
 #' @param P Passed to \code{.agalfsy_translate}.

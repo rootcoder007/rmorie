@@ -277,7 +277,7 @@ morie_tlsurvy_design_efficiency <- function(values, influence, n, seed = 0) {
 #' Adaptive_survey_tmle: Sample by the adaptive design, then run the
 #'
 #' estimator on the sample. Reports both error sources: the sampling
-#' variance from using n of N, and the estimator\'s own standard error.
+#' variance from using n of N, and the estimator's own standard error.
 #'
 #' @param V Passed to \code{morie_tlsurvy_inclusion_probabilities}.
 #' @param influence_proxy Passed to \code{morie_tlsurvy_inclusion_probabilities}.

@@ -221,7 +221,7 @@
   out
 }
 
-#' Wichura\'s AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <=
+#' Wichura's AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <=
 #' 5
 #'
 #' A step of the rng_native implementation. Called by \code{.morie_random_normal},

@@ -12,9 +12,9 @@
 # R's own d/p/q/r at 1e-13 or better in tests/testthat/test-dist-native.R.
 
 
-#' Neumaier compensated summation: the R-side counterpart of Python\'s
+#' Neumaier compensated summation: the R-side counterpart of Python's
 #'
-#' math.fsum (Shewchuk).  On ARM64 R\'s long double IS double, so base
+#' math.fsum (Shewchuk).  On ARM64 R's long double IS double, so base
 #' sum() accumulates rounding error this does not; the two language arms
 #' then agree to the last bit instead of to the platform.
 #'
@@ -866,7 +866,7 @@ Pt <- function(q, df, lower_tail = TRUE) {
 #' The t is symmetric: qt(p) = -qt(1 - p) and qt(0.5) = 0 exactly
 #'
 #' Without this, bisection lands on the cdf plateau around zero --
-#' betainc\'s 1 - xb underflows for |v| < ~1e-8, the cdf sits at exactly
+#' betainc's 1 - xb underflows for |v| < ~1e-8, the cdf sits at exactly
 #' 0.5 there, and both bisection and Newton are blind inside it.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.

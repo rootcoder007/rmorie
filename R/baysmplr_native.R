@@ -293,7 +293,7 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #' gr3 <- function(x) {
 #'     dv <- x - MU3
 #'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
-#'         j\] * dv[j], numeric(1))), numeric(1))
+#'         j] * dv[j], numeric(1))), numeric(1))
 #' }
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
@@ -330,7 +330,7 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 }
 
 # Hoffman and Gelman's recursive doubling, Algorithm 3.
-#' Hoffman and Gelman\'s recursive doubling, Algorithm 3
+#' Hoffman and Gelman's recursive doubling, Algorithm 3
 #'
 #' A step of the baysmplr_native implementation. Called by \code{morie_baysmplr_nuts}.
 #' See the file header for the source the module follows.
@@ -424,7 +424,7 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 #' gr3 <- function(x) {
 #'     dv <- x - MU3
 #'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
-#'         j\] * dv[j], numeric(1))), numeric(1))
+#'         j] * dv[j], numeric(1))), numeric(1))
 #' }
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
@@ -593,7 +593,7 @@ morie_baysmplr_ess <- function(chain, max_lag = 200L) {
 #' gr3 <- function(x) {
 #'     dv <- x - MU3
 #'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
-#'         j\] * dv[j], numeric(1))), numeric(1))
+#'         j] * dv[j], numeric(1))), numeric(1))
 #' }
 #' morie_baysmplr(lp3, gr3, c(0, 0, 0), n_iter = 80L, burn = 30L,
 #'     seed = 5, eps = 0.25, steps = 8L)

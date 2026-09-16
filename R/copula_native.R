@@ -214,7 +214,7 @@ morie_copula_tau <- function(family, theta = NULL, nu = NULL) {
 # form Czado's Table 3.2 does not give.
 #' Tau = 4 int int C dC - 1 on a grid; used for families whose closed
 #'
-#' form Czado\'s Table 3.2 does not give.
+#' form Czado's Table 3.2 does not give.
 #'
 #' @param family Passed to \code{morie_copula_cdf}.
 #' @param theta Passed to \code{morie_copula_cdf}.

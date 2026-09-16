@@ -445,7 +445,6 @@ morie_gwrcal_global_aicc <- function(y, X) {
 #' @param search One of \code{"golden"}, \code{"grid"}.
 #' @param n_points Number of points for the grid.
 #' @param tol Convergence tolerance for golden section.
-#' @param tol See Usage.
 #' @return A list with \code{bandwidth}, \code{score},
 #'   \code{criterion}, \code{kernel}, \code{adaptive}, \code{search},
 #'   \code{grid}, \code{profile}, \code{at_boundary},

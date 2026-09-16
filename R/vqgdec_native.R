@@ -129,7 +129,7 @@ morie_vqgdec_decode_indices <- function(indices, codebook) {
 # Balances the two losses at the decoder's last layer.
 #' Adaptive_weight: lambda = grad_GL\[L_rec\] / (grad_GL\[L_GAN\] + delta)
 #'
-#' Balances the two losses at the decoder\'s last layer.
+#' Balances the two losses at the decoder's last layer.
 #'
 #' @param grad_rec Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grad_gan Coerced to numeric by the body, with \code{as.numeric}.
@@ -217,7 +217,7 @@ morie_vqgdec_patch_discriminator <- function(image, patch = 4,
 # transformer's context.
 #' Sliding_windows: generate windows for images larger than the
 #'
-#' transformer\'s context.
+#' transformer's context.
 #'
 #' @param height Coerced to integer by the body, with \code{as.integer}.
 #' @param width Coerced to integer by the body, with \code{as.integer}.

@@ -215,7 +215,7 @@
 }
 
 # The paper's DID_M estimator: switchers vs stayers, period by period.
-#' The paper\'s DID_M estimator: switchers vs stayers, period by period
+#' The paper's DID_M estimator: switchers vs stayers, period by period
 #'
 #' A step of the causdiddc_native implementation. Called by \code{morie_causdiddc},
 #' \code{morie_causdiddc_did_m}.

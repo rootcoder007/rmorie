@@ -530,7 +530,7 @@ LisaI <- function(x, w) {
   )
 }
 
-#' Eqs (1.4) and (1.5) with the book\'s own default choices,
+#' Eqs (1.4) and (1.5) with the book's own default choices,
 #'
 #' W_ij = ||s_i - s_j|| and U_ij = |Z_i - Z_j|, plus the regression
 #' slope beta = M2 / sum sum W_ij^2 displayed in Sec. 1.3.1.
@@ -664,7 +664,7 @@ MantelZ <- function(coords, x, w, u = NULL) {
   )
 }
 
-#' Eq (1.16).  Eg\[Ires\] = n tr\[MW\] / \{(n-k) w..\} is the book\'s own
+#' Eq (1.16).  Eg\[Ires\] = n tr\[MW\] / \{(n-k) w..\} is the book's own
 #'
 #' formula, Sec. 1.3.2, and is reproduced term for term.  The variance
 #' is derived from the exact moments of a ratio of quadratic forms in
@@ -745,7 +745,7 @@ MoranRes <- function(residuals, w, x = NULL) {
 
 # --- Ch 3: point patterns --------------------------------------------------
 
-#' R(h) = K\'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the
+#' R(h) = K'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the
 #'
 #' intensity of eq (3.8).  The naive estimator is NEGATIVELY BIASED (the
 #' book says so outright), hence the border correction by default.
@@ -1242,9 +1242,9 @@ SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
 
 # --- methods NOT in Schabenberger & Gotway ---------------------------------
 
-#' Cohen\'s kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than
+#' Cohen's kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than
 #'
-#' same-site pairs; the pairing is Mantel\'s M2, eq (1.5), with U_ij =
+#' same-site pairs; the pairing is Mantel's M2, eq (1.5), with U_ij =
 #' I\{x_i = y_j\}.  The kappa coefficient itself is NOT in the book.
 #'
 #' @param x Passed to \code{.morie_spx_chkv}.
@@ -1312,7 +1312,7 @@ SpKappa <- function(x, y, w) {
 #'
 #' (simple random sampling without replacement of the other n-1
 #' deviations into the neighbour slots).  The HH/LL/HL/LH labels are
-#' Anselin (1996)\'s Moran scatterplot, NOT in Schabenberger & Gotway; a
+#' Anselin (1996)'s Moran scatterplot, NOT in Schabenberger & Gotway; a
 #' fixed-string search of the book for "quadrant" and "Moran scatter"
 #' finds only an unrelated kriging search neighbourhood.
 #'
@@ -1405,7 +1405,7 @@ LisaClust <- function(x, w, alpha = 0.05) {
 #' Tukey (1977), Exploratory Data Analysis.  NOT in Schabenberger &
 #'
 #' Gotway -- a fixed-string search for "polish" returns nothing; the
-#' book\'s trend removal is the OLS trend surface of Sec. 5.3.1.  Median
+#' book's trend removal is the OLS trend surface of Sec. 5.3.1.  Median
 #' polish is resistant to outliers, which is why the geostatistical
 #' literature reaches for it first.  A sweep must run row-then-column in
 #' a FIXED order; median polish is not order-invariant.
@@ -1490,7 +1490,7 @@ MedPolish <- function(values, grid = NULL, iters = 10L) {
 #' Thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),
 #'
 #' lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on
-#' the CLUSTER\'S OWN SIZE; a common lambda over-shrinks the large
+#' the CLUSTER'S OWN SIZE; a common lambda over-shrinks the large
 #' clusters. Stein (1956); Morris (1983) JASA 78:47-55.  NOT in
 #' Schabenberger & Gotway -- a fixed-string search for "shrinkage"
 #' returns nothing.
@@ -1972,7 +1972,7 @@ SpecClust <- function(a, k = 2L) {
   )
 }
 
-#' MULTISPATI: diagonalise H = (1/n) X\' ((W + W\')/2) X on the centred,
+#' MULTISPATI: diagonalise H = (1/n) X' ((W + W')/2) X on the centred,
 #'
 #' unit-variance X, so an axis is scored by SPATIAL covariance, not
 #' variance.  Eigenvalues may be NEGATIVE -- that is a local-contrast
@@ -2047,9 +2047,9 @@ SpatialPca <- function(x, w, naxes = 2L) {
 #' Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved
 #' as
 #'
-#' the saddle-point system \[K + n lam I, T; T\', 0\].  T = \[1, s1, s2, X\]
+#' the saddle-point system \[K + n lam I, T; T', 0\].  T = \[1, s1, s2, X\]
 #' spans the null space of the penalty and must NOT be shrunk; dropping
-#' the T\'c = 0 block leaves the system singular.  Duchon (1977); Wood
+#' the T'c = 0 block leaves the system singular.  Duchon (1977); Wood
 #' (2006) Ch. 4.  NOT in Schabenberger & Gotway, whose parametric
 #' analogue is Sec. 5.3.1.
 #'
@@ -2221,8 +2221,8 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
 #' the
 #'
 #' BACK-shifted exposure.  Forward-shifting is the sign error this
-#' estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2),
-#' so w = exp\{(delta/tau^2)(A - H\'gamma - delta/2)\}.  Diaz & van der
+#' estimand invites.  Gaussian working model A|H ~ N(H'gamma, tau^2),
+#' so w = exp\{(delta/tau^2)(A - H'gamma - delta/2)\}.  Diaz & van der
 #' Laan (2012, 2018).  NOT in Schabenberger & Gotway.
 #'
 #' @param y Passed to \code{.morie_spx_chkv}.

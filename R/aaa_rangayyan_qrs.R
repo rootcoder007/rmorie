@@ -318,7 +318,7 @@
 
 #' 0-based argmax over the half-open range [lo, hi); first max on ties,
 #'
-#' exactly as Python\'s max(range(...), key=...).
+#' exactly as Python's max(range(...), key=...).
 #'
 #' @param v A vector; indexed elementwise.
 #' @param lo Numeric; combined arithmetically in the body.
@@ -1095,7 +1095,7 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
 #' define
 #'
 #' them; the definitions are the Task Force ones, Circulation
-#' 93(5):1043- 1065, 1996, reference \[84\] of the book\'s Chapter 8.
+#' 93(5):1043- 1065, 1996, reference \[84\] of the book's Chapter 8.
 #'
 #' @param rr Numeric; combined arithmetically in the body.
 #' @return A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50},

@@ -110,7 +110,7 @@ morie_covariate_balance <- function(x, treat, weights = NULL, threshold = 0.1) {
 }
 
 # Internal: a_ij = 1 when j is among i's k nearest, excluding i itself.
-#' Internal: a_ij = 1 when j is among i\'s k nearest, excluding i itself
+#' Internal: a_ij = 1 when j is among i's k nearest, excluding i itself
 #'
 #' A step of the panelspatial implementation. Called by \code{morie_jacquez_knn}.
 #' See the file header for the source the module follows.
@@ -198,7 +198,7 @@ morie_jacquez_knn <- function(coords, time, k = 3L, B = 999L) {
 
 # Internal: Ripley's K without edge correction. The bias is shared with
 # the simulated patterns, drawn in the same window, so it cancels.
-#' Internal: Ripley\'s K without edge correction. The bias is shared
+#' Internal: Ripley's K without edge correction. The bias is shared
 #' with
 #'
 #' the simulated patterns, drawn in the same window, so it cancels.

@@ -12,7 +12,7 @@
 
 # Private helper (mirrors Python's _leaf: a node is a leaf exactly when
 # it is a dict that carries a "label" key).
-#' Private helper (mirrors Python\'s _leaf: a node is a leaf exactly
+#' Private helper (mirrors Python's _leaf: a node is a leaf exactly
 #' when
 #'
 #' it is a dict that carries a "label" key).
@@ -27,7 +27,7 @@
 # Match Python's str() for the tie-breaking sort. Python's str(1.0) is
 # "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None";
 # reproducing those quirks keeps the sort identical to the Python arm.
-#' Match Python\'s str() for the tie-breaking sort. Python\'s str(1.0)
+#' Match Python's str() for the tie-breaking sort. Python's str(1.0)
 #' is
 #'
 #' "1.0" not "1", str(True) is "True" not "TRUE", str(None) is "None";
@@ -68,7 +68,7 @@
 
 # Mirror Python's max(sorted(scores, key=str), key=scores.__getitem__):
 # among ties, the key whose str() sorts earliest wins.
-#' Mirror Python\'s max(sorted(scores, key=str),
+#' Mirror Python's max(sorted(scores, key=str),
 #' key=scores.__getitem__):
 #'
 #' among ties, the key whose str() sorts earliest wins.
@@ -91,7 +91,7 @@
 # 1 == "1" is False, and isTRUE(1 == "1") is FALSE in R).
 #' Python-style == for the accuracy block: bool <-> int, int <-> float
 #'
-#' all match (R\'s == coerces); int vs str does not (mirrors Python: 1
+#' all match (R's == coerces); int vs str does not (mirrors Python: 1
 #' == "1" is False, and isTRUE(1 == "1") is FALSE in R).
 #'
 #' @param a Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -115,7 +115,7 @@
 #' every candidate value of the sensitive feature, multiplies the
 #' error-model probability by the marginal priors, and returns the
 #' maximum a posteriori estimate. The black-box route uses
-#' \eqn{err(y, y\')} from a confusion matrix; the white-box route
+#' \eqn{err(y, y')} from a confusion matrix; the white-box route
 #' additionally weights each root-to-leaf path by its training
 #' count, which carries joint-distribution information the marginals
 #' cannot reach on their own.

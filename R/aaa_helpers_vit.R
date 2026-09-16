@@ -120,7 +120,7 @@
 }
 
 # Index of the first maximum; R's which.max already has this tie rule.
-#' Index of the first maximum; R\'s which.max already has this tie rule
+#' Index of the first maximum; R's which.max already has this tie rule
 #'
 #' A step of the helpers_vit implementation. Called by \code{Vitfsv}.
 #' See the file header for the source the module follows.

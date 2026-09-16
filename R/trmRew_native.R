@@ -436,7 +436,7 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
   .trmRew_app(t[[2]], lapply(t[[3]], function(a) .trmRew_rename(a, tag)))
 }
 
-#' Superpose rb\'s left-hand side on ra\'s, at every non-variable
+#' Superpose rb's left-hand side on ra's, at every non-variable
 #'
 #' position, and rewrite the overlap both ways.
 #'
@@ -567,7 +567,7 @@ morie_trmRew_is_locally_confluent <- function(rules, max_steps = 10000) {
   )
 }
 
-#' Confluence via Newman\'s lemma: terminating and locally confluent
+#' Confluence via Newman's lemma: terminating and locally confluent
 #'
 #' A step of the trmRew_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

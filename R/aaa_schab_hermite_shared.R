@@ -91,7 +91,7 @@
 #' Golub-Welsch: nodes are the eigenvalues of the symmetric tridiagonal
 #'
 #' Jacobi matrix (zero diagonal, sqrt(k) off-diagonal for the
-#' probabilists\' Hermite system); weights are the squared first
+#' probabilists' Hermite system); weights are the squared first
 #' eigenvector components. Written out rather than taken from a package
 #' so this arm runs the same arithmetic as the Python one -- both need
 #' only a symmetric eigensolver. The weights sum to 1, so sum(w * g(x))

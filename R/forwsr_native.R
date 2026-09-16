@@ -52,9 +52,9 @@
   list(M = M, y = yy, n = n, p = p)
 }
 
-#' CPython\'s builtin sum() switched to Neumaier compensated summation
+#' CPython's builtin sum() switched to Neumaier compensated summation
 #'
-#' for floats in 3.12. R\'s sum() accumulates in long double, and a
+#' for floats in 3.12. R's sum() accumulates in long double, and a
 #' plain loop accumulates in double; neither reproduces it. The forward
 #' search orders residuals that differ in their last digits, so the
 #' summation algorithm decides which row enters next and the two arms
@@ -122,7 +122,7 @@
   vapply(seq_len(p), function(i) Ab[i, p + 1L] / Ab[i, i], numeric(1))
 }
 
-#' R\'s qnorm IS Wichura AS 241 (PPND16); the Python arm implements the
+#' R's qnorm IS Wichura AS 241 (PPND16); the Python arm implements the
 #'
 #' same rational approximation with the same coefficients, and the two
 #' agree bit for bit. Bisecting on erf/pnorm instead lands on different

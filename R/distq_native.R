@@ -95,7 +95,7 @@ atoms <- function(v_min, v_max, n_atoms) {
 # routines so we don't rebuild the spacing each time.)
 #' (Internal companion returning both z and dz -- used by the other
 #'
-#' routines so we don\'t rebuild the spacing each time.)
+#' routines so we don't rebuild the spacing each time.)
 #'
 #' @param v_min Passed to \code{.distq_atoms}.
 #' @param v_max Passed to \code{.distq_atoms}.
@@ -224,7 +224,7 @@ categorical_loss <- function(m, probs, eps = 1e-12) {
 
 #' Greedy action from per-action next-state distributions
 #'
-#' \eqn{a* = argmax_a sum_i z_i p_i(x\', a)}.
+#' \eqn{a* = argmax_a sum_i z_i p_i(x', a)}.
 #'
 #' @param next_probs_by_action List of numeric vectors, one per action.
 #' @param z Numeric vector of atom positions.
