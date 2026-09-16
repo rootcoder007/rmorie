@@ -19,7 +19,7 @@
 #'
 #' HC3 is written out rather than delegated, since \pkg{sandwich} is not
 #' a dependency here:
-#' \eqn{V = (X primeX)^-1 [sum_i x_i x_i prime e_i^2/(1 - h_ii)^2] (X primeX)^-1},
+#' \eqn{V = (X primeX)^-1 [sum_i x_i x_i' e_i^2/(1 - h_ii)^2] (X primeX)^-1},
 #' MacKinnon and White (1985), the grf default.
 #'
 #' @param y Numeric outcome of length n.

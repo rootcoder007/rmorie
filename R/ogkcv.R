@@ -12,8 +12,8 @@
 #' (1) \code{y_j = x_j / sigma_j} with \code{sigma_j} the MAD;
 #' (2) \code{U_jk} by the GK identity on the standardized columns,
 #'     \code{U_jj = 1};
-#' (3) \eqn{U = E Lambda E prime}, \eqn{z = E prime y};
-#' (4) \code{Gamma = diag(sigma(z_l)^2)}, \eqn{Sigma = A Gamma A prime}
+#' (3) \eqn{U = E Lambda E'}, \eqn{z = E' y};
+#' (4) \code{Gamma = diag(sigma(z_l)^2)}, \eqn{Sigma = A Gamma A'}
 #'     with \code{A = diag(sigma) E}, positive semi-definite by
 #'     construction;
 #' (5) location \code{mu = A m(z)}, \code{m} the coordinatewise median.

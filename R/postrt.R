@@ -6,7 +6,7 @@
 #' weights sum to \eqn{_h} within every stratum exactly, which is the
 #' calibration property that makes the adjustment worth doing.
 #'
-#' Formula: \code{w_i prime = w_i N_h / sum_{j in h} w_j}; the estimate is the
+#' Formula: \code{w_i' = w_i N_h / sum_{j in h} w_j}; the estimate is the
 #' weighted mean
 #'
 #' @param y Observed values.

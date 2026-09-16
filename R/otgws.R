@@ -10,7 +10,7 @@
 #'
 #' The Gromov objective is not convex, so what the iteration returns is a
 #' stationary point. When the two spaces share a symmetry and the plan is
-#' started at \eqn{ b prime}, which is itself symmetric, the iteration cannot
+#' started at \eqn{ b'}, which is itself symmetric, the iteration cannot
 #' break the tie and settles on the symmetric average of the two optima
 #' rather than on either of them.
 #'
