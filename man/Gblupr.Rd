@@ -18,7 +18,6 @@ Gblupr(y, X, Z, G, var_u = 1, var_e = 1, ridge = 1e-08)
 \item{var_u, var_e}{Variance components, positive.}
 
 \item{ridge}{Ridge added to G before inversion.}
-
 }
 \value{
 List with \code{estimate}, \code{beta}, \code{u},

@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the tmldgp_native implementation. Called by \code{morie_tmldgp}, \code{shrunk_targeting_unsafe}.
+A step of the tmldgp_native implementation. Called by \code{morie_tmldgp},
+\code{shrunk_targeting_unsafe}.
 See the file header for the source the module follows.
 source it follows.
 }

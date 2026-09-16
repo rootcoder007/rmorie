@@ -16,7 +16,6 @@ Agdproj(X, y, lower = NULL, upper = NULL, steps = 100, lipschitz = NULL)
 \item{steps}{Fixed iteration count.}
 
 \item{lipschitz}{L; NULL uses a fixed 50-step power iteration on X'X.}
-
 }
 \value{
 List with beta, objective, lipschitz, steps, nactive, n, p.

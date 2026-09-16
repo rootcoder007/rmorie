@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the alammar_llm_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_encoder_block}, \code{.morie_gr_softmax_cols} and 13 others in the module.
+A step of the alammar_llm_native implementation. Called by \code{.morie_gr_attend},
+\code{.morie_gr_encoder_block}, \code{.morie_gr_softmax_cols} and 13 others in the
+module.
 See the file header for the source the module follows.
 for the source it follows.
 }

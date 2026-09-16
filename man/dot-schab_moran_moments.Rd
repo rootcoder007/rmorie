@@ -12,7 +12,10 @@
 \item{w}{Passed to \code{.schab_weight_sums}.}
 }
 \value{
-A list with \code{I}, \code{expectation}, \code{variance_normal}, \code{variance_randomization}, \code{sd_normal}, \code{sd_randomization}, \code{z_normal}, \code{z_randomization}, \code{kurtosis_b}, \code{S0}, \code{S1}, \code{S2}, \code{n}, \code{geary_c}, \code{geary_expectation}.
+A list with \code{I}, \code{expectation}, \code{variance_normal},
+\code{variance_randomization}, \code{sd_normal}, \code{sd_randomization},
+\code{z_normal}, \code{z_randomization}, \code{kurtosis_b}, \code{S0}, \code{S1},
+\code{S2}, \code{n}, \code{geary_c}, \code{geary_expectation}.
 }
 \description{
 A step of the schab_rest_shared implementation. Called by \code{spmenv}.

@@ -15,7 +15,9 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the schab_glmm_shared implementation. Called by \code{.schab_conditional_variance}, \code{.schab_data_covariance}, \code{.schab_sigma_mu}.
+A step of the schab_glmm_shared implementation. Called by
+\code{.schab_conditional_variance}, \code{.schab_data_covariance},
+\code{.schab_sigma_mu}.
 See the file header for the source the module follows.
 the source it follows.
 }

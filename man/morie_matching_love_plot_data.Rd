@@ -21,7 +21,6 @@ morie_matching_love_plot_data(
 
 \item{weights_col}{Optional column of matching weights in
 \code{matched_data}.}
-
 }
 \value{
 A data frame with columns \code{covariate}, \code{smd_before},
@@ -30,7 +29,7 @@ A data frame with columns \code{covariate}, \code{smd_before},
 \description{
 Returns a data frame suitable for plotting absolute SMDs before and
 after matching.  For a publication-ready plot, pass the same
-\code{matchit} object to \code{cobalt::love.plot}.
+\code{matchit} object to \code{\link[cobalt:love.plot]{cobalt::love.plot}}.
 }
 \examples{
 if (requireNamespace("cobalt", quietly = TRUE)) {

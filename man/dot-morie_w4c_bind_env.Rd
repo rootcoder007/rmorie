@@ -13,7 +13,8 @@
 A list with \code{reset}, \code{step}.
 }
 \description{
-A step of the geron_w4c_native implementation. Called by \code{morie_geron_ppo}, \code{morie_geron_reinforcement_learning}.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_ppo},
+\code{morie_geron_reinforcement_learning}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -10,7 +10,7 @@ that runs on any of Toronto Police Service's 13 public crime CSVs
 plus a cross-category comparison driver.
 }
 \details{
-\subsection{Functions}{
+Functions
 
 \itemize{
 \item \code{\link{morie_tps_temporal_summary}}: year / month / dow / hour rollups.
@@ -32,5 +32,4 @@ Each summary callable returns a named \code{list} carrying summary
 lines, optional tables, optional warnings, and a plain-language
 \code{interpretation}. The aggregate \code{morie_tps_analyze_one()}
 nests these sub-results under named keys.
-}
 }

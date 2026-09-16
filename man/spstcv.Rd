@@ -30,8 +30,6 @@ numerically on it and the minimum eigenvalue is reported. Construction
 alone is not proof of validity: Sec. 9.3 records that Gneiting (2002)
 found published covariance functions in Cressie and Huang (1999) to be
 invalid.}
-
-
 }
 \value{
 A list with \code{st_covariance}, \code{form}, \code{separable}, \code{spatial_only},
@@ -61,7 +59,7 @@ The drawback Sec. 9.2 identifies is reported rather than hidden: under
 product separability the spatial covariances at different time lags are
 proportional, so the spatial dependence has the same shape at every time
 lag and the two components "do not act upon each other". If that matters,
-use \code{spstcn()}.
+use \code{\link[=spstcn]{spstcn()}}.
 }
 \references{
 Schabenberger Ch 9, Sec 9.2, eqs (9.5)-(9.6)

@@ -15,7 +15,8 @@
 A vector, from \code{c}.
 }
 \description{
-A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgemgf}, \code{rgemgfd} and 1 others in the module.
+A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgemgf},
+\code{rgemgfd} and 1 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

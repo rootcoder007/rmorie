@@ -3,7 +3,9 @@
 \name{MORIE_SIUIAP_PANEL_MEMBERS}
 \alias{MORIE_SIUIAP_PANEL_MEMBERS}
 \title{SIU IAP panel members (2021-2024 panel, Sapers-chaired)}
-
+\usage{
+MORIE_SIUIAP_PANEL_MEMBERS
+}
 \description{
 SIU IAP panel members (2021-2024 panel, Sapers-chaired)
 }

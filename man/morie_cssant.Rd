@@ -17,7 +17,6 @@ morie_cssant(y, D, unit, time, cohort = NULL, control = "notyet")
 unit, as an alternative to deriving it from \code{D}.}
 
 \item{control}{\code{"notyet"} (default) or \code{"never"}.}
-
 }
 \value{
 A list with \code{estimate} (overall ATT), \code{se},

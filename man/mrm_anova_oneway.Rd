@@ -12,7 +12,6 @@ mrm_anova_oneway(data, response_col, group_col, alpha = 0.05)
 \item{response_col, group_col}{Column names.}
 
 \item{alpha}{CI level (default 0.05).}
-
 }
 \value{
 Named list with f_statistic, p_value, df_between,

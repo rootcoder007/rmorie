@@ -19,7 +19,8 @@
 The value of \code{list}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_krona_output}, \code{morie_kamath_ch4_krona_tuned_weights}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch4_krona_output}, \code{morie_kamath_ch4_krona_tuned_weights}.
 See the file header for the source the module follows.
 for the source it follows.
 }

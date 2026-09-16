@@ -18,9 +18,6 @@ Seirep(S, E, I, R, beta, sigma, gamma, t_max = 160, dt = 0.1)
 \item{t_max}{Integration horizon. Default 160.}
 
 \item{dt}{Runge-Kutta step. Default 0.1.}
-
-
-
 }
 \value{
 List with \code{estimate} (final size), \code{S}, \code{E},
@@ -37,7 +34,7 @@ Integrates the deterministic SEIR system
 \details{
 The exposed class E holds individuals who are infected but not yet
 infectious; they progress at rate sigma, so the mean latent period is
-\code{1 / sigma}.  The basic reproduction number is \code{R0 = beta /
+\code{1 / sigma}.  The basic reproduction number is \eqn{R0 = beta /
 gamma}: the latent stage delays but does not alter the number of
 secondary cases, because every exposed individual eventually becomes
 infectious.  Population \code{N = S + E + I + R} is conserved.

@@ -32,7 +32,6 @@ Alfembed(
 \item{wtgt}{Target projection added to every MSA row, \code{cm x ctf}.}
 
 \item{bins}{Relative position bins; defaults to -32, ..., 32.}
-
 }
 \value{
 A list with the initial \code{z} and \code{m}, the relative

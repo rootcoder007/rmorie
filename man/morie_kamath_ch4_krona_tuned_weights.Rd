@@ -17,7 +17,6 @@ morie_kamath_ch4_krona_output(X, W, A_k, B_k, s)
 \item{s}{Scale.}
 
 \item{X}{Input rows.}
-
 }
 \value{
 List with \code{W_tuned}, \code{delta}, \code{shape}.

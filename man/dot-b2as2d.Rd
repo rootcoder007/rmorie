@@ -13,7 +13,8 @@
 The value of \code{m}, as built in the body.
 }
 \description{
-A step of the b2info implementation. Called by \code{Cndent}, \code{Jntent}, \code{Klchain} and 1 others in the module.
+A step of the b2info implementation. Called by \code{Cndent}, \code{Jntent},
+\code{Klchain} and 1 others in the module.
 See the file header for the source the module follows.
 it follows.
 }

@@ -36,7 +36,8 @@
 \item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.}
 }
 \value{
-A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{delta}, \code{max_density_ratio}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci},
+\code{mean_eic}, \code{delta}, \code{max_density_ratio}, \code{method}, \code{note}.
 }
 \description{
 A step of the tlstoch_native implementation. No other function in the package calls it.

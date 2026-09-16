@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the bayopt_native implementation. Called by \code{acquisition_gradient}, \code{expected_improvement}.
+A step of the bayopt_native implementation. Called by \code{acquisition_gradient},
+\code{expected_improvement}.
 See the file header for the source the module follows.
 source it follows.
 }

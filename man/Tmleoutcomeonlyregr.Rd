@@ -12,7 +12,6 @@ Tmleoutcomeonlyregr(y, D, X = NULL, alpha = 0.05)
 \item{X}{covariates.}
 
 \item{alpha}{interval level.}
-
 }
 \value{
 list: estimate, psi_gcomp, psi_tmle, gap, se, ci_lo, ci_hi,

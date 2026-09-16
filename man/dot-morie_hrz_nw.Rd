@@ -19,7 +19,8 @@
 The value of \code{ifelse}.
 }
 \description{
-A step of the horowitz_native8 implementation. Called by \code{morie_direct_discrete}, \code{morie_nls_weight_function}, \code{morie_one_step_efficient}.
+A step of the horowitz_native8 implementation. Called by \code{morie_direct_discrete},
+\code{morie_nls_weight_function}, \code{morie_one_step_efficient}.
 See the file header for the source the module follows.
 the source it follows.
 }

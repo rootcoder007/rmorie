@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}, \code{morie_ncfRS_gmf}, \code{morie_ncfRS_neumf}.
+A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf},
+\code{morie_ncfRS_gmf}, \code{morie_ncfRS_neumf}.
 See the file header for the source the module follows.
 source it follows.
 }

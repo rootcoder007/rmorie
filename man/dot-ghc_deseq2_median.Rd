@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_mad}, \code{dispersion_trend}.
+A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_mad},
+\code{dispersion_trend}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -26,7 +26,6 @@ Drdiddyn(
 \item{horizon}{largest |event time| reported.}
 
 \item{X}{baseline covariates, one row per unit-period.}
-
 }
 \value{
 list: estimate, event_time, att, n_cells, method.

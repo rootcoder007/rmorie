@@ -12,7 +12,8 @@
 \item{kappa}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \value{
-A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding}, \code{fraction_positive_blip}, \code{note}.
+A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding},
+\code{fraction_positive_blip}, \code{note}.
 }
 \description{
 A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_rule}.

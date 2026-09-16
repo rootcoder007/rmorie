@@ -16,7 +16,6 @@ Survlnk(time, event, X, link = "cloglog", max_iter = 100L, tol = 1e-10)
 \item{link}{"cloglog" or "logit".}
 
 \item{max_iter, tol}{Newton controls.}
-
 }
 \value{
 List with \code{estimate}, \code{se}, \code{alpha},

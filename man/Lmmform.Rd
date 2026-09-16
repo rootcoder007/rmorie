@@ -20,11 +20,20 @@ Lmmform(X, beta, Z, u, Sigma, R = NULL)
 \item{R}{Residual variance-covariance matrix; None uses the identity.}
 }
 \value{
-List with \code{mean_marginal}, \code{mean_conditional}, \code{signal}, \code{V}, \code{n}, \code{p}, \code{q}.
+List with \code{mean_marginal}, \code{mean_conditional}, \code{signal}, \code{V}, \code{n},
+\code{p}, \code{q}.
 }
 \description{
-Formula: Y = X beta + Z u + e,  u ~ N(0, Sigma), e ~ N(0, R);  E(Y) = X beta, E(Y|u) = X beta + Z u, Var(Y) = Z Sigma Z' + R
+Formula: Y = X beta + Z u + e,  u ~ N(0, Sigma), e ~ N(0, R);  E(Y) = X beta, E(Y|u) =
+X beta + Z u, Var(Y) = Z Sigma Z' + R
 }
 \references{
-Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 2, Eq. (2.1) p. 37 and the paragraph beneath it: Y is n x 1, X is n x p, Z is n x q, u ~ N(0, Sigma) with Sigma of order q x q and e ~ N(0, R) with R of order n x n; the unconditional mean is E(Y) = X beta and the conditional mean given the random effects is E(Y|u) = X beta + Z u.  The marginal variance Z Sigma Z' + R is the V that Sect. 2.2 uses for the BLUE and BLUP.  Read from the chapter PDF, not recalled.
+Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+Statistical Machine Learning Methods for Genomic Prediction, Springer,
+doi:10.1007/978-3-030-89010-0.  Chapter 2, Eq. (2.1) p. 37 and the paragraph beneath
+it: Y is n x 1, X is n x p, Z is n x q, u ~ N(0, Sigma) with Sigma of order q x q and
+e ~ N(0, R) with R of order n x n; the unconditional mean is E(Y) = X beta and the
+conditional mean given the random effects is E(Y|u) = X beta + Z u.  The marginal
+variance Z Sigma Z' + R is the V that Sect. 2.2 uses for the BLUE and BLUP.  Read from
+the chapter PDF, not recalled.
 }

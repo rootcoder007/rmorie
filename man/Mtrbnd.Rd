@@ -17,7 +17,6 @@ Mtrbnd(y, D, direction = "increasing", d = NULL, y_min = NULL, y_max = NULL)
 \code{max(D)}.}
 
 \item{y_min, y_max}{A priori outcome support; default the observed range.}
-
 }
 \value{
 List with lower, upper, width, nfixed, n, d.
@@ -30,7 +29,7 @@ the direction switch and delegates.
 \details{
 Under monotone treatment response \code{Y_i(d) >= y_i} when
 \code{d >= z_i} and \code{Y_i(d) <= y_i} when \code{d <= z_i}, giving
-\code{L_i = y_i if z_i <= d else ymin}, \code{U_i = y_i if z_i >= d
+\code{L_i = y_i if z_i <= d else ymin}, \eqn{U_i = y_i if z_i >= d
 else ymax} and \code{E[Y(d)] in [mean(L), mean(U)]}.
 
 \code{direction = "decreasing"} asserts the reverse monotonicity, which

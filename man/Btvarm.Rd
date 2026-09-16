@@ -19,7 +19,8 @@ Btvarm(x, B = 200L, rng = 2L, exhaustive = FALSE)
 list: estimate, var_b, mean_b, grand_mean, B, n, exhaustive, method.
 }
 \description{
-\deqn{\mathrm{Var}^* = \frac{1}{B}\sum_b (\bar{x}^*_b - \overline{\bar{x}^*})^2.}{Var* = (1/B) sum_b (xbar*_b - mean of them)^2.}
+\deqn{\mathrm{Var}^* = \frac{1}{B}\sum_b (\bar{x}^*_b - \overline{\bar{x}^*})^2.}{Var*
+= (1/B) sum_b (xbar*_b - mean of them)^2.}
 }
 \details{
 Efron, B. (1979), "Bootstrap methods: another look at the jackknife",

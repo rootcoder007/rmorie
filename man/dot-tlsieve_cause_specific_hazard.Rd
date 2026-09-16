@@ -13,7 +13,8 @@
 
 \item{times}{A vector; its length is taken and its elements indexed.}
 
-\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
 A list with \code{hazards}, \code{types}, \code{times}.

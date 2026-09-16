@@ -12,8 +12,6 @@ morie_did_parallel_trends_data(data, outcome, treatment, time, weights = NULL)
 \item{outcome, treatment, time}{Column names.}
 
 \item{weights}{Optional survey weight column.}
-
-
 }
 \value{
 A data frame with columns \code{time}, \code{group},

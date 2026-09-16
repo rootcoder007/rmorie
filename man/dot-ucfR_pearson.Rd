@@ -19,7 +19,8 @@
 
 \item{min_common}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.}
 
-\item{significance}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.}
+\item{significance}{Coerced to logical by the body, with \code{as.logical}. Defaults
+to \code{FALSE}.}
 
 \item{threshold}{Passed to \code{.ucfR_significance_weight}. Defaults to \code{50}.}
 }

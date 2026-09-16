@@ -51,8 +51,6 @@ morie_universal_kriging(
 \item{nugget, sill, range_}{Variogram parameters.}
 
 \item{trend_order}{0, 1, or 2.}
-
-
 }
 \value{
 Named list: estimate, se, n, method.

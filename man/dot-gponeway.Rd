@@ -10,10 +10,13 @@
 \item{groups}{Iterated over elementwise, with \code{lapply}.}
 }
 \value{
-A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means}, \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between}, \code{ms_within}.
+A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means},
+\code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between},
+\code{ms_within}.
 }
 \description{
-A step of the helpers_gp_core implementation. Called by \code{Msm002}, \code{Msm003}, \code{Msm005} and 1 others in the module.
+A step of the helpers_gp_core implementation. Called by \code{Msm002}, \code{Msm003},
+\code{Msm005} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

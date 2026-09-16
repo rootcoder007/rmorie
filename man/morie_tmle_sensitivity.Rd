@@ -7,13 +7,11 @@
 morie_tmle_sensitivity(y, d, x, gamma_grid = NULL, trunc = 0.01)
 }
 \arguments{
-\item{y, d, x}{As in \code{morie_tmle_propensity_only()}.}
+\item{y, d, x}{As in \code{\link[=morie_tmle_propensity_only]{morie_tmle_propensity_only()}}.}
 
 \item{gamma_grid}{Odds-ratio bounds (all >= 1).}
 
 \item{trunc}{Propensity truncation.}
-
-
 }
 \value{
 List with \code{gamma}, \code{lower}, \code{upper}, \code{ate}, \code{gamma_critical},

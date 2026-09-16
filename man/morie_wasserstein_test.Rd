@@ -14,7 +14,6 @@ rather than flattened: the closed form above holds only on the line.}
 
 \item{cdf}{Optional function giving the null CDF of the statistic,
 replacing the permutation null.}
-
 }
 \value{
 Named list with \code{statistic}, \code{p_value}, \code{B},

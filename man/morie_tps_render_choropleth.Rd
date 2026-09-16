@@ -41,7 +41,6 @@ polygon-ID labels at each ward centroid.}
 \item{border_color}{Polygon edge colour.}
 
 \item{border_lw}{Polygon edge linewidth.}
-
 }
 \value{
 A \code{ggplot} object (when ggplot2 is loaded) or
@@ -53,7 +52,7 @@ Renders a sequential-colour choropleth from a polygon data.frame
 carrying one row per neighbourhood with a list-column of WGS84
 (lon, lat) rings (\code{geometry}) and a numeric \code{rate_col}.
 This signature deliberately matches what
-\code{rmorie::morie_fetch("https://.../NeighbourhoodCrimeRates...",
+\eqn{rmorie::morie_fetch("https://.../NeighbourhoodCrimeRates...",
 format = "geojson")} returns once unrolled.
 }
 \details{

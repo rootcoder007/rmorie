@@ -15,7 +15,8 @@
 A list with \code{fitted}, \code{level}.
 }
 \description{
-A step of the forecast_native implementation. Called by \code{morie_joseph_simple_exponential_smoothing}, \code{morie_theta_method}.
+A step of the forecast_native implementation. Called by
+\code{morie_joseph_simple_exponential_smoothing}, \code{morie_theta_method}.
 See the file header for the source the module follows.
 the source it follows.
 }

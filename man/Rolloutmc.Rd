@@ -30,8 +30,6 @@ Rolloutmc(
 \item{lam}{mixing weight.}
 
 \item{stream}{optional uniforms driving the rollout.}
-
-
 }
 \value{
 list: estimate, z, v_theta, lam, plies, trajectory, actions,

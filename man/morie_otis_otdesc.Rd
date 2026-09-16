@@ -14,7 +14,6 @@ morie_otis_otdesc(
 \item{df}{data.frame.}
 
 \item{id_col, year_col}{Column names.}
-
 }
 \value{
 \code{morie_otis_result}.

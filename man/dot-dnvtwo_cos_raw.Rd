@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the dnvtwo_native implementation. Called by \code{deduplicate}, \code{retrieve_augment}.
+A step of the dnvtwo_native implementation. Called by \code{deduplicate},
+\code{retrieve_augment}.
 See the file header for the source the module follows.
 source it follows.
 }

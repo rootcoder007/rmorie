@@ -48,8 +48,10 @@ Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}, \
 \description{
 The Hajek estimator uses stabilised IPW weights:
 \deqn{\widehat{ATE} = \bar{y}_1^{w} - \bar{y}_0^{w}}{ATE_hat = y_bar_1^w - y_bar_0^w}
-where \eqn{\bar{y}_t^{w} = \sum_{T_i=t} w_i Y_i / \sum_{T_i=t} w_i}{y_bar_t^w = sum_T_i=t w_i Y_i / sum_T_i=t w_i}
-and \eqn{w_i = T_i/\hat{e}(X_i) + (1-T_i)/(1-\hat{e}(X_i))}{w_i = T_i/e_hat(X_i) + (1-T_i)/(1-e_hat(X_i))}.
+where \eqn{\bar{y}_t^{w} = \sum_{T_i=t} w_i Y_i / \sum_{T_i=t} w_i}{y_bar_t^w =
+sum_T_i=t w_i Y_i / sum_T_i=t w_i}
+and \eqn{w_i = T_i/\hat{e}(X_i) + (1-T_i)/(1-\hat{e}(X_i))}{w_i = T_i/e_hat(X_i) +
+(1-T_i)/(1-e_hat(X_i))}.
 }
 \details{
 When \pkg{WeightIt} is installed the propensity step delegates to

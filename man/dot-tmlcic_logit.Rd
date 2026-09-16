@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the tmlcic_native implementation. Called by \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm}, \code{morie_tmlcic_candidate_tmle}.
+A step of the tmlcic_native implementation. Called by \code{.tmlcic_hier_cluster_arm},
+\code{.tmlcic_hier_individual_arm}, \code{morie_tmlcic_candidate_tmle}.
 See the file header for the source the module follows.
 source it follows.
 }

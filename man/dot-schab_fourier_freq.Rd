@@ -15,7 +15,8 @@
 A list with \code{w1}, \code{w2}, \code{j}, \code{k}.
 }
 \description{
-A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram}, \code{.schab_periodogram_from_cov}.
+A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram},
+\code{.schab_periodogram_from_cov}.
 See the file header for the source the module follows.
 the source it follows.
 }

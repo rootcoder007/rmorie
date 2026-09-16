@@ -17,7 +17,8 @@ morie_datasets_edmonton_socrata_by_id(soda_id, limit = 1000L)
 \value{
 A \code{data.frame} of records.
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 }
 \description{
 Phase 3FFF3. Generic SODA2 fetch wrapper for arbitrary Calgary
@@ -31,6 +32,11 @@ df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
 if (!inherits(df, "try-error")) head(df)
 }
 \dontshow{\}) # examplesIf}
+\donttest{
+cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
+df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+if (!inherits(df, "try-error")) head(df)
+}
 \donttest{
 cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
 df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))

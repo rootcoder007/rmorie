@@ -16,7 +16,8 @@ down)}
 The value of \code{perm}, as built in the body.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_dataloader_minibatch}, \code{morie_geron_kfold_cv}.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_dataloader_minibatch}, \code{morie_geron_kfold_cv}.
 See the file header for the source the module follows.
 for the source it follows.
 }

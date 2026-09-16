@@ -13,7 +13,8 @@
 The value of \code{.gppinv}.
 }
 \description{
-A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gplmmloglik}, \code{.gpolsfit} and 1 others in the module.
+A step of the helpers_gp_core implementation. Called by \code{.gpblueblup},
+\code{.gplmmloglik}, \code{.gpolsfit} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

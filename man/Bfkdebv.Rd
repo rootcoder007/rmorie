@@ -18,21 +18,25 @@ morie_fauzi_thm5_5_bdfree_kde_bv(n, h, density, c2, dg, mu2 = 1, rk = NULL)
 
 \item{c2}{The Theorem 5.5 coefficient.}
 
-\item{dg}{\verb{g\'(g^-1(x))}, strictly positive.}
+\item{dg}{\verb{g'(g^-1(x))}, strictly positive.}
 
 \item{mu2}{\verb{int v^2 K(v) dv}.}
 
 \item{rk}{\verb{int K^2(v) dv}; defaults to the Gaussian \verb{1/(2 sqrt(pi))}.}
 }
 \value{
-Named list with \code{bias}, \code{variance}, \code{se}, \code{mse}, \code{hopt}, \code{h}, \code{n}, \code{method}.
+Named list with \code{bias}, \code{variance}, \code{se}, \code{mse}, \code{hopt}, \code{h},
+\code{n}, \code{method}.
 }
 \description{
 Theorem 5.5, Eqs. (5.10)-(5.11):
-\deqn{\mathrm{Bias}[\tilde f_X(x)] = \frac{h^2 c_2(x)}{2g'(g^{-1}(x))}\mu_2(K) + o(h^2),\quad \mathrm{Var}[\tilde f_X(x)] = \frac{f_X(x)}{nhg'(g^{-1}(x))}\int K^2(v)dv + o(1/(nh)).}{Bias[ftilde(x)] = h^2 c2(x) mu2(K) / (2 g'(g^-1(x))) + o(h^2), Var[ftilde(x)] = f(x) int K^2 / (n h g'(g^-1(x))) + o(1/(nh)).}
+\deqn{\mathrm{Bias}[\tilde f_X(x)] = \frac{h^2 c_2(x)}{2g'(g^{-1}(x))}\mu_2(K) +
+o(h^2),\quad \mathrm{Var}[\tilde f_X(x)] = \frac{f_X(x)}{nhg'(g^{-1}(x))}\int
+K^2(v)dv + o(1/(nh)).}{Bias[ftilde(x)] = h^2 c2(x) mu2(K) / (2 g'(g^-1(x))) +
+o(h^2), Var[ftilde(x)] = f(x) int K^2 / (n h g'(g^-1(x))) + o(1/(nh)).}
 }
 \details{
-Both carry \verb{1/g\'}, and the SAME power in both -- which is why the
+Both carry \verb{1/g'}, and the SAME power in both -- which is why the
 transformation does not change the shape of the bias-variance tradeoff, only
 its constants. The MSE-optimal bandwidth is still \code{O(n^(-1/5))} and the
 optimal MSE still \code{O(n^(-4/5))}.

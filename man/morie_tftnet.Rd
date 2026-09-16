@@ -42,14 +42,6 @@ morie_tftnet(
 \item{y}{optional observations, to evaluate eq. (25)}
 
 \item{q}{the quantile level}
-
-
-
-
-
-
-
-
 }
 \value{
 list(grn, gate, weights, yhat, topvar, maxweight, entropy,

@@ -11,13 +11,16 @@
 
 \item{H}{A matrix; passed to \code{as.matrix}.}
 
-\item{kind}{Accepted by the signature and not used anywhere in the body. Defaults to \code{"normal"}.}
+\item{kind}{Accepted by the signature and not used anywhere in the body. Defaults to
+\code{"normal"}.}
 }
 \value{
 A list with \code{dens}, \code{info}.
 }
 \description{
-A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_ip_weights}.
+A step of the gentmt_native implementation. Called by
+\code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
+\code{.gentmt_ip_weights}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -13,7 +13,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the geron_w4b_native implementation. Called by \code{morie_geron_gru}, \code{morie_geron_lstm}, \code{morie_geron_mish}.
+A step of the geron_w4b_native implementation. Called by \code{morie_geron_gru},
+\code{morie_geron_lstm}, \code{morie_geron_mish}.
 See the file header for the source the module follows.
 the source it follows.
 }

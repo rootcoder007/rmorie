@@ -10,8 +10,6 @@ morie_alammar_sdp_attention(Q, K, V, mask = NULL)
 \item{Q, K, V}{Matrices.}
 
 \item{mask}{Optional matrix.}
-
-
 }
 \value{
 List with \code{output}, \code{attention}.

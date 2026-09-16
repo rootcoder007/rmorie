@@ -34,7 +34,7 @@ re-derived; that module carries the algebraic checks on them.
 }
 \details{
 The synthesis step is the exact adjoint,
-a_j[(2i+k) mod M] += h_k a_\{j+1\}[i] + g_k d_\{j+1\}[i], which
+a_j[(2i+k) mod M] += h_k a_\{j+1\}\link[fixest:i]{i} + g_k d_\{j+1\}\link[fixest:i]{i}, which
 reconstructs exactly because analysis is orthonormal.
 \code{reconstruction_error} is max |x - synth(analyse(x))|.
 

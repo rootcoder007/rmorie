@@ -16,7 +16,8 @@ order}
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the geron_w4c_native implementation. Called by \code{morie_geron_polynomial_features_hm}.
+A step of the geron_w4c_native implementation. Called by
+\code{morie_geron_polynomial_features_hm}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -21,7 +21,8 @@
 The value of \code{morie_jsonlt_to_json}.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.morie_to_json}, \code{.s03json_write}, \code{jsonlite_toJSON_or_stub} and 1 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.morie_to_json},
+\code{.s03json_write}, \code{jsonlite_toJSON_or_stub} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

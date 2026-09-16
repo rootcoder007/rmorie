@@ -21,7 +21,8 @@
 A list with \code{g}, \code{b}.
 }
 \description{
-A step of the tmlcds_native implementation. Called by \code{.tmlcds_refit_on}, \code{ctmle_sequence}.
+A step of the tmlcds_native implementation. Called by \code{.tmlcds_refit_on},
+\code{ctmle_sequence}.
 See the file header for the source the module follows.
 source it follows.
 }

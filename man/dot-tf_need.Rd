@@ -17,7 +17,8 @@
 The value of \code{v}, as built in the body.
 }
 \description{
-A step of the rangayyan_tf implementation. Called by \code{AtomTfd}, \code{BiorDwt}, \code{CDemod} and 28 others in the module.
+A step of the rangayyan_tf implementation. Called by \code{AtomTfd}, \code{BiorDwt},
+\code{CDemod} and 28 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

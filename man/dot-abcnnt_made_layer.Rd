@@ -18,7 +18,8 @@
 \item{reverse}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }
 \value{
-A list with \code{W1}, \code{b1}, \code{Wm}, \code{bm}, \code{Wa}, \code{ba}, \code{M1}, \code{M2}, \code{dim_x}, \code{dim_t}, \code{hidden}, \code{order}.
+A list with \code{W1}, \code{b1}, \code{Wm}, \code{bm}, \code{Wa}, \code{ba},
+\code{M1}, \code{M2}, \code{dim_x}, \code{dim_t}, \code{hidden}, \code{order}.
 }
 \description{
 masks are stored as 0/1 floats so element-wise multiply drops blocked

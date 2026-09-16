@@ -15,7 +15,8 @@
 The value of \code{.pq_wvarint}.
 }
 \description{
-A step of the parquet implementation. Called by \code{.pq_wfield}, \code{.pq_wi32}, \code{.pq_wi64} and 1 others in the module.
+A step of the parquet implementation. Called by \code{.pq_wfield}, \code{.pq_wi32},
+\code{.pq_wi64} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

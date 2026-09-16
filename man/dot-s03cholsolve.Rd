@@ -15,7 +15,8 @@
 The value of \code{x}, as built in the body.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.cfa_inv}, \code{.ch_ols_se} and 35 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
+\code{.cfa_inv}, \code{.ch_ols_se} and 35 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

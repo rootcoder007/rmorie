@@ -16,7 +16,7 @@ morie_coherence(x, y, nperseg = NULL, fs = 1)
 \item{fs}{Sampling frequency. Default 1.}
 }
 \value{
-Named list with \code{frequencies, morie_coherence, n_segments,
+Named list with \eqn{frequencies, morie_coherence, n_segments,
   nperseg, fs, n, method}.
 }
 \description{

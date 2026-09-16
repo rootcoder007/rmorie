@@ -15,7 +15,8 @@
 The value of \code{list}.
 }
 \description{
-A step of the geron_w4c_native implementation. Called by \code{morie_geron_quantization_aware_training_hm}.
+A step of the geron_w4c_native implementation. Called by
+\code{morie_geron_quantization_aware_training_hm}.
 See the file header for the source the module follows.
 the source it follows.
 }

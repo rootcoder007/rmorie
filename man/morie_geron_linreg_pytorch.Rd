@@ -23,10 +23,10 @@ morie_geron_linreg_pytorch(
 \item{batch_size}{Mini-batch size.}
 
 \item{seed}{Shuffle seed.}
-
 }
 \value{
-List with w, b, loss_history, final_loss, w_closed_form, b_closed_form, gap, lr_limit, estimate, n, method.
+List with w, b, loss_history, final_loss, w_closed_form, b_closed_form, gap,
+lr_limit, estimate, n, method.
 }
 \description{
 Shuffle order via the shared LCG stream, not numpy PCG64. With

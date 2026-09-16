@@ -14,7 +14,8 @@ of k.mat)}
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the tlnet1_native implementation. Called by \code{decompose_effects}, \code{policy_mean}.
+A step of the tlnet1_native implementation. Called by \code{decompose_effects},
+\code{policy_mean}.
 See the file header for the source the module follows.
 source it follows.
 }

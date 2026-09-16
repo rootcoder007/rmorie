@@ -12,7 +12,6 @@ morie_kamath_rwkv_time_mix(k, v, w, u = 0)
 \item{w}{Decay (non-negative).}
 
 \item{u}{Current-token bonus.}
-
 }
 \value{
 List with \code{wkv}, \code{estimate}.

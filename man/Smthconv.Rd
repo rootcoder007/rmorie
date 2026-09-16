@@ -24,17 +24,18 @@ morie_fauzi_thm5_8_smoothed_convergence(
 
 \item{zstd, zsmooth}{The two standardised statistics, for the finite-\code{n}
 squared difference.}
-
 }
 \value{
 Named list with \code{ok}, \code{d}, \code{h}, \code{sqdiff}, \code{lower}, \code{upper}, \code{method}.
 }
 \description{
-Theorem 5.8: if \verb{f\'} exists and is continuous near \code{-theta}, the bandwidth
+Theorem 5.8: if \verb{f'} exists and is continuous near \code{-theta}, the bandwidth
 is \verb{h = c n^(-d)} with \code{c > 0} and \verb{1/4 < d < 1/2}, the kernel is symmetric,
 and two limiting moment conditions hold, then the standardised smoothed and
 ordinary statistics agree in MEAN SQUARE:
-\deqn{\lim_n E\Big[\frac{S - E(S)}{\sqrt{V(S)}} - \frac{\tilde S - E(\tilde S)}{\sqrt{V(\tilde S)}}\Big]^2 = 0,}{lim E[(S - E S)/sqrt(V S) - (Stilde - E Stilde)/sqrt(V Stilde)]^2 = 0,}
+\deqn{\lim_n E\Big[\frac{S - E(S)}{\sqrt{V(S)}} - \frac{\tilde S - E(\tilde
+S)}{\sqrt{V(\tilde S)}}\Big]^2 = 0,}{lim E[(S - E S)/sqrt(V S) - (Stilde - E
+Stilde)/sqrt(V Stilde)]^2 = 0,}
 and likewise for \code{W} and \code{Wtilde}.
 }
 \details{

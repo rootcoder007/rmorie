@@ -34,7 +34,8 @@ A list with \code{delta}, the gradient with respect to this
 network's input, and \code{grads}, the accumulated parameter gradients.
 }
 \description{
-A step of the propinf_native implementation. Called by \code{.propinf_deepsets_backward}, \code{.propinf_train_vector_meta}.
+A step of the propinf_native implementation. Called by
+\code{.propinf_deepsets_backward}, \code{.propinf_train_vector_meta}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -15,7 +15,8 @@
 The value of \code{v}, as built in the body.
 }
 \description{
-A step of the helpers_ot implementation. Called by \code{Otbar}, \code{Otbarfree}, \code{Otbreg} and 9 others in the module.
+A step of the helpers_ot implementation. Called by \code{Otbar}, \code{Otbarfree},
+\code{Otbreg} and 9 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

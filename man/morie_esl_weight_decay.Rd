@@ -20,7 +20,7 @@ List with \code{penalty}, \code{gradient}, \code{objective}, \code{effective_lam
 }
 \description{
 The penalty is written \code{lambda * sum(w^2)}, so the gradient is
-\code{2 * lambda * w} -- twice what frameworks using the \code{lambda/2} convention
+\verb{2 &#42; lambda &#42; w} -- twice what frameworks using the \code{lambda/2} convention
 apply for the same nominal lambda. The gradient is returned explicitly so
 the convention in use is visible rather than assumed.
 }

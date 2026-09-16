@@ -17,7 +17,8 @@
 The value of \code{.morie_normal_quantile}.
 }
 \description{
-A step of the rng_native implementation. Called by \code{.morie_random_multivariate_normal}, \code{.schab_simulate_unconditional}.
+A step of the rng_native implementation. Called by
+\code{.morie_random_multivariate_normal}, \code{.schab_simulate_unconditional}.
 See the file header for the source the module follows.
 source it follows.
 }

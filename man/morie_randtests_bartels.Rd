@@ -14,7 +14,7 @@ morie_randtests_bartels(x, ...)
 \code{alternative}, \code{pvalue}).}
 }
 \value{
-A list with \code{$method =
+A list with \eqn{$method =
   "randtests::bartels.rank.test"} and \code{$raw} (an
 \code{htest} object).
 }

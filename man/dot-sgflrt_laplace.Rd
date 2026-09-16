@@ -23,7 +23,8 @@ effect}
 \item{disp}{Passed to \code{.sgflrt_family}. Defaults to \code{1}.}
 }
 \value{
-A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta}, \code{loglik}, \code{w}, \code{L}, \code{v}.
+A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta},
+\code{loglik}, \code{w}, \code{L}, \code{v}.
 }
 \description{
 is carried as u = Lv with LL\' = Sigma and v ~ N(0, I), so the

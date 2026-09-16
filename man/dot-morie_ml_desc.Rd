@@ -15,7 +15,8 @@
 The value of \code{seen}, as built in the body.
 }
 \description{
-A step of the causal_molak implementation. Called by \code{.morie_ml_blocked}, \code{morie_docalc}.
+A step of the causal_molak implementation. Called by \code{.morie_ml_blocked},
+\code{morie_docalc}.
 See the file header for the source the module follows.
 source it follows.
 }

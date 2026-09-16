@@ -25,7 +25,8 @@
 A list with \code{slope}, \code{coef}, \code{n}.
 }
 \description{
-A step of the bnskt2_native implementation. Called by \code{covariate_kink_test}, \code{density_kink_test}, \code{local_polynomial_slope} and 1 others in the module.
+A step of the bnskt2_native implementation. Called by \code{covariate_kink_test},
+\code{density_kink_test}, \code{local_polynomial_slope} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

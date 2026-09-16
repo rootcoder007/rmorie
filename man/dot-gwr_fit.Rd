@@ -20,7 +20,8 @@
 \item{adaptive}{A flag; the body branches on it.}
 }
 \value{
-A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid}, \code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
+A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid},
+\code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
 }
 \description{
 A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}, \code{morie_gwrcal}.

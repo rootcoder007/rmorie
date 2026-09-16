@@ -15,7 +15,8 @@
 The value of \code{x}, as built in the body.
 }
 \description{
-A step of the tipsne_native implementation. Called by \code{.tipsne_inv_from_chol}, \code{morie_tipsne_ancova}.
+A step of the tipsne_native implementation. Called by \code{.tipsne_inv_from_chol},
+\code{morie_tipsne_ancova}.
 See the file header for the source the module follows.
 source it follows.
 }

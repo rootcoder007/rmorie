@@ -22,8 +22,6 @@ morie_bnd_lp(
 
 \item{bounds}{list of \code{c(lo, hi)} per coordinate; \verb{[0, 1]} each
 when \code{NULL} -- the natural range for response probabilities.}
-
-
 }
 \value{
 list: lower, upper, width, argmin, argmax, feasible,
@@ -31,7 +29,7 @@ bounded, sharp, k, n_inequalities, n_equalities, method.
 }
 \description{
 The computational engine of Mogstad, Santos and Torgovitsky
-(2018): when the object of interest is a linear functional \verb{c\'x}
+(2018): when the object of interest is a linear functional \verb{c'x}
 and everything the data and assumptions say about \code{x} is linear,
 the identified set for the target is
 \verb{[min c'x, max c'x]} over the feasible polytope -- and both ends

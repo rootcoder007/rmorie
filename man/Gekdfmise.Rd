@@ -21,18 +21,21 @@ morie_fauzi_thm2_4_mise_brdkdfe(n, h, a, biasint, varint, r1 = NULL, r2 = NULL)
 \item{varint}{\verb{int F(x)(1 - F(x)) dx}.}
 
 \item{r1, r2}{Kernel constants; default to Gaussian \code{r1} and \code{r2(a)}.}
-
 }
 \value{
-Named list with \code{mise}, \code{biasterm}, \code{varterm}, \code{smoothgain}, \code{h}, \code{a}, \code{method}.
+Named list with \code{mise}, \code{biasterm}, \code{varterm}, \code{smoothgain}, \code{h},
+\code{a}, \code{method}.
 }
 \description{
 Theorem 2.4:
-\deqn{\mathrm{MISE}(\tilde F_X) = h^8 a^4\int\Big[\frac{b_2^2 - 2b_4F}{2F}\Big]^2 dx + \frac1n\int F(1-F)dx - \frac hn\Big[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big] + o(h^8 + h/n).}{MISE(Ftilde) = h^8 a^4 int [(b2^2 - 2 b4 F)/(2F)]^2 dx + (1/n) int F(1-F) dx - (h/n)[2(a^4+1)/(a^2-1)^2 r1 + r2] + o(h^8 + h/n).}
+\deqn{\mathrm{MISE}(\tilde F_X) = h^8 a^4\int\Big[\frac{b_2^2 - 2b_4F}{2F}\Big]^2 dx
++ \frac1n\int F(1-F)dx - \frac hn\Big[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big] +
+o(h^8 + h/n).}{MISE(Ftilde) = h^8 a^4 int [(b2^2 - 2 b4 F)/(2F)]^2 dx + (1/n) int
+F(1-F) dx - (h/n)[2(a^4+1)/(a^2-1)^2 r1 + r2] + o(h^8 + h/n).}
 }
 \details{
 Compare the plain KDFE's MISE from Sec. 2.1, which leads with
-\verb{h^4 mu2^2 R(f\')/4}: the bias term has gone from \code{h^4} to \code{h^8} while the
+\verb{h^4 mu2^2 R(f')/4}: the bias term has gone from \code{h^4} to \code{h^8} while the
 variance terms are unchanged in order. That is the claim in one line.
 
 The third term has lost its \code{f(x)} factor relative to (2.3): integrating

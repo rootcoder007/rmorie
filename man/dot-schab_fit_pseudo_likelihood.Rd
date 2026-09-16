@@ -36,7 +36,9 @@
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \value{
-A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta}, \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged}, \code{link}, \code{family}.
+A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta},
+\code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged},
+\code{link}, \code{family}.
 }
 \description{
 A step of the schab_glmm_shared implementation. Called by \code{sppql}.

@@ -169,6 +169,7 @@ the R and Python sides. The optional Linux-kernel adjuncts under
 Useful links:
 \itemize{
   \item \url{https://github.com/rootcoder007/rmorie}
+  \item \url{https://rootcoder007.github.io/rmorie/}
   \item Report bugs at \url{https://github.com/rootcoder007/rmorie/issues}
 }
 

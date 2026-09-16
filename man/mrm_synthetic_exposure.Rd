@@ -28,7 +28,7 @@ homelessness rates of police force, LGBTQ stop-and-frisk rates,
 undocumented-immigrant ICE-contact rates -- any "rate per hidden
 subpopulation" estimand.
 
-The returned offset is suitable for use as the \code{offset=
+The returned offset is suitable for use as the \eqn{offset=
 log(exposure)} argument in a Poisson / negative-binomial GLM that
 counts trait-specific events.
 }

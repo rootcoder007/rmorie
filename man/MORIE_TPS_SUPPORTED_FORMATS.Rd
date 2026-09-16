@@ -3,7 +3,9 @@
 \name{MORIE_TPS_SUPPORTED_FORMATS}
 \alias{MORIE_TPS_SUPPORTED_FORMATS}
 \title{Format names that \code{morie_tps_load()} knows how to dispatch}
-
+\usage{
+MORIE_TPS_SUPPORTED_FORMATS
+}
 \description{
 Format names that \code{morie_tps_load()} knows how to dispatch
 }

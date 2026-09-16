@@ -26,8 +26,6 @@ columns.}
 
 \item{centroid_lat_col, centroid_lon_col}{Names of centroid columns
 when \code{polygons} is a plain data.frame.}
-
-
 }
 \value{
 A named list with \code{I_xy}, \code{n}, \code{x_col},
@@ -39,7 +37,9 @@ attributes: measures the cross-correlation between attribute X at
 location i and attribute Y at neighbouring locations j.
 }
 \details{
-\deqn{I_{xy} = \frac{n}{S_0}\,\frac{\sum_i \sum_j w_{ij}\, z^x_i\, z^y_j}{\sqrt{\sum_i (z^x_i)^2 \cdot \sum_i (z^y_i)^2}}}{I_xy = (n)/(S_0) frac{sum_i sum_j w_ij z^x_i z^y_j}{sqrt(sum_i (z^x_i)^2 * sum_i (z^y_i)^2)}}
+\deqn{I_{xy} = \frac{n}{S_0}\,\frac{\sum_i \sum_j w_{ij}\, z^x_i\, z^y_j}{\sqrt{\sum_i
+(z^x_i)^2 \cdot \sum_i (z^y_i)^2}}}{I_xy = (n)/(S_0) frac{sum_i sum_j w_ij z^x_i
+z^y_j}{sqrt(sum_i (z^x_i)^2 * sum_i (z^y_i)^2)}}
 
 Polygon centroids and k-NN weights are constructed exactly as in
 \code{\link{morie_tps_polygon_morans_i}}; distances use the

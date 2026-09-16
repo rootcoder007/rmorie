@@ -16,8 +16,6 @@ densities.}
 \item{tol}{Relative convergence tolerance on \eqn{\log r}.}
 
 \item{max_iter}{Maximum iterations.}
-
-
 }
 \value{
 A list with \code{ratio}, \code{log_ratio},

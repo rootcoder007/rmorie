@@ -13,7 +13,9 @@
 A matrix, from \code{matrix}.
 }
 \description{
-A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}, \code{morie_se3T_invariant_features}, \code{morie_se3T_se3_attention}.
+A step of the se3T_native implementation. Called by
+\code{morie_se3T_check_equivariance}, \code{morie_se3T_invariant_features},
+\code{morie_se3T_se3_attention}.
 See the file header for the source the module follows.
 source it follows.
 }

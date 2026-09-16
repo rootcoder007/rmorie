@@ -22,7 +22,8 @@
 
 \item{interpretation}{Carried through into a list the body builds. Defaults to \code{""}.}
 
-\item{warnings}{Coerced to character by the body, with \code{as.character}. Defaults to \code{character()}.}
+\item{warnings}{Coerced to character by the body, with \code{as.character}. Defaults
+to \code{character()}.}
 
 \item{payload}{A vector; its length is taken and its elements indexed. Defaults to \code{list()}.}
 }
@@ -30,12 +31,10 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-\subsection{Public entry point: cluster fingerprints by exclusion sphere.}{
-
+Public entry point: cluster fingerprints by exclusion sphere.
 Returns a rich-result-shaped named list whose \verb{$payload} carries the
 fields the Python arm puts in its RichResult payload, mirroring the
 key set exactly. The list itself (and \verb{$payload}) is also a plain
 named list with the same names, so callers can use \code{result$size} or
 \code{result$payload$size} interchangeably, just like the Python arm.
-}
 }

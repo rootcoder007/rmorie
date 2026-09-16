@@ -8,8 +8,6 @@ morie_geron_xception(n_classes = 1000, in_channels = 3, input_size = 299)
 }
 \arguments{
 \item{n_classes, in_channels, input_size}{As in Python original.}
-
-
 }
 \value{
 list with layers, total_params, trainable_params, non_trainable_params,
@@ -18,8 +16,8 @@ standard_conv_params, savings_ratio, output_shape, final_map, estimate, n, metho
 }
 \description{
 Resolves the entry/middle(x8)/exit flow into concrete layers, shapes
-and parameter counts; separable convs cost k*k*c_in + c_in*c_out,
-batch norm 2*C trainable + 2*C non-trainable per layer.
+and parameter counts; separable convs cost k\*k\*c\_in + c\_in\*c\_out,
+batch norm 2\*C trainable + 2\*C non-trainable per layer.
 }
 \examples{
 morie_geron_xception()

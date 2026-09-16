@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants}, \code{.mor_fp_morgan}, \code{morie_rdkfp}.
+A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants},
+\code{.mor_fp_morgan}, \code{morie_rdkfp}.
 See the file header for the source the module follows.
 source it follows.
 }

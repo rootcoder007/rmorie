@@ -17,7 +17,6 @@ morie_geron_glorot_xavier_init(
 \item{distribution}{"normal" or "uniform".}
 
 \item{seed}{LCG seed.}
-
 }
 \value{
 List with \code{weights}, \code{target_variance}, \code{achieved_variance},

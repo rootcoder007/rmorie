@@ -17,7 +17,8 @@ morie_fairness_simulate_biased_crime_data(
 \arguments{
 \item{n}{Number of records.}
 
-\item{groups}{Character vector of group labels (the first entry is treated as the reference group).}
+\item{groups}{Character vector of group labels (the first entry is treated as the
+reference group).}
 
 \item{group_props}{Optional sampling proportions.}
 

@@ -22,7 +22,8 @@ morie_survival_hr(beta, se, alpha = 0.05, names = NULL)
 list with the hazard ratios, the interval bounds, and the z statistics and p-values.
 }
 \description{
-HR = exp(beta) with the interval formed on the LOG scale and exponentiated, so it is asymmetric about the hazard ratio and never crosses zero.
+HR = exp(beta) with the interval formed on the LOG scale and exponentiated, so it is
+asymmetric about the hazard ratio and never crosses zero.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

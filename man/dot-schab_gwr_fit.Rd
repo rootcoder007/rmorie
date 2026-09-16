@@ -27,10 +27,15 @@
 \item{adaptive}{Passed to \code{.schab_local_weights}. Defaults to \code{FALSE}.}
 }
 \value{
-A list with \code{se_params}, \code{sigma2_gwr}, \code{edf_resid}, \code{v1}, \code{v2}, \code{params}, \code{fitted}, \code{resid}, \code{S}, \code{tr_S}, \code{tr_STS}, \code{effective_parameters}, \code{rss}, \code{sigma2}, \code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel}, \code{adaptive}, \code{n_rank_deficient}.
+A list with \code{se_params}, \code{sigma2_gwr}, \code{edf_resid}, \code{v1},
+\code{v2}, \code{params}, \code{fitted}, \code{resid}, \code{S}, \code{tr_S},
+\code{tr_STS}, \code{effective_parameters}, \code{rss}, \code{sigma2},
+\code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel},
+\code{adaptive}, \code{n_rank_deficient}.
 }
 \description{
-A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{.schab_mgwr_backfit}, \code{spgwrb}.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion},
+\code{.schab_mgwr_backfit}, \code{spgwrb}.
 See the file header for the source the module follows.
 the source it follows.
 }

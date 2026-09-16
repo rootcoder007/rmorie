@@ -35,7 +35,6 @@ Vargpc(
 \item{step_size}{Initial step, positive.}
 
 \item{jitter}{Added to the diagonal of K_mm.}
-
 }
 \value{
 List with \code{prob}, \code{pred}, \code{fit_prob},

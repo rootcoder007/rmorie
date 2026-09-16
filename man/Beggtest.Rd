@@ -29,5 +29,6 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Beggtest(V, V)
 }
 \references{
-Begg and Mazumdar (1994), Biometrics 50:1088-1101.  Paywalled; the coded form was read from Viechtbauer's metafor, R/ranktest.r, the reference implementation.
+Begg and Mazumdar (1994), Biometrics 50:1088-1101.  Paywalled; the coded
+form was read from Viechtbauer's metafor, R/ranktest.r, the reference implementation.
 }

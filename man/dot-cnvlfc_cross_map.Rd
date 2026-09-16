@@ -23,17 +23,20 @@
 
 \item{tau}{Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.}
 
-\item{library}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{library}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.}
 
 \item{exclude}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 }
 \value{
-A list with \code{rho}, \code{observed}, \code{predicted}, \code{n_predicted}, \code{library}, \code{E}, \code{tau}.
+A list with \code{rho}, \code{observed}, \code{predicted}, \code{n_predicted},
+\code{library}, \code{E}, \code{tau}.
 }
 \description{
-A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{cnvlfc_cross_map}.
+A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm},
+\code{cnvlfc_cross_map}.
 See the file header for the source the module follows.
 source it follows.
 }

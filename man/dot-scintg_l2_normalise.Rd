@@ -13,7 +13,8 @@
 The value of \code{sweep}.
 }
 \description{
-A step of the scintg_native implementation. Called by \code{.scintg_kmeans_init}, \code{.scintg_maximum_diversity_clustering}.
+A step of the scintg_native implementation. Called by \code{.scintg_kmeans_init},
+\code{.scintg_maximum_diversity_clustering}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -28,7 +28,9 @@
 \item{recovery}{Coerced to logical by the body, with \code{as.logical}.}
 }
 \value{
-A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu}, \code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation}, \code{kl}, \code{delta}, \code{method}.
+A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu},
+\code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation},
+\code{kl}, \code{delta}, \code{method}.
 }
 \description{
 A step of the safrl_native implementation. Called by \code{morie_safrl}.

@@ -21,7 +21,8 @@
 
 \item{z}{A vector; its length is taken and its elements indexed.}
 
-\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
+\item{n_space_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults
+to \code{10L}.}
 
 \item{n_time_bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 
@@ -30,7 +31,8 @@
 \item{max_time}{The body requires: \code{max_dist} and \code{max_time} must be positive.}
 }
 \value{
-A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags}, \code{space_edges}, \code{time_edges}.
+A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags},
+\code{space_edges}, \code{time_edges}.
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstvg}.

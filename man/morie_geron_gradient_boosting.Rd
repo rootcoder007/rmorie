@@ -17,10 +17,6 @@ morie_geron_gradient_boosting(
 \item{X, y}{Data.}
 
 \item{n_estimators, learning_rate, max_depth, loss}{Config.}
-
-
-
-
 }
 \value{
 List with \code{predictions}, \code{init}, \code{trees}, \code{loss_history}, \code{train_mse}, \code{monotone}.

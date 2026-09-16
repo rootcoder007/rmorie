@@ -18,7 +18,7 @@ A list with components \code{flag} (0/1 per observation),
 \code{estimate} (= \code{n_out}) and \code{method}.
 }
 \description{
-Declare an observation an outlier when \code{|x - mean(x)| / sd(x) >
+Declare an observation an outlier when \eqn{|x - mean(x)| / sd(x) >
 crit}, with \code{crit = 2} by default.
 }
 \details{

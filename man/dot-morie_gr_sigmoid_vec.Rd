@@ -13,7 +13,9 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_gru_cell}, \code{morie_geron_logistic_regression_probability}, \code{morie_geron_lstm_cell} and 6 others in the module.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_gru_cell}, \code{morie_geron_logistic_regression_probability},
+\code{morie_geron_lstm_cell} and 6 others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

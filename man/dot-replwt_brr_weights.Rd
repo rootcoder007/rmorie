@@ -7,12 +7,14 @@
 .replwt_brr_weights(d, fay = 0)
 }
 \arguments{
-\item{d}{A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.}
+\item{d}{A list; the body reads \code{$psu_units}, \code{$stratum_order},
+\code{$stratum_psus}, \code{$weights} from it.}
 
 \item{fay}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 }
 \value{
-A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{hadamard_order}, \code{fay}, \code{method}.
+A list with \code{weights}, \code{scale}, \code{n_replicates},
+\code{hadamard_order}, \code{fay}, \code{method}.
 }
 \description{
 A step of the replwt_native implementation. Called by \code{morie_replwt}.

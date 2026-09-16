@@ -21,7 +21,10 @@ Named list with \code{mean}, \code{variance}, \code{se}, \code{projvar}, \code{n
 }
 \description{
 Sec. 5.3.1. With \verb{Wtilde = n(n+1)/2 - sum_\{i<=j\} K(-(X_i+X_j)/(2h))},
-\deqn{E_\theta(\tilde W) = \frac{n(n+1)}{2}\{G(\theta) + O(h^2)\},\quad V_\theta(\tilde W) = n(n+1)^2\Big\{\int F^2(u+2\theta)f(u)du - G^2(\theta) + O(h^2)\Big\},}{E(Wtilde) = n(n+1)/2 {G(theta) + O(h^2)}, V(Wtilde) = n(n+1)^2 {int F^2(u + 2 theta) f(u) du - G(theta)^2 + O(h^2)},}
+\deqn{E_\theta(\tilde W) = \frac{n(n+1)}{2}\{G(\theta) + O(h^2)\},\quad
+V_\theta(\tilde W) = n(n+1)^2\Big\{\int F^2(u+2\theta)f(u)du - G^2(\theta) +
+O(h^2)\Big\},}{E(Wtilde) = n(n+1)/2 {G(theta) + O(h^2)}, V(Wtilde) = n(n+1)^2 {int
+F^2(u + 2 theta) f(u) du - G(theta)^2 + O(h^2)},}
 with \code{G} the half-sum distribution function.
 }
 \details{
@@ -47,6 +50,7 @@ Verified against Maesono, Moriyama and Lu (2018), AISM 70(5):969-982
 Swilmom(n = 10)
 }
 \references{
-Fauzi and Maesono (2023), Sec. 5.3.1; Maesono, Moriyama and Lu (2018), AISM 70:969-982.
+Fauzi and Maesono (2023), Sec. 5.3.1; Maesono, Moriyama and Lu (2018),
+AISM 70:969-982.
 }
 \keyword{internal}

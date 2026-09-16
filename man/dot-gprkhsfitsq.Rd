@@ -14,7 +14,8 @@
 \item{lam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \value{
-A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals}, \code{loss}, \code{penalty}, \code{objective}.
+A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals},
+\code{loss}, \code{penalty}, \code{objective}.
 }
 \description{
 A step of the helpers_gp_core implementation. Called by \code{Msm128}.

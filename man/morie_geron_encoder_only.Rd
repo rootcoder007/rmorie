@@ -28,9 +28,6 @@ morie_geron_encoder_only(
 \item{n_segments}{Segment embedding rows.}
 
 \item{n_classes}{Optional CLS head.}
-
-
-
 }
 \value{
 List with \code{total_params}, \code{block_params}, \code{embedding_params},

@@ -26,7 +26,8 @@
 \item{min_child}{Numeric; combined arithmetically in the body.}
 }
 \value{
-A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain}, \code{left}, \code{right}.
+A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain},
+\code{left}, \code{right}.
 }
 \description{
 A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}.

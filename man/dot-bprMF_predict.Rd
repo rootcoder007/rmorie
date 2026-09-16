@@ -19,7 +19,8 @@
 A numeric value.
 }
 \description{
-A step of the bprMF_native implementation. Called by \code{.bprMF_auc}, \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module.
+A step of the bprMF_native implementation. Called by \code{.bprMF_auc},
+\code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

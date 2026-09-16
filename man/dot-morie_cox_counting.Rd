@@ -30,13 +30,16 @@
 
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-09}.}
 
-\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
-A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter}, \code{n_events}.
+A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter},
+\code{n_events}.
 }
 \description{
-A step of the recur_native implementation. Called by \code{Agrec}, \code{Pwpgt}, \code{Shfrm} and 1 others in the module.
+A step of the recur_native implementation. Called by \code{Agrec}, \code{Pwpgt},
+\code{Shfrm} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

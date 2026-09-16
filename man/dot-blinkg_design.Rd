@@ -17,7 +17,8 @@
 The value of \code{d}, as built in the body.
 }
 \description{
-A step of the blinkg_native implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}.
+A step of the blinkg_native implementation. Called by \code{morie_blinkg_scan},
+\code{morie_blinkg_select}.
 See the file header for the source the module follows.
 source it follows.
 }

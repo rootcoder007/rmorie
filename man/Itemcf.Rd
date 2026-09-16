@@ -14,7 +14,6 @@ Itemcf(R, u = 0, i = 0, k_nn = 2, similarity = "adjusted")
 \item{k_nn}{neighbourhood size.}
 
 \item{similarity}{"adjusted" or "cosine".}
-
 }
 \value{
 list: estimate, prediction, neighbours, sims, method.

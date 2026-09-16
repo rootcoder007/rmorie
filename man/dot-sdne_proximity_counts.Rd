@@ -10,7 +10,8 @@
 \item{adjacency}{Passed to \code{.sdne_mat}.}
 }
 \value{
-A list with \code{first_order_pairs}, \code{second_order_pairs}, \code{total_pairs}, \code{density}, \code{ratio}, \code{note}.
+A list with \code{first_order_pairs}, \code{second_order_pairs},
+\code{total_pairs}, \code{density}, \code{ratio}, \code{note}.
 }
 \description{
 A step of the sdne_native implementation. No other function in the package calls it.

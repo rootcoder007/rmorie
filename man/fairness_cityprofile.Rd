@@ -14,7 +14,7 @@ city \code{data.frame} onto the canonical schema so the audit code
 never needs to know which city the data came from.
 }
 \details{
-\subsection{Functions}{
+Functions
 
 \itemize{
 \item \code{\link{morie_fairness_city_profile}}: constructor for a
@@ -27,6 +27,5 @@ profile by case-insensitive name.
 profile names.
 \item \code{\link{morie_fairness_apply_profile}}: rename a
 \code{data.frame} onto the canonical schema.
-}
 }
 }

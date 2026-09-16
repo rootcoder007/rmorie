@@ -17,7 +17,8 @@
 The value of \code{W}, as built in the body.
 }
 \description{
-A step of the sp_fill implementation. Called by \code{LisaClust}, \code{LisaI}, \code{MantelM2} and 7 others in the module.
+A step of the sp_fill implementation. Called by \code{LisaClust}, \code{LisaI},
+\code{MantelM2} and 7 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -11,8 +11,7 @@ interval, effect size, point estimate, sample size and a free-form
 \code{extra} list, so downstream code can post-process programmatically.
 }
 \details{
-\subsection{Categories}{
-
+Categories
 \itemize{
 \item Location: \code{one_sample_ttest}, \code{two_sample_ttest},
 \code{welch_ttest}, \code{paired_ttest}
@@ -40,6 +39,5 @@ interval, effect size, point estimate, sample size and a free-form
 \item Convenience: \code{normality_suite},
 \code{variance_equality_suite}, \code{correlation_matrix},
 \code{auto_test}
-}
 }
 }

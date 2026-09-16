@@ -21,7 +21,8 @@ Named list with \code{ok}, \code{upper}, \code{lower}, \code{hbook}, \code{ratio
 }
 \description{
 Eq. (3.8): the expansion is proved under
-\deqn{h = o(n^{-1/4})\quad\text{and}\quad \lim_n (n^{1/4}h)^{-k}n^{-\beta} = 0}{h = o(n^-1/4) and lim (n^1/4 h)^-k n^-beta = 0}
+\deqn{h = o(n^{-1/4})\quad\text{and}\quad \lim_n (n^{1/4}h)^{-k}n^{-\beta} = 0}{h =
+o(n^-1/4) and lim (n^1/4 h)^-k n^-beta = 0}
 for every \code{beta > 0} and integer \code{k}.
 }
 \details{

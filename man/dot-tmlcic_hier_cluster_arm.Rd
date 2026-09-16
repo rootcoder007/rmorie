@@ -21,7 +21,8 @@
 
 \item{ridge}{Numeric; passed to \code{max}.}
 
-\item{known_g}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{known_g}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
 A list with \code{psi}, \code{D}, \code{info}.

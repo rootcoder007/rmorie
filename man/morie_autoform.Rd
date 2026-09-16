@@ -12,8 +12,6 @@ morie_autoform(q, k, v, kernel = 3L, c = 1)
 \item{kernel}{decomposition kernel size}
 
 \item{c}{the Topk constant}
-
-
 }
 \value{
 list(out, taus, weights, k, L, r1, outmean, outmax,

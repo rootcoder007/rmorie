@@ -28,7 +28,7 @@ bound whenever selection rates differ by stratum, and reproduces the
 pooled bound when they do not.
 }
 \details{
-Formula, per stratum: \code{[E(y | D = 1, x) P(D = 1 | x) +
+Formula, per stratum: \eqn{[E(y | D = 1, x) P(D = 1 | x) +
 y_0 P(D = 0 | x), E(y | D = 1, x) P(D = 1 | x) + y_1 P(D = 0 | x)]},
 averaged with weights \code{P(x)}.
 }

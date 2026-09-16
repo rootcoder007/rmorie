@@ -11,7 +11,8 @@
 
 \item{y_true}{Passed to \code{.gpflat}.}
 
-\item{n_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{n_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 
 \item{halved}{A flag; the body branches on it. Defaults to \code{FALSE}.}
 }

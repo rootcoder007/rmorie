@@ -15,7 +15,9 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_bleu_score}, \code{morie_kamath_ch8_rouge_n}, \code{morie_kamath_rouge_n}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_bleu_score}, \code{morie_kamath_ch8_rouge_n},
+\code{morie_kamath_rouge_n}.
 See the file header for the source the module follows.
 for the source it follows.
 }

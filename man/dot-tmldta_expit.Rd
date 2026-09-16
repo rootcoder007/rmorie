@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the tmldta_native implementation. Called by \code{.fit_g}, \code{.fit_q}, \code{split_specific_tmle}.
+A step of the tmldta_native implementation. Called by \code{.fit_g}, \code{.fit_q},
+\code{split_specific_tmle}.
 See the file header for the source the module follows.
 source it follows.
 }

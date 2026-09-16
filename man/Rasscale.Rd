@@ -22,5 +22,8 @@ List with \code{M}, \code{u}, \code{v}, \code{row_error}, \code{col_error}, \cod
 Formula: M = diag(u) K diag(v) with u <- r / (K v) and v <- c / (K' u), alternated
 }
 \references{
-Bregman (1967), The relaxation method of finding the common point of convex sets, USSR Computational Mathematics and Mathematical Physics 7:200-217. Not held locally; alternating diagonal scaling to fixed margins (RAS, Sinkhorn-Knopp) is the standard published form of the method.
+Bregman (1967), The relaxation method of finding the common point of
+convex sets, USSR Computational Mathematics and Mathematical Physics 7:200-217. Not
+held locally; alternating diagonal scaling to fixed margins (RAS, Sinkhorn-Knopp) is
+the standard published form of the method.
 }

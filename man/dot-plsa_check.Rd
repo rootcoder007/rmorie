@@ -13,7 +13,8 @@
 A list with \code{N}, \code{D}, \code{V}.
 }
 \description{
-A step of the plsa_native implementation. Called by \code{.plsa_e_step}, \code{.plsa_log_likelihood}, \code{.plsa_m_step} and 2 others in the module.
+A step of the plsa_native implementation. Called by \code{.plsa_e_step},
+\code{.plsa_log_likelihood}, \code{.plsa_m_step} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

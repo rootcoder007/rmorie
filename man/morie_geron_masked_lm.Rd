@@ -27,7 +27,8 @@ morie_geron_masked_lm(
 \item{mask_token}{Substituted value.}
 }
 \value{
-List with loss, baseline_loss, perplexity, masked_positions, targets, probabilities, n_masked, estimate, n, method.
+List with loss, baseline_loss, perplexity, masked_positions, targets,
+probabilities, n_masked, estimate, n, method.
 }
 \description{
 Mask positions via the shared LCG stream, not numpy PCG64 choice.

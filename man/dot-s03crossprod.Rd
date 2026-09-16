@@ -13,7 +13,8 @@
 The value of \code{.s03matmul}.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.bkw_influence}, \code{.btres_xtxinv}, \code{.ch_ols_se} and 7 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.bkw_influence},
+\code{.btres_xtxinv}, \code{.ch_ols_se} and 7 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

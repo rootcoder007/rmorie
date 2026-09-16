@@ -15,14 +15,17 @@
 
 \item{tau}{Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.}
 
-\item{lib_sizes}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{lib_sizes}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 
 \item{seed}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.}
 
 \item{exclude}{Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.}
 }
 \value{
-A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x}, \code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict}, \code{method}.
+A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x},
+\code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict},
+\code{method}.
 }
 \description{
 A step of the cnvlfc_native implementation. Called by \code{cnvlfc_ccm}.

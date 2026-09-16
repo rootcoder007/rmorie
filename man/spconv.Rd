@@ -14,7 +14,6 @@ spconv(kernel = NULL, h = NULL, sigma2_x = 1, half_width = 5, n = 40001)
 \item{sigma2_x}{White-noise variance, positive.}
 
 \item{half_width, n}{Quadrature half-width and node count.}
-
 }
 \value{
 Named list: h, covariance, correlation, variance.

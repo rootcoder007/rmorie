@@ -13,7 +13,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the vepan_native implementation. Called by \code{.vepan_splice_terms}, \code{morie_vepan_annotate}.
+A step of the vepan_native implementation. Called by \code{.vepan_splice_terms},
+\code{morie_vepan_annotate}.
 See the file header for the source the module follows.
 source it follows.
 }

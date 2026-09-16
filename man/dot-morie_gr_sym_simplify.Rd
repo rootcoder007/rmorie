@@ -13,7 +13,8 @@
 A vector, from \code{c}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_symbolic_differentiation}.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_symbolic_differentiation}.
 See the file header for the source the module follows.
 for the source it follows.
 }

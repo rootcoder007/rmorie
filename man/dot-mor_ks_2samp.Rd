@@ -12,7 +12,8 @@
 \item{b}{Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \value{
-A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus}, \code{d_minus}, \code{n_ties}.
+A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus},
+\code{d_minus}, \code{n_ties}.
 }
 \description{
 A step of the over_native implementation. Called by \code{morie_over}.

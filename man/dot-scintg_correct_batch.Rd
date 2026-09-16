@@ -15,7 +15,8 @@
 
 \item{lam}{Numeric; combined arithmetically in the body. Defaults to \code{1}.}
 
-\item{reference}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{reference}{Optional; may be \code{NULL}. A vector; its length is taken and its
+elements indexed.}
 }
 \value{
 A list with \code{Z}, \code{W}, \code{batches}.

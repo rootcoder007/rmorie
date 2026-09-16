@@ -17,7 +17,6 @@ sorted unique x).}
 \item{bandwidth}{Kernel half-width (default: half the x range).}
 
 \item{kernel}{"tricube" (default), "epanechnikov" or "gaussian".}
-
 }
 \value{
 A list with elements \code{fitted}, \code{x0},

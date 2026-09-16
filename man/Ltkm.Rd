@@ -19,10 +19,12 @@ morie_survival_left_truncated_km(entry, time, event, alpha = 0.05)
 \item{alpha}{significance level for the interval.}
 }
 \value{
-list with the survival estimate, its standard error, the confidence interval and the risk-set sizes.
+list with the survival estimate, its standard error, the confidence interval
+and the risk-set sizes.
 }
 \description{
-The only change from the ordinary estimator is the risk set: a subject enters at \code{entry} rather than at time zero, so it is at risk only over (entry, time].
+The only change from the ordinary estimator is the risk set: a subject enters at
+\code{entry} rather than at time zero, so it is at risk only over (entry, time].
 }
 \examples{
 ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
@@ -31,5 +33,6 @@ en <- c(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2)
 Ltkm(en, ST, SE)
 }
 \references{
-Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, Section 3.4.
+Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed.,
+Springer, Section 3.4.
 }

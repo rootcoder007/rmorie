@@ -19,7 +19,8 @@
 The value of \code{as.vector}.
 }
 \description{
-A step of the causal_shared_native implementation. Called by \code{morie_dr_learner}, \code{morie_regime_value}, \code{morie_tmle_ate} and 3 others in the module.
+A step of the causal_shared_native implementation. Called by \code{morie_dr_learner},
+\code{morie_regime_value}, \code{morie_tmle_ate} and 3 others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

@@ -27,15 +27,13 @@ morie_causal_survival_blp(
 \item{horizon}{Restriction time; default the 90th percentile of \code{time}.}
 
 \item{n_trees, min_leaf, seed}{Forest hyperparameters.}
-
-
 }
 \value{
 List with \code{alpha}, \code{beta}, \code{se_beta}, \code{p_value},
 \code{heterogeneous}, \code{ate}, \code{horizon}, \code{n}.
 }
 \description{
-Chains \code{morie_causal_survival_forest()} into \code{morie_hte_blp_test()},
+Chains \code{\link[=morie_causal_survival_forest]{morie_causal_survival_forest()}} into \code{\link[=morie_hte_blp_test]{morie_hte_blp_test()}},
 passing the out-of-bag CATEs and the IPCW-RMST pseudo outcome.
 Mirrors \code{morie.fn.csurv2}.
 }

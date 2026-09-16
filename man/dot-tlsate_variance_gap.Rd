@@ -20,7 +20,8 @@
 \item{psi}{Passed to \code{.tlsate_pate_influence_curve}.}
 }
 \value{
-A list with \code{var_pate}, \code{var_sate}, \code{gap}, \code{var_conditional_effect}, \code{note}.
+A list with \code{var_pate}, \code{var_sate}, \code{gap},
+\code{var_conditional_effect}, \code{note}.
 }
 \description{
 A step of the tlsate_native implementation. No other function in the package calls it.

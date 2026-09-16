@@ -15,8 +15,6 @@ morie_spatial_cross_validation(x, coords, nugget = 0, sill = 1, range_ = 1)
 \item{coords}{Coord matrix.}
 
 \item{nugget, sill, range_}{Exponential-covariance parameters.}
-
-
 }
 \value{
 Named list: estimate (MSPE, RMSPE, MAE, residuals), n, method.

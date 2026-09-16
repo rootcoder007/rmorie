@@ -17,7 +17,8 @@
 A list with \code{y}, \code{d}.
 }
 \description{
-A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt}, \code{Bndnpr} and 6 others in the module.
+A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt},
+\code{Bndnpr} and 6 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

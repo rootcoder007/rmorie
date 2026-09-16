@@ -10,7 +10,7 @@ morie_dcc_multivariate_garch(x)
 \item{x}{Numeric matrix of returns (T x k).}
 }
 \value{
-Named list with \code{a, b, unconditional_correlation,
+Named list with \eqn{a, b, unconditional_correlation,
   conditional_correlation, conditional_variance, loglik, n, k, method}.
 }
 \description{

@@ -15,7 +15,8 @@
 The value of \code{.morie_fsum}.
 }
 \description{
-A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}, \code{.morie_spx_topeigs}, \code{SpecRad} and 1 others in the module.
+A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2},
+\code{.morie_spx_topeigs}, \code{SpecRad} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

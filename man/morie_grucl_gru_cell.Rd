@@ -42,8 +42,6 @@ morie_gru_cell(
 seed from \code{\link{morie_det_rng}("grucl", deterministic_seed)} is
 installed before sampling so Py<->R streams agree.  Overrides
 \code{seed} when set.}
-
-
 }
 \value{
 Named list \code{(h, estimate, z, r, n, method)}.
@@ -54,7 +52,8 @@ R parity for \code{morie.fn.grucl.gru_cell}.  Gates stacked as
 }
 \details{
 \deqn{z, r = \sigma(\ldots); \quad n = \tanh(W_n x + r \odot U_n h); \quad
-      h = (1 - z) \odot n + z \odot h_\text{prev}}{z, r = sigma(...); n = tanh(W_n x + r odot U_n h); h = (1 - z) odot n + z odot h_prev}
+      h = (1 - z) \odot n + z \odot h_\text{prev}}{z, r = sigma(...); n = tanh(W_n x +
+r odot U_n h); h = (1 - z) odot n + z odot h_prev}
 }
 \examples{
 set.seed(1)

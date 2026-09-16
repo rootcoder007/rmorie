@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the xdeep_native implementation. Called by \code{xdeep_hadamard}, \code{xdeep_xdeepfm_score}.
+A step of the xdeep_native implementation. Called by \code{xdeep_hadamard},
+\code{xdeep_xdeepfm_score}.
 See the file header for the source the module follows.
 source it follows.
 }

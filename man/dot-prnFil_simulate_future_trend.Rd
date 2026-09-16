@@ -7,7 +7,8 @@
 .prnFil_simulate_future_trend(fit, t_future, n_sims = 200, seed = 0)
 }
 \arguments{
-\item{fit}{A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k}, \code{$m}, \code{$t} from it.}
+\item{fit}{A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k},
+\code{$m}, \code{$t} from it.}
 
 \item{t_future}{Coerced to numeric by the body, with \code{as.numeric}.}
 

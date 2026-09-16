@@ -17,7 +17,8 @@
 A list with \code{policy}, \code{v}.
 }
 \description{
-A step of the qlearn_native implementation. Called by \code{morie_ddqn}, \code{morie_qlearn}, \code{morie_sarsa}.
+A step of the qlearn_native implementation. Called by \code{morie_ddqn},
+\code{morie_qlearn}, \code{morie_sarsa}.
 See the file header for the source the module follows.
 source it follows.
 }

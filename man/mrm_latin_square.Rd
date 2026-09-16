@@ -10,9 +10,6 @@ mrm_latin_square(data, response_col, row_col, col_col, treatment_col)
 \item{data}{data.frame.}
 
 \item{response_col, row_col, col_col, treatment_col}{Column names.}
-
-
-
 }
 \value{
 Named list with anova, n, k, interpretation.

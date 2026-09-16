@@ -22,7 +22,6 @@ Bymfit(y, E, A, u, v, taus = 1, tauv = 1, X = NULL, beta = NULL)
 \item{X}{Covariates, one row per area, or NULL.}
 
 \item{beta}{Covariate coefficients, or NULL.}
-
 }
 \value{
 List with logpost, loglik, logpu, logpv, rr, fitted, usum,

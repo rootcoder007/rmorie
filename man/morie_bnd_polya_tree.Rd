@@ -24,7 +24,6 @@ morie_bnd_polya_tree(
 
 \item{lo, hi}{support of the base measure; padded data range
 when \code{NULL}.}
-
 }
 \value{
 list: grid, density, mass, tree_depth, alpha, alpha_rule,
@@ -52,6 +51,6 @@ morie_bnd_polya_tree(stats::rnorm(100), grid = c(-1, 0, 1))$density
 \references{
 Lavine (1992), \emph{Annals of Statistics} 20:1222-1235;
 Ferguson (1974), \emph{Annals of Statistics} 2:615-629; Kraft (1964),
-\emph{J. Applied Probability} 1:385-388; Hanson (2006), \emph{JASA}
+\emph{J. Applied Probability} 1:385-388; Hanson (2006), *JASA*
 101:1548-1565.
 }

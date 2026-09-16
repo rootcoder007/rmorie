@@ -13,7 +13,6 @@ Freg(y1, y2, max_lag = NULL)
 The reported shift is the delta such that y2(t + delta) best matches
 y1(t).  It is NEGATIVE when y2 leads y1 and positive when y2 lags it --
 the sign follows from the criterion being evaluated as y1[i] - y2[i+delta].}
-
 }
 \value{
 list: estimate, shift, refinement, criterion, profile, lags, n,

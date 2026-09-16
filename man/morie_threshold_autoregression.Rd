@@ -16,7 +16,7 @@ morie_threshold_autoregression(x, p = 1, d = 1, n_grid = 50)
 \item{n_grid}{Grid size for threshold search. Default 50.}
 }
 \value{
-Named list with \code{threshold, phi_lower, phi_upper, p, d,
+Named list with \eqn{threshold, phi_lower, phi_upper, p, d,
   regime_sizes, sse, n, method}.
 }
 \description{

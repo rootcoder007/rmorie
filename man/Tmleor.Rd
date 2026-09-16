@@ -18,8 +18,6 @@ Tmleor(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95)
 \item{gbound}{Propensity truncation level.}
 
 \item{level}{Confidence level.}
-
-
 }
 \value{
 List with \code{estimate}, \code{log_or}, \code{se_log},

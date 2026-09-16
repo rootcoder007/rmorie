@@ -19,9 +19,11 @@ morie_datasets_ottawa_open_crime_adjacent_layers(offline = TRUE)
 A \code{data.frame} with \code{soda_id}, \code{title}, \code{type},
 \code{search_keyword}.
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 }
 \description{
 Phase 3FFF3. Included snapshot of 157 City-of-Calgary Socrata
@@ -32,6 +34,14 @@ fire, ambulance, traffic, incident, collision, bylaw, 311).
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
 head(d)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+cat_df <- morie_datasets_edmonton_open_crime_adjacent_layers()
+head(cat_df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+cat_df <- morie_datasets_ottawa_open_crime_adjacent_layers()
+head(cat_df)
 \dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_edmonton_open_crime_adjacent_layers()

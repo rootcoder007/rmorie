@@ -10,7 +10,6 @@ morie_greedy_independent_set(ground, independent, weights)
 \item{ground, independent}{The system.}
 
 \item{weights}{Numeric vector aligned with \code{ground}.}
-
 }
 \value{
 A list with \code{set} and \code{weight}.

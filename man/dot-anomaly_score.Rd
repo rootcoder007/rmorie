@@ -11,12 +11,15 @@
 
 \item{layers}{Passed to \code{.log_prob}.}
 
-\item{threshold_quantile}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
+\item{threshold_quantile}{Coerced to numeric by the body, with \code{as.numeric}.
+Defaults to \code{0.95}.}
 
 \item{reference}{Optional; may be \code{NULL}. Passed to \code{.flow_an_to_mat}.}
 }
 \value{
-A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag}, \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced}, \code{log_likelihood}, \code{method}.
+A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag},
+\code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced},
+\code{log_likelihood}, \code{method}.
 }
 \description{
 A step of the flow_an_native implementation. Called by \code{morie_flow_an}.

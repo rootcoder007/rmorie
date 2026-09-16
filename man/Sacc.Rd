@@ -26,7 +26,6 @@ Sacc(
 \item{tol}{Convergence threshold.}
 
 \item{max_eval, max_improve}{Iteration caps.}
-
 }
 \value{
 List with \code{estimate} (soft V*), \code{policy},

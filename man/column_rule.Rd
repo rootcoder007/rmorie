@@ -38,7 +38,6 @@ column_rule(
 \item{regex}{Regex pattern for string columns (or NULL).}
 
 \item{custom}{Optional function \code{(column) -> logical(1)}.}
-
 }
 \value{
 A \code{column_rule} list.

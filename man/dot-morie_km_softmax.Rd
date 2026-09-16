@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_attention_softmax}, \code{morie_kamath_decoder_token_distribution}.
+A step of the kamath_ch2_native implementation. Called by
+\code{morie_kamath_attention_softmax}, \code{morie_kamath_decoder_token_distribution}.
 See the file header for the source the module follows.
 the source it follows.
 }

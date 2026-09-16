@@ -12,7 +12,8 @@
 \item{codebook}{Passed to \code{.vqgenc_as_matrix}.}
 }
 \value{
-A list with \code{indices}, \code{codes}, \code{distance}, \code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.
+A list with \code{indices}, \code{codes}, \code{distance},
+\code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.
 }
 \description{
 A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.

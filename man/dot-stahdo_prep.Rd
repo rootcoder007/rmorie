@@ -13,7 +13,8 @@
 A list with \code{M}, \code{n}, \code{p}.
 }
 \description{
-A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}, \code{.stahdo_stahel_donoho}.
+A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness},
+\code{.stahdo_stahel_donoho}.
 See the file header for the source the module follows.
 source it follows.
 }

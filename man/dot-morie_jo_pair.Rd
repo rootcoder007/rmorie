@@ -15,7 +15,8 @@
 A list with \code{a}, \code{b}.
 }
 \description{
-A step of the ts_joseph implementation. Called by \code{morie_mapets}, \code{morie_pinball}, \code{morie_relmae} and 4 others in the module.
+A step of the ts_joseph implementation. Called by \code{morie_mapets},
+\code{morie_pinball}, \code{morie_relmae} and 4 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

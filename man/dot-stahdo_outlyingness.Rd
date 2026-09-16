@@ -16,7 +16,8 @@
 \item{seed}{Passed to \code{.stahdo_subsample_dirs}. Defaults to \code{1}.}
 }
 \value{
-A list with \code{outlyingness}, \code{n_directions}, \code{n_used}, \code{exhaustive}, \code{directions}.
+A list with \code{outlyingness}, \code{n_directions}, \code{n_used},
+\code{exhaustive}, \code{directions}.
 }
 \description{
 A step of the stahdo_native implementation. Called by \code{.stahdo_stahel_donoho}.

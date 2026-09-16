@@ -13,7 +13,8 @@
 A character value.
 }
 \description{
-A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{.vepan_hgvs_c}, \code{morie_vepan_transcript_sequence}.
+A step of the vepan_native implementation. Called by \code{.vepan_apply},
+\code{.vepan_hgvs_c}, \code{morie_vepan_transcript_sequence}.
 See the file header for the source the module follows.
 source it follows.
 }

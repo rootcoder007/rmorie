@@ -18,14 +18,14 @@ only to check shapes.}
 \item{numerator_model}{Fitted \eqn{f(A_t|A_{t-1})}, subjects by time.}
 
 \item{denominator_model}{Fitted \eqn{f(A_t|H_t)}, subjects by time.}
-
 }
 \value{
 Named list with \code{estimate}, \code{weights}, \code{unstabilized},
 \code{mean_weight}, \code{max_weight}, \code{n}, \code{n_times}, \code{method}.
 }
 \description{
-\deqn{sw_i = \prod_t f(A_{it}|A_{i,t-1}) / f(A_{it}|H_{it})}{sw = prod_t f(A_t|A_(t-1)) / f(A_t|H_t)}
+\deqn{sw_i = \prod_t f(A_{it}|A_{i,t-1}) / f(A_{it}|H_{it})}{sw = prod_t
+f(A_t|A_(t-1)) / f(A_t|H_t)}
 The marginal numerator keeps the weights centred near one instead of
 letting one small conditional probability blow the weight up.
 Correctly specified stabilized weights have mean close to 1, so

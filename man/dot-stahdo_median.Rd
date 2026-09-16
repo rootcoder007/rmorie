@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the stahdo_native implementation. Called by \code{.stahdo_mad}, \code{.stahdo_outlyingness}.
+A step of the stahdo_native implementation. Called by \code{.stahdo_mad},
+\code{.stahdo_outlyingness}.
 See the file header for the source the module follows.
 source it follows.
 }

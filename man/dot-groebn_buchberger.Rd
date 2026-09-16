@@ -16,7 +16,9 @@
 \item{reduced}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{estimate}, \code{basis}, \code{order}, \code{size}, \code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned}, \code{method}.
+A list with \code{estimate}, \code{basis}, \code{order}, \code{size},
+\code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned},
+\code{method}.
 }
 \description{
 Buchberger completion and reduce_basis

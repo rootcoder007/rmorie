@@ -13,7 +13,8 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the rangayyan_tf implementation. Called by \code{.tf_analytic}, \code{CDemod}, \code{CprWt} and 2 others in the module.
+A step of the rangayyan_tf implementation. Called by \code{.tf_analytic},
+\code{CDemod}, \code{CprWt} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

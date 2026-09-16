@@ -17,7 +17,6 @@ Drsta(y, D, unit, time, cohort, X = NULL)
 never-treated unit.}
 
 \item{X}{Optional baseline covariates, one row per unit-period.}
-
 }
 \value{
 List with \code{estimate}, \code{cohorts}, \code{event_time},

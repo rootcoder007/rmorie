@@ -7,7 +7,8 @@
 .starts(spec)
 }
 \arguments{
-\item{spec}{A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.}
+\item{spec}{A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p},
+\code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.}
 }
 \value{
 The value of \code{out}, as built in the body.

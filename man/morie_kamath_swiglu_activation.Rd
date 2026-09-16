@@ -19,8 +19,6 @@ morie_kamath_swish(z, beta = 1)
 \item{z}{Pre-activation.}
 
 \item{beta}{Swish sharpness.}
-
-
 }
 \value{
 List with \code{output}, \code{gate}, \code{linear}.

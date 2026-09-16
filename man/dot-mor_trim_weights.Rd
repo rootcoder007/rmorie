@@ -9,7 +9,8 @@
 \arguments{
 \item{w}{Passed to \code{return}.}
 
-\item{weight_trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{weight_trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
 \item{side}{One of \code{"both"}, \code{"upper"}. Defaults to \code{"upper"}.}
 }

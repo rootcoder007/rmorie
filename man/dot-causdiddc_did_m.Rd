@@ -16,10 +16,12 @@
 \item{period}{Passed to \code{.causdiddc_panel}.}
 }
 \value{
-A list with \code{estimate}, \code{did_m}, \code{switches}, \code{n_switches}, \code{n_switching_obs}, \code{n}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{did_m}, \code{switches}, \code{n_switches},
+\code{n_switching_obs}, \code{n}, \code{method}, \code{note}.
 }
 \description{
-A step of the causdiddc_native implementation. Called by \code{morie_causdiddc}, \code{morie_causdiddc_did_m}.
+A step of the causdiddc_native implementation. Called by \code{morie_causdiddc},
+\code{morie_causdiddc_did_m}.
 See the file header for the source the module follows.
 the source it follows.
 }

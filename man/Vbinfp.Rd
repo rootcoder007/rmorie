@@ -11,7 +11,6 @@ Vbinfp(X, Y, q = NULL)
 
 \item{q}{ny-by-nx decoder matrix, or NULL for the empirical
 conditional.}
-
 }
 \value{
 List with \code{bound}, \code{entropy_x}, \code{entropy_y},

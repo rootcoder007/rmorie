@@ -13,7 +13,7 @@ forecast on monthly counts. All functions return a multi-section
 to a notebook.
 }
 \details{
-\subsection{Functions}{
+Functions
 
 \itemize{
 \item \code{\link{morie_tps_year_over_year_trend}}: OLS slope /
@@ -25,6 +25,5 @@ non-parametric change-point on yearly counts (no external
 change-point dependency).
 \item \code{\link{morie_tps_arima_forecast}}: ARIMA(1,1,1)
 forecast on monthly counts via \code{stats::arima}.
-}
 }
 }

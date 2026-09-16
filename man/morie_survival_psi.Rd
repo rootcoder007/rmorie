@@ -12,8 +12,6 @@ morie_survival_psi(S, t_grid, S0, L, G)
 \item{t_grid}{the grid everything is supplied on.}
 
 \item{S0, L, G}{the section's components, on t_grid.}
-
-
 }
 \value{
 list: t_grid, psi, sup_norm, parameter_is, norm,

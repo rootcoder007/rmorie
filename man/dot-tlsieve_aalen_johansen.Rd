@@ -16,7 +16,8 @@
 \item{weights}{Passed to \code{.tlsieve_cause_specific_hazard}.}
 }
 \value{
-A list with \code{estimate}, \code{F}, \code{survival}, \code{types}, \code{times}, \code{closure}, \code{method}, \code{caveat}.
+A list with \code{estimate}, \code{F}, \code{survival}, \code{types},
+\code{times}, \code{closure}, \code{method}, \code{caveat}.
 }
 \description{
 A step of the tlsieve_native implementation. No other function in the package calls it.

@@ -20,7 +20,8 @@ gamma(0) is 0 even when nugget > 0.}
 Named list: gamma, nugget, sill, range, model.
 }
 \description{
-gamma(h) = c0 + sigma0^2 (3h/(2 alpha) - (h/alpha)^3 / 2) for 0 < h <= alpha; the sill is reached exactly at alpha (a TRUE range).
+gamma(h) = c0 + sigma0^2 (3h/(2 alpha) - (h/alpha)^3 / 2) for 0 < h <= alpha; the sill
+is reached exactly at alpha (a TRUE range).
 }
 \details{
 \code{range} is the PRACTICAL range in the book's parameterisation: the lag

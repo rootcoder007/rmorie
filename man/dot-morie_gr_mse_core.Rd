@@ -17,7 +17,9 @@
 A list with \code{cost}, \code{rmse}, \code{residuals}, \code{predictions}, \code{n}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_ch4_mse_gradient_vector}, \code{morie_geron_ch4_normal_equation}, \code{morie_geron_early_stopping} and 4 others in the module.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_ch4_mse_gradient_vector}, \code{morie_geron_ch4_normal_equation},
+\code{morie_geron_early_stopping} and 4 others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

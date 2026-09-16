@@ -27,13 +27,17 @@
 
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-09}.}
 
-\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
-A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter}, \code{converged}.
+A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter},
+\code{converged}.
 }
 \description{
-A step of the cox_native implementation. Called by \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard}, \code{morie_cox_breslow_step} and 4 others in the module.
+A step of the cox_native implementation. Called by
+\code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard},
+\code{morie_cox_breslow_step} and 4 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

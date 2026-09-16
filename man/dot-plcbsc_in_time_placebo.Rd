@@ -20,7 +20,8 @@
 \item{...}{Passed through.}
 }
 \value{
-A list with \code{weights}, \code{gaps}, \code{placebo_effect}, \code{rmspe_pre}, \code{rmspe_placebo}.
+A list with \code{weights}, \code{gaps}, \code{placebo_effect},
+\code{rmspe_pre}, \code{rmspe_placebo}.
 }
 \description{
 A step of the plcbsc_native implementation. No other function in the package calls it.

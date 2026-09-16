@@ -15,10 +15,11 @@ morie_yuen_paired(x, y, tr = 0.2, alpha = 0.05)
 \arguments{
 \item{x, y}{numeric vectors}
 
-
 \item{tr}{Argument \code{tr}; see Usage.}
 
 \item{alpha}{Argument \code{alpha}; see Usage.}
+
+\item{x, }{y numeric vectors}
 }
 \value{
 list with the estimate, \code{statistic}, \code{df}, \code{se} and \code{p_value}

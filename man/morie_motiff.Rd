@@ -35,7 +35,8 @@ A list with elements \code{count}, \code{z_score},
 }
 \description{
 Z = (N_real - mean N_rand)/sd N_rand over a degree-preserving
-randomized ensemble; p = fraction of randomizations with count= real (P < 0.01 motif cutoff).  Feed-forward loop and 3-cycle.
+randomized ensemble; p = fraction of randomizations with count
+at or above the real count (P < 0.01 motif cutoff).  Feed-forward loop and 3-cycle.
 }
 \references{
 Milo, R. et al. (2002). Network motifs: simple

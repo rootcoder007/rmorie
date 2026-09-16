@@ -13,7 +13,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Beggtest}, \code{Boxpierce} and 13 others in the module.
+A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Beggtest},
+\code{Boxpierce} and 13 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

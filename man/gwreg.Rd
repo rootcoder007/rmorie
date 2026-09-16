@@ -32,7 +32,8 @@ n, method.
 }
 \description{
 Local WLS at each site i:
-\deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i) X)^-1 X^top W(s_i) y}.
+\deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i)
+X)^-1 X^top W(s_i) y}.
 }
 \examples{
 set.seed(1)

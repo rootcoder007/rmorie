@@ -24,9 +24,11 @@ morie_datasets_calgary_fire_stations(offline = TRUE, max_features = NULL)
 A \code{data.frame} with \code{community}, \code{category}, \code{crime_count},
 \code{year}, \code{month}.
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 }
 \description{
 Phase 3FFF3. Included 200-row sample of Calgary's per-community
@@ -39,6 +41,14 @@ calls (Socrata id \code{bdez-pds9}).
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_calgary_community_crime_stats()
+head(df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+df <- morie_datasets_calgary_fire_response_calls()
+head(df)
+\dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+df <- morie_datasets_calgary_fire_stations()
 head(df)
 \dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}

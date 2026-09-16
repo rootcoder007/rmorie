@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the geron_w4b_native implementation. Called by \code{.morie_gr_w4b_sdpa}, \code{morie_geron_hf_pipelines}, \code{morie_geron_knowledge_distillation} and 1 others in the module.
+A step of the geron_w4b_native implementation. Called by \code{.morie_gr_w4b_sdpa},
+\code{morie_geron_hf_pipelines}, \code{morie_geron_knowledge_distillation} and 1
+others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -14,7 +14,7 @@ morie_performance_check_collinearity(model, ...)
 \code{verbose}).}
 }
 \value{
-A list with \code{$method =
+A list with \eqn{$method =
   "performance::check_collinearity"} and \code{$raw} (the
 upstream VIF data frame).
 }

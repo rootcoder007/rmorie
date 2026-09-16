@@ -23,7 +23,6 @@ morie_geron_gpt1(
 \item{targets}{Optional next-token targets (default shifted X).}
 
 \item{...}{Other decoder_only args.}
-
 }
 \value{
 List with \code{total_params}, \code{config}, \code{loss}, \code{perplexity}, \code{n_predicted}.

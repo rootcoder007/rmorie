@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the funkM_native implementation. Called by \code{morie_funkM}, \code{morie_funkM_imputed_svd_error}.
+A step of the funkM_native implementation. Called by \code{morie_funkM},
+\code{morie_funkM_imputed_svd_error}.
 See the file header for the source the module follows.
 source it follows.
 }

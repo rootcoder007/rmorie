@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the bnsadt_native implementation. Called by \code{morie_bnsadt}, \code{morie_bnsadt_fit}, \code{morie_bnsadt_group_counts}.
+A step of the bnsadt_native implementation. Called by \code{morie_bnsadt},
+\code{morie_bnsadt_fit}, \code{morie_bnsadt_group_counts}.
 See the file header for the source the module follows.
 source it follows.
 }

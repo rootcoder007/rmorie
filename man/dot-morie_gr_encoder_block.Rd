@@ -10,7 +10,8 @@ Wq/Wk/Wv/Wo/W1/b1/W2/b2}
 \arguments{
 \item{X}{A matrix; passed to \code{nrow}.}
 
-\item{W}{A list; the body reads \code{$b1}, \code{$b2}, \code{$W1}, \code{$W2}, \code{$Wk}, \code{$Wo}, \code{$Wq}, \code{$Wv} from it.}
+\item{W}{A list; the body reads \code{$b1}, \code{$b2}, \code{$W1}, \code{$W2},
+\code{$Wk}, \code{$Wo}, \code{$Wq}, \code{$Wv} from it.}
 
 \item{n_heads}{A count; the body uses it as \code{seq_len(...)}.}
 
@@ -20,7 +21,8 @@ Wq/Wk/Wv/Wo/W1/b1/W2/b2}
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{morie_geron_albert}, \code{morie_geron_bert}, \code{morie_geron_roberta}.
+A step of the geron_ml_native implementation. Called by \code{morie_geron_albert},
+\code{morie_geron_bert}, \code{morie_geron_roberta}.
 See the file header for the source the module follows.
 the source it follows.
 }

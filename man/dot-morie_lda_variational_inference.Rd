@@ -18,7 +18,8 @@
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
 }
 \value{
-A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged}, \code{K}, \code{N}, \code{topic_proportions}.
+A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged},
+\code{K}, \code{N}, \code{topic_proportions}.
 }
 \description{
 A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}.

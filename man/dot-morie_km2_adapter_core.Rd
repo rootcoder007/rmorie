@@ -21,7 +21,8 @@
 The value of \code{list}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch4_parallel_adapter}, \code{morie_kamath_ch4_series_adapter}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch4_parallel_adapter}, \code{morie_kamath_ch4_series_adapter}.
 See the file header for the source the module follows.
 for the source it follows.
 }

@@ -20,7 +20,6 @@ morie_geron_contrastive_infonce(
 \item{tau}{Positive temperature.}
 
 \item{normalize}{Cosine similarity.}
-
 }
 \value{
 List with \code{loss}, \code{per_anchor_loss}, \code{pos_sim}, \code{neg_sim},

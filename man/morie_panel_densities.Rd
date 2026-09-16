@@ -24,8 +24,6 @@ morie_panel_densities(
 \item{nu_U, nu_eps}{the two bandwidths.}
 
 \item{grid_u, grid_z}{evaluation points.}
-
-
 }
 \value{
 list: grid_u, f_U, grid_z, f_eps, nu_U, nu_eps,

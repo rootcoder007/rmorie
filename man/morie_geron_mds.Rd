@@ -14,7 +14,8 @@ morie_geron_mds(X, n_components, precomputed = FALSE)
 \item{precomputed}{Treat X as a symmetric distance matrix.}
 }
 \value{
-List with embedding, eigenvalues, stress, distance_matrix, n_negative_eigenvalues, estimate, n, method.
+List with embedding, eigenvalues, stress, distance_matrix,
+n_negative_eigenvalues, estimate, n, method.
 }
 \description{
 Classical (Torgerson) multidimensional scaling (Geron Ch 7, morie.fn hmmds)

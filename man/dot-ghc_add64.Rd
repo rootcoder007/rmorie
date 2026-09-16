@@ -15,7 +15,8 @@
 A list with \code{hi}, \code{lo}.
 }
 \description{
-A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}, \code{.survrsf_rng}.
+A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int},
+\code{.ghc_unif}, \code{.survrsf_rng}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -18,7 +18,8 @@
 \item{astar}{Numeric; combined arithmetically in the body.}
 }
 \value{
-A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te}, \code{mediated_interaction}, \code{beta}, \code{theta}.
+A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te},
+\code{mediated_interaction}, \code{beta}, \code{theta}.
 }
 \description{
 A step of the ctde implementation. Called by \code{Ctde}, \code{Pnie}, \code{Tnie}.

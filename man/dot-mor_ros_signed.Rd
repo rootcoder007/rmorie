@@ -12,7 +12,8 @@
 \item{Gamma}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 }
 \value{
-A list with \code{p_upper}, \code{p_lower}, \code{W}, \code{mu_plus}, \code{sigma_plus}, \code{z_upper}, \code{n_pairs}, \code{Gamma}.
+A list with \code{p_upper}, \code{p_lower}, \code{W}, \code{mu_plus},
+\code{sigma_plus}, \code{z_upper}, \code{n_pairs}, \code{Gamma}.
 }
 \description{
 A step of the rosenb_native implementation. Called by \code{morie_rosenb}.

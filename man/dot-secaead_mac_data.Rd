@@ -15,7 +15,8 @@
 A vector, from \code{c}.
 }
 \description{
-A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
+A step of the secaead_native implementation. Called by
+\code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -30,7 +30,7 @@ morie_kalman_filter(
 \item{P0}{Initial state covariance.}
 }
 \value{
-Named list with \code{state, state_cov, innovations,
+Named list with \eqn{state, state_cov, innovations,
   innovation_variance, loglik, n, method}.
 }
 \description{

@@ -11,7 +11,6 @@ morie_spatial_variogram_fit(coords, values, model = "exponential")
 
 \item{model}{\code{"exponential"} (default), \code{"spherical"},
 or \code{"gaussian"}.}
-
 }
 \value{
 A list with \code{model}, \code{nugget}, \code{psill},

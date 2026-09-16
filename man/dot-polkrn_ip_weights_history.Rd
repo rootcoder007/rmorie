@@ -11,7 +11,8 @@
 
 \item{L_hist}{A vector; indexed elementwise.}
 
-\item{kind}{Accepted by the signature and not used anywhere in the body.}
+\item{kind}{Exposure type; only \code{"binary"} is implemented and
+anything else is refused.}
 
 \item{stabilize}{A flag; the body branches on it.}
 

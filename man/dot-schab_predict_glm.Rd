@@ -16,7 +16,9 @@
 \item{link_kind}{Passed to \code{.schab_link_derivative}.}
 }
 \value{
-A list with \code{prediction}, \code{mspe}, \code{prediction_error}, \code{inverse_link_prediction}, \code{pseudo_scale_prediction}, \code{pseudo_scale_mspe}, \code{mspe_is_for}.
+A list with \code{prediction}, \code{mspe}, \code{prediction_error},
+\code{inverse_link_prediction}, \code{pseudo_scale_prediction},
+\code{pseudo_scale_mspe}, \code{mspe_is_for}.
 }
 \description{
 predictor (6.87), whose delta-method variance (6.88) the text says

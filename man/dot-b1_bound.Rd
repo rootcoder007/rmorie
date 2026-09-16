@@ -17,7 +17,8 @@
 The value of \code{pmin}.
 }
 \description{
-A step of the b1_tmle implementation. Called by \code{.b1_logit}, \code{.b1_target}, \code{Comptml} and 3 others in the module.
+A step of the b1_tmle implementation. Called by \code{.b1_logit}, \code{.b1_target},
+\code{Comptml} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

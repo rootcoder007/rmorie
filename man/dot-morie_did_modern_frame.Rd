@@ -18,7 +18,8 @@
 \item{treatment_time}{Passed to \code{c}.}
 }
 \value{
-A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel}, \code{treated_post}.
+A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel},
+\code{treated_post}.
 }
 \description{
 NA = never), event time, and the treated-post indicator.

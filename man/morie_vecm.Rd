@@ -14,7 +14,7 @@ morie_vecm(Y, k_ar = 1, coint_rank = 1)
 \item{coint_rank}{Cointegration rank. Default 1.}
 }
 \value{
-Named list with \code{alpha, beta, Gamma, Sigma, eigenvalues,
+Named list with \eqn{alpha, beta, Gamma, Sigma, eigenvalues,
   loglik, n, k, rank, method}.
 }
 \description{

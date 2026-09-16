@@ -18,7 +18,9 @@
 \item{g}{Passed to \code{.tlsate_check}.}
 }
 \value{
-A list with \code{estimate}, \code{psi}, \code{se_population}, \code{se_sample}, \code{ci_population}, \code{ci_sample}, \code{width_ratio}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{psi}, \code{se_population},
+\code{se_sample}, \code{ci_population}, \code{ci_sample}, \code{width_ratio},
+\code{method}, \code{note}.
 }
 \description{
 A step of the tlsate_native implementation. No other function in the package calls it.

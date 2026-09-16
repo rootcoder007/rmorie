@@ -15,7 +15,8 @@
 A vector, from \code{sapply}.
 }
 \description{
-A step of the svycox_native implementation. Called by \code{.svycox_inverse}, \code{.svycox_svycoxph}.
+A step of the svycox_native implementation. Called by \code{.svycox_inverse},
+\code{.svycox_svycoxph}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -13,7 +13,6 @@ matrix of (parent, child). Must be acyclic.}
 \item{x, y}{Treatment and outcome node names.}
 
 \item{z}{Candidate adjustment set; the empty set is valid.}
-
 }
 \value{
 Named list with \code{satisfied},

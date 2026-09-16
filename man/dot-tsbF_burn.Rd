@@ -15,7 +15,8 @@
 The value of \code{[}.
 }
 \description{
-A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
+A step of the tsbF_native implementation. Called by
+\code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
 See the file header for the source the module follows.
 source it follows.
 }

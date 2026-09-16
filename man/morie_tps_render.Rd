@@ -25,7 +25,8 @@ callables fall back to base \code{plot()}.  Heavy panels
 the Python TPS spatial modules are intentionally not ported here:
 the projection + base choropleth / point-pattern primitives below
 are enough for the empirical paper's figures.
-\subsection{Functions}{
+
+Functions
 
 \itemize{
 \item \code{\link{morie_tps_project_xy}}: degrees -> rotated planar km.
@@ -39,6 +40,5 @@ pre-1998 borough name.
 (incident dots + optional DBSCAN colouring).
 \item \code{\link{morie_tps_render_yearly_grid}}: small-multiples
 by year.
-}
 }
 }

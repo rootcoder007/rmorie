@@ -14,7 +14,8 @@ morie_geron_isomap(X, n_components, n_neighbors = 5)
 \item{n_neighbors}{Neighbours.}
 }
 \value{
-List with embedding, geodesic_distances, eigenvalues, stress, n_neighbors, estimate, n, method.
+List with embedding, geodesic_distances, eigenvalues, stress, n_neighbors,
+estimate, n, method.
 }
 \description{
 Isomap: geodesic MDS via kNN graph + Dijkstra (Geron Ch 7, morie.fn hmiso)

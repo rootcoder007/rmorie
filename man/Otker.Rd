@@ -16,7 +16,6 @@ Otker(X, Y, kernel = "gaussian", epsilon = 0.1, gamma = 1, max_iter = 200)
 \item{gamma}{Gaussian bandwidth parameter.}
 
 \item{max_iter}{Sinkhorn sweeps.}
-
 }
 \value{
 List with \code{EMD_approx}, \code{C}, \code{exact_cost},
@@ -24,7 +23,7 @@ List with \code{EMD_approx}, \code{C}, \code{exact_cost},
 }
 \description{
 Once the ground cost is the squared distance in a feature space, it
-never has to be formed there: \code{||phi(x) - phi(y)||^2 = k(x,x) +
+never has to be formed there: \eqn{||phi(x) - phi(y)||^2 = k(x,x) +
 k(y,y) - 2 k(x,y)}, so the kernel alone determines the cost, which is
 the \code{-2 k(x,y)} of the usual shorthand plus the two diagonal terms
 that keep it non-negative. Dropping them would shift every entry by a

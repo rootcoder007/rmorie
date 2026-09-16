@@ -17,7 +17,8 @@
 A list with \code{imfs}, \code{residual}.
 }
 \description{
-A step of the rangayyan_tf implementation. Called by \code{EmdEns}, \code{EmdSpec}, \code{Sift} and 2 others in the module.
+A step of the rangayyan_tf implementation. Called by \code{EmdEns}, \code{EmdSpec},
+\code{Sift} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

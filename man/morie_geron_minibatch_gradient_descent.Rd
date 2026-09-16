@@ -16,15 +16,13 @@ morie_geron_minibatch_gradient_descent(X, y, theta, eta, b, n_iter, seed = 0)
 \item{n_iter}{Number of steps.}
 
 \item{seed}{Base LCG seed.}
-
-
 }
 \value{
 List with \code{theta}, \code{cost_history}, \code{theta_history},
 \code{initial_cost}, \code{final_cost}.
 }
 \description{
-Batches from \code{morie_geron_dataloader_minibatch()} with a per-epoch
+Batches from \code{\link[=morie_geron_dataloader_minibatch]{morie_geron_dataloader_minibatch()}} with a per-epoch
 seed of \code{seed + epoch}, gradient from the shared MSE core.
 }
 \examples{

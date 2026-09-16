@@ -17,7 +17,8 @@
 A list with \code{idx}, \code{mu}, \code{C}, \code{det}.
 }
 \description{
-A step of the robpca_native implementation. Called by \code{.robpca_fast_mcd}, \code{morie_robpca}.
+A step of the robpca_native implementation. Called by \code{.robpca_fast_mcd},
+\code{morie_robpca}.
 See the file header for the source the module follows.
 source it follows.
 }

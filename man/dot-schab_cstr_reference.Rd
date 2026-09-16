@@ -14,7 +14,8 @@
 \item{lam}{Numeric; combined arithmetically in the body.}
 }
 \value{
-A list with \code{expected_count}, \code{variance}, \code{intensity}, \code{second_order_intensity}, \code{volume}.
+A list with \code{expected_count}, \code{variance}, \code{intensity},
+\code{second_order_intensity}, \code{volume}.
 }
 \description{
 A step of the schab_st_shared implementation. Called by \code{spstp}.

@@ -21,7 +21,8 @@
 A list with \code{y}, \code{a}, \code{Xm}, \code{p}, \code{n}, \code{arms}.
 }
 \description{
-A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}, \code{trclrn_rule_value}.
+A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree},
+\code{trclrn_rule_value}.
 See the file header for the source the module follows.
 source it follows.
 }

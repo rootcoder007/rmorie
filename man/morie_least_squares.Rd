@@ -8,7 +8,6 @@ morie_least_squares(x, y)
 }
 \arguments{
 \item{x, y}{data vectors, length >= 2.}
-
 }
 \value{
 list: A, B, S, r, C, slope_product.

@@ -16,7 +16,7 @@ morie_crypto_hybrid_decrypt(ciphertext, recipient_sk)
 Raw vector of decrypted plaintext.
 }
 \description{
-Inverse of \code{morie_crypto_hybrid_encrypt()}. The wrapping key is
+Inverse of \code{\link[=morie_crypto_hybrid_encrypt]{morie_crypto_hybrid_encrypt()}}. The wrapping key is
 re-derived from \code{HKDF(kem_ct || pk)} using the public key embedded
 in the ML-KEM-768 secret key (bytes 1153..2336), matching the
 Python \code{morie.crypto.hybrid_decrypt} exactly, so no decapsulation

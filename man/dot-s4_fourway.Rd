@@ -23,7 +23,8 @@
 A list with \code{cde}, \code{intref}, \code{intmed}, \code{pie}, \code{te}.
 }
 \description{
-A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4}, \code{Intvse} and 2 others in the module.
+A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4},
+\code{Intvse} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

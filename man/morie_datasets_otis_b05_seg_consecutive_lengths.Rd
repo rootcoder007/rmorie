@@ -23,7 +23,8 @@ error if absent), or \code{"synth"} (return a deterministic
 \code{set.seed()} synthetic for didactic examples).}
 }
 \value{
-A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+data is unavailable offline).
 }
 \description{
 OTIS b05 -- Segregation placements by consecutive-length bucket

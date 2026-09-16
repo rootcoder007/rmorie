@@ -26,7 +26,8 @@ R parity for \code{morie.fn.attnq.scaled_dot_product_attention}.
 }
 \details{
 \deqn{\mathrm{Attention}(Q, K, V) =
-      \mathrm{softmax}\!\left(\tfrac{Q K^\top}{\sqrt{d_k}}\right) V}{Attention(Q, K, V) = softmax(tfrac{Q K^top}{sqrt(d_k)}) V}
+      \mathrm{softmax}\!\left(\tfrac{Q K^\top}{\sqrt{d_k}}\right) V}{Attention(Q, K,
+V) = softmax(tfrac{Q K^top}{sqrt(d_k)}) V}
 }
 \examples{
 set.seed(1)

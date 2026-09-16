@@ -24,10 +24,12 @@
 
 \item{seed}{Numeric; combined arithmetically in the body. Defaults to \code{11}.}
 
-\item{n_permutations}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.}
+\item{n_permutations}{Coerced to integer by the body, with \code{as.integer}. Defaults
+to \code{3}.}
 }
 \value{
-A list with \code{honest}, \code{splits_stable_under_I_permutation}, \code{splits_move_under_J_permutation}, \code{n_splits}.
+A list with \code{honest}, \code{splits_stable_under_I_permutation},
+\code{splits_move_under_J_permutation}, \code{n_splits}.
 }
 \description{
 A step of the frfgrf_native implementation. Called by \code{.frfgrf_forest_fit_check}.

@@ -25,5 +25,7 @@ Formula: Pi(k_i) = k_i / sum_j k_j; each new vertex brings m edges
 Bamodel(n = 5L)
 }
 \references{
-Barabasi and Albert (1999), Emergence of scaling in random networks, Science 286:509-512, arXiv:cond-mat/9910332. Verified against the paper for Pi(k_i) = k_i / sum_j k_j and the growth rule.
+Barabasi and Albert (1999), Emergence of scaling in random networks,
+Science 286:509-512, arXiv:cond-mat/9910332. Verified against the paper for Pi(k_i) =
+k_i / sum_j k_j and the growth rule.
 }

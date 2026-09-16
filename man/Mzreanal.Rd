@@ -29,7 +29,6 @@ Mzreanal(
 \item{alpha, beta}{Prioritised-replay exponents.}
 
 \item{oldvalues}{Values for the priority gap; NULL uses freshvalues.}
-
 }
 \value{
 List with target, policy, priority, prob, weight, T, A, n,

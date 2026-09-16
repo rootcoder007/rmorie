@@ -13,7 +13,9 @@
 The value of \code{do.call}.
 }
 \description{
-A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_community_estimand}, \code{morie_tlnetlg_longitudinal_network_gcomp}.
+A step of the tlnetlg_native implementation. Called by
+\code{morie_tlnetlg_community_estimand},
+\code{morie_tlnetlg_longitudinal_network_gcomp}.
 See the file header for the source the module follows.
 the source it follows.
 }

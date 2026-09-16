@@ -20,7 +20,6 @@ morie_geron_mlp_forward(
 \item{activation}{One of "relu", "tanh", "sigmoid", "identity".}
 
 \item{output_activation}{Optional override for the last layer.}
-
 }
 \value{
 List with \code{output}, \code{activations}, \code{layer_sizes}, \code{n_layers},
@@ -28,7 +27,7 @@ List with \code{output}, \code{activations}, \code{layer_sizes}, \code{n_layers}
 }
 \description{
 a_l = phi(W_l \verb{a_\{l-1\}} + b_l), stacked
-\code{morie_geron_linear_layer_forward()} calls; the last layer uses
+\code{\link[=morie_geron_linear_layer_forward]{morie_geron_linear_layer_forward()}} calls; the last layer uses
 \code{output_activation}.
 }
 \examples{

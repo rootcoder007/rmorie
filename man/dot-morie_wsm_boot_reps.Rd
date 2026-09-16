@@ -19,7 +19,9 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the wasserman_native implementation. Called by \code{morie_wasserman_bootstrap_percentile}, \code{morie_wasserman_bootstrap_pivotal}, \code{morie_wasserman_nonparametric_boot}.
+A step of the wasserman_native implementation. Called by
+\code{morie_wasserman_bootstrap_percentile}, \code{morie_wasserman_bootstrap_pivotal},
+\code{morie_wasserman_nonparametric_boot}.
 See the file header for the source the module follows.
 the source it follows.
 }

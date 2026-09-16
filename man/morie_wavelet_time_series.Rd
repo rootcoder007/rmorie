@@ -14,7 +14,7 @@ morie_wavelet_time_series(x, wavelet = "haar", level = NULL)
 \item{level}{Decomposition depth. Default floor(log2 n) capped at 6.}
 }
 \value{
-Named list with \code{approximation, details, energies, level,
+Named list with \eqn{approximation, details, energies, level,
   n, wavelet, method}.
 }
 \description{

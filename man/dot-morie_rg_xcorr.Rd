@@ -11,7 +11,8 @@
 
 \item{y}{A vector; its length is taken and its elements indexed.}
 
-\item{maxlag}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{maxlag}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 A list with \code{lags}, \code{values}.

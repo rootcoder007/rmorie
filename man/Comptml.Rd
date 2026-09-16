@@ -18,7 +18,6 @@ Comptml(Yc, A, Q1, Q0, g1W, gbound = 0.025, level = 0.95)
 \item{gbound}{Propensity truncation.}
 
 \item{level}{Confidence level.}
-
 }
 \value{
 List with \code{effect}, \code{se}, \code{ci_lower},

@@ -22,8 +22,6 @@ morie_dp_gan(
 for accounting.}
 
 \item{seed}{optional integer seed.}
-
-
 }
 \value{
 list with \code{disc_update}, \code{private_gradient},

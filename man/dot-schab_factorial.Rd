@@ -13,7 +13,8 @@
 The value of \code{prod}.
 }
 \description{
-A step of the schab_hermite_shared implementation. Called by \code{.schab_indicator_coefficients}.
+A step of the schab_hermite_shared implementation. Called by
+\code{.schab_indicator_coefficients}.
 See the file header for the source the module follows.
 for the source it follows.
 }

@@ -30,7 +30,8 @@
 The value of \code{total}, as built in the body.
 }
 \description{
-A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{spgwrb}.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion},
+\code{spgwrb}.
 See the file header for the source the module follows.
 the source it follows.
 }

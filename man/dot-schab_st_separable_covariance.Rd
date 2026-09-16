@@ -21,7 +21,8 @@
 
 \item{cov_temporal}{Accepted by the signature and not used anywhere in the body.}
 
-\item{form}{The body requires: \code{form} must be 'product', 'sum' or 'product_sum'. Defaults to \code{"product"}.}
+\item{form}{The body requires: \code{form} must be 'product', 'sum' or 'product_sum'.
+Defaults to \code{"product"}.}
 }
 \value{
 The value of \code{switch}.

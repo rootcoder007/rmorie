@@ -17,7 +17,8 @@
 The value of \code{unique}.
 }
 \description{
-A step of the prsLR_native implementation. Called by \code{.prsLR_closure}, \code{.prsLR_first_sets}, \code{.prsLR_follow_sets}.
+A step of the prsLR_native implementation. Called by \code{.prsLR_closure},
+\code{.prsLR_first_sets}, \code{.prsLR_follow_sets}.
 See the file header for the source the module follows.
 source it follows.
 }

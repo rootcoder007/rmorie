@@ -15,10 +15,12 @@
 
 \item{trim}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}
 
-\item{link}{Accepted by the signature and not used anywhere in the body. Defaults to \code{"logit"}.}
+\item{link}{Accepted by the signature and not used anywhere in the body. Defaults to
+\code{"logit"}.}
 }
 \value{
-A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0}, \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
+A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0},
+\code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
 }
 \description{
 Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated

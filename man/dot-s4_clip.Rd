@@ -17,7 +17,8 @@
 The value of \code{pmin}.
 }
 \description{
-A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlmpi_cdf_bank} and 25 others in the module.
+A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle},
+\code{.tmlmpi_cdf_bank} and 25 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -22,7 +22,8 @@
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.}
 }
 \value{
-A list with \code{estimate}, \code{mean_eic}, \code{solved}, \code{se}, \code{ci}, \code{method}.
+A list with \code{estimate}, \code{mean_eic}, \code{solved}, \code{se},
+\code{ci}, \code{method}.
 }
 \description{
 A step of the tlroad_native implementation. No other function in the package calls it.

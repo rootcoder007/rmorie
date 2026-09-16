@@ -22,9 +22,11 @@
 
 \item{step}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
 
-\item{lag_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{lag_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 
-\item{max_sites}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{max_sites}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 The value of \code{repeat}.

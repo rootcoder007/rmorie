@@ -13,7 +13,8 @@
 
 \item{X}{Carried through into a list the body builds.}
 
-\item{fit}{A list; the body reads \code{$beta}, \code{$converged}, \code{$cov}, \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.}
+\item{fit}{A list; the body reads \code{$beta}, \code{$converged}, \code{$cov},
+\code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.}
 
 \item{family}{Carried through into a list the body builds.}
 
@@ -22,7 +23,10 @@
 \item{method}{Carried through into a list the body builds.}
 }
 \value{
-A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma}, \code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events}, \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X}, \code{method}.
+A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma},
+\code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events},
+\code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X},
+\code{method}.
 }
 \description{
 A step of the aft_native implementation. Called by \code{.morie_aft_common}.

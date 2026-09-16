@@ -15,7 +15,6 @@ morie_horowitz_manski_bounds(y, R, y_min, y_max)
 \item{R}{Response indicator, 1 observed and 0 missing.}
 
 \item{y_min, y_max}{A priori support limits.}
-
 }
 \value{
 list: estimate, mar_estimate, lower, upper, width, contrast_lower,

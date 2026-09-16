@@ -10,7 +10,10 @@
 \item{rec}{A vector; indexed elementwise.}
 }
 \value{
-A list with \code{case_number}, \code{state}, \code{county}, \code{dlc_date}, \code{sex}, \code{race}, \code{age_min}, \code{age_max}, \code{height_cm_min}, \code{height_cm_max}, \code{weight_kg_min}, \code{weight_kg_max}, \code{first_name}, \code{last_name}, \code{city}, \code{circumstances}.
+A list with \code{case_number}, \code{state}, \code{county}, \code{dlc_date},
+\code{sex}, \code{race}, \code{age_min}, \code{age_max}, \code{height_cm_min},
+\code{height_cm_max}, \code{weight_kg_min}, \code{weight_kg_max}, \code{first_name},
+\code{last_name}, \code{city}, \code{circumstances}.
 }
 \description{
 NamUs Search endpoint actually returns; verified live 2026-07).

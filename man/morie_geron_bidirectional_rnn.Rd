@@ -25,19 +25,13 @@ morie_geron_bidirectional_rnn(
 \item{b_f, b_b, h0_f, h0_b}{Optional biases and initial states.}
 
 \item{activation}{One of "tanh", "relu", "sigmoid", "identity".}
-
-
-
-
-
-
 }
 \value{
 List with \code{output}, \code{h_fwd}, \code{h_bwd}, \code{final}, \code{hidden_size}.
 }
 \description{
 Backward states are re-aligned to the original time index before the
-concatenation, so \verb{output[t, ]} mixes prefix and suffix at t.
+concatenation, so \code{output[t, ]} mixes prefix and suffix at t.
 }
 \examples{
 morie_geron_bidirectional_rnn(matrix(c(1, 1, 0.5), ncol = 1),

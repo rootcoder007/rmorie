@@ -16,7 +16,6 @@ morie_test_information(theta, a, b, c = NULL, upper = NULL, D = 1)
 \item{upper}{upper asymptotes; default 1.}
 
 \item{D}{scaling constant.}
-
 }
 \value{
 list: information, sem, item_information, theta, n_items, D, method.

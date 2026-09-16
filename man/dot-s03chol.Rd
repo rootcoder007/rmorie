@@ -13,7 +13,8 @@
 The value of \code{L}, as built in the body.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.cfa_logdet}, \code{.s03cholsolve}, \code{Fevdc} and 14 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.cfa_logdet},
+\code{.s03cholsolve}, \code{Fevdc} and 14 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -16,7 +16,9 @@
 \item{target}{Optional; may be \code{NULL}. Passed to \code{.vqgenc_as_matrix}.}
 }
 \value{
-A list with \code{estimate}, \code{indices}, \code{codes}, \code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss}, \code{usage_fraction}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{indices}, \code{codes},
+\code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss},
+\code{usage_fraction}, \code{method}, \code{note}.
 }
 \description{
 A step of the vqgenc_native implementation. No other function in the package calls it.

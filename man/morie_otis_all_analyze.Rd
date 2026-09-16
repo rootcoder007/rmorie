@@ -14,7 +14,7 @@ generic MRM-UoF callables.
 \details{
 For every dataset id (\code{b01}..\code{d07}) this module exposes
 \code{morie_otis_analyze_<id>(data)}. Each analyzer returns a named
-\code{list} with class \code{c("morie_otis_analysis_result",
+\code{list} with class \eqn{c("morie_otis_analysis_result",
 "morie_rich_result", "list")} containing
 \code{title} / \code{summary_lines} / \code{tables} /
 \code{interpretation} / \code{warnings} / \code{payload}, mirroring

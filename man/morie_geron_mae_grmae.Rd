@@ -8,7 +8,6 @@ morie_geron_mae_grmae(y_true, y_pred)
 }
 \arguments{
 \item{y_true, y_pred}{Equal-length numeric vectors.}
-
 }
 \value{
 List with \code{mae}, \code{rmse}, \code{max_error},

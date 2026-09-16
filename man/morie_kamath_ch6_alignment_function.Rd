@@ -12,7 +12,6 @@ morie_kamath_ch6_alignment_function(a, b, y, f = NULL)
 \item{y}{Output space.}
 
 \item{f}{Head.}
-
 }
 \value{
 List with \code{estimate}, \code{label}, \code{space}, \code{labels}.

@@ -13,17 +13,22 @@
 
 \item{X}{A matrix; indexed by row and column.}
 
-\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{weights}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
-\item{strata}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{strata}{Optional; may be \code{NULL}. Coerced to character by the body, with
+\code{as.character}.}
 
-\item{cluster}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{cluster}{Optional; may be \code{NULL}. Coerced to character by the body, with
+\code{as.character}.}
 }
 \value{
-A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c}, \code{n}, \code{p}.
+A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c},
+\code{n}, \code{p}.
 }
 \description{
-A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}.
+A step of the svycox_native implementation. Called by \code{.svycox_score_residuals},
+\code{.svycox_svycoxph}.
 See the file header for the source the module follows.
 source it follows.
 }

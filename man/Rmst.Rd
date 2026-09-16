@@ -22,12 +22,14 @@ morie_survival_rmst(time, event, tau = NULL, alpha = 0.05)
 list with the RMST, its standard error, the confidence interval and the horizon used.
 }
 \description{
-Area under the Kaplan-Meier curve up to \code{tau}, RMST(tau) = integral_0^tau S(t) dt, with the variance of Klein and Moeschberger (2003) eq.
+Area under the Kaplan-Meier curve up to \code{tau}, RMST(tau) = integral_0^tau S(t)
+dt, with the variance of Klein and Moeschberger (2003) eq.
 (4.5.4).
 }
 \examples{
 Rmst(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
 }
 \references{
-Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, eq. (4.5.4).
+Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed.,
+Springer, eq. (4.5.4).
 }

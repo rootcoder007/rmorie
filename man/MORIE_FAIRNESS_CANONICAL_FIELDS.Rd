@@ -3,7 +3,9 @@
 \name{MORIE_FAIRNESS_CANONICAL_FIELDS}
 \alias{MORIE_FAIRNESS_CANONICAL_FIELDS}
 \title{The five canonical per-area fields the audit consumes}
-
+\usage{
+MORIE_FAIRNESS_CANONICAL_FIELDS
+}
 \description{
 The five canonical per-area fields the audit consumes
 }

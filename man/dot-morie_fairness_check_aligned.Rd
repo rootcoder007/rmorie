@@ -13,7 +13,10 @@
 The value of \code{for}.
 }
 \description{
-A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 3 others in the module.
+A step of the frns_metrics implementation. Called by
+\code{morie_fairness_average_odds_difference},
+\code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -3,7 +3,9 @@
 \name{.MORIE_ENTHEO_EEG_BANDS}
 \alias{.MORIE_ENTHEO_EEG_BANDS}
 \title{Canonical EEG bands (delta..gamma) ordered by ascending frequency}
-
+\usage{
+.MORIE_ENTHEO_EEG_BANDS
+}
 \description{
 Canonical EEG bands (delta..gamma) ordered by ascending frequency
 }

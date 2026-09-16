@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the schab_hermite_shared implementation. Called by \code{.schab_disjunctive_kriging}, \code{.schab_hermite_coefficients}.
+A step of the schab_hermite_shared implementation. Called by
+\code{.schab_disjunctive_kriging}, \code{.schab_hermite_coefficients}.
 See the file header for the source the module follows.
 for the source it follows.
 }

@@ -24,7 +24,6 @@ Evalgate(
 \item{draws}{drawn games.}
 
 \item{threshold}{the replacement margin.}
-
 }
 \value{
 list: estimate, score, replace, p_value, wins, draws, losses,

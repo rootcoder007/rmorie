@@ -21,8 +21,6 @@ morie_geron_gaussian_mixture(
 \item{seed}{LCG seed.}
 
 \item{max_iter, tol, reg}{EM controls.}
-
-
 }
 \value{
 List with \code{weights}, \code{means}, \code{covariances}, \code{responsibilities},

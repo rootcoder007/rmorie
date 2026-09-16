@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_rowce}, \code{morie_kamath_word2vec_skipgram}.
+A step of the kamath_llm2_native implementation. Called by \code{.morie_km2_rowce},
+\code{morie_kamath_word2vec_skipgram}.
 See the file header for the source the module follows.
 for the source it follows.
 }

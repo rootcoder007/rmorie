@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta}, \code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
+A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta},
+\code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

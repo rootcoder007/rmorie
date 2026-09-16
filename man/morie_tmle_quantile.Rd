@@ -7,15 +7,13 @@
 morie_tmle_quantile(y, d, x, quantile = 0.5, n_grid = 60L, trunc = 0.01)
 }
 \arguments{
-\item{y, d, x}{As in \code{morie_tmle_propensity_only()}.}
+\item{y, d, x}{As in \code{\link[=morie_tmle_propensity_only]{morie_tmle_propensity_only()}}.}
 
 \item{quantile}{Quantile level in (0, 1).}
 
 \item{n_grid}{Grid points spanning the outcome range.}
 
 \item{trunc}{Propensity truncation.}
-
-
 }
 \value{
 List with \code{qte}, \code{q1}, \code{q0}, \code{quantile}, \code{grid}, \code{f1}, \code{f0},

@@ -13,7 +13,8 @@
 A matrix, from \code{as.matrix}.
 }
 \description{
-A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit}, \code{.schab_select_bandwidth}, \code{spgwrb}.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit},
+\code{.schab_select_bandwidth}, \code{spgwrb}.
 See the file header for the source the module follows.
 the source it follows.
 }

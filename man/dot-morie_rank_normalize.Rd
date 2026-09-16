@@ -13,7 +13,8 @@
 A matrix, from \code{matrix}.
 }
 \description{
-A step of the mcmc_native implementation. Called by \code{.morie_split_rhat}, \code{morie_effective_sample_size_bulk}.
+A step of the mcmc_native implementation. Called by \code{.morie_split_rhat},
+\code{morie_effective_sample_size_bulk}.
 See the file header for the source the module follows.
 source it follows.
 }

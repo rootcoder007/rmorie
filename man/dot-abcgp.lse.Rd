@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likelihood}, \code{morie_abcgp}.
+A step of the abcgp_native implementation. Called by
+\code{.abcgp.gabc_log_likelihood}, \code{morie_abcgp}.
 See the file header for the source the module follows.
 source it follows.
 }

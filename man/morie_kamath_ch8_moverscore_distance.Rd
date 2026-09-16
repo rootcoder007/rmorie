@@ -15,8 +15,6 @@ morie_kamath_ch8_smd(x, y, E = NULL)
 \item{E}{Optional embedder.}
 
 \item{x, y}{Sentence embeddings.}
-
-
 }
 \value{
 List with \code{estimate}, \code{difference}.

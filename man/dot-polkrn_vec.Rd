@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the polkrn_native implementation. Called by \code{.polkrn_ip_weights_history}, \code{morie_polkrn}, \code{rbf_basis}.
+A step of the polkrn_native implementation. Called by
+\code{.polkrn_ip_weights_history}, \code{morie_polkrn}, \code{rbf_basis}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -8,7 +8,8 @@ rows}
 .tmlcds_refit_on(info, steps, s, tr, fold, tuning, penalties, trim)
 }
 \arguments{
-\item{info}{A list; the body reads \code{$columns}, \code{$q_covariates}, \code{$treatment}, \code{$y_scaled} from it.}
+\item{info}{A list; the body reads \code{$columns}, \code{$q_covariates},
+\code{$treatment}, \code{$y_scaled} from it.}
 
 \item{steps}{A vector; indexed elementwise.}
 

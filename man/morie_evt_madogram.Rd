@@ -10,7 +10,6 @@ morie_evt_madogram(x, y, t = NULL)
 \item{x, y}{paired observations.}
 
 \item{t}{evaluation points in (0, 1); a grid when \code{NULL}.}
-
 }
 \value{
 list: t, A, A_raw, clipped_fraction, dependence_summary,

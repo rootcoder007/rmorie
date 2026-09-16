@@ -19,8 +19,6 @@ morie_hlm_components(
 (harmonic mean under unequal sizes).}
 
 \item{ll_null, ll_full}{Log-likelihoods.}
-
-
 }
 \value{
 List with sigma2_u, icc, lr_chi2.

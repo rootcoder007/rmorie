@@ -14,7 +14,8 @@
 \item{pair}{Carried through into a list the body builds.}
 }
 \value{
-A list with \code{estimate}, \code{rules}, \code{complete}, \code{reason}, \code{pair}, \code{n_rules}, \code{method}.
+A list with \code{estimate}, \code{rules}, \code{complete}, \code{reason},
+\code{pair}, \code{n_rules}, \code{method}.
 }
 \description{
 A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}.

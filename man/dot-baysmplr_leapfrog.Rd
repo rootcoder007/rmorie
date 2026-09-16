@@ -21,7 +21,8 @@
 A list with \code{q}, \code{p}, \code{g}.
 }
 \description{
-A step of the baysmplr_native implementation. Called by \code{.baysmplr_build_tree}, \code{morie_baysmplr_hmc}.
+A step of the baysmplr_native implementation. Called by \code{.baysmplr_build_tree},
+\code{morie_baysmplr_hmc}.
 See the file header for the source the module follows.
 the source it follows.
 }

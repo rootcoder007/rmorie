@@ -12,7 +12,6 @@ morie_geron_reparameterization_trick(mu, logvar, eps = NULL, seed = 42)
 \item{eps}{Optional noise; otherwise LCG normals.}
 
 \item{seed}{LCG seed.}
-
 }
 \value{
 List with \code{z}, \code{sigma}, \code{eps}, \code{dz_dmu}, \code{dz_dlogvar},

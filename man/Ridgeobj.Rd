@@ -15,7 +15,8 @@ Ridgeobj(X, y, beta, lam, add_intercept = TRUE)
 
 \item{lam}{Regularization parameter lambda; must be non-negative.}
 
-\item{add_intercept}{Treat the first entry of beta as an unpenalized intercept and prepend a column of ones to X.}
+\item{add_intercept}{Treat the first entry of beta as an unpenalized intercept and
+prepend a column of ones to X.}
 }
 \value{
 List with \code{prss}, \code{rss}, \code{penalty}, \code{lambda}, \code{n}, \code{p}.
@@ -24,5 +25,9 @@ List with \code{prss}, \code{rss}, \code{penalty}, \code{lambda}, \code{n}, \cod
 Formula: PRSS(beta, lambda) = sum_i (y_i - b0 - sum_j x_ij b_j)^2 + lambda sum_j b_j^2
 }
 \references{
-Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.1 p. 81: PRSS_lambda(beta) = RSS(beta) + lambda beta'D beta with D = diag(0, 1, ..., 1), so the intercept is not penalized.  Read from the chapter PDF, not recalled.
+Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+Statistical Machine Learning Methods for Genomic Prediction, Springer,
+doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.1 p. 81: PRSS_lambda(beta) =
+RSS(beta) + lambda beta'D beta with D = diag(0, 1, ..., 1), so the intercept is not
+penalized.  Read from the chapter PDF, not recalled.
 }

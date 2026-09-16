@@ -17,7 +17,8 @@
 The value of \code{Y}, as built in the body.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{.morie_gr_gradient_matrix}, \code{morie_geron_softmax_cross_entropy_cost}.
+A step of the geron_train_native implementation. Called by
+\code{.morie_gr_gradient_matrix}, \code{morie_geron_softmax_cross_entropy_cost}.
 See the file header for the source the module follows.
 for the source it follows.
 }

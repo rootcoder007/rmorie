@@ -20,7 +20,8 @@
 \item{seed}{Passed to \code{.morie_bx_nmfmu}.}
 }
 \value{
-A list with \code{X}, \code{C}, \code{W}, \code{H}, \code{error}, \code{rmsd}, \code{normalized}, \code{ranking}, \code{selected}.
+A list with \code{X}, \code{C}, \code{W}, \code{H}, \code{error}, \code{rmsd},
+\code{normalized}, \code{ranking}, \code{selected}.
 }
 \description{
 A step of the rangayyan_class2 implementation. Called by \code{BciChSel}, \code{NmfChSel}.

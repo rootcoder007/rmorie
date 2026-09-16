@@ -17,7 +17,8 @@
 The value of \code{centres}, as built in the body.
 }
 \description{
-A step of the scintg_native implementation. Called by \code{.scintg_maximum_diversity_clustering}.
+A step of the scintg_native implementation. Called by
+\code{.scintg_maximum_diversity_clustering}.
 See the file header for the source the module follows.
 source it follows.
 }

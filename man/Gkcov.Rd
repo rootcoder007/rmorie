@@ -53,12 +53,18 @@ morie_fauzi_thm1_4_asympnorm_mgkde(
 \item{ngrid}{Number of grid points; fixed, never adapted.}
 }
 \value{
-Named list with \code{covariance}, \code{form}, \code{cross}, \code{jh}, \code{j4h}, \code{h}, \code{n}, \code{method}.
+Named list with \code{covariance}, \code{form}, \code{cross}, \code{jh}, \code{j4h}, \code{h},
+\code{n}, \code{method}.
 }
 \description{
 Theorem 1.4. With \code{R} the Stirling ratio (1.12) and \code{s = sqrt(h)}, the
 interior form (\code{x/h -> Inf}) is
-\deqn{\mathrm{Cov}[A_h, A_{4h}] = \frac{R(s^{-1}-1)R((2s)^{-1}-1)(\frac32-2s)^{\frac{3}{2s}-\frac32}}{2\sqrt{\pi}R(\frac{3}{2s}-2)(3x+5s)(2-2s)^{\frac1s-\frac12}(1-2s)^{\frac{1}{2s}-\frac12}}\Big(\frac{x+s}{3x+5s}\Big)^{\frac{1}{2s}-1}\Big(\frac{2x+4s}{3x+5s}\Big)^{\frac1s-1}\frac{f_X(x)}{nh^{1/4}},}{Cov[A_h, A_4h] = [R(1/s - 1) R(1/(2s) - 1) (3/2 - 2s)^(3/(2s) - 3/2)] / [2 sqrt(pi) R(3/(2s) - 2) (3x + 5s) (2-2s)^(1/s - 1/2) (1-2s)^(1/(2s) - 1/2)] * ((x+s)/(3x+5s))^(1/(2s) - 1) * ((2x+4s)/(3x+5s))^(1/s - 1) * f(x)/(n h^(1/4)),}
+\deqn{\mathrm{Cov}[A_h, A_{4h}] =
+\frac{R(s^{-1}-1)R((2s)^{-1}-1)(\frac32-2s)^{\frac{3}{2s}-\frac32}}{2\sqrt{\pi}R(\frac{3}{2s}-2)(3x+5s)(2-2s)^{\frac1s-\frac12}(1-2s)^{\frac{1}{2s}-\frac12}}\Big(\frac{x+s}{3x+5s}\Big)^{\frac{1}{2s}-1}\Big(\frac{2x+4s}{3x+5s}\Big)^{\frac1s-1}
+\frac{f_X(x)}{nh^{1/4}},}{Cov[A_h,
+A_4h] = [R(1/s - 1) R(1/(2s) - 1) (3/2 - 2s)^(3/(2s) - 3/2)] / [2 sqrt(pi)
+R(3/(2s) - 2) (3x + 5s) (2-2s)^(1/s - 1/2) (1-2s)^(1/(2s) - 1/2)] *
+((x+s)/(3x+5s))^(1/(2s) - 1) * ((2x+4s)/(3x+5s))^(1/s - 1) * f(x)/(n h^(1/4)),}
 and the boundary form (\code{x/h -> c}) replaces \verb{3x+5s} by \verb{3cs+5}, \code{x+s} by
 \code{cs+1}, \verb{2x+4s} by \verb{2cs+4}, and \code{h^(1/4)} by \code{h^(3/4)}.
 }
@@ -84,6 +90,7 @@ asymptotics a given \code{h} actually is.
 Gkcov(x = 1, h = 0.01, n = 100, f = 0.3)
 }
 \references{
-Fauzi and Maesono (2023), Theorem 1.4; Fauzi (2020), Kyushu University doctoral thesis, Theorem 2.1.7.
+Fauzi and Maesono (2023), Theorem 1.4; Fauzi (2020), Kyushu University
+doctoral thesis, Theorem 2.1.7.
 }
 \keyword{internal}

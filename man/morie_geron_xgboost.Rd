@@ -21,13 +21,8 @@ morie_geron_xgboost(
 
 \item{y}{Targets \verb{(\{0,1\}} for logistic).}
 
-\item{n_estimators, learning_rate, max_depth, reg_lambda, gamma, min_child_weight, objective}{As in Python original.}
-
-
-
-
-
-
+\item{n_estimators, learning_rate, max_depth, reg_lambda, gamma, min_child_weight, objective}{As in
+Python original.}
 }
 \value{
 list with predicted, raw_score, trees, base_score, loss_curve,

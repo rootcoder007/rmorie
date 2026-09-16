@@ -10,7 +10,8 @@
 \item{h}{A vector; its length is taken and its elements indexed.}
 }
 \value{
-A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11}, \code{pi01}, \code{pi11}, \code{pi}.
+A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11},
+\code{pi01}, \code{pi11}, \code{pi}.
 }
 \description{
 A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}.

@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the sp_fill implementation. Called by \code{MantelM2}, \code{Pcf}, \code{SpAcf} and 1 others in the module.
+A step of the sp_fill implementation. Called by \code{MantelM2}, \code{Pcf},
+\code{SpAcf} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -27,7 +27,6 @@ numeric range, or a vector of discrete choices.}
 \item{fit_score}{Required scoring function.}
 
 \item{seed}{LCG seed.}
-
 }
 \value{
 List with \code{best_params}, \code{best_score}, \code{results},

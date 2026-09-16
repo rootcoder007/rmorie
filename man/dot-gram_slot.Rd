@@ -11,7 +11,8 @@
 
 \item{gram_index}{A vector; indexed elementwise.}
 
-\item{hash_buckets}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{hash_buckets}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 One of two values, depending on the branch taken.

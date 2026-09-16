@@ -15,7 +15,8 @@
 The value of \code{cbind}.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.s03drdid}, \code{.s03tmle}, \code{.tmlcic_hier_cluster_arm} and 16 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.s03drdid}, \code{.s03tmle},
+\code{.tmlcic_hier_cluster_arm} and 16 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

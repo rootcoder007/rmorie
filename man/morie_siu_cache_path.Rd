@@ -14,7 +14,7 @@ Absolute path to \code{SIU.csv} (file may not exist yet).
 }
 \description{
 Returns the path \code{<cache_dir>/SIU.csv}, creating
-\code{cache_dir} if needed. Default is \code{file.path(tempdir(),
+\code{cache_dir} if needed. Default is \eqn{file.path(tempdir(),
 "morie", "siu")}; pass \code{morie_cache_dir("siu")} for persistent
 caching.
 }

@@ -21,14 +21,19 @@ morie_fauzi_thm5_9_edgeworth_wilcoxon(y, n, which = "sign", book = FALSE)
 book and the primary source agree.}
 }
 \value{
-Named list with \code{estimate}, \code{normal}, \code{correction}, \code{coef}, \code{which}, \code{book}, \code{method}.
+Named list with \code{estimate}, \code{normal}, \code{correction}, \code{coef}, \code{which},
+\code{book}, \code{method}.
 }
 \description{
 Theorem 5.9. Under the conditions of Theorem 5.8, with a symmetric kernel,
 \verb{|f''(x)| <= M}, \verb{int |u^4 k(u)| du < Inf} and \verb{h = c n^(-d)},
 \verb{1/4 < d < 1/2}:
-\deqn{P_0\Big(\frac{\tilde S - E_0(\tilde S)}{\sqrt{V_0(\tilde S)}}\le y\Big) = \Phi(y) - \frac{1}{24n}(y^3-3y)\phi(y) + o(n^{-1}),}{P((Stilde - E Stilde)/sqrt(V Stilde) <= y) = Phi(y) - (1/(24n))(y^3 - 3y) phi(y) + o(1/n),}
-\deqn{P_0\Big(\frac{\tilde W - E_0(\tilde W)}{\sqrt{V_0(\tilde W)}}\le y\Big) = \Phi(y) - \frac{1}{20n}(y^3-3y)\phi(y) + o(n^{-1}).}{P((Wtilde - E Wtilde)/sqrt(V Wtilde) <= y) = Phi(y) - (1/(20n))(y^3 - 3y) phi(y) + o(1/n).}
+\deqn{P_0\Big(\frac{\tilde S - E_0(\tilde S)}{\sqrt{V_0(\tilde S)}}\le y\Big) =
+\Phi(y) - \frac{1}{24n}(y^3-3y)\phi(y) + o(n^{-1}),}{P((Stilde - E Stilde)/sqrt(V
+Stilde) <= y) = Phi(y) - (1/(24n))(y^3 - 3y) phi(y) + o(1/n),}
+\deqn{P_0\Big(\frac{\tilde W - E_0(\tilde W)}{\sqrt{V_0(\tilde W)}}\le y\Big) =
+\Phi(y) - \frac{1}{20n}(y^3-3y)\phi(y) + o(n^{-1}).}{P((Wtilde - E Wtilde)/sqrt(V
+Wtilde) <= y) = Phi(y) - (1/(20n))(y^3 - 3y) phi(y) + o(1/n).}
 }
 \details{
 Both corrections are the same Hermite polynomial \verb{H3(y) = y^3 - 3y}; only
@@ -49,6 +54,7 @@ which is used here. \code{book = TRUE} reproduces the book's printed coefficient
 Smthedge(y = 0, n = 100, which = "wilcoxon")
 }
 \references{
-Fauzi and Maesono (2023), Theorem 5.9; Maesono, Moriyama and Lu (2018), AISM 70:969-982, Theorems 3 and 5.
+Fauzi and Maesono (2023), Theorem 5.9; Maesono, Moriyama and Lu (2018),
+AISM 70:969-982, Theorems 3 and 5.
 }
 \keyword{internal}

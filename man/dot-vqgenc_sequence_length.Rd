@@ -14,7 +14,9 @@
 \item{downsample}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{16L}.}
 }
 \value{
-A list with \code{tokens}, \code{pixels}, \code{compression}, \code{attention_cost_pixels}, \code{attention_cost_tokens}, \code{speedup}, \code{note}.
+A list with \code{tokens}, \code{pixels}, \code{compression},
+\code{attention_cost_pixels}, \code{attention_cost_tokens}, \code{speedup},
+\code{note}.
 }
 \description{
 A step of the vqgenc_native implementation. No other function in the package calls it.

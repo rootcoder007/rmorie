@@ -29,7 +29,6 @@ Fitcgp(
 \item{jitter}{added to K_mm.}
 
 \item{kind}{"fitc" or "dtc".}
-
 }
 \value{
 list: estimate, pred, var, lam, alpha, method.

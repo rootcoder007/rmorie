@@ -17,7 +17,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle}, \code{.potM_neg_loglik}.
+A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle},
+\code{.potM_neg_loglik}.
 See the file header for the source the module follows.
 for the source it follows.
 }

@@ -14,7 +14,8 @@ Brenier1d(x, y, p = 2)
 \item{p}{See Usage.}
 }
 \value{
-List with \code{map} (image of each input in its original order), \code{cost}, \code{order_x}, \code{order_y}, \code{n}.
+List with \code{map} (image of each input in its original order), \code{cost},
+\code{order_x}, \code{order_y}, \code{n}.
 }
 \description{
 Formula: T(x_(i)) = y_(i): the monotone rearrangement matching order statistic to order statistic
@@ -24,5 +25,8 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Brenier1d(V, V)
 }
 \references{
-Brenier (1991), Polar factorization and monotone rearrangement of vector-valued functions, Communications on Pure and Applied Mathematics 44:375-417. Not held locally; the one-dimensional monotone-rearrangement solution is the standard published result.
+Brenier (1991), Polar factorization and monotone rearrangement of
+vector-valued functions, Communications on Pure and Applied Mathematics 44:375-417.
+Not held locally; the one-dimensional monotone-rearrangement solution is the standard
+published result.
 }

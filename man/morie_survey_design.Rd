@@ -30,7 +30,7 @@ morie_survey_design(
 An object of class \code{"morie_survey_design_fallback"}.
 }
 \description{
-Returns a \code{survey::svydesign} object when \code{survey} is available; otherwise
+Returns a \code{survey::svydesign} object when \code{survey} is installed; otherwise
 returns a lightweight list with the same fields the morie helpers consume.
 }
 \examples{

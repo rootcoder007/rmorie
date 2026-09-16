@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias}, \code{.timeRS_item_bias}, \code{morie_timeRS_time_bin}.
+A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias},
+\code{.timeRS_item_bias}, \code{morie_timeRS_time_bin}.
 See the file header for the source the module follows.
 source it follows.
 }

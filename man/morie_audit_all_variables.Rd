@@ -8,7 +8,6 @@ morie_audit_all_variables(otis_specs = NULL, arsau_specs = NULL)
 }
 \arguments{
 \item{otis_specs, arsau_specs}{See per-domain functions.}
-
 }
 \value{
 Named list with \code{$otis} and \code{$arsau} audit results.

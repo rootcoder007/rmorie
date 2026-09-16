@@ -15,7 +15,8 @@
 The value of \code{cbind}.
 }
 \description{
-A step of the causal implementation. Called by \code{.fit_propensity}, \code{morie_estimate_aipw}.
+A step of the causal implementation. Called by \code{.fit_propensity},
+\code{morie_estimate_aipw}.
 See the file header for the source the module follows.
 it follows.
 }

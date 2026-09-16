@@ -22,8 +22,6 @@ spstcn(
 "differential".}
 
 \item{coords, times}{Optional design on which to check eq (9.5).}
-
-
 }
 \value{
 A list with \code{st_covariance}, \code{method}, \code{equation}, \code{separable},

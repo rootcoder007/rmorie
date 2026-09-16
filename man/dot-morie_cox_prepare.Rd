@@ -17,7 +17,9 @@
 A list with \code{t}, \code{e}, \code{X}.
 }
 \description{
-A step of the cox_native implementation. Called by \code{.morie_aft_common}, \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard} and 8 others in the module.
+A step of the cox_native implementation. Called by \code{.morie_aft_common},
+\code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard} and 8 others
+in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -25,7 +25,8 @@ Cliff-Ord (1981) randomization variance.
 \details{
 Formula:
 \deqn{I = (n / S_0) \sum_{ij} w_{ij}(x_i - \bar x)(x_j - \bar x)
-          / \sum_i (x_i - \bar x)^2}{I = (n / S_0) sum_ij w_ij(x_i - bar x)(x_j - bar x) / sum_i (x_i - bar x)^2}
+          / \sum_i (x_i - \bar x)^2}{I = (n / S_0) sum_ij w_ij(x_i - bar x)(x_j - bar
+x) / sum_i (x_i - bar x)^2}
 }
 \examples{
 # See the package vignettes for usage examples:

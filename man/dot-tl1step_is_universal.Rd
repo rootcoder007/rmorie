@@ -16,7 +16,8 @@
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.}
 }
 \value{
-A list with \code{max_deviation}, \code{universal}, \code{epsilon}, \code{local_submodel_direction_drift}, \code{note}.
+A list with \code{max_deviation}, \code{universal}, \code{epsilon},
+\code{local_submodel_direction_drift}, \code{note}.
 }
 \description{
 Evaluated away from zero, because at zero a local least favorable

@@ -15,7 +15,9 @@
 The value of \code{list}.
 }
 \description{
-A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose}, \code{morie_unifAlg_substitute}.
+A step of the unifAlg_native implementation. Called by
+\code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose},
+\code{morie_unifAlg_substitute}.
 See the file header for the source the module follows.
 the source it follows.
 }

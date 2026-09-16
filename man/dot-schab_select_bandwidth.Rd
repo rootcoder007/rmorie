@@ -33,10 +33,12 @@
 \item{tol}{Passed to \code{.schab_golden_section}. Defaults to \code{1e-04}.}
 }
 \value{
-A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds}, \code{adaptive}.
+A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds},
+\code{adaptive}.
 }
 \description{
-A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit}, \code{spgwrb}.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit},
+\code{spgwrb}.
 See the file header for the source the module follows.
 the source it follows.
 }

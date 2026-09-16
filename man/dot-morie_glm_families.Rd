@@ -10,7 +10,8 @@
 A list with \code{binomial}, \code{poisson}, \code{gaussian}, \code{gamma}.
 }
 \description{
-A step of the glm implementation. Called by \code{morie_deviance_residuals}, \code{morie_glm}, \code{morie_glm_predict}.
+A step of the glm implementation. Called by \code{morie_deviance_residuals},
+\code{morie_glm}, \code{morie_glm_predict}.
 See the file header for the source the module follows.
 follows.
 }

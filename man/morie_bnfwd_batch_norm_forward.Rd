@@ -25,7 +25,8 @@ Named list \code{(y, estimate, x_hat, mu, var, eps, method)}.
 R parity for \code{morie.fn.bnfwd.batch_norm_forward}.
 }
 \details{
-\deqn{y_i = \gamma\,\frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta}{y_i = gamma frac{x_i - mu}{sqrt(sigma^2 + epsilon)} + beta}
+\deqn{y_i = \gamma\,\frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta}{y_i = gamma
+frac{x_i - mu}{sqrt(sigma^2 + epsilon)} + beta}
 }
 \examples{
 set.seed(1)

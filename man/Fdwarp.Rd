@@ -12,7 +12,6 @@ Fdwarp(x, y, cost = "abs", window = NULL)
 \item{cost}{local distance, "abs" for |x_i - y_j| or "sq" for its square.}
 
 \item{window}{Sakoe-Chiba adjustment window; unrestricted when omitted.}
-
 }
 \value{
 list: estimate, distance, normalized, path_length, path, n, m,

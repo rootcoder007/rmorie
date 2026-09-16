@@ -15,7 +15,8 @@
 
 \item{n_folds}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5L}.}
 
-\item{lambdas}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{lambdas}{Optional; may be \code{NULL}. A vector; its length is taken and its
+elements indexed.}
 }
 \value{
 A numeric value.

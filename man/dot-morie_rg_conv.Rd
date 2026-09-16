@@ -15,7 +15,8 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the rangayyan_xfrm implementation. Called by \code{CCepSum}, \code{ClogSum}, \code{ConvModel} and 13 others in the module.
+A step of the rangayyan_xfrm implementation. Called by \code{CCepSum}, \code{ClogSum},
+\code{ConvModel} and 13 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

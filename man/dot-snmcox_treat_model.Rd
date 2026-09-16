@@ -15,7 +15,8 @@ else}
 \item{ridge}{Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.}
 }
 \value{
-A list, whose contents depend on the branch taken; across the branches its names are \code{e}, \code{b}, \code{kind}.
+A list, whose contents depend on the branch taken; across the branches its
+names are \code{e}, \code{b}, \code{kind}.
 }
 \description{
 A step of the snmcox_native implementation. Called by \code{morie_snmcox_gest_score}.

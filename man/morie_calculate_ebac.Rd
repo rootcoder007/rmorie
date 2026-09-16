@@ -24,7 +24,8 @@ standard Widmark formula. Mirrors the Python \code{morie.calculate_ebac()}.
 }
 \details{
 The Widmark formula is:
-\deqn{eBAC = (drinks \times 5.14) / (weight\_lbs \times r) - 0.015 \times hours}{eBAC = (drinks x 5.14) / (weight\_lbs x r) - 0.015 x hours}
+\deqn{eBAC = (drinks \times 5.14) / (weight\_lbs \times r) - 0.015 \times hours}{eBAC
+= (drinks x 5.14) / (weight\_lbs x r) - 0.015 x hours}
 where \eqn{r} is the gender constant (0.73 for men, 0.66 for women).
 Returned values are clipped at zero.
 }

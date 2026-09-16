@@ -10,7 +10,6 @@ morie_kamath_image_text_contrastive(I_emb, T_emb, tau)
 \item{I_emb, T_emb}{Tower outputs.}
 
 \item{tau}{Temperature.}
-
 }
 \value{
 List with \code{estimate}, \code{loss_i2t}, \code{loss_t2i}, \code{similarity}.

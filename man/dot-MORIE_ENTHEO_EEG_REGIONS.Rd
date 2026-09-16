@@ -3,7 +3,9 @@
 \name{.MORIE_ENTHEO_EEG_REGIONS}
 \alias{.MORIE_ENTHEO_EEG_REGIONS}
 \title{EEG cortical regions used by the Timmermann 2023 IRASA pool}
-
+\usage{
+.MORIE_ENTHEO_EEG_REGIONS
+}
 \description{
 EEG cortical regions used by the Timmermann 2023 IRASA pool
 }

@@ -15,11 +15,9 @@
 The value of \code{nb}, as built in the body.
 }
 \description{
-\subsection{Neighbour lists: for each compound, the set of others within
-threshold.}{
-
+Neighbour lists: for each compound, the set of others within
+threshold.
 Returns a list of integer vectors (sorted ascending); index i holds
 the indices j != i with Tanimoto(fp_i, fp_j) >= threshold. Mirrors
 the Python neighbour_lists() function.
-}
 }

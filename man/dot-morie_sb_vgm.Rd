@@ -21,7 +21,8 @@
 The value of \code{ifelse}.
 }
 \description{
-A step of the schaben_native implementation. Called by \code{morie_kriging_pred_error}, \code{morie_variogram_composite_likelihood}.
+A step of the schaben_native implementation. Called by
+\code{morie_kriging_pred_error}, \code{morie_variogram_composite_likelihood}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -10,7 +10,6 @@ morie_brute_force_max_weight(ground, independent, weights)
 \item{ground, independent}{The system.}
 
 \item{weights}{Numeric vector aligned with \code{ground}.}
-
 }
 \value{
 A list with \code{set} and \code{weight}.

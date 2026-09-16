@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_loss}, \code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module.
+A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_loss},
+\code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -27,10 +27,12 @@
 \item{score}{Passed to \code{morie_geron_cross_validation_score}.}
 }
 \value{
-A list with \code{best_params}, \code{best_score}, \code{results}, \code{n_candidates}, \code{n_fits}, \code{estimate}, \code{n}, \code{method}.
+A list with \code{best_params}, \code{best_score}, \code{results},
+\code{n_candidates}, \code{n_fits}, \code{estimate}, \code{n}, \code{method}.
 }
 \description{
-A step of the geron_w4b_native implementation. Called by \code{morie_geron_hyperparameter_tuning}.
+A step of the geron_w4b_native implementation. Called by
+\code{morie_geron_hyperparameter_tuning}.
 See the file header for the source the module follows.
 the source it follows.
 }

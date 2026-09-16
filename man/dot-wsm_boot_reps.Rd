@@ -19,7 +19,8 @@
 A vector, from \code{vapply}.
 }
 \description{
-A step of the wsm_native implementation. Called by \code{morie_wsm_bootstrap}, \code{morie_wsm_plug_in}.
+A step of the wsm_native implementation. Called by \code{morie_wsm_bootstrap},
+\code{morie_wsm_plug_in}.
 See the file header for the source the module follows.
 source it follows.
 }

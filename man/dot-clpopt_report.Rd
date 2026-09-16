@@ -22,7 +22,9 @@
 \item{rule}{Compared against \code{"bland"}.}
 }
 \value{
-A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate}, \code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
+A list with \code{estimate}, \code{status}, \code{x}, \code{fun},
+\code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate},
+\code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
 }
 \description{
 A step of the clpopt_native implementation. Called by \code{simplex}.

@@ -35,7 +35,8 @@ Pareto exponent \eqn{\alpha}{alpha} of the step-length distribution between
 chronologically consecutive incidents, following Brockmann,
 Hufnagel & Geisel (2006). For a power-law tail \eqn{p(\ell) \propto
 \ell^{-\alpha}}{p(l) prop l^-alpha} on \eqn{\ell \ge \ell_{\min}}{l >= ell_min} the Hill MLE is
-\deqn{\hat\alpha = 1 + n / \sum_i \log(\ell_i / \ell_{\min}).}{hatalpha = 1 + n / sum_i log(ell_i / ell_min).}
+\deqn{\hat\alpha = 1 + n / \sum_i \log(\ell_i / \ell_{\min}).}{hatalpha = 1 + n /
+sum_i log(ell_i / ell_min).}
 Standard error is obtained by 200 nonparametric bootstrap resamples.
 }
 \examples{

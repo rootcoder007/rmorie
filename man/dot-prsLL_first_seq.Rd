@@ -17,7 +17,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 1 others in the module.
+A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
+\code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

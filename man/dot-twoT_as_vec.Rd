@@ -13,7 +13,9 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_corrected_logits}, \code{morie_twoT_retrieve} and 1 others in the module.
+A step of the twoT_native implementation. Called by
+\code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_corrected_logits},
+\code{morie_twoT_retrieve} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

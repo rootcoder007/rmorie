@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module.
+A step of the painn_native implementation. Called by \code{dipole_moment},
+\code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

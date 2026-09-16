@@ -20,7 +20,8 @@
 \item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
 }
 \value{
-A list with \code{score}, \code{eic_component}, \code{difference}, \code{spans}, \code{note}.
+A list with \code{score}, \code{eic_component}, \code{difference},
+\code{spans}, \code{note}.
 }
 \description{
 A step of the tlroad_native implementation. No other function in the package calls it.

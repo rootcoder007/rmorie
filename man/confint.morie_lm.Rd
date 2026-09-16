@@ -9,10 +9,9 @@
 \arguments{
 \item{object}{A \code{morie_lm}.}
 
-\item{parm, level}{Standard \code{stats::confint()} arguments.}
+\item{parm, level}{Standard \code{\link[stats:confint]{stats::confint()}} arguments.}
 
 \item{...}{Unused.}
-
 }
 \value{
 Coefficient confidence intervals.

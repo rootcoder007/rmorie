@@ -26,7 +26,8 @@ Named list with \code{bound_over_c}, \code{bound}, \code{exponent}, \code{naive}
 \description{
 Eq. (3.12): for \code{q >= 2}, if \verb{E|nu(X_1,...,X_r)|^q < Inf} there is a
 constant \code{C} depending on \code{nu} and \code{F} but NOT on \code{n} with
-\deqn{E|A_k|^q \le C n^{qk/2} E|\rho_k(X_{i_1},\dots,X_{i_k})|^q,}{E|A_k|^q <= C n^(qk/2) E|rho_k|^q,}
+\deqn{E|A_k|^q \le C n^{qk/2} E|\rho_k(X_{i_1},\dots,X_{i_k})|^q,}{E|A_k|^q <= C
+n^(qk/2) E|rho_k|^q,}
 where \code{A_k} is the \code{k}-th projection of the H-decomposition (3.10)-(3.11).
 }
 \details{

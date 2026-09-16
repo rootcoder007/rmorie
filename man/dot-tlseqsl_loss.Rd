@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_risk}, \code{morie_tlseqsl_ensemble_super_learner}.
+A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_risk},
+\code{morie_tlseqsl_ensemble_super_learner}.
 See the file header for the source the module follows.
 the source it follows.
 }

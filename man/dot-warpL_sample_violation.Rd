@@ -24,13 +24,16 @@
 
 \item{margin}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.}
 
-\item{max_draws}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{max_draws}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
-A list with \code{violated}, \code{draws}, \code{negative}, \code{estimated_rank}, \code{capped}, \code{note}.
+A list with \code{violated}, \code{draws}, \code{negative},
+\code{estimated_rank}, \code{capped}, \code{note}.
 }
 \description{
-A step of the warpL_native implementation. Called by \code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}.
+A step of the warpL_native implementation. Called by
+\code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}.
 See the file header for the source the module follows.
 source it follows.
 }

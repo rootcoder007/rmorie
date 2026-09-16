@@ -17,7 +17,8 @@
 The value of \code{Yoh}, as built in the body.
 }
 \description{
-A step of the geron_ml2_native implementation. Called by \code{morie_geron_cross_entropy_cost}, \code{morie_geron_cross_entropy_gradient}.
+A step of the geron_ml2_native implementation. Called by
+\code{morie_geron_cross_entropy_cost}, \code{morie_geron_cross_entropy_gradient}.
 See the file header for the source the module follows.
 the source it follows.
 }

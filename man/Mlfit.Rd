@@ -11,14 +11,19 @@ Mlfit(y, X, V)
 
 \item{X}{Fixed-effects design, n by p.}
 
-\item{V}{Marginal variance \eqn{Z D Z prime + R}, n by n.}
+\item{V}{Marginal variance \eqn{Z D Z' + R}, n by n.}
 }
 \value{
 List with estimate (log-likelihood), loglik, neg2loglik,
 logdet_V, quadratic_form, aic, bic, n, p.
 }
 \description{
-Gaussian ML log-likelihood of a linear mixed model at a given V
+\eqn{l(beta, V; y) = -1/2 [n log(2 pi) + log|V| +
+(y - X beta)' V^-1 (y - X beta)]} with \code{beta} profiled out at its
+GLS value \eqn{(X' V^-1 X)^-1 X' V^-1 y}, which is the maximiser for
+any fixed \code{V}; what is returned is therefore the profile
+log-likelihood in \code{V}. \code{V} must be positive definite -- an
+inadmissible set of variance components is refused, not returned.
 }
 \details{
 The Cholesky route is used for both the determinant and the quadratic

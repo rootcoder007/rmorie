@@ -23,7 +23,8 @@
 
 \item{reg}{Numeric; combined arithmetically in the body.}
 
-\item{factor}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{factor}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 A list with \code{rmse} for the epoch just run and the updated

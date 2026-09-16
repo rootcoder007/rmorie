@@ -14,7 +14,6 @@ Tmlerob(y, D, X = NULL, trim = 0.025, alpha = 0.05)
 \item{trim}{propensity bound.}
 
 \item{alpha}{interval level.}
-
 }
 \value{
 list: estimate, se, ci_lo, ci_hi, n_trimmed, min_g, max_g,

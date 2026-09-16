@@ -14,7 +14,6 @@ Nbdsp(y, X, link = "log", max_iter = 100L, tol = 1e-12)
 \item{link}{only "log" is offered, the link the Chapter 2 table gives.}
 
 \item{max_iter, tol}{fixed-point controls.}
-
 }
 \value{
 list: estimate, mu_hat, r_hat, beta, n, method.

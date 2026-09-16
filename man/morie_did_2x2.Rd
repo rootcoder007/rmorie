@@ -38,9 +38,11 @@ A list with elements \code{estimate}, \code{std_error},
 \description{
 Estimates the canonical two-group / two-period DiD treatment effect
 \deqn{\hat\tau = (\bar Y_{1,\text{post}} - \bar Y_{1,\text{pre}})
-                - (\bar Y_{0,\text{post}} - \bar Y_{0,\text{pre}}).}{hattau = (bar Y_1,post - bar Y_1,pre) - (bar Y_0,post - bar Y_0,pre).}
+                - (\bar Y_{0,\text{post}} - \bar Y_{0,\text{pre}}).}{hattau = (bar
+Y_1,post - bar Y_1,pre) - (bar Y_0,post - bar Y_0,pre).}
 With covariates, fits the regression
-\eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y = alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
+\eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y =
+alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
 and reports \eqn{\hat\tau}{hattau}.
 }
 \details{

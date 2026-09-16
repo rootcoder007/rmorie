@@ -14,9 +14,6 @@ Tmleqs(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025)
 \item{g1W}{Initial propensity.}
 
 \item{gbound}{Propensity truncation level.}
-
-
-
 }
 \value{
 List with \code{score_init}, \code{score_final},

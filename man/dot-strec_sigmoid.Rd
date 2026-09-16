@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_stamp_scores}.
+A step of the strec_native implementation. Called by \code{strec_attention_weights},
+\code{strec_stamp_scores}.
 See the file header for the source the module follows.
 source it follows.
 }

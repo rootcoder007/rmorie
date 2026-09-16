@@ -15,7 +15,6 @@ morie_rangayyan_coherence(x, y, fs = 1, nperseg = NULL)
 \item{fs}{Sampling rate (Hz).}
 
 \item{nperseg}{Welch segment length (default \code{min(N, 256)}).}
-
 }
 \value{
 Named list \code{freqs}, \code{morie_coherence}, \code{mean_coherence},

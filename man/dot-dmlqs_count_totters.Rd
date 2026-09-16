@@ -11,7 +11,8 @@
 
 \item{length}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.}
 
-\item{exclude_reverse}{Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.}
+\item{exclude_reverse}{Coerced to logical by the body, with \code{as.logical}.
+Defaults to \code{TRUE}.}
 }
 \value{
 A list with \code{paths}, \code{totters}, \code{fraction}, \code{excluded_reverse}.

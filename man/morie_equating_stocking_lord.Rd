@@ -21,8 +21,6 @@ morie_equating_stocking_lord(
 \item{n_quad}{quadrature points.}
 
 \item{theta_range}{half-width of the quadrature grid.}
-
-
 }
 \value{
 as \code{\link{morie_equating_haebara}}.

@@ -17,7 +17,6 @@ morie_beta_schedule_values(
 \item{beta_schedule}{"linear", "cosine", or an explicit length-T vector.}
 
 \item{beta_start, beta_end}{Linear-schedule endpoints.}
-
 }
 \value{
 Numeric vector of length T.

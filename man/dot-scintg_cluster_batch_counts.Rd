@@ -11,13 +11,15 @@
 
 \item{batches}{A vector; its length is taken.}
 
-\item{names}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{names}{Optional; may be \code{NULL}. A vector; its length is taken and its
+elements indexed.}
 }
 \value{
 A list with \code{O}, \code{E}, \code{batches}.
 }
 \description{
-A step of the scintg_native implementation. Called by \code{.scintg_harmony_objective}, \code{.scintg_maximum_diversity_clustering}.
+A step of the scintg_native implementation. Called by
+\code{.scintg_harmony_objective}, \code{.scintg_maximum_diversity_clustering}.
 See the file header for the source the module follows.
 source it follows.
 }

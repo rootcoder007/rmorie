@@ -18,7 +18,8 @@ LCG-seeded}
 A vector, from \code{sort}.
 }
 \description{
-A step of the geron_w4c_native implementation. Called by \code{morie_geron_pasting}, \code{morie_geron_random_forest}, \code{morie_geron_random_patches}.
+A step of the geron_w4c_native implementation. Called by \code{morie_geron_pasting},
+\code{morie_geron_random_forest}, \code{morie_geron_random_patches}.
 See the file header for the source the module follows.
 the source it follows.
 }

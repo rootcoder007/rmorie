@@ -13,7 +13,8 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}, \code{.vqgenc_quantize}.
+A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode},
+\code{.vqgenc_quantize}.
 See the file header for the source the module follows.
 source it follows.
 }

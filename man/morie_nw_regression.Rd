@@ -12,7 +12,6 @@ morie_nw_regression(x, y, grid = NULL, h = NULL)
 \item{grid}{evaluation points.}
 
 \item{h}{bandwidth.}
-
 }
 \value{
 list: grid, fitted, bandwidth, n.

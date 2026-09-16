@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{.morie_gr_init}, \code{morie_geron_bert}, \code{morie_geron_roberta}.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_init},
+\code{morie_geron_bert}, \code{morie_geron_roberta}.
 See the file header for the source the module follows.
 the source it follows.
 }

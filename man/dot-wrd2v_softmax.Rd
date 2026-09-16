@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \code{.wrd2v_sg_step}.
+A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step},
+\code{.wrd2v_sg_step}.
 See the file header for the source the module follows.
 source it follows.
 }

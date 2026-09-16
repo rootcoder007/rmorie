@@ -13,7 +13,8 @@
 
 \item{fu}{Numeric; combined arithmetically in the body.}
 
-\item{coefficients}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{coefficients}{Optional; may be \code{NULL}. A vector; its length is taken and
+its elements indexed.}
 }
 \value{
 The value of \code{fut}, as built in the body.

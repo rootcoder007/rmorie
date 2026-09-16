@@ -8,7 +8,6 @@ morie_cmuti(x, y)
 }
 \arguments{
 \item{x, y}{Paired numeric vectors (n >= 3).}
-
 }
 \value{
 A list with elements \code{estimate} (MI in nats),

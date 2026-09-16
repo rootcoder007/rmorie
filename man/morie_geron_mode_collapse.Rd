@@ -14,7 +14,8 @@ morie_geron_mode_collapse(samples, reference = NULL, tol = NULL)
 \item{tol}{Optional mode radius.}
 }
 \value{
-List with n_modes, collapse_score, mean_pairwise_distance, coverage, mode_labels, mode_sizes, estimate, n, method.
+List with n_modes, collapse_score, mean_pairwise_distance, coverage,
+mode_labels, mode_sizes, estimate, n, method.
 }
 \description{
 Mode-collapse diagnostics (Geron Ch 18, morie.fn hmmdc)

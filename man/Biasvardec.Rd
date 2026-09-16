@@ -7,14 +7,16 @@
 Biasvardec(F, f, sigma2)
 }
 \arguments{
-\item{F}{One row per replicate fit, one column per evaluation point: the predictions fhat(x_j) from replicate r.}
+\item{F}{One row per replicate fit, one column per evaluation point: the predictions
+fhat(x_j) from replicate r.}
 
 \item{f}{The true f(x_j) at the same n evaluation points.}
 
 \item{sigma2}{Irreducible error Var(e); must be non-negative.}
 }
 \value{
-List with \code{bias2}, \code{variance}, \code{irreducible}, \code{total}, \code{bias2_point}, \code{variance_point}, \code{R}, \code{n}.
+List with \code{bias2}, \code{variance}, \code{irreducible}, \code{total},
+\code{bias2_point}, \code{variance_point}, \code{R}, \code{n}.
 }
 \description{
 Formula: E(y - fhat)^2 = Var(e) + Bias[fhat]^2 + Var(fhat)
@@ -26,5 +28,11 @@ f <- rnorm(10)
 Biasvardec(F, f, sigma2 = 1)
 }
 \references{
-Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.2 p. 113, which reproduces the decomposition of Hastie, Tibshirani and Friedman (2008) p. 223: the expected prediction error under quadratic loss splits into Var(e), the squared bias of fhat and the variance of fhat.  Averaged over the evaluation points here.  Read from the chapter PDF, not recalled.
+Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+Statistical Machine Learning Methods for Genomic Prediction, Springer,
+doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.2 p. 113, which reproduces the
+decomposition of Hastie, Tibshirani and Friedman (2008) p. 223: the expected
+prediction error under quadratic loss splits into Var(e), the squared bias of fhat and
+the variance of fhat.  Averaged over the evaluation points here.  Read from the
+chapter PDF, not recalled.
 }

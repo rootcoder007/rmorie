@@ -15,7 +15,9 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_check_mdp}, \code{.morie_gr_conv2d_valid} and 396 others in the module.
+A step of the geron_ml_native implementation. Called by \code{.morie_gr_attend},
+\code{.morie_gr_check_mdp}, \code{.morie_gr_conv2d_valid} and 396 others in the
+module.
 See the file header for the source the module follows.
 the source it follows.
 }

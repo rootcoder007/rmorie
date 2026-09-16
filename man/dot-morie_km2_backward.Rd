@@ -17,7 +17,8 @@
 The value of \code{beta}, as built in the body.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_unigram_lm_tokenizer}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_unigram_lm_tokenizer}.
 See the file header for the source the module follows.
 for the source it follows.
 }

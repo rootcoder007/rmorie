@@ -7,7 +7,8 @@
 .abcgp.as_nugget(nugget, n)
 }
 \arguments{
-\item{nugget}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{nugget}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
 \item{n}{A count; the body uses it as \code{rep(...)}.}
 }
@@ -15,7 +16,8 @@
 The value of \code{pmax}.
 }
 \description{
-A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.mle_lengthscale}.
+A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
+\code{.abcgp.mle_lengthscale}.
 See the file header for the source the module follows.
 source it follows.
 }

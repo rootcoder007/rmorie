@@ -31,9 +31,6 @@ Tmleboot(
 \item{gbound}{Propensity truncation level.}
 
 \item{level}{Confidence level.}
-
-
-
 }
 \value{
 List with \code{estimate}, \code{boot_se}, \code{ci_lower},

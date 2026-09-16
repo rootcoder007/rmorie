@@ -12,10 +12,12 @@
 \item{method}{One of \code{"lalr1"}, \code{"slr1"}.}
 }
 \value{
-A list with \code{action}, \code{goto}, \code{states}, \code{n_states}, \code{conflicts}, \code{rules}, \code{augmented}, \code{method}.
+A list with \code{action}, \code{goto}, \code{states}, \code{n_states},
+\code{conflicts}, \code{rules}, \code{augmented}, \code{method}.
 }
 \description{
-A step of the prsLR_native implementation. Called by \code{.prsLR_parse}, \code{morie_build_tables}, \code{morie_conflicts} and 1 others in the module.
+A step of the prsLR_native implementation. Called by \code{.prsLR_parse},
+\code{morie_build_tables}, \code{morie_conflicts} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

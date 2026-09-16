@@ -13,7 +13,8 @@
 A logical value.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{.morie_gr_sym_diff}, \code{.morie_gr_sym_eval}, \code{.morie_gr_sym_simplify} and 2 others in the module.
+A step of the geron_train_native implementation. Called by \code{.morie_gr_sym_diff},
+\code{.morie_gr_sym_eval}, \code{.morie_gr_sym_simplify} and 2 others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

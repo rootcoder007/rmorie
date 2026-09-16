@@ -7,7 +7,8 @@
 .vepan_splice_terms(t, v, lo, hi)
 }
 \arguments{
-\item{t}{A list; the body reads \code{$end}, \code{$exons}, \code{$start}, \code{$strand} from it.}
+\item{t}{A list; the body reads \code{$end}, \code{$exons}, \code{$start},
+\code{$strand} from it.}
 
 \item{v}{Accepted by the signature and not used anywhere in the body.}
 

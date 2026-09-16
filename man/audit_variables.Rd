@@ -15,13 +15,13 @@ cross-year-safety, and recommended methods per variable.
 Pure R; no C/C++ hot path needed (taxonomy is regex + lookup, not
 CPU-bound).  Per \code{[[feedback_r_cpp_first]]} we'd reach for
 Rcpp only if profiling showed a real bottleneck.
-\subsection{Public callables}{
+
+Public callables
 
 \itemize{
 \item \code{\link{morie_audit_otis_variables}}
 \item \code{\link{morie_audit_arsau_variables}}
 \item \code{\link{morie_audit_all_variables}}
 \item \code{\link{morie_write_audit_markdown}}
-}
 }
 }

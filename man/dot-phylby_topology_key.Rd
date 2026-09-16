@@ -13,7 +13,8 @@
 The value of \code{[}.
 }
 \description{
-A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}, \code{morie_phylby_topology_key}.
+A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours},
+\code{morie_phylby_topology_key}.
 See the file header for the source the module follows.
 source it follows.
 }

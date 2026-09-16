@@ -17,7 +17,9 @@
 A list with \code{W}, \code{eta}, \code{n}, \code{T}.
 }
 \description{
-A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}.
+A step of the horowitz_native7 implementation. Called by
+\code{morie_panel_deconvolution}, \code{morie_panel_densities},
+\code{morie_smoothed_fU}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -12,7 +12,7 @@ morie_crypto_mldsa65_verify(pk, message, signature)
 \item{message}{Raw vector that was signed.}
 
 \item{signature}{Raw vector signature returned by
-\code{morie_crypto_mldsa65_sign()}.}
+\code{\link[=morie_crypto_mldsa65_sign]{morie_crypto_mldsa65_sign()}}.}
 }
 \value{
 Single logical: \code{TRUE} if signature is valid.

@@ -27,7 +27,8 @@ morie_geron_multinomial_logistic(
 \item{alpha}{L2 strength on non-bias rows.}
 }
 \value{
-List with Theta, probabilities, prediction, loss_history, loss, accuracy, estimate, n, method.
+List with Theta, probabilities, prediction, loss_history, loss, accuracy,
+estimate, n, method.
 }
 \description{
 Softmax regression fitted by batch gradient descent (Geron Ch 4, morie.fn hmmnl)

@@ -13,12 +13,15 @@
 
 \item{max_iter}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.}
 
-\item{threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{threshold}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
 \item{seed}{Accepted by the signature and not used anywhere in the body. Defaults to \code{0L}.}
 }
 \value{
-A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations}, \code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations},
+\code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method},
+\code{note}.
 }
 \description{
 A step of the farmlmm_native implementation. Called by \code{morie_farmlmm}.

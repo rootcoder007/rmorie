@@ -7,7 +7,8 @@
 .morie_fairness_resolve_privileged(privileged, rates, warnings_env)
 }
 \arguments{
-\item{privileged}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{privileged}{Optional; may be \code{NULL}. Coerced to character by the body, with
+\code{as.character}.}
 
 \item{rates}{Iterated over elementwise, with \code{vapply}.}
 
@@ -17,7 +18,10 @@
 The value of \code{inferred}, as built in the body.
 }
 \description{
-A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 2 others in the module.
+A step of the frns_metrics implementation. Called by
+\code{morie_fairness_average_odds_difference},
+\code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

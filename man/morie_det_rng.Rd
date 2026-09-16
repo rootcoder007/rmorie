@@ -13,7 +13,7 @@ Must be identical to the string the Python side passes.}
 \item{seed}{Integer; user-supplied seed.}
 }
 \value{
-Integer seed installed via [set.seed()] (invisibly).
+Integer seed installed via \code{\link[=set.seed]{set.seed()}} (invisibly).
 }
 \description{
 Given a callable / fixture name and an integer seed, derive a stable

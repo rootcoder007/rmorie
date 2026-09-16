@@ -14,12 +14,12 @@ Mirrors Python \code{morie.fn.qjlcrn.cheatsheet}: a single
 character string summarising the dimension bound, the two entry
 distributions and the \code{l2}-only scope.
 }
+\examples{
+res <- .qjlcrn_cheatsheet()
+res
+}
 \references{
 Achlioptas, D. (2003). Database-friendly random
 projections. Journal of Computer and System Sciences, 66(4),
 671-687.
-}
-\examples{
-res <- .qjlcrn_cheatsheet()
-res
 }

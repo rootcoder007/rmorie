@@ -17,7 +17,9 @@
 The value of \code{[}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_ddpm_forward_process}, \code{morie_geron_ddpm_reverse_step}, \code{morie_geron_gaussian_random_projection} and 2 others in the module.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_ddpm_forward_process}, \code{morie_geron_ddpm_reverse_step},
+\code{morie_geron_gaussian_random_projection} and 2 others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

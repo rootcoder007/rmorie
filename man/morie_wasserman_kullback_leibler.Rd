@@ -11,7 +11,6 @@ morie_wasserman_kullback_leibler(p, q, x_grid = NULL)
 \code{x_grid}.}
 
 \item{x_grid}{Optional support grid for the continuous form.}
-
 }
 \value{
 List with \code{estimate} (nats), \code{bits}, \code{reverse} (D(q||p)),

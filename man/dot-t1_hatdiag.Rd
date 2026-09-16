@@ -15,7 +15,8 @@
 The value of \code{rowSums}.
 }
 \description{
-A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitsols}, \code{Olsnormeq}.
+A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitsols},
+\code{Olsnormeq}.
 See the file header for the source the module follows.
 source it follows.
 }

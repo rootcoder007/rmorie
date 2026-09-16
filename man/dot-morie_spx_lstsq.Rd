@@ -17,7 +17,8 @@
 The value of \code{.morie_spx_solve}.
 }
 \description{
-A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}, \code{ShiftInt}, \code{SpErrMod}.
+A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2},
+\code{ShiftInt}, \code{SpErrMod}.
 See the file header for the source the module follows.
 source it follows.
 }

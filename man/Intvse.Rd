@@ -16,7 +16,6 @@ Intvse(Y, X, M, Cc = NULL, a = 1, astar = 0)
 \item{Cc}{Optional covariates; read at their means.}
 
 \item{a, astar}{Exposure contrast levels.}
-
 }
 \value{
 List with \code{estimate}, \code{ide}, \code{iie},

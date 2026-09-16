@@ -33,7 +33,6 @@ perturbation.}
 \item{n_iter, lr}{gradient-descent controls.}
 
 \item{seed}{optional integer seed.}
-
 }
 \value{
 list with \code{beta}, \code{prob}, \code{accuracy},

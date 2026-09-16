@@ -22,5 +22,8 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Azuma(V, V)
 }
 \references{
-Azuma (1967), Weighted sums of certain dependent random variables, Tohoku Mathematical Journal 19:357-367; Hoeffding (1963), JASA 58:13-30. Neither is held locally; the inequality is stated in this exact form in every standard reference consulted.
+Azuma (1967), Weighted sums of certain dependent random variables, Tohoku
+Mathematical Journal 19:357-367; Hoeffding (1963), JASA 58:13-30. Neither is held
+locally; the inequality is stated in this exact form in every standard reference
+consulted.
 }

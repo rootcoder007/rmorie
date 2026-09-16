@@ -7,7 +7,9 @@
 .abcnnt_layer_stats(layer, x, t)
 }
 \arguments{
-\item{layer}{A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t}, \code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa}, \code{$Wm} from it.}
+\item{layer}{A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t},
+\code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa},
+\code{$Wm} from it.}
 
 \item{x}{Passed to \code{c}.}
 

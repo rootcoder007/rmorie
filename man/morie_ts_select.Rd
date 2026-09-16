@@ -14,7 +14,6 @@ morie_ts_select(x, max_p = 3L, max_q = 3L, d = NULL, ic = c("aic", "bic"))
 \item{d}{Differencing order (default: the stationarity suggestion).}
 
 \item{ic}{"aic" or "bic".}
-
 }
 \value{
 A list with the full \code{results} table and the \code{best} model

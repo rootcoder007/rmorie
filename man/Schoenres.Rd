@@ -12,7 +12,6 @@ Schoenres(time, event, X, beta = NULL)
 \item{X}{covariates.}
 
 \item{beta}{the fitted Cox coefficients.}
-
 }
 \value{
 list: estimate, residuals, scaled, event_times, rho, V,

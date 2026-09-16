@@ -13,7 +13,9 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate}, \code{morie_sam2vd_push_memory}.
+A step of the sam2vd_native implementation. Called by
+\code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate},
+\code{morie_sam2vd_push_memory}.
 See the file header for the source the module follows.
 source it follows.
 }

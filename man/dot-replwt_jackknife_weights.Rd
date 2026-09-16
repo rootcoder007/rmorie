@@ -7,7 +7,8 @@
 .replwt_jackknife_weights(d, method = "jkn")
 }
 \arguments{
-\item{d}{A list; the body reads \code{$n}, \code{$psu_order}, \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.}
+\item{d}{A list; the body reads \code{$n}, \code{$psu_order}, \code{$psu_units},
+\code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.}
 
 \item{method}{One of \code{"jk1"}, \code{"jkn"}. Defaults to \code{"jkn"}.}
 }

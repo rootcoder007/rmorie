@@ -13,7 +13,9 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}, \code{morie_se3T_radial_kernel}, \code{morie_se3T_rotation_matrix} and 1 others in the module.
+A step of the se3T_native implementation. Called by
+\code{morie_se3T_check_equivariance}, \code{morie_se3T_radial_kernel},
+\code{morie_se3T_rotation_matrix} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

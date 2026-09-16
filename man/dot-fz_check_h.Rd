@@ -13,7 +13,9 @@
 The value of \code{h}, as built in the body.
 }
 \description{
-A step of the fauzi_native implementation. Called by \code{.fz_cs_common}, \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_gamma_kde} and 5 others in the module.
+A step of the fauzi_native implementation. Called by \code{.fz_cs_common},
+\code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_gamma_kde} and 5 others in the
+module.
 See the file header for the source the module follows.
 source it follows.
 }

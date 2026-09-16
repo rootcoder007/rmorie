@@ -3,7 +3,9 @@
 \name{MORIE_SIUIAP_URL}
 \alias{MORIE_SIUIAP_URL}
 \title{SIU IAP -- Public Safety Canada landing page URL}
-
+\usage{
+MORIE_SIUIAP_URL
+}
 \description{
 SIU IAP -- Public Safety Canada landing page URL
 }

@@ -14,7 +14,8 @@ evolution. The R port keeps optimisation in base R
 }
 \details{
 All functions return a multi-section \code{morie_rich_result} list.
-\subsection{Functions}{
+
+Functions
 
 \itemize{
 \item \code{\link{morie_tps_hawkes_temporal_fit}}: fit mu, kappa,
@@ -30,5 +31,4 @@ finite-difference density evolution under OU drift+diffusion.
 
 References: Mohler et al. 2011 (self-exciting point process crime);
 Short, D'Orsogna, Bertozzi 2010 (stochastic physics of crime).
-}
 }

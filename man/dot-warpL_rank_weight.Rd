@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the warpL_native implementation. Called by \code{.warpL_warp_loss}, \code{morie_warpL_rank_weight}.
+A step of the warpL_native implementation. Called by \code{.warpL_warp_loss},
+\code{morie_warpL_rank_weight}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -10,7 +10,6 @@ Mivbound(lower, upper, prob)
 \item{lower, upper}{Per-value bounds in increasing order of v.}
 
 \item{prob}{P(V = v), same order; normalised internally.}
-
 }
 \value{
 List with lower, upper, width, lowerv, upperv, prob, k.

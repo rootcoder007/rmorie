@@ -17,7 +17,9 @@
 A vector, from \code{c}.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch5_dpo_loss}, \code{morie_kamath_ch5_dpo_pref_simplified}, \code{morie_kamath_ch5_dpo_pref_substituted}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch5_dpo_loss}, \code{morie_kamath_ch5_dpo_pref_simplified},
+\code{morie_kamath_ch5_dpo_pref_substituted}.
 See the file header for the source the module follows.
 for the source it follows.
 }

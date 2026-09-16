@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}.
+A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block},
+\code{.resnxt_grouped_block}.
 See the file header for the source the module follows.
 source it follows.
 }

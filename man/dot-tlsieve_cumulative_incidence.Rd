@@ -12,7 +12,8 @@
 \item{times}{A vector; its length is taken.}
 }
 \value{
-A list with \code{F}, \code{survival}, \code{times}, \code{types}, \code{closure}, \code{note}.
+A list with \code{F}, \code{survival}, \code{times}, \code{types},
+\code{closure}, \code{note}.
 }
 \description{
 A step of the tlsieve_native implementation. Called by \code{.tlsieve_aalen_johansen}.

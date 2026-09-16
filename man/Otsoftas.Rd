@@ -14,7 +14,6 @@ Otsoftas(a, b, C, epsilon, max_iter = 200L)
 \item{epsilon}{Positive regularisation strength.}
 
 \item{max_iter}{Fixed number of scalings (default 200).}
-
 }
 \value{
 Named list with \code{estimate} (row-normalised matrix), \code{T},

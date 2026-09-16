@@ -3,7 +3,9 @@
 \name{MORIE_SIUIAP_AFFIDAVITS}
 \alias{MORIE_SIUIAP_AFFIDAVITS}
 \title{Federal Court affidavits / expert evidence indexed by \code{morie}}
-
+\usage{
+MORIE_SIUIAP_AFFIDAVITS
+}
 \description{
 Federal Court affidavits / expert evidence indexed by \code{morie}
 }

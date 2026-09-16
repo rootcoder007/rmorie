@@ -28,9 +28,6 @@ morie_geron_roberta(
 \item{epochs}{Dynamic-masking passes.}
 
 \item{seed}{LCG seed.}
-
-
-
 }
 \value{
 List with \code{hidden}, \code{mlm_loss}, \code{epoch_losses}, \code{masks},

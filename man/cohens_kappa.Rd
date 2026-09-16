@@ -10,7 +10,6 @@ cohens_kappa(rater1, rater2, confidence = 0.95)
 \item{rater1, rater2}{Equal-length categorical vectors.}
 
 \item{confidence}{Confidence level.}
-
 }
 \value{
 An object of class \code{"morie_test_result"}.

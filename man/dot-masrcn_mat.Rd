@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the masrcn_native implementation. Called by \code{mask_loss}, \code{roi_align}, \code{roi_pool}.
+A step of the masrcn_native implementation. Called by \code{mask_loss},
+\code{roi_align}, \code{roi_pool}.
 See the file header for the source the module follows.
 source it follows.
 }

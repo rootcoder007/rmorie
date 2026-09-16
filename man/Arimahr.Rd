@@ -15,7 +15,6 @@ Arimahr(y, p = 1, q = 1, d = 0, m = NULL)
 
 \item{m}{Order of the stage-one autoregression; NULL uses
 max(p + q + 1, floor(sqrt(n)) + 1).}
-
 }
 \value{
 List with phi, theta, intercept, sigma2, resid, m, p, q, d,

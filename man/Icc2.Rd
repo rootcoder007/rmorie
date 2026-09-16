@@ -38,7 +38,9 @@ E[MSC] = sigma_e^2 + n sigma_c^2 and E[MSE] = sigma_e^2, so the moment
 estimates are sigma_r^2 = (MSR - MSE)/k, sigma_c^2 = (MSC - MSE)/n and
 sigma_e^2 = MSE, and
 
-\deqn{ICC(2,1) = \frac{\sigma_r^2}{\sigma_r^2 + \sigma_c^2 + \sigma_e^2} = \frac{MSR - MSE}{MSR + (k-1)MSE + k(MSC - MSE)/n},}{ICC(2,1) = sigma_r^2/(sigma_r^2 + sigma_c^2 + sigma_e^2) = (MSR - MSE)/(MSR + (k-1) MSE + k (MSC - MSE)/n),}
+\deqn{ICC(2,1) = \frac{\sigma_r^2}{\sigma_r^2 + \sigma_c^2 + \sigma_e^2} = \frac{MSR -
+MSE}{MSR + (k-1)MSE + k(MSC - MSE)/n},}{ICC(2,1) = sigma_r^2/(sigma_r^2 + sigma_c^2 +
+sigma_e^2) = (MSR - MSE)/(MSR + (k-1) MSE + k (MSC - MSE)/n),}
 
 which is the form used here.  On the book's own data it returns 0.977209,
 and the same number comes out of the variance components computed from

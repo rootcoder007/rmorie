@@ -8,7 +8,6 @@ PascalId(n, k)
 }
 \arguments{
 \item{n, k}{requires 1 <= k <= n - 1.}
-
 }
 \value{
 list(n, k, lhs, rhs, term_left, term_right, forms_agree).

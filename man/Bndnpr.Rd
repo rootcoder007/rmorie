@@ -28,7 +28,7 @@ collapses to the unconditional worst-case bound; for any finite bandwidth
 the averaged interval is no wider.
 }
 \details{
-Formula: \code{E_X [ m_1(X) p_1(X) + y_0 (1 - p_1(X)) - m_0(X) p_0(X)
+Formula: \eqn{E_X [ m_1(X) p_1(X) + y_0 (1 - p_1(X)) - m_0(X) p_0(X)
 - y_1 (1 - p_0(X)) ]} for the lower bound and the mirror expression for
 the upper, with Gaussian kernel weights.
 }

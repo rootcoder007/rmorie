@@ -13,7 +13,9 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}, \code{morie_survrsf_forest}, \code{morie_survrsf_grow_tree}.
+A step of the survrsf_native implementation. Called by
+\code{morie_survrsf_best_split}, \code{morie_survrsf_forest},
+\code{morie_survrsf_grow_tree}.
 See the file header for the source the module follows.
 the source it follows.
 }

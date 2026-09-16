@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the pratt_native implementation. Called by \code{.pratt_attention}, \code{morie_pratt}, \code{morie_pratt_attention_entropy}.
+A step of the pratt_native implementation. Called by \code{.pratt_attention},
+\code{morie_pratt}, \code{morie_pratt_attention_entropy}.
 See the file header for the source the module follows.
 source it follows.
 }

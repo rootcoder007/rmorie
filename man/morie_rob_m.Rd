@@ -14,7 +14,6 @@ morie_rob_m(X, y, psi = "huber", c = NULL, max_iter = 100L)
 \item{c}{tuning constant; the family's 95\% value when \code{NULL}.}
 
 \item{max_iter}{IRLS iterations.}
-
 }
 \value{
 list: beta, scale, residuals, weights, psi, c, monotone,
@@ -28,7 +27,7 @@ default \code{c = 1.345}) or \code{"bisquare"} (redescending, default
 every observation a non-zero vote; a redescending psi zeroes gross
 outliers but its objective is non-convex, so IRLS from least
 squares finds a LOCAL solution -- for high-breakdown behaviour use
-\code{morie_rob_mm()}, and the output says so.
+\code{\link[=morie_rob_mm]{morie_rob_mm()}}, and the output says so.
 }
 \examples{
 set.seed(1)

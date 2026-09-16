@@ -11,7 +11,8 @@
 
 \item{G}{Passed to \code{.farmlmm_to_mat}.}
 
-\item{covariates}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{integer(0)}.}
+\item{covariates}{Coerced to integer by the body, with \code{as.integer}. Defaults to
+\code{integer(0)}.}
 
 \item{K}{Accepted by the signature and not used anywhere in the body.}
 }

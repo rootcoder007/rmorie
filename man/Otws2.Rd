@@ -10,7 +10,6 @@ Otws2(x, y, p = 2)
 \item{x, y}{Two samples of equal length.}
 
 \item{p}{Exponent, positive.}
-
 }
 \value{
 List with \code{Wp}, \code{Wp_p}, \code{n}, \code{p}.

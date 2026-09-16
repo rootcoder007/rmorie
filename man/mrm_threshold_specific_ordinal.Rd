@@ -34,10 +34,9 @@ the proportional-odds baseline is fit and an LR test against the
 threshold-specific model is reported.}
 
 \item{max_iter, tol}{IRLS / GLM control passed to \code{\link[stats]{glm.fit}}.}
-
 }
 \value{
-An object of class \code{c("mrm_threshold_specific_ordinal",
+An object of class \eqn{c("mrm_threshold_specific_ordinal",
   "morie_mrm_result", "list")} with elements
 \code{threshold_labels}, \code{covariate_names},
 \code{coefficients} (a (K-1) x p matrix), \code{cutpoints},

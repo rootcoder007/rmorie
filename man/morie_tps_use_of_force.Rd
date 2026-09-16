@@ -31,12 +31,10 @@ list compatible with the \code{morie_mrm_uof_result} family in
 \code{R/mrm_uof.R}.
 }
 \details{
-\subsection{Formula}{
-
+Formula
 \itemize{
 \item \code{rate = length(force_types) / n_encounters}
 \item \code{type_counts = table(force_types)}
-}
 }
 }
 \examples{

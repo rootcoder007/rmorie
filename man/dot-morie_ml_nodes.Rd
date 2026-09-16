@@ -9,13 +9,15 @@
 \arguments{
 \item{edges}{Coerced to character by the body, with \code{as.character}.}
 
-\item{extra}{Coerced to character by the body, with \code{as.character}. Defaults to \code{character(0)}.}
+\item{extra}{Coerced to character by the body, with \code{as.character}. Defaults to
+\code{character(0)}.}
 }
 \value{
 A vector, from \code{sort}.
 }
 \description{
-A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic}, \code{.morie_ml_dsep}, \code{morie_docalc} and 3 others in the module.
+A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic},
+\code{.morie_ml_dsep}, \code{morie_docalc} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

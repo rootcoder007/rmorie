@@ -9,7 +9,8 @@
 \arguments{
 \item{ps}{A vector; its length is taken.}
 
-\item{trim}{Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.1, 0.9)}.}
+\item{trim}{Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to
+\code{c(0.1, 0.9)}.}
 
 \item{trim_type}{Passed to \code{identical}. Defaults to \code{"value"}.}
 }

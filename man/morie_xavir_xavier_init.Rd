@@ -19,16 +19,18 @@ morie_xavier_initialization(fan_in, fan_out, seed = 42L, uniform = TRUE)
 \item{uniform}{Use uniform (TRUE, default) or normal (FALSE).}
 }
 \value{
-Named list \code{(weights, value, fan_in, fan_out, mean, std,
+Named list \eqn{(weights, value, fan_in, fan_out, mean, std,
   shape, method)}.
 }
 \description{
 R parity for \code{morie.fn.xavir.xavier_init}.
 }
 \details{
-\deqn{W \sim \mathcal{N}\!\left(0, \tfrac{2}{n_{in} + n_{out}}\right)}{W ~ N(0, tfrac{2}{n_in + n_out})}
+\deqn{W \sim \mathcal{N}\!\left(0, \tfrac{2}{n_{in} + n_{out}}\right)}{W ~ N(0,
+tfrac{2}{n_in + n_out})}
 (normal) or
-\eqn{W \sim U[-\sqrt{6/(n_{in}+n_{out})}, +\sqrt{6/(n_{in}+n_{out})}]}{W ~ U[-sqrt{6/(n_in+n_out)}, +sqrt{6/(n_in+n_out)}]}
+\eqn{W \sim U[-\sqrt{6/(n_{in}+n_{out})}, +\sqrt{6/(n_{in}+n_{out})}]}{W ~
+U[-sqrt{6/(n_in+n_out)}, +sqrt{6/(n_in+n_out)}]}
 (uniform).
 }
 \examples{

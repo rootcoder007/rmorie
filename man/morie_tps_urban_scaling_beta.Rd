@@ -29,7 +29,8 @@ standard error, R-squared, the back-transformed prefactor
 }
 \description{
 Performs the standard log-log OLS scaling fit
-\deqn{\log y_i = \log Y_0 + \beta \log p_i + \varepsilon_i,}{log y_i = log Y_0 + beta log p_i + varepsilon_i,}
+\deqn{\log y_i = \log Y_0 + \beta \log p_i + \varepsilon_i,}{log y_i = log Y_0 + beta
+log p_i + varepsilon_i,}
 where \eqn{y_i} is the crime count and \eqn{p_i} is the population
 of ward \code{i}. \eqn{\beta > 1}{beta > 1} indicates super-linear (crime
 grows faster than population), \eqn{\beta = 1}{beta = 1} linear, and
@@ -37,6 +38,13 @@ grows faster than population), \eqn{\beta = 1}{beta = 1} linear, and
 \emph{et al.} 2007; D'Orsogna & Perc 2015 sec. 4.1).
 }
 \examples{
+\dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\donttest{
+  rr <- morie_tps_urban_scaling_beta("Assault", year = 2024,
+                                      save_fig = FALSE)
+  print(rr$summary_lines)
+}
+\dontshow{\}) # examplesIf}
 \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
   rr <- morie_tps_urban_scaling_beta("Assault", year = 2024,

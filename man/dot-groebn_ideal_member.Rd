@@ -16,7 +16,8 @@
 \item{basis}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 }
 \value{
-A list with \code{estimate}, \code{member}, \code{remainder}, \code{order}, \code{basis}, \code{method}.
+A list with \code{estimate}, \code{member}, \code{remainder}, \code{order},
+\code{basis}, \code{method}.
 }
 \description{
 Ideal membership

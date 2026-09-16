@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the edgrn_native implementation. Called by \code{edgrn_moderate_dispersion}, \code{edgrn_tmm_factor}.
+A step of the edgrn_native implementation. Called by \code{edgrn_moderate_dispersion},
+\code{edgrn_tmm_factor}.
 See the file header for the source the module follows.
 source it follows.
 }

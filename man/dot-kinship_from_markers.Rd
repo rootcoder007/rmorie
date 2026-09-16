@@ -9,7 +9,8 @@
 \arguments{
 \item{G}{Passed to \code{.farmlmm_to_mat}.}
 
-\item{markers}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{markers}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 A list with \code{K}, \code{markers_used}, \code{n_markers}, \code{all_markers}.

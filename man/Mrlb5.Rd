@@ -10,7 +10,7 @@ Mrlb5(dg, density, mrl, surv = NULL)
 morie_fauzi_b5_coefficient_mrl(dg, density, mrl, surv = NULL)
 }
 \arguments{
-\item{dg}{\verb{g\'(g^-1(t))}.}
+\item{dg}{\verb{g'(g^-1(t))}.}
 
 \item{density}{\code{f_X(t)}.}
 
@@ -28,16 +28,18 @@ Eq. (4.28), second half:
 \details{
 It multiplies the \code{-h/n} term of (4.27), so it is the SIZE OF THE GAIN from
 smoothing:
-\deqn{\mathrm{Var}[m_{X,i}(t)] = \frac{1}{n}\frac{b_4(t)}{S_X^2(t)} - \frac{h}{n}\frac{b_5(t)}{S_X^2(t)}\int V(y)W(y)dy + o(h/n).}{Var[m(t)] = (1/n) b4/S^2 - (h/n) b5/S^2 int V W dy + o(h/n).}
+\deqn{\mathrm{Var}[m_{X,i}(t)] = \frac{1}{n}\frac{b_4(t)}{S_X^2(t)} -
+\frac{h}{n}\frac{b_5(t)}{S_X^2(t)}\int V(y)W(y)dy + o(h/n).}{Var[m(t)] = (1/n)
+b4/S^2 - (h/n) b5/S^2 int V W dy + o(h/n).}
 
 The sign is the same lesson as \code{r1} in Chapter 2 -- smoothing a
 distribution-type functional REDUCES variance -- and the same reason the
 bandwidth rate here is \code{n^(-1/3)}, not \code{n^(-1/5)}.
 
-Note where \verb{g\'} enters: the gain is proportional to the derivative of the
+Note where \verb{g'} enters: the gain is proportional to the derivative of the
 transformation at the point. A transformation that stretches near \code{t} buys
 more variance reduction there, the mechanism behind Remark 5.1's observation
-that \verb{g\'(g^-1(x)) >= 1} makes the boundary-free estimator strictly better
+that \verb{g'(g^-1(x)) >= 1} makes the boundary-free estimator strictly better
 than the naive one.
 }
 \examples{

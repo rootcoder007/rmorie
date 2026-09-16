@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the helpers_w3num implementation. Called by \code{.alfrf2_centre}, \code{.baysmplr_build_tree}, \code{.blinkg_corr} and 101 others in the module.
+A step of the helpers_w3num implementation. Called by \code{.alfrf2_centre},
+\code{.baysmplr_build_tree}, \code{.blinkg_corr} and 101 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

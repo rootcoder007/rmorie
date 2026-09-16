@@ -15,7 +15,8 @@
 )
 }
 \arguments{
-\item{logf}{The body requires: baygsl: the shrinkage loop did not terminate; is logf returning a constant or NaN?.}
+\item{logf}{The body requires: baygsl: the shrinkage loop did not terminate; is logf
+returning a constant or NaN?.}
 
 \item{x0}{Numeric; combined arithmetically in the body.}
 

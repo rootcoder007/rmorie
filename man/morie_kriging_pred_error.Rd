@@ -18,7 +18,7 @@ morie_kriging_pred_error(
 )
 }
 \arguments{
-\item{coords, z}{As in \code{morie_cressie_hawkins()}.}
+\item{coords, z}{As in \code{\link[=morie_cressie_hawkins]{morie_cressie_hawkins()}}.}
 
 \item{target}{Matrix of prediction locations.}
 
@@ -28,11 +28,6 @@ morie_kriging_pred_error(
 least squares when any is NULL.}
 
 \item{jitter, n_jitter, seed}{Controls for approximating \eqn{B}.}
-
-
-
-
-
 }
 \value{
 A list with \code{prediction}, \code{mse}, \code{mse_plugin}, \code{correction},

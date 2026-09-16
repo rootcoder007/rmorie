@@ -16,7 +16,6 @@ Admixq(G, K = 2, steps = 50, Q0 = NULL, P0 = NULL)
 \item{Q0, P0}{Starting values; NULL uses the deterministic defaults
 q_ik proportional to 1 + ((i+k) mod K) and p_kj = (2 + ((k J + j) mod
 7))/10 with zero-based i, j, k.}
-
 }
 \value{
 List with Q, P, loglik, loglik0, I, J, K, steps.

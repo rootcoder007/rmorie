@@ -13,7 +13,8 @@
 The value of \code{yv}, as built in the body.
 }
 \description{
-A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
+A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta},
+\code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

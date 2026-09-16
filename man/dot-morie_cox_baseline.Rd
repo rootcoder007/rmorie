@@ -15,13 +15,16 @@
 
 \item{beta}{A matrix; passed to \code{\%*\%}.}
 
-\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{offset}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
 A list with \code{times}, \code{hazard}, \code{cumhazard}.
 }
 \description{
-A step of the cox_native implementation. Called by \code{morie_cox_breslow_step}, \code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the module.
+A step of the cox_native implementation. Called by \code{morie_cox_breslow_step},
+\code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the
+module.
 See the file header for the source the module follows.
 source it follows.
 }

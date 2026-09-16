@@ -37,7 +37,6 @@ observed t, which is the default, b - a.}
 
 \item{ridge}{added to the diagonal of G before inversion; G from a finite
 marker panel is singular whenever two lines share a haplotype.}
-
 }
 \value{
 list: estimate, mu, beta_func, beta, g_hat, coefs, X, Q, fitted,

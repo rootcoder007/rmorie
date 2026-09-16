@@ -19,14 +19,13 @@ directory (CRAN-safe: never writes without an explicit
 }
 
 \code{morie_otis_otdml} is excluded from the capsule because it
-requires the caller to specify \code{(treatment, outcome,
+requires the caller to specify \eqn{(treatment, outcome,
 covariates)} -- call it directly when needed.
-\subsection{Year-lock invariant}{
 
+Year-lock invariant
 OTIS \code{UniqueIndividual_ID} is randomly reassigned every fiscal
 year. All analyses are computed within \code{EndFiscalYear};
 cross-year ID joins are forbidden (the
 \code{variable_taxonomy.R} registry sets
 \code{cross_year_safe = FALSE}).
-}
 }

@@ -19,12 +19,13 @@ morie_winsorized_regression(X, y, tr = 0.2, n_iter = 20, tol = 1e-04)
 
 \item{equal_variance}{pool the Winsorized variances}
 
-
 \item{X}{Argument \code{X}; see Usage.}
 
 \item{n_iter}{Argument \code{n_iter}; see Usage.}
 
 \item{tol}{Argument \code{tol}; see Usage.}
+
+\item{x, }{y numeric vectors}
 }
 \value{
 a list; see each method's description

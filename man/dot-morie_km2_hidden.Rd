@@ -17,7 +17,8 @@
 The value of \code{v}, as built in the body.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_affect_lm}, \code{morie_kamath_ch6_lstm_softmax_word}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch6_affect_lm}, \code{morie_kamath_ch6_lstm_softmax_word}.
 See the file header for the source the module follows.
 for the source it follows.
 }

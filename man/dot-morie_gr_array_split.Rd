@@ -15,7 +15,9 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the geron_ml_native implementation. Called by \code{morie_geron_cross_validation_score}, \code{morie_geron_kfold}, \code{morie_geron_kfold_cv} and 1 others in the module.
+A step of the geron_ml_native implementation. Called by
+\code{morie_geron_cross_validation_score}, \code{morie_geron_kfold},
+\code{morie_geron_kfold_cv} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

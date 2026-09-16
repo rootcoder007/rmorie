@@ -15,7 +15,6 @@ RtSi(incidence, serial_interval, window = 7L, a_prior = 1, b_prior = 5)
 
 \item{a_prior, b_prior}{gamma prior shape and SCALE (EpiEstim default
 prior mean 5, sd 5 is a = 1, b = 5)}
-
 }
 \value{
 list(r_mean, r_std, a_posterior, b_posterior, lambda, t_start,

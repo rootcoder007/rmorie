@@ -36,8 +36,6 @@ reference, e.g. \code{project = "bigquery-public-data"},
 \item{max_rows}{Optional cap on rows downloaded.}
 
 \item{quiet}{Suppress \pkg{bigrquery} progress output.}
-
-
 }
 \value{
 A base R \code{data.frame}.
@@ -50,6 +48,19 @@ backtick-quoted \code{SELECT} against a fully-qualified table and
 downloads the result.
 }
 \examples{
+\dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+# Runs when the caller has bigrquery + a GCP_PROJECT billing project.
+# Keyless alternative for the same data: morie_ingest_chicago_crime()
+# (Socrata, no account) or the bundled samples in 'rmoriedata'.
+df <- morie_ingest_bigquery_table(
+  project = "bigquery-public-data",
+  dataset = "chicago_crime",
+  table   = "crime",
+  where   = "year = 2024",
+  limit   = 10000L
+)
+head(df)
+\dontshow{\}) # examplesIf}
 \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 # Keyless alternative for the same data: morie_ingest_chicago_crime()

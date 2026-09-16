@@ -15,7 +15,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient}, \code{matern52}, \code{squared_exponential}.
+A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient},
+\code{matern52}, \code{squared_exponential}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -8,7 +8,6 @@ CovZMean(x, y)
 }
 \arguments{
 \item{x, y}{equal-length zero-mean data vectors.}
-
 }
 \value{
 list(cov).

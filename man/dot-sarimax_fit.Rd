@@ -30,7 +30,11 @@
 \item{method}{One of \code{"css"}, \code{"ml"}, \code{"uls"}. Defaults to \code{"ml"}.}
 }
 \value{
-A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2}, \code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals}, \code{innovation_variance}, \code{include_constant}, \code{order}, \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
+A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi},
+\code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2},
+\code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals},
+\code{innovation_variance}, \code{include_constant}, \code{order},
+\code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
 }
 \description{
 A step of the sarimax_native implementation. Called by \code{.try_fit}, \code{morie_sarimax}.

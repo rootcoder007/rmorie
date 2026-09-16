@@ -29,7 +29,6 @@ Y > y_K; all ones if omitted.}
 omitted.}
 
 \item{cycles, gs_iter}{Coordinate-descent controls.}
-
 }
 \value{
 list: estimate, theta_hat, beta_hat, h_j_hat, Lambda0, loglik,

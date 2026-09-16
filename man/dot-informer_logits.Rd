@@ -17,7 +17,9 @@
 A vector, from \code{sapply}.
 }
 \description{
-A step of the informer_native implementation. Called by \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention}, \code{morie_informer_sparsity_measure}.
+A step of the informer_native implementation. Called by
+\code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention},
+\code{morie_informer_sparsity_measure}.
 See the file header for the source the module follows.
 the source it follows.
 }

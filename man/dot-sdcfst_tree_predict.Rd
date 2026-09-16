@@ -7,7 +7,8 @@
 .sdcfst_tree_predict(node, x)
 }
 \arguments{
-\item{node}{A list; the body reads \code{$cut}, \code{$feature}, \code{$leaf}, \code{$left}, \code{$right}, \code{$value} from it.}
+\item{node}{A list; the body reads \code{$cut}, \code{$feature}, \code{$leaf},
+\code{$left}, \code{$right}, \code{$value} from it.}
 
 \item{x}{A vector; indexed elementwise.}
 }

@@ -10,7 +10,8 @@
 \item{z}{A matrix; passed to \code{nrow}.}
 }
 \value{
-A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{covariance}, \code{lags_j}, \code{lags_k}.
+A list with \code{periodogram}, \code{omega1}, \code{omega2},
+\code{covariance}, \code{lags_j}, \code{lags_k}.
 }
 \description{
 A step of the schab_rest_shared implementation. Called by \code{spperiod}.

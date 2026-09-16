@@ -14,7 +14,8 @@
 \item{oc}{Coerced to logical by the body, with \code{as.logical}.}
 }
 \value{
-A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason}, \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
+A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason},
+\code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
 }
 \description{
 A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_unify}.

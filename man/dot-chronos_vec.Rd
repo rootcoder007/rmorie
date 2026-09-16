@@ -13,7 +13,8 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the chronos_native implementation. Called by \code{forecast_summary}, \code{mean_scale}, \code{quantile_bins} and 1 others in the module.
+A step of the chronos_native implementation. Called by \code{forecast_summary},
+\code{mean_scale}, \code{quantile_bins} and 1 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -29,7 +29,6 @@ Modelrl(
 \item{tol}{sweep tolerance.}
 
 \item{max_iter}{sweep cap.}
-
 }
 \value{
 list: estimate, v, policy, sweeps, n_states, n_actions, method.

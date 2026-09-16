@@ -9,7 +9,7 @@ morie_matrxP(x, window)
 \arguments{
 \item{x}{Numeric series.}
 
-\item{window}{Subsequence length; needs \code{2 <= window <=
+\item{window}{Subsequence length; needs \eqn{2 <= window <=
 length(x)/2}.}
 }
 \value{

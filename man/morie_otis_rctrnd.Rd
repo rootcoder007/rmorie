@@ -15,8 +15,6 @@ morie_otis_rctrnd(
 \item{df}{data.frame.}
 
 \item{id_col, year_col, region_col}{Column names.}
-
-
 }
 \value{
 \code{morie_otis_result} (the trends table is in

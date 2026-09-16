@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{lyapunov_exponent}.
+A step of the lyapun_native implementation. Called by \code{divergence_curve},
+\code{lyapunov_exponent}.
 See the file header for the source the module follows.
 source it follows.
 }

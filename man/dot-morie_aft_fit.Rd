@@ -30,7 +30,8 @@
 \item{add_intercept}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
+A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov},
+\code{n_iter}, \code{converged}.
 }
 \description{
 A step of the aft_native implementation. Called by \code{.morie_aft_common}.

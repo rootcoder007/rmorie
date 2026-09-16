@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat}, \code{Tmlecde}.
+A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat},
+\code{Tmlecde}.
 See the file header for the source the module follows.
 source it follows.
 }

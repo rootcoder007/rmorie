@@ -21,7 +21,8 @@
 A list with \code{chosen}, \code{M}.
 }
 \description{
-A step of the tncomp_native implementation. Called by \code{maxmin_selection}, \code{maxsum_selection}, \code{morie_tncomp}.
+A step of the tncomp_native implementation. Called by \code{maxmin_selection},
+\code{maxsum_selection}, \code{morie_tncomp}.
 See the file header for the source the module follows.
 source it follows.
 }

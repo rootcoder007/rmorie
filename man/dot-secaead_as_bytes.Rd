@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the secaead_native implementation. Called by \code{.secaead_constant_time_equal}, \code{.secaead_hexlify}, \code{.secaead_mac_data} and 4 others in the module.
+A step of the secaead_native implementation. Called by
+\code{.secaead_constant_time_equal}, \code{.secaead_hexlify}, \code{.secaead_mac_data}
+and 4 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

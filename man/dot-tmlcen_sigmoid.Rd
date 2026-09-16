@@ -13,7 +13,9 @@
 A numeric value.
 }
 \description{
-A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}, \code{morie_censoring_survival}, \code{morie_ipcw_interval} and 1 others in the module.
+A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit},
+\code{morie_censoring_survival}, \code{morie_ipcw_interval} and 1 others in the
+module.
 See the file header for the source the module follows.
 source it follows.
 }

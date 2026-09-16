@@ -111,4 +111,9 @@ morie_siu_translate(target_lang = "en",
 # ollama); translates the French-only directors reports field-by-field.
 res <- morie_siu_translate_fr_to_en(case_numbers = "26-OCI-168")
 }
+\donttest{
+# Needs the SIU HTML cache plus a configured LLM provider (e.g. local
+# ollama); translates the French-only directors reports field-by-field.
+res <- morie_siu_translate_fr_to_en(case_numbers = "26-OCI-168")
+}
 }

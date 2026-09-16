@@ -23,7 +23,6 @@ morie_geron_transfer_learning(
 \item{n_frozen}{Leading layers to freeze.}
 
 \item{epochs, lr}{As in Python original.}
-
 }
 \value{
 list with weights, frozen, loss_curve, initial_loss, final_loss,

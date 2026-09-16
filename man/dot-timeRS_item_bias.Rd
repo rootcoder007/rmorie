@@ -21,7 +21,8 @@
 A list with \code{bias}, \code{bin}.
 }
 \description{
-A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time}, \code{morie_timeRS_item_bias}.
+A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time},
+\code{morie_timeRS_item_bias}.
 See the file header for the source the module follows.
 source it follows.
 }

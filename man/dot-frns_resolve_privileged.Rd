@@ -7,7 +7,8 @@
 .frns_resolve_privileged(privileged, rates)
 }
 \arguments{
-\item{privileged}{Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.}
+\item{privileged}{Optional; may be \code{NULL}. Coerced to character by the body, with
+\code{as.character}.}
 
 \item{rates}{Iterated over elementwise, with \code{vapply}.}
 }

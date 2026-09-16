@@ -30,7 +30,6 @@ result carries \code{detected}.}
 pairwise distance.}
 
 \item{kmin, kmax}{Scan range; \code{kmax} defaults to \code{n - 2}.}
-
 }
 \value{
 A list with \code{estimate} (the estimated split index),

@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the grclus_native implementation. Called by \code{.grclus_grow_partition}, \code{.grclus_match_vertices}, \code{.grclus_shuffled}.
+A step of the grclus_native implementation. Called by \code{.grclus_grow_partition},
+\code{.grclus_match_vertices}, \code{.grclus_shuffled}.
 See the file header for the source the module follows.
 source it follows.
 }

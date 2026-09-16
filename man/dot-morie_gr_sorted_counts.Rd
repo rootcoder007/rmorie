@@ -15,7 +15,8 @@
 A list with \code{y}, \code{s}, \code{P}, \code{N}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_precision_recall_curve}, \code{morie_geron_roc_curve}.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_precision_recall_curve}, \code{morie_geron_roc_curve}.
 See the file header for the source the module follows.
 for the source it follows.
 }

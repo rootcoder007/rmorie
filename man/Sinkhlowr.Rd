@@ -29,7 +29,6 @@ Sinkhlowr(
 \item{inner}{inner Sinkhorn iterations.}
 
 \item{gamma}{mirror-descent step scaling.}
-
 }
 \value{
 list: U, V, T, g, estimate, cost, rank, method.

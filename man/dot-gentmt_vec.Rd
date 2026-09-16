@@ -13,7 +13,9 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_treatment_density} and 1 others in the module.
+A step of the gentmt_native implementation. Called by
+\code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
+\code{.gentmt_treatment_density} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

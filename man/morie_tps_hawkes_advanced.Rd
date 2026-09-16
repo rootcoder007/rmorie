@@ -12,7 +12,8 @@ time-varying \emph{and} the excitation kernel is non-exponential
 }
 \details{
 The complete intensity is
-\deqn{\lambda(t) = \mu(t) + \int_0^{t-} g(t - s) \, dN_s,}{lambda(t) = u(t) + int_0^t- g(t - s) dN_s,}
+\deqn{\lambda(t) = \mu(t) + \int_0^{t-} g(t - s) \, dN_s,}{lambda(t) = u(t) + int_0^t-
+g(t - s) dN_s,}
 with kernel decomposition \eqn{g(u) = \eta \cdot \tilde g(u)}{g(u) = eta * tilde g(u)} where
 \eqn{\eta \in (0, 1)}{eta in (0, 1)} is the branching ratio (mean offspring per
 event) and \eqn{\tilde g}{tilde g} is a probability density on
@@ -21,7 +22,8 @@ event) and \eqn{\tilde g}{tilde g} is a probability density on
 Supported kernels: exponential, gamma, Weibull, Lomax (Pareto-II).
 Supported baselines: constant and sinusoidal-with-trend
 \deqn{\mu(t) = \exp\bigl(a_0 + a_1 (t/T) + a_2 \sin(2\pi t / 365.25)
-       + a_3 \cos(2\pi t / 365.25)\bigr).}{u(t) = expbigl(a_0 + a_1 (t/T) + a_2 sin(2pi t / 365.25) + a_3 cos(2pi t / 365.25)bigr).}
+       + a_3 \cos(2\pi t / 365.25)\bigr).}{u(t) = expbigl(a_0 + a_1 (t/T) + a_2
+sin(2pi t / 365.25) + a_3 cos(2pi t / 365.25)bigr).}
 
 Companion to \code{morie_tps_hawkes_temporal_fit} (exponential /
 constant Markovian special case) in \code{morie.tps_stochastic}.
@@ -36,7 +38,8 @@ baseline fast path; otherwise the negative log-likelihood is
 computed in base R via direct O(n^2) summation. The non-Markovian
 kernels (gamma, Weibull, Lomax) always use the base-R path -- those
 kernels lack the memorylessness required for O(n) recursion.
-\subsection{Functions}{
+
+Functions
 
 \itemize{
 \item \code{\link{morie_tps_hawkes_advanced_fit}} -- fit one
@@ -47,7 +50,6 @@ comparison across (kernel, baseline) combinations.
 \item \code{\link{morie_tps_hawkes_markovian_vs_nonmarkovian}} --
 focused 2x2 comparison: classical exp/const vs gamma/
 sinusoidal.
-}
 }
 }
 \references{

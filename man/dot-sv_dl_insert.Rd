@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the sv_dl_native implementation. Called by \code{.sv_dl_size}, \code{morie_sv_dl_classify_pair}.
+A step of the sv_dl_native implementation. Called by \code{.sv_dl_size},
+\code{morie_sv_dl_classify_pair}.
 See the file header for the source the module follows.
 source it follows.
 }

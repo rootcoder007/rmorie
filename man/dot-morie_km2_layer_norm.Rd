@@ -15,7 +15,9 @@
 A numeric value.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_layer_norm_rows}, \code{morie_kamath_post_ln_transformer}, \code{morie_kamath_pre_ln_transformer}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_layer_norm_rows}, \code{morie_kamath_post_ln_transformer},
+\code{morie_kamath_pre_ln_transformer}.
 See the file header for the source the module follows.
 for the source it follows.
 }

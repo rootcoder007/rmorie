@@ -31,7 +31,8 @@ loaders, returning a named list with \code{data},
 \code{morie_arsau_available_datasets()},
 \code{morie_arsau_describe()}: discovery callables.
 }
-\subsection{Path portability}{
+
+Path portability
 
 No path on the maintainer's workstation is hard-coded.  All file
 resolution goes through \code{.morie_resolve_arsau_dir} (defined
@@ -44,13 +45,12 @@ below), which honours, in order:
 \item \code{morie_cache_dir("arsau")} (only if already populated by
 a previous \code{morie_arsau_download()} call -- never
 auto-created at read-time, per CRAN policy)
-\item \code{system.file("extdata", "arsau", package = "rmorie")} --
+\item \code{.rmorie_extdata("arsau")} --
 the included tiny fixture for unit tests + tutorials
 \item stop with a remediation paragraph
 }
-}
 
-\subsection{2023 weapon-records invalidity gate}{
+2023 weapon-records invalidity gate
 
 The 2023 release ships \code{uof_weapon_records_invaliddata.csv},
 flagged by the ministry as non-compliant.
@@ -58,5 +58,4 @@ flagged by the ministry as non-compliant.
 the caller passes \code{allow_invalid = TRUE}; when allowed, the
 returned object's \code{is_valid} field is \code{FALSE} and its
 \code{warnings} list opens with an explicit caveat paragraph.
-}
 }

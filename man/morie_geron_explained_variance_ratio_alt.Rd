@@ -14,7 +14,8 @@ morie_geron_explained_variance_ratio_alt(X, n_components = NULL, center = TRUE)
 \item{center}{Subtract column means.}
 }
 \value{
-List with \code{explained_variance_ratio}, \code{explained_variance}, \code{singular_values}, \code{cumulative}, \code{n_for_95}.
+List with \code{explained_variance_ratio}, \code{explained_variance}, \code{singular_values},
+\code{cumulative}, \code{n_for_95}.
 }
 \description{
 Explained variance ratio from the SVD of the centred data matrix (hmevr)

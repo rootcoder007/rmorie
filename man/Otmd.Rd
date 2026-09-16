@@ -24,7 +24,7 @@ scale and the correlation, so the cost is invariant to any full-rank
 affine recoding of the data.
 }
 \details{
-Formula: \eqn{_ij = (x_i - y_j) prime Sigma^{-1} (x_i - y_j)}.
+Formula: \eqn{_ij = (x_i - y_j)' Sigma^{-1} (x_i - y_j)}.
 }
 \examples{
 Otmd(X = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8), Sigma = 0.5)

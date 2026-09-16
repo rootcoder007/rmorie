@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{.poissp_joint_hessian}.
+A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
+\code{.poissp_joint_hessian}.
 See the file header for the source the module follows.
 source it follows.
 }

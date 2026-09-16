@@ -12,7 +12,6 @@ Otsw(X, Y, p = 2, n_proj = 32)
 \item{p}{Exponent, positive.}
 
 \item{n_proj}{Number of directions.}
-
 }
 \value{
 List with \code{SW}, \code{SW_p}, \code{per_proj}, \code{n},
@@ -26,7 +25,7 @@ are a van der Corput / AS 241 sequence rather than a pseudo-random one,
 so the value is reproducible across arms and across runs.
 }
 \details{
-Formula: \code{SW_p(mu,nu) = (E_theta [W_p(P_theta mu, P_theta
+Formula: \eqn{SW_p(mu,nu) = (E_theta [W_p(P_theta mu, P_theta
 nu)^p])^(1/p)} -- Bonneel et al. (2015) eq. (5); Peyre and Cuturi
 (2019) eq. (10.13), p. 166.
 }

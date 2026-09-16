@@ -18,7 +18,8 @@
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \value{
-A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi}, \code{n_iter}, \code{converged}.
+A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi},
+\code{n_iter}, \code{converged}.
 }
 \description{
 GEE with Poisson family and exchangeable working correlation (Liang &

@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the rfppos_native implementation. Called by \code{morie_rfppos_angle}, \code{morie_rfppos_dihedral}, \code{morie_rfppos_distance}.
+A step of the rfppos_native implementation. Called by \code{morie_rfppos_angle},
+\code{morie_rfppos_dihedral}, \code{morie_rfppos_distance}.
 See the file header for the source the module follows.
 source it follows.
 }

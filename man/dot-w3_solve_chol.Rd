@@ -15,7 +15,8 @@
 The value of \code{x}, as built in the body.
 }
 \description{
-A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol}, \code{.w3_ols}, \code{morie_cypin_fit} and 3 others in the module.
+A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol},
+\code{.w3_ols}, \code{morie_cypin_fit} and 3 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

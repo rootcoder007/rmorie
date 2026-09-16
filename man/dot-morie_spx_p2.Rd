@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ}, \code{MoranRes}.
+A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ},
+\code{MoranRes}.
 See the file header for the source the module follows.
 source it follows.
 }

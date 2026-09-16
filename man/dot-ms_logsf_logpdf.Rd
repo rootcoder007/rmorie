@@ -7,7 +7,8 @@
 .ms_logsf_logpdf(dist, y, mu, logsig)
 }
 \arguments{
-\item{dist}{One of \code{"exponential"}, \code{"loglogistic"}, \code{"lognormal"}, \code{"weibull"}.}
+\item{dist}{One of \code{"exponential"}, \code{"loglogistic"}, \code{"lognormal"},
+\code{"weibull"}.}
 
 \item{y}{Numeric; combined arithmetically in the body.}
 

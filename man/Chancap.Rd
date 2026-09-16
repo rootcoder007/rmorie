@@ -12,14 +12,19 @@ Chancap(P, iters = 200)
 \item{iters}{See Usage.}
 }
 \value{
-List with \code{capacity_bits}, \code{capacity_nats}, \code{input_dist}, \code{trace} (nats per iteration), \code{iterations}.
+List with \code{capacity_bits}, \code{capacity_nats}, \code{input_dist}, \code{trace}
+(nats per iteration), \code{iterations}.
 }
 \description{
-Formula: q(x|y) = r(x) P(y|x) / sum_x' r(x') P(y|x'); r(x) <- exp(sum_y P(y|x) log q(x|y)) normalised; C = max_r I(X;Y)
+Formula: q(x|y) = r(x) P(y|x) / sum_x' r(x') P(y|x'); r(x) <- exp(sum_y P(y|x) log
+q(x|y)) normalised; C = max_r I(X;Y)
 }
 \examples{
 Chancap(P = 1)
 }
 \references{
-Blahut (1972), Computation of channel capacity and rate-distortion functions, IEEE Transactions on Information Theory 18:460-473; Arimoto (1972), same volume, 14-20. Neither is held locally; the alternating update is the standard published form of the algorithm.
+Blahut (1972), Computation of channel capacity and rate-distortion
+functions, IEEE Transactions on Information Theory 18:460-473; Arimoto (1972), same
+volume, 14-20. Neither is held locally; the alternating update is the standard
+published form of the algorithm.
 }

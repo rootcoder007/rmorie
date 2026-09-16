@@ -12,7 +12,6 @@ Varatr(y, alpha = 0.05, a_grid = NULL, b_grid = NULL)
 \item{alpha}{Tail probability in (0, 1); 0.05 is the 95 percent VaR.}
 
 \item{a_grid, b_grid}{Lattices for the ARCH and GARCH coefficients.}
-
 }
 \value{
 List with \code{var}, \code{es}, \code{mu}, \code{sigma},

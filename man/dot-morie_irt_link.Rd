@@ -31,7 +31,8 @@ differ}
 \item{aggregate_first}{A flag; the body branches on it.}
 }
 \value{
-A list with \code{A}, \code{B}, \code{criterion}, \code{a_transformed}, \code{b_transformed}, \code{n_items}, \code{converged}, \code{warnings}.
+A list with \code{A}, \code{B}, \code{criterion}, \code{a_transformed},
+\code{b_transformed}, \code{n_items}, \code{converged}, \code{warnings}.
 }
 \description{
 ONLY in whether the curve differences are summed before or after

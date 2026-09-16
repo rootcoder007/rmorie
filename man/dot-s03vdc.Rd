@@ -15,7 +15,8 @@
 The value of \code{r}, as built in the body.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.bt_counts}, \code{.rfcand}, \code{.s03mammen} and 22 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.bt_counts}, \code{.rfcand},
+\code{.s03mammen} and 22 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -7,7 +7,8 @@
 .schab_as_empirical_variogram(ev)
 }
 \arguments{
-\item{ev}{A list; the body reads \code{$counts}, \code{$gamma}, \code{$lag}, \code{$lags}, \code{$n_pairs} from it.}
+\item{ev}{A list; the body reads \code{$counts}, \code{$gamma}, \code{$lag},
+\code{$lags}, \code{$n_pairs} from it.}
 }
 \value{
 A list with \code{lags}, \code{gamma}, \code{counts}.

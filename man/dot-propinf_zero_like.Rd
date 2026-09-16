@@ -13,7 +13,8 @@
 The value of \code{lapply}.
 }
 \description{
-A step of the propinf_native implementation. Called by \code{.propinf_train_vector_meta}, \code{.propinf_zero_grads}.
+A step of the propinf_native implementation. Called by
+\code{.propinf_train_vector_meta}, \code{.propinf_zero_grads}.
 See the file header for the source the module follows.
 the source it follows.
 }

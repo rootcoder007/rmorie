@@ -13,7 +13,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the mafft_native implementation. Called by \code{iterative_refine}, \code{progressive_align}.
+A step of the mafft_native implementation. Called by \code{iterative_refine},
+\code{progressive_align}.
 See the file header for the source the module follows.
 source it follows.
 }

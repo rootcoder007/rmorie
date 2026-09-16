@@ -14,7 +14,10 @@
 \item{constraint}{Compared against \code{"sum_zero"}. Defaults to \code{"reference"}.}
 }
 \value{
-A list with \code{estimate}, \code{coefficients}, \code{names}, \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{tss}, \code{r_squared}, \code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences}, \code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.
+A list with \code{estimate}, \code{coefficients}, \code{names}, \code{beta},
+\code{fitted}, \code{residuals}, \code{rss}, \code{tss}, \code{r_squared},
+\code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences},
+\code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.
 }
 \description{
 A step of the frwil_native implementation. No other function in the package calls it.

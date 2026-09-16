@@ -15,7 +15,8 @@
 A list with \code{mu}, \code{S}.
 }
 \description{
-A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm}, \code{Mcdcv} and 2 others in the module.
+A step of the helpers_rouss implementation. Called by \code{.rscstep}, \code{Fastm},
+\code{Mcdcv} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

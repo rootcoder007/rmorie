@@ -13,12 +13,14 @@
 
 \item{H}{Passed to \code{.gentmt_treatment_density}.}
 
-\item{doses}{Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.}
+\item{doses}{Optional; may be \code{NULL}. A vector; its length is taken and its
+elements indexed.}
 
 \item{degree}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.}
 }
 \value{
-A list with \code{estimate}, \code{se}, \code{doses}, \code{curve}, \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
+A list with \code{estimate}, \code{se}, \code{doses}, \code{curve},
+\code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
 }
 \description{
 A step of the gentmt_native implementation. Called by \code{morie_gentmt}.

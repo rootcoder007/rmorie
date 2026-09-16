@@ -17,7 +17,9 @@
 A list with \code{X}, \code{P}, \code{Yh}, \code{G}.
 }
 \description{
-A step of the geron_train_native implementation. Called by \code{morie_geron_ch4_cross_entropy_gradient_vector}, \code{morie_geron_softmax_cost_gradient}.
+A step of the geron_train_native implementation. Called by
+\code{morie_geron_ch4_cross_entropy_gradient_vector},
+\code{morie_geron_softmax_cost_gradient}.
 See the file header for the source the module follows.
 for the source it follows.
 }

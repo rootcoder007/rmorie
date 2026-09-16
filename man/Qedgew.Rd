@@ -37,18 +37,18 @@ morie_fauzi_gn_edgeworth_correction(
 
 \item{book}{Logical; use the book's \verb{3 e2n + e4n} instead of the primary
 source's \verb{3 e3n + e4n}.}
-
-
-
-
-
 }
 \value{
 Named list with \code{estimate}, \code{normal}, \code{correction}, \code{book}, \code{method}.
 }
 \description{
 Theorem 3.1, the function \code{G_n} of (3.14):
-\deqn{G_n(x) = \Phi(x) - \phi(x)\Big\{\frac{x^2-1}{6n^{1/2}\sigma_n^3}\Big(e_{1n} + \frac{3e_{2n}}{h}\Big) + \frac{1}{nh^2}\Big[\frac{x}{4\sigma_n^2}(4e_{5n}+e_{6n}) + \frac{x^3-3x}{6\sigma_n^4}(3e_{3n}+e_{4n}) + \frac{x^5-10x^3+15x}{8\sigma_n^6}e_{2n}^2\Big]\Big\}.}{G_n(x) = Phi(x) - phi(x){(x^2-1)/(6 n^1/2 s^3)(e1n + 3 e2n/h) + (1/(n h^2))[x/(4 s^2)(4 e5n + e6n) + (x^3-3x)/(6 s^4)(3 e3n + e4n) + (x^5-10x^3+15x)/(8 s^6) e2n^2]}.}
+\deqn{G_n(x) = \Phi(x) - \phi(x)\Big\{\frac{x^2-1}{6n^{1/2}\sigma_n^3}\Big(e_{1n} +
+\frac{3e_{2n}}{h}\Big) + \frac{1}{nh^2}\Big[\frac{x}{4\sigma_n^2}(4e_{5n}+e_{6n}) +
+\frac{x^3-3x}{6\sigma_n^4}(3e_{3n}+e_{4n}) +
+\frac{x^5-10x^3+15x}{8\sigma_n^6}e_{2n}^2\Big]\Big\}.}{G_n(x) = Phi(x) -
+phi(x){(x^2-1)/(6 n^1/2 s^3)(e1n + 3 e2n/h) + (1/(n h^2))[x/(4 s^2)(4 e5n + e6n) +
+(x^3-3x)/(6 s^4)(3 e3n + e4n) + (x^5-10x^3+15x)/(8 s^6) e2n^2]}.}
 }
 \details{
 Every bracket is a Hermite polynomial -- \code{He2 = x^2-1}, \verb{He3 = x^3-3x},
@@ -68,6 +68,7 @@ defines \code{e3n} immediately below the display and then never uses it. Pass
 Qedgew(x = 0, n = 100, h = 0.1, sigma = 1, e1 = 0, e2 = 0, e3 = 0, e4 = 0, e5 = 0, e6 = 0)
 }
 \references{
-Fauzi and Maesono (2023), Theorem 3.1, Eq. (3.14); Maesono and Penev (2011), AISM 63:617-644, Theorem 1.
+Fauzi and Maesono (2023), Theorem 3.1, Eq. (3.14); Maesono and Penev
+(2011), AISM 63:617-644, Theorem 1.
 }
 \keyword{internal}

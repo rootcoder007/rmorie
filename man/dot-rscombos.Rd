@@ -17,7 +17,8 @@
 The value of \code{repeat}.
 }
 \description{
-A step of the helpers_rouss implementation. Called by \code{.rscombosstride}, \code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
+A step of the helpers_rouss implementation. Called by \code{.rscombosstride},
+\code{Lmsreg}, \code{Ltsreg} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

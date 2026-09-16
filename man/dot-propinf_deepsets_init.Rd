@@ -27,10 +27,12 @@
 
 \item{context}{One of \code{"none"}, \code{"paired"}. Defaults to \code{"paired"}.}
 
-\item{edge_hidden}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{edge_hidden}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
-A list with \code{phis}, \code{psis}, \code{rho}, \code{repr_dim}, \code{shapes}, \code{context}, \code{scalers}.
+A list with \code{phis}, \code{psis}, \code{rho}, \code{repr_dim},
+\code{shapes}, \code{context}, \code{scalers}.
 }
 \description{
 A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}.

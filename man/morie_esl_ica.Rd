@@ -23,7 +23,6 @@ morie_esl_ica(
 \item{max_iter, tol}{Fixed-point controls.}
 
 \item{seed}{Seed for the random initialisation.}
-
 }
 \value{
 List with \code{sources} (unit variance), \code{unmixing}, \code{mixing},

@@ -21,7 +21,7 @@ ate_* keys plus contains_zero, n, method.
 }
 \description{
 With \code{P(obs)} the share of outcomes seen and \verb{[K0, K1]} the
-outcome's logical support, \verb{E[Y]} lies in
+outcome's logical support, \code{E[Y]} lies in
 \verb{[E[Y|obs] P(obs) + K0 (1-P(obs)), E[Y|obs] P(obs) + K1 (1-P(obs))]}.
 The width is EXACTLY \code{(K1 - K0)(1 - P(obs))}. Nothing about the
 missing data is assumed -- that is the point, and the reason the

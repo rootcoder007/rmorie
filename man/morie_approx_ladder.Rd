@@ -16,7 +16,6 @@ morie_approx_ladder(a, n, order = 1, x = NULL, delta = NULL, power = 2)
 \item{x, delta}{optional difference-quotient inputs.}
 
 \item{power}{exponent for the difference quotient.}
-
 }
 \value{
 list: exact, approx, validity, quotient, derivative.

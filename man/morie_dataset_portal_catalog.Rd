@@ -30,7 +30,7 @@ VPD GeoDASH, Statistics Canada CCJS, Montreal, Toronto, Calgary,
 Edmonton, Ottawa) into a single tidy \code{data.frame} for cross-portal
 discovery and tooling. Caches the result in a session-local
 environment so repeated calls are O(1); call
-\code{morie_dataset_portal_catalog_clear_cache()} to force a rebuild
+\code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}} to force a rebuild
 after editing a registry in an interactive session.
 }
 \examples{
@@ -46,8 +46,20 @@ head(nypd$dataset_key)
 cat_df <- morie_dataset_portal_catalog()
 table(cat_df$source)
 \dontshow{\}) # examplesIf}
+\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+# Per-portal slice: registry lives in code, fastest path.
+nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
+nrow(nypd)
+head(nypd$dataset_key)
+
+# Full catalog: bulk portals (NYC OpenData, Chicago, Toronto Hub,
+# etc.) prefer the rmoriedata companion when installed, otherwise
+# contribute zero rows with a one-time warning per portal.
+cat_df <- morie_dataset_portal_catalog()
+table(cat_df$source)
+\dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{morie_dataset_portal_catalog_clear_cache()},
-\code{morie_datasets_load_by_key()}, \code{morie_datasets_browse()}
+\code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}},
+\code{\link[=morie_datasets_load_by_key]{morie_datasets_load_by_key()}}, \code{\link[=morie_datasets_browse]{morie_datasets_browse()}}
 }

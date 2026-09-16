@@ -18,7 +18,8 @@
 \item{seed}{Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{0}.}
 }
 \value{
-A list with \code{estimate}, \code{median}, \code{lower}, \code{upper}, \code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.
+A list with \code{estimate}, \code{median}, \code{lower}, \code{upper},
+\code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.
 }
 \description{
 A step of the prnFil_native implementation. No other function in the package calls it.

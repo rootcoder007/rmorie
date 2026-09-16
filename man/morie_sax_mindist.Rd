@@ -12,7 +12,6 @@ morie_sax_mindist(word1, word2, n, alphabet)
 \item{n}{Length of the original series.}
 
 \item{alphabet}{Alphabet size used to produce the words.}
-
 }
 \value{
 The MINDIST value.

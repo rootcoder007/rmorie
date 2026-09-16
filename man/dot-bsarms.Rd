@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{.bsaenvelope}, \code{ApneaDet}, \code{InfantCry} and 3 others in the module.
+A step of the rangayyan_phys implementation. Called by \code{.bsaenvelope},
+\code{ApneaDet}, \code{InfantCry} and 3 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

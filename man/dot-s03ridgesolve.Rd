@@ -17,7 +17,8 @@
 The value of \code{.s03cholsolve}.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.btres_xtxinv}, \code{.cfa_em}, \code{.htprd_ridge_cv} and 25 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.btres_xtxinv},
+\code{.cfa_em}, \code{.htprd_ridge_cv} and 25 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

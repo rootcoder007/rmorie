@@ -14,7 +14,8 @@
 \item{phase}{Passed to \code{sprintf}.}
 }
 \value{
-A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule}, \code{message}, \code{method}.
+A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule},
+\code{message}, \code{method}.
 }
 \description{
 A step of the clpopt_native implementation. Called by \code{simplex}.

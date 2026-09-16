@@ -29,10 +29,6 @@ morie_count_glm(
 \item{se}{Poisson standard error.}
 
 \item{mu, alpha}{Negative binomial terms.}
-
-
-
-
 }
 \value{
 List of the named quantities.

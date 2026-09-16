@@ -8,7 +8,6 @@ Resaln(p, q)
 }
 \arguments{
 \item{p, q}{Coefficients, lowest degree first.}
-
 }
 \value{
 Named list with \code{estimate}, \code{resultant}, \code{sylvester},

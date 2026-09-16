@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the sarima_native implementation. Called by \code{moment_estimate}, \code{preliminary_estimates}.
+A step of the sarima_native implementation. Called by \code{moment_estimate},
+\code{preliminary_estimates}.
 See the file header for the source the module follows.
 source it follows.
 }

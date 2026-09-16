@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the tmlcds_native implementation. Called by \code{.tmlcds_fluctuate}, \code{.tmlcds_logit_irls}, \code{.tmlcds_propensity} and 1 others in the module.
+A step of the tmlcds_native implementation. Called by \code{.tmlcds_fluctuate},
+\code{.tmlcds_logit_irls}, \code{.tmlcds_propensity} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -45,8 +45,6 @@ the fitted \code{stanfit} object.}
 
 \item{chains, iter, seed}{HMC settings for \code{backend = "cmdstanr"}
 (chains, warmup = sampling iterations per chain, RNG seed).}
-
-
 }
 \value{
 A named \code{list} (all estimates \code{double}): \code{coefficients}

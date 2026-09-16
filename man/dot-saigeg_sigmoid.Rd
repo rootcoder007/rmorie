@@ -13,7 +13,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}, \code{.saigeg_logit_irls}.
+A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null},
+\code{.saigeg_logit_irls}.
 See the file header for the source the module follows.
 source it follows.
 }

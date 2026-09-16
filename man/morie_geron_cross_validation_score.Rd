@@ -25,9 +25,6 @@ morie_geron_cross_validation_score(
 \item{shuffle}{Must be FALSE.}
 
 \item{random_state}{Ignored.}
-
-
-
 }
 \value{
 List with \code{cv_score}, \code{fold_scores}, \code{fold_sizes}, \code{se},

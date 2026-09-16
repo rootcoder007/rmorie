@@ -15,7 +15,10 @@
 The value of \code{p}, as built in the body.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch3_prompt_label_mapping}, \code{morie_kamath_ch3_top1_prompt_metric}, \code{morie_kamath_ch5_rlhf_objective} and 1 others in the module.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch3_prompt_label_mapping},
+\code{morie_kamath_ch3_top1_prompt_metric}, \code{morie_kamath_ch5_rlhf_objective} and
+1 others in the module.
 See the file header for the source the module follows.
 for the source it follows.
 }

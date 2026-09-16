@@ -19,7 +19,8 @@
 The value of \code{.schab_kernel_weights}.
 }
 \description{
-A step of the schab_gwr_shared implementation. Called by \code{.schab_cv_score}, \code{.schab_gwr_fit}.
+A step of the schab_gwr_shared implementation. Called by \code{.schab_cv_score},
+\code{.schab_gwr_fit}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -30,7 +30,10 @@
 \item{...}{Passed through.}
 }
 \value{
-A list with \code{estimate}, \code{selected}, \code{selected_index}, \code{deltas}, \code{candidates}, \code{n_selected}, \code{n_candidates}, \code{tau}, \code{fit}, \code{last_candidate_fraction}, \code{changepoint_range}, \code{rmse}, \code{method}.
+A list with \code{estimate}, \code{selected}, \code{selected_index},
+\code{deltas}, \code{candidates}, \code{n_selected}, \code{n_candidates}, \code{tau},
+\code{fit}, \code{last_candidate_fraction}, \code{changepoint_range}, \code{rmse},
+\code{method}.
 }
 \description{
 A step of the prnFil_native implementation. No other function in the package calls it.

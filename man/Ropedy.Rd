@@ -16,7 +16,6 @@ Ropedy(y, q, m, theta = 10000, L_new = NULL, L_train = NULL)
 \item{theta}{Base.}
 
 \item{L_new, L_train}{Target and trained context lengths.}
-
 }
 \value{
 List with \code{estimate}, \code{theta_base}, \code{freqs},
@@ -30,8 +29,8 @@ range. The NTK-aware variant scales the base instead: low frequencies
 stretch a lot, high frequencies barely at all.
 }
 \details{
-Formula: \code{theta\' = theta (L_new/L_train)^(d/(d-2))} inside
-\code{theta_i = theta\'^(-2i/d)}, then rotate by \code{m theta_i}.
+Formula: \eqn{theta\' = theta (L_new/L_train)^(d/(d-2))} inside
+\eqn{theta_i = theta\'^(-2i/d)}, then rotate by \code{m theta_i}.
 }
 \examples{
 Ropedy(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5, m = 5L)

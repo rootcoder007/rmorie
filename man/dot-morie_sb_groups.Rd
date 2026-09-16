@@ -11,7 +11,8 @@
 
 \item{bins}{Optional; may be \code{NULL}. A vector; its length is taken.}
 
-\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 
 \item{exact}{A flag; the body branches on it.}
 }
@@ -19,7 +20,8 @@
 A list with \code{centres}, \code{idx}.
 }
 \description{
-A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins}, \code{morie_matheron_estimator}.
+A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins},
+\code{morie_matheron_estimator}.
 See the file header for the source the module follows.
 the source it follows.
 }

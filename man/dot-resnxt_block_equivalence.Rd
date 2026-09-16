@@ -18,7 +18,8 @@
 \item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.}
 }
 \value{
-A list with \code{equivalent}, \code{max_deviation}, \code{aggregated}, \code{grouped}, \code{note}.
+A list with \code{equivalent}, \code{max_deviation}, \code{aggregated},
+\code{grouped}, \code{note}.
 }
 \description{
 A step of the resnxt_native implementation. No other function in the package calls it.

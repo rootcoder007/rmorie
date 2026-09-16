@@ -13,7 +13,6 @@ morie_brunner_munzel(x, y, alpha = 0.05)
 \item{x, y}{numeric vectors}
 
 \item{alpha}{significance level}
-
 }
 \value{
 list with the effect estimate, interval and p-value

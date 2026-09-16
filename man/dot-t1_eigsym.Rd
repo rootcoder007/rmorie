@@ -13,7 +13,8 @@
 A list with \code{values}, \code{vectors}.
 }
 \description{
-A step of the tail1_core implementation. Called by \code{Clrpca}, \code{Eigcent}, \code{Lapeig} and 4 others in the module.
+A step of the tail1_core implementation. Called by \code{Clrpca}, \code{Eigcent},
+\code{Lapeig} and 4 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

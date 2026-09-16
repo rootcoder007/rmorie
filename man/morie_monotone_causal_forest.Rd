@@ -16,7 +16,7 @@ morie_monotone_causal_forest(
 )
 }
 \arguments{
-\item{y, d, x}{As in \code{morie_causal_forest()}.}
+\item{y, d, x}{As in \code{\link[=morie_causal_forest]{morie_causal_forest()}}.}
 
 \item{monotone_feature}{Column index the effect must be monotone in;
 \code{NULL} returns the unconstrained forest.}
@@ -24,10 +24,6 @@ morie_monotone_causal_forest(
 \item{direction}{1 for nondecreasing, -1 for nonincreasing.}
 
 \item{n_trees, min_leaf, seed}{Forest hyperparameters.}
-
-
-
-
 }
 \value{
 List with \code{cate}, \code{cate_raw}, \code{monotone_feature}, \code{direction},

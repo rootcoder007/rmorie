@@ -15,7 +15,9 @@
 A numeric value.
 }
 \description{
-A step of the cgnonl_native implementation. Called by \code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves}, \code{beta_polak_ribiere} and 2 others in the module.
+A step of the cgnonl_native implementation. Called by
+\code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves},
+\code{beta_polak_ribiere} and 2 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

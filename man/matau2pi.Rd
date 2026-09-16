@@ -13,7 +13,6 @@ morie_matau2pi(yi, vi, level = 0.95)
 \item{yi, vi}{study effects and their within-study variances.}
 
 \item{level}{interval level.}
-
 }
 \value{
 list: estimate, se, tau2, spread, pi_lower, pi_upper,

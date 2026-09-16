@@ -17,10 +17,6 @@ morie_geron_anomaly_gmm(
 \item{X}{Training data.}
 
 \item{n_components, threshold, contamination, seed, X_new}{Config.}
-
-
-
-
 }
 \value{
 List with \code{is_anomaly}, \code{density}, \code{log_density}, \code{threshold}, \code{n_anomalies}.

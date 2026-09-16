@@ -7,7 +7,8 @@
 .frfgrf_structure(tree)
 }
 \arguments{
-\item{tree}{A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right}, \code{$threshold} from it.}
+\item{tree}{A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
+\code{$right}, \code{$threshold} from it.}
 }
 \value{
 A vector, from \code{c}.

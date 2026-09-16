@@ -28,7 +28,7 @@ Companion bridge for layers outside the incident registry, notably
 \code{"NeighbourhoodCrimeRates"} (per-ward annualised counts and
 populations). Attributes are paged from the public TPS ArcGIS hub
 with the same exceededTransferLimit-driven pager contract as
-\code{morie_fetch_tps()}.
+\code{\link[=morie_fetch_tps]{morie_fetch_tps()}}.
 }
 \examples{
 \donttest{

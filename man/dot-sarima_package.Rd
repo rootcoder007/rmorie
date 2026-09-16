@@ -48,7 +48,11 @@
 \item{res}{Optional; may be \code{NULL}. A list; the body reads \code{$success} from it.}
 }
 \value{
-A list with \code{estimate}, \code{sigma2}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{loglik}, \code{aic}, \code{n_used}, \code{n_par}, \code{residuals}, \code{ssq}, \code{order}, \code{seasonal_order}, \code{s}, \code{y}, \code{w}, \code{fit_method}, \code{converged}, \code{method}.
+A list with \code{estimate}, \code{sigma2}, \code{phi}, \code{theta},
+\code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{loglik}, \code{aic},
+\code{n_used}, \code{n_par}, \code{residuals}, \code{ssq}, \code{order},
+\code{seasonal_order}, \code{s}, \code{y}, \code{w}, \code{fit_method},
+\code{converged}, \code{method}.
 }
 \description{
 A step of the sarima_native implementation. Called by \code{.sarima_fit}.

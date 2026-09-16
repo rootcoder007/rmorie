@@ -27,8 +27,6 @@ Eapinfo(
 \item{lower, upper}{Quadrature range.}
 
 \item{nqp}{Number of quadrature points.}
-
-
 }
 \value{
 List with \code{estimate}, \code{se}, \code{information},

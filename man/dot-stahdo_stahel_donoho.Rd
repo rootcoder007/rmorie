@@ -21,10 +21,14 @@
 
 \item{seed}{Passed to \code{.stahdo_outlyingness}. Defaults to \code{1}.}
 
-\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{cutoff}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
+\code{as.numeric}.}
 }
 \value{
-A list with \code{estimate}, \code{location}, \code{scatter}, \code{outlyingness}, \code{weights}, \code{cutoff}, \code{n_directions}, \code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n}, \code{p}, \code{method}.
+A list with \code{estimate}, \code{location}, \code{scatter},
+\code{outlyingness}, \code{weights}, \code{cutoff}, \code{n_directions},
+\code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n},
+\code{p}, \code{method}.
 }
 \description{
 A step of the stahdo_native implementation. Called by \code{morie_stahdo}.

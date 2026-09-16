@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the propinf_native implementation. Called by \code{.propinf_init_net}, \code{.propinf_mlp_init}.
+A step of the propinf_native implementation. Called by \code{.propinf_init_net},
+\code{.propinf_mlp_init}.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -17,12 +17,10 @@
 The value of \code{clusters}, as built in the body.
 }
 \description{
-\subsection{Butina clusters: the exclusion-sphere clusters, largest sphere first.}{
-
+Butina clusters: the exclusion-sphere clusters, largest sphere first.
 Mirrors Python butina_clusters(): repeatedly pick the live compound
 with the largest (live-respecting) neighbour count as a centroid,
 then take the centroid together with its live neighbours as the next
 cluster and remove them. Ties broken by ascending index for
 determinism. Final list is sorted by (-size, centroid).
-}
 }

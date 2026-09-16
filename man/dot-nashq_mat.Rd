@@ -15,7 +15,8 @@
 The value of \code{M}, as built in the body.
 }
 \description{
-A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}, \code{stage_game_type}.
+A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix},
+\code{stage_game_type}.
 See the file header for the source the module follows.
 source it follows.
 }

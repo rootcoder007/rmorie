@@ -46,7 +46,11 @@ fit}
 \item{standardize}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{bandwidths}, \code{at_search_boundary}, \code{standardized}, \code{y_centre}, \code{y_scale}, \code{x_centre}, \code{x_scale}, \code{params}, \code{fitted}, \code{resid}, \code{bandwidth_gwr}, \code{bandwidth_history}, \code{score_history}, \code{n_iter}, \code{converged}, \code{criterion}, \code{kernel}.
+A list with \code{bandwidths}, \code{at_search_boundary}, \code{standardized},
+\code{y_centre}, \code{y_scale}, \code{x_centre}, \code{x_scale}, \code{params},
+\code{fitted}, \code{resid}, \code{bandwidth_gwr}, \code{bandwidth_history},
+\code{score_history}, \code{n_iter}, \code{converged}, \code{criterion},
+\code{kernel}.
 }
 \description{
 MOVED, not how good it is. When the initial single-bandwidth GWR

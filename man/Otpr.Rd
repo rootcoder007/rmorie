@@ -12,7 +12,6 @@ Otpr(a, b, C, m)
 \item{C}{Ground cost, n by k.}
 
 \item{m}{Mass to transport; must not exceed either total.}
-
 }
 \value{
 List with \code{T}, \code{cost}, \code{mass}, \code{a_left},
@@ -28,7 +27,7 @@ cost with a zero-price dummy row and column.
 }
 \details{
 Formula: \code{min_T <T,C>} subject to \code{T 1 <= a},
-\eqn{T prime 1 <= b}, \code{sum T = m}.
+\eqn{T' 1 <= b}, \code{sum T = m}.
 }
 \examples{
 Otpr(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)

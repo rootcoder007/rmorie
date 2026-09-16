@@ -25,7 +25,6 @@ it, exactly as in the Cox model.}
 censored; all ones if omitted.}
 
 \item{max_iter, tol}{Newton controls.}
-
 }
 \value{
 list: estimate, beta_hat, se, h0_hat, event_times, Lambda0, n,

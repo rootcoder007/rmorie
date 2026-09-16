@@ -13,7 +13,8 @@
 The value of \code{lgamma}.
 }
 \description{
-A step of the edgrn_native implementation. Called by \code{.edgrn_betainc}, \code{.edgrn_chi2_sf}, \code{.edgrn_nb_logpmf}.
+A step of the edgrn_native implementation. Called by \code{.edgrn_betainc},
+\code{.edgrn_chi2_sf}, \code{.edgrn_nb_logpmf}.
 See the file header for the source the module follows.
 source it follows.
 }

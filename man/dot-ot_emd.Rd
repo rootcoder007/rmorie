@@ -13,13 +13,15 @@
 
 \item{C}{A matrix; passed to \code{nrow}.}
 
-\item{max_pivots}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000L}.}
+\item{max_pivots}{Coerced to integer by the body, with \code{as.integer}. Defaults to
+\code{20000L}.}
 }
 \value{
 A list with \code{T}, \code{cost}.
 }
 \description{
-A step of the helpers_ot implementation. Called by \code{.ot_partial_plan}, \code{Otbarfree}, \code{Otemd} and 6 others in the module.
+A step of the helpers_ot implementation. Called by \code{.ot_partial_plan},
+\code{Otbarfree}, \code{Otemd} and 6 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

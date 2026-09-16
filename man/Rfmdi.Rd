@@ -14,7 +14,6 @@ Rfmdi(forest, X, y, mtry = NULL, nodesize = 5L)
 \item{y}{length-n response, or an n-by-q matrix for the multivariate case.}
 
 \item{mtry, nodesize}{as in Rfmlt; the p. 643 regression defaults.}
-
 }
 \value{
 list: estimate, importance, relative, ranking, total, mtry, n,

@@ -22,10 +22,13 @@
 \item{mult}{A flag; the body branches on it.}
 }
 \value{
-A list with \code{forecast}, \code{level}, \code{trend}, \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma}, \code{period}, \code{horizon}.
+A list with \code{forecast}, \code{level}, \code{trend}, \code{seasonal},
+\code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma},
+\code{period}, \code{horizon}.
 }
 \description{
-A step of the forecast_native implementation. Called by \code{morie_holt_winters_additive}, \code{morie_holt_winters_mult}.
+A step of the forecast_native implementation. Called by
+\code{morie_holt_winters_additive}, \code{morie_holt_winters_mult}.
 See the file header for the source the module follows.
 the source it follows.
 }

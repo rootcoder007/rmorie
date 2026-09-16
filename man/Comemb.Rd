@@ -30,11 +30,6 @@ Comemb(
 \item{walk_len, n_walks, window, epochs, lr, neg}{As in \code{Deepw}.}
 
 \item{seed}{Seed of the deterministic stream.}
-
-
-
-
-
 }
 \value{
 List with \code{estimate}, \code{embedding}, \code{walks},

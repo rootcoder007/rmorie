@@ -12,7 +12,6 @@ Otmarsh(a, b, C, delta)
 \item{C}{Ground cost, n by m.}
 
 \item{delta}{Mass removed from the source, in total or per bin.}
-
 }
 \value{
 List with \code{T}, \code{cost}, \code{a_shift},
@@ -27,8 +26,8 @@ over the bins in proportion to \code{a}, or as a per-bin vector when a
 vector is supplied.
 }
 \details{
-Formula: solve \code{min_T <T,C>} with \code{a\' = a - delta} and total
-transported mass \code{sum(a\')}, the partial-transport problem of
+Formula: solve \code{min_T <T,C>} with \eqn{a\' = a - delta} and total
+transported mass \eqn{sum(a\')}, the partial-transport problem of
 Caffarelli and McCann (2010).
 }
 \examples{

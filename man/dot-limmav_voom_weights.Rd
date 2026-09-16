@@ -16,7 +16,8 @@
 \item{span}{Passed to \code{.limmav_lowess}. Defaults to \code{0.5}.}
 }
 \value{
-A list with \code{log_cpm}, \code{weights}, \code{mean_log_count}, \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{lo}.
+A list with \code{log_cpm}, \code{weights}, \code{mean_log_count},
+\code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{lo}.
 }
 \description{
 A step of the limmav_native implementation. Called by \code{morie_limmav}.

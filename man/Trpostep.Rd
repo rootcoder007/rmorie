@@ -27,8 +27,6 @@ Trpostep(
 \item{g}{gradient of the surrogate.}
 
 \item{F}{Fisher information matrix.}
-
-
 }
 \value{
 list: estimate, surrogate, kl_mean, feasible, step, step_size,

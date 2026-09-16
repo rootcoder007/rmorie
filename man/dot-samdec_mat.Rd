@@ -13,7 +13,8 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the samdec_native implementation. Called by \code{decode_mask}, \code{two_way_block}, \code{upsample}.
+A step of the samdec_native implementation. Called by \code{decode_mask},
+\code{two_way_block}, \code{upsample}.
 See the file header for the source the module follows.
 source it follows.
 }

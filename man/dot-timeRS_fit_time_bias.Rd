@@ -36,10 +36,14 @@
 \item{beta}{Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.}
 }
 \value{
-A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{alpha_user}, \code{b_item}, \code{item_bins}, \code{t_user}, \code{beta}, \code{n_instances}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu},
+\code{b_user}, \code{alpha_user}, \code{b_item}, \code{item_bins}, \code{t_user},
+\code{beta}, \code{n_instances}, \code{method}, \code{note}.
 }
 \description{
-A step of the timeRS_native implementation. Called by \code{morie_timeRS}, \code{morie_timeRS_fit_time_bias}, \code{morie_timeRS_timesvd} and 1 others in the module.
+A step of the timeRS_native implementation. Called by \code{morie_timeRS},
+\code{morie_timeRS_fit_time_bias}, \code{morie_timeRS_timesvd} and 1 others in the
+module.
 See the file header for the source the module follows.
 source it follows.
 }

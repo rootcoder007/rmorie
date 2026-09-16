@@ -14,7 +14,6 @@ Mskbnd2(y, D, X, y_min, y_max)
 \item{X}{Stratum label per unit.}
 
 \item{y_min, y_max}{A priori outcome support.}
-
 }
 \value{
 List with lower, upper, width, inter_lower, inter_upper,

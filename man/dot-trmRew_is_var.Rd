@@ -13,7 +13,8 @@
 The value of \code{morie_unifAlg_is_var}.
 }
 \description{
-A step of the trmRew_native implementation. Called by \code{.trmRew_overlap}, \code{.trmRew_rename}, \code{morie_trmRew_lpo_greater} and 5 others in the module.
+A step of the trmRew_native implementation. Called by \code{.trmRew_overlap},
+\code{.trmRew_rename}, \code{morie_trmRew_lpo_greater} and 5 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

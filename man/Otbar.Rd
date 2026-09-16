@@ -30,7 +30,8 @@ of Sinkhorn problems sharing a common row scaling.
 }
 \details{
 Formula: \eqn{rgmin_nu sum_k w_k OT_eps(mu_k, nu)}, solved by
-\eqn{v_k = mu_k/(K_k prime u_k)} -- Benamou et al. (2015) Section 3.2;
+\code{u_k = nu/(K_k v_k)}, \code{nu = prod_k (K_k v_k)^{w_k}},
+\eqn{v_k = mu_k/(K_k' u_k)} -- Benamou et al. (2015) Section 3.2;
 Peyre and Cuturi (2019) eq. (9.11), (9.15)
 }
 \references{

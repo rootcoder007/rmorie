@@ -16,7 +16,8 @@ morie_geron_span_corrupt(tokens, noise_density = 0.15, mean_span = 3, seed = 0)
 \item{seed}{LCG seed for span placement.}
 }
 \value{
-list(inputs, target, spans) where spans is a list of c(start0, length) pairs (0-based start).
+list(inputs, target, spans) where spans is a list of c(start0, length) pairs
+(0-based start).
 }
 \description{
 T5 span-corruption masking (encoder input / decoder target / spans)

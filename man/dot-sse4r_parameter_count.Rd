@@ -16,7 +16,8 @@
 \item{item_dim}{Coerced to integer by the body, with \code{as.integer}.}
 }
 \value{
-A list with \code{user_params}, \code{item_params}, \code{total}, \code{user_share}, \code{note}.
+A list with \code{user_params}, \code{item_params}, \code{total},
+\code{user_share}, \code{note}.
 }
 \description{
 A step of the sse4r_native implementation. No other function in the package calls it.

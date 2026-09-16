@@ -39,7 +39,9 @@
 \item{implicit}{A flag; the body branches on it. Defaults to \code{TRUE}.}
 }
 \value{
-A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu},
+\code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit},
+\code{method}, \code{note}.
 }
 \description{
 A step of the svdpp_native implementation. Called by \code{morie_svdpp}.

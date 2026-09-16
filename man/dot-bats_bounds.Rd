@@ -7,7 +7,8 @@
 .bats_bounds(spec)
 }
 \arguments{
-\item{spec}{A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.}
+\item{spec}{A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p},
+\code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.}
 }
 \value{
 A list with \code{lo}, \code{hi}.

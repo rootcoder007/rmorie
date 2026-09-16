@@ -19,7 +19,8 @@
 A vector, from \code{c}.
 }
 \description{
-A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndnpr}, \code{Bnssel} and 1 others in the module.
+A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndnpr},
+\code{Bnssel} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

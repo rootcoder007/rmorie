@@ -19,7 +19,8 @@
 A list with \code{freqs}, \code{powers}.
 }
 \description{
-A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec}, \code{InfantCry} and 6 others in the module.
+A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec},
+\code{InfantCry} and 6 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

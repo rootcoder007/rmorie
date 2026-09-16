@@ -15,7 +15,8 @@
 The value of \code{[}.
 }
 \description{
-A step of the rouge_native implementation. Called by \code{morie_lcs_length}, \code{morie_rouge_l}.
+A step of the rouge_native implementation. Called by \code{morie_lcs_length},
+\code{morie_rouge_l}.
 See the file header for the source the module follows.
 source it follows.
 }

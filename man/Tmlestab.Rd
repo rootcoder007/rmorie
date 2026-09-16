@@ -14,9 +14,6 @@ Tmlestab(Y, A, QAW, Q1W, Q0W, g1W, gbounds = NULL)
 \item{g1W}{Initial propensity.}
 
 \item{gbounds}{Truncation levels to try.}
-
-
-
 }
 \value{
 List with \code{gbounds}, \code{estimate}, \code{se},

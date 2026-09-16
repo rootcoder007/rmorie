@@ -33,7 +33,10 @@
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-09}.}
 }
 \value{
-A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios}, \code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information}, \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events}, \code{n_iterations}, \code{ties}, \code{method}.
+A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios},
+\code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information},
+\code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events},
+\code{n_iterations}, \code{ties}, \code{method}.
 }
 \description{
 A step of the svycox_native implementation. Called by \code{morie_svycox}.

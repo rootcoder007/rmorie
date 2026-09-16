@@ -17,7 +17,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_ch6_debias_regularizer}, \code{morie_kamath_ch6_gender_direction}.
+A step of the kamath_llm2_native implementation. Called by
+\code{morie_kamath_ch6_debias_regularizer}, \code{morie_kamath_ch6_gender_direction}.
 See the file header for the source the module follows.
 for the source it follows.
 }

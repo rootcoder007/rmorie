@@ -32,10 +32,10 @@ morie_geron_hyperparameter_tuning(
 \item{seed}{Seed.}
 
 \item{score}{Optional scorer.}
-
 }
 \value{
-List with best_params, best_score, results, n_candidates, n_fits, distinct_values_per_param, estimate, n, method.
+List with best_params, best_score, results, n_candidates, n_fits,
+distinct_values_per_param, estimate, n, method.
 }
 \description{
 The grid branch is exact and deterministic (delegates to the existing

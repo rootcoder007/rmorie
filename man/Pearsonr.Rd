@@ -10,7 +10,6 @@ Pearsonr(x, y, level = 0.95)
 \item{x, y}{Paired samples of the same length, n >= 3.}
 
 \item{level}{Confidence level.}
-
 }
 \value{
 List with \code{estimate}, \code{statistic}, \code{p_value},

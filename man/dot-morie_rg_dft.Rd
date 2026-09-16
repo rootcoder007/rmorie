@@ -13,7 +13,8 @@
 A list with \code{re}, \code{im}.
 }
 \description{
-A step of the rangayyan_cep implementation. Called by \code{CardioResp}, \code{CCepstrum}, \code{Cepstrum} and 11 others in the module.
+A step of the rangayyan_cep implementation. Called by \code{CardioResp},
+\code{CCepstrum}, \code{Cepstrum} and 11 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

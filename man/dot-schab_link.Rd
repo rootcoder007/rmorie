@@ -17,7 +17,9 @@
 Nothing; this branch always raises.
 }
 \description{
-A step of the schab_glmm_shared implementation. Called by \code{.schab_conditional_mean}, \code{.schab_fit_pseudo_likelihood}, \code{.schab_naive_marginal_mean} and 3 others in the module.
+A step of the schab_glmm_shared implementation. Called by
+\code{.schab_conditional_mean}, \code{.schab_fit_pseudo_likelihood},
+\code{.schab_naive_marginal_mean} and 3 others in the module.
 See the file header for the source the module follows.
 the source it follows.
 }

@@ -8,14 +8,13 @@
 }
 \arguments{
 \item{e1, e2}{Tape nodes or numbers.}
-
 }
 \value{
 A tape node.
 }
 \description{
 Group generic supporting \verb{+ - * / ^} and unary minus for
-\code{morie_geron_autograd()} leaves.
+\code{\link[=morie_geron_autograd]{morie_geron_autograd()}} leaves.
 }
 \examples{
 x <- .morie_gvar(2)

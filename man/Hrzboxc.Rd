@@ -25,9 +25,6 @@ morie_horowitz_box_cox(
 \item{a_lo, a_hi, ngrid, refine}{The deterministic search over alpha.}
 
 \item{nu}{Points in the trapezoid rule for the integral over u.}
-
-
-
 }
 \value{
 list: estimate, lambda_hat, beta_hat, criterion, resid, n, method.

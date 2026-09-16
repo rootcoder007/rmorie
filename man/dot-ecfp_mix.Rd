@@ -15,7 +15,8 @@
 A numeric value.
 }
 \description{
-A step of the ecfp4 implementation. Called by \code{.ecfp_conninv}, \code{.ecfp_morgan}, \code{Rdkfp}.
+A step of the ecfp4 implementation. Called by \code{.ecfp_conninv},
+\code{.ecfp_morgan}, \code{Rdkfp}.
 See the file header for the source the module follows.
 it follows.
 }

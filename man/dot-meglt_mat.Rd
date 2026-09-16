@@ -13,7 +13,8 @@
 One of two values, depending on the branch taken.
 }
 \description{
-A step of the meglt_native implementation. Called by \code{coherence}, \code{nuclear_norm}, \code{relative_error} and 1 others in the module.
+A step of the meglt_native implementation. Called by \code{coherence},
+\code{nuclear_norm}, \code{relative_error} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -13,7 +13,9 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-A step of the tlstoch_native implementation. Called by \code{.tlstoch_density_ratio}, \code{.tlstoch_positivity_shift}, \code{.tlstoch_shift_regime} and 2 others in the module.
+A step of the tlstoch_native implementation. Called by \code{.tlstoch_density_ratio},
+\code{.tlstoch_positivity_shift}, \code{.tlstoch_shift_regime} and 2 others in the
+module.
 See the file header for the source the module follows.
 the source it follows.
 }

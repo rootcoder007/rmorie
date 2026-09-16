@@ -45,7 +45,8 @@
 \item{beta}{Passed to \code{.timeRS_user_bias}. Defaults to \code{.timeRS_BETA}.}
 }
 \value{
-A list with \code{prediction}, \code{user_bias}, \code{item_bias}, \code{deviation}, \code{bin}.
+A list with \code{prediction}, \code{user_bias}, \code{item_bias},
+\code{deviation}, \code{bin}.
 }
 \description{
 A step of the timeRS_native implementation. Called by \code{morie_timeRS_predict_time}.

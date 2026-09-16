@@ -13,7 +13,8 @@
 The value of \code{r}, as built in the body.
 }
 \description{
-A step of the helpers_s03 implementation. Called by \code{.hrz3_u01}, \code{CnsRos}, \code{Evangia} and 1 others in the module.
+A step of the helpers_s03 implementation. Called by \code{.hrz3_u01}, \code{CnsRos},
+\code{Evangia} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

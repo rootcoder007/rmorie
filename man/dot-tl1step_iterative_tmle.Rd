@@ -18,7 +18,8 @@
 \item{tol}{Passed to \code{<}. Defaults to \code{1e-08}.}
 }
 \value{
-A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star}, \code{abs_score}, \code{method}.
+A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star},
+\code{abs_score}, \code{method}.
 }
 \description{
 within each iteration and recomputed between them -- a sequence of

@@ -13,7 +13,8 @@
 The value of \code{rp}, as built in the body.
 }
 \description{
-A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}, \code{morie_sccsno_fit}.
+A step of the sccsno_native implementation. Called by
+\code{morie_sccsno_build_intervals}, \code{morie_sccsno_fit}.
 See the file header for the source the module follows.
 source it follows.
 }

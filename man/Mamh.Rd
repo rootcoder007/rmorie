@@ -11,9 +11,6 @@ Mamh(a, b, c, d, confidence = 0.95)
 unexposed cases, unexposed non-cases.}
 
 \item{confidence}{Confidence level.}
-
-
-
 }
 \value{
 Whatever \code{\link{Mhors}} returns, unchanged.

@@ -36,9 +36,6 @@ Default v = n_T + 2, S = I, the smallest degrees of freedom at which the
 inverse-Wishart mean exists.}
 
 \item{tol}{fixed-point tolerance on the genetic effects.}
-
-
-
 }
 \value{
 list: estimate, gebv, b1, Sigma_T, R, mu, beta, n, method.

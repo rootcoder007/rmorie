@@ -19,7 +19,8 @@
 A list with \code{tr}, \code{tg}, \code{zx}, \code{zt}, \code{hh}, \code{n}.
 }
 \description{
-A step of the fauzi_native implementation. Called by \code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2}.
+A step of the fauzi_native implementation. Called by
+\code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2}.
 See the file header for the source the module follows.
 source it follows.
 }

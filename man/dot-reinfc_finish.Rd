@@ -16,10 +16,13 @@
 \item{traj}{Carried through into a list the body builds.}
 }
 \value{
-A list with \code{estimate}, \code{rewards}, \code{baseline}, \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last}, \code{method}.
+A list with \code{estimate}, \code{rewards}, \code{baseline},
+\code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last},
+\code{method}.
 }
 \description{
-A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
+\code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -11,7 +11,8 @@
 
 \item{y_pred}{Passed to \code{.gpflat}.}
 
-\item{n_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{n_classes}{Optional; may be \code{NULL}. Coerced to integer by the body, with
+\code{as.integer}.}
 }
 \value{
 The value of \code{M}, as built in the body.

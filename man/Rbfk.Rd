@@ -10,7 +10,6 @@ Rbfk(x, y, sigma)
 \item{x, y}{Vectors of the same length.}
 
 \item{sigma}{Bandwidth, positive.}
-
 }
 \value{
 Named list with \code{estimate}, \code{value}, \code{sq_distance},

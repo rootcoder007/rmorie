@@ -32,7 +32,6 @@ Both routes the paper defines are available.}
 
 \item{t_window, l_window}{Trend and low-pass spans; \code{NULL} uses
 the Sec. 3.4 defaults.}
-
 }
 \value{
 A list with \code{seasonal}, \code{trend},

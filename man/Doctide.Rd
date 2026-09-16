@@ -12,7 +12,6 @@ Doctide(y, D, unit, time)
 \item{D}{Binary treatment indicator.}
 
 \item{unit, time}{Unit and period identifiers.}
-
 }
 \value{
 List with \code{estimate}, \code{periods}, \code{did_plus},

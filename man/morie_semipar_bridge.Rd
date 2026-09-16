@@ -16,8 +16,8 @@ The Python module loads a C shared library (\code{semipar_kernels.dylib}
 implements the same algorithms in vectorised form and additionally
 wraps \code{mgcv::gam} for a high-quality penalised-spline smoother
 as an alternative to manual bandwidth selection.
-\subsection{Functions}{
 
+Functions
 \itemize{
 \item \code{\link{kernel_eval}}: evaluate a kernel function.
 \item \code{\link{nw_regression}}: Nadaraya-Watson kernel regression.
@@ -31,6 +31,5 @@ and variance.
 \item \code{\link{gam_smoother}}: \code{mgcv::gam} thin-plate
 smoother fit + predict.
 \item \code{\link{SemiparKernels}}: object-style wrapper.
-}
 }
 }

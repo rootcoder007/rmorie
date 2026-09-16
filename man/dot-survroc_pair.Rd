@@ -23,7 +23,8 @@
 The value of \code{.survroc_km_pair}.
 }
 \description{
-A step of the survroc_native implementation. Called by \code{morie_survroc_roc_at}, \code{morie_survroc_sensitivity}, \code{morie_survroc_specificity}.
+A step of the survroc_native implementation. Called by \code{morie_survroc_roc_at},
+\code{morie_survroc_sensitivity}, \code{morie_survroc_specificity}.
 See the file header for the source the module follows.
 the source it follows.
 }

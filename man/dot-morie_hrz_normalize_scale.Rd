@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the horowitz_native6 implementation. Called by \code{morie_chen_transform}, \code{morie_transform_prediction}, \code{morie_transform_T_F}.
+A step of the horowitz_native6 implementation. Called by \code{morie_chen_transform},
+\code{morie_transform_prediction}, \code{morie_transform_T_F}.
 See the file header for the source the module follows.
 the source it follows.
 }

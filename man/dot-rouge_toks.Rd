@@ -13,7 +13,8 @@
 A character value.
 }
 \description{
-A step of the rouge_native implementation. Called by \code{.rouge_get_refs_complex}, \code{morie_rouge_l}, \code{morie_rouge_n} and 1 others in the module.
+A step of the rouge_native implementation. Called by \code{.rouge_get_refs_complex},
+\code{morie_rouge_l}, \code{morie_rouge_n} and 1 others in the module.
 See the file header for the source the module follows.
 source it follows.
 }

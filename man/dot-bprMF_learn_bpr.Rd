@@ -34,19 +34,22 @@
 
 \item{seed}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.}
 
-\item{regularizer_sign}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"correct"}.}
+\item{regularizer_sign}{Coerced to character by the body, with \code{as.character}.
+Defaults to \code{"correct"}.}
 
 \item{init_scale}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}
 }
 \value{
-A list with \code{estimate}, \code{W}, \code{H}, \code{k}, \code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc}, \code{param_norm}, \code{regularizer_sign}, \code{method}, \code{caveat}.
+A list with \code{estimate}, \code{W}, \code{H}, \code{k},
+\code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc}, \code{param_norm},
+\code{regularizer_sign}, \code{method}, \code{caveat}.
 }
 \description{
 drawn from D_S. Mirrors morie.fn.bprMF.learn_bpr step for step, with
-the same draw order from the shared SplitMix64 stream: U*K uniforms
+the same draw order from the shared SplitMix64 stream: U\\emph{K uniforms
 fill W, I*K uniforms fill H, then per iteration three uniforms (user
 index, positive item, negative item) plus up to 100 negative-item
 rejection-guard uniforms.  regularizer_sign="paper" reproduces the
-printed Figure 4 update whose +lambda*Theta term diverges; the
+printed Figure 4 update whose +lambda}Theta term diverges; the
 default is the sign that actually ascends BPR-Opt.
 }

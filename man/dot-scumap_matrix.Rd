@@ -13,7 +13,8 @@
 The value of \code{M}, as built in the body.
 }
 \description{
-A step of the scumap_native implementation. Called by \code{morie_scumap_fuzzy_simplicial_set}, \code{morie_scumap_umap_singlecell}.
+A step of the scumap_native implementation. Called by
+\code{morie_scumap_fuzzy_simplicial_set}, \code{morie_scumap_umap_singlecell}.
 See the file header for the source the module follows.
 source it follows.
 }

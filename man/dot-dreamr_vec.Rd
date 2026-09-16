@@ -15,7 +15,8 @@
 The value of \code{v}, as built in the body.
 }
 \description{
-A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}, \code{morie_dreamr_value_update}.
+A step of the dreamr_native implementation. Called by
+\code{morie_dreamr_lambda_return}, \code{morie_dreamr_value_update}.
 See the file header for the source the module follows.
 source it follows.
 }

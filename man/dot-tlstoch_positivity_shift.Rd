@@ -16,7 +16,8 @@
 \item{bins}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.}
 }
 \value{
-A list with \code{fraction_outside}, \code{delta}, \code{bins}, \code{satisfied}, \code{note}.
+A list with \code{fraction_outside}, \code{delta}, \code{bins},
+\code{satisfied}, \code{note}.
 }
 \description{
 A step of the tlstoch_native implementation. No other function in the package calls it.

@@ -33,7 +33,8 @@
 A list with \code{alpha}, \code{b}, \code{n_iter}, \code{converged}.
 }
 \description{
-A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
+A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
+\code{morie_esl_svm_kernel}.
 See the file header for the source the module follows.
 source it follows.
 }

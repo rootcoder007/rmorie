@@ -35,8 +35,6 @@ morie_spatiotemporal_autocovariance(
 \item{n_spatial_bins, n_temporal_bins}{Integer bin counts.}
 
 \item{max_spatial, max_temporal}{Upper cutoffs (default: max/2).}
-
-
 }
 \value{
 Named list: estimate (C, spatial_bins, temporal_bins, counts),
@@ -44,7 +42,8 @@ n, method.
 }
 \description{
 \deqn{\hat C(h, u) = \frac{1}{|N(h, u)|}
-      \sum_{(i,j) \in N(h,u)} (Z_i - \bar Z)(Z_j - \bar Z)}{hat C(h, u) = (1)/(|N(h, u)|) sum_(i,j) in N(h,u) (Z_i - bar Z)(Z_j - bar Z)}.
+      \sum_{(i,j) \in N(h,u)} (Z_i - \bar Z)(Z_j - \bar Z)}{hat C(h, u) = (1)/(|N(h,
+u)|) sum_(i,j) in N(h,u) (Z_i - bar Z)(Z_j - bar Z)}.
 }
 \examples{
 set.seed(1)

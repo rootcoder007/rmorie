@@ -24,7 +24,8 @@ n, method.
 }
 \description{
 \deqn{\hat\gamma(h) = \frac{1}{2|N(h)|}
-       \sum_{(i,j) \in N(h)} (Z(s_i) - Z(s_j))^2}{hatgamma(h) = (1)/(2|N(h)|) sum_(i,j) in N(h) (Z(s_i) - Z(s_j))^2}
+       \sum_{(i,j) \in N(h)} (Z(s_i) - Z(s_j))^2}{hatgamma(h) = (1)/(2|N(h)|)
+sum_(i,j) in N(h) (Z(s_i) - Z(s_j))^2}
 }
 \examples{
 set.seed(1)

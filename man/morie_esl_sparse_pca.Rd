@@ -24,8 +24,6 @@ morie_esl_sparse_pca(
 \item{max_iter, tol}{Power-iteration controls.}
 
 \item{center, scale}{Centre columns, optionally scale to unit variance.}
-
-
 }
 \value{
 List with \code{loadings}, \code{scores}, \code{sparsity}, \code{adjusted_variance},

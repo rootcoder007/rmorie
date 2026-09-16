@@ -17,7 +17,8 @@
 A numeric value.
 }
 \description{
-A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat}, \code{PpgFeat}.
+A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat},
+\code{PpgFeat}.
 See the file header for the source the module follows.
 source it follows.
 }

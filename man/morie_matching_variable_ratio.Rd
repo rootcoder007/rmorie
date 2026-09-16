@@ -27,13 +27,12 @@ morie_matching_variable_ratio(
 
 \item{ps}{Optional pre-computed propensity scores (ignored; retained
 for back-compat).}
-
 }
 \value{
 A list of class \code{morie_match_result}.
 }
 \description{
-Thin wrapper around \code{MatchIt::matchit(method = "nearest",
+Thin wrapper around \eqn{MatchIt::matchit(method = "nearest",
 ratio = max_ratio, min.controls = min_ratio)} which supports
 variable-ratio nearest-neighbour matching natively.
 }

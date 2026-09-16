@@ -15,7 +15,6 @@ morie_kamath_ch6_pii_likelihood(a_m, A, x, L_q, L_r)
 tokens.}
 
 \item{L_q, L_r}{Query and answer lengths.}
-
 }
 \value{
 List with \code{estimate}, \code{log_likelihood}, \code{context_lengths}.

@@ -22,7 +22,6 @@ morie_kamath_viterbi_segment(text, probs)
 \item{probs}{Named list of piece probabilities.}
 
 \item{text}{One string to segment.}
-
 }
 \value{
 List with \code{probs}, \code{log_likelihood}, \code{segmentations}.

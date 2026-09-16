@@ -17,7 +17,9 @@
 The value of \code{rates}, as built in the body.
 }
 \description{
-A step of the frns_metrics implementation. Called by \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity}, \code{morie_fairness_disparate_impact}.
+A step of the frns_metrics implementation. Called by
+\code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity},
+\code{morie_fairness_disparate_impact}.
 See the file header for the source the module follows.
 source it follows.
 }

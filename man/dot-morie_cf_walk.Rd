@@ -7,7 +7,8 @@
 .morie_cf_walk(node, xrow)
 }
 \arguments{
-\item{node}{A list; the body reads \code{$feature}, \code{$left}, \code{$right}, \code{$tau}, \code{$threshold} from it.}
+\item{node}{A list; the body reads \code{$feature}, \code{$left}, \code{$right},
+\code{$tau}, \code{$threshold} from it.}
 
 \item{xrow}{A vector; indexed elementwise.}
 }

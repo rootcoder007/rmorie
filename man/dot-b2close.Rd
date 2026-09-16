@@ -13,7 +13,8 @@
 A numeric value.
 }
 \description{
-A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otfreeen}, \code{Otsinktol}.
+A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otfreeen},
+\code{Otsinktol}.
 See the file header for the source the module follows.
 it follows.
 }

@@ -15,7 +15,8 @@
 The value of \code{idx}, as built in the body.
 }
 \description{
-A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoImp}, \code{EchoSig}.
+A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoImp},
+\code{EchoSig}.
 See the file header for the source the module follows.
 source it follows.
 }

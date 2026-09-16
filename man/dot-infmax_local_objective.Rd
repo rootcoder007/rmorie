@@ -21,7 +21,8 @@
 \item{estimator}{Carried through into a list the body builds. Defaults to \code{"jsd"}.}
 }
 \value{
-A list with \code{estimate}, \code{objective}, \code{estimator}, \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{objective}, \code{estimator},
+\code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.
 }
 \description{
 A step of the infmax_native implementation. Called by \code{morie_infmax}.

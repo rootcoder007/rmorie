@@ -3,7 +3,9 @@
 \name{CCRSO_TABLE2_FLOW}
 \alias{CCRSO_TABLE2_FLOW}
 \title{CCRSO Table 2 -- prisoner flow 2013/14-2017/18}
-
+\usage{
+CCRSO_TABLE2_FLOW
+}
 \description{
 CCRSO Table 2 -- prisoner flow 2013/14-2017/18
 }

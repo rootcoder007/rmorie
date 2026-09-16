@@ -12,8 +12,6 @@ morie_hsicstat(a, b, sigma_a = NULL, sigma_b = NULL, threshold = 0.01)
 \item{sigma_a, sigma_b}{RBF bandwidths; NULL uses the median heuristic}
 
 \item{threshold}{cutoff below which the samples are called independent}
-
-
 }
 \value{
 list(hsic, nhsic, independent, n)

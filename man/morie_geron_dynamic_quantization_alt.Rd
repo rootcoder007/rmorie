@@ -14,7 +14,8 @@ morie_geron_dynamic_quantization_alt(model, dtype = "int8", activations = NULL)
 \item{activations}{Optional batch to quantize dynamically.}
 }
 \value{
-List with \code{quantized}, \code{scales}, \code{zero_points}, \code{dequantized}, \code{max_abs_error}, \code{compression}.
+List with \code{quantized}, \code{scales}, \code{zero_points}, \code{dequantized},
+\code{max_abs_error}, \code{compression}.
 }
 \description{
 Dynamic quantization: static per-tensor weights, dynamic per-batch activations (hmdqnt)
