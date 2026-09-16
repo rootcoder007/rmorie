@@ -7,6 +7,10 @@
 #' @param y Response.
 #' @param intercept Prepend a column of ones.
 
+#' DFFITS, the scaled deletion influence on the fitted value
+#'
+#' Formula: `DFFITS_i = t*_i sqrt(h_ii/(1-h_ii))`, `t*_i = e_i / (s_(i) sqrt(1-h_ii))`
+#'
 #' @param X See Usage.
 #' @param y See Usage.
 #' @param intercept See Usage.
