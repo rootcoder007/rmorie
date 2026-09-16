@@ -6,7 +6,7 @@
 #' unconstrained. The posterior-mean increment at an observed event
 #' time pools the prior increment and the observed count by their
 #' weights,
-#' \code{dH(t_k) = (c dH_0(t_k) + dN_k) / (c + sum_{j in R_k} exp(x_j'b))},
+#' \eqn{dH(t_k) = (c dH_0(t_k) + dN_k) / (c + sum_{j in R_k} exp(x_j'b))},
 #' with \eqn{_k} the risk set. As \code{c -> 0} this is exactly the
 #' Breslow estimator; with \code{b = 0} as well it is Nelson-Aalen.
 #'
