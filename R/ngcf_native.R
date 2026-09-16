@@ -91,6 +91,8 @@
 #' @param n_i Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' ngcf_laplacian_coefficient(n_u = 5L, n_i = 5L)
 ngcf_laplacian_coefficient <- function(n_u, n_i) {
   a <- as.integer(n_u)
   b <- as.integer(n_i)
@@ -114,6 +116,13 @@ ngcf_laplacian_coefficient <- function(n_u, n_i) {
 #' @param affinity A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 3
+#' W1 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+#' W2 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+#' m <- ngcf_message(rnorm(d), rnorm(d), W1, W2, p_ui = 0.5)
+#' length(m) == d
 ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity = TRUE) {
   ei <- as.numeric(e_i)
   eu <- as.numeric(e_u)
@@ -143,6 +152,15 @@ ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity = TRUE) {
 #' @param slope Passed to \code{.ngcf_leaky}. Defaults to \code{0.2}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 3
+#' E <- matrix(rnorm(12), 4, 3)
+#' adjacency <- list(c(2, 4), c(1, 3), c(2, 4), c(1, 3))
+#' W1 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+#' W2 <- matrix(rnorm(d * d, 0, 0.3), d, d)
+#' Z <- ngcf_propagate(E, adjacency, W1, W2)
+#' dim(Z)
 ngcf_propagate <- function(E, adjacency, W1, W2, affinity = TRUE, slope = 0.2) {
   n <- nrow(E)
   d <- ncol(E)
@@ -185,6 +203,15 @@ ngcf_propagate <- function(E, adjacency, W1, W2, affinity = TRUE, slope = 0.2) {
 #' @return A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers},
 #' \code{affinity}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' d <- 3
+#' E0 <- matrix(rnorm(12), 4, 3)
+#' adjacency <- list(c(2, 4), c(1, 3), c(2, 4), c(1, 3))
+#' mk <- function() matrix(rnorm(d * d, 0, 0.3), d, d)
+#' Ws <- list(list(mk(), mk()), list(mk(), mk()))
+#' r <- ngcf_stack_layers(E0, adjacency, Ws)
+#' c(r$n_layers, ncol(r$final))
 ngcf_stack_layers <- function(E0, adjacency, Ws, affinity = TRUE, slope = 0.2) {
   E <- as.matrix(E0)
   storage.mode(E) <- "double"
@@ -224,6 +251,9 @@ ngcf_stack_layers <- function(E0, adjacency, Ws, affinity = TRUE, slope = 0.2) {
 #' @param i Coerced to integer by the body, with \code{as.integer}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' ngcf_score(final = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   u = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8))
 ngcf_score <- function(final, u, i) {
   a <- final[as.integer(u), ]
   b <- final[as.integer(i), ]
@@ -241,6 +271,8 @@ ngcf_score <- function(final, u, i) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' ngcf_cheatsheet()
 ngcf_cheatsheet <- function() {
   paste0(
     "ngcf: conventional CF never puts the COLLABORATIVE ",

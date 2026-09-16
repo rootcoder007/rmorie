@@ -30,6 +30,13 @@
 #' @param kernel \code{"epan"} or \code{"gauss"}.
 #' @return A numeric vector, one fitted value per point of \code{at}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' t <- sort(runif(80))
+#' y <- sin(2 * pi * t) + rnorm(80, 0, 0.1)
+#' at <- seq(0.05, 0.95, length.out = 11)
+#' fit <- morie_pace_local_linear(t, y, at, bw = 0.12)
+#' c(length(fit), max(abs(fit - sin(2 * pi * at))) < 0.3)
 morie_pace_local_linear <- function(t, y, at, bw, kernel = "epan") {
   if (!kernel %in% c("epan", "gauss")) {
     stop("pace: kernel must be epan or gauss, got '", kernel, "'.",
@@ -74,6 +81,13 @@ morie_pace_local_linear <- function(t, y, at, bw, kernel = "epan") {
 #' @return A matrix with one row per \code{at_s} and column per
 #'   \code{at_t}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' s <- runif(150); t <- runif(150)
+#' z <- sin(2 * s) + cos(2 * t) + rnorm(150, 0, 0.1)
+#' grid <- seq(0.2, 0.8, length.out = 4)
+#' fit <- morie_pace_local_linear_2d(s, t, z, grid, grid, bw = 0.35)
+#' length(fit)
 morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
                                        kernel = "epan") {
   if (!kernel %in% c("epan", "gauss")) {
@@ -177,6 +191,16 @@ morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
 #'     Statistical Association 100(470), 577-590.
 #'     doi:10.1198/016214504000001745.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Y <- list(); argvals <- list()
+#' for (i in 1:25) {
+#'   ti <- sort(runif(7))
+#'   Y[[i]] <- sin(2 * pi * ti) + rnorm(7, 0, 0.2)
+#'   argvals[[i]] <- ti
+#' }
+#' r <- morie_pace(Y, argvals, K = 2L, n_grid = 15L)
+#' length(r$mu) == 15L
 morie_pace <- function(Y, argvals, K = 2L, n_grid = 21L, bw_mu = NULL,
                        bw_cov = NULL, kernel = "epan", shrink = TRUE) {
   if (!kernel %in% c("epan", "gauss")) {

@@ -21,6 +21,9 @@
 #' \code{adaptive_coefficient}, \code{forecast_error}, \code{loglik},
 #' \code{signal_to_noise}, \code{n}, \code{V}, \code{W}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_baytsm_dlm_local_level(V)
 morie_baytsm_dlm_local_level <- function(y, V = 1.0, W = 0.1, m0 = 0.0,
                                          C0 = 1e6) {
   obs <- as.numeric(y)

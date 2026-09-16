@@ -41,6 +41,8 @@
 #' @param seed Passed to \code{cv_tmle_smoothed}. Defaults to \code{0L}.
 #' @return The value of \code{cv_tmle_smoothed}.
 #' @export
+#' @examples
+#' morie_tlcvnp(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
                          V = 5L, seed = 0L) {
   cv_tmle_smoothed(X, x0, bandwidths, kernel = kernel, V = V,
@@ -59,6 +61,8 @@ morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
 #' @param kernel One of \code{"epanechnikov"}, \code{"uniform"}. Defaults to \code{"epanechnikov"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' kernel_smooth(u = 5L)
 kernel_smooth <- function(u, kernel = "epanechnikov") {
   if (!(kernel %in% .tlcvnp_kernels))
     stop(sprintf("tlcvnp: kernel must be one of %s, got %s",
@@ -85,6 +89,8 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 #' @return A list with \code{psi_h}, \code{se}, \code{h}, \code{n},
 #' \code{influence_curve}, \code{note}.
 #' @export
+#' @examples
+#' smoothed_parameter(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, h = 0.5)
 smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
   v <- as.numeric(X)
   hh <- as.numeric(h)
@@ -115,6 +121,8 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
 #' @param smoothness Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @return A list with \code{bias_order}, \code{h}, \code{smoothness}, \code{note}.
 #' @export
+#' @examples
+#' smoothing_bias(true_density = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
 smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
   hh <- as.numeric(h)
   s <- as.numeric(smoothness)
@@ -138,6 +146,8 @@ smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
 #' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{h}, \code{fit}, \code{criterion}, \code{all}, \code{note}.
 #' @export
+#' @examples
+#' select_bandwidth(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
 select_bandwidth <- function(X, x0, bandwidths,
                              kernel = "epanechnikov",
                              criterion = "lepski", C = 1.0) {
@@ -192,6 +202,8 @@ select_bandwidth <- function(X, x0, bandwidths,
 #' @return A list with \code{estimate}, \code{psi}, \code{se}, \code{ci},
 #' \code{bandwidths}, \code{fold_estimates}, \code{V}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' cv_tmle_smoothed(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
 cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
                              V = 5L, seed = 0L) {
   v <- as.numeric(X)

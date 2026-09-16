@@ -19,6 +19,9 @@
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ragRet_normalise(V)
 morie_ragRet_normalise <- function(v) {
   x <- as.numeric(v)
   n <- sqrt(sum(x^2))
@@ -39,6 +42,8 @@ morie_ragRet_normalise <- function(v) {
 #' @return A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric},
 #' \code{comparisons}, \code{note}.
 #' @export
+#' @examples
+#' morie_ragRet_top_k(query = 5L, corpus = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
                                metric = "inner_product") {
   if (!(metric %in% .METRICS))
@@ -76,6 +81,9 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
 #' @return A list with \code{centroids}, \code{lists}, \code{assign}, \code{n.cells},
 #' \code{n}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ragRet_ivf_index(V)
 morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
                                    seed = 0L) {
   D <- lapply(corpus, as.numeric)
@@ -173,6 +181,9 @@ morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
 #' @param exact Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{recall}, \code{hits}, \code{k}, \code{missed}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ragRet_recall_at_k(V, V)
 morie_ragRet_recall_at_k <- function(approximate, exact) {
   A <- as.integer(approximate)
   E <- as.integer(exact)
@@ -193,6 +204,9 @@ morie_ragRet_recall_at_k <- function(approximate, exact) {
 #' @param mode One of \code{"sequence"}, \code{"token"}. Defaults to \code{"sequence"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ragRet_marginalise(V, V)
 morie_ragRet_marginalise <- function(doc.scores, token.probs,
                                      mode = "sequence") {
   p <- as.numeric(doc.scores)

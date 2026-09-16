@@ -19,11 +19,13 @@
 #'   the most likely cluster, its Poisson log-likelihood-ratio statistic,
 #'   the Monte-Carlo permutation p-value, and a plain-language
 #'   \code{interpretation}.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' if (FALSE) {
 #'   tps <- morie_sample("tps_assault")
 #'   mrm_tps_kulldorff_scan(tps, n_permutations = 49)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @name mrm_kulldorff
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}

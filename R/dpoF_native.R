@@ -114,6 +114,9 @@
 #' \code{reward_l}, \code{margin}, \code{grad_weight}, \code{accuracy}, \code{beta},
 #' \code{n}, \code{model}, \code{method}.
 #' @export
+#' @examples
+#' morie_dpoF(logp_w = c(-1, -2), logp_l = c(-3, -4),
+#'            logp_ref_w = c(-1.5, -2.5), logp_ref_l = c(-2.5, -3.5))
 morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
                        logp_ref_w = NULL, logp_ref_l = NULL,
                        beta = 0.1, model = "bradley-terry",
@@ -264,6 +267,8 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
 #' @param beta Numeric; combined arithmetically in the body.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' optimal_policy(logp_ref = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 optimal_policy <- function(logp_ref, reward, beta) {
   lr <- .dpoF_vec(logp_ref, "logp_ref")
   rr <- .dpoF_vec(reward, "reward")

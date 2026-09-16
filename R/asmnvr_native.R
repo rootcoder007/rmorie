@@ -40,6 +40,9 @@
 #'   An Eulerian path approach to DNA fragment assembly. PNAS,
 #'   98(17), 9748-9753.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_asmnvr(D)
 morie_asmnvr <- function(reads, k = NULL, multiplicity = "set") {
   rs <- as.character(reads)
   if (length(rs) == 0L)
@@ -115,6 +118,8 @@ morie_asmnvr <- function(reads, k = NULL, multiplicity = "set") {
 #' @param multiplicity One of \code{"count"}, \code{"set"}. Defaults to \code{"set"}.
 #' @return A list with \code{edges}, \code{indeg}, \code{outdeg}.
 #' @export
+#' @examples
+#' de_bruijn_graph(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
 de_bruijn_graph <- function(reads, k, multiplicity = "set") {
   if (!(multiplicity %in% c("set", "count")))
     stop(sprintf("asmnvr: multiplicity must be 'set' or 'count', got '%s'",

@@ -171,6 +171,9 @@
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}, \code{n}.
 #' @export
+#' @examples
+#' cause_specific_hazards(time = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   event_type = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8))
 cause_specific_hazards <- function(time, event_type, times,
                                    A = NULL, arm = NULL, weights = NULL) {
   t <- .tmlcmp_vec(time)
@@ -229,6 +232,9 @@ cause_specific_hazards <- function(time, event_type, times,
 #' @param times A vector; its length is taken.
 #' @return A list with \code{F}, \code{survival}, \code{types}, \code{closure}.
 #' @export
+#' @examples
+#' hazards <- list("1" = c(0.10, 0.15, 0.20), "2" = c(0.05, 0.05, 0.10))
+#' cumulative_incidence(hazards, times = c(1, 2, 3))
 cumulative_incidence <- function(hazards, times) {
   types <- sort(as.numeric(names(hazards)))
   if (length(types) == 0) {
@@ -276,6 +282,9 @@ cumulative_incidence <- function(hazards, times) {
 #' @param cause Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{caveat}.
 #' @export
+#' @examples
+#' hazards <- list("1" = c(0.10, 0.15, 0.20), "2" = c(0.05, 0.05, 0.10))
+#' one_minus_km(hazards, times = c(1, 2, 3), cause = 1)
 one_minus_km <- function(hazards, times, cause) {
   j <- as.numeric(cause)
   j_str <- as.character(j)
@@ -318,6 +327,11 @@ one_minus_km <- function(hazards, times, cause) {
 #' \code{curve_treated}, \code{curve_control}, \code{se}, \code{ci}, \code{horizon},
 #' \code{cause}, \code{times}, \code{closure_treated}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_tmlcmp(time = sort(runif(10)), event_type = rbinom(10, 1, 0.5),
+#'   D = rbinom(10, 1, 0.5), X = rnorm(10))
+#' TRUE
 morie_tmlcmp <- function(time, event_type, D, X, times = NULL,
                          cause = 1, horizon = NULL, g = NULL, iters = 50) {
   t <- .tmlcmp_vec(time)

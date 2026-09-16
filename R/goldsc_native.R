@@ -143,6 +143,8 @@
 #' @param n The repulsive exponent.
 #' @return The energy.
 #' @export
+#' @examples
+#' morie_goldsc_lj(r = 5L, r0 = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
 morie_goldsc_lj <- function(r, r0, eps, m = 6, n = 12) {
   r <- as.numeric(r)
   if (r <= 0) return(Inf)
@@ -167,6 +169,8 @@ morie_goldsc_lj <- function(r, r0, eps, m = 6, n = 12) {
 #' @param inner The exponent pair used inside it.
 #' @return The energy.
 #' @export
+#' @examples
+#' morie_goldsc_split(r = 5L, r0 = 5L, eps = 0.5)
 morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
                                inner = c(2, 4)) {
   if (as.numeric(r) >= r0)
@@ -228,6 +232,11 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #' @param cutoff Drop contacts beyond this separation, or NULL.
 #' @return A list with the total, the per-contact energies and the count.
 #' @export
+#' @examples
+#' RAD <- list(list("C", 1.9), list("N", 1.7), list("O", 1.6))
+#' DEP <- list(list("C", 0.15), list("N", 0.16), list("O", 0.2))
+#' morie_goldsc_vdw(list(list(3.4, "C", "C"), list(5, "C", "N")),
+#'     RAD, DEP)
 morie_goldsc_vdw <- function(pairs, radii, depths, potential = "4-8",
                              cutoff = NULL) {
   terms <- numeric(0)
@@ -260,6 +269,9 @@ morie_goldsc_vdw <- function(pairs, radii, depths, potential = "4-8",
 #' @param max_distance The distance threshold.
 #' @return A list with the total, the counted energies and the count.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_goldsc_hbond(D)
 morie_goldsc_hbond <- function(bonds, max_distance = 2.5) {
   terms <- numeric(0)
   for (b in bonds)
@@ -277,6 +289,9 @@ morie_goldsc_hbond <- function(bonds, max_distance = 2.5) {
 #' @param torsions A list of c(phi, A, n, phi0).
 #' @return A list with the total and the per-bond terms.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_goldsc_torsion(D)
 morie_goldsc_torsion <- function(torsions) {
   terms <- vapply(torsions, function(t)
     as.numeric(t[2]) * (1 + cos(as.numeric(t[3]) * as.numeric(t[1]) *
@@ -364,6 +379,8 @@ morie_goldsc <- function(receptor, ligand, radii = list(),
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_goldsc_cheatsheet()
 morie_goldsc_cheatsheet <- function()
   paste0("goldsc: GoldScore docking fitness. potentials ",
          paste(.GOLDSC_POTENTIALS, collapse = ", "),

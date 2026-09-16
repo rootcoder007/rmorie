@@ -21,6 +21,6 @@ List with \code{estimate}, \code{label}, \code{space}, \code{labels}.
 f: (a, b) -> y with the label space ENFORCED. \code{y} is "bin", "3way" or "reg".
 }
 \examples{
-morie_kamath_ch6_alignment_function("a", "b", "3way", function(a, 
+morie_kamath_ch6_alignment_function("a", "b", "3way", function(a,
     b) "CONTRADICT")
 }

@@ -109,6 +109,14 @@
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{mh}, \code{eh}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 120
+#' X <- matrix(rnorm(n * 3), n, 3)
+#' W <- rbinom(n, 1, 0.5)
+#' y <- W * (1 + X[, 1]) + X[, 2] + rnorm(n, 0, 0.5)
+#' lc <- local_centering(y, W, X, n_folds = 3, n_trees = 40)
+#' c(length(lc$mh), length(lc$eh))
 local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
                             min_leaf = 5, seed = 0) {
   n <- length(y)
@@ -143,6 +151,15 @@ local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
 #' @param pi Passed to \code{grow_forest}. Defaults to \code{0.5}.
 #' @return A list with \code{tau}, \code{info}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 120
+#' X <- matrix(rnorm(n * 3), n, 3)
+#' W <- rbinom(n, 1, 0.5)
+#' y <- W * (1 + X[, 1]) + X[, 2] + rnorm(n, 0, 0.5)
+#' lc <- local_centering(y, W, X, n_folds = 3, n_trees = 40)
+#' rf <- residual_forest(y - lc$mh, W - lc$eh, X, n_trees = 40)
+#' is.list(rf)
 residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
                             min_leaf = 5, seed = 0, alpha = 0.05, pi = 0.5) {
   n <- length(y_res)
@@ -193,6 +210,14 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
 #' \code{e_hat}, \code{y_residual}, \code{w_residual}, \code{centered}, \code{n},
 #' \code{n_trees}, \code{ate}, \code{level}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 120
+#' X <- matrix(rnorm(n * 3), n, 3)
+#' W <- rbinom(n, 1, 0.5)
+#' y <- W * (1 + X[, 1]) + X[, 2] + rnorm(n, 0, 0.5)
+#' fit <- morie_plrgrf(y, W, X, n_trees = 40, n_folds = 3)
+#' is.list(fit)
 morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
                          n_folds = 5, min_leaf = 5, seed = 0,
                          center = TRUE, level = 0.95) {

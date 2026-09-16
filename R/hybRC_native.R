@@ -122,6 +122,8 @@
 #' @param method Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{method}, \code{order_sensitive}, \code{note}.
 #' @export
+#' @examples
+#' is_order_sensitive("mixed")
 is_order_sensitive <- function(method) {
   m <- as.character(method)
   if (!(m %in% .METHODS)) {
@@ -146,6 +148,9 @@ is_order_sensitive <- function(method) {
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.hybRC_vec}.
 #' @return A list with \code{scores}, \code{ranking}, \code{partially_scored}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' weighted(V)
 weighted <- function(scores, weights = NULL) {
   S <- lapply(scores, function(s) as.list(s))
   if (length(S) == 0L) {
@@ -200,6 +205,13 @@ weighted <- function(scores, weights = NULL) {
 #' @param context Passed to \code{criterion}.
 #' @return A list with \code{scores}, \code{chosen}, \code{ranking}, \code{note}.
 #' @export
+#' @examples
+#' r <- switching(list(content = c(a = 0.9, b = 0.2),
+#'                     collab = c(a = 0.1, b = 0.8)),
+#'                criterion = function(ctx)
+#'                  if (ctx$n_ratings < 5) 0L else 1L,
+#'                context = list(n_ratings = 2))
+#' str(r, max.level = 1)
 switching <- function(scores, criterion, context = NULL) {
   S <- lapply(scores, function(s) as.list(s))
   c_idx <- as.integer(criterion(context))
@@ -232,6 +244,9 @@ switching <- function(scores, criterion, context = NULL) {
 #' \code{as.integer}.
 #' @return A list with \code{presented}, \code{n_sources}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' mixed(V)
 mixed <- function(recommendations, top_k = NULL) {
   L <- lapply(recommendations, function(r) as.list(r))
   if (length(L) == 0L) {
@@ -275,6 +290,9 @@ mixed <- function(recommendations, top_k = NULL) {
 #' @param collaborative_features Passed to \code{.hybRC_mat}.
 #' @return A list with \code{features}, \code{content_dim}, \code{collaborative_dim}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' feature_combination(V, V)
 feature_combination <- function(content_features, collaborative_features) {
   C <- .hybRC_mat(content_features)
   D <- .hybRC_mat(collaborative_features)
@@ -314,6 +332,8 @@ feature_combination <- function(content_features, collaborative_features) {
 #' @return A list with \code{ranking}, \code{tie_groups_broken},
 #' \code{primary_respected}, \code{note}.
 #' @export
+#' @examples
+#' cascade(primary = list(a = 1, b = 2), secondary = c(1, 2, 3, 4, 5, 6, 7, 8))
 cascade <- function(primary, secondary, tol = 1e-9) {
   P <- as.list(primary)
   S <- as.list(secondary)
@@ -352,6 +372,13 @@ cascade <- function(primary, secondary, tol = 1e-9) {
 #' @param consumer Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{result}, \code{note}.
 #' @export
+#' @examples
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   base <- function(data) rowMeans(data)
+#'   consumer <- function(feat) list(score = mean(feat))
+#'   r <- feature_augmentation(base(matrix(1:6, 3, 2)), consumer)
+#'   str(r, max.level = 1)
+#' }
 feature_augmentation <- function(base_output, consumer) {
   list(
     result = consumer(base_output),
@@ -370,6 +397,13 @@ feature_augmentation <- function(base_output, consumer) {
 #' @param data Passed to \code{model_builder}.
 #' @return A list with \code{estimate}, \code{result}, \code{model}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' mb <- function(data) lm(y ~ x, data = data)
+#' cons <- function(model) unname(coef(model)[2])
+#' d <- data.frame(x = 1:10, y = 2 * (1:10) + rnorm(10, 0, 0.1))
+#' r <- meta_level(mb, cons, d)
+#' str(r, max.level = 1)
 meta_level <- function(model_builder, consumer, data) {
   model <- model_builder(data)
   estimate <- consumer(model)

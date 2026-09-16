@@ -207,12 +207,14 @@ morie_placebo_dr_did <- function(y_pre1, y_pre2, D, X, ...) {
 #'   Generalized random forests. \emph{Annals of Statistics}, 47(2),
 #'   1148-1178.
 #' @examples
-#' set.seed(1)
-#' X <- matrix(rnorm(1200), ncol = 4)
-#' D <- rbinom(300, 1, 0.5)
-#' y <- X[, 2] + ifelse(X[, 1] > 0, 2, -2) * D + rnorm(300, 0, 0.5)
-#' r <- morie_egregious_loss_forest(y, D, X, n_trees = 40)
-#' round(mean(r$cate[X[, 1] > 0], na.rm = TRUE), 2)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   X <- matrix(rnorm(1200), ncol = 4)
+#'   D <- rbinom(300, 1, 0.5)
+#'   y <- X[, 2] + ifelse(X[, 1] > 0, 2, -2) * D + rnorm(300, 0, 0.5)
+#'   r <- morie_egregious_loss_forest(y, D, X, n_trees = 40)
+#'   round(mean(r$cate[X[, 1] > 0], na.rm = TRUE), 2)
+#' }
 #' @export
 morie_egregious_loss_forest <- function(y, D, X, n_trees = 200L,
                                         min_leaf = 10L, max_depth = 6L,

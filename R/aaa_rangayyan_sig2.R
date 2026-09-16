@@ -19,6 +19,9 @@
 #' @return A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{contributions},
 #' \code{commutes}, \code{causal}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' LinConv(V, V)
 LinConv <- function(x, h, causal = TRUE) {
   # eqs (3.36)-(3.37): y(n) = sum_k x(k) h(n-k) = sum_k h(k) x(n-k),
   # causality assumed as the book states under eq (3.37).  eq (3.39)
@@ -56,6 +59,9 @@ LinConv <- function(x, h, causal = TRUE) {
 #' @return A list with \code{s}, \code{y}, \code{h}, \code{y_via_combined},
 #' \code{max_difference}, \code{equivalent}, \code{method}.
 #' @export
+#' @examples
+#' LsiSer(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 LsiSer <- function(x, h1, h2) {
   # eqs (3.43)-(3.45): s = x*h1, y = s*h2 = x*h, h = h1*h2.  One method,
   # so one function; the equivalence in eq (3.44) is measured, not
@@ -89,6 +95,9 @@ LsiSer <- function(x, h1, h2) {
 #' @return A list with \code{y}, \code{h}, \code{s}, \code{equivalent},
 #' \code{max_difference}, \code{method}.
 #' @export
+#' @examples
+#' LsiSerY(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 LsiSerY <- function(x, h1, h2) {
   # eq (3.44): the cascade output, read off LsiSer rather than convolved
   # a second time -- the content of the equation is that the cascade IS a
@@ -112,6 +121,9 @@ LsiSerY <- function(x, h1, h2) {
 #' @return A list with \code{s1}, \code{s2}, \code{y}, \code{h}, \code{y_via_combined},
 #' \code{max_difference}, \code{equivalent}, \code{method}.
 #' @export
+#' @examples
+#' LsiPar(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 LsiPar <- function(x, h1, h2) {
   # eqs (3.46)-(3.49): s1 = x*h1, s2 = x*h2, y = s1 + s2 = x*(h1+h2).
   # The shorter response is zero-extended before the addition; truncating
@@ -145,6 +157,9 @@ LsiPar <- function(x, h1, h2) {
 #' @param h2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{s2}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' LsiPar2(V, V)
 LsiPar2 <- function(x, h2) {
   # eq (3.47): identical in form to eq (3.46) -- both branches of a
   # parallel structure see the same input.
@@ -167,6 +182,9 @@ LsiPar2 <- function(x, h2) {
 #' @return A list with \code{y}, \code{h}, \code{s1}, \code{s2}, \code{equivalent},
 #' \code{max_difference}, \code{method}.
 #' @export
+#' @examples
+#' LsiParY(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 LsiParY <- function(x, h1, h2) {
   # eqs (3.48)-(3.49): the parallel counterpart of eq (3.44) -- here the
   # impulse responses ADD where a cascade convolves them.
@@ -192,6 +210,9 @@ LsiParY <- function(x, h1, h2) {
 #' @return A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{s},
 #' \code{max_difference}, \code{holds}, \code{method}.
 #' @export
+#' @examples
+#' LtiProd(c(1, 2, 1), c(1, -1), s = complex(real = 0.3, imaginary = 1.1),
+#'     dt = 0.5)
 LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
   # eqs (3.50), (3.53): convolution in time is multiplication in the s
   # and omega domains.  s = j omega recovers the frequency-domain form,
@@ -242,6 +263,9 @@ LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
 #' @param npoints Passed to \code{CircConv}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PerConv(V, V)
 PerConv <- function(x, h, npoints = NULL) {
   # eq (3.90); the same equation CircConv implements, so it delegates --
   # two copies of one equation is how the two drift apart.
@@ -266,6 +290,8 @@ PerConv <- function(x, h, npoints = NULL) {
 #' \code{fs}, \code{suppressed_carrier}, \code{baseband_gain}, \code{image_frequency},
 #' \code{method}.
 #' @export
+#' @examples
+#' AmSig(rep(1, 8), fc = 1, fs = 8)
 AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
   # Section 5.5.1: y(t) = x(t) cos(wc t) -- double-sideband SUPPRESSED
   # carrier -- with synchronous demodulation x_d = y cos(wc t) =
@@ -310,6 +336,8 @@ AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
 #' \code{fs}, \code{kf}, \code{max_instantaneous_frequency},
 #' \code{min_instantaneous_frequency}, \code{aliases}, \code{method}.
 #' @export
+#' @examples
+#' FmSig(c(rep(0, 10), rep(50, 10)), fc = 100, fs = 1000, kf = 1)
 FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {
   # Rangayyan names FM as a signal model but prints no equation for it,
   # unlike AM in Section 5.5.1, so the standard definition is used and
@@ -354,6 +382,9 @@ FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {
 #' @return A list with \code{y}, \code{n}, \code{kernel_lengths}, \code{shift_invariant},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' TvLsi(V, V)
 TvLsi <- function(x, h) {
   # A time-variant system needs h(n, m), one response per output instant:
   #   y(n) = sum_m h(n, m) x(n - m).

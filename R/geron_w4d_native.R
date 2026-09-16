@@ -544,8 +544,10 @@ morie_geron_self_supervised <- function(X, pretext = "mask", noise = 0.1, seed =
 #'   objective, laplacian, affinity, alpha, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6,
-#' 7, 8), X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'     X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' }
 morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
                                        fit_intercept = TRUE) {
   L1 <- as.matrix(X_l)
@@ -1033,8 +1035,7 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 #' @return A list with \code{labels}, \code{centers}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_w4d_lloyd(Z = X, k = 3L)
 #' res
 .morie_w4d_lloyd <- function(Z, k, seed = 0, iters = 100) {
@@ -1083,8 +1084,8 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 #'   accuracy, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_semisupervised_cluster(X = c(1, 2, 3, 4, 5, 6, 7, 8), X_labeled = c(1, 2,
-#' 3, 4, 5, 6, 7, 8), y_labeled = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_semisupervised_cluster(X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X_labeled = c(1, 2, 3, 4, 5, 6, 7, 8), y_labeled = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_semisupervised_cluster <- function(X, X_labeled, y_labeled, n_clusters = 2,
                                                seed = 0, y_true = NULL) {
   A <- as.matrix(X)
@@ -1327,8 +1328,10 @@ morie_geron_stride <- function(in_dim, k, p = 0, s = 1) {
 #'   optimism, leverage, r2, estimate, n, method.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_supervised_learning(V, V)
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_geron_supervised_learning(V, V)
+#' }
 morie_geron_supervised_learning <- function(X, y, ridge = 0.0, fit_intercept = TRUE) {
   A <- as.matrix(X)
   t <- as.numeric(y)
@@ -2304,8 +2307,8 @@ morie_geron_td3 <- function(env, policy = NULL, Q1 = NULL, Q2 = NULL, epochs = 3
 #'   trainable_params, total_params, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_transfer_learning(pretrained_model = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1,
-#' 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_transfer_learning(pretrained_model = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_transfer_learning <- function(pretrained_model, X, y, n_frozen = 1, epochs = 200, lr = 0.05) {
   Ws <- lapply(pretrained_model, as.matrix)
   A <- as.matrix(X)
@@ -2489,8 +2492,7 @@ morie_geron_torchscript <- function(model, example_inputs) {
 #' @return A numeric value.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_w4d_layernorm(x = X)
 #' res
 .morie_w4d_layernorm <- function(x, eps = 1e-5) {
@@ -2504,8 +2506,8 @@ morie_geron_torchscript <- function(model, example_inputs) {
 #' @return Integer parameter count.
 #' @export
 #' @examples
-#' morie_geron_encoder_params(d_model = c(1, 2, 3, 4, 5, 6, 7, 8), d_ff = c(1, 2, 3, 4,
-#' 5, 6, 7, 8), n_layers = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_encoder_params(d_model = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   d_ff = c(1, 2, 3, 4, 5, 6, 7, 8), n_layers = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_encoder_params <- function(d_model, d_ff, n_layers) {
   per <- 4 * d_model * d_model + d_model * d_ff + d_ff + d_ff * d_model + d_model + 4 * d_model
   as.integer(per * n_layers)
@@ -2955,8 +2957,8 @@ morie_geron_unsupervised_learning <- function(X, n_clusters = 2, bottleneck = 1,
 #'   explained_variance_ratio, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_unsupervised_pretraining(X_unlab = c(1, 2, 3, 4, 5, 6, 7, 8), X_lab = c(1,
-#' 2, 3, 4, 5, 6, 7, 8), y_lab = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_unsupervised_pretraining(X_unlab = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   X_lab = c(1, 2, 3, 4, 5, 6, 7, 8), y_lab = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_unsupervised_pretraining <- function(X_unlab, X_lab, y_lab, bottleneck = 1) {
   U <- as.matrix(X_unlab)
   L <- as.matrix(X_lab)
@@ -3855,8 +3857,8 @@ morie_geron_warm_restarts <- function(t, T0 = 10, factor = 2.0, eta_max = 0.1, e
 #' @return Integer parameter count k*k*c_in + c_in*c_out.
 #' @export
 #' @examples
-#' morie_geron_separable_params(k = 5L, c_in = c(1, 2, 3, 4, 5, 6, 7, 8), c_out = c(1, 2,
-#' 3, 4, 5, 6, 7, 8))
+#' morie_geron_separable_params(k = 5L, c_in = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   c_out = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_separable_params <- function(k, c_in, c_out) {
   as.integer(k * k * c_in + c_in * c_out)
 }

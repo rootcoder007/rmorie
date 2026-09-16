@@ -78,6 +78,8 @@
 #' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{0}.
 #' @return The value of \code{train}, as built in the body.
 #' @export
+#' @examples
+#' logistic_trainer()
 logistic_trainer <- function(l2 = 1e-3, epochs = 300L, lr = 0.5, seed = 0) {
   train <- function(X, y) {
     n <- length(X)
@@ -129,6 +131,8 @@ logistic_trainer <- function(l2 = 1e-3, epochs = 300L, lr = 0.5, seed = 0) {
 #' @param smoothing A count; the body uses it as \code{rep(...)}. Defaults to \code{0.001}.
 #' @return The value of \code{train}, as built in the body.
 #' @export
+#' @examples
+#' knn_trainer()
 knn_trainer <- function(k = 1L, smoothing = 1e-3) {
   k <- as.integer(k)
   if (k < 1L) stop("memb: k must be >= 1")
@@ -173,6 +177,15 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
 #' @param out_y A vector; indexed elementwise.
 #' @return A list with \code{rows}, \code{labels}, \code{classes}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' model_predict <- function(rows) lapply(rows, function(r)
+#'   {p <- exp(r); p / sum(p)})
+#' in_X <- lapply(1:5, function(i) rnorm(3))
+#' out_X <- lapply(1:5, function(i) rnorm(3))
+#' r <- attack_dataset(model_predict, in_X, as.list(rep(0, 5)),
+#'                     out_X, as.list(rep(1, 5)))
+#' str(r, max.level = 1)
 attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
   rows <- list()
   lab <- c()
@@ -215,6 +228,14 @@ attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return Nothing; the function is called for its effect.
 #' @export
+#' @examples
+#' set.seed(1)
+#' target <- function(rows) lapply(rows, function(r)
+#'   {z <- c(sum(r), -sum(r)); p <- exp(z - max(z)); p / sum(p)})
+#' r <- synthesize(target, c = 0L, n_features = 3,
+#'                 feature_values = list(c(-1, 0, 1), c(-1, 0, 1),
+#'                                       c(-1, 0, 1)))
+#' str(r, max.level = 1)
 synthesize <- function(target_predict, c, n_features, feature_values = NULL,
                        k_max = NULL, k_min = 1L, conf_min = 0.8,
                        iter_max = 1000L, rej_max = 10L, seed = 0) {
@@ -294,6 +315,8 @@ synthesize <- function(target_predict, c, n_features, feature_values = NULL,
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' synthesize_marginals(X = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 synthesize_marginals <- function(X, n, seed = 0) {
   if (length(X) == 0L)
     stop("memb: no data to take marginals from")
@@ -323,6 +346,9 @@ synthesize_marginals <- function(X, n, seed = 0) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' synthesize_noisy(V)
 synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
                               seed = 0) {
   if (!(fraction >= 0 && fraction <= 1))
@@ -359,6 +385,9 @@ synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
 #' @return A list with \code{precision}, \code{recall}, \code{accuracy}, \code{tp},
 #' \code{fp}, \code{fn}, \code{tn}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' precision_recall(V, V)
 precision_recall <- function(pred, truth) {
   pred <- as.integer(pred)
   truth <- as.integer(truth)

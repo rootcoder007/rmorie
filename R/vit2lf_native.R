@@ -113,6 +113,9 @@
 #' @param tau_floor The lower bound on tau.
 #' @return A list with the logit matrix and the scale actually applied.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_vit2lf_logits(V, V)
 morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
                                 n = NULL,
                                 tau_floor = .VIT2LF_TAU_FLOOR) {
@@ -172,6 +175,9 @@ morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
 #' @param mask A logical matrix, TRUE where a key is visible, or NULL.
 #' @return The attention weight matrix.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_vit2lf_softmax(M)
 morie_vit2lf_softmax <- function(logits, mask = NULL) {
   nq <- nrow(logits)
   nk <- ncol(logits)
@@ -198,6 +204,9 @@ morie_vit2lf_softmax <- function(logits, mask = NULL) {
 #' @param w The attention weight matrix.
 #' @return One entropy per query row.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_vit2lf_entropy(M)
 morie_vit2lf_entropy <- function(w) {
   vapply(seq_len(nrow(w)), function(i) {
     p <- w[i, ][w[i, ] > 0]
@@ -216,6 +225,8 @@ morie_vit2lf_entropy <- function(w) {
 #' @param dy Vertical offset.
 #' @return The two log-spaced offsets.
 #' @export
+#' @examples
+#' morie_vit2lf_log_coords(dx = 5L, dy = 5L)
 morie_vit2lf_log_coords <- function(dx, dy) {
   f <- function(v) {
     v <- as.numeric(v)
@@ -237,6 +248,19 @@ morie_vit2lf_log_coords <- function(dx, dy) {
 #' @param log_spaced Whether to transform the offsets first.
 #' @return The bias matrix.
 #' @export
+#' @examples
+#' mk <- function(nr, nc, f) {
+#'     m <- matrix(0, nr, nc)
+#'     for (i in seq_len(nr)) for (j in seq_len(nc)) m[i, j] <- f(i -
+#'         1L, j - 1L)
+#'     m
+#' }
+#' W <- 4L
+#' SPAN <- 2L * W - 1L
+#' TABLE <- mk(SPAN, SPAN, function(a, b) (((a * 3 + b * 5)%%9) -
+#'     4)/6)
+#' COORDS <- matrix(0, 6L, 2L)
+#' morie_vit2lf_relative_bias(COORDS, TABLE, W, TRUE)
 morie_vit2lf_relative_bias <- function(coords, table, window,
                                        log_spaced = TRUE) {
   coords <- as.matrix(coords)
@@ -285,6 +309,8 @@ morie_vit2lf_relative_bias <- function(coords, table, window,
 #'   largest weight -- the last two being how you see the scaling
 #'   working.
 #' @export
+#' @examples
+#' morie_vit2lf(q = 0.5, k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_vit2lf <- function(q, k, v, mode = "logn", tau = 1, bias = NULL,
                          mask = NULL, n = NULL,
                          tau_floor = .VIT2LF_TAU_FLOOR) {
@@ -320,6 +346,8 @@ morie_vit2lf <- function(q, k, v, mode = "logn", tau = 1, bias = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_vit2lf_cheatsheet()
 morie_vit2lf_cheatsheet <- function()
   paste0("vit2lf: log-scaled attention. modes ",
          paste(.VIT2LF_MODES, collapse = ", "),

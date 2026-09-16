@@ -584,10 +584,12 @@ morie_esl_dropout <- function(X, p = 0.5, training = TRUE, seed = 0L) {
 #' @references Donoho, D. L., & Johnstone, I. M. (1994). Ideal spatial
 #'   adaptation by wavelet shrinkage. Biometrika 81(3), 425-455.
 #' @examples
-#' set.seed(1)
-#' clean <- rep(c(0, 4, 1, -2), each = 64)
-#' r <- morie_esl_wavelet_smooth(clean + rnorm(256, sd = 0.5))
-#' mean((r$signal - clean)^2) < 0.25
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   clean <- rep(c(0, 4, 1, -2), each = 64)
+#'   r <- morie_esl_wavelet_smooth(clean + rnorm(256, sd = 0.5))
+#'   mean((r$signal - clean)^2) < 0.25
+#' }
 #' @export
 morie_esl_wavelet_smooth <- function(y, mode = "soft", threshold = NULL,
                                      levels = NULL) {

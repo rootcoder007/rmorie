@@ -21,6 +21,6 @@ that is not strongly connected has no finite MLE and is refused. The
 pairwise loss comes from \code{morie_kamath_reward_model_training_loss}.
 }
 \examples{
-morie_kamath_rlaif_objective(list(c("a", "b"), c("b", "c"), c("c", 
+morie_kamath_rlaif_objective(list(c("a", "b"), c("b", "c"), c("c",
     "a"), c("a", "c")))
 }

@@ -38,7 +38,7 @@ A list with the draws, the acceptance rate and the settings.
 \keyword{internal}
 \examples{
 MU3 <- c(1, -0.5, 2)
-Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2), 
+Q3 <- matrix(c(2, 0.6, 0.1, 0.6, 1.5, -0.3, 0.1, -0.3, 1.2),
     3, 3, byrow = TRUE)
 lp3 <- function(x) {
     dv <- x - MU3

@@ -19,6 +19,6 @@ A list with \code{y}, \code{y1}, \code{y2}, \code{x1}, \code{x2}, \code{x_recons
 }
 \keyword{internal}
 \examples{
-morie_geron_revnet(c(1, 2, 3, 4), function(a) 2 * a, function(a) a + 
+morie_geron_revnet(c(1, 2, 3, 4), function(a) 2 * a, function(a) a +
     1)
 }

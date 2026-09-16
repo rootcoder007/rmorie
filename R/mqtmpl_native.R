@@ -41,6 +41,8 @@
 #'   full status dictionary.
 #' @return A list with the available methods, or a per-method status.
 #' @export
+#' @examples
+#' morie_mqtmpl_method_status()
 morie_mqtmpl_method_status <- function(method = NULL) {
   avail <- c("em", "mr", "imp")
   unsourced <- list(
@@ -80,6 +82,12 @@ morie_mqtmpl_method_status <- function(method = NULL) {
 #' @param error_rate Genotyping error rate in [0, 0.5).
 #' @return A list of per-individual posterior matrices.
 #' @export
+#' @examples
+#' set.seed(1)
+#' g <- lapply(1:6, function(i) c(rbinom(1, 1, 0.5), NA, rbinom(1, 1, 0.5)))
+#' pos <- c(0, 0.1, 0.2)
+#' r <- morie_mqtmpl_hmm_genotype_probabilities(g, pos)
+#' str(r[[1]])
 morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
                                                       error_rate = 0) {
   e <- as.numeric(error_rate)
@@ -146,6 +154,12 @@ morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
 #' @param seed Seed for the shared generator.
 #' @return A list of draws.
 #' @export
+#' @examples
+#' set.seed(1)
+#' g <- lapply(1:6, function(i) c(rbinom(1, 1, 0.5), NA, rbinom(1, 1, 0.5)))
+#' pos <- c(0, 0.1, 0.2)
+#' r <- morie_mqtmpl_sample_genotypes(g, pos, grid = pos, n_imp = 4)
+#' str(r, max.level = 1)
 morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
                                            n_imp = 16, error_rate = 0,
                                            seed = 0) {
@@ -195,6 +209,9 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
 #' @param model_dimension Degrees of freedom in the model.
 #' @return The log weight.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mqtmpl_imputation_weights(V, V)
 morie_mqtmpl_imputation_weights <- function(y, genotype_column,
                                              model_dimension = 2) {
   n <- length(y)
@@ -387,6 +404,15 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 #' @param error_rate Genotyping error rate.
 #' @return A list with peak LOD, position, full grid, and bookkeeping.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5)
+#' m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' r <- morie_mqtmpl_scanone(y, list(m1, m2), positions = c(0, 0.1),
+#'                           method = "mr")
+#' str(r, max.level = 1)
 morie_mqtmpl_scanone <- function(y, markers, positions,
                                   method = "em", step = 0.02,
                                   covariates = list(),
@@ -443,6 +469,16 @@ morie_mqtmpl_scanone <- function(y, markers, positions,
 #' @param seed Seed.
 #' @return A list with threshold, null maxima, median, alpha, n_perm.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5)
+#' m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' r <- morie_mqtmpl_permutation_threshold(y, list(m1, m2),
+#'                                         positions = c(0, 0.1),
+#'                                         n_perm = 20, method = "mr")
+#' str(r, max.level = 1)
 morie_mqtmpl_permutation_threshold <- function(y, markers, positions,
                                                 n_perm = 100, alpha = 0.05,
                                                 method = "em",
@@ -475,6 +511,16 @@ morie_mqtmpl_permutation_threshold <- function(y, markers, positions,
 #' @param drop LOD drop.
 #' @return A list with peak, lower, upper, drop, peak_lod.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 40
+#' m1 <- rbinom(n, 1, 0.5)
+#' m2 <- ifelse(runif(n) < 0.9, m1, 1 - m1)
+#' y <- 1 + 0.8 * m1 + rnorm(n, 0, 0.5)
+#' sc <- morie_mqtmpl_scanone(y, list(m1, m2), positions = c(0, 0.1),
+#'                            method = "mr")
+#' r <- morie_mqtmpl_lod_support_interval(sc)
+#' str(r, max.level = 1)
 morie_mqtmpl_lod_support_interval <- function(scan_result, drop = 1.5) {
   lod <- scan_result$lod
   pos <- scan_result$position

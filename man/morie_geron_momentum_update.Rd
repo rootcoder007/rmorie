@@ -22,6 +22,6 @@ List with \code{theta_new}, \code{v_new}, \code{step}, \code{terminal_speedup}.
 v = beta v + g; theta -= eta v; terminal speedup 1/(1-beta).
 }
 \examples{
-morie_geron_momentum_update(c(1, -2), c(0.5, 0.25), c(0.1, -0.1), 
+morie_geron_momentum_update(c(1, -2), c(0.5, 0.25), c(0.1, -0.1),
     0.05, 0.8)
 }

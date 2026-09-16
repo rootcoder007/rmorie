@@ -4,7 +4,7 @@
 \alias{morie_taphonomy_fetch_usgs_soil}
 \title{Fetch USGS National Geochemical Database soil geochemistry}
 \source{
-\url{https://mrdata.usgs.gov/ngdb/soil/}
+\url{https://web.archive.org/web/20250620012926/https://mrdata.usgs.gov/ngdb/soil/} (archived snapshot of mrdata.usgs.gov/ngdb/soil/)
 }
 \usage{
 morie_taphonomy_fetch_usgs_soil(

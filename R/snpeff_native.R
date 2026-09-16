@@ -45,6 +45,8 @@
 #'
 #' @return The value of \code{.SNPEFF_CODONS}, as built in the body.
 #' @export
+#' @examples
+#' codon_table()
 codon_table <- function() .SNPEFF_CODONS
 
 #' translate
@@ -58,6 +60,9 @@ codon_table <- function() .SNPEFF_CODONS
 #' @param to_stop A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A character value.
 #' @export
+#' @examples
+#' S <- c("a", "b", "c")
+#' translate(S)
 translate <- function(seq, to_stop = FALSE) {
   s <- toupper(as.character(seq))
   s <- gsub("U", "T", s, fixed = TRUE)
@@ -145,6 +150,8 @@ translate <- function(seq, to_stop = FALSE) {
 #' with \code{as.integer}.
 #' @return The value of \code{.snpeff_pack}.
 #' @export
+#' @examples
+#' annotate_variant("ATGAAACCCGGGTTTTAA", 4, "A", "T")
 annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
                              upstream = 5000, downstream = 5000,
                              transcript_len = NULL) {

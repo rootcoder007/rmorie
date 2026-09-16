@@ -21,6 +21,9 @@
 #' order does not matter at load time; the body is a single call to the
 #' target, so outputs are exactly identical.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Locdp(V)
 Locdp <- function(bit, epsilon = 1) {
   Rrand(bit, epsilon = epsilon)
 }

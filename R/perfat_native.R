@@ -49,6 +49,8 @@
 #' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' draw_projections(m = 5L, d = 5L)
 draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
   m <- as.integer(m)
   d <- as.integer(d)
@@ -102,6 +104,9 @@ draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' favor_features(M, M)
 favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
   if (!kind %in% c("positive", "trig"))
     stop(sprintf("perfat: kind must be positive or trig, got %s", kind))
@@ -137,6 +142,9 @@ favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
 #' @param kind Passed to \code{favor_features}. Defaults to \code{"positive"}.
 #' @return The value of \code{.dot}.
 #' @export
+#' @examples
+#' kernel_estimate(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   omegas = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 kernel_estimate <- function(x, y, omegas, kind = "positive") {
   f <- favor_features(rbind(x, y), omegas, kind = kind)
   .dot(f[1L, ], f[2L, ])
@@ -154,6 +162,8 @@ kernel_estimate <- function(x, y, omegas, kind = "positive") {
 #' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' softmax_attention(Q = 0.5, K = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8))
 softmax_attention <- function(Q, K, V, causal = FALSE) {
   Qm <- as.matrix(Q)
   Km <- as.matrix(K)
@@ -190,6 +200,9 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 #' @return A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind},
 #' \code{orthogonal}, \code{causal}, \code{L}, \code{d}, \code{d_v}, \code{method}.
 #' @export
+#' @examples
+#' favor_attention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   V = c(1, 2, 3, 4, 5, 6, 7, 8))
 favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,
                             kind = "positive", orthogonal = TRUE,
                             causal = FALSE) {

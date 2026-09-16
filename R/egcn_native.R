@@ -34,6 +34,11 @@
 #' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- equivariantgraphconv(H = rnorm(10), X = rnorm(10), layers = rnorm(10), phi_e = rnorm(10),
+#'   phi_x = rnorm(10), phi_h = rnorm(10))
+#' TRUE
 equivariantgraphconv <- function(H, X, layers, phi_e, phi_x, phi_h,
                                 A = NULL, C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -56,6 +61,15 @@ equivariantgraphconv <- function(H, X, layers, phi_e, phi_x, phi_h,
 #' @param C Passed to \code{run_egnn}.
 #' @return The value of \code{run_egnn}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- e_gcn(H, X, layers = 2L, phi_e, phi_x, phi_h)
+#' str(r, max.level = 1)
 e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                   C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -79,6 +93,15 @@ e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' H <- lapply(1:4, function(i) rnorm(2))
+#' X <- lapply(1:4, function(i) rnorm(3))
+#' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
+#' phi_x <- function(m) sum(m) * 0.01
+#' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
+#' r <- morie_egcn(H, X, layers = 2L, phi_e, phi_x, phi_h)
+#' str(r, max.level = 1)
 morie_egcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                        C = NULL) {
   list(estimate = run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C),

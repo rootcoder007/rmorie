@@ -38,6 +38,9 @@
 #' @return A list with \code{alpha}, \code{center}, \code{radius2}, \code{support},
 #' \code{outliers}, \code{kkt_violation}, \code{kernel}, \code{C}, \code{method}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' svdd(M)
 svdd <- function(X, C = 1.0, kernel = "linear", gamma = 1.0,
                  tol = 1e-10, max_sweeps = 500L) {
   Xv <- lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -147,6 +150,8 @@ morie_deepSVDD <- svdd
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' deepSVDD_cheatsheet()
 deepSVDD_cheatsheet <- function() {
   "svdd: max sum a K_ii - aa'K, sum a=1, 0<=a<=C; a = center weights"
 }

@@ -22,6 +22,6 @@ probabilities (validated to sum to 1); \code{M} a named character vector
 label -> answer word.
 }
 \examples{
-morie_kamath_ch3_prompt_label_mapping(c(great = 0.7, terrible = 0.3), 
+morie_kamath_ch3_prompt_label_mapping(c(great = 0.7, terrible = 0.3),
     "positive", list(positive = "great", negative = "terrible"))
 }

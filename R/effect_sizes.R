@@ -975,14 +975,16 @@ prediction_interval <- function(estimates, standard_errors,
 #' @param seed RNG seed. Default 42.
 #' @return A `morie_effect_size`.
 #' @examples
-#' set.seed(1)
-#' x <- rnorm(30)
-#' y <- rnorm(30, mean = 0.6)
-#' r <- bootstrap_effect_size_ci(function(a, b) mean(a) - mean(b),
-#'   x, y,
-#'   n_boot = 50L
-#' )
-#' r$estimate
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- rnorm(30)
+#'   y <- rnorm(30, mean = 0.6)
+#'   r <- bootstrap_effect_size_ci(function(a, b) mean(a) - mean(b),
+#'     x, y,
+#'     n_boot = 50L
+#'   )
+#'   r$estimate
+#' }
 #' @export
 bootstrap_effect_size_ci <- function(func, ..., n_boot = 2000L,
                                      confidence = 0.95, seed = 42L) {

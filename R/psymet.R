@@ -94,12 +94,14 @@ morie_psymet_alpha <- function(data, ci = 0.95) {
 #' @param nf Number of factors (default 1).
 #' @return list with `total`, `hier`, `alpha`, `nf`, `expvar`.
 #' @examples
-#' set.seed(1)
-#' f <- rnorm(120)
-#' X <- sapply(1:12, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(120))
-#' colnames(X) <- paste0("i", 1:12)
-#' res <- morie_psymet_omega(X, nf = 4)
-#' c(res$total, res$hier)
+#' if (requireNamespace("psych", quietly = TRUE)) {
+#'   set.seed(1)
+#'   f <- rnorm(120)
+#'   X <- sapply(1:12, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(120))
+#'   colnames(X) <- paste0("i", 1:12)
+#'   res <- morie_psymet_omega(X, nf = 4)
+#'   c(res$total, res$hier)
+#' }
 #' @export
 morie_psymet_omega <- function(data, nf = 1) {
   X <- .as_item_matrix(data)
@@ -207,12 +209,14 @@ morie_psymet_ave <- function(loads) {
 #' @return list with `msa` (overall) and named numeric vector `items`.
 #' @param data Numeric matrix or data.frame of items.
 #' @examples
-#' set.seed(1)
-#' f <- rnorm(100)
-#' X <- sapply(1:5, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(100))
-#' colnames(X) <- paste0("i", 1:5)
-#' res <- morie_psymet_kmo(X)
-#' res$msa
+#' if (requireNamespace("psych", quietly = TRUE)) {
+#'   set.seed(1)
+#'   f <- rnorm(100)
+#'   X <- sapply(1:5, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(100))
+#'   colnames(X) <- paste0("i", 1:5)
+#'   res <- morie_psymet_kmo(X)
+#'   res$msa
+#' }
 #' @export
 morie_psymet_kmo <- function(data) {
   X <- .as_item_matrix(data)

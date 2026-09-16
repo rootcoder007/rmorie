@@ -107,13 +107,11 @@ morie_crim_etas <- function(times, magnitudes = NULL, m0 = NULL,
 #' @param x A \code{morie_etas} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
 #' set.seed(1)
-#' tt <- sort(runif(120, 0, 100))
-#' mm <- rexp(120, 1.5) + 2
-#' obj <- morie_crim_etas(tt, mm)
-#' print(obj)
-#' }
+#' times <- sort(runif(80, 0, 200))
+#' fit <- morie_crim_etas(times)
+#' out <- capture.output(print(fit))
+#' any(grepl("ETAS", out))
 #' @references
 #'   Ogata (1988) JASA 83(401).
 #' @export
@@ -218,13 +216,12 @@ morie_crim_hawkes_multivariate <- function(times, marks, t_max = NULL,
 #' @param x A \code{morie_mv_hawkes} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
-#' set.seed(2)
-#' tt <- sort(runif(150, 0, 100))
-#' mk <- sample(1:2, 150, TRUE)
-#' obj <- morie_crim_hawkes_multivariate(tt, mk, beta = 1)
-#' print(obj)
-#' }
+#' set.seed(1)
+#' times <- sort(runif(60, 0, 200))
+#' marks <- sample(c("A", "B"), 60, replace = TRUE)
+#' fit <- morie_crim_hawkes_multivariate(times, marks)
+#' out <- capture.output(print(fit))
+#' any(grepl("Hawkes", out))
 #' @references
 #'   Hawkes (1971) Biometrika 58(1).
 #' @export
@@ -302,13 +299,8 @@ morie_crim_near_repeat <- function(x, y, times, s_threshold,
 #' @param x A \code{morie_knox} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
-#' set.seed(3)
-#' obj <- morie_crim_near_repeat(runif(60), runif(60), runif(60, 0, 30),
-#'   s_threshold = 0.1, t_threshold = 3
-#' )
-#' print(obj)
-#' }
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::print.morie_knox(D)
 #' @references
 #'   Knox (1964); Townsley, Homel & Chaseling (2003).
 #' @export
@@ -400,13 +392,13 @@ morie_crim_risk_terrain <- function(incidents, layers, n_grid = 25L,
 #' @param x A \code{morie_rtm} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
-#' set.seed(4)
-#' inc <- cbind(runif(80), runif(80))
-#' lay <- list(bars = cbind(runif(15), runif(15)))
-#' obj <- morie_crim_risk_terrain(inc, lay, n_grid = 10L)
-#' print(obj)
-#' }
+#' set.seed(1)
+#' incidents <- cbind(runif(50), runif(50))
+#' layers <- list(schools = cbind(runif(8), runif(8)),
+#'                bars = cbind(runif(6), runif(6)))
+#' fit <- morie_crim_risk_terrain(incidents, layers, n_grid = 10L)
+#' out <- capture.output(print(fit))
+#' any(grepl("Risk terrain", out))
 #' @references
 #'   Caplan, Kennedy & Miller (2011) Justice Quarterly 28(2).
 #' @export

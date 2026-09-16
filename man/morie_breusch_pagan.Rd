@@ -33,9 +33,9 @@ an order of magnitude by collinearity.
 \examples{
 if (requireNamespace("sandwich", quietly = TRUE)) {
   N <- 40
-  X1 <- sapply(0:(N - 1), function(i) ((i * 7)\%\%13) + 0.5 * ((i * 
+  X1 <- sapply(0:(N - 1), function(i) ((i * 7)\%\%13) + 0.5 * ((i *
       3)\%\%5))
-  X2 <- sapply(0:(N - 1), function(i) ((i * 5)\%\%11) - 0.25 * ((i * 
+  X2 <- sapply(0:(N - 1), function(i) ((i * 5)\%\%11) - 0.25 * ((i *
       2)\%\%7))
   E <- sapply(0:(N - 1), function(i) ((i * 13)\%\%17)/17 - 0.5)
   Y <- 3 + 1.5 * X1 - 0.8 * X2 + E * (1 + 0.05 * X1)

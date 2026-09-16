@@ -197,6 +197,9 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 #' @param target_types Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_funcal_assign_orthologs(V, V)
 morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
                                          target_taxa = NULL,
                                          target_types = NULL) {
@@ -286,6 +289,9 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 #' to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_funcal_transfer_terms(V, V)
 morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL,
                                        min_support = 1) {
   if (min_support < 1) {
@@ -427,6 +433,8 @@ morie_funcal_functional_annotation <- morie_funcal
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_funcal_cheatsheet()
 morie_funcal_cheatsheet <- function() {
   paste("funcal: eggNOG-mapper v2 (Cantalapiedra et al. 2021).",
         "Function is transferred from ORTHOLOGS, not from the best",

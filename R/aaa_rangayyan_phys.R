@@ -507,6 +507,9 @@
 #' \code{peak_time_ms}, \code{v_rest_mV}, \code{v_peak_mV}, \code{t_rise_ms},
 #' \code{t_fall_ms}, \code{width_half_ms}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ApWave(V)
 ApWave <- function(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1,
                    t_onset = 0, v_undershoot = NULL, t_recover = NULL) {
   ts <- as.numeric(t)
@@ -580,6 +583,9 @@ ApWave <- function(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1,
 #' \code{denominator_mM}, \code{slope_mV}, \code{permeabilities}, \code{T_K},
 #' \code{units}, \code{method}.
 #' @export
+#' @examples
+#' Ghk(ion_concs = list(K_in = 140, K_out = 5, Na_in = 12, Na_out = 145,
+#'                      Cl_in = 4, Cl_out = 110))
 Ghk <- function(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15) {
   if (!is.list(ion_concs)) {
     stop("ion_concs must be a dict of concentrations in mM")
@@ -642,6 +648,8 @@ Ghk <- function(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15) {
 #' \code{slope_mV}, \code{ratio}, \code{T_K}, \code{z}, \code{conc_out_mM},
 #' \code{conc_in_mM}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' Nernst()
 Nernst <- function(T = 310.15, z = 1, conc_out = 5, conc_in = 140,
                    ion = "K+") {
   T <- as.numeric(T)
@@ -687,6 +695,8 @@ Nernst <- function(T = 310.15, z = 1, conc_out = 5, conc_in = 140,
 #' \code{n}, \code{m_inf}, \code{h_inf}, \code{n_inf}, \code{tau_m_ms}, \code{tau_h_ms},
 #' \code{tau_n_ms}, \code{alpha_per_ms}, \code{beta_per_ms}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' HhGate(V = 5L)
 HhGate <- function(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) {
   V <- as.numeric(V)
   dt <- as.numeric(dt)
@@ -766,6 +776,8 @@ HhGate <- function(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) {
 #' \code{peak_time_ms}, \code{rest_mV}, \code{min_mV}, \code{spiked}, \code{n_spikes},
 #' \code{dt_ms}, \code{I_ext_uA_cm2}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' HhModel()
 HhModel <- function(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5,
                     stim_stop = 6, C_m = 1, g_Na = 120, g_K = 36, g_L = 0.3,
                     E_Na = 50, E_K = -77, E_L = -54.387, V0 = -65) {
@@ -889,6 +901,8 @@ HhModel <- function(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5,
 #' \code{n_spikes}, \code{spike_times}, \code{period}, \code{a}, \code{b}, \code{eps},
 #' \code{I_ext}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' Fhn()
 Fhn <- function(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8,
                 eps = 0.08, v0 = -1.2, w0 = -0.6, stim_start = 0,
                 stim_stop = NULL) {
@@ -972,6 +986,9 @@ Fhn <- function(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8,
 #' \code{input_resistance_MOhm}, \code{peak_mV}, \code{final_mV}, \code{V_rest_mV},
 #' \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' RcMemb(V)
 RcMemb <- function(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65) {
   ts <- as.numeric(t)
   if (length(ts) < 1L) {
@@ -1045,6 +1062,8 @@ RcMemb <- function(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65) {
 #' \code{D_cm2_per_ms}, \code{sigma_bulk_mS_cm}, \code{dt_ms}, \code{dx_cm},
 #' \code{stability_limit_ms}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' BiDomain()
 BiDomain <- function(n_nodes = 100, dx_cm = 0.02, duration_ms = 60,
                      dt_ms = 0.005, sigma_i = 1, sigma_e = 2, C_m = 1,
                      Sv = 1000, I_ion = NULL, stim_nodes = 5, I_stim = 50,
@@ -1201,6 +1220,12 @@ BiDomain <- function(n_nodes = 100, dx_cm = 0.02, duration_ms = 60,
 #' @param ref_band A vector; indexed elementwise. Defaults to \code{c(50, 300)}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' fs <- 2000
+#' tv <- seq(0, 1, by = 1 / fs)
+#' snd <- sin(2 * pi * 400 * tv) * exp(-3 * tv) + 0.1 * rnorm(length(tv))
+#' CadAcou(snd, fs = fs)
 CadAcou <- function(coronary_sound, fs, order = 8, hf_band = c(300, 900),
                     ref_band = c(50, 300)) {
   xs <- as.numeric(coronary_sound)
@@ -1269,6 +1294,8 @@ CadAcou <- function(coronary_sound, fs, order = 8, hf_band = c(300, 900),
 #' \code{corner_freq_hz}, \code{reynolds_param_x}, \code{reynolds_number},
 #' \code{total_power_Pa2}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' CorSound(diameter = 5L, flow_velocity = 5L)
 CorSound <- function(diameter, flow_velocity, stenosis_pct = 0, p2max = 1,
                      freqs = NULL, nu = 3.5e-6) {
   D <- as.numeric(diameter)
@@ -1337,6 +1364,14 @@ CorSound <- function(diameter, flow_velocity, stenosis_pct = 0, p2max = 1,
 #' \code{window_ms}, \code{n_windows}, \code{fs_hz}, \code{flat_tolerance}, \code{units},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' fs <- 8000
+#' tv <- seq(0, 0.5, by = 1 / fs)
+#' cry <- sin(2 * pi * 450 * tv) * (1 + 0.2 * sin(2 * pi * 5 * tv)) +
+#'   0.05 * rnorm(length(tv))
+#' r <- InfantCry(cry, fs = fs)
+#' str(r, max.level = 1)
 InfantCry <- function(cry, fs, window_ms = 40, f0_range = c(200, 1000),
                       order = NULL, flat_tolerance = 0.06) {
   xs <- as.numeric(cry)
@@ -1463,6 +1498,11 @@ InfantCry <- function(cry, fs, window_ms = 40, f0_range = c(200, 1000),
 #' @param normal_band A vector; indexed elementwise. Defaults to \code{c(0.0333, 0.0667)}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' fs <- 1
+#' egg <- sin(2 * pi * 0.05 * (1:600)) + 0.2 * rnorm(600)
+#' EggFeat(egg, fs = fs)
 EggFeat <- function(egg, fs, normal_band = c(0.0333, 0.0667)) {
   fs <- as.numeric(fs)
   if (fs <= 0) stop("fs must be positive (Hz)")
@@ -1534,6 +1574,9 @@ EggFeat <- function(egg, fs, normal_band = c(0.0333, 0.0667)) {
 #' \code{cv_from_onset_m_s}, \code{latencies_ms}, \code{velocities_m_s},
 #' \code{distance_m}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' EngCap(V)
 EngCap <- function(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70),
                    amp_range = c(0.5, 2), width_ms = 0.3) {
   ts <- as.numeric(t)
@@ -1620,6 +1663,11 @@ EngCap <- function(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70),
 #' \code{threshold_slow_fraction}, \code{baseline_epochs}, \code{n_epochs},
 #' \code{epoch_s}, \code{fs_hz}, \code{binnie_bands_hz}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' fs <- 100
+#' eeg <- c(rnorm(fs * 5, 0, 1), rnorm(fs * 2, 0, 4), rnorm(fs * 3, 0, 1))
+#' SeizDet(eeg, fs = fs)
 SeizDet <- function(eeg, fs, epoch_s = 1, ratio_threshold = 2,
                     baseline_epochs = NULL) {
   xs <- as.numeric(eeg)
@@ -1749,6 +1797,8 @@ SeizDet <- function(eeg, fs, epoch_s = 1, ratio_threshold = 2,
 #' @return A list with \code{components}, \code{peak_to_peak_uV}, \code{baseline_uV},
 #' \code{t_ms}, \code{erp_uV}, \code{fs_hz}, \code{t0_ms}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' ErpFeat(erp = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 ErpFeat <- function(erp, fs, t0 = 0, components = NULL,
                     baseline_ms = list(NULL, 0)) {
   xs <- as.numeric(erp)
@@ -1827,6 +1877,11 @@ ErpFeat <- function(erp, fs, t0 = 0, components = NULL,
 #' \code{active_window_s}, \code{ref_samples}, \code{active_samples}, \code{fs_hz},
 #' \code{sign_convention}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(8)
+#' fs <- 100
+#' eeg <- rnorm(fs * 6)
+#' ErdErs(eeg, fs = fs, ref_window = c(0, 2), active_window = c(3, 5))
 ErdErs <- function(eeg, fs, ref_window, active_window, band = c(8, 13)) {
   xs <- as.numeric(eeg)
   fs <- as.numeric(fs)
@@ -1905,6 +1960,11 @@ ErdErs <- function(eeg, fs, ref_window, active_window, band = c(8, 13)) {
 #' @param bands Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' set.seed(8)
+#' fs <- 2000
+#' x <- sin(2 * pi * 100 * seq(0, 1, by = 1 / fs)) + 0.1 * rnorm(2001)
+#' CadSpec(x, fs = fs)
 CadSpec <- function(x, fs, bands = NULL) {
   fs <- as.numeric(fs)
   sp <- .bsapsd(x, fs)
@@ -1961,6 +2021,13 @@ CadSpec <- function(x, fs, bands = NULL) {
 #' \code{n_taps}, \code{alpha}, \code{adaptive_mu}, \code{fs_hz}, \code{units},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(9)
+#' fs <- 500
+#' n <- fs
+#' emg <- rnorm(n)
+#' vag <- 0.5 * emg + rnorm(n, 0, 0.3)
+#' VagClean(vag, emg, fs = fs)
 VagClean <- function(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02,
                      adaptive_mu = TRUE) {
   xs <- as.numeric(vag)
@@ -2066,6 +2133,9 @@ VagClean <- function(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02,
 #' \code{n_fibers}, \code{conduction_vel_m_s}, \code{in_normal_duration_band},
 #' \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MuapModel(V)
 MuapModel <- function(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3,
                       amp_uV = 8, width_ms = 1, phases = 3) {
   ts <- as.numeric(t)
@@ -2145,6 +2215,11 @@ MuapModel <- function(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3,
 #' @param f3 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{150}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' set.seed(9)
+#' fs <- 1000
+#' pcg <- sin(2 * pi * 60 * seq(0, 1, by = 1 / fs)) + 0.2 * rnorm(1001)
+#' MurmSpec(pcg, fs = fs)
 MurmSpec <- function(pcg, fs, f1 = 25, f2 = 75, f3 = 150) {
   fs <- as.numeric(fs)
   f1 <- as.numeric(f1)
@@ -2195,6 +2270,13 @@ MurmSpec <- function(pcg, fs, f1 = 25, f2 = 75, f3 = 150) {
 #' @param bands Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' fs <- 16000
+#' tv <- seq(0, 0.3, by = 1 / fs)
+#' oae <- sin(2 * pi * 2000 * tv) * exp(-5 * tv) + 0.02 * rnorm(length(tv))
+#' r <- OaeFeat(oae, fs = fs)
+#' str(r, max.level = 1)
 OaeFeat <- function(oae, fs, noise_floor = NULL, bands = NULL) {
   fs <- as.numeric(fs)
   if (fs <= 0) stop("fs must be positive (Hz)")
@@ -2284,6 +2366,16 @@ OaeFeat <- function(oae, fs, noise_floor = NULL, bands = NULL) {
 #' \code{gait_rate_hz}, \code{gait_regularity}, \code{tremor_present},
 #' \code{tremor_band_hz}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' fs <- 100
+#' tv <- seq(0, 10, by = 1 / fs)
+#' eeg <- rnorm(length(tv))
+#' emg <- sin(2 * pi * 5 * tv) + 0.3 * rnorm(length(tv))
+#' gait <- sin(2 * pi * 1 * tv) + 0.1 * sin(2 * pi * 5 * tv) +
+#'   0.1 * rnorm(length(tv))
+#' r <- PdMonitor(eeg, emg, gait, fs = fs)
+#' str(r, max.level = 1)
 PdMonitor <- function(eeg, emg, gait, fs, tremor_band = c(3, 7)) {
   fs <- as.numeric(fs)
   if (fs < 60) stop("fs must be at least 60 Hz")
@@ -2386,6 +2478,14 @@ PdMonitor <- function(eeg, emg, gait, fs, tremor_band = c(3, 7)) {
 #' \code{delay_ms_at_peak}, \code{significance_level}, \code{n_segments},
 #' \code{segment_samples}, \code{band_hz}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' fs <- 200
+#' n <- 1024
+#' pcg <- sin(2 * pi * 60 * (1:n) / fs) + 0.2 * rnorm(n)
+#' eeg <- 0.4 * pcg + rnorm(n)
+#' r <- PcgEeg(pcg, eeg, fs = fs)
+#' str(r, max.level = 1)
 PcgEeg <- function(pcg, eeg, fs, n_segments = 8, band = c(1, 100)) {
   xs <- as.numeric(pcg)
   ys <- as.numeric(eeg)
@@ -2476,6 +2576,14 @@ PcgEeg <- function(pcg, eeg, fs, n_segments = 8, band = c(1, 100)) {
 #' @param hf_band A vector; indexed elementwise. Defaults to \code{c(150, 600)}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' fs <- 2000
+#' tv <- seq(0, 2, by = 1 / fs)
+#' pcg <- sin(2 * pi * 60 * tv) + 0.6 * sin(2 * pi * 300 * tv) +
+#'   0.05 * rnorm(length(tv))
+#' r <- MurmDet(pcg, fs = fs)
+#' str(r, max.level = 1)
 MurmDet <- function(pcg, fs, threshold = 0.15, hf_band = c(150, 600)) {
   fs <- as.numeric(fs)
   threshold <- as.numeric(threshold)
@@ -2525,6 +2633,15 @@ MurmDet <- function(pcg, fs, threshold = 0.15, hf_band = c(150, 600)) {
 #' \code{n_epochs}, \code{epoch_len_s}, \code{fs_hz}, \code{heuristic}, \code{units},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' fs <- 100
+#' n <- fs * 90
+#' eeg <- rnorm(n)
+#' eog <- rnorm(n, 0, 0.5)
+#' emg <- rnorm(n, 0, 0.8)
+#' r <- PsgStage(eeg, eog, emg, fs = fs, epoch_len = 30)
+#' str(r, max.level = 1)
 PsgStage <- function(eeg, eog, emg, fs, epoch_len = 30) {
   a <- as.numeric(eeg)
   b <- as.numeric(eog)
@@ -2630,6 +2747,9 @@ PsgStage <- function(eeg, eog, emg, fs, epoch_len = 30) {
 #' \code{ipi_histogram}, \code{n_events}, \code{n_intervals}, \code{duration_s},
 #' \code{regularity}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IeiStats(V)
 IeiStats <- function(event_times, T = NULL, n_bins = 20) {
   ts <- as.numeric(event_times)
   if (length(ts) < 3L) {
@@ -2722,6 +2842,14 @@ IeiStats <- function(event_times, T = NULL, n_bins = 20) {
 #' \code{as.integer}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' fs <- 2000
+#' tv <- seq(0, 0.5, by = 1 / fs)
+#' pcg <- sin(2 * pi * 80 * tv) + 0.5 * sin(2 * pi * 220 * tv) +
+#'   0.05 * rnorm(length(tv))
+#' r <- ValvePcg(pcg, fs = fs, n_peaks = 2)
+#' str(r, max.level = 1)
 ValvePcg <- function(pcg, fs, n_peaks = 3, order = NULL) {
   xs <- as.numeric(pcg)
   fs <- as.numeric(fs)
@@ -2783,6 +2911,13 @@ ValvePcg <- function(pcg, fs, n_peaks = 3, order = NULL) {
 #' \code{mean_te_s}, \code{ie_ratio}, \code{breaths}, \code{n_breaths},
 #' \code{signal_type}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' fs <- 25
+#' tv <- seq(0, 30, by = 1 / fs)
+#' resp <- sin(2 * pi * 0.25 * tv) + 0.05 * rnorm(length(tv))
+#' r <- RespFeat(resp, fs = fs, signal_type = "flow")
+#' str(r, max.level = 1)
 RespFeat <- function(resp, fs, signal_type = "flow", min_breath_s = 1) {
   xs <- as.numeric(resp)
   fs <- as.numeric(fs)
@@ -2892,6 +3027,8 @@ RespFeat <- function(resp, fs, signal_type = "flow", min_breath_s = 1) {
 #' \code{Ga_m3_per_Pa_s}, \code{resonance_hz}, \code{area_m2}, \code{circumference_m},
 #' \code{volume_m3}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' RespSound()
 RespSound <- function(length_m = 0.1, radius_m = 0.009, freqs = NULL,
                       rho = 1.2, c = 343, mu = 1.8e-5, P0 = 101325,
                       eta = 1.4, lam = 0.026, cp = 1005) {
@@ -2971,6 +3108,21 @@ RespSound <- function(length_m = 0.1, radius_m = 0.009, freqs = NULL,
 #' \code{fs_hz}, \code{desat_criterion_pct}, \code{heuristic}, \code{units},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' fs <- 100
+#' n <- fs * 180
+#' ecg <- rep(0, n)
+#' for (b in seq(0.4, 179, by = 0.8)) {
+#'   i <- round(b * fs)
+#'   ecg[i:(i + 4)] <- c(0.3, 1.2, -0.4, 0.1, 0)
+#' }
+#' ecg <- ecg + 0.01 * rnorm(n)
+#' spo2 <- rep(97, n)
+#' spo2[(60 * fs):(75 * fs)] <- 91
+#' snore <- rnorm(n, 0, 0.2)
+#' r <- ApneaDet(ecg, spo2, snore, fs = fs, epoch_s = 60)
+#' str(r, max.level = 1)
 ApneaDet <- function(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4) {
   e <- as.numeric(ecg)
   s <- as.numeric(spo2)
@@ -3090,6 +3242,14 @@ ApneaDet <- function(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4) {
 #' \code{order}, \code{ar_coeffs}, \code{prediction_error}, \code{freq_hz},
 #' \code{lpc_psd}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' fs <- 8000
+#' tv <- seq(0, 0.3, by = 1 / fs)
+#' speech <- sin(2 * pi * 120 * tv) + 0.5 * sin(2 * pi * 700 * tv) +
+#'   0.3 * sin(2 * pi * 1200 * tv) + 0.02 * rnorm(length(tv))
+#' r <- SpeechFeat(speech, fs = fs)
+#' str(r, max.level = 1)
 SpeechFeat <- function(speech, fs, order = NULL, n_formants = 4,
                        f0_range = c(60, 400)) {
   xs <- as.numeric(speech)
@@ -3170,6 +3330,12 @@ SpeechFeat <- function(speech, fs, order = NULL, n_formants = 4,
 #' \code{entropy_bits}, \code{rms}, \code{duration_s}, \code{fs_hz}, \code{n_segments},
 #' \code{units}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' fs <- 2000
+#' vag <- rnorm(fs, 0, seq(0.5, 2, length.out = fs))
+#' r <- VagFeat(vag, fs = fs)
+#' str(r, max.level = 1)
 VagFeat <- function(vag, fs, n_segments = 8) {
   xs <- as.numeric(vag)
   fs <- as.numeric(fs)
@@ -3249,6 +3415,12 @@ VagFeat <- function(vag, fs, n_segments = 8) {
 #' @param n_segments Passed to \code{VagFeat}. Defaults to \code{8}.
 #' @return The value of \code{base}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(6)
+#' fs <- 2000
+#' vag <- rnorm(fs, 0, seq(0.5, 2, length.out = fs))
+#' r <- VagKnee(vag, fs = fs)
+#' str(r, max.level = 1)
 VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {
   base <- VagFeat(vag, fs, n_segments = n_segments)
   varms <- base$var_of_segment_ms
@@ -3332,6 +3504,9 @@ VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {
 #' \code{log_Y_imag}, \code{log_X_real}, \code{log_X_imag}, \code{log_H_real},
 #' \code{log_H_imag}, \code{max_abs_error}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CLogProd(V, V)
 CLogProd <- function(X, H, omega = NULL) {
   xs <- as.complex(X)
   hs <- as.complex(H)
@@ -3406,6 +3581,9 @@ CLogProd <- function(X, H, omega = NULL) {
 #' \code{X_real}, \code{X_imag}, \code{max_abs_error}, \code{terms}, \code{counts},
 #' \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CLogPz(V)
 CLogPz <- function(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0),
                    c_k = complex(0), d_k = complex(0),
                    M_I = NULL, M_O = NULL, N_I = NULL, N_O = NULL) {

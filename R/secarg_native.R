@@ -66,6 +66,9 @@
 #' @return Raw vector of \code{length} bytes.
 #' @references RFC 9106 Sec. 3.3.
 #' @export
+#' @examples
+#' r <- morie_secarg_variable_hash(charToRaw("hello"), 64L)
+#' length(r)
 morie_secarg_variable_hash <- function(data, length) {
   T <- as.integer(length)
   if (T < 1L) stop("secarg: the output length must be positive")
@@ -102,6 +105,11 @@ morie_secarg_variable_hash <- function(data, length) {
 #' @return Raw 64-byte BLAKE2b digest.
 #' @references RFC 9106 Sec. 3.1.
 #' @export
+#' @examples
+#' r <- morie_secarg_prehash(charToRaw("password"), charToRaw("somesalt"),
+#'                           parallelism = 1L, tag_length = 32L,
+#'                           memory = 32L, passes = 3L)
+#' str(r, max.level = 1)
 morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
                                  memory, passes,
                                  variant = "argon2id",
@@ -309,6 +317,10 @@ morie_secarg_compress <- function(X, Y) {
 #'   \code{data_independent_first_half}, \code{method}, \code{note}.
 #' @references RFC 9106 Sec. 3.1-3.4.
 #' @export
+#' @examples
+#' r <- morie_secarg_argon2(charToRaw("password"), charToRaw("somesalt"),
+#'                          memory = 32, passes = 1)
+#' str(r, max.level = 1)
 morie_secarg_argon2 <- function(password, salt, memory = 32, passes = 3,
                                 parallelism = 4, tag_length = 32,
                                 variant = "argon2id", secret = NULL,
@@ -343,6 +355,8 @@ morie_secarg_argon2 <- function(password, salt, memory = 32, passes = 3,
 #'   \code{salt_bytes}, \code{note}, \code{warning}.
 #' @references RFC 9106 Sec. 4 and 7.4.
 #' @export
+#' @examples
+#' morie_secarg_parameter_advice()
 morie_secarg_parameter_advice <- function(profile = "first") {
   rec <- list(
     first = list(variant = "argon2id", memory = 2L * 1024L * 1024L,

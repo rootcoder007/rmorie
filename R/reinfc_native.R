@@ -545,6 +545,8 @@ morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_reinfc_cheatsheet()
 morie_reinfc_cheatsheet <- function() {
   paste("reinfc: REINFORCE, Delta w = alpha (r - b) dln g/dw ",
         "(Williams 1992 eq. 2). Units bernoulli (eq. 5, L_R-I), ",

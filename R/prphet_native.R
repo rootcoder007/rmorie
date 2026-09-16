@@ -46,6 +46,10 @@
 #' @param cps Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' morie_prphet_piecewise_trend(t = c(1, 2, 3, 4, 5, 6, 7, 8), k.rate = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   m.off = c(1, 2, 3, 4, 5, 6, 7, 8), deltas = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   cps = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
   out <- numeric(length(t))
   for (i in seq_along(t)) {
@@ -68,6 +72,9 @@ morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
 #' @param cps A vector; its length is taken and its elements indexed.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prphet_trend_matrix(V, V)
 morie_prphet_trend_matrix <- function(t, cps) {
   rows <- matrix(0, nrow = length(t), ncol = 2L + length(cps))
   rows[, 1] <- t
@@ -92,6 +99,8 @@ morie_prphet_trend_matrix <- function(t, cps) {
 #' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{rows}, as built in the body.
 #' @export
+#' @examples
+#' morie_prphet_fourier_terms(t = c(1, 2, 3, 4, 5, 6, 7, 8), period = 5L, order = 5L)
 morie_prphet_fourier_terms <- function(t, period, order) {
   if (period <= 0) stop("prphet: period must be positive")
   if (order < 1L) stop("prphet: order must be at least 1")
@@ -120,6 +129,9 @@ morie_prphet_fourier_terms <- function(t, period, order) {
 #' @param upper Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{rows}, \code{names}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prphet_holiday_matrix(V, V)
 morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
   names.v <- sort(names(holidays))
   rows <- matrix(0, nrow = length(t), ncol = length(names.v))
@@ -148,6 +160,9 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 #' @param holiday_window A vector; indexed elementwise. Defaults to \code{c(0, 0)}.
 #' @return A list with \code{X}, \code{cols}, \code{holiday.names}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prphet_design(V, V)
 morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
                                 holiday_window = c(0, 0)) {
   tm <- morie_prphet_trend_matrix(t, cps)
@@ -198,6 +213,9 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 #' \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior},
 #' \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_prphet_fit(V, V)
 morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8,
                              changepoints = NULL, seasonalities = NULL,
                              holidays = NULL, holiday_window = c(0, 0),

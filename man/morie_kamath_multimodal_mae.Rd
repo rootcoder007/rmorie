@@ -20,7 +20,7 @@ List with \code{estimate}, \code{per_modality}, \code{n_masked}.
 sum_m ||x_masked - Decoder_m(visible)||^2 across the modalities.
 }
 \examples{
-morie_kamath_multimodal_mae(list(v = 0), list(v = c(1, 2)), list(v = c(TRUE, 
-    FALSE, TRUE)), decoders = list(v = function(x, m) c(0.5, 
+morie_kamath_multimodal_mae(list(v = 0), list(v = c(1, 2)), list(v = c(TRUE,
+    FALSE, TRUE)), decoders = list(v = function(x, m) c(0.5,
     1)))
 }

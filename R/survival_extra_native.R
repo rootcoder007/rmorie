@@ -142,11 +142,13 @@ morie_censoring_at_risk_weight <- function(time, censor, at = NULL,
 #' @references Clayton, D. G. (1978). A model for association in
 #'   bivariate life tables. \emph{Biometrika}, 65(1), 141-151.
 #' @examples
+#' \donttest{
 #' set.seed(4)
 #' X <- matrix(rnorm(120), ncol = 1)
 #' cl <- rep(1:20, each = 6)
 #' tt <- rexp(120, exp(X * 0.5))
 #' round(morie_gamma_frailty_cox(tt, rep(1, 120), X, cl)$theta, 3)
+#' }
 #' @export
 morie_gamma_frailty_cox <- function(time, event, X, cluster, ...) {
   r <- morie_cox_frailty(time, event, X, cluster, ...)

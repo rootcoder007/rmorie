@@ -44,6 +44,9 @@
 #' @param W Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gsageemd_aggregate(V)
 morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
   if (!(how %in% .GSAGEEMD_AGGS))
     stop(paste0("gsageemd: aggregator must be one of ",
@@ -81,6 +84,12 @@ morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
 #' @param rng Optional generator environment (defaults to .ghc_rng(0)).
 #' @return Vector of sampled neighbour ids.
 #' @export
+#' @examples
+#' rng <- rmorie:::.ghc_rng(0L)
+#' adj <- list(`0` = c(`1` = 1, `3` = 1), `1` = c(`0` = 1, `2` = 1),
+#'             `2` = c(`1` = 1, `3` = 1), `3` = c(`2` = 1, `0` = 1))
+#' nb <- sample_neighbors(adj, v = 0, size = 2, rng)
+#' length(nb) == 2L
 sample_neighbors <- function(adj, v, size, rng = NULL) {
   if (is.null(rng)) rng <- .ghc_rng(0L)
   nb <- sort(as.integer(names(adj[[as.character(v)]])))
@@ -112,6 +121,14 @@ sample_neighbors <- function(adj, v, size, rng = NULL) {
 #' @param normalize If TRUE, L2-normalise the output.
 #' @return Updated node feature matrix.
 #' @export
+#' @examples
+#' set.seed(1)
+#' adj <- list(`0` = c(`1` = 1, `3` = 1), `1` = c(`0` = 1, `2` = 1),
+#'             `2` = c(`1` = 1, `3` = 1), `3` = c(`2` = 1, `0` = 1))
+#' H <- matrix(runif(12), 4, 3)
+#' W <- matrix(rnorm(6 * 4, 0, 0.3), nrow = 4, ncol = 6)
+#' Z <- sage_layer(H, adj, W, how = "mean")
+#' dim(Z)
 sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
                        rng = NULL, normalize = TRUE) {
   H <- as.matrix(H)
@@ -155,6 +172,15 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 #' @return List with estimate, embeddings, depth, aggregator,
 #'   per_batch_bound, method, note.
 #' @export
+#' @examples
+#' set.seed(1)
+#' adj <- list(`0` = c(`1` = 1, `3` = 1), `1` = c(`0` = 1, `2` = 1),
+#'             `2` = c(`1` = 1, `3` = 1), `3` = c(`2` = 1, `0` = 1))
+#' feats <- matrix(runif(12), 4, 3)
+#' W1 <- matrix(rnorm(6 * 4, 0, 0.3), 4, 6)
+#' W2 <- matrix(rnorm(8 * 2, 0, 0.3), 2, 8)
+#' emb <- morie_gsageemd_embed(feats, adj, list(W1, W2), how = "mean", seed = 1)
+#' dim(emb)
 morie_gsageemd_embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
                   seed = 0) {
   rng <- .ghc_rng(as.integer(seed))
@@ -177,6 +203,9 @@ morie_gsageemd_embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
 #' @param z_negatives List of negative embeddings.
 #' @return Scalar negative log-likelihood.
 #' @export
+#' @examples
+#' unsupervised_loss(z_u = c(1, 2, 3, 4, 5, 6, 7, 8), z_v = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   z_negatives = c(1, 2, 3, 4, 5, 6, 7, 8))
 unsupervised_loss <- function(z_u, z_v, z_negatives) {
   z_u <- as.numeric(z_u)
   z_v <- as.numeric(z_v)

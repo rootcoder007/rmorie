@@ -472,7 +472,7 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
 #' @export
 #' @examples
 #' morie_ld50(dose = c(1, 2, 3, 4, 5, 6, 7, 8), n_dead = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' n_total = c(1, 2, 3, 4, 5, 6, 7, 8))
+#'   n_total = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_ld50 <- function(dose, n_dead, n_total, link = c("probit", "logit"),
                        level = 0.5, alpha = 0.05, log_dose = TRUE) {
   link <- match.arg(link)

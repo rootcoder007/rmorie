@@ -21,6 +21,6 @@ A list with \code{oob_score}, \code{oob_predictions}, \code{covered}, \code{vote
 \keyword{internal}
 \examples{
 f <- function(A) as.numeric(A[, 1])
-morie_geron_oob_score(matrix(c(0, 1), ncol = 1), c(0, 1), list(list(f, 
+morie_geron_oob_score(matrix(c(0, 1), ncol = 1), c(0, 1), list(list(f,
     c(TRUE, FALSE)), list(f, c(FALSE, TRUE))))
 }

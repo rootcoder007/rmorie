@@ -140,6 +140,9 @@
 #' @return A list with \code{components}, \code{n_components}, \code{n_markers},
 #' \code{variance_explained}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_genemt_ld_principal_components(V)
 morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
   M <- as.matrix(G)
   storage.mode(M) <- "numeric"
@@ -199,6 +202,9 @@ morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
 #' @return A list with \code{F}, \code{df1}, \code{df2}, \code{p}, \code{z},
 #' \code{n_markers}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_genemt_gene_statistic(V, V)
 morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
   yv <- as.numeric(y)
   pc <- morie_genemt_ld_principal_components(G, keep)
@@ -243,6 +249,9 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
 #' \code{as.numeric}.
 #' @return A list with \code{covariates}, \code{names}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_genemt_gene_covariates(V, V)
 morie_genemt_gene_covariates <- function(n_markers, gene_length,
                                          ld_scores = NULL) {
   nm <- as.numeric(n_markers)
@@ -280,6 +289,9 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
 #' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p},
 #' \code{n_genes}, \code{covariates_used}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_genemt_gene_set_regression(V, V)
 morie_genemt_gene_set_regression <- function(z_scores, membership,
                                              covariates = NULL) {
   z <- as.numeric(z_scores)
@@ -331,6 +343,9 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
 #' @return A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta},
 #' \code{conditional_p}, \code{attenuation}, \code{note}.
 #' @export
+#' @examples
+#' morie_genemt_conditional_set_test(z_scores = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   set_a = c(1, 2, 3, 4, 5, 6, 7, 8), set_b = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
                                              covariates = NULL) {
   z <- as.numeric(z_scores)
@@ -371,6 +386,8 @@ morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_genemt_cheatsheet()
 morie_genemt_cheatsheet <- function() {
   paste("genemt: single markers are underpowered, so aggregate -- ",
         "but existing tools lost power to LINKAGE DISEQUILIBRIUM ",

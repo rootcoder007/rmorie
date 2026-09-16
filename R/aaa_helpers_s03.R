@@ -254,8 +254,7 @@
 #' @return The value of \code{.s03ridgesolve}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s03lstsq(X = X, y = y)
 #' res
@@ -862,8 +861,7 @@
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .s03logit(X = X, y = y)
 #' res
@@ -1020,10 +1018,12 @@
 #' \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
 #' @export
 #' @examples
-#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
-#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
-#' res <- .s03tmle(y = y, D = g)
-#' res
+#' if (requireNamespace("jsonlite", quietly = TRUE)) {
+#'   y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#'   g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#'   res <- .s03tmle(y = y, D = g)
+#'   res
+#' }
 .s03tmle <- function(y, D, X = NULL, trim = 0, link = "logit") {
   yv <- .s03vec(y)
   d <- .s03vec(D)

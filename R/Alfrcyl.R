@@ -23,7 +23,7 @@
 #'   equation (48)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' rmorie:::Alfrcyl(V)
+#' Alfrcyl(V)
 #' @export
 Alfrcyl <- function(losses, nprime = NULL) {
   nc <- length(losses)

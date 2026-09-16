@@ -77,6 +77,9 @@ morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
 #' @return A list with \code{min_g}, \code{max_g}, \code{worst}, \code{satisfied},
 #' \code{delta}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' positivity_check(V)
 positivity_check <- function(g, delta = 0.01) {
   gg <- as.numeric(g)
   if (length(gg) == 0L)
@@ -101,6 +104,9 @@ positivity_check <- function(g, delta = 0.01) {
 #' @param covariate_probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' g_computation(list("a", "b"), outcome_means = c(0.3, 0.7),
+#'               covariate_probs = c(0.4, 0.6))
 g_computation <- function(strata, outcome_means, covariate_probs) {
   s <- as.list(strata)
   p <- as.numeric(covariate_probs)
@@ -167,6 +173,9 @@ sequential_g_formula <- function(Q_functions, L_supports, L_probs,
 #' @param strata_probs Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @examples
+#' counterfactual_mean(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   L = c(1, 2, 3, 4, 5, 6, 7, 8), a_star = c(1, 2, 3, 4, 5, 6, 7, 8))
 counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
   y <- as.numeric(Y)
   a <- as.numeric(A)

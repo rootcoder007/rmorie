@@ -97,6 +97,9 @@
 #' @return A list with \code{primal}, \code{dual}, \code{mu}, \code{primal_norm},
 #' \code{dual_norm}, \code{note}.
 #' @export
+#' @examples
+#' mehtad_residuals(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8))
 mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)
   m <- nrow(M)
@@ -126,6 +129,9 @@ mehtad_residuals <- function(A, b, c, x, y, s) {
 #' @param eta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9995}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' max_step(V, V)
 max_step <- function(v, dv, eta = 0.9995) {
   a <- 1.0
   for (i in seq_along(v)) {
@@ -148,6 +154,8 @@ max_step <- function(v, dv, eta = 0.9995) {
 #' @param nu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @return A list with \code{sigma}, \code{ratio}, \code{nu}, \code{approximation}, \code{note}.
 #' @export
+#' @examples
+#' centering_parameter(mu = 5L, mu_affine = 5L)
 centering_parameter <- function(mu, mu_affine, nu = 3.0) {
   m <- as.numeric(mu)
   ma <- as.numeric(mu_affine)
@@ -208,6 +216,9 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #' @param rc Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{dx}, \code{dy}, \code{ds}.
 #' @export
+#' @examples
+#' newton_direction(A = c(1, 2, 3, 4, 5, 6, 7, 8), x = 5L, s = 5L, rp = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   rd = c(1, 2, 3, 4, 5, 6, 7, 8), rc = c(1, 2, 3, 4, 5, 6, 7, 8))
 newton_direction <- function(A, x, s, rp, rd, rc) {
   M <- as.matrix(A)
   storage.mode(M) <- "double"
@@ -245,6 +256,11 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 #' \code{primal_residual}, \code{dual_residual}, \code{converged}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' A <- matrix(c(1, 1, 1, 0, 0, 1, 0, 1), 2, 4, byrow = TRUE)
+#' b <- c(4, 2)
+#' cc <- c(-1, -2, 0, 0)
+#' solve_lp(A, b, cc)
 solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
                      eta = 0.9995, corrector = TRUE) {
   M <- as.matrix(A)

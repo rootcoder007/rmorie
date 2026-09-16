@@ -27,6 +27,6 @@ v_w = sum of the character n-gram vectors of the word. The boundary-marked
 whole word is always a gram.
 }
 \examples{
-morie_kamath_fasttext_subword("ab", list(`<a` = 1, ab = 2, `b>` = 3, 
+morie_kamath_fasttext_subword("ab", list(`<a` = 1, ab = 2, `b>` = 3,
     `<ab>` = 4), 2, 2)
 }

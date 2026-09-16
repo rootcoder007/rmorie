@@ -21,6 +21,6 @@ Sums the softmax mass of each class's answer tokens; the leftover mass is
 reported rather than hidden, and a token may verbalise only one class.
 }
 \examples{
-morie_kamath_verbalizer_mapping(c(1, 0, 2), c("gr", "te", "ok"), 
+morie_kamath_verbalizer_mapping(c(1, 0, 2), c("gr", "te", "ok"),
     list(pos = c("gr", "ok"), neg = c("te")))
 }

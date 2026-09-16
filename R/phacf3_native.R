@@ -75,6 +75,8 @@
 #' @param edges The bin edges.
 #' @return The zero-based bin index, or -1.
 #' @export
+#' @examples
+#' morie_phacf3_bin(d = 5L, edges = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_phacf3_bin <- function(d, edges) {
   d <- as.numeric(d)
   if (d < edges[1] || d >= edges[length(edges)]) return(-1L)
@@ -183,6 +185,10 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 #' @return A list with the key matrix, their string forms and a lookup
 #'   environment from string to zero-based bit index.
 #' @export
+#' @examples
+#' FS <- c("donor", "acceptor", "hydrophobic", "aromatic")
+#' EDGES <- c(2, 4.5, 7, 10, 14)
+#' morie_phacf3_space(FS, length(EDGES) - 1L, EDGES)
 morie_phacf3_space <- function(features = .PHACF3_FEATURES,
                                n_bins = NULL,
                                edges = .PHACF3_DEFAULT_EDGES) {
@@ -237,6 +243,9 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 #' @param b The second fingerprint.
 #' @return The Tanimoto coefficient.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_phacf3_tanimoto(V, V)
 morie_phacf3_tanimoto <- function(a, b) {
   if (length(a) != length(b))
     stop("fingerprints must be the same length")
@@ -270,6 +279,14 @@ morie_phacf3_tanimoto <- function(a, b) {
 #'   produced them, and the counts of triangles rejected for falling
 #'   outside the distance range or for failing the triangle inequality.
 #' @export
+#' @examples
+#' FS <- c("donor", "acceptor", "hydrophobic", "aromatic")
+#' EDGES <- c(2, 4.5, 7, 10, 14)
+#' SPACE <- morie_phacf3_space(FS, length(EDGES) - 1L, EDGES)
+#' MOL <- list(list(0, 0, 0, "donor"), list(3, 0, 0, "acceptor"),
+#'     list(0, 4, 0, "hydrophobic"), list(2, 2, 5, "aromatic"),
+#'     list(-3, 1, 2, "donor"), list(6, -2, 1, "acceptor"))
+#' morie_phacf3(MOL, FS, EDGES, "binary", SPACE)
 morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
                          edges = .PHACF3_DEFAULT_EDGES, mode = "binary",
                          space = NULL) {
@@ -340,6 +357,8 @@ morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_phacf3_cheatsheet()
 morie_phacf3_cheatsheet <- function()
   paste0("phacf3: three-point 3D pharmacophore fingerprint. modes ",
          paste(.PHACF3_MODES, collapse = ", "), "; features ",

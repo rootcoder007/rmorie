@@ -197,8 +197,10 @@ morie_pps_sample <- function(df, size_col, n, seed = 42L,
 #' @export
 #' @examples
 #' set.seed(1)
-#' df <- data.frame(x = rnorm(100))
-#' morie_bootstrap_sample(df, statistic = function(d) mean(d$x))
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   df <- data.frame(x = rnorm(100))
+#'   morie_bootstrap_sample(df, statistic = function(d) mean(d$x))
+#' }
 morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42L) {
   if (!is.data.frame(df)) {
     stop("`df` must be a data.frame -- got a ", class(df)[1],

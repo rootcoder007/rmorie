@@ -370,8 +370,7 @@
 #' @return The value of \code{z}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_lattice_check(z = X)
 #' res
 .schab_lattice_check <- function(z) {
@@ -409,8 +408,7 @@
 #' @return A list with \code{cov}, \code{lags_j}, \code{lags_k}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_sample_cov2d(z = X)
 #' res
 .schab_sample_cov2d <- function(z) {
@@ -453,8 +451,7 @@
 #' \code{c}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_periodogram(z = X)
 #' res
 .schab_periodogram <- function(z, omit_zero_frequency = TRUE) {
@@ -497,8 +494,7 @@
 #' \code{covariance}, \code{lags_j}, \code{lags_k}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schab_periodogram_from_cov(z = X)
 #' res
 .schab_periodogram_from_cov <- function(z) {

@@ -30,6 +30,6 @@ seed of \code{seed + epoch}, gradient from the shared MSE core.
 \examples{
 X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
 y <- c(2, 3, 6, 9)
-morie_geron_minibatch_gradient_descent(X, y, c(0, 0), 0.02, 2, 
+morie_geron_minibatch_gradient_descent(X, y, c(0, 0), 0.02, 2,
     5, seed = 3)
 }

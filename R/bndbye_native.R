@@ -16,6 +16,8 @@
 #' @param half_width Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{phi_hat}.
 #' @export
+#' @examples
+#' morie_identified_set_interval(phi_hat = c(1, 2, 3, 4, 5, 6, 7, 8), half_width = 5L)
 morie_identified_set_interval <- function(phi_hat, half_width) {
   h <- as.numeric(half_width)
   if (h < 0) stop("bndbye: the half-width must be non-negative")
@@ -33,6 +35,10 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 #' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{401L}.
 #' @return A list with \code{grid}, \code{density}.
 #' @export
+#' @examples
+#' r <- morie_conditional_prior_uniform(list(lower = 0.2, upper = 0.8),
+#'                                      n_grid = 21L)
+#' str(r, max.level = 1)
 morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
   lo <- as.numeric(theta_set$lower)
   hi <- as.numeric(theta_set$upper)
@@ -56,6 +62,9 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{level},
 #' \code{covered}, \code{n_grid_points}, \code{method}.
 #' @export
+#' @examples
+#' r <- morie_posterior_hpd(list(lower = 0.2, upper = 0.8), level = 0.9)
+#' str(r, max.level = 1)
 morie_posterior_hpd <- function(theta_set, level = 0.95,
                                conditional_prior = NULL, n_grid = 401L) {
   if (level <= 0 || level >= 1) stop("bndbye: level must lie in (0, 1)")
@@ -101,6 +110,9 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
 #' @return A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value},
 #' \code{target}, \code{level}, \code{note}.
 #' @export
+#' @examples
+#' morie_frequentist_confidence_set(theta_set = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   se_phi = 5L)
 morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
                                             target = "parameter") {
   if (!(target %in% c("parameter", "set")))
@@ -133,6 +145,9 @@ morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
 #' \code{cs_contains_identified_set}, \code{width_ratio_hpd_over_cs},
 #' \code{conditional_prior_reported}, \code{method}, \code{recommendation}.
 #' @export
+#' @examples
+#' r <- morie_compare_sets(phi_hat = 0.5, half_width = 0.2, se_phi = 0.1)
+#' str(r, max.level = 1)
 morie_compare_sets <- function(phi_hat, half_width, se_phi, level = 0.95,
                                conditional_prior = NULL, n_grid = 401L) {
   ts <- morie_identified_set_interval(phi_hat, half_width)

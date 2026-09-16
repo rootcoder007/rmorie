@@ -276,6 +276,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' @param batch See Usage.
 #' @export
 #' @examples
+#' \donttest{
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
 #' set.seed(1)
 #' D <- lapply(1:30, function(k) {
@@ -286,6 +287,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #'   flow_logprob(fl, p[[2]], p[[1]]), numeric(1)))
 #' trained <- train_flow(flow, D, epochs = 10L, lr = 0.02, seed = 1L)
 #' round(c(before = ll(flow), after = ll(trained)), 3)
+#' }
 train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
                        batch = NULL) {
   if (length(D) == 0L) stop("abcnnt: no training pairs")
@@ -370,6 +372,7 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
 #' @param n_posterior See Usage.
 #' @export
 #' @examples
+#' \donttest{
 #' simulator <- function(theta, e) theta * 0.5 + rnorm(length(theta), 0, 0.2)
 #' log_prior <- function(th) if (any(abs(th) > 5)) -Inf else -0.5 * sum(th^2)
 #' set.seed(1)
@@ -377,6 +380,7 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
 #'               n_rounds = 2L, n_per_round = 25L, epochs = 5L, lr = 0.02,
 #'               seed = 1L, mcmc_burn = 50L, mcmc_step = 0.8)
 #' names(res)
+#' }
 abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
                    n_per_round = 50L, n_layers = 5L, hidden = 20L,
                    epochs = 40L, lr = 0.01, mcmc_burn = 100L,

@@ -86,8 +86,7 @@
 #' @return The value of \code{Z}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .scintg_matrix(Z = X)
 #' res
 .scintg_matrix <- function(Z) {
@@ -128,8 +127,7 @@
 #' @return The value of \code{sweep}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .scintg_l2_normalise(Z = X)
 #' res
 .scintg_l2_normalise <- function(Z) {
@@ -514,6 +512,10 @@
 #' \code{objective}, \code{history}, \code{n_rounds}, \code{theta}, \code{sigma},
 #' \code{lam}, \code{diversity}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_scintg(M, D)
 morie_scintg <- function(Z, batches, K = NULL, sigma = 0.1, theta = 2.0, lam = 1.0,
                          max_iter = 10, cluster_iter = 25, tol = 1e-4, seed = 0,
                          reference = NULL, diversity = "penalise") {

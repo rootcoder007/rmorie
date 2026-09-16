@@ -36,10 +36,14 @@
 #'   Goodman-Bacon (2021) J. Econometrics 225(2).
 #' @examples
 #' set.seed(1)
-#' df <- expand.grid(id = 1:30, t = 1:6)
-#' df$g <- ifelse(df$id <= 15, 4L, NA)
-#' df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
-#' morie_did(df, "y", "id", "t", "g")
+#' if (morie_crypto_liboqs_available()) {
+#'   if (requireNamespace("did", quietly = TRUE)) {
+#'     df <- expand.grid(id = 1:30, t = 1:6)
+#'     df$g <- ifelse(df$id <= 15, 4L, NA)
+#'     df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
+#'     morie_did(df, "y", "id", "t", "g")
+#'   }
+#' }
 #' @export
 morie_did <- function(data, outcome, unit, time, treatment_time,
                       covariates = NULL, n_bootstrap = 200L,
@@ -118,14 +122,8 @@ morie_did <- function(data, outcome, unit, time, treatment_time,
 #' @param x A \code{morie_did} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' set.seed(1)
-#' \donttest{
-#' df <- expand.grid(id = 1:40, t = 1:8)
-#' df$g <- ifelse(df$id <= 20, 5L, NA)
-#' df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
-#' obj <- morie_did_borusyak(df, "y", "id", "t", "g", n_bootstrap = 29L)
-#' print(obj)
-#' }
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::print.morie_did(D)
 #' @references
 #'   Borusyak, Jaravel & Spiess (2024) REStud 91(6).
 #' @export
@@ -245,14 +243,13 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' set.seed(1)
-#' \donttest{
 #' n <- 200
-#' z <- rnorm(n); u <- rnorm(n)
-#' d <- z + 0.5 * u + rnorm(n)
-#' y <- 2 * d + u + rnorm(n)
-#' obj <- morie_iv_2sls(data.frame(y, d, z), "y", "d", "z")
-#' print(obj)
-#' }
+#' z <- rnorm(n)
+#' xend <- 0.8 * z + rnorm(n)
+#' yy <- 1 + 2 * xend + rnorm(n)
+#' df <- data.frame(y = yy, x = xend, z = z)
+#' fit <- morie_iv_2sls(df, "y", "x", "z")
+#' print(fit)
 #' @references
 #'   Staiger & Stock (1997); Anderson & Rubin (1949);
 #'   Stock & Yogo (2005).
@@ -371,13 +368,14 @@ morie_rdd <- function(data, outcome, running, cutoff = 0,
 #' @param x A \code{morie_rdd} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
 #' set.seed(1)
-#' x <- runif(500, -1, 1)
-#' y <- 1 + 2 * (x >= 0) + x + rnorm(500, sd = 0.5)
-#' obj <- morie_rdd(data.frame(y, x), "y", "x")
-#' print(obj)
-#' }
+#' n <- 500
+#' xr <- runif(n, -1, 1)
+#' tr <- as.integer(xr >= 0)
+#' yy <- 0.5 * xr + 0.4 * tr + rnorm(n) * 0.3
+#' df <- data.frame(y = yy, x = xr)
+#' fit <- morie_rdd(df, "y", "x", cutoff = 0)
+#' print(fit)
 #' @references
 #'   Imbens & Kalyanaraman (2012); Calonico, Cattaneo &
 #'   Titiunik (2014); McCrary (2008).

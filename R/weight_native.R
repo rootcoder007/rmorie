@@ -42,12 +42,8 @@
 #' @param x A \code{morie_weight} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' set.seed(1)
-#' \donttest{
-#' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
-#' obj <- morie_weight_trimming(morie_weight_ps(d, "t", "x"))
-#' print(obj)
-#' }
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::print.morie_weight(D)
 #' @export
 print.morie_weight <- function(x, ...) {
   cat(sprintf("morie_weight: %s (estimand %s)\n", x$method, x$estimand))

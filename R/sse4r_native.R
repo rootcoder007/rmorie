@@ -237,6 +237,9 @@
 #' @return A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' morie_sse4r(sequence = c(1, 2, 3, 4, 5, 6, 7, 8), user_embedding = TRUE,
+#'   item_table = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_sse4r <- function(sequence, user_embedding, item_table,
                        attend = NULL, top_k = 3) {
   pers <- .sse4r_personalise(sequence, user_embedding)
@@ -313,6 +316,8 @@ morie_sse4r <- function(sequence, user_embedding, item_table,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' sse4r_cheatsheet()
 sse4r_cheatsheet <- function() {
   paste0("sse4r: a self-attentive sequential recommender models WHAT ",
          "was clicked and ignores WHO clicked, so two users with the ",

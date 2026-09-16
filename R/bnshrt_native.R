@@ -36,6 +36,12 @@
 #' @param link One of \code{"logit"}, \code{"probit"}. Defaults to \code{"logit"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- matrix(c(0.5, -0.2, 0.1, 0.4), 2, 2)
+#' p <- morie_sequence_probabilities(beta = c(0.5, -0.3), gamma = 0.8,
+#'                                   x = x, alpha = -0.2, y0 = 0)
+#' stopifnot(abs(sum(unlist(p)) - 1) < 1e-9)
+#' str(p)
 morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
                                          link = "logit") {
   xs <- as.matrix(x)
@@ -76,6 +82,10 @@ morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
 #' @param Y A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Y <- matrix(rbinom(40, 1, 0.5), 20, 2)
+#' morie_sequence_frequencies(Y)
 morie_sequence_frequencies <- function(Y) {
   Ym <- as.matrix(Y)
   if (nrow(Ym) == 0L) stop("bnshrt: no observations")
@@ -145,6 +155,14 @@ morie_sequence_frequencies <- function(Y) {
 #' @return A list with \code{discrepancy}, \code{feasible}, \code{weights},
 #' \code{fitted}, \code{target}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- matrix(c(0.5, -0.2, 0.1, 0.4), 2, 2)
+#' Y <- matrix(rbinom(60, 1, 0.5), 30, 2)
+#' freq <- morie_sequence_frequencies(Y)
+#' r <- morie_in_identified_set(freq, beta = c(0.5, -0.3), gamma = 0.8,
+#'                              x = x, alpha_grid = c(-0.5, 0, 0.5))
+#' str(r, max.level = 1)
 morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
                                     y0_values = c(0, 1),
                                     link = "logit", tol = 1e-4,
@@ -212,6 +230,14 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
 #' \code{beta_bounds}, \code{gamma_bounds}, \code{beta_width}, \code{gamma_width},
 #' \code{point_identified}, \code{discrepancy}, \code{method}, \code{assumes}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' x <- matrix(c(0.5, -0.2, 0.1, 0.4), 2, 2)
+#' Y <- matrix(rbinom(60, 1, 0.5), 30, 2)
+#' r <- morie_identified_set(Y, x, beta_grid = list(c(0.5, -0.3)),
+#'                           gamma_grid = c(0, 0.8),
+#'                           alpha_grid = c(-0.5, 0, 0.5))
+#' str(r, max.level = 1)
 morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
                                  beta_fixed = NULL, link = "logit",
                                  tol = 1e-3) {

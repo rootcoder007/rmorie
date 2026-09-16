@@ -25,7 +25,7 @@
 #'   \code{estimate} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. section 1.2.8
 #' @examples
-#' rmorie:::Alfcrop(seqlen = 5L, cropsize = 5L)
+#' Alfcrop(seqlen = 5L, cropsize = 5L)
 #' @export
 Alfcrop <- function(seqlen, cropsize, start = 1, target = NULL, pair = NULL,
                     msa = NULL, mode = "clamped") {

@@ -23,6 +23,10 @@
 #' @return List with \code{prk}, \code{salt_supplied}, \code{note}.
 #' @references RFC 5869 Sec. 2.2.
 #' @export
+#' @examples
+#' r <- morie_seckdf_extract(rep(as.raw(0x0b), 22), as.raw(0:12))
+#' stopifnot(substr(r$prk_hex %||% .kdf_hex(r$prk), 1, 8) == "07770936")
+#' str(r, max.level = 1)
 morie_seckdf_extract <- function(ikm, salt = NULL) {
   s <- if (is.null(salt)) raw(.KDF_HASH_LEN) else as.raw(salt)
   list(prk = .kdf_hmac(s, ikm), salt_supplied = !is.null(salt),
@@ -40,6 +44,12 @@ morie_seckdf_extract <- function(ikm, salt = NULL) {
 #' @return List with \code{okm}, \code{blocks}, \code{length}.
 #' @references RFC 5869 Sec. 2.3.
 #' @export
+#' @examples
+#' prk <- morie_seckdf_extract(rep(as.raw(0x0b), 22), as.raw(0:12))$prk
+#' info <- as.raw(c(0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5, 0xf6, 0xf7,
+#'                  0xf8, 0xf9))
+#' r <- morie_seckdf_expand(prk, info, 42L)
+#' str(r, max.level = 1)
 morie_seckdf_expand <- function(prk, info = raw(), length = 32L) {
   L <- as.integer(length)
   if (L < 1L) stop("seckdf: the output length must be positive")
@@ -79,6 +89,12 @@ morie_seckdf_expand <- function(prk, info = raw(), length = 32L) {
 #'   \code{note}.
 #' @references RFC 5869 Sec. 2.2-2.3.
 #' @export
+#' @examples
+#' r <- morie_seckdf_hkdf(rep(as.raw(0x0b), 22), as.raw(0:12),
+#'                        as.raw(c(0xf0, 0xf1, 0xf2, 0xf3, 0xf4, 0xf5,
+#'                                 0xf6, 0xf7, 0xf8, 0xf9)), 42L)
+#' stopifnot(substr(r$okm_hex, 1, 8) == "3cb25f25")
+#' str(r, max.level = 1)
 morie_seckdf_hkdf <- function(ikm, salt = NULL, info = raw(),
                              length = 32L, skip_extract = FALSE) {
   if (isTRUE(skip_extract)) {
@@ -110,6 +126,11 @@ morie_seckdf_hkdf <- function(ikm, salt = NULL, info = raw(),
 #' @return List with \code{keys}, \code{hex}, \code{prk},
 #'   \code{all_distinct}, \code{note}.
 #' @export
+#' @examples
+#' r <- morie_seckdf_derive_context_keys(as.raw(1:32),
+#'                                       c("encrypt", "mac"))
+#' stopifnot(r$all_distinct)
+#' str(r, max.level = 1)
 morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
                                               length = 32L) {
   e <- morie_seckdf_extract(ikm, salt)

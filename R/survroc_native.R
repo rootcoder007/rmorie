@@ -109,6 +109,10 @@ ROUTES <- c("km", "empirical")
 #' @param at Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{val}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+#' str(morie_survroc_kaplan_meier(tt, ev), max.level = 1)
 morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
   cln <- .survroc_clean(times, events)
   T <- cln$T
@@ -267,6 +271,11 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[[}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+#' mk <- -log(tt) + rnorm(40, 0, 0.3)
+#' morie_survroc_sensitivity(tt, ev, mk, threshold = 0, t = 1)
 morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
                                      route = "km") {
   res <- .survroc_pair(times, events, marker, threshold, t, route)
@@ -287,6 +296,11 @@ morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
 #' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[[}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+#' mk <- -log(tt) + rnorm(40, 0, 0.3)
+#' morie_survroc_specificity(tt, ev, mk, threshold = 0, t = 1)
 morie_survroc_specificity <- function(times, events, marker, threshold, t,
                                      route = "km") {
   res <- .survroc_pair(times, events, marker, threshold, t, route)
@@ -307,6 +321,11 @@ morie_survroc_specificity <- function(times, events, marker, threshold, t,
 #' @param route Passed to \code{.survroc_pair}. Defaults to \code{"km"}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+#' mk <- -log(tt) + rnorm(40, 0, 0.3)
+#' str(morie_survroc_roc_at(tt, ev, mk, t = 1), max.level = 1)
 morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
   cln <- .survroc_clean(times, events, marker)
   M <- cln$M
@@ -341,6 +360,11 @@ morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
 #' @param route Passed to \code{morie_survroc_roc_at}. Defaults to \code{"km"}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+#' mk <- -log(tt) + rnorm(40, 0, 0.3)
+#' morie_survroc_auc_at(tt, ev, mk, t = 1)
 morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
   pts <- morie_survroc_roc_at(times, events, marker, t, route)
   a <- 0.0
@@ -369,6 +393,11 @@ morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
 #' \code{route}, \code{n}, \code{n_events_by_t}, \code{n_at_risk_after_t},
 #' \code{n_censored_before_t}, \code{survival_at_t}, \code{out_of_range}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
+#' mk <- -log(tt) + rnorm(40, 0, 0.3)
+#' str(morie_survroc(tt, ev, mk, t = 1), max.level = 1)
 morie_survroc <- function(times, events, marker, t, route = "km") {
   cln <- .survroc_clean(times, events, marker)
   T <- cln$T

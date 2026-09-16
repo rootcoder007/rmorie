@@ -385,6 +385,8 @@ morie_wenge_weight_based_mediation <- function(X, M, C, Y, strategy = "em",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_wenge_cheatsheet()
 morie_wenge_cheatsheet <- function() {
   paste0(
     "wenge: mediation functional theta = E(Y_1,M_0) three ways ",

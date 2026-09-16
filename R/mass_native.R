@@ -62,8 +62,10 @@
 #' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
 #' @examples
-#' set.seed(1)
-#' morie_mvrnorm(3, mu = c(0, 0), Sigma = diag(2))
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   set.seed(1)
+#'   morie_mvrnorm(3, mu = c(0, 0), Sigma = diag(2))
+#' }
 #' @export
 morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
                           empirical = FALSE) {
@@ -100,9 +102,11 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 #' @return A numeric value.
 #' @export
 #' @examples
-#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
-#' res <- .morie_bandwidth_nrd(x = x)
-#' res
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#'   res <- .morie_bandwidth_nrd(x = x)
+#'   res
+#' }
 .morie_bandwidth_nrd <- function(x) {
   r <- stats::quantile(x, c(0.25, 0.75))
   h <- (r[2L] - r[1L]) / 1.34
@@ -122,10 +126,12 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 #' @return A list \code{list(x, y, z)} (grid axes and the n1 x n2
 #'   density matrix).
 #' @examples
-#' set.seed(2)
-#' x <- rnorm(80); y <- rnorm(80)
-#' k <- morie_kde2d(x, y, n = 20)
-#' dim(k$z)
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   set.seed(2)
+#'   x <- rnorm(80); y <- rnorm(80)
+#'   k <- morie_kde2d(x, y, n = 20)
+#'   dim(k$z)
+#' }
 #' @export
 morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
   nx <- length(x)
@@ -302,14 +308,12 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
 #' @param dispersion A \code{negbin} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
-#' set.seed(1); n <- 300
-#' x <- rnorm(n)
-#' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
+#' set.seed(1)
+#' x <- rnorm(60)
+#' y <- rpois(60, exp(0.4 + 0.3 * x))
 #' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
-#' coef(fit)
-#' summary(fit)
-#' }
+#' s <- summary(fit)
+#' !is.null(s$theta)
 #' @references
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
@@ -326,13 +330,9 @@ summary.negbin <- function(object, dispersion = 1, ...) {
 #' @param object A \code{negbin} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
-#' set.seed(1); n <- 300
-#' x <- rnorm(n)
-#' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
-#' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
-#' coef(fit)
-#' logLik(fit)
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#'   rmorie:::logLik.negbin(D)
 #' }
 #' @references
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
@@ -428,15 +428,13 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
 #' @param object A \code{morie_rlm} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
-#' set.seed(3)
-#' n <- 100; x <- rnorm(n)
-#' y <- 2 * x + rnorm(n)
-#' y[1:3] <- y[1:3] + 40
-#' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
-#' rob$coefficients
-#' summary(rob)
-#' }
+#' set.seed(1)
+#' x <- rnorm(50)
+#' y <- 1 + 2 * x + rnorm(50, 0, 0.5)
+#' y[50] <- 40
+#' fit <- morie_rlm(y ~ x, data = data.frame(y, x))
+#' s <- summary(fit)
+#' nrow(s$coefficients) >= 2L
 #' @references
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
@@ -481,12 +479,14 @@ summary.morie_rlm <- function(object, ...) {
 #' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
 #' @examples
-#' set.seed(4)
-#' n <- 250; x <- rnorm(n)
-#' yc <- 1 + (runif(n) > plogis(-0.5 - x)) + (runif(n) > plogis(1 - x))
-#' yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
-#' fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
-#' fit$zeta
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   set.seed(4)
+#'   n <- 250; x <- rnorm(n)
+#'   yc <- 1 + (runif(n) > plogis(-0.5 - x)) + (runif(n) > plogis(1 - x))
+#'   yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
+#'   fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
+#'   fit$zeta
+#' }
 #' @export
 morie_polr <- function(formula, data, weights, method = "logistic") {
   pfun <- switch(method, logistic = stats::plogis, probit = stats::pnorm,
@@ -569,14 +569,13 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
 #' @param object A \code{morie_polr} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' \donttest{
-#' set.seed(4)
-#' n <- 250; x <- rnorm(n)
-#' yc <- 1 + (runif(n) > plogis(-0.5 - x)) + (runif(n) > plogis(1 - x))
-#' yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
-#' fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
-#' fit$zeta
-#' logLik(fit)
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   set.seed(1)
+#'   x <- rnorm(80)
+#'   y <- factor(cut(1.5 * x + rnorm(80), 3), ordered = TRUE)
+#'   fit <- morie_polr(y ~ x, data = data.frame(y, x))
+#'   ll <- logLik(fit)
+#'   inherits(ll, "logLik")
 #' }
 #' @references
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern

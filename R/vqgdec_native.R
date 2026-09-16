@@ -97,6 +97,10 @@
 #' @param codebook Passed to \code{.vqgdec_to_matrix}.
 #' @return A list with \code{codes}, \code{n}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_vqgdec_decode_indices(M, V)
 morie_vqgdec_decode_indices <- function(indices, codebook) {
     Z <- .vqgdec_to_matrix(codebook)
     n_code <- nrow(Z)
@@ -132,6 +136,9 @@ morie_vqgdec_decode_indices <- function(indices, codebook) {
 #' @param clip Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10000}.
 #' @return A list with \code{lambda}, \code{raw}, \code{clipped}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_vqgdec_adaptive_weight(V, V)
 morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
                                           delta = 1e-6, clip = 1e4) {
     gr <- abs(as.numeric(grad_rec))
@@ -217,6 +224,8 @@ morie_vqgdec_patch_discriminator <- function(image, patch = 4,
 #' @return A list with \code{windows}, \code{n_windows}, \code{covers_everything},
 #' \code{context}, \code{note}.
 #' @export
+#' @examples
+#' morie_vqgdec_sliding_windows(height = 5L, width = 5L, window = 5L)
 morie_vqgdec_sliding_windows <- function(height, width, window,
                                           stride = NULL) {
     H <- as.integer(height)
@@ -302,6 +311,10 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 #' @return A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens},
 #' \code{adaptive_lambda}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_vqgdec_decode(M, V)
 morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
                                  grad_rec = NULL, grad_gan = NULL) {
     d <- morie_vqgdec_decode_indices(indices, codebook)
@@ -334,6 +347,8 @@ morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_vqgdec_cheatsheet()
 morie_vqgdec_cheatsheet <- function() {
     paste(
         "vqgdec: at compression 16 an L2 loss returns the conditional",

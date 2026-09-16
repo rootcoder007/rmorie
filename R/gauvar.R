@@ -20,6 +20,9 @@
 # Cressie (1993), Statistics for Spatial Data, rev. edn., sec. 2.3.1.
 
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::morie_gaussian_variogram_model(V)
 morie_gaussian_variogram_model <- function(h, c0 = 0, c = 1, a = 1) {
   hs <- .expvar_lags(h)
   c0 <- as.numeric(c0)[1L]

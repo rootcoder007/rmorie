@@ -28,6 +28,8 @@
 #' @param full_output A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @examples
+#' cgmth(function(x) sum(x^2), function(x) 2 * x, x0 = c(1, 1))
 cgmth <- function(f, grad_f, x0, tol = 1e-6, max_iter = 1000L,
                   full_output = FALSE) {
   x <- as.numeric(x0)

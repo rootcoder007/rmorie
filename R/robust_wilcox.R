@@ -12,6 +12,8 @@
 # because it carries no numeric dependency.
 
 #' @noRd
+#' @examples
+#' rmorie:::morie_robust_trim_counts(n = 20, tr = 0.2)
 morie_robust_trim_counts <- function(n, tr) {
   if (tr < 0 || tr >= 0.5) stop("tr must satisfy 0 <= tr < 0.5")
   floor(tr * n)

@@ -30,6 +30,9 @@
 #'   Attributable Risk for Multiple Risk Factors Using Case-Control
 #'   Data. American Journal of Epidemiology, 122(5), 904-914.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rapaf_population_attributable_risk(V, V)
 morie_rapaf_population_attributable_risk <- function(case_counts,
                                                       rate_ratios) {
   cc <- as.numeric(case_counts)
@@ -66,6 +69,8 @@ morie_rapaf_population_attributable_risk <- function(case_counts,
 #' @references Levin, M. L. (1953). The occurrence of lung cancer in
 #'   man. Acta Unio Internationalis Contra Cancrum, 9(3), 531-541.
 #' @export
+#' @examples
+#' morie_rapaf_levin_ar(0.2, 2.5)
 morie_rapaf_levin_ar <- function(prevalence, rate_ratio) {
   p <- as.numeric(prevalence)
   R <- as.numeric(rate_ratio)
@@ -132,6 +137,10 @@ morie_rapaf_partial_ar <- function(case_counts, rate_ratios,
 #'   Attributable Risk for Multiple Risk Factors Using Case-Control
 #'   Data. American Journal of Epidemiology, 122(5), 904-914.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rapaf_population_attributable_risk(V, V)
+#' morie_rapaf_rate_ratios_from_logit(case_counts = V, control_counts = V, design = V)
 morie_rapaf_rate_ratios_from_logit <- function(case_counts,
                                                control_counts, design,
                                                ridge = 1e-8) {
@@ -182,6 +191,9 @@ morie_rapaf_rate_ratios_from_logit <- function(case_counts,
 #' @return A list with \code{estimate}, \code{lower}, \code{upper},
 #'   \code{level}, \code{draws}.
 #' @export
+#' @examples
+#' morie_rapaf_ar_confidence_interval(case_counts = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   rate_ratios = c(1, 2, 3, 4, 5, 6, 7, 8), log_rr_se = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rapaf_ar_confidence_interval <- function(case_counts, rate_ratios,
                                                 log_rr_se,
                                                 level = 0.95,

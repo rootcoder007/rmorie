@@ -17,6 +17,9 @@
 #' \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Rms(V)
 Rms <- function(x, window = NULL) {
   # eq (3.9): RMS = sqrt((1/N) sum x^2), divisor N.  With a window, the
   # short-time RMS the book uses for EMG activity (Section 5.6).
@@ -50,6 +53,8 @@ Rms <- function(x, window = NULL) {
 #' @return A list with \code{form_factor}, \code{complexity}, \code{mobility},
 #' \code{activity}, \code{mobility_of_derivative}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' FormFactor(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 FormFactor <- function(x) {
   # eqs (5.25)-(5.26): activity = var(x); mobility = sd(x')/sd(x);
   # form factor = mobility(x')/mobility(x) = (sd(x'')/sd(x'))/(sd(x')/sd(x)).
@@ -134,6 +139,9 @@ FormFactor <- function(x) {
 #' \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' TurnsCount(V)
 TurnsCount <- function(x, threshold = 100, window = NULL) {
   # Section 5.6.3, Willison: a turn is a change of slope, counted only
   # when the swing since the LAST COUNTED TURN exceeds the threshold
@@ -177,6 +185,9 @@ TurnsCount <- function(x, threshold = 100, window = NULL) {
 #' \code{signal_power}, \code{noise_power}, \code{noise_rms}, \code{definition},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Snr(V, V)
 Snr <- function(signal, noise, definition = "power") {
   # Section 3.2.1 gives two definitions in one sentence, and they are not
   # interchangeable: the power ratio (10 log10) and the peak-to-peak
@@ -219,6 +230,9 @@ Snr <- function(signal, noise, definition = "power") {
 #' @return A list with \code{snr_db}, \code{residual_power}, \code{signal_power},
 #' \code{residual}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' SnrFilt(V, V)
 SnrFilt <- function(clean, filtered) {
   # The power form of Section 3.2.1 applied to the residual against a
   # known clean reference.  This penalises distortion as well as leftover
@@ -250,6 +264,9 @@ SnrFilt <- function(clean, filtered) {
 #' @return A list with \code{average}, \code{sd}, \code{m}, \code{n}, \code{se},
 #' \code{snr_gain}, \code{snr_gain_db}, \code{alignment_note}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' SyncAvg(V)
 SyncAvg <- function(observations) {
   # eqs (3.95)-(3.96): y_k = x_k + eta_k, and the sum over k separates
   # into a signal sum that grows as M and a zero-mean noise sum that
@@ -295,6 +312,9 @@ SyncAvg <- function(observations) {
 #' @param eta Iterated over elementwise, with \code{lapply}.
 #' @return A list with \code{y}, \code{m}, \code{n}, \code{identical_repetitions}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' ObsReal(D, D)
 ObsReal <- function(x, eta) {
   # eq (3.95): y_k(n) = x_k(n) + eta_k(n), the model that synchronized
   # averaging assumes.  A single x is read as the same signal repeated,
@@ -345,6 +365,9 @@ ObsReal <- function(x, eta) {
 #' \code{intercept}, \code{n_bins}, \code{r_squared}, \code{in_range}, \code{band},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FdPsd(V, V)
 FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
   # eqs (6.50)-(6.52): an fBm signal has PSD ~ 1/f^beta, and for a 1-D
   # signal H = (beta-1)/2, FD = (5-beta)/2.  beta is MINUS the slope of
@@ -421,6 +444,13 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
 #' \code{as.integer}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' sine <- function(n, cycles, amp = 1) amp * sin(2 * pi * cycles *
+#'     (0:(n - 1))/n)
+#' x <- sine(2000, 5)
+#' n <- 64
+#' fs <- 2000
+#' FdVag(x, fs = fs, fmin = 100, fmax = 500)
 FdVag <- function(x, fs, fmin = 100, fmax = 500, nperseg = NULL) {
   # Sections 6.6.2-6.6.3: PSA is the book's preferred FD estimator for a
   # self-affine signal, applied to knee-joint VAG signals.  The band is
@@ -451,6 +481,9 @@ FdVag <- function(x, fs, fmin = 100, fmax = 500, nperseg = NULL) {
 #' @return A list with \code{fd}, \code{total_length}, \code{max_distance},
 #' \code{mean_step}, \code{n_steps}, \code{n}, \code{scale_sensitive}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' KatzFd(V)
 KatzFd <- function(x, dt = 1) {
   # Katz (1988): FD = log10(n) / (log10(n) + log10(d/L)), with L the path
   # length, d the greatest distance from the first point, n = L/a.
@@ -495,6 +528,9 @@ KatzFd <- function(x, dt = 1) {
 #' @return A list with \code{entropy}, \code{units}, \code{max_entropy},
 #' \code{normalized}, \code{n_bins}, \code{probabilities}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' SpecEntropy(V)
 SpecEntropy <- function(psd, freqs = NULL, fmin = NULL, fmax = NULL) {
   # eq (3.11) applied to the PSD normalized to unit mass.  Rangayyan
   # defines the spectral MOMENTS of Section 6.4.4 but prints no
@@ -541,6 +577,9 @@ SpecEntropy <- function(psd, freqs = NULL, fmin = NULL, fmax = NULL) {
 #' \code{idi}, \code{n_discharges}, \code{mean_instantaneous_rate}, \code{duration},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FiringRate(V)
 FiringRate <- function(times, fs = NULL) {
   # MFR = 1/mean(IDI), CV = SD(IDI)/mean(IDI).  MFR is the RECIPROCAL OF
   # THE MEAN interval, not the mean of the reciprocals; the two differ
@@ -584,6 +623,8 @@ FiringRate <- function(times, fs = NULL) {
 #' \code{spectral_centroid}, \code{spectral_bandwidth}, \code{spectral_entropy},
 #' \code{n}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' SigFeatures(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 SigFeatures <- function(x, fs = 1, threshold = 0) {
   # The descriptors Rangayyan uses across Chapters 3, 5 and 6, each
   # computed by the function that owns its definition so the vector

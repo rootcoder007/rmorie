@@ -43,6 +43,9 @@ DISTRIBUTIONS <- c("rademacher", "sparse")
 #'   projections. Journal of Computer and System Sciences, 66(4),
 #'   671-687, Theorem 1.1.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- target_dimension(n = 8L, epsilon = 0.5); TRUE
 target_dimension <- function(n, epsilon, beta = 1.0) {
   n <- as.integer(n)
   e <- as.numeric(epsilon)
@@ -75,6 +78,8 @@ target_dimension <- function(n, epsilon, beta = 1.0) {
 #'   projections. Journal of Computer and System Sciences, 66(4),
 #'   671-687, Lemma 5.1.
 #' @export
+#' @examples
+#' moments()
 moments <- function(distribution = "rademacher") {
   if (!(distribution %in% DISTRIBUTIONS))
     stop(sprintf("qjlcrn: distribution must be one of %s, got %s",
@@ -111,6 +116,8 @@ moments <- function(distribution = "rademacher") {
 #'   projections. Journal of Computer and System Sciences, 66(4),
 #'   671-687, Theorem 1.1.
 #' @export
+#' @examples
+#' projection_matrix(d = 5L, k = 5L)
 projection_matrix <- function(d, k, distribution = "rademacher",
                               seed = 0L) {
   if (!(distribution %in% DISTRIBUTIONS))
@@ -163,6 +170,8 @@ projection_matrix <- function(d, k, distribution = "rademacher",
 #'   Lindenstrauss, J. (1984). Extensions of Lipschitz mappings
 #'   into a Hilbert space. Contemporary Mathematics, 26, 189-206.
 #' @export
+#' @examples
+#' morie_qjlcrn(A = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_qjlcrn <- function(A, k, distribution = "rademacher",
                          seed = 0L) {
   n <- length(A)
@@ -203,6 +212,9 @@ morie_qjlcrn <- function(A, k, distribution = "rademacher",
 #'   & Lindenstrauss, J. (1984). Contemporary Mathematics, 26,
 #'   189-206.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' distortion(V, V)
 distortion <- function(A, E) {
   if (length(A) != length(E))
     stop("qjlcrn: the embedding must have one row per point")

@@ -18,6 +18,6 @@ List with \code{estimate}, \code{score}, \code{n_relevant}.
 Relevant context sentences / retrieved sentences, via km111's ratio core.
 }
 \examples{
-morie_kamath_ragas_context_relevance(c("s1", "s2", "s3"), c(1, 
+morie_kamath_ragas_context_relevance(c("s1", "s2", "s3"), c(1,
     0, 1))
 }

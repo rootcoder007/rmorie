@@ -87,6 +87,8 @@
 #' @param r2 The outer radius.
 #' @return The shell volume.
 #' @export
+#' @examples
+#' morie_pmfsc_shell(r1 = 5L, r2 = 5L)
 morie_pmfsc_shell <- function(r1, r2) {
   if (r2 < r1) stop("the outer radius must not be inside the inner")
   (4 / 3) * pi * (r2 * r2 * r2 - r1 * r1 * r1)
@@ -103,6 +105,8 @@ morie_pmfsc_shell <- function(r1, r2) {
 #' @param n_bins The number of bins.
 #' @return The zero-based bin index, or -1 past the cutoff.
 #' @export
+#' @examples
+#' morie_pmfsc_bin(r = 5L, r_max = 5L, n_bins = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_pmfsc_bin <- function(r, r_max, n_bins) {
   r <- as.numeric(r)
   if (r < 0) stop("a separation cannot be negative")
@@ -151,6 +155,9 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 #'   density, the reference density, the potential and the count of
 #'   capped bins.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_pmfsc_derive(D)
 morie_pmfsc_derive <- function(observations, n_complexes = 1,
                                r_max = .PMFSC_DEFAULT_CUTOFF,
                                n_bins = 24, reference = "bulk",
@@ -239,6 +246,9 @@ morie_pmfsc_derive <- function(observations, n_complexes = 1,
 #' @param missing The contribution of an unparameterised pair.
 #' @return A list with the score and the three counts.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_pmfsc_score(D, D)
 morie_pmfsc_score <- function(pairs, potential,
                               r_max = .PMFSC_DEFAULT_CUTOFF,
                               n_bins = 24, missing = 0) {
@@ -298,6 +308,26 @@ morie_pmfsc_score <- function(pairs, potential,
 #' @return A list with the score, the potential used, and the counts
 #'   that say how much of the pose the potential actually covered.
 #' @export
+#' @examples
+#' RMAX <- 12
+#' NB <- 24L
+#' PT <- c("C", "N", "O")
+#' LT <- c("c", "n", "o")
+#' OBS <- lapply(0:399, function(i) {
+#'     a <- PT[(i%%3) + 1L]
+#'     b <- LT[((i%/%3)%%3) + 1L]
+#'     r <- if (a == "C" && b == "c")
+#'         3 + ((i * 7)%%20)/10
+#'     else if (a == "O" && b == "n")
+#'         7 + ((i * 11)%%40)/10
+#'     else 1 + ((i * 13)%%110)/10
+#'     list(a, b, r)
+#' })
+#' REC <- list(list(0, 0, 0, "C"), list(4, 0, 0, "N"), list(0, 4.5,
+#'     0, "O"), list(20, 0, 0, "C"))
+#' LIG <- list(list(3.4, 0, 0, "c"), list(1, 3, 0, "n"), list(5,
+#'     5, 1, "o"), list(2, 2, 2, "x"))
+#' morie_pmfsc(REC, LIG, observations = OBS, r_max = RMAX, n_bins = NB)
 morie_pmfsc <- function(receptor, ligand, potential = NULL,
                         observations = NULL, n_complexes = 1,
                         r_max = .PMFSC_DEFAULT_CUTOFF, n_bins = 24,
@@ -337,6 +367,8 @@ morie_pmfsc <- function(receptor, ligand, potential = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_pmfsc_cheatsheet()
 morie_pmfsc_cheatsheet <- function()
   paste0("pmfsc: knowledge-based PMF scoring. references ",
          paste(.PMFSC_REFERENCES, collapse = ", "), "; corrections ",

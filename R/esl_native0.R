@@ -399,8 +399,10 @@ morie_esl_kernel_density <- function(x, data, lambda_ = NULL) {
 #'   Eqs. (7.54)-(7.56); Efron and Tibshirani (1997).
 #' @examples
 #' set.seed(1)
-#' X <- matrix(stats::rnorm(150), 50)
-#' morie_esl_bootstrap_err(X, stats::rnorm(50), B = 20)$err_loo_boot
+#' if (morie_crypto_liboqs_available()) {
+#'   X <- matrix(stats::rnorm(150), 50)
+#'   morie_esl_bootstrap_err(X, stats::rnorm(50), B = 20)$err_loo_boot
+#' }
 #' @export
 morie_esl_bootstrap_err <- function(X, y, model = NULL, B = 100,
                                     loss = NULL, seed = 0) {

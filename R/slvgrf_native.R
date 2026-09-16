@@ -99,6 +99,9 @@ aipw_scores <- function(Y, W, mu1, mu0, e) {
 #' @param priority Passed to \code{.slvgrf_check}.
 #' @return A list with \code{u}, \code{toc}, \code{ate}, \code{order}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' toc_curve(V, V)
 toc_curve <- function(scores, priority) {
   chk <- .slvgrf_check(scores, priority)
   g <- chk$g
@@ -131,6 +134,9 @@ toc_curve <- function(scores, priority) {
 #' @param weight Compared against \code{"qini"}. Defaults to \code{"autoc"}.
 #' @return A list with \code{estimate}, \code{weight}, \code{curve}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rate(V, V)
 rate <- function(scores, priority, weight = "autoc") {
   if (!(weight %in% .SLVGRF_WEIGHTS))
     stop(sprintf("slvgrf: weight must be one of %s, got %s",
@@ -155,6 +161,9 @@ rate <- function(scores, priority, weight = "autoc") {
 #' @param priority Passed to \code{rate}.
 #' @return The value of \code{$}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' autoc(V, V)
 autoc <- function(scores, priority) {
   rate(scores, priority, weight = "autoc")$estimate
 }
@@ -169,6 +178,9 @@ autoc <- function(scores, priority) {
 #' @param priority Passed to \code{rate}.
 #' @return The value of \code{$}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' qini_coefficient(V, V)
 qini_coefficient <- function(scores, priority) {
   rate(scores, priority, weight = "qini")$estimate
 }
@@ -184,6 +196,9 @@ qini_coefficient <- function(scores, priority) {
 #' @param cost Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{spend}, \code{gain}, \code{ate}, \code{n}, \code{constrained}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' qini_curve(V, V)
 qini_curve <- function(scores, priority, cost = NULL) {
   chk <- .slvgrf_check(scores, priority)
   g <- chk$g
@@ -230,6 +245,9 @@ qini_curve <- function(scores, priority, cost = NULL) {
 #' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value},
 #' \code{weight}, \code{reps}, \code{n}, \code{null}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rate_test(V, V)
 rate_test <- function(scores, priority, weight = "autoc", reps = 500,
                       seed = 0) {
   chk <- .slvgrf_check(scores, priority)

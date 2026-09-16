@@ -25,6 +25,9 @@
 #' \code{weighted_fraction_below}, \code{tau}, \code{iterations}, \code{converged},
 #' \code{n}, \code{p}, \code{sum_weights}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_svyrcq_survey_quantile_regression(V, V)
 morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
                                                     weights = NULL,
                                                     add_intercept = TRUE,

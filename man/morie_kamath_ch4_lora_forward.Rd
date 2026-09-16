@@ -22,6 +22,6 @@ List with \code{h}, \code{base}, \code{delta_h}, \code{r}, \code{delta_W_rank}.
 h = W_0 x + B A x; dW = BA has rank at most r, and that rank is reported.
 }
 \examples{
-morie_kamath_ch4_lora_forward(diag(2), matrix(c(1, 0), 2), matrix(c(1, 
+morie_kamath_ch4_lora_forward(diag(2), matrix(c(1, 0), 2), matrix(c(1,
     0), 1), c(1, 2))
 }

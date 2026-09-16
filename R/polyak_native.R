@@ -68,6 +68,9 @@
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{average}, \code{n_averaged}, \code{burn_in}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_polyak(V)
 morie_polyak <- function(iterates, burn_in = 0) {
   X <- lapply(iterates, function(t) as.numeric(t))
 

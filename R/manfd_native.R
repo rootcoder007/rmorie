@@ -61,6 +61,9 @@
 #' @param grid The sampling points, or NULL for the integers.
 #' @return The distance matrix.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_manfd_l2(V)
 morie_manfd_l2 <- function(Y, grid = NULL) {
   Y <- as.matrix(Y)
   storage.mode(Y) <- "double"
@@ -99,6 +102,13 @@ morie_manfd_l2 <- function(Y, grid = NULL) {
 #' @param symmetric Whether to symmetrise by union.
 #' @return The adjacency matrix, infinite where there is no edge.
 #' @export
+#' @examples
+#' N <- 18L
+#' P <- 12L
+#' GRID <- vapply(0:(P - 1L), function(t) t/(P - 1), numeric(1))
+#' Y <- matrix(0, N, P)
+#' D <- morie_manfd_l2(Y, GRID)
+#' morie_manfd_knn(D, 3L)
 morie_manfd_knn <- function(D, k, symmetric = TRUE) {
   n <- nrow(D)
   k <- as.integer(k)
@@ -129,6 +139,9 @@ morie_manfd_knn <- function(D, k, symmetric = TRUE) {
 #' @param A An adjacency matrix.
 #' @return A list with the geodesic matrix and the component count.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_manfd_paths(M)
 morie_manfd_paths <- function(A) {
   n <- nrow(A)
   G <- A
@@ -163,6 +176,9 @@ morie_manfd_paths <- function(A) {
 #' @return A list with descending eigenvalues and their vectors as
 #'   columns, each signed so its largest-magnitude entry is positive.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_manfd_jacobi(M)
 morie_manfd_jacobi <- function(A, sweeps = 60L) {
   n <- nrow(A)
   a <- as.matrix(A)
@@ -227,6 +243,9 @@ morie_manfd_jacobi <- function(A, sweeps = 60L) {
 #' @return A list with the coordinates, the eigenvalues, the count of
 #'   negative eigenvalues and the centred matrix.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_manfd_scaling(M)
 morie_manfd_scaling <- function(D, dim = 2L, sweeps = 60L) {
   n <- nrow(D)
   d2 <- D * D
@@ -261,6 +280,9 @@ morie_manfd_scaling <- function(D, dim = 2L, sweeps = 60L) {
 #'   distances, the number of connected components and the residual
 #'   variance of the embedding.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_manfd(V)
 morie_manfd <- function(Y, k = 4L, method = "isomap", grid = NULL,
                         dim = 2L, sweeps = 60L) {
   if (!(method %in% .MANFD_METHODS))
@@ -322,6 +344,8 @@ morie_manfd <- function(Y, k = 4L, method = "isomap", grid = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_manfd_cheatsheet()
 morie_manfd_cheatsheet <- function()
   paste0("manfd: functional manifold learning. methods ",
          paste(.MANFD_METHODS, collapse = ", "),

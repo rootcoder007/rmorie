@@ -103,8 +103,8 @@
 #'   # (btsrp is the bootstrap primitive; its narrative ships in
 #'   # the bundled describe corpus).
 #'   morie_describe(btsrp)
-#' }
 #'
+#' }
 #' @seealso \code{\link{morie_describe_by_name}} for the
 #'   string-only variant that does not capture symbol names.
 #' @export
@@ -142,11 +142,12 @@ morie_describe <- function(callable) {
 #'   and prints a helpful diagnostic.
 #'
 #' @examples
+#' # The corpus is data shipped by rmoriedata (>= 0.3.2).
 #' if (rmorie:::.morie_describe_corpus_available()) {
 #'   morie_describe_by_name("aalen")
 #'   morie_describe_by_name("morie_aalen")
-#' }
 #'
+#' }
 #' @export
 morie_describe_by_name <- function(name) {
   if (!is.character(name) || length(name) != 1L || !nzchar(name)) {

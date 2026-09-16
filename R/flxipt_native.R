@@ -69,6 +69,8 @@
 #' @param ridge_penalties Defaults to \code{c(0, 1, 10)}.
 #' @return The value of \code{lib}, as built in the body.
 #' @export
+#' @examples
+#' default_learners(p = 0.5)
 default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
   lib <- list(
     list(name = "intercept", kind = "intercept", penalty = 0),
@@ -276,8 +278,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .flxipt_nnls_simplex(Z = X, y = y)
 #' res
@@ -339,6 +340,9 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param loss One of \code{"l2"}, \code{"nll"}. Defaults to \code{"l2"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' cv_risk(V, V)
 cv_risk <- function(y, Z, loss = "l2") {
   y <- as.numeric(y)
   Z <- as.matrix(Z)
@@ -379,6 +383,13 @@ cv_risk <- function(y, Z, loss = "l2") {
 #' \code{candidate_fits}, \code{library}, \code{n}, \code{n_folds}, \code{meta},
 #' \code{loss}, \code{binary}, \code{honest_level_one}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 40
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' y <- 1 + X[, 1] - 0.5 * X[, 2] + rnorm(n, 0, 0.3)
+#' r <- super_learner(y, X, n_folds = 4)
+#' str(r, max.level = 1)
 super_learner <- function(y, X, library = NULL, n_folds = 10,
                           meta = "nnls", binary = NULL, loss = "l2",
                           ridge = 1e-8, honest_level_one = TRUE) {
@@ -479,6 +490,13 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 #' \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n},
 #' \code{trim}, \code{stabilized}, \code{library}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 60
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- rbinom(n, 1, plogis(0.5 * H[, 1]))
+#' r <- flexible_iptw(A, H, n_folds = 4)
+#' str(r, max.level = 1)
 flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
                           meta = "nnls", trim = 0.01, ridge = 1e-8,
                           stabilize = FALSE) {
@@ -539,6 +557,14 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 #' \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity},
 #' \code{n}, \code{level}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 60
+#' H <- matrix(rnorm(n * 2), n, 2)
+#' A <- rbinom(n, 1, plogis(0.5 * H[, 1]))
+#' y <- 1 + 0.8 * A + H[, 1] + rnorm(n, 0, 0.3)
+#' r <- iptw_ate(y, A, H, n_folds = 4)
+#' str(r, max.level = 1)
 iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
                      meta = "nnls", trim = 0.01, ridge = 1e-8,
                      level = 0.95) {

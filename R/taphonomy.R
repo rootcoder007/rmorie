@@ -1276,7 +1276,7 @@ morie_taphonomy_ilr <- function(x, pseudocount = 1e-6) {
 #' @param refresh Re-download even if the cached zip exists.
 #' @return A \code{data.frame} of soil samples with elemental-concentration
 #'   columns; \code{attr(., "source")} records the URL.
-#' @source \url{https://mrdata.usgs.gov/ngdb/soil/}
+#' @source \url{https://web.archive.org/web/20250620012926/https://mrdata.usgs.gov/ngdb/soil/} (archived snapshot of mrdata.usgs.gov/ngdb/soil/)
 #' @seealso \code{\link{morie_taphonomy_clr}}, \code{\link{morie_taphonomy_ilr}}
 #' @examples
 #' \donttest{

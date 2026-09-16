@@ -81,6 +81,10 @@
 #' @param rhs Passed to \code{morie_unifAlg_variables}.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
 morie_trmRew_rule <- function(lhs, rhs) {
   # A rewrite rule, checked for the two conditions rules need.
   if (.trmRew_is_var(lhs)) {
@@ -112,6 +116,10 @@ morie_trmRew_rule <- function(lhs, rhs) {
 #' @param t A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' t <- morie_unifAlg_app("plus", morie_unifAlg_const("0"), x)
+#' morie_trmRew_positions(t)
 morie_trmRew_positions <- function(t) {
   # Every position in a term, as a 0-based integer vector of argument
   # indices. The empty position is integer(0).
@@ -138,6 +146,10 @@ morie_trmRew_positions <- function(t) {
 #' @param pos See Usage.
 #' @return The value of \code{cur}, as built in the body.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' t <- morie_unifAlg_app("plus", morie_unifAlg_const("0"), x)
+#' morie_trmRew_subterm_at(t, 0L)
 morie_trmRew_subterm_at <- function(t, pos) {
   # The subterm at a position.
   cur <- t
@@ -162,6 +174,10 @@ morie_trmRew_subterm_at <- function(t, pos) {
 #' @param new Passed to \code{morie_trmRew_replace_at}.
 #' @return The value of \code{.trmRew_app}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' t <- morie_unifAlg_app("plus", morie_unifAlg_const("0"), x)
+#' morie_trmRew_replace_at(t, 0L, morie_unifAlg_const("1"))
 morie_trmRew_replace_at <- function(t, pos, new) {
   # The term with the subterm at pos replaced.
   if (length(pos) == 0L) {
@@ -188,6 +204,12 @@ morie_trmRew_replace_at <- function(t, pos, new) {
 #' @param strategy Compared against \code{"innermost"}. Defaults to \code{"innermost"}.
 #' @return Nothing; the function is called for its effect.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' t <- morie_unifAlg_app("plus", zero, morie_unifAlg_const("a"))
+#' morie_trmRew_rewrite_step(t, list(r1))
 morie_trmRew_rewrite_step <- function(t, rules, strategy = "innermost") {
   # One rewrite, or NULL when the term is in normal form. Innermost
   # reduces arguments before the term above them; outermost the other
@@ -243,6 +265,14 @@ morie_trmRew_rewrite_step <- function(t, rules, strategy = "innermost") {
 #' \code{10000}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' t <- morie_unifAlg_app("plus", zero,
+#'                        morie_unifAlg_app("plus", zero,
+#'                                          morie_unifAlg_const("a")))
+#' morie_trmRew_normal_form(t, list(r1))
 morie_trmRew_normal_form <- function(t, rules, strategy = "innermost",
                                      max_steps = 10000) {
   # Rewrite to exhaustion. Raises if the step budget runs out.
@@ -295,6 +325,9 @@ morie_trmRew_normal_form <- function(t, rules, strategy = "innermost",
 #' @param precedence Passed to \code{morie_trmRew_lpo_greater}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' morie_trmRew_lpo_greater(s = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   precedence = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_trmRew_lpo_greater <- function(s, t, precedence) {
   # The lexicographic path order, s >_lpo t.
   if (identical(s, t)) {
@@ -352,6 +385,11 @@ morie_trmRew_lpo_greater <- function(s, t, precedence) {
 #' @param precedence Passed to \code{morie_trmRew_lpo_greater}.
 #' @return A list with \code{terminating}, \code{unoriented}, \code{method}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' morie_trmRew_is_terminating(list(r1), precedence = c(plus = 2, "0" = 1))
 morie_trmRew_is_terminating <- function(rules, precedence) {
   # Whether every rule strictly decreases in the LPO. Sufficient, not
   # necessary. Returns 0-based indices of unoriented rules.
@@ -438,6 +476,12 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
 #' @param rules A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' r2 <- morie_trmRew_rule(morie_unifAlg_app("plus", x, zero), x)
+#' morie_trmRew_critical_pairs(list(r1, r2))
 morie_trmRew_critical_pairs <- function(rules) {
   # Every overlap between two left-hand sides.
   out <- list()
@@ -464,6 +508,8 @@ morie_trmRew_critical_pairs <- function(rules) {
 #' @param max_steps Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.
 #' @return The value of \code{res}, as built in the body.
 #' @export
+#' @examples
+#' morie_trmRew_joinable(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, rules = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_trmRew_joinable <- function(a, b, rules, max_steps = 10000) {
   # Whether two terms reach a common normal form.
   res <- tryCatch(
@@ -488,6 +534,12 @@ morie_trmRew_joinable <- function(a, b, rules, max_steps = 10000) {
 #' @return A list with \code{estimate}, \code{locally_confluent},
 #' \code{n_critical_pairs}, \code{unjoinable}, \code{method}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' r2 <- morie_trmRew_rule(morie_unifAlg_app("plus", x, zero), x)
+#' morie_trmRew_is_locally_confluent(list(r1, r2))
 morie_trmRew_is_locally_confluent <- function(rules, max_steps = 10000) {
   # The Critical Pair Lemma, applied.
   cps <- morie_trmRew_critical_pairs(rules)
@@ -516,6 +568,13 @@ morie_trmRew_is_locally_confluent <- function(rules, max_steps = 10000) {
 #' @return A list with \code{estimate}, \code{confluent}, \code{terminating},
 #' \code{locally_confluent}, \code{n_critical_pairs}, \code{unjoinable}, \code{method}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' r2 <- morie_trmRew_rule(morie_unifAlg_app("plus", x, zero), x)
+#' morie_trmRew_is_confluent(list(r1, r2),
+#'                           precedence = c(plus = 2, "0" = 1))
 morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
   # Confluence via Newman's lemma: terminating and locally confluent.
   term <- morie_trmRew_is_terminating(rules, precedence)
@@ -635,6 +694,12 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4000}.
 #' @return The value of \code{.trmRew_incomplete}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' eq <- list(list(morie_unifAlg_app("plus", zero, x), x))
+#' res <- morie_trmRew_complete(eq, precedence = c(plus = 2, "0" = 1))
+#' res$complete
 morie_trmRew_complete <- function(equations, precedence, max_rules = 60,
                                   max_steps = 10000, max_iter = 4000) {
   # Knuth-Bendix completion of a set of equations (Huet's form: rules
@@ -728,6 +793,12 @@ morie_trmRew_complete <- function(equations, precedence, max_rules = 60,
 #' @param max_steps Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.
 #' @return A list with \code{equal}, \code{left}, \code{right}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' a <- morie_unifAlg_app("plus", zero, morie_unifAlg_const("a"))
+#' morie_trmRew_decides(a, morie_unifAlg_const("a"), list(r1))$equal
 morie_trmRew_decides <- function(s, t, rules, max_steps = 10000) {
   # Whether two terms are equal in the theory the rules present. Sound
   # only for a convergent system.
@@ -749,6 +820,12 @@ morie_trmRew_decides <- function(s, t, rules, max_steps = 10000) {
 #' @return A list with \code{estimate}, \code{normal_form}, \code{steps}, \code{trace},
 #' \code{strategy}, \code{method}.
 #' @export
+#' @examples
+#' x <- morie_unifAlg_var("x")
+#' zero <- morie_unifAlg_const("0")
+#' r1 <- morie_trmRew_rule(morie_unifAlg_app("plus", zero, x), x)
+#' t <- morie_unifAlg_app("plus", zero, morie_unifAlg_const("a"))
+#' morie_trmRew_term_rewriting(t, list(r1))
 morie_trmRew_term_rewriting <- function(term, rules, strategy = "innermost",
                                         max_steps = 10000) {
   # Entry point: reduce term under rules.
@@ -768,6 +845,8 @@ morie_trmRew_term_rewriting <- function(term, rules, strategy = "innermost",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_trmRew_cheatsheet()
 morie_trmRew_cheatsheet <- function() {
   paste0(
     "trmRew: a rule l -> r rewrites a subterm that MATCHES l (rule ",

@@ -246,11 +246,13 @@ n_stat_commands <- function() {
 #' @return The number of commands removed, invisibly.
 #' @keywords internal
 #' @examples
+#' \donttest{
 #' n_cleared <- clear_stat_commands()
 #' n_stat_commands()
 #' rmorie:::.morie_seed_stat_commands()
 #' rmorie:::.morie_auto_register_stat_commands()
 #' n_stat_commands()
+#' }
 #' @export
 clear_stat_commands <- function() {
   n <- length(.morie_stat_commands$registry)

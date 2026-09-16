@@ -18,6 +18,9 @@
 #' @param alphabet Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.
 #' @return A list with \code{score}, \code{qstart}, \code{sstart}, \code{length}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_msp_exact(V, V)
 morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
                             matrix = NULL, alphabet = "ACGT") {
   q <- as.character(query)
@@ -72,6 +75,9 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
 #' @param alphabet Character; passed to \code{strsplit}. Defaults to \code{"ACGT"}.
 #' @return The value of \code{hits}, as built in the body.
 #' @export
+#' @examples
+#' r <- morie_word_hits("ACGTACGT", "TTACGTAA", w = 4)
+#' str(r, max.level = 1)
 morie_word_hits <- function(query, subject, w, mode = "exact",
                             threshold = NULL, match = 5, mismatch = -4,
                             matrix = NULL, alphabet = "ACGT") {
@@ -137,6 +143,12 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
 #' @param X Passed to \code{>}.
 #' @return A list with \code{score}, \code{qs}, \code{ss}, \code{length}.
 #' @export
+#' @examples
+#' q <- strsplit("ACGTACGT", "")[[1]]
+#' s <- strsplit("TTACGTAA", "")[[1]]
+#' sc <- function(a, b) if (a == b) 5 else -4
+#' r <- extend_one(q, s, qi = 0L, si = 2L, w = 4L, sc, X = 20)
+#' str(r, max.level = 1)
 extend_one <- function(qchars, schars, qi, si, w, sc, X) {
   score <- 0
   for (t in seq_len(w)) score <- score + sc(qchars[qi + t], schars[si + t])
@@ -193,6 +205,8 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
 #' \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam},
 #' \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.
 #' @export
+#' @examples
+#' morie_blstn(query = 5L, subjects = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
                         cutoff = NULL, X = 20, word_mode = "exact",
                         threshold = NULL, matrix = NULL, alphabet = "ACGT",
@@ -324,6 +338,8 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
 #' @param pvalues Passed to \code{morie_blstn}. Defaults to \code{TRUE}.
 #' @return The value of \code{morie_blstn}.
 #' @export
+#' @examples
+#' morie_blast(query = 5L, subjects = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_blast <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
                         cutoff = NULL, X = 20, word_mode = "exact",
                         threshold = NULL, matrix = NULL, alphabet = "ACGT",
@@ -348,6 +364,8 @@ morie_blast_nucleotide <- morie_blstn
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{n}, as built in the body.
 #' @export
+#' @examples
+#' lattice_check(x = 5L)
 lattice_check <- function(x) {
   v <- as.numeric(x)
   n <- as.integer(round(v))
@@ -372,6 +390,8 @@ lattice_check <- function(x) {
 #' with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' morie_score_distribution()
 morie_score_distribution <- function(match = 5, mismatch = -4,
                                      letter_probs = NULL, matrix = NULL,
                                      subject_probs = NULL) {
@@ -413,6 +433,9 @@ morie_score_distribution <- function(match = 5, mismatch = -4,
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' d <- list("5" = 0.25, "-4" = 0.75)
+#' lambda_star(d)
 lambda_star <- function(dist, hi = 20, tol = 1e-14, max_iter = 300) {
   scores <- as.numeric(names(dist))
   mean <- sum(scores * unlist(dist))
@@ -444,6 +467,9 @@ lambda_star <- function(dist, hi = 20, tol = 1e-14, max_iter = 300) {
 #' @param scores See Usage.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gcd_span(V)
 gcd_span <- function(scores) {
   g <- 0
   for (s in scores) {
@@ -473,6 +499,8 @@ gcd_span <- function(scores) {
 #' @return A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C},
 #' \code{delta}, \code{terms}, \code{series}, \code{mean_score}, \code{distribution}.
 #' @export
+#' @examples
+#' morie_karlin_altschul()
 morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
                                   letter_probs = NULL, matrix = NULL,
                                   subject_probs = NULL, max_terms = 1000,
@@ -554,6 +582,9 @@ morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
 #' @param c Numeric; combined arithmetically in the body. Defaults to \code{1L}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' morie_blast_pvalue(score = 35, m = 1000, n = 1e6, lam = 0.192,
+#'                    K = 0.176)
 morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
   lam <- as.numeric(lam)
   K <- as.numeric(K)
@@ -589,6 +620,8 @@ morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
 #' @param quantiles A vector; indexed elementwise. Defaults to \code{c(0.2, 0.9)}.
 #' @return A list with \code{lam}, \code{K}, \code{scores}.
 #' @export
+#' @examples
+#' morie_estimate_gumbel(m = 5L, n = 5L, letter_freqs = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
                                   mismatch = -4, matrix = NULL,
                                   alphabet = "ACGT", n_sim = 200, seed = 0,

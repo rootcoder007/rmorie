@@ -80,6 +80,9 @@
 #' @param logits A numeric vector.
 #' @return A vector of the same length summing to one.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alfomg_softmax(V)
 morie_alfomg_softmax <- function(logits) {
   m <- logits[1]
   for (v in logits) if (v > m) m <- v
@@ -103,6 +106,9 @@ morie_alfomg_softmax <- function(logits) {
 #'   channel vectors.
 #' @return A list of lists of numeric vectors.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alfomg_opm(V)
 morie_alfomg_opm <- function(msa) {
   sh <- .alfomg_shape(msa)
   s <- sh[1]
@@ -145,6 +151,9 @@ morie_alfomg_opm <- function(msa) {
 #' @param w The learned map, or NULL.
 #' @return An r by r numeric matrix.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_alfomg_bias(D)
 morie_alfomg_bias <- function(pair, w = NULL) {
   r <- length(pair)
   out <- matrix(0, r, r)
@@ -175,6 +184,21 @@ morie_alfomg_bias <- function(pair, w = NULL) {
 #' @param gate A per-channel output multiplier, or NULL for ungated.
 #' @return A list with the attention weights and the attended output.
 #' @export
+#' @examples
+#' S <- 3L
+#' R <- 4L
+#' C <- 3L
+#' CZ <- 5L
+#' MSA <- lapply(0:(S - 1L), function(k) lapply(0:(R - 1L), function(i) vapply(0:(C -
+#'     1L), function(a) ((k * 37 + i * 11 + a * 5)%%17)/8 - 1, numeric(1))))
+#' PAIR <- lapply(0:(R - 1L), function(i) lapply(0:(R - 1L), function(j) vapply(0:(CZ -
+#'     1L), function(d) ((i * 13 + j * 7 + d * 3)%%11)/10 - 0.5,
+#'     numeric(1))))
+#' WB <- vapply(0:(CZ - 1L), function(d) ((d * 5 + 3)%%7)/6 - 0.5,
+#'     numeric(1))
+#' b1 <- morie_alfomg_bias(PAIR, WB)
+#' d <- 0
+#' morie_alfomg_row_attention(MSA, b1)
 morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
                                        gate = NULL) {
   sh <- .alfomg_shape(msa)
@@ -236,6 +260,8 @@ morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
 #' @return A list with the outer product mean, the attention bias and
 #'   weights, the updated alignment, and the pair representation.
 #' @export
+#' @examples
+#' morie_alfomg(msa = c(1, 2, 3, 4, 5, 6, 7, 8), pair = 5L)
 morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
                          scale = NULL, gate = NULL) {
   sh <- .alfomg_shape(msa)
@@ -310,6 +336,8 @@ morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_alfomg_cheatsheet()
 morie_alfomg_cheatsheet <- function() {
   paste0(
     "alfomg: OpenFold MSA-pair head. Outer product mean for ",

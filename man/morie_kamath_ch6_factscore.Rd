@@ -24,6 +24,6 @@ response is skipped, not scored 0.
 }
 \examples{
 x <- c(1, 2, 3, 4)
-morie_kamath_ch6_factscore(function(x) if (x == "p2") NULL else paste0("r", 
+morie_kamath_ch6_factscore(function(x) if (x == "p2") NULL else paste0("r",
     x), list("p1", "p2", "p3"), function(r) c("f1", "f2"), c("f1"))
 }

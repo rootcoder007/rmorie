@@ -25,6 +25,9 @@
 #' @param t0 Optional integer, number of leading terms to use.
 #' @return A single numeric.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_deepar_scale_factor(V)
 morie_deepar_scale_factor <- function(z, t0 = NULL) {
   zv <- as.numeric(z)
   n <- if (is.null(t0)) length(zv) else as.integer(t0)
@@ -41,6 +44,9 @@ morie_deepar_scale_factor <- function(z, t0 = NULL) {
 #' @param sigma Numeric standard deviation.
 #' @return Numeric log-density.
 #' @export
+#' @examples
+#' morie_deepar_gaussian_loglik(z = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   sigma = 0.5)
 morie_deepar_gaussian_loglik <- function(z, mu, sigma) {
   s <- max(as.numeric(sigma), 1e-12)
   z <- as.numeric(z)
@@ -58,6 +64,8 @@ morie_deepar_gaussian_loglik <- function(z, mu, sigma) {
 #' @param alpha Numeric overdispersion.
 #' @return Numeric log-density.
 #' @export
+#' @examples
+#' morie_deepar_negative_binomial_loglik(z = 5L, mu = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
 morie_deepar_negative_binomial_loglik <- function(z, mu, alpha) {
   zz <- as.numeric(z)
   m <- max(as.numeric(mu), 1e-12)
@@ -165,6 +173,9 @@ morie_deepar_negative_binomial_loglik <- function(z, mu, alpha) {
 #' @return A list with the fitted parameters and the same field
 #'   names as the Python arm.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_deepar_fit(V)
 morie_deepar_fit <- function(z, n_lags = 2L,
                              likelihood = "negative-binomial",
                              ridge = 1e-6) {
@@ -263,6 +274,10 @@ morie_deepar_sample <- function(fit, z_history, horizon, n_samples = 200L,
 #' @return A list with \code{mean}, \code{quantiles}, \code{paths},
 #'   \code{width} and the same metadata as the Python arm.
 #' @export
+#' @examples
+#' \donttest{
+#' morie_deepar_forecast(z = c(1, 2, 3, 4, 5, 6, 7, 8), horizon = 5L)
+#' }
 morie_deepar_forecast <- function(z, horizon, n_lags = 2L,
                                   likelihood = "negative-binomial",
                                   n_samples = 300L,

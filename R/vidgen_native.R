@@ -105,8 +105,7 @@
 #' @return A list with \code{out}, \code{W}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .vidgen_softmax_attend(X = X)
 #' res
 .vidgen_softmax_attend <- function(X, mask = NULL) {
@@ -154,6 +153,10 @@
 #' @param kernel Passed to \code{.vidgen_mat}.
 #' @return A list with \code{video}, \code{frames}, \code{note}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' S <- c("a", "b", "c")
+#' morie_vidgen_space_only_conv(D, S)
 morie_vidgen_space_only_conv <- function(video, kernel) {
   V <- lapply(video, .vidgen_mat)
   K <- .vidgen_mat(kernel)
@@ -197,6 +200,9 @@ morie_vidgen_space_only_conv <- function(video, kernel) {
 #' @param video See Usage.
 #' @return A list with \code{video}, \code{weights}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_vidgen_spatial_attention(V)
 morie_vidgen_spatial_attention <- function(video) {
   out <- list()
   weights <- list()
@@ -223,6 +229,9 @@ morie_vidgen_spatial_attention <- function(video) {
 #' @param identity A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{video}, \code{identity}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_vidgen_temporal_attention(V)
 morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
   V <- lapply(video, .vidgen_mat)
   F <- length(V)
@@ -288,6 +297,8 @@ morie_vidgen_as_image_model <- function(video, block) {
 #' @param spatial_positions Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{joint}, \code{factorised}, \code{ratio}, \code{note}.
 #' @export
+#' @examples
+#' morie_vidgen_attention_cost(frames = 5L, spatial_positions = 5L)
 morie_vidgen_attention_cost <- function(frames, spatial_positions) {
   F <- as.integer(frames)
   S <- as.integer(spatial_positions)
@@ -318,6 +329,10 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 #' @return A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight},
 #' \code{guided_frames}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' morie_vidgen_reconstruction_guidance(x_hat = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   observed = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+#'   index = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
                                                   weight = 2.0,
                                                   downsample = NULL) {
@@ -378,6 +393,8 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_vidgen_cheatsheet()
 morie_vidgen_cheatsheet <- function() {
   paste0(
     "vidgen: a 3D U-Net FACTORISED over space and time -- each 3x",

@@ -234,6 +234,8 @@ morie_survvae_PRIMITIVES <- .GHC_SURVVAE_PRIMITIVES
 #' @return Numeric scalar, the log density.
 #' @references Nagpal et al. (2021), Sec. III.
 #' @export
+#' @examples
+#' morie_survvae_log_pdf(t = 5L, shape = 5L, scale = TRUE)
 morie_survvae_log_pdf <- function(t, shape, scale, primitive = "weibull") {
   .ghc_survvae_check_primitive(primitive)
   t <- as.numeric(t)
@@ -269,6 +271,8 @@ morie_survvae_log_pdf <- function(t, shape, scale, primitive = "weibull") {
 #' @return Numeric scalar, the log survival.
 #' @references Nagpal et al. (2021), Sec. III.
 #' @export
+#' @examples
+#' morie_survvae_log_survival(t = 5L, shape = c(1, 2, 3, 4, 5, 6, 7, 8), scale = TRUE)
 morie_survvae_log_survival <- function(t, shape, scale,
                                        primitive = "weibull") {
   .ghc_survvae_check_primitive(primitive)
@@ -297,6 +301,9 @@ morie_survvae_log_survival <- function(t, shape, scale,
 #' @return Numeric vector of length \code{K}, sums to one.
 #' @references Nagpal et al. (2021), Sec. III.
 #' @export
+#' @examples
+#' morie_survvae_gates(x = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   bias = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_survvae_gates <- function(x, W, bias) {
   K <- length(bias)
   z <- numeric(K)
@@ -332,6 +339,16 @@ morie_survvae_gates <- function(x, W, bias) {
 #'   \code{censored}, \code{prior_penalty}, \code{alpha}.
 #' @references Nagpal et al. (2021), Sec. III-C.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- lapply(1:20, function(i) rnorm(3))
+#' tt <- rexp(20, 0.1)
+#' ev <- rbinom(20, 1, 0.7)
+#' W <- matrix(rnorm(9, 0, 0.3), 3, 3)
+#' bias <- rep(0, 3)
+#' r <- morie_survvae_elbo(X, tt, ev, W, bias, shapes = c(1, 1.5, 2),
+#'                         scales = c(5, 10, 15))
+#' str(r, max.level = 1)
 morie_survvae_elbo <- function(X, y_lower, events, W, bias, shapes, scales,
                                 primitive = "weibull", alpha = 1,
                                 prior = 0) {
@@ -374,6 +391,16 @@ morie_survvae_elbo <- function(X, y_lower, events, W, bias, shapes, scales,
 #'   \code{censored}.
 #' @references Nagpal et al. (2021), Sec. III-C.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- lapply(1:20, function(i) rnorm(3))
+#' tt <- rexp(20, 0.1)
+#' ev <- rbinom(20, 1, 0.7)
+#' W <- matrix(rnorm(9, 0, 0.3), 3, 3)
+#' bias <- rep(0, 3)
+#' r <- morie_survvae_exact_loglik(X, tt, ev, W, bias, shapes = c(1, 1.5, 2),
+#'                                 scales = c(5, 10, 15))
+#' str(r, max.level = 1)
 morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
                                         shapes, scales,
                                         primitive = "weibull",
@@ -431,6 +458,11 @@ morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
 #'   \code{prior}, \code{times}, \code{events}, \code{method}.
 #' @references Nagpal et al. (2021), Sec. III and III-C.
 #' @export
+#' @examples
+#' \donttest{
+#' morie_survvae(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   events = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' }
 morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
                           alpha = 1, prior = 0, seed = 0,
                           restarts = 4L) {
@@ -525,6 +557,15 @@ morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
 #' @return Named list with \code{time}, \code{survival}, \code{gates}.
 #' @references Nagpal et al. (2021), Sec. III.
 #' @export
+#' @examples
+#' \donttest{
+#' set.seed(2)
+#' X <- lapply(1:40, function(i) rnorm(2))
+#' tt <- rexp(40, 0.1)
+#' ev <- rbinom(40, 1, 0.7)
+#' fit <- morie_survvae(X, tt, ev, K = 2L, restarts = 2L)
+#' morie_survvae_predict_survival(fit, rnorm(2), times = c(5, 10, 20))
+#' }
 morie_survvae_predict_survival <- function(fit_result, x, times) {
   g <- morie_survvae_gates(x, fit_result$W, fit_result$bias)
   K <- fit_result$K
@@ -554,6 +595,10 @@ morie_survvae_predict_survival <- function(fit_result, x, times) {
 #' @return Numeric vector of risks, one per row of \code{X}.
 #' @references Nagpal et al. (2021), Sec. III.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_survvae_risk_score(D, V)
 morie_survvae_risk_score <- function(fit_result, X, horizon = NULL) {
   if (is.null(horizon)) {
     sorted_times <- sort(fit_result$times)
@@ -580,6 +625,15 @@ morie_survvae_risk_score <- function(fit_result, X, horizon = NULL) {
 #'   K. L. & Rosati, R. A. (1982). Evaluating the yield of medical
 #'   tests. JAMA, 247(18), 2543-2546.
 #' @export
+#' @examples
+#' \donttest{
+#' set.seed(2)
+#' X <- lapply(1:40, function(i) rnorm(2))
+#' tt <- rexp(40, 0.1)
+#' ev <- rbinom(40, 1, 0.7)
+#' fit <- morie_survvae(X, tt, ev, K = 2L, restarts = 2L)
+#' morie_survvae_concordance(fit, X, tt, ev)
+#' }
 morie_survvae_concordance <- function(fit_result, X, times, events,
                                        horizon = NULL) {
   .ghc_c_index(times, events,
@@ -602,6 +656,11 @@ morie_survvae_concordance <- function(fit_result, X, times, events,
 #'   \code{method}.
 #' @references Nagpal et al. (2021), Sec. III-D.
 #' @export
+#' @examples
+#' \donttest{
+#' morie_survvae_fit_competing(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   causes = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' }
 morie_survvae_fit_competing <- function(X, times, causes, K = 3L,
                                          primitive = "weibull",
                                          alpha = 1, prior = 0,
@@ -628,6 +687,8 @@ morie_survvae_fit_competing <- function(X, times, causes, K = 3L,
 #'
 #' @return Character scalar.
 #' @export
+#' @examples
+#' morie_survvae_cheatsheet()
 morie_survvae_cheatsheet <- function() {
   paste(paste0(
     "survvae: S(t|x) = sum_k g_k(x) S_k(t), gates a softmax and t",

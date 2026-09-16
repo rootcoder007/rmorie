@@ -118,6 +118,10 @@
 #' @references Neal, R. M. (2003). Slice sampling. Annals of Statistics
 #'   31(3), 705-767.
 #' @export
+#' @examples
+#' e <- rmorie:::.ghc_rng(1)
+#' logf <- function(x) -0.5 * x^2
+#' morie_slice_sample_1d(logf, x0 = 0.5, e)
 morie_slice_sample_1d <- function(logf, x0, e, w = 1.0, max_steps = 50L,
                                   lower = -Inf, upper = Inf) {
   .baygsl_slice_1d(logf, as.numeric(x0), e, w = as.numeric(w),
@@ -143,6 +147,10 @@ morie_slice_sample_1d <- function(logf, x0, e, w = 1.0, max_steps = 50L,
 #'   \code{evals_per_draw}.
 #' @references Neal, R. M. (2003). Damien, P. et al. (1999).
 #' @export
+#' @examples
+#' r <- morie_slice_chain(function(x) -0.5 * x^2, x0 = 0, n = 400L,
+#'                        seed = 1)
+#' str(r, max.level = 1)
 morie_slice_chain <- function(logf, x0, n = 2000L, w = 1.0, burn = 0L,
                               seed = 1L, lower = -Inf, upper = Inf,
                               thin = 1L) {
@@ -183,6 +191,9 @@ morie_slice_chain <- function(logf, x0, n = 2000L, w = 1.0, burn = 0L,
 #' @param x Numeric vector of draws.
 #' @return Estimated ESS.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ess_ipseq(V)
 morie_ess_ipseq <- function(x) {
   v <- as.numeric(x)
   n <- length(v)
@@ -226,6 +237,12 @@ morie_ess_ipseq <- function(x) {
 #'   \code{method}.
 #' @references Damien, P., Wakefield, J. & Walker, S. (1999).
 #' @export
+#' @examples
+#' lcs <- list(
+#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2,
+#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2)
+#' r <- morie_gibbs_slice(lcs, x0 = c(0, 0), n = 300L, seed = 1)
+#' str(r, max.level = 1)
 morie_gibbs_slice <- function(log_conditionals, x0, n = 2000L, w = NULL,
                               burn = 0L, seed = 1L, bounds = NULL) {
   p <- length(x0)
@@ -300,6 +317,12 @@ morie_gibbs_slice <- function(log_conditionals, x0, n = 2000L, w = NULL,
 #' @inheritParams morie_gibbs_slice
 #' @return Same payload as \code{morie_gibbs_slice}.
 #' @export
+#' @examples
+#' lcs <- list(
+#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2,
+#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2)
+#' r <- morie_hybrid_gibbs_slice(lcs, x0 = c(0, 0), n = 300L, seed = 1)
+#' str(r, max.level = 1)
 morie_hybrid_gibbs_slice <- function(log_conditionals, x0, n = 2000L, ...) {
   morie_gibbs_slice(log_conditionals, x0, n, ...)
 }

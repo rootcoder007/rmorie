@@ -58,6 +58,9 @@
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{states}, \code{steps}, \code{depth}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sequential_scan(V)
 sequential_scan <- function(pairs, x0 = 0.0) {
   # The recurrence as written: L steps, no parallelism.
   n <- length(pairs)
@@ -122,6 +125,9 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{states}, \code{prefix}, \code{depth}, \code{work}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' parallel_scan(V)
 parallel_scan <- function(pairs, x0 = 0.0) {
   # Blelloch scan over the affine composition.
   # Same states as sequential_scan, O(log L) depth.
@@ -184,6 +190,8 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{left}, \code{right}, \code{deviation}, \code{associative}, \code{note}.
 #' @export
+#' @examples
+#' check_associativity(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
 check_associativity <- function(a, b, c, tol = 1e-12) {
   # Test (a o b) o c == a o (b o c) directly.
   left <- .ssmpar_compose(.ssmpar_compose(a, b), c)
@@ -205,6 +213,8 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 #' @return A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth},
 #' \code{work}, \code{speedup}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' scan_depth(length = 5L)
 scan_depth <- function(length) {
   # Sequential against parallel depth.
   n <- as.integer(length)

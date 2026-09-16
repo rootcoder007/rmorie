@@ -32,6 +32,10 @@
 #' @param boxes Coerced to list by the body, with \code{as.list}.
 #' @return A list with \code{text}, \code{n_captions}, \code{n_boxes}, \code{note}.
 #' @export
+#' @examples
+#' r <- symbolic_representation(captions = c("a cat on a mat"),
+#'                              boxes = list(list("cat", 1, 2, 10, 8)))
+#' is.list(r)
 symbolic_representation <- function(captions, boxes) {
   caps <- vapply(as.list(captions), as.character, character(1))
   bx <- as.list(boxes)
@@ -65,6 +69,9 @@ symbolic_representation <- function(captions, boxes) {
 #' @param kind Carried through into a list the body builds. Defaults to \code{"conversation"}.
 #' @return A list with \code{prompt}, \code{kind}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' instruction_prompt(D)
 instruction_prompt <- function(symbolic, kind = "conversation") {
   if (!(kind %in% .LLAVX_KINDS))
     stop("llavx: kind must be one of ",
@@ -90,6 +97,9 @@ instruction_prompt <- function(symbolic, kind = "conversation") {
 #' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' project_patches(V, V)
 project_patches <- function(patch_features, W, b = NULL) {
   Fmat <- lapply(patch_features, function(r) as.numeric(r))
   d_in <- length(Fmat[[1L]])
@@ -119,6 +129,9 @@ project_patches <- function(patch_features, W, b = NULL) {
 #' @return A list with \code{estimate}, \code{sequence}, \code{n_visual}, \code{n_text},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' build_sequence(V, V)
 build_sequence <- function(visual_tokens, text_embeddings) {
   V <- lapply(visual_tokens, function(r) as.numeric(r))
   T <- lapply(text_embeddings, function(r) as.numeric(r))
@@ -145,6 +158,9 @@ llava_visual_chat <- build_sequence
 #' @param stage Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{stage}, \code{trainable}, \code{frozen}, \code{data}, \code{note}.
 #' @export
+#' @examples
+#' s <- training_stage(1)
+#' s$stage == 1L
 training_stage <- function(stage) {
   s <- as.integer(stage)
   if (!(s %in% c(1L, 2L)))
@@ -194,6 +210,9 @@ training_stage <- function(stage) {
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export
+#' @examples
+#' r <- morie_llavx("training_stage", 2)
+#' r$stage == 2L
 morie_llavx <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("llavx: op must be one of symbolic_representation, instruction_prompt, project_patches, build_sequence, training_stage, cheatsheet")

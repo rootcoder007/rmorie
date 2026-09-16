@@ -19,6 +19,6 @@ A list with \code{j}, \code{trace_between}, \code{trace_within}, \code{s_within}
 }
 \keyword{internal}
 \examples{
-SepIndex(matrix(c(0, 0, 0.1, 0, 1, 0, 1.1, 0), ncol = 2, byrow = TRUE), 
+SepIndex(matrix(c(0, 0, 0.1, 0, 1, 0, 1.1, 0), ncol = 2, byrow = TRUE),
     c(0, 0, 1, 1))
 }

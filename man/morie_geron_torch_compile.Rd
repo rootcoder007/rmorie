@@ -26,7 +26,7 @@ mode = "max-autotune" costs the fused product via the matrix-chain DP.
 A2 <- diag(2) * 2
 B2 <- diag(2) * 3
 C2 <- diag(2) * 5
-morie_geron_torch_compile(list(list(kind = "linear", param = A2), 
-    list(kind = "linear", param = B2), list(kind = "linear", 
+morie_geron_torch_compile(list(list(kind = "linear", param = A2),
+    list(kind = "linear", param = B2), list(kind = "linear",
         param = C2)), example_inputs = matrix(c(1, 1), 1, 2))
 }

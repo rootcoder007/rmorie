@@ -45,6 +45,11 @@
 #'   using exponential smoothing. Monash University Department of
 #'   Econometrics and Business Statistics Working Paper 15/10.
 #' @export
+#' @examples
+#' \donttest{
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_bats(V)
+#' }
 morie_bats <- function(y, seasonal_periods = numeric(0),
                        harmonics = NULL,
                        use_box_cox = NULL, use_trend = NULL,
@@ -134,6 +139,8 @@ morie_bats <- function(y, seasonal_periods = numeric(0),
 #' @param omega Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' box_cox(y = c(1, 2, 3, 4, 5, 6, 7, 8), omega = 5L)
 box_cox <- function(y, omega) {
   y <- as.numeric(y)
   if (any(y <= 0))
@@ -152,6 +159,8 @@ box_cox <- function(y, omega) {
 #' @param omega Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' inv_box_cox(z = c(1, 2, 3, 4, 5, 6, 7, 8), omega = 5L)
 inv_box_cox <- function(z, omega) {
   z <- as.numeric(z)
   if (omega == 0) return(exp(z))
@@ -172,6 +181,8 @@ inv_box_cox <- function(z, omega) {
 #' @param k Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' seasonal_harmonics(m = 5L)
 seasonal_harmonics <- function(m, k = NULL) {
   m <- as.numeric(m)
   if (m <= 1) stop("bats: a seasonal period must exceed 1")
@@ -209,6 +220,8 @@ seasonal_harmonics <- function(m, k = NULL) {
 #' @param q Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return The value of \code{structure}.
 #' @export
+#' @examples
+#' BatsSpec()
 BatsSpec <- function(periods = numeric(0), harmonics = NULL,
                      use_box_cox = FALSE, use_trend = TRUE,
                      damped = FALSE, p = 0L, q = 0L) {
@@ -257,6 +270,9 @@ BatsSpec <- function(periods = numeric(0), harmonics = NULL,
 #' \code{$q}, \code{$use_trend} from it.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' spec <- BatsSpec(periods = c(4), use_trend = TRUE)
+#' n_states(spec)
 n_states <- function(spec) {
   n <- 1L + if (spec$use_trend) 1L else 0L
   if (!is.null(spec$harmonics))
@@ -276,6 +292,9 @@ n_states <- function(spec) {
 #' \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.
 #' @return The value of \code{n}, as built in the body.
 #' @export
+#' @examples
+#' spec <- BatsSpec(periods = c(4), use_trend = TRUE)
+#' n_free(spec)
 n_free <- function(spec) {
   n <- 1L
   if (spec$use_trend) {
@@ -300,6 +319,9 @@ n_free <- function(spec) {
 #' \code{$periods}, \code{$q}, \code{$use_box_cox} from it.
 #' @return A character value.
 #' @export
+#' @examples
+#' spec <- BatsSpec(periods = c(4), use_trend = TRUE)
+#' label(spec)
 label <- function(spec) {
   head <- if (!is.null(spec$harmonics)) "TBATS" else "BATS"
   om <- if (spec$use_box_cox) "omega" else "1"
@@ -376,6 +398,13 @@ label <- function(spec) {
 #' @param long_run_b Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A list with \code{resid}, \code{fitted}, \code{carry}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' z <- as.numeric(arima.sim(list(ar = 0.5), 40)) + 10
+#' spec <- BatsSpec()
+#' theta <- rep(0.1, n_free(spec))
+#' r <- bats_filter(z, spec, theta, x0 = rep(0, n_states(spec)))
+#' str(r, max.level = 1)
 bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   u <- .unpack(spec, theta)
   alpha <- u$alpha
@@ -482,6 +511,12 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
 #' @param long_run_b Passed to \code{bats_filter}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' z <- as.numeric(arima.sim(list(ar = 0.5), 40)) + 10
+#' spec <- BatsSpec()
+#' theta <- rep(0.1, n_free(spec))
+#' fit_seed_state(z, spec, theta)
 fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
   n <- length(z)
   ns <- n_states(spec)
@@ -540,6 +575,10 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
 #' @param theta Passed to \code{bats_filter}.
 #' @return A list with \code{w}, \code{fmat}, \code{g}.
 #' @export
+#' @examples
+#' spec <- BatsSpec()
+#' theta <- rep(0.1, n_free(spec))
+#' state_matrices(spec, theta)
 state_matrices <- function(spec, theta) {
   ns <- n_states(spec)
   zero <- rep(0, ns)
@@ -573,6 +612,10 @@ state_matrices <- function(spec, theta) {
 #' @param tol Passed to \code{>=}. Defaults to \code{1e-06}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' spec <- BatsSpec()
+#' theta <- rep(0.1, n_free(spec))
+#' spectral_radius(spec, theta)
 spectral_radius <- function(spec, theta, tol = 1e-6) {
   sm <- state_matrices(spec, theta)
   ns <- length(sm$w)
@@ -592,6 +635,10 @@ spectral_radius <- function(spec, theta, tol = 1e-6) {
 #' @param theta Passed to \code{state_matrices}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' spec <- BatsSpec()
+#' theta <- rep(0.1, n_free(spec))
+#' all_eigenvalues(spec, theta)
 all_eigenvalues <- function(spec, theta) {
   sm <- state_matrices(spec, theta)
   ns <- length(sm$w)
@@ -611,6 +658,10 @@ all_eigenvalues <- function(spec, theta) {
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' spec <- BatsSpec()
+#' theta <- rep(0.1, n_free(spec))
+#' is_forecastable(spec, theta)
 is_forecastable <- function(spec, theta, tol = 1e-8) {
   spectral_radius(spec, theta) < 1 - tol
 }
@@ -626,6 +677,8 @@ is_forecastable <- function(spec, theta, tol = 1e-8) {
 #' @param omega Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' concentrated_loglik(y = c(1, 2, 3, 4, 5, 6, 7, 8), resid = c(1, 2, 3, 4, 5, 6, 7, 8), omega = 5L)
 concentrated_loglik <- function(y, resid, omega) {
   n <- length(resid)
   sse <- sum(resid^2)

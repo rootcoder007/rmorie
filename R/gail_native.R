@@ -67,6 +67,9 @@
 #' @return Named numeric vector of pair frequencies.
 #' @references Ho & Ermon (2016) arXiv:1606.03476.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gail_occupancy_measure(V, V)
 gail_occupancy_measure <- function(states, actions) {
   pr <- .gail_pairs(states, actions, "occupancy")
   counts <- list()
@@ -122,6 +125,9 @@ gail_occupancy_measure <- function(states, actions) {
 #' @references Ho & Ermon (2016) arXiv:1606.03476, eqs. 16-18 and
 #'   Algorithm 1.
 #' @export
+#' @examples
+#' gail(expert_states = c(1, 2, 3, 4, 5, 6, 7, 8), expert_actions = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   policy_states = c(1, 2, 3, 4, 5, 6, 7, 8), policy_actions = c(1, 2, 3, 4, 5, 6, 7, 8))
 gail <- function(expert_states, expert_actions,
                  policy_states, policy_actions,
                  features = NULL, lr = 0.1, epochs = 200,

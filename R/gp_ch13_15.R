@@ -66,6 +66,8 @@ morie_conv2d <- function(image, kernel, bias = 0, stride = 1,
 #' @param period Fourier period; defaults to the range of `t`
 #' @return numeric matrix with one row per grid point
 #' @noRd
+#' @examples
+#' rmorie:::morie_fda_basis(t = c(1, 2, 3, 4, 5, 6, 7, 8), n_basis = 5L)
 morie_fda_basis <- function(t, n_basis, kind = "fourier",
                             period = NULL) {
   # the basis expansion of eq. (14.5): x(t) = sum_l c_l phi_l(t)
@@ -134,6 +136,9 @@ morie_fda_basis <- function(t, n_basis, kind = "fourier",
 #' @param x_t observed curve values on the same grid
 #' @return numeric vector of basis coefficients
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::morie_fda_coefficients(V, V)
 morie_fda_coefficients <- function(Psi, x_t) {
   # eq. (14.6): c-hat = (Psi'Psi)^-1 Psi'x, least squares onto the basis
   P <- as.matrix(Psi)
@@ -150,6 +155,8 @@ morie_fda_coefficients <- function(Psi, x_t) {
 #' @param kind basis kind, "fourier" or "poly"
 #' @return an L1 x L2 numeric matrix
 #' @noRd
+#' @examples
+#' rmorie:::morie_fda_inner_product(t = seq(0, 1, length.out = 50), L1 = 2, L2 = 3)
 morie_fda_inner_product <- function(t, L1, L2, kind = "fourier") {
   # eq. (14.7): Q_{jl} = integral phi_j(t) psi_l(t) dt, by the
   # trapezoid rule over the observed grid
@@ -400,6 +407,9 @@ morie_zap_mean_variance <- function(theta, mu) {
 # ---- marginal structural models (Robins, Hernan & Brumback 2000) ----
 
 #' @noRd
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' rmorie:::morie_msm_design(M)
 morie_msm_design <- function(treatment_history, extra = NULL) {
   A <- if (is.matrix(treatment_history)) {
     treatment_history
@@ -413,6 +423,9 @@ morie_msm_design <- function(treatment_history, extra = NULL) {
 }
 
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::morie_msm_weighted_glm(V, V)
 morie_msm_weighted_glm <- function(y, X, weights = NULL,
                                    family = "gaussian", offset = NULL,
                                    n_iter = 60, tol = 1e-10) {
@@ -467,6 +480,9 @@ morie_msm_weighted_glm <- function(y, X, weights = NULL,
 }
 
 #' @noRd
+#' @examples
+#' rmorie:::morie_msm_cox_weighted(time = 5L, event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   treatment_history = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 morie_msm_cox_weighted <- function(time, event, treatment_history,
                                    weights = NULL, n_iter = 60,
                                    tol = 1e-10) {
@@ -502,6 +518,9 @@ morie_msm_cox_weighted <- function(time, event, treatment_history,
 }
 
 #' @noRd
+#' @examples
+#' rmorie:::morie_msm_gmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   Z = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_msm_gmm <- function(y, X, Z, weights = NULL) {
   # E[Z (Y - g(a-bar; beta))] = 0 with the IPT weights inside the
   # moment condition (Hansen 1982; Robins 1999)

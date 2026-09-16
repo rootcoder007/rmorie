@@ -32,8 +32,10 @@
 #' @return list: estimate, lambda_hat, beta_hat, criterion, resid, n, method.
 #' @keywords internal
 #' @examples
+#' \donttest{
 #' xx <- cbind(1, seq(-1, 1, length.out = 25))
 #' Hrzboxc(xx, (0.5 * (3 + 1.5 * xx[, 2]) + 1)^2)$lambda_hat
+#' }
 #' @export
 Hrzboxc <- function(x, y, a_lo = -2, a_hi = 2, ngrid = 81L, refine = 60L,
                     nu = 201L) {

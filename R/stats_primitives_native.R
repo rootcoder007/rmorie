@@ -29,7 +29,9 @@
 #'   \emph{Communications for Statistical Applications and Methods},
 #'   22(6), 665-674.
 #' @examples
-#' morie_partial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+#' if (requireNamespace("ppcor", quietly = TRUE)) {
+#'   morie_partial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+#' }
 #' @export
 morie_partial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
@@ -62,7 +64,9 @@ morie_partial_cor <- function(data, method = "pearson") {
 #' @return A one-row data frame: \code{estimate}, \code{p.value},
 #'   \code{statistic}, \code{n}, \code{gp}, \code{Method}.
 #' @examples
-#' morie_partial_cor_test(mtcars$mpg, mtcars$wt, mtcars$disp)
+#' if (requireNamespace("ppcor", quietly = TRUE)) {
+#'   morie_partial_cor_test(mtcars$mpg, mtcars$wt, mtcars$disp)
+#' }
 #' @export
 morie_partial_cor_test <- function(x, y, z, method = "pearson") {
   z <- as.matrix(z)
@@ -86,7 +90,9 @@ morie_partial_cor_test <- function(x, y, z, method = "pearson") {
 #' @return A list mirroring \code{\link{morie_partial_cor}} with the
 #'   semi-partial coefficients in \code{estimate}.
 #' @examples
-#' morie_semipartial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+#' if (requireNamespace("randtests", quietly = TRUE)) {
+#'   morie_semipartial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+#' }
 #' @export
 morie_semipartial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
@@ -129,7 +135,9 @@ morie_semipartial_cor <- function(data, method = "pearson") {
 #'   samples are from the same population. \emph{Annals of
 #'   Mathematical Statistics}, 11(2), 147-162.
 #' @examples
-#' set.seed(1); morie_runs_test(rnorm(50))$p.value
+#' if (requireNamespace("randtests", quietly = TRUE)) {
+#'   set.seed(1); morie_runs_test(rnorm(50))$p.value
+#' }
 #' @export
 morie_runs_test <- function(x, threshold = stats::median(x),
                             alternative = "two.sided") {
@@ -161,7 +169,9 @@ morie_runs_test <- function(x, threshold = stats::median(x),
 #' @return A list with \code{statistic} (z), \code{p.value},
 #'   \code{tp} (turning-point count), \code{method}.
 #' @examples
-#' set.seed(1); morie_turning_point_test(rnorm(60))$p.value
+#' if (requireNamespace("randtests", quietly = TRUE)) {
+#'   set.seed(1); morie_turning_point_test(rnorm(60))$p.value
+#' }
 #' @export
 morie_turning_point_test <- function(x) {
   n <- length(x)
@@ -184,10 +194,12 @@ morie_turning_point_test <- function(x) {
 #' @return A list with \code{statistic}, \code{p.value}, \code{ds}
 #'   (count of positive differences), \code{method}.
 #' @examples
-#' set.seed(4)
-#' x <- rnorm(80)
-#' res <- morie_difference_sign_test(x)
-#' res$p.value
+#' if (requireNamespace("randtests", quietly = TRUE)) {
+#'   set.seed(4)
+#'   x <- rnorm(80)
+#'   res <- morie_difference_sign_test(x)
+#'   res$p.value
+#' }
 #' @export
 morie_difference_sign_test <- function(x) {
   d <- diff(x)

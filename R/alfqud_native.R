@@ -175,6 +175,16 @@ morie_alfqud_run <- function(program, x, n_reg) {
 #' @param n_reg How many registers.
 #' @return An integer count.
 #' @export
+#' @examples
+#' IN <- list(c(2, 1), c(1, 2), c(5, 3))
+#' TGT <- lapply(IN, sort)
+#' ACTS <- list(list("mov", list("M", 0), list("R", 0)), list("cmp",
+#'     list("M", 1), list("M", 0)), list("cmovl", list("M", 1),
+#'     list("M", 0)), list("cmovl", list("R", 0), list("M", 1)),
+#'     list("mov", list("M", 1), list("R", 0)), list("cmovg", list("M",
+#'         0), list("M", 1)))
+#' SOLN <- ACTS[1:4]
+#' morie_alfqud_correctness(SOLN, IN, TGT, 1L)
 morie_alfqud_correctness <- function(program, inputs, targets, n_reg) {
   got <- 0L
   for (q in seq_along(inputs)) {
@@ -196,6 +206,8 @@ morie_alfqud_correctness <- function(program, inputs, targets, n_reg) {
 #' @param n_reg How many registers.
 #' @return A list of instructions.
 #' @export
+#' @examples
+#' morie_alfqud_actions(n_mem = c(1, 2, 3, 4, 5, 6, 7, 8), n_reg = 5L)
 morie_alfqud_actions <- function(n_mem, n_reg) {
   locs <- list()
   for (i in 0:(as.integer(n_mem) - 1L)) {
@@ -225,6 +237,14 @@ morie_alfqud_actions <- function(n_mem, n_reg) {
 #' @param program A list of instructions.
 #' @return A character scalar.
 #' @export
+#' @examples
+#' ACTS <- list(list("mov", list("M", 0), list("R", 0)), list("cmp",
+#'     list("M", 1), list("M", 0)), list("cmovl", list("M", 1),
+#'     list("M", 0)), list("cmovl", list("R", 0), list("M", 1)),
+#'     list("mov", list("M", 1), list("R", 0)), list("cmovg", list("M",
+#'         0), list("M", 1)))
+#' SOLN <- ACTS[1:4]
+#' morie_alfqud_text(SOLN)
 morie_alfqud_text <- function(program) {
   if (!length(program)) {
     return("")
@@ -421,6 +441,9 @@ morie_alfqud_text <- function(program) {
 #' @return A list with the best program, its score, its correctness, and
 #'   how much of the space was looked at.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alfqud(V)
 morie_alfqud <- function(target, action_space = NULL, reward_fn = NULL,
                          n_reg = 2L, max_len = 3L, latency_weight = 0,
                          search = "mcts", n_sim = 400L, c_puct = 1.25,
@@ -479,6 +502,8 @@ morie_alfqud <- function(target, action_space = NULL, reward_fn = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_alfqud_cheatsheet()
 morie_alfqud_cheatsheet <- function() {
   paste0(
     "alfqud: AlphaDev AssemblyGame. Programs of mov/cmp/cmovl/",

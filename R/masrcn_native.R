@@ -85,6 +85,10 @@
 #' @return A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift},
 #' \code{caveat}.
 #' @export
+#' @examples
+#' features <- matrix(as.numeric(1:36), 6, 6)
+#' p <- roi_pool(features, box = c(0, 0, 4, 4), out_size = 2L)
+#' is.list(p)
 roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
   F <- .masrcn_mat(features)
   y0 <- as.numeric(box[1L]) / as.numeric(stride)
@@ -138,6 +142,9 @@ roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
 #' @param samples Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @return A list with \code{pooled}, \code{exact_box}, \code{samples_per_bin}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' roi_align(V, V)
 roi_align <- function(features, box, out_size = 2L, stride = 1.0,
                       samples = 2L) {
   F <- .masrcn_mat(features)
@@ -185,6 +192,10 @@ roi_align <- function(features, box, out_size = 2L, stride = 1.0,
 #' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{feature_shift}, \code{input_pixel_shift}, \code{stride}, \code{note}.
 #' @export
+#' @examples
+#' features <- matrix(as.numeric(1:36), 6, 6)
+#' a <- alignment_error(features, box = c(0.3, 0.3, 4.7, 4.7))
+#' is.list(a)
 alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
   p <- roi_pool(features, box, out_size, stride)
   shift <- p$quantisation_shift
@@ -206,6 +217,9 @@ alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
 #' @param decoupled A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{loss}, \code{kind}, \code{caveat}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' mask_loss(V, V)
 mask_loss <- function(logits, target, decoupled = TRUE) {
   L <- .masrcn_mat(logits)
   T <- .masrcn_mat(target)
@@ -251,6 +265,9 @@ mask_loss <- function(logits, target, decoupled = TRUE) {
 #' @param l_mask Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{total}, \code{cls}, \code{box}, \code{mask}, \code{note}.
 #' @export
+#' @examples
+#' multitask_loss(l_cls = c(1, 2, 3, 4, 5, 6, 7, 8), l_box = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   l_mask = c(1, 2, 3, 4, 5, 6, 7, 8))
 multitask_loss <- function(l_cls, l_box, l_mask) {
   list(total = as.numeric(l_cls) + as.numeric(l_box) + as.numeric(l_mask),
        cls = as.numeric(l_cls), box = as.numeric(l_box),
@@ -295,6 +312,11 @@ mask_rcnn_segmentation <- roi_align
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export
+#' @examples
+#' features <- matrix(as.numeric(1:36), 6, 6)
+#' r <- morie_masrcn("roi_pool", features, box = c(0, 0, 4, 4),
+#'                   out_size = 2L)
+#' is.list(r)
 morie_masrcn <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("masrcn: op must be one of roi_pool, roi_align, alignment_error, mask_loss, multitask_loss, cheatsheet")

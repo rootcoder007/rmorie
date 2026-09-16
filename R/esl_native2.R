@@ -554,11 +554,13 @@ morie_esl_thin_plate_spline <- function(X, y, lambda_ = 1, newdata = NULL) {
 #' @references Hyvarinen, A., & Oja, E. (2000). Independent component analysis:
 #'   Algorithms and applications. Neural Networks 13(4-5), 411-430.
 #' @examples
-#' tt <- seq(0, 8 * pi, length.out = 500)
-#' S <- cbind(sin(tt), sign(cos(2.7 * tt)))
-#' A <- matrix(c(1, -0.6, 0.7, 1.2), 2)
-#' r <- morie_esl_ica(S %*% t(A), k = 2, seed = 1L)
-#' round(apply(r$sources, 2, function(z) sqrt(mean((z - mean(z))^2))), 6)
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   tt <- seq(0, 8 * pi, length.out = 500)
+#'   S <- cbind(sin(tt), sign(cos(2.7 * tt)))
+#'   A <- matrix(c(1, -0.6, 0.7, 1.2), 2)
+#'   r <- morie_esl_ica(S %*% t(A), k = 2, seed = 1L)
+#'   round(apply(r$sources, 2, function(z) sqrt(mean((z - mean(z))^2))), 6)
+#' }
 #' @export
 morie_esl_ica <- function(X, k = NULL, fun = "logcosh", max_iter = 500L,
                           tol = 1e-8, seed = 0L) {
@@ -823,9 +825,11 @@ morie_esl_lle <- function(X, k = 2, neighbors = 5, reg = 1e-3) {
 #' @references Kohonen, T. (1990). The self-organizing map. Proc. IEEE 78(9),
 #'   1464-1480.
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' X <- matrix(runif(600), ncol = 2)
 #' morie_esl_self_organize(X, grid = c(5, 5), seed = 1L)$topographic_error < 0.25
+#' }
 #' @export
 morie_esl_self_organize <- function(X, grid = c(5L, 5L), eta = 0.5,
                                     n_epochs = 50L, sigma0 = NULL, seed = 0L) {

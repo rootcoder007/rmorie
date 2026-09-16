@@ -150,9 +150,9 @@
 #' @export
 #' @examples
 #' fml <- y ~ x
-#' df <- data.frame(x = c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), y = c(2.9, 5.1, 6.8,
-#' 9.4, 11.2, 13.1, 15.0, 17.6), g = c('a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'),
-#' stringsAsFactors = FALSE)
+#' df <- data.frame(x = c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9),
+#'   y = c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6),
+#'   g = c('a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'), stringsAsFactors = FALSE)
 #' res <- .morie_coin_parse(formula = fml, data = df)
 #' res
 .morie_coin_parse <- function(formula, data) {
@@ -227,9 +227,11 @@
 #' @param distribution \code{"asymptotic"} (only; kept for parity).
 #' @return A list with \code{statistic} (standardized) and \code{p.value}.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
-#' str(morie_indep_test(y ~ g, df), max.level = 1)
+#' if (requireNamespace("coin", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#'   str(morie_indep_test(y ~ g, df), max.level = 1)
+#' }
 #' @export
 morie_indep_test <- function(formula, data,
                              alternative = "two.sided",
@@ -262,9 +264,11 @@ morie_indep_test <- function(formula, data,
 #' @param distribution \code{"asymptotic"} (default) or \code{"exact"}.
 #' @return A list with \code{statistic} (standardized Z) and \code{p.value}.
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
-#' str(morie_wilcox_test(y ~ g, df), max.level = 1)
+#' if (requireNamespace("coin", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(y = rnorm(40), g = factor(rep(c("a", "b"), 20)))
+#'   str(morie_wilcox_test(y ~ g, df), max.level = 1)
+#' }
 #' @export
 morie_wilcox_test <- function(formula, data,
                               alternative = "two.sided",

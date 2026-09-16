@@ -151,6 +151,14 @@
 #'   basic countermeasures. In CCS '15 (pp. 1322-1333).
 #'   doi:10.1145/2810103.2813677.
 #' @export
+#' @examples
+#' tree <- list(feature = 0L, branches = list(
+#'   "0" = list(label = 0L, count = 30),
+#'   "1" = list(label = 1L, count = 20)))
+#' priors <- list("0" = list("0" = 0.6, "1" = 0.4))
+#' r <- morie_attrInf(tree, targets = list(list(known = list(), y = 1L)),
+#'                    priors = priors, mode = "whitebox")
+#' str(r, max.level = 1)
 morie_attrInf <- function(tree, targets, priors,
                           confusion = NULL, labels = NULL,
                           sensitive = 0L, mode = "blackbox",
@@ -299,6 +307,13 @@ morie_attrInf <- function(tree, targets, priors,
 #' @param tree The body requires: attrInf: the tree has no paths.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' tree <- list(feature = 0L, branches = list(
+#'   "0" = list(label = 0L, count = 30),
+#'   "1" = list(feature = 1L, branches = list(
+#'     "0" = list(label = 0L, count = 10),
+#'     "1" = list(label = 1L, count = 20)))))
+#' str(tree_paths(tree), max.level = 1)
 tree_paths <- function(tree) {
   out <- list()
   walk <- function(node, cons) {
@@ -341,6 +356,9 @@ tree_paths <- function(tree) {
 #' @param labels Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{err}, as built in the body.
 #' @export
+#' @examples
+#' err <- confusion_error(rbind(c(40, 10), c(5, 45)))
+#' err(0L, 1L)
 confusion_error <- function(C, labels = NULL) {
   if (is.matrix(C)) {
     if (nrow(C) == 0L || ncol(C) == 0L)
@@ -397,6 +415,14 @@ confusion_error <- function(C, labels = NULL) {
 #' to \code{0L}.
 #' @return A list with \code{estimate}, \code{scores}.
 #' @export
+#' @examples
+#' model <- function(x) if (identical(x[["0"]], "1")) 1L else 0L
+#' priors <- list("0" = list("0" = 0.6, "1" = 0.4))
+#' r <- map_invert(model, y = 1L, known = list("1" = "a"),
+#'                 candidates = list("0", "1"),
+#'                 err = function(y, yp) if (identical(y, yp)) 1 else 0,
+#'                 priors = priors)
+#' str(r, max.level = 1)
 map_invert <- function(model, y, known, candidates, err, priors,
                        sensitive = 0L) {
   if (length(candidates) == 0L)
@@ -437,6 +463,14 @@ map_invert <- function(model, y, known, candidates, err, priors,
 #' \code{as.integer}.
 #' @return A list with \code{estimate}, \code{scores}, \code{n_paths}, \code{N}.
 #' @export
+#' @examples
+#' tree <- list(feature = 0L, branches = list(
+#'   "0" = list(label = 0L, count = 30),
+#'   "1" = list(label = 1L, count = 20)))
+#' priors <- list("0" = list("0" = 0.6, "1" = 0.4))
+#' r <- wbwc_invert(tree, known = list(), candidates = list("0", "1"),
+#'                  priors = priors)
+#' str(r, max.level = 1)
 wbwc_invert <- function(tree, known, candidates, priors,
                         sensitive = 0L, unknown = NULL) {
   if (length(candidates) == 0L)

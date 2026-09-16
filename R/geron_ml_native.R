@@ -1354,8 +1354,7 @@ morie_geron_batch_learning <- function(X, y, fit_intercept = FALSE, ridge = 0) {
 #' @return List with `gradient`, `cost`, `residuals`, `theta_next`, `grad_norm`.
 #' @export
 #' @examples
-#' morie_geron_batch_gd_grad(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7,
-#' 8), theta = 0.5)
+#' morie_geron_batch_gd_grad(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5)
 morie_geron_batch_gd_grad <- function(X, y, theta, eta = NULL) {
   Xm <- if (is.matrix(X)) X else as.matrix(X)
   storage.mode(Xm) <- "double"
@@ -1602,8 +1601,8 @@ morie_geron_conv2d_forward <- function(X, W, b = 0, stride = 1, padding = 0) {
 #' @return List with `alpha`, `weights`, `scores`, `context`, `entropy`, `argmax`.
 #' @export
 #' @examples
-#' morie_geron_bahdanau_attention(h = 0.5, s_prev = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8), U
-#' = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_bahdanau_attention(h = 0.5, s_prev = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   U = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_bahdanau_attention <- function(h, s_prev, W, U, v, b = NULL) {
   H <- if (is.matrix(h)) h else matrix(as.numeric(h), nrow = 1)
   storage.mode(H) <- "double"
@@ -1846,8 +1845,7 @@ morie_geron_bidirectional_combine <- function(h_forward, h_backward,
 #' @return List with `a`, `z`, `fires`, `threshold`.
 #' @export
 #' @examples
-#' morie_geron_biological_neuron(x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6,
-#' 7, 8), b = 5L)
+#' morie_geron_biological_neuron(x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 morie_geron_biological_neuron <- function(x, w, b, activation = "step") {
   ws <- as.numeric(w)
   .morie_gr_need(length(ws) > 0L, "geron_biological_neuron: w is empty")
@@ -2430,8 +2428,8 @@ morie_geron_clip_contrastive_loss <- function(image_embeddings,
 #' @export
 #' @examples
 #' morie_geron_contrastive_infonce(anchors = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
-#' positives = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), negatives = matrix(c(1, 2, 3, 4, 5,
-#' 6), nrow = 2))
+#'   positives = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+#'   negatives = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 morie_geron_contrastive_infonce <- function(anchors, positives, negatives,
                                             tau = 0.1, normalize = TRUE) {
   A <- .morie_gr_mat(anchors, "anchors")
@@ -4252,8 +4250,8 @@ morie_geron_bagging_predictor <- function(predictions, aggregate = "mean") {
 #'   `worst_fold`, `spread`.
 #' @export
 #' @examples
-#' morie_geron_cross_validation_score(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5,
-#' 6, 7, 8), K = 3L)
+#' morie_geron_cross_validation_score(X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y = c(1, 2, 3, 4, 5, 6, 7, 8), K = 3L)
 morie_geron_cross_validation_score <- function(X, y, K, fit = NULL,
                                                predict = NULL, score = NULL,
                                                shuffle = FALSE,
@@ -4392,8 +4390,8 @@ morie_geron_autoencoder <- function(X, bottleneck, center = TRUE) {
 #' @export
 #' @examples
 #' morie_geron_autoencoder_reconstruction_loss(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
-#' encoded = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), decoded = matrix(c(1, 2, 3, 4, 5, 6),
-#' nrow = 2))
+#'   encoded = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+#'   decoded = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 morie_geron_autoencoder_reconstruction_loss <- function(X, encoded, decoded) {
   X <- .morie_gr_mat(X, "X")
   decoded <- .morie_gr_mat(decoded, "decoded")
@@ -4428,8 +4426,8 @@ morie_geron_autoencoder_reconstruction_loss <- function(X, encoded, decoded) {
 #'   `x_tilde`, `noise_energy`, `denoising_gain`, `snr_db`.
 #' @export
 #' @examples
-#' morie_geron_denoising_autoencoder(x = c(1, 2, 3, 4, 5, 6, 7, 8), noise = c(1, 2, 3, 4,
-#' 5, 6, 7, 8), decoded = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_denoising_autoencoder(x = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   noise = c(1, 2, 3, 4, 5, 6, 7, 8), decoded = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_denoising_autoencoder <- function(x, noise, decoded,
                                               corruption = "additive") {
   x <- .morie_gr_mat(x, "x")
@@ -4553,8 +4551,8 @@ morie_geron_denoising_autoencoder <- function(x, noise, decoded,
 #'   `compression_ratio`.
 #' @export
 #' @examples
-#' morie_geron_convolutional_autoencoder(x = 5L, encoder_weights = c(1, 2, 3, 4, 5, 6, 7,
-#' 8), decoder_weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_convolutional_autoencoder(x = 5L, encoder_weights = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   decoder_weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_convolutional_autoencoder <- function(x, encoder_weights,
                                                   decoder_weights, stride = 2,
                                                   output_activation = "identity") {
@@ -5254,6 +5252,8 @@ Math.morie_gvar <- function(x, ...) {
 #' ReLU on a reverse-mode tape node
 #' @param x A tape node. @return A tape node.
 #' @export
+#' @examples
+#' morie_gvar_relu(.morie_gvar(-1.5))$value
 morie_gvar_relu <- function(x) {
   .morie_gvar(max(x$value, 0), list(list(x, if (x$value > 0) 1 else 0)), "relu")
 }
@@ -5261,6 +5261,8 @@ morie_gvar_relu <- function(x) {
 #' Logistic sigmoid on a reverse-mode tape node
 #' @param x A tape node. @return A tape node.
 #' @export
+#' @examples
+#' morie_gvar_sigmoid(.morie_gvar(0))$value
 morie_gvar_sigmoid <- function(x) {
   s <- 1 / (1 + exp(-x$value))
   .morie_gvar(s, list(list(x, s * (1 - s))), "sigmoid")

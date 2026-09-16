@@ -21,8 +21,8 @@ A list with \code{mlm_loss_curve}, \code{mlm_improved}, \code{task_loss}, \code{
 }
 \keyword{internal}
 \examples{
-s <- morie_alammar_sampling_decoding(matrix(rep(c(1, 0), 10), 
+s <- morie_alammar_sampling_decoding(matrix(rep(c(1, 0), 10),
     10, 2, byrow = TRUE), seed = 7)
-morie_alammar_continued_pretraining("doc", function(docs, s) 1/(s + 
+morie_alammar_continued_pretraining("doc", function(docs, s) 1/(s +
     1), 5)
 }

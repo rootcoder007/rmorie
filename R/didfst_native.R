@@ -47,6 +47,10 @@
 #' @param event_time Integer H in 1-based period numbers.
 #' @return Numeric vector of length n.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Y <- matrix(rnorm(40, 10), 8, 5)
+#' morie_didfst_panel_differences(Y, event_time = 3)
 morie_didfst_panel_differences <- function(Y, event_time) {
   p <- .panel(Y)
   H <- as.integer(event_time)
@@ -70,6 +74,13 @@ morie_didfst_panel_differences <- function(Y, event_time) {
 #' @return A list with \code{estimate}, \code{treated_mean},
 #'   \code{control_mean}, \code{treated_weight}, \code{control_weight}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Y <- matrix(rnorm(40, 10), 8, 5)
+#' D <- rep(c(1, 0), 4)
+#' Y[D == 1, 4:5] <- Y[D == 1, 4:5] + 2
+#' delta <- morie_didfst_panel_differences(Y, event_time = 3)
+#' morie_didfst_did_estimate(delta, D)
 morie_didfst_did_estimate <- function(delta, D, weights = NULL) {
   d <- as.numeric(delta)
   Dv <- as.numeric(D)
@@ -112,6 +123,15 @@ morie_didfst_did_estimate <- function(delta, D, weights = NULL) {
 #' @return A list with \code{tau}, \code{att_uniform} and the
 #'   evaluation metadata.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 60
+#' Y <- matrix(rnorm(n * 5, 10), n, 5)
+#' D <- rbinom(n, 1, 0.5)
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' Y[D == 1, 4:5] <- Y[D == 1, 4:5] + 2 + X[D == 1, 1]
+#' r <- morie_didfst_did_forest(Y, D, X, event_time = 3, n_trees = 20L)
+#' str(r, max.level = 1)
 morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
                                     n_trees = 200L, min_leaf = 5L,
                                     alpha = 0.05, max_depth = 12L,
@@ -165,6 +185,12 @@ morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #'   split.
 #' @return A list with \code{estimate} and the change components.
 #' @export
+#' @examples
+#' set.seed(3)
+#' Y <- matrix(rnorm(48, 10), 8, 6)
+#' D <- rep(c(1, 0), 4)
+#' r <- morie_didfst_placebo_did(Y, D, event_time = 4)
+#' str(r, max.level = 1)
 morie_didfst_placebo_did <- function(Y, D, event_time, split = NULL) {
   p <- .panel(Y)
   H <- as.integer(event_time)
@@ -195,6 +221,14 @@ morie_didfst_placebo_did <- function(Y, D, event_time, split = NULL) {
 #' @return A list with \code{att}, \code{cohorts} and the cohort
 #'   details.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 12
+#' Y <- matrix(rnorm(n * 5, 10), n, 5)
+#' ft <- as.list(c(rep(3L, 4), rep(4L, 4), rep(NA_real_, 4)))
+#' ft[9:12] <- list(NULL)
+#' r <- morie_didfst_group_time_att(Y, ft)
+#' str(r, max.level = 1)
 morie_didfst_group_time_att <- function(Y, first_treated,
                                         comparison = "not-yet-treated") {
   p <- .panel(Y)
@@ -258,6 +292,15 @@ morie_didfst_group_time_att <- function(Y, first_treated,
 #' @param horizon Optional integer, restrict the event-time profile.
 #' @return A list with the estimate and the scheme details.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 12
+#' Y <- matrix(rnorm(n * 5, 10), n, 5)
+#' ft <- as.list(c(rep(3L, 4), rep(4L, 4), rep(NA_real_, 4)))
+#' ft[9:12] <- list(NULL)
+#' gt <- morie_didfst_group_time_att(Y, ft)
+#' r <- morie_didfst_aggregate_att(gt, scheme = "simple")
+#' str(r, max.level = 1)
 morie_didfst_aggregate_att <- function(gt, scheme = "simple",
                                        horizon = NULL) {
   if (!(scheme %in% c("simple", "event", "cohort")))

@@ -222,6 +222,9 @@
 #' \code{reml_profile}, \code{prediction_new}, \code{n}, \code{m}, \code{p},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rrblpr_rr_blup(V, V)
 morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
                                  log_lam_lo = -12.0, log_lam_hi = 12.0,
                                  max_iter = 200L, tol = 1e-9) {

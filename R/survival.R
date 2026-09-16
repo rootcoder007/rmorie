@@ -65,8 +65,10 @@ morie_kaplan_meier <- function(time, event, alpha = 0.05) {
 #' @return list with `time`, `cumhaz`, `se` and `surv = exp(-H)`
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_nelson_aalen(V, V)
+#' if (requireNamespace("survival", quietly = TRUE)) {
+#'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#'   morie_nelson_aalen(V, V)
+#' }
 morie_nelson_aalen <- function(time, event) {
   ut <- sort(unique(time[event == 1]))
   H <- 0
@@ -95,8 +97,10 @@ morie_nelson_aalen <- function(time, event) {
 #' @return list with `statistic`, `df`, `p_value`, `observed`, `expected`
 #' @export
 #' @examples
-#' morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1,
-#' 0), group = c("a", "b", "c"))
+#' if (requireNamespace("survival", quietly = TRUE)) {
+#'   morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'     group = c("a", "b", "c"))
+#' }
 morie_logrank_test <- function(time, event, group) {
   lev <- sort(unique(group))
   k <- length(lev)
@@ -267,8 +271,8 @@ morie_cox_partial_loglik <- function(time, event, X, beta,
 #' @return list with `c_index` and the pair counts
 #' @export
 #' @examples
-#' morie_concordance_index(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0,
-#' 1, 0), predicted_risk = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_concordance_index(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   predicted_risk = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_concordance_index <- function(time, event, predicted_risk) {
   n <- length(time)
   conc <- disc <- tied <- 0

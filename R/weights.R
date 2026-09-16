@@ -150,11 +150,13 @@ morie_weights_poststratify <- function(weights, strata, population_totals) {
 #' @return list with `weights`, `converged`, `iterations`, `max_adjustment`,
 #'   `diagnostics` (from `morie_weights_diagnostics`).
 #' @examples
-#' set.seed(1)
-#' df <- data.frame(g = rep(c("m", "f"), 15), r = rep(c("x", "y", "z"), 10))
-#' res <- morie_weights_rake(rep(1, 30), df,
-#'                           list(g = c(m = 50, f = 50), r = c(x = 30, y = 40, z = 30)))
-#' res$converged
+#' if (requireNamespace("survey", quietly = TRUE)) {
+#'   set.seed(1)
+#'   df <- data.frame(g = rep(c("m", "f"), 15), r = rep(c("x", "y", "z"), 10))
+#'   res <- morie_weights_rake(rep(1, 30), df,
+#'                             list(g = c(m = 50, f = 50), r = c(x = 30, y = 40, z = 30)))
+#'   res$converged
+#' }
 #' @export
 morie_weights_rake <- function(weights, df, margins,
                                max_iter = 100, tol = 1e-6, bounds = NULL) {
@@ -510,9 +512,11 @@ morie_weights_deff <- function(weights) {
 #' \code{threshold_upper}, \code{extreme_indices}, \code{extreme_values},
 #' \code{pct_extreme}.
 #' @examples
-#' set.seed(1)
-#' w <- c(runif(28, 0.5, 2), 25, 30)
-#' str(morie_weights_detect_extreme(w), max.level = 1)
+#' if (requireNamespace("survey", quietly = TRUE)) {
+#'   set.seed(1)
+#'   w <- c(runif(28, 0.5, 2), 25, 30)
+#'   str(morie_weights_detect_extreme(w), max.level = 1)
+#' }
 #' @export
 morie_weights_detect_extreme <- function(weights, k = 3) {
   w <- as.numeric(weights)
@@ -540,9 +544,11 @@ morie_weights_detect_extreme <- function(weights, k = 3) {
 #' @inheritParams morie_weights_params
 #' @return A numeric \code{matrix}.
 #' @examples
-#' set.seed(1)
-#' res <- morie_weights_jackknife(runif(10, 0.5, 2))
-#' str(res, max.level = 1)
+#' if (requireNamespace("survey", quietly = TRUE)) {
+#'   set.seed(1)
+#'   res <- morie_weights_jackknife(runif(10, 0.5, 2))
+#'   str(res, max.level = 1)
+#' }
 #' @export
 morie_weights_jackknife <- function(weights, strata = NULL,
                                     jk_type = c("JK1", "JKn")) {
@@ -591,9 +597,11 @@ morie_weights_jackknife <- function(weights, strata = NULL,
 #' @inheritParams morie_weights_params
 #' @return A numeric \code{matrix}.
 #' @examples
-#' set.seed(1)
-#' res <- morie_weights_brr(runif(16, 0.5, 2), rep(1:8, each = 2))
-#' str(res, max.level = 1)
+#' if (requireNamespace("survey", quietly = TRUE)) {
+#'   set.seed(1)
+#'   res <- morie_weights_brr(runif(16, 0.5, 2), rep(1:8, each = 2))
+#'   str(res, max.level = 1)
+#' }
 #' @export
 morie_weights_brr <- function(weights, strata, n_replicates = NULL,
                               seed = 42) {

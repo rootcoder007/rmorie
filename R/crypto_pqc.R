@@ -22,7 +22,9 @@
 #'
 #' @return Single logical.
 #' @examples
-#' morie_crypto_liboqs_available()
+#' if (morie_crypto_sodium_available()) {
+#'   morie_crypto_liboqs_available()
+#' }
 #' @export
 morie_crypto_liboqs_available <- function() {
   .Call(`_rmorie_morie_crypto_liboqs_available`)
@@ -32,8 +34,10 @@ morie_crypto_liboqs_available <- function() {
 #'
 #' @return Single character (e.g. `"0.15.0"`); empty if liboqs absent.
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   morie_crypto_liboqs_version()
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     morie_crypto_liboqs_version()
+#'   }
 #' }
 #' @export
 morie_crypto_liboqs_version <- function() {
@@ -51,9 +55,11 @@ morie_crypto_liboqs_version <- function() {
 #'
 #' @return List with `pk` (raw, 1184 B) and `sk` (raw, 2400 B).
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- morie_crypto_mlkem768_keygen()
-#'   c(pk = length(kp$pk), sk = length(kp$sk))
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- morie_crypto_mlkem768_keygen()
+#'     c(pk = length(kp$pk), sk = length(kp$sk))
+#'   }
 #' }
 #' @export
 morie_crypto_mlkem768_keygen <- function() {
@@ -69,11 +75,13 @@ morie_crypto_mlkem768_keygen <- function() {
 #' @param pk 1184-byte raw vector (recipient's ML-KEM-768 public key).
 #' @return List with `ct` (raw, 1088 B) and `shared_secret` (raw, 32 B).
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- morie_crypto_mlkem768_keygen()
-#'   e <- morie_crypto_mlkem768_encaps(kp$pk)
-#'   length(e$ct) # 1088
-#'   length(e$shared_secret) # 32
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- morie_crypto_mlkem768_keygen()
+#'     e <- morie_crypto_mlkem768_encaps(kp$pk)
+#'     length(e$ct) # 1088
+#'     length(e$shared_secret) # 32
+#'   }
 #' }
 #' @export
 morie_crypto_mlkem768_encaps <- function(pk) {
@@ -90,11 +98,13 @@ morie_crypto_mlkem768_encaps <- function(pk) {
 #' @param ct 1088-byte raw vector (sender's encapsulation ciphertext).
 #' @return Raw vector (32 B), the shared secret.
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- morie_crypto_mlkem768_keygen()
-#'   e <- morie_crypto_mlkem768_encaps(kp$pk)
-#'   ss <- morie_crypto_mlkem768_decaps(kp$sk, e$ct)
-#'   print(identical(ss, e$shared_secret))
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- morie_crypto_mlkem768_keygen()
+#'     e <- morie_crypto_mlkem768_encaps(kp$pk)
+#'     ss <- morie_crypto_mlkem768_decaps(kp$sk, e$ct)
+#'     print(identical(ss, e$shared_secret))
+#'   }
 #' }
 #' @export
 morie_crypto_mlkem768_decaps <- function(sk, ct) {
@@ -113,10 +123,12 @@ morie_crypto_mlkem768_decaps <- function(sk, ct) {
 #'
 #' @return List with `pk` (raw, 1952 B) and `sk` (raw, 4032 B).
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- morie_crypto_mldsa65_keygen()
-#'   length(kp$pk) # 1952 (FIPS 204)
-#'   length(kp$sk) # 4032
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- morie_crypto_mldsa65_keygen()
+#'     length(kp$pk) # 1952 (FIPS 204)
+#'     length(kp$sk) # 4032
+#'   }
 #' }
 #' @export
 morie_crypto_mldsa65_keygen <- function() {
@@ -132,11 +144,13 @@ morie_crypto_mldsa65_keygen <- function() {
 #' @param message Raw vector to sign.
 #' @return Raw vector signature.
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- morie_crypto_mldsa65_keygen()
-#'   msg <- charToRaw("signed payload v1")
-#'   sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
-#'   print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- morie_crypto_mldsa65_keygen()
+#'     msg <- charToRaw("signed payload v1")
+#'     sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
+#'     print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+#'   }
 #' }
 #' @export
 morie_crypto_mldsa65_sign <- function(sk, message) {
@@ -152,11 +166,13 @@ morie_crypto_mldsa65_sign <- function(sk, message) {
 #'   [morie_crypto_mldsa65_sign()].
 #' @return Single logical: `TRUE` if signature is valid.
 #' @examples
-#' if (morie_crypto_liboqs_available()) {
-#'   kp <- morie_crypto_mldsa65_keygen()
-#'   msg <- charToRaw("signed payload v1")
-#'   sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
-#'   print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+#' if (morie_crypto_sodium_available()) {
+#'   if (morie_crypto_liboqs_available()) {
+#'     kp <- morie_crypto_mldsa65_keygen()
+#'     msg <- charToRaw("signed payload v1")
+#'     sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
+#'     print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+#'   }
 #' }
 #' @export
 morie_crypto_mldsa65_verify <- function(pk, message, signature) {

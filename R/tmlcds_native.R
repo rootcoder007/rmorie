@@ -152,8 +152,7 @@
 #' @return A vector, from \code{as.numeric}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcds_lstsq(Z = X, y = y)
 #' res
@@ -181,8 +180,7 @@
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .tmlcds_logit_irls(X = X, y = y)
 #' res
@@ -306,6 +304,9 @@
 #' \code{as.integer}.
 #' @return A list with \code{steps}, \code{info}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- ctmle_sequence(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
 ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
                            trim = 0.005, scale = NULL,
                            q_covariates = NULL) {
@@ -526,6 +527,9 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @param scale See Usage.
 #' @param q_covariates See Usage.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- tmle_cdrs(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
 tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
                       n_folds = 5L, trim = 0.005, scale = NULL,
                       q_covariates = NULL) {

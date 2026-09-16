@@ -77,6 +77,9 @@
 #' @param include_input A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' positional_encoding(V)
 positional_encoding <- function(p, L = 10, include_input = TRUE) {
   v <- .nrfrad_vec(p)
   Li <- as.integer(L)
@@ -107,6 +110,11 @@ positional_encoding <- function(p, L = 10, include_input = TRUE) {
 #' @param stratified A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{t}, \code{points}, \code{direction}.
 #' @export
+#' @examples
+#' r <- ray_points(origin = c(0, 0, 0), direction = c(0, 0, 1),
+#'                 t_near = 1, t_far = 5, n_samples = 8, seed = 1,
+#'                 stratified = TRUE)
+#' c(length(r$t), nrow(as.matrix(r$points)))
 ray_points <- function(origin, direction, t_near, t_far, n_samples,
                        seed = 0, stratified = TRUE) {
   o <- .nrfrad_vec(origin)
@@ -145,6 +153,9 @@ ray_points <- function(origin, direction, t_near, t_far, n_samples,
 #' @return A list with \code{colour}, \code{weights}, \code{accumulated_alpha},
 #' \code{transmittance_final}, \code{note}.
 #' @export
+#' @examples
+#' volume_render(sigma = c(1, 2, 3, 4, 5, 6, 7, 8), colour = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   t = c(1, 2, 3, 4, 5, 6, 7, 8))
 volume_render <- function(sigma, colour, t) {
   s <- .nrfrad_vec(sigma)
   C <- .nrfrad_mat(colour)
@@ -194,6 +205,8 @@ volume_render <- function(sigma, colour, t) {
 #' @param eps Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' sample_pdf(bins = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
 sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
   b <- .nrfrad_vec(bins)
   w <- .nrfrad_vec(weights) + as.numeric(eps)
@@ -230,6 +243,12 @@ sample_pdf <- function(bins, weights, n_samples, seed = 0, eps = 1e-5) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{sigmas}, \code{max_deviation}, \code{view_independent}, \code{note}.
 #' @export
+#' @examples
+#' model <- function(p, d) list(sigma = sum(p^2), rgb = c(0.5, 0.5, 0.5))
+#' r <- density_is_view_independent(model, point = c(1, 2, 3),
+#'                                  directions = list(c(1, 0, 0), c(0, 1, 0),
+#'                                                    c(0, 0, 1)))
+#' r$max_deviation < 1e-9
 density_is_view_independent <- function(model, point, directions,
                                         tol = 1e-9) {
   p <- .nrfrad_vec(point)

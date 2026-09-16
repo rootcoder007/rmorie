@@ -12,6 +12,8 @@
 
 #' EDF count is binomial -- Gibbons Theorem 2.3.1 (book p. 33)
 #' @noRd
+#' @examples
+#' rmorie:::Edfbinom(n = 10, fx = 0.5)
 Edfbinom <- function(n, fx, i = NULL) {
   n <- as.integer(n)
   fx <- as.numeric(fx)
@@ -31,6 +33,8 @@ Edfbinom <- function(n, fx, i = NULL) {
 
 #' CDF of the r-th order statistic -- Theorem 2.4.1, eq. (2.4.1), p. 37
 #' @noRd
+#' @examples
+#' rmorie:::Ostatcdf(t = 0.5, r = 2, n = 5, cdf = pnorm)
 Ostatcdf <- function(t, r, n, cdf) {
   r <- as.integer(r)
   n <- as.integer(n)
@@ -44,6 +48,9 @@ Ostatcdf <- function(t, r, n, cdf) {
 
 #' PDF of the r-th order statistic -- Theorem 2.4.2, eq. (2.4.2), p. 37
 #' @noRd
+#' @examples
+#' rmorie:::Ostatpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L, n = 5L,
+#'   cdf = c(1, 2, 3, 4, 5, 6, 7, 8), pdf = c(1, 2, 3, 4, 5, 6, 7, 8))
 Ostatpdf <- function(x, r, n, cdf, pdf) {
   r <- as.integer(r)
   n <- as.integer(n)
@@ -57,6 +64,8 @@ Ostatpdf <- function(x, r, n, cdf, pdf) {
 
 #' Uniform order statistic is Beta(r, n-r+1) -- Theorem 2.4.3, p. 38
 #' @noRd
+#' @examples
+#' rmorie:::Ostatbeta(u = 0.3, r = 2, n = 5)
 Ostatbeta <- function(u, r, n) {
   r <- as.integer(r)
   n <- as.integer(n)
@@ -74,6 +83,8 @@ Ostatbeta <- function(u, r, n) {
 
 #' Asymptotic normality of the sample quantile -- Theorem 2.10.1, p. 60
 #' @noRd
+#' @examples
+#' rmorie:::Ostatasymp(p = 0.5, n = 100, xp = 0, fxp = dnorm(0))
 Ostatasymp <- function(p, n, xp, fxp) {
   p <- as.numeric(p)
   n <- as.integer(n)
@@ -87,6 +98,9 @@ Ostatasymp <- function(p, n, xp, fxp) {
 
 #' Empirical distribution function -- eq. (2.3.1), p. 32
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Edfstep(V, V)
 Edfstep <- function(x, t) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -98,6 +112,8 @@ Edfstep <- function(x, t) {
 
 #' Moments of a uniform order statistic -- Sec. 2.4, p. 38
 #' @noRd
+#' @examples
+#' rmorie:::Ostatmom(r = 5L, n = 5L)
 Ostatmom <- function(r, n, k = 1) {
   r <- as.integer(r)
   n <- as.integer(n)
@@ -111,6 +127,8 @@ Ostatmom <- function(r, n, k = 1) {
 
 #' Covariance of two uniform order statistics -- Sec. 2.4, p. 38
 #' @noRd
+#' @examples
+#' rmorie:::Ostatcov(r = 5L, s = 5L, n = 5L)
 Ostatcov <- function(r, s, n) {
   r <- as.integer(r)
   s <- as.integer(s)
@@ -126,6 +144,9 @@ Ostatcov <- function(r, s, n) {
 
 #' Joint density of X_(r), X_(s) -- Sec. 2.5, p. 39
 #' @noRd
+#' @examples
+#' rmorie:::Ostatjoint(x = -0.5, y = 0.5, r = 1, s = 3, n = 5,
+#'            cdf = pnorm, pdf = dnorm)
 Ostatjoint <- function(x, y, r, s, n, cdf, pdf) {
   r <- as.integer(r)
   s <- as.integer(s)
@@ -148,6 +169,8 @@ Ostatjoint <- function(x, y, r, s, n, cdf, pdf) {
 
 #' Joint density of all n order statistics -- Sec. 2.2, p. 31
 #' @noRd
+#' @examples
+#' rmorie:::Ostatjall(x = c(-1.2, -0.3, 0.4, 1.1), pdf = dnorm)
 Ostatjall <- function(x, pdf) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -161,6 +184,8 @@ Ostatjall <- function(x, pdf) {
 
 #' Sample quantile as an order statistic -- Sec. 2.6, p. 42
 #' @noRd
+#' @examples
+#' rmorie:::Sampquant(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
 Sampquant <- function(x, p) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -175,6 +200,8 @@ Sampquant <- function(x, p) {
 
 #' Placement / exceedance null law -- Problem 2.28(c), p. 70
 #' @noRd
+#' @examples
+#' rmorie:::Exceed(i = 5L, m = 5L, n = 5L)
 Exceed <- function(i, m, n, j = NULL) {
   i <- as.integer(i)
   m <- as.integer(m)
@@ -200,6 +227,9 @@ Exceed <- function(i, m, n, j = NULL) {
 
 #' Placements of Y among the X order statistics -- Sec. 2.11, p. 65
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Placement(V, V)
 Placement <- function(x, y) {
   xs <- sort(as.numeric(x))
   ys <- sort(as.numeric(y))
@@ -213,6 +243,10 @@ Placement <- function(x, y) {
 
 #' Distribution-free quantile confidence interval -- Sec. 5.2, p. 158
 #' @noRd
+#' @examples
+#' set.seed(1)
+#' x <- rnorm(20)
+#' rmorie:::Quantci(x, p = 0.5, r = 6, s = 15)
 Quantci <- function(x, p, r, s) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -230,6 +264,9 @@ Quantci <- function(x, p, r, s) {
 
 #' Distribution-free quantile test -- Sec. 5.3, p. 163
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Quanttest(V, V)
 Quanttest <- function(x, q0, p = 0.5, alternative = "two-sided") {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -250,6 +287,9 @@ Quanttest <- function(x, q0, p = 0.5, alternative = "two-sided") {
 
 #' Sign-test statistic K -- Sec. 5.4, eq. (5.4.1), p. 168
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Signk(V)
 Signk <- function(x, m0 = 0) {
   xs <- as.numeric(x) - as.numeric(m0)
   n_raw <- length(xs)
@@ -263,6 +303,8 @@ Signk <- function(x, m0 = 0) {
 
 #' Exact sign-test p-value -- eq. (5.4.3), p. 169
 #' @noRd
+#' @examples
+#' rmorie:::Signp(k = 5L, n = 5L)
 Signp <- function(k, n, alternative = "two-sided") {
   k <- as.integer(k)
   n <- as.integer(n)
@@ -281,6 +323,8 @@ Signp <- function(k, n, alternative = "two-sided") {
 
 #' Sign-test normal approximation -- eq. (5.4.7), p. 174
 #' @noRd
+#' @examples
+#' rmorie:::Signz(k = 5L, n = 5L)
 Signz <- function(k, n, alternative = "two-sided", correct = TRUE) {
   k <- as.integer(k)
   n <- as.integer(n)
@@ -303,6 +347,9 @@ Signz <- function(k, n, alternative = "two-sided", correct = TRUE) {
 
 #' Zero differences in the sign test -- Sec. 5.4.8, p. 180
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Signzero(V)
 Signzero <- function(x, m0 = 0, method = "discard") {
   xs <- as.numeric(x) - as.numeric(m0)
   n_raw <- length(xs)
@@ -328,6 +375,8 @@ Signzero <- function(x, m0 = 0, method = "discard") {
 
 #' Power of the sign test -- eq. (5.4.8), Table 5.4.1, p. 174
 #' @noRd
+#' @examples
+#' rmorie:::Signpow(n = 5L, theta = 0.5)
 Signpow <- function(n, theta, alpha = 0.05, exact = TRUE) {
   n <- as.integer(n)
   theta <- as.numeric(theta)
@@ -360,6 +409,9 @@ Signpow <- function(n, theta, alpha = 0.05, exact = TRUE) {
 
 #' Simulated sign-test power over supplied samples -- Sec. 5.4.5, p. 175
 #' @noRd
+#' @examples
+#' rmorie:::Signsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   kcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
 Signsimpow <- function(samples, m0, kcrit) {
   rows <- if (is.matrix(samples)) split(samples, row(samples)) else samples
   nsim <- length(rows)
@@ -373,6 +425,8 @@ Signsimpow <- function(samples, m0, kcrit) {
 
 #' Sign-test sample size -- eq. (5.4.9), p. 179
 #' @noRd
+#' @examples
+#' rmorie:::Signn(theta = 0.05)
 Signn <- function(theta, alpha = 0.05, beta = 0.10) {
   theta <- as.numeric(theta)
   alpha <- as.numeric(alpha)
@@ -390,6 +444,8 @@ Signn <- function(theta, alpha = 0.05, beta = 0.10) {
 
 #' Two-sided sign-test sample size -- eq. (5.4.9) with alpha/2, p. 179
 #' @noRd
+#' @examples
+#' rmorie:::Signnasy(theta = 0.05)
 Signnasy <- function(theta, alpha = 0.05, beta = 0.10) {
   theta <- as.numeric(theta)
   alpha <- as.numeric(alpha)
@@ -407,6 +463,9 @@ Signnasy <- function(theta, alpha = 0.05, beta = 0.10) {
 
 #' Median CI from sign-test inversion -- eq. (5.4.11), p. 179
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Signmedci(V)
 Signmedci <- function(x, alpha = 0.05) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -433,6 +492,9 @@ Signmedci <- function(x, alpha = 0.05) {
 
 #' Midranks of |d| with signs -- Sec. 5.5, p. 189
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Absrank(V)
 Absrank <- function(d) {
   ds <- as.numeric(d)
   n <- length(ds)
@@ -448,6 +510,9 @@ Absrank <- function(d) {
 
 #' Wilcoxon signed-rank T+ -- Sec. 5.7, eqs. (5.7.1)/(5.7.9), p. 195
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wsr(V)
 Wsr <- function(x, m0 = 0) {
   ds <- as.numeric(x) - as.numeric(m0)
   nzero <- sum(ds == 0)
@@ -470,6 +535,8 @@ Wsr <- function(x, m0 = 0) {
 
 #' Null moments of T+ -- eq. (5.7.2), p. 197
 #' @noRd
+#' @examples
+#' rmorie:::Wsrmom(n = 5L)
 Wsrmom <- function(n) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
@@ -481,6 +548,9 @@ Wsrmom <- function(n) {
 
 #' Tie-corrected Var[T+] -- eqs. (5.7.10)-(5.7.11), p. 203
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wsrties(V)
 Wsrties <- function(d, m0 = 0) {
   ds <- as.numeric(d) - as.numeric(m0)
   nzero <- sum(ds == 0)
@@ -497,6 +567,8 @@ Wsrties <- function(d, m0 = 0) {
 
 #' Signed-rank normal approximation -- eq. (5.7.9), p. 202
 #' @noRd
+#' @examples
+#' rmorie:::Wsrz(tplus = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 Wsrz <- function(tplus, n, alternative = "two-sided", correct = FALSE) {
   n <- as.integer(n)
   tplus <- as.numeric(tplus)
@@ -518,6 +590,8 @@ Wsrz <- function(tplus, n, alternative = "two-sided", correct = FALSE) {
 
 #' Signed-rank power -- eqs. (5.7.13)-(5.7.14), p. 205
 #' @noRd
+#' @examples
+#' rmorie:::Wsrpow(n = 5L, p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 Wsrpow <- function(n, p1, p2, alpha = 0.05) {
   n <- as.integer(n)
   p1 <- as.numeric(p1)
@@ -536,6 +610,9 @@ Wsrpow <- function(n, p1, p2, alpha = 0.05) {
 
 #' Simulated signed-rank power over supplied samples -- Sec. 5.7.3, p. 204
 #' @noRd
+#' @examples
+#' rmorie:::Wsrsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   tcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
 Wsrsimpow <- function(samples, m0, tcrit) {
   rows <- if (is.matrix(samples)) split(samples, row(samples)) else samples
   nsim <- length(rows)
@@ -554,6 +631,8 @@ Wsrsimpow <- function(samples, m0, tcrit) {
 
 #' Signed-rank sample size -- eq. (5.7.15), p. 206
 #' @noRd
+#' @examples
+#' rmorie:::Wsrn(p2 = 0.7, alpha = 0.05, beta = 0.1)
 Wsrn <- function(p2, alpha = 0.05, beta = 0.05, twosided = FALSE) {
   p2 <- as.numeric(p2)
   alpha <- as.numeric(alpha)
@@ -583,6 +662,8 @@ Wsrn <- function(p2, alpha = 0.05, beta = 0.05, twosided = FALSE) {
 
 #' Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209
 #' @noRd
+#' @examples
+#' rmorie:::Wsrci(x = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = 5L)
 Wsrci <- function(x, tcrit) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -601,6 +682,9 @@ Wsrci <- function(x, tcrit) {
 
 #' Signed-rank test of symmetry -- Sec. 5.7.7, p. 211
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wsrsym(V)
 Wsrsym <- function(x, centre = 0) {
   ds <- as.numeric(x) - as.numeric(centre)
   ds <- ds[ds != 0]
@@ -619,6 +703,9 @@ Wsrsym <- function(x, centre = 0) {
 
 #' Hodges-Lehmann estimator and Walsh counting identity -- pp. 209-210
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Hlwsrlink(V)
 Hlwsrlink <- function(x, m0 = 0) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -636,6 +723,8 @@ Hlwsrlink <- function(x, m0 = 0) {
 
 #' Total runs asymptotic normality -- eq. (3.2.9), p. 82
 #' @noRd
+#' @examples
+#' rmorie:::Runsz(r = 9, n1 = 10, n2 = 10)
 Runsz <- function(r, n1, n2, correct = FALSE) {
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
@@ -661,6 +750,8 @@ Runsz <- function(r, n1, n2, correct = FALSE) {
 
 #' Runs up-and-down moments -- Sec. 3.4, p. 93 (Levene 1952)
 #' @noRd
+#' @examples
+#' rmorie:::Runsudvar(n = 5L)
 Runsudvar <- function(n, r = NULL, alpha = 0.05) {
   n <- as.integer(n)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
@@ -682,6 +773,8 @@ Runsudvar <- function(n, r = NULL, alpha = 0.05) {
 
 #' RVN null moments -- Sec. 3.5, p. 95 (Bartels 1982)
 #' @noRd
+#' @examples
+#' rmorie:::Rvnmom(n = 5L)
 Rvnmom <- function(n) {
   n <- as.integer(n)
   if (n < 3L) stop("n must be at least 3.", call. = FALSE)
@@ -692,6 +785,9 @@ Rvnmom <- function(n) {
 
 #' Rank von Neumann test -- eqs. (3.5.1)-(3.5.2), p. 95
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Rvntest(V)
 Rvntest <- function(x, alternative = "two-sided") {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -730,6 +826,8 @@ Rvntest <- function(x, alternative = "two-sided") {
 
 #' Table D: exact runs distribution -- Theorem 3.2.2, p. 79
 #' @noRd
+#' @examples
+#' rmorie:::Runstab(n1 = 5L, n2 = 5L)
 Runstab <- function(n1, n2, r = NULL) {
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
@@ -758,6 +856,8 @@ Runstab <- function(n1, n2, r = NULL) {
 
 #' Exact runs-test critical region -- Sec. 3.2, p. 84; Table D
 #' @noRd
+#' @examples
+#' rmorie:::Runscrit(n1 = 5L, n2 = 5L)
 Runscrit <- function(n1, n2, alpha = 0.05, tail = "two-sided") {
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
@@ -795,6 +895,9 @@ Runscrit <- function(n1, n2, alpha = 0.05, tail = "two-sided") {
 
 #' Attainable exact sizes of a discrete test -- Sec. 1.2.9, p. 26
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Exactsize(V)
 Exactsize <- function(pmf, alpha = 0.05, upper = TRUE) {
   p <- as.numeric(pmf)
   k <- length(p)
@@ -814,6 +917,9 @@ Exactsize <- function(pmf, alpha = 0.05, upper = TRUE) {
 
 #' Randomized decision rule of exact size -- Sec. 1.2.9, pp. 26-27
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Randtest(V)
 Randtest <- function(pmf, alpha = 0.05, pmf_alt = NULL) {
   p <- as.numeric(pmf)
   k <- length(p)
@@ -847,6 +953,9 @@ Randtest <- function(pmf, alpha = 0.05, pmf_alt = NULL) {
 
 #' Consistency of a test -- Sec. 1.2.10, p. 23
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Consist(V, V)
 Consist <- function(nvals, effect, alpha = 0.05) {
   ns <- as.integer(nvals)
   if (!length(ns)) stop("nvals must be non-empty.", call. = FALSE)
@@ -862,6 +971,9 @@ Consist <- function(nvals, effect, alpha = 0.05) {
 
 #' Chi-square goodness of fit -- eq. (4.2.1), p. 104
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Chigof(V, V)
 Chigof <- function(observed, expected, ddof = 0) {
   o <- as.numeric(observed)
   e <- as.numeric(expected)
@@ -879,6 +991,9 @@ Chigof <- function(observed, expected, ddof = 0) {
 
 #' KS statistics via the PIT -- Theorem 4.3.1, p. 111
 #' @noRd
+#' @examples
+#' set.seed(2)
+#' rmorie:::Ksdistfree(rnorm(25), cdf = pnorm)
 Ksdistfree <- function(x, cdf) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -891,6 +1006,8 @@ Ksdistfree <- function(x, cdf) {
 
 #' Exact P(D_n < d) -- Theorem 4.3.2 via Durbin's matrix identity, p. 111
 #' @noRd
+#' @examples
+#' rmorie:::Ksexact(d = 5L, n = 5L)
 Ksexact <- function(d, n) {
   d <- as.numeric(d)
   n <- as.integer(n)
@@ -951,6 +1068,8 @@ Ksexact <- function(d, n) {
 
 #' Exact P(D+ >= c) -- Theorem 4.3.4, Birnbaum-Tingey, p. 115
 #' @noRd
+#' @examples
+#' rmorie:::Ksplusdist(c = 0.2, n = 20)
 Ksplusdist <- function(c, n) {
   c <- as.numeric(c)
   n <- as.integer(n)
@@ -970,6 +1089,8 @@ Ksplusdist <- function(c, n) {
 
 #' KS critical value (Table F) by exact bisection -- p. 565
 #' @noRd
+#' @examples
+#' rmorie:::Kscrit(n = 5L)
 Kscrit <- function(n, alpha = 0.05, exact = TRUE) {
   n <- as.integer(n)
   alpha <- as.numeric(alpha)
@@ -999,6 +1120,9 @@ Kscrit <- function(n, alpha = 0.05, exact = TRUE) {
 
 #' KS confidence band -- Sec. 4.4.2, p. 121
 #' @noRd
+#' @examples
+#' set.seed(2)
+#' rmorie:::Ksband(rnorm(25), dcrit = 0.264)
 Ksband <- function(x, dcrit, at = NULL) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -1016,6 +1140,8 @@ Ksband <- function(x, dcrit, at = NULL) {
 
 #' KS sample size for uniform error c -- Sec. 4.4.3, p. 122
 #' @noRd
+#' @examples
+#' rmorie:::Ksn(c = 0.2, alpha = 0.05)
 Ksn <- function(c, alpha = 0.05) {
   c <- as.numeric(c)
   alpha <- as.numeric(alpha)
@@ -1042,6 +1168,9 @@ Ksn <- function(c, alpha = 0.05) {
 
 #' Cramer-von Mises W^2 -- Problem 4.14, p. 150
 #' @noRd
+#' @examples
+#' set.seed(2)
+#' rmorie:::Cvmw2(rnorm(25), cdf = pnorm)
 Cvmw2 <- function(x, cdf) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -1054,6 +1183,9 @@ Cvmw2 <- function(x, cdf) {
 
 #' KS vs Cramer-von Mises on one sample -- Sec. 4.9, p. 146
 #' @noRd
+#' @examples
+#' set.seed(2)
+#' rmorie:::Kscvmcmp(rnorm(30), cdf = pnorm)
 Kscvmcmp <- function(x, cdf) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -1088,6 +1220,9 @@ Kscvmcmp <- function(x, cdf) {
 
 #' Lilliefors test for normality -- Sec. 4.5, p. 126; Table O
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Lillienorm(V)
 Lillienorm <- function(x, alpha = 0.05) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -1133,6 +1268,9 @@ Lillienorm <- function(x, alpha = 0.05) {
 
 #' Lilliefors test for exponentiality -- Sec. 4.6, p. 133; Table T
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Lillieexp(V)
 Lillieexp <- function(x, alpha = 0.05) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -1172,6 +1310,9 @@ Lillieexp <- function(x, alpha = 0.05) {
 
 #' Anderson-Darling W_n^2 -- eq. (4.7.1), p. 138; Table 4.7.1, p. 140
 #' @noRd
+#' @examples
+#' set.seed(2)
+#' rmorie:::Adtest(rnorm(30), cdf = pnorm)
 Adtest <- function(x, cdf, case = "specified", alpha = 0.05) {
   xs <- sort(as.numeric(x))
   n <- length(xs)
@@ -1202,6 +1343,9 @@ Adtest <- function(x, cdf, case = "specified", alpha = 0.05) {
 
 #' Wald-Wolfowitz two-sample runs test -- Sec. 6.2, p. 231
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wwruns(V, V)
 Wwruns <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1224,6 +1368,9 @@ Wwruns <- function(x, y) {
 
 #' Runs-test tie bounds -- Sec. 6.2.1, p. 233
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wwties(V, V)
 Wwties <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1274,6 +1421,9 @@ Wwties <- function(x, y) {
 
 #' Exact two-sample runs test -- Sec. 6.2, p. 231
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wwexact(V, V)
 Wwexact <- function(x, y, tail = "left") {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1324,6 +1474,9 @@ Wwexact <- function(x, y, tail = "left") {
 
 #' Two-sample KS test -- Sec. 6.3, p. 239
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Ks2(V, V)
 Ks2 <- function(x, y) {
   xs <- sort(as.numeric(x))
   ys <- sort(as.numeric(y))
@@ -1342,6 +1495,8 @@ Ks2 <- function(x, y) {
 
 #' Two-sample KS asymptotic -- Sec. 6.3, p. 241
 #' @noRd
+#' @examples
+#' rmorie:::Ks2asymp(d = 5L, m = 5L, n = 5L)
 Ks2asymp <- function(d, m, n) {
   d <- as.numeric(d)
   m <- as.integer(m)
@@ -1356,6 +1511,8 @@ Ks2asymp <- function(d, m, n) {
 
 #' Exact two-sided Smirnov distribution -- Sec. 6.3, p. 239
 #' @noRd
+#' @examples
+#' rmorie:::Smirnov2(d = 0.4, m = 10, n = 12)
 Smirnov2 <- function(d, m, n) {
   d <- as.numeric(d)
   m <- as.integer(m)
@@ -1370,6 +1527,8 @@ Smirnov2 <- function(d, m, n) {
 
 #' Exact one-sided Smirnov distribution -- Sec. 6.3, p. 241
 #' @noRd
+#' @examples
+#' rmorie:::Smirnov1(d = 0.4, m = 10, n = 12)
 Smirnov1 <- function(d, m, n) {
   d <- as.numeric(d)
   m <- as.integer(m)
@@ -1383,6 +1542,9 @@ Smirnov1 <- function(d, m, n) {
 
 #' Two-sample median test -- Sec. 6.4, p. 247
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Medtest(V, V)
 Medtest <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1410,6 +1572,9 @@ Medtest <- function(x, y) {
 
 #' Median-test confidence interval -- Sec. 6.4.2, p. 251
 #' @noRd
+#' @examples
+#' set.seed(3)
+#' rmorie:::Medtestci(rnorm(15), rnorm(15, 0.5), c = 3)
 Medtestci <- function(x, y, c) {
   xs <- sort(as.numeric(x))
   ys <- sort(as.numeric(y))
@@ -1435,6 +1600,8 @@ Medtestci <- function(x, y, c) {
 
 #' Precedence/median-test power -- eqs. (6.4.9)-(6.4.10), p. 254
 #' @noRd
+#' @examples
+#' rmorie:::Medtestpow(m = 9, n = 8, r = 5, wcrit = 2, g = function(u) u^2)
 Medtestpow <- function(m, n, r, wcrit, g, nodes = 2001) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -1456,6 +1623,9 @@ Medtestpow <- function(m, n, r, wcrit, g, nodes = 2001) {
 
 #' Two-sided median test with exact region -- Sec. 6.4, p. 247
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Medtest2(V, V)
 Medtest2 <- function(x, y, alpha = 0.05) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1499,6 +1669,9 @@ Medtest2 <- function(x, y, alpha = 0.05) {
 
 #' Ties at the combined median -- Sec. 6.4, p. 247
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Medties(V, V)
 Medties <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1520,6 +1693,8 @@ Medties <- function(x, y) {
 
 #' Control median test -- Sec. 6.5, eq. (6.5.1), p. 256
 #' @noRd
+#' @examples
+#' rmorie:::Ctrlmed(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
 Ctrlmed <- function(x, y, alternative = "two-sided") {
   xs <- sort(as.numeric(x))
   ys <- sort(as.numeric(y))
@@ -1547,6 +1722,8 @@ Ctrlmed <- function(x, y, alternative = "two-sided") {
 
 #' Curtailed control median test -- eq. (6.5.2), p. 258
 #' @noRd
+#' @examples
+#' rmorie:::Ctrlmedcur(m = 5L, n = 5L)
 Ctrlmedcur <- function(m, n, alpha = 0.05) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -1576,6 +1753,8 @@ Ctrlmedcur <- function(m, n, alpha = 0.05) {
 
 #' Control median test power -- Sec. 6.5.2, p. 258
 #' @noRd
+#' @examples
+#' rmorie:::Ctrlmedpow(m = 8, n = 9, d = 2, h = function(v) v^2)
 Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -1629,6 +1808,9 @@ Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
 
 #' Mann-Whitney U -- Sec. 6.6, eqs. (6.6.1), (6.6.14), p. 260
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Mwu(V, V)
 Mwu <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1652,6 +1834,8 @@ Mwu <- function(x, y) {
 
 #' Mann-Whitney shift CI -- Sec. 6.6.2, p. 267
 #' @noRd
+#' @examples
+#' rmorie:::Mwuci(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Mwuci <- function(x, y, k) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1668,6 +1852,8 @@ Mwuci <- function(x, y, k) {
 
 #' Mann-Whitney sample size -- eq. (6.6.18), p. 269 (Noether 1987)
 #' @noRd
+#' @examples
+#' rmorie:::Mwun(p = 0.05)
 Mwun <- function(p, c = 0.5, alpha = 0.05, beta = 0.10, twosided = FALSE) {
   p <- as.numeric(p)
   c <- as.numeric(c)
@@ -1687,6 +1873,9 @@ Mwun <- function(p, c = 0.5, alpha = 0.05, beta = 0.10, twosided = FALSE) {
 
 #' Wilcoxon rank-sum W_N -- Sec. 8.2, pp. 290-291
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wrs(V, V)
 Wrs <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1714,6 +1903,8 @@ Wrs <- function(x, y) {
 
 #' Rank-sum shift CI -- Sec. 8.2, p. 292
 #' @noRd
+#' @examples
+#' rmorie:::Wrsci(x = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), wcrit = 5L)
 Wrsci <- function(x, y, wcrit) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1731,6 +1922,8 @@ Wrsci <- function(x, y, wcrit) {
 
 #' Rank-sum normal approximation -- Sec. 8.2, p. 291
 #' @noRd
+#' @examples
+#' rmorie:::Wrsz(w = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L, n = 5L)
 Wrsz <- function(w, m, n, alternative = "two-sided", correct = FALSE,
                  ties = NULL) {
   m <- as.integer(m)
@@ -1771,6 +1964,9 @@ Wrsz <- function(w, m, n, alternative = "two-sided", correct = FALSE,
 
 #' Terry-Hoeffding normal-scores test -- Sec. 8.3.1, p. 299
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Normscores(V, V)
 Normscores <- function(x, y, nodes = 4001) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1791,6 +1987,9 @@ Normscores <- function(x, y, nodes = 4001) {
 
 #' van der Waerden test -- Sec. 8.3.2, p. 301
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Vdw(V, V)
 Vdw <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1814,6 +2013,9 @@ Vdw <- function(x, y) {
 
 #' Percentile modified rank test for location -- eqs. (8.3.5)-(8.3.6), p. 304
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Pctrankloc(V, V)
 Pctrankloc <- function(x, y, s = 0.5, r = NULL) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1852,6 +2054,8 @@ Pctrankloc <- function(x, y, s = 0.5, r = NULL) {
 
 #' Covariance of two linear rank statistics -- Theorem 7.3.3, p. 279
 #' @noRd
+#' @examples
+#' rmorie:::Lrankcov(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), m = 3L, n = 5L)
 Lrankcov <- function(a, b, m, n) {
   av <- as.numeric(a)
   bv <- as.numeric(b)
@@ -1871,6 +2075,9 @@ Lrankcov <- function(a, b, m, n) {
 
 #' Linear rank statistic properties -- Theorem 7.3.7, p. 283
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Lrankprop(V, V)
 Lrankprop <- function(a, z) {
   av <- as.numeric(a)
   zv <- as.numeric(z)
@@ -1888,6 +2095,9 @@ Lrankprop <- function(a, z) {
 
 #' Chernoff-Savage null moments -- Theorem 7.3.8 / Corollary 7.3.1, p. 285
 #' @noRd
+#' @examples
+#' rmorie:::Lrankasymp(j = function(u) qnorm(u), jprime = function(u) 1 / dnorm(qnorm(u)),
+#'            lam = 0.5, n = 20)
 Lrankasymp <- function(j, jprime, lam, n, nodes = 2001) {
   lam <- as.numeric(lam)
   n <- as.integer(n)
@@ -1914,6 +2124,8 @@ Lrankasymp <- function(j, jprime, lam, n, nodes = 2001) {
 
 #' Rank-test inversion interval -- Secs. 5.7.5, 6.4.2, 6.6.2
 #' @noRd
+#' @examples
+#' rmorie:::Rankci(values = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Rankci <- function(values, k, level = NULL) {
   v <- sort(as.numeric(values))
   mm <- length(v)
@@ -1943,6 +2155,9 @@ Rankci <- function(values, k, level = NULL) {
 
 #' Mood scale test -- eqs. (9.2.1)-(9.2.3), pp. 314-316
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Moodscale(V, V)
 Moodscale <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1963,6 +2178,8 @@ Moodscale <- function(x, y) {
 
 #' Mood null moments -- eqs. (9.2.2)-(9.2.3), pp. 315-316
 #' @noRd
+#' @examples
+#' rmorie:::Moodmom(m = 5L, n = 5L)
 Moodmom <- function(m, n) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -1975,6 +2192,9 @@ Moodmom <- function(m, n) {
 
 #' Freund-Ansari-Bradley-David-Barton test -- eq. (9.3.1), p. 316
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Ansbrad(V, V)
 Ansbrad <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -1993,6 +2213,9 @@ Ansbrad <- function(x, y) {
 
 #' Siegel-Tukey scale test -- Sec. 9.4, p. 320
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Sgltukey(V, V)
 Sgltukey <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2043,6 +2266,9 @@ Sgltukey <- function(x, y) {
 
 #' Klotz normal-scores scale test -- eq. (9.5.1), p. 322
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Klotzsc(V, V)
 Klotzsc <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2061,6 +2287,9 @@ Klotzsc <- function(x, y) {
 
 #' Percentile modified rank test for scale -- Sec. 9.6, p. 323
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Pctranksc(V, V)
 Pctranksc <- function(x, y, s = 0.5, r = NULL) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2101,6 +2330,9 @@ Pctranksc <- function(x, y, s = 0.5, r = NULL) {
 
 #' Sukhatme scale test -- eq. (9.7.1), p. 323
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Sukhatme(V, V)
 Sukhatme <- function(x, y, alternative = "two-sided") {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2125,6 +2357,9 @@ Sukhatme <- function(x, y, alternative = "two-sided") {
 
 #' Scale-ratio CI from Sukhatme -- eqs. (9.8.1)-(9.8.2), p. 328
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Scaleci(V, V)
 Scaleci <- function(x, y, alpha = 0.05, k = NULL) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2153,6 +2388,9 @@ Scaleci <- function(x, y, alpha = 0.05, k = NULL) {
 
 #' Westenberg interquartile scale test -- eq. (9.9.1), p. 329
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wstnbrg(V, V)
 Wstnbrg <- function(x, y) {
   xs <- as.numeric(x)
   ys <- sort(as.numeric(y))
@@ -2181,6 +2419,9 @@ Wstnbrg <- function(x, y) {
 
 #' Rosenbaum outside-extremes scale test -- eq. (9.9.2), p. 329
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Rosenbm(V, V)
 Rosenbm <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2199,6 +2440,9 @@ Rosenbm <- function(x, y) {
 
 #' k-sample median test -- Sec. 10.2, pp. 344-346
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Kmedtest(V)
 Kmedtest <- function(samples) {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
@@ -2222,6 +2466,9 @@ Kmedtest <- function(samples) {
 
 #' k-sample control median test -- Sec. 10.3, eq. (10.3.1), pp. 350-351
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Kctrlmed(V)
 Kctrlmed <- function(samples, p = c(0.5)) {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
@@ -2262,6 +2509,9 @@ Kctrlmed <- function(samples, p = c(0.5)) {
 
 #' Control-vector covariance -- Theorem 10.7.1, p. 375
 #' @noRd
+#' @examples
+#' rmorie:::Kctrlasymp(lam = c(0.4, 0.3, 0.3), dens = c(0.39, 0.35, 0.30),
+#'            pval = c(0.5, 0.55, 0.6))
 Kctrlasymp <- function(lam, dens, pval) {
   lam <- as.numeric(lam)
   dens <- as.numeric(dens)
@@ -2282,6 +2532,9 @@ Kctrlasymp <- function(lam, dens, pval) {
 
 #' Kruskal-Wallis H -- eqs. (10.4.2)/(10.4.5)/(10.4.7), pp. 354-358
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Kwh(V)
 Kwh <- function(samples, correct = TRUE) {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
@@ -2306,6 +2559,9 @@ Kwh <- function(samples, correct = TRUE) {
 
 #' Kruskal-Wallis defining form -- eqs. (10.4.2)/(10.4.7), pp. 354, 357
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Kwalt(V, V)
 Kwalt <- function(rank_sums, ns) {
   rs <- as.numeric(rank_sums)
   nv <- as.integer(ns)
@@ -2322,6 +2578,8 @@ Kwalt <- function(rank_sums, ns) {
 
 #' Chi-square approximation to H -- Sec. 10.4.1, p. 357
 #' @noRd
+#' @examples
+#' rmorie:::Kwchi(h = 0.5, k = 5L)
 Kwchi <- function(h, k, ns = NULL) {
   h <- as.numeric(h)
   k <- as.integer(k)
@@ -2339,6 +2597,9 @@ Kwchi <- function(h, k, ns = NULL) {
 
 #' Kruskal-Wallis multiple comparisons -- eq. (10.4.8), p. 357
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Kwmc(V, V)
 Kwmc <- function(rank_means, ns, alpha = 0.20) {
   rm <- as.numeric(rank_means)
   nv <- as.integer(ns)
@@ -2367,6 +2628,9 @@ Kwmc <- function(rank_means, ns, alpha = 0.20) {
 
 #' General k-sample rank statistic -- eqs. (10.5.1)-(10.5.2), pp. 362-363
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Krankstat(V)
 Krankstat <- function(samples, scores = NULL) {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
@@ -2391,6 +2655,9 @@ Krankstat <- function(samples, scores = NULL) {
 
 #' Jonckheere-Terpstra B -- Sec. 10.6, eqs. (10.6.2)-(10.6.3), p. 365
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Jtstat(V)
 Jtstat <- function(samples, alternative = "greater") {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
@@ -2416,6 +2683,9 @@ Jtstat <- function(samples, alternative = "greater") {
 
 #' JT null moments -- eqs. (10.6.2)-(10.6.3), pp. 365-366
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Jtmom(V)
 Jtmom <- function(ns) {
   nv <- as.integer(ns)
   k <- length(nv)
@@ -2432,6 +2702,9 @@ Jtmom <- function(ns) {
 
 #' JT as the pairwise U matrix -- Sec. 10.6, eq. (10.6.1), p. 365
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Jtsum(V)
 Jtsum <- function(samples) {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
@@ -2448,6 +2721,9 @@ Jtsum <- function(samples) {
 
 #' Treatments-vs-control precedence test -- eq. (10.7.3), p. 373
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Ctrltree(V)
 Ctrltree <- function(samples, r = NULL) {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
@@ -2471,6 +2747,8 @@ Ctrltree <- function(samples, r = NULL) {
 
 #' Null distribution of S = P - Q -- Sec. 11.2.1, p. 395
 #' @noRd
+#' @examples
+#' rmorie:::Taunull(n = 5L)
 Taunull <- function(n, s = NULL) {
   n <- as.integer(n)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
@@ -2508,6 +2786,9 @@ Taunull <- function(n, s = NULL) {
 
 #' Kendall tau trend test -- Sec. 11.2.5, p. 406
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Tautrend(V)
 Tautrend <- function(y, alternative = "two-sided") {
   ys <- as.numeric(y)
   n <- length(ys)
@@ -2530,6 +2811,9 @@ Tautrend <- function(y, alternative = "two-sided") {
 
 #' Spearman rank correlation -- Sec. 11.3, eq. (11.3.2), p. 407
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Spearrho(V, V)
 Spearrho <- function(x, y) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2548,6 +2832,8 @@ Spearrho <- function(x, y) {
 
 #' Test of zero Spearman correlation -- Secs. 11.3.2-11.3.3, pp. 412-413
 #' @noRd
+#' @examples
+#' rmorie:::Rhotest(r = 0.45, n = 20)
 Rhotest <- function(r, n, alternative = "two-sided") {
   r <- as.numeric(r)
   n <- as.integer(n)
@@ -2573,6 +2859,9 @@ Rhotest <- function(r, n, alternative = "two-sided") {
 
 #' Fieller-Hartley-Pearson normal-scores correlation -- Sec. 11.5, p. 422
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Normcorr(V, V)
 Normcorr <- function(x, y, rho = 0, nodes = 4001) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2596,6 +2885,9 @@ Normcorr <- function(x, y, rho = 0, nodes = 4001) {
 
 #' Kendall partial tau -- Sec. 12.6, eq. (12.6.1), p. 467
 #' @noRd
+#' @examples
+#' rmorie:::Taupartial(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   z = c(1, 2, 3, 4, 5, 6, 7, 8))
 Taupartial <- function(x, y, z) {
   xs <- as.numeric(x)
   ys <- as.numeric(y)
@@ -2652,6 +2944,9 @@ Taupartial <- function(x, y, z) {
 
 #' Friedman two-way ANOVA by ranks -- eqs. (12.2.8)/(12.2.12), pp. 441-445
 #' @noRd
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::Friedq(D)
 Friedq <- function(data, correct = TRUE) {
   rows <- lapply(data, as.numeric)
   k <- length(rows)
@@ -2672,6 +2967,9 @@ Friedq <- function(data, correct = TRUE) {
 
 #' Tie-corrected Friedman Q -- eq. (12.2.12), p. 445
 #' @noRd
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::Friedties(D)
 Friedties <- function(data) {
   rows <- lapply(data, as.numeric)
   k <- length(rows)
@@ -2692,6 +2990,8 @@ Friedties <- function(data) {
 
 #' Chi-square approximation to Friedman Q -- Sec. 12.2, p. 442
 #' @noRd
+#' @examples
+#' rmorie:::Friedchi(q = 0.5, k = 5L, n = 5L)
 Friedchi <- function(q, k, n) {
   q <- as.numeric(q)
   k <- as.integer(k)
@@ -2709,6 +3009,8 @@ Friedchi <- function(q, k, n) {
 
 #' Friedman S and Q moments -- eq. (12.2.7), p. 442
 #' @noRd
+#' @examples
+#' rmorie:::Friedvar(k = 5L, n = 5L)
 Friedvar <- function(k, n) {
   k <- as.integer(k)
   n <- as.integer(n)
@@ -2724,6 +3026,8 @@ Friedvar <- function(k, n) {
 
 #' Friedman multiple comparisons -- eq. (12.2.13), p. 445
 #' @noRd
+#' @examples
+#' rmorie:::Friedmc(rank_sums = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Friedmc <- function(rank_sums, k, alpha = 0.20) {
   rs <- as.numeric(rank_sums)
   n <- length(rs)
@@ -2748,6 +3052,9 @@ Friedmc <- function(rank_sums, k, alpha = 0.20) {
 
 #' Page's L test -- eqs. (12.3.1)-(12.3.2), pp. 448-449
 #' @noRd
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::Pagel(D)
 Pagel <- function(data, weights = NULL) {
   rows <- lapply(data, as.numeric)
   k <- length(rows)
@@ -2767,6 +3074,8 @@ Pagel <- function(data, weights = NULL) {
 
 #' Exact null distribution of Page's L -- Sec. 12.3, p. 448
 #' @noRd
+#' @examples
+#' rmorie:::Pageexact(k = 5L, n = 5L)
 Pageexact <- function(k, n, ell = NULL) {
   k <- as.integer(k)
   n <- as.integer(n)
@@ -2814,6 +3123,8 @@ Pageexact <- function(k, n, ell = NULL) {
 
 #' Page's L normal approximation -- eq. (12.3.2), p. 449
 #' @noRd
+#' @examples
+#' rmorie:::Pageasymp(ell = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L, n = 5L)
 Pageasymp <- function(ell, k, n, correct = TRUE) {
   ell <- as.numeric(ell)
   k <- as.integer(k)
@@ -2830,6 +3141,8 @@ Pageasymp <- function(ell, k, n, correct = TRUE) {
 
 #' Concordance W significance test -- Sec. 12.4.2, p. 455
 #' @noRd
+#' @examples
+#' rmorie:::Wsignif(w = 0.6, k = 3, n = 10)
 Wsignif <- function(w, k, n) {
   w <- as.numeric(w)
   k <- as.integer(k)
@@ -2846,6 +3159,8 @@ Wsignif <- function(w, k, n) {
 
 #' ARE from derivatives and variances -- Theorem 13.2.2, eq. (13.2.1), p. 485
 #' @noRd
+#' @examples
+#' rmorie:::Arepitman(deriv = 0.399, var = 1, deriv_star = 0.318, var_star = 1.05)
 Arepitman <- function(deriv, var, deriv_star, var_star) {
   d <- as.numeric(deriv)
   v <- as.numeric(var)
@@ -2861,6 +3176,8 @@ Arepitman <- function(deriv, var, deriv_star, var_star) {
 
 #' Efficacy -- eq. (13.2.4), p. 486
 #' @noRd
+#' @examples
+#' rmorie:::Efficacy(deriv = c(1, 2, 3, 4, 5, 6, 7, 8), var = 5L)
 Efficacy <- function(deriv, var) {
   d <- as.numeric(deriv)
   v <- as.numeric(var)
@@ -2870,6 +3187,8 @@ Efficacy <- function(deriv, var) {
 
 #' Sign test efficacy -- eq. (13.3.3), p. 489
 #' @noRd
+#' @examples
+#' rmorie:::Effsign(n = 5L, fmed = 5L)
 Effsign <- function(n, fmed) {
   n <- as.integer(n)
   f <- as.numeric(fmed)
@@ -2881,6 +3200,8 @@ Effsign <- function(n, fmed) {
 
 #' One-sample t efficacy -- eq. (13.3.2), p. 488
 #' @noRd
+#' @examples
+#' rmorie:::Efft(n = 5L, sigma2 = 5L)
 Efft <- function(n, sigma2) {
   n <- as.integer(n)
   s2 <- as.numeric(sigma2)
@@ -2891,6 +3212,8 @@ Efft <- function(n, sigma2) {
 
 #' Signed-rank efficacy -- eq. (13.3.4), p. 490
 #' @noRd
+#' @examples
+#' rmorie:::Effwsr(n = 5L, f0 = c(1, 2, 3, 4, 5, 6, 7, 8), integral = c(1, 2, 3, 4, 5, 6, 7, 8))
 Effwsr <- function(n, f0, integral) {
   n <- as.integer(n)
   f0 <- as.numeric(f0)
@@ -2902,6 +3225,8 @@ Effwsr <- function(n, f0, integral) {
 
 #' Mann-Whitney / rank-sum efficacy -- eq. (13.3.10), p. 494
 #' @noRd
+#' @examples
+#' rmorie:::Effwrs(m = 5L, n = 5L, integral = c(1, 2, 3, 4, 5, 6, 7, 8))
 Effwrs <- function(m, n, integral) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -2912,6 +3237,8 @@ Effwrs <- function(m, n, integral) {
 
 #' Two-sample t efficacy -- eq. (13.3.9), p. 494
 #' @noRd
+#' @examples
+#' rmorie:::Efft2(m = 5L, n = 5L, sigma2 = 5L)
 Efft2 <- function(m, n, sigma2) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -2923,6 +3250,9 @@ Efft2 <- function(m, n, sigma2) {
 
 #' Chi-square test of independence -- Sec. 14.2, p. 505
 #' @noRd
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' rmorie:::Chiindep(M)
 Chiindep <- function(table, correct = FALSE) {
   tb <- as.matrix(table)
   storage.mode(tb) <- "double"
@@ -2948,6 +3278,8 @@ Chiindep <- function(table, correct = FALSE) {
 
 #' k x 2 equal-proportions test -- eq. (14.3.2), p. 514
 #' @noRd
+#' @examples
+#' rmorie:::Chik2(successes = c(18, 12, 25), ns = c(30, 30, 40))
 Chik2 <- function(successes, ns) {
   y <- as.numeric(successes)
   nv <- as.numeric(ns)
@@ -2976,6 +3308,8 @@ Chik2 <- function(successes, ns) {
 
 #' Fisher exact test -- Sec. 14.4, p. 517
 #' @noRd
+#' @examples
+#' rmorie:::Fisherex(rbind(c(8, 2), c(1, 5)))
 Fisherex <- function(table, alternative = "two-sided") {
   tb <- round(as.matrix(table))
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
@@ -3005,6 +3339,8 @@ Fisherex <- function(table, alternative = "two-sided") {
 
 #' One-sided Fisher exact test -- Sec. 14.4, p. 517
 #' @noRd
+#' @examples
+#' rmorie:::Fisherex1(rbind(c(8, 2), c(1, 5)))
 Fisherex1 <- function(table, alternative = "greater") {
   tb <- round(as.matrix(table))
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
@@ -3029,6 +3365,8 @@ Fisherex1 <- function(table, alternative = "greater") {
 
 #' McNemar test -- eq. (14.5.1), p. 523
 #' @noRd
+#' @examples
+#' rmorie:::Mcnemarq(rbind(c(20, 5), c(12, 13)))
 Mcnemarq <- function(table, correct = FALSE) {
   tb <- as.matrix(table)
   storage.mode(tb) <- "double"
@@ -3050,6 +3388,8 @@ Mcnemarq <- function(table, correct = FALSE) {
 
 #' McNemar CI -- Sec. 14.5, eq. (14.5.2), p. 523
 #' @noRd
+#' @examples
+#' rmorie:::Mcnemarci(rbind(c(20, 5), c(12, 13)))
 Mcnemarci <- function(table, alpha = 0.05) {
   tb <- as.matrix(table)
   storage.mode(tb) <- "double"
@@ -3071,6 +3411,8 @@ Mcnemarci <- function(table, alpha = 0.05) {
 
 #' Multinomial goodness of fit -- Sec. 14.6, p. 528
 #' @noRd
+#' @examples
+#' rmorie:::Multgof(observed = c(22, 18, 20, 40), probs = c(0.2, 0.2, 0.2, 0.4))
 Multgof <- function(observed, probs, ddof = 0) {
   o <- as.numeric(observed)
   p <- as.numeric(probs)
@@ -3094,6 +3436,9 @@ Multgof <- function(observed, probs, ddof = 0) {
 
 #' Linear rank test for ordered categories -- Sec. 14.6.1, p. 531
 #' @noRd
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' rmorie:::Linbylin(M)
 Linbylin <- function(table, scores = NULL) {
   tb <- as.matrix(table)
   storage.mode(tb) <- "double"

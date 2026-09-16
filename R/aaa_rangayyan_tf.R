@@ -924,6 +924,9 @@
 #' @return A list with \code{amplitude}, \code{phase}, \code{demodulated}, \code{f0},
 #' \code{bandwidth}, \code{mean_amplitude}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CDemod(V)
 CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -999,6 +1002,9 @@ CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
 #' \code{levels}, \code{reconstructed}, \code{max_reconstruction_error},
 #' \code{symmetric}, \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' BiorDwt(V)
 BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   w <- gsub("[-_]", "", tolower(trimws(as.character(wavelet))))
@@ -1082,6 +1088,9 @@ BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma},
 #' \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ExpKerTfd(V)
 ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
   v <- .tf_need(x, "x", 8L)
   fs <- as.numeric(fs)
@@ -1158,6 +1167,12 @@ ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
 #' @return A list with \code{sdw}, \code{scale_energy}, \code{scales}, \code{freqs},
 #' \code{peak_scale}, \code{peak_freq}, \code{organised}, \code{band}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' fs <- 250
+#' tvec <- seq(0, 2, by = 1 / fs)
+#' ecg <- sin(2 * pi * 8 * tvec) + 0.2 * rnorm(length(tvec))
+#' CprWt(ecg, fs = fs)
 CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
   v <- .tf_need(ecg, "ecg", 16L)
   fs <- as.numeric(fs)
@@ -1240,6 +1255,9 @@ CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
 #' @return A list with \code{coeffs}, \code{scales}, \code{freqs}, \code{times},
 #' \code{energy_per_scale}, \code{peak_scale}, \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Cwt(V)
 Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -1300,6 +1318,9 @@ Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
 #' \code{tsmooth}, \code{fsmooth}, \code{peak_freq}, \code{crossterm_ratio},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Gtfd(V)
 Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
                  tsmooth = NULL, fsmooth = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -1353,6 +1374,8 @@ Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
 #' \code{order}, \code{length}, \code{vanishing_moments}, \code{sum_lo}, \code{norm_lo},
 #' \code{max_shift_inner_product}, \code{method}.
 #' @export
+#' @examples
+#' OrthFilt()
 OrthFilt <- function(order = 4) {
   k <- as.integer(order)
   if (is.null(.TF_DBTAPS[[as.character(k)]])) {
@@ -1401,6 +1424,9 @@ OrthFilt <- function(order = 4) {
 #' \code{n_atoms}, \code{decay}, \code{residual_energy}, \code{explained},
 #' \code{peak_freq}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' AtomTfd(V)
 AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
                     nfreq = NULL, min_decay = 1e-3) {
   v <- .tf_need(x, "x", 8L)
@@ -1511,6 +1537,10 @@ AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
 #' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths},
 #' \code{levels}, \code{wavelet}, \code{energy}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+#' str(Dwt(x, wavelet = "db4", levels = 3), max.level = 1)
 Dwt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -1547,6 +1577,9 @@ Dwt <- function(x, wavelet = "db4", levels = 3) {
 #' \code{noise_std}, \code{seed}, \code{reconstruction_error}, \code{energy_per_imf},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' EmdEns(V)
 EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0) {
   v <- .tf_need(x, "x", 8L)
   ne <- as.integer(n_ensembles)
@@ -1621,6 +1654,9 @@ EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
 #' @return A list with \code{imfs}, \code{residual}, \code{n_imfs},
 #' \code{reconstruction_error}, \code{energy_per_imf}, \code{tol}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Sift(V)
 Sift <- function(x, max_imfs = 10, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   mi <- as.integer(max_imfs)
@@ -1663,6 +1699,8 @@ Sift <- function(x, max_imfs = 10, tol = 0.05) {
 #' \code{max_envelope_mean}, \code{envelope_mean_ok}, \code{is_imf}, \code{iterations},
 #' \code{converged}, \code{amplitude}, \code{phase}, \code{method}.
 #' @export
+#' @examples
+#' Imf(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 Imf <- function(x, max_iter = 50, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   mi <- as.integer(max_iter)
@@ -1728,6 +1766,20 @@ Imf <- function(x, max_iter = 50, tol = 0.05) {
 #' \code{even_mean}, \code{difference}, \code{n_beats}, \code{n_odd}, \code{n_even},
 #' \code{r_peaks}, \code{rpeaks_supplied}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' fs <- 250
+#' tv <- seq(0, 4, by = 1 / fs)
+#' ecg <- rep(0, length(tv))
+#' beats <- seq(0.4, 3.8, by = 0.8)
+#' amp <- rep(c(1, 1.1), length.out = length(beats))
+#' for (k in seq_along(beats)) {
+#'   i <- round(beats[k] * fs)
+#'   ecg[i:(i + 6)] <- amp[k] * c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' ecg <- ecg + rnorm(length(tv), 0, 0.02)
+#' r <- TwaEmd(ecg, fs = fs)
+#' str(r, max.level = 1)
 TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
                    max_imfs = 6) {
   v <- .tf_need(ecg, "ecg", 32L)
@@ -1828,6 +1880,15 @@ TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
 #' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{features},
 #' \code{dominant_imf}, \code{dominant_freq}, \code{method}.
 #' @export
+#' @examples
+#' \donttest{
+#' set.seed(2)
+#' fs <- 250
+#' tv <- seq(0, 2, by = 1 / fs)
+#' vf <- sin(2 * pi * 5 * tv + 2 * sin(2 * pi * 0.5 * tv)) +
+#'   0.1 * rnorm(length(tv))
+#' str(VfEmd(vf, fs = fs), max.level = 1)
+#' }
 VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
   v <- .tf_need(ecg, "ecg", 16L)
   fs <- as.numeric(fs)
@@ -1895,6 +1956,10 @@ VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
 #' \code{relative_energy}, \code{labels}, \code{levels}, \code{base}, \code{wavelet},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+#' WtEntropy(x, wavelet = "db4", levels = 3)
 WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
   b <- tolower(trimws(as.character(base)))
   if (!(b %in% c("e", "2"))) stop("base must be 'e' or '2'")
@@ -1934,6 +1999,9 @@ WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
 #' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths},
 #' \code{levels}, \code{energy}, \code{input_energy}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Dwt2Tap(V)
 Dwt2Tap <- function(x, levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -1971,6 +2039,9 @@ Dwt2Tap <- function(x, levels = 3) {
 #' \code{amplitude}, \code{inst_freq}, \code{marginal}, \code{n_imfs}, \code{peak_freq},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' EmdSpec(V)
 EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   fs <- as.numeric(fs)
@@ -2046,6 +2117,9 @@ EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
 #' \code{bands}, \code{standard}, \code{mean_rr}, \code{mean_hr}, \code{resampled},
 #' \code{fs_resamp}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HrvTv(V)
 HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
                   noverlap = NULL, standard = "taskforce") {
   rr <- .tf_need(rr_intervals, "rr_intervals", 4L)
@@ -2149,6 +2223,9 @@ HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
 #' @return A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start},
 #' \code{valid_end}, \code{n_frames}, \code{method}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' IStft(M)
 IStft <- function(stft, window = "hann", hop = NULL) {
   frames <- if (is.matrix(stft)) {
     lapply(seq_len(nrow(stft)), function(i) stft[i, ])
@@ -2222,6 +2299,10 @@ IStft <- function(stft, window = "hann", hop = NULL) {
 #' \code{reconstruction_error}, \code{energy_per_band}, \code{levels}, \code{wavelet},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+#' str(Mra(x, wavelet = "db4", levels = 3), max.level = 1)
 Mra <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -2274,6 +2355,22 @@ Mra <- function(x, wavelet = "db4", levels = 3) {
 #' \code{s2_index}, \code{s2_time}, \code{s2_amplitude}, \code{s2_s1_ratio},
 #' \code{snr_gain_db}, \code{method}.
 #' @export
+#' @examples
+#' \donttest{
+#' set.seed(3)
+#' fs <- 1000
+#' tv <- seq(0, 3, by = 1 / fs)
+#' n <- length(tv)
+#' ecg <- rep(0, n)
+#' for (b in seq(0.5, 2.5, by = 1)) {
+#'   i <- round(b * fs)
+#'   ecg[i:(i + 6)] <- c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' pcg <- sin(2 * pi * 60 * tv) * exp(-((tv %% 1) / 0.1)) +
+#'   0.05 * rnorm(n)
+#' r <- PcgEnvAvg(pcg, ecg, fs = fs)
+#' str(r, max.level = 1)
+#' }
 PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
                       envelope_smoothing = NULL) {
   p <- .tf_need(pcg, "pcg", 16L)
@@ -2375,6 +2472,12 @@ PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
 #' \code{artifact_energy}, \code{snr_improvement_db}, \code{approx_energy},
 #' \code{levels}, \code{wavelet}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' fs <- 100
+#' tv <- seq(0, 5, by = 1 / fs)
+#' ppg <- sin(2 * pi * 1.2 * tv) + 0.2 * rnorm(length(tv))
+#' str(PpgWtDen(ppg, fs = fs), max.level = 1)
 PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
                      threshold_type = "soft") {
   v <- .tf_need(ppg, "ppg", 8L)
@@ -2418,6 +2521,9 @@ PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
 #' @return A list with \code{scalogram}, \code{scales}, \code{freqs}, \code{times},
 #' \code{energy_per_scale}, \code{total_energy}, \code{ridge}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Scalogram(V)
 Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
   r <- Cwt(x, fs = fs, wavelet = wavelet, scales = scales, w0 = w0)
   sg <- do.call(rbind, lapply(r$coeffs, function(row) Mod(row)^2))
@@ -2461,6 +2567,11 @@ Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
 #' \code{energies}, \code{seizure_detected}, \code{threshold}, \code{wavelet},
 #' \code{levels}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' fs <- 100
+#' eeg <- c(rnorm(fs * 4, 0, 1), rnorm(fs * 2, 0, 4), rnorm(fs * 2, 0, 1))
+#' str(SeizWt(eeg, fs = fs), max.level = 1)
 SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
                    scales = c(3, 4, 5), threshold = NULL) {
   v <- .tf_need(eeg, "eeg", 8L)
@@ -2517,6 +2628,8 @@ SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
 #' \code{achieved_t_res}, \code{achieved_f_res}, \code{tf_product},
 #' \code{heisenberg_bound}, \code{feasible}, \code{method}.
 #' @export
+#' @examples
+#' StftParam(fs = 250, desired_t_res = 0.2, desired_f_res = 2)
 StftParam <- function(fs, desired_t_res, desired_f_res) {
   fs <- as.numeric(fs)
   dt <- as.numeric(desired_t_res)
@@ -2556,6 +2669,11 @@ StftParam <- function(fs, desired_t_res, desired_f_res) {
 #' \code{nperseg}, \code{hop}, \code{window}, \code{n_frames}, \code{total_energy},
 #' \code{peak_freq}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' fs <- 200
+#' x <- sin(2 * pi * 20 * seq(0, 2, by = 1 / fs)) + 0.1 * rnorm(401)
+#' str(Spectrogram(x, fs = fs, nperseg = 64), max.level = 1)
 Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
                         window = "hann") {
   v <- .tf_need(x, "x", 2L)
@@ -2614,6 +2732,9 @@ Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
 #' @return A list with \code{approx}, \code{details}, \code{levels}, \code{wavelet},
 #' \code{redundancy}, \code{energy_per_level}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Swt(V)
 Swt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -2660,6 +2781,10 @@ Swt <- function(x, wavelet = "db4", levels = 3) {
 #' \code{n_coeffs}, \code{n_shifts}, \code{residual_energy}, \code{levels},
 #' \code{wavelet}, \code{threshold_type}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.3)
+#' str(SwtDen(x, wavelet = "db4", levels = 3), max.level = 1)
 SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
                    threshold_type = "soft") {
   v <- .tf_need(x, "x", 4L)
@@ -2738,6 +2863,9 @@ SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
 #' \code{tau}, \code{iterations}, \code{converged}, \code{reconstruction_error},
 #' \code{residual_energy}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' VModes(V)
 VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
                    tol = 1e-7, max_iter = 300) {
   v <- .tf_need(x, "x", 8L)
@@ -2836,6 +2964,9 @@ VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
 #' @return A list with \code{structures}, \code{n_structures}, \code{scalogram},
 #' \code{scales}, \code{times}, \code{min_prominence}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CwtRidge(V)
 CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
                      min_prominence = 0.1) {
   p <- as.numeric(min_prominence)
@@ -2894,6 +3025,9 @@ CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
 #' \code{scales}, \code{overall_correlation}, \code{levels}, \code{max_lag},
 #' \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' WtXcor(V, V)
 WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
   a <- .tf_need(x, "x", 4L)
   b <- .tf_need(y, "y", 4L)
@@ -2985,6 +3119,9 @@ WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
 #' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{peak_freq},
 #' \code{total_energy}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' WvDist(V)
 WvDist <- function(x, fs = 1, nfreq = NULL) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -3022,6 +3159,10 @@ WvDist <- function(x, fs = 1, nfreq = NULL) {
 #' \code{total_energy}, \code{input_energy}, \code{energy_balance}, \code{dominant_band},
 #' \code{levels}, \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+#' WtEnergy(x, wavelet = "db4", levels = 3)
 WtEnergy <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -3057,6 +3198,10 @@ WtEnergy <- function(x, wavelet = "db4", levels = 3) {
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @return A list with \code{moments}, \code{labels}, \code{levels}, \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+#' WtMoment(x, wavelet = "db4", levels = 3)
 WtMoment <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -3106,6 +3251,10 @@ WtMoment <- function(x, wavelet = "db4", levels = 3) {
 #' \code{energy_per_leaf}, \code{dominant_leaf}, \code{entropy}, \code{levels},
 #' \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
+#' str(Wpt(x, wavelet = "db4", levels = 3), max.level = 1)
 Wpt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -3166,6 +3315,10 @@ Wpt <- function(x, wavelet = "db4", levels = 3) {
 #' \code{n_coeffs}, \code{sparsity}, \code{noise_removed}, \code{threshold_type},
 #' \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.3)
+#' str(WtThresh(x, wavelet = "db4", levels = 3), max.level = 1)
 WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
                      threshold = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -3221,6 +3374,9 @@ WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
 #' \code{total_variance}, \code{sample_variance}, \code{dominant_scale}, \code{is_allan},
 #' \code{wavelet}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' WtVar(V)
 WtVar <- function(x, wavelet = "db1", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -3309,6 +3465,8 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 #' @param n Passed to \code{.tf_echo_idx}.
 #' @return A list with \code{x}, \code{n}, \code{a}, \code{n_0}, \code{method}.
 #' @export
+#' @examples
+#' EchoImp(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, n = 5L)
 EchoImp <- function(a, n_0, n) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3343,6 +3501,8 @@ EchoImp <- function(a, n_0, n) {
 #' @return A list with \code{y}, \code{n}, \code{h}, \code{a}, \code{n_0},
 #' \code{echo_visible}, \code{method}.
 #' @export
+#' @examples
+#' EchoSig(h = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L)
 EchoSig <- function(h, a, n_0, n = NULL) {
   hh <- as.numeric(h)
   if (!length(hh)) stop("h must contain at least one sample")
@@ -3381,6 +3541,8 @@ EchoSig <- function(h, a, n_0, n = NULL) {
 #' @return A list with \code{Y}, \code{echo_factor}, \code{z}, \code{H}, \code{a},
 #' \code{n_0}, \code{method}.
 #' @export
+#' @examples
+#' EchoZ(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, z = c(1, 2, 3, 4, 5, 6, 7, 8))
 EchoZ <- function(a, n_0, z, H = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3429,6 +3591,8 @@ EchoZ <- function(a, n_0, z, H = NULL) {
 #' @return A list with \code{Y}, \code{echo_factor}, \code{magnitude}, \code{phase},
 #' \code{omega}, \code{ripple_period}, \code{a}, \code{n_0}, \code{method}.
 #' @export
+#' @examples
+#' EchoSpec(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, omega = c(1, 2, 3, 4, 5, 6, 7, 8))
 EchoSpec <- function(a, n_0, omega, H = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3483,6 +3647,8 @@ EchoSpec <- function(a, n_0, omega, H = NULL) {
 #' \code{series_error}, \code{omega}, \code{a}, \code{n_0}, \code{n_terms},
 #' \code{method}.
 #' @export
+#' @examples
+#' EchoLogSp(a = 0.5, n_0 = 8L, omega = seq(0, pi, length.out = 16))
 EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3621,6 +3787,8 @@ EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
 #' @return A list with \code{power}, \code{wavelet_power}, \code{echo_power}, \code{z},
 #' \code{a}, \code{n_0}, \code{method}.
 #' @export
+#' @examples
+#' EchoPsd(H = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, z = c(1, 2, 3, 4, 5, 6, 7, 8))
 EchoPsd <- function(H, a, n_0, z) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3666,6 +3834,8 @@ EchoPsd <- function(H, a, n_0, z) {
 #' \code{dc_term}, \code{ripple}, \code{modulation_index}, \code{ripple_period},
 #' \code{decomposition_error}, \code{omega}, \code{a}, \code{n_0}, \code{method}.
 #' @export
+#' @examples
+#' EchoLogPsd(H = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, omega = c(1, 2, 3, 4, 5, 6, 7, 8))
 EchoLogPsd <- function(H, a, n_0, omega) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)

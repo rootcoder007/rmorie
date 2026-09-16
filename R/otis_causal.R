@@ -434,15 +434,17 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
 #'   29(2), 238-249.
 #' @export
 #' @examples
-#' set.seed(1)
-#' n <- 300L
-#' x <- rnorm(n)
-#' d <- rbinom(n, 1, plogis(0.4 * x))
-#' y <- 0.5 * d + x + rnorm(n)
-#' df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
-#'                                                       replace = TRUE))
-#' morie_otis_irm_dml(df, treatment = "d", outcome = "y",
-#'                    covariates = "x", n_folds = 3L)
+#' if (requireNamespace("DoubleML", quietly = TRUE) && requireNamespace("MatchIt", quietly = TRUE)) {
+#'   set.seed(1)
+#'   n <- 300L
+#'   x <- rnorm(n)
+#'   d <- rbinom(n, 1, plogis(0.4 * x))
+#'   y <- 0.5 * d + x + rnorm(n)
+#'   df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
+#'                                                         replace = TRUE))
+#'   morie_otis_irm_dml(df, treatment = "d", outcome = "y",
+#'                      covariates = "x", n_folds = 3L)
+#' }
 morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
                                cluster_cols = NULL,
                                n_folds = 3L, seed = 123L,
@@ -772,11 +774,13 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
 #'   \code{covariates} = c("Gender", "Age_Category", "EndFiscalYear").
 #' @export
 #' @examples
-#' \donttest{
+#' if (requireNamespace("DoubleML", quietly = TRUE) && requireNamespace("MatchIt", quietly = TRUE) && requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   df <- morie_otis_load()
-#'   pair <- morie_otis_make_pair_alert_to_volatility_ruhela(df)
-#'   morie_otis_irm_dml(pair$data, treatment = pair$T,
-#'                      outcome = pair$Y, covariates = pair$covariates)
+#'     pair <- morie_otis_make_pair_alert_to_volatility_ruhela(df)
+#'     morie_otis_irm_dml(pair$data, treatment = pair$T,
+#'                        outcome = pair$Y, covariates = pair$covariates)
+#'   }
 #' }
 morie_otis_make_pair_alert_to_volatility_ruhela <- function(df) {
   base <- .otis_alert_volatility_frame(df)
@@ -827,9 +831,11 @@ morie_otis_make_pair_alert_to_volatility_ruhela <- function(df) {
 #'   c("Gender", "Age_Category", "EndFiscalYear").
 #' @export
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   df <- morie_otis_load()
-#'   morie_otis_make_pair_alert_to_volatility_naive(df)
+#'     morie_otis_make_pair_alert_to_volatility_naive(df)
+#'   }
 #' }
 morie_otis_make_pair_alert_to_volatility_naive <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
@@ -882,8 +888,10 @@ morie_otis_make_pair_alert_to_volatility_naive <- function(df) {
 #'   each element is the output of the corresponding make-pair builder.
 #' @export
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   morie_otis_make_pair_alert_to_volatility_all(morie_otis_load())
+#'   }
 #' }
 morie_otis_make_pair_alert_to_volatility_all <- function(df) {
   list(
@@ -935,8 +943,10 @@ morie_otis_make_pair_alert_to_volatility_a01 <- function(df = NULL) {
 #' @return Named list \code{list(data, T = "T_a", Y = "Y_a", covariates)}.
 #' @export
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   morie_otis_make_pair_a(morie_otis_load())
+#'   }
 #' }
 morie_otis_make_pair_a <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
@@ -966,8 +976,10 @@ morie_otis_make_pair_a <- function(df) {
 #' @return Named list \code{list(data, T = "T_b", Y = "Y_b", covariates)}.
 #' @export
 #' @examples
-#' \donttest{
+#' if (requireNamespace("readr", quietly = TRUE)) {
+#'   \donttest{
 #'   morie_otis_make_pair_b(morie_otis_load())
+#'   }
 #' }
 morie_otis_make_pair_b <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear", "Gender",
@@ -1163,6 +1175,7 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
 #'   \code{morie_otis_aipw_ate}).
 #' @export
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' n <- 200
 #' x1 <- rnorm(n); x2 <- rnorm(n)
@@ -1172,6 +1185,7 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
 #' morie_otis_aipw_superlearner(df, treatment = "d", outcome = "y",
 #'                              covariates = c("x1", "x2"),
 #'                              n_folds = 3L)
+#' }
 morie_otis_aipw_superlearner <- function(df, treatment, outcome,
                                          covariates, n_folds = 5L,
                                          seed = 123L, eps = 0.02) {

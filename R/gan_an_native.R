@@ -241,6 +241,9 @@ morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
 #' @param g_z Passed to \code{.gan_an_residual_loss_impl}.
 #' @return The value of \code{.gan_an_residual_loss_impl}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' residual_loss(V, V)
 residual_loss <- function(x, g_z) {
   .gan_an_residual_loss_impl(x, g_z)
 }
@@ -255,6 +258,9 @@ residual_loss <- function(x, g_z) {
 #' @param f_gz Passed to \code{.gan_an_discrimination_loss_impl}.
 #' @return The value of \code{.gan_an_discrimination_loss_impl}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' discrimination_loss(V, V)
 discrimination_loss <- function(f_x, f_gz) {
   .gan_an_discrimination_loss_impl(f_x, f_gz)
 }
@@ -272,6 +278,9 @@ discrimination_loss <- function(f_x, f_gz) {
 #' @param lam Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.
 #' @return The value of \code{.gan_an_anomaly_score_impl}.
 #' @export
+#' @examples
+#' anomaly_score(x = c(1, 2, 3, 4, 5, 6, 7, 8), g_z = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   f_x = c(1, 2, 3, 4, 5, 6, 7, 8), f_gz = c(1, 2, 3, 4, 5, 6, 7, 8))
 anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
   .gan_an_anomaly_score_impl(x, g_z, f_x, f_gz, lam)
 }
@@ -287,6 +296,9 @@ anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
 #' @param shape Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{map}, \code{max}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' residual_map(V, V)
 residual_map <- function(x, g_z, shape = NULL) {
   a <- .gan_an_as_num(x)
   b <- .gan_an_as_num(g_z)
@@ -321,6 +333,9 @@ residual_map <- function(x, g_z, shape = NULL) {
 #' @return A list with \code{auc}, \code{mean_normal}, \code{mean_anomalous},
 #' \code{separated}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' score_separation(V, V)
 score_separation <- function(normal_scores, anomalous_scores) {
   a <- .gan_an_as_num(normal_scores)
   b <- .gan_an_as_num(anomalous_scores)

@@ -132,6 +132,8 @@ morie_tlhoest_second_order_term <- .tlhoest_second_order_term
 #' @return A list with \code{order}, \code{required_rate_per_nuisance}, \code{example_n},
 #' \code{error_at_that_rate}, \code{note}.
 #' @export
+#' @examples
+#' morie_tlhoest_rate_requirement(order = 5L)
 morie_tlhoest_rate_requirement <- function(order, n = 1000L) {
   o <- as.integer(order)
   if (o < 1L) {
@@ -156,6 +158,9 @@ morie_tlhoest_rate_requirement <- function(order, n = 1000L) {
 #' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{expansion_order}, \code{remainder_order}, \code{must_be}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tlhoest_remainder_order(V)
 morie_tlhoest_remainder_order <- function(order) {
   o <- as.integer(order)
   list(
@@ -174,6 +179,8 @@ morie_tlhoest_remainder_order <- function(order) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_tlhoest_cheatsheet()
 morie_tlhoest_cheatsheet <- function() {
   paste0(
     "tlhoest: TMLE's first-order representation works only if ",

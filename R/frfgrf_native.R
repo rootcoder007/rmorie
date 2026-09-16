@@ -437,6 +437,11 @@
 #' @param sizes Passed to \code{.frfgrf_forest_fit_check}.
 #' @return The value of \code{.frfgrf_forest_fit_check}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- rnorm(50)
+#' X <- matrix(rnorm(100), 50, 2)
+#' morie_frfgrf(y, X, n_trees = 20)
 morie_frfgrf <- function(y, X, n_trees = 100, min_leaf = 5,
                          subsample_frac = 0.5, alpha = 0.05,
                          pi = 0.5, seed = 0,

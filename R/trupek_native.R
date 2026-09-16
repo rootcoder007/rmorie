@@ -434,6 +434,11 @@
 #'   rejected, converged, exit_reason, history, subproblem,
 #'   subproblem_exit and method.
 #' @export
+#' @examples
+#' f <- function(x) sum(x^2)
+#' gf <- function(x) 2 * x
+#' hf <- function(x) 2 * diag(length(x))
+#' morie_trupek_trust_region(f, gf, hf, x0 = c(1.5, -1.0))
 morie_trupek_trust_region <- function(f, grad_f, hess_f, x0, delta = 1,
                                       delta_max = NULL,
                                       subproblem = "steihaug",

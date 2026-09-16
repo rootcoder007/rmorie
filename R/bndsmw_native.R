@@ -18,6 +18,9 @@
 #' @param n_levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @return A list with \code{instruments}, \code{n_instruments}, \code{n_levels}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_hypercube_instruments(V)
 morie_hypercube_instruments <- function(X, n_levels = 3L) {
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"
@@ -66,6 +69,9 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mean}, \code{sd}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_weighted_moments(V, V)
 morie_weighted_moments <- function(m, g) {
   M <- as.matrix(m)
   storage.mode(M) <- "double"
@@ -101,6 +107,9 @@ morie_weighted_moments <- function(m, g) {
 #' @param n_equality Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_S_function(V)
 morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   if (!(form %in% .S_FORMS))
     stop("bndsmw: form must be one of ", paste(.S_FORMS, collapse = ", "))
@@ -130,6 +139,9 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' @return A list with \code{statistic}, \code{per_instrument}, \code{form},
 #' \code{n_instruments}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_cvm_statistic(D, D)
 morie_cvm_statistic <- function(m, instruments, form = "sum",
                                 n_equality = 0L, weights = NULL) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
@@ -175,6 +187,9 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
 #' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level},
 #' \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_gms_critical_value(D, D)
 morie_gms_critical_value <- function(m, instruments, form = "sum",
                                      n_equality = 0L, level = 0.95,
                                      reps = 200L, seed = 0, kappa = NULL) {

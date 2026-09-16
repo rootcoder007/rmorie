@@ -60,6 +60,10 @@
 #' @param type_embeddings Defaults to \code{NULL}.
 #' @return A list with \code{tokens}, \code{n_prompts}, \code{sparse}, \code{note}.
 #' @export
+#' @examples
+#' e <- encode_point_prompt(points = list(c(10, 20), c(30, 40)),
+#'                          labels = c(1, 0), dim = 8)
+#' is.list(e) || is.matrix(e) || is.numeric(e)
 encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL) {
   P <- lapply(points, function(p) c(as.numeric(p[1]), as.numeric(p[2])))
   L <- as.integer(unlist(labels))
@@ -94,6 +98,9 @@ encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL)
 #' @param type_embeddings Defaults to \code{NULL}.
 #' @return A list with \code{tokens}, \code{n_prompts}, \code{sparse}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' encode_box_prompt(V)
 encode_box_prompt <- function(box, dim = 8, type_embeddings = NULL) {
   v <- as.numeric(unlist(box))
   x0 <- v[1]
@@ -122,6 +129,9 @@ encode_box_prompt <- function(box, dim = 8, type_embeddings = NULL) {
 #' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{embedding}, \code{sparse}, \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' encode_mask_prompt(M, M)
 encode_mask_prompt <- function(mask, image_embedding, weight = 1.0) {
   M <- mask
   if (is.list(M) && !is.matrix(M)) M <- do.call(rbind, M)
@@ -149,6 +159,9 @@ encode_mask_prompt <- function(mask, image_embedding, weight = 1.0) {
 #' @return A list with \code{total_ms}, \code{per_prompt_ms}, \code{naive_ms},
 #' \code{speedup}, \code{interactive}, \code{note}.
 #' @export
+#' @examples
+#' r <- amortised_cost(encoder_ms = 100, decoder_ms = 5, n_prompts = 50)
+#' is.list(r) || is.numeric(r)
 amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
   e <- as.numeric(encoder_ms)
   d <- as.numeric(decoder_ms)
@@ -176,6 +189,13 @@ amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
 #' @return A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' decoder <- function(emb, tokens, multi) list(matrix(runif(16), 4, 4),
+#'                                              matrix(runif(16), 4, 4))
+#' r <- promptable_segment(image_embedding = matrix(rnorm(64), 8, 8),
+#'                         prompt_tokens = matrix(rnorm(16), 2, 8), decoder)
+#' is.list(r)
 promptable_segment <- function(image_embedding, prompt_tokens, decoder,
                                multimask = TRUE) {
   masks <- decoder(image_embedding, prompt_tokens, multimask)

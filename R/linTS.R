@@ -26,7 +26,7 @@
 #' @export
 #' @examples
 #' Lints(contexts = c(1, 2, 3, 4, 5, 6, 7, 8), played = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' rewards = c(1, 2, 3, 4, 5, 6, 7, 8))
+#'   rewards = c(1, 2, 3, 4, 5, 6, 7, 8))
 Lints <- function(contexts, played, rewards, R = 0.5, delta = 0.1, horizon = NULL, z = NULL) {
   X <- as.matrix(contexts)
   P <- as.matrix(played)

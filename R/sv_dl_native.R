@@ -159,6 +159,14 @@
 #' @param spread One of \code{"mad"}, \code{"sd"}. Defaults to \code{"mad"}.
 #' @return A list with \code{median}, \code{sd}, \code{spread}, \code{orientation}, \code{n}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' mk <- function(pos, gap) list(chrom1 = "chr1", pos1 = pos, strand1 = "+",
+#'                               chrom2 = "chr1", pos2 = pos + gap,
+#'                               strand2 = "-")
+#' pairs <- lapply(seq(100, 4000, by = 150), function(p)
+#'   mk(p, 300 + sample(-20:20, 1)))
+#' morie_sv_dl_insert_size_stats(pairs)
 morie_sv_dl_insert_size_stats <- function(pairs, orientation = NULL,
                                           spread = "mad") {
   # Median and spread of the library insert size, and its orientation.
@@ -231,6 +239,10 @@ morie_sv_dl_insert_size_stats <- function(pairs, orientation = NULL,
 #' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @return Nothing; the function is called for its effect.
 #' @export
+#' @examples
+#' p <- list(chrom1 = "chr1", pos1 = 1000, strand1 = "+",
+#'           chrom2 = "chr1", pos2 = 3000, strand2 = "-")
+#' morie_sv_dl_classify_pair(p, median = 300, sd = 15)
 morie_sv_dl_classify_pair <- function(p, median, sd, orientation = c("+", "-"),
                                       n_sd = 3.0) {
   # The signature of one pair (Section 2.1, Figure 2). Returns NULL
@@ -386,6 +398,10 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
 #' @param edges A matrix; indexed by row and column.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_sv_dl_maximal_clique(V, M)
 morie_sv_dl_maximal_clique <- function(members, edges) {
   # Grow a clique from the lowest-weight edge (Section 2.1): the seed
   # is e_min; then repeatedly the lowest-weight edge with exactly one
@@ -451,6 +467,16 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
 #' @param spread Passed to \code{morie_sv_dl_insert_size_stats}. Defaults to \code{"mad"}.
 #' @return The value of \code{calls}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(2)
+#' mk <- function(pos, gap) list(chrom1 = "chr1", pos1 = pos, strand1 = "+",
+#'                               chrom2 = "chr1", pos2 = pos + gap,
+#'                               strand2 = "-")
+#' conc <- lapply(seq(100, 4000, by = 150), function(p)
+#'   mk(p, 300 + sample(-20:20, 1)))
+#' del <- lapply(1:3, function(k) mk(5000 + 5 * k, 1500))
+#' r <- morie_sv_dl_paired_end_calls(c(conc, del))
+#' str(r, max.level = 1)
 morie_sv_dl_paired_end_calls <- function(pairs, median = NULL, sd = NULL,
                                          orientation = NULL, n_sd = 3.0,
                                          min_support = 2, window = NULL,
@@ -561,6 +587,8 @@ morie_sv_dl_paired_end_calls <- function(pairs, median = NULL, sd = NULL,
 #' @param sv_type One of \code{"DEL"}, \code{"DUP"}, \code{"INV"}.
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_sv_dl_deletion_type_reference("ACGTACGTAA", "INV")
 morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
   # Rewrite the region so a deletion-type search works (Figure 4): a
   # tandem duplication has its two halves swapped, an inversion has
@@ -600,6 +628,8 @@ morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
 #' @param require_half A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' morie_sv_dl_kmer_diagonals(read = 5L, ref = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_sv_dl_kmer_diagonals <- function(read, ref, k = 7, k_min = 3,
                                        require_half = TRUE) {
   # Bin the read's k-mer hits by alignment diagonal (Section 2.2).
@@ -674,6 +704,9 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k = 7, k_min = 3,
 #' \code{as.integer}.
 #' @return A list with \code{consensus}, \code{start}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_sv_dl_split_read_consensus(V)
 morie_sv_dl_split_read_consensus <- function(reads, starts = NULL) {
   # Gapless majority-vote consensus over the aligned reads. starts
   # places each read in a common frame. Returns list(consensus, start).
@@ -785,6 +818,8 @@ morie_sv_dl_split_read_consensus <- function(reads, starts = NULL) {
 #' @param gap_extend Passed to \code{.sv_dl_gotoh}. Defaults to \code{-1}.
 #' @return A list with \code{f}, \code{f_at}, \code{r}, \code{r_at}.
 #' @export
+#' @examples
+#' morie_sv_dl_gotoh_score_vectors(consensus = 5L, ref = 5L)
 morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match = 1.0,
                                             mismatch = -2.0, gap_open = -4.0,
                                             gap_extend = -1.0) {
@@ -822,6 +857,9 @@ morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match = 1.0,
 #' @param r A vector; its length is taken and its elements indexed.
 #' @return A list with \code{i}, \code{j}, \code{score}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_sv_dl_optimal_split(V, V)
 morie_sv_dl_optimal_split <- function(f, r) {
   # argmax_{i<j} f_i + r_j -- the split with a microinsertion gap.
   # Indices are 1-based over the consensus, as in the paper.
@@ -976,6 +1014,16 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k = 7,
 #' \code{insert_median}, \code{insert_sd}, \code{spread}, \code{orientation},
 #' \code{n_sd}, \code{min_support}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' mk <- function(pos, gap) list(chrom1 = "chr1", pos1 = pos, strand1 = "+",
+#'                               chrom2 = "chr1", pos2 = pos + gap,
+#'                               strand2 = "-")
+#' conc <- lapply(seq(100, 4000, by = 150), function(p)
+#'   mk(p, 300 + sample(-20:20, 1)))
+#' del <- lapply(1:3, function(k) mk(5000 + 5 * k, 1500))
+#' r <- morie_sv_dl_structural_variant(c(conc, del))
+#' str(r, max.level = 1)
 morie_sv_dl_structural_variant <- function(pairs, reference = NULL,
                                            split_reads = NULL,
                                            orientation = NULL, median = NULL,
@@ -1052,6 +1100,8 @@ morie_sv_dl_structural_variant <- function(pairs, reference = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_sv_dl_cheatsheet()
 morie_sv_dl_cheatsheet <- function() {
   paste0(
     "sv_dl: DELLY (Rausch et al. 2012). Discordant pairs are ",

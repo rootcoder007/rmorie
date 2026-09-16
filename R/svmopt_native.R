@@ -40,6 +40,9 @@
 #' @param coef0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{K}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' kernel_matrix(V)
 kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
                           coef0 = 0.0) {
   M <- as.matrix(X)
@@ -75,6 +78,12 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
 #' @param K A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- rbind(matrix(rnorm(10, -1), 5, 2), matrix(rnorm(10, 1), 5, 2))
+#' y <- rep(c(-1, 1), each = 5)
+#' K <- X %*% t(X)
+#' dual_objective(rep(0.1, 10), y, K)
 dual_objective <- function(alpha, y, K) {
   a <- as.numeric(alpha)
   yy <- as.numeric(y)
@@ -127,6 +136,15 @@ dual_objective <- function(alpha, y, K) {
 #' @return A list with \code{alpha}, \code{moved}, \code{clipped}, \code{L}, \code{H},
 #' \code{eta}, \code{step}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- rbind(matrix(rnorm(10, -1), 5, 2), matrix(rnorm(10, 1), 5, 2))
+#' y <- rep(c(-1, 1), each = 5)
+#' K <- X %*% t(X)
+#' a <- rep(0, 10)
+#' grad <- rep(-1, 10)
+#' r <- solve_pair(1L, 6L, a, y, K, grad, C = 1)
+#' str(r, max.level = 1)
 solve_pair <- function(i, j, alpha, y, K, grad, C) {
   a <- as.numeric(alpha)
   if (i == j)
@@ -166,6 +184,14 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
 #' @param C Numeric; combined arithmetically in the body.
 #' @return A list with \code{gap}, \code{i}, \code{j}, \code{n_up}, \code{n_low}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- rbind(matrix(rnorm(10, -1), 5, 2), matrix(rnorm(10, 1), 5, 2))
+#' y <- rep(c(-1, 1), each = 5)
+#' K <- X %*% t(X)
+#' a <- rep(0.1, 10)
+#' grad <- as.numeric(K %*% (a * y) * y) - 1
+#' str(kkt_violation(a, y, grad, C = 1), max.level = 1)
 kkt_violation <- function(alpha, y, grad, C) {
   a <- as.numeric(alpha)
   yy <- as.numeric(y)
@@ -198,6 +224,9 @@ kkt_violation <- function(alpha, y, grad, C) {
 #' @param C Numeric; combined arithmetically in the body.
 #' @return A list with \code{b}, \code{n_free}, \code{bracketed}, \code{note}.
 #' @export
+#' @examples
+#' recover_bias(alpha = 0.5, y = c(1, 2, 3, 4, 5, 6, 7, 8), grad = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   C = c(1, 2, 3, 4, 5, 6, 7, 8))
 recover_bias <- function(alpha, y, grad, C) {
   a <- as.numeric(alpha)
   yy <- as.numeric(y)
@@ -230,6 +259,13 @@ recover_bias <- function(alpha, y, grad, C) {
 #' \code{iterations}, \code{converged}, \code{support_vectors}, \code{n_sv},
 #' \code{n_free}, \code{equality_residual}, \code{objective}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- rbind(matrix(rnorm(20, -1.5), 10, 2), matrix(rnorm(20, 1.5), 10, 2))
+#' y <- rep(c(-1, 1), each = 10)
+#' K <- X %*% t(X)
+#' r <- smo(y, K, C = 1)
+#' str(r, max.level = 1)
 smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
   yy <- as.numeric(y)
   n <- length(yy)

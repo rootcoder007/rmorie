@@ -33,6 +33,10 @@
 #' \code{elementary_effects}, \code{n_runs}, \code{delta}, \code{n_levels}, \code{r},
 #' \code{p}, \code{k}, \code{method}.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' res <- morie_morrisM(fun = fn, k = 3L)
+#' res
 morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
                           bounds = NULL) {
   k <- as.integer(k)

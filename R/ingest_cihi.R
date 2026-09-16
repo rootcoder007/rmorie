@@ -37,9 +37,11 @@
 #' @return A base R \code{data.frame} with columns \code{title}, \code{url},
 #'   and (when \pkg{rmoriedata} is present) \code{wayback_url}.
 #' @examples
-#' cat <- morie_datasets_cihi_data_tables()
-#' nrow(cat)
-#' cat$title[1]
+#' if (requireNamespace("readxl", quietly = TRUE)) {
+#'   cat <- morie_datasets_cihi_data_tables()
+#'   nrow(cat)
+#'   cat$title[1]
+#' }
 #' @export
 morie_datasets_cihi_data_tables <- function() {
   if (requireNamespace("rmoriedata", quietly = TRUE)) {
@@ -79,12 +81,14 @@ morie_datasets_cihi_data_tables <- function() {
 #'   installed; \code{""} disables the fallback.
 #' @param ... forwarded to readxl::read_excel.
 #' @return base R data.frame.
-#' @examplesIf requireNamespace("httr2", quietly = TRUE) && requireNamespace("readxl", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Any table from the catalogue, e.g. the injury/trauma ED table:
 #' u <- morie_datasets_cihi_data_tables()$url[1]
 #' df <- morie_ingest_cihi_xlsx(u)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
                                    user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)",

@@ -42,7 +42,7 @@ A list with the chosen pose, the chosen chi angles, the   softened and hard ener
 }
 \keyword{internal}
 \examples{
-REC <- list(c(0, 0, 0), c(1.5, 0, 0), c(2.2, 1.2, 0), c(3, 1.2, 
+REC <- list(c(0, 0, 0), c(1.5, 0, 0), c(2.2, 1.2, 0), c(3, 1.2,
     0), c(0, -4, 0), c(-3, 0, 0))
 RR <- rep(1.7, 6)
 CHI <- list(list(a = 0L, b = 1L, moves = c(2L, 3L)))

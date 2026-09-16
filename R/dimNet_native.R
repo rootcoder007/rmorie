@@ -29,6 +29,9 @@
 #' @param r_i Numeric position of atom i.
 #' @return Numeric angle in radians.
 #' @export
+#' @examples
+#' morie_dimNet_angle_between(r_k = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   r_j = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), r_i = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_dimNet_angle_between <- function(r_k, r_j, r_i) {
   a <- as.numeric(r_k)
   b <- as.numeric(r_j)
@@ -48,6 +51,9 @@ morie_dimNet_angle_between <- function(r_k, r_j, r_i) {
 #' @param adj Named list mapping each node to its neighbours.
 #' @return A list with \code{triplets} and \code{pairs}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_dimNet_triplet_count(V)
 morie_dimNet_triplet_count <- function(adj) {
   pairs <- 0
   trips <- 0
@@ -70,6 +76,8 @@ morie_dimNet_triplet_count <- function(adj) {
 #' @param n_basis Integer number of basis functions.
 #' @return Numeric vector of length \code{n_basis}.
 #' @export
+#' @examples
+#' morie_dimNet_bessel_basis(d = 5L)
 morie_dimNet_bessel_basis <- function(d, cutoff = 5.0, n_basis = 8L) {
   c <- as.numeric(cutoff)
   dv <- as.numeric(d)
@@ -90,6 +98,9 @@ morie_dimNet_bessel_basis <- function(d, cutoff = 5.0, n_basis = 8L) {
 #' @param n_basis Integer number of basis functions.
 #' @return Numeric vector of length \code{n_basis}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_dimNet_spherical_harmonic_basis(V)
 morie_dimNet_spherical_harmonic_basis <- function(angle, n_basis = 4L) {
   x <- cos(as.numeric(angle))
   n <- as.integer(n_basis)
@@ -117,6 +128,10 @@ morie_dimNet_spherical_harmonic_basis <- function(angle, n_basis = 4L) {
 #' @return A list with the updated messages, the count and the
 #'   triplets.
 #' @export
+#' @examples
+#' morie_dimNet_directional_message_pass(messages = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   adj = c(1, 2, 3, 4, 5, 6, 7, 8), R = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   interact = c(1, 2, 3, 4, 5, 6, 7, 8), update = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_dimNet_directional_message_pass <- function(messages, adj, R,
                                                    interact, update,
                                                    cutoff = 5.0,

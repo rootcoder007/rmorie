@@ -19,6 +19,6 @@ List with \code{estimate}, \code{margins}, implicit rewards.
 -mean log sigmoid of the beta-scaled log-ratio margin.
 }
 \examples{
-morie_kamath_ch5_dpo_loss(list(c(0.6, 0.4), c(0.7, 0.3)), list(c(0.5, 
+morie_kamath_ch5_dpo_loss(list(c(0.6, 0.4), c(0.7, 0.3)), list(c(0.5,
     0.5), c(0.5, 0.5)), 0.2)
 }

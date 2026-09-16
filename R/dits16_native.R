@@ -15,6 +15,8 @@
 #' @param patch      integer, patch side p; p must divide I.
 #' @return list with tokens, grid, patch, latent_size, note.
 #' @export
+#' @examples
+#' patch_grid(latent_size = 5L, patch = 5L)
 patch_grid <- function(latent_size, patch) {
   I <- as.integer(latent_size)
   p <- as.integer(patch)
@@ -40,6 +42,8 @@ patch_grid <- function(latent_size, patch) {
 #' @param mlp_ratio numeric, MLP hidden expansion (default 4.0).
 #' @return list with gflops, tokens, depth, width, attention_share, note.
 #' @export
+#' @examples
+#' gflops(tokens = c(1, 2, 3, 4, 5, 6, 7, 8), depth = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L)
 gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
   T <- as.integer(tokens)
   L <- as.integer(depth)
@@ -86,6 +90,10 @@ gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
 #' @param eps     numeric, variance epsilon.
 #' @return list with modulated, gate, identity_at_init, note.
 #' @export
+#' @examples
+#' adaln_zero(cond = c(1, 2, 3, 4, 5, 6, 7, 8), hidden = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   W_scale = c(1, 2, 3, 4, 5, 6, 7, 8), W_shift = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   W_alpha = c(1, 2, 3, 4, 5, 6, 7, 8))
 adaln_zero <- function(cond, hidden, W_scale, W_shift, W_alpha,
                        eps = 1e-6) {
   c <- .dits16_vec(cond)
@@ -155,6 +163,10 @@ dit_block <- function(hidden, cond, attn_fn, mlp_fn,
 #' @param configs list of 5-tuples (name, latent, patch, depth, width).
 #' @return list with ranked entries and a note.
 #' @export
+#' @examples
+#' configs <- list(list("small", 224, 16, 6, 384),
+#'                 list("base", 224, 16, 12, 768))
+#' scaling_comparison(configs)
 scaling_comparison <- function(configs) {
   out <- list()
   for (cfg in configs) {

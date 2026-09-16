@@ -178,6 +178,9 @@
 #' \code{moments_only}, \code{verdict}, \code{informativeness}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_pibmd_prior_informativeness_bias_diagnostic(V, V)
 morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
                                                               n_grid = 512L) {
   q <- as.numeric(samples)

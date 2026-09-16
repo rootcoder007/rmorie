@@ -219,6 +219,8 @@
 #'   Difference Boundaries in Areal Data. Statistica Sinica, 25(1),
 #'   385-402.
 #' @export
+#' @examples
+#' morie_dpgrf(W = 5L, label_draws = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_dpgrf <- function(W, label_draws, threshold = 0.5) {
   pairs <- .dpgrf_adjacency_pairs(W)$pairs
   co <- .dpgrf_coclustering(label_draws)$matrix

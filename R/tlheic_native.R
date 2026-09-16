@@ -41,6 +41,12 @@
 #' @param mode One of \code{"deriv"}, \code{"grad"}, \code{"verify"}.
 #' @return The value of \code{estimate_eic}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' B <- cbind(1, matrix(rnorm(40), 20, 2))
+#' psi <- function(w) sum(w * B[, 2])
+#' r <- morie_tlheic(psi_of_P = psi, basis = B, mode = "estimate")
+#' str(r, max.level = 1)
 morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
                          score = NULL, weights = NULL,
                          h = 1e-5, tol = 1e-4, ridge = 1e-8,
@@ -71,6 +77,12 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(1)
+#' w <- rep(1 / 20, 20)
+#' score <- rnorm(20)
+#' psi <- function(wv) sum(wv * (1:20))
+#' numerical_derivative(psi, w, score)
 numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
   w <- as.numeric(weights)
   s <- as.numeric(score)
@@ -101,6 +113,9 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
 #' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gradient_inner_product(V, V)
 gradient_inner_product <- function(D, score, weights = NULL) {
   d <- as.numeric(D)
   s <- as.numeric(score)
@@ -128,6 +143,12 @@ gradient_inner_product <- function(D, score, weights = NULL) {
 #' @return A list with \code{estimate}, \code{D}, \code{coefficients},
 #' \code{n_directions}, \code{mean}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' B <- cbind(1, matrix(rnorm(40), 20, 2))
+#' psi <- function(w) sum(w * B[, 2])
+#' r <- estimate_eic(psi, B)
+#' str(r, max.level = 1)
 estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
                          ridge = 1e-8) {
   B <- as.matrix(basis)
@@ -172,6 +193,16 @@ estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
 #' @return A list with \code{derivative}, \code{inner_product}, \code{difference},
 #' \code{verified}, \code{note}.
 #' @export
+#' @examples
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   set.seed(1)
+#'   B <- cbind(1, matrix(rnorm(40), 20, 2))
+#'   psi <- function(w) sum(w * B[, 2])
+#'   eic <- estimate_eic(psi, B)
+#'   score <- B[, 2] - mean(B[, 2])
+#'   r <- verify_gradient(psi, eic$D, score)
+#'   str(r, max.level = 1)
+#' }
 verify_gradient <- function(psi_of_P, D, score, weights = NULL,
                             h = 1e-5, tol = 1e-4) {
   D <- as.numeric(D)

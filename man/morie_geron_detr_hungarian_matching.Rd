@@ -47,7 +47,7 @@ minimised exactly by the Jonker-Volgenant shortest-augmenting-path
 assignment. \code{matching} pairs are 0-based (pred, gt), as in Python.
 }
 \examples{
-pb <- matrix(c(0, 0, 1, 1, 10, 10, 11, 11, 0, 0, 2, 2), 3, 4, 
+pb <- matrix(c(0, 0, 1, 1, 10, 10, 11, 11, 0, 0, 2, 2), 3, 4,
     byrow = TRUE)
 pc <- matrix(c(10, 0, 0, 10, 1, 1), 3, 2, byrow = TRUE)
 gb <- matrix(c(0, 0, 1, 1, 10, 10, 11, 11), 2, 4, byrow = TRUE)

@@ -23,6 +23,9 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{Mod}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_unclr_dft_amp(V)
 morie_unclr_dft_amp <- function(x) Mod(stats::fft(as.numeric(x)))
 
 #' morie_unclr_phi
@@ -60,6 +63,9 @@ morie_unclr_Phi <- function(z) stats::pnorm(z)
 
 #' Joint likelihood of independent observations (Lawson eq. 3.1)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Likprod(V)
 Likprod <- function(dens) {
   d <- as.numeric(dens)
   if (any(d < 0)) stop("densities must be non-negative")
@@ -70,6 +76,9 @@ Likprod <- function(dens) {
 
 #' Log-likelihood of independent observations (Lawson eq. 3.2)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Loglksum(V)
 Loglksum <- function(dens) {
   d <- as.numeric(dens)
   if (any(d <= 0)) stop("densities must be strictly positive to take logs")
@@ -78,6 +87,12 @@ Loglksum <- function(dens) {
 
 #' Posterior-averaged Poisson residual (Lawson eq. 5.2)
 #' @noRd
+#' @examples
+#' set.seed(1)
+#' e <- runif(20, 5, 15)
+#' theta <- matrix(rgamma(80, 2, 2), 4, 20)
+#' y <- rpois(20, e * colMeans(theta))
+#' rmorie:::Postres(y, e, theta)
 Postres <- function(y, e, theta_draws) {
   y <- as.numeric(y)
   e <- as.numeric(e)
@@ -92,6 +107,9 @@ Postres <- function(y, e, theta_draws) {
 
 #' Modulated point-process intensity (Lawson eq. 6.3)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Intmod(V, V)
 Intmod <- function(lam0, lam1) {
   a <- as.numeric(lam0)
   b <- as.numeric(lam1)
@@ -103,6 +121,9 @@ Intmod <- function(lam0, lam1) {
 
 #' Case-control logistic likelihood (Lawson eq. 6.6)
 #' @noRd
+#' @examples
+#' set.seed(4)
+#' rmorie:::Cclogl(eta = rnorm(8), y = rbinom(8, 1, 0.5))
 Cclogl <- function(eta, y) {
   e <- as.numeric(eta)
   yy <- as.numeric(y)
@@ -115,6 +136,9 @@ Cclogl <- function(eta, y) {
 
 #' Contextual multilevel logit predictor (Lawson eq. 6.8)
 #' @noRd
+#' @examples
+#' rmorie:::Mlogitlp(f = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   R = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mlogitlp <- function(f, g, R) {
   f <- as.numeric(f)
   g <- as.numeric(g)
@@ -127,6 +151,8 @@ Mlogitlp <- function(f, g, R) {
 
 #' Log-Gaussian Cox process intensity (Lawson eq. 6.18)
 #' @noRd
+#' @examples
+#' rmorie:::Lgcpint(lam0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, S = c(1, 2, 3, 4, 5, 6, 7, 8))
 Lgcpint <- function(lam0, beta, S) {
   a <- as.numeric(lam0)
   s <- as.numeric(S)
@@ -137,6 +163,8 @@ Lgcpint <- function(lam0, beta, S) {
 
 #' Spatial factor Poisson log-risk (Lawson eq. 11.1)
 #' @noRd
+#' @examples
+#' rmorie:::Facrisk(alpha0 = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), phi = 0.5)
 Facrisk <- function(alpha0, W, phi) {
   W <- as.matrix(W)
   p <- as.numeric(phi)
@@ -147,6 +175,8 @@ Facrisk <- function(alpha0, W, phi) {
 
 #' Shared-factor multivariate disease mean (Lawson eq. 14.1)
 #' @noRd
+#' @examples
+#' rmorie:::Mvfacmu(e = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mvfacmu <- function(e, lam, f) {
   E <- as.matrix(e)
   lv <- as.numeric(lam)
@@ -159,6 +189,10 @@ Mvfacmu <- function(e, lam, f) {
 
 #' Multilevel Poisson log-rate (Lawson eq. 15.2)
 #' @noRd
+#' @examples
+#' rmorie:::Mlpois(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   age = c(1, 2, 3, 4, 5, 6, 7, 8), race_effect = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   v = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mlpois <- function(beta0, beta1, age, race_effect, v, W) {
   a <- as.numeric(age)
   r <- as.numeric(race_effect)
@@ -172,6 +206,9 @@ Mlpois <- function(beta0, beta1, age, race_effect, v, W) {
 
 #' Measurement-error normal outcome model (Lawson eq. 16.1)
 #' @noRd
+#' @examples
+#' rmorie:::Menorm(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   x_true = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 Menorm <- function(beta0, beta1, x_true, tau) {
   xt <- as.numeric(x_true)
   t <- as.numeric(tau)
@@ -182,6 +219,10 @@ Menorm <- function(beta0, beta1, x_true, tau) {
 
 #' Binary spatial regression with random effect (Lawson eq. 17.1)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_unclr_dft_amp(V)
+#' rmorie:::Logitre(gamma0 = V, gamma1 = V, d = V, gamma2 = V, x = V, R = V)
 Logitre <- function(gamma0, gamma1, d, gamma2, x, R) {
   d <- as.numeric(d)
   x <- as.numeric(x)
@@ -194,6 +235,9 @@ Logitre <- function(gamma0, gamma1, d, gamma2, x, R) {
 
 #' Epidemic log-autoregression (Lawson eq. 18.3)
 #' @noRd
+#' @examples
+#' rmorie:::Epiar(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   i_lag = c(1, 2, 3, 4, 5, 6, 7, 8), b1 = c(1, 2, 3, 4, 5, 6, 7, 8))
 Epiar <- function(beta0, beta1, i_lag, b1) {
   il <- as.numeric(i_lag)
   bb <- as.numeric(b1)
@@ -205,6 +249,10 @@ Epiar <- function(beta0, beta1, i_lag, b1) {
 
 #' Epidemic log-autoregression with neighbours (Lawson eq. 18.4)
 #' @noRd
+#' @examples
+#' rmorie:::Epiarnb(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   i_lag = c(1, 2, 3, 4, 5, 6, 7, 8), nb_lag = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   b1 = c(1, 2, 3, 4, 5, 6, 7, 8))
 Epiarnb <- function(beta0, beta1, i_lag, nb_lag, b1) {
   il <- as.numeric(i_lag)
   nb <- as.numeric(nb_lag)
@@ -224,6 +272,9 @@ Epiarnb <- function(beta0, beta1, i_lag, nb_lag, b1) {
 
 #' Characteristic-function inversion for a pmf (Deshmukh eq. 4.9)
 #' @noRd
+#' @examples
+#' rmorie:::Cfinvpmf(t = c(1, 2, 3, 4, 5, 6, 7, 8), phi_re = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   phi_im = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8))
 Cfinvpmf <- function(t, phi_re, phi_im, x) {
   tv <- as.numeric(t)
   pr <- as.numeric(phi_re)
@@ -243,6 +294,10 @@ Cfinvpmf <- function(t, phi_re, phi_im, x) {
 
 #' Independence of k events (Deshmukh eq. 5.1)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' S <- c("a", "b", "c")
+#' rmorie:::Indevk(S, V)
 Indevk <- function(p, joint) {
   pv <- as.numeric(p)
   k <- length(pv)
@@ -261,6 +316,9 @@ Indevk <- function(p, joint) {
 
 #' Independence of two random variables (Deshmukh eq. 5.3)
 #' @noRd
+#' @examples
+#' J <- outer(c(0.3, 0.7), c(0.4, 0.6))
+#' rmorie:::Indrv2(J)
 Indrv2 <- function(joint) {
   J <- as.matrix(joint)
   tot <- sum(J)
@@ -274,6 +332,8 @@ Indrv2 <- function(joint) {
 
 #' Limit-superior event, infinitely often (Deshmukh eq. 6.1)
 #' @noRd
+#' @examples
+#' rmorie:::Limsupio(dev = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Limsupio <- function(dev, k) {
   D <- as.matrix(dev)
   kk <- as.integer(k)
@@ -286,6 +346,9 @@ Limsupio <- function(dev, k) {
 
 #' Degenerate limiting distribution of the sample mean (Deshmukh eq. 10.3)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Degencdf(V, V)
 Degencdf <- function(x, mu) {
   xv <- as.numeric(x)
   m <- as.numeric(mu)
@@ -300,6 +363,9 @@ Degencdf <- function(x, mu) {
 
 #' Graph Laplacian pseudoinverse (Klein & Randic 1993)
 #' @noRd
+#' @examples
+#' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
+#' rmorie:::Lappinv(A)
 Lappinv <- function(A, tol = 1e-9) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -318,6 +384,9 @@ Lappinv <- function(A, tol = 1e-9) {
 
 #' Resistance distance matrix (Klein & Randic 1993)
 #' @noRd
+#' @examples
+#' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
+#' rmorie:::Resdist(A)
 Resdist <- function(A, tol = 1e-9) {
   lp <- Lappinv(A, tol)
   Lp <- lp$Lplus
@@ -329,6 +398,9 @@ Resdist <- function(A, tol = 1e-9) {
 
 #' Commute-time distance (Klein & Randic 1993; Chandra et al. 1989)
 #' @noRd
+#' @examples
+#' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
+#' rmorie:::Commdist(A)
 Commdist <- function(A, tol = 1e-9) {
   rd <- Resdist(A, tol)
   m2 <- sum(as.matrix(A))
@@ -337,6 +409,9 @@ Commdist <- function(A, tol = 1e-9) {
 
 #' Kirchhoff index (Klein & Randic 1993)
 #' @noRd
+#' @examples
+#' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
+#' rmorie:::Kirchidx(A)
 Kirchidx <- function(A, tol = 1e-9) {
   rd <- Resdist(A, tol)
   n <- rd$n
@@ -353,6 +428,11 @@ Kirchidx <- function(A, tol = 1e-9) {
 
 #' Gromov-Wasserstein discrepancy (Memoli 2011)
 #' @noRd
+#' @examples
+#' set.seed(5)
+#' Cx <- as.matrix(dist(matrix(rnorm(10), 5, 2)))
+#' Cy <- as.matrix(dist(matrix(rnorm(10), 5, 2)))
+#' rmorie:::Gwdist(Cx, Cy, a = rep(0.2, 5), b = rep(0.2, 5), n_iter = 10)
 Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
   X <- as.matrix(Cx)
   Y <- as.matrix(Cy)
@@ -419,6 +499,9 @@ Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_unclr_alr(V)
 morie_unclr_alr <- function(x) log(x[-length(x)] / x[length(x)])
 
 #' morie_unclr_alr_inv
@@ -431,6 +514,9 @@ morie_unclr_alr <- function(x) log(x[-length(x)] / x[length(x)])
 #' @param total Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_unclr_alr_inv(V, V)
 morie_unclr_alr_inv <- function(z, total) {
   e <- c(exp(z), 1)
   total * e / sum(e)
@@ -448,6 +534,8 @@ morie_unclr_alr_inv <- function(z, total) {
 #' @param draw Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.
 #' @export
+#' @examples
+#' morie_unclr_lr_impute(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, n_iter = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
   Xm <- as.matrix(X)
   n <- nrow(Xm)
@@ -501,10 +589,14 @@ morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
 
 #' Log-ratio EM below a detection limit (Palarea-Albaladejo & Martin-Fernandez 2008)
 #' @noRd
+#' @examples
+#' rmorie:::Lrem(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L)
 Lrem <- function(X, dl, n_iter = 20) morie_unclr_lr_impute(X, dl, n_iter, NULL)
 
 #' Log-ratio data augmentation below a detection limit (Palarea-Albaladejo et al. 2013)
 #' @noRd
+#' @examples
+#' rmorie:::Lrda(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, draw = c(1, 2, 3, 4, 5, 6, 7, 8))
 Lrda <- function(X, dl, draw, n_iter = 20) {
   if (is.null(draw)) stop("lrda needs caller-supplied standard normal variates")
   morie_unclr_lr_impute(X, dl, n_iter, draw)
@@ -516,6 +608,9 @@ Lrda <- function(X, dl, draw, n_iter = 20) {
 
 #' Delete-d jackknife variance (Shao & Wu 1989)
 #' @noRd
+#' @examples
+#' set.seed(4)
+#' rmorie:::Jackd(theta = rnorm(10, 2, 0.1), n = 10, d = 1)
 Jackd <- function(theta, n, d) {
   tv <- as.numeric(theta)
   n <- as.integer(n)
@@ -537,6 +632,8 @@ Jackd <- function(theta, n, d) {
 
 #' Moments of a linear rank statistic (Gibbons & Chakraborti Thm 7.3.1-7.3.2)
 #' @noRd
+#' @examples
+#' rmorie:::Lrankmom(a = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
 Lrankmom <- function(a, m) {
   av <- as.numeric(a)
   N <- length(av)
@@ -556,6 +653,9 @@ Lrankmom <- function(a, m) {
 
 #' Inverse-probability weight truncation (Cole & Hernan 2008)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Wtrunc(V)
 Wtrunc <- function(w, q = 0.99) {
   wv <- as.numeric(w)
   if (any(wv < 0)) stop("weights must be non-negative")
@@ -572,6 +672,13 @@ Wtrunc <- function(w, q = 0.99) {
 
 #' Unified mixed-model per-SNP association test (Yu et al. 2006)
 #' @noRd
+#' @examples
+#' set.seed(2)
+#' n <- 30
+#' X <- cbind(1, rnorm(n))
+#' snp <- rbinom(n, 2, 0.3)
+#' y <- X %*% c(1, 0.5) + 0.4 * snp + rnorm(n, 0, 0.5)
+#' rmorie:::Gwasmlm(as.numeric(y), X, snp, diag(n))
 Gwasmlm <- function(y, X, snp, Vinv) {
   yv <- as.numeric(y)
   g <- as.numeric(snp)
@@ -603,6 +710,9 @@ Gwasmlm <- function(y, X, snp, Vinv) {
 
 #' Multiply-imputed Wald test (Li et al. 1991)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Mitest(V, V)
 Mitest <- function(theta, U) {
   Th <- as.matrix(theta)
   m <- nrow(Th)
@@ -628,6 +738,8 @@ Mitest <- function(theta, U) {
 
 #' Continuous-shrinkage polygenic effects (Ge et al. 2019)
 #' @noRd
+#' @examples
+#' rmorie:::Csshrink(beta_hat = 5L, D = 5L, psi = 5L, n = 5L)
 Csshrink <- function(beta_hat, D, psi, n, sigma2 = 1) {
   bh <- as.numeric(beta_hat)
   Dm <- as.matrix(D)
@@ -651,6 +763,12 @@ Csshrink <- function(beta_hat, D, psi, n, sigma2 = 1) {
 
 #' Piecewise log-linear shedding curve (standard)
 #' @noRd
+#' @examples
+#' set.seed(2)
+#' days <- 0:14
+#' load <- 10^(c(seq(2, 6, length.out = 5), seq(5.8, 4, length.out = 5),
+#'               rep(3.9, 5)) + rnorm(15, 0, 0.05))
+#' rmorie:::Shedcurve(days, load, t_peak = 4, t_plateau = 9)
 Shedcurve <- function(days, load, t_peak, t_plateau) {
   d <- as.numeric(days)
   v <- as.numeric(load)
@@ -692,6 +810,15 @@ Shedcurve <- function(days, load, t_peak, t_plateau) {
 
 #' Cross-validated TMLE of the ATE (Zheng & van der Laan 2011)
 #' @noRd
+#' @examples
+#' set.seed(3)
+#' n <- 60
+#' a <- rbinom(n, 1, 0.5)
+#' g <- rep(0.5, n)
+#' q1 <- rep(0.6, n); q0 <- rep(0.4, n)
+#' y <- rbinom(n, 1, ifelse(a == 1, 0.6, 0.4))
+#' fold <- rep(1:3, length.out = n)
+#' rmorie:::Cvtmle(y, a, q0, q1, g, fold)
 Cvtmle <- function(y, a, q0, q1, g, fold, n_newton = 50) {
   yv <- as.numeric(y)
   av <- as.numeric(a)
@@ -737,6 +864,9 @@ Cvtmle <- function(y, a, q0, q1, g, fold, n_newton = 50) {
 
 #' Natural direct effect (Zheng & van der Laan 2012)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Ndeff(V, V)
 Ndeff <- function(y10, y00) {
   a <- as.numeric(y10)
   b <- as.numeric(y00)
@@ -749,6 +879,9 @@ Ndeff <- function(y10, y00) {
 
 #' Natural indirect effect (Zheng & van der Laan 2012)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Nieff(V, V)
 Nieff <- function(y11, y10) {
   a <- as.numeric(y11)
   b <- as.numeric(y10)
@@ -765,6 +898,9 @@ Nieff <- function(y11, y10) {
 
 #' X-learner heterogeneous treatment effect (Kunzel et al. 2019)
 #' @noRd
+#' @examples
+#' set.seed(3)
+#' rmorie:::Xlearn(tau1 = rnorm(20, 1), tau0 = rnorm(20, 0.8), g = runif(20, 0.3, 0.7))
 Xlearn <- function(tau1, tau0, g) {
   t1 <- as.numeric(tau1)
   t0 <- as.numeric(tau0)
@@ -786,6 +922,9 @@ Xlearn <- function(tau1, tau0, g) {
 
 #' Rotary position embedding (Su et al. 2021, RoFormer)
 #' @noRd
+#' @examples
+#' rmorie:::Rope(q = c(1, 0, 0.5, -0.5), m = 3,
+#'      theta = 10000^(-c(0, 1) / 2))
 Rope <- function(q, m, theta) {
   qv <- as.numeric(q)
   th <- as.numeric(theta)
@@ -807,6 +946,9 @@ Rope <- function(q, m, theta) {
 
 #' Group normalisation (Wu & He 2018)
 #' @noRd
+#' @examples
+#' set.seed(4)
+#' rmorie:::Grpnorm(rnorm(12), n_groups = 3)
 Grpnorm <- function(x, n_groups, eps = 1e-5) {
   xv <- as.numeric(x)
   G <- as.integer(n_groups)
@@ -830,6 +972,9 @@ Grpnorm <- function(x, n_groups, eps = 1e-5) {
 
 #' Graph readout by sum pooling (standard; Xu et al. 2019 for its power)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Sumpl(V)
 Sumpl <- function(H) {
   Hm <- as.matrix(H)
   if (nrow(Hm) == 0L) stop("H must have at least one node")
@@ -839,6 +984,10 @@ Sumpl <- function(H) {
 
 #' Graph isomorphism network aggregation (Xu et al. 2019)
 #' @noRd
+#' @examples
+#' A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
+#' H <- matrix(1:6, 3, 2)
+#' rmorie:::Ginagg(A, H, eps = 0.1)
 Ginagg <- function(A, H, eps = 0) {
   Am <- as.matrix(A)
   Hm <- as.matrix(H)
@@ -858,6 +1007,9 @@ Ginagg <- function(A, H, eps = 0) {
 #' @param self_loops A flag; the body branches on it.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
+#' morie_unclr_sym_norm(A, self_loops = TRUE)
 morie_unclr_sym_norm <- function(A, self_loops) {
   n <- nrow(A)
   M <- A + if (self_loops) diag(1, n) else 0
@@ -868,6 +1020,10 @@ morie_unclr_sym_norm <- function(A, self_loops) {
 
 #' Simplified graph convolution propagation (Wu et al. 2019, SGC)
 #' @noRd
+#' @examples
+#' A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
+#' X <- matrix(1:6, 3, 2)
+#' rmorie:::Sgcprop(A, X, K = 2)
 Sgcprop <- function(A, X, K) {
   S <- morie_unclr_sym_norm(as.matrix(A), TRUE)
   out <- as.matrix(X)
@@ -877,6 +1033,11 @@ Sgcprop <- function(A, X, K) {
 
 #' LightGCN layer combination (He et al. 2020)
 #' @noRd
+#' @examples
+#' set.seed(1)
+#' A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
+#' E <- matrix(rnorm(6), 3, 2)
+#' rmorie:::Lgcnprop(A, E, K = 2)
 Lgcnprop <- function(A, E, K, alpha = NULL) {
   S <- morie_unclr_sym_norm(as.matrix(A), FALSE)
   K <- as.integer(K)
@@ -894,6 +1055,8 @@ Lgcnprop <- function(A, E, K, alpha = NULL) {
 
 #' LinUCB arm scores (Li et al. 2010)
 #' @noRd
+#' @examples
+#' rmorie:::Linucb(x = 5L, theta = c(1, 2, 3, 4, 5, 6, 7, 8), Ainv = c(1, 2, 3, 4, 5, 6, 7, 8))
 Linucb <- function(x, theta, Ainv, alpha = 1) {
   xv <- as.numeric(x)
   Th <- as.matrix(theta)
@@ -918,6 +1081,9 @@ Linucb <- function(x, theta, Ainv, alpha = 1) {
 
 #' Structured state-space convolution kernel (Gu, Goel & Re 2022, S4)
 #' @noRd
+#' @examples
+#' rmorie:::Ssmk(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   C = c(1, 2, 3, 4, 5, 6, 7, 8), L = 5L)
 Ssmk <- function(A, B, C, L) {
   Am <- as.matrix(A)
   Bv <- as.numeric(B)
@@ -936,6 +1102,9 @@ Ssmk <- function(A, B, C, L) {
 
 #' Causal convolution y_t = sum_l K_l x_\{t-l\} (standard)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Ssmconv(V, V)
 Ssmconv <- function(K, x) {
   Kv <- as.numeric(K)
   xv <- as.numeric(x)
@@ -947,6 +1116,9 @@ Ssmconv <- function(K, x) {
 
 #' Dominant periods from the amplitude spectrum (Wu et al. 2023, TimesNet)
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::Fftperiod(V)
 Fftperiod <- function(x, k = 1) {
   xv <- as.numeric(x)
   n <- length(xv)
@@ -963,6 +1135,10 @@ Fftperiod <- function(x, k = 1) {
 
 #' Series decomposition and autocorrelation (Wu et al. 2021, Autoformer)
 #' @noRd
+#' @examples
+#' set.seed(5)
+#' x <- sin(2 * pi * (1:60) / 12) + 0.1 * (1:60) / 10 + rnorm(60, 0, 0.1)
+#' str(rmorie:::Serdecomp(x, kernel = 5), max.level = 1)
 Serdecomp <- function(x, kernel) {
   xv <- as.numeric(x)
   n <- length(xv)

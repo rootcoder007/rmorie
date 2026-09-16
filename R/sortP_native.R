@@ -24,6 +24,8 @@
 #' \code{as.numeric}.
 #' @return The value of \code{c}, as built in the body.
 #' @export
+#' @examples
+#' wl_colours(adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L)
 wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
   n <- as.integer(n)
   c <- if (is.null(initial)) rep(1.0, n) else as.numeric(initial)
@@ -58,6 +60,8 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
 #' @return A list with \code{pooled}, \code{order}, \code{n_truncated}, \code{n_padded},
 #' \code{k}, \code{sort_channel}, \code{note}.
 #' @export
+#' @examples
+#' sort_pooling(features = c(1, 2, 3, 4, 5, 6, 7, 8), k_keep = 5L)
 sort_pooling <- function(features, k_keep, sort_channel = -1) {
   X <- if (is.matrix(features)) features else
     do.call(rbind, lapply(features, function(r) as.numeric(r)))
@@ -91,6 +95,9 @@ sort_pooling <- function(features, k_keep, sort_channel = -1) {
 #' @param coverage Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.6}.
 #' @return A list with \code{k}, \code{coverage}, \code{fraction_untruncated}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' choose_k(V)
 choose_k <- function(graph_sizes, coverage = 0.6) {
   s <- sort(as.integer(graph_sizes))
   c <- as.numeric(coverage)

@@ -76,11 +76,15 @@ GEMINI_BASE_URL <- "https://generativelanguage.googleapis.com/v1beta/openai"
 #'   \code{quantization}. Zero rows when the server is unreachable or serves
 #'   no models (never errors), so it doubles as a connectivity test.
 #' @examples
+#' # \dontrun (not \donttest): this reaches the network. \donttest
+#' # examples ARE run by pkgdown and by CRAN's --run-donttest.
 #' \dontrun{
-#' # Point at your own Ollama server, then see what it serves:
-#' Sys.setenv(OLLAMA_HOST = "http://localhost:11434")
-#' models <- morie_llm_ollama_models()
-#' models$name
+#' if (requireNamespace("httr2", quietly = TRUE)) {
+#'   # Point at your own Ollama server, then see what it serves:
+#'   Sys.setenv(OLLAMA_HOST = "http://localhost:11434")
+#'   models <- morie_llm_ollama_models()
+#'   models$name
+#'   }
 #' }
 #' @export
 morie_llm_ollama_models <- function(base = .morie_llm_ollama_base(),
@@ -165,9 +169,11 @@ if (nzchar(v)) v else NULL }
 #' # \dontrun (not \donttest): this reaches the network. \donttest
 #' # examples ARE run by pkgdown and by CRAN's --run-donttest.
 #' \dontrun{
-#' old <- options(morie.llm.ollama_cached = FALSE)
-#' morie_llm_probe_ollama()
-#' options(old)
+#' if (requireNamespace("httr2", quietly = TRUE)) {
+#'   old <- options(morie.llm.ollama_cached = FALSE)
+#'   morie_llm_probe_ollama()
+#'   options(old)
+#' }
 #' }
 #' @export
 morie_llm_probe_ollama <- function(timeout = 2) {
@@ -243,10 +249,12 @@ morie_llm_detect_provider <- function() {
 #' @param timeout Seconds. Default 120.
 #' @return Parsed JSON list (the response body).
 #' @examples
-#' \dontrun{
-#' msgs <- list(list(role = "user", content = "Say hello"))
-#' # Second arg is whatever model your Ollama server serves (see `ollama list`).
-#' res <- try(morie_llm_request_completion("http://localhost:11434", "your-model", msgs))
+#' if (requireNamespace("httr2", quietly = TRUE)) {
+#'   \donttest{
+#'   msgs <- list(list(role = "user", content = "Say hello"))
+#'   # Second arg is whatever model your Ollama server serves (see `ollama list`).
+#'   res <- try(morie_llm_request_completion("http://localhost:11434", "your-model", msgs))
+#'   }
 #' }
 #' @export
 morie_llm_request_completion <- function(base_url, model, messages,

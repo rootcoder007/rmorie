@@ -25,7 +25,7 @@ The value of \code{r}, as built in the body.
 }
 \keyword{internal}
 \examples{
-sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 * 
+sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
     pi * cycles * (0:(n - 1))/n + phase)
 n <- 400
 v <- sine_a(256, 3)

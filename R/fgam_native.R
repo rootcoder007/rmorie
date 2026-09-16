@@ -136,6 +136,9 @@
 #' \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t},
 #' \code{linear_deviation}, \code{n}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_fgam_functional_gam(V, V)
 morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
                                       lam_x = 1.0, lam_t = 1.0) {
   Xm <- as.matrix(X)

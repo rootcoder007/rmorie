@@ -101,6 +101,9 @@
 #' @param a,b Coordinate triples.
 #' @return A numeric scalar.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rfppos_distance(V, V)
 morie_rfppos_distance <- function(a, b) .rfppos_norm(a - b)
 
 #' The angle at b, in degrees, subtended by a and c
@@ -113,6 +116,8 @@ morie_rfppos_distance <- function(a, b) .rfppos_norm(a - b)
 #' @param a,b,c Coordinate triples; b is the vertex.
 #' @return Degrees.
 #' @export
+#' @examples
+#' morie_rfppos_angle(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rfppos_angle <- function(a, b, c) {
   u <- a - b
   v <- c - b
@@ -135,6 +140,8 @@ morie_rfppos_angle <- function(a, b, c) {
 #' @param a,b,c,d Four coordinate triples.
 #' @return Degrees, signed.
 #' @export
+#' @examples
+#' morie_rfppos_dihedral(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L)
 morie_rfppos_dihedral <- function(a, b, c, d) {
   b1 <- b - a
   b2 <- c - b
@@ -167,6 +174,8 @@ morie_rfppos_dihedral <- function(a, b, c, d) {
 #' @return A zero-based triple of electrophile, reference and torsion
 #'   atom, or NULL when the molecule carries no such warhead.
 #' @export
+#' @examples
+#' morie_rfppos_warhead("C=CC(=O)N", mode = "michael")
 morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
   if (!(mode %in% .rfppos_modes))
     stop("the mode is burgi_dunitz or michael")
@@ -296,6 +305,8 @@ morie_rfppos <- function(pose, cys_residue, mode = "burgi_dunitz",
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_rfppos_cheatsheet()
 morie_rfppos_cheatsheet <- function()
   paste0("rfppos: covalent pose filter. Sulfur-to-electrophile ",
          "distance, Buergi-Dunitz or perpendicular attack angle, and ",

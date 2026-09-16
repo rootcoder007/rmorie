@@ -21,6 +21,6 @@ Heaviside-gated scores plus the above/below jump. A threshold that puts
 every model on one side is refused.
 }
 \examples{
-morie_kamath_emergent_abilities(c(1, 10, 100), c(0.1, 0.2, 0.9), 
+morie_kamath_emergent_abilities(c(1, 10, 100), c(0.1, 0.2, 0.9),
     50)
 }

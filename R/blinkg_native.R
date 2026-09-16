@@ -133,6 +133,9 @@
 #' @return A list with the effect, its standard error, the t statistic
 #'   and the two sided p value for each marker.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_blinkg_scan(V, V)
 morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
   n <- length(y)
   m <- length(geno)
@@ -214,6 +217,9 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
 #' @param threshold Correlation above which a candidate is dropped.
 #' @return The kept marker indices, most significant first.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_blinkg_ld_filter(V, V)
 morie_blinkg_ld_filter <- function(geno, order,
                                    threshold = .BLINKG_LD_THRESHOLD) {
   kept <- integer(0)
@@ -240,6 +246,18 @@ morie_blinkg_ld_filter <- function(geno, order,
 #' @param bin_size Bin width.
 #' @return The kept marker indices, most significant first.
 #' @export
+#' @examples
+#' N <- 60L
+#' M <- 25L
+#' G <- lapply(0:(M - 1L), function(j) vapply(0:(N - 1L), function(i) floor((((i +
+#'     1) * (j + 1) * 2654435761)%%2147483648)/8192)%%3, numeric(1)))
+#' POS <- vapply(0:(M - 1L), function(j) j * 1e+05, numeric(1))
+#' Y <- vapply(0:(N - 1L), function(i) 2 * G[[6]][i + 1L] + 0.7 *
+#'     G[[13]][i + 1L] + (((i * 17)%%11) - 5)/10, numeric(1))
+#' s0 <- morie_blinkg_scan(Y, G, NULL, integer(0))
+#' live_j <- which(!is.nan(s0$p))
+#' ord <- live_j[order(s0$p[live_j], live_j)]
+#' morie_blinkg_bin_filter(ord, POS, 3e+05)
 morie_blinkg_bin_filter <- function(order, positions, bin_size) {
   if (bin_size <= 0) stop("the bin size must be positive")
   seen <- numeric(0)
@@ -284,6 +302,9 @@ morie_blinkg_bin_filter <- function(order, positions, bin_size) {
 #' @return A list with the chosen indices, the score path and the chosen
 #'   count.
 #' @export
+#' @examples
+#' morie_blinkg_select(y = c(1, 2, 3, 4, 5, 6, 7, 8), geno = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   candidates = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_blinkg_select <- function(y, geno, candidates, covars = NULL,
                                 criterion = "bic") {
   if (!(criterion %in% .BLINKG_CRITERIA))
@@ -339,6 +360,14 @@ morie_blinkg_select <- function(y, geno, candidates, covars = NULL,
 #'   chosen, the criterion path, the iteration count and whether the set
 #'   settled, and the genomic inflation factor.
 #' @export
+#' @examples
+#' N <- 60L
+#' M <- 25L
+#' G <- lapply(0:(M - 1L), function(j) vapply(0:(N - 1L), function(i) floor((((i +
+#'     1) * (j + 1) * 2654435761)%%2147483648)/8192)%%3, numeric(1)))
+#' Y <- vapply(0:(N - 1L), function(i) 2 * G[[6]][i + 1L] + 0.7 *
+#'     G[[13]][i + 1L] + (((i * 17)%%11) - 5)/10, numeric(1))
+#' morie_blinkg(Y, G)
 morie_blinkg <- function(y, geno, positions = NULL, covars = NULL,
                          selection = "ld", criterion = "bic",
                          ld_threshold = .BLINKG_LD_THRESHOLD,
@@ -428,6 +457,8 @@ morie_blinkg <- function(y, geno, positions = NULL, covars = NULL,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_blinkg_cheatsheet()
 morie_blinkg_cheatsheet <- function()
   paste0("blinkg: BLINK iterative fixed-effect GWAS. selections ",
          paste(.BLINKG_SELECTIONS, collapse = ", "), "; criteria ",

@@ -18,6 +18,8 @@
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' query_tokens(n_queries = 5L, dim = 5L)
 query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
   n <- as.integer(n_queries)
   d <- as.integer(dim)
@@ -41,6 +43,12 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
 #' @return A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches},
 #' \code{compression}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Q <- matrix(rnorm(8), 2, 4)
+#' Im <- matrix(rnorm(12), 3, 4)
+#' W <- matrix(rnorm(16), 4, 4)
+#' qformer_attend(Q, Im, W, W, W)
 qformer_attend <- function(queries, image_features, WQ, WK, WV) {
   Q <- as.matrix(queries)
   storage.mode(Q) <- "double"
@@ -84,6 +92,8 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
 #' @return A list with \code{trainable}, \code{total}, \code{fraction},
 #' \code{frozen_fraction}, \code{note}.
 #' @export
+#' @examples
+#' trainable_fraction(1e6, 3e8, 7e9)
 trainable_fraction <- function(qformer_params, frozen_vision_params,
                                frozen_llm_params) {
   q <- as.numeric(qformer_params)
@@ -108,6 +118,9 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
 #' @return A list with \code{per_query_similarity}, \code{image_text_similarity},
 #' \code{best_query}, \code{logit}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' stage_one_objectives(V, V)
 stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
   Q <- as.matrix(query_out)
   storage.mode(Q) <- "double"
@@ -142,6 +155,9 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
 #' @return A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' project_to_llm(V, V)
 project_to_llm <- function(query_out, W, b = NULL) {
   Q <- as.matrix(query_out)
   storage.mode(Q) <- "double"

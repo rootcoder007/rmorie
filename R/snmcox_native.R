@@ -31,6 +31,10 @@
 #' @param treat_times See Usage.
 #' @param psi See Usage.
 #' @export
+#' @examples
+#' morie_snmcox_blip_down(time = 5L,
+#'   treat_times = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   psi = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_snmcox_blip_down <- function(time, treat_times, psi) {
   T <- as.numeric(time)
   if (T < 0) stop("snmcox: a failure time cannot be negative")
@@ -97,8 +101,7 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .snmcox_logit_irls(X = X, y = y)
 #' res
@@ -183,6 +186,9 @@ morie_snmcox_gest_score <- function(psi, time, event, A, L, treat_times,
 #' Robins, J. M. (1992) Biometrika 79(2), 321-334,
 #' doi:10.1093/biomet/79.2.321.
 #' @export
+#' @examples
+#' morie_snmcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   treatment_history = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_snmcox <- function(time, event, treatment_history,
                          covariate_history = NULL, treat_times = NULL,
                          censor_time = NULL, level = 0.95,
@@ -306,6 +312,8 @@ morie_snm_cox <- morie_snmcox
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_snmcox_cheatsheet()
 morie_snmcox_cheatsheet <- function() {
   paste0("snmcox: structural nested failure time model by g-estimation. ",
          "Blip down U(psi) = int_0^T exp(psi A(u)) du; the true psi is the ",

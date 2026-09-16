@@ -29,6 +29,9 @@
 #' @param A Optional edge network: a function of e_vw returning a matrix.
 #' @return A message vector.
 #' @export
+#' @examples
+#' morie_mpfn_message(h_v = c(1, 2, 3, 4, 5, 6, 7, 8), h_w = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   e_vw = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
   hw <- as.numeric(h_w)
   if (is.null(A)) {
@@ -77,6 +80,10 @@ morie_mpfn_update_gru <- function(h, m, Wz, Uz, Wr, Ur, Wh, Uh) {
 #' @param update Optional update function.
 #' @return Final states.
 #' @export
+#' @examples
+#' morie_mpfn_message_passing(H0 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   edge_features = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_mpfn_message_passing <- function(H0, adj, edge_features, T = 3L,
                                         A = NULL, update = NULL) {
   T <- as.integer(T)
@@ -113,6 +120,9 @@ morie_mpfn_message_passing <- function(H0, adj, edge_features, T = 3L,
 #' @param H0,i_fn,j_fn Required for the gated readout.
 #' @return A vector of length d.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mpfn_readout(V)
 morie_mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL,
                                 j_fn = NULL) {
   if (!(how %in% .GHC_MPFN_READOUTS))
@@ -146,6 +156,10 @@ morie_mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL,
 #' @param tol Tolerance.
 #' @return A list with invariant, max_deviation, readout.
 #' @export
+#' @examples
+#' morie_mpfn_is_permutation_invariant(H = 0.5,
+#'   adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   edge_features = c(1, 2, 3, 4, 5, 6, 7, 8), perm = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_mpfn_is_permutation_invariant <- function(H, adj, edge_features,
                                                  perm, T = 3L,
                                                  how = "sum",

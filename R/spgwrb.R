@@ -72,8 +72,8 @@
 #'   Independently checked against spgwr's published NY8 output.
 #' @export
 #' @examples
-#' spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2,
-#' 3, 4, 5, 6, 7, 8))
+#' spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 spgwrb <- function(x, y, coords, kernel = "gaussian", criterion = "cv",
                    adaptive = FALSE, bounds = NULL, tol = 1e-4) {
   x <- as.matrix(x)

@@ -365,6 +365,8 @@
 #' \code{pole_restores_gain_above_the_wander_band},
 #' \code{differentiates_by_the_one_over_T_factor}, \code{method}.
 #' @export
+#' @examples
+#' BlWander(ecg = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 BlWander <- function(ecg, fs, pole = 0.995) {
   # eqs (3.132)-(3.133): H(z) = (1/T)(1 - z^-1)/(1 - 0.995 z^-1).  The zero at
   # z = 1 kills DC (which is what baseline wander is); the pole close to it
@@ -428,6 +430,15 @@ BlWander <- function(ecg, fs, pole = 0.995) {
 #' @return A list with \code{notch}, \code{upstroke}, \code{s}, \code{p}, \code{mwin},
 #' \code{fs}, \code{tolerancems}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' fs <- 250
+#' tv <- seq(0, 2, by = 1 / fs)
+#' ph <- (tv %% 0.8) / 0.8
+#' cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
+#' cp <- cp + 0.01 * rnorm(length(cp))
+#' r <- DicNotch(cp, fs = fs)
+#' r$notch
 DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
   # Lehner and Rangayyan, Section 4.3.5.  The noncausal least-squares second
   # derivative of eq (4.22), squared and smoothed by eq (4.23).  The second
@@ -510,6 +521,15 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
 #' \code{pepcmean}, \code{etcmean}, \code{hr}, \code{fs}, \code{normpepc},
 #' \code{normetcmale}, \code{normetcfemale}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' fs <- 250
+#' tv <- seq(0, 2, by = 1 / fs)
+#' ph <- (tv %% 0.8) / 0.8
+#' cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
+#' qrs <- round(seq(0.05, 1.95, by = 0.8) * fs)
+#' r <- CPulseFeat(cp, fs = fs, qrs = qrs)
+#' str(r, max.level = 1)
 CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
   # Carotid pulse landmarks (Section 1.2.10) and the systolic time intervals
   # of Section 4.9.  PEPC = PEP + 0.4 HR and ETC = ET + 1.6 HR are the
@@ -581,6 +601,17 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
 #' @return A list with \code{qrs}, \code{y0}, \code{y1}, \code{y2}, \code{y3},
 #' \code{mask}, \code{thresh}, \code{fs}, \code{hr}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' fs <- 200
+#' tv <- seq(0, 4, by = 1 / fs)
+#' ecg <- rep(0, length(tv))
+#' for (b in seq(0.4, 3.8, by = 0.8)) {
+#'   i <- round(b * fs)
+#'   ecg[i:(i + 6)] <- c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' ecg <- ecg + rnorm(length(tv), 0, 0.02)
+#' QrsDeriv(ecg, fs = fs)
 QrsDeriv <- function(x, fs, thresh = 1) {
   # Balda et al., Section 4.3.1: y0 by eq (4.1), y1 by eq (4.2), combined as
   # y2 = 1.3 y0 + 1.1 y1 (eq 4.3), scanned with a threshold of 1.0 on a
@@ -653,6 +684,16 @@ QrsDeriv <- function(x, fs, thresh = 1) {
 #' @return A list with \code{hr}, \code{rms}, \code{meanfreq}, \code{rrms}, \code{rmnf},
 #' \code{nbeats}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' fs <- 200
+#' n <- fs * 4
+#' ecg <- rep(0, n)
+#' qrs <- round(seq(0.4, 3.8, by = 0.4) * fs)
+#' for (i in qrs) ecg[i:(i + 4)] <- c(0.3, 1.2, -0.4, 0.1, 0)
+#' emg <- rnorm(n, 0, seq(0.5, 2, length.out = n))
+#' r <- EcgEmgCpl(ecg, emg, qrs = qrs, fs = fs)
+#' str(r, max.level = 1)
 EcgEmgCpl <- function(ecg, emg, qrs, fs) {
   # Section 2.2.6 (EMG RMS and mean frequency rise with contraction) meets
   # Section 2.2.5 (rate rises with effort).  Both series are sampled on the
@@ -716,6 +757,15 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
 #' \code{qrsdurmean}, \code{prdurmean}, \code{qtdurmean}, \code{rampmean}, \code{nbeats},
 #' \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(9)
+#' fs <- 200
+#' tv <- seq(0, 4, by = 1 / fs)
+#' ecg <- rep(0, length(tv))
+#' qrs <- round(seq(0.4, 3.8, by = 0.8) * fs)
+#' for (i in qrs) ecg[i:(i + 6)] <- c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+#' ecg <- ecg + rnorm(length(tv), 0, 0.02)
+#' EcgFeat(ecg, qrs = qrs, fs = fs)
 EcgFeat <- function(x, qrs, fs) {
   # Section 1.2.4 waves and intervals.  Amplitudes are measured against the
   # PQ segment, not against zero: the PQ segment is the isoelectric reference
@@ -824,6 +874,8 @@ EcgFeat <- function(x, qrs, fs) {
 #' \code{sdurok}, \code{rdurok}, \code{qabsent}, \code{stdev}, \code{stfinding},
 #' \code{required}, \code{method}.
 #' @export
+#' @examples
+#' EcgWaveShp(qrsdur = 5L, stdev = 5L)
 EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
                        qpresent = NULL) {
   # Sections 1.2.4 (ST deviation against the PQ reference) and 10.2.1 (the
@@ -885,6 +937,16 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
 #' \code{stslopemean}, \code{flagged}, \code{thresh}, \code{threshnote}, \code{jofs},
 #' \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' fs <- 250
+#' n <- fs * 3
+#' x <- rep(0, n)
+#' qrs <- round(seq(0.5, 2.7, by = 0.75) * fs)
+#' for (i in qrs) x[i:(i + 5)] <- c(0.2, 1.1, -0.5, 0.05, 0.02, 0)
+#' x <- x + 0.01 * rnorm(n)
+#' r <- ExerEcgSt(x, qrs = qrs, fs = fs)
+#' str(r, max.level = 1)
 ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
   # ST level at J + jofs relative to the PQ isoelectric level, and the slope
   # of the segment that follows (Section 1.2.4).  The 0.1 mV threshold is the
@@ -956,6 +1018,9 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
 #' \code{lfpct}, \code{hfpct}, \code{lfhf}, \code{bands}, \code{limits}, \code{fsr},
 #' \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HrvFreq(V)
 HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12.  Task Force bands by default; Bianchi et al. bands on
   # request.  The RR series is a series of EVENTS, so it is interpolated onto
@@ -1027,6 +1092,9 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
 #' @return A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50},
 #' \code{meannn}, \code{meanhr}, \code{n}, \code{units}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HrvTime(V)
 HrvTime <- function(rr) {
   # SDNN, RMSSD and pNN50.  Section 2.2.5 motivates these but does not define
   # them; the definitions are the Task Force ones, Circulation 93(5):1043-
@@ -1068,6 +1136,20 @@ HrvTime <- function(rr) {
 #' @return A list with \code{s1}, \code{s2}, \code{notch}, \code{qrs}, \code{s2delayms},
 #' \code{s2delaymeasured}, \code{searchwindowms}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' fs <- 250
+#' tv <- seq(0, 3, by = 1 / fs)
+#' n <- length(tv)
+#' ecg <- rep(0, n)
+#' for (b in seq(0.4, 2.8, by = 0.8)) {
+#'   i <- round(b * fs); ecg[i:(i + 5)] <- c(0.2, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' ecg <- ecg + 0.01 * rnorm(n)
+#' ph <- ((tv - 0.45) %% 0.8) / 0.8
+#' cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
+#' r <- HSoundId(ecg, cp, fs = fs)
+#' str(r, max.level = 1)
 HSoundId <- function(ecg, cp, fs) {
   # Section 4.9.  S1 at the QRS onset; S2 from the dicrotic notch minus the
   # standardised 52.6 ms (mean + 2 SD of the 42.6 +/- 5 ms Lehner and
@@ -1111,6 +1193,13 @@ HSoundId <- function(ecg, cp, fs) {
 #' @return A list with \code{fetal}, \code{maternal}, \code{weights}, \code{order},
 #' \code{mu}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(8)
+#' n <- 800
+#' mecg <- sin(2 * pi * 2 * (1:n) / 200)
+#' thor <- sin(2 * pi * 1.2 * (1:n) / 200)
+#' abd <- 0.6 * thor + 0.3 * mecg + rnorm(n, 0, 0.05)
+#' MEcgFilt(abd, thor)
 MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
   # Sections 3.3.5 and 9.7.2: the thoracic lead is the reference input of an
   # adaptive noise canceller whose primary input is the abdominal lead, so the
@@ -1171,6 +1260,11 @@ MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
 #' @return A list with \code{clean}, \code{artifact}, \code{nsegments}, \code{fraction},
 #' \code{win}, \code{factor}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' fs <- 100
+#' x <- c(rnorm(fs * 2, 0, 0.5), rnorm(fs, 0, 4), rnorm(fs * 2, 0, 0.5))
+#' MotionArt(x, fs = fs)
 MotionArt <- function(x, fs, win = 1, factor = 4) {
   # Section 1.2.11 characterises motion artifact but gives no detection
   # equation, so none is attributed to the book.  Window range and window
@@ -1257,6 +1351,18 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
 #' \code{bandpass}, \code{delay}, \code{spki}, \code{npki}, \code{thresh1},
 #' \code{thresh2}, \code{searchback}, \code{fs}, \code{fsnote}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' fs <- 200
+#' tv <- seq(0, 4, by = 1 / fs)
+#' ecg <- rep(0, length(tv))
+#' beats <- seq(0.4, 3.8, by = 0.8)
+#' for (b in beats) {
+#'   i <- round(b * fs)
+#'   ecg[i:(i + 6)] <- c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' ecg <- ecg + rnorm(length(tv), 0, 0.02)
+#' QrsDetect(ecg, fs = fs)
 QrsDetect <- function(x, fs = 200) {
   # Pan-Tompkins, Section 4.3.2, eqs (4.8)-(4.18) plus search-back.  The
   # filter coefficients are integers designed for fs = 200 Hz and DO NOT
@@ -1376,6 +1482,22 @@ QrsDetect <- function(x, fs = 200) {
 #' @return A list with \code{s1}, \code{s2}, \code{systole}, \code{diastole},
 #' \code{systolerms}, \code{diastolerms}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' fs <- 250
+#' tv <- seq(0, 3, by = 1 / fs)
+#' n <- length(tv)
+#' ecg <- rep(0, n)
+#' for (b in seq(0.4, 2.8, by = 0.8)) {
+#'   i <- round(b * fs); ecg[i:(i + 5)] <- c(0.2, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' ecg <- ecg + 0.01 * rnorm(n)
+#' ph <- ((tv - 0.45) %% 0.8) / 0.8
+#' cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
+#' pcg <- sin(2 * pi * 60 * tv) * exp(-((tv %% 0.8) / 0.06)) +
+#'   0.02 * rnorm(n)
+#' r <- PcgParts(pcg, ecg, cp, fs = fs)
+#' str(r, max.level = 1)
 PcgParts <- function(pcg, ecg, cp, fs) {
   # The six-step procedure of Section 4.9.  Timing is imported from the ECG
   # and the carotid pulse because S1 and S2 are not reliably the loudest
@@ -1436,6 +1558,12 @@ PcgParts <- function(pcg, ecg, cp, fs) {
 #' @return A list with \code{y}, \code{coeffs}, \code{notched}, \code{f0}, \code{fs},
 #' \code{n}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' fs <- 360
+#' tv <- seq(0, 2, by = 1 / fs)
+#' x <- sin(2 * pi * 5 * tv) + 0.5 * sin(2 * pi * 60 * tv)
+#' PLineNotch(x, fs = fs, f0 = 60)
 PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
   # eq (3.150): H(z) = 1 - 2 cos(wo) z^-1 + z^-2, divided by its DC gain
   # H(1) = 2 - 2 cos(wo) so the passband gain at DC is unity.  Extra zeros at
@@ -1496,6 +1624,12 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
 #' \code{amplitude}, \code{ac}, \code{dc}, \code{pi}, \code{rate}, \code{fs},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(8)
+#' fs <- 100
+#' tv <- seq(0, 5, by = 1 / fs)
+#' ppg <- sin(2 * pi * 1.2 * tv) + 0.1 * rnorm(length(tv))
+#' PpgFeat(ppg, fs = fs)
 PpgFeat <- function(ppg, fs, mwin = 16) {
   # Section 1.2.11.  The notch is located with the SAME machinery the book
   # gives for the carotid pulse in Section 4.3.5 (eqs 4.22, 4.23), because
@@ -1558,6 +1692,20 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
 #' @return A list with \code{p}, \code{template}, \code{windows}, \code{bandpass},
 #' \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' fs <- 250
+#' n <- fs * 3
+#' x <- rep(0, n)
+#' qrs <- round(seq(0.5, 2.7, by = 0.75) * fs)
+#' for (i in qrs) {
+#'   x[(i - round(0.15 * fs)):(i - round(0.15 * fs) + 8)] <-
+#'     0.15 * exp(-((0:8 - 4) / 2)^2)
+#'   x[i:(i + 5)] <- c(0.2, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' x <- x + 0.005 * rnorm(n)
+#' r <- PWaveDet(x, qrs = qrs, fs = fs)
+#' str(r, max.level = 1)
 PWaveDet <- function(x, qrs, fs, template = NULL) {
   # Hengeveld and van Bemmel, Section 4.3.3.  The P wave is never searched for
   # directly: the QRS is deleted, the residue bandpassed 3-11 Hz, ternarised
@@ -1669,6 +1817,18 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
 #' @return A list with \code{edr}, \code{amp}, \code{times}, \code{resprate}, \code{fsr},
 #' \code{nbeats}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(9)
+#' fs <- 200
+#' tv <- seq(0, 10, by = 1 / fs)
+#' ecg <- rep(0, length(tv))
+#' qrs <- round(seq(0.4, 9.8, by = 0.8) * fs)
+#' amp <- 1 + 0.2 * sin(2 * pi * 0.25 * (seq_along(qrs)) * 0.8)
+#' for (k in seq_along(qrs)) {
+#'   i <- qrs[k]
+#'   ecg[i:(i + 6)] <- amp[k] * c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
+#' }
+#' EdrSignal(ecg, qrs = qrs, fs = fs)
 EdrSignal <- function(x, qrs, fs, fsr = 4) {
   # Section 2.2.4 for the physiology; the estimator is Arunachalam and Brown,
   # Proc. IEEE EMBC 2009, pp. 5681-5684 (reference [52] of Chapter 2).  Chest
@@ -1743,6 +1903,16 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
 #' @return A list with \code{events}, \code{nevents}, \code{ahi}, \code{desatdepth},
 #' \code{hours}, \code{mindur}, \code{desat}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' fs <- 4
+#' n <- fs * 600
+#' edr <- sin(2 * pi * 0.25 * (1:n) / fs)
+#' edr[800:1000] <- 0.02 * rnorm(201)
+#' spo2 <- rep(97, n)
+#' spo2[850:1100] <- 92
+#' r <- ApneaEdr(edr, spo2, fs = fs)
+#' str(r, max.level = 1)
 ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
   # Section 10.2.5 frames the problem and the AHI but gives NO detection
   # algorithm, so none is attributed to it.  Requiring BOTH a respiratory
@@ -1816,6 +1986,9 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
 #' @return A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct},
 #' \code{rrvar}, \code{bands}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' LfHfRatio(V)
 LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12 and Figure 8.38.  The ratio alone, with the band powers and
   # the RR variance alongside it so it can be interpreted rather than read
@@ -1851,6 +2024,13 @@ LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
 #' \code{noisesd}, \code{nbeats}, \code{npoints}, \code{cyclesperbeat}, \code{present},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' base <- exp(-((1:40 - 20) / 8)^2)
+#' tw <- lapply(1:16, function(k) base * (1 + 0.05 * (-1)^k) +
+#'                                 0.01 * rnorm(40))
+#' r <- TwaSpectr(tw)
+#' str(r, max.level = 1)
 TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
   # Section 9.10 citing Smith et al., Circulation 77(1):110-121, 1988.
   # Alternation every other beat is a period of exactly two beats, so it
@@ -1924,6 +2104,20 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
 #' @return A list with \code{t}, \code{onset}, \code{offset}, \code{length}, \code{tdur},
 #' \code{nchan}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(5)
+#' fs <- 250
+#' n <- fs * 3
+#' x <- rep(0, n)
+#' qrs <- round(seq(0.5, 2.7, by = 0.75) * fs)
+#' for (i in qrs) {
+#'   x[i:(i + 5)] <- c(0.2, 1.2, -0.5, 0.1, 0.05, 0)
+#'   j <- i + round(0.25 * fs)
+#'   x[j:(j + 12)] <- 0.3 * exp(-((0:12 - 6) / 3)^2)
+#' }
+#' x <- x + 0.005 * rnorm(n)
+#' r <- TWaveDet(list(x), qrs = qrs, fs = fs)
+#' str(r, max.level = 1)
 TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
   # Gritzali et al., Section 4.3.4.  The QRS is detected first, blanked to the
   # isoelectric baseline, and the length transform of eq (4.21) re-run with
@@ -2009,6 +2203,13 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
 #' \code{rate}, \code{conc}, \code{crestmax}, \code{nwin}, \code{fraction}, \code{win},
 #' \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' fs <- 250
+#' tv <- seq(0, 8, by = 1 / fs)
+#' vf <- sin(2 * pi * 5 * tv + 2 * sin(2 * pi * 0.3 * tv))
+#' r <- VfDetect(vf, fs = fs)
+#' str(r, max.level = 1)
 VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
   # Sections 1.2.4 and 8.11 describe VF but give NO detector and NO
   # threshold, and no external primary source was verified here.  The rule
@@ -2084,6 +2285,9 @@ VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y0}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsDeriv1(V)
 QrsDeriv1 <- function(x) {
   # eq (4.1): y0(n) = |x(n) - x(n-2)|.  The two-sample span is what makes it
   # "smoothed"; the absolute value makes an inverted QRS give the same
@@ -2108,6 +2312,9 @@ QrsDeriv1 <- function(x) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y1}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsDeriv2(V)
 QrsDeriv2 <- function(x) {
   # eq (4.2): y1(n) = |x(n) - 2 x(n-2) + x(n-4)|.  The second difference
   # removes any locally linear trend, so T-wave limbs and baseline drift give
@@ -2135,6 +2342,9 @@ QrsDeriv2 <- function(x) {
 #' @param y1 A vector; its length is taken.
 #' @return A list with \code{y2}, \code{w0}, \code{w1}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsDerivMx(V, V)
 QrsDerivMx <- function(y0, y1) {
   # eq (4.3): y2(n) = 1.3 y0(n) + 1.1 y1(n).  Slope and curvature respond to
   # different parts of the complex; the mix has its peak reliably inside it.
@@ -2160,6 +2370,17 @@ QrsDerivMx <- function(y0, y1) {
 #' @param nwin A count; the body uses it as \code{seq_len(...)}. Defaults to \code{8}.
 #' @return A list with \code{g1}, \code{nwin}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(6)
+#' fs <- 200
+#' n <- fs * 3
+#' x <- rep(0, n)
+#' for (b in seq(0.4, 2.8, by = 0.8)) {
+#'   i <- round(b * fs); x[i:(i + 4)] <- c(0.3, 1.2, -0.4, 0.1, 0)
+#' }
+#' x <- x + 0.01 * rnorm(n)
+#' r <- QrsWSqDrv(x)
+#' str(r, max.level = 1)
 QrsWSqDrv <- function(x, nwin = 8) {
   # eq (4.4) (Murthy and Rangaraj): g1(n) = sum_i |x(n-i+1) - x(n-i)|^2
   # (N - i + 1).  Squaring rewards the large QRS differences; the linearly
@@ -2194,6 +2415,9 @@ QrsWSqDrv <- function(x, nwin = 8) {
 #' @param mwin Passed to \code{.morie_qrs_mavg}. Defaults to \code{8}.
 #' @return A list with \code{g}, \code{mwin}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsDrvSmth(V)
 QrsDrvSmth <- function(g1, mwin = 8) {
   # eq (4.5): the M-point moving average that collapses the several
   # derivative peaks across the Q-R-S swings into one pulse per beat.
@@ -2221,6 +2445,9 @@ QrsDrvSmth <- function(g1, mwin = 8) {
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{a},
 #' \code{fs}, \code{fsnote}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsLPassTf(V)
 QrsLPassTf <- function(freq, fs = 200) {
   # eq (4.7): H(z) = (1/32)(1 - z^-6)^2 / (1 - z^-1)^2, evaluated in its
   # equivalent finite form (sum_{k=0}^{5} z^-k)^2 / 32 so the apparent pole at
@@ -2265,6 +2492,9 @@ QrsLPassTf <- function(freq, fs = 200) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y}, \code{delay}, \code{n}, \code{fsnote}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsLPassDf(V)
 QrsLPassDf <- function(x) {
   # eq (4.8): y(n) = 2 y(n-1) - y(n-2) + (1/32)[x(n) - 2 x(n-6) + x(n-12)].
   # Adds and one shift by 32 -- which is why it was chosen for real time.
@@ -2297,6 +2527,9 @@ QrsLPassDf <- function(x) {
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsHpLpTf(V)
 QrsHpLpTf <- function(freq, fs = 200) {
   # eq (4.9): Hlp(z) = (1 - z^-32)/(1 - z^-1), a running sum of 32 samples.
   # Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
@@ -2331,6 +2564,9 @@ QrsHpLpTf <- function(freq, fs = 200) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{y}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsHpLpDf(V)
 QrsHpLpDf <- function(x) {
   # eq (4.10): y(n) = y(n-1) + x(n) - x(n-32).  One add and one subtract per
   # sample regardless of window length.
@@ -2359,6 +2595,9 @@ QrsHpLpDf <- function(x) {
 #' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{fs}, \code{fsnote},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsHPassTf(V)
 QrsHPassTf <- function(freq, fs = 200) {
   # eq (4.11): Hhp(z) = z^-16 - (1/32) Hlp(z).  An allpass (a pure 16-sample
   # delay) minus a scaled lowpass, so it shares the running sum already
@@ -2398,6 +2637,9 @@ QrsHPassTf <- function(freq, fs = 200) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{p}, \code{y}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsHPassDf(V)
 QrsHPassDf <- function(x) {
   # eq (4.12): p(n) = x(n-16) - (1/32)[y(n-1) + x(n) - x(n-32)], where the
   # bracketed group is exactly y(n) of eq (4.10), so the running-sum state is
@@ -2431,6 +2673,9 @@ QrsHPassDf <- function(x) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{p}, \code{n}, \code{delayms}, \code{fsnote}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsHPassIo(V)
 QrsHPassIo <- function(x) {
   # eq (4.13): p(n) = p(n-1) - (1/32) x(n) + x(n-16) - x(n-17) +
   # (1/32) x(n-32).  Eqs (4.9)-(4.12) folded into one recursion: four adds
@@ -2463,6 +2708,9 @@ QrsHPassIo <- function(x) {
 #' @param x A vector; its length is taken.
 #' @return A list with \code{y}, \code{b}, \code{n}, \code{fsnote}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsDerivOp(V)
 QrsDerivOp <- function(x) {
   # eq (4.14): y(n) = (1/8)[2 x(n) + x(n-1) - x(n-3) - 2 x(n-4)].  The
   # antisymmetric taps make it exactly zero on any constant or linear
@@ -2491,6 +2739,9 @@ QrsDerivOp <- function(x) {
 #' @param fs Optional; may be \code{NULL}. Passed to \code{.morie_qrs_fs}.
 #' @return A list with \code{y}, \code{nwin}, \code{widthsec}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsMwInt(V)
 QrsMwInt <- function(x, nwin = 30, fs = NULL) {
   # eq (4.15).  N matters: too wide merges QRS and T, too narrow leaves
   # multiple peaks.  The book found N = 30 at fs = 200 Hz, i.e. 150 ms, and
@@ -2525,6 +2776,9 @@ QrsMwInt <- function(x, nwin = 30, fs = NULL) {
 #' @return A list with \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2},
 #' \code{peaki}, \code{issignal}, \code{method}.
 #' @export
+#' @examples
+#' QrsThresh(peaki = c(1, 2, 3, 4, 5, 6, 7, 8), spki = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   npki = c(1, 2, 3, 4, 5, 6, 7, 8), issignal = c(1, 2, 3, 4, 5, 6, 7, 8))
 QrsThresh <- function(peaki, spki, npki, issignal) {
   # eqs (4.16) and (4.17).  The 0.125/0.875 split is a long-memory recursive
   # average, so the estimates track slow drift without being thrown by one
@@ -2561,6 +2815,9 @@ QrsThresh <- function(peaki, spki, npki, issignal) {
 #' @param spki Numeric; combined arithmetically in the body.
 #' @return A list with \code{spki}, \code{previous}, \code{peaki}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QrsSpkiUpd(V, V)
 QrsSpkiUpd <- function(peaki, spki) {
   # eq (4.18): SPKI = 0.25 PEAKI + 0.75 SPKI, replacing the 0.125/0.875 rule.
   # A beat found only by search-back was missed by the primary threshold, so
@@ -2587,6 +2844,8 @@ QrsSpkiUpd <- function(peaki, spki) {
 #' @param duration Numeric; combined arithmetically in the body.
 #' @return A list with \code{hr}, \code{nbeats}, \code{duration}, \code{method}.
 #' @export
+#' @examples
+#' HrFromCnt(nbeats = 5L, duration = 5L)
 HrFromCnt <- function(nbeats, duration) {
   # eq (4.19): HR = 60 NB / T.  The counting estimate averages over the whole
   # window, so unlike the beat-to-beat form of eq (4.20) it is insensitive to
@@ -2619,6 +2878,17 @@ HrFromCnt <- function(nbeats, duration) {
 #' @return A list with \code{length}, \code{nchan}, \code{wsamp}, \code{wsec}, \code{fs},
 #' \code{n}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(7)
+#' fs <- 200
+#' n <- fs * 2
+#' x1 <- rep(0, n)
+#' for (b in seq(0.4, 1.8, by = 0.7)) {
+#'   i <- round(b * fs); x1[i:(i + 4)] <- c(0.3, 1.2, -0.4, 0.1, 0)
+#' }
+#' x2 <- 0.5 * x1 + 0.01 * rnorm(n)
+#' r <- LengthXfm(list(x1, x2), wwin = 0.12, fs = fs)
+#' str(r, max.level = 1)
 LengthXfm <- function(chans, wwin, fs) {
   # eq (4.21) (Gritzali et al.).  Since (dx/dt) dt = dx, the transform is the
   # arc length of the MULTICHANNEL trajectory accumulated over a w-second
@@ -2670,6 +2940,9 @@ LengthXfm <- function(chans, wwin, fs) {
 #' @param mwin A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16}.
 #' @return A list with \code{s}, \code{weights}, \code{mwin}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' DNotchSmth(V)
 DNotchSmth <- function(p, mwin = 16) {
   # eq (4.23) (Lehner and Rangayyan): s(n) = sum_k p^2(n-k+1) (M - k + 1).
   # Squaring discards the sign of the curvature; the linearly decaying weight

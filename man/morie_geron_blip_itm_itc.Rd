@@ -43,7 +43,7 @@ padding). Caption targets are 0-based token ids.
 }
 \examples{
 cl <- array(0, dim = c(2, 2, 2))
-morie_geron_blip_itm_itc(matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE), 
-    matrix(c(1, 0.2, 0.1, 1), 2, 2, byrow = TRUE), cl, matrix(c(0, 
+morie_geron_blip_itm_itc(matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE),
+    matrix(c(1, 0.2, 0.1, 1), 2, 2, byrow = TRUE), cl, matrix(c(0,
         1, 1, -1), 2, 2, byrow = TRUE), tau = 0.5)
 }

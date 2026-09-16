@@ -32,6 +32,9 @@
 #' @param clusters Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{groups}, \code{labels}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' clrgrf_cluster_index(V)
 clrgrf_cluster_index <- function(clusters) {
   lab <- as.character(clusters)
   order <- character(0)
@@ -202,6 +205,8 @@ morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' clrgrf_cheatsheet()
 clrgrf_cheatsheet <- function() {
   paste0("clrgrf: draw whole CLUSTERS into the subsample -- row-wise ",
          "draws split clusters across the split and estimate halves, ",

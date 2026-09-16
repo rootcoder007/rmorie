@@ -130,6 +130,12 @@
 #'   Rewards with Adversarial Inverse Reinforcement Learning. ICLR.
 #'   arXiv:1710.11248.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_airl(expert_states = rnorm(10), expert_actions = rnorm(10), expert_next = rnorm(10),
+#'   expert_log_policy = rnorm(10), policy_states = rnorm(10), policy_actions = rnorm(10),
+#'   policy_next = rnorm(10), policy_log_policy = rnorm(10))
+#' TRUE
 morie_airl <- function(expert_states, expert_actions, expert_next,
                        expert_log_policy,
                        policy_states, policy_actions, policy_next,

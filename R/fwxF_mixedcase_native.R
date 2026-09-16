@@ -210,6 +210,10 @@
 #' @param dc_init Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{15}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' morie_fwxF(temp = c(1, 2, 3, 4, 5, 6, 7, 8), rh = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   wind = c(1, 2, 3, 4, 5, 6, 7, 8), rain = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   month = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_fwxF <- function(temp, rh, wind, rain, month,
                        ffmc_init = 85.0, dmc_init = 6.0, dc_init = 15.0) {
   # Canadian Forest Fire Weather Index (FWI) System, daily codes.

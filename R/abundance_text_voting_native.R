@@ -977,6 +977,7 @@ morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
 #'   \doi{10.2307/2111172}.
 #' @export
 #' @examples
+#' \donttest{
 #' set.seed(3)
 #' n_leg <- 20; n_votes <- 15
 #' ideal <- rnorm(n_leg)
@@ -986,6 +987,7 @@ morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
 #' })
 #' r <- morie_wnominate_fit(votes, n_dims = 1L)
 #' str(r, max.level = 1)
+#' }
 morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
                                 max_iter = 250L, tol = 1e-7, ridge = 1e-3) {
   V <- as.matrix(votes)

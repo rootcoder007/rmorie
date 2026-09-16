@@ -40,13 +40,13 @@ The bias matrix.
 \examples{
 mk <- function(nr, nc, f) {
     m <- matrix(0, nr, nc)
-    for (i in seq_len(nr)) for (j in seq_len(nc)) m[i, j] <- f(i - 
+    for (i in seq_len(nr)) for (j in seq_len(nc)) m[i, j] <- f(i -
         1L, j - 1L)
     m
 }
 W <- 4L
 SPAN <- 2L * W - 1L
-TABLE <- mk(SPAN, SPAN, function(a, b) (((a * 3 + b * 5)\%\%9) - 
+TABLE <- mk(SPAN, SPAN, function(a, b) (((a * 3 + b * 5)\%\%9) -
     4)/6)
 COORDS <- matrix(0, 6L, 2L)
 morie_vit2lf_relative_bias(COORDS, TABLE, W, TRUE)

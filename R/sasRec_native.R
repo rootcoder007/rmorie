@@ -31,6 +31,8 @@
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{mask}, as built in the body.
 #' @export
+#' @examples
+#' causal_mask(n = 5L)
 causal_mask <- function(n) {
   m <- as.integer(n)
   if (m < 1L) stop("sasRec: the sequence must be non-empty")
@@ -52,6 +54,10 @@ causal_mask <- function(n) {
 #' @param mask Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{output}, \code{weights}, \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' attention_span(M)
+#' self_attention(E = M, WQ = M, WK = M, WV = M)
 self_attention <- function(E, WQ, WK, WV, mask = NULL) {
   X <- E
   if (is.list(X) && !is.matrix(X)) X <- do.call(rbind, X)
@@ -97,6 +103,9 @@ self_attention <- function(E, WQ, WK, WV, mask = NULL) {
 #' @return A list with \code{mean_lookback}, \code{mass_on_last}, \code{effective_order},
 #' \code{note}.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' attention_span(M)
 attention_span <- function(weights, position = NULL) {
   W <- weights
   if (is.list(W) && !is.matrix(W)) W <- do.call(rbind, W)
@@ -124,6 +133,10 @@ attention_span <- function(weights, position = NULL) {
 #' @param exclude Passed to \code{unlist}. Defaults to \code{numeric(0)}.
 #' @return A list with \code{estimate}, \code{ranking}, \code{n_scored}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' predict_next(V, M)
 predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)) {
   s <- as.numeric(state)
   E <- item_embeddings
@@ -152,6 +165,8 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
 #' @return A list with \code{attention_ops}, \code{rnn_ops},
 #' \code{attention_sequential_steps}, \code{rnn_sequential_steps}, \code{note}.
 #' @export
+#' @examples
+#' complexity(n = 5L, d = 5L)
 complexity <- function(n, d) {
   nn <- as.integer(n)
   dd <- as.integer(d)

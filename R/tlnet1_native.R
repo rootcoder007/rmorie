@@ -150,6 +150,9 @@
 #' @param values See Usage.
 #' @param friends See Usage.
 #' @param kind See Usage.
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::friend_summary(V, V)
 friend_summary <- function(values, friends, kind = "fraction") {
   v <- .tlnet1_vec(values)
   N <- length(v)
@@ -181,6 +184,9 @@ friend_summary <- function(values, friends, kind = "fraction") {
 #' flows somewhere the model does not represent.
 #' @param friends See Usage.
 #' @param N See Usage.
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::check_network_assumption(V)
 check_network_assumption <- function(friends, N = NULL) {
   n <- if (is.null(N)) length(friends) else as.integer(N)
   deg <- sapply(seq_along(friends),
@@ -293,6 +299,9 @@ decompose_effects <- function(Q_fn, W, friends, p_high = 1.0, p_low = 0.0,
 #' Variance with covariance along edges only
 #' @param ic See Usage.
 #' @param friends See Usage.
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::network_influence_variance(V, V)
 network_influence_variance <- function(ic, friends) {
   v <- .tlnet1_vec(ic)
   N <- length(v)

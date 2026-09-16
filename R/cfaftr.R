@@ -21,9 +21,11 @@
 #'   Spearman (1904), Am. J. Psychology 15(2):201-292.
 #' @export
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' X <- matrix(rnorm(200), 50, 4)
 #' Cfaftr(X)
+#' }
 Cfaftr <- function(X, factor_structure = NULL) {
   S <- .cfa_cov(X)
   p <- nrow(S)

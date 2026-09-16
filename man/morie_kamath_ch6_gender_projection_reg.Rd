@@ -18,6 +18,6 @@ List with \code{estimate}, \code{projections}, \code{sum_abs}, \code{g_norm}.
 Sum of stereotype embeddings' projections onto the unit gender direction.
 }
 \examples{
-morie_kamath_ch6_gender_projection_reg(matrix(c(1, 2, 1, 0), 
+morie_kamath_ch6_gender_projection_reg(matrix(c(1, 2, 1, 0),
     2), c(0, 3))
 }

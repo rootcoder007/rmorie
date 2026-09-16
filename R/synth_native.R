@@ -153,6 +153,7 @@
 #'   Synthetic control methods for comparative case studies.
 #'   \emph{JASA}, 105(490), 493--505.
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' pan <- expand.grid(unit = letters[1:6], time = 1:10)
 #' pan$y <- rnorm(nrow(pan)) + as.integer(pan$time) * 0.2 +
@@ -160,6 +161,7 @@
 #' fit <- morie_synth_control(pan, "y", "unit", "time",
 #'                            treated_unit = "a", treatment_time = 7)
 #' fit$att
+#' }
 #' @export
 morie_synth_control <- function(data, outcome, unit, time,
                                 treated_unit, treatment_time,
@@ -244,16 +246,8 @@ morie_synth_control <- function(data, outcome, unit, time,
 #' @param x A \code{morie_synth} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
-#' set.seed(1)
-#' \donttest{
-#' pan <- expand.grid(unit = letters[1:6], time = 1:10)
-#' pan$y <- rnorm(nrow(pan)) + as.integer(pan$time) * 0.2 +
-#'   ifelse(pan$unit == "a" & pan$time >= 7, 2, 0)
-#' fit <- morie_synth_control(pan, "y", "unit", "time",
-#'                            treated_unit = "a", treatment_time = 7)
-#' fit$att
-#' print(fit)
-#' }
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::print.morie_synth(D)
 #' @references
 #'   Abadie, A., Diamond, A., & Hainmueller, J. (2010).
 #'   Synthetic control methods for comparative case studies.

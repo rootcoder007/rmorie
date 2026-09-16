@@ -83,6 +83,8 @@
 #' @return A list with \code{z} (the atom positions) and \code{dz}
 #'   (the spacing).
 #' @export
+#' @examples
+#' atoms(v_min = -10, v_max = 10, n_atoms = 5)
 atoms <- function(v_min, v_max, n_atoms) {
   a <- .distq_atoms(v_min, v_max, n_atoms)
   a$z
@@ -109,6 +111,9 @@ atoms <- function(v_min, v_max, n_atoms) {
 #' @param z Numeric vector of atom positions.
 #' @return Scalar mean of the categorical distribution.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' distribution_mean(V, V)
 distribution_mean <- function(probs, z) {
   p <- as.numeric(probs)
   zz <- as.numeric(z)
@@ -139,6 +144,12 @@ distribution_mean <- function(probs, z) {
 #' @return Numeric vector of length n_atoms: the projected target
 #'   probabilities, which sum to 1.
 #' @export
+#' @examples
+#' m <- categorical_projection(reward = 1, gamma = 0.9,
+#'                             next_probs = rep(0.2, 5),
+#'                             v_min = -10, v_max = 10)
+#' stopifnot(abs(sum(m) - 1) < 1e-9)
+#' m
 categorical_projection <- function(reward, gamma, next_probs, v_min, v_max,
                                    n_atoms = NULL, done = FALSE) {
   p <- as.numeric(next_probs)
@@ -190,6 +201,9 @@ categorical_projection <- function(reward, gamma, next_probs, v_min, v_max,
 #' @param eps Floor on the log to keep \code{p = 0} finite.
 #' @return Scalar cross-entropy.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' categorical_loss(V, V)
 categorical_loss <- function(m, probs, eps = 1e-12) {
   mm <- as.numeric(m)
   pp <- as.numeric(probs)
@@ -213,6 +227,8 @@ categorical_loss <- function(m, probs, eps = 1e-12) {
 #' @return A list with \code{action} (1-based R index) and \code{q_values}
 #'   (the per-action means).
 #' @export
+#' @examples
+#' greedy_action(next_probs_by_action = c(1, 2, 3, 4, 5, 6, 7, 8), z = 5L)
 greedy_action <- function(next_probs_by_action, z) {
   rows <- as.list(next_probs_by_action)
   if (length(rows) == 0L)
@@ -245,6 +261,13 @@ greedy_action <- function(next_probs_by_action, z) {
 #'   \code{action}, \code{q_values}, \code{q_target}, \code{q_current},
 #'   \code{atoms}, \code{n_atoms}, \code{method}.
 #' @export
+#' @examples
+#' r <- c51_update(reward = 1, gamma = 0.9,
+#'                 next_probs_by_action = list(rep(0.2, 5),
+#'                                             c(0.1, 0.1, 0.2, 0.3, 0.3)),
+#'                 current_probs = rep(0.2, 5),
+#'                 v_min = -10, v_max = 10)
+#' str(r, max.level = 1)
 c51_update <- function(reward, gamma, next_probs_by_action, current_probs,
                        v_min, v_max, done = FALSE) {
   cur <- as.numeric(current_probs)
@@ -287,6 +310,9 @@ c51_update <- function(reward, gamma, next_probs_by_action, current_probs,
 #' @param done Terminal flag.
 #' @return Scalar in [0, 1].
 #' @export
+#' @examples
+#' bernoulli_algorithm(reward = 1, gamma = 0.9, next_probs = rep(0.2, 5),
+#'                     v_min = -10, v_max = 10)
 bernoulli_algorithm <- function(reward, gamma, next_probs, v_min, v_max,
                                 done = FALSE) {
   p <- as.numeric(next_probs)
@@ -321,6 +347,12 @@ bernoulli_algorithm <- function(reward, gamma, next_probs, v_min, v_max,
 #'   distribution) and \code{info} (a named list with
 #'   \code{iterations}, \code{converged}, \code{shift}).
 #' @export
+#' @examples
+#' r <- value_distribution_iteration(reward_atoms = c(0, 1),
+#'                                   reward_probs = c(0.5, 0.5),
+#'                                   gamma = 0.9, v_min = 0, v_max = 15,
+#'                                   n_atoms = 21)
+#' str(r, max.level = 1)
 value_distribution_iteration <- function(reward_atoms, reward_probs, gamma,
                                          v_min, v_max, n_atoms,
                                          iters = 400L, tol = 1e-13) {

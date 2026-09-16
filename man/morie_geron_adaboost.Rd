@@ -34,7 +34,7 @@ Default weak learner is a weighted 1-split stump.
 \examples{
 W1 <- matrix(c(1, -1), 1, 2)
 W2 <- matrix(c(2, 3), 2, 1)
-morie_geron_backpropagation(matrix(c(1, 2), ncol = 1), matrix(c(0, 
+morie_geron_backpropagation(matrix(c(1, 2), ncol = 1), matrix(c(0,
     1), ncol = 1), list(W1, W2), c("relu", "identity"))
 morie_geron_adaboost(X = W2, y = W1)
 }

@@ -25,6 +25,9 @@
 #' \code{n_coefficients}, \code{sum_weights}, \code{finite_sample_correction},
 #' \code{inflation}, \code{method}.
 #' @export
+#' @examples
+#' morie_acigls(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   H = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_acigls <- function(y, A, H, cluster, small_sample = TRUE) {
   y <- as.numeric(y)
   n <- length(y)

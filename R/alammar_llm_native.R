@@ -20,8 +20,7 @@
 #' @return A numeric value.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .morie_al_softmax_rows(z = X)
 #' res
 .morie_al_softmax_rows <- function(z) {
@@ -84,8 +83,7 @@
 #' @return List with `output`, `attention`.
 #' @export
 #' @examples
-#' morie_alammar_sdp_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4,
-#' 5, 6, 7, 8))
+#' morie_alammar_sdp_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
   Q <- as.matrix(Q)
   K <- as.matrix(K)
@@ -130,6 +128,12 @@ morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
 #' @param Wo Output projection.
 #' @param heads Head count.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(stats::rnorm(6), 3, 2)
+#' I2 <- diag(2)
+#' morie_alammar_multi_head_attention(X, X, X, list(I2), list(I2),
+#'     list(I2), I2, 1)
 morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
                                                heads) {
   heads <- as.integer(heads)
@@ -179,6 +183,13 @@ morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
 #' @param K_groups,V_groups Lists of shared K and V.
 #' @param n_query_heads,n_kv_groups Counts.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
+#' Ks <- matrix(stats::rnorm(6), 3, 2)
+#' Vs <- matrix(stats::rnorm(6), 3, 2)
+#' morie_alammar_grouped_query_attention(Qh, list(Ks), list(Vs),
+#'     4, 1)
 morie_alammar_grouped_query_attention <- function(Q_heads, K_groups,
                                                   V_groups, n_query_heads,
                                                   n_kv_groups) {
@@ -224,6 +235,12 @@ morie_alammar_grouped_query_attention <- function(Q_heads, K_groups,
 #' @rdname morie_alammar_grouped_query_attention
 #' @param K_shared,V_shared Single shared K and V matrices.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
+#' Ks <- matrix(stats::rnorm(6), 3, 2)
+#' Vs <- matrix(stats::rnorm(6), 3, 2)
+#' morie_alammar_multi_query_attention(Qh, Ks, Vs, 4)
 morie_alammar_multi_query_attention <- function(Q_heads, K_shared,
                                                 V_shared, n_query_heads) {
   H <- as.integer(n_query_heads)
@@ -247,6 +264,10 @@ morie_alammar_multi_query_attention <- function(Q_heads, K_shared,
 #' @param Q,K,V One sequence's matrices.
 #' @param window_size W.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(stats::rnorm(6), 3, 2)
+#' morie_alammar_sliding_window_attention(X, X, X, 2)
 morie_alammar_sliding_window_attention <- function(Q, K, V, window_size) {
   Q <- as.matrix(Q)
   K <- as.matrix(K)
@@ -275,6 +296,14 @@ morie_alammar_sliding_window_attention <- function(Q, K, V, window_size) {
 #' @param K_cache,V_cache Existing caches or NULL.
 #' @param k_new,v_new,q_new Single-row matrices.
 #' @export
+#' @examples
+#' set.seed(1)
+#' K <- matrix(stats::rnorm(12), 4, 3)
+#' V <- matrix(stats::rnorm(8), 4, 2)
+#' k5 <- matrix(stats::rnorm(3), 1, 3)
+#' v5 <- matrix(stats::rnorm(2), 1, 2)
+#' q <- matrix(stats::rnorm(3), 1, 3)
+#' morie_alammar_kv_cache_lookup(K, V, k5, v5, q)
 morie_alammar_kv_cache_lookup <- function(K_cache, V_cache, k_new, v_new,
                                           q_new) {
   k_new <- matrix(as.numeric(k_new), nrow = 1)
@@ -305,6 +334,8 @@ morie_alammar_kv_cache_lookup <- function(K_cache, V_cache, k_new, v_new,
 #' @param W_cls Weight matrix.
 #' @param b Bias.
 #' @export
+#' @examples
+#' morie_alammar_classification_head(h_cls = 5L, W_cls = 5L, b = 5L)
 morie_alammar_classification_head <- function(h_cls, W_cls, b) {
   h <- as.numeric(h_cls)
   W <- as.matrix(W_cls)
@@ -333,6 +364,8 @@ morie_alammar_classification_head <- function(h_cls, W_cls, b) {
 #' @param h_tokens Token hidden states, one row each.
 #' @param W,tags Weight matrix and 0-based tag targets (or NULL).
 #' @export
+#' @examples
+#' morie_alammar_ner_token_head(h_tokens = c(1, 2, 3, 4, 5, 6, 7, 8), W = 5L, b = 5L)
 morie_alammar_ner_token_head <- function(h_tokens, W, b, tags = NULL) {
   H <- as.matrix(h_tokens)
   W <- as.matrix(W)
@@ -364,6 +397,10 @@ morie_alammar_ner_token_head <- function(h_tokens, W, b, tags = NULL) {
 #' @param ids 0-based token ids.
 #' @param E_tok V x d embedding table.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_alammar_token_embedding_lookup(M, V)
 morie_alammar_token_embedding_lookup <- function(ids, E_tok) {
   E <- as.matrix(E_tok)
   ids <- as.integer(ids)
@@ -388,6 +425,9 @@ morie_alammar_token_embedding_lookup <- function(ids, E_tok) {
 #' @param token_embeddings Token vectors, one row each.
 #' @param attention_mask 0/1 vector; padding must not dilute the mean.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_document_embedding_pool(V)
 morie_alammar_document_embedding_pool <- function(token_embeddings,
                                                   attention_mask = NULL) {
   H <- as.matrix(token_embeddings)
@@ -416,6 +456,9 @@ morie_alammar_document_embedding_pool <- function(token_embeddings,
 #' @param layer_outputs A (layers x seq x dim) array.
 #' @param layer_idx,position 0-based indices, negatives from the end.
 #' @export
+#' @examples
+#' L <- array(0, dim = c(2, 2, 2))
+#' morie_alammar_contextualized_embedding(L, -1, 1)
 morie_alammar_contextualized_embedding <- function(layer_outputs,
                                                    layer_idx, position) {
   L <- layer_outputs
@@ -456,6 +499,9 @@ morie_alammar_contextualized_embedding <- function(layer_outputs,
 #' @param E (P^2 x d) projection.
 #' @param cls_token,E_pos Optional class token and positional table.
 #' @export
+#' @examples
+#' img <- matrix(0:15, 4, 4, byrow = TRUE)
+#' morie_alammar_vit_patch_embedding(img, 2, diag(4))
 morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
                                               cls_token = NULL,
                                               E_pos = NULL) {
@@ -517,6 +563,12 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
 #' @param y_true Cosine
 #'   targets in [-1, 1].
 #' @export
+#' @examples
+#' set.seed(1)
+#' A <- matrix(rnorm(12), 3, 4)
+#' B <- A + matrix(rnorm(12, 0, 0.2), 3, 4)
+#' r <- morie_alammar_cosine_similarity_loss(A, B, c(1, 1, -1))
+#' str(r, max.level = 1)
 morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
   A <- as.matrix(a)
   B <- as.matrix(b)
@@ -544,6 +596,9 @@ morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
 #' @param anchor,positive,negative Row-matched matrices.
 #' @param margin m.
 #' @export
+#' @examples
+#' morie_alammar_sbert_triplet_loss(anchor = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   positive = c(1, 2, 3, 4, 5, 6, 7, 8), negative = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_alammar_sbert_triplet_loss <- function(anchor, positive, negative,
                                              margin = 1.0) {
   A <- as.matrix(anchor)
@@ -568,6 +623,9 @@ morie_alammar_sbert_triplet_loss <- function(anchor, positive, negative,
 #' @param negatives Matrix of negative embeddings.
 #' @param tau Temperature.
 #' @export
+#' @examples
+#' morie_alammar_infonce_loss(anchor = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   positive = c(1, 2, 3, 4, 5, 6, 7, 8), negatives = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_alammar_infonce_loss <- function(anchor, positive, negatives,
                                        tau = 0.07) {
   t <- as.numeric(tau)
@@ -610,6 +668,9 @@ morie_alammar_infonce_loss <- function(anchor, positive, negatives,
 #' @param anchors,positives Row-matched batches; every other positive
 #'   is an in-batch negative.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_multiple_negatives_ranking(V, V)
 morie_alammar_multiple_negatives_ranking <- function(anchors, positives,
                                                      tau = 0.05) {
   t <- as.numeric(tau)
@@ -641,6 +702,9 @@ morie_alammar_multiple_negatives_ranking <- function(anchors, positives,
 #' @param embeddings_dropout1,embeddings_dropout2 Two dropout passes of
 #'   the same sentences.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_simcse_dropout_aug(V, V)
 morie_alammar_simcse_dropout_aug <- function(embeddings_dropout1,
                                              embeddings_dropout2,
                                              tau = 0.05) {
@@ -671,6 +735,9 @@ morie_alammar_simcse_dropout_aug <- function(embeddings_dropout1,
 #' @rdname morie_alammar_cosine_similarity_loss
 #' @param I_emb,T_emb Image and text towers, row-matched.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_openclip_contrastive(V, V)
 morie_alammar_openclip_contrastive <- function(I_emb, T_emb, tau = 0.07) {
   t <- as.numeric(tau)
   if (t <= 0) stop("the temperature must be positive.", call. = FALSE)
@@ -701,6 +768,9 @@ morie_alammar_openclip_contrastive <- function(I_emb, T_emb, tau = 0.07) {
 #' Skip-gram negative sampling and the Bradley-Terry reward loss
 #' @param center_vec,context_vec,negative_vecs Word vectors.
 #' @export
+#' @examples
+#' morie_alammar_negative_sampling_skipgram(center_vec = 5L, context_vec = 5L,
+#'   negative_vecs = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_alammar_negative_sampling_skipgram <- function(center_vec,
                                                      context_vec,
                                                      negative_vecs) {
@@ -725,6 +795,9 @@ morie_alammar_negative_sampling_skipgram <- function(center_vec,
 #' @rdname morie_alammar_negative_sampling_skipgram
 #' @param scores_w,scores_l Winner and loser reward scores.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_reward_model_bt(V, V)
 morie_alammar_reward_model_bt <- function(scores_w, scores_l) {
   rw <- as.numeric(scores_w)
   rl <- as.numeric(scores_l)
@@ -748,6 +821,9 @@ morie_alammar_reward_model_bt <- function(scores_w, scores_l) {
 #' @param rankings List of ranked id vectors.
 #' @param relevant_indices List of relevant-id vectors.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_mean_reciprocal_rank(V, V)
 morie_alammar_mean_reciprocal_rank <- function(rankings,
                                                relevant_indices) {
   if (length(rankings) != length(relevant_indices)) {
@@ -776,6 +852,9 @@ morie_alammar_mean_reciprocal_rank <- function(rankings,
 #' @param relevant Relevant ids.
 #' @param k k.
 #' @export
+#' @examples
+#' morie_alammar_recall_at_k(retrieved = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   relevant = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_alammar_recall_at_k <- function(retrieved, relevant, k) {
   k <- as.integer(k)
   if (k < 1L) stop("k must be positive.", call. = FALSE)
@@ -796,6 +875,8 @@ morie_alammar_recall_at_k <- function(retrieved, relevant, k) {
 #' @rdname morie_alammar_mean_reciprocal_rank
 #' @param relevances Graded relevances in ranked order.
 #' @export
+#' @examples
+#' morie_alammar_ndcg_at_k(relevances = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_alammar_ndcg_at_k <- function(relevances, k) {
   r <- as.numeric(relevances)
   k <- as.integer(k)
@@ -827,6 +908,9 @@ morie_alammar_ndcg_at_k <- function(relevances, k) {
 #' @param category_map Named map
 #'   task -> category.
 #' @export
+#' @examples
+#' morie_alammar_mteb_benchmark_score(task_scores = list(a = 1, b = 2),
+#'   category_map = list(a = 1, b = 2))
 morie_alammar_mteb_benchmark_score <- function(task_scores, category_map) {
   ts <- unlist(task_scores)
   if (length(ts) == 0L) stop("no task scores supplied.", call. = FALSE)
@@ -852,6 +936,9 @@ morie_alammar_mteb_benchmark_score <- function(task_scores, category_map) {
 #' Greedy and sampled decoding (Alammar Ch 6)
 #' @param logits Matrix, one row per step.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_greedy_decoding(V)
 morie_alammar_greedy_decoding <- function(logits) {
   Z <- as.matrix(logits)
   toks <- integer(nrow(Z))
@@ -871,6 +958,9 @@ morie_alammar_greedy_decoding <- function(logits) {
 #' @rdname morie_alammar_greedy_decoding
 #' @param seed LCG seed; the Python mirror draws the same tokens.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_sampling_decoding(V)
 morie_alammar_sampling_decoding <- function(logits, seed = 0) {
   Z <- as.matrix(logits)
   s <- as.numeric(seed) %% 2^32
@@ -898,6 +988,9 @@ morie_alammar_sampling_decoding <- function(logits, seed = 0) {
 #' BoW, c-TF-IDF, BIO tagging, vocabulary overlap (Alammar Ch 1-5)
 #' @param tokens,vocab Character vectors.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_bag_of_words(V, V)
 morie_alammar_bag_of_words <- function(tokens, vocab) {
   toks <- as.character(tokens)
   voc <- as.character(vocab)
@@ -921,6 +1014,9 @@ morie_alammar_bag_of_words <- function(tokens, vocab) {
 #' @param term_counts_by_class Classes x terms count matrix.
 #' @param corpus_freq,A Optional column sums and mean class size.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_c_tfidf(V)
 morie_alammar_c_tfidf <- function(term_counts_by_class, corpus_freq = NULL,
                                   A = NULL) {
   M <- as.matrix(term_counts_by_class)
@@ -949,6 +1045,10 @@ morie_alammar_c_tfidf <- function(term_counts_by_class, corpus_freq = NULL,
 #'   exclusive, matching the Python mirror.
 #' @param scheme BIO or BIOES.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_alammar_bio_tagging(V, D)
 morie_alammar_bio_tagging <- function(tokens, entity_spans,
                                       scheme = "BIO") {
   toks <- as.character(tokens)
@@ -1001,6 +1101,9 @@ morie_alammar_bio_tagging <- function(tokens, entity_spans,
 #' @rdname morie_alammar_bag_of_words
 #' @param vocab_a,vocab_b Token vocabularies.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_tokenizer_vocab_overlap(V, V)
 morie_alammar_tokenizer_vocab_overlap <- function(vocab_a, vocab_b) {
   A <- unique(as.character(vocab_a))
   B <- unique(as.character(vocab_b))
@@ -1021,6 +1124,8 @@ morie_alammar_tokenizer_vocab_overlap <- function(vocab_a, vocab_b) {
 #' @param separators Tier list.
 #' @param target_size,overlap Sizes.
 #' @export
+#' @examples
+#' morie_alammar_recursive_chunking(text = 5L)
 morie_alammar_recursive_chunking <- function(text, separators = NULL,
                                              target_size = 200,
                                              overlap = 0) {
@@ -1075,6 +1180,9 @@ morie_alammar_recursive_chunking <- function(text, separators = NULL,
 #' @param conversation List of c(user, assistant) turns.
 #' @param N Window.
 #' @export
+#' @examples
+#' morie_alammar_conversation_buffer_memory(
+#'   conversation = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), N = 5L)
 morie_alammar_conversation_buffer_memory <- function(conversation, N) {
   n <- as.integer(N)
   if (n < 1L) stop("N must be positive.", call. = FALSE)
@@ -1097,6 +1205,9 @@ morie_alammar_conversation_buffer_memory <- function(conversation, N) {
 #' @param template_tokens Named
 #'   list role -> c(open, close).
 #' @export
+#' @examples
+#' morie_alammar_chat_template(list(c("user", "hi")), list(user = c("<u>",
+#'     "</u>")))
 morie_alammar_chat_template <- function(turns, template_tokens = NULL) {
   tt <- if (is.null(template_tokens)) {
     list(
@@ -1129,6 +1240,14 @@ morie_alammar_chat_template <- function(turns, template_tokens = NULL) {
 #' @rdname morie_alammar_recursive_chunking
 #' @param prompts,chosen,rejected Aligned character vectors.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
+#' Ks <- matrix(stats::rnorm(6), 3, 2)
+#' Vs <- matrix(stats::rnorm(6), 3, 2)
+#' morie_alammar_grouped_query_attention(Qh, list(Ks), list(Vs),
+#'     4, 1)
+#' morie_alammar_chosen_rejected_template(prompts = Ks, chosen = Vs, rejected = Ks)
 morie_alammar_chosen_rejected_template <- function(prompts, chosen,
                                                    rejected) {
   P <- as.character(prompts)
@@ -1159,6 +1278,9 @@ morie_alammar_chosen_rejected_template <- function(prompts, chosen,
 #' @param records List of lists with instruction/input/output.
 #' @param template Format string with `{instruction}` and `{input}`.
 #' @export
+#' @examples
+#' morie_alammar_instruction_data_template(list(list(instruction = "add",
+#'     input = "2 2", output = "four")))
 morie_alammar_instruction_data_template <- function(records,
                                                     template = NULL) {
   tmpl <- if (is.null(template)) {
@@ -1199,6 +1321,10 @@ morie_alammar_instruction_data_template <- function(records,
 #' @param vocab Vocabulary incl. UNK and specials.
 #' @param unk_token,lowercase,specials Pipeline settings.
 #' @export
+#' @examples
+#' vocab <- c("[CLS]", "[SEP]", "[UNK]", "the", "cat", "sat")
+#' r <- morie_alammar_tokenization_pipeline("The cat sat down", vocab)
+#' str(r, max.level = 1)
 morie_alammar_tokenization_pipeline <- function(text, vocab,
                                                 unk_token = "[UNK]",
                                                 lowercase = TRUE,
@@ -1278,6 +1404,9 @@ morie_alammar_tokenization_pipeline <- function(text, vocab,
 #' @param X Point matrix.
 #' @param min_cluster_size,min_samples Sizes.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_hdbscan_cluster(V)
 morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
                                           min_samples = NULL) {
   X <- as.matrix(X)
@@ -1362,6 +1491,9 @@ morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
 #' @param X Points.
 #' @param n_neighbors,min_dist,d_out,n_steps,learning_rate,seed Settings.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_umap_projection(V)
 morie_alammar_umap_projection <- function(X, n_neighbors = 5,
                                           min_dist = 0.1, d_out = 2,
                                           n_steps = 200,
@@ -1449,6 +1581,8 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
 #' @param n_topics K.
 #' @param alpha,beta,n_iter,seed Settings.
 #' @export
+#' @examples
+#' morie_alammar_lda_topic_distribution(documents = c(1, 2, 3, 4, 5, 6, 7, 8), n_topics = 5L)
 morie_alammar_lda_topic_distribution <- function(documents, n_topics,
                                                  alpha = 0.1, beta = 0.01,
                                                  n_iter = 200, seed = 1) {
@@ -1522,6 +1656,20 @@ morie_alammar_lda_topic_distribution <- function(documents, n_topics,
 #' @param embeddings,labels Data (labels 0-based, every class present).
 #' @param n_steps,learning_rate,l2 Training settings.
 #' @export
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   img <- matrix(0:15, 4, 4, byrow = TRUE)
+#'   v <- morie_alammar_vit_patch_embedding(img, 2, diag(4))
+#'   y <- c(0, 0, 0, 1, 1, 1)
+#'   morie_alammar_chain_prompting("3", list(function(y, x) paste("double",
+#'       x), function(y, x) paste("add one to", y)), function(p) {
+#'       v <- as.integer(sub(".* ", "", p))
+#'       if (grepl("double", p))
+#'           as.character(v * 2)
+#'       else as.character(v + 1)
+#'   })
+#'   morie_alammar_embedding_classifier(embeddings = y, labels = y)
+#' }
 morie_alammar_embedding_classifier <- function(embeddings, labels,
                                                n_steps = 500,
                                                learning_rate = 0.5,
@@ -1565,6 +1713,9 @@ morie_alammar_embedding_classifier <- function(embeddings, labels,
 
 #' @rdname morie_alammar_embedding_classifier
 #' @export
+#' @examples
+#' morie_alammar_setfit_twostep(rbind(c(0, 0), c(0.1, 0), c(5, 5),
+#'     c(5.1, 5)), c(0, 0, 1, 1))
 morie_alammar_setfit_twostep <- function(embeddings, labels) {
   X <- as.matrix(embeddings)
   y <- as.integer(labels)
@@ -1608,6 +1759,13 @@ morie_alammar_setfit_twostep <- function(embeddings, labels) {
 #'   (0-based lists), entry (0-based).
 #' @param ef_search Beam budget.
 #' @export
+#' @examples
+#' pts <- rbind(c(0, 0), c(1, 0), c(2, 0), c(3, 0), c(4, 0), c(5,
+#'     0), c(50, 50))
+#' nbrs <- list(1L, c(0L, 2L), c(1L, 3L), c(2L, 4L), c(3L, 5L),
+#'     c(4L, 6L), 5L)
+#' morie_alammar_ann_search(c(4.4, 0), list(points = pts, neighbors = nbrs,
+#'     entry = 0))
 morie_alammar_ann_search <- function(query_vec, index, ef_search = 8) {
   q <- as.numeric(query_vec)
   P <- as.matrix(index$points)
@@ -1677,6 +1835,13 @@ morie_alammar_ann_search <- function(query_vec, index, ef_search = 8) {
 #' @param nli_model function(premise, hypothesis) -> score.
 #' @param hypothesis_template Format string with one %s.
 #' @export
+#' @examples
+#' h <- morie_alammar_classification_head(c(1, 2), rbind(c(1, 0),
+#'     c(0, 1)), c(0, 0))
+#' nli <- function(p, h) if (grepl("sport", h) && grepl("goal",
+#'     p)) 5 else 0
+#' morie_alammar_zero_shot_classification("a late goal won it",
+#'     c("sport", "finance"), nli)
 morie_alammar_zero_shot_classification <- function(text, candidate_labels,
                                                    nli_model,
                                                    hypothesis_template =
@@ -1717,6 +1882,15 @@ morie_alammar_zero_shot_classification <- function(text, candidate_labels,
 #' @param model function(input, label) -> log-probability.
 #' @param prefix Optional task prefix.
 #' @export
+#' @examples
+#' i <- morie_alammar_infonce_loss(c(1, 0), c(1, 0), rbind(c(0,
+#'     1), c(-1, 0)), 0.1)
+#' morie_alammar_t5_classify("good film", c("positive", "negative"),
+#'     function(i, l) {
+#'         if (l == "positive" && grepl("good", i))
+#'             0
+#'         else -3
+#'     })
 morie_alammar_t5_classify <- function(input_text, label_tokens, model,
                                       prefix = "") {
   labels <- as.character(label_tokens)
@@ -1749,6 +1923,15 @@ morie_alammar_t5_classify <- function(input_text, label_tokens, model,
 #' @param judge_model function(rubric, response, sample_index) -> score.
 #' @param n_samples Judge samples per response.
 #' @export
+#' @examples
+#' s <- morie_alammar_sampling_decoding(matrix(rep(c(1, 0), 10),
+#'     10, 2, byrow = TRUE), seed = 7)
+#' judge <- function(r, resp, s) {
+#'     if (resp == "a")
+#'         c(1, 3)[s + 1]
+#'     else c(2, 2)[s + 1]
+#' }
+#' morie_alammar_llm_as_judge(c("a", "b"), "rubric", judge, n_samples = 2)
 morie_alammar_llm_as_judge <- function(responses, rubric, judge_model,
                                        n_samples = 1) {
   if (!is.function(judge_model)) {
@@ -1781,6 +1964,12 @@ morie_alammar_llm_as_judge <- function(responses, rubric, judge_model,
 #' @param criteria Character vector.
 #' @param verifier_model function(response, criterion) -> "PASS"|"FAIL".
 #' @export
+#' @examples
+#' verifier <- function(response, criterion)
+#'   if (grepl(criterion, response, fixed = TRUE)) "PASS" else "FAIL"
+#' r <- morie_alammar_output_verification("The answer is 42.",
+#'                                        c("42", "answer"), verifier)
+#' str(r, max.level = 1)
 morie_alammar_output_verification <- function(response, criteria,
                                               verifier_model) {
   if (!is.function(verifier_model)) {
@@ -1821,6 +2010,19 @@ morie_alammar_output_verification <- function(response, criteria,
 #'   function(previous_output, original_input) -> prompt.
 #' @param model function(prompt) -> text.
 #' @export
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   img <- matrix(0:15, 4, 4, byrow = TRUE)
+#'   v <- morie_alammar_vit_patch_embedding(img, 2, diag(4))
+#'   y <- c(0, 0, 0, 1, 1, 1)
+#'   morie_alammar_chain_prompting("3", list(function(y, x) paste("double",
+#'       x), function(y, x) paste("add one to", y)), function(p) {
+#'       v <- as.integer(sub(".* ", "", p))
+#'       if (grepl("double", p))
+#'           as.character(v * 2)
+#'       else as.character(v + 1)
+#'   })
+#' }
 morie_alammar_chain_prompting <- function(x, prompts, model) {
   if (!is.function(model)) {
     stop("model must be a function prompt -> text.",
@@ -1851,6 +2053,14 @@ morie_alammar_chain_prompting <- function(x, prompts, model) {
 #' @param retriever function(query) -> ranked ids.
 #' @param rephraser function(query, i) -> alternative query.
 #' @export
+#' @examples
+#' set.seed(1)
+#' q <- matrix(stats::rnorm(3), 1, 3)
+#' i <- morie_alammar_infonce_loss(c(1, 0), c(1, 0), rbind(c(0,
+#'     1), c(-1, 0)), 0.1)
+#' corpus <- list(q = c(1, 2), q0 = c(2, 3), q1 = 4)
+#' morie_alammar_multi_query_retrieval("q", 2, function(q) corpus[[q]],
+#'     function(q, i) paste0(q, i))
 morie_alammar_multi_query_retrieval <- function(query, K, retriever,
                                                 rephraser) {
   if (!is.function(retriever) || !is.function(rephraser)) {
@@ -1883,6 +2093,18 @@ morie_alammar_multi_query_retrieval <- function(query, K, retriever,
 #' @param tools Named list of functions.
 #' @param max_steps Budget.
 #' @export
+#' @examples
+#' calc <- function(x) as.character(eval(parse(text = x)))
+#' model <- function(ctx) {
+#'   if (length(ctx) == 1L) {
+#'     list(thought = "need arithmetic", tool = "calc", input = "6 * 7")
+#'   } else {
+#'     list(final = "42")
+#'   }
+#' }
+#' r <- morie_alammar_react_agent_loop("what is 6 times 7?",
+#'                                     list(calc = calc), model)
+#' str(r, max.level = 1)
 morie_alammar_react_agent_loop <- function(query, tools, model,
                                            max_steps = 5) {
   if (!is.function(model)) {
@@ -1937,6 +2159,9 @@ morie_alammar_react_agent_loop <- function(query, tools, model,
 #' @param llm function(projected, prompt) -> caption.
 #' @param prompt Text prompt.
 #' @export
+#' @examples
+#' morie_alammar_image_captioning("img", function(im) c(1, 2), rbind(c(1,
+#'     0)), function(z, p) "cap")
 morie_alammar_image_captioning <- function(image, visual_encoder,
                                            projector, llm,
                                            prompt = "Describe the image.") {
@@ -1968,6 +2193,8 @@ morie_alammar_image_captioning <- function(image, visual_encoder,
 #' @rdname morie_alammar_image_captioning
 #' @param n_layers,n_stages Schedule sizes.
 #' @export
+#' @examples
+#' morie_alammar_layer_freezing(n_layers = 5L)
 morie_alammar_layer_freezing <- function(n_layers, n_stages = NULL) {
   L <- as.integer(n_layers)
   if (L < 1L) stop("n_layers must be positive.", call. = FALSE)
@@ -1995,6 +2222,11 @@ morie_alammar_layer_freezing <- function(n_layers, n_stages = NULL) {
 #' @param task_loss_fn
 #'   Optional function() -> loss.
 #' @export
+#' @examples
+#' s <- morie_alammar_sampling_decoding(matrix(rep(c(1, 0), 10),
+#'     10, 2, byrow = TRUE), seed = 7)
+#' morie_alammar_continued_pretraining("doc", function(docs, s) 1/(s +
+#'     1), 5)
 morie_alammar_continued_pretraining <- function(domain_corpus,
                                                 mlm_loss_fn, n_mlm_steps,
                                                 task_loss_fn = NULL) {
@@ -2030,6 +2262,13 @@ morie_alammar_continued_pretraining <- function(domain_corpus,
 #'   function(a, b) -> score.
 #' @param gold_pairs,gold_labels Optional.
 #' @export
+#' @examples
+#' b <- morie_alammar_bag_of_words(c("a", "b", "a", "z"), c("a",
+#'     "b", "c"))
+#' morie_alammar_augmented_sbert(list(c("x", "x"), c("x", "y")),
+#'     function(a, b) if (a == b) 1 else 0, gold_pairs = list(c("p",
+#'         "p"), c("p", "q"), c("r", "r"), c("r", "s")), gold_labels = c(1,
+#'         0, 1, 0))
 morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
                                           gold_pairs = NULL,
                                           gold_labels = NULL) {
@@ -2078,6 +2317,9 @@ morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
 #' @param reconstruction_logprob Optional
 #'   per-ORIGINAL-token log-probs.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_tsdae_objective(V)
 morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
                                           seed = 1,
                                           reconstruction_logprob = NULL) {
@@ -2127,6 +2369,9 @@ morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
 #'   per document.
 #' @param min_cluster_size Cluster floor.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alammar_bertopic_pipeline(V, V)
 morie_alammar_bertopic_pipeline <- function(documents, embeddings,
                                             min_cluster_size = 2) {
   docs <- lapply(documents, as.character)

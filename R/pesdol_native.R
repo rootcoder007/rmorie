@@ -16,8 +16,7 @@
 #' @return A list with \code{beta}, \code{fit}, \code{res}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .pesdol_ols(X = X, y = y)
 #' res
@@ -52,6 +51,9 @@
 #' \code{n_params}, \code{rss_unrestricted}, \code{rss_restricted}, \code{p}, \code{q},
 #' \code{n_regressors}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_pesdol_ardl_bounds(V, V)
 morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
   yv <- as.numeric(y)
   Xm <- as.matrix(x)

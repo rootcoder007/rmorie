@@ -20,6 +20,9 @@
 #' \code{y_loadings}, \code{explained_x}, \code{explained_y}, \code{n_components},
 #' \code{r_squared}, \code{n}, \code{p}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_plsqs_pls_regression(V, V)
 morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"

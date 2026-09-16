@@ -25,8 +25,10 @@
 #'   line per element).
 #' @seealso [morie_datasets_vpd_crime()] for the loader that
 #'   accepts the downloaded file.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_vpd_download_instructions()
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_vpd_download_instructions <- function(to = NULL) {
   lines <- c(

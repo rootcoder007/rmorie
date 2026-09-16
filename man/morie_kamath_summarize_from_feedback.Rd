@@ -29,6 +29,6 @@ Combines \code{morie_kamath_reward_model_training_loss} on the summary pairs
 with \code{morie_kamath_ppo_rlhf_objective} on the policy batch.
 }
 \examples{
-morie_kamath_summarize_from_feedback(list(c(2, 1), c(1, 2)), 
+morie_kamath_summarize_from_feedback(list(c(2, 1), c(1, 2)),
     c(1, 2), c(-1, -2), c(-1.5, -1.5), 0.5)
 }

@@ -305,12 +305,14 @@ ARSAU_KINDS <- function() {
 #'
 #' @param path Path to the JSON file.
 #' @return Named list with \code{fields} and \code{records}.
-#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' tf <- tempfile(fileext = ".json")
 #' writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
 #' res <- morie_arsau_read_sidecar(tf)
 #' res$fields
 #' unlink(tf)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_arsau_read_sidecar <- function(path) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {

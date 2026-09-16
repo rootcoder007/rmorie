@@ -205,10 +205,12 @@ NULL
 #'   and Rosenthal, H. (2021). *Analyzing Spatial Models of Choice and
 #'   Judgment*, 2nd ed. Chapman & Hall/CRC.
 #' @examples
-#' set.seed(1)
-#' Z <- matrix(rnorm(20 * 5), 20, 5)
-#' fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-#' fit$zhat
+#' if (requireNamespace("basicspace", quietly = TRUE)) {
+#'   set.seed(1)
+#'   Z <- matrix(rnorm(20 * 5), 20, 5)
+#'   fit <- morie_spatial_voting_aldrich_mckelvey(Z)
+#'   fit$zhat
+#' }
 #' @export
 morie_spatial_voting_aldrich_mckelvey <- function(Z,
                                                   n_dims  = 1L,
@@ -307,9 +309,11 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
 #'   `engine`.
 #' @references Poole, K. T. (1998); Armstrong et al. (2021).
 #' @examples
-#' set.seed(1)
-#' X <- matrix(rnorm(30 * 6), 30, 6)
-#' morie_spatial_voting_blackbox(X, n_dims = 2)
+#' if (requireNamespace("basicspace", quietly = TRUE)) {
+#'   set.seed(1)
+#'   X <- matrix(rnorm(30 * 6), 30, 6)
+#'   morie_spatial_voting_blackbox(X, n_dims = 2)
+#' }
 #' @export
 morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
   X <- .sv_as_matrix(X)
@@ -375,9 +379,11 @@ morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
 #'   Poole, K. T. (2000). "Non-Parametric Unfolding of Binary Choice
 #'   Data." *Political Analysis*, 8(3), 211-237.
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' v <- matrix(stats::rbinom(20 * 30, 1, 0.5), 20, 30)
 #' morie_spatial_voting_optimal_classification(v)
+#' }
 #' @export
 morie_spatial_voting_optimal_classification <- function(votes,
                                                         n_dims    = 1L,
@@ -466,7 +472,9 @@ morie_spatial_voting_optimal_classification <- function(votes,
 #' @param D Symmetric numeric distance matrix.
 #' @return The double-centered matrix \eqn{B}.
 #' @references Torgerson (1952); Armstrong et al. (2021), Section 3.
-#' @examples morie_spatial_voting_double_centering(as.matrix(dist(matrix(rnorm(20), 5))))
+#' @examples
+#' set.seed(1)
+#' morie_spatial_voting_double_centering(as.matrix(dist(matrix(rnorm(20), 5))))
 #' @export
 morie_spatial_voting_double_centering <- function(D) {
   .sv_double_centering(D)
@@ -860,7 +868,9 @@ morie_spatial_voting_smacof_unfolding <- function(D,
 #'   ideal point).
 #' @return Numeric matrix of respondent ideal points.
 #' @references Armstrong et al. (2021), Section 4.5.
-#' @examples morie_spatial_voting_ideal_point_recovery(matrix(rnorm(6), 3, 2))
+#' @examples
+#' set.seed(1)
+#' morie_spatial_voting_ideal_point_recovery(matrix(rnorm(6), 3, 2))
 #' @export
 morie_spatial_voting_ideal_point_recovery <- function(X_r, X_s = NULL) {
   as.matrix(X_r)
@@ -1045,7 +1055,9 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 #'   Ideological Preferences and Perceptions." *AJPS*, 59(3).
 #' @examples
 #' set.seed(1)
-#' \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
+#' if (requireNamespace("basicspace", quietly = TRUE)) {
+#'   \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
+#' }
 #' @export
 morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
                                              burn_in = 200L,
@@ -1079,12 +1091,14 @@ morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
 #'   configuration), fit diagnostics, and an `engine` tag.
 #' @references Oh & Raftery (2001) JASA 96(455).
 #' @examples
-#' \donttest{
-#' # A real dissimilarity matrix (the all-zero matrix is degenerate
-#' # and makes the stress majorizer divide by zero).
-#' set.seed(1)
-#' X <- matrix(rnorm(30), 10, 3)
-#' morie_spatial_voting_bayesian_mds(as.matrix(dist(X)))
+#' if (requireNamespace("smacof", quietly = TRUE)) {
+#'   \donttest{
+#'   # A real dissimilarity matrix (the all-zero matrix is degenerate
+#'   # and makes the stress majorizer divide by zero).
+#'   set.seed(1)
+#'   X <- matrix(rnorm(30), 10, 3)
+#'   morie_spatial_voting_bayesian_mds(as.matrix(dist(X)))
+#'   }
 #' }
 #' @param n_dims Integer; latent dimensionality.
 #' @param n_samples Integer; posterior-sample count.
@@ -1122,11 +1136,13 @@ morie_spatial_voting_bayesian_mds <- function(D, n_dims = 2L,
 #'   Metropolis sampler when smacof is absent).
 #' @references Bakker, R. and Poole, K. T. (2013).
 #' @examples
-#' \donttest{
-#' # Random positive respondent-stimulus dissimilarities; an all-zero
-#' # matrix is degenerate for the unfolding transform.
-#' set.seed(1)
-#' morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
+#' if (requireNamespace("smacof", quietly = TRUE)) {
+#'   \donttest{
+#'   # Random positive respondent-stimulus dissimilarities; an all-zero
+#'   # matrix is degenerate for the unfolding transform.
+#'   set.seed(1)
+#'   morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
+#'   }
 #' }
 #' @param n_samples Integer; posterior-sample count.
 #' @export
@@ -1161,11 +1177,13 @@ morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
 #'   analysis of roll call data. \emph{American Political Science
 #'   Review}, 98(2), 355-370.
 #' @examples
-#' set.seed(1)
-#' votes <- matrix(rbinom(200, 1, 0.5), 20, 10)
-#' fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
-#'                                     burn_in = 50L)
-#' head(fit$ideal_points)
+#' if (requireNamespace("pscl", quietly = TRUE)) {
+#'   set.seed(1)
+#'   votes <- matrix(rbinom(200, 1, 0.5), 20, 10)
+#'   fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
+#'                                       burn_in = 50L)
+#'   head(fit$ideal_points)
+#' }
 #' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
@@ -1836,11 +1854,13 @@ morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
 #' @references Quinn, K. M. (2004). "Bayesian Factor Analysis for Mixed
 #'   Ordinal and Continuous Responses." *Political Analysis*, 12(4).
 #' @examples
-#' set.seed(1)
-#' Y <- matrix(sample(1:3, 60, TRUE), 20, 3)
-#' fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 100L,
-#'                                         burn_in = 50L)
-#' head(fit$ideal_points)
+#' if (requireNamespace("MCMCpack", quietly = TRUE)) {
+#'   set.seed(1)
+#'   Y <- matrix(sample(1:3, 60, TRUE), 20, 3)
+#'   fit <- morie_spatial_voting_ordinal_irt(Y, n_samples = 100L,
+#'                                           burn_in = 50L)
+#'   head(fit$ideal_points)
+#' }
 #' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,

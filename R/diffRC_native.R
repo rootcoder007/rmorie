@@ -31,6 +31,8 @@
 #' @return A list with \code{beta}, \code{alpha_bar}, \code{T},
 #'   \code{scale}, \code{signal_retained} and a note.
 #' @export
+#' @examples
+#' morie_diffRC_noise_schedule(T = 5L)
 morie_diffRC_noise_schedule <- function(T, scale = 0.001,
                                          beta_min = 0.0001,
                                          beta_max = 0.02) {
@@ -64,6 +66,11 @@ morie_diffRC_noise_schedule <- function(T, scale = 0.001,
 #' @return A list with \code{x_t}, \code{mean}, \code{std} and
 #'   \code{sampled}.
 #' @export
+#' @examples
+#' rng <- rmorie:::.ghc_rng(1)
+#' r <- morie_diffRC_forward_corrupt(x0 = c(1, -1, 0.5),
+#'                                   alpha_bar_t = 0.7, rng = rng)
+#' str(r, max.level = 1)
 morie_diffRC_forward_corrupt <- function(x0, alpha_bar_t, rng = NULL) {
   x <- as.numeric(x0)
   ab <- as.numeric(alpha_bar_t)
@@ -89,6 +96,11 @@ morie_diffRC_forward_corrupt <- function(x0, alpha_bar_t, rng = NULL) {
 #' @param beta_t Numeric.
 #' @return A list with the mean and the two coefficients.
 #' @export
+#' @examples
+#' r <- morie_diffRC_posterior_mean(x_t = c(0.8, -0.9), x0_hat = c(1, -1),
+#'                                  alpha_bar_t = 0.7, alpha_bar_prev = 0.8,
+#'                                  beta_t = 0.1)
+#' str(r, max.level = 1)
 morie_diffRC_posterior_mean <- function(x_t, x0_hat, alpha_bar_t,
                                         alpha_bar_prev, beta_t) {
   xt <- as.numeric(x_t)
@@ -118,6 +130,9 @@ morie_diffRC_posterior_mean <- function(x_t, x0_hat, alpha_bar_t,
 #' @param smoothing Numeric additive smoothing.
 #' @return A list with \code{weights} and \code{effective_steps}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_diffRC_importance_weights(V)
 morie_diffRC_importance_weights <- function(step_losses, uniform = FALSE,
                                              smoothing = 0.1) {
   L <- as.numeric(step_losses)
@@ -149,6 +164,11 @@ morie_diffRC_importance_weights <- function(step_losses, uniform = FALSE,
 #' @return A list with the denoised estimate, the path and the
 #'   schedule summary.
 #' @export
+#' @examples
+#' sched <- morie_diffRC_noise_schedule(10L)
+#' model <- function(x, t) x * 0.9
+#' r <- morie_diffRC_denoise(c(0.5, -0.3, 0.2), model, sched)
+#' str(r, max.level = 1)
 morie_diffRC_denoise <- function(x_t, model, schedule, t_start = NULL) {
   x <- as.numeric(x_t)
   ab <- schedule$alpha_bar

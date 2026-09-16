@@ -210,6 +210,9 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
 #' @param nullq The centring quantile function, or NULL.
 #' @return The log prior density.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_bnppvl_log_prior(q = matrix(rnorm(20), 5, 4), m = matrix(rnorm(20), 5, 4)); TRUE
 morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
                                    centring = "uniform", nullq = NULL) {
   m <- as.integer(m)
@@ -257,6 +260,9 @@ morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
 #' @param q The dyadic grid.
 #' @return An integer vector of length k.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_bnppvl_counts(V, V)
 morie_bnppvl_counts <- function(u, q) {
   k <- length(q) - 1L
   n <- integer(k)
@@ -280,6 +286,9 @@ morie_bnppvl_counts <- function(u, q) {
 #' @param kind A member of the likelihood list.
 #' @return The log likelihood.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_bnppvl_loglik(V, V)
 morie_bnppvl_loglik <- function(u, q, kind = "exact") {
   if (!(kind %in% .BNPPVL_LIKELIHOODS))
     stop("kind must be one of ", paste(.BNPPVL_LIKELIHOODS, collapse = ", "))
@@ -443,6 +452,13 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #'   predictive density and distribution function on the grid, the
 #'   predictive quantiles, and the acceptance rate.
 #' @export
+#' @examples
+#' X <- vapply(0:39, function(i) {
+#'     v <- ((i * 37)%%101)/100
+#'     v * v
+#' }, numeric(1))
+#' morie_bnppvl(X, m = 3L, c = 2.5, likelihood = "exact", sweeps = 400L,
+#'     burn = 100L, thin = 4L, seed = 7, init = "empirical")
 morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
                          centring = "uniform", nullq = NULL,
                          likelihood = "exact", lo = 0, hi = 1,
@@ -603,6 +619,8 @@ morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_bnppvl_cheatsheet()
 morie_bnppvl_cheatsheet <- function()
   paste0("bnppvl: quantile-pyramid predictive for a new observation. ",
          "likelihoods ", paste(.BNPPVL_LIKELIHOODS, collapse = ", "),

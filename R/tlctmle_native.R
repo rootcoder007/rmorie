@@ -42,6 +42,16 @@
 #' @param penalty Passed to \code{ctmle}. Defaults to \code{TRUE}.
 #' @return The value of \code{ctmle}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 100
+#' W <- matrix(rnorm(n * 3), n, 3)
+#' A <- rbinom(n, 1, plogis(W[, 1]))
+#' Y <- rbinom(n, 1, plogis(0.5 * A + W[, 2]))
+#' Q1 <- plogis(0.5 + W[, 2])
+#' Q0 <- plogis(W[, 2])
+#' g_models <- list(1, c(1, 2), c(1, 2, 3))
+#' morie_tlctmle(A, Y, Q1, Q0, W, g_models, V = 3L)
 morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
                           seed = 0L, penalty = TRUE) {
   ctmle(A, Y, Q1, Q0, W, g_models, V = V, seed = seed,
@@ -130,6 +140,9 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' targeted_loss(V, V)
 targeted_loss <- function(Q_star, Y) {
   q <- as.numeric(Q_star)
   y <- as.numeric(Y)
@@ -153,6 +166,9 @@ targeted_loss <- function(Q_star, Y) {
 #' @param g_models A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' candidate_sequence(A = c(1, 2, 3, 4, 5, 6, 7, 8), W = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+#'   g_models = list(a = 1, b = 2))
 candidate_sequence <- function(A, W, g_models) {
   a <- as.numeric(A)
   rows <- as.matrix(W)
@@ -205,6 +221,9 @@ candidate_sequence <- function(A, W, g_models) {
 #' @param g_large Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{small}, \code{large}, \code{ratio}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' instrument_penalty(V, V)
 instrument_penalty <- function(g_small, g_large) {
   gs <- as.numeric(g_small)
   gl <- as.numeric(g_large)
@@ -235,6 +254,16 @@ instrument_penalty <- function(g_small, g_large) {
 #' \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 100
+#' W <- matrix(rnorm(n * 3), n, 3)
+#' A <- rbinom(n, 1, plogis(W[, 1]))
+#' Y <- rbinom(n, 1, plogis(0.5 * A + W[, 2]))
+#' Q1 <- plogis(0.5 + W[, 2])
+#' Q0 <- plogis(W[, 2])
+#' g_models <- list(1, c(1, 2), c(1, 2, 3))
+#' ctmle(A, Y, Q1, Q0, W, g_models, V = 3L)
 ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
                   penalty = TRUE) {
   a <- as.numeric(A)

@@ -47,7 +47,7 @@ policy/target refresh (argmax + Polyak averaging at rate tau) happens
 only every policy_delay epochs.
 }
 \examples{
-bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L, 
+bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L,
     step = function(a) list(0L, as.numeric(a), FALSE))
 morie_geron_td3(bandit, epochs = 40)
 }

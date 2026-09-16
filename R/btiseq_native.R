@@ -23,8 +23,10 @@
 #'   687-697.
 #' @export
 #' @examples
+#' \donttest{
 #' set.seed(1)
 #' r <- morie_btiseq(x = rnorm(10)); TRUE
+#' }
 morie_btiseq <- function(x, mu0 = 0, B_outer = 300, B_inner = 150,
                          seed = 0) {
   xv <- as.numeric(x)

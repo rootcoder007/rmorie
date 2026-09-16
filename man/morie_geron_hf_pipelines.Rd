@@ -25,6 +25,6 @@ Task pipeline: preprocess -> model -> postprocess (Geron Ch 14, morie.fn hmhfpi)
 }
 \examples{
 logits <- function(xs) matrix(c(2, 0, 0, 3), nrow = 2, byrow = TRUE)
-morie_geron_hf_pipelines("sentiment-analysis", list("good", "bad"), 
+morie_geron_hf_pipelines("sentiment-analysis", list("good", "bad"),
     logits, labels = c("POSITIVE", "NEGATIVE"))
 }

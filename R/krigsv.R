@@ -75,6 +75,9 @@
 }
 
 #' @noRd
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::morie_variogram_fit(V, V)
 morie_variogram_fit <- function(coords, values, model = "exponential",
                                 n_bins = 15, max_dist = NULL) {
   ev <- .sp_empirical_variogram(coords, values, n_bins, max_dist)

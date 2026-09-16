@@ -185,6 +185,14 @@
 #'   \code{spread}.
 #' @references Hubbard, A. E. et al. (2018).
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 60
+#' W <- matrix(rnorm(n * 2), n, 2)
+#' A <- sample(0:2, n, replace = TRUE)
+#' y <- plogis(0.5 * A + W[, 1] + rnorm(n, 0, 0.4))
+#' r <- discover_levels(y, A, W, levels = 0:2)
+#' str(r, max.level = 1)
 discover_levels <- function(y, A, W, levels, rows = NULL,
                             eval_rows = NULL, ridge = 1e-8) {
   n <- length(y)
@@ -221,6 +229,15 @@ discover_levels <- function(y, A, W, levels, rows = NULL,
 #'   \code{max_weight}.
 #' @references Hubbard, A. E. et al. (2018).
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 60
+#' W <- matrix(rnorm(n * 2), n, 2)
+#' A <- sample(0:2, n, replace = TRUE)
+#' y <- plogis(0.5 * A + W[, 1] + rnorm(n, 0, 0.4))
+#' r <- split_specific_tmle(y, A, W, levels = 0:2, aL = 0, aH = 2,
+#'                          fit_rows = seq_len(n), est_rows = seq_len(n))
+#' str(r, max.level = 1)
 split_specific_tmle <- function(y, A, W, levels, aL, aH,
                                 fit_rows, est_rows,
                                 ridge = 1e-8, trim = 0.01,
@@ -313,6 +330,14 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
 #'   \code{algorithm}.
 #' @references Hubbard, A. E. et al. (2018).
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' D <- rbinom(n, 1, 0.5)
+#' y <- plogis(0.8 * D + X[, 1] + rnorm(n, 0, 0.4))
+#' r <- morie_tmldta(y, D, X, method = "sample-split")
+#' str(r, max.level = 1)
 morie_tmldta <- function(y, D, X, candidate_strata = NULL,
                          method = "cv-tmle", n_folds = 10,
                          trim = 0.01, ridge = 1e-8, level = 0.95,
@@ -451,6 +476,13 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
 #' @return A list of per-variable results, sorted by absolute estimate.
 #' @references Hubbard, A. E. et al. (2018).
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 120
+#' X <- cbind(rbinom(n, 2, 0.5), rbinom(n, 1, 0.5), rbinom(n, 2, 0.4))
+#' y <- plogis(0.6 * X[, 1] + 0.4 * X[, 2] + rnorm(n, 0, 0.5))
+#' r <- morie_variable_importance(y, X, method = "naive")
+#' str(r, max.level = 1)
 morie_variable_importance <- function(y, X, candidate_strata = NULL,
                                       method = "cv-tmle",
                                       n_folds = 10, names = NULL, ...) {

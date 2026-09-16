@@ -33,6 +33,8 @@
 #' @references Muller, P. & Quintana, F. A. (2004). Nonparametric
 #'   Bayesian Data Analysis. Statistical Science, 19(1), 95-110.
 #' @export
+#' @examples
+#' poltrx_level_parameters(level = 1)
 poltrx_level_parameters <- function(level, c = 1.0, rule = "m_squared") {
   m <- as.integer(level)
   if (m < 1L) stop("poltrx: levels are numbered from 1")
@@ -64,6 +66,8 @@ poltrx_level_parameters <- function(level, c = 1.0, rule = "m_squared") {
 #' @return A list with \code{rule}, \code{draws} and \code{reason}.
 #' @references Muller, P. & Quintana, F. A. (2004). Sec. 2.3.
 #' @export
+#' @examples
+#' poltrx_continuity_regime("m_squared")
 poltrx_continuity_regime <- function(rule) {
   rule <- as.character(rule)
   if (!(rule %in% .POLTRX_RULES)) {
@@ -113,6 +117,8 @@ poltrx_continuity_regime <- function(rule) {
 #'   \code{level}.
 #' @references Muller, P. & Quintana, F. A. (2004). Sec. 2.3.
 #' @export
+#' @examples
+#' poltrx_partition_index(0.3, level = 2)
 poltrx_partition_index <- function(x, level, lo = 0.0, hi = 1.0) {
   m <- as.integer(level)
   a <- as.numeric(lo)
@@ -156,6 +162,8 @@ poltrx_partition_index <- function(x, level, lo = 0.0, hi = 1.0) {
 #' @references Muller, P. & Quintana, F. A. (2004). Sec. 2.3;
 #'   Lavine, M. (1992, 1994).
 #' @export
+#' @examples
+#' poltrx_finite_tree(levels = 5L)
 poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
                                rng = NULL, seed = 0) {
   M <- as.integer(levels)
@@ -206,6 +214,9 @@ poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
 #' @param shape Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
 #' @export
+#' @examples
+#' e <- rmorie:::.ghc_rng(1)
+#' poltrx_gamma(e, shape = 2.5)
 poltrx_gamma <- function(e, shape) {
   if (shape < 1) {
     # Python: u = max(r.uniform(), 1e-15); gamma(shape+1) * u**(1/shape)
@@ -239,6 +250,8 @@ poltrx_gamma <- function(e, shape) {
 #' @param key Compared against \code{"()"}.
 #' @return The value of \code{as.integer}.
 #' @export
+#' @examples
+#' poltrx_eps_from_key(key = 5L)
 poltrx_eps_from_key <- function(key) {
   if (key == "()") {
     return(integer(0))
@@ -257,6 +270,9 @@ poltrx_eps_from_key <- function(key) {
 #'   \code{level}.
 #' @references Muller, P. & Quintana, F. A. (2004). Sec. 2.3.
 #' @export
+#' @examples
+#' tr <- poltrx_finite_tree(levels = 3, seed = 1)
+#' poltrx_set_probability(c(0L, 1L), tr)
 poltrx_set_probability <- function(epsilon, tree) {
   eps <- as.integer(epsilon)
   if (length(eps) > tree$levels) {
@@ -291,6 +307,9 @@ poltrx_set_probability <- function(epsilon, tree) {
 #' @references Muller, P. & Quintana, F. A. (2004). Sec. 2.3, after
 #'   Lavine (1992, 1994).
 #' @export
+#' @examples
+#' tr <- poltrx_finite_tree(levels = 3, seed = 1)
+#' str(poltrx_tree_density(tr, level = 2), max.level = 1)
 poltrx_tree_density <- function(tree, level = NULL, lo = 0.0, hi = 1.0) {
   M <- if (is.null(level)) as.integer(tree$levels) else as.integer(level)
   n <- 2L^M
@@ -335,6 +354,8 @@ poltrx_tree_density <- function(tree, level = NULL, lo = 0.0, hi = 1.0) {
 #' @references Muller, P. & Quintana, F. A. (2004). Nonparametric
 #'   Bayesian Data Analysis. Statistical Science, 19(1), 95-110.
 #' @export
+#' @examples
+#' morie_poltrx(levels = 5L)
 morie_poltrx <- function(levels, c = 1.0, rule = "m_squared", seed = 0) {
   lp <- poltrx_level_parameters(levels, c, rule)
   cr <- poltrx_continuity_regime(lp$rule)

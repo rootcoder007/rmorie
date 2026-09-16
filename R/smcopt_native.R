@@ -22,6 +22,8 @@
 #' @param kind One of \code{"geometric"}, \code{"linear"}. Defaults to \code{"geometric"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' annealing_ladder(n_steps = 5L)
 annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
                              kind = "geometric") {
   n_steps <- as.integer(n_steps)

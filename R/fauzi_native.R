@@ -1202,8 +1202,10 @@ morie_fauzi_theorem_4_5 <- function(mrl_hat, mrl_true, t_grid,
 #' @references Fauzi and Maesono (2023), Theorem 4.6, Eq. (4.29).
 #' @examples
 #' set.seed(1)
-#' x <- stats::rexp(200)
-#' morie_fauzi_theorem_4_6(x, 0, mean(x))$gap
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   x <- stats::rexp(200)
+#'   morie_fauzi_theorem_4_6(x, 0, mean(x))$gap
+#' }
 #' @export
 morie_fauzi_theorem_4_6 <- function(x, a1, mrl_at_a1, h = NULL) {
   xv <- .fz_check_sample(x)

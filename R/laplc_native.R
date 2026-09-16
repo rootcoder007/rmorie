@@ -38,8 +38,8 @@
 #' @param seed Integer or NULL. Optional seed for reproducibility.
 #' @return A named list (RichResult) with the noisy value and metadata.
 #' @examples
-#' rmorie:::morie_laplc(value = c(1, 2, 3, 4, 5, 6, 7, 8), sensitivity = c(1, 2, 3, 4, 5,
-#' 6, 7, 8), epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_laplc(value = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   sensitivity = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @export
 morie_laplc <- function(value, sensitivity, epsilon, seed = NULL) {
   if (!is.null(seed)) {
@@ -66,6 +66,8 @@ morie_laplc <- function(value, sensitivity, epsilon, seed = NULL) {
 morie_laplace_mechanism <- morie_laplc
 
 #' Cheatsheet
+#' @examples
+#' rmorie:::morie_laplc_cheatsheet()
 morie_laplc_cheatsheet <- function() {
   "laplc: Laplace mechanism (alias of dpglap.dp_laplace_mechanism)."
 }

@@ -879,8 +879,10 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
 #'   analysis in observational research: introducing the E-value.
 #'   \emph{Annals of Internal Medicine}, 167(4), 268--274.
 #' @examples
-#' str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
-#'                              ci_upper = 2.7), max.level = 1)
+#' if (requireNamespace("tipr", quietly = TRUE)) {
+#'   str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
+#'                                ci_upper = 2.7), max.level = 1)
+#' }
 #' @export
 morie_sensitivity_evalue <- function(estimate, se = NULL, sd = NULL,
                                      type = c("OLS", "RR", "OR",
@@ -1078,8 +1080,10 @@ morie_sensitivity_omitted_var_bias <- function(model, treatment,
 #'   Kelcey, B. M. (2013). What would it take to change an
 #'   inference?  \emph{Educational Evaluation and Policy Analysis},
 #'   35(4), 437--460.
-#' @examplesIf requireNamespace("konfound", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("konfound", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_sensitivity_konfound <- function(estimate, se, n,
                                        n_covariates = 0L,

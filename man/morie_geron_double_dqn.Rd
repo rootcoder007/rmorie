@@ -37,7 +37,7 @@ List with \code{Q}, \code{Q_target}, \code{loss_history}, \code{overestimation_g
 Target computation delegated to \code{morie_geron_double_dqn_target}.
 }
 \examples{
-morie_geron_double_dqn(NULL, matrix(c(0, 1), 1, 2), matrix(c(10, 
-    -10), 1, 2), list(list(0, 0, 0, 0, FALSE)), epochs = 1, lr = 1, 
+morie_geron_double_dqn(NULL, matrix(c(0, 1), 1, 2), matrix(c(10,
+    -10), 1, 2), list(list(0, 0, 0, 0, FALSE)), epochs = 1, lr = 1,
     gamma = 1)
 }

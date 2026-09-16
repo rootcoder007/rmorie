@@ -110,6 +110,8 @@ CV_SCHEMES <- c("kfold", "loo")
 #' \code{1000}.
 #' @return The value of \code{blocks}, as built in the body.
 #' @export
+#' @examples
+#' make_blocks(n_markers = 5L)
 make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
   n <- as.integer(n_markers)
   b <- as.integer(block_size)
@@ -156,6 +158,11 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
 #' @param lam Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{fitted}, \code{lam}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(60), 20, 3)
+#' y <- X %*% c(1, -0.5, 0.2) + rnorm(20, 0, 0.3)
+#' str(ridge_fit(X, as.numeric(y), lam = 0.5), max.level = 1)
 ridge_fit <- function(X, y, lam) {
   n <- length(y)
   if (!is.matrix(X)) {
@@ -189,6 +196,14 @@ ridge_fit <- function(X, y, lam) {
 #' @param n_ridge Passed to \code{.regmlm_lambda_grid}. Defaults to \code{5}.
 #' @return A list with \code{predictors}, \code{meta}, \code{n_predictors}, \code{reduction}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 30
+#' G <- matrix(rbinom(n * 20, 2, 0.3), n, 20)
+#' y <- G[, 1] - G[, 10] + rnorm(n, 0, 0.5)
+#' blocks <- make_blocks(20, block_size = 10)
+#' r <- level0_predictors(G, y, blocks, n_ridge = 3)
+#' str(r, max.level = 1)
 level0_predictors <- function(G, y, blocks, n_ridge = 5) {
   n <- length(y)
   if (!is.matrix(G)) G <- do.call(rbind, G)
@@ -237,6 +252,8 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
 #' @return A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv},
 #' \code{lam}, \code{n_predictors}.
 #' @export
+#' @examples
+#' level1_stack(preds = list(a = 1, b = 2), y = 5L)
 level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
   if (!cv %in% CV_SCHEMES) {
     stop(sprintf("regmlm: cv must be one of %s, got %s",
@@ -286,6 +303,17 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 #' \code{as.integer}.
 #' @return A list with \code{loco}, \code{chromosomes}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 30
+#' G <- matrix(rbinom(n * 20, 2, 0.3), n, 20)
+#' y <- G[, 1] - G[, 10] + rnorm(n, 0, 0.5)
+#' blocks <- make_blocks(20, chromosomes = rep(1:2, each = 10),
+#'                       block_size = 10)
+#' l0 <- level0_predictors(G, y, blocks, n_ridge = 3)
+#' l1 <- level1_stack(l0$predictors, y)
+#' r <- loco_predictions(l0$predictors, l0$meta, l1$weights)
+#' str(r, max.level = 1)
 loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
   n <- length(preds[[1]])
 
@@ -325,6 +353,9 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
 #' @param covariates A vector; its length is taken. Defaults to \code{list()}.
 #' @return A list with \code{beta}, \code{se}, \code{chisq}, \code{p_value}, \code{n}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' test_variant(V, V)
 test_variant <- function(g, y, offset = NULL, covariates = list()) {
   n <- length(y)
   if (n != length(g)) stop("regmlm: genotype and phenotype lengths differ")
@@ -382,6 +413,13 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
 #' \code{level1}, \code{loco}, \code{chromosomes}, \code{n_predictors}, \code{reduction},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 30
+#' G <- matrix(rbinom(n * 20, 2, 0.3), n, 20)
+#' y <- G[, 1] - G[, 10] + rnorm(n, 0, 0.5)
+#' r <- morie_regmlm(G, y, block_size = 10, n_ridge = 3)
+#' str(r, max.level = 1)
 morie_regmlm <- function(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5,
                         cv = "kfold", k = 5) {
   if (!is.matrix(G)) G <- do.call(rbind, G)

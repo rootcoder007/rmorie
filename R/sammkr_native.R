@@ -25,8 +25,7 @@
 #' @return A vector, from \code{as.numeric}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .sammkr_flat(m = X)
 #' res
 .sammkr_flat <- function(m) {
@@ -53,6 +52,9 @@
 #' @param masks A vector; its length is taken.
 #' @return A list with \code{mask}, \code{ambiguous_fraction}, \code{n_averaged}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' average_of_valid_masks(V)
 average_of_valid_masks <- function(masks) {
   if (length(masks) == 0)
     stop("sammkr: no masks given")
@@ -79,6 +81,9 @@ average_of_valid_masks <- function(masks) {
 #' @param threshold Passed to \code{>}. Defaults to \code{0.5}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' iou(V, V)
 iou <- function(a, b, threshold = 0.5) {
   x <- as.numeric(.sammkr_flat(a) > threshold)
   y <- as.numeric(.sammkr_flat(b) > threshold)
@@ -101,6 +106,8 @@ iou <- function(a, b, threshold = 0.5) {
 #' @return A list with \code{loss}, \code{index}, \code{losses}, \code{mean_loss},
 #' \code{gap}, \code{note}.
 #' @export
+#' @examples
+#' min_loss_over_masks(list(c(1, 0), c(0, 1)), c(1, 0), function(p, t) sum((p - t)^2))
 min_loss_over_masks <- function(predictions, target, loss_fn) {
   if (length(predictions) == 0)
     stop("sammkr: no predictions given")
@@ -123,6 +130,8 @@ min_loss_over_masks <- function(predictions, target, loss_fn) {
 #' @param target_hierarchy Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{assignment}, \code{sizes}, \code{nested}, \code{note}.
 #' @export
+#' @examples
+#' whole_part_subpart(list(c(1, 1, 1, 0), c(1, 1, 0, 0), c(1, 0, 0, 0)))
 whole_part_subpart <- function(masks, target_hierarchy = NULL) {
   if (length(masks) != 3)
     stop(sprintf("sammkr: the paper's argument is about THREE outputs (whole, part, subpart), got %d",
@@ -155,6 +164,9 @@ whole_part_subpart <- function(masks, target_hierarchy = NULL) {
 #' @param target Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rank_masks(V, V)
 rank_masks <- function(masks, predicted_iou, target = NULL) {
   p <- as.numeric(unlist(predicted_iou))
   if (length(p) != length(masks))

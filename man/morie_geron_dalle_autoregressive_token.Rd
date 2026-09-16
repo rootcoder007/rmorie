@@ -33,6 +33,6 @@ distribution after temperature and optional top-k truncation.
 }
 \examples{
 skew <- function(ctx) c(0, 1, 2) + 0.1 * length(ctx)
-morie_geron_dalle_autoregressive_token(c(0, 1), c(2, 0), skew, 
+morie_geron_dalle_autoregressive_token(c(0, 1), c(2, 0), skew,
     temperature = 0.5)
 }

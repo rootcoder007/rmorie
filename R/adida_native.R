@@ -31,6 +31,9 @@
 #' @param y Numeric series of demand observations.
 #' @return The fraction of periods with no positive demand.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' zero_fraction(V)
 zero_fraction <- function(y) {
   yv <- as.numeric(y)
   if (length(yv) == 0L) stop("adida: empty series")
@@ -50,6 +53,8 @@ zero_fraction <- function(y) {
 #'   FALSE (default), partition into the last complete buckets.
 #' @return Numeric vector of bucket sums.
 #' @export
+#' @examples
+#' aggregate_buckets(y = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
 aggregate_buckets <- function(y, m, overlapping = FALSE) {
   yv <- as.numeric(y)
   n <- length(yv)
@@ -83,6 +88,8 @@ aggregate_buckets <- function(y, m, overlapping = FALSE) {
 #'   non-negative weights; when NULL equal weights are used.
 #' @return Numeric vector of length \code{m}.
 #' @export
+#' @examples
+#' disaggregate(aggregate_value = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
 disaggregate <- function(aggregate_value, m, profile = NULL) {
   mm <- as.integer(m)
   if (mm < 1L) stop("adida: the bucket size must be at least 1")
@@ -121,6 +128,9 @@ disaggregate <- function(aggregate_value, m, profile = NULL) {
 #' @return Named list with \code{forecast}.
 #' @references Teunter, R. H., Syntetos, A. A. & Babai, M. Z. (2011).
 #' @keywords internal
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::intermittent_forecast(V)
 intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
                                   beta = 0.05, horizon = 1L) {
   yv <- as.numeric(y)
@@ -184,6 +194,8 @@ intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
 #'   \code{base_method}, \code{disaggregation_sums_back}, \code{method}.
 #' @references Nikolopoulos, K. et al. (2011).
 #' @export
+#' @examples
+#' morie_adida(y = c(1, 2, 3, 4, 5, 6, 7, 8), m = 3L)
 morie_adida <- function(y, m, horizon = 1L, method = "tsb",
                         alpha = 0.1, beta = 0.05,
                         overlapping = FALSE, profile = NULL,
@@ -242,6 +254,8 @@ morie_adida <- function(y, m, horizon = 1L, method = "tsb",
 #'   \code{per_level}, \code{weights}, \code{spread}, \code{method}.
 #' @references Petropoulos, F. & Kourentzes, N. (2015).
 #' @export
+#' @examples
+#' temporal_combination(y = c(1, 2, 3, 4, 5, 6, 7, 8), levels = factor(c("lo", "hi", "lo", "hi")))
 temporal_combination <- function(y, levels, horizon = 1L, method = "tsb",
                                  alpha = 0.1, beta = 0.05,
                                  weights = NULL) {

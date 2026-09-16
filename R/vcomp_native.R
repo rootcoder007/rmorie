@@ -69,6 +69,9 @@
 #' \code{icc_upper}, \code{method_used}, \code{balanced}, \code{a}, \code{N}, \code{fit},
 #' \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_vcomp(y = rnorm(10), group = rbinom(10, 1, 0.5)); TRUE
 morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
   if (!(method %in% c("reml", "anova"))) {
     stop("method must be 'reml' or 'anova'")

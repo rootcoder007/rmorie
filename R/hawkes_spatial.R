@@ -232,11 +232,13 @@ morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
 #' @return A list of class \code{morie_hawkes_st_fit}: \code{params} (named
 #'   list), \code{loglik}, \code{n}, \code{convergence} (0 = success).
 #' @examples
+#' \donttest{
 #' ev <- morie_hawkes_st_simulate(
 #'   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.4),
 #'   end_time = 40, region = c(0, 10, 0, 10), seed = 7
 #' )
 #' morie_hawkes_st_fit(ev, end_time = 40, area = 100)$params
+#' }
 #' @export
 morie_hawkes_st_fit <- function(events, end_time = NULL, area = 1,
                                 start = NULL) {

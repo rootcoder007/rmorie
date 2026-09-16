@@ -26,6 +26,9 @@
 #' @param directed If TRUE, combine in- and out-degree vectors.
 #' @return List with encoding, degrees, note.
 #' @export
+#' @examples
+#' centrality_encoding(adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L,
+#'   z_in = c(1, 2, 3, 4, 5, 6, 7, 8))
 centrality_encoding <- function(adj, n, z_in, z_out = NULL,
                                  directed = FALSE) {
   N <- as.integer(n)
@@ -69,6 +72,10 @@ centrality_encoding <- function(adj, n, z_in, z_out = NULL,
 #' @param n Number of vertices.
 #' @return List with distance matrix, unreachable, n_unreachable.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' shortest_path_matrix(D, V)
 shortest_path_matrix <- function(adj, n) {
   N <- as.integer(n)
   D <- matrix(.GRPHMR_UNREACHABLE, nrow = N, ncol = N)
@@ -108,6 +115,10 @@ shortest_path_matrix <- function(adj, n) {
 #' @param unreachable_bias Bias for unreachable pairs.
 #' @return List with bias, unreachable_bias, note.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' spatial_bias(M, V)
 spatial_bias <- function(distance, b_table, unreachable_bias = NULL) {
   D <- matrix(as.integer(distance), nrow = nrow(distance))
   ub <- if (is.null(unreachable_bias)) -10.0 else as.numeric(unreachable_bias)
@@ -132,6 +143,9 @@ spatial_bias <- function(distance, b_table, unreachable_bias = NULL) {
 #' @param w_table Learnable weight table indexed by step.
 #' @return List with edge_bias and note.
 #' @export
+#' @examples
+#' edge_encoding(paths = c(1, 2, 3, 4, 5, 6, 7, 8), edge_features = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   w_table = c(1, 2, 3, 4, 5, 6, 7, 8))
 edge_encoding <- function(paths, edge_features, w_table) {
   out <- list()
   for (key in names(paths)) {
@@ -172,6 +186,11 @@ edge_encoding <- function(paths, edge_features, w_table) {
 #' @param edge_bias Optional list of edge biases keyed by (i, j).
 #' @return List with output, weights, method, note.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' spatial_bias(M, V)
+#' graphormer_attention(H = M, WQ = M, WK = M, WV = M, bias = M)
 graphormer_attention <- function(H, WQ, WK, WV, bias, edge_bias = NULL) {
   X <- as.matrix(H)
   storage.mode(X) <- "double"

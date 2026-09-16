@@ -22,6 +22,6 @@ A list with \code{mean_return}, \code{returns}, \code{lengths}, \code{se}, \code
 \examples{
 reset <- function() 0
 step <- function(a) list(0, as.numeric(a), TRUE)
-morie_geron_reinforcement_learning(list(reset = reset, step = step), 
+morie_geron_reinforcement_learning(list(reset = reset, step = step),
     function(s) 0, gamma = 0.5)
 }

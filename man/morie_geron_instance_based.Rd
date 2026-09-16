@@ -35,7 +35,7 @@ k-nearest-neighbour (instance-based) prediction (Geron Ch 1, morie.fn hmins)
 X <- matrix(c(1, 2, 3, 4), ncol = 1)
 y <- c(3, 6, 9, 12)
 vshape <- function(L, Xt, yt, Xv, yv) abs(L - 3) + 0.5
-morie_geron_hidden_layers_heuristic(vshape, X, y, max_layers = 10, 
+morie_geron_hidden_layers_heuristic(vshape, X, y, max_layers = 10,
     patience = 2)
 morie_geron_instance_based(X_train = X, y_train = X, x_query = X)
 }

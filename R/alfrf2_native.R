@@ -68,6 +68,8 @@
 #' @param beta_end The last variance.
 #' @return A list with betas, alphas and abar.
 #' @export
+#' @examples
+#' morie_alfrf2_schedule(T = 5L)
 morie_alfrf2_schedule <- function(T, beta_start = 1e-4, beta_end = 0.02) {
   T <- as.integer(T)
   if (T < 1L) stop("a diffusion needs at least one step")
@@ -97,6 +99,8 @@ morie_alfrf2_schedule <- function(T, beta_start = 1e-4, beta_end = 0.02) {
 #' @param eps Standard normal deviates of the same shape.
 #' @return The noised structure.
 #' @export
+#' @examples
+#' morie_alfrf2_noise(x0 = c(1, 2, 3, 4, 5, 6, 7, 8), abar_t = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
 morie_alfrf2_noise <- function(x0, abar_t, eps) {
   a <- sqrt(abar_t)
   b <- sqrt(1 - abar_t)
@@ -132,8 +136,7 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #' @return A numeric value.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .alfrf2_det3(M = X)
 #' res
 .alfrf2_det3 <- function(M) {
@@ -156,6 +159,11 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #' @return A list with the rotation, the translation, the root-mean-
 #'   square deviation and the moved points.
 #' @export
+#' @examples
+#' set.seed(1)
+#' P <- matrix(rnorm(15), 5, 3)
+#' Q <- P %*% matrix(c(0,-1,0, 1,0,0, 0,0,1), 3, 3) + 0.05
+#' morie_alfrf2_kabsch(P, Q)
 morie_alfrf2_kabsch <- function(P, Q) {
   P <- as.matrix(P)
   Q <- as.matrix(Q)
@@ -244,6 +252,11 @@ morie_alfrf2_kabsch <- function(P, Q) {
 #' @param Q The reference points.
 #' @return A numeric scalar.
 #' @export
+#' @examples
+#' set.seed(1)
+#' P <- matrix(rnorm(15), 5, 3)
+#' Q <- P + 0.1
+#' morie_alfrf2_rmsd(P, Q)
 morie_alfrf2_rmsd <- function(P, Q) morie_alfrf2_kabsch(P, Q)$rmsd
 
 #' Relax consecutive alpha carbons toward the backbone spacing
@@ -263,6 +276,9 @@ morie_alfrf2_rmsd <- function(P, Q) morie_alfrf2_kabsch(P, Q)$rmsd
 #' @param passes How many relaxation passes.
 #' @return The relaxed structure.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_alfrf2_ideal(V, V)
 morie_alfrf2_ideal <- function(x, fixed, spacing = .alfrf2_ca_spacing,
                                passes = 8L) {
   y <- as.matrix(x)
@@ -336,6 +352,8 @@ morie_alfrf2_ideal <- function(x, fixed, spacing = .alfrf2_ca_spacing,
 #'   around, the motif RMSD -- which must be zero -- and the chain
 #'   geometry it came out with.
 #' @export
+#' @examples
+#' morie_alfrf2(target_motif = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), scaffold = 5L)
 morie_alfrf2 <- function(target_motif, scaffold, T = 20L,
                          denoise = "ideal", denoiser = NULL,
                          beta_start = 1e-4, beta_end = 0.02,
@@ -445,6 +463,8 @@ morie_alfrf2 <- function(target_motif, scaffold, T = 20L,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_alfrf2_cheatsheet()
 morie_alfrf2_cheatsheet <- function() {
   paste0(
     "alfrf2: RFdiffusion motif scaffolding. Reverse DDPM over ",

@@ -19,7 +19,7 @@
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 23
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' rmorie:::Alfbkb(M, M)
+#' Alfbkb(M, M)
 #' @export
 Alfbkb <- function(s, w, b = NULL, frames = NULL) {
   n <- nrow(s)

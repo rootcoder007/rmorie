@@ -247,6 +247,9 @@
 #' \code{"cumulative"}.
 #' @return The value of \code{rowSums}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' exposure_summary(V)
 exposure_summary <- function(A_history, how = "cumulative") {
   if (!how %in% c("cumulative", "final", "duration")) {
     stop(sprintf(
@@ -287,6 +290,9 @@ exposure_summary <- function(A_history, how = "cumulative") {
 #' \code{as.numeric}.
 #' @return A list with \code{X}, \code{centres}, \code{width}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' rbf_basis(runif(20), n_centres = 5)
 rbf_basis <- function(x, n_centres = 5, width = NULL) {
   xs <- .polkrn_vec(x)
   m <- as.integer(n_centres)

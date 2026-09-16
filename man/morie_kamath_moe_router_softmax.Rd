@@ -24,7 +24,7 @@ Delegates to \code{morie_kamath_moe_topk_gating} (km040) and
 }
 \examples{
 x <- c(1, 2, 3, 4)
-morie_kamath_moe_router_softmax(c(1, 0), matrix(c(1, 0, 0, 1, 
-    2, 0), 2), list(function(x) x * 1, function(x) x * 2, function(x) x * 
+morie_kamath_moe_router_softmax(c(1, 0), matrix(c(1, 0, 0, 1,
+    2, 0), 2), list(function(x) x * 1, function(x) x * 2, function(x) x *
     3), 2)
 }

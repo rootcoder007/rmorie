@@ -18,6 +18,8 @@
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{log1p}.
 #' @export
+#' @examples
+#' softplus(z = 5L)
 softplus <- function(z) {
   x <- as.numeric(z)
   if (x > 30.0) return(x)
@@ -37,6 +39,8 @@ softplus <- function(z) {
 #' @param rule One of \code{"euler"}, \code{"zoh"}. Defaults to \code{"zoh"}.
 #' @return A list with \code{Abar}, \code{Bbar}.
 #' @export
+#' @examples
+#' discretize_zoh(delta = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8))
 discretize_zoh <- function(delta, A, B, rule = "zoh") {
   if (!(rule %in% c("zoh", "euler")))
     stop(sprintf("mambss: rule must be zoh or euler, got %s", rule))
@@ -78,6 +82,13 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
 #' @param rule Passed to \code{discretize_zoh}. Defaults to \code{"zoh"}.
 #' @return A list with \code{h}, \code{y}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' N <- 3
+#' r <- selective_ssm_step(x = 0.5, h = rep(0, N),
+#'                         A = -abs(rnorm(N)), B = rnorm(N), C = rnorm(N),
+#'                         delta = 0.1)
+#' str(r, max.level = 1)
 selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
   N <- length(A)
   if (length(h) != N)
@@ -151,6 +162,15 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' @return A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L},
 #' \code{D}, \code{N}, \code{rule}, \code{time_invariant}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' L <- 5; D <- 2; N <- 3
+#' X <- matrix(rnorm(L * D), L, D)
+#' r <- selective_scan(X, A = matrix(-abs(rnorm(D * N)), D, N),
+#'                     W_B = matrix(rnorm(N * D, 0, 0.3), N, D),
+#'                     W_C = matrix(rnorm(N * D, 0, 0.3), N, D),
+#'                     W_delta = matrix(rnorm(D, 0, 0.3), 1, D))
+#' str(r, max.level = 1)
 selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
                            b_B = NULL, b_C = NULL, b_delta = 0.0,
                            rule = "zoh", D_skip = NULL) {
@@ -211,6 +231,9 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
 #' @param b Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{h}, \code{g}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gated_rnn_equivalent(V, V)
 gated_rnn_equivalent <- function(x, w, b = 0.0) {
   h <- 0.0
   hs <- numeric(length(x))
@@ -238,6 +261,15 @@ gated_rnn_equivalent <- function(x, w, b = 0.0) {
 #' @param ... Passed through.
 #' @return The value of \code{$}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' L <- 5; D <- 2; N <- 3
+#' X <- matrix(rnorm(L * D), L, D)
+#' r <- s6_layer(X, A = matrix(-abs(rnorm(D * N)), D, N),
+#'               W_B = matrix(rnorm(N * D, 0, 0.3), N, D),
+#'               W_C = matrix(rnorm(N * D, 0, 0.3), N, D),
+#'               W_delta = matrix(rnorm(D, 0, 0.3), 1, D))
+#' str(r, max.level = 1)
 s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
   selective_scan(X, A, W_B, W_C, W_delta, ...)$y
 }
@@ -287,6 +319,15 @@ mambassmstep <- selective_ssm_step
 #' @param D_skip Passed to \code{selective_scan}.
 #' @return The value of \code{selective_scan}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' L <- 5; D <- 2; N <- 3
+#' X <- matrix(rnorm(L * D), L, D)
+#' r <- morie_mambss(X, A = matrix(-abs(rnorm(D * N)), D, N),
+#'                   W_B = matrix(rnorm(N * D, 0, 0.3), N, D),
+#'                   W_C = matrix(rnorm(N * D, 0, 0.3), N, D),
+#'                   W_delta = matrix(rnorm(D, 0, 0.3), 1, D))
+#' str(r, max.level = 1)
 morie_mambss <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
                         b_B = NULL, b_C = NULL, b_delta = 0.0,
                         rule = "zoh", D_skip = NULL) {

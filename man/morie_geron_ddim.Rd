@@ -35,6 +35,6 @@ this wrapper picks the \code{n_steps} evenly-spaced timesteps out of \code{T}.
 }
 \examples{
 zero <- function(x, t) rep(0, length(x))
-morie_geron_ddim(1, zero, T = 4, n_steps = 2, beta_schedule = rep(0.5, 
+morie_geron_ddim(1, zero, T = 4, n_steps = 2, beta_schedule = rep(0.5,
     4))
 }

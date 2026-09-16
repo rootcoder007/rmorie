@@ -28,6 +28,6 @@ Pick the highest reward-model score among N samples. \code{best_index} is
 0-BASED.
 }
 \examples{
-morie_kamath_best_of_n_sampling(list("a", "b", "c"), rewards = c(0.1, 
+morie_kamath_best_of_n_sampling(list("a", "b", "c"), rewards = c(0.1,
     0.9, 0.4))
 }

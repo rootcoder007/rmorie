@@ -55,8 +55,7 @@
 #' @return A list with \code{U}, \code{s}, \code{Vt}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .meglt_svd(M = X)
 #' res
 .meglt_svd <- function(M) {
@@ -75,6 +74,9 @@
 #' @param A Passed to \code{.meglt_mat}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(1)
+#' nuclear_norm(matrix(rnorm(12), 3, 4))
 nuclear_norm <- function(A) {
   M <- .meglt_mat(A)
   s <- .meglt_svd(M)
@@ -91,6 +93,10 @@ nuclear_norm <- function(A) {
 #' @param rank Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{mu_row}, \code{mu_col}, \code{mu}, \code{rank}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- coherence(matrix(rnorm(20), 5, 4), rank = 2)
+#' str(r, max.level = 1)
 coherence <- function(A, rank = NULL) {
   M <- .meglt_mat(A)
   sv <- .meglt_svd(M)
@@ -132,6 +138,8 @@ coherence <- function(A, rank = NULL) {
 #' @param exponent Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.2}.
 #' @return A list with \code{m}, \code{fraction}, \code{n}, \code{r}, \code{exponent}, \code{note}.
 #' @export
+#' @examples
+#' sample_bound(n = 5L, r = 5L)
 sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
   if (!(exponent %in% c(1.2, 1.25)))
     stop("meglt: the exponent must be 1.2 (moderate rank) or 1.25 (all ranks), got ", format(exponent))
@@ -161,6 +169,16 @@ sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
 #' \code{final_residual}, \code{tau}, \code{n_observed}, \code{fraction_observed},
 #' \code{nuclear_norm}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' U <- matrix(rnorm(10), 5, 2)
+#' V <- matrix(rnorm(8), 4, 2)
+#' M <- U %*% t(V)
+#' obs <- list()
+#' for (i in 0:4) for (j in 0:3) if (runif(1) < 0.7)
+#'   obs[[length(obs) + 1]] <- c(i, j)
+#' r <- svt(M, obs, tau = 1, iters = 100)
+#' str(r, max.level = 1)
 svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
                 tol = 1e-6) {
   A <- .meglt_mat(M)
@@ -217,6 +235,9 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
 #' @param M Passed to \code{.meglt_mat}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' relative_error(V, V)
 relative_error <- function(X, M) {
   A <- .meglt_mat(M)
   num <- 0
@@ -268,6 +289,16 @@ matrix_completion_low_rank <- svt
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' U <- matrix(rnorm(10), 5, 2)
+#' V <- matrix(rnorm(8), 4, 2)
+#' M <- U %*% t(V)
+#' obs <- list()
+#' for (i in 0:4) for (j in 0:3) if (runif(1) < 0.7)
+#'   obs[[length(obs) + 1]] <- c(i, j)
+#' r <- morie_meglt("svt", M, obs, tau = 1, iters = 100)
+#' str(r, max.level = 1)
 morie_meglt <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("meglt: op must be one of nuclear_norm, coherence, sample_bound, svt, relative_error, cheatsheet")

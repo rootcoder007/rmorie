@@ -21,6 +21,6 @@ A list with \code{rewards}, \code{total_reward}, \code{returns}, \code{discounte
 \keyword{internal}
 \examples{
 tbl <- array(c(0, 0, 2, 0, 1, 0, 0, 2), dim = c(2, 2, 2))
-morie_geron_reward_function(c(0, 1, 1), c(0, 0, 1), c(1, 0, 1), 
+morie_geron_reward_function(c(0, 1, 1), c(0, 0, 1), c(1, 0, 1),
     R = tbl, gamma = 0.5)
 }

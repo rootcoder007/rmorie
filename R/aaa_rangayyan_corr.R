@@ -48,6 +48,9 @@
 #' @return A list with \code{dot_product}, \code{gamma}, \code{energy_x},
 #' \code{energy_y}, \code{n}, \code{mean_removed}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' DotProd(V, V)
 DotProd <- function(x, y, subtract_mean = FALSE) {
   # eqs (4.24)-(4.25): the inner product and the correlation coefficient
   # it normalizes to.  The book notes the means may be removed first
@@ -86,6 +89,9 @@ DotProd <- function(x, y, subtract_mean = FALSE) {
 #' @return A list with \code{theta}, \code{integrand}, \code{discrete_sum},
 #' \code{duration}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ContProj(V, V)
 ContProj <- function(x, y, t = NULL, dt = 1) {
   # eq (4.26): the continuous counterpart of eq (4.24).  Tabulated it is
   # the discrete inner product SCALED BY dt; dropping the dt turns an
@@ -121,6 +127,8 @@ ContProj <- function(x, y, t = NULL, dt = 1) {
 #' \code{toeplitz_deviation}, \code{relative_deviation}, \code{tol}, \code{toeplitz},
 #' \code{method}.
 #' @export
+#' @examples
+#' CcfOuter(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
 CcfOuter <- function(x, y, order, tol = 1e-3) {
   # eq (4.29): Theta_xy = E[x(n) y^T(n)], an N x N matrix carrying all
   # pairwise delays -- which is why the outer product appears in the
@@ -171,6 +179,9 @@ CcfOuter <- function(x, y, order, tol = 1e-3) {
 #' @return A list with \code{csd}, \code{via_ccf}, \code{ccf_circular}, \code{freqs},
 #' \code{max_difference}, \code{agrees}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Csd(V, V)
 Csd <- function(x, y, fs = 1) {
   # eqs (4.30)-(4.31): S_xx = |X|^2 and S_xy = X Y*.  Both routes to the
   # CSD -- the transform of the CCF and the product -- are computed and
@@ -219,6 +230,22 @@ Csd <- function(x, y, fs = 1) {
 #' @return A list with \code{coherence}, \code{phase}, \code{sxx}, \code{syy},
 #' \code{sxy}, \code{freqs}, \code{n_segments}, \code{nperseg}, \code{method}.
 #' @export
+#' @examples
+#' sine_c <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
+#'     pi * cycles * (0:(n - 1))/n + phase)
+#' r <- DotProd(c(1, 2, 3), c(4, 5, 6))
+#' n <- 1024
+#' x <- sine_c(n, 13) + 0.2 * sine_c(n, 97)
+#' fs <- 128
+#' cyc <- 16
+#' k <- which.min(abs(r$freqs - cyc * fs/n))
+#' y <- sine_c(n, 11) + 0.5 * sine_c(n, 71)
+#' freqs <- (0:8)/8
+#' m <- 12
+#' cycles <- lapply(0:(m - 1), function(k) sine_c(n, 3) + 0.8 *
+#'     sin(2 * pi * 30 * (0:(n - 1))/n + k * 1.7))
+#' Msc(x, y, nperseg = 128)
+#' Cohere(x = x, y = y)
 Cohere <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
   # eq (4.32).  The book is emphatic: computed from two single
   # observations the magnitude is UNITY AT EVERY FREQUENCY, which is
@@ -290,6 +317,21 @@ Cohere <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #' @param noverlap Passed to \code{Cohere}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' sine_c <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
+#'     pi * cycles * (0:(n - 1))/n + phase)
+#' r <- DotProd(c(1, 2, 3), c(4, 5, 6))
+#' n <- 1024
+#' x <- sine_c(n, 13) + 0.2 * sine_c(n, 97)
+#' fs <- 128
+#' cyc <- 16
+#' k <- which.min(abs(r$freqs - cyc * fs/n))
+#' y <- sine_c(n, 11) + 0.5 * sine_c(n, 71)
+#' freqs <- (0:8)/8
+#' m <- 12
+#' cycles <- lapply(0:(m - 1), function(k) sine_c(n, 3) + 0.8 *
+#'     sin(2 * pi * 30 * (0:(n - 1))/n + k * 1.7))
+#' Msc(x, y, nperseg = 128)
 Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
   # The square of eq (4.32).  The two forms are NOT interchangeable:
   # 0.5 magnitude coherence is 0.25 magnitude-squared coherence.
@@ -314,6 +356,9 @@ Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #' @param subtract_mean A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Template(V, V)
 Template <- function(x, ref, threshold = NULL, subtract_mean = TRUE) {
   # eqs (4.25), (4.28): the correlation coefficient at every shift.
   # gamma is normalized at EVERY shift by the energy of the segment under
@@ -375,6 +420,9 @@ Template <- function(x, ref, threshold = NULL, subtract_mean = TRUE) {
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{X}, \code{omega}, \code{dt}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MfInput(V, V)
 MfInput <- function(x, omega, dt = 1) {
   # eq (4.33): X(omega) = integral x(t) exp(-j omega t) dt.  An integral,
   # so it carries the sampling interval.
@@ -412,6 +460,9 @@ MfInput <- function(x, omega, dt = 1) {
 #' @return A list with \code{y}, \code{t}, \code{peak_index}, \code{peak_time},
 #' \code{peak_magnitude}, \code{dt}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MfOutput(V, V)
 MfOutput <- function(x, h, dt = 1) {
   # eq (4.34), computed as y = x * h: exact for a finite record, where
   # the frequency-domain route would need fine enough sampling to avoid
@@ -441,6 +492,8 @@ MfOutput <- function(x, h, dt = 1) {
 #' @param freqs Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' MfNoiseIn(power = 5L)
 MfNoiseIn <- function(power, freqs = NULL) {
   # eq (4.35): S_eta_i = P_eta_i / 2.  The factor of two is the TWO-SIDED
   # convention: integrating the flat density over all f returns P, not
@@ -470,6 +523,8 @@ MfNoiseIn <- function(power, freqs = NULL) {
 #' @return A list with \code{psd}, \code{power}, \code{rms}, \code{input_power},
 #' \code{input_density}, \code{method}.
 #' @export
+#' @examples
+#' MfNoiseOut(power = 5L, H = 0.5)
 MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
   # eqs (4.36)-(4.37): S_eta_o = (P/2)|H|^2 and its integral.  eq (4.36)
   # holds only because the input was white, so the density factored out.
@@ -505,6 +560,9 @@ MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
 #' @param t0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{my}, \code{y}, \code{t0}, \code{phase}, \code{method}.
 #' @export
+#' @examples
+#' MfPeak(X = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   freqs = c(1, 2, 3, 4, 5, 6, 7, 8), t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 MfPeak <- function(X, H, freqs, t0) {
   # eq (4.38): M_y = |y(t0)|, the numerator of the SNR everything else
   # maximizes.  It is a MAGNITUDE, so the phase of X H at t0 is what the
@@ -542,6 +600,8 @@ MfPeak <- function(X, H, freqs, t0) {
 #' @return A list with \code{snr}, \code{snr_db}, \code{amplitude_snr}, \code{my},
 #' \code{noise_power}, \code{peak_to_mean}, \code{method}.
 #' @export
+#' @examples
+#' MfSnr(my = 5L, noise_power = 5L)
 MfSnr <- function(my, noise_power) {
   # eq (4.39): a PEAK-to-MEAN ratio, not the mean-to-mean of an ordinary
   # SNR.  The matched filter maximizes the output at ONE INSTANT, which
@@ -571,6 +631,8 @@ MfSnr <- function(my, noise_power) {
 #' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' SigEnergy(c(4, 0, 0, 0), dt = 1)
 SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
   # eq (4.40): E_x = integral x^2 dt = integral |X|^2 df, Parseval named
   # for the role it plays here -- E_x is constant for a given signal, so
@@ -615,6 +677,22 @@ SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
 #' @return A list with \code{ratio}, \code{bound}, \code{optimality}, \code{numerator},
 #' \code{energy_h}, \code{energy_x}, \code{method}.
 #' @export
+#' @examples
+#' sine_c <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
+#'     pi * cycles * (0:(n - 1))/n + phase)
+#' r <- DotProd(c(1, 2, 3), c(4, 5, 6))
+#' n <- 1024
+#' x <- sine_c(n, 13) + 0.2 * sine_c(n, 97)
+#' fs <- 128
+#' cyc <- 16
+#' k <- which.min(abs(r$freqs - cyc * fs/n))
+#' y <- sine_c(n, 11) + 0.5 * sine_c(n, 71)
+#' freqs <- (0:8)/8
+#' m <- 12
+#' cycles <- lapply(0:(m - 1), function(k) sine_c(n, 3) + 0.8 *
+#'     sin(2 * pi * 30 * (0:(n - 1))/n + k * 1.7))
+#' Msc(x, y, nperseg = 128)
+#' MfRatio(X = freqs, H = freqs, freqs = freqs, t0 = cyc, noise_power = cyc)
 MfRatio <- function(X, H, freqs, t0, noise_power) {
   # eq (4.41).  Dividing by the constant E_x is what turns eq (4.39) into
   # something Schwarz's inequality applies to; by eq (4.46) the ratio
@@ -653,6 +731,9 @@ MfRatio <- function(X, H, freqs, t0, noise_power) {
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{ratio},
 #' \code{equality}, \code{k}, \code{collinear}, \code{method}.
 #' @export
+#' @examples
+#' SchwarzC(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 SchwarzC <- function(A, B, grid) {
   # eq (4.42), with equality exactly when A = K B* -- which, applied with
   # A = H and B = X exp(+j2 pi f t0), IS the matched-filter derivation.
@@ -696,6 +777,9 @@ SchwarzC <- function(A, B, grid) {
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{k},
 #' \code{collinear}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' SchwarzR(V, V)
 SchwarzR <- function(a, b, grid = NULL, dt = 1) {
   # eq (4.43), the real case of eq (4.42); equality when a = K b, the two
   # functions collinear as vectors in function space.
@@ -734,6 +818,9 @@ SchwarzR <- function(a, b, grid = NULL, dt = 1) {
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{cosine},
 #' \code{equality}, \code{norm_a}, \code{norm_b}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CauchySch(V, V)
 CauchySch <- function(a, b) {
   # eq (4.44): |a.b| <= |a||b|.  The ratio of the two sides is the cosine
   # between the vectors, which is exactly the correlation coefficient of
@@ -765,6 +852,9 @@ CauchySch <- function(a, b) {
 #' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality},
 #' \code{norm_sum}, \code{norm_a}, \code{norm_b}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Triangle(V, V)
 Triangle <- function(a, b) {
   # eq (4.45): |a+b| <= |a|+|b|, with equality when the vectors align.
   # It is the statement that no combination of two signals carries more
@@ -797,6 +887,9 @@ Triangle <- function(a, b) {
 #' @return A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude},
 #' \code{conjugate_of_signal}, \code{method}.
 #' @export
+#' @examples
+#' MfTf(X = c(1, 2, 3, 4, 5, 6, 7, 8), freqs = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 MfTf <- function(X, freqs, t0, gain = 1) {
   # eq (4.48): H(f) = K X*(f) exp(-j 2 pi f t0).  The CONJUGATE is what
   # cancels the signal's phase so every component arrives in step at t0 --
@@ -828,6 +921,9 @@ MfTf <- function(X, freqs, t0, gain = 1) {
 #' @return A list with \code{h}, \code{t0}, \code{shift_samples}, \code{gain},
 #' \code{causal}, \code{reversed}, \code{n_reference}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MfImpulse(V)
 MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
   # eqs (4.49), (4.56): h(t) = K x(t0 - t), reversed and delayed.  The
   # delay must be at least the reference duration or the filter is not
@@ -868,6 +964,9 @@ MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' \code{peak_value}, \code{expected_peak}, \code{energy}, \code{max_difference},
 #' \code{equals_acf}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MfAcf(V)
 MfAcf <- function(x, gain = 1, dt = 1) {
   # Filtering with h(t) = K x(t0 - t) makes the convolution equivalent to
   # CORRELATION, so y(t) = K phi_x(t - t0): the output is a delayed copy
@@ -912,6 +1011,8 @@ MfAcf <- function(x, gain = 1, dt = 1) {
 #' @return A list with \code{g}, \code{h}, \code{y}, \code{acf}, \code{delay},
 #' \code{max_difference}, \code{output_is_acf}, \code{method}.
 #' @export
+#' @examples
+#' RefPattern()
 RefPattern <- function(amplitudes = NULL) {
   # eqs (4.53)-(4.54): g(n) = 3 d(n) + 2 d(n-1) + d(n-2) and its filter
   # h(n) = d(n) + 2 d(n-1) + 3 d(n-2) -- the same three numbers reversed.
@@ -941,6 +1042,9 @@ RefPattern <- function(amplitudes = NULL) {
 #' @param gain Passed to \code{MfTf}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' MfTfEeg(X = c(1, 2, 3, 4, 5, 6, 7, 8), freqs = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 MfTfEeg <- function(X, freqs, t0, gain = 1) {
   # eq (4.55), the same expression as eq (4.48) restated in Section 4.6.2,
   # so it delegates.  What is specific here is the DFT caveat.
@@ -964,6 +1068,9 @@ MfTfEeg <- function(X, freqs, t0, gain = 1) {
 #' @param dt Passed to \code{MfImpulse}. Defaults to \code{1}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MfImpEeg(V)
 MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
   # eq (4.56), identical to eq (4.49).  Section 4.6.2 adds that because h
   # is a reversed reference, the filtering is equivalent to correlation.
@@ -983,6 +1090,9 @@ MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' @return A list with \code{Y}, \code{psd}, \code{max_imaginary}, \code{max_difference},
 #' \code{is_psd}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MfPsd(V)
 MfPsd <- function(x, dt = 1) {
   # eq (4.57): Y(f) = X X* = S_x(f).  Because Y is a PSD it is real and
   # nonnegative -- the phase has been cancelled exactly, the
@@ -1015,6 +1125,8 @@ MfPsd <- function(x, dt = 1) {
 #' @return A list with \code{snr}, \code{snr_db}, \code{energy}, \code{noise_power},
 #' \code{n0}, \code{depends_only_on_energy}, \code{method}.
 #' @export
+#' @examples
+#' MfMaxSnr(x = c(1, 2, 3, 4, 5, 6, 7, 8), noise_power = 5L)
 MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
   # eq (4.46) rearranged: M_y^2 / P_eta_o = 2 E_x / P_eta_i, the familiar
   # 2E/N0.  It depends on the signal ONLY through its energy -- the same
@@ -1052,6 +1164,9 @@ MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MatchedFilt(V)
 MatchedFilt <- function(ref, x = NULL, noise_psd = NULL, freqs = NULL,
                         t0 = NULL, gain = 1, dt = 1) {
   # eqs (4.48)-(4.49) for the white-noise case.  The derivation assumed
@@ -1116,6 +1231,9 @@ MatchedFilt <- function(ref, x = NULL, noise_psd = NULL, freqs = NULL,
 #' @param X Coerced to complex by the body, with \code{as.complex}.
 #' @return A list with \code{x}, \code{complex}, \code{n}, \code{max_imaginary}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Idft(V)
 Idft <- function(X) {
   # eq (3.81): the 1/N and the PLUS sign are what distinguish it from the
   # forward transform of eq (3.80); getting either wrong scales the
@@ -1145,6 +1263,9 @@ Idft <- function(X) {
 #' @return A list with \code{energy_time}, \code{energy_freq}, \code{psd},
 #' \code{max_difference}, \code{holds}, \code{n}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Parseval(V)
 Parseval <- function(x) {
   # eq (3.91), discrete form: sum |x(n)|^2 = (1/N) sum |X(k)|^2.  With the
   # unnormalized forward transform of eq (3.80) the spectral sum is N
@@ -1174,6 +1295,9 @@ Parseval <- function(x) {
 #' @return A list with \code{sum}, \code{average}, \code{m}, \code{n},
 #' \code{signal_growth}, \code{noise_growth}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' SyncSum(V)
 SyncSum <- function(observations) {
   # eq (3.96): the sum separates into a signal sum growing linearly in M
   # and a zero-mean noise sum growing only as sqrt(M).  The SUM is
@@ -1211,6 +1335,9 @@ SyncSum <- function(observations) {
 #' \code{kurtosis}, \code{fm3}, \code{fm4}, \code{n_bins}, \code{uniformity},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' SpecMoments(V)
 SpecMoments <- function(psd, fs = 1, freqs = NULL) {
   # eqs (6.32)-(6.43).  The sums run over ONE HALF of the periodic PSD:
   # for a real signal S(k) is even-symmetric about fs/2, so summing the
@@ -1263,6 +1390,8 @@ SpecMoments <- function(psd, fs = 1, freqs = NULL) {
 #' \code{bandwidth}, \code{total_power}, \code{psd}, \code{freqs}, \code{fs},
 #' \code{nperseg}, \code{method}.
 #' @export
+#' @examples
+#' EmgFreq(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 EmgFreq <- function(x, fs, nperseg = NULL) {
   # eqs (6.34)-(6.35) on the EMG periodogram.  Both fall as a muscle
   # fatigues, but they are not interchangeable: the median is far less
@@ -1300,6 +1429,8 @@ EmgFreq <- function(x, fs, nperseg = NULL) {
 #' \code{sidelobe_db}, \code{equivalent_noise_bandwidth_bins}, \code{duration}, \code{n},
 #' \code{fs}, \code{window}, \code{zero_padding_helps}, \code{method}.
 #' @export
+#' @examples
+#' SpecRes(n = 5L)
 SpecRes <- function(n, fs = 1, window = "rectangular") {
   # Rayleigh: delta_f = fs/N, set by the RECORD LENGTH.  Zero-padding
   # interpolates the same spectrum more finely and does NOT improve
@@ -1347,6 +1478,8 @@ SpecRes <- function(n, fs = 1, window = "rectangular") {
 #' @param bands Optional; may be \code{NULL}. Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' PsdHz(psd = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
   # Section 6.4: bin k sits at k fs / N, and a band power is the sum of
   # its bins times the bin width fs/N.  The bin width turns a density
@@ -1392,6 +1525,9 @@ PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
 #' @return A list with \code{average_psd}, \code{psd_of_average}, \code{mean_waveform},
 #' \code{freqs}, \code{m}, \code{n}, \code{power_retained}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' PcgSyncAvg(D)
 PcgSyncAvg <- function(cycles, fs = 1) {
   # S_avg(f) = (1/M) sum |PCG_k(f)|^2.  The averaging is of POWER
   # SPECTRA, not waveforms, and that is the point: successive PCG cycles
@@ -1449,6 +1585,9 @@ PcgSyncAvg <- function(cycles, fs = 1) {
 #' \code{rejected}, \code{n_rejected}, \code{peaks}, \code{n}, \code{snr_gain},
 #' \code{snr_gain_db}, \code{artifact_factor}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ErpArtifact(V)
 ErpArtifact <- function(epochs, reject = NULL) {
   # Section 3.5: averaging M aligned epochs raises the SNR by sqrt(M).  A
   # large artifact is NOT zero-mean over the epochs it contaminates, so
@@ -1584,6 +1723,14 @@ SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
 #' \code{coherence_peak}, \code{coherence_mean}, \code{coherence}, \code{freqs},
 #' \code{band}, \code{n}, \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' \donttest{
+#' n <- 1024
+#' fs <- 128
+#' resp <- sin(2 * pi * 0.25 * (0:(n - 1))/fs)
+#' ecg <- sin(2 * pi * 0.25 * (0:(n - 1))/fs + 0.7)
+#' CardioResp(ecg, resp, fs = fs)
+#' }
 CardioResp <- function(ecg_rate, resp, fs, band = c(0.15, 0.40),
                        nperseg = NULL) {
   # Coherence (eq 4.32) measures LINEAR association; the phase-locking

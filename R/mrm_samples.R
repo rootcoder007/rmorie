@@ -21,11 +21,13 @@
 #'   \code{morie_fetch_siu()}) return the file path to the downloaded or
 #'   cached CSV; \code{morie_load_dataset()} returns the loaded
 #'   \code{data.frame}.
-#' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' if (FALSE) {
 #'   b01 <- morie_load_dataset("otisb01")
 #'   head(b01)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @name mrm_samples
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -132,7 +134,8 @@ morie_tps_layer_urls <- function() {
 #'   path without re-downloading.
 #' @param max_per_page ArcGIS page size (default `2000`; server caps).
 #' @return Path to the CSV.
-#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Network: fetches major-crime indicators from the Toronto Police
 #' # ArcGIS open-data layer.
@@ -144,6 +147,7 @@ morie_tps_layer_urls <- function() {
 #' tps <- utils::read.csv(csv)
 #' nrow(tps)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_fetch_tps <- function(
   category,

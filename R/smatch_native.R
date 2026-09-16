@@ -85,6 +85,13 @@
 #' @return A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age},
 #' \code{n_people}, \code{n_rows}.
 #' @export
+#' @examples
+#' cases <- list(
+#'   list(start = 0, end = 365, exposure = 100, events = c(110, 250)),
+#'   list(start = 0, end = 365, exposure = 200, events = c(215)),
+#'   list(start = 0, end = 365, exposure = 50, events = c(60, 70)))
+#' r <- morie_smatch_poisson_design(cases, risk_periods = list(c(0, 30)))
+#' str(r, max.level = 1)
 morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
   rp <- lapply(risk_periods, function(r) c(as.numeric(r[1]), as.numeric(r[2])))
   ab <- as.numeric(age_breaks)
@@ -145,6 +152,13 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
 #' \code{age_effects}, \code{individual_effects}, \code{coef}, \code{converged},
 #' \code{iterations}, \code{n_rows}, \code{n_people}, \code{method}, \code{identical_to}.
 #' @export
+#' @examples
+#' cases <- list(
+#'   list(start = 0, end = 365, exposure = 100, events = c(110, 250)),
+#'   list(start = 0, end = 365, exposure = 200, events = c(215)),
+#'   list(start = 0, end = 365, exposure = 50, events = c(60, 70)))
+#' r <- morie_smatch_sccs_poisson_fit(cases, risk_periods = list(c(0, 30)))
+#' str(r, max.level = 1)
 morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
                              iters = 200, tol = 1e-12, ridge = 1e-9) {
   d <- morie_smatch_poisson_design(cases, risk_periods, age_breaks = age_breaks)
@@ -233,6 +247,8 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' \code{B}, \code{C}, \code{z_alpha_2}, \code{z_power}, \code{log_ri}, \code{r},
 #' \code{p_exposed}, \code{assumes}, \code{method}.
 #' @export
+#' @examples
+#' morie_smatch_sample_size(log_ri = log(2), r = 0.1, p_exposed = 0.8)
 morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
   b <- as.numeric(log_ri)
   rr <- as.numeric(r)
@@ -283,6 +299,9 @@ morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power =
 #' @param alpha Passed to \code{morie_smatch_sample_size}. Defaults to \code{0.05}.
 #' @return A list with \code{power}, \code{z_power}, \code{n_events}, \code{A}, \code{B}, \code{C}.
 #' @export
+#' @examples
+#' morie_smatch_power(n_events = 120, log_ri = log(2), r = 0.1,
+#'                    p_exposed = 0.8)
 morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
   s <- morie_smatch_sample_size(log_ri, r, p_exposed, alpha = alpha, power = 0.5)
   A <- s$A
@@ -306,6 +325,8 @@ morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
 #' @return A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri},
 #' \code{interpretation}.
 #' @export
+#' @examples
+#' morie_smatch_relative_efficiency(r = 0.1, log_ri = log(2))
 morie_smatch_relative_efficiency <- function(r, log_ri) {
   rr <- as.numeric(r)
   b <- as.numeric(log_ri)

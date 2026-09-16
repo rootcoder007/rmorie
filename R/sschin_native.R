@@ -45,8 +45,7 @@
 #' @return A list with \code{beta}, \code{sigma}.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .sschin_ols(X = X, y = y)
 #' res
@@ -181,6 +180,9 @@
 #' \code{n_missing}, \code{columns_imputed}, \code{n_events}, \code{df_complete},
 #' \code{method}, \code{note}.
 #' @export
+#' @examples
+#' morie_sschin_chained_imputation(time = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
                                             cycles = 10L, ties = "breslow") {
   tv <- as.numeric(time)

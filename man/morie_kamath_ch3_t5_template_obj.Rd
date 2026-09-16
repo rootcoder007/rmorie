@@ -22,6 +22,6 @@ sum over D_train of log P_T5(T | T(x_in, y)). A probability of 0 is
 refused rather than returned as -Inf.
 }
 \examples{
-morie_kamath_ch3_t5_template_obj(list(list("g m", "pos"), list("a m", 
+morie_kamath_ch3_t5_template_obj(list(list("g m", "pos"), list("a m",
     "neg")), "{x} It was {y}", function(T, s) 0.5)
 }

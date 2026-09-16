@@ -98,6 +98,9 @@
 #' @param length_scale Passed to \code{.lengths}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' matern52(V, V)
 matern52 <- function(a, b, amplitude = 1, length_scale = 1) {
   d <- length(a)
   ls <- .lengths(length_scale, d)
@@ -118,6 +121,9 @@ matern52 <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @param length_scale Passed to \code{.lengths}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' squared_exponential(V, V)
 squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
   d <- length(a)
   ls <- .lengths(length_scale, d)
@@ -250,6 +256,9 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @param mean Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{mean}, \code{variance}, \code{sd}.
 #' @export
+#' @examples
+#' gp_posterior(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   Xs = c(1, 2, 3, 4, 5, 6, 7, 8))
 gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
                          length_scale = 1, noise = 1e-8, mean = NULL) {
   rows <- as.matrix(X)
@@ -317,6 +326,8 @@ gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
 #' @param mean Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{grad_mu}, \code{grad_sd}, \code{mu}, \code{sd}.
 #' @export
+#' @examples
+#' gp_posterior_gradient(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), xs = 5L)
 gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
                                   amplitude = 1, length_scale = 1,
                                   noise = 1e-8, mean = NULL) {
@@ -383,6 +394,9 @@ gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
 #' @param xi Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{.Phi}.
 #' @export
+#' @examples
+#' probability_of_improvement(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L,
+#'   best = c(1, 2, 3, 4, 5, 6, 7, 8))
 probability_of_improvement <- function(mu, sd, best, xi = 0) {
   if (sd <= 0) {
     return(0)
@@ -402,6 +416,8 @@ probability_of_improvement <- function(mu, sd, best, xi = 0) {
 #' @param xi Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' expected_improvement(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L, best = c(1, 2, 3, 4, 5, 6, 7, 8))
 expected_improvement <- function(mu, sd, best, xi = 0) {
   if (sd <= 0) {
     return(0)
@@ -421,6 +437,9 @@ expected_improvement <- function(mu, sd, best, xi = 0) {
 #' @param kappa Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' lower_confidence_bound(V, V)
 lower_confidence_bound <- function(mu, sd, kappa = 2) {
   mu - kappa * sd
 }
@@ -439,6 +458,8 @@ lower_confidence_bound <- function(mu, sd, kappa = 2) {
 #' @param xi Passed to \code{expected_improvement}. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' acquire(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L, best = c(1, 2, 3, 4, 5, 6, 7, 8))
 acquire <- function(mu, sd, best, acq = "ei", kappa = 2, xi = 0) {
   if (!(acq %in% c("ei", "pi", "lcb"))) {
     stop("bayopt: acq must be one of ei, pi, lcb")
@@ -468,6 +489,10 @@ acquire <- function(mu, sd, best, acq = "ei", kappa = 2, xi = 0) {
 #' @param xi Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' r <- acquisition_gradient(gmu = c(0.2, -0.1), gsd = c(-0.05, 0.03),
+#'                           mu = 1.2, sd = 0.4, best = 1.0, acq = "ei")
+#' r
 acquisition_gradient <- function(gmu, gsd, mu, sd, best, acq = "ei",
                                  kappa = 2, xi = 0) {
   if (!(acq %in% c("ei", "pi", "lcb"))) {
@@ -516,6 +541,14 @@ acquisition_gradient <- function(gmu, gsd, mu, sd, best, acq = "ei",
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return A list with \code{x}, \code{acq}, \code{n_starts}, \code{evaluations}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(runif(20), 10, 2)
+#' y <- sin(3 * X[, 1]) + X[, 2]
+#' r <- maximise_acquisition(X, y, best = max(y),
+#'                           box = list(c(0, 1), c(0, 1)),
+#'                           acq = "ei", n_starts = 3, max_iter = 20)
+#' str(r, max.level = 1)
 maximise_acquisition <- function(X, y, best, box, acq = "ei",
                                  kernel = "matern52", amplitude = 1,
                                  length_scale = 1, noise = 1e-8,
@@ -634,6 +667,12 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
 #' \code{trace}, \code{acq}, \code{kernel}, \code{inner}, \code{n_eval}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' f <- function(x) -sum((x - c(0.3, 0.7))^2)
+#' r <- bayopt(f, bounds = list(c(0, 1), c(0, 1)), n_iter = 5,
+#'             n_init = 4, seed = 1)
+#' str(r, max.level = 1)
 bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
                    kernel = "matern52", amplitude = 1, length_scale = 1,
                    noise = 1e-8, kappa = 2, xi = 0, n_candidates = 200,

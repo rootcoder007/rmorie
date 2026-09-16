@@ -43,8 +43,7 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .painn_mat(M = X)
 #' res
 .painn_mat <- function(M) {
@@ -65,6 +64,9 @@
 #' @param v Passed to \code{.painn_mat}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' vector_norm(V)
 vector_norm <- function(v) {
   a <- .painn_mat(v)
   F <- ncol(a)
@@ -91,6 +93,17 @@ vector_norm <- function(v) {
 #' @param W_rbf Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{ds}, \code{dv}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' F <- 4; D <- 3
+#' s <- rnorm(F)
+#' v <- matrix(rnorm(D * F), D, F)
+#' r <- c(1, 0.5, -0.5)
+#' phi_s <- function(s, w) s
+#' phi_v <- function(s, w) rep(0.1, 2 * length(s))
+#' W_rbf <- function(d) rep(1, 5)
+#' m <- scalar_vector_message(s, v, r, phi_s, phi_v, W_rbf)
+#' c(length(m$ds), nrow(m$dv), ncol(m$dv))
 scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
                                   W_rbf) {
   s <- .painn_vec(s_j)
@@ -133,6 +146,15 @@ scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
 #' @param phi Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{ds}, \code{dv}, \code{scalar_from_vectors}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' F <- 4; D <- 3
+#' s <- rnorm(F)
+#' v <- matrix(rnorm(D * F), D, F)
+#' U <- diag(F); V <- diag(F)
+#' phi <- function(sv, dot, nrm) list(ds = sv + dot, gate = rep(0.5, length(sv)))
+#' u <- gated_update(s, v, U, V, phi)
+#' c(length(u$ds), nrow(u$dv))
 gated_update <- function(s, v, U, V, phi) {
   sv <- .painn_vec(s)
   Vv <- .painn_mat(v)
@@ -175,6 +197,9 @@ gated_update <- function(s, v, U, V, phi) {
 #' @param centre Optional; may be \code{NULL}. Passed to \code{.painn_vec}.
 #' @return A list with \code{dipole}, \code{magnitude}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' dipole_moment(V, V)
 dipole_moment <- function(charges, R, centre = NULL) {
   q <- .painn_vec(charges)
   pos <- .painn_mat(R)
@@ -220,6 +245,17 @@ dipole_moment <- function(charges, R, centre = NULL) {
 #' @return A list with \code{scalar_error}, \code{vector_error},
 #' \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' F <- 4
+#' s <- rnorm(F)
+#' v <- matrix(rnorm(3 * F), 3, F)
+#' R <- matrix(rnorm(9), 3, 3)
+#' th <- pi / 5
+#' Q <- matrix(c(cos(th), -sin(th), 0, sin(th), cos(th), 0, 0, 0, 1), 3, 3)
+#' model <- function(s, V, pos) list(s = s, v = V)
+#' e <- morie_painn_equivariance_error(model, s, v, R, Q)
+#' is.list(e)
 morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   pos <- .painn_mat(R)
   d <- ncol(pos)

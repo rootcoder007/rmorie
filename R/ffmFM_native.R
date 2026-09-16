@@ -34,6 +34,9 @@
 #' @param model One of \code{"ffm"}, \code{"fm"}. Defaults to \code{"ffm"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' n_parameters(n_features = c(1, 2, 3, 4, 5, 6, 7, 8), n_fields = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   k_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
 n_parameters <- function(n_features, n_fields, k_dim,
                          model = "ffm") {
   n <- as.integer(n_features)
@@ -56,6 +59,11 @@ n_parameters <- function(n_features, n_fields, k_dim,
 #' @param W A vector; indexed elementwise.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(3)
+#' W <- lapply(1:4, function(j) lapply(1:2, function(f) rnorm(3, 0, 0.3)))
+#' x <- list(list(0L, 1.0), list(2L, 1.0))
+#' phi(x, fields = c(0L, 0L, 1L, 1L), W)
 phi <- function(x, fields, W) {
   nz <- list()
   for (pair in x) {
@@ -92,6 +100,8 @@ phi <- function(x, fields, W) {
 #' @param phi_val Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' logistic_loss(y = 1, phi_val = 0.7)
 logistic_loss <- function(y, phi_val) {
   yv <- as.numeric(y)
   if (!(yv == -1 || yv == 1))
@@ -120,6 +130,16 @@ logistic_loss <- function(y, phi_val) {
 #' @return A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss},
 #' \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' rows <- list(list(list(0L, 1), list(2L, 1)),
+#'              list(list(1L, 1), list(3L, 1)),
+#'              list(list(0L, 1), list(3L, 1)),
+#'              list(list(1L, 1), list(2L, 1)))
+#' labels <- c(1, -1, 1, -1)
+#' r <- fit_ffm(rows, labels, fields = c(0L, 0L, 1L, 1L),
+#'              n_features = 4, n_fields = 2, k_dim = 2, epochs = 5)
+#' str(r, max.level = 1)
 fit_ffm <- function(rows, labels, fields, n_features, n_fields,
                     k_dim = 4, eta = 0.1, lam = 2e-5, epochs = 10,
                     seed = 0) {
@@ -240,6 +260,14 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
 #' @param seed Passed to \code{fit_ffm}. Defaults to \code{0}.
 #' @return The value of \code{fit_ffm}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' rows <- list(list(list(0L, 1), list(2L, 1)),
+#'              list(list(1L, 1), list(3L, 1)))
+#' labels <- c(1, -1)
+#' r <- morie_ffmFM(rows, labels, fields = c(0L, 0L, 1L, 1L),
+#'                  n_features = 4, n_fields = 2, k_dim = 2, epochs = 3)
+#' str(r, max.level = 1)
 morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
                         k_dim = 4, eta = 0.1, lam = 2e-5,
                         epochs = 10, seed = 0) {
@@ -265,6 +293,14 @@ morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
 #' @param seed Passed to \code{fit_ffm}. Defaults to \code{0}.
 #' @return The value of \code{fit_ffm}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' rows <- list(list(list(0L, 1), list(2L, 1)),
+#'              list(list(1L, 1), list(3L, 1)))
+#' labels <- c(1, -1)
+#' r <- fieldawarefm(rows, labels, fields = c(0L, 0L, 1L, 1L),
+#'                   n_features = 4, n_fields = 2, k_dim = 2, epochs = 3)
+#' str(r, max.level = 1)
 fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
                          k_dim = 4, eta = 0.1, lam = 2e-5,
                          epochs = 10, seed = 0) {
@@ -290,6 +326,14 @@ fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
 #' @param seed Passed to \code{fit_ffm}. Defaults to \code{0}.
 #' @return The value of \code{fit_ffm}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' rows <- list(list(list(0L, 1), list(2L, 1)),
+#'              list(list(1L, 1), list(3L, 1)))
+#' labels <- c(1, -1)
+#' r <- field_aware_fm(rows, labels, fields = c(0L, 0L, 1L, 1L),
+#'                     n_features = 4, n_fields = 2, k_dim = 2, epochs = 3)
+#' str(r, max.level = 1)
 field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
                            k_dim = 4, eta = 0.1, lam = 2e-5,
                            epochs = 10, seed = 0) {

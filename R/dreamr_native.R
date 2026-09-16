@@ -131,6 +131,14 @@
 #' @return A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards},
 #' \code{values}, \code{horizon}, \code{method}.
 #' @export
+#' @examples
+#' am <- function(s) 1
+#' tr <- function(s, a) s * 0.9 + 0.1
+#' rm <- function(s) sum(s)
+#' vm <- function(s) sum(s) * 2
+#' r <- morie_dreamr_imagine(state = c(1, 0.5), am, tr, rm, horizon = 5,
+#'                           value_model = vm)
+#' str(r, max.level = 1)
 morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
                                   horizon, value_model = NULL) {
   H <- as.integer(horizon)
@@ -186,6 +194,10 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
 #' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return The value of \code{.dreamr_pack}.
 #' @export
+#' @examples
+#' r <- morie_dreamr_lambda_return(rewards = c(1, 0.8, 0.6, 0.4),
+#'                                 values = c(2, 1.6, 1.2, 0.8, 0.4))
+#' str(r, max.level = 1)
 morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95,
                                         estimator = "lambda", k = 1) {
   if (!is.character(estimator) || length(estimator) != 1L ||
@@ -263,6 +275,9 @@ morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95
 #' @param targets Passed to \code{.dreamr_vec}.
 #' @return A list with \code{estimate}, \code{loss}, \code{residual}, \code{grad}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_dreamr_value_update(V, V)
 morie_dreamr_value_update <- function(values, targets) {
   v <- .dreamr_vec(values, "values")
   t <- .dreamr_vec(targets, "targets")
@@ -302,6 +317,13 @@ morie_dreamr_value_update <- function(values, targets) {
 #' \code{values}, \code{horizon}, \code{gamma}, \code{lam}, \code{estimator},
 #' \code{method}.
 #' @export
+#' @examples
+#' am <- function(s) 1
+#' tr <- function(s, a) s * 0.9 + 0.1
+#' rm <- function(s) sum(s)
+#' vm <- function(s) sum(s) * 2
+#' r <- morie_dreamr(c(1, 0.5), am, tr, rm, vm, horizon = 5)
+#' str(r, max.level = 1)
 morie_dreamr <- function(state, action_model, transition, reward_model, value_model,
                           horizon = 15, gamma = 0.99, lam = 0.95,
                           estimator = "lambda", k = 1) {
@@ -338,6 +360,8 @@ morie_dreamer <- morie_dreamr
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_dreamr_cheatsheet()
 morie_dreamr_cheatsheet <- function() {
   paste0("dreamr: learn behaviour inside a latent world model ",
          "(Hafner 2020). Imagine H steps with the TRANSITION model ",

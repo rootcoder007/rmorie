@@ -835,9 +835,11 @@ morie_otis_region_alert_state_richness <- function(df) {
 #' @param df b01 data.frame.
 #' @return \code{morie_otis_result}.
 #' @examples
-#' b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
-#' res <- morie_otis_regC_demog_contingency(b02)
-#' res$title
+#' if (requireNamespace("MASS", quietly = TRUE)) {
+#'   b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+#'   res <- morie_otis_regC_demog_contingency(b02)
+#'   res$title
+#' }
 #' @export
 morie_otis_regC_demog_contingency <- function(df) {
   needed <- c("UniqueIndividual_ID", "EndFiscalYear",

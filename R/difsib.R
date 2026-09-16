@@ -41,10 +41,14 @@
 #' @return list: beta, sigma, statistic, p_value, df, n_levels, levels,
 #'   pstar, correction, n, method.
 #' @examples
-#' set.seed(1)
-#' m <- rep(0:2, each = 20)
-#' g <- rep(c("r", "f"), 30)
-#' Difsib(rbinom(60, 1, 0.5), g, matching = m)$beta
+#' \donttest{
+#' if (requireNamespace("mirt", quietly = TRUE)) {
+#'   set.seed(1)
+#'   m <- rep(0:2, each = 20)
+#'   g <- rep(c("r", "f"), 30)
+#'   Difsib(rbinom(60, 1, 0.5), g, matching = m)$beta
+#' }
+#' }
 #' @export
 Difsib <- function(y, group, studied = NULL, matching = NULL, correction = FALSE,
                    reference = NULL) {

@@ -25,6 +25,9 @@
 #' @return A list with \code{K}, \code{shape}, \code{period}, \code{lengthscale},
 #' \code{variance}, \code{diag_is_variance}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_perK(V)
 morie_perK <- function(x1, x2 = NULL, period = 1, lengthscale = 1,
                        variance = 1) {
   a <- as.numeric(x1)

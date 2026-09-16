@@ -41,6 +41,9 @@
 #' \code{ci}, \code{n_clusters}, \code{design_effect}, \code{method}, \code{note},
 #' \code{naive}, \code{pooled}, \code{sequential}.
 #' @export
+#' @examples
+#' morie_tlclust(Q_seq = c(1, 2, 3, 4, 5, 6, 7, 8), H_seq = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   Y = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
   # the LTMLE-with-clustering entry point
   if (is.list(Q_seq) && !is.null(Y) && !is.null(cluster)) {
@@ -76,6 +79,9 @@ morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
 #' @param ic Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' naive_variance(V)
 naive_variance <- function(ic) {
   v <- as.numeric(ic)
   n <- length(v)
@@ -96,6 +102,9 @@ naive_variance <- function(ic) {
 #' @param cluster Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{se}, \code{n_clusters}, \code{cluster_sums}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' cluster_variance(V, V)
 cluster_variance <- function(ic, cluster) {
   v <- as.numeric(ic)
   c <- as.character(cluster)
@@ -124,6 +133,9 @@ cluster_variance <- function(ic, cluster) {
 #' @param cluster Passed to \code{cluster_variance}.
 #' @return A list with \code{se_naive}, \code{se_clustered}, \code{ratio}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' design_effect(V, V)
 design_effect <- function(ic, cluster) {
   a <- naive_variance(ic)
   b <- cluster_variance(ic, cluster)$se
@@ -143,6 +155,9 @@ design_effect <- function(ic, cluster) {
 #' \code{as.numeric}.
 #' @return A list with \code{psi}, \code{parametrization}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' g_formula_pooled(V)
 g_formula_pooled <- function(Q_final, weights = NULL) {
   q <- as.numeric(Q_final)
   w <- if (is.null(weights)) rep(1, length(q)) else as.numeric(weights)
@@ -163,6 +178,9 @@ g_formula_pooled <- function(Q_final, weights = NULL) {
 #' @param Q_seq A vector; its length is taken and its elements indexed.
 #' @return A list with \code{psi}, \code{parametrization}, \code{T}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' g_formula_sequential(V)
 g_formula_sequential <- function(Q_seq) {
   if (length(Q_seq) == 0L)
     stop("tlclust: the sequence is empty")

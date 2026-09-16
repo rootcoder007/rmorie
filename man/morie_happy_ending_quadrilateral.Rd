@@ -22,7 +22,7 @@ every 5-subset is checked, which is the theorem's statement, not a
 sample of it.
 }
 \examples{
-morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2, 
+morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2,
     1), c(1, 4), c(3, 5)))
 }
 \references{

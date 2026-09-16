@@ -23,6 +23,6 @@ h + W_up GELU(W_down h) with m << d enforced. \code{approximate = "none"} is
 the exact erf GELU (R: \code{z * pnorm(z)}), "tanh" the tanh approximation.
 }
 \examples{
-morie_kamath_houlsby_adapter(matrix(c(1, 2, 3), 1), matrix(c(1, 
+morie_kamath_houlsby_adapter(matrix(c(1, 2, 3), 1), matrix(c(1,
     0, 0), 1), matrix(c(1, 0, 0), 3))
 }

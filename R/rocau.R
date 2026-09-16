@@ -8,9 +8,11 @@
 #' @param y_score Predicted scores for the positive class.
 #' @return Named list: estimate, auc, fpr, tpr, thresholds, n,
 #'   n_positive, n_negative, method.
-#' @examplesIf requireNamespace("pROC", quietly = TRUE)
+#' @examples
+#' \dontshow{if (requireNamespace("pROC", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_roc_auc_score <- function(y_true, y_score) {
   if (!requireNamespace("pROC", quietly = TRUE)) {

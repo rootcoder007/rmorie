@@ -22,7 +22,7 @@ The value of \code{r}, as built in the body.
 }
 \keyword{internal}
 \examples{
-sine <- function(n, cycles, amp = 1) amp * sin(2 * pi * cycles * 
+sine <- function(n, cycles, amp = 1) amp * sin(2 * pi * cycles *
     (0:(n - 1))/n)
 x <- sine(2000, 5)
 n <- 64

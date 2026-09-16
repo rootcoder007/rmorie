@@ -25,8 +25,12 @@ NULL
 #' JSON enumeration of all registered commands
 #'
 #' @return A length-1 character vector containing JSON text.
-#' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
+#' @examples
+#' \donttest{
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' substr(stat_bridge_registry_json(), 1, 200)
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 stat_bridge_registry_json <- function() {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
@@ -211,13 +215,15 @@ stat_bridge_fn_search <- function(query, max_results = 20L) {
 #'   that each command carries a callable handler and runs none
 #'   of them.
 #' @return A data.frame with columns \code{name}, \code{ok}, \code{message}.
-#' @examplesIf nzchar(Sys.getenv("MORIE_RUN_FULL_SMOKE"))
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("MORIE_RUN_FULL_SMOKE"))) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Invokes EVERY registered command handler -- some fetch live data over the
 #' # network -- so this is a smoke test, not a quick example. Opt in with
 #' # MORIE_RUN_FULL_SMOKE=1.
 #' str(stat_bridge_verify(), max.level = 1)
 #' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 stat_bridge_verify <- function(execute = FALSE) {
   reg <- .morie_stat_commands$registry

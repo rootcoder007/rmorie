@@ -81,6 +81,9 @@
 #' @param smiles The compound.
 #' @return A numeric vector in the order given by the module's names.
 #' @export
+#' @examples
+#' r <- morie_cypin_descriptors("c1ccccc1O")
+#' str(r, max.level = 1)
 morie_cypin_descriptors <- function(smiles) {
   g <- morie_avalon_parse(smiles)
   el <- g$el
@@ -162,6 +165,8 @@ morie_cypin_descriptors <- function(smiles) {
 #' @param z A numeric scalar.
 #' @return A number strictly between zero and one.
 #' @export
+#' @examples
+#' morie_cypin_logistic(z = 5L)
 morie_cypin_logistic <- function(z) {
   if (z >= 0) return(1 / (1 + exp(-z)))
   e <- exp(z)
@@ -189,6 +194,9 @@ morie_cypin_logistic <- function(z) {
 #' @return A list with the coefficients, the deviance, the iteration
 #'   count and the score.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_cypin_fit(V, V)
 morie_cypin_fit <- function(X, y, ridge = 1e-6, iters = 50L,
                             tol = 1e-12) {
   n <- length(X)
@@ -242,6 +250,10 @@ morie_cypin_fit <- function(X, y, ridge = 1e-6, iters = 50L,
 #'   descriptor.
 #' @return A probability.
 #' @export
+#' @examples
+#' x <- morie_cypin_descriptors("c1ccccc1O")
+#' coef <- c(-0.5, rep(0.01, length(x)))
+#' morie_cypin_predict(x, coef)
 morie_cypin_predict <- function(x, coefficients) {
   if (length(coefficients) != length(x) + 1L)
     stop("the model must have one coefficient per descriptor plus an ",
@@ -259,6 +271,11 @@ morie_cypin_predict <- function(x, coefficients) {
 #' @return A list with the descriptors, named; the probability if a
 #'   model was given; and otherwise the reason there is none.
 #' @export
+#' @examples
+#' x <- morie_cypin_descriptors("c1ccccc1O")
+#' coef <- c(-0.5, rep(0.01, length(x)))
+#' r <- morie_cypin("c1ccccc1O", isozyme = "3A4", model = coef)
+#' str(r, max.level = 1)
 morie_cypin <- function(smiles, isozyme, model = NULL) {
   if (!(isozyme %in% .cypin_isozymes))
     stop("the isozyme is one of ",
@@ -294,6 +311,8 @@ morie_cypin <- function(smiles, isozyme, model = NULL) {
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_cypin_cheatsheet()
 morie_cypin_cheatsheet <- function()
   paste0("cypin: P450 inhibition for 1A2/2C9/2C19/2D6/3A4. Exact graph ",
          "descriptors plus a logistic model the caller fits; no ",

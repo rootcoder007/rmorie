@@ -25,19 +25,19 @@ a <- morie_geron_kv_cache_compress(loud, loud, n_bits = 8, per_head = TRUE)
 b <- morie_geron_kv_cache_compress(loud, loud, n_bits = 8, per_head = FALSE)
 TOOLS <- list(list(name = "add", description = "add two numbers"))
 server <- function(req) {
-    if (req$method == "tools/list") 
+    if (req$method == "tools/list")
         return(list(jsonrpc = "2.0", id = req$id, result = list(tools = TOOLS)))
     if (req$method == "tools/call") {
         a <- req$params$arguments$a
         b <- req$params$arguments$b
-        return(list(jsonrpc = "2.0", id = req$id, result = list(content = a + 
+        return(list(jsonrpc = "2.0", id = req$id, result = list(content = a +
             b)))
     }
-    list(jsonrpc = "2.0", id = req$id, error = list(code = -32601L, 
+    list(jsonrpc = "2.0", id = req$id, error = list(code = -32601L,
         message = "Method not found"))
 }
-reqs <- list(list(jsonrpc = "2.0", id = 1, method = "tools/list"), 
-    list(jsonrpc = "2.0", id = 2, method = "tools/call", params = list(name = "add", 
+reqs <- list(list(jsonrpc = "2.0", id = 1, method = "tools/list"),
+    list(jsonrpc = "2.0", id = 2, method = "tools/call", params = list(name = "add",
         arguments = list(a = 2, b = 3))))
 morie_geron_model_context_protocol(server, reqs)
 }

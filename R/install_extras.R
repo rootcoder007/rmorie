@@ -82,7 +82,6 @@
 #'   # Just one family
 #'   morie_install_extras(which = c("hawkes", "sf", "spdep"))
 #' }
-#'
 #' }
 #' @export
 morie_install_extras <- function(which = "missing",

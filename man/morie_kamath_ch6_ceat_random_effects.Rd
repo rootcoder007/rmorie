@@ -27,6 +27,6 @@ W1 <- diag(2)
 W2 <- -diag(2)
 A1 <- diag(2)
 A2 <- matrix(c(1, 2, 1, 0), 2)
-morie_kamath_ch6_ceat_random_effects(list(A1, A1), list(A2, A2), 
+morie_kamath_ch6_ceat_random_effects(list(A1, A1), list(A2, A2),
     list(W1, W1), list(W2, W2), c(1, 3))
 }

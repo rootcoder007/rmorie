@@ -20,8 +20,8 @@
 #' re-read against the chapter PDF here.
 #' @export
 #' @examples
-#' Svmwolfe(alpha = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2,
-#' 3, 4, 5, 6, 7, 8))
+#' Svmwolfe(alpha = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Svmwolfe <- function(alpha, X, y, K = NULL) {
   a <- .t1_vec(alpha)
   yv <- .t1_vec(y)

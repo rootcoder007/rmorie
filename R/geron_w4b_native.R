@@ -303,20 +303,22 @@ morie_geron_hf_pipelines <- function(task, inputs, model, labels = NULL, top_k =
 #' estimate, n, method.
 #' @export
 #' @examples
-#' W <- list(W_z = matrix(0, 2, 2), U_z = matrix(0, 2, 2), b_z = c(0,
-#'     0), W_r = matrix(0, 2, 2), U_r = matrix(0, 2, 2), b_r = c(0,
-#'     0), W_h = matrix(0, 2, 2), U_h = matrix(0, 2, 2), b_h = c(0,
-#'     0))
-#' r <- morie_geron_gru(c(0, 0), c(4, -2), W)
-#' X <- matrix(c(1, 2, 3, 4), ncol = 1)
-#' y <- c(3, 6, 9, 12)
-#' lg <- function(p, Xb, yb) {
-#'     r <- as.numeric(Xb %*% p) - yb
-#'     list(mean(r^2), (2/length(yb)) * as.numeric(t(Xb) %*% r))
+#' if (requireNamespace("ranger", quietly = TRUE)) {
+#'   W <- list(W_z = matrix(0, 2, 2), U_z = matrix(0, 2, 2), b_z = c(0,
+#'       0), W_r = matrix(0, 2, 2), U_r = matrix(0, 2, 2), b_r = c(0,
+#'       0), W_h = matrix(0, 2, 2), U_h = matrix(0, 2, 2), b_h = c(0,
+#'       0))
+#'   r <- morie_geron_gru(c(0, 0), c(4, -2), W)
+#'   X <- matrix(c(1, 2, 3, 4), ncol = 1)
+#'   y <- c(3, 6, 9, 12)
+#'   lg <- function(p, Xb, yb) {
+#'       r <- as.numeric(Xb %*% p) - yb
+#'       list(mean(r^2), (2/length(yb)) * as.numeric(t(Xb) %*% r))
+#'   }
+#'   m0 <- list(params = 0, loss_and_grad = lg)
+#'   morie_geron_hf_trainer(m0, list(epochs = 50, batch_size = 4,
+#'       learning_rate = 0.05), list(X, y), list(X, y))
 #' }
-#' m0 <- list(params = 0, loss_and_grad = lg)
-#' morie_geron_hf_trainer(m0, list(epochs = 50, batch_size = 4,
-#'     learning_rate = 0.05), list(X, y), list(X, y))
 morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NULL) {
   .morie_gr_need(
     !is.null(model$params) && !is.null(model$loss_and_grad),
@@ -1476,6 +1478,8 @@ morie_geron_kmeans_limits <- function(X, n_clusters = 2, seed = 0) {
 #' Centre a Gram matrix in feature space (Geron Ch 7, morie.fn hmkprbf helper)
 #' @param K Gram matrix. @return Centred Gram matrix.
 #' @export
+#' @examples
+#' morie_geron_center_gram(K = 5L)
 morie_geron_center_gram <- function(K) {
   K <- as.matrix(K)
   n <- nrow(K)
@@ -1784,8 +1788,8 @@ morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta =
 #' @return List with cost, mse, penalty, gradient, n_zero, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_lasso_cost_hmlaso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6,
-#' 7, 8), theta = 0.5, alpha = 0.5)
+#' morie_geron_lasso_cost_hmlaso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   theta = 0.5, alpha = 0.5)
 morie_geron_lasso_cost_hmlaso <- function(X, y, theta, alpha, skip_bias = FALSE) {
   A <- as.matrix(X)
   storage.mode(A) <- "double"
@@ -1874,11 +1878,16 @@ morie_geron_learning_curves_hmlcv <- function(X, y, n_splits = 10, val_fraction 
 #' Euclidean pairwise distance matrix (Geron Ch 7, morie.fn hmmds helper)
 #' @param X Data matrix. @return Distance matrix.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_pairwise_distances(V)
 morie_geron_pairwise_distances <- function(X) .morie_gr_w4b_pairwise_distances(X)
 
 #' Double-centre a squared-distance matrix (Geron Ch 7, morie.fn hmmds helper)
 #' @param D Distance matrix. @return Gram matrix B.
 #' @export
+#' @examples
+#' morie_geron_double_center(D = 5L)
 morie_geron_double_center <- function(D) .morie_gr_w4b_double_center(D)
 
 #' Classical (Torgerson) multidimensional scaling (Geron Ch 7, morie.fn hmmds)
@@ -2220,8 +2229,8 @@ morie_geron_learning_rate_heuristic <- function(lr_curve, divergence_factor = 4.
 #' @return List with prediction, residuals, rmse, r2, theta0, theta1, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_linear_regression_life(gdp = c(1, 2, 3, 4, 5, 6, 7, 8), theta0 = c(1, 2,
-#' 3, 4, 5, 6, 7, 8), theta1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_linear_regression_life(gdp = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   theta0 = c(1, 2, 3, 4, 5, 6, 7, 8), theta1 = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_linear_regression_life <- function(gdp, theta0, theta1, life_sat = NULL) {
   x <- as.numeric(gdp)
   .morie_gr_need(length(x) > 0L, "geron_linear_regression_life: gdp is empty")
@@ -2673,8 +2682,8 @@ morie_geron_mode_collapse <- function(samples, reference = NULL, tol = NULL) {
 #' @return List with V, Q, policy, policy_labels, n_iter, effective_horizon, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_mdp(states = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), actions =
-#' c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5, R = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_mdp(states = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+#'   actions = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5, R = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_mdp <- function(states, actions, P, R, gamma = 0.95, max_iter = 1000, tol = 1e-10) {
   S <- states
   A <- actions
@@ -2953,6 +2962,9 @@ morie_geron_mistral7b <- function(prompt, n_tokens, n_layers = 32, d_model = 409
 #' @param z Pre-activations. @return List with activation, derivative, softplus, minimum,
 #' estimate, n, method.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_mish(V)
 morie_geron_mish <- function(z) {
   a <- as.numeric(z)
   .morie_gr_need(length(a) > 0L, "geron_mish: z is empty")

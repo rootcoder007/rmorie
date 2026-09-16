@@ -105,6 +105,9 @@
 #' \code{n_original}, \code{n_relabelled}, \code{rewards}, \code{success_rate},
 #' \code{strategy}, \code{k}, \code{n_episodes}, \code{method}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' hindsr(D)
 hindsr <- function(episodes, actions = NULL, goals = NULL,
                    strategy = "future", k = 4L, tol = 1e-6,
                    reward_fn = NULL, state_to_goal = NULL, seed = 0L,

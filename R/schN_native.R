@@ -30,8 +30,7 @@
 #' @return Nothing; this branch always raises.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .schn_mat(x = X)
 #' res
 .schn_mat <- function(x) {
@@ -73,6 +72,9 @@
 #' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gaussian_expansion(V)
 gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
                                 gamma = NULL) {
   n <- as.integer(n_gaussians)
@@ -97,6 +99,8 @@ gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
 #' @param cutoff Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' cosine_cutoff(r = 5L)
 cosine_cutoff <- function(r, cutoff = 5.0) {
   rc <- as.numeric(cutoff)
   if (rc <= 0) stop("schn: the cutoff must be positive")
@@ -117,6 +121,14 @@ cosine_cutoff <- function(r, cutoff = 5.0) {
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 5; d <- 4
+#' X <- matrix(rnorm(n * d), n, d)
+#' R <- matrix(rnorm(n * 3), n, 3)
+#' filter_net <- function(g) rep(0.1, d)
+#' out <- cfconv(X, R, filter_net, cutoff = 5)
+#' dim(out)
 cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
   feats <- .schn_mat(X)
   pos <- .schn_mat(R)
@@ -151,6 +163,12 @@ cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A list with \code{estimate}, \code{forces}, \code{net_force}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' R <- matrix(rnorm(4 * 3), 4, 3)
+#' energy_fn <- function(R) sum(R^2)
+#' Fm <- forces_from_energy(energy_fn, R)
+#' c(nrow(Fm$forces), max(abs(Fm$forces + 2 * R)) < 1e-3)
 forces_from_energy <- function(energy_fn, R, h = 1e-5) {
   pos <- .schn_mat(R)
   n <- nrow(pos)
@@ -183,6 +201,14 @@ forces_from_energy <- function(energy_fn, R, h = 1e-5) {
 #' @return A list with \code{energy_error}, \code{force_error}, \code{energy_invariant},
 #' \code{forces_equivariant}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' R <- matrix(rnorm(4 * 3), 4, 3)
+#' energy_fn <- function(R) sum(rowSums(as.matrix(R)^2))
+#' th <- pi / 4
+#' Q <- matrix(c(cos(th), -sin(th), 0, sin(th), cos(th), 0, 0, 0, 1), 3, 3)
+#' ie <- invariance_error(energy_fn, R, Q)
+#' is.numeric(ie) || is.list(ie)
 invariance_error <- function(energy_fn, R, Q, g = NULL) {
   pos <- .schn_mat(R)
   d <- ncol(pos)

@@ -66,6 +66,9 @@ COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 #' \code{as.integer}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_fingerprint(V)
 sasimi_fingerprint <- function(bits, n_bits = NULL) {
   bits <- as.vector(bits)
 
@@ -116,6 +119,9 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 #' @param fp_b Passed to \code{sasimi_fingerprint}.
 #' @return A list with \code{a}, \code{b}, \code{c}, \code{union}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_counts(V, V)
 sasimi_counts <- function(fp_a, fp_b) {
   A <- sasimi_fingerprint(fp_a)
   B <- sasimi_fingerprint(fp_b)
@@ -155,6 +161,9 @@ sasimi_counts <- function(fp_a, fp_b) {
 #' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_tanimoto(V, V)
 sasimi_tanimoto <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -172,6 +181,9 @@ sasimi_tanimoto <- function(fp_a, fp_b) {
 #' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_dice(V, V)
 sasimi_dice <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -189,6 +201,9 @@ sasimi_dice <- function(fp_a, fp_b) {
 #' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_cosine(V, V)
 sasimi_cosine <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -211,6 +226,9 @@ sasimi_cosine <- function(fp_a, fp_b) {
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_tversky(V, V)
 sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
   al <- as.numeric(alpha)
   be <- as.numeric(beta)
@@ -258,6 +276,9 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_distance(V, V)
 sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
   1.0 - .sasimi_coef(coefficient)(fp_a, fp_b)
 }
@@ -273,6 +294,9 @@ sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_similarity_matrix(V)
 sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
   f <- .sasimi_coef(coefficient)
   F <- lapply(fps, sasimi_fingerprint)
@@ -304,6 +328,9 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' sasimi_nearest_neighbours(V, V)
 sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimoto") {
   if (as.integer(k) < 1L) {
     stop("sasimi: k must be at least 1")
@@ -343,6 +370,9 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 #' @return A list with \code{estimate}, \code{similarity}, \code{distance},
 #' \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_sasimi(V, V)
 morie_sasimi <- function(fp_a, fp_b, coefficient = "tanimoto",
                          alpha = NULL, beta = NULL) {
   n <- sasimi_counts(fp_a, fp_b)

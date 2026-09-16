@@ -86,13 +86,15 @@
 #' @param select Projection list (default \code{"*"}).
 #' @return A SQL string.
 #' @examples
-#' morie_ingest_bigquery_build_sql(
-#'   project = "bigquery-public-data",
-#'   dataset = "chicago_crime",
-#'   table   = "crime",
-#'   where   = "year = 2024",
-#'   limit   = 10000L
-#' )
+#' if (requireNamespace("bigrquery", quietly = TRUE)) {
+#'   morie_ingest_bigquery_build_sql(
+#'     project = "bigquery-public-data",
+#'     dataset = "chicago_crime",
+#'     table   = "crime",
+#'     where   = "year = 2024",
+#'     limit   = 10000L
+#'   )
+#' }
 #' @export
 morie_ingest_bigquery_build_sql <- function(project, dataset, table,
                                             where = NULL,
@@ -142,7 +144,8 @@ LIMIT ", format(lim, scientific = FALSE))
 #'   \code{Inf}, i.e. all rows).
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
-#' @examplesIf nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 #' # Keyless alternative for the same data: morie_ingest_chicago_crime()
 #' # (Socrata, no account) or the bundled samples in 'rmoriedata'.
@@ -153,6 +156,7 @@ LIMIT ", format(lim, scientific = FALSE))
 #'     ORDER BY year"
 #' )
 #' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_ingest_bigquery_table}},
 #'   \code{\link{morie_ingest_bigquery_build_sql}}
 #' @examples
@@ -236,7 +240,8 @@ morie_ingest_bigquery_query <- function(sql,
 #' @param max_rows Optional cap on rows downloaded.
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
-#' @examplesIf nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 #' # Keyless alternative for the same data: morie_ingest_chicago_crime()
 #' # (Socrata, no account) or the bundled samples in 'rmoriedata'.
@@ -248,6 +253,7 @@ morie_ingest_bigquery_query <- function(sql,
 #'   limit   = 10000L
 #' )
 #' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_ingest_bigquery_query}}
 #' @examples
 #' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}

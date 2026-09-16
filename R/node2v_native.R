@@ -28,6 +28,8 @@
 #' @param q Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{p}, \code{q}.
 #' @export
+#' @examples
+#' node2v_check_pq(p = 0.5, q = 0.5)
 node2v_check_pq <- function(p, q) {
   p <- as.numeric(p)
   q <- as.numeric(q)
@@ -47,6 +49,8 @@ node2v_check_pq <- function(p, q) {
 #' @param q Passed to \code{node2v_check_pq}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' c(alpha_pq(0L, 1, 1), alpha_pq(1L, 1, 2), alpha_pq(2L, 1, 0.5))
 alpha_pq <- function(d_tx, p, q) {
   d <- as.integer(d_tx)
   pq <- node2v_check_pq(p, q)
@@ -90,6 +94,9 @@ alpha_pq <- function(d_tx, p, q) {
 #' @param weights Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
 #' @export
+#' @examples
+#' transition_probabilities(adj = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   v = 5L, p = 0.5, q = 0.5)
 transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
   nb <- adj[[v]]
   if (is.null(nb) || length(nb) == 0L) {
@@ -181,6 +188,9 @@ walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
 #' @return A list with \code{estimate}, \code{walks}, \code{p}, \code{q}, \code{n_walks},
 #' \code{length}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' generate_walks(V)
 generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,
                            q = 1.0, seed = 0, weights = NULL) {
   nw <- as.integer(num_walks)
@@ -220,6 +230,9 @@ node2vec <- generate_walks
 #' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @return The value of \code{do.call}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' skipgram_pairs(V)
 skipgram_pairs <- function(walks, window = 2) {
   w <- as.integer(window)
   if (w < 1L)

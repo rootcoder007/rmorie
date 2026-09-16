@@ -23,6 +23,6 @@ z_hat = \verb{argmax_\{z in Z\}} score(f_fill(x, z)). \code{theta} scores the FI
 prompt; argmax is invariant to any monotone map.
 }
 \examples{
-morie_kamath_ch3_prompt_search_argmax("Paris is [z].", c("great", 
+morie_kamath_ch3_prompt_search_argmax("Paris is [z].", c("great",
     "terrible"), function(s) nchar(s))
 }

@@ -21,8 +21,8 @@
 #' choice of pre-period and control cohort. Verified against the paper.
 #' @export
 #' @examples
-#' Iwdid(y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2,
-#' 3, 4, 5, 6, 7, 8), cohort = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Iwdid(y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   time = c(1, 2, 3, 4, 5, 6, 7, 8), cohort = c(1, 2, 3, 4, 5, 6, 7, 8))
 Iwdid <- function(y, unit, time, cohort, never = 0) {
   y <- .t1_vec(y)
   time <- as.numeric(time)

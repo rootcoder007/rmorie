@@ -94,6 +94,10 @@
 #' \code{n_components}, \code{bipartite_components}, \code{zero_eigenvalue_multiplicity},
 #' \code{method}.
 #' @export
+#' @examples
+#' A <- rbind(c(0, 1, 1, 0), c(1, 0, 0, 1), c(1, 0, 0, 1), c(0, 1, 1, 0))
+#' r <- SignlessL(A)
+#' str(r, max.level = 1)
 SignlessL <- function(A) {
   A <- .morie_t2_checkadj(A)
   n <- nrow(A)
@@ -163,6 +167,10 @@ SignlessL <- function(A) {
 #' \code{colouring}, \code{part_sizes}, \code{n_components}, \code{n}, \code{m},
 #' \code{method}.
 #' @export
+#' @examples
+#' A <- rbind(c(0, 1, 0, 0), c(1, 0, 1, 0), c(0, 1, 0, 1), c(0, 0, 1, 0))
+#' r <- BipartSpec(A)
+#' str(r, max.level = 1)
 BipartSpec <- function(A) {
   A <- .morie_t2_checkadj(A)
   n <- nrow(A)
@@ -276,6 +284,9 @@ BipartSpec <- function(A) {
 #' \code{n_vars}, \code{n_clauses}, \code{decisions}, \code{propagations},
 #' \code{pure_literals}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Dpll(V)
 Dpll <- function(cnf) {
   clauses <- lapply(cnf, function(cl) {
     c <- as.integer(cl)
@@ -408,6 +419,18 @@ Dpll <- function(cnf) {
 #' @return A list with \code{theta}, \code{loglik}, \code{trace}, \code{increments},
 #' \code{min_increment}, \code{monotone}, \code{steps}, \code{method}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' xs <- c(rnorm(50, 0), rnorm(50, 4))
+#' ll <- function(mu) sum(log(0.5 * dnorm(xs, mu[1]) +
+#'                            0.5 * dnorm(xs, mu[2])))
+#' Q <- function(mu) {
+#'   r1 <- dnorm(xs, mu[1]); r2 <- dnorm(xs, mu[2])
+#'   g <- r1 / (r1 + r2)
+#'   c(sum(g * xs) / sum(g), sum((1 - g) * xs) / sum(1 - g))
+#' }
+#' r <- EmAlgo(ll, Q, x0 = c(-1, 5), steps = 20)
+#' str(r, max.level = 1)
 EmAlgo <- function(log_lik, Q, x0, steps) {
   theta <- as.numeric(x0)
   steps <- as.integer(steps)
@@ -481,6 +504,8 @@ EmAlgo <- function(log_lik, Q, x0, steps) {
 #' \code{basis}, \code{dual}, \code{iterations}, \code{n_var}, \code{n_con},
 #' \code{method}.
 #' @export
+#' @examples
+#' SimplexLP(c = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 SimplexLP <- function(c, A, b, max_iter = 1000L, tol = 1e-12) {
   c <- as.numeric(c)
   A <- matrix(as.numeric(as.matrix(A)), nrow = length(b))

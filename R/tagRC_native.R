@@ -22,6 +22,9 @@
 #' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples},
 #' \code{note}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' tripartite_graph(D)
 tripartite_graph <- function(triples) {
   nodes <- character(0)
   edges <- list()
@@ -72,6 +75,9 @@ tripartite_graph <- function(triples) {
 #' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.
 #' @return A list with \code{p}, \code{focus}, \code{mass}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' preference_vector(V, V)
 preference_vector <- function(nodes, focus, weight = 0.9) {
   N <- as.list(nodes)
   F <- intersect(focus, N)
@@ -110,6 +116,10 @@ preference_vector <- function(nodes, focus, weight = 0.9) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{w}, \code{ranking}.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' S <- c("a", "b", "c")
+#' adapted_pagerank(D, S)
 adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
                              iters = 200, tol = 1e-12) {
   N <- as.list(nodes)
@@ -188,6 +198,10 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
 #' \code{with_preference}, \code{without_preference}, \code{undifferenced_ranking},
 #' \code{baseline_ranking}, \code{focus}, \code{n_nodes}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),
+#'                 c("u2", "t1", "r1"), c("u2", "t3", "r3"))
+#' folkrank(triples, focus = "t:t1")
 folkrank <- function(triples, focus, d = 0.7, weight = 0.9, iters = 200) {
   g <- tripartite_graph(triples)
   N <- g$nodes
@@ -252,6 +266,10 @@ tagawarerec <- folkrank
 #' @param iters Passed to \code{folkrank}. Defaults to \code{200}.
 #' @return The value of \code{folkrank}.
 #' @export
+#' @examples
+#' triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),
+#'                 c("u2", "t1", "r1"), c("u2", "t3", "r3"))
+#' morie_tagRC(triples, focus = "t:t1")
 morie_tagRC <- function(triples, focus, d = 0.7, weight = 0.9,
                         iters = 200) {
   folkrank(triples, focus, d = d, weight = weight, iters = iters)

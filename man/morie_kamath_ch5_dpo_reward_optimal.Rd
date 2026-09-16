@@ -21,6 +21,6 @@ List with \code{r}, \code{log_ratio}, \code{offset}.
 r* = beta log(pi*/pi_ref) + beta log Z.
 }
 \examples{
-morie_kamath_ch5_dpo_reward_optimal(c(0.6, 0.4), c(0.5, 0.5), 
+morie_kamath_ch5_dpo_reward_optimal(c(0.6, 0.4), c(0.5, 0.5),
     0.2, Z = 2)
 }

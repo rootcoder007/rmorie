@@ -71,6 +71,9 @@
 #' @param right Row indices of the right group.
 #' @return The statistic.
 #' @export
+#' @examples
+#' morie_qsfrgr_logrank(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   left = c(1, 2, 3, 4, 5, 6, 7, 8), right = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_qsfrgr_logrank <- function(time, event, left, right) {
   if (!length(left) || !length(right)) return(0)
   rows <- sort(c(left, right))
@@ -250,6 +253,9 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' @param rule A member of the split list.
 #' @return A list of trees.
 #' @export
+#' @examples
+#' morie_qsfrgr_forest(X = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   event = c(0, 1, 0, 1, 1, 0, 1, 0))
 morie_qsfrgr_forest <- function(X, time, event, n_trees = 20L,
                                 mtry = NULL, min_leaf = 3L,
                                 max_depth = 6L, honest = TRUE, seed = 0,
@@ -298,6 +304,16 @@ morie_qsfrgr_forest <- function(X, time, event, n_trees = 20L,
 #' @param n The training sample size.
 #' @return A list with the weights and the number of trees used.
 #' @export
+#' @examples
+#' N <- 24L
+#' X <- matrix(0, N, 2)
+#' T <- vapply(0:(N - 1L), function(i) round(2 + 9 * (1 - ((i *
+#'     7)%%11)/10) + ((i * 3)%%5) * 0.4, 4), numeric(1))
+#' E <- vapply(0:(N - 1L), function(i) if (i%%3 == 0) 0L else 1L,
+#'     integer(1))
+#' trees <- morie_qsfrgr_forest(X, T, E, 5L, NULL, 3L, 3L, TRUE,
+#'     4, "logrank")
+#' morie_qsfrgr_weights(trees, X[i, ], N)
 morie_qsfrgr_weights <- function(trees, x, n) {
   w <- numeric(n)
   used <- 0L
@@ -326,6 +342,9 @@ morie_qsfrgr_weights <- function(trees, x, n) {
 #' @return A list with the step times, the survival after each step, and
 #'   the curve on the grid when one was given.
 #' @export
+#' @examples
+#' morie_qsfrgr_km(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_qsfrgr_km <- function(time, event, weights, grid = NULL) {
   n <- length(time)
   ts <- sort(unique(time[event == 1L & weights > 0]))
@@ -362,6 +381,8 @@ morie_qsfrgr_km <- function(time, event, weights, grid = NULL) {
 #' @param q The quantile.
 #' @return The quantile time, or NA.
 #' @export
+#' @examples
+#' morie_qsfrgr_quantile(curve = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), q = 0.5)
 morie_qsfrgr_quantile <- function(curve, q) {
   q <- as.numeric(q)
   if (!(q > 0 && q < 1))
@@ -392,6 +413,9 @@ morie_qsfrgr_quantile <- function(curve, q) {
 #'   survival curve on the grid, the weights' effective sample size, and
 #'   how many observations were censored.
 #' @export
+#' @examples
+#' morie_qsfrgr(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'   X = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_qsfrgr <- function(time, event, X, quantile = 0.5, n_trees = 20L,
                          mtry = NULL, min_leaf = 3L, max_depth = 6L,
                          honest = TRUE, seed = 0, rule = "logrank",
@@ -447,6 +471,8 @@ morie_qsfrgr <- function(time, event, X, quantile = 0.5, n_trees = 20L,
 #'
 #' @return A character scalar.
 #' @export
+#' @examples
+#' morie_qsfrgr_cheatsheet()
 morie_qsfrgr_cheatsheet <- function()
   paste0("qsfrgr: quantile survival forest. splits ",
          paste(.QSFRGR_SPLITS, collapse = ", "),

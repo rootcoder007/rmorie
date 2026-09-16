@@ -40,8 +40,7 @@
 #' @return A numeric value.
 #' @export
 #' @examples
-#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
-#' 2.6, 3.4, 3.9))
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
 #' res <- .rkmeans_dist(x = X, m = X)
 #' res
 .rkmeans_dist <- function(x, m) {
@@ -239,6 +238,9 @@
 #' \code{outliers}, \code{criterion}, \code{distances}, \code{sizes}, \code{n_trimmed},
 #' \code{n_kept}, \code{alpha}, \code{k}, \code{penalty}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rkmeans(V)
 morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
                           n_start = 20, max_iter = 100,
                           huber_c = 1.345, seed = 0, centers = NULL) {

@@ -51,6 +51,8 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' morie_strmkr_strauss_process(coords = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), r = 5L)
 morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
                                          window = NULL, nx = 12L, ny = 12L,
                                          max_iter = 100L, tol = 1e-11) {

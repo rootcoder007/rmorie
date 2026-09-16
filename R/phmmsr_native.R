@@ -96,6 +96,8 @@
 #' @param vector_width Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @return A list with \code{order}, \code{segments}, \code{width}, \code{note}.
 #' @export
+#' @examples
+#' phmmsr_striped_layout(length = 5L)
 phmmsr_striped_layout <- function(length, vector_width = 4) {
   L <- as.integer(length)
   w <- as.integer(vector_width)
@@ -131,6 +133,9 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
 #' @param lam Accepted by the signature and not used anywhere in the body. Defaults to \code{0.7}.
 #' @return A list with \code{score}, \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' phmmsr_msv_score(V, V)
 phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
   s <- as.list(seq)
   P <- .phmmsr_to_matrix(profile)
@@ -210,6 +215,9 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
 #' @return A list with \code{values}, \code{rescaled}, \code{factor}, \code{log_offset},
 #' \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' phmmsr_sparse_rescale(V)
 phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
   v <- as.numeric(values)
   if (length(v) == 0L) {
@@ -245,6 +253,9 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 #' \code{discarded}, \code{survivor_fraction}, \code{full_scores}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' phmmsr_search_pipeline(V, V)
 phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
                                   mu = 10.0, lam = 0.7, full_score = NULL) {
   passed <- integer(0)
@@ -289,6 +300,8 @@ phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' phmmsr_cheatsheet()
 phmmsr_cheatsheet <- function() {
   paste0(
     "phmmsr: profile HMMs are more sensitive and were far slower,",

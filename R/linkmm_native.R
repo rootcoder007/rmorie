@@ -27,7 +27,7 @@
 #' @export
 #' @examples
 #' morie_linkmm(a_from = c(1, 2, 3, 4, 5, 6, 7, 8), b_from = c(1, 2, 3, 4, 5, 6, 7, 8),
-#' a_to = c(1, 2, 3, 4, 5, 6, 7, 8), b_to = c(1, 2, 3, 4, 5, 6, 7, 8))
+#'   a_to = c(1, 2, 3, 4, 5, 6, 7, 8), b_to = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_linkmm <- function(a_from, b_from, a_to, b_to,
                          method = "mean/mean") {
   af <- as.numeric(a_from)

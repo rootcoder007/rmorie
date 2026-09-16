@@ -39,7 +39,7 @@ A list with the ranked candidates, each with its similarity,   whether its scaff
 \keyword{internal}
 \examples{
 LEAD <- "OCCc1ccccc1"
-DB <- c("OCCc1ccccc1", "OCCc1ccncc1", "OCCC1CCCCC1", "OCCCCCC", 
+DB <- c("OCCc1ccccc1", "OCCc1ccncc1", "OCCC1CCCCC1", "OCCCCCC",
     "Cc1ccccc1", "CC(=O)O")
 morie_scfhop(LEAD, DB)
 }

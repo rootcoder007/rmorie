@@ -33,6 +33,6 @@ List with \code{estimate}, \code{loss_ce}, \code{loss_mlm}, \code{n_masked}.
 Verbalizer cross entropy + alpha * the km022 MLM loss.
 }
 \examples{
-morie_kamath_pet_loss(c(1, 0), 0, matrix(c(1, 0, 0, 2), 2), c(0, 
+morie_kamath_pet_loss(c(1, 0), 0, matrix(c(1, 0, 0, 2), 2), c(0,
     -100), 0.5)
 }

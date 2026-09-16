@@ -38,6 +38,9 @@
 #' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index},
 #' \code{commutes}, \code{longer_than_either_input}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' LsiSerH(V, V)
 LsiSerH <- function(h_1, h_2, n = NULL) {
   # eq (3.45): cascading two LSI systems convolves their impulse
   # responses.  Convolution commutes, so a filter chain may be reordered,
@@ -76,6 +79,9 @@ LsiSerH <- function(h_1, h_2, n = NULL) {
 #' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index},
 #' \code{length_is_the_longer_branch}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' LsiParH(V, V)
 LsiParH <- function(h_1, h_2, n = NULL) {
   # eq (3.49): parallel branches add their impulse responses, and the
   # result is as long as the LONGER branch -- not longer, the contrast
@@ -112,6 +118,8 @@ LsiParH <- function(h_1, h_2, n = NULL) {
 #' @return A list with \code{H}, \code{s}, \code{t_min}, \code{t_max}, \code{n},
 #' \code{trapezoidal}, \code{over_the_sampled_interval_only}, \code{method}.
 #' @export
+#' @examples
+#' Laplace(h = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8))
 Laplace <- function(h, t, s) {
   # eq (3.50), by the trapezoidal rule over the samples supplied.  What
   # is returned is the transform OF THE SAMPLED RECORD over the interval
@@ -148,6 +156,10 @@ Laplace <- function(h, t, s) {
 #' @return A list with \code{H}, \code{omega}, \code{magnitude}, \code{phase},
 #' \code{t_min}, \code{t_max}, \code{valid_only_inside_the_roc}, \code{method}.
 #' @export
+#' @examples
+#' t <- (0:200)/200
+#' h <- rep(1, 201)
+#' LaplaceFr(h, 3, t = t)
 LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
   # eq (3.52): H(omega) = H(s) at s = j omega.  Legitimate only when the
   # imaginary axis lies inside the region of convergence, which holds for
@@ -195,6 +207,9 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
 #' @return A list with \code{H}, \code{z}, \code{numerator}, \code{denominator},
 #' \code{N}, \code{M}, \code{leading_one_is_implicit}, \code{method}.
 #' @export
+#' @examples
+#' IirTf(b_k = c(1, 2, 3, 4, 5, 6, 7, 8), a_k = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   z = c(1, 2, 3, 4, 5, 6, 7, 8))
 IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
   # eq (3.67).  The leading 1 of the denominator is part of the equation,
   # so a_k is a_1..a_M WITHOUT it; passing a vector that already carries
@@ -240,6 +255,9 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{N}, \code{M},
 #' \code{recursive}, \code{feedback_is_subtracted}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IirDiff(V, V)
 IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
                     n = NULL) {
   # eq (3.68).  The MINUS on the feedback term is the equation's and is
@@ -289,6 +307,9 @@ IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
 #' @return A list with \code{magnitude}, \code{zero_product}, \code{pole_product},
 #' \code{n_zeros}, \code{n_poles}, \code{on_a_zero}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' PzMag(V, V)
 PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
   # eq (3.72): the geometric reading of a filter.  Approaching a zero
   # drives the response to nought, approaching a pole drives it up, and a
@@ -336,6 +357,8 @@ PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
 #' \code{zero_angle_sum}, \code{pole_angle_sum}, \code{z_0_angle}, \code{n_zeros},
 #' \code{n_poles}, \code{origin_term_vanishes_when_orders_match}, \code{method}.
 #' @export
+#' @examples
+#' PzPhase(z_0 = 5L, alpha_k = c(1, 2, 3, 4, 5, 6, 7, 8), beta_k = c(1, 2, 3, 4, 5, 6, 7, 8))
 PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
   # eq (3.73).  The (M - N) angle(z_0) term accounts for the zeros or
   # poles at the origin that balance the orders; dropping it is easy,
@@ -377,6 +400,8 @@ PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
 #' \code{settled_from}, \code{dc_gain}, \code{equal_weights}, \code{delay_samples},
 #' \code{method}.
 #' @export
+#' @examples
+#' MaFir(c(1, 2, 3, 4), N = 1)
 MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
   # eqs (3.97)-(3.99).  With no coefficients the equal-weight boxcar is
   # used.  Equal weights are the worst choice for stopband attenuation --
@@ -425,6 +450,9 @@ MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
 #' @return A list with \code{H}, \code{z}, \code{b}, \code{N}, \code{dc_gain},
 #' \code{always_stable}, \code{poles_only_at_the_origin}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MaTf(V, V)
 MaTf <- function(b_k, z, N = NULL) {
   # eq (3.99): a polynomial in z^-1 with no poles away from the origin,
   # so an FIR filter is stable whatever its coefficients.
@@ -452,6 +480,9 @@ MaTf <- function(b_k, z, N = NULL) {
 #' @return A list with \code{y}, \code{value}, \code{index}, \code{n}, \code{taps},
 #' \code{delay_samples}, \code{settled_from}, \code{dc_gain}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HannFilt(V)
 HannFilt <- function(x, n = NULL) {
   # eq (3.100): y(n) = (1/4)[x(n) + 2x(n-1) + x(n-2)].  Three taps in the
   # ratio 1:2:1.  It is a delaying smoother, not a symmetric one: the
@@ -486,6 +517,8 @@ HannFilt <- function(x, n = NULL) {
 #' @return A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum},
 #' \code{finite}, \code{symmetric}, \code{method}.
 #' @export
+#' @examples
+#' HannImp()
 HannImp <- function(n = NULL) {
   # eq (3.101): three nonzero taps and nothing else.  The response is
   # FINITE, which is what "FIR" names, and it sums to 1, so a constant
@@ -514,6 +547,8 @@ HannImp <- function(n = NULL) {
 #' @return A list with \code{Y}, \code{H}, \code{X}, \code{z},
 #' \code{transfer_function_is_input_independent}, \code{method}.
 #' @export
+#' @examples
+#' HannZ(X = c(1, 2, 3, 4, 5, 6, 7, 8), z = 5L)
 HannZ <- function(X, z) {
   # eq (3.102): convolution in time is multiplication in z, so the whole
   # filter is one factor multiplying the input transform.  Dividing out
@@ -538,6 +573,9 @@ HannZ <- function(X, z) {
 #' @return A list with \code{H}, \code{z}, \code{zeros}, \code{zero_multiplicity},
 #' \code{zeros_at_nyquist}, \code{dc_gain}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HannTf(V)
 HannTf <- function(z) {
   # eq (3.103): (1/4)(1 + z^-1)^2, a DOUBLE zero at z = -1, that is at
   # Nyquist.  The double zero is why the response reaches nought there
@@ -565,6 +603,9 @@ HannTf <- function(z) {
 #' @return A list with \code{H}, \code{omega}, \code{magnitude},
 #' \code{on_the_unit_circle}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HannFr(V)
 HannFr <- function(omega) {
   # eq (3.104): the transfer function on the unit circle, raw form.
   w <- as.numeric(omega)
@@ -589,6 +630,9 @@ HannFr <- function(omega) {
 #' \code{max_difference_from_eq_3_104}, \code{agrees_with_raw_form},
 #' \code{real_factor_times_a_pure_delay}, \code{linear_phase}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HannFrs(V)
 HannFrs <- function(omega) {
   # eq (3.105): a REAL nonnegative factor times a pure one-sample delay.
   # That factorization is the point -- it proves the filter has exactly
@@ -619,6 +663,9 @@ HannFrs <- function(omega) {
 #' \code{nyquist_gain}, \code{lowpass}, \code{absolute_value_is_redundant},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HannMag(V)
 HannMag <- function(omega) {
   # eq (3.106): unity at DC, exactly nought at omega = pi, monotone
   # between.  The book's absolute value is redundant -- 1 + cos is never
@@ -642,6 +689,9 @@ HannMag <- function(omega) {
 #' @return A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope},
 #' \code{linear_phase}, \code{constant_group_delay}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' HannPh(V)
 HannPh <- function(omega) {
   # eq (3.107): exactly -omega, slope -1, a constant group delay of one
   # sample at every frequency.  Constant group delay is what "no phase
@@ -674,6 +724,8 @@ HannPh <- function(omega) {
 #' \code{trimmed_each_end}, \code{order}, \code{nonlinear}, \code{no_frequency_response},
 #' \code{edges}, \code{method}.
 #' @export
+#' @examples
+#' OsFilt(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
 OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,
                    order = NULL) {
   # Section 3.8.  Rank the window, then take one entry or a combination:

@@ -138,9 +138,11 @@ mrm_tps_levy_scaling <- function(
 #'   `dbscan_n_noise`, `dbscan_largest`.
 #' @export
 #' @examples
-#' if (FALSE) {
-#'   tps <- read.csv("Assault_Open_Data.csv")
-#'   mrm_tps_moran_clustering(tps)
+#' if (requireNamespace("dbscan", quietly = TRUE)) {
+#'   if (FALSE) {
+#'     tps <- read.csv("Assault_Open_Data.csv")
+#'     mrm_tps_moran_clustering(tps)
+#'   }
 #' }
 mrm_tps_moran_clustering <- function(
   data,

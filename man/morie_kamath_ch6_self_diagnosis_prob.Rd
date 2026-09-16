@@ -23,6 +23,6 @@ List with \code{estimate}, \code{p_yes}, \code{p_no}, \code{prompt}.
 p(Yes) renormalised against p(No) on the self-diagnosis prompt.
 }
 \examples{
-morie_kamath_ch6_self_diagnosis_prob("t", "tox", function(p) c(Yes = 0.3, 
+morie_kamath_ch6_self_diagnosis_prob("t", "tox", function(p) c(Yes = 0.3,
     No = 0.5))
 }

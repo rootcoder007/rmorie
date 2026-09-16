@@ -294,8 +294,8 @@ morie_graphic_matroid <- function(edges, n_vertices) {
 #' @references Edmonds J (1971) \emph{Math Prog} 1:127-136.
 #' @export
 #' @examples
-#' morie_greedy_independent_set(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2,
-#' 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_greedy_independent_set(ground = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   independent = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_greedy_independent_set <- function(ground, independent, weights) {
   g <- as.integer(ground)
   w <- stats::setNames(as.numeric(weights), as.character(g))
@@ -317,8 +317,8 @@ morie_greedy_independent_set <- function(ground, independent, weights) {
 #' @return A list with `set` and `weight`.
 #' @export
 #' @examples
-#' morie_brute_force_max_weight(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2,
-#' 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_brute_force_max_weight(ground = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   independent = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_brute_force_max_weight <- function(ground, independent, weights) {
   g <- as.integer(ground)
   w <- stats::setNames(as.numeric(weights), as.character(g))

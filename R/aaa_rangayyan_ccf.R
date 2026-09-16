@@ -75,6 +75,11 @@
 #' \code{reference_window_grows}, \code{near_zero_when_one_model_explains_both},
 #' \code{method}.
 #' @export
+#' @examples
+#' sine <- function(n, cycles_hz, fs = 100, amp = 1, phase = 0) {
+#'     amp * sin(2 * pi * cycles_hz * (seq_len(n) - 1L)/fs + phase)
+#' }
+#' Glr(sine(400, 5), 201, order = 4)
 Glr <- function(x, m, n = NULL, order = 4) {
   # eqs (8.30)-(8.31), after Appel and v. Brandt.  The reference window
   # GROWS from the start of the segment -- that is what separates GLR from
@@ -130,6 +135,11 @@ Glr <- function(x, m, n = NULL, order = 4) {
 #' \code{window}, \code{step}, \code{order}, \code{fs},
 #' \code{reference_restarts_at_boundaries}, \code{robust_threshold}, \code{method}.
 #' @export
+#' @examples
+#' sine <- function(n, cycles_hz, fs = 100, amp = 1, phase = 0) {
+#'     amp * sin(2 * pi * cycles_hz * (seq_len(n) - 1L)/fs + phase)
+#' }
+#' EegAdapt(c(sine(200, 5), sine(200, 40)), 100, window = 60, step = 20)
 EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
                      threshold = NULL) {
   # Section 8.5.3.  On a boundary the reference window RESTARTS; without
@@ -225,6 +235,9 @@ EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
 #' \code{biased}, \code{normalized}, \code{positive_lag_means_y_trails_x},
 #' \code{biased_keeps_nonnegative_definiteness}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' XCorr(V, V)
 XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
   # R_xy(m) = (1/N) sum_n x(n) y(n + m).  A POSITIVE lag means y trails x.
   xs <- as.numeric(x)
@@ -271,6 +284,9 @@ XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
 #' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag},
 #' \code{normalized}, \code{is_the_matched_filter_output}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' XCorrDisc(V, V)
 XCorrDisc <- function(x, y, delays = NULL) {
   # The RAW sum, not divided by N: the matched-filter output AT each
   # instant IS this sum, so its peak locates the pattern.  Neither XCorr
@@ -317,6 +333,9 @@ XCorrDisc <- function(x, y, delays = NULL) {
 #' \code{interpolated}, \code{trapezoidal}, \code{long_delays_use_less_data},
 #' \code{method}.
 #' @export
+#' @examples
+#' XCorrCont(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'   t = c(1, 2, 3, 4, 5, 6, 7, 8), delays = c(1, 2, 3, 4, 5, 6, 7, 8))
 XCorrCont <- function(x, y, t, delays) {
   # The continuous-time form, evaluated by the trapezoidal rule on the
   # samples that BOTH signals cover.  Long delays use less data, so the
@@ -370,6 +389,9 @@ XCorrCont <- function(x, y, t, delays) {
 #' \code{expectation_estimated_by_time_average},
 #' \code{requires_joint_stationarity_and_ergodicity}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' XCorrProc(V, V)
 XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
   # The ensemble expectation is estimated by a TIME average, which is only
   # legitimate under joint stationarity and ergodicity.
@@ -405,6 +427,9 @@ XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
 #' \code{max_difference}, \code{identity_holds},
 #' \code{correlation_is_convolution_with_one_reversed}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CorrConv(V, V)
 CorrConv <- function(x, y) {
   # Correlation IS convolution with one sequence reversed.
   xs <- as.numeric(x)
@@ -453,6 +478,9 @@ CorrConv <- function(x, y) {
 #' \code{normalized_per_shift}, \code{bounded_in_unit_interval},
 #' \code{loud_beats_matching_without_normalization}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' NccfTpl(V, V)
 NccfTpl <- function(x, template) {
   # Normalized per shift, so a LOUD stretch cannot outscore a matching one
   # -- that is the whole reason to normalize rather than take the raw CCF.
@@ -492,6 +520,9 @@ NccfTpl <- function(x, template) {
 #' \code{is_a_cosine_not_an_agreement}, \code{unity_for_a_positive_rescaling},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CorrDot(V, V)
 CorrDot <- function(x, y) {
   # eq (4.25).  Delegates to DotProd -- one copy of the arithmetic.
   raw <- DotProd(x, y)
@@ -525,6 +556,8 @@ CorrDot <- function(x, y) {
 #' \code{peak_value}, \code{a_rhythm_gives_a_periodic_acf},
 #' \code{robust_to_amplitude_variation}, \code{method}.
 #' @export
+#' @examples
+#' EegAcf(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 EegAcf <- function(x, fs, maxlag = NULL) {
   # phi(m) = (1/N) sum_n x(n) x(n + m).  BOTH the raw phi and the
   # normalized rho are returned: rho is what a threshold can be set on,
@@ -582,6 +615,8 @@ EegAcf <- function(x, fs, maxlag = NULL) {
 #' \code{needs_both_the_band_and_the_amplitude}, \code{same_test_serves_other_bands},
 #' \code{fs}, \code{method}.
 #' @export
+#' @examples
+#' AlphaRhy(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
 AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
   # The alpha band by convention; the SAME test serves the other bands,
   # so the band is an argument, not a constant.  Both the band AND the
@@ -629,6 +664,8 @@ AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
 #' @return A list with \code{x}, \code{t}, \code{n}, \code{fs}, \code{f1}, \code{f2},
 #' \code{a1}, \code{a2}, \code{components_are_known_by_construction}, \code{method}.
 #' @export
+#' @examples
+#' SinCosTest()
 SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
                        fs = 100, duration = 1) {
   # A test signal whose components are known BY CONSTRUCTION, which is
@@ -667,6 +704,9 @@ SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
 #' \code{pattern_length}, \code{n_copies}, \code{copies_add},
 #' \code{overlap_breaks_peak_picking}, \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CompSig(V, V)
 CompSig <- function(g, shifts, scales = NULL, n = NULL) {
   # A composite of shifted, scaled copies of one pattern.  Copies closer
   # together than the pattern is long OVERLAP, and the count is reported
@@ -719,6 +759,9 @@ CompSig <- function(g, shifts, scales = NULL, n = NULL) {
 #' \code{invariant_to_positive_affine_change}, \code{says_nothing_about_agreement},
 #' \code{method}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CorrCoef(V, V)
 CorrCoef <- function(x, y) {
   # Pearson's r.  The MEANS ARE REMOVED, which is what separates it from
   # the Chapter 4 dot-product cosine; both are returned so the difference

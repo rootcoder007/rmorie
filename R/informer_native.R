@@ -118,6 +118,11 @@
 #' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(1)
+#' q <- rnorm(4)
+#' K <- matrix(rnorm(24), 6, 4)
+#' morie_informer_sparsity_measure(q, K)
 morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NULL) {
   if (!(measure %in% .informer_MEASURES)) {
     stop(sprintf("informer: measure must be exact or maxmean, got '%s'", measure))
@@ -152,6 +157,11 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
 #' @param scale Passed to \code{morie_informer_sparsity_measure}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(1)
+#' q <- rnorm(4)
+#' K <- matrix(rnorm(24), 6, 4)
+#' morie_informer_kl_from_uniform(q, K)
 morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
   Km <- .informer_mat(K)
   return(morie_informer_sparsity_measure(q, K, measure = "exact",
@@ -175,6 +185,11 @@ morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
 #' @return A list with \code{top}, \code{u}, \code{scores}, \code{L_Q}, \code{L_K},
 #' \code{n_sample}, \code{measure}.
 #' @export
+#' @examples
+#' set.seed(2)
+#' Q <- matrix(rnorm(32), 8, 4)
+#' K <- matrix(rnorm(32), 8, 4)
+#' str(morie_informer_select_queries(Q, K, factor = 2), max.level = 1)
 morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
                                           n_sample = NULL, seed = 0) {
   Qm <- .informer_to_rows(Q)
@@ -222,6 +237,12 @@ morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
 #' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(2)
+#' Q <- matrix(rnorm(16), 4, 4)
+#' K <- matrix(rnorm(16), 4, 4)
+#' V <- matrix(rnorm(16), 4, 4)
+#' str(morie_informer_full_attention(Q, K, V), max.level = 1)
 morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
   Qm <- .informer_to_rows(Q)
   Km <- .informer_to_rows(K)
@@ -261,6 +282,13 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
 #' @return A list with \code{estimate}, \code{output}, \code{selected}, \code{u},
 #' \code{L_Q}, \code{L_K}, \code{measure}, \code{complexity}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' Q <- matrix(rnorm(32), 8, 4)
+#' K <- matrix(rnorm(32), 8, 4)
+#' V <- matrix(rnorm(32), 8, 4)
+#' r <- morie_informer_probsparse_attention(Q, K, V, factor = 2)
+#' str(r, max.level = 1)
 morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
                                                 measure = "maxmean",
                                                 n_sample = NULL, seed = 0,
@@ -315,6 +343,9 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
 #' @return A list with \code{full}, \code{probsparse}, \code{u}, \code{ratio},
 #' \code{memory_full}, \code{memory_probsparse}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_informer_complexity(V, V)
 morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
   lq <- as.integer(L_Q)
   lk <- as.integer(L_K)
@@ -337,6 +368,8 @@ morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' morie_informer_cheatsheet()
 morie_informer_cheatsheet <- function() {
   paste0(
     "informer: ProbSparse. A query whose attention is UNIFORM jus",

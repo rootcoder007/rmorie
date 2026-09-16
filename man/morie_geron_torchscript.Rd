@@ -20,6 +20,6 @@ node), then verifies by replay.
 }
 \examples{
 W <- diag(2)
-morie_geron_torchscript(list(list(kind = "linear", param = W), 
+morie_geron_torchscript(list(list(kind = "linear", param = W),
     list(kind = "relu")), matrix(c(1, -1), 1, 2))
 }
