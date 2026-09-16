@@ -31,8 +31,8 @@ Epbias <- function(A_obs, Se, Sp, N = NULL) {
   if (is.null(N)) {
     if (length(a) != 2L)
       stop("N is required unless A_obs is (exposed, unexposed)")
-    tot <- a[1] + a[2]
-    a <- a[1]
+    tot <- a\[1\] + a[2]
+    a <- a\[1\]
   } else {
     tot <- as.numeric(N)
     if (length(tot) != length(a)) stop("A_obs and N must have the same length")
@@ -57,14 +57,14 @@ Epbias <- function(A_obs, Se, Sp, N = NULL) {
   at <- (a - (1 - sp) * tot) / (se + sp - 1)
   prev <- at / tot
   .or <- function(x) {
-    n0 <- tot[1] - x[1]
+    n0 <- tot\[1\] - x\[1\]
     n1 <- tot[2] - x[2]
-    if (x[2] <= 0 || n0 <= 0 || n1 <= 0 || x[1] <= 0) NaN
-    else (x[1] * n1) / (x[2] * n0)
+    if (x[2] <= 0 || n0 <= 0 || n1 <= 0 || x\[1\] <= 0) NaN
+    else (x\[1\] * n1) / (x[2] * n0)
   }
   oro <- if (g == 2L) .or(a) else NaN
   ort <- if (g == 2L) .or(at) else NaN
-  .t1_result(estimate = at[1], a_true = at, a_obs = a, totals = tot,
+  .t1_result(estimate = at\[1\], a_true = at, a_obs = a, totals = tot,
              prevalence = prev, or_obs = oro, or_true = ort,
              sensitivity = se, specificity = sp, n = g,
              method = "Bias correction for exposure misclassification")

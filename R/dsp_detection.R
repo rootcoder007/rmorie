@@ -216,7 +216,7 @@ morie_dsp_onset_detect <- function(x, fs, energy_window_ms = 20,
 #' morie_dsp_shannon_energy(x)
 #' @export
 morie_dsp_shannon_energy <- function(x) {
-  # Normalise to max amplitude so x_sq lies in [0, 1] and the entropy
+  # Normalise to max amplitude so x_sq lies in \[0, 1\] and the entropy
   # form -p log(p) stays non-negative even when |x| > 1.
   m <- max(abs(x))
   if (m > 0) x <- x / m

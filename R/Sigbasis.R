@@ -40,7 +40,7 @@ Sigbasis <- function(X, B, y = NULL) {
     fitted <- as.numeric(.s03matvec(H, theta))
     rss <- sum((yv - fitted)^2)
   }
-  list(estimate = H[1, 1], h = H, theta = theta, fitted = fitted, rss = rss,
+  list(estimate = H\[1, 1\], h = H, theta = theta, fitted = fitted, rss = rss,
        n = n, p = p, K = K,
        method = "Hastie-Tibshirani-Friedman (2009) ESL eqs. (2.30)-(2.32)")
 }

@@ -39,7 +39,7 @@ Convnx <- function(x, filters = NULL, kernel = 7, expand = 4,
   e <- .ghc_rng(seed)
   dw <- matrix(0, k, k)
   for (a in seq_len(k)) for (b in seq_len(k))
-    dw[a, b] <- .ghc_norm(e, 1L, 0, 1) / k
+    dw\[a, b\] <- .ghc_norm(e, 1L, 0, 1) / k
   w1 <- numeric(expand)
   for (q in seq_len(expand)) w1[q] <- .ghc_norm(e, 1L, 0, 0.02)
   w2 <- numeric(expand)
@@ -53,26 +53,26 @@ Convnx <- function(x, filters = NULL, kernel = 7, expand = 4,
       jj <- min(max(j + b, 1L), W)
       s <- s + M[ii, jj] * dw[a + r + 1L, b + r + 1L]
     }
-    conv[i, j] <- s
+    conv\[i, j\] <- s
   }
   mu <- 0
-  for (i in seq_len(H)) for (j in seq_len(W)) mu <- mu + conv[i, j]
+  for (i in seq_len(H)) for (j in seq_len(W)) mu <- mu + conv\[i, j\]
   mu <- mu / (H * W)
   vr <- 0
-  for (i in seq_len(H)) for (j in seq_len(W)) vr <- vr + (conv[i, j] - mu)^2
+  for (i in seq_len(H)) for (j in seq_len(W)) vr <- vr + (conv\[i, j\] - mu)^2
   vr <- vr / (H * W)
   inv <- 1 / sqrt(vr + 1e-6)
   out <- matrix(0, H, W)
   for (i in seq_len(H)) for (j in seq_len(W)) {
-    h <- (conv[i, j] - mu) * inv
+    h <- (conv\[i, j\] - mu) * inv
     acc <- 0
     for (q in seq_len(expand)) acc <- acc + .s03gelu(h * w1[q]) * w2[q]
-    out[i, j] <- M[i, j] + layer_scale * acc
+    out\[i, j\] <- M\[i, j\] + layer_scale * acc
   }
   res <- 0
-  for (i in seq_len(H)) for (j in seq_len(W)) res <- res + (out[i, j] - M[i, j])^2
+  for (i in seq_len(H)) for (j in seq_len(W)) res <- res + (out\[i, j\] - M\[i, j\])^2
   tot <- 0
-  for (i in seq_len(H)) for (j in seq_len(W)) tot <- tot + out[i, j]
+  for (i in seq_len(H)) for (j in seq_len(W)) tot <- tot + out\[i, j\]
   .t1_result(estimate = tot / (H * W), out = out, residual_norm = sqrt(res),
              H = H, W = W, C = C, method = "ConvNeXt block")
 }

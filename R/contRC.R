@@ -62,7 +62,7 @@ ContRC <- function(item_feat, user_profile, ratings = NULL, topn = 3) {
   order_ <- order(-scores, seq_len(ni))
   rec <- setdiff(order_, rated)
   rec <- rec[seq_len(min(as.integer(topn), length(rec)))]
-  .t1_result(estimate = if (length(rec)) scores[rec[1]] else NaN,
+  .t1_result(estimate = if (length(rec)) scores[rec\[1\]] else NaN,
              scores = scores, ranking = order_ - 1L,
              recommended = rec - 1L, profile = prof, n_items = ni, f = f,
              method = "content-based recommendation")

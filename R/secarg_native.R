@@ -287,7 +287,7 @@ morie_secarg_compress <- function(X, Y) {
                        counter) {
   zero <- rep(0, 128)
   inp <- rep(0, 128)
-  inp[1] <- pass_no
+  inp\[1\] <- pass_no
   inp[2] <- lane
   inp[3] <- slice_no
   inp[4] <- m_prime

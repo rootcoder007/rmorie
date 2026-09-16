@@ -24,7 +24,7 @@
 #'   eq. (2). Archived:
 #'   fetched-wave3/zhou-2009-resource-allocation-link-prediction.pdf.
 #' @examples
-#' A <- matrix(0, 4, 4); A[1, 2] <- A[2, 1] <- 1
+#' A <- matrix(0, 4, 4); A\[1, 2\] <- A[2, 1] <- 1
 #' A[1, 3] <- A[3, 1] <- 1; A[2, 4] <- A[4, 2] <- 1; A[3, 4] <- A[4, 3] <- 1
 #' Linkpr(A, 1, 4)
 #' @export

@@ -221,8 +221,8 @@ morie_spatial_neighbors <- function(x, type = c("knn", "distance",
       uy <- min(diff(sort(unique(xy[, 2]))))
       adj_rook <- (dx <= ux + 1e-9 & dy < 1e-9) | (dy <= uy + 1e-9 & dx < 1e-9)
       adj_queen <- dx <= ux + 1e-9 & dy <= uy + 1e-9
-      if (type == "rook" && adj_rook) W[i, j] <- 1L
-      if (type == "queen" && adj_queen) W[i, j] <- 1L
+      if (type == "rook" && adj_rook) W\[i, j\] <- 1L
+      if (type == "queen" && adj_queen) W\[i, j\] <- 1L
     }
   }
   W
@@ -334,7 +334,7 @@ morie_spatial_leaflet_spec <- function(x) {
 #' @export
 plot.morie_spatial <- function(x, ...) {
   plot(x$coords[, 1], x$coords[, 2],
-       xlab = sprintf("%s (%s)", x$coord_names[1], x$units),
+       xlab = sprintf("%s (%s)", x$coord_names\[1\], x$units),
        ylab = sprintf("%s (%s)", x$coord_names[2], x$units),
        pch = 19, ...)
   invisible(NULL)

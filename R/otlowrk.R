@@ -43,13 +43,13 @@ Sinkhlowr <- function(a, b, C, rank = 2, epsilon = 0.1, max_iter = 20,
     CR <- matrix(0, n, r)
     for (i in seq_len(n)) for (t in seq_len(r)) {
       s <- 0
-      for (j in seq_len(m)) s <- s + Cm[i, j] * R[j, t]
+      for (j in seq_len(m)) s <- s + Cm\[i, j\] * R[j, t]
       CR[i, t] <- if (g[t] > 0) s / g[t] else 0
     }
     CQ <- matrix(0, m, r)
     for (j in seq_len(m)) for (t in seq_len(r)) {
       s <- 0
-      for (i in seq_len(n)) s <- s + Cm[i, j] * Q[i, t]
+      for (i in seq_len(n)) s <- s + Cm\[i, j\] * Q[i, t]
       CQ[j, t] <- if (g[t] > 0) s / g[t] else 0
     }
     Q <- Sinkhlog(av, g, CR, as.numeric(epsilon) / as.numeric(gamma), inner)$T
@@ -68,10 +68,10 @@ Sinkhlowr <- function(a, b, C, rank = 2, epsilon = 0.1, max_iter = 20,
   for (i in seq_len(n)) for (j in seq_len(m)) {
     s <- 0
     for (t in seq_len(r)) if (g[t] > 0) s <- s + Q[i, t] * R[j, t] / g[t]
-    T[i, j] <- s
+    T\[i, j\] <- s
   }
   cost <- 0
-  for (i in seq_len(n)) for (j in seq_len(m)) cost <- cost + T[i, j] * Cm[i, j]
+  for (i in seq_len(n)) for (j in seq_len(m)) cost <- cost + T\[i, j\] * Cm\[i, j\]
   list(U = Q, V = R, T = T, g = g, estimate = cost, cost = cost, rank = r,
        method = "Low-rank Sinkhorn factorisation P = Q diag(1/g) R' (Scetbon et al. 2021)")
 }

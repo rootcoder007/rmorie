@@ -398,7 +398,7 @@ morie_tps_load <- function(name, format = "csv", nrows = NULL) {
 #' @return Named character vector (`format` -> file path).
 #'
 #' @examples
-#' res <- try(morie_tps_list_formats(morie_tps_list_categories()[1]))
+#' res <- try(morie_tps_list_formats(morie_tps_list_categories()\[1\]))
 #' @export
 morie_tps_list_formats <- function(name) {
   canonical <- tryCatch(

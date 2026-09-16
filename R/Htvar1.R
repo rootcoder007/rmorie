@@ -33,7 +33,7 @@ Htvar1 <- function(y, pi, pi_ij) {
   if (any(p <= 0 | p > 1)) stop("ht_variance: inclusion probabilities must lie in (0, 1]")
   var <- 0
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    pij <- if (i == j) p[i] else P[i, j]
+    pij <- if (i == j) p[i] else P\[i, j\]
     if (pij <= 0) stop("ht_variance: joint inclusion probability is not positive")
     var <- var + (pij - p[i] * p[j]) * (v[i] / p[i]) * (v[j] / p[j]) / pij
   }

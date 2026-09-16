@@ -294,9 +294,9 @@
       if (is.null(vocab)) {
         # word indices are 0-based everywhere else in this module, so the
         # reported one has to be too; j is an R column subscript
-        list(j - 1L, B[i, j])
+        list(j - 1L, B\[i, j\])
       } else {
-        list(vocab[j], B[i, j])
+        list(vocab[j], B\[i, j\])
       }
     })
   }

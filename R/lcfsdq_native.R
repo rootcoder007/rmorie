@@ -223,7 +223,7 @@ morie_lcfsdq <- function(x, coords, k = 1L, metric = "euclidean",
   bb <- win$bb
 
   if (edge == "buffer") {
-    keep <- which(pts[, 1] - bb[1] >= radius & bb[2] - pts[, 1] >= radius &
+    keep <- which(pts[, 1] - bb\[1\] >= radius & bb[2] - pts[, 1] >= radius &
                     pts[, 2] - bb[3] >= radius & bb[4] - pts[, 2] >= radius)
     if (length(keep) < 3L)
       stop("the buffer left fewer than three points; use a smaller ",

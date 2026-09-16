@@ -41,8 +41,8 @@
   ll
 }
 
-## Deterministic golden-section maximisation on [lo, hi].
-#' Deterministic golden-section maximisation on [lo, hi]
+## Deterministic golden-section maximisation on \[lo, hi\].
+#' Deterministic golden-section maximisation on \[lo, hi\]
 #'
 #' A step of the k03volsv implementation. Called by \code{Volsv}.
 #' See the file header for the source the module follows.

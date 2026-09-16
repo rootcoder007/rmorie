@@ -135,7 +135,7 @@ bilm_forward <- function(X, layers) {
     # hidden size = ROWS of Whf; length() of an R matrix counts every
     # element, where the reference len() counts rows
     d <- if (is.matrix(Whf)) nrow(Whf) else length(Whf)
-    if (length(reps[[1]][[1]]) != 2L * d)
+    if (length(reps[\[1\]][\[1\]]) != 2L * d)
       stop("elmo: token dimension ", ncol(Xm),
            " but hidden dimension ", d,
            "; layer 0 is [x; x] so they must match")
@@ -198,8 +198,8 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
     stop("elmo: ", length(raw_weights), " weights for ", n_layers,
          " layers")
   s <- layer_weights(raw_weights)
-  L <- length(reps[[1]])
-  dims <- unique(sapply(reps, function(r) length(r[[1]])))
+  L <- length(reps[\[1\]])
+  dims <- unique(sapply(reps, function(r) length(r[\[1\]])))
   if (length(dims) != 1L)
     stop("elmo: layers have differing widths ",
          paste(dims, collapse = ", "))
@@ -209,7 +209,7 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
     as.numeric(gamma) *
       rowSums(sapply(seq_len(n_layers), function(j)
         s[j] * reps[[j]][[t]])))
-  if (is.null(position)) out else out[[1]]
+  if (is.null(position)) out else out[\[1\]]
 }
 
 #' elmo_representation
@@ -245,8 +245,8 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
   mixed <- elmo_mix(reps, raw, gamma = gamma)
   s <- layer_weights(raw)
   list(estimate = mixed, elmo = mixed, layers = reps, weights = s,
-       gamma = as.numeric(gamma), n_layers = n, L = length(reps[[1]]),
-       d = if (length(mixed) > 0L) length(mixed[[1]]) else 0L,
+       gamma = as.numeric(gamma), n_layers = n, L = length(reps[\[1\]]),
+       d = if (length(mixed) > 0L) length(mixed[\[1\]]) else 0L,
        top_layer = reps[[n]],
        method = "ELMo layer mixture, Peters et al. (2018) eq. (1)")
 }

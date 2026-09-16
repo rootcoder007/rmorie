@@ -21,7 +21,7 @@
       stop("motfsr: alphabet has repeated letters")
     return(alpha)
   }
-  seen <- unique(unlist(lapply(seqs, function(s) strsplit(s, "")[[1]])))
+  seen <- unique(unlist(lapply(seqs, function(s) strsplit(s, "")[\[1\]])))
   if (length(seen) == 0L) stop("motfsr: the sequences contain no letters")
   sort(seen)
 }
@@ -36,9 +36,9 @@
   alpha <- .ghc_mot_alphabet(seqs, alphabet)
   idx <- setNames(seq_along(alpha) - 1L, alpha)
   coded <- lapply(seqs, function(s) {
-    ch <- strsplit(s, "")[[1]]
+    ch <- strsplit(s, "")[\[1\]]
     if (!all(ch %in% alpha))
-      stop(paste0("motfsr: letter '", ch[!ch %in% alpha][1],
+      stop(paste0("motfsr: letter '", ch[!ch %in% alpha]\[1\],
                   "' is not in the alphabet '",
                   paste(alpha, collapse = ""), "'"))
     unname(idx[ch])
@@ -175,8 +175,8 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
   n <- length(starts)
   mu <- .ghc_mot_mu(coded, L)
   if (is.null(theta0)) {
-    theta <- .ghc_mot_theta_from_subsequence(coded, starts[[1]][1],
-                                              starts[[1]][2], w, L, mu, 0.5)
+    theta <- .ghc_mot_theta_from_subsequence(coded, starts[\[1\]]\[1\],
+                                              starts[\[1\]][2], w, L, mu, 0.5)
   } else {
     theta <- lapply(theta0, function(r) as.numeric(r))
     if (length(theta) != w + 1L || any(vapply(theta, length, integer(1)) != L))
@@ -198,7 +198,7 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
     log_l1 <- log(lam1)
     log_l2 <- log(1 - lam1)
     for (sj in seq_along(starts)) {
-      i <- starts[[sj]][1]
+      i <- starts[[sj]]\[1\]
       j <- starts[[sj]][2]
       a <- log_l1 + .ghc_mot_log_component(theta, coded, i, j, w, 1L)
       b <- log_l2 + .ghc_mot_log_component(theta, coded, i, j, w, 2L)
@@ -215,7 +215,7 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
       z_by_seq <- .ghc_mot_normalise_windows(z_by_seq, w)
     z_sum <- 0
     for (sj in seq_along(starts)) {
-      i <- starts[[sj]][1]
+      i <- starts[[sj]]\[1\]
       j <- starts[[sj]][2]
       z_sum <- z_sum + z_by_seq[[i]][j + 1L]
     }
@@ -223,7 +223,7 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
     ccount <- vector("list", w + 1L)
     for (r in seq_len(w + 1L)) ccount[[r]] <- rep(0, L)
     for (sj in seq_along(starts)) {
-      i <- starts[[sj]][1]
+      i <- starts[[sj]]\[1\]
       j <- starts[[sj]][2]
       z1 <- z_by_seq[[i]][j + 1L]
       z2 <- 1 - z1
@@ -300,9 +300,9 @@ morie_motfsr_bayes_threshold <- function(lambda1, loss = NULL) {
     stop("motfsr: lambda1 must lie in (0, 1)")
   t <- log((1 - lambda1) / lambda1)
   if (is.null(loss)) return(t)
-  r11 <- loss[[1]][[1]]
-  r12 <- loss[[1]][[2]]
-  r21 <- loss[[2]][[1]]
+  r11 <- loss[\[1\]][\[1\]]
+  r12 <- loss[\[1\]][[2]]
+  r21 <- loss[[2]][\[1\]]
   r22 <- loss[[2]][[2]]
   num <- as.numeric(r12) - as.numeric(r22)
   den <- as.numeric(r21) - as.numeric(r11)
@@ -329,7 +329,7 @@ morie_motfsr_score_sequence <- function(spec, sequence, alphabet,
   idx <- setNames(seq_along(alpha) - 1L, alpha)
   w <- length(spec)
   s <- as.character(sequence)
-  ch <- strsplit(s, "")[[1]]
+  ch <- strsplit(s, "")[\[1\]]
   scores <- numeric(max(0L, length(ch) - w + 1L))
   for (j in seq_along(scores)) {
     tot <- 0
@@ -419,7 +419,7 @@ morie_motfsr <- function(sequences, w, alphabet = NULL, n_motifs = 1,
     step <- max(1L, as.integer(ceiling(n / max(1L, as.integer(max_starts)))))
     cand <- lapply(all_starts[seq(1L, n, by = step)],
                    function(sj)
-                     .ghc_mot_theta_from_subsequence(coded, sj[1], sj[2],
+                     .ghc_mot_theta_from_subsequence(coded, sj\[1\], sj[2],
                                                       w, L, mu, start_weight))
   }
   lam_grid <- .ghc_mot_lambda_grid(n, length(coded), w, lambda0)

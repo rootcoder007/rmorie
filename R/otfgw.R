@@ -17,7 +17,7 @@
 #' @param Cx Structure matrix of the first object, n by n.
 #' @param Cy Structure matrix of the second object, m by m.
 #' @param a,b Marginals.
-#' @param alpha Trade-off in [0, 1].
+#' @param alpha Trade-off in \[0, 1\].
 #' @param max_iter Conditional-gradient steps.
 #' @return List with \code{T}, \code{cost}, \code{wass_part},
 #'   \code{gromov_part}, \code{n}, \code{m}, \code{iters}.
@@ -36,7 +36,7 @@ Otfgw <- function(M, Cx, Cy, a, b, alpha = 0.5, max_iter = 20) {
   if (nrow(A) != n || nrow(B) != m)
     stop("structure matrices must match the marginals")
   al <- as.numeric(alpha)
-  if (al < 0 || al > 1) stop("alpha must lie in [0, 1]")
+  if (al < 0 || al > 1) stop("alpha must lie in \[0, 1\]")
   t1 <- sum(outer(aa, aa) * A^2)
   t3 <- sum(outer(bb, bb) * B^2)
   T <- outer(aa, bb)

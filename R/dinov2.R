@@ -70,7 +70,7 @@ Dinov2 <- function(x, student, teacher, tau = 0.1, tau_t = 0.04,
     for (j in seq_len(n)) {
       if (i == j) next
       dd <- 0
-      for (k in seq_len(d)) dd <- dd + (En[i, k] - En[j, k])^2
+      for (k in seq_len(d)) dd <- dd + (En\[i, k\] - En[j, k])^2
       dd <- sqrt(dd)
       if (dd < best) best <- dd
     }

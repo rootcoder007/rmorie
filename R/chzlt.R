@@ -95,7 +95,7 @@ Chzlt <- function(model, treat = NULL, cov = NULL, R2_yu = 0, R2_du = 0,
     D <- cbind(d, Xm)
   }
   if (!(R2_yu >= 0 && R2_yu <= 1 && R2_du >= 0 && R2_du < 1))
-    stop("R2_yu must lie in [0, 1] and R2_du in [0, 1)")
+    stop("R2_yu must lie in \[0, 1\] and R2_du in [0, 1)")
   f <- .ch_ols_se(y, D, 2L)
   tau <- f$beta
   se <- f$se

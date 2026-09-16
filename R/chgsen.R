@@ -2,9 +2,9 @@
 #' Change-of-variance function and sensitivity (Hampel et al. 1986)
 #'
 #' For a location M-estimator with score psi at a symmetric model F the
-#' asymptotic variance is V = E[psi^2] / (E[psi-prime])^2 and the
+#' asymptotic variance is V = E\[psi^2\] / (E[psi-prime])^2 and the
 #' change-of-variance function is
-#' CVF(x) = V * (1 + psi(x)^2/E[psi^2] - 2 psi-prime(x)/E[psi-prime]),
+#' CVF(x) = V * (1 + psi(x)^2/E\[psi^2\] - 2 psi-prime(x)/E[psi-prime]),
 #' with sensitivity kappa* = sup CVF(x)/V.  Source consulted: Hampel,
 #' Ronchetti, Rousseeuw and Stahel (1986), Robust Statistics, section 2.5.
 #'
@@ -24,7 +24,7 @@ chgsen <- function(psi, x = NULL, dpsi = NULL, w = NULL) {
   if (is.null(dpsi)) {
     dp <- numeric(n)
     for (i in seq_len(n)) {
-      if (i == 1) dp[i] <- (psi[2] - psi[1]) / (xg[2] - xg[1])
+      if (i == 1) dp[i] <- (psi[2] - psi\[1\]) / (xg[2] - xg\[1\])
       else if (i == n) dp[i] <- (psi[n] - psi[n - 1]) / (xg[n] - xg[n - 1])
       else dp[i] <- (psi[i + 1] - psi[i - 1]) / (xg[i + 1] - xg[i - 1])
     }

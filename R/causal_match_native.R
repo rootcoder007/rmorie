@@ -235,7 +235,7 @@ morie_causal_caliper_matching <- function(ps, treat, caliper = NULL, k = 1,
 #'
 #' @param ps propensity scores.
 #' @param treat 0/1 treatment indicator.
-#' @param bins histogram bins on \eqn{[0, 1]}.
+#' @param bins histogram bins on \eqn{\[0, 1\]}.
 #' @param eps threshold defining an extreme score.
 #' @return list with \code{common_support}, \code{n_outside},
 #'   \code{prop_extreme}, \code{overlap_coefficient},

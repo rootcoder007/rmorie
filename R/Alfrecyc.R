@@ -30,7 +30,7 @@
 #' @export
 Alfrecyc <- function(m1, z, x, wd, bins = NULL, ncycle = 1) {
   if (is.null(bins)) bins <- 3.375 + (21.375 - 3.375) / 14 * (seq_len(15) - 1)
-  n <- dim(z)[1]
+  n <- dim(z)\[1\]
   cz <- dim(z)[3]
   zc <- z
   mc <- m1
@@ -38,13 +38,13 @@ Alfrecyc <- function(m1, z, x, wd, bins = NULL, ncycle = 1) {
   for (cyc in seq_len(ncycle)) {
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        d[i, j] <- sqrt(alfVn2(x[i, ] - x[j, ]))
+        d\[i, j\] <- sqrt(alfVn2(x[i, ] - x[j, ]))
       }
     }
     zn <- array(0, c(n, n, cz))
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        zn[i, j, ] <- alfLin(alfOnehot(d[i, j], bins), wd) + alfLnorm(zc[i, j, ])
+        zn\[i, j, \] <- alfLin(alfOnehot(d\[i, j\], bins), wd) + alfLnorm(zc\[i, j, \])
       }
     }
     zc <- zn

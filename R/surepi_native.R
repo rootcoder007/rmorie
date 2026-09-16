@@ -78,7 +78,7 @@
 #' @export
 .surepi_stat <- function(counts, method, sigma_floor) {
   w <- .surepi_windows[[method]]
-  lag <- w[1]
+  lag <- w\[1\]
   width <- w[2]
   n <- length(counts)
   out <- rep(NA_real_, n)
@@ -183,7 +183,7 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
     stop("surepi: sigma_floor must be positive -- a flat baseline gives sigma = 0 and an undefined statistic")
   }
   w <- .surepi_windows[[method]]
-  lag <- w[1]
+  lag <- w\[1\]
   width <- w[2]
   need <- lag + width - 1L
   if (length(cv) <= need) {

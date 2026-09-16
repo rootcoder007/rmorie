@@ -59,7 +59,7 @@
 #' @return A numeric value.
 #' @export
 .rkmeans_mean <- function(pts) {
-  p <- length(pts[[1]])
+  p <- length(pts[\[1\]])
   out <- numeric(p)
   for (x in pts) {
     out <- out + x
@@ -300,11 +300,11 @@ morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
   for (init in starts) {
     got <- .rkmeans_concentrate(rows, init, k, n_keep, penalty, huber_c,
                                 as.integer(max_iter))
-    if (is.null(best) || got[[1]] < best[[1]]) {
+    if (is.null(best) || got[\[1\]] < best[\[1\]]) {
       best <- got
     }
   }
-  crit <- best[[1]]
+  crit <- best[\[1\]]
   cen <- best[[2]]
   labels <- best[[3]]
   kept <- best[[4]]

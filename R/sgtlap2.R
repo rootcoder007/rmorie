@@ -47,6 +47,6 @@ Sgtlap2 <- function(A, k = 2) {
   e <- .s03jacobi(s$L)
   Y <- e$vectors[, seq_len(k) + 1L, drop = FALSE]
   .t1_result(Y = Y, eigvals = e$values[seq_len(k) + 1L],
-             lambda1 = e$values[1], k = k, n = n,
+             lambda1 = e$values\[1\], k = k, n = n,
              method = "Laplacian eigenmaps on L_sym")
 }

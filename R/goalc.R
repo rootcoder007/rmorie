@@ -84,7 +84,7 @@ Goalcond <- function(env, policy = NULL, goal_dist = NULL, n_states = NULL,
     for (gi in seq_len(ng)) acc <- acc + wts[gi] * (if (is.finite(V[s, gi])) V[s, gi] else 0)
     ev[s] <- if (wtot > 0) acc / wtot else NaN
   }
-  list(estimate = if (ns) ev[1] else NaN, v = V, expected_value = ev,
+  list(estimate = if (ns) ev\[1\] else NaN, v = V, expected_value = ev,
        reachable = if (ns && ng) reach / (ns * ng) else NaN, n_states = ns,
        method = "Goal-conditioned V*(s, g) with the sparse pseudo-reward (UVFA)")
 }

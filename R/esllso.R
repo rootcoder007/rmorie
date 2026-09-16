@@ -66,7 +66,7 @@ Esllso <- function(X, y, lambda_, max_iter = 10000, tol = 1e-12) {
     break }
   }
   active <- which(beta != 0) - 1L
-  .t1_result(estimate = beta[1], beta = beta, n_nonzero = length(active),
+  .t1_result(estimate = beta\[1\], beta = beta, n_nonzero = length(active),
              active_set = active,
              objective = 0.5 * sum(r^2) + lam * sum(abs(beta[!const])),
              iterations = it, converged = converged, lambda = lam,

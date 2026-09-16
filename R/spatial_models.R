@@ -11,7 +11,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_logdet_I_minus(V, V)
 morie_logdet_I_minus <- function(rho, W) {
-  determinant(diag(nrow(W)) - rho * W, logarithm = TRUE)$modulus[1]
+  determinant(diag(nrow(W)) - rho * W, logarithm = TRUE)$modulus\[1\]
 }
 
 #' Maximum-likelihood spatial regression models
@@ -125,7 +125,7 @@ morie_ripley_k <- function(coords, r_grid, area = NULL,
     tot <- 0
     for (i in seq_len(n)) for (j in seq_len(n)) {
       if (i == j) next
-      d <- D[i, j]
+      d <- D\[i, j\]
       if (d <= r) tot <- tot + wfun(i, d)
     }
     tot / (n * lam)

@@ -13,7 +13,7 @@
 #' wild bootstrap is required instead.
 #'
 #' Because the design never changes, the conditional moments are available in
-#' closed form and are this module's anchor: E*[beta*] = beta_hat and
+#' closed form and are this module's anchor: E*\[beta*\] = beta_hat and
 #' Var*(beta*) = sigma_tilde^2 (X'X)^-1 with sigma_tilde^2 = sum r_i^2 / n,
 #' the resampling distribution's own variance (divisor n, not n - p).
 #' var_closed reports the diagonal.  That is the homoskedastic formula with a
@@ -78,7 +78,7 @@ Btres <- function(X, y, B = 200, seed = 1, alpha = 0.05, rescale = FALSE) {
   }
   list(beta_b = reps, beta_hat = bh, resid = res, se = se, lo = lo, hi = hi,
        var_closed = vc, sigma2_tilde = s2, n = n, p = p, B = as.integer(B),
-       estimate = bh[1],
+       estimate = bh\[1\],
        method = "Freedman (1981) Ann. Statist. 9(6):1218-1228, residual resampling")
 }
 

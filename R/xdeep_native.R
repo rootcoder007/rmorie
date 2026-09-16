@@ -139,7 +139,7 @@ xdeep_cin_layer <- function(X_prev, X0, W) {
     acc <- numeric(d)
     for (i in seq_len(mp)) {
       for (j in seq_len(m)) {
-        w <- Wh[i, j]
+        w <- Wh\[i, j\]
         if (w == 0) next
         acc <- acc + w * (P[i, ] * Z[j, ])
       }

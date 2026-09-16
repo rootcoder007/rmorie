@@ -46,7 +46,7 @@ Diffevol <- function(f, population, F = 0.8, CR = 0.9, generations = 20) {
         if (.s03vdc(step * d + (j - 1L), 2L) <= as.numeric(CR) || (j - 1L) == jr) {
           u[j] <- P[r1, j] + as.numeric(F) * (P[r2, j] - P[r3, j])
         } else {
-          u[j] <- P[i, j]
+          u[j] <- P\[i, j\]
         }
       }
       fu <- as.numeric(f(u))

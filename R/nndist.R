@@ -34,7 +34,7 @@ Nndist <- function(coords, r_grid, window = NULL) {
   region <- .sp_region(window, p)
   lam <- .sp_intensity(p, region)
   d <- .sp_nn(p)
-  b <- pmin(p[, 1] - region[1], region[3] - p[, 1],
+  b <- pmin(p[, 1] - region\[1\], region[3] - p[, 1],
             p[, 2] - region[2], region[4] - p[, 2])
   rs <- as.numeric(r_grid)
   if (!length(rs)) stop("Nndist: r_grid is empty")

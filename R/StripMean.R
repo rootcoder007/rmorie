@@ -5,7 +5,7 @@
 #' The mean of X within the strip at y0 is the reverse regression
 #' slope times y0.
 #'
-#' @param r correlation, in [-1, 1].
+#' @param r correlation, in \[-1, 1\].
 #' @param sigma_x spread of X, >= 0.
 #' @param sigma_y spread of Y, > 0.
 #' @param y0 the y value defining the strip.

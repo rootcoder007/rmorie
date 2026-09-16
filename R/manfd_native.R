@@ -84,7 +84,7 @@ morie_manfd_l2 <- function(Y, grid = NULL) {
       terms <- c(terms, 0.5 * (a * a + b * b) * (grid[t + 1L] - grid[t]))
     }
     v <- if (length(terms)) sqrt(.w3_csum(terms)) else 0
-    D[i, j] <- v
+    D\[i, j\] <- v
     D[j, i] <- v
   }
   D
@@ -121,13 +121,13 @@ morie_manfd_knn <- function(D, k, symmetric = TRUE) {
     taken <- 0L
     for (j in ord) {
       if (j == i) next
-      A[i, j] <- D[i, j]
+      A\[i, j\] <- D\[i, j\]
       taken <- taken + 1L
       if (taken >= k) break
     }
   }
   if (symmetric) for (i in seq_len(n)) for (j in seq_len(n))
-    if (A[j, i] < A[i, j]) A[i, j] <- A[j, i]
+    if (A[j, i] < A\[i, j\]) A\[i, j\] <- A[j, i]
   A
 }
 
@@ -150,7 +150,7 @@ morie_manfd_paths <- function(A) {
     for (j in seq_len(n)) {
       if (is.infinite(G[m, j])) next
       v <- G[i, m] + G[m, j]
-      if (v < G[i, j]) G[i, j] <- v
+      if (v < G\[i, j\]) G\[i, j\] <- v
     }
   }
   seen <- rep(FALSE, n)
@@ -158,7 +158,7 @@ morie_manfd_paths <- function(A) {
   for (i in seq_len(n)) {
     if (seen[i]) next
     comp <- comp + 1L
-    for (j in seq_len(n)) if (is.finite(G[i, j])) seen[j] <- TRUE
+    for (j in seq_len(n)) if (is.finite(G\[i, j\])) seen[j] <- TRUE
   }
   list(G = G, components = comp)
 }
@@ -187,7 +187,7 @@ morie_manfd_jacobi <- function(A, sweeps = 60L) {
   for (it in seq_len(as.integer(sweeps))) {
     off <- 0
     for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n)
-      off <- off + a[i, j] * a[i, j]
+      off <- off + a\[i, j\] * a\[i, j\]
     if (off <= 1e-30) break
     if (n > 1L) for (p in seq_len(n - 1L)) for (q in (p + 1L):n) {
       if (abs(a[p, q]) <= 1e-300) next
@@ -254,7 +254,7 @@ morie_manfd_scaling <- function(D, dim = 2L, sweeps = 60L) {
   gmean <- .w3_csum(rmean) / n
   B <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n))
-    B[i, j] <- -0.5 * (d2[i, j] - rmean[i] - cmean[j] + gmean)
+    B\[i, j\] <- -0.5 * (d2\[i, j\] - rmean[i] - cmean[j] + gmean)
   je <- morie_manfd_jacobi(B, sweeps)
   dim <- as.integer(dim)
   if (dim < 1L || dim > n)
@@ -262,7 +262,7 @@ morie_manfd_scaling <- function(D, dim = 2L, sweeps = 60L) {
   coords <- matrix(0, n, dim)
   for (i in seq_len(n)) for (j in seq_len(dim)) {
     lam <- je$values[j]
-    coords[i, j] <- if (lam > 0) je$vectors[i, j] * sqrt(lam) else 0
+    coords\[i, j\] <- if (lam > 0) je$vectors\[i, j\] * sqrt(lam) else 0
   }
   list(coords = coords, values = je$values,
        n_negative = sum(je$values < -1e-9), B = B)
@@ -314,7 +314,7 @@ morie_manfd <- function(Y, k = 4L, method = "isomap", grid = NULL,
     a <- numeric(0)
     b <- numeric(0)
     for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n) {
-      a <- c(a, src[i, j])
+      a <- c(a, src\[i, j\])
       b <- c(b, sqrt(.w3_csum((coords[i, ] - coords[j, ]) *
                                 (coords[i, ] - coords[j, ]))))
     }

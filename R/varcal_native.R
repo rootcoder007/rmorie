@@ -114,7 +114,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' res <- .varcal_chars(x = x)
 #' res
 .varcal_chars <- function(x) {
-  if (is.character(x) && length(x) == 1L) strsplit(x, "")[[1]] else x
+  if (is.character(x) && length(x) == 1L) strsplit(x, "")[\[1\]] else x
 }
 
 #' .varcal_norm_reads
@@ -183,8 +183,8 @@ varcal_pileup_column <- function(reads, position, reference) {
 #' @param reference A vector; its length is taken.
 #' @param min_alt_count The body requires: varcal: min_alt_count must be at least 1.
 #' Defaults to \code{2}.
-#' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in [0,
-#' 1]. Defaults to \code{0.05}.
+#' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in \[0,
+#' 1\]. Defaults to \code{0.05}.
 #' @param min_bq Passed to \code{>=}. Defaults to \code{10}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -199,7 +199,7 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
   reads <- .varcal_norm_reads(reads)
   reference <- .varcal_chars(reference)
   if (min_alt_fraction < 0.0 || min_alt_fraction > 1.0) {
-    stop("varcal: min_alt_fraction must lie in [0, 1]")
+    stop("varcal: min_alt_fraction must lie in \[0, 1\]")
   }
   if (min_alt_count < 1) {
     stop("varcal: min_alt_count must be at least 1")
@@ -266,7 +266,7 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #'   lapply(1:3, function(i) list(pos = 0L, seq = "ACGTTCGT")),
 #'   lapply(1:3, function(i) list(pos = 0L, seq = "ACGTACGT")))
 #' cands <- varcal_find_candidates(reads, reference = "ACGTACGTAC")
-#' enc <- varcal_encode_pileup(reads, "ACGTACGTAC", cands[[1]], width = 7,
+#' enc <- varcal_encode_pileup(reads, "ACGTACGTAC", cands[\[1\]], width = 7,
 #'                             height = 8)
 #' str(enc, max.level = 1)
 varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
@@ -362,7 +362,7 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
     mid <- image$width %/% 2
     for (row in image$read_rows) {
       cell <- row[[mid + 1]]
-      if (cell[1] > 0.0) {
+      if (cell\[1\] > 0.0) {
         tot <- tot + 1.0
         if (cell[4] <= 0.5) {
           alt <- alt + 1.0

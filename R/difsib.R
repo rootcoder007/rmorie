@@ -62,7 +62,7 @@ Difsib <- function(y, group, studied = NULL, matching = NULL, correction = FALSE
   levs <- unique(g)
   if (length(levs) != 2L) stop("group must have exactly 2 distinct values")
   ref <- if (is.null(reference)) {
-    levs[1]
+    levs\[1\]
   } else if (as.character(reference) %in% levs) {
     as.character(reference)
   } else {

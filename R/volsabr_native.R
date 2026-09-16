@@ -15,7 +15,7 @@
 #' @param K,f Strike and forward (positive).
 #' @param T Time to exercise (years).
 #' @param alpha Volatility parameter (> 0).
-#' @param beta CEV exponent in [0, 1].
+#' @param beta CEV exponent in \[0, 1\].
 #' @param rho Correlation in (-1, 1).
 #' @param nu Vol-of-vol (>= 0).
 #' @return A list with elements \code{estimate}, \code{z},

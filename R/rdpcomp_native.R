@@ -24,7 +24,7 @@
 #' @examples
 #' morie_rdp_sampled_gaussian(2, 0.01, 1.0)
 morie_rdp_sampled_gaussian <- function(alpha, q, sigma) {
-  a <- as.numeric(alpha)[1]
+  a <- as.numeric(alpha)\[1\]
   if (a != floor(a))
     stop("morie_rdp_sampled_gaussian: alpha must be an integer -- the ",
          "closed form is the paper's Case I binomial expansion. ",
@@ -32,10 +32,10 @@ morie_rdp_sampled_gaussian <- function(alpha, q, sigma) {
          "not implemented")
   ai <- as.integer(a)
   if (ai <= 1) stop("morie_rdp_sampled_gaussian: alpha must exceed 1")
-  qq <- as.numeric(q)[1]
+  qq <- as.numeric(q)\[1\]
   if (!(qq > 0 && qq <= 1))
     stop("morie_rdp_sampled_gaussian: q must lie in (0, 1]")
-  s <- as.numeric(sigma)[1]
+  s <- as.numeric(sigma)\[1\]
   if (s <= 0) stop("morie_rdp_sampled_gaussian: sigma must be positive")
 
   # Summed in log space: exp(k(k-1)/(2 s^2)) reaches exp(alpha^2/(2 s^2)),
@@ -70,7 +70,7 @@ morie_rdp_sampled_gaussian <- function(alpha, q, sigma) {
 #' @examples
 #' morie_rdp_compose(2, 0.01, 1.0, steps = 100)
 morie_rdp_compose <- function(alpha, q, sigma, steps = 1) {
-  t <- as.integer(steps)[1]
+  t <- as.integer(steps)\[1\]
   if (t < 1) stop("morie_rdp_compose: steps must be at least 1")
   t * morie_rdp_sampled_gaussian(alpha, q, sigma)
 }
@@ -96,7 +96,7 @@ morie_rdpcomp <- function(q, sigma, alpha = NULL, steps = 1, delta = NULL) {
   orders <- if (is.null(alpha)) 2:64 else as.integer(as.numeric(alpha))
   if (length(orders) < 1)
     stop("morie_rdpcomp: alpha must hold at least one order")
-  t <- as.integer(steps)[1]
+  t <- as.integer(steps)\[1\]
   curve <- vapply(orders,
                   function(a) morie_rdp_compose(a, q, sigma, steps = t),
                   numeric(1))
@@ -104,15 +104,15 @@ morie_rdpcomp <- function(q, sigma, alpha = NULL, steps = 1, delta = NULL) {
   out <- list(estimate = min(curve),
               rdp_epsilons = curve,
               alphas = as.numeric(orders),
-              q = as.numeric(q)[1],
-              sigma = as.numeric(sigma)[1],
+              q = as.numeric(q)\[1\],
+              sigma = as.numeric(sigma)\[1\],
               steps = t,
               method = paste("RDP of the Sampled Gaussian Mechanism",
                              "(Mironov, Talwar & Zhang 2019, Thm 4 /",
                              "Case I); composition by Mironov (2017)",
                              "Prop 1"))
   if (!is.null(delta)) {
-    d <- as.numeric(delta)[1]
+    d <- as.numeric(delta)\[1\]
     if (!(d > 0 && d < 1))
       stop("morie_rdpcomp: delta must lie strictly in (0, 1)")
     eps <- curve + log(1 / d) / (orders - 1)

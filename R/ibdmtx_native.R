@@ -113,17 +113,17 @@ morie_ibdmtx <- function(G) {
       Nexp <- matrix(0, 3, 3)
       for (j in seq_len(m)) {
         if (is.null(tables[[j]])) next
-        g1 <- rows[i, j]
+        g1 <- rows\[i, j\]
         g2 <- rows[k, j]
         if (!(g1 %in% valid) || !(g2 %in% valid)) next
         ibs <- 2 - abs(g1 - g2)
         Nobs[ibs + 1L] <- Nobs[ibs + 1L] + 1
         Nexp <- Nexp + tables[[j]]
       }
-      if (Nexp[1, 1] <= 0 || Nexp[2, 2] <= 0)
+      if (Nexp\[1, 1\] <= 0 || Nexp[2, 2] <= 0)
         stop("no informative SNPs for a pair")
-      z0 <- Nobs[1] / Nexp[1, 1]
-      z1 <- (Nobs[2] - z0 * Nexp[1, 2]) / Nexp[2, 2]
+      z0 <- Nobs\[1\] / Nexp\[1, 1\]
+      z1 <- (Nobs[2] - z0 * Nexp\[1, 2\]) / Nexp[2, 2]
       z2 <- (Nobs[3] - z0 * Nexp[1, 3] - z1 * Nexp[2, 3]) / Nexp[3, 3]
       # bounding, Purcell et al. 2007 p. 566
       if (z0 > 1) {
@@ -154,12 +154,12 @@ morie_ibdmtx <- function(G) {
         z1 <- 2 * pi_ * (1 - pi_)
         z2 <- pi_ * pi_
       }
-      pihat[i, k] <- pihat[k, i] <- pi_
-      Z0[i, k] <- Z0[k, i] <- z0
-      Z1[i, k] <- Z1[k, i] <- z1
-      Z2[i, k] <- Z2[k, i] <- z2
+      pihat\[i, k\] <- pihat[k, i] <- pi_
+      Z0\[i, k\] <- Z0[k, i] <- z0
+      Z1\[i, k\] <- Z1[k, i] <- z1
+      Z2\[i, k\] <- Z2[k, i] <- z2
       counts_out[[length(counts_out) + 1L]] <-
-        c(i - 1L, k - 1L, Nobs[1], Nobs[2], Nobs[3])
+        c(i - 1L, k - 1L, Nobs\[1\], Nobs[2], Nobs[3])
     }
   }
   list(estimate = pihat, Z0 = Z0, Z1 = Z1, Z2 = Z2,

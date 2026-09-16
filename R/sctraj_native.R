@@ -183,7 +183,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov = "full",
       }
       diff <- centers[[a]] - centers[[b]]
       if (cov == "euclidean") {
-        D[a, b] <- sqrt(sum(diff * diff))
+        D\[a, b\] <- sqrt(sum(diff * diff))
         next
       }
       P <- covs[[a]] + covs[[b]]
@@ -194,7 +194,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov = "full",
       }
       sol <- .sctraj_solve(P, diff)
       d2 <- sum(diff * sol)
-      D[a, b] <- sqrt(max(d2, 0.0))
+      D\[a, b\] <- sqrt(max(d2, 0.0))
     }
   }
   list(distances = D, clusters = nms, centers = centers, covariances = covs)
@@ -241,7 +241,7 @@ morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends = NULL) {
         if (b %in% seen) {
           next
         }
-        w <- D[a, b]
+        w <- D\[a, b\]
         if (is.null(best) || w < best$w) {
           best <- list(w = w, a = a, b = b)
         }
@@ -571,7 +571,7 @@ morie_sctraj_average_curve <- function(curves, n_points = 100,
 
 #' CDF of a cosine kernel of bandwidth 1/2: density 1 + cos(2 pi u)
 #'
-#' on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
+#' on \[-1/2, 1/2\], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -580,7 +580,7 @@ morie_sctraj_average_curve <- function(curves, n_points = 100,
 #' morie_sctraj_cosine_cdf(u = 5L)
 morie_sctraj_cosine_cdf <- function(u) {
   # CDF of a cosine kernel of bandwidth 1/2: density 1 + cos(2 pi u)
-  # on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
+  # on \[-1/2, 1/2\], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
   if (u <= -0.5) {
     return(0.0)
   }

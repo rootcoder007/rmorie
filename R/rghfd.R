@@ -40,7 +40,7 @@ rghfd <- function(x, kmax = 10L) {
   fit <- stats::lm(log_L ~ log_inv_k)
   list(
     HFD = unname(stats::coef(fit)[2]),
-    intercept = unname(stats::coef(fit)[1]),
+    intercept = unname(stats::coef(fit)\[1\]),
     log_L = log_L, log_inv_k = log_inv_k, kmax = kmax
   )
 }

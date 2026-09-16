@@ -30,7 +30,7 @@ Chancap <- function(P, iters = 200) {
     qy <- as.numeric(t(P) %*% r)
     vapply(seq_len(m), function(i) {
       k <- P[i, ] > 0 & qy > 0
-      sum(P[i, k] * log(P[i, k] / qy[k]))
+      sum(P\[i, k\] * log(P\[i, k\] / qy[k]))
     }, numeric(1))
   }
   for (it in seq_len(as.integer(iters))) {
@@ -43,7 +43,7 @@ Chancap <- function(P, iters = 200) {
   cap <- 0
   for (i in seq_len(m)) {
     k <- P[i, ] > 0 & qy > 0
-    cap <- cap + r[i] * sum(P[i, k] * log(P[i, k] / qy[k]))
+    cap <- cap + r[i] * sum(P\[i, k\] * log(P\[i, k\] / qy[k]))
   }
   .t1_result(capacity_bits = cap / log(2), capacity_nats = cap,
              input_dist = r, trace = trace, iterations = as.integer(iters),

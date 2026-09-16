@@ -57,9 +57,9 @@ morie_yangr <- function(marker_matrix, freq = NULL, yang_diagonal = FALSE) {
         x <- M[i, keep]
         s <- sum((x * x - (1 + 2 * pi_[keep]) * x + 2 * pi_[keep]^2) /
                    var_[keep])
-        A[i, j] <- 1 + s / p
+        A\[i, j\] <- 1 + s / p
       } else {
-        A[i, j] <- sum(Zs[i, keep] * Zs[j, keep] / var_[keep]) / p
+        A\[i, j\] <- sum(Zs[i, keep] * Zs[j, keep] / var_[keep]) / p
       }
     }
   }

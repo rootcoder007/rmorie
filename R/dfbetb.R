@@ -36,7 +36,7 @@ Dfbetb <- function(y, X, intercept = TRUE) {
       for (a in seq_len(p)) num <- num + f$inv[[j]][a] * D[i, a]
       denom <- si * sqrt(f$inv[[j]][j]) * (1 - f$h[i])
       v <- if (denom != 0) num * f$e[i] / denom else NaN
-      out[i, j] <- v
+      out\[i, j\] <- v
       if (!is.nan(v)) {
         if (abs(v) > worst) worst <- abs(v)
         if (abs(v) > thr) flag <- 1L

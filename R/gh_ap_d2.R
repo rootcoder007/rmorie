@@ -7,8 +7,8 @@
 #' Formula: P_0 Pi(V | X) <= d_TV(P_0, P_U) + P_0 phi
 #'   + (1/Pi(U)) int_V P(1 - phi) dPi(P)
 #'
-#' @param dtv d_TV(P_0, P_U), in [0, 1].
-#' @param p0_phi P_0 phi, the type I error, in [0, 1].
+#' @param dtv d_TV(P_0, P_U), in \[0, 1\].
+#' @param p0_phi P_0 phi, the type I error, in \[0, 1\].
 #' @param prior_mass Pi(U), strictly positive.
 #' @param integral int_V P(1 - phi) dPi(P), non-negative.
 #' @return List with \code{bound}, \code{term_tv}, \code{term_test},
@@ -25,8 +25,8 @@ Lecam <- function(dtv, p0_phi, prior_mass, integral) {
   p0 <- as.numeric(p0_phi)
   pm <- as.numeric(prior_mass)
   it <- as.numeric(integral)
-  if (dtv < 0 || dtv > 1) stop("dtv must lie in [0, 1]")
-  if (p0 < 0 || p0 > 1) stop("P_0 phi must lie in [0, 1]")
+  if (dtv < 0 || dtv > 1) stop("dtv must lie in \[0, 1\]")
+  if (p0 < 0 || p0 > 1) stop("P_0 phi must lie in \[0, 1\]")
   if (pm <= 0) stop("the prior mass Pi(U) must be positive")
   if (it < 0) stop("the integral must be non-negative")
   t3 <- it / pm

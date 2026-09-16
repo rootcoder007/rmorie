@@ -28,9 +28,9 @@
 #' Pseudor2(-20.31519 / 2, -28.26715 / 2, 23)$mcfadden
 #' @export
 Pseudor2 <- function(llmod, llnull, n) {
-  llmod <- as.numeric(llmod)[1]
-  llnull <- as.numeric(llnull)[1]
-  n <- as.integer(n)[1]
+  llmod <- as.numeric(llmod)\[1\]
+  llnull <- as.numeric(llnull)\[1\]
+  n <- as.integer(n)\[1\]
   if (!is.finite(llmod) || !is.finite(llnull)) stop("log-likelihoods must be finite")
   if (is.na(n) || n < 1L) stop("n must be at least 1")
   if (llnull >= 0) {

@@ -11,7 +11,7 @@
 #' rows as an iid draw from a joint distribution and so survives
 #' heteroskedasticity and a stochastic design, at the price of not
 #' conditioning on X.  This is the case version: draw i*_1, ..., i*_n
-#' uniformly with replacement from 1..n, refit OLS on (X[i*], y[i*]), collect
+#' uniformly with replacement from 1..n, refit OLS on (X\[i*\], y\[i*\]), collect
 #' beta*.
 #'
 #' Because the design is redrawn a resample can be rank deficient; the fit is
@@ -68,6 +68,6 @@ Btpair <- function(X, y, B = 200, seed = 1, alpha = 0.05) {
     hi[j] <- .s03quantile7(col, 1 - a / 2)
   }
   list(beta_b = reps, beta_hat = bh, se = se, lo = lo, hi = hi,
-       n_illcond = ill, n = n, p = p, B = as.integer(B), estimate = bh[1],
+       n_illcond = ill, n = n, p = p, B = as.integer(B), estimate = bh\[1\],
        method = "Freedman (1981) Ann. Statist. 9(6):1218-1228, case resampling")
 }

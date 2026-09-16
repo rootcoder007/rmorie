@@ -11,7 +11,7 @@
 #'
 #' @param x First variable.
 #' @param y Second variable.
-#' @param t_grid Points in [0, 1], or NULL for eleven equally spaced.
+#' @param t_grid Points in \[0, 1\], or NULL for eleven equally spaced.
 #' @param u Copula level in (0, 1), or NULL for exp(-1).
 #' @return List with \code{A}, \code{t}, \code{estimate} (A at 1/2),
 #'   \code{chi}, \code{convex_ok}, \code{n}, \code{method}.
@@ -27,7 +27,7 @@ Evpdfn <- function(x, y, t_grid = NULL, u = NULL) {
   if (n == 0L) stop("empty input: x has no observations")
   if (length(ys) != n) stop("x and y must have the same length")
   if (is.null(t_grid)) t_grid <- (0:10) / 10 else t_grid <- .s03vec(t_grid)
-  if (any(t_grid < 0 | t_grid > 1)) stop("t_grid must lie in [0, 1]")
+  if (any(t_grid < 0 | t_grid > 1)) stop("t_grid must lie in \[0, 1\]")
   if (is.null(u)) u <- exp(-1)
   u <- as.numeric(u)
   if (!(u > 0 && u < 1)) stop("u must lie strictly in (0, 1)")

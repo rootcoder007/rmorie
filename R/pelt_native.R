@@ -17,8 +17,8 @@
 #                 negative log-likelihood n_l (log 2 pi + log
 #                 sigma2_hat + 1) using the biased MLE sigma2_hat.
 
-# cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs[k - 1]
-#' Cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs[k - 1]
+# cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs\[k - 1\]
+#' Cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs\[k - 1\]
 #'
 #' A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code{morie_binseg}.
 #' See the file header for the source the module follows.

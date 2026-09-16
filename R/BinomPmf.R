@@ -6,7 +6,7 @@
 #'
 #' @param k successes, >= 0.
 #' @param n trials, >= 0.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(k, n, p, probability).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eqs (4.6), (4.60).
@@ -22,7 +22,7 @@ BinomPmf <- function(k, n, p) {
   }
   p <- as.numeric(p)
   if (length(p) != 1L || is.na(p) || p < 0 || p > 1) {
-    stop("p must be a single value in [0, 1].", call. = FALSE)
+    stop("p must be a single value in \[0, 1\].", call. = FALSE)
   }
   k <- as.integer(k)
   n <- as.integer(n)

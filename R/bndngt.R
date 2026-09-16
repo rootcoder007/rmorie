@@ -25,7 +25,7 @@
 #' Bndngt(y = rnorm(40), D = rbinom(40, 1, 0.5), y_min = -3)
 Bndngt <- function(y, D, y_min) {
   z <- .bnd_yd(y, D, "Bndngt")
-  ymin <- as.numeric(y_min)[1]
+  ymin <- as.numeric(y_min)\[1\]
   y0 <- min(z$y)
   y1 <- max(z$y)
   if (ymin > y0) stop("Bndngt: y_min is above min(y)")

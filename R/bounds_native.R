@@ -59,7 +59,7 @@
 #'
 #' Returns the pair of logical matrices that make XLNet's permutation
 #' objective computable in a single pass over an unpermuted sequence.
-#' `content[i, j]` is TRUE when position `i` may attend to position `j`.
+#' `content\[i, j\]` is TRUE when position `i` may attend to position `j`.
 #'
 #' The content stream sees \eqn{z_{\le t}} -- itself included -- and the
 #' query stream sees only \eqn{z_{<t}}. The single difference is the

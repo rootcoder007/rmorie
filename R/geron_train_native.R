@@ -362,7 +362,7 @@ morie_geron_dino_self_distillation <- function(student_logits, teacher_logits,
 #' into consecutive batches of `b`. Returned indices are 0-based.
 #'
 #' @param n Number of instances.
-#' @param b Batch size in [1, n].
+#' @param b Batch size in \[1, n\].
 #' @param shuffle Logical; permute before slicing.
 #' @param seed LCG seed.
 #' @param drop_last Drop a short final batch.
@@ -403,7 +403,7 @@ morie_geron_dataloader_minibatch <- function(n, b, shuffle = TRUE, seed = 0,
 #'
 #' @param x0 Numeric vector or matrix.
 #' @param t 0-based index into `alpha_bar`.
-#' @param alpha_bar Non-increasing cumulative products in [0, 1].
+#' @param alpha_bar Non-increasing cumulative products in \[0, 1\].
 #' @param noise Optional noise of the same shape; otherwise LCG normals.
 #' @param seed LCG seed.
 #' @return List with `x_t`, `noise`, `signal_coef`, `noise_coef`, `snr`,
@@ -420,7 +420,7 @@ morie_geron_ddpm_forward_process <- function(x0, t, alpha_bar, noise = NULL,
   .morie_gr_fin(X, "x0")
   ab <- as.numeric(alpha_bar)
   .morie_gr_need(length(ab) > 0L, "alpha_bar is empty.")
-  .morie_gr_need(all(ab >= 0 & ab <= 1), "alpha_bar entries must lie in [0, 1].")
+  .morie_gr_need(all(ab >= 0 & ab <= 1), "alpha_bar entries must lie in \[0, 1\].")
   .morie_gr_need(all(diff(ab) <= 1e-12), "alpha_bar must be non-increasing.")
   t <- as.integer(t)
   .morie_gr_need(t >= 0L && t < length(ab), "t must index alpha_bar.")
@@ -544,7 +544,7 @@ morie_geron_ddpm_reverse_step <- function(x_t, t, eps_pred, alpha, alpha_bar,
 
 #' Direct Preference Optimization loss (Geron Ch 15, morie.fn grdpo)
 #'
-#' L = mean log(1 + exp(-beta * [(lp_w - ref_w) - (lp_l - ref_l)])).
+#' L = mean log(1 + exp(-beta * \[(lp_w - ref_w) - (lp_l - ref_l)\])).
 #'
 #' @param logp_w,logp_l,logp_ref_w,logp_ref_l Non-positive log-probability
 #'   vectors of equal length.
@@ -596,7 +596,7 @@ morie_geron_dpo_loss <- function(logp_w, logp_l, logp_ref_w, logp_ref_l,
 #' @param Q,Q_target (n_states, n_actions) matrices.
 #' @param batch List of transitions c(s, a, r, s_next) or
 #'   c(s, a, r, s_next, done); s / a / s_next are 0-based.
-#' @param gamma Discount in [0, 1].
+#' @param gamma Discount in \[0, 1\].
 #' @return List with `loss`, `targets`, `predictions`, `td_errors`,
 #'   `max_abs_td_error`, `n_terminal`.
 #' @export
@@ -615,7 +615,7 @@ morie_geron_dqn_loss <- function(Q, Q_target, batch, gamma = 0.99) {
   nS <- nrow(Qa)
   nA <- ncol(Qa)
   gamma <- as.numeric(gamma)
-  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in [0, 1].")
+  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in \[0, 1\].")
   rows <- batch
   .morie_gr_need(length(rows) > 0L, "batch is empty.")
   targets <- numeric(length(rows))
@@ -625,9 +625,9 @@ morie_geron_dqn_loss <- function(Q, Q_target, batch, gamma = 0.99) {
     tr <- rows[[k]]
     .morie_gr_need(
       length(tr) %in% c(4L, 5L),
-      "batch rows must be (s, a, r, s_next[, done])."
+      "batch rows must be (s, a, r, s_next\[, done\])."
     )
-    s <- as.integer(tr[[1]])
+    s <- as.integer(tr[\[1\]])
     a <- as.integer(tr[[2]])
     r <- as.numeric(tr[[3]])
     s2 <- as.integer(tr[[4]])
@@ -841,7 +841,7 @@ morie_geron_early_stopping <- function(X_train, y_train, X_val, y_val, n_iter,
 #' @examples
 #' x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
 #' morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1),
-#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1,
+#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc\[1\]/t, c(1,
 #'         2, 3), 4)
 morie_geron_encoder_decoder_seq2seq <- function(encoder, decoder, x, max_out_len,
                                                 start_token = NULL,
@@ -889,7 +889,7 @@ morie_geron_encoder_decoder_seq2seq <- function(encoder, decoder, x, max_out_len
 #'
 #' @param X,y,theta Design, targets and parameters.
 #' @param alpha Non-negative L1 weight.
-#' @param penalize_intercept Include theta[1] in the penalty.
+#' @param penalize_intercept Include theta\[1\] in the penalty.
 #' @return List with `cost`, `mse`, `l1_penalty`, `l1_norm`, `n_zero`.
 #' @export
 #' @examples
@@ -922,8 +922,8 @@ morie_geron_lasso_cost <- function(X, y, theta, alpha,
 #'
 #' @param X,y,theta Design, targets and parameters.
 #' @param alpha Non-negative penalty weight.
-#' @param r L1 mix ratio in [0, 1].
-#' @param penalize_intercept Include theta[1] in both penalties.
+#' @param r L1 mix ratio in \[0, 1\].
+#' @param penalize_intercept Include theta\[1\] in both penalties.
 #' @return List with `cost`, `mse`, `l1_penalty`, `l2_penalty`,
 #'   `l1_norm`, `l2_norm_sq`.
 #' @export
@@ -937,7 +937,7 @@ morie_geron_elastic_net_cost <- function(X, y, theta, alpha, r,
   alpha <- as.numeric(alpha)
   r <- as.numeric(r)
   .morie_gr_need(is.finite(alpha) && alpha >= 0, "alpha must be non-negative and finite.")
-  .morie_gr_need(r >= 0 && r <= 1, "r must lie in [0, 1].")
+  .morie_gr_need(r >= 0 && r <= 1, "r must lie in \[0, 1\].")
   inner <- morie_geron_lasso_cost(X, y, theta, r * alpha,
     penalize_intercept = penalize_intercept
   )
@@ -956,7 +956,7 @@ morie_geron_elastic_net_cost <- function(X, y, theta, alpha, r,
 #'
 #' @param X,y,theta Design, targets and parameters.
 #' @param alpha Non-negative weight; the penalty uses 2 * alpha.
-#' @param penalize_intercept Include theta[1] in the penalty.
+#' @param penalize_intercept Include theta\[1\] in the penalty.
 #' @return List with `cost`, `mse`, `l1_penalty`, `l1_norm`,
 #'   `effective_alpha`.
 #' @export
@@ -983,8 +983,8 @@ morie_geron_ch4_lasso_regression_cost_function <- function(X, y, theta, alpha,
 #'
 #' @param X,y,theta Design, targets and parameters.
 #' @param alpha Non-negative penalty weight.
-#' @param r L1 mix ratio in [0, 1].
-#' @param penalize_intercept Include theta[1] in both penalties.
+#' @param r L1 mix ratio in \[0, 1\].
+#' @param penalize_intercept Include theta\[1\] in both penalties.
 #' @return List with `cost`, `mse`, `l1_penalty`, `l2_penalty`,
 #'   `l1_norm`, `l2_norm_sq`.
 #' @export
@@ -998,7 +998,7 @@ morie_geron_ch4_elastic_net_cost_function <- function(X, y, theta, alpha, r,
   alpha <- as.numeric(alpha)
   r <- as.numeric(r)
   .morie_gr_need(is.finite(alpha) && alpha >= 0, "alpha must be non-negative and finite.")
-  .morie_gr_need(r >= 0 && r <= 1, "r must lie in [0, 1].")
+  .morie_gr_need(r >= 0 && r <= 1, "r must lie in \[0, 1\].")
   inner <- morie_geron_lasso_cost(X, y, theta, 2 * r * alpha,
     penalize_intercept = penalize_intercept
   )
@@ -1086,7 +1086,7 @@ morie_geron_shannon_entropy <- function(y, base = 2) {
 #' P(greedy) = 1 - eps + eps/|A|. Actions returned 0-based.
 #'
 #' @param Q_s Action values for one state.
-#' @param eps Exploration rate in [0, 1].
+#' @param eps Exploration rate in \[0, 1\].
 #' @param seed LCG seed; two uniforms are drawn (explore test, then
 #'   action) exactly as in Python.
 #' @return List with `action`, `greedy_action`, `explored`,
@@ -1099,7 +1099,7 @@ morie_geron_epsilon_greedy <- function(Q_s, eps, seed = 0) {
   .morie_gr_need(length(Q) > 0L, "Q_s is empty.")
   .morie_gr_fin(Q, "Q_s")
   eps <- as.numeric(eps)
-  .morie_gr_need(eps >= 0 && eps <= 1, "eps must lie in [0, 1].")
+  .morie_gr_need(eps >= 0 && eps <= 1, "eps must lie in \[0, 1\].")
   A <- length(Q)
   greedy <- which.max(Q) - 1L
   probs <- rep(eps / A, A)
@@ -1366,7 +1366,7 @@ morie_geron_fcn_upsample <- function(X, W, stride = 2) {
     for (j in seq_len(Wi)) {
       ri <- ((i - 1L) * s + 1L):((i - 1L) * s + kh)
       rj <- ((j - 1L) * s + 1L):((j - 1L) * s + kw)
-      Y[ri, rj] <- Y[ri, rj] + A[i, j] * K
+      Y[ri, rj] <- Y[ri, rj] + A\[i, j\] * K
       counts[ri, rj] <- counts[ri, rj] + 1L
     }
   }
@@ -1727,10 +1727,10 @@ morie_geron_fp16_mixed_precision <- function(loss, S, gradients = NULL) {
 #' GAN minimax objective (Geron Ch 17, morie.fn grgan)
 #'
 #' V = mean log D(x) + mean log(1 - D(G(z))) after clipping to
-#' [eps, 1-eps]; the accuracy uses the UNCLIPPED probabilities.
+#' \[eps, 1-eps\]; the accuracy uses the UNCLIPPED probabilities.
 #'
 #' @param real,fake Real and fake batches (used only for their sizes).
-#' @param D_real,D_fake Discriminator probabilities in [0, 1].
+#' @param D_real,D_fake Discriminator probabilities in \[0, 1\].
 #' @param eps Clip guard in (0, 0.5).
 #' @return List with `value`, `d_loss`, `g_loss_nonsaturating`,
 #'   `g_loss_saturating`, `d_accuracy`, `at_equilibrium`.
@@ -1738,7 +1738,7 @@ morie_geron_fp16_mixed_precision <- function(loss, S, gradients = NULL) {
 #' @examples
 #' x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
 #' morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1),
-#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1,
+#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc\[1\]/t, c(1,
 #'         2, 3), 4)
 #' morie_geron_gan_minimax(real = x, fake = x, D_real = x, D_fake = x)
 morie_geron_gan_minimax <- function(real, fake, D_real, D_fake, eps = 1e-12) {
@@ -1750,8 +1750,8 @@ morie_geron_gan_minimax <- function(real, fake, D_real, D_fake, eps = 1e-12) {
   )
   .morie_gr_fin(dr, "D_real")
   .morie_gr_fin(df, "D_fake")
-  .morie_gr_need(all(dr >= 0 & dr <= 1), "D_real must lie in [0, 1].")
-  .morie_gr_need(all(df >= 0 & df <= 1), "D_fake must lie in [0, 1].")
+  .morie_gr_need(all(dr >= 0 & dr <= 1), "D_real must lie in \[0, 1\].")
+  .morie_gr_need(all(df >= 0 & df <= 1), "D_fake must lie in \[0, 1\].")
   eps <- as.numeric(eps)
   .morie_gr_need(eps > 0 && eps < 0.5, "eps must lie in (0, 0.5).")
   drc <- pmin(pmax(dr, eps), 1 - eps)
@@ -1917,7 +1917,7 @@ morie_geron_gini_impurity_grgin <- function(y) {
 
 #' Gaussian mixture log-likelihood (Geron Ch 9, morie.fn grgmll)
 #'
-#' log L = sum_i logsumexp_k [log pi_k + log N(x_i | mu_k, Sigma_k)],
+#' log L = sum_i logsumexp_k \[log pi_k + log N(x_i | mu_k, Sigma_k)\],
 #' the component densities computed through a Cholesky solve.
 #'
 #' @param X (m, d) data.
@@ -2137,7 +2137,7 @@ morie_geron_gaussian_random_projection <- function(X, d, seed = 0) {
 #' PORTED AS THE PYTHON HAS IT: this module uses the tied-gate
 #' convention h = (1 - z) h_prev + z h_tilde (rather than the more common
 #' z h_prev + (1 - z) h_tilde), the gates act on the concatenation
-#' [h, x] and the candidate on [r * h, x], and there are no biases.
+#' \[h, x\] and the candidate on \[r * h, x\], and there are no biases.
 #'
 #' @param x_t Input vector.
 #' @param h_prev Previous hidden state.
@@ -2241,7 +2241,7 @@ morie_geron_grid_search_cv <- function(X, y, param_grid, K, fit_score,
         length(s) == 1L && is.finite(s),
         "fit_score must return one finite number."
       )
-      scores[i, k] <- s
+      scores\[i, k\] <- s
     }
   }
   mn <- rowMeans(scores)
@@ -2555,7 +2555,7 @@ morie_geron_johnson_lindenstrauss_bound <- function(n_samples, eps) {
 #'
 #' @param student_logits,teacher_logits (m, K) logit matrices.
 #' @param y 0-based hard labels, length m.
-#' @param alpha Soft/hard mix in [0, 1].
+#' @param alpha Soft/hard mix in \[0, 1\].
 #' @param T Positive temperature.
 #' @return List with `loss`, `ce_hard`, `kl_soft`,
 #'   `kl_student_teacher`, `kl_teacher_student`, `soft_targets`,
@@ -2582,7 +2582,7 @@ morie_geron_knowledge_distillation_loss <- function(student_logits,
     paste0("y must lie in [0, ", K - 1L, "].")
   )
   alpha <- as.numeric(alpha)
-  .morie_gr_need(alpha >= 0 && alpha <= 1, "alpha must lie in [0, 1].")
+  .morie_gr_need(alpha >= 0 && alpha <= 1, "alpha must lie in \[0, 1\].")
   Temp <- as.numeric(T)
   .morie_gr_need(is.finite(Temp) && Temp > 0, "T must be a positive finite temperature.")
   logp_hard <- .morie_gr_log_softmax_rows(S)
@@ -2612,7 +2612,7 @@ morie_geron_knowledge_distillation_loss <- function(student_logits,
 #' extra member. All indices are 0-based.
 #'
 #' @param n Number of instances (at least 2).
-#' @param K Folds in [2, n].
+#' @param K Folds in \[2, n\].
 #' @param shuffle Permute with the LCG Fisher-Yates first.
 #' @param seed LCG seed.
 #' @return List with `splits` (each `train` / `val`), `val_folds`,
@@ -2732,7 +2732,7 @@ morie_geron_kmeans_objective <- function(X, centroids, labels) {
 #' are 0-based.
 #'
 #' @param X (m, n) data.
-#' @param k Centroids in [1, m].
+#' @param k Centroids in \[1, m\].
 #' @param seed LCG seed.
 #' @return List with `centroids`, `indices`, `min_pairwise_distance`,
 #'   `sampling_probabilities`.
@@ -2796,7 +2796,7 @@ morie_geron_kmeans_pp_seeding <- function(X, k, seed = 0) {
 #'
 #' @param X (m, n) data.
 #' @param gamma Positive RBF width parameter.
-#' @param d Components in [1, m].
+#' @param d Components in \[1, m\].
 #' @return List with `projected`, `eigenvalues`, `eigenvectors`,
 #'   `explained_variance_ratio`, `kernel`, `kernel_centered`.
 #' @export
@@ -2933,7 +2933,7 @@ morie_geron_layer_normalization <- function(X, gamma = 1, beta = 0, eps = 1e-05)
 #' distance matrix (numpy argsort kind="stable" == order(method="radix")).
 #'
 #' @param X (m, n) data.
-#' @param k Neighbours in [1, m-1].
+#' @param k Neighbours in \[1, m-1\].
 #' @return List with `lof`, `lrd`, `k_distance`, `neighbors`,
 #'   `most_outlying`.
 #' @export
@@ -3082,7 +3082,7 @@ morie_geron_logistic_cost_gradient <- function(X, y, theta) {
 #' 0..T curve is returned and its monotonicity checked.
 #'
 #' @param eta_min,eta_max Non-negative rates with eta_min <= eta_max.
-#' @param t Step in [0, T].
+#' @param t Step in \[0, T\].
 #' @param T Positive horizon.
 #' @return List with `eta`, `schedule`, `halfway_value`,
 #'   `is_monotone_decreasing`.
@@ -3216,7 +3216,7 @@ morie_geron_learning_curves <- function(X, y, n_splits = 10,
 
 #' LSTM cell forward pass (Geron Ch 15, morie.fn grlstc)
 #'
-#' c = f c_prev + i g, h = o tanh(c); every gate acts on [h_prev, x_t].
+#' c = f c_prev + i g, h = o tanh(c); every gate acts on \[h_prev, x_t\].
 #'
 #' @param x_t,h_prev,c_prev State vectors.
 #' @param Wf,Wi,Wg,Wo (H, H + n) gate weights.
@@ -3365,7 +3365,7 @@ morie_geron_gan_mode_collapse_metric <- function(samples, true_modes,
 #'
 #' @param X,y,theta Data and starting parameters.
 #' @param eta Positive learning rate.
-#' @param b Batch size in [1, m].
+#' @param b Batch size in \[1, m\].
 #' @param n_iter Number of steps.
 #' @param seed Base LCG seed.
 #' @return List with `theta`, `cost_history`, `theta_history`,
@@ -3509,7 +3509,7 @@ morie_geron_multi_head_attention <- function(Q, K, V, WQ, WK, WV, WO, h,
 #' @examples
 #' x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
 #' morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1),
-#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1,
+#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc\[1\]/t, c(1,
 #'         2, 3), 4)
 #' morie_geron_multilabel_classification(X = x, Y = x)
 morie_geron_multilabel_classification <- function(X, Y, thresholds = 0.5) {
@@ -3866,8 +3866,8 @@ morie_geron_max_pooling <- function(X, k = 2, stride = NULL) {
         ((j - 1L) * s + 1L):((j - 1L) * s + k),
         drop = FALSE
       ]
-      Y[i, j] <- max(win)
-      arg[i, j] <- which.max(as.numeric(t(win))) - 1L
+      Y\[i, j\] <- max(win)
+      arg\[i, j\] <- which.max(as.numeric(t(win))) - 1L
     }
   }
   list(
@@ -3903,7 +3903,7 @@ morie_geron_linreg_mse_cost_grmse <- function(X, y, theta) {
 #'
 #' y_hat = theta_0 + sum_j theta_j x_j.
 #'
-#' @param theta Length n+1 parameters, theta[1] the bias.
+#' @param theta Length n+1 parameters, theta\[1\] the bias.
 #' @param x Instance vector or (m, n) batch.
 #' @return List with `prediction`, `contributions` (single instance
 #'   only), `bias`.
@@ -4023,8 +4023,8 @@ morie_geron_ch4_mse_gradient_vector <- function(X, y, theta) {
 #'
 #' y_hat = 1 iff p_hat >= threshold; the boundary goes positive.
 #'
-#' @param p_hat Probabilities in [0, 1].
-#' @param threshold Cut in [0, 1].
+#' @param p_hat Probabilities in \[0, 1\].
+#' @param threshold Cut in \[0, 1\].
 #' @return List with `y_hat`, `positive_rate`, `margin`.
 #' @export
 #' @examples
@@ -4035,9 +4035,9 @@ morie_geron_ch4_logistic_regression_prediction <- function(p_hat,
   p <- p_hat
   .morie_gr_need(length(p) > 0L, "p_hat is empty.")
   .morie_gr_fin(p, "p_hat")
-  .morie_gr_need(all(p >= 0 & p <= 1), "p_hat must be probabilities in [0, 1].")
+  .morie_gr_need(all(p >= 0 & p <= 1), "p_hat must be probabilities in \[0, 1\].")
   threshold <- as.numeric(threshold)
-  .morie_gr_need(threshold >= 0 && threshold <= 1, "threshold must lie in [0, 1].")
+  .morie_gr_need(threshold >= 0 && threshold <= 1, "threshold must lie in \[0, 1\].")
   yhat <- (p >= threshold) * 1L
   list(
     y_hat = yhat, positive_rate = mean(yhat), margin = p - threshold,
@@ -4761,7 +4761,7 @@ morie_geron_one_vs_one <- function(X, y, base_fit = NULL, eta = 0.5,
 #' which makes the projection deterministic across BLAS builds.
 #'
 #' @param X (m, n) data.
-#' @param d Components in [1, min(m, n)].
+#' @param d Components in \[1, min(m, n)\].
 #' @return List with `projection`, `components`, `explained_variance`,
 #'   `explained_variance_ratio`, `cumulative_ratio`, `singular_values`,
 #'   `mean`.
@@ -4787,7 +4787,7 @@ morie_geron_pca_projection <- function(X, d) {
   V <- t(sv$v)[seq_len(d), , drop = FALSE]
   for (i in seq_len(d)) {
     j <- which.max(abs(V[i, ]))
-    if (V[i, j] < 0) V[i, ] <- -V[i, ]
+    if (V\[i, j\] < 0) V[i, ] <- -V[i, ]
   }
   Z <- Xc %*% t(V)
   total <- sum(sv$d^2)
@@ -4840,7 +4840,7 @@ morie_geron_sinusoidal_positional_encoding <- function(seq_len, d_model,
 #' the U vectors are diagonal.
 #'
 #' @param x_t,h_prev,c_prev State vectors.
-#' @param Wf,Wi,Wg,Wo (H, H + n) gate weights on [h_prev, x_t].
+#' @param Wf,Wi,Wg,Wo (H, H + n) gate weights on \[h_prev, x_t\].
 #' @param Uf,Ui,Uo Length-H diagonal peepholes.
 #' @param bf,bi,bg,bo Length-H biases.
 #' @return List with `h`, `c`, `f`, `i`, `g`, `o`.
@@ -4908,7 +4908,7 @@ morie_geron_peephole_lstm_cell <- function(x_t, h_prev, c_prev, Wf, Wi, Wg, Wo,
 #'
 #' @param priorities TD errors (default) or explicit positive priorities.
 #' @param N Replay buffer size; defaults to the number of priorities.
-#' @param alpha,beta Prioritisation and correction exponents in [0, 1].
+#' @param alpha,beta Prioritisation and correction exponents in \[0, 1\].
 #' @param eps Non-negative floor added to |delta|.
 #' @param are_td_errors Treat `priorities` as TD errors.
 #' @return List with `weights`, `probabilities`, `priorities`,
@@ -4926,8 +4926,8 @@ morie_geron_prioritized_experience_weight <- function(priorities, N = NULL,
   .morie_gr_fin(d, "priorities")
   alpha <- as.numeric(alpha)
   beta <- as.numeric(beta)
-  .morie_gr_need(alpha >= 0 && alpha <= 1, "alpha must lie in [0, 1].")
-  .morie_gr_need(beta >= 0 && beta <= 1, "beta must lie in [0, 1].")
+  .morie_gr_need(alpha >= 0 && alpha <= 1, "alpha must lie in \[0, 1\].")
+  .morie_gr_need(beta >= 0 && beta <= 1, "beta must lie in \[0, 1\].")
   eps <- as.numeric(eps)
   .morie_gr_need(eps >= 0, "eps must be non-negative.")
   if (isTRUE(are_td_errors)) {
@@ -5009,7 +5009,7 @@ morie_geron_perceiver_io <- function(X, Z_latent, output_queries, n_iter = 1) {
 
 #' Polynomial feature expansion (Geron Ch 4, morie.fn grpoly)
 #'
-#' [1, X, X^2, ..., X^d] per feature, powers only, no cross terms, so
+#' \[1, X, X^2, ..., X^d\] per feature, powers only, no cross terms, so
 #' the column order is (bias), then all features at power 1, then all at
 #' power 2, and so on. `powers` entries are 0-based (feature, power)
 #' pairs with (0, 0) marking the bias.
@@ -5342,7 +5342,7 @@ morie_geron_weight_pruning <- function(W, sparsity) {
 #' Symmetric quantization kernel (morie.fn grq8 `quantize_symmetric`)
 #'
 #' @param x Numeric object.
-#' @param bits Width in [2, 32].
+#' @param bits Width in \[2, 32\].
 #' @return List with `q`, `scale`, `dequantized`.
 #' @export
 #' @examples
@@ -5353,7 +5353,7 @@ morie_geron_quantize_symmetric <- function(x, bits = 8) {
   .morie_gr_need(length(a) > 0L, "x is empty.")
   .morie_gr_fin(a, "x")
   bits <- as.integer(bits)
-  .morie_gr_need(bits >= 2L && bits <= 32L, "bits must lie in [2, 32].")
+  .morie_gr_need(bits >= 2L && bits <= 32L, "bits must lie in \[2, 32\].")
   qmax <- 2^(bits - 1L) - 1
   amax <- max(abs(a))
   .morie_gr_need(amax != 0, "x is all zeros.")
@@ -5367,7 +5367,7 @@ morie_geron_quantize_symmetric <- function(x, bits = 8) {
 #' s = max|x|/qmax, q = round(x/s) clipped; zero maps to zero exactly.
 #'
 #' @param x Numeric object.
-#' @param bits Width in [2, 32].
+#' @param bits Width in \[2, 32\].
 #' @return List with `q`, `scale`, `dequantized`, `max_abs_error`,
 #'   `snr_db`.
 #' @export
@@ -5397,7 +5397,7 @@ morie_geron_int8_quantization <- function(x, bits = 8) {
 #'
 #' @param x Numeric object.
 #' @param s Positive step size.
-#' @param bits Width in [2, 32].
+#' @param bits Width in \[2, 32\].
 #' @param upstream_grad Optional gradient of the same shape.
 #' @return List with `y`, `q`, `ste_mask`, `grad_x`, `clipped_fraction`.
 #' @export
@@ -5411,7 +5411,7 @@ morie_geron_quantization_aware_training <- function(x, s, bits = 8,
   s <- as.numeric(s)
   .morie_gr_need(is.finite(s) && s > 0, "s must be a positive finite step.")
   bits <- as.integer(bits)
-  .morie_gr_need(bits >= 2L && bits <= 32L, "bits must lie in [2, 32].")
+  .morie_gr_need(bits >= 2L && bits <= 32L, "bits must lie in \[2, 32\].")
   qmax <- 2^(bits - 1L) - 1
   q <- pmin(pmax(round(a / s), -qmax), qmax)
   y <- q * s
@@ -5436,14 +5436,14 @@ morie_geron_quantization_aware_training <- function(x, s, bits = 8,
 
 #' Q-learning update (Geron Ch 18, morie.fn grql)
 #'
-#' Q(s,a) += alpha [r + gamma max_a' Q(s',a') - Q(s,a)]; `done` drops the
+#' Q(s,a) += alpha \[r + gamma max_a' Q(s',a') - Q(s,a)\]; `done` drops the
 #' bootstrap. State and action indices are 0-based.
 #'
 #' @param Q (n_states, n_actions) table.
 #' @param s,a,s_next 0-based indices.
 #' @param r Finite reward.
 #' @param alpha Step size in (0, 1].
-#' @param gamma Discount in [0, 1].
+#' @param gamma Discount in \[0, 1\].
 #' @param done Terminal flag.
 #' @return List with `Q`, `old_value`, `new_value`, `target`,
 #'   `td_error`, `max_next`.
@@ -5472,7 +5472,7 @@ morie_geron_q_learning_update <- function(Q, s, a, r, s_next, alpha, gamma,
   alpha <- as.numeric(alpha)
   .morie_gr_need(alpha > 0 && alpha <= 1, "alpha must lie in (0, 1].")
   gamma <- as.numeric(gamma)
-  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in [0, 1].")
+  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in \[0, 1\].")
   old <- Qm[s + 1L, a + 1L]
   best_next <- max(Qm[s_next + 1L, ])
   target <- if (isTRUE(done)) r else r + gamma * best_next
@@ -5557,7 +5557,7 @@ morie_geron_static_ptq <- function(model, calibration_data, bits = 8,
 #'
 #' Queries at full resolution, keys and values from an R x R
 #' average-pooled map. The (H, W, d) array is flattened ROW-MAJOR into
-#' H*W tokens, which in R means indexing [i, j, ] in that order.
+#' H*W tokens, which in R means indexing \[i, j, \] in that order.
 #'
 #' @param X (H, W, d_model) array.
 #' @param WQ,WK,WV Projections with d_model rows.
@@ -5598,7 +5598,7 @@ morie_geron_pyramid_vit_stage <- function(X, WQ, WK, WV, reduction_ratio = 2) {
   tokens <- matrix(0, H * W, d)
   for (i in seq_len(H)) {
     for (j in seq_len(W)) {
-      tokens[(i - 1L) * W + j, ] <- A[i, j, ]
+      tokens[(i - 1L) * W + j, ] <- A\[i, j, \]
     }
   }
   hh <- H %/% R
@@ -5968,7 +5968,7 @@ morie_geron_reparameterization_trick <- function(mu, logvar, eps = NULL,
 #' 1/(1-gamma).
 #'
 #' @param rewards Reward sequence.
-#' @param gamma Discount in [0, 1].
+#' @param gamma Discount in \[0, 1\].
 #' @return List with `returns`, `G0`, `effective_horizon`.
 #' @export
 #' @examples
@@ -5978,7 +5978,7 @@ morie_geron_discounted_return <- function(rewards, gamma) {
   .morie_gr_need(length(r) > 0L, "rewards is empty.")
   .morie_gr_fin(r, "rewards")
   gamma <- as.numeric(gamma)
-  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in [0, 1].")
+  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in \[0, 1\].")
   G <- numeric(length(r))
   acc <- 0
   for (t in rev(seq_along(r))) {
@@ -6001,7 +6001,7 @@ morie_geron_discounted_return <- function(rewards, gamma) {
 #'
 #' @param X,y,theta Design, targets and parameters.
 #' @param alpha Non-negative penalty.
-#' @param intercept Treat theta[1] as an unpenalised bias.
+#' @param intercept Treat theta\[1\] as an unpenalised bias.
 #' @return List with `cost`, `mse`, `penalty`, `gradient`.
 #' @export
 #' @examples
@@ -6158,7 +6158,7 @@ morie_geron_rmse_grrmse <- function(y_true, y_pred) {
 #' @param param_dist Named list of specs: a function(u), a length-2
 #'   numeric range, or a vector of discrete choices.
 #' @param n_iter Configurations to draw.
-#' @param K Folds in [2, m].
+#' @param K Folds in \[2, m\].
 #' @param fit_score Required scoring function.
 #' @param seed LCG seed.
 #' @return List with `best_params`, `best_score`, `results`,
@@ -7005,7 +7005,7 @@ morie_geron_symbolic_differentiation <- function(expression, var = "x",
 #' @param w Length-d weights.
 #' @param b Finite bias.
 #' @param pooling "mean", "max" or "sum".
-#' @param threshold Label cut in [0, 1].
+#' @param threshold Label cut in \[0, 1\].
 #' @return List with `probability`, `label`, `logit`, `pooled`,
 #'   `token_contributions`.
 #' @export
@@ -7030,7 +7030,7 @@ morie_geron_sentiment_binary <- function(token_ids, E, w, b = 0,
   b <- as.numeric(b)
   .morie_gr_need(is.finite(b), "b must be finite.")
   threshold <- as.numeric(threshold)
-  .morie_gr_need(threshold >= 0 && threshold <= 1, "threshold must lie in [0, 1].")
+  .morie_gr_need(threshold >= 0 && threshold <= 1, "threshold must lie in \[0, 1\].")
   V <- Em[ids + 1L, , drop = FALSE]
   pooled <- switch(pooling,
     mean = colMeans(V),
@@ -7139,7 +7139,7 @@ morie_geron_stacked_autoencoder <- function(x, layer_weights,
 #' column raises.
 #'
 #' @param X Vector or matrix.
-#' @param ddof Denominator correction in [0, m-1].
+#' @param ddof Denominator correction in \[0, m-1\].
 #' @return List with `scaled`, `mean`, `scale`.
 #' @export
 #' @examples
@@ -7224,7 +7224,7 @@ morie_geron_stacking_predictor <- function(base_preds, y, blender = NULL,
 #' @param X (H, W, d_model) array.
 #' @param window_size M dividing both H and W.
 #' @param WQ,WK,WV Projections with d_model rows.
-#' @param shift Cyclic shift in [0, M-1].
+#' @param shift Cyclic shift in \[0, M-1\].
 #' @return List with `output`, `window_weights`, `n_windows`,
 #'   `tokens_per_window`, `shift`.
 #' @export
@@ -7302,14 +7302,14 @@ morie_geron_swin_window_attention <- function(X, window_size, WQ, WK, WV,
 
 #' TD(0) value update (Geron Ch 18, morie.fn grtd0)
 #'
-#' V(s) += alpha [r + gamma V(s') - V(s)]; `done` drops the bootstrap.
+#' V(s) += alpha \[r + gamma V(s') - V(s)\]; `done` drops the bootstrap.
 #' States are 0-based.
 #'
 #' @param V State value vector.
 #' @param state,next_state 0-based indices.
 #' @param reward Finite reward.
 #' @param alpha Step size in (0, 1].
-#' @param gamma Discount in [0, 1].
+#' @param gamma Discount in \[0, 1\].
 #' @param done Terminal flag.
 #' @return List with `V`, `old_value`, `new_value`, `target`,
 #'   `td_error`.
@@ -7332,7 +7332,7 @@ morie_geron_td_zero_update <- function(V, state, next_state, reward, alpha,
   alpha <- as.numeric(alpha)
   .morie_gr_need(alpha > 0 && alpha <= 1, "alpha must lie in (0, 1].")
   gamma <- as.numeric(gamma)
-  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in [0, 1].")
+  .morie_gr_need(gamma >= 0 && gamma <= 1, "gamma must lie in \[0, 1\].")
   old <- Vv[s + 1L]
   target <- if (isTRUE(done)) reward else reward + gamma * Vv[sn + 1L]
   td <- target - old
@@ -7657,7 +7657,7 @@ morie_geron_temperature_sampling <- function(logits, T = 1) {
 #' and zeroes the rest. `kept_indices` are 0-based and ascending.
 #'
 #' @param logits Score vector.
-#' @param k Truncation size in [1, length(logits)].
+#' @param k Truncation size in \[1, length(logits)\].
 #' @param T Positive temperature.
 #' @return List with `probabilities`, `kept_indices`, `kept_mass`,
 #'   `full_probabilities`, `entropy`.
@@ -7787,7 +7787,7 @@ morie_geron_tree_regression_leaf <- function(y, leaf_mask = NULL) {
 
 #' VAE evidence lower bound (Geron Ch 17, morie.fn grvae)
 #'
-#' ELBO = E_q[log p(x|z)] - beta KL, both terms divided by the batch
+#' ELBO = E_q\[log p(x|z)\] - beta KL, both terms divided by the batch
 #' size; the KL is the closed form.
 #'
 #' @param x Input batch.
@@ -7821,8 +7821,8 @@ morie_geron_vae_elbo <- function(x, mu, logvar, recon,
   recon_term <- if (likelihood == "gaussian") {
     -0.5 * sum((X - R)^2) / m
   } else if (likelihood == "bernoulli") {
-    .morie_gr_need(all(R >= 0 & R <= 1), "bernoulli recon must lie in [0, 1].")
-    .morie_gr_need(all(X >= 0 & X <= 1), "bernoulli x must lie in [0, 1].")
+    .morie_gr_need(all(R >= 0 & R <= 1), "bernoulli recon must lie in \[0, 1\].")
+    .morie_gr_need(all(X >= 0 & X <= 1), "bernoulli x must lie in \[0, 1\].")
     Rc <- pmin(pmax(R, 1e-12), 1 - 1e-12)
     sum(X * log(Rc) + (1 - X) * log(1 - Rc)) / m
   } else {
@@ -8096,7 +8096,7 @@ morie_geron_wordpiece_tokenizer_score <- function(counts, pairs) {
 
 #' XGBoost regularized split gain (Geron Ch 7, morie.fn grxgbg)
 #'
-#' Gain = 0.5 [GL^2/(HL+l) + GR^2/(HR+l) - G^2/(H+l)] - gamma; a
+#' Gain = 0.5 \[GL^2/(HL+l) + GR^2/(HR+l) - G^2/(H+l)\] - gamma; a
 #' negative gain means prune.
 #'
 #' @param GL,HL,GR,HR Gradient and Hessian sums per child.

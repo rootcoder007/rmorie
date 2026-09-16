@@ -276,9 +276,9 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #' \code{note}.
 #' @export
 #' @examples
-#' f <- function(x) sum((x - c(1, 2))^2) + 0.5 * x[1]^2 * x[2]^2
-#' g <- function(x) c(2 * (x[1] - 1) + x[1] * x[2]^2,
-#'                    2 * (x[2] - 2) + x[1]^2 * x[2])
+#' f <- function(x) sum((x - c(1, 2))^2) + 0.5 * x\[1\]^2 * x[2]^2
+#' g <- function(x) c(2 * (x\[1\] - 1) + x\[1\] * x[2]^2,
+#'                    2 * (x[2] - 2) + x\[1\]^2 * x[2])
 #' r <- nonlinear_cg(f, g, x0 = c(0, 0))
 #' str(r, max.level = 1)
 nonlinear_cg <- function(f, grad, x0, beta = "fletcher-reeves",

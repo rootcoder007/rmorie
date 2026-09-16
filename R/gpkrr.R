@@ -31,7 +31,7 @@ Krrdual <- function(X, y, X_test = NULL, lam = 1e-2, gamma = 1) {
   yv <- .s03vec(y)
   n <- nrow(Xm)
   K <- matrix(0, n, n)
-  for (i in seq_len(n)) for (j in seq_len(n)) K[i, j] <- rbf(Xm[i, ], Xm[j, ])
+  for (i in seq_len(n)) for (j in seq_len(n)) K\[i, j\] <- rbf(Xm[i, ], Xm[j, ])
   A <- K
   for (i in seq_len(n)) A[i, i] <- A[i, i] + as.numeric(lam)
   alpha <- .s03cholsolve(A, yv)
@@ -49,7 +49,7 @@ Krrdual <- function(X, y, X_test = NULL, lam = 1e-2, gamma = 1) {
     for (i in seq_len(n)) q <- q + ks[i] * w[i]
     var_[t] <- rbf(Xt[t, ], Xt[t, ]) - q
   }
-  list(estimate = if (length(pred)) pred[1] else NaN, pred = pred, var = var_,
+  list(estimate = if (length(pred)) pred\[1\] else NaN, pred = pred, var = var_,
        alpha = alpha, lam = as.numeric(lam),
        method = "Dual ridge alpha = (K + lambda I)^-1 y (Saunders et al. 1998); equals the GP posterior mean")
 }

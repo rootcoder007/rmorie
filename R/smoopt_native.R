@@ -213,9 +213,9 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
   d1 <- as.numeric(a1_new) - a[i]
   d2 <- as.numeric(a2_new) - a[j]
   b1 <- as.numeric(b) + as.numeric(E[i]) +
-    yy[i] * d1 * K[i, i] + yy[j] * d2 * K[i, j]
+    yy[i] * d1 * K[i, i] + yy[j] * d2 * K\[i, j\]
   b2 <- as.numeric(b) + as.numeric(E[j]) +
-    yy[i] * d1 * K[i, j] + yy[j] * d2 * K[j, j]
+    yy[i] * d1 * K\[i, j\] + yy[j] * d2 * K[j, j]
   free1 <- as.numeric(a1_new) > .SMOOPT_EPS &&
     as.numeric(a1_new) < as.numeric(C) - .SMOOPT_EPS
   free2 <- as.numeric(a2_new) > .SMOOPT_EPS &&

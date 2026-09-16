@@ -3,7 +3,7 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 533-577], Chapter 13, Section 13.4, pp. 542-543, read as a
+#' volume \[Pages 533-577\], Chapter 13, Section 13.4, pp. 542-543, read as a
 #' rendered page.  "The max pooling operation summarizes the input as the
 #' maximum within a rectangular neighborhood"; the window slides by the
 #' stride and the output size in the l-th layer is
@@ -42,6 +42,6 @@ Maxpl <- function(x, kernel, stride) {
     pooled[i] <- v[best]
     where[i] <- best - 1L
   }
-  list(estimate = pooled[1], pooled = pooled, argmax = where, n = m,
+  list(estimate = pooled\[1\], pooled = pooled, argmax = where, n = m,
        method = "y[i] = max(x[i*S : i*S+P]), Chapter 13 Sect. 13.4 with L' = (L-P)/S + 1")
 }

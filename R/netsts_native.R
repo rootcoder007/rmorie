@@ -214,7 +214,7 @@
 .netsts_gradient_retention <- function(forget_value, steps) {
   f <- as.numeric(forget_value)
   if (f < 0 || f > 1)
-    stop("netsts: the forget value must be in [0, 1]")
+    stop("netsts: the forget value must be in \[0, 1\]")
   f ^ as.integer(steps)
 }
 

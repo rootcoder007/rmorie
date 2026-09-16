@@ -36,7 +36,7 @@
   in_tree <- rep(FALSE, n)
   key <- rep(Inf, n)
   parent <- rep(-1L, n)
-  key[1] <- 0
+  key\[1\] <- 0
   edges <- list()
   for (s in seq_len(n)) {
     u <- -1L
@@ -212,7 +212,7 @@ morie_hdbsc <- function(X, min_pts = 5, min_cluster_size = 5,
     ok_r <- szr >= mcs
     if (ok_l && ok_r) {
       for (pair in list(c(l, szl), c(r, szr))) {
-        side <- pair[1]
+        side <- pair\[1\]
         sz <- pair[2]
         c_ <- next_cluster
         next_cluster <- next_cluster + 1L
@@ -246,7 +246,7 @@ morie_hdbsc <- function(X, min_pts = 5, min_cluster_size = 5,
   # stability (Eq. 3)
   stability <- setNames(rep(0, length(cl_ids)), as.character(cl_ids))
   for (row in rows) {
-    parent <- row[1]
+    parent <- row\[1\]
     lam <- row[3]
     sz <- row[4]
     if (is.infinite(lam)) next

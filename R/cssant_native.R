@@ -90,7 +90,7 @@
   ever <- apply(Dm, 1, function(r) any(r > 0))
   if (any(ever))
     g[ever] <- apply(Dm[ever, , drop = FALSE], 1,
-                     function(r) which(r > 0)[1] - 1)
+                     function(r) which(r > 0)\[1\] - 1)
   list(g = g, Dm = Dm, units = p$units, periods = p$periods)
 }
 
@@ -181,7 +181,7 @@ morie_aggregateatt <- function(gt, g, n_units, weights_by = "cohort_size") {
     s <- sum(wts)
     if (s <= 0) return(c(NA_real_, NA_real_))
     est <- sum(wts / s * vapply(kk, function(k) gt[[k]]$att, numeric(1)))
-    infl <- numeric(length(gt[[kk[1]]]$infl))
+    infl <- numeric(length(gt[[kk\[1\]]]$infl))
     for (m in seq_along(kk)) infl <- infl + wts[m] / s * gt[[kk[m]]]$infl
     c(est, sqrt(sum(infl^2) / n_units^2))
   }
@@ -201,7 +201,7 @@ morie_aggregateatt <- function(gt, g, n_units, weights_by = "cohort_size") {
     kk <- keys[tof == tt]
     calendar[[sprintf("%.17g", tt)]] <- combine(kk, w[kk])
   }
-  list(overall = ov[1], overall_se = ov[2], event = event,
+  list(overall = ov\[1\], overall_se = ov[2], event = event,
        cohort = cohort, calendar = calendar)
 }
 

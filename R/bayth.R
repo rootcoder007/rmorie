@@ -3,14 +3,14 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 171-208], Chapter 6, Section 6.1 "Bayes Theorem and Bayesian
+#' volume \[Pages 171-208\], Chapter 6, Section 6.1 "Bayes Theorem and Bayesian
 #' Linear Regression", pp. 171-172, read as a rendered page.  The section
 #' gives, unnumbered, immediately before equation (6.1),
 #'
 #'   f(theta|y) = f(y, theta)/f(y) = f(theta) f(y|theta) / f(y)
 #'              proportional to f(theta) L(theta; y),
 #'
-#' "where f(y) = integral f(y|theta) f(theta) d theta = E_theta[f(y|theta)] is
+#' "where f(y) = integral f(y|theta) f(theta) d theta = E_theta\[f(y|theta)\] is
 #' the marginal distribution".  It adds that "once a sample of the posterior
 #' distribution is obtained, estimation of a parameter is often found by
 #' averaging the sample values", which is the posterior mean reported here.

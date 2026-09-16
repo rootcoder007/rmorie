@@ -265,7 +265,7 @@ morie_otis_astcmb <- function(df,
                          paste(setdiff(needed, names(df)), collapse = ", "))
     ))
   }
-  a <- .otis_binarise(df[[alert_cols[1]]])
+  a <- .otis_binarise(df[[alert_cols\[1\]]])
   b <- .otis_binarise(df[[alert_cols[2]]])
   cc <- .otis_binarise(df[[alert_cols[3]]])  # not 'c' -- shadows base c()
   flags <- data.frame(
@@ -426,8 +426,8 @@ morie_otis_rctrnd <- function(df,
   }
   key <- paste(df[[year_col]], df[[region_col]], sep = "\u001f")
   agg <- lapply(split(seq_len(nrow(df)), key), function(idx) {
-    yr <- df[[year_col]][idx[1]]
-    rg <- df[[region_col]][idx[1]]
+    yr <- df[[year_col]][idx\[1\]]
+    rg <- df[[region_col]][idx\[1\]]
     data.frame(year = yr, region = rg,
                n_individuals = length(unique(df[[id_col]][idx])),
                n_placements = length(idx),
@@ -439,7 +439,7 @@ morie_otis_rctrnd <- function(df,
 
   yrs <- sort(unique(trends$year))
   yr_label <- if (length(yrs) >= 2L) sprintf("%s-%s", min(yrs), max(yrs))
-              else as.character(yrs[1])
+              else as.character(yrs\[1\])
 
   .otis_result(
     title = "OTIS restrictive-confinement trends over time",
@@ -509,7 +509,7 @@ morie_otis_otdesc <- function(df,
   freq <- as.integer(table(df[[id_col]]))
   q <- as.numeric(stats::quantile(freq, c(0, 0.25, 0.5, 0.75, 1),
                                   names = FALSE))
-  pmnt_summary <- list(min = q[1], q1 = q[2], median = q[3],
+  pmnt_summary <- list(min = q\[1\], q1 = q[2], median = q[3],
                         mean = mean(freq), q3 = q[4], max = q[5])
 
   .otis_result(
@@ -539,7 +539,7 @@ morie_otis_otdesc <- function(df,
 #'
 #' Wraps a Frisch-Waugh-Lovell partialling-out estimator with
 #' \code{n_folds} cross-fitting on the OLS nuisance functions
-#' \eqn{E[Y|X]} and \eqn{E[D|X]}, then regresses outcome residuals on
+#' \eqn{E\[Y|X\]} and \eqn{E[D|X]}, then regresses outcome residuals on
 #' treatment residuals for the ATE; heteroskedasticity-robust standard
 #' errors. ATT is the ATE divided by the treated share (a simple
 #' weighting approximation; for the production-grade DML use

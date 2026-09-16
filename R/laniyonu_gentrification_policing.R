@@ -49,7 +49,7 @@
 #' df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
 #' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
 #' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
-#' res[[1]]$rho
+#' res[\[1\]]$rho
 NULL
 
 
@@ -66,7 +66,7 @@ NULL
   gent_idx <- which(vapply(decompositions, function(d) {
     grepl("^gent", d$coefficient %||% "")
   }, logical(1)))
-  gent_d <- if (length(gent_idx) > 0L) decompositions[[gent_idx[1]]] else NULL
+  gent_d <- if (length(gent_idx) > 0L) decompositions[[gent_idx\[1\]]] else NULL
 
   head <- sprintf(
     "Year %s, N=%d tracts, rho=%+.4f, Moran's I (OLS residuals)=%+.4f. ",
@@ -258,7 +258,7 @@ NULL
 #' df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
 #' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
 #' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
-#' res[[1]]$rho
+#' res[\[1\]]$rho
 #' @export
 morie_laniyonu_gentrification_policing <- function(
   df,
@@ -422,7 +422,7 @@ morie_laniyonu_gentrification_policing <- function(
 #' df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
 #' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
 #' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
-#' res[[1]]$rho
+#' res[\[1\]]$rho
 #' print(res)
 #' }
 #' @references

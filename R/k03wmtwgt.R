@@ -69,7 +69,7 @@ Wmtwgt <- function(coords, method = "distance", k_or_threshold = 1,
     if (i == n) break
     for (j in seq.int(i + 1L, n)) {
       v <- sqrt(sum((pts[i, ] - pts[j, ])^2))
-      d[i, j] <- v
+      d\[i, j\] <- v
       d[j, i] <- v
     }
   }
@@ -95,9 +95,9 @@ Wmtwgt <- function(coords, method = "distance", k_or_threshold = 1,
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
         if (i == j) next
-        dij <- d[i, j]
+        dij <- d\[i, j\]
         if (dij <= 0 || dij > thr) next
-        w[i, j] <- if (method == "distance") 1 else dij^(-alpha)
+        w\[i, j\] <- if (method == "distance") 1 else dij^(-alpha)
       }
     }
   }

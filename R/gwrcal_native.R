@@ -83,7 +83,7 @@
   for (i in seq_len(n)) for (j in seq_len(n)) {
     dx <- C[i, 1] - C[j, 1]
     dy <- C[i, 2] - C[j, 2]
-    D[i, j] <- sqrt(dx * dx + dy * dy)
+    D\[i, j\] <- sqrt(dx * dx + dy * dy)
   }
   D
 }
@@ -123,7 +123,7 @@
     L[k, k] <- sqrt(Mk)
     rows <- which(!used)
     L[k, rows] <- M[p, rows] / L[k, k]
-    for (i in rows) for (j in rows) M[i, j] <- M[i, j] -
+    for (i in rows) for (j in rows) M\[i, j\] <- M\[i, j\] -
       L[k, i] * L[k, j]
   }
   list(L = L, rdef = rdef, piv = piv)
@@ -473,13 +473,13 @@ morie_gwrcal <- function(y, X, coords, kernel = "gaussian", criterion = "aicc",
     stop("gwrcal: an adaptive bandwidth is a neighbour count, so it is searched on the integer grid; use search='grid'")
   D <- .gwr_pairwise(C)
   if (adaptive) {
-    lo <- if (is.null(bounds)) p + 1 else bounds[1]
+    lo <- if (is.null(bounds)) p + 1 else bounds\[1\]
     hi <- if (is.null(bounds)) n else bounds[2]
     grid <- seq_len(max(1L, as.integer(hi) - as.integer(lo) + 1L)) +
       as.integer(lo) - 1L
   } else {
     bnds <- if (is.null(bounds)) .gwr_default_bounds(C) else bounds
-    lo <- bnds[1]
+    lo <- bnds\[1\]
     hi <- bnds[2]
     if (!(hi > lo))
       stop("gwrcal: the upper bound must exceed the lower one")
@@ -495,7 +495,7 @@ morie_gwrcal <- function(y, X, coords, kernel = "gaussian", criterion = "aicc",
   } else {
     out <- .gwr_golden(function(h)
       .gwr_criterion(yv, Xr, D, h, kernel, FALSE, criterion), lo, hi, tol)
-    bw <- as.numeric(out[1])
+    bw <- as.numeric(out\[1\])
     score <- as.numeric(out[2])
   }
   fit <- .gwr_fit(yv, Xr, D, bw, kernel, adaptive)
@@ -508,10 +508,10 @@ morie_gwrcal <- function(y, X, coords, kernel = "gaussian", criterion = "aicc",
             if (criterion == "aic") .gwr_aicc(n, sigma2, tr_S) else
               fit$sigma2 |> (function(s) .gwr_aicc(n, s, tr_S))()
   ols_aicc <- morie_gwrcal_global_aicc(yv, Xr)
-  span <- if (length(grid) > 1L) grid[length(grid)] - grid[1L] else 0
+  span <- if (length(grid) > 1L) grid\[length(grid)\] - grid[1L] else 0
   edge <- if (span > 0) {
     if (abs(bw - grid[1L]) <= 0.01 * span) "lower"
-    else if (abs(bw - grid[length(grid)]) <= 0.01 * span) "upper"
+    else if (abs(bw - grid\[length(grid)\]) <= 0.01 * span) "upper"
     else NULL
   } else NULL
   list(estimate = bw, bandwidth = bw, score = score,

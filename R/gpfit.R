@@ -6,7 +6,7 @@
 #' Internal helper: Gpfit Log Gp
 #' @noRd
 .gpfit_log_gp <- function(par, y) {
-  sigma <- exp(par[1])
+  sigma <- exp(par\[1\])
   xi <- par[2]
   if (abs(xi) < 1e-8) {
     ll <- -log(sigma) - y / sigma
@@ -53,7 +53,7 @@ gpfit <- function(x, threshold = NULL) {
   fit <- stats::optim(c(log(stats::sd(excess)), 0.1), nll,
     method = "BFGS", hessian = TRUE
   )
-  sigma <- exp(fit$par[1])
+  sigma <- exp(fit$par\[1\])
   xi <- fit$par[2]
   loglik <- -fit$value
   J <- diag(c(sigma, 1))
@@ -64,9 +64,9 @@ gpfit <- function(x, threshold = NULL) {
   list(
     scale = as.numeric(sigma), shape = as.numeric(xi),
     threshold = as.numeric(threshold), n_exceedances = as.integer(n),
-    se_sigma = as.numeric(ses[1]), se_xi = as.numeric(ses[2]),
+    se_sigma = as.numeric(ses\[1\]), se_xi = as.numeric(ses[2]),
     loglik = as.numeric(loglik),
-    estimate = as.numeric(sigma), se = as.numeric(ses[1]),
+    estimate = as.numeric(sigma), se = as.numeric(ses\[1\]),
     method = "GP MLE (Pickands 1975)"
   )
 }

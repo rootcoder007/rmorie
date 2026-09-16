@@ -53,7 +53,7 @@ morie_mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100,
 morie_mtdrl_history_features <- function(history, n_arms) {
   feat <- rep(0, n_arms + 2L)
   if (length(history) > 0L) {
-    a <- history[[length(history)]][[1]] + 1L
+    a <- history[[length(history)]][\[1\]] + 1L
     r <- as.numeric(history[[length(history)]][[2]])
     feat[a] <- 1
     feat[n_arms + 1L] <- r
@@ -126,7 +126,7 @@ morie_mtdrl <- function(tasks, agent, episode_length = 100,
                          reset_between_episodes = TRUE) {
   T <- lapply(tasks, function(t) as.numeric(t))
   if (length(T) == 0L) stop("mtdrl: tasks must be non-empty")
-  k <- if (is.null(n_arms)) length(T[[1]]) else as.integer(n_arms)
+  k <- if (is.null(n_arms)) length(T[\[1\]]) else as.integer(n_arms)
   for (t in T)
     if (length(t) != k)
       stop(paste0("mtdrl: every task must have ", k, " arms"))

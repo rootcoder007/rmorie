@@ -31,7 +31,7 @@ Logrank <- function(time, event, group) {
   ord <- order(time, seq_len(n))
   tt <- time[ord]
   ee <- event[ord]
-  gg <- ifelse(g[ord] == labels[1], 1L, 2L)
+  gg <- ifelse(g[ord] == labels\[1\], 1L, 2L)
   o1 <- sum(ee[gg == 1L])
   e1 <- 0
   v <- 0

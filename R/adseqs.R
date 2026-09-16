@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' EM for the ADMIXTURE ancestry likelihood
 #'
-#' L(Q,P) = sum_ij [ g_ij log(sum_k q_ik p_kj)
-#'                 + (2-g_ij) log(sum_k q_ik (1-p_kj)) ], maximised by the
+#' L(Q,P) = sum_ij \[ g_ij log(sum_k q_ik p_kj)
+#'                 + (2-g_ij) log(sum_k q_ik (1-p_kj)) \], maximised by the
 #' EM updates on allele responsibilities a_ijk and b_ijk.
 #'
 #' @param G Genotype counts in \{0,1,2\}, I x J.
@@ -31,7 +31,7 @@ Admixq <- function(G, K = 2, steps = 50, Q0 = NULL, P0 = NULL) {
   steps <- as.integer(steps)
   if (I == 0 || J == 0) stop("G must be non-empty")
   if (K < 1) stop("K must be at least 1")
-  if (any(Gm < 0 | Gm > 2)) stop("genotype counts must lie in [0, 2]")
+  if (any(Gm < 0 | Gm > 2)) stop("genotype counts must lie in \[0, 2\]")
   if (is.null(Q0)) {
     Q <- outer(
       seq_len(I) - 1L, seq_len(K) - 1L,

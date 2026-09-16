@@ -46,6 +46,6 @@ Gpcm <- function(y, theta, a, b_j) {
     ll <- ll + log(pobs[i])
   }
   .t1_result(estimate = mean(pobs), p_observed = pobs,
-             probs_first = probs(th[1]), loglik = ll, categories = m,
+             probs_first = probs(th\[1\]), loglik = ll, categories = m,
              n = length(ys), method = "GPCM eq. (1) of Muraki (1992)")
 }

@@ -333,7 +333,7 @@ morie_datasets_vic_table <- function(key, table = 1, cache_dir = NULL,
     stop(sprintf("unknown key '%s'; see morie_datasets_vic_catalog()", key),
          call. = FALSE)
   }
-  dest <- file.path(morie_datasets_vic_cache_dir(cache_dir), hit$file[1])
+  dest <- file.path(morie_datasets_vic_cache_dir(cache_dir), hit$file\[1\])
   if (!file.exists(dest)) {
     if (isTRUE(offline)) {
       # Fall back to the sample rmoriedata bundles for this key before
@@ -346,7 +346,7 @@ morie_datasets_vic_table <- function(key, table = 1, cache_dir = NULL,
       }
       return(data.frame())
     }
-    utils::download.file(hit$url[1], dest, mode = "wb", quiet = TRUE)
+    utils::download.file(hit$url\[1\], dest, mode = "wb", quiet = TRUE)
   }
   sheet <- if (is.numeric(table)) sprintf("Table %02d", as.integer(table))
            else as.character(table)
@@ -381,7 +381,7 @@ morie_datasets_vic_sheets <- function(key, cache_dir = NULL) {
     stop(sprintf("unknown key '%s'; see morie_datasets_vic_catalog()", key),
          call. = FALSE)
   }
-  dest <- file.path(morie_datasets_vic_cache_dir(cache_dir), hit$file[1])
+  dest <- file.path(morie_datasets_vic_cache_dir(cache_dir), hit$file\[1\])
   if (!file.exists(dest)) {
     return(character(0))
   }
@@ -507,7 +507,7 @@ morie_datasets_vic_sheets <- function(key, cache_dir = NULL) {
 #' @noRd
 .morie_vic_col_index <- function(ref) {
   letters_ <- toupper(gsub("[^A-Za-z]", "", ref))
-  chars <- strsplit(letters_, "")[[1]]
+  chars <- strsplit(letters_, "")[\[1\]]
   idx <- 0L
   for (ch in chars) idx <- idx * 26L + (utf8ToInt(ch) - 64L)
   idx
@@ -641,11 +641,11 @@ morie_vic_offence_trend <- function(data) {
   out <- lapply(sort(unique(agg$division)), function(d) {
     sub <- agg[agg$division == d, , drop = FALSE]
     sub <- sub[order(sub$year), , drop = FALSE]
-    f <- sub$count[1]
+    f <- sub$count\[1\]
     l <- sub$count[nrow(sub)]
     data.frame(
       division = d,
-      first_year = sub$year[1], last_year = sub$year[nrow(sub)],
+      first_year = sub$year\[1\], last_year = sub$year[nrow(sub)],
       first_count = f, last_count = l,
       abs_change = l - f,
       pct_change = if (f > 0) 100 * (l - f) / f else NA_real_,

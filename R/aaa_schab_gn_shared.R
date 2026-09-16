@@ -72,7 +72,7 @@
 
 #' OLS is R = phi I, so the weights are 1. WLS uses Cressie\'s (1985)
 #'
-#' approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|,
+#' approximation (4.33), Var\[gamma_hat(h_m)\] = 2 gamma^2 / |N(h_m)|,
 #' whose reciprocal is the weight in (4.34).
 #'
 #' @param kind Passed to \code{identical}.
@@ -82,7 +82,7 @@
 #' @export
 .schab_gn_weights <- function(kind, fitted, counts) {
   # OLS is R = phi I, so the weights are 1. WLS uses Cressie's (1985)
-  # approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|, whose
+  # approximation (4.33), Var\[gamma_hat(h_m)\] = 2 gamma^2 / |N(h_m)|, whose
   # reciprocal is the weight in (4.34).
   if (identical(kind, "ols")) {
     return(rep(1, length(fitted)))
@@ -106,7 +106,7 @@
 .schab_gn_project <- function(theta) {
   # Onto the parameter space of Sec. 4.3: variances >= 0, a range > 0. This is
   # the constraint the model imposes, not a search box.
-  c(max(theta[1], 0), max(theta[2], 0), max(theta[3], .Machine$double.xmin))
+  c(max(theta\[1\], 0), max(theta[2], 0), max(theta[3], .Machine$double.xmin))
 }
 
 #' .schab_gauss_newton
@@ -138,7 +138,7 @@
   }
 
   objective <- function(theta) {
-    fitted <- .sp_semivariogram(h, theta[1], theta[2], theta[3], model)
+    fitted <- .sp_semivariogram(h, theta\[1\], theta[2], theta[3], model)
     if (any(!is.finite(fitted))) {
       return(list(
         value = Inf, fitted = fitted, w = rep(0, length(h)),
@@ -168,7 +168,7 @@
   converged <- FALSE
   it <- 0L
   for (it in seq_len(max_iter)) {
-    jac <- .schab_semivariogram_jacobian(h, theta[1], theta[2], theta[3], model)
+    jac <- .schab_semivariogram_jacobian(h, theta\[1\], theta[2], theta[3], model)
     # Normal equations of the weighted Gauss-Newton step:
     #   (J' W J) delta = J' W r
     jw <- jac * cur$w

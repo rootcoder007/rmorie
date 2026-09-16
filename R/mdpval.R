@@ -14,10 +14,10 @@
   storage.mode(m) <- "double"
   m })
   A <- length(Pm)
-  if (A < 1L || nrow(Pm[[1]]) != ncol(Pm[[1]])) {
+  if (A < 1L || nrow(Pm[\[1\]]) != ncol(Pm[\[1\]])) {
     stop("P must be a list of square (S, S) matrices", call. = FALSE)
   }
-  S <- nrow(Pm[[1]])
+  S <- nrow(Pm[\[1\]])
   for (a in seq_len(A)) {
     if (!all(dim(Pm[[a]]) == c(S, S))) stop("P element is not (S, S)", call. = FALSE)
     for (s in seq_len(S)) {

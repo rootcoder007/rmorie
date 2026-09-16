@@ -77,16 +77,16 @@ morie_glrtest <- function(x, p0, p1, threshold = NULL, family = "bernoulli",
   x <- as.numeric(x)
   n <- length(x)
   if (n < 1) stop("morie_glrtest: x must hold at least one observation")
-  fam <- tolower(as.character(family)[1])
+  fam <- tolower(as.character(family)\[1\])
   if (!fam %in% c("bernoulli", "normal", "poisson"))
     stop("morie_glrtest: family must be bernoulli, normal or poisson")
-  p0 <- as.numeric(p0)[1]
-  p1 <- as.numeric(p1)[1]
+  p0 <- as.numeric(p0)\[1\]
+  p1 <- as.numeric(p1)\[1\]
   if (p0 == p1)
     stop("morie_glrtest: p0 and p1 must differ -- with one density there is ",
          "no change to detect")
 
-  sc <- .morie_glrtest_scores(x, p0, p1, fam, as.numeric(sd)[1])
+  sc <- .morie_glrtest_scores(x, p0, p1, fam, as.numeric(sd)\[1\])
   z <- sc$z
 
   cusum <- numeric(n)
@@ -111,7 +111,7 @@ morie_glrtest <- function(x, p0, p1, threshold = NULL, family = "bernoulli",
       best_k <- smin_at
     }
     if (!is.null(threshold) && is.null(stop_index) &&
-        val >= as.numeric(threshold)[1])
+        val >= as.numeric(threshold)\[1\])
       stop_index <- i - 1L
   }
 
@@ -127,7 +127,7 @@ morie_glrtest <- function(x, p0, p1, threshold = NULL, family = "bernoulli",
               p1 = p1,
               method = "Page likelihood-ratio CUSUM (Lai 1995, eq. 2.3)")
   if (!is.null(threshold)) {
-    out$threshold <- as.numeric(threshold)[1]
+    out$threshold <- as.numeric(threshold)\[1\]
     out$detected <- !is.null(stop_index)
     out$stop_index <- if (is.null(stop_index)) -1L else as.integer(stop_index)
     out$expected_delay <- if (sc$kl > 0) out$threshold / sc$kl else Inf

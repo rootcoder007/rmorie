@@ -194,7 +194,7 @@
 }
 
 
-#' Levinson-Durbin linear prediction; returns list(a = a[1..p], e =
+#' Levinson-Durbin linear prediction; returns list(a = a\[1..p\], e =
 #' error)
 #'
 #' A step of the rangayyan_phys implementation. Called by \code{CadAcou},
@@ -211,11 +211,11 @@
 #' res <- .bsalpc(x = x, order = 3L)
 #' res
 .bsalpc <- function(x, order) {
-  # Levinson-Durbin linear prediction; returns list(a = a[1..p], e = error).
+  # Levinson-Durbin linear prediction; returns list(a = a\[1..p\], e = error).
   if (order < 1L) stop("order must be >= 1")
   r <- .bsaacf(x, order)
   if (r[1L] <= 0) stop("signal is constant; no linear-prediction model")
-  a <- rep(0, order + 1L) # a[1] is Python a[0], unused
+  a <- rep(0, order + 1L) # a\[1\] is Python a[0], unused
   e <- r[1L]
   for (i in seq_len(order)) {
     acc <- r[i + 1L]
@@ -723,7 +723,7 @@ HhGate <- function(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) {
       x <- xinf
     } else {
       x <- as.numeric(x0)
-      if (!(x >= 0 && x <= 1)) stop(paste0("gate ", nm, " must start in [0, 1]"))
+      if (!(x >= 0 && x <= 1)) stop(paste0("gate ", nm, " must start in \[0, 1\]"))
       x <- xinf + (x - xinf) * exp(-steps * dt / tau)
     }
     out[[nm]] <- x

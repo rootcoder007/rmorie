@@ -32,7 +32,7 @@ irtsp <- function(x, n_iter = 60L, tol = 1e-6) {
     error = function(e) NULL
   )
   x_hat <- if (!is.null(sv)) {
-    sv$u[, 1] * sv$d[1]
+    sv$u[, 1] * sv$d\[1\]
   } else {
     seq(-1, 1, length.out = n)
   }
@@ -64,7 +64,7 @@ irtsp <- function(x, n_iter = 60L, tol = 1e-6) {
           error = function(e) NULL
         )
         if (is.null(step)) break
-        a <- a - step[1]
+        a <- a - step\[1\]
         b <- b - step[2]
         if (max(abs(step)) < tol) break
       }

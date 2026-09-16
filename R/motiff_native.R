@@ -19,10 +19,10 @@
   cyc <- 0L
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      if (j == i || !adj[i, j]) next
+      if (j == i || !adj\[i, j\]) next
       for (k in seq_len(n)) {
         if (k == i || k == j) next
-        if (adj[i, k] && adj[j, k]) ff <- ff + 1L
+        if (adj\[i, k\] && adj[j, k]) ff <- ff + 1L
         if (adj[j, k] && adj[k, i]) cyc <- cyc + 1L
       }
     }
@@ -56,7 +56,7 @@
   mj <- integer(0)          # mutual pairs [min,max]
   seen <- new.env(hash = TRUE)
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    if (i == j || !adj[i, j]) next
+    if (i == j || !adj\[i, j\]) next
     if (adj[j, i]) {
       lo <- min(i, j)
       hi <- max(i, j)
@@ -128,8 +128,8 @@
   }
   new <- matrix(0L, n, n)
   for (nm_key in ls(present)) {
-    ij <- as.integer(strsplit(nm_key, "_")[[1]])
-    new[ij[1], ij[2]] <- 1L
+    ij <- as.integer(strsplit(nm_key, "_")[\[1\]])
+    new[ij\[1\], ij[2]] <- 1L
   }
   new
 }

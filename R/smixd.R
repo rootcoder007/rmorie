@@ -7,7 +7,7 @@
 #' Internal helper: Smixd Negreml
 #' @noRd
 .smixd_negreml <- function(theta, D, n, X, y, p) {
-  phi <- exp(theta[1])
+  phi <- exp(theta\[1\])
   nu <- exp(theta[2])
   Sigma <- exp(-D / phi) + nu * diag(n)
   L <- tryCatch(chol(Sigma), error = function(e) NULL)
@@ -69,7 +69,7 @@ smixd <- function(x, y, coords) {
     method = "Nelder-Mead",
     control = list(maxit = 400, reltol = 1e-6)
   )
-  phi <- exp(res$par[1])
+  phi <- exp(res$par\[1\])
   nu <- exp(res$par[2])
   Sigma <- exp(-D / phi) + nu * diag(n)
   L <- chol(Sigma)

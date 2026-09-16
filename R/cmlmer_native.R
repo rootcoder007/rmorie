@@ -8,7 +8,7 @@
 .cmlmer_EPS <- 1e-12
 
 
-# Maximise f over [lo, hi] by a staged fixed-grid argmax.
+# Maximise f over \[lo, hi\] by a staged fixed-grid argmax.
 #
 # A golden-section search is PATH-DEPENDENT. Each arm walks its own sequence
 # of brackets, and near a flat maximum the fc > fd branch is decided by the
@@ -128,7 +128,7 @@
   jit <- 1e-12 * max(abs(sum(diag(A)) / n), 1.0)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
-      s <- A[i, j]
+      s <- A\[i, j\]
       if (j > 1L) s <- s - sum(L[i, seq_len(j - 1L)] * L[j, seq_len(j - 1L)])
       if (i == j) {
         s <- s + jit
@@ -136,7 +136,7 @@
           stop("cmlmer: the covariance matrix is not positive definite")
         L[i, i] <- sqrt(s)
       } else {
-        L[i, j] <- s / L[j, j]
+        L\[i, j\] <- s / L[j, j]
       }
     }
   }
@@ -336,7 +336,7 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
   ng <- length(groups)
   Kg <- matrix(0.0, ng, ng)
   for (a in seq_len(ng)) for (b in seq_len(ng))
-    Kg[a, b] <- sum(Km[groups[[a]], groups[[b]]]) /
+    Kg\[a, b\] <- sum(Km[groups[[a]], groups[[b]]]) /
       (length(groups[[a]]) * length(groups[[b]]))
   ZKZ <- Kg[lab + 1L, lab + 1L, drop = FALSE]
 
@@ -410,7 +410,7 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
       ng2 <- length(gr2)
       Kg2 <- matrix(0.0, ng2, ng2)
       for (a in seq_len(ng2)) for (b in seq_len(ng2))
-        Kg2[a, b] <- sum(Km[gr2[[a]], gr2[[b]]]) /
+        Kg2\[a, b\] <- sum(Km[gr2[[a]], gr2[[b]]]) /
           (length(gr2[[a]]) * length(gr2[[b]]))
       ZKZ2 <- Kg2[cl2$lab + 1L, cl2$lab + 1L, drop = FALSE]
       best <- NULL

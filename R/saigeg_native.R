@@ -543,7 +543,7 @@ morie_saigeg <- function(y, G, X = NULL, mu = NULL, ratio = 1.0, two_sided = TRU
   if (length(bad) > 0) {
     stop(sprintf(
       "saigeg: the phenotype must be 0/1, got %g at index %d",
-      yv[bad[1]], bad[1]
+      yv[bad\[1\]], bad\[1\]
     ))
   }
   n_case <- as.integer(sum(yv))

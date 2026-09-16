@@ -28,7 +28,7 @@ morie_two_sample_coverage <- function(x, y) {
     ))
   }
   xs <- sort(x)
-  # findInterval(y, xs) gives 0..m where 0 means y <= xs[1]-eps and m means y > xs[m]
+  # findInterval(y, xs) gives 0..m where 0 means y <= xs\[1\]-eps and m means y > xs[m]
   idx <- findInterval(y, xs, left.open = TRUE) # 0..m
   block_freq <- tabulate(idx + 1L, nbins = m + 1L)
   block_prop <- block_freq / n

@@ -52,7 +52,7 @@ Pertarget <- function(replay_buffer, priorities = NULL, z = NULL, v = NULL,
   for (x in w) if (x > mx) mx <- x
   w <- if (mx > 0) w / mx else rep(0, n)
   list(
-    estimate = if (n) prob[1] else NaN, prob = prob, weight = w,
+    estimate = if (n) prob\[1\] else NaN, prob = prob, weight = w,
     priority = p, n = n,
     method = "Prioritized replay priorities from the value residual |z - v|"
   )

@@ -156,7 +156,7 @@ NULL
     stop("p_values contain non-finite entries")
   }
   if (any(p < 0 - 1e-12) || any(p > 1 + 1e-12)) {
-    stop("p_values must lie in [0, 1]")
+    stop("p_values must lie in \[0, 1\]")
   }
   pmin(pmax(p, 0), 1)
 }
@@ -820,13 +820,13 @@ fixed_sequence <- function(p_values, alpha = 0.05, labels = NULL) {
       break
     }
   }
-  first_fail <- which(!rejected)[1]
+  first_fail <- which(!rejected)\[1\]
   note <- if (is.na(first_fail)) {
     "All hypotheses in the predetermined sequence were rejected."
   } else if (first_fail == 1L) {
     sprintf(
       "The first hypothesis failed (p=%.4g > alpha=%.4f); no rejections.",
-      p[1], alpha
+      p\[1\], alpha
     )
   } else {
     sprintf(
@@ -1002,7 +1002,7 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
 #' @inheritParams bonferroni
 #' @param method One of \code{"storey"}, \code{"bootstrap"}, or
 #'   \code{"two_step"}.
-#' @return A scalar pi0 estimate in `[0, 1]`.
+#' @return A scalar pi0 estimate in `\[0, 1\]`.
 #' @examples
 #' if (requireNamespace("qvalue", quietly = TRUE)) {
 #'   set.seed(1)
@@ -1241,7 +1241,7 @@ print.morie_multiple_testing_result <- function(x, ...) {
 #' proportion of null hypotheses estimated by the Storey-style cutoff
 #' at \eqn{p > 0.5}.
 #'
-#' @param p_values Numeric vector of raw p-values in \eqn{`[0, 1]`}.
+#' @param p_values Numeric vector of raw p-values in \eqn{`\[0, 1\]`}.
 #' @param pi0_method Pi-zero estimator. Accepted: \code{"bootstrap"}
 #'   (alias for the Storey-style cutoff at 0.5; retained for API
 #'   parity with the Python sibling).

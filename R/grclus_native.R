@@ -175,7 +175,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
     stop("grclus: edge weights must be non-negative")
   for (i in seq_len(nrow(M))) {
     for (j in seq_len(ncol(M))) {
-      w <- M[i, j]
+      w <- M\[i, j\]
       if (i == j || w == 0) next
       if (abs(w - M[j, i]) > 1e-9 * max(1, abs(w)))
         stop("grclus: A must be symmetric; entry (", i, ", ", j,
@@ -187,7 +187,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
     dest <- integer(0)
     wts <- numeric(0)
     for (j in seq_len(ncol(M))) {
-      w <- M[i, j]
+      w <- M\[i, j\]
       if (i == j || w == 0) next
       dest <- c(dest, j)
       wts <- c(wts, w)

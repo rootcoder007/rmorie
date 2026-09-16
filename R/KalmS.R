@@ -74,7 +74,7 @@ KalmS <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL, ridge = 1e-12) {
     xsm[[t]] <- xs[[t]] + as.numeric(C %*% (xsm[[t + 1L]] - xp[[t + 1L]]))
     Psm[[t]] <- Ps[[t]] + C %*% (Psm[[t + 1L]] - Pp[[t + 1L]]) %*% t(C)
   }
-  .t1_result(estimate = xsm[[1]][1], smoothed = xsm, smoothed_cov = Psm,
+  .t1_result(estimate = xsm[\[1\]]\[1\], smoothed = xsm, smoothed_cov = Psm,
              filtered = xs, loglik = ll, n = n,
              method = "forward Kalman pass plus the RTS backward recursion, Rauch, Tung & Striebel (1965)")
 }

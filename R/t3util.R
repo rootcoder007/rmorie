@@ -75,7 +75,7 @@ t3nodes <- function(m = 401L, lim = 8.0) {
 #' @export
 #' @examples
 #' A <- matrix(0, 4, 4)
-#' A[1, 2] <- A[2, 1] <- 1
+#' A\[1, 2\] <- A[2, 1] <- 1
 #' A[2, 3] <- A[3, 2] <- 1
 #' A[3, 4] <- A[4, 3] <- 1
 #' t3bfs(A, 1)
@@ -88,7 +88,7 @@ t3bfs <- function(A, s) {
   while (length(frontier) > 0) {
     nxt <- integer(0)
     for (i in frontier) for (j in seq_len(n)) {
-      if (A[i, j] != 0 && is.infinite(d[j])) { d[j] <- d[i] + 1
+      if (A\[i, j\] != 0 && is.infinite(d[j])) { d[j] <- d[i] + 1
       nxt <- c(nxt, j) }
     }
     frontier <- nxt

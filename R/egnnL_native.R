@@ -276,7 +276,7 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
   # output. The property is stated as an equality; this measures the
   # gap.
   n <- length(X)
-  d <- length(X[[1]])
+  d <- length(X[\[1\]])
   base <- run_egnn(H, X, layers, phi_e, phi_x, phi_h, C = C)
   Xt <- lapply(seq_len(n), function(i) {
     xi <- as.numeric(X[[i]])

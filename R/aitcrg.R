@@ -74,7 +74,7 @@ Aitcrg <- function(X, Y_comp, V = NULL) {
   for (n in seq_len(N)) fitted_comp[n, ] <- .aitcrg_inv(fitted[n, ], Vm)
   list(
     beta = beta, fitted = fitted, resid = resid, fitted_comp = fitted_comp,
-    Y_ilr = Yi, sse = sse, estimate = beta[1, 1], N = N, p = p, D = D,
+    Y_ilr = Yi, sse = sse, estimate = beta\[1, 1\], N = N, p = p, D = D,
     method = "OLS of ilr(Y) on X in the Egozcue et al. (2003) SBP basis"
   )
 }

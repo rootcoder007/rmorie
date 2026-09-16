@@ -33,7 +33,7 @@ Medmsm <- function(y, A, M, H) {
   sw <- sqrt(w)
   theta <- .s4_ols(cbind(sw, sw * Av, sw * Mv, sw * Av * Mv), sw * yv)$beta
   beta <- .s4_ols(cbind(sw, sw * Av), sw * Mv)$beta
-  nde <- theta[2] + theta[4] * beta[1]
+  nde <- theta[2] + theta[4] * beta\[1\]
   nie <- beta[2] * (theta[3] + theta[4])
   .t1_result(estimate = nde, nie = nie, total = nde + nie, theta = theta,
              beta = beta, w_mean = sum(w) / n, n = n,

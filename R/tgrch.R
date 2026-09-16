@@ -14,7 +14,7 @@
 #' @return A numeric value.
 #' @export
 .tgarch_negll <- function(p, r, n) {
-  omega <- p[1]
+  omega <- p\[1\]
   alpha <- p[2]
   gamma <- p[3]
   beta <- p[4]
@@ -22,7 +22,7 @@
     return(1e10)
   }
   s2 <- numeric(n)
-  s2[1] <- var(r) + 1e-10
+  s2\[1\] <- var(r) + 1e-10
   for (t in 2:n) {
     I <- if (r[t - 1] <= 0) 1 else 0
     s2[t] <- max(
@@ -67,12 +67,12 @@ morie_tgarch_model <- function(x) {
     lower = c(1e-8, 1e-8, -0.5, 1e-8),
     upper = c(var_r * 10, 0.5, 0.999, 0.999)
   )
-  omega <- opt$par[1]
+  omega <- opt$par\[1\]
   alpha <- opt$par[2]
   gamma <- opt$par[3]
   beta <- opt$par[4]
   s2 <- numeric(n)
-  s2[1] <- var_r
+  s2\[1\] <- var_r
   for (t in 2:n) {
     I <- if (r[t - 1] <= 0) 1 else 0
     s2[t] <- omega + (alpha + gamma * I) * r[t - 1]^2 + beta * s2[t - 1]

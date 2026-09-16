@@ -47,7 +47,7 @@ Slope1 <- function(R, u, i) {
   if (i < 0L || i >= ni) stop("slope_one: i is out of range")
   ur <- u + 1L
   ic <- i + 1L
-  rated <- function(a, b) !is.na(M[a, b])
+  rated <- function(a, b) !is.na(M\[a, b\])
 
   rated_items <- integer(0)
   for (b in seq_len(ni)) if (b != ic && rated(ur, b)) rated_items <- c(rated_items, b)
@@ -65,7 +65,7 @@ Slope1 <- function(R, u, i) {
     s <- 0
     for (a in seq_len(nu)) {
       if (rated(a, ic) && rated(a, b)) {
-        s <- s + M[a, ic] - M[a, b]
+        s <- s + M[a, ic] - M\[a, b\]
         cc <- cc + 1L
       }
     }

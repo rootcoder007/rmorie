@@ -7,7 +7,7 @@
 #' Econometrics, Section 3.3, pages 77-80, implementing the estimator
 #' of Horowitz and Mammen (2007).  The model is
 #'
-#'   E(Y | X = x) = G[m_1(x^1) + ... + m_d(x^d)]
+#'   E(Y | X = x) = G\[m_1(x^1) + ... + m_d(x^d)\]
 #'
 #' with G and all m_j unknown.  This nests both the single-index model
 #' and the additive model with identity link.
@@ -20,7 +20,7 @@
 #'   sum_j int m_j^2(v) dv = 1                                  (3.26)
 #'
 #' (3.25) is imposed EXACTLY here, by expanding each m_j in centred
-#' monomials v^k - 1/(k+1) which integrate to zero on [0, 1] by
+#' monomials v^k - 1/(k+1) which integrate to zero on \[0, 1\] by
 #' construction; (3.26) is imposed exactly by rescaling against the
 #' closed-form Gram matrix.  Neither is approached iteratively, so both
 #' are identities of the returned fit rather than things that happen to
@@ -32,7 +32,7 @@
 #'
 #' The estimator solves
 #'
-#'   min (1/n) sum_i \{Y_i - G[m_1(X_i^1) + ... + m_d(X_i^d)]\}^2
+#'   min (1/n) sum_i \{Y_i - G\[m_1(X_i^1) + ... + m_d(X_i^d)\]\}^2
 #'       + lambda_n^2 J(G, m_1, ..., m_d)                       (3.28)
 #'
 #' computed, as the text describes, "by a backfitting algorithm that
@@ -93,7 +93,7 @@ Hrzaul <- function(x, y, bandwidth = NULL, degree = 3L, link_degree = 3L,
 
   kk <- seq_len(p)
   U <- lapply(seq_len(d), function(j) .hrz3_u01(X[, j]))
-  # B[[j]][i, k] = phi_k(u_ij), phi_k(v) = v^k - 1/(k+1).
+  # B[[j]]\[i, k\] = phi_k(u_ij), phi_k(v) = v^k - 1/(k+1).
   B <- lapply(seq_len(d), function(j) {
     outer(U[[j]], kk, "^") - rep(1 / (kk + 1), each = n)
   })

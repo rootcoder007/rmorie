@@ -20,10 +20,10 @@
 sppois <- function(lam = 1, region = NULL, seed = NULL) {
   if (lam <= 0) stop("`lam` must be > 0")
   reg <- if (is.null(region)) c(0, 0, 1, 1) else .sp_region(region)
-  area <- (reg[3] - reg[1]) * (reg[4] - reg[2])
+  area <- (reg[3] - reg\[1\]) * (reg[4] - reg[2])
   if (!is.null(seed)) set.seed(seed)
   n <- stats::rpois(1, lam * area)
-  pts <- cbind(stats::runif(n, reg[1], reg[3]), stats::runif(n, reg[2], reg[4]))
+  pts <- cbind(stats::runif(n, reg\[1\], reg[3]), stats::runif(n, reg[2], reg[4]))
   list(points = pts, n = as.integer(n), lambda = as.numeric(lam), area = area,
        expected_n = as.numeric(lam) * area, var_n = as.numeric(lam) * area,
        region = reg)

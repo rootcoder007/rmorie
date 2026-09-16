@@ -37,7 +37,7 @@ Pcfunc <- function(points, window, r, h = NULL) {
   Khi <- .sp_k(p, region, rs + hh, correction = "border")
   Kat <- .sp_k(p, region, rs, correction = "border")
   g <- (Khi - Klo) / (2 * hh) / (2 * pi * rs)
-  .t1_result(g = g, r = rs, K = Kat, h = hh, estimate = g[1],
+  .t1_result(g = g, r = rs, K = Kat, h = hh, estimate = g\[1\],
              lambda_hat = .sp_intensity(p, region), n = n,
              method = "Pair correlation function from K'(r) / (2 pi r)")
 }

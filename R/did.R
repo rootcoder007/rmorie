@@ -271,7 +271,7 @@ NULL
     std_error = std_error,
     t_stat    = t_val,
     p_value   = p_val,
-    ci_lower  = ci[1],
+    ci_lower  = ci\[1\],
     ci_upper  = ci[2],
     n_treated = n_treated,
     n_control = n_control,
@@ -979,7 +979,7 @@ morie_did_aggregate_gt_att <- function(gt_results,
     ci <- .morie_did_make_ci(est, se)
     data.frame(
       group = label, estimate = est, std_error = se,
-      ci_lower = ci[1], ci_upper = ci[2]
+      ci_lower = ci\[1\], ci_upper = ci[2]
     )
   }
   if (identical(aggregation, "overall")) {
@@ -1330,7 +1330,7 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
     estimate = tau, std_error = se_est,
     t_stat = if (is.finite(se_est) && se_est > 0) tau / se_est else NA_real_,
     p_value = pval,
-    ci_lower = ci[1], ci_upper = ci[2],
+    ci_lower = ci\[1\], ci_upper = ci[2],
     n_treated = length(treated_units),
     n_control = length(control_units),
     method = "synthetic_did (rmorie native)",
@@ -1435,7 +1435,7 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
   list(
     estimate = est, std_error = se_est,
     t_stat = t_full, p_value = boot_p,
-    ci_lower = ci[1], ci_upper = ci[2],
+    ci_lower = ci\[1\], ci_upper = ci[2],
     n_treated = sum(d == 1), n_control = sum(d == 0),
     method = "wild_cluster_bootstrap (base-R)",
     details = list(
@@ -2059,8 +2059,8 @@ morie_did_diagnostics <- function(data, outcome, treatment, post,
       }
       y <- as.numeric(g[[outcome]])
       data.frame(
-        treatment = g[[treatment]][1],
-        post = g[[post]][1],
+        treatment = g[[treatment]]\[1\],
+        post = g[[post]]\[1\],
         mean = mean(y),
         std = stats::sd(y),
         median = stats::median(y),

@@ -32,7 +32,7 @@ wquan <- function(y, weights = NULL, p = 0.5) {
   hd <- sum(wt * xs)
   cum <- cumsum(ws / tot)
   idx <- which(cum >= p)
-  ecdf <- if (length(idx) > 0) xs[idx[1]] else xs[n]
+  ecdf <- if (length(idx) > 0) xs[idx\[1\]] else xs[n]
   list(estimate = as.numeric(hd), hd = as.numeric(hd), ecdf = as.numeric(ecdf),
        w = wt, p = as.numeric(p), n = as.integer(n),
        method = "Harrell-Davis weighted quantile (Harrell & Davis 1982)")

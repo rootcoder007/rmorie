@@ -21,7 +21,7 @@
 #' @return list: estimate, S, ST, V, n, method.
 #' @keywords internal
 #' @examples
-#' Sobolidx(function(x) x[1] + 2 * x[2], NULL, 32, 2)$S
+#' Sobolidx(function(x) x\[1\] + 2 * x[2], NULL, 32, 2)$S
 #' @export
 Sobolidx <- function(model, input_dist = NULL, N = 64, d = NULL) {
   primes <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47)
@@ -63,6 +63,6 @@ Sobolidx <- function(model, input_dist = NULL, N = 64, d = NULL) {
     S[i] <- if (V > 0) vi / V else NaN
     ST[i] <- if (V > 0) vti / V else NaN
   }
-  list(estimate = if (dd) S[1] else NaN, S = S, ST = ST, V = V, n = n,
+  list(estimate = if (dd) S\[1\] else NaN, S = S, ST = ST, V = V, n = n,
        method = "Saltelli et al. (2010) estimators of the Sobol (1993) indices, on a quasi-Monte Carlo design")
 }

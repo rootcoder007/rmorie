@@ -32,7 +32,7 @@ morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
       s_ <- b[i]
       if (i > 1) {
         for (k in seq_len(i - 1)) {
-          s_ <- s_ - L[i, k] * yy[k]
+          s_ <- s_ - L\[i, k\] * yy[k]
         }
       }
       yy[i] <- s_ / L[i, i]
@@ -54,17 +54,17 @@ morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
     L <- matrix(0, nn, nn)
     for (i in seq_len(nn)) {
       for (j in seq_len(i)) {
-        s_ <- MM[i, j]
+        s_ <- MM\[i, j\]
         if (j > 1) {
           for (k in seq_len(j - 1)) {
-            s_ <- s_ - L[i, k] * L[j, k]
+            s_ <- s_ - L\[i, k\] * L[j, k]
           }
         }
         if (i == j) {
           if (s_ <= 1e-14) s_ <- 1e-14
           L[i, i] <- sqrt(s_)
         } else {
-          L[i, j] <- s_ / L[j, j]
+          L\[i, j\] <- s_ / L[j, j]
         }
       }
     }
@@ -72,13 +72,13 @@ morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
   }
   ada <- function(M, d) {
     mm <- length(M)
-    nn <- length(M[[1]])
+    nn <- length(M[\[1\]])
     out <- matrix(0, mm, mm)
     for (i in seq_len(mm)) {
       for (j in seq_len(mm)) {
         acc <- 0
         for (k in seq_len(nn)) acc <- acc + M[[i]][k] * d[k] * M[[j]][k]
-        out[i, j] <- acc
+        out\[i, j\] <- acc
       }
     }
     out

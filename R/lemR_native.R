@@ -41,7 +41,7 @@ LemR <- function(A, resolution = 1, quality = "modularity", max_iter = 20L) {
     q <- 0
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        if (lab[i] == lab[j]) q <- q + (W[i, j] - g * deg[i] * deg[j] / m2) / m2
+        if (lab[i] == lab[j]) q <- q + (W\[i, j\] - g * deg[i] * deg[j] / m2) / m2
       }
     }
     q

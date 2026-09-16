@@ -195,7 +195,7 @@ morie_fetch_tps <- function(
     for (f in feats) {
       r <- f$properties
       if (!is.null(f$geometry) && identical(f$geometry$type, "Point")) {
-        r$LONG_WGS84 <- f$geometry$coordinates[[1]]
+        r$LONG_WGS84 <- f$geometry$coordinates[\[1\]]
         r$LAT_WGS84 <- f$geometry$coordinates[[2]]
       }
       rows[[length(rows) + 1L]] <- r

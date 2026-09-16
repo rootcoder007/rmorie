@@ -172,7 +172,7 @@ upsample <- function(grid, factor = 2) {
   # each row is an upsampled pixel vector.
   if (is.list(grid) && !is.matrix(grid)) {
     Grows <- lapply(grid, function(r) as.numeric(r))
-    d <- length(Grows[[1]])
+    d <- length(Grows[\[1\]])
     out <- vector("list", H * f)
     for (i in seq_len(H * f)) {
       src <- Grows[[(i - 1L) %/% f + 1L]]
@@ -213,8 +213,8 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
   # length-d numeric vector.
   if (is.list(image_grid_vectors) && !is.matrix(image_grid_vectors)) {
     H <- length(image_grid_vectors)
-    W <- length(image_grid_vectors[[1]])
-    d <- length(image_grid_vectors[[1]][[1]])
+    W <- length(image_grid_vectors[\[1\]])
+    d <- length(image_grid_vectors[\[1\]][\[1\]])
     if (length(w) != d) {
       stop(
         "samdec: the dynamic classifier is ", length(w),
@@ -225,7 +225,7 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
     for (i in seq_len(H)) {
       for (j in seq_len(W)) {
         v <- as.numeric(image_grid_vectors[[i]][[j]])
-        logits[i, j] <- sum(w * v)
+        logits\[i, j\] <- sum(w * v)
       }
     }
   } else {
@@ -338,7 +338,7 @@ decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
                         output_index = 0) {
   P <- .samdec_mat(prompt_tokens)
   I <- .samdec_mat(image_tokens)
-  H <- as.integer(grid_shape[1])
+  H <- as.integer(grid_shape\[1\])
   W <- as.integer(grid_shape[2])
   if (H * W != nrow(I)) {
     stop(

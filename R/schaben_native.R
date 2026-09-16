@@ -234,11 +234,11 @@ morie_variogram_composite_likelihood <- function(coords, z,
   prev <- NULL
   it <- 0L
   for (it in seq_len(max_iter)) {
-    g_cur <- pmax(.morie_sb_vgm(h, model, theta[1], theta[2], theta[3]), 1e-12)
+    g_cur <- pmax(.morie_sb_vgm(h, model, theta\[1\], theta[2], theta[3]), 1e-12)
     w <- 1 / (8 * g_cur^2)
     obj <- function(p) {
       t <- exp(p)
-      g <- .morie_sb_vgm(h, model, t[1], t[2], t[3])
+      g <- .morie_sb_vgm(h, model, t\[1\], t[2], t[3])
       sum(w * (t3 - 2 * g)^2)
     }
     op <- stats::optim(log(pmax(theta, 1e-10)), obj, method = "Nelder-Mead",
@@ -247,14 +247,14 @@ morie_variogram_composite_likelihood <- function(coords, z,
     if (!is.null(prev) && max(abs(theta - prev)) < tol) break
     prev <- theta
   }
-  g_fin <- pmax(.morie_sb_vgm(h, model, theta[1], theta[2], theta[3]), 1e-12)
+  g_fin <- pmax(.morie_sb_vgm(h, model, theta\[1\], theta[2], theta[3]), 1e-12)
   # A bounded model cannot fit an unbounded variogram. Under a trend in
   # the mean the semivariance keeps climbing (eq 5.35) and the fit answers
   # by pushing the range towards infinity; that is a diagnosis, not a fit.
   hmax <- max(h)
   diverged <- theta[3] > 10 * hmax
-  list(nugget = theta[1], psill = theta[2], range = theta[3],
-       sill = theta[1] + theta[2], model = model,
+  list(nugget = theta\[1\], psill = theta[2], range = theta[3],
+       sill = theta\[1\] + theta[2], model = model,
        objective = sum((t3 - 2 * g_fin)^2 / (8 * g_fin^2)),
        iterations = it, n_pairs = length(h),
        converged = !diverged,
@@ -313,7 +313,7 @@ morie_kriging_pred_error <- function(coords, z, target,
     v0 <- stats::var(zz)
     obj <- function(p) {
       t <- exp(p)
-      g <- .morie_sb_vgm(em$lag, model, t[1], t[2], t[3])
+      g <- .morie_sb_vgm(em$lag, model, t\[1\], t[2], t[3])
       sum(em$n_pairs / (2 * pmax(g, 1e-12)^2) * (em$gamma - g)^2)
     }
     op <- stats::optim(log(c(max(0.1 * v0, 1e-8), max(0.9 * v0, 1e-8),
@@ -321,7 +321,7 @@ morie_kriging_pred_error <- function(coords, z, target,
                        obj, method = "Nelder-Mead",
                        control = list(maxit = 2000L, reltol = 1e-12))
     th <- exp(op$par)
-    nugget <- th[1]
+    nugget <- th\[1\]
     psill <- th[2]
     rng <- th[3]
   }
@@ -331,10 +331,10 @@ morie_kriging_pred_error <- function(coords, z, target,
     sqrt(sum((P[i, ] - T0[j, ])^2))
   }))
   krige <- function(t) {
-    sill <- t[1] + t[2]
-    C <- sill - .morie_sb_vgm(D, model, t[1], t[2], t[3])
+    sill <- t\[1\] + t[2]
+    C <- sill - .morie_sb_vgm(D, model, t\[1\], t[2], t[3])
     C <- C + diag(1e-10 * max(sill, 1e-12), n)
-    c0 <- sill - .morie_sb_vgm(d0, model, t[1], t[2], t[3])
+    c0 <- sill - .morie_sb_vgm(d0, model, t\[1\], t[2], t[3])
     Ci1 <- solve(C, rep(1, n))
     Cic <- solve(C, c0)
     den <- sum(Ci1)
@@ -360,8 +360,8 @@ morie_kriging_pred_error <- function(coords, z, target,
   draws <- pmax(draws, 1e-10)
   cen <- sweep(draws, 2L, theta)
   B <- crossprod(cen) / n_jitter
-  sill <- theta[1] + theta[2]
-  Cth <- sill - .morie_sb_vgm(D, model, theta[1], theta[2], theta[3])
+  sill <- theta\[1\] + theta[2]
+  Cth <- sill - .morie_sb_vgm(D, model, theta\[1\], theta[2], theta[3])
   Cth <- Cth + diag(1e-10 * max(sill, 1e-12), n)
   corr <- numeric(m)
   for (j in seq_len(m)) {
@@ -373,7 +373,7 @@ morie_kriging_pred_error <- function(coords, z, target,
   mse <- k0$var + 2 * corr
   list(prediction = pred, mse = mse, se = sqrt(pmax(mse, 0)),
        mse_plugin = k0$var, correction = 2 * corr,
-       parameters = list(nugget = theta[1], psill = theta[2],
+       parameters = list(nugget = theta\[1\], psill = theta[2],
                          range = theta[3]),
        parameters_estimated = estimated, model = model,
        n = n, n_target = m,

@@ -411,7 +411,7 @@ morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
 #' is.list(lt) || is.numeric(lt)
 morie_latent_time <- function(fits) {
   if (length(fits) == 0) stop("scvelo: no gene fits supplied", call. = FALSE)
-  n <- length(fits[[1]]$latent)
+  n <- length(fits[\[1\]]$latent)
   for (f in fits) {
     if (length(f$latent) != n) {
       stop("scvelo: every gene must cover the same cells", call. = FALSE)

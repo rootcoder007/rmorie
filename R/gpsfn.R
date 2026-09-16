@@ -35,7 +35,7 @@ Fitcgp <- function(X, y, X_test = NULL, inducing = NULL, gamma = 1,
   }
   cross <- function(A, B) {
     out <- matrix(0, nrow(A), nrow(B))
-    for (i in seq_len(nrow(A))) for (j in seq_len(nrow(B))) out[i, j] <- rbf(A[i, ], B[j, ])
+    for (i in seq_len(nrow(A))) for (j in seq_len(nrow(B))) out\[i, j\] <- rbf(A[i, ], B[j, ])
     out
   }
   Xm <- .s03mat(X)
@@ -80,7 +80,7 @@ Fitcgp <- function(X, y, X_test = NULL, inducing = NULL, gamma = 1,
     qb <- qb + Ktm[t, a] * wb[a] }
     var_[t] <- 1 - qb + qa
   }
-  list(estimate = if (length(pred)) pred[1] else NaN, pred = pred, var = var_,
+  list(estimate = if (length(pred)) pred\[1\] else NaN, pred = pred, var = var_,
        lam = lam, alpha = alpha,
        method = "FITC sparse GP with the diagonal correction (Snelson and Ghahramani 2006)")
 }

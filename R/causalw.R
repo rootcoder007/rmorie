@@ -150,7 +150,7 @@ Eaiprl <- function(y, D, X = NULL, ml_outcome = NULL,
   if (length(dd) != n) stop("y and D must have the same length", call. = FALSE)
   if (is.null(ml_outcome) || is.null(ml_propensity))
     stop("ml_outcome (m1, m0) and ml_propensity are required", call. = FALSE)
-  m1 <- as.numeric(ml_outcome[[1]])
+  m1 <- as.numeric(ml_outcome[\[1\]])
   m0 <- as.numeric(ml_outcome[[2]])
   e <- as.numeric(ml_propensity)
   if (length(m1) != n || length(m0) != n || length(e) != n)
@@ -174,12 +174,12 @@ Eaiprl <- function(y, D, X = NULL, ml_outcome = NULL,
 #' \eqn{H_1^*=I(A=1)/g(1|W)}, \eqn{H_0^*=I(A=0)/g(0|W)}, and the
 #' fluctuation \eqn{logit(Q^*) = logit(Q) + \epsilon_0 H_0^* + \epsilon_1 H_1^*}
 #' fitted by logistic regression of Y on the clever covariates with
-#' offset \eqn{logit(Q)}.  `y` must be bounded in [0, 1] so the
+#' offset \eqn{logit(Q)}.  `y` must be bounded in \[0, 1\] so the
 #' fluctuation stays inside the model space.  When the initial fit
 #' already solves the score, epsilon is 0 and the estimate equals
 #' `plugin`.
 #'
-#' @param y Outcomes in [0, 1].
+#' @param y Outcomes in \[0, 1\].
 #' @param T Treatment indicator, 0/1.
 #' @param ps Propensity \eqn{g(1|W)}, strictly in (0, 1).
 #' @param Q1,Q0 Initial outcome fits under treatment and control.
@@ -205,7 +205,7 @@ Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
   if (any(g <= 0 | g >= 1))
     stop("propensities must lie strictly in (0, 1)", call. = FALSE)
   if (any(ys < 0 | ys > 1))
-    stop("y must be bounded in [0, 1] for the fluctuation", call. = FALSE)
+    stop("y must be bounded in \[0, 1\] for the fluctuation", call. = FALSE)
   LO <- 1e-12
   lg <- function(p) { p <- pmin(pmax(p, LO), 1 - LO)
   log(p / (1 - p)) }
@@ -282,7 +282,7 @@ Cde <- function(Y, X, M, m) {
   s2 <- sum(resid^2) / (n - 4)
   inv <- solve(XtX)
   vr <- s2 * (inv[2, 2] + mv * mv * inv[4, 4] + 2 * mv * inv[2, 4])
-  list(estimate = cdev, cde = cdev, intercept = b[1], beta_x = b[2],
+  list(estimate = cdev, cde = cdev, intercept = b\[1\], beta_x = b[2],
        beta_m = b[3], interaction = b[4],
        se = if (vr > 0) sqrt(vr) else 0, m = mv, n = n,
        method = "controlled direct effect (Robins & Greenland 1992)")

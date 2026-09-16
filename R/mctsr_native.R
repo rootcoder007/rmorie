@@ -14,7 +14,7 @@
 #' BACKUP propagates the reward. Selection uses
 #' UCT\_j = Xbar\_j + 2\*Cp\*sqrt(2\*log(n)/n\_j), unvisited children
 #' valued Inf. Cp = 1/sqrt(2) is the Kocsis-Szepesvari value for
-#' rewards in [0, 1].  Both survey backups are provided: "sum"
+#' rewards in \[0, 1\].  Both survey backups are provided: "sum"
 #' (Algorithm 2) and "negamax" (Algorithm 3, two-player zero-sum).
 #' Both final-move criteria: "robust" (most-visited root child,
 #' default) and "max" (highest mean reward).
@@ -53,7 +53,7 @@ morie_mctsr <- function(root_state, actions, step, reward, is_terminal,
   untried <- list(as.list(actions(root_state)))
   Nv <- 0
   Qv <- 0
-  if (!length(untried[[1]]) && !is_terminal(root_state))
+  if (!length(untried[\[1\]]) && !is_terminal(root_state))
     stop("root has no legal actions")
 
   best_child <- function(v) {
@@ -73,7 +73,7 @@ morie_mctsr <- function(root_state, actions, step, reward, is_terminal,
     repeat {
       if (is_terminal(st[[v]])) break
       if (length(untried[[v]])) {
-        a <- untried[[v]][[1]]
+        a <- untried[[v]][\[1\]]
         untried[[v]] <- untried[[v]][-1]
         s2 <- step(st[[v]], a)
         st[[length(st) + 1L]] <- s2
@@ -107,12 +107,12 @@ morie_mctsr <- function(root_state, actions, step, reward, is_terminal,
     }
   }
 
-  ch <- kids[[1]]
+  ch <- kids[\[1\]]
   if (!length(ch)) stop("no children expanded; increase n_iter")
   pick <- if (final == "robust") ch[which.max(Nv[ch])] else
     ch[which.max(ifelse(Nv[ch] > 0, Qv[ch] / Nv[ch], -Inf))]
   labs <- vapply(ch, function(k) as.character(act[[k]]), character(1))
-  list(action = act[[pick]], root_visits = Nv[1],
+  list(action = act[[pick]], root_visits = Nv\[1\],
        child_visits = setNames(as.integer(Nv[ch]), labs),
        child_values = setNames(
          ifelse(Nv[ch] > 0, Qv[ch] / Nv[ch], 0), labs),

@@ -226,13 +226,13 @@
 #' @return Nothing; this branch always raises.
 #' @export
 .karpv_apply <- function(op, vals) {
-  if (op == "+") return(vals[1] + vals[2])
-  if (op == "-") return(vals[1] - vals[2])
-  if (op == "*") return(vals[1] * vals[2])
+  if (op == "+") return(vals\[1\] + vals[2])
+  if (op == "-") return(vals\[1\] - vals[2])
+  if (op == "*") return(vals\[1\] * vals[2])
   if (op == "%") {
     # Koza's protected division: a zero divisor yields 1, so one bad
     # division does not throw away an otherwise good program.
-    return(if (vals[2] == 0) 1 else vals[1] / vals[2])
+    return(if (vals[2] == 0) 1 else vals\[1\] / vals[2])
   }
   stop(sprintf("karpV: unknown function %s", op), call. = FALSE)
 }
@@ -322,7 +322,7 @@ morie_karpV_to_string <- function(node) {
   n <- length(terminals) + (if (is.null(erc)) 0L else 1L)
   i <- .karpv_below(e, n)
   if (i < length(terminals)) return(.karpv_tnode(terminals[i + 1L]))
-  .karpv_tnode(erc[1] + (erc[2] - erc[1]) * .karpv_unit(e))
+  .karpv_tnode(erc\[1\] + (erc[2] - erc\[1\]) * .karpv_unit(e))
 }
 
 #' .karpv_grow
@@ -349,7 +349,7 @@ morie_karpV_to_string <- function(node) {
       return(.karpv_random_terminal(e, terminals, erc))
   }
   f <- functions[[.karpv_below(e, length(functions)) + 1L]]
-  .karpv_fnode(f[[1]], lapply(seq_len(f[[2]]), function(k)
+  .karpv_fnode(f[\[1\]], lapply(seq_len(f[[2]]), function(k)
     .karpv_grow(e, functions, terminals, erc, d - 1L, full)))
 }
 
@@ -461,7 +461,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 .karpv_replace <- function(node, path, new) {
   if (!length(path)) return(.karpv_copy(new))
   out <- .karpv_fnode(node$op, node$args)
-  out$args[[path[1]]] <- .karpv_replace(out$args[[path[1]]], path[-1], new)
+  out$args[[path\[1\]]] <- .karpv_replace(out$args[[path\[1\]]], path[-1], new)
   out
 }
 
@@ -514,7 +514,7 @@ morie_karpV_raw_fitness <- function(node, cases, terminals) {
   errs <- numeric(length(cases))
   for (i in seq_along(cases)) {
     cs <- cases[[i]]
-    env <- as.list(stats::setNames(as.numeric(cs[[1]]), terminals))
+    env <- as.list(stats::setNames(as.numeric(cs[\[1\]]), terminals))
     got <- try(morie_karpV_evaluate(node, env), silent = TRUE)
     if (inherits(got, "try-error") || !is.finite(got)) return(Inf)
     errs[i] <- abs(got - as.numeric(cs[[2]]))

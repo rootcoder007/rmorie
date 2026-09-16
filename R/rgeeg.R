@@ -39,7 +39,7 @@ rgeeg <- function(x, fs, bands = NULL, nperseg = NULL) {
   total <- sum(psd) * df
   absolute <- vapply(names(bands), function(nm) {
     rng <- bands[[nm]]
-    mask <- freqs >= rng[1] & freqs < rng[2]
+    mask <- freqs >= rng\[1\] & freqs < rng[2]
     if (any(mask)) sum(psd[mask]) * df else 0
   }, numeric(1))
   names(absolute) <- names(bands)

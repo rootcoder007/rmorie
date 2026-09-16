@@ -151,7 +151,7 @@
 .clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
   th <- as.numeric(threshold)
   if (is.na(th) || th < 0.0 || th > 1.0)
-    stop("clusmd: the threshold must lie in [0, 1], got ", th)
+    stop("clusmd: the threshold must lie in \[0, 1\], got ", th)
   if (length(fps) < 1L)
     stop("clusmd: no compounds given")
   F <- lapply(fps, .clusmd_fp)
@@ -333,7 +333,7 @@
 #'
 #' @param fps A list of fingerprints. Each fingerprint is either an
 #'   integer vector of on-bit indices or a 0/1 sequence.
-#' @param threshold Tanimoto threshold in \code{[0, 1]}; default 0.8
+#' @param threshold Tanimoto threshold in \code{\[0, 1\]}; default 0.8
 #'   (Butina's working value).
 #' @return A list of length \code{length(fps)} of integer vectors.
 #' @references Butina, D. (1999) J. Chem. Inf. Comput. Sci. 39(4),
@@ -358,7 +358,7 @@ morie_clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
 #' then ascending centroid.
 #'
 #' @param fps A list of fingerprints.
-#' @param threshold Tanimoto threshold in \code{[0, 1]}; default 0.8.
+#' @param threshold Tanimoto threshold in \code{\[0, 1\]}; default 0.8.
 #' @param recount If \code{TRUE}, recompute neighbour counts each
 #'   round against the currently live compounds (more expensive, can
 #'   give more balanced clusters). Default \code{FALSE} preserves
@@ -404,7 +404,7 @@ morie_clusmd_cluster_summary <- function(clusters) {
 #' \code{assignment}, \code{centroids}, \code{method}.
 #'
 #' @param fps A list of fingerprints.
-#' @param threshold Tanimoto threshold in \code{[0, 1]}; default 0.8.
+#' @param threshold Tanimoto threshold in \code{\[0, 1\]}; default 0.8.
 #' @param recount If \code{TRUE}, recompute neighbour counts each round.
 #' @return A rich-result list of class \code{morie_clusmd_result}.
 #' @references Butina, D. (1999) J. Chem. Inf. Comput. Sci. 39(4),

@@ -50,7 +50,7 @@ hrzi1 <- function(x, y, bandwidth = NULL) {
   beta0 <- as.numeric(stats::coef(stats::lm.fit(X, y)))
   nrm <- sqrt(sum(beta0^2))
   if (nrm < 1e-10) beta0 <- rep(1, p) / sqrt(p) else beta0 <- beta0 / nrm
-  if (beta0[1] < 0) beta0 <- -beta0
+  if (beta0\[1\] < 0) beta0 <- -beta0
   h0 <- if (is.null(bandwidth)) .hrz_silverman(X %*% beta0) else as.numeric(bandwidth)
 
   # 3MMM.28: Brent for p=1 (1-D); Nelder-Mead for p>=2. stats::optim
@@ -67,7 +67,7 @@ hrzi1 <- function(x, y, bandwidth = NULL) {
   }
   bh <- res$par
   bh <- bh / max(sqrt(sum(bh^2)), 1e-12)
-  if (bh[1] < 0) bh <- -bh
+  if (bh\[1\] < 0) bh <- -bh
   # Numerical Hessian for SE
   eps <- 1e-4
   H <- matrix(0, p, p)
@@ -85,7 +85,7 @@ hrzi1 <- function(x, y, bandwidth = NULL) {
       bmp <- bh
       bmp[i] <- bmp[i] - eps
       bmp[j] <- bmp[j] + eps
-      H[i, j] <- (obj(bp) - obj(bpm) - obj(bmp) + obj(bm)) / (4 * eps^2)
+      H\[i, j\] <- (obj(bp) - obj(bpm) - obj(bmp) + obj(bm)) / (4 * eps^2)
     }
   }
   H <- 0.5 * (H + t(H))

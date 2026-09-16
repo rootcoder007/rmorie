@@ -60,6 +60,6 @@ Linatt <- function(Q, K, V, E, F_) {
   if (nrow(Ea) == 1L) P <- matrix(P, nrow = n)
   out <- P %*% FV
   list(output = out, weights = P, projected_K = EK, projected_V = FV,
-       k = nrow(Ea), estimate = out[1, 1], n = n,
+       k = nrow(Ea), estimate = out\[1, 1\], n = n,
        method = "Linformer low-rank attention (Wang et al. 2020, Eq 7)")
 }

@@ -8,7 +8,7 @@
 #' The exact tabular algorithm underlying soft actor-critic (Haarnoja
 #' et al. 2018, Section 4.1): soft policy evaluation applies the soft
 #' Bellman backup of eqs. (2)-(3), Q <- r + gamma E[V], V =
-#' E_pi[Q - temp log pi]; soft policy improvement projects onto
+#' E_pi\[Q - temp log pi\]; soft policy improvement projects onto
 #' softmax(Q/temp) (eq. 4), the exact minimizer for the tabular class,
 #' with monotone improvement and convergence per Lemmas 1-2 and
 #' Theorem 1. At the fixed point V(s) = temp logsumexp(Q(s,.)/temp)
@@ -37,9 +37,9 @@ Sacc <- function(P, R, gamma, temp = 1, tol = 1e-12, max_eval = 100000L,
   Rm <- ar$R
   S <- ar$S
   A <- ar$A
-  gamma <- as.numeric(gamma)[1]
-  temp <- as.numeric(temp)[1]
-  tol <- as.numeric(tol)[1]
+  gamma <- as.numeric(gamma)\[1\]
+  temp <- as.numeric(temp)\[1\]
+  tol <- as.numeric(tol)\[1\]
   if (temp <= 0) stop("temp must be positive", call. = FALSE)
   Q <- matrix(0, S, A)
   pi_ <- matrix(1 / A, S, A)

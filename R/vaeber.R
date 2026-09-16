@@ -5,7 +5,7 @@
 #' Variational Bayes", ICLR 2014; arXiv:1312.6114.
 #'
 #' The bound is Eq. (3), L = -KL(q_phi(z|x) || p_theta(z)) +
-#' E_\{q_phi\}[log p_theta(x|z)], estimated by the SGVB estimator of
+#' E_\{q_phi\}\[log p_theta(x|z)\], estimated by the SGVB estimator of
 #' Eq. (7) with the reparameterisation z = mu + sigma * eps,
 #' eps ~ N(0, I). With a Gaussian encoder and a standard normal prior the
 #' KL is closed form (Appendix B / Eq. 10):
@@ -18,8 +18,8 @@
 #'
 #' DECODER. p(x|z) = N(x; W z + b, s^2 I), the Gaussian decoder of
 #' Appendix C.2, for which the reconstruction term is also closed form:
-#' E_q[log p(x|z)] = -(1/2) sum_k [log(2 pi s^2) + ((x_k - (W mu + b)_k)^2
-#' + sum_j sigma_j^2 W[j,k]^2)/s^2], returned as \code{recon_analytic}.
+#' E_q\[log p(x|z)\] = -(1/2) sum_k [log(2 pi s^2) + ((x_k - (W mu + b)_k)^2
+#' + sum_j sigma_j^2 W\[j,k\]^2)/s^2], returned as \code{recon_analytic}.
 #' The Monte Carlo estimate must approach it as \code{n_samples} grows --
 #' an anchor that does not run through the other language arm.
 #'
@@ -79,13 +79,13 @@ Vaeber <- function(x, encoder = NULL, decoder = NULL, latent_dim = 2,
   }
   eps <- .vitdraw(L, m, skip + 2L * d * m + m * d, 1)
   sig <- matrix(0, n, m)
-  for (i in seq_len(n)) for (j in seq_len(m)) sig[i, j] <- exp(0.5 * lv[i, j])
+  for (i in seq_len(n)) for (j in seq_len(m)) sig\[i, j\] <- exp(0.5 * lv\[i, j\])
   klp <- numeric(n)
   for (i in seq_len(n)) {
     t <- 0
     for (j in seq_len(m)) {
-      v <- sig[i, j] * sig[i, j]
-      t <- t + mu[i, j] * mu[i, j] + v - 1 - lv[i, j]
+      v <- sig\[i, j\] * sig\[i, j\]
+      t <- t + mu\[i, j\] * mu\[i, j\] + v - 1 - lv\[i, j\]
     }
     klp[i] <- 0.5 * t
   }
@@ -96,12 +96,12 @@ Vaeber <- function(x, encoder = NULL, decoder = NULL, latent_dim = 2,
     acc <- 0
     for (l in seq_len(L)) {
       z <- numeric(m)
-      for (j in seq_len(m)) z[j] <- mu[i, j] + sig[i, j] * eps[l, j]
+      for (j in seq_len(m)) z[j] <- mu\[i, j\] + sig\[i, j\] * eps[l, j]
       t <- 0
       for (k in seq_len(d)) {
         r <- bd[k]
         for (j in seq_len(m)) r <- r + z[j] * Wd[j, k]
-        t <- t + cc + (X[i, k] - r) * (X[i, k] - r) / (s * s)
+        t <- t + cc + (X\[i, k\] - r) * (X\[i, k\] - r) / (s * s)
       }
       acc <- acc + -0.5 * t
     }
@@ -109,10 +109,10 @@ Vaeber <- function(x, encoder = NULL, decoder = NULL, latent_dim = 2,
     t <- 0
     for (k in seq_len(d)) {
       r <- bd[k]
-      for (j in seq_len(m)) r <- r + mu[i, j] * Wd[j, k]
+      for (j in seq_len(m)) r <- r + mu\[i, j\] * Wd[j, k]
       q <- 0
-      for (j in seq_len(m)) q <- q + sig[i, j] * sig[i, j] * Wd[j, k] * Wd[j, k]
-      t <- t + cc + ((X[i, k] - r) * (X[i, k] - r) + q) / (s * s)
+      for (j in seq_len(m)) q <- q + sig\[i, j\] * sig\[i, j\] * Wd[j, k] * Wd[j, k]
+      t <- t + cc + ((X\[i, k\] - r) * (X\[i, k\] - r) + q) / (s * s)
     }
     anap[i] <- -0.5 * t
   }

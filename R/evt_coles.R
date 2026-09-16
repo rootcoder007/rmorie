@@ -98,15 +98,15 @@ morie_evt_gev_mle <- function(x) {
   s <- stats::sd(x)
   sigma0 <- s * sqrt(6) / pi
   mu0 <- mean(x) - 0.5772156649015329 * sigma0
-  nll <- function(th) -morie_evt_gev_loglik(x, th[1], exp(th[2]), th[3])
+  nll <- function(th) -morie_evt_gev_loglik(x, th\[1\], exp(th[2]), th[3])
   fit <- stats::optim(c(mu0, log(sigma0), 0.1), nll,
     method = "Nelder-Mead",
     control = list(maxit = 4000)
   )
-  mu <- fit$par[1]
+  mu <- fit$par\[1\]
   sigma <- exp(fit$par[2])
   xi <- fit$par[3]
-  nll_nat <- function(th) -morie_evt_gev_loglik(x, th[1], th[2], th[3])
+  nll_nat <- function(th) -morie_evt_gev_loglik(x, th\[1\], th[2], th[3])
   H <- .evt_num_hessian(nll_nat, c(mu, sigma, xi))
   covm <- tryCatch(solve(H), error = function(e) MASS_ginv_fallback(H))
   list(
@@ -147,7 +147,7 @@ morie_evt_gev_mle <- function(x) {
       tmp[j] <- tmp[j] + hj
       tmm[i] <- tmm[i] - hi
       tmm[j] <- tmm[j] - hj
-      H[i, j] <- H[j, i] <- (f(tpp) - f(tpm) - f(tmp) + f(tmm)) /
+      H\[i, j\] <- H[j, i] <- (f(tpp) - f(tpm) - f(tmp) + f(tmm)) /
         (4 * hi * hj)
     }
   }
@@ -241,7 +241,7 @@ morie_evt_gpd_mle <- function(y) {
   s2 <- stats::var(y)
   xi0 <- 0.5 * (1 - ybar^2 / s2)
   sigma0 <- max(if (xi0 < 1) ybar * (1 - xi0) else ybar, 1e-8)
-  nll <- function(th) -morie_evt_gpd_loglik(y, exp(th[1]), th[2])
+  nll <- function(th) -morie_evt_gpd_loglik(y, exp(th\[1\]), th[2])
   fit <- stats::optim(
     c(
       log(sigma0),
@@ -251,9 +251,9 @@ morie_evt_gpd_mle <- function(y) {
     method = "Nelder-Mead",
     control = list(maxit = 4000)
   )
-  sigma <- exp(fit$par[1])
+  sigma <- exp(fit$par\[1\])
   xi <- fit$par[2]
-  nll_nat <- function(th) -morie_evt_gpd_loglik(y, th[1], th[2])
+  nll_nat <- function(th) -morie_evt_gpd_loglik(y, th\[1\], th[2])
   H <- .evt_num_hessian(nll_nat, c(sigma, xi))
   covm <- tryCatch(solve(H), error = function(e) MASS_ginv_fallback(H))
   list(
@@ -373,7 +373,7 @@ morie_evt_xi_ci_profile <- function(x, alpha = 0.05, model = "gev") {
     prof <- function(xi) {
       nll <- function(th) {
         -morie_evt_gev_loglik(
-          x, th[1],
+          x, th\[1\],
           exp(th[2]), xi
         )
       }
@@ -385,7 +385,7 @@ morie_evt_xi_ci_profile <- function(x, alpha = 0.05, model = "gev") {
   } else {
     fit <- morie_evt_gpd_mle(x)
     prof <- function(xi) {
-      nll <- function(th) -morie_evt_gpd_loglik(x, exp(th[1]), xi)
+      nll <- function(th) -morie_evt_gpd_loglik(x, exp(th\[1\]), xi)
       -stats::optim(log(fit$sigma), nll,
         method = "Brent",
         lower = log(fit$sigma) - 6,
@@ -432,8 +432,8 @@ morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
   set.seed(seed)
   f <- morie_evt_gev_mle(x)
   logpost <- function(th) {
-    morie_evt_gev_loglik(x, th[1], exp(th[2]), th[3]) -
-      th[1]^2 / (2 * prior_sd[1]^2) -
+    morie_evt_gev_loglik(x, th\[1\], exp(th[2]), th[3]) -
+      th\[1\]^2 / (2 * prior_sd\[1\]^2) -
       th[2]^2 / (2 * prior_sd[2]^2) -
       th[3]^2 / (2 * prior_sd[3]^2)
   }
@@ -460,7 +460,7 @@ morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
     }
     if (it > warm) {
       kept <- kept + 1L
-      draws[kept, ] <- c(th[1], exp(th[2]), th[3])
+      draws[kept, ] <- c(th\[1\], exp(th[2]), th[3])
     }
   }
   list(draws = draws, accept_rate = acc / tot)
@@ -480,7 +480,7 @@ morie_evt_gev_trend <- function(x, t = seq_along(x) - 1) {
   f0 <- morie_evt_gev_mle(x)
   nll <- function(th) {
     s <- exp(th[3])
-    -sum(morie_evt_gev_logpdf(x, th[1] + th[2] * tz, s, th[4]))
+    -sum(morie_evt_gev_logpdf(x, th\[1\] + th[2] * tz, s, th[4]))
   }
   fit <- stats::optim(c(f0$mu, 0, log(f0$sigma), f0$xi), nll,
     method = "Nelder-Mead",
@@ -489,7 +489,7 @@ morie_evt_gev_trend <- function(x, t = seq_along(x) - 1) {
   tsd <- max(stats::sd(t) * sqrt((n - 1) / n), 1e-12)
   beta1 <- fit$par[2] / tsd
   list(
-    beta0 = fit$par[1], beta1 = beta1,
+    beta0 = fit$par\[1\], beta1 = beta1,
     sigma = exp(fit$par[3]), xi = fit$par[4],
     loglik = -fit$value,
     lr_vs_stationary = 2 * (-fit$value - f0$loglik)

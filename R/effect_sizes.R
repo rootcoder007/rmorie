@@ -281,7 +281,7 @@ epsilon_squared <- function(ss_effect, ss_total, df_effect, ms_error) {
 # CONTINGENCY TABLE EFFECT SIZES
 # =====================================================================
 
-#' Odds ratio for a 2x2 table `[[a, b], [c, d]]`
+#' Odds ratio for a 2x2 table `[\[a, b\], [c, d]]`
 #'
 #' @param a,b,c,d Cell counts of the 2x2 table: a = exposed with outcome,
 #'   b = exposed without, c = unexposed with outcome, d = unexposed without.
@@ -551,7 +551,7 @@ phi_coefficient <- function(contingency_table) {
   chi2 <- as.numeric(cs$statistic)
   n <- sum(tbl)
   phi <- if (n > 0) sqrt(chi2 / n) else 0
-  if (tbl[1, 1] * tbl[2, 2] < tbl[1, 2] * tbl[2, 1]) phi <- -phi
+  if (tbl\[1, 1\] * tbl[2, 2] < tbl\[1, 2\] * tbl[2, 1]) phi <- -phi
   effect_size_result("Phi coefficient", phi, n = as.integer(n))
 }
 

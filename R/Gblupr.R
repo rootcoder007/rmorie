@@ -9,7 +9,7 @@
 #' inversion because VanRaden's G is singular whenever markers
 #' outnumber individuals.
 #'
-#' Formula: [X'X, X'Z; Z'X, Z'Z + G^\{-1\} k] [beta; u] = [X'y; Z'y],
+#' Formula: [X'X, X'Z; Z'X, Z'Z + G^\{-1\} k] \[beta; u\] = \[X'y; Z'y\],
 #'   k = sigma_e^2 / sigma_u^2.
 #'
 #' @param y Response vector.
@@ -61,7 +61,7 @@ Gblupr <- function(y, X, Z, G, var_u = 1, var_e = 1, ridge = 1e-8) {
   u <- sol[p + seq_len(q)]
   fitted <- as.numeric(Xm %*% beta + Zm %*% u)
   resid <- yv - fitted
-  .t1_result(estimate = u[1], beta = beta, u = u, fitted = fitted,
+  .t1_result(estimate = u\[1\], beta = beta, u = u, fitted = fitted,
              residual_ss = sum(resid * resid), lambda = k, n = n,
              method = "Henderson mixed model equations with G from VanRaden (2008)")
 }

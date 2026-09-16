@@ -124,7 +124,7 @@ morie_qlrtst <- function(y, X = NULL, trim = 0.15) {
   if (!is.null(.qlr_hansen_t2[[key_m]])) {
     key_t <- sprintf("%.2f", tr)
     th <- .qlr_hansen_t2[[key_m]][[key_t]]
-    z <- th[1] + th[2] * best_w
+    z <- th\[1\] + th[2] * best_w
     p <- if (z <= 0) 1 else pchisq(z, th[3], lower.tail = FALSE)
   }
   list(statistic = best_w, breakpoint = best_k, p_value = p,

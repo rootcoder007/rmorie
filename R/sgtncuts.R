@@ -27,7 +27,7 @@ Ncut <- function(A, labels) {
   vol <- numeric(length(ids))
   for (gi in seq_along(ids)) {
     s <- 0
-    for (i in seq_len(n)) if (lab[i] == ids[gi]) for (j in seq_len(n)) s <- s + W[i, j]
+    for (i in seq_len(n)) if (lab[i] == ids[gi]) for (j in seq_len(n)) s <- s + W\[i, j\]
     vol[gi] <- s
   }
   ncut <- 0
@@ -39,7 +39,7 @@ Ncut <- function(A, labels) {
     for (i in seq_len(n)) {
       if (lab[i] != ids[gi]) next
       for (j in seq_len(n)) {
-        if (lab[j] != ids[gi]) cut <- cut + W[i, j] else assoc <- assoc + W[i, j]
+        if (lab[j] != ids[gi]) cut <- cut + W\[i, j\] else assoc <- assoc + W\[i, j\]
       }
     }
     cut_total <- cut_total + cut

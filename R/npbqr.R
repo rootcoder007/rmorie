@@ -50,7 +50,7 @@ Npbqr <- function(y, X, tau = 0.5, alpha = 1, niter = 40L, eps = 1e-3) {
   r <- as.numeric(yv - Xm %*% beta)
   loss <- sum(r * (t - as.numeric(r < 0)))
   ek <- sum(a / (a + seq_len(n) - 1))
-  .t1_result(beta = beta, estimate = beta[1], sigma = loss / n,
+  .t1_result(beta = beta, estimate = beta\[1\], sigma = loss / n,
              check_loss = loss, e_k = ek,
              e_k_digamma = a * (.s03digamma(a + n) - .s03digamma(a)),
              tau = t, alpha = a, n = n, p = p,

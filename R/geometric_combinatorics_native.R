@@ -28,7 +28,7 @@
 #' @return A numeric value.
 #' @export
 .morie_cross3 <- function(o, a, b) {
-  (a[1] - o[1]) * (b[2] - o[2]) - (a[2] - o[2]) * (b[1] - o[1])
+  (a\[1\] - o\[1\]) * (b[2] - o[2]) - (a[2] - o[2]) * (b\[1\] - o\[1\])
 }
 
 #' Convex hull of lattice points by Andrew's monotone chain
@@ -175,7 +175,7 @@ morie_pick_theorem <- function(vertices, verify_by_enumeration = TRUE,
   if (isTRUE(verify_by_enumeration)) {
     xr <- range(v[, 1])
     yr <- range(v[, 2])
-    box <- (xr[2] - xr[1] + 1) * (yr[2] - yr[1] + 1)
+    box <- (xr[2] - xr\[1\] + 1) * (yr[2] - yr\[1\] + 1)
     if (box > enumeration_cap) {
       warns <- c(warns, sprintf(paste(
         "The bounding box holds %g lattice points, above the enumeration",
@@ -185,8 +185,8 @@ morie_pick_theorem <- function(vertices, verify_by_enumeration = TRUE,
       ), box, enumeration_cap))
     } else {
       cnt <- 0L
-      for (px in xr[1]:xr[2]) {
-        for (py in yr[1]:yr[2]) {
+      for (px in xr\[1\]:xr[2]) {
+        for (py in yr\[1\]:yr[2]) {
           if (strictly_inside(px, py)) cnt <- cnt + 1L
         }
       }
@@ -311,7 +311,7 @@ morie_happy_ending_quadrilateral <- function(points) {
     if (.morie_cross3(a, b, cc) == 0) {
       stop(sprintf(
         "points (%d, %d), (%d, %d), (%d, %d) are collinear; the theorem assumes general position.",
-        a[1], a[2], b[1], b[2], cc[1], cc[2]
+        a\[1\], a[2], b\[1\], b[2], cc\[1\], cc[2]
       ), call. = FALSE)
     }
   }

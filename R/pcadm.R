@@ -28,7 +28,7 @@ morie_pca_dimension_reduction <- function(x, n_components = NULL, seed = 0L) {
   components <- t(pc$rotation[, seq_len(k), drop = FALSE])
   scores <- pc$x[, seq_len(k), drop = FALSE]
   list(
-    estimate                 = as.numeric(ratio[1]),
+    estimate                 = as.numeric(ratio\[1\]),
     components               = components,
     explained_variance       = as.numeric(ev),
     explained_variance_ratio = as.numeric(ratio),

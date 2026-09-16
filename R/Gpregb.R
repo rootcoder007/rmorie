@@ -45,7 +45,7 @@ Gpregb <- function(X, y, kernel = NULL, X_test = NULL, lengthscales = NULL,
   kf <- function(P, Q, ell) {
     out <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      out[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      out\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     out
   }
   mus <- list()
@@ -76,7 +76,7 @@ Gpregb <- function(X, y, kernel = NULL, X_test = NULL, lengthscales = NULL,
     mean[j] <- sum(vapply(seq_along(w), function(g) w[g] * mus[[g]][j], 0))
     varp[j] <- sum(vapply(seq_along(w), function(g) w[g] * (sds[[g]][j] + mus[[g]][j]^2), 0)) - mean[j]^2
   }
-  .t1_result(estimate = mean[1], mean = mean, variance = varp, weights = w,
+  .t1_result(estimate = mean\[1\], mean = mean, variance = varp, weights = w,
              loglik = lls, n = n,
              method = "GP posterior (R&W eqs. 2.23-2.26) averaged over a marginal-likelihood-weighted hyperparameter grid; Murray & Adams (2010)")
 }

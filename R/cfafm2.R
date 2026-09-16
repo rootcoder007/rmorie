@@ -28,7 +28,7 @@
   mu <- colSums(M) / n
   S <- matrix(0, q, q)
   for (a in seq_len(q)) for (b in seq_len(q))
-    S[a, b] <- sum((M[, a] - mu[a]) * (M[, b] - mu[b])) / (n - 1)
+    S\[a, b\] <- sum((M[, a] - mu[a]) * (M[, b] - mu[b])) / (n - 1)
   S
 }
 
@@ -53,7 +53,7 @@
     .s03cholsolve(A, e)
   })
   out <- matrix(0, m, m)
-  for (a in seq_len(m)) for (b in seq_len(m)) out[a, b] <- cols[[b]][a]
+  for (a in seq_len(m)) for (b in seq_len(m)) out\[a, b\] <- cols[[b]][a]
   out
 }
 
@@ -76,11 +76,11 @@
 }
 
 # Masked EM factor analysis (Rubin & Thayer 1982 E- and M-steps).
-# mask[i, j] is 1 where item i may load on factor j.  Factors are
+# mask\[i, j\] is 1 where item i may load on factor j.  Factors are
 # standardised and orthogonal, so Sigma = Lambda Lambda' + Psi.
 #' Masked EM factor analysis (Rubin & Thayer 1982 E- and M-steps)
 #'
-#' mask[i, j] is 1 where item i may load on factor j.  Factors are
+#' mask\[i, j\] is 1 where item i may load on factor j.  Factors are
 #' standardised and orthogonal, so Sigma = Lambda Lambda\' + Psi.
 #'
 #' @param S A matrix; indexed by row and column.
@@ -95,7 +95,7 @@
   for (j in seq_len(k)) {
     idx <- p - j + 1L
     sv <- sqrt(max(eg$values[idx], 0))
-    for (i in seq_len(p)) lam[i, j] <- sv * eg$vectors[i, idx] * mask[i, j]
+    for (i in seq_len(p)) lam\[i, j\] <- sv * eg$vectors[i, idx] * mask\[i, j\]
   }
   psi <- numeric(p)
   for (i in seq_len(p)) {
@@ -107,7 +107,7 @@
     it <- iter
     Sig <- matrix(0, p, p)
     for (a in seq_len(p)) for (b in seq_len(p))
-      Sig[a, b] <- sum(lam[a, ] * lam[b, ]) + if (a == b) psi[a] else 0
+      Sig\[a, b\] <- sum(lam[a, ] * lam[b, ]) + if (a == b) psi[a] else 0
     Si <- .cfa_inv(Sig)
     beta <- matrix(0, k, p)
     for (j in seq_len(k)) for (b in seq_len(p))
@@ -120,7 +120,7 @@
       Czz[u, v] <- (if (u == v) 1 else 0) - sum(beta[u, ] * lam[, v]) +
         sum(bS[u, ] * beta[v, ])
     Cxz <- matrix(0, p, k)
-    for (i in seq_len(p)) for (j in seq_len(k)) Cxz[i, j] <- bS[j, i]
+    for (i in seq_len(p)) for (j in seq_len(k)) Cxz\[i, j\] <- bS[j, i]
     delta <- 0
     for (i in seq_len(p)) {
       act <- which(mask[i, ] != 0L)
@@ -142,7 +142,7 @@
   }
   Sig <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p))
-    Sig[a, b] <- sum(lam[a, ] * lam[b, ]) + if (a == b) psi[a] else 0
+    Sig\[a, b\] <- sum(lam[a, ] * lam[b, ]) + if (a == b) psi[a] else 0
   Si <- .cfa_inv(Sig)
   fml <- .cfa_logdet(Sig) - .cfa_logdet(S) + sum(S * t(Si)) - p
   resid <- max(abs(S - Sig))

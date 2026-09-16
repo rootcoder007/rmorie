@@ -52,7 +52,7 @@ Bymfit <- function(y, E, A, u, v, taus = 1, tauv = 1, X = NULL,
   q <- 0
   npair <- 0L
   if (n > 1L) for (i in seq_len(n - 1L)) for (j in (i + 1L):n) {
-    if (Am[i, j] != 0 || Am[j, i] != 0) {
+    if (Am\[i, j\] != 0 || Am[j, i] != 0) {
       q <- q + (u[i] - u[j])^2
       npair <- npair + 1L
     }

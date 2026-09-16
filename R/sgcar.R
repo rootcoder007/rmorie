@@ -114,7 +114,7 @@ sgcar <- function(Z, W, X = NULL, parameterization = "weighted") {
     if (identical(parameterization, "weighted")) D - rho * W else diag(n) - rho * W
   }
   b <- car_rho_bounds(W, parameterization)
-  lo <- b[1]
+  lo <- b\[1\]
   hi <- b[2]
   eps <- 1e-6 * max(hi - lo, 1e-12)
 

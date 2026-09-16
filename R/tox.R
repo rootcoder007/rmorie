@@ -142,7 +142,7 @@ morie_tox_calibration <- function(conc, response, weights = "1/x^2",
 
   fit <- stats::lm(response ~ conc, weights = w)
   co <- stats::coef(fit)
-  intercept <- unname(co[[1]])
+  intercept <- unname(co[\[1\]])
   slope <- unname(co[[2]])
   if (!is.finite(slope) || slope == 0) {
     stop("degenerate calibration (zero/undefined slope)", call. = FALSE)

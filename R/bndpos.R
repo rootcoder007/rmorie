@@ -26,7 +26,7 @@
 #' Bndpos(y = rnorm(40), D = rbinom(40, 1, 0.5), y_max = 3)
 Bndpos <- function(y, D, y_max) {
   z <- .bnd_yd(y, D, "Bndpos")
-  ymax <- as.numeric(y_max)[1]
+  ymax <- as.numeric(y_max)\[1\]
   y0 <- min(z$y)
   y1 <- max(z$y)
   if (ymax < y1) stop("Bndpos: y_max is below max(y)")

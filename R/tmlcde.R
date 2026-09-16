@@ -6,13 +6,13 @@
 #' effect; \code{min_denominator} exists for that reason.
 #'
 #' Formula: H_a = 1\{A = a, M = m\} / (g_a(W) h_m(A, W));
-#'   psi = E[Q*(1, m, W)] - E[Q*(0, m, W)]
+#'   psi = E\[Q*(1, m, W)\] - E\[Q*(0, m, W)\]
 #'
-#' @param Y Outcome in [0, 1].
+#' @param Y Outcome in \[0, 1\].
 #' @param A Binary treatment.
 #' @param M Mediator level of each observation.
-#' @param QAM Initial E[Y | A, M, W] at the observed (A, M).
-#' @param Q1m,Q0m Initial E[Y | A = 1/0, M = m, W].
+#' @param QAM Initial E\[Y | A, M, W\] at the observed (A, M).
+#' @param Q1m,Q0m Initial E\[Y | A = 1/0, M = m, W\].
 #' @param g1W Initial P(A = 1 | W).
 #' @param hmW Initial P(M = m | A, W).
 #' @param m The level the mediator is set to.
@@ -43,7 +43,7 @@ Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
             length(g1W), length(hmW)) != n))
     stop("every argument must have one entry per observation")
   if (any(!(A %in% c(0, 1)))) stop("A must be binary 0/1")
-  if (any(Y < 0 | Y > 1)) stop("Y must lie in [0, 1]")
+  if (any(Y < 0 | Y > 1)) stop("Y must lie in \[0, 1\]")
   if (n < 2L) stop("at least two observations are required")
   m <- as.numeric(m)
   g1 <- .b1_bound(g1W, gbound, 1 - gbound)
@@ -55,7 +55,7 @@ Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
   off <- .b1_logit(QAM)
   e <- c(0, 0)
   for (t in seq_len(100L)) {
-    mu <- .b1_expit(off + e[1] * H0 + e[2] * H1)
+    mu <- .b1_expit(off + e\[1\] * H0 + e[2] * H1)
     r <- Y - mu
     w <- mu * (1 - mu)
     gr <- c(sum(H0 * r), sum(H1 * r))
@@ -65,9 +65,9 @@ Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
     e <- e + st
     if (max(abs(st)) < 1e-12) break
   }
-  QAs <- .b1_expit(off + e[1] * H0 + e[2] * H1)
+  QAs <- .b1_expit(off + e\[1\] * H0 + e[2] * H1)
   Q1s <- .b1_expit(.b1_logit(Q1m) + e[2] / (g1 * h))
-  Q0s <- .b1_expit(.b1_logit(Q0m) + e[1] / (g0 * h))
+  Q0s <- .b1_expit(.b1_logit(Q0m) + e\[1\] / (g0 * h))
   mu1 <- mean(Q1s)
   mu0 <- mean(Q0s)
   ic <- H1 * (Y - QAs) + Q1s - mu1 - (H0 * (Y - QAs) + Q0s - mu0)

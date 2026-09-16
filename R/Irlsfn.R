@@ -40,7 +40,7 @@ Irlsfn <- function(y, X, weights) {
   for (i in seq_len(n)) {
     for (a in seq_len(p)) {
       ZtWy[a] <- ZtWy[a] + Z[i, a] * w[i] * yv[i]
-      for (b in seq_len(p)) ZtWZ[a, b] <- ZtWZ[a, b] + Z[i, a] * w[i] * Z[i, b]
+      for (b in seq_len(p)) ZtWZ\[a, b\] <- ZtWZ\[a, b\] + Z[i, a] * w[i] * Z[i, b]
     }
   }
   beta <- .s03cholsolve(ZtWZ, ZtWy)

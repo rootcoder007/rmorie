@@ -239,8 +239,8 @@ morie_ess_ipseq <- function(x) {
 #' @export
 #' @examples
 #' lcs <- list(
-#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2,
-#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2)
+#'   function(x, others) -0.5 * (x - 0.5 * others\[1\])^2,
+#'   function(x, others) -0.5 * (x - 0.5 * others\[1\])^2)
 #' r <- morie_gibbs_slice(lcs, x0 = c(0, 0), n = 300L, seed = 1)
 #' str(r, max.level = 1)
 morie_gibbs_slice <- function(log_conditionals, x0, n = 2000L, w = NULL,
@@ -264,7 +264,7 @@ morie_gibbs_slice <- function(log_conditionals, x0, n = 2000L, w = NULL,
     bd <- vector("list", p)
     for (k in seq_len(p)) bd[[k]] <- c(.baygsl_NEG_INF, .baygsl_POS_INF)
   } else {
-    bd <- lapply(bounds, function(b) c(as.numeric(b[1]), as.numeric(b[2])))
+    bd <- lapply(bounds, function(b) c(as.numeric(b\[1\]), as.numeric(b[2])))
     if (length(bd) != p)
       stop(sprintf("baygsl: bounds has length %d but %d coordinates",
                    length(bd), p))
@@ -284,7 +284,7 @@ morie_gibbs_slice <- function(log_conditionals, x0, n = 2000L, w = NULL,
         as.numeric(log_conditionals[[kk]](v, s))
       }
       st <- .baygsl_slice_1d(lf, state[k], e, w = ws[k],
-                             lower = bd[[k]][1], upper = bd[[k]][2])
+                             lower = bd[[k]]\[1\], upper = bd[[k]][2])
       state[k] <- st$x
       evals <- evals + st$n_eval
     }
@@ -319,8 +319,8 @@ morie_gibbs_slice <- function(log_conditionals, x0, n = 2000L, w = NULL,
 #' @export
 #' @examples
 #' lcs <- list(
-#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2,
-#'   function(x, others) -0.5 * (x - 0.5 * others[1])^2)
+#'   function(x, others) -0.5 * (x - 0.5 * others\[1\])^2,
+#'   function(x, others) -0.5 * (x - 0.5 * others\[1\])^2)
 #' r <- morie_hybrid_gibbs_slice(lcs, x0 = c(0, 0), n = 300L, seed = 1)
 #' str(r, max.level = 1)
 morie_hybrid_gibbs_slice <- function(log_conditionals, x0, n = 2000L, ...) {

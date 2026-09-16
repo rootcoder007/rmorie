@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Brier score for survival prediction
 #'
-#' E[(I(T > t) - S(t|X))^2] with inverse-probability-of-censoring
+#' E\[(I(T > t) - S(t|X))^2\] with inverse-probability-of-censoring
 #' weights.  A thin alias for \code{Brier}; the estimator already exists
 #' and is not duplicated here.
 #'

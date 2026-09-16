@@ -153,7 +153,7 @@ loglik_profile <- function(y, grid, make_model, n_particles = 200L,
   ses <- numeric(length(g))
   for (t in seq_along(g)) {
     ms <- make_model(g[t])
-    init <- ms[[1]]
+    init <- ms[\[1\]]
     step <- ms[[2]]
     loglik <- ms[[3]]
     r <- replicated_pfilter(y, n_particles, init, step, loglik,

@@ -31,7 +31,7 @@ Vcquant <- function(V, b = 3, seed = 1) {
   base <- .kvmse_codebook(b - 1L)
   g <- .t1_lcg(seed + 1)
   S <- matrix(0, d, d)
-  for (i in seq_len(d)) for (j in seq_len(d)) S[i, j] <- g$norm()
+  for (i in seq_len(d)) for (j in seq_len(d)) S\[i, j\] <- g$norm()
   rec <- matrix(0, n, d)
   mse <- rn <- numeric(n)
   for (i in seq_len(n)) {

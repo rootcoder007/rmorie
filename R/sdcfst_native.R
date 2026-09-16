@@ -300,7 +300,7 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
       r <- z[i] - mu
       for (a in seq_len(p)) {
         g[a] <- g[a] + d[a] * r
-        for (b in seq_len(p)) h[a, b] <- h[a, b] + wgt * d[a] * d[b]
+        for (b in seq_len(p)) h\[a, b\] <- h\[a, b\] + wgt * d[a] * d[b]
       }
     }
     for (a in seq_len(p)) {
@@ -325,7 +325,7 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #' @return A numeric value.
 #' @export
 .sdcfst_logit_predict <- function(beta, x) {
-  eta <- beta[1] + .w3_dot(beta[-1], as.numeric(x))
+  eta <- beta\[1\] + .w3_dot(beta[-1], as.numeric(x))
   if (eta > 30) eta <- 30 else if (eta < -30) eta <- -30
   1 / (1 + exp(-eta))
 }

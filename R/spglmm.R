@@ -13,7 +13,7 @@
 #' The trap this function makes visible is the one Sec. 6.3.4 spells out. In
 #' a linear model the marginal and conditional specifications agree; in a GLM
 #' they do not, because
-#' \eqn{E[Z(s)] = E_S[g^{-1}(x(s)'\beta + S(s))] \ne g^{-1}(x(s)'\beta)}.
+#' \eqn{E\[Z(s)\] = E_S[g^{-1}(x(s)'\beta + S(s))] \ne g^{-1}(x(s)'\beta)}.
 #' Taking expectations does not carry through a nonlinear link. Both are
 #' returned, and for the log link, where Example 6.6 gives the correction in
 #' closed form, so is the ratio between them -- \eqn{\exp(\sigma_S^2/2)},
@@ -55,7 +55,7 @@ spglmm <- function(X, beta, S, sigma2 = 1, family = "poisson",
     out$marginal_ratio <- exp(s2S / 2)
     if (!is.null(correlation)) out$marginal_covariance <- mom$covariance
     out$marginal_note <- sprintf(
-      paste("E[Z(s)] is NOT g^-1(x(s)'beta): under the log link the marginal",
+      paste("E\[Z(s)\] is NOT g^-1(x(s)'beta): under the log link the marginal",
             "mean exceeds the naive value by exp(sigma_S^2/2) = %.4f"),
       out$marginal_ratio)
   } else {

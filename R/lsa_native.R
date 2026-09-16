@@ -56,7 +56,7 @@ term_weighting <- function(X, how = "log_entropy") {
     for (i in seq_len(t)) {
       df <- sum(A[i, ] > 0.0)
       idf <- log((1.0 + d) / (1.0 + df)) + 1.0
-      for (j in seq_len(d)) out[i, j] <- A[i, j] * idf
+      for (j in seq_len(d)) out\[i, j\] <- A\[i, j\] * idf
     }
     return(out)
   }
@@ -67,11 +67,11 @@ term_weighting <- function(X, how = "log_entropy") {
     next }
     ent <- 0.0
     for (j in seq_len(d)) {
-      p <- A[i, j] / gf
+      p <- A\[i, j\] / gf
       if (p > 0.0) ent <- ent + p * log(p)
     }
     g <- if (d > 1) 1.0 + ent / log(d) else 1.0
-    for (j in seq_len(d)) out[i, j] <- g * log(1.0 + A[i, j])
+    for (j in seq_len(d)) out\[i, j\] <- g * log(1.0 + A\[i, j\])
   }
   out
 }
@@ -137,7 +137,7 @@ reconstruct <- function(model) {
     for (j in seq_len(nD)) {
       s <- 0
       for (q in seq_len(k)) s <- s + T[i, q] * S[q] * D[j, q]
-      out[i, j] <- s
+      out\[i, j\] <- s
     }
   }
   out

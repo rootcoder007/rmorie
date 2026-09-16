@@ -28,7 +28,7 @@
 #'
 #' @param X n-by-p data matrix.
 #' @param k_factors number of factors, 1 <= k <= p.
-#' @param h MCD subset size; defaults to [(n + p + 1)/2].
+#' @param h MCD subset size; defaults to \[(n + p + 1)/2\].
 #' @param max_subsets passed to the MCD enumeration.
 #' @return list: estimate, loadings, uniquenesses, communalities, correlation,
 #'   reproduced, eigenvalues, center, k_factors, n, p, method.
@@ -53,7 +53,7 @@ Rfcomp <- function(X, k_factors = 1L, h = NULL, max_subsets = 200000) {
     sd[a] <- sqrt(S[a, a])
   }
   Cm <- matrix(0, p, p)
-  for (a in seq_len(p)) for (b in seq_len(p)) Cm[a, b] <- S[a, b] / (sd[a] * sd[b])
+  for (a in seq_len(p)) for (b in seq_len(p)) Cm\[a, b\] <- S\[a, b\] / (sd[a] * sd[b])
   je <- .s03jacobi(Cm)
   ord <- seq(p, 1L)
   evals <- je$values[ord]
@@ -76,9 +76,9 @@ Rfcomp <- function(X, k_factors = 1L, h = NULL, max_subsets = 200000) {
   for (a in seq_len(p)) for (b in seq_len(p)) {
     t <- 0
     for (cc in seq_len(kf)) t <- t + L[a, cc] * L[b, cc]
-    rep_[a, b] <- t + if (a == b) uniq[a] else 0
+    rep_\[a, b\] <- t + if (a == b) uniq[a] else 0
   }
-  list(estimate = comm[1], loadings = L, uniquenesses = uniq, communalities = comm,
+  list(estimate = comm\[1\], loadings = L, uniquenesses = uniq, communalities = comm,
        correlation = Cm, reproduced = rep_, eigenvalues = evals, center = m$center,
        k_factors = kf, n = n, p = p,
        method = "Pison-Rousseeuw-Filzmoser-Croux (2003) robust factor analysis: principal factors on the MCD correlation matrix")

@@ -46,7 +46,7 @@
 #' res <- .potM_neg_loglik(par = x, z = y)
 #' res
 .potM_neg_loglik <- function(par, z) {
-  sigma <- par[1]
+  sigma <- par\[1\]
   xi <- par[2]
   ll <- .potM_loglik(z, sigma, xi)
   if (is.na(ll) || !is.finite(ll)) {
@@ -96,7 +96,7 @@
     )
   }
 
-  sigma <- result$par[1]
+  sigma <- result$par\[1\]
   xi <- result$par[2]
   loglik <- .potM_loglik(z, sigma, xi)
   converged <- isTRUE(result$convergence == 0)
@@ -109,7 +109,7 @@
   # Diagonal elements
   f_pp <- .potM_neg_loglik(c(sigma + eps, xi), z)
   f_mm <- .potM_neg_loglik(c(sigma - eps, xi), z)
-  H[1, 1] <- (f_pp - 2 * f0 + f_mm) / (eps * eps)
+  H\[1, 1\] <- (f_pp - 2 * f0 + f_mm) / (eps * eps)
 
   f_pp <- .potM_neg_loglik(c(sigma, xi + eps), z)
   f_mm <- .potM_neg_loglik(c(sigma, xi - eps), z)
@@ -120,7 +120,7 @@
   f_pm <- .potM_neg_loglik(c(sigma + eps, xi - eps), z)
   f_mp <- .potM_neg_loglik(c(sigma - eps, xi + eps), z)
   f_mm <- .potM_neg_loglik(c(sigma - eps, xi - eps), z)
-  H[1, 2] <- H[2, 1] <- (f_pp - f_pm - f_mp + f_mm) / (4 * eps * eps)
+  H\[1, 2\] <- H[2, 1] <- (f_pp - f_pm - f_mp + f_mm) / (4 * eps * eps)
 
   # Covariance = inverse of observed information (Hessian of neg loglik)
   cov_mat <- tryCatch(solve(H), error = function(e) matrix(NA_real_, 2, 2))

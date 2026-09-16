@@ -64,7 +64,7 @@ Atq8 <- function(y = NULL, Q = NULL, K = NULL, V = NULL, scales = NULL) {
     if (length(scales) != 3L) {
       stop("int8_attention: scales must hold three vectors, for Q, K and V")
     }
-    sq <- as.numeric(scales[[1]])
+    sq <- as.numeric(scales[\[1\]])
     sk <- as.numeric(scales[[2]])
     sv <- as.numeric(scales[[3]])
     if (length(sq) != nq || length(sk) != nk || length(sv) != nk) {
@@ -81,7 +81,7 @@ Atq8 <- function(y = NULL, Q = NULL, K = NULL, V = NULL, scales = NULL) {
     for (j in seq_len(nk)) {
       acc <- 0
       for (t in seq_len(d)) acc <- acc + Qi[i, t] * Ki[j, t]
-      S[i, j] <- acc * sq[i] * sk[j] * sc
+      S\[i, j\] <- acc * sq[i] * sk[j] * sc
     }
   }
   O <- matrix(0, nrow = nq, ncol = dv)
@@ -113,7 +113,7 @@ Atq8 <- function(y = NULL, Q = NULL, K = NULL, V = NULL, scales = NULL) {
       if (dd > err) err <- dd
     }
   }
-  list(output = O, estimate = O[1, 1], scores = S, weights = W, s_q = sq, s_k = sk,
+  list(output = O, estimate = O\[1, 1\], scores = S, weights = W, s_q = sq, s_k = sk,
        s_v = sv, max_abs_error_vs_float = err, n_q = nq, n_k = nk, d = d, d_v = dv,
        method = "vector-wise int8 quantisation, float softmax; Dettmers et al. (2022), arXiv:2208.07339")
 }
@@ -137,10 +137,10 @@ Atq8 <- function(y = NULL, Q = NULL, K = NULL, V = NULL, scales = NULL) {
   out <- matrix(0, nrow = nrow(M), ncol = ncol(M))
   for (i in seq_len(nrow(M))) {
     for (j in seq_len(ncol(M))) {
-      q <- .atq8_round(M[i, j] / s[i])
+      q <- .atq8_round(M\[i, j\] / s[i])
       if (q > 127) q <- 127
       if (q < -127) q <- -127
-      out[i, j] <- q
+      out\[i, j\] <- q
     }
   }
   out

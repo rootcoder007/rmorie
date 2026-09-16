@@ -16,7 +16,7 @@
 #' @param functions N-by-T matrix, one curve per row.
 #' @param groups N group labels.
 #' @param t the argument grid of length T; defaults to equally spaced on
-#'   [0, 1] and is ignored when T == 1.
+#'   \[0, 1\] and is ignored when T == 1.
 #' @return list: estimate, grand, effects, ssb, ssw, ssb_int, ssw_int, F,
 #'   df1, df2, n, method.
 #' @keywords internal
@@ -36,7 +36,7 @@ Fanva <- function(functions, groups, t = NULL) {
   if (G < 2L) stop("fanova: need at least two groups")
   if (N <= G) stop("fanova: need more curves than groups")
   grand <- numeric(Tn)
-  for (i in seq_len(N)) for (j in seq_len(Tn)) grand[j] <- grand[j] + Y[i, j]
+  for (i in seq_len(N)) for (j in seq_len(Tn)) grand[j] <- grand[j] + Y\[i, j\]
   grand <- grand / N
   gmeans <- vector("list", G)
   counts <- integer(G)
@@ -44,7 +44,7 @@ Fanva <- function(functions, groups, t = NULL) {
     idx <- which(g == levels[a])
     counts[a] <- length(idx)
     m <- numeric(Tn)
-    for (i in idx) for (j in seq_len(Tn)) m[j] <- m[j] + Y[i, j]
+    for (i in idx) for (j in seq_len(Tn)) m[j] <- m[j] + Y\[i, j\]
     gmeans[[a]] <- m / length(idx)
   }
   effects <- matrix(0, G, Tn)
@@ -56,7 +56,7 @@ Fanva <- function(functions, groups, t = NULL) {
     for (i in seq_len(N)) {
       if (g[i] != levels[a]) next
       for (j in seq_len(Tn)) {
-        r <- Y[i, j] - gmeans[[a]][j]
+        r <- Y\[i, j\] - gmeans[[a]][j]
         ssw[j] <- ssw[j] + r * r
       }
     }
@@ -66,8 +66,8 @@ Fanva <- function(functions, groups, t = NULL) {
   Fp <- numeric(Tn)
   for (j in seq_len(Tn)) Fp[j] <- if (ssw[j] > 0) (ssb[j] / df1) / (ssw[j] / df2) else Inf
   if (Tn == 1L) {
-    ssb_int <- ssb[1]
-    ssw_int <- ssw[1]
+    ssb_int <- ssb\[1\]
+    ssw_int <- ssw\[1\]
   } else {
     tt <- if (is.null(t)) (seq_len(Tn) - 1) / (Tn - 1) else .s03vec(t)
     if (length(tt) != Tn) stop("fanova: t must match the number of argument values")

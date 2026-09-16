@@ -39,7 +39,7 @@ Stickpost <- function(partition, alpha = 1) {
   rest <- 1
   for (i in seq_len(K)) { pi_[i] <- Vs[i] * rest
   rest <- rest * (1 - Vs[i]) }
-  list(estimate = if (K) pi_[1] else NaN, pi = pi_, V = Vs, counts = counts,
+  list(estimate = if (K) pi_\[1\] else NaN, pi = pi_, V = Vs, counts = counts,
        remainder = rest,
        method = "Ishwaran and James (2001) conjugate stick-breaking posterior, at its mean")
 }

@@ -10,7 +10,7 @@
 #'   psi = mean(Q*(1,W)) - mean(Q*(0,W));
 #'   se = sqrt(var(IC)/n)
 #'
-#' @param Y Outcome in [0, 1].
+#' @param Y Outcome in \[0, 1\].
 #' @param A Binary treatment.
 #' @param QAW,Q1W,Q0W Initial outcome predictions.
 #' @param g1W Initial propensity.
@@ -37,7 +37,7 @@ Tmlerd <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95) {
             length(g1W)) != n))
     stop("every argument must have one entry per observation")
   if (any(!(A %in% c(0, 1)))) stop("A must be binary 0/1")
-  if (any(Y < 0 | Y > 1)) stop("Y must lie in [0, 1]")
+  if (any(Y < 0 | Y > 1)) stop("Y must lie in \[0, 1\]")
   if (n < 2L) stop("at least two observations are required")
   fit <- .b1_target(Y, A, QAW, Q1W, Q0W, g1W, gbound)
   cv <- .b1_curves(Y, A, fit)

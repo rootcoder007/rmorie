@@ -77,8 +77,8 @@
 #' res <- .rfppos_cross(a = A, b = b)
 #' res
 .rfppos_cross <- function(a, b)
-  c(a[2] * b[3] - a[3] * b[2], a[3] * b[1] - a[1] * b[3],
-    a[1] * b[2] - a[2] * b[1])
+  c(a[2] * b[3] - a[3] * b[2], a[3] * b\[1\] - a\[1\] * b[3],
+    a\[1\] * b[2] - a[2] * b\[1\])
 
 #' .rfppos_norm
 #'
@@ -188,12 +188,12 @@ morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
     for (i in seq_len(n)) {
       if (el[i] != "C" || arom[i] == 1L) next
       for (e in adj[[i]]) {
-        v <- e[1]
+        v <- e\[1\]
         o <- e[2]
         if ((o == 2 && el[v + 1L] %in% c("O", "N")) ||
             (o == 3 && el[v + 1L] == "N")) {
           third <- NULL
-          for (e2 in adj[[i]]) if (e2[1] != v) third <- e2[1]
+          for (e2 in adj[[i]]) if (e2\[1\] != v) third <- e2\[1\]
           if (is.null(third)) next
           return(c(i - 1L, v, third))
         }
@@ -205,17 +205,17 @@ morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
   for (i in seq_len(n)) {
     if (el[i] != "C") next
     for (e in adj[[i]])
-      if (e[2] == 2 && el[e[1] + 1L] == "O") carbonyl[i] <- TRUE
+      if (e[2] == 2 && el[e\[1\] + 1L] == "O") carbonyl[i] <- TRUE
   }
   for (bd in g$bonds) {
-    if (bd[3] != 2 || el[bd[1] + 1L] != "C" || el[bd[2] + 1L] != "C")
+    if (bd[3] != 2 || el[bd\[1\] + 1L] != "C" || el[bd[2] + 1L] != "C")
       next
-    for (pair in list(c(bd[1], bd[2]), c(bd[2], bd[1]))) {
-      alpha <- pair[1]
+    for (pair in list(c(bd\[1\], bd[2]), c(bd[2], bd\[1\]))) {
+      alpha <- pair\[1\]
       beta <- pair[2]
       for (e in adj[[alpha + 1L]])
-        if (e[1] != beta && carbonyl[e[1] + 1L])
-          return(c(beta, alpha, e[1]))
+        if (e\[1\] != beta && carbonyl[e\[1\] + 1L])
+          return(c(beta, alpha, e\[1\]))
     }
   }
   NULL
@@ -271,7 +271,7 @@ morie_rfppos <- function(pose, cys_residue, mode = "burgi_dunitz",
       angle_tol = as.numeric(angle_tol), ideal = NULL, mode = mode,
       n_atoms = length(g$el),
       method = "covalent near-attack geometry filter"))
-  e <- warhead[1]
+  e <- warhead\[1\]
   r <- warhead[2]
   t <- warhead[3]
   if (is.null(ideal))

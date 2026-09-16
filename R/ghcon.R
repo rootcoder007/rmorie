@@ -27,7 +27,7 @@ morie_ghosal_posterior_consistency <- function(x, ref_loc = NULL, ref_scale = NU
     ))
   }
   xs <- sort(x)
-  grid <- seq(xs[1] - 1, xs[n] + 1, length.out = 200)
+  grid <- seq(xs\[1\] - 1, xs[n] + 1, length.out = 200)
   if (is.null(ref_loc) || is.null(ref_scale)) {
     F_ref <- vapply(grid, function(t) sum(xs <= t), numeric(1)) / n
   } else {

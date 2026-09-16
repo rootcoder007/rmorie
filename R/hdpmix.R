@@ -50,7 +50,7 @@ Hdpmix <- function(y, groups = NULL, gamma = 1, alpha = 1, truncation = 6) {
     for (row in counts) if (row[t] > 0) used <- used + 1L
     if (used > 1L) shared <- shared + 1L
   }
-  list(estimate = if (K) beta[1] else NaN, beta = beta, pi = pi_,
+  list(estimate = if (K) beta\[1\] else NaN, beta = beta, pi = pi_,
        counts = counts, shared = shared, group_ids = ids,
        method = "HDP: beta ~ GEM(gamma), pi_j ~ DP(alpha_0, beta) at its posterior mean (Teh et al. 2006, eqs. 2 and 19)")
 }

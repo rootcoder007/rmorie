@@ -7,8 +7,8 @@
 #' y_i = alpha + integral beta(t) x_i(t) dt + eps_i.
 #'
 #' Expanding beta(t) = sum_k b_k phi_k(t) makes the integral linear in b,
-#' integral beta x_i = sum_k b_k J[i, k] with J[i, k] = integral phi_k x_i, so
-#' the model is the ordinary linear regression of y on the design [1, J].
+#' integral beta x_i = sum_k b_k J\[i, k\] with J\[i, k\] = integral phi_k x_i, so
+#' the model is the ordinary linear regression of y on the design \[1, J\].
 #' That basis-expansion reduction is what makes the problem finite
 #' dimensional, and is the same device Reiss and Ogden use before choosing the
 #' basis by principal components.
@@ -19,7 +19,7 @@
 #' @param X N-by-T matrix, one predictor curve per row.
 #' @param Y N scalar responses.
 #' @param basis T-by-K matrix of basis functions on the grid.
-#' @param t the grid of length T; defaults to equally spaced on [0, 1].
+#' @param t the grid of length T; defaults to equally spaced on \[0, 1\].
 #' @return list: estimate, alpha, coef, beta, J, fitted, residual, sse, r2,
 #'   df, n, method.
 #' @keywords internal
@@ -43,11 +43,11 @@ Scfd <- function(X, Y, basis, t = NULL) {
   if (length(tt) != T_) stop("scalar_on_function: t must match the number of argument values")
   J <- matrix(0, N, K)
   for (i in seq_len(N)) for (j in seq_len(K)) {
-    J[i, j] <- .fdtrapz(tt, B[, j] * Xm[i, ])
+    J\[i, j\] <- .fdtrapz(tt, B[, j] * Xm[i, ])
   }
   Z <- cbind(1, J)
   ab <- .s03lstsq(Z, yy, 0)
-  alpha <- ab[1]
+  alpha <- ab\[1\]
   b <- ab[-1]
   fit <- .s03matvec(Z, ab)
   res <- yy - fit

@@ -307,7 +307,7 @@ residual_map <- function(x, g_z, shape = NULL) {
   }
   r <- abs(a - b)
   if (!is.null(shape)) {
-    h <- as.integer(shape[1])
+    h <- as.integer(shape\[1\])
     w <- as.integer(shape[2])
     if (h * w != length(r)) {
       stop("gan_an: the shape ", h, "x", w, " does not match ",

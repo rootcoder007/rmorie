@@ -8,7 +8,7 @@
 #' the metric is 1/sigma^2 and for Bernoulli(theta) it is
 #' 1/(theta(1 - theta)); both closed forms are what the tests check.
 #'
-#' Formula: g_ij(theta) = E[d_i log p d_j log p].
+#' Formula: g_ij(theta) = E\[d_i log p d_j log p\].
 #'
 #' @param log_p Function log_p(x, theta).
 #' @param theta Parameter value.
@@ -31,7 +31,7 @@ Infgnt <- function(log_p, theta, support, discrete = TRUE, h = 1e-5) {
   if (length(xs) < 2L) stop("information_geometry: support needs at least two points")
   hv <- as.numeric(h)
   if (hv <= 0) stop("information_geometry: h must be positive")
-  dx <- if (isTRUE(discrete)) 1 else (xs[2] - xs[1])
+  dx <- if (isTRUE(discrete)) 1 else (xs[2] - xs\[1\])
   G <- matrix(0, d, d)
   total <- 0
   for (x in xs) {
@@ -47,6 +47,6 @@ Infgnt <- function(log_p, theta, support, discrete = TRUE, h = 1e-5) {
     }
     G <- G + w * (sc %o% sc)
   }
-  .t1_result(estimate = G[1, 1], metric = G, total_mass = total, n = length(xs),
-             method = "g_ij = E[d_i log p d_j log p] by quadrature over the support, Amari (1985)")
+  .t1_result(estimate = G\[1, 1\], metric = G, total_mass = total, n = length(xs),
+             method = "g_ij = E\[d_i log p d_j log p\] by quadrature over the support, Amari (1985)")
 }

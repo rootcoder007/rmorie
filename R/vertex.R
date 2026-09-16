@@ -180,7 +180,7 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
                  status, substr(body, 1L, 400L)))
   }
   data <- .morie_from_json(body, simplifyVector = FALSE)
-  parts <- tryCatch(data$candidates[[1]]$content$parts,
+  parts <- tryCatch(data$candidates[\[1\]]$content$parts,
                     error = function(e) NULL)
   if (is.null(parts)) {
     stop(sprintf("unexpected Vertex response shape: %s",
@@ -212,7 +212,7 @@ morie_vertex_health_check <- function() {
     out$reply <- reply
     out$ok <- nzchar(reply)
   }, error = function(e) {
-    out$error <<- sprintf("%s: %s", class(e)[1], conditionMessage(e))
+    out$error <<- sprintf("%s: %s", class(e)\[1\], conditionMessage(e))
   })
   out
 }

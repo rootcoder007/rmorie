@@ -166,7 +166,7 @@ morie_metsem_graph <- function(reads, k) {
   path <- first
   v <- substr(first, 2L, nchar(first))
   while (.metsem_outdeg(g, v) == 1L && .metsem_indeg(g, v) == 1L) {
-    nxt <- g$out[[v]][1]
+    nxt <- g$out[[v]]\[1\]
     if (nxt %in% path) break
     path <- c(path, nxt)
     v <- substr(nxt, 2L, nchar(nxt))
@@ -184,8 +184,8 @@ morie_metsem_graph <- function(reads, k) {
 #' @return A character value.
 #' @export
 .metsem_seq <- function(path) {
-  if (length(path) == 1L) return(path[1])
-  paste0(path[1],
+  if (length(path) == 1L) return(path\[1\])
+  paste0(path\[1\],
          paste(vapply(path[-1], function(e)
            substr(e, nchar(e), nchar(e)), character(1)),
            collapse = ""))
@@ -234,7 +234,7 @@ morie_metsem_unitigs <- function(g) {
   rows <- lapply(paths, function(p) {
     w <- vapply(p, function(e) as.numeric(g$edges[[e]]), numeric(1))
     s <- .metsem_seq(p)
-    list(path = p, seq = s, start = substr(p[1], 1L, nchar(p[1]) - 1L),
+    list(path = p, seq = s, start = substr(p\[1\], 1L, nchar(p\[1\]) - 1L),
          end = substr(p[length(p)], 2L, nchar(p[length(p)])),
          length = nchar(s), coverage = .w3_csum(w) / length(w),
          n_edges = length(p))
@@ -332,7 +332,7 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
       sq <- vapply(grp, function(r) r$seq, character(1))
       grp <- grp[order(-cv, sq, method = "radix")]
       for (q in 2:length(grp))
-        if (grp[[q]]$coverage <= bubble_ratio * grp[[1]]$coverage) {
+        if (grp[[q]]$coverage <= bubble_ratio * grp[\[1\]]$coverage) {
           drop <- c(drop, grp[[q]]$path)
           bubbles <- bubbles + 1L
         }
@@ -354,7 +354,7 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
           neigh <- c(neigh, o$coverage)
       }
       if (!length(neigh)) next
-      best <- neigh[1]
+      best <- neigh\[1\]
       for (v in neigh) if (v > best) best <- v
       if (u$coverage <= tip_ratio * best) {
         drop <- c(drop, u$path)
@@ -387,7 +387,7 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
        short_contigs = vapply(short, function(u) u$seq, character(1)),
        n_contigs = length(keep), n_short = length(short),
        total_length = sum(lens),
-       longest = if (length(lens)) lens[1] else 0,
+       longest = if (length(lens)) lens\[1\] else 0,
        n50 = morie_metsem_n50(lens), n_tips_removed = tips,
        n_bubbles_removed = bubbles, n_kmers = length(g$edges),
        n_kmers_initial = n_edges0, n_nodes = length(g$nodes),

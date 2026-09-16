@@ -61,20 +61,20 @@
   if (kernel == "linear") {
     for (i in seq_len(n)) {
       for (j in seq_len(m)) {
-        K[i, j] <- sum(X[i, ] * Y[j, ])
+        K\[i, j\] <- sum(X[i, ] * Y[j, ])
       }
     }
   } else if (kernel == "rbf") {
     for (i in seq_len(n)) {
       for (j in seq_len(m)) {
         diff <- X[i, ] - Y[j, ]
-        K[i, j] <- exp(-gamma * sum(diff * diff))
+        K\[i, j\] <- exp(-gamma * sum(diff * diff))
       }
     }
   } else if (kernel == "poly") {
     for (i in seq_len(n)) {
       for (j in seq_len(m)) {
-        K[i, j] <- (gamma * sum(X[i, ] * Y[j, ]) + coef0)^degree
+        K\[i, j\] <- (gamma * sum(X[i, ] * Y[j, ]) + coef0)^degree
       }
     }
   } else {
@@ -107,7 +107,7 @@
   for (i in seq_len(n)) {
     s <- 0
     for (j in seq_len(n)) {
-      s <- s + alpha[j] * K[i, j]
+      s <- s + alpha[j] * K\[i, j\]
     }
     Ka[i] <- s
   }
@@ -134,7 +134,7 @@
 
     i <- up
     j <- dn
-    denom <- 2.0 * (K[i, i] - 2.0 * K[i, j] + K[j, j])
+    denom <- 2.0 * (K[i, i] - 2.0 * K\[i, j\] + K[j, j])
     if (denom <= 1e-15) {
       d <- if (g[i] > g[j]) alpha[j] else 0.0
     } else {
@@ -234,7 +234,7 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
     ai <- alpha[i]
     for (j in seq_len(n)) {
       if (alpha[j] != 0.0) {
-        aKa <- aKa + ai * alpha[j] * K[i, j]
+        aKa <- aKa + ai * alpha[j] * K\[i, j\]
       }
     }
   }

@@ -63,7 +63,7 @@ Matccd <- function(cases, controls, matching_id, exposure, level = 0.95,
       s0 <- sum(ex)
       s1 <- sum(ex * x[idx])
       s2 <- sum(ex * x[idx]^2)
-      xc <- x[idx][y[idx] == 1][1]
+      xc <- x[idx][y[idx] == 1]\[1\]
       score <- score + xc - s1 / s0
       info <- info + s2 / s0 - (s1 / s0)^2
     }
@@ -78,7 +78,7 @@ Matccd <- function(cases, controls, matching_id, exposure, level = 0.95,
   for (idx in sets) {
     mx <- max(beta * x[idx])
     s0 <- sum(exp(beta * x[idx] - mx))
-    xc <- x[idx][y[idx] == 1][1]
+    xc <- x[idx][y[idx] == 1]\[1\]
     ll <- ll + beta * xc - (mx + log(s0))
   }
   se <- 1 / sqrt(info)

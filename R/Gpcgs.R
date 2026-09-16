@@ -10,7 +10,7 @@
 #' of the paper, so the two arms follow the same path.  At the starting
 #' point q(u) = p(u) the KL term is exactly zero.
 #'
-#' Formula: L = sum_i E_q[log p(y_i | f_i)] - KL(q(u) || p(u)),
+#' Formula: L = sum_i E_q\[log p(y_i | f_i)\] - KL(q(u) || p(u)),
 #'   mu_i = a_i' m, var_i = k_ii - a_i'(K_mm - S) a_i.
 #'
 #' @param X Training inputs, one row per point.
@@ -49,7 +49,7 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
   kf <- function(P, Q) {
     o <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      o[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      o\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     o
   }
   gh <- function(nn) {
@@ -73,7 +73,7 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
   tri <- function(v) {
     L <- matrix(0, m, m)
     t <- 1L
-    for (i in seq_len(m)) for (j in seq_len(i)) { L[i, j] <- v[t]
+    for (i in seq_len(m)) for (j in seq_len(i)) { L\[i, j\] <- v[t]
     t <- t + 1L }
     L
   }
@@ -134,7 +134,7 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
     mus[j] <- mj
     p[j] <- .s03pnorm(mj / sqrt(1 + vj))
   }
-  .t1_result(estimate = p[1], p = p, predicted = as.integer(p >= 0.5),
+  .t1_result(estimate = p\[1\], p = p, predicted = as.integer(p >= 0.5),
              latent_mean = mus, elbo = fin$b, kl = fin$kl, elbo_path = path,
              n = n,
              method = "variational bound of Hensman, Matthews & Ghahramani (2015) with Gauss-Hermite quadrature")

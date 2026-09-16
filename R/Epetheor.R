@@ -4,7 +4,7 @@
 #' Hastie, Tibshirani and Friedman (2009), The Elements of Statistical
 #' Learning, 2nd ed., Springer, Section 2.4, book pp. 18-19 (PDF pp. 37-38).
 #'
-#' EPE(f) = E(Y - f(X))^2 (2.9) and beta = [E(XX')]^-1 E(XY) (2.16), the
+#' EPE(f) = E(Y - f(X))^2 (2.9) and beta = \[E(XX')\]^-1 E(XY) (2.16), the
 #' latter obtained by plugging the linear model (2.15) into (2.9) and
 #' differentiating.  (2.16) is a population statement; the sample moment
 #' matrices (1/N) X'X and (1/N) X'y are substituted here, which is exactly
@@ -32,7 +32,7 @@ Epetheor <- function(X, y) {
   pred <- as.numeric(.s03matvec(Xm, beta))
   epe <- sum((yv - pred)^2) / n
   eyy <- sum(yv * yv) / n
-  list(estimate = beta[1], beta = beta, exx = exx, exy = exy, epe = epe,
+  list(estimate = beta\[1\], beta = beta, exx = exx, exy = exy, epe = epe,
        eyy = eyy, n = n, p = p,
        method = "Hastie-Tibshirani-Friedman (2009) ESL eqs. (2.9), (2.15), (2.16)")
 }

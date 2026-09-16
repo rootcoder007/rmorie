@@ -109,7 +109,7 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
       # The Fine-Gray weight: subjects who already failed of a competing
       # cause stay in the risk set, discounted by the censoring survival
       # ratio. That retention is exactly what ties the model to incidence.
-      wt <- ifelse(t >= ut, 1, ifelse(competing & t < ut, Gfun(ut)[1] / Gi, 0))
+      wt <- ifelse(t >= ut, 1, ifelse(competing & t < ut, Gfun(ut)\[1\] / Gi, 0))
       inr <- wt > 0
       if (!any(inr)) next
       died <- t == ut & e == 1

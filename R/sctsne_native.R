@@ -87,7 +87,7 @@ morie_sctsne <- function(X, dim = 2, perplexity = 10, T = 300,
   e <- .ghc_rng(seed)
   Y <- matrix(0, n, dim)
   for (i in seq_len(n)) {
-    for (k in seq_len(dim)) Y[i, k] <- 1e-2 * .ghc_norm(e, 1)
+    for (k in seq_len(dim)) Y\[i, k\] <- 1e-2 * .ghc_norm(e, 1)
   }
   Ym1 <- Y
   qkl <- function(Y) {

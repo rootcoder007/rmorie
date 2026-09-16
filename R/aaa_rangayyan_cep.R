@@ -70,7 +70,7 @@
   if (!length(phase)) {
     return(out)
   }
-  out[1] <- phase[1]
+  out\[1\] <- phase\[1\]
   off <- 0
   for (i in seq_along(phase)[-1]) {
     d <- phase[i] - phase[i - 1L]
@@ -389,8 +389,8 @@ RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
     num / den
   }, complex(1))
   one <- length(pts) == 1L
-  out$X <- if (one) vals[[1]] else vals
-  out$z <- if (one) pts[[1]] else pts
+  out$X <- if (one) vals[\[1\]] else vals
+  out$z <- if (one) pts[\[1\]] else pts
   out
 }
 
@@ -539,8 +539,8 @@ EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
       complex(1)
     )
     one <- length(ws) == 1L
-    out$series <- if (one) vals[[1]] else vals
-    out$exact <- if (one) exact[[1]] else exact
+    out$series <- if (one) vals[\[1\]] else vals
+    out$exact <- if (one) exact[\[1\]] else exact
     out$max_error <- max(Mod(vals - exact))
   }
   out
@@ -884,7 +884,7 @@ VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
   if (n < 16L) stop("need at least sixteen samples")
   cep <- CCepstrum(ys)$cepstrum
   half <- n %/% 2L
-  lo_q <- max(1L, as.integer(pitch_range[1] * fsv))
+  lo_q <- max(1L, as.integer(pitch_range\[1\] * fsv))
   hi_q <- min(half, as.integer(pitch_range[2] * fsv) + 1L)
   if (hi_q <= lo_q) {
     stop(
@@ -940,7 +940,7 @@ MinPhase <- function(x) {
   cc <- CCepstrum(xs)$cepstrum
   half <- n %/% 2L
   folded <- numeric(n)
-  folded[1] <- cc[1]
+  folded\[1\] <- cc\[1\]
   if (half > 1L) {
     i <- 2:half
     folded[i] <- cc[i] + cc[n - i + 2L]

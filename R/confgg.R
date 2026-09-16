@@ -47,8 +47,8 @@ Configmodel <- function(degrees, seed = 1) {
   dup <- tb[tb > 1]
   multi <- 0L
   if (length(dup)) for (k in names(dup)) {
-    pr <- as.integer(strsplit(k, "-")[[1]])
-    if (pr[1] != pr[2]) multi <- multi + as.integer(dup[[k]]) - 1L
+    pr <- as.integer(strsplit(k, "-")[\[1\]])
+    if (pr\[1\] != pr[2]) multi <- multi + as.integer(dup[[k]]) - 1L
   }
   real <- tabulate(c(ea, eb), nbins = n)
   .t1_result(edges = cbind(ea, eb) - 1L, degree = real, self_loops = loops,

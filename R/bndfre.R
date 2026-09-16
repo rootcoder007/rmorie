@@ -37,8 +37,8 @@ Bndfre <- function(lower, upper, alpha = 0.05) {
   if (sl <= 0) sl <- 1e-12
   if (su <= 0) su <- 1e-12
   r <- morie_bnd_imbens_manski(tl, tu, sl, su, n, alpha)
-  .t1_result(lower = r$ci[1], upper = r$ci[2],
-             width = r$ci[2] - r$ci[1], c = r$c,
+  .t1_result(lower = r$ci\[1\], upper = r$ci[2],
+             width = r$ci[2] - r$ci\[1\], c = r$c,
              z_one_sided = r$z_one_sided, z_two_sided = r$z_two_sided,
              delta = r$delta, n = n,
              method = "Frequentist bound with valid coverage")

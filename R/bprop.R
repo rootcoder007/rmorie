@@ -3,7 +3,7 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 379-425], Chapter 10, Sections 10.8 and 10.8.1, equations
+#' volume \[Pages 379-425\], Chapter 10, Sections 10.8 and 10.8.1, equations
 #' (10.12) to (10.17), pp. 411-413, and the hand computation of Illustrative
 #' Example 10.1, pp. 413-417.
 #'
@@ -49,7 +49,7 @@ Bprop <- function(layers, activations, loss_grad, act_fun = "sigmoid") {
   if (length(A) != L + 1L) {
     stop("backpropagation_chain_rule: need L+1 activation blocks for L layers")
   }
-  n <- nrow(A[[1]])
+  n <- nrow(A[\[1\]])
   if (n == 0L) stop("backpropagation_chain_rule: no patterns supplied")
   for (a in A) if (nrow(a) != n) {
     stop("backpropagation_chain_rule: activation blocks disagree on the pattern count")
@@ -73,7 +73,7 @@ Bprop <- function(layers, activations, loss_grad, act_fun = "sigmoid") {
   uL <- ncol(A[[L + 1L]])
   d <- matrix(0, n, uL)
   for (i in seq_len(n)) for (j in seq_len(uL)) {
-    d[i, j] <- Gd[i, j] * dact(fns[L], A[[L + 1L]][i, j])
+    d\[i, j\] <- Gd\[i, j\] * dact(fns[L], A[[L + 1L]]\[i, j\])
   }
   deltas[[L]] <- d
   if (L > 1L) for (l in seq(L - 1L, 1L)) {
@@ -82,7 +82,7 @@ Bprop <- function(layers, activations, loss_grad, act_fun = "sigmoid") {
     new <- matrix(0, n, u)
     for (i in seq_len(n)) for (kk in seq_len(u)) {
       s <- 0
-      for (j in seq_len(nrow(W[[l + 1L]]))) s <- s + nxt[i, j] * W[[l + 1L]][j, kk + 1L]
+      for (j in seq_len(nrow(W[[l + 1L]]))) s <- s + nxt\[i, j\] * W[[l + 1L]][j, kk + 1L]
       new[i, kk] <- s * dact(fns[l], A[[l + 1L]][i, kk])
     }
     deltas[[l]] <- new
@@ -95,16 +95,16 @@ Bprop <- function(layers, activations, loss_grad, act_fun = "sigmoid") {
     for (i in seq_len(n)) {
       prev <- c(1, A[[l]][i, ])
       for (j in seq_len(rows)) {
-        dj <- deltas[[l]][i, j]
+        dj <- deltas[[l]]\[i, j\]
         for (cc in seq_len(cols)) G[j, cc] <- G[j, cc] + dj * prev[cc]
       }
     }
     grads[[l]] <- G
   }
   E <- 0
-  for (i in seq_len(n)) for (j in seq_len(uL)) E <- E + Gd[i, j] * Gd[i, j]
+  for (i in seq_len(n)) for (j in seq_len(uL)) E <- E + Gd\[i, j\] * Gd\[i, j\]
   E <- E / (2 * n * uL)
-  list(estimate = grads[[1]][1, 1], gradients = grads, deltas = deltas,
+  list(estimate = grads[\[1\]]\[1, 1\], gradients = grads, deltas = deltas,
        loss = E, n = n,
        method = "delta/psi recursion of Chapter 10 Sect. 10.8.1 steps 9-12, eqs. (10.12)-(10.17)")
 }

@@ -57,7 +57,7 @@ Idw <- function(coords, values, s_predict = NULL, power = 2) {
     ess[t] <- if (sw2 > 0) (sw * sw) / sw2 else NaN
     exact[t] <- FALSE
   }
-  list(estimate = if (length(out)) out[1] else NaN, pred = out, ess = ess,
+  list(estimate = if (length(out)) out\[1\] else NaN, pred = out, ess = ess,
        exact = exact, power = p,
        method = "Shepard (1968) inverse-distance weighting, exact at the data")
 }

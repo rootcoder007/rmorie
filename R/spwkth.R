@@ -32,8 +32,8 @@ spwkth <- function(cov_func, omega = NULL, h_max = 200, n = 40001) {
   ch <- as.numeric(cov_func(abs(h)))
   trap <- function(y, x) sum(diff(x) * (utils::head(y, -1) + utils::tail(y, -1)) / 2)
   s <- vapply(omega, function(w) trap(cos(w * h) * ch, h) / (2 * pi), numeric(1))
-  var <- as.numeric(cov_func(0))[1]
-  dh <- h[2] - h[1]
+  var <- as.numeric(cov_func(0))\[1\]
+  dh <- h[2] - h\[1\]
   w_nyq <- 0.5 * pi / dh
   wide <- seq(-w_nyq, w_nyq, length.out = 20001)
   sw <- vapply(wide, function(w) trap(cos(w * h) * ch, h) / (2 * pi), numeric(1))

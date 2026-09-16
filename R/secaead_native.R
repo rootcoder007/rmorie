@@ -250,7 +250,7 @@
 #' key <- as.raw(0:31)
 #' nonce <- as.raw(c(0, 0, 0, 9, 0, 0, 0, 0x4a, 0, 0, 0, 0))
 #' ks <- morie_secaead_chacha20_block(key, 1, nonce)
-#' stopifnot(ks[1] == 0x10, ks[2] == 0xf1, ks[3] == 0xe7)
+#' stopifnot(ks\[1\] == 0x10, ks[2] == 0xf1, ks[3] == 0xe7)
 #' head(ks, 8)
 morie_secaead_chacha20_block <- function(key, counter, nonce, rounds = 20) {
   # One 64-byte keystream block. The permuted state is ADDED to the
@@ -301,7 +301,7 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds = 20) {
 #' pt <- charToRaw("Ladies and Gentlemen of the class of \x2799: If I could offer you only one tip for the future,
 #'   sunscreen would be it.")
 #' ct <- morie_secaead_chacha20(key, 1, nonce, pt)
-#' stopifnot(ct[1] == 0x6e, ct[2] == 0x2e, ct[3] == 0x35, ct[4] == 0x9a)
+#' stopifnot(ct\[1\] == 0x6e, ct[2] == 0x2e, ct[3] == 0x35, ct[4] == 0x9a)
 #' head(ct, 8)
 morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   # XOR the data with the keystream from counter onward.
@@ -550,7 +550,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   r[12] <- bitwAnd(r[12], 0x0f)
   r[16] <- bitwAnd(r[16], 0x0f)
   r[5] <- bitwAnd(r[5], 0xfc)
-  r[9] <- bitwAnd(r[9], 0xfc)
+  r\[9\] <- bitwAnd(r\[9\], 0xfc)
   r[13] <- bitwAnd(r[13], 0xfc)
   r
 }
@@ -570,7 +570,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #'                 0x4a, 0xbf, 0xf6, 0xaf, 0x41, 0x49, 0xf5, 0x1b))
 #' msg <- charToRaw("Cryptographic Forum Research Group")
 #' tag <- morie_secaead_poly1305_mac(msg, key)
-#' stopifnot(tag[1] == 0xa8, tag[2] == 0x06, tag[3] == 0x1d, tag[4] == 0xc1)
+#' stopifnot(tag\[1\] == 0xa8, tag[2] == 0x06, tag[3] == 0x1d, tag[4] == 0xc1)
 #' tag
 morie_secaead_poly1305_mac <- function(message, key) {
   # The one-time authenticator over 2^130 - 5. key is 32 bytes: the
@@ -592,7 +592,7 @@ morie_secaead_poly1305_mac <- function(message, key) {
     blk <- m[i:min(i + 15L, length(m))]
     n <- .secaead_limbs_from_bytes(c(blk, 1L)) # append the high bit
     acc <- .secaead_p_add(
-      if (length(acc) == 1L && acc[1] == 0) 0 else acc,
+      if (length(acc) == 1L && acc\[1\] == 0) 0 else acc,
       n
     )
     acc <- .secaead_p_mulmod(acc, r)
@@ -619,7 +619,7 @@ morie_secaead_poly1305_mac <- function(message, key) {
 #' key <- as.raw(c(0x80:0x8f, 0x90:0x9f))
 #' nonce <- as.raw(c(0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7))
 #' otk <- morie_secaead_poly1305_key_gen(key, nonce)
-#' stopifnot(otk[1] == 0x8a, otk[2] == 0xd5)
+#' stopifnot(otk\[1\] == 0x8a, otk[2] == 0xd5)
 #' head(otk, 8)
 morie_secaead_poly1305_key_gen <- function(key, nonce) {
   # Block 0 gives the one-time key; the message starts at 1.

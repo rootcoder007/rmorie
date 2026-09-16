@@ -169,7 +169,7 @@ morie_hurst_r <- function(x) {
 #' Higuchi fractal dimension
 #'
 #' Estimates the Higuchi (1988) fractal dimension of a 1-D time series via
-#' length scaling across `k` time-lags. Values typically fall in [1, 2];
+#' length scaling across `k` time-lags. Values typically fall in \[1, 2\];
 #' higher values indicate greater signal complexity.
 #'
 #' Reference: Higuchi, T. (1988) "Approach to an irregular time series on
@@ -370,7 +370,7 @@ hdecon <- function(x, cutoff, n_fft = NULL) {
   cepstrum <- stats::fft(log_X, inverse = TRUE) / n_fft
 
   lifter <- numeric(n_fft)
-  lifter[1] <- 1
+  lifter\[1\] <- 1
   cidx <- min(cutoff, n_fft %/% 2)
   if (cidx > 1) lifter[2:cidx] <- 2
   if (cidx < n_fft %/% 2) lifter[cidx + 1] <- 1
@@ -380,7 +380,7 @@ hdecon <- function(x, cutoff, n_fft = NULL) {
   h <- Re(stats::fft(H, inverse = TRUE) / n_fft)[seq_len(n)]
 
   cep_exc <- cepstrum * (1 - lifter)
-  cep_exc[1] <- cepstrum[1] - cep_min[1]
+  cep_exc\[1\] <- cepstrum\[1\] - cep_min\[1\]
   E <- exp(stats::fft(cep_exc))
   e <- Re(stats::fft(E, inverse = TRUE) / n_fft)[seq_len(n)]
 
@@ -438,7 +438,7 @@ dfa <- function(x, scales = NULL) {
     for (j in seq_len(n_seg)) {
       seg <- y[((j - 1) * s + 1):(j * s)]
       coeffs <- stats::lm.fit(cbind(1, tt), seg)$coefficients
-      trend <- coeffs[1] + coeffs[2] * tt
+      trend <- coeffs\[1\] + coeffs[2] * tt
       rms_vals[j] <- sqrt(mean((seg - trend)^2))
     }
     fluct[i] <- mean(rms_vals)
@@ -500,7 +500,7 @@ ecgdet <- function(ecg, fs) {
     ))
   }
   min_dist <- as.integer(0.3 * fs)
-  r_peaks <- candidates[1]
+  r_peaks <- candidates\[1\]
   for (c in candidates[-1]) {
     if (c - r_peaks[length(r_peaks)] >= min_dist) r_peaks <- c(r_peaks, c)
   }
@@ -625,7 +625,7 @@ hrvfd <- function(rr, fs_interp = 4) {
   rr <- as.numeric(rr)
   if (length(rr) < 10L) return(list(name = "hrv_freq_domain", value = NA_real_))
   t_rr <- cumsum(rr) / 1000
-  t_rr <- t_rr - t_rr[1]
+  t_rr <- t_rr - t_rr\[1\]
   t_uniform <- seq(0, t_rr[length(t_rr)], by = 1 / fs_interp)
   rr_interp <- stats::approx(t_rr, rr, xout = t_uniform, rule = 2)$y
   rr_interp <- rr_interp - mean(rr_interp)
@@ -633,7 +633,7 @@ hrvfd <- function(rr, fs_interp = 4) {
   w <- welch(rr_interp, fs = fs_interp, nperseg = nperseg)
   freqs <- w$extra$freqs
   psd <- w$filtered
-  df <- if (length(freqs) > 1) freqs[2] - freqs[1] else 1
+  df <- if (length(freqs) > 1) freqs[2] - freqs\[1\] else 1
   vlf <- sum(psd[freqs >= 0.003 & freqs < 0.04]) * df
   lf <- sum(psd[freqs >= 0.04 & freqs < 0.15]) * df
   hf <- sum(psd[freqs >= 0.15 & freqs < 0.40]) * df
@@ -713,7 +713,7 @@ kfd <- function(x) {
   if (n < 2L) return(list(name = "katz_fd", value = NA_real_))
   dists <- abs(diff(x))
   L <- sum(dists)
-  d <- max(abs(x - x[1]))
+  d <- max(abs(x - x\[1\]))
   a <- mean(dists)
   if (d == 0 || a == 0) return(list(name = "katz_fd", value = NA_real_))
   D <- log10(n - 1) / (log10(n - 1) + log10(d / L))
@@ -785,7 +785,7 @@ pburg <- function(x, fs, order = 16L, nfft = 256L) {
   ef <- x
   eb <- x
   a <- numeric(order + 1L)
-  a[1] <- 1
+  a\[1\] <- 1
   pe <- sum(x * x) / n
   for (m in seq_len(order)) {
     efm <- ef[(m + 1L):n]
@@ -795,7 +795,7 @@ pburg <- function(x, fs, order = 16L, nfft = 256L) {
     if (den == 0) break
     km <- num / den
     a_new <- numeric(m + 1L)
-    a_new[1] <- 1
+    a_new\[1\] <- 1
     if (m > 1L) for (j in seq_len(m - 1L)) a_new[j + 1L] <- a[j + 1L] + km * a[m - j + 1L]
     a_new[m + 1L] <- km
     a <- numeric(order + 1L)
@@ -955,7 +955,7 @@ pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
   edges <- diff(as.integer(above))
   starts <- which(edges == 1L) + 1L
   stops <- which(edges == -1L) + 1L
-  if (above[1]) starts <- c(1L, starts)
+  if (above\[1\]) starts <- c(1L, starts)
   if (above[length(env)]) stops <- c(stops, length(env))
   n_seg <- min(length(starts), length(stops))
   if (n_seg == 0L) {
@@ -967,7 +967,7 @@ pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
   stops <- stops[seq_len(n_seg)]
   peaks <- as.integer((starts + stops) %/% 2L)
   min_gap <- as.integer(min_gap_ms * fs / 1000)
-  merged <- peaks[1]
+  merged <- peaks\[1\]
   for (p in peaks[-1]) {
     if (p - merged[length(merged)] >= min_gap) merged <- c(merged, p)
   }
@@ -988,14 +988,14 @@ pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
 #'
 #' Combines a 100--400 Hz band-energy ratio, normalised spectral entropy,
 #' and the Higuchi fractal dimension of the PCG into a murmur-likelihood
-#' score in `[0, 1]`.
+#' score in `\[0, 1\]`.
 #'
 #' Reference: Rangayyan, R.M. (2015) *Biomedical Signal Analysis*, 2nd ed.,
 #' Wiley/IEEE Press, chapter on heart-sound analysis.
 #'
 #' @param pcg Numeric vector (1-D PCG signal).
 #' @param fs Sampling frequency in Hz.
-#' @return List with `value` (score in `[0, 1]`), `name`, and `extra`
+#' @return List with `value` (score in `\[0, 1\]`), `name`, and `extra`
 #'   (`fractal_dimension`, `hf_energy_ratio`, `spectral_entropy`,
 #'   `fd_score`, `hf_score`, `ent_score`).
 #' @export

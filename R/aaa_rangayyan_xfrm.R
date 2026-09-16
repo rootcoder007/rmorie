@@ -39,8 +39,8 @@ Ztrans <- function(x, z = NULL, n0 = 0) {
     zs, function(zv) sum(as.complex(xs) * zv^(-idx)),
     complex(1)
   )
-  out$X <- if (length(vals) == 1L) vals[[1]] else vals
-  out$z <- if (length(zs) == 1L) zs[[1]] else zs
+  out$X <- if (length(vals) == 1L) vals[\[1\]] else vals
+  out$z <- if (length(zs) == 1L) zs[\[1\]] else zs
   out
 }
 
@@ -96,9 +96,9 @@ ZtConv <- function(x, h, z) {
   scale <- max(Mod(rhs))
   if (scale == 0) scale <- 1
   list(
-    y = y, Y = if (length(lhs) == 1L) lhs[[1]] else lhs,
-    XH = if (length(rhs) == 1L) rhs[[1]] else rhs,
-    z = if (length(zs) == 1L) zs[[1]] else zs,
+    y = y, Y = if (length(lhs) == 1L) lhs[\[1\]] else lhs,
+    XH = if (length(rhs) == 1L) rhs[\[1\]] else rhs,
+    z = if (length(zs) == 1L) zs[\[1\]] else zs,
     max_difference = gap, holds = gap <= 1e-9 * scale,
     method = "Rangayyan (2024) eq. (3.56)"
   )
@@ -129,8 +129,8 @@ DtftZ <- function(x, omega, fs = NULL) {
   vals <- vapply(zs, function(zv) sum(as.complex(xs) * zv^(-idx)), complex(1))
   one <- length(ws) == 1L
   list(
-    X = if (one) vals[[1]] else vals, z = if (one) zs[[1]] else zs,
-    omega = if (one) ws[[1]] else ws, T = t_s, n = length(xs),
+    X = if (one) vals[\[1\]] else vals, z = if (one) zs[\[1\]] else zs,
+    omega = if (one) ws[\[1\]] else ws, T = t_s, n = length(xs),
     on_unit_circle = all(abs(Mod(zs) - 1) < 1e-12),
     method = "Rangayyan (2024) eq. (3.66)"
   )
@@ -163,9 +163,9 @@ Euler <- function(omega, t = 0) {
   vals <- complex(real = re, imaginary = im)
   one <- length(vals) == 1L
   list(
-    value = if (one) vals[[1]] else vals,
-    real = if (one) re[[1]] else re, imag = if (one) im[[1]] else im,
-    angle = if (one) ang[[1]] else ang,
+    value = if (one) vals[\[1\]] else vals,
+    real = if (one) re[\[1\]] else re, imag = if (one) im[\[1\]] else im,
+    angle = if (one) ang[\[1\]] else ang,
     unit_modulus = all(abs(Mod(vals) - 1) < 1e-15),
     method = "Rangayyan (2024) eq. (3.74)"
   )
@@ -216,9 +216,9 @@ Ctft <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
   }, complex(1))
   one <- length(ws) == 1L
   list(
-    X = if (one) vals[[1]] else vals,
-    omega = if (one) ws[[1]] else ws, f = if (one) fs_[[1]] else fs_,
-    variable = variable, duration = ts[length(ts)] - ts[1],
+    X = if (one) vals[\[1\]] else vals,
+    omega = if (one) ws[\[1\]] else ws, f = if (one) fs_[\[1\]] else fs_,
+    variable = variable, duration = ts[length(ts)] - ts\[1\],
     method = "Rangayyan (2024) eqs. (3.75)-(3.76)"
   )
 }
@@ -314,7 +314,7 @@ Ictft <- function(X, t, omega = NULL, f = NULL) {
   }, complex(1))
   one <- length(ts) == 1L
   list(
-    x = if (one) out[[1]] else out, t = if (one) ts[[1]] else ts,
+    x = if (one) out[\[1\]] else out, t = if (one) ts[\[1\]] else ts,
     variable = variable, scale = scale,
     method = "Rangayyan (2024) eq. (3.77)"
   )
@@ -348,7 +348,7 @@ Dtft <- function(x, omega, n0 = 0) {
   }, complex(1))
   one <- length(ws) == 1L
   list(
-    X = if (one) vals[[1]] else vals, omega = if (one) ws[[1]] else ws,
+    X = if (one) vals[\[1\]] else vals, omega = if (one) ws[\[1\]] else ws,
     n0 = as.integer(n0), n = length(xs),
     method = "Rangayyan (2024) eq. (3.78)"
   )
@@ -469,9 +469,9 @@ Twiddle <- function(npoints, power = 1) {
   )
   one <- length(ps) == 1L
   list(
-    W = if (one) vals[[1]] else vals, N = n,
-    power = if (one) ps[[1]] else ps,
-    root_of_unity = if (one) Mod(vals[[1]]^n - 1) < 1e-9 else NULL,
+    W = if (one) vals[\[1\]] else vals, N = n,
+    power = if (one) ps[\[1\]] else ps,
+    root_of_unity = if (one) Mod(vals[\[1\]]^n - 1) < 1e-9 else NULL,
     method = "Rangayyan (2024) eq. (3.82)"
   )
 }
@@ -965,8 +965,8 @@ FtConv <- function(x, h, omega, dt = 1) {
   gap <- max(Mod(Y - prod))
   one <- length(ws) == 1L
   list(
-    y = y, Y = if (one) Y[[1]] else Y, X = if (one) X[[1]] else X,
-    H = if (one) H[[1]] else H, XH = if (one) prod[[1]] else prod,
+    y = y, Y = if (one) Y[\[1\]] else Y, X = if (one) X[\[1\]] else X,
+    H = if (one) H[\[1\]] else H, XH = if (one) prod[\[1\]] else prod,
     max_difference = gap, holds = gap <= 1e-8 * (1 + max(Mod(prod))),
     method = "Rangayyan (2024) eqs. (4.61)-(4.62)"
   )
@@ -1020,10 +1020,10 @@ ClogSum <- function(x, h, z) {
   wrap <- max(abs(off - round(off)))
   one <- length(zs) == 1L
   list(
-    y = y, Y_hat = if (one) Yh[[1]] else Yh,
-    X_hat = if (one) Xh[[1]] else Xh, H_hat = if (one) Hh[[1]] else Hh,
+    y = y, Y_hat = if (one) Yh[\[1\]] else Yh,
+    X_hat = if (one) Xh[\[1\]] else Xh, H_hat = if (one) Hh[\[1\]] else Hh,
     magnitude_difference = mag_gap,
-    branch_offset = if (one) off[[1]] else off,
+    branch_offset = if (one) off[\[1\]] else off,
     holds_up_to_branch = mag_gap < 1e-9 && wrap < 1e-9,
     method = "Rangayyan (2024) eqs. (4.63), (4.65)"
   )
@@ -1062,10 +1062,10 @@ LogSeries <- function(x, terms = 20) {
   exact <- log(1 + xs)
   one <- length(xs) == 1L
   list(
-    value = if (one) res[[1]] else res,
-    exact = if (one) exact[[1]] else exact,
+    value = if (one) res[\[1\]] else res,
+    exact = if (one) exact[\[1\]] else exact,
     error = max(Mod(res - exact)),
-    error_bound = if (one) bound[[1]] else bound, terms = k,
+    error_bound = if (one) bound[\[1\]] else bound, terms = k,
     method = "Rangayyan (2024) eq. (4.69)"
   )
 }

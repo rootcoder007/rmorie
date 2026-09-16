@@ -46,7 +46,7 @@ Prefixev <- function(tokens) {
   if (length(st) != 1L)
     stop(sprintf("malformed prefix expression: %d values left on the stack",
                  length(st)))
-  .t1_result(value = st[1], n_tokens = as.numeric(length(toks)),
+  .t1_result(value = st\[1\], n_tokens = as.numeric(length(toks)),
              n_operators = as.numeric(nop), max_stack = as.numeric(mx),
              method = "Prefix (Polish) notation evaluation")
 }

@@ -32,7 +32,7 @@
 #' @return The value of \code{res}, as built in the body.
 #' @export
 .egrch_negll <- function(p, r, n, EZ) {
-  omega <- p[1]
+  omega <- p\[1\]
   alpha <- p[2]
   gamma <- p[3]
   beta <- p[4]
@@ -40,7 +40,7 @@
     return(1e10)
   }
   log_s2 <- numeric(n)
-  log_s2[1] <- log(var(r) + 1e-12)
+  log_s2\[1\] <- log(var(r) + 1e-12)
   for (t in 2:n) {
     z <- r[t - 1] / sqrt(exp(log_s2[t - 1]) + 1e-12)
     log_s2[t] <- omega + beta * log_s2[t - 1] + alpha * (abs(z) - EZ) + gamma * z
@@ -100,14 +100,14 @@ morie_egarch_model <- function(x) {
     upper = c(5, 1, 1, 0.999)
   )
   log_s2 <- numeric(n)
-  log_s2[1] <- log(var(r) + 1e-12)
+  log_s2\[1\] <- log(var(r) + 1e-12)
   for (t in 2:n) {
     z <- r[t - 1] / sqrt(exp(log_s2[t - 1]) + 1e-12)
-    log_s2[t] <- opt$par[1] + opt$par[4] * log_s2[t - 1] +
+    log_s2[t] <- opt$par\[1\] + opt$par[4] * log_s2[t - 1] +
       opt$par[2] * (abs(z) - EZ) + opt$par[3] * z
   }
   list(
-    omega = opt$par[1], alpha = opt$par[2],
+    omega = opt$par\[1\], alpha = opt$par[2],
     gamma = opt$par[3], beta = opt$par[4],
     loglik = -opt$objective,
     conditional_variance = exp(log_s2), n = n,

@@ -99,7 +99,7 @@
   for (q in 1:3) for (l in 1:3) for (r in 1:3)
     G[q, l] <- G[q, l] + (q == l) * lm[q] * tl[q, l]
   # for the two-test-genotype case, marginalise over aa by collapsing
-  p_AA <- G[1, 1] + G[1, 2] * 0.5
+  p_AA <- G\[1, 1\] + G\[1, 2\] * 0.5
   p_Aa <- G[2, 1] * 0.5 + G[2, 2] * 0.5 + G[2, 3] * 0.5
   s <- p_AA + p_Aa
   if (s <= 0) return(c(0.5, 0.5))
@@ -171,7 +171,7 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
   post <- rep(0.5, n)
 
   mean_at <- function(i, q) {
-    m <- beta[1] + beta[2] * q
+    m <- beta\[1\] + beta[2] * q
     if (length(cof) > 0L)
       for (k in seq_along(cof))
         m <- m + beta[2 + k] * cof[[k]][i]
@@ -183,7 +183,7 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
     for (i in seq_len(n)) {
       d0 <- exp(-((y[i] - mean_at(i, 0)) ^ 2) / (2 * s2))
       d1 <- exp(-((y[i] - mean_at(i, 1)) ^ 2) / (2 * s2))
-      m0 <- G[[i]][1] * d0
+      m0 <- G[[i]]\[1\] * d0
       m1 <- G[[i]][2] * d1
       tot <- m0 + m1
       if (tot <= 0) stop(sprintf("cqtmpl: the mixture vanished at individual %d", i))
@@ -221,7 +221,7 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
   s0 <- mean(r0 ^ 2)
   ll0 <- -0.5 * n * (log(2 * pi * s0) + 1)
   lod <- (history[length(history)] - ll0) * (1 / log(10))
-  list(estimate = lod, lod = lod, b0 = beta[1], b = beta[2],
+  list(estimate = lod, lod = lod, b0 = beta\[1\], b = beta[2],
        cofactor_coefficients = beta[-(1:2)], sigma2 = s2,
        sigma2_null = s0, loglik = history[length(history)],
        loglik_null = ll0, iterations = length(history),

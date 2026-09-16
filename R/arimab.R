@@ -53,7 +53,7 @@ Arimahr <- function(y, p = 1, q = 1, d = 0, m = NULL) {
   k <- p + q + 1L
   .t1_result(phi = if (p > 0L) b[2:(1L + p)] else numeric(0),
              theta = if (q > 0L) b[(2L + p):(1L + p + q)] else numeric(0),
-             intercept = b[1],
+             intercept = b\[1\],
              sigma2 = sum(res^2) / max(nobs - k, 1L), resid = res,
              m = m, p = p, q = q, d = d, nobs = nobs,
              method = "Hannan-Rissanen ARMA estimation (Hannan-Rissanen 1982)")

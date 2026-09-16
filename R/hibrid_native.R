@@ -11,7 +11,7 @@
 .hibrid_HI <- 14.0
 
 
-# Maximise f over [lo, hi] by a staged fixed-grid argmax.
+# Maximise f over \[lo, hi\] by a staged fixed-grid argmax.
 #
 # A golden-section search is PATH-DEPENDENT. Each arm walks its own sequence
 # of brackets, and near a flat maximum the fc > fd branch is decided by the
@@ -109,7 +109,7 @@
   jit <- 1e-11 * max(abs(sum(diag(A)) / n), 1.0)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
-      s <- A[i, j]
+      s <- A\[i, j\]
       if (j > 1L) s <- s - sum(L[i, seq_len(j - 1L)] * L[j, seq_len(j - 1L)])
       if (i == j) {
         s <- s + jit
@@ -117,7 +117,7 @@
           stop("hibrid: the covariance matrix is not positive definite")
         L[i, i] <- sqrt(s)
       } else {
-        L[i, j] <- s / L[j, j]
+        L\[i, j\] <- s / L[j, j]
       }
     }
   }
@@ -335,8 +335,8 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
       c1 <- as.numeric(P1 %*% Q1[u, ]) / m
       c2 <- as.numeric(P2 %*% Q2[u, ]) / m
       # an untested cross carries no covariate row, so the fixed part is the
-      # intercept alone -- beta[1] by construction of X
-      pred_new[u] <- beta[1] + s2a * sum((c1 + c2) * w) +
+      # intercept alone -- beta\[1\] by construction of X
+      pred_new[u] <- beta\[1\] + s2a * sum((c1 + c2) * w) +
         s2s * sum((c1 * c2) * w)
     }
   }

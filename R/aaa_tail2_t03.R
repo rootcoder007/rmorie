@@ -59,7 +59,7 @@
   out <- matrix(0, k, k)
   for (i in seq_len(k)) {
     for (j in seq_len(k)) {
-      out[i, j] <- M[i, k + j] / M[i, i]
+      out\[i, j\] <- M[i, k + j] / M[i, i]
     }
   }
   out
@@ -184,7 +184,7 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
   for (i in seq_len(k)) {
     j <- i + 1L
     while (j <= k) {
-      if (abs(info[i, j] - info[j, i]) > 1e-12 * (1 + abs(info[i, j]))) {
+      if (abs(info\[i, j\] - info[j, i]) > 1e-12 * (1 + abs(info\[i, j\]))) {
         stop("Fisher information matrix must be symmetric")
       }
       j <- j + 1L
@@ -255,7 +255,7 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
       for (a in seq_len(p)) {
         s1[a] <- s1[a] + w[i] * X[i, a]
         for (b in seq_len(p)) {
-          s2[a, b] <- s2[a, b] + w[i] * X[i, a] * X[i, b]
+          s2\[a, b\] <- s2\[a, b\] + w[i] * X[i, a] * X[i, b]
         }
       }
       j <- j + 1L
@@ -273,8 +273,8 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
       for (a in seq_len(p)) {
         score[a] <- score[a] - d * s1[a] / s0
         for (b in seq_len(p)) {
-          info[a, b] <- info[a, b] +
-            d * (s2[a, b] / s0 - (s1[a] / s0) * (s1[b] / s0))
+          info\[a, b\] <- info\[a, b\] +
+            d * (s2\[a, b\] / s0 - (s1[a] / s0) * (s1[b] / s0))
         }
       }
     }
@@ -490,7 +490,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' @export
 #' @examples
 #' f <- function(x) sum(x^2)
-#' cons <- list(function(x) 1 - x[1])
+#' cons <- list(function(x) 1 - x\[1\])
 #' r <- PenaltyMin(f, cons, x0 = c(2, 0), mu = 1)
 #' str(r, max.level = 1)
 PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
@@ -677,7 +677,7 @@ OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {
   C <- matrix(0, ns, nt)
   for (i in seq_len(ns)) {
     for (j in seq_len(nt)) {
-      C[i, j] <- sum((Xs[i, ] - Xt[j, ])^2)
+      C\[i, j\] <- sum((Xs[i, ] - Xt[j, ])^2)
     }
   }
   K <- exp(-C / epsilon)
@@ -700,7 +700,7 @@ OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {
   gamma <- matrix(0, ns, nt)
   for (i in seq_len(ns)) {
     for (j in seq_len(nt)) {
-      gamma[i, j] <- u[i] * K[i, j] * v[j]
+      gamma\[i, j\] <- u[i] * K\[i, j\] * v[j]
     }
   }
 
@@ -712,7 +712,7 @@ OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {
       stop("a source point received no transported mass")
     }
     for (k in seq_len(d)) {
-      adapted[i, k] <- sum(gamma[i, ] * Xt[, k]) / rows[i]
+      adapted\[i, k\] <- sum(gamma[i, ] * Xt[, k]) / rows[i]
     }
   }
   list(

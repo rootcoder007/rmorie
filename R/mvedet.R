@@ -6,7 +6,7 @@
 #' 283-297.  The MVE is the ellipsoid of smallest volume covering at least h of
 #' the n observations; its centre estimates location and its shape, suitably
 #' scaled, estimates scatter.  Like the MCD it attains the maximal breakdown
-#' point at h = [(n + p + 1)/2].
+#' point at h = \[(n + p + 1)/2\].
 #'
 #' Computation follows the standard resampling scheme: for each (p+1)-subset J
 #' take the mean m_J and covariance C_J of J, and inflate the ellipsoid until
@@ -30,7 +30,7 @@
 #' shortest-half construction of Rousseeuw (1984) Theorem 2, p. 873.
 #'
 #' @param X n-by-p data matrix.
-#' @param h coverage; defaults to [(n + p + 1)/2].
+#' @param h coverage; defaults to \[(n + p + 1)/2\].
 #' @param n_starts cap on the number of (p+1)-subsets enumerated.
 #' @return list: estimate, center, cov, cov_raw, m2, subset, covered, h, n, p,
 #'   method.

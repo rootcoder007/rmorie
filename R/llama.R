@@ -72,7 +72,7 @@ Llamablock <- function(tokens, model = NULL, Wq = NULL, Wk = NULL, Wv = NULL,
     kk[[t]] <- rope(.s03matvec(Km, xn), t - 1L, rope_base)
     vv[[t]] <- .s03matvec(Vm, xn)
   }
-  dk <- length(q[[1]])
+  dk <- length(q[\[1\]])
   attn <- vector("list", n)
   ctx <- vector("list", n)
   for (t in seq_len(n)) {
@@ -84,7 +84,7 @@ Llamablock <- function(tokens, model = NULL, Wq = NULL, Wk = NULL, Wv = NULL,
     }
     w <- .s03softmax(logits)
     attn[[t]] <- w
-    cc <- numeric(length(vv[[1]]))
+    cc <- numeric(length(vv[\[1\]]))
     for (m in seq_len(t)) for (b in seq_along(cc)) cc[b] <- cc[b] + w[m] * vv[[m]][b]
     ctx[[t]] <- cc
   }

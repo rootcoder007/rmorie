@@ -28,6 +28,6 @@ Tqrot <- function(d, seed = 1) {
   A <- matrix(vapply(seq_len(d * d), function(i) g$norm(), 0), d, d, byrow = TRUE)
   Q <- .s4_qr_mgs(A)$Q
   err <- max(abs(crossprod(Q) - diag(1, d)))
-  .t1_result(Q = Q, estimate = Q[1, 1], d = d, orth_err = err,
+  .t1_result(Q = Q, estimate = Q\[1, 1\], d = d, orth_err = err,
              method = "Random orthogonal rotation, QR of a Gaussian matrix")
 }

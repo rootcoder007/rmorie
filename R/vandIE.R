@@ -25,7 +25,7 @@ VandIE <- function(Y, X, M, Cc = NULL, a = 1, astar = 0, m = 0) {
   mm <- .s4_medmodels(Y, X, M, Cc)
   d <- .s4_fourway(mm$theta, mm$beta, mm$cbar, a, astar, m)
   parts <- c(d$cde, d$intref, d$intmed, d$pie)
-  same <- as.numeric(all((parts >= 0) == (parts[1] >= 0)))
+  same <- as.numeric(all((parts >= 0) == (parts\[1\] >= 0)))
   sh <- function(v) if (d$te != 0) v / d$te else NaN
   .t1_result(estimate = sh(d$intref + d$intmed + d$pie), p_cde = sh(d$cde),
              p_intref = sh(d$intref), p_intmed = sh(d$intmed),

@@ -48,7 +48,7 @@ Crpgib <- function(y, alpha = 1, n_iter = 50, m = 3, mu0 = 0, tau2 = 10,
       K <- length(counts)
       aux <- numeric(m)
       for (j in seq_len(m)) aux[j] <- .ghc_norm(e, 1L, mu0, sqrt(tau2))
-      if (counts[k] == 0L) aux[1] <- theta[k]
+      if (counts[k] == 0L) aux\[1\] <- theta[k]
       w <- numeric(K + m)
       for (c in seq_len(K))
         w[c] <- if (counts[c] > 0L)

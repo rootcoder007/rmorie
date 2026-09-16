@@ -14,7 +14,7 @@
 #' @export
 HockStick <- function(n, k) {
   res <- morie_hockey_stick(n, k)
-  total <- as.numeric(res[[1]])
+  total <- as.numeric(res[\[1\]])
   closed <- as.numeric(res[[2]])
   if (abs(total - closed) > 1e-6 * max(1, closed)) {
     stop("hockey-stick sum and closed form disagree.", call. = FALSE)

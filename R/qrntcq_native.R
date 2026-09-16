@@ -120,7 +120,7 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
   list(efficacy = prevented / remaining,
        prevented.mass = prevented, remaining.mass = remaining,
        t.Q = q, t.R = r, max.attainable = 1,
-       pre.quarantine.mass = .mass(ts, ys, ts[1], q))
+       pre.quarantine.mass = .mass(ts, ys, ts\[1\], q))
 }
 
 #' morie_qrntcq_efficacy_test_and_release
@@ -147,7 +147,7 @@ morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
     morie_qrntcq_gamma_generation_time() else generation.time
   p <- as.numeric(false.negative)
   if (p < 0 || p > 1)
-    stop(paste0("qrntcq: the false-negative probability must lie in [0, 1], got ",
+    stop(paste0("qrntcq: the false-negative probability must lie in \[0, 1\], got ",
                 false.negative))
   if (t.T < t.Q)
     stop("qrntcq: the test cannot precede the start of quarantine")

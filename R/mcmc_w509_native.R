@@ -32,23 +32,23 @@
 #'   fetched-wave3/sisson-2018-abc-overview.pdf).
 #' @export
 #' @examples
-#' sim <- function(theta, e) theta[1] + 0.1 * rmorie:::.ghc_norm(e, 1L)
+#' sim <- function(theta, e) theta\[1\] + 0.1 * rmorie:::.ghc_norm(e, 1L)
 #' r <- Abcrej(sim, obs = 1.5, eps = 0.3, prior = list(c(0, 3)),
 #'             n_draws = 400)
 #' str(r, max.level = 1)
 Abcrej <- function(sim, obs, eps, prior, n_draws = 1000L, seed = 0L) {
   obs <- as.numeric(obs)
-  eps <- as.numeric(eps)[1]
+  eps <- as.numeric(eps)\[1\]
   if (eps <= 0) stop("eps must be positive", call. = FALSE)
-  bounds <- lapply(prior, function(p) c(as.numeric(p[1]), as.numeric(p[2])))
-  if (any(vapply(bounds, function(b) b[2] <= b[1], logical(1)))) {
+  bounds <- lapply(prior, function(p) c(as.numeric(p\[1\]), as.numeric(p[2])))
+  if (any(vapply(bounds, function(b) b[2] <= b\[1\], logical(1)))) {
     stop("each prior pair must satisfy low < high", call. = FALSE)
   }
   e <- .ghc_rng(seed)
   accepted <- list()
   dists <- numeric(0)
   for (i in seq_len(as.integer(n_draws))) {
-    theta <- vapply(bounds, function(b) .ghc_unif(e, 1L, b[1], b[2]), 0)
+    theta <- vapply(bounds, function(b) .ghc_unif(e, 1L, b\[1\], b[2]), 0)
     s <- as.numeric(sim(theta, e))
     if (length(s) != length(obs)) {
       stop("sim() must return summaries matching obs", call. = FALSE)

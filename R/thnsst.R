@@ -28,12 +28,12 @@ Voronoi <- function(coords, bbox = NULL, values = NULL) {
     for (i in seq_len(n)) {
       p <- poly[[i]]
       q <- poly[[if (i == n) 1L else i + 1L]]
-      dp <- a * p[1] + b * p[2] - cc
-      dq <- a * q[1] + b * q[2] - cc
+      dp <- a * p\[1\] + b * p[2] - cc
+      dq <- a * q\[1\] + b * q[2] - cc
       if (dp <= 0) out[[length(out) + 1L]] <- p
       if ((dp < 0 && dq > 0) || (dq < 0 && dp > 0)) {
         t <- dp / (dp - dq)
-        out[[length(out) + 1L]] <- c(p[1] + t * (q[1] - p[1]), p[2] + t * (q[2] - p[2]))
+        out[[length(out) + 1L]] <- c(p\[1\] + t * (q\[1\] - p\[1\]), p[2] + t * (q[2] - p[2]))
       }
     }
     out
@@ -44,7 +44,7 @@ Voronoi <- function(coords, bbox = NULL, values = NULL) {
     if (n < 3L) return(0)
     for (i in seq_len(n)) {
       j <- if (i == n) 1L else i + 1L
-      s <- s + poly[[i]][1] * poly[[j]][2] - poly[[j]][1] * poly[[i]][2]
+      s <- s + poly[[i]]\[1\] * poly[[j]][2] - poly[[j]]\[1\] * poly[[i]][2]
     }
     abs(s) / 2
   }
@@ -61,7 +61,7 @@ Voronoi <- function(coords, bbox = NULL, values = NULL) {
               max(xs) + 0.5 * mx, max(ys) + 0.5 * my)
   }
   bb <- as.numeric(bbox)
-  x0 <- bb[1]
+  x0 <- bb\[1\]
   y0 <- bb[2]
   x1 <- bb[3]
   y1 <- bb[4]

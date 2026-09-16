@@ -343,7 +343,7 @@ morie_tmlcmp <- function(time, event_type, D, X, times = NULL,
     stop("tmlcmp: the inputs differ in length")
   }
   grid <- if (is.null(times)) sort(unique(t)) else as.numeric(times)
-  hz <- if (is.null(horizon)) grid[length(grid)] else as.numeric(horizon)
+  hz <- if (is.null(horizon)) grid\[length(grid)\] else as.numeric(horizon)
   if (is.null(g)) {
     des <- .tmlcmp_design(W, n)
     b <- .tmlcmp_logit_irls(des, a)

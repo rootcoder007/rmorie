@@ -28,7 +28,7 @@ morie_binomial_inference <- function(w, n, p = NA, z = 1.96,
       cl <- 0
       for (ww in 0:n) {
         ci <- interval_fn(ww, n)
-        if (ci[1] <= p && p <= ci[2]) cl <- cl + stats::dbinom(ww, n, p)
+        if (ci\[1\] <= p && p <= ci[2]) cl <- cl + stats::dbinom(ww, n, p)
       }
       out$true_level <- cl
     }
@@ -56,8 +56,8 @@ morie_two_group_binomial <- function(w1, n1, w2, n2, z = 1.96) {
   stopifnot(p_bar > 0, p_bar < 1)
   x2 <- 0
   for (g in list(c(w1, n1), c(w2, n2))) {
-    x2 <- x2 + (g[1] - g[2] * p_bar)^2 / (g[2] * p_bar) +
-      (g[2] - g[1] - g[2] * (1 - p_bar))^2 / (g[2] * (1 - p_bar))
+    x2 <- x2 + (g\[1\] - g[2] * p_bar)^2 / (g[2] * p_bar) +
+      (g[2] - g\[1\] - g[2] * (1 - p_bar))^2 / (g[2] * (1 - p_bar))
   }
   term <- function(w, n, ph) {
     o <- 0
@@ -275,7 +275,7 @@ morie_poisson_loglinear <- function(mu_hat = NA, n = NA, z = 1.96,
   if (!is.null(bxz)) {
     b <- as.numeric(bxz)
     stopifnot(length(b) == 4)
-    out$or_loglinear <- exp(b[1] + b[2] - b[3] - b[4])
+    out$or_loglinear <- exp(b\[1\] + b[2] - b[3] - b[4])
   }
   if (!is.na(beta_z_jp) && !is.na(beta_xz_i)) {
     out$mean_ratio <- exp((beta_z_j - beta_z_jp) +
@@ -515,7 +515,7 @@ morie_spline_logit <- function(x = NA, knot = NA, coef_left = NULL,
                                coef_right = NULL, betas = NULL,
                                knots = NULL, a = NA, b_pt = NA) {
   tps <- function(xx, bb, kk) {
-    v <- bb[1] + bb[2] * xx + bb[3] * xx^2 + bb[4] * xx^3
+    v <- bb\[1\] + bb[2] * xx + bb[3] * xx^2 + bb[4] * xx^3
     for (d in seq_along(kk)) {
       if (xx > kk[d]) v <- v + bb[4 + d] * (xx - kk[d])^3
     }
@@ -524,7 +524,7 @@ morie_spline_logit <- function(x = NA, knot = NA, coef_left = NULL,
   out <- list()
   if (!is.na(knot) && !is.null(coef_left)) {
     cc <- if (x <= knot) as.numeric(coef_left) else as.numeric(coef_right)
-    out$piecewise <- cc[1] + cc[2] * x + cc[3] * x^2 + cc[4] * x^3
+    out$piecewise <- cc\[1\] + cc[2] * x + cc[3] * x^2 + cc[4] * x^3
   }
   if (!is.null(betas)) {
     bb <- as.numeric(betas)

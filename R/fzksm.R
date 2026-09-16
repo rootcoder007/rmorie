@@ -30,7 +30,7 @@ fzksm <- function(x, cdf = "norm", args = NULL, h = NULL, n_grid = 512L) {
     F0 <- cdf
   } else if (identical(cdf, "norm")) {
     if (is.null(args)) args <- list(mean(x), stats::sd(x))
-    F0 <- function(t) stats::pnorm(t, mean = args[[1]], sd = args[[2]])
+    F0 <- function(t) stats::pnorm(t, mean = args[\[1\]], sd = args[[2]])
   } else {
     stop("supply a function for non-normal cdf")
   }

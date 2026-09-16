@@ -184,7 +184,7 @@ recall_at_k <- function(ranked, target, kk = 20L) {
 mrr_at_k <- function(ranked, target, kk = 20L) {
   kk <- as.integer(kk)
   top <- as.integer(ranked)[seq_len(min(kk, length(ranked)))]
-  if (as.integer(target) %in% top) 1 / (which(top == as.integer(target))[1])
+  if (as.integer(target) %in% top) 1 / (which(top == as.integer(target))\[1\])
   else 0
 }
 

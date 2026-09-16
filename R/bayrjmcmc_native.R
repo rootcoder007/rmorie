@@ -105,7 +105,7 @@
 #' @return The value of \code{.logabsdet}.
 #' @export
 #' @examples
-#' j <- numeric_log_jacobian(function(z) c(z[1] + z[2], z[1] - z[2]),
+#' j <- numeric_log_jacobian(function(z) c(z\[1\] + z[2], z\[1\] - z[2]),
 #'                           c(0.4, 0.2))
 #' stopifnot(abs(j - log(2)) < 1e-5)
 #' j
@@ -155,7 +155,7 @@ numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
 #'        transform = function(theta, u) list(c(theta, u), numeric(0))),
 #'   list(frm = "m2", to = "m1", n_u = 0L, n_u_rev = 1L,
 #'        propose = function(theta, uni) numeric(0),
-#'        transform = function(theta, u) list(theta[1], theta[2]))
+#'        transform = function(theta, u) list(theta\[1\], theta[2]))
 #' )
 #' names(check_dimension_matching(models, moves))
 check_dimension_matching <- function(models, moves) {
@@ -301,7 +301,7 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #'        logq = function(theta, u) dnorm(u, log = TRUE)),
 #'   list(frm = "m2", to = "m1", n_u = 0L, n_u_rev = 1L,
 #'        propose = function(theta, uni) numeric(0),
-#'        transform = function(theta, u) list(theta[1], theta[2]),
+#'        transform = function(theta, u) list(theta\[1\], theta[2]),
 #'        logjac = function(theta, u, theta2, u2) 0,
 #'        logq_rev = function(theta2, u2) dnorm(u2, log = TRUE))
 #' )
@@ -375,7 +375,7 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
       if (length(theta) > 0) {
         if (!is.null(within) && !is.null(within[[cur]])) {
           out <- within[[cur]](theta, uni)
-          prop <- as.numeric(out[[1]])
+          prop <- as.numeric(out[\[1\]])
           log_ratio <- as.numeric(out[[2]])
         } else {
           prop <- .rw_within(theta, uni, within_scale)
@@ -399,7 +399,7 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
                            "but declares n_u = %d"),
                      label, length(u), as.integer(mv$n_u)))
       tr <- mv$transform(theta, u)
-      theta2 <- as.numeric(tr[[1]])
+      theta2 <- as.numeric(tr[\[1\]])
       u2 <- as.numeric(tr[[2]])
       dim2 <- as.integer(models[[mv$to]]$dim)
       if (length(theta2) != dim2 || length(u2) != as.integer(mv$n_u_rev))
@@ -416,7 +416,7 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
           tf <- mv$transform
           flat <- function(z) {
             ab <- tf(z[1:n_from], z[(n_from + 1):length(z)])
-            c(as.numeric(ab[[1]]), as.numeric(ab[[2]]))
+            c(as.numeric(ab[\[1\]]), as.numeric(ab[[2]]))
           }
           logjac <- numeric_log_jacobian(flat, c(theta, u))
         }
@@ -659,7 +659,7 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' set.seed(2); y <- sort(c(runif(30, 0, .4), runif(60, .4, 1)))
 #' r <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
 #' r$k_mean
-#' r$k_posterior[1]
+#' r$k_posterior\[1\]
 #' r2 <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
 #' r$k_posterior
 changepoint_rjmcmc <- function(y = numeric(0), L = 1.0, n_iter = 40000,
@@ -726,7 +726,7 @@ changepoint_rjmcmc <- function(y = numeric(0), L = 1.0, n_iter = 40000,
       while (j < length(edges) - 1L && s_star >= edges[j + 1L]) j <- j + 1L
       u <- uni()
       h_split <- birth_split_heights(h[j], u, edges[j], s_star, edges[j + 1L])
-      hl <- h_split[1]
+      hl <- h_split\[1\]
       hr <- h_split[2]
       s_new <- c(s[seq_len(j - 1L)], s_star, (if (j <= length(s)) s[j:length(s)] else numeric(0)))
       h_new <- c(h[seq_len(j - 1L)], hl, hr, (if (j + 1L <= length(h)) h[(j + 1L):length(h)] else numeric(0)))

@@ -92,7 +92,7 @@ morie_predpol_aggregate_areas <- function(area, risk, outcome, group = NULL,
         )
       }
       population <- as.numeric(population)
-      pops <- vapply(areas, function(a) population[area == a][1], numeric(1))
+      pops <- vapply(areas, function(a) population[area == a]\[1\], numeric(1))
     }
     outcome_rate <- ifelse(pops > 0, counts / pops * 10000, NA_real_)
   }

@@ -80,6 +80,6 @@ Moetop <- function(x, W_g, experts, k = 2L, alpha = 0.01) {
   aux <- as.numeric(alpha) * N * sum(f * P)
   list(output = out, gates = gates, topk_indices = top_idx,
        topk_gates = top_gate, aux_loss = aux, f = f, P = P,
-       n_experts = N, k = k, estimate = out[1, 1], n = T_,
+       n_experts = N, k = k, estimate = out\[1, 1\], n = T_,
        method = "MoE top-k routing + Switch aux load-balance loss (GShard Sec 2.1; Switch Eqs 4-6)")
 }

@@ -138,9 +138,9 @@ morie_fairness_simulate_biased_crime_data <- function(n = 2000L,
   G <- length(groups)
   if (G < 2L) stop("need at least two groups")
   if (!(base_rate >= 0.0 && base_rate <= 1.0)) {
-    stop("base_rate must be in [0, 1]")
+    stop("base_rate must be in \[0, 1\]")
   }
-  if (!(bias >= -1.0 && bias <= 1.0)) stop("bias must be in [-1, 1]")
+  if (!(bias >= -1.0 && bias <= 1.0)) stop("bias must be in \[-1, 1\]")
   if (n_areas < G) stop("n_areas must be >= the number of groups")
 
   set.seed(as.integer(seed))

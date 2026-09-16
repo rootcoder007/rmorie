@@ -73,7 +73,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
   if (length(C) == 0L) {
     stop("frwil: no compounds given")
   }
-  k <- length(C[[1]])
+  k <- length(C[\[1\]])
   if (k == 0L || any(lengths(C) != k)) {
     stop("frwil: every compound must list a group for the same number of positions")
   }
@@ -101,7 +101,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
   if (length(C) == 0L) {
     stop("frwil: no compounds given")
   }
-  k <- length(C[[1]])
+  k <- length(C[\[1\]])
   groups <- list()
   for (p in seq_len(k)) {
     seen <- character(0)
@@ -113,7 +113,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
     }
     if (length(seen) < 2L) {
       stop(sprintf("frwil: position %d has only the group %s, so its contribution cannot be separated from the intercept",
-                   p, sQuote(seen[1])))
+                   p, sQuote(seen\[1\])))
     }
     groups[[p]] <- seen
   }
@@ -134,7 +134,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
     row <- C[[i]]
     for (j in seq_along(cols)) {
       col <- cols[[j]]
-      if (row[as.integer(col[1])] == col[2]) {
+      if (row[as.integer(col\[1\])] == col[2]) {
         M[i, j + 1L] <- 1.0
       }
     }
@@ -172,7 +172,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
       for (i in seq_len(n)) {
         s <- s + M[i, a] * M[i, b]
       }
-      A[a, b] <- s + (if (a == b) ridge else 0.0)
+      A\[a, b\] <- s + (if (a == b) ridge else 0.0)
     }
   }
   b <- numeric(p)
@@ -243,8 +243,8 @@ CONSTRAINTS <- c("reference", "sum_zero")
       row <- rep(0.0, length(names_vec))
       for (j in seq_along(D$columns)) {
         col <- D$columns[[j]]
-        if (as.integer(col[1]) == p) {
-          count <- sum(sapply(C, `[`, as.integer(col[1])) == col[2])
+        if (as.integer(col\[1\]) == p) {
+          count <- sum(sapply(C, `[`, as.integer(col\[1\])) == col[2])
           row[j + 1L] <- as.numeric(count)
         }
       }
@@ -271,7 +271,7 @@ CONSTRAINTS <- c("reference", "sum_zero")
   counts <- list()
   for (j in seq_along(D$columns)) {
     col <- D$columns[[j]]
-    count <- sum(sapply(C, `[`, as.integer(col[1])) == col[2])
+    count <- sum(sapply(C, `[`, as.integer(col\[1\])) == col[2])
     counts[[names_vec[j + 1L]]] <- as.integer(count)
   }
   coef_list <- as.list(setNames(beta, names_vec))

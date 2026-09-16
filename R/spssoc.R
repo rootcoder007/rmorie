@@ -16,7 +16,7 @@ spssoc <- function(cov_func, h) {
   if (!is.function(cov_func)) stop("`cov_func` must be a function C(h)")
   h <- as.numeric(h)
   if (any(h < 0)) stop("lag distances `h` must be non-negative")
-  c0 <- as.numeric(cov_func(0))[1]
+  c0 <- as.numeric(cov_func(0))\[1\]
   ch <- as.numeric(cov_func(h))
   list(gamma = c0 - ch, covariance = ch, sill = c0)
 }

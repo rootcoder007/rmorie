@@ -49,7 +49,7 @@ morie_crim_etas <- function(times, magnitudes = NULL, m0 = NULL,
     if (any(!is.finite(par))) {
       return(1e10)
     }
-    mu <- exp(min(par[1], 20))
+    mu <- exp(min(par\[1\], 20))
     K <- exp(min(par[2], 20))
     alpha <- if (alpha_free) max(min(par[3], 10), -10) else 0
     cc <- exp(min(par[4], 20))
@@ -85,7 +85,7 @@ morie_crim_etas <- function(times, magnitudes = NULL, m0 = NULL,
     method = "Nelder-Mead",
     control = list(maxit = 2000L)
   )
-  mu <- exp(opt$par[1])
+  mu <- exp(opt$par\[1\])
   K <- exp(opt$par[2])
   alpha <- if (alpha_free) opt$par[3] else 0
   cc <- exp(opt$par[4])
@@ -159,7 +159,7 @@ morie_crim_hawkes_multivariate <- function(times, marks, t_max = NULL,
   if (is.null(t_max)) t_max <- max(t)
 
   ll_at <- function(mu, A, b) {
-    # R[j,k] recursion: R_i = e^{-b dt}(R_{i-1} + 1[mark_{i-1} = k]).
+    # R\[j,k\] recursion: R_i = e^{-b dt}(R_{i-1} + 1[mark_{i-1} = k]).
     R <- matrix(0, n, K)
     for (i in 2:n) {
       dec <- exp(-b * (t[i] - t[i - 1]))

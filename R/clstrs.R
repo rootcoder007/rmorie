@@ -6,7 +6,7 @@
 #' than on the rounding.
 #'
 #' Formula: k_opt = sqrt( c1 (1 - rho) / (c2 rho) );
-#'   m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) [1 + (k - 1) rho]
+#'   m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) \[1 + (k - 1) rho\]
 #'
 #' @param rho Intraclass correlation, 0 < rho <= 1.
 #' @param S2 Element variance in the population.
@@ -42,9 +42,9 @@ Clusdes <- function(rho, S2, c1, c2, budget) {
   }
   lo <- max(1, floor(kopt))
   hi <- lo + 1
-  k <- if (Vf(lo)[1] <= Vf(hi)[1]) lo else hi
+  k <- if (Vf(lo)\[1\] <= Vf(hi)\[1\]) lo else hi
   vm <- Vf(k)
-  .t1_result(k_opt = kopt, k = as.numeric(k), m = vm[2], variance = vm[1],
+  .t1_result(k_opt = kopt, k = as.numeric(k), m = vm[2], variance = vm\[1\],
              deff = 1 + (k - 1) * rho, cost = vm[2] * (c1 + c2 * k),
              elements = vm[2] * k,
              method = "Optimal cluster size under a linear cost function")

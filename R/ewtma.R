@@ -17,7 +17,7 @@ morie_ewma_volatility <- function(x, lambda = 0.94) {
   if (lambda <= 0 || lambda >= 1) stop("lambda must be in (0,1).")
   r2 <- r^2
   s2 <- numeric(n)
-  s2[1] <- r2[1]
+  s2\[1\] <- r2\[1\]
   for (t in 2:n) s2[t] <- lambda * s2[t - 1] + (1 - lambda) * r2[t - 1]
   list(
     conditional_variance = s2,

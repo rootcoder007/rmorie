@@ -31,7 +31,7 @@ clausC <- function(T, Lv = 2.501e6, Rv = 461.5) {
 
 # CANONICAL TEST
 # r <- clausC(288); stopifnot(r$estimate > 0.06, r$estimate < 0.08)
-# stopifnot(abs(clausC(273.15)$es[1] - 611.2) < 1e-9)
+# stopifnot(abs(clausC(273.15)$es\[1\] - 611.2) < 1e-9)
 
 #' @rdname clausC
 #' @keywords internal

@@ -31,7 +31,7 @@ morie_adf_test <- function(y, lags = 1, kind = "drift") {
   if (kind == "trend") X <- cbind(X, idx + 1)
   if (lags >= 1) for (i in 1:lags) X <- cbind(X, dy[idx - i])
   fit <- morie_ols(dy[idx], X, add_intercept = FALSE)
-  stat <- fit$t[1]
+  stat <- fit$t\[1\]
   TAB <- switch(kind,
     none  = rbind(c(25,-2.66,-1.95,-1.60), c(50,-2.62,-1.95,-1.61),
                   c(100,-2.60,-1.95,-1.61), c(250,-2.58,-1.95,-1.62),
@@ -43,14 +43,14 @@ morie_adf_test <- function(y, lags = 1, kind = "drift") {
                   c(100,-4.04,-3.45,-3.15), c(250,-3.99,-3.43,-3.13),
                   c(500,-3.98,-3.42,-3.13), c(1000,-3.96,-3.41,-3.12)))
   m <- length(idx)
-  lo <- max(TAB[TAB[, 1] <= m, 1], TAB[1, 1])
+  lo <- max(TAB[TAB[, 1] <= m, 1], TAB\[1, 1\])
   hi <- min(TAB[TAB[, 1] >= m, 1], TAB[nrow(TAB), 1])
   rl <- TAB[TAB[, 1] == lo, 2:4]
   rh <- TAB[TAB[, 1] == hi, 2:4]
   crit <- if (lo == hi) rl else rl + (m - lo) / (hi - lo) * (rh - rl)
   list(statistic = stat, kind = kind, lags = lags, n_used = m,
        coef = fit$coef, se = fit$se,
-       critical_values = c(`1pct` = crit[1], `5pct` = crit[2],
+       critical_values = c(`1pct` = crit\[1\], `5pct` = crit[2],
                            `10pct` = crit[3]),
        reject_5pct = stat < crit[2])
 }

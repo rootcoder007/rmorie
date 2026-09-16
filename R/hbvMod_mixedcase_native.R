@@ -175,7 +175,7 @@ morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
     for (j in seq_along(w)) {
       queue[j] <- queue[j] + w[j] * qgw
     }
-    q <- queue[1]
+    q <- queue\[1\]
     queue <- c(queue[-1], 0.0)
     out$q[i]     <- q
     out$q_gw[i]  <- qgw

@@ -108,7 +108,7 @@ Bayhier <- function(y, group, sigma2 = NULL, tau2 = NULL) {
   }
   mu <- if (den > 0) num / den else grand
   theta <- lam * ybar + (1 - lam) * mu
-  list(theta = theta, estimate = theta[1], lambda_g = lam, theta_nopool = ybar,
+  list(theta = theta, estimate = theta\[1\], lambda_g = lam, theta_nopool = ybar,
        theta_pool = mu, mu = mu, sigma2 = s2, tau2 = t2, n_g = ng,
        grand_mean = grand, G = G, n = n,
        method = "normal-normal partial pooling, lambda_g = tau2/(tau2 + sigma2/n_g); Lindley and Smith (1972)")

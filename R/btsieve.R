@@ -128,7 +128,7 @@ Btsieve <- function(x, fit_fn = NULL, rvs_fn = NULL, stat = NULL, B = 200,
     v <- resid[j + 1L]
     if (p > 0L) for (k in seq_len(p)) v <- v + phi[k] * hist[k]
     if (length(hist) > 1L) for (k in length(hist):2L) hist[k] <- hist[k - 1L]
-    hist[1] <- v
+    hist\[1\] <- v
     if (t > BURN) { q <- q + 1L
     out[q] <- v + mu }
   }

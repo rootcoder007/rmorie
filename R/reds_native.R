@@ -189,7 +189,7 @@ morie_convex_hull <- function(points) {
   hull <- P[idx, , drop = FALSE]
   x <- hull[, 1]
   y <- hull[, 2]
-  area <- 0.5 * abs(sum(x * c(y[-1], y[1])) - sum(y * c(x[-1], x[1])))
+  area <- 0.5 * abs(sum(x * c(y[-1], y\[1\])) - sum(y * c(x[-1], x\[1\])))
   list(hull_indices = idx, hull_points = hull, n_vertices = length(idx),
        area = area, method = "Convex hull (Andrew scan via grDevices::chull)")
 }
@@ -216,7 +216,7 @@ morie_convex_hull <- function(points) {
 morie_adjacency_matrix <- function(edges, n = NULL, directed = FALSE) {
   E <- if (is.matrix(edges)) edges else do.call(rbind, lapply(edges, function(e) {
     if (length(e) != 2L) stop("every edge must be a pair.", call. = FALSE)
-    c(e[[1]], e[[2]])
+    c(e[\[1\]], e[[2]])
   }))
   if (ncol(E) != 2L) stop("every edge must be a pair.", call. = FALSE)
   labs <- sort(unique(as.vector(E)))
@@ -240,7 +240,7 @@ morie_adjacency_matrix <- function(edges, n = NULL, directed = FALSE) {
   for (k in seq_len(nrow(E))) {
     i <- index[[as.character(E[k, 1])]]
     j <- index[[as.character(E[k, 2])]]
-    A[i, j] <- 1
+    A\[i, j\] <- 1
     if (!directed) A[j, i] <- 1
   }
   m <- if (directed) nrow(unique(E)) else nrow(unique(t(apply(E, 1, sort))))

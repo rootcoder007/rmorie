@@ -74,7 +74,7 @@ Bartsurv <- function(time, event, X = NULL, n_trees = 5, shrink = 0.3,
         ml <- sl / wl
         mr <- sr / wr
         gain <- wl * ml * ml + wr * mr * mr
-        if (is.null(best) || gain > best[[1]]) best <- list(gain, a, thr, ml, mr)
+        if (is.null(best) || gain > best[\[1\]]) best <- list(gain, a, thr, ml, mr)
       }
     }
     best
@@ -105,7 +105,7 @@ Bartsurv <- function(time, event, X = NULL, n_trees = 5, shrink = 0.3,
   haz <- pnorm(f)
   surv <- rep(1, n)
   for (i in seq_len(m)) surv[who[i]] <- surv[who[i]] * (1 - haz[i])
-  list(estimate = if (m) haz[1] else NaN, hazard = haz, surv = surv,
+  list(estimate = if (m) haz\[1\] else NaN, hazard = haz, surv = surv,
        trees = trees, grid = g, n = n,
        method = paste0("Person-period probit hazard with a boosted sum of stumps ",
                        "(Sparapani et al. 2016 recasting; deterministic fit, not a posterior sample)"))

@@ -33,13 +33,13 @@
 #' @param x Numeric vector, the endogenous regressor.
 #' @param y Numeric vector, the response.
 #' @param w Numeric vector, the instrument.
-#' @param bandwidth Numeric or NULL; kernel bandwidth on the [0, 1]
+#' @param bandwidth Numeric or NULL; kernel bandwidth on the \[0, 1\]
 #'   scale.  Default `1.06 n^(-1/6)/sqrt(12)`: after the mid-rank map
 #'   the marginals are exactly uniform, so Silverman's constant fixes
 #'   the scale and not merely the rate.
 #' @param alpha Numeric, the regularisation constant a_n in (5.72).
 #'   Must be positive; at 0 the problem is ill-posed.
-#' @param grid Integer, number of quadrature points on [0, 1].
+#' @param grid Integer, number of quadrature points on \[0, 1\].
 #' @return Named list with g_hat, grid_points, r_hat, fxw, raw_mass,
 #'   alpha, bandwidth, n, m, method.
 #' @keywords internal
@@ -48,7 +48,7 @@
 #' x <- sin(1.7 * seq_len(n))
 #' w <- cos(1.1 * seq_len(n))
 #' y <- 2 * x
-#' Hrztiku(x, y, w, alpha = 1e-2, grid = 11)$g_hat[1]
+#' Hrztiku(x, y, w, alpha = 1e-2, grid = 11)$g_hat\[1\]
 #' @export
 Hrztiku <- function(x, y, w, bandwidth = NULL, alpha = 1e-3, grid = 25L) {
   x <- as.numeric(x)

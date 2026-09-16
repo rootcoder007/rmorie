@@ -67,12 +67,12 @@ Ogkcv <- function(y, X = NULL) {
   A <- diag(sig, p) %*% E
   S <- A %*% diag(gam, p) %*% t(A)
   mu <- as.numeric(A %*% med)
-  out <- list(sigma = S, location = mu, scales = sig, estimate = S[1, 1],
+  out <- list(sigma = S, location = mu, scales = sig, estimate = S\[1, 1\],
               eigenvalues = eg$values, det = prod(gam) * prod(sig^2),
               n = n, p = p,
               method = "Orthogonalized Gnanadesikan-Kettenring scatter")
   if (!is.null(X) && p > 1L) {
-    out$beta <- as.numeric(solve(S[-1, -1, drop = FALSE], S[-1, 1]))
+    out$beta <- as.numeric(solve(S[-1, -1, drop = FALSE], S\[-1, 1\]))
   }
   do.call(.t1_result, out)
 }

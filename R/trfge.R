@@ -79,7 +79,7 @@ morie_transformer_genomic <- function(x, y, markers, d_model = 8, lam = 1, seed 
     }
   }
   Amat <- crossprod(feats) + lam * diag(ncol(feats))
-  Amat[1, 1] <- Amat[1, 1] - lam
+  Amat\[1, 1\] <- Amat\[1, 1\] - lam
   beta <- as.numeric(solve(Amat, crossprod(feats, y)))
   y_hat <- as.numeric(feats %*% beta)
   resid <- y - y_hat

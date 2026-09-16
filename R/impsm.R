@@ -39,7 +39,7 @@ impsm <- function(x, h = NULL, p = NULL, q = NULL) {
 # CANONICAL TEST
 # set.seed(0); x <- rnorm(5000)
 # r <- impsm(x, h = function(z) z^2)
-# # E[X^2] under N(0,1) = 1
+# # E\[X^2\] under N(0,1) = 1
 # stopifnot(abs(r$estimate - 1) < 0.2)
 
 #' @rdname impsm

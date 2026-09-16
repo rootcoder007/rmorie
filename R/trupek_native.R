@@ -227,11 +227,11 @@
   L <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
-      s <- H[i, j] - if (j > 1) .trupek_dot(L[i, seq_len(j - 1)], L[j, seq_len(j - 1)]) else 0
+      s <- H\[i, j\] - if (j > 1) .trupek_dot(L[i, seq_len(j - 1)], L[j, seq_len(j - 1)]) else 0
       if (i == j) {
         if (s <= 0) return(NULL)
         L[i, i] <- sqrt(s)
-      } else L[i, j] <- s / L[j, j]
+      } else L\[i, j\] <- s / L[j, j]
     }
   }
   L

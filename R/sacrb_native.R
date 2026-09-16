@@ -68,7 +68,7 @@
 
 .sacrb_TOKENIZERS <- c("13a", "intl", "none")
 .sacrb_PUNCT <- ".,!?;:()\"'`-[]{}<>/\\|@#$%^&*+=~"
-.sacrb_PUNCT_CHARS <- strsplit(.sacrb_PUNCT, "")[[1]]
+.sacrb_PUNCT_CHARS <- strsplit(.sacrb_PUNCT, "")[\[1\]]
 .sacrb_EPS <- 1e-12
 
 #' .sacrb_tokenize_13a
@@ -90,11 +90,11 @@
   if (n == 0L) {
     return(character(0))
   }
-  chars <- strsplit(s, "")[[1]]
+  chars <- strsplit(s, "")[\[1\]]
   parts <- ifelse(chars %in% .sacrb_PUNCT_CHARS,
                   paste0(" ", chars, " "), chars)
   joined <- paste0(parts, collapse = "")
-  out <- strsplit(trimws(joined), "\\s+")[[1]]
+  out <- strsplit(trimws(joined), "\\s+")[\[1\]]
   if (length(out) == 1L && identical(out, "")) {
     out <- character(0)
   }
@@ -120,7 +120,7 @@
   if (n == 0L) {
     return(character(0))
   }
-  chars <- strsplit(s, "")[[1]]
+  chars <- strsplit(s, "")[\[1\]]
   out <- character(0)
   cur <- character(0)
   for (ch in chars) {
@@ -165,7 +165,7 @@
     if (lowercase) {
       s <- tolower(s)
     }
-    parts <- strsplit(trimws(s), "\\s+")[[1]]
+    parts <- strsplit(trimws(s), "\\s+")[\[1\]]
     if (length(parts) == 1L && identical(parts, "")) {
       return(character(0))
     }
@@ -385,7 +385,7 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
     lowercase = as.logical(lowercase),
     max_n = N,
     signature = .sacrb_signature(tokenizer, lowercase, N,
-                                 length(R[[1]])),
+                                 length(R[\[1\]])),
     method = paste0("corpus BLEU; Papineni et al. (2002) Sec. 2.3, ",
                     "reported with a sacreBLEU-style signature ",
                     "(Post 2018)")

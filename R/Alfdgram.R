@@ -24,16 +24,16 @@ Alfdgram <- function(z, w, bins = NULL, dtrue = NULL) {
     wdt <- (22 - 2) / (nbins - 1)
     bins <- 2 + wdt * (seq_len(nbins) - 1)
   }
-  n <- dim(z)[1]
+  n <- dim(z)\[1\]
   nb <- length(bins)
   ps <- array(0, c(n, n, nb))
   dd <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      sym <- as.numeric(z[i, j, ]) + as.numeric(z[j, i, ])
+      sym <- as.numeric(z\[i, j, \]) + as.numeric(z[j, i, ])
       p <- alfSmax(alfLin(sym, w))
-      ps[i, j, ] <- p
-      dd[i, j] <- sum(p * bins)
+      ps\[i, j, \] <- p
+      dd\[i, j\] <- sum(p * bins)
     }
   }
   loss <- NULL
@@ -41,7 +41,7 @@ Alfdgram <- function(z, w, bins = NULL, dtrue = NULL) {
     tot <- 0
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        tot <- tot + alfXent(alfOnehot(dtrue[i, j], bins), ps[i, j, ])
+        tot <- tot + alfXent(alfOnehot(dtrue\[i, j\], bins), ps\[i, j, \])
       }
     }
     loss <- tot / (n * n)

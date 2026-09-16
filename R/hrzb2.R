@@ -50,13 +50,13 @@ hrzb2 <- function(x, y, bandwidth = NULL) {
   beta0 <- as.numeric(stats::coef(stats::lm.fit(X, ys)))
   nrm <- sqrt(sum(beta0^2))
   if (nrm > 1e-12) beta0 <- beta0 / nrm
-  if (beta0[1] < 0) beta0 <- -beta0
+  if (beta0\[1\] < 0) beta0 <- -beta0
   res <- stats::optim(beta0, loss,
     method = "BFGS",
     control = list(maxit = 200)
   )
   bh <- res$par / max(sqrt(sum(res$par^2)), 1e-12)
-  if (bh[1] < 0) bh <- -bh
+  if (bh\[1\] < 0) bh <- -bh
   z <- (X %*% bh) / h
   phi <- stats::dnorm(z)
   score_i <- -as.numeric(ys * phi) * X / h

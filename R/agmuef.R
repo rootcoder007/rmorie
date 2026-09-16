@@ -3,7 +3,7 @@
 #'
 #' score(a) = Qbar(s,a) + P(s,a) sqrt(sum_b N(s,b)) / (1 + N(s,a))
 #'            * (c1 + log((sum_b N(s,b) + c2 + 1)/c2)),
-#' with Qbar the tree-wide min-max rescaling of Q onto [0, 1].
+#' with Qbar the tree-wide min-max rescaling of Q onto \[0, 1\].
 #'
 #' @param Q Mean action values at this node.
 #' @param N Visit counts, same length as Q.

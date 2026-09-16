@@ -201,7 +201,7 @@ morie_cpd_all_analyses <- function(crime_df = NULL, arrests_df = NULL,
     results[[nm]] <- tryCatch(fns[[nm]](), error = function(e) {
       .morie_cpd_result(sprintf("cpd.%s (failed)", nm),
         warnings = sprintf(
-          "%s: %s", class(e)[1],
+          "%s: %s", class(e)\[1\],
           conditionMessage(e)
         )
       )

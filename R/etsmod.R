@@ -47,15 +47,15 @@ Etsmod <- function(y, error = "A", trend = FALSE, season = 0,
       b0 <- if (use_b) ((sum(y[(m + 1L):(2L * m)]) / m) - l0) / m else 0
       s0 <- y[seq_len(m)] - l0
     } else {
-      l0 <- y[1]
-      b0 <- if (use_b && n > 1L) y[2] - y[1] else 0
+      l0 <- y\[1\]
+      b0 <- if (use_b && n > 1L) y[2] - y\[1\] else 0
       s0 <- numeric(0)
     }
     list(l0, b0, s0)
   }
   .sse <- function(a, b, g) {
     ini <- .ini()
-    l <- ini[[1]]
+    l <- ini[\[1\]]
     bt <- ini[[2]]
     s <- ini[[3]]
     tot <- 0
@@ -79,12 +79,12 @@ Etsmod <- function(y, error = "A", trend = FALSE, season = 0,
     for (b in Bs) {
       Gs <- if (!is.null(gamma)) as.numeric(gamma) else if (m > 0L) grid[grid <= 1 - a] else 0
       for (g in Gs) {
-        tot <- .sse(a, b, g)[[1]]
-        if (is.null(best) || tot < best[1] - 1e-15) best <- c(tot, a, b, g)
+        tot <- .sse(a, b, g)[\[1\]]
+        if (is.null(best) || tot < best\[1\] - 1e-15) best <- c(tot, a, b, g)
       }
     }
   }
-  sse <- best[1]
+  sse <- best\[1\]
   a <- best[2]
   b <- best[3]
   g <- best[4]

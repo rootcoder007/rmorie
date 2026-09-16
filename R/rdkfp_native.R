@@ -212,7 +212,7 @@ morie_rdkfp <- function(adjacency, atomnum, aromatic = NULL,
       seed <- 0
       for (v in bh) seed <- .mor_fp_mix(seed, v)
     } else {
-      seed <- bh[1]
+      seed <- bh\[1\]
     }
     feats[si] <- seed
     b <- seed %% nbits

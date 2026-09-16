@@ -22,7 +22,7 @@ Ptotal <- function(priors, likelihoods) {
   if (any(is.na(priors)) || any(is.na(likelihoods)) ||
         any(priors < 0) || any(priors > 1) ||
         any(likelihoods < 0) || any(likelihoods > 1)) {
-    stop("all probabilities must be in [0, 1].", call. = FALSE)
+    stop("all probabilities must be in \[0, 1\].", call. = FALSE)
   }
   if (abs(sum(priors) - 1) > 1e-9) {
     stop("priors must sum to 1 (complete, mutually exclusive set).", call. = FALSE)

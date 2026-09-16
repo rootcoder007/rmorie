@@ -65,7 +65,7 @@
   out <- matrix(0, nrow(A), ncol(B))
   for (i in seq_len(nrow(A))) {
     for (j in seq_len(ncol(B))) {
-      out[i, j] <- .morie_fsum(A[i, ] * B[, j])
+      out\[i, j\] <- .morie_fsum(A[i, ] * B[, j])
     }
   }
   out
@@ -558,7 +558,7 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
     W <- matrix(0, n, n)
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        if (i != j) W[i, j] <- .morie_spx_dist(cc[i, ], cc[j, ])
+        if (i != j) W\[i, j\] <- .morie_spx_dist(cc[i, ], cc[j, ])
       }
     }
   } else {
@@ -791,7 +791,7 @@ Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
   D <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      D[i, j] <- .morie_spx_dist(P[i, 1:2], P[j, 1:2])
+      D\[i, j\] <- .morie_spx_dist(P[i, 1:2], P[j, 1:2])
     }
   }
   bd <- vapply(seq_len(n), function(i) {
@@ -806,7 +806,7 @@ Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
       cnt <- 0
       for (i in seq_len(n)) {
         for (j in seq_len(n)) {
-          if (i != j && D[i, j] <= h) cnt <- cnt + 1
+          if (i != j && D\[i, j\] <= h) cnt <- cnt + 1
         }
       }
       kv <- c(kv, (cnt / n) / lam)
@@ -819,7 +819,7 @@ Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
       cnt <- 0
       for (i in seq_len(n)) {
         for (j in keep) {
-          if (i != j && D[i, j] <= h) cnt <- cnt + 1
+          if (i != j && D\[i, j\] <= h) cnt <- cnt + 1
         }
       }
       kv <- c(kv, (cnt / length(keep)) / lam)
@@ -1884,7 +1884,7 @@ SpecAnom <- function(x, q = 3L) {
 #' @export
 #' @examples
 #' A <- matrix(0, 6, 6)
-#' A[1, 2] <- A[2, 3] <- A[1, 3] <- 1
+#' A\[1, 2\] <- A[2, 3] <- A[1, 3] <- 1
 #' A[4, 5] <- A[5, 6] <- A[4, 6] <- 1
 #' A[3, 4] <- 0.05
 #' A <- A + t(A)
@@ -2077,7 +2077,7 @@ SpGam <- function(y, x, coords, lam = 0) {
     for (j in seq_len(n)) {
       if (i != j) {
         r <- .morie_spx_dist(cc[i, 1:2], cc[j, 1:2])
-        K[i, j] <- if (r > 0) r * r * log(r) else 0
+        K\[i, j\] <- if (r > 0) r * r * log(r) else 0
       }
     }
   }

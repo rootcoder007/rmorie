@@ -14,7 +14,7 @@
 # (ordered-response models, eq. 4.43). Section numbers checked
 # against the printed table of contents.
 
-# Minimise fn over b with b[1] fixed at 1. Every maximum-score variant
+# Minimise fn over b with b\[1\] fixed at 1. Every maximum-score variant
 # is identified only up to scale.
 #
 # These objectives are STEP FUNCTIONS of b, which rules out gradient

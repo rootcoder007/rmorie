@@ -47,7 +47,7 @@ Atompairfp <- function(adjacency, atomtype, nbits = 2048, maxdist = 30) {
   npairs <- 0L
   dists <- integer(0)
   if (a > 1L) for (i in seq_len(a - 1L)) for (j in (i + 1L):a) {
-    dd <- D[i, j]
+    dd <- D\[i, j\]
     if (dd == -1L || dd > as.integer(maxdist)) next
     ta <- min(t[i], t[j])
     tb <- max(t[i], t[j])

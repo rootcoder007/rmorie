@@ -87,7 +87,7 @@ morie_mqtmpl_method_status <- function(method = NULL) {
 #' g <- lapply(1:6, function(i) c(rbinom(1, 1, 0.5), NA, rbinom(1, 1, 0.5)))
 #' pos <- c(0, 0.1, 0.2)
 #' r <- morie_mqtmpl_hmm_genotype_probabilities(g, pos)
-#' str(r[[1]])
+#' str(r[\[1\]])
 morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
                                                       error_rate = 0) {
   e <- as.numeric(error_rate)
@@ -237,7 +237,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 .ghc_mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
                                   error_rate, seed) {
   n <- length(y)
-  grid <- seq(from = as.numeric(positions[1]),
+  grid <- seq(from = as.numeric(positions\[1\]),
               to = as.numeric(positions[length(positions)]),
               by = as.numeric(step))
   geno <- vector("list", n)
@@ -313,7 +313,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
       p <- p * (if (gR[i] != q) r_right else 1 - r_right)
       out[q + 1L] <- p
     }
-    tot <- out[1] + out[2]
+    tot <- out\[1\] + out[2]
     if (tot <= 0) stop("mqtmpl: the flanking marker configuration has probability zero")
     out / tot
   }, numeric(2)))
@@ -327,7 +327,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
   b <- crossprod(X * w, yy)
   as.numeric(solve(A, b)) }
   for (iter in seq_len(as.integer(max_iter))) {
-    base <- beta[1] + if (length(cof)) as.numeric(cofmat %*% beta[-(1:2)]) else 0
+    base <- beta\[1\] + if (length(cof)) as.numeric(cofmat %*% beta[-(1:2)]) else 0
     m0 <- base
     m1 <- base + beta[2]
     d0 <- exp(-((y - m0)^2) / (2 * s2))
@@ -335,7 +335,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
     w0 <- G[, 1] * d0
     w1 <- G[, 2] * d1
     tot <- w0 + w1
-    if (any(tot <= 0)) stop("mqtmpl: the mixture vanished at individual ", which(tot <= 0)[1])
+    if (any(tot <= 0)) stop("mqtmpl: the mixture vanished at individual ", which(tot <= 0)\[1\])
     post <- w1 / tot
     ll <- sum(log(tot / sqrt(2 * pi * s2)))
     history <- c(history, ll)
@@ -352,7 +352,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
   s0 <- sum(r0^2) / n
   ll0 <- -0.5 * n * (log(2 * pi * s0) + 1)
   lod <- (history[length(history)] - ll0) * (1 / log(10))
-  list(lod = lod, b0 = beta[1], b = beta[2], cofactor_coefficients = beta[-(1:2)],
+  list(lod = lod, b0 = beta\[1\], b = beta[2], cofactor_coefficients = beta[-(1:2)],
        sigma2 = s2, sigma2_null = s0, loglik = history[length(history)], loglik_null = ll0,
        iterations = length(history), posterior = post, rss = s2 * n, coef = beta)
 }

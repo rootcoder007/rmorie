@@ -170,7 +170,7 @@ dit_block <- function(hidden, cond, attn_fn, mlp_fn,
 scaling_comparison <- function(configs) {
   out <- list()
   for (cfg in configs) {
-    name <- as.character(cfg[[1]])
+    name <- as.character(cfg[\[1\]])
     I    <- as.numeric(cfg[[2]])
     p    <- as.numeric(cfg[[3]])
     Ln   <- as.numeric(cfg[[4]])

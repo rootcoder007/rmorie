@@ -129,7 +129,7 @@
     stop(sprintf("tsbF: init must be one of %s, got %s",
                  paste(.tsbF_INITS, collapse = ", "), init))
   }
-  first <- which(yv > 0)[1]
+  first <- which(yv > 0)\[1\]
   if (init == "known") {
     if (is.null(z0) || (is.null(x0) && is.null(p0))) {
       stop("tsbF: init='known' needs z0 and one of x0 / p0")
@@ -172,7 +172,7 @@
     }
   }
   X <- if (length(gaps) > 0) sum(gaps) / length(gaps) else 1.0
-  return(list(first = first, Z = pos[1], X = max(X, 1.0),
+  return(list(first = first, Z = pos\[1\], X = max(X, 1.0),
               P = length(pos) / as.numeric(length(yv))))
 }
 

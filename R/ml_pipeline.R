@@ -186,14 +186,14 @@ morie_ml_split <- function(data,
   if (is.null(strata)) {
     # deterministic proportional counts, then shuffle the assignment
     counts <- floor(prop * n)
-    counts[1] <- n - sum(counts[-1])
+    counts\[1\] <- n - sum(counts[-1])
     roles <- sample(rep(names(prop), counts))
   } else {
     roles <- character(n)
     for (lev in unique(data[[strata]])) {
       idx <- which(data[[strata]] == lev)
       counts <- floor(prop * length(idx))
-      counts[1] <- length(idx) - sum(counts[-1])
+      counts\[1\] <- length(idx) - sum(counts[-1])
       roles[idx] <- sample(rep(names(prop), counts))
     }
   }
@@ -344,7 +344,7 @@ morie_ml_prep <- function(recipe, data) {
     } else 1
     p[[v]] <- list(impute = if (recipe$impute == "none") NA_real_
                             else morie_ml_impute(data[[v]], recipe$impute)[
-                              which(is.na(data[[v]]))[1]],
+                              which(is.na(data[[v]]))\[1\]],
                    impute_fill = switch(recipe$impute,
                      mean = mean(data[[v]], na.rm = TRUE),
                      median = stats::median(data[[v]], na.rm = TRUE),
@@ -600,7 +600,7 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
   # Map weights from standardised space back to the raw feature scale.
   if (length(feats)) {
     w[feats] <- w[feats] / scl
-    w[1] <- w[1] - sum(w[feats] * ctr)
+    w\[1\] <- w\[1\] - sum(w[feats] * ctr)
   }
   fit <- list(weights = stats::setNames(w, colnames(X)),
               loss_path = loss_path, grad_norm = grad_norm,

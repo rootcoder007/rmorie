@@ -591,7 +591,7 @@ morie_caus_aipw <- function(y, T, ps, m1, m0, trim = 0.01) {
   }
   if (!all(Tv %in% c(0, 1))) stop("T must be binary 0/1.", call. = FALSE)
   if (any(e < 0) || any(e > 1)) {
-    stop("propensity scores must lie in [0, 1].", call. = FALSE)
+    stop("propensity scores must lie in \[0, 1\].", call. = FALSE)
   }
   tr <- as.numeric(trim)
   if (tr < 0 || tr >= 0.5) {

@@ -445,15 +445,15 @@ collinearity_diagnostics <- function(X, column_names = NULL) {
     colnames(var_decomp_df) <- paste0("comp_", seq_len(p) - 1L)
   }
 
-  condition_number <- sqrt(eigenvalues[1] / max(eigenvalues[p], 1e-10))
-  condition_indices <- sqrt(eigenvalues[1] / pmax(eigenvalues, 1e-10))
+  condition_number <- sqrt(eigenvalues\[1\] / max(eigenvalues[p], 1e-10))
+  condition_indices <- sqrt(eigenvalues\[1\] / pmax(eigenvalues, 1e-10))
 
   corr <- suppressWarnings(stats::cor(X))
   collinear_pairs <- list()
   if (p >= 2L) {
     for (i in seq_len(p - 1L)) {
       for (j in (i + 1L):p) {
-        cij <- corr[i, j]
+        cij <- corr\[i, j\]
         if (!is.na(cij) && abs(cij) > 0.8) {
           collinear_pairs[[length(collinear_pairs) + 1L]] <- list(
             var1 = column_names[i], var2 = column_names[j],

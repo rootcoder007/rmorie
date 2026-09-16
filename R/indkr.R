@@ -56,7 +56,7 @@ indkr <- function(x, coords, threshold, target = NULL,
     probs[k] <- min(max(sum(lam * I_obs), 0), 1)
   }
   list(
-    estimate = if (m == 1) probs[1] else probs,
+    estimate = if (m == 1) probs\[1\] else probs,
     threshold = threshold, n = n,
     method = "Indicator kriging (ordinary, exp. cov)"
   )

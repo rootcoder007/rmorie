@@ -37,7 +37,7 @@ latnh <- function(N = 100L, d = 1L, f = NULL, seed = 42L) {
 }
 
 # CANONICAL TEST
-# r <- latnh(N = 500, d = 2, f = function(u) u[1] + u[2], seed = 0)
+# r <- latnh(N = 500, d = 2, f = function(u) u\[1\] + u[2], seed = 0)
 # stopifnot(abs(r$estimate - 1) < 0.05)
 
 #' @rdname latnh

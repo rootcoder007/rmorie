@@ -52,8 +52,8 @@ Drdidsplit <- function(y, D, X = NULL, K = 5, y0 = NULL) {
     for (i in te_i) {
       e <- 0
       m <- 0
-      for (j in seq_along(gam)) { e <- e + Z[i, j] * gam[j]
-      m <- m + Z[i, j] * b0[j] }
+      for (j in seq_along(gam)) { e <- e + Z\[i, j\] * gam[j]
+      m <- m + Z\[i, j\] * b0[j] }
       p <- .s03sigmoid(e)
       pis[i] <- p
       mus[i] <- m

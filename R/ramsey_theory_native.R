@@ -58,7 +58,7 @@
 #'
 #' Almost nothing is known. For \eqn{k, l \ge 3} exactly nine values
 #' have ever been determined and the list has not grown since 1995.
-#' \eqn{R(5,5)} is unknown, lying in [43, 46]. The difficulty is not
+#' \eqn{R(5,5)} is unknown, lying in \[43, 46\]. The difficulty is not
 #' that the problem is open-ended but that it is finite and enormous:
 #' settling \eqn{R(5,5)} by exhaustive search means examining the
 #' \eqn{2^{903}} colourings of \eqn{K_{43}}.
@@ -111,7 +111,7 @@ morie_ramsey_number <- function(k, l = NULL) {
       .morie_ramsey_credits[[key]] else "DS1 Table Ia"
   } else if (!is.null(.morie_ramsey_bounds[[key]])) {
     val <- NULL
-    lo <- .morie_ramsey_bounds[[key]][1]
+    lo <- .morie_ramsey_bounds[[key]]\[1\]
     hi <- .morie_ramsey_bounds[[key]][2]
     credit <- "DS1 Tables Ia and Ib (bounds only)"
   } else {
@@ -131,7 +131,7 @@ morie_ramsey_number <- function(k, l = NULL) {
     warns <- c(warns, paste(
       "The frequently repeated claim that R(5,5) = 50 is incorrect. DS1",
       "records that it has been shown wrong more than once and is still",
-      "being cited. The published interval is [43, 46], with 43",
+      "being cited. The published interval is \[43, 46\], with 43",
       "conjectured."))
   }
   list(k = k, l = l, value = val, lower = lo, upper = hi,
@@ -298,7 +298,7 @@ morie_goodman_triangles <- function(colouring, brute_force = FALSE) {
         i <- cmb[1, c]
         j <- cmb[2, c]
         k <- cmb[3, c]
-        s <- R[i, j] + R[i, k] + R[j, k]
+        s <- R\[i, j\] + R\[i, k\] + R[j, k]
         if (s == 3L) red_t <- red_t + 1L else if (s == 0L)
           blue_t <- blue_t + 1L
       }
@@ -422,7 +422,7 @@ morie_party_problem <- function(n_people = 6L) {
     C <- matrix(0L, n, n)
     for (i in seq_len(n)) {
       j <- if (i == n) 1L else i + 1L
-      C[i, j] <- 1L
+      C\[i, j\] <- 1L
       C[j, i] <- 1L
     }
     witness <- C

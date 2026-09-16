@@ -28,7 +28,7 @@ Bertrec <- function(seqs, K = 10, scores = NULL, rho = 0.2) {
   S <- .s03mat(seqs)
   V <- 0L
   for (i in seq_len(nrow(S))) for (j in seq_len(ncol(S))) {
-    if (as.integer(S[i, j]) + 1L > V) V <- as.integer(S[i, j]) + 1L
+    if (as.integer(S\[i, j\]) + 1L > V) V <- as.integer(S\[i, j\]) + 1L
   }
   total <- 0
   nm <- 0L

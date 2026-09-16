@@ -41,7 +41,7 @@ bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,
   Mc <- M - matrix(colMeans(M, na.rm = TRUE), n, m, byrow = TRUE)
   Mc[is.na(Mc)] <- 0
   sv <- tryCatch(svd(Mc, nu = 1L, nv = 0L), error = function(e) NULL)
-  x_cur <- if (!is.null(sv)) sv$u[, 1] * sv$d[1] else stats::rnorm(n)
+  x_cur <- if (!is.null(sv)) sv$u[, 1] * sv$d\[1\] else stats::rnorm(n)
   x_cur <- (x_cur - mean(x_cur)) / (stats::sd(x_cur) + 1e-12)
   a_cur <- rep(1, m)
   b_cur <- rep(0, m)

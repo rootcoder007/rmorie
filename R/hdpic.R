@@ -34,7 +34,7 @@ Hpdint <- function(samples, alpha = 0.05) {
   if (want > n) want <- n
   j <- want - 1L
   best <- 0L
-  width <- v[j + 1L] - v[1]
+  width <- v[j + 1L] - v\[1\]
   if (n - j > 1L) for (i in seq_len(n - j - 1L)) {
     w <- v[i + j + 1L] - v[i + 1L]
     if (w < width) { width <- w

@@ -73,8 +73,8 @@ okrig <- function(x, coords, target, model = "exponential",
     ses[k] <- sqrt(var_pred)
   }
   list(
-    estimate = if (m == 1) ests[1] else ests,
-    se = if (m == 1) ses[1] else ses,
+    estimate = if (m == 1) ests\[1\] else ests,
+    se = if (m == 1) ses\[1\] else ses,
     n = n, method = sprintf("Ordinary kriging (%s)", model)
   )
 }

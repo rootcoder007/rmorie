@@ -40,7 +40,7 @@ Ghosalfbmprior <- function(H = 0.7, ts = c(0.25, 0.5, 0.75)) {
       m[r, ] <- m[r, ] - f * m[i, ]
     }
   }
-  .t1_result(estimate = G[1, 1], kernel = G, var_gap = var_gap,
+  .t1_result(estimate = G\[1, 1\], kernel = G, var_gap = var_gap,
              positive_definite = all(minors > 0),
              method = "fBm covariance (GvdV 2017 eq. 11.6)")
 }

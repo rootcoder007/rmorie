@@ -89,8 +89,8 @@ morie_flexrd_rotate <- function(p, a, b, degrees) {
   cc <- cos(t)
   ss <- sin(t)
   kv <- .w3_dot(k, v)
-  cr <- c(k[2] * v[3] - k[3] * v[2], k[3] * v[1] - k[1] * v[3],
-          k[1] * v[2] - k[2] * v[1])
+  cr <- c(k[2] * v[3] - k[3] * v[2], k[3] * v\[1\] - k\[1\] * v[3],
+          k\[1\] * v[2] - k[2] * v\[1\])
   a + v * cc + cr * ss + k * kv * (1 - cc)
 }
 
@@ -145,7 +145,7 @@ morie_flexrd_energy <- function(rec, lig, rec_r, lig_r, scale = 1,
   terms <- numeric(0)
   for (i in seq_along(lig)) for (j in seq_along(rec)) {
     d <- lig[[i]] - rec[[j]]
-    r2 <- d[1] * d[1] + d[2] * d[2] + d[3] * d[3]
+    r2 <- d\[1\] * d\[1\] + d[2] * d[2] + d[3] * d[3]
     if (r2 > cutoff * cutoff) next
     r <- sqrt(r2)
     if (r == 0)
@@ -269,13 +269,13 @@ morie_flexrd <- function(receptor, ligand, flex_residues, angles = NULL,
         rc2 <- build(combo)
         e <- morie_flexrd_energy(rc2, pose, rr, lr, soft, epsilon,
                                  cutoff)
-        if (is.null(bestc) || e < bestc[[1]])
+        if (is.null(bestc) || e < bestc[\[1\]])
           bestc <- list(e, combo, rc2)
       }
       rc2 <- bestc[[3]]
       cand <- list(morie_flexrd_energy(rc2, pose, rr, lr, 1, epsilon,
                                        cutoff),
-                   pidx, bestc[[2]], bestc[[1]], rc2)
+                   pidx, bestc[[2]], bestc[\[1\]], rc2)
     } else {
       chosen <- rep(0, length(chis))
       cur <- build(chosen)
@@ -299,10 +299,10 @@ morie_flexrd <- function(receptor, ligand, flex_residues, angles = NULL,
                                        cutoff),
                    pidx, chosen, e, cur)
     }
-    if (is.null(best) || cand[[1]] < best[[1]]) best <- cand
+    if (is.null(best) || cand[\[1\]] < best[\[1\]]) best <- cand
   }
 
-  e_hard <- best[[1]]
+  e_hard <- best[\[1\]]
   pidx <- best[[2]]
   chosen <- best[[3]]
   e_soft <- best[[4]]

@@ -26,7 +26,7 @@ spkfun <- function(points, lambda_est = NULL, r = NULL, region = NULL,
                    correction = "border") {
   reg <- .sp_region(region, points)
   if (is.null(r)) {
-    side <- min(reg[3] - reg[1], reg[4] - reg[2])
+    side <- min(reg[3] - reg\[1\], reg[4] - reg[2])
     r <- seq(0, side / 4, length.out = 20)
   }
   r <- as.numeric(r)

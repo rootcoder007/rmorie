@@ -5,7 +5,7 @@
 #' 1(4), 407-414.  On the unit cube with independent inputs, f = f_0 +
 #' sum_i f_i(x_i) + sum_(i<j) f_ij(x_i, x_j) + ... uniquely, every summand
 #' integrating to zero over each of its own variables, with f_0 = E[f],
-#' f_i = E[f | x_i] - f_0 and f_ij = E[f | x_i, x_j] - f_i - f_j - f_0;
+#' f_i = E\[f | x_i\] - f_0 and f_ij = E\[f | x_i, x_j\] - f_i - f_j - f_0;
 #' the component variances sum to the total.  The 1993 paper was not
 #' retrievable here; the decomposition and its orthogonality are quoted in
 #' their standard published form.  The conditional expectations are
@@ -20,7 +20,7 @@
 #' @return list: estimate, f0, D, D_main, D_int, closure, method.
 #' @keywords internal
 #' @examples
-#' Fanova(function(x) x[1] + 2 * x[2], NULL, 2, 6)$closure
+#' Fanova(function(x) x\[1\] + 2 * x[2], NULL, 2, 6)$closure
 #' @export
 Fanova <- function(f, input_dist = NULL, d = 2, grid = 8) {
   dd <- as.integer(d)

@@ -17,12 +17,12 @@
 .btarsv_yw <- function(xc, p) {
   n <- length(xc)
   g <- sapply(0:p, function(k) sum(xc[1:(n - k)] * xc[(1 + k):n]) / n)
-  if (g[1] <= 0) stop("degenerate series")
+  if (g\[1\] <= 0) stop("degenerate series")
   phi <- numeric(p)
   prev <- numeric(p)
-  v <- g[1]
+  v <- g\[1\]
   for (k in 1:p) {
-    acc <- g[k + 1]
+    acc <- g\[k + 1\]
     if (k > 1) acc <- acc - sum(prev[1:(k - 1)] * g[k:2])
     ref <- acc / v
     phi[k] <- ref

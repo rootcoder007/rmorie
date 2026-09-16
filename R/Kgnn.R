@@ -38,7 +38,7 @@ Kgnn <- function(A_r, X, W_r, W0 = NULL) {
     Ms[[r]] <- M
     Ws[[r]] <- Wm
   }
-  q <- ncol(Ws[[1]])
+  q <- ncol(Ws[\[1\]])
   W0m <- if (is.null(W0)) diag(1, p, q) else .s03mat(W0)
   out <- matrix(0, n, q)
   for (r in seq_along(Ms)) {

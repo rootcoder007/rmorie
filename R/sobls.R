@@ -48,7 +48,7 @@ sobls <- function(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L) {
 }
 
 # CANONICAL TEST
-# r <- sobls(N = 128, d = 2, f = function(u) u[1] * u[2], seed = 0)
+# r <- sobls(N = 128, d = 2, f = function(u) u\[1\] * u[2], seed = 0)
 # stopifnot(abs(r$estimate - 0.25) < 0.05)
 
 #' @rdname sobls

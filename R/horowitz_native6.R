@@ -87,7 +87,7 @@
 #' dz dv} (6.60) and \eqn{F_n(u) = A_n(u)/B_n(u)} (6.66).
 #'
 #' The derivation is the point. Differentiating \eqn{G(y|z) =
-#' F[T(y) - z]} gives \eqn{T'(y) = -G_y(y|z)/G_z(y|z)}, so T is an
+#' F\[T(y) - z\]} gives \eqn{T'(y) = -G_y(y|z)/G_z(y|z)}, so T is an
 #' INTEGRAL of a ratio of kernel estimators. Each converges more
 #' slowly than \eqn{n^{-1/2}} and their ratio is not root-n
 #' consistent for anything -- but integrating over v and z averages
@@ -599,7 +599,7 @@ morie_transform_prediction <- function(x, y_threshold, T_hat, F_hat, beta_hat,
     ), call. = FALSE)
   }
   if (any(fg < 0) || any(fg > 1)) {
-    stop("F_hat must lie in [0, 1].", call. = FALSE)
+    stop("F_hat must lie in \[0, 1\].", call. = FALSE)
   }
   t_of <- function(v) stats::approx(yg, tg, xout = v, rule = 2L)$y
   f_of <- function(v) stats::approx(ug, fg, xout = v, rule = 2L)$y

@@ -190,7 +190,7 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
   L <- matrix(0, n, n)
   for (i in 1:n) {
     for (j in 1:i) {
-      s <- A[i, j] - sum(L[i, 1:(j - 1)] * L[j, 1:(j - 1)])
+      s <- A\[i, j\] - sum(L[i, 1:(j - 1)] * L[j, 1:(j - 1)])
       if (i == j) {
         if (s <= 0) {
           stop(paste(
@@ -198,9 +198,9 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
             "definite; add noise or spread the design points"
           ))
         }
-        L[i, j] <- sqrt(s)
+        L\[i, j\] <- sqrt(s)
       } else {
-        L[i, j] <- s / L[j, j]
+        L\[i, j\] <- s / L[j, j]
       }
     }
   }
@@ -276,7 +276,7 @@ gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
   K <- matrix(0, n, n)
   for (i in 1:n) {
     for (j in 1:n) {
-      K[i, j] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
+      K\[i, j\] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
         (if (i == j) noise else 0)
     }
   }
@@ -350,7 +350,7 @@ gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
   K <- matrix(0, n, n)
   for (i in 1:n) {
     for (j in 1:n) {
-      K[i, j] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
+      K\[i, j\] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
         (if (i == j) noise else 0)
     }
   }
@@ -566,7 +566,7 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
   if (is.null(starts)) {
     starts <- lapply(seq_len(as.integer(n_starts)), function(i) {
       vapply(
-        1:d, function(j) box[[j]][1] + rnd() * (box[[j]][2] - box[[j]][1]),
+        1:d, function(j) box[[j]]\[1\] + rnd() * (box[[j]][2] - box[[j]]\[1\]),
         numeric(1)
       )
     })
@@ -578,11 +578,11 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
       X, y, rbind(pt), kernel, amplitude, length_scale,
       noise
     )
-    acquire(p$mean[1], p$sd[1], best, acq, kappa, xi)
+    acquire(p$mean\[1\], p$sd\[1\], best, acq, kappa, xi)
   }
   clip <- function(pt) {
     vapply(
-      1:d, function(i) min(max(pt[i], box[[i]][1]), box[[i]][2]),
+      1:d, function(i) min(max(pt[i], box[[i]]\[1\]), box[[i]][2]),
       numeric(1)
     )
   }
@@ -590,7 +590,7 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
   best_pt <- NULL
   best_val <- -Inf
   evals <- 0
-  span <- max(vapply(1:d, function(i) box[[i]][2] - box[[i]][1], numeric(1)))
+  span <- max(vapply(1:d, function(i) box[[i]][2] - box[[i]]\[1\], numeric(1)))
   step <- span * 0.1
   for (s0 in starts) {
     pt <- clip(as.numeric(s0))
@@ -685,9 +685,9 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
   if (!(acq %in% c("ei", "pi", "lcb"))) {
     stop("bayopt: acq must be one of ei, pi, lcb")
   }
-  box <- lapply(bounds, function(b) c(as.numeric(b[1]), as.numeric(b[2])))
+  box <- lapply(bounds, function(b) c(as.numeric(b\[1\]), as.numeric(b[2])))
   if (length(box) == 0) stop("bayopt: bounds are empty")
-  if (any(vapply(box, function(b) b[1] >= b[2], logical(1)))) {
+  if (any(vapply(box, function(b) b\[1\] >= b[2], logical(1)))) {
     stop("bayopt: each bound must have lo < hi")
   }
   if (n_iter < 1 || n_candidates < 1) {
@@ -705,7 +705,7 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
   }
   draw <- function() {
     vapply(
-      1:d, function(i) box[[i]][1] + rnd() * (box[[i]][2] - box[[i]][1]),
+      1:d, function(i) box[[i]]\[1\] + rnd() * (box[[i]][2] - box[[i]]\[1\]),
       numeric(1)
     )
   }

@@ -191,7 +191,7 @@ Twostg <- function(time, event, X, Z = NULL, error = "ph",
       s <- sum((Xm[i, ] - Xm[j, ]) * beta)
       base <- -xi(s)
       if (d[j] == 1 && t[i] >= t[j]) base <- base + 1 / G2[j]
-      ehat[i, j] <- base
+      ehat\[i, j\] <- base
     }
   }
   lam_inv <- matrix(0, p, p)
@@ -208,11 +208,11 @@ Twostg <- function(time, event, X, Z = NULL, error = "ph",
     for (j in seq_len(n)) {
       if (j == i) next
       zij <- Xm[i, ] - Xm[j, ]
-      aij <- ehat[i, j] - ehat[j, i]
+      aij <- ehat\[i, j\] - ehat[j, i]
       for (k in seq_len(n)) {
         if (k == j || k == i) next
         zik <- Xm[i, ] - Xm[k, ]
-        aik <- ehat[i, k] - ehat[k, i]
+        aik <- ehat\[i, k\] - ehat[k, i]
         gam <- gam + aij * aik * (zij %o% zik)
       }
     }

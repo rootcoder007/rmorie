@@ -8,7 +8,7 @@
 #' @param y Response vector of length n.
 #' @param beta Coefficient vector.
 #' @param lam Regularization parameter lambda; must be non-negative.
-#' @param alpha Mixing parameter in [0, 1]: 0 is the ridge penalty, 1 is the lasso penalty.
+#' @param alpha Mixing parameter in \[0, 1\]: 0 is the ridge penalty, 1 is the lasso penalty.
 #' @param add_intercept Treat the first entry of beta as an unpenalized intercept and
 #' prepend a column of ones to X.
 #'
@@ -46,7 +46,7 @@ Enetobj <- function(X, y, beta, lam, alpha, add_intercept = TRUE) {
   if (n != length(y)) stop("X must have one row per entry of y")
   if (length(b) != p) stop("beta must have one entry per column of the design")
   if (lam < 0) stop("lambda must be non-negative")
-  if (a < 0 || a > 1) stop("alpha must lie in [0, 1]")
+  if (a < 0 || a > 1) stop("alpha must lie in \[0, 1\]")
   rss <- sum((y - as.numeric(Xm %*% b))^2)
   start <- if (isTRUE(add_intercept)) 2L else 1L
   l2 <- sum(b[start:p]^2)

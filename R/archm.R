@@ -6,7 +6,7 @@
 #' Internal helper: Archm Negll
 #' @noRd
 .archm_negll <- function(p, y, n) {
-  mu <- p[1]
+  mu <- p\[1\]
   delta <- p[2]
   omega <- p[3]
   alpha <- p[4]
@@ -14,9 +14,9 @@
     return(1e10)
   }
   s2 <- numeric(n)
-  s2[1] <- max(var(y), 1e-10)
+  s2\[1\] <- max(var(y), 1e-10)
   eps <- numeric(n)
-  eps[1] <- y[1] - mu - delta * sqrt(s2[1])
+  eps\[1\] <- y\[1\] - mu - delta * sqrt(s2\[1\])
   for (t in 2:n) {
     # Ceiling as well as floor: at corner parameter values the
     # eps -> s2 -> eps recursion explodes and turns the objective into
@@ -51,14 +51,14 @@ morie_arch_in_mean <- function(x) {
     lower = c(-10, -10, 1e-8, 1e-8),
     upper = c(10, 10, var_y * 10, 0.999)
   )
-  mu <- opt$par[1]
+  mu <- opt$par\[1\]
   delta <- opt$par[2]
   omega <- opt$par[3]
   alpha <- opt$par[4]
   s2 <- numeric(n)
-  s2[1] <- var_y
+  s2\[1\] <- var_y
   eps <- numeric(n)
-  eps[1] <- y[1] - mu - delta * sqrt(s2[1])
+  eps\[1\] <- y\[1\] - mu - delta * sqrt(s2\[1\])
   for (t in 2:n) {
     s2[t] <- omega + alpha * eps[t - 1]^2
     eps[t] <- y[t] - mu - delta * sqrt(s2[t])

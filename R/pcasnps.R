@@ -71,13 +71,13 @@ Pcasnps <- function(genotypes, n_components = 2L) {
     a <- sqrt(n - 1) + sqrt(neff)
     mu_tw <- a * a / neff
     sg <- (a / neff) * (1 / sqrt(n - 1) + 1 / sqrt(neff))^(1 / 3)
-    l1 <- if (s1 > 0) n * ev[1] / s1 else NaN
+    l1 <- if (s1 > 0) n * ev\[1\] / s1 else NaN
     tw <- (l1 - mu_tw) / sg
   } else {
     tw <- NaN
   }
   .t1_result(eigenvalues = ev, pcs = pcs, variance_explained = vexp,
-             estimate = ev[1], tw_statistic = tw, n_eff = neff,
+             estimate = ev\[1\], tw_statistic = tw, n_eff = neff,
              n_dropped = dropped, n = n, m = m,
              method = "EIGENSTRAT genotype PCA (Patterson-Price-Reich 2006)")
 }

@@ -239,7 +239,7 @@ Rmstdiff <- function(time, event, group, tau = NULL,
   cap <- min(vapply(parts, function(p) max(p$t), numeric(1)))
   horizon <- if (is.null(tau)) cap else min(as.numeric(tau), cap)
   capped <- !is.null(tau) && as.numeric(tau) > cap
-  a <- Rmst(parts[[1]]$t, parts[[1]]$e, tau = horizon,
+  a <- Rmst(parts[\[1\]]$t, parts[\[1\]]$e, tau = horizon,
                            alpha = alpha)
   b <- Rmst(parts[[2]]$t, parts[[2]]$e, tau = horizon,
                            alpha = alpha)
@@ -294,7 +294,7 @@ Martingale <- function(time, event, X, beta) {
 
 #' Deviance residuals from a fitted Cox model
 #'
-#' d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing transform of the
+#' d_i = sign(M) sqrt(-2\[M + delta log(delta - M)\]), a symmetrizing transform of the
 #' martingale residuals: roughly normal when the model holds.
 #'
 #' @param time observed follow-up times.
@@ -309,7 +309,7 @@ Martingale <- function(time, event, X, beta) {
 #' Devresid(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Devresid <- function(time, event, X, beta) {
-  # d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing
+  # d_i = sign(M) sqrt(-2\[M + delta log(delta - M)\]), a symmetrizing
   # transform of the martingale residuals: roughly normal when the model
   # fits, so a large |d_i| is an outlier in the usual sense.  The log
   # term is zero when delta = 0, which is the limit, not a special case
@@ -335,7 +335,7 @@ Devresid <- function(time, event, X, beta) {
   list(residuals = d, martingale = m,
        sum_of_squares = .morie_fsum(d * d), max_abs = max(abs(d)),
        n = length(t), is_model_deviance = FALSE,
-       method = "d_i = sign(M) sqrt(-2[M + delta log(delta - M)])")
+       method = "d_i = sign(M) sqrt(-2\[M + delta log(delta - M)\])")
 }
 
 #' Cox-Snell residuals from a fitted Cox model
@@ -437,7 +437,7 @@ Schoenfeld <- function(time, event, X, beta, vcov = NULL,
                    function(k) .morie_fsum(X[rk, k] * w[rk]) / sw,
                    numeric(1))
     times <- c(times, u)
-    res <- rbind(res, X[ev[1], ] - xbar)
+    res <- rbind(res, X[ev\[1\], ] - xbar)
   }
   out <- list(time = times, residuals = res, n_events = length(times),
               ties_dropped = dropped, p = p,
@@ -860,11 +860,11 @@ Turnbull <- function(left, right, max_iter = 1000L,
                "may be right-censored"))
   key <- vapply(inner, function(v) paste(v, collapse = "_"), character(1))
   inner <- inner[!duplicated(key)]
-  inner <- inner[order(vapply(inner, function(v) v[1], numeric(1)))]
+  inner <- inner[order(vapply(inner, function(v) v\[1\], numeric(1)))]
   m <- length(inner)
   alpha <- matrix(0, n, m)
   for (i in seq_len(n)) for (j in seq_len(m))
-    if (L[i] <= inner[[j]][1] && inner[[j]][2] <= R[i]) alpha[i, j] <- 1
+    if (L[i] <= inner[[j]]\[1\] && inner[[j]][2] <= R[i]) alpha\[i, j\] <- 1
   if (any(rowSums(alpha) == 0))
     stop(paste("an observation is compatible with no Turnbull interval;",
                "check the endpoints"))
@@ -1010,10 +1010,10 @@ Parasurv <- function(time, event, dist = "weibull") {
     stop(sprintf("unknown distribution '%s'; known: %s", dist,
                  paste(.ms_dists, collapse = ", ")))
   fit <- .ms_fit_lls(dist, time, event)
-  fit$intercept <- fit$coef[1]
+  fit$intercept <- fit$coef\[1\]
   if (dist %in% c("weibull", "exponential")) {
     fit$weibull_shape <- 1 / fit$scale
-    fit$weibull_scale <- exp(fit$coef[1])
+    fit$weibull_scale <- exp(fit$coef\[1\])
   }
   if (dist == "weibull") {
     ex <- .ms_fit_lls("exponential", time, event)
@@ -1060,7 +1060,7 @@ Aftfit <- function(time, event, X, dist = "weibull",
                  paste(.ms_dists, collapse = ", ")))
   fit <- .ms_fit_lls(dist, time, event, X)
   b <- fit$coef
-  fit$intercept <- b[1]
+  fit$intercept <- b\[1\]
   fit$beta <- b[-1]
   fit$time_ratio <- exp(b[-1])
   fit$positive_coef_means_longer_survival <- TRUE
@@ -1118,7 +1118,7 @@ Paracompare <- function(time, event, X = NULL,
     bic = fits[[d]]$bic, n_par = fits[[d]]$n_par,
     stringsAsFactors = FALSE)))
   tab <- tab[order(tab$aic), , drop = FALSE]
-  out <- list(table = tab, best_aic = tab$dist[1],
+  out <- list(table = tab, best_aic = tab$dist\[1\],
               best_bic = tab$dist[which.min(tab$bic)], fits = fits,
               failed = errs, families_not_nested = TRUE,
               aic_is_not_goodness_of_fit = TRUE,

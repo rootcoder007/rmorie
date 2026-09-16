@@ -86,7 +86,7 @@ morie_polyak <- function(iterates, burn_in = 0) {
 
   # Keep iterates after burn-in: Python X[b:] corresponds to R X[(b+1):length(X)]
   keep <- X[(b + 1L):length(X)]
-  d <- length(keep[[1]])
+  d <- length(keep[\[1\]])
 
   # Stack iterates as rows of a matrix, then take the column means.
   mat <- matrix(unlist(keep), nrow = length(keep), byrow = TRUE)

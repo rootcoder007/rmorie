@@ -90,7 +90,7 @@ shrink_covariance <- function(residuals, lam = NULL) {
     off_sum <- 0.0
     for (a in 1:m) {
       for (b in 1:m) {
-        if (a != b) off_sum <- off_sum + Sig[a, b]^2
+        if (a != b) off_sum <- off_sum + Sig\[a, b\]^2
       }
     }
     var <- 0.0
@@ -128,7 +128,7 @@ shrink_covariance <- function(residuals, lam = NULL) {
   # chol() returns the UPPER factor U with A = t(U) %*% U, so the
   # forward solve must use t(U) and the back solve U. Passing U to
   # forwardsolve and t(U) to backsolve, as this did, silently solves a
-  # different system: for a 3x3 it returned b[1]/A[1,1] and zeros.
+  # different system: for a 3x3 it returned b\[1\]/A[1,1] and zeros.
   U <- tryCatch(chol(A), error = function(e) NULL)
   if (!is.null(U)) {
     return(as.numeric(backsolve(U, forwardsolve(t(U), b))))

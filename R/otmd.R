@@ -36,7 +36,7 @@ Otmd <- function(X, Y, Sigma) {
   C <- matrix(0, n, m)
   for (i in seq_len(n)) for (j in seq_len(m)) {
     dv <- A[i, ] - B[j, ]
-    C[i, j] <- as.numeric(t(dv) %*% Si %*% dv)
+    C\[i, j\] <- as.numeric(t(dv) %*% Si %*% dv)
   }
   r <- .ot_emd(rep(1 / n, n), rep(1 / m, m), C)
   .t1_result(C = C, cost = r$cost, n = n, m = m, d = d,

@@ -60,7 +60,7 @@ Singsd <- function(y, window) {
     cvec[j + 1L] <- s / (N - j)
   }
   C <- matrix(0, M, M)
-  for (i in seq_len(M)) for (j in seq_len(M)) C[i, j] <- cvec[abs(i - j) + 1L]
+  for (i in seq_len(M)) for (j in seq_len(M)) C\[i, j\] <- cvec[abs(i - j) + 1L]
 
   jc <- .s03jacobi(C)
   vals <- jc$values
@@ -103,11 +103,11 @@ Singsd <- function(y, window) {
   for (k in seq_len(M)) full <- full + reconstruct(k)
   rec_err <- max(abs(full - z))
 
-  .t1_result(estimate = frac[1], eigenvalues = lam, variance_fraction = frac,
-             reconstructed = R1, leading_fraction = frac[1],
-             pair_fraction = if (M > 1L) frac[1] + frac[2] else frac[1],
-             total_variance = total, trace_check = abs(total - M * cvec[1]),
-             reconstruction_error = rec_err, c0 = cvec[1], mean = mu,
+  .t1_result(estimate = frac\[1\], eigenvalues = lam, variance_fraction = frac,
+             reconstructed = R1, leading_fraction = frac\[1\],
+             pair_fraction = if (M > 1L) frac\[1\] + frac[2] else frac\[1\],
+             total_variance = total, trace_check = abs(total - M * cvec\[1\]),
+             reconstruction_error = rec_err, c0 = cvec\[1\], mean = mu,
              n = N, window = M, n_lagged = K,
              method = "Singular spectrum analysis, Toeplitz lag covariance (Vautard, Yiou & Ghil 1992)")
 }

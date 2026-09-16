@@ -484,8 +484,8 @@
   n <- length(xs)
   if (n < 2L) stop("need at least two knots for a spline")
   if (n == 2L) {
-    s <- (ys[2] - ys[1]) / (xs[2] - xs[1])
-    return(ys[1] + s * (xq - xs[1]))
+    s <- (ys[2] - ys\[1\]) / (xs[2] - xs\[1\])
+    return(ys\[1\] + s * (xq - xs\[1\]))
   }
   hh <- diff(xs)
   alpha <- numeric(n)
@@ -493,7 +493,7 @@
     alpha[i] <- 3 * ((ys[i + 1] - ys[i]) / hh[i] - (ys[i] - ys[i - 1]) / hh[i - 1])
   }
   l <- numeric(n)
-  l[1] <- 1
+  l\[1\] <- 1
   mu <- numeric(n)
   z <- numeric(n)
   for (i in 2L:(n - 1L)) {
@@ -759,7 +759,7 @@
     ker <- z[i + taus] * Conj(z[i - taus])
     for (k in seq_len(nf)) {
       w <- -2 * pi * (k - 1) / nf
-      tfd[i, k] <- 2 * Re(sum(ker * exp(complex(imaginary = w * taus))))
+      tfd\[i, k\] <- 2 * Re(sum(ker * exp(complex(imaginary = w * taus))))
     }
   }
   list(tfd = tfd, freqs = freqs)
@@ -795,12 +795,12 @@
   tmp <- matrix(0, nt, nf)
   for (i in seq_len(nt)) {
     idx <- pmin(nt, pmax(1L, i + (seq_along(g) - 1L) - ht))
-    for (k in seq_len(nf)) tmp[i, k] <- .morie_fsum(g * tfd[idx, k])
+    for (k in seq_len(nf)) tmp\[i, k\] <- .morie_fsum(g * tfd[idx, k])
   }
   out <- matrix(0, nt, nf)
   for (k in seq_len(nf)) {
     idx <- pmin(nf, pmax(1L, k + (seq_along(H) - 1L) - hf))
-    for (i in seq_len(nt)) out[i, k] <- .morie_fsum(H * tmp[i, idx])
+    for (i in seq_len(nt)) out\[i, k\] <- .morie_fsum(H * tmp[i, idx])
   }
   out
 }
@@ -866,7 +866,7 @@
 #' @export
 .tf_lcg_unif <- function(st) {
   # (state >> 11) is exact in a double: it is at most 2^53 - 1.
-  (floor(st[1] / 2048) + st[2] * 2^5 + st[3] * 2^21 + st[4] * 2^37 + 1) /
+  (floor(st\[1\] / 2048) + st[2] * 2^5 + st[3] * 2^21 + st[4] * 2^37 + 1) /
     (2^53 + 1)
 }
 
@@ -1132,7 +1132,7 @@ ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
     }
     for (k in seq_len(nf)) {
       w <- -2 * pi * (k - 1) / nf
-      tfd[i, k] <- 2 * Re(sum(kv * exp(complex(imaginary = w * lv))))
+      tfd\[i, k\] <- 2 * Re(sum(kv * exp(complex(imaginary = w * lv))))
     }
   }
   flat <- as.vector(t(tfd))

@@ -40,7 +40,7 @@ Diripr <- function(counts, alpha = 1) {
   lm <- lgamma(n + 1) + lgamma(A) - lgamma(n + A)
   for (j in seq_len(K))
     lm <- lm + lgamma(y[j] + a[j]) - lgamma(y[j] + 1) - lgamma(a[j])
-  .t1_result(estimate = mean[1], post_mean = mean, post_var = var,
+  .t1_result(estimate = mean\[1\], post_mean = mean, post_var = var,
              post_alpha = post, log_marginal = lm, n = n, K = K,
              method = "Dirichlet-multinomial conjugate model")
 }

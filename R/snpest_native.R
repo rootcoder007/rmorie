@@ -254,8 +254,8 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
       lp <- numeric(K + 1L)
       if (K > 0L)
         for (j in seq_len(K))
-          lp[j] <- log(cl[[j]][1]) +
-            morie_snpest_predictive(x, cl[[j]][1], cl[[j]][2], cl[[j]][3],
+          lp[j] <- log(cl[[j]]\[1\]) +
+            morie_snpest_predictive(x, cl[[j]]\[1\], cl[[j]][2], cl[[j]][3],
                                     m0, kappa0, a0, b0)
       lp[K + 1L] <- log(alpha) +
         morie_snpest_predictive(x, 0, 0, 0, m0, kappa0, a0, b0)
@@ -282,17 +282,17 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
         pick <- K
         if (K > 0L)
           for (j in seq_len(K)) {
-            acc <- acc + cl[[j]][1]
+            acc <- acc + cl[[j]]\[1\]
             if (u <= acc) { pick <- j - 1L
             break }
           }
         incr[p] <- lp[pick + 1L] -
-          log(if (pick < K) cl[[pick + 1L]][1] else alpha)
+          log(if (pick < K) cl[[pick + 1L]]\[1\] else alpha)
       }
       if (pick == K) {
         cl[[K + 1L]] <- c(1, x, x * x)
       } else {
-        cl[[pick + 1L]][1] <- cl[[pick + 1L]][1] + 1
+        cl[[pick + 1L]]\[1\] <- cl[[pick + 1L]]\[1\] + 1
         cl[[pick + 1L]][2] <- cl[[pick + 1L]][2] + x
         cl[[pick + 1L]][3] <- cl[[pick + 1L]][3] + x * x
       }
@@ -338,8 +338,8 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
       lp <- numeric(K + 1L)
       if (K > 0L)
         for (j in seq_len(K))
-          lp[j] <- log(cl[[j]][1]) +
-            morie_snpest_predictive(g, cl[[j]][1], cl[[j]][2], cl[[j]][3],
+          lp[j] <- log(cl[[j]]\[1\]) +
+            morie_snpest_predictive(g, cl[[j]]\[1\], cl[[j]][2], cl[[j]][3],
                                     m0, kappa0, a0, b0)
       lp[K + 1L] <- log(alpha) +
         morie_snpest_predictive(g, 0, 0, 0, m0, kappa0, a0, b0)

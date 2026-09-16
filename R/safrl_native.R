@@ -95,10 +95,10 @@
   } else {
     stop(sprintf("safrl: %s must be a matrix or list of vectors", name))
   }
-  if (length(rows) == 0 || length(rows[[1]]) == 0) {
+  if (length(rows) == 0 || length(rows[\[1\]]) == 0) {
     stop(sprintf("safrl: %s must be non-empty", name))
   }
-  w <- length(rows[[1]])
+  w <- length(rows[\[1\]])
   for (r in rows) {
     if (length(r) != w) {
       stop(sprintf("safrl: %s must be rectangular", name))
@@ -152,7 +152,7 @@
   M <- matrix(0, nrow = n, ncol = n + 1)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      M[i, j] <- A[[i]][j]
+      M\[i, j\] <- A[[i]][j]
     }
     M[i, n + 1] <- b[i]
   }
@@ -350,7 +350,7 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
   gv <- .safrl_vec(g, "g")
   Hm <- .safrl_mat(H, "H")
   n <- length(gv)
-  if (length(Hm) != n || length(Hm[[1]]) != n) {
+  if (length(Hm) != n || length(Hm[\[1\]]) != n) {
     stop("safrl: H must be (n, n) matching g")
   }
   delta <- as.numeric(delta)
@@ -376,7 +376,7 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
   if (length(Bm) != n) {
     stop("safrl: B must have one row per parameter")
   }
-  m <- length(Bm[[1]])
+  m <- length(Bm[\[1\]])
   cv <- .safrl_vec(c, "c")
   if (length(cv) != m) {
     stop("safrl: c must have one entry per constraint")
@@ -402,7 +402,7 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
   S <- matrix(0, nrow = m, ncol = m)
   for (a in seq_len(m)) {
     for (b in seq_len(m)) {
-      S[a, b] <- sum(cols[[a]] * Hinv_b[[b]])
+      S\[a, b\] <- sum(cols[[a]] * Hinv_b[[b]])
     }
   }
 
@@ -537,8 +537,8 @@ morie_safrl_cmdp_returns <- function(policy, states, actions, step,
   }
 
   return(list(
-    estimate = out[[1]],
-    J = out[[1]],
+    estimate = out[\[1\]],
+    J = out[\[1\]],
     J_C = out[-1],
     gamma = as.numeric(gamma),
     method = "CMDP returns (Altman 1999; Achiam et al. 2017 sec. 4)"

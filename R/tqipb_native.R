@@ -5,7 +5,7 @@
 # TurboQuant (Zandieh, Han, Daliri and Karbasi, 2025) rotates a vector at
 # random before quantizing it. The rotation is what makes the scheme
 # analysable: a random rotation of any unit vector has coordinates
-# distributed Beta((d-1)/2, (d-1)/2) rescaled to [-1, 1] -- the same law
+# distributed Beta((d-1)/2, (d-1)/2) rescaled to \[-1, 1\] -- the same law
 # for every input -- so ONE scalar quantizer designed against that law is
 # optimal for every input rather than for a training set. The constants
 # below are that quantizer's, not a fit.
@@ -274,7 +274,7 @@ morie_tqipb <- function(bits, norm_sq = 1, d = NULL, eps = 0.1,
     relative_error = if (scale > 0) sqrt(v) / scale else 0,
     delta_bound = p,
     eps = as.numeric(eps),
-    constant = morie_tqipb_constant(b, dims[1], route),
+    constant = morie_tqipb_constant(b, dims\[1\], route),
     bits = b,
     d = as.integer(d),
     n_blocks = as.integer(n_blocks),

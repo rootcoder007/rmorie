@@ -256,7 +256,7 @@ poltrx_eps_from_key <- function(key) {
   if (key == "()") {
     return(integer(0))
   }
-  as.integer(strsplit(sub("^\\(|\\)$", "", key), ",")[[1]])
+  as.integer(strsplit(sub("^\\(|\\)$", "", key), ",")[\[1\]])
 }
 
 #' Set probability in a finite Polya tree

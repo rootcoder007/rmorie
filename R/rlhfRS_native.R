@@ -140,7 +140,7 @@ morie_rlhfRS_rollout <- function(env, policy, n_episodes = 20L,
   P <- env$transition
   R <- env$reward
   n_s <- length(P)
-  n_a <- length(P[[1]])
+  n_a <- length(P[\[1\]])
   if (nrow(policy) != n_s || ncol(policy) != n_a)
     stop("the policy must give a distribution over the environment's ",
          "actions in every state")
@@ -216,7 +216,7 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
   # The support condition. Without it the estimate has no bound on its
   # error, so it is refused rather than returned.
   for (i in seq_len(n)) {
-    s <- log[[i]][1]
+    s <- log[[i]]\[1\]
     a <- log[[i]][2]
     if (behaviour[i] <= 0 && policy[s + 1L, a + 1L] > 0)
       stop(sprintf(paste0("the target policy takes action %d in state ",
@@ -227,7 +227,7 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
   w <- numeric(n)
   clipped <- 0L
   for (i in seq_len(n)) {
-    s <- log[[i]][1]
+    s <- log[[i]]\[1\]
     a <- log[[i]][2]
     v <- if (behaviour[i] > 0) policy[s + 1L, a + 1L] / behaviour[i]
          else 0
@@ -246,7 +246,7 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
       stop("the doubly robust estimator needs a reward model")
     terms <- numeric(n)
     for (i in seq_len(n)) {
-      s <- log[[i]][1]
+      s <- log[[i]]\[1\]
       a <- log[[i]][2]
       base <- .w3_csum(policy[s + 1L, ] * reward_model[s + 1L, ])
       terms[i] <- base + w[i] * (rs[i] - reward_model[s + 1L, a + 1L])

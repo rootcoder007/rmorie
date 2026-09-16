@@ -23,7 +23,7 @@
 #' Imai(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Imai <- function(X, M, Y, Cc = NULL) {
   mm <- .s4_medmodels(Y, X, M, Cc)
-  bc0 <- mm$beta[1]
+  bc0 <- mm$beta\[1\]
   if (length(mm$cbar)) bc0 <- bc0 + sum(mm$beta[2 + seq_along(mm$cbar)] * mm$cbar)
   d0 <- mm$beta[2] * mm$theta[3]
   d1 <- mm$beta[2] * (mm$theta[3] + mm$theta[4])

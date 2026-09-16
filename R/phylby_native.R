@@ -59,7 +59,7 @@
       other <- setdiff(all_tips, below)
       side_sorted <- sort(side)
       other_sorted <- sort(other)
-      if (side_sorted[1] < other_sorted[1]) {
+      if (side_sorted\[1\] < other_sorted\[1\]) {
         acc$out[[length(acc$out) + 1]] <- side
       } else {
         acc$out[[length(acc$out) + 1]] <- other
@@ -106,7 +106,7 @@
 #' @export
 .phylby_replace_branch <- function(node, path, value) {
   if (length(path) == 0) return(node)
-  idx <- path[1] + 1
+  idx <- path\[1\] + 1
   parts <- node
   if (length(path) == 1) {
     parts[[idx]] <- value
@@ -178,7 +178,7 @@
 .phylby_set_at <- function(node, path, value) {
   if (length(path) == 0) return(value)
   parts <- node
-  idx <- path[1] + 1
+  idx <- path\[1\] + 1
   parts[[idx]] <- .phylby_set_at(parts[[idx]], path[-1], value)
   return(parts)
 }
@@ -589,7 +589,7 @@ morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
     stop("phylby: at least four taxa are needed for an unrooted topology to vary")
   }
   Ls <- unique(sapply(seqs, nchar))
-  if (length(Ls) != 1 || Ls[1] == 0) {
+  if (length(Ls) != 1 || Ls\[1\] == 0) {
     stop("phylby: sequences must be aligned and non-empty")
   }
   if (n_iter < 1 || n_chains < 1 || n_runs < 1) {
@@ -598,7 +598,7 @@ morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
   if (swap_every < 1 || sample_every < 1) {
     stop("phylby: swap_every and sample_every must be positive")
   }
-  if (!is.null(partitions) && length(partitions) != nchar(seqs[[1]])) {
+  if (!is.null(partitions) && length(partitions) != nchar(seqs[\[1\]])) {
     stop("phylby: one partition label per site is required")
   }
   burn <- if (is.null(burnin)) as.integer(n_iter) %/% 2L else as.integer(burnin)
@@ -607,7 +607,7 @@ morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
   }
   names_vec <- sort(names(seqs))
   if (is.null(tree)) {
-    tree <- list(names_vec[1], 0.1, names_vec[2], 0.1)
+    tree <- list(names_vec\[1\], 0.1, names_vec[2], 0.1)
     if (length(names_vec) > 2) {
       for (i in 3:length(names_vec)) {
         t <- names_vec[i]
@@ -660,11 +660,11 @@ morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
         }
       }
       if (it0 >= burn && (it0 - burn) %% as.integer(sample_every) == 0) {
-        samples[[length(samples) + 1]] <- chains[[1]]$tree
+        samples[[length(samples) + 1]] <- chains[\[1\]]$tree
       }
     }
     if (length(samples) == 0) {
-      samples[[1]] <- chains[[1]]$tree
+      samples[\[1\]] <- chains[\[1\]]$tree
     }
     runs[[r]] <- samples
   }

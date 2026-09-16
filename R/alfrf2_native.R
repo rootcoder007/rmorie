@@ -140,8 +140,8 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #' res <- .alfrf2_det3(M = X)
 #' res
 .alfrf2_det3 <- function(M) {
-  M[1, 1] * (M[2, 2] * M[3, 3] - M[2, 3] * M[3, 2]) -
-    M[1, 2] * (M[2, 1] * M[3, 3] - M[2, 3] * M[3, 1]) +
+  M\[1, 1\] * (M[2, 2] * M[3, 3] - M[2, 3] * M[3, 2]) -
+    M\[1, 2\] * (M[2, 1] * M[3, 3] - M[2, 3] * M[3, 1]) +
     M[1, 3] * (M[2, 1] * M[3, 2] - M[2, 2] * M[3, 1])
 }
 
@@ -179,13 +179,13 @@ morie_alfrf2_kabsch <- function(P, Q) {
   C <- matrix(0, 3, 3)
   for (a in 1:3) {
     for (b in 1:3) {
-      C[a, b] <- .w3_csum(q[, a] * p[, b])
+      C\[a, b\] <- .w3_csum(q[, a] * p[, b])
     }
   }
   S <- matrix(0, 3, 3)
   for (a in 1:3) {
     for (b in 1:3) {
-      S[a, b] <- .w3_csum(vapply(
+      S\[a, b\] <- .w3_csum(vapply(
         1:3, function(k) C[k, a] * C[k, b],
         numeric(1)
       ))
@@ -194,7 +194,7 @@ morie_alfrf2_kabsch <- function(P, Q) {
   je <- morie_manfd_jacobi(S)
   lam <- je$values
   V <- je$vectors
-  if (lam[3] <= 1e-12 * (if (lam[1] > 0) lam[1] else 1)) {
+  if (lam[3] <= 1e-12 * (if (lam\[1\] > 0) lam\[1\] else 1)) {
     stop(
       "the points do not span three dimensions, so the polar factor ",
       "does not determine a rotation"
@@ -205,7 +205,7 @@ morie_alfrf2_kabsch <- function(P, Q) {
     M <- matrix(0, 3, 3)
     for (a in 1:3) {
       for (b in 1:3) {
-        M[a, b] <- .w3_csum(vapply(1:3, function(k) {
+        M\[a, b\] <- .w3_csum(vapply(1:3, function(k) {
           V[a, k] * inv[k] * V[b, k]
         }, numeric(1)))
       }
@@ -213,7 +213,7 @@ morie_alfrf2_kabsch <- function(P, Q) {
     R <- matrix(0, 3, 3)
     for (a in 1:3) {
       for (b in 1:3) {
-        R[a, b] <- .w3_csum(vapply(
+        R\[a, b\] <- .w3_csum(vapply(
           1:3, function(k) C[a, k] * M[k, b],
           numeric(1)
         ))
@@ -230,7 +230,7 @@ morie_alfrf2_kabsch <- function(P, Q) {
   for (i in seq_len(n)) {
     for (a in 1:3) {
       moved[i, a] <- .w3_csum(vapply(
-        1:3, function(b) R[a, b] * p[i, b],
+        1:3, function(b) R\[a, b\] * p[i, b],
         numeric(1)
       )) + cq$c[a]
     }
@@ -239,7 +239,7 @@ morie_alfrf2_kabsch <- function(P, Q) {
   tr <- vapply(1:3, function(a) {
     cq$c[a] -
       .w3_csum(vapply(
-        1:3, function(b) R[a, b] * cp$c[b],
+        1:3, function(b) R\[a, b\] * cp$c[b],
         numeric(1)
       ))
   }, numeric(1))
@@ -359,7 +359,7 @@ morie_alfrf2 <- function(target_motif, scaffold, T = 20L,
                          beta_start = 1e-4, beta_end = 0.02,
                          spacing = .alfrf2_ca_spacing, passes = 8L,
                          noise_scale = 1, seed = 0) {
-  idx <- vapply(target_motif, function(p) as.integer(p[[1]]), integer(1))
+  idx <- vapply(target_motif, function(p) as.integer(p[\[1\]]), integer(1))
   pos <- lapply(target_motif, function(p) as.numeric(p[[2]]))
   if (length(scaffold) == 1L && is.numeric(scaffold) &&
     scaffold == round(scaffold)) {

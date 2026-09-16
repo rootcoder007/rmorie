@@ -49,8 +49,8 @@ Drspr <- function(y, D, X = NULL, exposure = NULL) {
   }
   d1 <- fitpair(dirt, ctrl)
   s1 <- fitpair(spil, ctrl)
-  tot <- if (is.na(d1[1]) || is.na(s1[1])) NaN else d1[1] + s1[1]
-  .t1_result(estimate = d1[1], att_direct = d1[1], att_spillover = s1[1],
+  tot <- if (is.na(d1\[1\]) || is.na(s1\[1\])) NaN else d1\[1\] + s1\[1\]
+  .t1_result(estimate = d1\[1\], att_direct = d1\[1\], att_spillover = s1\[1\],
              se_direct = d1[2], se_spillover = s1[2], total = tot,
              n_direct = length(dirt), n_spill = length(spil),
              n_control = length(ctrl), n = n,

@@ -24,7 +24,7 @@ Mrr <- function(pred_rank, relevant) {
   rr <- numeric(Q)
   for (q in seq_len(Q)) {
     hit <- which(P_[q, ] %in% R_[q, ])
-    rr[q] <- if (length(hit)) 1 / hit[1] else 0
+    rr[q] <- if (length(hit)) 1 / hit\[1\] else 0
   }
   .t1_result(estimate = sum(rr) / Q, rr = rr, n_hit = sum(rr > 0), Q = Q,
              method = "Mean reciprocal rank")

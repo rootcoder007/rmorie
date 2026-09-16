@@ -71,7 +71,7 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
 
   if (is.null(window)) {
     win <- c(min(P[, 1]), max(P[, 1]), min(P[, 2]), max(P[, 2]))
-    if (win[2] - win[1] <= .strmkr_EPS) { win[1] <- win[1] - 0.5
+    if (win[2] - win\[1\] <= .strmkr_EPS) { win\[1\] <- win\[1\] - 0.5
                                           win[2] <- win[2] + 0.5 }
     if (win[4] - win[3] <= .strmkr_EPS) { win[3] <- win[3] - 0.5
                                           win[4] <- win[4] + 0.5 }
@@ -80,11 +80,11 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
     win <- as.numeric(window)
     if (length(win) != 4L)
       stop("strmkr: window must be (xmin, xmax, ymin, ymax)")
-    if (win[2] <= win[1] || win[4] <= win[3])
+    if (win[2] <= win\[1\] || win[4] <= win[3])
       stop("strmkr: the window has non-positive area")
     window_source <- "supplied"
   }
-  area <- (win[2] - win[1]) * (win[4] - win[3])
+  area <- (win[2] - win\[1\]) * (win[4] - win[3])
 
   # sufficient statistic: pairs closer together than r
   npairs <- 0L
@@ -99,14 +99,14 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
   idx <- 0L
   for (a in seq_len(nx) - 1L) for (b in seq_len(ny) - 1L) {
     idx <- idx + 1L
-    dummy[idx, 1] <- win[1] + (a + 0.5) * (win[2] - win[1]) / nx
+    dummy[idx, 1] <- win\[1\] + (a + 0.5) * (win[2] - win\[1\]) / nx
     dummy[idx, 2] <- win[3] + (b + 0.5) * (win[4] - win[3]) / ny
   }
   quad <- rbind(P, dummy)
   m <- nrow(quad)
   isdata <- c(rep(1.0, n), rep(0.0, nx * ny))
 
-  ta <- pmin(pmax(as.integer((quad[, 1] - win[1]) / (win[2] - win[1]) * nx),
+  ta <- pmin(pmax(as.integer((quad[, 1] - win\[1\]) / (win[2] - win\[1\]) * nx),
                   0L), nx - 1L)
   tb <- pmin(pmax(as.integer((quad[, 2] - win[3]) / (win[4] - win[3]) * ny),
                   0L), ny - 1L)
@@ -144,36 +144,36 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
     zi <- eta + (yq - mu) / pmax(mu, 1e-300)
     A <- crossprod(X * ww, X)
     rhs <- as.numeric(crossprod(X, ww * zi))
-    det <- A[1, 1] * A[2, 2] - A[1, 2] * A[2, 1]
+    det <- A\[1, 1\] * A[2, 2] - A\[1, 2\] * A[2, 1]
     if (abs(det) < 1e-300)
       stop(paste0("strmkr: the pseudolikelihood information matrix is ",
                   "singular -- no quadrature point has a close neighbour, ",
                   "so gamma is not identified at this radius"))
-    new <- c((A[2, 2] * rhs[1] - A[1, 2] * rhs[2]) / det,
-             (A[1, 1] * rhs[2] - A[2, 1] * rhs[1]) / det)
+    new <- c((A[2, 2] * rhs\[1\] - A\[1, 2\] * rhs[2]) / det,
+             (A\[1, 1\] * rhs[2] - A[2, 1] * rhs\[1\]) / det)
     shift <- max(abs(new - beta))
     beta <- new
     if (shift < tol) { converged <- TRUE
     break }
   }
 
-  det <- A[1, 1] * A[2, 2] - A[1, 2] * A[2, 1]
+  det <- A\[1, 1\] * A[2, 2] - A\[1, 2\] * A[2, 1]
   cov2 <- matrix(c(A[2, 2] / det, -A[2, 1] / det,
-                   -A[1, 2] / det, A[1, 1] / det), 2L, 2L)
-  se <- c(sqrt(max(cov2[1, 1], 0.0)), sqrt(max(cov2[2, 2], 0.0)))
+                   -A\[1, 2\] / det, A\[1, 1\] / det), 2L, 2L)
+  se <- c(sqrt(max(cov2\[1, 1\], 0.0)), sqrt(max(cov2[2, 2], 0.0)))
 
   eta <- as.numeric(X %*% beta)
   mu <- exp(pmax(-500.0, pmin(500.0, eta)))
   logpl <- sum(w * (yq * eta - mu))
 
-  beta_hat <- exp(beta[1])
+  beta_hat <- exp(beta\[1\])
   gamma_hat <- exp(beta[2])
   logpl_pois <- n * log(max(n / area, 1e-300)) - n
   out <- list(
     estimate = c(beta_hat, gamma_hat),
     beta = beta_hat, gamma = gamma_hat,
-    log_beta = beta[1], log_gamma = beta[2],
-    se_log_beta = se[1], se_log_gamma = se[2],
+    log_beta = beta\[1\], log_gamma = beta[2],
+    se_log_beta = se\[1\], se_log_gamma = se[2],
     gamma_ci_lower = exp(beta[2] - 1.959963984540054 * se[2]),
     gamma_ci_upper = exp(beta[2] + 1.959963984540054 * se[2]),
     n_points = as.integer(n), n_close_pairs = as.integer(npairs),

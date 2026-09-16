@@ -10,7 +10,7 @@
 #' other edges turned off; in linear systems these path-restricted
 #' effects are sums of products of path coefficients along the
 #' retained paths (Pearl 2001, Section 2). For an acyclic coefficient
-#' matrix B with B[i, j] the coefficient on the edge from i to j, the
+#' matrix B with B\[i, j\] the coefficient on the edge from i to j, the
 #' unit-change effect along g is entry (x, y) of
 #' \eqn{(I - B_g)^{-1} = I + B_g + B_g^2 + \dots}
 #' where B_g zeroes every edge outside g. The full graph gives the
@@ -62,12 +62,12 @@ Pseudo <- function(B, x, y, edges = NULL) {
     Bg <- matrix(0, k, k)
     used <- 0L
     for (e in edges) {
-      i <- as.integer(e[[1]])
+      i <- as.integer(e[\[1\]])
       j <- as.integer(e[[2]])
       if (i < 1L || i > k || j < 1L || j > k) {
         stop(sprintf("edge (%d, %d) out of range", i, j), call. = FALSE)
       }
-      Bg[i, j] <- Bm[i, j]
+      Bg\[i, j\] <- Bm\[i, j\]
       used <- used + 1L
     }
   }

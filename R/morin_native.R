@@ -112,7 +112,7 @@ morie_hockey_stick <- function(n, k) {
 #' @export
 morie_prob_rules <- function(p_a, p_b, p_ab) {
   for (p in c(p_a, p_b, p_ab)) {
-    if (p < 0 || p > 1) stop("probabilities must be in [0, 1].", call. = FALSE)
+    if (p < 0 || p > 1) stop("probabilities must be in \[0, 1\].", call. = FALSE)
   }
   if (p_ab > min(p_a, p_b) + 1e-12) {
     stop("P(A and B) cannot exceed min(P(A), P(B)).", call. = FALSE)
@@ -137,7 +137,7 @@ morie_prob_rules <- function(p_a, p_b, p_ab) {
 #' @return list(posteriors, p_z).
 #' @references Morin (2016), eqs. (2.51)-(2.53), (2.55), (2.74).
 #' @examples
-#' morie_bayes(c(0.02, 0.98), c(0.95, 0.10))$posteriors[1]
+#' morie_bayes(c(0.02, 0.98), c(0.95, 0.10))$posteriors\[1\]
 #' @export
 morie_bayes <- function(priors, likelihoods) {
   priors <- as.numeric(priors)
@@ -147,7 +147,7 @@ morie_bayes <- function(priors, likelihoods) {
   }
   if (any(priors < 0) || any(priors > 1) || any(likelihoods < 0) ||
         any(likelihoods > 1)) {
-    stop("all probabilities must be in [0, 1].", call. = FALSE)
+    stop("all probabilities must be in \[0, 1\].", call. = FALSE)
   }
   if (abs(sum(priors) - 1) > 1e-9) {
     stop("priors must sum to 1.", call. = FALSE)
@@ -255,10 +255,10 @@ morie_sd_forms <- function(sigmas, a = 1) {
   if (any(sigmas < 0)) stop("sigmas must be >= 0.", call. = FALSE)
   n <- length(sigmas)
   list(
-    scaled = abs(a) * sigmas[1],
+    scaled = abs(a) * sigmas\[1\],
     sd_sum = sqrt(sum(sigmas^2)),
-    sd_iid_sum = sqrt(n) * sigmas[1],
-    sd_mean = sigmas[1] / sqrt(n),
+    sd_iid_sum = sqrt(n) * sigmas\[1\],
+    sd_mean = sigmas\[1\] / sqrt(n),
     sd_mean_hetero = sqrt(sum(sigmas^2)) / n
   )
 }
@@ -279,7 +279,7 @@ morie_sd_forms <- function(sigmas, a = 1) {
 #' @export
 morie_binomial_dist <- function(n, p, k = NULL) {
   n <- as.integer(n)
-  if (n < 0L || p < 0 || p > 1) stop("need n >= 0, p in [0, 1].", call. = FALSE)
+  if (n < 0L || p < 0 || p > 1) stop("need n >= 0, p in \[0, 1\].", call. = FALSE)
   pmf <- NULL
   if (!is.null(k)) {
     k <- as.integer(k)

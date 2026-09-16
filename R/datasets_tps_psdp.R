@@ -221,7 +221,7 @@ morie_tps_psdp_layers <- function() {
     year_col <- intersect(c(
       "OCC_YEAR", "OCCURRENCE_YEAR",
       "REPORT_YEAR"
-    ), names(df))[1]
+    ), names(df))\[1\]
     if (!is.null(year) && !is.na(year_col)) {
       df <- df[df[[year_col]] == as.integer(year), , drop = FALSE]
       rownames(df) <- NULL

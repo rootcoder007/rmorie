@@ -39,7 +39,7 @@ morie_ideal_fourths <- function(x) {
   h <- n / 4 + 5 / 12 - j
   k <- n - j + 1
   list(q1 = (1 - h) * v[j] + h * v[j + 1],
-       q2 = (1 - h) * v[k] + h * v[k - 1], j = j, h = h, k = k)
+       q2 = (1 - h) * v[k] + h * v\[k - 1\], j = j, h = h, k = k)
 }
 
 #' @rdname morie_ideal_fourths
@@ -107,6 +107,8 @@ morie_winsorized_variance <- function(x, tr = 0.2) {
 #' @return `morie_mad`, `morie_madn`, `morie_mad_rescaled` numbers;
 #'   `morie_mad_median_rule` a list with `median`, `madn`, `ratio`,
 #'   `is_outlier`, `outliers`, `n_outliers`
+#' @param constant Argument `constant`; see Usage.
+#' @param crit Argument `crit`; see Usage.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -180,6 +182,9 @@ morie_boxplot_outliers <- function(x, carling = FALSE, gval = NULL) {
 #' covariance.
 #' @param x,y numeric vectors
 #' @return list with the estimate, `statistic`, `df`, `se` and `p_value`
+#' @param x, y numeric vectors
+#' @param tr Argument `tr`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -252,6 +257,8 @@ morie_yuen_paired <- function(x, y, tr = 0.2, alpha = 0.05) {
 #' @param tr amount of trimming
 #' @return `morie_trimmed_mean_se` a number; `morie_trimmed_mean_ci` a
 #'   list with `estimate`, `ci`, `statistic`, `se`, `df`, `p_value`
+#' @param alpha Argument `alpha`; see Usage.
+#' @param null_value Argument `null_value`; see Usage.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -287,6 +294,9 @@ morie_trimmed_mean_ci <- function(x, tr = 0.2, alpha = 0.05,
 #' @param x numeric vector
 #' @param q quantile to estimate
 #' @return a numeric scalar
+#' @param beta Argument `beta`; see Usage.
+#' @param bend Argument `bend`; see Usage.
+#' @param constant Argument `constant`; see Usage.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -344,7 +354,7 @@ morie_one_step_m <- function(x, bend = 1.28, constant = 1.4826) {
 #' Robust correlations
 #'
 #' The percentage bend correlation clips standardised deviations to
-#' `[-1, 1]`; the Winsorized correlation is Pearson's on the Winsorized
+#' `\[-1, 1\]`; the Winsorized correlation is Pearson's on the Winsorized
 #' values, tested with `n - 2g - 2` degrees of freedom.
 #' @param x,y numeric vectors
 #' @param beta bending constant
@@ -519,7 +529,7 @@ morie_brunner_dette_munk <- function(groups) {
   VN <- diag(N * svec / nvec, J, J)
   C <- diag(1, J, J) - matrix(1, J, J) / J
   trVN <- sum(diag(VN))
-  c11 <- C[1, 1]
+  c11 <- C\[1, 1\]
   F <- N * as.numeric(t(phat) %*% C %*% phat) / (c11 * trVN)
   nu1 <- c11^2 * trVN^2 / sum(diag(C %*% VN %*% C %*% VN))
   lam <- diag(1 / (nvec - 1), J, J)
@@ -590,7 +600,7 @@ morie_winsorized_regression <- function(X, y, tr = 0.2, n_iter = 20,
   mvals <- apply(Xm, 2, function(c) morie_winsorized_mean(c, tr))
   M <- matrix(0, p, p)
   for (i in seq_len(p)) for (j in seq_len(p))
-    M[i, j] <- morie_winsorized_correlation(Xm[, i], Xm[, j], tr)$cov
+    M\[i, j\] <- morie_winsorized_correlation(Xm[, i], Xm[, j], tr)$cov
   ma <- vapply(seq_len(p), function(i)
     morie_winsorized_correlation(Xm[, i], y, tr)$cov, numeric(1))
   slope <- solve(M, ma)

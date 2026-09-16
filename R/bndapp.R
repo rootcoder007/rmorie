@@ -58,7 +58,7 @@ Bndapp <- function(y, z, t1 = NULL, t0 = NULL) {
     upper[k] <- sum(p[above] * m[above]) + m[k] * sum(p[!above])
   }
   tt1 <- if (is.null(t1)) lev[K] else as.numeric(t1)
-  tt0 <- if (is.null(t0)) lev[1] else as.numeric(t0)
+  tt0 <- if (is.null(t0)) lev\[1\] else as.numeric(t0)
   if (!(tt1 %in% lev) || !(tt0 %in% lev)) {
     stop("Bndapp: t1 and t0 must be realized levels of z")
   }

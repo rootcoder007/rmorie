@@ -232,12 +232,12 @@ morie_scumap_spectral_layout <- function(B, n_components = 2,
   L <- matrix(0.0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      lij <- (if (i == j) d[i] else 0.0) - B[i, j]
+      lij <- (if (i == j) d[i] else 0.0) - B\[i, j\]
       if (laplacian == "normalised") {
         s <- sqrt(d[i]) * sqrt(d[j])
-        L[i, j] <- if (s > 0) lij / s else 0.0
+        L\[i, j\] <- if (s > 0) lij / s else 0.0
       } else {
-        L[i, j] <- sqrt(d[i]) * lij * sqrt(d[j])
+        L\[i, j\] <- sqrt(d[i]) * lij * sqrt(d[j])
       }
     }
   }
@@ -444,10 +444,10 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors = 15, min_dist = 0.1,
   ew <- numeric(0)
   for (i in seq_len(n)) {
     for (j in seq.int(i + 1L, length.out = max(0L, n - i))) {
-      if (B[i, j] > 0.0) {
+      if (B\[i, j\] > 0.0) {
         ei <- c(ei, i)
         ej <- c(ej, j)
-        ew <- c(ew, B[i, j])
+        ew <- c(ew, B\[i, j\])
       }
     }
   }

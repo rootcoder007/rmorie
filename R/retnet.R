@@ -31,11 +31,11 @@ Retention <- function(y, Q = NULL, K = NULL, V = NULL, gamma = 0.9) {
   out <- matrix(0, n, dv)
   for (t in seq_len(n)) {
     for (a in seq_len(dk)) for (b in seq_len(dv)) {
-      S[a, b] <- g * S[a, b] + Km[t, a] * Vm[t, b]
+      S\[a, b\] <- g * S\[a, b\] + Km[t, a] * Vm[t, b]
     }
     for (b in seq_len(dv)) {
       s <- 0
-      for (a in seq_len(dk)) s <- s + Qm[t, a] * S[a, b]
+      for (a in seq_len(dk)) s <- s + Qm[t, a] * S\[a, b\]
       out[t, b] <- s
     }
   }
@@ -53,7 +53,7 @@ Retention <- function(y, Q = NULL, K = NULL, V = NULL, gamma = 0.9) {
     d <- abs(out[t, b] - par[t, b])
     if (d > gap) gap <- d
   }
-  list(estimate = if (n && dv) out[1, 1] else NaN, out = out, out_par = par,
+  list(estimate = if (n && dv) out\[1, 1\] else NaN, out = out, out_par = par,
        max_gap = gap, state = S, gamma = g,
        method = "RetNet retention, recurrent and parallel forms (Sun et al. 2023, eqs. 5-6)")
 }

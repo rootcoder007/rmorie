@@ -308,8 +308,8 @@ morie_datasets_load_by_key <- function(dataset_key,
   if (!is.null(fmt)) {
     csv_idx <- which(toupper(fmt) == "CSV")
     if (length(csv_idx) > 0L) {
-      return(res$id[csv_idx[1]])
+      return(res$id[csv_idx\[1\]])
     }
   }
-  res$id[1]
+  res$id\[1\]
 }

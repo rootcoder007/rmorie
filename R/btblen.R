@@ -15,14 +15,14 @@
 #' than papered over.
 #'
 #' Page 58, the flat-top lag-window of Politis and Romano (1995):
-#' lambda(t) = 1 for |t| in [0, 1/2]; 2(1 - |t|) for |t| in [1/2, 1]; 0
+#' lambda(t) = 1 for |t| in \[0, 1/2\]; 2(1 - |t|) for |t| in \[1/2, 1\]; 0
 #' otherwise, with R_hat(k) = N^-1 sum_\{i=1\}^\{N-|k|\} (X_i - Xbar)(X_\{i+|k|\} -
 #' Xbar); equation (8): G_hat = sum_\{k=-M\}^\{M\} lambda(k/M) |k| R_hat(k),
 #' g_hat(w) = sum_\{k=-M\}^\{M\} lambda(k/M) R_hat(k) cos(wk), and
 #' D_hat_SB = 4 g_hat^2(0) + (2/pi) int_\{-pi\}^\{pi\} (1 + cos w) g_hat^2(w) dw;
 #' equation (9): b_opt_SB = (2 G_hat^2 / D_hat_SB)^(1/3) N^(1/3); page 60
 #' equation (13): D_hat_CB = (4/3) g_hat^2(0); equation (14):
-#' b_opt_CB = [ (2 G_hat^2 / D_hat_CB)^(1/3) N^(1/3) ] with [x] the nearest
+#' b_opt_CB = \[ (2 G_hat^2 / D_hat_CB)^(1/3) N^(1/3) \] with [x] the nearest
 #' integer.  Page 62 notes the moving-block optimum equals the circular one,
 #' so ell serves both.
 #'
@@ -31,7 +31,7 @@
 #' |rho_hat(m_hat + k)| < c sqrt(log10(N)/N) for k = 1, ..., K_N, with the
 #' paper's recommended c = 2 and K_N = max(5, sqrt(log10 N)), and M = 2 m_hat.
 #' The integral is evaluated on a fixed 2000-panel trapezoid grid over
-#' [-pi, pi] so both language arms produce identical numbers; the integrand is
+#' \[-pi, pi\] so both language arms produce identical numbers; the integrand is
 #' a smooth trigonometric polynomial of degree 2M + 1, for which that grid is
 #' far finer than needed.
 #'
@@ -67,7 +67,7 @@ Btblen <- function(x, method = "circular", c = 2, m_max = NULL) {
     if (n - k >= 1L) for (i in seq_len(n - k)) s <- s + (xx[i] - xb) * (xx[i + k] - xb)
     R[k + 1L] <- s / n
   }
-  if (R[1] <= 0) stop("boot_block_length_pr: the series has zero variance")
+  if (R\[1\] <= 0) stop("boot_block_length_pr: the series has zero variance")
   KN <- as.integer(max(5, sqrt(log10(n))))
   thr <- cc * sqrt(log10(n) / n)
   if (is.null(m_max)) m_max <- as.integer(ceiling(sqrt(n))) + KN
@@ -79,7 +79,7 @@ Btblen <- function(x, method = "circular", c = 2, m_max = NULL) {
     for (kk in seq_len(KN)) {
       idx <- m + kk
       if (idx > kmax) break
-      if (abs(R[idx + 1L] / R[1]) >= thr) { okm <- FALSE
+      if (abs(R[idx + 1L] / R\[1\]) >= thr) { okm <- FALSE
       break }
     }
     if (okm) { mhat <- m

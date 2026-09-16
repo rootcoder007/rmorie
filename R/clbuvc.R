@@ -2,7 +2,7 @@
 
 #' CLUB upper bound on mutual information
 #'
-#' Formula: I_CLUB = E[log q(y|x)] - E_marg[log q(y|x)]
+#' Formula: I_CLUB = E\[log q(y|x)\] - E_marg\[log q(y|x)\]
 #'
 #' The second term averages the SAME conditional density over
 #' mismatched pairs, so the bound is the average log-ratio between
@@ -47,7 +47,7 @@ Clbuvc <- function(x, y, q = NULL) {
   } else {
     qq <- .s03vec(q)
     if (length(qq) != 3L) stop("q must be (a, b, sigma2)")
-    a <- qq[1]
+    a <- qq\[1\]
     b <- qq[2]
     s2 <- qq[3]
   }

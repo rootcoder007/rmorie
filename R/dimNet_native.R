@@ -106,7 +106,7 @@ morie_dimNet_spherical_harmonic_basis <- function(angle, n_basis = 4L) {
   n <- as.integer(n_basis)
   if (n < 1L) stop("dimNet: at least one basis function is needed")
   out <- numeric(n)
-  if (n >= 1L) out[1] <- 1
+  if (n >= 1L) out\[1\] <- 1
   if (n >= 2L) out[2] <- x
   for (l in 3:n)
     out[l] <- ((2 * l - 3) * x * out[l - 1] - (l - 2) * out[l - 2]) / (l - 1)
@@ -141,8 +141,8 @@ morie_dimNet_directional_message_pass <- function(messages, adj, R,
   out <- list()
   keys <- names(messages)
   for (k in keys) {
-    parts <- strsplit(k, "->", fixed = TRUE)[[1]]
-    j <- parts[1]
+    parts <- strsplit(k, "->", fixed = TRUE)[\[1\]]
+    j <- parts\[1\]
     i <- parts[2]
     nbrs <- setdiff(adj[[j]], c(i, j))
     acc <- NULL

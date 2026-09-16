@@ -41,9 +41,9 @@ Bnstvr <- function(y, D, X) {
     cm <- .bnd_cellmeans(z$y[sel], z$d[sel])
     a1 <- .bnd_wc_arm(cm$m1, cm$p1, y0, y1)
     a0 <- .bnd_wc_arm(cm$m0, cm$p0, y0, y1)
-    if (a1[1] > lo1) lo1 <- a1[1]
+    if (a1\[1\] > lo1) lo1 <- a1\[1\]
     if (a1[2] < hi1) hi1 <- a1[2]
-    if (a0[1] > lo0) lo0 <- a0[1]
+    if (a0\[1\] > lo0) lo0 <- a0\[1\]
     if (a0[2] < hi0) hi0 <- a0[2]
   }
   refuted <- if (lo1 > hi1 || lo0 > hi0) 1 else 0

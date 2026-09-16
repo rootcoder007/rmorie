@@ -77,7 +77,7 @@ valid_transitions <- function(labels) {
     for (b in 1:n) {
       pb <- substr(labels[b], 1, 1)
       tb <- if (pb == "O") NA else substr(labels[b], 3, nchar(labels[b]))
-      if (pb == "I") T[a, b] <- (pa %in% c("B", "I")) && !is.na(ta) &&
+      if (pb == "I") T\[a, b\] <- (pa %in% c("B", "I")) && !is.na(ta) &&
                                   !is.na(tb) && ta == tb
     }
   }
@@ -181,8 +181,8 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
       best <- .benRea_NEG
       arg <- -1L
       for (i in 1:n) {
-        if (!T[i, j] || dp[t - 1, i] == .benRea_NEG) next
-        v <- dp[t - 1, i] + S[i, j]
+        if (!T\[i, j\] || dp[t - 1, i] == .benRea_NEG) next
+        v <- dp[t - 1, i] + S\[i, j\]
         if (v > best) { best <- v
         arg <- i }
       }
@@ -196,7 +196,7 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
   if (dp[L, end] == .benRea_NEG) stop("benRea: no valid path exists")
   path_idx <- end
   for (t in L:2) {
-    path_idx <- c(bk[t, path_idx[1]], path_idx)
+    path_idx <- c(bk[t, path_idx\[1\]], path_idx)
   }
   list(path = labels[path_idx], score = dp[L, end])
 }
