@@ -1903,7 +1903,7 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
 #'   Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
 #'   1953-1999." *Political Analysis*, 10(2).
 #' @examples \donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
-#' dynamic-IRT random-walk prior on ideal points.
+#' # dynamic-IRT random-walk prior on ideal points.
 #' @export
 morie_spatial_voting_dynamic_irt <- function(votes, time_periods,
                                              n_samples = 500L,

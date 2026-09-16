@@ -263,7 +263,7 @@ morie_performance_r2 <- function(model, ...) {
 #' @param ... Further arguments forwarded to
 #'   \code{performance::check_collinearity} (e.g. \code{ci},
 #'   \code{verbose}).
-#' @return A list with \eqn{$method =
+#' @return A list with \verb{$method =
 #'   "performance::check_collinearity"} and \code{$raw} (the
 #'   upstream VIF data frame).
 #' @examples
@@ -294,7 +294,7 @@ morie_performance_check_collinearity <- function(model, ...) {
 #' @param ... Further arguments forwarded to
 #'   \code{performance::check_outliers} (e.g. \code{method},
 #'   \code{threshold}).
-#' @return A list with \eqn{$method =
+#' @return A list with \verb{$method =
 #'   "performance::check_outliers"} and \code{$raw} (the upstream
 #'   outlier-check object).
 #' @examples
@@ -529,7 +529,7 @@ morie_randtests_runs <- function(x, ...) {
 #' @param ... Further arguments forwarded to
 #'   \code{randtests::turning.point.test} (e.g.
 #'   \code{alternative}).
-#' @return A list with \eqn{$method =
+#' @return A list with \verb{$method =
 #'   "randtests::turning.point.test"} and \code{$raw} (an
 #'   \code{htest} object).
 #' @examples
@@ -553,7 +553,7 @@ morie_randtests_turning_point <- function(x, ...) {
 #' @param ... Further arguments forwarded to
 #'   \code{randtests::bartels.rank.test} (e.g.
 #'   \code{alternative}, \code{pvalue}).
-#' @return A list with \eqn{$method =
+#' @return A list with \verb{$method =
 #'   "randtests::bartels.rank.test"} and \code{$raw} (an
 #'   \code{htest} object).
 #' @examples
