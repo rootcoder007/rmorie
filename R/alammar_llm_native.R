@@ -127,6 +127,7 @@ morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
 #' @param Wq,Wk,Wv Lists of matrices.
 #' @param Wo Output projection.
 #' @param heads Head count.
+#' @return A list with `output`, `heads`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -183,6 +184,7 @@ morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
 #' @param Q_heads List of per-head query matrices.
 #' @param K_groups,V_groups Lists of shared K and V.
 #' @param n_query_heads,n_kv_groups Counts.
+#' @return A list with `output`, `group_assignment`, `kv_cache_ratio`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -266,6 +268,7 @@ morie_alammar_multi_query_attention <- function(Q_heads, K_shared,
 #' Sliding-window causal attention (Beltagy et al. 2020)
 #' @param Q,K,V One sequence's matrices.
 #' @param window_size W.
+#' @return A list with `output`, `attention`, `window`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -299,6 +302,7 @@ morie_alammar_sliding_window_attention <- function(Q, K, V, window_size) {
 #' KV-cache append plus one attention row (Alammar Ch 3)
 #' @param K_cache,V_cache Existing caches or NULL.
 #' @param k_new,v_new,q_new Single-row matrices.
+#' @return A list with `output`, `attention`, `K_cache`, `V_cache`, `cache_length`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -338,6 +342,7 @@ morie_alammar_kv_cache_lookup <- function(K_cache, V_cache, k_new, v_new,
 #' @param h_cls Hidden vector.
 #' @param W_cls Weight matrix.
 #' @param b Bias.
+#' @return A list with `logits`, `probabilities`, `predicted_class`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_alammar_classification_head(h_cls = 5L, W_cls = 5L, b = 5L)
@@ -403,6 +408,7 @@ morie_alammar_ner_token_head <- function(h_tokens, W, b, tags = NULL) {
 #' Token lookup, masked pooling, contextual extraction (Alammar Ch 2/8)
 #' @param ids 0-based token ids.
 #' @param E_tok V x d embedding table.
+#' @return A list with `embeddings`, `estimate`, `vocab_size`, `dim`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -508,6 +514,7 @@ morie_alammar_contextualized_embedding <- function(layer_outputs,
 #' @param patch_size P.
 #' @param E (P^2 x d) projection.
 #' @param cls_token,E_pos Optional class token and positional table.
+#' @return A list with `sequence`, `n_patches`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' img <- matrix(0:15, 4, 4, byrow = TRUE)
@@ -573,6 +580,7 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
 #' @param a,b Row-matched embedding matrices.
 #' @param y_true Cosine
 #'   targets in \[-1, 1\].
+#' @return A list with `estimate`, `losses`, `similarities`, `n`, `method`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -784,6 +792,7 @@ morie_alammar_openclip_contrastive <- function(I_emb, T_emb, tau = 0.07) {
 
 #' Skip-gram negative sampling and the Bradley-Terry reward loss
 #' @param center_vec,context_vec,negative_vecs Word vectors.
+#' @return A list with `estimate`, `positive_logsig`, `negative_logsigs`, `k`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_alammar_negative_sampling_skipgram(center_vec = 5L, context_vec = 5L,
@@ -839,6 +848,7 @@ morie_alammar_reward_model_bt <- function(scores_w, scores_l) {
 #' Retrieval metrics: MRR, recall@k, NDCG@k, MTEB aggregation
 #' @param rankings List of ranked id vectors.
 #' @param relevant_indices List of relevant-id vectors.
+#' @return A list with `estimate`, `reciprocal_ranks`, `queries_missed`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -958,6 +968,7 @@ morie_alammar_mteb_benchmark_score <- function(task_scores, category_map) {
 
 #' Greedy and sampled decoding (Alammar Ch 6)
 #' @param logits Matrix, one row per step.
+#' @return A list with `tokens`, `had_ties`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1012,6 +1023,7 @@ morie_alammar_sampling_decoding <- function(logits, seed = 0) {
 
 #' BoW, c-TF-IDF, BIO tagging, vocabulary overlap (Alammar Ch 1-5)
 #' @param tokens,vocab Character vectors.
+#' @return A list with `bow_vector`, `oov_count`, `estimate`, `vocab_size`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1152,6 +1164,7 @@ morie_alammar_tokenizer_vocab_overlap <- function(vocab_a, vocab_b) {
 #' @param text Input string.
 #' @param separators Tier list.
 #' @param target_size,overlap Sizes.
+#' @return A list with `chunks`, `n_chunks`, `max_chunk_length`, `overlap`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_alammar_recursive_chunking(text = 5L)
@@ -1354,6 +1367,7 @@ morie_alammar_instruction_data_template <- function(records,
 #' @param text Input.
 #' @param vocab Vocabulary incl. UNK and specials.
 #' @param unk_token,lowercase,specials Pipeline settings.
+#' @return A list with `tokens`, `n_unk`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' vocab <- c("[CLS]", "[SEP]", "[UNK]", "the", "cat", "sat")
@@ -1438,6 +1452,7 @@ morie_alammar_tokenization_pipeline <- function(text, vocab,
 #'
 #' @param X Point matrix.
 #' @param min_cluster_size,min_samples Sizes.
+#' @return A list with `labels`, `n_clusters`, `n_noise`, `core_distances`, `cut_threshold`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1526,6 +1541,7 @@ morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
 #' simplified: exact k-NN, bisected sigma, full-batch descent)
 #' @param X Points.
 #' @param n_neighbors,min_dist,d_out,n_steps,learning_rate,seed Settings.
+#' @return A list with `embedding`, `objective_initial`, `objective_final`, `objective_decreased`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1617,6 +1633,7 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
 #' @param documents List of token vectors.
 #' @param n_topics K.
 #' @param alpha,beta,n_iter,seed Settings.
+#' @return A list with `theta`, `phi`, `vocabulary`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_alammar_lda_topic_distribution(documents = c(1, 2, 3, 4, 5, 6, 7, 8), n_topics = 5L)
@@ -1693,6 +1710,7 @@ morie_alammar_lda_topic_distribution <- function(documents, n_topics,
 #' Softmax head on frozen embeddings; SetFit pair generation
 #' @param embeddings,labels Data (labels 0-based, every class present).
 #' @param n_steps,learning_rate,l2 Training settings.
+#' @return A list with `weights`, `bias`, `train_accuracy`, `cross_entropy`, `predictions`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' if (morie_crypto_sodium_available()) {
@@ -1798,6 +1816,7 @@ morie_alammar_setfit_twostep <- function(embeddings, labels) {
 #' @param index List with points, neighbors
 #'   (0-based lists), entry (0-based).
 #' @param ef_search Beam budget.
+#' @return A list with `nearest`, `distance`, `greedy_path`, `candidates_examined`, `exact_nearest`, `found_exact`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' pts <- rbind(c(0, 0), c(1, 0), c(2, 0), c(3, 0), c(4, 0), c(5,
@@ -1875,6 +1894,7 @@ morie_alammar_ann_search <- function(query_vec, index, ef_search = 8) {
 #' @param candidate_labels Labels.
 #' @param nli_model function(premise, hypothesis) -> score.
 #' @param hypothesis_template Format string with one %s.
+#' @return A list with `probabilities`, `predicted_label`, `entailment_scores`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' h <- morie_alammar_classification_head(c(1, 2), rbind(c(1, 0),
@@ -2054,6 +2074,7 @@ morie_alammar_output_verification <- function(response, criteria,
 #' @param prompts List of
 #'   function(previous_output, original_input) -> prompt.
 #' @param model function(prompt) -> text.
+#' @return A list with `final_output`, `steps`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' if (morie_crypto_sodium_available()) {
@@ -2206,6 +2227,7 @@ morie_alammar_react_agent_loop <- function(query, tools, model,
 #' @param projector Matrix (d_llm x d_vis) or function.
 #' @param llm function(projected, prompt) -> caption.
 #' @param prompt Text prompt.
+#' @return A list with `caption`, `projected`, `feature_dim`, `projected_dim`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_alammar_image_captioning("img", function(im) c(1, 2), rbind(c(1,
@@ -2421,6 +2443,7 @@ morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
 #' @param embeddings One row
 #'   per document.
 #' @param min_cluster_size Cluster floor.
+#' @return A list with `labels`, `reduced`, `topic_top_word`, `n_topics`, `vocabulary`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

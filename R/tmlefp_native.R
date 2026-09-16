@@ -284,11 +284,13 @@ morie_tmlefp <- function(y, treatment, pscore,
        method = "optimal-overlap subpopulation and weights (Crump, Hotz, Imbens & Mitnik 2009)")
 }
 
+#' @rdname morie_tmlefp
 #' Compact alias per ledger/NAMING.md
 #' @export
 #' @noRd
 morie_optimal_overlap <- morie_tmlefp
 
+#' @rdname morie_tmlefp
 #' Name carried over from the generated stub this replaced
 #' @export
 #' @noRd

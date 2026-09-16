@@ -71,6 +71,18 @@
 #' @param a,b The two sequences.
 #' @param match,mismatch,gap The scoring.
 #' @return A list with the score and the two gapped sequences.
+#' @references Vaser, R., Sovic, I., Nagarajan, N. and Sikic, M. (2017) "Fast and
+#'       accurate de novo genome assembly from long uncorrected reads."
+#'       Genome Research 27(5), 737-746. doi:10.1101/gr.214270.116.
+#'     Lee, C., Grasso, C. and Sharlow, M.F. (2002) "Multiple sequence
+#'       alignment using partial order graphs." Bioinformatics 18(3),
+#'       452-464. doi:10.1093/bioinformatics/18.3.452.
+#'     Needleman, S.B. and Wunsch, C.D. (1970) "A general method applicable
+#'       to the search for similarities in the amino acid sequence of two
+#'       proteins." Journal of Molecular Biology 48(3), 443-453.
+#'     Wick, R.R., Judd, L.M. and Holt, K.E. (2019) "Performance of neural
+#'       network basecalling tools for Oxford Nanopore sequencing." Genome
+#'       Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 #' @export
 #' @examples
 #' morie_longrd_align("ACGTACGT", "ACGAACGT")
@@ -126,6 +138,18 @@ morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
 #'
 #' @param seq A sequence.
 #' @return A list of base and count pairs.
+#' @references Vaser, R., Sovic, I., Nagarajan, N. and Sikic, M. (2017) "Fast and
+#'       accurate de novo genome assembly from long uncorrected reads."
+#'       Genome Research 27(5), 737-746. doi:10.1101/gr.214270.116.
+#'     Lee, C., Grasso, C. and Sharlow, M.F. (2002) "Multiple sequence
+#'       alignment using partial order graphs." Bioinformatics 18(3),
+#'       452-464. doi:10.1093/bioinformatics/18.3.452.
+#'     Needleman, S.B. and Wunsch, C.D. (1970) "A general method applicable
+#'       to the search for similarities in the amino acid sequence of two
+#'       proteins." Journal of Molecular Biology 48(3), 443-453.
+#'     Wick, R.R., Judd, L.M. and Holt, K.E. (2019) "Performance of neural
+#'       network basecalling tools for Oxford Nanopore sequencing." Genome
+#'       Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 #' @export
 #' @examples
 #' morie_longrd_rle("AAACCGTT")
@@ -149,6 +173,18 @@ morie_longrd_rle <- function(seq) {
 #'
 #' @param runs A list of base and count pairs.
 #' @return A character scalar.
+#' @references Vaser, R., Sovic, I., Nagarajan, N. and Sikic, M. (2017) "Fast and
+#'       accurate de novo genome assembly from long uncorrected reads."
+#'       Genome Research 27(5), 737-746. doi:10.1101/gr.214270.116.
+#'     Lee, C., Grasso, C. and Sharlow, M.F. (2002) "Multiple sequence
+#'       alignment using partial order graphs." Bioinformatics 18(3),
+#'       452-464. doi:10.1093/bioinformatics/18.3.452.
+#'     Needleman, S.B. and Wunsch, C.D. (1970) "A general method applicable
+#'       to the search for similarities in the amino acid sequence of two
+#'       proteins." Journal of Molecular Biology 48(3), 443-453.
+#'     Wick, R.R., Judd, L.M. and Holt, K.E. (2019) "Performance of neural
+#'       network basecalling tools for Oxford Nanopore sequencing." Genome
+#'       Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -173,6 +209,18 @@ morie_longrd_unrle <- function(runs) {
 #' @param reads The reads.
 #' @param match,mismatch,gap The scoring.
 #' @return A list with the columns and the insertion counts.
+#' @references Vaser, R., Sovic, I., Nagarajan, N. and Sikic, M. (2017) "Fast and
+#'       accurate de novo genome assembly from long uncorrected reads."
+#'       Genome Research 27(5), 737-746. doi:10.1101/gr.214270.116.
+#'     Lee, C., Grasso, C. and Sharlow, M.F. (2002) "Multiple sequence
+#'       alignment using partial order graphs." Bioinformatics 18(3),
+#'       452-464. doi:10.1093/bioinformatics/18.3.452.
+#'     Needleman, S.B. and Wunsch, C.D. (1970) "A general method applicable
+#'       to the search for similarities in the amino acid sequence of two
+#'       proteins." Journal of Molecular Biology 48(3), 443-453.
+#'     Wick, R.R., Judd, L.M. and Holt, K.E. (2019) "Performance of neural
+#'       network basecalling tools for Oxford Nanopore sequencing." Genome
+#'       Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 #' @export
 #' @examples
 #' TRUTH <- "ACGTTTTGACCA"
@@ -254,6 +302,8 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
 
 #' Progressive partial-order consensus: the heaviest path
 #'
+#' The first read is the seed. Each later read is aligned to the current consensus and every aligned column votes; the consensus is recomputed as the column-wise majority, which for a partial order graph built this way IS the heaviest path, because every node's weight is the number of reads passing through it. Progressive construction depends on the order the reads arrive. That is a property of the method and not an accident, so the reads are sorted first by default -- which does not make the answer order-INDEPENDENT, it makes it a function of the SET rather than of the sequence, and those are different guarantees.
+#'
 #' The first read is the seed. Each later read is aligned to the current
 #' consensus and every aligned column votes; the consensus is recomputed
 #' as the column-wise majority, which for a partial order graph built
@@ -270,6 +320,18 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
 #' @param match,mismatch,gap The scoring.
 #' @param sort_reads Whether to sort first.
 #' @return The consensus sequence.
+#' @references Vaser, R., Sovic, I., Nagarajan, N. and Sikic, M. (2017) "Fast and
+#'       accurate de novo genome assembly from long uncorrected reads."
+#'       Genome Research 27(5), 737-746. doi:10.1101/gr.214270.116.
+#'     Lee, C., Grasso, C. and Sharlow, M.F. (2002) "Multiple sequence
+#'       alignment using partial order graphs." Bioinformatics 18(3),
+#'       452-464. doi:10.1093/bioinformatics/18.3.452.
+#'     Needleman, S.B. and Wunsch, C.D. (1970) "A general method applicable
+#'       to the search for similarities in the amino acid sequence of two
+#'       proteins." Journal of Molecular Biology 48(3), 443-453.
+#'     Wick, R.R., Judd, L.M. and Holt, K.E. (2019) "Performance of neural
+#'       network basecalling tools for Oxford Nanopore sequencing." Genome
+#'       Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -310,6 +372,18 @@ morie_longrd_poa <- function(reads, match = 1, mismatch = -1, gap = -2,
 #' @return A list with the polished sequence, the per-position depth and
 #'   support, the run-length view of both sequences, and how much
 #'   changed.
+#' @references Vaser, R., Sovic, I., Nagarajan, N. and Sikic, M. (2017) "Fast and
+#'       accurate de novo genome assembly from long uncorrected reads."
+#'       Genome Research 27(5), 737-746. doi:10.1101/gr.214270.116.
+#'     Lee, C., Grasso, C. and Sharlow, M.F. (2002) "Multiple sequence
+#'       alignment using partial order graphs." Bioinformatics 18(3),
+#'       452-464. doi:10.1093/bioinformatics/18.3.452.
+#'     Needleman, S.B. and Wunsch, C.D. (1970) "A general method applicable
+#'       to the search for similarities in the amino acid sequence of two
+#'       proteins." Journal of Molecular Biology 48(3), 443-453.
+#'     Wick, R.R., Judd, L.M. and Holt, K.E. (2019) "Performance of neural
+#'       network basecalling tools for Oxford Nanopore sequencing." Genome
+#'       Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 #' @export
 #' @examples
 #' morie_longrd(assembly = 5L, reads = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -386,6 +460,18 @@ morie_longrd <- function(assembly, reads, method = "pileup",
 #' One-line summary of the longrd module
 #'
 #' @return A character scalar.
+#' @references Vaser, R., Sovic, I., Nagarajan, N. and Sikic, M. (2017) "Fast and
+#'       accurate de novo genome assembly from long uncorrected reads."
+#'       Genome Research 27(5), 737-746. doi:10.1101/gr.214270.116.
+#'     Lee, C., Grasso, C. and Sharlow, M.F. (2002) "Multiple sequence
+#'       alignment using partial order graphs." Bioinformatics 18(3),
+#'       452-464. doi:10.1093/bioinformatics/18.3.452.
+#'     Needleman, S.B. and Wunsch, C.D. (1970) "A general method applicable
+#'       to the search for similarities in the amino acid sequence of two
+#'       proteins." Journal of Molecular Biology 48(3), 443-453.
+#'     Wick, R.R., Judd, L.M. and Holt, K.E. (2019) "Performance of neural
+#'       network basecalling tools for Oxford Nanopore sequencing." Genome
+#'       Biology 20, 129. doi:10.1186/s13059-019-1727-y.
 #' @export
 #' @examples
 #' morie_longrd_cheatsheet()

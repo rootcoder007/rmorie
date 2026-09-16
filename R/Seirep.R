@@ -7,7 +7,7 @@
 #'
 #' The exposed class E holds individuals who are infected but not yet
 #' infectious; they progress at rate sigma, so the mean latent period is
-#' \code{1 / sigma}.  The basic reproduction number is \code{R0 = beta /
+#' \code{1 / sigma}.  The basic reproduction number is \eqn{R0 = beta /
 #' gamma}: the latent stage delays but does not alter the number of
 #' secondary cases, because every exposed individual eventually becomes
 #' infectious.  Population \code{N = S + E + I + R} is conserved.

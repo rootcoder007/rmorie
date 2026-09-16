@@ -73,6 +73,21 @@
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
 #' @return A list with \code{mode}, \code{precision}, \code{sd}, \code{iterations},
 #' \code{log_norm}, \code{note}.
+#' @references ----------
+#'   Rue, H., Martino, S. & Chopin, N. (2009) "Approximate Bayesian
+#'   inference for latent Gaussian models by using integrated nested
+#'   Laplace approximations", Journal of the Royal Statistical Society:
+#'   Series B (Statistical Methodology) 71(2), 319-392,
+#'   doi:10.1111/j.1467-9868.2008.00700.x. [PDF supplied by Vee.]
+#'   Tierney, L. & Kadane, J. B. (1986) "Accurate Approximations for
+#'   Posterior Moments and Marginal Densities", Journal of the American
+#'   Statistical Association 81(393), 82-86,
+#'   doi:10.1080/01621459.1986.10478240. The Laplace approximation
+#'   being nested.
+#'   Rue, H. & Held, L. (2005) Gaussian Markov Random Fields: Theory
+#'   and Applications, Chapman & Hall/CRC,
+#'   doi:10.1201/9780203492024. The sparse GMRF computations the
+#'   method rests on.
 #' @export
 #' @examples
 #' ga <- gaussian_approximation(
@@ -124,6 +139,21 @@ gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
 #' @param third_derivative Coerced to numeric by the body, with \code{as.numeric}.
 #' @param precision Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{skewness}, \code{gaussian_adequate}, \code{note}.
+#' @references ----------
+#'   Rue, H., Martino, S. & Chopin, N. (2009) "Approximate Bayesian
+#'   inference for latent Gaussian models by using integrated nested
+#'   Laplace approximations", Journal of the Royal Statistical Society:
+#'   Series B (Statistical Methodology) 71(2), 319-392,
+#'   doi:10.1111/j.1467-9868.2008.00700.x. [PDF supplied by Vee.]
+#'   Tierney, L. & Kadane, J. B. (1986) "Accurate Approximations for
+#'   Posterior Moments and Marginal Densities", Journal of the American
+#'   Statistical Association 81(393), 82-86,
+#'   doi:10.1080/01621459.1986.10478240. The Laplace approximation
+#'   being nested.
+#'   Rue, H. & Held, L. (2005) Gaussian Markov Random Fields: Theory
+#'   and Applications, Chapman & Hall/CRC,
+#'   doi:10.1201/9780203492024. The sparse GMRF computations the
+#'   method rests on.
 #' @export
 #' @examples
 #' skewness_correction(third_derivative = c(1, 2, 3, 4, 5, 6, 7, 8), precision = 5L)
@@ -151,6 +181,21 @@ skewness_correction <- function(third_derivative, precision) {
 #' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @param theta Passed to \code{log_joint}.
 #' @return A list with \code{x}, \code{density}, \code{mean}, \code{sd}, \code{log_scale}.
+#' @references ----------
+#'   Rue, H., Martino, S. & Chopin, N. (2009) "Approximate Bayesian
+#'   inference for latent Gaussian models by using integrated nested
+#'   Laplace approximations", Journal of the Royal Statistical Society:
+#'   Series B (Statistical Methodology) 71(2), 319-392,
+#'   doi:10.1111/j.1467-9868.2008.00700.x. [PDF supplied by Vee.]
+#'   Tierney, L. & Kadane, J. B. (1986) "Accurate Approximations for
+#'   Posterior Moments and Marginal Densities", Journal of the American
+#'   Statistical Association 81(393), 82-86,
+#'   doi:10.1080/01621459.1986.10478240. The Laplace approximation
+#'   being nested.
+#'   Rue, H. & Held, L. (2005) Gaussian Markov Random Fields: Theory
+#'   and Applications, Chapman & Hall/CRC,
+#'   doi:10.1201/9780203492024. The sparse GMRF computations the
+#'   method rests on.
 #' @export
 #' @examples
 #' lm <- laplace_marginal(
@@ -205,6 +250,21 @@ laplace_marginal <- function(log_joint, x_grid, theta) {
 #' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{points}, \code{n_points}, \code{dim}, \code{cost_scaling}, \code{note}.
+#' @references ----------
+#'   Rue, H., Martino, S. & Chopin, N. (2009) "Approximate Bayesian
+#'   inference for latent Gaussian models by using integrated nested
+#'   Laplace approximations", Journal of the Royal Statistical Society:
+#'   Series B (Statistical Methodology) 71(2), 319-392,
+#'   doi:10.1111/j.1467-9868.2008.00700.x. [PDF supplied by Vee.]
+#'   Tierney, L. & Kadane, J. B. (1986) "Accurate Approximations for
+#'   Posterior Moments and Marginal Densities", Journal of the American
+#'   Statistical Association 81(393), 82-86,
+#'   doi:10.1080/01621459.1986.10478240. The Laplace approximation
+#'   being nested.
+#'   Rue, H. & Held, L. (2005) Gaussian Markov Random Fields: Theory
+#'   and Applications, Chapman & Hall/CRC,
+#'   doi:10.1201/9780203492024. The sparse GMRF computations the
+#'   method rests on.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -253,6 +313,21 @@ hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
 #' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{mean}, \code{sd}, \code{density}, \code{x},
 #' \code{theta_weights}, \code{n_theta}, \code{method}, \code{note}.
+#' @references ----------
+#'   Rue, H., Martino, S. & Chopin, N. (2009) "Approximate Bayesian
+#'   inference for latent Gaussian models by using integrated nested
+#'   Laplace approximations", Journal of the Royal Statistical Society:
+#'   Series B (Statistical Methodology) 71(2), 319-392,
+#'   doi:10.1111/j.1467-9868.2008.00700.x. [PDF supplied by Vee.]
+#'   Tierney, L. & Kadane, J. B. (1986) "Accurate Approximations for
+#'   Posterior Moments and Marginal Densities", Journal of the American
+#'   Statistical Association 81(393), 82-86,
+#'   doi:10.1080/01621459.1986.10478240. The Laplace approximation
+#'   being nested.
+#'   Rue, H. & Held, L. (2005) Gaussian Markov Random Fields: Theory
+#'   and Applications, Chapman & Hall/CRC,
+#'   doi:10.1201/9780203492024. The sparse GMRF computations the
+#'   method rests on.
 #' @export
 #' @examples
 #' xs <- seq(-4, 6, by = 0.1)

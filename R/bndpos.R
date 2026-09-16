@@ -7,7 +7,7 @@
 #' \code{(y, D)} pair rather than only the pairs in the arm of interest, so
 #' they stay informative even when one arm is nearly empty.
 #'
-#' Formula: \code{upper = [E(y | D = 1) P(D = 1) + y_max P(D = 0)] -
+#' Formula: \eqn{upper = [E(y | D = 1) P(D = 1) + y_max P(D = 0)] -
 #' [E(y | D = 0) P(D = 0) + y_min P(D = 1)]}, \code{lower = 0}.
 #'
 #' @param y Observed outcome.

@@ -276,6 +276,7 @@ morie_tmlcps <- function(y, A, X, a_grid = NULL, fit = "kernel",
                        "Theorem 1 and Sec. 3.2"))
 }
 
+#' @rdname morie_tmlcps
 #' Compact alias per ledger/NAMING.md
 #' @export
 #' @noRd

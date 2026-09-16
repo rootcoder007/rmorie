@@ -438,7 +438,7 @@ cross_validate <- function(fit_fn, predict_fn, X, y,
 #' supported for backward compatibility:
 #'
 #' \itemize{
-#'   \item \strong{Legacy stub form:} \code{nested_cross_validate(tune_fn,
+#'   \item \strong{Legacy stub form:} \eqn{nested_cross_validate(tune_fn,
 #'         predict_fn, X, y, outer_folds, scoring, random_state)} where
 #'         \code{tune_fn(X, y)} returns a fitted model (no grid argument).
 #'         In this mode no inner search is run.

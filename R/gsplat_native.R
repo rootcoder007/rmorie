@@ -175,8 +175,10 @@ adaptive_density_control <- function(gradients, scales, opacities,
 }
 
 # Compact aliases
+#' @rdname alpha_composite
 #' @export
 gaussiansplatting <- alpha_composite
+#' @rdname alpha_composite
 #' @export
 gaussian_splatting <- alpha_composite
 

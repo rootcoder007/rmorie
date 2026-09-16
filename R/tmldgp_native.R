@@ -74,7 +74,7 @@
 #' @param y Outcome vector.
 #' @param lam Regularisation strength.
 #' @param iters Maximum coordinate-descent passes.
-#' @tol Convergence tolerance on the maximum coordinate update.
+#' @param tol Convergence tolerance on the maximum coordinate update.
 #' @param tol See Usage.
 #' @return A list with \code{beta}, \code{intercept}, \code{support},
 #'   \code{lambda}.
@@ -270,11 +270,13 @@ morie_tmldgp <- function(y, D, X, penalty = 0.05, iters = 100) {
                      "score equation"))
 }
 
+#' @rdname morie_tmldgp
 #' Compact alias per ledger/NAMING.md
 #' @export
 #' @noRd
 morie_penalisedtmle <- morie_tmldgp
 
+#' @rdname morie_tmldgp
 #' Public alias resolved by fn/_lazy_map.json
 #' @export
 #' @noRd

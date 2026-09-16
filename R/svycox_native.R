@@ -485,6 +485,19 @@
 #' @param cluster Passed to \code{.svycox_svycoxph}.
 #' @param ... Passed through.
 #' @return The value of \code{.svycox_svycoxph}.
+#' @references ----------
+#'   Binder, D. A. (1992) "Fitting Cox\'s proportional hazards models from
+#'   survey data", *Biometrika* 79(1), 139-147,
+#'   doi:10.1093/biomet/79.1.139. The weighted estimating equation above,
+#'   the interpretation of \eqn{\hat\beta} as a finite-population census
+#'   parameter, and the sandwich variance with the design-based variance
+#'   of the weighted score residuals in the middle.
+#'   
+#'   Cox, D. R. (1972) "Regression models and life-tables", *Journal of
+#'   the Royal Statistical Society: Series B* 34(2), 187-202,
+#'   doi:10.1111/j.2517-6161.1972.tb00899.x, for the partial likelihood
+#'   being weighted; see :mod:`morie.fn.coxph` for the unweighted fit this
+#'   must reduce to.
 #' @export
 #' @examples
 #' morie_svycox(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5),

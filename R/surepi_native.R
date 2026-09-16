@@ -103,6 +103,16 @@
 #' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{3}.
 #' @param sigma_floor Passed to \code{surepi_ears_detect}. Defaults to \code{1}.
 #' @return The value of \code{surepi_ears_detect}.
+#' @references ----------
+#'   Hutwagner, L., Thompson, W., Seeman, G. M. & Treadwell, T. (2003)
+#'   "The Bioterrorism Preparedness and Response Early Aberration
+#'   Reporting System (EARS)", Journal of Urban Health: Bulletin of the
+#'   New York Academy of Medicine 80(2, Supplement 1), i89-i96.
+#'   
+#'   Hutwagner, L. C., Maloney, E. K., Bean, N. H., Slutsker, L. & Martin,
+#'   S. M. (1997) "Using laboratory-based surveillance data for
+#'   prevention: an algorithm for detecting Salmonella outbreaks",
+#'   Emerging Infectious Diseases 3(3), 395-400.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -123,6 +133,16 @@ surepi_c1_mild <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 #' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{3}.
 #' @param sigma_floor Passed to \code{surepi_ears_detect}. Defaults to \code{1}.
 #' @return The value of \code{surepi_ears_detect}.
+#' @references ----------
+#'   Hutwagner, L., Thompson, W., Seeman, G. M. & Treadwell, T. (2003)
+#'   "The Bioterrorism Preparedness and Response Early Aberration
+#'   Reporting System (EARS)", Journal of Urban Health: Bulletin of the
+#'   New York Academy of Medicine 80(2, Supplement 1), i89-i96.
+#'   
+#'   Hutwagner, L. C., Maloney, E. K., Bean, N. H., Slutsker, L. & Martin,
+#'   S. M. (1997) "Using laboratory-based surveillance data for
+#'   prevention: an algorithm for detecting Salmonella outbreaks",
+#'   Emerging Infectious Diseases 3(3), 395-400.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -143,6 +163,16 @@ surepi_c2_medium <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 #' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{2}.
 #' @param sigma_floor Passed to \code{surepi_ears_detect}. Defaults to \code{1}.
 #' @return The value of \code{surepi_ears_detect}.
+#' @references ----------
+#'   Hutwagner, L., Thompson, W., Seeman, G. M. & Treadwell, T. (2003)
+#'   "The Bioterrorism Preparedness and Response Early Aberration
+#'   Reporting System (EARS)", Journal of Urban Health: Bulletin of the
+#'   New York Academy of Medicine 80(2, Supplement 1), i89-i96.
+#'   
+#'   Hutwagner, L. C., Maloney, E. K., Bean, N. H., Slutsker, L. & Martin,
+#'   S. M. (1997) "Using laboratory-based surveillance data for
+#'   prevention: an algorithm for detecting Salmonella outbreaks",
+#'   Emerging Infectious Diseases 3(3), 395-400.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -167,6 +197,16 @@ surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
 #' @return A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged},
 #' \code{method}, \code{threshold}, \code{baseline_lag}, \code{baseline_width},
 #' \code{sigma_floor}, \code{n}, \code{n_evaluable}, \code{reference}, \code{caveat}.
+#' @references ----------
+#'   Hutwagner, L., Thompson, W., Seeman, G. M. & Treadwell, T. (2003)
+#'   "The Bioterrorism Preparedness and Response Early Aberration
+#'   Reporting System (EARS)", Journal of Urban Health: Bulletin of the
+#'   New York Academy of Medicine 80(2, Supplement 1), i89-i96.
+#'   
+#'   Hutwagner, L. C., Maloney, E. K., Bean, N. H., Slutsker, L. & Martin,
+#'   S. M. (1997) "Using laboratory-based surveillance data for
+#'   prevention: an algorithm for detecting Salmonella outbreaks",
+#'   Emerging Infectious Diseases 3(3), 395-400.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -244,6 +284,16 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
 #' @param min_count Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @return A list with \code{cusum}, \code{flag}, \code{estimate}, \code{n_flagged},
 #' \code{decision}, \code{k}, \code{min_count}, \code{method}.
+#' @references ----------
+#'   Hutwagner, L., Thompson, W., Seeman, G. M. & Treadwell, T. (2003)
+#'   "The Bioterrorism Preparedness and Response Early Aberration
+#'   Reporting System (EARS)", Journal of Urban Health: Bulletin of the
+#'   New York Academy of Medicine 80(2, Supplement 1), i89-i96.
+#'   
+#'   Hutwagner, L. C., Maloney, E. K., Bean, N. H., Slutsker, L. & Martin,
+#'   S. M. (1997) "Using laboratory-based surveillance data for
+#'   prevention: an algorithm for detecting Salmonella outbreaks",
+#'   Emerging Infectious Diseases 3(3), 395-400.
 #' @export
 #' @examples
 #' surepi_salmonella_cusum(counts = c(1, 2, 3, 4, 5, 6, 7, 8), mu0 = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -307,6 +357,16 @@ surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
 #' @param multiplier Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @return A list with \code{smoothed}, \code{baseline}, \code{sigma}, \code{threshold},
 #' \code{flag}, \code{current}, \code{method}.
+#' @references ----------
+#'   Hutwagner, L., Thompson, W., Seeman, G. M. & Treadwell, T. (2003)
+#'   "The Bioterrorism Preparedness and Response Early Aberration
+#'   Reporting System (EARS)", Journal of Urban Health: Bulletin of the
+#'   New York Academy of Medicine 80(2, Supplement 1), i89-i96.
+#'   
+#'   Hutwagner, L. C., Maloney, E. K., Bean, N. H., Slutsker, L. & Martin,
+#'   S. M. (1997) "Using laboratory-based surveillance data for
+#'   prevention: an algorithm for detecting Salmonella outbreaks",
+#'   Emerging Infectious Diseases 3(3), 395-400.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -392,6 +452,16 @@ surepi_compound_smoothing <- function(values, current,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Hutwagner, L., Thompson, W., Seeman, G. M. & Treadwell, T. (2003)
+#'   "The Bioterrorism Preparedness and Response Early Aberration
+#'   Reporting System (EARS)", Journal of Urban Health: Bulletin of the
+#'   New York Academy of Medicine 80(2, Supplement 1), i89-i96.
+#'   
+#'   Hutwagner, L. C., Maloney, E. K., Bean, N. H., Slutsker, L. & Martin,
+#'   S. M. (1997) "Using laboratory-based surveillance data for
+#'   prevention: an algorithm for detecting Salmonella outbreaks",
+#'   Emerging Infectious Diseases 3(3), 395-400.
 #' @export
 #' @examples
 #' surepi_cheatsheet()

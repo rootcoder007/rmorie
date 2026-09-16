@@ -5,7 +5,7 @@
 #' @param x Numeric univariate series.
 #' @param period Seasonal period (pass 0 to omit). Default 12.
 #' @param trend Trend specification, "local level" or "local linear".
-#' @return Named list with \code{trend, seasonal, irregular, loglik, n,
+#' @return Named list with \eqn{trend, seasonal, irregular, loglik, n,
 #'   period, method}.
 #' @examples
 #' set.seed(1)

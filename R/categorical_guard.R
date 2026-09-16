@@ -227,6 +227,7 @@ morie_audit_categories <- function(data, cols = NULL) {
 #'
 #' @param x A \code{morie_category_audit} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' \donttest{
 #' df <- data.frame(

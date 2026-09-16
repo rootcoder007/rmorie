@@ -109,6 +109,16 @@ CV_SCHEMES <- c("kfold", "loo")
 #' @param block_size Coerced to integer by the body, with \code{as.integer}. Defaults to
 #' \code{1000}.
 #' @return The value of \code{blocks}, as built in the body.
+#' @references Mbatchou, J., et al. (2021) "Computationally efficient whole-genome
+#'   regression for quantitative and binary traits", Nature Genetics
+#'   53(7), 1097-1103, doi:10.1038/s41588-021-00870-7.
+#'   
+#'   Hoerl, A. E. & Kennard, R. W. (1970) "Ridge Regression: Biased
+#'   Estimation for Nonorthogonal Problems", Technometrics 12(1), 55-67.
+#'   
+#'   Yang, J., et al. (2014) "Advantages and pitfalls in the application
+#'   of mixed-model association methods", Nature Genetics 46(2),
+#'   100-106.
 #' @export
 #' @examples
 #' make_blocks(n_markers = 5L)
@@ -158,6 +168,16 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
 #' @param y A matrix; passed to \code{crossprod}.
 #' @param lam Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{fitted}, \code{lam}.
+#' @references Mbatchou, J., et al. (2021) "Computationally efficient whole-genome
+#'   regression for quantitative and binary traits", Nature Genetics
+#'   53(7), 1097-1103, doi:10.1038/s41588-021-00870-7.
+#'   
+#'   Hoerl, A. E. & Kennard, R. W. (1970) "Ridge Regression: Biased
+#'   Estimation for Nonorthogonal Problems", Technometrics 12(1), 55-67.
+#'   
+#'   Yang, J., et al. (2014) "Advantages and pitfalls in the application
+#'   of mixed-model association methods", Nature Genetics 46(2),
+#'   100-106.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -197,6 +217,16 @@ ridge_fit <- function(X, y, lam) {
 #' @param blocks See Usage.
 #' @param n_ridge Passed to \code{.regmlm_lambda_grid}. Defaults to \code{5}.
 #' @return A list with \code{predictors}, \code{meta}, \code{n_predictors}, \code{reduction}.
+#' @references Mbatchou, J., et al. (2021) "Computationally efficient whole-genome
+#'   regression for quantitative and binary traits", Nature Genetics
+#'   53(7), 1097-1103, doi:10.1038/s41588-021-00870-7.
+#'   
+#'   Hoerl, A. E. & Kennard, R. W. (1970) "Ridge Regression: Biased
+#'   Estimation for Nonorthogonal Problems", Technometrics 12(1), 55-67.
+#'   
+#'   Yang, J., et al. (2014) "Advantages and pitfalls in the application
+#'   of mixed-model association methods", Nature Genetics 46(2),
+#'   100-106.
 #' @export
 #' @examples
 #' set.seed(2)
@@ -254,6 +284,16 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
 #' @param lam Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv},
 #' \code{lam}, \code{n_predictors}.
+#' @references Mbatchou, J., et al. (2021) "Computationally efficient whole-genome
+#'   regression for quantitative and binary traits", Nature Genetics
+#'   53(7), 1097-1103, doi:10.1038/s41588-021-00870-7.
+#'   
+#'   Hoerl, A. E. & Kennard, R. W. (1970) "Ridge Regression: Biased
+#'   Estimation for Nonorthogonal Problems", Technometrics 12(1), 55-67.
+#'   
+#'   Yang, J., et al. (2014) "Advantages and pitfalls in the application
+#'   of mixed-model association methods", Nature Genetics 46(2),
+#'   100-106.
 #' @export
 #' @examples
 #' level1_stack(preds = list(a = 1, b = 2), y = 5L)
@@ -306,6 +346,16 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 #' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with
 #' \code{as.integer}.
 #' @return A list with \code{loco}, \code{chromosomes}, \code{note}.
+#' @references Mbatchou, J., et al. (2021) "Computationally efficient whole-genome
+#'   regression for quantitative and binary traits", Nature Genetics
+#'   53(7), 1097-1103, doi:10.1038/s41588-021-00870-7.
+#'   
+#'   Hoerl, A. E. & Kennard, R. W. (1970) "Ridge Regression: Biased
+#'   Estimation for Nonorthogonal Problems", Technometrics 12(1), 55-67.
+#'   
+#'   Yang, J., et al. (2014) "Advantages and pitfalls in the application
+#'   of mixed-model association methods", Nature Genetics 46(2),
+#'   100-106.
 #' @export
 #' @examples
 #' set.seed(2)
@@ -357,6 +407,16 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
 #' \code{as.numeric}.
 #' @param covariates A vector; its length is taken. Defaults to \code{list()}.
 #' @return A list with \code{beta}, \code{se}, \code{chisq}, \code{p_value}, \code{n}.
+#' @references Mbatchou, J., et al. (2021) "Computationally efficient whole-genome
+#'   regression for quantitative and binary traits", Nature Genetics
+#'   53(7), 1097-1103, doi:10.1038/s41588-021-00870-7.
+#'   
+#'   Hoerl, A. E. & Kennard, R. W. (1970) "Ridge Regression: Biased
+#'   Estimation for Nonorthogonal Problems", Technometrics 12(1), 55-67.
+#'   
+#'   Yang, J., et al. (2014) "Advantages and pitfalls in the application
+#'   of mixed-model association methods", Nature Genetics 46(2),
+#'   100-106.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -418,6 +478,16 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
 #' @return A list with \code{estimate}, \code{blocks}, \code{n_blocks}, \code{level0},
 #' \code{level1}, \code{loco}, \code{chromosomes}, \code{n_predictors}, \code{reduction},
 #' \code{method}.
+#' @references Mbatchou, J., et al. (2021) "Computationally efficient whole-genome
+#'   regression for quantitative and binary traits", Nature Genetics
+#'   53(7), 1097-1103, doi:10.1038/s41588-021-00870-7.
+#'   
+#'   Hoerl, A. E. & Kennard, R. W. (1970) "Ridge Regression: Biased
+#'   Estimation for Nonorthogonal Problems", Technometrics 12(1), 55-67.
+#'   
+#'   Yang, J., et al. (2014) "Advantages and pitfalls in the application
+#'   of mixed-model association methods", Nature Genetics 46(2),
+#'   100-106.
 #' @export
 #' @examples
 #' set.seed(2)

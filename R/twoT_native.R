@@ -118,6 +118,28 @@
 #' @param b Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
 #' @param normalise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{embedding}, \code{norm}, \code{normalised}.
+#' @references ----------
+#'   Yi, X., Yang, J., Hong, L., Cheng, D. Z., Heldt, L., Kumthekar, A.,
+#'   Zhao, Z., Wei, L. & Chi, E. (2019) "Sampling-Bias-Corrected Neural
+#'   Modeling for Large Corpus Item Recommendations", *Proceedings of the
+#'   13th ACM Conference on Recommender Systems (RecSys \'19)*, 269-277,
+#'   doi:10.1145/3298689.3346996. The two-tower architecture for
+#'   large-corpus item retrieval; batch softmax with in-batch negatives and
+#'   the resulting sampling bias toward popular items; the logQ correction
+#'   subtracting log p_j from the logit; the streaming frequency estimation
+#'   algorithm tracking the number of steps between successive hits of an
+#'   item and estimating the sampling probability as its reciprocal; and
+#'   normalisation of the embeddings with a temperature in the softmax.
+#'   
+#'   Bengio, Y. & Senecal, J.-S. (2008) "Adaptive Importance Sampling to
+#'   Accelerate Training of a Neural Probabilistic Language Model", *IEEE
+#'   Transactions on Neural Networks* 19(4), 713-722,
+#'   doi:10.1109/TNN.2007.912312. The sampled-softmax correction being
+#'   applied.
+#'   
+#'   Covington, P., Adams, J. & Sargin, E. (2016) "Deep Neural Networks
+#'   for YouTube Recommendations", *RecSys 2016*, 191-198,
+#'   doi:10.1145/2959100.2959190. The retrieval setting.
 #' @export
 #' @examples
 #' morie_twoT_tower_embedding(features = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -157,6 +179,28 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
 #' @param probabilities Passed to \code{.twoT_as_vec}.
 #' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{corrected}, \code{raw}, \code{shift}, \code{note}.
+#' @references ----------
+#'   Yi, X., Yang, J., Hong, L., Cheng, D. Z., Heldt, L., Kumthekar, A.,
+#'   Zhao, Z., Wei, L. & Chi, E. (2019) "Sampling-Bias-Corrected Neural
+#'   Modeling for Large Corpus Item Recommendations", *Proceedings of the
+#'   13th ACM Conference on Recommender Systems (RecSys \'19)*, 269-277,
+#'   doi:10.1145/3298689.3346996. The two-tower architecture for
+#'   large-corpus item retrieval; batch softmax with in-batch negatives and
+#'   the resulting sampling bias toward popular items; the logQ correction
+#'   subtracting log p_j from the logit; the streaming frequency estimation
+#'   algorithm tracking the number of steps between successive hits of an
+#'   item and estimating the sampling probability as its reciprocal; and
+#'   normalisation of the embeddings with a temperature in the softmax.
+#'   
+#'   Bengio, Y. & Senecal, J.-S. (2008) "Adaptive Importance Sampling to
+#'   Accelerate Training of a Neural Probabilistic Language Model", *IEEE
+#'   Transactions on Neural Networks* 19(4), 713-722,
+#'   doi:10.1109/TNN.2007.912312. The sampled-softmax correction being
+#'   applied.
+#'   
+#'   Covington, P., Adams, J. & Sargin, E. (2016) "Deep Neural Networks
+#'   for YouTube Recommendations", *RecSys 2016*, 191-198,
+#'   doi:10.1145/2959100.2959190. The retrieval setting.
 #' @export
 #' @keywords internal
 morie_twoT_corrected_logits <- function(scores, probabilities,
@@ -210,6 +254,28 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param init Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
+#' @references ----------
+#'   Yi, X., Yang, J., Hong, L., Cheng, D. Z., Heldt, L., Kumthekar, A.,
+#'   Zhao, Z., Wei, L. & Chi, E. (2019) "Sampling-Bias-Corrected Neural
+#'   Modeling for Large Corpus Item Recommendations", *Proceedings of the
+#'   13th ACM Conference on Recommender Systems (RecSys \'19)*, 269-277,
+#'   doi:10.1145/3298689.3346996. The two-tower architecture for
+#'   large-corpus item retrieval; batch softmax with in-batch negatives and
+#'   the resulting sampling bias toward popular items; the logQ correction
+#'   subtracting log p_j from the logit; the streaming frequency estimation
+#'   algorithm tracking the number of steps between successive hits of an
+#'   item and estimating the sampling probability as its reciprocal; and
+#'   normalisation of the embeddings with a temperature in the softmax.
+#'   
+#'   Bengio, Y. & Senecal, J.-S. (2008) "Adaptive Importance Sampling to
+#'   Accelerate Training of a Neural Probabilistic Language Model", *IEEE
+#'   Transactions on Neural Networks* 19(4), 713-722,
+#'   doi:10.1109/TNN.2007.912312. The sampled-softmax correction being
+#'   applied.
+#'   
+#'   Covington, P., Adams, J. & Sargin, E. (2016) "Deep Neural Networks
+#'   for YouTube Recommendations", *RecSys 2016*, 191-198,
+#'   doi:10.1145/2959100.2959190. The retrieval setting.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -259,6 +325,28 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
 #' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to
 #' \code{0.05}.
 #' @return A list with \code{loss}, \code{per_example}, \code{corrected}.
+#' @references ----------
+#'   Yi, X., Yang, J., Hong, L., Cheng, D. Z., Heldt, L., Kumthekar, A.,
+#'   Zhao, Z., Wei, L. & Chi, E. (2019) "Sampling-Bias-Corrected Neural
+#'   Modeling for Large Corpus Item Recommendations", *Proceedings of the
+#'   13th ACM Conference on Recommender Systems (RecSys \'19)*, 269-277,
+#'   doi:10.1145/3298689.3346996. The two-tower architecture for
+#'   large-corpus item retrieval; batch softmax with in-batch negatives and
+#'   the resulting sampling bias toward popular items; the logQ correction
+#'   subtracting log p_j from the logit; the streaming frequency estimation
+#'   algorithm tracking the number of steps between successive hits of an
+#'   item and estimating the sampling probability as its reciprocal; and
+#'   normalisation of the embeddings with a temperature in the softmax.
+#'   
+#'   Bengio, Y. & Senecal, J.-S. (2008) "Adaptive Importance Sampling to
+#'   Accelerate Training of a Neural Probabilistic Language Model", *IEEE
+#'   Transactions on Neural Networks* 19(4), 713-722,
+#'   doi:10.1109/TNN.2007.912312. The sampled-softmax correction being
+#'   applied.
+#'   
+#'   Covington, P., Adams, J. & Sargin, E. (2016) "Deep Neural Networks
+#'   for YouTube Recommendations", *RecSys 2016*, 191-198,
+#'   doi:10.1145/2959100.2959190. The retrieval setting.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -311,6 +399,28 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
 #' @param temperature Passed to \code{morie_twoT_corrected_logits}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{top_k}, \code{uncorrected_top_k},
 #' \code{scores}, \code{corrected_scores}, \code{changed}, \code{method}, \code{note}.
+#' @references ----------
+#'   Yi, X., Yang, J., Hong, L., Cheng, D. Z., Heldt, L., Kumthekar, A.,
+#'   Zhao, Z., Wei, L. & Chi, E. (2019) "Sampling-Bias-Corrected Neural
+#'   Modeling for Large Corpus Item Recommendations", *Proceedings of the
+#'   13th ACM Conference on Recommender Systems (RecSys \'19)*, 269-277,
+#'   doi:10.1145/3298689.3346996. The two-tower architecture for
+#'   large-corpus item retrieval; batch softmax with in-batch negatives and
+#'   the resulting sampling bias toward popular items; the logQ correction
+#'   subtracting log p_j from the logit; the streaming frequency estimation
+#'   algorithm tracking the number of steps between successive hits of an
+#'   item and estimating the sampling probability as its reciprocal; and
+#'   normalisation of the embeddings with a temperature in the softmax.
+#'   
+#'   Bengio, Y. & Senecal, J.-S. (2008) "Adaptive Importance Sampling to
+#'   Accelerate Training of a Neural Probabilistic Language Model", *IEEE
+#'   Transactions on Neural Networks* 19(4), 713-722,
+#'   doi:10.1109/TNN.2007.912312. The sampled-softmax correction being
+#'   applied.
+#'   
+#'   Covington, P., Adams, J. & Sargin, E. (2016) "Deep Neural Networks
+#'   for YouTube Recommendations", *RecSys 2016*, 191-198,
+#'   doi:10.1145/2959100.2959190. The retrieval setting.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -350,6 +460,28 @@ morie_twoT_retrieve <- function(query_embedding, item_embeddings,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Yi, X., Yang, J., Hong, L., Cheng, D. Z., Heldt, L., Kumthekar, A.,
+#'   Zhao, Z., Wei, L. & Chi, E. (2019) "Sampling-Bias-Corrected Neural
+#'   Modeling for Large Corpus Item Recommendations", *Proceedings of the
+#'   13th ACM Conference on Recommender Systems (RecSys \'19)*, 269-277,
+#'   doi:10.1145/3298689.3346996. The two-tower architecture for
+#'   large-corpus item retrieval; batch softmax with in-batch negatives and
+#'   the resulting sampling bias toward popular items; the logQ correction
+#'   subtracting log p_j from the logit; the streaming frequency estimation
+#'   algorithm tracking the number of steps between successive hits of an
+#'   item and estimating the sampling probability as its reciprocal; and
+#'   normalisation of the embeddings with a temperature in the softmax.
+#'   
+#'   Bengio, Y. & Senecal, J.-S. (2008) "Adaptive Importance Sampling to
+#'   Accelerate Training of a Neural Probabilistic Language Model", *IEEE
+#'   Transactions on Neural Networks* 19(4), 713-722,
+#'   doi:10.1109/TNN.2007.912312. The sampled-softmax correction being
+#'   applied.
+#'   
+#'   Covington, P., Adams, J. & Sargin, E. (2016) "Deep Neural Networks
+#'   for YouTube Recommendations", *RecSys 2016*, 191-198,
+#'   doi:10.1145/2959100.2959190. The retrieval setting.
 #' @export
 #' @examples
 #' morie_twoT_cheatsheet()

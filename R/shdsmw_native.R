@@ -105,6 +105,7 @@
 #' @param contrast See Usage.
 #' @param path See Usage.
 #' @param trim See Usage.
+#' @return The value of `out`, as built in the body.
 #' @export
 #' @keywords internal
 shrinkage_msm <- function(y, treatment_history, covariate_history,
@@ -230,6 +231,7 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
 #' @param covariate_history See Usage.
 #' @param path See Usage.
 #' @param contrast See Usage.
+#' @return The value of `$`.
 #' @export
 #' @keywords internal
 penalty_path <- function(y, treatment_history, covariate_history,

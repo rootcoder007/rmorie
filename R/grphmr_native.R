@@ -237,6 +237,7 @@ graphormer_attention <- function(H, WQ, WK, WV, bias, edge_bias = NULL) {
 }
 
 # Compact alias
+#' @rdname graphormer_attention
 #' @export
 graphormer <- graphormer_attention
 

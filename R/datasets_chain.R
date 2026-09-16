@@ -10,7 +10,7 @@
 #' Resolve a dataset loader through the live -> included -> synthetic chain
 #'
 #' Internal dispatch used by the unified \code{morie_datasets_*}
-#' loaders that accept a \code{source = c("auto", "live", "included",
+#' loaders that accept a \eqn{source = c("auto", "live", "included",
 #' "synthetic", "empty")} argument. The chain is:
 #'
 #' \describe{

@@ -16,7 +16,7 @@
 #' @param mu Encoder mean.
 #' @param log_var Encoder log-variance.
 #' @param reduction \code{"mean"} (default) or \code{"sum"}.
-#' @return Named list \code{(elbo, estimate, loss, recon_loss,
+#' @return Named list \eqn{(elbo, estimate, loss, recon_loss,
 #'   kl_divergence, method)}.
 #' @references Kingma & Welling (2014), ICLR.
 #' @examples

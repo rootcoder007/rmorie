@@ -493,6 +493,11 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param seed Passed to \code{.stahdo_stahel_donoho}. Defaults to \code{1}.
 #' @param cutoff Passed to \code{.stahdo_stahel_donoho}.
 #' @return The value of \code{.stahdo_stahel_donoho}.
+#' @references ----------
+#'   Maronna, R. A. & Yohai, V. J. (1995) "The behavior of the
+#'   Stahel-Donoho robust multivariate estimator", *Journal of the
+#'   American Statistical Association* 90(429), 330-341,
+#'   doi:10.1080/01621459.1995.10476517.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

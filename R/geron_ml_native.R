@@ -5251,6 +5251,7 @@ Math.morie_gvar <- function(x, ...) {
 
 #' ReLU on a reverse-mode tape node
 #' @param x A tape node. @return A tape node.
+#' @return The value of `.morie_gvar`.
 #' @export
 #' @examples
 #' morie_gvar_relu(.morie_gvar(-1.5))$value
@@ -5261,6 +5262,7 @@ morie_gvar_relu <- function(x) {
 
 #' Logistic sigmoid on a reverse-mode tape node
 #' @param x A tape node. @return A tape node.
+#' @return The value of `.morie_gvar`.
 #' @export
 #' @examples
 #' morie_gvar_sigmoid(.morie_gvar(0))$value

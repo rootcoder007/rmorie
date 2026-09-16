@@ -21,7 +21,7 @@
 #' locates the discord and its minimum locates the motif pair.
 #'
 #' @param x Numeric series.
-#' @param window Subsequence length; needs \code{2 <= window <=
+#' @param window Subsequence length; needs \eqn{2 <= window <=
 #'   length(x)/2}.
 #' @return A list with \code{profile}, \code{index} (1-based nearest
 #'   neighbour of each subsequence), \code{discord},

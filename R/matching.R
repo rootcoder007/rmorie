@@ -683,7 +683,7 @@ morie_matching_genetic <- function(data, treatment, covariates,
 
 #' Variable-ratio matching on propensity score
 #'
-#' Thin wrapper around \code{MatchIt::matchit(method = "nearest",
+#' Thin wrapper around \eqn{MatchIt::matchit(method = "nearest",
 #' ratio = max_ratio, min.controls = min_ratio)} which supports
 #' variable-ratio nearest-neighbour matching natively.
 #'

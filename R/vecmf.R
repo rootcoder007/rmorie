@@ -13,7 +13,7 @@
 #' @param Y Numeric matrix (T x k) of I(1) candidate series.
 #' @param k_ar Number of lagged differences. Default 1.
 #' @param coint_rank Cointegration rank. Default 1.
-#' @return Named list with \code{alpha, beta, Gamma, Sigma, eigenvalues,
+#' @return Named list with \eqn{alpha, beta, Gamma, Sigma, eigenvalues,
 #'   loglik, n, k, rank, method}.
 #' @examples
 #' set.seed(1)

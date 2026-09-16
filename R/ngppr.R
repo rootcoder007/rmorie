@@ -8,7 +8,7 @@
 #' mass gives \code{DP(alpha, P0)}; because normalizing divides out the
 #' scale, the resulting law does not depend on \code{tau} at all.
 #'
-#' Formula: \code{E[K_n] = sum_i alpha / (alpha + i - 1) =
+#' Formula: \eqn{E[K_n] = sum_i alpha / (alpha + i - 1) =
 #' alpha (digamma(alpha + n) - digamma(alpha))} and
 #' \code{Var[K_n] = sum_i alpha (i - 1) / (alpha + i - 1)^2}. Both
 #' expressions for the mean are computed, so each checks the other.

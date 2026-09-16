@@ -55,6 +55,7 @@
 #' Kamath Ch 2 encoder-decoder scaffolding (Eq 2.1-2.6)
 #' @param h_t_1,x_t Previous state and input.
 #' @param f Optional cell.
+#' @return A list with `h`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -220,6 +221,7 @@ morie_kamath_seq2seq_cross_entropy <- function(y, c, U = NULL) {
 #' Kamath Ch 2 attention chain (Eq 2.7-2.12, 2.15-2.16, 2.19)
 #' @param q,k_i Query and key.
 #' @param alpha Score family or function.
+#' @return A list with `estimate`, `alpha`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -446,6 +448,7 @@ morie_kamath_masked_attention <- function(Q, K, V, M, d_k = NULL) {
 #' @param i Position.
 #' @param j Frequency index.
 #' @param d Model width.
+#' @return A list with `estimate`, `wavelength`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_kamath_positional_sin(5, 0, 16)
@@ -562,6 +565,7 @@ morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
 #' The Kamath Ch 2 pretraining loss family (Eq 2.20-2.33)
 #' @param L_PTi Pretext losses.
 #' @param lambda_i Optional weights.
+#' @return A list with `estimate`, `components`, `lambdas`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -705,6 +709,7 @@ morie_kamath_span_loss <- function(x, xhat, i, j) {
 #' @param U Per-token probabilities.
 #' @param k Context size (recorded).
 #' @param Theta Unused, kept for the signature.
+#' @return A list with `estimate`, `cross_entropy`, `context_size`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_kamath_gpt_unsupervised(c(0.5, 0.5))

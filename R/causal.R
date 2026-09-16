@@ -291,7 +291,7 @@ NULL
 
 #' Estimate propensity scores via logistic regression
 #'
-#' Thin wrapper over \code{WeightIt::weightit(method = "glm",
+#' Thin wrapper over \eqn{WeightIt::weightit(method = "glm",
 #' estimand = "ATE")} when \pkg{WeightIt} is installed; falls back
 #' to \code{stats::glm(family = binomial())} otherwise.
 #'

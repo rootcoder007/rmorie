@@ -212,6 +212,15 @@
 #'   degrees of freedom, sigma2, the unscaled covariance and the fitted
 #'   values.
 #' @keywords internal
+#' @references Rubin, D.B. (1987) "Multiple Imputation for Nonresponse in Surveys."
+#'       Wiley. Chapter 3: the combining rules.
+#'     Barnard, J. and Rubin, D.B. (1999) "Small-sample degrees of freedom
+#'       with multiple imputation." Biometrika 86(4), 948-955.
+#'     Yan, X., Lee, S., Ling, N. and Lin, J. (2021) tipping-point
+#'       sensitivity analysis for MNAR departures in clinical trials; the
+#'       delta-adjustment procedure here follows the now-standard regulatory
+#'       form (impute under MAR, shift imputed values by delta per arm,
+#'       re-analyse, locate the crossing).
 #' @examples
 #' N <- 60L
 #' ii <- 0:(N - 1L)
@@ -295,6 +304,15 @@ morie_tipsne_ancova <- function(y, design) {
 #' @param mi Imputation route.
 #' @return A completed numeric outcome vector.
 #' @keywords internal
+#' @references Rubin, D.B. (1987) "Multiple Imputation for Nonresponse in Surveys."
+#'       Wiley. Chapter 3: the combining rules.
+#'     Barnard, J. and Rubin, D.B. (1999) "Small-sample degrees of freedom
+#'       with multiple imputation." Biometrika 86(4), 948-955.
+#'     Yan, X., Lee, S., Ling, N. and Lin, J. (2021) tipping-point
+#'       sensitivity analysis for MNAR departures in clinical trials; the
+#'       delta-adjustment procedure here follows the now-standard regulatory
+#'       form (impute under MAR, shift imputed values by delta per arm,
+#'       re-analyse, locate the crossing).
 morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
   n <- length(y)
   des <- .tipsne_design(arm, X, n)
@@ -445,6 +463,15 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' @return A list with the pooled estimate, standard error, degrees of
 #'   freedom, t statistic, p-value and the variance decomposition.
 #' @keywords internal
+#' @references Rubin, D.B. (1987) "Multiple Imputation for Nonresponse in Surveys."
+#'       Wiley. Chapter 3: the combining rules.
+#'     Barnard, J. and Rubin, D.B. (1999) "Small-sample degrees of freedom
+#'       with multiple imputation." Biometrika 86(4), 948-955.
+#'     Yan, X., Lee, S., Ling, N. and Lin, J. (2021) tipping-point
+#'       sensitivity analysis for MNAR departures in clinical trials; the
+#'       delta-adjustment procedure here follows the now-standard regulatory
+#'       form (impute under MAR, shift imputed values by delta per arm,
+#'       re-analyse, locate the crossing).
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_tipsne_pool(V, V)
@@ -520,6 +547,15 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 #'   well as the outcome's own units.
 #' @return A list with the MAR analysis, the grid, the tipping point for
 #'   each control-arm delta, and whether the result tipped at all.
+#' @references Rubin, D.B. (1987) "Multiple Imputation for Nonresponse in Surveys."
+#'       Wiley. Chapter 3: the combining rules.
+#'     Barnard, J. and Rubin, D.B. (1999) "Small-sample degrees of freedom
+#'       with multiple imputation." Biometrika 86(4), 948-955.
+#'     Yan, X., Lee, S., Ling, N. and Lin, J. (2021) tipping-point
+#'       sensitivity analysis for MNAR departures in clinical trials; the
+#'       delta-adjustment procedure here follows the now-standard regulatory
+#'       form (impute under MAR, shift imputed values by delta per arm,
+#'       re-analyse, locate the crossing).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -627,6 +663,15 @@ morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
 #' One-line summary of the tipsne module
 #'
 #' @return A character scalar.
+#' @references Rubin, D.B. (1987) "Multiple Imputation for Nonresponse in Surveys."
+#'       Wiley. Chapter 3: the combining rules.
+#'     Barnard, J. and Rubin, D.B. (1999) "Small-sample degrees of freedom
+#'       with multiple imputation." Biometrika 86(4), 948-955.
+#'     Yan, X., Lee, S., Ling, N. and Lin, J. (2021) tipping-point
+#'       sensitivity analysis for MNAR departures in clinical trials; the
+#'       delta-adjustment procedure here follows the now-standard regulatory
+#'       form (impute under MAR, shift imputed values by delta per arm,
+#'       re-analyse, locate the crossing).
 #' @export
 #' @examples
 #' morie_tipsne_cheatsheet()

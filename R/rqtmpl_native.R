@@ -456,6 +456,7 @@ morie_progeny_required <- function(var_qtl, var_residual, alpha = 0.05) {
 
 # Compact alias mirroring interval_mapping = scan_interval.
 # Exported under the same name as the Python arm's ledger alias.
+#' @rdname morie_scan_interval
 #' @export
 morie_interval_mapping <- morie_scan_interval
 
@@ -467,6 +468,7 @@ morie_interval_mapping <- morie_scan_interval
 # file.
 #' morie_rqtmpl
 #'
+#' @return A list with `haldane`, `inverse_haldane`, `genotype_probabilities`, `single_marker`, `interval_map`, `scan_interval`, `interval_mapping`, `elod`, `threshold`, `progeny_required`, `cheatsheet`, `LOG10E`.
 #' @export
 #' @examples
 #' morie_rqtmpl()

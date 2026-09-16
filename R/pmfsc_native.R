@@ -86,6 +86,24 @@
 #' @param r1 The inner radius.
 #' @param r2 The outer radius.
 #' @return The shell volume.
+#' @references Muegge, I. and Martin, Y.C. (1999) "A general and fast scoring
+#'       function for protein-ligand interactions: a simplified potential
+#'       approach." Journal of Medicinal Chemistry 42(5), 791-804.
+#'       doi:10.1021/jm980536j.
+#'     Muegge, I. (2001) "Effect of ligand volume correction on PMF
+#'       scoring." Journal of Computational Chemistry 22(4), 418-425.
+#'     Muegge, I. (2006) "PMF scoring revisited." Journal of Medicinal
+#'       Chemistry 49(20), 5895-5902.
+#'     Sippl, M.J. (1990) "Calculation of conformational ensembles from
+#'       potentials of mean force." Journal of Molecular Biology 213(4),
+#'       859-883.
+#'   
+#'   A note on what is sourced. The functional form and the role of each
+#'   factor above are from the papers. The particular realisation of the
+#'   volume correction as an excluded-volume ratio, and the capping rule
+#'   for unobserved bins, are this module's -- they are described in the
+#'   sources in words rather than given as formulas, so they are named here
+#'   as choices rather than attributed.
 #' @export
 #' @examples
 #' morie_pmfsc_shell(r1 = 5L, r2 = 5L)
@@ -105,6 +123,24 @@ morie_pmfsc_shell <- function(r1, r2) {
 #' @param r_max The cutoff.
 #' @param n_bins The number of bins.
 #' @return The zero-based bin index, or -1 past the cutoff.
+#' @references Muegge, I. and Martin, Y.C. (1999) "A general and fast scoring
+#'       function for protein-ligand interactions: a simplified potential
+#'       approach." Journal of Medicinal Chemistry 42(5), 791-804.
+#'       doi:10.1021/jm980536j.
+#'     Muegge, I. (2001) "Effect of ligand volume correction on PMF
+#'       scoring." Journal of Computational Chemistry 22(4), 418-425.
+#'     Muegge, I. (2006) "PMF scoring revisited." Journal of Medicinal
+#'       Chemistry 49(20), 5895-5902.
+#'     Sippl, M.J. (1990) "Calculation of conformational ensembles from
+#'       potentials of mean force." Journal of Molecular Biology 213(4),
+#'       859-883.
+#'   
+#'   A note on what is sourced. The functional form and the role of each
+#'   factor above are from the papers. The particular realisation of the
+#'   volume correction as an excluded-volume ratio, and the capping rule
+#'   for unobserved bins, are this module's -- they are described in the
+#'   sources in words rather than given as formulas, so they are named here
+#'   as choices rather than attributed.
 #' @export
 #' @examples
 #' morie_pmfsc_bin(r = 5L, r_max = 5L, n_bins = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -156,6 +192,24 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 #' @return A named list keyed by "type_i|type_j" with the counts, the
 #'   density, the reference density, the potential and the count of
 #'   capped bins.
+#' @references Muegge, I. and Martin, Y.C. (1999) "A general and fast scoring
+#'       function for protein-ligand interactions: a simplified potential
+#'       approach." Journal of Medicinal Chemistry 42(5), 791-804.
+#'       doi:10.1021/jm980536j.
+#'     Muegge, I. (2001) "Effect of ligand volume correction on PMF
+#'       scoring." Journal of Computational Chemistry 22(4), 418-425.
+#'     Muegge, I. (2006) "PMF scoring revisited." Journal of Medicinal
+#'       Chemistry 49(20), 5895-5902.
+#'     Sippl, M.J. (1990) "Calculation of conformational ensembles from
+#'       potentials of mean force." Journal of Molecular Biology 213(4),
+#'       859-883.
+#'   
+#'   A note on what is sourced. The functional form and the role of each
+#'   factor above are from the papers. The particular realisation of the
+#'   volume correction as an excluded-volume ratio, and the capping rule
+#'   for unobserved bins, are this module's -- they are described in the
+#'   sources in words rather than given as formulas, so they are named here
+#'   as choices rather than attributed.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -248,6 +302,24 @@ morie_pmfsc_derive <- function(observations, n_complexes = 1,
 #' @param n_bins The number of radial bins.
 #' @param missing The contribution of an unparameterised pair.
 #' @return A list with the score and the three counts.
+#' @references Muegge, I. and Martin, Y.C. (1999) "A general and fast scoring
+#'       function for protein-ligand interactions: a simplified potential
+#'       approach." Journal of Medicinal Chemistry 42(5), 791-804.
+#'       doi:10.1021/jm980536j.
+#'     Muegge, I. (2001) "Effect of ligand volume correction on PMF
+#'       scoring." Journal of Computational Chemistry 22(4), 418-425.
+#'     Muegge, I. (2006) "PMF scoring revisited." Journal of Medicinal
+#'       Chemistry 49(20), 5895-5902.
+#'     Sippl, M.J. (1990) "Calculation of conformational ensembles from
+#'       potentials of mean force." Journal of Molecular Biology 213(4),
+#'       859-883.
+#'   
+#'   A note on what is sourced. The functional form and the role of each
+#'   factor above are from the papers. The particular realisation of the
+#'   volume correction as an excluded-volume ratio, and the capping rule
+#'   for unobserved bins, are this module's -- they are described in the
+#'   sources in words rather than given as formulas, so they are named here
+#'   as choices rather than attributed.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -311,6 +383,24 @@ morie_pmfsc_score <- function(pairs, potential,
 #' @param missing The contribution of an unparameterised pair.
 #' @return A list with the score, the potential used, and the counts
 #'   that say how much of the pose the potential actually covered.
+#' @references Muegge, I. and Martin, Y.C. (1999) "A general and fast scoring
+#'       function for protein-ligand interactions: a simplified potential
+#'       approach." Journal of Medicinal Chemistry 42(5), 791-804.
+#'       doi:10.1021/jm980536j.
+#'     Muegge, I. (2001) "Effect of ligand volume correction on PMF
+#'       scoring." Journal of Computational Chemistry 22(4), 418-425.
+#'     Muegge, I. (2006) "PMF scoring revisited." Journal of Medicinal
+#'       Chemistry 49(20), 5895-5902.
+#'     Sippl, M.J. (1990) "Calculation of conformational ensembles from
+#'       potentials of mean force." Journal of Molecular Biology 213(4),
+#'       859-883.
+#'   
+#'   A note on what is sourced. The functional form and the role of each
+#'   factor above are from the papers. The particular realisation of the
+#'   volume correction as an excluded-volume ratio, and the capping rule
+#'   for unobserved bins, are this module's -- they are described in the
+#'   sources in words rather than given as formulas, so they are named here
+#'   as choices rather than attributed.
 #' @export
 #' @examples
 #' RMAX <- 12
@@ -371,6 +461,24 @@ morie_pmfsc <- function(receptor, ligand, potential = NULL,
 #' One-line summary of the pmfsc module
 #'
 #' @return A character scalar.
+#' @references Muegge, I. and Martin, Y.C. (1999) "A general and fast scoring
+#'       function for protein-ligand interactions: a simplified potential
+#'       approach." Journal of Medicinal Chemistry 42(5), 791-804.
+#'       doi:10.1021/jm980536j.
+#'     Muegge, I. (2001) "Effect of ligand volume correction on PMF
+#'       scoring." Journal of Computational Chemistry 22(4), 418-425.
+#'     Muegge, I. (2006) "PMF scoring revisited." Journal of Medicinal
+#'       Chemistry 49(20), 5895-5902.
+#'     Sippl, M.J. (1990) "Calculation of conformational ensembles from
+#'       potentials of mean force." Journal of Molecular Biology 213(4),
+#'       859-883.
+#'   
+#'   A note on what is sourced. The functional form and the role of each
+#'   factor above are from the papers. The particular realisation of the
+#'   volume correction as an excluded-volume ratio, and the capping rule
+#'   for unobserved bins, are this module's -- they are described in the
+#'   sources in words rather than given as formulas, so they are named here
+#'   as choices rather than attributed.
 #' @export
 #' @examples
 #' morie_pmfsc_cheatsheet()

@@ -79,6 +79,7 @@ morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
 #' Vector-form linear model w.x + b (Burkov Eq 1.4)
 #' @param w,x Vectors.
 #' @param b Bias.
+#' @return A list with `estimate`, `dot`, `b`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_linear_vector(w = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
@@ -97,6 +98,7 @@ morie_burkov_linear_vector <- function(w, x, b) {
 
 #' Cosine similarity (Burkov Eq 1.5)
 #' @param x,y Vectors; neither may be zero.
+#' @return A list with `estimate`, `angle_radians`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -153,6 +155,7 @@ morie_burkov_cosine_similarity <- function(x, y) {
 #' @param x Input.
 #' @param b_1 Bias.
 #' @param phi Activation name or function.
+#' @return A list with `output`, `preactivation`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_layer1_output(W_1 = c(1, 2, 3, 4, 5, 6, 7, 8), x = 5L, b_1 = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -186,6 +189,7 @@ morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
 #' @param y_1 Layer-1 output.
 #' @param b_2_1 Bias.
 #' @param phi Activation.
+#' @return A list with `estimate`, `preactivation`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_layer2_output(W_2 = c(1, 2, 3, 4, 5, 6, 7, 8), y_1 = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -211,6 +215,7 @@ morie_burkov_layer2_output <- function(W_2, y_1, b_2_1, phi = "identity") {
 #' Logistic regression sigma(w.x + b) (Burkov Eq 1.8)
 #' @param w,x Vectors.
 #' @param b Bias.
+#' @return A list with `estimate`, `logit`, `predicted_class`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_logistic(w = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
@@ -233,6 +238,7 @@ morie_burkov_logistic <- function(w, x, b) {
 #' Binary cross-entropy for one example (Burkov Eq 1.9)
 #' @param y_hat Predicted probabilities in \[0, 1\].
 #' @param y Targets, 0 or 1.
+#' @return A list with `losses`, `estimate`, `mean_loss`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_binary_cross_entropy(0.5, 1)
@@ -264,6 +270,7 @@ morie_burkov_binary_cross_entropy <- function(y_hat, y) {
 #' @param N Optional size check.
 #' @param j Optional
 #'   0-based coordinate for `estimate` (matching the Python mirror).
+#' @return A list with `grad_w`, `grad_b`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_bce_gradients(y_hat = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -298,6 +305,7 @@ morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
 #' @param y_hat Probability distribution.
 #' @param c Correct class,
 #'   0-based to match the Python mirror.
+#' @return A list with `estimate`, `p_correct`, `n_classes`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_categorical_cross_entropy(c(0.7, 0.2, 0.1), 0)
@@ -337,6 +345,7 @@ morie_burkov_categorical_cross_entropy <- function(y_hat, c) {
 #'
 #' @param t_next Candidate token.
 #' @param s Token sequence.
+#' @return A list with `estimate`, `context`, `distribution`, `notations_agree`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_next_token("b", c("a", "b", "a", "c", "a", "b"))
@@ -370,6 +379,7 @@ morie_burkov_next_token <- function(t_next, s) {
 
 #' N-gram MLE probability (Burkov Ch 2)
 #' @param counts_ngram,counts_prefix Counts.
+#' @return A list with `estimate`, `count_ngram`, `count_prefix`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_ngram_mle(counts_ngram = 5L, counts_prefix = 5L)
@@ -400,6 +410,7 @@ morie_burkov_ngram_mle <- function(counts_ngram, counts_prefix) {
 #' Laplace add-1 smoothing (Burkov Ch 2)
 #' @param counts_ngram,counts_prefix Counts.
 #' @param V Vocabulary size.
+#' @return A list with `estimate`, `count_ngram`, `count_prefix`, `vocab_size`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_laplace(counts_ngram = 3, counts_prefix = 10, V = 100)
@@ -422,6 +433,7 @@ morie_burkov_laplace <- function(counts_ngram, counts_prefix, V) {
 #' @param counts_ngram,counts_prefix Counts.
 #' @param V Vocabulary size.
 #' @param k Pseudo-count, positive.
+#' @return A list with `estimate`, `count_ngram`, `count_prefix`, `vocab_size`, `k`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_add_k(counts_ngram = 3, counts_prefix = 10, V = 100, k = 0.5)
@@ -453,6 +465,7 @@ morie_burkov_add_k <- function(counts_ngram, counts_prefix, V, k = 0.5) {
 #' Linear interpolation of n-gram orders (Burkov Ch 2)
 #' @param probs_by_order Probabilities.
 #' @param lambdas Weights, sum 1.
+#' @return A list with `estimate`, `probs`, `lambdas`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_interpolation(c(0.9, 0.1, 0.5), c(0.6, 0.3, 0.1))
@@ -482,6 +495,7 @@ morie_burkov_interpolation <- function(probs_by_order, lambdas) {
 #' @param counts_by_order List of `c(count_ngram, count_prefix)` pairs,
 #'   highest order first.
 #' @param alpha Per-level discount in (0, 1].
+#' @return The value of `stop`.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -524,6 +538,7 @@ morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
 #' @param continuation_counts `c(n_types_after_prefix,
 #'   continuation_count_of_word, total_bigram_types)`.
 #' @param d Absolute discount in (0, 1).
+#' @return A list with `estimate`, `discounted_mle`, `lambda`, `p_continuation`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_kneser_ney(counts_ngram = 5L, counts_prefix = 5L,
@@ -570,6 +585,7 @@ morie_burkov_kneser_ney <- function(counts_ngram, counts_prefix,
 #' Bits per character from cross-entropy (Burkov Ch 2)
 #' @param ce_loss Cross-entropy in nats per token.
 #' @param n_tokens,n_characters Counts.
+#' @return A list with `estimate`, `bits_per_token`, `chars_per_token`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_bits_per_character(2, 100, 400)
@@ -592,6 +608,7 @@ morie_burkov_bits_per_character <- function(ce_loss, n_tokens,
 
 #' Dot product, L2 norm and unit vector (Burkov Ch 1)
 #' @param a,b Vectors.
+#' @return A list with `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -647,6 +664,7 @@ morie_burkov_unit_vector <- function(a) {
 #' @param term Query term.
 #' @param document Token vector.
 #' @param normalise Divide by document length.
+#' @return A list with `estimate`, `count`, `doc_length`, `normalised`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -705,6 +723,7 @@ morie_burkov_tf_idf <- function(term, document, corpus) {
 #' @param prev_tokens 0-based indices of
 #'   already-generated tokens (matching the Python mirror).
 #' @param penalty Positive penalty, usually above 1.
+#' @return A list with `penalised`, `estimate`, `penalty`, `tokens_hit`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -737,6 +756,7 @@ morie_burkov_repetition_penalty <- function(logits, prev_tokens,
 #' Weight tying: logits through the shared embedding (Burkov Ch 4)
 #' @param h_last Hidden state.
 #' @param E Embedding matrix, V x d.
+#' @return A list with `logits`, `estimate`, `vocab_size`, `hidden_size`, `n`, `method`.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -769,6 +789,7 @@ morie_burkov_weight_tying <- function(h_last, E) {
 #' @param h_prev Previous hidden state.
 #' @param Wh,Wx,Wy Weight matrices.
 #' @param bh,by Biases.
+#' @return A list with `h`, `y`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_burkov_elman_rnn(c(1, 0.5), c(0.2, -0.1), rbind(c(0.5,
@@ -817,6 +838,7 @@ morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
 #'
 #' @param graph Node list.
 #' @param inputs Named leaf values.
+#' @return A list with `output`, `estimate`, `gradients`, `values`, `n`, `method`.
 #' @export
 #' @examples
 #' g <- list(list(name = "wx", op = "mul", args = c("w", "x")),

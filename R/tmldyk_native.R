@@ -200,6 +200,7 @@ morie_tmldyk <- function(y, D, X, epsilon = 1, g_min = 0.05,
                      "sensitivity"))
 }
 
+#' @rdname morie_tmldyk
 #' Compact alias per ledger/NAMING.md
 #' @export
 #' @noRd

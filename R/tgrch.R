@@ -51,7 +51,7 @@
 #' Glosten, L. R., Jagannathan, R. & Runkle, D. E. (1993). On the relation
 #' between the expected value and the volatility of the nominal excess
 #' return on stocks. \emph{Journal of Finance}, 48(5), 1779-1801.
-#' @return Named list with \code{omega, alpha, gamma, beta, persistence,
+#' @return Named list with \eqn{omega, alpha, gamma, beta, persistence,
 #'   loglik, conditional_variance, n, method}.
 #' @examples
 #' set.seed(1)

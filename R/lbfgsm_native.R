@@ -151,6 +151,9 @@
 #' at the cost of holding three times the history. `grad_norm`,
 #' `grad_norm_relative` and `grad_norm_ratio` are all reported so the
 #' behaviour can be judged rather than inferred.
+#' @references Liu, D. C. and Nocedal, J. (1989). On the limited memory BFGS method
+#'   for large scale optimization. \emph{Mathematical Programming}
+#'   \strong{45}, 503-528.
 #' @export
 #' @keywords internal
 morie_lbfgsm <- function(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-8,

@@ -121,6 +121,7 @@ morie_did <- function(data, outcome, unit, time, treatment_time,
 #'
 #' @param x A \code{morie_did} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_did(D)
@@ -242,6 +243,7 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
 #'
 #' @param x A \code{morie_iv} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' set.seed(1)
 #' n <- 200
@@ -369,6 +371,7 @@ morie_rdd <- function(data, outcome, running, cutoff = 0,
 #'
 #' @param x A \code{morie_rdd} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' set.seed(1)
 #' n <- 500

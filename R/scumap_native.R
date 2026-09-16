@@ -564,5 +564,6 @@ morie_scumap_cheatsheet <- function() {
 # compact aliases per ledger/NAMING.md
 morie_scumap_umapsinglecell <- morie_scumap_umap_singlecell
 
+#' @rdname morie_scumap_umap_singlecell
 #' @export
 morie_scumap <- morie_scumap_umap_singlecell

@@ -85,6 +85,16 @@
 #' @param fields Column names.
 #' @param thresholds A list of annotation, direction, cutoff triples.
 #' @return A list with one FILTER string per record and the counts.
+#' @references Broad Institute, GATK Best Practices: "Hard-filtering germline short
+#'       variants," the source of the threshold values above.
+#'     DePristo, M.A. et al. (2011) "A framework for variation discovery
+#'       and genotyping using next-generation DNA sequencing data." Nature
+#'       Genetics 43(5), 491-498.
+#'     Van der Auwera, G.A. et al. (2013) "From FastQ data to
+#'       high-confidence variant calls." Current Protocols in
+#'       Bioinformatics 43, 11.10.1-11.10.33.
+#'     Dempster, A.P., Laird, N.M. and Rubin, D.B. (1977) JRSS B 39(1),
+#'       1-38.
 #' @export
 #' @examples
 #' morie_varqc1_hard(records = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
@@ -124,6 +134,16 @@ morie_varqc1_hard <- function(records, fields, thresholds) {
 #' @param means Component means, a list of vectors.
 #' @param chols Component Cholesky factors, a list of matrices.
 #' @return The log density.
+#' @references Broad Institute, GATK Best Practices: "Hard-filtering germline short
+#'       variants," the source of the threshold values above.
+#'     DePristo, M.A. et al. (2011) "A framework for variation discovery
+#'       and genotyping using next-generation DNA sequencing data." Nature
+#'       Genetics 43(5), 491-498.
+#'     Van der Auwera, G.A. et al. (2013) "From FastQ data to
+#'       high-confidence variant calls." Current Protocols in
+#'       Bioinformatics 43, 11.10.1-11.10.33.
+#'     Dempster, A.P., Laird, N.M. and Rubin, D.B. (1977) JRSS B 39(1),
+#'       1-38.
 #' @export
 #' @keywords internal
 morie_varqc1_logpdf <- function(x, weights, means, chols) {
@@ -173,6 +193,16 @@ morie_varqc1_logpdf <- function(x, weights, means, chols) {
 #'   diagonal is scale-free and is the standard remedy.
 #' @return A list with the weights, means, Cholesky factors and the
 #'   log-likelihood trace.
+#' @references Broad Institute, GATK Best Practices: "Hard-filtering germline short
+#'       variants," the source of the threshold values above.
+#'     DePristo, M.A. et al. (2011) "A framework for variation discovery
+#'       and genotyping using next-generation DNA sequencing data." Nature
+#'       Genetics 43(5), 491-498.
+#'     Van der Auwera, G.A. et al. (2013) "From FastQ data to
+#'       high-confidence variant calls." Current Protocols in
+#'       Bioinformatics 43, 11.10.1-11.10.33.
+#'     Dempster, A.P., Laird, N.M. and Rubin, D.B. (1977) JRSS B 39(1),
+#'       1-38.
 #' @export
 #' @examples
 #' FIELDS <- c("QD", "QUAL", "SOR", "FS", "MQ", "MQRankSum", "ReadPosRankSum")
@@ -276,6 +306,16 @@ morie_varqc1_mixture <- function(X, n_components = 2L, n_iter = 50L, seed = 1,
 #'   seven-dimensional fit on twenty variants from being singular.
 #' @return A list with per-record FILTER strings and counts, and for the
 #'   VQSR routes the VQSLOD score, the tranche and the fitted mixtures.
+#' @references Broad Institute, GATK Best Practices: "Hard-filtering germline short
+#'       variants," the source of the threshold values above.
+#'     DePristo, M.A. et al. (2011) "A framework for variation discovery
+#'       and genotyping using next-generation DNA sequencing data." Nature
+#'       Genetics 43(5), 491-498.
+#'     Van der Auwera, G.A. et al. (2013) "From FastQ data to
+#'       high-confidence variant calls." Current Protocols in
+#'       Bioinformatics 43, 11.10.1-11.10.33.
+#'     Dempster, A.P., Laird, N.M. and Rubin, D.B. (1977) JRSS B 39(1),
+#'       1-38.
 #' @export
 #' @examples
 #' FIELDS <- c("QD", "QUAL", "SOR", "FS", "MQ", "MQRankSum", "ReadPosRankSum")
@@ -398,6 +438,16 @@ morie_varqc1 <- function(vcf, thresholds = NULL, fields = NULL, mode = "snp",
 #' One-line summary of the varqc1 module
 #'
 #' @return A character scalar.
+#' @references Broad Institute, GATK Best Practices: "Hard-filtering germline short
+#'       variants," the source of the threshold values above.
+#'     DePristo, M.A. et al. (2011) "A framework for variation discovery
+#'       and genotyping using next-generation DNA sequencing data." Nature
+#'       Genetics 43(5), 491-498.
+#'     Van der Auwera, G.A. et al. (2013) "From FastQ data to
+#'       high-confidence variant calls." Current Protocols in
+#'       Bioinformatics 43, 11.10.1-11.10.33.
+#'     Dempster, A.P., Laird, N.M. and Rubin, D.B. (1977) JRSS B 39(1),
+#'       1-38.
 #' @export
 #' @examples
 #' morie_varqc1_cheatsheet()

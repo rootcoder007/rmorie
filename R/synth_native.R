@@ -245,6 +245,7 @@ morie_synth_control <- function(data, outcome, unit, time,
 #'
 #' @param x A \code{morie_synth} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_synth(D)

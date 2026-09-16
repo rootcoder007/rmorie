@@ -128,17 +128,21 @@ morie_qpdual <- function(Q, c, x0 = NULL, domain = "simplex",
                        "gap bounds f(x) - f(x*)"))
 }
 
+#' @rdname morie_qpdual
 #' @export
 frank_wolfe_qp <- morie_qpdual
 
+#' @rdname morie_qpdual
 #' @export
 qpdual <- morie_qpdual
 
+#' @rdname morie_qpdual
 #' @export
 quadratic_program <- morie_qpdual
 
 #' qpdual_cheatsheet
 #'
+#' @return A character value.
 #' @export
 #' @examples
 #' qpdual_cheatsheet()

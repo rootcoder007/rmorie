@@ -7,7 +7,7 @@
 #'
 #' Under monotone treatment response \code{Y_i(d) >= y_i} when
 #' \code{d >= z_i} and \code{Y_i(d) <= y_i} when \code{d <= z_i}, giving
-#' \code{L_i = y_i if z_i <= d else ymin}, \code{U_i = y_i if z_i >= d
+#' \code{L_i = y_i if z_i <= d else ymin}, \eqn{U_i = y_i if z_i >= d
 #' else ymax} and \code{E[Y(d)] in [mean(L), mean(U)]}.
 #'
 #' \code{direction = "decreasing"} asserts the reverse monotonicity, which

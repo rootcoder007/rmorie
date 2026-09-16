@@ -113,6 +113,7 @@ morie_bigint <- function(x) {
 #' as.character.morie_bigint
 #'
 #' @param x See Usage.
+#' @return A character value.
 #' @export
 #' @examples
 #' as.character(morie_bigint("123456789012345678901234567890"))
@@ -139,6 +140,7 @@ as.character.morie_bigint <- function(x, ...) {
 #'
 #' @param x A \code{morie_bigint} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -153,6 +155,7 @@ print.morie_bigint <- function(x, ...) {
 #'
 #' @param x A \code{morie_bigint} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return A character value.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

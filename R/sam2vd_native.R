@@ -94,6 +94,29 @@
 #' @param m_prompted Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{recent}, \code{prompted}, \code{pointers}, \code{n_recent},
 #' \code{m_prompted}, \code{note}.
+#' @references ----------
+#'   Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., Khedr, H.,
+#'   Radle, R., Rolland, C., Gustafson, L., Mintun, E., Pan, J., Alwala,
+#'   K. V., Carion, N., Wu, C.-Y., Girshick, R., Dollar, P. &
+#'   Feichtenhofer, C. (2024) "SAM 2: Segment Anything in Images and
+#'   Videos", arXiv:2408.00714. Sec. 4: the streaming architecture
+#'   processing video frames one at a time with a memory attention module
+#'   attending to previous memories of the target object, and that when
+#'   applied to images the memory is empty and the model behaves like SAM;
+#'   the memory attention stacking L blocks of self-attention followed by
+#'   cross-attention to memories of prompted and unprompted frames and to
+#'   OBJECT POINTERS, followed by an MLP; the memory bank as a FIFO queue
+#'   of up to N recent frames plus a separate FIFO queue of up to M
+#'   prompted frames, both stored as spatial feature maps; the object
+#'   pointers taken from mask decoder output tokens; and temporal
+#'   position information embedded into the N recent memories but NOT
+#'   into prompted frames, because their training signal is sparser and
+#'   generalising to unseen temporal ranges is harder. Also the reported
+#'   results: 3x fewer interactions in video and 6x faster than SAM on
+#'   images, with the SA-V dataset of 35.5M masks across 50.9K videos.
+#'   
+#'   Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
+#'   4015-4026, arXiv:2304.02643. The image model generalised here.
 #' @export
 #' @examples
 #' morie_sam2vd_memory_bank()
@@ -126,6 +149,29 @@ morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
 #' @param prompted A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param object_pointer Optional; may be \code{NULL}. Passed to \code{.sam2vd_to_num}.
 #' @return The value of \code{b}, as built in the body.
+#' @references ----------
+#'   Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., Khedr, H.,
+#'   Radle, R., Rolland, C., Gustafson, L., Mintun, E., Pan, J., Alwala,
+#'   K. V., Carion, N., Wu, C.-Y., Girshick, R., Dollar, P. &
+#'   Feichtenhofer, C. (2024) "SAM 2: Segment Anything in Images and
+#'   Videos", arXiv:2408.00714. Sec. 4: the streaming architecture
+#'   processing video frames one at a time with a memory attention module
+#'   attending to previous memories of the target object, and that when
+#'   applied to images the memory is empty and the model behaves like SAM;
+#'   the memory attention stacking L blocks of self-attention followed by
+#'   cross-attention to memories of prompted and unprompted frames and to
+#'   OBJECT POINTERS, followed by an MLP; the memory bank as a FIFO queue
+#'   of up to N recent frames plus a separate FIFO queue of up to M
+#'   prompted frames, both stored as spatial feature maps; the object
+#'   pointers taken from mask decoder output tokens; and temporal
+#'   position information embedded into the N recent memories but NOT
+#'   into prompted frames, because their training signal is sparser and
+#'   generalising to unseen temporal ranges is harder. Also the reported
+#'   results: 3x fewer interactions in video and 6x faster than SAM on
+#'   images, with the SA-V dataset of 35.5M masks across 50.9K videos.
+#'   
+#'   Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
+#'   4015-4026, arXiv:2304.02643. The image model generalised here.
 #' @export
 #' @keywords internal
 morie_sam2vd_push_memory <- function(bank, frame_index, features,
@@ -179,6 +225,29 @@ morie_sam2vd_push_memory <- function(bank, frame_index, features,
 #' @param dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @return A list with \code{features}, \code{embedded}, \code{distance}.
+#' @references ----------
+#'   Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., Khedr, H.,
+#'   Radle, R., Rolland, C., Gustafson, L., Mintun, E., Pan, J., Alwala,
+#'   K. V., Carion, N., Wu, C.-Y., Girshick, R., Dollar, P. &
+#'   Feichtenhofer, C. (2024) "SAM 2: Segment Anything in Images and
+#'   Videos", arXiv:2408.00714. Sec. 4: the streaming architecture
+#'   processing video frames one at a time with a memory attention module
+#'   attending to previous memories of the target object, and that when
+#'   applied to images the memory is empty and the model behaves like SAM;
+#'   the memory attention stacking L blocks of self-attention followed by
+#'   cross-attention to memories of prompted and unprompted frames and to
+#'   OBJECT POINTERS, followed by an MLP; the memory bank as a FIFO queue
+#'   of up to N recent frames plus a separate FIFO queue of up to M
+#'   prompted frames, both stored as spatial feature maps; the object
+#'   pointers taken from mask decoder output tokens; and temporal
+#'   position information embedded into the N recent memories but NOT
+#'   into prompted frames, because their training signal is sparser and
+#'   generalising to unseen temporal ranges is harder. Also the reported
+#'   results: 3x fewer interactions in video and 6x faster than SAM on
+#'   images, with the SA-V dataset of 35.5M masks across 50.9K videos.
+#'   
+#'   Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
+#'   4015-4026, arXiv:2304.02643. The image model generalised here.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -225,6 +294,29 @@ morie_sam2vd_temporal_embedding <- function(entry, current_frame,
 #' @param include_pointers A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{features}, \code{attended}, \code{n_memories},
 #' \code{weights}, \code{note}.
+#' @references ----------
+#'   Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., Khedr, H.,
+#'   Radle, R., Rolland, C., Gustafson, L., Mintun, E., Pan, J., Alwala,
+#'   K. V., Carion, N., Wu, C.-Y., Girshick, R., Dollar, P. &
+#'   Feichtenhofer, C. (2024) "SAM 2: Segment Anything in Images and
+#'   Videos", arXiv:2408.00714. Sec. 4: the streaming architecture
+#'   processing video frames one at a time with a memory attention module
+#'   attending to previous memories of the target object, and that when
+#'   applied to images the memory is empty and the model behaves like SAM;
+#'   the memory attention stacking L blocks of self-attention followed by
+#'   cross-attention to memories of prompted and unprompted frames and to
+#'   OBJECT POINTERS, followed by an MLP; the memory bank as a FIFO queue
+#'   of up to N recent frames plus a separate FIFO queue of up to M
+#'   prompted frames, both stored as spatial feature maps; the object
+#'   pointers taken from mask decoder output tokens; and temporal
+#'   position information embedded into the N recent memories but NOT
+#'   into prompted frames, because their training signal is sparser and
+#'   generalising to unseen temporal ranges is harder. Also the reported
+#'   results: 3x fewer interactions in video and 6x faster than SAM on
+#'   images, with the SA-V dataset of 35.5M masks across 50.9K videos.
+#'   
+#'   Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
+#'   4015-4026, arXiv:2304.02643. The image model generalised here.
 #' @export
 #' @examples
 #' morie_sam2vd_memory_attention(frame_features = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -304,6 +396,29 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
 #' @param m_prompted Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{masks}, \code{conditioned},
 #' \code{n_frames}, \code{first_frame_is_sam}, \code{method}, \code{note}.
+#' @references ----------
+#'   Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., Khedr, H.,
+#'   Radle, R., Rolland, C., Gustafson, L., Mintun, E., Pan, J., Alwala,
+#'   K. V., Carion, N., Wu, C.-Y., Girshick, R., Dollar, P. &
+#'   Feichtenhofer, C. (2024) "SAM 2: Segment Anything in Images and
+#'   Videos", arXiv:2408.00714. Sec. 4: the streaming architecture
+#'   processing video frames one at a time with a memory attention module
+#'   attending to previous memories of the target object, and that when
+#'   applied to images the memory is empty and the model behaves like SAM;
+#'   the memory attention stacking L blocks of self-attention followed by
+#'   cross-attention to memories of prompted and unprompted frames and to
+#'   OBJECT POINTERS, followed by an MLP; the memory bank as a FIFO queue
+#'   of up to N recent frames plus a separate FIFO queue of up to M
+#'   prompted frames, both stored as spatial feature maps; the object
+#'   pointers taken from mask decoder output tokens; and temporal
+#'   position information embedded into the N recent memories but NOT
+#'   into prompted frames, because their training signal is sparser and
+#'   generalising to unseen temporal ranges is harder. Also the reported
+#'   results: 3x fewer interactions in video and 6x faster than SAM on
+#'   images, with the SA-V dataset of 35.5M masks across 50.9K videos.
+#'   
+#'   Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
+#'   4015-4026, arXiv:2304.02643. The image model generalised here.
 #' @export
 #' @keywords internal
 morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
@@ -353,6 +468,29 @@ morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Ravi, N., Gabeur, V., Hu, Y.-T., Hu, R., Ryali, C., Ma, T., Khedr, H.,
+#'   Radle, R., Rolland, C., Gustafson, L., Mintun, E., Pan, J., Alwala,
+#'   K. V., Carion, N., Wu, C.-Y., Girshick, R., Dollar, P. &
+#'   Feichtenhofer, C. (2024) "SAM 2: Segment Anything in Images and
+#'   Videos", arXiv:2408.00714. Sec. 4: the streaming architecture
+#'   processing video frames one at a time with a memory attention module
+#'   attending to previous memories of the target object, and that when
+#'   applied to images the memory is empty and the model behaves like SAM;
+#'   the memory attention stacking L blocks of self-attention followed by
+#'   cross-attention to memories of prompted and unprompted frames and to
+#'   OBJECT POINTERS, followed by an MLP; the memory bank as a FIFO queue
+#'   of up to N recent frames plus a separate FIFO queue of up to M
+#'   prompted frames, both stored as spatial feature maps; the object
+#'   pointers taken from mask decoder output tokens; and temporal
+#'   position information embedded into the N recent memories but NOT
+#'   into prompted frames, because their training signal is sparser and
+#'   generalising to unseen temporal ranges is harder. Also the reported
+#'   results: 3x fewer interactions in video and 6x faster than SAM on
+#'   images, with the SA-V dataset of 35.5M masks across 50.9K videos.
+#'   
+#'   Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
+#'   4015-4026, arXiv:2304.02643. The image model generalised here.
 #' @export
 #' @examples
 #' morie_sam2vd_cheatsheet()

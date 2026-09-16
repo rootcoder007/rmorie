@@ -10,7 +10,7 @@
 #'
 #' For every dataset id (\code{b01}..\code{d07}) this module exposes
 #' \code{morie_otis_analyze_<id>(data)}. Each analyzer returns a named
-#' \code{list} with class \code{c("morie_otis_analysis_result",
+#' \code{list} with class \eqn{c("morie_otis_analysis_result",
 #' "morie_rich_result", "list")} containing
 #' \code{title} / \code{summary_lines} / \code{tables} /
 #' \code{interpretation} / \code{warnings} / \code{payload}, mirroring
@@ -1537,7 +1537,7 @@ morie_otis_analyze_b04_ruhela_aggregate <- function(data, out_dir = NULL) {
 #'
 #' OTIS b05 (segregation placements by consecutive duration) does
 #' not carry a demographic treatment variable -- the published
-#' schema is just \code{EndFiscalYear, Consecutive_Duration,
+#' schema is just \eqn{EndFiscalYear, Consecutive_Duration,
 #' Number_SegregationPlacements}. The "Ruhela formulation" presumes
 #' a binary treatment column (typically Gender, Race, or alert
 #' status) for the aggregate RF test, so b05 has no meaningful

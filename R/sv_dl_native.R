@@ -1132,5 +1132,6 @@ morie_sv_dl_cheatsheet <- function() {
 # compact alias per ledger/NAMING.md
 morie_sv_dl_sv_delly <- morie_sv_dl_structural_variant
 
+#' @rdname morie_sv_dl_structural_variant
 #' @export
 morie_sv_dl <- morie_sv_dl_structural_variant

@@ -245,6 +245,16 @@
 #' @param nonce Passed to \code{.secaead_as_bytes}.
 #' @param rounds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @return The value of \code{.secaead_le_bytes}.
+#' @references ----------
+#'   Nir, Y. & Langley, A. (2018) "ChaCha20 and Poly1305 for IETF
+#'   Protocols", RFC 8439, doi:10.17487/RFC8439. Secs. 2.1-2.3, 2.5,
+#'   2.6, 2.8, 2.8.2.
+#'   
+#'   Bernstein, D. J. (2008) "ChaCha, a variant of Salsa20", Workshop
+#'   Record of SASC 2008.
+#'   
+#'   Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
+#'   code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 #' @export
 #' @examples
 #' key <- as.raw(0:31)
@@ -295,6 +305,16 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds = 20) {
 #' @param nonce Passed to \code{morie_secaead_chacha20_block}.
 #' @param data Passed to \code{.secaead_as_bytes}.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Nir, Y. & Langley, A. (2018) "ChaCha20 and Poly1305 for IETF
+#'   Protocols", RFC 8439, doi:10.17487/RFC8439. Secs. 2.1-2.3, 2.5,
+#'   2.6, 2.8, 2.8.2.
+#'   
+#'   Bernstein, D. J. (2008) "ChaCha, a variant of Salsa20", Workshop
+#'   Record of SASC 2008.
+#'   
+#'   Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
+#'   code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 #' @export
 #' @examples
 #' key <- as.raw(0:31)
@@ -564,6 +584,16 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param message Passed to \code{.secaead_as_bytes}.
 #' @param key Passed to \code{.secaead_as_bytes}.
 #' @return The value of \code{.secaead_bytes_from_limbs}.
+#' @references ----------
+#'   Nir, Y. & Langley, A. (2018) "ChaCha20 and Poly1305 for IETF
+#'   Protocols", RFC 8439, doi:10.17487/RFC8439. Secs. 2.1-2.3, 2.5,
+#'   2.6, 2.8, 2.8.2.
+#'   
+#'   Bernstein, D. J. (2008) "ChaCha, a variant of Salsa20", Workshop
+#'   Record of SASC 2008.
+#'   
+#'   Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
+#'   code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 #' @export
 #' @examples
 #' key <- as.raw(c(0x85, 0xd6, 0xbe, 0x78, 0x57, 0x55, 0x6d, 0x33,
@@ -617,6 +647,16 @@ morie_secaead_poly1305_mac <- function(message, key) {
 #' @param key Passed to \code{morie_secaead_chacha20_block}.
 #' @param nonce Passed to \code{morie_secaead_chacha20_block}.
 #' @return The value of \code{[}.
+#' @references ----------
+#'   Nir, Y. & Langley, A. (2018) "ChaCha20 and Poly1305 for IETF
+#'   Protocols", RFC 8439, doi:10.17487/RFC8439. Secs. 2.1-2.3, 2.5,
+#'   2.6, 2.8, 2.8.2.
+#'   
+#'   Bernstein, D. J. (2008) "ChaCha, a variant of Salsa20", Workshop
+#'   Record of SASC 2008.
+#'   
+#'   Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
+#'   code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 #' @export
 #' @examples
 #' key <- as.raw(c(0x80:0x8f, 0x90:0x9f))
@@ -702,6 +742,16 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' @return A list with \code{estimate}, \code{ciphertext}, \code{ciphertext_hex},
 #' \code{tag}, \code{tag_hex}, \code{onetime_key}, \code{aad_len}, \code{ct_len},
 #' \code{method}, \code{note}.
+#' @references ----------
+#'   Nir, Y. & Langley, A. (2018) "ChaCha20 and Poly1305 for IETF
+#'   Protocols", RFC 8439, doi:10.17487/RFC8439. Secs. 2.1-2.3, 2.5,
+#'   2.6, 2.8, 2.8.2.
+#'   
+#'   Bernstein, D. J. (2008) "ChaCha, a variant of Salsa20", Workshop
+#'   Record of SASC 2008.
+#'   
+#'   Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
+#'   code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 #' @export
 #' @examples
 #' key <- as.raw(c(0x80:0x8f, 0x90:0x9f))
@@ -748,6 +798,16 @@ morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad = NULL) {
 #' @param tag Passed to \code{.secaead_constant_time_equal}.
 #' @param aad Passed to \code{.secaead_mac_data}.
 #' @return A list with \code{valid}, \code{plaintext}, \code{expected_tag}.
+#' @references ----------
+#'   Nir, Y. & Langley, A. (2018) "ChaCha20 and Poly1305 for IETF
+#'   Protocols", RFC 8439, doi:10.17487/RFC8439. Secs. 2.1-2.3, 2.5,
+#'   2.6, 2.8, 2.8.2.
+#'   
+#'   Bernstein, D. J. (2008) "ChaCha, a variant of Salsa20", Workshop
+#'   Record of SASC 2008.
+#'   
+#'   Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
+#'   code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 #' @export
 #' @examples
 #' key <- as.raw(c(0x80:0x8f, 0x90:0x9f))
@@ -790,6 +850,16 @@ morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
 #' the source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Nir, Y. & Langley, A. (2018) "ChaCha20 and Poly1305 for IETF
+#'   Protocols", RFC 8439, doi:10.17487/RFC8439. Secs. 2.1-2.3, 2.5,
+#'   2.6, 2.8, 2.8.2.
+#'   
+#'   Bernstein, D. J. (2008) "ChaCha, a variant of Salsa20", Workshop
+#'   Record of SASC 2008.
+#'   
+#'   Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
+#'   code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 #' @export
 #' @examples
 #' morie_secaead_cheatsheet()
@@ -816,5 +886,6 @@ morie_secaead_chacha20poly1305 <- morie_secaead_aead_encrypt
 # public names resolved by fn/_lazy_map.json
 morie_secaead_aead_chacha20poly1305 <- morie_secaead_aead_encrypt
 
+#' @rdname morie_secaead_aead_encrypt
 #' @export
 morie_secaead <- morie_secaead_aead_encrypt

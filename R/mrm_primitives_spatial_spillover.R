@@ -57,7 +57,7 @@ NULL
 #' @param W Numeric matrix of shape (N, N). Row-standardised spatial
 #'   weight matrix.
 #' @param coefficient_names Optional character vector of length K with
-#'   human-readable covariate names; defaults to \code{c("x1", ...,
+#'   human-readable covariate names; defaults to \eqn{c("x1", ...,
 #'   "xK")}.
 #' @return A named list with classes \code{morie_mrm_result},
 #'   \code{morie_rich_result}, \code{list}. Carries

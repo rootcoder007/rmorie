@@ -19,6 +19,7 @@
 #' Delegating wrapper (not a bare assignment) so that source collation
 #' order does not matter at load time; the body is a single call to the
 #' target, so outputs are exactly identical.
+#' @return The value of `Dpld`.
 #' @export
 #' @keywords internal
 Ldiff <- function(X, quasi_ids, sensitive, l, c = 1) {

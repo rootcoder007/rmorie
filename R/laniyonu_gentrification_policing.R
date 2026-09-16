@@ -37,7 +37,7 @@
 #' @name morie_laniyonu_gentrification_policing
 #' @examples
 #' set.seed(1)
-#' df <- expand.grid(tract_id = sprintf("T\%02d", 1:40), year = 2010:2012,
+#' df <- expand.grid(tract_id = sprintf("T%02d", 1:40), year = 2010:2012,
 #'                   stringsAsFactors = FALSE)
 #' df$median_inc_2000 <- runif(nrow(df), 3e4, 7e4)
 #' df$median_inc_2014 <- df$median_inc_2000 * 1.2

@@ -303,6 +303,17 @@
 #' @param q_covariates Optional; may be \code{NULL}. Coerced to integer by the body, with
 #' \code{as.integer}.
 #' @return A list with \code{steps}, \code{info}.
+#' @references van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in Data
+#'   Science: Causal Inference for Complex Longitudinal Studies, Springer
+#'   Series in Statistics, doi:10.1007/978-3-319-65304-4, Ch. 10 (Sec. 10.1,
+#'   Examples 10.2 and 10.3, Sec. 10.1.1).
+#'   van der Laan, M. J. & Gruber, S. (2010) "Collaborative double robust
+#'   targeted maximum likelihood estimation", The International Journal of
+#'   Biostatistics 6(1), article 17, doi:10.2202/1557-4679.1181.
+#'   Gruber, S. & van der Laan, M. J. (2010) "A targeted maximum likelihood
+#'   estimator of a causal effect on a bounded continuous outcome", The
+#'   International Journal of Biostatistics 6(1), article 26,
+#'   doi:10.2202/1557-4679.1260.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -527,6 +538,18 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @param trim See Usage.
 #' @param scale See Usage.
 #' @param q_covariates See Usage.
+#' @return The value of `.RichResult`.
+#' @references van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in Data
+#'   Science: Causal Inference for Complex Longitudinal Studies, Springer
+#'   Series in Statistics, doi:10.1007/978-3-319-65304-4, Ch. 10 (Sec. 10.1,
+#'   Examples 10.2 and 10.3, Sec. 10.1.1).
+#'   van der Laan, M. J. & Gruber, S. (2010) "Collaborative double robust
+#'   targeted maximum likelihood estimation", The International Journal of
+#'   Biostatistics 6(1), article 17, doi:10.2202/1557-4679.1181.
+#'   Gruber, S. & van der Laan, M. J. (2010) "A targeted maximum likelihood
+#'   estimator of a causal effect on a bounded continuous outcome", The
+#'   International Journal of Biostatistics 6(1), article 26,
+#'   doi:10.2202/1557-4679.1260.
 #' @export
 #' @examples
 #' set.seed(1)

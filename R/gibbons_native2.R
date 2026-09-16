@@ -11,6 +11,10 @@
 # 2026-08-03 NAMESPACE note in SHELF_LEDGER.txt.
 
 #' EDF count is binomial -- Gibbons Theorem 2.3.1 (book p. 33)
+#' @param n Argument `n`; see Usage.
+#' @param fx Argument `fx`; see Usage.
+#' @param i Argument `i`; see Usage.
+#' @return A list with `mean`, `var`, `pmf`, `cdf`, `n`, `fx`.
 #' @examples
 #' rmorie:::Edfbinom(n = 10, fx = 0.5)
 #' @keywords internal
@@ -32,6 +36,11 @@ Edfbinom <- function(n, fx, i = NULL) {
 }
 
 #' CDF of the r-th order statistic -- Theorem 2.4.1, eq. (2.4.1), p. 37
+#' @param t Argument `t`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param cdf Argument `cdf`; see Usage.
+#' @return A list with `cdf`, `sf`, `fx`, `r`, `n`, `t`.
 #' @examples
 #' rmorie:::Ostatcdf(t = 0.5, r = 2, n = 5, cdf = pnorm)
 #' @keywords internal
@@ -47,6 +56,12 @@ Ostatcdf <- function(t, r, n, cdf) {
 }
 
 #' PDF of the r-th order statistic -- Theorem 2.4.2, eq. (2.4.2), p. 37
+#' @param x Argument `x`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param cdf Argument `cdf`; see Usage.
+#' @param pdf Argument `pdf`; see Usage.
+#' @return A list with `pdf`, `coef`, `fx`, `dx`, `r`, `n`.
 #' @examples
 #' rmorie:::Ostatpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L, n = 5L,
 #'   cdf = c(1, 2, 3, 4, 5, 6, 7, 8), pdf = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -63,6 +78,10 @@ Ostatpdf <- function(x, r, n, cdf, pdf) {
 }
 
 #' Uniform order statistic is Beta(r, n-r+1) -- Theorem 2.4.3, p. 38
+#' @param u Argument `u`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `pdf`, `cdf`, `mean`, `var`, `alpha`, `beta`, `r`, `n`.
 #' @examples
 #' rmorie:::Ostatbeta(u = 0.3, r = 2, n = 5)
 #' @keywords internal
@@ -82,6 +101,11 @@ Ostatbeta <- function(u, r, n) {
 }
 
 #' Asymptotic normality of the sample quantile -- Theorem 2.10.1, p. 60
+#' @param p Argument `p`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param xp Argument `xp`; see Usage.
+#' @param fxp Argument `fxp`; see Usage.
+#' @return A list with `mean`, `var`, `se`, `p`, `n`.
 #' @examples
 #' rmorie:::Ostatasymp(p = 0.5, n = 100, xp = 0, fxp = dnorm(0))
 #' @keywords internal
@@ -97,6 +121,9 @@ Ostatasymp <- function(p, n, xp, fxp) {
 }
 
 #' Empirical distribution function -- eq. (2.3.1), p. 32
+#' @param x Argument `x`; see Usage.
+#' @param t Argument `t`; see Usage.
+#' @return A list with `edf`, `count`, `n`, `sorted`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Edfstep(V, V)
@@ -111,6 +138,10 @@ Edfstep <- function(x, t) {
 }
 
 #' Moments of a uniform order statistic -- Sec. 2.4, p. 38
+#' @param r Argument `r`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @return A list with `moment`, `mean`, `var`, `r`, `n`, `k`.
 #' @examples
 #' rmorie:::Ostatmom(r = 5L, n = 5L)
 #' @keywords internal
@@ -126,6 +157,10 @@ Ostatmom <- function(r, n, k = 1) {
 }
 
 #' Covariance of two uniform order statistics -- Sec. 2.4, p. 38
+#' @param r Argument `r`; see Usage.
+#' @param s Argument `s`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `cov`, `corr`, `var_r`, `var_s`, `r`, `s`, `n`.
 #' @examples
 #' rmorie:::Ostatcov(r = 5L, s = 5L, n = 5L)
 #' @keywords internal
@@ -143,6 +178,14 @@ Ostatcov <- function(r, s, n) {
 }
 
 #' Joint density of X_(r), X_(s) -- Sec. 2.5, p. 39
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param s Argument `s`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param cdf Argument `cdf`; see Usage.
+#' @param pdf Argument `pdf`; see Usage.
+#' @return A list with `pdf`, `coef`, `fx`, `fy`, `r`, `s`, `n`.
 #' @examples
 #' rmorie:::Ostatjoint(x = -0.5, y = 0.5, r = 1, s = 3, n = 5,
 #'            cdf = pnorm, pdf = dnorm)
@@ -168,6 +211,9 @@ Ostatjoint <- function(x, y, r, s, n, cdf, pdf) {
 }
 
 #' Joint density of all n order statistics -- Sec. 2.2, p. 31
+#' @param x Argument `x`; see Usage.
+#' @param pdf Argument `pdf`; see Usage.
+#' @return A list with `pdf`, `coef`, `prod`, `ordered`, `n`.
 #' @examples
 #' rmorie:::Ostatjall(x = c(-1.2, -0.3, 0.4, 1.1), pdf = dnorm)
 #' @keywords internal
@@ -183,6 +229,9 @@ Ostatjall <- function(x, pdf) {
 }
 
 #' Sample quantile as an order statistic -- Sec. 2.6, p. 42
+#' @param x Argument `x`; see Usage.
+#' @param p Argument `p`; see Usage.
+#' @return A list with `estimate`, `r`, `n`, `p`, `u_mean`, `u_var`.
 #' @examples
 #' rmorie:::Sampquant(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
 #' @keywords internal
@@ -199,6 +248,11 @@ Sampquant <- function(x, p) {
 }
 
 #' Placement / exceedance null law -- Problem 2.28(c), p. 70
+#' @param i Argument `i`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param j Argument `j`; see Usage.
+#' @return A list with `pmf`, `pmf_j`, `cdf_j`, `mean`, `var`, `i`, `m`, `n`.
 #' @examples
 #' rmorie:::Exceed(i = 5L, m = 5L, n = 5L)
 #' @keywords internal
@@ -226,6 +280,9 @@ Exceed <- function(i, m, n, j = NULL) {
 }
 
 #' Placements of Y among the X order statistics -- Sec. 2.11, p. 65
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `placements`, `ranks`, `blocks`, `total`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Placement(V, V)
@@ -242,6 +299,11 @@ Placement <- function(x, y) {
 }
 
 #' Distribution-free quantile confidence interval -- Sec. 5.2, p. 158
+#' @param x Argument `x`; see Usage.
+#' @param p Argument `p`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param s Argument `s`; see Usage.
+#' @return A list with `lower`, `upper`, `coverage`, `alpha`, `r`, `s`, `n`, `p`.
 #' @examples
 #' set.seed(1)
 #' x <- rnorm(20)
@@ -263,6 +325,11 @@ Quantci <- function(x, p, r, s) {
 }
 
 #' Distribution-free quantile test -- Sec. 5.3, p. 163
+#' @param x Argument `x`; see Usage.
+#' @param q0 Argument `q0`; see Usage.
+#' @param p Argument `p`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `statistic`, `p_value`, `n`, `p`, `mean`, `var`, `alternative`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Quanttest(V, V)
@@ -286,6 +353,9 @@ Quanttest <- function(x, q0, p = 0.5, alternative = "two-sided") {
 }
 
 #' Sign-test statistic K -- Sec. 5.4, eq. (5.4.1), p. 168
+#' @param x Argument `x`; see Usage.
+#' @param m0 Argument `m0`; see Usage.
+#' @return A list with `statistic`, `n`, `nzero`, `mean`, `var`, `n_raw`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Signk(V)
@@ -302,6 +372,10 @@ Signk <- function(x, m0 = 0) {
 }
 
 #' Exact sign-test p-value -- eq. (5.4.3), p. 169
+#' @param k Argument `k`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `p_value`, `p_lower`, `p_upper`, `statistic`, `n`, `alternative`.
 #' @examples
 #' rmorie:::Signp(k = 5L, n = 5L)
 #' @keywords internal
@@ -322,6 +396,11 @@ Signp <- function(k, n, alternative = "two-sided") {
 }
 
 #' Sign-test normal approximation -- eq. (5.4.7), p. 174
+#' @param k Argument `k`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `z`, `p_value`, `statistic`, `n`, `mean`, `var`, `alternative`.
 #' @examples
 #' rmorie:::Signz(k = 5L, n = 5L)
 #' @keywords internal
@@ -346,6 +425,10 @@ Signz <- function(k, n, alternative = "two-sided", correct = TRUE) {
 }
 
 #' Zero differences in the sign test -- Sec. 5.4.8, p. 180
+#' @param x Argument `x`; see Usage.
+#' @param m0 Argument `m0`; see Usage.
+#' @param method Argument `method`; see Usage.
+#' @return A list with `statistic`, `n`, `nzero`, `k_raw`, `n_raw`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Signzero(V)
@@ -374,6 +457,11 @@ Signzero <- function(x, m0 = 0, method = "discard") {
 }
 
 #' Power of the sign test -- eq. (5.4.8), Table 5.4.1, p. 174
+#' @param n Argument `n`; see Usage.
+#' @param theta Argument `theta`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param exact Argument `exact`; see Usage.
+#' @return A list with `power`, `power_exact`, `k_alpha`, `alpha_exact`, `n`, `theta`.
 #' @examples
 #' rmorie:::Signpow(n = 5L, theta = 0.5)
 #' @keywords internal
@@ -408,6 +496,10 @@ Signpow <- function(n, theta, alpha = 0.05, exact = TRUE) {
 }
 
 #' Simulated sign-test power over supplied samples -- Sec. 5.4.5, p. 175
+#' @param samples Argument `samples`; see Usage.
+#' @param m0 Argument `m0`; see Usage.
+#' @param kcrit Argument `kcrit`; see Usage.
+#' @return A list with `power`, `rejections`, `nsim`, `kmean`, `kcrit`.
 #' @examples
 #' rmorie:::Signsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   kcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -424,6 +516,10 @@ Signsimpow <- function(samples, m0, kcrit) {
 }
 
 #' Sign-test sample size -- eq. (5.4.9), p. 179
+#' @param theta Argument `theta`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @return A list with `n`, `n_raw`, `root_n`, `z_alpha`, `z_beta`, `theta`.
 #' @examples
 #' rmorie:::Signn(theta = 0.05)
 #' @keywords internal
@@ -443,6 +539,10 @@ Signn <- function(theta, alpha = 0.05, beta = 0.10) {
 }
 
 #' Two-sided sign-test sample size -- eq. (5.4.9) with alpha/2, p. 179
+#' @param theta Argument `theta`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @return A list with `n`, `n_raw`, `root_n`, `z_alpha`, `z_beta`, `theta`.
 #' @examples
 #' rmorie:::Signnasy(theta = 0.05)
 #' @keywords internal
@@ -462,6 +562,9 @@ Signnasy <- function(theta, alpha = 0.05, beta = 0.10) {
 }
 
 #' Median CI from sign-test inversion -- eq. (5.4.11), p. 179
+#' @param x Argument `x`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `lower`, `upper`, `r`, `s`, `coverage`, `tail`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Signmedci(V)
@@ -491,6 +594,8 @@ Signmedci <- function(x, alpha = 0.05) {
 }
 
 #' Midranks of |d| with signs -- Sec. 5.5, p. 189
+#' @param d Argument `d`; see Usage.
+#' @return A list with `ranks`, `signs`, `signed`, `ties`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Absrank(V)
@@ -509,6 +614,9 @@ Absrank <- function(d) {
 }
 
 #' Wilcoxon signed-rank T+ -- Sec. 5.7, eqs. (5.7.1)/(5.7.9), p. 195
+#' @param x Argument `x`; see Usage.
+#' @param m0 Argument `m0`; see Usage.
+#' @return A list with `statistic`, `tminus`, `n`, `nzero`, `mean`, `var`, `z`, `p_value`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wsr(V)
@@ -534,6 +642,8 @@ Wsr <- function(x, m0 = 0) {
 }
 
 #' Null moments of T+ -- eq. (5.7.2), p. 197
+#' @param n Argument `n`; see Usage.
+#' @return A list with `mean`, `var`, `sd`, `total`, `skew`, `n`.
 #' @examples
 #' rmorie:::Wsrmom(n = 5L)
 #' @keywords internal
@@ -547,6 +657,9 @@ Wsrmom <- function(n) {
 }
 
 #' Tie-corrected Var\[T+\] -- eqs. (5.7.10)-(5.7.11), p. 203
+#' @param d Argument `d`; see Usage.
+#' @param m0 Argument `m0`; see Usage.
+#' @return A list with `var`, `var_uncorrected`, `correction`, `n`, `nzero`, `ties`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wsrties(V)
@@ -566,6 +679,11 @@ Wsrties <- function(d, m0 = 0) {
 }
 
 #' Signed-rank normal approximation -- eq. (5.7.9), p. 202
+#' @param tplus Argument `tplus`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `z`, `p_value`, `mean`, `var`, `statistic`, `n`, `alternative`.
 #' @examples
 #' rmorie:::Wsrz(tplus = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 #' @keywords internal
@@ -589,6 +707,11 @@ Wsrz <- function(tplus, n, alternative = "two-sided", correct = FALSE) {
 }
 
 #' Signed-rank power -- eqs. (5.7.13)-(5.7.14), p. 205
+#' @param n Argument `n`; see Usage.
+#' @param p1 Argument `p1`; see Usage.
+#' @param p2 Argument `p2`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `power`, `z_beta`, `shift`, `sd0`, `n`, `p1`, `p2`.
 #' @examples
 #' rmorie:::Wsrpow(n = 5L, p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
@@ -609,6 +732,10 @@ Wsrpow <- function(n, p1, p2, alpha = 0.05) {
 }
 
 #' Simulated signed-rank power over supplied samples -- Sec. 5.7.3, p. 204
+#' @param samples Argument `samples`; see Usage.
+#' @param m0 Argument `m0`; see Usage.
+#' @param tcrit Argument `tcrit`; see Usage.
+#' @return A list with `power`, `rejections`, `nsim`, `tmean`, `tcrit`.
 #' @examples
 #' rmorie:::Wsrsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   tcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -630,6 +757,11 @@ Wsrsimpow <- function(samples, m0, tcrit) {
 }
 
 #' Signed-rank sample size -- eq. (5.7.15), p. 206
+#' @param p2 Argument `p2`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @param twosided Argument `twosided`; see Usage.
+#' @return A list with `n`, `n_raw`, `z_alpha`, `z_beta`, `p2`.
 #' @examples
 #' rmorie:::Wsrn(p2 = 0.7, alpha = 0.05, beta = 0.1)
 #' @keywords internal
@@ -661,6 +793,9 @@ Wsrn <- function(p2, alpha = 0.05, beta = 0.05, twosided = FALSE) {
 }
 
 #' Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209
+#' @param x Argument `x`; see Usage.
+#' @param tcrit Argument `tcrit`; see Usage.
+#' @return A list with `lower`, `upper`, `coverage`, `tail`, `nwalsh`, `n`, `tcrit`, `estimate`.
 #' @examples
 #' rmorie:::Wsrci(x = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = 5L)
 #' @keywords internal
@@ -681,6 +816,9 @@ Wsrci <- function(x, tcrit) {
 }
 
 #' Signed-rank test of symmetry -- Sec. 5.7.7, p. 211
+#' @param x Argument `x`; see Usage.
+#' @param centre Argument `centre`; see Usage.
+#' @return A list with `statistic`, `z`, `p_value`, `mean`, `var`, `skewdir`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wsrsym(V)
@@ -702,6 +840,9 @@ Wsrsym <- function(x, centre = 0) {
 }
 
 #' Hodges-Lehmann estimator and Walsh counting identity -- pp. 209-210
+#' @param x Argument `x`; see Usage.
+#' @param m0 Argument `m0`; see Usage.
+#' @return A list with `estimate`, `tplus`, `tminus`, `nbelow`, `nequal`, `nabove`, `nwalsh`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Hlwsrlink(V)
@@ -722,6 +863,11 @@ Hlwsrlink <- function(x, m0 = 0) {
 }
 
 #' Total runs asymptotic normality -- eq. (3.2.9), p. 82
+#' @param r Argument `r`; see Usage.
+#' @param n1 Argument `n1`; see Usage.
+#' @param n2 Argument `n2`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `z`, `z_exact`, `p_value`, `mean`, `var`, `mean_exact`, `var_exact`, `lam`, `n`.
 #' @examples
 #' rmorie:::Runsz(r = 9, n1 = 10, n2 = 10)
 #' @keywords internal
@@ -749,6 +895,10 @@ Runsz <- function(r, n1, n2, correct = FALSE) {
 }
 
 #' Runs up-and-down moments -- Sec. 3.4, p. 93 (Levene 1952)
+#' @param n Argument `n`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `mean`, `var`, `sd`, `z_left`, `z_right`, `p_value`, `zcrit`, `n`.
 #' @examples
 #' rmorie:::Runsudvar(n = 5L)
 #' @keywords internal
@@ -772,6 +922,8 @@ Runsudvar <- function(n, r = NULL, alpha = 0.05) {
 }
 
 #' RVN null moments -- Sec. 3.5, p. 95 (Bartels 1982)
+#' @param n Argument `n`; see Usage.
+#' @return A list with `mean`, `var`, `var_approx`, `sd`, `denom`, `n`.
 #' @examples
 #' rmorie:::Rvnmom(n = 5L)
 #' @keywords internal
@@ -784,6 +936,9 @@ Rvnmom <- function(n) {
 }
 
 #' Rank von Neumann test -- eqs. (3.5.1)-(3.5.2), p. 95
+#' @param x Argument `x`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `statistic`, `nm`, `denom`, `z`, `p_value`, `mean`, `var`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Rvntest(V)
@@ -825,6 +980,10 @@ Rvntest <- function(x, alternative = "two-sided") {
 }
 
 #' Table D: exact runs distribution -- Theorem 3.2.2, p. 79
+#' @param n1 Argument `n1`; see Usage.
+#' @param n2 Argument `n2`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @return A list with `support`, `pmf`, `cdf`, `pmf_r`, `cdf_r`, `sf_r`, `mean`, `var`, `n1`, `n2`.
 #' @examples
 #' rmorie:::Runstab(n1 = 5L, n2 = 5L)
 #' @keywords internal
@@ -855,6 +1014,11 @@ Runstab <- function(n1, n2, r = NULL) {
 }
 
 #' Exact runs-test critical region -- Sec. 3.2, p. 84; Table D
+#' @param n1 Argument `n1`; see Usage.
+#' @param n2 Argument `n2`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param tail Argument `tail`; see Usage.
+#' @return A list with `lower`, `upper`, `alpha_lower`, `alpha_upper`, `alpha_exact`, `n1`, `n2`.
 #' @examples
 #' rmorie:::Runscrit(n1 = 5L, n2 = 5L)
 #' @keywords internal
@@ -894,6 +1058,10 @@ Runscrit <- function(n1, n2, alpha = 0.05, tail = "two-sided") {
 }
 
 #' Attainable exact sizes of a discrete test -- Sec. 1.2.9, p. 26
+#' @param pmf Argument `pmf`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param upper Argument `upper`; see Usage.
+#' @return A list with `sizes`, `alpha_exact`, `cut`, `nlevels`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Exactsize(V)
@@ -916,6 +1084,10 @@ Exactsize <- function(pmf, alpha = 0.05, upper = TRUE) {
 }
 
 #' Randomized decision rule of exact size -- Sec. 1.2.9, pp. 26-27
+#' @param pmf Argument `pmf`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param pmf_alt Argument `pmf_alt`; see Usage.
+#' @return A list with `gamma`, `t2`, `t1`, `size_hard`, `size`, `power`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Randtest(V)
@@ -952,6 +1124,10 @@ Randtest <- function(pmf, alpha = 0.05, pmf_alt = NULL) {
 }
 
 #' Consistency of a test -- Sec. 1.2.10, p. 23
+#' @param nvals Argument `nvals`; see Usage.
+#' @param effect Argument `effect`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `power`, `consistent`, `monotone`, `limit`, `effect`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Consist(V, V)
@@ -970,6 +1146,10 @@ Consist <- function(nvals, effect, alpha = 0.05) {
 }
 
 #' Chi-square goodness of fit -- eq. (4.2.1), p. 104
+#' @param observed Argument `observed`; see Usage.
+#' @param expected Argument `expected`; see Usage.
+#' @param ddof Argument `ddof`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `k`, `n`, `contrib`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Chigof(V, V)
@@ -990,6 +1170,9 @@ Chigof <- function(observed, expected, ddof = 0) {
 }
 
 #' KS statistics via the PIT -- Theorem 4.3.1, p. 111
+#' @param x Argument `x`; see Usage.
+#' @param cdf Argument `cdf`; see Usage.
+#' @return A list with `statistic`, `dplus`, `dminus`, `z`, `n`.
 #' @examples
 #' set.seed(2)
 #' rmorie:::Ksdistfree(rnorm(25), cdf = pnorm)
@@ -1005,6 +1188,9 @@ Ksdistfree <- function(x, cdf) {
 }
 
 #' Exact P(D_n < d) -- Theorem 4.3.2 via Durbin's matrix identity, p. 111
+#' @param d Argument `d`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `cdf`, `sf`, `k`, `t`, `n`, `d`.
 #' @examples
 #' rmorie:::Ksexact(d = 5L, n = 5L)
 #' @keywords internal
@@ -1067,6 +1253,9 @@ Ksexact <- function(d, n) {
 }
 
 #' Exact P(D+ >= c) -- Theorem 4.3.4, Birnbaum-Tingey, p. 115
+#' @param c Argument `c`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `sf`, `cdf`, `terms`, `n`, `c`.
 #' @examples
 #' rmorie:::Ksplusdist(c = 0.2, n = 20)
 #' @keywords internal
@@ -1088,6 +1277,10 @@ Ksplusdist <- function(c, n) {
 .gbKsQ <- function(k) 2 * sum((-1)^(0:99) * exp(-2 * (1:100)^2 * k * k))
 
 #' KS critical value (Table F) by exact bisection -- p. 565
+#' @param n Argument `n`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param exact Argument `exact`; see Usage.
+#' @return A list with `dcrit`, `dcrit_asymp`, `k_alpha`, `n`, `alpha`.
 #' @examples
 #' rmorie:::Kscrit(n = 5L)
 #' @keywords internal
@@ -1119,6 +1312,10 @@ Kscrit <- function(n, alpha = 0.05, exact = TRUE) {
 }
 
 #' KS confidence band -- Sec. 4.4.2, p. 121
+#' @param x Argument `x`; see Usage.
+#' @param dcrit Argument `dcrit`; see Usage.
+#' @param at Argument `at`; see Usage.
+#' @return A list with `at`, `edf`, `lower`, `upper`, `width`, `dcrit`, `n`.
 #' @examples
 #' set.seed(2)
 #' rmorie:::Ksband(rnorm(25), dcrit = 0.264)
@@ -1139,6 +1336,9 @@ Ksband <- function(x, dcrit, at = NULL) {
 }
 
 #' KS sample size for uniform error c -- Sec. 4.4.3, p. 122
+#' @param c Argument `c`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `n`, `n_asymp`, `k_alpha`, `coverage`, `c`, `alpha`.
 #' @examples
 #' rmorie:::Ksn(c = 0.2, alpha = 0.05)
 #' @keywords internal
@@ -1167,6 +1367,9 @@ Ksn <- function(c, alpha = 0.05) {
 }
 
 #' Cramer-von Mises W^2 -- Problem 4.14, p. 150
+#' @param x Argument `x`; see Usage.
+#' @param cdf Argument `cdf`; see Usage.
+#' @return A list with `statistic`, `nw2`, `z`, `n`.
 #' @examples
 #' set.seed(2)
 #' rmorie:::Cvmw2(rnorm(25), cdf = pnorm)
@@ -1182,6 +1385,9 @@ Cvmw2 <- function(x, cdf) {
 }
 
 #' KS vs Cramer-von Mises on one sample -- Sec. 4.9, p. 146
+#' @param x Argument `x`; see Usage.
+#' @param cdf Argument `cdf`; see Usage.
+#' @return A list with `d`, `w2`, `argmax`, `share`, `n`.
 #' @examples
 #' set.seed(2)
 #' rmorie:::Kscvmcmp(rnorm(30), cdf = pnorm)
@@ -1219,6 +1425,9 @@ Kscvmcmp <- function(x, cdf) {
   TAIL = c(.816, .888, 1.038, 1.212))
 
 #' Lilliefors test for normality -- Sec. 4.5, p. 126; Table O
+#' @param x Argument `x`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `statistic`, `dcrit`, `reject`, `mean`, `sd`, `n`, `n_table`, `alpha`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Lillienorm(V)
@@ -1267,6 +1476,9 @@ Lillienorm <- function(x, alpha = 0.05) {
   TAIL = c(.980, 1.077, 1.274, 1.501))
 
 #' Lilliefors test for exponentiality -- Sec. 4.6, p. 133; Table T
+#' @param x Argument `x`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `statistic`, `dcrit`, `reject`, `mean`, `n`, `n_table`, `alpha`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Lillieexp(V)
@@ -1309,6 +1521,11 @@ Lillieexp <- function(x, alpha = 0.05) {
     "exponential" = c(1.959, 1.591, 1.321, 1.062, 0.916)))
 
 #' Anderson-Darling W_n^2 -- eq. (4.7.1), p. 138; Table 4.7.1, p. 140
+#' @param x Argument `x`; see Usage.
+#' @param cdf Argument `cdf`; see Usage.
+#' @param case Argument `case`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `statistic`, `astar`, `crit`, `reject`, `z`, `n`, `case`, `alpha`.
 #' @examples
 #' set.seed(2)
 #' rmorie:::Adtest(rnorm(30), cdf = pnorm)
@@ -1342,6 +1559,9 @@ Adtest <- function(x, cdf, case = "specified", alpha = 0.05) {
 .gbRunsPmf2 <- function(m, n) .gbRunsPmf(m, n)
 
 #' Wald-Wolfowitz two-sample runs test -- Sec. 6.2, p. 231
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `p_value`, `z`, `p_normal`, `mean`, `var`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wwruns(V, V)
@@ -1367,6 +1587,9 @@ Wwruns <- function(x, y) {
 }
 
 #' Runs-test tie bounds -- Sec. 6.2.1, p. 233
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `rmin`, `rmax`, `nties`, `ambiguous`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wwties(V, V)
@@ -1420,6 +1643,10 @@ Wwties <- function(x, y) {
 }
 
 #' Exact two-sample runs test -- Sec. 6.2, p. 231
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param tail Argument `tail`; see Usage.
+#' @return A list with `statistic`, `p_value`, `p_left`, `p_right`, `support`, `pmf`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wwexact(V, V)
@@ -1473,6 +1700,9 @@ Wwexact <- function(x, y, tail = "left") {
 }
 
 #' Two-sample KS test -- Sec. 6.3, p. 239
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `p_value`, `dplus`, `dminus`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Ks2(V, V)
@@ -1494,6 +1724,10 @@ Ks2 <- function(x, y) {
 }
 
 #' Two-sample KS asymptotic -- Sec. 6.3, p. 241
+#' @param d Argument `d`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `p_value`, `k`, `neff`, `m`, `n`.
 #' @examples
 #' rmorie:::Ks2asymp(d = 5L, m = 5L, n = 5L)
 #' @keywords internal
@@ -1510,6 +1744,10 @@ Ks2asymp <- function(d, m, n) {
 }
 
 #' Exact two-sided Smirnov distribution -- Sec. 6.3, p. 239
+#' @param d Argument `d`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `sf`, `cdf`, `npaths`, `inside`, `m`, `n`.
 #' @examples
 #' rmorie:::Smirnov2(d = 0.4, m = 10, n = 12)
 #' @keywords internal
@@ -1526,6 +1764,10 @@ Smirnov2 <- function(d, m, n) {
 }
 
 #' Exact one-sided Smirnov distribution -- Sec. 6.3, p. 241
+#' @param d Argument `d`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `sf`, `cdf`, `sf_asymp`, `k`, `m`, `n`.
 #' @examples
 #' rmorie:::Smirnov1(d = 0.4, m = 10, n = 12)
 #' @keywords internal
@@ -1541,6 +1783,9 @@ Smirnov1 <- function(d, m, n) {
 }
 
 #' Two-sample median test -- Sec. 6.4, p. 247
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `p_value`, `p_lower`, `p_upper`, `median`, `t`, `mean`, `var`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Medtest(V, V)
@@ -1571,6 +1816,10 @@ Medtest <- function(x, y) {
 }
 
 #' Median-test confidence interval -- Sec. 6.4.2, p. 251
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @return A list with `lower`, `upper`, `estimate`, `c`, `m`, `n`.
 #' @examples
 #' set.seed(3)
 #' rmorie:::Medtestci(rnorm(15), rnorm(15, 0.5), c = 3)
@@ -1599,6 +1848,13 @@ Medtestci <- function(x, y, c) {
 }
 
 #' Precedence/median-test power -- eqs. (6.4.9)-(6.4.10), p. 254
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param wcrit Argument `wcrit`; see Usage.
+#' @param g Argument `g`; see Usage.
+#' @param nodes Argument `nodes`; see Usage.
+#' @return A list with `power`, `pmf`, `m`, `n`, `r`, `wcrit`.
 #' @examples
 #' rmorie:::Medtestpow(m = 9, n = 8, r = 5, wcrit = 2, g = function(u) u^2)
 #' @keywords internal
@@ -1622,6 +1878,10 @@ Medtestpow <- function(m, n, r, wcrit, g, nodes = 2001) {
 }
 
 #' Two-sided median test with exact region -- Sec. 6.4, p. 247
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `statistic`, `p_value`, `lower`, `upper`, `alpha_exact`, `t`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Medtest2(V, V)
@@ -1668,6 +1928,9 @@ Medtest2 <- function(x, y, alpha = 0.05) {
 }
 
 #' Ties at the combined median -- Sec. 6.4, p. 247
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `u_strict`, `u_inclusive`, `u_split`, `t_strict`, `t_inclusive`, `nties`, `median`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Medties(V, V)
@@ -1692,6 +1955,10 @@ Medties <- function(x, y) {
 }
 
 #' Control median test -- Sec. 6.5, eq. (6.5.1), p. 256
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `statistic`, `p_value`, `z`, `mean`, `var`, `pmf`, `r`, `m`, `n`.
 #' @examples
 #' rmorie:::Ctrlmed(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
 #' @keywords internal
@@ -1721,6 +1988,10 @@ Ctrlmed <- function(x, y, alternative = "two-sided") {
 }
 
 #' Curtailed control median test -- eq. (6.5.2), p. 258
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `d`, `d_raw`, `d_exact`, `alpha_exact`, `z_alpha`, `m`, `n`.
 #' @examples
 #' rmorie:::Ctrlmedcur(m = 5L, n = 5L)
 #' @keywords internal
@@ -1752,6 +2023,12 @@ Ctrlmedcur <- function(m, n, alpha = 0.05) {
 }
 
 #' Control median test power -- Sec. 6.5.2, p. 258
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param d Argument `d`; see Usage.
+#' @param h Argument `h`; see Usage.
+#' @param nodes Argument `nodes`; see Usage.
+#' @return A list with `power`, `pmf`, `q`, `r`, `m`, `n`, `d`.
 #' @examples
 #' rmorie:::Ctrlmedpow(m = 8, n = 9, d = 2, h = function(v) v^2)
 #' @keywords internal
@@ -1807,6 +2084,9 @@ Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
 }
 
 #' Mann-Whitney U -- Sec. 6.6, eqs. (6.6.1), (6.6.14), p. 260
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `p_value`, `z`, `p_normal`, `mean`, `var`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Mwu(V, V)
@@ -1833,6 +2113,10 @@ Mwu <- function(x, y) {
 }
 
 #' Mann-Whitney shift CI -- Sec. 6.6.2, p. 267
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @return A list with `lower`, `upper`, `estimate`, `k`, `ndiff`, `m`, `n`.
 #' @examples
 #' rmorie:::Mwuci(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 #' @keywords internal
@@ -1851,6 +2135,12 @@ Mwuci <- function(x, y, k) {
 }
 
 #' Mann-Whitney sample size -- eq. (6.6.18), p. 269 (Noether 1987)
+#' @param p Argument `p`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @param twosided Argument `twosided`; see Usage.
+#' @return A list with `n`, `n_raw`, `m`, `n_y`, `z_alpha`, `z_beta`, `c`, `p`.
 #' @examples
 #' rmorie:::Mwun(p = 0.05)
 #' @keywords internal
@@ -1872,6 +2162,9 @@ Mwun <- function(p, c = 0.5, alpha = 0.05, beta = 0.10, twosided = FALSE) {
 }
 
 #' Wilcoxon rank-sum W_N -- Sec. 8.2, pp. 290-291
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `p_value`, `z`, `p_normal`, `mean`, `var`, `wmin`, `wmax`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wrs(V, V)
@@ -1902,6 +2195,10 @@ Wrs <- function(x, y) {
 }
 
 #' Rank-sum shift CI -- Sec. 8.2, p. 292
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param wcrit Argument `wcrit`; see Usage.
+#' @return A list with `lower`, `upper`, `k`, `estimate`, `ndiff`, `m`, `n`.
 #' @examples
 #' rmorie:::Wrsci(x = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), wcrit = 5L)
 #' @keywords internal
@@ -1921,6 +2218,13 @@ Wrsci <- function(x, y, wcrit) {
 }
 
 #' Rank-sum normal approximation -- Sec. 8.2, p. 291
+#' @param w Argument `w`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @param ties Argument `ties`; see Usage.
+#' @return A list with `z`, `p_value`, `mean`, `var`, `var_uncorrected`, `m`, `n`.
 #' @examples
 #' rmorie:::Wrsz(w = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L, n = 5L)
 #' @keywords internal
@@ -1963,6 +2267,10 @@ Wrsz <- function(w, m, n, alternative = "two-sided", correct = FALSE,
 }
 
 #' Terry-Hoeffding normal-scores test -- Sec. 8.3.1, p. 299
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param nodes Argument `nodes`; see Usage.
+#' @return A list with `statistic`, `z`, `p_value`, `mean`, `var`, `scores`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Normscores(V, V)
@@ -1986,6 +2294,9 @@ Normscores <- function(x, y, nodes = 4001) {
 }
 
 #' van der Waerden test -- Sec. 8.3.2, p. 301
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `z`, `p_value`, `mean`, `var`, `scores`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Vdw(V, V)
@@ -2012,6 +2323,11 @@ Vdw <- function(x, y) {
 }
 
 #' Percentile modified rank test for location -- eqs. (8.3.5)-(8.3.6), p. 304
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param s Argument `s`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @return A list with `statistic`, `tupper`, `blower`, `var`, `var_book`, `z`, `p_value`, `S`, `R`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Pctrankloc(V, V)
@@ -2053,6 +2369,11 @@ Pctrankloc <- function(x, y, s = 0.5, r = NULL) {
 }
 
 #' Covariance of two linear rank statistics -- Theorem 7.3.3, p. 279
+#' @param a Argument `a`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `cov`, `corr`, `var_a`, `var_b`, `N`, `m`, `n`.
 #' @examples
 #' rmorie:::Lrankcov(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), m = 3L, n = 5L)
 #' @keywords internal
@@ -2074,6 +2395,9 @@ Lrankcov <- function(a, b, m, n) {
 }
 
 #' Linear rank statistic properties -- Theorem 7.3.7, p. 283
+#' @param a Argument `a`; see Usage.
+#' @param z Argument `z`; see Usage.
+#' @return A list with `t`, `t_reversed`, `t_conjugate`, `sum_a`, `palindromic`, `resid1`, `resid2`, `N`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Lrankprop(V, V)
@@ -2094,6 +2418,12 @@ Lrankprop <- function(a, z) {
 }
 
 #' Chernoff-Savage null moments -- Theorem 7.3.8 / Corollary 7.3.1, p. 285
+#' @param j Argument `j`; see Usage.
+#' @param jprime Argument `jprime`; see Usage.
+#' @param lam Argument `lam`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param nodes Argument `nodes`; see Usage.
+#' @return A list with `mean`, `var`, `sd`, `integral`, `lam`, `n`.
 #' @examples
 #' rmorie:::Lrankasymp(j = function(u) qnorm(u), jprime = function(u) 1 / dnorm(qnorm(u)),
 #'            lam = 0.5, n = 20)
@@ -2123,6 +2453,10 @@ Lrankasymp <- function(j, jprime, lam, n, nodes = 2001) {
 }
 
 #' Rank-test inversion interval -- Secs. 5.7.5, 6.4.2, 6.6.2
+#' @param values Argument `values`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @param level Argument `level`; see Usage.
+#' @return A list with `lower`, `upper`, `estimate`, `k`, `m`, `level`.
 #' @examples
 #' rmorie:::Rankci(values = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 #' @keywords internal
@@ -2154,6 +2488,9 @@ Rankci <- function(values, k, level = NULL) {
 }
 
 #' Mood scale test -- eqs. (9.2.1)-(9.2.3), pp. 314-316
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `mean`, `var`, `var_general`, `z`, `p_value`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Moodscale(V, V)
@@ -2177,6 +2514,9 @@ Moodscale <- function(x, y) {
 }
 
 #' Mood null moments -- eqs. (9.2.2)-(9.2.3), pp. 315-316
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `mean`, `var`, `sd`, `N`, `m`, `n`.
 #' @examples
 #' rmorie:::Moodmom(m = 5L, n = 5L)
 #' @keywords internal
@@ -2191,6 +2531,9 @@ Moodmom <- function(m, n) {
 }
 
 #' Freund-Ansari-Bradley-David-Barton test -- eq. (9.3.1), p. 316
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `mean`, `var`, `z`, `p_value`, `scores`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Ansbrad(V, V)
@@ -2212,6 +2555,9 @@ Ansbrad <- function(x, y) {
 }
 
 #' Siegel-Tukey scale test -- Sec. 9.4, p. 320
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `mean`, `var`, `z`, `p_value`, `scores`, `dropped`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Sgltukey(V, V)
@@ -2265,6 +2611,9 @@ Sgltukey <- function(x, y) {
 }
 
 #' Klotz normal-scores scale test -- eq. (9.5.1), p. 322
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `mean`, `var`, `z`, `p_value`, `scores`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Klotzsc(V, V)
@@ -2286,6 +2635,11 @@ Klotzsc <- function(x, y) {
 }
 
 #' Percentile modified rank test for scale -- Sec. 9.6, p. 323
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param s Argument `s`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @return A list with `statistic`, `tupper`, `blower`, `mean`, `var`, `mean_book`, `var_book`, `z`, `p_value`, `S`, `R`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Pctranksc(V, V)
@@ -2329,6 +2683,10 @@ Pctranksc <- function(x, y, s = 0.5, r = NULL) {
 }
 
 #' Sukhatme scale test -- eq. (9.7.1), p. 323
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `statistic`, `mean`, `var`, `z`, `p_value`, `phat`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Sukhatme(V, V)
@@ -2356,6 +2714,11 @@ Sukhatme <- function(x, y, alternative = "two-sided") {
 }
 
 #' Scale-ratio CI from Sukhatme -- eqs. (9.8.1)-(9.8.2), p. 328
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @return A list with `lower`, `upper`, `k`, `kprime`, `k_raw`, `npos`, `estimate`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Scaleci(V, V)
@@ -2387,6 +2750,9 @@ Scaleci <- function(x, y, alpha = 0.05, k = NULL) {
 }
 
 #' Westenberg interquartile scale test -- eq. (9.9.1), p. 329
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `p_value`, `pmf`, `q1`, `q3`, `mean`, `var`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wstnbrg(V, V)
@@ -2418,6 +2784,9 @@ Wstnbrg <- function(x, y) {
 }
 
 #' Rosenbaum outside-extremes scale test -- eq. (9.9.2), p. 329
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `p_value`, `pmf`, `ymin`, `ymax`, `mean`, `m`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Rosenbm(V, V)
@@ -2439,6 +2808,8 @@ Rosenbm <- function(x, y) {
 }
 
 #' k-sample median test -- Sec. 10.2, pp. 344-346
+#' @param samples Argument `samples`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `u`, `t`, `median`, `prob`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Kmedtest(V)
@@ -2465,6 +2836,9 @@ Kmedtest <- function(samples) {
 }
 
 #' k-sample control median test -- Sec. 10.3, eq. (10.3.1), pp. 350-351
+#' @param samples Argument `samples`; see Usage.
+#' @param p Argument `p`; see Usage.
+#' @return A list with `counts`, `cuts`, `r`, `pcell`, `statistic`, `df`, `p_value`, `k`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Kctrlmed(V)
@@ -2508,6 +2882,10 @@ Kctrlmed <- function(samples, p = c(0.5)) {
 }
 
 #' Control-vector covariance -- Theorem 10.7.1, p. 375
+#' @param lam Argument `lam`; see Usage.
+#' @param dens Argument `dens`; see Usage.
+#' @param pval Argument `pval`; see Usage.
+#' @return A list with `sigma`, `q`, `p`, `k`.
 #' @examples
 #' rmorie:::Kctrlasymp(lam = c(0.4, 0.3, 0.3), dens = c(0.39, 0.35, 0.30),
 #'            pval = c(0.5, 0.55, 0.6))
@@ -2531,6 +2909,9 @@ Kctrlasymp <- function(lam, dens, pval) {
 }
 
 #' Kruskal-Wallis H -- eqs. (10.4.2)/(10.4.5)/(10.4.7), pp. 354-358
+#' @param samples Argument `samples`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `statistic`, `h_raw`, `correction`, `df`, `p_value`, `rank_sums`, `rank_means`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Kwh(V)
@@ -2558,6 +2939,9 @@ Kwh <- function(samples, correct = TRUE) {
 }
 
 #' Kruskal-Wallis defining form -- eqs. (10.4.2)/(10.4.7), pp. 354, 357
+#' @param rank_sums Argument `rank_sums`; see Usage.
+#' @param ns Argument `ns`; see Usage.
+#' @return A list with `statistic`, `h_computing`, `resid`, `df`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Kwalt(V, V)
@@ -2577,6 +2961,10 @@ Kwalt <- function(rank_sums, ns) {
 }
 
 #' Chi-square approximation to H -- Sec. 10.4.1, p. 357
+#' @param h Argument `h`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @param ns Argument `ns`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `table_k`, `k`.
 #' @examples
 #' rmorie:::Kwchi(h = 0.5, k = 5L)
 #' @keywords internal
@@ -2596,6 +2984,10 @@ Kwchi <- function(h, k, ns = NULL) {
 }
 
 #' Kruskal-Wallis multiple comparisons -- eq. (10.4.8), p. 357
+#' @param rank_means Argument `rank_means`; see Usage.
+#' @param ns Argument `ns`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `bound`, `bounds`, `diffs`, `significant`, `zstar`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Kwmc(V, V)
@@ -2627,6 +3019,9 @@ Kwmc <- function(rank_means, ns, alpha = 0.20) {
 }
 
 #' General k-sample rank statistic -- eqs. (10.5.1)-(10.5.2), pp. 362-363
+#' @param samples Argument `samples`; see Usage.
+#' @param scores Argument `scores`; see Usage.
+#' @return A list with `q`, `statistic`, `df`, `p_value`, `abar`, `score_sums`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Krankstat(V)
@@ -2654,6 +3049,9 @@ Krankstat <- function(samples, scores = NULL) {
 }
 
 #' Jonckheere-Terpstra B -- Sec. 10.6, eqs. (10.6.2)-(10.6.3), p. 365
+#' @param samples Argument `samples`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `statistic`, `mean`, `var`, `z`, `p_value`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Jtstat(V)
@@ -2682,6 +3080,8 @@ Jtstat <- function(samples, alternative = "greater") {
 }
 
 #' JT null moments -- eqs. (10.6.2)-(10.6.3), pp. 365-366
+#' @param ns Argument `ns`; see Usage.
+#' @return A list with `mean`, `mean_pairwise`, `var`, `sd`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Jtmom(V)
@@ -2701,6 +3101,8 @@ Jtmom <- function(ns) {
 }
 
 #' JT as the pairwise U matrix -- Sec. 10.6, eq. (10.6.1), p. 365
+#' @param samples Argument `samples`; see Usage.
+#' @return A list with `u`, `statistic`, `npairs`, `k`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Jtsum(V)
@@ -2720,6 +3122,9 @@ Jtsum <- function(samples) {
 }
 
 #' Treatments-vs-control precedence test -- eq. (10.7.3), p. 373
+#' @param samples Argument `samples`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @return A list with `statistic`, `p_value`, `pmf`, `t`, `r`, `mtreat`, `mean`, `k`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Ctrltree(V)
@@ -2746,6 +3151,9 @@ Ctrltree <- function(samples, r = NULL) {
 }
 
 #' Null distribution of S = P - Q -- Sec. 11.2.1, p. 395
+#' @param n Argument `n`; see Usage.
+#' @param s Argument `s`; see Usage.
+#' @return A list with `support`, `pmf`, `pmf_s`, `cdf_s`, `sf_s`, `var_tau`, `var_s`, `n`.
 #' @examples
 #' rmorie:::Taunull(n = 5L)
 #' @keywords internal
@@ -2785,6 +3193,9 @@ Taunull <- function(n, s = NULL) {
 }
 
 #' Kendall tau trend test -- Sec. 11.2.5, p. 406
+#' @param y Argument `y`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `tau`, `statistic`, `P`, `Q`, `z`, `p_value`, `var`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Tautrend(V)
@@ -2810,6 +3221,9 @@ Tautrend <- function(y, alternative = "two-sided") {
 }
 
 #' Spearman rank correlation -- Sec. 11.3, eq. (11.3.2), p. 407
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `statistic`, `r_shortcut`, `sumd2`, `tied`, `var`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Spearrho(V, V)
@@ -2831,6 +3245,10 @@ Spearrho <- function(x, y) {
 }
 
 #' Test of zero Spearman correlation -- Secs. 11.3.2-11.3.3, pp. 412-413
+#' @param r Argument `r`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `z`, `p_normal`, `t`, `df`, `p_value`, `var`, `n`.
 #' @examples
 #' rmorie:::Rhotest(r = 0.45, n = 20)
 #' @keywords internal
@@ -2858,6 +3276,11 @@ Rhotest <- function(r, n, alternative = "two-sided") {
 }
 
 #' Fieller-Hartley-Pearson normal-scores correlation -- Sec. 11.5, p. 422
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param rho Argument `rho`; see Usage.
+#' @param nodes Argument `nodes`; see Usage.
+#' @return A list with `statistic`, `zf`, `mean_zf`, `var_zf`, `z`, `p_value`, `scores`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Normcorr(V, V)
@@ -2884,6 +3307,10 @@ Normcorr <- function(x, y, rho = 0, nodes = 4001) {
 }
 
 #' Kendall partial tau -- Sec. 12.6, eq. (12.6.1), p. 467
+#' @param x Argument `x`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param z Argument `z`; see Usage.
+#' @return A list with `statistic`, `x11`, `x12`, `x21`, `x22`, `dropped`, `npairs`, `n`.
 #' @examples
 #' rmorie:::Taupartial(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   z = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -2943,6 +3370,9 @@ Taupartial <- function(x, y, z) {
 }
 
 #' Friedman two-way ANOVA by ranks -- eqs. (12.2.8)/(12.2.12), pp. 441-445
+#' @param data Argument `data`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `statistic`, `q_raw`, `s`, `df`, `p_value`, `rank_sums`, `k`, `n`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::Friedq(D)
@@ -2966,6 +3396,8 @@ Friedq <- function(data, correct = TRUE) {
 }
 
 #' Tie-corrected Friedman Q -- eq. (12.2.12), p. 445
+#' @param data Argument `data`; see Usage.
+#' @return A list with `statistic`, `q_raw`, `tiesum`, `factor`, `s`, `rank_sums`, `k`, `n`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::Friedties(D)
@@ -2989,6 +3421,10 @@ Friedties <- function(data) {
 }
 
 #' Chi-square approximation to Friedman Q -- Sec. 12.2, p. 442
+#' @param q Argument `q`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `mean`, `var_exact`, `var_chi2`, `ratio`, `k`, `n`.
 #' @examples
 #' rmorie:::Friedchi(q = 0.5, k = 5L, n = 5L)
 #' @keywords internal
@@ -3008,6 +3444,9 @@ Friedchi <- function(q, k, n) {
 }
 
 #' Friedman S and Q moments -- eq. (12.2.7), p. 442
+#' @param k Argument `k`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `mean_s`, `var_s`, `mean_q`, `var_q`, `var_chi2`, `deficit`, `k`, `n`.
 #' @examples
 #' rmorie:::Friedvar(k = 5L, n = 5L)
 #' @keywords internal
@@ -3025,6 +3464,10 @@ Friedvar <- function(k, n) {
 }
 
 #' Friedman multiple comparisons -- eq. (12.2.13), p. 445
+#' @param rank_sums Argument `rank_sums`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `bound`, `zstar`, `diffs`, `significant`, `k`, `n`.
 #' @examples
 #' rmorie:::Friedmc(rank_sums = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 #' @keywords internal
@@ -3051,6 +3494,9 @@ Friedmc <- function(rank_sums, k, alpha = 0.20) {
 }
 
 #' Page's L test -- eqs. (12.3.1)-(12.3.2), pp. 448-449
+#' @param data Argument `data`; see Usage.
+#' @param weights Argument `weights`; see Usage.
+#' @return A list with `statistic`, `z`, `p_value`, `rav`, `rank_sums`, `k`, `n`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::Pagel(D)
@@ -3073,6 +3519,10 @@ Pagel <- function(data, weights = NULL) {
 }
 
 #' Exact null distribution of Page's L -- Sec. 12.3, p. 448
+#' @param k Argument `k`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param ell Argument `ell`; see Usage.
+#' @return A list with `support`, `pmf`, `pmf_l`, `sf_l`, `mean`, `var`, `k`, `n`.
 #' @examples
 #' rmorie:::Pageexact(k = 5L, n = 5L)
 #' @keywords internal
@@ -3122,6 +3572,11 @@ Pageexact <- function(k, n, ell = NULL) {
 }
 
 #' Page's L normal approximation -- eq. (12.3.2), p. 449
+#' @param ell Argument `ell`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `z`, `p_value`, `mean`, `var`, `statistic`, `k`, `n`.
 #' @examples
 #' rmorie:::Pageasymp(ell = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L, n = 5L)
 #' @keywords internal
@@ -3140,6 +3595,10 @@ Pageasymp <- function(ell, k, n, correct = TRUE) {
 }
 
 #' Concordance W significance test -- Sec. 12.4.2, p. 455
+#' @param w Argument `w`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A list with `statistic`, `w`, `df`, `p_value`, `s`, `table_n`, `k`, `n`.
 #' @examples
 #' rmorie:::Wsignif(w = 0.6, k = 3, n = 10)
 #' @keywords internal
@@ -3158,6 +3617,11 @@ Wsignif <- function(w, k, n) {
 }
 
 #' ARE from derivatives and variances -- Theorem 13.2.2, eq. (13.2.1), p. 485
+#' @param deriv Argument `deriv`; see Usage.
+#' @param var Argument `var`; see Usage.
+#' @param deriv_star Argument `deriv_star`; see Usage.
+#' @param var_star Argument `var_star`; see Usage.
+#' @return A list with `are`, `check`, `efficacy`, `efficacy_star`.
 #' @examples
 #' rmorie:::Arepitman(deriv = 0.399, var = 1, deriv_star = 0.318, var_star = 1.05)
 #' @keywords internal
@@ -3175,6 +3639,9 @@ Arepitman <- function(deriv, var, deriv_star, var_star) {
 }
 
 #' Efficacy -- eq. (13.2.4), p. 486
+#' @param deriv Argument `deriv`; see Usage.
+#' @param var Argument `var`; see Usage.
+#' @return A list with `efficacy`, `deriv`, `var`.
 #' @examples
 #' rmorie:::Efficacy(deriv = c(1, 2, 3, 4, 5, 6, 7, 8), var = 5L)
 #' @keywords internal
@@ -3186,6 +3653,9 @@ Efficacy <- function(deriv, var) {
 }
 
 #' Sign test efficacy -- eq. (13.3.3), p. 489
+#' @param n Argument `n`; see Usage.
+#' @param fmed Argument `fmed`; see Usage.
+#' @return A list with `efficacy`, `per_obs`, `n`, `fmed`.
 #' @examples
 #' rmorie:::Effsign(n = 5L, fmed = 5L)
 #' @keywords internal
@@ -3199,6 +3669,9 @@ Effsign <- function(n, fmed) {
 }
 
 #' One-sample t efficacy -- eq. (13.3.2), p. 488
+#' @param n Argument `n`; see Usage.
+#' @param sigma2 Argument `sigma2`; see Usage.
+#' @return A list with `efficacy`, `per_obs`, `n`, `sigma2`.
 #' @examples
 #' rmorie:::Efft(n = 5L, sigma2 = 5L)
 #' @keywords internal
@@ -3211,6 +3684,10 @@ Efft <- function(n, sigma2) {
 }
 
 #' Signed-rank efficacy -- eq. (13.3.4), p. 490
+#' @param n Argument `n`; see Usage.
+#' @param f0 Argument `f0`; see Usage.
+#' @param integral Argument `integral`; see Usage.
+#' @return A list with `efficacy`, `limit`, `integral`, `n`.
 #' @examples
 #' rmorie:::Effwsr(n = 5L, f0 = c(1, 2, 3, 4, 5, 6, 7, 8), integral = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
@@ -3224,6 +3701,10 @@ Effwsr <- function(n, f0, integral) {
 }
 
 #' Mann-Whitney / rank-sum efficacy -- eq. (13.3.10), p. 494
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param integral Argument `integral`; see Usage.
+#' @return A list with `efficacy`, `integral`, `m`, `n`.
 #' @examples
 #' rmorie:::Effwrs(m = 5L, n = 5L, integral = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
@@ -3236,6 +3717,10 @@ Effwrs <- function(m, n, integral) {
 }
 
 #' Two-sample t efficacy -- eq. (13.3.9), p. 494
+#' @param m Argument `m`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param sigma2 Argument `sigma2`; see Usage.
+#' @return A list with `efficacy`, `m`, `n`, `sigma2`.
 #' @examples
 #' rmorie:::Efft2(m = 5L, n = 5L, sigma2 = 5L)
 #' @keywords internal
@@ -3249,6 +3734,9 @@ Efft2 <- function(m, n, sigma2) {
 }
 
 #' Chi-square test of independence -- Sec. 14.2, p. 505
+#' @param table Argument `table`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `expected`, `n`, `r`, `c`.
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::Chiindep(M)
@@ -3277,6 +3765,9 @@ Chiindep <- function(table, correct = FALSE) {
 }
 
 #' k x 2 equal-proportions test -- eq. (14.3.2), p. 514
+#' @param successes Argument `successes`; see Usage.
+#' @param ns Argument `ns`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `phat`, `props`, `k`, `n`.
 #' @examples
 #' rmorie:::Chik2(successes = c(18, 12, 25), ns = c(30, 30, 40))
 #' @keywords internal
@@ -3307,6 +3798,9 @@ Chik2 <- function(successes, ns) {
 }
 
 #' Fisher exact test -- Sec. 14.4, p. 517
+#' @param table Argument `table`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `p_value`, `p_greater`, `p_less`, `prob`, `statistic`, `support`.
 #' @examples
 #' rmorie:::Fisherex(rbind(c(8, 2), c(1, 5)))
 #' @keywords internal
@@ -3338,6 +3832,9 @@ Fisherex <- function(table, alternative = "two-sided") {
 }
 
 #' One-sided Fisher exact test -- Sec. 14.4, p. 517
+#' @param table Argument `table`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
+#' @return A list with `p_value`, `p_greater`, `p_less`, `prob`, `statistic`, `mean`.
 #' @examples
 #' rmorie:::Fisherex1(rbind(c(8, 2), c(1, 5)))
 #' @keywords internal
@@ -3364,6 +3861,9 @@ Fisherex1 <- function(table, alternative = "greater") {
 }
 
 #' McNemar test -- eq. (14.5.1), p. 523
+#' @param table Argument `table`; see Usage.
+#' @param correct Argument `correct`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `p_exact`, `x12`, `x21`, `ndisc`.
 #' @examples
 #' rmorie:::Mcnemarq(rbind(c(20, 5), c(12, 13)))
 #' @keywords internal
@@ -3387,6 +3887,9 @@ Mcnemarq <- function(table, correct = FALSE) {
 }
 
 #' McNemar CI -- Sec. 14.5, eq. (14.5.2), p. 523
+#' @param table Argument `table`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `estimate`, `lower`, `upper`, `se`, `se_null`, `n`.
 #' @examples
 #' rmorie:::Mcnemarci(rbind(c(20, 5), c(12, 13)))
 #' @keywords internal
@@ -3410,6 +3913,10 @@ Mcnemarci <- function(table, alpha = 0.05) {
 }
 
 #' Multinomial goodness of fit -- Sec. 14.6, p. 528
+#' @param observed Argument `observed`; see Usage.
+#' @param probs Argument `probs`; see Usage.
+#' @param ddof Argument `ddof`; see Usage.
+#' @return A list with `statistic`, `df`, `p_value`, `expected`, `prob`, `n`, `k`.
 #' @examples
 #' rmorie:::Multgof(observed = c(22, 18, 20, 40), probs = c(0.2, 0.2, 0.2, 0.4))
 #' @keywords internal
@@ -3435,6 +3942,9 @@ Multgof <- function(observed, probs, ddof = 0) {
 }
 
 #' Linear rank test for ordered categories -- Sec. 14.6.1, p. 531
+#' @param table Argument `table`; see Usage.
+#' @param scores Argument `scores`; see Usage.
+#' @return A list with `statistic`, `mean`, `var`, `sd`, `z`, `p_value`, `p_twosided`, `scores`, `n`.
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::Linbylin(M)

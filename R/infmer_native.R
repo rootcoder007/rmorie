@@ -179,6 +179,15 @@
 #' @param c Passed to \code{.infmer_complexity}. Defaults to \code{5}.
 #' @return A list with \code{output}, \code{selected_queries}, \code{n_selected},
 #' \code{sparsity_scores}, \code{complexity}.
+#' @references ----------
+#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
+#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
+#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
+#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
+#'   
+#'   See Also
+#'   --------
+#'   :mod:`morie.fn.informer` -- the implementation.
 #' @export
 #' @examples
 #' morie_infmer(q = 0.5, k = 5L, v = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -242,6 +251,15 @@ morie_infmer <- function(q, k, v, c = 5) {
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Zhou, H., Zhang, S., Peng, J., Zhang, S., Li, J., Xiong, H. & Zhang,
+#'   W. (2021) "Informer: Beyond Efficient Transformer for Long Sequence
+#'   Time-Series Forecasting", Proceedings of the AAAI Conference on
+#'   Artificial Intelligence 35(12), 11106-11115, arXiv:2012.07436.
+#'   
+#'   See Also
+#'   --------
+#'   :mod:`morie.fn.informer` -- the implementation.
 #' @export
 #' @examples
 #' morie_infmer_cheatsheet()

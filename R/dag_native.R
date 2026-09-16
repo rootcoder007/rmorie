@@ -68,6 +68,7 @@ morie_dag <- function(edges, exposure, outcome, latent = character()) {
 #'
 #' @param x A \code{morie_dag} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' \donttest{
 #' g <- morie_dag(

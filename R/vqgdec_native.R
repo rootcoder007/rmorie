@@ -96,6 +96,27 @@
 #' @param indices Coerced to integer by the body, with \code{as.integer}.
 #' @param codebook Passed to \code{.vqgdec_to_matrix}.
 #' @return A list with \code{codes}, \code{n}, \code{note}.
+#' @references ----------
+#'   Esser, P., Rombach, R. & Ommer, B. (2021) "Taming Transformers for
+#'   High-Resolution Image Synthesis", CVPR 2021, 12873-12883,
+#'   arXiv:2012.09841. Sec. 3.1 ("Learning a Perceptually Rich Codebook":
+#'   replacing the L2 reconstruction loss with a perceptual loss and
+#'   introducing adversarial training with a PATCH-BASED discriminator to
+#'   keep perceptual quality at increased compression), Sec. 3.2 (the
+#'   adaptive weight lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#'   computed with respect to the last layer L of the decoder), and Sec. 3.3
+#'   (sliding-window generation, valid when the dataset statistics are
+#'   approximately spatially invariant or spatial conditioning is
+#'   available, with conditioning on image coordinates as the remedy
+#'   otherwise).
+#'   
+#'   Isola, P., Zhu, J.-Y., Zhou, T. & Efros, A. A. (2017) "Image-to-Image
+#'   Translation with Conditional Adversarial Networks", CVPR 2017,
+#'   1125-1134, arXiv:1611.07004. The patch-based discriminator.
+#'   
+#'   Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
+#'   "The Unreasonable Effectiveness of Deep Features as a Perceptual
+#'   Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -136,6 +157,27 @@ morie_vqgdec_decode_indices <- function(indices, codebook) {
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
 #' @param clip Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10000}.
 #' @return A list with \code{lambda}, \code{raw}, \code{clipped}, \code{note}.
+#' @references ----------
+#'   Esser, P., Rombach, R. & Ommer, B. (2021) "Taming Transformers for
+#'   High-Resolution Image Synthesis", CVPR 2021, 12873-12883,
+#'   arXiv:2012.09841. Sec. 3.1 ("Learning a Perceptually Rich Codebook":
+#'   replacing the L2 reconstruction loss with a perceptual loss and
+#'   introducing adversarial training with a PATCH-BASED discriminator to
+#'   keep perceptual quality at increased compression), Sec. 3.2 (the
+#'   adaptive weight lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#'   computed with respect to the last layer L of the decoder), and Sec. 3.3
+#'   (sliding-window generation, valid when the dataset statistics are
+#'   approximately spatially invariant or spatial conditioning is
+#'   available, with conditioning on image coordinates as the remedy
+#'   otherwise).
+#'   
+#'   Isola, P., Zhu, J.-Y., Zhou, T. & Efros, A. A. (2017) "Image-to-Image
+#'   Translation with Conditional Adversarial Networks", CVPR 2017,
+#'   1125-1134, arXiv:1611.07004. The patch-based discriminator.
+#'   
+#'   Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
+#'   "The Unreasonable Effectiveness of Deep Features as a Perceptual
+#'   Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -170,6 +212,27 @@ morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
 #' @param patch Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param scorer Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{scores}, \code{n_patches}, \code{mean}, \code{note}.
+#' @references ----------
+#'   Esser, P., Rombach, R. & Ommer, B. (2021) "Taming Transformers for
+#'   High-Resolution Image Synthesis", CVPR 2021, 12873-12883,
+#'   arXiv:2012.09841. Sec. 3.1 ("Learning a Perceptually Rich Codebook":
+#'   replacing the L2 reconstruction loss with a perceptual loss and
+#'   introducing adversarial training with a PATCH-BASED discriminator to
+#'   keep perceptual quality at increased compression), Sec. 3.2 (the
+#'   adaptive weight lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#'   computed with respect to the last layer L of the decoder), and Sec. 3.3
+#'   (sliding-window generation, valid when the dataset statistics are
+#'   approximately spatially invariant or spatial conditioning is
+#'   available, with conditioning on image coordinates as the remedy
+#'   otherwise).
+#'   
+#'   Isola, P., Zhu, J.-Y., Zhou, T. & Efros, A. A. (2017) "Image-to-Image
+#'   Translation with Conditional Adversarial Networks", CVPR 2017,
+#'   1125-1134, arXiv:1611.07004. The patch-based discriminator.
+#'   
+#'   Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
+#'   "The Unreasonable Effectiveness of Deep Features as a Perceptual
+#'   Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 #' @export
 #' @keywords internal
 morie_vqgdec_patch_discriminator <- function(image, patch = 4,
@@ -226,6 +289,27 @@ morie_vqgdec_patch_discriminator <- function(image, patch = 4,
 #' \code{as.integer}.
 #' @return A list with \code{windows}, \code{n_windows}, \code{covers_everything},
 #' \code{context}, \code{note}.
+#' @references ----------
+#'   Esser, P., Rombach, R. & Ommer, B. (2021) "Taming Transformers for
+#'   High-Resolution Image Synthesis", CVPR 2021, 12873-12883,
+#'   arXiv:2012.09841. Sec. 3.1 ("Learning a Perceptually Rich Codebook":
+#'   replacing the L2 reconstruction loss with a perceptual loss and
+#'   introducing adversarial training with a PATCH-BASED discriminator to
+#'   keep perceptual quality at increased compression), Sec. 3.2 (the
+#'   adaptive weight lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#'   computed with respect to the last layer L of the decoder), and Sec. 3.3
+#'   (sliding-window generation, valid when the dataset statistics are
+#'   approximately spatially invariant or spatial conditioning is
+#'   available, with conditioning on image coordinates as the remedy
+#'   otherwise).
+#'   
+#'   Isola, P., Zhu, J.-Y., Zhou, T. & Efros, A. A. (2017) "Image-to-Image
+#'   Translation with Conditional Adversarial Networks", CVPR 2017,
+#'   1125-1134, arXiv:1611.07004. The patch-based discriminator.
+#'   
+#'   Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
+#'   "The Unreasonable Effectiveness of Deep Features as a Perceptual
+#'   Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 #' @export
 #' @examples
 #' morie_vqgdec_sliding_windows(height = 5L, width = 5L, window = 5L)
@@ -314,6 +398,27 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 #' @param grad_gan Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.
 #' @return A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens},
 #' \code{adaptive_lambda}, \code{method}, \code{note}.
+#' @references ----------
+#'   Esser, P., Rombach, R. & Ommer, B. (2021) "Taming Transformers for
+#'   High-Resolution Image Synthesis", CVPR 2021, 12873-12883,
+#'   arXiv:2012.09841. Sec. 3.1 ("Learning a Perceptually Rich Codebook":
+#'   replacing the L2 reconstruction loss with a perceptual loss and
+#'   introducing adversarial training with a PATCH-BASED discriminator to
+#'   keep perceptual quality at increased compression), Sec. 3.2 (the
+#'   adaptive weight lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#'   computed with respect to the last layer L of the decoder), and Sec. 3.3
+#'   (sliding-window generation, valid when the dataset statistics are
+#'   approximately spatially invariant or spatial conditioning is
+#'   available, with conditioning on image coordinates as the remedy
+#'   otherwise).
+#'   
+#'   Isola, P., Zhu, J.-Y., Zhou, T. & Efros, A. A. (2017) "Image-to-Image
+#'   Translation with Conditional Adversarial Networks", CVPR 2017,
+#'   1125-1134, arXiv:1611.07004. The patch-based discriminator.
+#'   
+#'   Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
+#'   "The Unreasonable Effectiveness of Deep Features as a Perceptual
+#'   Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -351,6 +456,27 @@ morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Esser, P., Rombach, R. & Ommer, B. (2021) "Taming Transformers for
+#'   High-Resolution Image Synthesis", CVPR 2021, 12873-12883,
+#'   arXiv:2012.09841. Sec. 3.1 ("Learning a Perceptually Rich Codebook":
+#'   replacing the L2 reconstruction loss with a perceptual loss and
+#'   introducing adversarial training with a PATCH-BASED discriminator to
+#'   keep perceptual quality at increased compression), Sec. 3.2 (the
+#'   adaptive weight lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#'   computed with respect to the last layer L of the decoder), and Sec. 3.3
+#'   (sliding-window generation, valid when the dataset statistics are
+#'   approximately spatially invariant or spatial conditioning is
+#'   available, with conditioning on image coordinates as the remedy
+#'   otherwise).
+#'   
+#'   Isola, P., Zhu, J.-Y., Zhou, T. & Efros, A. A. (2017) "Image-to-Image
+#'   Translation with Conditional Adversarial Networks", CVPR 2017,
+#'   1125-1134, arXiv:1611.07004. The patch-based discriminator.
+#'   
+#'   Zhang, R., Isola, P., Efros, A. A., Shechtman, E. & Wang, O. (2018)
+#'   "The Unreasonable Effectiveness of Deep Features as a Perceptual
+#'   Metric", CVPR 2018, 586-595, arXiv:1801.03924. The perceptual loss.
 #' @export
 #' @examples
 #' morie_vqgdec_cheatsheet()

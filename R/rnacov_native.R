@@ -71,6 +71,19 @@
 #' @param i First column, one-based.
 #' @param j Second column, one-based.
 #' @return A list with the joint counts, both margins and the count.
+#' @references Eddy, S.R. and Durbin, R. (1994) "RNA sequence analysis using
+#'       covariance models." Nucleic Acids Research 22(11), 2079-2088.
+#'       doi:10.1093/nar/22.11.2079.
+#'     Nawrocki, E.P. and Eddy, S.R. (2013) "Infernal 1.1: 100-fold faster
+#'       RNA homology searches." Bioinformatics 29(22), 2933-2935.
+#'     Rivas, E., Clements, J. and Eddy, S.R. (2017) "A statistical test
+#'       for conserved RNA structure shows lack of evidence for structure
+#'       in lncRNAs." Nature Methods 14(1), 45-48.
+#'     Nussinov, R. and Jacobson, A.B. (1980) "Fast algorithm for
+#'       predicting the secondary structure of single-stranded RNA." PNAS
+#'       77(11), 6309-6313.
+#'     Miller, G.A. (1955) "Note on the bias of information estimates." In
+#'       Information Theory in Psychology, 95-100.
 #' @export
 #' @examples
 #' morie_rnacov_counts(alignment = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -103,6 +116,19 @@ morie_rnacov_counts <- function(alignment, i, j) {
 #' @param j Second column, one-based.
 #' @param correction "none" or "miller_madow".
 #' @return A list with the information, the support and the cells seen.
+#' @references Eddy, S.R. and Durbin, R. (1994) "RNA sequence analysis using
+#'       covariance models." Nucleic Acids Research 22(11), 2079-2088.
+#'       doi:10.1093/nar/22.11.2079.
+#'     Nawrocki, E.P. and Eddy, S.R. (2013) "Infernal 1.1: 100-fold faster
+#'       RNA homology searches." Bioinformatics 29(22), 2933-2935.
+#'     Rivas, E., Clements, J. and Eddy, S.R. (2017) "A statistical test
+#'       for conserved RNA structure shows lack of evidence for structure
+#'       in lncRNAs." Nature Methods 14(1), 45-48.
+#'     Nussinov, R. and Jacobson, A.B. (1980) "Fast algorithm for
+#'       predicting the secondary structure of single-stranded RNA." PNAS
+#'       77(11), 6309-6313.
+#'     Miller, G.A. (1955) "Note on the bias of information estimates." In
+#'       Information Theory in Psychology, 95-100.
 #' @export
 #' @examples
 #' morie_rnacov_mi(alignment = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -145,6 +171,19 @@ morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
 #'
 #' @param s A dot-bracket string.
 #' @return A two-column matrix of zero-based pair positions.
+#' @references Eddy, S.R. and Durbin, R. (1994) "RNA sequence analysis using
+#'       covariance models." Nucleic Acids Research 22(11), 2079-2088.
+#'       doi:10.1093/nar/22.11.2079.
+#'     Nawrocki, E.P. and Eddy, S.R. (2013) "Infernal 1.1: 100-fold faster
+#'       RNA homology searches." Bioinformatics 29(22), 2933-2935.
+#'     Rivas, E., Clements, J. and Eddy, S.R. (2017) "A statistical test
+#'       for conserved RNA structure shows lack of evidence for structure
+#'       in lncRNAs." Nature Methods 14(1), 45-48.
+#'     Nussinov, R. and Jacobson, A.B. (1980) "Fast algorithm for
+#'       predicting the secondary structure of single-stranded RNA." PNAS
+#'       77(11), 6309-6313.
+#'     Miller, G.A. (1955) "Note on the bias of information estimates." In
+#'       Information Theory in Psychology, 95-100.
 #' @export
 #' @examples
 #' STRUCT <- "(((((...))))).."
@@ -201,6 +240,19 @@ morie_rnacov_parse <- function(s) {
 #' @param seq A sequence string.
 #' @param min_loop The minimum hairpin loop.
 #' @return A list with the zero-based pair matrix and the pair count.
+#' @references Eddy, S.R. and Durbin, R. (1994) "RNA sequence analysis using
+#'       covariance models." Nucleic Acids Research 22(11), 2079-2088.
+#'       doi:10.1093/nar/22.11.2079.
+#'     Nawrocki, E.P. and Eddy, S.R. (2013) "Infernal 1.1: 100-fold faster
+#'       RNA homology searches." Bioinformatics 29(22), 2933-2935.
+#'     Rivas, E., Clements, J. and Eddy, S.R. (2017) "A statistical test
+#'       for conserved RNA structure shows lack of evidence for structure
+#'       in lncRNAs." Nature Methods 14(1), 45-48.
+#'     Nussinov, R. and Jacobson, A.B. (1980) "Fast algorithm for
+#'       predicting the secondary structure of single-stranded RNA." PNAS
+#'       77(11), 6309-6313.
+#'     Miller, G.A. (1955) "Note on the bias of information estimates." In
+#'       Information Theory in Psychology, 95-100.
 #' @export
 #' @examples
 #' S <- c("a", "b", "c")
@@ -273,6 +325,19 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
 #' @return A list with per-pair mutual information and support, the
 #'   total, the pairs used, and how many were too sparsely covered to
 #'   judge.
+#' @references Eddy, S.R. and Durbin, R. (1994) "RNA sequence analysis using
+#'       covariance models." Nucleic Acids Research 22(11), 2079-2088.
+#'       doi:10.1093/nar/22.11.2079.
+#'     Nawrocki, E.P. and Eddy, S.R. (2013) "Infernal 1.1: 100-fold faster
+#'       RNA homology searches." Bioinformatics 29(22), 2933-2935.
+#'     Rivas, E., Clements, J. and Eddy, S.R. (2017) "A statistical test
+#'       for conserved RNA structure shows lack of evidence for structure
+#'       in lncRNAs." Nature Methods 14(1), 45-48.
+#'     Nussinov, R. and Jacobson, A.B. (1980) "Fast algorithm for
+#'       predicting the secondary structure of single-stranded RNA." PNAS
+#'       77(11), 6309-6313.
+#'     Miller, G.A. (1955) "Note on the bias of information estimates." In
+#'       Information Theory in Psychology, 95-100.
 #' @export
 #' @examples
 #' STRUCT <- "(((((...))))).."
@@ -353,6 +418,19 @@ morie_rnacov <- function(alignment, structure = NULL,
 #' One-line summary of the rnacov module
 #'
 #' @return A character scalar.
+#' @references Eddy, S.R. and Durbin, R. (1994) "RNA sequence analysis using
+#'       covariance models." Nucleic Acids Research 22(11), 2079-2088.
+#'       doi:10.1093/nar/22.11.2079.
+#'     Nawrocki, E.P. and Eddy, S.R. (2013) "Infernal 1.1: 100-fold faster
+#'       RNA homology searches." Bioinformatics 29(22), 2933-2935.
+#'     Rivas, E., Clements, J. and Eddy, S.R. (2017) "A statistical test
+#'       for conserved RNA structure shows lack of evidence for structure
+#'       in lncRNAs." Nature Methods 14(1), 45-48.
+#'     Nussinov, R. and Jacobson, A.B. (1980) "Fast algorithm for
+#'       predicting the secondary structure of single-stranded RNA." PNAS
+#'       77(11), 6309-6313.
+#'     Miller, G.A. (1955) "Note on the bias of information estimates." In
+#'       Information Theory in Psychology, 95-100.
 #' @export
 #' @examples
 #' morie_rnacov_cheatsheet()

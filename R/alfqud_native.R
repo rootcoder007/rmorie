@@ -121,6 +121,13 @@
 #' @param st A list with mem, reg and flag.
 #' @param instr A list of the operation and its two locations.
 #' @return The state after the instruction.
+#' @references Mankowitz, D.J. et al. (2023) "Faster sorting algorithms discovered
+#'       using deep reinforcement learning." Nature 618, 257-263.
+#'       doi:10.1038/s41586-023-06004-9.
+#'     Silver, D. et al. (2017) "Mastering the game of Go without human
+#'       knowledge." Nature 550, 354-359. The PUCT selection rule.
+#'     Rosin, C.D. (2011) "Multi-armed bandits with episode context."
+#'       Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 #' @export
 #' @keywords internal
 morie_alfqud_step <- function(st, instr) {
@@ -152,6 +159,13 @@ morie_alfqud_step <- function(st, instr) {
 #' @param x The input vector.
 #' @param n_reg How many registers.
 #' @return The memory the program leaves behind.
+#' @references Mankowitz, D.J. et al. (2023) "Faster sorting algorithms discovered
+#'       using deep reinforcement learning." Nature 618, 257-263.
+#'       doi:10.1038/s41586-023-06004-9.
+#'     Silver, D. et al. (2017) "Mastering the game of Go without human
+#'       knowledge." Nature 550, 354-359. The PUCT selection rule.
+#'     Rosin, C.D. (2011) "Multi-armed bandits with episode context."
+#'       Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 #' @export
 #' @keywords internal
 morie_alfqud_run <- function(program, x, n_reg) {
@@ -176,6 +190,13 @@ morie_alfqud_run <- function(program, x, n_reg) {
 #' @param targets What each input should become.
 #' @param n_reg How many registers.
 #' @return An integer count.
+#' @references Mankowitz, D.J. et al. (2023) "Faster sorting algorithms discovered
+#'       using deep reinforcement learning." Nature 618, 257-263.
+#'       doi:10.1038/s41586-023-06004-9.
+#'     Silver, D. et al. (2017) "Mastering the game of Go without human
+#'       knowledge." Nature 550, 354-359. The PUCT selection rule.
+#'     Rosin, C.D. (2011) "Multi-armed bandits with episode context."
+#'       Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 #' @export
 #' @examples
 #' IN <- list(c(2, 1), c(1, 2), c(5, 3))
@@ -208,6 +229,13 @@ morie_alfqud_correctness <- function(program, inputs, targets, n_reg) {
 #' @param n_mem How many memory slots.
 #' @param n_reg How many registers.
 #' @return A list of instructions.
+#' @references Mankowitz, D.J. et al. (2023) "Faster sorting algorithms discovered
+#'       using deep reinforcement learning." Nature 618, 257-263.
+#'       doi:10.1038/s41586-023-06004-9.
+#'     Silver, D. et al. (2017) "Mastering the game of Go without human
+#'       knowledge." Nature 550, 354-359. The PUCT selection rule.
+#'     Rosin, C.D. (2011) "Multi-armed bandits with episode context."
+#'       Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 #' @export
 #' @examples
 #' morie_alfqud_actions(n_mem = c(1, 2, 3, 4, 5, 6, 7, 8), n_reg = 5L)
@@ -240,6 +268,13 @@ morie_alfqud_actions <- function(n_mem, n_reg) {
 #'
 #' @param program A list of instructions.
 #' @return A character scalar.
+#' @references Mankowitz, D.J. et al. (2023) "Faster sorting algorithms discovered
+#'       using deep reinforcement learning." Nature 618, 257-263.
+#'       doi:10.1038/s41586-023-06004-9.
+#'     Silver, D. et al. (2017) "Mastering the game of Go without human
+#'       knowledge." Nature 550, 354-359. The PUCT selection rule.
+#'     Rosin, C.D. (2011) "Multi-armed bandits with episode context."
+#'       Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 #' @export
 #' @examples
 #' ACTS <- list(list("mov", list("M", 0), list("R", 0)), list("cmp",
@@ -445,6 +480,13 @@ morie_alfqud_text <- function(program) {
 #'   Python arm.
 #' @return A list with the best program, its score, its correctness, and
 #'   how much of the space was looked at.
+#' @references Mankowitz, D.J. et al. (2023) "Faster sorting algorithms discovered
+#'       using deep reinforcement learning." Nature 618, 257-263.
+#'       doi:10.1038/s41586-023-06004-9.
+#'     Silver, D. et al. (2017) "Mastering the game of Go without human
+#'       knowledge." Nature 550, 354-359. The PUCT selection rule.
+#'     Rosin, C.D. (2011) "Multi-armed bandits with episode context."
+#'       Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -507,6 +549,13 @@ morie_alfqud <- function(target, action_space = NULL, reward_fn = NULL,
 #' One-line summary of the alfqud module
 #'
 #' @return A character scalar.
+#' @references Mankowitz, D.J. et al. (2023) "Faster sorting algorithms discovered
+#'       using deep reinforcement learning." Nature 618, 257-263.
+#'       doi:10.1038/s41586-023-06004-9.
+#'     Silver, D. et al. (2017) "Mastering the game of Go without human
+#'       knowledge." Nature 550, 354-359. The PUCT selection rule.
+#'     Rosin, C.D. (2011) "Multi-armed bandits with episode context."
+#'       Annals of Mathematics and Artificial Intelligence 61(3), 203-230.
 #' @export
 #' @examples
 #' morie_alfqud_cheatsheet()

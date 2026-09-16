@@ -11,6 +11,8 @@
 #
 # Helpers live in aaa_helpers_irt.R.
 
+#' morie_nominal_response_bock
+#'
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_nominal_response_bock(V)

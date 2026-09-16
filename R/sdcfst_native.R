@@ -214,6 +214,17 @@
 #' @param max_depth Maximum depth.
 #' @param e A generator environment from .ghc_rng.
 #' @return A list of trees plus the settings used.
+#' @references Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Robinson, P.M. (1988) "Root-N-consistent semiparametric regression."
+#'       Econometrica 56(4), 931-954.
+#'     Robins, J.M., Rotnitzky, A. and Zhao, L.P. (1994) JASA 89(427),
+#'       846-866.
+#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
+#'       heterogeneous treatment effects using random forests." JASA
+#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' morie_sdcfst_forest(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -252,6 +263,17 @@ morie_sdcfst_forest <- function(X, y, rows, n_trees = 20L, mtry = NULL,
 #' @param forest A forest from morie_sdcfst_forest.
 #' @param x A covariate row.
 #' @return The prediction.
+#' @references Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Robinson, P.M. (1988) "Root-N-consistent semiparametric regression."
+#'       Econometrica 56(4), 931-954.
+#'     Robins, J.M., Rotnitzky, A. and Zhao, L.P. (1994) JASA 89(427),
+#'       846-866.
+#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
+#'       heterogeneous treatment effects using random forests." JASA
+#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -275,6 +297,17 @@ morie_sdcfst_predict <- function(forest, x)
 #' @param ridge Ridge penalty.
 #' @param iters Maximum Newton steps.
 #' @return The coefficient vector, intercept first.
+#' @references Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Robinson, P.M. (1988) "Root-N-consistent semiparametric regression."
+#'       Econometrica 56(4), 931-954.
+#'     Robins, J.M., Rotnitzky, A. and Zhao, L.P. (1994) JASA 89(427),
+#'       846-866.
+#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
+#'       heterogeneous treatment effects using random forests." JASA
+#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' N <- 120L
@@ -381,6 +414,17 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #' @return A list with the estimate, its standard error from the
 #'   influence function, the per-fold estimates, the trimming count and
 #'   the fitted propensity summary.
+#' @references Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Robinson, P.M. (1988) "Root-N-consistent semiparametric regression."
+#'       Econometrica 56(4), 931-954.
+#'     Robins, J.M., Rotnitzky, A. and Zhao, L.P. (1994) JASA 89(427),
+#'       846-866.
+#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
+#'       heterogeneous treatment effects using random forests." JASA
+#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -509,6 +553,17 @@ morie_sdcfst <- function(y, D, X, K_fold = 5L, score = "aipw",
 #' One-line summary of the sdcfst module
 #'
 #' @return A character scalar.
+#' @references Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Robinson, P.M. (1988) "Root-N-consistent semiparametric regression."
+#'       Econometrica 56(4), 931-954.
+#'     Robins, J.M., Rotnitzky, A. and Zhao, L.P. (1994) JASA 89(427),
+#'       846-866.
+#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
+#'       heterogeneous treatment effects using random forests." JASA
+#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' morie_sdcfst_cheatsheet()

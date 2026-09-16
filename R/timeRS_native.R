@@ -359,6 +359,28 @@
 #' @param reg Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{0.02}.
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -385,6 +407,28 @@ morie_timeRS <- function(ratings, n_users, n_items, bin_days = 70,
 #' @param t_user Passed to \code{.timeRS_deviation}.
 #' @param beta Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_deviation}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' morie_timeRS_deviation(t = 5L, t_user = 5L)
@@ -403,6 +447,28 @@ morie_timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
 #' @param bin_days Passed to \code{.timeRS_time_bin}. Defaults to \code{70}.
 #' @param n_bins Passed to \code{.timeRS_time_bin}. Defaults to \code{30}.
 #' @return The value of \code{.timeRS_time_bin}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -425,6 +491,28 @@ morie_timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
 #' @param per_day Passed to \code{.timeRS_user_bias}.
 #' @param beta Passed to \code{.timeRS_user_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_user_bias}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' morie_timeRS_user_bias(b_u = 0.2, alpha_u = 0.05, t = 300, t_user = 200)
@@ -446,6 +534,28 @@ morie_timeRS_user_bias <- function(b_u, alpha_u, t, t_user, per_day = NULL,
 #' @param bin_days Passed to \code{.timeRS_item_bias}. Defaults to \code{70}.
 #' @param n_bins Passed to \code{.timeRS_item_bias}. Defaults to \code{30}.
 #' @return The value of \code{.timeRS_item_bias}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' morie_timeRS_item_bias(b_i = c(1, 2, 3, 4, 5, 6, 7, 8), bins = 5L, t = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -473,6 +583,28 @@ morie_timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
 #' @param bin_days Passed to \code{.timeRS_predict_time}. Defaults to \code{70}.
 #' @param beta Passed to \code{.timeRS_predict_time}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_predict_time}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -508,6 +640,28 @@ morie_timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins,
 #' @param reg Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{0.02}.
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -541,6 +695,28 @@ morie_timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
 #' @param reg Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{0.02}.
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' set.seed(2)
@@ -573,6 +749,28 @@ morie_timeRS_timesvdpp <- function(ratings, n_users, n_items, bin_days = 70,
 #' @param reg Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{0.02}.
 #' @param beta Passed to \code{.timeRS_fit_time_bias}. Defaults to \code{.timeRS_BETA}.
 #' @return The value of \code{.timeRS_fit_time_bias}.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' set.seed(2)
@@ -595,6 +793,28 @@ morie_timeRS_timesvd <- function(ratings, n_users, n_items, bin_days = 70,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Koren, Y. (2010) "Collaborative filtering with temporal dynamics",
+#'   *Communications of the ACM* 53(4), 89-97,
+#'   doi:10.1145/1721654.1721677. [PDF supplied by Vee.] The two measured
+#'   effects in the Netflix data -- the abrupt shift of rating scale in
+#'   early 2004 from around 3.4 to above 3.6 stars, and ratings increasing
+#'   with movie age; the argument that this differs from concept drift
+#'   because many characteristics shift simultaneously and that classical
+#'   time-window or instance-decay approaches cannot work as they lose too
+#'   many signals when discarding data instances; the time deviation
+#'   dev_u(t) = sign(t - t_u) |t - t_u|^beta with t_u the user\'s mean
+#'   rating date and beta = 0.4 set by cross-validation; the resulting
+#'   time-dependent user bias; item bias in time bins; and the per-day user
+#'   term.
+#'   
+#'   Koren, Y. (2009) "Collaborative Filtering with Temporal Dynamics",
+#'   *KDD \'09*, 447-456, doi:10.1145/1557019.1557072. The full conference
+#'   treatment, including the spline alternative to the linear drift.
+#'   
+#'   Koren, Y. (2008) "Factorization Meets the Neighborhood", *KDD \'08*,
+#'   426-434, doi:10.1145/1401890.1401944. The SVD++ base this extends;
+#'   implemented in :mod:`svdpp`.
 #' @export
 #' @examples
 #' morie_timeRS_cheatsheet()

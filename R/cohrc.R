@@ -6,7 +6,7 @@
 #' @param y Numeric vector (same length).
 #' @param nperseg Segment length. Default n/4.
 #' @param fs Sampling frequency. Default 1.
-#' @return Named list with \code{frequencies, morie_coherence, n_segments,
+#' @return Named list with \eqn{frequencies, morie_coherence, n_segments,
 #'   nperseg, fs, n, method}.
 #' @examples
 #' set.seed(1)

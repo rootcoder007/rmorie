@@ -66,6 +66,7 @@ morie_laplc <- function(value, sensitivity, epsilon, seed = NULL) {
 morie_laplace_mechanism <- morie_laplc
 
 #' Cheatsheet
+#' @return The terminal expression of the body.
 #' @examples
 #' rmorie:::morie_laplc_cheatsheet()
 #' @keywords internal

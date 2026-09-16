@@ -11,7 +11,7 @@
 #' Formula: \code{OR_MH = sum(a_k d_k/n_k) / sum(b_k c_k/n_k)}. The
 #' variance of its logarithm is the Robins-Breslow-Greenland expression
 #' \code{P/(2 S^2) + Q/(2 S T) + R/(2 T^2)} with
-#' \code{P = sum (a+d) a d / n^2}, \code{Q = sum ((a+d) b c + (b+c) a d)
+#' \code{P = sum (a+d) a d / n^2}, \eqn{Q = sum ((a+d) b c + (b+c) a d)
 #' / n^2}, \code{R = sum (b+c) b c / n^2}, \code{S = sum a d / n},
 #' \code{T = sum b c / n}.
 #'

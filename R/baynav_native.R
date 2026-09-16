@@ -121,7 +121,7 @@ enforce_invertibility <- function(u, w) {
 #'
 #' @param z,u,w Numeric vectors of equal length.
 #' @param b Numeric scalar.
-#' @return A list with \code{z, log_det, det, invertibility_adjusted,
+#' @return A list with \eqn{z, log_det, det, invertibility_adjusted,
 #'   note}.
 #' @export
 #' @examples
@@ -153,7 +153,7 @@ planar_flow <- function(z, u, w, b) {
 #' @param z0 Numeric vector; the base sample.
 #' @param log_q0 Numeric scalar; the base log-density at \code{z0}.
 #' @param layers List of \code{list(u, w, b)} triples.
-#' @return A list with \code{estimate, log_q, z, log_dets, depth,
+#' @return A list with \eqn{estimate, log_q, z, log_dets, depth,
 #'   method, note}.
 #' @export
 #' @examples

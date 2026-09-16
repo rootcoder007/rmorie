@@ -20,7 +20,7 @@
 #' \code{2 K int_0^1 pchisq((QT+LR)/(1 + QT x^2/LR), L) (1-x^2)^((L-3)/2) dx}
 #' with \code{K = gamma(L/2)/(sqrt(pi) gamma((L-1)/2))}; the
 #' substitution \code{x = sin(theta)} used here turns that into
-#' \code{2 K int_0^{pi/2} pchisq((QT+LR)/(1 + QT sin^2(theta)/LR), L)
+#' \eqn{2 K int_0^{pi/2} pchisq((QT+LR)/(1 + QT sin^2(theta)/LR), L)
 #' cos^(L-2)(theta) dtheta}, whose integrand is bounded and smooth for
 #' every \code{L >= 2}, so the epsilon-regularised \code{L = 4} special
 #' case in the package is not needed.  A fixed 4096-interval composite

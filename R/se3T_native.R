@@ -148,6 +148,32 @@
 #' @param axis Passed to \code{.se3T_vec}.
 #' @param angle Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A matrix, from \code{matrix}.
+#' @references ----------
+#'   Fuchs, F. B., Worrall, D. E., Fischer, V. & Welling, M. (2020)
+#'   "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention
+#'   Networks", *Advances in Neural Information Processing Systems 33
+#'   (NeurIPS 2020)*, 1970-1981, arXiv:2006.10503. The abstract and Sec.
+#'   1-3: a variant of the self-attention module for 3D point clouds and
+#'   graphs which is equivariant under continuous 3D roto-translations;
+#'   that equivariance is important to ensure stable and predictable
+#'   performance in the presence of nuisance transformations of the input,
+#'   with increased weight-tying as a positive corollary; that
+#'   SE(3)-equivariance generalises the translational weight-tying of
+#'   conventional convolutions to roto-translations in 3D and restricts the
+#'   space of learnable functions to a subspace adhering to the symmetries
+#'   of the task; the use of self-attention to operate on point clouds and
+#'   graphs with varying numbers of points; and that the model outperforms
+#'   both a strong non-equivariant attention baseline and an equivariant
+#'   model without attention.
+#'   
+#'   Thomas, N., Smidt, T., Kearnes, S., Yang, L., Li, L., Kohlhoff, K. &
+#'   Riley, P. (2018) "Tensor field networks: Rotation- and
+#'   translation-equivariant neural networks for 3D point clouds",
+#'   arXiv:1802.08219. The equivariant kernel basis.
+#'   
+#'   Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
+#'   5998-6008, arXiv:1706.03762. The attention module being made
+#'   equivariant.
 #' @export
 #' @examples
 #' morie_se3T_rotation_matrix(axis = c(0, 0, 1), angle = pi / 4)
@@ -181,6 +207,32 @@ morie_se3T_rotation_matrix <- function(axis, angle) {
 #' @param i See Usage.
 #' @param j See Usage.
 #' @return A list with \code{distance}, \code{direction}, \code{note}.
+#' @references ----------
+#'   Fuchs, F. B., Worrall, D. E., Fischer, V. & Welling, M. (2020)
+#'   "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention
+#'   Networks", *Advances in Neural Information Processing Systems 33
+#'   (NeurIPS 2020)*, 1970-1981, arXiv:2006.10503. The abstract and Sec.
+#'   1-3: a variant of the self-attention module for 3D point clouds and
+#'   graphs which is equivariant under continuous 3D roto-translations;
+#'   that equivariance is important to ensure stable and predictable
+#'   performance in the presence of nuisance transformations of the input,
+#'   with increased weight-tying as a positive corollary; that
+#'   SE(3)-equivariance generalises the translational weight-tying of
+#'   conventional convolutions to roto-translations in 3D and restricts the
+#'   space of learnable functions to a subspace adhering to the symmetries
+#'   of the task; the use of self-attention to operate on point clouds and
+#'   graphs with varying numbers of points; and that the model outperforms
+#'   both a strong non-equivariant attention baseline and an equivariant
+#'   model without attention.
+#'   
+#'   Thomas, N., Smidt, T., Kearnes, S., Yang, L., Li, L., Kohlhoff, K. &
+#'   Riley, P. (2018) "Tensor field networks: Rotation- and
+#'   translation-equivariant neural networks for 3D point clouds",
+#'   arXiv:1802.08219. The equivariant kernel basis.
+#'   
+#'   Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
+#'   5998-6008, arXiv:1706.03762. The attention module being made
+#'   equivariant.
 #' @export
 #' @examples
 #' morie_se3T_invariant_features(positions = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -208,6 +260,32 @@ morie_se3T_invariant_features <- function(positions, i, j) {
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.se3T_vec}.
 #' @param sigma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
+#' @references ----------
+#'   Fuchs, F. B., Worrall, D. E., Fischer, V. & Welling, M. (2020)
+#'   "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention
+#'   Networks", *Advances in Neural Information Processing Systems 33
+#'   (NeurIPS 2020)*, 1970-1981, arXiv:2006.10503. The abstract and Sec.
+#'   1-3: a variant of the self-attention module for 3D point clouds and
+#'   graphs which is equivariant under continuous 3D roto-translations;
+#'   that equivariance is important to ensure stable and predictable
+#'   performance in the presence of nuisance transformations of the input,
+#'   with increased weight-tying as a positive corollary; that
+#'   SE(3)-equivariance generalises the translational weight-tying of
+#'   conventional convolutions to roto-translations in 3D and restricts the
+#'   space of learnable functions to a subspace adhering to the symmetries
+#'   of the task; the use of self-attention to operate on point clouds and
+#'   graphs with varying numbers of points; and that the model outperforms
+#'   both a strong non-equivariant attention baseline and an equivariant
+#'   model without attention.
+#'   
+#'   Thomas, N., Smidt, T., Kearnes, S., Yang, L., Li, L., Kohlhoff, K. &
+#'   Riley, P. (2018) "Tensor field networks: Rotation- and
+#'   translation-equivariant neural networks for 3D point clouds",
+#'   arXiv:1802.08219. The equivariant kernel basis.
+#'   
+#'   Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
+#'   5998-6008, arXiv:1706.03762. The attention module being made
+#'   equivariant.
 #' @export
 #' @examples
 #' morie_se3T_radial_kernel(distance = 5L)
@@ -240,6 +318,32 @@ morie_se3T_radial_kernel <- function(distance, weights = NULL, sigma = 1.0) {
 #' @param sigma Passed to \code{morie_se3T_radial_kernel}. Defaults to \code{1}.
 #' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{type1}, \code{type0}, \code{weights}, \code{note}.
+#' @references ----------
+#'   Fuchs, F. B., Worrall, D. E., Fischer, V. & Welling, M. (2020)
+#'   "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention
+#'   Networks", *Advances in Neural Information Processing Systems 33
+#'   (NeurIPS 2020)*, 1970-1981, arXiv:2006.10503. The abstract and Sec.
+#'   1-3: a variant of the self-attention module for 3D point clouds and
+#'   graphs which is equivariant under continuous 3D roto-translations;
+#'   that equivariance is important to ensure stable and predictable
+#'   performance in the presence of nuisance transformations of the input,
+#'   with increased weight-tying as a positive corollary; that
+#'   SE(3)-equivariance generalises the translational weight-tying of
+#'   conventional convolutions to roto-translations in 3D and restricts the
+#'   space of learnable functions to a subspace adhering to the symmetries
+#'   of the task; the use of self-attention to operate on point clouds and
+#'   graphs with varying numbers of points; and that the model outperforms
+#'   both a strong non-equivariant attention baseline and an equivariant
+#'   model without attention.
+#'   
+#'   Thomas, N., Smidt, T., Kearnes, S., Yang, L., Li, L., Kohlhoff, K. &
+#'   Riley, P. (2018) "Tensor field networks: Rotation- and
+#'   translation-equivariant neural networks for 3D point clouds",
+#'   arXiv:1802.08219. The equivariant kernel basis.
+#'   
+#'   Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
+#'   5998-6008, arXiv:1706.03762. The attention module being made
+#'   equivariant.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -313,6 +417,32 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights = NULL,
 #' @return A list with \code{estimate}, \code{type1_deviation}, \code{type0_deviation},
 #' \code{weight_deviation}, \code{equivariant}, \code{weights_invariant}, \code{method},
 #' \code{note}.
+#' @references ----------
+#'   Fuchs, F. B., Worrall, D. E., Fischer, V. & Welling, M. (2020)
+#'   "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention
+#'   Networks", *Advances in Neural Information Processing Systems 33
+#'   (NeurIPS 2020)*, 1970-1981, arXiv:2006.10503. The abstract and Sec.
+#'   1-3: a variant of the self-attention module for 3D point clouds and
+#'   graphs which is equivariant under continuous 3D roto-translations;
+#'   that equivariance is important to ensure stable and predictable
+#'   performance in the presence of nuisance transformations of the input,
+#'   with increased weight-tying as a positive corollary; that
+#'   SE(3)-equivariance generalises the translational weight-tying of
+#'   conventional convolutions to roto-translations in 3D and restricts the
+#'   space of learnable functions to a subspace adhering to the symmetries
+#'   of the task; the use of self-attention to operate on point clouds and
+#'   graphs with varying numbers of points; and that the model outperforms
+#'   both a strong non-equivariant attention baseline and an equivariant
+#'   model without attention.
+#'   
+#'   Thomas, N., Smidt, T., Kearnes, S., Yang, L., Li, L., Kohlhoff, K. &
+#'   Riley, P. (2018) "Tensor field networks: Rotation- and
+#'   translation-equivariant neural networks for 3D point clouds",
+#'   arXiv:1802.08219. The equivariant kernel basis.
+#'   
+#'   Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
+#'   5998-6008, arXiv:1706.03762. The attention module being made
+#'   equivariant.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -377,6 +507,32 @@ morie_se3T_check_equivariance <- function(positions, type0, type1, layer = NULL,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Fuchs, F. B., Worrall, D. E., Fischer, V. & Welling, M. (2020)
+#'   "SE(3)-Transformers: 3D Roto-Translation Equivariant Attention
+#'   Networks", *Advances in Neural Information Processing Systems 33
+#'   (NeurIPS 2020)*, 1970-1981, arXiv:2006.10503. The abstract and Sec.
+#'   1-3: a variant of the self-attention module for 3D point clouds and
+#'   graphs which is equivariant under continuous 3D roto-translations;
+#'   that equivariance is important to ensure stable and predictable
+#'   performance in the presence of nuisance transformations of the input,
+#'   with increased weight-tying as a positive corollary; that
+#'   SE(3)-equivariance generalises the translational weight-tying of
+#'   conventional convolutions to roto-translations in 3D and restricts the
+#'   space of learnable functions to a subspace adhering to the symmetries
+#'   of the task; the use of self-attention to operate on point clouds and
+#'   graphs with varying numbers of points; and that the model outperforms
+#'   both a strong non-equivariant attention baseline and an equivariant
+#'   model without attention.
+#'   
+#'   Thomas, N., Smidt, T., Kearnes, S., Yang, L., Li, L., Kohlhoff, K. &
+#'   Riley, P. (2018) "Tensor field networks: Rotation- and
+#'   translation-equivariant neural networks for 3D point clouds",
+#'   arXiv:1802.08219. The equivariant kernel basis.
+#'   
+#'   Vaswani, A. et al. (2017) "Attention Is All You Need", *NIPS 2017*,
+#'   5998-6008, arXiv:1706.03762. The attention module being made
+#'   equivariant.
 #' @export
 #' @examples
 #' morie_se3T_cheatsheet()

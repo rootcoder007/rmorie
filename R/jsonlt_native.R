@@ -596,6 +596,25 @@ morie_jsonlt_base64url_dec <- function(input) {
 #' dataframe,matrix,Date,POSIXt,factor,complex,raw,null,na,auto_unbox,digits,pretty,force,...
 #' as in jsonlite.
 #' @return a length-one character vector of class `json`.
+#' @param pretty FALSE, TRUE, or an indent width.
+#' @param ... toJSON options: dataframe (rows, columns, values), matrix (rowmajor, columnmajor), Date (ISO8601, epoch), POSIXt (string, ISO8601, epoch, mongo), factor (string, integer), complex (string, list), raw (base64, hex, int, mongo), null (list, null), na (NULL, null, string), auto_unbox, digits, force.
+#' @param dataframe Argument `dataframe`; see Usage.
+#' @param matrix Argument `matrix`; see Usage.
+#' @param Date Argument `Date`; see Usage.
+#' @param POSIXt Argument `POSIXt`; see Usage.
+#' @param factor Argument `factor`; see Usage.
+#' @param complex Argument `complex`; see Usage.
+#' @param raw Argument `raw`; see Usage.
+#' @param null Argument `null`; see Usage.
+#' @param na Argument `na`; see Usage.
+#' @param auto_unbox Argument `auto_unbox`; see Usage.
+#' @param digits Argument `digits`; see Usage.
+#' @param force Argument `force`; see Usage.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_jsonlt_to_json(V)
@@ -630,9 +649,16 @@ morie_jsonlt_to_json <- function(x, dataframe = c("rows", "columns", "values"),
 
 #' Mark a value as a JSON scalar (jsonlite's unbox)
 #'
+#' R has no scalars, so a length-one vector is ambiguous. This resolves it for one value without turning auto_unbox on for the whole document.
+#'
 #' @param x an atomic vector of length one, a one-row data.frame, or a
 #'   length-one POSIXt.
 #' @return `x` with class `scalar`, so it is written without brackets.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @export
 #' @examples
 #' morie_jsonlt_unbox(x = 5L)
@@ -1017,6 +1043,11 @@ print.json <- function(x, ...) {
 #' @param simplify legacy: `FALSE` turns every simplification off.
 #' @param ... ignored, for call compatibility.
 #' @return an R object.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @examples
 #' morie_jsonlt_from_json('[{"a":1,"b":"x"},{"a":2,"b":"y"}]')
 #' morie_jsonlt_from_json('[[1,2],[3,4]]')
@@ -1297,9 +1328,16 @@ morie_jsonlt_validate <- function(txt) {
 
 #' Indent JSON text (jsonlite's prettify)
 #'
+#' Structure only: a comma inside a string stays a comma, which is why this walks characters rather than running a regular expression over the text.
+#'
 #' @param txt JSON text.
 #' @param indent spaces per level (negative = tabs).
 #' @return the same JSON, indented, with a trailing newline.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @export
 #' @examples
 #' cat(morie_jsonlt_prettify('{"a":[1,2,{"b":null}]}'))
@@ -1314,6 +1352,11 @@ morie_jsonlt_prettify <- function(txt, indent = 4) {
 #'
 #' @param txt JSON text.
 #' @return the same JSON with no whitespace outside strings.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @export
 #' @examples
 #' morie_jsonlt_minify('{ "a" : [ 1 , 2 ] }')
@@ -1325,6 +1368,11 @@ morie_jsonlt_minify <- function(txt) .jsonlt_reformat(txt, FALSE)
 #' @param x a data.frame.
 #' @param recursive expand nested frames all the way down.
 #' @return a data.frame whose nested columns became outer.inner columns.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @export
 #' @examples
 #' df <- morie_jsonlt_from_json('[{"a":{"b":1,"c":{"d":2}}},{"a":{"b":3,"c":{"d":4}}}]')
@@ -1553,6 +1601,11 @@ morie_jsonlt_rbind_pages <- function(pages) {
 #' @param digits decimal digits for doubles (8, as jsonlite).
 #' @param pretty indent the output.
 #' @return a length-one character vector of class `json`.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1566,6 +1619,11 @@ morie_jsonlt_serialize <- function(x, digits = 8, pretty = FALSE) {
 #'
 #' @param txt JSON produced by [morie_jsonlt_serialize()].
 #' @return the original R object.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @export
 #' @keywords internal
 morie_jsonlt_unserialize <- function(txt) .jsonlt_unpack(.jsonlt_parse(txt))
@@ -1574,11 +1632,18 @@ morie_jsonlt_unserialize <- function(txt) .jsonlt_unpack(.jsonlt_parse(txt))
 
 #' jsonlite's JSON mapping, natively
 #'
+#' One entry point over every route, so the module can be driven the same way from either language arm.
+#'
 #' @param x the value or JSON text the route acts on.
 #' @param route one of to_json, from_json, prettify, minify, validate,
 #'   flatten, serialize, unserialize, base64_enc, base64_dec.
 #' @param ... options for the chosen route.
 #' @return a list with route, result and method.
+#' @references Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
+#'     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
+#'   
+#'   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
+#'     Interchange Format." RFC 8259.
 #' @export
 #' @examples
 #' morie_jsonlt()

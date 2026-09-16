@@ -406,6 +406,8 @@ morie_zap_mean_variance <- function(theta, mu) {
 
 # ---- marginal structural models (Robins, Hernan & Brumback 2000) ----
 
+#' morie_msm_design
+#'
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::morie_msm_design(M)
@@ -422,6 +424,8 @@ morie_msm_design <- function(treatment_history, extra = NULL) {
   list(X = X, a_bar = abar)
 }
 
+#' morie_msm_weighted_glm
+#'
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_msm_weighted_glm(V, V)
@@ -479,6 +483,8 @@ morie_msm_weighted_glm <- function(y, X, weights = NULL,
   list(beta = beta, fitted = mu, eta = eta, weights = w, family = family)
 }
 
+#' morie_msm_cox_weighted
+#'
 #' @examples
 #' rmorie:::morie_msm_cox_weighted(time = 5L, event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   treatment_history = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
@@ -517,6 +523,8 @@ morie_msm_cox_weighted <- function(time, event, treatment_history,
   list(beta = beta, hazard_ratio = exp(beta))
 }
 
+#' morie_msm_gmm
+#'
 #' @examples
 #' rmorie:::morie_msm_gmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Z = c(1, 2, 3, 4, 5, 6, 7, 8))

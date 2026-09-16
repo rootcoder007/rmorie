@@ -132,6 +132,19 @@
 #' @param qtn Indices of the current pseudo-QTNs, one-based.
 #' @return A list with the effect, its standard error, the t statistic
 #'   and the two sided p value for each marker.
+#' @references Huang, M., Liu, X., Zhou, Y., Summers, R.M. and Zhang, Z. (2019)
+#'       "BLINK: a package for the next level of genome-wide association
+#'       studies with both individuals and markers in the millions."
+#'       GigaScience 8(2), giy154. doi:10.1093/gigascience/giy154. The LD
+#'       filter with its 0.7 threshold and the Bonferroni pre-filter at
+#'       alpha = 0.01, the BIC = 2(-LL) + k log n selection, and the
+#'       iteration to a stable pseudo-QTN set.
+#'     Liu, X., Huang, M., Fan, B., Buckler, E.S. and Zhang, Z. (2016)
+#'       "Iterative usage of fixed and random effect models for powerful
+#'       and efficient genome-wide association studies." PLoS Genetics
+#'       12(2), e1005767. FarmCPU, the bin-based predecessor.
+#'     Devlin, B. and Roeder, K. (1999) "Genomic control for association
+#'       studies." Biometrics 55(4), 997-1004.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -217,6 +230,19 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
 #' @param order Marker indices in p-value order.
 #' @param threshold Correlation above which a candidate is dropped.
 #' @return The kept marker indices, most significant first.
+#' @references Huang, M., Liu, X., Zhou, Y., Summers, R.M. and Zhang, Z. (2019)
+#'       "BLINK: a package for the next level of genome-wide association
+#'       studies with both individuals and markers in the millions."
+#'       GigaScience 8(2), giy154. doi:10.1093/gigascience/giy154. The LD
+#'       filter with its 0.7 threshold and the Bonferroni pre-filter at
+#'       alpha = 0.01, the BIC = 2(-LL) + k log n selection, and the
+#'       iteration to a stable pseudo-QTN set.
+#'     Liu, X., Huang, M., Fan, B., Buckler, E.S. and Zhang, Z. (2016)
+#'       "Iterative usage of fixed and random effect models for powerful
+#'       and efficient genome-wide association studies." PLoS Genetics
+#'       12(2), e1005767. FarmCPU, the bin-based predecessor.
+#'     Devlin, B. and Roeder, K. (1999) "Genomic control for association
+#'       studies." Biometrics 55(4), 997-1004.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -247,6 +273,19 @@ morie_blinkg_ld_filter <- function(geno, order,
 #' @param positions Genomic positions, one per marker.
 #' @param bin_size Bin width.
 #' @return The kept marker indices, most significant first.
+#' @references Huang, M., Liu, X., Zhou, Y., Summers, R.M. and Zhang, Z. (2019)
+#'       "BLINK: a package for the next level of genome-wide association
+#'       studies with both individuals and markers in the millions."
+#'       GigaScience 8(2), giy154. doi:10.1093/gigascience/giy154. The LD
+#'       filter with its 0.7 threshold and the Bonferroni pre-filter at
+#'       alpha = 0.01, the BIC = 2(-LL) + k log n selection, and the
+#'       iteration to a stable pseudo-QTN set.
+#'     Liu, X., Huang, M., Fan, B., Buckler, E.S. and Zhang, Z. (2016)
+#'       "Iterative usage of fixed and random effect models for powerful
+#'       and efficient genome-wide association studies." PLoS Genetics
+#'       12(2), e1005767. FarmCPU, the bin-based predecessor.
+#'     Devlin, B. and Roeder, K. (1999) "Genomic control for association
+#'       studies." Biometrics 55(4), 997-1004.
 #' @export
 #' @examples
 #' N <- 60L
@@ -304,6 +343,19 @@ morie_blinkg_bin_filter <- function(order, positions, bin_size) {
 #' @param criterion A member of the criterion list.
 #' @return A list with the chosen indices, the score path and the chosen
 #'   count.
+#' @references Huang, M., Liu, X., Zhou, Y., Summers, R.M. and Zhang, Z. (2019)
+#'       "BLINK: a package for the next level of genome-wide association
+#'       studies with both individuals and markers in the millions."
+#'       GigaScience 8(2), giy154. doi:10.1093/gigascience/giy154. The LD
+#'       filter with its 0.7 threshold and the Bonferroni pre-filter at
+#'       alpha = 0.01, the BIC = 2(-LL) + k log n selection, and the
+#'       iteration to a stable pseudo-QTN set.
+#'     Liu, X., Huang, M., Fan, B., Buckler, E.S. and Zhang, Z. (2016)
+#'       "Iterative usage of fixed and random effect models for powerful
+#'       and efficient genome-wide association studies." PLoS Genetics
+#'       12(2), e1005767. FarmCPU, the bin-based predecessor.
+#'     Devlin, B. and Roeder, K. (1999) "Genomic control for association
+#'       studies." Biometrics 55(4), 997-1004.
 #' @export
 #' @examples
 #' morie_blinkg_select(y = c(1, 2, 3, 4, 5, 6, 7, 8), geno = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -363,6 +415,19 @@ morie_blinkg_select <- function(y, geno, candidates, covars = NULL,
 #' @return A list with the final scan, the pseudo-QTNs and how they were
 #'   chosen, the criterion path, the iteration count and whether the set
 #'   settled, and the genomic inflation factor.
+#' @references Huang, M., Liu, X., Zhou, Y., Summers, R.M. and Zhang, Z. (2019)
+#'       "BLINK: a package for the next level of genome-wide association
+#'       studies with both individuals and markers in the millions."
+#'       GigaScience 8(2), giy154. doi:10.1093/gigascience/giy154. The LD
+#'       filter with its 0.7 threshold and the Bonferroni pre-filter at
+#'       alpha = 0.01, the BIC = 2(-LL) + k log n selection, and the
+#'       iteration to a stable pseudo-QTN set.
+#'     Liu, X., Huang, M., Fan, B., Buckler, E.S. and Zhang, Z. (2016)
+#'       "Iterative usage of fixed and random effect models for powerful
+#'       and efficient genome-wide association studies." PLoS Genetics
+#'       12(2), e1005767. FarmCPU, the bin-based predecessor.
+#'     Devlin, B. and Roeder, K. (1999) "Genomic control for association
+#'       studies." Biometrics 55(4), 997-1004.
 #' @export
 #' @examples
 #' N <- 60L
@@ -461,6 +526,19 @@ morie_blinkg <- function(y, geno, positions = NULL, covars = NULL,
 #' One-line summary of the blinkg module
 #'
 #' @return A character scalar.
+#' @references Huang, M., Liu, X., Zhou, Y., Summers, R.M. and Zhang, Z. (2019)
+#'       "BLINK: a package for the next level of genome-wide association
+#'       studies with both individuals and markers in the millions."
+#'       GigaScience 8(2), giy154. doi:10.1093/gigascience/giy154. The LD
+#'       filter with its 0.7 threshold and the Bonferroni pre-filter at
+#'       alpha = 0.01, the BIC = 2(-LL) + k log n selection, and the
+#'       iteration to a stable pseudo-QTN set.
+#'     Liu, X., Huang, M., Fan, B., Buckler, E.S. and Zhang, Z. (2016)
+#'       "Iterative usage of fixed and random effect models for powerful
+#'       and efficient genome-wide association studies." PLoS Genetics
+#'       12(2), e1005767. FarmCPU, the bin-based predecessor.
+#'     Devlin, B. and Roeder, K. (1999) "Genomic control for association
+#'       studies." Biometrics 55(4), 997-1004.
 #' @export
 #' @examples
 #' morie_blinkg_cheatsheet()

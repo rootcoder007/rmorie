@@ -19,6 +19,8 @@
 # 12(6) p. 16 states J = (1 - G)/(1 - F) and p. 17 attributes it to
 # van Lieshout & Baddeley (1996).
 
+#' morie_ripley_j_function
+#'
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::morie_ripley_j_function(M)

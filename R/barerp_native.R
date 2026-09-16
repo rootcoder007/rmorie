@@ -820,6 +820,7 @@ barriermethod <- barrier_method
 #' @param grad See Usage.
 #' @param hess See Usage.
 #' @param affine See Usage.
+#' @return The value of `barrier_method`.
 #' @export
 #' @examples
 #' f0 <- function(x) sum(x^2)

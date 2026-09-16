@@ -7,7 +7,7 @@
 #' are a van der Corput / AS 241 sequence rather than a pseudo-random one,
 #' so the value is reproducible across arms and across runs.
 #'
-#' Formula: \code{SW_p(mu,nu) = (E_theta [W_p(P_theta mu, P_theta
+#' Formula: \eqn{SW_p(mu,nu) = (E_theta [W_p(P_theta mu, P_theta
 #' nu)^p])^(1/p)} -- Bonneel et al. (2015) eq. (5); Peyre and Cuturi
 #' (2019) eq. (10.13), p. 166.
 #'

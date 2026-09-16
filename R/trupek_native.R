@@ -433,6 +433,15 @@
 #' @return a list with x, fval, gnorm, delta, iterations, accepted,
 #'   rejected, converged, exit_reason, history, subproblem,
 #'   subproblem_exit and method.
+#' @references Conn, A.R., Gould, N.I.M. & Toint, P.L. (2000) "Trust-Region
+#'       Methods." MPS-SIAM Series on Optimization, SIAM, Philadelphia.
+#'       Algorithm 6.1.1 (BTR), Section 6.3 (Cauchy point), Section 7.3
+#'       (exact subproblem), Algorithm 7.5.1 (Steihaug-Toint).
+#'     Powell, M.J.D. (1970) "A new algorithm for unconstrained
+#'       optimization", in Nonlinear Programming, Academic Press, 31-65.
+#'     Steihaug, T. (1983) "The conjugate gradient method and trust regions
+#'       in large scale optimization", SIAM Journal on Numerical Analysis
+#'       20(3), 626-637, doi:10.1137/0720042
 #' @export
 #' @examples
 #' f <- function(x) sum(x^2)
@@ -519,6 +528,15 @@ morie_trupek_trust_region <- function(f, grad_f, hess_f, x0, delta = 1,
 #' @param x0 starting point.
 #' @param ... passed to morie_trupek_trust_region.
 #' @return see morie_trupek_trust_region.
+#' @references Conn, A.R., Gould, N.I.M. & Toint, P.L. (2000) "Trust-Region
+#'       Methods." MPS-SIAM Series on Optimization, SIAM, Philadelphia.
+#'       Algorithm 6.1.1 (BTR), Section 6.3 (Cauchy point), Section 7.3
+#'       (exact subproblem), Algorithm 7.5.1 (Steihaug-Toint).
+#'     Powell, M.J.D. (1970) "A new algorithm for unconstrained
+#'       optimization", in Nonlinear Programming, Academic Press, 31-65.
+#'     Steihaug, T. (1983) "The conjugate gradient method and trust regions
+#'       in large scale optimization", SIAM Journal on Numerical Analysis
+#'       20(3), 626-637, doi:10.1137/0720042
 #' @export
 #' @keywords internal
 morie_trupek <- function(f, grad_f, hess_f, x0, ...)

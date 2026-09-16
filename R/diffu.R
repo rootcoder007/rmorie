@@ -12,7 +12,7 @@
 #' @param dx Spatial step (default 0.1).
 #' @param dt Time step (default 0.01).
 #' @param n_steps Number of time steps (default 100).
-#' @return Named list \code{(value, T_final, T_initial, history,
+#' @return Named list \eqn{(value, T_final, T_initial, history,
 #'   r_stability, n_steps, alpha, method)}.
 #' @references Crank (1975), Mathematics of Diffusion.
 #' @examples

@@ -13,6 +13,8 @@
 #
 # Helpers live in aaa_helpers_irt.R.
 
+#' morie_rating_scale_andrich
+#'
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_rating_scale_andrich(V)

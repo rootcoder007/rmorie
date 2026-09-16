@@ -118,6 +118,7 @@
 #' @param flow See Usage.
 #' @param x See Usage.
 #' @param t See Usage.
+#' @return A list with `u`, `total`.
 #' @export
 #' @examples
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
@@ -140,6 +141,7 @@ flow_forward <- function(flow, x, t) {
 #' @param flow See Usage.
 #' @param x See Usage.
 #' @param t See Usage.
+#' @return A numeric value.
 #' @export
 #' @examples
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
@@ -162,6 +164,7 @@ flow_logprob <- function(flow, x, t) {
 #' @param n_layers See Usage.
 #' @param hidden See Usage.
 #' @param seed See Usage.
+#' @return A list with `layers`, `dim_x`, `dim_t`.
 #' @export
 #' @examples
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 3L, hidden = 6L, seed = 1L)
@@ -277,6 +280,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' @param lr See Usage.
 #' @param seed See Usage.
 #' @param batch See Usage.
+#' @return The value of `flow`, as built in the body.
 #' @export
 #' @examples
 #' \donttest{
@@ -331,6 +335,7 @@ train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
 #' @param burn See Usage.
 #' @param step See Usage.
 #' @param seed See Usage.
+#' @return A list with `samples`, `acceptance`.
 #' @export
 #' @examples
 #' # a standard normal target
@@ -375,6 +380,7 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
 #' @param mcmc_step See Usage.
 #' @param seed See Usage.
 #' @param n_posterior See Usage.
+#' @return A list with `estimate`, `posterior_mean`, `posterior_sd`, `posterior_samples`, `flow`, `D`, `n_simulations`, `history`, `acceptance`, `n_rounds`, `method`, `note`.
 #' @export
 #' @examples
 #' \donttest{
@@ -459,6 +465,7 @@ abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
   )
 }
 
+#' @rdname abcnnt
 #' Compact alias for abcnnt
 #' @export
 #' @noRd

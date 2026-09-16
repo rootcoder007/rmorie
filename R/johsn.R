@@ -4,7 +4,7 @@
 #'
 #' @param x Numeric matrix (T x k) of I(1) candidate series.
 #' @param k_ar_diff Number of lagged differences. Default 1.
-#' @return Named list with \code{eigenvalues, trace_stat, crit_values,
+#' @return Named list with \eqn{eigenvalues, trace_stat, crit_values,
 #'   rank, n, k, method}.
 #' @examples
 #' # See the package vignettes for usage examples:
