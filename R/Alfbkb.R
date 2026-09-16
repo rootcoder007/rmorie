@@ -20,6 +20,7 @@
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::Alfbkb(M, M)
+#' @export
 Alfbkb <- function(s, w, b = NULL, frames = NULL) {
   n <- nrow(s)
   out <- vector("list", n)

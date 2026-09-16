@@ -15,6 +15,7 @@
 #' @param activation optional "relu" or "logistic"
 #' @return list with `feature_map`, `output_shape` and `n_parameters`
 #' @noRd
+#' @export
 morie_conv2d <- function(image, kernel, bias = 0, stride = 1,
                          activation = NULL) {
   # eq. (13.1): each unit sees w'x + b over its receptive field only,
@@ -173,6 +174,7 @@ morie_fda_inner_product <- function(t, L1, L2, kind = "fourier") {
 #' @param X_curves matrix or list of observed curves, one per subject
 #' @return list with `X_star`, `C`, `Q` and `Psi`
 #' @noRd
+#' @export
 morie_fda_design <- function(t, X_curves, L1 = 3, L2 = 5,
                              kind = "fourier") {
   # eq. (14.3)/(14.9): X* = C Q', so the functional regression
@@ -199,6 +201,7 @@ morie_fda_design <- function(t, X_curves, L1 = 3, L2 = 5,
 #' @param y response vector, one entry per curve
 #' @return list with `beta`, `fitted`, `residuals`, `sigma2`, `X_star`
 #' @noRd
+#' @export
 morie_fda_fit <- function(t, X_curves, y, L1 = 3, L2 = 5,
                           kind = "fourier") {
   # eq. (14.4): beta-hat = (X*'X*)^-1 X*'y and
@@ -225,6 +228,7 @@ morie_fda_fit <- function(t, X_curves, y, L1 = 3, L2 = 5,
 #' @param kind basis kind, "fourier" or "poly"
 #' @return numeric vector of beta(t) values
 #' @noRd
+#' @export
 morie_fda_beta_function <- function(t, beta_coefs, L1,
                                     kind = "fourier") {
   as.numeric(morie_fda_basis(t, L1, kind) %*% as.numeric(beta_coefs))
@@ -239,6 +243,7 @@ morie_fda_beta_function <- function(t, beta_coefs, L1,
 #' @param n_obs number of observations
 #' @return the BIC value
 #' @noRd
+#' @export
 morie_fda_bic <- function(loglik, n_params, n_obs) {
   # p.582: BIC = -2 loglik + (L + 1) log(n); the +1 is the intercept
   -2 * loglik + (n_params + 1) * log(n_obs)
@@ -254,6 +259,7 @@ morie_fda_bic <- function(loglik, n_params, n_obs) {
 #' @param kind basis kind, "fourier" or "poly"
 #' @return mean squared leave-one-out prediction error
 #' @noRd
+#' @export
 morie_fda_loocv <- function(t, x_t, L2, kind = "fourier") {
   # eq. (14.8): leave one grid point out, refit the basis, predict it
   tt <- as.numeric(t)
@@ -276,6 +282,7 @@ morie_fda_loocv <- function(t, x_t, L2, kind = "fourier") {
 #' @param theta_pred linear predictor for the zero probability
 #' @return list with `mu` and `theta`
 #' @noRd
+#' @export
 morie_zap_link <- function(mu_pred, theta_pred) {
   # eq. (15.1): the two nonparametric links of the zero-altered
   # Poisson, log for the count mean and logit for the zero part
@@ -293,6 +300,7 @@ morie_zap_link <- function(mu_pred, theta_pred) {
 #' @param x unused, kept for signature parity with the Python API
 #' @return the log-likelihood value
 #' @noRd
+#' @export
 morie_zap_loglik <- function(y_positive, mu = NULL, x = NULL) {
   # eq. (15.2): the zero-truncated Poisson log-likelihood used as the
   # splitting criterion; the truncation is the log(1 - exp(-mu)) term
@@ -312,6 +320,7 @@ morie_zap_loglik <- function(y_positive, mu = NULL, x = NULL) {
 #' @param max_iter maximum number of bisection steps
 #' @return the estimate of mu, or 0 when the positive mean is at most 1
 #' @noRd
+#' @export
 morie_zap_mle <- function(y_positive, tol = 1e-12,
                           max_iter = 200) {
   yy <- as.numeric(y_positive)
@@ -346,6 +355,7 @@ morie_zap_mle <- function(y_positive, tol = 1e-12,
 #' @return list with `prediction`, `zero_probability` and, when
 #'   `threshold` is given, `is_zero` and `prediction_classified`
 #' @noRd
+#' @export
 morie_zap_predict <- function(theta_hat, mu_hat, threshold = NULL) {
   # eq. (15.3): E[Y] = (1 - theta) mu / (1 - exp(-mu)).
   #
@@ -378,6 +388,7 @@ morie_zap_predict <- function(theta_hat, mu_hat, threshold = NULL) {
 #' @param mu Poisson mean of the count part
 #' @return list with `mean` and `variance`
 #' @noRd
+#' @export
 morie_zap_mean_variance <- function(theta, mu) {
   th <- as.numeric(theta)
   m <- pmax(as.numeric(mu), 1e-9)
@@ -522,6 +533,7 @@ morie_msm_gmm <- function(y, X, Z, weights = NULL) {
 #' @param weights stabilized IPT weights (unit weights if omitted)
 #' @return list with `estimate`, `beta`, `a_bar` and `fitted`
 #' @noRd
+#' @export
 morie_msm_linear <- function(y, treatment_history, weights = NULL) {
   d <- morie_msm_design(treatment_history)
   f <- morie_msm_weighted_glm(y, d$X, weights, "gaussian")
@@ -538,6 +550,7 @@ morie_msm_linear <- function(y, treatment_history, weights = NULL) {
 #' @inheritParams morie_msm_linear
 #' @return list with `estimate`, `beta` and `odds_ratio`
 #' @noRd
+#' @export
 morie_msm_logistic <- function(y, treatment_history, weights = NULL) {
   d <- morie_msm_design(treatment_history)
   f <- morie_msm_weighted_glm(y, d$X, weights, "binomial")
@@ -555,6 +568,7 @@ morie_msm_logistic <- function(y, treatment_history, weights = NULL) {
 #' @param offset optional log-exposure offset
 #' @return list with `estimate`, `beta` and `rate_ratio`
 #' @noRd
+#' @export
 morie_msm_poisson <- function(y, treatment_history, offset = NULL,
                               weights = NULL) {
   d <- morie_msm_design(treatment_history)
@@ -573,6 +587,7 @@ morie_msm_poisson <- function(y, treatment_history, offset = NULL,
 #' @param alpha overdispersion parameter
 #' @return list with `estimate`, `beta`, `rate_ratio` and `variance`
 #' @noRd
+#' @export
 morie_msm_negative_binomial <- function(y, treatment_history, alpha = 1,
                                         offset = NULL, weights = NULL) {
   f <- morie_msm_poisson(y, treatment_history, offset, weights)
@@ -590,6 +605,7 @@ morie_msm_negative_binomial <- function(y, treatment_history, alpha = 1,
 #' @inheritParams morie_msm_linear
 #' @return list with `estimate`, `beta` and `hazard_ratio`
 #' @noRd
+#' @export
 morie_msm_cox_marginal <- function(time, event, treatment_history,
                                    weights = NULL) {
   f <- morie_msm_cox_weighted(time, event, treatment_history, weights)
@@ -603,6 +619,7 @@ morie_msm_cox_marginal <- function(time, event, treatment_history,
 #' @inheritParams morie_msm_cox_marginal
 #' @return list with `estimate`, `beta`, `time_ratio` and `n_uncensored`
 #' @noRd
+#' @export
 morie_msm_accelerated_failure <- function(time, event, treatment_history,
                                           weights = NULL) {
   ts <- as.numeric(time)
@@ -629,6 +646,7 @@ morie_msm_accelerated_failure <- function(time, event, treatment_history,
 #' @param instruments optional instrument matrix; defaults to the design
 #' @return list with `estimate`, `beta` and `moments`
 #' @noRd
+#' @export
 morie_msm_gmm_estimator <- function(y, treatment_history,
                                     instruments = NULL, weights = NULL) {
   d <- morie_msm_design(treatment_history)
@@ -647,6 +665,7 @@ morie_msm_gmm_estimator <- function(y, treatment_history,
 #' @param weights stabilized IPT weights
 #' @return list with `estimate`, `beta`, `weight_mean` and `weight_max`
 #' @noRd
+#' @export
 morie_msm_time_varying_exposure <- function(y, exposure_history,
                                             weights = NULL) {
   d <- morie_msm_design(exposure_history)

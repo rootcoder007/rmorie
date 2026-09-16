@@ -21,6 +21,7 @@
 #' @return A list with \code{m}, \code{z}, the single representation
 #'   \code{s}, \code{estimate}, \code{nblock} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 6
+#' @export
 Alfevo <- function(m, z, w, nblock = 1, drop = NULL) {
   s <- dim(m)[1]
   n <- dim(m)[2]

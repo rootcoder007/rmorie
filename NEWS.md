@@ -1,3 +1,20 @@
+# rmorie 1.2.5 - 2026-09-16
+
+## Eighty-eight documented functions are now exported
+
+Eighty-eight functions carried full roxygen documentation, references and
+examples but no `@export`, so their examples reached them through
+`rmorie:::`. Most are the genomic-prediction and kernel-method family
+(`morie_gblup()`, `morie_kernel_matrix()`, `morie_msm_*()`, `morie_fda_*()`),
+the AlphaFold loss functions (`Alfviol()` and its siblings) and
+`morie_laplc()`. All are exported now and their examples call them
+directly.
+
+## pkgdown
+
+`DESCRIPTION` lists the pkgdown site URL, which `pkgdown::check_pkgdown()`
+requires.
+
 # rmorie 1.2.4 - 2026-09-14
 
 ## morie_otis_stock_flow, and the Lakner stock/flow measures

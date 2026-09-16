@@ -25,6 +25,7 @@
 #' @return A list with the update \code{s}, \code{attn}, the local output
 #'   \code{points}, \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 22
+#' @export
 Alfipa <- function(s, z, frames, wq, wk, wv, wqp, wkp, wvp, wb, gamma, wo) {
   n <- nrow(s)
   cz <- dim(z)[3]

@@ -23,6 +23,7 @@
 #' @return A list with the updated pair tensor \code{z}, its mean
 #'   \code{estimate}, \code{n}, \code{mode} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 11-12
+#' @export
 Alftrimu <- function(z, wag, wav, wbg, wbv, wg, wo, mode = "outgoing",
                      layernorm = TRUE) {
   if (!mode %in% c("outgoing", "incoming"))

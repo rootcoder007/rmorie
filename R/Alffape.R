@@ -20,6 +20,7 @@
 #' @return A list with the loss \code{estimate}, the distance matrix
 #'   \code{d}, \code{nframes}, \code{natoms} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 28
+#' @export
 Alffape <- function(frames_pred, x, frames_true, x_true, Z = 10, dclamp = 10,
                     eps = 1e-4) {
   nf <- length(frames_pred)

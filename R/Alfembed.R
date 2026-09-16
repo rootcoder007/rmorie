@@ -25,6 +25,7 @@
 #'   position contribution \code{pos}, \code{estimate}, \code{n} and
 #'   \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 3-5
+#' @export
 Alfembed <- function(target_feat, residue_index, msa_feat, wa, wb, wrel,
                      wmsa, wtgt, bins = NULL) {
   if (is.null(bins)) bins <- -32:32

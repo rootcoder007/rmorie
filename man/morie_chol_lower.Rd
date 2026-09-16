@@ -21,6 +21,6 @@ A matrix, from \code{t}.
 set.seed(1)
 n <- 12
 A <- matrix(rnorm(n * 6), nrow = n)
-G <- rmorie:::morie_grm(A) + diag(0.3, n)
+G <- morie_grm(A) + diag(0.3, n)
 rmorie:::morie_chol_lower(G)
 }

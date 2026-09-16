@@ -18,6 +18,7 @@
 #' @return A list with \code{z}, the attention array \code{attn},
 #'   \code{estimate}, \code{n}, \code{mode} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithms 13-14
+#' @export
 Alftriat <- function(z, wq, wk, wv, wb, wg, wo, mode = "starting") {
   if (!mode %in% c("starting", "ending"))
     stop("mode must be 'starting' or 'ending'")

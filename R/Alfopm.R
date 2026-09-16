@@ -16,6 +16,7 @@
 #' @return A list with the pair update \code{z}, the flattened outer product
 #'   means \code{o}, \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 10
+#' @export
 Alfopm <- function(m, wa, wb, wo, layernorm = TRUE) {
   s <- dim(m)[1]
   n <- dim(m)[2]

@@ -1,7 +1,7 @@
 Package: rmorie
 Type: Package
 Title: Multi-Domain Open Research and Inferential Estimation
-Version: 1.2.4
+Version: 1.2.5
 Authors@R: c(
   person(
     given = "Vansh Singh",
@@ -210,7 +210,8 @@ Suggests:
   jsonlite,
   changepoint
 VignetteBuilder: knitr
-URL: https://github.com/rootcoder007/rmorie
+URL: https://github.com/rootcoder007/rmorie,
+    https://rootcoder007.github.io/rmorie/
 BugReports: https://github.com/rootcoder007/rmorie/issues
 Config/testthat/edition: 3
 biocViews:
