@@ -21,6 +21,11 @@
 
 #' morie_ripley_j_function
 #'
+#' @param points Argument `points`; see Usage.
+#' @param window Argument `window`; see Usage.
+#' @param r Argument `r`; see Usage.
+#' @param n_grid Argument `n_grid`; see Usage.
+#' @return A list with `r`, `j`, `g`, `f`, `j_csr`, `lambda_est`, `n_defined`, `method`.
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::morie_ripley_j_function(M)

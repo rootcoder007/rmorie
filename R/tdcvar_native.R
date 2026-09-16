@@ -288,16 +288,6 @@
 #' @param stabilize Passed to \code{.tdcvar_ip_weights_history}. Defaults to \code{TRUE}.
 #' @param trim Passed to \code{.tdcvar_ip_weights_history}.
 #' @return The value of \code{result}, as built in the body.
-#' @references ----------
-#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
-#'   Raton: Chapman & Hall/CRC. Ch. 20 (treatment-confounder feedback),
-#'   Sec. 21.2 (IP weighting for time-varying treatments), Sec. 12.3 (the
-#'   stabilized weights and the mean-1 diagnostic).
-#'   
-#'   Robins, J. (1986) "A new approach to causal inference in mortality
-#'   studies with a sustained exposure period", Mathematical Modelling
-#'   7(9-12), 1393-1512, doi:10.1016/0270-0255(86)90088-6 -- where the
-#'   problem and the weighted solution were first set out.
 #' @export
 #' @keywords internal
 morie_tdcvar <- function(y, A, L_t, time = NULL, contrast = "cumulative",
@@ -431,16 +421,6 @@ morie_tdcvar <- function(y, A, L_t, time = NULL, contrast = "cumulative",
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
-#'   Raton: Chapman & Hall/CRC. Ch. 20 (treatment-confounder feedback),
-#'   Sec. 21.2 (IP weighting for time-varying treatments), Sec. 12.3 (the
-#'   stabilized weights and the mean-1 diagnostic).
-#'   
-#'   Robins, J. (1986) "A new approach to causal inference in mortality
-#'   studies with a sustained exposure period", Mathematical Modelling
-#'   7(9-12), 1393-1512, doi:10.1016/0270-0255(86)90088-6 -- where the
-#'   problem and the weighted solution were first set out.
 #' @export
 #' @examples
 #' morie_tdcvar_cheatsheet()

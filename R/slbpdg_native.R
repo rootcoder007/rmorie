@@ -69,15 +69,6 @@
 #'
 #' @param v The beta variates.
 #' @return A list with the weights and the unbroken remainder.
-#' @references Walker, S.G. (2007) "Sampling the Dirichlet mixture model with
-#'       slices." Communications in Statistics -- Simulation and
-#'       Computation 36(1), 45-54.
-#'     Kalli, M., Griffin, J.E. and Walker, S.G. (2011) "Slice sampling
-#'       mixture models." Statistics and Computing 21(1), 93-105.
-#'     Escobar, M.D. and West, M. (1995) "Bayesian density estimation and
-#'       inference using mixtures." JASA 90(430), 577-588, section 6.
-#'     Ishwaran, H. and James, L.F. (2001) "Gibbs sampling methods for
-#'       stick-breaking priors." JASA 96(453), 161-173.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -118,15 +109,6 @@ morie_slbpdg_weights <- function(v) {
 #' @param mu Component means.
 #' @param s2 Component variances.
 #' @return The density value.
-#' @references Walker, S.G. (2007) "Sampling the Dirichlet mixture model with
-#'       slices." Communications in Statistics -- Simulation and
-#'       Computation 36(1), 45-54.
-#'     Kalli, M., Griffin, J.E. and Walker, S.G. (2011) "Slice sampling
-#'       mixture models." Statistics and Computing 21(1), 93-105.
-#'     Escobar, M.D. and West, M. (1995) "Bayesian density estimation and
-#'       inference using mixtures." JASA 90(430), 577-588, section 6.
-#'     Ishwaran, H. and James, L.F. (2001) "Gibbs sampling methods for
-#'       stick-breaking priors." JASA 96(453), 161-173.
 #' @export
 #' @examples
 #' V <- c(0.3, 0.5, 0.2, 0.8, 0.1)
@@ -294,15 +276,6 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' @return A list of posterior summaries: the mean density on the grid,
 #'   the distribution of the number of occupied clusters, the retained
 #'   alpha draws and per-sweep diagnostics.
-#' @references Walker, S.G. (2007) "Sampling the Dirichlet mixture model with
-#'       slices." Communications in Statistics -- Simulation and
-#'       Computation 36(1), 45-54.
-#'     Kalli, M., Griffin, J.E. and Walker, S.G. (2011) "Slice sampling
-#'       mixture models." Statistics and Computing 21(1), 93-105.
-#'     Escobar, M.D. and West, M. (1995) "Bayesian density estimation and
-#'       inference using mixtures." JASA 90(430), 577-588, section 6.
-#'     Ishwaran, H. and James, L.F. (2001) "Gibbs sampling methods for
-#'       stick-breaking priors." JASA 96(453), 161-173.
 #' @export
 #' @examples
 #' \donttest{
@@ -488,15 +461,6 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
 #' One-line summary of the slbpdg module
 #'
 #' @return A character scalar.
-#' @references Walker, S.G. (2007) "Sampling the Dirichlet mixture model with
-#'       slices." Communications in Statistics -- Simulation and
-#'       Computation 36(1), 45-54.
-#'     Kalli, M., Griffin, J.E. and Walker, S.G. (2011) "Slice sampling
-#'       mixture models." Statistics and Computing 21(1), 93-105.
-#'     Escobar, M.D. and West, M. (1995) "Bayesian density estimation and
-#'       inference using mixtures." JASA 90(430), 577-588, section 6.
-#'     Ishwaran, H. and James, L.F. (2001) "Gibbs sampling methods for
-#'       stick-breaking priors." JASA 96(453), 161-173.
 #' @export
 #' @examples
 #' morie_slbpdg_cheatsheet()

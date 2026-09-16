@@ -142,20 +142,6 @@
 #' @param m The attractive exponent.
 #' @param n The repulsive exponent.
 #' @return The energy.
-#' @references Jones, G., Willett, P., Glen, R.C., Leach, A.R. and Taylor, R.
-#'       (1997) "Development and validation of a genetic algorithm for
-#'       flexible docking." Journal of Molecular Biology 267(3), 727-748.
-#'       doi:10.1006/jmbi.1996.0897.
-#'     Jones, G., Willett, P. and Glen, R.C. (1995) "Molecular recognition
-#'       of receptor sites using a genetic algorithm with a description of
-#'       desolvation." Journal of Molecular Biology 245(1), 43-53.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623. doi:10.1002/prot.10465.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," section
-#'       8.3 for the four components and the 1.375 external van der Waals
-#'       factor, and section 5.4 for the 6-12 internal, 4-8 external
-#'       defaults and the two split potentials.
 #' @export
 #' @examples
 #' morie_goldsc_lj(r = 5L, r0 = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
@@ -183,20 +169,6 @@ morie_goldsc_lj <- function(r, r0, eps, m = 6, n = 12) {
 #' @param outer The exponent pair used at or beyond the minimum.
 #' @param inner The exponent pair used inside it.
 #' @return The energy.
-#' @references Jones, G., Willett, P., Glen, R.C., Leach, A.R. and Taylor, R.
-#'       (1997) "Development and validation of a genetic algorithm for
-#'       flexible docking." Journal of Molecular Biology 267(3), 727-748.
-#'       doi:10.1006/jmbi.1996.0897.
-#'     Jones, G., Willett, P. and Glen, R.C. (1995) "Molecular recognition
-#'       of receptor sites using a genetic algorithm with a description of
-#'       desolvation." Journal of Molecular Biology 245(1), 43-53.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623. doi:10.1002/prot.10465.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," section
-#'       8.3 for the four components and the 1.375 external van der Waals
-#'       factor, and section 5.4 for the 6-12 internal, 4-8 external
-#'       defaults and the two split potentials.
 #' @export
 #' @examples
 #' morie_goldsc_split(r = 5L, r0 = 5L, eps = 0.5)
@@ -261,20 +233,6 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #' @param potential A member of the potential list.
 #' @param cutoff Drop contacts beyond this separation, or NULL.
 #' @return A list with the total, the per-contact energies and the count.
-#' @references Jones, G., Willett, P., Glen, R.C., Leach, A.R. and Taylor, R.
-#'       (1997) "Development and validation of a genetic algorithm for
-#'       flexible docking." Journal of Molecular Biology 267(3), 727-748.
-#'       doi:10.1006/jmbi.1996.0897.
-#'     Jones, G., Willett, P. and Glen, R.C. (1995) "Molecular recognition
-#'       of receptor sites using a genetic algorithm with a description of
-#'       desolvation." Journal of Molecular Biology 245(1), 43-53.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623. doi:10.1002/prot.10465.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," section
-#'       8.3 for the four components and the 1.375 external van der Waals
-#'       factor, and section 5.4 for the 6-12 internal, 4-8 external
-#'       defaults and the two split potentials.
 #' @export
 #' @examples
 #' RAD <- list(list("C", 1.9), list("N", 1.7), list("O", 1.6))
@@ -313,20 +271,6 @@ morie_goldsc_vdw <- function(pairs, radii, depths, potential = "4-8",
 #' @param bonds A list of list(distance, energy).
 #' @param max_distance The distance threshold.
 #' @return A list with the total, the counted energies and the count.
-#' @references Jones, G., Willett, P., Glen, R.C., Leach, A.R. and Taylor, R.
-#'       (1997) "Development and validation of a genetic algorithm for
-#'       flexible docking." Journal of Molecular Biology 267(3), 727-748.
-#'       doi:10.1006/jmbi.1996.0897.
-#'     Jones, G., Willett, P. and Glen, R.C. (1995) "Molecular recognition
-#'       of receptor sites using a genetic algorithm with a description of
-#'       desolvation." Journal of Molecular Biology 245(1), 43-53.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623. doi:10.1002/prot.10465.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," section
-#'       8.3 for the four components and the 1.375 external van der Waals
-#'       factor, and section 5.4 for the 6-12 internal, 4-8 external
-#'       defaults and the two split potentials.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -348,20 +292,6 @@ morie_goldsc_hbond <- function(bonds, max_distance = 2.5) {
 #'
 #' @param torsions A list of c(phi, A, n, phi0).
 #' @return A list with the total and the per-bond terms.
-#' @references Jones, G., Willett, P., Glen, R.C., Leach, A.R. and Taylor, R.
-#'       (1997) "Development and validation of a genetic algorithm for
-#'       flexible docking." Journal of Molecular Biology 267(3), 727-748.
-#'       doi:10.1006/jmbi.1996.0897.
-#'     Jones, G., Willett, P. and Glen, R.C. (1995) "Molecular recognition
-#'       of receptor sites using a genetic algorithm with a description of
-#'       desolvation." Journal of Molecular Biology 245(1), 43-53.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623. doi:10.1002/prot.10465.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," section
-#'       8.3 for the four components and the 1.375 external van der Waals
-#'       factor, and section 5.4 for the 6-12 internal, 4-8 external
-#'       defaults and the two split potentials.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -411,20 +341,6 @@ morie_goldsc_torsion <- function(torsions) {
 #' @param cutoff Drop external contacts beyond this separation, or NULL.
 #' @return A list with the fitness, each component, and the per-contact
 #'   energies.
-#' @references Jones, G., Willett, P., Glen, R.C., Leach, A.R. and Taylor, R.
-#'       (1997) "Development and validation of a genetic algorithm for
-#'       flexible docking." Journal of Molecular Biology 267(3), 727-748.
-#'       doi:10.1006/jmbi.1996.0897.
-#'     Jones, G., Willett, P. and Glen, R.C. (1995) "Molecular recognition
-#'       of receptor sites using a genetic algorithm with a description of
-#'       desolvation." Journal of Molecular Biology 245(1), 43-53.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623. doi:10.1002/prot.10465.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," section
-#'       8.3 for the four components and the 1.375 external van der Waals
-#'       factor, and section 5.4 for the 6-12 internal, 4-8 external
-#'       defaults and the two split potentials.
 #' @export
 #' @keywords internal
 morie_goldsc <- function(receptor, ligand, radii = list(),
@@ -468,20 +384,6 @@ morie_goldsc <- function(receptor, ligand, radii = list(),
 #' One-line summary of the goldsc module
 #'
 #' @return A character scalar.
-#' @references Jones, G., Willett, P., Glen, R.C., Leach, A.R. and Taylor, R.
-#'       (1997) "Development and validation of a genetic algorithm for
-#'       flexible docking." Journal of Molecular Biology 267(3), 727-748.
-#'       doi:10.1006/jmbi.1996.0897.
-#'     Jones, G., Willett, P. and Glen, R.C. (1995) "Molecular recognition
-#'       of receptor sites using a genetic algorithm with a description of
-#'       desolvation." Journal of Molecular Biology 245(1), 43-53.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623. doi:10.1002/prot.10465.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," section
-#'       8.3 for the four components and the 1.375 external van der Waals
-#'       factor, and section 5.4 for the 6-12 internal, 4-8 external
-#'       defaults and the two split potentials.
 #' @export
 #' @examples
 #' morie_goldsc_cheatsheet()

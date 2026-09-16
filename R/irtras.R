@@ -20,6 +20,10 @@
 
 #' morie_rating_scale_model
 #'
+#' @param theta Argument `theta`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @param tau Argument `tau`; see Usage.
+#' @return A list with `p`, `expected`, `info`, `test_expected`, `test_info`, `theta`, `b`, `tau`, `ncat`, `n`, `k`, `method`.
 #' @examples
 #' rmorie:::morie_rating_scale_model(theta = 0.5, b = 5L, tau = 0.5)
 #' @keywords internal

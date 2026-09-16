@@ -44,31 +44,6 @@
 #' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @return The value of \code{out}, as built in the body.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -99,31 +74,6 @@ morie_sdxlcd_fourier_embedding <- function(value, dim = 8, scale = 0.001) {
 #' @param w_original Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dim Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.
 #' @return A list with \code{c_size}, \code{embedding}, \code{note}.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @examples
 #' morie_sdxlcd_size_conditioning(h_original = 5L, w_original = 5L)
@@ -150,31 +100,6 @@ morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
 #' @param c_left Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param dim Passed to \code{morie_sdxlcd_fourier_embedding}. Defaults to \code{8}.
 #' @return A list with \code{c_crop}, \code{embedding}, \code{object_centred}, \code{note}.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @examples
 #' morie_sdxlcd_crop_conditioning()
@@ -204,31 +129,6 @@ morie_sdxlcd_crop_conditioning <- function(c_top = 0, c_left = 0, dim = 8) {
 #' @param target_w Coerced to integer by the body, with \code{as.integer}.
 #' @param rng Passed to \code{.ghc_unif}.
 #' @return A list with \code{c_top}, \code{c_left}.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @keywords internal
 morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
@@ -256,31 +156,6 @@ morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
 #' @param minimum Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{256}.
 #' @return A list with \code{discarded}, \code{total}, \code{fraction},
 #' \code{kept_with_conditioning}, \code{minimum}, \code{note}.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -325,31 +200,6 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
 #' \code{1024 * 1024}.
 #' @param multiple Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
 #' @return A list with \code{buckets}, \code{max_pixel_error}, \code{note}.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -393,31 +243,6 @@ morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, mult
 #' @param dim Passed to \code{morie_sdxlcd_size_conditioning}. Defaults to \code{8}.
 #' @return A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size},
 #' \code{c_crop}, \code{method}, \code{note}.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @examples
 #' morie_sdxlcd_condition_vector(h_original = 5L, w_original = 5L)
@@ -450,31 +275,6 @@ morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_l
 #' source it follows.
 #'
 #' @return A character value.
-#' @references Podell, D., English, Z., Lacey, K., Blattmann, A., Dockhorn, T.,
-#'   Muller, J., Penna, J. & Rombach, R. (2023) "SDXL: Improving Latent
-#'   Diffusion Models for High-Resolution Image Synthesis",
-#'   arXiv:2307.01952 (ICLR 2024). Sec. 2.1 (a three times larger UNet
-#'   backbone, more attention blocks, a second text encoder), Sec. 2.2
-#'   ("Conditioning the Model on Image Size": the two existing approaches of
-#'   discarding images below a minimum resolution or upscaling them, the
-#'   measured 39% of data that would be discarded at 256 pixels, and the
-#'   proposal to condition on the original height and width, each embedded
-#'   by Fourier features, concatenated and ADDED to the timestep embedding;
-#'   "Conditioning the Model on Cropping Parameters": random cropping during
-#'   training leaking into samples as cut-off objects, uniformly sampling
-#'   c_top and c_left and feeding them as Fourier-embedded conditioning, and
-#'   setting (0,0) at inference to obtain object-centred samples), Sec. 2.3
-#'   (multi-aspect finetuning with buckets keeping the pixel count close to
-#'   1024^2), and Sec. 2.5 (the separate refinement model applying a
-#'   noising-denoising process to SDXL\'s latents).
-#'   
-#'   Rombach, R., Blattmann, A., Lorenz, D., Esser, P. & Ommer, B. (2022)
-#'   "High-Resolution Image Synthesis with Latent Diffusion Models",
-#'   CVPR 2022, 10684-10695, arXiv:2112.10752. The latent diffusion
-#'   model being improved.
-#'   
-#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
-#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239.
 #' @export
 #' @examples
 #' morie_sdxlcd_cheatsheet()

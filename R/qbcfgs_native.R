@@ -64,24 +64,6 @@
 #' @param e Fitted propensities.
 #' @param n_strata Number of strata.
 #' @return A zero-based stratum index per observation.
-#' @references Hsu, Y.-C., Huber, M., Lee, Y.-Y. and Pipoz, L. (2022) "Direct and
-#'       indirect effects of continuous treatments based on generalized
-#'       propensity score weighting." Journal of Applied Econometrics
-#'       37(2), 449-460.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1983) "The central role of the
-#'       propensity score in observational studies for causal effects."
-#'       Biometrika 70(1), 41-55.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1984) "Reducing bias in
-#'       observational studies using subclassification on the propensity
-#'       score." Journal of the American Statistical Association 79(387),
-#'       516-524.
-#'     Austin, P.C. (2009) "Balance diagnostics for comparing the
-#'       distribution of baseline covariates between treatment groups in
-#'       propensity-score matched samples." Statistics in Medicine 28(25),
-#'       3083-3107.
-#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
-#'       heterogeneous treatment effects using random forests." JASA
-#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' morie_qbcfgs_strata(e = c(1, 2, 3, 4, 5, 6, 7, 8), n_strata = 5L)
@@ -109,24 +91,6 @@ morie_qbcfgs_strata <- function(e, n_strata) {
 #' @param d Treatment indicators.
 #' @param w Weights, or NULL for unweighted.
 #' @return The standardised mean difference.
-#' @references Hsu, Y.-C., Huber, M., Lee, Y.-Y. and Pipoz, L. (2022) "Direct and
-#'       indirect effects of continuous treatments based on generalized
-#'       propensity score weighting." Journal of Applied Econometrics
-#'       37(2), 449-460.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1983) "The central role of the
-#'       propensity score in observational studies for causal effects."
-#'       Biometrika 70(1), 41-55.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1984) "Reducing bias in
-#'       observational studies using subclassification on the propensity
-#'       score." Journal of the American Statistical Association 79(387),
-#'       516-524.
-#'     Austin, P.C. (2009) "Balance diagnostics for comparing the
-#'       distribution of baseline covariates between treatment groups in
-#'       propensity-score matched samples." Statistics in Medicine 28(25),
-#'       3083-3107.
-#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
-#'       heterogeneous treatment effects using random forests." JASA
-#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -168,24 +132,6 @@ morie_qbcfgs_smd <- function(x, d, w = NULL) {
 #' @return A list with the per-stratum effects and sizes, the overall
 #'   effect, the balance before and after weighting, and the focal
 #'   stratum.
-#' @references Hsu, Y.-C., Huber, M., Lee, Y.-Y. and Pipoz, L. (2022) "Direct and
-#'       indirect effects of continuous treatments based on generalized
-#'       propensity score weighting." Journal of Applied Econometrics
-#'       37(2), 449-460.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1983) "The central role of the
-#'       propensity score in observational studies for causal effects."
-#'       Biometrika 70(1), 41-55.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1984) "Reducing bias in
-#'       observational studies using subclassification on the propensity
-#'       score." Journal of the American Statistical Association 79(387),
-#'       516-524.
-#'     Austin, P.C. (2009) "Balance diagnostics for comparing the
-#'       distribution of baseline covariates between treatment groups in
-#'       propensity-score matched samples." Statistics in Medicine 28(25),
-#'       3083-3107.
-#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
-#'       heterogeneous treatment effects using random forests." JASA
-#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' N <- 48L
@@ -311,24 +257,6 @@ morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
 #' One-line summary of the qbcfgs module
 #'
 #' @return A character scalar.
-#' @references Hsu, Y.-C., Huber, M., Lee, Y.-Y. and Pipoz, L. (2022) "Direct and
-#'       indirect effects of continuous treatments based on generalized
-#'       propensity score weighting." Journal of Applied Econometrics
-#'       37(2), 449-460.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1983) "The central role of the
-#'       propensity score in observational studies for causal effects."
-#'       Biometrika 70(1), 41-55.
-#'     Rosenbaum, P.R. and Rubin, D.B. (1984) "Reducing bias in
-#'       observational studies using subclassification on the propensity
-#'       score." Journal of the American Statistical Association 79(387),
-#'       516-524.
-#'     Austin, P.C. (2009) "Balance diagnostics for comparing the
-#'       distribution of baseline covariates between treatment groups in
-#'       propensity-score matched samples." Statistics in Medicine 28(25),
-#'       3083-3107.
-#'     Wager, S. and Athey, S. (2018) "Estimation and inference of
-#'       heterogeneous treatment effects using random forests." JASA
-#'       113(523), 1228-1242.
 #' @export
 #' @examples
 #' morie_qbcfgs_cheatsheet()

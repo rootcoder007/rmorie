@@ -79,15 +79,6 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its
 #' elements indexed.
 #' @return The value of \code{pmin}.
-#' @references Goldstein, A. A. (1964) "Convex programming in Hilbert space",
-#'     Bulletin of the American Mathematical Society 70(5), 709-710,
-#'     doi:10.1090/S0002-9904-1964-11178-2.
-#'   Levitin, E. S. & Polyak, B. T. (1966) "Constrained minimization
-#'     methods", USSR Computational Mathematics and Mathematical Physics
-#'     6(5), 1-50, doi:10.1016/0041-5553(66)90114-5.
-#'   Beck, A. & Teboulle, M. (2009) "A fast iterative shrinkage-
-#'     thresholding algorithm for linear inverse problems", SIAM Journal
-#'     on Imaging Sciences 2(1), 183-202, doi:10.1137/080716542.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -129,15 +120,6 @@ project_box <- function(x, lower = NULL, upper = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{pmax}.
-#' @references Goldstein, A. A. (1964) "Convex programming in Hilbert space",
-#'     Bulletin of the American Mathematical Society 70(5), 709-710,
-#'     doi:10.1090/S0002-9904-1964-11178-2.
-#'   Levitin, E. S. & Polyak, B. T. (1966) "Constrained minimization
-#'     methods", USSR Computational Mathematics and Mathematical Physics
-#'     6(5), 1-50, doi:10.1016/0041-5553(66)90114-5.
-#'   Beck, A. & Teboulle, M. (2009) "A fast iterative shrinkage-
-#'     thresholding algorithm for linear inverse problems", SIAM Journal
-#'     on Imaging Sciences 2(1), 183-202, doi:10.1137/080716542.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -158,15 +140,6 @@ project_nonneg <- function(x) {
 #' @param centre Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
 #' @return A numeric value.
-#' @references Goldstein, A. A. (1964) "Convex programming in Hilbert space",
-#'     Bulletin of the American Mathematical Society 70(5), 709-710,
-#'     doi:10.1090/S0002-9904-1964-11178-2.
-#'   Levitin, E. S. & Polyak, B. T. (1966) "Constrained minimization
-#'     methods", USSR Computational Mathematics and Mathematical Physics
-#'     6(5), 1-50, doi:10.1016/0041-5553(66)90114-5.
-#'   Beck, A. & Teboulle, M. (2009) "A fast iterative shrinkage-
-#'     thresholding algorithm for linear inverse problems", SIAM Journal
-#'     on Imaging Sciences 2(1), 183-202, doi:10.1137/080716542.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -247,15 +220,6 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{iterations},
 #' \code{history}, \code{step}, \code{rule}, \code{n_backtracks},
 #' \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.
-#' @references Goldstein, A. A. (1964) "Convex programming in Hilbert space",
-#'     Bulletin of the American Mathematical Society 70(5), 709-710,
-#'     doi:10.1090/S0002-9904-1964-11178-2.
-#'   Levitin, E. S. & Polyak, B. T. (1966) "Constrained minimization
-#'     methods", USSR Computational Mathematics and Mathematical Physics
-#'     6(5), 1-50, doi:10.1016/0041-5553(66)90114-5.
-#'   Beck, A. & Teboulle, M. (2009) "A fast iterative shrinkage-
-#'     thresholding algorithm for linear inverse problems", SIAM Journal
-#'     on Imaging Sciences 2(1), 183-202, doi:10.1137/080716542.
 #' @export
 #' @keywords internal
 projected_gradient <- function(f, grad, x0, project, step = NULL,

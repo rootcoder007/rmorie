@@ -176,8 +176,6 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 #' @param seed Seed for the shared generator.
 #' @return List with estimate, embeddings, depth, aggregator,
 #'   per_batch_bound, method, note.
-#' @references Sources: Hamilton, W. L., Ying, R. and Leskovec, J. (2017),
-#'   the unsupervised loss; Kipf, T. N. and Welling, M. (2017), Semi-
 #' @export
 #' @examples
 #' set.seed(1)

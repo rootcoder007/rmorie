@@ -168,27 +168,6 @@
 #' @return A list with \code{estimate}, \code{score}, \code{z}, \code{reconstruction},
 #' \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step},
 #' \code{method}, \code{note}.
-#' @references ----------
-#'   Schlegl, T., Seebock, P., Waldstein, S. M., Schmidt-Erfurth, U. &
-#'   Langs, G. (2017) "Unsupervised Anomaly Detection with Generative
-#'   Adversarial Networks to Guide Marker Discovery", *Information
-#'   Processing in Medical Imaging (IPMI 2017)*, LNCS 10265, 146-157,
-#'   doi:10.1007/978-3-319-59050-9_12, arXiv:1703.05921. Training a GAN on
-#'   normal data to learn a manifold of normal anatomical variability;
-#'   mapping a query image back to the latent space by iterative
-#'   optimisation of z with the generator fixed; the anomaly score
-#'   combining a residual loss on pixel differences with a discrimination
-#'   loss on intermediate discriminator features; and the residual image
-#'   localising anomalies.
-#'   
-#'   Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
-#'   Warde-Farley, D., Ozair, S., Courville, A. & Bengio, Y. (2014)
-#'   "Generative Adversarial Nets", *NIPS 2014*, 2672-2680,
-#'   arXiv:1406.2661.
-#'   
-#'   Radford, A., Metz, L. & Chintala, S. (2016) "Unsupervised
-#'   Representation Learning with Deep Convolutional Generative Adversarial
-#'   Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 #' @export
 #' @keywords internal
 morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
@@ -262,27 +241,6 @@ morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
 #' @param x Passed to \code{.gan_an_residual_loss_impl}.
 #' @param g_z Passed to \code{.gan_an_residual_loss_impl}.
 #' @return The value of \code{.gan_an_residual_loss_impl}.
-#' @references ----------
-#'   Schlegl, T., Seebock, P., Waldstein, S. M., Schmidt-Erfurth, U. &
-#'   Langs, G. (2017) "Unsupervised Anomaly Detection with Generative
-#'   Adversarial Networks to Guide Marker Discovery", *Information
-#'   Processing in Medical Imaging (IPMI 2017)*, LNCS 10265, 146-157,
-#'   doi:10.1007/978-3-319-59050-9_12, arXiv:1703.05921. Training a GAN on
-#'   normal data to learn a manifold of normal anatomical variability;
-#'   mapping a query image back to the latent space by iterative
-#'   optimisation of z with the generator fixed; the anomaly score
-#'   combining a residual loss on pixel differences with a discrimination
-#'   loss on intermediate discriminator features; and the residual image
-#'   localising anomalies.
-#'   
-#'   Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
-#'   Warde-Farley, D., Ozair, S., Courville, A. & Bengio, Y. (2014)
-#'   "Generative Adversarial Nets", *NIPS 2014*, 2672-2680,
-#'   arXiv:1406.2661.
-#'   
-#'   Radford, A., Metz, L. & Chintala, S. (2016) "Unsupervised
-#'   Representation Learning with Deep Convolutional Generative Adversarial
-#'   Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -301,27 +259,6 @@ residual_loss <- function(x, g_z) {
 #' @param f_x Passed to \code{.gan_an_discrimination_loss_impl}.
 #' @param f_gz Passed to \code{.gan_an_discrimination_loss_impl}.
 #' @return The value of \code{.gan_an_discrimination_loss_impl}.
-#' @references ----------
-#'   Schlegl, T., Seebock, P., Waldstein, S. M., Schmidt-Erfurth, U. &
-#'   Langs, G. (2017) "Unsupervised Anomaly Detection with Generative
-#'   Adversarial Networks to Guide Marker Discovery", *Information
-#'   Processing in Medical Imaging (IPMI 2017)*, LNCS 10265, 146-157,
-#'   doi:10.1007/978-3-319-59050-9_12, arXiv:1703.05921. Training a GAN on
-#'   normal data to learn a manifold of normal anatomical variability;
-#'   mapping a query image back to the latent space by iterative
-#'   optimisation of z with the generator fixed; the anomaly score
-#'   combining a residual loss on pixel differences with a discrimination
-#'   loss on intermediate discriminator features; and the residual image
-#'   localising anomalies.
-#'   
-#'   Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
-#'   Warde-Farley, D., Ozair, S., Courville, A. & Bengio, Y. (2014)
-#'   "Generative Adversarial Nets", *NIPS 2014*, 2672-2680,
-#'   arXiv:1406.2661.
-#'   
-#'   Radford, A., Metz, L. & Chintala, S. (2016) "Unsupervised
-#'   Representation Learning with Deep Convolutional Generative Adversarial
-#'   Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -343,27 +280,6 @@ discrimination_loss <- function(f_x, f_gz) {
 #' @param f_gz Passed to \code{.gan_an_anomaly_score_impl}.
 #' @param lam Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.
 #' @return The value of \code{.gan_an_anomaly_score_impl}.
-#' @references ----------
-#'   Schlegl, T., Seebock, P., Waldstein, S. M., Schmidt-Erfurth, U. &
-#'   Langs, G. (2017) "Unsupervised Anomaly Detection with Generative
-#'   Adversarial Networks to Guide Marker Discovery", *Information
-#'   Processing in Medical Imaging (IPMI 2017)*, LNCS 10265, 146-157,
-#'   doi:10.1007/978-3-319-59050-9_12, arXiv:1703.05921. Training a GAN on
-#'   normal data to learn a manifold of normal anatomical variability;
-#'   mapping a query image back to the latent space by iterative
-#'   optimisation of z with the generator fixed; the anomaly score
-#'   combining a residual loss on pixel differences with a discrimination
-#'   loss on intermediate discriminator features; and the residual image
-#'   localising anomalies.
-#'   
-#'   Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
-#'   Warde-Farley, D., Ozair, S., Courville, A. & Bengio, Y. (2014)
-#'   "Generative Adversarial Nets", *NIPS 2014*, 2672-2680,
-#'   arXiv:1406.2661.
-#'   
-#'   Radford, A., Metz, L. & Chintala, S. (2016) "Unsupervised
-#'   Representation Learning with Deep Convolutional Generative Adversarial
-#'   Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 #' @export
 #' @examples
 #' anomaly_score(x = c(1, 2, 3, 4, 5, 6, 7, 8), g_z = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -383,27 +299,6 @@ anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
 #' @param g_z Passed to \code{.gan_an_as_num}.
 #' @param shape Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return A list with \code{map}, \code{max}, \code{note}.
-#' @references ----------
-#'   Schlegl, T., Seebock, P., Waldstein, S. M., Schmidt-Erfurth, U. &
-#'   Langs, G. (2017) "Unsupervised Anomaly Detection with Generative
-#'   Adversarial Networks to Guide Marker Discovery", *Information
-#'   Processing in Medical Imaging (IPMI 2017)*, LNCS 10265, 146-157,
-#'   doi:10.1007/978-3-319-59050-9_12, arXiv:1703.05921. Training a GAN on
-#'   normal data to learn a manifold of normal anatomical variability;
-#'   mapping a query image back to the latent space by iterative
-#'   optimisation of z with the generator fixed; the anomaly score
-#'   combining a residual loss on pixel differences with a discrimination
-#'   loss on intermediate discriminator features; and the residual image
-#'   localising anomalies.
-#'   
-#'   Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
-#'   Warde-Farley, D., Ozair, S., Courville, A. & Bengio, Y. (2014)
-#'   "Generative Adversarial Nets", *NIPS 2014*, 2672-2680,
-#'   arXiv:1406.2661.
-#'   
-#'   Radford, A., Metz, L. & Chintala, S. (2016) "Unsupervised
-#'   Representation Learning with Deep Convolutional Generative Adversarial
-#'   Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -442,27 +337,6 @@ residual_map <- function(x, g_z, shape = NULL) {
 #' @param anomalous_scores Passed to \code{.gan_an_as_num}.
 #' @return A list with \code{auc}, \code{mean_normal}, \code{mean_anomalous},
 #' \code{separated}, \code{note}.
-#' @references ----------
-#'   Schlegl, T., Seebock, P., Waldstein, S. M., Schmidt-Erfurth, U. &
-#'   Langs, G. (2017) "Unsupervised Anomaly Detection with Generative
-#'   Adversarial Networks to Guide Marker Discovery", *Information
-#'   Processing in Medical Imaging (IPMI 2017)*, LNCS 10265, 146-157,
-#'   doi:10.1007/978-3-319-59050-9_12, arXiv:1703.05921. Training a GAN on
-#'   normal data to learn a manifold of normal anatomical variability;
-#'   mapping a query image back to the latent space by iterative
-#'   optimisation of z with the generator fixed; the anomaly score
-#'   combining a residual loss on pixel differences with a discrimination
-#'   loss on intermediate discriminator features; and the residual image
-#'   localising anomalies.
-#'   
-#'   Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
-#'   Warde-Farley, D., Ozair, S., Courville, A. & Bengio, Y. (2014)
-#'   "Generative Adversarial Nets", *NIPS 2014*, 2672-2680,
-#'   arXiv:1406.2661.
-#'   
-#'   Radford, A., Metz, L. & Chintala, S. (2016) "Unsupervised
-#'   Representation Learning with Deep Convolutional Generative Adversarial
-#'   Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

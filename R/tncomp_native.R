@@ -99,19 +99,6 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #'
 #' @param fps Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{D}, as built in the body.
-#' @references ----------
-#'   Snarey, M., Terrett, N. K., Willett, P. & Wilton, D. J. (1997)
-#'   "Comparison of algorithms for dissimilarity-based compound
-#'   selection", Journal of Molecular Graphics and Modelling 15(6),
-#'   372-385, doi:10.1016/S1093-3263(98)00008-4.  The MaxMin and
-#'   MaxSum objectives reproduced above, their greedy implementation,
-#'   and the finding that MaxMin covers a collection better.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", Journal of Chemical Information and
-#'   Computer Sciences 38(6), 983-996, doi:10.1021/ci9800211, for
-#'   the Tanimoto distance the objectives are measured in; see
-#'   morie.fn.sasimi.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -207,19 +194,6 @@ distance_matrix <- function(fps) {
 #' @param k Passed to \code{.tncomp_select}.
 #' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{$}.
-#' @references ----------
-#'   Snarey, M., Terrett, N. K., Willett, P. & Wilton, D. J. (1997)
-#'   "Comparison of algorithms for dissimilarity-based compound
-#'   selection", Journal of Molecular Graphics and Modelling 15(6),
-#'   372-385, doi:10.1016/S1093-3263(98)00008-4.  The MaxMin and
-#'   MaxSum objectives reproduced above, their greedy implementation,
-#'   and the finding that MaxMin covers a collection better.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", Journal of Chemical Information and
-#'   Computer Sciences 38(6), 983-996, doi:10.1021/ci9800211, for
-#'   the Tanimoto distance the objectives are measured in; see
-#'   morie.fn.sasimi.
 #' @export
 #' @examples
 #' maxmin_selection(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
@@ -238,19 +212,6 @@ maxmin_selection <- function(fps, k, seed = NULL) {
 #' @param k Passed to \code{.tncomp_select}.
 #' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{$}.
-#' @references ----------
-#'   Snarey, M., Terrett, N. K., Willett, P. & Wilton, D. J. (1997)
-#'   "Comparison of algorithms for dissimilarity-based compound
-#'   selection", Journal of Molecular Graphics and Modelling 15(6),
-#'   372-385, doi:10.1016/S1093-3263(98)00008-4.  The MaxMin and
-#'   MaxSum objectives reproduced above, their greedy implementation,
-#'   and the finding that MaxMin covers a collection better.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", Journal of Chemical Information and
-#'   Computer Sciences 38(6), 983-996, doi:10.1021/ci9800211, for
-#'   the Tanimoto distance the objectives are measured in; see
-#'   morie.fn.sasimi.
 #' @export
 #' @examples
 #' maxsum_selection(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
@@ -270,19 +231,6 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 #' @param D Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{min_distance}, \code{mean_distance}, \code{max_distance},
 #' \code{n_pairs}.
-#' @references ----------
-#'   Snarey, M., Terrett, N. K., Willett, P. & Wilton, D. J. (1997)
-#'   "Comparison of algorithms for dissimilarity-based compound
-#'   selection", Journal of Molecular Graphics and Modelling 15(6),
-#'   372-385, doi:10.1016/S1093-3263(98)00008-4.  The MaxMin and
-#'   MaxSum objectives reproduced above, their greedy implementation,
-#'   and the finding that MaxMin covers a collection better.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", Journal of Chemical Information and
-#'   Computer Sciences 38(6), 983-996, doi:10.1021/ci9800211, for
-#'   the Tanimoto distance the objectives are measured in; see
-#'   morie.fn.sasimi.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -323,19 +271,6 @@ diversity <- function(fps, subset, D = NULL) {
 #' @param objective Passed to \code{.tncomp_select}. Defaults to \code{"maxmin"}.
 #' @param seed Passed to \code{.tncomp_select}.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Snarey, M., Terrett, N. K., Willett, P. & Wilton, D. J. (1997)
-#'   "Comparison of algorithms for dissimilarity-based compound
-#'   selection", Journal of Molecular Graphics and Modelling 15(6),
-#'   372-385, doi:10.1016/S1093-3263(98)00008-4.  The MaxMin and
-#'   MaxSum objectives reproduced above, their greedy implementation,
-#'   and the finding that MaxMin covers a collection better.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", Journal of Chemical Information and
-#'   Computer Sciences 38(6), 983-996, doi:10.1021/ci9800211, for
-#'   the Tanimoto distance the objectives are measured in; see
-#'   morie.fn.sasimi.
 #' @export
 #' @examples
 #' morie_tncomp(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)

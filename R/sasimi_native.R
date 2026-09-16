@@ -65,19 +65,6 @@ COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 #' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with
 #' \code{as.integer}.
 #' @return A vector, from \code{sort}.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -132,19 +119,6 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 #' @param fp_a Passed to \code{sasimi_fingerprint}.
 #' @param fp_b Passed to \code{sasimi_fingerprint}.
 #' @return A list with \code{a}, \code{b}, \code{c}, \code{union}.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -188,19 +162,6 @@ sasimi_counts <- function(fp_a, fp_b) {
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -222,19 +183,6 @@ sasimi_tanimoto <- function(fp_a, fp_b) {
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -256,19 +204,6 @@ sasimi_dice <- function(fp_a, fp_b) {
 #' @param fp_a Passed to \code{sasimi_counts}.
 #' @param fp_b Passed to \code{sasimi_counts}.
 #' @return A numeric value.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -295,19 +230,6 @@ sasimi_cosine <- function(fp_a, fp_b) {
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -359,19 +281,6 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 #' @param fp_b See Usage.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return A numeric value.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -391,19 +300,6 @@ sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
 #' @param fps Iterated over elementwise, with \code{lapply}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{M}, as built in the body.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -439,19 +335,6 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{result}, as built in the body.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -495,19 +378,6 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 #' @param beta Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{similarity}, \code{distance},
 #' \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.
-#' @references ----------
-#'   Jaccard, P. (1912) "The distribution of the flora in the alpine
-#'   zone", *New Phytologist* 11(2), 37-50,
-#'   doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-#'   \eqn{c/(a+b-c)} itself.
-#'   
-#'   Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
-#'   similarity searching", *Journal of Chemical Information and Computer
-#'   Sciences* 38(6), 983-996, doi:10.1021/ci9800211. The survey these
-#'   formulae are taken from: the Tanimoto, Dice, cosine and Tversky
-#'   coefficients on binary fingerprints, the relations between them, and
-#'   the size bias of Tanimoto.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

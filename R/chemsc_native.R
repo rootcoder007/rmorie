@@ -102,19 +102,6 @@
 #' @param d_ideal The tolerance window.
 #' @param d_max The maximum deviation.
 #' @return A value in the unit interval.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_block(2.5, 2.0, 4.0)
@@ -143,19 +130,6 @@ morie_chemsc_block <- function(d, d_ideal, d_max) {
 #' @param d_max The maximum deviation.
 #' @param sigma The Gaussian smearing width.
 #' @return A value in the unit interval.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_smooth_block(2.5, 2.0, 4.0, 0.5)
@@ -231,19 +205,6 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' @param smoothing A member of the smoothing list.
 #' @param par Overrides for the hydrogen-bond parameters, or NULL.
 #' @return A value in the unit interval.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_hbond(r = 5L, alpha = 0.5, betas = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -298,19 +259,6 @@ morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
 #' @param smoothing A member of the smoothing list.
 #' @param par Overrides for the metal parameters, or NULL.
 #' @return A value in the unit interval.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_metal(r = 5L)
@@ -327,19 +275,6 @@ morie_chemsc_metal <- function(r, smoothing = "gaussian", par = NULL) {
 #' @param smoothing A member of the smoothing list.
 #' @param par Overrides for the lipophilic parameters, or NULL.
 #' @return A value in the unit interval.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_lipophilic(r = 5L)
@@ -363,19 +298,6 @@ morie_chemsc_lipophilic <- function(r, smoothing = "gaussian",
 #' @param fractions A list of length-two vectors, the non-lipophilic
 #'   fractions on the two sides of each FROZEN rotatable bond.
 #' @return The entropy term.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -405,19 +327,6 @@ morie_chemsc_rot <- function(fractions) {
 #' @param slope The penalty per angstrom of overlap.
 #' @param par Overrides for the clash radii, or NULL.
 #' @return The penalty, zero at or beyond the radius.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_clash(r = 5L)
@@ -446,19 +355,6 @@ morie_chemsc_clash <- function(r, kind = "general", slope = 1,
 #' @param n The periodicity.
 #' @param phi0 The phase, in radians.
 #' @return The strain contribution.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_torsion(phi = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L,
@@ -490,19 +386,6 @@ morie_chemsc_torsion <- function(phi, A, n, phi0)
 #'   hbond, metal, lipo and clash entries.
 #' @return A list with the free energy estimate, the fitness and every
 #'   term separately so the total can be checked against its parts.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_score()
@@ -619,19 +502,6 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 #' @param coefficients Overrides for the regression coefficients.
 #' @param par Overrides for the geometry parameters.
 #' @return As the score function, with the contact lists it built.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -700,19 +570,6 @@ morie_chemsc <- function(receptor, ligand, smoothing = "gaussian",
 #' One-line summary of the chemsc module
 #'
 #' @return A character scalar.
-#' @references Eldridge, M.D., Murray, C.W., Auton, T.R., Paolini, G.V. and Mee,
-#'       R.P. (1997) "Empirical scoring functions: I. The development of a
-#'       fast empirical scoring function to estimate the binding affinity
-#'       of ligands in receptor complexes." Journal of Computer-Aided
-#'       Molecular Design 11(5), 425-445. doi:10.1023/A:1007996124545.
-#'     Baxter, C.A., Murray, C.W., Clark, D.E., Westhead, D.R. and
-#'       Eldridge, M.D. (1998) "Flexible docking using Tabu search and an
-#'       empirical estimate of binding affinity." Proteins 33(3), 367-382.
-#'     Cambridge Crystallographic Data Centre, "GOLD User Guide," sections
-#'       8.4.1 to 8.4.6. Every default parameter value used here.
-#'     Verdonk, M.L., Cole, J.C., Hartshorn, M.J., Murray, C.W. and Taylor,
-#'       R.D. (2003) "Improved protein-ligand docking using GOLD."
-#'       Proteins 52(4), 609-623.
 #' @export
 #' @examples
 #' morie_chemsc_cheatsheet()

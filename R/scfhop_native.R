@@ -76,17 +76,6 @@
 #'
 #' @param smiles The molecule.
 #' @return A list of character vectors, one per atom.
-#' @references Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-#'       "'Scaffold-hopping' by topological pharmacophore search."
-#'       Angewandte Chemie International Edition 38(19), 2894-2896.
-#'     Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
-#'       1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),
-#'       2887-2893. doi:10.1021/jm9602928.
-#'     Weisfeiler, B. and Leman, A.A. (1968) "The reduction of a graph to
-#'       canonical form and the algebra which appears therein."
-#'       Nauchno-Technicheskaya Informatsia 2(9), 12-16.
-#'     Shervashidze, N. et al. (2011) "Weisfeiler-Lehman graph kernels."
-#'       Journal of Machine Learning Research 12, 2539-2561.
 #' @export
 #' @examples
 #' morie_scfhop_types("c1ccccc1O")
@@ -180,17 +169,6 @@ morie_scfhop_types <- function(smiles) {
 #' @param maxdist The distance limit, in bonds.
 #' @param scaling One of type, count or none.
 #' @return A numeric vector.
-#' @references Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-#'       "'Scaffold-hopping' by topological pharmacophore search."
-#'       Angewandte Chemie International Edition 38(19), 2894-2896.
-#'     Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
-#'       1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),
-#'       2887-2893. doi:10.1021/jm9602928.
-#'     Weisfeiler, B. and Leman, A.A. (1968) "The reduction of a graph to
-#'       canonical form and the algebra which appears therein."
-#'       Nauchno-Technicheskaya Informatsia 2(9), 12-16.
-#'     Shervashidze, N. et al. (2011) "Weisfeiler-Lehman graph kernels."
-#'       Journal of Machine Learning Research 12, 2539-2561.
 #' @export
 #' @examples
 #' r <- morie_scfhop_cats("c1ccccc1CCN")
@@ -245,17 +223,6 @@ morie_scfhop_cats <- function(smiles, maxdist = 9L, scaling = "type") {
 #' @param a,b Two descriptors of the same length.
 #' @param metric One of tanimoto, euclidean or cosine.
 #' @return A number, larger meaning closer.
-#' @references Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-#'       "'Scaffold-hopping' by topological pharmacophore search."
-#'       Angewandte Chemie International Edition 38(19), 2894-2896.
-#'     Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
-#'       1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),
-#'       2887-2893. doi:10.1021/jm9602928.
-#'     Weisfeiler, B. and Leman, A.A. (1968) "The reduction of a graph to
-#'       canonical form and the algebra which appears therein."
-#'       Nauchno-Technicheskaya Informatsia 2(9), 12-16.
-#'     Shervashidze, N. et al. (2011) "Weisfeiler-Lehman graph kernels."
-#'       Journal of Machine Learning Research 12, 2539-2561.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -292,17 +259,6 @@ morie_scfhop_similarity <- function(a, b, metric = "tanimoto") {
 #' @param smiles The molecule.
 #' @return A list with the surviving zero-based atom indices and the
 #'   surviving bonds.
-#' @references Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-#'       "'Scaffold-hopping' by topological pharmacophore search."
-#'       Angewandte Chemie International Edition 38(19), 2894-2896.
-#'     Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
-#'       1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),
-#'       2887-2893. doi:10.1021/jm9602928.
-#'     Weisfeiler, B. and Leman, A.A. (1968) "The reduction of a graph to
-#'       canonical form and the algebra which appears therein."
-#'       Nauchno-Technicheskaya Informatsia 2(9), 12-16.
-#'     Shervashidze, N. et al. (2011) "Weisfeiler-Lehman graph kernels."
-#'       Journal of Machine Learning Research 12, 2539-2561.
 #' @export
 #' @examples
 #' r <- morie_scfhop_murcko("c1ccccc1CCN")
@@ -349,17 +305,6 @@ morie_scfhop_murcko <- function(smiles) {
 #' @param smiles The molecule.
 #' @param rounds The refinement depth.
 #' @return A sorted numeric vector, empty for an acyclic molecule.
-#' @references Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-#'       "'Scaffold-hopping' by topological pharmacophore search."
-#'       Angewandte Chemie International Edition 38(19), 2894-2896.
-#'     Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
-#'       1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),
-#'       2887-2893. doi:10.1021/jm9602928.
-#'     Weisfeiler, B. and Leman, A.A. (1968) "The reduction of a graph to
-#'       canonical form and the algebra which appears therein."
-#'       Nauchno-Technicheskaya Informatsia 2(9), 12-16.
-#'     Shervashidze, N. et al. (2011) "Weisfeiler-Lehman graph kernels."
-#'       Journal of Machine Learning Research 12, 2539-2561.
 #' @export
 #' @examples
 #' morie_scfhop_signature("c1ccccc1CCc1ccccc1")
@@ -414,17 +359,6 @@ morie_scfhop_signature <- function(smiles, rounds = 3L) {
 #' @return A list with the ranked candidates, each with its similarity,
 #'   whether its scaffold differs from the lead's, and whether it is a
 #'   hop.
-#' @references Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-#'       "'Scaffold-hopping' by topological pharmacophore search."
-#'       Angewandte Chemie International Edition 38(19), 2894-2896.
-#'     Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
-#'       1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),
-#'       2887-2893. doi:10.1021/jm9602928.
-#'     Weisfeiler, B. and Leman, A.A. (1968) "The reduction of a graph to
-#'       canonical form and the algebra which appears therein."
-#'       Nauchno-Technicheskaya Informatsia 2(9), 12-16.
-#'     Shervashidze, N. et al. (2011) "Weisfeiler-Lehman graph kernels."
-#'       Journal of Machine Learning Research 12, 2539-2561.
 #' @export
 #' @examples
 #' LEAD <- "OCCc1ccccc1"
@@ -475,17 +409,6 @@ morie_scfhop <- function(lead_smiles, scaffold_db, maxdist = 9L,
 #' One-line summary of the scfhop module
 #'
 #' @return A character scalar.
-#' @references Schneider, G., Neidhart, W., Giller, T. and Schmid, G. (1999)
-#'       "'Scaffold-hopping' by topological pharmacophore search."
-#'       Angewandte Chemie International Edition 38(19), 2894-2896.
-#'     Bemis, G.W. and Murcko, M.A. (1996) "The properties of known drugs.
-#'       1. Molecular frameworks." Journal of Medicinal Chemistry 39(15),
-#'       2887-2893. doi:10.1021/jm9602928.
-#'     Weisfeiler, B. and Leman, A.A. (1968) "The reduction of a graph to
-#'       canonical form and the algebra which appears therein."
-#'       Nauchno-Technicheskaya Informatsia 2(9), 12-16.
-#'     Shervashidze, N. et al. (2011) "Weisfeiler-Lehman graph kernels."
-#'       Journal of Machine Learning Research 12, 2539-2561.
 #' @export
 #' @examples
 #' morie_scfhop_cheatsheet()

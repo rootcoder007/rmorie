@@ -88,22 +88,6 @@
 #' @param rule A member of the weight-rule list.
 #' @return A numeric pair, the land and ocean weights, summing to one
 #'   when the cell has any observation and to zero when it has none.
-#' @references Morice, C.P., Kennedy, J.J., Rayner, N.A., Winn, J.P., Hogan, E.,
-#'       Killick, R.E., Dunn, R.J.H., Osborn, T.J., Jones, P.D. and
-#'       Simpson, I.R. (2021) "An updated assessment of near-surface
-#'       temperature change from 1850: the HadCRUT5 data set." Journal of
-#'       Geophysical Research: Atmospheres 126(3), e2019JD032361.
-#'       doi:10.1029/2019JD032361.
-#'     Osborn, T.J. et al. (2021) "Land surface air temperature variations
-#'       across the globe updated to 2019: the CRUTEM5 data set." Journal
-#'       of Geophysical Research: Atmospheres 126(2), e2019JD032352.
-#'     Kennedy, J.J., Rayner, N.A., Atkinson, C.P. and Killick, R.E. (2019)
-#'       "An ensemble data set of sea surface temperature change from 1850:
-#'       the Met Office Hadley Centre HadSST.4.0.0.0 data set." Journal of
-#'       Geophysical Research: Atmospheres 124(14), 7719-7763.
-#'     Donlon, C.J. et al. (2012) "The Operational Sea Surface Temperature
-#'       and Sea Ice Analysis (OSTIA) system." Remote Sensing of
-#'       Environment 116, 140-158.
 #' @export
 #' @keywords internal
 morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
@@ -168,22 +152,6 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 #' @param sst_var Per-cell SST error variance matrix, or NULL.
 #' @return A list with the blended anomaly matrix, the blended variance
 #'   matrix, the land weights and the observation mask.
-#' @references Morice, C.P., Kennedy, J.J., Rayner, N.A., Winn, J.P., Hogan, E.,
-#'       Killick, R.E., Dunn, R.J.H., Osborn, T.J., Jones, P.D. and
-#'       Simpson, I.R. (2021) "An updated assessment of near-surface
-#'       temperature change from 1850: the HadCRUT5 data set." Journal of
-#'       Geophysical Research: Atmospheres 126(3), e2019JD032361.
-#'       doi:10.1029/2019JD032361.
-#'     Osborn, T.J. et al. (2021) "Land surface air temperature variations
-#'       across the globe updated to 2019: the CRUTEM5 data set." Journal
-#'       of Geophysical Research: Atmospheres 126(2), e2019JD032352.
-#'     Kennedy, J.J., Rayner, N.A., Atkinson, C.P. and Killick, R.E. (2019)
-#'       "An ensemble data set of sea surface temperature change from 1850:
-#'       the Met Office Hadley Centre HadSST.4.0.0.0 data set." Journal of
-#'       Geophysical Research: Atmospheres 124(14), 7719-7763.
-#'     Donlon, C.J. et al. (2012) "The Operational Sea Surface Temperature
-#'       and Sea Ice Analysis (OSTIA) system." Remote Sensing of
-#'       Environment 116, 140-158.
 #' @export
 #' @examples
 #' NLAT <- 6L
@@ -297,22 +265,6 @@ morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
 #' @param var Per-cell variance matrix, or NULL.
 #' @return A list with the mean, its variance, the total weight, the
 #'   cell counts and the two hemispheric means.
-#' @references Morice, C.P., Kennedy, J.J., Rayner, N.A., Winn, J.P., Hogan, E.,
-#'       Killick, R.E., Dunn, R.J.H., Osborn, T.J., Jones, P.D. and
-#'       Simpson, I.R. (2021) "An updated assessment of near-surface
-#'       temperature change from 1850: the HadCRUT5 data set." Journal of
-#'       Geophysical Research: Atmospheres 126(3), e2019JD032361.
-#'       doi:10.1029/2019JD032361.
-#'     Osborn, T.J. et al. (2021) "Land surface air temperature variations
-#'       across the globe updated to 2019: the CRUTEM5 data set." Journal
-#'       of Geophysical Research: Atmospheres 126(2), e2019JD032352.
-#'     Kennedy, J.J., Rayner, N.A., Atkinson, C.P. and Killick, R.E. (2019)
-#'       "An ensemble data set of sea surface temperature change from 1850:
-#'       the Met Office Hadley Centre HadSST.4.0.0.0 data set." Journal of
-#'       Geophysical Research: Atmospheres 124(14), 7719-7763.
-#'     Donlon, C.J. et al. (2012) "The Operational Sea Surface Temperature
-#'       and Sea Ice Analysis (OSTIA) system." Remote Sensing of
-#'       Environment 116, 140-158.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -374,22 +326,6 @@ morie_hadcrut_area_mean <- function(grid, route = "hemispheric", var = NULL) {
 #' @param route A member of the mean-route list.
 #' @return The signed coverage error, or NA when either average is
 #'   undefined.
-#' @references Morice, C.P., Kennedy, J.J., Rayner, N.A., Winn, J.P., Hogan, E.,
-#'       Killick, R.E., Dunn, R.J.H., Osborn, T.J., Jones, P.D. and
-#'       Simpson, I.R. (2021) "An updated assessment of near-surface
-#'       temperature change from 1850: the HadCRUT5 data set." Journal of
-#'       Geophysical Research: Atmospheres 126(3), e2019JD032361.
-#'       doi:10.1029/2019JD032361.
-#'     Osborn, T.J. et al. (2021) "Land surface air temperature variations
-#'       across the globe updated to 2019: the CRUTEM5 data set." Journal
-#'       of Geophysical Research: Atmospheres 126(2), e2019JD032352.
-#'     Kennedy, J.J., Rayner, N.A., Atkinson, C.P. and Killick, R.E. (2019)
-#'       "An ensemble data set of sea surface temperature change from 1850:
-#'       the Met Office Hadley Centre HadSST.4.0.0.0 data set." Journal of
-#'       Geophysical Research: Atmospheres 124(14), 7719-7763.
-#'     Donlon, C.J. et al. (2012) "The Operational Sea Surface Temperature
-#'       and Sea Ice Analysis (OSTIA) system." Remote Sensing of
-#'       Environment 116, 140-158.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -429,22 +365,6 @@ morie_hadcrut_coverage_error <- function(reference, seen,
 #' @return A list with the blended grid, the global and hemispheric
 #'   means, the three uncertainty components and the combined interval,
 #'   and the coverage actually achieved.
-#' @references Morice, C.P., Kennedy, J.J., Rayner, N.A., Winn, J.P., Hogan, E.,
-#'       Killick, R.E., Dunn, R.J.H., Osborn, T.J., Jones, P.D. and
-#'       Simpson, I.R. (2021) "An updated assessment of near-surface
-#'       temperature change from 1850: the HadCRUT5 data set." Journal of
-#'       Geophysical Research: Atmospheres 126(3), e2019JD032361.
-#'       doi:10.1029/2019JD032361.
-#'     Osborn, T.J. et al. (2021) "Land surface air temperature variations
-#'       across the globe updated to 2019: the CRUTEM5 data set." Journal
-#'       of Geophysical Research: Atmospheres 126(2), e2019JD032352.
-#'     Kennedy, J.J., Rayner, N.A., Atkinson, C.P. and Killick, R.E. (2019)
-#'       "An ensemble data set of sea surface temperature change from 1850:
-#'       the Met Office Hadley Centre HadSST.4.0.0.0 data set." Journal of
-#'       Geophysical Research: Atmospheres 124(14), 7719-7763.
-#'     Donlon, C.J. et al. (2012) "The Operational Sea Surface Temperature
-#'       and Sea Ice Analysis (OSTIA) system." Remote Sensing of
-#'       Environment 116, 140-158.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -562,22 +482,6 @@ morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
 #' One-line summary of the hadcrut module
 #'
 #' @return A character scalar.
-#' @references Morice, C.P., Kennedy, J.J., Rayner, N.A., Winn, J.P., Hogan, E.,
-#'       Killick, R.E., Dunn, R.J.H., Osborn, T.J., Jones, P.D. and
-#'       Simpson, I.R. (2021) "An updated assessment of near-surface
-#'       temperature change from 1850: the HadCRUT5 data set." Journal of
-#'       Geophysical Research: Atmospheres 126(3), e2019JD032361.
-#'       doi:10.1029/2019JD032361.
-#'     Osborn, T.J. et al. (2021) "Land surface air temperature variations
-#'       across the globe updated to 2019: the CRUTEM5 data set." Journal
-#'       of Geophysical Research: Atmospheres 126(2), e2019JD032352.
-#'     Kennedy, J.J., Rayner, N.A., Atkinson, C.P. and Killick, R.E. (2019)
-#'       "An ensemble data set of sea surface temperature change from 1850:
-#'       the Met Office Hadley Centre HadSST.4.0.0.0 data set." Journal of
-#'       Geophysical Research: Atmospheres 124(14), 7719-7763.
-#'     Donlon, C.J. et al. (2012) "The Operational Sea Surface Temperature
-#'       and Sea Ice Analysis (OSTIA) system." Remote Sensing of
-#'       Environment 116, 140-158.
 #' @export
 #' @examples
 #' morie_hadcrut_cheatsheet()

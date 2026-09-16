@@ -8,6 +8,9 @@
 
 #' morie_logdet_I_minus
 #'
+#' @param rho Argument `rho`; see Usage.
+#' @param W Argument `W`; see Usage.
+#' @return The value of `[`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_logdet_I_minus(V, V)

@@ -614,13 +614,6 @@
 #'
 #' @param g Passed to \code{.prsLR_augment}.
 #' @return The value of \code{.prsLR_augment}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -642,13 +635,6 @@ morie_augment <- function(g) {
 #' @param nts Passed to \code{.prsLR_closure}.
 #' @param k Passed to \code{.prsLR_closure}. Defaults to \code{1}.
 #' @return The value of \code{.prsLR_closure}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @keywords internal
 morie_closure <- function(items, ag, first, nts, k = 1) {
@@ -668,13 +654,6 @@ morie_closure <- function(items, ag, first, nts, k = 1) {
 #' @param nts Passed to \code{.prsLR_goto}.
 #' @param k Passed to \code{.prsLR_goto}. Defaults to \code{1}.
 #' @return The value of \code{.prsLR_goto}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @keywords internal
 morie_goto <- function(state, sym, ag, first, nts, k = 1) {
@@ -690,13 +669,6 @@ morie_goto <- function(state, sym, ag, first, nts, k = 1) {
 #' @param ag Passed to \code{.prsLR_canonical_collection}.
 #' @param k Passed to \code{.prsLR_canonical_collection}. Defaults to \code{1}.
 #' @return The value of \code{.prsLR_canonical_collection}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -715,13 +687,6 @@ morie_canonical_collection <- function(ag, k = 1) {
 #' @param g Passed to \code{.prsLR_build_tables}.
 #' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
 #' @return The value of \code{.prsLR_build_tables}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @examples
 #' g <- list(rules = list(list("E", list("E", "+", "T")),
@@ -745,13 +710,6 @@ morie_build_tables <- function(g, method = "lr1") {
 #' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
 #' @return A list with \code{estimate}, \code{conflicts}, \code{n_conflicts},
 #' \code{method}, \code{n_states}, \code{ok}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @examples
 #' g <- list(rules = list(list("E", list("E", "+", "T")),
@@ -784,13 +742,6 @@ morie_conflicts <- function(g, method = "lr1") {
 #' @param method Passed to \code{.prsLR_parse}. Defaults to \code{"lr1"}.
 #' @param tables Passed to \code{.prsLR_parse}.
 #' @return The value of \code{.prsLR_parse}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @examples
 #' g <- list(rules = list(list("E", list("E", "+", "T")),
@@ -815,13 +766,6 @@ morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
 #' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
 #' @return A list with \code{estimate}, \code{tree}, \code{method}, \code{n_states},
 #' \code{conflicts}, \code{tokens}, \code{yield}.
-#' @references ----------
-#'   Knuth, D. E. (1965) "On the translation of languages from left to
-#'   right", Information and Control 8(6), 607-639,
-#'   doi:10.1016/S0019-9958(65)90426-2.
-#'   
-#'   DeRemer, F. L. (1971) "Simple LR(k) grammars", Communications of the
-#'   ACM 14(7), 453-460, doi:10.1145/362619.362625.
 #' @export
 #' @examples
 #' g <- list(rules = list(list("E", list("E", "+", "T")),

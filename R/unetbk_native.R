@@ -95,29 +95,6 @@
 #' @param kernel Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @return A list with \code{output}, \code{input}, \code{border_lost},
 #' \code{skip_sizes}, \code{note}.
-#' @references ----------
-#'   Ronneberger, O., Fischer, P. & Brox, T. (2015) "U-Net: Convolutional
-#'   Networks for Biomedical Image Segmentation", *Medical Image Computing
-#'   and Computer-Assisted Intervention (MICCAI 2015)*, LNCS 9351,
-#'   234-241, doi:10.1007/978-3-319-24574-4_28, arXiv:1505.04597. The
-#'   abstract (training deep networks is thought to need many thousand
-#'   annotated samples; the strategy relies on strong data augmentation; a
-#'   contracting path to capture context and a symmetric expanding path
-#'   enabling precise localization; end-to-end training from very few
-#'   images; winning the ISBI cell tracking challenge 2015; segmentation of
-#'   a 512x512 image in under a second). Sec. 2 (pooling operators replaced
-#'   by upsampling; high-resolution features from the contracting path
-#'   combined with the upsampled output; a large number of feature channels
-#'   in the expansive path propagating context to higher resolution layers,
-#'   making it symmetric and yielding the u-shape; no fully connected
-#'   layers and only the valid part of each convolution, so the map
-#'   contains only pixels with full context). Figure 2 and Sec. 3 (the
-#'   overlap-tile strategy with missing input extrapolated by mirroring,
-#'   and the weight map for separating touching objects).
-#'   
-#'   Long, J., Shelhamer, E. & Darrell, T. (2015) "Fully convolutional
-#'   networks for semantic segmentation", *CVPR 2015*, 3431-3440,
-#'   doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 #' @export
 #' @examples
 #' valid_output_size(572L, depth = 4L)
@@ -171,29 +148,6 @@ valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kern
 #' @param image Passed to \code{.unetbk_as_matrix}.
 #' @param pad Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Ronneberger, O., Fischer, P. & Brox, T. (2015) "U-Net: Convolutional
-#'   Networks for Biomedical Image Segmentation", *Medical Image Computing
-#'   and Computer-Assisted Intervention (MICCAI 2015)*, LNCS 9351,
-#'   234-241, doi:10.1007/978-3-319-24574-4_28, arXiv:1505.04597. The
-#'   abstract (training deep networks is thought to need many thousand
-#'   annotated samples; the strategy relies on strong data augmentation; a
-#'   contracting path to capture context and a symmetric expanding path
-#'   enabling precise localization; end-to-end training from very few
-#'   images; winning the ISBI cell tracking challenge 2015; segmentation of
-#'   a 512x512 image in under a second). Sec. 2 (pooling operators replaced
-#'   by upsampling; high-resolution features from the contracting path
-#'   combined with the upsampled output; a large number of feature channels
-#'   in the expansive path propagating context to higher resolution layers,
-#'   making it symmetric and yielding the u-shape; no fully connected
-#'   layers and only the valid part of each convolution, so the map
-#'   contains only pixels with full context). Figure 2 and Sec. 3 (the
-#'   overlap-tile strategy with missing input extrapolated by mirroring,
-#'   and the weight map for separating touching objects).
-#'   
-#'   Long, J., Shelhamer, E. & Darrell, T. (2015) "Fully convolutional
-#'   networks for semantic segmentation", *CVPR 2015*, 3431-3440,
-#'   doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 #' @export
 #' @examples
 #' mirror_pad(matrix(as.numeric(1:16), 4, 4), pad = 2L)
@@ -232,29 +186,6 @@ mirror_pad <- function(image, pad) {
 #' @param tile Coerced to integer by the body, with \code{as.integer}.
 #' @param border Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{tiles}, \code{n_tiles}, \code{output_size}, \code{note}.
-#' @references ----------
-#'   Ronneberger, O., Fischer, P. & Brox, T. (2015) "U-Net: Convolutional
-#'   Networks for Biomedical Image Segmentation", *Medical Image Computing
-#'   and Computer-Assisted Intervention (MICCAI 2015)*, LNCS 9351,
-#'   234-241, doi:10.1007/978-3-319-24574-4_28, arXiv:1505.04597. The
-#'   abstract (training deep networks is thought to need many thousand
-#'   annotated samples; the strategy relies on strong data augmentation; a
-#'   contracting path to capture context and a symmetric expanding path
-#'   enabling precise localization; end-to-end training from very few
-#'   images; winning the ISBI cell tracking challenge 2015; segmentation of
-#'   a 512x512 image in under a second). Sec. 2 (pooling operators replaced
-#'   by upsampling; high-resolution features from the contracting path
-#'   combined with the upsampled output; a large number of feature channels
-#'   in the expansive path propagating context to higher resolution layers,
-#'   making it symmetric and yielding the u-shape; no fully connected
-#'   layers and only the valid part of each convolution, so the map
-#'   contains only pixels with full context). Figure 2 and Sec. 3 (the
-#'   overlap-tile strategy with missing input extrapolated by mirroring,
-#'   and the weight map for separating touching objects).
-#'   
-#'   Long, J., Shelhamer, E. & Darrell, T. (2015) "Fully convolutional
-#'   networks for semantic segmentation", *CVPR 2015*, 3431-3440,
-#'   doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 #' @export
 #' @examples
 #' overlap_tiles(height = 100L, width = 100L, tile = 32L, border = 8L)
@@ -301,29 +232,6 @@ overlap_tiles <- function(height, width, tile, border) {
 #' @param upsampled Passed to \code{.unetbk_as_matrix}.
 #' @param contracting Passed to \code{.unetbk_as_matrix}.
 #' @return A list with \code{concatenated}, \code{crop_offset}, \code{channels}, \code{note}.
-#' @references ----------
-#'   Ronneberger, O., Fischer, P. & Brox, T. (2015) "U-Net: Convolutional
-#'   Networks for Biomedical Image Segmentation", *Medical Image Computing
-#'   and Computer-Assisted Intervention (MICCAI 2015)*, LNCS 9351,
-#'   234-241, doi:10.1007/978-3-319-24574-4_28, arXiv:1505.04597. The
-#'   abstract (training deep networks is thought to need many thousand
-#'   annotated samples; the strategy relies on strong data augmentation; a
-#'   contracting path to capture context and a symmetric expanding path
-#'   enabling precise localization; end-to-end training from very few
-#'   images; winning the ISBI cell tracking challenge 2015; segmentation of
-#'   a 512x512 image in under a second). Sec. 2 (pooling operators replaced
-#'   by upsampling; high-resolution features from the contracting path
-#'   combined with the upsampled output; a large number of feature channels
-#'   in the expansive path propagating context to higher resolution layers,
-#'   making it symmetric and yielding the u-shape; no fully connected
-#'   layers and only the valid part of each convolution, so the map
-#'   contains only pixels with full context). Figure 2 and Sec. 3 (the
-#'   overlap-tile strategy with missing input extrapolated by mirroring,
-#'   and the weight map for separating touching objects).
-#'   
-#'   Long, J., Shelhamer, E. & Darrell, T. (2015) "Fully convolutional
-#'   networks for semantic segmentation", *CVPR 2015*, 3431-3440,
-#'   doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -366,29 +274,6 @@ skip_concat <- function(upsampled, contracting) {
 #' @param w0 Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A list with \code{weights}, \code{n_instances}, \code{max_weight}, \code{note}.
-#' @references ----------
-#'   Ronneberger, O., Fischer, P. & Brox, T. (2015) "U-Net: Convolutional
-#'   Networks for Biomedical Image Segmentation", *Medical Image Computing
-#'   and Computer-Assisted Intervention (MICCAI 2015)*, LNCS 9351,
-#'   234-241, doi:10.1007/978-3-319-24574-4_28, arXiv:1505.04597. The
-#'   abstract (training deep networks is thought to need many thousand
-#'   annotated samples; the strategy relies on strong data augmentation; a
-#'   contracting path to capture context and a symmetric expanding path
-#'   enabling precise localization; end-to-end training from very few
-#'   images; winning the ISBI cell tracking challenge 2015; segmentation of
-#'   a 512x512 image in under a second). Sec. 2 (pooling operators replaced
-#'   by upsampling; high-resolution features from the contracting path
-#'   combined with the upsampled output; a large number of feature channels
-#'   in the expansive path propagating context to higher resolution layers,
-#'   making it symmetric and yielding the u-shape; no fully connected
-#'   layers and only the valid part of each convolution, so the map
-#'   contains only pixels with full context). Figure 2 and Sec. 3 (the
-#'   overlap-tile strategy with missing input extrapolated by mirroring,
-#'   and the weight map for separating touching objects).
-#'   
-#'   Long, J., Shelhamer, E. & Darrell, T. (2015) "Fully convolutional
-#'   networks for semantic segmentation", *CVPR 2015*, 3431-3440,
-#'   doi:10.1109/CVPR.2015.7298965. The fully convolutional predecessor.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

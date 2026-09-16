@@ -189,10 +189,6 @@ morie_forwsr_consistency_factor <- function(m, n) {
 #' @param subset 0-based row indices, all rows when \code{NULL}.
 #' @return List with \code{beta}, \code{residuals} (all rows),
 #'   \code{s2}, \code{sigma}, \code{subset}, \code{df}.
-#' @references Atkinson, A. C. and Riani, M. (2000) Robust Diagnostic Regression
-#'     doi:10.1007/978-1-4612-1160-0. The forward search: the
-#'     Riani, M., Atkinson, A. C. and Cerioli, A. (2009) "Finding an
-#'     doi:10.1111/j.1467-9868.2008.00692.x.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -240,10 +236,6 @@ morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
 #' @param seed SplitMix64 seed, matching the Python arm.
 #' @return List with \code{subset} (0-based, sorted) and
 #'   \code{median_sq_residual}.
-#' @references Atkinson, A. C. and Riani, M. (2000) Robust Diagnostic Regression
-#'     doi:10.1007/978-1-4612-1160-0. The forward search: the
-#'     Riani, M., Atkinson, A. C. and Cerioli, A. (2009) "Finding an
-#'     doi:10.1111/j.1467-9868.2008.00692.x.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -287,10 +279,6 @@ morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
 #' @return List of steps, each with \code{m}, \code{beta}, \code{sigma},
 #'   \code{s2}, \code{consistency_factor}, \code{sigma_corrected},
 #'   \code{min_deletion_residual} and \code{subset}.
-#' @references Atkinson, A. C. and Riani, M. (2000) Robust Diagnostic Regression
-#'     doi:10.1007/978-1-4612-1160-0. The forward search: the
-#'     Riani, M., Atkinson, A. C. and Cerioli, A. (2009) "Finding an
-#'     doi:10.1111/j.1467-9868.2008.00692.x.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -339,10 +327,6 @@ morie_forwsr_forward_search <- function(X, y, start = NULL,
 #' @param steps Output of \code{morie_forwsr_forward_search}.
 #' @param key Which monitored quantity to return.
 #' @return List with \code{m} and the requested series.
-#' @references Atkinson, A. C. and Riani, M. (2000) Robust Diagnostic Regression
-#'     doi:10.1007/978-1-4612-1160-0. The forward search: the
-#'     Riani, M., Atkinson, A. C. and Cerioli, A. (2009) "Finding an
-#'     doi:10.1111/j.1467-9868.2008.00692.x.
 #' @export
 #' @keywords internal
 morie_forwsr_forward_plot <- function(steps,

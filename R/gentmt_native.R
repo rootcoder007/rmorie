@@ -403,14 +403,6 @@
 #' @param doses Passed to \code{.gentmt_dose_response_curve}.
 #' @param trim Passed to \code{.gentmt_ip_weights}.
 #' @return The value of \code{out}, as built in the body.
-#' @references Robins, J. M., Hernan, M. A. & Brumback, B. (2000) "Marginal structural
-#'       models and causal inference in epidemiology", Epidemiology 11(5), 550-560.
-#'     Imai, K. & van Dyk, D. A. (2004) "Causal inference with general treatment
-#'       regimes: generalizing the propensity score", JASA 99(467), 854-866.
-#'     Hirano, K. & Imbens, G. W. (2004) "The propensity score with continuous
-#'       treatments", in Applied Bayesian Modeling and Causal Inference from
-#'       Incomplete-Data Perspectives, Wiley, 73-84.
-#'     Hernan M. A. & Robins J. M. (2020) Causal Inference: What If, Sec. 12.3.
 #' @examples
 #' # A continuous dose that depends on the covariate but is not a
 #' # deterministic function of it: the treatment model must retain some

@@ -33,6 +33,11 @@
 
 #' morie_exponential_variogram_model
 #'
+#' @param h Argument `h`; see Usage.
+#' @param c0 Argument `c0`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @param a Argument `a`; see Usage.
+#' @return A list with `gamma`, `covariance`, `h`, `c0`, `c`, `a`, `sill`, `practical_range`, `n`, `method`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_exponential_variogram_model(V)

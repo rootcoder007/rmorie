@@ -15,6 +15,10 @@
 
 #' morie_rating_scale_andrich
 #'
+#' @param theta Argument `theta`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @param tau Argument `tau`; see Usage.
+#' @return A list with `p`, `eta`, `expected`, `info`, `theta`, `b`, `tau`, `ncat`, `n`, `method`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_rating_scale_andrich(V)

@@ -12,6 +12,9 @@
 
 #' morie_ma_cochran_q
 #'
+#' @param yi Argument `yi`; see Usage.
+#' @param vi Argument `vi`; see Usage.
+#' @return A list with `statistic`, `pvalue`, `df`, `k`, `theta_fe`, `se_fe`, `tau2`, `i2`, `h2`, `weights`, `c_constant`, `method`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_ma_cochran_q(V, V)

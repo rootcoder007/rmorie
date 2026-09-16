@@ -223,31 +223,6 @@
 #' \code{P_w_given_z}, \code{loglik_history}, \code{final_loglik}, \code{iterations},
 #' \code{K}, \code{n_docs}, \code{vocab}, \code{n_parameters}, \code{method},
 #' \code{caveat}.
-#' @references ----------
-#'   Hofmann, T. (1999) "Probabilistic Latent Semantic Analysis",
-#'   Proceedings of the Fifteenth Conference on Uncertainty in
-#'   Artificial Intelligence (UAI 1999), 289-296, arXiv:1301.6705.
-#'   Sec. 2 (LSA by SVD and the assessment of its theoretical
-#'   foundation), Sec. 3 (the aspect model, eq. (1) asymmetric and
-#'   eq. (2) symmetric parameterisations, the conditional independence
-#'   of d and w given z, and z as a bottleneck), and Sec. 3.2 (EM:
-#'   eq. (3) for the E step and eqs. (4)-(6) for the M step; maximum
-#'   likelihood as minimisation of the cross entropy or KL divergence
-#'   against the empirical distribution).
-#'   
-#'   NOTE: the text layer of the local PDF is garbled across the equation
-#'   region; the equations above were recovered by OCR (ocrpg.sh, 300 dpi
-#'   + tesseract) rather than by pdftotext.
-#'   
-#'   Deerwester, S., Dumais, S. T., Furnas, G. W., Landauer, T. K. &
-#'   Harshman, R. (1990) "Indexing by latent semantic analysis", Journal
-#'   of the American Society for Information Science 41(6), 391-407. The
-#'   LSA method this gives a probabilistic footing to.
-#'   
-#'   Blei, D. M., Ng, A. Y. & Jordan, M. I. (2003) "Latent Dirichlet
-#'   Allocation", Journal of Machine Learning Research 3, 993-1022. The
-#'   Dirichlet prior that removes the per-document parameter growth;
-#'   implemented in lda.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -372,31 +347,6 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #' @param tol Passed to \code{morie_plsa}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{morie_plsa}. Defaults to \code{0}.
 #' @return The value of \code{morie_plsa}.
-#' @references ----------
-#'   Hofmann, T. (1999) "Probabilistic Latent Semantic Analysis",
-#'   Proceedings of the Fifteenth Conference on Uncertainty in
-#'   Artificial Intelligence (UAI 1999), 289-296, arXiv:1301.6705.
-#'   Sec. 2 (LSA by SVD and the assessment of its theoretical
-#'   foundation), Sec. 3 (the aspect model, eq. (1) asymmetric and
-#'   eq. (2) symmetric parameterisations, the conditional independence
-#'   of d and w given z, and z as a bottleneck), and Sec. 3.2 (EM:
-#'   eq. (3) for the E step and eqs. (4)-(6) for the M step; maximum
-#'   likelihood as minimisation of the cross entropy or KL divergence
-#'   against the empirical distribution).
-#'   
-#'   NOTE: the text layer of the local PDF is garbled across the equation
-#'   region; the equations above were recovered by OCR (ocrpg.sh, 300 dpi
-#'   + tesseract) rather than by pdftotext.
-#'   
-#'   Deerwester, S., Dumais, S. T., Furnas, G. W., Landauer, T. K. &
-#'   Harshman, R. (1990) "Indexing by latent semantic analysis", Journal
-#'   of the American Society for Information Science 41(6), 391-407. The
-#'   LSA method this gives a probabilistic footing to.
-#'   
-#'   Blei, D. M., Ng, A. Y. & Jordan, M. I. (2003) "Latent Dirichlet
-#'   Allocation", Journal of Machine Learning Research 3, 993-1022. The
-#'   Dirichlet prior that removes the per-document parameter growth;
-#'   implemented in lda.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -421,31 +371,6 @@ plsa <- probabilisticlsa
 #' @param Pd_z Passed to \code{.plsa_e_step}.
 #' @param Pw_z Passed to \code{.plsa_e_step}.
 #' @return The value of \code{.plsa_e_step}.
-#' @references ----------
-#'   Hofmann, T. (1999) "Probabilistic Latent Semantic Analysis",
-#'   Proceedings of the Fifteenth Conference on Uncertainty in
-#'   Artificial Intelligence (UAI 1999), 289-296, arXiv:1301.6705.
-#'   Sec. 2 (LSA by SVD and the assessment of its theoretical
-#'   foundation), Sec. 3 (the aspect model, eq. (1) asymmetric and
-#'   eq. (2) symmetric parameterisations, the conditional independence
-#'   of d and w given z, and z as a bottleneck), and Sec. 3.2 (EM:
-#'   eq. (3) for the E step and eqs. (4)-(6) for the M step; maximum
-#'   likelihood as minimisation of the cross entropy or KL divergence
-#'   against the empirical distribution).
-#'   
-#'   NOTE: the text layer of the local PDF is garbled across the equation
-#'   region; the equations above were recovered by OCR (ocrpg.sh, 300 dpi
-#'   + tesseract) rather than by pdftotext.
-#'   
-#'   Deerwester, S., Dumais, S. T., Furnas, G. W., Landauer, T. K. &
-#'   Harshman, R. (1990) "Indexing by latent semantic analysis", Journal
-#'   of the American Society for Information Science 41(6), 391-407. The
-#'   LSA method this gives a probabilistic footing to.
-#'   
-#'   Blei, D. M., Ng, A. Y. & Jordan, M. I. (2003) "Latent Dirichlet
-#'   Allocation", Journal of Machine Learning Research 3, 993-1022. The
-#'   Dirichlet prior that removes the per-document parameter growth;
-#'   implemented in lda.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -465,31 +390,6 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #' @param post Passed to \code{.plsa_m_step}.
 #' @param K Passed to \code{.plsa_m_step}.
 #' @return The value of \code{.plsa_m_step}.
-#' @references ----------
-#'   Hofmann, T. (1999) "Probabilistic Latent Semantic Analysis",
-#'   Proceedings of the Fifteenth Conference on Uncertainty in
-#'   Artificial Intelligence (UAI 1999), 289-296, arXiv:1301.6705.
-#'   Sec. 2 (LSA by SVD and the assessment of its theoretical
-#'   foundation), Sec. 3 (the aspect model, eq. (1) asymmetric and
-#'   eq. (2) symmetric parameterisations, the conditional independence
-#'   of d and w given z, and z as a bottleneck), and Sec. 3.2 (EM:
-#'   eq. (3) for the E step and eqs. (4)-(6) for the M step; maximum
-#'   likelihood as minimisation of the cross entropy or KL divergence
-#'   against the empirical distribution).
-#'   
-#'   NOTE: the text layer of the local PDF is garbled across the equation
-#'   region; the equations above were recovered by OCR (ocrpg.sh, 300 dpi
-#'   + tesseract) rather than by pdftotext.
-#'   
-#'   Deerwester, S., Dumais, S. T., Furnas, G. W., Landauer, T. K. &
-#'   Harshman, R. (1990) "Indexing by latent semantic analysis", Journal
-#'   of the American Society for Information Science 41(6), 391-407. The
-#'   LSA method this gives a probabilistic footing to.
-#'   
-#'   Blei, D. M., Ng, A. Y. & Jordan, M. I. (2003) "Latent Dirichlet
-#'   Allocation", Journal of Machine Learning Research 3, 993-1022. The
-#'   Dirichlet prior that removes the per-document parameter growth;
-#'   implemented in lda.
 #' @export
 #' @examples
 #' m_step(n_dw = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -521,31 +421,6 @@ log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, 
 #' @param Pd_z Passed to \code{.plsa_joint_probability}.
 #' @param Pw_z Passed to \code{.plsa_joint_probability}.
 #' @return The value of \code{.plsa_joint_probability}.
-#' @references ----------
-#'   Hofmann, T. (1999) "Probabilistic Latent Semantic Analysis",
-#'   Proceedings of the Fifteenth Conference on Uncertainty in
-#'   Artificial Intelligence (UAI 1999), 289-296, arXiv:1301.6705.
-#'   Sec. 2 (LSA by SVD and the assessment of its theoretical
-#'   foundation), Sec. 3 (the aspect model, eq. (1) asymmetric and
-#'   eq. (2) symmetric parameterisations, the conditional independence
-#'   of d and w given z, and z as a bottleneck), and Sec. 3.2 (EM:
-#'   eq. (3) for the E step and eqs. (4)-(6) for the M step; maximum
-#'   likelihood as minimisation of the cross entropy or KL divergence
-#'   against the empirical distribution).
-#'   
-#'   NOTE: the text layer of the local PDF is garbled across the equation
-#'   region; the equations above were recovered by OCR (ocrpg.sh, 300 dpi
-#'   + tesseract) rather than by pdftotext.
-#'   
-#'   Deerwester, S., Dumais, S. T., Furnas, G. W., Landauer, T. K. &
-#'   Harshman, R. (1990) "Indexing by latent semantic analysis", Journal
-#'   of the American Society for Information Science 41(6), 391-407. The
-#'   LSA method this gives a probabilistic footing to.
-#'   
-#'   Blei, D. M., Ng, A. Y. & Jordan, M. I. (2003) "Latent Dirichlet
-#'   Allocation", Journal of Machine Learning Research 3, 993-1022. The
-#'   Dirichlet prior that removes the per-document parameter growth;
-#'   implemented in lda.
 #' @export
 #' @examples
 #' joint_probability(Pz = c(1, 2, 3, 4, 5, 6, 7, 8), Pd_z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
@@ -563,31 +438,6 @@ joint_probability <- function(Pz, Pd_z, Pw_z) .plsa_joint_probability(Pz, Pd_z, 
 #' @param Pd_z Passed to \code{.plsa_perplexity}.
 #' @param Pw_z Passed to \code{.plsa_perplexity}.
 #' @return The value of \code{.plsa_perplexity}.
-#' @references ----------
-#'   Hofmann, T. (1999) "Probabilistic Latent Semantic Analysis",
-#'   Proceedings of the Fifteenth Conference on Uncertainty in
-#'   Artificial Intelligence (UAI 1999), 289-296, arXiv:1301.6705.
-#'   Sec. 2 (LSA by SVD and the assessment of its theoretical
-#'   foundation), Sec. 3 (the aspect model, eq. (1) asymmetric and
-#'   eq. (2) symmetric parameterisations, the conditional independence
-#'   of d and w given z, and z as a bottleneck), and Sec. 3.2 (EM:
-#'   eq. (3) for the E step and eqs. (4)-(6) for the M step; maximum
-#'   likelihood as minimisation of the cross entropy or KL divergence
-#'   against the empirical distribution).
-#'   
-#'   NOTE: the text layer of the local PDF is garbled across the equation
-#'   region; the equations above were recovered by OCR (ocrpg.sh, 300 dpi
-#'   + tesseract) rather than by pdftotext.
-#'   
-#'   Deerwester, S., Dumais, S. T., Furnas, G. W., Landauer, T. K. &
-#'   Harshman, R. (1990) "Indexing by latent semantic analysis", Journal
-#'   of the American Society for Information Science 41(6), 391-407. The
-#'   LSA method this gives a probabilistic footing to.
-#'   
-#'   Blei, D. M., Ng, A. Y. & Jordan, M. I. (2003) "Latent Dirichlet
-#'   Allocation", Journal of Machine Learning Research 3, 993-1022. The
-#'   Dirichlet prior that removes the per-document parameter growth;
-#'   implemented in lda.
 #' @export
 #' @examples
 #' set.seed(1)

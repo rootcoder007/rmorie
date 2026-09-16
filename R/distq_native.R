@@ -82,13 +82,6 @@
 #' @param n_atoms Number of atoms N. Must be at least 2.
 #' @return A list with \code{z} (the atom positions) and \code{dz}
 #'   (the spacing).
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' atoms(v_min = -10, v_max = 10, n_atoms = 5)
@@ -118,13 +111,6 @@ atoms <- function(v_min, v_max, n_atoms) {
 #' @param probs Numeric vector of probabilities.
 #' @param z Numeric vector of atom positions.
 #' @return Scalar mean of the categorical distribution.
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -159,13 +145,6 @@ distribution_mean <- function(probs, z) {
 #' @param done Terminal flag; equivalent to \code{gamma = 0}.
 #' @return Numeric vector of length n_atoms: the projected target
 #'   probabilities, which sum to 1.
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' m <- categorical_projection(reward = 1, gamma = 0.9,
@@ -224,13 +203,6 @@ categorical_projection <- function(reward, gamma, next_probs, v_min, v_max,
 #' @param probs Numeric vector: the current distribution.
 #' @param eps Floor on the log to keep \code{p = 0} finite.
 #' @return Scalar cross-entropy.
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -258,13 +230,6 @@ categorical_loss <- function(m, probs, eps = 1e-12) {
 #' @param z Numeric vector of atom positions.
 #' @return A list with \code{action} (1-based R index) and \code{q_values}
 #'   (the per-action means).
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' greedy_action(next_probs_by_action = c(1, 2, 3, 4, 5, 6, 7, 8), z = 5L)
@@ -300,13 +265,6 @@ greedy_action <- function(next_probs_by_action, z) {
 #' @return Named list with \code{estimate}, \code{loss}, \code{target},
 #'   \code{action}, \code{q_values}, \code{q_target}, \code{q_current},
 #'   \code{atoms}, \code{n_atoms}, \code{method}.
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' r <- c51_update(reward = 1, gamma = 0.9,
@@ -357,13 +315,6 @@ c51_update <- function(reward, gamma, next_probs_by_action, current_probs,
 #' @param v_max Upper bound of the support.
 #' @param done Terminal flag.
 #' @return Scalar in \[0, 1\].
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' bernoulli_algorithm(reward = 1, gamma = 0.9, next_probs = rep(0.2, 5),
@@ -402,13 +353,6 @@ bernoulli_algorithm <- function(reward, gamma, next_probs, v_min, v_max,
 #' @return A list with \code{distribution} (the final categorical
 #'   distribution) and \code{info} (a named list with
 #'   \code{iterations}, \code{converged}, \code{shift}).
-#' @references ----------
-#'   Bellemare, M. G., Dabney, W. & Munos, R. (2017) "A Distributional
-#'   Perspective on Reinforcement Learning", ICML 2017 (arXiv:1707.06887)
-#'   eq. (7) and Algorithm 1. Rowland, M., Bellemare, M. G., Dabney, W.,
-#'   Munos, R. & Teh, Y. W. (2018) "An Analysis of Categorical
-#'   Distributional Reinforcement Learning", AISTATS 2018
-#'   (arXiv:1802.08163) contraction in Cramer distance.
 #' @export
 #' @examples
 #' r <- value_distribution_iteration(reward_atoms = c(0, 1),

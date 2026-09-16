@@ -115,10 +115,9 @@ morie_posspr <- function(n, alpha, seed = 0) {
        note       = "ties occur with POSITIVE probability, which is why the DP clusters")
 }
 
-#' @rdname morie_posspr
 #' Python name for \code{morie_posspr}
+#' @rdname morie_posspr
 #' @export
-#' @noRd
 sample_urn <- morie_posspr
 
 #' Predictive density

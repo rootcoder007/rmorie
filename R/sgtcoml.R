@@ -81,7 +81,6 @@
 #' @keywords internal
 #' @param A Argument `A`; see Usage.
 #' @return A list with components `comm`, `sweeps`, `estimate`, `communities`, `n_communities`, `modularity_before`, `n`, `method`.
-#' @references ' Source consulted: Blondel, Guillaume, Lambiotte and Lefebvre (2008), JSTAT
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

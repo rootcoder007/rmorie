@@ -232,27 +232,6 @@
 #' @return A list with \code{estimate}, \code{Q}, \code{residual_history},
 #' \code{final_residual}, \code{greedy_policy}, \code{used_replay},
 #' \code{used_target_network}, \code{C}, \code{method}.
-#' @references ----------
-#'   Mnih, V., Kavukcuoglu, K., Silver, D., Rusu, A. A., Veness, J.,
-#'   Bellemare, M. G., Graves, A., Riedmiller, M., Fidjeland, A. K.,
-#'   Ostrovski, G., Petersen, S., Beattie, C., Sadik, A., Antonoglou, I.,
-#'   King, H., Kumaran, D., Wierstra, D., Legg, S. & Hassabis, D. (2015)
-#'   "Human-level control through deep reinforcement learning", *Nature*
-#'   518(7540), 529-533, doi:10.1038/nature14236. The two key ideas:
-#'   experience replay, which randomises over the data to remove
-#'   correlations in the observation sequence and smooth over changes in
-#'   the data distribution; and an iterative update towards target values
-#'   that are only periodically updated, with theta^- held fixed between
-#'   updates and refreshed every C steps. The Methods section gives the
-#'   reward clipping to [-1, 1].
-#'   
-#'   Watkins, C. J. C. H. & Dayan, P. (1992) "Q-learning", *Machine
-#'   Learning* 8, 279-292, doi:10.1007/BF00992698. The learning rule
-#'   itself.
-#'   
-#'   Lin, L.-J. (1992) "Self-improving reactive agents based on
-#'   reinforcement learning, planning and teaching", *Machine Learning* 8,
-#'   293-321, doi:10.1007/BF00992699. Experience replay.
 #' @export
 #' @keywords internal
 morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,

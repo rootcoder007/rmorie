@@ -76,18 +76,6 @@
 #' @param loc Location.
 #' @param scale2 Squared scale.
 #' @return The log density.
-#' @references MacEachern, S.N., Clyde, M. and Liu, J.S. (1999) "Sequential
-#'       importance sampling for nonparametric Bayes models: the next
-#'       generation." Canadian Journal of Statistics 27(2), 251-267.
-#'     Fearnhead, P. (2004) "Particle filters for mixture models with an
-#'       unknown number of components." Statistics and Computing 14(1),
-#'       11-21.
-#'     Caron, F., Doucet, A. and Gottardo, R. (2012) "On-line changepoint
-#'       detection and parameter estimation with application to genomic
-#'       data." Statistics and Computing 22(2), 579-595. The ledger cites
-#'       this as 2017; the paper is 2012, and the year is corrected here
-#'       rather than repeated.
-#'     Escobar, M.D. and West, M. (1995) JASA 90(430), 577-588.
 #' @export
 #' @examples
 #' morie_snpest_t_logpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -115,18 +103,6 @@ morie_snpest_t_logpdf <- function(x, df, loc, scale2) {
 #' @param a0 Inverse-gamma shape.
 #' @param b0 Inverse-gamma scale.
 #' @return The log predictive density.
-#' @references MacEachern, S.N., Clyde, M. and Liu, J.S. (1999) "Sequential
-#'       importance sampling for nonparametric Bayes models: the next
-#'       generation." Canadian Journal of Statistics 27(2), 251-267.
-#'     Fearnhead, P. (2004) "Particle filters for mixture models with an
-#'       unknown number of components." Statistics and Computing 14(1),
-#'       11-21.
-#'     Caron, F., Doucet, A. and Gottardo, R. (2012) "On-line changepoint
-#'       detection and parameter estimation with application to genomic
-#'       data." Statistics and Computing 22(2), 579-595. The ledger cites
-#'       this as 2017; the paper is 2012, and the year is corrected here
-#'       rather than repeated.
-#'     Escobar, M.D. and West, M. (1995) JASA 90(430), 577-588.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -231,18 +207,6 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #' @return A list with the running log marginal likelihood, the expected
 #'   number of clusters after each point, the ESS trace, the resampling
 #'   times, and the filtered predictive density on the grid.
-#' @references MacEachern, S.N., Clyde, M. and Liu, J.S. (1999) "Sequential
-#'       importance sampling for nonparametric Bayes models: the next
-#'       generation." Canadian Journal of Statistics 27(2), 251-267.
-#'     Fearnhead, P. (2004) "Particle filters for mixture models with an
-#'       unknown number of components." Statistics and Computing 14(1),
-#'       11-21.
-#'     Caron, F., Doucet, A. and Gottardo, R. (2012) "On-line changepoint
-#'       detection and parameter estimation with application to genomic
-#'       data." Statistics and Computing 22(2), 579-595. The ledger cites
-#'       this as 2017; the paper is 2012, and the year is corrected here
-#'       rather than repeated.
-#'     Escobar, M.D. and West, M. (1995) JASA 90(430), 577-588.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -406,18 +370,6 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
 #' One-line summary of the snpest module
 #'
 #' @return A character scalar.
-#' @references MacEachern, S.N., Clyde, M. and Liu, J.S. (1999) "Sequential
-#'       importance sampling for nonparametric Bayes models: the next
-#'       generation." Canadian Journal of Statistics 27(2), 251-267.
-#'     Fearnhead, P. (2004) "Particle filters for mixture models with an
-#'       unknown number of components." Statistics and Computing 14(1),
-#'       11-21.
-#'     Caron, F., Doucet, A. and Gottardo, R. (2012) "On-line changepoint
-#'       detection and parameter estimation with application to genomic
-#'       data." Statistics and Computing 22(2), 579-595. The ledger cites
-#'       this as 2017; the paper is 2012, and the year is corrected here
-#'       rather than repeated.
-#'     Escobar, M.D. and West, M. (1995) JASA 90(430), 577-588.
 #' @export
 #' @examples
 #' morie_snpest_cheatsheet()

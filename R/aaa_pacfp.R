@@ -15,6 +15,9 @@
 
 #' morie_partial_autocorrelation
 #'
+#' @param y Argument `y`; see Usage.
+#' @param lag_max Argument `lag_max`; see Usage.
+#' @return A list with `pacf`, `acf`, `phi`, `lag_max`, `n`, `method`.
 #' @examples
 #' rmorie:::morie_partial_autocorrelation(y = c(1, 2, 3, 4, 5, 6, 7, 8), lag_max = 5L)
 #' @keywords internal

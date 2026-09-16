@@ -88,15 +88,6 @@
 #' @param metric A member of the metric list.
 #' @return A list with the distances and the neighbour indices, the
 #'   latter zero-based to match the Python arm.
-#' @references Clark, P.J. and Evans, F.C. (1954) "Distance to nearest neighbor as
-#'       a measure of spatial relationships in populations." Ecology 35(4),
-#'       445-453.
-#'     Donnelly, K. (1978) "Simulations to determine the variance and
-#'       edge-effect of total nearest neighbour distance." In I. Hodder
-#'       (ed.), Simulation Methods in Archaeology, Cambridge University
-#'       Press, 91-95.
-#'     Diggle, P.J. (2003) "Statistical Analysis of Spatial Point
-#'       Patterns," 2nd edition. Arnold, chapter 2.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -152,15 +143,6 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 #' @param edge "none" or "donnelly".
 #' @return A list with R, the observed and expected means, the standard
 #'   error, z and p.
-#' @references Clark, P.J. and Evans, F.C. (1954) "Distance to nearest neighbor as
-#'       a measure of spatial relationships in populations." Ecology 35(4),
-#'       445-453.
-#'     Donnelly, K. (1978) "Simulations to determine the variance and
-#'       edge-effect of total nearest neighbour distance." In I. Hodder
-#'       (ed.), Simulation Methods in Archaeology, Cambridge University
-#'       Press, 91-95.
-#'     Diggle, P.J. (2003) "Statistical Analysis of Spatial Point
-#'       Patterns," 2nd edition. Arnold, chapter 2.
 #' @export
 #' @examples
 #' morie_lcfsdq_clark_evans(dists = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, area = 5L,
@@ -209,15 +191,6 @@ morie_lcfsdq_clark_evans <- function(dists, n, area, perimeter,
 #'   index and test, the neighbourhood radius, per-point local means and
 #'   counts, the points flagged as locally clustered or isolated, and
 #'   the G function against its complete-spatial-randomness expectation.
-#' @references Clark, P.J. and Evans, F.C. (1954) "Distance to nearest neighbor as
-#'       a measure of spatial relationships in populations." Ecology 35(4),
-#'       445-453.
-#'     Donnelly, K. (1978) "Simulations to determine the variance and
-#'       edge-effect of total nearest neighbour distance." In I. Hodder
-#'       (ed.), Simulation Methods in Archaeology, Cambridge University
-#'       Press, 91-95.
-#'     Diggle, P.J. (2003) "Statistical Analysis of Spatial Point
-#'       Patterns," 2nd edition. Arnold, chapter 2.
 #' @export
 #' @examples
 #' ii <- 0:35
@@ -311,15 +284,6 @@ morie_lcfsdq <- function(x, coords, k = 1L, metric = "euclidean",
 #' One-line summary of the lcfsdq module
 #'
 #' @return A character scalar.
-#' @references Clark, P.J. and Evans, F.C. (1954) "Distance to nearest neighbor as
-#'       a measure of spatial relationships in populations." Ecology 35(4),
-#'       445-453.
-#'     Donnelly, K. (1978) "Simulations to determine the variance and
-#'       edge-effect of total nearest neighbour distance." In I. Hodder
-#'       (ed.), Simulation Methods in Archaeology, Cambridge University
-#'       Press, 91-95.
-#'     Diggle, P.J. (2003) "Statistical Analysis of Spatial Point
-#'       Patterns," 2nd edition. Arnold, chapter 2.
 #' @export
 #' @examples
 #' morie_lcfsdq_cheatsheet()

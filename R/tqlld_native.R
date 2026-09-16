@@ -199,8 +199,7 @@ morie_quantize_with_codebook <- function(x, codebook) {
        method = "Nearest-codeword quantisation")
 }
 
-#' @rdname morie_tqlld
 #' Public alias resolved by fn/_lazy_map.json
+#' @rdname morie_tqlld
 #' @export
-#' @noRd
 morie_lloyd_max_codebook <- morie_tqlld

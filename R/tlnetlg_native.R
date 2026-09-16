@@ -123,32 +123,6 @@
 #' @param friends A vector; its length is taken and its elements indexed.
 #' @return A list with \code{N}, \code{degrees}, \code{max_degree}, \code{mean_degree},
 #' \code{max_share}, \code{sparse}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
-#'   Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 20 (Sofrygin
-#'   & van der Laan): existing causal inference assumes n independent,
-#'   causally unconnected units, so causal models need only describe
-#'   relations within a unit and inference rests on n independent
-#'   realisations; in many cluster randomized trials or observational
-#'   studies of few communities the number of independent units is not
-#'   large enough for limit-distribution inference; the extreme case of a
-#'   single community of causally connected individuals and whether a
-#'   community-level intervention\'s effect on a community-level outcome can
-#'   still be evaluated; and the requirement that causal models incorporate
-#'   all units and that identifiability be established under minimal
-#'   assumptions WITHOUT relying on asymptotics in a number of independent
-#'   units. Chap. 21 (the restriction of dependence to the known network
-#'   and the condition that |F_i|/N vanishes).
-#'   
-#'   Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
-#'   and Inference for the Mean Outcome of the Single Time-Point
-#'   Intervention in a Causally Connected Population", *Journal of Causal
-#'   Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
-#'   
-#'   Ogburn, E. L. & VanderWeele, T. J. (2014) "Causal Diagrams for
-#'   Interference", *Statistical Science* 29(4), 559-578,
-#'   doi:10.1214/14-STS501.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -189,32 +163,6 @@ morie_tlnetlg_network_summary <- function(friends) {
 #' @param kind One of \code{"any"}, \code{"count"}, \code{"fraction"}. Defaults to
 #' \code{"fraction"}.
 #' @return A list with \code{summary}, \code{kind}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
-#'   Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 20 (Sofrygin
-#'   & van der Laan): existing causal inference assumes n independent,
-#'   causally unconnected units, so causal models need only describe
-#'   relations within a unit and inference rests on n independent
-#'   realisations; in many cluster randomized trials or observational
-#'   studies of few communities the number of independent units is not
-#'   large enough for limit-distribution inference; the extreme case of a
-#'   single community of causally connected individuals and whether a
-#'   community-level intervention\'s effect on a community-level outcome can
-#'   still be evaluated; and the requirement that causal models incorporate
-#'   all units and that identifiability be established under minimal
-#'   assumptions WITHOUT relying on asymptotics in a number of independent
-#'   units. Chap. 21 (the restriction of dependence to the known network
-#'   and the condition that |F_i|/N vanishes).
-#'   
-#'   Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
-#'   and Inference for the Mean Outcome of the Single Time-Point
-#'   Intervention in a Causally Connected Population", *Journal of Causal
-#'   Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
-#'   
-#'   Ogburn, E. L. & VanderWeele, T. J. (2014) "Causal Diagrams for
-#'   Interference", *Statistical Science* 29(4), 559-578,
-#'   doi:10.1214/14-STS501.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -268,32 +216,6 @@ morie_tlnetlg_exposure_summary <- function(A, friends, kind = "fraction") {
 #' @param W Passed to \code{.tlnetlg_mat}.
 #' @param policy Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{psi}, \code{assigned}, \code{individual}, \code{N}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
-#'   Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 20 (Sofrygin
-#'   & van der Laan): existing causal inference assumes n independent,
-#'   causally unconnected units, so causal models need only describe
-#'   relations within a unit and inference rests on n independent
-#'   realisations; in many cluster randomized trials or observational
-#'   studies of few communities the number of independent units is not
-#'   large enough for limit-distribution inference; the extreme case of a
-#'   single community of causally connected individuals and whether a
-#'   community-level intervention\'s effect on a community-level outcome can
-#'   still be evaluated; and the requirement that causal models incorporate
-#'   all units and that identifiability be established under minimal
-#'   assumptions WITHOUT relying on asymptotics in a number of independent
-#'   units. Chap. 21 (the restriction of dependence to the known network
-#'   and the condition that |F_i|/N vanishes).
-#'   
-#'   Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
-#'   and Inference for the Mean Outcome of the Single Time-Point
-#'   Intervention in a Causally Connected Population", *Journal of Causal
-#'   Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
-#'   
-#'   Ogburn, E. L. & VanderWeele, T. J. (2014) "Causal Diagrams for
-#'   Interference", *Statistical Science* 29(4), 559-578,
-#'   doi:10.1214/14-STS501.
-#'   """
 #' @export
 #' @keywords internal
 morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {
@@ -336,32 +258,6 @@ morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {
 #' @param friends A vector; its length is taken and its elements indexed.
 #' @return A list with \code{se}, \code{se_naive}, \code{n_dependent_pairs},
 #' \code{ratio}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
-#'   Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 20 (Sofrygin
-#'   & van der Laan): existing causal inference assumes n independent,
-#'   causally unconnected units, so causal models need only describe
-#'   relations within a unit and inference rests on n independent
-#'   realisations; in many cluster randomized trials or observational
-#'   studies of few communities the number of independent units is not
-#'   large enough for limit-distribution inference; the extreme case of a
-#'   single community of causally connected individuals and whether a
-#'   community-level intervention\'s effect on a community-level outcome can
-#'   still be evaluated; and the requirement that causal models incorporate
-#'   all units and that identifiability be established under minimal
-#'   assumptions WITHOUT relying on asymptotics in a number of independent
-#'   units. Chap. 21 (the restriction of dependence to the known network
-#'   and the condition that |F_i|/N vanishes).
-#'   
-#'   Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
-#'   and Inference for the Mean Outcome of the Single Time-Point
-#'   Intervention in a Causally Connected Population", *Journal of Causal
-#'   Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
-#'   
-#'   Ogburn, E. L. & VanderWeele, T. J. (2014) "Causal Diagrams for
-#'   Interference", *Statistical Science* 29(4), 559-578,
-#'   doi:10.1214/14-STS501.
-#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -419,32 +315,6 @@ morie_tlnetlg_network_variance <- function(ic, friends) {
 #' @param T Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{T},
 #' \code{network}, \code{method}, \code{note}.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
-#'   Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 20 (Sofrygin
-#'   & van der Laan): existing causal inference assumes n independent,
-#'   causally unconnected units, so causal models need only describe
-#'   relations within a unit and inference rests on n independent
-#'   realisations; in many cluster randomized trials or observational
-#'   studies of few communities the number of independent units is not
-#'   large enough for limit-distribution inference; the extreme case of a
-#'   single community of causally connected individuals and whether a
-#'   community-level intervention\'s effect on a community-level outcome can
-#'   still be evaluated; and the requirement that causal models incorporate
-#'   all units and that identifiability be established under minimal
-#'   assumptions WITHOUT relying on asymptotics in a number of independent
-#'   units. Chap. 21 (the restriction of dependence to the known network
-#'   and the condition that |F_i|/N vanishes).
-#'   
-#'   Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
-#'   and Inference for the Mean Outcome of the Single Time-Point
-#'   Intervention in a Causally Connected Population", *Journal of Causal
-#'   Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
-#'   
-#'   Ogburn, E. L. & VanderWeele, T. J. (2014) "Causal Diagrams for
-#'   Interference", *Statistical Science* 29(4), 559-578,
-#'   doi:10.1214/14-STS501.
-#'   """
 #' @export
 #' @keywords internal
 morie_tlnetlg_longitudinal_network_gcomp <- function(Q_seq, friends, W, policy, T) {
@@ -486,32 +356,6 @@ morie_tlnetlg_longitudinal_network_gcomp <- function(Q_seq, friends, W, policy, 
 #' the source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
-#'   Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 20 (Sofrygin
-#'   & van der Laan): existing causal inference assumes n independent,
-#'   causally unconnected units, so causal models need only describe
-#'   relations within a unit and inference rests on n independent
-#'   realisations; in many cluster randomized trials or observational
-#'   studies of few communities the number of independent units is not
-#'   large enough for limit-distribution inference; the extreme case of a
-#'   single community of causally connected individuals and whether a
-#'   community-level intervention\'s effect on a community-level outcome can
-#'   still be evaluated; and the requirement that causal models incorporate
-#'   all units and that identifiability be established under minimal
-#'   assumptions WITHOUT relying on asymptotics in a number of independent
-#'   units. Chap. 21 (the restriction of dependence to the known network
-#'   and the condition that |F_i|/N vanishes).
-#'   
-#'   Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
-#'   and Inference for the Mean Outcome of the Single Time-Point
-#'   Intervention in a Causally Connected Population", *Journal of Causal
-#'   Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
-#'   
-#'   Ogburn, E. L. & VanderWeele, T. J. (2014) "Causal Diagrams for
-#'   Interference", *Statistical Science* 29(4), 559-578,
-#'   doi:10.1214/14-STS501.
-#'   """
 #' @export
 #' @examples
 #' morie_tlnetlg_cheatsheet()

@@ -59,14 +59,6 @@
 #' @param tau See Usage.
 #' @param rho See Usage.
 #' @return A numeric value.
-#' @references Banerjee, S., Carlin, B. P. and Gelfand, A. E. (2014) Hierarchical
-#'   Modeling and Analysis for Spatial Data, 2nd edn, Monographs on
-#'   Statistics and Applied Probability 135, Chapman & Hall/CRC, Boca Raton,
-#'   ISBN 978-1-4398-1917-3 -- Ch. 4 (proper and intrinsic CAR) and Ch. 6
-#'   (Poisson-CAR disease mapping).
-#'   Besag, J., York, J. and Mollie, A. (1991) "Bayesian image restoration,
-#'   with two applications in spatial statistics", Annals of the Institute
-#'   of Statistical Mathematics 43(1), 1-20, doi:10.1007/BF00116466.
 #' @export
 #' @examples
 #' W <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
@@ -85,14 +77,6 @@ morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
 #' The propriety interval for rho
 #' @param W See Usage.
 #' @return A list with `lower`, `upper`, `eigenvalues`.
-#' @references Banerjee, S., Carlin, B. P. and Gelfand, A. E. (2014) Hierarchical
-#'   Modeling and Analysis for Spatial Data, 2nd edn, Monographs on
-#'   Statistics and Applied Probability 135, Chapman & Hall/CRC, Boca Raton,
-#'   ISBN 978-1-4398-1917-3 -- Ch. 4 (proper and intrinsic CAR) and Ch. 6
-#'   (Poisson-CAR disease mapping).
-#'   Besag, J., York, J. and Mollie, A. (1991) "Bayesian image restoration,
-#'   with two applications in spatial statistics", Annals of the Institute
-#'   of Statistical Mathematics 43(1), 1-20, doi:10.1007/BF00116466.
 #' @export
 #' @examples
 #' W <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
@@ -461,14 +445,6 @@ morie_poisson_spatial_glm <- morie_poissp
 #' source it follows.
 #'
 #' @return A character value.
-#' @references Banerjee, S., Carlin, B. P. and Gelfand, A. E. (2014) Hierarchical
-#'   Modeling and Analysis for Spatial Data, 2nd edn, Monographs on
-#'   Statistics and Applied Probability 135, Chapman & Hall/CRC, Boca Raton,
-#'   ISBN 978-1-4398-1917-3 -- Ch. 4 (proper and intrinsic CAR) and Ch. 6
-#'   (Poisson-CAR disease mapping).
-#'   Besag, J., York, J. and Mollie, A. (1991) "Bayesian image restoration,
-#'   with two applications in spatial statistics", Annals of the Institute
-#'   of Statistical Mathematics 43(1), 1-20, doi:10.1007/BF00116466.
 #' @export
 #' @examples
 #' morie_poissp_cheatsheet()

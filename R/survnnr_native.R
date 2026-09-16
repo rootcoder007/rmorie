@@ -118,22 +118,6 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param activation Passed to \code{.survnnr_act}. Defaults to \code{"tanh"}.
 #' @return A list with \code{output}, \code{pre}, \code{acts}.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @examples
 #' morie_survnnr_forward(W = 5L, b = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -165,22 +149,6 @@ morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
 #' @param events A vector; its length is taken and its elements indexed.
 #' @param risk A vector; its length is taken and its elements indexed.
 #' @return A list with \code{loglik}, \code{average}, \code{n_events}, \code{ties}.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @examples
 #' morie_survnnr_partial_loglik(times = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -255,22 +223,6 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 #' \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk},
 #' \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties},
 #' \code{scale_note}, \code{method}.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @examples
 #' set.seed(1); n <- 40
@@ -361,22 +313,6 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
 #' @param fit_result A list; the body reads \code{$activation}, \code{$b}, \code{$W} from it.
 #' @param X Iterated over elementwise, with \code{sapply}.
 #' @return A vector, from \code{sapply}.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -396,22 +332,6 @@ morie_survnnr_risk_score <- function(fit_result, X) {
 #'
 #' @param fit_result A list; the body reads \code{$events}, \code{$risk}, \code{$times} from it.
 #' @return A list with \code{time}, \code{cumulative_hazard}.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @keywords internal
 morie_survnnr_baseline_hazard <- function(fit_result) {
@@ -446,22 +366,6 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
 #' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
 #' @return A list with \code{time}, \code{survival}.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @keywords internal
 morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
@@ -528,22 +432,6 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
 #' @param times Passed to \code{.survnnr_c_index}.
 #' @param events Passed to \code{.survnnr_c_index}.
 #' @return The value of \code{.survnnr_c_index}.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @examples
 #' morie_survnnr_concordance(fit_result = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
@@ -561,22 +449,6 @@ morie_survnnr_concordance <- function(fit_result, X, times, events) {
 #' the source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Katzman, J. L., Shaham, U., Cloninger, A., Bates, J., Jiang, T. & Kluger, Y.
-#'   (2018) "DeepSurv: personalized treatment recommender system using a Cox
-#'   proportional hazards deep neural network", BMC Medical Research Methodology
-#'   18, 24, doi:10.1186/s12874-018-0482-1. Sec. "DeepSurv" for the architecture
-#'   and for the objective, the average negative log partial likelihood with L2
-#'   regularisation.
-#'   
-#'   Cox, D. R. (1972) "Regression Models and Life-Tables", Journal of the Royal
-#'   Statistical Society. Series B 34(2), 187-220, doi:10.1111/j.2517-6161.1972
-#'   .tb00899.x, for the partial likelihood and the fact that it leaves the
-#'   baseline hazard unspecified.
-#'   
-#'   Breslow, N. (1974) "Covariance Analysis of Censored Survival Data",
-#'   Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
-#'   baseline cumulative hazard estimator used here.
 #' @export
 #' @examples
 #' morie_survnnr_cheatsheet()

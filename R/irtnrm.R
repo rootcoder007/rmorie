@@ -15,6 +15,10 @@
 
 #' morie_nominal_response
 #'
+#' @param theta Argument `theta`; see Usage.
+#' @param a Argument `a`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @return A list with `p`, `expected`, `info`, `test_info`, `theta`, `a`, `c`, `ncat`, `n`, `k`, `method`.
 #' @examples
 #' rmorie:::morie_nominal_response(theta = 0.5, a = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
 #'   c = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))

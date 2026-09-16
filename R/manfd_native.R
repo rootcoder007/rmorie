@@ -60,18 +60,6 @@
 #' @param Y A matrix with one curve per row.
 #' @param grid The sampling points, or NULL for the integers.
 #' @return The distance matrix.
-#' @references Chen, D. and Mueller, H.-G. (2012) "Nonlinear manifold
-#'       representations for functional data." The Annals of Statistics
-#'       40(1), 1-29. doi:10.1214/11-AOS936.
-#'     Tenenbaum, J.B., de Silva, V. and Langford, J.C. (2000) "A global
-#'       geometric framework for nonlinear dimensionality reduction."
-#'       Science 290(5500), 2319-2323.
-#'     Torgerson, W.S. (1952) "Multidimensional scaling: I. Theory and
-#'       method." Psychometrika 17(4), 401-419.
-#'     Floyd, R.W. (1962) "Algorithm 97: shortest path." Communications of
-#'       the ACM 5(6), 345.
-#'     Jacobi, C.G.J. (1846) Journal fuer die reine und angewandte
-#'       Mathematik 30, 51-94.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -114,18 +102,6 @@ morie_manfd_l2 <- function(Y, grid = NULL) {
 #' @param k Neighbours per point.
 #' @param symmetric Whether to symmetrise by union.
 #' @return The adjacency matrix, infinite where there is no edge.
-#' @references Chen, D. and Mueller, H.-G. (2012) "Nonlinear manifold
-#'       representations for functional data." The Annals of Statistics
-#'       40(1), 1-29. doi:10.1214/11-AOS936.
-#'     Tenenbaum, J.B., de Silva, V. and Langford, J.C. (2000) "A global
-#'       geometric framework for nonlinear dimensionality reduction."
-#'       Science 290(5500), 2319-2323.
-#'     Torgerson, W.S. (1952) "Multidimensional scaling: I. Theory and
-#'       method." Psychometrika 17(4), 401-419.
-#'     Floyd, R.W. (1962) "Algorithm 97: shortest path." Communications of
-#'       the ACM 5(6), 345.
-#'     Jacobi, C.G.J. (1846) Journal fuer die reine und angewandte
-#'       Mathematik 30, 51-94.
 #' @export
 #' @examples
 #' N <- 18L
@@ -164,18 +140,6 @@ morie_manfd_knn <- function(D, k, symmetric = TRUE) {
 #'
 #' @param A An adjacency matrix.
 #' @return A list with the geodesic matrix and the component count.
-#' @references Chen, D. and Mueller, H.-G. (2012) "Nonlinear manifold
-#'       representations for functional data." The Annals of Statistics
-#'       40(1), 1-29. doi:10.1214/11-AOS936.
-#'     Tenenbaum, J.B., de Silva, V. and Langford, J.C. (2000) "A global
-#'       geometric framework for nonlinear dimensionality reduction."
-#'       Science 290(5500), 2319-2323.
-#'     Torgerson, W.S. (1952) "Multidimensional scaling: I. Theory and
-#'       method." Psychometrika 17(4), 401-419.
-#'     Floyd, R.W. (1962) "Algorithm 97: shortest path." Communications of
-#'       the ACM 5(6), 345.
-#'     Jacobi, C.G.J. (1846) Journal fuer die reine und angewandte
-#'       Mathematik 30, 51-94.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -214,18 +178,6 @@ morie_manfd_paths <- function(A) {
 #' @param sweeps The number of sweeps.
 #' @return A list with descending eigenvalues and their vectors as
 #'   columns, each signed so its largest-magnitude entry is positive.
-#' @references Chen, D. and Mueller, H.-G. (2012) "Nonlinear manifold
-#'       representations for functional data." The Annals of Statistics
-#'       40(1), 1-29. doi:10.1214/11-AOS936.
-#'     Tenenbaum, J.B., de Silva, V. and Langford, J.C. (2000) "A global
-#'       geometric framework for nonlinear dimensionality reduction."
-#'       Science 290(5500), 2319-2323.
-#'     Torgerson, W.S. (1952) "Multidimensional scaling: I. Theory and
-#'       method." Psychometrika 17(4), 401-419.
-#'     Floyd, R.W. (1962) "Algorithm 97: shortest path." Communications of
-#'       the ACM 5(6), 345.
-#'     Jacobi, C.G.J. (1846) Journal fuer die reine und angewandte
-#'       Mathematik 30, 51-94.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -294,18 +246,6 @@ morie_manfd_jacobi <- function(A, sweeps = 60L) {
 #' @param sweeps Jacobi sweeps.
 #' @return A list with the coordinates, the eigenvalues, the count of
 #'   negative eigenvalues and the centred matrix.
-#' @references Chen, D. and Mueller, H.-G. (2012) "Nonlinear manifold
-#'       representations for functional data." The Annals of Statistics
-#'       40(1), 1-29. doi:10.1214/11-AOS936.
-#'     Tenenbaum, J.B., de Silva, V. and Langford, J.C. (2000) "A global
-#'       geometric framework for nonlinear dimensionality reduction."
-#'       Science 290(5500), 2319-2323.
-#'     Torgerson, W.S. (1952) "Multidimensional scaling: I. Theory and
-#'       method." Psychometrika 17(4), 401-419.
-#'     Floyd, R.W. (1962) "Algorithm 97: shortest path." Communications of
-#'       the ACM 5(6), 345.
-#'     Jacobi, C.G.J. (1846) Journal fuer die reine und angewandte
-#'       Mathematik 30, 51-94.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -344,18 +284,6 @@ morie_manfd_scaling <- function(D, dim = 2L, sweeps = 60L) {
 #' @return A list with the coordinates, the eigenvalues, the geodesic
 #'   distances, the number of connected components and the residual
 #'   variance of the embedding.
-#' @references Chen, D. and Mueller, H.-G. (2012) "Nonlinear manifold
-#'       representations for functional data." The Annals of Statistics
-#'       40(1), 1-29. doi:10.1214/11-AOS936.
-#'     Tenenbaum, J.B., de Silva, V. and Langford, J.C. (2000) "A global
-#'       geometric framework for nonlinear dimensionality reduction."
-#'       Science 290(5500), 2319-2323.
-#'     Torgerson, W.S. (1952) "Multidimensional scaling: I. Theory and
-#'       method." Psychometrika 17(4), 401-419.
-#'     Floyd, R.W. (1962) "Algorithm 97: shortest path." Communications of
-#'       the ACM 5(6), 345.
-#'     Jacobi, C.G.J. (1846) Journal fuer die reine und angewandte
-#'       Mathematik 30, 51-94.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -421,18 +349,6 @@ morie_manfd <- function(Y, k = 4L, method = "isomap", grid = NULL,
 #' One-line summary of the manfd module
 #'
 #' @return A character scalar.
-#' @references Chen, D. and Mueller, H.-G. (2012) "Nonlinear manifold
-#'       representations for functional data." The Annals of Statistics
-#'       40(1), 1-29. doi:10.1214/11-AOS936.
-#'     Tenenbaum, J.B., de Silva, V. and Langford, J.C. (2000) "A global
-#'       geometric framework for nonlinear dimensionality reduction."
-#'       Science 290(5500), 2319-2323.
-#'     Torgerson, W.S. (1952) "Multidimensional scaling: I. Theory and
-#'       method." Psychometrika 17(4), 401-419.
-#'     Floyd, R.W. (1962) "Algorithm 97: shortest path." Communications of
-#'       the ACM 5(6), 345.
-#'     Jacobi, C.G.J. (1846) Journal fuer die reine und angewandte
-#'       Mathematik 30, 51-94.
 #' @export
 #' @examples
 #' morie_manfd_cheatsheet()

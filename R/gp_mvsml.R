@@ -8,6 +8,9 @@
 
 #' morie_pinv
 #'
+#' @param A Argument `A`; see Usage.
+#' @param rcond Argument `rcond`; see Usage.
+#' @return The value of `%*%`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_pinv(V)
@@ -22,6 +25,9 @@ morie_pinv <- function(A, rcond = 1e-15) {
 
 #' morie_solve
 #'
+#' @param A Argument `A`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @return The value of `out`, as built in the body.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_solve(V)
@@ -203,6 +209,10 @@ morie_ridge <- function(X, y, lambda, add_intercept = TRUE) {
 
 #' morie_epe
 #'
+#' @param sigma2 Argument `sigma2`; see Usage.
+#' @param x_star Argument `x_star`; see Usage.
+#' @param eigenvalues Argument `eigenvalues`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' rmorie:::morie_epe(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -280,6 +290,9 @@ morie_brier <- function(probs, y_true, halved = FALSE) {
 
 #' morie_mll
 #'
+#' @param probs Argument `probs`; see Usage.
+#' @param y_true Argument `y_true`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' S <- c("a", "b", "c")
@@ -295,6 +308,9 @@ morie_mll <- function(probs, y_true) {
 
 #' morie_kron
 #'
+#' @param A Argument `A`; see Usage.
+#' @param B Argument `B`; see Usage.
+#' @return The value of `kronecker`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_kron(V, V)
@@ -303,6 +319,10 @@ morie_kron <- function(A, B) kronecker(as.matrix(A), as.matrix(B))
 
 #' morie_lmm_v
 #'
+#' @param Z Argument `Z`; see Usage.
+#' @param D Argument `D`; see Usage.
+#' @param R Argument `R`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' rmorie:::morie_lmm_v(Z = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
 #' @keywords internal
@@ -508,6 +528,10 @@ morie_gxe_multitrait <- function(Y, Z_L, Z_EL, G, Sigma_T,
 
 #' morie_scaled_inv_chisq
 #'
+#' @param nu Argument `nu`; see Usage.
+#' @param S Argument `S`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_scaled_inv_chisq(V, V)
@@ -518,6 +542,12 @@ morie_scaled_inv_chisq <- function(nu, S, n = 1L) {
 
 #' morie_brr_hyper
 #'
+#' @param y Argument `y`; see Usage.
+#' @param R2 Argument `R2`; see Usage.
+#' @param nu Argument `nu`; see Usage.
+#' @param nu_beta Argument `nu_beta`; see Usage.
+#' @param sum_var_x Argument `sum_var_x`; see Usage.
+#' @return A list with `S`, `S_beta`, `nu`, `nu_beta`, `var_y`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_brr_hyper(V)
@@ -535,6 +565,8 @@ morie_brr_hyper <- function(y, R2 = 0.5, nu = 5, nu_beta = 5,
 
 #' morie_chol_lower
 #'
+#' @param G Argument `G`; see Usage.
+#' @return A matrix, from `t`.
 #' @examples
 #' set.seed(1)
 #' n <- 12
@@ -609,6 +641,13 @@ morie_bayes_gblup <- function(y, G, n_iter = 2000L,
 
 #' morie_rkhs_cov
 #'
+#' @param Z_L Argument `Z_L`; see Usage.
+#' @param G Argument `G`; see Usage.
+#' @param Z_LE Argument `Z_LE`; see Usage.
+#' @param I_env Argument `I_env`; see Usage.
+#' @param sigma2_g Argument `sigma2_g`; see Usage.
+#' @param sigma2_ge Argument `sigma2_ge`; see Usage.
+#' @return The value of `out`, as built in the body.
 #' @examples
 #' set.seed(1)
 #' n <- 12
@@ -631,6 +670,11 @@ morie_rkhs_cov <- function(Z_L, G, Z_LE = NULL, I_env = NULL,
 
 #' morie_extended_predictor
 #'
+#' @param n Argument `n`; see Usage.
+#' @param X_E Argument `X_E`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param X_EM Argument `X_EM`; see Usage.
+#' @return A list with `design`, `widths`, `n_columns`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_extended_predictor(V)
@@ -658,6 +702,9 @@ morie_extended_predictor <- function(n, X_E = NULL, X = NULL,
 
 #' morie_inv_wishart
 #'
+#' @param nu Argument `nu`; see Usage.
+#' @param S Argument `S`; see Usage.
+#' @return The value of `morie_pinv`.
 #' @examples
 #' rmorie:::morie_inv_wishart(nu = 0.5, S = 5L)
 #' @keywords internal
@@ -741,6 +788,11 @@ morie_ordinal_probs <- function(eta, thresholds,
 
 #' morie_rtruncnorm
 #'
+#' @param mean Argument `mean`; see Usage.
+#' @param sd Argument `sd`; see Usage.
+#' @param lo Argument `lo`; see Usage.
+#' @param hi Argument `hi`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' rmorie:::morie_rtruncnorm(0, 1, 0.5, 1.5)
 #' @keywords internal
@@ -868,6 +920,14 @@ morie_penalized_multinomial <- function(X, y, beta0, beta,
 
 #' morie_multinomial_block
 #'
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @param lambda Argument `lambda`; see Usage.
+#' @param cls Argument `cls`; see Usage.
+#' @param baseline_last Argument `baseline_last`; see Usage.
+#' @return A list with `beta0`, `beta`, `weights`, `working_response`.
 #' @examples
 #' set.seed(7)
 #' X <- matrix(rnorm(60), 30, 2)
@@ -902,6 +962,9 @@ morie_multinomial_block <- function(X, y, beta0, beta, lambda,
 
 #' morie_poisson_pmf
 #'
+#' @param y Argument `y`; see Usage.
+#' @param lambda Argument `lambda`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_poisson_pmf(V, V)
@@ -986,6 +1049,9 @@ morie_kernel_matrix <- function(X, kernel = "linear",
 
 #' morie_is_psd
 #'
+#' @param K Argument `K`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `psd`, `eigenvalues`.
 #' @examples
 #' rmorie:::morie_is_psd(K = 5L)
 #' @keywords internal
@@ -997,6 +1063,9 @@ morie_is_psd <- function(K, tol = 1e-9) {
 
 #' morie_rkhs_norm
 #'
+#' @param beta Argument `beta`; see Usage.
+#' @param K Argument `K`; see Usage.
+#' @return A vector.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_rkhs_norm(V, V)
@@ -1076,6 +1145,9 @@ morie_arccos_kernel <- function(X, Z = NULL, depth = 1L,
 
 #' morie_hadamard
 #'
+#' @param A Argument `A`; see Usage.
+#' @param B Argument `B`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_hadamard(V, V)
@@ -1290,6 +1362,10 @@ morie_svm_fit_dual <- function(X, y, C = NULL, n_iter = 4000L,
 
 #' morie_act
 #'
+#' @param name Argument `name`; see Usage.
+#' @param z Argument `z`; see Usage.
+#' @param deriv Argument `deriv`; see Usage.
+#' @return The value of `stop`.
 #' @examples
 #' rmorie:::morie_act("relu", c(-1, 0.5))
 #' @keywords internal
@@ -1337,6 +1413,9 @@ morie_ann_forward <- function(X, W, activations = NULL) {
 
 #' morie_ann_sse
 #'
+#' @param y_hat Argument `y_hat`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A numeric value.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_ann_sse(V, V)
@@ -1391,6 +1470,12 @@ morie_ann_train <- function(X, y, W, eta = 0.1, n_iter = 500L,
 
 #' morie_ann_numeric_gradient
 #'
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param W Argument `W`; see Usage.
+#' @param activations Argument `activations`; see Usage.
+#' @param eps Argument `eps`; see Usage.
+#' @return The value of `lapply`.
 #' @examples
 #' rmorie:::morie_ann_numeric_gradient(X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   y = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8))

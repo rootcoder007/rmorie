@@ -319,16 +319,6 @@
 #' \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight},
 #' \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n},
 #' \code{n_times}, \code{contrast}, \code{method}.
-#' @references ----------
-#'   Robins, J. M. & Hernan, M. A. (2009) "Estimation of the causal effects
-#'   of time-varying exposures", in Fitzmaurice, G., Davidian, M.,
-#'   Verbeke, G. & Molenberghs, G. (eds.), Longitudinal Data Analysis,
-#'   Chapman & Hall/CRC Handbooks of Modern Statistical Methods, 553-599,
-#'   doi:10.1201/9781420011579.ch23.
-#'   
-#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
-#'   Chapman & Hall/CRC, Sec. 12.5 (effect modification and marginal
-#'   structural models) and Sec. 21.2 (the time-varying weights).
 #' @export
 #' @keywords internal
 morie_mfovsm <- function(y, feature, A, H, v_in_numerator = TRUE,
@@ -462,16 +452,6 @@ mfovsm <- morie_mfovsm
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Robins, J. M. & Hernan, M. A. (2009) "Estimation of the causal effects
-#'   of time-varying exposures", in Fitzmaurice, G., Davidian, M.,
-#'   Verbeke, G. & Molenberghs, G. (eds.), Longitudinal Data Analysis,
-#'   Chapman & Hall/CRC Handbooks of Modern Statistical Methods, 553-599,
-#'   doi:10.1201/9781420011579.ch23.
-#'   
-#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
-#'   Chapman & Hall/CRC, Sec. 12.5 (effect modification and marginal
-#'   structural models) and Sec. 21.2 (the time-varying weights).
 #' @export
 #' @examples
 #' morie_mfovsm_cheatsheet()

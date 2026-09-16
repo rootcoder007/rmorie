@@ -100,17 +100,6 @@
 #'
 #' @param a,b Coordinate triples.
 #' @return A numeric scalar.
-#' @references Buergi, H.B., Dunitz, J.D. and Shefter, E. (1973) "Geometrical
-#'       reaction coordinates. II. Nucleophilic addition to a carbonyl
-#'       group." Journal of the American Chemical Society 95(15),
-#'       5065-5067. doi:10.1021/ja00796a058.
-#'     Bianco, G., Forli, S., Goodsell, D.S. and Olson, A.J. (2016)
-#'       "Covalent docking using autodock." Protein Science 25(1),
-#'       295-301. doi:10.1002/pro.2733.
-#'     Zhu, K. et al. (2014) "Docking covalent inhibitors: a parameter free
-#'       approach to pose prediction and scoring." Journal of Chemical
-#'       Information and Modeling 54(7), 1932-1940. CovDock, which the
-#'       ledger entry names.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -127,17 +116,6 @@ morie_rfppos_distance <- function(a, b) .rfppos_norm(a - b)
 #'
 #' @param a,b,c Coordinate triples; b is the vertex.
 #' @return Degrees.
-#' @references Buergi, H.B., Dunitz, J.D. and Shefter, E. (1973) "Geometrical
-#'       reaction coordinates. II. Nucleophilic addition to a carbonyl
-#'       group." Journal of the American Chemical Society 95(15),
-#'       5065-5067. doi:10.1021/ja00796a058.
-#'     Bianco, G., Forli, S., Goodsell, D.S. and Olson, A.J. (2016)
-#'       "Covalent docking using autodock." Protein Science 25(1),
-#'       295-301. doi:10.1002/pro.2733.
-#'     Zhu, K. et al. (2014) "Docking covalent inhibitors: a parameter free
-#'       approach to pose prediction and scoring." Journal of Chemical
-#'       Information and Modeling 54(7), 1932-1940. CovDock, which the
-#'       ledger entry names.
 #' @export
 #' @examples
 #' morie_rfppos_angle(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -163,17 +141,6 @@ morie_rfppos_angle <- function(a, b, c) {
 #'
 #' @param a,b,c,d Four coordinate triples.
 #' @return Degrees, signed.
-#' @references Buergi, H.B., Dunitz, J.D. and Shefter, E. (1973) "Geometrical
-#'       reaction coordinates. II. Nucleophilic addition to a carbonyl
-#'       group." Journal of the American Chemical Society 95(15),
-#'       5065-5067. doi:10.1021/ja00796a058.
-#'     Bianco, G., Forli, S., Goodsell, D.S. and Olson, A.J. (2016)
-#'       "Covalent docking using autodock." Protein Science 25(1),
-#'       295-301. doi:10.1002/pro.2733.
-#'     Zhu, K. et al. (2014) "Docking covalent inhibitors: a parameter free
-#'       approach to pose prediction and scoring." Journal of Chemical
-#'       Information and Modeling 54(7), 1932-1940. CovDock, which the
-#'       ledger entry names.
 #' @export
 #' @examples
 #' morie_rfppos_dihedral(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L)
@@ -211,17 +178,6 @@ morie_rfppos_dihedral <- function(a, b, c, d) {
 #' @param mode Either burgi_dunitz or michael.
 #' @return A zero-based triple of electrophile, reference and torsion
 #'   atom, or NULL when the molecule carries no such warhead.
-#' @references Buergi, H.B., Dunitz, J.D. and Shefter, E. (1973) "Geometrical
-#'       reaction coordinates. II. Nucleophilic addition to a carbonyl
-#'       group." Journal of the American Chemical Society 95(15),
-#'       5065-5067. doi:10.1021/ja00796a058.
-#'     Bianco, G., Forli, S., Goodsell, D.S. and Olson, A.J. (2016)
-#'       "Covalent docking using autodock." Protein Science 25(1),
-#'       295-301. doi:10.1002/pro.2733.
-#'     Zhu, K. et al. (2014) "Docking covalent inhibitors: a parameter free
-#'       approach to pose prediction and scoring." Journal of Chemical
-#'       Information and Modeling 54(7), 1932-1940. CovDock, which the
-#'       ledger entry names.
 #' @export
 #' @examples
 #' morie_rfppos_warhead("C=CC(=O)N", mode = "michael")
@@ -290,17 +246,6 @@ morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
 #'   caller would rather name them than have them found.
 #' @return A list with the measured geometry, each criterion separately,
 #'   and whether the pose passes all of them.
-#' @references Buergi, H.B., Dunitz, J.D. and Shefter, E. (1973) "Geometrical
-#'       reaction coordinates. II. Nucleophilic addition to a carbonyl
-#'       group." Journal of the American Chemical Society 95(15),
-#'       5065-5067. doi:10.1021/ja00796a058.
-#'     Bianco, G., Forli, S., Goodsell, D.S. and Olson, A.J. (2016)
-#'       "Covalent docking using autodock." Protein Science 25(1),
-#'       295-301. doi:10.1002/pro.2733.
-#'     Zhu, K. et al. (2014) "Docking covalent inhibitors: a parameter free
-#'       approach to pose prediction and scoring." Journal of Chemical
-#'       Information and Modeling 54(7), 1932-1940. CovDock, which the
-#'       ledger entry names.
 #' @export
 #' @keywords internal
 morie_rfppos <- function(pose, cys_residue, mode = "burgi_dunitz",
@@ -366,17 +311,6 @@ morie_rfppos <- function(pose, cys_residue, mode = "burgi_dunitz",
 #' One-line summary of the rfppos module
 #'
 #' @return A character scalar.
-#' @references Buergi, H.B., Dunitz, J.D. and Shefter, E. (1973) "Geometrical
-#'       reaction coordinates. II. Nucleophilic addition to a carbonyl
-#'       group." Journal of the American Chemical Society 95(15),
-#'       5065-5067. doi:10.1021/ja00796a058.
-#'     Bianco, G., Forli, S., Goodsell, D.S. and Olson, A.J. (2016)
-#'       "Covalent docking using autodock." Protein Science 25(1),
-#'       295-301. doi:10.1002/pro.2733.
-#'     Zhu, K. et al. (2014) "Docking covalent inhibitors: a parameter free
-#'       approach to pose prediction and scoring." Journal of Chemical
-#'       Information and Modeling 54(7), 1932-1940. CovDock, which the
-#'       ledger entry names.
 #' @export
 #' @examples
 #' morie_rfppos_cheatsheet()

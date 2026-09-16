@@ -26,6 +26,8 @@
 
 #' Wrap to [-pi, pi)
 #'
+#' @param theta Angle in radians.
+#' @return Angle in [-pi, pi).
 wrap_angle <- function(theta) {
   t <- .tqang_fmod(as.numeric(theta) + pi, .TWO_PI)
   if (t < 0) t <- t + .TWO_PI
@@ -85,14 +87,12 @@ morie_tqang <- function(theta, bits = 4) {
        method = "Uniform angle quantisation on [-pi, pi), midpoint reconstruction, wrapped error")
 }
 
-#' @rdname morie_tqang
 #' Public alias resolved by fn/_lazy_map.json
+#' @rdname morie_tqang
 #' @export
-#' @noRd
 morie_quantize_angles <- morie_tqang
 
-#' @rdname morie_tqang
 #' Public alias resolved by fn/_lazy_map.json
+#' @rdname morie_tqang
 #' @export
-#' @noRd
 morie_turboquant_angle_quantization <- morie_tqang

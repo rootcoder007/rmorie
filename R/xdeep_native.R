@@ -96,18 +96,6 @@
 #' @param a Passed to \code{.xdeep_to_vec}.
 #' @param b Passed to \code{.xdeep_to_vec}.
 #' @return A numeric value.
-#' @references ----------
-#'   Lian, J., Zhou, X., Zhang, F., Chen, Z., Xie, X. & Sun, G. (2018)
-#'   "xDeepFM: Combining Explicit and Implicit Feature Interactions for
-#'   Recommender Systems", *Proceedings of the 24th ACM SIGKDD
-#'   International Conference on Knowledge Discovery and Data Mining (KDD
-#'   \'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
-#'   Rendle, S. (2010) "Factorization Machines", *ICDM 2010*, 995-1000,
-#'   doi:10.1109/ICDM.2010.127. The vector-wise tradition; implemented in
-#'   :mod:`fmFM`.
-#'   Guo, H., Tang, R., Ye, Y., Li, Z. & He, X. (2017) "DeepFM: A
-#'   Factorization-Machine based Neural Network for CTR Prediction",
-#'   *IJCAI 2017*, 1725-1731, doi:10.24963/ijcai.2017/239.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -133,18 +121,6 @@ xdeep_hadamard <- function(a, b) {
 #' @param X0 Passed to \code{.xdeep_to_mat}.
 #' @param W A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
-#' @references ----------
-#'   Lian, J., Zhou, X., Zhang, F., Chen, Z., Xie, X. & Sun, G. (2018)
-#'   "xDeepFM: Combining Explicit and Implicit Feature Interactions for
-#'   Recommender Systems", *Proceedings of the 24th ACM SIGKDD
-#'   International Conference on Knowledge Discovery and Data Mining (KDD
-#'   \'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
-#'   Rendle, S. (2010) "Factorization Machines", *ICDM 2010*, 995-1000,
-#'   doi:10.1109/ICDM.2010.127. The vector-wise tradition; implemented in
-#'   :mod:`fmFM`.
-#'   Guo, H., Tang, R., Ye, Y., Li, Z. & He, X. (2017) "DeepFM: A
-#'   Factorization-Machine based Neural Network for CTR Prediction",
-#'   *IJCAI 2017*, 1725-1731, doi:10.24963/ijcai.2017/239.
 #' @export
 #' @examples
 #' xdeep_cin_layer(X_prev = 5L, X0 = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -185,18 +161,6 @@ xdeep_cin_layer <- function(X_prev, X0, W) {
 #' @param Ws A vector; its length is taken.
 #' @return A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees},
 #' \code{n_layers}, \code{method}, \code{note}.
-#' @references ----------
-#'   Lian, J., Zhou, X., Zhang, F., Chen, Z., Xie, X. & Sun, G. (2018)
-#'   "xDeepFM: Combining Explicit and Implicit Feature Interactions for
-#'   Recommender Systems", *Proceedings of the 24th ACM SIGKDD
-#'   International Conference on Knowledge Discovery and Data Mining (KDD
-#'   \'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
-#'   Rendle, S. (2010) "Factorization Machines", *ICDM 2010*, 995-1000,
-#'   doi:10.1109/ICDM.2010.127. The vector-wise tradition; implemented in
-#'   :mod:`fmFM`.
-#'   Guo, H., Tang, R., Ye, Y., Li, Z. & He, X. (2017) "DeepFM: A
-#'   Factorization-Machine based Neural Network for CTR Prediction",
-#'   *IJCAI 2017*, 1725-1731, doi:10.24963/ijcai.2017/239.
 #' @export
 #' @examples
 #' xdeep_cin(X0 = 5L, Ws = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -233,18 +197,6 @@ xdeep_cin <- function(X0, Ws) {
 #'
 #' @param layer_index Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{layer}, \code{degree}, \code{note}.
-#' @references ----------
-#'   Lian, J., Zhou, X., Zhang, F., Chen, Z., Xie, X. & Sun, G. (2018)
-#'   "xDeepFM: Combining Explicit and Implicit Feature Interactions for
-#'   Recommender Systems", *Proceedings of the 24th ACM SIGKDD
-#'   International Conference on Knowledge Discovery and Data Mining (KDD
-#'   \'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
-#'   Rendle, S. (2010) "Factorization Machines", *ICDM 2010*, 995-1000,
-#'   doi:10.1109/ICDM.2010.127. The vector-wise tradition; implemented in
-#'   :mod:`fmFM`.
-#'   Guo, H., Tang, R., Ye, Y., Li, Z. & He, X. (2017) "DeepFM: A
-#'   Factorization-Machine based Neural Network for CTR Prediction",
-#'   *IJCAI 2017*, 1725-1731, doi:10.24963/ijcai.2017/239.
 #' @export
 #' @examples
 #' xdeep_interaction_degree(layer_index = 5L)
@@ -278,18 +230,6 @@ xdeep_interaction_degree <- function(layer_index) {
 #' @param bias Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{logit}, \code{probability}, \code{linear}, \code{cin},
 #' \code{dnn}, \code{note}.
-#' @references ----------
-#'   Lian, J., Zhou, X., Zhang, F., Chen, Z., Xie, X. & Sun, G. (2018)
-#'   "xDeepFM: Combining Explicit and Implicit Feature Interactions for
-#'   Recommender Systems", *Proceedings of the 24th ACM SIGKDD
-#'   International Conference on Knowledge Discovery and Data Mining (KDD
-#'   \'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
-#'   Rendle, S. (2010) "Factorization Machines", *ICDM 2010*, 995-1000,
-#'   doi:10.1109/ICDM.2010.127. The vector-wise tradition; implemented in
-#'   :mod:`fmFM`.
-#'   Guo, H., Tang, R., Ye, Y., Li, Z. & He, X. (2017) "DeepFM: A
-#'   Factorization-Machine based Neural Network for CTR Prediction",
-#'   *IJCAI 2017*, 1725-1731, doi:10.24963/ijcai.2017/239.
 #' @export
 #' @keywords internal
 xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
@@ -329,18 +269,6 @@ xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
 #' source it follows.
 #'
 #' @return A character value.
-#' @references ----------
-#'   Lian, J., Zhou, X., Zhang, F., Chen, Z., Xie, X. & Sun, G. (2018)
-#'   "xDeepFM: Combining Explicit and Implicit Feature Interactions for
-#'   Recommender Systems", *Proceedings of the 24th ACM SIGKDD
-#'   International Conference on Knowledge Discovery and Data Mining (KDD
-#'   \'18)*, 1754-1763, doi:10.1145/3219819.3220023, arXiv:1803.05170.
-#'   Rendle, S. (2010) "Factorization Machines", *ICDM 2010*, 995-1000,
-#'   doi:10.1109/ICDM.2010.127. The vector-wise tradition; implemented in
-#'   :mod:`fmFM`.
-#'   Guo, H., Tang, R., Ye, Y., Li, Z. & He, X. (2017) "DeepFM: A
-#'   Factorization-Machine based Neural Network for CTR Prediction",
-#'   *IJCAI 2017*, 1725-1731, doi:10.24963/ijcai.2017/239.
 #' @export
 #' @examples
 #' xdeep_cheatsheet()

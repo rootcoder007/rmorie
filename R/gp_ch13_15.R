@@ -408,6 +408,9 @@ morie_zap_mean_variance <- function(theta, mu) {
 
 #' morie_msm_design
 #'
+#' @param treatment_history Argument `treatment_history`; see Usage.
+#' @param extra Argument `extra`; see Usage.
+#' @return A list with `X`, `a_bar`.
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::morie_msm_design(M)
@@ -426,6 +429,14 @@ morie_msm_design <- function(treatment_history, extra = NULL) {
 
 #' morie_msm_weighted_glm
 #'
+#' @param y Argument `y`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param weights Argument `weights`; see Usage.
+#' @param family Argument `family`; see Usage.
+#' @param offset Argument `offset`; see Usage.
+#' @param n_iter Argument `n_iter`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `beta`, `fitted`, `eta`, `weights`, `family`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_msm_weighted_glm(V, V)
@@ -485,6 +496,13 @@ morie_msm_weighted_glm <- function(y, X, weights = NULL,
 
 #' morie_msm_cox_weighted
 #'
+#' @param time Argument `time`; see Usage.
+#' @param event Argument `event`; see Usage.
+#' @param treatment_history Argument `treatment_history`; see Usage.
+#' @param weights Argument `weights`; see Usage.
+#' @param n_iter Argument `n_iter`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `beta`, `hazard_ratio`.
 #' @examples
 #' rmorie:::morie_msm_cox_weighted(time = 5L, event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   treatment_history = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
@@ -525,6 +543,11 @@ morie_msm_cox_weighted <- function(time, event, treatment_history,
 
 #' morie_msm_gmm
 #'
+#' @param y Argument `y`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param Z Argument `Z`; see Usage.
+#' @param weights Argument `weights`; see Usage.
+#' @return A list with `beta`, `residuals`, `moments`.
 #' @examples
 #' rmorie:::morie_msm_gmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Z = c(1, 2, 3, 4, 5, 6, 7, 8))

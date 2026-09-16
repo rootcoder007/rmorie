@@ -13,6 +13,11 @@
 
 #' morie_three_parameter_logistic
 #'
+#' @param theta Argument `theta`; see Usage.
+#' @param a Argument `a`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @return A list with `p`, `logit`, `theta`, `a`, `b`, `c`, `n`, `method`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_three_parameter_logistic(V)

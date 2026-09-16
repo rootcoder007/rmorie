@@ -31,17 +31,6 @@
 #' @param treat_times See Usage.
 #' @param psi See Usage.
 #' @return A numeric value.
-#' @references Robins, J. M. (1992) "Estimation of the time-dependent accelerated failure
-#'   time model in the presence of confounding factors", Biometrika 79(2),
-#'   321-334, doi:10.1093/biomet/79.2.321.
-#'   Robins, J. M., Blevins, D., Ritter, G. and Wulfsohn, M. (1992) "G-estimation
-#'   of the effect of prophylaxis therapy for Pneumocystis carinii pneumonia on
-#'   the survival of AIDS patients", Epidemiology 3(4), 319-336,
-#'   doi:10.1097/00001648-199207000-00007.
-#'   Hernan, M. A., Cole, S. R., Margolick, J., Cohen, M. and Robins, J. M. (2005)
-#'   "Structural accelerated failure time models for survival analysis in studies
-#'   with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
-#'   477-491, doi:10.1002/pds.1064.
 #' @export
 #' @examples
 #' morie_snmcox_blip_down(time = 5L,
@@ -142,17 +131,6 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' @param censor_time See Usage.
 #' @param ridge See Usage.
 #' @return A list with `s`, `z`, `m`, `U`, `e`.
-#' @references Robins, J. M. (1992) "Estimation of the time-dependent accelerated failure
-#'   time model in the presence of confounding factors", Biometrika 79(2),
-#'   321-334, doi:10.1093/biomet/79.2.321.
-#'   Robins, J. M., Blevins, D., Ritter, G. and Wulfsohn, M. (1992) "G-estimation
-#'   of the effect of prophylaxis therapy for Pneumocystis carinii pneumonia on
-#'   the survival of AIDS patients", Epidemiology 3(4), 319-336,
-#'   doi:10.1097/00001648-199207000-00007.
-#'   Hernan, M. A., Cole, S. R., Margolick, J., Cohen, M. and Robins, J. M. (2005)
-#'   "Structural accelerated failure time models for survival analysis in studies
-#'   with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
-#'   477-491, doi:10.1002/pds.1064.
 #' @export
 #' @keywords internal
 morie_snmcox_gest_score <- function(psi, time, event, A, L, treat_times,
@@ -339,17 +317,6 @@ morie_snm_cox <- morie_snmcox
 #' source it follows.
 #'
 #' @return A character value.
-#' @references Robins, J. M. (1992) "Estimation of the time-dependent accelerated failure
-#'   time model in the presence of confounding factors", Biometrika 79(2),
-#'   321-334, doi:10.1093/biomet/79.2.321.
-#'   Robins, J. M., Blevins, D., Ritter, G. and Wulfsohn, M. (1992) "G-estimation
-#'   of the effect of prophylaxis therapy for Pneumocystis carinii pneumonia on
-#'   the survival of AIDS patients", Epidemiology 3(4), 319-336,
-#'   doi:10.1097/00001648-199207000-00007.
-#'   Hernan, M. A., Cole, S. R., Margolick, J., Cohen, M. and Robins, J. M. (2005)
-#'   "Structural accelerated failure time models for survival analysis in studies
-#'   with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
-#'   477-491, doi:10.1002/pds.1064.
 #' @export
 #' @examples
 #' morie_snmcox_cheatsheet()
