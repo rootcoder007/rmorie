@@ -37,6 +37,7 @@
 #' @export
 #' @examples
 #' cutoffs(45, step = 10)
+#' @keywords internal
 cutoffs <- function(N, step = 10) {
   n <- as.integer(N)
   s <- as.integer(step)
@@ -110,6 +111,7 @@ cutoffs <- function(N, step = 10) {
 #' @examples
 #' set.seed(1)
 #' normalizer(rep(c(1L, 0L), 25), measure = "rND", step = 10)
+#' @keywords internal
 normalizer <- function(protected, measure = "rND", step = 10) {
   # Z: the value of the worst arrangement. The protected group placed
   # entirely last maximises the deviation at every cut-off.
@@ -179,6 +181,7 @@ normalizer <- function(protected, measure = "rND", step = 10) {
 #' @examples
 #' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
 #' rND(prot, step = 10)
+#' @keywords internal
 rND <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted difference.
   .measure(protected, "rND", step, normalize)
@@ -198,6 +201,7 @@ rND <- function(protected, step = 10, normalize = TRUE) {
 #' @examples
 #' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
 #' rKL(prot, step = 10)
+#' @keywords internal
 rKL <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted KL divergence.
   .measure(protected, "rKL", step, normalize)
@@ -216,6 +220,7 @@ rKL <- function(protected, step = 10, normalize = TRUE) {
 #' @examples
 #' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
 #' rRD(prot, step = 10)
+#' @keywords internal
 rRD <- function(protected, step = 10, normalize = TRUE) {
   # Normalised discounted ratio. Only meaningful when the protected
   # group is the minority -- it does not treat the two groups
@@ -276,6 +281,7 @@ fairnessrec <- rND
 #' @examples
 #' prot <- c(rep(0L, 10), rep(1L, 10), rep(0L, 10), rep(1L, 10))
 #' morie_fairRC(prot, measure = "rND", step = 10)
+#' @keywords internal
 morie_fairRC <- function(protected, measure = "rND", step = 10,
                          normalize = TRUE) {
   if (!(measure %in% .FAIRRC_MEASURES))

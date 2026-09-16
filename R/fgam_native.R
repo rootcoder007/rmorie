@@ -139,6 +139,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_fgam_functional_gam(V, V)
+#' @keywords internal
 morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
                                       lam_x = 1.0, lam_t = 1.0) {
   Xm <- as.matrix(X)

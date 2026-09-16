@@ -26,6 +26,7 @@
 #' @export
 #' @examples
 #' wl_colours(adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L)
+#' @keywords internal
 wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
   n <- as.integer(n)
   c <- if (is.null(initial)) rep(1.0, n) else as.numeric(initial)
@@ -62,6 +63,7 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
 #' @export
 #' @examples
 #' sort_pooling(features = c(1, 2, 3, 4, 5, 6, 7, 8), k_keep = 5L)
+#' @keywords internal
 sort_pooling <- function(features, k_keep, sort_channel = -1) {
   X <- if (is.matrix(features)) features else
     do.call(rbind, lapply(features, function(r) as.numeric(r)))
@@ -98,6 +100,7 @@ sort_pooling <- function(features, k_keep, sort_channel = -1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' choose_k(V)
+#' @keywords internal
 choose_k <- function(graph_sizes, coverage = 0.6) {
   s <- sort(as.integer(graph_sizes))
   c <- as.numeric(coverage)
@@ -125,6 +128,7 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
 #' @return A list with \code{max_deviation}, \code{invariant}, \code{note}.
 #' @export
+#' @keywords internal
 order_is_graph_determined <- function(features, adj, perm, k_keep,
                                       tol = 1e-9) {
   X <- if (is.matrix(features)) features else

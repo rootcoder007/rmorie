@@ -357,31 +357,31 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 }
 
 #' Binary C-SVC via SMO (compiled)
-#' @noRd
+#' @keywords internal
 morie_svc_train_cpp <- function(X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter) {
     .Call(`_rmorie_morie_svc_train_cpp`, X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter)
 }
 
 #' eps-SVR via SMO (compiled)
-#' @noRd
+#' @keywords internal
 morie_svr_train_cpp <- function(X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter) {
     .Call(`_rmorie_morie_svr_train_cpp`, X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter)
 }
 
 #' Decision values for new data given fitted SVM coefficients (compiled)
-#' @noRd
+#' @keywords internal
 morie_svm_decision_cpp <- function(SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree) {
     .Call(`_rmorie_morie_svm_decision_cpp`, SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree)
 }
 
 #' Grow one regression / second-order tree (compiled)
-#' @noRd
+#' @keywords internal
 morie_tree_fit_cpp <- function(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen) {
     .Call(`_rmorie_morie_tree_fit_cpp`, X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen)
 }
 
 #' Predict from a flattened tree (compiled)
-#' @noRd
+#' @keywords internal
 morie_tree_predict_cpp <- function(tree, X) {
     .Call(`_rmorie_morie_tree_predict_cpp`, tree, X)
 }

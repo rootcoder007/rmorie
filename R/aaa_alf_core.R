@@ -25,6 +25,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfSigm(V)
+#' @keywords internal
 alfSigm <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)), exp(x) / (1 + exp(x)))
 
 #' alfRelu
@@ -39,6 +40,7 @@ alfSigm <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)), exp(x) / (1 + exp(x)))
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfRelu(V)
+#' @keywords internal
 alfRelu <- function(x) ifelse(x > 0, x, 0)
 
 # Softmax with max subtraction.  The stabilisation is part of the contract:
@@ -54,6 +56,7 @@ alfRelu <- function(x) ifelse(x > 0, x, 0)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfSmax(V)
+#' @keywords internal
 alfSmax <- function(v) {
   e <- exp(v - max(v))
   e / sum(e)
@@ -73,6 +76,7 @@ alfSmax <- function(v) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfVdot(V, V)
+#' @keywords internal
 alfVdot <- function(a, b) sum(a * b)
 
 #' alfVn2
@@ -87,6 +91,7 @@ alfVdot <- function(a, b) sum(a * b)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfVn2(V)
+#' @keywords internal
 alfVn2 <- function(a) sum(a * a)
 
 # Dense projection of a vector; W is (n_out x n_in).
@@ -105,6 +110,7 @@ alfVn2 <- function(a) sum(a * a)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfLin(V, V)
+#' @keywords internal
 alfLin <- function(v, W, b = NULL) {
   o <- as.numeric(W %*% as.numeric(v))
   if (!is.null(b)) o <- o + as.numeric(b)
@@ -126,6 +132,7 @@ alfLin <- function(v, W, b = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfLnorm(V)
+#' @keywords internal
 alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
   v <- as.numeric(v)
   n <- length(v)
@@ -151,6 +158,7 @@ alfLnorm <- function(v, g = NULL, b = NULL, eps = 1e-5) {
 #' @examples
 #' Tf <- list(R = diag(2), t = c(1, -1))
 #' alfRap(Tf, c(2, 3))
+#' @keywords internal
 alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
 
 #' alfRinv
@@ -168,6 +176,7 @@ alfRap <- function(Tf, x) as.numeric(Tf$R %*% as.numeric(x)) + as.numeric(Tf$t)
 #'            t = c(1, -1))
 #' inv <- alfRinv(Tf)
 #' alfRap(inv, alfRap(Tf, c(2, 3)))
+#' @keywords internal
 alfRinv <- function(Tf) {
   Rt <- t(Tf$R)
   list(R = Rt, t = -as.numeric(Rt %*% as.numeric(Tf$t)))
@@ -189,6 +198,7 @@ alfRinv <- function(Tf) {
 #' Tf <- list(R = rbind(c(cos(th), -sin(th)), c(sin(th), cos(th))),
 #'            t = c(1, -1))
 #' alfRinvap(Tf, alfRap(Tf, c(2, 3)))
+#' @keywords internal
 alfRinvap <- function(Tf, x) {
   as.numeric(t(Tf$R) %*% (as.numeric(x) - as.numeric(Tf$t)))
 }
@@ -209,6 +219,7 @@ alfRinvap <- function(Tf, x) {
 #' B <- list(R = diag(2), t = c(0, 2))
 #' C <- alfRcomp(A, B)
 #' alfRap(C, c(0, 0))
+#' @keywords internal
 alfRcomp <- function(A, B) list(R = A$R %*% B$R, t = alfRap(A, B$t))
 
 # Non-unit quaternion (1, b, c, d) to a rotation matrix -- Algorithm 23
@@ -227,6 +238,7 @@ alfRcomp <- function(A, B) list(R = A$R %*% B$R, t = alfRap(A, B$t))
 #' @export
 #' @examples
 #' alfQ2rot(b = 0.2, c = 0.3, d = 0.4)
+#' @keywords internal
 alfQ2rot <- function(b, c, d) {
   n <- sqrt(1 + b * b + c * c + d * d)
   a <- 1 / n
@@ -250,6 +262,7 @@ alfQ2rot <- function(b, c, d) {
 #' @export
 #' @examples
 #' alfIdent()
+#' @keywords internal
 alfIdent <- function() list(R = diag(3), t = c(0, 0, 0))
 
 # One-hot encoding with nearest bin -- Algorithm 5.  Ties go to the lowest
@@ -266,6 +279,7 @@ alfIdent <- function() list(R = diag(3), t = c(0, 0, 0))
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfOnehot(V, V)
+#' @keywords internal
 alfOnehot <- function(x, bins) {
   p <- numeric(length(bins))
   p[which.min(abs(x - bins))] <- 1
@@ -287,6 +301,7 @@ alfOnehot <- function(x, bins) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alfXent(V, V)
+#' @keywords internal
 alfXent <- function(y, p, eps = 1e-12) {
   -sum(y * log(pmax(p, eps)))
 }

@@ -79,6 +79,7 @@
 #' @examples
 #' morie_flexrd_rotate(p = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L,
 #'   degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_flexrd_rotate <- function(p, a, b, degrees) {
   ax <- b - a
   n <- sqrt(.w3_csum(ax * ax))
@@ -108,6 +109,7 @@ morie_flexrd_rotate <- function(p, a, b, degrees) {
 #' @examples
 #' morie_flexrd_chi(coords = c(1, 2, 3, 4, 5, 6, 7, 8), chi = list(a = 1, b = 2),
 #'   degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_flexrd_chi <- function(coords, chi, degrees) {
   out <- coords
   a <- out[[as.integer(chi$a) + 1L]]
@@ -140,6 +142,7 @@ morie_flexrd_chi <- function(coords, chi, degrees) {
 #' morie_flexrd_energy(rec = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
 #'   lig = c(1, 2, 3, 4, 5, 6, 7, 8), rec_r = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   lig_r = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_flexrd_energy <- function(rec, lig, rec_r, lig_r, scale = 1,
                                 epsilon = 1, cutoff = 8) {
   terms <- numeric(0)
@@ -210,6 +213,7 @@ morie_flexrd_energy <- function(rec, lig, rec_r, lig_r, scale = 1,
 #' REC_D <- list(coords = REC, radii = RR)
 #' LIG_D <- list(coords = LIG, radii = LR)
 #' morie_flexrd(REC_D, LIG_D, CHI)
+#' @keywords internal
 morie_flexrd <- function(receptor, ligand, flex_residues, angles = NULL,
                          soft = 0.7, epsilon = 1, cutoff = 8,
                          search = "coordinate", passes = 3L,
@@ -330,6 +334,7 @@ morie_flexrd <- function(receptor, ligand, flex_residues, angles = NULL,
 #' @export
 #' @examples
 #' morie_flexrd_cheatsheet()
+#' @keywords internal
 morie_flexrd_cheatsheet <- function()
   paste0("flexrd: induced-fit docking. Soften the radii and rank poses, ",
          "turn the side-chain chi angles by Rodrigues rotation, rescore ",

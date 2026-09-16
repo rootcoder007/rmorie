@@ -180,6 +180,7 @@
 #' \code{denoiser_coefs}, \code{sigma_data}, \code{steps}, \code{rmsd_to_reference},
 #' \code{n_atoms}, \code{route}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
                                     clean = NULL, steps = 20L,
                                     sigma_data = 16.0, s_max = 160.0,

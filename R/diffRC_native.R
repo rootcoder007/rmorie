@@ -33,6 +33,7 @@
 #' @export
 #' @examples
 #' morie_diffRC_noise_schedule(T = 5L)
+#' @keywords internal
 morie_diffRC_noise_schedule <- function(T, scale = 0.001,
                                          beta_min = 0.0001,
                                          beta_max = 0.02) {
@@ -71,6 +72,7 @@ morie_diffRC_noise_schedule <- function(T, scale = 0.001,
 #' r <- morie_diffRC_forward_corrupt(x0 = c(1, -1, 0.5),
 #'                                   alpha_bar_t = 0.7, rng = rng)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_diffRC_forward_corrupt <- function(x0, alpha_bar_t, rng = NULL) {
   x <- as.numeric(x0)
   ab <- as.numeric(alpha_bar_t)
@@ -101,6 +103,7 @@ morie_diffRC_forward_corrupt <- function(x0, alpha_bar_t, rng = NULL) {
 #'                                  alpha_bar_t = 0.7, alpha_bar_prev = 0.8,
 #'                                  beta_t = 0.1)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_diffRC_posterior_mean <- function(x_t, x0_hat, alpha_bar_t,
                                         alpha_bar_prev, beta_t) {
   xt <- as.numeric(x_t)
@@ -133,6 +136,7 @@ morie_diffRC_posterior_mean <- function(x_t, x0_hat, alpha_bar_t,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_diffRC_importance_weights(V)
+#' @keywords internal
 morie_diffRC_importance_weights <- function(step_losses, uniform = FALSE,
                                              smoothing = 0.1) {
   L <- as.numeric(step_losses)
@@ -169,6 +173,7 @@ morie_diffRC_importance_weights <- function(step_losses, uniform = FALSE,
 #' model <- function(x, t) x * 0.9
 #' r <- morie_diffRC_denoise(c(0.5, -0.3, 0.2), model, sched)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_diffRC_denoise <- function(x_t, model, schedule, t_start = NULL) {
   x <- as.numeric(x_t)
   ab <- schedule$alpha_bar

@@ -133,6 +133,7 @@
 #' x <- c(rbinom(50, 1, 0.2), rbinom(50, 1, 0.75))
 #' res <- morie_glr_test(x, p0 = 0.2, p1 = 0.75, family = "bernoulli")
 #' abs(res$changepoint - 50) < 25
+#' @keywords internal
 morie_glr_test <- function(x, p0, p1, threshold = NULL,
                       family = "bernoulli", sd = 1.0) {
   if (is.null(x) || length(x) == 0L)
@@ -233,6 +234,7 @@ morie_glr_test <- function(x, p0, p1, threshold = NULL,
 #' x <- c(rbinom(50, 1, 0.2), rbinom(50, 1, 0.75))
 #' res <- page_cusum(x, p0 = 0.2, p1 = 0.75, threshold = 5)
 #' c(res$detected, res$stop_index >= 0)
+#' @keywords internal
 page_cusum <- function(x, p0, p1, threshold = NULL,
                        family = "bernoulli", sd = 1.0) {
   morie_glr_test(x = x, p0 = p0, p1 = p1, threshold = threshold,
@@ -258,6 +260,7 @@ page_cusum <- function(x, p0, p1, threshold = NULL,
 #' x <- c(rpois(40, 1), rpois(40, 4))
 #' res <- glrtest(x, p0 = 1, p1 = 4, family = "poisson")
 #' res$changepoint >= 0
+#' @keywords internal
 glrtest <- function(x, p0, p1, threshold = NULL,
                     family = "bernoulli", sd = 1.0) {
   morie_glr_test(x = x, p0 = p0, p1 = p1, threshold = threshold,

@@ -1014,6 +1014,7 @@
 #' rd <- morie_prsLL(g, c("id", "+", "id", "*", "id"),
 #'                   route = "recursive_descent")
 #' identical(res$tree, rd$tree)
+#' @keywords internal
 morie_prsLL <- function(grammar_, tokens, route = "table") {
   if (is.list(grammar_) && !is.null(grammar_$rules) && !is.null(grammar_$start)) {
     g <- grammar_

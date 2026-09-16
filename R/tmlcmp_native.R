@@ -174,6 +174,7 @@
 #' @examples
 #' cause_specific_hazards(time = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   event_type = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 cause_specific_hazards <- function(time, event_type, times,
                                    A = NULL, arm = NULL, weights = NULL) {
   t <- .tmlcmp_vec(time)
@@ -235,6 +236,7 @@ cause_specific_hazards <- function(time, event_type, times,
 #' @examples
 #' hazards <- list("1" = c(0.10, 0.15, 0.20), "2" = c(0.05, 0.05, 0.10))
 #' cumulative_incidence(hazards, times = c(1, 2, 3))
+#' @keywords internal
 cumulative_incidence <- function(hazards, times) {
   types <- sort(as.numeric(names(hazards)))
   if (length(types) == 0) {
@@ -285,6 +287,7 @@ cumulative_incidence <- function(hazards, times) {
 #' @examples
 #' hazards <- list("1" = c(0.10, 0.15, 0.20), "2" = c(0.05, 0.05, 0.10))
 #' one_minus_km(hazards, times = c(1, 2, 3), cause = 1)
+#' @keywords internal
 one_minus_km <- function(hazards, times, cause) {
   j <- as.numeric(cause)
   j_str <- as.character(j)
@@ -332,6 +335,7 @@ one_minus_km <- function(hazards, times, cause) {
 #' r <- morie_tmlcmp(time = sort(runif(10)), event_type = rbinom(10, 1, 0.5),
 #'   D = rbinom(10, 1, 0.5), X = rnorm(10))
 #' TRUE
+#' @keywords internal
 morie_tmlcmp <- function(time, event_type, D, X, times = NULL,
                          cause = 1, horizon = NULL, g = NULL, iters = 50) {
   t <- .tmlcmp_vec(time)

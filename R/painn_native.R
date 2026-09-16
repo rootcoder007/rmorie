@@ -67,6 +67,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' vector_norm(V)
+#' @keywords internal
 vector_norm <- function(v) {
   a <- .painn_mat(v)
   F <- ncol(a)
@@ -104,6 +105,7 @@ vector_norm <- function(v) {
 #' W_rbf <- function(d) rep(1, 5)
 #' m <- scalar_vector_message(s, v, r, phi_s, phi_v, W_rbf)
 #' c(length(m$ds), nrow(m$dv), ncol(m$dv))
+#' @keywords internal
 scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
                                   W_rbf) {
   s <- .painn_vec(s_j)
@@ -155,6 +157,7 @@ scalar_vector_message <- function(s_j, v_j, r_ij, phi_s, phi_v,
 #' phi <- function(sv, dot, nrm) list(ds = sv + dot, gate = rep(0.5, length(sv)))
 #' u <- gated_update(s, v, U, V, phi)
 #' c(length(u$ds), nrow(u$dv))
+#' @keywords internal
 gated_update <- function(s, v, U, V, phi) {
   sv <- .painn_vec(s)
   Vv <- .painn_mat(v)
@@ -200,6 +203,7 @@ gated_update <- function(s, v, U, V, phi) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' dipole_moment(V, V)
+#' @keywords internal
 dipole_moment <- function(charges, R, centre = NULL) {
   q <- .painn_vec(charges)
   pos <- .painn_mat(R)
@@ -256,6 +260,7 @@ dipole_moment <- function(charges, R, centre = NULL) {
 #' model <- function(s, V, pos) list(s = s, v = V)
 #' e <- morie_painn_equivariance_error(model, s, v, R, Q)
 #' is.list(e)
+#' @keywords internal
 morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   pos <- .painn_mat(R)
   d <- ncol(pos)

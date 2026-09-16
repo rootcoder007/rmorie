@@ -81,6 +81,7 @@ morie_dag <- function(edges, exposure, outcome, latent = character()) {
 #' print(g)
 #' }
 #' @export
+#' @keywords internal
 print.morie_dag <- function(x, ...) {
   cat(
     "morie causal DAG:", length(x$nodes), "nodes,",

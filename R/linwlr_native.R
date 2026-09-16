@@ -220,6 +220,7 @@
 #' @examples
 #' morie_linwlr_blip(a = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   psi = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_linwlr_blip <- function(a, w, psi) {
   av <- .linwlr_vec(a)
   if (is.null(w)) return(av * psi[1])
@@ -249,6 +250,7 @@ morie_linwlr_blip <- function(a, w, psi) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_linwlr(V, V)
+#' @keywords internal
 morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
                           baseline = NULL, pi_covariates = NULL,
                           ridge = 1e-10) {
@@ -388,6 +390,7 @@ morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
 #' @export
 #' @examples
 #' morie_linwlr_cheatsheet()
+#' @keywords internal
 morie_linwlr_cheatsheet <- function() {
   paste0("linwlr: linear blip gamma(a,w) = a(psi0 + psi1'w) by ",
          "g-estimation on A - E[A|W] (Robins 2004), or by IP-weighted ",

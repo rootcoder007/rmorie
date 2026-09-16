@@ -30,6 +30,7 @@
 #' @export
 #' @examples
 #' morie_thomp(p = 0.5, T = 5L)
+#' @keywords internal
 morie_thomp <- function(p, T, alpha0 = NULL, beta0 = NULL, seed = 0) {
   p <- as.numeric(p)
   K <- length(p)

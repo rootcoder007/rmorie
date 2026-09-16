@@ -46,6 +46,7 @@ DISTRIBUTIONS <- c("rademacher", "sparse")
 #' @examples
 #' set.seed(1)
 #' r <- target_dimension(n = 8L, epsilon = 0.5); TRUE
+#' @keywords internal
 target_dimension <- function(n, epsilon, beta = 1.0) {
   n <- as.integer(n)
   e <- as.numeric(epsilon)
@@ -80,6 +81,7 @@ target_dimension <- function(n, epsilon, beta = 1.0) {
 #' @export
 #' @examples
 #' moments()
+#' @keywords internal
 moments <- function(distribution = "rademacher") {
   if (!(distribution %in% DISTRIBUTIONS))
     stop(sprintf("qjlcrn: distribution must be one of %s, got %s",
@@ -118,6 +120,7 @@ moments <- function(distribution = "rademacher") {
 #' @export
 #' @examples
 #' projection_matrix(d = 5L, k = 5L)
+#' @keywords internal
 projection_matrix <- function(d, k, distribution = "rademacher",
                               seed = 0L) {
   if (!(distribution %in% DISTRIBUTIONS))
@@ -172,6 +175,7 @@ projection_matrix <- function(d, k, distribution = "rademacher",
 #' @export
 #' @examples
 #' morie_qjlcrn(A = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+#' @keywords internal
 morie_qjlcrn <- function(A, k, distribution = "rademacher",
                          seed = 0L) {
   n <- length(A)
@@ -215,6 +219,7 @@ morie_qjlcrn <- function(A, k, distribution = "rademacher",
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' distortion(V, V)
+#' @keywords internal
 distortion <- function(A, E) {
   if (length(A) != length(E))
     stop("qjlcrn: the embedding must have one row per point")

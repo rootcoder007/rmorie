@@ -45,6 +45,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' mean_scale(V)
+#' @keywords internal
 mean_scale <- function(x, context = NULL) {
   v <- .chronos_vec(x)
   if (length(v) == 0L) stop("chronos: the series is empty")
@@ -83,6 +84,7 @@ mean_scale <- function(x, context = NULL) {
 #' @export
 #' @examples
 #' uniform_bins()
+#' @keywords internal
 uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
   B <- as.integer(n_bins)
   if (B < 2L) stop(sprintf("chronos: need at least 2 bins, got %d", B))
@@ -108,6 +110,7 @@ uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
 #' @examples
 #' set.seed(1)
 #' quantile_bins(rnorm(500), n_bins = 16L)
+#' @keywords internal
 quantile_bins <- function(samples, n_bins = 4096L) {
   v <- sort(.chronos_vec(samples))
   B <- as.integer(n_bins)
@@ -141,6 +144,7 @@ quantile_bins <- function(samples, n_bins = 4096L) {
 #' set.seed(1)
 #' b <- uniform_bins(-3, 3, n_bins = 16L)
 #' quantize(c(-2.5, 0, 1.7), b)
+#' @keywords internal
 quantize <- function(x, bins) {
   v <- .chronos_vec(x)
   c <- bins$centers
@@ -181,6 +185,7 @@ quantize <- function(x, bins) {
 #' @examples
 #' b <- uniform_bins(-3, 3, n_bins = 16L)
 #' dequantize(quantize(c(-2.5, 0, 1.7), b)$tokens, b)
+#' @keywords internal
 dequantize <- function(tokens, bins) {
   c <- bins$centers
   out <- numeric(0)
@@ -213,6 +218,7 @@ dequantize <- function(tokens, bins) {
 #' set.seed(2)
 #' b <- uniform_bins(-3, 3, n_bins = 16L)
 #' tokenize(rnorm(10), b)
+#' @keywords internal
 tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
   sc <- mean_scale(x, context = context)
   qz <- quantize(sc$scaled, bins)
@@ -246,6 +252,7 @@ tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
 #' x <- rnorm(10)
 #' tk <- tokenize(x, b, add_eos = FALSE)
 #' detokenize(tk$tokens, b, tk$scale)
+#' @keywords internal
 detokenize <- function(tokens, bins, scale) {
   q <- dequantize(tokens, bins)
   q * as.numeric(scale)
@@ -265,6 +272,7 @@ detokenize <- function(tokens, bins, scale) {
 #' @examples
 #' b <- uniform_bins(-3, 3, n_bins = 8L)
 #' forecast_summary(rep(1 / 8, 8), b)
+#' @keywords internal
 forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
   p <- .chronos_vec(token_probs)
   c <- bins$centers
@@ -312,6 +320,7 @@ forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
 #' set.seed(3)
 #' r <- morie_chronos(rnorm(20), uniform_bins(-3, 3, n_bins = 16L))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_chronos <- function(x, bins, context = NULL, add_eos = TRUE,
                           pad_to = NULL) {
   tokenize(x, bins, context, add_eos, pad_to)

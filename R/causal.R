@@ -496,6 +496,7 @@ NULL
 #'   df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
 #'   morie_estimate_propensity_scores(df, "t", "x")
 #' }
+#' @keywords internal
 morie_estimate_propensity_scores <- function(data, treatment, covariates,
                                              trim = c(0.01, 0.99),
                                              trim_type = "value",
@@ -815,6 +816,7 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
 #' morie_estimate_aipw(df, "t", "y", "x", outcome_model = "linear")
 #' @export
+#' @keywords internal
 morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
                                 outcome_model = c("linear", "logistic"),

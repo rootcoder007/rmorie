@@ -439,6 +439,7 @@
 #' gf <- function(x) 2 * x
 #' hf <- function(x) 2 * diag(length(x))
 #' morie_trupek_trust_region(f, gf, hf, x0 = c(1.5, -1.0))
+#' @keywords internal
 morie_trupek_trust_region <- function(f, grad_f, hess_f, x0, delta = 1,
                                       delta_max = NULL,
                                       subproblem = "steihaug",
@@ -519,5 +520,6 @@ morie_trupek_trust_region <- function(f, grad_f, hess_f, x0, delta = 1,
 #' @param ... passed to morie_trupek_trust_region.
 #' @return see morie_trupek_trust_region.
 #' @export
+#' @keywords internal
 morie_trupek <- function(f, grad_f, hess_f, x0, ...)
   morie_trupek_trust_region(f, grad_f, hess_f, x0, ...)

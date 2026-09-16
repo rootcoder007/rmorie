@@ -105,6 +105,7 @@ Gbtcom <- function(data, outcome, treatment, unit, time) {
 #' D <- as.integer(!is.na(ft) & time >= ft)
 #' y <- rnorm(nu * T) + D * 1.5
 #' morie_gbtcom(y, D, unit, time)
+#' @keywords internal
 morie_gbtcom <- function(y, D, unit, time) {
   n <- length(y)
   if (length(D) != n || length(unit) != n || length(time) != n)

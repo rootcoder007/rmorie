@@ -112,6 +112,7 @@
 #' A <- rbinom(50, 1, 0.5)
 #' g <- runif(50, 0.2, 0.8)
 #' tlltmle_clever_covariate(A, g)
+#' @keywords internal
 tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
   a <- as.numeric(A)
   gg <- as.numeric(g)
@@ -145,6 +146,7 @@ tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
 #' @examples
 #' tlltmle_fluctuate(Q = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
   q <- as.numeric(Q)
   h <- as.numeric(H)
@@ -192,6 +194,7 @@ tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
 #' Q0 <- runif(50, 0.2, 0.5)
 #' g <- runif(50, 0.3, 0.7)
 #' tlltmle_tmle_point(A, Y, Q1, Q0, g)
+#' @keywords internal
 tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
   a <- as.numeric(A)
   y <- as.numeric(Y)
@@ -234,6 +237,7 @@ tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
 #' @examples
 #' tlltmle_ltmle(Q_seq = c(1, 2, 3, 4, 5, 6, 7, 8), H_seq = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Y_seq = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
   T_ <- length(Q_seq)
   if (T_ < 1) stop("ltmle: the sequence is empty")
@@ -268,6 +272,7 @@ tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' tlltmle_influence_curve_se(V)
+#' @keywords internal
 tlltmle_influence_curve_se <- function(d) {
   v <- as.numeric(d)
   n <- length(v)
@@ -286,6 +291,7 @@ tlltmle_influence_curve_se <- function(d) {
 #' @export
 #' @examples
 #' tlltmle_cheatsheet()
+#' @keywords internal
 tlltmle_cheatsheet <- function() {
   paste0(
     "tlltmle: write the g-formula as ITERATED conditional expecta",

@@ -537,6 +537,7 @@
 #' \code{n_controls}, \code{variance_ratio}, \code{saddlepoint}, \code{method},
 #' \code{why}.
 #' @export
+#' @keywords internal
 morie_saigeg <- function(y, G, X = NULL, mu = NULL, ratio = 1.0, two_sided = TRUE) {
   yv <- as.numeric(y)
   bad <- which(yv != 0 & yv != 1)

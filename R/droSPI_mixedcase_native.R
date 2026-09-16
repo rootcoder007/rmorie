@@ -91,6 +91,7 @@
 #' @return A list with \code{spi}, \code{totals}, \code{params}, \code{scale},
 #' \code{by_month}, \code{method}.
 #' @export
+#' @keywords internal
 morie_droSPI <- function(precip, scale = 3L, by_month = TRUE) {
   x <- as.numeric(precip)
   if (any(x < 0))

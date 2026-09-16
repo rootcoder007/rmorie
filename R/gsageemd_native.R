@@ -47,6 +47,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_gsageemd_aggregate(V)
+#' @keywords internal
 morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
   if (!(how %in% .GSAGEEMD_AGGS))
     stop(paste0("gsageemd: aggregator must be one of ",
@@ -90,6 +91,7 @@ morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
 #'             `2` = c(`1` = 1, `3` = 1), `3` = c(`2` = 1, `0` = 1))
 #' nb <- sample_neighbors(adj, v = 0, size = 2, rng)
 #' length(nb) == 2L
+#' @keywords internal
 sample_neighbors <- function(adj, v, size, rng = NULL) {
   if (is.null(rng)) rng <- .ghc_rng(0L)
   nb <- sort(as.integer(names(adj[[as.character(v)]])))
@@ -129,6 +131,7 @@ sample_neighbors <- function(adj, v, size, rng = NULL) {
 #' W <- matrix(rnorm(6 * 4, 0, 0.3), nrow = 4, ncol = 6)
 #' Z <- sage_layer(H, adj, W, how = "mean")
 #' dim(Z)
+#' @keywords internal
 sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
                        rng = NULL, normalize = TRUE) {
   H <- as.matrix(H)
@@ -181,6 +184,7 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 #' W2 <- matrix(rnorm(8 * 2, 0, 0.3), 2, 8)
 #' emb <- morie_gsageemd_embed(feats, adj, list(W1, W2), how = "mean", seed = 1)
 #' dim(emb)
+#' @keywords internal
 morie_gsageemd_embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
                   seed = 0) {
   rng <- .ghc_rng(as.integer(seed))
@@ -206,6 +210,7 @@ morie_gsageemd_embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
 #' @examples
 #' unsupervised_loss(z_u = c(1, 2, 3, 4, 5, 6, 7, 8), z_v = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   z_negatives = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 unsupervised_loss <- function(z_u, z_v, z_negatives) {
   z_u <- as.numeric(z_u)
   z_v <- as.numeric(z_v)

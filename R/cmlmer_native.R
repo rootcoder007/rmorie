@@ -302,6 +302,7 @@
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- morie_cmlmer_compressed_lmm(y = b, M = A, K = A)
 #' res
+#' @keywords internal
 morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
                                         compare_levels = NULL,
                                         log_delta_lo = -10.0,

@@ -236,6 +236,7 @@ morie_survvae_PRIMITIVES <- .GHC_SURVVAE_PRIMITIVES
 #' @export
 #' @examples
 #' morie_survvae_log_pdf(t = 5L, shape = 5L, scale = TRUE)
+#' @keywords internal
 morie_survvae_log_pdf <- function(t, shape, scale, primitive = "weibull") {
   .ghc_survvae_check_primitive(primitive)
   t <- as.numeric(t)
@@ -273,6 +274,7 @@ morie_survvae_log_pdf <- function(t, shape, scale, primitive = "weibull") {
 #' @export
 #' @examples
 #' morie_survvae_log_survival(t = 5L, shape = c(1, 2, 3, 4, 5, 6, 7, 8), scale = TRUE)
+#' @keywords internal
 morie_survvae_log_survival <- function(t, shape, scale,
                                        primitive = "weibull") {
   .ghc_survvae_check_primitive(primitive)
@@ -304,6 +306,7 @@ morie_survvae_log_survival <- function(t, shape, scale,
 #' @examples
 #' morie_survvae_gates(x = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   bias = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survvae_gates <- function(x, W, bias) {
   K <- length(bias)
   z <- numeric(K)
@@ -349,6 +352,7 @@ morie_survvae_gates <- function(x, W, bias) {
 #' r <- morie_survvae_elbo(X, tt, ev, W, bias, shapes = c(1, 1.5, 2),
 #'                         scales = c(5, 10, 15))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_survvae_elbo <- function(X, y_lower, events, W, bias, shapes, scales,
                                 primitive = "weibull", alpha = 1,
                                 prior = 0) {
@@ -401,6 +405,7 @@ morie_survvae_elbo <- function(X, y_lower, events, W, bias, shapes, scales,
 #' r <- morie_survvae_exact_loglik(X, tt, ev, W, bias, shapes = c(1, 1.5, 2),
 #'                                 scales = c(5, 10, 15))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
                                         shapes, scales,
                                         primitive = "weibull",
@@ -463,6 +468,7 @@ morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
 #' morie_survvae(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   events = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' }
+#' @keywords internal
 morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
                           alpha = 1, prior = 0, seed = 0,
                           restarts = 4L) {
@@ -566,6 +572,7 @@ morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
 #' fit <- morie_survvae(X, tt, ev, K = 2L, restarts = 2L)
 #' morie_survvae_predict_survival(fit, rnorm(2), times = c(5, 10, 20))
 #' }
+#' @keywords internal
 morie_survvae_predict_survival <- function(fit_result, x, times) {
   g <- morie_survvae_gates(x, fit_result$W, fit_result$bias)
   K <- fit_result$K
@@ -599,6 +606,7 @@ morie_survvae_predict_survival <- function(fit_result, x, times) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_survvae_risk_score(D, V)
+#' @keywords internal
 morie_survvae_risk_score <- function(fit_result, X, horizon = NULL) {
   if (is.null(horizon)) {
     sorted_times <- sort(fit_result$times)
@@ -634,6 +642,7 @@ morie_survvae_risk_score <- function(fit_result, X, horizon = NULL) {
 #' fit <- morie_survvae(X, tt, ev, K = 2L, restarts = 2L)
 #' morie_survvae_concordance(fit, X, tt, ev)
 #' }
+#' @keywords internal
 morie_survvae_concordance <- function(fit_result, X, times, events,
                                        horizon = NULL) {
   .ghc_c_index(times, events,
@@ -661,6 +670,7 @@ morie_survvae_concordance <- function(fit_result, X, times, events,
 #' morie_survvae_fit_competing(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   causes = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' }
+#' @keywords internal
 morie_survvae_fit_competing <- function(X, times, causes, K = 3L,
                                          primitive = "weibull",
                                          alpha = 1, prior = 0,
@@ -689,6 +699,7 @@ morie_survvae_fit_competing <- function(X, times, causes, K = 3L,
 #' @export
 #' @examples
 #' morie_survvae_cheatsheet()
+#' @keywords internal
 morie_survvae_cheatsheet <- function() {
   paste(paste0(
     "survvae: S(t|x) = sum_k g_k(x) S_k(t), gates a softmax and t",

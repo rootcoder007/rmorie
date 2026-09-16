@@ -50,6 +50,7 @@
 #' @export
 #' @examples
 #' normalise_bbox(box = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, height = 5L)
+#' @keywords internal
 normalise_bbox <- function(box, width, height, scale = 1000) {
   if (length(box) < 4L)
     stop("ocrwit: the box must have four coordinates")
@@ -86,6 +87,7 @@ normalise_bbox <- function(box, width, height, scale = 1000) {
 #' @examples
 #' boxes <- matrix(c(10, 10, 60, 30, 70, 10, 110, 30), 2, 4, byrow = TRUE)
 #' segment_layout_boxes(boxes, c(0, 1), width = 200, height = 100)
+#' @keywords internal
 segment_layout_boxes <- function(boxes, segment_ids, width, height,
                                  scale = 1000) {
   segs <- as.list(segment_ids)
@@ -133,6 +135,7 @@ segment_layout_boxes <- function(boxes, segment_ids, width, height,
 #' @export
 #' @examples
 #' mask_units(n_units = 5L)
+#' @keywords internal
 mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
   n <- as.integer(n_units)
   r <- as.numeric(rate)
@@ -179,6 +182,7 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 #' @export
 #' @examples
 #' patch_of_box(box = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, height = 5L)
+#' @keywords internal
 patch_of_box <- function(box, width, height, patch_grid = 14) {
   g <- as.integer(patch_grid)
   nb <- normalise_bbox(box, width, height, g)
@@ -211,6 +215,7 @@ patch_of_box <- function(box, width, height, patch_grid = 14) {
 #' @examples
 #' text_boxes <- list(c(10, 10, 60, 30), c(70, 10, 120, 30))
 #' word_patch_alignment(text_boxes, list(0, 5), width = 200, height = 100)
+#' @keywords internal
 word_patch_alignment <- function(text_boxes, masked_patches, width,
                                  height, patch_grid = 14,
                                  masked_text = list()) {

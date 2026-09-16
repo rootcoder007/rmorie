@@ -972,6 +972,7 @@
 #'   Craig et al. (1997); Sobol (1967); Bratley & Fox (1988);
 #'   Rasmussen & Williams (2006).
 #' @export
+#' @keywords internal
 morie_abcgp <- function(sim, obs, X_grid = NULL, kernel = "sqexp",
                         method = "wilkinson", prior_ppf = NULL,
                         log_prior = NULL, theta0 = NULL, n_sim = 50,

@@ -217,6 +217,7 @@
 #' @param kappa Passed to \code{.tloilr_constrained_value}.
 #' @return The value of \code{.tloilr_constrained_value}.
 #' @export
+#' @keywords internal
 morie_tloilr <- function(Q1, Q0, kappa) {
   .tloilr_constrained_value(Q1, Q0, kappa)
 }

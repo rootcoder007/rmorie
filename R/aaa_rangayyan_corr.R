@@ -51,6 +51,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DotProd(V, V)
+#' @keywords internal
 DotProd <- function(x, y, subtract_mean = FALSE) {
   # eqs (4.24)-(4.25): the inner product and the correlation coefficient
   # it normalizes to.  The book notes the means may be removed first
@@ -92,6 +93,7 @@ DotProd <- function(x, y, subtract_mean = FALSE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ContProj(V, V)
+#' @keywords internal
 ContProj <- function(x, y, t = NULL, dt = 1) {
   # eq (4.26): the continuous counterpart of eq (4.24).  Tabulated it is
   # the discrete inner product SCALED BY dt; dropping the dt turns an
@@ -129,6 +131,7 @@ ContProj <- function(x, y, t = NULL, dt = 1) {
 #' @export
 #' @examples
 #' CcfOuter(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+#' @keywords internal
 CcfOuter <- function(x, y, order, tol = 1e-3) {
   # eq (4.29): Theta_xy = E[x(n) y^T(n)], an N x N matrix carrying all
   # pairwise delays -- which is why the outer product appears in the
@@ -182,6 +185,7 @@ CcfOuter <- function(x, y, order, tol = 1e-3) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Csd(V, V)
+#' @keywords internal
 Csd <- function(x, y, fs = 1) {
   # eqs (4.30)-(4.31): S_xx = |X|^2 and S_xy = X Y*.  Both routes to the
   # CSD -- the transform of the CCF and the product -- are computed and
@@ -246,6 +250,7 @@ Csd <- function(x, y, fs = 1) {
 #'     sin(2 * pi * 30 * (0:(n - 1))/n + k * 1.7))
 #' Msc(x, y, nperseg = 128)
 #' Cohere(x = x, y = y)
+#' @keywords internal
 Cohere <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
   # eq (4.32).  The book is emphatic: computed from two single
   # observations the magnitude is UNITY AT EVERY FREQUENCY, which is
@@ -332,6 +337,7 @@ Cohere <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #' cycles <- lapply(0:(m - 1), function(k) sine_c(n, 3) + 0.8 *
 #'     sin(2 * pi * 30 * (0:(n - 1))/n + k * 1.7))
 #' Msc(x, y, nperseg = 128)
+#' @keywords internal
 Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
   # The square of eq (4.32).  The two forms are NOT interchangeable:
   # 0.5 magnitude coherence is 0.25 magnitude-squared coherence.
@@ -359,6 +365,7 @@ Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Template(V, V)
+#' @keywords internal
 Template <- function(x, ref, threshold = NULL, subtract_mean = TRUE) {
   # eqs (4.25), (4.28): the correlation coefficient at every shift.
   # gamma is normalized at EVERY shift by the energy of the segment under
@@ -423,6 +430,7 @@ Template <- function(x, ref, threshold = NULL, subtract_mean = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MfInput(V, V)
+#' @keywords internal
 MfInput <- function(x, omega, dt = 1) {
   # eq (4.33): X(omega) = integral x(t) exp(-j omega t) dt.  An integral,
   # so it carries the sampling interval.
@@ -463,6 +471,7 @@ MfInput <- function(x, omega, dt = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MfOutput(V, V)
+#' @keywords internal
 MfOutput <- function(x, h, dt = 1) {
   # eq (4.34), computed as y = x * h: exact for a finite record, where
   # the frequency-domain route would need fine enough sampling to avoid
@@ -494,6 +503,7 @@ MfOutput <- function(x, h, dt = 1) {
 #' @export
 #' @examples
 #' MfNoiseIn(power = 5L)
+#' @keywords internal
 MfNoiseIn <- function(power, freqs = NULL) {
   # eq (4.35): S_eta_i = P_eta_i / 2.  The factor of two is the TWO-SIDED
   # convention: integrating the flat density over all f returns P, not
@@ -525,6 +535,7 @@ MfNoiseIn <- function(power, freqs = NULL) {
 #' @export
 #' @examples
 #' MfNoiseOut(power = 5L, H = 0.5)
+#' @keywords internal
 MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
   # eqs (4.36)-(4.37): S_eta_o = (P/2)|H|^2 and its integral.  eq (4.36)
   # holds only because the input was white, so the density factored out.
@@ -563,6 +574,7 @@ MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
 #' @examples
 #' MfPeak(X = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   freqs = c(1, 2, 3, 4, 5, 6, 7, 8), t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 MfPeak <- function(X, H, freqs, t0) {
   # eq (4.38): M_y = |y(t0)|, the numerator of the SNR everything else
   # maximizes.  It is a MAGNITUDE, so the phase of X H at t0 is what the
@@ -602,6 +614,7 @@ MfPeak <- function(X, H, freqs, t0) {
 #' @export
 #' @examples
 #' MfSnr(my = 5L, noise_power = 5L)
+#' @keywords internal
 MfSnr <- function(my, noise_power) {
   # eq (4.39): a PEAK-to-MEAN ratio, not the mean-to-mean of an ordinary
   # SNR.  The matched filter maximizes the output at ONE INSTANT, which
@@ -633,6 +646,7 @@ MfSnr <- function(my, noise_power) {
 #' @export
 #' @examples
 #' SigEnergy(c(4, 0, 0, 0), dt = 1)
+#' @keywords internal
 SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
   # eq (4.40): E_x = integral x^2 dt = integral |X|^2 df, Parseval named
   # for the role it plays here -- E_x is constant for a given signal, so
@@ -693,6 +707,7 @@ SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
 #'     sin(2 * pi * 30 * (0:(n - 1))/n + k * 1.7))
 #' Msc(x, y, nperseg = 128)
 #' MfRatio(X = freqs, H = freqs, freqs = freqs, t0 = cyc, noise_power = cyc)
+#' @keywords internal
 MfRatio <- function(X, H, freqs, t0, noise_power) {
   # eq (4.41).  Dividing by the constant E_x is what turns eq (4.39) into
   # something Schwarz's inequality applies to; by eq (4.46) the ratio
@@ -734,6 +749,7 @@ MfRatio <- function(X, H, freqs, t0, noise_power) {
 #' @examples
 #' SchwarzC(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 SchwarzC <- function(A, B, grid) {
   # eq (4.42), with equality exactly when A = K B* -- which, applied with
   # A = H and B = X exp(+j2 pi f t0), IS the matched-filter derivation.
@@ -780,6 +796,7 @@ SchwarzC <- function(A, B, grid) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SchwarzR(V, V)
+#' @keywords internal
 SchwarzR <- function(a, b, grid = NULL, dt = 1) {
   # eq (4.43), the real case of eq (4.42); equality when a = K b, the two
   # functions collinear as vectors in function space.
@@ -821,6 +838,7 @@ SchwarzR <- function(a, b, grid = NULL, dt = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CauchySch(V, V)
+#' @keywords internal
 CauchySch <- function(a, b) {
   # eq (4.44): |a.b| <= |a||b|.  The ratio of the two sides is the cosine
   # between the vectors, which is exactly the correlation coefficient of
@@ -855,6 +873,7 @@ CauchySch <- function(a, b) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Triangle(V, V)
+#' @keywords internal
 Triangle <- function(a, b) {
   # eq (4.45): |a+b| <= |a|+|b|, with equality when the vectors align.
   # It is the statement that no combination of two signals carries more
@@ -890,6 +909,7 @@ Triangle <- function(a, b) {
 #' @examples
 #' MfTf(X = c(1, 2, 3, 4, 5, 6, 7, 8), freqs = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 MfTf <- function(X, freqs, t0, gain = 1) {
   # eq (4.48): H(f) = K X*(f) exp(-j 2 pi f t0).  The CONJUGATE is what
   # cancels the signal's phase so every component arrives in step at t0 --
@@ -924,6 +944,7 @@ MfTf <- function(X, freqs, t0, gain = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MfImpulse(V)
+#' @keywords internal
 MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
   # eqs (4.49), (4.56): h(t) = K x(t0 - t), reversed and delayed.  The
   # delay must be at least the reference duration or the filter is not
@@ -967,6 +988,7 @@ MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MfAcf(V)
+#' @keywords internal
 MfAcf <- function(x, gain = 1, dt = 1) {
   # Filtering with h(t) = K x(t0 - t) makes the convolution equivalent to
   # CORRELATION, so y(t) = K phi_x(t - t0): the output is a delayed copy
@@ -1013,6 +1035,7 @@ MfAcf <- function(x, gain = 1, dt = 1) {
 #' @export
 #' @examples
 #' RefPattern()
+#' @keywords internal
 RefPattern <- function(amplitudes = NULL) {
   # eqs (4.53)-(4.54): g(n) = 3 d(n) + 2 d(n-1) + d(n-2) and its filter
   # h(n) = d(n) + 2 d(n-1) + 3 d(n-2) -- the same three numbers reversed.
@@ -1045,6 +1068,7 @@ RefPattern <- function(amplitudes = NULL) {
 #' @examples
 #' MfTfEeg(X = c(1, 2, 3, 4, 5, 6, 7, 8), freqs = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 MfTfEeg <- function(X, freqs, t0, gain = 1) {
   # eq (4.55), the same expression as eq (4.48) restated in Section 4.6.2,
   # so it delegates.  What is specific here is the DFT caveat.
@@ -1071,6 +1095,7 @@ MfTfEeg <- function(X, freqs, t0, gain = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MfImpEeg(V)
+#' @keywords internal
 MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
   # eq (4.56), identical to eq (4.49).  Section 4.6.2 adds that because h
   # is a reversed reference, the filtering is equivalent to correlation.
@@ -1093,6 +1118,7 @@ MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MfPsd(V)
+#' @keywords internal
 MfPsd <- function(x, dt = 1) {
   # eq (4.57): Y(f) = X X* = S_x(f).  Because Y is a PSD it is real and
   # nonnegative -- the phase has been cancelled exactly, the
@@ -1127,6 +1153,7 @@ MfPsd <- function(x, dt = 1) {
 #' @export
 #' @examples
 #' MfMaxSnr(x = c(1, 2, 3, 4, 5, 6, 7, 8), noise_power = 5L)
+#' @keywords internal
 MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
   # eq (4.46) rearranged: M_y^2 / P_eta_o = 2 E_x / P_eta_i, the familiar
   # 2E/N0.  It depends on the signal ONLY through its energy -- the same
@@ -1167,6 +1194,7 @@ MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MatchedFilt(V)
+#' @keywords internal
 MatchedFilt <- function(ref, x = NULL, noise_psd = NULL, freqs = NULL,
                         t0 = NULL, gain = 1, dt = 1) {
   # eqs (4.48)-(4.49) for the white-noise case.  The derivation assumed
@@ -1234,6 +1262,7 @@ MatchedFilt <- function(ref, x = NULL, noise_psd = NULL, freqs = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Idft(V)
+#' @keywords internal
 Idft <- function(X) {
   # eq (3.81): the 1/N and the PLUS sign are what distinguish it from the
   # forward transform of eq (3.80); getting either wrong scales the
@@ -1266,6 +1295,7 @@ Idft <- function(X) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Parseval(V)
+#' @keywords internal
 Parseval <- function(x) {
   # eq (3.91), discrete form: sum |x(n)|^2 = (1/N) sum |X(k)|^2.  With the
   # unnormalized forward transform of eq (3.80) the spectral sum is N
@@ -1298,6 +1328,7 @@ Parseval <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SyncSum(V)
+#' @keywords internal
 SyncSum <- function(observations) {
   # eq (3.96): the sum separates into a signal sum growing linearly in M
   # and a zero-mean noise sum growing only as sqrt(M).  The SUM is
@@ -1338,6 +1369,7 @@ SyncSum <- function(observations) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SpecMoments(V)
+#' @keywords internal
 SpecMoments <- function(psd, fs = 1, freqs = NULL) {
   # eqs (6.32)-(6.43).  The sums run over ONE HALF of the periodic PSD:
   # for a real signal S(k) is even-symmetric about fs/2, so summing the
@@ -1392,6 +1424,7 @@ SpecMoments <- function(psd, fs = 1, freqs = NULL) {
 #' @export
 #' @examples
 #' EmgFreq(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 EmgFreq <- function(x, fs, nperseg = NULL) {
   # eqs (6.34)-(6.35) on the EMG periodogram.  Both fall as a muscle
   # fatigues, but they are not interchangeable: the median is far less
@@ -1431,6 +1464,7 @@ EmgFreq <- function(x, fs, nperseg = NULL) {
 #' @export
 #' @examples
 #' SpecRes(n = 5L)
+#' @keywords internal
 SpecRes <- function(n, fs = 1, window = "rectangular") {
   # Rayleigh: delta_f = fs/N, set by the RECORD LENGTH.  Zero-padding
   # interpolates the same spectrum more finely and does NOT improve
@@ -1480,6 +1514,7 @@ SpecRes <- function(n, fs = 1, window = "rectangular") {
 #' @export
 #' @examples
 #' PsdHz(psd = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
   # Section 6.4: bin k sits at k fs / N, and a band power is the sum of
   # its bins times the bin width fs/N.  The bin width turns a density
@@ -1528,6 +1563,7 @@ PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' PcgSyncAvg(D)
+#' @keywords internal
 PcgSyncAvg <- function(cycles, fs = 1) {
   # S_avg(f) = (1/M) sum |PCG_k(f)|^2.  The averaging is of POWER
   # SPECTRA, not waveforms, and that is the point: successive PCG cycles
@@ -1588,6 +1624,7 @@ PcgSyncAvg <- function(cycles, fs = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ErpArtifact(V)
+#' @keywords internal
 ErpArtifact <- function(epochs, reject = NULL) {
   # Section 3.5: averaging M aligned epochs raises the SNR by sqrt(M).  A
   # large artifact is NOT zero-mean over the epochs it contaminates, so
@@ -1647,6 +1684,7 @@ ErpArtifact <- function(epochs, reject = NULL) {
 #' \code{step}, \code{nperseg}, \code{n_windows}, \code{n_channels},
 #' \code{sustained_criterion}, \code{method}.
 #' @export
+#' @keywords internal
 SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
                        nperseg = NULL) {
   # Section 4.5.3: the coherence of eq (4.32) detects rhythms in COMMON
@@ -1731,6 +1769,7 @@ SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
 #' ecg <- sin(2 * pi * 0.25 * (0:(n - 1))/fs + 0.7)
 #' CardioResp(ecg, resp, fs = fs)
 #' }
+#' @keywords internal
 CardioResp <- function(ecg_rate, resp, fs, band = c(0.15, 0.40),
                        nperseg = NULL) {
   # Coherence (eq 4.32) measures LINEAR association; the phase-locking

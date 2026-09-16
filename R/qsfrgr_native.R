@@ -74,6 +74,7 @@
 #' @examples
 #' morie_qsfrgr_logrank(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   left = c(1, 2, 3, 4, 5, 6, 7, 8), right = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_qsfrgr_logrank <- function(time, event, left, right) {
   if (!length(left) || !length(right)) return(0)
   rows <- sort(c(left, right))
@@ -256,6 +257,7 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' @examples
 #' morie_qsfrgr_forest(X = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   event = c(0, 1, 0, 1, 1, 0, 1, 0))
+#' @keywords internal
 morie_qsfrgr_forest <- function(X, time, event, n_trees = 20L,
                                 mtry = NULL, min_leaf = 3L,
                                 max_depth = 6L, honest = TRUE, seed = 0,
@@ -314,6 +316,7 @@ morie_qsfrgr_forest <- function(X, time, event, n_trees = 20L,
 #' trees <- morie_qsfrgr_forest(X, T, E, 5L, NULL, 3L, 3L, TRUE,
 #'     4, "logrank")
 #' morie_qsfrgr_weights(trees, X[i, ], N)
+#' @keywords internal
 morie_qsfrgr_weights <- function(trees, x, n) {
   w <- numeric(n)
   used <- 0L
@@ -345,6 +348,7 @@ morie_qsfrgr_weights <- function(trees, x, n) {
 #' @examples
 #' morie_qsfrgr_km(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_qsfrgr_km <- function(time, event, weights, grid = NULL) {
   n <- length(time)
   ts <- sort(unique(time[event == 1L & weights > 0]))
@@ -383,6 +387,7 @@ morie_qsfrgr_km <- function(time, event, weights, grid = NULL) {
 #' @export
 #' @examples
 #' morie_qsfrgr_quantile(curve = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), q = 0.5)
+#' @keywords internal
 morie_qsfrgr_quantile <- function(curve, q) {
   q <- as.numeric(q)
   if (!(q > 0 && q < 1))
@@ -416,6 +421,7 @@ morie_qsfrgr_quantile <- function(curve, q) {
 #' @examples
 #' morie_qsfrgr(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_qsfrgr <- function(time, event, X, quantile = 0.5, n_trees = 20L,
                          mtry = NULL, min_leaf = 3L, max_depth = 6L,
                          honest = TRUE, seed = 0, rule = "logrank",
@@ -473,6 +479,7 @@ morie_qsfrgr <- function(time, event, X, quantile = 0.5, n_trees = 20L,
 #' @export
 #' @examples
 #' morie_qsfrgr_cheatsheet()
+#' @keywords internal
 morie_qsfrgr_cheatsheet <- function()
   paste0("qsfrgr: quantile survival forest. splits ",
          paste(.QSFRGR_SPLITS, collapse = ", "),

@@ -115,6 +115,7 @@ morie_crim_etas <- function(times, magnitudes = NULL, m0 = NULL,
 #' @references
 #'   Ogata (1988) JASA 83(401).
 #' @export
+#' @keywords internal
 print.morie_etas <- function(x, ...) {
   cat("ETAS (Ogata 1988), n =", x$n, "\n")
   print(round(x$par, 4))
@@ -225,6 +226,7 @@ morie_crim_hawkes_multivariate <- function(times, marks, t_max = NULL,
 #' @references
 #'   Hawkes (1971) Biometrika 58(1).
 #' @export
+#' @keywords internal
 print.morie_mv_hawkes <- function(x, ...) {
   cat(sprintf(
     "Multivariate Hawkes (K = %d, beta = %.3g), n = %d\n",
@@ -304,6 +306,7 @@ morie_crim_near_repeat <- function(x, y, times, s_threshold,
 #' @references
 #'   Knox (1964); Townsley, Homel & Chaseling (2003).
 #' @export
+#' @keywords internal
 print.morie_knox <- function(x, ...) {
   cat("Knox near-repeat test\n")
   cat(sprintf(
@@ -402,6 +405,7 @@ morie_crim_risk_terrain <- function(incidents, layers, n_grid = 25L,
 #' @references
 #'   Caplan, Kennedy & Miller (2011) Justice Quarterly 28(2).
 #' @export
+#' @keywords internal
 print.morie_rtm <- function(x, ...) {
   cat("Risk terrain model,", x$n, "incidents\n")
   cat("  log relative risk per layer (standardized densities):\n")

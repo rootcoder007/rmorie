@@ -152,6 +152,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_potM(V, M)
+#' @keywords internal
 morie_potM <- function(y, u, return_periods = c(10.0, 100.0)) {
   yv <- as.numeric(y)
   u <- as.numeric(u)
@@ -209,6 +210,7 @@ peaks_over_threshold <- morie_potM
 #' @export
 #' @examples
 #' morie_potM_cheatsheet()
+#' @keywords internal
 morie_potM_cheatsheet <- function() {
   "potM: GPD MLE on y-u | y>u; x_m = u + sigma/xi ((m zeta)^xi - 1)"
 }

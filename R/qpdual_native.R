@@ -58,6 +58,7 @@
 #'   \code{gap}, \code{iterations}, \code{converged}, \code{domain},
 #'   \code{step}, \code{history}, \code{method}.
 #' @export
+#' @keywords internal
 morie_qpdual <- function(Q, c, x0 = NULL, domain = "simplex",
                          lower = NULL, upper = NULL, step = "exact",
                          max_iter = 1000L, tol = 1e-12) {
@@ -136,9 +137,12 @@ qpdual <- morie_qpdual
 #' @export
 quadratic_program <- morie_qpdual
 
+#' qpdual_cheatsheet
+#'
 #' @export
 #' @examples
 #' qpdual_cheatsheet()
+#' @keywords internal
 qpdual_cheatsheet <- function() {
   paste0("qpdual: Frank-Wolfe, s = argmin_C <grad, s>, ",
          "x += gamma (s - x); ",

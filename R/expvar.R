@@ -31,10 +31,10 @@
   hs
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_exponential_variogram_model(V)
+#' @keywords internal
 morie_exponential_variogram_model <- function(h, c0 = 0, c = 1, a = 1) {
   hs <- .expvar_lags(h)
   c0 <- as.numeric(c0)[1L]

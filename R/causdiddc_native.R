@@ -315,6 +315,7 @@
 #' Y <- 1 + 0.5 * grid$t + 2 * D + rnorm(nrow(grid), 0, 0.2)
 #' r <- morie_causdiddc(Y, D, grid$g, grid$t)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_causdiddc <- function(Y, D, group, period) {
   fe <- .causdiddc_twfe(Y, D, group, period)
   dm <- tryCatch(.causdiddc_did_m(Y, D, group, period),
@@ -363,6 +364,7 @@ morie_causdiddc <- function(Y, D, group, period) {
 #' D <- as.numeric(grid$g <= 2 & grid$t >= 3)
 #' r <- morie_causdiddc_weights(D, grid$g, grid$t)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_causdiddc_weights <- function(D, group, period, weights = NULL) {
   w <- .causdiddc_twfe_weights(D, group, period, weights = weights)
   list(weights = w$weights, residual = w$residual)
@@ -388,6 +390,7 @@ morie_causdiddc_weights <- function(D, group, period, weights = NULL) {
 #' Y <- 1 + 0.5 * grid$t + 2 * D + rnorm(nrow(grid), 0, 0.2)
 #' r <- morie_causdiddc_twfe(Y, D, grid$g, grid$t)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_causdiddc_twfe <- function(Y, D, group, period) {
   .causdiddc_twfe(Y, D, group, period)
 }
@@ -416,6 +419,7 @@ morie_causdiddc_twfe <- function(Y, D, group, period) {
 #' Y <- 1 + 0.5 * grid$t + 2 * D + rnorm(nrow(grid), 0, 0.2)
 #' r <- morie_causdiddc_did_m(Y, D, grid$g, grid$t)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_causdiddc_did_m <- function(Y, D, group, period) {
   .causdiddc_did_m(Y, D, group, period)
 }

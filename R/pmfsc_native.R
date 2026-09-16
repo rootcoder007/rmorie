@@ -89,6 +89,7 @@
 #' @export
 #' @examples
 #' morie_pmfsc_shell(r1 = 5L, r2 = 5L)
+#' @keywords internal
 morie_pmfsc_shell <- function(r1, r2) {
   if (r2 < r1) stop("the outer radius must not be inside the inner")
   (4 / 3) * pi * (r2 * r2 * r2 - r1 * r1 * r1)
@@ -107,6 +108,7 @@ morie_pmfsc_shell <- function(r1, r2) {
 #' @export
 #' @examples
 #' morie_pmfsc_bin(r = 5L, r_max = 5L, n_bins = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_pmfsc_bin <- function(r, r_max, n_bins) {
   r <- as.numeric(r)
   if (r < 0) stop("a separation cannot be negative")
@@ -158,6 +160,7 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_pmfsc_derive(D)
+#' @keywords internal
 morie_pmfsc_derive <- function(observations, n_complexes = 1,
                                r_max = .PMFSC_DEFAULT_CUTOFF,
                                n_bins = 24, reference = "bulk",
@@ -249,6 +252,7 @@ morie_pmfsc_derive <- function(observations, n_complexes = 1,
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_pmfsc_score(D, D)
+#' @keywords internal
 morie_pmfsc_score <- function(pairs, potential,
                               r_max = .PMFSC_DEFAULT_CUTOFF,
                               n_bins = 24, missing = 0) {
@@ -328,6 +332,7 @@ morie_pmfsc_score <- function(pairs, potential,
 #' LIG <- list(list(3.4, 0, 0, "c"), list(1, 3, 0, "n"), list(5,
 #'     5, 1, "o"), list(2, 2, 2, "x"))
 #' morie_pmfsc(REC, LIG, observations = OBS, r_max = RMAX, n_bins = NB)
+#' @keywords internal
 morie_pmfsc <- function(receptor, ligand, potential = NULL,
                         observations = NULL, n_complexes = 1,
                         r_max = .PMFSC_DEFAULT_CUTOFF, n_bins = 24,
@@ -369,6 +374,7 @@ morie_pmfsc <- function(receptor, ligand, potential = NULL,
 #' @export
 #' @examples
 #' morie_pmfsc_cheatsheet()
+#' @keywords internal
 morie_pmfsc_cheatsheet <- function()
   paste0("pmfsc: knowledge-based PMF scoring. references ",
          paste(.PMFSC_REFERENCES, collapse = ", "), "; corrections ",

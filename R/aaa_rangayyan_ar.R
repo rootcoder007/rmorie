@@ -27,6 +27,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Levinson(V)
+#' @keywords internal
 Levinson <- function(acf, order = NULL) {
   # eqs (7.37)-(7.39).  Init eps_0 = phi(0); for i = 1..P:
   #   gamma_i = -(1/eps_{i-1})[phi(i) + sum_j a_{i-1,j} phi(i-j)]
@@ -84,6 +85,7 @@ Levinson <- function(acf, order = NULL) {
 #' @export
 #' @examples
 #' Lpc(x = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+#' @keywords internal
 Lpc <- function(x, order, method = "autocorrelation") {
   # eqs (7.17)-(7.18), (7.25), (7.35).  The ACF is the BIASED estimator
   # (divide by N): that is what makes the Toeplitz system
@@ -137,6 +139,7 @@ Lpc <- function(x, order, method = "autocorrelation") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LpcSynth(V, V)
+#' @keywords internal
 LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
   # Inverting eq (7.18): y(n) = G e(n) - sum a_k y(n-k).  The minus
   # follows from A(z) = 1 + sum a_k z^-k.  Coefficients from the other
@@ -183,6 +186,7 @@ LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
 #' @export
 #' @examples
 #' ArFit(x = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+#' @keywords internal
 ArFit <- function(x, order, fs = 1, nfreq = 256) {
   # Section 7.5: S(f) = G^2 / |A(exp(-j 2 pi f / fs))|^2, a smooth
   # spectrum from P+1 parameters.  That smoothness is also the trap: the
@@ -223,6 +227,7 @@ ArFit <- function(x, order, fs = 1, nfreq = 256) {
 #' @export
 #' @examples
 #' FpeOrder(errors = 5L, n_samples = 5L)
+#' @keywords internal
 FpeOrder <- function(errors, n_samples) {
   # Akaike (1970): FPE(p) = sigma_p^2 (N+p+1)/(N-p-1).  The residual
   # variance falls monotonically with p (eq 7.39), so without a penalty
@@ -260,6 +265,7 @@ FpeOrder <- function(errors, n_samples) {
 #' @export
 #' @examples
 #' MdlOrder(errors = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
+#' @keywords internal
 MdlOrder <- function(errors, n_samples) {
   # Rissanen (1978): MDL(p) = N log(sigma_p^2) + p log(N).  The penalty
   # per parameter is log(N), larger than AIC's 2 for any N > 7, so MDL
@@ -298,6 +304,7 @@ MdlOrder <- function(errors, n_samples) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PzForm(V, V)
+#' @keywords internal
 PzForm <- function(zeros, poles, z = NULL, gain = 1) {
   # eq (3.69): H(z) = prod (1 - z_k z^-1) / prod (1 - p_k z^-1).  A pole
   # on the unit circle makes H undefined there; outside it, a causal
@@ -348,6 +355,7 @@ PzForm <- function(zeros, poles, z = NULL, gain = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PzFormZ(V, V)
+#' @keywords internal
 PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
   # eq (3.70): H(z) = z^(M-N) prod (z - z_k) / prod (z - p_k), the same
   # function as eq (3.69) rewritten in z.  The z^(M-N) factor is exactly
@@ -409,6 +417,7 @@ PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
 #' @examples
 #' PzResp(zeros = c(1, 2, 3, 4, 5, 6, 7, 8), poles = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 PzResp <- function(zeros, poles, omega, gain = 1) {
   # eqs (3.71)-(3.73): on the unit circle the magnitude is the product
   # of distances to the zeros over the product of distances to the
@@ -468,6 +477,7 @@ PzResp <- function(zeros, poles, omega, gain = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PoleZero(V)
+#' @keywords internal
 PoleZero <- function(b, a = NULL) {
   # eqs (3.67), (3.69): zeros are the roots of the numerator, poles the
   # roots of the denominator.  The denominator is in the book's
@@ -513,6 +523,7 @@ PoleZero <- function(b, a = NULL) {
 #' @export
 #' @examples
 #' ArmaFit(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 1, q = 0.5)
+#' @keywords internal
 ArmaFit <- function(x, p, q, fs = 1) {
   # Section 7.7: H(z) = B(z)/A(z), needed when the signal has spectral
   # nulls as well as resonances -- an all-pole model can only make
@@ -577,6 +588,7 @@ ArmaFit <- function(x, p, q, fs = 1) {
 #' set.seed(1)
 #' x <- sin(2 * pi * 40 * (1:500) / 1000) + rnorm(500) * 0.1
 #' PcgAr(x, fs = 1000)
+#' @keywords internal
 PcgAr <- function(x, fs, order = NULL, segment = NULL) {
   # Chapter 7: the poles of an all-pole PCG model track the resonances
   # of S1 and S2.  A pole p gives a resonance at (fs/2pi) Arg(p) with
@@ -631,6 +643,7 @@ PcgAr <- function(x, fs, order = NULL, segment = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HrvAr(V)
+#' @keywords internal
 HrvAr <- function(rr, order = 16, fs = 4, nfreq = 512) {
   # The RR series is unevenly sampled by construction, so it is
   # resampled onto a uniform grid (4 Hz, comfortably above the 0.4 Hz
@@ -694,6 +707,7 @@ HrvAr <- function(rr, order = 16, fs = 4, nfreq = 512) {
 #' @examples
 #' stats_free_interp(beats = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 stats_free_interp <- function(beats, values, grid) {
   # piecewise-linear interpolation onto `grid`, written out rather than
   # delegated so the R and Python arms resample identically
@@ -730,6 +744,7 @@ stats_free_interp <- function(beats, values, grid) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HrvRatio(V)
+#' @keywords internal
 HrvRatio <- function(rr, order = 16, fs = 4) {
   # LF/HF from the AR model PSD.  Often called a sympathovagal balance;
   # that reading is contested -- HF is reasonably vagal, but LF reflects

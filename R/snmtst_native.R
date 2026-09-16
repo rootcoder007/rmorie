@@ -88,6 +88,7 @@
 #' beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
 #' r <- identified_set(beta, n_pre = 2, n_post = 3, M = 0.1)
 #' str(r, max.level = 1)
+#' @keywords internal
 identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
                            l_vec = NULL, grid = NULL) {
   if (!(family %in% .SNMTST_FAMILIES))
@@ -227,6 +228,7 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
 #' r <- sensitivity_curve(beta, n_pre = 2, n_post = 3,
 #'                        Ms = c(0, 0.05, 0.1))
 #' str(r, max.level = 1)
+#' @keywords internal
 sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
                               l_vec = NULL) {
   curve <- lapply(Ms, function(M) {
@@ -259,6 +261,7 @@ sensitivity_curve <- function(beta, n_pre, n_post, Ms, family = "SD",
 #' beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
 #' r <- breakdown_value(beta, n_pre = 2, n_post = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 breakdown_value <- function(beta, n_pre, n_post, family = "SD",
                             l_vec = NULL, sign = "positive",
                             M_max = 10.0, tol = 1e-9) {
@@ -308,6 +311,7 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
 #' beta <- c(-0.05, 0.02, 0.5, 0.55, 0.6)
 #' r <- fixed_length_ci(beta, sigma = 0.1, n_pre = 2, n_post = 3, M = 0.1)
 #' str(r, max.level = 1)
+#' @keywords internal
 fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
                             family = "SD", l_vec = NULL, level = 0.95) {
   s <- identified_set(beta, n_pre, n_post, M = M, family = family,

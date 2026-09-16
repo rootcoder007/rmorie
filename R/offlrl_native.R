@@ -128,6 +128,7 @@
 #' \code{objective}, \code{alpha}, \code{variant}, \code{backup}, \code{n_transitions},
 #' \code{method}.
 #' @export
+#' @keywords internal
 offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,
                    gamma = 0.99, variant = "H", backup = "max",
                    policy = NULL, mu = NULL, lr = 0.5, iters = 2000,

@@ -94,6 +94,7 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @examples
 #' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
 #' policy_values(T, R = c(1, 0), gamma = 0.9, policy = c(1L, 2L))
+#' @keywords internal
 policy_values <- function(T, R, gamma, policy) {
   m <- .mdp(T, gamma)
   nS <- m$nS
@@ -121,6 +122,7 @@ policy_values <- function(T, R, gamma, policy) {
 #' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
 #' V <- policy_values(T, R = c(1, 0), gamma = 0.9, policy = c(1L, 2L))
 #' q_values(T, R = c(1, 0), gamma = 0.9, V)
+#' @keywords internal
 q_values <- function(T, R, gamma, V) {
   m <- .mdp(T, gamma)
   nS <- m$nS
@@ -150,6 +152,7 @@ q_values <- function(T, R, gamma, V) {
 #' T <- list(list(c(0.9, 0.1), c(0.2, 0.8)), list(c(0.5, 0.5), c(0.1, 0.9)))
 #' r <- policy_iteration(T, R = c(1, 0), gamma = 0.9)
 #' str(r, max.level = 1)
+#' @keywords internal
 policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   m <- .mdp(T, gamma)
   nS <- m$nS
@@ -219,6 +222,7 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' log_prior(V)
+#' @keywords internal
 log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
                       J = 0.1, H = 0, neighbours = NULL) {
   if (!(prior %in% PRIORS))
@@ -287,6 +291,7 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' obs <- list(c(1L, 1L), c(2L, 2L), c(1L, 1L))
 #' r <- policy_walk(T, obs, gamma = 0.9, n_iter = 100, seed = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
                         alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                         J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
@@ -388,6 +393,7 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 #' obs <- list(c(1L, 1L), c(2L, 2L), c(1L, 1L))
 #' r <- birl(T, obs, gamma = 0.9, n_iter = 100, seed = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 birl <- function(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25,
                  alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                  J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {

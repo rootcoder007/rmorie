@@ -69,6 +69,7 @@
 #' @examples
 #' r <- morie_secarg_variable_hash(charToRaw("hello"), 64L)
 #' length(r)
+#' @keywords internal
 morie_secarg_variable_hash <- function(data, length) {
   T <- as.integer(length)
   if (T < 1L) stop("secarg: the output length must be positive")
@@ -110,6 +111,7 @@ morie_secarg_variable_hash <- function(data, length) {
 #'                           parallelism = 1L, tag_length = 32L,
 #'                           memory = 32L, passes = 3L)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
                                  memory, passes,
                                  variant = "argon2id",
@@ -208,6 +210,7 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 #' @return Integer vector of 128 64-bit words.
 #' @references RFC 9106 Sec. 3.5-3.6.
 #' @export
+#' @keywords internal
 morie_secarg_compress <- function(X, Y) {
   R <- mapply(bitwXor, as.numeric(X), as.numeric(Y), SIMPLIFY = TRUE)
   Q <- R
@@ -321,6 +324,7 @@ morie_secarg_compress <- function(X, Y) {
 #' r <- morie_secarg_argon2(charToRaw("password"), charToRaw("somesalt"),
 #'                          memory = 32, passes = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_secarg_argon2 <- function(password, salt, memory = 32, passes = 3,
                                 parallelism = 4, tag_length = 32,
                                 variant = "argon2id", secret = NULL,
@@ -357,6 +361,7 @@ morie_secarg_argon2 <- function(password, salt, memory = 32, passes = 3,
 #' @export
 #' @examples
 #' morie_secarg_parameter_advice()
+#' @keywords internal
 morie_secarg_parameter_advice <- function(profile = "first") {
   rec <- list(
     first = list(variant = "argon2id", memory = 2L * 1024L * 1024L,

@@ -68,6 +68,7 @@
 #'   Variational Inference: A Review for Statisticians. JASA
 #'   112(518), 859-877.
 #' @export
+#' @keywords internal
 morie_baynav <- function(u, w, b, value, support, eps,
                          z0, log_q0, layers,
                          log_joint, log_q, samples) {
@@ -93,6 +94,7 @@ morie_baynav <- function(u, w, b, value, support, eps,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' enforce_invertibility(V, V)
+#' @keywords internal
 enforce_invertibility <- function(u, w) {
   uv <- as.numeric(u)
   wv <- as.numeric(w)
@@ -125,6 +127,7 @@ enforce_invertibility <- function(u, w) {
 #' @examples
 #' planar_flow(z = c(1, 2, 3, 4, 5, 6, 7, 8), u = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+#' @keywords internal
 planar_flow <- function(z, u, w, b) {
   zv <- as.numeric(z)
   fixed <- enforce_invertibility(u, w)
@@ -158,6 +161,7 @@ planar_flow <- function(z, u, w, b) {
 #'                list(u = c(-0.1, 0.2), w = c(0.3, 0.1), b = 0))
 #' r <- flow_log_density(z0 = c(0.5, -0.2), log_q0 = -1.5, layers)
 #' str(r, max.level = 1)
+#' @keywords internal
 flow_log_density <- function(z0, log_q0, layers) {
   z <- as.numeric(z0)
   lq <- as.numeric(log_q0)
@@ -190,6 +194,7 @@ flow_log_density <- function(z0, log_q0, layers) {
 #' @export
 #' @examples
 #' transform_to_real(value = 5L)
+#' @keywords internal
 transform_to_real <- function(value, support = "positive", eps = 1e-10) {
   # The Python arm's `eps` is accepted but only used to guard
   # against log(0) for positive parameters; the R guard is
@@ -236,6 +241,7 @@ transform_to_real <- function(value, support = "positive", eps = 1e-10) {
 #' lq <- function(s) -0.5 * (s - 0.2)^2 - 0.9
 #' r <- elbo(lj, lq, samples = c(-0.5, 0, 0.5, 1))
 #' str(r, max.level = 1)
+#' @keywords internal
 elbo <- function(log_joint, log_q, samples) {
   if (length(samples) == 0L)
     stop("baynav: no samples given")

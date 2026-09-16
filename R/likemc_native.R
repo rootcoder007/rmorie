@@ -111,6 +111,7 @@
 #' \code{R0_q025}, \code{R0_median}, \code{R0_q975}, \code{logpost_final}, \code{seed},
 #' \code{step}, \code{method}.
 #' @export
+#' @keywords internal
 morie_likemc <- function(model, data, priors, n_iter, seed = 1,
                          step = 0.15, burn = 0) {
   y <- as.numeric(data)

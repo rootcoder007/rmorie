@@ -218,6 +218,7 @@
 #' @examples
 #' morie_sdcfst_forest(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   rows = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_sdcfst_forest <- function(X, y, rows, n_trees = 20L, mtry = NULL,
                                 min_leaf = 5L, max_depth = 6L, e = NULL) {
   if (is.null(e)) e <- .ghc_rng(1)
@@ -256,6 +257,7 @@ morie_sdcfst_forest <- function(X, y, rows, n_trees = 20L, mtry = NULL,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_sdcfst_predict(D, V)
+#' @keywords internal
 morie_sdcfst_predict <- function(forest, x)
   .w3_csum(vapply(forest$trees, function(t) .sdcfst_tree_predict(t, x),
                   numeric(1))) / length(forest$trees)
@@ -284,6 +286,7 @@ morie_sdcfst_predict <- function(forest, x)
 #' lin <- 0.9 * x1 - 0.7 * x2 + 0.5 * x3
 #' D <- ifelse(lin + 0.35 * sin(4.1 * ii) > 0, 1, 0)
 #' morie_sdcfst_logistic(X, D, seq_len(N))
+#' @keywords internal
 morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
   p <- ncol(X) + 1L
   beta <- numeric(p)
@@ -382,6 +385,7 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
 #' @examples
 #' set.seed(1)
 #' r <- morie_sdcfst(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+#' @keywords internal
 morie_sdcfst <- function(y, D, X, K_fold = 5L, score = "aipw",
                          learner = "forest", n_trees = 20L, mtry = NULL,
                          min_leaf = 5L, max_depth = 6L, trim = 0.02,
@@ -508,6 +512,7 @@ morie_sdcfst <- function(y, D, X, K_fold = 5L, score = "aipw",
 #' @export
 #' @examples
 #' morie_sdcfst_cheatsheet()
+#' @keywords internal
 morie_sdcfst_cheatsheet <- function()
   paste0("sdcfst: cross-fitted doubly robust treatment effects. scores ",
          paste(.SDCFST_SCORES, collapse = ", "), "; learners ",

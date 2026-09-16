@@ -62,6 +62,7 @@
 #' @examples
 #' W <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
 #' morie_poissp_car_precision(W, tau = 1.0, rho = 0.5)
+#' @keywords internal
 morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
   A <- .poissp_adjacency(W)
   n <- nrow(A)
@@ -78,6 +79,7 @@ morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
 #' @examples
 #' W <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3)
 #' morie_poissp_rho_bounds(W)
+#' @keywords internal
 morie_poissp_rho_bounds <- function(W) {
   A <- .poissp_adjacency(W)
   n <- nrow(A)
@@ -315,6 +317,7 @@ morie_poissp_rho_bounds <- function(W) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_poissp(V)
+#' @keywords internal
 morie_poissp <- function(counts, X = NULL, offset = NULL, W = NULL,
                          rho = 1.0, tau = NULL, constrain = NULL,
                          iters = 100L, tol = 1e-11, ridge = 1e-10,
@@ -442,6 +445,7 @@ morie_poisson_spatial_glm <- morie_poissp
 #' @export
 #' @examples
 #' morie_poissp_cheatsheet()
+#' @keywords internal
 morie_poissp_cheatsheet <- function() {
   paste0("poissp: Poisson areal regression, log mu = X beta + u with a ",
          "known offset E entering at coefficient one, and u ~ CAR with ",

@@ -40,6 +40,7 @@ FAIL <- NA_integer_
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prsPEG_lit(V)
+#' @keywords internal
 morie_prsPEG_lit <- function(s) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -60,6 +61,7 @@ morie_prsPEG_lit <- function(s) {
 #' @export
 #' @examples
 #' morie_prsPEG_seq()
+#' @keywords internal
 morie_prsPEG_seq <- function(...) {
   es <- list(...)
   fn <- function(text, pos, ctx) {
@@ -86,6 +88,7 @@ morie_prsPEG_seq <- function(...) {
 #' @export
 #' @examples
 #' morie_prsPEG_choice()
+#' @keywords internal
 morie_prsPEG_choice <- function(...) {
   es <- list(...)
   fn <- function(text, pos, ctx) {
@@ -112,6 +115,7 @@ morie_prsPEG_choice <- function(...) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prsPEG_star(V)
+#' @keywords internal
 morie_prsPEG_star <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -138,6 +142,7 @@ morie_prsPEG_star <- function(e) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prsPEG_plus(V)
+#' @keywords internal
 morie_prsPEG_plus <- function(e) morie_prsPEG_seq(e, morie_prsPEG_star(e))
 
 #' morie_prsPEG_opt
@@ -152,6 +157,7 @@ morie_prsPEG_plus <- function(e) morie_prsPEG_seq(e, morie_prsPEG_star(e))
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prsPEG_opt(V)
+#' @keywords internal
 morie_prsPEG_opt <- function(e) morie_prsPEG_choice(e, morie_prsPEG_lit(""))
 
 #' morie_prsPEG_and_
@@ -166,6 +172,7 @@ morie_prsPEG_opt <- function(e) morie_prsPEG_choice(e, morie_prsPEG_lit(""))
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prsPEG_and_(V)
+#' @keywords internal
 morie_prsPEG_and_ <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -187,6 +194,7 @@ morie_prsPEG_and_ <- function(e) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prsPEG_not_(V)
+#' @keywords internal
 morie_prsPEG_not_ <- function(e) {
   fn <- function(text, pos, ctx) {
     ctx$steps <- ctx$steps + 1L
@@ -208,6 +216,7 @@ morie_prsPEG_not_ <- function(e) {
 #' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{consumed},
 #' \code{steps}, \code{memoised}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_prsPEG_parse <- function(expr, text, full = TRUE) {
   ctx <- list(steps = 0L, memo = NULL)
   end <- expr(as.character(text), 0L, ctx)
@@ -231,6 +240,7 @@ morie_prsPEG_parse <- function(expr, text, full = TRUE) {
 #' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{steps},
 #' \code{memo.entries}, \code{memoised}, \code{method}.
 #' @export
+#' @keywords internal
 morie_prsPEG_packrat_parse <- function(expr, text, full = TRUE) {
   memo <- new.env(parent = emptyenv())
   ctx <- list(steps = 0L, memo = memo)

@@ -188,6 +188,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_impFB(V)
+#' @keywords internal
 morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
                        seed = 0, fast = TRUE) {
   M <- as.matrix(R)

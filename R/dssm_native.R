@@ -104,6 +104,7 @@
 #' @export
 #' @examples
 #' morie_dssm_letter_ngrams(word = 5L)
+#' @keywords internal
 morie_dssm_letter_ngrams <- function(word, n = 3L, boundary = "#") {
   m <- as.integer(n)
   if (length(m) != 1L || is.na(m))
@@ -147,6 +148,7 @@ morie_dssm_letter_ngrams <- function(word, n = 3L, boundary = "#") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_dssm_word_hash(V)
+#' @keywords internal
 morie_dssm_word_hash <- function(words, n = 3L, vocabulary = NULL) {
   W <- as.character(words)
   if (length(W) == 0L)
@@ -210,6 +212,7 @@ morie_dssm_word_hash <- function(words, n = 3L, vocabulary = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_dssm_collision_rate(V)
+#' @keywords internal
 morie_dssm_collision_rate <- function(vocabulary, n = 3L) {
   V <- as.character(vocabulary)
   if (length(V) == 0L)
@@ -251,6 +254,7 @@ morie_dssm_collision_rate <- function(vocabulary, n = 3L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_dssm_cosine_similarity(V, V)
+#' @keywords internal
 morie_dssm_cosine_similarity <- function(query_vector, doc_vector) {
   q <- .dssm_to_vec(query_vector)
   d <- .dssm_to_vec(doc_vector)
@@ -292,6 +296,7 @@ morie_dssm_cosine_similarity <- function(query_vector, doc_vector) {
 #' @examples
 #' morie_dssm_click_posterior(query_vector = 5L, clicked_vector = 5L,
 #'   unclicked_vectors = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_dssm_click_posterior <- function(query_vector, clicked_vector,
                                        unclicked_vectors,
                                        gamma = 10.0) {

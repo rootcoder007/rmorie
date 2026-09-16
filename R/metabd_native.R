@@ -72,6 +72,7 @@
 #' @export
 #' @examples
 #' tetranucleotide_frequency("ACGTACGTACGTTGCAACGT")
+#' @keywords internal
 tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
   s <- toupper(as.character(seq))
   K <- as.integer(kk)
@@ -115,6 +116,7 @@ tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' abundance_correlation(V, V)
+#' @keywords internal
 abundance_correlation <- function(cov_a, cov_b) {
   a <- .metabd_vec(cov_a)
   b <- .metabd_vec(cov_b)
@@ -144,6 +146,7 @@ abundance_correlation <- function(cov_a, cov_b) {
 #' @export
 #' @examples
 #' length_weight(length = 5L)
+#' @keywords internal
 length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
   L <- as.numeric(length)
   if (L <= 0) stop("metabd: the contig length must be positive")
@@ -174,6 +177,7 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' composite_distance(V, V)
+#' @keywords internal
 composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
                                len_a = NULL, len_b = NULL,
                                w_abundance = 0.5) {
@@ -220,6 +224,7 @@ composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' bin_contigs(V)
+#' @keywords internal
 bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
                         threshold = 0.15, min_bin_size = 200000.0) {
   T <- .metabd_mat(tnfs)
@@ -270,6 +275,7 @@ bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' purity_completeness(V, V)
+#' @keywords internal
 purity_completeness <- function(bins, truth) {
   t <- as.list(unlist(truth))
   per_bin <- list()
@@ -328,6 +334,7 @@ metagenome_binning <- bin_contigs
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 morie_metabd <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("metabd: op must be one of tetranucleotide_frequency, abundance_correlation, length_weight, composite_distance, bin_contigs, purity_completeness, cheatsheet")

@@ -103,6 +103,7 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' distance_matrix(V)
+#' @keywords internal
 distance_matrix <- function(fps) {
   F <- lapply(fps, .tncomp_fingerprint)
   n <- length(F)
@@ -196,6 +197,7 @@ distance_matrix <- function(fps) {
 #' @export
 #' @examples
 #' maxmin_selection(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+#' @keywords internal
 maxmin_selection <- function(fps, k, seed = NULL) {
   .tncomp_select(fps, k, "maxmin", seed)$chosen
 }
@@ -213,6 +215,7 @@ maxmin_selection <- function(fps, k, seed = NULL) {
 #' @export
 #' @examples
 #' maxsum_selection(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+#' @keywords internal
 maxsum_selection <- function(fps, k, seed = NULL) {
   .tncomp_select(fps, k, "maxsum", seed)$chosen
 }
@@ -232,6 +235,7 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' diversity(V, V)
+#' @keywords internal
 diversity <- function(fps, subset, D = NULL) {
   M <- if (is.null(D)) distance_matrix(fps) else D
   S <- as.integer(subset)
@@ -270,6 +274,7 @@ diversity <- function(fps, subset, D = NULL) {
 #' @export
 #' @examples
 #' morie_tncomp(fps = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+#' @keywords internal
 morie_tncomp <- function(fps, k, objective = "maxmin", seed = NULL) {
   result <- .tncomp_select(fps, k, objective, seed)
   chosen <- result$chosen

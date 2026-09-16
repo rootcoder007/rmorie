@@ -18,6 +18,7 @@
 #' @export
 #' @examples
 #' cumulative_episodes(histories = list(a = 1, b = 2))
+#' @keywords internal
 cumulative_episodes <- function(histories, states = .STATES) {
   S <- as.character(states)
   idx <- setNames(seq_along(S), S)
@@ -82,6 +83,7 @@ cumulative_episodes <- function(histories, states = .STATES) {
 #' histories <- list(c(1, 0, 1), c(0, 1, 1))
 #' propensities <- list(c(0.5, 0.5, 0.5), c(0.4, 0.6, 0.5))
 #' treatment_weights(histories, propensities, stabilise = FALSE)
+#' @keywords internal
 treatment_weights <- function(histories, propensities, stabilise = TRUE,
                               marginal = NULL, truncate = NULL) {
   W <- numeric(length(histories))
@@ -138,6 +140,7 @@ treatment_weights <- function(histories, propensities, stabilise = TRUE,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' weight_diagnostics(V)
+#' @keywords internal
 weight_diagnostics <- function(weights) {
   w <- as.numeric(weights)
   n <- length(w)
@@ -194,6 +197,7 @@ weight_diagnostics <- function(weights) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' confounding_check(M, M)
+#' @keywords internal
 confounding_check <- function(covariate_history, treatment_history,
                               outcome = NULL) {
   L <- as.matrix(covariate_history)
@@ -268,6 +272,7 @@ confounding_check <- function(covariate_history, treatment_history,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' fit_msm(V, V)
+#' @keywords internal
 fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   y <- as.numeric(outcome)
   X <- as.matrix(cumulative)

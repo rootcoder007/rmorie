@@ -161,6 +161,7 @@ morie_vepan_PICK_ORDER <- c(
 #' @export
 #' @examples
 #' morie_vepan_consequence_rank(term = 5L)
+#' @keywords internal
 morie_vepan_consequence_rank <- function(term) {
   # Severity rank of an SO term; 1 is worst. Unknown terms sort last.
   r <- morie_vepan_CONSEQUENCE_RANK[[term]]
@@ -178,6 +179,7 @@ morie_vepan_consequence_rank <- function(term) {
 #' @export
 #' @examples
 #' morie_vepan_consequence_impact(term = 5L)
+#' @keywords internal
 morie_vepan_consequence_impact <- function(term) {
   # HIGH/MODERATE/LOW/MODIFIER for an SO term.
   i <- morie_vepan_CONSEQUENCE_IMPACT[[term]]
@@ -196,6 +198,7 @@ morie_vepan_consequence_impact <- function(term) {
 #' @examples
 #' morie_vepan_most_severe_consequence(c("missense_variant",
 #'                                       "synonymous_variant"))
+#' @keywords internal
 morie_vepan_most_severe_consequence <- function(terms) {
   # The lowest-ranked (worst) term.
   ts <- as.character(terms)
@@ -330,6 +333,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #' genome <- "AATGGCCTAGGCTTAA"
 #' tr <- list(exons = rbind(c(3L, 8L), c(11L, 14L)), strand = "+")
 #' morie_vepan_transcript_sequence(tr, genome)
+#' @keywords internal
 morie_vepan_transcript_sequence <- function(tr, genome) {
   # The spliced transcript, 5' to 3', and the genomic position of each
   # of its bases (returns list(seq, gpos)).
@@ -826,6 +830,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' v <- list(chrom = "chr1", pos = 5L, ref = "G", alt = "A")
 #' r <- morie_vepan_annotate(v, list(tr), genome)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_vepan_annotate <- function(variant, transcripts, genome,
                                  upstream = 5000, downstream = 5000) {
   # One record per (variant, transcript) overlap, as the VEP emits. A
@@ -1052,6 +1057,7 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 #' v <- list(chrom = "chr1", pos = 5L, ref = "G", alt = "A")
 #' recs <- morie_vepan_annotate(v, list(tr), genome)
 #' str(morie_vepan_pick(recs), max.level = 1)
+#' @keywords internal
 morie_vepan_pick <- function(records, per_gene = FALSE) {
   # --pick (one record) or --per_gene (one per gene).
   rs <- records
@@ -1109,6 +1115,7 @@ morie_vepan_pick <- function(records, per_gene = FALSE) {
 #' v <- list(chrom = "chr1", pos = 5L, ref = "G", alt = "A")
 #' r <- morie_vepan_vep_annotation(list(v), list(tr), genome)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_vepan_vep_annotation <- function(variants, transcripts, genome,
                                        upstream = 5000, downstream = 5000,
                                        mode = "all", no_intergenic = FALSE) {
@@ -1174,6 +1181,7 @@ morie_vepan_vep_annotation <- function(variants, transcripts, genome,
 #' @export
 #' @examples
 #' morie_vepan_cheatsheet()
+#' @keywords internal
 morie_vepan_cheatsheet <- function() {
   paste0(
     "vepan: Ensembl VEP (McLaren et al. 2016). One record per ",

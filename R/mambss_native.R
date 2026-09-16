@@ -20,6 +20,7 @@
 #' @export
 #' @examples
 #' softplus(z = 5L)
+#' @keywords internal
 softplus <- function(z) {
   x <- as.numeric(z)
   if (x > 30.0) return(x)
@@ -41,6 +42,7 @@ softplus <- function(z) {
 #' @export
 #' @examples
 #' discretize_zoh(delta = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 discretize_zoh <- function(delta, A, B, rule = "zoh") {
   if (!(rule %in% c("zoh", "euler")))
     stop(sprintf("mambss: rule must be zoh or euler, got %s", rule))
@@ -89,6 +91,7 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
 #'                         A = -abs(rnorm(N)), B = rnorm(N), C = rnorm(N),
 #'                         delta = 0.1)
 #' str(r, max.level = 1)
+#' @keywords internal
 selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
   N <- length(A)
   if (length(h) != N)
@@ -171,6 +174,7 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #'                     W_C = matrix(rnorm(N * D, 0, 0.3), N, D),
 #'                     W_delta = matrix(rnorm(D, 0, 0.3), 1, D))
 #' str(r, max.level = 1)
+#' @keywords internal
 selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
                            b_B = NULL, b_C = NULL, b_delta = 0.0,
                            rule = "zoh", D_skip = NULL) {
@@ -234,6 +238,7 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' gated_rnn_equivalent(V, V)
+#' @keywords internal
 gated_rnn_equivalent <- function(x, w, b = 0.0) {
   h <- 0.0
   hs <- numeric(length(x))
@@ -270,6 +275,7 @@ gated_rnn_equivalent <- function(x, w, b = 0.0) {
 #'               W_C = matrix(rnorm(N * D, 0, 0.3), N, D),
 #'               W_delta = matrix(rnorm(D, 0, 0.3), 1, D))
 #' str(r, max.level = 1)
+#' @keywords internal
 s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
   selective_scan(X, A, W_B, W_C, W_delta, ...)$y
 }
@@ -328,6 +334,7 @@ mambassmstep <- selective_ssm_step
 #'                   W_C = matrix(rnorm(N * D, 0, 0.3), N, D),
 #'                   W_delta = matrix(rnorm(D, 0, 0.3), 1, D))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mambss <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
                         b_B = NULL, b_C = NULL, b_delta = 0.0,
                         rule = "zoh", D_skip = NULL) {

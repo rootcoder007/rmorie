@@ -160,6 +160,7 @@
 #' \code{sentence_attention}, \code{word_attention}, \code{n_sentences}, \code{method},
 #' \code{note}.
 #' @export
+#' @keywords internal
 morie_pratt <- function(word_states, Ww, bw, u_w, Ws, bs, u_s, Wc, bc) {
   S <- list()
   wa <- list()
@@ -209,6 +210,7 @@ morie_pratt_classify <- morie_pratt
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_pratt_attention_entropy(V)
+#' @keywords internal
 morie_pratt_attention_entropy <- function(alpha) {
   a <- .pratt_vec(alpha)
   s <- sum(a)
@@ -234,6 +236,7 @@ morie_pratt_attention_entropy <- function(alpha) {
 #' @export
 #' @examples
 #' morie_pratt_cheatsheet()
+#' @keywords internal
 morie_pratt_cheatsheet <- function() {
   paste("pratt: mirror the document's own structure -- words to sentences",
         "to document -- with attention at BOTH levels, because which word",

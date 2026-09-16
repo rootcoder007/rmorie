@@ -57,6 +57,7 @@
 #' @param e A vector; its length is taken.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @keywords internal
 aipw_scores <- function(Y, W, mu1, mu0, e) {
   y <- as.numeric(Y)
   w <- as.numeric(W)
@@ -102,6 +103,7 @@ aipw_scores <- function(Y, W, mu1, mu0, e) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' toc_curve(V, V)
+#' @keywords internal
 toc_curve <- function(scores, priority) {
   chk <- .slvgrf_check(scores, priority)
   g <- chk$g
@@ -137,6 +139,7 @@ toc_curve <- function(scores, priority) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rate(V, V)
+#' @keywords internal
 rate <- function(scores, priority, weight = "autoc") {
   if (!(weight %in% .SLVGRF_WEIGHTS))
     stop(sprintf("slvgrf: weight must be one of %s, got %s",
@@ -164,6 +167,7 @@ rate <- function(scores, priority, weight = "autoc") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' autoc(V, V)
+#' @keywords internal
 autoc <- function(scores, priority) {
   rate(scores, priority, weight = "autoc")$estimate
 }
@@ -181,6 +185,7 @@ autoc <- function(scores, priority) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' qini_coefficient(V, V)
+#' @keywords internal
 qini_coefficient <- function(scores, priority) {
   rate(scores, priority, weight = "qini")$estimate
 }
@@ -199,6 +204,7 @@ qini_coefficient <- function(scores, priority) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' qini_curve(V, V)
+#' @keywords internal
 qini_curve <- function(scores, priority, cost = NULL) {
   chk <- .slvgrf_check(scores, priority)
   g <- chk$g
@@ -248,6 +254,7 @@ qini_curve <- function(scores, priority, cost = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rate_test(V, V)
+#' @keywords internal
 rate_test <- function(scores, priority, weight = "autoc", reps = 500,
                       seed = 0) {
   chk <- .slvgrf_check(scores, priority)

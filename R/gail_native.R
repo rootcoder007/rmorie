@@ -70,6 +70,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' gail_occupancy_measure(V, V)
+#' @keywords internal
 gail_occupancy_measure <- function(states, actions) {
   pr <- .gail_pairs(states, actions, "occupancy")
   counts <- list()
@@ -128,6 +129,7 @@ gail_occupancy_measure <- function(states, actions) {
 #' @examples
 #' gail(expert_states = c(1, 2, 3, 4, 5, 6, 7, 8), expert_actions = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   policy_states = c(1, 2, 3, 4, 5, 6, 7, 8), policy_actions = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 gail <- function(expert_states, expert_actions,
                  policy_states, policy_actions,
                  features = NULL, lr = 0.1, epochs = 200,

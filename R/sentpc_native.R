@@ -26,6 +26,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_sentpc_escape_whitespace(V)
+#' @keywords internal
 morie_sentpc_escape_whitespace <- function(text, add_prefix = TRUE) {
   out <- gsub(" ", .SENT_SPACE, as.character(text), fixed = TRUE)
   if (isTRUE(add_prefix)) out <- paste0(.SENT_SPACE, out)
@@ -40,6 +41,7 @@ morie_sentpc_escape_whitespace <- function(text, add_prefix = TRUE) {
 #' @export
 #' @examples
 #' morie_sentpc_unescape_whitespace(text = 5L)
+#' @keywords internal
 morie_sentpc_unescape_whitespace <- function(text,
                                               strip_prefix = TRUE) {
   s <- as.character(text)
@@ -82,6 +84,7 @@ morie_sentpc_unescape_whitespace <- function(text,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_sentpc_decode(V)
+#' @keywords internal
 morie_sentpc_decode <- function(pieces, strip_prefix = TRUE) {
   morie_sentpc_unescape_whitespace(paste0(as.character(pieces), collapse = ""),
                                     strip_prefix = strip_prefix)
@@ -101,6 +104,7 @@ morie_sentpc_decode <- function(pieces, strip_prefix = TRUE) {
 #' @export
 #' @examples
 #' morie_sentpc_train_bpe(corpus = c(1, 2, 3, 4, 5, 6, 7, 8), vocab_size = 5L)
+#' @keywords internal
 morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
   V <- as.integer(vocab_size)
   if (V < 1L) stop("sentpc: vocab_size must be at least 1")
@@ -177,6 +181,7 @@ morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_sentpc_encode_bpe(V, D)
+#' @keywords internal
 morie_sentpc_encode_bpe <- function(text, model, add_prefix = TRUE) {
   esc <- morie_sentpc_escape_whitespace(text, add_prefix)
   out <- character(0)
@@ -214,6 +219,7 @@ morie_sentpc_encode_bpe <- function(text, model, add_prefix = TRUE) {
 #' @return List with \code{pieces}, \code{logp}, \code{n_pieces},
 #'   \code{algorithm}.
 #' @export
+#' @keywords internal
 morie_sentpc_viterbi_segment <- function(text, piece_logp,
                                           add_prefix = TRUE) {
   s <- morie_sentpc_escape_whitespace(text, add_prefix)

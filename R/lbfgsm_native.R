@@ -152,6 +152,7 @@
 #' `grad_norm_relative` and `grad_norm_ratio` are all reported so the
 #' behaviour can be judged rather than inferred.
 #' @export
+#' @keywords internal
 morie_lbfgsm <- function(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-8,
                          tol_type = c("absolute", "relative", "initial"),
                          precond = NULL,

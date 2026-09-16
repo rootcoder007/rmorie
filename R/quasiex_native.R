@@ -127,6 +127,7 @@ morie_did <- function(data, outcome, unit, time, treatment_time,
 #' @references
 #'   Borusyak, Jaravel & Spiess (2024) REStud 91(6).
 #' @export
+#' @keywords internal
 print.morie_did <- function(x, ...) {
   cat("Difference-in-differences --", x$method, "\n")
   cat(sprintf("  ATT: %.4f  (SE %.4f)  95%% CI [%.4f, %.4f]  p = %.3g\n",
@@ -254,6 +255,7 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
 #'   Staiger & Stock (1997); Anderson & Rubin (1949);
 #'   Stock & Yogo (2005).
 #' @export
+#' @keywords internal
 print.morie_iv <- function(x, ...) {
   cat("Two-stage least squares --", x$method, "\n")
   if (x$weak_instruments) {
@@ -380,6 +382,7 @@ morie_rdd <- function(data, outcome, running, cutoff = 0,
 #'   Imbens & Kalyanaraman (2012); Calonico, Cattaneo &
 #'   Titiunik (2014); McCrary (2008).
 #' @export
+#' @keywords internal
 print.morie_rdd <- function(x, ...) {
   cat(sprintf("Regression discontinuity (%s), bandwidth = %.4f\n",
               x$kind, x$bandwidth))

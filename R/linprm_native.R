@@ -12,6 +12,7 @@
 #' @return A list with \code{x}, \code{y}, \code{s}, \code{iterations}, \code{gap},
 #' \code{converged}, \code{mu_history}, \code{primal_residual}, \code{dual_residual}.
 #' @export
+#' @keywords internal
 morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
   cv <- as.numeric(c)
   M <- lapply(A, function(row) as.numeric(row))

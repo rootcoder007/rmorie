@@ -43,6 +43,7 @@
 #' @export
 #' @examples
 #' morie_crsfmr_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_crsfmr_attention <- function(Q, K, V) {
   Qm <- as.matrix(Q)
   Km <- as.matrix(K)
@@ -87,6 +88,7 @@ morie_crsfmr_attention <- function(Q, K, V) {
 #' set.seed(1)
 #' X <- matrix(rnorm(40), 20, 2)
 #' morie_crsfmr_dsw_embed(X, seg_len = 4)
+#' @keywords internal
 morie_crsfmr_dsw_embed <- function(X, seg_len, E = NULL, pos = NULL) {
   Xm <- as.matrix(X)
   T <- nrow(Xm)
@@ -138,6 +140,7 @@ morie_crsfmr_dsw_embed <- function(X, seg_len, E = NULL, pos = NULL) {
 #' @export
 #' @examples
 #' morie_crsfmr_cross_time_stage(Z = 5L)
+#' @keywords internal
 morie_crsfmr_cross_time_stage <- function(Z) {
   L <- length(Z)
   if (L == 0L) stop("crsfmr: the input array is empty")
@@ -166,6 +169,7 @@ morie_crsfmr_cross_time_stage <- function(Z) {
 #' @param n_router Integer, number of router vectors.
 #' @return A 3D array indexed as \code{out[[i]][[d]]}.
 #' @export
+#' @keywords internal
 morie_crsfmr_cross_dimension_stage <- function(Z, router = NULL,
                                               n_router = NULL) {
   L <- length(Z)
@@ -209,6 +213,7 @@ morie_crsfmr_cross_dimension_stage <- function(Z, router = NULL,
 #' @export
 #' @examples
 #' morie_crsfmr_two_stage_attention(Z = 5L)
+#' @keywords internal
 morie_crsfmr_two_stage_attention <- function(Z, n_router = NULL,
                                              router = NULL) {
   zt <- morie_crsfmr_cross_time_stage(Z)
@@ -234,6 +239,7 @@ morie_crsfmr_two_stage_attention <- function(Z, n_router = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_crsfmr_segment_merge(V)
+#' @keywords internal
 morie_crsfmr_segment_merge <- function(Z, factor = 2L) {
   f <- as.integer(factor)
   if (f < 2L)
@@ -269,6 +275,7 @@ morie_crsfmr_segment_merge <- function(Z, factor = 2L) {
 #' @export
 #' @examples
 #' morie_crsfmr_complexity(L = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_crsfmr_complexity <- function(L, D, c) {
   Lv <- as.integer(L)
   Dv <- as.integer(D)

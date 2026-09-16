@@ -280,6 +280,7 @@
 #' \code{n_lags}, \code{forget_bias}, \code{mean}, \code{sd}, \code{n_models},
 #' \code{retention_10}, \code{method}.
 #' @export
+#' @keywords internal
 morie_netsts <- function(y, horizon, hidden = 8, n_lags = 4,
                          strategy = "recursive", forget_bias = 1.0,
                          seed = 0, ridge = 1e-6) {

@@ -127,6 +127,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tlnetlg_network_summary(V)
+#' @keywords internal
 morie_tlnetlg_network_summary <- function(friends) {
   N <- length(friends)
   if (N < 2) stop("tlnetlg: at least 2 units are needed")
@@ -166,6 +167,7 @@ morie_tlnetlg_network_summary <- function(friends) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tlnetlg_exposure_summary(V, V)
+#' @keywords internal
 morie_tlnetlg_exposure_summary <- function(A, friends, kind = "fraction") {
   a <- .tlnetlg_vec(A)
   N <- length(a)
@@ -215,6 +217,7 @@ morie_tlnetlg_exposure_summary <- function(A, friends, kind = "fraction") {
 #' @param policy Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{psi}, \code{assigned}, \code{individual}, \code{N}.
 #' @export
+#' @keywords internal
 morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {
   rows <- .tlnetlg_mat(W)
   N <- nrow(rows)
@@ -259,6 +262,7 @@ morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tlnetlg_network_variance(V, V)
+#' @keywords internal
 morie_tlnetlg_network_variance <- function(ic, friends) {
   v <- .tlnetlg_vec(ic)
   N <- length(v)
@@ -312,6 +316,7 @@ morie_tlnetlg_network_variance <- function(ic, friends) {
 #' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{T},
 #' \code{network}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_tlnetlg_longitudinal_network_gcomp <- function(Q_seq, friends, W, policy, T) {
   T_int <- as.integer(T)
   if (T_int < 1L) stop("tlnetlg: need at least one time point")
@@ -354,6 +359,7 @@ morie_tlnetlg_longitudinal_network_gcomp <- function(Q_seq, friends, W, policy, 
 #' @export
 #' @examples
 #' morie_tlnetlg_cheatsheet()
+#' @keywords internal
 morie_tlnetlg_cheatsheet <- function() {
   paste("tlnetlg: standard causal inference assumes n independent,",
         "causally unconnected units -- useless when you observe",

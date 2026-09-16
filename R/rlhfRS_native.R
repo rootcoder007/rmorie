@@ -62,6 +62,7 @@
 #' @export
 #' @examples
 #' morie_rlhfRS_precision(relevance = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+#' @keywords internal
 morie_rlhfRS_precision <- function(relevance, k) {
   k <- as.integer(k)
   if (k < 1L) stop("a cut-off below one ranks nothing")
@@ -87,6 +88,7 @@ morie_rlhfRS_precision <- function(relevance, k) {
 #' @export
 #' @examples
 #' morie_rlhfRS_ndcg(relevance = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+#' @keywords internal
 morie_rlhfRS_ndcg <- function(relevance, k) {
   k <- as.integer(k)
   if (k < 1L) stop("a cut-off below one ranks nothing")
@@ -109,6 +111,7 @@ morie_rlhfRS_ndcg <- function(relevance, k) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rlhfRS_mrr(V)
+#' @keywords internal
 morie_rlhfRS_mrr <- function(relevance) {
   for (i in seq_along(relevance)) if (relevance[i] > 0) return(1 / i)
   0
@@ -134,6 +137,7 @@ morie_rlhfRS_mrr <- function(relevance) {
 #' @return A list with the returns, their mean and standard error, and
 #'   the visitation counts.
 #' @export
+#' @keywords internal
 morie_rlhfRS_rollout <- function(env, policy, n_episodes = 20L,
                                  horizon = 10L, gamma = 0.9,
                                  seed = 0) {
@@ -204,6 +208,7 @@ morie_rlhfRS_rollout <- function(env, policy, n_episodes = 20L,
 #' @param clip A cap on the importance weight, or NULL.
 #' @return A list with the estimate, the weights and the diagnostics.
 #' @export
+#' @keywords internal
 morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
                                    estimator = "ips",
                                    reward_model = NULL, clip = NULL) {
@@ -287,6 +292,7 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
 #' ENV <- list(transition = P, reward = R, start = 0L)
 #' GREEDY <- matrix(c(0, 1, 0, 0, 1, 0), 2L, 3L)
 #' morie_rlhfRS(ENV, GREEDY, 25L, 8L, 0.9, 7)
+#' @keywords internal
 morie_rlhfRS <- function(env, policy, n_episodes = 20L, horizon = 10L,
                          gamma = 0.9, seed = 0, estimator = "ips",
                          reward_model = NULL, clip = NULL,
@@ -363,6 +369,7 @@ morie_rlhfRS <- function(env, policy, n_episodes = 20L, horizon = 10L,
 #' @export
 #' @examples
 #' morie_rlhfRS_cheatsheet()
+#' @keywords internal
 morie_rlhfRS_cheatsheet <- function()
   paste0("rlhfRS: recommendation as a session MDP. Discounted rollout ",
          "plus IPS, self-normalised IPS or doubly robust off-policy ",

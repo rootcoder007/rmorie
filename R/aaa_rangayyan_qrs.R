@@ -367,6 +367,7 @@
 #' @export
 #' @examples
 #' BlWander(ecg = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 BlWander <- function(ecg, fs, pole = 0.995) {
   # eqs (3.132)-(3.133): H(z) = (1/T)(1 - z^-1)/(1 - 0.995 z^-1).  The zero at
   # z = 1 kills DC (which is what baseline wander is); the pole close to it
@@ -439,6 +440,7 @@ BlWander <- function(ecg, fs, pole = 0.995) {
 #' cp <- cp + 0.01 * rnorm(length(cp))
 #' r <- DicNotch(cp, fs = fs)
 #' r$notch
+#' @keywords internal
 DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
   # Lehner and Rangayyan, Section 4.3.5.  The noncausal least-squares second
   # derivative of eq (4.22), squared and smoothed by eq (4.23).  The second
@@ -530,6 +532,7 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
 #' qrs <- round(seq(0.05, 1.95, by = 0.8) * fs)
 #' r <- CPulseFeat(cp, fs = fs, qrs = qrs)
 #' str(r, max.level = 1)
+#' @keywords internal
 CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
   # Carotid pulse landmarks (Section 1.2.10) and the systolic time intervals
   # of Section 4.9.  PEPC = PEP + 0.4 HR and ETC = ET + 1.6 HR are the
@@ -612,6 +615,7 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
 #' }
 #' ecg <- ecg + rnorm(length(tv), 0, 0.02)
 #' QrsDeriv(ecg, fs = fs)
+#' @keywords internal
 QrsDeriv <- function(x, fs, thresh = 1) {
   # Balda et al., Section 4.3.1: y0 by eq (4.1), y1 by eq (4.2), combined as
   # y2 = 1.3 y0 + 1.1 y1 (eq 4.3), scanned with a threshold of 1.0 on a
@@ -694,6 +698,7 @@ QrsDeriv <- function(x, fs, thresh = 1) {
 #' emg <- rnorm(n, 0, seq(0.5, 2, length.out = n))
 #' r <- EcgEmgCpl(ecg, emg, qrs = qrs, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 EcgEmgCpl <- function(ecg, emg, qrs, fs) {
   # Section 2.2.6 (EMG RMS and mean frequency rise with contraction) meets
   # Section 2.2.5 (rate rises with effort).  Both series are sampled on the
@@ -766,6 +771,7 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
 #' for (i in qrs) ecg[i:(i + 6)] <- c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
 #' ecg <- ecg + rnorm(length(tv), 0, 0.02)
 #' EcgFeat(ecg, qrs = qrs, fs = fs)
+#' @keywords internal
 EcgFeat <- function(x, qrs, fs) {
   # Section 1.2.4 waves and intervals.  Amplitudes are measured against the
   # PQ segment, not against zero: the PQ segment is the isoelectric reference
@@ -876,6 +882,7 @@ EcgFeat <- function(x, qrs, fs) {
 #' @export
 #' @examples
 #' EcgWaveShp(qrsdur = 5L, stdev = 5L)
+#' @keywords internal
 EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
                        qpresent = NULL) {
   # Sections 1.2.4 (ST deviation against the PQ reference) and 10.2.1 (the
@@ -947,6 +954,7 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
 #' x <- x + 0.01 * rnorm(n)
 #' r <- ExerEcgSt(x, qrs = qrs, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
   # ST level at J + jofs relative to the PQ isoelectric level, and the slope
   # of the segment that follows (Section 1.2.4).  The 0.1 mV threshold is the
@@ -1021,6 +1029,7 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HrvFreq(V)
+#' @keywords internal
 HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12.  Task Force bands by default; Bianchi et al. bands on
   # request.  The RR series is a series of EVENTS, so it is interpolated onto
@@ -1095,6 +1104,7 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HrvTime(V)
+#' @keywords internal
 HrvTime <- function(rr) {
   # SDNN, RMSSD and pNN50.  Section 2.2.5 motivates these but does not define
   # them; the definitions are the Task Force ones, Circulation 93(5):1043-
@@ -1150,6 +1160,7 @@ HrvTime <- function(rr) {
 #' cp <- exp(-((ph - 0.25) / 0.12)^2) + 0.35 * exp(-((ph - 0.55) / 0.05)^2)
 #' r <- HSoundId(ecg, cp, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 HSoundId <- function(ecg, cp, fs) {
   # Section 4.9.  S1 at the QRS onset; S2 from the dicrotic notch minus the
   # standardised 52.6 ms (mean + 2 SD of the 42.6 +/- 5 ms Lehner and
@@ -1200,6 +1211,7 @@ HSoundId <- function(ecg, cp, fs) {
 #' thor <- sin(2 * pi * 1.2 * (1:n) / 200)
 #' abd <- 0.6 * thor + 0.3 * mecg + rnorm(n, 0, 0.05)
 #' MEcgFilt(abd, thor)
+#' @keywords internal
 MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
   # Sections 3.3.5 and 9.7.2: the thoracic lead is the reference input of an
   # adaptive noise canceller whose primary input is the abdominal lead, so the
@@ -1265,6 +1277,7 @@ MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
 #' fs <- 100
 #' x <- c(rnorm(fs * 2, 0, 0.5), rnorm(fs, 0, 4), rnorm(fs * 2, 0, 0.5))
 #' MotionArt(x, fs = fs)
+#' @keywords internal
 MotionArt <- function(x, fs, win = 1, factor = 4) {
   # Section 1.2.11 characterises motion artifact but gives no detection
   # equation, so none is attributed to the book.  Window range and window
@@ -1363,6 +1376,7 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
 #' }
 #' ecg <- ecg + rnorm(length(tv), 0, 0.02)
 #' QrsDetect(ecg, fs = fs)
+#' @keywords internal
 QrsDetect <- function(x, fs = 200) {
   # Pan-Tompkins, Section 4.3.2, eqs (4.8)-(4.18) plus search-back.  The
   # filter coefficients are integers designed for fs = 200 Hz and DO NOT
@@ -1498,6 +1512,7 @@ QrsDetect <- function(x, fs = 200) {
 #'   0.02 * rnorm(n)
 #' r <- PcgParts(pcg, ecg, cp, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 PcgParts <- function(pcg, ecg, cp, fs) {
   # The six-step procedure of Section 4.9.  Timing is imported from the ECG
   # and the carotid pulse because S1 and S2 are not reliably the loudest
@@ -1564,6 +1579,7 @@ PcgParts <- function(pcg, ecg, cp, fs) {
 #' tv <- seq(0, 2, by = 1 / fs)
 #' x <- sin(2 * pi * 5 * tv) + 0.5 * sin(2 * pi * 60 * tv)
 #' PLineNotch(x, fs = fs, f0 = 60)
+#' @keywords internal
 PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
   # eq (3.150): H(z) = 1 - 2 cos(wo) z^-1 + z^-2, divided by its DC gain
   # H(1) = 2 - 2 cos(wo) so the passband gain at DC is unity.  Extra zeros at
@@ -1630,6 +1646,7 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
 #' tv <- seq(0, 5, by = 1 / fs)
 #' ppg <- sin(2 * pi * 1.2 * tv) + 0.1 * rnorm(length(tv))
 #' PpgFeat(ppg, fs = fs)
+#' @keywords internal
 PpgFeat <- function(ppg, fs, mwin = 16) {
   # Section 1.2.11.  The notch is located with the SAME machinery the book
   # gives for the carotid pulse in Section 4.3.5 (eqs 4.22, 4.23), because
@@ -1706,6 +1723,7 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
 #' x <- x + 0.005 * rnorm(n)
 #' r <- PWaveDet(x, qrs = qrs, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 PWaveDet <- function(x, qrs, fs, template = NULL) {
   # Hengeveld and van Bemmel, Section 4.3.3.  The P wave is never searched for
   # directly: the QRS is deleted, the residue bandpassed 3-11 Hz, ternarised
@@ -1829,6 +1847,7 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
 #'   ecg[i:(i + 6)] <- amp[k] * c(0.1, 0.4, 1.2, -0.5, 0.1, 0.05, 0)
 #' }
 #' EdrSignal(ecg, qrs = qrs, fs = fs)
+#' @keywords internal
 EdrSignal <- function(x, qrs, fs, fsr = 4) {
   # Section 2.2.4 for the physiology; the estimator is Arunachalam and Brown,
   # Proc. IEEE EMBC 2009, pp. 5681-5684 (reference [52] of Chapter 2).  Chest
@@ -1913,6 +1932,7 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
 #' spo2[850:1100] <- 92
 #' r <- ApneaEdr(edr, spo2, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
   # Section 10.2.5 frames the problem and the AHI but gives NO detection
   # algorithm, so none is attributed to it.  Requiring BOTH a respiratory
@@ -1989,6 +2009,7 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LfHfRatio(V)
+#' @keywords internal
 LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12 and Figure 8.38.  The ratio alone, with the band powers and
   # the RR variance alongside it so it can be interpreted rather than read
@@ -2031,6 +2052,7 @@ LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
 #'                                 0.01 * rnorm(40))
 #' r <- TwaSpectr(tw)
 #' str(r, max.level = 1)
+#' @keywords internal
 TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
   # Section 9.10 citing Smith et al., Circulation 77(1):110-121, 1988.
   # Alternation every other beat is a period of exactly two beats, so it
@@ -2118,6 +2140,7 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
 #' x <- x + 0.005 * rnorm(n)
 #' r <- TWaveDet(list(x), qrs = qrs, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
   # Gritzali et al., Section 4.3.4.  The QRS is detected first, blanked to the
   # isoelectric baseline, and the length transform of eq (4.21) re-run with
@@ -2210,6 +2233,7 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
 #' vf <- sin(2 * pi * 5 * tv + 2 * sin(2 * pi * 0.3 * tv))
 #' r <- VfDetect(vf, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
   # Sections 1.2.4 and 8.11 describe VF but give NO detector and NO
   # threshold, and no external primary source was verified here.  The rule
@@ -2288,6 +2312,7 @@ VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsDeriv1(V)
+#' @keywords internal
 QrsDeriv1 <- function(x) {
   # eq (4.1): y0(n) = |x(n) - x(n-2)|.  The two-sample span is what makes it
   # "smoothed"; the absolute value makes an inverted QRS give the same
@@ -2315,6 +2340,7 @@ QrsDeriv1 <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsDeriv2(V)
+#' @keywords internal
 QrsDeriv2 <- function(x) {
   # eq (4.2): y1(n) = |x(n) - 2 x(n-2) + x(n-4)|.  The second difference
   # removes any locally linear trend, so T-wave limbs and baseline drift give
@@ -2345,6 +2371,7 @@ QrsDeriv2 <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsDerivMx(V, V)
+#' @keywords internal
 QrsDerivMx <- function(y0, y1) {
   # eq (4.3): y2(n) = 1.3 y0(n) + 1.1 y1(n).  Slope and curvature respond to
   # different parts of the complex; the mix has its peak reliably inside it.
@@ -2381,6 +2408,7 @@ QrsDerivMx <- function(y0, y1) {
 #' x <- x + 0.01 * rnorm(n)
 #' r <- QrsWSqDrv(x)
 #' str(r, max.level = 1)
+#' @keywords internal
 QrsWSqDrv <- function(x, nwin = 8) {
   # eq (4.4) (Murthy and Rangaraj): g1(n) = sum_i |x(n-i+1) - x(n-i)|^2
   # (N - i + 1).  Squaring rewards the large QRS differences; the linearly
@@ -2418,6 +2446,7 @@ QrsWSqDrv <- function(x, nwin = 8) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsDrvSmth(V)
+#' @keywords internal
 QrsDrvSmth <- function(g1, mwin = 8) {
   # eq (4.5): the M-point moving average that collapses the several
   # derivative peaks across the Q-R-S swings into one pulse per beat.
@@ -2448,6 +2477,7 @@ QrsDrvSmth <- function(g1, mwin = 8) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsLPassTf(V)
+#' @keywords internal
 QrsLPassTf <- function(freq, fs = 200) {
   # eq (4.7): H(z) = (1/32)(1 - z^-6)^2 / (1 - z^-1)^2, evaluated in its
   # equivalent finite form (sum_{k=0}^{5} z^-k)^2 / 32 so the apparent pole at
@@ -2495,6 +2525,7 @@ QrsLPassTf <- function(freq, fs = 200) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsLPassDf(V)
+#' @keywords internal
 QrsLPassDf <- function(x) {
   # eq (4.8): y(n) = 2 y(n-1) - y(n-2) + (1/32)[x(n) - 2 x(n-6) + x(n-12)].
   # Adds and one shift by 32 -- which is why it was chosen for real time.
@@ -2530,6 +2561,7 @@ QrsLPassDf <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsHpLpTf(V)
+#' @keywords internal
 QrsHpLpTf <- function(freq, fs = 200) {
   # eq (4.9): Hlp(z) = (1 - z^-32)/(1 - z^-1), a running sum of 32 samples.
   # Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
@@ -2567,6 +2599,7 @@ QrsHpLpTf <- function(freq, fs = 200) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsHpLpDf(V)
+#' @keywords internal
 QrsHpLpDf <- function(x) {
   # eq (4.10): y(n) = y(n-1) + x(n) - x(n-32).  One add and one subtract per
   # sample regardless of window length.
@@ -2598,6 +2631,7 @@ QrsHpLpDf <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsHPassTf(V)
+#' @keywords internal
 QrsHPassTf <- function(freq, fs = 200) {
   # eq (4.11): Hhp(z) = z^-16 - (1/32) Hlp(z).  An allpass (a pure 16-sample
   # delay) minus a scaled lowpass, so it shares the running sum already
@@ -2640,6 +2674,7 @@ QrsHPassTf <- function(freq, fs = 200) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsHPassDf(V)
+#' @keywords internal
 QrsHPassDf <- function(x) {
   # eq (4.12): p(n) = x(n-16) - (1/32)[y(n-1) + x(n) - x(n-32)], where the
   # bracketed group is exactly y(n) of eq (4.10), so the running-sum state is
@@ -2676,6 +2711,7 @@ QrsHPassDf <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsHPassIo(V)
+#' @keywords internal
 QrsHPassIo <- function(x) {
   # eq (4.13): p(n) = p(n-1) - (1/32) x(n) + x(n-16) - x(n-17) +
   # (1/32) x(n-32).  Eqs (4.9)-(4.12) folded into one recursion: four adds
@@ -2711,6 +2747,7 @@ QrsHPassIo <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsDerivOp(V)
+#' @keywords internal
 QrsDerivOp <- function(x) {
   # eq (4.14): y(n) = (1/8)[2 x(n) + x(n-1) - x(n-3) - 2 x(n-4)].  The
   # antisymmetric taps make it exactly zero on any constant or linear
@@ -2742,6 +2779,7 @@ QrsDerivOp <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsMwInt(V)
+#' @keywords internal
 QrsMwInt <- function(x, nwin = 30, fs = NULL) {
   # eq (4.15).  N matters: too wide merges QRS and T, too narrow leaves
   # multiple peaks.  The book found N = 30 at fs = 200 Hz, i.e. 150 ms, and
@@ -2779,6 +2817,7 @@ QrsMwInt <- function(x, nwin = 30, fs = NULL) {
 #' @examples
 #' QrsThresh(peaki = c(1, 2, 3, 4, 5, 6, 7, 8), spki = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   npki = c(1, 2, 3, 4, 5, 6, 7, 8), issignal = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 QrsThresh <- function(peaki, spki, npki, issignal) {
   # eqs (4.16) and (4.17).  The 0.125/0.875 split is a long-memory recursive
   # average, so the estimates track slow drift without being thrown by one
@@ -2818,6 +2857,7 @@ QrsThresh <- function(peaki, spki, npki, issignal) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' QrsSpkiUpd(V, V)
+#' @keywords internal
 QrsSpkiUpd <- function(peaki, spki) {
   # eq (4.18): SPKI = 0.25 PEAKI + 0.75 SPKI, replacing the 0.125/0.875 rule.
   # A beat found only by search-back was missed by the primary threshold, so
@@ -2846,6 +2886,7 @@ QrsSpkiUpd <- function(peaki, spki) {
 #' @export
 #' @examples
 #' HrFromCnt(nbeats = 5L, duration = 5L)
+#' @keywords internal
 HrFromCnt <- function(nbeats, duration) {
   # eq (4.19): HR = 60 NB / T.  The counting estimate averages over the whole
   # window, so unlike the beat-to-beat form of eq (4.20) it is insensitive to
@@ -2889,6 +2930,7 @@ HrFromCnt <- function(nbeats, duration) {
 #' x2 <- 0.5 * x1 + 0.01 * rnorm(n)
 #' r <- LengthXfm(list(x1, x2), wwin = 0.12, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 LengthXfm <- function(chans, wwin, fs) {
   # eq (4.21) (Gritzali et al.).  Since (dx/dt) dt = dx, the transform is the
   # arc length of the MULTICHANNEL trajectory accumulated over a w-second
@@ -2943,6 +2985,7 @@ LengthXfm <- function(chans, wwin, fs) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DNotchSmth(V)
+#' @keywords internal
 DNotchSmth <- function(p, mwin = 16) {
   # eq (4.23) (Lehner and Rangayyan): s(n) = sum_k p^2(n-k+1) (M - k + 1).
   # Squaring discards the sign of the curvature; the linearly decaying weight

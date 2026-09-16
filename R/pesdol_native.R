@@ -54,6 +54,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_pesdol_ardl_bounds(V, V)
+#' @keywords internal
 morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
   yv <- as.numeric(y)
   Xm <- as.matrix(x)

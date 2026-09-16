@@ -64,6 +64,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rescale(V)
+#' @keywords internal
 rescale <- function(y, lower = NULL, upper = NULL) {
   v <- as.numeric(y)
   if (length(v) == 0L) stop("tmlcou: no outcomes given")
@@ -86,6 +87,7 @@ rescale <- function(y, lower = NULL, upper = NULL) {
 #' @examples
 #' unscale(value = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   upper = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 unscale <- function(value, lower, upper) {
   as.numeric(value) * (as.numeric(upper) - as.numeric(lower)) +
     as.numeric(lower)
@@ -106,6 +108,7 @@ unscale <- function(value, lower, upper) {
 #' @examples
 #' linear_fluctuation_unsafe(Q = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 linear_fluctuation_unsafe <- function(Q, H, Y) {
   q <- as.numeric(Q)
   h <- as.numeric(H)
@@ -151,6 +154,7 @@ linear_fluctuation_unsafe <- function(Q, H, Y) {
 #' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
 #' res <- morie_tmlcou(y = y, D = g, X = x)
 #' res
+#' @keywords internal
 morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
                          Q1 = NULL, Q0 = NULL,
                          lower = NULL, upper = NULL, iters = 100) {

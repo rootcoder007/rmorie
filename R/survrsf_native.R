@@ -65,6 +65,7 @@ morie_survrsf_SPLIT_RULES <- c(
 #' @export
 #' @examples
 #' morie_survrsf_rule_status()
+#' @keywords internal
 morie_survrsf_rule_status <- function(rule = NULL) {
   # Which of the paper's four splitting rules are implemented.
   if (is.null(rule)) {
@@ -180,6 +181,7 @@ morie_survrsf_rule_status <- function(rule = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_survrsf_nelson_aalen(V, V)
+#' @keywords internal
 morie_survrsf_nelson_aalen <- function(times, events) {
   # The terminal-node estimator of equation (3.1).
   n <- length(times)
@@ -254,6 +256,7 @@ morie_survrsf_nelson_aalen <- function(times, events) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_survrsf_conservation_check(V, V)
+#' @keywords internal
 morie_survrsf_conservation_check <- function(times, events) {
   # Lemma 1: the hazard summed over observed times is the deaths.
   # Censored times count too.
@@ -284,6 +287,7 @@ morie_survrsf_conservation_check <- function(times, events) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_survrsf_nelson_aalen(V, V)
 #' morie_survrsf_logrank_statistic(times = V, events = V, group = V)
+#' @keywords internal
 morie_survrsf_logrank_statistic <- function(times, events, group) {
   # The two-sample log-rank statistic used for splitting.
   n <- length(times)
@@ -340,6 +344,7 @@ morie_survrsf_logrank_statistic <- function(times, events, group) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_survrsf_logrank_scores(V, V)
+#' @keywords internal
 morie_survrsf_logrank_scores <- function(times, events) {
   # Lausen's log-rank scores, Hothorn & Lausen (2003) eq. (13).
   # Without censoring or ties these are the Savage scores and sum to
@@ -385,6 +390,7 @@ morie_survrsf_logrank_scores <- function(times, events) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_survrsf_nelson_aalen(V, V)
 #' morie_survrsf_logrank_score_statistic(times = V, events = V, group = V)
+#' @keywords internal
 morie_survrsf_logrank_score_statistic <- function(times, events, group,
                                                   scores = NULL) {
   # The standardised statistic of Hothorn & Lausen (2003) eqs (1)-(4),
@@ -425,6 +431,7 @@ morie_survrsf_logrank_score_statistic <- function(times, events, group,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_survrsf_conservation_residuals(V, V)
+#' @keywords internal
 morie_survrsf_conservation_residuals <- function(times, events) {
   # The partial sums M_k of Ishwaran & Kogalur (2007) over the ordered
   # times of a node. Lemma 1 forces M_n = 0.
@@ -463,6 +470,7 @@ morie_survrsf_conservation_residuals <- function(times, events) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_survrsf_nelson_aalen(V, V)
 #' morie_survrsf_conserve_statistic(times = V, events = V, group = V)
+#' @keywords internal
 morie_survrsf_conserve_statistic <- function(times, events, group) {
   # Conservation-of-events splitting, Ishwaran & Kogalur (2007).
   # Returns the transform 1/(1 + Conserve).
@@ -511,6 +519,7 @@ morie_survrsf_conserve_statistic <- function(times, events, group) {
 #' sp <- morie_survrsf_best_split(X, times, events, features = 0:2,
 #'                                min_deaths = 3)
 #' is.list(sp)
+#' @keywords internal
 morie_survrsf_best_split <- function(X, times, events, features,
                                      min_deaths = 3, rule = "logrank",
                                      rng = NULL) {
@@ -583,6 +592,7 @@ morie_survrsf_best_split <- function(X, times, events, features,
 #' @examples
 #' morie_survrsf_grow_tree(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   events = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survrsf_grow_tree <- function(X, times, events, mtry = NULL,
                                     min_deaths = 3, rule = "logrank",
                                     seed = 0, rng = NULL) {
@@ -661,6 +671,7 @@ morie_survrsf_grow_tree <- function(X, times, events, mtry = NULL,
 #' tree <- morie_survrsf_grow_tree(X, times, events, min_deaths = 5, seed = 1)
 #' p <- morie_survrsf_predict_tree(tree, X[1, ])
 #' is.list(p) || is.numeric(p)
+#' @keywords internal
 morie_survrsf_predict_tree <- function(tree, x, random_variable = NULL,
                                        rng = NULL) {
   # Drop a case down the tree and return its terminal node.
@@ -699,6 +710,7 @@ morie_survrsf_predict_tree <- function(tree, x, random_variable = NULL,
 #' @examples
 #' morie_survrsf_forest(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   events = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survrsf_forest <- function(X, times, events, n_trees = 50, mtry = NULL,
                                  min_deaths = 3, rule = "logrank", seed = 0) {
   # Grow the forest, keeping the out-of-bag membership.
@@ -758,6 +770,7 @@ morie_survrsf_forest <- function(X, times, events, n_trees = 50, mtry = NULL,
 #' @examples
 #' morie_survrsf_ensemble_chf(fit = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survrsf_ensemble_chf <- function(fit, X, t, oob = TRUE,
                                        random_variable = NULL, seed = 1) {
   # Equations (3.2) and (3.3): the out-of-bag or bootstrap ensemble.
@@ -801,6 +814,7 @@ morie_survrsf_ensemble_chf <- function(fit, X, t, oob = TRUE,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_survrsf_mortality(D, V)
+#' @keywords internal
 morie_survrsf_mortality <- function(fit, X, oob = TRUE,
                                     random_variable = NULL, seed = 1) {
   # Sec. 4.1: the hazard summed over every observed time.
@@ -846,6 +860,7 @@ morie_survrsf_mortality <- function(fit, X, oob = TRUE,
 #' @examples
 #' morie_survrsf_c_index(times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   predicted = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survrsf_c_index <- function(times, events, predicted) {
   # Harrell's C by the paper's four steps. predicted is a
   # worse-outcome score: larger means the case is expected to fail
@@ -928,6 +943,7 @@ morie_survrsf_c_index <- function(times, events, predicted) {
 #' @return A list with \code{estimate}, \code{vimp}, \code{baseline_error}, \code{note},
 #' \code{method}.
 #' @export
+#' @keywords internal
 morie_survrsf_vimp <- function(fit, X, variables = NULL, seed = 1) {
   # Sec. 7: random daughter assignment at splits on x. Keys are
   # 0-based variable indices to match the Python.
@@ -980,6 +996,7 @@ morie_survrsf_vimp <- function(fit, X, variables = NULL, seed = 1) {
 #' @export
 #' @examples
 #' morie_survrsf_cheatsheet()
+#' @keywords internal
 morie_survrsf_cheatsheet <- function() {
   paste0(
     "survrsf: bootstrap survival trees split on the log-rank ",

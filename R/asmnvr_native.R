@@ -43,6 +43,7 @@
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_asmnvr(D)
+#' @keywords internal
 morie_asmnvr <- function(reads, k = NULL, multiplicity = "set") {
   rs <- as.character(reads)
   if (length(rs) == 0L)
@@ -120,6 +121,7 @@ morie_asmnvr <- function(reads, k = NULL, multiplicity = "set") {
 #' @export
 #' @examples
 #' de_bruijn_graph(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
+#' @keywords internal
 de_bruijn_graph <- function(reads, k, multiplicity = "set") {
   if (!(multiplicity %in% c("set", "count")))
     stop(sprintf("asmnvr: multiplicity must be 'set' or 'count', got '%s'",
@@ -231,6 +233,7 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 #' @param outdeg A vector; indexed elementwise.
 #' @return The value of \code{path}, as built in the body.
 #' @export
+#' @keywords internal
 eulerian_path <- function(edges, indeg, outdeg) {
   verts <- unique(c(ls(indeg, all.names = TRUE),
                     ls(outdeg, all.names = TRUE)))

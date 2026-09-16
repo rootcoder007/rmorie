@@ -139,6 +139,7 @@
 #' r <- morie_dreamr_imagine(state = c(1, 0.5), am, tr, rm, horizon = 5,
 #'                           value_model = vm)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
                                   horizon, value_model = NULL) {
   H <- as.integer(horizon)
@@ -198,6 +199,7 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
 #' r <- morie_dreamr_lambda_return(rewards = c(1, 0.8, 0.6, 0.4),
 #'                                 values = c(2, 1.6, 1.2, 0.8, 0.4))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95,
                                         estimator = "lambda", k = 1) {
   if (!is.character(estimator) || length(estimator) != 1L ||
@@ -278,6 +280,7 @@ morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_dreamr_value_update(V, V)
+#' @keywords internal
 morie_dreamr_value_update <- function(values, targets) {
   v <- .dreamr_vec(values, "values")
   t <- .dreamr_vec(targets, "targets")
@@ -324,6 +327,7 @@ morie_dreamr_value_update <- function(values, targets) {
 #' vm <- function(s) sum(s) * 2
 #' r <- morie_dreamr(c(1, 0.5), am, tr, rm, vm, horizon = 5)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_dreamr <- function(state, action_model, transition, reward_model, value_model,
                           horizon = 15, gamma = 0.99, lam = 0.95,
                           estimator = "lambda", k = 1) {
@@ -362,6 +366,7 @@ morie_dreamer <- morie_dreamr
 #' @export
 #' @examples
 #' morie_dreamr_cheatsheet()
+#' @keywords internal
 morie_dreamr_cheatsheet <- function() {
   paste0("dreamr: learn behaviour inside a latent world model ",
          "(Hafner 2020). Imagine H steps with the TRANSITION model ",

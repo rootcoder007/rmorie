@@ -18,6 +18,7 @@
 #' @export
 #' @examples
 #' t3golden(function(x) (x - 2)^2, 0, 5)
+#' @keywords internal
 t3golden <- function(f, lo, hi, iters = 80L) {
   a <- as.numeric(lo)
   b <- as.numeric(hi)
@@ -55,6 +56,7 @@ t3golden <- function(f, lo, hi, iters = 80L) {
 #' @export
 #' @examples
 #' t3nodes()
+#' @keywords internal
 t3nodes <- function(m = 401L, lim = 8.0) {
   m <- as.integer(m)
   u <- seq(-lim, lim, length.out = m)
@@ -79,6 +81,7 @@ t3nodes <- function(m = 401L, lim = 8.0) {
 #' A[2, 3] <- A[3, 2] <- 1
 #' A[3, 4] <- A[4, 3] <- 1
 #' t3bfs(A, 1)
+#' @keywords internal
 t3bfs <- function(A, s) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -108,6 +111,7 @@ t3bfs <- function(A, s) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' t3relu(V)
+#' @keywords internal
 t3relu <- function(x) ifelse(x > 0, x, 0)
 
 #' t3expit
@@ -122,6 +126,7 @@ t3relu <- function(x) ifelse(x > 0, x, 0)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' t3expit(V)
+#' @keywords internal
 t3expit <- function(x) 1 / (1 + exp(-x))
 
 #' t3ols
@@ -137,6 +142,7 @@ t3expit <- function(x) 1 / (1 + exp(-x))
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' t3ols(V, V)
+#' @keywords internal
 t3ols <- function(X, y) {
   X <- as.matrix(X)
   y <- as.numeric(y)

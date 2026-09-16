@@ -104,6 +104,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rfppos_distance(V, V)
+#' @keywords internal
 morie_rfppos_distance <- function(a, b) .rfppos_norm(a - b)
 
 #' The angle at b, in degrees, subtended by a and c
@@ -118,6 +119,7 @@ morie_rfppos_distance <- function(a, b) .rfppos_norm(a - b)
 #' @export
 #' @examples
 #' morie_rfppos_angle(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_rfppos_angle <- function(a, b, c) {
   u <- a - b
   v <- c - b
@@ -142,6 +144,7 @@ morie_rfppos_angle <- function(a, b, c) {
 #' @export
 #' @examples
 #' morie_rfppos_dihedral(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L)
+#' @keywords internal
 morie_rfppos_dihedral <- function(a, b, c, d) {
   b1 <- b - a
   b2 <- c - b
@@ -176,6 +179,7 @@ morie_rfppos_dihedral <- function(a, b, c, d) {
 #' @export
 #' @examples
 #' morie_rfppos_warhead("C=CC(=O)N", mode = "michael")
+#' @keywords internal
 morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
   if (!(mode %in% .rfppos_modes))
     stop("the mode is burgi_dunitz or michael")
@@ -241,6 +245,7 @@ morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
 #' @return A list with the measured geometry, each criterion separately,
 #'   and whether the pose passes all of them.
 #' @export
+#' @keywords internal
 morie_rfppos <- function(pose, cys_residue, mode = "burgi_dunitz",
                          d_min = 1.5, d_max = 3.5, ideal = NULL,
                          angle_tol = 15, warhead = NULL) {
@@ -307,6 +312,7 @@ morie_rfppos <- function(pose, cys_residue, mode = "burgi_dunitz",
 #' @export
 #' @examples
 #' morie_rfppos_cheatsheet()
+#' @keywords internal
 morie_rfppos_cheatsheet <- function()
   paste0("rfppos: covalent pose filter. Sulfur-to-electrophile ",
          "distance, Buergi-Dunitz or perpendicular attack angle, and ",

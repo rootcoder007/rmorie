@@ -99,6 +99,8 @@
   as.integer(max.col(-d, ties.method = "first")) - 1L
 }
 
+#' SPDX-License-Identifier: AGPL-3.0-or-later
+#'
 #' @param K See Usage.
 #' @param b See Usage.
 #' @param seed See Usage.
@@ -106,6 +108,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Kvmse(V)
+#' @keywords internal
 Kvmse <- function(K, b = 2, seed = 1) {
   K <- as.matrix(K)
   n <- nrow(K)

@@ -92,6 +92,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_ncfRS_gmf(V, V)
+#' @keywords internal
 morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
   p <- as.numeric(p_u)
   q <- as.numeric(q_i)
@@ -133,6 +134,7 @@ morie_ncfRS_gmf <- function(p_u, q_i, h = NULL, activation = "sigmoid") {
 #' bs <- list(rep(0, 4), rep(0, 2))
 #' z <- morie_ncfRS_mlp_layers(p_u, q_i, Ws, bs)
 #' length(z) == 2L
+#' @keywords internal
 morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
   z <- c(as.numeric(p_u), as.numeric(q_i))
   for (l in seq_along(Ws)) {
@@ -170,6 +172,7 @@ morie_ncfRS_mlp_layers <- function(p_u, q_i, Ws, bs) {
 #' h <- rnorm(6, 0, 0.3)
 #' s <- morie_ncfRS_neumf(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h)
 #' is.numeric(s)
+#' @keywords internal
 morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
   g <- as.numeric(p_gmf) * as.numeric(q_gmf)
   m <- morie_ncfRS_mlp_layers(p_mlp, q_mlp, Ws, bs)
@@ -199,6 +202,7 @@ morie_ncfRS_neumf <- function(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_ncfRS_log_loss(V, V)
+#' @keywords internal
 morie_ncfRS_log_loss <- function(y, y_hat) {
   p <- min(max(as.numeric(y_hat), .ncfRS_EPS), 1.0 - .ncfRS_EPS)
   yv <- as.numeric(y)
@@ -229,6 +233,7 @@ morie_ncfRS_log_loss <- function(y, y_hat) {
 #' fit <- morie_ncfRS_fit_gmf(pos, n_users = 3, n_items = 3, k_dim = 4,
 #'                            iters = 200, seed = 1)
 #' is.list(fit)
+#' @keywords internal
 morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
                                 iters = 2000, n_neg = 4, seed = 0, learn_h = TRUE) {
   U <- as.integer(n_users)
@@ -338,6 +343,7 @@ morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
 #' @export
 #' @examples
 #' morie_ncfRS_cheatsheet()
+#' @keywords internal
 morie_ncfRS_cheatsheet <- function() {
   paste0("ncfRS: the inner product is an ASSUMPTION, not a ",
          "necessity. GMF = a_out(h' (p_u * q_i)) elementwise, which ",

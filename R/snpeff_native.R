@@ -47,6 +47,7 @@
 #' @export
 #' @examples
 #' codon_table()
+#' @keywords internal
 codon_table <- function() .SNPEFF_CODONS
 
 #' translate
@@ -63,6 +64,7 @@ codon_table <- function() .SNPEFF_CODONS
 #' @examples
 #' S <- c("a", "b", "c")
 #' translate(S)
+#' @keywords internal
 translate <- function(seq, to_stop = FALSE) {
   s <- toupper(as.character(seq))
   s <- gsub("U", "T", s, fixed = TRUE)
@@ -152,6 +154,7 @@ translate <- function(seq, to_stop = FALSE) {
 #' @export
 #' @examples
 #' annotate_variant("ATGAAACCCGGGTTTTAA", 4, "A", "T")
+#' @keywords internal
 annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
                              upstream = 5000, downstream = 5000,
                              transcript_len = NULL) {
@@ -249,6 +252,7 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
 #' @return A list with \code{estimate}, \code{annotations}, \code{effect_counts},
 #' \code{impact_counts}, \code{n_variants}, \code{protein}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
                    downstream = 5000, transcript_len = NULL) {
   if (length(variants) == 0L)

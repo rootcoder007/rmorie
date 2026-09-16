@@ -75,6 +75,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' gaussian_expansion(V)
+#' @keywords internal
 gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
                                 gamma = NULL) {
   n <- as.integer(n_gaussians)
@@ -101,6 +102,7 @@ gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
 #' @export
 #' @examples
 #' cosine_cutoff(r = 5L)
+#' @keywords internal
 cosine_cutoff <- function(r, cutoff = 5.0) {
   rc <- as.numeric(cutoff)
   if (rc <= 0) stop("schn: the cutoff must be positive")
@@ -129,6 +131,7 @@ cosine_cutoff <- function(r, cutoff = 5.0) {
 #' filter_net <- function(g) rep(0.1, d)
 #' out <- cfconv(X, R, filter_net, cutoff = 5)
 #' dim(out)
+#' @keywords internal
 cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
   feats <- .schn_mat(X)
   pos <- .schn_mat(R)
@@ -169,6 +172,7 @@ cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
 #' energy_fn <- function(R) sum(R^2)
 #' Fm <- forces_from_energy(energy_fn, R)
 #' c(nrow(Fm$forces), max(abs(Fm$forces + 2 * R)) < 1e-3)
+#' @keywords internal
 forces_from_energy <- function(energy_fn, R, h = 1e-5) {
   pos <- .schn_mat(R)
   n <- nrow(pos)
@@ -209,6 +213,7 @@ forces_from_energy <- function(energy_fn, R, h = 1e-5) {
 #' Q <- matrix(c(cos(th), -sin(th), 0, sin(th), cos(th), 0, 0, 0, 1), 3, 3)
 #' ie <- invariance_error(energy_fn, R, Q)
 #' is.numeric(ie) || is.list(ie)
+#' @keywords internal
 invariance_error <- function(energy_fn, R, Q, g = NULL) {
   pos <- .schn_mat(R)
   d <- ncol(pos)

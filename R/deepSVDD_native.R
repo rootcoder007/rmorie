@@ -41,6 +41,7 @@
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' svdd(M)
+#' @keywords internal
 svdd <- function(X, C = 1.0, kernel = "linear", gamma = 1.0,
                  tol = 1e-10, max_sweeps = 500L) {
   Xv <- lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -152,6 +153,7 @@ morie_deepSVDD <- svdd
 #' @export
 #' @examples
 #' deepSVDD_cheatsheet()
+#' @keywords internal
 deepSVDD_cheatsheet <- function() {
   "svdd: max sum a K_ii - aa'K, sum a=1, 0<=a<=C; a = center weights"
 }

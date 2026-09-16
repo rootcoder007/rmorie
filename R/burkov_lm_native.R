@@ -82,6 +82,7 @@ morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
 #' @export
 #' @examples
 #' morie_burkov_linear_vector(w = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+#' @keywords internal
 morie_burkov_linear_vector <- function(w, x, b) {
   w <- as.numeric(w)
   x <- as.numeric(x)
@@ -100,6 +101,7 @@ morie_burkov_linear_vector <- function(w, x, b) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_burkov_cosine_similarity(V, V)
+#' @keywords internal
 morie_burkov_cosine_similarity <- function(x, y) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -154,6 +156,7 @@ morie_burkov_cosine_similarity <- function(x, y) {
 #' @export
 #' @examples
 #' morie_burkov_layer1_output(W_1 = c(1, 2, 3, 4, 5, 6, 7, 8), x = 5L, b_1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
   W <- as.matrix(W_1)
   x <- as.numeric(x)
@@ -187,6 +190,7 @@ morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
 #' @examples
 #' morie_burkov_layer2_output(W_2 = c(1, 2, 3, 4, 5, 6, 7, 8), y_1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   b_2_1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_burkov_layer2_output <- function(W_2, y_1, b_2_1, phi = "identity") {
   w <- as.numeric(W_2)
   y1 <- as.numeric(y_1)
@@ -210,6 +214,7 @@ morie_burkov_layer2_output <- function(W_2, y_1, b_2_1, phi = "identity") {
 #' @export
 #' @examples
 #' morie_burkov_logistic(w = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+#' @keywords internal
 morie_burkov_logistic <- function(w, x, b) {
   w <- as.numeric(w)
   x <- as.numeric(x)
@@ -231,6 +236,7 @@ morie_burkov_logistic <- function(w, x, b) {
 #' @export
 #' @examples
 #' morie_burkov_binary_cross_entropy(0.5, 1)
+#' @keywords internal
 morie_burkov_binary_cross_entropy <- function(y_hat, y) {
   yh <- as.numeric(y_hat)
   y <- as.numeric(y)
@@ -262,6 +268,7 @@ morie_burkov_binary_cross_entropy <- function(y_hat, y) {
 #' @examples
 #' morie_burkov_bce_gradients(y_hat = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   x = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
   yh <- as.numeric(y_hat)
   y <- as.numeric(y)
@@ -294,6 +301,7 @@ morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
 #' @export
 #' @examples
 #' morie_burkov_categorical_cross_entropy(c(0.7, 0.2, 0.1), 0)
+#' @keywords internal
 morie_burkov_categorical_cross_entropy <- function(y_hat, c) {
   p <- as.numeric(y_hat)
   c <- as.integer(c)
@@ -332,6 +340,7 @@ morie_burkov_categorical_cross_entropy <- function(y_hat, c) {
 #' @export
 #' @examples
 #' morie_burkov_next_token("b", c("a", "b", "a", "c", "a", "b"))
+#' @keywords internal
 morie_burkov_next_token <- function(t_next, s) {
   seq_ <- as.character(s)
   if (length(seq_) < 2L) {
@@ -364,6 +373,7 @@ morie_burkov_next_token <- function(t_next, s) {
 #' @export
 #' @examples
 #' morie_burkov_ngram_mle(counts_ngram = 5L, counts_prefix = 5L)
+#' @keywords internal
 morie_burkov_ngram_mle <- function(counts_ngram, counts_prefix) {
   c <- as.numeric(counts_ngram)
   p <- as.numeric(counts_prefix)
@@ -393,6 +403,7 @@ morie_burkov_ngram_mle <- function(counts_ngram, counts_prefix) {
 #' @export
 #' @examples
 #' morie_burkov_laplace(counts_ngram = 3, counts_prefix = 10, V = 100)
+#' @keywords internal
 morie_burkov_laplace <- function(counts_ngram, counts_prefix, V) {
   c <- as.numeric(counts_ngram)
   p <- as.numeric(counts_prefix)
@@ -414,6 +425,7 @@ morie_burkov_laplace <- function(counts_ngram, counts_prefix, V) {
 #' @export
 #' @examples
 #' morie_burkov_add_k(counts_ngram = 3, counts_prefix = 10, V = 100, k = 0.5)
+#' @keywords internal
 morie_burkov_add_k <- function(counts_ngram, counts_prefix, V, k = 0.5) {
   c <- as.numeric(counts_ngram)
   p <- as.numeric(counts_prefix)
@@ -444,6 +456,7 @@ morie_burkov_add_k <- function(counts_ngram, counts_prefix, V, k = 0.5) {
 #' @export
 #' @examples
 #' morie_burkov_interpolation(c(0.9, 0.1, 0.5), c(0.6, 0.3, 0.1))
+#' @keywords internal
 morie_burkov_interpolation <- function(probs_by_order, lambdas) {
   ps <- as.numeric(probs_by_order)
   ls <- as.numeric(lambdas)
@@ -473,6 +486,7 @@ morie_burkov_interpolation <- function(probs_by_order, lambdas) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_burkov_backoff(D)
+#' @keywords internal
 morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
   a <- as.numeric(alpha)
   if (a <= 0 || a > 1) {
@@ -514,6 +528,7 @@ morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
 #' @examples
 #' morie_burkov_kneser_ney(counts_ngram = 5L, counts_prefix = 5L,
 #'   continuation_counts = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_burkov_kneser_ney <- function(counts_ngram, counts_prefix,
                                     continuation_counts, d = 0.75) {
   c <- as.numeric(counts_ngram)
@@ -558,6 +573,7 @@ morie_burkov_kneser_ney <- function(counts_ngram, counts_prefix,
 #' @export
 #' @examples
 #' morie_burkov_bits_per_character(2, 100, 400)
+#' @keywords internal
 morie_burkov_bits_per_character <- function(ce_loss, n_tokens,
                                             n_characters) {
   l <- as.numeric(ce_loss)
@@ -580,6 +596,7 @@ morie_burkov_bits_per_character <- function(ce_loss, n_tokens,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_burkov_dot_product(V, V)
+#' @keywords internal
 morie_burkov_dot_product <- function(a, b) {
   a <- as.numeric(a)
   b <- as.numeric(b)
@@ -597,6 +614,7 @@ morie_burkov_dot_product <- function(a, b) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_burkov_vector_norm(V)
+#' @keywords internal
 morie_burkov_vector_norm <- function(a) {
   a <- as.numeric(a)
   list(
@@ -610,6 +628,7 @@ morie_burkov_vector_norm <- function(a) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_burkov_unit_vector(V)
+#' @keywords internal
 morie_burkov_unit_vector <- function(a) {
   a <- as.numeric(a)
   n <- sqrt(sum(a^2))
@@ -632,6 +651,7 @@ morie_burkov_unit_vector <- function(a) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_burkov_term_frequency(V, V)
+#' @keywords internal
 morie_burkov_term_frequency <- function(term, document, normalise = FALSE) {
   doc <- as.character(document)
   if (length(doc) == 0L) stop("the document is empty.", call. = FALSE)
@@ -650,6 +670,7 @@ morie_burkov_term_frequency <- function(term, document, normalise = FALSE) {
 #' @examples
 #' morie_burkov_tf_idf(term = 5L, document = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   corpus = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_burkov_tf_idf <- function(term, document, corpus) {
   t <- as.character(term)
   doc <- as.character(document)
@@ -689,6 +710,7 @@ morie_burkov_tf_idf <- function(term, document, corpus) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_burkov_repetition_penalty(V, M)
+#' @keywords internal
 morie_burkov_repetition_penalty <- function(logits, prev_tokens,
                                             penalty = 1.2) {
   z <- as.numeric(logits)
@@ -720,6 +742,7 @@ morie_burkov_repetition_penalty <- function(logits, prev_tokens,
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' S <- c("a", "b", "c")
 #' morie_burkov_weight_tying(S, M)
+#' @keywords internal
 morie_burkov_weight_tying <- function(h_last, E) {
   h <- as.numeric(h_last)
   E <- as.matrix(E)
@@ -751,6 +774,7 @@ morie_burkov_weight_tying <- function(h_last, E) {
 #' morie_burkov_elman_rnn(c(1, 0.5), c(0.2, -0.1), rbind(c(0.5,
 #'     0), c(0, 0.5)), rbind(c(1, 0), c(0, 1)), rbind(c(1, 1)),
 #'     c(0, 0), 0.1)
+#' @keywords internal
 morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
   x <- as.numeric(x_t)
   h0 <- as.numeric(h_prev)
@@ -802,6 +826,7 @@ morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
 #'         args = "d"))
 #' inputs <- list(w = 0.7, x = 1.3, b = -0.2, y = 1)
 #' morie_burkov_computational_graph(g, inputs)
+#' @keywords internal
 morie_burkov_computational_graph <- function(graph, inputs) {
   if (length(graph) == 0L) stop("the graph is empty.", call. = FALSE)
   sig <- function(a) 1 / (1 + exp(-a))

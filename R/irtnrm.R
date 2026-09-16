@@ -13,10 +13,10 @@
 #
 # Helpers live in aaa_helpers_irt.R.
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_nominal_response(theta = 0.5, a = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
 #'   c = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+#' @keywords internal
 morie_nominal_response <- function(theta, a, c) {
   th <- as.numeric(theta)
   n <- length(th)

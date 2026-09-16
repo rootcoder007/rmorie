@@ -172,6 +172,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_alfmpv_msa_pairing(V)
+#' @keywords internal
 morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
                                      min_coverage = 0.5, max_gap = 0.9,
                                      copies = NULL, max_pairs = NULL) {
@@ -336,6 +337,7 @@ morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
 #' @param ... passed to morie_alfmpv_msa_pairing.
 #' @return see morie_alfmpv_msa_pairing.
 #' @export
+#' @keywords internal
 morie_alfmpv <- function(chains = NULL, msas = NULL, mode = "multimer",
                          ...) {
   if (is.null(msas)) msas <- chains

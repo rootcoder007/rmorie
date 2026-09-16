@@ -110,10 +110,13 @@ morie_bigint <- function(x) {
   .morie_big_new(sign, limbs)
 }
 
+#' as.character.morie_bigint
+#'
 #' @param x See Usage.
 #' @export
 #' @examples
 #' as.character(morie_bigint("123456789012345678901234567890"))
+#' @keywords internal
 as.character.morie_bigint <- function(x, ...) {
   if (x$sign == 0) {
     return("0")
@@ -140,6 +143,7 @@ as.character.morie_bigint <- function(x, ...) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::print.morie_bigint(V)
+#' @keywords internal
 print.morie_bigint <- function(x, ...) {
   cat(as.character(x), "\n", sep = "")
   invisible(x)
@@ -153,6 +157,7 @@ print.morie_bigint <- function(x, ...) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::format.morie_bigint(V)
+#' @keywords internal
 format.morie_bigint <- function(x, ...) as.character(x)
 
 #' .morie_big_cmp_abs

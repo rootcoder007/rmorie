@@ -30,6 +30,7 @@
 #' @export
 #' @examples
 #' node2v_check_pq(p = 0.5, q = 0.5)
+#' @keywords internal
 node2v_check_pq <- function(p, q) {
   p <- as.numeric(p)
   q <- as.numeric(q)
@@ -51,6 +52,7 @@ node2v_check_pq <- function(p, q) {
 #' @export
 #' @examples
 #' c(alpha_pq(0L, 1, 1), alpha_pq(1L, 1, 2), alpha_pq(2L, 1, 0.5))
+#' @keywords internal
 alpha_pq <- function(d_tx, p, q) {
   d <- as.integer(d_tx)
   pq <- node2v_check_pq(p, q)
@@ -97,6 +99,7 @@ alpha_pq <- function(d_tx, p, q) {
 #' @examples
 #' transition_probabilities(adj = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   v = 5L, p = 0.5, q = 0.5)
+#' @keywords internal
 transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
   nb <- adj[[v]]
   if (is.null(nb) || length(nb) == 0L) {
@@ -145,6 +148,7 @@ transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
 #' @param weights Passed to \code{transition_probabilities}.
 #' @return The value of \code{path}, as built in the body.
 #' @export
+#' @keywords internal
 walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
                  weights = NULL) {
   len <- as.integer(length)
@@ -191,6 +195,7 @@ walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' generate_walks(V)
+#' @keywords internal
 generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,
                            q = 1.0, seed = 0, weights = NULL) {
   nw <- as.integer(num_walks)
@@ -233,6 +238,7 @@ node2vec <- generate_walks
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' skipgram_pairs(V)
+#' @keywords internal
 skipgram_pairs <- function(walks, window = 2) {
   w <- as.integer(window)
   if (w < 1L)

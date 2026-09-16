@@ -18,6 +18,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ztrans(V)
+#' @keywords internal
 Ztrans <- function(x, z = NULL, n0 = 0) {
   # eq (3.54): X(z) = sum_n x(n) z^-n; eq (3.55) is the causal FIR case.
   xs <- as.numeric(x)
@@ -78,6 +79,7 @@ Ztrans <- function(x, z = NULL, n0 = 0) {
 #' @export
 #' @examples
 #' ZtConv(x = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 ZtConv <- function(x, h, z) {
   # eq (3.56): y = x * h  =>  Y(z) = X(z) H(z).  Both sides computed
   # separately so the property is demonstrated, not assumed.
@@ -117,6 +119,7 @@ ZtConv <- function(x, h, z) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DtftZ(V, V)
+#' @keywords internal
 DtftZ <- function(x, omega, fs = NULL) {
   # eq (3.66): the Fourier transform is the z-transform on the unit
   # circle, z = exp(j omega T).  fs = NULL reads omega as normalized.
@@ -150,6 +153,7 @@ DtftZ <- function(x, omega, fs = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Euler(V)
+#' @keywords internal
 Euler <- function(omega, t = 0) {
   # eq (3.74): exp(j omega t) = cos(omega t) + j sin(omega t)
   ws <- as.numeric(omega)
@@ -189,6 +193,7 @@ Euler <- function(omega, t = 0) {
 #' x <- rep(1, 201)
 #' t <- seq(0, 2, length.out = 201)
 #' Ctft(x, t = t, omega = 0)
+#' @keywords internal
 Ctft <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
   # eqs (3.75)-(3.76): one transform in two frequency variables,
   # omega = 2 pi f.  Integrated over the supplied samples, so the limits
@@ -236,6 +241,7 @@ Ctft <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CtftF(V, V)
+#' @keywords internal
 CtftF <- function(x, f, t = NULL, dt = NULL) {
   # eq (3.76), the Hz spelling of eq (3.75); one implementation so the
   # two can never drift apart.
@@ -260,6 +266,7 @@ CtftF <- function(x, f, t = NULL, dt = NULL) {
 #' ts <- c(0, 0.25, 0.5, 0.75, 1)
 #' f0 <- 0.7
 #' Fourier(xs, t = ts, f = f0)
+#' @keywords internal
 Fourier <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
   # eqs (3.75)-(3.76); the name Section 3.4.4 uses.
   Ctft(x, t = t, omega = omega, f = f, dt = dt)
@@ -280,6 +287,7 @@ Fourier <- function(x, t = NULL, omega = NULL, f = NULL, dt = NULL) {
 #' grid <- seq(-1, 1, length.out = 401)
 #' X <- rep(complex(real = 1, imaginary = 0), 401)
 #' Ictft(X, t = 0, omega = grid)
+#' @keywords internal
 Ictft <- function(X, t, omega = NULL, f = NULL) {
   # eq (3.77): the 1/(2 pi) belongs to the omega form only.  Getting that
   # factor wrong scales the synthesis by 6.28, so the branch is explicit.
@@ -333,6 +341,7 @@ Ictft <- function(X, t, omega = NULL, f = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dtft(V, V)
+#' @keywords internal
 Dtft <- function(x, omega, n0 = 0) {
   # eq (3.78): discrete signal, CONTINUOUS frequency -- that is the whole
   # distinction from the DFT of eq (3.80), which samples this at N points.
@@ -364,6 +373,7 @@ Dtft <- function(x, omega, n0 = 0) {
 #' @export
 #' @examples
 #' DftK(x = c(1, 2, 3, 4, 5, 6, 7, 8), k_points = 5L)
+#' @keywords internal
 DftK <- function(x, k_points) {
   # eq (3.79): K need not equal N.  K > N samples the same DTFT more
   # finely; K < N folds and the signal cannot be recovered.
@@ -397,6 +407,7 @@ DftK <- function(x, k_points) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dft(V)
+#' @keywords internal
 Dft <- function(x) {
   # eq (3.80), evaluated straight from the definition: exact at any N,
   # with no power-of-two requirement.  eq (3.85) is the same sum split
@@ -434,6 +445,7 @@ Dft <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DftX(V)
+#' @keywords internal
 DftX <- function(x, fs = 1) {
   # eq (3.80) with bin k at k fs / N.  Figure 3.38: for even N, DC and
   # the folding frequency fs/2 are the two real-valued bins.
@@ -458,6 +470,7 @@ DftX <- function(x, fs = 1) {
 #' @export
 #' @examples
 #' Twiddle(npoints = 5L)
+#' @keywords internal
 Twiddle <- function(npoints, power = 1) {
   # eq (3.82): W_N = exp(-j 2 pi / N), the N-th root of unity.
   n <- as.integer(npoints)
@@ -488,6 +501,7 @@ Twiddle <- function(npoints, power = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DftTw(V)
+#' @keywords internal
 DftTw <- function(x) {
   # eq (3.83): the same transform written with twiddle factors, which is
   # the structure the FFT exploits via eqs (3.88)-(3.89).  Checked
@@ -528,6 +542,7 @@ DftTw <- function(x) {
 #' @export
 #' @examples
 #' TwidCS(npoints = 5L, n = 5L, k = 5L)
+#' @keywords internal
 TwidCS <- function(npoints, n, k) {
   # eq (3.84): W_N^(nk) = cos(.) - j sin(.).  Note the MINUS on the sine:
   # the DFT projects onto the conjugated exponential, and that sign is
@@ -555,6 +570,7 @@ TwidCS <- function(npoints, n, k) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DftRI(V)
+#' @keywords internal
 DftRI <- function(x) {
   # eq (3.85): the real part is the projection onto the k-th cosine, the
   # imaginary part is MINUS the projection onto the corresponding sine.
@@ -589,6 +605,7 @@ DftRI <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IdftRI(V)
+#' @keywords internal
 IdftRI <- function(X) {
   # eq (3.86): synthesis as a weighted sum of sinusoids.  The imaginary
   # residue is reported, not discarded -- a large one means the spectrum
@@ -623,6 +640,7 @@ IdftRI <- function(X) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DftConv(V, V)
+#' @keywords internal
 DftConv <- function(x, h) {
   # eq (3.87).  The book is explicit that the convolution here is
   # PERIODIC: multiplying N-point DFTs gives the circular convolution of
@@ -668,6 +686,7 @@ DftConv <- function(x, h) {
 #' @export
 #' @examples
 #' TwidConj(npoints = 5L, n = 5L, k = 5L)
+#' @keywords internal
 TwidConj <- function(npoints, n, k) {
   # eq (3.88): W_N^(-nk) = conj(W_N^(nk)) -- a negative power costs only
   # a sign flip, one of the two properties the FFT is built on.
@@ -698,6 +717,7 @@ TwidConj <- function(npoints, n, k) {
 #' @export
 #' @examples
 #' TwidPer(npoints = 5L, n = 5L, k = 5L)
+#' @keywords internal
 TwidPer <- function(npoints, n, k) {
   # eq (3.89): indices reduce modulo N -- why the same roots of unity are
   # reused at every FFT stage, and why every DFT relation is periodic.
@@ -737,6 +757,7 @@ TwidPer <- function(npoints, n, k) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CircConv(V, V)
+#' @keywords internal
 CircConv <- function(x, h, npoints = NULL) {
   # eq (3.90): y_p(n) = sum_k x_p(k) h_p[(n-k) mod N], defined only for
   # equal periods.  Both routes -- the modular sum and the inverse DFT of
@@ -829,6 +850,7 @@ CircConv <- function(x, h, npoints = NULL) {
 #' @examples
 #' S <- c("a", "b", "c")
 #' EvenPart(S)
+#' @keywords internal
 EvenPart <- function(x, n = NULL) {
   # eq (3.92): x_e(n) = 0.5 [x(n) + x(-n)].  x(-n) must exist, so the
   # index grid has to be symmetric; reflecting a causal sequence about 0
@@ -849,6 +871,7 @@ EvenPart <- function(x, n = NULL) {
 #' @examples
 #' S <- c("a", "b", "c")
 #' OddPart(S)
+#' @keywords internal
 OddPart <- function(x, n = NULL) {
   # eq (3.93): x_o(n) = 0.5 [x(n) - x(-n)]; forced to 0 at the origin.
   c(.morie_rg_evenodd(x, n), method = "Rangayyan (2024) eq. (3.93)")
@@ -865,6 +888,7 @@ OddPart <- function(x, n = NULL) {
 #' @examples
 #' S <- c("a", "b", "c")
 #' EvenOdd(S)
+#' @keywords internal
 EvenOdd <- function(x, n = NULL) {
   # eqs (3.92)-(3.94).  Eq (3.94) is an identity, so the reconstruction
   # error checks the index bookkeeping, not the arithmetic.
@@ -889,6 +913,7 @@ EvenOdd <- function(x, n = NULL) {
 #' @examples
 #' LogFT(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LogFT <- function(x, p, omega, t = NULL, dt = NULL) {
   # eqs (4.58)-(4.60): y = x p, log y = log x + log p, and so
   # Y_l(omega) = X_l(omega) + P_l(omega).  Eq (4.59) needs both factors
@@ -932,6 +957,7 @@ LogFT <- function(x, p, omega, t = NULL, dt = NULL) {
 #' @export
 #' @examples
 #' FtConv(x = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 FtConv <- function(x, h, omega, dt = 1) {
   # eqs (4.61)-(4.62): the Fourier transform turns the convolution into a
   # product, which eq (4.63) then turns into a sum.  The convolution is
@@ -987,6 +1013,7 @@ FtConv <- function(x, h, omega, dt = 1) {
 #' @export
 #' @examples
 #' ClogSum(x = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 ClogSum <- function(x, h, z) {
   # eqs (4.63), (4.65): complex logs of the z-transforms add.  Arg() is a
   # principal value in (-pi, pi], so the two sides can differ by an
@@ -1040,6 +1067,7 @@ ClogSum <- function(x, h, z) {
 #' @export
 #' @examples
 #' LogSeries(0.5, terms = 60)
+#' @keywords internal
 LogSeries <- function(x, terms = 20) {
   # eq (4.69): log(1 + x) = x - x^2/2 + x^3/3 - ..., |x| < 1.  The radius
   # is exactly 1, so |x| >= 1 is refused instead of diverging quietly.
@@ -1083,6 +1111,7 @@ LogSeries <- function(x, terms = 20) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LogMinPh(V)
+#' @keywords internal
 LogMinPh <- function(alpha, terms = 20, z = NULL) {
   # eq (4.70): log(1 - alpha z^-1) = -sum alpha^n/n z^-n, |z| > |alpha|.
   # The coefficients sit at POSITIVE quefrency and decay at least as fast
@@ -1123,6 +1152,7 @@ LogMinPh <- function(alpha, terms = 20, z = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LogMaxPh(V)
+#' @keywords internal
 LogMaxPh <- function(beta, terms = 20, z = NULL) {
   # eq (4.71): log(1 - beta z) = -sum beta^n/n z^n, |z| < 1/|beta|.  The
   # mirror of eq (4.70): positive powers of z, so the maximum-phase part

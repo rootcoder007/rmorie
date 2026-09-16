@@ -417,6 +417,7 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_replwt(D)
+#' @keywords internal
 morie_replwt <- function(d, method = "jkn", R = 200, fay = 0.0, seed = 1) {
   if (!method %in% METHODS) {
     stop(sprintf("replwt: method must be one of %s, got %s",

@@ -76,6 +76,7 @@
 #'   \code{method}.
 #' @references Lee et al. (2019), arXiv:1810.00825.
 #' @export
+#' @keywords internal
 morie_setT_setT <- function(Z, S, params) {
   Za <- as.matrix(Z)
   Sa <- as.matrix(S)
@@ -103,6 +104,7 @@ morie_setT_setT <- function(Z, S, params) {
 #' @param params List of weights.
 #' @return As for \code{setT}.
 #' @export
+#' @keywords internal
 morie_setT_set_transformer <- function(X = NULL, k = NULL, S = NULL,
                                        params = NULL) {
   if (is.null(X) || is.null(S) || is.null(params))

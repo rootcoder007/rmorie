@@ -100,6 +100,7 @@
 #' @examples
 #' mehtad_residuals(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)
   m <- nrow(M)
@@ -132,6 +133,7 @@ mehtad_residuals <- function(A, b, c, x, y, s) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' max_step(V, V)
+#' @keywords internal
 max_step <- function(v, dv, eta = 0.9995) {
   a <- 1.0
   for (i in seq_along(v)) {
@@ -156,6 +158,7 @@ max_step <- function(v, dv, eta = 0.9995) {
 #' @export
 #' @examples
 #' centering_parameter(mu = 5L, mu_affine = 5L)
+#' @keywords internal
 centering_parameter <- function(mu, mu_affine, nu = 3.0) {
   m <- as.numeric(mu)
   ma <- as.numeric(mu_affine)
@@ -219,6 +222,7 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #' @examples
 #' newton_direction(A = c(1, 2, 3, 4, 5, 6, 7, 8), x = 5L, s = 5L, rp = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   rd = c(1, 2, 3, 4, 5, 6, 7, 8), rc = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 newton_direction <- function(A, x, s, rp, rd, rc) {
   M <- as.matrix(A)
   storage.mode(M) <- "double"
@@ -261,6 +265,7 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 #' b <- c(4, 2)
 #' cc <- c(-1, -2, 0, 0)
 #' solve_lp(A, b, cc)
+#' @keywords internal
 solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
                      eta = 0.9995, corrector = TRUE) {
   M <- as.matrix(A)
@@ -353,6 +358,7 @@ mehrotras_predictor <- solve_lp
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 morie_mehtad <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("mehtad: op must be one of residuals, max_step, centering_parameter, newton_direction, solve_lp, cheatsheet")

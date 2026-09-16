@@ -289,6 +289,7 @@
 #' times <- c(1.2, 3.4, 2.1, 5.0)
 #' deltas <- c(1, 0, 1, 1)
 #' morie_coarsen_interval(times, deltas)
+#' @keywords internal
 morie_coarsen_interval <- function(times, deltas) {
   ts <- as.numeric(times)
   ds <- as.numeric(deltas)
@@ -333,6 +334,7 @@ morie_coarsen_interval <- function(times, deltas) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_censoring_survival(V, V)
+#' @keywords internal
 morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
                                      grid = NULL, by_covariate = TRUE,
                                      ridge = 1e-8) {
@@ -411,6 +413,7 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 #' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
                                 g = NULL, gc = NULL, ridge = 1e-8) {
   av <- as.numeric(A)
@@ -491,6 +494,7 @@ morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
 #' morie_tmle_censoring(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   censor = c(0, 1, 0, 1, 1, 0, 1, 0), treatment = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   covariates = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
                                  kind = "right", grid = NULL, a = 1.0,
                                  r = NULL, g = NULL, gc = NULL,

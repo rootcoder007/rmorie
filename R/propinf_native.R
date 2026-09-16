@@ -39,6 +39,7 @@
 #' net <- morie_propinf_train_fcnn(X, y, hidden = c(6L), epochs = 60L,
 #'                                 lr = 0.3, seed = 1L)
 #' mean((morie_propinf_fcnn_predict(net, X) >= 0.5) == (y == 1))
+#' @keywords internal
 morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
                                     lr = 0.1, batch_size = 16L, seed = 0L) {
   rows <- .propinf_rows(X)
@@ -129,6 +130,7 @@ morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
 #' )
 #' X <- matrix(c(1, -2, 0.5, 3), nrow = 2, byrow = TRUE)
 #' morie_propinf_fcnn_predict(net, X)
+#' @keywords internal
 morie_propinf_fcnn_predict <- function(net, X) {
   rows <- .propinf_rows(X)
   vapply(rows, function(r) {
@@ -162,6 +164,7 @@ morie_propinf_fcnn_predict <- function(net, X) {
 #' # relabelling the units of a hidden layer changes nothing the net computes
 #' all.equal(morie_propinf_fcnn_predict(net, X),
 #'           morie_propinf_fcnn_predict(perm, X))
+#' @keywords internal
 morie_propinf_permute_hidden_layer <- function(net, t, sigma) {
   t <- as.integer(t)
   if (t < 0L || t >= length(net))
@@ -208,6 +211,7 @@ morie_propinf_permute_hidden_layer <- function(net, t, sigma) {
 #' perm <- morie_propinf_permute_hidden_layer(net, 0L, c(2L, 0L, 1L))
 #' identical(morie_propinf_flat_representation(net),
 #'           morie_propinf_flat_representation(perm))
+#' @keywords internal
 morie_propinf_flat_representation <- function(net) {
   F <- numeric(0)
   for (L in net) {
@@ -244,6 +248,7 @@ morie_propinf_flat_representation <- function(net) {
 #' perm <- morie_propinf_permute_hidden_layer(net, 0L, c(2L, 0L, 1L))
 #' identical(morie_propinf_sorted_representation(net),
 #'           morie_propinf_sorted_representation(perm))
+#' @keywords internal
 morie_propinf_sorted_representation <- function(net, metric = NULL) {
   if (is.null(metric)) metric <- .propinf_node_metric
   # W stays a matrix: lapply over a matrix walks its ELEMENTS and
@@ -278,6 +283,7 @@ morie_propinf_sorted_representation <- function(net, metric = NULL) {
 #' )
 #' # Algorithm 2: each layer as a set of (weights, bias) vectors
 #' morie_propinf_set_representation(net)
+#' @keywords internal
 morie_propinf_set_representation <- function(net) {
   lapply(net, function(L) lapply(seq_len(nrow(L$W)),
                                  function(i) c(L$W[i, ], L$b[i])))
@@ -330,6 +336,7 @@ morie_propinf_set_representation <- function(net) {
 #'                                         epochs = 20L, seed = 3L)
 #' res$train_accuracy
 #' res$representation
+#' @keywords internal
 morie_propinf_property_inference <- function(shadow_models, shadow_labels,
                                              target_models = NULL,
                                              target_labels = NULL,

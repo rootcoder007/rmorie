@@ -36,6 +36,7 @@
 #' r <- symbolic_representation(captions = c("a cat on a mat"),
 #'                              boxes = list(list("cat", 1, 2, 10, 8)))
 #' is.list(r)
+#' @keywords internal
 symbolic_representation <- function(captions, boxes) {
   caps <- vapply(as.list(captions), as.character, character(1))
   bx <- as.list(boxes)
@@ -72,6 +73,7 @@ symbolic_representation <- function(captions, boxes) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' instruction_prompt(D)
+#' @keywords internal
 instruction_prompt <- function(symbolic, kind = "conversation") {
   if (!(kind %in% .LLAVX_KINDS))
     stop("llavx: kind must be one of ",
@@ -100,6 +102,7 @@ instruction_prompt <- function(symbolic, kind = "conversation") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' project_patches(V, V)
+#' @keywords internal
 project_patches <- function(patch_features, W, b = NULL) {
   Fmat <- lapply(patch_features, function(r) as.numeric(r))
   d_in <- length(Fmat[[1L]])
@@ -132,6 +135,7 @@ project_patches <- function(patch_features, W, b = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' build_sequence(V, V)
+#' @keywords internal
 build_sequence <- function(visual_tokens, text_embeddings) {
   V <- lapply(visual_tokens, function(r) as.numeric(r))
   T <- lapply(text_embeddings, function(r) as.numeric(r))
@@ -161,6 +165,7 @@ llava_visual_chat <- build_sequence
 #' @examples
 #' s <- training_stage(1)
 #' s$stage == 1L
+#' @keywords internal
 training_stage <- function(stage) {
   s <- as.integer(stage)
   if (!(s %in% c(1L, 2L)))
@@ -213,6 +218,7 @@ training_stage <- function(stage) {
 #' @examples
 #' r <- morie_llavx("training_stage", 2)
 #' r$stage == 2L
+#' @keywords internal
 morie_llavx <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("llavx: op must be one of symbolic_representation, instruction_prompt, project_patches, build_sequence, training_stage, cheatsheet")

@@ -34,6 +34,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' zero_fraction(V)
+#' @keywords internal
 zero_fraction <- function(y) {
   yv <- as.numeric(y)
   if (length(yv) == 0L) stop("adida: empty series")
@@ -55,6 +56,7 @@ zero_fraction <- function(y) {
 #' @export
 #' @examples
 #' aggregate_buckets(y = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+#' @keywords internal
 aggregate_buckets <- function(y, m, overlapping = FALSE) {
   yv <- as.numeric(y)
   n <- length(yv)
@@ -90,6 +92,7 @@ aggregate_buckets <- function(y, m, overlapping = FALSE) {
 #' @export
 #' @examples
 #' disaggregate(aggregate_value = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+#' @keywords internal
 disaggregate <- function(aggregate_value, m, profile = NULL) {
   mm <- as.integer(m)
   if (mm < 1L) stop("adida: the bucket size must be at least 1")
@@ -196,6 +199,7 @@ intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
 #' @export
 #' @examples
 #' morie_adida(y = c(1, 2, 3, 4, 5, 6, 7, 8), m = 3L)
+#' @keywords internal
 morie_adida <- function(y, m, horizon = 1L, method = "tsb",
                         alpha = 0.1, beta = 0.05,
                         overlapping = FALSE, profile = NULL,
@@ -256,6 +260,7 @@ morie_adida <- function(y, m, horizon = 1L, method = "tsb",
 #' @export
 #' @examples
 #' temporal_combination(y = c(1, 2, 3, 4, 5, 6, 7, 8), levels = factor(c("lo", "hi", "lo", "hi")))
+#' @keywords internal
 temporal_combination <- function(y, levels, horizon = 1L, method = "tsb",
                                  alpha = 0.1, beta = 0.05,
                                  weights = NULL) {

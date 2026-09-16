@@ -67,6 +67,7 @@
 #' set.seed(1)
 #' y <- as.numeric(arima.sim(list(ar = 0.9), 200))
 #' str(morie_lyapun_embed(y, m = 3, tau = 2), max.level = 1)
+#' @keywords internal
 morie_lyapun_embed <- function(y, m, tau) {
   y <- .lyapun_as_series(y)
   m <- as.integer(m)
@@ -103,6 +104,7 @@ morie_lyapun_embed <- function(y, m, tau) {
 #' set.seed(1)
 #' y <- as.numeric(arima.sim(list(ar = 0.9), 200))
 #' autocorrelation_lag(y)
+#' @keywords internal
 autocorrelation_lag <- function(y, threshold = NULL) {
   y <- .lyapun_as_series(y)
   n <- length(y)
@@ -134,6 +136,7 @@ autocorrelation_lag <- function(y, threshold = NULL) {
 #' @examples
 #' y <- sin(2 * pi * (1:400) / 25)
 #' mean_period(y)
+#' @keywords internal
 mean_period <- function(y, dt = 1.0) {
   y <- .lyapun_as_series(y)
   n <- length(y)
@@ -236,6 +239,7 @@ mean_period <- function(y, dt = 1.0) {
 #' r0 <- 3.9; x <- numeric(300); x[1] <- 0.4
 #' for (i in 2:300) x[i] <- r0 * x[i - 1] * (1 - x[i - 1])
 #' str(divergence_curve(x, m = 3, tau = 1), max.level = 1)
+#' @keywords internal
 divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
                              min_sep = NULL, max_steps = NULL) {
   y <- .lyapun_as_series(y)
@@ -379,6 +383,7 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #' for (i in 2:400) x[i] <- r0 * x[i - 1] * (1 - x[i - 1])
 #' r <- lyapunov_exponent(x, embedding = 3, tau = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
                               fit = NULL, min_sep = NULL,
                               max_steps = NULL, method = "rosenstein",
@@ -515,6 +520,7 @@ largest_lyapunov <- lyapunov_exponent
 #' y <- sin(2 * pi * (1:400) / 25)
 #' r <- morie_lyapun("mean_period", y)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_lyapun <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("lyapun: op must be one of lyapunov_exponent, morie_lyapun_embed, autocorrelation_lag, mean_period, divergence_curve, cheatsheet")

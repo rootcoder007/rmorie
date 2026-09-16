@@ -31,6 +31,7 @@
 #' @examples
 #' set.seed(1)
 #' r <- morie_exp3(x = rnorm(10), gamma_ = 0.5); TRUE
+#' @keywords internal
 morie_exp3 <- function(x, gamma_, T = NULL, seed = 0) {
   x <- as.matrix(x)
   storage.mode(x) <- "double"

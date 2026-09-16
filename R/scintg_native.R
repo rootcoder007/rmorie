@@ -516,6 +516,7 @@
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_scintg(M, D)
+#' @keywords internal
 morie_scintg <- function(Z, batches, K = NULL, sigma = 0.1, theta = 2.0, lam = 1.0,
                          max_iter = 10, cluster_iter = 25, tol = 1e-4, seed = 0,
                          reference = NULL, diversity = "penalise") {

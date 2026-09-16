@@ -45,6 +45,7 @@
 #'                     B = 200L, method = "naive")
 #'   str(r, max.level = 1)
 #' }
+#' @keywords internal
 morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
                          method = c("naive", "targeted",
                                     "multiplier"),
@@ -149,6 +150,7 @@ morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
 #'   r <- naive_bootstrap(d, estimator = function(s) mean(unlist(s)), B = 200L)
 #'   str(r, max.level = 1)
 #' }
+#' @keywords internal
 naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
   morie_tlboot(data = data, estimator = estimator, B = B,
                seed = seed, method = "naive")
@@ -174,6 +176,7 @@ naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
 #'                           B = 100L)
 #'   str(r, max.level = 1)
 #' }
+#' @keywords internal
 targeted_bootstrap <- function(P_star_sampler, estimator, B = 200L,
                                seed = 0L) {
   if (!is.function(P_star_sampler)) {
@@ -220,6 +223,7 @@ targeted_bootstrap <- function(P_star_sampler, estimator, B = 200L,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' multiplier_bootstrap(V)
+#' @keywords internal
 multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
   morie_tlboot(data = NULL, estimator = NULL, B = B,
                seed = seed, method = "multiplier", ic = ic)
@@ -243,6 +247,7 @@ multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
 #' reps <- rnorm(500, 2, 0.3)
 #' r <- moment_check(reps, target_mean = 2, target_se = 0.3)
 #' str(r, max.level = 1)
+#' @keywords internal
 moment_check <- function(replicates, target_mean, target_se,
                          tol = 0.15) {
   v <- as.numeric(replicates)

@@ -34,6 +34,7 @@
 #' @export
 #' @examples
 #' subwords(word = 5L)
+#' @keywords internal
 subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
                      whole_word = TRUE) {
   lo <- as.integer(n_min)
@@ -84,6 +85,7 @@ subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
 #' @examples
 #' word_vector(word = 5L, Z = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   gram_index = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+#' @keywords internal
 word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
                         boundary = TRUE, whole_word = TRUE,
                         hash_buckets = NULL) {
@@ -190,6 +192,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' fasttext(V)
+#' @keywords internal
 fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
                      window = 5, epochs = 5, lr = 0.05, negative = 5,
                      min_count = 1, boundary = TRUE,
@@ -369,6 +372,7 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_fastxt(V)
+#' @keywords internal
 morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,
                          window = 5, epochs = 5, lr = 0.05,
                          negative = 5, min_count = 1, boundary = TRUE,

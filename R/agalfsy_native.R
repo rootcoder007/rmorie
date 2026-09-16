@@ -263,6 +263,7 @@
 #'                                     window = 10L, seed = 2)
 #' # the reported pose is a rigid motion of the ligand
 #' dim(res$pose)
+#' @keywords internal
 morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
                                          policy = NULL, critic = NULL,
                                          max_steps = 600L, min_steps = 300L,

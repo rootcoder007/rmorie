@@ -20,6 +20,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Rms(V)
+#' @keywords internal
 Rms <- function(x, window = NULL) {
   # eq (3.9): RMS = sqrt((1/N) sum x^2), divisor N.  With a window, the
   # short-time RMS the book uses for EMG activity (Section 5.6).
@@ -55,6 +56,7 @@ Rms <- function(x, window = NULL) {
 #' @export
 #' @examples
 #' FormFactor(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+#' @keywords internal
 FormFactor <- function(x) {
   # eqs (5.25)-(5.26): activity = var(x); mobility = sd(x')/sd(x);
   # form factor = mobility(x')/mobility(x) = (sd(x'')/sd(x'))/(sd(x')/sd(x)).
@@ -142,6 +144,7 @@ FormFactor <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' TurnsCount(V)
+#' @keywords internal
 TurnsCount <- function(x, threshold = 100, window = NULL) {
   # Section 5.6.3, Willison: a turn is a change of slope, counted only
   # when the swing since the LAST COUNTED TURN exceeds the threshold
@@ -188,6 +191,7 @@ TurnsCount <- function(x, threshold = 100, window = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Snr(V, V)
+#' @keywords internal
 Snr <- function(signal, noise, definition = "power") {
   # Section 3.2.1 gives two definitions in one sentence, and they are not
   # interchangeable: the power ratio (10 log10) and the peak-to-peak
@@ -233,6 +237,7 @@ Snr <- function(signal, noise, definition = "power") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SnrFilt(V, V)
+#' @keywords internal
 SnrFilt <- function(clean, filtered) {
   # The power form of Section 3.2.1 applied to the residual against a
   # known clean reference.  This penalises distortion as well as leftover
@@ -267,6 +272,7 @@ SnrFilt <- function(clean, filtered) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SyncAvg(V)
+#' @keywords internal
 SyncAvg <- function(observations) {
   # eqs (3.95)-(3.96): y_k = x_k + eta_k, and the sum over k separates
   # into a signal sum that grows as M and a zero-mean noise sum that
@@ -315,6 +321,7 @@ SyncAvg <- function(observations) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' ObsReal(D, D)
+#' @keywords internal
 ObsReal <- function(x, eta) {
   # eq (3.95): y_k(n) = x_k(n) + eta_k(n), the model that synchronized
   # averaging assumes.  A single x is read as the same signal repeated,
@@ -368,6 +375,7 @@ ObsReal <- function(x, eta) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FdPsd(V, V)
+#' @keywords internal
 FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
   # eqs (6.50)-(6.52): an fBm signal has PSD ~ 1/f^beta, and for a 1-D
   # signal H = (beta-1)/2, FD = (5-beta)/2.  beta is MINUS the slope of
@@ -451,6 +459,7 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
 #' n <- 64
 #' fs <- 2000
 #' FdVag(x, fs = fs, fmin = 100, fmax = 500)
+#' @keywords internal
 FdVag <- function(x, fs, fmin = 100, fmax = 500, nperseg = NULL) {
   # Sections 6.6.2-6.6.3: PSA is the book's preferred FD estimator for a
   # self-affine signal, applied to knee-joint VAG signals.  The band is
@@ -484,6 +493,7 @@ FdVag <- function(x, fs, fmin = 100, fmax = 500, nperseg = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' KatzFd(V)
+#' @keywords internal
 KatzFd <- function(x, dt = 1) {
   # Katz (1988): FD = log10(n) / (log10(n) + log10(d/L)), with L the path
   # length, d the greatest distance from the first point, n = L/a.
@@ -531,6 +541,7 @@ KatzFd <- function(x, dt = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SpecEntropy(V)
+#' @keywords internal
 SpecEntropy <- function(psd, freqs = NULL, fmin = NULL, fmax = NULL) {
   # eq (3.11) applied to the PSD normalized to unit mass.  Rangayyan
   # defines the spectral MOMENTS of Section 6.4.4 but prints no
@@ -580,6 +591,7 @@ SpecEntropy <- function(psd, freqs = NULL, fmin = NULL, fmax = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FiringRate(V)
+#' @keywords internal
 FiringRate <- function(times, fs = NULL) {
   # MFR = 1/mean(IDI), CV = SD(IDI)/mean(IDI).  MFR is the RECIPROCAL OF
   # THE MEAN interval, not the mean of the reciprocals; the two differ
@@ -625,6 +637,7 @@ FiringRate <- function(times, fs = NULL) {
 #' @export
 #' @examples
 #' SigFeatures(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+#' @keywords internal
 SigFeatures <- function(x, fs = 1, threshold = 0) {
   # The descriptors Rangayyan uses across Chapters 3, 5 and 6, each
   # computed by the function that owns its definition so the vector

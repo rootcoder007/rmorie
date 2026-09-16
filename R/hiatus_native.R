@@ -68,6 +68,7 @@
 #' @export
 #' @examples
 #' basic_reproduction_numbers(beta = 0.5, nu = 0.5, mu = 5L)
+#' @keywords internal
 basic_reproduction_numbers <- function(beta, nu, mu) {
   b <- as.numeric(beta)
   n <- length(b)
@@ -98,6 +99,7 @@ basic_reproduction_numbers <- function(beta, nu, mu) {
 #' @export
 #' @examples
 #' endemic_equilibrium(beta = 0.5, nu = 0.5, mu = 5L)
+#' @keywords internal
 endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
   R0 <- basic_reproduction_numbers(beta, nu, mu)[as.integer(strain) + 1L]
   if (R0 <= 1.0) {
@@ -126,6 +128,7 @@ endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
 #' @param sigma Passed to \code{._check}.
 #' @return A list with \code{dS}, \code{dI}.
 #' @export
+#' @keywords internal
 derivatives <- function(S, I, beta, nu, mu, sigma) {
   chk <- ._check(beta, nu, mu, sigma)
   b <- chk$b
@@ -276,6 +279,7 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 #' @export
 #' @examples
 #' linear_strain_space(n = 5L)
+#' @keywords internal
 linear_strain_space <- function(n, width = 2.0, floor = 0.0) {
   if (as.integer(n) < 1L) stop("hiatus: n must be at least 1")
   if (as.numeric(width) <= 0.0) stop("hiatus: width must be positive")
@@ -317,6 +321,7 @@ hiatusmodel <- .hiatus_simulate
 #' \donttest{
 #' morie_hiatus(beta = 0.5, nu = 0.5, mu = 5L, sigma = 0.5)
 #' }
+#' @keywords internal
 morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
                          t_end = 2000.0, dt = 0.05, mutation = 0.0,
                          record_every = 100L) {

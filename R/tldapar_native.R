@@ -43,6 +43,7 @@
 #' @export
 #' @examples
 #' str(morie_tldapar(30, V = 5, mode = "split"), max.level = 1)
+#' @keywords internal
 morie_tldapar <- function(n, V = 10L, seed = 0L,
                           define_on_training = NULL,
                           estimate_on_holdout = NULL,
@@ -75,6 +76,7 @@ morie_tldapar <- function(n, V = 10L, seed = 0L,
 #' @export
 #' @examples
 #' str(split_sample(30, V = 5), max.level = 1)
+#' @keywords internal
 split_sample <- function(n, V = 10L, seed = 0L) {
   n <- as.integer(n)
   V <- as.integer(V)
@@ -124,6 +126,7 @@ split_sample <- function(n, V = 10L, seed = 0L) {
 #'   r <- data_adaptive_parameter(def, est, n = 50, V = 5)
 #'   str(r, max.level = 1)
 #' }
+#' @keywords internal
 data_adaptive_parameter <- function(define_on_training,
                                    estimate_on_holdout,
                                    n, V = 10L, seed = 0L) {
@@ -168,6 +171,7 @@ data_adaptive_parameter <- function(define_on_training,
 #' ics <- lapply(1:5, function(v) rnorm(10, 0, 0.5))
 #' r <- cv_tmle(ests, ics, n = 50)
 #' str(r, max.level = 1)
+#' @keywords internal
 cv_tmle <- function(fold_estimates, fold_ics, n) {
   e <- as.numeric(fold_estimates)
   if (length(e) == 0L)
@@ -209,6 +213,7 @@ cv_tmle <- function(fold_estimates, fold_ics, n) {
 #'   r <- variable_importance(X, NULL, scr, eff, V = 5)
 #'   str(r, max.level = 1)
 #' }
+#' @keywords internal
 variable_importance <- function(X, Y, screen, effect, V = 5L,
                                 seed = 0L) {
   rows <- as.matrix(X)
@@ -258,6 +263,7 @@ variable_importance <- function(X, Y, screen, effect, V = 5L,
 #'   r <- naive_reuse(function(idx) list(estimate = mean(idx)), n = 50)
 #'   str(r, max.level = 1)
 #' }
+#' @keywords internal
 naive_reuse <- function(define_and_estimate, n, seed = 0L) {
   r <- define_and_estimate(seq_len(as.integer(n)))
   list(estimate = as.numeric(r$estimate),

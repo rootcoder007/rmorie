@@ -33,6 +33,7 @@
 #' @export
 #' @examples
 #' causal_mask(n = 5L)
+#' @keywords internal
 causal_mask <- function(n) {
   m <- as.integer(n)
   if (m < 1L) stop("sasRec: the sequence must be non-empty")
@@ -58,6 +59,7 @@ causal_mask <- function(n) {
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' attention_span(M)
 #' self_attention(E = M, WQ = M, WK = M, WV = M)
+#' @keywords internal
 self_attention <- function(E, WQ, WK, WV, mask = NULL) {
   X <- E
   if (is.list(X) && !is.matrix(X)) X <- do.call(rbind, X)
@@ -106,6 +108,7 @@ self_attention <- function(E, WQ, WK, WV, mask = NULL) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' attention_span(M)
+#' @keywords internal
 attention_span <- function(weights, position = NULL) {
   W <- weights
   if (is.list(W) && !is.matrix(W)) W <- do.call(rbind, W)
@@ -137,6 +140,7 @@ attention_span <- function(weights, position = NULL) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' predict_next(V, M)
+#' @keywords internal
 predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)) {
   s <- as.numeric(state)
   E <- item_embeddings
@@ -167,6 +171,7 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
 #' @export
 #' @examples
 #' complexity(n = 5L, d = 5L)
+#' @keywords internal
 complexity <- function(n, d) {
   nn <- as.integer(n)
   dd <- as.integer(d)

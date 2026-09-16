@@ -106,6 +106,7 @@
 #' @param path See Usage.
 #' @param trim See Usage.
 #' @export
+#' @keywords internal
 shrinkage_msm <- function(y, treatment_history, covariate_history,
                           lam = 0.0, contrast = "cumulative",
                           path = NULL, trim = NULL) {
@@ -230,6 +231,7 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
 #' @param path See Usage.
 #' @param contrast See Usage.
 #' @export
+#' @keywords internal
 penalty_path <- function(y, treatment_history, covariate_history,
                          path = NULL, contrast = "cumulative") {
   r <- shrinkage_msm(y, treatment_history, covariate_history, lam = 0.0,

@@ -44,6 +44,7 @@
 #' @examples
 #' morie_tlclust(Q_seq = c(1, 2, 3, 4, 5, 6, 7, 8), H_seq = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Y = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
   # the LTMLE-with-clustering entry point
   if (is.list(Q_seq) && !is.null(Y) && !is.null(cluster)) {
@@ -82,6 +83,7 @@ morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' naive_variance(V)
+#' @keywords internal
 naive_variance <- function(ic) {
   v <- as.numeric(ic)
   n <- length(v)
@@ -105,6 +107,7 @@ naive_variance <- function(ic) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cluster_variance(V, V)
+#' @keywords internal
 cluster_variance <- function(ic, cluster) {
   v <- as.numeric(ic)
   c <- as.character(cluster)
@@ -136,6 +139,7 @@ cluster_variance <- function(ic, cluster) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' design_effect(V, V)
+#' @keywords internal
 design_effect <- function(ic, cluster) {
   a <- naive_variance(ic)
   b <- cluster_variance(ic, cluster)$se
@@ -158,6 +162,7 @@ design_effect <- function(ic, cluster) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' g_formula_pooled(V)
+#' @keywords internal
 g_formula_pooled <- function(Q_final, weights = NULL) {
   q <- as.numeric(Q_final)
   w <- if (is.null(weights)) rep(1, length(q)) else as.numeric(weights)
@@ -181,6 +186,7 @@ g_formula_pooled <- function(Q_final, weights = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' g_formula_sequential(V)
+#' @keywords internal
 g_formula_sequential <- function(Q_seq) {
   if (length(Q_seq) == 0L)
     stop("tlclust: the sequence is empty")

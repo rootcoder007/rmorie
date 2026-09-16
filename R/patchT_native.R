@@ -70,6 +70,7 @@
 #' @export
 #' @examples
 #' patchify(x = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
+#' @keywords internal
 patchify <- function(x, patch_len, stride = NULL) {
   v <- .patcht_vec(x)
   L <- length(v)
@@ -112,6 +113,7 @@ patchify <- function(x, patch_len, stride = NULL) {
 #' @export
 #' @examples
 #' channel_independent_tokens(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
+#' @keywords internal
 channel_independent_tokens <- function(X, patch_len, stride = NULL) {
   Xm <- .patcht_mat(X)
   if (nrow(Xm) == 0L)
@@ -148,6 +150,7 @@ channel_independent_tokens <- function(X, patch_len, stride = NULL) {
 #' @export
 #' @examples
 #' channel_mixed_tokens(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
+#' @keywords internal
 channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
   Xm <- .patcht_mat(X)
   if (nrow(Xm) == 0L)
@@ -175,6 +178,7 @@ channel_mixed_tokens <- function(X, patch_len, stride = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' instance_norm(V)
+#' @keywords internal
 instance_norm <- function(x) {
   v <- .patcht_vec(x)
   if (length(v) < 2L)
@@ -211,6 +215,7 @@ instance_norm <- function(x) {
 #' @export
 #' @examples
 #' attention_cost(L = 5L, patch_len = 5L)
+#' @keywords internal
 attention_cost <- function(L, patch_len, stride = NULL, D = 1,
                             channel_independent = TRUE) {
   P <- as.integer(patch_len)
@@ -248,6 +253,7 @@ attention_cost <- function(L, patch_len, stride = NULL, D = 1,
 #' @export
 #' @examples
 #' patchtst_encode(X = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
+#' @keywords internal
 patchtst_encode <- function(X, patch_len, stride = NULL,
                             normalise = TRUE) {
   Xm <- .patcht_mat(X)

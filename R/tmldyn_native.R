@@ -164,6 +164,7 @@
 #' A1 <- rbinom(n, 1, plogis(0.5 * L1[, 1]))
 #' r <- intervention_mechanism(L0, A0, L1, A1)
 #' str(r, max.level = 1)
+#' @keywords internal
 intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
                                     known = NULL, penalty = 0) {
   n <- length(A0)
@@ -291,6 +292,7 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' y <- plogis(0.3 * A0 + 0.5 * A1 + 0.4 * L0[, 1] + rnorm(n, 0, 0.4))
 #' r <- sequential_blips(y, L0, A0, L1, A1)
 #' str(r, max.level = 1)
+#' @keywords internal
 sequential_blips <- function(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL,
                              ridge = 1e-8, idx = NULL,
                              eval_idx = NULL) {
@@ -342,6 +344,7 @@ sequential_blips <- function(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL,
 #' y <- plogis(0.3 * A0 + 0.5 * A1 + 0.4 * L0[, 1] + rnorm(n, 0, 0.4))
 #' r <- optimal_rule(y, L0, A0, L1, A1)
 #' str(r, max.level = 1)
+#' @keywords internal
 optimal_rule <- function(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL,
                           ridge = 1e-8) {
   r <- sequential_blips(y, L0, A0, L1, A1, V0 = V0, V1 = V1,
@@ -359,6 +362,7 @@ optimal_rule <- function(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' exceptional_law_share(V)
+#' @keywords internal
 exceptional_law_share <- function(blips, tol = 0.01) {
   v <- abs(as.numeric(blips))
   if (length(v) == 0L) return(0)
@@ -443,6 +447,7 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #' d <- optimal_rule(y, L0, A0, L1, A1)
 #' im <- intervention_mechanism(L0, A0, L1, A1)
 #' rule_value_seq(y, L0, A0, L1, A1, d$d0, d$d1, im$g0, im$g1)
+#' @keywords internal
 rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
                             ridge = 1e-8) {
   n <- length(y)
@@ -538,6 +543,7 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
 #' y <- plogis(0.3 * A0 + 0.5 * A1 + 0.4 * L0 + rnorm(n, 0, 0.4))
 #' r <- morie_tmldyn(y, cbind(A0, A1), list(L0, L1), method = "tmle")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tmldyn <- function(y, treatment_history, covariate_history,
                           regime = "optimal", method = "cv-tmle",
                           n_folds = 10, V0 = NULL, V1 = NULL,

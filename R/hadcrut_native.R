@@ -89,6 +89,7 @@
 #' @return A numeric pair, the land and ocean weights, summing to one
 #'   when the cell has any observation and to zero when it has none.
 #' @export
+#' @keywords internal
 morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
                                   has_land = TRUE, has_sst = TRUE,
                                   rule = "hadcrut5") {
@@ -170,6 +171,7 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 #' TV <- mk(function(i, j) 0.01 * (1 + (i + j)%%3))
 #' SV <- mk(function(i, j) 0.02 * (1 + (i * j)%%4))
 #' morie_hadcrut_blend(TG, SG, LAND, ICE, "hadcrut5", TV, SV)
+#' @keywords internal
 morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
                                 rule = "hadcrut5", T_var = NULL,
                                 sst_var = NULL) {
@@ -267,6 +269,7 @@ morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_hadcrut_area_mean(M)
+#' @keywords internal
 morie_hadcrut_area_mean <- function(grid, route = "hemispheric", var = NULL) {
   if (!(route %in% .HADCRUT_MEAN_ROUTES))
     stop("route must be one of ", paste(.HADCRUT_MEAN_ROUTES, collapse = ", "))
@@ -327,6 +330,7 @@ morie_hadcrut_area_mean <- function(grid, route = "hemispheric", var = NULL) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_hadcrut_coverage_error(M, M)
+#' @keywords internal
 morie_hadcrut_coverage_error <- function(reference, seen,
                                          route = "hemispheric") {
   full <- morie_hadcrut_area_mean(reference, route)$mean
@@ -365,6 +369,7 @@ morie_hadcrut_coverage_error <- function(reference, seen,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_hadcrut(V, V)
+#' @keywords internal
 morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
                           rule = "hadcrut5", route = "hemispheric",
                           interval = "normal", level = 0.95, T_var = NULL,
@@ -480,6 +485,7 @@ morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
 #' @export
 #' @examples
 #' morie_hadcrut_cheatsheet()
+#' @keywords internal
 morie_hadcrut_cheatsheet <- function()
   paste0("hadcrut: HadCRUT5 blended land/SST anomaly. rules ",
          paste(.HADCRUT_WEIGHT_RULES, collapse = ", "), "; routes ",

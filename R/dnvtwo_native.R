@@ -132,6 +132,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' deduplicate(V)
+#' @keywords internal
 deduplicate <- function(embeddings, threshold = 0.999) {
   E <- .dnvtwo_mat(embeddings)
   th <- as.numeric(threshold)
@@ -175,6 +176,7 @@ deduplicate <- function(embeddings, threshold = 0.999) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' retrieve_augment(V, V)
+#' @keywords internal
 retrieve_augment <- function(curated, uncurated, per_query = 2L,
                              min_similarity = 0) {
   C <- .dnvtwo_mat(curated)
@@ -218,6 +220,7 @@ retrieve_augment <- function(curated, uncurated, per_query = 2L,
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' koleo(M)
+#' @keywords internal
 koleo <- function(features) {
   raw <- .dnvtwo_mat(features)
   if (length(raw) < 2L)
@@ -261,6 +264,7 @@ koleo <- function(features) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sinkhorn_knopp(V)
+#' @keywords internal
 sinkhorn_knopp <- function(scores, iterations = 3L, epsilon = 0.05) {
   S <- .dnvtwo_mat(scores)
   n <- length(S)
@@ -313,6 +317,7 @@ sinkhorn_knopp <- function(scores, iterations = 3L, epsilon = 0.05) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' self_distillation_loss(V, V)
+#' @keywords internal
 self_distillation_loss <- function(student, teacher, temperature_s = 0.1,
                                    temperature_t = 0.04,
                                    patch_level = FALSE) {

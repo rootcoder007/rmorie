@@ -295,6 +295,7 @@
 #' @param estimator Passed to \code{.infmax_local_objective}. Defaults to \code{"jsd"}.
 #' @return The value of \code{.infmax_local_objective}.
 #' @export
+#' @keywords internal
 morie_infmax <- function(global_features, feature_maps, critic,
                          estimator = "jsd") {
   .infmax_local_objective(global_features, feature_maps, critic, estimator)

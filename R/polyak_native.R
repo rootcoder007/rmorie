@@ -71,6 +71,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_polyak(V)
+#' @keywords internal
 morie_polyak <- function(iterates, burn_in = 0) {
   X <- lapply(iterates, function(t) as.numeric(t))
 

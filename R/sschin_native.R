@@ -183,6 +183,7 @@
 #' @examples
 #' morie_sschin_chained_imputation(time = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
                                             cycles = 10L, ties = "breslow") {
   tv <- as.numeric(time)

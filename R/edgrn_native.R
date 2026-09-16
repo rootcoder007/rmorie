@@ -167,6 +167,7 @@
 #' @export
 #' @examples
 #' edgrn_nb_variance(mu = 5L, dispersion = 5L)
+#' @keywords internal
 edgrn_nb_variance <- function(mu, dispersion) {
   m <- as.numeric(mu)
   p <- as.numeric(dispersion)
@@ -200,6 +201,7 @@ edgrn_nb_variance <- function(mu, dispersion) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' edgrn_tmm_factor(V, V)
+#' @keywords internal
 edgrn_tmm_factor <- function(counts_sample, counts_reference,
                              trim_m = 0.3, trim_a = 0.05,
                              lib_sample = NULL, lib_reference = NULL) {
@@ -271,6 +273,7 @@ edgrn_tmm_factor <- function(counts_sample, counts_reference,
 #' @export
 #' @examples
 #' edgrn_effective_library_size(library_size = 5L, factor = 5L)
+#' @keywords internal
 edgrn_effective_library_size <- function(library_size, factor) {
   N <- as.numeric(library_size)
   f <- as.numeric(factor)
@@ -300,6 +303,7 @@ edgrn_effective_library_size <- function(library_size, factor) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' edgrn_moderate_dispersion(V)
+#' @keywords internal
 edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
                                       prior_df = 10.0, df_residual = 1.0) {
   p <- .edgrn_vec(gene_dispersions)
@@ -352,6 +356,7 @@ edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
 #' @export
 #' @examples
 #' edgrn_exact_test(10, 25, 1000, 1000, 0.1)
+#' @keywords internal
 edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
   ya <- as.numeric(count_a)
   yb <- as.numeric(count_b)
@@ -399,6 +404,7 @@ edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
 #' @export
 #' @examples
 #' edgrn_ql_f_test(5.0, 1, 1.2, 10)
+#' @keywords internal
 edgrn_ql_f_test <- function(lrt, q, quasi_dispersion, df_residual,
                             df_prior = NULL) {
   L <- as.numeric(lrt)

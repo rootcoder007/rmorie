@@ -42,6 +42,7 @@
 #'                                   x = x, alpha = -0.2, y0 = 0)
 #' stopifnot(abs(sum(unlist(p)) - 1) < 1e-9)
 #' str(p)
+#' @keywords internal
 morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
                                          link = "logit") {
   xs <- as.matrix(x)
@@ -86,6 +87,7 @@ morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
 #' set.seed(1)
 #' Y <- matrix(rbinom(40, 1, 0.5), 20, 2)
 #' morie_sequence_frequencies(Y)
+#' @keywords internal
 morie_sequence_frequencies <- function(Y) {
   Ym <- as.matrix(Y)
   if (nrow(Ym) == 0L) stop("bnshrt: no observations")
@@ -163,6 +165,7 @@ morie_sequence_frequencies <- function(Y) {
 #' r <- morie_in_identified_set(freq, beta = c(0.5, -0.3), gamma = 0.8,
 #'                              x = x, alpha_grid = c(-0.5, 0, 0.5))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
                                     y0_values = c(0, 1),
                                     link = "logit", tol = 1e-4,
@@ -238,6 +241,7 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
 #'                           gamma_grid = c(0, 0.8),
 #'                           alpha_grid = c(-0.5, 0, 0.5))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
                                  beta_fixed = NULL, link = "logit",
                                  tol = 1e-3) {

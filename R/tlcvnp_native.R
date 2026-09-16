@@ -43,6 +43,7 @@
 #' @export
 #' @examples
 #' morie_tlcvnp(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
                          V = 5L, seed = 0L) {
   cv_tmle_smoothed(X, x0, bandwidths, kernel = kernel, V = V,
@@ -63,6 +64,7 @@ morie_tlcvnp <- function(X, x0, bandwidths, kernel = "epanechnikov",
 #' @export
 #' @examples
 #' kernel_smooth(u = 5L)
+#' @keywords internal
 kernel_smooth <- function(u, kernel = "epanechnikov") {
   if (!(kernel %in% .tlcvnp_kernels))
     stop(sprintf("tlcvnp: kernel must be one of %s, got %s",
@@ -91,6 +93,7 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 #' @export
 #' @examples
 #' smoothed_parameter(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, h = 0.5)
+#' @keywords internal
 smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
   v <- as.numeric(X)
   hh <- as.numeric(h)
@@ -123,6 +126,7 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
 #' @export
 #' @examples
 #' smoothing_bias(true_density = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5)
+#' @keywords internal
 smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
   hh <- as.numeric(h)
   s <- as.numeric(smoothness)
@@ -148,6 +152,7 @@ smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
 #' @export
 #' @examples
 #' select_bandwidth(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 select_bandwidth <- function(X, x0, bandwidths,
                              kernel = "epanechnikov",
                              criterion = "lepski", C = 1.0) {
@@ -204,6 +209,7 @@ select_bandwidth <- function(X, x0, bandwidths,
 #' @export
 #' @examples
 #' cv_tmle_smoothed(X = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = 5L, bandwidths = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
                              V = 5L, seed = 0L) {
   v <- as.numeric(X)

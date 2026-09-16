@@ -33,6 +33,7 @@
 #' @export
 #' @examples
 #' morie_pmpfit(alpha = 0.5, theta = 0.5, K = 5L)
+#' @keywords internal
 morie_pmpfit <- function(alpha, theta, K, seed = 0L) {
   params <- morie_pmpfit_check(alpha, theta)
   a <- params$alpha
@@ -70,6 +71,7 @@ morie_pmpfit <- function(alpha, theta, K, seed = 0L) {
 #' @export
 #' @examples
 #' morie_pmpfit_check(alpha = 0.5, theta = 0.5)
+#' @keywords internal
 morie_pmpfit_check <- function(alpha, theta) {
   a <- as.numeric(alpha)
   th <- as.numeric(theta)
@@ -97,6 +99,7 @@ morie_pmpfit_check <- function(alpha, theta) {
 #' @export
 #' @examples
 #' morie_pmpfit_predictive(counts = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, theta = 0.5)
+#' @keywords internal
 morie_pmpfit_predictive <- function(counts, alpha, theta) {
   c_ <- as.numeric(counts)
   params <- morie_pmpfit_check(alpha, theta)
@@ -132,6 +135,7 @@ morie_pmpfit_predictive <- function(counts, alpha, theta) {
 #' @export
 #' @examples
 #' morie_pmpfit_expected(n = 5L, alpha = 0.5, theta = 0.5)
+#' @keywords internal
 morie_pmpfit_expected <- function(n, alpha, theta) {
   params <- morie_pmpfit_check(alpha, theta)
   a <- params$alpha
@@ -162,6 +166,7 @@ morie_pmpfit_expected <- function(n, alpha, theta) {
 #' @export
 #' @examples
 #' morie_pmpfit_tail(n = 5L)
+#' @keywords internal
 morie_pmpfit_tail <- function(n, theta = 1.0, alphas = c(0.0, 0.3, 0.6)) {
   th <- as.numeric(theta)
   N <- as.integer(n)
@@ -194,6 +199,7 @@ morie_pmpfit_tail <- function(n, theta = 1.0, alphas = c(0.0, 0.3, 0.6)) {
 #' @export
 #' @examples
 #' morie_pmpfit_cheatsheet()
+#' @keywords internal
 morie_pmpfit_cheatsheet <- function() {
   paste("pmpfit: the DP breaks its stick with Beta(1, theta)",
         "at EVERY index; Pitman-Yor lets the parameters DRIFT --",

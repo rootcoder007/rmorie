@@ -168,6 +168,7 @@
 #' @export
 #' @examples
 #' morie_forwsr_consistency_factor(m = 5L, n = 5L)
+#' @keywords internal
 morie_forwsr_consistency_factor <- function(m, n) {
   m <- as.integer(m)
   n <- as.integer(n)
@@ -190,6 +191,7 @@ morie_forwsr_consistency_factor <- function(m, n) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_forwsr_ols_fit(V, V)
+#' @keywords internal
 morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
   pr <- .forwsr_prep(X, y)
   M <- pr$M
@@ -234,6 +236,7 @@ morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_forwsr_lms_start(V, V)
+#' @keywords internal
 morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
   pr <- .forwsr_prep(X, y)
   n <- pr$n
@@ -274,6 +277,7 @@ morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_forwsr_forward_search(V, V)
+#' @keywords internal
 morie_forwsr_forward_search <- function(X, y, start = NULL,
                                         n_draw = 500L, seed = 1L) {
   pr <- .forwsr_prep(X, y)
@@ -316,6 +320,7 @@ morie_forwsr_forward_search <- function(X, y, start = NULL,
 #' @param key Which monitored quantity to return.
 #' @return List with \code{m} and the requested series.
 #' @export
+#' @keywords internal
 morie_forwsr_forward_plot <- function(steps,
                                       key = "min_deletion_residual") {
   if (length(steps) == 0L) stop("forwsr: no steps to monitor")
@@ -351,6 +356,7 @@ morie_forwsr_forward_plot <- function(steps,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_forwsr(V, V)
+#' @keywords internal
 morie_forwsr <- function(X, y, start = NULL, n_draw = 500L, seed = 1L,
                          threshold = 3.0, min_df = 5L) {
   pr <- .forwsr_prep(X, y)

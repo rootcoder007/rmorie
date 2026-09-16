@@ -34,6 +34,7 @@
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' bcq(D)
+#' @keywords internal
 bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
                 gamma = 0.99, lr = 0.5, iters = 2000, loss = "huber",
                 huber_c = 1.0, behavior = NULL, tol = 1e-12) {
@@ -243,4 +244,5 @@ batch_constrained_q <- bcq
 #' @param ... Passed through.
 #' @return The value of \code{bcq}.
 #' @export
+#' @keywords internal
 morie_bcq <- function(...) bcq(...)

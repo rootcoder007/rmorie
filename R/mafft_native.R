@@ -112,6 +112,7 @@ names(.MAFFT_PHAT) <- .MAFFT_AA
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' residue_vectors(V)
+#' @keywords internal
 residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
   rows <- vapply(group, function(s) toupper(as.character(s)), character(1))
   if (length(rows) == 0L) {
@@ -278,6 +279,7 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' correlation(V, V)
+#' @keywords internal
 correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
                         seq_type = "aa", method = "fft") {
   if (!(method %in% c("fft", "direct"))) {
@@ -391,6 +393,7 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #' @export
 #' @examples
 #' jtt_matrix()
+#' @keywords internal
 jtt_matrix <- function(pam = 200L, scale = 10.0) {
   if (pam <= 0) {
     stop("mafft: pam must be positive")
@@ -508,6 +511,7 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
 #' @export
 #' @examples
 #' normalized_similarity_matrix()
+#' @keywords internal
 normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
                                          s_a = 0.06, seq_type = "aa",
                                          mode = "normalized",
@@ -751,6 +755,7 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' sc <- normalized_similarity_matrix(seq_type = "aa")
 #' r <- group_align(list("MKVLA"), list("MKVLG"), sc)
 #' str(r, max.level = 1)
+#' @keywords internal
 group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NULL,
                         s_op = 2.4, anchors = NULL) {
   g1 <- vapply(group1, function(s) toupper(as.character(s)), character(1))
@@ -835,6 +840,7 @@ group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NUL
 #' @examples
 #' find_homologous_segments(group1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   group2 = c(1, 2, 3, 4, 5, 6, 7, 8), scoring = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 find_homologous_segments <- function(group1, group2, scoring,
                                      weights1 = NULL, weights2 = NULL,
                                      seq_type = "aa", window = 30L,
@@ -921,6 +927,7 @@ find_homologous_segments <- function(group1, group2, scoring,
 #' @examples
 #' segs <- list(c(0L, 0L, 4L, 5L), c(5L, 6L, 3L, 3L), c(2L, 1L, 2L, 4L))
 #' arrange_segments(segs)
+#' @keywords internal
 arrange_segments <- function(segments) {
   segs <- segments[order(vapply(segments, `[`, integer(1), 1L))]
   n <- length(segs)
@@ -984,6 +991,7 @@ arrange_segments <- function(segments) {
 #' @examples
 #' seqs <- c("MKVLA", "MKVLG", "MRVLA")
 #' sixtuple_distance(seqs)
+#' @keywords internal
 sixtuple_distance <- function(seqs) {
   coded <- c()
   for (s in seqs) {
@@ -1046,6 +1054,7 @@ sixtuple_distance <- function(seqs) {
 #' @examples
 #' seqs <- c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA")
 #' guide_tree(sixtuple_distance(seqs))
+#' @keywords internal
 guide_tree <- function(D) {
   n <- nrow(D)
   if (n < 2L) stop("mafft: a guide tree needs at least two sequences")
@@ -1134,6 +1143,7 @@ guide_tree <- function(D) {
 #' sc <- normalized_similarity_matrix(seq_type = "aa")
 #' progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA"),
 #'                   sc, use_fft = FALSE)
+#' @keywords internal
 progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
                               s_op = 2.4, use_fft = TRUE, ...) {
   seqs <- vapply(seqs, function(s) toupper(as.character(s)), character(1))
@@ -1212,6 +1222,7 @@ progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
 #' aln <- progressive_align(c("MKVLATLLPLAA", "MKVLATLLPLAG",
 #'                            "MRVLATGLPLAA"), sc, use_fft = FALSE)
 #' wsp_score(aln, sc)
+#' @keywords internal
 wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
   aln <- vapply(alignment, function(s) toupper(as.character(s)), character(1))
   if (length(unique(vapply(aln, nchar, integer(1)))) != 1L) {
@@ -1296,6 +1307,7 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
 #'                            "MRVLATGLPLAA"), sc, use_fft = FALSE)
 #' r <- iterative_refine(aln, sc, max_iterate = 2L)
 #' str(r, max.level = 1)
+#' @keywords internal
 iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
                              max_iterate = 16L, seq_type = "aa",
                              use_fft = TRUE, ...) {
@@ -1389,6 +1401,7 @@ iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
 #' r <- mafft_alignment(c("MKVLATLLPLAA", "MKVLATLLPLAG", "MRVLATGLPLAA"),
 #'                      method = "FFT-NS-2")
 #' str(r, max.level = 1)
+#' @keywords internal
 mafft_alignment <- function(sequences, method = "FFT-NS-2", seq_type = NULL,
                             raw_matrix = NULL, freqs = NULL, s_a = 0.06,
                             s_op = 2.4, matrix = "normalized",
@@ -1495,6 +1508,7 @@ mafftalignment <- mafft_alignment
 #'                  sixtuple_distance(c("MKVLATLLPLAA", "MKVLATLLPLAG",
 #'                                      "MRVLATGLPLAA")))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mafft <- function(op, ...) {
   if (missing(op) || length(op) != 1L) {
     stop(paste0(

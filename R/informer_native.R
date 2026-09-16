@@ -123,6 +123,7 @@
 #' q <- rnorm(4)
 #' K <- matrix(rnorm(24), 6, 4)
 #' morie_informer_sparsity_measure(q, K)
+#' @keywords internal
 morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NULL) {
   if (!(measure %in% .informer_MEASURES)) {
     stop(sprintf("informer: measure must be exact or maxmean, got '%s'", measure))
@@ -162,6 +163,7 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
 #' q <- rnorm(4)
 #' K <- matrix(rnorm(24), 6, 4)
 #' morie_informer_kl_from_uniform(q, K)
+#' @keywords internal
 morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
   Km <- .informer_mat(K)
   return(morie_informer_sparsity_measure(q, K, measure = "exact",
@@ -190,6 +192,7 @@ morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
 #' Q <- matrix(rnorm(32), 8, 4)
 #' K <- matrix(rnorm(32), 8, 4)
 #' str(morie_informer_select_queries(Q, K, factor = 2), max.level = 1)
+#' @keywords internal
 morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
                                           n_sample = NULL, seed = 0) {
   Qm <- .informer_to_rows(Q)
@@ -243,6 +246,7 @@ morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
 #' K <- matrix(rnorm(16), 4, 4)
 #' V <- matrix(rnorm(16), 4, 4)
 #' str(morie_informer_full_attention(Q, K, V), max.level = 1)
+#' @keywords internal
 morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
   Qm <- .informer_to_rows(Q)
   Km <- .informer_to_rows(K)
@@ -289,6 +293,7 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
 #' V <- matrix(rnorm(32), 8, 4)
 #' r <- morie_informer_probsparse_attention(Q, K, V, factor = 2)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
                                                 measure = "maxmean",
                                                 n_sample = NULL, seed = 0,
@@ -346,6 +351,7 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_informer_complexity(V, V)
+#' @keywords internal
 morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
   lq <- as.integer(L_Q)
   lk <- as.integer(L_K)
@@ -370,6 +376,7 @@ morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
 #' @export
 #' @examples
 #' morie_informer_cheatsheet()
+#' @keywords internal
 morie_informer_cheatsheet <- function() {
   paste0(
     "informer: ProbSparse. A query whose attention is UNIFORM jus",

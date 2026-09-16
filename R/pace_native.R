@@ -37,6 +37,7 @@
 #' at <- seq(0.05, 0.95, length.out = 11)
 #' fit <- morie_pace_local_linear(t, y, at, bw = 0.12)
 #' c(length(fit), max(abs(fit - sin(2 * pi * at))) < 0.3)
+#' @keywords internal
 morie_pace_local_linear <- function(t, y, at, bw, kernel = "epan") {
   if (!kernel %in% c("epan", "gauss")) {
     stop("pace: kernel must be epan or gauss, got '", kernel, "'.",
@@ -88,6 +89,7 @@ morie_pace_local_linear <- function(t, y, at, bw, kernel = "epan") {
 #' grid <- seq(0.2, 0.8, length.out = 4)
 #' fit <- morie_pace_local_linear_2d(s, t, z, grid, grid, bw = 0.35)
 #' length(fit)
+#' @keywords internal
 morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
                                        kernel = "epan") {
   if (!kernel %in% c("epan", "gauss")) {
@@ -201,6 +203,7 @@ morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
 #' }
 #' r <- morie_pace(Y, argvals, K = 2L, n_grid = 15L)
 #' length(r$mu) == 15L
+#' @keywords internal
 morie_pace <- function(Y, argvals, K = 2L, n_grid = 21L, bw_mu = NULL,
                        bw_cov = NULL, kernel = "epan", shrink = TRUE) {
   if (!kernel %in% c("epan", "gauss")) {

@@ -23,6 +23,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prtcl_effective_sample_size(V)
+#' @keywords internal
 morie_prtcl_effective_sample_size <- function(weights) {
   s1 <- sum(weights)
   s2 <- sum(weights^2)
@@ -44,6 +45,7 @@ morie_prtcl_effective_sample_size <- function(weights) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prtcl_systematic_resample(V)
+#' @keywords internal
 morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
   J <- length(weights)
   tot <- sum(weights)
@@ -123,6 +125,7 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #' \code{min.ess}, \code{resampled}, \code{n.particles}, \code{n.obs}, \code{systematic},
 #' \code{particles}, \code{method}.
 #' @export
+#' @keywords internal
 morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
                                        seed = 0L, resample.threshold = 1.0,
                                        systematic = TRUE) {
@@ -188,6 +191,7 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
 #' @examples
 #' morie_prtcl_kalman_filter_1d(y = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   q = 0.5, c = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_prtcl_kalman_filter_1d <- function(y, a, q, c, r, m0 = 0, p0 = 1) {
   m <- as.numeric(m0)
   p <- as.numeric(p0)

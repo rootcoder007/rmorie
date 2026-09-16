@@ -69,6 +69,7 @@ COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_fingerprint(V)
+#' @keywords internal
 sasimi_fingerprint <- function(bits, n_bits = NULL) {
   bits <- as.vector(bits)
 
@@ -122,6 +123,7 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_counts(V, V)
+#' @keywords internal
 sasimi_counts <- function(fp_a, fp_b) {
   A <- sasimi_fingerprint(fp_a)
   B <- sasimi_fingerprint(fp_b)
@@ -164,6 +166,7 @@ sasimi_counts <- function(fp_a, fp_b) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_tanimoto(V, V)
+#' @keywords internal
 sasimi_tanimoto <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -184,6 +187,7 @@ sasimi_tanimoto <- function(fp_a, fp_b) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_dice(V, V)
+#' @keywords internal
 sasimi_dice <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -204,6 +208,7 @@ sasimi_dice <- function(fp_a, fp_b) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_cosine(V, V)
+#' @keywords internal
 sasimi_cosine <- function(fp_a, fp_b) {
   n <- sasimi_counts(fp_a, fp_b)
   .sasimi_guard(n)
@@ -229,6 +234,7 @@ sasimi_cosine <- function(fp_a, fp_b) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_tversky(V, V)
+#' @keywords internal
 sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
   al <- as.numeric(alpha)
   be <- as.numeric(beta)
@@ -279,6 +285,7 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_distance(V, V)
+#' @keywords internal
 sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
   1.0 - .sasimi_coef(coefficient)(fp_a, fp_b)
 }
@@ -297,6 +304,7 @@ sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_similarity_matrix(V)
+#' @keywords internal
 sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
   f <- .sasimi_coef(coefficient)
   F <- lapply(fps, sasimi_fingerprint)
@@ -331,6 +339,7 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sasimi_nearest_neighbours(V, V)
+#' @keywords internal
 sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimoto") {
   if (as.integer(k) < 1L) {
     stop("sasimi: k must be at least 1")
@@ -373,6 +382,7 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_sasimi(V, V)
+#' @keywords internal
 morie_sasimi <- function(fp_a, fp_b, coefficient = "tanimoto",
                          alpha = NULL, beta = NULL) {
   n <- sasimi_counts(fp_a, fp_b)

@@ -33,6 +33,7 @@
 #'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #'   morie_sechsh_chain_entry(V, V)
 #' }
+#' @keywords internal
 morie_sechsh_chain_entry <- function(previous_hash, entry, key = NULL) {
   p <- as.raw(previous_hash)
   e <- as.raw(entry)
@@ -56,6 +57,7 @@ morie_sechsh_chain_entry <- function(previous_hash, entry, key = NULL) {
 #'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #'   morie_sechsh_build_chain(V)
 #' }
+#' @keywords internal
 morie_sechsh_build_chain <- function(entries, key = NULL,
                                      genesis = .SECH_GEN) {
   prev <- as.raw(genesis)
@@ -89,6 +91,7 @@ morie_sechsh_build_chain <- function(entries, key = NULL,
 #'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #'   morie_sechsh_verify_chain(V, V)
 #' }
+#' @keywords internal
 morie_sechsh_verify_chain <- function(entries, hashes, key = NULL,
                                       genesis = .SECH_GEN) {
   if (length(entries) != length(hashes))
@@ -129,6 +132,7 @@ morie_sechsh_verify_chain <- function(entries, hashes, key = NULL,
 #'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #'   morie_sechsh_merkle_root(V)
 #' }
+#' @keywords internal
 morie_sechsh_merkle_root <- function(leaves) {
   L <- lapply(leaves, as.raw)
   if (length(L) == 0L) return(.sech_sha256(raw()))
@@ -155,6 +159,7 @@ morie_sechsh_merkle_root <- function(leaves) {
 #' if (morie_crypto_sodium_available()) {
 #'   morie_sechsh_inclusion_proof(leaves = c(1, 2, 3, 4, 5, 6, 7, 8), index = 5L)
 #' }
+#' @keywords internal
 morie_sechsh_inclusion_proof <- function(leaves, index) {
   L <- lapply(leaves, as.raw)
   m <- as.integer(index)
@@ -197,6 +202,7 @@ morie_sechsh_inclusion_proof <- function(leaves, index) {
 #' @return List with \code{root}, \code{root_hex}, \code{valid},
 #'   \code{path_used}.
 #' @export
+#' @keywords internal
 morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
   m <- as.integer(index)
   n <- as.integer(size)

@@ -116,6 +116,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_vit2lf_logits(V, V)
+#' @keywords internal
 morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
                                 n = NULL,
                                 tau_floor = .VIT2LF_TAU_FLOOR) {
@@ -178,6 +179,7 @@ morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_vit2lf_softmax(M)
+#' @keywords internal
 morie_vit2lf_softmax <- function(logits, mask = NULL) {
   nq <- nrow(logits)
   nk <- ncol(logits)
@@ -207,6 +209,7 @@ morie_vit2lf_softmax <- function(logits, mask = NULL) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_vit2lf_entropy(M)
+#' @keywords internal
 morie_vit2lf_entropy <- function(w) {
   vapply(seq_len(nrow(w)), function(i) {
     p <- w[i, ][w[i, ] > 0]
@@ -227,6 +230,7 @@ morie_vit2lf_entropy <- function(w) {
 #' @export
 #' @examples
 #' morie_vit2lf_log_coords(dx = 5L, dy = 5L)
+#' @keywords internal
 morie_vit2lf_log_coords <- function(dx, dy) {
   f <- function(v) {
     v <- as.numeric(v)
@@ -261,6 +265,7 @@ morie_vit2lf_log_coords <- function(dx, dy) {
 #'     4)/6)
 #' COORDS <- matrix(0, 6L, 2L)
 #' morie_vit2lf_relative_bias(COORDS, TABLE, W, TRUE)
+#' @keywords internal
 morie_vit2lf_relative_bias <- function(coords, table, window,
                                        log_spaced = TRUE) {
   coords <- as.matrix(coords)
@@ -311,6 +316,7 @@ morie_vit2lf_relative_bias <- function(coords, table, window,
 #' @export
 #' @examples
 #' morie_vit2lf(q = 0.5, k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_vit2lf <- function(q, k, v, mode = "logn", tau = 1, bias = NULL,
                          mask = NULL, n = NULL,
                          tau_floor = .VIT2LF_TAU_FLOOR) {
@@ -348,6 +354,7 @@ morie_vit2lf <- function(q, k, v, mode = "logn", tau = 1, bias = NULL,
 #' @export
 #' @examples
 #' morie_vit2lf_cheatsheet()
+#' @keywords internal
 morie_vit2lf_cheatsheet <- function()
   paste0("vit2lf: log-scaled attention. modes ",
          paste(.VIT2LF_MODES, collapse = ", "),

@@ -353,6 +353,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' lagged_design(V)
+#' @keywords internal
 lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
   .lggvls_lagged_design(L_hist, Y_hist, k_time, lag)
 }
@@ -382,6 +383,7 @@ lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
 #' @export
 #' @examples
 #' morie_lggvls(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5)
+#' @keywords internal
 morie_lggvls <- function(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE,
                         kind = "binary", trim = NULL,
                         contrast = "cumulative") {

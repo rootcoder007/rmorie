@@ -280,6 +280,7 @@
 #' @examples
 #' local_nuisance(target = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 local_nuisance <- function(target, W, weights, exclude = NULL,
                           ridge = 1e-8) {
   Wm <- as.matrix(W)
@@ -318,6 +319,7 @@ local_nuisance <- function(target, W, weights, exclude = NULL,
 #' @examples
 #' orthogonal_moment(y_res = c(1, 2, 3, 4, 5, 6, 7, 8), t_res = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 orthogonal_moment <- function(y_res, t_res, weights) {
   n <- length(y_res)
   if (length(t_res) != n || length(weights) != n)
@@ -354,6 +356,7 @@ orthogonal_moment <- function(y_res, t_res, weights) {
 #' @param leave_one_out A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{theta}, \code{den}, \code{w}.
 #' @export
+#' @keywords internal
 orf_estimate <- function(Y, T, X, W, x, trees,
                          residualize = "local", ridge = 1e-8,
                          leave_one_out = TRUE) {
@@ -419,6 +422,7 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #' orthogonal_random_forest(Y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   T = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   W = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                                      n_trees = 100, min_leaf = 5,
                                      alpha = 0.05, max_depth = 12,

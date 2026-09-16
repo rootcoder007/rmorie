@@ -68,6 +68,7 @@ morie_laplace_mechanism <- morie_laplc
 #' Cheatsheet
 #' @examples
 #' rmorie:::morie_laplc_cheatsheet()
+#' @keywords internal
 morie_laplc_cheatsheet <- function() {
   "laplc: Laplace mechanism (alias of dpglap.dp_laplace_mechanism)."
 }

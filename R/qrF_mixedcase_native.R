@@ -27,6 +27,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_qrF(V, V)
+#' @keywords internal
 morie_qrF <- function(y_true, y_pred, theta = 0.5) {
   yt <- as.numeric(y_true)
   yp <- as.numeric(y_pred)

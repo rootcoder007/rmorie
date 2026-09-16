@@ -75,6 +75,7 @@
 #' @export
 #' @examples
 #' lag_summary(series = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L)
+#' @keywords internal
 lag_summary <- function(series, t, lags = 2) {
   v <- as.numeric(series)
   L <- as.integer(lags)
@@ -114,6 +115,7 @@ lag_summary <- function(series, t, lags = 2) {
 #' set.seed(1)
 #' A <- rnorm(10)
 #' stochastic_intervention(A, nodes = c(0, 1, 2), shift = 0.5)
+#' @keywords internal
 stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
   a <- as.numeric(A)
   idx <- as.integer(nodes)
@@ -155,6 +157,7 @@ stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' martingale_variance(V)
+#' @keywords internal
 martingale_variance <- function(D) {
   v <- as.numeric(D)
   T_len <- length(v)
@@ -183,6 +186,7 @@ martingale_variance <- function(D) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' martingale_check(V, V)
+#' @keywords internal
 martingale_check <- function(D, past, tol = 0.2) {
   d <- as.numeric(D)
   p <- as.numeric(past)
@@ -219,6 +223,7 @@ martingale_check <- function(D, past, tol = 0.2) {
 #' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci},
 #' \code{T_scored}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
   y <- as.numeric(Y)
   a <- as.numeric(A)

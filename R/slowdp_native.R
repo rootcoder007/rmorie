@@ -48,6 +48,7 @@
 #' @export
 #' @examples
 #' stick_breaking(alpha = 0.5, K = 5L)
+#' @keywords internal
 stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
   a <- as.numeric(alpha)
   n <- as.integer(K)
@@ -86,6 +87,7 @@ stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
 #' @export
 #' @examples
 #' truncation_error(alpha = 0.5, K = 5L)
+#' @keywords internal
 truncation_error <- function(alpha, K) {
   a <- as.numeric(alpha)
   n <- as.integer(K)
@@ -109,6 +111,7 @@ truncation_error <- function(alpha, K) {
 #' @export
 #' @examples
 #' sticks_for_tolerance(alpha = 0.5)
+#' @keywords internal
 sticks_for_tolerance <- function(alpha, tol = 1e-3) {
   a <- as.numeric(alpha)
   t <- as.numeric(tol)
@@ -137,6 +140,7 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
 #' @export
 #' @examples
 #' decay_diagnostics(weights = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+#' @keywords internal
 decay_diagnostics <- function(weights, alpha) {
   p <- as.numeric(weights)
   K <- length(p)
@@ -177,6 +181,7 @@ decay_diagnostics <- function(weights, alpha) {
 #' @export
 #' @examples
 #' truncated_dp(alpha = 0.5, K = 5L)
+#' @keywords internal
 truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
                          seed = 0, renormalise = TRUE) {
   if (!is.null(rng)) e <- rng else e <- .ghc_rng(seed)

@@ -51,6 +51,7 @@
 #' @examples
 #' pooled_features(hyp = c(1, 2, 3, 4, 5, 6, 7, 8), src = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   ref = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 pooled_features <- function(hyp, src, ref) {
   h <- .comet_vec(hyp)
   s <- .comet_vec(src)
@@ -88,6 +89,7 @@ pooled_features <- function(hyp, src, ref) {
 #' hyp <- rnorm(4); src <- rnorm(4); ref <- rnorm(4)
 #' W <- matrix(rnorm(24, 0, 0.3), 1, 24)
 #' estimator_score(hyp, src, ref, W)
+#' @keywords internal
 estimator_score <- function(hyp, src, ref, W, b = NULL) {
   W <- as.matrix(W)
   storage.mode(W) <- "double"
@@ -138,6 +140,7 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #' @examples
 #' triplet_loss(better = c(1, 2, 3, 4, 5, 6, 7, 8), worse = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   src = c(1, 2, 3, 4, 5, 6, 7, 8), ref = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
   m <- as.numeric(margin)
   if (m <= 0) stop("comet: the margin must be positive")
@@ -162,6 +165,7 @@ triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' kendall_tau(V, V)
+#' @keywords internal
 kendall_tau <- function(scores, human) {
   a <- .comet_vec(scores)
   b <- .comet_vec(human)
@@ -203,6 +207,7 @@ kendall_tau <- function(scores, human) {
 #' hyp <- rnorm(4); src <- rnorm(4)
 #' W <- matrix(rnorm(16, 0, 0.3), 1, 16)
 #' reference_free(hyp, src, W)
+#' @keywords internal
 reference_free <- function(hyp, src, W, b = NULL) {
   h <- .comet_vec(hyp)
   s <- .comet_vec(src)
@@ -243,6 +248,7 @@ comet <- estimator_score
 #' hyp <- rnorm(4); src <- rnorm(4); ref <- rnorm(4)
 #' W <- matrix(rnorm(24, 0, 0.3), 1, 24)
 #' morie_comet(hyp, src, ref, W)
+#' @keywords internal
 morie_comet <- function(hyp, src, ref, W, b = NULL) {
   estimator_score(hyp, src, ref, W, b = b)
 }

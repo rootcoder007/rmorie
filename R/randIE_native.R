@@ -47,6 +47,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_randIE_mediator_distribution(V, V)
+#' @keywords internal
 morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
   a <- .labels(A, "A")
   m <- .labels(M, "M")
@@ -113,6 +114,7 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
 #' Y <- 1 + 0.8 * (A == "1") + 0.5 * (M == "1") + 0.4 * (C == "1") + rnorm(n)
 #' im <- morie_randIE_interventional_mean(Y, A, M, C = C)
 #' is.list(im)
+#' @keywords internal
 morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
                                              a.star = "0",
                                              route = "gformula",
@@ -236,6 +238,7 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
 #' Y <- 1 + 0.8 * (A == "1") + 0.5 * (M == "1") + 0.4 * (C == "1") + rnorm(n)
 #' rie <- morie_randIE_randomized_interventional_effect(Y, A, M, C = C)
 #' abs(rie$total - (rie$direct + rie$indirect)) < 1e-8
+#' @keywords internal
 morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
                                                          treated = "1",
                                                          control = "0",
@@ -281,6 +284,7 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
 #' rie <- morie_randIE_randomized_interventional_effect(Y, A, M, C = C)
 #' dec <- morie_randIE_decompose(rie)
 #' abs(dec$residual) < 1e-8
+#' @keywords internal
 morie_randIE_decompose <- function(result) {
   tot <- result$total
   d <- result$direct

@@ -97,6 +97,7 @@
 #' @export
 #' @examples
 #' glove_weight(x = 5L)
+#' @keywords internal
 glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
   x <- as.numeric(x)
   x_max <- as.numeric(x_max)
@@ -128,6 +129,7 @@ glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cooccurrence(V)
+#' @keywords internal
 cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
   docs <- .glove_as_docs(corpus)
   all_tokens <- unlist(docs, use.names = FALSE)
@@ -202,6 +204,7 @@ cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
 #' b <- rnorm(3)
 #' bt <- rnorm(3)
 #' glove_loss(X, W, Wt, b, bt)
+#' @keywords internal
 glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
   total <- 0.0
   n <- nrow(X)
@@ -248,6 +251,7 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_glove(D)
+#' @keywords internal
 morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
                         x_max = 100.0, alpha = 0.75, harmonic = TRUE,
                         min_count = 1, seed = 0, combine = "sum") {

@@ -23,6 +23,7 @@
 #' @export
 #' @examples
 #' sample_ibp(n = 5L, alpha = 0.5)
+#' @keywords internal
 sample_ibp <- function(n, alpha, seed = 0L) {
   N <- as.integer(n)
   a <- as.numeric(alpha)
@@ -86,6 +87,7 @@ sample_ibp <- function(n, alpha, seed = 0L) {
 #' @export
 #' @examples
 #' expected_features(n = 5L, alpha = 0.5)
+#' @keywords internal
 expected_features <- function(n, alpha) {
   N <- as.integer(n)
   a <- as.numeric(alpha)
@@ -109,6 +111,7 @@ expected_features <- function(n, alpha) {
 #' @export
 #' @examples
 #' left_ordered_form(Z = 5L)
+#' @keywords internal
 left_ordered_form <- function(Z) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -141,6 +144,7 @@ left_ordered_form <- function(Z) {
 #' @export
 #' @examples
 #' ibp_log_probability(Z = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+#' @keywords internal
 ibp_log_probability <- function(Z, alpha) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -171,6 +175,7 @@ ibp_log_probability <- function(Z, alpha) {
 #' @param alpha Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{p_on}, \code{prior}, \code{z}, \code{note}.
 #' @export
+#' @keywords internal
 gibbs_feature_update <- function(Z, i, kk, likelihood, alpha) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
@@ -209,6 +214,7 @@ indian_buffet_factor <- sample_ibp
 #' @export
 #' @examples
 #' morie_ibpfa(n = 5L, alpha = 0.5)
+#' @keywords internal
 morie_ibpfa <- function(n, alpha, seed = 0L) {
   sample_ibp(n, alpha, seed)
 }

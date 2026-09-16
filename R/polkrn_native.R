@@ -250,6 +250,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' exposure_summary(V)
+#' @keywords internal
 exposure_summary <- function(A_history, how = "cumulative") {
   if (!how %in% c("cumulative", "final", "duration")) {
     stop(sprintf(
@@ -293,6 +294,7 @@ exposure_summary <- function(A_history, how = "cumulative") {
 #' @examples
 #' set.seed(1)
 #' rbf_basis(runif(20), n_centres = 5)
+#' @keywords internal
 rbf_basis <- function(x, n_centres = 5, width = NULL) {
   xs <- .polkrn_vec(x)
   m <- as.integer(n_centres)
@@ -345,6 +347,7 @@ rbf_basis <- function(x, n_centres = 5, width = NULL) {
 #' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 morie_polkrn <- function(y, A_history, H_history, degree = 2,
                          basis = "both", summary = "cumulative",
                          n_centres = 5, width = NULL, kind = "binary",

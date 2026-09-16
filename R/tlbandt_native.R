@@ -98,6 +98,7 @@
 #' @examples
 #' morie_tlbandt(W = c(1, 2, 3, 4, 5, 6, 7, 8), Y1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Y0 = c(1, 2, 3, 4, 5, 6, 7, 8), blip_fn = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
                           greedy = FALSE, burn_in = 20L) {
   if (is.list(W) && !is.data.frame(W) && !is.matrix(W)) {

@@ -101,6 +101,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_vqgdec_decode_indices(M, V)
+#' @keywords internal
 morie_vqgdec_decode_indices <- function(indices, codebook) {
     Z <- .vqgdec_to_matrix(codebook)
     n_code <- nrow(Z)
@@ -139,6 +140,7 @@ morie_vqgdec_decode_indices <- function(indices, codebook) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_vqgdec_adaptive_weight(V, V)
+#' @keywords internal
 morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
                                           delta = 1e-6, clip = 1e4) {
     gr <- abs(as.numeric(grad_rec))
@@ -169,6 +171,7 @@ morie_vqgdec_adaptive_weight <- function(grad_rec, grad_gan,
 #' @param scorer Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{scores}, \code{n_patches}, \code{mean}, \code{note}.
 #' @export
+#' @keywords internal
 morie_vqgdec_patch_discriminator <- function(image, patch = 4,
                                               scorer = NULL) {
     I <- .vqgdec_to_matrix(image)
@@ -226,6 +229,7 @@ morie_vqgdec_patch_discriminator <- function(image, patch = 4,
 #' @export
 #' @examples
 #' morie_vqgdec_sliding_windows(height = 5L, width = 5L, window = 5L)
+#' @keywords internal
 morie_vqgdec_sliding_windows <- function(height, width, window,
                                           stride = NULL) {
     H <- as.integer(height)
@@ -315,6 +319,7 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_vqgdec_decode(M, V)
+#' @keywords internal
 morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
                                  grad_rec = NULL, grad_gan = NULL) {
     d <- morie_vqgdec_decode_indices(indices, codebook)
@@ -349,6 +354,7 @@ morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
 #' @export
 #' @examples
 #' morie_vqgdec_cheatsheet()
+#' @keywords internal
 morie_vqgdec_cheatsheet <- function() {
     paste(
         "vqgdec: at compression 16 an L2 loss returns the conditional",

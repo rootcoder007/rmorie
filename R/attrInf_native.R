@@ -159,6 +159,7 @@
 #' r <- morie_attrInf(tree, targets = list(list(known = list(), y = 1L)),
 #'                    priors = priors, mode = "whitebox")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_attrInf <- function(tree, targets, priors,
                           confusion = NULL, labels = NULL,
                           sensitive = 0L, mode = "blackbox",
@@ -314,6 +315,7 @@ morie_attrInf <- function(tree, targets, priors,
 #'     "0" = list(label = 0L, count = 10),
 #'     "1" = list(label = 1L, count = 20)))))
 #' str(tree_paths(tree), max.level = 1)
+#' @keywords internal
 tree_paths <- function(tree) {
   out <- list()
   walk <- function(node, cons) {
@@ -359,6 +361,7 @@ tree_paths <- function(tree) {
 #' @examples
 #' err <- confusion_error(rbind(c(40, 10), c(5, 45)))
 #' err(0L, 1L)
+#' @keywords internal
 confusion_error <- function(C, labels = NULL) {
   if (is.matrix(C)) {
     if (nrow(C) == 0L || ncol(C) == 0L)
@@ -423,6 +426,7 @@ confusion_error <- function(C, labels = NULL) {
 #'                 err = function(y, yp) if (identical(y, yp)) 1 else 0,
 #'                 priors = priors)
 #' str(r, max.level = 1)
+#' @keywords internal
 map_invert <- function(model, y, known, candidates, err, priors,
                        sensitive = 0L) {
   if (length(candidates) == 0L)
@@ -471,6 +475,7 @@ map_invert <- function(model, y, known, candidates, err, priors,
 #' r <- wbwc_invert(tree, known = list(), candidates = list("0", "1"),
 #'                  priors = priors)
 #' str(r, max.level = 1)
+#' @keywords internal
 wbwc_invert <- function(tree, known, candidates, priors,
                         sensitive = 0L, unknown = NULL) {
   if (length(candidates) == 0L)

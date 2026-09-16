@@ -82,6 +82,7 @@
 #' @export
 #' @examples
 #' lasso_path(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+#' @keywords internal
 lasso_path <- function(X, y, lam, iters = 500, tol = 1e-9) {
   rows <- as.matrix(X)
   storage.mode(rows) <- "double"
@@ -122,6 +123,7 @@ lasso_path <- function(X, y, lam, iters = 500, tol = 1e-9) {
 #' @export
 #' @examples
 #' post_lasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+#' @keywords internal
 post_lasso <- function(X, y, lam) {
   rows <- as.matrix(X)
   storage.mode(rows) <- "double"
@@ -164,6 +166,7 @@ post_lasso <- function(X, y, lam) {
 #' @export
 #' @examples
 #' shrunk_targeting_unsafe(Q = 0.5, H = 0.5, Y = 5L)
+#' @keywords internal
 shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1) {
   q <- as.numeric(Q)
   h <- as.numeric(H)
@@ -203,6 +206,7 @@ shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1) {
 #' @references Belloni, A. & Chernozhukov, V. (2013); van der Laan, M.
 #'   J. & Gruber, S. (2016).
 #' @export
+#' @keywords internal
 morie_tmldgp <- function(y, D, X, penalty = 0.05, iters = 100) {
   yv <- as.numeric(y)
   a <- as.numeric(D)

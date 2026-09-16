@@ -17,7 +17,7 @@
 #
 # Helpers live in aaa_helpers_irt.R.
 
-#' @noRd
+#' @keywords internal
 morie_theta_mle <- function(x, a = 1, b = 0, c = 0) {
   xs <- as.numeric(x)
   n <- length(xs)

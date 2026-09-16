@@ -31,6 +31,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_gwasem_kinship(V)
+#' @keywords internal
 morie_gwasem_kinship <- function(genotypes) {
   G <- as.matrix(genotypes)
   storage.mode(G) <- "double"
@@ -61,6 +62,7 @@ morie_gwasem_kinship <- function(genotypes) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_gwasem_gower(M)
+#' @keywords internal
 morie_gwasem_gower <- function(S) {
   S <- as.matrix(S)
   storage.mode(S) <- "double"
@@ -261,6 +263,7 @@ morie_gwasem_gower <- function(S) {
 #' @param ml Use ML rather than REML.
 #' @return A list with the components and supporting quantities.
 #' @export
+#' @keywords internal
 morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
   yv <- as.numeric(y)
   n <- length(yv)
@@ -376,6 +379,7 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_gwasem_gc(V)
+#' @keywords internal
 morie_gwasem_gc <- function(stats, df = 1) {
   s <- sort(as.numeric(stats))
   if (length(s) == 0L) stop("gwasem: no statistics")
@@ -411,6 +415,7 @@ morie_gwasem_gc <- function(stats, df = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_gwasem(V, V)
+#' @keywords internal
 morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
                          trait = "quantitative", test = "f", ml = FALSE,
                          per_marker_reml = FALSE, min_maf = 0) {

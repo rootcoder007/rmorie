@@ -34,6 +34,7 @@
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_funBoot(D)
+#' @keywords internal
 morie_funBoot <- function(curves, statistic = NULL, alpha = 0.05, B = 500L,
                           metric = "l2", smooth = 0.0, seed = 0) {
   X <- lapply(seq_len(nrow(curves)),

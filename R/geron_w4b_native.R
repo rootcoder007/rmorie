@@ -1480,6 +1480,7 @@ morie_geron_kmeans_limits <- function(X, n_clusters = 2, seed = 0) {
 #' @export
 #' @examples
 #' morie_geron_center_gram(K = 5L)
+#' @keywords internal
 morie_geron_center_gram <- function(K) {
   K <- as.matrix(K)
   n <- nrow(K)
@@ -1881,6 +1882,7 @@ morie_geron_learning_curves_hmlcv <- function(X, y, n_splits = 10, val_fraction 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_pairwise_distances(V)
+#' @keywords internal
 morie_geron_pairwise_distances <- function(X) .morie_gr_w4b_pairwise_distances(X)
 
 #' Double-centre a squared-distance matrix (Geron Ch 7, morie.fn hmmds helper)
@@ -1888,6 +1890,7 @@ morie_geron_pairwise_distances <- function(X) .morie_gr_w4b_pairwise_distances(X
 #' @export
 #' @examples
 #' morie_geron_double_center(D = 5L)
+#' @keywords internal
 morie_geron_double_center <- function(D) .morie_gr_w4b_double_center(D)
 
 #' Classical (Torgerson) multidimensional scaling (Geron Ch 7, morie.fn hmmds)
@@ -2965,6 +2968,7 @@ morie_geron_mistral7b <- function(prompt, n_tokens, n_layers = 32, d_model = 409
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_mish(V)
+#' @keywords internal
 morie_geron_mish <- function(z) {
   a <- as.numeric(z)
   .morie_gr_need(length(a) > 0L, "geron_mish: z is empty")

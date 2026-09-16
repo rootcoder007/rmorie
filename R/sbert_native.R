@@ -75,6 +75,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' pool(V)
+#' @keywords internal
 pool <- function(token_vectors, mode = "mean", mask = NULL) {
   if (!(mode %in% .SBERT_POOLING))
     stop(sprintf("sbert: pooling must be one of %s, got '%s'",
@@ -111,6 +112,7 @@ pool <- function(token_vectors, mode = "mean", mask = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cosine_similarity(V, V)
+#' @keywords internal
 cosine_similarity <- function(u, v) {
   a <- .sbert_vec(u)
   b <- .sbert_vec(v)
@@ -137,6 +139,7 @@ cosine_similarity <- function(u, v) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' classification_features(V, V)
+#' @keywords internal
 classification_features <- function(u, v) {
   a <- .sbert_vec(u)
   b <- .sbert_vec(v)
@@ -162,6 +165,7 @@ classification_features <- function(u, v) {
 #' @export
 #' @examples
 #' pair_cost(n = 5L)
+#' @keywords internal
 pair_cost <- function(n, mode = "cross-encoder") {
   N <- as.integer(n)
   if (N < 2L) stop("sbert: need at least 2 sentences")
@@ -188,6 +192,7 @@ pair_cost <- function(n, mode = "cross-encoder") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rank_by_similarity(V, V)
+#' @keywords internal
 rank_by_similarity <- function(query, corpus_embeddings, top_k = 5) {
   E <- .sbert_mat(corpus_embeddings)
   if (nrow(E) == 0) stop("sbert: the corpus is empty")
@@ -212,6 +217,7 @@ rank_by_similarity <- function(query, corpus_embeddings, top_k = 5) {
 #' @return A list with \code{estimate}, \code{scores}, \code{embed_calls},
 #' \code{n_pairs}, \code{cross_encoder_calls}, \code{method}.
 #' @export
+#' @keywords internal
 sts_score <- function(pairs, embed) {
   cache <- new.env(hash = TRUE)
   out <- numeric(length(pairs))

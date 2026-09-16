@@ -98,6 +98,7 @@
 #' @export
 #' @examples
 #' valid_output_size(572L, depth = 4L)
+#' @keywords internal
 valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L) {
   s <- as.integer(input_size)
   kk <- as.integer(kernel) - 1L
@@ -150,6 +151,7 @@ valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kern
 #' @export
 #' @examples
 #' mirror_pad(matrix(as.numeric(1:16), 4, 4), pad = 2L)
+#' @keywords internal
 mirror_pad <- function(image, pad) {
   img <- .unetbk_as_matrix(image)
   p <- as.integer(pad)
@@ -187,6 +189,7 @@ mirror_pad <- function(image, pad) {
 #' @export
 #' @examples
 #' overlap_tiles(height = 100L, width = 100L, tile = 32L, border = 8L)
+#' @keywords internal
 overlap_tiles <- function(height, width, tile, border) {
   t <- as.integer(tile)
   b <- as.integer(border)
@@ -233,6 +236,7 @@ overlap_tiles <- function(height, width, tile, border) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' skip_concat(V, V)
+#' @keywords internal
 skip_concat <- function(upsampled, contracting) {
   up <- .unetbk_as_matrix(upsampled)
   co <- .unetbk_as_matrix(contracting)
@@ -274,6 +278,7 @@ skip_concat <- function(upsampled, contracting) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' separation_weight_map(V)
+#' @keywords internal
 separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
   lab <- .unetbk_as_matrix(labels)
   h <- nrow(lab)

@@ -116,6 +116,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' WienerOut(V, V)
+#' @keywords internal
 WienerOut <- function(w, x) {
   # eq. (3.154): the estimate is the convolution of the tap weights with
   # the input.  The first M-1 outputs run on a partly empty delay line and
@@ -150,6 +151,7 @@ WienerOut <- function(w, x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' WienerDot(V, V)
+#' @keywords internal
 WienerDot <- function(w, xvec) {
   # eq. (3.155): the same estimate written as an inner product.  x(n) runs
   # BACKWARDS in time, its first entry being the current sample; getting
@@ -184,6 +186,7 @@ WienerDot <- function(w, xvec) {
 #' @export
 #' @examples
 #' MseGrad(phi = 0.5, theta = 0.5, w = 5L)
+#' @keywords internal
 MseGrad <- function(phi, theta, w) {
   # eq. (3.167): grad J = -2 Theta + 2 Phi w.  The surface is quadratic
   # with a single minimum, so a vanishing gradient is the optimum and not
@@ -218,6 +221,7 @@ MseGrad <- function(phi, theta, w) {
 #' @export
 #' @examples
 #' WienerHopf(phi = 0.5, theta = 0.5)
+#' @keywords internal
 WienerHopf <- function(phi, theta) {
   # eq. (3.168): Phi w = Theta.  At the solution the input vector and the
   # error are orthogonal, and so are the output and the error -- the
@@ -256,6 +260,7 @@ WienerHopf <- function(phi, theta) {
 #' @export
 #' @examples
 #' WienerOpt(phi = 0.5, theta = 0.5)
+#' @keywords internal
 WienerOpt <- function(phi, theta) {
   # eq. (3.169): w_o = Phi^-1 Theta.  Written as an inverse in the book,
   # computed here by solving the system -- the inverse is never formed,
@@ -281,6 +286,7 @@ WienerOpt <- function(phi, theta) {
 #' @export
 #' @examples
 #' WienerMin(phi = 0.5, theta = 0.5, var_d = 5L)
+#' @keywords internal
 WienerMin <- function(phi, theta, var_d) {
   # eq. (3.172): J_min = var(d) - Theta' w_o.  A negative J_min cannot
   # happen for consistent statistics, so it is reported rather than
@@ -318,6 +324,7 @@ WienerMin <- function(phi, theta, var_d) {
 #' @export
 #' @examples
 #' WienerConv(w = 5L, phi = 0.5, theta = 0.5)
+#' @keywords internal
 WienerConv <- function(w, phi, theta) {
   # eqs. (3.173)-(3.174): the normal equations written as a convolution of
   # the tap weights with the ACF.  It holds only for a stationary process;
@@ -356,6 +363,7 @@ WienerConv <- function(w, phi, theta) {
 #' @examples
 #' WienerFreqR(W = c(1, 2, 3, 4, 5, 6, 7, 8), sxx = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   sxd = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 WienerFreqR <- function(W, sxx, sxd) {
   # eq. (3.175): W(w) S_xx(w) = S_xd(w).  Bins where S_xx vanishes carry
   # no information about W and are listed, not silently satisfied.
@@ -392,6 +400,7 @@ WienerFreqR <- function(W, sxx, sxd) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' WienerFreq(V, V)
+#' @keywords internal
 WienerFreq <- function(sxx, sxd) {
   # eq. (3.176): W(w) = S_xd(w) / S_xx(w).  Where the denominator vanishes
   # the ratio is undefined; returning zero there is a choice, and it is
@@ -426,6 +435,7 @@ WienerFreq <- function(sxx, sxd) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' WienerSnr(V, V)
+#' @keywords internal
 WienerSnr <- function(sd, seta) {
   # eq. (3.186): W = S_d / (S_d + S_eta).  Three properties the book
   # stresses and this checks: zero where the signal is absent (nothing to
@@ -465,6 +475,7 @@ WienerSnr <- function(sd, seta) {
 #' @export
 #' @examples
 #' Whopf(x = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), order = 5L)
+#' @keywords internal
 Whopf <- function(x, d, order) {
   # eqs. (3.168), (3.171): build the Toeplitz correlation matrix and the
   # cross-correlation vector from data and solve for the tap weights.  The
@@ -513,6 +524,7 @@ Whopf <- function(x, d, order) {
 #' s <- sin(2 * pi * (1:200) / 20)
 #' x <- s + rnorm(200) * 0.3
 #' WienerFilt(x, desired = s, order = 8)
+#' @keywords internal
 WienerFilt <- function(x, desired = NULL, order = 8, sd = NULL,
                        seta = NULL, fs = 1) {
   # The two routes to the same filter.  The time route estimates the
@@ -589,6 +601,7 @@ WienerFilt <- function(x, desired = NULL, order = 8, sd = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' AncInput(V, V)
+#' @keywords internal
 AncInput <- function(v, m) {
   # Section 3.10.1: the primary input is x = v + m.  The method needs the
   # signal and the interference statistically independent; the sample
@@ -635,6 +648,7 @@ AncInput <- function(v, m) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' AncOut(V, V)
+#' @keywords internal
 AncOut <- function(x, y) {
   # eq. (3.196): e = x - y, and the ERROR is the canceller's output.  This
   # is the step that surprises: the quantity being minimized is the thing
@@ -670,6 +684,7 @@ AncOut <- function(x, y) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LmsOut(V, V)
+#' @keywords internal
 LmsOut <- function(w, r) {
   # eq. (3.195): the adaptive filter runs on the REFERENCE, not on the
   # primary input.  Filtering the primary would cancel the signal too.
@@ -706,6 +721,7 @@ LmsOut <- function(w, r) {
 #' @examples
 #' LmsSqErr(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   w = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LmsSqErr <- function(x, rvec, w) {
   # eq. (3.200): e^2 = x^2 - 2 x r'w + (r'w)^2.  The expansion is checked
   # against the square itself.  This is the INSTANTANEOUS squared error
@@ -745,6 +761,7 @@ LmsSqErr <- function(x, rvec, w) {
 #' @examples
 #' LmsDescent(w = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   rvec = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LmsDescent <- function(w, e, rvec, mu) {
   # eqs. (3.201)-(3.202): the instantaneous gradient is -2 e r, so
   # steepest descent gives w - mu grad, which is exactly Widrow-Hoff.
@@ -781,6 +798,7 @@ LmsDescent <- function(w, e, rvec, mu) {
 #' @examples
 #' WidrowHoff(w = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   rvec = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 WidrowHoff <- function(w, e, rvec, mu) {
   # eq. (3.203): w(n+1) = w(n) + 2 mu e(n) r(n).  The factor of two is in
   # the book's equation and is kept; folding it into mu silently halves
@@ -820,6 +838,7 @@ WidrowHoff <- function(w, e, rvec, mu) {
 #' @examples
 #' LmsVarStep(w = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   rvec = c(1, 2, 3, 4, 5, 6, 7, 8), mu_n = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LmsVarStep <- function(w, e, rvec, mu_n) {
   # eq. (3.204): eq. (3.203) with a step size that changes each sample.
   ws <- as.numeric(w)
@@ -857,6 +876,7 @@ LmsVarStep <- function(w, e, rvec, mu_n) {
 #' @export
 #' @examples
 #' LmsZhang(0.5, 4, 2, alpha = 0.02)
+#' @keywords internal
 LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
   # eq. (3.205), after Zhang et al.: mu(n) = mu / ((M+1) xbar^2(n)) with
   # xbar^2(n) = alpha r^2(n) + (1-alpha) xbar^2(n-1).  Normalizing by the
@@ -914,6 +934,7 @@ LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' LmsFilt(primary = ref, reference = ref)
+#' @keywords internal
 LmsFilt <- function(primary, reference, order = 8, mu = 0.01,
                     variable = FALSE, alpha = 0.02) {
   # Section 3.10.2: run the canceller, eqs. (3.195)-(3.196), (3.203).
@@ -987,6 +1008,7 @@ LmsFilt <- function(primary, reference, order = 8, mu = 0.01,
 #' @export
 #' @examples
 #' RlsObj(c(1, 1, 1), 0.5)
+#' @keywords internal
 RlsObj <- function(errors, lam) {
   # eq. (3.206): xi = sum lambda^(n-i) e^2(i).  lambda < 1 discounts old
   # errors, giving an effective memory of 1/(1-lambda) samples; lambda = 1
@@ -1016,6 +1038,7 @@ RlsObj <- function(errors, lam) {
 #' @export
 #' @examples
 #' RlsNormal(phi = 0.5, theta = 0.5)
+#' @keywords internal
 RlsNormal <- function(phi, theta) {
   # eq. (3.207): the same form as Wiener-Hopf, but with time-averaged and
   # exponentially weighted correlations.  Solving it outright each sample
@@ -1045,6 +1068,7 @@ RlsNormal <- function(phi, theta) {
 #' @examples
 #' AbcdLemma(matrix(c(4, 1, 1, 3), 2, 2), matrix(c(1, 2), 2, 1),
 #'     matrix(1, 1, 1), matrix(c(1, 2), 1, 2))
+#' @keywords internal
 AbcdLemma <- function(A, B, C, D) {
   # eq. (3.213), the matrix inversion lemma:
   #   (A + B C D)^-1 = A^-1 - A^-1 B (D A^-1 B + C^-1)^-1 D A^-1.
@@ -1095,6 +1119,7 @@ AbcdLemma <- function(A, B, C, D) {
 #' @export
 #' @examples
 #' RlsUpdate(w_prev = 5L, k = 5L, alpha = 0.5)
+#' @keywords internal
 RlsUpdate <- function(w_prev, k, alpha) {
   # eq. (3.224): w(n) = w(n-1) + k(n) alpha(n).
   #
@@ -1135,6 +1160,7 @@ RlsUpdate <- function(w_prev, k, alpha) {
 #' @examples
 #' RlsApriori(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   w_prev = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 RlsApriori <- function(x, rvec, w_prev) {
   # eq. (3.225): alpha(n) = x(n) - w'(n-1) r(n).  The A PRIORI error, made
   # with the PREVIOUS weights.  Using the updated weights gives the a
@@ -1179,6 +1205,7 @@ RlsApriori <- function(x, rvec, w_prev) {
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' RlsFilt(primary = ref, reference = ref)
+#' @keywords internal
 RlsFilt <- function(primary, reference, order = 8, lam = 0.98, delta = 1) {
   # Section 3.10.3, eqs. (3.215), (3.221), (3.224)-(3.225).  P is
   # symmetrized every sample: in exact arithmetic the update preserves
@@ -1262,6 +1289,7 @@ RlsFilt <- function(primary, reference, order = 8, lam = 0.98, delta = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' RlsLattice(V)
+#' @keywords internal
 RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
   # Section 8.6.2.  Every stage is itself a predictor, so one run gives
   # the fit at EVERY order up to the one requested -- an order need not be
@@ -1344,6 +1372,7 @@ RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' RlsMonitor(x = ref)
+#' @keywords internal
 RlsMonitor <- function(x, reference = NULL, order = 8, lam = 0.98,
                        settle = NULL, threshold = 3, window = NULL) {
   # Section 8.6.1: watch the RLS error power and mark a boundary where it
@@ -1420,6 +1449,7 @@ RlsMonitor <- function(x, reference = NULL, order = 8, lam = 0.98,
 #' R <- matrix(1)
 #' Riccati(F, H, Q, R)
 #' Kalman(z = F, F = F, H = H, Q = Q, R = R)
+#' @keywords internal
 Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
   # The recursive counterpart of the Wiener filter: it tracks a state
   # through a model instead of filtering a stationary record.  P is
@@ -1501,6 +1531,7 @@ Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
 #' Q <- matrix(0.1)
 #' R <- matrix(1)
 #' Riccati(F, H, Q, R)
+#' @keywords internal
 Riccati <- function(F, H, Q, R, maxiter = 1000L, tol = 1e-12) {
   # The fixed point of the Kalman covariance recursion.  Once P settles
   # the gain is constant and the filter is a fixed linear filter -- which
@@ -1560,6 +1591,7 @@ Riccati <- function(F, H, Q, R, maxiter = 1000L, tol = 1e-12) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Sem(V, V)
+#' @keywords internal
 Sem <- function(psd, reference) {
   # Section 8.5.1, the spectral error measure: the mean squared difference
   # of the LOG spectra.  Taking logs is what makes it scale-free -- a pure
@@ -1606,6 +1638,7 @@ Sem <- function(psd, reference) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Acfseg(V, V)
+#' @keywords internal
 Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
   # Section 8.5.2, eqs. (8.27)-(8.29), after Michael and Houchin.
   #
@@ -1703,6 +1736,7 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' PcgSeg(x = ref, fs = n)
+#' @keywords internal
 PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
                    threshold = NULL) {
   # Section 8.5: adaptive segmentation of the PCG by the spectral error
@@ -1803,6 +1837,7 @@ PcgSeg <- function(x, fs, window = NULL, step = NULL, order = 6,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PsdAcf(V)
+#' @keywords internal
 PsdAcf <- function(x) {
   # eq. (4.30): the PSD is the DFT of the ACF.  It holds exactly for the
   # CIRCULAR autocorrelation.  The linear (biased) ACF gives a smoothed
@@ -1871,6 +1906,7 @@ PsdAcf <- function(x) {
 #' v <- sine_a(256, 3)
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
+#' @keywords internal
 Anc <- function(primary, reference, order = 8, mu = 0.01,
                 method = "lms", lam = 0.98, delta = 1) {
   # Section 3.10, eqs. (3.195)-(3.196): the canceller with either
@@ -1928,6 +1964,7 @@ Anc <- function(primary, reference, order = 8, mu = 0.01,
 #' v <- sine_a(256, 3)
 #' ref <- sine_a(n, 61)
 #' FetalEcg(v + 0.8 * ref, ref, order = 4, mu = 0.005)
+#' @keywords internal
 FetalEcg <- function(abdominal, chest, order = 32, mu = 0.005,
                      method = "lms") {
   # Section 3.14, after Widrow et al.: cancel the maternal ECG from an

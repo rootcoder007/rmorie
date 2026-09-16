@@ -429,6 +429,7 @@
 #' g <- morie_reinfc(bump, mu = 0, sigma = 1, unit = "gaussian",
 #'                   trials = 400L, alpha = 0.2, seed = 1L)
 #' round(g$mu, 3)
+#' @keywords internal
 morie_reinfc <- function(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0.0, sigma = 1.0,
                          unit = "bernoulli-logistic", baseline = "comparison", mode = "immediate",
                          alpha = 0.1, gamma = 0.9, rho = 0.1, episode_length = 1, trials = 100,
@@ -527,6 +528,7 @@ morie_reinforce <- morie_reinfc
 #' morie_reinfc_expected_update(p = 0.5, r0 = 0, r1 = 1, alpha = 2)
 #' # the same update for any baseline (equation 10)
 #' morie_reinfc_expected_update(p = 0.5, r0 = 0, r1 = 1, alpha = 2, b = 100)
+#' @keywords internal
 morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
   p <- as.numeric(p)
   if (p <= 0 || p >= 1) {
@@ -547,6 +549,7 @@ morie_reinfc_expected_update <- function(p, r0, r1, alpha = 1.0, b = 0.0) {
 #' @export
 #' @examples
 #' morie_reinfc_cheatsheet()
+#' @keywords internal
 morie_reinfc_cheatsheet <- function() {
   paste("reinfc: REINFORCE, Delta w = alpha (r - b) dln g/dw ",
         "(Williams 1992 eq. 2). Units bernoulli (eq. 5, L_R-I), ",

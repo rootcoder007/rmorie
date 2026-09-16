@@ -136,6 +136,7 @@
 #'         u2) < 0.5) 1 else 0))
 #' Counterfactual(evidence = list(x = 1, y = 1), equations = .pearl_eqs,
 #'     exogenous = c("u1", "u2"), do = list(x = 0), query = "y")
+#' @keywords internal
 Counterfactual <- function(evidence, equations, exogenous, do, query,
                            u_support = NULL) {
   if (!length(exogenous)) stop("need at least one exogenous variable")

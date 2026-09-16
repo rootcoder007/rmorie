@@ -6,10 +6,10 @@
 # (3.1) p.71 + OLS pp.72-73; EPE p.80; ridge p.81; (4.5)-(4.14)
 # pp.131-136.
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_pinv(V)
+#' @keywords internal
 morie_pinv <- function(A, rcond = 1e-15) {
   A <- as.matrix(A)
   s <- svd(A)
@@ -18,10 +18,10 @@ morie_pinv <- function(A, rcond = 1e-15) {
   s$v %*% diag(di, nrow = length(di)) %*% t(s$u)
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_solve(V)
+#' @keywords internal
 morie_solve <- function(A, b = NULL) {
   # Rank-deficient systems are legitimate here (intercept-only design
   # blocks, zero covariate columns, a genomic relationship matrix with
@@ -197,10 +197,10 @@ morie_ridge <- function(X, y, lambda, add_intercept = TRUE) {
   )
 }
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_epe(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_epe <- function(sigma2, x_star, eigenvalues) {
   if (any(eigenvalues <= 0)) stop("eigenvalues must be positive")
   sigma2 * (1 + sum(x_star^2 / eigenvalues))
@@ -272,11 +272,11 @@ morie_brier <- function(probs, y_true, halved = FALSE) {
   if (halved) bs / 2 else bs
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' S <- c("a", "b", "c")
 #' rmorie:::morie_mll(V, S)
+#' @keywords internal
 morie_mll <- function(probs, y_true) {
   P <- as.matrix(probs)
   yt <- as.integer(y_true)
@@ -285,15 +285,15 @@ morie_mll <- function(probs, y_true) {
 
 # ---- chapter 5: linear mixed models (MVSML 2022 pp.142-155) ----
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_kron(V, V)
+#' @keywords internal
 morie_kron <- function(A, B) kronecker(as.matrix(A), as.matrix(B))
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_lmm_v(Z = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+#' @keywords internal
 morie_lmm_v <- function(Z, D, R = NULL) {
   Z <- as.matrix(Z)
   if (is.null(R)) R <- diag(nrow(Z))
@@ -494,18 +494,18 @@ morie_gxe_multitrait <- function(Y, Z_L, Z_EL, G, Sigma_T,
 
 # ---- chapter 6: Bayesian genomic linear regression (pp.171-186) ----
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_scaled_inv_chisq(V, V)
+#' @keywords internal
 morie_scaled_inv_chisq <- function(nu, S, n = 1L) {
   S / rchisq(n, df = nu)
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_brr_hyper(V)
+#' @keywords internal
 morie_brr_hyper <- function(y, R2 = 0.5, nu = 5, nu_beta = 5,
                             sum_var_x = NULL) {
   var_y <- var(as.numeric(y))
@@ -517,13 +517,13 @@ morie_brr_hyper <- function(y, R2 = 0.5, nu = 5, nu_beta = 5,
   )
 }
 
-#' @noRd
 #' @examples
 #' set.seed(1)
 #' n <- 12
 #' A <- matrix(rnorm(n * 6), nrow = n)
 #' G <- morie_grm(A) + diag(0.3, n)
 #' rmorie:::morie_chol_lower(G)
+#' @keywords internal
 morie_chol_lower <- function(G) t(chol(as.matrix(G)))
 
 #' @noRd
@@ -589,7 +589,6 @@ morie_bayes_gblup <- function(y, G, n_iter = 2000L,
   fit
 }
 
-#' @noRd
 #' @examples
 #' set.seed(1)
 #' n <- 12
@@ -597,6 +596,7 @@ morie_bayes_gblup <- function(y, G, n_iter = 2000L,
 #' G <- morie_grm(A) + diag(0.3, n)
 #' rmorie:::morie_chol_lower(G)
 #' rmorie:::morie_rkhs_cov(Z_L = G, G = G)
+#' @keywords internal
 morie_rkhs_cov <- function(Z_L, G, Z_LE = NULL, I_env = NULL,
                            sigma2_g = 1, sigma2_ge = 1) {
   ZL <- as.matrix(Z_L)
@@ -609,10 +609,10 @@ morie_rkhs_cov <- function(Z_L, G, Z_LE = NULL, I_env = NULL,
   out
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_extended_predictor(V)
+#' @keywords internal
 morie_extended_predictor <- function(n, X_E = NULL, X = NULL,
                                      X_EM = NULL) {
   design <- matrix(1, nrow = n, ncol = 1)
@@ -634,9 +634,9 @@ morie_extended_predictor <- function(n, X_E = NULL, X = NULL,
 
 # ---- chapter 6b: multi-trait Bayesian / BMTME (pp.190-196) ----
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_inv_wishart(nu = 0.5, S = 5L)
+#' @keywords internal
 morie_inv_wishart <- function(nu, S) {
   S <- as.matrix(S)
   p <- nrow(S)
@@ -715,9 +715,9 @@ morie_ordinal_probs <- function(eta, thresholds,
   }, numeric(length(thresholds) + 1L)))
 }
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_rtruncnorm(0, 1, 0.5, 1.5)
+#' @keywords internal
 morie_rtruncnorm <- function(mean, sd, lo, hi) {
   a <- if (is.finite(lo)) pnorm((lo - mean) / sd) else 0
   b <- if (is.finite(hi)) pnorm((hi - mean) / sd) else 1
@@ -840,7 +840,6 @@ morie_penalized_multinomial <- function(X, y, beta0, beta,
   )
 }
 
-#' @noRd
 #' @examples
 #' set.seed(7)
 #' X <- matrix(rnorm(60), 30, 2)
@@ -848,6 +847,7 @@ morie_penalized_multinomial <- function(X, y, beta0, beta,
 #' beta0 <- rep(0, 3)
 #' beta <- matrix(0, 3, 2)
 #' rmorie:::morie_multinomial_block(X, y, beta0, beta, lambda = 0.1, cls = 0L)
+#' @keywords internal
 morie_multinomial_block <- function(X, y, beta0, beta, lambda,
                                     cls,
                                     baseline_last = TRUE) {
@@ -872,10 +872,10 @@ morie_multinomial_block <- function(X, y, beta0, beta, lambda,
   )
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_poisson_pmf(V, V)
+#' @keywords internal
 morie_poisson_pmf <- function(y, lambda) {
   exp(y * log(lambda) - lambda - lgamma(y + 1))
 }
@@ -954,19 +954,19 @@ morie_kernel_matrix <- function(X, kernel = "linear",
   stop("unknown kernel: ", kernel)
 }
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_is_psd(K = 5L)
+#' @keywords internal
 morie_is_psd <- function(K, tol = 1e-9) {
   S <- (as.matrix(K) + t(as.matrix(K))) / 2
   lam <- eigen(S, symmetric = TRUE, only.values = TRUE)$values
   list(psd = min(lam) >= -tol, eigenvalues = lam)
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_rkhs_norm(V, V)
+#' @keywords internal
 morie_rkhs_norm <- function(beta, K) {
   b <- as.numeric(beta)
   as.numeric(t(b) %*% as.matrix(K) %*% b)
@@ -1040,10 +1040,10 @@ morie_arccos_kernel <- function(X, Z = NULL, depth = 1L,
 
 # ---- chapter 8c: Bayesian kernel BLUP (pp.281-285) ----
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_hadamard(V, V)
+#' @keywords internal
 morie_hadamard <- function(A, B) as.matrix(A) * as.matrix(B)
 
 #' @noRd
@@ -1252,9 +1252,9 @@ morie_svm_fit_dual <- function(X, y, C = NULL, n_iter = 4000L,
 
 # ---- chapter 10: ANN and backpropagation (pp.385, 409-412) ----
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_act("relu", c(-1, 0.5))
+#' @keywords internal
 morie_act <- function(name, z, deriv = FALSE) {
   if (name == "identity") {
     return(if (deriv) rep(1, length(z)) else z)
@@ -1297,10 +1297,10 @@ morie_ann_forward <- function(X, W, activations = NULL) {
   )
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_ann_sse(V, V)
+#' @keywords internal
 morie_ann_sse <- function(y_hat, y) {
   0.5 * sum((as.matrix(y_hat) - as.matrix(y))^2)
 }
@@ -1349,10 +1349,10 @@ morie_ann_train <- function(X, y, W, eta = 0.1, n_iter = 500L,
   list(W = Wc, loss = f$loss, history = hist, iterations = length(hist))
 }
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_ann_numeric_gradient(X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   y = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_ann_numeric_gradient <- function(X, y, W,
                                        activations = NULL,
                                        eps = 1e-6) {

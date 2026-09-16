@@ -28,6 +28,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_mistr_rms_norm(V)
+#' @keywords internal
 morie_mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
   d <- length(x)
   if (d == 0L) stop("mistr: empty vector")
@@ -55,6 +56,7 @@ morie_mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
 #' morie_mistr_swiglu(x, W1 = matrix(rnorm(32, 0, 0.3), 4, 8),
 #'                    W2 = matrix(rnorm(32, 0, 0.3), 8, 4),
 #'                    W3 = matrix(rnorm(32, 0, 0.3), 4, 8))
+#' @keywords internal
 morie_mistr_swiglu <- function(x, W1, W2, W3) {
   W1 <- as.matrix(W1)
   W2 <- as.matrix(W2)
@@ -79,6 +81,7 @@ morie_mistr_swiglu <- function(x, W1, W2, W3) {
 #' @export
 #' @examples
 #' morie_mistr_rope_angles(d = 8)
+#' @keywords internal
 morie_mistr_rope_angles <- function(d, base = 10000) {
   if (d %% 2 != 0L) stop(paste0("mistr: RoPE needs an even dimension, ",
                                 "got ", d))
@@ -98,6 +101,7 @@ morie_mistr_rope_angles <- function(d, base = 10000) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_mistr_apply_rope(V, V)
+#' @keywords internal
 morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
   x <- as.numeric(x)
   d <- length(x)
@@ -127,6 +131,7 @@ morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
 #' @export
 #' @examples
 #' morie_mistr_sliding_window_mask(L = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+#' @keywords internal
 morie_mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
   if (window < 1L)
     stop(paste0("mistr: window must be at least 1, got ", window))
@@ -149,6 +154,7 @@ morie_mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_mistr_attention_span(V, V)
+#' @keywords internal
 morie_mistr_attention_span <- function(window, n_layers) {
   as.integer(window) * as.integer(n_layers)
 }
@@ -173,6 +179,7 @@ morie_mistr_attention_span <- function(window, n_layers) {
 #' r <- morie_mistr_grouped_query_attention(Q, K, V, n_heads = 2,
 #'                                          n_kv_heads = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mistr_grouped_query_attention <- function(Q, K, V, n_heads,
                                                 n_kv_heads, mask = NULL,
                                                 positions = NULL,
@@ -254,6 +261,7 @@ morie_mistr_grouped_query_attention <- function(Q, K, V, n_heads,
 #'                                W3 = W(16),
 #'                                n_heads = 2, n_kv_heads = 1, window = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
                                        n_heads, n_kv_heads, window,
                                        norm1 = NULL, norm2 = NULL,

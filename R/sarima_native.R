@@ -47,6 +47,7 @@
 #' @export
 #' @examples
 #' series_g()
+#' @keywords internal
 series_g <- function(log = FALSE) {
   out <- numeric(144)
   idx <- 0
@@ -73,6 +74,7 @@ series_g <- function(log = FALSE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' difference(V)
+#' @keywords internal
 difference <- function(y, d = 0, D = 0, s = 1) {
   d <- as.integer(d)
   D <- as.integer(D)
@@ -146,6 +148,7 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' @export
 #' @examples
 #' expand_polynomials()
+#' @keywords internal
 expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
                                 theta = numeric(0), Theta = numeric(0), s = 12) {
   s <- as.integer(s)
@@ -172,6 +175,7 @@ expand_polynomials <- function(phi = numeric(0), Phi = numeric(0),
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' sample_acf(V, M)
+#' @keywords internal
 sample_acf <- function(x, lags) {
   n <- length(x)
   if (n < 2) stop("sarima: need at least two observations")
@@ -200,6 +204,7 @@ sample_acf <- function(x, lags) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' airline_autocovariances(V, V)
+#' @keywords internal
 airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
   th <- as.numeric(theta)
   TH <- as.numeric(Theta)
@@ -248,6 +253,7 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
 #' @export
 #' @examples
 #' moment_estimate(rho = 0.5)
+#' @keywords internal
 moment_estimate <- function(rho) .sarima_invert_rho(rho)
 
 #' preliminary_estimates
@@ -266,6 +272,7 @@ moment_estimate <- function(rho) .sarima_invert_rho(rho)
 #' w <- rnorm(120)
 #' pe <- preliminary_estimates(w, s = 12)
 #' is.list(pe)
+#' @keywords internal
 preliminary_estimates <- function(w, s = 12) {
   r <- sample_acf(w, c(1, as.integer(s)))
   th <- .sarima_invert_rho(r[["1"]])
@@ -291,6 +298,7 @@ preliminary_estimates <- function(w, s = 12) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' css(V)
+#' @keywords internal
 css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
   ar <- as.numeric(ar)
   ma <- as.numeric(ma)
@@ -373,6 +381,7 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' loglik(V)
+#' @keywords internal
 loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   ar <- as.numeric(ar)
   ma <- as.numeric(ma)
@@ -751,6 +760,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' f$sigma2
 #' f$forecast_differenced
 #' f$forecast
+#' @keywords internal
 forecast <- function(fitted, h = 12) {
   h <- as.integer(h)
   if (h < 1) stop("sarima: h must be at least 1")
@@ -805,6 +815,7 @@ forecast <- function(fitted, h = 12) {
 #' @export
 #' @examples
 #' large_sample_se(theta = 0.5, Theta = 0.5, n = 5L)
+#' @keywords internal
 large_sample_se <- function(theta, Theta, n) {
   th <- as.numeric(theta)
   TH <- as.numeric(Theta)
@@ -833,6 +844,7 @@ large_sample_se <- function(theta, Theta, n) {
 #' rho <- sample_acf(rnorm(150), c(1, 11, 12, 13))
 #' se <- bartlett_se(rho, 150)
 #' is.numeric(se) || is.list(se)
+#' @keywords internal
 bartlett_se <- function(rho, n) {
   n <- as.integer(n)
   if (n < 1) stop("sarima: n must be positive")
@@ -860,6 +872,7 @@ bartlett_se <- function(rho, n) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' r_convention(D)
+#' @keywords internal
 r_convention <- function(fitted) {
   list(ma = -as.numeric(fitted$theta), sma = -as.numeric(fitted$Theta),
        ar = as.numeric(fitted$phi), sar = as.numeric(fitted$Phi),

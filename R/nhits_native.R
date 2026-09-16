@@ -272,6 +272,7 @@
 #' \code{lookback}, \code{horizon}, \code{n}, \code{total_knots},
 #' \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.
 #' @export
+#' @keywords internal
 morie_nhits <- function(y, horizon, lookback = NULL, blocks = NULL,
                         ridge = 1e-8) {
   yv <- .nhits_vec(y)

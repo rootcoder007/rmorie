@@ -71,6 +71,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tlonsl_summary_measure(V)
+#' @keywords internal
 morie_tlonsl_summary_measure <- function(history, lags = 1) {
   # A fixed-dimensional summary Z of the past. lags=0 gives the empty
   # summary, which is exactly the i.i.d. case.
@@ -103,6 +104,7 @@ morie_tlonsl_summary_measure <- function(history, lags = 1) {
 #' @param lags Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.
 #' @return A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \code{note}.
 #' @export
+#' @keywords internal
 morie_tlonsl_sequential_risk <- function(y, algorithm, loss = "squared",
                                          burn_in = 5, lags = 1) {
   # Train on the past, score the one-step-ahead prediction. V-fold
@@ -155,6 +157,7 @@ morie_tlonsl_sequential_risk <- function(y, algorithm, loss = "squared",
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tlonsl_update_weights(V)
+#' @keywords internal
 morie_tlonsl_update_weights <- function(cum_losses, eta = 1.0) {
   # Exponentially weighted update from cumulative losses. The
   # cumulative losses are sufficient, so the update is O(1) in memory.
@@ -183,6 +186,7 @@ morie_tlonsl_update_weights <- function(cum_losses, eta = 1.0) {
 #' \code{best_single}, \code{best_member}, \code{weight_path}, \code{n_scored},
 #' \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_tlonsl_online_super_learner <- function(y, library, loss = "squared",
                                               burn_in = 5, lags = 1, eta = 1.0) {
   # Sequentially-validated ensemble over a library. Weights are
@@ -249,6 +253,7 @@ morie_tlonsl_online_super_learner <- function(y, library, loss = "squared",
 #' @export
 #' @examples
 #' morie_tlonsl_cheatsheet()
+#' @keywords internal
 morie_tlonsl_cheatsheet <- function() {
   paste0(
     "tlonsl: data arrive sequentially, O(t) given a ",

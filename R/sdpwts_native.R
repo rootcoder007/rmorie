@@ -75,6 +75,7 @@
 #' @export
 #' @examples
 #' sdpwts_lmi(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 sdpwts_lmi <- function(x, F0, Fs) {
   v <- as.numeric(x)
   A <- as.matrix(F0)
@@ -108,6 +109,7 @@ sdpwts_lmi <- function(x, F0, Fs) {
 #' @export
 #' @examples
 #' sdpwts_is_psd(M = 5L)
+#' @keywords internal
 sdpwts_is_psd <- function(M, tol = -1e-10) {
   A <- as.matrix(M)
   ev <- eigen(A, symmetric = TRUE, only.values = TRUE)$values
@@ -132,6 +134,7 @@ sdpwts_is_psd <- function(M, tol = -1e-10) {
 #' @export
 #' @examples
 #' sdpwts_barrier(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 sdpwts_barrier <- function(x, F0, Fs) {
   M <- sdpwts_lmi(x, F0, Fs)
   ev <- eigen(M, symmetric = TRUE, only.values = TRUE)$values
@@ -161,6 +164,7 @@ sdpwts_barrier <- function(x, F0, Fs) {
 #' @export
 #' @examples
 #' sdpwts_central_path_gap(t = 5L, m = 5L)
+#' @keywords internal
 sdpwts_central_path_gap <- function(t, m) {
   tt <- as.numeric(t)
   mm <- as.integer(m)
@@ -274,6 +278,7 @@ sdpwts_central_path_gap <- function(t, m) {
 #' @examples
 #' sdpwts_solve_sdp(c = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   x0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
                              tol = 1e-8, max_outer = 60) {
   cc <- as.numeric(c)
@@ -331,6 +336,7 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 #' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 #' res <- sdpwts_min_eigenvalue_sdp(A = A)
 #' res
+#' @keywords internal
 sdpwts_min_eigenvalue_sdp <- function(A, t0 = 1.0, mu = 10.0,
                                       tol = 1e-9) {
   M <- as.matrix(A)
@@ -365,6 +371,7 @@ morie_sdpwts <- sdpwts_solve_sdp
 #' @export
 #' @examples
 #' sdpwts_cheatsheet()
+#' @keywords internal
 sdpwts_cheatsheet <- function() {
   paste0("sdpwts: minimise c'x subject to a LINEAR MATRIX ",
          "INEQUALITY F0 + sum x_i F_i >= 0. The feasible set is the ",

@@ -67,6 +67,7 @@
 #' @export
 #' @examples
 #' morie_qbcfgs_strata(e = c(1, 2, 3, 4, 5, 6, 7, 8), n_strata = 5L)
+#' @keywords internal
 morie_qbcfgs_strata <- function(e, n_strata) {
   n <- length(e)
   ord <- order(e, seq_len(n))
@@ -94,6 +95,7 @@ morie_qbcfgs_strata <- function(e, n_strata) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_qbcfgs_smd(V, V)
+#' @keywords internal
 morie_qbcfgs_smd <- function(x, d, w = NULL) {
   n <- length(x)
   if (is.null(w)) w <- rep(1, n)
@@ -141,6 +143,7 @@ morie_qbcfgs_smd <- function(x, d, w = NULL) {
 #'     2 * (((i * 7)%%11)/10) - 1 * (((i * 5)%%13)/12) + ((i * 11)%%7) *
 #'     0.1, 4), numeric(1))
 #' morie_qbcfgs(Y, D, X, 0.5, 4L, "ate", 6L, 3L, 3L, 6)
+#' @keywords internal
 morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
                          weight = "ate", n_trees = 8L, min_leaf = 3L,
                          max_depth = 3L, seed = 0, clip = 0.01) {
@@ -257,6 +260,7 @@ morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
 #' @export
 #' @examples
 #' morie_qbcfgs_cheatsheet()
+#' @keywords internal
 morie_qbcfgs_cheatsheet <- function()
   paste0("qbcfgs: quantile-balanced score for forests. weightings ",
          paste(.QBCFGS_WEIGHTS, collapse = ", "),

@@ -77,6 +77,7 @@
 #' @examples
 #' set.seed(1)
 #' nuclear_norm(matrix(rnorm(12), 3, 4))
+#' @keywords internal
 nuclear_norm <- function(A) {
   M <- .meglt_mat(A)
   s <- .meglt_svd(M)
@@ -97,6 +98,7 @@ nuclear_norm <- function(A) {
 #' set.seed(1)
 #' r <- coherence(matrix(rnorm(20), 5, 4), rank = 2)
 #' str(r, max.level = 1)
+#' @keywords internal
 coherence <- function(A, rank = NULL) {
   M <- .meglt_mat(A)
   sv <- .meglt_svd(M)
@@ -140,6 +142,7 @@ coherence <- function(A, rank = NULL) {
 #' @export
 #' @examples
 #' sample_bound(n = 5L, r = 5L)
+#' @keywords internal
 sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
   if (!(exponent %in% c(1.2, 1.25)))
     stop("meglt: the exponent must be 1.2 (moderate rank) or 1.25 (all ranks), got ", format(exponent))
@@ -179,6 +182,7 @@ sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
 #'   obs[[length(obs) + 1]] <- c(i, j)
 #' r <- svt(M, obs, tau = 1, iters = 100)
 #' str(r, max.level = 1)
+#' @keywords internal
 svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
                 tol = 1e-6) {
   A <- .meglt_mat(M)
@@ -238,6 +242,7 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' relative_error(V, V)
+#' @keywords internal
 relative_error <- function(X, M) {
   A <- .meglt_mat(M)
   num <- 0
@@ -299,6 +304,7 @@ matrix_completion_low_rank <- svt
 #'   obs[[length(obs) + 1]] <- c(i, j)
 #' r <- morie_meglt("svt", M, obs, tau = 1, iters = 100)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_meglt <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("meglt: op must be one of nuclear_norm, coherence, sample_bound, svt, relative_error, cheatsheet")

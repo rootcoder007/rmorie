@@ -13,10 +13,10 @@
 #
 # Helpers live in aaa_helpers_irt.R.
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_two_parameter_logistic(V)
+#' @keywords internal
 morie_two_parameter_logistic <- function(theta, a = 1, b = 0) {
   th <- as.numeric(theta)
   n <- length(th)

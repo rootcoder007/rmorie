@@ -10,6 +10,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' inv_logit(V)
+#' @keywords internal
 inv_logit <- function(x) {
   1 / (1 + exp(-x))
 }
@@ -28,6 +29,7 @@ inv_logit <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' inject_special_codes(V)
+#' @keywords internal
 inject_special_codes <- function(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 998L, 999L)) {
   if (rate <= 0) {
     return(x)
@@ -50,6 +52,7 @@ inject_special_codes <- function(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 
 #' @export
 #' @examples
 #' synthetic_required_keys()
+#' @keywords internal
 synthetic_required_keys <- function() {
   c(
     "id", "weight", "sex", "age_group", "region",
@@ -69,6 +72,7 @@ synthetic_required_keys <- function() {
 #' @param profile Passed to \code{morie_default_synthetic_name_map}.
 #' @return The value of \code{resolved}, as built in the body.
 #' @export
+#' @keywords internal
 resolve_synthetic_name_map <- function(name_map, profile) {
   required <- synthetic_required_keys()
 

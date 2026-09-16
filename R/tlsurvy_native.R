@@ -82,6 +82,7 @@
 #' morie_tlsurvy_inclusion_probabilities(V = runif(20), n = 10,
 #'                                       design = "adaptive",
 #'                                       influence = abs(rnorm(20)))
+#' @keywords internal
 morie_tlsurvy_inclusion_probabilities <- function(V, n, design = "adaptive",
                                                   influence = NULL,
                                                   floor = 0.01) {
@@ -172,6 +173,7 @@ morie_tlsurvy_inclusion_probabilities <- function(V, n, design = "adaptive",
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tlsurvy_draw_sample(V)
+#' @keywords internal
 morie_tlsurvy_draw_sample <- function(pi, seed = 0) {
   p <- as.numeric(pi)
   e <- .ghc_rng(seed)
@@ -205,6 +207,7 @@ morie_tlsurvy_draw_sample <- function(pi, seed = 0) {
 #' @examples
 #' morie_tlsurvy_horvitz_thompson(values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   pi = c(1, 2, 3, 4, 5, 6, 7, 8), selected = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N = NULL) {
   y <- as.numeric(values)
   p <- as.numeric(pi)
@@ -242,6 +245,7 @@ morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N = NULL) {
 #' @examples
 #' morie_tlsurvy_design_efficiency(values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   influence = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+#' @keywords internal
 morie_tlsurvy_design_efficiency <- function(values, influence, n, seed = 0) {
   y <- as.numeric(values)
   out <- list()
@@ -284,6 +288,7 @@ morie_tlsurvy_design_efficiency <- function(values, influence, n, seed = 0) {
 #' \code{N}, \code{sampling_fraction}, \code{inclusion_probabilities}, \code{method},
 #' \code{note}.
 #' @export
+#' @keywords internal
 morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
                                                full_estimator, n,
                                                seed = 0) {
@@ -318,6 +323,7 @@ morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
 #' @export
 #' @examples
 #' morie_tlsurvy_cheatsheet()
+#' @keywords internal
 morie_tlsurvy_cheatsheet <- function() {
   return(paste0(
     "tlsurvy: N too large to use, so SAMPLE the data rather than ",

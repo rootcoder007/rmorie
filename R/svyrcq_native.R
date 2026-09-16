@@ -28,6 +28,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_svyrcq_survey_quantile_regression(V, V)
+#' @keywords internal
 morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
                                                     weights = NULL,
                                                     add_intercept = TRUE,

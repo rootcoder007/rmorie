@@ -43,6 +43,7 @@
 #' @export
 #' @examples
 #' covariance_from_scale_rotation(c(1, 2, 0.5), c(1, 0, 0, 0))
+#' @keywords internal
 covariance_from_scale_rotation <- function(scale, quaternion) {
   s <- as.numeric(scale)
   if (length(s) != 3L || any(s <= 0))
@@ -62,6 +63,7 @@ covariance_from_scale_rotation <- function(scale, quaternion) {
 #' @export
 #' @examples
 #' is_positive_semidefinite(S = 5L)
+#' @keywords internal
 is_positive_semidefinite <- function(S, tol = -1e-9) {
   M <- as.matrix(S)
   storage.mode(M) <- "double"
@@ -79,6 +81,7 @@ is_positive_semidefinite <- function(S, tol = -1e-9) {
 #' @export
 #' @examples
 #' project_covariance(S = 5L, W = 5L, J = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 project_covariance <- function(S, W, J) {
   C <- as.matrix(S)
   storage.mode(C) <- "double"
@@ -103,6 +106,7 @@ project_covariance <- function(S, W, J) {
 #' @examples
 #' set.seed(1)
 #' alpha_composite(matrix(runif(6), 2, 3), c(0.5, 0.7))
+#' @keywords internal
 alpha_composite <- function(colours, alphas, depths = NULL) {
   C <- as.matrix(colours)
   storage.mode(C) <- "double"
@@ -140,6 +144,7 @@ alpha_composite <- function(colours, alphas, depths = NULL) {
 #' @examples
 #' adaptive_density_control(gradients = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   scales = c(1, 2, 3, 4, 5, 6, 7, 8), opacities = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 adaptive_density_control <- function(gradients, scales, opacities,
                                      grad_threshold = 0.0002,
                                      scale_threshold = 0.01,

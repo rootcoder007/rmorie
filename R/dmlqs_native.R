@@ -377,6 +377,7 @@
 #' @param ... Passed through.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @keywords internal
 morie_dmlqs <- function(what = "dmpnn_message_pass", ...) {
   w <- as.character(what)
   if (w == "directed_edges" || w == "directededges") {

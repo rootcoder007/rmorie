@@ -94,6 +94,7 @@
 #' # the error falls as the epochs run
 #' round(head(fit$rmse_history, 3), 4)
 #' round(tail(fit$rmse_history, 3), 4)
+#' @keywords internal
 morie_funkM <- function(ratings, n_users, n_items, factors = 8,
                         epochs = 60, lr = 0.005, reg = 0.02, seed = 0,
                         incremental = FALSE, epochs_per_factor = 20) {
@@ -356,6 +357,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' fit <- morie_funkM(ratings, n_users, n_items, factors = 3,
 #'                    epochs = 20, lr = 0.02, seed = 1)
 #' morie_funkM_rmse(ratings, fit$mu, fit$b_user, fit$b_item, fit$P, fit$Q)
+#' @keywords internal
 morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
   R <- .funkM_as_ratings(ratings)
   if (nrow(R) == 0L) stop("funkM: no ratings to score")
@@ -394,6 +396,7 @@ morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
 #' e <- morie_funkM_imputed_svd_error(ratings, n_users = 3, n_items = 3,
 #'                                    rank = 2, fill = "mean")
 #' is.numeric(e) || is.list(e)
+#' @keywords internal
 morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
                                           rank = 2, fill = "zero") {
   R  <- .funkM_as_ratings(ratings)

@@ -25,6 +25,7 @@ morie_default_workflow_map <- function() {
 #' @param script_map Character; the body checks with \code{is.character}.
 #' @return The value of \code{script_map}, as built in the body.
 #' @export
+#' @keywords internal
 validate_workflow_map <- function(script_map) {
   if (!is.character(script_map) || is.null(names(script_map))) {
     stop("`script_map` must be a named character vector.", call. = FALSE)

@@ -15,6 +15,7 @@
 #' @export
 #' @examples
 #' AICorder(prediction_errors = c(1, 2, 3, 4, 5, 6, 7, 8), n_samples = 5L)
+#' @keywords internal
 AICorder <- function(prediction_errors, n_samples, window = "hamming") {
   # Rangayyan eq. (7.60):  I(P) = log(eps_P) + 2P/Ne,  Ne = 0.4 N for a
   # Hamming window -- the EFFECTIVE sample count after windowing, which
@@ -85,6 +86,7 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 #' f0 <- 8
 #' x <- sin(2 * pi * f0 * (0:(n - 1))/fs)
 #' BartlettPSD(x, fs = fs, n_segments = 4)
+#' @keywords internal
 BartlettPSD <- function(x, fs = 1, n_segments = NULL,
                         segment_length = NULL) {
   # Rangayyan eqs. (6.14)-(6.16): split into K DISJOINT segments of M
@@ -135,6 +137,7 @@ BartlettPSD <- function(x, fs = 1, n_segments = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ARtoCepstrum(V)
+#' @keywords internal
 ARtoCepstrum <- function(a_coeffs, gain = NULL) {
   # Rangayyan eq. (7.65):
   #   h(1) = -a1;  h(n) = -a_n - sum_{k=1}^{n-1} (1 - k/n) a_k h(n-k)

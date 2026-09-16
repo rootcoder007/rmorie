@@ -73,6 +73,7 @@
 #' @export
 #' @examples
 #' morie_alf3df_schedule(n_steps = 5L)
+#' @keywords internal
 morie_alf3df_schedule <- function(n_steps, sigma_min = 0.002,
                                   sigma_max = 80, rho = 7) {
   n <- as.integer(n_steps)
@@ -101,6 +102,7 @@ morie_alf3df_schedule <- function(n_steps, sigma_min = 0.002,
 #' e <- rmorie:::.ghc_rng(5)
 #' e <- rmorie:::.ghc_rng(5)
 #' morie_alf3df_rotation(e)
+#' @keywords internal
 morie_alf3df_rotation <- function(e) {
   u1 <- .ghc_unif(e, 1L)
   u2 <- .ghc_unif(e, 1L)
@@ -141,6 +143,7 @@ morie_alf3df_rotation <- function(e) {
 #' e <- rmorie:::.ghc_rng(5)
 #' e <- rmorie:::.ghc_rng(5)
 #' morie_alf3df_augment(TRUEX, e)
+#' @keywords internal
 morie_alf3df_augment <- function(x, e) {
   n <- nrow(x)
   if (!n) {
@@ -181,6 +184,7 @@ morie_alf3df_augment <- function(x, e) {
 #' oracle <- function(x, sigma) TRUEX
 #' start <- matrix(0, NA_, 3L)
 #' morie_alf3df_step(start, 4, oracle, 1, order = "euler")
+#' @keywords internal
 morie_alf3df_step <- function(x, t, score_fn, sigma_next = NULL,
                               gamma = 0, noise_scale = 1,
                               step_scale = 1, order = "heun", e = NULL,
@@ -246,6 +250,7 @@ morie_alf3df_step <- function(x, t, score_fn, sigma_next = NULL,
 #' NA_ <- 6L
 #' shrink <- function(x, sigma) (1/(1 + sigma)) * x
 #' morie_alf3df_sample(NA_, shrink, 5L, seed = 3)
+#' @keywords internal
 morie_alf3df_sample <- function(shape_n, score_fn, n_steps = 8L,
                                 sigma_min = 0.002, sigma_max = 80,
                                 rho = 7, gamma = 0, noise_scale = 1,
@@ -285,6 +290,7 @@ morie_alf3df_sample <- function(shape_n, score_fn, n_steps = 8L,
 #' shrink <- function(x, sigma) (1/(1 + sigma)) * x
 #' NOISY <- matrix(0, NA_, 3L)
 #' morie_alf3df(NOISY, 4, shrink, sigma_next = 1)
+#' @keywords internal
 morie_alf3df <- function(x, t, score_fn, ...) {
   r <- morie_alf3df_step(x, t, score_fn, ...)
   nx <- r$x
@@ -317,6 +323,7 @@ morie_alf3df <- function(x, t, score_fn, ...) {
 #' @export
 #' @examples
 #' morie_alf3df_cheatsheet()
+#' @keywords internal
 morie_alf3df_cheatsheet <- function() {
   paste0(
     "alf3df: AlphaFold-3 style diffusion step. orders ",

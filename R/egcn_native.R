@@ -39,6 +39,7 @@
 #' r <- equivariantgraphconv(H = rnorm(10), X = rnorm(10), layers = rnorm(10), phi_e = rnorm(10),
 #'   phi_x = rnorm(10), phi_h = rnorm(10))
 #' TRUE
+#' @keywords internal
 equivariantgraphconv <- function(H, X, layers, phi_e, phi_x, phi_h,
                                 A = NULL, C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -70,6 +71,7 @@ equivariantgraphconv <- function(H, X, layers, phi_e, phi_x, phi_h,
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- e_gcn(H, X, layers = 2L, phi_e, phi_x, phi_h)
 #' str(r, max.level = 1)
+#' @keywords internal
 e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                   C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -102,6 +104,7 @@ e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- morie_egcn(H, X, layers = 2L, phi_e, phi_x, phi_h)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_egcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                        C = NULL) {
   list(estimate = run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C),

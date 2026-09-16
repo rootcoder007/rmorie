@@ -253,6 +253,7 @@ morie_synth_control <- function(data, outcome, unit, time,
 #'   Synthetic control methods for comparative case studies.
 #'   \emph{JASA}, 105(490), 493--505.
 #' @export
+#' @keywords internal
 print.morie_synth <- function(x, ...) {
   cat("Synthetic control (rmorie native)\n")
   cat("  treated unit :", as.character(x$treated_unit), "\n")

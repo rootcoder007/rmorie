@@ -24,6 +24,7 @@
 #' @export
 #' @examples
 #' annealing_ladder(n_steps = 5L)
+#' @keywords internal
 annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
                              kind = "geometric") {
   n_steps <- as.integer(n_steps)
@@ -69,6 +70,7 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
 #' \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{n_particles},
 #' \code{maximise}, \code{note}, \code{method}.
 #' @export
+#' @keywords internal
 smcopt <- function(objective, initial, n_particles = 200, n_steps = 30,
                    phi_max = 50.0, phi_min = 0.1, kind = "geometric",
                    kernel = NULL, ess_threshold = 0.5,

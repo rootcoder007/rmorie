@@ -166,6 +166,7 @@
 #' \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{n_basis},
 #' \code{degree}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
                                             degree = 3L, max_iter = 300L,
                                             tol = 1e-10, var_floor = 1e-8) {

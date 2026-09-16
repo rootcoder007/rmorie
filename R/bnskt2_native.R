@@ -88,6 +88,7 @@
 #' v <- runif(200, -1, 1)
 #' y <- 1 + 0.5 * v + 0.8 * pmax(v, 0) + rnorm(200, 0, 0.1)
 #' local_polynomial_slope(v, y, kink = 0, bandwidth = 0.5, side = "right")
+#' @keywords internal
 local_polynomial_slope <- function(v, y, kink, bandwidth, order = 2L,
                                    side = "right", kernel = "triangular") {
   if (!(side %in% c("left", "right")))
@@ -129,6 +130,7 @@ local_polynomial_slope <- function(v, y, kink, bandwidth, order = 2L,
 #' r <- rkd_estimate(v, y, kink = 0, bandwidth = 0.5,
 #'                   policy_slope_change = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
                          kernel = "triangular",
                          policy_slope_change = NULL, B = NULL,
@@ -188,6 +190,7 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
 #' v <- runif(400, -1, 1)
 #' r <- density_kink_test(v, kink = 0, bandwidth = 0.5)
 #' str(r, max.level = 1)
+#' @keywords internal
 density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
   v <- as.numeric(V)
   kp <- as.numeric(kink)
@@ -234,6 +237,7 @@ density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
 #' Z <- cbind(rnorm(300), rnorm(300))
 #' r <- covariate_kink_test(v, Z, kink = 0, bandwidth = 0.5)
 #' str(r, max.level = 1)
+#' @keywords internal
 covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
                                 kernel = "triangular") {
   r <- .side_fit(V, Z, kink, bandwidth, as.integer(order), "right", kernel)

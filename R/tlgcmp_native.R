@@ -47,6 +47,7 @@
 #' @param mode One of \code{"counterfactual"}, \code{"positivity"}, \code{"sequential"}.
 #' @return The value of \code{g_computation}.
 #' @export
+#' @keywords internal
 morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
                          covariate_probs = NULL,
                          Q_functions = NULL, L_supports = NULL,
@@ -80,6 +81,7 @@ morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' positivity_check(V)
+#' @keywords internal
 positivity_check <- function(g, delta = 0.01) {
   gg <- as.numeric(g)
   if (length(gg) == 0L)
@@ -107,6 +109,7 @@ positivity_check <- function(g, delta = 0.01) {
 #' @examples
 #' g_computation(list("a", "b"), outcome_means = c(0.3, 0.7),
 #'               covariate_probs = c(0.4, 0.6))
+#' @keywords internal
 g_computation <- function(strata, outcome_means, covariate_probs) {
   s <- as.list(strata)
   p <- as.numeric(covariate_probs)
@@ -130,6 +133,7 @@ g_computation <- function(strata, outcome_means, covariate_probs) {
 #' @return A list with \code{estimate}, \code{psi}, \code{horizon}, \code{method},
 #' \code{note}, \code{assumptions}.
 #' @export
+#' @keywords internal
 sequential_g_formula <- function(Q_functions, L_supports, L_probs,
                                  rule) {
   T <- length(L_supports)
@@ -176,6 +180,7 @@ sequential_g_formula <- function(Q_functions, L_supports, L_probs,
 #' @examples
 #' counterfactual_mean(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   L = c(1, 2, 3, 4, 5, 6, 7, 8), a_star = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
   y <- as.numeric(Y)
   a <- as.numeric(A)

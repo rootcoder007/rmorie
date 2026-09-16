@@ -124,6 +124,7 @@
 #' @export
 #' @examples
 #' is_order_sensitive("mixed")
+#' @keywords internal
 is_order_sensitive <- function(method) {
   m <- as.character(method)
   if (!(m %in% .METHODS)) {
@@ -151,6 +152,7 @@ is_order_sensitive <- function(method) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' weighted(V)
+#' @keywords internal
 weighted <- function(scores, weights = NULL) {
   S <- lapply(scores, function(s) as.list(s))
   if (length(S) == 0L) {
@@ -212,6 +214,7 @@ weighted <- function(scores, weights = NULL) {
 #'                  if (ctx$n_ratings < 5) 0L else 1L,
 #'                context = list(n_ratings = 2))
 #' str(r, max.level = 1)
+#' @keywords internal
 switching <- function(scores, criterion, context = NULL) {
   S <- lapply(scores, function(s) as.list(s))
   c_idx <- as.integer(criterion(context))
@@ -247,6 +250,7 @@ switching <- function(scores, criterion, context = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' mixed(V)
+#' @keywords internal
 mixed <- function(recommendations, top_k = NULL) {
   L <- lapply(recommendations, function(r) as.list(r))
   if (length(L) == 0L) {
@@ -293,6 +297,7 @@ mixed <- function(recommendations, top_k = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' feature_combination(V, V)
+#' @keywords internal
 feature_combination <- function(content_features, collaborative_features) {
   C <- .hybRC_mat(content_features)
   D <- .hybRC_mat(collaborative_features)
@@ -334,6 +339,7 @@ feature_combination <- function(content_features, collaborative_features) {
 #' @export
 #' @examples
 #' cascade(primary = list(a = 1, b = 2), secondary = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 cascade <- function(primary, secondary, tol = 1e-9) {
   P <- as.list(primary)
   S <- as.list(secondary)
@@ -379,6 +385,7 @@ cascade <- function(primary, secondary, tol = 1e-9) {
 #'   r <- feature_augmentation(base(matrix(1:6, 3, 2)), consumer)
 #'   str(r, max.level = 1)
 #' }
+#' @keywords internal
 feature_augmentation <- function(base_output, consumer) {
   list(
     result = consumer(base_output),
@@ -404,6 +411,7 @@ feature_augmentation <- function(base_output, consumer) {
 #' d <- data.frame(x = 1:10, y = 2 * (1:10) + rnorm(10, 0, 0.1))
 #' r <- meta_level(mb, cons, d)
 #' str(r, max.level = 1)
+#' @keywords internal
 meta_level <- function(model_builder, consumer, data) {
   model <- model_builder(data)
   estimate <- consumer(model)

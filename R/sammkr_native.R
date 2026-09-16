@@ -55,6 +55,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' average_of_valid_masks(V)
+#' @keywords internal
 average_of_valid_masks <- function(masks) {
   if (length(masks) == 0)
     stop("sammkr: no masks given")
@@ -84,6 +85,7 @@ average_of_valid_masks <- function(masks) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' iou(V, V)
+#' @keywords internal
 iou <- function(a, b, threshold = 0.5) {
   x <- as.numeric(.sammkr_flat(a) > threshold)
   y <- as.numeric(.sammkr_flat(b) > threshold)
@@ -108,6 +110,7 @@ iou <- function(a, b, threshold = 0.5) {
 #' @export
 #' @examples
 #' min_loss_over_masks(list(c(1, 0), c(0, 1)), c(1, 0), function(p, t) sum((p - t)^2))
+#' @keywords internal
 min_loss_over_masks <- function(predictions, target, loss_fn) {
   if (length(predictions) == 0)
     stop("sammkr: no predictions given")
@@ -132,6 +135,7 @@ min_loss_over_masks <- function(predictions, target, loss_fn) {
 #' @export
 #' @examples
 #' whole_part_subpart(list(c(1, 1, 1, 0), c(1, 1, 0, 0), c(1, 0, 0, 0)))
+#' @keywords internal
 whole_part_subpart <- function(masks, target_hierarchy = NULL) {
   if (length(masks) != 3)
     stop(sprintf("sammkr: the paper's argument is about THREE outputs (whole, part, subpart), got %d",
@@ -167,6 +171,7 @@ whole_part_subpart <- function(masks, target_hierarchy = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rank_masks(V, V)
+#' @keywords internal
 rank_masks <- function(masks, predicted_iou, target = NULL) {
   p <- as.numeric(unlist(predicted_iou))
   if (length(p) != length(masks))

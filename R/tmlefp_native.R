@@ -22,6 +22,7 @@
 #' @export
 #' @examples
 #' alpha_from_gamma(gamma = 9)
+#' @keywords internal
 alpha_from_gamma <- function(gamma) {
   g <- as.numeric(gamma)
   if (g < 4) stop("tmlefp: gamma must be at least 4; below that the threshold 1/(alpha(1-alpha)) = gamma has no root in (0, 1/2]")
@@ -48,6 +49,7 @@ alpha_from_gamma <- function(gamma) {
 #' set.seed(1)
 #' e <- runif(100, 0.02, 0.98)
 #' str(optimal_alpha(e), max.level = 1)
+#' @keywords internal
 optimal_alpha <- function(pscore, sigma2_treated = NULL,
                           sigma2_control = NULL, tol = 1e-12,
                           max_iter = 200) {
@@ -110,6 +112,7 @@ optimal_alpha <- function(pscore, sigma2_treated = NULL,
 #' e <- runif(100, 0.02, 0.98)
 #' w <- rbinom(100, 1, e)
 #' str(optimal_alpha_att(e, w), max.level = 1)
+#' @keywords internal
 optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
                               max_iter = 200) {
   e <- as.numeric(pscore)
@@ -155,6 +158,7 @@ optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
 #' set.seed(1)
 #' e <- runif(20, 0.05, 0.95)
 #' owate_weights(e)
+#' @keywords internal
 owate_weights <- function(pscore, sigma2_treated = NULL,
                           sigma2_control = NULL) {
   e <- as.numeric(pscore)
@@ -227,6 +231,7 @@ owate_weights <- function(pscore, sigma2_treated = NULL,
 #' y <- 1 + 0.8 * w + X + rnorm(n, 0, 0.5)
 #' r <- morie_tmlefp(y, w, e)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tmlefp <- function(y, treatment, pscore,
                           sigma2_treated = NULL,
                           sigma2_control = NULL,

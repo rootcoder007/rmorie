@@ -106,6 +106,7 @@
 #' @export
 #' @examples
 #' CohensD(m1 = 10, m2 = 8, s1 = 2, s2 = 2.5, n1 = 30, n2 = 28)
+#' @keywords internal
 CohensD <- function(m1, m2, s1, s2, n1, n2) {
   n1 <- as.integer(n1)
   n2 <- as.integer(n2)
@@ -171,6 +172,7 @@ CohensD <- function(m1, m2, s1, s2, n1, n2) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CramerRao(V)
+#' @keywords internal
 CramerRao <- function(fisher_info, var_estimate = NULL) {
   if (is.matrix(fisher_info)) {
     info <- matrix(as.numeric(fisher_info), nrow(fisher_info))
@@ -323,6 +325,7 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #' @examples
 #' CoxPL(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
                   tol = 1e-10) {
   time <- as.numeric(time)
@@ -493,6 +496,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' cons <- list(function(x) 1 - x[1])
 #' r <- PenaltyMin(f, cons, x0 = c(2, 0), mu = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
                        growth = 10, n_inner = 200L, step0 = 1,
                        h = 1e-6, armijo = 1e-4, max_halving = 40L) {
@@ -586,6 +590,7 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #' prox <- function(x, t) soft(x, 0.5 * t)
 #' r <- ProxGrad(f, gf, prox, x0 = c(0, 0), lr = 0.5)
 #' str(r, max.level = 1)
+#' @keywords internal
 ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
                      relaxation = 1) {
   x <- as.numeric(x0)
@@ -659,6 +664,7 @@ ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
 #' Xt <- matrix(rnorm(24, 2), 12, 2)
 #' r <- OtAdapt(Xs, Xt, epsilon = 0.5, n_iter = 200)
 #' str(r, max.level = 1)
+#' @keywords internal
 OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {
   Xs <- as.matrix(Xs)
   Xt <- as.matrix(Xt)

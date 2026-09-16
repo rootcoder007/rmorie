@@ -45,6 +45,7 @@
 #' @export
 #' @examples
 #' session_parallel_batches(list(c(1, 2, 3), c(4, 5), c(6, 7, 8, 9)), 2)
+#' @keywords internal
 session_parallel_batches <- function(sessions, batch_size) {
   S <- lapply(sessions, as.integer)
   if (any(vapply(S, length, integer(1)) < 2L))
@@ -102,6 +103,7 @@ session_parallel_batches <- function(sessions, batch_size) {
 #' @export
 #' @examples
 #' bpr_loss(r_target = 5L, r_negatives = 5L)
+#' @keywords internal
 bpr_loss <- function(r_target, r_negatives) {
   neg <- as.numeric(r_negatives)
   if (length(neg) == 0L)
@@ -118,6 +120,7 @@ bpr_loss <- function(r_target, r_negatives) {
 #' @export
 #' @examples
 #' top1_loss(r_target = 5L, r_negatives = 5L)
+#' @keywords internal
 top1_loss <- function(r_target, r_negatives, regularize = TRUE) {
   neg <- as.numeric(r_negatives)
   if (length(neg) == 0L)
@@ -145,6 +148,7 @@ top1_loss <- function(r_target, r_negatives, regularize = TRUE) {
 #' x <- c(1, -1)
 #' W <- matrix(rnorm(4), 2, 2)
 #' gru_step(x, h, W, W, W, W, W, W)
+#' @keywords internal
 gru_step <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
   n <- length(h)
   xv <- as.numeric(x)
@@ -169,6 +173,7 @@ gru_step <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
 #' @export
 #' @examples
 #' recall_at_k(ranked = c(1, 2, 3, 4, 5, 6, 7, 8), target = 5L)
+#' @keywords internal
 recall_at_k <- function(ranked, target, kk = 20L) {
   kk <- as.integer(kk)
   top <- as.integer(ranked)[seq_len(min(kk, length(ranked)))]
@@ -181,6 +186,7 @@ recall_at_k <- function(ranked, target, kk = 20L) {
 #' @export
 #' @examples
 #' mrr_at_k(ranked = c(1, 2, 3, 4, 5, 6, 7, 8), target = 5L)
+#' @keywords internal
 mrr_at_k <- function(ranked, target, kk = 20L) {
   kk <- as.integer(kk)
   top <- as.integer(ranked)[seq_len(min(kk, length(ranked)))]

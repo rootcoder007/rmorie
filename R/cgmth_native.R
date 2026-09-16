@@ -30,6 +30,7 @@
 #' @export
 #' @examples
 #' cgmth(function(x) sum(x^2), function(x) 2 * x, x0 = c(1, 1))
+#' @keywords internal
 cgmth <- function(f, grad_f, x0, tol = 1e-6, max_iter = 1000L,
                   full_output = FALSE) {
   x <- as.numeric(x0)

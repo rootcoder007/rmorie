@@ -189,6 +189,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rndnet(V)
+#' @keywords internal
 morie_rndnet <- function(observations, n_hidden = 64, n_out = 8, lr = 0.05, clip = 5.0,
                          normalize_obs = TRUE, normalize_reward = TRUE,
                          init_steps = 0, gamma_int = 0.99, seed = 0,
@@ -329,6 +330,7 @@ morie_rndnet <- function(observations, n_hidden = 64, n_out = 8, lr = 0.05, clip
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rndnet_combine_returns(V, V)
+#' @keywords internal
 morie_rndnet_combine_returns <- function(reward_ext, reward_int,
                                          gamma_ext = 0.999, gamma_int = 0.99,
                                          done = NULL) {

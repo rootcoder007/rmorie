@@ -139,6 +139,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' merge_panels(D, V)
+#' @keywords internal
 merge_panels <- function(panels, study_snps) {
   if (length(panels) == 0L) {
     stop("impfun: no reference panels given")
@@ -192,6 +193,7 @@ merge_panels <- function(panels, study_snps) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' copying_model(V, V)
+#' @keywords internal
 copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) {
   h <- as.integer(study_hap)
   R_list <- .impfun_as_int_list(reference_haps)
@@ -255,6 +257,7 @@ copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
 #' @param site Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{dosage}, \code{allele_freq}, \code{certainty}, \code{note}.
 #' @export
+#' @keywords internal
 impute_dosage <- function(posterior, reference_haps, site) {
   P <- .impfun_as_double_matrix(posterior)
   R_mat <- .impfun_as_double_matrix(reference_haps)
@@ -286,6 +289,7 @@ impute_dosage <- function(posterior, reference_haps, site) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' info_score(V)
+#' @keywords internal
 info_score <- function(dosages) {
   d <- .impfun_as_double_vec(dosages)
   n <- length(d)
@@ -325,6 +329,7 @@ info_score <- function(dosages) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' concordance(V, V)
+#' @keywords internal
 concordance <- function(imputed, truth) {
   a <- .impfun_as_double_vec(imputed)
   b <- .impfun_as_double_vec(truth)

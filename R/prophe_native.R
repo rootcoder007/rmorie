@@ -39,6 +39,7 @@
 #' t <- 1:60
 #' y <- sin(2 * pi * t / 12) + 0.05 * t + rnorm(60) * 0.1
 #' prophe_additive_components(t, y)
+#' @keywords internal
 prophe_additive_components <- function(t, y, seasonalities = NULL,
                                        holidays = NULL,
                                        holiday_window = c(0, 0), ...) {
@@ -120,6 +121,7 @@ prophe_additive_components <- function(t, y, seasonalities = NULL,
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' prophe_component_shares(D)
+#' @keywords internal
 prophe_component_shares <- function(components) {
   out <- list()
   for (nm in names(components)) {
@@ -152,6 +154,7 @@ prophe_component_shares <- function(components) {
 #' @export
 #' @examples
 #' prophe_cheatsheet()
+#' @keywords internal
 prophe_cheatsheet <- function() {
   paste0("prophe: same model and source as prphet (Taylor & Letham ",
          "2018 eq. 1) -- this is the DECOMPOSITION view. Fit once, ",
@@ -180,6 +183,7 @@ prophe_cheatsheet <- function() {
 #' t <- 1:60
 #' y <- sin(2 * pi * t / 12) + 0.05 * t + rnorm(60) * 0.1
 #' morie_prophe(t, y)
+#' @keywords internal
 morie_prophe <- function(t, y, seasonalities = NULL, holidays = NULL,
                          holiday_window = c(0, 0), ...) {
   prophe_additive_components(t, y, seasonalities = seasonalities,

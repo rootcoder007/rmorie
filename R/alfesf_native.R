@@ -251,6 +251,7 @@
 #' pae <- morie_alfesf_esmfold_confidence(pae_logits = pae_logits)
 #' dim(pae$pae)
 #' round(pae$ptm, 4)
+#' @keywords internal
 morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
                                             pae_logits = NULL,
                                             features = NULL, weights = NULL,

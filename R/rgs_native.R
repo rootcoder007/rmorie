@@ -46,6 +46,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rgs_functional_regression(V, V)
+#' @keywords internal
 morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"

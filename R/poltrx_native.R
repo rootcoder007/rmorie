@@ -35,6 +35,7 @@
 #' @export
 #' @examples
 #' poltrx_level_parameters(level = 1)
+#' @keywords internal
 poltrx_level_parameters <- function(level, c = 1.0, rule = "m_squared") {
   m <- as.integer(level)
   if (m < 1L) stop("poltrx: levels are numbered from 1")
@@ -68,6 +69,7 @@ poltrx_level_parameters <- function(level, c = 1.0, rule = "m_squared") {
 #' @export
 #' @examples
 #' poltrx_continuity_regime("m_squared")
+#' @keywords internal
 poltrx_continuity_regime <- function(rule) {
   rule <- as.character(rule)
   if (!(rule %in% .POLTRX_RULES)) {
@@ -119,6 +121,7 @@ poltrx_continuity_regime <- function(rule) {
 #' @export
 #' @examples
 #' poltrx_partition_index(0.3, level = 2)
+#' @keywords internal
 poltrx_partition_index <- function(x, level, lo = 0.0, hi = 1.0) {
   m <- as.integer(level)
   a <- as.numeric(lo)
@@ -164,6 +167,7 @@ poltrx_partition_index <- function(x, level, lo = 0.0, hi = 1.0) {
 #' @export
 #' @examples
 #' poltrx_finite_tree(levels = 5L)
+#' @keywords internal
 poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
                                rng = NULL, seed = 0) {
   M <- as.integer(levels)
@@ -217,6 +221,7 @@ poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
 #' @examples
 #' e <- rmorie:::.ghc_rng(1)
 #' poltrx_gamma(e, shape = 2.5)
+#' @keywords internal
 poltrx_gamma <- function(e, shape) {
   if (shape < 1) {
     # Python: u = max(r.uniform(), 1e-15); gamma(shape+1) * u**(1/shape)
@@ -252,6 +257,7 @@ poltrx_gamma <- function(e, shape) {
 #' @export
 #' @examples
 #' poltrx_eps_from_key(key = 5L)
+#' @keywords internal
 poltrx_eps_from_key <- function(key) {
   if (key == "()") {
     return(integer(0))
@@ -273,6 +279,7 @@ poltrx_eps_from_key <- function(key) {
 #' @examples
 #' tr <- poltrx_finite_tree(levels = 3, seed = 1)
 #' poltrx_set_probability(c(0L, 1L), tr)
+#' @keywords internal
 poltrx_set_probability <- function(epsilon, tree) {
   eps <- as.integer(epsilon)
   if (length(eps) > tree$levels) {
@@ -310,6 +317,7 @@ poltrx_set_probability <- function(epsilon, tree) {
 #' @examples
 #' tr <- poltrx_finite_tree(levels = 3, seed = 1)
 #' str(poltrx_tree_density(tr, level = 2), max.level = 1)
+#' @keywords internal
 poltrx_tree_density <- function(tree, level = NULL, lo = 0.0, hi = 1.0) {
   M <- if (is.null(level)) as.integer(tree$levels) else as.integer(level)
   n <- 2L^M
@@ -356,6 +364,7 @@ poltrx_tree_density <- function(tree, level = NULL, lo = 0.0, hi = 1.0) {
 #' @export
 #' @examples
 #' morie_poltrx(levels = 5L)
+#' @keywords internal
 morie_poltrx <- function(levels, c = 1.0, rule = "m_squared", seed = 0) {
   lp <- poltrx_level_parameters(levels, c, rule)
   cr <- poltrx_continuity_regime(lp$rule)

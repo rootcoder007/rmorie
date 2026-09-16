@@ -307,6 +307,7 @@
 #' @examples
 #' set.seed(1)
 #' r <- ctmle_sequence(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+#' @keywords internal
 ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
                            trim = 0.005, scale = NULL,
                            q_covariates = NULL) {
@@ -530,6 +531,7 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @examples
 #' set.seed(1)
 #' r <- tmle_cdrs(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+#' @keywords internal
 tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
                       n_folds = 5L, trim = 0.005, scale = NULL,
                       q_covariates = NULL) {

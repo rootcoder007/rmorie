@@ -68,6 +68,7 @@ clpopt_pivots <- c("bland", "dantzig")
 #' @examples
 #' sf <- standard_form(c = c(1, 2), A_ub = rbind(c(1, 1)), b_ub = 4)
 #' str(sf, max.level = 1)
+#' @keywords internal
 standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
                           b_eq = NULL, upper = NULL) {
   cv <- as.numeric(c)
@@ -305,6 +306,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'                     b_ub = c(4, 12, 18))
 #' r <- simplex(sf$c, sf$A, sf$b)
 #' str(r, max.level = 1)
+#' @keywords internal
 simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
                     initial_basis = NULL) {
   if (!(rule %in% clpopt_pivots))
@@ -455,6 +457,7 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
 #'                   b_ub = c(4, 12, 18), maximise = TRUE)
 #' stopifnot(abs(r$fun - 36) < 1e-6)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_clpopt <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
                          b_eq = NULL, upper = NULL, rule = "bland",
                          maximise = FALSE, max_iter = 10000) {

@@ -417,6 +417,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SpAcf(V, V)
+#' @keywords internal
 SpAcf <- function(coords, z, bins = NULL, cutoff = NULL) {
   # Empirical correlogram R(h) = C(h)/C(0), Schabenberger & Gotway (2005)
   # Sec. 1.4.2 and Chapter problem 1.14.  C(0) uses the 1/n divisor.
@@ -498,6 +499,7 @@ SpAcf <- function(coords, z, bins = NULL, cutoff = NULL) {
 #' W <- matrix(0, 5, 5)
 #' W[abs(row(W) - col(W)) == 1] <- 1
 #' LisaI(rnorm(5), W)
+#' @keywords internal
 LisaI <- function(x, w) {
   # eq (1.17), Sec. 1.3.3.  sum_i I(s_i) = w.. I is checked, not assumed:
   # a non-zero gap means the weights or the scaling are wrong.
@@ -543,6 +545,7 @@ LisaI <- function(x, w) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MantelM2(V, V)
+#' @keywords internal
 MantelM2 <- function(coords, x, w = NULL, u = NULL) {
   # eqs (1.4) and (1.5) with the book's own default choices,
   # W_ij = ||s_i - s_j|| and U_ij = |Z_i - Z_j|, plus the regression slope
@@ -604,6 +607,7 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
 #' W <- matrix(0, 5, 5)
 #' W[abs(row(W) - col(W)) == 1] <- 1
 #' MantelZ(coords, rnorm(5), W)
+#' @keywords internal
 MantelZ <- function(coords, x, w, u = NULL) {
   # Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states
   # the approach but does not print Eg[M2] or Varg[M2]; both are derived
@@ -678,6 +682,7 @@ MantelZ <- function(coords, x, w, u = NULL) {
 #' W <- matrix(0, 6, 6)
 #' W[abs(row(W) - col(W)) == 1] <- 1
 #' MoranRes(rnorm(6), W)
+#' @keywords internal
 MoranRes <- function(residuals, w, x = NULL) {
   # eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book's own
   # formula, Sec. 1.3.2, and is reproduced term for term.  The variance is
@@ -756,6 +761,7 @@ MoranRes <- function(residuals, w, x = NULL) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' Pcf(D)
+#' @keywords internal
 Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
   # R(h) = K'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the
   # intensity of eq (3.8).  The naive estimator is NEGATIVELY BIASED (the
@@ -869,6 +875,7 @@ Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SphVario(V)
+#' @keywords internal
 SphVario <- function(h, c0 = 0, c = 1, a = 1) {
   # gamma(h) = c0 + c{3h/(2a) - (1/2)(h/a)^3} on 0 < h <= a, eq (4.15)
   # plus the nugget of Sec. 4.3.6; covariance eq (4.14).  gamma(0) = 0
@@ -924,6 +931,7 @@ SphVario <- function(h, c0 = 0, c = 1, a = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Pgram(V)
+#' @keywords internal
 Pgram <- function(y) {
   # eq (4.57) specialised to R^1 in Sec. 4.7.1.1, checked against the
   # covariance form of eq (4.58).  THE ZERO FREQUENCY IS EXCLUDED: the
@@ -986,6 +994,7 @@ Pgram <- function(y) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SmPgram(V)
+#' @keywords internal
 SmPgram <- function(y, span = 3L) {
   # Daniell (equal-weight) smoothing of the eq (4.57) periodogram.  NOT in
   # Schabenberger & Gotway: "Daniell" and "smoothed periodogram" are
@@ -1041,6 +1050,7 @@ SmPgram <- function(y, span = 3L) {
 #' W <- matrix(0, 5, 5)
 #' W[abs(row(W) - col(W)) == 1] <- 1
 #' SpecRad(W)
+#' @keywords internal
 SpecRad <- function(g, iters = 400L) {
   # The SAR bound |rho| < 1/rho(W) comes from the non-singularity
   # condition in the PROSE of Sec. 6.2.2.1, p. 336 (1/theta_min < rho <
@@ -1141,6 +1151,7 @@ SpecRad <- function(g, iters = 400L) {
 #' x <- rnorm(12)
 #' y <- 1 + 2 * x + rnorm(12, 0, 0.3)
 #' str(SpErrMod(x, y, W), max.level = 1)
+#' @keywords internal
 SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
   # SAR ERROR model, eqs (6.35)-(6.37) of Sec. 6.2.2.1 -- NOT the spatially
   # lagged model of eq (6.38).  Whitening by A = I - rho W profiles beta
@@ -1248,6 +1259,7 @@ SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
 #' W <- matrix(0, 8, 8)
 #' W[abs(row(W) - col(W)) == 1] <- 1
 #' SpKappa(rbinom(8, 1, 0.5), rbinom(8, 1, 0.5), W)
+#' @keywords internal
 SpKappa <- function(x, y, w) {
   # Cohen's kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than
   # same-site pairs; the pairing is Mantel's M2, eq (1.5), with
@@ -1316,6 +1328,7 @@ SpKappa <- function(x, y, w) {
 #' W <- matrix(0, 8, 8)
 #' W[abs(row(W) - col(W)) == 1] <- 1
 #' str(LisaClust(rnorm(8), W), max.level = 1)
+#' @keywords internal
 LisaClust <- function(x, w, alpha = 0.05) {
   # Local Moran eq (1.17) with EXACT conditional-randomization moments
   # (simple random sampling without replacement of the other n-1
@@ -1407,6 +1420,7 @@ LisaClust <- function(x, w, alpha = 0.05) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' MedPolish(M)
+#' @keywords internal
 MedPolish <- function(values, grid = NULL, iters = 10L) {
   # Tukey (1977), Exploratory Data Analysis.  NOT in Schabenberger &
   # Gotway -- a fixed-string search for "polish" returns nothing; the
@@ -1494,6 +1508,7 @@ MedPolish <- function(values, grid = NULL, iters = 10L) {
 #' y <- c(rnorm(5, 1), rnorm(8, 2), rnorm(3, 0))
 #' cl <- c(rep(0, 5), rep(1, 8), rep(2, 3))
 #' ShrinkPred(y, cl, sigma2_u = 0.5, sigma2_e = 1)
+#' @keywords internal
 ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
   # thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),
   # lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on the
@@ -1562,6 +1577,7 @@ ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
 #' @export
 #' @examples
 #' SparseVector(queries = c(1, 2, 3, 4, 5, 6, 7, 8), threshold = 0.5)
+#' @keywords internal
 SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
                          threshold_noise = 0, query_noise = NULL) {
   # AboveThreshold / sparse vector (Dwork & Roth 2014, Alg. 2; Hardt &
@@ -1636,6 +1652,7 @@ SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
 #' @export
 #' @examples
 #' SpecDec(draft = c(0.5, 0.3, 0.2), target = c(0.4, 0.4, 0.2), gamma = 4L)
+#' @keywords internal
 SpecDec <- function(draft, target, gamma = 4L) {
   # alpha = sum_x min(p,q) = 1 - TV(p,q); E[tokens] =
   # (1 - alpha^(gamma+1))/(1 - alpha), capped at gamma+1 (a rejected token
@@ -1692,6 +1709,7 @@ SpecDec <- function(draft, target, gamma = 4L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CrossSpec(V, V)
+#' @keywords internal
 CrossSpec <- function(x, y) {
   # Raw cross-periodogram S_xy(w) = X(w) conj(Y(w)) / (2 pi n) on
   # MEAN-REMOVED records (Brillinger 2001, Ch. 7).  NOT in Schabenberger &
@@ -1750,6 +1768,7 @@ CrossSpec <- function(x, y) {
 #' x <- s + 0.3 * rnorm(n)
 #' y <- s + 0.3 * rnorm(n)
 #' str(MsCoh(x, y, nperseg = 128), max.level = 1)
+#' @keywords internal
 MsCoh <- function(x, y, nperseg = NULL, overlap = 0.5) {
   # C_xy = |S_xy|^2 / (S_xx S_yy) by Welch averaging (Bendat & Piersol
   # 2010, Ch. 5).  NOT in Schabenberger & Gotway -- a fixed-string search
@@ -1830,6 +1849,7 @@ MsCoh <- function(x, y, nperseg = NULL, overlap = 0.5) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SpecAnom(V)
+#' @keywords internal
 SpecAnom <- function(x, q = 3L) {
   # Spectral residual saliency (Hou & Zhang 2007).  NOT in Schabenberger &
   # Gotway.  THE PHASE IS KEPT: rebuilding from the residual amplitude
@@ -1889,6 +1909,7 @@ SpecAnom <- function(x, q = 3L) {
 #' A[3, 4] <- 0.05
 #' A <- A + t(A)
 #' SpecClust(A, k = 2L)
+#' @keywords internal
 SpecClust <- function(a, k = 2L) {
   # L_sym = I - D^-1/2 A D^-1/2.  The clustering lives in the SMALLEST
   # eigenvalues, so power iteration runs on 2I - L_sym and the values are
@@ -1973,6 +1994,7 @@ SpecClust <- function(a, k = 2L) {
 #' W[abs(row(W) - col(W)) == 1] <- 1
 #' X <- matrix(rnorm(30), 10, 3)
 #' str(SpatialPca(X, W), max.level = 1)
+#' @keywords internal
 SpatialPca <- function(x, w, naxes = 2L) {
   # MULTISPATI: diagonalise H = (1/n) X' ((W + W')/2) X on the centred,
   # unit-variance X, so an axis is scored by SPATIAL covariance, not
@@ -2045,6 +2067,7 @@ SpatialPca <- function(x, w, naxes = 2L) {
 #' x <- rnorm(12)
 #' y <- 1 + sin(x) + rnorm(12, 0, 0.2)
 #' str(SpGam(y, x, coords, lam = 0.1), max.level = 1)
+#' @keywords internal
 SpGam <- function(y, x, coords, lam = 0) {
   # Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved as
   # the saddle-point system [K + n lam I, T; T', 0].  T = [1, s1, s2, X]
@@ -2128,6 +2151,7 @@ SpGam <- function(y, x, coords, lam = 0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' SpikeInfo(V, V)
+#' @keywords internal
 SpikeInfo <- function(spike, stim, nbins = 2L) {
   # I = H(R) - H(R|S), bits.  H_noise is the STIMULUS-WEIGHTED average of
   # the per-stimulus entropies; weighting them equally inflates I whenever
@@ -2217,6 +2241,7 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
 #' a <- 0.5 * h[, 1] + rnorm(30)
 #' y <- a + h[, 1] + rnorm(30, 0, 0.3)
 #' ShiftInt(y, a, h, delta = 0.5)
+#' @keywords internal
 ShiftInt <- function(y, a, h, delta = 1, trim = NULL) {
   # psi = E[ {g(A - delta | H) / g(A | H)} Y ] -- the density ratio at the
   # BACK-shifted exposure.  Forward-shifting is the sign error this

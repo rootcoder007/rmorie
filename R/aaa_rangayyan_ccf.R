@@ -80,6 +80,7 @@
 #'     amp * sin(2 * pi * cycles_hz * (seq_len(n) - 1L)/fs + phase)
 #' }
 #' Glr(sine(400, 5), 201, order = 4)
+#' @keywords internal
 Glr <- function(x, m, n = NULL, order = 4) {
   # eqs (8.30)-(8.31), after Appel and v. Brandt.  The reference window
   # GROWS from the start of the segment -- that is what separates GLR from
@@ -140,6 +141,7 @@ Glr <- function(x, m, n = NULL, order = 4) {
 #'     amp * sin(2 * pi * cycles_hz * (seq_len(n) - 1L)/fs + phase)
 #' }
 #' EegAdapt(c(sine(200, 5), sine(200, 40)), 100, window = 60, step = 20)
+#' @keywords internal
 EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
                      threshold = NULL) {
   # Section 8.5.3.  On a boundary the reference window RESTARTS; without
@@ -238,6 +240,7 @@ EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' XCorr(V, V)
+#' @keywords internal
 XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
   # R_xy(m) = (1/N) sum_n x(n) y(n + m).  A POSITIVE lag means y trails x.
   xs <- as.numeric(x)
@@ -287,6 +290,7 @@ XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' XCorrDisc(V, V)
+#' @keywords internal
 XCorrDisc <- function(x, y, delays = NULL) {
   # The RAW sum, not divided by N: the matched-filter output AT each
   # instant IS this sum, so its peak locates the pattern.  Neither XCorr
@@ -336,6 +340,7 @@ XCorrDisc <- function(x, y, delays = NULL) {
 #' @examples
 #' XCorrCont(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   t = c(1, 2, 3, 4, 5, 6, 7, 8), delays = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 XCorrCont <- function(x, y, t, delays) {
   # The continuous-time form, evaluated by the trapezoidal rule on the
   # samples that BOTH signals cover.  Long delays use less data, so the
@@ -392,6 +397,7 @@ XCorrCont <- function(x, y, t, delays) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' XCorrProc(V, V)
+#' @keywords internal
 XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
   # The ensemble expectation is estimated by a TIME average, which is only
   # legitimate under joint stationarity and ergodicity.
@@ -430,6 +436,7 @@ XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CorrConv(V, V)
+#' @keywords internal
 CorrConv <- function(x, y) {
   # Correlation IS convolution with one sequence reversed.
   xs <- as.numeric(x)
@@ -481,6 +488,7 @@ CorrConv <- function(x, y) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' NccfTpl(V, V)
+#' @keywords internal
 NccfTpl <- function(x, template) {
   # Normalized per shift, so a LOUD stretch cannot outscore a matching one
   # -- that is the whole reason to normalize rather than take the raw CCF.
@@ -523,6 +531,7 @@ NccfTpl <- function(x, template) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CorrDot(V, V)
+#' @keywords internal
 CorrDot <- function(x, y) {
   # eq (4.25).  Delegates to DotProd -- one copy of the arithmetic.
   raw <- DotProd(x, y)
@@ -558,6 +567,7 @@ CorrDot <- function(x, y) {
 #' @export
 #' @examples
 #' EegAcf(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 EegAcf <- function(x, fs, maxlag = NULL) {
   # phi(m) = (1/N) sum_n x(n) x(n + m).  BOTH the raw phi and the
   # normalized rho are returned: rho is what a threshold can be set on,
@@ -617,6 +627,7 @@ EegAcf <- function(x, fs, maxlag = NULL) {
 #' @export
 #' @examples
 #' AlphaRhy(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
   # The alpha band by convention; the SAME test serves the other bands,
   # so the band is an argument, not a constant.  Both the band AND the
@@ -666,6 +677,7 @@ AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
 #' @export
 #' @examples
 #' SinCosTest()
+#' @keywords internal
 SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
                        fs = 100, duration = 1) {
   # A test signal whose components are known BY CONSTRUCTION, which is
@@ -707,6 +719,7 @@ SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CompSig(V, V)
+#' @keywords internal
 CompSig <- function(g, shifts, scales = NULL, n = NULL) {
   # A composite of shifted, scaled copies of one pattern.  Copies closer
   # together than the pattern is long OVERLAP, and the count is reported
@@ -762,6 +775,7 @@ CompSig <- function(g, shifts, scales = NULL, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CorrCoef(V, V)
+#' @keywords internal
 CorrCoef <- function(x, y) {
   # Pearson's r.  The MEANS ARE REMOVED, which is what separates it from
   # the Chapter 4 dot-product cosine; both are returned so the difference

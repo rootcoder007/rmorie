@@ -28,6 +28,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_perK(V)
+#' @keywords internal
 morie_perK <- function(x1, x2 = NULL, period = 1, lengthscale = 1,
                        variance = 1) {
   a <- as.numeric(x1)

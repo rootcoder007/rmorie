@@ -182,6 +182,7 @@
 #' \code{scores}, \code{cost}, \code{evaluate}, \code{n}, \code{n_scored}, \code{level},
 #' \code{method}.
 #' @export
+#' @keywords internal
 morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
                          min_leaf = 5, seed = 0, evaluate = "split",
                          propensity = NULL, level = 0.95) {

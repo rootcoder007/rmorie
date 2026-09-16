@@ -182,6 +182,7 @@
 #' @export
 #' @examples
 #' morie_infmer(q = 0.5, k = 5L, v = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_infmer <- function(q, k, v, c = 5) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   if (is.null(dim(k))) k <- matrix(k, nrow = 1L)
@@ -244,6 +245,7 @@ morie_infmer <- function(q, k, v, c = 5) {
 #' @export
 #' @examples
 #' morie_infmer_cheatsheet()
+#' @keywords internal
 morie_infmer_cheatsheet <- function() {
   paste("infmer: the same ledger method as `informer` -- one paper,",
         "one implementation, re-exported so the two entries cannot drift.",

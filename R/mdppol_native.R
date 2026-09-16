@@ -65,6 +65,7 @@
 #'           matrix(c(0.2, 0.8, 0.5, 0.5), nrow = 2, byrow = TRUE))
 #' R <- matrix(c(1, 0, 0, 2), nrow = 2)
 #' morie_mdppol(P = P, R = R, gamma = 0.9)
+#' @keywords internal
 morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
                          max_improve = 1000, pi0 = NULL) {
   args <- .mdppol_args(P, R)

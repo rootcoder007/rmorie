@@ -41,6 +41,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LsiSerH(V, V)
+#' @keywords internal
 LsiSerH <- function(h_1, h_2, n = NULL) {
   # eq (3.45): cascading two LSI systems convolves their impulse
   # responses.  Convolution commutes, so a filter chain may be reordered,
@@ -82,6 +83,7 @@ LsiSerH <- function(h_1, h_2, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LsiParH(V, V)
+#' @keywords internal
 LsiParH <- function(h_1, h_2, n = NULL) {
   # eq (3.49): parallel branches add their impulse responses, and the
   # result is as long as the LONGER branch -- not longer, the contrast
@@ -120,6 +122,7 @@ LsiParH <- function(h_1, h_2, n = NULL) {
 #' @export
 #' @examples
 #' Laplace(h = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 Laplace <- function(h, t, s) {
   # eq (3.50), by the trapezoidal rule over the samples supplied.  What
   # is returned is the transform OF THE SAMPLED RECORD over the interval
@@ -160,6 +163,7 @@ Laplace <- function(h, t, s) {
 #' t <- (0:200)/200
 #' h <- rep(1, 201)
 #' LaplaceFr(h, 3, t = t)
+#' @keywords internal
 LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
   # eq (3.52): H(omega) = H(s) at s = j omega.  Legitimate only when the
   # imaginary axis lies inside the region of convergence, which holds for
@@ -210,6 +214,7 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
 #' @examples
 #' IirTf(b_k = c(1, 2, 3, 4, 5, 6, 7, 8), a_k = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
   # eq (3.67).  The leading 1 of the denominator is part of the equation,
   # so a_k is a_1..a_M WITHOUT it; passing a vector that already carries
@@ -258,6 +263,7 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IirDiff(V, V)
+#' @keywords internal
 IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
                     n = NULL) {
   # eq (3.68).  The MINUS on the feedback term is the equation's and is
@@ -310,6 +316,7 @@ IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PzMag(V, V)
+#' @keywords internal
 PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
   # eq (3.72): the geometric reading of a filter.  Approaching a zero
   # drives the response to nought, approaching a pole drives it up, and a
@@ -359,6 +366,7 @@ PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
 #' @export
 #' @examples
 #' PzPhase(z_0 = 5L, alpha_k = c(1, 2, 3, 4, 5, 6, 7, 8), beta_k = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
   # eq (3.73).  The (M - N) angle(z_0) term accounts for the zeros or
   # poles at the origin that balance the orders; dropping it is easy,
@@ -402,6 +410,7 @@ PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
 #' @export
 #' @examples
 #' MaFir(c(1, 2, 3, 4), N = 1)
+#' @keywords internal
 MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
   # eqs (3.97)-(3.99).  With no coefficients the equal-weight boxcar is
   # used.  Equal weights are the worst choice for stopband attenuation --
@@ -453,6 +462,7 @@ MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MaTf(V, V)
+#' @keywords internal
 MaTf <- function(b_k, z, N = NULL) {
   # eq (3.99): a polynomial in z^-1 with no poles away from the origin,
   # so an FIR filter is stable whatever its coefficients.
@@ -483,6 +493,7 @@ MaTf <- function(b_k, z, N = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HannFilt(V)
+#' @keywords internal
 HannFilt <- function(x, n = NULL) {
   # eq (3.100): y(n) = (1/4)[x(n) + 2x(n-1) + x(n-2)].  Three taps in the
   # ratio 1:2:1.  It is a delaying smoother, not a symmetric one: the
@@ -519,6 +530,7 @@ HannFilt <- function(x, n = NULL) {
 #' @export
 #' @examples
 #' HannImp()
+#' @keywords internal
 HannImp <- function(n = NULL) {
   # eq (3.101): three nonzero taps and nothing else.  The response is
   # FINITE, which is what "FIR" names, and it sums to 1, so a constant
@@ -549,6 +561,7 @@ HannImp <- function(n = NULL) {
 #' @export
 #' @examples
 #' HannZ(X = c(1, 2, 3, 4, 5, 6, 7, 8), z = 5L)
+#' @keywords internal
 HannZ <- function(X, z) {
   # eq (3.102): convolution in time is multiplication in z, so the whole
   # filter is one factor multiplying the input transform.  Dividing out
@@ -576,6 +589,7 @@ HannZ <- function(X, z) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HannTf(V)
+#' @keywords internal
 HannTf <- function(z) {
   # eq (3.103): (1/4)(1 + z^-1)^2, a DOUBLE zero at z = -1, that is at
   # Nyquist.  The double zero is why the response reaches nought there
@@ -606,6 +620,7 @@ HannTf <- function(z) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HannFr(V)
+#' @keywords internal
 HannFr <- function(omega) {
   # eq (3.104): the transfer function on the unit circle, raw form.
   w <- as.numeric(omega)
@@ -633,6 +648,7 @@ HannFr <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HannFrs(V)
+#' @keywords internal
 HannFrs <- function(omega) {
   # eq (3.105): a REAL nonnegative factor times a pure one-sample delay.
   # That factorization is the point -- it proves the filter has exactly
@@ -666,6 +682,7 @@ HannFrs <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HannMag(V)
+#' @keywords internal
 HannMag <- function(omega) {
   # eq (3.106): unity at DC, exactly nought at omega = pi, monotone
   # between.  The book's absolute value is redundant -- 1 + cos is never
@@ -692,6 +709,7 @@ HannMag <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HannPh(V)
+#' @keywords internal
 HannPh <- function(omega) {
   # eq (3.107): exactly -omega, slope -1, a constant group delay of one
   # sample at every frequency.  Constant group delay is what "no phase
@@ -726,6 +744,7 @@ HannPh <- function(omega) {
 #' @export
 #' @examples
 #' OsFilt(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+#' @keywords internal
 OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,
                    order = NULL) {
   # Section 3.8.  Rank the window, then take one entry or a combination:

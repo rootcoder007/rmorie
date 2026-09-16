@@ -343,6 +343,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_farmlmm(V, V)
+#' @keywords internal
 morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
   .farmcpu(y = y, G = G, max_iter = max_iter, threshold = threshold, seed = seed)
 }
@@ -359,4 +360,5 @@ morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' erf(V)
+#' @keywords internal
 erf <- function(x) 2 * pnorm(x) - 1

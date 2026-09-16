@@ -237,6 +237,7 @@ morie_audit_categories <- function(data, cols = NULL) {
 #' print(obj)
 #' }
 #' @export
+#' @keywords internal
 print.morie_category_audit <- function(x, ...) {
   cat("Categorical audit:", nrow(x), "column(s)\n")
   for (i in seq_len(nrow(x))) {

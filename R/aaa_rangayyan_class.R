@@ -143,6 +143,7 @@
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::as.double.morie_frac(D)
+#' @keywords internal
 as.double.morie_frac <- function(x, ...) x$n / x$d
 #' as.numeric.morie_frac
 #'
@@ -157,6 +158,7 @@ as.double.morie_frac <- function(x, ...) x$n / x$d
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::as.numeric.morie_frac(D)
+#' @keywords internal
 as.numeric.morie_frac <- function(x, ...) x$n / x$d
 #' format.morie_frac
 #'
@@ -171,6 +173,7 @@ as.numeric.morie_frac <- function(x, ...) x$n / x$d
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::format.morie_frac(D)
+#' @keywords internal
 format.morie_frac <- function(x, ...) paste0(x$n, "/", x$d)
 #' print.morie_frac
 #'
@@ -185,6 +188,7 @@ format.morie_frac <- function(x, ...) paste0(x$n, "/", x$d)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::print.morie_frac(V)
+#' @keywords internal
 print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' Equality of exact rationals
 #' @param e1,e2 rationals (or numbers coerced with \code{.morie_rg_asfrac}).
@@ -251,6 +255,7 @@ print.morie_frac <- function(x, ...) cat(format(x), "\n")
 #' @export
 #' @examples
 #' Sens(45, 5)
+#' @keywords internal
 Sens <- function(tp, fn = NULL) {
   # eq (10.100): S+ = TP / (subjects with the disease).  Measures the
   # capability to DETECT and says nothing about false alarms -- a test
@@ -293,6 +298,7 @@ Sens <- function(tp, fn = NULL) {
 #' @export
 #' @examples
 #' Spec(40, 10)
+#' @keywords internal
 Spec <- function(tn, fp = NULL) {
   # eq (10.101): S- = TN / (subjects without the disease).
   if (is.null(fp)) {
@@ -336,6 +342,7 @@ Spec <- function(tn, fp = NULL) {
 #' @export
 #' @examples
 #' Ppv(45, 10)
+#' @keywords internal
 Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
                 specificity = NULL) {
   # eq (10.106): PPV = TP / (TP + FP).  Unlike sensitivity and
@@ -403,6 +410,7 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
 #' @export
 #' @examples
 #' Accuracy(tp = 45, tn = 40, fp = 10, fn = 5)
+#' @keywords internal
 Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
                      fn = NULL, prevalence = NULL, kind = NULL,
                      exact = FALSE) {
@@ -542,6 +550,7 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Roc(V, V)
+#' @keywords internal
 Roc <- function(scores, labels, positive = 1) {
   # Section 10.9.1.  The area the book calls A_z, by the trapezoidal
   # rule, which for tied scores is exactly the Mann-Whitney statistic --
@@ -599,6 +608,7 @@ Roc <- function(scores, labels, positive = 1) {
 #' @examples
 #' TAB104 <- matrix(c(2, 0, 10, 1, 0, 1, 0, 0, 4), nrow = 3, byrow = TRUE)
 #' McNemar(TAB104)
+#' @keywords internal
 McNemar <- function(table, correct = NULL) {
   # Section 10.9.2, McNemar's test of SYMMETRY.  The book states it on a
   # general contingency table -- its worked example, Table 10.4, is 3x3
@@ -667,6 +677,7 @@ McNemar <- function(table, correct = NULL) {
 #' @export
 #' @examples
 #' NormDist(0, 2, 1, 1)
+#' @keywords internal
 NormDist <- function(m1, m2, s1, s2) {
   # eq (10.112): d_n = |m1 - m2| / (sigma1 + sigma2).  The denominator is
   # the SUM of the SDs, not their quadrature sum -- this is not the
@@ -713,6 +724,7 @@ NormDist <- function(m1, m2, s1, s2) {
 #' @export
 #' @examples
 #' Divergence(c(0, 0), c(0, 0), diag(2), diag(3, 2))
+#' @keywords internal
 Divergence <- function(m1, m2, C1, C2) {
   # eq (10.117), the closed form of the symmetric divergence of
   # eq (10.115):
@@ -762,6 +774,7 @@ Divergence <- function(m1, m2, C1, C2) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DivAv(V, V)
+#' @keywords internal
 DivAv <- function(means, covs) {
   # The book averages the pairwise divergences for a single measure over
   # m classes.  Averaging hides a badly separated PAIR behind well
@@ -811,6 +824,7 @@ DivAv <- function(means, covs) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Kld(V, V)
+#' @keywords internal
 Kld <- function(p1, p2) {
   # eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)].
   # NOTE THE ARGUMENT ORDER -- the book weights by the SECOND PDF, so its
@@ -869,6 +883,7 @@ Kld <- function(p1, p2) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PdfOverlap(V, V)
+#' @keywords internal
 PdfOverlap <- function(p1, p2) {
   # BC(p1, p2) = sum_l sqrt(p1 p2): the OVERLAP between two PDFs,
   # bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built
@@ -928,6 +943,7 @@ PdfOverlap <- function(p1, p2) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Chernoff(V, V)
+#' @keywords internal
 Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
   # rho_a = sum_l p1^a p2^(1-a);  C = -ln min_a rho_a.  The Bhattacharyya
   # coefficient is exactly this at a = 1/2, which is the relationship the
@@ -1007,6 +1023,7 @@ Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Hellinger(V, V)
+#' @keywords internal
 Hellinger <- function(p1, p2) {
   # H = sqrt(1 - BC), so H^2 = 1 - BC.  The Python arm delegates to
   # morie.fn.helld.hellinger_dist; this is the same arithmetic, kept here
@@ -1066,6 +1083,7 @@ Hellinger <- function(p1, p2) {
 #' CC1 <- matrix(c(2, 0.3, 0.3, 1), 2, 2)
 #' CC2 <- matrix(c(1, -0.2, -0.2, 3), 2, 2)
 #' GaussOverlap(c(0, 1), c(2, -1), CC1, CC2)
+#' @keywords internal
 GaussOverlap <- function(m1, m2, C1, C2) {
   # NOT FROM THIS BOOK.  A full-text search of the 2024 third edition --
   # Rangayyan and Krishnan -- finds no occurrence of "Bhattacharyya", nor
@@ -1140,6 +1158,7 @@ GaussOverlap <- function(m1, m2, C1, C2) {
 #' @export
 #' @examples
 #' ErrBound(0.5, 0.5, 1.4)
+#' @keywords internal
 ErrBound <- function(p1, p2, db) {
   # P_e <= sqrt(P1 P2) exp(-D_B).  NOT FROM THIS BOOK -- the standard
   # Kailath bound.  It pairs with GaussOverlap, NOT with Divergence:
@@ -1184,6 +1203,7 @@ ErrBound <- function(p1, p2, db) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FishCrit(V, V)
+#' @keywords internal
 FishCrit <- function(x1, x2) {
   # J = (m1 - m2)^2 / (s1^2 + s2^2).  Close kin to eq (10.112) but NOT
   # the same measure: that divides |m1 - m2| by (s1 + s2).  They rank
@@ -1232,6 +1252,7 @@ FishCrit <- function(x1, x2) {
 #' @examples
 #' SepIndex(matrix(c(0, 0, 0.1, 0, 1, 0, 1.1, 0), ncol = 2, byrow = TRUE),
 #'     c(0, 0, 1, 1))
+#' @keywords internal
 SepIndex <- function(X, y) {
   # Section 10.10.1: J = tr(S_B) / tr(S_W).  The trace ratio ignores the
   # OFF-diagonal structure, so it cannot see that a pair of features is
@@ -1288,6 +1309,7 @@ SepIndex <- function(X, y) {
 #'     2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
 #' YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
 #' FishLda(XC, YC)
+#' @keywords internal
 FishLda <- function(X, y) {
   # Section 10.4.2: w = S_W^-1 (m1 - m2), the direction maximizing the
   # ratio of between- to within-class scatter of the PROJECTED data.  Two
@@ -1347,6 +1369,7 @@ FishLda <- function(X, y) {
 #' @export
 #' @examples
 #' Mahal(c(2, 0), c(0, 0), matrix(c(4, 0, 0, 1), 2, 2))
+#' @keywords internal
 Mahal <- function(x, mu, C) {
   # Section 10.4.3: D^2 = (x - mu)^T C^-1 (x - mu).  Distance in units of
   # the data's own scatter: a point far along an axis of natural
@@ -1389,6 +1412,7 @@ Mahal <- function(x, mu, C) {
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' S <- c("a", "b", "c")
 #' LinDisc(S, M)
+#' @keywords internal
 LinDisc <- function(x, weights, w0 = NULL) {
   # Section 10.4.1: d_i(x) = w_i^T x + w_i0, assign to the largest.  The
   # surfaces between classes are hyperplanes, so a linear machine carves
@@ -1437,6 +1461,7 @@ LinDisc <- function(x, weights, w0 = NULL) {
 #'     2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
 #' YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
 #' LinDSep(XC, YC)
+#' @keywords internal
 LinDSep <- function(X, y) {
   # Section 10.4.2 with a fitted cut.  The midpoint of the projected
   # means is optimal only for equal priors AND equal variances, so the
@@ -1492,6 +1517,7 @@ LinDSep <- function(X, y) {
 #' @export
 #' @examples
 #' Knn(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), query = 5L)
+#' @keywords internal
 Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
   # eq (10.29) and Section 10.4.4.  The book is explicit about why k > 1:
   # with k = 1 "the nearest neighbor may happen to be an outlier that is
@@ -1566,6 +1592,7 @@ Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' BayesCls(V)
+#' @keywords internal
 BayesCls <- function(likelihoods, priors = NULL) {
   # eq (10.70): d_i(x) = p(x|C_i) P(C_i), assign to the largest -- the
   # MAXIMUM A POSTERIORI rule.  Comparing likelihoods alone is maximum
@@ -1618,6 +1645,7 @@ BayesCls <- function(likelihoods, priors = NULL) {
 #' @export
 #' @examples
 #' BayesNorm(x = 5L, means = c(1, 2, 3, 4, 5, 6, 7, 8), covs = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
   # eq (10.72).  The book takes logarithms at eq (10.71) because the
   # normal PDF is an exponential and ln is monotonic: the ranking is
@@ -1691,6 +1719,7 @@ BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
 #'     2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
 #' YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
 #' Qda(XC, YC, c(1.1, 1))
+#' @keywords internal
 Qda <- function(X, y, query, priors = NULL) {
   # eq (10.73) with the mean and covariance estimated per class by
   # eqs (10.68)-(10.69).  Each class keeps its OWN covariance, so the
@@ -1765,6 +1794,7 @@ Qda <- function(X, y, query, priors = NULL) {
 #'     2.7, 2.6, 3.2, 3.1, 3.5), ncol = 2, byrow = TRUE)
 #' YC <- c(0, 0, 0, 0, 1, 1, 1, 1)
 #' LogReg(XC, YC)
+#' @keywords internal
 LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
   # Section 10.7, fitted by Newton-Raphson on the log-likelihood.  Unlike
   # the Bayes classifier it models the POSTERIOR directly and assumes
@@ -1835,6 +1865,7 @@ LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
 #' @export
 #' @examples
 #' KMeans(X = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+#' @keywords internal
 KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
   # Section 10.5.1.  WCSS falls at every step, so the iteration always
   # terminates -- at a LOCAL minimum that depends on where the centroids
@@ -1915,6 +1946,7 @@ KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Elbow(V)
+#' @keywords internal
 Elbow <- function(X, kmax = 8, kmin = 1) {
   # WCSS falls monotonically with k and reaches zero at k = n, so it
   # cannot be minimized -- the choice is the KNEE.  Located here as the
@@ -1972,6 +2004,7 @@ Elbow <- function(X, kmax = 8, kmin = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HClust(V)
+#' @keywords internal
 HClust <- function(X, linkage = "single", k = NULL) {
   # Section 10.5.1.  Single linkage CHAINS -- it will string distant
   # clusters together through a bridge of intermediate points -- while
@@ -2066,6 +2099,7 @@ HClust <- function(X, linkage = "single", k = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' KFoldCv(V, V)
+#' @keywords internal
 KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
   # Section 10.10.3.  The book's point is that the training and test
   # steps must use SEPARATE data: an error rate measured on the samples
@@ -2147,6 +2181,7 @@ KFoldCv <- function(X, y, k = 5, classifier = NULL, stratified = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LooCv(V, V)
+#' @keywords internal
 LooCv <- function(X, y, classifier = NULL) {
   # K-fold with K = N.  It uses the most training data of any split, so
   # it is nearly unbiased, and it is deterministic -- there is only one
@@ -2265,6 +2300,7 @@ LooCv <- function(X, y, classifier = NULL) {
 #' @examples
 #' Svm(matrix(c(1, 1, 2, 2, 4, 4, 5, 5), ncol = 2, byrow = TRUE),
 #'     c(-1, -1, 1, 1))
+#' @keywords internal
 Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
   # Section 10.4.5.  Only the patterns with a_i > 0 -- the SUPPORT
   # VECTORS -- enter the solution, so the boundary is set by the samples
@@ -2326,6 +2362,7 @@ Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
 #' xor <- matrix(c(0, 0, 0, 1, 1, 0, 1, 1), ncol = 2, byrow = TRUE)
 #' yx <- c(-1, 1, 1, -1)
 #' SvmKern(xor, yx, kernel = "rbf", gamma = 1, C = 10)
+#' @keywords internal
 SvmKern <- function(X, y, query = NULL, kernel = "rbf", gamma = NULL,
                     degree = 3, coef0 = 0, C = 1, maxiter = 2000,
                     tol = 1e-6) {

@@ -25,6 +25,7 @@
 #' @param output_patch_len Passed to \code{morie_timesfm}.
 #' @return The value of \code{morie_timesfm}.
 #' @export
+#' @keywords internal
 morie_timesf <- function(history, predictor, horizon, input_patch_len,
                          output_patch_len) {
   morie_timesfm(history, predictor, horizon, input_patch_len,

@@ -128,6 +128,7 @@
 #' @examples
 #' strec_trilinear(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   c = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 strec_trilinear <- function(a, b, c) {
   A <- as.numeric(a)
   B <- as.numeric(b)
@@ -152,6 +153,7 @@ strec_trilinear <- function(a, b, c) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' strec_session_average(V)
+#' @keywords internal
 strec_session_average <- function(embeddings) {
   X <- .strec_as_rows(embeddings)
   t <- length(X)
@@ -187,6 +189,7 @@ strec_session_average <- function(embeddings) {
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' S <- c("a", "b", "c")
 #' strec_mlp_cell(S, M)
+#' @keywords internal
 strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
   v <- as.numeric(m)
   W <- as.matrix(W)
@@ -227,6 +230,7 @@ strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
 #' strec_attention_weights(embeddings = 5L, W1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   W2 = c(1, 2, 3, 4, 5, 6, 7, 8), W3 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   W0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
   X <- .strec_as_rows(embeddings)
   t <- length(X)
@@ -300,6 +304,7 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
 #' @examples
 #' strec_stamp_scores(embeddings = 5L, item_table = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Ws = c(1, 2, 3, 4, 5, 6, 7, 8), Wt = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL,
                                 attention = NULL) {
   X <- .strec_as_rows(embeddings)
@@ -352,6 +357,7 @@ strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = N
 #' @export
 #' @examples
 #' strec_cross_entropy(probability = c(1, 2, 3, 4, 5, 6, 7, 8), target_index = 5L)
+#' @keywords internal
 strec_cross_entropy <- function(probability, target_index) {
   p <- as.numeric(probability)
   j <- as.integer(target_index)
@@ -377,6 +383,7 @@ strec_cross_entropy <- function(probability, target_index) {
 #' @export
 #' @examples
 #' strec_cheatsheet()
+#' @keywords internal
 strec_cheatsheet <- function() {
   paste0(
     "strec: a session recommender has no profile, only the clicks",

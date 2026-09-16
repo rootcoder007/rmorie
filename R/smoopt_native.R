@@ -76,6 +76,7 @@
 #' y <- sign(X[, 1])
 #' K <- X %*% t(X)
 #' error_cache(rep(0, 10), y, K, 0)
+#' @keywords internal
 error_cache <- function(alpha, y, K, b) {
   a <- as.numeric(alpha)
   yy <- as.numeric(y)
@@ -105,6 +106,7 @@ error_cache <- function(alpha, y, K, b) {
 #' @examples
 #' violates_kkt(i = 5L, alpha = 0.5, y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   C = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
   a <- as.numeric(alpha[i])
   r <- as.numeric(y[i]) * as.numeric(E[i])
@@ -126,6 +128,7 @@ violates_kkt <- function(i, alpha, y, E, C, tol = 1e-3) {
 #' @examples
 #' outer_loop_schedule(alpha = 0.5, C = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   examine_all = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 outer_loop_schedule <- function(alpha, C, examine_all) {
   a <- as.numeric(alpha)
   if (isTRUE(examine_all)) {
@@ -157,6 +160,7 @@ outer_loop_schedule <- function(alpha, C, examine_all) {
 #' second_choice(i1 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), alpha = 0.5,
 #'   y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   rng = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
   a <- as.numeric(alpha)
   n <- length(a)
@@ -204,6 +208,7 @@ second_choice <- function(i1, alpha, y, E, C, rng, tol = 1e-3) {
 #' @param C Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{b}, \code{from}, \code{b1}, \code{b2}, \code{note}.
 #' @export
+#' @keywords internal
 compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
                               C) {
   yy <- as.numeric(y)
@@ -251,6 +256,7 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
 #' y <- sign(X[, 1])
 #' K <- X %*% t(X)
 #' smo_platt(y, K, C = 1.0)
+#' @keywords internal
 smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
                       max_passes = 200, seed = 0) {
   yy <- as.numeric(y)
