@@ -117,7 +117,7 @@
 #'   \code{n_variants} and \code{method}.
 #' @references Burgess, S. & Bowden, J. (2015). Integrating
 #'   summarized data from multiple genetic variants in Mendelian
-#'   randomization. arXiv:1512.04486 [stat.AP].
+#'   randomization. arXiv:1512.04486 \[stat.AP\].
 #' @export
 #' @examples
 #' morie_mtr2sx(beta_x = c(1, 2, 3, 4, 5, 6, 7, 8), se_x = c(1, 2, 3, 4, 5, 6, 7, 8),

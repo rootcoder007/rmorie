@@ -353,7 +353,7 @@ optimal_rule <- function(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL,
 #'
 #' @param blips Blip vector.
 #' @param tol Tolerance.
-#' @return Scalar in [0,1].
+#' @return Scalar in \[0,1\].
 #' @references Robins, J. M. (2004).
 #' @export
 #' @examples

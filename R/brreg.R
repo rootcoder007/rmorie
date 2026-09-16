@@ -2,7 +2,7 @@
 
 #' Bayesian ridge regression (RR-BLUP closed form)
 #'
-#' beta_hat = solve(X'X + lambda*I) %*% X'y
+#' beta_hat = solve(X'X + lambda&#42;I) %&#42;% X'y
 #'
 #' @param x (n x p) marker matrix.
 #' @param y Numeric response.

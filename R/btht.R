@@ -4,7 +4,7 @@
 #' Davison and Hinkley (1997), Bootstrap Methods and their Application,
 #' Cambridge University Press, Chapter 4.  The resampling must be done under
 #' the null, not under the fitted model: the data are shifted so their
-#' statistic equals theta0, x0_i = x_i - t + theta0, resampled with
+#' statistic equals theta0, x0&#95;i = x&#95;i - t + theta0, resampled with
 #' replacement, and the two-sided p-value is
 #' p = 2 min((1 + #\{T*_b >= T_hat\})/(B + 1), (1 + #\{T*_b <= T_hat\})/(B + 1)),
 #' capped at one.  The +1 in numerator and denominator is Davison and Hinkley's

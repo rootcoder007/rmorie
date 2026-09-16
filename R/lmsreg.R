@@ -8,7 +8,7 @@
 #' Equation (1.8), p. 872, defines the estimator: minimize_theta med_i r_i^2.
 #'
 #' Theorem 1, p. 872: if p > 1 and the observations are in general position,
-#' the breakdown point of the LMS method is (\[n/2\] - p + 2)/n, where [r] is the
+#' the breakdown point of the LMS method is (\[n/2\] - p + 2)/n, where \[r\] is the
 #' largest integer <= r.  That formula is reported in the payload.
 #'
 #' Theorem 2, p. 873: for p = 1 with all x_i = 1, so the sample reduces to

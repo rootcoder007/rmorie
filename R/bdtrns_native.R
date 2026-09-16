@@ -7,7 +7,7 @@
 #' Manski no-assumptions identification bound for a mean
 #'
 #' With observation probability p and bounded outcomes \[g0, g1\], the
-#' identification region for E[y] is
+#' identification region for E\[y\] is
 #' \[m p + g0 (1-p), m p + g1 (1-p)\] with m the observed-subsample
 #' mean; the width is exactly (g1 - g0)(1 - p).
 #'

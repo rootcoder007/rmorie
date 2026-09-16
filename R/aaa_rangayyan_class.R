@@ -695,7 +695,7 @@ NormDist <- function(m1, m2, s1, s2) {
 
 #' Eq (10.117), the closed form of the symmetric divergence of
 #'
-#' eq (10.115): D = (1/2) tr[(Ci - Cj)(Cj^-1 - Ci^-1)] + (1/2) tr[(Ci^-1
+#' eq (10.115): D = (1/2) tr\[(Ci - Cj)(Cj^-1 - Ci^-1)\] + (1/2) tr[(Ci^-1
 #' + Cj^-1)(mi - mj)(mi - mj)^T] The second term resembles eq (10.112)
 #' and vanishes for equal means; the FIRST does not, so unlike d_n the
 #' divergence still separates classes differing only in covariance.
@@ -791,7 +791,7 @@ DivAv <- function(means, covs) {
   )
 }
 
-#' Eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)]
+#' Eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln\[p2(x_l) / p1(x_l)\]
 #'
 #' NOTE THE ARGUMENT ORDER -- the book weights by the SECOND PDF, so its
 #' KLD(p1, p2) is D_KL(p2 || p1) in standard notation, the REVERSE of

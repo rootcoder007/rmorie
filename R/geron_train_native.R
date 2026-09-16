@@ -6997,7 +6997,7 @@ morie_geron_symbolic_differentiation <- function(expression, var = "x",
 
 #' Binary sentiment head (Geron Ch 16, morie.fn grsnt)
 #'
-#' p = sigmoid(w . pool(E[ids]) + b); mean pooling loses order, max acts
+#' p = sigmoid(w . pool(E\[ids\]) + b); mean pooling loses order, max acts
 #' as a keyword detector. Token ids are 0-based.
 #'
 #' @param token_ids 0-based ids.
@@ -7847,7 +7847,7 @@ morie_geron_vae_elbo <- function(x, mu, logvar, recon,
 #'
 #' @param image (H, W) or (H, W, C) array.
 #' @param patch_size Divisor of both H and W.
-#' @param E (p*p*C, d_model) projection.
+#' @param E (p&#42;p&#42;C, d_model) projection.
 #' @param E_pos Optional (n_patches + 1, d_model) positional table.
 #' @param cls_token Optional length-d_model CLS vector; default zeros.
 #' @return List with `embeddings`, `patches`, `n_patches`, `d_model`.

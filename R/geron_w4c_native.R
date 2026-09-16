@@ -613,7 +613,7 @@ morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
 
 # ============================================================ hmnsp
 
-#' Next sentence prediction: BERT-style input assembly plus a linear [CLS] head (Geron
+#' Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron
 #' Ch 15, hmnsp)
 #' @param sent_A,sent_B Tokenised sentences.
 #' @param encoder Optional `encoder(tokens, segments) -> h`.

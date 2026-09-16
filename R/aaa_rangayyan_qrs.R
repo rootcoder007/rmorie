@@ -2484,8 +2484,8 @@ QrsLPassTf <- function(freq, fs = 200) {
 }
 
 
-#' Eq (4.8): y(n) = 2 y(n-1) - y(n-2) + (1/32)[x(n) - 2 x(n-6) +
-#' x(n-12)]
+#' Eq (4.8): y(n) = 2 y(n-1) - y(n-2) + (1/32)\[x(n) - 2 x(n-6) +
+#' x(n-12)\]
 #'
 #' Adds and one shift by 32 -- which is why it was chosen for real time.
 #'
@@ -2628,7 +2628,7 @@ QrsHPassTf <- function(freq, fs = 200) {
 }
 
 
-#' Eq (4.12): p(n) = x(n-16) - (1/32)[y(n-1) + x(n) - x(n-32)], where
+#' Eq (4.12): p(n) = x(n-16) - (1/32)\[y(n-1) + x(n) - x(n-32)\], where
 #' the
 #'
 #' bracketed group is exactly y(n) of eq (4.10), so the running-sum
@@ -2700,7 +2700,7 @@ QrsHPassIo <- function(x) {
 }
 
 
-#' Eq (4.14): y(n) = (1/8)[2 x(n) + x(n-1) - x(n-3) - 2 x(n-4)].  The
+#' Eq (4.14): y(n) = (1/8)\[2 x(n) + x(n-1) - x(n-3) - 2 x(n-4)\].  The
 #'
 #' antisymmetric taps make it exactly zero on any constant or linear
 #' baseline.

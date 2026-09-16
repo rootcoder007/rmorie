@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Ridge (weight-decay) regularized loss
 #'
-#' Formula: L(w, lambda) = L(w) + 0.5 * lambda * w'w
+#' Formula: L(w, lambda) = L(w) + 0.5 &#42; lambda &#42; w'w
 #'
 #' @param loss Unregularized loss L(w).
 #' @param w Network weights.

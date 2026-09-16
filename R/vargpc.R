@@ -11,8 +11,8 @@
 #' a_n = K_mm^\{-1\} k_mn (Eqs. 6-8), and the bound maximised is
 #' ELBO = sum_n E_\{q(f_n)\}\[log p(y_n|f_n)\] - KL(q(u) || p(u)), the
 #' Bernoulli expectation done by Gauss-Hermite quadrature. The Gaussian
-#' KL is closed form: (1/2)[tr(K^\{-1\} S) + m' K^\{-1\} m - M + log|K| -
-#' log|S|].
+#' KL is closed form: (1/2)\[tr(K^\{-1\} S) + m' K^\{-1\} m - M + log|K| -
+#' log|S|\].
 #'
 #' QUADRATURE. Nodes and weights are not tabulated: they come from
 #' Golub-Welsch, the eigenvalues of the symmetric tridiagonal Jacobi
