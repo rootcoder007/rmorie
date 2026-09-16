@@ -15,7 +15,7 @@
 #' Tracy-Widom law. With \eqn{l1\' = n lambda_1 / sum(lambda)} and
 #' \eqn{n\' = (n + 1) (sum l)^2 / ((n - 1) sum l^2 - (sum l)^2)},
 #' \code{mu = (sqrt(n - 1) + sqrt(n'))^2 / n'},
-#' \code{sigma = ((sqrt(n-1) + sqrt(n')) / n')
+#' \eqn{sigma = ((sqrt(n-1) + sqrt(n')) / n')
 #' (1/sqrt(n-1) + 1/sqrt(n'))^(1/3)}, the statistic
 #' \eqn{(l1\' - mu) / sigma} follows TW1 under the null of no
 #' structure. \eqn{n\'} is the EFFECTIVE number of markers and is not

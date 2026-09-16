@@ -7,7 +7,7 @@
 #' embeds into a Hilbert space so kernel methods apply directly. The price
 #' is that it is only a first-order approximation.
 #'
-#' Formula: \code{W_1(mu,nu) ~ ||mu - nu||_{H^{-1}} = sqrt((mu-nu)'
+#' Formula: \eqn{W_1(mu,nu) ~ ||mu - nu||_{H^{-1}} = sqrt((mu-nu)'
 #' (-Delta)^\{-1\} (mu-nu))} -- Peyre (2018), Section 2
 #'
 #' @param mu,nu Two measures on the same support.
