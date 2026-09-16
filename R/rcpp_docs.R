@@ -1102,31 +1102,26 @@ NULL
 NULL
 
 #' Binary C-SVC via SMO (compiled)
-#' @noRd
 #' @name morie_svc_train_cpp
 #' @rdname morie_svc_train_cpp
 NULL
 
 #' eps-SVR via SMO (compiled)
-#' @noRd
 #' @name morie_svr_train_cpp
 #' @rdname morie_svr_train_cpp
 NULL
 
 #' Decision values for new data given fitted SVM coefficients (compiled)
-#' @noRd
 #' @name morie_svm_decision_cpp
 #' @rdname morie_svm_decision_cpp
 NULL
 
 #' Grow one regression / second-order tree (compiled)
-#' @noRd
 #' @name morie_tree_fit_cpp
 #' @rdname morie_tree_fit_cpp
 NULL
 
 #' Predict from a flattened tree (compiled)
-#' @noRd
 #' @name morie_tree_predict_cpp
 #' @rdname morie_tree_predict_cpp
 NULL
