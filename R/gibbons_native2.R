@@ -546,7 +546,7 @@ Wsrmom <- function(n) {
        skew = 0, n = n)
 }
 
-#' Tie-corrected Var[T+] -- eqs. (5.7.10)-(5.7.11), p. 203
+#' Tie-corrected Var\[T+\] -- eqs. (5.7.10)-(5.7.11), p. 203
 #' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

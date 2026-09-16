@@ -1,7 +1,7 @@
 #' EEG band power (delta theta alpha beta gamma) via Welch -- Rangayyan Ch 9
 #'
 #' Absolute and relative power in the clinical EEG bands using the
-#' Welch PSD ([rgpsd()]).
+#' Welch PSD (\[rgpsd()\]).
 #'
 #' Default bands: delta 0.5-4, theta 4-8, alpha 8-13, beta 13-30,
 #' gamma 30-100 Hz.

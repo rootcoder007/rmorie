@@ -7,7 +7,7 @@
 #' and the pyramid (Mallat) algorithm it implies: with scaling filter h
 #' and quadrature mirror g_k = (-1)^k h_\{L-1-k\}, one level of the periodic
 #' decomposition of a length-M sequence is
-#' a_\{j+1\}[i] = sum_k h_k a_j\[(2i+k) mod M\] and
+#' a_\{j+1\}\[i\] = sum_k h_k a_j\[(2i+k) mod M\] and
 #' d_\{j+1\}[i] = sum_k g_k a_j\[(2i+k) mod M\], i = 0 ... M/2-1, repeated on
 #' the approximation. The filters are those of Daubechies (1988),
 #' doi:10.1002/cpa.3160410705, taken from \code{\link{Wave}} rather than

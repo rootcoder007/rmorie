@@ -221,7 +221,7 @@ hfd <- function(x, kmax = 10L) {
 
 #' Phonocardiogram (PCG) bandpass filter
 #'
-#' Convenience preset wrapping [buttbp()] with the standard PCG band
+#' Convenience preset wrapping \[buttbp()\] with the standard PCG band
 #' (25--400 Hz at 2000 Hz sampling). Removes baseline drift below 25 Hz and
 #' anti-aliased high-frequency noise above 400 Hz.
 #'

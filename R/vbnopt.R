@@ -16,7 +16,7 @@
 #' @param x Observed sample.
 #' @param mu0,lambda0,a0,b0 Normal-Gamma prior hyperparameters.
 #' @param max_iter Maximum coordinate sweeps.
-#' @param tol Stop when E[tau] moves by less than this.
+#' @param tol Stop when E\[tau\] moves by less than this.
 #' @return As \code{\link{Vinfer}}.
 #' @references Jordan, M.I., Ghahramani, Z., Jaakkola, T.S. and Saul, L.K.
 #'   (1999). Machine Learning 37(2):183-233. doi:10.1023/A:1007665907178.

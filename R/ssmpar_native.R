@@ -25,7 +25,7 @@
 .ssmpar_EPS <- 1e-12
 
 
-#' (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
+#' (A2, b2) o (A1, b1) = (A2&#42;A1, A2&#42;b1 + b2)
 #'
 #' A step of the ssmpar_native implementation. Called by \code{.ssmpar_upsweep},
 #' \code{check_associativity}, \code{parallel_scan}.

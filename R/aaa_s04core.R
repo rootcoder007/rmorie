@@ -654,11 +654,11 @@ NULL
 ## Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid of
 ## 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
 ## optimiser, so the arms cannot land on different local optima.
-#' Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid
-#' of
+#' Zhang-Stephens empirical-Bayes generalised Pareto fit
 #'
-#' # 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
-#' # optimiser, so the arms cannot land on different local optima.
+#' Fixed grid of 30 + floor(sqrt(N)) points weighted by the profile
+#' likelihood -- no optimiser, so the arms cannot land on different local
+#' optima.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{k}, \code{sigma}.

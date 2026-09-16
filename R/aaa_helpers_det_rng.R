@@ -1,7 +1,7 @@
 #' SHA-keyed deterministic RNG for Py<->R parity
 #'
 #' Given a callable / fixture name and an integer seed, derive a stable
-#' R-side seed value via SHA-256, install it with [set.seed()], and
+#' R-side seed value via SHA-256, install it with \[set.seed()\], and
 #' return it invisibly.  The matched Python helper
 #' `morie._det_rng.from_seed(name, seed)` builds a `numpy.random.Generator`
 #' from the same SHA digest so bootstrap / MCMC draws on the two sides

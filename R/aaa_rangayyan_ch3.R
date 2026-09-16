@@ -182,7 +182,7 @@ PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   )
 }
 
-#' Eq (3.2): E[eta^2].  Equal to the variance only when mu = 0, so both
+#' Eq (3.2): E\[eta^2\].  Equal to the variance only when mu = 0, so both
 #'
 #' are returned rather than one being assumed for the other.
 #'

@@ -27,7 +27,7 @@
 #' @export
 .morie_wsm_need <- function(ok, msg) if (!isTRUE(ok)) stop(msg, call. = FALSE)
 
-#' Variance Var(X) = E\[X^2\] - E[X]^2 (Wasserman Ch 3, morie.fn wsmvar)
+#' Variance Var(X) = E\[X^2\] - E\[X\]^2 (Wasserman Ch 3, morie.fn wsmvar)
 #'
 #' @param x Numeric sample, at least one observation.
 #' @return List with `estimate` (population variance, divisor n),
@@ -123,7 +123,7 @@ morie_wasserman_expectation <- function(x, f) {
   )
 }
 
-#' Covariance Cov(X,Y) = E[XY] - E[X]E[Y] (Ch 4, wsmcov)
+#' Covariance Cov(X,Y) = E\[XY\] - E[X]E\[Y\] (Ch 4, wsmcov)
 #'
 #' @param x,y Paired numeric samples of equal length.
 #' @return List with `estimate` (population, divisor n),

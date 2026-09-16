@@ -105,7 +105,7 @@ atoms <- function(v_min, v_max, n_atoms) {
   .distq_atoms(v_min, v_max, n_atoms)
 }
 
-#' E[Z] = sum_i z_i p_i
+#' E\[Z\] = sum_i z_i p_i
 #'
 #' @param probs Numeric vector of probabilities.
 #' @param z Numeric vector of atom positions.

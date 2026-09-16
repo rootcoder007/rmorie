@@ -6063,7 +6063,7 @@ morie_geron_albert <- function(X, n_layers = 4, n_heads = 2, d_model = 8,
 #'
 #' @param X 0-based token ids.
 #' @param n_layers,n_heads,d_model,d_ff Geometry.
-#' @param vocab_size Optional; one extra row is appended for [MASK].
+#' @param vocab_size Optional; one extra row is appended for \[MASK\].
 #' @param mask_prob Masking fraction in (0, 1).
 #' @param seed LCG seed.
 #' @return List with `hidden`, `mlm_loss`, `mlm_losses`, `masked_positions`,

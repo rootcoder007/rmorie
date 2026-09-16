@@ -2761,7 +2761,7 @@ morie_geron_trl_finetune <- function(model = NULL, dataset, method = "sft", epoc
 # ---------------------------------------------------------------------
 
 #' Optimal parenthesisation of a matrix chain (matrix-chain DP)
-#' @param dims Chain dimensions; matrix i has shape (dims[i], dims\[i+1\]).
+#' @param dims Chain dimensions; matrix i has shape (dims\[i\], dims\[i+1\]).
 #' @return list(cost, split) with cost the min multiplication count.
 #' @export
 #' @examples
@@ -3413,7 +3413,7 @@ morie_geron_vilbert <- function(image, text, d_model = 8, seed = 0) {
 
 #' Vision Transformer (ViT): transformer on image patches
 #'
-#' Patchify image, linear-embed patches, prepend [CLS], add sinusoidal
+#' Patchify image, linear-embed patches, prepend \[CLS\], add sinusoidal
 #' position encodings, run \code{morie_geron_transformer}, linear head
 #' on the [CLS] row.
 #'
@@ -3854,7 +3854,7 @@ morie_geron_warm_restarts <- function(t, T0 = 10, factor = 2.0, eta_max = 0.1, e
 #' @param k Kernel side.
 #' @param c_in Input channels.
 #' @param c_out Output channels.
-#' @return Integer parameter count k*k*c_in + c_in*c_out.
+#' @return Integer parameter count k&#42;k&#42;c_in + c_in*c_out.
 #' @export
 #' @examples
 #' morie_geron_separable_params(k = 5L, c_in = c(1, 2, 3, 4, 5, 6, 7, 8),

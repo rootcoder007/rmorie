@@ -22,7 +22,7 @@
 #' D_hat_SB = 4 g_hat^2(0) + (2/pi) int_\{-pi\}^\{pi\} (1 + cos w) g_hat^2(w) dw;
 #' equation (9): b_opt_SB = (2 G_hat^2 / D_hat_SB)^(1/3) N^(1/3); page 60
 #' equation (13): D_hat_CB = (4/3) g_hat^2(0); equation (14):
-#' b_opt_CB = \[ (2 G_hat^2 / D_hat_CB)^(1/3) N^(1/3) \] with [x] the nearest
+#' b_opt_CB = \[ (2 G_hat^2 / D_hat_CB)^(1/3) N^(1/3) \] with \[x\] the nearest
 #' integer.  Page 62 notes the moving-block optimum equals the circular one,
 #' so ell serves both.
 #'

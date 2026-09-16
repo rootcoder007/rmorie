@@ -1299,7 +1299,7 @@ morie_kamath_ch5_reward_kl_penalty <- function(x, y, pi_RL, pi_SFT, beta,
 
 #' RLHF objective and PPO loss (Kamath Eq 5.4-5.5)
 #'
-#' E[r] - beta KL(pi_theta || pi_ref), maximised.
+#' E\[r\] - beta KL(pi_theta || pi_ref), maximised.
 #'
 #' @details One core serves both Python modules exactly as km068 calls
 #' km069 per prompt and negates the mean: km069 ->
