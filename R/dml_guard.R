@@ -41,7 +41,6 @@
 #' @rdname dot-morie_dml_guard_begin
 #' @param st State list returned by `.morie_dml_guard_begin`.
 #' @keywords internal
-#' @noRd
 .morie_dml_guard_end <- function(st) {
   options(st$opts)
   if (!is.null(st$plan)) {
