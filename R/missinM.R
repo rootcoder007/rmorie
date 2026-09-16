@@ -2,10 +2,10 @@
 #' Pattern-mixture sensitivity analysis over a shift parameter delta
 #'
 #' Missingness at random is not testable from the observed data: any
-#' value of \code{E\[Y | R = 0\]} is equally consistent with what was seen.
+#' value of \code{E[Y | R = 0]} is equally consistent with what was seen.
 #' A pattern-mixture sensitivity analysis parameterises the departure
 #' instead of assuming it away,
-#' \code{E\[Y | R = 0\] = E\[Y | R = 1\] + delta}, so the marginal mean traced
+#' \code{E[Y | R = 0] = E[Y | R = 1] + delta}, so the marginal mean traced
 #' over the grid is
 #' \code{E[Y](delta) = E[Y|R=1] + (1 - P(R=1)) delta}.
 #'

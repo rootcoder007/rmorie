@@ -558,7 +558,7 @@
 #' amb <- .prsLL_grammar(list(list("S", c("a", "S")), list("S", "a")))
 #' r <- .prsLL_is_ll1(amb)
 #' r$ll1
-#' r$conflicts[\[1\]][c("nonterminal", "lookahead")]
+#' r$conflicts[[1]][c("nonterminal", "lookahead")]
 .prsLL_is_ll1 <- function(g) {
   t <- .prsLL_ll1_table(g)
   list(
@@ -799,7 +799,7 @@
 #' g <- .prsLL_grammar(rules, start = "E")
 #' t <- .prsLL_ll1_table(g)
 #' res <- .prsLL_parse_rd(g, t$table, c("id", "*", "id", "$"), "E", 0L)
-#' .prsLL_linearise(res[\[1\]])
+#' .prsLL_linearise(res[[1]])
 .prsLL_parse_rd <- function(g, table, toks, A, pos) {
   i <- .prsLL_pick(table, A, toks[pos + 1L])
   rhs <- g$rules[[i]][[2]]
@@ -851,7 +851,7 @@
 #' g <- .prsLL_grammar(rules, start = "E")
 #' t <- .prsLL_ll1_table(g)
 #' res <- .prsLL_parse_table(g, t$table, c("id", "+", "id", "$"))
-#' .prsLL_linearise(res[\[1\]])
+#' .prsLL_linearise(res[[1]])
 #' res[[2]]   # tokens consumed
 .prsLL_parse_table <- function(g, table, toks) {
   nts <- .prsLL_nonterminals(g)

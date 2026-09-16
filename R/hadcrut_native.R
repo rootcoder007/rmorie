@@ -157,7 +157,7 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 #' NLON <- 4L
 #' mk <- function(f) {
 #'     m <- matrix(NA_real_, NLAT, NLON)
-#'     for (i in seq_len(NLAT)) for (j in seq_len(NLON)) m\[i, j\] <- f(i -
+#'     for (i in seq_len(NLAT)) for (j in seq_len(NLON)) m[i, j] <- f(i -
 #'         1L, j - 1L)
 #'     m
 #' }

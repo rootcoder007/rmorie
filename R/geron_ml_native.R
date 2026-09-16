@@ -5282,7 +5282,7 @@ morie_gvar_sigmoid <- function(x) {
 #' @return List with `grad`, `value`, `tape_size`, `params`.
 #' @export
 #' @examples
-#' loss <- function(p) p[\[1\]] * p[\[1\]] + 3 * p[[2]]
+#' loss <- function(p) p[[1]] * p[[1]] + 3 * p[[2]]
 #' r <- morie_geron_autograd(loss, c(2, 1))
 #' str(r, max.level = 1)
 morie_geron_autograd <- function(loss, params) {

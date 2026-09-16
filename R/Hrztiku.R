@@ -48,7 +48,7 @@
 #' x <- sin(1.7 * seq_len(n))
 #' w <- cos(1.1 * seq_len(n))
 #' y <- 2 * x
-#' Hrztiku(x, y, w, alpha = 1e-2, grid = 11)$g_hat\[1\]
+#' Hrztiku(x, y, w, alpha = 1e-2, grid = 11)$g_hat[1]
 #' @export
 Hrztiku <- function(x, y, w, bandwidth = NULL, alpha = 1e-3, grid = 25L) {
   x <- as.numeric(x)

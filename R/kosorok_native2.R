@@ -22,7 +22,7 @@
 
 #' Brownian bridge covariance
 #'
-#' \eqn{cov\[G(s), G(t)\] = F(s \wedge t) - F(s)F(t)} (Kosorok Ch. 2).
+#' \eqn{cov[G(s), G(t)] = F(s \wedge t) - F(s)F(t)} (Kosorok Ch. 2).
 #' Mirrors \code{morie.fn.ksr030}.
 #'
 #' @param s,t numeric time points.

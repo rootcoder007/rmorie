@@ -422,10 +422,10 @@ Dpll <- function(cnf) {
 #' @examples
 #' set.seed(1)
 #' xs <- c(rnorm(50, 0), rnorm(50, 4))
-#' ll <- function(mu) sum(log(0.5 * dnorm(xs, mu\[1\]) +
+#' ll <- function(mu) sum(log(0.5 * dnorm(xs, mu[1]) +
 #'                            0.5 * dnorm(xs, mu[2])))
 #' Q <- function(mu) {
-#'   r1 <- dnorm(xs, mu\[1\]); r2 <- dnorm(xs, mu[2])
+#'   r1 <- dnorm(xs, mu[1]); r2 <- dnorm(xs, mu[2])
 #'   g <- r1 / (r1 + r2)
 #'   c(sum(g * xs) / sum(g), sum((1 - g) * xs) / sum(1 - g))
 #' }

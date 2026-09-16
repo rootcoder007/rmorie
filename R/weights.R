@@ -55,7 +55,7 @@
 #' @param lower_percentile Lower percentile cut for `trim`.
 #' @param upper_percentile Upper percentile cut for `trim`.
 #' @param fay_coefficient Fay's coefficient (\eqn{k}) for Fay's-BRR.
-#' @param shrinkage_factor Numeric in `\[0, 1\]`; smoothing pull-toward-
+#' @param shrinkage_factor Numeric in `[0, 1]`; smoothing pull-toward-
 #'   mean factor.
 #' @param target Numeric target sum (`normalize`).
 #' @param replicate_estimates Numeric vector of replicate point

@@ -1080,7 +1080,7 @@ morie_fauzi_theorem_4_3 <- function(t, S_X, S_bar_X, m_X, b1,
 #' The standardised estimators are asymptotically `N(0, 1)`, and the
 #' statement holds AT the boundary as well as inside. The Lyapunov
 #' condition needs no extra assumption because `V` is bounded in
-#' `\[0, 1\]`, so every moment exists automatically.
+#' `[0, 1]`, so every moment exists automatically.
 #'
 #' @param mrl_hat estimated mean residual life.
 #' @param mrl_true the value under the null.

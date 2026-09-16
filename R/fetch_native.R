@@ -498,7 +498,7 @@ morie_xml_sax <- function(txt, on_start = NULL, on_text = NULL,
 #' @return The root element as a nested list.
 #' @examples
 #' r <- morie_fetch_xml("<a x=\"1\"><b>hi</b></a>")
-#' r$children[\[1\]]$text
+#' r$children[[1]]$text
 #' @export
 morie_fetch_xml <- function(txt) {
   stack <- list(list(

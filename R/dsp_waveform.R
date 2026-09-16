@@ -180,7 +180,7 @@ morie_dsp_willison_amplitude <- function(x, threshold = NULL) {
 #'
 #' @param x Numeric vector.
 #' @param threshold Optional threshold.
-#' @return Scalar in `\[0, 1\]`.
+#' @return Scalar in `[0, 1]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 5, sec. 5.4.
 #' @examples
 #' set.seed(2L)
@@ -663,7 +663,7 @@ morie_dsp_qrs_features <- function(beat) {
 #'
 #' @param x Numeric vector.
 #' @param y Numeric vector.
-#' @return Scalar in `\[-1, 1\]`.
+#' @return Scalar in `[-1, 1]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 5.
 #' @examples
 #' set.seed(1)

@@ -2333,7 +2333,7 @@ morie_wasserman_directed_graph <- function(dag, x) {
 #' @return List with `estimate` (Z), `probabilities`, `n_nodes`,
 #'   `n_cliques`, `method`.
 #' @examples
-#' agree <- function(t) if (t\[1\] == t[2]) 2 else 1
+#' agree <- function(t) if (t[1] == t[2]) 2 else 1
 #' morie_wasserman_undirected_graph(list(2, list(c(0, 1))), list(agree))$estimate
 #' @export
 morie_wasserman_undirected_graph <- function(graph, psi) {
@@ -2379,7 +2379,7 @@ morie_wasserman_undirected_graph <- function(graph, psi) {
 #' @return List with `estimate` (probability of the mode), `mode`
 #'   (bit vector), `partition_function`, `probabilities`, `n_nodes`, `method`.
 #' @examples
-#' agree <- function(t) if (t\[1\] == t[2]) 2 else 1
+#' agree <- function(t) if (t[1] == t[2]) 2 else 1
 #' morie_wasserman_graphical_model(list(2, list(c(0, 1))), list(agree))$mode
 #' @export
 morie_wasserman_graphical_model <- function(graph, psi) {

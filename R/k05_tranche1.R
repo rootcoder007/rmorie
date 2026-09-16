@@ -449,7 +449,7 @@ morie_sample_acf <- function(y, max_lag = 20) {
 #'   Durbin, J. (1960), \emph{Revue de l'Institut International de
 #'   Statistique} 28, 233-244.
 #' @examples
-#' morie_sample_pacf(c(1, 3, 2, 7, 6, 8, 5, 9), max_lag = 3)$pacf\[1\]
+#' morie_sample_pacf(c(1, 3, 2, 7, 6, 8, 5, 9), max_lag = 3)$pacf[1]
 #' @export
 morie_sample_pacf <- function(y, max_lag = 20) {
   v <- as.numeric(y)

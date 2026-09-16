@@ -438,7 +438,7 @@ hess.Fun <- function(self, x) {
 #' @export
 #' @examples
 #' f0 <- function(x) sum(x^2)
-#' cons <- list(function(x) 1 - x\[1\], function(x) x\[1\] - 5)
+#' cons <- list(function(x) 1 - x[1], function(x) x[1] - 5)
 #' r <- central_point(f0, cons, x = c(2, 0), t = 10)
 #' str(r, max.level = 1)
 central_point <- function(f0, cons, x, t,
@@ -531,7 +531,7 @@ central_point <- function(f0, cons, x, t,
 #'   \code{newton}.
 #' @export
 #' @examples
-#' cons <- list(function(x) 1 - x\[1\], function(x) x\[1\] - 5)
+#' cons <- list(function(x) 1 - x[1], function(x) x[1] - 5)
 #' r <- phase1(cons, x0 = c(0.5, 0))
 #' str(r, max.level = 1)
 phase1 <- function(cons, x0, aeq = NULL, beq = NULL,
@@ -605,7 +605,7 @@ phase1 <- function(cons, x0, aeq = NULL, beq = NULL,
 #' @export
 #' @examples
 #' f0 <- function(x) sum(x^2)
-#' cons <- list(function(x) 1 - x\[1\])
+#' cons <- list(function(x) 1 - x[1])
 #' r <- barrier_method(f0, cons, x0 = c(2, 0))
 #' r$x
 barrier_method <- function(f0, constraints, x0,
@@ -808,7 +808,7 @@ barriermethod <- barrier_method
 #' @export
 #' @examples
 #' f0 <- function(x) sum(x^2)
-#' cons <- list(function(x) 1 - x\[1\])
+#' cons <- list(function(x) 1 - x[1])
 #' r <- morie_barerp(f0, cons, x0 = c(2, 0))
 #' r$x
 morie_barerp <- function(f0, constraints, x0,

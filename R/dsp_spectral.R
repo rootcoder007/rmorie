@@ -241,7 +241,7 @@ morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
 #' concentration.
 #'
 #' @param psd PSD vector.
-#' @return Scalar in `\[0, 1\]`.
+#' @return Scalar in `[0, 1]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7.
 #' @examples
 #' uni <- rep(1, 64)

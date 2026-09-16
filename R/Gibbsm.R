@@ -24,7 +24,7 @@
 #' @export
 #' @examples
 #' conditionals <- list(function(x, u) qnorm(u, 0.5 * x[2], 1),
-#'                      function(x, u) qnorm(u, 0.5 * x\[1\], 1))
+#'                      function(x, u) qnorm(u, 0.5 * x[1], 1))
 #' Gibbsm(conditionals, x0 = c(0, 0), n_iter = 50, burn = 10)
 Gibbsm <- function(conditionals, x0, n_iter = 100, burn = 0) {
   x <- .s03vec(x0)

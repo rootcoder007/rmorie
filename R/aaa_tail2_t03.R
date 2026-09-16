@@ -490,7 +490,7 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' @export
 #' @examples
 #' f <- function(x) sum(x^2)
-#' cons <- list(function(x) 1 - x\[1\])
+#' cons <- list(function(x) 1 - x[1])
 #' r <- PenaltyMin(f, cons, x0 = c(2, 0), mu = 1)
 #' str(r, max.level = 1)
 PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,

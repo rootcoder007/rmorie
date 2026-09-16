@@ -987,7 +987,7 @@ morie_geron_optics <- function(X, min_samples = 5, max_eps = Inf, eps_cluster = 
 #' @param verbalizer Optional `verbalizer(label) -> str`.
 #' @export
 #' @examples
-#' copy <- function(prompt) prompt[\[1\]][[2]]
+#' copy <- function(prompt) prompt[[1]][[2]]
 #' morie_geron_one_shot(copy, list("hello", "greeting"), "goodbye")
 morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
   .morie_gr_need(is.function(model), "geron_one_shot: model must be callable")
@@ -2289,7 +2289,7 @@ morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200
 #' @param x Point.
 #' @export
 #' @examples
-#' morie_geron_reverse_autodiff(function(v) v[\[1\]] * v[[2]], c(3,
+#' morie_geron_reverse_autodiff(function(v) v[[1]] * v[[2]], c(3,
 #'     4))
 morie_geron_reverse_autodiff <- function(f, x) {
   base <- morie_geron_autograd(f, x)

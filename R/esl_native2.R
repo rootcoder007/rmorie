@@ -1291,7 +1291,7 @@ morie_esl_backprop <- function(X, y, weights, task = "regression") {
 #' base <- rbind(c(1, 1, 1, 0, 0, 0), c(0, 0, 0, 1, 1, 1))
 #' V <- base[rep(1:2, each = 50), ]
 #' r <- morie_esl_boltzmann(V, h = 3, lr = 0.5, n_epochs = 200L, seed = 1L)
-#' r$error_path[length(r$error_path)] < r$error_path\[1\]
+#' r$error_path[length(r$error_path)] < r$error_path[1]
 #' @export
 morie_esl_boltzmann <- function(v, h = 4L, lr = 0.1, n_epochs = 200L,
                                 k_cd = 1L, seed = 0L, batch_size = NULL) {

@@ -124,7 +124,7 @@ morie_tps_list_categories <- function() {
 #' morie_tps_list_categories()
 #' \dontrun{
 #' # Each fetch is a live ArcGIS query paged 2000 records at a time.
-#' res <- morie_tps_fetch_category(morie_tps_list_categories()\[1\],
+#' res <- morie_tps_fetch_category(morie_tps_list_categories()[1],
 #'                                 cache_dir = tempdir())
 #' }
 #' @export
@@ -220,7 +220,7 @@ morie_tps_fetch_category <- function(category,
 #' \dontrun{
 #' # Fetching one is a live ArcGIS query; it ran for nine minutes in the
 #' # docs build, so it is shown rather than executed.
-#' df <- morie_tps_fetch_dataframe(morie_tps_list_categories()\[1\])
+#' df <- morie_tps_fetch_dataframe(morie_tps_list_categories()[1])
 #' head(df)
 #' }
 #' @export

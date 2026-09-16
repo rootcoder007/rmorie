@@ -87,7 +87,7 @@ morie_mqtmpl_method_status <- function(method = NULL) {
 #' g <- lapply(1:6, function(i) c(rbinom(1, 1, 0.5), NA, rbinom(1, 1, 0.5)))
 #' pos <- c(0, 0.1, 0.2)
 #' r <- morie_mqtmpl_hmm_genotype_probabilities(g, pos)
-#' str(r[\[1\]])
+#' str(r[[1]])
 morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
                                                       error_rate = 0) {
   e <- as.numeric(error_rate)

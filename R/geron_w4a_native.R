@@ -2404,7 +2404,7 @@ morie_geron_f1_score_alt <- function(y_true, y_pred, pos_label = 1, average = "b
 #' @export
 #' @examples
 #' f <- function(d) {
-#'   x <- d[\[1\]]; y <- d[[2]]
+#'   x <- d[[1]]; y <- d[[2]]
 #'   v <- x$value * y$value + x$value^2
 #'   g <- x$deriv * y$value + x$value * y$deriv + 2 * x$value * x$deriv
 #'   list(value = v, deriv = g)
@@ -2902,7 +2902,7 @@ morie_geron_few_shot <- function(model, examples, query, k = NULL, separator = "
 #' @return List with `theta`, `theta_init`, `loss_history`, `drift`, `lr_schedule`, `frozen`.
 #' @export
 #' @examples
-#' task <- function(th, batch) list((th\[1\] - 3)^2, 2 * (th\[1\] -
+#' task <- function(th, batch) list((th[1] - 3)^2, 2 * (th[1] -
 #'     3))
 #' morie_geron_finetune_lm(task, list(1), epochs = 1, lr = 0.1,
 #'     theta = 0)

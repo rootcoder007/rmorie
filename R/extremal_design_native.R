@@ -225,7 +225,7 @@ morie_erdos_ko_rado <- function(n, k) {
 #' the chain cover by a bipartite matching -- and the equality is then
 #' CHECKED rather than assumed, since equality is the content.
 #'
-#' @param leq Square logical matrix; `leq\[i, j\]` when \eqn{i \le j}.
+#' @param leq Square logical matrix; `leq[i, j]` when \eqn{i \le j}.
 #' @return A list with `antichain_size`, `chain_cover_size`,
 #'   `dilworth_holds`, `antichain`, `warnings`.
 #' @references Dilworth RP (1950) \emph{Annals of Mathematics}

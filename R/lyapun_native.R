@@ -233,7 +233,7 @@ mean_period <- function(y, dt = 1.0) {
 #' \code{min_sep}, \code{n_points}, \code{n_obs}.
 #' @export
 #' @examples
-#' r0 <- 3.9; x <- numeric(300); x\[1\] <- 0.4
+#' r0 <- 3.9; x <- numeric(300); x[1] <- 0.4
 #' for (i in 2:300) x[i] <- r0 * x[i - 1] * (1 - x[i - 1])
 #' str(divergence_curve(x, m = 3, tau = 1), max.level = 1)
 divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
@@ -375,7 +375,7 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #' \code{n}, \code{dt}, \code{method}, \code{note}.
 #' @export
 #' @examples
-#' r0 <- 3.9; x <- numeric(400); x\[1\] <- 0.4
+#' r0 <- 3.9; x <- numeric(400); x[1] <- 0.4
 #' for (i in 2:400) x[i] <- r0 * x[i - 1] * (1 - x[i - 1])
 #' r <- lyapunov_exponent(x, embedding = 3, tau = 1)
 #' str(r, max.level = 1)

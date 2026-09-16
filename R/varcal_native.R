@@ -266,7 +266,7 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #'   lapply(1:3, function(i) list(pos = 0L, seq = "ACGTTCGT")),
 #'   lapply(1:3, function(i) list(pos = 0L, seq = "ACGTACGT")))
 #' cands <- varcal_find_candidates(reads, reference = "ACGTACGTAC")
-#' enc <- varcal_encode_pileup(reads, "ACGTACGTAC", cands[\[1\]], width = 7,
+#' enc <- varcal_encode_pileup(reads, "ACGTACGTAC", cands[[1]], width = 7,
 #'                             height = 8)
 #' str(enc, max.level = 1)
 varcal_encode_pileup <- function(reads, reference, candidate, width = 21,

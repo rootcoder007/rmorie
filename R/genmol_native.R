@@ -146,7 +146,7 @@ morie_genmol_sample <- function(mu, logvar, n = 1L, temperature = 1,
 #' @return A list with the endpoint, the trajectory and the values.
 #' @export
 #' @examples
-#' prop <- function(z) -((z\[1\] - 1)^2 + (z[2] + 0.5)^2)
+#' prop <- function(z) -((z[1] - 1)^2 + (z[2] + 0.5)^2)
 #' morie_genmol_optimise(c(-2, 3), prop, 20L, 0.1)
 morie_genmol_optimise <- function(z0, property_fn, steps = 20L,
                                   lr = 0.1, eps = 1e-4) {
