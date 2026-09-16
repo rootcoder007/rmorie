@@ -2,7 +2,7 @@
 #' Gaussian ML log-likelihood of a linear mixed model at a given V
 #'
 #' \eqn{l(beta, V; y) = -1/2 [n log(2 pi) + log|V| +
-# prime (y - X beta) prime V^-1 (y - X beta)]} with \code{beta} profiled out at its
+#' prime (y - X beta) prime V^-1 (y - X beta)]} with \code{beta} profiled out at its
 #' GLS value \eqn{(X prime V^-1 X)^-1 X prime V^-1 y}, which is the maximiser for
 #' any fixed \code{V}; what is returned is therefore the profile
 #' log-likelihood in \code{V}. \code{V} must be positive definite -- an

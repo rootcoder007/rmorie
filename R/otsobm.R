@@ -2,12 +2,12 @@
 #' Replace W_1 by a Hilbert norm on the difference of the measures
 #'
 #' \eqn{_1} linearised around a common reference measure is exactly the
-# prime \code{H^{-1}} norm of the difference, and unlike \eqn{_1} that norm
-# prime is quadratic: it needs one linear solve, not a linear program, and it
-# prime embeds into a Hilbert space so kernel methods apply directly. The price
-# prime is that it is only a first-order approximation.
-# prime
-# prime Formula: \code{W_1(mu,nu) ~ ||mu - nu||_{H^{-1}} = sqrt((mu-nu)'
+#' \code{H^{-1}} norm of the difference, and unlike \eqn{_1} that norm
+#' is quadratic: it needs one linear solve, not a linear program, and it
+#' embeds into a Hilbert space so kernel methods apply directly. The price
+#' is that it is only a first-order approximation.
+#'
+#' Formula: \code{W_1(mu,nu) ~ ||mu - nu||_{H^{-1}} = sqrt((mu-nu)'
 #' (-Delta)^\{-1\} (mu-nu))} -- Peyre (2018), Section 2
 #'
 #' @param mu,nu Two measures on the same support.

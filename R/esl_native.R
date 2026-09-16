@@ -448,7 +448,7 @@ morie_esl_sis_screening <- function(X, y, d = NULL) {
 #' Weight-decay penalty and its gradient
 #'
 #' The penalty is written `lambda * sum(w^2)`, so the gradient is
-#' `2 * lambda * w` -- twice what frameworks using the `lambda/2` convention
+#' `2 &#42; lambda &#42; w` -- twice what frameworks using the `lambda/2` convention
 #' apply for the same nominal lambda. The gradient is returned explicitly so
 #' the convention in use is visible rather than assumed.
 #'

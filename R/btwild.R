@@ -6,7 +6,7 @@
 #' doi:10.1214/aos/1176349025 (verified against Crossref).
 #'
 #' The design and the residuals are both held fixed; only a scalar multiplier
-#' is redrawn per observation, y*_i = x_i' beta_hat + r_i v_i, with v_i iid,
+#' is redrawn per observation, y*&#95;i = x&#95;i' beta_hat + r_i v_i, with v_i iid,
 #' mean 0, variance 1, third moment 1.  Mammen's two-point law attains all
 #' three: v = (1 - sqrt 5)/2 with probability (sqrt 5 + 1)/(2 sqrt 5), else
 #' v = (1 + sqrt 5)/2.  That is the law the package's shared .s03mammen

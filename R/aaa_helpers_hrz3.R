@@ -174,7 +174,7 @@ NULL
 # toward zero.
 #' Density-weighted average derivative, Horowitz Sec. 2.6.1:
 #'
-#' delta = E\[f_X(X) dE(Y|X)/dX\] = -2 E[f_X\'(X) Y]. In a single-index
+#' delta = E\[f_X(X) dE(Y|X)/dX\] = -2 E\[f_X\'(X) Y\]. In a single-index
 #' model delta is proportional to beta, so it fixes the index DIRECTION
 #' without optimising over it.  The leave-one-out form is used: the
 #' own-observation term of a kernel density derivative is identically

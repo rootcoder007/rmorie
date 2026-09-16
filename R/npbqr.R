@@ -8,7 +8,7 @@
 #' of the scale. The location parameter is unaffected, which is why the
 #' regression coefficient can be read off the check-loss fit,
 #' \eqn{_hat = argmin sum rho_tau(y_i - x_i primeb)} with
-# prime \code{rho_tau(u) = u (tau - 1{u < 0})}, and only the error model
+#' \code{rho_tau(u) = u (tau - 1{u < 0})}, and only the error model
 #' changes. The fit uses the shared fixed-iteration IRLS helper, which
 #' takes exactly the same path in both language arms
 #'

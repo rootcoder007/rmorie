@@ -12,11 +12,11 @@
 #' If h = \[n/2\] + 1 is chosen, the breakdown point of Theorem 1 is obtained,
 #' and for h = \[n/2\] + \[(p+1)/2\], the result of Remark 1 holds.  In general, h
 #' may depend on some trimming proportion alpha, for instance by means of
-#' h = [n(1 - alpha)] + 1."
+#' h = \[n(1 - alpha)\] + 1."
 #'
 #' The default here is the maximal-breakdown choice of Remark 1,
 #' h = \[n/2\] + \[(p+1)/2\], whose breakdown point (p. 873) is
-#' ([(n - p)/2] + 1)/n.  Both breakdown formulas are reported.  The same page
+#' (\[(n - p)/2\] + 1)/n.  Both breakdown formulas are reported.  The same page
 #' states that the LTS converges like n^-1/2, unlike the LMS at n^-1/3, which
 #' is why Section 4 introduces it.
 #'
