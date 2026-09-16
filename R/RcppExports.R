@@ -357,74 +357,31 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 }
 
 #' Binary C-SVC via SMO (compiled)
-#' @keywords internal
-#' @param X Argument `X`; see Usage.
-#' @param y Argument `y`; see Usage.
-#' @param C Argument `C`; see Usage.
-#' @param kernel_type Argument `kernel_type`; see Usage.
-#' @param gamma Argument `gamma`; see Usage.
-#' @param coef0 Argument `coef0`; see Usage.
-#' @param degree Argument `degree`; see Usage.
-#' @param tol Argument `tol`; see Usage.
-#' @param max_iter Argument `max_iter`; see Usage.
-#' @return The value of `.Call`.
+#' @noRd
 morie_svc_train_cpp <- function(X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter) {
     .Call(`_rmorie_morie_svc_train_cpp`, X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter)
 }
 
 #' eps-SVR via SMO (compiled)
-#' @keywords internal
-#' @param X Argument `X`; see Usage.
-#' @param z Argument `z`; see Usage.
-#' @param C Argument `C`; see Usage.
-#' @param epsilon Argument `epsilon`; see Usage.
-#' @param kernel_type Argument `kernel_type`; see Usage.
-#' @param gamma Argument `gamma`; see Usage.
-#' @param coef0 Argument `coef0`; see Usage.
-#' @param degree Argument `degree`; see Usage.
-#' @param tol Argument `tol`; see Usage.
-#' @param max_iter Argument `max_iter`; see Usage.
-#' @return The value of `.Call`.
+#' @noRd
 morie_svr_train_cpp <- function(X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter) {
     .Call(`_rmorie_morie_svr_train_cpp`, X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter)
 }
 
 #' Decision values for new data given fitted SVM coefficients (compiled)
-#' @keywords internal
-#' @param SV Argument `SV`; see Usage.
-#' @param coef Argument `coef`; see Usage.
-#' @param rho Argument `rho`; see Usage.
-#' @param Xnew Argument `Xnew`; see Usage.
-#' @param kernel_type Argument `kernel_type`; see Usage.
-#' @param gamma Argument `gamma`; see Usage.
-#' @param coef0 Argument `coef0`; see Usage.
-#' @param degree Argument `degree`; see Usage.
-#' @return The value of `.Call`.
+#' @noRd
 morie_svm_decision_cpp <- function(SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree) {
     .Call(`_rmorie_morie_svm_decision_cpp`, SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree)
 }
 
 #' Grow one regression / second-order tree (compiled)
-#' @keywords internal
-#' @param X Argument `X`; see Usage.
-#' @param g Argument `g`; see Usage.
-#' @param h Argument `h`; see Usage.
-#' @param max_depth Argument `max_depth`; see Usage.
-#' @param min_node Argument `min_node`; see Usage.
-#' @param mtry Argument `mtry`; see Usage.
-#' @param lambda Argument `lambda`; see Usage.
-#' @param alpha Argument `alpha`; see Usage.
-#' @param gamma_pen Argument `gamma_pen`; see Usage.
-#' @return The value of `.Call`.
+#' @noRd
 morie_tree_fit_cpp <- function(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen) {
     .Call(`_rmorie_morie_tree_fit_cpp`, X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen)
 }
 
 #' Predict from a flattened tree (compiled)
-#' @keywords internal
-#' @param tree Argument `tree`; see Usage.
-#' @param X Argument `X`; see Usage.
-#' @return The value of `.Call`.
+#' @noRd
 morie_tree_predict_cpp <- function(tree, X) {
     .Call(`_rmorie_morie_tree_predict_cpp`, tree, X)
 }
