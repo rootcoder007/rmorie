@@ -93,7 +93,7 @@
 #' @examples
 #' # a layer straight out of a flow, so only exported functions are needed
 #' L <- MAF(dim_x = 3L, dim_t = 2L, n_layers = 1L, hidden = 6L,
-#'          seed = 2L)$layers[\[1\]]
+#'          seed = 2L)$layers[[1]]
 #' st <- .abcnnt_layer_stats(L, x = c(0.5, -0.2, 0.9), t = c(0.1, -0.4))
 #' st$mu
 #' st$al       # the log-scale, clamped to [-5, 5]
@@ -147,7 +147,7 @@ flow_forward <- function(flow, x, t) {
 #' f1 <- MAF(dim_x = 1L, dim_t = 1L, n_layers = 3L, hidden = 5L, seed = 4L)
 #' g <- seq(-12, 12, length.out = 2001)
 #' d <- vapply(g, function(x) exp(flow_logprob(f1, x, 0.3)), numeric(1))
-#' round(sum((d[-1] + d[-length(d)]) / 2) * (g[2] - g\[1\]), 3)
+#' round(sum((d[-1] + d[-length(d)]) / 2) * (g[2] - g[1]), 3)
 flow_logprob <- function(flow, x, t) {
   fw <- flow_forward(flow, x, t)
   d <- length(fw$u)
@@ -165,7 +165,7 @@ flow_logprob <- function(flow, x, t) {
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 3L, hidden = 6L, seed = 1L)
 #' length(flow$layers)
 #' # the autoregressive ordering alternates between layers
-#' flow$layers[\[1\]]$order
+#' flow$layers[[1]]$order
 #' flow$layers[[2]]$order
 MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
   if (dim_x < 1L || dim_t < 1L) stop("abcnnt: dimensions must be positive")
@@ -199,7 +199,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' ps <- .abcnnt_params(flow)
 #' length(ps)
 #' # each entry addresses one trainable parameter
-#' ps[\[1\]]
+#' ps[[1]]
 .abcnnt_params <- function(flow) {
   # An address, not the value: R hands out a copy of L$W1, so perturbing
   # what this returned could never reach the flow and every
@@ -236,7 +236,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' @export
 #' @examples
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
-#' a <- .abcnnt_params(flow)[\[1\]]
+#' a <- .abcnnt_params(flow)[[1]]
 #' .abcnnt_param_get(flow, a)
 .abcnnt_param_get <- function(flow, a) {
   x <- flow$layers[[a$layer]][[a$field]]
@@ -251,7 +251,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' @export
 #' @examples
 #' flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
-#' a <- .abcnnt_params(flow)[\[1\]]
+#' a <- .abcnnt_params(flow)[[1]]
 #' moved <- .abcnnt_param_set(flow, a, 0.5)
 #' .abcnnt_param_get(moved, a)
 .abcnnt_param_set <- function(flow, a, v) {
@@ -284,7 +284,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #'   list(th, th * 0.5 + rnorm(2, 0, 0.2))
 #' })
 #' ll <- function(fl) mean(vapply(D, function(p)
-#'   flow_logprob(fl, p[[2]], p[\[1\]]), numeric(1)))
+#'   flow_logprob(fl, p[[2]], p[[1]]), numeric(1)))
 #' trained <- train_flow(flow, D, epochs = 10L, lr = 0.02, seed = 1L)
 #' round(c(before = ll(flow), after = ll(trained)), 3)
 #' }

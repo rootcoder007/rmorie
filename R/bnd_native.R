@@ -496,7 +496,7 @@ morie_bnd_moment_inequality <- function(data, g, theta_grid, alpha = 0.05,
 #' @param c target functional's coefficients.
 #' @param A_ub,b_ub inequality restrictions `A_ub x <= b_ub`.
 #' @param A_eq,b_eq equality restrictions (typically data moments).
-#' @param bounds list of `c(lo, hi)` per coordinate; `\[0, 1\]` each
+#' @param bounds list of `c(lo, hi)` per coordinate; `[0, 1]` each
 #'   when `NULL` -- the natural range for response probabilities.
 #' @return list: lower, upper, width, argmin, argmax, feasible,
 #'   bounded, sharp, k, n_inequalities, n_equalities, method.

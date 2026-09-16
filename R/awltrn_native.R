@@ -268,7 +268,7 @@ weighted_rule <- function(H, labels, weights, ridge = 1e-6) {
 #' H <- matrix(rnorm(n * 2), n, 2)
 #' A <- sample(c(-1, 1), n, replace = TRUE)
 #' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
-#' regimen_value(R, A, H, rule = function(h) if (h\[1\] > 0) 1 else -1)
+#' regimen_value(R, A, H, rule = function(h) if (h[1] > 0) 1 else -1)
 regimen_value <- function(R, A, H, rule, propensity = NULL) {
   chk <- .awltrn_check(R, A, H, propensity)
   r <- chk$r

@@ -988,14 +988,14 @@ pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
 #'
 #' Combines a 100--400 Hz band-energy ratio, normalised spectral entropy,
 #' and the Higuchi fractal dimension of the PCG into a murmur-likelihood
-#' score in `\[0, 1\]`.
+#' score in `[0, 1]`.
 #'
 #' Reference: Rangayyan, R.M. (2015) *Biomedical Signal Analysis*, 2nd ed.,
 #' Wiley/IEEE Press, chapter on heart-sound analysis.
 #'
 #' @param pcg Numeric vector (1-D PCG signal).
 #' @param fs Sampling frequency in Hz.
-#' @return List with `value` (score in `\[0, 1\]`), `name`, and `extra`
+#' @return List with `value` (score in `[0, 1]`), `name`, and `extra`
 #'   (`fractal_dimension`, `hf_energy_ratio`, `spectral_entropy`,
 #'   `fd_score`, `hf_score`, `ent_score`).
 #' @export

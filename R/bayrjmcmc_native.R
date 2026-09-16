@@ -105,7 +105,7 @@
 #' @return The value of \code{.logabsdet}.
 #' @export
 #' @examples
-#' j <- numeric_log_jacobian(function(z) c(z\[1\] + z[2], z\[1\] - z[2]),
+#' j <- numeric_log_jacobian(function(z) c(z[1] + z[2], z[1] - z[2]),
 #'                           c(0.4, 0.2))
 #' stopifnot(abs(j - log(2)) < 1e-5)
 #' j
@@ -155,7 +155,7 @@ numeric_log_jacobian <- function(mapfun, z, h = 1e-6) {
 #'        transform = function(theta, u) list(c(theta, u), numeric(0))),
 #'   list(frm = "m2", to = "m1", n_u = 0L, n_u_rev = 1L,
 #'        propose = function(theta, uni) numeric(0),
-#'        transform = function(theta, u) list(theta\[1\], theta[2]))
+#'        transform = function(theta, u) list(theta[1], theta[2]))
 #' )
 #' names(check_dimension_matching(models, moves))
 check_dimension_matching <- function(models, moves) {
@@ -301,7 +301,7 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #'        logq = function(theta, u) dnorm(u, log = TRUE)),
 #'   list(frm = "m2", to = "m1", n_u = 0L, n_u_rev = 1L,
 #'        propose = function(theta, uni) numeric(0),
-#'        transform = function(theta, u) list(theta\[1\], theta[2]),
+#'        transform = function(theta, u) list(theta[1], theta[2]),
 #'        logjac = function(theta, u, theta2, u2) 0,
 #'        logq_rev = function(theta2, u2) dnorm(u2, log = TRUE))
 #' )
@@ -659,7 +659,7 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' set.seed(2); y <- sort(c(runif(30, 0, .4), runif(60, .4, 1)))
 #' r <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
 #' r$k_mean
-#' r$k_posterior\[1\]
+#' r$k_posterior[1]
 #' r2 <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
 #' r$k_posterior
 changepoint_rjmcmc <- function(y = numeric(0), L = 1.0, n_iter = 40000,

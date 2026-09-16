@@ -20,7 +20,7 @@
 #' @return list: estimate, f0, D, D_main, D_int, closure, method.
 #' @keywords internal
 #' @examples
-#' Fanova(function(x) x\[1\] + 2 * x[2], NULL, 2, 6)$closure
+#' Fanova(function(x) x[1] + 2 * x[2], NULL, 2, 6)$closure
 #' @export
 Fanova <- function(f, input_dist = NULL, d = 2, grid = 8) {
   dd <- as.integer(d)

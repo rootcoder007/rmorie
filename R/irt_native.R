@@ -164,7 +164,7 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
 #' X <- vapply(seq_len(k), function(j) {
 #'   bj <- sort(runif(2, -1, 1))
 #'   u <- runif(n)
-#'   1L + (u < plogis(a_true[j] * (th - bj\[1\]))) + (u < plogis(a_true[j] * (th - bj[2])))
+#'   1L + (u < plogis(a_true[j] * (th - bj[1]))) + (u < plogis(a_true[j] * (th - bj[2])))
 #' }, integer(n))
 #' morie_irt_grm(X)
 #' @export

@@ -634,7 +634,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
 #' )
 #' fp <- .propinf_forward(net, c(1, -2))
-#' fp$pre[\[1\]]        # pre-activations of the hidden layer
+#' fp$pre[[1]]        # pre-activations of the hidden layer
 #' fp$acts[[2]]       # after ReLU
 #' fp$acts[[3]]       # the logistic output
 .propinf_forward <- function(net, x) {
@@ -702,7 +702,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
 #' )
 #' # |sum of the row's weights|, Algorithm 1's sorting key
-#' vapply(1:3, function(i) .propinf_node_metric(net[\[1\]], i), numeric(1))
+#' vapply(1:3, function(i) .propinf_node_metric(net[[1]], i), numeric(1))
 .propinf_node_metric <- function(layer, i) {
   abs(sum(layer$W[i, ]))
 }
@@ -729,7 +729,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
 #'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
 #' )
-#' .propinf_permute_hidden_layer_internal(net, 0L, c(2L, 0L, 1L))[\[1\]]$b
+#' .propinf_permute_hidden_layer_internal(net, 0L, c(2L, 0L, 1L))[[1]]$b
 .propinf_permute_hidden_layer_internal <- function(net, t, sigma) {
   out <- lapply(net, function(L) list(W = L$W, b = as.numeric(L$b)))
   out[[t + 1L]]$W <- net[[t + 1L]]$W[sigma + 1L, , drop = FALSE]
@@ -819,7 +819,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'                     4, 5), nrow = 3, byrow = TRUE), b = c(10, 20, 30)),
 #'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
 #' )
-#' .propinf_set_representation_internal(net)[\[1\]]
+#' .propinf_set_representation_internal(net)[[1]]
 .propinf_set_representation_internal <- function(net) {
   lapply(net, function(L) lapply(seq_len(nrow(L$W)),
                                  function(i) c(L$W[i, ], L$b[i])))
@@ -921,7 +921,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' bw <- .propinf_mlp_backward(net, fp$acts, fp$pre, p - 1,
 #'                             .propinf_zero_like(net), final = "sigmoid")
 #' bw$delta                 # gradient with respect to x
-#' bw$grads[\[1\]]$b          # accumulated bias gradients of the first layer
+#' bw$grads[[1]]$b          # accumulated bias gradients of the first layer
 .propinf_mlp_backward <- function(net, acts, pre, dout, grads, final = "relu",
                                   hidden_act = "relu") {
   delta <- as.numeric(dout)
@@ -988,9 +988,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @examples
 #' net <- .propinf_mlp_init(c(3L, 2L, 1L), .propinf_rng(1L))
 #' g <- .propinf_zero_like(net)
-#' g[\[1\]]$b <- c(1, -1)
+#' g[[1]]$b <- c(1, -1)
 #' stepped <- .propinf_sgd_step(net, g, lr = 0.1, scale = 1)
-#' stepped[\[1\]]$b - net[\[1\]]$b
+#' stepped[[1]]$b - net[[1]]$b
 .propinf_sgd_step <- function(net, grads, lr, scale) {
   for (k in seq_along(net)) {
     net[[k]]$W <- net[[k]]$W - lr * scale * grads[[k]]$W
@@ -1062,7 +1062,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' feats <- lapply(1:8, function(i) as.numeric(c(i, i^2 / 10, -i / 2, 1)))
 #' labs <- c(0, 0, 0, 0, 1, 1, 1, 1)
 #' meta <- .propinf_train_vector_meta(feats, labs, 8L, 50L, 0.05, 0L)
-#' .propinf_vector_meta_predict(meta, feats[\[1\]])
+#' .propinf_vector_meta_predict(meta, feats[[1]])
 .propinf_vector_meta_predict <- function(net, f) {
   .propinf_mlp_forward(net, f, final = "sigmoid")$acts[[length(net) + 1L]][[1L]]
 }
@@ -1086,7 +1086,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
 #' )
 #' sets <- lapply(list(net, net), .propinf_set_representation_internal)
-#' .propinf_layer_scalers(sets)[\[1\]]
+#' .propinf_layer_scalers(sets)[[1]]
 .propinf_layer_scalers <- function(sets_list) {
   out <- list()
   for (t in seq_along(sets_list[[1L]])) {
@@ -1126,7 +1126,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' shapes <- list(c(3L, 2L), c(1L, 3L))
 #' m <- .propinf_deepsets_init(shapes, 8L, 4L, 8L, .propinf_rng(1L))
 #' length(m$psis)            # one entry per layer
-#' is.null(m$psis[\[1\]])      # the first layer has no incoming edge network
+#' is.null(m$psis[[1]])      # the first layer has no incoming edge network
 .propinf_deepsets_init <- function(shapes, phi_hidden, repr_dim, rho_hidden,
                                    rnd, context = "paired",
                                    edge_hidden = NULL) {
@@ -1189,9 +1189,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
 #' )
 #' sets <- .propinf_set_representation_internal(net)
-#' shapes <- lapply(sets, function(L) c(length(L), length(L[\[1\]]) - 1L))
+#' shapes <- lapply(sets, function(L) c(length(L), length(L[[1]]) - 1L))
 #' m <- .propinf_deepsets_init(shapes, 6L, 3L, 6L, .propinf_rng(4L))
-#' .propinf_deepsets_forward(m, sets)[\[1\]]
+#' .propinf_deepsets_forward(m, sets)[[1]]
 .propinf_deepsets_forward <- function(model, sets) {
   phis <- model$phis
   psis <- model$psis
@@ -1283,12 +1283,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #'   list(W = matrix(c(0.5, -0.5, 0.25), nrow = 1), b = 7)
 #' )
 #' sets <- .propinf_set_representation_internal(net)
-#' shapes <- lapply(sets, function(L) c(length(L), length(L[\[1\]]) - 1L))
+#' shapes <- lapply(sets, function(L) c(length(L), length(L[[1]]) - 1L))
 #' m <- .propinf_deepsets_init(shapes, 6L, 3L, 6L, .propinf_rng(4L))
 #' fwd <- .propinf_deepsets_forward(m, sets)
-#' g <- .propinf_deepsets_backward(m, sets, fwd[[2]], fwd[\[1\]] - 1,
+#' g <- .propinf_deepsets_backward(m, sets, fwd[[2]], fwd[[1]] - 1,
 #'                                 .propinf_zero_grads(m))
-#' g$rho[\[1\]]$b
+#' g$rho[[1]]$b
 .propinf_deepsets_backward <- function(model, sets, cache, dout, grads) {
   r <- model$repr_dim
   ctx <- model$context
@@ -1358,7 +1358,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' m <- .propinf_deepsets_init(shapes, 8L, 4L, 8L, .propinf_rng(1L))
 #' z <- .propinf_zero_grads(m)
 #' length(z$psis)
-#' is.null(z$psis[\[1\]])
+#' is.null(z$psis[[1]])
 .propinf_zero_grads <- function(model) {
   list(phis = lapply(model$phis, .propinf_zero_like),
        psis = lapply(model$psis, function(p)
@@ -1395,7 +1395,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' meta <- .propinf_train_set_meta(sets, c(0, 1, 0, 1, 0, 1), 6L, 3L, 6L,
 #'                                 20L, 0.05, 0L)
 #' round(vapply(sets, function(s)
-#'   .propinf_deepsets_forward(meta, s)[\[1\]], numeric(1)), 3)
+#'   .propinf_deepsets_forward(meta, s)[[1]], numeric(1)), 3)
 .propinf_train_set_meta <- function(sets_list, labels, phi_hidden, repr_dim,
                                     rho_hidden, epochs, lr, seed,
                                     context = "paired") {

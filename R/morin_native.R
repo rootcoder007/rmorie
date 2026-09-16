@@ -137,7 +137,7 @@ morie_prob_rules <- function(p_a, p_b, p_ab) {
 #' @return list(posteriors, p_z).
 #' @references Morin (2016), eqs. (2.51)-(2.53), (2.55), (2.74).
 #' @examples
-#' morie_bayes(c(0.02, 0.98), c(0.95, 0.10))$posteriors\[1\]
+#' morie_bayes(c(0.02, 0.98), c(0.95, 0.10))$posteriors[1]
 #' @export
 morie_bayes <- function(priors, likelihoods) {
   priors <- as.numeric(priors)

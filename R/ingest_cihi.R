@@ -40,7 +40,7 @@
 #' if (requireNamespace("readxl", quietly = TRUE)) {
 #'   cat <- morie_datasets_cihi_data_tables()
 #'   nrow(cat)
-#'   cat$title\[1\]
+#'   cat$title[1]
 #' }
 #' @export
 morie_datasets_cihi_data_tables <- function() {
@@ -85,7 +85,7 @@ morie_datasets_cihi_data_tables <- function() {
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Any table from the catalogue, e.g. the injury/trauma ED table:
-#' u <- morie_datasets_cihi_data_tables()$url\[1\]
+#' u <- morie_datasets_cihi_data_tables()$url[1]
 #' df <- morie_ingest_cihi_xlsx(u)
 #' }
 #' \dontshow{\}) # examplesIf}

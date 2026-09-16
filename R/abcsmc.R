@@ -26,7 +26,7 @@
 #' @return list: estimate, theta, weights, ess, accept, method.
 #' @keywords internal
 #' @examples
-#' Abcsmc(function(th) th\[1\], 0.5, list(c(0, 1)), 8, c(0.5, 0.2))$ess
+#' Abcsmc(function(th) th[1], 0.5, list(c(0, 1)), 8, c(0.5, 0.2))$ess
 #' @export
 Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
                    schedule = NULL, kernel_sd = 0.1) {

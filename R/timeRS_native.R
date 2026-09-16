@@ -475,8 +475,8 @@ morie_timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
 #'                  runif(60, 0, 2000), sample(1:5, 60, TRUE))
 #' fit <- morie_timeRS_fit_time_bias(ratings, n_users = 5, n_items = 6,
 #'                                   epochs = 10)
-#' morie_timeRS_predict_time(fit$mu, fit$b_u\[1\], fit$alpha_u\[1\],
-#'                           fit$t_user\[1\], fit$b_i[2], fit$item_bins[[2]],
+#' morie_timeRS_predict_time(fit$mu, fit$b_u[1], fit$alpha_u[1],
+#'                           fit$t_user[1], fit$b_i[2], fit$item_bins[[2]],
 #'                           t = 500)
 morie_timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins,
                                       t, p_u = NULL, q_i = NULL,

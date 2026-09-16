@@ -841,7 +841,7 @@ morie_geron_early_stopping <- function(X_train, y_train, X_val, y_val, n_iter,
 #' @examples
 #' x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
 #' morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1),
-#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc\[1\]/t, c(1,
+#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1,
 #'         2, 3), 4)
 morie_geron_encoder_decoder_seq2seq <- function(encoder, decoder, x, max_out_len,
                                                 start_token = NULL,
@@ -1738,7 +1738,7 @@ morie_geron_fp16_mixed_precision <- function(loss, S, gradients = NULL) {
 #' @examples
 #' x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
 #' morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1),
-#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc\[1\]/t, c(1,
+#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1,
 #'         2, 3), 4)
 #' morie_geron_gan_minimax(real = x, fake = x, D_real = x, D_fake = x)
 morie_geron_gan_minimax <- function(real, fake, D_real, D_fake, eps = 1e-12) {
@@ -3509,7 +3509,7 @@ morie_geron_multi_head_attention <- function(Q, K, V, WQ, WK, WV, WO, h,
 #' @examples
 #' x <- matrix(c(1, 0, 0.5, 1), 2, byrow = TRUE)
 #' morie_geron_encoder_decoder_seq2seq(function(x) c(sum(x), 1),
-#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc\[1\]/t, c(1,
+#'     function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1]/t, c(1,
 #'         2, 3), 4)
 #' morie_geron_multilabel_classification(X = x, Y = x)
 morie_geron_multilabel_classification <- function(X, Y, thresholds = 0.5) {

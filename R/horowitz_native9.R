@@ -13,7 +13,7 @@
 #' Marginal integration for a nonparametric additive model
 #'
 #' For \eqn{E(Y|X = x) = \mu + m_1(x^1) + \dots + m_d(x^d)} (3.5) with
-#' the location normalisation \eqn{E\[m_j(X^j)\] = 0} (3.6), which makes
+#' the location normalisation \eqn{E[m_j(X^j)] = 0} (3.6), which makes
 #' \eqn{\mu = E(Y)} (3.7) and
 #' \eqn{m_1(x^1) = \int E(Y|X = x)p_{-1}(x^{-1})dx^{-1} - \mu} (3.8).
 #' Replacing the conditional mean by the kernel estimator (3.9) and

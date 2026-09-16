@@ -279,7 +279,7 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
 #'     row <- rep(".", 15L)
 #'     for (k in seq_along(STEM)) {
 #'         ab <- PSET[[(sq + k - 1L)%%4L + 1L]]
-#'         row[STEM[[k]]\[1\] + 1L] <- ab\[1\]
+#'         row[STEM[[k]][1] + 1L] <- ab[1]
 #'         row[STEM[[k]][2] + 1L] <- ab[2]
 #'     }
 #'     row[6] <- "A"

@@ -413,7 +413,7 @@ morie_wsm_bootstrap <- function(data, T, B = 1000, seed = 0, ddof = 1L) {
 #' @examples
 #' set.seed(1)
 #' x <- stats::rnorm(200, 2, 1.5)
-#' morie_wsm_mle(x, function(d, t) stats::dnorm(d, t\[1\], abs(t[2])),
+#' morie_wsm_mle(x, function(d, t) stats::dnorm(d, t[1], abs(t[2])),
 #'               c(0, 1))$estimate
 #' @export
 morie_wsm_mle <- function(data, f, theta0, se = TRUE) {

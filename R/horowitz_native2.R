@@ -289,7 +289,7 @@ morie_index_regression <- function(X, y, beta, h = NULL, grid = NULL) {
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(200), ncol = 2)
-#' morie_ichimura(X, tanh(X %*% c(1, -0.6)))$beta\[1\]
+#' morie_ichimura(X, tanh(X %*% c(1, -0.6)))$beta[1]
 #' @export
 morie_ichimura <- function(X, y, h = NULL) {
   X <- as.matrix(X)

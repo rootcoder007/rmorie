@@ -251,7 +251,7 @@ morie_vit2lf_log_coords <- function(dx, dy) {
 #' @examples
 #' mk <- function(nr, nc, f) {
 #'     m <- matrix(0, nr, nc)
-#'     for (i in seq_len(nr)) for (j in seq_len(nc)) m\[i, j\] <- f(i -
+#'     for (i in seq_len(nr)) for (j in seq_len(nc)) m[i, j] <- f(i -
 #'         1L, j - 1L)
 #'     m
 #' }
