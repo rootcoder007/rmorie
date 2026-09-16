@@ -6,7 +6,7 @@
 # Programming, Vol. 2, Sec. 4.3.2 (CRT in computer arithmetic, as
 # cited by the stub).
 
-#' Extended Euclid: returns (g, c, d) with c*a + d*b = g
+#' Extended Euclid: returns (g, c, d) with c&#42;a + d&#42;b = g
 #'
 #' A step of the crtT_mixedcase_native implementation. Called by \code{crtT}.
 #' See the file header for the source the module follows.

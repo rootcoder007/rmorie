@@ -206,7 +206,7 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
   min(max(p, 0.0), 1.0)
 }
 
-#' Complementary error function via pnorm: erfc(x) = 2*pnorm(-x*sqrt2)
+#' Complementary error function via pnorm: erfc(x) = 2&#42;pnorm(-x&#42;sqrt2)
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pvalue}.
 #' See the file header for the source the module follows.

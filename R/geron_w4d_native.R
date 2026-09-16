@@ -3797,7 +3797,7 @@ morie_geron_wordpiece_tokenizer <- function(corpus, vocab_size = 50) {
 
 #' Warm restarts: cosine decay with periodic restarts (SGDR)
 #'
-#' eta = eta\_min + 0.5*(eta\_max-eta\_min)&#42;(1+cos(pi&#42;T\_cur/T\_i)); cycle
+#' eta = eta&#95;min + 0.5&#42;(eta&#95;max-eta&#95;min)&#42;(1+cos(pi&#42;T&#95;cur/T&#95;i)); cycle
 #' lengths grow geometrically `T_{i+1}` = round(T_i * factor).
 #'
 #' @param t Integer step or vector of steps (>=0).

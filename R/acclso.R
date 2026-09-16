@@ -4,7 +4,7 @@
 #' Minimises F(b) = 0.5 ||X b - y||^2 + lam ||b||&#95;1 by the accelerated
 #' proximal-gradient scheme of Beck and Teboulle (2009, Sect. 4):
 #' x_k = soft(y_k - grad f(y_k)/L, lam/L),
-#' t&#95;\{k+1\} = (1 + sqrt(1 + 4 t_k^2))/2,
+#' t&#95;\{k+1\} = (1 + sqrt(1 + 4 t&#95;k^2))/2,
 #' y_\{k+1\} = x_k + ((t_k - 1)/t_\{k+1\})(x_k - x_\{k-1\}).
 #'
 #' @param X Design matrix, one record per row.

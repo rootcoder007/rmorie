@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Pair correlation function g(r) from the derivative of Ripley's K
 #'
-#' Formula: \eqn{g(r) = K prime(r) / (2 pi r)}. \code{K} is estimated with
+#' Formula: \eqn{g(r) = K'(r) / (2 pi r)}. \code{K} is estimated with
 #' the reduced-sample (border) correction and differentiated by a
 #' central difference of half-width \code{h},
 #' \code{g_hat(r) = (K_hat(r + h) - K_hat(r - h)) / (2 h) / (2 pi r)},
