@@ -567,7 +567,7 @@ morie_meta_effect_sizes <- function(m1 = NA, m2 = NA, s1 = NA, s2 = NA,
 #' ratio.
 #' @param or_value Odds ratio.
 #' @param r Point-biserial r.
-#'   @param se_r Its standard error.
+#' @param se_r Its standard error.
 #' @return List of every conversion whose inputs were supplied.
 #' @export
 #' @examples

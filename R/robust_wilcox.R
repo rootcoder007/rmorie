@@ -385,6 +385,7 @@ morie_percentage_bend_correlation <- function(x, y, beta = 0.2) {
        p_value = 2 * (1 - stats::pt(abs(tstat), n - 2)))
 }
 
+#' @param tr amount of Winsorizing, per tail (default 0.2)
 #' @rdname morie_percentage_bend_correlation
 #' @export
 morie_winsorized_correlation <- function(x, y, tr = 0.2) {

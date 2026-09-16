@@ -598,18 +598,6 @@ morie_jsonlt_base64url_dec <- function(input) {
 #' @return a length-one character vector of class `json`.
 #' @param pretty FALSE, TRUE, or an indent width.
 #' @param ... toJSON options: dataframe (rows, columns, values), matrix (rowmajor, columnmajor), Date (ISO8601, epoch), POSIXt (string, ISO8601, epoch, mongo), factor (string, integer), complex (string, list), raw (base64, hex, int, mongo), null (list, null), na (NULL, null, string), auto_unbox, digits, force.
-#' @param dataframe Argument `dataframe`; see Usage.
-#' @param matrix Argument `matrix`; see Usage.
-#' @param Date Argument `Date`; see Usage.
-#' @param POSIXt Argument `POSIXt`; see Usage.
-#' @param factor Argument `factor`; see Usage.
-#' @param complex Argument `complex`; see Usage.
-#' @param raw Argument `raw`; see Usage.
-#' @param null Argument `null`; see Usage.
-#' @param na Argument `na`; see Usage.
-#' @param auto_unbox Argument `auto_unbox`; see Usage.
-#' @param digits Argument `digits`; see Usage.
-#' @param force Argument `force`; see Usage.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_jsonlt_to_json(V)
