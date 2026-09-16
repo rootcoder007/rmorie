@@ -709,7 +709,8 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #'                   0x44, 0x45, 0x46, 0x47))
 #' aad <- as.raw(c(0x50, 0x51, 0x52, 0x53, 0xc0, 0xc1, 0xc2, 0xc3,
 #'                 0xc4, 0xc5, 0xc6, 0xc7))
-#' pt <- charToRaw("Ladies and Gentlemen of the class of \x2799: If I could offer you only one tip for the future, sunscreen would be it.")
+#' pt <- charToRaw(paste0("Ladies and Gentlemen of the class of \x2799: If I could offer you ",
+#'   "only one tip for the future, sunscreen would be it."))
 #' r <- morie_secaead_aead_encrypt(key, nonce, pt, aad)
 #' stopifnot(substr(r$tag_hex, 1, 8) == "1ae10b59")
 #' r$tag_hex
