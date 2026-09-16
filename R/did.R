@@ -1173,7 +1173,7 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
 #'   d <- rbinom(n, 1, 0.5)
 #'   p <- rbinom(n, 1, 0.5)
 #'   s <- rbinom(n, 1, 0.5)
-#'   y <- 0.2 * d + 0.3 * p + 0.4 * s + 0.5 * d &#42; p &#42; s + rnorm(n, sd = 0.5)
+#'   y <- 0.2 * d + 0.3 * p + 0.4 * s + 0.5 * d * p * s + rnorm(n, sd = 0.5)
 #'   df <- data.frame(y = y, d = d, post = p, group = s)
 #'   res <- morie_did_triple_difference(df, "y", "d", "post", "group")
 #'   res$estimate
