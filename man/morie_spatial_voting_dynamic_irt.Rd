@@ -33,7 +33,7 @@ Time-series IRT where ideal points evolve via a random walk:
 }
 \examples{
 \donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
-dynamic-IRT random-walk prior on ideal points.
+# dynamic-IRT random-walk prior on ideal points.
 }
 \references{
 Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point

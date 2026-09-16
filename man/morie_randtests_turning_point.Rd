@@ -14,7 +14,7 @@ morie_randtests_turning_point(x, ...)
 \code{alternative}).}
 }
 \value{
-A list with \eqn{$method =
+A list with \verb{$method =
   "randtests::turning.point.test"} and \code{$raw} (an
 \code{htest} object).
 }

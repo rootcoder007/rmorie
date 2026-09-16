@@ -18,7 +18,7 @@ morie_np_kernel_reg(formula, data, ...)
 \code{regtype}, \code{tol}, \code{ftol}).}
 }
 \value{
-A list with \eqn{$method = "np::npreg (bws via
+A list with \verb{$method = "np::npreg (bws via
   npregbw)"} and \code{$raw}, where \code{$raw} is itself a
 list with \code{$bws} (the \code{rbandwidth} object from
 \code{np::npregbw}) and \code{$fit} (the \code{npregression}
