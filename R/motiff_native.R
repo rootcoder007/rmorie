@@ -138,7 +138,7 @@
 #'
 #' Z = (N_real - mean N_rand)/sd N_rand over a degree-preserving
 #' randomized ensemble; p = fraction of randomizations with count
-#' >= real (P < 0.01 motif cutoff).  Feed-forward loop and 3-cycle.
+#' at or above the real count (P < 0.01 motif cutoff).  Feed-forward loop and 3-cycle.
 #'
 #' @param adjacency Directed 0/1 adjacency (n x n).
 #' @param motif "ffl" or "cycle3".
