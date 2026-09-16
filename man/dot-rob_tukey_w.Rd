@@ -16,5 +16,5 @@ The value of \code{ifelse}.
 }
 \description{
 redescending part is what buys breakdown -- a gross outlier gets no
-vote at all, where Huber\'s psi still gives it a bounded one.
+vote at all, where Huber's psi still gives it a bounded one.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aft_native.R
 \name{.morie_numeric_cov}
 \alias{.morie_numeric_cov}
-\title{Inverse of the central-difference Hessian. The optimiser\'s own}
+\title{Inverse of the central-difference Hessian. The optimiser's own}
 \usage{
 .morie_numeric_cov(fn, theta, rel = 1e-05)
 }

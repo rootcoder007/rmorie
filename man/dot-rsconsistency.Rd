@@ -19,7 +19,7 @@ One of two values, depending on the branch taken.
 }
 \description{
 Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045,
-"Definition". Pchisq and Qchisq are the package\'s own native
+"Definition". Pchisq and Qchisq are the package's own native
 mirrors, not stats::.
 }
 \examples{

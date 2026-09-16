@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_class.R
 \name{McNemar}
 \alias{McNemar}
-\title{Section 10.9.2, McNemar\'s test of SYMMETRY.  The book states it on a}
+\title{Section 10.9.2, McNemar's test of SYMMETRY.  The book states it on a}
 \usage{
 McNemar(table, correct = NULL)
 }
@@ -19,8 +19,8 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{pairs},
 \description{
 general contingency table -- its worked example, Table 10.4, is 3x3
 with normal / indeterminate / abnormal -- so any k x k is accepted. k
-= 2 gives McNemar with Yates\' correction, k > 2 its generalization,
-Bowker\'s test.  Only the OFF-DIAGONAL disagreements enter: the
+= 2 gives McNemar with Yates' correction, k > 2 its generalization,
+Bowker's test.  Only the OFF-DIAGONAL disagreements enter: the
 diagonal, usually most of the cases, contributes nothing, because the
 question is whether the disagreements are one-sided.
 }

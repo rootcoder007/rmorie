@@ -17,6 +17,6 @@
 A list with \code{x}, \code{fun}, \code{success}.
 }
 \description{
-restart-until-stuck shape as the Python arm\'s call to
+restart-until-stuck shape as the Python arm's call to
 _sci_core.minimize(method="Nelder-Mead").
 }

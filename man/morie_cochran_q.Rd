@@ -2,7 +2,7 @@
 % Please edit documentation in R/k05_tranche2.R
 \name{morie_cochran_q}
 \alias{morie_cochran_q}
-\title{Cochran\'s Q: the R arm already lives in aaa_macn.R as}
+\title{Cochran's Q: the R arm already lives in aaa_macn.R as}
 \usage{
 morie_cochran_q(yi, vi)
 }

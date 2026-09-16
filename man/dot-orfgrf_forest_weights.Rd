@@ -18,5 +18,5 @@ A numeric value.
 }
 \description{
 Each unit that lands in the same leaf as x in tree t contributes 1 /
-(#units from tree t\'s leaf-sample in that leaf).
+(#units from tree t's leaf-sample in that leaf).
 }

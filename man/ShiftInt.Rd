@@ -26,8 +26,8 @@ A list with \code{psi}, \code{naive_mean}, \code{weights}, \code{max_weight},
 }
 \description{
 BACK-shifted exposure.  Forward-shifting is the sign error this
-estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2),
-so w = exp\{(delta/tau^2)(A - H\'gamma - delta/2)\}.  Diaz & van der
+estimand invites.  Gaussian working model A|H ~ N(H'gamma, tau^2),
+so w = exp\{(delta/tau^2)(A - H'gamma - delta/2)\}.  Diaz & van der
 Laan (2012, 2018).  NOT in Schabenberger & Gotway.
 }
 \examples{

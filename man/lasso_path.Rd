@@ -15,7 +15,7 @@ lasso_path(X, y, lam, iters = 500, tol = 1e-09)
 
 \item{iters}{Maximum coordinate-descent passes.}
 
-\item{tol}{See Usage.}
+\item{tol}{Convergence tolerance on the maximum coordinate update.}
 }
 \value{
 A list with \code{beta}, \code{intercept}, \code{support},

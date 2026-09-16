@@ -20,7 +20,7 @@ A list with \code{output}, \code{selected_queries}, \code{n_selected},
 \code{sparsity_scores}, \code{complexity}.
 }
 \description{
-Informer\'s ProbSparse self-attention (Zhou et al. 2021). q: numeric
+Informer's ProbSparse self-attention (Zhou et al. 2021). q: numeric
 matrix [L_Q, d] (queries) k: numeric matrix [L_K, d] (keys) v:
 numeric matrix [L_K, d_v] (values) c: numeric sparsity constant
 (default 5) Returns named list: output : [L_Q, d_v] attended values

@@ -2,7 +2,7 @@
 % Please edit documentation in R/difpanel.R
 \name{.pdcoin_nuisance}
 \alias{.pdcoin_nuisance}
-\title{Internal: Pedroni\'s steps 2-4 nuisance terms for one panel unit}
+\title{Internal: Pedroni's steps 2-4 nuisance terms for one panel unit}
 \usage{
 .pdcoin_nuisance(y, Zx, e, bandwidth)
 }

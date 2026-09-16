@@ -2,7 +2,7 @@
 % Please edit documentation in R/smcsam_native.R
 \name{.smcsam_pick}
 \alias{.smcsam_pick}
-\title{Binary search over a precomputed cumulative distribution.  R\'s}
+\title{Binary search over a precomputed cumulative distribution.  R's}
 \usage{
 .smcsam_pick(cum, u)
 }
@@ -16,6 +16,6 @@ The value of \code{lo}, as built in the body.
 }
 \description{
 findInterval has the same effect but is documented to return the
-leftmost interval, so we keep our own to mirror the Python arm\'s
+leftmost interval, so we keep our own to mirror the Python arm's
 hand-written loop.
 }

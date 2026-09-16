@@ -83,7 +83,7 @@ lp3 <- function(x) {
 gr3 <- function(x) {
     dv <- x - MU3
     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
-        j\] * dv[j], numeric(1))), numeric(1))
+        j] * dv[j], numeric(1))), numeric(1))
 }
 morie_baysmplr(lp3, gr3, c(0, 0, 0), n_iter = 80L, burn = 30L,
     seed = 5, eps = 0.25, steps = 8L)

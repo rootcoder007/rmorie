@@ -16,7 +16,7 @@ A list with \code{y}, \code{m}, \code{n}, \code{identical_repetitions}, \code{me
 }
 \description{
 averaging assumes.  A single x is read as the same signal repeated,
-which is the book\'s "identical and aligned" case.
+which is the book's "identical and aligned" case.
 }
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

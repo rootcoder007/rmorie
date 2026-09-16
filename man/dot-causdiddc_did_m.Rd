@@ -2,7 +2,7 @@
 % Please edit documentation in R/causdiddc_native.R
 \name{.causdiddc_did_m}
 \alias{.causdiddc_did_m}
-\title{The paper\'s DID_M estimator: switchers vs stayers, period by period}
+\title{The paper's DID_M estimator: switchers vs stayers, period by period}
 \usage{
 .causdiddc_did_m(Y, D, group, period)
 }

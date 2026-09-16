@@ -17,5 +17,5 @@
 A list with \code{Y}, \code{units}, \code{periods}.
 }
 \description{
-are taken in sorted order, matching numpy\'s unique().
+are taken in sorted order, matching numpy's unique().
 }

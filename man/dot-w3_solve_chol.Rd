@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_w3num.R
 \name{.w3_solve_chol}
 \alias{.w3_solve_chol}
-\title{Solve L L\' x = b by forward then back substitution}
+\title{Solve L L' x = b by forward then back substitution}
 \usage{
 .w3_solve_chol(lo, b)
 }

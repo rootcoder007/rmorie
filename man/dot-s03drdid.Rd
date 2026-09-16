@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_s03.R
 \name{.s03drdid}
 \alias{.s03drdid}
-\title{Doubly robust DiD for panel data, Sant\'Anna and Zhao (2020) eq.
+\title{Doubly robust DiD for panel data, Sant'Anna and Zhao (2020) eq.
 (2.6):}
 \usage{
 .s03drdid(dy, D, X = NULL, weights = NULL)

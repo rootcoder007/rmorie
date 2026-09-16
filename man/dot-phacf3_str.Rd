@@ -2,7 +2,7 @@
 % Please edit documentation in R/phacf3_native.R
 \name{.phacf3_str}
 \alias{.phacf3_str}
-\title{A key\'s string form, zero padded so that byte order is numeric order}
+\title{A key's string form, zero padded so that byte order is numeric order}
 \usage{
 .phacf3_str(k)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/wrd2v_native.R
 \name{morie_wrd2v_analogy}
 \alias{morie_wrd2v_analogy}
-\title{Section 4\'s offset query: b - a + c. The three question words are}
+\title{Section 4's offset query: b - a + c. The three question words are}
 \usage{
 morie_wrd2v_analogy(vectors, a, b, c, topn = 1)
 }

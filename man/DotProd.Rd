@@ -20,7 +20,7 @@ A list with \code{dot_product}, \code{gamma}, \code{energy_x},
 \description{
 it normalizes to.  The book notes the means may be removed first (eq
 3.97), which is a DIFFERENT quantity -- without removal gamma is the
-cosine between the raw vectors, with it, Pearson\'s r.
+cosine between the raw vectors, with it, Pearson's r.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

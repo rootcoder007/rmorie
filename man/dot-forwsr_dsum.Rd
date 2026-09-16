@@ -2,7 +2,7 @@
 % Please edit documentation in R/forwsr_native.R
 \name{.forwsr_dsum}
 \alias{.forwsr_dsum}
-\title{CPython\'s builtin sum() switched to Neumaier compensated summation}
+\title{CPython's builtin sum() switched to Neumaier compensated summation}
 \usage{
 .forwsr_dsum(v)
 }
@@ -13,7 +13,7 @@
 A numeric value.
 }
 \description{
-for floats in 3.12. R\'s sum() accumulates in long double, and a
+for floats in 3.12. R's sum() accumulates in long double, and a
 plain loop accumulates in double; neither reproduces it. The forward
 search orders residuals that differ in their last digits, so the
 summation algorithm decides which row enters next and the two arms

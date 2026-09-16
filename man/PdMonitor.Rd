@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_phys.R
 \name{PdMonitor}
 \alias{PdMonitor}
-\title{PdMonitor: Parkinson\'s disease monitoring via multimodal signals}
+\title{PdMonitor: Parkinson's disease monitoring via multimodal signals}
 \usage{
 PdMonitor(eeg, emg, gait, fs, tremor_band = c(3, 7))
 }

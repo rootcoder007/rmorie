@@ -2,7 +2,7 @@
 % Please edit documentation in R/attrInf_native.R
 \name{.attrInf_py_str}
 \alias{.attrInf_py_str}
-\title{Match Python\'s str() for the tie-breaking sort. Python\'s str(1.0)
+\title{Match Python's str() for the tie-breaking sort. Python's str(1.0)
 is}
 \usage{
 .attrInf_py_str(v)

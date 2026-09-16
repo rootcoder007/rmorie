@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rng_native.R
 \name{.morie_normal_quantile}
 \alias{.morie_normal_quantile}
-\title{Wichura\'s AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <=
+\title{Wichura's AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <=
 5}
 \usage{
 .morie_normal_quantile(p)

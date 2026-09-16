@@ -20,7 +20,7 @@ EchoSeries(a, n0, terms = 10, omega = NULL)
 The value of \code{out}, as built in the body.
 }
 \description{
-is the wavelet\'s cepstrum plus impulses at n0 and its multiples,
+is the wavelet's cepstrum plus impulses at n0 and its multiples,
 amplitudes (-1)^(k+1) a^k / k.  The expansion needs |a| < 1, which
 the book states and which is enforced.
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/k05_tranche1.R
 \name{.morie_k05_permutation}
 \alias{.morie_k05_permutation}
-\title{Fisher-Yates driven by the package\'s Philox stream, swapping}
+\title{Fisher-Yates driven by the package's Philox stream, swapping}
 \usage{
 .morie_k05_permutation(n, seed = 0, stream = 0)
 }

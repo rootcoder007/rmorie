@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_s03.R
 \name{.s03quantile7}
 \alias{.s03quantile7}
-\title{Type-7 quantile, the default of R\'s quantile()}
+\title{Type-7 quantile, the default of R's quantile()}
 \usage{
 .s03quantile7(v, p)
 }

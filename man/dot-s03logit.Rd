@@ -21,8 +21,8 @@
 The value of \code{beta}, as built in the body.
 }
 \description{
-which for the canonical link is exactly IRLS, beta <- beta + (X\' W
-X)^-1 X\' (y - p), W = diag(p (1 - p)).
+which for the canonical link is exactly IRLS, beta <- beta + (X' W
+X)^-1 X' (y - p), W = diag(p (1 - p)).
 }
 \examples{
 X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))

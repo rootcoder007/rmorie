@@ -19,7 +19,7 @@ morie_vqgdec_adaptive_weight(grad_rec, grad_gan, delta = 1e-06, clip = 10000)
 A list with \code{lambda}, \code{raw}, \code{clipped}, \code{note}.
 }
 \description{
-Balances the two losses at the decoder\'s last layer.
+Balances the two losses at the decoder's last layer.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

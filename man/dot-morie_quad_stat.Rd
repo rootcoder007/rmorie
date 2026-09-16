@@ -2,7 +2,7 @@
 % Please edit documentation in R/coin_native.R
 \name{.morie_quad_stat}
 \alias{.morie_quad_stat}
-\title{Quadratic-form statistic c = (T-mu)\' Sigma^+ (T-mu) ~ chi-square(df)}
+\title{Quadratic-form statistic c = (T-mu)' Sigma^+ (T-mu) ~ chi-square(df)}
 \usage{
 .morie_quad_stat(m, tol = 1e-08)
 }

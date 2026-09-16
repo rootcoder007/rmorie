@@ -15,8 +15,8 @@
 The value of \code{p}, as built in the body.
 }
 \description{
-Not the language\'s power operator: R raises to an integer exponent
-by repeated squaring while Python calls the C library\'s pow, and the
+Not the language's power operator: R raises to an integer exponent
+by repeated squaring while Python calls the C library's pow, and the
 two disagree in the last bit. A potential that is about to be summed
 over thousands of contacts cannot afford to be a different function
 in the two arms.

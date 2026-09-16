@@ -19,7 +19,7 @@ morie_soft_value_iteration(
 
 \item{actions}{Iterable of actions.}
 
-\item{step}{Function \eqn{(s, a) -> s\'}.}
+\item{step}{Function \eqn{(s, a) -> s'}.}
 
 \item{reward}{Function \code{s -> r(s)}.}
 
@@ -35,7 +35,7 @@ and \code{pi} (named numeric vector keyed by
 \code{"<state>|<action>"}).
 }
 \description{
-\eqn{Q(s, a) = r(s) + gamma V(s\')},
+\eqn{Q(s, a) = r(s) + gamma V(s')},
 \code{V(s) = log sum_a exp Q(s, a)}, with the soft-optimal policy
 \code{pi(a | s) = exp(Q(s, a) - V(s))}. AIRL is derived in the
 maximum-entropy IRL setting, so this is the \code{V*} that Theorem

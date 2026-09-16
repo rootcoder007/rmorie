@@ -2,12 +2,17 @@
 % Please edit documentation in R/aaa_tail2_t03.R
 \name{ProxGrad}
 \alias{ProxGrad}
-\title{\' Minimise f + g by proximal forward-backward splitting}
+\title{' Minimise f + g by proximal forward-backward splitting}
 \usage{
 ProxGrad(f, grad_f, prox_g, x0, lr, n_iter = 200L, relaxation = 1)
 }
 \arguments{
-\item{f}{Accepted by the signature and not used anywhere in the body.}
+\item{f}{smooth part, reported only as the objective ' @param
+grad_f gradient of f ' @param prox_g function(y, lr) giving prox of
+lr * g at y ' @param x0 starting point ' @param lr step size, the
+survey's beta^-1 ' @param n_iter fixed iteration count ' @param
+relaxation the survey's lambda_n, in ]0, 3/2[ ' @return list(x,
+objective, n_iter, lr, relaxation, step_norm, method) ' @export}
 
 \item{grad_f}{The body requires: grad_f returned the wrong length.}
 
@@ -26,9 +31,9 @@ A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr},
 \code{relaxation}, \code{step_norm}, \code{method}.
 }
 \description{
-\' \' x_\{n+1\} = x_n + lambda (prox_\{lr g\}(x_n - lr grad f(x_n)) -
-x_n), \' equation (21) of Combettes & Pesquet (2011),
-arXiv:0912.3522. \' Runs a fixed number of iterations. \' \'
+' ' x_\{n+1\} = x_n + lambda (prox_\{lr g\}(x_n - lr grad f(x_n)) -
+x_n), ' equation (21) of Combettes & Pesquet (2011),
+arXiv:0912.3522. ' Runs a fixed number of iterations. ' '
 }
 \examples{
 f <- function(x) 0.5 * sum((x - c(2, -1))^2)

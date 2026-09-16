@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_w3num.R
 \name{.w3_lgamma}
 \alias{.w3_lgamma}
-\title{Lanczos log-gamma. Not lgamma(): Python\'s is a different routine}
+\title{Lanczos log-gamma. Not lgamma(): Python's is a different routine}
 \usage{
 .w3_lgamma(z)
 }

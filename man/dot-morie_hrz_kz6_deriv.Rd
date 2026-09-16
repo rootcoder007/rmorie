@@ -2,7 +2,7 @@
 % Please edit documentation in R/horowitz_native6.R
 \name{.morie_hrz_kz6_deriv}
 \alias{.morie_hrz_kz6_deriv}
-\title{K\'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above}
+\title{K'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above}
 \usage{
 .morie_hrz_kz6_deriv(u)
 }
@@ -13,7 +13,7 @@
 A numeric value.
 }
 \description{
-and using phi\'(u) = -u phi(u).
+and using phi'(u) = -u phi(u).
 }
 \examples{
 x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)

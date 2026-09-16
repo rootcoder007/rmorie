@@ -16,7 +16,7 @@ A list with \code{T}, \code{mu}, \code{Sigma}, \code{n}.
 }
 \description{
 g : n x p transformation of the covariate (e.g. group indicators) h :
-n x q influence (transformation) of the response Returns the vec\'d
+n x q influence (transformation) of the response Returns the vec'd
 statistic T (pq), its conditional mean mu and covariance Sigma,
-matching coin\'s \code{expectation()} / \code{covariance()}.
+matching coin's \code{expectation()} / \code{covariance()}.
 }

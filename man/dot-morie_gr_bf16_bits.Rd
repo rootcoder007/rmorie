@@ -16,7 +16,7 @@ A numeric value.
 }
 \description{
 "nearest_even" or "truncate"; arithmetic is done in doubles and
-folded back mod 2^32, exactly reproducing numpy\'s uint32/uint64
+folded back mod 2^32, exactly reproducing numpy's uint32/uint64
 masking.
 }
 \examples{

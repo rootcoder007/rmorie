@@ -2,7 +2,7 @@
 % Please edit documentation in R/smatch_native.R
 \name{.smatch_cholsolve}
 \alias{.smatch_cholsolve}
-\title{Symmetric positive-definite solve via base R\'s chol}
+\title{Symmetric positive-definite solve via base R's chol}
 \usage{
 .smatch_cholsolve(M, b)
 }

@@ -33,7 +33,7 @@ morie_gwrcal(
 
 \item{n_points}{Number of points for the grid.}
 
-\item{tol}{See Usage.}
+\item{tol}{Convergence tolerance for golden section.}
 }
 \value{
 A list with \code{bandwidth}, \code{score},

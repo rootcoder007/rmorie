@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_s03.R
 \name{.s03mammen}
 \alias{.s03mammen}
-\title{Mammen\'s two-point multiplier at a van der Corput point: mean 1,}
+\title{Mammen's two-point multiplier at a van der Corput point: mean 1,}
 \usage{
 .s03mammen(i)
 }

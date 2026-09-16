@@ -3,7 +3,7 @@
 \name{morie_se3T_rotation_matrix}
 \alias{morie_se3T_rotation_matrix}
 \alias{morie_se3T}
-\title{Rodrigues\' formula -- a genuine element of SO(3)}
+\title{Rodrigues' formula -- a genuine element of SO(3)}
 \usage{
 morie_se3T_rotation_matrix(axis, angle)
 

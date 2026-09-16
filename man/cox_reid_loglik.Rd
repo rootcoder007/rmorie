@@ -19,7 +19,7 @@ cox_reid_loglik(alpha, K, mu, X)
 Numeric scalar.
 }
 \description{
-\eqn{ell(alpha) - 0.5 log det(X\' W X)}. The adjustment is the
+\eqn{ell(alpha) - 0.5 log det(X' W X)}. The adjustment is the
 GLM analogue of Bessel's correction.
 }
 \examples{

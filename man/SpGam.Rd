@@ -22,9 +22,9 @@ A list with \code{fitted}, \code{residuals}, \code{coef},
 \code{null_space_is_unpenalised}, \code{n}, \code{method}.
 }
 \description{
-the saddle-point system [K + n lam I, T; T\', 0].  T = [1, s1, s2, X]
+the saddle-point system [K + n lam I, T; T', 0].  T = [1, s1, s2, X]
 spans the null space of the penalty and must NOT be shrunk; dropping
-the T\'c = 0 block leaves the system singular.  Duchon (1977); Wood
+the T'c = 0 block leaves the system singular.  Duchon (1977); Wood
 (2006) Ch. 4.  NOT in Schabenberger & Gotway, whose parametric
 analogue is Sec. 5.3.1.
 }

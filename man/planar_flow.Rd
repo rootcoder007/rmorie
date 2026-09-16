@@ -2,7 +2,7 @@
 % Please edit documentation in R/baynav_native.R
 \name{planar_flow}
 \alias{planar_flow}
-\title{Planar flow \eqn{z + u*tanh(w\'z + b)} with its log-determinant}
+\title{Planar flow \eqn{z + u*tanh(w'z + b)} with its log-determinant}
 \usage{
 planar_flow(z, u, w, b)
 }
@@ -17,7 +17,7 @@ A list with \eqn{z, log_det, det, invertibility_adjusted,
 }
 \description{
 The Jacobian is rank-one, so the matrix determinant lemma gives
-\eqn{|1 + u\'psi(z)|} in O(d) rather than O(d^3).
+\eqn{|1 + u'psi(z)|} in O(d) rather than O(d^3).
 }
 \examples{
 planar_flow(z = c(1, 2, 3, 4, 5, 6, 7, 8), u = c(1, 2, 3, 4, 5, 6, 7, 8),

@@ -6,6 +6,13 @@
 \usage{
 Oddsrat(table, alpha = 0.05, cc = 0)
 }
+\arguments{
+\item{table}{A 2 by 2 contingency table (matrix or table).}
+
+\item{alpha}{Significance level for the confidence interval.}
+
+\item{cc}{Continuity correction added to each cell (0 for none).}
+}
 \description{
 Odds ratio by Woolf's logit method (Woolf 1955) -- NOT from Gibbons
 }

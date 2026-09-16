@@ -16,7 +16,7 @@ A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50},
 }
 \description{
 them; the definitions are the Task Force ones, Circulation
-93(5):1043- 1065, 1996, reference [84] of the book\'s Chapter 8.
+93(5):1043- 1065, 1996, reference [84] of the book's Chapter 8.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

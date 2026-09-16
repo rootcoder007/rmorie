@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_sp_fill.R
 \name{Pcf}
 \alias{Pcf}
-\title{R(h) = K\'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the}
+\title{R(h) = K'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the}
 \usage{
 Pcf(points, region = NULL, r = NULL, correction = "border")
 }

@@ -18,7 +18,7 @@ morie_spatial_voting_cjr_irt(
 
 \item{n_samples}{MCMC samples.}
 
-\item{burn_in}{Integer; MCMC burn-in iterations.}
+\item{burn_in}{Burn-in length.}
 }
 \value{
 List: \code{ideal_points}, \code{ideal_sd}, \code{discrimination},

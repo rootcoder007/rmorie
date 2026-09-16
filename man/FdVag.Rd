@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_stat.R
 \name{FdVag}
 \alias{FdVag}
-\title{Sections 6.6.2-6.6.3: PSA is the book\'s preferred FD estimator for a}
+\title{Sections 6.6.2-6.6.3: PSA is the book's preferred FD estimator for a}
 \usage{
 FdVag(x, fs, fmin = 100, fmax = 500, nperseg = NULL)
 }
@@ -24,7 +24,7 @@ The value of \code{r}, as built in the body.
 \description{
 self-affine signal, applied to knee-joint VAG signals.  The band is
 an argument because it decides the answer -- a band that reaches down
-into baseline drift fits the drift\'s slope, not the signal\'s.
+into baseline drift fits the drift's slope, not the signal's.
 }
 \examples{
 sine <- function(n, cycles, amp = 1) amp * sin(2 * pi * cycles *

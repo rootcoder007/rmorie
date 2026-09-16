@@ -2,7 +2,7 @@
 % Please edit documentation in R/panelspatial.R
 \name{.knn_indicator}
 \alias{.knn_indicator}
-\title{Internal: a_ij = 1 when j is among i\'s k nearest, excluding i itself}
+\title{Internal: a_ij = 1 when j is among i's k nearest, excluding i itself}
 \usage{
 .knn_indicator(D, k)
 }

@@ -16,7 +16,7 @@ morie_spatial_voting_bayesian_unfolding(
 
 \item{n_dims}{Latent dimensions.}
 
-\item{n_samples}{Integer; posterior-sample count.}
+\item{n_samples}{MCMC samples.}
 
 \item{burn_in}{Burn-in length.}
 }

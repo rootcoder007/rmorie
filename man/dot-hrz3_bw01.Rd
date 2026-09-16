@@ -14,7 +14,7 @@ A numeric value.
 }
 \description{
 marginals are exactly uniform on [0, 1], whose standard deviation is
-1/sqrt(12), so Silverman\'s constant gives a scale rather than only a
+1/sqrt(12), so Silverman's constant gives a scale rather than only a
 rate.  n^(-1/6) alone is a rate and on the unit interval is far too
 wide: at n = 40 it puts two thirds of the kernel mass outside
 support.

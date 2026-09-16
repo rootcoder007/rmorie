@@ -2,7 +2,7 @@
 % Please edit documentation in R/tipsne_native.R
 \name{.tipsne_inv_from_chol}
 \alias{.tipsne_inv_from_chol}
-\title{(L L\')^-1, formed column by column from the factor}
+\title{(L L')^-1, formed column by column from the factor}
 \usage{
 .tipsne_inv_from_chol(lo)
 }

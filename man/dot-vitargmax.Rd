@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_vit.R
 \name{.vitargmax}
 \alias{.vitargmax}
-\title{Index of the first maximum; R\'s which.max already has this tie rule}
+\title{Index of the first maximum; R's which.max already has this tie rule}
 \usage{
 .vitargmax(v)
 }

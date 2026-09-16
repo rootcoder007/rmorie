@@ -2,7 +2,7 @@
 % Please edit documentation in R/baynav_native.R
 \name{enforce_invertibility}
 \alias{enforce_invertibility}
-\title{Project \code{u} so that \eqn{u\'w >= -1}}
+\title{Project \code{u} so that \eqn{u'w >= -1}}
 \usage{
 enforce_invertibility(u, w)
 }

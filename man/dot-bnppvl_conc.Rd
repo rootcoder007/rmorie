@@ -2,7 +2,7 @@
 % Please edit documentation in R/bnppvl_native.R
 \name{.bnppvl_conc}
 \alias{.bnppvl_conc}
-\title{The Beta concentration a_m at a given level. "cubic" is the paper\'s}
+\title{The Beta concentration a_m at a given level. "cubic" is the paper's}
 \usage{
 .bnppvl_conc(level, c, schedule)
 }

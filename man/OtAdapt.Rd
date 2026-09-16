@@ -2,12 +2,16 @@
 % Please edit documentation in R/aaa_tail2_t03.R
 \name{OtAdapt}
 \alias{OtAdapt}
-\title{\' Adapt source samples to a target domain through an OT plan}
+\title{' Adapt source samples to a target domain through an OT plan}
 \usage{
 OtAdapt(Xs, Xt, epsilon, n_iter = 1000L)
 }
 \arguments{
-\item{Xs}{A matrix; indexed by row and column.}
+\item{Xs}{source samples, ns x d ' @param Xt target samples, nt x d
+' @param epsilon entropic regularisation weight (1/lambda in the
+paper) ' @param n_iter fixed number of Sinkhorn sweeps ' @return
+list(Xs_adapted, gamma, cost, transport_cost, row_error, '
+col_error, ns, nt, d, epsilon, n_iter, method) ' @export}
 
 \item{Xt}{A matrix; indexed by row and column.}
 
@@ -21,10 +25,10 @@ A list with \code{Xs_adapted}, \code{gamma}, \code{cost},
 \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
 }
 \description{
-\' \' The entropy-regularised plan of equation (9) is found by a
-fixed \' number of Sinkhorn-Knopp sweeps, then the source samples
-are moved by \' the barycentric mapping of equation (14), \' Xs_hat
-= diag(gamma 1_nt)^-1 gamma Xt, with squared Euclidean cost. \' \'
+' ' The entropy-regularised plan of equation (9) is found by a
+fixed ' number of Sinkhorn-Knopp sweeps, then the source samples
+are moved by ' the barycentric mapping of equation (14), ' Xs_hat
+= diag(gamma 1_nt)^-1 gamma Xt, with squared Euclidean cost. ' '
 }
 \examples{
 set.seed(3)

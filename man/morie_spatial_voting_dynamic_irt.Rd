@@ -15,12 +15,11 @@ morie_spatial_voting_dynamic_irt(
 \arguments{
 \item{votes}{Vote matrix.}
 
-\item{time_periods}{Integer vector of period indices (one per roll call) for the
-dynamic-IRT random-walk prior on ideal points.}
+\item{time_periods}{Per-vote period indices.}
 
 \item{n_samples}{MCMC samples.}
 
-\item{burn_in}{Integer; MCMC burn-in iterations.}
+\item{burn_in}{Burn-in length.}
 
 \item{seed}{RNG seed.}
 }
@@ -34,6 +33,7 @@ Time-series IRT where ideal points evolve via a random walk:
 }
 \examples{
 \donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
+dynamic-IRT random-walk prior on ideal points.
 }
 \references{
 Martin, A. D. and Quinn, K. M. (2002). "Dynamic Ideal Point

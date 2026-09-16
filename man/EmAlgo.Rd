@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_tail2_t04.R
 \name{EmAlgo}
 \alias{EmAlgo}
-\title{\' Run EM for a fixed number of steps and audit its monotonicity}
+\title{' Run EM for a fixed number of steps and audit its monotonicity}
 \usage{
 EmAlgo(log_lik, Q, x0, steps)
 }
@@ -13,20 +13,21 @@ EmAlgo(log_lik, Q, x0, steps)
 
 \item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
 
-\item{steps}{A count; the body uses it as \code{seq_len(...)}.}
+\item{steps}{number of EM iterations ' @return list(theta, loglik,
+trace, increments, min_increment, monotone, ' steps, method) '}
 }
 \value{
 A list with \code{theta}, \code{loglik}, \code{trace}, \code{increments},
 \code{min_increment}, \code{monotone}, \code{steps}, \code{method}.
 }
 \description{
-\' \' Theorem 1 of Dempster, Laird & Rubin (1977) says every EM
-step \' increases the observed-data log likelihood.  That is not
-assumed but \' checked: the log likelihood is evaluated at every
-iterate and the \' increments are returned along with a monotone
-flag. \' \' @param log_lik function(theta) giving the observed-data
-log likelihood \' @param Q function(theta) giving the next iterate
-(combined E and M step) \' @param x0 starting parameter vector \'
+' ' Theorem 1 of Dempster, Laird & Rubin (1977) says every EM
+step ' increases the observed-data log likelihood.  That is not
+assumed but ' checked: the log likelihood is evaluated at every
+iterate and the ' increments are returned along with a monotone
+flag. ' ' @param log_lik function(theta) giving the observed-data
+log likelihood ' @param Q function(theta) giving the next iterate
+(combined E and M step) ' @param x0 starting parameter vector '
 }
 \examples{
 set.seed(1)

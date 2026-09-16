@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_w3num.R
 \name{.w3_inv_from_chol}
 \alias{.w3_inv_from_chol}
-\title{(L L\')^-1, column by column from the factor}
+\title{(L L')^-1, column by column from the factor}
 \usage{
 .w3_inv_from_chol(lo)
 }

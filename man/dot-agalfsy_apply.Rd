@@ -15,7 +15,7 @@
 The value of \code{.agalfsy_rotate}.
 }
 \description{
-0-based here to match the Python arm\'s action numbering, which is a
+0-based here to match the Python arm's action numbering, which is a
 REPORTED quantity (it appears in the trajectory).
 }
 \examples{

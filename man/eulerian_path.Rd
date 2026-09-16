@@ -2,7 +2,7 @@
 % Please edit documentation in R/asmnvr_native.R
 \name{eulerian_path}
 \alias{eulerian_path}
-\title{Hierholzer\'s algorithm with the exact existence condition checked:}
+\title{Hierholzer's algorithm with the exact existence condition checked:}
 \usage{
 eulerian_path(edges, indeg, outdeg)
 }

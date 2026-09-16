@@ -2,7 +2,7 @@
 % Please edit documentation in R/alfmpv_native.R
 \name{.alfmpv_order}
 \alias{.alfmpv_order}
-\title{Lower sorts first. Ties break on the hit\'s position in the
+\title{Lower sorts first. Ties break on the hit's position in the
 alignment,}
 \usage{
 .alfmpv_order(tab, mode, idx, pos)

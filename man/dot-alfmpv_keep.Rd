@@ -2,7 +2,7 @@
 % Please edit documentation in R/alfmpv_native.R
 \name{.alfmpv_keep}
 \alias{.alfmpv_keep}
-\title{Which hits survive the route\'s own filter, in order}
+\title{Which hits survive the route's own filter, in order}
 \usage{
 .alfmpv_keep(tab, mode, min_coverage, max_gap)
 }

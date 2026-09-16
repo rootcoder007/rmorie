@@ -17,7 +17,7 @@ A list with \code{h}, \code{template}, \code{n}, \code{energy},
 \code{output_is_the_cross_correlation}, \code{method}.
 }
 \description{
-filter\'s output the cross-correlation with the template.  Reversal
+filter's output the cross-correlation with the template.  Reversal
 is the whole content -- convolving with the unreversed template
 correlates with a mirrored pattern and peaks in the wrong place.
 }

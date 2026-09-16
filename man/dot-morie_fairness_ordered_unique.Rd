@@ -2,7 +2,7 @@
 % Please edit documentation in R/frns_metrics.R
 \name{.morie_fairness_ordered_unique}
 \alias{.morie_fairness_ordered_unique}
-\title{Python\'s "first-seen" order; unique() in R is already first-seen}
+\title{Python's "first-seen" order; unique() in R is already first-seen}
 \usage{
 .morie_fairness_ordered_unique(arr)
 }

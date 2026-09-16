@@ -20,7 +20,7 @@ A list with \code{weights}.
 w_1 = V_1, w_h = V_h * prod_\{j<h\}(1 - V_j), V_h ~ Beta(1, alpha).
 Drawn through the inverse CDF V = 1 - U^(1/alpha), consuming ONE
 uniform per stick from the shared generator \code{e}. This is the
-canonical construction used by the Python arm\'s sb.stick_breaking
+canonical construction used by the Python arm's sb.stick_breaking
 when it consumes from the GHC stream. NOTE: the Python source for
 slowdp.stick_breaking is not held here; the inverse-CDF form is the
 standard implementation and matches the GHC stream one-for-one.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_tf.R
 \name{Gtfd}
 \alias{Gtfd}
-\title{Cohen\'s class generalised TFD, eqs (8.124)-(8.127)}
+\title{Cohen's class generalised TFD, eqs (8.124)-(8.127)}
 \usage{
 Gtfd(x, fs = 1, kernel = "spwvd", nfreq = NULL, tsmooth = NULL, fsmooth = NULL)
 }

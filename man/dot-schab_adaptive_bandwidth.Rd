@@ -18,6 +18,6 @@ so the}
 A vector, from \code{as.numeric}.
 }
 \description{
-neighbour itself falls strictly inside a truncated kernel\'s support.
+neighbour itself falls strictly inside a truncated kernel's support.
 The regression point counts as its own first neighbour.
 }

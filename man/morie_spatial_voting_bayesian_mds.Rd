@@ -15,13 +15,13 @@ morie_spatial_voting_bayesian_mds(
 \arguments{
 \item{D}{Distance matrix.}
 
-\item{n_dims}{Integer; latent dimensionality.}
+\item{n_dims}{Dimensions.}
 
-\item{n_samples}{Integer; posterior-sample count.}
+\item{n_samples}{MCMC samples.}
 
 \item{burn_in}{Burn-in length.}
 
-\item{sigma_init}{Numeric; initial value for the latent-coordinate scale (default 1).}
+\item{sigma_init}{Initial sigma.}
 }
 \value{
 List: \code{positions}/\code{coords} (posterior-mean or modal

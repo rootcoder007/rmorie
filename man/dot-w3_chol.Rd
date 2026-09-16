@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_w3num.R
 \name{.w3_chol}
 \alias{.w3_chol}
-\title{Lower Cholesky factor L with A = L L\'. Explicit, not chol()}
+\title{Lower Cholesky factor L with A = L L'. Explicit, not chol()}
 \usage{
 .w3_chol(a)
 }

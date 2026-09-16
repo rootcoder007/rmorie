@@ -13,7 +13,7 @@
 A numeric value.
 }
 \description{
-CPython 3.12+ compensates a run of floats and R\'s sum() accumulates
+CPython 3.12+ compensates a run of floats and R's sum() accumulates
 in long double, so the two built-ins are different functions and a
 comparison at the twelfth digit finds the difference.
 }

@@ -20,7 +20,7 @@ A list with \code{y}, \code{acf}, \code{lags}, \code{peak_index},
 }
 \description{
 CORRELATION, so y(t) = K phi_x(t - t0): the output is a delayed copy
-of the reference\'s ACF and peaks at t0 with K times its energy.
+of the reference's ACF and peaks at t0 with K times its energy.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

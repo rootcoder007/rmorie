@@ -2,7 +2,7 @@
 % Please edit documentation in R/tipsne_native.R
 \name{.tipsne_draw_beta}
 \alias{.tipsne_draw_beta}
-\title{Beta* ~ N(betahat, sigma2 (X\'X)^-1) via the Cholesky of the
+\title{Beta* ~ N(betahat, sigma2 (X'X)^-1) via the Cholesky of the
 covariance}
 \usage{
 .tipsne_draw_beta(e, beta, xtx_inv, sigma2_draw)

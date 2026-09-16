@@ -17,7 +17,7 @@ A list with \code{order}, \code{criterion}, \code{aic}, \code{aic_order},
 \code{method}.
 }
 \description{
-per parameter is log(N), larger than AIC\'s 2 for any N > 7, so MDL
+per parameter is log(N), larger than AIC's 2 for any N > 7, so MDL
 picks the same order or a lower one -- and unlike AIC it is
 consistent.  AIC is returned alongside for comparison.
 }

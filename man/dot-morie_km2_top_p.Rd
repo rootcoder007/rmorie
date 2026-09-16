@@ -2,7 +2,7 @@
 % Please edit documentation in R/kamath_llm2_native.R
 \name{.morie_km2_top_p}
 \alias{.morie_km2_top_p}
-\title{Toppd\'s core: nucleus truncation of temperature-scaled logits}
+\title{Toppd's core: nucleus truncation of temperature-scaled logits}
 \usage{
 .morie_km2_top_p(z, p, T = 1)
 }

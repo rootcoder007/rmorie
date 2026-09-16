@@ -2,7 +2,7 @@
 % Please edit documentation in R/trmRew_native.R
 \name{.trmRew_overlap}
 \alias{.trmRew_overlap}
-\title{Superpose rb\'s left-hand side on ra\'s, at every non-variable}
+\title{Superpose rb's left-hand side on ra's, at every non-variable}
 \usage{
 .trmRew_overlap(ra, rb, same)
 }

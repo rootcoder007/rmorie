@@ -16,7 +16,7 @@ A list with \code{H}, \code{z}, \code{T}, \code{zeros}, \code{zero_at_dc},
 \code{dc_gain}, \code{method}.
 }
 \description{
-the whole of the operator\'s highpass character.
+the whole of the operator's highpass character.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

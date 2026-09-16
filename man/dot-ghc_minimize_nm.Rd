@@ -20,7 +20,7 @@ A list with \code{x}, \code{value}.
 _sci_core.minimize with method="Nelder-Mead"; optim(method=
 "Nelder-Mead") in base R runs the same algorithm and gives
 numerically equivalent results on smooth objectives like this one.
-The Python arm\'s six-inner-iteration structure is preserved by the
+The Python arm's six-inner-iteration structure is preserved by the
 outer loop in morie_survvae(), which calls this helper up to six
 times per restart, each time from the current point -- exactly
 mirroring the "for _ in range(6)" loop in fit().

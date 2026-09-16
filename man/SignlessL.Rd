@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_tail2_t04.R
 \name{SignlessL}
 \alias{SignlessL}
-\title{\' Signless Laplacian Q = D + A of an undirected graph}
+\title{' Signless Laplacian Q = D + A of an undirected graph}
 \usage{
 SignlessL(A)
 }
@@ -15,13 +15,13 @@ A list with \code{Q}, \code{degree}, \code{n}, \code{m}, \code{trace},
 \code{method}.
 }
 \description{
-\' \' D is the diagonal matrix of row sums.  The multiplicity of 0
-as an \' eigenvalue of Q equals the number of bipartite components;
-that count \' is returned, computed combinatorially by two-colouring
-rather than by \' an eigensolver, so it is exact. \' \' @param A
-symmetric adjacency matrix with a zero diagonal \' @return list(Q,
-degree, n, m, trace, n_components, \' bipartite_components,
-zero_eigenvalue_multiplicity, method) \' @export
+' ' D is the diagonal matrix of row sums.  The multiplicity of 0
+as an ' eigenvalue of Q equals the number of bipartite components;
+that count ' is returned, computed combinatorially by two-colouring
+rather than by ' an eigensolver, so it is exact. ' ' @param A
+symmetric adjacency matrix with a zero diagonal ' @return list(Q,
+degree, n, m, trace, n_components, ' bipartite_components,
+zero_eigenvalue_multiplicity, method) ' @export
 }
 \examples{
 A <- rbind(c(0, 1, 1, 0), c(1, 0, 0, 1), c(1, 0, 0, 1), c(0, 1, 1, 0))

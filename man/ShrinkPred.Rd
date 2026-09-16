@@ -22,7 +22,7 @@ A list with \code{clusters}, \code{shrunk}, \code{raw}, \code{lambda},
 }
 \description{
 lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on
-the CLUSTER\'S OWN SIZE; a common lambda over-shrinks the large
+the CLUSTER'S OWN SIZE; a common lambda over-shrinks the large
 clusters. Stein (1956); Morris (1983) JASA 78:47-55.  NOT in
 Schabenberger & Gotway -- a fixed-string search for "shrinkage"
 returns nothing.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_adapt.R
 \name{WienerMin}
 \alias{WienerMin}
-\title{Eq. (3.172): J_min = var(d) - Theta\' w_o.  A negative J_min cannot}
+\title{Eq. (3.172): J_min = var(d) - Theta' w_o.  A negative J_min cannot}
 \usage{
 WienerMin(phi, theta, var_d)
 }

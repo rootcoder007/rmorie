@@ -2,7 +2,7 @@
 % Please edit documentation in R/tipsne_native.R
 \name{.tipsne_chol}
 \alias{.tipsne_chol}
-\title{Cholesky factor L with A = L L\', lower triangular. Explicit rather
+\title{Cholesky factor L with A = L L', lower triangular. Explicit rather
 than}
 \usage{
 .tipsne_chol(a)

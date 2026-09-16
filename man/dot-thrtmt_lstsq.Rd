@@ -17,5 +17,5 @@
 A vector, from \code{as.numeric}.
 }
 \description{
-Returns b solving (Z\'Z + ridge I) b = Z\' y
+Returns b solving (Z'Z + ridge I) b = Z' y
 }

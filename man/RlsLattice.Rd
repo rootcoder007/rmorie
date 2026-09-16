@@ -22,7 +22,7 @@ A list with \code{reflection}, \code{forward_error}, \code{backward_error},
 }
 \description{
 the fit at EVERY order up to the one requested -- an order need not
-be chosen in advance, which is the lattice\'s advantage over the
+be chosen in advance, which is the lattice's advantage over the
 direct form.  |gamma| < 1 at every stage is the stability condition,
 the same one as eq. (7.39).
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_sp_fill.R
 \name{MoranRes}
 \alias{MoranRes}
-\title{Eq (1.16).  Eg[Ires] = n tr[MW] / \{(n-k) w..\} is the book\'s own}
+\title{Eq (1.16).  Eg[Ires] = n tr[MW] / \{(n-k) w..\} is the book's own}
 \usage{
 MoranRes(residuals, w, x = NULL)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlcic_native.R
 \name{morie_tmlcic_default_library}
 \alias{morie_tmlcic_default_library}
-\title{The chapter\'s example library: the unadjusted model, one main term}
+\title{The chapter's example library: the unadjusted model, one main term}
 \usage{
 morie_tmlcic_default_library(p, interactions = TRUE)
 }

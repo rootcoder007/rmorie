@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_adapt.R
 \name{LmsSqErr}
 \alias{LmsSqErr}
-\title{Eq. (3.200): e^2 = x^2 - 2 x r\'w + (r\'w)^2.  The expansion is
+\title{Eq. (3.200): e^2 = x^2 - 2 x r'w + (r'w)^2.  The expansion is
 checked}
 \usage{
 LmsSqErr(x, rvec, w)

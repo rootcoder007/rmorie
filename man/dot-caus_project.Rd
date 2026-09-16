@@ -2,7 +2,7 @@
 % Please edit documentation in R/caus_native.R
 \name{.caus_project}
 \alias{.caus_project}
-\title{P_Z M by least squares rather than a formed inverse: Z\'Z is}
+\title{P_Z M by least squares rather than a formed inverse: Z'Z is}
 \usage{
 .caus_project(Z, M)
 }

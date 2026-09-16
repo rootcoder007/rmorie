@@ -2,7 +2,7 @@
 % Please edit documentation in R/funBand_native.R
 \name{.funBand_roughness}
 \alias{.funBand_roughness}
-\title{K = Q R^-1 Q\', symmetric PSD with a two-dimensional null space}
+\title{K = Q R^-1 Q', symmetric PSD with a two-dimensional null space}
 \usage{
 .funBand_roughness(x)
 }

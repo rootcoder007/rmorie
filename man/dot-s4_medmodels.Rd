@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_s04core.R
 \name{.s4_medmodels}
 \alias{.s4_medmodels}
-\title{Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4\'c and
+\title{Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4'c and
 mediator}
 \usage{
 .s4_medmodels(Y, A, M, Cc = NULL)
@@ -20,10 +20,10 @@ mediator}
 A list with \code{theta}, \code{beta}, \code{cbar}.
 }
 \description{
-Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4\'c and
+Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4'c and
 mediator
 }
-\section{model M = b0 + b1 a + b2\'c; cbar is where the decomposition is}{
+\section{model M = b0 + b1 a + b2'c; cbar is where the decomposition is}{
 read.
 }
 

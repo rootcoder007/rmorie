@@ -18,5 +18,5 @@ the}
 A vector, from \code{vapply}.
 }
 \description{
-Python arm\'s k_function; needed by Diggle-Chetwynd\'s D(h).
+Python arm's k_function; needed by Diggle-Chetwynd's D(h).
 }

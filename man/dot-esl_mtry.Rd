@@ -2,7 +2,7 @@
 % Please edit documentation in R/esl_native0.R
 \name{.esl_mtry}
 \alias{.esl_mtry}
-\title{The book\'s defaults for the number of variables sampled at each}
+\title{The book's defaults for the number of variables sampled at each}
 \usage{
 .esl_mtry(p, task = "regression")
 }

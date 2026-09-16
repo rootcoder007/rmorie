@@ -14,7 +14,7 @@ agree}
 A numeric value.
 }
 \description{
-term for term rather than relying on R\'s digamma matching a Python
+term for term rather than relying on R's digamma matching a Python
 series.
 }
 \examples{

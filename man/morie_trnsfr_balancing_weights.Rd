@@ -2,7 +2,7 @@
 % Please edit documentation in R/trnsfr_native.R
 \name{morie_trnsfr_balancing_weights}
 \alias{morie_trnsfr_balancing_weights}
-\title{Minimum-variance weights that match the target\'s X means: solve}
+\title{Minimum-variance weights that match the target's X means: solve}
 \usage{
 morie_trnsfr_balancing_weights(X, S, ridge = 1e-08)
 }
