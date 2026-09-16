@@ -20,7 +20,8 @@ A data.frame, or \code{NULL} if the table does not exist.
 Load a table from the MORIE cache
 }
 \examples{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 db <- tempfile(fileext = ".db")
 morie_cache_store(

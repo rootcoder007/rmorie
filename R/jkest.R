@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Jackknife bias and variance (Quenouille 1956, Tukey 1958)
 #'
-#' Leave-one-out jackknife: bias\_jack = (n-1)\*(mean(T\_minus\_i) - T\_hat),
+#' Leave-one-out jackknife: bias&#95;jack = (n-1)&#42;(mean(T&#95;minus&#95;i) - T&#95;hat),
 #' var_jack = (n-1)/n * sum((T_minus_i - mean(T_minus_i))^2),
-#' T\_jack = n\*T\_hat - (n-1)\*mean(T\_minus\_i).
+#' T&#95;jack = n&#42;T&#95;hat - (n-1)&#42;mean(T&#95;minus&#95;i).
 #'
 #' @param x numeric vector.
 #' @param statistic function returning a scalar; default \code{mean}.

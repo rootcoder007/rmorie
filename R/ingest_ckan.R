@@ -467,7 +467,8 @@ morie_ingest_ckan_fetch_package_csvs <- function(
 #' @return A base R \code{data.frame}.
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{try(morie_ingest_ckan_search_packages("https://open.canada.ca/data", query = "crime", rows = 1L))}
+#' \donttest{try(morie_ingest_ckan_search_packages("https://open.canada.ca/data",
+#'   query = "crime", rows = 1L))}
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_ckan_search_packages <- function(portal,

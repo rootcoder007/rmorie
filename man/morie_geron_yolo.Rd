@@ -25,7 +25,7 @@ suppressed, grid, n_classes, estimate, n, method.
 }
 \description{
 Decodes an (S,S,B\*5+C) prediction tensor (tx,ty,tw,th,conf per box,
-shared class probs per cell), score = conf\*class\_prob, greedy
+shared class probs per cell), score = conf*class_prob, greedy
 per-class NMS at iou_threshold.
 }
 \examples{

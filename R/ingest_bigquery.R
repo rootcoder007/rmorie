@@ -145,7 +145,8 @@ LIMIT ", format(lim, scientific = FALSE))
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
+#'   requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 #' # Keyless alternative for the same data: morie_ingest_chicago_crime()
 #' # (Socrata, no account) or the bundled samples in 'rmoriedata'.
@@ -160,7 +161,8 @@ LIMIT ", format(lim, scientific = FALSE))
 #' @seealso \code{\link{morie_ingest_bigquery_table}},
 #'   \code{\link{morie_ingest_bigquery_build_sql}}
 #' @examples
-#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
+#'   requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 #' # Keyless alternative for the same data: morie_ingest_chicago_crime()
 #' # (Socrata, no account) or the bundled samples in 'rmoriedata'.
@@ -241,7 +243,8 @@ morie_ingest_bigquery_query <- function(sql,
 #' @param quiet Suppress \pkg{bigrquery} progress output.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
+#'   requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 #' # Keyless alternative for the same data: morie_ingest_chicago_crime()
 #' # (Socrata, no account) or the bundled samples in 'rmoriedata'.
@@ -256,7 +259,8 @@ morie_ingest_bigquery_query <- function(sql,
 #' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_ingest_bigquery_query}}
 #' @examples
-#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
+#'   requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 #' # Keyless alternative for the same data: morie_ingest_chicago_crime()
 #' # (Socrata, no account) or the bundled samples in 'rmoriedata'.

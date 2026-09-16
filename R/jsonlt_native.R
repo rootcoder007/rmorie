@@ -593,7 +593,7 @@ morie_jsonlt_base64url_dec <- function(input) {
 #'
 #' @param x the object to encode.
 #' @param
-#' dataframe,matrix,Date,POSIXt,factor,complex,raw,null,na,auto_unbox,digits,pretty,force,...
+#' dataframe,matrix,Date,POSIXt,factor,complex,raw,null,na,auto_unbox,digits,force
 #' as in jsonlite.
 #' @return a length-one character vector of class `json`.
 #' @param pretty FALSE, TRUE, or an indent width.

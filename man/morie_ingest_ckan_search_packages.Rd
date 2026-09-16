@@ -39,6 +39,7 @@ canonical \code{<portal>/dataset/<name>} URL).
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{try(morie_ingest_ckan_search_packages("https://open.canada.ca/data", query = "crime", rows = 1L))}
+\donttest{try(morie_ingest_ckan_search_packages("https://open.canada.ca/data",
+  query = "crime", rows = 1L))}
 \dontshow{\}) # examplesIf}
 }

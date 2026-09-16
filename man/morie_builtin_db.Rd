@@ -16,7 +16,8 @@ CCS, CSADS, CSUS, HealthInfobase, and CIHI datasets pre-loaded as
 SQLite tables.
 }
 \examples{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_builtin_db()
 \dontshow{\}) # examplesIf}
 }

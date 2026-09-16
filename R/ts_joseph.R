@@ -1769,8 +1769,8 @@ morie_tide <- function(y, feats, fproj, enc, dec, tdec, wglobal, horizon) {
 
 #' TSMixer time-mixing and feature-mixing, all-MLP
 #'
-#' Quoted from the paper: (4) "TP_{L->T}(X)_{*,i} = W_1 X_{*,i} + b_1";
-#' (5) "TM(X)_{*,i} = Norm(X_{*,i} + Drop(sigma(TP_{L->L}(X)_{*,i})))"
+#' Quoted from the paper: (4) "TP_\{L->T\}(X)_\{&#42;,i\} = W_1 X_\{&#42;,i\} + b_1";
+#' (5) "TM(X)_\{&#42;,i\} = Norm(X_\{&#42;,i\} + Drop(sigma(TP_\{L->L\}(X)_\{&#42;,i\})))"
 #' -- Chen, S.-A., Li, C.-L., Yoder, N. C., Arik, S. O. and Pfister,
 #' T., TSMixer: An All-MLP Architecture for Time Series Forecasting,
 #' TMLR 2023 (arXiv:2303.06053), Appendix B.3.1. Feature mixing and

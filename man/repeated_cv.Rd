@@ -42,7 +42,8 @@ with different RNG seeds and pools the per-fold scores.
 (cross-referenced).
 }
 \examples{
-if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) && requireNamespace("rsample", quietly = TRUE)) {
+if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) &&
+  requireNamespace("rsample", quietly = TRUE)) {
   set.seed(1)
   X <- matrix(rnorm(80), ncol = 2)
   y <- rnorm(40)

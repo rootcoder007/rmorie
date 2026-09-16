@@ -23,7 +23,8 @@ Reads a local file and writes it to the cache so that CI and Docker
 environments (which may lack the original files) can still run tests.
 }
 \examples{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # The SQLite backend needs the optional 'RSQLite' package.
 if (requireNamespace("RSQLite", quietly = TRUE)) {
   tdir <- tempfile("morie-cache-")

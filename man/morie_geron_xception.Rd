@@ -16,7 +16,7 @@ standard_conv_params, savings_ratio, output_shape, final_map, estimate, n, metho
 }
 \description{
 Resolves the entry/middle(x8)/exit flow into concrete layers, shapes
-and parameter counts; separable convs cost k\*k\*c\_in + c\_in\*c\_out,
+and parameter counts; separable convs cost k*k*c_in + c_in*c_out,
 batch norm 2\*C trainable + 2\*C non-trainable per layer.
 }
 \examples{

@@ -61,5 +61,6 @@ table(cat_df$source)
 }
 \seealso{
 \code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}},
-\code{\link[=morie_datasets_load_by_key]{morie_datasets_load_by_key()}}, \code{\link[=morie_datasets_browse]{morie_datasets_browse()}}
+\code{\link[=morie_datasets_load_by_key]{morie_datasets_load_by_key()}},
+  \code{\link[=morie_datasets_browse]{morie_datasets_browse()}}
 }
