@@ -20,7 +20,7 @@
 morie_burkov_linear_function <- function(x, w, b) {
   x <- as.numeric(x)
   list(
-    predictions = w * x + b, estimate = (w * x + b)[1], w = w, b = b,
+    predictions = w * x + b, estimate = (w * x + b)\[1\], w = w, b = b,
     n = length(x), method = "Linear model f(x) = wx + b (Burkov Eq 1.1)"
   )
 }
@@ -42,7 +42,7 @@ morie_burkov_squared_error <- function(y_hat, y) {
   }
   err <- (y_hat - y)^2
   list(
-    errors = err, estimate = err[1], n = length(y),
+    errors = err, estimate = err\[1\], n = length(y),
     method = "Squared error (Burkov Eq 1.2)"
   )
 }
@@ -173,7 +173,7 @@ morie_burkov_layer1_output <- function(W_1, x, b_1, phi = "relu") {
   pre <- as.numeric(W %*% x + b)
   out <- .morie_burkov_phi(phi)(pre)
   list(
-    output = out, preactivation = pre, estimate = out[1],
+    output = out, preactivation = pre, estimate = out\[1\],
     n = length(out), method = "Layer 1 output phi(W1 x + b1) (Burkov Eq 1.6)"
   )
 }
@@ -226,7 +226,7 @@ morie_burkov_logistic <- function(w, x, b) {
 }
 
 #' Binary cross-entropy for one example (Burkov Eq 1.9)
-#' @param y_hat Predicted probabilities in [0, 1].
+#' @param y_hat Predicted probabilities in \[0, 1\].
 #' @param y Targets, 0 or 1.
 #' @export
 #' @examples
@@ -238,7 +238,7 @@ morie_burkov_binary_cross_entropy <- function(y_hat, y) {
     stop("y_hat and y must have the same length.", call. = FALSE)
   }
   if (any(yh < 0 | yh > 1)) {
-    stop("predicted probabilities must lie in [0, 1].", call. = FALSE)
+    stop("predicted probabilities must lie in \[0, 1\].", call. = FALSE)
   }
   if (any(y != 0 & y != 1)) {
     stop("targets must be 0 or 1 for Eq 1.9.", call. = FALSE)
@@ -246,7 +246,7 @@ morie_burkov_binary_cross_entropy <- function(y_hat, y) {
   loss <- -(y * log(yh) + (1 - y) * log(1 - yh))
   loss[is.nan(loss)] <- 0 # 0 * log 0 limit
   list(
-    losses = loss, estimate = loss[1], mean_loss = mean(loss),
+    losses = loss, estimate = loss\[1\], mean_loss = mean(loss),
     n = length(y), method = "Binary cross-entropy (Burkov Eq 1.9)"
   )
 }
@@ -279,7 +279,7 @@ morie_burkov_bce_gradients <- function(y_hat, y, x, N = NULL, j = NULL) {
   resid <- yh - y
   gw <- colMeans(X * resid)
   gb <- mean(resid)
-  est <- if (!is.null(j)) gw[as.integer(j) + 1L] else gw[1]
+  est <- if (!is.null(j)) gw[as.integer(j) + 1L] else gw\[1\]
   list(
     grad_w = as.numeric(gw), grad_b = gb, estimate = as.numeric(est),
     n = length(y),
@@ -457,7 +457,7 @@ morie_burkov_interpolation <- function(probs_by_order, lambdas) {
     ), call. = FALSE)
   }
   if (any(ps < 0 | ps > 1)) {
-    stop("probabilities must lie in [0, 1].", call. = FALSE)
+    stop("probabilities must lie in \[0, 1\].", call. = FALSE)
   }
   list(
     estimate = sum(ls * ps), probs = ps, lambdas = ls, n = length(ps),
@@ -484,7 +484,7 @@ morie_burkov_backoff <- function(counts_by_order, alpha = 0.4) {
   discount <- 1
   for (level in seq_along(counts_by_order)) {
     pair <- as.numeric(counts_by_order[[level]])
-    c <- pair[1]
+    c <- pair\[1\]
     p <- pair[2]
     if (c < 0 || p < 0) stop("counts must be non-negative.", call. = FALSE)
     if (c > p) stop("count(ngram) cannot exceed count(prefix).", call. = FALSE)
@@ -529,7 +529,7 @@ morie_burkov_kneser_ney <- function(counts_ngram, counts_prefix,
     )
   }
   cc <- as.numeric(continuation_counts)
-  n_after <- cc[1]
+  n_after <- cc\[1\]
   cont_w <- cc[2]
   total_types <- cc[3]
   if (total_types <= 0 || cont_w < 0 || n_after < 0) {
@@ -619,7 +619,7 @@ morie_burkov_unit_vector <- function(a) {
     )
   }
   list(
-    unit = a / n, estimate = (a / n)[1], norm = n, n = length(a),
+    unit = a / n, estimate = (a / n)\[1\], norm = n, n = length(a),
     method = "Unit vector a/||a|| (Burkov Ch 1)"
   )
 }
@@ -706,7 +706,7 @@ morie_burkov_repetition_penalty <- function(logits, prev_tokens,
     z[i] <- if (z[i] > 0) z[i] / r else z[i] * r
   }
   list(
-    penalised = z, estimate = z[1], penalty = r, tokens_hit = prev,
+    penalised = z, estimate = z\[1\], penalty = r, tokens_hit = prev,
     n = length(z),
     method = "Repetition penalty on logits (Burkov Ch 5)"
   )
@@ -735,7 +735,7 @@ morie_burkov_weight_tying <- function(h_last, E) {
   }
   logits <- as.numeric(E %*% h)
   list(
-    logits = logits, estimate = logits[1], vocab_size = nrow(E),
+    logits = logits, estimate = logits\[1\], vocab_size = nrow(E),
     hidden_size = ncol(E), n = length(h),
     method = "Weight tying logits = h E^T (Burkov Ch 4)"
   )
@@ -778,7 +778,7 @@ morie_burkov_elman_rnn <- function(x_t, h_prev, Wh, Wx, Wy, bh, by) {
   h <- tanh(as.numeric(Wh %*% h0 + Wx %*% x + bh))
   y <- as.numeric(Wy %*% h + by)
   list(
-    h = h, y = y, estimate = y[1], n = length(h),
+    h = h, y = y, estimate = y\[1\], n = length(h),
     method = "Elman RNN step (Burkov Ch 3)"
   )
 }

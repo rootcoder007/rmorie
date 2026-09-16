@@ -24,7 +24,7 @@ Mzworld <- function(observation, actions, representation, dynamics) {
   rewards <- numeric(0)
   for (i in seq_along(actions)) {
     out <- dynamics(s, actions[[i]])
-    rewards <- c(rewards, as.numeric(out[[1]]))
+    rewards <- c(rewards, as.numeric(out[\[1\]]))
     s <- out[[2]]
     states[[length(states) + 1L]] <- s
   }

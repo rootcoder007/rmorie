@@ -87,7 +87,7 @@ morie_miord2 <- function(data, m = 5, maxit = 5, seed = 0,
       for (i in which(mask[, j])) {
         pick <- min(floor(.ghc_unif(e, 1) * length(obs)),
                     length(obs) - 1) + 1
-        cur[i, j] <- obs[pick]
+        cur\[i, j\] <- obs[pick]
       }
     }
     for (t_ in seq_len(maxit)) {

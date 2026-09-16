@@ -23,6 +23,6 @@ Tqorth <- function(S_mat) {
   Q <- .s4_qr_mgs(t(Sm))$Q
   So <- t(Q)
   err <- max(abs(tcrossprod(So) - diag(1, m)))
-  .t1_result(S_orth = So, estimate = So[1, 1], m = m, d = d, orth_err = err,
+  .t1_result(S_orth = So, estimate = So\[1, 1\], m = m, d = d, orth_err = err,
              method = "Orthogonalized JL sketch matrix")
 }

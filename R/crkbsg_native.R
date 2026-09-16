@@ -211,7 +211,7 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
   m <- n1 + n2 + 2L
   A <- matrix(0.0, m, m)
   for (i in seq_len(n1)) {
-    for (j in seq_len(n1)) A[i, j] <- cov2(C1[i, ], C1[j, ], b11, n11)
+    for (j in seq_len(n1)) A\[i, j\] <- cov2(C1[i, ], C1[j, ], b11, n11)
     for (j in seq_len(n2)) A[i, n1 + j] <- cov2(C1[i, ], C2[j, ], b12, n12)
     A[i, n1 + n2 + 1L] <- 1.0
   }
@@ -251,7 +251,7 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
     lagr <- c(sol[n1 + n2 + 1L], sol[n1 + n2 + 2L])
     pred[ti] <- sum(lam * yv) + sum(mu * zv)
     v <- c11_0 - (sum(lam * rhs[seq_len(n1)]) +
-                    sum(mu * rhs[n1 + seq_len(n2)]) + lagr[1])
+                    sum(mu * rhs[n1 + seq_len(n2)]) + lagr\[1\])
     vv[ti] <- max(v, 0.0)
 
     rk <- c(vapply(seq_len(n1), function(i) cov2(C1[i, ], t0, b11, n11), 0),

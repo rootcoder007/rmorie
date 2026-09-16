@@ -80,7 +80,7 @@ Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
   if (dec$n0 < 2L || dec$n1 < 2L) {
     stop("both core alleles need at least 2 chromosomes", call. = FALSE)
   }
-  me <- as.numeric(min_ehh)[1]
+  me <- as.numeric(min_ehh)\[1\]
   aL <- .morie_ihh_side(pos, dec$ehh0, dec$core, -1L, me)
   aR <- .morie_ihh_side(pos, dec$ehh0, dec$core, +1L, me)
   dL <- .morie_ihh_side(pos, dec$ehh1, dec$core, -1L, me)
@@ -92,7 +92,7 @@ Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
   }
   u <- log(ihh_a / ihh_d)
   if (!is.null(standardize)) {
-    mu <- as.numeric(standardize[1])
+    mu <- as.numeric(standardize\[1\])
     sd_ <- as.numeric(standardize[2])
     if (sd_ <= 0) stop("standardize sd must be positive", call. = FALSE)
     est <- (u - mu) / sd_
@@ -145,7 +145,7 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
     stop("populations must cover the same SNPs", call. = FALSE)
   }
   pos <- decA$positions
-  me <- as.numeric(min_ehh)[1]
+  me <- as.numeric(min_ehh)\[1\]
   aL <- .morie_ihh_side(pos, decA$ehhs, decA$core, -1L, me)
   aR <- .morie_ihh_side(pos, decA$ehhs, decA$core, +1L, me)
   bL <- .morie_ihh_side(pos, decB$ehhs, decB$core, -1L, me)
@@ -157,7 +157,7 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
   }
   u <- log(IA / IB)
   if (!is.null(standardize)) {
-    mu <- as.numeric(standardize[1])
+    mu <- as.numeric(standardize\[1\])
     sd_ <- as.numeric(standardize[2])
     if (sd_ <= 0) stop("standardize sd must be positive", call. = FALSE)
     est <- (u - mu) / sd_
@@ -264,18 +264,18 @@ Ibdmtx <- function(G) {
       Nexp <- matrix(0, 3, 3)
       for (j in seq_len(m)) {
         if (is.null(tables[[j]])) next
-        g1 <- Gm[i, j]
+        g1 <- Gm\[i, j\]
         g2 <- Gm[k, j]
         if (!valid(g1) || !valid(g2)) next
         ibs <- 2L - as.integer(abs(g1 - g2))
         Nobs[ibs + 1L] <- Nobs[ibs + 1L] + 1
         Nexp <- Nexp + tables[[j]]
       }
-      if (Nexp[1, 1] <= 0 || Nexp[2, 2] <= 0) {
+      if (Nexp\[1, 1\] <= 0 || Nexp[2, 2] <= 0) {
         stop("no informative SNPs for a pair", call. = FALSE)
       }
-      z0 <- Nobs[1] / Nexp[1, 1]
-      z1 <- (Nobs[2] - z0 * Nexp[1, 2]) / Nexp[2, 2]
+      z0 <- Nobs\[1\] / Nexp\[1, 1\]
+      z1 <- (Nobs[2] - z0 * Nexp\[1, 2\]) / Nexp[2, 2]
       z2 <- (Nobs[3] - z0 * Nexp[1, 3] - z1 * Nexp[2, 3]) / Nexp[3, 3]
       if (z0 > 1) { z0 <- 1
       z1 <- 0
@@ -300,10 +300,10 @@ Ibdmtx <- function(G) {
         z1 <- 2 * pi_ * (1 - pi_)
         z2 <- pi_ * pi_
       }
-      pihat[i, k] <- pihat[k, i] <- pi_
-      Z0[i, k] <- Z0[k, i] <- z0
-      Z1[i, k] <- Z1[k, i] <- z1
-      Z2[i, k] <- Z2[k, i] <- z2
+      pihat\[i, k\] <- pihat[k, i] <- pi_
+      Z0\[i, k\] <- Z0[k, i] <- z0
+      Z1\[i, k\] <- Z1[k, i] <- z1
+      Z2\[i, k\] <- Z2[k, i] <- z2
       counts_out[[length(counts_out) + 1L]] <- c(i, k, Nobs)
     }
   }

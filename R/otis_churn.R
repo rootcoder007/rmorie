@@ -86,7 +86,7 @@ NULL
   }
   rng <- regmatches(s, regexpr("[0-9]+\\s+to\\s+[0-9]+", s))
   if (length(rng)) {
-    nums <- as.numeric(strsplit(rng, "\\s+to\\s+")[[1]])
+    nums <- as.numeric(strsplit(rng, "\\s+to\\s+")[\[1\]])
     return(mean(nums))
   }
   m <- regmatches(s, regexpr("[0-9]+", s))
@@ -254,7 +254,7 @@ morie_otis_within_year_placement_count <- function(df) {
       `Distinct (id x year) cells` = length(cnt_arr),
       `Mean placements / person-year` = round(mean(cnt_arr), 3),
       Median = stats::median(cnt_arr),
-      `Q1 / Q3` = sprintf("%.1f / %.1f", q[1], q[2]),
+      `Q1 / Q3` = sprintf("%.1f / %.1f", q\[1\], q[2]),
       `Max in one FY` = max(cnt_arr),
       `Cells with 1 placement` = sum(cnt_arr == 1L),
       `Cells with 2 placements` = sum(cnt_arr == 2L),
@@ -860,8 +860,8 @@ morie_otis_regC_demog_contingency <- function(df) {
     stringsAsFactors = FALSE
   )
   regC <- tapply(agg$rg, agg$key, function(v) length(unique(v)))
-  gender <- tapply(agg$gender, agg$key, function(v) v[1])
-  age <- tapply(agg$age, agg$key, function(v) v[1])
+  gender <- tapply(agg$gender, agg$key, function(v) v\[1\])
+  age <- tapply(agg$age, agg$key, function(v) v\[1\])
   cell <- data.frame(
     key = names(regC), regC = as.integer(regC),
     Gender = unname(gender), Age = unname(age),
@@ -967,9 +967,9 @@ morie_otis_irr_glmm_vm <- function(df) {
     data.frame(
       vm = vm,
       T_high_ac = as.integer(ac >= 2L),
-      yr = as.character(g$EndFiscalYear[1]),
-      sg = as.character(g$Gender[1]),
-      ag = as.character(g$Age_Category[1]),
+      yr = as.character(g$EndFiscalYear\[1\]),
+      sg = as.character(g$Gender\[1\]),
+      ag = as.character(g$Age_Category\[1\]),
       stringsAsFactors = FALSE
     )
   }))
@@ -996,7 +996,7 @@ morie_otis_irr_glmm_vm <- function(df) {
     ci  <- exp(beta + c(-1, 1) * 1.96 * se)
     aic <- tryCatch(stats::AIC(fit), error = function(e) NA_real_)
     list(label, round(irr, 4),
-         sprintf("[%.3f, %.3f]", ci[1], ci[2]),
+         sprintf("[%.3f, %.3f]", ci\[1\], ci[2]),
          signif(pval, 3), round(aic, 2))
   }
   # 3MMM.28: bump glm maxit to 200 (default 25 hits ceiling on
@@ -1124,7 +1124,7 @@ morie_otis_churn_analyze_all <- function(b01 = NULL, b02 = NULL,
     r <- tryCatch(fns[[nm]](), error = function(e) {
       out <- list(title = sprintf("churn %s (failed)", nm),
                   warnings = sprintf("%s: %s",
-                                      class(e)[1], conditionMessage(e)))
+                                      class(e)\[1\], conditionMessage(e)))
       class(out) <- c("morie_otis_result", "morie_rich_result", "list")
       out
     })

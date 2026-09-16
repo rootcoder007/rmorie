@@ -44,8 +44,8 @@ Semsro <- function(sample_cov, fitted_cov) {
   if (nrow(G) != p || ncol(G) != p)
     stop("sem_residual: fitted_cov must have the same order as sample_cov")
   for (i in seq_len(p)) for (j in seq_len(p)) {
-    if (abs(S[i, j] - S[j, i]) > 1e-8) stop("sem_residual: sample_cov is not symmetric")
-    if (abs(G[i, j] - G[j, i]) > 1e-8) stop("sem_residual: fitted_cov is not symmetric")
+    if (abs(S\[i, j\] - S[j, i]) > 1e-8) stop("sem_residual: sample_cov is not symmetric")
+    if (abs(G\[i, j\] - G[j, i]) > 1e-8) stop("sem_residual: fitted_cov is not symmetric")
   }
   for (i in seq_len(p)) if (S[i, i] <= 0)
     stop("sem_residual: sample_cov has a non-positive variance")
@@ -58,7 +58,7 @@ Semsro <- function(sample_cov, fitted_cov) {
   max_abs_std <- 0
   for (i in seq_len(p)) {
     for (j in seq_len(i)) {
-      e <- E[i, j]
+      e <- E\[i, j\]
       ss_raw <- ss_raw + e * e
       z <- e / sqrt(S[i, i] * S[j, j])
       ss_std <- ss_std + z * z

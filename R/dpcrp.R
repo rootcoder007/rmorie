@@ -38,7 +38,7 @@ Crp <- function(n, alpha = 1, u = NULL, seed = 1) {
     if (length(counts)) {
       cw <- cumsum(counts / tot)
       w <- which(draw < cw)
-      if (length(w)) pick <- w[1] - 1L
+      if (length(w)) pick <- w\[1\] - 1L
     }
     if (pick < 0L) { counts <- c(counts, 0)
     pick <- length(counts) - 1L }

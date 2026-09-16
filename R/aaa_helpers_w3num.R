@@ -120,7 +120,7 @@
   lo <- matrix(0, p, p)
   for (i in seq_len(p)) {
     for (j in seq_len(i)) {
-      s <- a[i, j] - if (j > 1L) {
+      s <- a\[i, j\] - if (j > 1L) {
         .w3_dot(
           lo[i, seq_len(j - 1L)],
           lo[j, seq_len(j - 1L)]
@@ -130,9 +130,9 @@
       }
       if (i == j) {
         if (s <= 0) stop("matrix is not positive definite")
-        lo[i, j] <- sqrt(s)
+        lo\[i, j\] <- sqrt(s)
       } else {
-        lo[i, j] <- s / lo[j, j]
+        lo\[i, j\] <- s / lo[j, j]
       }
     }
   }
@@ -191,7 +191,7 @@
     .w3_solve_chol(lo, e)
   })
   out <- matrix(0, p, p)
-  for (i in seq_len(p)) for (j in seq_len(p)) out[i, j] <- cols[[j]][i]
+  for (i in seq_len(p)) for (j in seq_len(p)) out\[i, j\] <- cols[[j]][i]
   out
 }
 
@@ -219,7 +219,7 @@
   xtx <- matrix(0, p, p)
   for (a in seq_len(p)) {
     for (b in seq_len(p)) {
-      xtx[a, b] <- .w3_csum(design[, a] * design[, b])
+      xtx\[a, b\] <- .w3_csum(design[, a] * design[, b])
     }
   }
   xty <- vapply(seq_len(p), function(a) .w3_csum(design[, a] * y), numeric(1))
@@ -624,7 +624,7 @@
     )
     xr <- cen + alpha * (cen - pts[[n + 1L]])
     fr <- f(xr)
-    if (fr < vals[1]) {
+    if (fr < vals\[1\]) {
       xe <- cen + gamma * (xr - cen)
       fe <- f(xe)
       if (fe < fr) {
@@ -665,6 +665,6 @@
       vals[i] <- f(pts[[i]])
     }
   }
-  b <- order(vals, seq_len(n + 1L))[1]
+  b <- order(vals, seq_len(n + 1L))\[1\]
   list(x = pts[[b]], value = vals[b])
 }

@@ -125,7 +125,7 @@
   out <- matrix(0, nrow(A), ncol(B))
   for (i in seq_len(nrow(A))) {
     for (j in seq_len(ncol(B))) {
-      out[i, j] <- .morie_fsum(A[i, ] * B[, j])
+      out\[i, j\] <- .morie_fsum(A[i, ] * B[, j])
     }
   }
   out
@@ -373,7 +373,7 @@
 .morie_bx_fill <- function(nr, nc, u, f) {
   # row-major fill, the order the Python list comprehensions draw in
   m <- matrix(0, nr, nc)
-  for (i in seq_len(nr)) for (j in seq_len(nc)) m[i, j] <- f(u())
+  for (i in seq_len(nr)) for (j in seq_len(nc)) m\[i, j\] <- f(u())
   m
 }
 
@@ -425,7 +425,7 @@
   for (a in seq_len(p)) {
     for (b in a:p) {
       v <- .morie_fsum((X[, a] - mu[a]) * (X[, b] - mu[b])) / d
-      C[a, b] <- v
+      C\[a, b\] <- v
       C[b, a] <- v
     }
   }
@@ -1059,7 +1059,7 @@ PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
     inv <- matrix(0, p, p)
     for (i in seq_len(p)) {
       for (j in seq_len(p)) {
-        inv[i, j] <- .morie_fsum(ev$vectors[i, ] * ev$vectors[j, ] / ev$values)
+        inv\[i, j\] <- .morie_fsum(ev$vectors[i, ] * ev$vectors[j, ] / ev$values)
       }
     }
     means[[ci]] <- cv$mu
@@ -1970,7 +1970,7 @@ IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
   C <- matrix(0, K, K)
   for (i in seq_len(K)) {
     for (j in seq_len(K)) {
-      C[i, j] <- .morie_fsum(Yc[i, ] * Yc[j, ]) / T
+      C\[i, j\] <- .morie_fsum(Yc[i, ] * Yc[j, ]) / T
     }
   }
   ev <- .morie_bx_jacobi(C)
@@ -2031,7 +2031,7 @@ IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
   A <- matrix(0, K, L)
   for (i in seq_len(K)) {
     for (j in seq_len(L)) {
-      A[i, j] <- .morie_fsum(Wt[i, ] * Ginv[, j])
+      A\[i, j\] <- .morie_fsum(Wt[i, ] * Ginv[, j])
     }
   }
 
@@ -2170,7 +2170,7 @@ Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
   C <- matrix(0, K, K)
   for (i in seq_len(K)) {
     for (j in seq_len(K)) {
-      C[i, j] <- .morie_fsum(Yc[i, ] * Yc[j, ]) / T
+      C\[i, j\] <- .morie_fsum(Yc[i, ] * Yc[j, ]) / T
     }
   }
   ev <- .morie_bx_jacobi(C)
@@ -2192,7 +2192,7 @@ Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
     M <- diag(1, L)
     for (i in seq_len(L)) {
       for (j in seq_len(L)) {
-        M[i, j] <- M[i, j] + .morie_fsum(P[i, ] * U[j, ]) / T
+        M\[i, j\] <- M\[i, j\] + .morie_fsum(P[i, ] * U[j, ]) / T
       }
     }
     D <- .morie_bx_mm(M, W)
@@ -2806,7 +2806,7 @@ BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
     Kmat <- matrix(0, L, K)
     for (i in seq_len(L)) {
       for (j in seq_len(K)) {
-        Kmat[i, j] <- .morie_fsum(APCt[i, ] * Kg[, j])
+        Kmat\[i, j\] <- .morie_fsum(APCt[i, ] * Kg[, j])
       }
     }
     pred <- .morie_bx_mv(Cm, xh)
@@ -2822,7 +2822,7 @@ BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
     Pf <- matrix(0, L, L)
     for (i in seq_len(L)) {
       for (j in seq_len(L)) {
-        Pf[i, j] <- P[i, j] - .morie_fsum(KC[i, ] * P[, j])
+        Pf\[i, j\] <- P\[i, j\] - .morie_fsum(KC[i, ] * P[, j])
       }
     }
     P <- .morie_bx_mm(.morie_bx_mm(A, Pf), t(A)) + Qd
@@ -3026,7 +3026,7 @@ PcaSig <- function(X, ncomp = NULL) {
   S <- matrix(0, K, K)
   for (i in seq_len(K)) {
     for (j in seq_len(K)) {
-      S[i, j] <- .morie_fsum(Yc[i, ] * Yc[j, ]) / (T - 1)
+      S\[i, j\] <- .morie_fsum(Yc[i, ] * Yc[j, ]) / (T - 1)
     }
   }
   ev <- .morie_bx_jacobi(S)

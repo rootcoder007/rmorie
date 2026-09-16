@@ -45,7 +45,7 @@ Gpvbo <- function(X, y, X_grid, lengthscale = 1, variance = 1, noise = 1e-6, xi 
   kf <- function(P, Q) {
     o <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      o[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      o\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     o
   }
   K <- kf(A, A) + diag(s2, n)

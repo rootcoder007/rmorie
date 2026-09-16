@@ -177,6 +177,8 @@ morie_newey_west_vcov <- function(fit, lags = NULL) {
 #' an order of magnitude by collinearity.
 #' @param fit a `morie_ols` fit
 #' @return a list of the statistic and, where exact, its p-value
+#' @param X Argument `X`; see Usage.
+#' @param add_intercept Argument `add_intercept`; see Usage.
 #' @export
 #' @examples
 #' if (requireNamespace("sandwich", quietly = TRUE)) {

@@ -40,10 +40,10 @@ Svgp <- function(X, y, Z = NULL, gamma = 1, sigma2 = 1e-2, jitter = 1e-8,
   n <- nrow(Xm)
   m <- nrow(Zm)
   Kmm <- matrix(0, m, m)
-  for (i in seq_len(m)) for (j in seq_len(m)) Kmm[i, j] <- rbf(Zm[i, ], Zm[j, ])
+  for (i in seq_len(m)) for (j in seq_len(m)) Kmm\[i, j\] <- rbf(Zm[i, ], Zm[j, ])
   for (i in seq_len(m)) Kmm[i, i] <- Kmm[i, i] + as.numeric(jitter)
   Knm <- matrix(0, n, m)
-  for (i in seq_len(n)) for (j in seq_len(m)) Knm[i, j] <- rbf(Xm[i, ], Zm[j, ])
+  for (i in seq_len(n)) for (j in seq_len(m)) Knm\[i, j\] <- rbf(Xm[i, ], Zm[j, ])
   Q <- matrix(0, n, n)
   trace <- 0
   for (i in seq_len(n)) {
@@ -51,7 +51,7 @@ Svgp <- function(X, y, Z = NULL, gamma = 1, sigma2 = 1e-2, jitter = 1e-8,
     for (j in seq_len(n)) {
       s <- 0
       for (t in seq_len(m)) s <- s + Knm[j, t] * w[t]
-      Q[i, j] <- s
+      Q\[i, j\] <- s
     }
     trace <- trace + 1 - Q[i, i]
   }

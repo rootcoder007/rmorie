@@ -19,10 +19,10 @@
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 17
 #' @export
 Alftmpl <- function(t, z, wq, wk, wv, wo) {
-  nt <- dim(t)[1]
-  n <- dim(z)[1]
+  nt <- dim(t)\[1\]
+  n <- dim(z)\[1\]
   nh <- length(wq)
-  cc <- nrow(wq[[1]])
+  cc <- nrow(wq[\[1\]])
   scale <- 1 / sqrt(cc)
 
   attn <- array(0, c(nh, n, n, nt))
@@ -30,7 +30,7 @@ Alftmpl <- function(t, z, wq, wk, wv, wo) {
   for (h in seq_len(nh)) {
     o[[h]] <- array(0, c(n, n, cc))
     for (i in seq_len(n)) for (j in seq_len(n)) {
-      q <- alfLin(z[i, j, ], wq[[h]])
+      q <- alfLin(z\[i, j, \], wq[[h]])
       logits <- numeric(nt)
       vv <- matrix(0, nt, cc)
       for (st in seq_len(nt)) {
@@ -47,8 +47,8 @@ Alftmpl <- function(t, z, wq, wk, wv, wo) {
   out <- array(0, c(n, n, cz))
   for (i in seq_len(n)) for (j in seq_len(n)) {
     cat_ <- numeric(0)
-    for (h in seq_len(nh)) cat_ <- c(cat_, o[[h]][i, j, ])
-    out[i, j, ] <- alfLin(cat_, wo)
+    for (h in seq_len(nh)) cat_ <- c(cat_, o[[h]]\[i, j, \])
+    out\[i, j, \] <- alfLin(cat_, wo)
   }
 
   list(z = out, attn = attn, estimate = mean(out), n = n, ntempl = nt,

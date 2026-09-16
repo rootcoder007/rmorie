@@ -5,7 +5,7 @@
 #' information network embedding, WWW 24, 1067-1077 (arXiv:1503.03578 --
 #' FETCHED).  First-order proximity, eqs. (1)-(3): p_1(v_i, v_j) = 1/(1 +
 #' exp(-u_i' u_j)) and O_1 = -sum_(i,j) w_ij log p_1.  Second-order, eqs.
-#' (4)-(6): p\_2(v\_j | v\_i) = softmax\_j(u'\_j . u\_i) and O\_2 = -sum\_(i,j)
+#' (4)-(6): p_2(v_j | v_i) = softmax_j(u'_j . u_i) and O_2 = -sum_(i,j)
 #' w_ij log p_2.  Both are the KL divergence between the empirical and the
 #' modelled proximity with the constants dropped, exactly as derived.
 #' Embeddings are supplied or fitted by fixed full-batch gradient steps;
@@ -32,13 +32,13 @@ Lineembed <- function(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0,
   if (is.null(U)) {
     U <- matrix(0, n, d)
     for (i in seq_len(n)) for (j in seq_len(d)) {
-      U[i, j] <- .s03vdc((i - 1L) * d + (j - 1L), 2L) - 0.5
+      U\[i, j\] <- .s03vdc((i - 1L) * d + (j - 1L), 2L) - 0.5
     }
   } else U <- .s03mat(U)
   if (is.null(Uc)) {
     Uc <- matrix(0, n, d)
     for (i in seq_len(n)) for (j in seq_len(d)) {
-      Uc[i, j] <- .s03vdc((i - 1L) * d + (j - 1L), 3L) - 0.5
+      Uc\[i, j\] <- .s03vdc((i - 1L) * d + (j - 1L), 3L) - 0.5
     }
   } else Uc <- .s03mat(Uc)
   obj <- function() {
@@ -54,14 +54,14 @@ Lineembed <- function(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0,
         lse <- .s03logsumexp(logits)
       }
       for (j in seq_len(n)) {
-        if (W[i, j] == 0) next
+        if (W\[i, j\] == 0) next
         if (as.integer(order) == 2L) {
-          o <- o - W[i, j] * (logits[j] - lse)
+          o <- o - W\[i, j\] * (logits[j] - lse)
         } else {
           s <- 0
           for (a in seq_len(d)) s <- s + U[i, a] * U[j, a]
           p <- .s03sigmoid(s)
-          o <- o - W[i, j] * log(if (p > 1e-300) p else 1e-300)
+          o <- o - W\[i, j\] * log(if (p > 1e-300) p else 1e-300)
         }
       }
     }
@@ -71,10 +71,10 @@ Lineembed <- function(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0,
   for (st in seq_len(as.integer(steps))) {
     gU <- matrix(0, n, d)
     for (i in seq_len(n)) for (j in seq_len(n)) {
-      if (W[i, j] == 0 || as.integer(order) != 1L) next
+      if (W\[i, j\] == 0 || as.integer(order) != 1L) next
       s <- 0
       for (a in seq_len(d)) s <- s + U[i, a] * U[j, a]
-      cc <- W[i, j] * (.s03sigmoid(s) - 1)
+      cc <- W\[i, j\] * (.s03sigmoid(s) - 1)
       for (a in seq_len(d)) {
         gU[i, a] <- gU[i, a] + cc * U[j, a]
         gU[j, a] <- gU[j, a] + cc * U[i, a]

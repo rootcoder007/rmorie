@@ -206,11 +206,11 @@ morie_ts_stationarity <- function(x, max_d = 2L) {
     if (have_urca) {
       adf <- suppressWarnings(urca::ur.df(v, type = "drift",
                                           selectlags = "AIC"))
-      adf_stat <- adf@teststat[1]
+      adf_stat <- adf@teststat\[1\]
       adf_crit <- adf@cval[1, "5pct"]
       adf_stationary <- adf_stat < adf_crit          # reject unit root
       kp <- suppressWarnings(urca::ur.kpss(v, type = "mu"))
-      kpss_stat <- kp@teststat[1]
+      kpss_stat <- kp@teststat\[1\]
       kpss_crit <- kp@cval[1, "5pct"]
       kpss_stationary <- kpss_stat < kpss_crit        # fail to reject H0
     } else {
@@ -366,8 +366,8 @@ morie_ts_arima <- function(x, order = c(0L, 0L, 0L),
 print.morie_ts_model <- function(x, ...) {
   cat("<morie_ts_model>\n")
   cat(sprintf("  ARIMA(%d,%d,%d)(%d,%d,%d)[%d]  xreg=%s\n",
-              x$order[1], x$order[2], x$order[3],
-              x$seasonal[1], x$seasonal[2], x$seasonal[3],
+              x$order\[1\], x$order[2], x$order[3],
+              x$seasonal\[1\], x$seasonal[2], x$seasonal[3],
               x$frequency, x$has_xreg))
   cat(sprintf("  AIC=%.2f  logLik=%.2f\n", x$aic, x$loglik))
   invisible(x)

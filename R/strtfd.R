@@ -49,7 +49,7 @@ Stratdes <- function(Nh, Sh, n, Ch = NULL, kind = "neyman") {
   base <- pmax(1L, as.integer(floor(exact)))
   while (sum(base) > n) {
     cand <- which(base > 1L)
-    i <- cand[order(-(base[cand] - exact[cand]), cand)][1]
+    i <- cand[order(-(base[cand] - exact[cand]), cand)]\[1\]
     base[i] <- base[i] - 1L
   }
   ord <- order(-(exact - base), seq_len(L))

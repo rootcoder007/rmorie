@@ -46,7 +46,7 @@ Gpsps <- function(X, y, X_test = NULL, Q = 1, weights = NULL, variances = NULL,
   xt <- if (is.null(X_test)) xs else .s03vec(X_test)
   sm <- function(t) sum(w * exp(-2 * pi^2 * t * t * v) * cos(2 * pi * t * m))
   K <- matrix(0, n, n)
-  for (i in seq_len(n)) for (j in seq_len(n)) K[i, j] <- sm(xs[i] - xs[j])
+  for (i in seq_len(n)) for (j in seq_len(n)) K\[i, j\] <- sm(xs[i] - xs[j])
   K <- K + diag(s2, n)
   alpha <- .s03cholsolve(K, yv)
   Ks <- matrix(0, length(xt), n)
@@ -60,7 +60,7 @@ Gpsps <- function(X, y, X_test = NULL, Q = 1, weights = NULL, variances = NULL,
   }
   L <- .s03chol(K)
   ll <- -0.5 * sum(yv * alpha) - sum(log(diag(L))) - 0.5 * n * log(2 * pi)
-  .t1_result(estimate = mu[1], mean = mu, variance = sd, k_zero = k0,
+  .t1_result(estimate = mu\[1\], mean = mu, variance = sd, k_zero = k0,
              loglik = ll, n = n,
              method = "k(tau) = sum_q w_q exp(-2 pi^2 tau^2 v_q) cos(2 pi tau mu_q), Wilson & Adams (2013)")
 }

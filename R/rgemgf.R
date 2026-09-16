@@ -20,8 +20,8 @@
 #' threshold being 100 microvolts in the book's own experiment.
 #'
 #' The goodness of fit is equation (5.28), p. 292:
-#' r^2 = [sum x(n) y(n) - N xbar ybar]^2 /
-#'       ([sum x^2(n) - N xbar^2][sum y^2(n) - N ybar^2]).
+#' r^2 = \[sum x(n) y(n) - N xbar ybar\]^2 /
+#'       ([sum x^2(n) - N xbar^2]\[sum y^2(n) - N ybar^2\]).
 #' The captions of Figures 5.15-5.17 give r^2 = 0.98 for RMS, 0.78 for ZCR and
 #' 0.97 for TCR: RMS and TCR track force closely, ZCR does not.
 #'
@@ -60,7 +60,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
   zv <- numeric(0)
   tv <- numeric(0)
   for (q in seq_along(ivs)) {
-    a <- ivs[[q]][1]
+    a <- ivs[[q]]\[1\]
     b <- ivs[[q]][2]
     sf <- f[(a + 1L):b]
     se <- e[(a + 1L):b]
@@ -89,9 +89,9 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
               intervals = ivs, n_intervals = length(ivs),
               force_levels = lev, rms = rv, zcr = zv, tcr = tv,
               r2_rms = r2r, r2_zcr = r2z, r2_tcr = r2t,
-              slope_rms = fr[1], intercept_rms = fr[2],
-              slope_zcr = fz[1], intercept_zcr = fz[2],
-              slope_tcr = ft[1], intercept_tcr = ft[2],
+              slope_rms = fr\[1\], intercept_rms = fr[2],
+              slope_zcr = fz\[1\], intercept_zcr = fz[2],
+              slope_tcr = ft\[1\], intercept_tcr = ft[2],
               mvc = max(f), n = n, fs = fsv,
               method = "Rangayyan (2024) Sect. 5.9 pp.290-292, interval delineation at 10% MVC refined at 0.7 of the interval peak; eq. (5.28) for r^2")
   if (!is.null(window)) {
@@ -131,7 +131,7 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
   }
   fine <- list()
   for (q in seq_along(coarse)) {
-    a <- coarse[[q]][1]
+    a <- coarse[[q]]\[1\]
     b <- coarse[[q]][2]
     seg <- f[a:b]
     t2 <- .RGEMGF_REFINE_FRACTION * max(seg)
@@ -142,12 +142,12 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
       if (seg[k] >= t2) {
         p <- k
         while (p <= m && seg[p] >= t2) p <- p + 1L
-        if (is.null(best) || (p - k) > (best[2] - best[1])) best <- c(k, p)
+        if (is.null(best) || (p - k) > (best[2] - best\[1\])) best <- c(k, p)
         k <- p
       } else k <- k + 1L
     }
     if (!is.null(best))
-      fine[[length(fine) + 1L]] <- c(a + best[1] - 2L, a + best[2] - 2L)
+      fine[[length(fine) + 1L]] <- c(a + best\[1\] - 2L, a + best[2] - 2L)
   }
   fine
 }

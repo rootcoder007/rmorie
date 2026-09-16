@@ -319,7 +319,7 @@ mrm_synthetic_area_exposure <- function(survey_df,
         `Survey rows (usable)` = nrow(X_survey),
         `Areas`                = nrow(area_df),
         `Covariates`           = length(survey_covariate_cols),
-        `Intercept (beta_0)`   = coef[1],
+        `Intercept (beta_0)`   = coef\[1\],
         `Mean predicted rate`  = if (any(is.finite(pred_rate)))
                                     mean(pred_rate, na.rm = TRUE) else NA_real_,
         `Sum exposure`         = if (any(is.finite(exposure)))

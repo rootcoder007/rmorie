@@ -136,8 +136,8 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
        row_kinds = vapply(rows, function(r) r$kind, character(1)))
 }
 
-# Internal: pivot on T[row, col]. Mirrors clpopt._pivot.
-#' Internal: pivot on T[row, col]. Mirrors clpopt._pivot
+# Internal: pivot on T\[row, col\]. Mirrors clpopt._pivot.
+#' Internal: pivot on T\[row, col\]. Mirrors clpopt._pivot
 #'
 #' A step of the clpopt_native implementation. Called by \code{.clpopt_run}, \code{simplex}.
 #' See the file header for the source the module follows.
@@ -149,7 +149,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @return The value of \code{T}, as built in the body.
 #' @export
 .clpopt_pivot <- function(T, row, col) {
-  p <- T[row, col]
+  p <- T\[row, col\]
   T[row, ] <- T[row, ] / p
   m <- nrow(T)
   for (i in seq_len(m)) {
@@ -400,7 +400,7 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
   for (i in seq_len(m)) {
     if (basis[i] >= n) {
       for (j in seq_len(n)) {
-        if (abs(T[i, j]) > .clpopt_eps) {
+        if (abs(T\[i, j\]) > .clpopt_eps) {
           T <- .clpopt_pivot(T, i, j)
           basis[i] <- j - 1L
           break

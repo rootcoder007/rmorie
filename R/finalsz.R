@@ -11,7 +11,7 @@
 #' S(0) -> 1 collapses to the classical Z = 1 - exp(-R0 Z) (their eq. 5).
 #' Ma & Earn show the relation holds for arbitrary distributions of the
 #' infectious period, so R0 alone determines the final size.  The root is
-#' isolated by bisection on [0, S(0)], where the residual is
+#' isolated by bisection on \[0, S(0)\], where the residual is
 #' non-negative at 0 and strictly negative at S(0).
 #'
 #' @param R0 Basic reproduction number (>= 0).

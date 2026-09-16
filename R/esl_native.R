@@ -138,7 +138,7 @@ morie_esl_em_gmm <- function(X, k = 2, max_iter = 200L, tol = 1e-6,
 #' set.seed(1)
 #' x <- c(rnorm(300, -3), rnorm(300, 3))
 #' d <- morie_esl_gaussian_mixture(x, k = 2, newdata = c(-3, 0))
-#' d$density[1] > d$density[2]
+#' d$density\[1\] > d$density[2]
 #' @export
 morie_esl_gaussian_mixture <- function(X, k = 2, newdata = NULL, ...) {
   X <- if (is.matrix(X)) X else matrix(as.numeric(X), ncol = 1L)

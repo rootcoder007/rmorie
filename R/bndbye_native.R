@@ -75,9 +75,9 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
   if (length(g) != length(d))
     stop("bndbye: the prior grid and density differ in length")
   if (length(g) == 1L)
-    return(list(lower = g[1], upper = g[1], width = 0,
+    return(list(lower = g\[1\], upper = g\[1\], width = 0,
                 level = as.numeric(level), covered = 1))
-  step <- (g[length(g)] - g[1]) / (length(g) - 1L)
+  step <- (g[length(g)] - g\[1\]) / (length(g) - 1L)
   mass <- d * step
   tot <- sum(mass)
   if (tot <= .bndbye_GHC_EPS) stop("bndbye: the conditional prior has no mass")

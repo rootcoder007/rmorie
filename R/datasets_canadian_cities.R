@@ -203,13 +203,13 @@ morie_datasets_calgary_fire_stations <- function(offline = TRUE,
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
-#' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+#' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id\[1\], limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
 #' \dontshow{\}) # examplesIf}
 #' \donttest{
 #' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
-#' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+#' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id\[1\], limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
 #' @export
@@ -288,7 +288,7 @@ morie_datasets_edmonton_fire_stations <- function(offline = TRUE,
 #' @examples
 #' \donttest{
 #' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
-#' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+#' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id\[1\], limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
 #' @export

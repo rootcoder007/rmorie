@@ -40,7 +40,7 @@ Baynet <- function(graph, cpts, evidence = list(), query = NULL) {
   card <- integer(0)
   for (v in nodes) {
     t <- cpts[[v]]
-    for (p in graph[[v]]) t <- t[[1]]
+    for (p in graph[[v]]) t <- t[\[1\]]
     card[v] <- length(unlist(t))
   }
   if (!query %in% names(card)) stop("unknown query node")

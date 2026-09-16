@@ -19,7 +19,7 @@
 #' @noRd
 .ghc_simplex_mip <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
   m <- length(A)
-  n <- if (m > 0) length(A[[1]]) else 0
+  n <- if (m > 0) length(A[\[1\]]) else 0
   rows <- vector("list", m)
   rhs <- numeric(m)
   for (i in seq_len(m)) {
@@ -58,7 +58,7 @@
     for (i in seq_len(m)) {
       f <- z[basis[[i]]]
       if (f != 0) {
-        for (j in seq_len(width + 1)) z[j] <- z[j] - f * Tmat[i, j]
+        for (j in seq_len(width + 1)) z[j] <- z[j] - f * Tmat\[i, j\]
       }
     }
     z
@@ -115,7 +115,7 @@
       if (basis[[i]] >= n + m) {
         moved <- FALSE
         for (j in seq_len(n + m)) {
-          if (abs(Tmat[i, j]) > tol) { pivot(i, j)
+          if (abs(Tmat\[i, j\]) > tol) { pivot(i, j)
           moved <- TRUE
           break }
         }
@@ -162,7 +162,7 @@
 #' @noRd
 .ghc_mipinterior <- function(M, rhs, c, tol = 1e-10, max_iter = 200) {
   m <- length(M)
-  n <- length(M[[1]])
+  n <- length(M[\[1\]])
   X <- matrix(0, m, n)
   for (i in seq_len(m)) X[i, ] <- as.numeric(M[[i]])
   rb <- as.numeric(rhs)
@@ -451,7 +451,7 @@ morie_miprgr_branch_and_bound <- function(A, b, c, integer_vars,
       }
       alt <- last$alt
       last$alt <- list(last$sense, last$value)
-      last$sense <- alt[[1]]
+      last$sense <- alt[\[1\]]
       last$value <- alt[[2]]
       last$marked <- TRUE
       lst[[length(lst)]] <- last

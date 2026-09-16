@@ -74,7 +74,7 @@ morie_ldiff <- function(X, quasi_ids, sensitive, l, c = 1) {
     ent <- -sum(p * log(p))
     r <- sort(cnt, decreasing = TRUE)
     tail <- if (ll <= m) sum(r[ll:m]) else 0
-    need <- if (tail <= 0) Inf else r[1] / tail
+    need <- if (tail <= 0) Inf else r\[1\] / tail
     if (c_min < need) c_min <- need
     if (is.na(distinct_l) || m < distinct_l) distinct_l <- m
     if (is.na(min_ent) || ent < min_ent) min_ent <- ent

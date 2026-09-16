@@ -37,7 +37,7 @@ Bpetrain <- function(corpus, vocab_size = 10, word_counts = NULL) {
     freq <- cnt
   }
   eow <- "</w>"
-  seqs <- lapply(words, function(w) c(strsplit(w, "")[[1]], eow))
+  seqs <- lapply(words, function(w) c(strsplit(w, "")[\[1\]], eow))
   merges <- character(0)
   counts <- numeric(0)
   for (it in seq_len(as.integer(vocab_size))) {
@@ -56,8 +56,8 @@ Bpetrain <- function(corpus, vocab_size = 10, word_counts = NULL) {
     best <- 1L
     if (length(pairs) > 1L) for (i in seq(2L, length(pairs))) if (pc[i] > pc[best]) best <- i
     if (pc[best] <= 1) break
-    ab <- strsplit(pairs[best], "\001", fixed = TRUE)[[1]]
-    a <- ab[1]
+    ab <- strsplit(pairs[best], "\001", fixed = TRUE)[\[1\]]
+    a <- ab\[1\]
     b <- ab[2]
     merges <- c(merges, paste0(a, "|", b))
     counts <- c(counts, pc[best])

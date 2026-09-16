@@ -192,14 +192,14 @@ Cndmi <- function(pxyz, base = 2) {
     return(p)
   }
   nx <- length(p)
-  ny <- length(p[[1]])
-  nz <- length(p[[1]][[1]])
+  ny <- length(p[\[1\]])
+  nz <- length(p[\[1\]][\[1\]])
   out <- array(0, dim = c(nx, ny, nz))
   for (i in seq_len(nx)) {
     if (length(p[[i]]) != ny) stop("ragged 3-D array", call. = FALSE)
     for (j in seq_len(ny)) {
       if (length(p[[i]][[j]]) != nz) stop("ragged 3-D array", call. = FALSE)
-      out[i, j, ] <- as.numeric(p[[i]][[j]])
+      out\[i, j, \] <- as.numeric(p[[i]][[j]])
     }
   }
   if (any(out < 0)) stop("pmf must be non-negative", call. = FALSE)

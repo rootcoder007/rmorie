@@ -85,27 +85,27 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
       # Weighted logistic Newton for (a_j, b_j): P = plogis(a(th-b))
       par <- c(a[j], b[j])
       for (nr in 1:25) {
-        eta <- par[1] * (q$theta - par[2])
+        eta <- par\[1\] * (q$theta - par[2])
         pj <- stats::plogis(eta)
         # gradient wrt (a, b)
         resid <- rq - nq * pj
         g <- c(sum(resid * (q$theta - par[2])),
-               sum(resid * (-par[1])))
+               sum(resid * (-par\[1\])))
         wv <- nq * pj * (1 - pj)
         H11 <- -sum(wv * (q$theta - par[2])^2)
-        H22 <- -sum(wv * par[1]^2)
-        H12 <- -sum(wv * (-par[1]) * (q$theta - par[2])) -
+        H22 <- -sum(wv * par\[1\]^2)
+        H12 <- -sum(wv * (-par\[1\]) * (q$theta - par[2])) -
           sum(resid)
         H <- matrix(c(H11, H12, H12, H22), 2L)
         step <- tryCatch(solve(H, g), error = function(e) g * 0)
         par_new <- par - step
-        par_new[1] <- min(max(par_new[1], 0.05), 8)
+        par_new\[1\] <- min(max(par_new\[1\], 0.05), 8)
         par_new[2] <- min(max(par_new[2], -6), 6)
         if (max(abs(par_new - par)) < 1e-8) { par <- par_new
         break }
         par <- par_new
       }
-      a[j] <- par[1]
+      a[j] <- par\[1\]
       b[j] <- par[2]
     }
     if (abs(ll - ll_old) < tol * max(1, abs(ll))) {
@@ -164,7 +164,7 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
 #' X <- vapply(seq_len(k), function(j) {
 #'   bj <- sort(runif(2, -1, 1))
 #'   u <- runif(n)
-#'   1L + (u < plogis(a_true[j] * (th - bj[1]))) + (u < plogis(a_true[j] * (th - bj[2])))
+#'   1L + (u < plogis(a_true[j] * (th - bj\[1\]))) + (u < plogis(a_true[j] * (th - bj[2])))
 #' }, integer(n))
 #' morie_irt_grm(X)
 #' @export

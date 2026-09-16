@@ -25,6 +25,6 @@ Ebfmi <- function(energy) {
     if (den > 0) num / den else NA_real_
   }, numeric(1))
   .t1_result(ebfmi = out, min_ebfmi = min(out), n_chains = length(E),
-             n = length(E[[1]]),
+             n = length(E[\[1\]]),
              method = "Energy Bayesian fraction of missing information")
 }

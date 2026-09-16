@@ -296,7 +296,7 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
     acc <- 0
     for (i in seq_len(N)) {
       out <- move(X[[i]], target, rng)
-      xn <- if (is.list(out)) out$x else out[[1]]
+      xn <- if (is.list(out)) out$x else out[\[1\]]
       a  <- if (is.list(out)) out$accept else out[[2]]
       if (weight_rule == "general") {
         num <- log_gamma(xn, cur)   + log_backward(xn, X[[i]], cur)

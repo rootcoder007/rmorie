@@ -26,7 +26,7 @@ giss <- function(T, years = NULL, base = c(1951, 1980), dist = NULL, radius = 12
   if (is.null(years)) { yr <- seq_len(m) - 1
   inbase <- rep(TRUE, m) }
   else { yr <- as.numeric(years)
-  inbase <- yr >= base[1] & yr <= base[2] }
+  inbase <- yr >= base\[1\] & yr <= base[2] }
   if (!any(inbase)) inbase <- rep(TRUE, m)
   nbase <- sum(inbase)
   baselines <- numeric(nst)
@@ -45,7 +45,7 @@ giss <- function(T, years = NULL, base = c(1951, 1980), dist = NULL, radius = 12
   beta <- t3ols(cbind(1, yr), ser)
   list(estimate = mean(ser), anomaly = ser,
        baseline = as.numeric(sum(w * baselines)),
-       trend = as.numeric(beta[2]), intercept = as.numeric(beta[1]),
+       trend = as.numeric(beta[2]), intercept = as.numeric(beta\[1\]),
        nbase = as.integer(nbase), nstation = as.integer(nst),
        n = as.integer(m),
        method = "GISS base-period temperature anomaly (Hansen et al. 1999)")

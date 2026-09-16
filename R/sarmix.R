@@ -40,7 +40,7 @@
         # arms walk to adjacent lattice points. A 1e-12 margin means only
         # a real improvement moves the incumbent, and both arms scan in
         # the same order, so both keep the same point.
-        if (f < best[1] - 1e-12) best <- c(f, u, v)
+        if (f < best\[1\] - 1e-12) best <- c(f, u, v)
       }
     }
     a1n <- best[2] - s1
@@ -130,7 +130,7 @@ Sarmix <- function(y, X, W1, W2) {
 
   iv1 <- .sp_rho_interval(A1, "identity")
   iv2 <- .sp_rho_interval(A2, "identity")
-  best <- .sarmix_refine(negll, iv1[1], iv1[2], iv2[1], iv2[2])
+  best <- .sarmix_refine(negll, iv1\[1\], iv1[2], iv2\[1\], iv2[2])
   rho <- best[2]
   lam <- best[3]
 
@@ -141,7 +141,7 @@ Sarmix <- function(y, X, W1, W2) {
 
   list(
     estimate = pt$beta, se = se, rho = rho, lambda = lam,
-    sigma2 = sigma2, loglik = -best[1], n = n,
+    sigma2 = sigma2, loglik = -best\[1\], n = n,
     method = "SARAR (SAR lag + SAR error) by concentrated ML"
   )
 }

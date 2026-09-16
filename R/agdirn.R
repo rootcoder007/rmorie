@@ -85,7 +85,7 @@ Rootnoise <- function(p, alpha = 0.3, eps = 0.25, eta = NULL) {
   h <- 0
   for (x in mixed) if (x > 0) h <- h - x * log(x)
   list(
-    estimate = if (m > 0L) mixed[1] else NaN, p_noisy = mixed, eta = et,
+    estimate = if (m > 0L) mixed\[1\] else NaN, p_noisy = mixed, eta = et,
     entropy = h, alpha = a, eps = e,
     method = "Dirichlet exploration noise at the MCTS root"
   )

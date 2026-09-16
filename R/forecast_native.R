@@ -216,7 +216,7 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
       gamma = gamma
     )
     if (v < 0 || v > 1) {
-      stop(sprintf("%s must be in [0, 1]", nm), call. = FALSE)
+      stop(sprintf("%s must be in \[0, 1\]", nm), call. = FALSE)
     }
   }
   horizon <- if (is.null(horizon)) m else as.integer(horizon)
@@ -281,7 +281,7 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 #'
 #' @param y series.
 #' @param period seasonal period.
-#' @param alpha,beta,gamma smoothing parameters in \eqn{[0, 1]}.
+#' @param alpha,beta,gamma smoothing parameters in \eqn{\[0, 1\]}.
 #' @param horizon steps ahead; defaults to one full period.
 #' @return list with \code{forecast}, \code{level}, \code{trend},
 #'   \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}.

@@ -16,7 +16,7 @@ morie_prophet_components <- function(x, period = 12) {
   if (n < max(2 * period, 6)) stop("Series too short.")
   t <- seq(0, n - 1)
   fit <- lm(y ~ t)
-  intercept <- coef(fit)[1]
+  intercept <- coef(fit)\[1\]
   slope <- coef(fit)[2]
   trend <- fitted(fit)
   detr <- y - trend

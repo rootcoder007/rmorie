@@ -40,9 +40,9 @@
   # (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
   left <- as.numeric(left)
   right <- as.numeric(right)
-  A1 <- left[1]
+  A1 <- left\[1\]
   b1 <- left[2]
-  A2 <- right[1]
+  A2 <- right\[1\]
   b2 <- right[2]
   c(A2 * A1, A2 * b1 + b2)
 }
@@ -73,7 +73,7 @@ sequential_scan <- function(pairs, x0 = 0.0) {
   x <- as.numeric(x0)
   out <- numeric(n)
   for (i in seq_len(n)) {
-    A <- P[[i]][1]
+    A <- P[[i]]\[1\]
     b <- P[[i]][2]
     x <- A * x + b
     out[i] <- x
@@ -166,7 +166,7 @@ parallel_scan <- function(pairs, x0 = 0.0) {
   x <- as.numeric(x0)
   states <- numeric(n)
   for (i in seq_len(n)) {
-    A <- prefix[[i]][1]
+    A <- prefix[[i]]\[1\]
     b <- prefix[[i]][2]
     states[i] <- A * x + b
   }
@@ -196,7 +196,7 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
   # Test (a o b) o c == a o (b o c) directly.
   left <- .ssmpar_compose(.ssmpar_compose(a, b), c)
   right <- .ssmpar_compose(a, .ssmpar_compose(b, c))
-  d <- max(abs(left[1] - right[1]), abs(left[2] - right[2]))
+  d <- max(abs(left\[1\] - right\[1\]), abs(left[2] - right[2]))
   list(left = left, right = right, deviation = d,
        associative = d <= as.numeric(tol),
        note = "the property the parallel scan rests on")

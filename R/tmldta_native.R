@@ -98,7 +98,7 @@
 #' @return A list with \code{q}, \code{b}.
 #' @export
 .fit_q <- function(y, A, W, levels, rows, ridge) {
-  ref <- levels[1]
+  ref <- levels\[1\]
   others <- levels[-1]
   n <- length(y)
   p <- ncol(W)
@@ -360,7 +360,7 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
   if (length(missing) > 0L) {
     stop("tmldta: candidate levels never occur")
   }
-  lo <- if (is.null(bounds)) min(yv) else as.numeric(bounds)[1]
+  lo <- if (is.null(bounds)) min(yv) else as.numeric(bounds)\[1\]
   hi <- if (is.null(bounds)) max(yv) else as.numeric(bounds)[2]
   rng <- hi - lo
   if (rng <= 0) stop("tmldta: the outcome has no range")
@@ -430,12 +430,12 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
     }
   }
   modal_kk <- names(which.max(unlist(lapply(chosen, identity))))
-  modal <- as.numeric(strsplit(modal_kk, "|", fixed = TRUE)[[1]])
+  modal <- as.numeric(strsplit(modal_kk, "|", fixed = TRUE)[\[1\]])
   agreement <- chosen[[modal_kk]] / length(splits)
   dl_all <- discover_levels(ys, Av, Wm, lv, all_rows, all_rows, ridge)
   ordered_means <- sort(unlist(dl_all$info$means))
   separation <- min(
-    ordered_means[2] - ordered_means[1],
+    ordered_means[2] - ordered_means\[1\],
     ordered_means[length(ordered_means)] -
       ordered_means[length(ordered_means) - 1]
   ) * rng

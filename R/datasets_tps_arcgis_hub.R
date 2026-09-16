@@ -354,7 +354,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' \donttest{
 #' path <- try(morie_datasets_tps_arcgis_hub_download(
-#'   cat$hub_id[1],
+#'   cat$hub_id\[1\],
 #'   format = "csv"
 #' ))
 #' if (!inherits(path, "try-error")) path

@@ -64,11 +64,11 @@ Unobts <- function(y, components = "level", period = 4, ratio_grid = NULL,
   d <- 1L + (if (has_trend) 1L else 0L) + ns
   Tm <- matrix(0, d, d)
   Z <- numeric(d)
-  Tm[1, 1] <- 1
-  Z[1] <- 1
+  Tm\[1, 1\] <- 1
+  Z\[1\] <- 1
   j <- 2L
   if (has_trend) {
-    Tm[1, 2] <- 1
+    Tm\[1, 2\] <- 1
     Tm[2, 2] <- 1
     j <- 3L
   }

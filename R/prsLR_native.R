@@ -80,7 +80,7 @@
 #' @return The value of \code{unique}.
 #' @export
 .prsLR_nonterminals <- function(g) {
-  unique(sapply(g$rules, function(r) r[[1]]))
+  unique(sapply(g$rules, function(r) r[\[1\]]))
 }
 
 #' .prsLR_terminals
@@ -144,7 +144,7 @@
   while (changed) {
     changed <- FALSE
     for (rule in g$rules) {
-      lhs    <- rule[[1]]
+      lhs    <- rule[\[1\]]
       rhs    <- rule[[2]]
       add    <- .prsLR_first_seq(rhs, first, nts)
       newset <- unique(c(first[[lhs]], add))
@@ -176,7 +176,7 @@
   while (changed) {
     changed <- FALSE
     for (rule in g$rules) {
-      lhs <- rule[[1]]
+      lhs <- rule[\[1\]]
       rhs <- rule[[2]]
       n   <- length(rhs)
       for (i in seq_len(n)) {
@@ -253,8 +253,8 @@
   while (changed) {
     changed <- FALSE
     for (it in out) {
-      parts <- strsplit(it, ":", fixed = TRUE)[[1]]
-      i   <- as.integer(parts[1])
+      parts <- strsplit(it, ":", fixed = TRUE)[\[1\]]
+      i   <- as.integer(parts\[1\])
       dot <- as.integer(parts[2])
       rhs <- ag$rules[[i]][[2]]
       if (dot >= length(rhs) || !(rhs[[dot + 1]] %in% nts)) next
@@ -271,7 +271,7 @@
         }
       }
       for (j in seq_along(ag$rules)) {
-        if (ag$rules[[j]][[1]] != B) next
+        if (ag$rules[[j]][\[1\]] != B) next
         if (k == 0) {
           new <- paste0(j, ":0")
           if (!(new %in% out)) {
@@ -311,8 +311,8 @@
 .prsLR_goto <- function(state, sym, ag, first, nts, k) {
   moved <- character(0)
   for (it in state) {
-    parts <- strsplit(it, ":", fixed = TRUE)[[1]]
-    i   <- as.integer(parts[1])
+    parts <- strsplit(it, ":", fixed = TRUE)[\[1\]]
+    i   <- as.integer(parts\[1\])
     dot <- as.integer(parts[2])
     rhs <- ag$rules[[i]][[2]]
     if (dot < length(rhs) && rhs[[dot + 1]] == sym) {
@@ -340,8 +340,8 @@
 .prsLR_core <- function(state) {
   cores <- character(0)
   for (it in state) {
-    parts <- strsplit(it, ":", fixed = TRUE)[[1]]
-    cores <- c(cores, paste(parts[1], parts[2], sep = ":"))
+    parts <- strsplit(it, ":", fixed = TRUE)[\[1\]]
+    cores <- c(cores, paste(parts\[1\], parts[2], sep = ":"))
   }
   sort(unique(cores))
 }
@@ -371,7 +371,7 @@
   trans <- list()
   q <- list(I0)
   while (length(q) > 0) {
-    I <- q[[1]]
+    I <- q[\[1\]]
     q <- q[-1]
     I_idx <- index[[paste(I, collapse = "|")]]
     for (X in syms) {
@@ -415,8 +415,8 @@
   trans_raw <- col$transitions
   trans <- list()
   for (key in names(trans_raw)) {
-    parts <- strsplit(key, ":", fixed = TRUE)[[1]]
-    s <- as.integer(parts[1])
+    parts <- strsplit(key, ":", fixed = TRUE)[\[1\]]
+    s <- as.integer(parts\[1\])
     X <- parts[2]
     new_key <- paste(s, X, sep = ":")
     trans[[new_key]] <- trans_raw[[key]]
@@ -448,8 +448,8 @@
     states <- merged
     new_trans <- list()
     for (key in names(trans)) {
-      parts <- strsplit(key, ":", fixed = TRUE)[[1]]
-      s <- as.integer(parts[1])
+      parts <- strsplit(key, ":", fixed = TRUE)[\[1\]]
+      s <- as.integer(parts\[1\])
       X <- parts[2]
       t <- trans[[key]]
       new_s <- remap[as.character(s)]
@@ -469,7 +469,7 @@
     if (!is.null(action[[key]])) {
       existing <- action[[key]]
       if (!identical(existing, act)) {
-        kind <- if ("shift" %in% c(existing[1], act[1])) "shift/reduce" else "reduce/reduce"
+        kind <- if ("shift" %in% c(existing\[1\], act\[1\])) "shift/reduce" else "reduce/reduce"
         confl[[length(confl) + 1]] <<- list(
           state = s, lookahead = a,
           existing = existing, proposed = act, kind = kind
@@ -481,8 +481,8 @@
   }
 
   for (key in names(trans)) {
-    parts <- strsplit(key, ":", fixed = TRUE)[[1]]
-    s <- as.integer(parts[1])
+    parts <- strsplit(key, ":", fixed = TRUE)[\[1\]]
+    s <- as.integer(parts\[1\])
     X <- parts[2]
     t <- trans[[key]]
     if (X %in% nts) {
@@ -495,11 +495,11 @@
     s <- s_idx - 1
     st <- states[[s_idx]]
     for (it in st) {
-      parts <- strsplit(it, ":", fixed = TRUE)[[1]]
-      i <- as.integer(parts[1])
+      parts <- strsplit(it, ":", fixed = TRUE)[\[1\]]
+      i <- as.integer(parts\[1\])
       dot <- as.integer(parts[2])
       rule <- ag$rules[[i]]
-      lhs <- rule[[1]]
+      lhs <- rule[\[1\]]
       rhs <- rule[[2]]
       if (dot != length(rhs)) next
       if (i == 1) {
@@ -549,7 +549,7 @@
 .prsLR_parse <- function(g, tokens, method, tables) {
   t <- if (!is.null(tables)) tables else .prsLR_build_tables(g, method)
   if (length(t$conflicts) > 0) {
-    c <- t$conflicts[[1]]
+    c <- t$conflicts[\[1\]]
     stop(sprintf("prsLR: the grammar is not %s -- %d conflict(s), first a %s in state %d on %s",
                  t$method, length(t$conflicts), c$kind, c$state, c$lookahead))
   }
@@ -566,7 +566,7 @@
       stop(sprintf("prsLR: syntax error at token %d (%s) in state %d",
                    pos - 1L, a, stack[length(stack)]))
     }
-    op <- act[1]
+    op <- act\[1\]
     arg <- act[2]
     if (op == "shift") {
       stack <- c(stack, as.integer(arg))
@@ -575,7 +575,7 @@
     } else if (op == "reduce") {
       i <- as.integer(arg)
       rule <- t$rules[[i]]
-      lhs <- rule[[1]]
+      lhs <- rule[\[1\]]
       rhs <- rule[[2]]
       n <- length(rhs)
       kids <- list()
@@ -598,7 +598,7 @@
         stop(sprintf("prsLR: accepted with %d trees and %d tokens left",
                      length(trees), length(toks) - pos))
       }
-      return(trees[[1]])
+      return(trees[\[1\]])
     }
   }
   stop("prsLR: the parser did not terminate")

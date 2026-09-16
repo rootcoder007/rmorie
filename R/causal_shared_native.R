@@ -82,15 +82,15 @@
 .morie_ridge_fit <- function(X, y, lam = 1e-3) {
   D <- cbind(1, X)
   A <- crossprod(D) + lam * diag(ncol(D))
-  A[1, 1] <- A[1, 1] - lam
+  A\[1, 1\] <- A\[1, 1\] - lam
   solve(A, crossprod(D, y))
 }
 
 # Inverse-probability-of-censoring-weighted RMST pseudo outcome, whose
-# expectation is E[min(T, horizon)] under independent censoring.
+# expectation is E\[min(T, horizon)\] under independent censoring.
 #' Inverse-probability-of-censoring-weighted RMST pseudo outcome, whose
 #'
-#' expectation is E[min(T, horizon)] under independent censoring.
+#' expectation is E\[min(T, horizon)\] under independent censoring.
 #'
 #' @param time A vector; its length is taken and its elements indexed.
 #' @param event A vector; indexed elementwise.

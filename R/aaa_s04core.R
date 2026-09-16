@@ -215,7 +215,7 @@ NULL
   out <- matrix(0, nrow(X), nrow(Z))
   for (i in seq_len(nrow(X))) {
     for (j in seq_len(nrow(Z))) {
-      out[i, j] <- exp(-0.5 * sum((X[i, ] - Z[j, ])^2) / (ell * ell))
+      out\[i, j\] <- exp(-0.5 * sum((X[i, ] - Z[j, ])^2) / (ell * ell))
     }
   }
   out
@@ -344,8 +344,8 @@ NULL
   for (j in seq_len(p)) {
     if (j > 1L) {
       for (i in seq_len(j - 1L)) {
-        R[i, j] <- sum(Q[, i] * Q[, j])
-        Q[, j] <- Q[, j] - R[i, j] * Q[, i]
+        R\[i, j\] <- sum(Q[, i] * Q[, j])
+        Q[, j] <- Q[, j] - R\[i, j\] * Q[, i]
       }
     }
     R[j, j] <- sqrt(sum(Q[, j]^2))
@@ -422,7 +422,7 @@ NULL
 #' @export
 .s4_fourway <- function(theta, beta, cbar, a = 1, astar = 0, m = 0) {
   d <- a - astar
-  bc <- beta[1] + beta[2] * astar
+  bc <- beta\[1\] + beta[2] * astar
   if (length(cbar)) bc <- bc + sum(beta[2 + seq_along(cbar)] * cbar)
   cde <- (theta[2] + theta[4] * m) * d
   intref <- theta[4] * (bc - m) * d
@@ -544,7 +544,7 @@ NULL
       d <- if (abs(R[i, i]) > 1e-300) R[i, i] else 1e-300
       s <- (if (i == j) 1 else 0) -
         (if (i < p) sum(R[i, (i + 1L):p] * out[(i + 1L):p, j]) else 0)
-      out[i, j] <- s / d
+      out\[i, j\] <- s / d
     }
   }
   out

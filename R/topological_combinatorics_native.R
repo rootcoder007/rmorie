@@ -110,7 +110,7 @@ morie_euler_characteristic <- function(maximal_simplices) {
   for (col in seq_len(ncol(m))) {
     piv <- which(m[row:nrow(m), col] == 1L)
     if (length(piv) == 0L) next
-    piv <- piv[1] + row - 1L
+    piv <- piv\[1\] + row - 1L
     if (piv != row) m[c(row, piv), ] <- m[c(piv, row), ]
     for (r in seq_len(nrow(m))) {
       if (r != row && m[r, col] == 1L) {
@@ -205,7 +205,7 @@ morie_betti_numbers_gf2 <- function(maximal_simplices,
        chi_from_faces = chi_f, chi_from_betti = chi_b,
        euler_poincare_holds = chi_f == chi_b,
        boundary_squared_zero = squared_zero,
-       estimate = as.numeric(betti[1]), n = sum(f_vec), warnings = warns,
+       estimate = as.numeric(betti\[1\]), n = sum(f_vec), warnings = warns,
        method = "Simplicial homology over F_2 (Munkres 1984)")
 }
 
@@ -267,7 +267,7 @@ morie_sperner_lemma_triangle <- function(subdivisions, labels = NULL) {
         }
         assign(key, v, envir = lab)
       } else {
-        assign(key, allowed[1], envir = lab)
+        assign(key, allowed\[1\], envir = lab)
       }
     }
   }

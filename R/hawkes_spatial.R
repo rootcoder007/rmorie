@@ -159,7 +159,7 @@ morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
     stop("`region` must be c(xmin, xmax, ymin, ymax)", call. = FALSE)
   }
   if (!is.null(seed)) set.seed(seed)
-  xmin <- region[1]
+  xmin <- region\[1\]
   xmax <- region[2]
   ymin <- region[3]
   ymax <- region[4]
@@ -251,7 +251,7 @@ morie_hawkes_st_fit <- function(events, end_time = NULL, area = 1,
   par0 <- log(c(s$mu, s$alpha, s$beta, s$sigma))
   nll <- function(lp) {
     p <- list(
-      mu = exp(lp[1]), alpha = exp(lp[2]),
+      mu = exp(lp\[1\]), alpha = exp(lp[2]),
       beta = exp(lp[3]), sigma = exp(lp[4])
     )
     val <- tryCatch(
@@ -266,7 +266,7 @@ morie_hawkes_st_fit <- function(events, end_time = NULL, area = 1,
   opt <- stats::optim(par0, nll, method = "L-BFGS-B")
   p <- exp(opt$par)
   out <- list(
-    params = list(mu = p[1], alpha = p[2], beta = p[3], sigma = p[4]),
+    params = list(mu = p\[1\], alpha = p[2], beta = p[3], sigma = p[4]),
     loglik = -opt$value, n = length(t), convergence = opt$convergence
   )
   class(out) <- "morie_hawkes_st_fit"

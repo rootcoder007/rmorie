@@ -15,7 +15,7 @@
 #'
 #' @param x Numeric matrix of covariates, n by d, with no constant column.
 #' @param beta Numeric vector of index coefficients, scale normalised
-#'   so that \code{beta[1] == 1}.
+#'   so that \code{beta\[1\] == 1}.
 #' @param y Optional numeric outcome vector; supplied, the spread of
 #'   the mean of Y across index deciles is reported as evidence on
 #'   condition (a).

@@ -137,8 +137,8 @@ Laplace <- function(h, t, s) {
     sum(0.5 * (f[-length(f)] + f[-1]) * diff(ts))
   }, complex(1))
   list(
-    H = if (length(out) == 1L) out[[1]] else out, s = s,
-    t_min = ts[1], t_max = ts[length(ts)], n = length(ts),
+    H = if (length(out) == 1L) out[\[1\]] else out, s = s,
+    t_min = ts\[1\], t_max = ts[length(ts)], n = length(ts),
     trapezoidal = TRUE, over_the_sampled_interval_only = TRUE,
     method = "Rangayyan (2024) eq. (3.50)"
   )
@@ -184,10 +184,10 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
   }, complex(1))
   scalar <- length(out) == 1L
   list(
-    H = if (scalar) out[[1]] else out, omega = omega,
-    magnitude = if (scalar) Mod(out[[1]]) else Mod(out),
-    phase = if (scalar) Arg(out[[1]]) else Arg(out),
-    t_min = ts[1], t_max = ts[length(ts)],
+    H = if (scalar) out[\[1\]] else out, omega = omega,
+    magnitude = if (scalar) Mod(out[\[1\]]) else Mod(out),
+    phase = if (scalar) Arg(out[\[1\]]) else Arg(out),
+    t_min = ts\[1\], t_max = ts[length(ts)],
     valid_only_inside_the_roc = TRUE,
     method = "Rangayyan (2024) eq. (3.52)"
   )
@@ -231,7 +231,7 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
   }
   H <- .morie_rg_polyz(b, z) / den
   list(
-    H = if (length(H) == 1L) H[[1]] else H, z = z,
+    H = if (length(H) == 1L) H[\[1\]] else H, z = z,
     numerator = b, denominator = den_coefs,
     N = length(b) - 1L, M = length(a),
     leading_one_is_implicit = TRUE,
@@ -463,7 +463,7 @@ MaTf <- function(b_k, z, N = NULL) {
   }
   H <- .morie_rg_polyz(b, z)
   list(
-    H = if (length(H) == 1L) H[[1]] else H, z = z, b = b,
+    H = if (length(H) == 1L) H[\[1\]] else H, z = z, b = b,
     N = length(b) - 1L, dc_gain = .morie_fsum(b),
     always_stable = TRUE, poles_only_at_the_origin = TRUE,
     method = "Rangayyan (2024) eq. (3.99)"
@@ -586,7 +586,7 @@ HannTf <- function(z) {
   }
   H <- 0.25 * (1 + zc^-1)^2
   list(
-    H = if (length(H) == 1L) H[[1]] else H, z = z,
+    H = if (length(H) == 1L) H[\[1\]] else H, z = z,
     zeros = c(-1, -1), zero_multiplicity = 2L,
     zeros_at_nyquist = TRUE, dc_gain = 1,
     method = "Rangayyan (2024) eq. (3.103)"
@@ -613,8 +613,8 @@ HannFr <- function(omega) {
     complex(real = cos(-2 * w), imaginary = sin(-2 * w)))
   scalar <- length(H) == 1L
   list(
-    H = if (scalar) H[[1]] else H, omega = omega,
-    magnitude = if (scalar) Mod(H[[1]]) else Mod(H),
+    H = if (scalar) H[\[1\]] else H, omega = omega,
+    magnitude = if (scalar) Mod(H[\[1\]]) else Mod(H),
     on_the_unit_circle = TRUE,
     method = "Rangayyan (2024) eq. (3.104)"
   )
@@ -644,7 +644,7 @@ HannFrs <- function(omega) {
   gap <- max(Mod(H - raw))
   scalar <- length(H) == 1L
   list(
-    H = if (scalar) H[[1]] else H, omega = omega,
+    H = if (scalar) H[\[1\]] else H, omega = omega,
     envelope = 0.5 * (1 + cos(w)),
     max_difference_from_eq_3_104 = gap,
     agrees_with_raw_form = gap <= 1e-12,
@@ -673,7 +673,7 @@ HannMag <- function(omega) {
   w <- as.numeric(omega)
   mag <- abs(0.5 * (1 + cos(w)))
   list(
-    magnitude = if (length(mag) == 1L) mag[[1]] else mag,
+    magnitude = if (length(mag) == 1L) mag[\[1\]] else mag,
     omega = omega, dc_gain = 1, nyquist_gain = 0, lowpass = TRUE,
     absolute_value_is_redundant = TRUE,
     method = "Rangayyan (2024) eq. (3.106)"
@@ -699,7 +699,7 @@ HannPh <- function(omega) {
   w <- as.numeric(omega)
   ph <- -w
   list(
-    phase = if (length(ph) == 1L) ph[[1]] else ph, omega = omega,
+    phase = if (length(ph) == 1L) ph[\[1\]] else ph, omega = omega,
     group_delay = 1, slope = -1, linear_phase = TRUE,
     constant_group_delay = TRUE,
     method = "Rangayyan (2024) eq. (3.107)"
@@ -789,10 +789,10 @@ OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,
   }
 
   out <- switch(kind,
-    min = rank_pass(xs, function(r) r[1]),
+    min = rank_pass(xs, function(r) r\[1\]),
     max = rank_pass(xs, function(r) r[w]),
     minmax = rank_pass(
-      rank_pass(xs, function(r) r[1]),
+      rank_pass(xs, function(r) r\[1\]),
       function(r) r[w]
     ),
     median = rank_pass(xs, function(r) r[half + 1L]),

@@ -34,15 +34,15 @@ Mutinfo <- function(y, x = NULL, y2 = NULL) {
   px <- numeric(length(la))
   py <- numeric(length(lb))
   for (i in seq_along(la)) for (j in seq_along(lb)) {
-    px[i] <- px[i] + P[i, j]
-    py[j] <- py[j] + P[i, j]
+    px[i] <- px[i] + P\[i, j\]
+    py[j] <- py[j] + P\[i, j\]
   }
   mi <- 0
   hxy <- 0
   for (i in seq_along(la)) for (j in seq_along(lb)) {
-    if (P[i, j] > 0) {
-      mi <- mi + P[i, j] * log(P[i, j] / (px[i] * py[j]))
-      hxy <- hxy - P[i, j] * log(P[i, j])
+    if (P\[i, j\] > 0) {
+      mi <- mi + P\[i, j\] * log(P\[i, j\] / (px[i] * py[j]))
+      hxy <- hxy - P\[i, j\] * log(P\[i, j\])
     }
   }
   hx <- 0
@@ -50,7 +50,7 @@ Mutinfo <- function(y, x = NULL, y2 = NULL) {
   hy <- 0
   for (v in py) if (v > 0) hy <- hy - v * log(v)
   nz <- 0L
-  for (i in seq_along(la)) for (j in seq_along(lb)) if (P[i, j] > 0) nz <- nz + 1L
+  for (i in seq_along(la)) for (j in seq_along(lb)) if (P\[i, j\] > 0) nz <- nz + 1L
   mm <- if (n) mi - (nz - length(la) - length(lb) + 1) / (2 * n) else NaN
   list(estimate = mi, mi = mi, bits = mi / log(2), mm = mm, hx = hx, hy = hy,
        hxy = hxy, n = n,

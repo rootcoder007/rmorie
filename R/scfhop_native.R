@@ -92,7 +92,7 @@ morie_scfhop_types <- function(smiles) {
   dbl_o <- integer(n)
   sng_o <- integer(n)
   for (i in seq_len(n)) for (e in adj[[i]]) {
-    if (el[e[1] + 1L] == "O") {
+    if (el[e\[1\] + 1L] == "O") {
       if (e[2] == 2) dbl_o[i] <- dbl_o[i] + 1L
       else if (e[2] == 1) sng_o[i] <- sng_o[i] + 1L
     }
@@ -108,17 +108,17 @@ morie_scfhop_types <- function(smiles) {
     if (e0 == "N" && arom[i] != 1L) {
       amide <- FALSE
       for (e in adj[[i]])
-        if (el[e[1] + 1L] == "C" && dbl_o[e[1] + 1L] > 0L) amide <- TRUE
+        if (el[e\[1\] + 1L] == "C" && dbl_o[e\[1\] + 1L] > 0L) amide <- TRUE
       if (!amide) t <- c(t, "P")
     }
     if (e0 == "O") {
       for (e in adj[[i]])
-        if (el[e[1] + 1L] == "C" && dbl_o[e[1] + 1L] > 0L &&
-            sng_o[e[1] + 1L] > 0L) t <- c(t, "N")
+        if (el[e\[1\] + 1L] == "C" && dbl_o[e\[1\] + 1L] > 0L &&
+            sng_o[e\[1\] + 1L] > 0L) t <- c(t, "N")
     }
     if (e0 == "C") {
       het <- FALSE
-      for (e in adj[[i]]) if (el[e[1] + 1L] %in% c("N", "O")) het <- TRUE
+      for (e in adj[[i]]) if (el[e\[1\] + 1L] %in% c("N", "O")) het <- TRUE
       if (!het) t <- c(t, "L")
     } else if (e0 %in% c("S", "F", "Cl", "Br", "I")) {
       t <- c(t, "L")
@@ -180,13 +180,13 @@ morie_scfhop_cats <- function(smiles, maxdist = 9L, scaling = "type") {
   n <- length(g$el)
   D <- .avalon_dist(.avalon_adj(n, g$bonds), n)
   P <- .scfhop_pairs()
-  pkey <- vapply(P, function(p) paste0(p[1], p[2]), character(1))
+  pkey <- vapply(P, function(p) paste0(p\[1\], p[2]), character(1))
   v <- numeric(length(P) * (maxdist + 1L))
   have <- rep(0L, length(.scfhop_types))
   names(have) <- .scfhop_types
   for (i in seq_len(n)) for (t in ty[[i]]) have[t] <- have[t] + 1L
   for (i in seq_len(n)) for (j in i:n) {
-    d <- D[i, j]
+    d <- D\[i, j\]
     if (d < 0L || d > maxdist) next
     for (a in ty[[i]]) for (b in ty[[j]]) {
       k <- if (.avalon_lte(a, b)) paste0(a, b) else paste0(b, a)
@@ -197,7 +197,7 @@ morie_scfhop_cats <- function(smiles, maxdist = 9L, scaling = "type") {
   }
   if (scaling == "type") {
     for (p in seq_along(P)) {
-      s <- have[[P[[p]][1]]] + have[[P[[p]][2]]]
+      s <- have[[P[[p]]\[1\]]] + have[[P[[p]][2]]]
       rng <- (p - 1L) * (maxdist + 1L) + seq_len(maxdist + 1L)
       v[rng] <- if (s > 0L) v[rng] / s else 0
     }
@@ -268,8 +268,8 @@ morie_scfhop_murcko <- function(smiles) {
   while (changed) {
     changed <- FALSE
     deg <- integer(n)
-    for (b in g$bonds) if (keep[b[1] + 1L] && keep[b[2] + 1L]) {
-      deg[b[1] + 1L] <- deg[b[1] + 1L] + 1L
+    for (b in g$bonds) if (keep[b\[1\] + 1L] && keep[b[2] + 1L]) {
+      deg[b\[1\] + 1L] <- deg[b\[1\] + 1L] + 1L
       deg[b[2] + 1L] <- deg[b[2] + 1L] + 1L
     }
     for (i in seq_len(n))
@@ -280,7 +280,7 @@ morie_scfhop_murcko <- function(smiles) {
   }
   atoms <- which(keep) - 1L
   kb <- list()
-  for (b in g$bonds) if (keep[b[1] + 1L] && keep[b[2] + 1L])
+  for (b in g$bonds) if (keep[b\[1\] + 1L] && keep[b[2] + 1L])
     kb[[length(kb) + 1L]] <- b
   list(atoms = atoms, bonds = kb)
 }
@@ -313,7 +313,7 @@ morie_scfhop_signature <- function(smiles, rounds = 3L) {
   nb <- vector("list", m)
   for (k in seq_len(m)) nb[[k]] <- list()
   for (b in mk$bonds) {
-    p1 <- pos[b[1] + 1L]
+    p1 <- pos[b\[1\] + 1L]
     p2 <- pos[b[2] + 1L]
     nb[[p1]][[length(nb[[p1]]) + 1L]] <- c(p2, b[3])
     nb[[p2]][[length(nb[[p2]]) + 1L]] <- c(p1, b[3])
@@ -327,7 +327,7 @@ morie_scfhop_signature <- function(smiles, rounds = 3L) {
     for (k in seq_len(m)) {
       around <- if (!length(nb[[k]])) character(0) else
         sort(vapply(nb[[k]], function(e)
-          sprintf("%d:%.0f", as.integer(e[2]), col[e[1]]),
+          sprintf("%d:%.0f", as.integer(e[2]), col[e\[1\]]),
           character(1)), method = "radix")
       nxt[k] <- morie_avalon_fnv(
         sprintf("%.0f|%s", col[k], paste(around, collapse = ",")))

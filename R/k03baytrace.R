@@ -24,7 +24,7 @@
 #'
 #' @param chains Numeric vector (a single chain) or matrix whose columns
 #'   are chains and whose rows are iterations.
-#' @param probs Numeric vector of probabilities in [0, 1] at which the
+#' @param probs Numeric vector of probabilities in \[0, 1\] at which the
 #'   running bands are reported.
 #' @return Named list with \code{running_mean} (one numeric vector per
 #'   chain), \code{bands} (per chain, a list of one numeric vector per
@@ -50,7 +50,7 @@ Baytrace <- function(chains, probs = c(0.025, 0.5, 0.975)) {
   n_iter <- length(cols[[1L]])
   pv <- as.numeric(probs)
   if (any(!is.finite(pv)) || any(pv < 0) || any(pv > 1)) {
-    stop("probs must lie in [0, 1]", call. = FALSE)
+    stop("probs must lie in \[0, 1\]", call. = FALSE)
   }
 
   running_mean <- vector("list", length(cols))

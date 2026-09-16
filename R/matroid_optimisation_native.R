@@ -118,7 +118,7 @@ morie_is_matroid <- function(ground, independent) {
     warns <- c(warns, sprintf(paste(
       "Heredity fails: {%s} is independent but its subset {%s} is not.",
       "This is not even an independence system."),
-      paste(hered_bad[[1]], collapse = ", "),
+      paste(hered_bad[\[1\]], collapse = ", "),
       paste(hered_bad[[2]], collapse = ", ")))
   }
   if (!is.null(exch_bad)) {
@@ -126,7 +126,7 @@ morie_is_matroid <- function(ground, independent) {
       "Exchange fails: {%s} and {%s} are both independent with the first",
       "smaller, yet no element of the second can be added to the first. The",
       "greedy algorithm is therefore not guaranteed optimal on this system."),
-      paste(exch_bad[[1]], collapse = ", "),
+      paste(exch_bad[\[1\]], collapse = ", "),
       paste(exch_bad[[2]], collapse = ", ")))
   }
   list(is_matroid = ok, hereditary = is.null(hered_bad),
@@ -269,7 +269,7 @@ morie_graphic_matroid <- function(edges, n_vertices) {
       x
     }
     for (i in sub) {
-      a <- find(E[[i]][1])
+      a <- find(E[[i]]\[1\])
       b <- find(E[[i]][2])
       if (a == b) return(FALSE)
       uf[a] <- b
@@ -375,7 +375,7 @@ morie_minimum_spanning_tree <- function(edges, n_vertices, weights = NULL) {
   chosen <- integer(0)
   total <- 0
   for (i in ord) {
-    a <- find(E[[i]][1])
+    a <- find(E[[i]]\[1\])
     b <- find(E[[i]][2])
     if (a != b) {
       uf[a] <- b
@@ -412,7 +412,7 @@ morie_bipartite_matching <- function(left_n, right_n, edges) {
   adj <- vector("list", max(ln, 1L))
   for (i in seq_len(ln)) adj[[i]] <- integer(0)
   for (e in edges) {
-    a <- as.integer(e[1])
+    a <- as.integer(e\[1\])
     b <- as.integer(e[2])
     if (a < 1L || a > ln) {
       stop(sprintf("left endpoint %d leaves 1 .. %d", a, ln), call. = FALSE)
@@ -479,7 +479,7 @@ morie_konig_theorem <- function(left_n, right_n, edges) {
   adj <- vector("list", max(ln, 1L))
   for (i in seq_len(ln)) adj[[i]] <- integer(0)
   for (e in edges) {
-    adj[[as.integer(e[1])]] <- c(adj[[as.integer(e[1])]], as.integer(e[2]))
+    adj[[as.integer(e\[1\])]] <- c(adj[[as.integer(e\[1\])]], as.integer(e[2]))
   }
   vis_l <- rep(FALSE, ln)
   vis_r <- rep(FALSE, rn)
@@ -501,7 +501,7 @@ morie_konig_theorem <- function(left_n, right_n, edges) {
   cover_right <- which(vis_r)
   cover_size <- length(cover_left) + length(cover_right)
   uncovered <- Filter(function(e) {
-    !(as.integer(e[1]) %in% cover_left) && !(as.integer(e[2]) %in% cover_right)
+    !(as.integer(e\[1\]) %in% cover_left) && !(as.integer(e[2]) %in% cover_right)
   }, edges)
   valid <- length(uncovered) == 0L
   warns <- character(0)
@@ -544,7 +544,7 @@ morie_hall_condition <- function(left_n, right_n, edges) {
   nbr <- vector("list", max(ln, 1L))
   for (i in seq_len(ln)) nbr[[i]] <- integer(0)
   for (e in edges) {
-    a <- as.integer(e[1])
+    a <- as.integer(e\[1\])
     b <- as.integer(e[2])
     if (a < 1L || a > ln || b < 1L || b > rn) {
       stop("an edge endpoint is out of range.", call. = FALSE)
@@ -588,7 +588,7 @@ morie_hall_condition <- function(left_n, right_n, edges) {
 #' matrix rather than assumed equal, so the theorem is a check rather
 #' than a restatement.
 #'
-#' @param capacity Square non-negative matrix; `capacity[i, j]` is the
+#' @param capacity Square non-negative matrix; `capacity\[i, j\]` is the
 #'   arc capacity from i to j.
 #' @param source,sink Node indices, numbered from 1.
 #' @return A list with `flow`, `cut_capacity`, `min_cut_source_side`,
@@ -620,7 +620,7 @@ morie_max_flow_min_cut <- function(capacity, source = 1L, sink = NULL) {
     parent[s] <- s
     queue <- s
     while (length(queue) && parent[t] == 0L) {
-      u <- queue[1]
+      u <- queue\[1\]
       queue <- queue[-1]
       for (v in seq_len(n)) {
         if (parent[v] == 0L && R[u, v] > 1e-12) {
@@ -648,7 +648,7 @@ morie_max_flow_min_cut <- function(capacity, source = 1L, sink = NULL) {
   reach[s] <- TRUE
   queue <- s
   while (length(queue)) {
-    u <- queue[1]
+    u <- queue\[1\]
     queue <- queue[-1]
     for (v in seq_len(n)) {
       if (!reach[v] && R[u, v] > 1e-12) { reach[v] <- TRUE
@@ -659,8 +659,8 @@ morie_max_flow_min_cut <- function(capacity, source = 1L, sink = NULL) {
   cut_edges <- list()
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      if (reach[i] && !reach[j] && C[i, j] > 0) {
-        cut_cap <- cut_cap + C[i, j]
+      if (reach[i] && !reach[j] && C\[i, j\] > 0) {
+        cut_cap <- cut_cap + C\[i, j\]
         cut_edges[[length(cut_edges) + 1L]] <- c(i, j)
       }
     }

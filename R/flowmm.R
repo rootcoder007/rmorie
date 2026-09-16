@@ -13,7 +13,7 @@
 #' Both numbers are computed by separate routes and returned, so their
 #' equality is checkable rather than assumed.
 #'
-#' @param G Square non-negative capacity matrix; G[i, j] is the capacity
+#' @param G Square non-negative capacity matrix; G\[i, j\] is the capacity
 #'   of the directed arc i -> j.
 #' @param source,sink Zero-based vertex indices; must differ.
 #' @return List with \code{estimate}, \code{max_flow}, \code{min_cut},
@@ -45,7 +45,7 @@ Flowmm <- function(G, source, sink) {
     prev[s] <- s
     q <- s
     while (length(q) && prev[t] < 0L) {
-      v <- q[1]
+      v <- q\[1\]
       q <- q[-1]
       for (w in seq_len(n)) if (prev[w] < 0L && R[v, w] > 0) {
         prev[w] <- v
@@ -74,7 +74,7 @@ Flowmm <- function(G, source, sink) {
   seen[s] <- TRUE
   q <- s
   while (length(q)) {
-    v <- q[1]
+    v <- q\[1\]
     q <- q[-1]
     for (w in seq_len(n)) if (!seen[w] && R[v, w] > 0) {
       seen[w] <- TRUE
@@ -84,7 +84,7 @@ Flowmm <- function(G, source, sink) {
   side <- which(seen) - 1L
   cut <- 0
   for (i in seq_len(n)) if (seen[i]) for (j in seq_len(n)) if (!seen[j])
-    cut <- cut + C[i, j]
+    cut <- cut + C\[i, j\]
   .t1_result(estimate = flow, max_flow = flow, min_cut = cut,
              cut_size = length(side), source_side = side,
              augmentations = aug, n = n,

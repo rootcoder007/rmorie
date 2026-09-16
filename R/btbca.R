@@ -79,7 +79,7 @@ Btbca <- function(theta_hat, theta_b, x, stat, alpha = 0.05) {
 #' @noRd
 .btbca_order <- function(sv, r) {
   R <- length(sv)
-  if (r <= 1) return(sv[1])
+  if (r <= 1) return(sv\[1\])
   if (r >= R) return(sv[R])
   lo <- floor(r)
   fr <- r - lo

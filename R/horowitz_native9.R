@@ -13,7 +13,7 @@
 #' Marginal integration for a nonparametric additive model
 #'
 #' For \eqn{E(Y|X = x) = \mu + m_1(x^1) + \dots + m_d(x^d)} (3.5) with
-#' the location normalisation \eqn{E[m_j(X^j)] = 0} (3.6), which makes
+#' the location normalisation \eqn{E\[m_j(X^j)\] = 0} (3.6), which makes
 #' \eqn{\mu = E(Y)} (3.7) and
 #' \eqn{m_1(x^1) = \int E(Y|X = x)p_{-1}(x^{-1})dx^{-1} - \mu} (3.8).
 #' Replacing the conditional mean by the kernel estimator (3.9) and
@@ -108,7 +108,7 @@ morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
 
   list(grid = g, m_hat = m_hat, mu_hat = mu, component = jj,
        h1 = h1, h2 = h2,
-       normalisation = "E[m_j(X^j)] = 0 for every j, so mu = E(Y)",
+       normalisation = "E\[m_j(X^j)\] = 0 for every j, so mu = E(Y)",
        mean_of_m_hat = mean(m_hat, na.rm = TRUE),
        smoothness_required = d,   # Theorem 3.1(b): q > d - 1
        curse_of_dimensionality = TRUE, n = n, d = d,
@@ -151,7 +151,7 @@ morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
 #' @param kappa series terms per component; \code{ceiling(n^(1/5))}
 #'   when NULL, at least 2.
 #' @param local_linear use the local-linear second stage.
-#' @param grid evaluation points on the rescaled [-1, 1] support.
+#' @param grid evaluation points on the rescaled \[-1, 1\] support.
 #' @return list: grid, m_hat, mu_hat, theta, kappa, bandwidth,
 #'   oracle_efficient, iterative, rate_exponent,
 #'   max_smoothing_dimension, curse_of_dimensionality, n, d, method.

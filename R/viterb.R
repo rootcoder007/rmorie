@@ -27,7 +27,7 @@ Viterb <- function(obs, trans, emit, init = NULL) {
   NEG <- -1e300
   lg <- function(v) ifelse(v > 0, log(v), NEG)
   pi_ <- if (is.null(init)) rep(1 / K, K) else as.numeric(init)
-  delta <- lg(pi_) + lg(B[, o[1]])
+  delta <- lg(pi_) + lg(B[, o\[1\]])
   psi <- matrix(0L, max(T_ - 1L, 1L), K)
   if (T_ > 1L) for (t in 2:T_) {
     nd <- numeric(K)

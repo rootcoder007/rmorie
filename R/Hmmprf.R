@@ -55,24 +55,24 @@ Hmmprf <- function(seq, profile) {
   vM <- fM
   vI <- fM
   vD <- fM
-  fM[1, 1] <- 0
-  vM[1, 1] <- 0
+  fM\[1, 1\] <- 0
+  vM\[1, 1\] <- 0
   for (i in seq_len(T + 1L)) for (j in seq_len(L + 1L)) {
     if (i == 1L && j == 1L) next
     if (i > 1L && j > 1L) {
       e <- lg(Mm[j - 1L, xs[i - 1L] + 1L])
       acc <- lse(lse(fM[i - 1L, j - 1L] + lmm, fI[i - 1L, j - 1L] + lim), fD[i - 1L, j - 1L] + ldm)
-      fM[i, j] <- acc + e
-      vM[i, j] <- max(vM[i - 1L, j - 1L] + lmm, vI[i - 1L, j - 1L] + lim, vD[i - 1L, j - 1L] + ldm) + e
+      fM\[i, j\] <- acc + e
+      vM\[i, j\] <- max(vM[i - 1L, j - 1L] + lmm, vI[i - 1L, j - 1L] + lim, vD[i - 1L, j - 1L] + ldm) + e
     }
     if (i > 1L) {
       e <- lg(ins[xs[i - 1L] + 1L])
-      fI[i, j] <- lse(fM[i - 1L, j] + lmi, fI[i - 1L, j] + lii) + e
-      vI[i, j] <- max(vM[i - 1L, j] + lmi, vI[i - 1L, j] + lii) + e
+      fI\[i, j\] <- lse(fM[i - 1L, j] + lmi, fI[i - 1L, j] + lii) + e
+      vI\[i, j\] <- max(vM[i - 1L, j] + lmi, vI[i - 1L, j] + lii) + e
     }
     if (j > 1L) {
-      fD[i, j] <- lse(fM[i, j - 1L] + lmd, fD[i, j - 1L] + ldd)
-      vD[i, j] <- max(vM[i, j - 1L] + lmd, vD[i, j - 1L] + ldd)
+      fD\[i, j\] <- lse(fM[i, j - 1L] + lmd, fD[i, j - 1L] + ldd)
+      vD\[i, j\] <- max(vM[i, j - 1L] + lmd, vD[i, j - 1L] + ldd)
     }
   }
   fwd <- lse(lse(fM[T + 1L, L + 1L], fI[T + 1L, L + 1L]), fD[T + 1L, L + 1L])

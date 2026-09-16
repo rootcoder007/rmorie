@@ -38,7 +38,7 @@
 Meteor <- function(candidate, reference, lowercase = TRUE) {
   tok <- function(x) {
     if (length(x) == 1L && is.character(x)) {
-      strsplit(trimws(x), "[[:space:]]+")[[1]]
+      strsplit(trimws(x), "[[:space:]]+")[\[1\]]
     } else {
       as.character(x)
     }
@@ -77,7 +77,7 @@ Meteor <- function(candidate, reference, lowercase = TRUE) {
   ch <- 1L
   if (m > 1L) {
     for (k in 2:m) {
-      if (!(ci[k] == ci[k - 1] + 1L && rj[k] == rj[k - 1] + 1L)) {
+      if (!(ci[k] == ci\[k - 1\] + 1L && rj[k] == rj\[k - 1\] + 1L)) {
         ch <- ch + 1L
       }
     }

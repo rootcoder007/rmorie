@@ -49,7 +49,7 @@
 .rouge_toks <- function(x) {
   if (is.character(x) && length(x) == 1L) {
     if (nchar(x) == 0L) return(character(0))
-    return(strsplit(x, "\\s+")[[1]])
+    return(strsplit(x, "\\s+")[\[1\]])
   }
   if (is.list(x)) {
     return(as.character(unlist(x)))
@@ -126,7 +126,7 @@
 .rouge_get_refs_complex <- function(reference) {
   if (is.list(reference)) {
     if (length(reference) == 0L) return(list())
-    if (!is.character(reference[[1]])) {
+    if (!is.character(reference[\[1\]])) {
       return(reference)
     }
     is_sentence <- vapply(reference, function(r) {
@@ -235,8 +235,8 @@
   for (i in 1:m) {
     for (j in 1:n) {
       if (identical(a[i], b[j])) {
-        k <- w_mat[i, j]
-        c_mat[i + 1L, j + 1L] <- c_mat[i, j] +
+        k <- w_mat\[i, j\]
+        c_mat[i + 1L, j + 1L] <- c_mat\[i, j\] +
           ((k + 1.0) ^ alpha - as.numeric(k) ^ alpha)
         w_mat[i + 1L, j + 1L] <- k + 1L
       } else {

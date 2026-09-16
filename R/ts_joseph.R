@@ -148,7 +148,7 @@
   n <- nrow(x)
   p <- ncol(x)
   xtx <- matrix(0, p, p)
-  for (a in seq_len(p)) for (b in seq_len(p)) xtx[a, b] <- sum(x[, a] * x[, b])
+  for (a in seq_len(p)) for (b in seq_len(p)) xtx\[a, b\] <- sum(x[, a] * x[, b])
   xty <- vapply(seq_len(p), function(a) sum(x[, a] * y), numeric(1))
   for (a in seq_len(p)) xtx[a, a] <- xtx[a, a] + 1e-12
   .morie_jo_solve(lapply(seq_len(p), function(i) xtx[i, ]), xty)
@@ -280,7 +280,7 @@ morie_relmae <- function(y, yhat, benchmark) {
 #'
 #' The book points at the quantile loss for probabilistic forecasts.
 #' The canonical statement is TFT eq. (25): QL(y, yhat, q) =
-#' q (y - yhat)\_+ + (1 - q)(yhat - y)\_+ -- Lim, Arik, Loeff and
+#' q (y - yhat)_+ + (1 - q)(yhat - y)_+ -- Lim, Arik, Loeff and
 #' Pfister, arXiv:1912.09363.
 #' @param y observed values
 #' @param qhat forecast quantiles
@@ -425,7 +425,7 @@ morie_diffser <- function(x, order = 1L, season = 1L) {
 morie_lagfeat <- function(x, lags) {
   v <- .morie_jo_vec(x)
   lags <- sort(unique(as.integer(lags)))
-  if (length(lags) == 0L || lags[1] < 1L) {
+  if (length(lags) == 0L || lags\[1\] < 1L) {
     stop("lags must be positive integers.", call. = FALSE)
   }
   start <- lags[length(lags)]
@@ -625,22 +625,22 @@ morie_tsimpute <- function(x, method = "linear", season = 1L) {
     out[i] <- if (method == "ffill") {
       if (length(prev)) raw[prev[length(prev)]] else gm
     } else if (method == "bfill") {
-      if (length(nxt)) raw[nxt[1]] else gm
+      if (length(nxt)) raw[nxt\[1\]] else gm
     } else if (method == "mean") {
       gm
     } else if (method == "seasonal") {
       same <- obs[(obs - i) %% season == 0]
-      if (length(same)) mean(raw[same]) else gm
+      if (length(same)) mean(raw\[same\]) else gm
     } else if (method == "linear") {
       if (length(prev) && length(nxt)) {
         a <- prev[length(prev)]
-        b <- nxt[1]
+        b <- nxt\[1\]
         w <- (i - a) / (b - a)
         raw[a] + w * (raw[b] - raw[a])
       } else if (length(prev)) {
         raw[prev[length(prev)]]
       } else if (length(nxt)) {
-        raw[nxt[1]]
+        raw[nxt\[1\]]
       } else gm
     } else stop("unknown method.", call. = FALSE)
   }
@@ -733,7 +733,7 @@ morie_pacfts <- function(x, maxlag = 20L) {
 
 #' Augmented Dickey-Fuller unit-root test (ch. 6 p. 149)
 #'
-#' Regresses diff(x)\_t on a constant, x\_\{t-1\} and lags lagged
+#' Regresses diff(x)_t on a constant, x_\{t-1\} and lags lagged
 #' differences; the statistic is the t-ratio on x_\{t-1\}. The null is a
 #' unit root, so a statistic BELOW the critical value rejects
 #' non-stationarity. Critical values are MacKinnon's (1991) response
@@ -774,7 +774,7 @@ morie_adfur <- function(x, lags = 1L) {
   if (dof < 1L) stop("not enough degrees of freedom.", call. = FALSE)
   s2 <- sum(resid * resid) / dof
   xtx <- matrix(0, p, p)
-  for (a in seq_len(p)) for (b in seq_len(p)) xtx[a, b] <- sum(rows[, a] * rows[, b])
+  for (a in seq_len(p)) for (b in seq_len(p)) xtx\[a, b\] <- sum(rows[, a] * rows[, b])
   for (a in seq_len(p)) xtx[a, a] <- xtx[a, a] + 1e-12
   e1 <- as.numeric(seq_len(p) == 2L)
   se <- sqrt(s2 * .morie_jo_solve(lapply(seq_len(p), function(i) xtx[i, ]), e1)[2])
@@ -863,7 +863,7 @@ morie_tsregmat <- function(x, lags, horizon = 1L) {
   v <- .morie_jo_vec(x)
   lags <- sort(unique(as.integer(lags)))
   horizon <- as.integer(horizon)
-  if (length(lags) == 0L || lags[1] < 1L || horizon < 1L) {
+  if (length(lags) == 0L || lags\[1\] < 1L || horizon < 1L) {
     stop("lags must be positive and horizon at least 1.", call. = FALSE)
   }
   start <- lags[length(lags)]
@@ -926,7 +926,7 @@ morie_recmulti <- function(x, lags, horizon) {
     hist <- c(hist, p)
   }
   list(forecast = preds, horizon = horizon, nmodels = 1L, ntrain = tr$nrows,
-       first = preds[1], last = preds[horizon], mean = mean(preds))
+       first = preds\[1\], last = preds[horizon], mean = mean(preds))
 }
 
 #' Direct multi-step forecasting (ch. 18 p. 548)
@@ -953,7 +953,7 @@ morie_dirmulti <- function(x, lags, horizon) {
     preds <- c(preds, .morie_jo_fitpred(tr$rows, tr$y, newrow))
   }
   list(forecast = preds, horizon = horizon, nmodels = horizon,
-       first = preds[1], last = preds[horizon], mean = mean(preds))
+       first = preds\[1\], last = preds[horizon], mean = mean(preds))
 }
 
 #' DirRec strategy (ch. 18 p. 551)
@@ -1004,8 +1004,8 @@ morie_dirrec <- function(x, lags, horizon) {
     ncols <- c(ncols, length(newrow))
   }
   list(forecast = preds, horizon = horizon, nmodels = horizon,
-       ncolsfirst = ncols[1], ncolslast = ncols[horizon],
-       first = preds[1], last = preds[horizon], mean = mean(preds))
+       ncolsfirst = ncols\[1\], ncolslast = ncols[horizon],
+       first = preds\[1\], last = preds[horizon], mean = mean(preds))
 }
 
 #' Seasonal naive baseline (ch. 8 p. 219)
@@ -1032,7 +1032,7 @@ morie_seasnaive <- function(x, season, horizon) {
                   function(h) v[length(v) - season + (h %% season) + 1L],
                   numeric(1))
   list(forecast = preds, season = season, horizon = horizon,
-       first = preds[1], last = preds[horizon], mean = mean(preds))
+       first = preds\[1\], last = preds[horizon], mean = mean(preds))
 }
 
 # =====================================================================
@@ -1070,7 +1070,7 @@ morie_slidecv <- function(n, trainsize, testsize, step = NULL) {
   }
   if (length(folds) == 0L) stop("n is too small for this layout.", call. = FALSE)
   list(folds = folds, nfolds = length(folds), trainsize = trainsize,
-       testsize = testsize, step = step, firsttest = folds[[1]][3],
+       testsize = testsize, step = step, firsttest = folds[\[1\]][3],
        lasttest = folds[[length(folds)]][4])
 }
 
@@ -1103,7 +1103,7 @@ morie_expandcv <- function(n, initial, testsize, step = NULL) {
   }
   if (length(folds) == 0L) stop("n is too small for this layout.", call. = FALSE)
   list(folds = folds, nfolds = length(folds), initial = initial,
-       testsize = testsize, step = step, firsttrainend = folds[[1]][2],
+       testsize = testsize, step = step, firsttrainend = folds[\[1\]][2],
        lasttrainend = folds[[length(folds)]][2])
 }
 
@@ -1175,7 +1175,7 @@ morie_quantreg <- function(x, y, q, iters = 25L) {
     w <- ifelse(r > 0, q, 1 - q) / pmax(abs(r), eps)
     xtx <- matrix(0, p, p)
     for (a in seq_len(p)) for (b in seq_len(p)) {
-      xtx[a, b] <- sum(w * xm[, a] * xm[, b])
+      xtx\[a, b\] <- sum(w * xm[, a] * xm[, b])
     }
     xty <- vapply(seq_len(p), function(a) sum(w * xm[, a] * yv), numeric(1))
     for (a in seq_len(p)) xtx[a, a] <- xtx[a, a] + 1e-10
@@ -1183,7 +1183,7 @@ morie_quantreg <- function(x, y, q, iters = 25L) {
   }
   fit <- as.numeric(xm %*% beta)
   list(beta = beta, fitted = fit, loss = morie_pinball(yv, fit, q)$loss,
-       q = q, intercept = beta[1], n = n, p = p)
+       q = q, intercept = beta\[1\], n = n, p = p)
 }
 
 #' Conformalized quantile regression (ch. 17 pp. 514-515)
@@ -1402,7 +1402,7 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 .morie_jo_interp <- function(theta, length_) {
   n <- length(theta)
   if (n < 1L || length_ < 1L) stop("theta and length must be non-empty.", call. = FALSE)
-  if (n == 1L) return(rep(theta[1], length_))
+  if (n == 1L) return(rep(theta\[1\], length_))
   vapply(seq_len(length_) - 1L, function(i) {
     pos <- if (length_ > 1L) (i * (n - 1)) / (length_ - 1) else 0
     lo <- floor(pos)
@@ -1432,7 +1432,7 @@ morie_seriesdecomp <- function(x, kernel) {
   kernel <- as.integer(kernel)
   if (kernel < 1L) stop("kernel must be at least 1.", call. = FALSE)
   half <- kernel %/% 2L
-  pad <- c(rep(v[1], half), v, rep(v[length(v)], kernel - 1L - half))
+  pad <- c(rep(v\[1\], half), v, rep(v[length(v)], kernel - 1L - half))
   trend <- vapply(seq_along(v), function(i) mean(pad[i:(i + kernel - 1L)]),
                   numeric(1))
   seas <- v - trend
@@ -1514,7 +1514,7 @@ morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
   P <- as.integer(patchlen)
   S <- as.integer(stride)
   if (P < 1L || S < 1L) stop("patchlen and stride must be positive.", call. = FALSE)
-  L <- length(chans[[1]])
+  L <- length(chans[\[1\]])
   if (any(vapply(chans, length, integer(1)) != L)) {
     stop("all channels must be the same length.", call. = FALSE)
   }
@@ -1538,20 +1538,20 @@ morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
     stats[[ci]] <- c(m, sd)
   }
   flat <- unlist(allp)
-  list(patches = allp, npatches = length(allp[[1]]), n = N, patchlen = P,
-       stride = S, nchannels = length(chans), mean = stats[[1]][1],
-       sd = stats[[1]][2], patchmean = mean(flat),
+  list(patches = allp, npatches = length(allp[\[1\]]), n = N, patchlen = P,
+       stride = S, nchannels = length(chans), mean = stats[\[1\]]\[1\],
+       sd = stats[\[1\]][2], patchmean = mean(flat),
        patchsumsq = sum(flat * flat))
 }
 
 #' N-HiTS multi-rate sampling with hierarchical interpolation
 #'
-#' Quoted from the paper: (1) "y^(p)\_l = MaxPool(y\_l, k\_l)"; (2)
-#' "h\_l = MLP\_l(y^(p)\_l); theta^f\_l = LINEAR^f(h\_l); theta^b\_l =
-#' LINEAR^b(h\_l)"; (3) "yhat\_\{tau,l\} = g(tau, theta^f\_l)" with
+#' Quoted from the paper: (1) "y^(p)_l = MaxPool(y_l, k_l)"; (2)
+#' "h_l = MLP_l(y^(p)_l); theta^f_l = LINEAR^f(h_l); theta^b_l =
+#' LINEAR^b(h_l)"; (3) "yhat_\{tau,l\} = g(tau, theta^f_l)" with
 #' "|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta[t1] +
 #' ((theta[t2]-theta[t1])/(t2-t1))(tau-t1)"; doubly residual stacking
-#' "yhat = sum\_l yhat\_l; y\_\{l+1\} = y\_l - ytilde\_l" -- Challu, C.,
+#' "yhat = sum_l yhat_l; y_\{l+1\} = y_l - ytilde_l" -- Challu, C.,
 #' Olivares, K. G., Oreshkin, B. N., Garza, F., Mergenthaler-Canseco,
 #' M. and Dubrawski, A., N-HiTS, AAAI 2023 (arXiv:2201.12886).
 #' wf[[l]] and wb[[l]] stand in for MLP_l followed by LINEAR: a single
@@ -1601,7 +1601,7 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
     resid <- resid - .morie_jo_interp(thb, length(resid))
   }
   list(forecast = fc, residual = resid, nblocks = length(ks), sizes = sizes,
-       first = fc[1], last = fc[H], mean = mean(fc),
+       first = fc\[1\], last = fc[H], mean = mean(fc),
        residnorm = sqrt(sum(resid * resid)))
 }
 
@@ -1630,8 +1630,8 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
 #' GLU_omega(eta_1))" with eta_2 = ELU(W_2 a + W_3 c + b_2); (5)
 #' "GLU_omega(gamma) = sigma(W_4 gamma + b_4) * (W_5 gamma + b_5)";
 #' (6) "v_chi_t = Softmax(GRN_v_chi(Xi_t, c_s))"; (23) "yhat(q,t,tau)
-#' = W\_q psitilde(t,tau) + b\_q"; (25) "QL(y, yhat, q) = q(y - yhat)\_+ +
-#' (1 - q)(yhat - y)\_+" -- Lim, B., Arik, S. O., Loeff, N. and
+#' = W_q psitilde(t,tau) + b_q"; (25) "QL(y, yhat, q) = q(y - yhat)_+ +
+#' (1 - q)(yhat - y)_+" -- Lim, B., Arik, S. O., Loeff, N. and
 #' Pfister, T., Temporal Fusion Transformers, International Journal of
 #' Forecasting 37(4):1748-1764 (arXiv:1912.09363). All weights are
 #' caller-supplied.
@@ -1755,7 +1755,7 @@ morie_tide <- function(y, feats, fproj, enc, dec, tdec, wglobal, horizon) {
     d <- g[((t - 1L) * p + 1L):(t * p)]
     o <- do.call(.morie_jo_resblock, c(list(d), tdec))
     if (length(o) != 1L) stop("tdec must produce one value per step.", call. = FALSE)
-    o[1]
+    o\[1\]
   }, numeric(1))
   glob <- .morie_jo_matvec(wglobal, v)
   if (length(glob) != H) {
@@ -1763,14 +1763,14 @@ morie_tide <- function(y, feats, fproj, enc, dec, tdec, wglobal, horizon) {
   }
   out <- temporal + glob
   list(forecast = out, temporal = temporal, global = glob, horizon = H,
-       p = p, encdim = length(e), nfeat = length(proj), first = out[1],
+       p = p, encdim = length(e), nfeat = length(proj), first = out\[1\],
        last = out[H], mean = mean(out))
 }
 
 #' TSMixer time-mixing and feature-mixing, all-MLP
 #'
-#' Quoted from the paper: (4) "TP\_\{L->T\}(X)\_\{\*,i\} = W\_1 X\_\{\*,i\} + b\_1";
-#' (5) "TM(X)\_\{\*,i\} = Norm(X\_\{\*,i\} + Drop(sigma(TP\_\{L->L\}(X)\_\{\*,i\})))"
+#' Quoted from the paper: (4) "TP_{L->T}(X)_{*,i} = W_1 X_{*,i} + b_1";
+#' (5) "TM(X)_{*,i} = Norm(X_{*,i} + Drop(sigma(TP_{L->L}(X)_{*,i})))"
 #' -- Chen, S.-A., Li, C.-L., Yoder, N. C., Arik, S. O. and Pfister,
 #' T., TSMixer: An All-MLP Architecture for Time Series Forecasting,
 #' TMLR 2023 (arXiv:2303.06053), Appendix B.3.1. Feature mixing and
@@ -1798,7 +1798,7 @@ morie_tsmixer <- function(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon) 
   chans <- lapply(x, .morie_jo_vec)
   C <- length(chans)
   if (C < 1L) stop("need at least one channel.", call. = FALSE)
-  L <- length(chans[[1]])
+  L <- length(chans[\[1\]])
   if (any(vapply(chans, length, integer(1)) != L)) {
     stop("all channels must be the same length.", call. = FALSE)
   }
@@ -1820,7 +1820,7 @@ morie_tsmixer <- function(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon) 
   }
   flat <- unlist(preds)
   list(forecast = preds, mixed = out, nchannels = C, L = L, horizon = H,
-       mean = mean(flat), first = preds[[1]][1], last = preds[[C]][H],
+       mean = mean(flat), first = preds[\[1\]]\[1\], last = preds[[C]][H],
        sumsq = sum(flat * flat))
 }
 
@@ -1828,7 +1828,7 @@ morie_tsmixer <- function(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon) 
 #'
 #' Quoted from the paper: (1) "h^0_n = Embedding(X_\{:,n\}); H^\{l+1\} =
 #' TrmBlock(H^l); Yhat_\{:,n\} = Projection(h^L_n)"; (2) "LayerNorm(H) =
-#' \{[h_n - Mean(h_n)]/sqrt(Var(h_n)) | n = 1..N\}"; attention scores
+#' \{\[h_n - Mean(h_n)\]/sqrt(Var(h_n)) | n = 1..N\}"; attention scores
 #' "A_\{i,j\} = (Q K^T / sqrt(d_k))_\{i,j\}" -- Liu, Y., Hu, T., Zhang, H.,
 #' Wu, H., Wang, S., Ma, L. and Long, M., iTransformer, ICLR 2024
 #' (arXiv:2310.06625). The inversion is the point: each VARIATE series
@@ -1859,23 +1859,23 @@ morie_itrans <- function(x, wembed, bembed, wq, wk, wv, wffn1, bffn1,
   chans <- lapply(x, .morie_jo_vec)
   N <- length(chans)
   if (N < 1L) stop("need at least one variate.", call. = FALSE)
-  Tn <- length(chans[[1]])
+  Tn <- length(chans[\[1\]])
   if (any(vapply(chans, length, integer(1)) != Tn)) {
     stop("all variates must be the same length.", call. = FALSE)
   }
   toks <- lapply(chans, function(cv) .morie_jo_ln(.morie_jo_matvec(wembed, cv) + bembed))
-  D <- length(toks[[1]])
+  D <- length(toks[\[1\]])
   Q <- lapply(toks, function(t) .morie_jo_matvec(wq, t))
   K <- lapply(toks, function(t) .morie_jo_matvec(wk, t))
   V <- lapply(toks, function(t) .morie_jo_matvec(wv, t))
-  dk <- length(Q[[1]])
+  dk <- length(Q[\[1\]])
   attn <- lapply(seq_len(N), function(i) {
     .morie_jo_softmax(vapply(seq_len(N),
                              function(j) sum(Q[[i]] * K[[j]]) / sqrt(dk),
                              numeric(1)))
   })
   ctx <- lapply(seq_len(N), function(i) {
-    s <- numeric(length(V[[1]]))
+    s <- numeric(length(V[\[1\]]))
     for (j in seq_len(N)) s <- s + attn[[i]][j] * V[[j]]
     s
   })
@@ -1887,7 +1887,7 @@ morie_itrans <- function(x, wembed, bembed, wq, wk, wv, wffn1, bffn1,
   preds <- lapply(ffn, function(t) .morie_jo_matvec(wproj, t) + bproj)
   flat <- unlist(preds)
   list(forecast = preds, attn = attn, tokens = ffn, nvariates = N, T = Tn,
-       D = D, horizon = length(preds[[1]]),
+       D = D, horizon = length(preds[\[1\]]),
        attndiag = sum(vapply(seq_len(N), function(i) attn[[i]][i], numeric(1))) / N,
-       mean = mean(flat), first = preds[[1]][1], sumsq = sum(flat * flat))
+       mean = mean(flat), first = preds[\[1\]]\[1\], sumsq = sum(flat * flat))
 }

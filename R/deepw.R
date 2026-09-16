@@ -37,7 +37,7 @@
 #' @export
 .dw_walk <- function(nb, start, length_, e) {
   w <- integer(length_)
-  w[1] <- start
+  w\[1\] <- start
   cur <- start
   m <- 1L
   if (length_ > 1L) for (s in seq_len(length_ - 1L)) {

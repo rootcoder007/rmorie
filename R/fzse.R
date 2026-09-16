@@ -39,7 +39,7 @@
 #' @export
 Ssgnmom <- function(n, ftheta = 0.5, h = NULL, f0 = NULL, fpp0 = NULL, a11 = NULL, a13 = NULL) {
   if (n < 1) stop("sample size must be at least 1.")
-  if (ftheta < 0 || ftheta > 1) stop("F(theta) must lie in [0, 1].")
+  if (ftheta < 0 || ftheta > 1) stop("F(theta) must lie in \[0, 1\].")
   mean <- n * ftheta
   v <- n * (1 - ftheta) * ftheta
   refined <- FALSE

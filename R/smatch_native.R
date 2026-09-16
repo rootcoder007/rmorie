@@ -93,7 +93,7 @@
 #' r <- morie_smatch_poisson_design(cases, risk_periods = list(c(0, 30)))
 #' str(r, max.level = 1)
 morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
-  rp <- lapply(risk_periods, function(r) c(as.numeric(r[1]), as.numeric(r[2])))
+  rp <- lapply(risk_periods, function(r) c(as.numeric(r\[1\]), as.numeric(r[2])))
   ab <- as.numeric(age_breaks)
   n_risk <- length(rp)
   n_age <- length(ab) + 1L

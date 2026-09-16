@@ -21,7 +21,7 @@
 #     + alpha * sum_{i in C} sum_k g_k(x_i) ln S_k(t_i)    [ELBO_C]
 #     + L_prior,
 #
-# and alpha in [0, 1] discounts the censored term. That discount is
+# and alpha in \[0, 1\] discounts the censored term. That discount is
 # not cosmetic: survival distributions have long right tails, and
 # censored cases are the ones asking for P(T > t) far out in that
 # tail, so weighting them fully biases the fit. Setting alpha = 0
@@ -333,7 +333,7 @@ morie_survvae_gates <- function(x, W, bias) {
 #' @param scales Numeric vector of \code{K} positive scale
 #'   parameters.
 #' @param primitive One of \code{"weibull"} or \code{"lognormal"}.
-#' @param alpha Discount on the censored term, in \code{[0, 1]}.
+#' @param alpha Discount on the censored term, in \code{\[0, 1\]}.
 #' @param prior Strength of the log-parameter L2 penalty.
 #' @return Named list with \code{elbo}, \code{uncensored},
 #'   \code{censored}, \code{prior_penalty}, \code{alpha}.
@@ -355,7 +355,7 @@ morie_survvae_elbo <- function(X, y_lower, events, W, bias, shapes, scales,
   .ghc_survvae_check_primitive(primitive)
   alpha <- as.numeric(alpha)
   if (!(length(alpha) == 1L && !is.na(alpha) && alpha >= 0 && alpha <= 1))
-    stop(sprintf("survvae: alpha must lie in [0, 1], got '%s'",
+    stop(sprintf("survvae: alpha must lie in \[0, 1\], got '%s'",
                  as.character(alpha)))
   K <- length(shapes)
   tot_u <- 0
@@ -445,7 +445,7 @@ morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
 #' @param events Event indicator (0/1 or logical), length \code{n}.
 #' @param K Number of experts.
 #' @param primitive One of \code{"weibull"} or \code{"lognormal"}.
-#' @param alpha Discount on the censored term, in \code{[0, 1]}.
+#' @param alpha Discount on the censored term, in \code{\[0, 1\]}.
 #' @param prior Strength of the log-parameter L2 penalty.
 #' @param seed Seed for the shared generator (see
 #'   \code{.ghc_rng}).

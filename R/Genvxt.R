@@ -36,7 +36,7 @@ Genvxt <- function(X, facets = NULL) {
   msi <- npr * sum((im - grand)^2) / (ni - 1)
   res <- 0
   for (i in seq_len(npr)) for (j in seq_len(ni))
-    res <- res + (M[i, j] - pm[i] - im[j] + grand)^2
+    res <- res + (M\[i, j\] - pm[i] - im[j] + grand)^2
   mspi <- res / ((npr - 1) * (ni - 1))
   vp <- (msp - mspi) / ni
   vi <- (msi - mspi) / npr

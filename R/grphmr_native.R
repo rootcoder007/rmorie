@@ -125,10 +125,10 @@ spatial_bias <- function(distance, b_table, unreachable_bias = NULL) {
   out <- matrix(0, nrow = nrow(D), ncol = ncol(D))
   for (i in seq_len(nrow(D))) {
     for (j in seq_len(ncol(D))) {
-      if (D[i, j] == .GRPHMR_UNREACHABLE) out[i, j] <- ub
+      if (D\[i, j\] == .GRPHMR_UNREACHABLE) out\[i, j\] <- ub
       else {
-        k <- min(D[i, j], length(b_table) - 1L)
-        out[i, j] <- as.numeric(b_table[[k + 1L]])
+        k <- min(D\[i, j\], length(b_table) - 1L)
+        out\[i, j\] <- as.numeric(b_table[[k + 1L]])
       }
     }
   }
@@ -156,11 +156,11 @@ edge_encoding <- function(paths, edge_features, w_table) {
     for (step in seq_along(path)) {
       e <- path[[step]]
       ekey <- if (is.character(e)) e
-              else paste0("(", e[1], ", ", e[2], ")")
+              else paste0("(", e\[1\], ", ", e[2], ")")
       f <- edge_features[[ekey]]
       if (is.null(f)) {
         rekey <- if (is.character(e)) e
-                 else paste0("(", e[2], ", ", e[1], ")")
+                 else paste0("(", e[2], ", ", e\[1\], ")")
         f <- edge_features[[rekey]]
       }
       if (is.null(f))
@@ -211,7 +211,7 @@ graphormer_attention <- function(H, WQ, WK, WV, bias, edge_bias = NULL) {
     sc <- numeric(n)
     for (j in seq_len(n)) {
       kj <- as.numeric(WK %*% X[j, ])
-      s <- sum(q * kj) / sqrt(dk) + B[i, j]
+      s <- sum(q * kj) / sqrt(dk) + B\[i, j\]
       if (!is.null(edge_bias)) {
         key <- paste0("(", i - 1L, ", ", j - 1L, ")")
         s <- s + as.numeric(edge_bias[[key]])

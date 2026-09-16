@@ -156,7 +156,7 @@ morie_local_linear <- function(x, y, grid = NULL, h = NULL) {
     coef <- tryCatch(solve(t(X) %*% WX, t(WX) %*% y),
       error = function(e) qr.solve(t(X) %*% WX, t(WX) %*% y)
     )
-    fit[i] <- coef[1]
+    fit[i] <- coef\[1\]
     slp[i] <- coef[2]
   }
   list(
@@ -289,7 +289,7 @@ morie_index_regression <- function(X, y, beta, h = NULL, grid = NULL) {
 #' @examples
 #' set.seed(1)
 #' X <- matrix(rnorm(200), ncol = 2)
-#' morie_ichimura(X, tanh(X %*% c(1, -0.6)))$beta[1]
+#' morie_ichimura(X, tanh(X %*% c(1, -0.6)))$beta\[1\]
 #' @export
 morie_ichimura <- function(X, y, h = NULL) {
   X <- as.matrix(X)
@@ -545,8 +545,8 @@ morie_kernel_quantile <- function(x, y, tau = 0.5, grid = NULL, h = NULL) {
     if (tot <= 0) next
     cdf <- cumsum(w) / tot
     for (j in seq_along(taus)) {
-      k <- which(cdf >= taus[j])[1]
-      out[i, j] <- ys[if (is.na(k)) length(ys) else k]
+      k <- which(cdf >= taus[j])\[1\]
+      out\[i, j\] <- ys[if (is.na(k)) length(ys) else k]
     }
   }
   list(
@@ -586,7 +586,7 @@ morie_rate_check <- function(errors, n_grid, expected_exponent) {
   slope <- unname(stats::coef(fit)[2])
   list(
     observed_exponent = slope, expected_exponent = expected_exponent,
-    intercept = unname(stats::coef(fit)[1]),
+    intercept = unname(stats::coef(fit)\[1\]),
     consistent = abs(slope - expected_exponent) < 0.15,
     method = "log-log slope of error against n"
   )

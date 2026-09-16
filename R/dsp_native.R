@@ -37,7 +37,7 @@
   k <- seq_len(n)
   p_proto <- exp(1i * pi * (2 * k + n - 1) / (2 * n))
   if (type %in% c("low", "high")) {
-    wc <- tan(pi * W[1] / 2)
+    wc <- tan(pi * W\[1\] / 2)
     if (type == "low") {
       p_a <- wc * p_proto
       z_a <- complex(0) # zeros at infinity
@@ -48,7 +48,7 @@
       gain_pt <- -1 + 0i # Nyquist (z = -1)
     }
   } else if (type == "pass") {
-    w1 <- tan(pi * W[1] / 2)
+    w1 <- tan(pi * W\[1\] / 2)
     w2 <- tan(pi * W[2] / 2)
     bw <- w2 - w1
     w0 <- sqrt(w1 * w2)
@@ -62,7 +62,7 @@
     gain_pt <- exp(1i * 2 * atan(w0)) # z at center frequency
   } else {
     # band-stop: s -> (bw * s) / (s^2 + w0^2)
-    w1 <- tan(pi * W[1] / 2)
+    w1 <- tan(pi * W\[1\] / 2)
     w2 <- tan(pi * W[2] / 2)
     bw <- w2 - w1
     w0 <- sqrt(w1 * w2)
@@ -95,9 +95,9 @@
 .morie_dsp_filter <- function(b, a, x) {
   b <- as.numeric(b)
   a <- as.numeric(a)
-  if (a[1] != 1) {
-    b <- b / a[1]
-    a <- a / a[1]
+  if (a\[1\] != 1) {
+    b <- b / a\[1\]
+    a <- a / a\[1\]
   }
   if (length(a) == 1L) {
     # pure FIR: convolution
@@ -131,7 +131,7 @@
   if (pad > 0) {
     # odd extension at both ends
     xx <- c(
-      2 * x[1] - x[seq(pad + 1, 2, by = -1)], x,
+      2 * x\[1\] - x[seq(pad + 1, 2, by = -1)], x,
       2 * x[n] - x[seq(n - 1, n - pad, by = -1)]
     )
   } else {
@@ -173,12 +173,12 @@
   # ideal low-pass with cutoff pi*fc (Nyquist = 1 convention)
   sinc <- function(fc) ifelse(m == 0, fc, sin(pi * fc * m) / (pi * m))
   h <- switch(type,
-    low = sinc(W[1]),
+    low = sinc(W\[1\]),
     high = {
       d <- ifelse(m == 0, 1, 0)
-      d - sinc(W[1])
+      d - sinc(W\[1\])
     },
-    pass = sinc(W[2]) - sinc(W[1])
+    pass = sinc(W[2]) - sinc(W\[1\])
   )
   w <- if (is.function(window)) {
     window
@@ -200,7 +200,7 @@
   } else if (type == "high") {
     h <- h / sum(h * cos(pi * (seq_along(h) - 1)))
   } else {
-    f0 <- (W[1] + W[2]) / 2
+    f0 <- (W\[1\] + W[2]) / 2
     h <- h / abs(sum(h * exp(-1i * pi * f0 * (seq_along(h) - 1))))
   }
   as.numeric(h)
@@ -220,7 +220,7 @@
     h[c(1, n / 2 + 1)] <- 1
     h[2:(n / 2)] <- 2
   } else {
-    h[1] <- 1
+    h\[1\] <- 1
     h[2:((n + 1) / 2)] <- 2
   }
   stats::fft(X * h, inverse = TRUE) / n

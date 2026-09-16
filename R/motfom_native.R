@@ -33,7 +33,7 @@
 #' @export
 Motfom <- function(sequence, pwm, background = NULL, pseudocount = 0,
                    scale = 1000L) {
-  seq_ <- toupper(as.character(sequence)[1])
+  seq_ <- toupper(as.character(sequence)\[1\])
   P <- as.matrix(pwm)
   if (ncol(P) != 4L) stop("pwm must be (w, 4)", call. = FALSE)
   w <- nrow(P)
@@ -78,7 +78,7 @@ Motfom <- function(sequence, pwm, background = NULL, pseudocount = 0,
   }
   surv <- numeric(length(dense) + 1)
   for (s in rev(seq_along(dense))) surv[s] <- surv[s + 1] + dense[s]
-  chars <- strsplit(seq_, "")[[1]]
+  chars <- strsplit(seq_, "")[\[1\]]
   code <- match(chars, c("A", "C", "G", "T"))
   n_win <- length(chars) - w + 1
   if (n_win < 1) stop("sequence shorter than motif", call. = FALSE)

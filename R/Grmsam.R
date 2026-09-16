@@ -6,8 +6,8 @@
 #' thresholds must strictly increase or a probability goes negative.
 #' The constraint is checked rather than assumed.
 #'
-#' Formula: P\*\_k = 1/(1 + exp(-a(theta - b\_k))), P\*\_0 = 1, P\*\_\{m+1\} = 0,
-#'   P\_k = P\*\_k - P\*\_\{k+1\}.
+#' Formula: P*_k = 1/(1 + exp(-a(theta - b_k))), P*_0 = 1, P*_{m+1} = 0,
+#'   P_k = P*_k - P*_{k+1}.
 #'
 #' @param y Observed categories, 0-based (0 .. m).
 #' @param theta Person abilities, same length as y.
@@ -47,7 +47,7 @@ Grmsam <- function(y, theta, a, b_k) {
     ll <- ll + log(pobs[i])
   }
   .t1_result(estimate = mean(pobs), p_observed = pobs,
-             probs_first = probs(th[1]), loglik = ll, categories = m + 1L,
+             probs_first = probs(th\[1\]), loglik = ll, categories = m + 1L,
              n = length(ys),
              method = "P_k = P*_k - P*_{k+1} with logistic P*, Samejima (1969)")
 }

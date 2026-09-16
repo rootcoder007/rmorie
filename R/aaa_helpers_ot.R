@@ -220,7 +220,7 @@
   j <- 1L
   repeat {
     t <- min(ra[i], rb[j])
-    T[i, j] <- t
+    T\[i, j\] <- t
     basis[[length(basis) + 1L]] <- c(i, j)
     ra[i] <- ra[i] - t
     rb[j] <- rb[j] - t
@@ -259,12 +259,12 @@
   edges <- list()
   have <- character(0)
   for (e in basis) {
-    ri <- fnd(e[1])
+    ri <- fnd(e\[1\])
     rj <- fnd(n + e[2])
     if (ri != rj) {
       parent[ri] <- rj
       edges[[length(edges) + 1L]] <- e
-      have <- c(have, paste(e[1], e[2]))
+      have <- c(have, paste(e\[1\], e[2]))
     }
   }
   for (i in seq_len(n)) {
@@ -296,7 +296,7 @@
   if (!length(edges)) {
     return(edges)
   }
-  key <- vapply(edges, function(e) e[1] * 1e6 + e[2], 0)
+  key <- vapply(edges, function(e) e\[1\] * 1e6 + e[2], 0)
   edges[order(key)]
 }
 
@@ -313,7 +313,7 @@
 .ot_adj <- function(basis, n) {
   adj <- vector("list", n + max(vapply(basis, function(e) e[2], 0L)))
   for (e in basis) {
-    i <- e[1]
+    i <- e\[1\]
     j <- e[2]
     adj[[i]] <- c(adj[[i]], list(c(n + j, i, j)))
     adj[[n + j]] <- c(adj[[n + j]], list(c(i, i, j)))
@@ -338,18 +338,18 @@
   u <- numeric(n)
   v <- numeric(m)
   seen <- rep(FALSE, n + m)
-  seen[1] <- TRUE
+  seen\[1\] <- TRUE
   stack <- c(1L)
   while (length(stack)) {
     node <- stack[length(stack)]
     stack <- stack[-length(stack)]
     for (e in adj[[node]]) {
-      nb <- e[1]
+      nb <- e\[1\]
       i <- e[2]
       j <- e[3]
       if (seen[nb]) next
       seen[nb] <- TRUE
-      if (nb > n) v[nb - n] <- C[i, j] - u[i] else u[nb] <- C[i, j] - v[j]
+      if (nb > n) v[nb - n] <- C\[i, j\] - u[i] else u[nb] <- C\[i, j\] - v[j]
       stack <- c(stack, nb)
     }
   }
@@ -379,7 +379,7 @@
       return(st$path)
     }
     for (e in adj[[st$node]]) {
-      nb <- e[1]
+      nb <- e\[1\]
       if (nb %in% st$seen) next
       stack[[length(stack) + 1L]] <- list(
         node = nb,
@@ -421,10 +421,10 @@
   basis <- .ot_complete_tree(nw$basis, n, m)
   done <- FALSE
   for (piv in seq_len(as.integer(max_pivots))) {
-    bkey <- vapply(basis, function(e) e[1] * 1e6 + e[2], 0)
+    bkey <- vapply(basis, function(e) e\[1\] * 1e6 + e[2], 0)
     pot <- .ot_potentials(basis, C, n, m)
     D <- C - outer(pot$u, pot$v, "+")
-    D[cbind(vapply(basis, function(e) e[1], 0L), vapply(basis, function(e) e[2], 0L))] <- Inf
+    D[cbind(vapply(basis, function(e) e\[1\], 0L), vapply(basis, function(e) e[2], 0L))] <- Inf
     best <- min(D)
     if (!(best < -1e-11)) {
       done <- TRUE
@@ -434,21 +434,21 @@
     # degenerate transport problems have several optimal vertices and
     # column-major order picks a different one.
     Dt <- t(D)
-    idx <- which(Dt <= best + 1e-15)[1]
+    idx <- which(Dt <= best + 1e-15)\[1\]
     sj <- ((idx - 1L) %% m) + 1L
     si <- ((idx - 1L) %/% m) + 1L
     path <- .ot_tree_path(basis, n, si, sj)
     minus <- path[seq(1, length(path), by = 2)]
-    flows <- vapply(minus, function(e) T[e[1], e[2]], 0)
+    flows <- vapply(minus, function(e) T[e\[1\], e[2]], 0)
     theta <- min(flows)
-    leave <- minus[[which(flows <= theta + 1e-15)[1]]]
+    leave <- minus[[which(flows <= theta + 1e-15)\[1\]]]
     T[si, sj] <- T[si, sj] + theta
     sgn <- -1
     for (e in path) {
-      T[e[1], e[2]] <- T[e[1], e[2]] + sgn * theta
+      T[e\[1\], e[2]] <- T[e\[1\], e[2]] + sgn * theta
       sgn <- -sgn
     }
-    lk <- leave[1] * 1e6 + leave[2]
+    lk <- leave\[1\] * 1e6 + leave[2]
     basis <- .ot_sortbasis(c(basis[bkey != lk], list(c(si, sj))))
   }
   if (!done) stop("emd: pivot cap reached")

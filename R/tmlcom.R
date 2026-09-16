@@ -7,12 +7,12 @@
 #' coordinate is targeted separately with the shared propensity.
 #'
 #' Formula: Z = clr(Y); for each coordinate j target
-#'   psi_j = E[Z_j(1)] - E[Z_j(0)]; sum_j psi_j = 0;
+#'   psi_j = E\[Z_j(1)\] - E\[Z_j(0)\]; sum_j psi_j = 0;
 #'   the perturbation on the simplex is C(exp(psi))
 #'
 #' @param Yc Compositional outcome, one composition per row.
 #' @param A Binary treatment.
-#' @param Q1,Q0 Initial E[clr(Y)_j | A = 1/0, W].
+#' @param Q1,Q0 Initial E\[clr(Y)_j | A = 1/0, W\].
 #' @param g1W Initial propensity.
 #' @param gbound Propensity truncation.
 #' @param level Confidence level.

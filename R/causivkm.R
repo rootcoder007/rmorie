@@ -96,7 +96,7 @@ Ivclr <- function(y, X, Z, beta0 = 0, X_exog = NULL, add_intercept = TRUE) {
 #' @param qT Conditioning value of Q_T.
 #' @param L Number of instruments.
 #' @param df2 Denominator degrees of freedom, used only when L = 1.
-#' @return Numeric p-value in [0, 1].
+#' @return Numeric p-value in \[0, 1\].
 #' @examples
 #' Morieclrp(2, 3, 2, 50)
 #' @export
@@ -116,7 +116,7 @@ Morieclrp <- function(m, qT, L, df2) {
   val <- stats::pchisq(arg, L) * cos(th)^(L - 2)
   w <- rep(2, N + 1)
   w[seq(2, N, by = 2)] <- 4
-  w[1] <- 1
+  w\[1\] <- 1
   w[N + 1] <- 1
   integral <- sum(w * val) * h / 3
   min(1, max(0, 1 - 2 * K * integral))

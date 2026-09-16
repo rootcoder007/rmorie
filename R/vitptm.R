@@ -71,7 +71,7 @@ Vitptm <- function(image, patch_size, embed_dim, w_scale = 1, skip = 0) {
         for (r in seq_len(p)) {
           for (s in seq_len(p)) {
             j <- j + 1L
-            patches[i, j] <- ch[[c]][(pr - 1L) * p + r, (pc - 1L) * p + s]
+            patches\[i, j\] <- ch[[c]][(pr - 1L) * p + r, (pc - 1L) * p + s]
           }
         }
       }

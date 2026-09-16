@@ -12,7 +12,7 @@
 .t4_wls_int <- function(xs, ys, ws) {
   sw <- sqrt(ws)
   X <- cbind(sw, sw * xs)
-  .t4_olsfit(X, sw * ys)$beta[1]
+  .t4_olsfit(X, sw * ys)$beta\[1\]
 }
 
 # degree-4 polynomial fit; coefficients and residual MSE

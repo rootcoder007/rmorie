@@ -84,7 +84,7 @@
     for (j in seq_len(m)) {
       s <- 0
       for (p in seq_len(k)) s <- s + A[i, p] * B[p, j]
-      out[i, j] <- s
+      out\[i, j\] <- s
     }
   }
   out
@@ -174,9 +174,9 @@
             call. = FALSE
           )
         }
-        L[i, j] <- sqrt(d)
+        L\[i, j\] <- sqrt(d)
       } else {
-        L[i, j] <- if (L[j, j] != 0) (A[i, j] - s) / L[j, j] else 0
+        L\[i, j\] <- if (L[j, j] != 0) (A\[i, j\] - s) / L[j, j] else 0
       }
     }
   }
@@ -288,7 +288,7 @@
   for (sw in seq_len(sweeps)) {
     off <- 0
     for (i in seq_len(n)) {
-      if (i < n) for (j in seq(i + 1L, n)) off <- off + M[i, j] * M[i, j]
+      if (i < n) for (j in seq(i + 1L, n)) off <- off + M\[i, j\] * M\[i, j\]
     }
     if (off <= 1e-30) break
     if (n > 1L) {
@@ -879,7 +879,7 @@
       r <- y[i] - mu[i]
       for (a in seq_len(p)) {
         Xtr[a] <- Xtr[a] + X[i, a] * r
-        for (b in seq_len(p)) XtWX[a, b] <- XtWX[a, b] + X[i, a] * w[i] * X[i, b]
+        for (b in seq_len(p)) XtWX\[a, b\] <- XtWX\[a, b\] + X[i, a] * w[i] * X[i, b]
       }
     }
     step <- .s03ridgesolve(XtWX, Xtr, ridge)
@@ -920,14 +920,14 @@
 }
 
 # Doubly robust DiD for panel data, Sant'Anna and Zhao (2020) eq. (2.6):
-#   tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))]
+#   tau = E\[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))\]
 #   w1  = D / E[D]
-#   w0  = [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
+#   w0  = \[pi(X)(1-D)/(1-pi(X))\] / E\[pi(X)(1-D)/(1-pi(X))\]
 #' Doubly robust DiD for panel data, Sant\'Anna and Zhao (2020) eq.
 #' (2.6):
 #'
-#' tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] w1 = D / E[D] w0 =
-#' [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
+#' tau = E\[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))\] w1 = D / E[D] w0 =
+#' \[pi(X)(1-D)/(1-pi(X))\] / E\[pi(X)(1-D)/(1-pi(X))\]
 #'
 #' @param dy Passed to \code{.s03vec}.
 #' @param D Passed to \code{.s03vec}.
@@ -996,7 +996,7 @@
 # Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated
 # along the logistic submodel whose score is the clever covariate
 # H = D/g - (1-D)/(1-g); eps solves the score equation by Newton, then
-# psi = mean(Q*(1,X) - Q*(0,X)).  y is scaled to [0, 1] so the logistic
+# psi = mean(Q*(1,X) - Q*(0,X)).  y is scaled to \[0, 1\] so the logistic
 # fluctuation is valid for continuous outcomes (Gruber and van der Laan
 # 2010).
 #' Targeted maximum likelihood for the ATE (van der Laan and Rubin 2006,
@@ -1004,7 +1004,7 @@
 #' Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated
 #' along the logistic submodel whose score is the clever covariate H =
 #' D/g - (1-D)/(1-g); eps solves the score equation by Newton, then psi
-#' = mean(Q*(1,X) - Q*(0,X)).  y is scaled to [0, 1] so the logistic
+#' = mean(Q*(1,X) - Q*(0,X)).  y is scaled to \[0, 1\] so the logistic
 #' fluctuation is valid for continuous outcomes (Gruber and van der Laan
 #' 2010).
 #'

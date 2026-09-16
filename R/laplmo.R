@@ -35,9 +35,9 @@ Lapeig <- function(W, k = 2, tol = 1e-10) {
   vals <- e$values[ord]
   V <- e$vectors[, ord[seq_len(k)], drop = FALSE]
   nzi <- which(vals > tol)
-  fied <- if (length(nzi)) e$vectors[, ord[nzi[1]]] else rep(0, n)
+  fied <- if (length(nzi)) e$vectors[, ord[nzi\[1\]]] else rep(0, n)
   .t1_result(values = vals[seq_len(k)], vectors = V, fiedler = fied,
-             lambda1 = if (length(nzi)) vals[nzi[1]] else NaN,
+             lambda1 = if (length(nzi)) vals[nzi\[1\]] else NaN,
              n_components = sum(vals <= tol), n = n, k = k,
              method = "Normalised-Laplacian eigenvectors (sign-fixed)")
 }

@@ -103,7 +103,7 @@
           Hi <- min(C, ai_old + aj_old)
         }
         if (L >= Hi) next
-        eta <- 2 * K[i, j] - K[i, i] - K[j, j]
+        eta <- 2 * K\[i, j\] - K[i, i] - K[j, j]
         if (eta >= 0) next
         alpha[j] <- min(max(aj_old - y[j] * (Ei - Ej) / eta, L), Hi)
         if (abs(alpha[j] - aj_old) < 1e-12) {
@@ -112,8 +112,8 @@
         }
         alpha[i] <- ai_old + y[i] * y[j] * (aj_old - alpha[j])
         b1 <- b - Ei - y[i] * (alpha[i] - ai_old) * K[i, i] -
-          y[j] * (alpha[j] - aj_old) * K[i, j]
-        b2 <- b - Ej - y[i] * (alpha[i] - ai_old) * K[i, j] -
+          y[j] * (alpha[j] - aj_old) * K\[i, j\]
+        b2 <- b - Ej - y[i] * (alpha[i] - ai_old) * K\[i, j\] -
           y[j] * (alpha[j] - aj_old) * K[j, j]
         b <- if (alpha[i] > 0 && alpha[i] < C) b1 else if (alpha[j] > 0 && alpha[j] < C) b2 else (b1 + b2) / 2
         changed <- changed + 1L
@@ -1291,7 +1291,7 @@ morie_esl_backprop <- function(X, y, weights, task = "regression") {
 #' base <- rbind(c(1, 1, 1, 0, 0, 0), c(0, 0, 0, 1, 1, 1))
 #' V <- base[rep(1:2, each = 50), ]
 #' r <- morie_esl_boltzmann(V, h = 3, lr = 0.5, n_epochs = 200L, seed = 1L)
-#' r$error_path[length(r$error_path)] < r$error_path[1]
+#' r$error_path[length(r$error_path)] < r$error_path\[1\]
 #' @export
 morie_esl_boltzmann <- function(v, h = 4L, lr = 0.1, n_epochs = 200L,
                                 k_cd = 1L, seed = 0L, batch_size = NULL) {

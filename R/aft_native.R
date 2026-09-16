@@ -81,7 +81,7 @@
       tmp <- theta
       tmp[i] <- tmp[i] - h[i]
       tmp[j] <- tmp[j] + h[j]
-      H[i, j] <- H[j, i] <- (fn(tp) - fn(tpm) - fn(tmp) + fn(tm)) /
+      H\[i, j\] <- H[j, i] <- (fn(tp) - fn(tpm) - fn(tmp) + fn(tm)) /
         (4 * h[i] * h[j])
     }
   }

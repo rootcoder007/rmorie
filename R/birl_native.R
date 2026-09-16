@@ -19,7 +19,7 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 .mdp <- function(T, gamma) {
   if (length(T) == 0) stop("birl: the transition model is empty")
   nS <- length(T)
-  nA <- length(T[[1]])
+  nA <- length(T[\[1\]])
   if (nA == 0) stop("birl: there are no actions")
   for (s in 1:nS) {
     if (length(T[[s]]) != nA)
@@ -101,7 +101,7 @@ policy_values <- function(T, R, gamma, policy) {
     stop("birl: policy and reward need one entry per state")
   A <- matrix(0, nS, nS)
   for (i in 1:nS) for (j in 1:nS)
-    A[i, j] <- (if (i == j) 1 else 0) - gamma * T[[i]][[policy[i]]][j]
+    A\[i, j\] <- (if (i == j) 1 else 0) - gamma * T[[i]][[policy[i]]][j]
   .solve(A, as.numeric(R))
 }
 
@@ -188,7 +188,7 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   if (length(observations) == 0) stop("birl: no observations")
   total <- 0
   for (sa in observations) {
-    s <- as.integer(sa[1])
+    s <- as.integer(sa\[1\])
     a <- as.integer(sa[2])
     if (s < 1 || s > nrow(Q) || a < 1 || a > ncol(Q))
       stop("birl: an observation is out of range")
@@ -392,7 +392,7 @@ birl <- function(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25,
                  alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                  J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
   .mdp(T, gamma)
-  obs <- lapply(observations, function(sa) c(as.integer(sa[1]),
+  obs <- lapply(observations, function(sa) c(as.integer(sa\[1\]),
                                               as.integer(sa[2])))
   walk <- policy_walk(T, obs, gamma, n_iter, delta, alpha, prior, scale,
                       r_max, J, H, burn, seed, R0)

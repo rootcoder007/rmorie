@@ -54,7 +54,7 @@ Bndtfm <- function(y, D, X, transform) {
     sel <- xv == g
     b <- .bnd_wc_ate(tv[sel], z$d[sel], t0, t1)
     w <- sum(sel) / n
-    lo <- lo + w * b[1]
+    lo <- lo + w * b\[1\]
     hi <- hi + w * b[2]
   }
   obs_y <- z$y[z$d == 1]

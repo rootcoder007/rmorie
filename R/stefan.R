@@ -10,7 +10,7 @@
 #' arms.
 #'
 #' @param T absolute temperature(s) in kelvin.
-#' @param emissivity emissivity in [0, 1]; 1 is a black body.
+#' @param emissivity emissivity in \[0, 1\]; 1 is a black body.
 #' @return list: estimate, exitance, sigma, emissivity, total, n, method.
 #' @keywords internal
 #' @examples
@@ -26,7 +26,7 @@ Stefanbz <- function(T, emissivity = 1) {
   out <- eps * sig * tv^4
   tot <- 0
   for (v in out) tot <- tot + v
-  list(estimate = if (length(out)) out[1] else NaN, exitance = out,
+  list(estimate = if (length(out)) out\[1\] else NaN, exitance = out,
        sigma = sig, emissivity = eps, total = tot, n = length(tv),
        method = "Stefan-Boltzmann radiant exitance j* = eps sigma T^4")
 }

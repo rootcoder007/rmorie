@@ -40,7 +40,7 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
   p <- as.numeric(numerator)
   q <- as.numeric(denominator)
   m <- as.integer(n_terms)
-  if (length(q) == 0L || q[1] == 0) {
+  if (length(q) == 0L || q\[1\] == 0) {
     stop(
       paste(
         "the denominator must have a non-zero constant term; a",
@@ -53,7 +53,7 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
     stop(sprintf("n_terms must be positive; got %s", n_terms), call. = FALSE)
   }
   integral_setup <- all(p == floor(p)) && all(q == floor(q)) &&
-    abs(q[1]) == 1
+    abs(q\[1\]) == 1
   if (integral_setup) {
     pb <- lapply(p, morie_bigint)
     qb <- lapply(q, morie_bigint)
@@ -67,7 +67,7 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
         ))
       }
       # q0 = +-1, so division is a sign flip at most
-      if (q[1] == -1) acc <- morie_big_sub(morie_bigint(0), acc)
+      if (q\[1\] == -1) acc <- morie_big_sub(morie_bigint(0), acc)
       coeffs[[n]] <- acc
     }
     ex <- vapply(coeffs, as.character, character(1))
@@ -83,7 +83,7 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
       for (i in seq_len(min(n - 1L, length(q) - 1L))) {
         acc <- acc - q[i + 1L] * coeffs[n - i]
       }
-      coeffs[n] <- acc / q[1]
+      coeffs[n] <- acc / q\[1\]
     }
     list(
       coefficients = coeffs, exact_coefficients = NULL,
@@ -119,7 +119,7 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
 morie_dominant_singularity_growth <- function(denominator,
                                               coefficients = NULL) {
   q <- as.numeric(denominator)
-  if (length(q) == 0L || q[1] == 0) {
+  if (length(q) == 0L || q\[1\] == 0) {
     stop("the denominator must have a non-zero constant term.",
       call. = FALSE
     )
@@ -358,7 +358,7 @@ morie_hardy_ramanujan_partitions <- function(n) {
     stop(sprintf("n must be positive; got %s", n), call. = FALSE)
   }
   p <- vector("list", n + 1L)
-  p[[1]] <- morie_bigint(1)
+  p[\[1\]] <- morie_bigint(1)
   for (m in seq_len(n)) {
     total <- morie_bigint(0)
     k <- 1L

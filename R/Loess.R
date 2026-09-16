@@ -32,7 +32,7 @@ Loess <- function(x, y, span = 2 / 3, iterations = 3L) {
   w <- numeric(n)
   ns <- max(2L, min(n, as.integer(n * span + 1e-7)))
   lowest <- function(xs, nleft, nright, userw) {
-    rng <- xv[n] - xv[1]
+    rng <- xv[n] - xv\[1\]
     h <- max(xs - xv[nleft], xv[nright] - xs)
     h9 <- 0.999 * h
     h1 <- 0.001 * h
@@ -98,7 +98,7 @@ Loess <- function(x, y, span = 2 / 3, iterations = 3L) {
 
 # CANONICAL TEST
 # r <- Loess(1:10, c(1.2,2.3,2.9,4.1,5.2,5.8,7.3,8.1,8.9,10.2), 0.5, 3L)
-# stopifnot(abs(r$fitted[1] - 1.25178975416042) < 1e-10)
+# stopifnot(abs(r$fitted\[1\] - 1.25178975416042) < 1e-10)
 
 #' @rdname Loess
 #' @keywords internal

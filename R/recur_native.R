@@ -238,7 +238,7 @@ Survtdc <- function(time, event, marker, t) {
   tt <- as.numeric(time)
   e <- as.numeric(event)
   m <- as.numeric(marker)
-  t <- as.numeric(t)[1]
+  t <- as.numeric(t)\[1\]
   n <- length(tt)
   if (length(e) != n || length(m) != n) {
     stop("time, event and marker must have equal length", call. = FALSE)

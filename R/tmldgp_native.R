@@ -141,9 +141,9 @@ post_lasso <- function(X, y, lam) {
   co <- as.numeric(solve(crossprod(XsI), crossprod(XsI, t)))
   predict_fn <- function(row) {
     v <- as.numeric(row)
-    co[1] + sum(co[-1] * v[S])
+    co\[1\] + sum(co[-1] * v[S])
   }
-  list(support = S, coef = co, intercept = co[1],
+  list(support = S, coef = co, intercept = co\[1\],
        predict = predict_fn, lasso_beta = sel$beta,
        selected_by = "lasso, refitted by OLS",
        note = "post-lasso removes the shrinkage bias on the selected coefficients")

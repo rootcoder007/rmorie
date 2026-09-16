@@ -36,7 +36,7 @@ Psoop <- function(f, bounds, n_particles = 20, w = 0.7, c1 = 1.5, c2 = 1.5,
   d <- length(bnd)
   if (d == 0L) stop("Psoop: bounds is empty")
   if (d > length(primes)) stop("Psoop: at most 16 dimensions are supported")
-  for (b in bnd) if (!(b[2] > b[1])) stop("Psoop: every bound needs hi > lo")
+  for (b in bnd) if (!(b[2] > b\[1\])) stop("Psoop: every bound needs hi > lo")
   n_particles <- as.integer(n_particles)
   maxiter <- as.integer(maxiter)
   if (n_particles < 1L) stop("Psoop: n_particles must be at least 1")
@@ -48,7 +48,7 @@ Psoop <- function(f, bounds, n_particles = 20, w = 0.7, c1 = 1.5, c2 = 1.5,
 
   pos <- matrix(0, n_particles, d)
   for (i in seq_len(n_particles)) for (j in seq_len(d))
-    pos[i, j] <- bnd[[j]][1] + (bnd[[j]][2] - bnd[[j]][1]) * .s03vdc(i, primes[j])
+    pos\[i, j\] <- bnd[[j]]\[1\] + (bnd[[j]][2] - bnd[[j]]\[1\]) * .s03vdc(i, primes[j])
   vel <- matrix(0, n_particles, d)
   pbest <- pos
   pval <- vapply(seq_len(n_particles), function(i) as.numeric(f(pos[i, ])), 0)
@@ -63,11 +63,11 @@ Psoop <- function(f, bounds, n_particles = 20, w = 0.7, c1 = 1.5, c2 = 1.5,
         r1 <- .s03vdc(k, 2L)
         r2 <- .s03vdc(k, 3L)
         k <- k + 1L
-        vel[i, j] <- w * vel[i, j] + c1 * r1 * (pbest[i, j] - pos[i, j]) +
-          c2 * r2 * (gbest[j] - pos[i, j])
-        v <- pos[i, j] + vel[i, j]
-        if (v < bnd[[j]][1]) v <- bnd[[j]][1] else if (v > bnd[[j]][2]) v <- bnd[[j]][2]
-        pos[i, j] <- v
+        vel\[i, j\] <- w * vel\[i, j\] + c1 * r1 * (pbest\[i, j\] - pos\[i, j\]) +
+          c2 * r2 * (gbest[j] - pos\[i, j\])
+        v <- pos\[i, j\] + vel\[i, j\]
+        if (v < bnd[[j]]\[1\]) v <- bnd[[j]]\[1\] else if (v > bnd[[j]][2]) v <- bnd[[j]][2]
+        pos\[i, j\] <- v
       }
       val <- as.numeric(f(pos[i, ]))
       n_eval <- n_eval + 1L

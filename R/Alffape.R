@@ -32,7 +32,7 @@ Alffape <- function(frames_pred, x, frames_true, x_true, Z = 10, dclamp = 10,
       xi <- alfRinvap(frames_pred[[i]], x[j, ])
       xt <- alfRinvap(frames_true[[i]], x_true[j, ])
       dij <- sqrt(alfVn2(xi - xt) + eps)
-      d[i, j] <- dij
+      d\[i, j\] <- dij
       tot <- tot + min(dclamp, dij)
     }
   }

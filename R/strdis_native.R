@@ -17,7 +17,7 @@
 #'   2013, arXiv:1304.4657, eqs. (2.2), (3.3), Table 1, Algorithm 1.
 #'   Archived: fetched-wave3/koutra-2013-deltacon.pdf.
 #' @examples
-#' A <- matrix(0, 3, 3); A[1, 2] <- A[2, 1] <- 1; A[2, 3] <- A[3, 2] <- 1
+#' A <- matrix(0, 3, 3); A\[1, 2\] <- A[2, 1] <- 1; A[2, 3] <- A[3, 2] <- 1
 #' B <- A; B[1, 3] <- B[3, 1] <- 1
 #' Strdis(A, B)
 #' @export

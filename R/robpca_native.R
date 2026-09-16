@@ -116,7 +116,7 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
   if (is.null(h)) h <- (n + 2L) %/% 2L
   h <- as.integer(h)
   if (h < 2L || h > n)
-    stop("robpca: h must lie in [2, n] for the univariate MCD")
+    stop("robpca: h must lie in \[2, n\] for the univariate MCD")
   csum <- cumsum(c(0, v))
   csq <- cumsum(c(0, v * v))
   best_ss <- Inf

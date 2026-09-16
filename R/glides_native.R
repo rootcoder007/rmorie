@@ -133,7 +133,7 @@
 #' morie_glides_vdw(D)
 morie_glides_vdw <- function(pairs, m = 6, n = 12) {
   terms <- vapply(pairs, function(p) {
-    r <- as.numeric(p[[1]])
+    r <- as.numeric(p[\[1\]])
     if (r <= 0) return(Inf)
     q <- as.numeric(p[[2]]) / r
     as.numeric(p[[3]]) * ((as.numeric(m) / (n - m)) * .glides_ipow(q, n) -
@@ -165,7 +165,7 @@ morie_glides_coulomb <- function(pairs, dielectric = "constant",
          paste(.GLIDES_DIELECTRICS, collapse = ", "))
   if (epsilon <= 0) stop("the permittivity must be positive")
   terms <- vapply(pairs, function(p) {
-    r <- as.numeric(p[[1]])
+    r <- as.numeric(p[\[1\]])
     if (r <= 0) return(Inf)
     den <- if (dielectric == "constant") epsilon * r else epsilon * r * r
     .GLIDES_COULOMB_K * as.numeric(p[[2]]) * as.numeric(p[[3]]) / den
@@ -220,7 +220,7 @@ morie_glides_hbond <- function(bonds, weights = NULL) {
   names(by) <- .GLIDES_HBOND_CLASSES
   terms <- numeric(0)
   for (b in bonds) {
-    cl <- as.character(b[[1]])
+    cl <- as.character(b[\[1\]])
     if (!(cl %in% .GLIDES_HBOND_CLASSES))
       stop("hydrogen bond class must be one of ",
            paste(.GLIDES_HBOND_CLASSES, collapse = ", "))
@@ -342,14 +342,14 @@ morie_glides <- function(receptor, ligand_pose, radii = list(),
                          site = 0, coefficients = NULL, weights = NULL,
                          cutoff = NULL) {
   look <- function(table, key, what) {
-    for (kv in table) if (kv[[1]] == key) return(as.numeric(kv[[2]]))
+    for (kv in table) if (kv[\[1\]] == key) return(as.numeric(kv[[2]]))
     stop("no ", what, " for atom type ", key)
   }
   rec <- lapply(receptor, function(a)
-    list(xyz = c(as.numeric(a[[1]]), as.numeric(a[[2]]),
+    list(xyz = c(as.numeric(a[\[1\]]), as.numeric(a[[2]]),
                  as.numeric(a[[3]])), type = as.character(a[[4]])))
   lig <- lapply(ligand_pose, function(a)
-    list(xyz = c(as.numeric(a[[1]]), as.numeric(a[[2]]),
+    list(xyz = c(as.numeric(a[\[1\]]), as.numeric(a[[2]]),
                  as.numeric(a[[3]])), type = as.character(a[[4]])))
   lipset <- as.character(lipophilic)
 

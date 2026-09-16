@@ -49,7 +49,7 @@ Assort <- function(y = NULL, A = NULL, excess = TRUE) {
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       if (j <= i) next
-      if (Am[i, j] != 0 || Am[j, i] != 0) {
+      if (Am\[i, j\] != 0 || Am[j, i] != 0) {
         eu <- c(eu, i)
         ev <- c(ev, j)
         deg[i] <- deg[i] + 1

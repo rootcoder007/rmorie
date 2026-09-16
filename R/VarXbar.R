@@ -2,7 +2,7 @@
 
 #' Variance of the sample mean
 #'
-#' E[(xbar - mu)^2] = sigma^2 / N.
+#' E\[(xbar - mu)^2\] = sigma^2 / N.
 #'
 #' @param sigma per-observation standard deviation, >= 0.
 #' @param N sample size, >= 1.

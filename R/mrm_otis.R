@@ -178,14 +178,14 @@ mrm_otis_placement_concentration <- function(
     }
     if (grepl("to", s)) {
       m <- regmatches(s, regexpr("[0-9]+ to [0-9]+", s))
-      nums <- as.numeric(strsplit(m, " to ", fixed = TRUE)[[1]])
+      nums <- as.numeric(strsplit(m, " to ", fixed = TRUE)[\[1\]])
       return(mean(nums))
     }
     nums <- as.numeric(regmatches(s, regexpr("[0-9]+", s)))
     if (length(nums) == 0L) {
       return(NA_real_)
     }
-    nums[1]
+    nums\[1\]
   }
 
   if (!is.null(gender_col) && !is.null(gender_keep)) {
@@ -354,13 +354,13 @@ mrm_otis_mortification_cooccurrence <- function(
   names(bins) <- alert_cols
   pairs <- utils::combn(alert_cols, 2L, simplify = FALSE)
   rows <- lapply(pairs, function(p) {
-    a <- bins[[p[1]]]
+    a <- bins[[p\[1\]]]
     b <- bins[[p[2]]]
     keep <- !is.na(a) & !is.na(b)
     tbl <- table(a[keep], b[keep])
     chi <- suppressWarnings(stats::chisq.test(tbl, correct = FALSE))
     data.frame(
-      alert_a = p[1], alert_b = p[2],
+      alert_a = p\[1\], alert_b = p[2],
       n = sum(keep),
       chi2 = round(as.numeric(chi$statistic), 2),
       df = as.integer(chi$parameter),

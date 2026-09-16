@@ -225,7 +225,7 @@
       n = n,
       successes = s,
       p_hat = ci$p,
-      ci_low_wald = ci$ci[1],
+      ci_low_wald = ci$ci\[1\],
       ci_high_wald = ci$ci[2],
       stringsAsFactors = FALSE
     )
@@ -234,7 +234,7 @@
       variable = var,
       p_hat = wci$p,
       se = wci$se,
-      ci_low = wci$ci[1],
+      ci_low = wci$ci\[1\],
       ci_high = wci$ci[2],
       n_unweighted_nonmissing = wci$n,
       stringsAsFactors = FALSE
@@ -246,28 +246,28 @@
     data.frame(
       quantity = "P(cannabis_any_use=1)",
       estimate = .weighted_binary_estimate(data$cannabis_any_use, data$weight)$p,
-      ci_lower = .weighted_binary_estimate(data$cannabis_any_use, data$weight)$ci[1],
+      ci_lower = .weighted_binary_estimate(data$cannabis_any_use, data$weight)$ci\[1\],
       ci_upper = .weighted_binary_estimate(data$cannabis_any_use, data$weight)$ci[2],
       stringsAsFactors = FALSE
     ),
     data.frame(
       quantity = "P(heavy_drinking_30d=1)",
       estimate = .weighted_binary_estimate(data$heavy_drinking_30d, data$weight)$p,
-      ci_lower = .weighted_binary_estimate(data$heavy_drinking_30d, data$weight)$ci[1],
+      ci_lower = .weighted_binary_estimate(data$heavy_drinking_30d, data$weight)$ci\[1\],
       ci_upper = .weighted_binary_estimate(data$heavy_drinking_30d, data$weight)$ci[2],
       stringsAsFactors = FALSE
     ),
     data.frame(
       quantity = "P(heavy_drinking_30d=1 | cannabis_any_use=1)",
       estimate = .weighted_binary_estimate(cannabis1$heavy_drinking_30d, cannabis1$weight)$p,
-      ci_lower = .weighted_binary_estimate(cannabis1$heavy_drinking_30d, cannabis1$weight)$ci[1],
+      ci_lower = .weighted_binary_estimate(cannabis1$heavy_drinking_30d, cannabis1$weight)$ci\[1\],
       ci_upper = .weighted_binary_estimate(cannabis1$heavy_drinking_30d, cannabis1$weight)$ci[2],
       stringsAsFactors = FALSE
     ),
     data.frame(
       quantity = "P(heavy_drinking_30d=1 | cannabis_any_use=0)",
       estimate = .weighted_binary_estimate(cannabis0$heavy_drinking_30d, cannabis0$weight)$p,
-      ci_lower = .weighted_binary_estimate(cannabis0$heavy_drinking_30d, cannabis0$weight)$ci[1],
+      ci_lower = .weighted_binary_estimate(cannabis0$heavy_drinking_30d, cannabis0$weight)$ci\[1\],
       ci_upper = .weighted_binary_estimate(cannabis0$heavy_drinking_30d, cannabis0$weight)$ci[2],
       stringsAsFactors = FALSE
     )
@@ -363,7 +363,7 @@
       level = lvl,
       prev = est$p,
       se = est$se,
-      ci_lower = est$ci[1],
+      ci_lower = est$ci\[1\],
       ci_upper = est$ci[2],
       n_unweighted_nonmissing = est$n,
       stringsAsFactors = FALSE
@@ -380,7 +380,7 @@
   if (nrow(gsum) >= 2L) {
     cmb <- utils::combn(gsum$level, 2, simplify = FALSE)
     for (pair in cmb) {
-      p1 <- gsum$p[gsum$level == pair[1]]
+      p1 <- gsum$p[gsum$level == pair\[1\]]
       p2 <- gsum$p[gsum$level == pair[2]]
       h <- 2 * asin(sqrt(p1)) - 2 * asin(sqrt(p2))
       effect_rows[[length(effect_rows) + 1L]] <- data.frame(
@@ -421,7 +421,7 @@
   )
   if (nrow(gsum) >= 2L) {
     first_two <- gsum$level[1:2]
-    s1 <- data[data$gender_label == first_two[1] & !is.na(data$heavy_drinking_30d), ]
+    s1 <- data[data$gender_label == first_two\[1\] & !is.na(data$heavy_drinking_30d), ]
     s2 <- data[data$gender_label == first_two[2] & !is.na(data$heavy_drinking_30d), ]
     pt_n <- c(sum(!is.na(s1$heavy_drinking_30d)), sum(!is.na(s2$heavy_drinking_30d)))
     if (all(pt_n > 0L)) {
@@ -490,7 +490,7 @@
       beta_post = b_post,
       post_mean = post_mean,
       post_sd = post_sd,
-      ci_lower = ci[1],
+      ci_lower = ci\[1\],
       ci_upper = ci[2],
       stringsAsFactors = FALSE
     )
@@ -590,11 +590,11 @@
     list("Model 4", "+ Cannabis x Gender interaction", heavy_drinking_30d ~ age_group_label + gender_label + province_region_label + mental_health_label + cannabis_any_use + physical_health_label + cannabis_any_use:gender_label)
   )
   fits <- lapply(formulas, function(item) stats::glm(item[[3]], data = frame, family = stats::binomial(), weights = weight))
-  null_dev <- fits[[1]]$deviance
+  null_dev <- fits[\[1\]]$deviance
   summary_tbl <- do.call(rbind, lapply(seq_along(fits), function(i) {
     fit <- fits[[i]]
     data.frame(
-      model = formulas[[i]][[1]],
+      model = formulas[[i]][\[1\]],
       description = formulas[[i]][[2]],
       n_parameters = length(stats::coef(fit)),
       deviance = fit$deviance,
@@ -694,9 +694,9 @@
   var_est <- stats::var(treated$heavy_drinking_30d * treated$ipw_trimmed, na.rm = TRUE) / nrow(treated) +
     stats::var(control$heavy_drinking_30d * control$ipw_trimmed, na.rm = TRUE) / nrow(control)
   se <- sqrt(var_est)
-  ci <- .wald_ci(out$ipw_results$estimate[1], se)
+  ci <- .wald_ci(out$ipw_results$estimate\[1\], se)
   out$ipw_results$se <- se
-  out$ipw_results$ci_lower <- ci[1]
+  out$ipw_results$ci_lower <- ci\[1\]
   out$ipw_results$ci_upper <- ci[2]
   out$ipw_results <- out$ipw_results[, c("estimand", "method", "estimate", "se", "ci_lower", "ci_upper", "n")]
   out$ipw_diagnostics <- out$diagnostics
@@ -713,8 +713,8 @@
     c("heavy_drinking_30d", "cannabis_any_use", "age_group_label", "gender_label", "province_region_label", "mental_health_label", "physical_health_label", "weight")
   )
   prop_out <- .run_propensity_scores_module_internal(data)
-  ate_ipw <- prop_out$ipw_results$estimate[1]
-  se_ipw <- prop_out$ipw_results$se[1]
+  ate_ipw <- prop_out$ipw_results$estimate\[1\]
+  se_ipw <- prop_out$ipw_results$se\[1\]
 
   out_model <- stats::glm(
     .robust_formula("heavy_drinking_30d",
@@ -783,8 +783,8 @@
     ci_upper = c(NA_real_, NA_real_, NA_real_),
     stringsAsFactors = FALSE
   )
-  summary_tbl$ci_lower[1] <- ate - 1.96 * summary_tbl$se[1]
-  summary_tbl$ci_upper[1] <- ate + 1.96 * summary_tbl$se[1]
+  summary_tbl$ci_lower\[1\] <- ate - 1.96 * summary_tbl$se\[1\]
+  summary_tbl$ci_upper\[1\] <- ate + 1.96 * summary_tbl$se\[1\]
   cate_rows <- list()
   for (var in c("gender_label", "age_group_label", "province_region_label", "mental_health_label")) {
     levs <- unique(frame[[var]])
@@ -907,7 +907,7 @@
       group_level = grp,
       estimate = e1$p,
       se = e1$se,
-      ci_lower95 = e1$ci[1],
+      ci_lower95 = e1$ci\[1\],
       ci_upper95 = e1$ci[2],
       n_unweighted_nonmissing = e1$n,
       stringsAsFactors = FALSE
@@ -1013,10 +1013,10 @@
     cannabis_any_use = c(0, 1),
     stringsAsFactors = FALSE
   )
-  grid$age_group_label <- stats::na.omit(observed$age_group_label)[1]
-  grid$province_region_label <- stats::na.omit(observed$province_region_label)[1]
-  grid$mental_health_label <- stats::na.omit(observed$mental_health_label)[1]
-  grid$physical_health_label <- stats::na.omit(observed$physical_health_label)[1]
+  grid$age_group_label <- stats::na.omit(observed$age_group_label)\[1\]
+  grid$province_region_label <- stats::na.omit(observed$province_region_label)\[1\]
+  grid$mental_health_label <- stats::na.omit(observed$mental_health_label)\[1\]
+  grid$physical_health_label <- stats::na.omit(observed$physical_health_label)\[1\]
   pred <- stats::predict(int_fit, newdata = grid, type = "link", se.fit = TRUE)
   grid$pred_prob <- plogis(pred$fit)
   grid$se <- pred$se.fit * grid$pred_prob * (1 - grid$pred_prob)
@@ -1103,10 +1103,10 @@
   legacy_compare <- data.frame(
     model = c("selection_adjusted_ipw", "selection_adjusted_ipw"),
     estimand = c("ebac_legal_or", "ebac_tot_beta"),
-    estimate = c(out$ebac_final_ipw_or$or[1], out$ebac_final_ipw_linear$estimate[1]),
-    ci_lower95 = c(out$ebac_final_ipw_or$or_lower95[1], out$ebac_final_ipw_linear$ci_lower95[1]),
-    ci_upper95 = c(out$ebac_final_ipw_or$or_upper95[1], out$ebac_final_ipw_linear$ci_upper95[1]),
-    p_value = c(out$ebac_final_ipw_or$p_value[1], out$ebac_final_ipw_linear$p_value[1]),
+    estimate = c(out$ebac_final_ipw_or$or\[1\], out$ebac_final_ipw_linear$estimate\[1\]),
+    ci_lower95 = c(out$ebac_final_ipw_or$or_lower95\[1\], out$ebac_final_ipw_linear$ci_lower95\[1\]),
+    ci_upper95 = c(out$ebac_final_ipw_or$or_upper95\[1\], out$ebac_final_ipw_linear$ci_upper95\[1\]),
+    p_value = c(out$ebac_final_ipw_or$p_value\[1\], out$ebac_final_ipw_linear$p_value\[1\]),
     stringsAsFactors = FALSE
   )
   list(

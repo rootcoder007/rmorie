@@ -69,8 +69,8 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' res
 .funcal_first <- function(x) {
   if (is.null(x) || length(x) == 0) return(NULL)
-  if (is.list(x)) return(x[[1]])
-  return(x[1])
+  if (is.list(x)) return(x[\[1\]])
+  return(x\[1\])
 }
 
 #' .funcal_hit
@@ -99,10 +99,10 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
     stop("funcal: an e-value cannot be negative")
   }
   if (query_cov < 0 || query_cov > 1) {
-    stop("funcal: query_cov must be a fraction in [0, 1]")
+    stop("funcal: query_cov must be a fraction in \[0, 1\]")
   }
   if (target_cov < 0 || target_cov > 1) {
-    stop("funcal: target_cov must be a fraction in [0, 1]")
+    stop("funcal: target_cov must be a fraction in \[0, 1\]")
   }
 
   list(query = h[["query"]], target = h[["target"]], evalue = evalue,
@@ -206,7 +206,7 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
   if (!is.null(target_types)) {
     bad <- target_types[!target_types %in% ORTHOLOGY_TYPES]
     if (length(bad) > 0) {
-      stop(sprintf("funcal: unknown orthology type '%s'", bad[1]))
+      stop(sprintf("funcal: unknown orthology type '%s'", bad\[1\]))
     }
   }
   if (is.null(taxa)) taxa <- list()
@@ -254,11 +254,11 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 
       n_target <- 1
       if (length(lineage) > 0) {
-        lineage_first <- lineage[[1]]
+        lineage_first <- lineage[\[1\]]
         n_target <- sum(sapply(members, function(x) {
           x_taxa <- taxa[[x]]
           if (is.null(x_taxa) || length(x_taxa) == 0) return(FALSE)
-          identical(x_taxa[[1]], lineage_first)
+          identical(x_taxa[\[1\]], lineage_first)
         }))
       }
 
@@ -300,7 +300,7 @@ morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL
   srcs <- if (is.null(sources)) ANNOTATION_SOURCES else as.character(sources)
   bad <- srcs[!srcs %in% ANNOTATION_SOURCES]
   if (length(bad) > 0) {
-    stop(sprintf("funcal: unknown annotation source '%s'", bad[1]))
+    stop(sprintf("funcal: unknown annotation source '%s'", bad\[1\]))
   }
 
   out <- list()

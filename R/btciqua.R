@@ -18,7 +18,7 @@
 #' letting it pass for precision.
 #'
 #' @param x the sample.
-#' @param tau the quantile level in [0, 1].
+#' @param tau the quantile level in \[0, 1\].
 #' @param B number of resamples.
 #' @param alpha two-sided error rate.
 #' @param seed integer seed for the deterministic index generator.
@@ -33,7 +33,7 @@ Btciqua <- function(x, tau = 0.5, B = 999, alpha = 0.05, seed = 1) {
   n <- length(v)
   if (n == 0L) stop("boot_ci_quantile: x is empty")
   t <- as.numeric(tau)
-  if (!(t >= 0 && t <= 1)) stop("boot_ci_quantile: tau must lie in [0, 1]")
+  if (!(t >= 0 && t <= 1)) stop("boot_ci_quantile: tau must lie in \[0, 1\]")
   a <- as.numeric(alpha)
   if (!(a > 0 && a < 1)) stop("boot_ci_quantile: alpha must lie strictly between 0 and 1")
   Bn <- as.integer(B)

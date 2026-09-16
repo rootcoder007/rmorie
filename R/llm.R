@@ -287,7 +287,7 @@ morie_llm_request_completion <- function(base_url, model, messages,
 .morie_llm_extract_text <- function(data) {
   choices <- data$choices
   if (length(choices) == 0L) return("")
-  msg <- choices[[1]]$message
+  msg <- choices[\[1\]]$message
   if (is.null(msg)) "" else (msg$content %||% "")
 }
 

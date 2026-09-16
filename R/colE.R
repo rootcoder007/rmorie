@@ -87,14 +87,14 @@ ColE <- function(user, mode = "popular", R = NULL, item_features = NULL,
     scores <- numeric(ni)
     for (j in seq_len(ni)) {
       s <- 0
-      for (i in seq_len(nu)) if (i != u) s <- s + sim[i] * Rm[i, j]
+      for (i in seq_len(nu)) if (i != u) s <- s + sim[i] * Rm\[i, j\]
       scores[j] <- s / (if (tot != 0) tot else 1)
     }
   }
   order_ <- order(-scores, seq_len(ni))
   rec <- setdiff(order_, rated)
   rec <- rec[seq_len(min(as.integer(topn), length(rec)))]
-  .t1_result(estimate = if (length(rec)) scores[rec[1]] else NaN,
+  .t1_result(estimate = if (length(rec)) scores[rec\[1\]] else NaN,
              is_cold = is_cold, n_rated = length(rated), scores = scores,
              recommended = rec - 1L, mode = mode, n_users = nu,
              n_items = ni, method = "cold-start recommendation fallback")

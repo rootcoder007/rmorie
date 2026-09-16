@@ -819,7 +819,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
     conclusion = if (length(conclusion_m)) conclusion_m else NA_character_,
     sections = strsplit(text, "\
 \\s*\
-")[[1]]
+")[\[1\]]
   )
 }
 

@@ -100,7 +100,7 @@
 #' @return The value of \code{coefs}, as built in the body.
 #' @export
 .alfbnp_fit_linear <- function(clean, sigmas, draws, ridge) {
-  n <- nrow(clean[[1]])
+  n <- nrow(clean[\[1\]])
   coefs <- numeric(length(sigmas))
   di <- 0L
   for (si in seq_along(sigmas)) {
@@ -141,7 +141,7 @@
 .alfbnp_clean_list <- function(clean) {
   if (is.array(clean) && length(dim(clean)) == 3L) {
     d <- dim(clean)
-    return(lapply(seq_len(d[1]), function(i) {
+    return(lapply(seq_len(d\[1\]), function(i) {
       matrix(as.numeric(clean[i, , ]), nrow = d[2], ncol = d[3])
     }))
   }
@@ -194,7 +194,7 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
     n <- nrow(X0)
   } else if (!is.null(clean)) {
     ref <- .alfbnp_clean_list(clean)
-    n <- nrow(ref[[1]])
+    n <- nrow(ref[\[1\]])
     for (c in ref) {
       if (nrow(c) != n) {
         stop("alfbnp: the reference structures have different atom counts")
@@ -277,7 +277,7 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
   } else {
     X <- matrix(0.0, n, 3L)
     for (i in seq_len(n)) {
-      for (a in 1:3) X[i, a] <- sig[1] * z[((zi + a - 1L) %% length(z)) + 1L]
+      for (a in 1:3) X[i, a] <- sig\[1\] * z[((zi + a - 1L) %% length(z)) + 1L]
       zi <- zi + 3L
     }
   }

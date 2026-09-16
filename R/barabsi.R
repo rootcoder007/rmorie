@@ -34,7 +34,7 @@ Bamodel <- function(n, m = 2, m0 = NULL, seed = 1) {
     for (e in seq_len(m)) {
       u <- g$unif() * sum(w)
       cw <- cumsum(w)
-      pick <- which(u < cw)[1]
+      pick <- which(u < cw)\[1\]
       if (is.na(pick)) pick <- length(cand)
       targets <- c(targets, cand[pick])
       w[pick] <- 0

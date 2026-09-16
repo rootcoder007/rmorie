@@ -22,14 +22,14 @@
 Alftriat <- function(z, wq, wk, wv, wb, wg, wo, mode = "starting") {
   if (!mode %in% c("starting", "ending"))
     stop("mode must be 'starting' or 'ending'")
-  n <- dim(z)[1]
+  n <- dim(z)\[1\]
   cz <- dim(z)[3]
   nh <- length(wq)
-  cc <- nrow(wq[[1]])
+  cc <- nrow(wq[\[1\]])
   scale <- 1 / sqrt(cc)
 
   zn <- array(0, c(n, n, cz))
-  for (i in seq_len(n)) for (j in seq_len(n)) zn[i, j, ] <- alfLnorm(z[i, j, ])
+  for (i in seq_len(n)) for (j in seq_len(n)) zn\[i, j, \] <- alfLnorm(z\[i, j, \])
 
   q <- k <- v <- g <- vector("list", nh)
   b <- vector("list", nh)
@@ -40,12 +40,12 @@ Alftriat <- function(z, wq, wk, wv, wb, wg, wo, mode = "starting") {
     g[[h]] <- array(0, c(n, n, cc))
     b[[h]] <- matrix(0, n, n)
     for (i in seq_len(n)) for (j in seq_len(n)) {
-      x <- zn[i, j, ]
-      q[[h]][i, j, ] <- alfLin(x, wq[[h]])
-      k[[h]][i, j, ] <- alfLin(x, wk[[h]])
-      v[[h]][i, j, ] <- alfLin(x, wv[[h]])
-      g[[h]][i, j, ] <- alfSigm(alfLin(x, wg[[h]]))
-      b[[h]][i, j] <- alfVdot(as.numeric(wb[h, ]), x)
+      x <- zn\[i, j, \]
+      q[[h]]\[i, j, \] <- alfLin(x, wq[[h]])
+      k[[h]]\[i, j, \] <- alfLin(x, wk[[h]])
+      v[[h]]\[i, j, \] <- alfLin(x, wv[[h]])
+      g[[h]]\[i, j, \] <- alfSigm(alfLin(x, wg[[h]]))
+      b[[h]]\[i, j\] <- alfVdot(as.numeric(wb[h, ]), x)
     }
   }
 
@@ -57,9 +57,9 @@ Alftriat <- function(z, wq, wk, wv, wb, wg, wo, mode = "starting") {
       logits <- numeric(n)
       for (kk in seq_len(n)) {
         logits[kk] <- if (mode == "starting")
-          scale * alfVdot(q[[h]][i, j, ], k[[h]][i, kk, ]) + b[[h]][j, kk]
+          scale * alfVdot(q[[h]]\[i, j, \], k[[h]][i, kk, ]) + b[[h]][j, kk]
         else
-          scale * alfVdot(q[[h]][i, j, ], k[[h]][kk, j, ]) + b[[h]][kk, i]
+          scale * alfVdot(q[[h]]\[i, j, \], k[[h]][kk, j, ]) + b[[h]][kk, i]
       }
       a <- alfSmax(logits)
       attn[h, i, j, ] <- a
@@ -72,15 +72,15 @@ Alftriat <- function(z, wq, wk, wv, wb, wg, wo, mode = "starting") {
         }
         ov[t] <- tot
       }
-      o[[h]][i, j, ] <- g[[h]][i, j, ] * ov
+      o[[h]]\[i, j, \] <- g[[h]]\[i, j, \] * ov
     }
   }
 
   out <- array(0, c(n, n, cz))
   for (i in seq_len(n)) for (j in seq_len(n)) {
     cat_ <- numeric(0)
-    for (h in seq_len(nh)) cat_ <- c(cat_, o[[h]][i, j, ])
-    out[i, j, ] <- alfLin(cat_, wo)
+    for (h in seq_len(nh)) cat_ <- c(cat_, o[[h]]\[i, j, \])
+    out\[i, j, \] <- alfLin(cat_, wo)
   }
 
   list(z = out, attn = attn, estimate = mean(out), n = n, mode = mode,

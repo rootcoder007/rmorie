@@ -465,7 +465,7 @@ morie_order_statistic_laws <- function(n, F_x = NULL, t = NULL, r = NULL) {
   )
   if (!is.null(F_x)) {
     Fv <- as.numeric(F_x)
-    if (any(Fv < 0 | Fv > 1)) stop("F_x must lie in [0, 1].", call. = FALSE)
+    if (any(Fv < 0 | Fv > 1)) stop("F_x must lie in \[0, 1\].", call. = FALSE)
     out$edf_mean <- Fv
     out$edf_var <- Fv * (1 - Fv) / n
     if (n %% 2L == 1L) {
@@ -478,7 +478,7 @@ morie_order_statistic_laws <- function(n, F_x = NULL, t = NULL, r = NULL) {
   if (!is.null(t) && !is.null(r)) {
     t <- as.numeric(t)
     r <- as.integer(r)
-    if (!(t >= 0 && t <= 1)) stop("t must lie in [0, 1].", call. = FALSE)
+    if (!(t >= 0 && t <= 1)) stop("t must lie in \[0, 1\].", call. = FALSE)
     if (!(r >= 1L && r <= n)) stop("need 1 <= r <= n.", call. = FALSE)
     i <- r:n
     out$identity_lhs <- sum(choose(n, i) * t^i * (1 - t)^(n - i))

@@ -470,7 +470,7 @@ morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
 #' @references Fauzi and Maesono (2023), Eq. (2.2) and Sec. 5.3.2;
 #'   Nadaraya (1964); Azzalini, A. (1981), "A note on the estimation
 #'   of a distribution function and quantiles by a kernel method",
-#'   Biometrika 68:326-328 (reference [9] of the book).
+#'   Biometrika 68:326-328 (reference \[9\] of the book).
 #' @examples
 #' set.seed(1)
 #' morie_fauzi_kdfe(stats::rexp(200), grid = c(0.5, 1))$F_hat
@@ -868,7 +868,7 @@ morie_fauzi_b3_coefficient <- function(t, f_X, f_X_prime = NULL,
     )
   }
   if (any(sx < 0 | sx > 1)) {
-    stop("S_X must lie in [0, 1].", call. = FALSE)
+    stop("S_X must lie in \[0, 1\].", call. = FALSE)
   }
   c(
     list(t = cm$tv, b_3 = cm$gp^2 * cm$fx - cm$gpp * sx),
@@ -1080,7 +1080,7 @@ morie_fauzi_theorem_4_3 <- function(t, S_X, S_bar_X, m_X, b1,
 #' The standardised estimators are asymptotically `N(0, 1)`, and the
 #' statement holds AT the boundary as well as inside. The Lyapunov
 #' condition needs no extra assumption because `V` is bounded in
-#' `[0, 1]`, so every moment exists automatically.
+#' `\[0, 1\]`, so every moment exists automatically.
 #'
 #' @param mrl_hat estimated mean residual life.
 #' @param mrl_true the value under the null.
@@ -1105,7 +1105,7 @@ morie_fauzi_theorem_4_4 <- function(mrl_hat, mrl_true, variance) {
     z = z, p_two_sided = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
     holds_for = "both m_tilde_{X,1} and m_tilde_{X,2}",
     why_lyapunov_works = paste(
-      "V is bounded in [0, 1], so every moment",
+      "V is bounded in \[0, 1\], so every moment",
       "exists automatically and the Lyapunov",
       "condition needs no extra assumption"
     ),

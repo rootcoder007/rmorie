@@ -21,19 +21,19 @@
 #' Radj(20, 2, r2 = 0.8)$radj
 #' @export
 Radj <- function(n, p, r2 = NULL, rss = NULL, ssy = NULL) {
-  n <- as.integer(n)[1]
-  p <- as.integer(p)[1]
+  n <- as.integer(n)\[1\]
+  p <- as.integer(p)\[1\]
   if (is.na(p) || p < 0L) stop("p must be non-negative")
   if (is.na(n) || n - (p + 1L) < 1L) stop("n - (p + 1) must be at least 1")
   if (is.null(r2)) {
     if (is.null(rss) || is.null(ssy)) stop("supply either r2, or both rss and ssy")
-    rss <- as.numeric(rss)[1]
-    ssy <- as.numeric(ssy)[1]
+    rss <- as.numeric(rss)\[1\]
+    ssy <- as.numeric(ssy)\[1\]
     if (!is.finite(rss) || rss < 0) stop("rss must be finite and non-negative")
     if (!is.finite(ssy) || ssy <= 0) stop("ssy must be finite and positive")
     r2 <- 1 - rss / ssy
   } else {
-    r2 <- as.numeric(r2)[1]
+    r2 <- as.numeric(r2)\[1\]
     if (!is.finite(r2)) stop("r2 must be finite")
   }
   val <- 1 - (n - 1) / (n - (p + 1)) * (1 - r2)

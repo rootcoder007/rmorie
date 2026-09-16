@@ -41,7 +41,7 @@
   }
   out <- rep(1, 4)
   for (ch in node) {
-    Lc <- .felsen_prune(ch[[1]], site, pi)
+    Lc <- .felsen_prune(ch[\[1\]], site, pi)
     P <- .felsen_pij(as.numeric(ch[[2]]), pi)
     out <- out * as.numeric(P %*% Lc)
   }

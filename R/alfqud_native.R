@@ -59,7 +59,7 @@
 #' @return Nothing; this branch always raises.
 #' @export
 .alfqud_read <- function(st, loc) {
-  bank <- loc[[1]]
+  bank <- loc[\[1\]]
   idx <- as.integer(loc[[2]])
   if (identical(bank, "M")) {
     if (idx < 0L || idx >= length(st$mem)) {
@@ -88,7 +88,7 @@
 #' @return The value of \code{st}, as built in the body.
 #' @export
 .alfqud_write <- function(st, loc, v) {
-  bank <- loc[[1]]
+  bank <- loc[\[1\]]
   idx <- as.integer(loc[[2]])
   if (identical(bank, "M")) {
     if (idx < 0L || idx >= length(st$mem)) {
@@ -123,7 +123,7 @@
 #' @return The state after the instruction.
 #' @export
 morie_alfqud_step <- function(st, instr) {
-  op <- instr[[1]]
+  op <- instr[\[1\]]
   if (!(op %in% .alfqud_ops)) stop("unknown instruction: ", op)
   a <- instr[[2]]
   b <- instr[[3]]
@@ -224,7 +224,7 @@ morie_alfqud_actions <- function(n_mem, n_reg) {
   for (op in .alfqud_ops) {
     for (a in locs) {
       for (b in locs) {
-        if (identical(a[[1]], b[[1]]) && a[[2]] == b[[2]]) next
+        if (identical(a[\[1\]], b[\[1\]]) && a[[2]] == b[[2]]) next
         out[[length(out) + 1L]] <- list(op, a, b)
       }
     }
@@ -252,8 +252,8 @@ morie_alfqud_text <- function(program) {
   paste(
     vapply(program, function(i) {
       sprintf(
-        "%s %s%d %s%d", i[[1]], i[[2]][[1]], as.integer(i[[2]][[2]]),
-        i[[3]][[1]], as.integer(i[[3]][[2]])
+        "%s %s%d %s%d", i[\[1\]], i[[2]][\[1\]], as.integer(i[[2]][[2]]),
+        i[[3]][\[1\]], as.integer(i[[3]][[2]])
       )
     }, character(1)),
     collapse = "\n"
@@ -304,7 +304,7 @@ morie_alfqud_text <- function(program) {
 .alfqud_bfs <- function(inputs, targets, acts, n_reg, max_len, lw, rf) {
   best <- list()
   z <- .alfqud_score(list(), inputs, targets, n_reg, lw, rf)
-  best_s <- z[1]
+  best_s <- z\[1\]
   best_c <- z[2]
   frontier <- list(list())
   seen <- 1L
@@ -315,8 +315,8 @@ morie_alfqud_text <- function(program) {
         cand <- c(prog, list(act))
         seen <- seen + 1L
         z <- .alfqud_score(cand, inputs, targets, n_reg, lw, rf)
-        if (z[1] > best_s) {
-          best_s <- z[1]
+        if (z\[1\] > best_s) {
+          best_s <- z\[1\]
           best_c <- z[2]
           best <- cand
         }
@@ -363,7 +363,7 @@ morie_alfqud_text <- function(program) {
   key <- function(v) paste0("k", paste(v, collapse = ","))
   best <- list()
   z <- .alfqud_score(list(), inputs, targets, n_reg, lw, rf)
-  best_s <- z[1]
+  best_s <- z\[1\]
   best_c <- z[2]
   nodes <- 0L
   for (it in seq_len(as.integer(n_sim))) {
@@ -398,14 +398,14 @@ morie_alfqud_text <- function(program) {
     }
     prog <- if (!length(node)) list() else lapply(node, function(k) acts[[k]])
     z <- .alfqud_score(prog, inputs, targets, n_reg, lw, rf)
-    if (z[1] > best_s) {
-      best_s <- z[1]
+    if (z\[1\] > best_s) {
+      best_s <- z\[1\]
       best_c <- z[2]
       best <- prog
     }
     v <- if (full > 0) z[2] / full else 0
     for (pp in path) {
-      kk <- pp[[1]]
+      kk <- pp[\[1\]]
       ii <- pp[[2]]
       nv <- get(kk, envir = N)
       nv[ii] <- nv[ii] + 1
@@ -455,7 +455,7 @@ morie_alfqud <- function(target, action_space = NULL, reward_fn = NULL,
       "from any other program"
     )
   }
-  n_mem <- length(inputs[[1]])
+  n_mem <- length(inputs[\[1\]])
   for (x in inputs) {
     if (length(x) != n_mem) {
       stop("every test input must be the same length")

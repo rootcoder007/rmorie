@@ -7,7 +7,7 @@
 #' one against n.  Recovering a slope of one is the whole content of the
 #' section -- a nonparametric prior paying no price on a parametric truth.
 #'
-#' Formula: K-hat = argmax_K [log m_K(y) - lam K log n];
+#' Formula: K-hat = argmax_K \[log m_K(y) - lam K log n\];
 #'   risk = K-hat/(n + 1) + sum_\{k=K-hat\}^\{d-1\} theta_k^2.
 #'
 #' @param d_true Dimension of the true submodel.
@@ -39,8 +39,8 @@ Ghosalparamrate <- function(d_true = 2, ns = c(100, 1000, 10000),
   }
   if (any(risks <= 0))
     stop("risk is zero at some n; the log-log slope is undefined")
-  rate_hat <- log(risks[1] / risks[length(risks)]) /
-    log(ns[length(ns)] / ns[1])
+  rate_hat <- log(risks\[1\] / risks[length(risks)]) /
+    log(ns[length(ns)] / ns\[1\])
   .t1_result(estimate = rate_hat,
              risk_by_n = risks,
              parametric = abs(rate_hat - 1) < 0.25,

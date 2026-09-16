@@ -447,10 +447,10 @@ Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
   cost <- function(Tm) {
     tot <- 0
     for (i in seq_len(n)) for (k in seq_len(m)) {
-      if (Tm[i, k] == 0) next
+      if (Tm\[i, k\] == 0) next
       for (j in seq_len(n)) {
-        e <- X[i, j] - Y[k, ]
-        tot <- tot + sum(e * e * Tm[i, k] * Tm[j, ])
+        e <- X\[i, j\] - Y[k, ]
+        tot <- tot + sum(e * e * Tm\[i, k\] * Tm[j, ])
       }
     }
     tot
@@ -460,10 +460,10 @@ Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
     for (i in seq_len(n)) for (k in seq_len(m)) {
       s <- 0
       for (j in seq_len(n)) {
-        e <- X[i, j] - Y[k, ]
+        e <- X\[i, j\] - Y[k, ]
         s <- s + sum(e * e * Tm[j, ])
       }
-      G[i, k] <- 2 * s
+      G\[i, k\] <- 2 * s
     }
     G
   }
@@ -555,7 +555,7 @@ morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
     if (p == 1L) S <- matrix(S, 1, 1)
     for (i in seq_len(n)) {
       for (j in seq_len(p)) {
-        if (!cens[i, j]) next
+        if (!cens\[i, j\]) next
         obs <- setdiff(seq_len(p), j)
         psi <- log(dlv[j] / W[i, d])
         if (length(obs) > 0L) {
@@ -578,7 +578,7 @@ morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
           u <- Dm[(t - 1L) %% nrow(Dm) + 1L, (i - 1L) %% ncol(Dm) + 1L]
           zj <- min(cm + sdv * u, psi)
         }
-        Z[i, j] <- zj
+        Z\[i, j\] <- zj
         W[i, ] <- morie_unclr_alr_inv(Z[i, ], totals[i])
       }
     }
@@ -795,9 +795,9 @@ Shedcurve <- function(days, load, t_peak, t_plateau) {
   dec <- which(d > tq)
   sr <- slope(rise)
   sd_ <- slope(dec)
-  list(rise_slope = sr[1], rise_intercept = sr[2],
+  list(rise_slope = sr\[1\], rise_intercept = sr[2],
        plateau_level = if (length(plat)) mean(y[plat]) else NaN,
-       decay_slope = sd_[1], decay_intercept = sd_[2],
+       decay_slope = sd_\[1\], decay_intercept = sd_[2],
        peak_load = max(y), peak_day = d[which.max(y)],
        n = length(d), n_rise = length(rise), n_plateau = length(plat),
        n_decay = length(dec))
@@ -829,7 +829,7 @@ Cvtmle <- function(y, a, q0, q1, g, fold, n_newton = 50) {
   n <- length(yv)
   if (!all(c(length(av), length(g0), length(g1), length(gv), length(fv)) == n))
     stop("all inputs must have the same length")
-  if (any(yv < 0 | yv > 1)) stop("y must be bounded in [0, 1]")
+  if (any(yv < 0 | yv > 1)) stop("y must be bounded in \[0, 1\]")
   if (any(gv <= 0 | gv >= 1)) stop("propensities must lie strictly inside (0, 1)")
   lg <- function(p) { p <- pmin(pmax(p, 1e-12), 1 - 1e-12)
   log(p / (1 - p)) }
@@ -907,7 +907,7 @@ Xlearn <- function(tau1, tau0, g) {
   gv <- as.numeric(g)
   if (!(length(t1) == length(t0) && length(t0) == length(gv)))
     stop("tau1, tau0 and g must have the same length")
-  if (any(gv < 0 | gv > 1)) stop("propensities must lie in [0, 1]")
+  if (any(gv < 0 | gv > 1)) stop("propensities must lie in \[0, 1\]")
   tau <- gv * t0 + (1 - gv) * t1
   n <- length(tau)
   list(tau = tau, ate = mean(tau),
@@ -1045,7 +1045,7 @@ Lgcnprop <- function(A, E, K, alpha = NULL) {
   if (length(w) != K + 1L)
     stop("alpha must give one weight per layer including layer 0")
   cur <- as.matrix(E)
-  acc <- w[1] * cur
+  acc <- w\[1\] * cur
   for (k in seq_len(K)) {
     cur <- S %*% cur
     acc <- acc + w[k + 1L] * cur
@@ -1146,7 +1146,7 @@ Serdecomp <- function(x, kernel) {
   if (kk < 1L || kk %% 2L == 0L) stop("kernel must be a positive odd integer")
   if (kk > n) stop("kernel must not exceed the series length")
   h <- kk %/% 2L
-  pad <- c(rep(xv[1], h), xv, rep(xv[n], h))
+  pad <- c(rep(xv\[1\], h), xv, rep(xv[n], h))
   trend <- vapply(seq_len(n), function(i) mean(pad[i:(i + kk - 1L)]), numeric(1))
   seas <- xv - trend
   m <- mean(seas)

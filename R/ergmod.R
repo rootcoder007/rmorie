@@ -51,8 +51,8 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
     vapply(names, function(nm) {
       if (nm == "edges") 1
       else if (nm == "twostar") {
-        di <- sum(A[i, ]) - A[i, j]
-        dj <- sum(A[j, ]) - A[i, j]
+        di <- sum(A[i, ]) - A\[i, j\]
+        dj <- sum(A[j, ]) - A\[i, j\]
         di + dj
       } else {
         kk <- setdiff(seq_len(n), c(i, j))
@@ -68,7 +68,7 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
   for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n) {
     d <- d + 1L
     X[d, ] <- .chg(i, j)
-    yv[d] <- A[i, j]
+    yv[d] <- A\[i, j\]
   }
   th <- if (is.null(theta_init)) numeric(p) else as.numeric(theta_init)
   if (length(th) != p) stop("theta_init must have one entry per statistic")
@@ -122,12 +122,12 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
       else {
         t <- 0
         for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n)
-          if (A[i, j] == 1 && j < n)
+          if (A\[i, j\] == 1 && j < n)
             t <- t + sum(A[i, (j + 1L):n] == 1 & A[j, (j + 1L):n] == 1)
         t
       }
   }
-  .t1_result(estimate = th[1], theta = th, se = se, observed_stats = obs,
+  .t1_result(estimate = th\[1\], theta = th, se = se, observed_stats = obs,
              pseudo_loglik = ll, n_dyads = nd, iters_used = used, n = n,
              method = "Exponential random graph model (MPLE)")
 }

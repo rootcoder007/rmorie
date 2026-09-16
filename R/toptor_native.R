@@ -29,7 +29,7 @@
   adj <- vector("list", n_atoms)
   for (i in seq_len(n_atoms)) adj[[i]] <- integer(0)
   for (b in bonds) {
-    i <- as.integer(b[[1]])
+    i <- as.integer(b[\[1\]])
     j <- as.integer(b[[2]])
     if (i == j) stop("toptor: a bond from an atom to itself")
     if (!(i >= 0 && i < n_atoms && j >= 0 && j < n_atoms))
@@ -55,7 +55,7 @@
   for (b in bonds) {
     order <- if (length(b) >= 3L) as.numeric(b[[3]]) else 1
     if (order < 1) stop("toptor: bond order below 1")
-    npi[as.integer(b[[1]]) + 1L] <- npi[as.integer(b[[1]]) + 1L] +
+    npi[as.integer(b[\[1\]]) + 1L] <- npi[as.integer(b[\[1\]]) + 1L] +
       order - 1
     npi[as.integer(b[[2]]) + 1L] <- npi[as.integer(b[[2]]) + 1L] +
       order - 1
@@ -121,7 +121,7 @@ topological_torsions <- function(elements, bonds, common_types = NULL) {
 #'
 #' @param t1 First torsion dictionary (or iterable of codes).
 #' @param t2 Second torsion dictionary (or iterable of codes).
-#' @return Scalar similarity in [0, 1].
+#' @return Scalar similarity in \[0, 1\].
 #' @references Nilakantan, R. et al. (1987).
 #' @export
 #' @examples
@@ -167,7 +167,7 @@ torsion_similarity <- function(t1, t2) {
     vec <- numeric(length(keys))
     for (i in seq_len(n)) {
       w <- a[order[i]] - mean_a
-      for (j in seq_along(keys)) vec[j] <- vec[j] + w * S[i, j]
+      for (j in seq_along(keys)) vec[j] <- vec[j] + w * S\[i, j\]
     }
     vec / n
   }
@@ -218,8 +218,8 @@ morie_toptor <- function(elements, bonds, reference = NULL,
                           common_types = NULL, activities = NULL,
                           permutations = 40, seed = 0) {
   many <- length(elements) > 0L &&
-    (is.list(elements[[1]]) || is.list(elements[[1]]) ||
-     inherits(elements[[1]], "list"))
+    (is.list(elements[\[1\]]) || is.list(elements[\[1\]]) ||
+     inherits(elements[\[1\]], "list"))
   if (many) {
     mols <- mapply(function(e, b) list(list(as.character(e)),
                                        as.list(b)),
@@ -230,22 +230,22 @@ morie_toptor <- function(elements, bonds, reference = NULL,
     mols <- list(list(as.character(elements), as.list(bonds)))
   }
   tors <- lapply(mols, function(m)
-    topological_torsions(m[[1]], m[[2]], common_types))
-  out <- list(estimate = if (many) tors else tors[[1]],
-              torsions = if (many) tors else tors[[1]],
+    topological_torsions(m[\[1\]], m[[2]], common_types))
+  out <- list(estimate = if (many) tors else tors[\[1\]],
+              torsions = if (many) tors else tors[\[1\]],
               n_distinct = if (many) vapply(tors, length, integer(1))
-                            else length(tors[[1]]),
+                            else length(tors[\[1\]]),
               n_total = if (many) vapply(tors, function(t) sum(unlist(t)),
                                           integer(1))
-                         else sum(unlist(tors[[1]])),
+                         else sum(unlist(tors[\[1\]])),
               method = "topological torsion descriptors (Nilakantan et al. 1987)")
   if (!is.null(reference)) {
-    ref <- topological_torsions(reference[[1]], reference[[2]],
+    ref <- topological_torsions(reference[\[1\]], reference[[2]],
                                  common_types)
     sims <- vapply(tors, function(t) torsion_similarity(ref, t),
                     numeric(1))
     out$reference_torsions <- ref
-    out$similarity <- if (many) sims else sims[1]
+    out$similarity <- if (many) sims else sims\[1\]
     out$ranking <- order(-sims) - 1L
   }
   if (!is.null(activities))

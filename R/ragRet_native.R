@@ -100,7 +100,7 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
     cent[[k]] <- D[[j]]
   }
   assign <- integer(n)
-  d <- length(D[[1]])
+  d <- length(D[\[1\]])
   for (it in seq_len(as.integer(iters))) {
     for (j in seq_len(n)) {
       best <- 1L
@@ -229,7 +229,7 @@ morie_ragRet_marginalise <- function(doc.scores, token.probs,
                 note = "ONE document conditions the whole output"))
   }
   if (mode == "token") {
-    n.tok <- length(T[[1]])
+    n.tok <- length(T[\[1\]])
     if (any(lengths(T) != n.tok))
       stop("ragRet: the token distributions differ in length")
     per.tok <- vapply(seq_len(n.tok), function(t)

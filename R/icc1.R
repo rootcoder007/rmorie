@@ -39,7 +39,7 @@ Icc1 <- function(y, cluster) {
   for (i in seq_len(n)) {
     s <- 0
     for (j in seq_len(k)) {
-      e <- rows[i, j]
+      e <- rows\[i, j\]
       s <- s + e
       tot <- tot + e
       tot2 <- tot2 + e * e

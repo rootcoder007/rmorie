@@ -35,7 +35,7 @@
 morie_mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
   hw <- as.numeric(h_w)
   if (is.null(A)) {
-    e <- if (is.list(e_vw) || length(e_vw) > 1L) as.numeric(e_vw)[1]
+    e <- if (is.list(e_vw) || length(e_vw) > 1L) as.numeric(e_vw)\[1\]
          else as.numeric(e_vw)
     return(e * hw)
   }
@@ -179,8 +179,8 @@ morie_mpfn_is_permutation_invariant <- function(H, adj, edge_features,
   }
   efp <- list()
   for (nm in names(edge_features)) {
-    ij <- as.integer(strsplit(nm, "_")[[1]])
-    efp[[paste0(perm[ij[1] + 1L] + 1L, "_",
+    ij <- as.integer(strsplit(nm, "_")[\[1\]])
+    efp[[paste0(perm[ij\[1\] + 1L] + 1L, "_",
                 perm[ij[2] + 1L] + 1L)]] <- edge_features[[nm]]
   }
   other <- morie_mpfn_readout(morie_mpfn_message_passing(Hp, adjp, efp, T),

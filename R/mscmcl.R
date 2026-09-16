@@ -77,7 +77,7 @@ Mscmcl <- function(y, D, lam, max_iter = 500, tol = 1e-10) {
   d <- svd(L, nu = 0, nv = 0)$d
   tau <- as.numeric(t(Y - L))[as.logical(t(W))]
   att <- sum(tau) / n_treated
-  eps <- 1e-10 * (if (length(d)) d[1] else 1)
+  eps <- 1e-10 * (if (length(d)) d\[1\] else 1)
   .t1_result(estimate = att, att = att, L = L, tau = tau,
              n_treated = n_treated, n_observed = n_obs,
              rank = sum(d > eps), nuclear = sum(d),

@@ -284,8 +284,8 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
 
   for (i in seq_len(h)) {
     for (j in seq_len(w)) {
-      if (lab[i, j] > 0) {
-        out[i, j] <- 1.0
+      if (lab\[i, j\] > 0) {
+        out\[i, j\] <- 1.0
         next
       }
       ds <- numeric(0)
@@ -298,9 +298,9 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
       }
       ds <- sort(ds)
       if (length(ds) >= 2L) {
-        out[i, j] <- 1.0 + w0 * exp(-(ds[1] + ds[2])^2 / (2.0 * sigma^2))
+        out\[i, j\] <- 1.0 + w0 * exp(-(ds\[1\] + ds[2])^2 / (2.0 * sigma^2))
       } else {
-        out[i, j] <- 1.0
+        out\[i, j\] <- 1.0
       }
     }
   }

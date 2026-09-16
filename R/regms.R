@@ -54,8 +54,8 @@ morie_regime_switching <- function(x, k_regimes = 2) {
     alpha <- matrix(0, n, k_regimes)
     cv <- numeric(n)
     alpha[1, ] <- pi * emit[1, ]
-    cv[1] <- sum(alpha[1, ])
-    alpha[1, ] <- alpha[1, ] / cv[1]
+    cv\[1\] <- sum(alpha[1, ])
+    alpha[1, ] <- alpha[1, ] / cv\[1\]
     for (t in 2:n) {
       alpha[t, ] <- (alpha[t - 1, ] %*% P) * emit[t, ]
       cv[t] <- sum(alpha[t, ])

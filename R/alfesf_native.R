@@ -274,7 +274,7 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
     if (any(obs < 0.0 | obs > 100.0)) {
       stop(sprintf(
         "alfesf: lddt must be on 0..100, got %g",
-        obs[which(obs < 0.0 | obs > 100.0)[1]]
+        obs[which(obs < 0.0 | obs > 100.0)\[1\]]
       ))
     }
     y <- pmin(
@@ -379,7 +379,7 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
     pae <- matrix(0.0, n, n)
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        pae[i, j] <- sum(Pp[(i - 1L) * n + j, ] * cen)
+        pae\[i, j\] <- sum(Pp[(i - 1L) * n + j, ] * cen)
       }
     }
     d0 <- .alfesf_d0(n)

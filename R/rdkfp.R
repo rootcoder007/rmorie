@@ -200,7 +200,7 @@ Rdkfp <- function(adjacency, atomnum, aromatic = NULL, nbits = 2048,
       bh <- c(sort(bh, method = "radix"), length(ats))
       seed <- 0
       for (v in bh) seed <- .ecfp_mix(seed, v)
-    } else seed <- bh[1]
+    } else seed <- bh\[1\]
     feats <- c(feats, seed)
     b <- seed %% nbits
     bits[b + 1L] <- 1L

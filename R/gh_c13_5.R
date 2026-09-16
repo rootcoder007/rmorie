@@ -8,7 +8,7 @@
 #' That cancellation is what the quadrature here confirms.
 #'
 #' Formula: int_0^1 u nu(du) = int_0^1 c (1 - u)^(c-1) du = 1,
-#'   so the expected mass on [0, t_max] is H0(t_max) = t_max.
+#'   so the expected mass on \[0, t_max\] is H0(t_max) = t_max.
 #'
 #' @param c Concentration, positive.
 #' @param t_max Upper time limit, with H0(t) = t.

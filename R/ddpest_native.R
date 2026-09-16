@@ -87,7 +87,7 @@ morie_ddpest_dependence_kind <- function(kind) {
     independent = list("everything, separately",
                        "no strength is borrowed at all"))
   row <- table[[kind]]
-  list(kind = kind, varies_with_x = row[[1]], effect = row[[2]])
+  list(kind = kind, varies_with_x = row[\[1\]], effect = row[[2]])
 }
 
 #' Common weights, atoms moving with x

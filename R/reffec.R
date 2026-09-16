@@ -15,7 +15,7 @@
 #' Formula: \code{Rt = R0 S / N}; growing iff \code{Rt > 1}.
 #'
 #' @param R0 Basic reproduction number, non-negative.
-#' @param S Current susceptible count in [0, N].
+#' @param S Current susceptible count in \[0, N\].
 #' @param N Population size, positive.
 #' @return List with \code{estimate}, \code{Rt}, \code{growing},
 #'   \code{susceptible_fraction}, \code{herd_immunity_threshold}.
@@ -33,7 +33,7 @@ Reffec <- function(R0, S, N) {
   N <- as.numeric(N)
   if (R0 < 0) stop("Reffec: R0 must be non-negative")
   if (N <= 0) stop("Reffec: N must be positive")
-  if (S < 0 || S > N) stop("Reffec: S must lie in [0, N]")
+  if (S < 0 || S > N) stop("Reffec: S must lie in \[0, N\]")
   frac <- S / N
   rt <- R0 * frac
   .t1_result(estimate = rt, Rt = rt, growing = if (rt > 1) 1 else 0,

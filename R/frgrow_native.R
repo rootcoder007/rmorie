@@ -230,7 +230,7 @@ morie_frgrow_metrics <- function(kd, hac, logp = NULL, mw = NULL,
 morie_frgrow <- function(fragment, linker_lib, route = "rt",
                          temperature = .FRGROW_T_STANDARD) {
   unpack <- function(row) {
-    kd <- as.numeric(row[[1]])
+    kd <- as.numeric(row[\[1\]])
     hac <- as.numeric(row[[2]])
     lp <- if (length(row) < 3L || is.null(row[[3]])) NULL
           else as.numeric(row[[3]])
@@ -269,7 +269,7 @@ morie_frgrow <- function(fragment, linker_lib, route = "rt",
   improved <- if (n)
     which(vapply(rows, function(r) isTRUE(r$improved), logical(1))) - 1L
     else integer(0)
-  best <- if (n) order_idx[1] else -1L
+  best <- if (n) order_idx\[1\] else -1L
   pull <- function(f) if (n) vapply(rows, f, numeric(1)) else numeric(0)
   pull_opt <- function(nm) {
     if (!n) return(numeric(0))

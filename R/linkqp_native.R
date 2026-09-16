@@ -35,7 +35,7 @@
 #'   parameters (a, b, c) on each scale; use c = 0 for 2PL.
 #' @param symmetric Minimize F1 + F2 instead of F1 only.
 #' @param theta_points Optional evaluation grid (default 41 points on
-#'   [-4, 4]).
+#'   \[-4, 4\]).
 #' @return A list with elements \code{A}, \code{B}, \code{criterion},
 #'   \code{symmetric}, \code{n_common}, \code{method}.
 #' @references Stocking, M. L. and Lord, F. M. (1983). Developing a
@@ -59,7 +59,7 @@ morie_linkqp <- function(items_from, items_to, symmetric = FALSE,
     as.numeric(theta_points)
   l_norm <- length(grid)
   crit <- function(x) {
-    A <- x[1]
+    A <- x\[1\]
     B <- x[2]
     if (A <= 0) return(1e10)
     f1 <- 0
@@ -84,7 +84,7 @@ morie_linkqp <- function(items_from, items_to, symmetric = FALSE,
   }
   res <- stats::optim(c(1, 0), crit, method = "Nelder-Mead",
                       control = list(reltol = 1e-14, maxit = 5000))
-  list(A = res$par[1], B = res$par[2],
+  list(A = res$par\[1\], B = res$par[2],
        criterion = res$value,
        symmetric = symmetric,
        n_common = s,

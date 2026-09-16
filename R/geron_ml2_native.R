@@ -713,7 +713,7 @@ morie_geron_ridge_normal <- function(X, y, alpha, intercept_index = 0) {
 #' L1 (Lasso) penalty, subgradient and prox (Geron Ch 4, morie.fn hml1r)
 #'
 #' `skip_bias` zeroes the mask at the FIRST element of the row-major
-#' flattening, which for a matrix `theta` is entry [1, 1].
+#' flattening, which for a matrix `theta` is entry \[1, 1\].
 #'
 #' @param theta Coefficients.
 #' @param alpha Non-negative penalty.
@@ -2126,7 +2126,7 @@ morie_geron_voting_hard <- function(models, X, y_true = NULL) {
 
 #' Sinusoidal positional encoding (Geron Ch 16, morie.fn hmpe)
 #'
-#' PE[p, 2i] = sin(p / base^(2i/d)), PE[p, 2i+1] = cos(...). The
+#' PE\[p, 2i\] = sin(p / base^(2i/d)), PE\[p, 2i+1\] = cos(...). The
 #' `rotation_check` field is the max error of expressing PE(p + 1) as
 #' a fixed rotation of PE(p) -- the property that lets the encoding
 #' extrapolate past the training length. It should be ~1e-16.
@@ -2285,7 +2285,7 @@ morie_geron_value_function <- function(s, pi, gamma, P = NULL, R = NULL) {
 #' @param V Value table.
 #' @param s,r,s_next Equal-length transitions.
 #' @param alpha In (0, 1].
-#' @param gamma In [0, 1].
+#' @param gamma In \[0, 1\].
 #' @param terminal Optional logical vector; TRUE drops the bootstrap.
 #' @return List with `V`, `td_error`, `target`, `updates`, `alpha`,
 #'   `gamma`, `estimate`, `n`.
@@ -2315,7 +2315,7 @@ morie_geron_td_learning <- function(V, s, r, s_next, alpha = 0.1,
   a <- as.numeric(alpha)
   g <- as.numeric(gamma)
   .morie_gr_need(a > 0 && a <= 1, "geron_td_learning: alpha must lie in (0, 1]")
-  .morie_gr_need(g >= 0 && g <= 1, "geron_td_learning: gamma must lie in [0, 1]")
+  .morie_gr_need(g >= 0 && g <= 1, "geron_td_learning: gamma must lie in \[0, 1\]")
   term <- if (is.null(terminal)) rep(FALSE, length(sa)) else as.logical(terminal)
   .morie_gr_need(
     length(term) == length(sa),
@@ -2347,7 +2347,7 @@ morie_geron_td_learning <- function(V, s, r, s_next, alpha = 0.1,
 #' @param r Reward.
 #' @param s_next 0-based next state.
 #' @param alpha In (0, 1].
-#' @param gamma In [0, 1].
+#' @param gamma In \[0, 1\].
 #' @param done Terminal.
 #' @return List with `Q`, `td_error`, `target`, `old_value`,
 #'   `new_value`, `max_next`, `estimate`, `n`.
@@ -2368,7 +2368,7 @@ morie_geron_q_learning <- function(Q, s, a, r, s_next, alpha, gamma,
   al <- as.numeric(alpha)
   ga <- as.numeric(gamma)
   .morie_gr_need(al > 0 && al <= 1, "geron_q_learning: alpha must lie in (0, 1]")
-  .morie_gr_need(ga >= 0 && ga <= 1, "geron_q_learning: gamma must lie in [0, 1]")
+  .morie_gr_need(ga >= 0 && ga <= 1, "geron_q_learning: gamma must lie in \[0, 1\]")
   rr <- as.numeric(r)
   .morie_gr_need(is.finite(rr), "geron_q_learning: r must be finite")
   if (isTRUE(done)) {
@@ -2400,7 +2400,7 @@ morie_geron_q_learning <- function(Q, s, a, r, s_next, alpha, gamma,
 #'
 #' @param trajectory Numeric rewards, or a list of (state, action,
 #'   reward) triples.
-#' @param gamma Discount in [0, 1].
+#' @param gamma Discount in \[0, 1\].
 #' @param lam Trace decay; default gamma.
 #' @param normalize Standardise the returns.
 #' @return List with `returns`, `raw_returns`, `rewards`,
@@ -2426,9 +2426,9 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
     "geron_credit_assignment: trajectory contains non-finite rewards"
   )
   g <- as.numeric(gamma)
-  .morie_gr_need(g >= 0 && g <= 1, "geron_credit_assignment: gamma must lie in [0, 1]")
+  .morie_gr_need(g >= 0 && g <= 1, "geron_credit_assignment: gamma must lie in \[0, 1\]")
   l <- if (is.null(lam)) g else as.numeric(lam)
-  .morie_gr_need(l >= 0 && l <= 1, "geron_credit_assignment: lam must lie in [0, 1]")
+  .morie_gr_need(l >= 0 && l <= 1, "geron_credit_assignment: lam must lie in \[0, 1\]")
   T_ <- length(rewards)
   ret <- numeric(T_)
   acc <- 0
@@ -3089,7 +3089,7 @@ morie_geron_confusion_matrix_labeled <- function(y_true, y_pred,
     support = base$support, predicted_totals = as.integer(colSums(cm)),
     macro_f1 = base$macro_f1, n_classes = K,
     estimate = base$accuracy, n = length(yt),
-    method = "confusion matrix C[i,j] = count(actual i, predicted j); counting delegated to grcfm"
+    method = "confusion matrix C\[i,j\] = count(actual i, predicted j); counting delegated to grcfm"
   )
 }
 
@@ -3203,7 +3203,7 @@ morie_geron_clip <- function(images, texts, tau = 0.07, normalize = TRUE,
 
 #' Classification + localization head (Geron Ch 14, morie.fn hmclc)
 #'
-#' The model returns [class scores..., x, y, w, h] per image. One head
+#' The model returns \[class scores..., x, y, w, h\] per image. One head
 #' is scored in nats and the other in squared pixels, so `alpha` is
 #' what makes the two comparable. Boxes are centre-form and converted
 #' to corners for the IoU.
@@ -3795,7 +3795,7 @@ morie_geron_conv_autoencoder_trained <- function(X, filters = 2, epochs = 100,
       for (j in seq_len(pw)) {
         out[((i - 1L) * P + 1L):(i * P), ((j - 1L) * P + 1L):(j * P)] <-
           t(matrix(recon[row, ], nrow = P, ncol = P))
-        for (f in seq_len(F_)) cgrid[[f]][i, j] <- code[row, f]
+        for (f in seq_len(F_)) cgrid[[f]]\[i, j\] <- code[row, f]
         row <- row + 1L
       }
     }

@@ -85,7 +85,7 @@
   cm <- .bnd_cellmeans(yv, dv)
   a1 <- .bnd_wc_arm(cm$m1, cm$p1, lo, hi)
   a0 <- .bnd_wc_arm(cm$m0, cm$p0, lo, hi)
-  c(a1[1] - a0[2], a1[2] - a0[1])
+  c(a1\[1\] - a0[2], a1[2] - a0\[1\])
 }
 
 #' .bnd_q1

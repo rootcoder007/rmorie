@@ -476,7 +476,7 @@ morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
 #' @references Ontario Data Catalogue CKAN API.
 #' @examples
 #' \donttest{
-#' res <- try(morie_arsau_fetch_sidecar(ARSAU_KINDS[1], ARSAU_YEARS[1],
+#' res <- try(morie_arsau_fetch_sidecar(ARSAU_KINDS\[1\], ARSAU_YEARS\[1\],
 #'   limit = 50L
 #' ))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
@@ -550,8 +550,8 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
 #' @examples
 #' \donttest{
 #' res <- try(morie_arsau_download(tempdir(),
-#'   kinds = ARSAU_KINDS()[1],
-#'   years = ARSAU_YEARS()[1], quiet = TRUE
+#'   kinds = ARSAU_KINDS()\[1\],
+#'   years = ARSAU_YEARS()\[1\], quiet = TRUE
 #' ))
 #' if (!inherits(res, "try-error")) length(res$downloaded)
 #' }

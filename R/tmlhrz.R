@@ -63,8 +63,8 @@ Tmlhrz <- function(time, event, D, X) {
   h0 <- matrix(0, n, K)
   h1 <- matrix(0, n, K)
   for (i in seq_len(n)) for (k in seq_len(K)) {
-    h0[i, k] <- haz(i, k, 0)
-    h1[i, k] <- haz(i, k, 1)
+    h0\[i, k\] <- haz(i, k, 0)
+    h1\[i, k\] <- haz(i, k, 1)
   }
   curves <- function(sh0, sh1) {
     s0 <- matrix(0, n, K)
@@ -73,16 +73,16 @@ Tmlhrz <- function(time, event, D, X) {
       p0 <- 1
       p1 <- 1
       for (k in seq_len(K)) {
-        a0 <- h0[i, k]
-        a1 <- h1[i, k]
+        a0 <- h0\[i, k\]
+        a1 <- h1\[i, k\]
         if (!is.null(sh0)) {
-          a0 <- .s4_clip(.s4_expit(.s4_logit(a0) + sh0[i, k]), 1e-12, 1 - 1e-12)
-          a1 <- .s4_clip(.s4_expit(.s4_logit(a1) + sh1[i, k]), 1e-12, 1 - 1e-12)
+          a0 <- .s4_clip(.s4_expit(.s4_logit(a0) + sh0\[i, k\]), 1e-12, 1 - 1e-12)
+          a1 <- .s4_clip(.s4_expit(.s4_logit(a1) + sh1\[i, k\]), 1e-12, 1 - 1e-12)
         }
         p0 <- p0 * (1 - a0)
         p1 <- p1 * (1 - a1)
-        s0[i, k] <- p0
-        s1[i, k] <- p1
+        s0\[i, k\] <- p0
+        s1\[i, k\] <- p1
       }
     }
     list(s0 = s0, s1 = s1)
@@ -95,8 +95,8 @@ Tmlhrz <- function(time, event, D, X) {
     pv1 <- if (k > 1L) S0$s1[i, k - 1L] else 1
     hit0 <- if (abs(Dv[i] - 0) < 0.5) 1 else 0
     hit1 <- if (abs(Dv[i] - 1) < 0.5) 1 else 0
-    H0[i, k] <- -hit0 / (1 - g[i]) * S0$s0[i, K] / pv0
-    H1[i, k] <- -hit1 / g[i] * S0$s1[i, K] / pv1
+    H0\[i, k\] <- -hit0 / (1 - g[i]) * S0$s0[i, K] / pv0
+    H1\[i, k\] <- -hit1 / g[i] * S0$s1[i, K] / pv1
   }
   Hobs <- ifelse(Dv[ii] > 0.5, H1[cbind(ii, kk)], H0[cbind(ii, kk)])
   hobs <- ifelse(Dv[ii] > 0.5, h1[cbind(ii, kk)], h0[cbind(ii, kk)])

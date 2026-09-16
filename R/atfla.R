@@ -95,7 +95,7 @@ Atfla <- function(y = NULL, Q = NULL, K = NULL, V = NULL, block_size = 2, causal
     if (l[i] <= 0) stop("flash_attention_block: a query row has every key masked out")
     for (t in seq_len(dv)) O[i, t] <- O[i, t] / l[i]
   }
-  list(output = O, estimate = O[1, 1], l = l, m = m, n_blocks = nb, block_size = bs,
+  list(output = O, estimate = O\[1, 1\], l = l, m = m, n_blocks = nb, block_size = bs,
        n_q = nq, n_k = nk, d = d, d_v = dv, causal = isTRUE(causal),
        method = "online-softmax block tiling, exact; Dao et al. (2022), arXiv:2205.14135")
 }

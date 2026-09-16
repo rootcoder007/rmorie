@@ -42,7 +42,7 @@ Gpmlt <- function(X, y_tasks, X_test = NULL, task_cov = NULL, lengthscale = 1,
   kf <- function(P, Q) {
     out <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      out[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      out\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     out
   }
   Kx <- kf(A, A)
@@ -53,11 +53,11 @@ Gpmlt <- function(X, y_tasks, X_test = NULL, task_cov = NULL, lengthscale = 1,
   mean <- matrix(0, T, nrow(Xs))
   for (a in seq_len(T)) for (j in seq_len(nrow(Xs))) {
     s <- 0
-    for (b in seq_len(T)) s <- s + Kf[a, b] * sum(Ksx[j, ] * alpha[((b - 1L) * n + 1L):(b * n)])
+    for (b in seq_len(T)) s <- s + Kf\[a, b\] * sum(Ksx[j, ] * alpha[((b - 1L) * n + 1L):(b * n)])
     mean[a, j] <- s
   }
   L <- .s03chol(K)
   ll <- -0.5 * sum(yv * alpha) - sum(log(diag(L))) - 0.5 * (T * n) * log(2 * pi)
-  .t1_result(estimate = mean[1, 1], mean = mean, loglik = ll, tasks = T, n = n,
+  .t1_result(estimate = mean\[1, 1\], mean = mean, loglik = ll, tasks = T, n = n,
              method = "K = K^f (x) K^x, Bonilla, Chai & Williams (2008) eqs. (1)-(2)")
 }

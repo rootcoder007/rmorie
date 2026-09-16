@@ -3,13 +3,13 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 141-170], Chapter 5, Section 5.3, equation (5.3), read as a
+#' volume \[Pages 141-170\], Chapter 5, Section 5.3, equation (5.3), read as a
 #' rendered page: the genomic mixed model is Y = 1_n mu + Z_L b + e with
 #' b ~ N_J(0, sigma_g^2 G) and R = sigma^2 I_n, so the phenotypic variance of
 #' a line is sigma_g^2 + sigma^2.
 #'
 #' Not in the book: all seventeen page-range volumes and the index
-#' ([Pages 683-691]) were searched and the book never writes the ratio down;
+#' (\[Pages 683-691\]) were searched and the book never writes the ratio down;
 #' "heritability" occurs only in prose.  The ratio
 #' h^2 = sigma_g^2 / (sigma_g^2 + sigma_e^2) is from de los Campos, Sorensen
 #' and Gianola (2015), Genomic heritability: what is it?, PLoS Genetics 11(5),
@@ -43,6 +43,6 @@ H2est <- function(sigma_g2, sigma_e2) {
     sp[i] <- p
     h2[i] <- a / p
   }
-  list(estimate = h2[1], h2 = h2, sigma_p2 = sp, n = n,
+  list(estimate = h2\[1\], h2 = h2, sigma_p2 = sp, n = n,
        method = "h2 = sigma_g^2/(sigma_g^2+sigma_e^2); Ch 5 eq. (5.3) decomposition, ratio from de los Campos et al. (2015)")
 }

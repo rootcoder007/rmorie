@@ -28,22 +28,22 @@ Alftrimu <- function(z, wag, wav, wbg, wbv, wg, wo, mode = "outgoing",
                      layernorm = TRUE) {
   if (!mode %in% c("outgoing", "incoming"))
     stop("mode must be 'outgoing' or 'incoming'")
-  n <- dim(z)[1]
+  n <- dim(z)\[1\]
   cz <- dim(z)[3]
   cc <- nrow(wag)
 
   zn <- array(0, c(n, n, cz))
   for (i in seq_len(n)) for (j in seq_len(n))
-    zn[i, j, ] <- if (layernorm) alfLnorm(z[i, j, ]) else as.numeric(z[i, j, ])
+    zn\[i, j, \] <- if (layernorm) alfLnorm(z\[i, j, \]) else as.numeric(z\[i, j, \])
 
   a <- array(0, c(n, n, cc))
   b <- array(0, c(n, n, cc))
   g <- array(0, c(n, n, cz))
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    v <- zn[i, j, ]
-    a[i, j, ] <- alfSigm(alfLin(v, wag)) * alfLin(v, wav)
-    b[i, j, ] <- alfSigm(alfLin(v, wbg)) * alfLin(v, wbv)
-    g[i, j, ] <- alfSigm(alfLin(v, wg))
+    v <- zn\[i, j, \]
+    a\[i, j, \] <- alfSigm(alfLin(v, wag)) * alfLin(v, wav)
+    b\[i, j, \] <- alfSigm(alfLin(v, wbg)) * alfLin(v, wbv)
+    g\[i, j, \] <- alfSigm(alfLin(v, wg))
   }
 
   out <- array(0, c(n, n, cz))
@@ -58,7 +58,7 @@ Alftrimu <- function(z, wag, wav, wbg, wbv, wg, wo, mode = "outgoing",
       s[q] <- tot
     }
     if (layernorm) s <- alfLnorm(s)
-    out[i, j, ] <- g[i, j, ] * alfLin(s, wo)
+    out\[i, j, \] <- g\[i, j, \] * alfLin(s, wo)
   }
 
   list(z = out, estimate = mean(out), n = n, mode = mode,

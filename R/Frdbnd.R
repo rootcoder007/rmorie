@@ -10,7 +10,7 @@
 #'
 #' Formula: max(u + v - 1, 0) <= C(u, v) <= min(u, v).
 #'
-#' @param F_0,F_1 Marginal CDF values in [0, 1], of equal length.
+#' @param F_0,F_1 Marginal CDF values in \[0, 1\], of equal length.
 #' @param joint Optional candidate joint CDF at the same points.
 #' @return List with \code{estimate}, \code{lower}, \code{upper},
 #'   \code{independence}, \code{width}, \code{respects_bounds},
@@ -27,7 +27,7 @@ Frdbnd <- function(F_0, F_1, joint = NULL) {
   v <- .s03vec(F_1)
   if (length(u) == 0L) stop("frechet_hoeffding_bounds: F_0 is empty")
   if (length(v) != length(u)) stop("frechet_hoeffding_bounds: F_0 and F_1 have different lengths")
-  if (any(c(u, v) < 0 | c(u, v) > 1)) stop("frechet_hoeffding_bounds: marginal probabilities must lie in [0, 1]")
+  if (any(c(u, v) < 0 | c(u, v) > 1)) stop("frechet_hoeffding_bounds: marginal probabilities must lie in \[0, 1\]")
   lo <- pmax(u + v - 1, 0)
   hi <- pmin(u, v)
   viol <- 0L
@@ -39,7 +39,7 @@ Frdbnd <- function(F_0, F_1, joint = NULL) {
     viol <- sum(jv < lo - 1e-12 | jv > hi + 1e-12)
     okv <- as.integer(viol == 0L)
   }
-  .t1_result(estimate = hi[1], lower = lo, upper = hi, independence = u * v,
+  .t1_result(estimate = hi\[1\], lower = lo, upper = hi, independence = u * v,
              width = hi - lo, respects_bounds = okv, n_violations = viol,
              n = length(u),
              method = "max(u + v - 1, 0) <= C(u, v) <= min(u, v), Frechet (1951); Hoeffding (1940)")

@@ -29,7 +29,7 @@
 #' @param coords Matrix of sampling locations, one row per observation.
 #' @param z Numeric vector of observed values.
 #' @param X Design matrix for the mean; defaults to an intercept, the
-#'   \eqn{E[Z(s)] = \mu} case worked in the text.
+#'   \eqn{E\[Z(s)\] = \mu} case worked in the text.
 #' @param variogram_model One of "exponential", "gaussian", "spherical".
 #' @return A list with `nugget`, `partial_sill`, `sill`, `range`, `mean`,
 #'   `neg2_restricted_loglik`, `converged`, `n` and `n_contrasts`.
@@ -52,7 +52,7 @@ spreml <- function(coords, z, X = NULL, variogram_model = "exponential") {
   list(nugget = fit$nugget, partial_sill = fit$partial_sill,
        sill = fit$nugget + fit$partial_sill, range = fit$range,
        nugget_ratio = fit$nugget_ratio,
-       mean = if (length(fit$beta) > 1) fit$beta else fit$beta[1],
+       mean = if (length(fit$beta) > 1) fit$beta else fit$beta\[1\],
        neg2_restricted_loglik = fit$neg2_restricted_loglik,
        converged = fit$converged, n = n, n_contrasts = n - ncol(X),
        model = variogram_model, method = "restricted maximum likelihood")

@@ -55,7 +55,7 @@ Esnnts <- function(y, reservoir_size = 20, spectral_radius = 0.9, leak = 1,
   if (wo < 0L || wo >= n - 1L) stop("washout must lie in [0, n-1)")
   W <- matrix(0, size, size)
   for (i in seq_len(size)) for (j in seq_len(size))
-    W[i, j] <- .drw((i - 1L) * size + (j - 1L))
+    W\[i, j\] <- .drw((i - 1L) * size + (j - 1L))
   Win <- vapply(seq_len(size), function(i) .drw(size * size + i - 1L), 0)
   nrm <- max(rowSums(abs(W)))
   scale <- if (nrm > 0) sr / nrm else 0
@@ -69,7 +69,7 @@ Esnnts <- function(y, reservoir_size = 20, spectral_radius = 0.9, leak = 1,
     nx <- numeric(size)
     for (i in seq_len(size)) {
       z <- Win[i] * u
-      for (j in seq_len(size)) z <- z + W[i, j] * x[j]
+      for (j in seq_len(size)) z <- z + W\[i, j\] * x[j]
       nx[i] <- (1 - a) * x[i] + a * tanh(z)
     }
     x <- nx
@@ -82,7 +82,7 @@ Esnnts <- function(y, reservoir_size = 20, spectral_radius = 0.9, leak = 1,
   if (nfit < 1L) stop("no rows left after washout")
   X <- matrix(unlist(rows), nrow = nfit, ncol = k, byrow = TRUE)
   XtX <- matrix(0, k, k)
-  for (i in seq_len(k)) for (j in seq_len(k)) XtX[i, j] <- sum(X[, i] * X[, j])
+  for (i in seq_len(k)) for (j in seq_len(k)) XtX\[i, j\] <- sum(X[, i] * X[, j])
   for (i in seq_len(k)) XtX[i, i] <- XtX[i, i] + lam
   Xty <- vapply(seq_len(k), function(i) sum(X[, i] * targ), 0)
   v <- .s03cholsolve(XtX, Xty)

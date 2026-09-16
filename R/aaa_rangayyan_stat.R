@@ -104,7 +104,7 @@ FormFactor <- function(x) {
   }
   turns <- 0L
   idx <- integer(0)
-  last <- seg[1]
+  last <- seg\[1\]
   direction <- 0L
   for (i in 2:length(seg)) {
     step <- seg[i] - seg[i - 1L]
@@ -275,7 +275,7 @@ SyncAvg <- function(observations) {
   recs <- lapply(observations, as.numeric)
   m <- length(recs)
   if (!m) stop("need at least one observation")
-  n <- length(recs[[1]])
+  n <- length(recs[\[1\]])
   if (!n) stop("records must be nonempty")
   if (any(vapply(recs, length, integer(1)) != n)) {
     stop(
@@ -322,7 +322,7 @@ ObsReal <- function(x, eta) {
   noises <- lapply(eta, as.numeric)
   m <- length(noises)
   if (!m) stop("need at least one noise realization")
-  n <- length(noises[[1]])
+  n <- length(noises[\[1\]])
   if (any(vapply(noises, length, integer(1)) != n)) {
     stop("all noise realizations must have the same length")
   }
@@ -339,7 +339,7 @@ ObsReal <- function(x, eta) {
     stop("signal and noise records must have equal length")
   }
   y <- Map(function(s, e) s + e, signals, noises)
-  first <- signals[[1]]
+  first <- signals[\[1\]]
   identical_reps <- all(vapply(
     signals,
     function(s) all(abs(s - first) < 1e-12),
@@ -498,7 +498,7 @@ KatzFd <- function(x, dt = 1) {
   lengths <- sqrt(step^2 + diff(xs)^2)
   total <- .morie_fsum(lengths)
   if (total <= 0) stop("the waveform has zero length")
-  d <- max(sqrt(((seq_len(n) - 1L) * step)^2 + (xs - xs[1])^2))
+  d <- max(sqrt(((seq_len(n) - 1L) * step)^2 + (xs - xs\[1\])^2))
   if (d <= 0) stop("every point coincides with the first")
   a <- total / (n - 1L)
   steps <- total / a
@@ -603,7 +603,7 @@ FiringRate <- function(times, fs = NULL) {
     mfr = 1 / m, mean_idi = m, sd_idi = sd, cv_idi = sd / m, idi = idi,
     n_discharges = length(ts),
     mean_instantaneous_rate = .morie_fsum(1 / idi) / length(idi),
-    duration = ts[length(ts)] - ts[1],
+    duration = ts[length(ts)] - ts\[1\],
     method = "Rangayyan (2024) Sections 4.2, 5.x (motor-unit discharge statistics)"
   )
 }

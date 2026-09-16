@@ -233,11 +233,11 @@ curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
 #' is_curriculum(list(c(1, 1, 1), c(1, 1, 0), c(1, 0, 0)))
 is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
   if (length(weights) < 2) stop("prgrl: need at least two steps to check")
-  n <- length(weights[[1]])
+  n <- length(weights[\[1\]])
   for (w in weights) {
     if (length(w) != n) stop("prgrl: the weight vectors differ in length")
     for (v in w) {
-      if (!(-tol <= v && v <= 1.0 + tol)) stop("prgrl: weights must lie in [0, 1]")
+      if (!(-tol <= v && v <= 1.0 + tol)) stop("prgrl: weights must lie in \[0, 1\]")
     }
   }
   if (is.null(p)) p <- rep(1.0 / n, n)
@@ -298,7 +298,7 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' @return The value of \code{w}, as built in the body.
 #' @export
 .prgrl_perceptron <- function(X, y, order, updates, w0) {
-  p <- length(X[[1]])
+  p <- length(X[\[1\]])
   w <- as.numeric(w0)
   n <- length(order)
   updates_int <- as.integer(updates)
@@ -334,7 +334,7 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' res <- .prgrl_error(X = x, y = y, w = x)
 #' res
 .prgrl_error <- function(X, y, w) {
-  p <- length(X[[1]])
+  p <- length(X[\[1\]])
   bad <- 0
   for (i in seq_along(X)) {
     s <- 0
@@ -408,7 +408,7 @@ prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
 
   updates_int <- as.integer(updates)
   n_repeats_int <- as.integer(n_repeats)
-  p_dim <- length(Xr[[1]])
+  p_dim <- length(Xr[\[1\]])
 
   curriculum_order_fn <- function(rnd) {
     if (order == "sorted") {
@@ -516,7 +516,7 @@ easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
   rnd <- .prgrl_rng(seed)
   easy_errs <- numeric(as.integer(n_repeats))
   all_errs <- numeric(as.integer(n_repeats))
-  p_dim <- length(Xr[[1]])
+  p_dim <- length(Xr[\[1\]])
   updates_int <- as.integer(updates)
   n_repeats_int <- as.integer(n_repeats)
 

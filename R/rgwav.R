@@ -38,8 +38,8 @@ rgwav <- function(x, wavelet = "d8", level = NULL, mode = c("soft", "hard")) {
   }
   level <- as.integer(level)
   fit <- .morie_dsp_dwt(xp, filter = wavelet, n_levels = level)
-  # MAD on the finest detail coefficients (W[[1]])
-  d1 <- as.numeric(fit$W[[1]])
+  # MAD on the finest detail coefficients (W[\[1\]])
+  d1 <- as.numeric(fit$W[\[1\]])
   sigma <- stats::median(abs(d1)) / 0.6745
   thr <- sigma * sqrt(2 * log(N))
   thresh <- function(d, thr, mode) {

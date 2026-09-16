@@ -143,7 +143,7 @@ morie_baysmplr_choose <- function(dim, has_grad, has_conditionals = FALSE,
 #'     terms <- numeric(9)
 #'     k <- 1L
 #'     for (i in 1:3) for (j in 1:3) {
-#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         terms[k] <- dv[i] * Q3\[i, j\] * dv[j]
 #'         k <- k + 1L
 #'     }
 #'     -0.5 * .w3_csum(terms)
@@ -282,15 +282,15 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #'     terms <- numeric(9)
 #'     k <- 1L
 #'     for (i in 1:3) for (j in 1:3) {
-#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         terms[k] <- dv[i] * Q3\[i, j\] * dv[j]
 #'         k <- k + 1L
 #'     }
 #'     -0.5 * .w3_csum(terms)
 #' }
 #' gr3 <- function(x) {
 #'     dv <- x - MU3
-#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
-#'         j] * dv[j], numeric(1))), numeric(1))
+#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3\[i,
+#'         j\] * dv[j], numeric(1))), numeric(1))
 #' }
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
@@ -412,15 +412,15 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 #'     terms <- numeric(9)
 #'     k <- 1L
 #'     for (i in 1:3) for (j in 1:3) {
-#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         terms[k] <- dv[i] * Q3\[i, j\] * dv[j]
 #'         k <- k + 1L
 #'     }
 #'     -0.5 * .w3_csum(terms)
 #' }
 #' gr3 <- function(x) {
 #'     dv <- x - MU3
-#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
-#'         j] * dv[j], numeric(1))), numeric(1))
+#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3\[i,
+#'         j\] * dv[j], numeric(1))), numeric(1))
 #' }
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
@@ -522,7 +522,7 @@ morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
 #' morie_baysmplr_ess(V)
 morie_baysmplr_ess <- function(chain, max_lag = 200L) {
   n <- length(chain)
-  d <- length(chain[[1]])
+  d <- length(chain[\[1\]])
   vapply(seq_len(d), function(cc) {
     v <- vapply(chain, function(row) row[cc], numeric(1))
     mu <- .w3_csum(v) / n
@@ -579,15 +579,15 @@ morie_baysmplr_ess <- function(chain, max_lag = 200L) {
 #'     terms <- numeric(9)
 #'     k <- 1L
 #'     for (i in 1:3) for (j in 1:3) {
-#'         terms[k] <- dv[i] * Q3[i, j] * dv[j]
+#'         terms[k] <- dv[i] * Q3\[i, j\] * dv[j]
 #'         k <- k + 1L
 #'     }
 #'     -0.5 * .w3_csum(terms)
 #' }
 #' gr3 <- function(x) {
 #'     dv <- x - MU3
-#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i,
-#'         j] * dv[j], numeric(1))), numeric(1))
+#'     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3\[i,
+#'         j\] * dv[j], numeric(1))), numeric(1))
 #' }
 #' morie_baysmplr(lp3, gr3, c(0, 0, 0), n_iter = 80L, burn = 30L,
 #'     seed = 5, eps = 0.25, steps = 8L)
@@ -647,7 +647,7 @@ morie_baysmplr <- function(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L,
        ess = ess, min_ess = min(ess), ess_per_draw = min(ess) / m,
        accept_rate = r$accept, draws = kept, kept = m, dim = d,
        n_iter = n_iter, burn = burn, info = r$info,
-       seed = as.integer(seed), estimate = means[1],
+       seed = as.integer(seed), estimate = means\[1\],
        method = "MCMC sampler dispatch")
 }
 

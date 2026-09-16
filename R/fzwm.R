@@ -38,7 +38,7 @@
 #' @export
 Swilmom <- function(n, gtheta = 0.5, projint = 1 / 3) {
   if (n < 1) stop("sample size must be at least 1.")
-  if (gtheta < 0 || gtheta > 1) stop("G(theta) must lie in [0, 1].")
+  if (gtheta < 0 || gtheta > 1) stop("G(theta) must lie in \[0, 1\].")
   projvar <- projint - gtheta^2
   mean <- n * (n + 1) / 2 * gtheta
   v <- n * (n + 1)^2 * projvar

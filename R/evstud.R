@@ -25,7 +25,7 @@
 #' @param unit,time Unit and period labels.
 #' @param cohort First treated period per observation; NA or Inf marks a
 #'   never-treated unit.
-#' @param max_lead,max_lag Truncate the window to [-max_lead, max_lag].
+#' @param max_lead,max_lag Truncate the window to \[-max_lead, max_lag\].
 #' @param ref Omitted event time.
 #' @return List with \code{estimate}, \code{event_times}, \code{coef},
 #'   \code{se}, \code{sigma2}, \code{resid_df}, \code{n_units},
@@ -88,7 +88,7 @@ Evstud <- function(y, D, unit, time, cohort, max_lead = NULL, max_lag = NULL,
     coef[k] <- b[j]
     se[k] <- sqrt(s2 * col[j])
   }
-  est <- if (any(ets == 0L)) coef[which(ets == 0L)[1]] else NaN
+  est <- if (any(ets == 0L)) coef[which(ets == 0L)\[1\]] else NaN
   .t1_result(estimate = est, event_times = ets, coef = coef, se = se,
              sigma2 = s2, resid_df = dof, n_units = U, n_periods = Tn,
              n = n, method = "Event-study leads + lags coefficients")

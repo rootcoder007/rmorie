@@ -25,10 +25,10 @@ morie_conv2d <- function(image, kernel, bias = 0, stride = 1,
   if (length(dim(img)) == 2L) dim(img) <- c(dim(img), 1L)
   ker <- as.array(kernel)
   if (length(dim(ker)) == 2L) dim(ker) <- c(dim(ker), 1L)
-  kh <- dim(ker)[1]
+  kh <- dim(ker)\[1\]
   kw <- dim(ker)[2]
   kc <- dim(ker)[3]
-  oh <- (dim(img)[1] - kh) %/% stride + 1L
+  oh <- (dim(img)\[1\] - kh) %/% stride + 1L
   ow <- (dim(img)[2] - kw) %/% stride + 1L
   out <- matrix(0, oh, ow)
   for (i in seq_len(oh)) {
@@ -43,7 +43,7 @@ morie_conv2d <- function(image, kernel, bias = 0, stride = 1,
           }
         }
       }
-      out[i, j] <- s
+      out\[i, j\] <- s
     }
   }
   if (identical(activation, "relu")) {
@@ -107,7 +107,7 @@ morie_fda_basis <- function(t, n_basis, kind = "fourier",
       }
     }
   } else if (kind %in% c("poly", "polynomial")) {
-    # monomials of the domain rescaled to [0, 1]. Raw tt^(l - 1) spans the
+    # monomials of the domain rescaled to \[0, 1\]. Raw tt^(l - 1) spans the
     # same space, but is unusable in double precision: at tt = 2015..2020
     # with n_basis = 5 the Gram matrix that morie_fda_coefficients inverts
     # has condition number 2.2e34, against the ~1e16 a double carries, so
@@ -446,7 +446,7 @@ morie_msm_weighted_glm <- function(y, X, weights = NULL,
   } else {
     beta <- rep(0, ncol(Xm))
     if (identical(family, "poisson")) {
-      beta[1] <- log(max(sum(w * yy) / max(sum(w), 1e-9), 1e-6))
+      beta\[1\] <- log(max(sum(w * yy) / max(sum(w), 1e-9), 1e-6))
     }
     for (it in seq_len(n_iter)) {
       eta <- off + as.numeric(Xm %*% beta)

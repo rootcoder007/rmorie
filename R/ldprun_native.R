@@ -94,7 +94,7 @@ Ldprun <- function(G, window = 50L, step = 5L, r2_threshold = 0.5) {
         }
       }
       if (is.null(offender)) break
-      i <- offender[1]
+      i <- offender\[1\]
       j <- offender[2]
       drop <- if (mafs[j] <= mafs[i]) j else i
       removed[drop] <- TRUE

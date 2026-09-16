@@ -34,10 +34,10 @@ Bndvld <- function(lower, upper, theta_0, H0 = 1) {
     stop("Bndvld: lower and upper must have the same length")
   L <- max(lo)
   U <- min(hi)
-  t0 <- as.numeric(theta_0)[1]
+  t0 <- as.numeric(theta_0)\[1\]
   refuted <- if (L > U) 1 else 0
   covers <- if (L <= t0 && t0 <= U) 1 else 0
-  reject <- if (as.numeric(H0)[1] != 0 && covers == 0) 1 else 0
+  reject <- if (as.numeric(H0)\[1\] != 0 && covers == 0) 1 else 0
   .t1_result(lower = L, upper = U, width = U - L, refuted = refuted,
              covers = covers, reject = reject, n = length(lo),
              method = "Validity check for bound assumptions")

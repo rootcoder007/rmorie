@@ -55,7 +55,7 @@ Svytbl <- function(x, y, weights = NULL) {
   stat <- 0
   for (i in seq_len(r)) for (j in seq_len(cc)) {
     e <- pr[i] * pc[j]
-    if (e > 0) stat <- stat + (M[i, j] - e)^2 / e
+    if (e > 0) stat <- stat + (M\[i, j\] - e)^2 / e
   }
   sw <- sum(w)
   neff <- sw * sw / sum(w * w)

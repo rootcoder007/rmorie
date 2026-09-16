@@ -31,12 +31,12 @@
 #' Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
 Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
-  T <- as.numeric(T)[1]
-  R_n <- as.numeric(R_n)[1]
-  u2 <- as.numeric(u2)[1]
-  VPD <- as.numeric(VPD)[1]
-  G <- as.numeric(G)[1]
-  P <- as.numeric(P)[1]
+  T <- as.numeric(T)\[1\]
+  R_n <- as.numeric(R_n)\[1\]
+  u2 <- as.numeric(u2)\[1\]
+  VPD <- as.numeric(VPD)\[1\]
+  G <- as.numeric(G)\[1\]
+  P <- as.numeric(P)\[1\]
   if (VPD < 0) stop("Basevap: VPD must be non-negative", call. = FALSE)
   if (u2 < 0) stop("Basevap: wind speed must be non-negative", call. = FALSE)
   if (P <= 0) stop("Basevap: pressure must be positive", call. = FALSE)
@@ -65,7 +65,7 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 .morie_qm_ecdf <- function(sx, v) {
   n <- length(sx)
   if (n == 1L) return(0.5)
-  if (v <= sx[1]) return(0)
+  if (v <= sx\[1\]) return(0)
   if (v >= sx[n]) return(1)
   lo <- 1L
   hi <- n
@@ -89,7 +89,7 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 #' @export
 .morie_qm_quant <- function(sx, p) {
   n <- length(sx)
-  if (n == 1L) return(sx[1])
+  if (n == 1L) return(sx\[1\])
   h <- (n - 1L) * p
   j <- floor(h)
   if (j >= n - 1L) return(sx[n])
@@ -159,7 +159,7 @@ Qmds <- function(x_mod, obs, mod) {
 Plncf <- function(lam, T, h = 6.62607015e-34, c = 299792458,
                   kB = 1.380649e-23) {
   lam <- as.numeric(lam)
-  T <- as.numeric(T)[1]
+  T <- as.numeric(T)\[1\]
   if (T <= 0) stop("Plncf: temperature must be > 0", call. = FALSE)
   if (any(lam <= 0)) stop("Plncf: wavelengths must be > 0", call. = FALSE)
   x <- pmin(h * c / (lam * kB * T), 700)

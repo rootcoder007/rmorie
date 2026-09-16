@@ -226,7 +226,7 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' @export
 .slbpdg_interp <- function(xs, ys, x) {
   n <- length(xs)
-  if (x <= xs[1]) return(ys[1])
+  if (x <= xs\[1\]) return(ys\[1\])
   if (x >= xs[n]) return(ys[n])
   lo <- 1L
   hi <- n
@@ -318,7 +318,7 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
   # One component to start, everybody in it.
   v <- .ghc_beta1(e, 1, alpha)
   th <- .slbpdg_theta(e, ys, m0, kappa0, a0, b0)
-  mus <- th[1]
+  mus <- th\[1\]
   s2s <- th[2]
   d <- integer(n)
 
@@ -356,7 +356,7 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
       }
       v <- c(v, .ghc_beta1(e, 1, alpha))
       tk <- .slbpdg_theta(e, numeric(0), m0, kappa0, a0, b0)
-      mus <- c(mus, tk[1])
+      mus <- c(mus, tk\[1\])
       s2s <- c(s2s, tk[2])
       sw <- morie_slbpdg_weights(v)
       w <- sw$w
@@ -396,7 +396,7 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
     # 5. the component parameters
     for (k in seq_len(K)) {
       tk <- .slbpdg_theta(e, ys[d == (k - 1L)], m0, kappa0, a0, b0)
-      mus[k] <- tk[1]
+      mus[k] <- tk\[1\]
       s2s[k] <- tk[2]
     }
 
@@ -435,12 +435,12 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
   mean_alpha <- .w3_csum(alphas) / kept
   lv <- sort(unique(n_clusters))
   cnt <- vapply(lv, function(c) sum(n_clusters == c), integer(1))
-  modal <- lv[order(-cnt, lv)[1]]
+  modal <- lv[order(-cnt, lv)\[1\]]
 
   out <- list(grid = grid, density = dens,
        density_integral = .w3_simpson(
-         function(x) .slbpdg_interp(grid, dens, x), grid[1],
-         grid[length(grid)], 200L),
+         function(x) .slbpdg_interp(grid, dens, x), grid\[1\],
+         grid\[length(grid)\], 200L),
        n_clusters = n_clusters, mean_clusters = mean_clusters,
        modal_clusters = modal,
        cluster_table = lapply(seq_along(lv), function(i) c(lv[i], cnt[i])),

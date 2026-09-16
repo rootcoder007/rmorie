@@ -7,7 +7,7 @@
 #' defaults are the book's worked dice average, sigma_avg = 0.0037.
 #'
 #' @param n number of trials, >= 1.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(sd_single, sd_tot, sd_avg).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eqs (3.57)-(3.58).
@@ -20,7 +20,7 @@ SdAvgBin <- function(n = 10000, p = 1 / 6) {
   }
   p <- as.numeric(p)
   if (length(p) != 1L || is.na(p) || p < 0 || p > 1) {
-    stop("p must be a single value in [0, 1].", call. = FALSE)
+    stop("p must be a single value in \[0, 1\].", call. = FALSE)
   }
   n <- as.integer(n)
   sd_single <- sqrt(p * (1 - p))

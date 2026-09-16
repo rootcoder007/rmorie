@@ -7,7 +7,7 @@
 #'
 #' @param x Mini-batch of activations, length m >= 2.
 #' @param runmean,runvar Running population moments.
-#' @param momentum Weight given to the new batch, in [0, 1].
+#' @param momentum Weight given to the new batch, in \[0, 1\].
 #' @param eps Numerical floor inside the square root.
 #' @param gamma,beta Learned scale and shift.
 #'
@@ -26,7 +26,7 @@ Bnrunstat <- function(x, runmean = 0, runvar = 1, momentum = 0.1,
   m <- length(x)
   if (m < 2) stop("need at least two activations to form a variance")
   momentum <- as.numeric(momentum)
-  if (momentum < 0 || momentum > 1) stop("momentum must lie in [0, 1]")
+  if (momentum < 0 || momentum > 1) stop("momentum must lie in \[0, 1\]")
   mu <- sum(x) / m
   vb <- sum((x - mu)^2) / m
   vu <- vb * m / (m - 1)

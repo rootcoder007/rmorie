@@ -63,7 +63,7 @@ Sfbnds <- function(y, D, Z) {
     stop("sharp_bounds_balke_pearl: y, D and Z must have the same length")
 
   nz <- c(sum(zz == 0), sum(zz == 1))
-  if (nz[1] == 0 || nz[2] == 0)
+  if (nz\[1\] == 0 || nz[2] == 0)
     stop("sharp_bounds_balke_pearl: both instrument arms must be non-empty")
   p <- function(a, b, cc) sum(yy == a & dd == b & zz == cc) / nz[cc + 1L]
 
@@ -111,6 +111,6 @@ Sfbnds <- function(y, D, Z) {
              excludes_zero = if (lo > 0 || up < 0) 1 else 0,
              p00_0 = p00_0, p01_0 = p01_0, p10_0 = p10_0, p11_0 = p11_0,
              p00_1 = p00_1, p01_1 = p01_1, p10_1 = p10_1, p11_1 = p11_1,
-             n = n, n_z0 = nz[1], n_z1 = nz[2],
+             n = n, n_z0 = nz\[1\], n_z1 = nz[2],
              method = "Balke-Pearl sharp bounds on the ACE (Balke & Pearl 1997, eqs. 4-5)")
 }

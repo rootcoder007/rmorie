@@ -50,16 +50,16 @@
 .hawkes_nll_cpp <- function(theta, times, end_time, kernel) {
   switch(kernel,
     exponential = morie_hawkes_ll_exp_const_cpp(
-      times, end_time, theta[1], theta[2], theta[3]
+      times, end_time, theta\[1\], theta[2], theta[3]
     ),
     weibull = morie_hawkes_ll_weibull_const_cpp(
-      times, end_time, theta[1], theta[2], theta[3], theta[4]
+      times, end_time, theta\[1\], theta[2], theta[3], theta[4]
     ),
     lomax = morie_hawkes_ll_lomax_const_cpp(
-      times, end_time, theta[1], theta[2], theta[3], theta[4]
+      times, end_time, theta\[1\], theta[2], theta[3], theta[4]
     ),
     gamma = morie_hawkes_ll_gamma_const_cpp(
-      times, end_time, theta[1], theta[2], theta[3], theta[4]
+      times, end_time, theta\[1\], theta[2], theta[3], theta[4]
     )
   )
 }
@@ -117,7 +117,7 @@
 #' Internal helper: Hawkes Nll PureR
 #' @noRd
 .hawkes_nll_pureR <- function(theta, times, end_time, kernel) {
-  nu <- exp(theta[1])
+  nu <- exp(theta\[1\])
   eta <- theta[2]
   if (!is.finite(nu) || nu <= 0 || eta <= 1e-6 || eta >= 0.999) {
     return(1e12)

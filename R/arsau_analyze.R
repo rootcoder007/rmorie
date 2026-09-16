@@ -423,7 +423,7 @@ morie_arsau_analyze_probe_cycle_records <- function(year, language = "en",
       if (!nzchar(trimws(s))) {
         return(0L)
       }
-      toks <- strsplit(s, ",", fixed = TRUE)[[1]]
+      toks <- strsplit(s, ",", fixed = TRUE)[\[1\]]
       toks <- toks[nzchar(trimws(toks))]
       length(toks)
     }, integer(1))

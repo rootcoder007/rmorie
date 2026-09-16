@@ -43,10 +43,10 @@ Nde <- function(X, M, Y) {
   }
   if (n < 4L) stop("need at least 4 observations to fit the SEM")
   b <- .t1_lstsq(cbind(1, x), m)$beta
-  b0 <- b[1]
+  b0 <- b\[1\]
   b1 <- b[2]
   cf <- .t1_lstsq(cbind(1, x, m, x * m), y)$beta
-  c0 <- cf[1]
+  c0 <- cf\[1\]
   c1 <- cf[2]
   c2 <- cf[3]
   c3 <- cf[4]

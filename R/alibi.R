@@ -29,7 +29,7 @@ Alibi <- function(scores, slopes = NULL, causal = FALSE) {
   m <- if (is.null(slopes)) 2^-8 else as.numeric(slopes)
   B <- .atalib_bias(nq, nk, m, causal)
   out <- S + B
-  list(biased = out, estimate = out[1, 1], bias = B, slope = m, n_q = nq, n_k = nk,
+  list(biased = out, estimate = out\[1, 1\], bias = B, slope = m, n_q = nq, n_k = nk,
        causal = isTRUE(causal),
        method = "scores - m|i-j|; shared implementation with morie.fn.atalib")
 }

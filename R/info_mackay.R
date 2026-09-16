@@ -53,9 +53,9 @@ morie_r3post <- function(r, f) {
   f <- as.numeric(f)
   if (!(f > 0 && f < 1)) stop("f must lie strictly in (0, 1).", call. = FALSE)
   lik <- vapply(c(0L, 1L), function(s) prod(ifelse(r != s, f, 1 - f)), numeric(1))
-  tot <- lik[1] + lik[2]
-  list(p0 = lik[1] / tot, p1 = lik[2] / tot,
-       decoded = if (lik[2] > lik[1]) 1L else 0L,
+  tot <- lik\[1\] + lik[2]
+  list(p0 = lik\[1\] / tot, p1 = lik[2] / tot,
+       decoded = if (lik[2] > lik\[1\]) 1L else 0L,
        gamma = (1 - f) / f, evidence = tot / 2)
 }
 
@@ -189,7 +189,7 @@ morie_urnpred <- function(nb, ntot, nurns = 10L) {
 # --- ch. 3: the bent coin and model comparison (pp. 50-53, 63) --------
 
 #' Bent-coin likelihood (eq. 3.8, p. 51)
-#' @param pa probability of outcome a, in [0, 1]
+#' @param pa probability of outcome a, in \[0, 1\]
 #' @param fa,fb counts of outcomes a and b
 #' @return list(likelihood, loglik, fa, fb)
 #' @export
@@ -200,7 +200,7 @@ morie_bcoinlik <- function(pa, fa, fb) {
   fa <- as.integer(fa)
   fb <- as.integer(fb)
   if (pa < 0 || pa > 1 || fa < 0L || fb < 0L) {
-    stop("need pa in [0, 1] and non-negative counts.", call. = FALSE)
+    stop("need pa in \[0, 1\] and non-negative counts.", call. = FALSE)
   }
   list(likelihood = pa^fa * (1 - pa)^fb,
        loglik = (if (fa > 0L) fa * log(pa) else 0) +
@@ -371,7 +371,7 @@ morie_sexbeta <- function(gamma) {
 }
 
 #' Mean-fitness growth rate under recombination (eq. 19.13, p. 273)
-#' @param f normalized fitness, in [0, 1]
+#' @param f normalized fitness, in \[0, 1\]
 #' @param g genome size
 #' @param eta rate constant; default sqrt(2/(pi + 2)) as in the book
 #' @return list(dfbardt, eta, g)
@@ -381,7 +381,7 @@ morie_sexbeta <- function(gamma) {
 morie_sexdfdt <- function(f, g, eta = NULL) {
   f <- as.numeric(f)
   g <- as.numeric(g)
-  if (f < 0 || f > 1 || g <= 0) stop("need f in [0, 1] and G > 0.", call. = FALSE)
+  if (f < 0 || f > 1 || g <= 0) stop("need f in \[0, 1\] and G > 0.", call. = FALSE)
   eta <- if (is.null(eta)) .morie_mk_eta else as.numeric(eta)
   list(dfbardt = eta * sqrt(f * (1 - f) * g), eta = eta, g = g)
 }
@@ -405,7 +405,7 @@ morie_sexfsol <- function(t, g, f0, eta = NULL, c = NULL) {
   t <- as.numeric(t)
   g <- as.numeric(g)
   f0 <- as.numeric(f0)
-  if (g <= 0 || f0 < 0 || f0 > 1) stop("need G > 0 and f0 in [0, 1].", call. = FALSE)
+  if (g <= 0 || f0 < 0 || f0 > 1) stop("need G > 0 and f0 in \[0, 1\].", call. = FALSE)
   eta <- if (is.null(eta)) .morie_mk_eta else as.numeric(eta)
   cbook <- asin(2 * f0 - 1)
   cc <- if (is.null(c)) (sqrt(g) / eta) * cbook else as.numeric(c)

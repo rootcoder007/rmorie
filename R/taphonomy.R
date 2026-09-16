@@ -304,7 +304,7 @@ morie_taphonomy_preservation_delta <- function(data,
       boot <- boot[is.finite(boot)]
       se <- stats::sd(boot)
       qs <- stats::quantile(boot, c(0.025, 0.975), names = FALSE)
-      ci_lower <- qs[1]
+      ci_lower <- qs\[1\]
       ci_upper <- qs[2]
       method <- sprintf("CATE (meta-learner, mean; %d-boot SE/CI)", length(boot))
     } else {
@@ -395,12 +395,12 @@ morie_taphonomy_preservation_delta <- function(data,
 #' (\code{preservation = 0}) chain against a treated one to quantify how much
 #' the burial practice changes the fate distribution.
 #'
-#' @param preservation Preservation factor in \code{[0, 1]}: 0 = ordinary
+#' @param preservation Preservation factor in \code{\[0, 1\]}: 0 = ordinary
 #'   decay, higher = stronger diversion toward mummification.
 #' @param decay_rate Base per-step progression probability in \code{(0, 1]}
 #'   (default 0.5).
 #' @param mummify_rate Base per-step diversion-to-mummified probability in
-#'   \code{[0, 1]} (default 0.5); scaled by \code{preservation}.
+#'   \code{\[0, 1\]} (default 0.5); scaled by \code{preservation}.
 #' @param states Character vector of transient decomposition stages (default
 #'   \code{c("fresh", "bloat", "active", "advanced")}).
 #' @return A named \code{list}: \code{P} (row-stochastic transition matrix,
@@ -419,7 +419,7 @@ morie_taphonomy_decay_chain <- function(preservation = 0,
                                         states = c("fresh", "bloat", "active",
                                                    "advanced")) {
   if (!is.numeric(preservation) || preservation < 0 || preservation > 1) {
-    stop("`preservation` must be in [0, 1]", call. = FALSE)
+    stop("`preservation` must be in \[0, 1\]", call. = FALSE)
   }
   if (decay_rate <= 0 || decay_rate > 1 || mummify_rate < 0 || mummify_rate > 1) {
     stop("`decay_rate` in (0,1] and `mummify_rate` in [0,1] required",
@@ -476,7 +476,7 @@ morie_taphonomy_decay_chain <- function(preservation = 0,
 #' morie_taphonomy_decay_absorption(morie_taphonomy_decay_chain(0.7))$absorption
 #' @export
 morie_taphonomy_decay_absorption <- function(chain,
-                                             start = chain$transient[1]) {
+                                             start = chain$transient\[1\]) {
   tr <- chain$transient
   ab <- chain$absorbing
   if (!start %in% tr) {
@@ -509,7 +509,7 @@ morie_taphonomy_decay_absorption <- function(chain,
 #' @examples
 #' morie_taphonomy_decay_simulate(morie_taphonomy_decay_chain(0.7), seed = 1)
 #' @export
-morie_taphonomy_decay_simulate <- function(chain, start = chain$transient[1],
+morie_taphonomy_decay_simulate <- function(chain, start = chain$transient\[1\],
                                            n_steps = 100L, seed = 42L) {
   if (!start %in% chain$transient) {
     stop("`start` must be a transient state", call. = FALSE)
@@ -517,7 +517,7 @@ morie_taphonomy_decay_simulate <- function(chain, start = chain$transient[1],
   set.seed(seed)
   s <- start
   path <- character(n_steps + 1L)
-  path[1] <- s
+  path\[1\] <- s
   used <- 1L
   for (i in seq_len(n_steps)) {
     s <- sample(chain$states, 1L, prob = chain$P[s, ])
@@ -553,7 +553,7 @@ morie_taphonomy_decay_delta <- function(preservation, start = NULL, ...) {
   }
   nat_chain <- morie_taphonomy_decay_chain(preservation = 0, ...)
   trt_chain <- morie_taphonomy_decay_chain(preservation = preservation, ...)
-  if (is.null(start)) start <- nat_chain$transient[1]
+  if (is.null(start)) start <- nat_chain$transient\[1\]
   p_nat <- morie_taphonomy_decay_absorption(nat_chain, start)$absorption[["mummified"]]
   p_trt <- morie_taphonomy_decay_absorption(trt_chain, start)$absorption[["mummified"]]
   delta <- p_trt - p_nat
@@ -870,7 +870,7 @@ morie_taphonomy_bhm <- function(data,
     )
   }
 
-  lime_row <- coefs[coefs$term %in% c("lime_treatment", covariates[1]), ][1, ]
+  lime_row <- coefs[coefs$term %in% c("lime_treatment", covariates\[1\]), ][1, ]
   list(
     coefficients   = coefs,
     sigma          = sqrt(sigma2),
@@ -1018,7 +1018,7 @@ generated quantities {
     fit <- fitfun(
       form, data = frame, family = stats::gaussian(),
       prior = rstanarm::normal(location = m0[-1], scale = s0[-1], autoscale = FALSE),
-      prior_intercept = rstanarm::normal(location = m0[1], scale = s0[1],
+      prior_intercept = rstanarm::normal(location = m0\[1\], scale = s0\[1\],
                                          autoscale = FALSE),
       chains = chains, iter = total_iter, seed = seed, refresh = 0)
     draws <- as.matrix(fit)
@@ -1034,7 +1034,7 @@ generated quantities {
     }
     label <- "rstanarm (NUTS)"
   } else {                                  # brms
-    pr <- brms::set_prior(sprintf("normal(%g, %g)", m0[1], s0[1]),
+    pr <- brms::set_prior(sprintf("normal(%g, %g)", m0\[1\], s0\[1\]),
                           class = "Intercept")
     for (i in seq_along(covariates)) {
       pr <- pr + brms::set_prior(sprintf("normal(%g, %g)", m0[i + 1], s0[i + 1]),
@@ -1244,7 +1244,7 @@ morie_taphonomy_ilr <- function(x, pseudocount = 1e-6) {
 #' @noRd
 .morie_read_usgs_soil_zip <- function(zip_path, nrows = NULL) {
   members <- utils::unzip(zip_path, list = TRUE)$Name
-  csv <- grep("\\.csv$", members, value = TRUE, ignore.case = TRUE)[1]
+  csv <- grep("\\.csv$", members, value = TRUE, ignore.case = TRUE)\[1\]
   if (is.na(csv)) stop("no CSV member found in ", basename(zip_path),
                        call. = FALSE)
   # read.csv opens AND closes the unz() connection it is handed; do not close

@@ -28,7 +28,7 @@
 #' @param Y N-by-nt matrix of response curves y_i(t), one curve per row.
 #' @param basis_X ns-by-K1 matrix, the basis theta on the s grid.
 #' @param basis_Y nt-by-K2 matrix, the basis eta on the t grid.
-#' @param s,t the two grids; default to equally spaced on [0, 1].
+#' @param s,t the two grids; default to equally spaced on \[0, 1\].
 #' @return list: estimate, B, beta, Z, J, fitted, residual, sse, ssy, r2, n,
 #'   method.
 #' @keywords internal
@@ -81,7 +81,7 @@ Fnlm <- function(X, Y, basis_X, basis_Y, s = NULL, t = NULL) {
   for (a in seq_len(ns)) for (b in seq_len(nt)) {
     v <- 0
     for (cc in seq_len(K1)) for (dd in seq_len(K2)) v <- v + Th[a, cc] * B[cc, dd] * Et[b, dd]
-    beta[a, b] <- v
+    beta\[a, b\] <- v
   }
   fitted <- matrix(0, N, nt)
   for (i in seq_len(N)) for (b in seq_len(nt)) {
@@ -97,7 +97,7 @@ Fnlm <- function(X, Y, basis_X, basis_Y, s = NULL, t = NULL) {
     ssy <- ssy + .fnlm_trapz(tt, Ym[i, ] * Ym[i, ])
   }
   r2 <- if (ssy > 0) 1 - sse / ssy else 0
-  list(estimate = B[1, 1], B = B, beta = beta, Z = Z, J = J, fitted = fitted,
+  list(estimate = B\[1, 1\], B = B, beta = beta, Z = Z, J = J, fitted = fitted,
        residual = resid, sse = sse, ssy = ssy, r2 = r2, n = N,
        method = "Ramsay-Silverman (2005) eqs. (16.3), (16.6)-(16.9), unregularised tensor-product fit")
 }

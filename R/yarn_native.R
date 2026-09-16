@@ -30,12 +30,12 @@
 Yarn <- function(base, s, d, L, beta_fast = 32, beta_slow = 1) {
   d <- as.integer(d)
   if (d < 2L || d %% 2L != 0L) stop(sprintf("Yarn: d must be a positive even width, got %d", d), call. = FALSE)
-  s <- as.numeric(s)[1]
+  s <- as.numeric(s)\[1\]
   if (s <= 0) stop(sprintf("Yarn: scale factor must be positive, got %g", s), call. = FALSE)
-  L <- as.numeric(L)[1]
+  L <- as.numeric(L)\[1\]
   if (L <= 0) stop(sprintf("Yarn: original context length must be positive, got %g", L), call. = FALSE)
-  alpha <- as.numeric(beta_slow)[1]
-  beta <- as.numeric(beta_fast)[1]
+  alpha <- as.numeric(beta_slow)\[1\]
+  beta <- as.numeric(beta_fast)\[1\]
   if (!(alpha < beta)) stop(sprintf("Yarn: need beta_slow < beta_fast, got %g and %g", alpha, beta), call. = FALSE)
   half <- d %/% 2L
   if (length(base) == 1L) {

@@ -35,12 +35,12 @@
         if (v < -1e-10) {
           stop("covariance not positive semidefinite")
         }
-        l[i, j] <- sqrt(max(v, 0))
+        l\[i, j\] <- sqrt(max(v, 0))
       } else {
         if (l[j, j] > 0) {
-          l[i, j] <- (a[i, j] - s) / l[j, j]
+          l\[i, j\] <- (a\[i, j\] - s) / l[j, j]
         } else {
-          l[i, j] <- 0
+          l\[i, j\] <- 0
         }
       }
     }
@@ -104,7 +104,7 @@
   pts <- matrix(0, 2 * n + 1, n)
   pts[1, ] <- x
   w <- numeric(2 * n + 1)
-  w[1] <- kappa / scale
+  w\[1\] <- kappa / scale
   for (i in 1:n) {
     pts[i + 1, ] <- x + l[, i]
     pts[n + i + 1, ] <- x - l[, i]
@@ -198,13 +198,13 @@ morie_ukfF <- function(f, h, Q, R, x0, P0, measurements, kappa = NULL) {
     Pzz <- ut_m$cov
     m <- length(zp)
     Pzz <- Pzz + Rm
-    # Pxz[a, b] = sum_i w[i] * (p[i, a] - xp[a]) * (y[i, b] - zp[b])
+    # Pxz\[a, b\] = sum_i w[i] * (p[i, a] - xp[a]) * (y[i, b] - zp[b])
     diff_p <- sp2$pts - matrix(xp, nrow(sp2$pts), n, byrow = TRUE)
     diff_y <- ys - matrix(zp, nrow(ys), m, byrow = TRUE)
     Pxz <- matrix(0, n, m)
     for (a in 1:n) {
       for (b in 1:m) {
-        Pxz[a, b] <- sum(sp2$w * diff_p[, a] * diff_y[, b])
+        Pxz\[a, b\] <- sum(sp2$w * diff_p[, a] * diff_y[, b])
       }
     }
     # K = Pxz Pzz^{-1}  <=>  solve Pzz K' = Pxz'
@@ -218,8 +218,8 @@ morie_ukfF <- function(f, h, Q, R, x0, P0, measurements, kappa = NULL) {
     # symmetrize (guard n=1 to avoid 1:0 = c(1,0))
     for (a in seq_len(n - 1)) {
       for (b in (a + 1):n) {
-        v <- 0.5 * (P[a, b] + P[b, a])
-        P[a, b] <- v
+        v <- 0.5 * (P\[a, b\] + P[b, a])
+        P\[a, b\] <- v
         P[b, a] <- v
       }
     }

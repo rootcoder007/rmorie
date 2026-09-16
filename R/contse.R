@@ -39,8 +39,8 @@ Contse <- function(sentences, tau = 0.05, dropout = 0.1, seed = 42) {
     for (k in seq_len(d)) {
       ma <- if (.ghc_unif(e, 1L) < dropout) 0 else 1 / keep
       mb <- if (.ghc_unif(e, 1L) < dropout) 0 else 1 / keep
-      ra[k] <- H[i, k] * ma
-      rb[k] <- H[i, k] * mb
+      ra[k] <- H\[i, k\] * ma
+      rb[k] <- H\[i, k\] * mb
     }
     A[i, ] <- .clip_l2norm(ra)
     B[i, ] <- .clip_l2norm(rb)
@@ -50,7 +50,7 @@ Contse <- function(sentences, tau = 0.05, dropout = 0.1, seed = 42) {
     s <- numeric(n)
     for (j in seq_len(n)) {
       acc <- 0
-      for (k in seq_len(d)) acc <- acc + A[i, k] * B[j, k]
+      for (k in seq_len(d)) acc <- acc + A\[i, k\] * B[j, k]
       s[j] <- acc / tau
     }
     mx <- max(s)
@@ -63,13 +63,13 @@ Contse <- function(sentences, tau = 0.05, dropout = 0.1, seed = 42) {
   loss <- loss / n
   align <- 0
   for (i in seq_len(n)) for (k in seq_len(d))
-    align <- align + (A[i, k] - B[i, k])^2
+    align <- align + (A\[i, k\] - B\[i, k\])^2
   align <- align / n
   unif <- 0
   cnt <- 0L
   if (n > 1L) for (i in seq_len(n - 1L)) for (j in seq(i + 1L, n)) {
     dd <- 0
-    for (k in seq_len(d)) dd <- dd + (A[i, k] - A[j, k])^2
+    for (k in seq_len(d)) dd <- dd + (A\[i, k\] - A[j, k])^2
     unif <- unif + exp(-2 * dd)
     cnt <- cnt + 1L
   }

@@ -17,7 +17,7 @@
 #'
 #' @param G Square adjacency matrix, one row/column per node.
 #' @param beta Per-edge infection rate.
-#' @param initial Initial infection probability of each node, in [0, 1].
+#' @param initial Initial infection probability of each node, in \[0, 1\].
 #' @param t_max Integration horizon. Default 20.
 #' @param dt Runge-Kutta step. Default 0.01.
 #' @return List with \code{estimate} (final prevalence), \code{prevalence},
@@ -37,7 +37,7 @@ Siepid <- function(G, beta, initial, t_max = 20, dt = 0.01) {
   if (n == 0L || ncol(A) != n) stop("si_epidemic: G must be a square adjacency matrix")
   p <- .s03vec(initial)
   if (length(p) != n) stop("si_epidemic: initial must have one entry per node")
-  if (any(p < 0) || any(p > 1)) stop("si_epidemic: initial probabilities must lie in [0, 1]")
+  if (any(p < 0) || any(p > 1)) stop("si_epidemic: initial probabilities must lie in \[0, 1\]")
   beta <- as.numeric(beta)
   t_max <- as.numeric(t_max)
   dt <- as.numeric(dt)
@@ -48,7 +48,7 @@ Siepid <- function(G, beta, initial, t_max = 20, dt = 0.01) {
     out <- numeric(n)
     for (i in seq_len(n)) {
       s <- 0
-      for (j in seq_len(n)) s <- s + A[i, j] * x[j]
+      for (j in seq_len(n)) s <- s + A\[i, j\] * x[j]
       out[i] <- beta * (1 - x[i]) * s
     }
     out

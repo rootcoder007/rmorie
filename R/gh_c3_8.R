@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Check that a moment sequence is realisable by a measure on [0, 1]
+#' Check that a moment sequence is realisable by a measure on \[0, 1\]
 #'
 #' Hausdorff's condition -- alternating finite differences all
 #' non-negative -- is necessary AND sufficient. \code{min_difference} is
 #' returned because a sequence can be feasible by a tiny margin.
 #'
-#' Formula: m realisable on [0, 1] iff (-1)^k (Delta^k m)_j >= 0 for all
-#'   j, k >= 0, where (Delta m)\_j = m\_\{j+1\} - m\_j
+#' Formula: m realisable on \[0, 1\] iff (-1)^k (Delta^k m)_j >= 0 for all
+#'   j, k >= 0, where (Delta m)_j = m_\{j+1\} - m_j
 #'
 #' @param moments m_0, m_1, ..., m_n with m_0 = 1.
 #' @return List with \code{feasible}, \code{min_difference},
@@ -24,7 +24,7 @@ Momprior <- function(moments) {
   m <- .t1_vec(moments)
   N <- length(m)
   if (N < 1L) stop("at least the zeroth moment is required")
-  if (abs(m[1] - 1) > 1e-12)
+  if (abs(m\[1\] - 1) > 1e-12)
     stop("m_0 must equal 1 for a probability measure")
   tri <- list(m)
   cur <- m

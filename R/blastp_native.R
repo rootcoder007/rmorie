@@ -71,8 +71,8 @@
 #' morie_blastp(V, V)
 morie_blastp <- function(query, subject, match = 1, mismatch = -1,
                          K = 0.1, lam = 1, score_matrix = NULL) {
-  q <- strsplit(as.character(query), "")[[1]]
-  s <- strsplit(as.character(subject), "")[[1]]
+  q <- strsplit(as.character(query), "")[\[1\]]
+  s <- strsplit(as.character(subject), "")[\[1\]]
   if (!length(q) || !length(s)) stop("sequences must be non-empty")
   score <- if (!is.null(score_matrix)) {
     function(x, y) {

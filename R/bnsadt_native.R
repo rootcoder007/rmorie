@@ -134,10 +134,10 @@ morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
   betas[k + 1L]
 }
 
-# E[p(X/sigma)] under the marginal law of an unselected study. A finite
+# E\[p(X/sigma)\] under the marginal law of an unselected study. A finite
 # sum of normal increments because p is a step function -- the reason no
 # quadrature appears anywhere in this module.
-#' E[p(X/sigma)] under the marginal law of an unselected study. A finite
+#' E\[p(X/sigma)\] under the marginal law of an unselected study. A finite
 #'
 #' sum of normal increments because p is a step function -- the reason
 #' no quadrature appears anywhere in this module.
@@ -291,7 +291,7 @@ morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
       for (j in seq_along(active))
         ps[active[j] + 1L] <- 1 / (1 + exp(-par[2L + j]))
     tau <- exp(par[2])
-    list(mu = par[1], tau = if (tau > tau_floor) tau else tau_floor, ps = ps)
+    list(mu = par\[1\], tau = if (tau > tau_floor) tau else tau_floor, ps = ps)
   }
 
   start <- c(mu0, log(tau0), rep(log(beta0 / (1 - beta0)), length(active)))
@@ -466,8 +466,8 @@ morie_bnsadt <- function(y, D, family = "symmetric_step", grid = NULL,
          estimate = morie_bnsadt_median_unbiased(target, target_se, family, ps))
   })
   ests <- vapply(sweep, function(s) s$estimate, numeric(1))
-  lo_i <- order(ests, seq_along(ests))[1]
-  hi_i <- order(-ests, seq_along(ests))[1]
+  lo_i <- order(ests, seq_along(ests))\[1\]
+  hi_i <- order(-ests, seq_along(ests))\[1\]
   res$sweep <- sweep
   res$bound_lower <- ests[lo_i]
   res$bound_upper <- ests[hi_i]

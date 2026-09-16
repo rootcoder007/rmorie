@@ -32,7 +32,7 @@ Raklng <- function(y, weights, margins, tol = 1e-12, max_iter = 200) {
   if (any(w <= 0)) stop("Raklng: weights must be positive")
   if (length(margins) == 0L) stop("Raklng: at least one margin is required")
   marg <- lapply(margins, function(m) {
-    labs <- as.character(unlist(m[[1]]))
+    labs <- as.character(unlist(m[\[1\]]))
     tgt <- m[[2]]
     if (length(labs) != length(y))
       stop("Raklng: margin labels must have one entry per observation")
@@ -42,7 +42,7 @@ Raklng <- function(y, weights, margins, tol = 1e-12, max_iter = 200) {
     if (any(tt < 0)) stop("Raklng: margin targets must be non-negative")
     list(labs = labs, tt = tt)
   })
-  tot0 <- sum(marg[[1]]$tt)
+  tot0 <- sum(marg[\[1\]]$tt)
   for (m in marg) if (abs(sum(m$tt) - tot0) > 1e-8 * max(1, abs(tot0)))
     stop("Raklng: margins have inconsistent totals")
   it <- 0L

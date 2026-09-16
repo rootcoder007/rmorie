@@ -253,7 +253,7 @@ morie_interval_map <- function(y, left, right, r_left, r_right,
     for (i in seq_len(n)) {
       d0 <- exp(-((y[i] - a)^2) / (2 * s2))
       d1 <- exp(-((y[i] - (a + b))^2) / (2 * s2))
-      m0 <- G[[i]][1] * d0
+      m0 <- G[[i]]\[1\] * d0
       m1 <- G[[i]][2] * d1
       tot <- m0 + m1
       if (tot <= 0)

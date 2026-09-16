@@ -121,7 +121,7 @@
   for (i in seq_along(p)) {
     if (p[i] == 0) next
     for (j in seq_along(q)) {
-      if (q[j] != 0) tot <- tot + p[i] * q[j] * M[i, j]
+      if (q[j] != 0) tot <- tot + p[i] * q[j] * M\[i, j\]
     }
   }
   tot
@@ -309,10 +309,10 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 .nashq_select <- function(A, B, selection, agent, tol) {
   eqs <- nash_equilibria_bimatrix(A, B, tol)
   if (length(eqs) == 0L) return(NULL)
-  if (selection == "first") return(eqs[[1]])
+  if (selection == "first") return(eqs[\[1\]])
   if (selection == "best_for_agent") {
     M <- if (agent == 0) A else B
-    best <- eqs[[1]]
+    best <- eqs[\[1\]]
     best_v <- .nashq_payoff(M, best$p, best$q)
     for (k in seq.int(2L, length(eqs))) {
       e <- eqs[[k]]
@@ -335,12 +335,12 @@ stage_game_type <- function(A, B, tol = 1e-9) {
         return(e)
       }
     }
-    return(eqs[[1]])
+    return(eqs[\[1\]])
   }
   for (e in eqs) {
     if (.nashq_is_saddle(A, B, e$p, e$q, tol)) return(e)
   }
-  eqs[[1]]
+  eqs[\[1\]]
 }
 
 #' .nashq_pick
@@ -414,7 +414,7 @@ morie_nashq <- function(states, actions, step, rewards,
     stop("nashq: this implementation covers two players; ",
          "pass actions as (A1, A2)")
   }
-  A1 <- as.list(actions[[1]])
+  A1 <- as.list(actions[\[1\]])
   A2 <- as.list(actions[[2]])
   if (length(S) == 0L || length(A1) == 0L || length(A2) == 0L) {
     stop("nashq: states and both action sets must be non-empty")
@@ -424,7 +424,7 @@ morie_nashq <- function(states, actions, step, rewards,
   }
   if (is.null(terminal)) term <- list() else term <- as.list(terminal)
   if (is.null(start)) {
-    s0_fn <- function() S[[1]]
+    s0_fn <- function() S[\[1\]]
   } else if (is.function(start)) {
     s0_fn <- start
   } else {
@@ -457,9 +457,9 @@ morie_nashq <- function(states, actions, step, rewards,
       j <- .nashq_pick(M1, A2, 1L, epsilon, rng_e)
       s1 <- step(s, A1[[i]], A2[[j]])
       rr <- rewards(s, A1[[i]], A2[[j]], s1)
-      r1 <- rr[[1]]
+      r1 <- rr[\[1\]]
       r2 <- rr[[2]]
-      tot[1] <- tot[1] + r1
+      tot\[1\] <- tot\[1\] + r1
       tot[2] <- tot[2] + r2
       is_term <- any(vapply(term, function(x) identical(x, s1), logical(1L)))
       if (is_term) {
@@ -476,9 +476,9 @@ morie_nashq <- function(states, actions, step, rewards,
         }
       }
       for (pl in c(0L, 1L)) {
-        cur <- Q[[.nashq_key(pl, s)]][i, j]
+        cur <- Q[[.nashq_key(pl, s)]]\[i, j\]
         r <- if (pl == 0L) r1 else r2
-        Q[[.nashq_key(pl, s)]][i, j] <-
+        Q[[.nashq_key(pl, s)]]\[i, j\] <-
           (1 - alpha) * cur + alpha * (r + gamma * nv[pl + 1L])
       }
       s <- s1
@@ -509,7 +509,7 @@ morie_nashq <- function(states, actions, step, rewards,
   tenth <- max(1L, as.integer(episodes) %/% 10L)
   mean_last <- c(
     sum(vapply(returns[(length(returns) - tenth + 1L):length(returns)],
-               function(r) r[1], numeric(1))) / tenth,
+               function(r) r\[1\], numeric(1))) / tenth,
     sum(vapply(returns[(length(returns) - tenth + 1L):length(returns)],
                function(r) r[2], numeric(1))) / tenth
   )

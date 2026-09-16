@@ -222,11 +222,11 @@
 #'   psi = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_linwlr_blip <- function(a, w, psi) {
   av <- .linwlr_vec(a)
-  if (is.null(w)) return(av * psi[1])
+  if (is.null(w)) return(av * psi\[1\])
   Wm <- .linwlr_mat(w)
   p <- ncol(Wm)
-  if (p == 0L) return(av * psi[1])
-  as.numeric(av * (psi[1] + as.numeric(Wm %*% psi[2:(1 + p)])))
+  if (p == 0L) return(av * psi\[1\])
+  as.numeric(av * (psi\[1\] + as.numeric(Wm %*% psi[2:(1 + p)])))
 }
 
 #' morie_linwlr
@@ -355,14 +355,14 @@ morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
   }
 
   blip_vals <- if (p > 0L) {
-    as.numeric(av * (psi[1] + Wm %*% psi[2:(1 + p)]))
+    as.numeric(av * (psi\[1\] + Wm %*% psi[2:(1 + p)]))
   } else {
-    av * psi[1]
+    av * psi\[1\]
   }
 
   result <- list(
-    estimate = psi[1],
-    se = if (length(se) > 0) se[1] else NaN,
+    estimate = psi\[1\],
+    se = if (length(se) > 0) se\[1\] else NaN,
     psi = psi,
     psi_se = se,
     propensity = pi,

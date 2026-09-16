@@ -69,7 +69,7 @@ Smplqc <- function(G, callrate_min = 0.98, het_sd = 3.0,
     o_hom <- 0L
     e_hom <- 0
     for (j in seq_len(m)) {
-      g <- Gm[i, j]
+      g <- Gm\[i, j\]
       if (!is_valid(g)) next
       n_obs <- n_obs + 1L
       if (g != 1) o_hom <- o_hom + 1L

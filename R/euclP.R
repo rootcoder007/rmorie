@@ -31,7 +31,7 @@ EuclP <- function(p, q, tol = 1e-10) {
     lead <- b[db + 1L]
     repeat {
       da <- length(a) - 1L
-      if (da < db || (length(a) == 1L && abs(a[1]) <= tol)) break
+      if (da < db || (length(a) == 1L && abs(a\[1\]) <= tol)) break
       f <- a[da + 1L] / lead
       for (i in seq_len(db + 1L))
         a[da - db + i] <- a[da - db + i] - f * b[i]
@@ -46,8 +46,8 @@ EuclP <- function(p, q, tol = 1e-10) {
   b <- .trim(as.numeric(q))
   if (length(a) == 0L || length(b) == 0L)
     stop("empty input: p and q must have coefficients")
-  zero_a <- length(a) == 1L && abs(a[1]) <= tol
-  zero_b <- length(b) == 1L && abs(b[1]) <= tol
+  zero_a <- length(a) == 1L && abs(a\[1\]) <= tol
+  zero_b <- length(b) == 1L && abs(b\[1\]) <= tol
   if (zero_a && zero_b) stop("gcd(0, 0) is undefined")
   if (zero_b) { tmp <- a
   a <- b
@@ -61,7 +61,7 @@ EuclP <- function(p, q, tol = 1e-10) {
     if (length(a) < length(b)) { tmp <- a
     a <- b
     b <- tmp }
-    while (!(length(b) == 1L && abs(b[1]) <= tol)) {
+    while (!(length(b) == 1L && abs(b\[1\]) <= tol)) {
       r <- .dvm(a, b)
       a <- b
       b <- .trim(r)

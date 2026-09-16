@@ -49,7 +49,7 @@ Phylotr <- function(distance, labels = NULL) {
     t1 <- sum(D[i, ks] + D[j, ks])
     t3 <- 0
     for (k in ks) for (l in ks) if (l > k) t3 <- t3 + D[k, l]
-    t1 / (2 * (m - 2)) + D[i, j] / 2 + t3 / (m - 2)
+    t1 / (2 * (m - 2)) + D\[i, j\] / 2 + t3 / (m - 2)
   }
   tot <- sum(D[upper.tri(D)])
   s0 <- tot / (n - 1)
@@ -87,9 +87,9 @@ Phylotr <- function(distance, labels = NULL) {
     labs <- c(labs[ks], new_lab)
     m <- m - 1L
   }
-  la <- (D[1, 2] + D[1, 3] - D[2, 3]) / 2
-  lb <- (D[1, 2] + D[2, 3] - D[1, 3]) / 2
-  lc <- (D[1, 3] + D[2, 3] - D[1, 2]) / 2
+  la <- (D\[1, 2\] + D[1, 3] - D[2, 3]) / 2
+  lb <- (D\[1, 2\] + D[2, 3] - D[1, 3]) / 2
+  lc <- (D[1, 3] + D[2, 3] - D\[1, 2\]) / 2
   list(joins = joins, s0 = s0, final_labels = labs,
        final_lengths = c(la, lb, lc), n = n,
        method = "neighbor joining, original 1987 algorithm (Saitou-Nei)")

@@ -107,7 +107,7 @@ ContProj <- function(x, y, t = NULL, dt = 1) {
   list(
     theta = .morie_rg_gridint(prod, ts), integrand = prod,
     discrete_sum = .morie_fsum(prod),
-    duration = ts[length(ts)] - ts[1], n = length(xs),
+    duration = ts[length(ts)] - ts\[1\], n = length(xs),
     method = "Rangayyan (2024) eq. (4.26)"
   )
 }
@@ -146,7 +146,7 @@ CcfOuter <- function(x, y, order, tol = 1e-3) {
   mat <- matrix(0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      mat[i, j] <- .morie_fsum(xs[k - i + 1L] * ys[k - j + 1L]) / m
+      mat\[i, j\] <- .morie_fsum(xs[k - i + 1L] * ys[k - j + 1L]) / m
     }
   }
   dev <- 0
@@ -443,8 +443,8 @@ MfInput <- function(x, omega, dt = 1) {
   )
   one <- length(ws) == 1L
   list(
-    X = if (one) vals[[1]] else vals,
-    omega = if (one) ws[[1]] else ws, dt = step, n = length(xs),
+    X = if (one) vals[\[1\]] else vals,
+    omega = if (one) ws[\[1\]] else ws, dt = step, n = length(xs),
     method = "Rangayyan (2024) eq. (4.33)"
   )
 }
@@ -538,7 +538,7 @@ MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
     if (length(fv) != length(Hs)) {
       stop("freqs and H must have the same length")
     }
-    if (length(fv) > 1L) .morie_rg_gridint(psd, fv) else psd[1] * as.numeric(df)
+    if (length(fv) > 1L) .morie_rg_gridint(psd, fv) else psd\[1\] * as.numeric(df)
   } else {
     .morie_fsum(psd) * as.numeric(df)
   }
@@ -755,7 +755,7 @@ SchwarzC <- function(A, B, grid) {
   rhs <- ea * eb
   keep <- Mod(Bs) > 1e-300
   ks <- if (any(keep)) As[keep] / Conj(Bs[keep]) else complex(0)
-  k <- if (length(ks)) ks[1] else NULL
+  k <- if (length(ks)) ks\[1\] else NULL
   list(
     lhs = lhs, rhs = rhs, holds = lhs <= rhs * (1 + 1e-9),
     ratio = if (rhs > 0) lhs / rhs else NULL,
@@ -799,7 +799,7 @@ SchwarzR <- function(a, b, grid = NULL, dt = 1) {
   rhs <- ea * eb
   keep <- abs(bv) > 1e-300
   ks <- if (any(keep)) av[keep] / bv[keep] else numeric(0)
-  k <- if (length(ks)) ks[1] else NULL
+  k <- if (length(ks)) ks\[1\] else NULL
   list(
     lhs = lhs, rhs = rhs, holds = lhs <= rhs * (1 + 1e-9),
     equality = rhs > 0 && abs(lhs - rhs) <= 1e-9 * rhs, k = k,
@@ -1306,7 +1306,7 @@ SyncSum <- function(observations) {
   recs <- lapply(observations, as.numeric)
   m <- length(recs)
   if (!m) stop("need at least one observation")
-  n <- length(recs[[1]])
+  n <- length(recs[\[1\]])
   if (!n) stop("records must be nonempty")
   if (any(vapply(recs, length, integer(1)) != n)) {
     stop("all realizations must have the same length")
@@ -1358,7 +1358,7 @@ SpecMoments <- function(psd, fs = 1, freqs = NULL) {
   if (ep <= 0) stop("the PSD has zero total power")
   fmean <- .morie_fsum(f * p) / ep
   cum <- cumsum(p)
-  idx <- which(cum >= 0.5 * ep)[1]
+  idx <- which(cum >= 0.5 * ep)\[1\]
   fmed <- if (is.na(idx)) f[nh] else f[idx]
   fm2 <- .morie_fsum((f - fmean)^2 * p) / ep
   fm3 <- .morie_fsum((f - fmean)^3 * p) / ep
@@ -1455,7 +1455,7 @@ SpecRes <- function(n, fs = 1, window = "rectangular") {
   v <- tab[[key]]
   df <- fsv / nn
   list(
-    delta_f = df, resolution = df * v[1] / 2, main_lobe_bins = v[1],
+    delta_f = df, resolution = df * v\[1\] / 2, main_lobe_bins = v\[1\],
     sidelobe_db = v[2], equivalent_noise_bandwidth_bins = v[3],
     duration = nn / fsv, n = nn, fs = fsv, window = key,
     zero_padding_helps = FALSE,
@@ -1500,8 +1500,8 @@ PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
   )
   if (!is.null(bands)) {
     powers <- lapply(bands, function(b) {
-      if (b[2] <= b[1]) stop("a band has hi <= lo")
-      .morie_fsum(p[freqs >= b[1] & freqs < b[2]]) * width
+      if (b[2] <= b\[1\]) stop("a band has hi <= lo")
+      .morie_fsum(p[freqs >= b\[1\] & freqs < b[2]]) * width
     })
     tot <- sum(unlist(powers))
     out$band_power <- powers
@@ -1597,7 +1597,7 @@ ErpArtifact <- function(epochs, reject = NULL) {
   recs <- lapply(epochs, as.numeric)
   m <- length(recs)
   if (!m) stop("need at least one epoch")
-  n <- length(recs[[1]])
+  n <- length(recs[\[1\]])
   if (!n) stop("epochs must be nonempty")
   if (any(vapply(recs, length, integer(1)) != n)) {
     stop("all epochs must have the same length")
@@ -1687,7 +1687,7 @@ SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
         )
         for (nm in names(bands)) {
           b <- bands[[nm]]
-          v <- c0$coherence[c0$freqs >= b[1] & c0$freqs < b[2]]
+          v <- c0$coherence[c0$freqs >= b\[1\] & c0$freqs < b[2]]
           if (length(v)) acc[[nm]] <- c(acc[[nm]], mean(v))
         }
       }
@@ -1748,7 +1748,7 @@ CardioResp <- function(ecg_rate, resp, fs, band = c(0.15, 0.40),
   if (n < 16L) stop("need at least sixteen samples")
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("fs must be positive")
-  lo <- band[1]
+  lo <- band\[1\]
   hi <- band[2]
   if (!(lo >= 0 && lo < hi && hi <= fsv / 2)) {
     stop("the band must satisfy 0 <= lo < hi <= fs/2")

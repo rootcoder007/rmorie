@@ -48,7 +48,7 @@ Gpsvi <- function(X, y, X_test = NULL, inducing = NULL, batch_size = NULL,
   kf <- function(P, Q) {
     out <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      out[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      out\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     out
   }
   Kmm <- kf(Z, Z) + diag(as.numeric(jitter), m)
@@ -71,7 +71,7 @@ Gpsvi <- function(X, y, X_test = NULL, inducing = NULL, batch_size = NULL,
     z <- .s03cholsolve(S, row)
     sd[j] <- max(var - sum(row * z), 0)
   }
-  .t1_result(estimate = mu[1], mean = mu, variance = sd, elbo = elbo,
+  .t1_result(estimate = mu\[1\], mean = mu, variance = sd, elbo = elbo,
              gaussian_term = gauss, trace_term = trace, n = n,
              method = "collapsed sparse bound of Titsias (2009) as used by Hensman, Fusi & Lawrence (2013)")
 }

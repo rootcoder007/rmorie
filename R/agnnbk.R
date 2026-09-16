@@ -48,11 +48,11 @@ Resblock <- function(x, filters = 1) {
     kerns <- list(1, 1)
   } else {
     kerns <- list(
-      .s03vec(filters[[1]]),
-      .s03vec(if (length(filters) > 1L) filters[[2]] else filters[[1]])
+      .s03vec(filters[\[1\]]),
+      .s03vec(if (length(filters) > 1L) filters[[2]] else filters[\[1\]])
     )
   }
-  h <- conv1d(v, kerns[[1]])
+  h <- conv1d(v, kerns[\[1\]])
   h <- bn(h)
   h1 <- pmax(h, 0)
   h2 <- conv1d(h1, kerns[[2]])

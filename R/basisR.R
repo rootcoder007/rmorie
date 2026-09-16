@@ -26,7 +26,7 @@ BasisR <- function(y, Phi) {
   fit <- .s03matvec(P, cc)
   res <- yy - fit
   sse <- sum(res * res)
-  list(estimate = cc[1], coef = cc, fitted = fit, residual = res,
+  list(estimate = cc\[1\], coef = cc, fitted = fit, residual = res,
        sse = sse, df = n - K, n = n,
        method = "Ramsay-Silverman (2005) Sect. 4.2 least-squares basis expansion, c = (Phi Phi)^-1 Phi y")
 }

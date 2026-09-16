@@ -45,11 +45,11 @@ laplacian <- function(adj, n, normalized = TRUE) {
   for (i in seq_len(N)) for (j in seq_len(N)) {
     if (normalized) {
       if (d[i] <= .GTRF_EPS || d[j] <= .GTRF_EPS)
-        L[i, j] <- if (i == j) 1 else 0
+        L\[i, j\] <- if (i == j) 1 else 0
       else
-        L[i, j] <- (if (i == j) 1 else 0) - A[i, j] / sqrt(d[i] * d[j])
+        L\[i, j\] <- (if (i == j) 1 else 0) - A\[i, j\] / sqrt(d[i] * d[j])
     } else {
-      L[i, j] <- (if (i == j) d[i] else 0) - A[i, j]
+      L\[i, j\] <- (if (i == j) d[i] else 0) - A\[i, j\]
     }
   }
   L

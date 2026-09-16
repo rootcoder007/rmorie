@@ -271,7 +271,7 @@ sinkhorn_knopp <- function(scores, iterations = 3L, epsilon = 0.05) {
   if (n > 0L && K > 0L) {
     for (i in seq_len(n)) {
       for (j in seq_len(K)) {
-        Q[i, j] <- exp(S[[i]][j] / eps)
+        Q\[i, j\] <- exp(S[[i]][j] / eps)
       }
     }
     tot <- sum(Q)

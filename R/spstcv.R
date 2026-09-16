@@ -60,7 +60,7 @@ spstcv <- function(spatial_h, temporal_u, cov_spatial, cov_temporal,
                                                    cov_spatial, cov_temporal,
                                                    form = form),
     sill = .schab_st_separable_covariance(0, 0, cov_spatial, cov_temporal,
-                                          form = form)[1])
+                                          form = form)\[1\])
   if (!is.null(coords) && !is.null(times)) {
     v <- .schab_st_is_valid_covariance(
       coords, times,

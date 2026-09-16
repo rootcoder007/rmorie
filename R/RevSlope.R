@@ -4,7 +4,7 @@
 #'
 #' r sigma_x / sigma_y, the slope of X regressed on Y.
 #'
-#' @param r correlation, in [-1, 1].
+#' @param r correlation, in \[-1, 1\].
 #' @param sigma_x spread of X, >= 0.
 #' @param sigma_y spread of Y, > 0.
 #' @return list(slope).
@@ -18,7 +18,7 @@ RevSlope <- function(r, sigma_x, sigma_y) {
   sigma_x <- as.numeric(sigma_x)
   sigma_y <- as.numeric(sigma_y)
   if (length(r) != 1L || is.na(r) || r < -1 || r > 1) {
-    stop("r must be a single value in [-1, 1].", call. = FALSE)
+    stop("r must be a single value in \[-1, 1\].", call. = FALSE)
   }
   if (length(sigma_y) != 1L || is.na(sigma_y) || sigma_y <= 0 ||
         length(sigma_x) != 1L || is.na(sigma_x) || sigma_x < 0) {

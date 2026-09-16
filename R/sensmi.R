@@ -60,7 +60,7 @@
 #' @param mediator Numeric mediator vector, same length as \code{y}.
 #' @param r2_grid Numeric vector of values of the product
 #'   \eqn{R^{2*}_M R^{2*}_Y}, each in [0, 1). Defaults to 10 points on
-#'   [0, 0.81]. The ACME is reported at both signs of \eqn{\rho},
+#'   \[0, 0.81\]. The ACME is reported at both signs of \eqn{\rho},
 #'   because its sign follows \eqn{sign(\lambda_2\lambda_3)}, which the
 #'   data cannot reveal.
 #' @return Named list with \code{estimate} (the ACME under sequential

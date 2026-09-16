@@ -11,7 +11,7 @@
 #' MODEL I, p. 47.  Realise a Poisson process of intensity lambda and then
 #' "exclude every event such that the distance to its nearest neighbour is
 #' less than a given positive number R"; if two points are closer than R,
-#' BOTH go.  Then E[Z(S)] = alpha lambda mu(S), eq. (3.6.5) p. 48, with
+#' BOTH go.  Then E\[Z(S)\] = alpha lambda mu(S), eq. (3.6.5) p. 48, with
 #' alpha = exp(-lambda C_n R^n), eq. (3.6.6) p. 48, and the pair retention
 #' function k(v) = 0 for 0 < v < R and exp(-lambda U(R, R; v)) for R <= v,
 #' eq. (3.6.4) p. 47.
@@ -92,7 +92,7 @@ Hcoreg <- function(coords, r, lam, model = 2) {
     }
   }
   d <- sort(d)
-  min_dist <- if (length(d)) d[1] else Inf
+  min_dist <- if (length(d)) d\[1\] else Inf
   feasible <- !any(close)
   retained <- ifelse(close, 0, 1)
   n_retained <- sum(retained)

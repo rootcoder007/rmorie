@@ -112,7 +112,7 @@ coherence <- function(A, rank = NULL) {
   mu_u <- 0
   for (i in seq_len(n1)) {
     ss <- 0
-    for (j in seq_len(r)) ss <- ss + U[i, j]^2
+    for (j in seq_len(r)) ss <- ss + U\[i, j\]^2
     if (ss > mu_u) mu_u <- ss
   }
   mu_v <- 0

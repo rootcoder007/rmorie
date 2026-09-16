@@ -63,9 +63,9 @@ morie_rdrobu <- function(y, x, cutoff = 0.0, alpha = 0.05, ...) {
       robust         = ci_r
     ),
     widths        = list(
-      conventional   = ci_c[2] - ci_c[1],
-      bias_corrected = ci_b[2] - ci_b[1],
-      robust         = ci_r[2] - ci_r[1]
+      conventional   = ci_c[2] - ci_c\[1\],
+      bias_corrected = ci_b[2] - ci_b\[1\],
+      robust         = ci_r[2] - ci_r\[1\]
     ),
     correction_factor = correction_factor,
     bias_estimate     = fit$estimate - fit$bias_corrected,

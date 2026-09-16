@@ -7,9 +7,9 @@
 #'
 #' Write I(X;Y) = H(X) - H(X|Y) and replace the intractable posterior
 #' p(x|y) by a variational decoder q(x|y). Since H(X|Y) =
-#' -E[log q(x|y)] - E_\{p(y)\}[KL(p(.|y) || q(.|y))] and the KL is
+#' -E\[log q(x|y)\] - E_\{p(y)\}\[KL(p(.|y) || q(.|y))\] and the KL is
 #' non-negative, dropping it can only lower the value:
-#' I(X;Y) >= H(X) + E_\{p(x,y)\}[log q(x|y)], with equality exactly when
+#' I(X;Y) >= H(X) + E_\{p(x,y)\}\[log q(x|y)\], with equality exactly when
 #' q(x|y) = p(x|y) for every y that occurs. The gap is the average KL, so
 #' \code{gap} is non-negative by Gibbs' inequality -- a property this
 #' module asserts rather than assumes.
@@ -21,7 +21,7 @@
 #' continuous version would need a parametric decoder and an optimiser
 #' and is not implemented -- this implementation's scope choice.
 #'
-#' The form I(X;Y) >= E[log q(y|x)/p(y)] is the same bound with X and Y
+#' The form I(X;Y) >= E\[log q(y|x)/p(y)\] is the same bound with X and Y
 #' exchanged; call the function with the arguments swapped.
 #'
 #' @param X,Y Paired discrete observations of equal length.
@@ -95,5 +95,5 @@ Vbinfp <- function(X, Y, q = NULL) {
   .t1_result(estimate = bound, bound = bound, entropy_x = hx, entropy_y = hy,
              expected_log_q = elq, plugin_mi = mi, gap = mi - bound,
              conditional_entropy = hxy, n = n, nx = nx, ny = ny,
-             method = "I(X;Y) >= H(X) + E[log q(x|y)] (Barber and Agakov 2003)")
+             method = "I(X;Y) >= H(X) + E\[log q(x|y)\] (Barber and Agakov 2003)")
 }

@@ -76,7 +76,7 @@ morie_yule_walker <- function(x, order = 4L) {
   r <- R[2:(p + 1L)]
   a <- tryCatch(solve(Rm, -r), error = function(e) qr.solve(Rm, -r))
   roots <- polyroot(rev(c(1, a)))
-  list(a = a, sigma2 = as.numeric(R[1] + sum(a * r)), order = p,
+  list(a = a, sigma2 = as.numeric(R\[1\] + sum(a * r)), order = p,
        stable = all(Mod(roots) < 1),
        method = "Toeplitz Yule-Walker on the BIASED ACF (guarantees stability)")
 }
@@ -305,7 +305,7 @@ morie_cepstrum_pitch <- function(x, fs, f0_range = c(50, 500)) {
   x <- as.numeric(x)
   fs <- as.numeric(fs)
   if (fs <= 0) stop("fs must be positive.", call. = FALSE)
-  lo <- f0_range[1]
+  lo <- f0_range\[1\]
   hi <- f0_range[2]
   if (!isTRUE(lo > 0 && lo < hi)) stop("f0_range must satisfy 0 < lo < hi.", call. = FALSE)
   if (length(x) < 16L) stop("need at least 16 samples.", call. = FALSE)
@@ -344,7 +344,7 @@ morie_spectral_bandwidth <- function(psd, freqs, criterion = "3dB") {
   ipk <- which.max(S)
   if (criterion == "3dB") {
     above <- which(S >= S[ipk] / 2)
-    lo <- f[above[1]]
+    lo <- f[above\[1\]]
     hi <- f[above[length(above)]]
   } else if (criterion == "99") {
     total <- sum(S)
@@ -392,8 +392,8 @@ morie_pan_tompkins_update <- function(PEAKI, SPKI = NULL, NPKI = NULL,
   peaks <- as.numeric(PEAKI)
   if (!length(peaks)) stop("PEAKI must be non-empty.", call. = FALSE)
   if (any(peaks < 0)) stop("peak amplitudes must be non-negative.", call. = FALSE)
-  spki <- if (is.null(SPKI)) peaks[1] else as.numeric(SPKI)
-  npki <- if (is.null(NPKI)) peaks[1] / 2 else as.numeric(NPKI)
+  spki <- if (is.null(SPKI)) peaks\[1\] else as.numeric(SPKI)
+  npki <- if (is.null(NPKI)) peaks\[1\] / 2 else as.numeric(NPKI)
   flags <- if (is.null(is_signal)) NULL else as.logical(is_signal)
   if (!is.null(flags) && length(flags) != length(peaks)) {
     stop("is_signal must have one entry per peak.", call. = FALSE)

@@ -174,8 +174,8 @@ morie_goldsc_lj <- function(r, r0, eps, m = 6, n = 12) {
 morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
                                inner = c(2, 4)) {
   if (as.numeric(r) >= r0)
-    return(morie_goldsc_lj(r, r0, eps, outer[1], outer[2]))
-  morie_goldsc_lj(r, r0, eps, inner[1], inner[2])
+    return(morie_goldsc_lj(r, r0, eps, outer\[1\], outer[2]))
+  morie_goldsc_lj(r, r0, eps, inner\[1\], inner[2])
 }
 
 #' .goldsc_pair
@@ -198,7 +198,7 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
   if (!is.null(inner))
     return(morie_goldsc_split(r, r0, eps, .goldsc_outer(potential), inner))
   mn <- .goldsc_outer(potential)
-  morie_goldsc_lj(r, r0, eps, mn[1], mn[2])
+  morie_goldsc_lj(r, r0, eps, mn\[1\], mn[2])
 }
 
 #' .goldsc_lookup
@@ -213,7 +213,7 @@ morie_goldsc_split <- function(r, r0, eps, outer = c(4, 8),
 #' @return Nothing; this branch always raises.
 #' @export
 .goldsc_lookup <- function(table, key, what) {
-  for (kv in table) if (kv[[1]] == key) return(as.numeric(kv[[2]]))
+  for (kv in table) if (kv[\[1\]] == key) return(as.numeric(kv[[2]]))
   stop("no ", what, " for atom type ", key)
 }
 
@@ -242,7 +242,7 @@ morie_goldsc_vdw <- function(pairs, radii, depths, potential = "4-8",
   terms <- numeric(0)
   kept <- 0L
   for (pr in pairs) {
-    r <- as.numeric(pr[[1]])
+    r <- as.numeric(pr[\[1\]])
     if (!is.null(cutoff) && r > as.numeric(cutoff)) next
     r0 <- .goldsc_lookup(radii, pr[[2]], "radius") +
       .goldsc_lookup(radii, pr[[3]], "radius")
@@ -275,7 +275,7 @@ morie_goldsc_vdw <- function(pairs, radii, depths, potential = "4-8",
 morie_goldsc_hbond <- function(bonds, max_distance = 2.5) {
   terms <- numeric(0)
   for (b in bonds)
-    if (as.numeric(b[[1]]) < as.numeric(max_distance))
+    if (as.numeric(b[\[1\]]) < as.numeric(max_distance))
       terms <- c(terms, as.numeric(b[[2]]))
   list(total = if (length(terms)) .w3_csum(terms) else 0,
        terms = terms, n = length(terms))
@@ -294,7 +294,7 @@ morie_goldsc_hbond <- function(bonds, max_distance = 2.5) {
 #' morie_goldsc_torsion(D)
 morie_goldsc_torsion <- function(torsions) {
   terms <- vapply(torsions, function(t)
-    as.numeric(t[2]) * (1 + cos(as.numeric(t[3]) * as.numeric(t[1]) *
+    as.numeric(t[2]) * (1 + cos(as.numeric(t[3]) * as.numeric(t\[1\]) *
                                   pi / 180 - as.numeric(t[4]))),
     numeric(1))
   list(total = if (length(terms)) .w3_csum(terms) else 0, terms = terms)
@@ -345,10 +345,10 @@ morie_goldsc <- function(receptor, ligand, radii = list(),
                          vdw_weight = .GOLDSC_VDW_WEIGHT,
                          max_distance = 2.5, cutoff = NULL) {
   rec <- lapply(receptor, function(a)
-    list(xyz = c(as.numeric(a[[1]]), as.numeric(a[[2]]),
+    list(xyz = c(as.numeric(a[\[1\]]), as.numeric(a[[2]]),
                  as.numeric(a[[3]])), type = as.character(a[[4]])))
   lig <- lapply(ligand, function(a)
-    list(xyz = c(as.numeric(a[[1]]), as.numeric(a[[2]]),
+    list(xyz = c(as.numeric(a[\[1\]]), as.numeric(a[[2]]),
                  as.numeric(a[[3]])), type = as.character(a[[4]])))
   pairs <- list()
   for (ra in rec) for (la in lig)

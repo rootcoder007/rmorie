@@ -90,7 +90,7 @@ NULL
   off <- .b1_logit(QAW)
   e <- c(0, 0)
   for (t in seq_len(as.integer(iters))) {
-    eta <- off + e[1] * H0 + e[2] * H1
+    eta <- off + e\[1\] * H0 + e[2] * H1
     mu <- .b1_expit(eta)
     r <- Y - mu
     w <- mu * (1 - mu)
@@ -105,9 +105,9 @@ NULL
   }
   list(
     epsilon = e,
-    QAstar = .b1_expit(off + e[1] * H0 + e[2] * H1),
+    QAstar = .b1_expit(off + e\[1\] * H0 + e[2] * H1),
     Q1star = .b1_expit(.b1_logit(Q1W) + e[2] / g1),
-    Q0star = .b1_expit(.b1_logit(Q0W) + e[1] / g0),
+    Q0star = .b1_expit(.b1_logit(Q0W) + e\[1\] / g0),
     g1 = g1, g0 = g0, H1 = H1, H0 = H0
   )
 }

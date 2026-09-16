@@ -35,7 +35,7 @@ Cncpat <- function(base, condition, zero_conv_weight = 0, seed = 42) {
     stop("base and condition must have the same shape")
   e <- .ghc_rng(seed)
   w <- matrix(0, 3, 3)
-  for (a in 1:3) for (b in 1:3) w[a, b] <- .ghc_norm(e, 1L, 0, 0.5)
+  for (a in 1:3) for (b in 1:3) w\[a, b\] <- .ghc_norm(e, 1L, 0, 0.5)
   ctrl <- matrix(0, H, W)
   for (i in seq_len(H)) for (j in seq_len(W)) {
     s <- 0
@@ -44,14 +44,14 @@ Cncpat <- function(base, condition, zero_conv_weight = 0, seed = 42) {
       jj <- min(max(j + b, 1L), W)
       s <- s + Cm[ii, jj] * w[a + 2L, b + 2L]
     }
-    ctrl[i, j] <- .s03gelu(s)
+    ctrl\[i, j\] <- .s03gelu(s)
   }
   out <- B + zero_conv_weight * ctrl
   dn <- 0
-  for (i in seq_len(H)) for (j in seq_len(W)) dn <- dn + (out[i, j] - B[i, j])^2
+  for (i in seq_len(H)) for (j in seq_len(W)) dn <- dn + (out\[i, j\] - B\[i, j\])^2
   dn <- sqrt(dn)
   tot <- 0
-  for (i in seq_len(H)) for (j in seq_len(W)) tot <- tot + out[i, j]
+  for (i in seq_len(H)) for (j in seq_len(W)) tot <- tot + out\[i, j\]
   .t1_result(estimate = tot / (H * W), out = out, control = ctrl,
              delta_norm = dn, is_identity = as.integer(dn == 0),
              H = H, W = W,

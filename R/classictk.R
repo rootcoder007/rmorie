@@ -290,7 +290,7 @@ ContFr <- function(x, n) {
 
 #' Continued fraction convergents of pi
 #'
-#' The leading partial quotients [3; 7, 15, 1, 292, ...] are tabulated
+#' The leading partial quotients \[3; 7, 15, 1, 292, ...\] are tabulated
 #' rather than derived: a double cannot supply them past the tenth, so
 #' asking for more than fifteen is refused instead of answered with
 #' noise.  The early convergents are the classical 22/7, 333/106 and
@@ -402,7 +402,7 @@ Resaln <- function(p, q) {
                                      sylvester = S, deg_p = m, deg_q = n,
                                      share_root = TRUE,
                                      method = "resultant via the Sylvester matrix (Bareiss)"))
-        sw <- k + sw[1]
+        sw <- k + sw\[1\]
         tmp <- A[k, ]
         A[k, ] <- A[sw, ]
         A[sw, ] <- tmp
@@ -410,9 +410,9 @@ Resaln <- function(p, q) {
       }
       for (i in (k + 1):size) {
         for (j in (k + 1):size) {
-          A[i, j] <- (A[i, j] * A[k, k] - A[i, k] * A[k, j]) / prev
+          A\[i, j\] <- (A\[i, j\] * A[k, k] - A\[i, k\] * A[k, j]) / prev
         }
-        A[i, k] <- 0
+        A\[i, k\] <- 0
       }
       prev <- A[k, k]
     }

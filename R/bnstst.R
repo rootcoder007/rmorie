@@ -29,8 +29,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Bnstst(V, V)
 Bnstst <- function(lower, upper, se = 0, cdf = 0.05) {
-  r <- Bndfre(lower, upper, as.numeric(cdf)[1])
-  t0 <- as.numeric(se)[1]
+  r <- Bndfre(lower, upper, as.numeric(cdf)\[1\])
+  t0 <- as.numeric(se)\[1\]
   covers <- if (r$lower <= t0 && t0 <= r$upper) 1 else 0
   .t1_result(lower = r$lower, upper = r$upper, width = r$width,
              covers = covers, reject = 1 - covers, c = r$c,

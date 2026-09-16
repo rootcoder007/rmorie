@@ -55,7 +55,7 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
   if (!(u >= 0 && u < 1))
     stop(paste0("prtcl: the offset must lie in [0, 1), got ", u))
   idx <- integer(J)
-  cum <- w[1]
+  cum <- w\[1\]
   j <- 1L
   for (m in seq_len(J)) {
     pos <- (m - 1L + u) / J
@@ -78,7 +78,7 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 .scalar <- function(state) {
-  if (is.list(state)) state[[1]] else if (length(state) > 1L) state[1] else as.numeric(state)
+  if (is.list(state)) state[\[1\]] else if (length(state) > 1L) state\[1\] else as.numeric(state)
 }
 
 #' .multinomial

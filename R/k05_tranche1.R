@@ -96,7 +96,7 @@
 #' Kupiec unconditional-coverage LR test for VaR exceedances
 #'
 #' Under the null the exceedance indicator is i.i.d. Bernoulli(alpha),
-#' so LR_uc = -2 log[ (1-p)^(T-N) p^N / ((1-N/T)^(T-N) (N/T)^N ) ] is
+#' so LR_uc = -2 log\[ (1-p)^(T-N) p^N / ((1-N/T)^(T-N) (N/T)^N ) \] is
 #' asymptotically chi-square on 1 df. This tests coverage ONLY: a model
 #' that puts every breach in one cluster passes it. Pair it with
 #' \code{morie_christoffersen_cc}.
@@ -382,7 +382,7 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
 #'
 #' @param y the series.
 #' @param max_lag highest lag; clipped to n-1.
-#' @return list: acf (index 1 is lag 0, acf[1] == 1), acvf, lags, n,
+#' @return list: acf (index 1 is lag 0, acf\[1\] == 1), acvf, lags, n,
 #'   max_lag, ci_bound, method.
 #' @references Box, G. E. P. & Jenkins, G. M. (1976), \emph{Time Series
 #'   Analysis: Forecasting and Control}, rev. ed., Holden-Day, sec. 2.1.
@@ -396,13 +396,13 @@ morie_sample_acf <- function(y, max_lag = 20) {
   max_lag <- min(as.integer(max_lag), n - 1L)
   if (max_lag < 1L) stop("max_lag must be at least 1.", call. = FALSE)
   cc <- .morie_k05_acvf(v, n, max_lag)
-  if (!(cc[1] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
-  list(acf = cc / cc[1], acvf = cc, lags = 0:max_lag, n = n, max_lag = max_lag,
+  if (!(cc\[1\] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
+  list(acf = cc / cc\[1\], acvf = cc, lags = 0:max_lag, n = n, max_lag = max_lag,
        ci_bound = 1.96 / sqrt(n),
        method = "Sample autocorrelation function (divide-by-n convention)")
 }
 
-#' R is indexed from 1 for lag 0, so r[k + 1] is lag k
+#' R is indexed from 1 for lag 0, so r\[k + 1\] is lag k
 #'
 #' A step of the k05_tranche1 implementation. Called by \code{morie_sample_pacf}.
 #' See the file header for the source the module follows.
@@ -413,7 +413,7 @@ morie_sample_acf <- function(y, max_lag = 20) {
 #' @return The value of \code{phi}, as built in the body.
 #' @export
 .morie_k05_durbin_levinson <- function(r, max_lag) {
-  # r is indexed from 1 for lag 0, so r[k + 1] is lag k.
+  # r is indexed from 1 for lag 0, so r\[k + 1\] is lag k.
   phi <- numeric(max_lag)
   prev <- numeric(0)
   for (k in seq_len(max_lag)) {
@@ -449,7 +449,7 @@ morie_sample_acf <- function(y, max_lag = 20) {
 #'   Durbin, J. (1960), \emph{Revue de l'Institut International de
 #'   Statistique} 28, 233-244.
 #' @examples
-#' morie_sample_pacf(c(1, 3, 2, 7, 6, 8, 5, 9), max_lag = 3)$pacf[1]
+#' morie_sample_pacf(c(1, 3, 2, 7, 6, 8, 5, 9), max_lag = 3)$pacf\[1\]
 #' @export
 morie_sample_pacf <- function(y, max_lag = 20) {
   v <- as.numeric(y)
@@ -458,8 +458,8 @@ morie_sample_pacf <- function(y, max_lag = 20) {
   max_lag <- min(as.integer(max_lag), n - 1L)
   if (max_lag < 1L) stop("max_lag must be at least 1.", call. = FALSE)
   cc <- .morie_k05_acvf(v, n, max_lag)
-  if (!(cc[1] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
-  r <- cc / cc[1]
+  if (!(cc\[1\] > 0)) stop("series is constant; the autocorrelation is undefined.", call. = FALSE)
+  r <- cc / cc\[1\]
   list(pacf = .morie_k05_durbin_levinson(r, max_lag), lags = seq_len(max_lag),
        acf = r, n = n, max_lag = max_lag, ci_bound = 1.96 / sqrt(n),
        method = "Sample PACF via the Durbin-Levinson recursion")

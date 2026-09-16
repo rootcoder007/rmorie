@@ -14,7 +14,7 @@
 #' anchor, not fitted by Bayesian logistic regression, and `method` says
 #' so.
 #'
-#' @param games a score in [0, 1], or a triple (wins, draws, losses).
+#' @param games a score in \[0, 1\], or a triple (wins, draws, losses).
 #' @param ladder optional ratings of other players.
 #' @param anchor rating of the opponent the score was achieved against.
 #' @param base "e" or 10.
@@ -28,13 +28,13 @@ Elorating <- function(games, ladder = NULL, anchor = 0, base = "e",
                       c_elo = 1 / 400) {
   g <- .s03vec(games)
   if (length(g) >= 3L) {
-    w <- g[1]
+    w <- g\[1\]
     d <- g[2]
     l <- g[3]
     tot <- w + d + l
     score <- if (tot > 0) (w + 0.5 * d) / tot else NaN
   } else {
-    score <- if (length(g)) g[1] else NaN
+    score <- if (length(g)) g\[1\] else NaN
   }
   if (score <= 0 || score >= 1) {
     rating <- if (score <= 0) -Inf else Inf

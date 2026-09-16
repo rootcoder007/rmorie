@@ -39,7 +39,7 @@
 # subjects.
 #
 # A caveat the estimator carries. The KM route can produce
-# sensitivities outside [0, 1] when the marker-specific curves
+# sensitivities outside \[0, 1\] when the marker-specific curves
 # cross badly at small samples. That is a property of the estimator,
 # not a bug; the value is reported along with a flag rather than
 # clipped silently.
@@ -145,7 +145,7 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
   at_f <- as.numeric(at)
   for (j in seq_along(curve)) {
     pair <- curve[[j]]
-    if (pair[1] <= at_f) {
+    if (pair\[1\] <= at_f) {
       val <- pair[2]
     } else {
       break

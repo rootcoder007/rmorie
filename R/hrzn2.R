@@ -33,7 +33,7 @@ hrzn2 <- function(y, sigma_u = 0.5, bandwidth = NULL, grid = NULL,
   if (is.null(grid)) grid <- seq(min(y), max(y), length.out = 51)
   grid <- as.numeric(grid)
   t_grid <- seq(-15, 15, length.out = 2049) / max(h, 1e-3)
-  dt <- t_grid[2] - t_grid[1]
+  dt <- t_grid[2] - t_grid\[1\]
   phi_Y <- colMeans(exp(1i * outer(y, t_grid)))
   phi_U <- if (noise == "normal") {
     exp(-0.5 * (sigma_u * t_grid)^2)

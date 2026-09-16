@@ -532,8 +532,8 @@ analyze_doob_full_affidavit <- function() {
     if (length(r$tables) > 0) {
       sections[[length(sections) + 1]] <- list(
         title   = sprintf("%s -- %s", labels[i], r$title),
-        headers = r$tables[[1]]$headers,
-        rows    = r$tables[[1]]$rows
+        headers = r$tables[\[1\]]$headers,
+        rows    = r$tables[\[1\]]$rows
       )
     }
   }

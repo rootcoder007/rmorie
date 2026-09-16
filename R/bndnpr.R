@@ -31,7 +31,7 @@ Bndnpr <- function(y, D, X, bw) {
   xv <- as.numeric(unlist(X))
   n <- length(z$y)
   if (length(xv) != n) stop("Bndnpr: X must have one value per unit")
-  h <- as.numeric(bw)[1]
+  h <- as.numeric(bw)\[1\]
   if (!(h > 0)) stop("Bndnpr: bw must be positive")
   y0 <- min(z$y)
   y1 <- max(z$y)
@@ -50,8 +50,8 @@ Bndnpr <- function(y, D, X, bw) {
     m0 <- if (w0 > 0) s0 / w0 else 0
     a1 <- .bnd_wc_arm(m1, p1, y0, y1)
     a0 <- .bnd_wc_arm(m0, p0, y0, y1)
-    slo <- slo + a1[1] - a0[2]
-    shi <- shi + a1[2] - a0[1]
+    slo <- slo + a1\[1\] - a0[2]
+    shi <- shi + a1[2] - a0\[1\]
   }
   lo <- slo / n
   hi <- shi / n

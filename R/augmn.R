@@ -3,7 +3,7 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 209-249], Chapter 7, Section 7.2 "Bayesian Ordinal Regression
+#' volume \[Pages 209-249\], Chapter 7, Section 7.2 "Bayesian Ordinal Regression
 #' Model", equation (7.2) on p. 214 and the numbered Gibbs samplers on pp. 212
 #' and 214, all read as rendered page images.  The chapter attributes the
 #' scheme to Albert, J. H. and Chib, S. (1993), Bayesian analysis of binary
@@ -82,8 +82,8 @@ Augmn <- function(y_bin, X, Z = NULL, sigma_g2 = 1, max_iter = 200L, tol = 1e-13
     prev <- lat
     for (i in seq_len(n)) {
       eta <- 0
-      for (j in seq_len(p)) eta <- eta + XX[i, j] * beta[j]
-      for (j in seq_len(q)) eta <- eta + ZZ[i, j] * b[j]
+      for (j in seq_len(p)) eta <- eta + XX\[i, j\] * beta[j]
+      for (j in seq_len(q)) eta <- eta + ZZ\[i, j\] * b[j]
       d <- inv2pi * exp(-0.5 * eta * eta)
       P <- .s03pnorm(eta)
       if (yy[i] == 1) {

@@ -246,9 +246,9 @@ LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
   gap <- max(Mod(Y - prod))
   one <- length(pts) == 1L
   list(
-    y = y, Y = if (one) Y[[1]] else Y, X = if (one) X[[1]] else X,
-    H = if (one) H[[1]] else H, XH = if (one) prod[[1]] else prod,
-    s = if (one) pts[[1]] else pts, max_difference = gap,
+    y = y, Y = if (one) Y[\[1\]] else Y, X = if (one) X[\[1\]] else X,
+    H = if (one) H[\[1\]] else H, XH = if (one) prod[\[1\]] else prod,
+    s = if (one) pts[\[1\]] else pts, max_difference = gap,
     holds = gap <= 1e-8 * (1 + max(Mod(prod))),
     method = "Rangayyan (2024) eqs. (3.50), (3.53)"
   )
@@ -412,7 +412,7 @@ TvLsi <- function(x, h) {
     keep <- (i - mm) >= 1L & (i - mm) <= n
     if (!any(keep)) 0 else .morie_fsum(row[keep] * xs[i - mm[keep]])
   }, numeric(1))
-  first <- rows[[1]]
+  first <- rows[\[1\]]
   invariant <- all(vapply(rows, function(r) {
     length(r) == length(first) && all(abs(r - first) < 1e-12)
   }, logical(1)))

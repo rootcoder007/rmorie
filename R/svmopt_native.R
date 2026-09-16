@@ -63,7 +63,7 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
   K <- matrix(0, n, n)
   for (i in seq_len(n))
     for (j in seq_len(n))
-      K[i, j] <- kf(M[i, ], M[j, ])
+      K\[i, j\] <- kf(M[i, ], M[j, ])
   K
 }
 
@@ -92,7 +92,7 @@ dual_objective <- function(alpha, y, K) {
   for (i in seq_len(n))
     if (a[i] != 0.0)
       for (j in seq_len(n))
-        q <- q + a[i] * a[j] * yy[i] * yy[j] * K[i, j]
+        q <- q + a[i] * a[j] * yy[i] * yy[j] * K\[i, j\]
   sum(a) - 0.5 * q
 }
 
@@ -157,7 +157,7 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
                 L = L, H = Hh,
                 note = "the box leaves no room for this pair"))
   eta <- K[i, i] + K[j, j] - 2.0 * as.numeric(y[i]) *
-    as.numeric(y[j]) * K[i, j]
+    as.numeric(y[j]) * K\[i, j\]
   if (eta <= .SVMOPT_TAU) eta <- .SVMOPT_TAU
   step <- ((-as.numeric(y[i]) * grad[i]) -
              (-as.numeric(y[j]) * grad[j])) / eta

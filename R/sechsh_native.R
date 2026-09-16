@@ -132,7 +132,7 @@ morie_sechsh_verify_chain <- function(entries, hashes, key = NULL,
 morie_sechsh_merkle_root <- function(leaves) {
   L <- lapply(leaves, as.raw)
   if (length(L) == 0L) return(.sech_sha256(raw()))
-  if (length(L) == 1L) return(.sech_sha256(c(.SECH_LEAF, L[[1]])))
+  if (length(L) == 1L) return(.sech_sha256(c(.SECH_LEAF, L[\[1\]])))
   k <- 1L
   while (k * 2L < length(L)) k <- k * 2L
   c1 <- morie_sechsh_merkle_root(L[seq_len(k)])
@@ -290,7 +290,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
       s1 <- bx(bx(rotr(w2, 17), rotr(w2, 19)), shr(w2, 10))
       W[i + 1L] <- (W[i - 16L + 1L] + s0 + W[i - 7L + 1L] + s1) %% 2^32
     }
-    a <- H[1]
+    a <- H\[1\]
     b <- H[2]
     cc <- H[3]
     d <- H[4]
@@ -314,7 +314,7 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
       b <- a
       a <- (T1 + T2) %% 2^32
     }
-    H[1] <- (H[1] + a) %% 2^32
+    H\[1\] <- (H\[1\] + a) %% 2^32
     H[2] <- (H[2] + b) %% 2^32
     H[3] <- (H[3] + cc) %% 2^32
     H[4] <- (H[4] + d) %% 2^32

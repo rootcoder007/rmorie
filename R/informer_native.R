@@ -133,9 +133,9 @@ morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NUL
     stop("informer: the key set is empty")
   }
   d <- length(qv)
-  if (length(Km[[1]]) != d) {
+  if (length(Km[\[1\]]) != d) {
     stop(sprintf("informer: query has %d dimensions but keys have %d",
-                 d, length(Km[[1]])))
+                 d, length(Km[\[1\]])))
   }
   sc <- if (is.null(scale)) (1.0 / sqrt(d)) else as.numeric(scale)
   z <- .informer_logits(qv, Km, sc)
@@ -251,13 +251,13 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
     stop(sprintf("informer: keys and values must match in length (%d, %d)",
                  length(Km), length(Vm)))
   }
-  d <- length(Qm[[1]])
+  d <- length(Qm[\[1\]])
   sc <- if (is.null(scale)) (1.0 / sqrt(d)) else as.numeric(scale)
   out <- vector("list", length(Qm))
   for (qi in seq_along(Qm)) {
     q <- Qm[[qi]]
     w <- .informer_softmax(.informer_logits(q, Km, sc))
-    out[[qi]] <- sapply(seq_along(Vm[[1]]), function(a) {
+    out[[qi]] <- sapply(seq_along(Vm[\[1\]]), function(a) {
       sum(w * sapply(seq_along(Vm), function(j) Vm[[j]][a]))
     })
   }
@@ -303,9 +303,9 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
   sel <- morie_informer_select_queries(Qm, Km, factor = factor,
                                        measure = measure,
                                        n_sample = n_sample, seed = seed)
-  d <- length(Qm[[1]])
+  d <- length(Qm[\[1\]])
   sc <- if (is.null(scale)) (1.0 / sqrt(d)) else as.numeric(scale)
-  dv <- length(Vm[[1]])
+  dv <- length(Vm[\[1\]])
   vbar <- sapply(seq_len(dv), function(a) {
     sum(sapply(seq_along(Vm), function(j) Vm[[j]][a])) / length(Vm)
   })

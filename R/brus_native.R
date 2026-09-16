@@ -660,7 +660,7 @@ morie_variogram_design <- function(mu = NA, a_i = NA, b_ij = NA,
     info <- matrix(0, pp, pp)
     for (i in seq_len(pp)) {
       for (j in seq_len(pp)) {
-        info[i, j] <- 0.5 * sum(diag(ai %*% as.matrix(da_list[[i]]) %*%
+        info\[i, j\] <- 0.5 * sum(diag(ai %*% as.matrix(da_list[[i]]) %*%
           ai %*% as.matrix(da_list[[j]])))
       }
     }
@@ -678,7 +678,7 @@ morie_variogram_design <- function(mu = NA, a_i = NA, b_ij = NA,
     acc <- 0
     for (i in seq_len(pp)) {
       for (j in seq_len(pp)) {
-        acc <- acc + ct[i, j] *
+        acc <- acc + ct\[i, j\] *
           as.numeric(t(as.numeric(dlam_dtheta[[i]])) %*% am %*%
             as.numeric(dlam_dtheta[[j]]))
       }

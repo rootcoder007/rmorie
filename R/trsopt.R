@@ -35,7 +35,7 @@ Trsub <- function(g, H, delta = 1, tol = 1e-13, max_iter = 200) {
     for (i in seq_len(n)) s <- s + vecs[i, t] * gv[i]
     gt[t] <- s
   }
-  lam1 <- vals[1]
+  lam1 <- vals\[1\]
   D <- as.numeric(delta)
   snorm <- function(lm) {
     s <- 0

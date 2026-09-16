@@ -947,7 +947,7 @@ morie_tps_moran_sweep_heatmap <- function(polygons,
       )
       mi <- if (!is.null(res)) res$moran_I else NULL
       if (!is.null(mi) && length(mi) == 1L && isTRUE(is.finite(mi))) {
-        M[i, j] <- mi
+        M\[i, j\] <- mi
       }
     }
   }

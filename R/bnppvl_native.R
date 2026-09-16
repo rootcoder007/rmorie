@@ -170,7 +170,7 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
     while (j < bitwShiftL(1L, level)) {
       i <- j * step
       ab <- .bnppvl_ab(level, c, schedule, centring, nullq, j)
-      v <- .ghc_beta1(e, ab[1], ab[2])
+      v <- .ghc_beta1(e, ab\[1\], ab[2])
       q[i + 1L] <- q[i - step + 1L] * (1 - v) + q[i + step + 1L] * v
       j <- j + 2L
     }
@@ -228,7 +228,7 @@ morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
       if (wide <= 0 || !(q[i + 1L] > lo && q[i + 1L] < hi)) return(-Inf)
       ab <- .bnppvl_ab(level, c, schedule, centring, nullq, j)
       terms <- c(terms,
-                 .bnppvl_log_beta((q[i + 1L] - lo) / wide, ab[1], ab[2]) -
+                 .bnppvl_log_beta((q[i + 1L] - lo) / wide, ab\[1\], ab[2]) -
                    log(wide))
       j <- j + 2L
     }
@@ -486,7 +486,7 @@ morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
   xs <- as.numeric(x)
   if (!length(xs)) stop("need at least one observation")
   if (any(xs < lo | xs > hi))
-    stop("every observation must lie inside [lo, hi]")
+    stop("every observation must lie inside \[lo, hi\]")
   sweeps <- as.integer(sweeps)
   burn <- as.integer(burn)
   thin <- as.integer(thin)

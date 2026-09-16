@@ -5,8 +5,8 @@
 #' singular at the ends because F(t)(1 - F(t)) vanishes there.
 #'
 #' Formula: F_n(t) = n^-1 sum_i 1\{x_i <= t\};
-#'   G_n(t) = sqrt(n) [F_n(t) - F(t)];
-#'   cov[G(s), G(t)] = F(s ^ t) - F(s) F(t)
+#'   G_n(t) = sqrt(n) \[F_n(t) - F(t)\];
+#'   cov\[G(s), G(t)\] = F(s ^ t) - F(s) F(t)
 #'
 #' @param x The sample.
 #' @param t Points at which the process is evaluated, non-decreasing.
@@ -25,7 +25,7 @@ Empproc <- function(x, t, F) {
   k <- length(t)
   if (n < 1L) stop("the sample must be non-empty")
   if (length(F) != k) stop("t and F must have the same length")
-  if (any(F < 0 | F > 1)) stop("F must lie in [0, 1]")
+  if (any(F < 0 | F > 1)) stop("F must lie in \[0, 1\]")
   if (is.unsorted(t)) stop("t must be non-decreasing")
   Fn <- vapply(t, function(v) sum(x <= v), 0) / n
   Gn <- sqrt(n) * (Fn - F)

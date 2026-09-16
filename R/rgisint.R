@@ -50,7 +50,7 @@ rgisint <- function(emg, force, fs, rest_level = 0) {
   dur <- numeric(0)
   ivs <- list()
   for (r in .rgisint_runs(f)) {
-    a <- r[1]
+    a <- r\[1\]
     b <- r[2]
     if (f[a] <= rest_level) next
     lev <- c(lev, f[a])
@@ -63,7 +63,7 @@ rgisint <- function(emg, force, fs, rest_level = 0) {
   r2 <- .rgemgf_r2(lev, rv)
   fit <- .rgemgf_linfit(lev, rv)
   list(estimate = r2, levels = lev, rms = rv, durations = dur, intervals = ivs,
-       slope = fit[1], intercept = fit[2], r2 = r2, n_levels = length(lev),
+       slope = fit\[1\], intercept = fit[2], r2 = r2, n_levels = length(lev),
        n = n, fs = fsv,
        method = "Rangayyan (2024) Sect. 5.11 pp.294-296, RMS per held isometric level; eq. (5.28) for r^2")
 }

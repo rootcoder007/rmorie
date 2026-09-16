@@ -49,7 +49,7 @@ rgiir <- function(x, cutoff, order = 4L, fs = 1.0, btype = c("low", "high", "pas
       paste(format(cutoff), collapse = ", "), fs, nyq
     ))
   }
-  if (length(cutoff) == 2L && !(cutoff[1] < cutoff[2])) {
+  if (length(cutoff) == 2L && !(cutoff\[1\] < cutoff[2])) {
     stop(sprintf("band cutoffs must be increasing, got cutoff=%s",
                  paste(format(cutoff), collapse = ", ")))
   }

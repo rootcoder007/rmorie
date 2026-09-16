@@ -165,10 +165,10 @@ simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
                               allow_presymptomatic = TRUE) {
   e <- .ghc_rng(as.numeric(seed))
   if (! (0.0 <= as.numeric(trace_prob) && as.numeric(trace_prob) <= 1.0))
-    stop("ttrace: trace_prob must lie in [0, 1], got ",
+    stop("ttrace: trace_prob must lie in \[0, 1\], got ",
          format(trace_prob))
   if (! (0.0 <= as.numeric(subclinical) && as.numeric(subclinical) <= 1.0))
-    stop("ttrace: subclinical must lie in [0, 1], got ",
+    stop("ttrace: subclinical must lie in \[0, 1\], got ",
          format(subclinical))
   if (as.integer(n_initial) < 1L)
     stop("ttrace: need at least one initial case")

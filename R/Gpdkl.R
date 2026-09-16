@@ -64,7 +64,7 @@ Gpdkl <- function(X, y, X_test = NULL, nn = NULL, lengthscale = 1,
   kf <- function(P, Q) {
     out <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      out[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
+      out\[i, j\] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     out
   }
   K <- kf(GA, GA) + diag(s2, n)
@@ -78,7 +78,7 @@ Gpdkl <- function(X, y, X_test = NULL, nn = NULL, lengthscale = 1,
   }
   L <- .s03chol(K)
   ll <- -0.5 * sum(yv * alpha) - sum(log(diag(L))) - 0.5 * n * log(2 * pi)
-  .t1_result(estimate = mu[1], mean = mu, variance = sd, loglik = ll,
+  .t1_result(estimate = mu\[1\], mean = mu, variance = sd, loglik = ll,
              features = ncol(GA), n = n,
              method = "k(g(x), g(x')) with a fixed tanh feature map, Wilson et al. (2016) eq. (1)")
 }

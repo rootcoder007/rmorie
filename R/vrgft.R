@@ -21,7 +21,7 @@
 #' Internal helper: Vrgft Obj
 #' @noRd
 .vrgft_obj <- function(p, mids, gammas, weights, model) {
-  pred <- .vrgft_model(mids, p[1], p[2], p[3], model)
+  pred <- .vrgft_model(mids, p\[1\], p[2], p[3], model)
   sum(weights * (gammas - pred)^2)
 }
 
@@ -77,7 +77,7 @@ vrgft <- function(x, coords, model = "exponential",
     ),
     error = function(e) list(par = p0, convergence = -1)
   )
-  c0 <- res$par[1]
+  c0 <- res$par\[1\]
   c1 <- res$par[2]
   a <- res$par[3]
   list(

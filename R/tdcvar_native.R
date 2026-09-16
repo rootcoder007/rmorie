@@ -89,7 +89,7 @@
   if (n == 0L) {
     return(matrix(0, nrow = 0, ncol = 0))
   }
-  p <- length(X[[1]])
+  p <- length(X[\[1\]])
   M <- matrix(0, nrow = n, ncol = p)
   for (i in seq_len(n)) {
     M[i, ] <- as.numeric(X[[i]])
@@ -201,7 +201,7 @@
 .tdcvar_ip_weights_history <- function(A_hist, L_hist, kind = "binary",
                                        stabilize = TRUE, trim = NULL) {
   K <- length(A_hist)
-  n <- length(A_hist[[1]])
+  n <- length(A_hist[\[1\]])
 
   A_mat <- matrix(0, nrow = n, ncol = K)
   for (k in seq_len(K)) {

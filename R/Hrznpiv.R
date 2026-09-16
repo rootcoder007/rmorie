@@ -4,7 +4,7 @@
 #'
 #' Horowitz (2009), Semiparametric and Nonparametric Methods in
 #' Econometrics, Section 5.3, pages 156-159.  For Y = g(X) + U with
-#' E(U | W = w) = 0 and the support of (X, W) mapped into [0, 1]^2,
+#' E(U | W = w) = 0 and the support of (X, W) mapped into \[0, 1\]^2,
 #'
 #'   E(Y | W = w) f_W(w) = int_0^1 f_XW(x, w) g(x) dx           (5.40)
 #'
@@ -33,9 +33,9 @@
 #' @param x Numeric vector, the endogenous regressor.
 #' @param y Numeric vector, the response.
 #' @param w Numeric vector, the instrument.
-#' @param bandwidth Numeric or NULL; kernel bandwidth on the [0, 1]
+#' @param bandwidth Numeric or NULL; kernel bandwidth on the \[0, 1\]
 #'   scale, default `1.06 n^(-1/6)/sqrt(12)`.
-#' @param grid Integer, number of quadrature points on [0, 1].
+#' @param grid Integer, number of quadrature points on \[0, 1\].
 #' @param tol Numeric, relative eigenvalue cutoff for the truncated
 #'   inverse.  This bounds the amplification factor lambda_1/lambda_j
 #'   of the retained directions at 1/tol.  The default is not
@@ -84,7 +84,7 @@ Hrznpiv <- function(x, y, w, bandwidth = NULL, grid = 25L, tol = 1e-5) {
   # f_W(w) = int f_XW(x, w) dx.
   fW <- as.numeric(wq %*% fxw)
 
-  # E(Y | W = w) by Nadaraya-Watson on the [0, 1] scale.
+  # E(Y | W = w) by Nadaraya-Watson on the \[0, 1\] scale.
   den <- as.numeric(KW %*% rep(1, n))
   mW <- ifelse(den > 1e-300, as.numeric(KW %*% y) / den, 0)
 

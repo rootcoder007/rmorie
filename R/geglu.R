@@ -31,7 +31,7 @@ Geglu <- function(y, x = NULL, W = NULL, V = NULL, b = NULL, c = NULL,
     out[i] <- gate[i] * (u[i] + cc[i])
   }
   ffn <- if (!is.null(W2)) .s03matvec(t(.s03mat(W2)), out) else numeric(0)
-  list(estimate = if (length(out)) out[1] else NaN, out = out, gate = gate,
+  list(estimate = if (length(out)) out\[1\] else NaN, out = out, gate = gate,
        ffn = ffn,
        method = "GEGLU gated activation with the exact GELU (Shazeer 2020)")
 }

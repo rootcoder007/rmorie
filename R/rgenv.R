@@ -22,11 +22,11 @@ rgenv <- function(x) {
   X <- stats::fft(x)
   h <- numeric(N)
   if (N %% 2 == 0) {
-    h[1] <- 1
+    h\[1\] <- 1
     h[N / 2 + 1] <- 1
     h[2:(N / 2)] <- 2
   } else {
-    h[1] <- 1
+    h\[1\] <- 1
     h[2:((N + 1) / 2)] <- 2
   }
   z <- stats::fft(X * h, inverse = TRUE) / N
@@ -35,7 +35,7 @@ rgenv <- function(x) {
   # unwrap
   dphi <- diff(phase)
   dphi <- ((dphi + pi) %% (2 * pi)) - pi
-  phase_unwrapped <- cumsum(c(phase[1], dphi))
+  phase_unwrapped <- cumsum(c(phase\[1\], dphi))
   inst_freq <- diff(phase_unwrapped) / (2 * pi)
   list(
     envelope = env, analytic = z,

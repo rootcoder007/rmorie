@@ -234,7 +234,7 @@ infonce <- function(image_embeddings, text_embeddings,
   S <- matrix(0.0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      S[i, j] <- sum(Iu[i, ] * Tu[j, ]) / t
+      S\[i, j\] <- sum(Iu[i, ] * Tu[j, ]) / t
     }
   }
 
@@ -243,7 +243,7 @@ infonce <- function(image_embeddings, text_embeddings,
     for (i in seq_len(n)) {
       m <- max(rows[i, ])
       z <- 0.0
-      for (k in seq_len(ncol(rows))) z <- z + exp(rows[i, k] - m)
+      for (k in seq_len(ncol(rows))) z <- z + exp(rows\[i, k\] - m)
       tot <- tot + -(rows[i, i] - m - log(z))
     }
     tot / n

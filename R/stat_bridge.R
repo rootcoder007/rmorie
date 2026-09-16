@@ -110,7 +110,7 @@ stat_bridge_help <- function() {
 #' cat(stat_bridge_exec("help"))
 #' @export
 stat_bridge_exec <- function(cmd_str) {
-  parts <- strsplit(trimws(cmd_str), "\\s+")[[1]]
+  parts <- strsplit(trimws(cmd_str), "\\s+")[\[1\]]
   if (length(parts) == 0L) {
     return("Usage: empty command")
   }

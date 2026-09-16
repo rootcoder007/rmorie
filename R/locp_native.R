@@ -35,7 +35,7 @@
 #'
 #' At each evaluation point x0 solves the kernel-weighted least
 #' squares problem (ESL Eq. 6.11) on the centered polynomial design
-#' [1, (x - x0), ..., (x - x0)^d]; the fitted value is the local
+#' \[1, (x - x0), ..., (x - x0)^d\]; the fitted value is the local
 #' intercept and the local slope is the coefficient of (x - x0).
 #' Degree-d polynomials are reproduced exactly for any kernel and
 #' bandwidth.
@@ -90,7 +90,7 @@ morie_locp <- function(x, y, x0 = NULL, degree = 1, bandwidth = NULL,
       fitted[ip] <- NaN
       slope[ip] <- NaN
     } else {
-      fitted[ip] <- beta[1]
+      fitted[ip] <- beta\[1\]
       slope[ip] <- if (d >= 1) beta[2] else NaN
     }
     neff[ip] <- sw

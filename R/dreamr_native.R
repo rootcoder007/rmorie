@@ -147,7 +147,7 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
               c(transition, "transition"),
               c(reward_model, "reward_model"))
   for (pair in fns) {
-    fn <- pair[[1]]
+    fn <- pair[\[1\]]
     name <- pair[[2]]
     if (!is.function(fn)) stop(sprintf("dreamr: %s must be callable", name))
   }
@@ -214,7 +214,7 @@ morie_dreamr_lambda_return <- function(rewards, values, gamma = 0.99, lam = 0.95
   }
   gamma <- as.numeric(gamma)
   lam <- as.numeric(lam)
-  if (lam < 0 || lam > 1) stop("dreamr: lam must lie in [0, 1]")
+  if (lam < 0 || lam > 1) stop("dreamr: lam must lie in \[0, 1\]")
 
   if (estimator == "reward") {
     # eq. 4: undiscounted sum to the horizon, no value model.

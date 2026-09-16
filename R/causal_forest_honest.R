@@ -731,7 +731,7 @@ morie_interventional_effects <- function(y, x, m, c = NULL, n_draws = 2000L,
 
   set.seed(seed)
   draw <- function(xv) {
-    mu <- bm[1] + bm[2] * xv + if (ncol(C)) sum(bm[-(1:2)] * cbar) else 0
+    mu <- bm\[1\] + bm[2] * xv + if (ncol(C)) sum(bm[-(1:2)] * cbar) else 0
     mu + sample(resid, B, replace = TRUE)
   }
   predict_y <- function(xv, mv) {

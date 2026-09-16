@@ -291,7 +291,7 @@ fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
     ses[a] <- if (sxx > .bhltmsm_EPS) sqrt(s2 / sxx) else Inf
   }
   names <- as.character(states)[seq_len(ncol(X))]
-  list(estimate = co[-1], intercept = co[1],
+  list(estimate = co[-1], intercept = co\[1\],
        coefficients = setNames(as.list(co[-1]), names),
        se = setNames(as.list(ses), names),
        per_episode = setNames(as.list(co[-1]), names),

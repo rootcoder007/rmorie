@@ -95,7 +95,7 @@
     if (is.list(Z)) {
       n <- length(Z)
       if (n == 0) stop("scintg: Z is empty")
-      d <- length(Z[[1]])
+      d <- length(Z[\[1\]])
       if (d == 0) stop("scintg: Z has no columns")
       for (i in seq_len(n)) {
         if (length(Z[[i]]) != d) stop("scintg: Z is ragged")
@@ -368,7 +368,7 @@
   Ws <- vector("list", K)
   for (k in seq_len(K)) {
     Rk <- R[k, ]
-    # A[a, b] = sum_i phi[i, a] * Rk[i] * phi[i, b]
+    # A\[a, b\] = sum_i phi[i, a] * Rk[i] * phi[i, b]
     A <- crossprod(phi, phi * Rk)
     # lambda_0 = 0, lambda_b = lam
     if (B + 1 >= 2) {
@@ -376,12 +376,12 @@
       diag_A[2:(B + 1)] <- diag_A[2:(B + 1)] + lam
       diag(A) <- diag_A
     }
-    # rhs[a, j] = sum_i phi[i, a] * Rk[i] * rows[i, j]
+    # rhs[a, j] = sum_i phi[i, a] * Rk[i] * rows\[i, j\]
     rhs <- crossprod(phi, rows * Rk)
     W <- .scintg_solve(A, rhs)
     W[1, ] <- 0
     Ws[[k]] <- W
-    # out[i, j] -= Rk[i] * sum_a phi[i, a] * W[a, j]
+    # out\[i, j\] -= Rk[i] * sum_a phi[i, a] * W[a, j]
     correction <- phi %*% W
     out <- out - Rk * correction
   }

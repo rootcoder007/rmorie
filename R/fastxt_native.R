@@ -48,7 +48,7 @@ subwords <- function(word, n_min = 3, n_max = 6, boundary = TRUE,
   seen <- character(0)
   for (n in lo:hi) {
     if (nchar(padded) < n) next
-    chars <- strsplit(padded, "")[[1]]
+    chars <- strsplit(padded, "")[\[1\]]
     for (i in seq_len(nchar(padded) - n + 1L)) {
       g <- substr(padded, i, i + n - 1L)
       if (!(g %in% seen)) {
@@ -153,7 +153,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
   docs <- list()
   for (item in corpus) {
     if (is.character(item) && length(item) == 1L) {
-      docs[[length(docs) + 1L]] <- strsplit(item, "\\s+")[[1]]
+      docs[[length(docs) + 1L]] <- strsplit(item, "\\s+")[\[1\]]
     } else {
       docs[[length(docs) + 1L]] <- as.character(item)
     }
@@ -281,7 +281,7 @@ fasttext <- function(corpus, dim = 50, n_min = 3, n_max = 6,
           }
           grad_u <- rep(0, d)
           for (tg in targets) {
-            ci <- tg[1] + 1L
+            ci <- tg\[1\] + 1L
             label <- tg[2]
             dot <- sum(u * Vc[ci, ])
             d_clamped <- max(-30, min(30, dot))

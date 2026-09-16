@@ -187,7 +187,7 @@
                         "probability and is not implemented, got %s"),
                  as.character(kind)))
   }
-  n <- length(A_hist[[1]])
+  n <- length(A_hist[\[1\]])
   T <- length(A_hist)
   w <- rep(1, n)
   per_time <- vector("list", T)
@@ -259,7 +259,7 @@ exposure_summary <- function(A_history, how = "cumulative") {
     ))
   }
   cols <- lapply(A_history, .polkrn_vec)
-  n <- length(cols[[1]])
+  n <- length(cols[\[1\]])
   for (j in seq_along(cols)) {
     if (length(cols[[j]]) != n) {
       stop(sprintf(
@@ -425,7 +425,7 @@ morie_polkrn <- function(y, A_history, H_history, degree = 2,
     out$se_polynomial <- fp$se
     out$vcov_polynomial <- fp$vcov
     out$curve_polynomial <- vapply(grid, function(g) {
-      bp[1] + sum(bp[1 + seq_len(deg)] * g^seq_len(deg))
+      bp\[1\] + sum(bp[1 + seq_len(deg)] * g^seq_len(deg))
     }, numeric(1))
     out$estimate <- bp[2]
     out$se <- fp$se[2]
@@ -444,7 +444,7 @@ morie_polkrn <- function(y, A_history, H_history, degree = 2,
     out$width <- h
     n_c <- length(centres)
     out$curve_kernel <- vapply(grid, function(g) {
-      bk[1] + sum(bk[1 + seq_len(n_c)] *
+      bk\[1\] + sum(bk[1 + seq_len(n_c)] *
         exp(-0.5 * ((g - centres) / h)^2))
     }, numeric(1))
     if (basis == "kernel") {

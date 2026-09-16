@@ -350,11 +350,11 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
     A[row, row] <- A[row, row] + 1
     b[row] <- R[i] * R[j]
     for (k in 1:r) for (m in 1:r)
-      A[row, (k - 1) * r + m] <- A[row, (k - 1) * r + m] - T[i, k] * T[j, m]
+      A[row, (k - 1) * r + m] <- A[row, (k - 1) * r + m] - T\[i, k\] * T[j, m]
   }
   vec <- solve(A, b)
   P <- matrix(0, r, r)
-  for (i in 1:r) for (j in 1:r) P[i, j] <- vec[(i - 1) * r + j]
+  for (i in 1:r) for (j in 1:r) P\[i, j\] <- vec[(i - 1) * r + j]
   P
 }
 
@@ -387,10 +387,10 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   ssq <- 0
   sumlogf <- 0
   for (t in 1:n) {
-    f <- P[1, 1]
+    f <- P\[1, 1\]
     if (f <= 0)
       stop("sarima: non-positive prediction variance; the parameters are outside the stationary region")
-    v <- w[t] - a[1]
+    v <- w[t] - a\[1\]
     PZ <- P[, 1]
     Ka <- v / f * PZ
     a <- a + Ka
@@ -424,7 +424,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   if (length(poly) == 1) return(TRUE)
   k <- length(poly) - 1
   C <- matrix(0, k, k)
-  for (j in 1:k) C[1, j] <- -poly[j + 1] / poly[1]
+  for (j in 1:k) C[1, j] <- -poly[j + 1] / poly\[1\]
   if (k > 1) for (i in 2:k) C[i, i - 1] <- 1
   ev <- eigen(C, only.values = TRUE)$values
   for (lam in ev) {
@@ -538,10 +538,10 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   if (!(method %in% .SARIMA_METHODS))
     stop(sprintf("sarima: method must be one of %s, got %s",
                  paste(.SARIMA_METHODS, collapse = ", "), method))
-  p <- as.integer(order[1])
+  p <- as.integer(order\[1\])
   d <- as.integer(order[2])
   q <- as.integer(order[3])
-  P <- as.integer(seasonal_order[1])
+  P <- as.integer(seasonal_order\[1\])
   D <- as.integer(seasonal_order[2])
   Q <- as.integer(seasonal_order[3])
   s <- as.integer(s)
@@ -786,7 +786,7 @@ forecast <- function(fitted, h = 12) {
   psi <- .sarima_psi_weights(z_ar, ma, h)
   var <- numeric(h)
   for (i in 1:h) var[i] <- fitted$sigma2 * sum(psi[1:i]^2)
-  list(estimate = out[1], forecast = out, variance = var,
+  list(estimate = out\[1\], forecast = out, variance = var,
        se = sqrt(pmax(var, 0)), psi = psi,
        method = "difference-equation forecasts; Box et al. (2016) Sec. 9.2.2")
 }
@@ -838,8 +838,8 @@ bartlett_se <- function(rho, n) {
   if (n < 1) stop("sarima: n must be positive")
   r <- as.list(rho)
   vals <- sapply(c("1", "11", "12", "13"), function(k) as.numeric(r[[k]] %||% 0))
-  if (is.null(rho[["1"]]) && !is.null(rho[[1]])) {
-    vals <- c(as.numeric(rho[[1]]), as.numeric(rho[[11]]), as.numeric(rho[[12]]), as.numeric(rho[[13]]))
+  if (is.null(rho[["1"]]) && !is.null(rho[\[1\]])) {
+    vals <- c(as.numeric(rho[\[1\]]), as.numeric(rho[[11]]), as.numeric(rho[[12]]), as.numeric(rho[[13]]))
   }
   ssq <- sum(vals^2)
   var <- (1 + 2 * ssq) / n

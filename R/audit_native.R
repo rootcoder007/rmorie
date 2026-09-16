@@ -23,7 +23,7 @@
 #' Informative censoring biases the curve and leaves no trace in the data.
 #'
 #' Intervals are on the log-log scale by default. A linear interval can
-#' leave [0, 1], and does so exactly in the tails, where the estimate is
+#' leave \[0, 1\], and does so exactly in the tails, where the estimate is
 #' least precise.
 #'
 #' @param time Observed follow-up times.
@@ -80,7 +80,7 @@ morie_km_native <- function(time, event, alpha = 0.05,
     lo[is.na(lo)] <- 0
     hi[is.na(hi)] <- 1
   }
-  med <- if (any(surv <= 0.5)) times[which(surv <= 0.5)[1]] else NA_real_
+  med <- if (any(surv <= 0.5)) times[which(surv <= 0.5)\[1\]] else NA_real_
   rmst <- if (length(times)) {
     edges <- c(0, times)
     heights <- c(1, surv)[-(length(surv) + 1L)]

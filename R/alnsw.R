@@ -45,7 +45,7 @@ Alnsw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
   best <- 0
   for (i in seq_len(n)) {
     for (j in seq_len(m)) {
-      d <- H[i, j] + sf(a[i], b[j])
+      d <- H\[i, j\] + sf(a[i], b[j])
       u <- H[i, j + 1L] - g
       l <- H[i + 1L, j] - g
       v <- 0
@@ -63,7 +63,7 @@ Alnsw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
   i <- bi
   j <- bj
   while (i > 0L && j > 0L && H[i + 1L, j + 1L] > 0) {
-    if (H[i + 1L, j + 1L] == H[i, j] + sf(a[i], b[j])) {
+    if (H[i + 1L, j + 1L] == H\[i, j\] + sf(a[i], b[j])) {
       o1 <- c(a[i], o1)
       o2 <- c(b[j], o2)
       i <- i - 1L

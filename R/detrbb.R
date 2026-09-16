@@ -18,7 +18,7 @@
   p <- integer(m + 1L)
   way <- integer(m + 1L)
   for (i in seq_len(n)) {
-    p[1] <- i
+    p\[1\] <- i
     j0 <- 1L
     minv <- rep(Inf, m + 1L)
     used <- rep(FALSE, m + 1L)
@@ -92,8 +92,8 @@ Detrbb <- function(image, queries, n_objects = NULL, targets = NULL) {
   if (!is.null(n_objects) && as.integer(n_objects) != G)
     stop("n_objects disagrees with the number of target rows")
   if (G > Q) stop("more ground-truth boxes than queries")
-  cor <- function(b) c(b[1] - b[3] / 2, b[2] - b[4] / 2,
-                       b[1] + b[3] / 2, b[2] + b[4] / 2)
+  cor <- function(b) c(b\[1\] - b[3] / 2, b[2] - b[4] / 2,
+                       b\[1\] + b[3] / 2, b[2] + b[4] / 2)
   l1 <- matrix(0, G, Q)
   giou <- matrix(0, G, Q)
   for (g in seq_len(G)) for (q in seq_len(Q)) {
@@ -102,12 +102,12 @@ Detrbb <- function(image, queries, n_objects = NULL, targets = NULL) {
     l1[g, q] <- s
     a <- cor(TT[g, ])
     b <- cor(P[q, ])
-    iw <- max(min(a[3], b[3]) - max(a[1], b[1]), 0)
+    iw <- max(min(a[3], b[3]) - max(a\[1\], b\[1\]), 0)
     ih <- max(min(a[4], b[4]) - max(a[2], b[2]), 0)
     inter <- iw * ih
-    ua <- (a[3] - a[1]) * (a[4] - a[2]) + (b[3] - b[1]) * (b[4] - b[2]) - inter
+    ua <- (a[3] - a\[1\]) * (a[4] - a[2]) + (b[3] - b\[1\]) * (b[4] - b[2]) - inter
     iou <- if (ua > 0) inter / ua else 0
-    cw <- max(a[3], b[3]) - min(a[1], b[1])
+    cw <- max(a[3], b[3]) - min(a\[1\], b\[1\])
     ch <- max(a[4], b[4]) - min(a[2], b[2])
     ac <- cw * ch
     gi <- if (ac > 0) iou - (ac - ua) / ac else iou

@@ -55,7 +55,7 @@ MatnK <- function(d, nu, rho, sigma2 = 1) {
   if (is.na(sigma2) || sigma2 < 0) stop("matern_kernel: the variance sigma2 must be non-negative")
   k <- numeric(length(v))
   for (i in seq_along(v)) k[i] <- .s03maternk(v[i], nu, rho, sigma2)
-  list(estimate = k[1], k = k, d = v, nu = nu, rho = rho, sigma2 = sigma2,
+  list(estimate = k\[1\], k = k, d = v, nu = nu, rho = rho, sigma2 = sigma2,
        b = sqrt(2 * nu) / rho, n = length(v),
        method = "Matern (1960) correlation function, eq. (2.4.7) p. 18")
 }

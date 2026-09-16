@@ -82,23 +82,23 @@ morie_datasets_statcan_cube_metadata <- function(product_id,
   if (!is.null(r$message) && is.character(r$message)) {
     stop("StatCan WDS: ", r$message[[1L]], call. = FALSE)
   }
-  if (length(r) == 0L || !is.list(r[[1]]) || is.null(r[[1]]$status)) {
+  if (length(r) == 0L || !is.list(r[\[1\]]) || is.null(r[\[1\]]$status)) {
     stop("StatCan WDS returned empty or malformed response ",
       "(the service intermittently rejects cloud IPs)",
       call. = FALSE
     )
   }
-  if (r[[1]]$status != "SUCCESS") {
+  if (r[\[1\]]$status != "SUCCESS") {
     stop(
       sprintf(
         "StatCan WDS status=%s: %s",
-        r[[1]]$status,
-        paste(unlist(r[[1]]), collapse = "; ")
+        r[\[1\]]$status,
+        paste(unlist(r[\[1\]]), collapse = "; ")
       ),
       call. = FALSE
     )
   }
-  r[[1]]
+  r[\[1\]]
 }
 
 #' Fetch the latest N periods for a set of StatCan vectors via WDS

@@ -8,7 +8,7 @@
 .sxrhrt_EPS <- 1e-12
 
 
-# Maximise f over [lo, hi] by a staged fixed-grid argmax.
+# Maximise f over \[lo, hi\] by a staged fixed-grid argmax.
 #
 # A golden-section search is PATH-DEPENDENT. Each arm walks its own sequence
 # of brackets, and near a flat maximum the fc > fd branch is decided by the
@@ -106,14 +106,14 @@
   jit <- 1e-11 * max(abs(sum(diag(A)) / n), 1.0)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
-      s <- A[i, j]
+      s <- A\[i, j\]
       if (j > 1L) s <- s - sum(L[i, seq_len(j - 1L)] * L[j, seq_len(j - 1L)])
       if (i == j) {
         s <- s + jit
         if (s <= 0.0) return(NULL)
         L[i, i] <- sqrt(s)
       } else {
-        L[i, j] <- s / L[j, j]
+        L\[i, j\] <- s / L[j, j]
       }
     }
   }
@@ -173,7 +173,7 @@
 #' @return A list with \code{ll}, \code{beta}, \code{L}.
 #' @export
 .sxrhrt_reml <- function(theta, y, X, Km, male) {
-  s2gm <- theta[1]
+  s2gm <- theta\[1\]
   s2gf <- theta[2]
   rg <- theta[3]
   s2em <- theta[4]
@@ -186,8 +186,8 @@
   S <- matrix(0.0, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      S[i, j] <- if (male[i] && male[j]) s2gm * Km[i, j] else
-        if (!male[i] && !male[j]) s2gf * Km[i, j] else cov2 * Km[i, j]
+      S\[i, j\] <- if (male[i] && male[j]) s2gm * Km\[i, j\] else
+        if (!male[i] && !male[j]) s2gf * Km\[i, j\] else cov2 * Km\[i, j\]
     }
     S[i, i] <- S[i, i] + (if (male[i]) s2em else s2ef)
   }
@@ -306,7 +306,7 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
                 "the relationship matrix is probably not a valid GRM"))
   ll <- res$ll
   beta <- res$beta
-  s2gm <- theta[1]
+  s2gm <- theta\[1\]
   s2gf <- theta[2]
   rg <- theta[3]
   s2em <- theta[4]
@@ -320,7 +320,7 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
   lrt_rg1 <- max(2.0 * (ll - at(th1)), 0.0)
   # and against equal heritabilities
   feq <- function(logv) { th <- theta
-  th[1] <- exp(logv)
+  th\[1\] <- exp(logv)
                           th[2] <- exp(logv)
                           at(th) }
   eq <- exp(.sxrhrt_gridmax(feq, lo, hi))

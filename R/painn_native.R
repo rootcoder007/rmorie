@@ -267,7 +267,7 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   for (a in seq_len(d)) {
     for (f in seq_len(F)) {
       acc <- 0.0
-      for (b in seq_len(d)) acc <- acc + Qm[a, b] * V[b, f]
+      for (b in seq_len(d)) acc <- acc + Qm\[a, b\] * V[b, f]
       rot_v[a, f] <- acc
     }
   }
@@ -282,7 +282,7 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   for (a in seq_len(d)) {
     for (f in seq_len(F)) {
       acc <- 0.0
-      for (b in seq_len(d)) acc <- acc + Qm[a, b] * base_v[(b - 1L) * F + f]
+      for (b in seq_len(d)) acc <- acc + Qm\[a, b\] * base_v[(b - 1L) * F + f]
       want[a, f] <- acc
     }
   }

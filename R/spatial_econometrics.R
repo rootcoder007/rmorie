@@ -41,6 +41,8 @@ morie_weights_totals <- function(W) {
 #' @param W numeric spatial weights matrix
 #' @return `morie_morans_i` a number; `morie_morans_i_test` a list with
 #'   `estimate`, `expectation`, `variance`, `statistic` and `p_value`
+#' @param randomisation Argument `randomisation`; see Usage.
+#' @param alternative Argument `alternative`; see Usage.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -128,7 +130,7 @@ morie_spatial_2sls <- function(y, X, W, add_intercept = TRUE) {
   Wy_hat <- as.numeric(inst %*% g)
   D <- cbind(Wy_hat, X)
   coefs <- as.numeric(solve(crossprod(D), crossprod(D, y)))
-  rho <- coefs[1]
+  rho <- coefs\[1\]
   beta <- coefs[-1]
   resid <- as.numeric(y - rho * Wy - X %*% beta)
   list(rho = rho, beta = beta, coefficients = coefs,

@@ -206,7 +206,7 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
     for (k in seq_along(ratings)) {
       x <- ratings[[k]]
       if (length(x) < 3L) stop("funkM: each rating needs (u, i, r)")
-      u[k]  <- as.integer(x[1])
+      u[k]  <- as.integer(x\[1\])
       iv[k] <- as.integer(x[2])
       rv[k] <- as.numeric(x[3])
     }

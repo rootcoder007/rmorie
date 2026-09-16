@@ -44,8 +44,8 @@
                    i - 1L))
     }
     for (j in seq_len(n)) {
-      if (A[i, j] < 0) stop("poissp: weights must be non-negative")
-      if (abs(A[i, j] - A[j, i]) > 1e-12) {
+      if (A\[i, j\] < 0) stop("poissp: weights must be non-negative")
+      if (abs(A\[i, j\] - A[j, i]) > 1e-12) {
         stop(sprintf("poissp: W must be symmetric; w[%d][%d] and w[%d][%d] differ",
                      i - 1L, j - 1L, j - 1L, i - 1L))
       }
@@ -111,8 +111,8 @@ morie_poissp_rho_bounds <- function(W) {
   1e8 * max(1.0, if (length(m)) max(m) else 1.0)
 }
 
-# negative joint Hessian [[X'MX, X'M], [MX, M + Q]] (+ constraint block)
-#' Negative joint Hessian [[X\'MX, X\'M], [MX, M + Q]] (+ constraint
+# negative joint Hessian [[X'MX, X'M], \[MX, M + Q\]] (+ constraint block)
+#' Negative joint Hessian [[X\'MX, X\'M], \[MX, M + Q\]] (+ constraint
 #' block)
 #'
 #' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
@@ -188,7 +188,7 @@ morie_poissp_rho_bounds <- function(W) {
   tot_y <- sum(y)
   tot_e <- sum(off)
   if (p > 0L && all(abs(X[, 1] - 1) < 1e-12)) {
-    beta[1] <- if (tot_y > 0 && tot_e > 0) log(tot_y / tot_e) else 0.0
+    beta\[1\] <- if (tot_y > 0 && tot_e > 0) log(tot_y / tot_e) else 0.0
   }
   u <- numeric(n)
   for (it in seq_len(as.integer(iters))) {

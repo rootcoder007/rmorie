@@ -35,7 +35,7 @@
 .kvmse_rotation <- function(d, seed) {
   g <- .t1_lcg(seed)
   A <- matrix(0, d, d)
-  for (i in seq_len(d)) for (j in seq_len(d)) A[i, j] <- g$norm()
+  for (i in seq_len(d)) for (j in seq_len(d)) A\[i, j\] <- g$norm()
   Q <- matrix(0, d, d)
   for (j in seq_len(d)) {
     v <- A[, j]

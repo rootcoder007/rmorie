@@ -3,12 +3,12 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 71-108], Chapter 3, Section 3.7, p. 99, read as a rendered
+#' volume \[Pages 71-108\], Chapter 3, Section 3.7, p. 99, read as a rendered
 #' page.  The chapter models the response as Bernoulli with
 #' p(x_i; beta) = exp(eta_i)/(1 + exp(eta_i)), eta_i = beta_0 + x_i' beta_0,
 #' and writes
 #'   l(beta; y) = sum_i y_i eta_i - sum_i log(1 + exp(eta_i)),
-#' with gradient X'[y - p(X; beta)] and Hessian -X' W X,
+#' with gradient X'\[y - p(X; beta)\] and Hessian -X' W X,
 #' W = Diag(p(1-p)).
 #'
 #' The sum-of-logs form and the chapter's form are the same function; the
@@ -39,12 +39,12 @@ Lgobj <- function(y, X, beta) {
   grad <- numeric(p_)
   for (i in seq_len(n)) {
     eta <- 0
-    for (j in seq_len(p_)) eta <- eta + XX[i, j] * bb[j]
+    for (j in seq_len(p_)) eta <- eta + XX\[i, j\] * bb[j]
     ll <- ll + yy[i] * eta - log1pexp(eta)
     pi_ <- .s03sigmoid(eta)
     p[i] <- pi_
     r <- yy[i] - pi_
-    for (j in seq_len(p_)) grad[j] <- grad[j] + XX[i, j] * r
+    for (j in seq_len(p_)) grad[j] <- grad[j] + XX\[i, j\] * r
   }
   list(estimate = ll, loglik = ll, p = p, gradient = grad, n = n,
        method = "l(beta;y) = sum y_i eta_i - sum log(1+exp(eta_i)), Chapter 3 Sect. 3.7")

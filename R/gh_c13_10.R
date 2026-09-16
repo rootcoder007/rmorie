@@ -49,6 +49,6 @@ Ghosalntrconsist <- function(ns = c(100, 800, 6400), seed = 42) {
     errs[k] <- abs(surv - exp(-1))
   }
   .t1_result(estimate = errs[length(errs)], err_by_n = errs,
-             improving = errs[length(errs)] < errs[1],
+             improving = errs[length(errs)] < errs\[1\],
              method = "NTR consistency (GvdV 2017 sec. 13.4.1)")
 }

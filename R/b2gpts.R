@@ -37,7 +37,7 @@
   if (is.function(spec)) return(function(a, b) as.numeric(spec(a, b)))
   pars <- if (is.null(spec)) c(1, 1) else as.numeric(spec)
   if (length(pars) != 2L) stop("kernel must be (sf, l) or a function", call. = FALSE)
-  sf <- pars[1]
+  sf <- pars\[1\]
   ell <- pars[2]
   if (!(ell > 0)) stop("length-scale must be positive", call. = FALSE)
   function(a, b) sf * sf * exp(-sum((as.numeric(a) - as.numeric(b))^2) / (2 * ell * ell))
@@ -58,7 +58,7 @@
 .b2gram <- function(A, B, kf) {
   out <- matrix(0, nrow(A), nrow(B))
   for (i in seq_len(nrow(A))) {
-    for (j in seq_len(nrow(B))) out[i, j] <- kf(A[i, ], B[j, ])
+    for (j in seq_len(nrow(B))) out\[i, j\] <- kf(A[i, ], B[j, ])
   }
   out
 }
@@ -94,7 +94,7 @@ Gpreg <- function(X, y, X_test, kernel = NULL, noise = 0) {
   mean <- as.numeric(Ks %*% alpha)
   W <- solve(K, t(Ks))
   var <- vapply(seq_len(nrow(B)), function(p) kf(B[p, ], B[p, ]) - sum(Ks[p, ] * W[, p]), numeric(1))
-  ll <- -0.5 * sum(yv * alpha) - 0.5 * determinant(K, logarithm = TRUE)$modulus[1] -
+  ll <- -0.5 * sum(yv * alpha) - 0.5 * determinant(K, logarithm = TRUE)$modulus\[1\] -
     0.5 * n * log(2 * pi)
   list(estimate = mean, variance = var, loglik = as.numeric(ll), n = n,
        method = "GP regression, SE kernel -- Rasmussen & Williams (2006) eq. (2.23)-(2.24)")
@@ -192,7 +192,7 @@ Gpresid <- function(X, y, y_pred, kernel = NULL, noise = 0) {
   K <- .b2gram(A, A, kf) + diag(as.numeric(noise)^2, n)
   alpha <- solve(K, r)
   smooth <- as.numeric(.b2gram(A, A, kf) %*% alpha)
-  ll <- -0.5 * sum(r * alpha) - 0.5 * determinant(K, logarithm = TRUE)$modulus[1] -
+  ll <- -0.5 * sum(r * alpha) - 0.5 * determinant(K, logarithm = TRUE)$modulus\[1\] -
     0.5 * n * log(2 * pi)
   list(estimate = smooth, residual = r, fitted = pv + smooth,
        loglik = as.numeric(ll), n = n,

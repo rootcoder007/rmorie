@@ -80,7 +80,7 @@ morie_hook_lengths <- function(shape) {
       paste(shape, collapse = ", ")
     ), call. = FALSE)
   }
-  conj <- vapply(seq_len(lam[1]), function(j) sum(lam > j - 1L), integer(1))
+  conj <- vapply(seq_len(lam\[1\]), function(j) sum(lam > j - 1L), integer(1))
   hooks <- vector("list", length(lam))
   for (i in seq_along(lam)) {
     j <- seq_len(lam[i])
@@ -268,7 +268,7 @@ morie_standard_tableaux_count <- function(shape) {
     return(integer(0))
   }
   sieve <- rep(TRUE, n)
-  sieve[1] <- FALSE
+  sieve\[1\] <- FALSE
   # seq_len, not 2:floor(sqrt(n)) -- for n < 4 the latter counts DOWN
   # from 2 to 1 and hands seq.int a negative step
   for (p in seq_len(floor(sqrt(n)))) {
@@ -303,7 +303,7 @@ morie_rsk_insert <- function(tableau, value) {
       tt[[i]] <- c(row, x)
       return(list(tableau = tt, row = i))
     }
-    j <- pos[1]
+    j <- pos\[1\]
     tmp <- row[j]
     row[j] <- x
     x <- tmp
@@ -349,7 +349,7 @@ morie_rsk_correspondence <- function(permutation) {
   }
   shape <- vapply(p, length, integer(1))
   qshape <- vapply(q, length, integer(1))
-  inc <- if (length(shape)) shape[1] else 0L
+  inc <- if (length(shape)) shape\[1\] else 0L
   dec <- length(shape)
   list(
     p_tableau = p, q_tableau = q, shape = shape, q_shape = qshape,
@@ -447,7 +447,7 @@ morie_burnside_orbit_count <- function(group_permutations, n_colours) {
   if (length(g) == 0L) {
     stop("the group must contain at least the identity.", call. = FALSE)
   }
-  n <- length(g[[1]])
+  n <- length(g[\[1\]])
   if (any(vapply(g, length, integer(1)) != n)) {
     stop("every group element must permute the same set.", call. = FALSE)
   }

@@ -248,7 +248,7 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V = 10,
       for (i in seq_len(n)) {
         r <- r + .tlseqsl_loss(
           loss, t_vec[i],
-          a * P[[1]][i] + (1 - a) * P[[2]][i]
+          a * P[\[1\]][i] + (1 - a) * P[[2]][i]
         )
       }
       r <- r / n

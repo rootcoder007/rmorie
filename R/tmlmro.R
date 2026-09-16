@@ -5,7 +5,7 @@
 #' non-collapsible. Inference is on the log scale because the sampling
 #' distribution of a ratio is badly skewed.
 #'
-#' Formula: psi = [mu1/(1-mu1)] / [mu0/(1-mu0)];
+#' Formula: psi = \[mu1/(1-mu1)\] / \[mu0/(1-mu0)\];
 #'   IC_logOR = IC_1/(mu1(1-mu1)) - IC_0/(mu0(1-mu0));
 #'   CI = exp(log psi -+ z se_log)
 #'
@@ -34,7 +34,7 @@ Tmleor <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95) {
             length(g1W)) != n))
     stop("every argument must have one entry per observation")
   if (any(!(A %in% c(0, 1)))) stop("A must be binary 0/1")
-  if (any(Y < 0 | Y > 1)) stop("Y must lie in [0, 1]")
+  if (any(Y < 0 | Y > 1)) stop("Y must lie in \[0, 1\]")
   if (n < 2L) stop("at least two observations are required")
   fit <- .b1_target(Y, A, QAW, Q1W, Q0W, g1W, gbound)
   cv <- .b1_curves(Y, A, fit)

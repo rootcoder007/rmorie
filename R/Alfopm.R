@@ -18,7 +18,7 @@
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 10
 #' @export
 Alfopm <- function(m, wa, wb, wo, layernorm = TRUE) {
-  s <- dim(m)[1]
+  s <- dim(m)\[1\]
   n <- dim(m)[2]
   cm <- dim(m)[3]
   cc <- nrow(wa)
@@ -46,13 +46,13 @@ Alfopm <- function(m, wa, wb, wo, layernorm = TRUE) {
           idx <- idx + 1L
         }
       }
-      o[i, j, ] <- f
+      o\[i, j, \] <- f
     }
   }
 
   cz <- nrow(wo)
   z <- array(0, c(n, n, cz))
-  for (i in seq_len(n)) for (j in seq_len(n)) z[i, j, ] <- alfLin(o[i, j, ], wo)
+  for (i in seq_len(n)) for (j in seq_len(n)) z\[i, j, \] <- alfLin(o\[i, j, \], wo)
 
   list(
     z = z, o = o, estimate = mean(z), n = n,

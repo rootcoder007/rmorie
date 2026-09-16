@@ -15,7 +15,7 @@
     m <- as.matrix(region)
     r <- c(min(m[, 1]), min(m[, 2]), max(m[, 1]), max(m[, 2]))
   }
-  if (!(r[3] > r[1] && r[4] > r[2])) stop("`region` must have positive area")
+  if (!(r[3] > r\[1\] && r[4] > r[2])) stop("`region` must have positive area")
   r
 }
 
@@ -25,7 +25,7 @@
 #' @return Numeric scalar.
 #' @noRd
 .sp_intensity <- function(points, region) {
-  nrow(as.matrix(points)) / ((region[3] - region[1]) * (region[4] - region[2]))
+  nrow(as.matrix(points)) / ((region[3] - region\[1\]) * (region[4] - region[2]))
 }
 
 #' Internal: Ripley's K estimated as in Sec 3.4.2
@@ -56,7 +56,7 @@
     stop("`correction` must be 'border' or 'none'")
   }
   db <- pmin(
-    p[, 1] - region[1], region[3] - p[, 1],
+    p[, 1] - region\[1\], region[3] - p[, 1],
     p[, 2] - region[2], region[4] - p[, 2]
   )
   vapply(r, function(h) {

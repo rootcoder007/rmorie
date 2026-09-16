@@ -8,7 +8,7 @@
 .rrblpr_EPS <- 1e-12
 
 
-# Maximise f over [lo, hi] by a staged fixed-grid argmax.
+# Maximise f over \[lo, hi\] by a staged fixed-grid argmax.
 #
 # A golden-section search is PATH-DEPENDENT. Each arm walks its own sequence
 # of brackets, and near a flat maximum the fc > fd branch is decided by the
@@ -108,7 +108,7 @@
   jit <- 1e-12 * max(abs(sum(diag(A)) / n), 1.0)
   for (i in seq_len(n)) {
     for (j in seq_len(i)) {
-      s <- A[i, j]
+      s <- A\[i, j\]
       if (j > 1L) s <- s - sum(L[i, seq_len(j - 1L)] * L[j, seq_len(j - 1L)])
       if (i == j) {
         s <- s + jit
@@ -116,7 +116,7 @@
           stop("rrblpr: the covariance matrix is not positive definite")
         L[i, i] <- sqrt(s)
       } else {
-        L[i, j] <- s / L[j, j]
+        L\[i, j\] <- s / L[j, j]
       }
     }
   }

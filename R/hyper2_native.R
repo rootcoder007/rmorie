@@ -116,7 +116,7 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
       s <- sqrt(5) * r
       (1 + s + s * s / 3) * exp(-s)
     }
-    out[i, j] <- sf2 * v
+    out\[i, j\] <- sf2 * v
   }
   out
 }
@@ -314,7 +314,7 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
   nu <- numeric(n)
 
   chol_of <- function(th)
-    .w3_chol(.hyper2_jit(morie_hyper2_kernel(Xv, Xv, th[1], th[2], kind),
+    .w3_chol(.hyper2_jit(morie_hyper2_kernel(Xv, Xv, th\[1\], th[2], kind),
                          jitter))
 
   loglik <- function(fv, sn) {
@@ -336,7 +336,7 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
   lml <- numeric(0)
 
   post <- function(th, g) {
-    Kt <- .hyper2_jit(morie_hyper2_kernel(Xv, Xv, th[1], th[2], kind), jitter)
+    Kt <- .hyper2_jit(morie_hyper2_kernel(Xv, Xv, th\[1\], th[2], kind), jitter)
     A <- .hyper2_jit(Kt, exp(2 * th[3]))
     La <- .w3_chol(A)
     sol <- .w3_solve_chol(La, g)
@@ -344,7 +344,7 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
     cols <- lapply(seq_len(n), function(j) .w3_solve_chol(La, Kt[, j]))
     cov <- matrix(0, n, n)
     for (i in seq_len(n)) for (j in seq_len(n))
-      cov[i, j] <- Kt[i, j] - .w3_dot(Kt[i, ], cols[[j]])
+      cov\[i, j\] <- Kt\[i, j\] - .w3_dot(Kt[i, ], cols[[j]])
     cov <- .hyper2_jit(cov, jitter)
     list(m = mvec, R = .w3_chol(cov), La = La)
   }
@@ -357,13 +357,13 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
           function(v) {
             th <- theta
             th[cc] <- v
-            morie_hyper2_logml(yv, Xv, th[1], th[2], th[3], kind) +
+            morie_hyper2_logml(yv, Xv, th\[1\], th[2], th[3], kind) +
               .hyper2_logprior(th)
           }
         })
         theta[cix] <- morie_hyper2_slice(target, theta[cix], e, w, m)
       }
-      cur <- morie_hyper2_logml(yv, Xv, theta[1], theta[2], theta[3], kind)
+      cur <- morie_hyper2_logml(yv, Xv, theta\[1\], theta[2], theta[3], kind)
     } else if (route == "whitened") {
       # theta moves with nu held fixed, so f = L(theta) nu follows the
       # kernel instead of being stranded by it.
@@ -447,12 +447,12 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
   pv <- numeric(ns)
   pm2 <- numeric(ns)
   for (th in draws) {
-    Kxx <- .hyper2_jit(morie_hyper2_kernel(Xv, Xv, th[1], th[2], kind),
+    Kxx <- .hyper2_jit(morie_hyper2_kernel(Xv, Xv, th\[1\], th[2], kind),
                        exp(2 * th[3]) + jitter)
     Lx <- .w3_chol(Kxx)
     alpha <- .w3_solve_chol(Lx, yv)
-    Ksx <- morie_hyper2_kernel(Xs, Xv, th[1], th[2], kind)
-    Kss <- morie_hyper2_kernel(Xs, Xs, th[1], th[2], kind)
+    Ksx <- morie_hyper2_kernel(Xs, Xv, th\[1\], th[2], kind)
+    Kss <- morie_hyper2_kernel(Xs, Xs, th\[1\], th[2], kind)
     for (j in seq_len(ns)) {
       mj <- .w3_dot(Ksx[j, ], alpha)
       vj <- .w3_solve_chol(Lx, Ksx[j, ])
@@ -477,14 +477,14 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
     } else 0
   }, numeric(1))
 
-  list(draws = draws, log_lengthscale = means[1], log_signal_sd = means[2],
-       log_noise_sd = means[3], lengthscale = exp(means[1]),
+  list(draws = draws, log_lengthscale = means\[1\], log_signal_sd = means[2],
+       log_noise_sd = means[3], lengthscale = exp(means\[1\]),
        signal_sd = exp(means[2]), noise_sd = exp(means[3]),
        posterior_sd = sds, log_target = lml,
        mean_log_target = .w3_csum(lml) / M,
        predict_mean = mean_, predict_sd = sd_, n = n, n_test = ns,
        kept = M, kind = kind, route = route, seed = as.integer(seed),
-       estimate = means[1],
+       estimate = means\[1\],
        method = "GP hyperparameter MCMC with the latent integrated out")
 }
 

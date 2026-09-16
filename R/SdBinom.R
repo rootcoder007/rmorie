@@ -6,7 +6,7 @@
 #' p = 1/6 gives sigma = 37.
 #'
 #' @param n number of trials, >= 0.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(n, p, sd, sd_tot); sd_tot is an alias of sd kept for
 #'   the eq (3.56) callers.
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
@@ -20,7 +20,7 @@ SdBinom <- function(n = 10000, p = 1 / 6) {
   }
   p <- as.numeric(p)
   if (length(p) != 1L || is.na(p) || p < 0 || p > 1) {
-    stop("p must be a single value in [0, 1].", call. = FALSE)
+    stop("p must be a single value in \[0, 1\].", call. = FALSE)
   }
   n <- as.integer(n)
   value <- sqrt(n * p * (1 - p))

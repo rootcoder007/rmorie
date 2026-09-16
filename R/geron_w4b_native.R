@@ -259,9 +259,9 @@ morie_geron_hf_pipelines <- function(task, inputs, model, labels = NULL, top_k =
     for (i in seq_along(items)) {
       ord <- order(probs[i, ], decreasing = TRUE)[seq_len(k)]
       preds[[i]] <- if (k == 1L) {
-        list(label = names_lab[ord[1]], score = probs[i, ord[1]])
+        list(label = names_lab[ord\[1\]], score = probs[i, ord\[1\]])
       } else {
-        lapply(ord, function(j) list(label = names_lab[j], score = probs[i, j]))
+        lapply(ord, function(j) list(label = names_lab[j], score = probs\[i, j\]))
       }
     }
     out <- preds
@@ -336,7 +336,7 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
   .morie_gr_need(batch_size >= 1L, "geron_hf_trainer: batch_size must be at least 1")
   .morie_gr_need(is.finite(lr) && lr > 0, "geron_hf_trainer: learning_rate must be positive and finite")
 
-  mkds <- function(d) list(X = as.matrix(d[[1]]), y = as.numeric(d[[2]]))
+  mkds <- function(d) list(X = as.matrix(d[\[1\]]), y = as.numeric(d[[2]]))
   tr <- mkds(train_ds)
   .morie_gr_need(nrow(tr$X) == length(tr$y), "geron_hf_trainer: train_ds row mismatch")
   ev <- if (is.null(eval_ds)) tr else mkds(eval_ds)
@@ -355,7 +355,7 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
       step <- step + 1L
       idx <- order_idx[st:min(st + batch_size - 1L, m)]
       res <- lg(params, tr$X[idx, , drop = FALSE], tr$y[idx])
-      loss <- as.numeric(res[[1]])
+      loss <- as.numeric(res[\[1\]])
       grad <- as.numeric(res[[2]])
       .morie_gr_need(
         length(grad) == length(params),
@@ -370,7 +370,7 @@ morie_geron_hf_trainer <- function(model, args = list(), train_ds, eval_ds = NUL
     }
     train_loss <- mean(losses)
     ev_res <- lg(params, ev$X, ev$y)
-    eval_loss <- as.numeric(ev_res[[1]])
+    eval_loss <- as.numeric(ev_res[\[1\]])
     .morie_gr_need(is.finite(eval_loss), sprintf("geron_hf_trainer: eval loss non-finite at epoch %d", ep))
     history[[ep]] <- list(epoch = ep, train_loss = train_loss, eval_loss = eval_loss)
     if (eval_loss < best_loss) {
@@ -600,7 +600,7 @@ morie_geron_histogram_gradient_boosting <- function(X, y, max_iter = 100, learni
   hess <- rep(1, m)
   trees <- vector("list", rounds)
   history <- numeric(rounds + 1L)
-  history[1] <- mean((pred - yy)^2)
+  history\[1\] <- mean((pred - yy)^2)
   rows_all <- seq_len(m)
   for (t in seq_len(rounds)) {
     grad <- yy - pred
@@ -873,7 +873,7 @@ morie_geron_in_context_learning_hmicl <- function(model, examples, query, candid
     s <- sub("{x}", as.character(x), s, fixed = TRUE)
     sub("{y}", as.character(y), s, fixed = TRUE)
   }
-  lines <- vapply(pairs, function(ex) fmt(ex[[1]], ex[[2]]), character(1))
+  lines <- vapply(pairs, function(ex) fmt(ex[\[1\]], ex[[2]]), character(1))
   query_line <- trimws(fmt(query, ""), which = "right")
   prompt <- paste(c(lines, query_line), collapse = separator)
 
@@ -1022,7 +1022,7 @@ morie_geron_instance_based <- function(X_train, y_train, x_query, k = 1, task = 
 
   list(
     prediction = pred, neighbors = nn, distances = dist, task = resolved, feature_ranges = ranges,
-    estimate = if (is.numeric(pred)) pred[1] else 0, n = nrow(A),
+    estimate = if (is.numeric(pred)) pred\[1\] else 0, n = nrow(A),
     method = "k-nearest-neighbour (instance-based) prediction"
   )
 }
@@ -1102,7 +1102,7 @@ morie_geron_incremental_pca <- function(X_iter, n_components, batch_size = NULL)
     batches <- lapply(starts, function(s) arr[s:min(s + bs - 1L, nrow(arr)), , drop = FALSE])
   }
   .morie_gr_need(length(batches) > 0L, "geron_incremental_pca: no batches were supplied")
-  n_feat <- ncol(batches[[1]])
+  n_feat <- ncol(batches[\[1\]])
   mean_v <- numeric(n_feat)
   S <- matrix(0, n_feat, n_feat)
   seen <- 0L
@@ -1167,7 +1167,7 @@ morie_geron_kmeans_plus_plus <- function(X, n_clusters, seed = 0) {
   .morie_gr_need(k >= 1L && k <= m, "geron_kmeans_plus_plus: n_clusters out of range")
 
   u0 <- .morie_gr_lcg_u(1L, seed)
-  first <- 1L + floor(u0[1] * m)
+  first <- 1L + floor(u0\[1\] * m)
   chosen <- c(first)
   d2 <- rowSums((A - matrix(A[first, ], m, ncol(A), byrow = TRUE))^2)
   draw_i <- 1L
@@ -1176,11 +1176,11 @@ morie_geron_kmeans_plus_plus <- function(X, n_clusters, seed = 0) {
     if (total <= 0) {
       remaining <- setdiff(seq_len(m), chosen)
       .morie_gr_need(length(remaining) > 0L, "geron_kmeans_plus_plus: cannot pick distinct centres")
-      nxt <- remaining[1]
+      nxt <- remaining\[1\]
     } else {
       uu <- .morie_gr_lcg_u(1L, seed + 97L * draw_i)
       draw_i <- draw_i + 1L
-      target <- uu[1] * total
+      target <- uu\[1\] * total
       csum <- cumsum(d2)
       nxt <- min(which(csum >= target), m)
     }
@@ -1279,7 +1279,7 @@ morie_geron_image_segmentation <- function(image, n_clusters, seed = 0) {
     img <- array(img, dim = c(d, 1L))
     d <- dim(img)
   }
-  h <- d[1]
+  h <- d\[1\]
   w <- d[2]
   c_ <- d[3]
   flat <- matrix(as.numeric(img), nrow = h * w, ncol = c_)
@@ -1322,7 +1322,7 @@ morie_geron_knowledge_distillation <- function(teacher, student, X = NULL, y = N
   temp <- as.numeric(T)
   .morie_gr_need(is.finite(temp) && temp > 0, "geron_knowledge_distillation: T must be positive and finite")
   a <- as.numeric(alpha)
-  .morie_gr_need(a >= 0 && a <= 1, "geron_knowledge_distillation: alpha must lie in [0, 1]")
+  .morie_gr_need(a >= 0 && a <= 1, "geron_knowledge_distillation: alpha must lie in \[0, 1\]")
   # A model may be handed over as logits already computed, or as a
   # function to evaluate at X. The second is what X is for, and
   # refusing a callable outright made the argument dead.
@@ -1541,7 +1541,7 @@ morie_geron_kernel_pca_rbf_hmkprbf <- function(X, n_components, gamma = NULL) {
   ratio <- if (total > 0) pmax(core$eigenvalues, 0) / total else rep(0, length(core$eigenvalues))
   list(
     X_projected = core$projection, eigenvalues = core$eigenvalues, alphas = core$alphas, K = K,
-    K_centered = Kc, explained_variance_ratio = ratio, gamma = g, estimate = core$eigenvalues[1],
+    K_centered = Kc, explained_variance_ratio = ratio, gamma = g, estimate = core$eigenvalues\[1\],
     n = m, method = "Kernel PCA (RBF kernel)"
   )
 }
@@ -1578,7 +1578,7 @@ morie_geron_kernel_pca_poly <- function(X, n_components, degree = 3, gamma = NUL
   list(
     X_projected = core$projection, eigenvalues = core$eigenvalues, alphas = core$alphas, K = K,
     K_centered = core$K_centered, feature_space_dim = fdim, degree = deg, gamma = g, coef0 = c0,
-    estimate = core$eigenvalues[1], n = m, method = "Kernel PCA (polynomial kernel)"
+    estimate = core$eigenvalues\[1\], n = m, method = "Kernel PCA (polynomial kernel)"
   )
 }
 
@@ -1609,7 +1609,7 @@ morie_geron_kernel_pca_sigmoid <- function(X, n_components, gamma = NULL, coef0 
   list(
     X_projected = core$projection, eigenvalues = core$eigenvalues, alphas = core$alphas, K = K,
     K_centered = Kc, spectrum = spectrum, n_negative_eigenvalues = n_neg, is_psd = n_neg == 0,
-    gamma = g, coef0 = c0, estimate = core$eigenvalues[1], n = m, method = "Kernel PCA (sigmoid kernel)"
+    gamma = g, coef0 = c0, estimate = core$eigenvalues\[1\], n = m, method = "Kernel PCA (sigmoid kernel)"
   )
 }
 
@@ -1672,7 +1672,7 @@ morie_geron_kv_cache_compress <- function(K, V, n_bits = 8, per_head = TRUE, dty
   .morie_gr_need(all(dim(Ka) == dim(Va)), "geron_kv_cache_compress: K/V shape mismatch")
   db <- as.integer(dtype_bytes)
   b <- as.integer(n_bits)
-  n_heads <- dim(Ka)[1]
+  n_heads <- dim(Ka)\[1\]
   outs <- list()
   scales <- list(K = c(), V = c())
   max_err <- 0
@@ -1746,7 +1746,7 @@ morie_geron_one_cycle <- function(t, T, lr_max, lr_min, mom_max = 0.95, mom_min 
 #' L2 (ridge) regularization penalty (Geron Ch 11, morie.fn hml2r)
 #' @param theta Parameters.
 #' @param alpha Strength.
-#' @param skip_bias Exclude theta[1].
+#' @param skip_bias Exclude theta\[1\].
 #' @param eta Optional learning rate.
 #' @return List with penalty, gradient, l2_norm, shrink_factor, estimate, n, method.
 #' @export
@@ -1761,7 +1761,7 @@ morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta =
   mask <- rep(1, length(t))
   if (isTRUE(skip_bias)) {
     .morie_gr_need(length(t) >= 2L, "geron_l2_regularization: skip_bias needs a non-bias parameter")
-    mask[1] <- 0
+    mask\[1\] <- 0
   }
   penalty <- 0.5 * a * sum((t * mask)^2)
   grad <- a * t * mask
@@ -1784,7 +1784,7 @@ morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta =
 #' @param X,y Data.
 #' @param theta Coefficients.
 #' @param alpha L1 strength.
-#' @param skip_bias Exclude theta[1].
+#' @param skip_bias Exclude theta\[1\].
 #' @return List with cost, mse, penalty, gradient, n_zero, estimate, n, method.
 #' @export
 #' @examples
@@ -2013,7 +2013,7 @@ morie_geron_lenet5 <- function(n_classes = 10, input_size = 32, in_channels = 1)
   layers <- list()
   total <- 0L
   conv <- function(name, size, cin, cout, kernel) {
-    out <- as.integer(morie_geron_conv_output_size(size, kernel, padding = 0, stride = 1)$out_size[1])
+    out <- as.integer(morie_geron_conv_output_size(size, kernel, padding = 0, stride = 1)$out_size\[1\])
     .morie_gr_need(out >= 1L, "geron_lenet5: kernel does not fit the map")
     p <- kernel * kernel * cin * cout + cout
     layers[[length(layers) + 1]] <<- list(name = name, type = "conv", output_shape = c(out, out, cout), parameters = p)
@@ -2021,25 +2021,25 @@ morie_geron_lenet5 <- function(n_classes = 10, input_size = 32, in_channels = 1)
     c(out, cout)
   }
   pool <- function(name, size, chan) {
-    out <- as.integer(morie_geron_conv_output_size(size, 2, padding = 0, stride = 2)$out_size[1])
+    out <- as.integer(morie_geron_conv_output_size(size, 2, padding = 0, stride = 2)$out_size\[1\])
     layers[[length(layers) + 1]] <<- list(name = name, type = "pool", output_shape = c(out, out, chan), parameters = 0L)
     c(out, chan)
   }
   r1 <- conv("C1", s, c_in, 6L, 5L)
-  sz <- r1[1]
+  sz <- r1\[1\]
   ch <- r1[2]
   r2 <- pool("S2", sz, ch)
-  sz <- r2[1]
+  sz <- r2\[1\]
   ch <- r2[2]
   r3 <- conv("C3", sz, ch, 16L, 5L)
-  sz <- r3[1]
+  sz <- r3\[1\]
   ch <- r3[2]
   r4 <- pool("S4", sz, ch)
-  sz <- r4[1]
+  sz <- r4\[1\]
   ch <- r4[2]
   .morie_gr_need(sz >= 5L, "geron_lenet5: input too small before C5")
   r5 <- conv("C5", sz, ch, 120L, 5L)
-  sz <- r5[1]
+  sz <- r5\[1\]
   ch <- r5[2]
   .morie_gr_need(sz == 1L, "geron_lenet5: C5 did not land on 1x1")
 
@@ -2052,7 +2052,7 @@ morie_geron_lenet5 <- function(n_classes = 10, input_size = 32, in_channels = 1)
 
   chain <- list(c(5, 1), c(2, 2), c(5, 1), c(2, 2), c(5, 1))
   rf <- 1
-  for (kv in rev(chain)) rf <- (rf - 1) * kv[2] + kv[1]
+  for (kv in rev(chain)) rf <- (rf - 1) * kv[2] + kv\[1\]
   rf <- if (rf > 32) 32 else rf
 
   list(
@@ -2250,7 +2250,7 @@ morie_geron_linear_regression_life <- function(gdp, theta0, theta1, life_sat = N
   }
   list(
     prediction = pred, residuals = resid, rmse = rmse, r2 = r2, theta0 = t0, theta1 = t1,
-    estimate = pred[1], n = length(x), method = "Univariate linear model (life satisfaction vs GDP per capita)"
+    estimate = pred\[1\], n = length(x), method = "Univariate linear model (life satisfaction vs GDP per capita)"
   )
 }
 
@@ -2288,7 +2288,7 @@ morie_geron_linreg_pytorch <- function(X, y, epochs = 100, lr = 0.01, batch_size
 
   Ab <- cbind(1, A)
   theta_cf <- .morie_gr_lstsq(Ab, yy)
-  b_cf <- theta_cf[1]
+  b_cf <- theta_cf\[1\]
   w_cf <- theta_cf[-1]
   H <- (2 / m) * (t(Ab) %*% Ab)
   lam <- max(eigen(0.5 * (H + t(H)), symmetric = TRUE, only.values = TRUE)$values)
@@ -2758,7 +2758,7 @@ morie_geron_mdp <- function(states, actions, P, R, gamma = 0.95, max_iter = 1000
     if (!is.finite(dist[u])) break
     seen[u] <- TRUE
     for (e in adj[[u]]) {
-      v <- e[1]
+      v <- e\[1\]
       w <- e[2]
       nd <- dist[u] + w
       if (nd < dist[v]) dist[v] <- nd
@@ -2792,7 +2792,7 @@ morie_geron_isomap <- function(X, n_components, n_neighbors = 5) {
   adj <- vector("list", m)
   for (i in seq_len(m)) {
     js <- which(edge[i, ])
-    adj[[i]] <- lapply(js, function(j) c(j, D[i, j]))
+    adj[[i]] <- lapply(js, function(j) c(j, D\[i, j\]))
   }
   G <- matrix(0, m, m)
   for (i in seq_len(m)) G[i, ] <- .morie_gr_w4b_dijkstra(adj, i, m)
@@ -3184,7 +3184,7 @@ morie_geron_mlp <- function(X, weights, biases, activations) {
 morie_geron_min_max_scaling <- function(X, feature_range = c(0.0, 1.0)) {
   A <- if (is.null(dim(X))) matrix(as.numeric(X), ncol = 1) else as.matrix(X)
   storage.mode(A) <- "double"
-  low <- as.numeric(feature_range[1])
+  low <- as.numeric(feature_range\[1\])
   high <- as.numeric(feature_range[2])
   .morie_gr_need(low < high, "geron_min_max_scaling: feature_range must satisfy low < high")
   mn <- apply(A, 2, min)
@@ -3498,7 +3498,7 @@ morie_geron_multioutput <- function(X, Y, k = 1, X_new = NULL) {
       nb <- ord[seq_len(kk)]
       for (j in seq_len(t_)) {
         tab <- table(Yv[nb, j])
-        out[i, j] <- names(tab)[which.max(tab)]
+        out\[i, j\] <- names(tab)[which.max(tab)]
       }
     }
     out
@@ -3556,8 +3556,8 @@ morie_geron_multioutput <- function(X, Y, k = 1, X_new = NULL) {
       r0 <- (i - 1L) * s + 1L
       c0 <- (j - 1L) * s + 1L
       block <- x[r0:(r0 + k - 1L), c0:(c0 + k - 1L), drop = FALSE]
-      y[i, j] <- max(block)
-      arg[i, j] <- which.max(block)
+      y\[i, j\] <- max(block)
+      arg\[i, j\] <- which.max(block)
     }
   }
   list(y = y, argmax = arg, output_shape = c(oh, ow))
@@ -3580,7 +3580,7 @@ morie_geron_max_pool <- function(x, window = 2, stride = NULL) {
   .morie_gr_need(k >= 1L, "geron_max_pool: window must be >= 1")
   s <- if (is.null(stride)) k else as.integer(stride)
   .morie_gr_need(s >= 1L, "geron_max_pool: stride must be >= 1")
-  H <- d[1]
+  H <- d\[1\]
   W <- d[2]
   .morie_gr_need(k <= H && k <= W, "geron_max_pool: window does not fit the map")
 
@@ -3597,7 +3597,7 @@ morie_geron_max_pool <- function(x, window = 2, stride = NULL) {
       outs[[c_]] <- b$y
       args[[c_]] <- b$argmax
     }
-    pooled <- array(unlist(outs), dim = c(nrow(outs[[1]]), ncol(outs[[1]]), d[3]))
+    pooled <- array(unlist(outs), dim = c(nrow(outs[\[1\]]), ncol(outs[\[1\]]), d[3]))
     arg <- array(unlist(args), dim = dim(pooled))
     shape <- dim(pooled)
   }

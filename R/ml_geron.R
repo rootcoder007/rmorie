@@ -146,7 +146,7 @@ morie_mcdrop <- function(logits) {
   a <- as.array(logits)
   d <- dim(a)
   if (length(d) != 3L) stop("logits must be an n by T by k array.", call. = FALSE)
-  n <- d[1]
+  n <- d\[1\]
   tt <- d[2]
   k <- d[3]
   probs <- matrix(0, n, k)
@@ -154,7 +154,7 @@ morie_mcdrop <- function(logits) {
   ents <- numeric(n)
   for (i in seq_len(n)) {
     passes <- t(vapply(seq_len(tt),
-                       function(j) .morie_gr_softmax(as.numeric(a[i, j, ])),
+                       function(j) .morie_gr_softmax(as.numeric(a\[i, j, \])),
                        numeric(k)))
     if (k == 1L) passes <- matrix(passes, ncol = 1L)
     mean_ <- colSums(passes) / tt
@@ -284,7 +284,7 @@ morie_stratsplt <- function(strata, testratio = 0.2) {
 
 #' Output of a convolutional layer, Equation 12-1 (p. 423)
 #'
-#' z[i, j, k] = b[k] + sum_u sum_v sum_kp x[ip, jp, kp] w[u, v, kp, k]
+#' z\[i, j, k\] = b[k] + sum_u sum_v sum_kp x\[ip, jp, kp\] w\[u, v, kp, k\]
 #' with ip = i * sh + u and jp = j * sw + v. This is a
 #' cross-correlation, as the book's own footnote 6 on p. 419 points
 #' out. Exported as morie_convlayer because morie_conv2d was already
@@ -311,16 +311,16 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
   if (length(dx) != 3L || length(dk) != 4L) {
     stop("x must be 3-D and kernel 4-D.", call. = FALSE)
   }
-  h <- dx[1]
+  h <- dx\[1\]
   w <- dx[2]
   cin <- dx[3]
-  fh <- dk[1]
+  fh <- dk\[1\]
   fw <- dk[2]
   cout <- dk[4]
   if (dk[3] != cin) stop("kernel in-channels must match the input.", call. = FALSE)
-  sh <- as.integer(stride[1])
+  sh <- as.integer(stride\[1\])
   sw <- as.integer(stride[2])
-  ph <- as.integer(padding[1])
+  ph <- as.integer(padding\[1\])
   pw <- as.integer(padding[2])
   if (sh < 1L || sw < 1L || ph < 0L || pw < 0L) {
     stop("stride must be positive and padding non-negative.", call. = FALSE)
@@ -349,7 +349,7 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
           }
         }
       }
-      z[i, j, ] <- cell
+      z\[i, j, \] <- cell
     }
   }
   list(z = z, height = oh, width = ow, channels = cout, total = sum(z),
@@ -417,7 +417,7 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #' O(n^3) -- swap it in if n ever exceeds a handful.
 #' @param posdist tracks-by-detections position cost matrix
 #' @param appdist matching appearance cost matrix, or NULL
-#' @param weight the appearance share of the combined cost, in [0, 1]
+#' @param weight the appearance share of the combined cost, in \[0, 1\]
 #' @param maxn cap on the exhaustive search
 #' @return list(cost, assignment, nmatched, nunmatchedtracks,
 #'   nunmatcheddets, meancost)
@@ -435,7 +435,7 @@ morie_trkassign <- function(posdist, appdist = NULL, weight = 0.5, maxn = 8L) {
     stop("exhaustive assignment is capped at maxn.", call. = FALSE)
   }
   weight <- as.numeric(weight)
-  if (weight < 0 || weight > 1) stop("weight must lie in [0, 1].", call. = FALSE)
+  if (weight < 0 || weight > 1) stop("weight must lie in \[0, 1\].", call. = FALSE)
   app <- if (is.null(appdist)) matrix(0, nt, nd) else as.matrix(appdist)
   storage.mode(app) <- "double"
   if (nrow(app) != nt || ncol(app) != nd) {
@@ -492,7 +492,7 @@ morie_pretprep <- function(image, size, mean, sd, logits = NULL, topk = 1L) {
   img <- as.array(image)
   d <- dim(img)
   if (length(d) != 3L) stop("image must be a 3-D array.", call. = FALSE)
-  h <- d[1]
+  h <- d\[1\]
   w <- d[2]
   cc <- d[3]
   size <- as.integer(size)
@@ -510,7 +510,7 @@ morie_pretprep <- function(image, size, mean, sd, logits = NULL, topk = 1L) {
     for (j in seq_len(size)) {
       si <- r0 + ((i - 1L) * side) %/% size + 1L
       sj <- c0 + ((j - 1L) * side) %/% size + 1L
-      out[i, j, ] <- (as.numeric(img[si, sj, ]) - mean) / sd
+      out\[i, j, \] <- (as.numeric(img[si, sj, ]) - mean) / sd
     }
   }
   res <- list(pixels = out, size = size, channels = cc, cropside = side,
@@ -518,9 +518,9 @@ morie_pretprep <- function(image, size, mean, sd, logits = NULL, topk = 1L) {
   if (!is.null(logits)) {
     lg <- as.numeric(logits)
     ord <- order(-lg, seq_along(lg))
-    res$pred <- as.integer(ord[1] - 1L)
+    res$pred <- as.integer(ord\[1\] - 1L)
     res$topk <- as.integer(ord[seq_len(as.integer(topk))] - 1L)
-    res$topprob <- .morie_gr_softmax(lg)[ord[1]]
+    res$topprob <- .morie_gr_softmax(lg)[ord\[1\]]
   }
   res
 }

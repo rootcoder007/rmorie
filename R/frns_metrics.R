@@ -55,7 +55,7 @@ NULL
   args <- list(...)
   lengths <- vapply(args, function(a) length(a[[2]]), integer(1))
   if (length(unique(lengths)) > 1L) {
-    nm <- vapply(args, function(a) a[[1]], character(1))
+    nm <- vapply(args, function(a) a[\[1\]], character(1))
     stop(
       sprintf(
         "length mismatch across inputs: %s",
@@ -64,7 +64,7 @@ NULL
       call. = FALSE
     )
   }
-  if (lengths[1] == 0L) stop("inputs are empty", call. = FALSE)
+  if (lengths\[1\] == 0L) stop("inputs are empty", call. = FALSE)
 }
 
 #' .frns_favorable_rates

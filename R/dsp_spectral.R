@@ -133,7 +133,7 @@ morie_dsp_psd_welch <- function(x, fs = 1, nperseg = 256L,
 #' morie_dsp_spectral_moment(out$psd, out$freqs, order = 0L)
 #' @export
 morie_dsp_spectral_moment <- function(psd, freqs, order = 0L) {
-  df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
+  df <- if (length(freqs) > 1L) freqs[2] - freqs\[1\] else 1
   sum((freqs^order) * psd) * df
 }
 
@@ -172,7 +172,7 @@ morie_dsp_mean_frequency <- function(psd, freqs) {
 #' morie_dsp_median_frequency(psd, freqs)
 #' @export
 morie_dsp_median_frequency <- function(psd, freqs) {
-  df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
+  df <- if (length(freqs) > 1L) freqs[2] - freqs\[1\] else 1
   cum <- cumsum(psd * df)
   total <- cum[length(cum)]
   if (total == 0) {
@@ -198,7 +198,7 @@ morie_dsp_median_frequency <- function(psd, freqs) {
 #' morie_dsp_spectral_edge(psd, freqs, pct = 0.95)
 #' @export
 morie_dsp_spectral_edge <- function(psd, freqs, pct = 0.95) {
-  df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
+  df <- if (length(freqs) > 1L) freqs[2] - freqs\[1\] else 1
   cum <- cumsum(psd * df)
   total <- cum[length(cum)]
   if (total == 0) {
@@ -225,9 +225,9 @@ morie_dsp_spectral_edge <- function(psd, freqs, pct = 0.95) {
 #' morie_dsp_spectral_ratio(psd, freqs, band1 = c(10, 30), band2 = c(50, 100))
 #' @export
 morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
-  df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
-  p1 <- sum(psd[freqs >= band1[1] & freqs <= band1[2]]) * df
-  p2 <- sum(psd[freqs >= band2[1] & freqs <= band2[2]]) * df
+  df <- if (length(freqs) > 1L) freqs[2] - freqs\[1\] else 1
+  p1 <- sum(psd[freqs >= band1\[1\] & freqs <= band1[2]]) * df
+  p2 <- sum(psd[freqs >= band2\[1\] & freqs <= band2[2]]) * df
   if (p2 == 0) {
     return(Inf)
   }
@@ -241,7 +241,7 @@ morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
 #' concentration.
 #'
 #' @param psd PSD vector.
-#' @return Scalar in `[0, 1]`.
+#' @return Scalar in `\[0, 1\]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7.
 #' @examples
 #' uni <- rep(1, 64)
@@ -367,7 +367,7 @@ morie_dsp_acf_from_psd <- function(psd) {
 #' morie_dsp_band_power(psd, freqs, 0.2, 0.5) # ~0.3
 #' @export
 morie_dsp_band_power <- function(psd, freqs, f_low, f_high) {
-  df <- if (length(freqs) > 1L) freqs[2] - freqs[1] else 1
+  df <- if (length(freqs) > 1L) freqs[2] - freqs\[1\] else 1
   sum(psd[freqs >= f_low & freqs <= f_high]) * df
 }
 
@@ -500,9 +500,9 @@ morie_dsp_fbm_synthesis <- function(N, H = 0.5) {
   white <- stats::rnorm(N)
   half <- N %/% 2L + 1L
   freqs <- seq.int(0, half - 1L) / N
-  freqs[1] <- 1
+  freqs\[1\] <- 1
   pf <- freqs^(-(H + 0.5))
-  pf[1] <- 0
+  pf\[1\] <- 0
   X <- stats::fft(white)[seq_len(half)] * pf
   # Reconstitute Hermitian.
   if (N %% 2L == 0L) {

@@ -164,10 +164,10 @@ NULL
 #' @noRd
 .otis_multiway_cluster_se <- function(scores, clusters) {
   if (length(clusters) == 1L) {
-    return(.otis_cluster_se(scores, clusters[[1]]))
+    return(.otis_cluster_se(scores, clusters[\[1\]]))
   }
   if (length(clusters) == 2L) {
-    a <- clusters[[1]]
+    a <- clusters[\[1\]]
     b <- clusters[[2]]
     inter <- paste(a, b, sep = "|")
     v_a <- .otis_cluster_se(scores, a)^2
@@ -178,7 +178,7 @@ NULL
   warning(sprintf("multiway clustering with %d dims not implemented; ",
                   length(clusters)),
           "falling back to first axis only")
-  .otis_cluster_se(scores, clusters[[1]])
+  .otis_cluster_se(scores, clusters[\[1\]])
 }
 
 # CausalEstimate constructor (R analogue of the python dataclass).
@@ -601,7 +601,7 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
     se_atte <- .otis_multiway_cluster_se(psi_atte - atte, cluster_arrs)
     se_atc <- .otis_multiway_cluster_se(psi_atc - atc, cluster_arrs)
     se_kind <- if (length(cl_list) == 1L) {
-      paste0("cluster:", cl_list[1])
+      paste0("cluster:", cl_list\[1\])
     } else {
       paste0("cluster:", paste(cl_list, collapse = "+"))
     }
@@ -1139,7 +1139,7 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
           ate = round(est$ate, 4),
           ate_se = round(est$ate_se, 4),
           ate_pval = round(est$ate_pval, 4),
-          ci95_lo = round(est$ate_ci95[1], 4),
+          ci95_lo = round(est$ate_ci95\[1\], 4),
           ci95_hi = round(est$ate_ci95[2], 4),
           notes = paste(unlist(est$notes), collapse = "; "),
           stringsAsFactors = FALSE)

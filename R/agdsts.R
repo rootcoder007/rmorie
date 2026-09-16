@@ -9,7 +9,7 @@
 #' @param student Student logits, length k.
 #' @param temperature T > 0.
 #' @param label One-based index of the correct class, or NULL.
-#' @param alpha Weight on the soft objective, in [0, 1].
+#' @param alpha Weight on the soft objective, in \[0, 1\].
 #'
 #' @return List with softce, kl, hardce, total, teacherprob, studentprob,
 #'   temperature, k.
@@ -30,7 +30,7 @@ Distilkl <- function(teacher, student, temperature = 2, label = NULL,
   }
   if (T <= 0) stop("temperature must be strictly positive")
   a <- as.numeric(alpha)
-  if (a < 0 || a > 1) stop("alpha must lie in [0, 1]")
+  if (a < 0 || a > 1) stop("alpha must lie in \[0, 1\]")
   k <- length(t)
   sm <- function(z, TT) {
     e <- exp((z - max(z)) / TT)

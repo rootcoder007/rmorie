@@ -62,7 +62,7 @@
 #' @return A logical value.
 #' @export
 .unifAlg_is_var <- function(t) {
-  is.list(t) && length(t) == 2L && identical(t[[1]], .VAR)
+  is.list(t) && length(t) == 2L && identical(t[\[1\]], .VAR)
 }
 
 #' .unifAlg_check
@@ -80,7 +80,7 @@
   if (.unifAlg_is_var(t)) {
     return(t)
   }
-  if (is.list(t) && length(t) == 3L && identical(t[[1]], .APP) &&
+  if (is.list(t) && length(t) == 3L && identical(t[\[1\]], .APP) &&
       is.character(t[[2]]) && length(t[[2]]) == 1L) {
     args <- t[[3]]
     new_args <- lapply(args, .unifAlg_check)
@@ -337,7 +337,7 @@ morie_unifAlg_compose <- function(outer, inner) {
   }
   keep <- vapply(names(out), function(k) {
     v <- out[[k]]
-    !(is.list(v) && length(v) == 2L && identical(v[[1]], .VAR) && identical(v[[2]], k))
+    !(is.list(v) && length(v) == 2L && identical(v[\[1\]], .VAR) && identical(v[[2]], k))
   }, logical(1))
   out[keep]
 }
@@ -414,11 +414,11 @@ morie_unifAlg_unify <- function(t1, t2, occurs_check = TRUE) {
         method = "Robinson (1965) Sec. 5 disagreement-set unification"
       ))
     }
-    x <- d[[1]]
+    x <- d[\[1\]]
     y <- d[[2]]
     if (.unifAlg_is_var(y) && !.unifAlg_is_var(x)) {
       x <- d[[2]]
-      y <- d[[1]]
+      y <- d[\[1\]]
     }
     if (!.unifAlg_is_var(x)) {
       why <- sprintf("symbol clash: %s/%d against %s/%d",
@@ -474,7 +474,7 @@ morie_unifAlg_match <- function(pattern, subject) {
   while (length(stack) > 0L) {
     pair <- stack[[length(stack)]]
     stack <- stack[-length(stack)]
-    x <- pair[[1]]
+    x <- pair[\[1\]]
     y <- pair[[2]]
 
     if (.unifAlg_is_var(x)) {

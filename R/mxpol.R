@@ -4,7 +4,7 @@
 #'
 #' R parity for \code{morie.fn.mxpol.maxpool_forward}.
 #'
-#' \deqn{y[i,j] = \max_{0 \le m,n < k} x[i s + m, j s + n]}{y[i,j] = max_0 <= m,n <
+#' \deqn{y\[i,j\] = \max_{0 \le m,n < k} x[i s + m, j s + n]}{y\[i,j\] = max_0 <= m,n <
 #' k x[i s + m, j s + n]}
 #'
 #' @param x Numeric matrix \code{(H, W)}.
@@ -34,8 +34,8 @@ morie_mxpol_maxpool_forward <- function(x, kernel_size = 2L, stride = NULL) {
       i0 <- (i - 1L) * s + 1L
       j0 <- (j - 1L) * s + 1L
       block <- as.numeric(x[i0:(i0 + k - 1L), j0:(j0 + k - 1L)])
-      y[i, j] <- max(block)
-      argmax[i, j] <- which.max(block) - 1L
+      y\[i, j\] <- max(block)
+      argmax\[i, j\] <- which.max(block) - 1L
     }
   }
   list(

@@ -346,7 +346,7 @@ morie_impala_vtrace <- function(rewards, values, behavior_logp, target_logp,
          call. = FALSE)
   }
   if (gamma < 0 || gamma > 1) {
-    stop("gamma must be in [0, 1]", call. = FALSE)
+    stop("gamma must be in \[0, 1\]", call. = FALSE)
   }
   ratio <- exp(pmax(pmin(tlp - blp, 50), -50))
   rho <- pmin(rho_bar, ratio)

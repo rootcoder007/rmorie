@@ -38,7 +38,7 @@ mac3 <- function(yi, vi, mods, weighted = TRUE) {
   xtws <- t(x) * rep(ws, each = p)
   vb <- solve(xtws %*% x)
   betar <- as.numeric(vb %*% (xtws %*% y))
-  list(estimate = betar[1], coefficients = betar, se = sqrt(diag(vb)),
+  list(estimate = betar\[1\], coefficients = betar, se = sqrt(diag(vb)),
        centers = as.numeric(ctr), tau2_resid = tau2r,
        tau2_total = k02dl(y, v)$tau2, QE = qe, centered = mc, n = k,
        method = "Meta-regression on centred moderators (Borenstein et al. 2009, ch. 20)")

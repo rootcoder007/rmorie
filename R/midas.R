@@ -7,7 +7,7 @@
 #' Internal helper: Midas Sse
 #' @noRd
 .midas_sse <- function(p, X, Y, K) {
-  b0 <- p[1]
+  b0 <- p\[1\]
   b1 <- p[2]
   t1 <- p[3]
   t2 <- p[4]
@@ -55,7 +55,7 @@ morie_midas_regression <- function(x, y, K = NULL) {
     lower = c(-1e3, -1e3, 0.1, 0.1),
     upper = c(1e3, 1e3, 50, 50)
   )
-  b0 <- opt$par[1]
+  b0 <- opt$par\[1\]
   b1 <- opt$par[2]
   t1 <- opt$par[3]
   t2 <- opt$par[4]

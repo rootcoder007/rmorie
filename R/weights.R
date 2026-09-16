@@ -55,7 +55,7 @@
 #' @param lower_percentile Lower percentile cut for `trim`.
 #' @param upper_percentile Upper percentile cut for `trim`.
 #' @param fay_coefficient Fay's coefficient (\eqn{k}) for Fay's-BRR.
-#' @param shrinkage_factor Numeric in `[0, 1]`; smoothing pull-toward-
+#' @param shrinkage_factor Numeric in `\[0, 1\]`; smoothing pull-toward-
 #'   mean factor.
 #' @param target Numeric target sum (`normalize`).
 #' @param replicate_estimates Numeric vector of replicate point
@@ -178,7 +178,7 @@ morie_weights_rake <- function(weights, df, margins,
         cur <- sum(w[mask])
         if (cur == 0) next
         f <- as.numeric(targets[[cat]]) / cur
-        if (!is.null(bounds)) f <- max(bounds[1], min(bounds[2], f))
+        if (!is.null(bounds)) f <- max(bounds\[1\], min(bounds[2], f))
         w[mask] <- w[mask] * f
         max_adj <- max(max_adj, abs(f - 1))
       }
@@ -408,7 +408,7 @@ morie_weights_combined <- function(selection_probs, responded,
   if (!is.null(calibration_strata) && !is.null(population_totals))
     w <- morie_weights_poststratify(w, calibration_strata, population_totals)
   if (!is.null(trim_percentiles))
-    w <- morie_weights_trim(w, trim_percentiles[1], trim_percentiles[2])
+    w <- morie_weights_trim(w, trim_percentiles\[1\], trim_percentiles[2])
   w
 }
 
@@ -521,8 +521,8 @@ morie_weights_deff <- function(weights) {
 morie_weights_detect_extreme <- function(weights, k = 3) {
   w <- as.numeric(weights)
   q <- stats::quantile(w, c(0.25, 0.75), names = FALSE)
-  iqr <- q[2] - q[1]
-  lo <- q[1] - k * iqr
+  iqr <- q[2] - q\[1\]
+  lo <- q\[1\] - k * iqr
   hi <- q[2] + k * iqr
   idx <- which(w < lo | w > hi)
   list(n_extreme = length(idx),

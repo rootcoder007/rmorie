@@ -392,12 +392,12 @@ NULL
     stop("weight_trim_side must be 'upper' or 'both'")
   q <- as.numeric(weight_trim)
   if (length(q) == 1L) q <- c(0, q)
-  lo <- q[1]
+  lo <- q\[1\]
   hi <- q[2]
   if (!(lo >= 0 && lo < hi && hi <= 1))
     stop("weight_trim must satisfy 0 <= lo < hi <= 1")
   cuts <- stats::quantile(w, c(lo, hi), names = FALSE, type = 7)
-  if (side == "both") pmin(pmax(w, cuts[1]), cuts[2]) else pmin(w, cuts[2])
+  if (side == "both") pmin(pmax(w, cuts\[1\]), cuts[2]) else pmin(w, cuts[2])
 }
 
 # Which units SURVIVE trimming.  Only trim_type = "discard" drops
@@ -433,7 +433,7 @@ NULL
 .mor_ps_keep <- function(ps, trim = c(0.1, 0.9), trim_type = "value") {
   if (!identical(trim_type, "discard") || is.null(trim))
     return(rep(TRUE, length(ps)))
-  lo <- as.numeric(trim[1])
+  lo <- as.numeric(trim\[1\])
   hi <- as.numeric(trim[2])
   if (!(lo >= 0 && lo < hi && hi <= 1))
     stop("trim must satisfy 0 <= lo < hi <= 1")
@@ -459,13 +459,13 @@ NULL
   if (!(trim_type %in% c("value", "quantile", "discard")))
     stop("trim_type must be 'value', 'quantile' or 'discard'")
   if (!is.null(trim) && trim_type != "discard") {
-    lo <- as.numeric(trim[1])
+    lo <- as.numeric(trim\[1\])
     hi <- as.numeric(trim[2])
     if (!(lo >= 0 && lo < hi && hi <= 1))
       stop("trim must satisfy 0 <= lo < hi <= 1")
     if (trim_type == "quantile") {
       qs <- stats::quantile(ps, c(lo, hi), names = FALSE, type = 7)
-      lo <- qs[1]
+      lo <- qs\[1\]
       hi <- qs[2]
     }
     ps <- pmin(pmax(ps, lo), hi)
@@ -609,7 +609,7 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
       "ATE on the retained subpopulation (Crump et al. 2009 discard)" else
 
       "ATE on the full sample",
-    ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2],
+    ate = ate, se = se, ci_lower = ci\[1\], ci_upper = ci[2],
     n = length(y), ess = ess
   )
 }
@@ -663,7 +663,7 @@ morie_estimate_att <- function(data, treatment, outcome, covariates,
   se <- stats::sd(if_vec) / sqrt(n)
   ci <- .wald_ci(att, se)
 
-  list(att = att, se = se, ci_lower = ci[1], ci_upper = ci[2], n_treated = n1)
+  list(att = att, se = se, ci_lower = ci\[1\], ci_upper = ci[2], n_treated = n1)
 }
 
 
@@ -716,7 +716,7 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
   se <- stats::sd(if_vec) / sqrt(n)
   ci <- .wald_ci(atc, se)
 
-  list(atc = atc, se = se, ci_lower = ci[1], ci_upper = ci[2], n_control = n0)
+  list(atc = atc, se = se, ci_lower = ci\[1\], ci_upper = ci[2], n_control = n0)
 }
 
 
@@ -878,7 +878,7 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
 
       "ATE on the retained subpopulation (Crump et al. 2009 discard)" else
 
-      "ATE on the full sample",ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2], n = length(y))
+      "ATE on the full sample",ate = ate, se = se, ci_lower = ci\[1\], ci_upper = ci[2], n = length(y))
 }
 
 #' Doubly-robust ATE via causal forest (grf)
@@ -915,7 +915,7 @@ morie_estimate_dr_forest <- function(data, treatment, outcome, covariates,
   nf <- .morie_causal_forest_native(X, Y, W)
   est <- .morie_causal_forest_ate(nf, Y, W, target_sample)
   ci <- .wald_ci(est$ate, est$se)
-  list(ate = est$ate, se = est$se, ci_lower = ci[1], ci_upper = ci[2],
+  list(ate = est$ate, se = est$se, ci_lower = ci\[1\], ci_upper = ci[2],
        n = length(Y))
 }
 
@@ -1121,7 +1121,7 @@ morie_estimate_late <- function(data, treatment, outcome, instrument,
     )
   )
   fs_fit <- stats::lm(fs_formula, data = data)
-  fs_f <- summary(fs_fit)$fstatistic[1]
+  fs_f <- summary(fs_fit)$fstatistic\[1\]
 
   # Wald estimator (no covariates)
   if (is.null(covariates)) {
@@ -1146,7 +1146,7 @@ morie_estimate_late <- function(data, treatment, outcome, instrument,
 
   ci <- .wald_ci(late, se)
   list(
-    late = late, se = se, ci_lower = ci[1], ci_upper = ci[2],
+    late = late, se = se, ci_lower = ci\[1\], ci_upper = ci[2],
     first_stage_f = as.numeric(fs_f), n = length(y)
   )
 }
@@ -1325,7 +1325,7 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
       ate <- as.numeric(tab[ate_idx, "Estimate"])
       se  <- as.numeric(tab[ate_idx, "Std. Error"])
       ci  <- .wald_ci(ate, se)
-      list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
+      list(ate = ate, se = se, ci_lower = ci\[1\], ci_upper = ci[2])
     }, error = function(e) NULL)
     if (!is.null(res)) {
       return(res)
@@ -1342,7 +1342,7 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
   ate <- mean(diffs)
   se <- stats::sd(diffs) / sqrt(length(diffs))
   ci <- .wald_ci(ate, se)
-  list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
+  list(ate = ate, se = se, ci_lower = ci\[1\], ci_upper = ci[2])
 }
 
 

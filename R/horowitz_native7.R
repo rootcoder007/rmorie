@@ -23,13 +23,13 @@
 # identified.
 
 # psi_zeta: a bounded real characteristic function supported on
-# [-1, 1] -- the book's example is the fourfold convolution of the
+# \[-1, 1\] -- the book's example is the fourfold convolution of the
 # uniform density with itself, whose characteristic function is
 # sinc^4. Compact support in tau is the point: it stops the integrand
 # being evaluated where the denominator has died.
 #' Psi_zeta: a bounded real characteristic function supported on
 #'
-#' [-1, 1] -- the book\'s example is the fourfold convolution of the
+#' \[-1, 1\] -- the book\'s example is the fourfold convolution of the
 #' uniform density with itself, whose characteristic function is sinc^4.
 #' Compact support in tau is the point: it stops the integrand being
 #' evaluated where the denominator has died.
@@ -238,7 +238,7 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #' Substituting the empirical characteristic functions straight into
 #' the inversion formula does NOT work -- the integral does not exist
 #' in general. \eqn{\psi_\zeta} is the regularisation: a
-#' characteristic function supported on \eqn{[-1, 1]}, so the
+#' characteristic function supported on \eqn{\[-1, 1\]}, so the
 #' integrand is identically zero past \eqn{1/\nu_{nU}} and the ratio
 #' is never formed where the denominator has died. It is the
 #' Fourier-transform analogue of kernel smoothing, and it is

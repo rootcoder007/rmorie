@@ -220,7 +220,7 @@
         stringsAsFactors = FALSE
       )
     }
-    target_required <- max(vapply(pair_rows, function(x) if (is.data.frame(x)) x$n_eq[1] else NA_real_, numeric(1)), na.rm = TRUE)
+    target_required <- max(vapply(pair_rows, function(x) if (is.data.frame(x)) x$n_eq\[1\] else NA_real_, numeric(1)), na.rm = TRUE)
     if (!is.finite(target_required)) target_required <- NA_real_
     target_rows[[length(target_rows) + 1L]] <- data.frame(
       endpoint = endpoint_name,
@@ -247,7 +247,7 @@
       target_power = 0.80,
       alpha = 0.05,
       total_n = target_required,
-      group1 = gsum$gender[1],
+      group1 = gsum$gender\[1\],
       n1 = ceiling(target_required / 2),
       group2 = gsum$gender[min(2, nrow(gsum))],
       n2 = floor(target_required / 2),
@@ -276,7 +276,7 @@
     gp_rows[[length(gp_rows) + 1L]] <- data.frame(
       test_family = "z tests",
       effect_metric = "Cohen_h",
-      effect_size = abs(pair_rows[[length(pair_rows)]]$h[1]),
+      effect_size = abs(pair_rows[[length(pair_rows)]]$h\[1\]),
       target_power = 0.80,
       alpha = 0.05,
       n_per_group = ceiling(target_required / 2),
@@ -309,7 +309,7 @@
     sds <- aggregate(ebac_tot ~ gender_label, data = continuous_endpoint, FUN = stats::sd)
     ns <- aggregate(ebac_tot ~ gender_label, data = continuous_endpoint, FUN = length)
     if (nrow(means) >= 2L) {
-      req_n <- .continuous_power_required_n(means$ebac_tot[1], means$ebac_tot[2], mean(sds$ebac_tot, na.rm = TRUE))
+      req_n <- .continuous_power_required_n(means$ebac_tot\[1\], means$ebac_tot[2], mean(sds$ebac_tot, na.rm = TRUE))
       target_rows[[length(target_rows) + 1L]] <- data.frame(
         endpoint = "ebac_tot",
         outcome = "ebac_tot",
@@ -329,7 +329,7 @@
       gp_rows[[length(gp_rows) + 1L]] <- data.frame(
         test_family = "t tests",
         effect_metric = "Cohen_d",
-        effect_size = abs(.safe_divide(means$ebac_tot[1] - means$ebac_tot[2], mean(sds$ebac_tot, na.rm = TRUE))),
+        effect_size = abs(.safe_divide(means$ebac_tot\[1\] - means$ebac_tot[2], mean(sds$ebac_tot, na.rm = TRUE))),
         target_power = 0.80,
         alpha = 0.05,
         n_per_group = ceiling(req_n / 2),
@@ -376,9 +376,9 @@
   }
 
   schedules <- list(
-    randomization_schedule_example_heavy_drinking_30d = .block_schedule("heavy_drinking_30d", target_rows[[1L]]$required_n[1], na.omit(unique(data$gender_label))),
-    randomization_schedule_example_ebac_legal = .block_schedule("ebac_legal", if (length(target_rows) >= 2L) target_rows[[2L]]$required_n[1] else NA_real_, na.omit(unique(data$gender_label))),
-    randomization_schedule_example_ebac_tot = .block_schedule("ebac_tot", if (length(target_rows) >= 3L) target_rows[[3L]]$required_n[1] else NA_real_, na.omit(unique(data$gender_label)))
+    randomization_schedule_example_heavy_drinking_30d = .block_schedule("heavy_drinking_30d", target_rows[[1L]]$required_n\[1\], na.omit(unique(data$gender_label))),
+    randomization_schedule_example_ebac_legal = .block_schedule("ebac_legal", if (length(target_rows) >= 2L) target_rows[[2L]]$required_n\[1\] else NA_real_, na.omit(unique(data$gender_label))),
+    randomization_schedule_example_ebac_tot = .block_schedule("ebac_tot", if (length(target_rows) >= 3L) target_rows[[3L]]$required_n\[1\] else NA_real_, na.omit(unique(data$gender_label)))
   )
 
   c(
@@ -468,8 +468,8 @@
   final_cate <- final_cate[, c("subgroup_var", "subgroup_level", "n_treated", "n_control", "cate", "se", "ci_lower95", "ci_upper95", "note")]
   final_consistency <- data.frame(
     check = c("ipw_or_available", "weighted_or_available", "smote_status_recorded"),
-    lhs = c(ipw$ebac_final_ipw_or$or[1], core$ebac_logistic_or_primary$or[core$ebac_logistic_or_primary$term == "cannabis_any_use"][1], sens$ebac_smote_status$run_completed[1]),
-    rhs = c(!is.na(ipw$ebac_final_ipw_or$or[1]), !is.na(core$ebac_logistic_or_primary$or[core$ebac_logistic_or_primary$term == "cannabis_any_use"][1]), TRUE),
+    lhs = c(ipw$ebac_final_ipw_or$or\[1\], core$ebac_logistic_or_primary$or[core$ebac_logistic_or_primary$term == "cannabis_any_use"]\[1\], sens$ebac_smote_status$run_completed\[1\]),
+    rhs = c(!is.na(ipw$ebac_final_ipw_or$or\[1\]), !is.na(core$ebac_logistic_or_primary$or[core$ebac_logistic_or_primary$term == "cannabis_any_use"]\[1\]), TRUE),
     abs_diff = c(0, 0, 0),
     pass = TRUE,
     stringsAsFactors = FALSE
@@ -524,7 +524,7 @@
     ebac_final_crosswalk_previous = data.frame(
       source = c("core_weighted_or", "selection_ipw_or"),
       metric = c("ebac_legal_cannabis_or", "ebac_legal_cannabis_or"),
-      estimate = c(core$ebac_logistic_or_primary$or[core$ebac_logistic_or_primary$term == "cannabis_any_use"][1], ipw$ebac_final_ipw_or$or[1]),
+      estimate = c(core$ebac_logistic_or_primary$or[core$ebac_logistic_or_primary$term == "cannabis_any_use"]\[1\], ipw$ebac_final_ipw_or$or\[1\]),
       stringsAsFactors = FALSE
     ),
     ebac_final_dml_results = empty_dml,
