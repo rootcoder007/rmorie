@@ -63,7 +63,7 @@
 # Normalised weighted mean: sum(y * w) / sum(w). Huber's Section 3
 # normalises so the weights within each treatment state add to unity,
 # following Imbens (2004) and Busso, DiNardo and McCrary (2009).
-#' Normalised weighted mean: sum(y * w) / sum(w). Huber\'s Section 3
+#' Normalised weighted mean: sum(y * w) / sum(w). Huber's Section 3
 #'
 #' normalises so the weights within each treatment state add to unity,
 #' following Imbens (2004) and Busso, DiNardo and McCrary (2009).

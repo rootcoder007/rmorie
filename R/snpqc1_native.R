@@ -319,7 +319,7 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex = NULL,
   res
 }
 
-#' PLINK\'s Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with
+#' PLINK's Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with
 #'
 #' rows Z=0,1,2 and columns I=0,1,2 (lower triangle zero).
 #'
@@ -376,10 +376,10 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction = TRUE) {
   rbind(c(i0z0, i1z0, i2z0), c(0.0, i1z1, i2z1), c(0.0, 0.0, 1.0))
 }
 
-#' PLINK\'s method-of-moments IBD estimates for every pair. Returns
+#' PLINK's method-of-moments IBD estimates for every pair. Returns
 #'
 #' list(Z, pihat) where Z[\[i\]][\[k\]] is c(P(Z=0), P(Z=1), P(Z=2)) after
-#' the paper\'s bounding rules and pihat\[i, k\] = P(Z=2) + P(Z=1)/2.
+#' the paper's bounding rules and pihat\[i, k\] = P(Z=2) + P(Z=1)/2.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @param correction Passed to \code{morie_snpqc1_ibs_given_ibd}. Defaults to \code{TRUE}.
@@ -503,7 +503,7 @@ morie_snpqc1_pihat_matrix <- function(genotypes, correction = TRUE) {
 #' Genomic kinship from centred, scaled genotypes:
 #'
 #' K_ik = (1/M) sum_j (g_ij - 2p_j)(g_kj - 2p_j) / (2 p_j (1 - p_j)). On
-#' the same scale as pi-hat but NOT PLINK\'s pi-hat.
+#' the same scale as pi-hat but NOT PLINK's pi-hat.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{K}, as built in the body.

@@ -22,7 +22,7 @@
 #' Softmax-normalised s^\{task\}. A simplex, not free weights: these
 #'
 #' choose WHICH layers to read and cannot alter the magnitude, which is
-#' gamma\'s job alone.
+#' gamma's job alone.
 #'
 #' @param raw A vector; its length is taken.
 #' @return A numeric value.
@@ -84,7 +84,7 @@ lstm_step <- function(x, h, c, Wx, Wh, b) {
   list(h = hn, c = cn)
 }
 
-#' Run the biLM and return every layer\'s representation
+#' Run the biLM and return every layer's representation
 #'
 #' layers is a list of (Wxf, Whf, bf, Wxb, Whb, bb). The token dimension
 #' must equal the hidden dimension, because layer 0 is the token vector

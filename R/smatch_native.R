@@ -19,7 +19,7 @@
 
 .smatch_EPS <- 1e-12
 
-#' Symmetric positive-definite solve via base R\'s chol
+#' Symmetric positive-definite solve via base R's chol
 #'
 #' A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_poisson_fit}.
 #' See the file header for the source the module follows.

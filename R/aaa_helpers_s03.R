@@ -556,7 +556,7 @@
 }
 
 # Type-7 quantile, the default of R's quantile().
-#' Type-7 quantile, the default of R\'s quantile()
+#' Type-7 quantile, the default of R's quantile()
 #'
 #' A step of the helpers_s03 implementation. Called by \code{.cstat_uno},
 #' \code{.dnnheadweights}, \code{.ot_quantiles} and 38 others in the module.
@@ -692,7 +692,7 @@
 .s03unif <- function(n, base = 2L) vapply(seq_len(n) - 1L, .s03vdc, 0, base = base)
 
 # R's qnorm IS Wichura AS 241, the same algorithm the Python arm codes.
-#' R\'s qnorm IS Wichura AS 241, the same algorithm the Python arm codes
+#' R's qnorm IS Wichura AS 241, the same algorithm the Python arm codes
 #'
 #' A step of the helpers_s03 implementation. Called by \code{.drbsze_tquant},
 #' \code{Btbca}, \code{Btcicor} and 20 others in the module.
@@ -760,7 +760,7 @@
 #' Same recurrence + asymptotic series as the Python arm, so the two
 #' agree
 #'
-#' term for term rather than relying on R\'s digamma matching a Python
+#' term for term rather than relying on R's digamma matching a Python
 #' series.
 #'
 #' @param x A vector; its length is taken.
@@ -850,8 +850,8 @@
 # beta <- beta + (X' W X)^-1 X' (y - p), W = diag(p (1 - p)).
 #' Logistic regression by IRLS: Newton-Raphson on the log-likelihood,
 #'
-#' which for the canonical link is exactly IRLS, beta <- beta + (X\' W
-#' X)^-1 X\' (y - p), W = diag(p (1 - p)).
+#' which for the canonical link is exactly IRLS, beta <- beta + (X' W
+#' X)^-1 X' (y - p), W = diag(p (1 - p)).
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
@@ -923,7 +923,7 @@
 #   tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))]
 #   w1  = D / E[D]
 #   w0  = [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
-#' Doubly robust DiD for panel data, Sant\'Anna and Zhao (2020) eq.
+#' Doubly robust DiD for panel data, Sant'Anna and Zhao (2020) eq.
 #' (2.6):
 #'
 #' tau = E\[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))\] w1 = D / E\[D\] w0 =
@@ -979,7 +979,7 @@
 
 # Mammen's two-point multiplier at a van der Corput point: mean 1,
 # variance 1, third moment 1, and deterministic, so both arms agree.
-#' Mammen\'s two-point multiplier at a van der Corput point: mean 1,
+#' Mammen's two-point multiplier at a van der Corput point: mean 1,
 #'
 #' variance 1, third moment 1, and deterministic, so both arms agree.
 #'

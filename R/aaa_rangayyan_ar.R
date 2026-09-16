@@ -253,7 +253,7 @@ FpeOrder <- function(errors, n_samples) {
 
 #' Rissanen (1978): MDL(p) = N log(sigma_p^2) + p log(N).  The penalty
 #'
-#' per parameter is log(N), larger than AIC\'s 2 for any N > 7, so MDL
+#' per parameter is log(N), larger than AIC's 2 for any N > 7, so MDL
 #' picks the same order or a lower one -- and unlike AIC it is
 #' consistent.  AIC is returned alongside for comparison.
 #'
@@ -466,7 +466,7 @@ PzResp <- function(zeros, poles, omega, gain = 1) {
 
 #' Eqs (3.67), (3.69): zeros are the roots of the numerator, poles the
 #'
-#' roots of the denominator.  The denominator is in the book\'s
+#' roots of the denominator.  The denominator is in the book's
 #' normalized form, so pass `a` WITHOUT the leading 1.
 #'
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.

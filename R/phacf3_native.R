@@ -157,7 +157,7 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 # A key's string form, zero padded so that byte order is numeric order.
 # Only used to index the lookup table; the ORDERING of the bit space is
 # done on the numbers themselves.
-#' A key\'s string form, zero padded so that byte order is numeric order
+#' A key's string form, zero padded so that byte order is numeric order
 #'
 #' Only used to index the lookup table; the ORDERING of the bit space is
 #' done on the numbers themselves.

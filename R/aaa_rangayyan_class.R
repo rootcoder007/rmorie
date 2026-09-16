@@ -590,12 +590,12 @@ Roc <- function(scores, labels, positive = 1) {
   )
 }
 
-#' Section 10.9.2, McNemar\'s test of SYMMETRY.  The book states it on a
+#' Section 10.9.2, McNemar's test of SYMMETRY.  The book states it on a
 #'
 #' general contingency table -- its worked example, Table 10.4, is 3x3
 #' with normal / indeterminate / abnormal -- so any k x k is accepted. k
-#' = 2 gives McNemar with Yates\' correction, k > 2 its generalization,
-#' Bowker\'s test.  Only the OFF-DIAGONAL disagreements enter: the
+#' = 2 gives McNemar with Yates' correction, k > 2 its generalization,
+#' Bowker's test.  Only the OFF-DIAGONAL disagreements enter: the
 #' diagonal, usually most of the cases, contributes nothing, because the
 #' question is whether the disagreements are one-sided.
 #'
@@ -1356,7 +1356,7 @@ FishLda <- function(X, y) {
 
 #' Section 10.4.3: D^2 = (x - mu)^T C^-1 (x - mu).  Distance in units of
 #'
-#' the data\'s own scatter: a point far along an axis of natural
+#' the data's own scatter: a point far along an axis of natural
 #' variation is NEAR, one close by across the grain is far.  Euclidean
 #' distance would quietly favour whichever feature has the largest
 #' units.
@@ -1446,7 +1446,7 @@ LinDisc <- function(x, weights, w0 = NULL) {
 #' error-minimizing cut is the default and the midpoint is reported
 #' beside it.  Both errors are resubstitution errors -- measured on the
 #' data that chose the cut -- so they are optimistic; Section 10.10.3 is
-#' the book\'s warning, and KFoldCv or LooCv gives an honest figure.
+#' the book's warning, and KFoldCv or LooCv gives an honest figure.
 #'
 #' @param X Passed to \code{FishLda}.
 #' @param y Passed to \code{FishLda}.
@@ -1932,7 +1932,7 @@ KMeans <- function(X, k, maxiter = 100, tol = 1e-10, init = NULL) {
 #' WCSS falls monotonically with k and reaches zero at k = n, so it
 #'
 #' cannot be minimized -- the choice is the KNEE.  Located here as the
-#' point of maximum distance from the chord joining the curve\'s ends,
+#' point of maximum distance from the chord joining the curve's ends,
 #' which is a definite rule rather than an eye judgement.  Still a
 #' heuristic: on data with no cluster structure the curve is smooth and
 #' the knee is wherever the arithmetic puts it.
@@ -2078,7 +2078,7 @@ HClust <- function(X, linkage = "single", k = NULL) {
   )
 }
 
-#' Section 10.10.3.  The book\'s point is that the training and test
+#' Section 10.10.3.  The book's point is that the training and test
 #'
 #' steps must use SEPARATE data: an error rate measured on the samples
 #' that trained the classifier is optimistic, and with enough free

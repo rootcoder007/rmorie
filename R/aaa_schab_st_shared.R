@@ -399,7 +399,7 @@
 #' is
 #'
 #' smooth and periodic so the trapezoid rule converges geometrically;
-#' base R\'s besselJ() is deliberately not used, see the file header.
+#' base R's besselJ() is deliberately not used, see the file header.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_quad Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.

@@ -22,7 +22,7 @@
 #                 identical clusters give the estimator's known floor
 #                 -1/(n0 - 1)
 
-#' Fisher-Yates driven by the package\'s Philox stream, swapping
+#' Fisher-Yates driven by the package's Philox stream, swapping
 #'
 #' downward from n-1 and consuming one uniform per step, so the Python
 #' mirror reproduces it exactly.

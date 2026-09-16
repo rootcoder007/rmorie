@@ -502,7 +502,7 @@ CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
 
 #' Eqs (4.79)-(4.80): the complex cepstrum of a wavelet plus one echo
 #'
-#' is the wavelet\'s cepstrum plus impulses at n0 and its multiples,
+#' is the wavelet's cepstrum plus impulses at n0 and its multiples,
 #' amplitudes (-1)^(k+1) a^k / k.  The expansion needs |a| < 1, which
 #' the book states and which is enforced.
 #'
@@ -598,8 +598,8 @@ PCepstrum <- function(x, square = TRUE) {
 #' Eq (4.82): the power cepstra of a convolution add, exactly when the
 #'
 #' squaring of eq (4.81) is omitted.  square defaults to FALSE here for
-#' that reason; TRUE reproduces the book\'s definition and shows how
-#' large the neglected cross-term is on the caller\'s own data.
+#' that reason; TRUE reproduces the book's definition and shows how
+#' large the neglected cross-term is on the caller's own data.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
@@ -731,7 +731,7 @@ Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
 
 #' Section 4.7.1, Figure 4.23: log -> linear filter -> exp.  The signal
 #'
-#' must be strictly positive (eq 4.59\'s side condition); a signal that
+#' must be strictly positive (eq 4.59's side condition); a signal that
 #' crosses zero needs the complex-log route of HomDeconv.  Rejected
 #' rather than clipped, since clipping changes the factorization.
 #'

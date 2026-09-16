@@ -76,7 +76,7 @@ morie_rdrobu <- function(y, x, cutoff = 0.0, alpha = 0.05, ...) {
 }
 
 # Alias kept from the generated stub's signature.
-#' Alias kept from the generated stub\'s signature
+#' Alias kept from the generated stub's signature
 #'
 #' A step of the rdrobu_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

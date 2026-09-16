@@ -3978,7 +3978,11 @@ Linbylin <- function(table, scores = NULL) {
 }
 
 #' Odds ratio by Woolf's logit method (Woolf 1955) -- NOT from Gibbons
-#' @rdname Oddsrat
+#'
+#' @param table A 2 by 2 contingency table (matrix or table).
+#' @param alpha Significance level for the confidence interval.
+#' @param cc Continuity correction added to each cell (0 for none).
+#' @rdname Oddsrat-gibbons
 Oddsrat <- function(table, alpha = 0.05, cc = 0) {
   tb <- as.matrix(table)
   storage.mode(tb) <- "double"

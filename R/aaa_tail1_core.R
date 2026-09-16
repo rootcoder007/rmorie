@@ -4,12 +4,12 @@
 # rcond = 1e-15) because they are two different published conventions and
 # code ported from MASS::ginv must keep MASS's answer. Mirrors
 # morie.fn._array_core.ginv exactly.
-#' Moore-Penrose pseudo-inverse, MASS::ginv\'s rule: relative cutoff
+#' Moore-Penrose pseudo-inverse, MASS::ginv's rule: relative cutoff
 #'
 #' tol * d\[1\] with tol = sqrt(.Machine$double.eps), i.e. ~1.49e-8 of the
 #' largest singular value. Kept DISTINCT from .morie_pinv (rcond *
 #' max(s), rcond = 1e-15) because they are two different published
-#' conventions and code ported from MASS::ginv must keep MASS\'s answer.
+#' conventions and code ported from MASS::ginv must keep MASS's answer.
 #' Mirrors morie.fn._array_core.ginv exactly.
 #'
 #' @param X A matrix; passed to \code{dim}.
@@ -133,7 +133,7 @@ NULL
 
 #' Minimum-norm least squares via the SVD, matching numpy.linalg.lstsq
 #'
-#' and so the Python arm\'s _lstsq.
+#' and so the Python arm's _lstsq.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.

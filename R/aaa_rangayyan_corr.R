@@ -40,7 +40,7 @@
 #'
 #' it normalizes to.  The book notes the means may be removed first (eq
 #' 3.97), which is a DIFFERENT quantity -- without removal gamma is the
-#' cosine between the raw vectors, with it, Pearson\'s r.
+#' cosine between the raw vectors, with it, Pearson's r.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -680,7 +680,7 @@ SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
 
 #' Eq (4.41).  Dividing by the constant E_x is what turns eq (4.39) into
 #'
-#' something Schwarz\'s inequality applies to; by eq (4.46) the ratio
+#' something Schwarz's inequality applies to; by eq (4.46) the ratio
 #' cannot exceed 2/P_eta_i, with equality exactly at eq (4.48).
 #'
 #' @param X Coerced to complex by the body, with \code{as.complex}.
@@ -896,7 +896,7 @@ Triangle <- function(a, b) {
 
 #' Eq (4.48): H(f) = K X*(f) exp(-j 2 pi f t0).  The CONJUGATE is what
 #'
-#' cancels the signal\'s phase so every component arrives in step at t0
+#' cancels the signal's phase so every component arrives in step at t0
 #' -- that coherent addition is the whole gain of the method.
 #'
 #' @param X Coerced to complex by the body, with \code{as.complex}.
@@ -976,7 +976,7 @@ MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' Filtering with h(t) = K x(t0 - t) makes the convolution equivalent to
 #'
 #' CORRELATION, so y(t) = K phi_x(t - t0): the output is a delayed copy
-#' of the reference\'s ACF and peaks at t0 with K times its energy.
+#' of the reference's ACF and peaks at t0 with K times its energy.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.

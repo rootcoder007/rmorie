@@ -82,7 +82,7 @@
   stop("unknown link", call. = FALSE)
 }
 
-#' D mu / d eta, the diagonal of Psi; the reciprocal of g\'(mu), as the
+#' D mu / d eta, the diagonal of Psi; the reciprocal of g'(mu), as the
 #' text
 #'
 #' notes when deriving (6.89).
@@ -213,7 +213,7 @@
   out
 }
 
-#' G^-1(x\'beta) -- what the marginal mean is NOT, in a GLMM
+#' G^-1(x'beta) -- what the marginal mean is NOT, in a GLMM
 #'
 #' A step of the schab_glmm_shared implementation. Called by \code{spglmm}.
 #' See the file header for the source the module follows.

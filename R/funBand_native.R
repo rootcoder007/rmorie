@@ -62,7 +62,7 @@
 }
 
 # K = Q R^-1 Q', symmetric PSD with a two-dimensional null space
-#' K = Q R^-1 Q\', symmetric PSD with a two-dimensional null space
+#' K = Q R^-1 Q', symmetric PSD with a two-dimensional null space
 #'
 #' A step of the funBand_native implementation. Called by \code{morie_funBand_influence_matrix}.
 #' See the file header for the source the module follows.

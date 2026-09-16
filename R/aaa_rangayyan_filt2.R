@@ -90,7 +90,7 @@ Ma8Tf <- function(z) {
   )
 }
 
-#' Eq (3.111).  The book\'s factored form is EXACT: the bracket is the
+#' Eq (3.111).  The book's factored form is EXACT: the bracket is the
 #' sum
 #'
 #' over lags -3..3, and exp(-j4w) shifts that to lags 1..7, which with
@@ -189,7 +189,7 @@ Ma8Rec <- function(x, n = NULL) {
   )
 }
 
-#' Eq (3.121): a pole at z = 1 cancelled by one of the numerator\'s
+#' Eq (3.121): a pole at z = 1 cancelled by one of the numerator's
 #' zeros,
 #'
 #' so the filter is still FIR despite the recursive implementation.  At
@@ -529,7 +529,7 @@ IntPh <- function(omega) {
 #'
 #' required in order to obtain the rate of change of the signal with
 #' respect to the true time".  Highpass, and it amplifies noise -- eq
-#' (3.128) is the book\'s remedy.
+#' (3.128) is the book's remedy.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
@@ -568,7 +568,7 @@ FDiff <- function(x, T = 1, n = NULL) {
 
 #' Eq (3.124): one zero, at z = 1, the DC point -- that single zero is
 #'
-#' the whole of the operator\'s highpass character.
+#' the whole of the operator's highpass character.
 #'
 #' @param z Passed to \code{.morie_rg_polyz}.
 #' @param T Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
@@ -2041,7 +2041,7 @@ GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
   )
 }
 
-#' The book\'s route end to end: prewarp by eq (3.141), place poles by
+#' The book's route end to end: prewarp by eq (3.141), place poles by
 #'
 #' eq (3.137), keep the left-half-plane ones by eq (3.138), apply the
 #' bilinear transform of eq (3.139) to reach eq (3.143).  Prewarping is
@@ -2145,7 +2145,7 @@ BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' W(n) = 0.54 - 0.46 cos(2 pi n/(N-1)).  The 0.54/0.46 split cancels
 #' the
 #'
-#' rectangle\'s largest sidelobe, about -43 dB, at the cost of a wider
+#' rectangle's largest sidelobe, about -43 dB, at the cost of a wider
 #' main lobe than the Hann.  It does NOT reach zero at the ends -- w(0)
 #' = 0.08 -- which matters when windows are overlapped and added.
 #'
@@ -2317,7 +2317,7 @@ WindowFn <- function(N, window_type = "hamming") {
 #'
 #' and delayed by M/2 to make it causal.  Truncation is multiplying by a
 #' rectangle, whose sidelobes decay slowly, so the realized stopband
-#' ripples: Gibbs\' phenomenon, and it does not improve with M -- only
+#' ripples: Gibbs' phenomenon, and it does not improve with M -- only
 #' the ripples narrow, they do not shrink.  A window fixes it.
 #'
 #' @param fc Coerced to numeric by the body, with \code{as.numeric}.
@@ -2372,7 +2372,7 @@ SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {
 
 #' H(n) = g(N-1-n): the template reversed in time, which makes the
 #'
-#' filter\'s output the cross-correlation with the template.  Reversal
+#' filter's output the cross-correlation with the template.  Reversal
 #' is the whole content -- convolving with the unreversed template
 #' correlates with a mirrored pattern and peaks in the wrong place.
 #'

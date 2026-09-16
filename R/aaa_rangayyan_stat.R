@@ -43,10 +43,10 @@ Rms <- function(x, window = NULL) {
   out
 }
 
-#' Eqs (5.25)-(5.26): activity = var(x); mobility = sd(x\')/sd(x);
+#' Eqs (5.25)-(5.26): activity = var(x); mobility = sd(x')/sd(x);
 #'
-#' form factor = mobility(x\')/mobility(x) =
-#' (sd(x\'\')/sd(x\'))/(sd(x\')/sd(x)). The book states a sinusoid has
+#' form factor = mobility(x')/mobility(x) =
+#' (sd(x'')/sd(x'))/(sd(x')/sd(x)). The book states a sinusoid has
 #' complexity 1 and that more variable waveforms give larger values.
 #' Ratios are dimensionless, so no fs.
 #'
@@ -312,7 +312,7 @@ SyncAvg <- function(observations) {
 #' Eq (3.95): y_k(n) = x_k(n) + eta_k(n), the model that synchronized
 #'
 #' averaging assumes.  A single x is read as the same signal repeated,
-#' which is the book\'s "identical and aligned" case.
+#' which is the book's "identical and aligned" case.
 #'
 #' @param x A list; the body checks with \code{is.list}.
 #' @param eta Iterated over elementwise, with \code{lapply}.
@@ -438,11 +438,11 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
   list(psd = p, freqs = k * fs / m)
 }
 
-#' Sections 6.6.2-6.6.3: PSA is the book\'s preferred FD estimator for a
+#' Sections 6.6.2-6.6.3: PSA is the book's preferred FD estimator for a
 #'
 #' self-affine signal, applied to knee-joint VAG signals.  The band is
 #' an argument because it decides the answer -- a band that reaches down
-#' into baseline drift fits the drift\'s slope, not the signal\'s.
+#' into baseline drift fits the drift's slope, not the signal's.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
@@ -624,7 +624,7 @@ FiringRate <- function(times, fs = NULL) {
 #'
 #' computed by the function that owns its definition so the vector
 #' cannot disagree with the individual measures.  threshold defaults to
-#' 0 (every direction change counts); pass the book\'s 100 microvolts
+#' 0 (every direction change counts); pass the book's 100 microvolts
 #' for a real EMG record or the count is dominated by noise.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.

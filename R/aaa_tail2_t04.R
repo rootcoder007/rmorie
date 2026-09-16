@@ -79,15 +79,15 @@
 # \' @return list(Q, degree, n, m, trace, n_components,
 # \'   bipartite_components, zero_eigenvalue_multiplicity, method)
 # \' @export
-#' \' Signless Laplacian Q = D + A of an undirected graph
+#' ' Signless Laplacian Q = D + A of an undirected graph
 #'
-#' \' \' D is the diagonal matrix of row sums.  The multiplicity of 0
-#' as an \' eigenvalue of Q equals the number of bipartite components;
-#' that count \' is returned, computed combinatorially by two-colouring
-#' rather than by \' an eigensolver, so it is exact. \' \' @param A
-#' symmetric adjacency matrix with a zero diagonal \' @return list(Q,
-#' degree, n, m, trace, n_components, \' bipartite_components,
-#' zero_eigenvalue_multiplicity, method) \' @export
+#' ' ' D is the diagonal matrix of row sums.  The multiplicity of 0
+#' as an ' eigenvalue of Q equals the number of bipartite components;
+#' that count ' is returned, computed combinatorially by two-colouring
+#' rather than by ' an eigensolver, so it is exact. ' ' @param A
+#' symmetric adjacency matrix with a zero diagonal ' @return list(Q,
+#' degree, n, m, trace, n_components, ' bipartite_components,
+#' zero_eigenvalue_multiplicity, method) ' @export
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return A list with \code{Q}, \code{degree}, \code{n}, \code{m}, \code{trace},
@@ -153,15 +153,15 @@ SignlessL <- function(A) {
 # \' @return list(bipartite, evidence, max_odd_trace, colouring,
 # \'   part_sizes, n_components, n, m, method)
 # \' @export
-#' \' Decide bipartiteness, with the odd power-traces as evidence
+#' ' Decide bipartiteness, with the odd power-traces as evidence
 #'
-#' \' \' A symmetric A has a spectrum symmetric about zero exactly
-#' when \' trace(A^k) = 0 for every odd k, and trace(A^k) counts closed
-#' walks of \' length k, so the criterion is "no odd cycle".  Both the
-#' spectral and \' the two-colouring answer are computed and must
-#' agree. \' \' @param A symmetric adjacency matrix with a zero
-#' diagonal \' @return list(bipartite, evidence, max_odd_trace,
-#' colouring, \' part_sizes, n_components, n, m, method) \' @export
+#' ' ' A symmetric A has a spectrum symmetric about zero exactly
+#' when ' trace(A^k) = 0 for every odd k, and trace(A^k) counts closed
+#' walks of ' length k, so the criterion is "no odd cycle".  Both the
+#' spectral and ' the two-colouring answer are computed and must
+#' agree. ' ' @param A symmetric adjacency matrix with a zero
+#' diagonal ' @return list(bipartite, evidence, max_odd_trace,
+#' colouring, ' part_sizes, n_components, n, m, method) ' @export
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A list with \code{bipartite}, \code{evidence}, \code{max_odd_trace},
@@ -270,15 +270,15 @@ BipartSpec <- function(A) {
 # \' @return list(satisfiable, assignment, model, n_vars, n_clauses,
 # \'   decisions, propagations, pure_literals, method)
 # \' @export
-#' \' Decide satisfiability of a CNF formula by DPLL
+#' ' Decide satisfiability of a CNF formula by DPLL
 #'
-#' \' \' Unit propagation, pure literal elimination, then a split on
-#' the \' lowest-indexed unassigned variable trying TRUE first.  The
-#' index rule \' is deterministic, so decision and propagation counts
-#' are reproducible \' and match the Python arm exactly. \' \' @param
-#' cnf list of integer vectors, DIMACS literals (v, -v); 0 is not \' a
-#' literal \' @return list(satisfiable, assignment, model, n_vars,
-#' n_clauses, \' decisions, propagations, pure_literals, method) \'
+#' ' ' Unit propagation, pure literal elimination, then a split on
+#' the ' lowest-indexed unassigned variable trying TRUE first.  The
+#' index rule ' is deterministic, so decision and propagation counts
+#' are reproducible ' and match the Python arm exactly. ' ' @param
+#' cnf list of integer vectors, DIMACS literals (v, -v); 0 is not ' a
+#' literal ' @return list(satisfiable, assignment, model, n_vars,
+#' n_clauses, ' decisions, propagations, pure_literals, method) '
 #' @export
 #'
 #' @param cnf Iterated over elementwise, with \code{lapply}.
@@ -402,23 +402,22 @@ Dpll <- function(cnf) {
 # \' @return list(theta, loglik, trace, increments, min_increment, monotone,
 # \'   steps, method)
 # \' @export
-#' \' Run EM for a fixed number of steps and audit its monotonicity
+#' ' Run EM for a fixed number of steps and audit its monotonicity
 #'
-#' \' \' Theorem 1 of Dempster, Laird & Rubin (1977) says every EM
-#' step \' increases the observed-data log likelihood.  That is not
-#' assumed but \' checked: the log likelihood is evaluated at every
-#' iterate and the \' increments are returned along with a monotone
-#' flag. \' \' @param log_lik function(theta) giving the observed-data
-#' log likelihood \' @param Q function(theta) giving the next iterate
-#' (combined E and M step) \' @param x0 starting parameter vector \'
-#' @param steps number of EM iterations \' @return list(theta, loglik,
-#' trace, increments, min_increment, monotone, \' steps, method) \'
+#' ' ' Theorem 1 of Dempster, Laird & Rubin (1977) says every EM
+#' step ' increases the observed-data log likelihood.  That is not
+#' assumed but ' checked: the log likelihood is evaluated at every
+#' iterate and the ' increments are returned along with a monotone
+#' flag. ' ' @param log_lik function(theta) giving the observed-data
+#' log likelihood ' @param Q function(theta) giving the next iterate
+#' (combined E and M step) ' @param x0 starting parameter vector '
+#' @param steps number of EM iterations ' @return list(theta, loglik,
+#' trace, increments, min_increment, monotone, ' steps, method) '
 #' @export
 #'
 #' @param log_lik Accepted by the signature and not used anywhere in the body.
 #' @param Q Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
-#' @param steps A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{theta}, \code{loglik}, \code{trace}, \code{increments},
 #' \code{min_increment}, \code{monotone}, \code{steps}, \code{method}.
 #' @export
@@ -482,22 +481,22 @@ EmAlgo <- function(log_lik, Q, x0, steps) {
 # \' @return list(status, x, objective, slack, basis, dual, iterations,
 # \'   n_var, n_con, method)
 # \' @export
-#' \' Maximise c\'x subject to A x <= b, x >= 0, with b >= 0
+#' ' Maximise c'x subject to A x <= b, x >= 0, with b >= 0
 #'
-#' \' \' Tableau simplex with Bland\'s rule: the entering column is
-#' the \' lowest-indexed one with a negative reduced cost in the
-#' objective row, \' and among rows attaining the minimum ratio the
-#' leaving row is the one \' whose basic variable has the smallest
-#' index.  Bland\'s rule cannot \' cycle, and being a pure index rule
-#' it makes the R and Python arms \' pivot identically.  Requires b >=
-#' 0 so the slack basis is feasible; \' a negative right-hand side
-#' needs a phase-1 problem, not built here. \' Checked against
-#' lpSolve::lp. \' \' @param c objective coefficients; the objective
-#' is MAXIMISED \' @param A constraint matrix, ncon x nvar \' @param b
-#' right-hand side, every entry non-negative \' @param max_iter pivot
-#' budget \' @param tol zero tolerance for reduced costs and pivot
-#' elements \' @return list(status, x, objective, slack, basis, dual,
-#' iterations, \' n_var, n_con, method) \' @export
+#' ' ' Tableau simplex with Bland's rule: the entering column is
+#' the ' lowest-indexed one with a negative reduced cost in the
+#' objective row, ' and among rows attaining the minimum ratio the
+#' leaving row is the one ' whose basic variable has the smallest
+#' index.  Bland's rule cannot ' cycle, and being a pure index rule
+#' it makes the R and Python arms ' pivot identically.  Requires b >=
+#' 0 so the slack basis is feasible; ' a negative right-hand side
+#' needs a phase-1 problem, not built here. ' Checked against
+#' lpSolve::lp. ' ' @param c objective coefficients; the objective
+#' is MAXIMISED ' @param A constraint matrix, ncon x nvar ' @param b
+#' right-hand side, every entry non-negative ' @param max_iter pivot
+#' budget ' @param tol zero tolerance for reduced costs and pivot
+#' elements ' @return list(status, x, objective, slack, basis, dual,
+#' iterations, ' n_var, n_con, method) ' @export
 #'
 #' @param c A vector; its length is taken.
 #' @param A A matrix; passed to \code{nrow}.

@@ -93,7 +93,7 @@ morie_hook_lengths <- function(shape) {
 }
 
 # helper: exponent of prime p in n!, by Legendre's formula
-#' Helper: exponent of prime p in n!, by Legendre\'s formula
+#' Helper: exponent of prime p in n!, by Legendre's formula
 #'
 #' Part of the algebraic_combinatorics_native implementation; see the
 #' file header for the source it follows.

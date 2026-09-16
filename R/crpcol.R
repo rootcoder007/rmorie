@@ -21,7 +21,7 @@
 # n_k f(y_i | y_k) and opens a new one with weight alpha f(y_i).  The
 # sweep order and the uniform draws are fixed, so the two language arms
 # visit identical states.
-#' Neal\'s algorithm 3 for a conjugate normal DP mixture.  theta is
+#' Neal's algorithm 3 for a conjugate normal DP mixture.  theta is
 #'
 #' integrated out, so a customer joins table k with weight n_k f(y_i |
 #' y_k) and opens a new one with weight alpha f(y_i).  The sweep order

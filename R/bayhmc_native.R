@@ -402,10 +402,10 @@ no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
 # the new trajectory ends (theta_minus, r_minus, theta_plus,
 # r_plus), the candidate sample t_p, and the tree's bookkeeping
 # (count, indicator, summed alpha, alpha normaliser).
-#' The recursion of Algorithm 3, returning the paper\'s nine values:
+#' The recursion of Algorithm 3, returning the paper's nine values:
 #'
 #' the new trajectory ends (theta_minus, r_minus, theta_plus, r_plus),
-#' the candidate sample t_p, and the tree\'s bookkeeping (count,
+#' the candidate sample t_p, and the tree's bookkeeping (count,
 #' indicator, summed alpha, alpha normaliser).
 #'
 #' @param theta Passed to \code{leapfrog}.

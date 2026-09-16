@@ -187,7 +187,6 @@ morie_boxplot_outliers <- function(x, carling = FALSE, gval = NULL) {
 #' covariance.
 #' @param x,y numeric vectors
 #' @return list with the estimate, `statistic`, `df`, `se` and `p_value`
-#' @param x, y numeric vectors
 #' @param tr Argument `tr`; see Usage.
 #' @param alpha Argument `alpha`; see Usage.
 #' @export
@@ -554,7 +553,6 @@ morie_brunner_dette_munk <- function(groups) {
 #' @param tr amount of trimming or Winsorizing
 #' @param equal_variance pool the Winsorized variances
 #' @return a list; see each method's description
-#' @param x, y numeric vectors
 #' @param X Argument `X`; see Usage.
 #' @param n_iter Argument `n_iter`; see Usage.
 #' @param tol Argument `tol`; see Usage.

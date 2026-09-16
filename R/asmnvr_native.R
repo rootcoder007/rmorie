@@ -221,7 +221,7 @@ de_bruijn_graph <- function(reads, k, multiplicity = "set") {
 # vertex with out - in = 1 (start) and one with in - out = 1 (end).
 # Returns NULL when no Eulerian path exists -- ambiguous or
 # disconnected graphs are reported, not guessed at.
-#' Hierholzer\'s algorithm with the exact existence condition checked:
+#' Hierholzer's algorithm with the exact existence condition checked:
 #'
 #' connected, and either all in/out degrees equal, or exactly one vertex
 #' with out - in = 1 (start) and one with in - out = 1 (end). Returns

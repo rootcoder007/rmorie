@@ -80,9 +80,9 @@
 # 4^b by repeated multiplication. Written out because R's `^` on an
 # integer exponent is repeated squaring while Python's `**` calls libm
 # pow(); the module does not rely on the two agreeing.
-#' 4^b by repeated multiplication. Written out because R\'s `^` on an
+#' 4^b by repeated multiplication. Written out because R's `^` on an
 #'
-#' integer exponent is repeated squaring while Python\'s `**` calls libm
+#' integer exponent is repeated squaring while Python's `**` calls libm
 #' pow(); the module does not rely on the two agreeing.
 #'
 #' @param b A count; the body uses it as \code{seq_len(...)}.

@@ -176,7 +176,7 @@ sdpwts_central_path_gap <- function(t, m) {
 }
 
 # Private: the centring objective t * c'x - log det F(x)
-#' Private: the centring objective t * c\'x - log det F(x)
+#' Private: the centring objective t * c'x - log det F(x)
 #'
 #' A step of the sdpwts_native implementation. Called by \code{.sdpwts_centre}.
 #' See the file header for the source the module follows.

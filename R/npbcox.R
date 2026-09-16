@@ -11,7 +11,7 @@
 #' Breslow estimator; with \code{b = 0} as well it is Nelson-Aalen.
 #'
 #' \code{b} maximises the Breslow partial log-likelihood
-#' \eqn{l(b) = sum_k \[sum_{i in D_k} x_i'b - d_k log sum_{j in R_k}
+#' \eqn{l(b) = sum_k [sum_{i in D_k} x_i'b - d_k log sum_{j in R_k}
 #' exp(x_j'b)]}, which is concave, so the Newton step is taken against
 #' the observed information and no line search is needed
 #'

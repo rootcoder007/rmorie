@@ -82,8 +82,8 @@
 # v <- b/(K' u), started from v = 1.
 #' Sinkhorn scaling, FIXED iteration count.  K = exp(-C/eps), i.e
 #'
-#' Cuturi\'s exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v)
-#' then v <- b/(K\' u), started from v = 1.
+#' Cuturi's exp(-lambda M) with lambda = 1/eps; updates u <- a/(K v)
+#' then v <- b/(K' u), started from v = 1.
 #'
 #' @param a Passed to \code{.b2close}.
 #' @param b Passed to \code{.b2close}.

@@ -199,8 +199,8 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 # xi_k > u_i decides how many components to carry.
 #' The deterministic bound xi_k = (1 - kappa) kappa^(k-1), built by
 #'
-#' repeated multiplication rather than kappa^(k-1): R\'s `^` on an
-#' integer exponent is repeated squaring and Python\'s `**` calls pow(),
+#' repeated multiplication rather than kappa^(k-1): R's `^` on an
+#' integer exponent is repeated squaring and Python's `**` calls pow(),
 #' and the two part company in the last bit exactly where the comparison
 #' xi_k > u_i decides how many components to carry.
 #'

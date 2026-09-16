@@ -190,7 +190,7 @@ size_factors <- function(counts) {
 
 #' Cox-Reid adjusted log-likelihood (eq. 7)
 #'
-#' \eqn{ell(alpha) - 0.5 log det(X\' W X)}. The adjustment is the
+#' \eqn{ell(alpha) - 0.5 log det(X' W X)}. The adjustment is the
 #' GLM analogue of Bessel's correction.
 #'
 #' @param alpha Positive numeric.

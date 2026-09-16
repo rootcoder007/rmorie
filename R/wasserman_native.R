@@ -2128,7 +2128,7 @@ morie_wasserman_viterbi <- function(obs, A, B, pi) {
 # (|error| < 1.15e-9). The PYTHON side uses this too: stats::qnorm is
 # more accurate, but parity requires the same approximation in both
 # languages, so LCG-driven chains agree draw for draw.
-#' Acklam\'s rational approximation of the standard normal quantile
+#' Acklam's rational approximation of the standard normal quantile
 #'
 #' (|error| < 1.15e-9). The PYTHON side uses this too: stats::qnorm is
 #' more accurate, but parity requires the same approximation in both

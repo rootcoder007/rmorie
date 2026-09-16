@@ -272,7 +272,7 @@ WienerOpt <- function(phi, theta) {
   r
 }
 
-#' Eq. (3.172): J_min = var(d) - Theta\' w_o.  A negative J_min cannot
+#' Eq. (3.172): J_min = var(d) - Theta' w_o.  A negative J_min cannot
 #'
 #' happen for consistent statistics, so it is reported rather than
 #' clamped: it means the supplied variance and covariances do not come
@@ -632,7 +632,7 @@ AncInput <- function(v, m) {
   )
 }
 
-#' Eq. (3.196): e = x - y, and the ERROR is the canceller\'s output.
+#' Eq. (3.196): e = x - y, and the ERROR is the canceller's output.
 #' This
 #'
 #' is the step that surprises: the quantity being minimized is the thing
@@ -704,7 +704,7 @@ LmsOut <- function(w, r) {
   )
 }
 
-#' Eq. (3.200): e^2 = x^2 - 2 x r\'w + (r\'w)^2.  The expansion is
+#' Eq. (3.200): e^2 = x^2 - 2 x r'w + (r'w)^2.  The expansion is
 #' checked
 #'
 #' against the square itself.  This is the INSTANTANEOUS squared error
@@ -783,7 +783,7 @@ LmsDescent <- function(w, e, rvec, mu) {
 
 #' Eq. (3.203): w(n+1) = w(n) + 2 mu e(n) r(n).  The factor of two is in
 #'
-#' the book\'s equation and is kept; folding it into mu silently halves
+#' the book's equation and is kept; folding it into mu silently halves
 #' every step size a reader transcribes from the text.  The stability
 #' bound 0 < mu < 1/lambda_max is reported against the input power.
 #'
@@ -861,7 +861,7 @@ LmsVarStep <- function(w, e, rvec, mu_n) {
 #' xbar^2(n) = alpha r^2(n) + (1-alpha) xbar^2(n-1).  Normalizing by the
 #' running power is what makes the step scale-free, so one mu works
 #' across a record whose amplitude varies by an order of magnitude --
-#' the book\'s motivation for VAG signals.  alpha must be small: near 1
+#' the book's motivation for VAG signals.  alpha must be small: near 1
 #' it tracks the instantaneous sample and reintroduces the very jitter
 #' the averaging removes, so a value above 0.5 is refused.
 #'
@@ -1144,7 +1144,7 @@ RlsUpdate <- function(w_prev, k, alpha) {
   )
 }
 
-#' Eq. (3.225): alpha(n) = x(n) - w\'(n-1) r(n).  The A PRIORI error,
+#' Eq. (3.225): alpha(n) = x(n) - w'(n-1) r(n).  The A PRIORI error,
 #' made
 #'
 #' with the PREVIOUS weights.  Using the updated weights gives the a
@@ -1274,7 +1274,7 @@ RlsFilt <- function(primary, reference, order = 8, lam = 0.98, delta = 1) {
 #' Section 8.6.2.  Every stage is itself a predictor, so one run gives
 #'
 #' the fit at EVERY order up to the one requested -- an order need not
-#' be chosen in advance, which is the lattice\'s advantage over the
+#' be chosen in advance, which is the lattice's advantage over the
 #' direct form.  |gamma| < 1 at every stage is the stability condition,
 #' the same one as eq. (7.39).
 #'

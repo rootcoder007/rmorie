@@ -1304,7 +1304,7 @@ Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
 }
 
 # -- Cohen's class generalised TFD, eqs (8.124)-(8.127).
-#' Cohen\'s class generalised TFD, eqs (8.124)-(8.127)
+#' Cohen's class generalised TFD, eqs (8.124)-(8.127)
 #'
 #' A step of the rangayyan_tf implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

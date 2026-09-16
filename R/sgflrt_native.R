@@ -214,8 +214,8 @@
 #' Inner Laplace mode and the approximated log likelihood. The random
 #' effect
 #'
-#' is carried as u = Lv with LL\' = Sigma and v ~ N(0, I), so the
-#' penalty is v\'v/2 and Sigma^-1 is never formed. That is not a nicety:
+#' is carried as u = Lv with LL' = Sigma and v ~ N(0, I), so the
+#' penalty is v'v/2 and Sigma^-1 is never formed. That is not a nicety:
 #' a spatial correlation matrix with any two nearby locations is close
 #' to singular, an explicitly inverted one is dominated by the jitter
 #' that made the inversion possible, and the fitted coefficients then

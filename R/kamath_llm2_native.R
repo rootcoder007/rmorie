@@ -222,7 +222,7 @@
 }
 
 # kmclm's core: causal-LM cross entropy over non-ignored positions.
-#' Kmclm\'s core: causal-LM cross entropy over non-ignored positions
+#' Kmclm's core: causal-LM cross entropy over non-ignored positions
 #'
 #' A step of the kamath_llm2_native implementation. Called by
 #' \code{morie_kamath_instruction_tuning_loss},
@@ -258,7 +258,7 @@
 }
 
 # rmsnr's core.
-#' Rmsnr\'s core
+#' Rmsnr's core
 #'
 #' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_rms_norm}.
 #' See the file header for the source the module follows.
@@ -283,7 +283,7 @@
 }
 
 # toppd's core: nucleus truncation of temperature-scaled logits.
-#' Toppd\'s core: nucleus truncation of temperature-scaled logits
+#' Toppd's core: nucleus truncation of temperature-scaled logits
 #'
 #' A step of the kamath_llm2_native implementation. Called by \code{morie_kamath_nucleus_sampling}.
 #' See the file header for the source the module follows.
@@ -315,8 +315,8 @@
 # WMD reads its objective off the same core.
 #' Exact min-cost transport (successive shortest augmenting path with
 #'
-#' Bellman-Ford potentials); ports km122\'s _solve_transport, and
-#' km/kmmsc\'s WMD reads its objective off the same core.
+#' Bellman-Ford potentials); ports km122's _solve_transport, and
+#' km/kmmsc's WMD reads its objective off the same core.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.

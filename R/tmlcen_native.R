@@ -277,7 +277,7 @@
 
 # coarsen_interval: the interval (L, R] implied by one subject's
 # monitoring, Sec. 8.5.
-#' Coarsen_interval: the interval (L, R] implied by one subject\'s
+#' Coarsen_interval: the interval (L, R] implied by one subject's
 #'
 #' monitoring, Sec. 8.5.
 #'
@@ -395,7 +395,7 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 }
 
 # ipcw_interval: Sec. 8.5's IPCW estimator of Psi_a = int r(t) Fbar_a(t) dt
-#' Ipcw_interval: Sec. 8.5\'s IPCW estimator of Psi_a = int r(t)
+#' Ipcw_interval: Sec. 8.5's IPCW estimator of Psi_a = int r(t)
 #' Fbar_a(t) dt
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.

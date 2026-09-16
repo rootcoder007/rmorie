@@ -446,7 +446,7 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 
 #' Small Nelder-Mead simplex minimiser in base R, with the same
 #'
-#' restart-until-stuck shape as the Python arm\'s call to
+#' restart-until-stuck shape as the Python arm's call to
 #' _sci_core.minimize(method="Nelder-Mead").
 #'
 #' @param fn Passed to \code{apply}.

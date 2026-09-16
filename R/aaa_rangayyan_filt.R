@@ -397,7 +397,7 @@ PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
 #' Eqs (3.97)-(3.99).  With no coefficients the equal-weight boxcar is
 #'
 #' used.  Equal weights are the worst choice for stopband attenuation --
-#' a rectangle\'s sidelobes fall off slowly -- which is what the window
+#' a rectangle's sidelobes fall off slowly -- which is what the window
 #' functions of Section 3.4 exist to fix.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
@@ -671,7 +671,7 @@ HannFrs <- function(omega) {
 
 #' Eq (3.106): unity at DC, exactly nought at omega = pi, monotone
 #'
-#' between.  The book\'s absolute value is redundant -- 1 + cos is never
+#' between.  The book's absolute value is redundant -- 1 + cos is never
 #' negative -- and is kept only because the book writes it.
 #'
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.

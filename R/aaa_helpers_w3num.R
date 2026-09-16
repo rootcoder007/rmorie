@@ -101,7 +101,7 @@
 }
 
 # Lower Cholesky factor L with A = L L'. Explicit, not chol().
-#' Lower Cholesky factor L with A = L L\'. Explicit, not chol()
+#' Lower Cholesky factor L with A = L L'. Explicit, not chol()
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_ols},
 #' \code{morie_cypin_fit}, \code{morie_hyper2} and 3 others in the module.
@@ -140,7 +140,7 @@
 }
 
 # Solve L L' x = b by forward then back substitution.
-#' Solve L L\' x = b by forward then back substitution
+#' Solve L L' x = b by forward then back substitution
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol},
 #' \code{.w3_ols}, \code{morie_cypin_fit} and 3 others in the module.
@@ -174,7 +174,7 @@
 }
 
 # (L L')^-1, column by column from the factor.
-#' (L L\')^-1, column by column from the factor
+#' (L L')^-1, column by column from the factor
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_ols}.
 #' See the file header for the source the module follows.
@@ -241,7 +241,7 @@
 )
 
 # Lanczos log-gamma. Not lgamma(): Python's is a different routine.
-#' Lanczos log-gamma. Not lgamma(): Python\'s is a different routine
+#' Lanczos log-gamma. Not lgamma(): Python's is a different routine
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta},
 #' \code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
@@ -268,7 +268,7 @@
 }
 
 # Q(a, x) by Lentz's continued fraction.
-#' Q(a, x) by Lentz\'s continued fraction
+#' Q(a, x) by Lentz's continued fraction
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_gammp}, \code{.w3_gammq}.
 #' See the file header for the source the module follows.
@@ -364,7 +364,7 @@
 #'
 #' Phi(z) = 1/2 (1 + sign(z) P(1/2, z^2/2)) is an identity, not an
 #' approximation, so this is exactly as accurate as gammp -- and it runs
-#' the same series as the Python arm rather than R\'s own pnorm.
+#' the same series as the Python arm rather than R's own pnorm.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -487,7 +487,7 @@
 }
 
 # Upper tail of Student's t.
-#' Upper tail of Student\'s t
+#' Upper tail of Student's t
 #'
 #' A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}.
 #' See the file header for the source the module follows.

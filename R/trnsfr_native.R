@@ -163,7 +163,7 @@ morie_trnsfr_transport_weights <- function(X, S, trim = 1e-3, ridge = 1e-6) {
   )
 }
 
-#' Minimum-variance weights that match the target\'s X means: solve
+#' Minimum-variance weights that match the target's X means: solve
 #'
 #' min sum w_i^2 over source units subject to sum w_i Xtilde_i =
 #' Xbar_target with Xtilde = (1, X). Weights may go negative, which is

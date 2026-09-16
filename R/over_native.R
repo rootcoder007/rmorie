@@ -17,7 +17,7 @@
 # path recursion of R's psmirnov2x.
 #' Exact P(D < d) for the two-sample statistic, no ties: the lattice
 #'
-#' path recursion of R\'s psmirnov2x.
+#' path recursion of R's psmirnov2x.
 #'
 #' @param d Numeric; combined arithmetically in the body.
 #' @param n1 A count; the body uses it as \code{seq_len(...)}.
@@ -45,7 +45,7 @@
 }
 
 # Two-sided asymptotic Kolmogorov series with Stephens' correction.
-#' Two-sided asymptotic Kolmogorov series with Stephens\' correction
+#' Two-sided asymptotic Kolmogorov series with Stephens' correction
 #'
 #' A step of the over_native implementation. Called by \code{.mor_ks_2samp}.
 #' See the file header for the source the module follows.

@@ -20,9 +20,9 @@
 #
 # Internal; `aaa_` collates it before its callers.
 
-#' Lower-triangular L with L L\' = Sigma. The book writes the root as an
+#' Lower-triangular L with L L' = Sigma. The book writes the root as an
 #'
-#' upper triangular U with Sigma = U\'U; L is that U\'.
+#' upper triangular U with Sigma = U'U; L is that U'.
 #'
 #' @param cov A matrix; passed to \code{nrow}.
 #' @param jitter Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
@@ -43,7 +43,7 @@
   t(u)
 }
 
-#' Symmetric square root P Delta^(1/2) P\'. Negative eigenvalues can
+#' Symmetric square root P Delta^(1/2) P'. Negative eigenvalues can
 #' only
 #'
 #' come from rounding on a matrix positive semi-definite in exact

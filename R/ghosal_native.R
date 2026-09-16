@@ -23,8 +23,8 @@
 #' N is kept as a DOUBLE, not coerced with as.integer(): these rate
 #'
 #' formulas are routinely evaluated at hypothetical sample sizes like
-#' 1e10, which overflow R\'s 32-bit integer and silently become NA.
-#' Python\'s int has no such limit, so coercing here would break parity
+#' 1e10, which overflow R's 32-bit integer and silently become NA.
+#' Python's int has no such limit, so coercing here would break parity
 #' exactly where the asymptotics become interesting.
 #'
 #' @param n Coerced to numeric by the body, with \code{as.numeric}.

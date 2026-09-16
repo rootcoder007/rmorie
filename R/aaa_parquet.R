@@ -45,7 +45,7 @@
 #' A decoder is a plain environment so the position advances by
 #' reference
 #'
-#' the way the Python reader\'s self.pos does; passing it around by
+#' the way the Python reader's self.pos does; passing it around by
 #' value would need every helper to return (value, pos) pairs.
 #'
 #' @param buf See Usage.

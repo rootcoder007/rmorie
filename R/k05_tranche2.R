@@ -124,7 +124,7 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
   c + (u - c) * p2
 }
 
-#' General two-category Fisher information I = (P\')^2/(PQ);
+#' General two-category Fisher information I = (P')^2/(PQ);
 #' substituting
 #'
 #' the 4PL P and using P-c = (u-c)P*, u-P = (u-c)Q* gives this form,
@@ -262,7 +262,7 @@ morie_lord_chisq <- function(b_R, b_F, V_R, V_F = NULL) {
 # method string are identical to what this file would have defined, so
 # rather than ship a second copy that can silently drift, morie_cochran_q
 # is an alias of it. See aaa_macn.R for the references and the derivation.
-#' Cochran\'s Q: the R arm already lives in aaa_macn.R as
+#' Cochran's Q: the R arm already lives in aaa_macn.R as
 #'
 #' morie_ma_cochran_q, written by another agent against this same Python
 #' module while this slice was in flight. Its arithmetic, field names

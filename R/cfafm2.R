@@ -81,7 +81,7 @@
 #' Masked EM factor analysis (Rubin & Thayer 1982 E- and M-steps)
 #'
 #' mask\[i, j\] is 1 where item i may load on factor j.  Factors are
-#' standardised and orthogonal, so Sigma = Lambda Lambda\' + Psi.
+#' standardised and orthogonal, so Sigma = Lambda Lambda' + Psi.
 #'
 #' @param S A matrix; indexed by row and column.
 #' @param mask A matrix; indexed by row and column.

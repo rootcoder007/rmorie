@@ -50,7 +50,7 @@
 # 32-bit range and overflows above 2^31, so the words are split into two
 # 16-bit halves; every value stays well under 2^53 and the arithmetic is
 # exact.
-#' 32-bit operations on doubles. R\'s bitwXor is defined over the signed
+#' 32-bit operations on doubles. R's bitwXor is defined over the signed
 #'
 #' 32-bit range and overflows above 2^31, so the words are split into
 #' two 16-bit halves; every value stays well under 2^53 and the
@@ -473,9 +473,9 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 # Compensated accumulation, so both arms agree bit for bit: R's sum()
 # accumulates in long double, CPython's compensates, and neither is the
 # plain loop the other one is.
-#' Compensated accumulation, so both arms agree bit for bit: R\'s sum()
+#' Compensated accumulation, so both arms agree bit for bit: R's sum()
 #'
-#' accumulates in long double, CPython\'s compensates, and neither is
+#' accumulates in long double, CPython's compensates, and neither is
 #' the plain loop the other one is.
 #'
 #' @param v A vector; its length is taken and its elements indexed.

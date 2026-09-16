@@ -81,7 +81,7 @@
 # Byte order, not the locale's collation. R would otherwise compare
 # strings by whatever collation happens to be in force, and the
 # canonical spelling of a path would depend on the machine.
-#' Byte order, not the locale\'s collation. R would otherwise compare
+#' Byte order, not the locale's collation. R would otherwise compare
 #'
 #' strings by whatever collation happens to be in force, and the
 #' canonical spelling of a path would depend on the machine.

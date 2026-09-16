@@ -48,7 +48,7 @@
 # Inverse of the central-difference Hessian. The optimiser's own
 # inverse-Hessian is a secant approximation accumulated along whatever
 # path it walked, so it is not reproducible across solvers; this is.
-#' Inverse of the central-difference Hessian. The optimiser\'s own
+#' Inverse of the central-difference Hessian. The optimiser's own
 #'
 #' inverse-Hessian is a secant approximation accumulated along whatever
 #' path it walked, so it is not reproducible across solvers; this is.

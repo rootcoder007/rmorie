@@ -44,10 +44,10 @@ ess <- function(weights) {
 # findInterval has the same effect but is documented to return the
 # leftmost interval, so we keep our own to mirror the Python
 # arm's hand-written loop.
-#' Binary search over a precomputed cumulative distribution.  R\'s
+#' Binary search over a precomputed cumulative distribution.  R's
 #'
 #' findInterval has the same effect but is documented to return the
-#' leftmost interval, so we keep our own to mirror the Python arm\'s
+#' leftmost interval, so we keep our own to mirror the Python arm's
 #' hand-written loop.
 #'
 #' @param cum A vector; its length is taken and its elements indexed.
@@ -169,9 +169,9 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 # random_walk_kernel(scale, n_moves), performs n_moves of
 # x' = x + Normal(0, scale^2) and returns the average accept
 # rate over the inner moves.
-#' A Metropolis random walk that, just like the Python arm\'s
+#' A Metropolis random walk that, just like the Python arm's
 #'
-#' random_walk_kernel(scale, n_moves), performs n_moves of x\' = x +
+#' random_walk_kernel(scale, n_moves), performs n_moves of x' = x +
 #' Normal(0, scale^2) and returns the average accept rate over the inner
 #' moves.
 #'

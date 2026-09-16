@@ -72,7 +72,7 @@
 # is absolutely continuous. "constant" holds a_m fixed, which does NOT:
 # the limit is continuous but singular, and it is here because a reader
 # who wants to see that happen should be able to.
-#' The Beta concentration a_m at a given level. "cubic" is the paper\'s
+#' The Beta concentration a_m at a given level. "cubic" is the paper's
 #'
 #' a_m = c m^3, for which the sum of 1/sqrt(a_m) converges and the limit
 #' is absolutely continuous. "constant" holds a_m fixed, which does NOT:
@@ -97,7 +97,7 @@
 #' The mean of V that centres the pyramid on a prior guess: the fraction
 #'
 #' of the parent interval that the guess assigns to the left child,
-#' which is the paper\'s equation (6). A guess that is flat over the
+#' which is the paper's equation (6). A guess that is flat over the
 #' parent gives exactly a half, the symmetric case.
 #'
 #' @param nullq Accepted by the signature and not used anywhere in the body.

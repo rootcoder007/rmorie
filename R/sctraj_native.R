@@ -61,7 +61,7 @@
   M
 }
 
-#' Solve A x = b; singular pooled covariance gets the paper\'s advice
+#' Solve A x = b; singular pooled covariance gets the paper's advice
 #'
 #' A step of the sctraj_native implementation. Called by \code{morie_sctraj_cluster_distances}.
 #' See the file header for the source the module follows.
@@ -201,7 +201,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov = "full",
   list(distances = D, clusters = nms, centers = centers, covariances = covs)
 }
 
-#' Prim\'s MST, with the paper\'s optional terminal-state constraint
+#' Prim's MST, with the paper's optional terminal-state constraint
 #'
 #' With ends given, the tree is built on the non-terminal clusters and
 #' each terminal is attached to its nearest non-terminal neighbour.

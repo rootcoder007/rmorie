@@ -147,7 +147,7 @@
 #' Mgwr/kernels.py: the n_neighbours-th order statistic, nudged by eps
 #' so the
 #'
-#' neighbour itself falls strictly inside a truncated kernel\'s support.
+#' neighbour itself falls strictly inside a truncated kernel's support.
 #' The regression point counts as its own first neighbour.
 #'
 #' @param distance_row Coerced to numeric by the body, with \code{as.numeric}.
@@ -197,7 +197,7 @@
 # The cutoff is numpy.linalg.pinv's default: max(dim) * eps * largest
 # singular value. Written out rather than taken from MASS::ginv because MASS
 # is only in Suggests.
-#' The cutoff is numpy.linalg.pinv\'s default: max(dim) * eps * largest
+#' The cutoff is numpy.linalg.pinv's default: max(dim) * eps * largest
 #'
 #' singular value. Written out rather than taken from MASS::ginv because
 #' MASS is only in Suggests.
@@ -416,7 +416,7 @@
 # Golden section rather than R's optimize (Brent): deterministic and with no
 # parabolic-interpolation step whose tie-breaking the Python arm would have
 # to match bit for bit.
-#' Golden section rather than R\'s optimize (Brent): deterministic and
+#' Golden section rather than R's optimize (Brent): deterministic and
 #' with no
 #'
 #' parabolic-interpolation step whose tie-breaking the Python arm would
@@ -461,7 +461,7 @@
 
 # spgwr::gwr.sel's search interval: the bounding-box diagonal and a
 # thousandth of it.
-#' Spgwr::gwr.sel\'s search interval: the bounding-box diagonal and a
+#' Spgwr::gwr.sel's search interval: the bounding-box diagonal and a
 #'
 #' thousandth of it.
 #'

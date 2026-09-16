@@ -239,7 +239,7 @@ morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
 #' a binding interaction", so anything at or inside R1 is fully ideal
 #' and only the far side ramps down. Folding this about zero the way the
 #' hydrogen-bond deviations are folded would penalise a contact for
-#' being too close, which is the clash term\'s job and not this one\'s
+#' being too close, which is the clash term's job and not this one's
 #' -- and it would also make a contact sitting exactly on R1 score a
 #' hair under one whenever the coordinate arithmetic put it a single bit
 #' on the wrong side.

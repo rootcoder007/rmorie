@@ -75,7 +75,7 @@
 # comparison at the twelfth digit finds the difference.
 #' Neumaier-compensated sum. Written out rather than left to sum():
 #'
-#' CPython 3.12+ compensates a run of floats and R\'s sum() accumulates
+#' CPython 3.12+ compensates a run of floats and R's sum() accumulates
 #' in long double, so the two built-ins are different functions and a
 #' comparison at the twelfth digit finds the difference.
 #'
@@ -125,7 +125,7 @@
 
 # Cholesky factor L with A = L L', lower triangular. Explicit rather than
 # chol() so the Python arm can match it element by element.
-#' Cholesky factor L with A = L L\', lower triangular. Explicit rather
+#' Cholesky factor L with A = L L', lower triangular. Explicit rather
 #' than
 #'
 #' chol() so the Python arm can match it element by element.
@@ -154,7 +154,7 @@
 }
 
 # Solve L L' x = b by forward then back substitution.
-#' Solve L L\' x = b by forward then back substitution
+#' Solve L L' x = b by forward then back substitution
 #'
 #' A step of the tipsne_native implementation. Called by \code{.tipsne_inv_from_chol},
 #' \code{morie_tipsne_ancova}.
@@ -182,7 +182,7 @@
 }
 
 # (L L')^-1, formed column by column from the factor.
-#' (L L\')^-1, formed column by column from the factor
+#' (L L')^-1, formed column by column from the factor
 #'
 #' A step of the tipsne_native implementation. Called by \code{morie_tipsne_ancova}.
 #' See the file header for the source the module follows.
@@ -263,7 +263,7 @@ morie_tipsne_ancova <- function(y, design) {
 # beta* ~ N(betahat, sigma2 (X'X)^-1) via the Cholesky of the covariance.
 # The draw is coordinate by coordinate so the stream position matches the
 # Python arm term for term.
-#' Beta* ~ N(betahat, sigma2 (X\'X)^-1) via the Cholesky of the
+#' Beta* ~ N(betahat, sigma2 (X'X)^-1) via the Cholesky of the
 #' covariance
 #'
 #' The draw is coordinate by coordinate so the stream position matches
@@ -353,7 +353,7 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 }
 
 # Lentz's algorithm for the beta continued fraction.
-#' Lentz\'s algorithm for the beta continued fraction
+#' Lentz's algorithm for the beta continued fraction
 #'
 #' A step of the tipsne_native implementation. Called by \code{.tipsne_betainc}.
 #' See the file header for the source the module follows.
@@ -424,7 +424,7 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 # Upper tail of Student's t, from the regularised incomplete beta.
 # Written out because pt() and the Python arm are separate
 # implementations and would disagree in the last digits.
-#' Upper tail of Student\'s t, from the regularised incomplete beta
+#' Upper tail of Student's t, from the regularised incomplete beta
 #'
 #' Written out because pt() and the Python arm are separate
 #' implementations and would disagree in the last digits.

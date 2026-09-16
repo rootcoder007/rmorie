@@ -41,7 +41,7 @@
 # P_Z M by least squares rather than a formed inverse: Z'Z is
 # routinely near-singular when instruments are correlated, and
 # inverting it explicitly turns a warning into a wrong answer.
-#' P_Z M by least squares rather than a formed inverse: Z\'Z is
+#' P_Z M by least squares rather than a formed inverse: Z'Z is
 #'
 #' routinely near-singular when instruments are correlated, and
 #' inverting it explicitly turns a warning into a wrong answer.

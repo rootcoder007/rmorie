@@ -378,10 +378,10 @@ NULL
 
 ## Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4'c and mediator
 ## model M = b0 + b1 a + b2'c; cbar is where the decomposition is read.
-#' Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4\'c and
+#' Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4'c and
 #' mediator
 #'
-#' # model M = b0 + b1 a + b2\'c; cbar is where the decomposition is
+#' # model M = b0 + b1 a + b2'c; cbar is where the decomposition is
 #' read.
 #'
 #' @param Y A vector; its length is taken.

@@ -20,7 +20,7 @@
 # are taken in sorted order, matching numpy's unique().
 #' Balanced panel matrix from long-format columns.  Units and periods
 #'
-#' are taken in sorted order, matching numpy\'s unique().
+#' are taken in sorted order, matching numpy's unique().
 #'
 #' @param y A vector; its length is taken.
 #' @param unit Coerced to vector by the body, with \code{as.vector}.

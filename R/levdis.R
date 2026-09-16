@@ -3,7 +3,7 @@
 #'
 #' Formula: the Wagner-Fischer dynamic program, \eqn{D[0,0]=0},
 #' \eqn{D[i,0] = i c_{del}}, \eqn{D[0,j] = j c_{ins}},
-#' \eqn{D\[i,j\] = \min(D[i-1,j]+c_{del},\, D[i,j-1]+c_{ins},\,
+#' \eqn{D[i,j] = \min(D[i-1,j]+c_{del},\, D[i,j-1]+c_{ins},\,
 #' D[i-1,j-1] + c_{sub}[s_1[i] \ne s_2[j]])}, answer at \eqn{D[m,n]}.
 #' Only the previous row is kept, so memory is O(n); the recurrence is
 #' unchanged.  Inputs are compared element by element, so token vectors
