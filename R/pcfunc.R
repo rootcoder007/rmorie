@@ -7,7 +7,7 @@
 #' \code{g_hat(r) = (K_hat(r + h) - K_hat(r - h)) / (2 h) / (2 pi r)},
 #' which is deterministic -- no kernel smoothing and no data-dependent
 #' bandwidth rule. Under complete spatial randomness \eqn{K(r) = pi
-# prime r^2} so \code{g(r) = 1} at every radius; above one means clustering
+#' r^2} so \code{g(r) = 1} at every radius; above one means clustering
 #' at that scale and below one regularity
 #'
 #' @param points Point coordinates, n by 2.

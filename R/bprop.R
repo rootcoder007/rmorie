@@ -21,7 +21,7 @@
 #' w_new = w_old + eta * gradient reproduces (10.13) and (10.17).
 #'
 #' @param layers list of weight matrices W_1..W_L, W_l with one row per unit
-#'   of layer l and a leading bias column, so z_l = W_l [1, a_\{l-1\}].
+#'   of layer l and a leading bias column, so z_l = W_l \[1, a_\{l-1\}\].
 #' @param activations the forward pass a_0..a_L, one row per pattern; a_0 is
 #'   the input without a bias column.
 #' @param loss_grad n-by-units_L matrix of dE/dyhat, which step 9 takes to be

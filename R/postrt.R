@@ -4,9 +4,9 @@
 #' The same method as \eqn{link{Poststs}} seen from the weight side:
 #' with unit design weights the two return the same number. The adjusted
 #' weights sum to \eqn{_h} within every stratum exactly, which is the
-# prime calibration property that makes the adjustment worth doing.
-# prime
-# prime Formula: \code{w_i prime = w_i N_h / sum_{j in h} w_j}; the estimate is the
+#' calibration property that makes the adjustment worth doing.
+#'
+#' Formula: \code{w_i prime = w_i N_h / sum_{j in h} w_j}; the estimate is the
 #' weighted mean
 #'
 #' @param y Observed values.

@@ -9,7 +9,7 @@
 #' proportional hazard with a gamma frailty of variance theta -- becomes
 #' finite-dimensional.  With y_0 = 0 the book gives, for 1 <= j <= K,
 #' P(y_\{j-1\} < Y <= y_j | X = x) equal to
-#' [1 + theta Lambda_0(y_\{j-1\}) exp(-x b)]^(-1/theta) minus
+#' \[1 + theta Lambda_0(y_\{j-1\}) exp(-x b)\]^(-1/theta) minus
 #' \[1 + theta Lambda_0(y_j) exp(-x b)\]^(-1/theta), and
 #' P(Y > y_K | X = x) = \[1 + theta Lambda_0(y_K) exp(-x b)\]^(-1/theta), and
 #' then the log likelihood of a random sample of (Y, X).

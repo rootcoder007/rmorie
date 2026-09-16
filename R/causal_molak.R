@@ -779,7 +779,7 @@ morie_poschk <- function(treat, stratum, tol = 0) {
 #' The estimator is taken from the primary source. Robinson
 #' decomposition, eq. (1): "Y_i - m*(X_i) = \{W_i - e*(X_i)\} tau*(X_i) +
 #' eps_i"; R-learner objective, eq. (4): "tau_hat(.) = argmin_tau
-#' [L_hat_n\{tau(.)\} + Lambda_n\{tau(.)\}]" with "L_hat_n\{tau(.)\} = (1/n)
+#' \[L_hat_n\{tau(.)\} + Lambda_n\{tau(.)\}\]" with "L_hat_n\{tau(.)\} = (1/n)
 #' sum_i [\{Y_i - m_hat^(-q(i))(X_i)\} - \{W_i - e_hat^(-q(i))(X_i)\}
 #' tau(X_i)]^2" -- Nie, X. and Wager, S. (2021), Quasi-Oracle
 #' Estimation of Heterogeneous Treatment Effects, Biometrika
