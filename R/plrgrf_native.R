@@ -117,6 +117,7 @@
 #' y <- W * (1 + X[, 1]) + X[, 2] + rnorm(n, 0, 0.5)
 #' lc <- local_centering(y, W, X, n_folds = 3, n_trees = 40)
 #' c(length(lc$mh), length(lc$eh))
+#' @keywords internal
 local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
                             min_leaf = 5, seed = 0) {
   n <- length(y)
@@ -160,6 +161,7 @@ local_centering <- function(y, W, X, n_folds = 5, n_trees = 100,
 #' lc <- local_centering(y, W, X, n_folds = 3, n_trees = 40)
 #' rf <- residual_forest(y - lc$mh, W - lc$eh, X, n_trees = 40)
 #' is.list(rf)
+#' @keywords internal
 residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
                             min_leaf = 5, seed = 0, alpha = 0.05, pi = 0.5) {
   n <- length(y_res)
@@ -218,6 +220,7 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
 #' y <- W * (1 + X[, 1]) + X[, 2] + rnorm(n, 0, 0.5)
 #' fit <- morie_plrgrf(y, W, X, n_trees = 40, n_folds = 3)
 #' is.list(fit)
+#' @keywords internal
 morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
                          n_folds = 5, min_leaf = 5, seed = 0,
                          center = TRUE, level = 0.95) {

@@ -227,6 +227,7 @@
 #' \code{p}, \code{max_cross_sex_relatedness}, \code{cycles}, \code{converged},
 #' \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
                                          max_cycles = 60L, tol = 1e-9,
                                          male_label = 1) {

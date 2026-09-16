@@ -320,6 +320,7 @@
 #' \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n},
 #' \code{n_times}, \code{contrast}, \code{method}.
 #' @export
+#' @keywords internal
 morie_mfovsm <- function(y, feature, A, H, v_in_numerator = TRUE,
                           contrast = "cumulative", trim = NULL) {
   A_hist <- .mfovsm_hist(A)
@@ -454,6 +455,7 @@ mfovsm <- morie_mfovsm
 #' @export
 #' @examples
 #' morie_mfovsm_cheatsheet()
+#' @keywords internal
 morie_mfovsm_cheatsheet <- function() {
   paste0("mfovsm: V-conditional MSM E[Y^abar|V] = b0 + b1 abar + ",
          "b2 V + b3 abar V (Robins-Hernan 2009; H&R Sec.12.5). ",

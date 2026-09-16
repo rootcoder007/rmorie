@@ -169,6 +169,7 @@
 #' \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step},
 #' \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
                          lr = 0.05, lam = 0.1, seed = 0, h = 1e-4,
                          step_decay = 0.05) {
@@ -244,6 +245,7 @@ morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' residual_loss(V, V)
+#' @keywords internal
 residual_loss <- function(x, g_z) {
   .gan_an_residual_loss_impl(x, g_z)
 }
@@ -261,6 +263,7 @@ residual_loss <- function(x, g_z) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' discrimination_loss(V, V)
+#' @keywords internal
 discrimination_loss <- function(f_x, f_gz) {
   .gan_an_discrimination_loss_impl(f_x, f_gz)
 }
@@ -281,6 +284,7 @@ discrimination_loss <- function(f_x, f_gz) {
 #' @examples
 #' anomaly_score(x = c(1, 2, 3, 4, 5, 6, 7, 8), g_z = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   f_x = c(1, 2, 3, 4, 5, 6, 7, 8), f_gz = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
   .gan_an_anomaly_score_impl(x, g_z, f_x, f_gz, lam)
 }
@@ -299,6 +303,7 @@ anomaly_score <- function(x, g_z, f_x, f_gz, lam = 0.1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' residual_map(V, V)
+#' @keywords internal
 residual_map <- function(x, g_z, shape = NULL) {
   a <- .gan_an_as_num(x)
   b <- .gan_an_as_num(g_z)
@@ -336,6 +341,7 @@ residual_map <- function(x, g_z, shape = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' score_separation(V, V)
+#' @keywords internal
 score_separation <- function(normal_scores, anomalous_scores) {
   a <- .gan_an_as_num(normal_scores)
   b <- .gan_an_as_num(anomalous_scores)

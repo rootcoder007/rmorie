@@ -113,6 +113,7 @@ ROUTES <- c("km", "empirical")
 #' set.seed(1)
 #' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
 #' str(morie_survroc_kaplan_meier(tt, ev), max.level = 1)
+#' @keywords internal
 morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
   cln <- .survroc_clean(times, events)
   T <- cln$T
@@ -276,6 +277,7 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 #' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
 #' mk <- -log(tt) + rnorm(40, 0, 0.3)
 #' morie_survroc_sensitivity(tt, ev, mk, threshold = 0, t = 1)
+#' @keywords internal
 morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
                                      route = "km") {
   res <- .survroc_pair(times, events, marker, threshold, t, route)
@@ -301,6 +303,7 @@ morie_survroc_sensitivity <- function(times, events, marker, threshold, t,
 #' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
 #' mk <- -log(tt) + rnorm(40, 0, 0.3)
 #' morie_survroc_specificity(tt, ev, mk, threshold = 0, t = 1)
+#' @keywords internal
 morie_survroc_specificity <- function(times, events, marker, threshold, t,
                                      route = "km") {
   res <- .survroc_pair(times, events, marker, threshold, t, route)
@@ -326,6 +329,7 @@ morie_survroc_specificity <- function(times, events, marker, threshold, t,
 #' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
 #' mk <- -log(tt) + rnorm(40, 0, 0.3)
 #' str(morie_survroc_roc_at(tt, ev, mk, t = 1), max.level = 1)
+#' @keywords internal
 morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
   cln <- .survroc_clean(times, events, marker)
   M <- cln$M
@@ -365,6 +369,7 @@ morie_survroc_roc_at <- function(times, events, marker, t, route = "km") {
 #' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
 #' mk <- -log(tt) + rnorm(40, 0, 0.3)
 #' morie_survroc_auc_at(tt, ev, mk, t = 1)
+#' @keywords internal
 morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
   pts <- morie_survroc_roc_at(times, events, marker, t, route)
   a <- 0.0
@@ -398,6 +403,7 @@ morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
 #' tt <- rexp(40); ev <- rbinom(40, 1, 0.7)
 #' mk <- -log(tt) + rnorm(40, 0, 0.3)
 #' str(morie_survroc(tt, ev, mk, t = 1), max.level = 1)
+#' @keywords internal
 morie_survroc <- function(times, events, marker, t, route = "km") {
   cln <- .survroc_clean(times, events, marker)
   T <- cln$T

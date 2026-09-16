@@ -989,6 +989,7 @@
 #' res$size
 #' # the published basis for this ideal is {x^2, xy, y^2 - x/2}
 #' lapply(res$basis, names)
+#' @keywords internal
 morie_groebn <- function(polys, order = "lex", prune = TRUE, reduced = TRUE) {
   polys_norm <- lapply(polys, .groebn_poly)
   .groebn_buchberger(polys_norm, order = order, prune = prune, reduced = reduced)

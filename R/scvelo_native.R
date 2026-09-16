@@ -88,6 +88,7 @@
 #' @export
 #' @examples
 #' morie_solve_kinetics(tau = 0.5, alpha = 0.5, beta = 0.5, gamma = 0.5)
+#' @keywords internal
 morie_solve_kinetics <- function(tau, alpha, beta, gamma,
                                 u0 = 0.0, s0 = 0.0) {
   if (beta <= 0) stop("scvelo: beta must be positive", call. = FALSE)
@@ -126,6 +127,7 @@ morie_solve_kinetics <- function(tau, alpha, beta, gamma,
 #' @examples
 #' morie_velocity(u = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5,
 #'   gamma = 0.5)
+#' @keywords internal
 morie_velocity <- function(u, s, beta, gamma) {
   beta * as.numeric(u) - gamma * as.numeric(s)
 }
@@ -151,6 +153,7 @@ morie_velocity <- function(u, s, beta, gamma) {
 #' sim <- morie_simulate_gene(alpha = 5, beta = 0.3, gamma = 0.2,
 #'                            t_switch = 8, times = seq(0, 20, by = 2))
 #' length(sim$observations)
+#' @keywords internal
 morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
   if (t_switch < 0) stop("scvelo: t_switch cannot be negative", call. = FALSE)
   sw <- morie_solve_kinetics(t_switch, alpha, beta, gamma)
@@ -192,6 +195,7 @@ morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_steady_state_velocity(V, V)
+#' @keywords internal
 morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
   n <- length(u)
   if (n != length(s)) stop("scvelo: u and s must have the same length",
@@ -241,6 +245,7 @@ morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
 #' at <- morie_assign_latent_time(u, s, alpha = 5, beta = 0.3,
 #'                                gamma = 0.2, t_switch = 8)
 #' is.list(at) || is.numeric(at)
+#' @keywords internal
 morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
                                      grid = 200, t_max = NULL) {
   if (is.null(t_max)) {
@@ -315,6 +320,7 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_dynamical_fit(V, V)
+#' @keywords internal
 morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
                                 gamma0 = 0.5, t_switch0 = NULL,
                                 n_iter = 25, grid = 120) {
@@ -409,6 +415,7 @@ morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
 #'              list(latent = mk(c(0.2, 0.4, 0.8, 0.35))))
 #' lt <- morie_latent_time(fits)
 #' is.list(lt) || is.numeric(lt)
+#' @keywords internal
 morie_latent_time <- function(fits) {
   if (length(fits) == 0) stop("scvelo: no gene fits supplied", call. = FALSE)
   n <- length(fits[[1]]$latent)

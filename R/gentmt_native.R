@@ -414,6 +414,7 @@
 #' y <- 0.5 * A + H + stats::rnorm(50)
 #' morie_gentmt(y = y, A = A, H = H)$estimate
 #' @export
+#' @keywords internal
 morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
                          n_strata = 5, doses = NULL, trim = NULL) {
   methods <- c("weight", "subclassify", "doseresponse")

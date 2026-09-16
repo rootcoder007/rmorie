@@ -126,6 +126,7 @@
 #' @export
 #' @examples
 #' morie_bnsadt_p(z = 5L)
+#' @keywords internal
 morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
   cuts <- .BNSADT_FAMILIES[[family]]$cuts
   betas <- .bnsadt_betas(family, params)
@@ -180,6 +181,7 @@ morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
 #' sigma <- rep(0.1, 20)
 #' morie_bnsadt_loglik(x, sigma, mu = 0.2, tau = 0.05,
 #'                     family = "symmetric_step", params = 0.3)
+#' @keywords internal
 morie_bnsadt_loglik <- function(x, sigma, mu, tau,
                                 family = "symmetric_step",
                                 params = numeric(0)) {
@@ -216,6 +218,7 @@ morie_bnsadt_loglik <- function(x, sigma, mu, tau,
 #' x <- c(rnorm(10, 0.3, 0.1), rnorm(5, -0.05, 0.1))
 #' sigma <- rep(0.1, 15)
 #' morie_bnsadt_group_counts(x, sigma, family = "symmetric_step")
+#' @keywords internal
 morie_bnsadt_group_counts <- function(x, sigma, family) {
   groups <- .BNSADT_FAMILIES[[family]]$groups
   cuts <- .BNSADT_FAMILIES[[family]]$cuts
@@ -265,6 +268,7 @@ morie_bnsadt_group_counts <- function(x, sigma, family) {
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_bnsadt_fit(M, V)
 #' }
+#' @keywords internal
 morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
                              mu0 = NULL, tau0 = NULL, beta0 = 0.5,
                              iters = 600L) {
@@ -365,6 +369,7 @@ morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
 #' @examples
 #' morie_bnsadt_median_unbiased(x = 0.25, sigma = 0.1,
 #'                              family = "symmetric_step", params = 0.3)
+#' @keywords internal
 morie_bnsadt_median_unbiased <- function(x, sigma,
                                          family = "symmetric_step",
                                          params = numeric(0),
@@ -405,6 +410,7 @@ morie_bnsadt_median_unbiased <- function(x, sigma,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_bnsadt(V, V)
 #' }
+#' @keywords internal
 morie_bnsadt <- function(y, D, family = "symmetric_step", grid = NULL,
                          target = NULL, target_se = NULL, fit = TRUE,
                          iters = 600L) {
@@ -484,6 +490,7 @@ morie_bnsadt <- function(y, D, family = "symmetric_step", grid = NULL,
 #' @export
 #' @examples
 #' morie_bnsadt_cheatsheet()
+#' @keywords internal
 morie_bnsadt_cheatsheet <- function()
   paste0("bnsadt: Andrews-Kasy publication-bias correction plus the ",
          "adversarial bound over the selection family. families ",

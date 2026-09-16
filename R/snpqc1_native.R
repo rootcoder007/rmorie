@@ -76,6 +76,7 @@
 #'   S <- c("a", "b", "c")
 #'   morie_snpqc1_call_rates(S)
 #' }
+#' @keywords internal
 morie_snpqc1_call_rates <- function(genotypes) {
   # Per-SNP and per-individual call rates.
   ch <- .snpqc1_check(genotypes)
@@ -100,6 +101,7 @@ morie_snpqc1_call_rates <- function(genotypes) {
 #'   S <- c("a", "b", "c")
 #'   morie_snpqc1_maf(S)
 #' }
+#' @keywords internal
 morie_snpqc1_maf <- function(genotypes) {
   # Minor allele frequency per SNP, over non-missing calls.
   ch <- .snpqc1_check(genotypes)
@@ -150,6 +152,7 @@ morie_snpqc1_maf <- function(genotypes) {
 #'   set.seed(1)
 #'   r <- morie_snpqc1_hwe_pvalue(n_hom_minor = 8L, n_het = 8L, n_hom_major = 8L); TRUE
 #' }
+#' @keywords internal
 morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
                                     test = "exact") {
   # Hardy-Weinberg p-value for one SNP. "exact" is the conditional
@@ -238,6 +241,7 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #'   S <- c("a", "b", "c")
 #'   morie_snpqc1_heterozygosity(S)
 #' }
+#' @keywords internal
 morie_snpqc1_heterozygosity <- function(genotypes) {
   # Per-individual heterozygosity rate over non-missing calls.
   ch <- .snpqc1_check(genotypes)
@@ -272,6 +276,7 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #'   S <- c("a", "b", "c")
 #'   morie_snpqc1_sex_check(S)
 #' }
+#' @keywords internal
 morie_snpqc1_sex_check <- function(x_genotypes, reported_sex = NULL,
                                    male_min = 0.8, female_max = 0.2) {
   # X-chromosome homozygosity F = (O - E)/(n - E) with the tutorial's
@@ -327,6 +332,7 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex = NULL,
 #' if (morie_crypto_sodium_available()) {
 #'   morie_snpqc1_ibs_given_ibd(x_count = 5L, y_count = 5L)
 #' }
+#' @keywords internal
 morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction = TRUE) {
   # PLINK's Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with
   # rows Z=0,1,2 and columns I=0,1,2 (lower triangle zero).
@@ -383,6 +389,7 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction = TRUE) {
 #' if (morie_crypto_sodium_available()) {
 #'   morie_snpqc1_ibd_moments(genotypes = list(a = 1, b = 2))
 #' }
+#' @keywords internal
 morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
   # PLINK's method-of-moments IBD estimates for every pair. Returns
   # list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2))
@@ -487,6 +494,7 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
 #' if (morie_crypto_sodium_available()) {
 #'   morie_snpqc1_pihat_matrix(genotypes = list(a = 1, b = 2))
 #' }
+#' @keywords internal
 morie_snpqc1_pihat_matrix <- function(genotypes, correction = TRUE) {
   # Just the pi-hat = P(Z=2) + P(Z=1)/2 matrix.
   morie_snpqc1_ibd_moments(genotypes, correction)$pihat
@@ -504,6 +512,7 @@ morie_snpqc1_pihat_matrix <- function(genotypes, correction = TRUE) {
 #' if (morie_crypto_sodium_available()) {
 #'   morie_snpqc1_kinship_matrix(genotypes = list(a = 1, b = 2))
 #' }
+#' @keywords internal
 morie_snpqc1_kinship_matrix <- function(genotypes) {
   # Genomic kinship from centred, scaled genotypes:
   # K_ik = (1/M) sum_j (g_ij - 2p_j)(g_kj - 2p_j) / (2 p_j (1 - p_j)).
@@ -563,6 +572,7 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
 #'   S <- c("a", "b", "c")
 #'   morie_snpqc1_ld_prune(S)
 #' }
+#' @keywords internal
 morie_snpqc1_ld_prune <- function(genotypes, window = 50, step = 5, r2 = 0.2) {
   # Window-based pruning: drop one of any pair with r^2 above the
   # threshold. Returns kept SNP indices (1-based).
@@ -649,6 +659,7 @@ morie_snpqc1_ld_prune <- function(genotypes, window = 50, step = 5, r2 = 0.2) {
 #' if (morie_crypto_sodium_available()) {
 #'   morie_snpqc1(genotypes = list(a = 1, b = 2))
 #' }
+#' @keywords internal
 morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
                          geno_relaxed = 0.2, mind_relaxed = 0.2, geno = 0.02,
                          mind = 0.02, maf_threshold = 0.01, hwe_case = 1e-10,
@@ -891,6 +902,7 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
 #' if (morie_crypto_sodium_available()) {
 #'   morie_snpqc1_cheatsheet()
 #' }
+#' @keywords internal
 morie_snpqc1_cheatsheet <- function() {
   paste0(
     "snpqc1: GWAS QC (Marees et al. 2018, Table 1). Seven steps ",

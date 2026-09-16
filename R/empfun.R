@@ -18,10 +18,10 @@
 # (contact distribution or 'point-to-event' distribution)". Schabenberger &
 # Gotway (2005) sec. 3.3.4, pp. 97-98.
 
-#' @noRd
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::morie_empty_space_function(M)
+#' @keywords internal
 morie_empty_space_function <- function(coords, r_grid = NULL, window = NULL,
                                        n_grid = 40) {
   res <- spffun(coords, window, r_grid, n_grid)

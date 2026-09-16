@@ -43,6 +43,7 @@
 #' @export
 #' @examples
 #' morie_mqtmpl_method_status()
+#' @keywords internal
 morie_mqtmpl_method_status <- function(method = NULL) {
   avail <- c("em", "mr", "imp")
   unsourced <- list(
@@ -88,6 +89,7 @@ morie_mqtmpl_method_status <- function(method = NULL) {
 #' pos <- c(0, 0.1, 0.2)
 #' r <- morie_mqtmpl_hmm_genotype_probabilities(g, pos)
 #' str(r[[1]])
+#' @keywords internal
 morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
                                                       error_rate = 0) {
   e <- as.numeric(error_rate)
@@ -160,6 +162,7 @@ morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
 #' pos <- c(0, 0.1, 0.2)
 #' r <- morie_mqtmpl_sample_genotypes(g, pos, grid = pos, n_imp = 4)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
                                            n_imp = 16, error_rate = 0,
                                            seed = 0) {
@@ -212,6 +215,7 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_mqtmpl_imputation_weights(V, V)
+#' @keywords internal
 morie_mqtmpl_imputation_weights <- function(y, genotype_column,
                                              model_dimension = 2) {
   n <- length(y)
@@ -413,6 +417,7 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 #' r <- morie_mqtmpl_scanone(y, list(m1, m2), positions = c(0, 0.1),
 #'                           method = "mr")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mqtmpl_scanone <- function(y, markers, positions,
                                   method = "em", step = 0.02,
                                   covariates = list(),
@@ -479,6 +484,7 @@ morie_mqtmpl_scanone <- function(y, markers, positions,
 #'                                         positions = c(0, 0.1),
 #'                                         n_perm = 20, method = "mr")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mqtmpl_permutation_threshold <- function(y, markers, positions,
                                                 n_perm = 100, alpha = 0.05,
                                                 method = "em",
@@ -521,6 +527,7 @@ morie_mqtmpl_permutation_threshold <- function(y, markers, positions,
 #'                            method = "mr")
 #' r <- morie_mqtmpl_lod_support_interval(sc)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_mqtmpl_lod_support_interval <- function(scan_result, drop = 1.5) {
   lod <- scan_result$lod
   pos <- scan_result$position

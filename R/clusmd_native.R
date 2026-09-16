@@ -342,6 +342,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_clusmd_neighbour_lists(V)
+#' @keywords internal
 morie_clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
   .clusmd_neighbour_lists(fps, threshold)
 }
@@ -371,6 +372,7 @@ morie_clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_clusmd_butina_clusters(V)
+#' @keywords internal
 morie_clusmd_butina_clusters <- function(fps, threshold = 0.8,
                                          recount = FALSE) {
   .clusmd_butina_clusters(fps, threshold, recount)
@@ -389,6 +391,7 @@ morie_clusmd_butina_clusters <- function(fps, threshold = 0.8,
 #'   \code{sizes}, \code{n_singletons}, \code{assignment},
 #'   \code{centroids}.
 #' @export
+#' @keywords internal
 morie_clusmd_cluster_summary <- function(clusters) {
   .clusmd_cluster_summary(clusters)
 }
@@ -413,6 +416,7 @@ morie_clusmd_cluster_summary <- function(clusters) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_clusmd_butina_clustering(V)
+#' @keywords internal
 morie_clusmd_butina_clustering <- function(fps, threshold = 0.8,
                                            recount = FALSE) {
   cl <- .clusmd_butina_clusters(fps, threshold, recount)

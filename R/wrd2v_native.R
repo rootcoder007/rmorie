@@ -139,6 +139,7 @@
 #' @examples
 #' morie_wrd2v_training_complexity(architecture = "skip-gram", D = 100L,
 #'                                 V = 10000L, C = 5L)
+#' @keywords internal
 morie_wrd2v_training_complexity <- function(architecture, D, V, N = NULL,
                                             C = NULL, hierarchical = TRUE) {
   # The paper's Q for one training example (eqs. 4-5).
@@ -174,6 +175,7 @@ morie_wrd2v_training_complexity <- function(architecture, D, V, N = NULL,
 #' @examples
 #' morie_wrd2v_noise_distribution(counts = c(the = 100, cat = 20, sat = 5),
 #'                                power = 0.75)
+#' @keywords internal
 morie_wrd2v_noise_distribution <- function(counts, power = 0.75) {
   # Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2.
   ws <- sort(names(counts))
@@ -201,6 +203,7 @@ morie_wrd2v_noise_distribution <- function(counts, power = 0.75) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_wrd2v_subsample_probability(V)
+#' @keywords internal
 morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
   # Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0.
   total <- sum(unlist(counts))
@@ -356,6 +359,7 @@ morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_wrd2v_wrd2v(V)
+#' @keywords internal
 morie_wrd2v_wrd2v <- function(corpus, size = 16, window = 5,
                               architecture = "skip-gram", lr = 0.05, epochs = 20,
                               min_count = 1, dynamic_window = TRUE,
@@ -552,6 +556,7 @@ morie_wrd2v_wrd2v <- function(corpus, size = 16, window = 5,
 #' vecs <- list(king = rnorm(5), man = rnorm(5), woman = rnorm(5),
 #'              queen = rnorm(5))
 #' morie_wrd2v_analogy(vecs, a = "king", b = "man", c = "woman")
+#' @keywords internal
 morie_wrd2v_analogy <- function(vectors, a, b, c, topn = 1) {
   # Section 4's offset query: b - a + c. The three question words are
   # excluded from the answer.
@@ -583,6 +588,7 @@ morie_wrd2v_analogy <- function(vectors, a, b, c, topn = 1) {
 #' @export
 #' @examples
 #' morie_wrd2v_cheatsheet()
+#' @keywords internal
 morie_wrd2v_cheatsheet <- function() {
   paste0(
     "wrd2v: log-linear word vectors (Mikolov 2013a). CBOW ",

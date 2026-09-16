@@ -147,6 +147,7 @@
 #'                                       risk_periods = list(c(0, 30)),
 #'                                       age_breaks = c(180))
 #' cells
+#' @keywords internal
 morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
                                          risk_periods, age_breaks) {
   # One individual's follow-up, cut into (age band, risk period) cells
@@ -258,6 +259,7 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 #'   morie_sccsno_build_intervals(c$start, c$end, c$exposure, c$events,
 #'                                list(c(0, 30)), c()))
 #' morie_sccsno_loglik(c(0.5), cbp, n_risk = 1L, n_age = 1L)
+#' @keywords internal
 morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
   # The conditional log-likelihood of Sec. 3. params is
   # (beta_1..beta_s, alpha_1..alpha_{m-1}) with beta_0 = alpha_0 = 0.
@@ -389,6 +391,7 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 #' })
 #' r <- morie_sccsno_fit(cases, risk_periods = list(c(0, 30)))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_sccsno_fit <- function(cases, risk_periods, age_breaks = c(),
                              iters = 100, tol = 1e-10, ridge = 1e-10) {
   # Maximise the conditional likelihood by Newton-Raphson. cases is a
@@ -493,6 +496,7 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks = c(),
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_sccsno_relative_incidence(D)
+#' @keywords internal
 morie_sccsno_relative_incidence <- function(fit, level = 0.95) {
   # Point estimates and Wald intervals on the incidence scale.
   z <- stats::qnorm(0.5 + as.numeric(level) / 2.0)
@@ -533,6 +537,7 @@ morie_sccsno_relative_incidence <- function(fit, level = 0.95) {
 #'                         risk_periods = list(c(-30, 0), c(0, 30)))
 #' r <- morie_sccsno_check_assumptions(fit, pre_index = 0)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index = 0,
                                            tol = 0.25) {
   # Read the pre-exposure window as a design diagnostic. A relative
@@ -563,6 +568,7 @@ morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index = 0,
 #' @export
 #' @examples
 #' morie_sccsno_cheatsheet()
+#' @keywords internal
 morie_sccsno_cheatsheet <- function() {
   paste0(
     "sccsno: SCCS. Cases ONLY. Conditioning on each person's ",

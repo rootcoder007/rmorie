@@ -76,6 +76,7 @@
 #' elements <- c("C", "C", "C", "C")
 #' bonds <- list(c(0, 1), c(1, 2), c(2, 3))
 #' topological_torsions(elements, bonds)
+#' @keywords internal
 topological_torsions <- function(elements, bonds, common_types = NULL) {
   els <- as.character(elements)
   n <- length(els)
@@ -127,6 +128,7 @@ topological_torsions <- function(elements, bonds, common_types = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' torsion_similarity(V, V)
+#' @keywords internal
 torsion_similarity <- function(t1, t2) {
   s1 <- if (is.list(t1)) names(t1) else unique(as.character(t1))
   s2 <- if (is.list(t2)) names(t2) else unique(as.character(t2))
@@ -214,6 +216,7 @@ torsion_similarity <- function(t1, t2) {
 #' elements <- c("C", "C", "C", "C")
 #' bonds <- list(c(0, 1), c(1, 2), c(2, 3))
 #' morie_toptor(elements, bonds)
+#' @keywords internal
 morie_toptor <- function(elements, bonds, reference = NULL,
                           common_types = NULL, activities = NULL,
                           permutations = 40, seed = 0) {

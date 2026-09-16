@@ -98,6 +98,7 @@
 #' A <- rbind(c(0, 1, 1, 0), c(1, 0, 0, 1), c(1, 0, 0, 1), c(0, 1, 1, 0))
 #' r <- SignlessL(A)
 #' str(r, max.level = 1)
+#' @keywords internal
 SignlessL <- function(A) {
   A <- .morie_t2_checkadj(A)
   n <- nrow(A)
@@ -171,6 +172,7 @@ SignlessL <- function(A) {
 #' A <- rbind(c(0, 1, 0, 0), c(1, 0, 1, 0), c(0, 1, 0, 1), c(0, 0, 1, 0))
 #' r <- BipartSpec(A)
 #' str(r, max.level = 1)
+#' @keywords internal
 BipartSpec <- function(A) {
   A <- .morie_t2_checkadj(A)
   n <- nrow(A)
@@ -287,6 +289,7 @@ BipartSpec <- function(A) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dpll(V)
+#' @keywords internal
 Dpll <- function(cnf) {
   clauses <- lapply(cnf, function(cl) {
     c <- as.integer(cl)
@@ -431,6 +434,7 @@ Dpll <- function(cnf) {
 #' }
 #' r <- EmAlgo(ll, Q, x0 = c(-1, 5), steps = 20)
 #' str(r, max.level = 1)
+#' @keywords internal
 EmAlgo <- function(log_lik, Q, x0, steps) {
   theta <- as.numeric(x0)
   steps <- as.integer(steps)
@@ -506,6 +510,7 @@ EmAlgo <- function(log_lik, Q, x0, steps) {
 #' @export
 #' @examples
 #' SimplexLP(c = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+#' @keywords internal
 SimplexLP <- function(c, A, b, max_iter = 1000L, tol = 1e-12) {
   c <- as.numeric(c)
   A <- matrix(as.numeric(as.matrix(A)), nrow = length(b))

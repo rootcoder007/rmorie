@@ -55,6 +55,7 @@
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
                          tau = NULL, sigma = NULL,
                          theta = 1.0, norm_K = NULL,
@@ -157,6 +158,7 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tv_denoise_1d(V)
+#' @keywords internal
 morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
                                 tol = 1e-12, theta = 1.0) {
   b <- as.numeric(signal)

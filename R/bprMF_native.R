@@ -403,6 +403,7 @@
 #' @export
 #' @examples
 #' bpr_sigmoid(x = 5L)
+#' @keywords internal
 bpr_sigmoid <- function(x) .bprMF_sigmoid(x)
 
 #' Predict x_hat_ui = <w_u, h_i>
@@ -422,6 +423,7 @@ bpr_sigmoid <- function(x) .bprMF_sigmoid(x)
 #' W <- lapply(1:4, function(i) rnorm(3, 0, 0.3))
 #' H <- lapply(1:5, function(i) rnorm(3, 0, 0.3))
 #' bpr_predict(W, H, u = 0L, i = 2L)
+#' @keywords internal
 bpr_predict <- function(W, H, u, i) .bprMF_predict(W, H, u, i)
 
 #' BPR-Opt and its loglik / penalty pieces
@@ -440,6 +442,7 @@ bpr_predict <- function(W, H, u, i) .bprMF_predict(W, H, u, i)
 #' @examples
 #' bpr_opt_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, pos = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 bpr_opt_R <- function(W, H, pos, n_items, lam = 0.01)
   .bprMF_bpr_opt(W, H, pos, n_items, lam)
 
@@ -459,6 +462,7 @@ bpr_opt_R <- function(W, H, pos, n_items, lam = 0.01)
 #'             "3" = c(2L, 4L))
 #' r <- bpr_auc_R(W, H, pos, n_items = 5)
 #' str(r, max.level = 1)
+#' @keywords internal
 bpr_auc_R <- function(W, H, pos, n_items)
   .bprMF_auc(W, H, pos, n_items)
 
@@ -493,6 +497,7 @@ bpr_auc_R <- function(W, H, pos, n_items)
 #' r <- bpr_learn_bpr_R(pos, n_users = 4, n_items = 5, k_dim = 3,
 #'                      iters = 200L)
 #' str(r, max.level = 1)
+#' @keywords internal
 bpr_learn_bpr_R <- function(pos, n_users, n_items, k_dim = 8L,
                             alpha = 0.05, lam = 0.01, iters = 2000L,
                             seed = 0L, regularizer_sign = "correct",
@@ -513,6 +518,7 @@ bpr_learn_bpr_R <- function(pos, n_users, n_items, k_dim = 8L,
 #' @export
 #' @examples
 #' bpr_recommend_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, u = 5L, n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 bpr_recommend_R <- function(W, H, u, n_items, top_k = 5L,
                             exclude = integer(0))
   .bprMF_recommend(W, H, u, n_items, top_k, exclude)

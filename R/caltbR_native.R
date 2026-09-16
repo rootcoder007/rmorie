@@ -110,6 +110,7 @@
 #' @export
 #' @examples
 #' genre_distribution(items = list(a = 1, b = 2), p_g_given_i = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+#' @keywords internal
 genre_distribution <- function(items, p_g_given_i, weights = NULL) {
   it <- as.integer(items)
   if (length(it) == 0L)
@@ -159,6 +160,7 @@ genre_distribution <- function(items, p_g_given_i, weights = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' calibration_kl(V, V)
+#' @keywords internal
 calibration_kl <- function(p, q, alpha = 0.01) {
   pp <- .caltbR_norm(p)
   qq <- .caltbR_norm(q)
@@ -191,6 +193,7 @@ calibration_kl <- function(p, q, alpha = 0.01) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' calibration_hellinger(V, V)
+#' @keywords internal
 calibration_hellinger <- function(p, q) {
   pp <- .caltbR_norm(p)
   qq <- .caltbR_norm(q)
@@ -217,6 +220,7 @@ calibration_hellinger <- function(p, q) {
 #' @export
 #' @examples
 #' diversity_prior(p_u = c(1, 2, 3, 4, 5, 6, 7, 8), p0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+#' @keywords internal
 diversity_prior <- function(p_u, p0, beta) {
   a <- as.numeric(p_u)
   b <- as.numeric(p0)
@@ -258,6 +262,7 @@ diversity_prior <- function(p_u, p0, beta) {
 #'   \code{N}, \code{guarantee}, \code{method}.
 #' @references Steck (2018), RecSys '18, eq. (6).
 #' @export
+#' @keywords internal
 calibrated_rerank <- function(scores, p_g_given_i, p_target, N = 10,
                               lam = 0.5, metric = "kl",
                               alpha = 0.01, rank_weights = NULL) {

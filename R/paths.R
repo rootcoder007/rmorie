@@ -21,6 +21,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' is_absolute_path(V)
+#' @keywords internal
 is_absolute_path <- function(path) {
   grepl("^(/|[A-Za-z]:[/\\\\])", path)
 }

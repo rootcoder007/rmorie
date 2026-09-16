@@ -77,6 +77,7 @@
 #' @export
 #' @examples
 #' morie_phacf3_bin(d = 5L, edges = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_phacf3_bin <- function(d, edges) {
   d <- as.numeric(d)
   if (d < edges[1] || d >= edges[length(edges)]) return(-1L)
@@ -129,6 +130,7 @@ morie_phacf3_bin <- function(d, edges) {
 #' @param d23 Bin of the edge between vertices two and three.
 #' @return A length-six integer vector, the canonical key.
 #' @export
+#' @keywords internal
 morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
   # (i, j, k) vertex order, one-based here; edges are (ij, ik, jk).
   perms <- list(c(1, 2, 3), c(1, 3, 2), c(2, 1, 3), c(2, 3, 1),
@@ -189,6 +191,7 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 #' FS <- c("donor", "acceptor", "hydrophobic", "aromatic")
 #' EDGES <- c(2, 4.5, 7, 10, 14)
 #' morie_phacf3_space(FS, length(EDGES) - 1L, EDGES)
+#' @keywords internal
 morie_phacf3_space <- function(features = .PHACF3_FEATURES,
                                n_bins = NULL,
                                edges = .PHACF3_DEFAULT_EDGES) {
@@ -246,6 +249,7 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_phacf3_tanimoto(V, V)
+#' @keywords internal
 morie_phacf3_tanimoto <- function(a, b) {
   if (length(a) != length(b))
     stop("fingerprints must be the same length")
@@ -287,6 +291,7 @@ morie_phacf3_tanimoto <- function(a, b) {
 #'     list(0, 4, 0, "hydrophobic"), list(2, 2, 5, "aromatic"),
 #'     list(-3, 1, 2, "donor"), list(6, -2, 1, "acceptor"))
 #' morie_phacf3(MOL, FS, EDGES, "binary", SPACE)
+#' @keywords internal
 morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
                          edges = .PHACF3_DEFAULT_EDGES, mode = "binary",
                          space = NULL) {
@@ -359,6 +364,7 @@ morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
 #' @export
 #' @examples
 #' morie_phacf3_cheatsheet()
+#' @keywords internal
 morie_phacf3_cheatsheet <- function()
   paste0("phacf3: three-point 3D pharmacophore fingerprint. modes ",
          paste(.PHACF3_MODES, collapse = ", "), "; features ",

@@ -136,6 +136,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_blinkg_scan(V, V)
+#' @keywords internal
 morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
   n <- length(y)
   m <- length(geno)
@@ -220,6 +221,7 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_blinkg_ld_filter(V, V)
+#' @keywords internal
 morie_blinkg_ld_filter <- function(geno, order,
                                    threshold = .BLINKG_LD_THRESHOLD) {
   kept <- integer(0)
@@ -258,6 +260,7 @@ morie_blinkg_ld_filter <- function(geno, order,
 #' live_j <- which(!is.nan(s0$p))
 #' ord <- live_j[order(s0$p[live_j], live_j)]
 #' morie_blinkg_bin_filter(ord, POS, 3e+05)
+#' @keywords internal
 morie_blinkg_bin_filter <- function(order, positions, bin_size) {
   if (bin_size <= 0) stop("the bin size must be positive")
   seen <- numeric(0)
@@ -305,6 +308,7 @@ morie_blinkg_bin_filter <- function(order, positions, bin_size) {
 #' @examples
 #' morie_blinkg_select(y = c(1, 2, 3, 4, 5, 6, 7, 8), geno = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   candidates = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_blinkg_select <- function(y, geno, candidates, covars = NULL,
                                 criterion = "bic") {
   if (!(criterion %in% .BLINKG_CRITERIA))
@@ -368,6 +372,7 @@ morie_blinkg_select <- function(y, geno, candidates, covars = NULL,
 #' Y <- vapply(0:(N - 1L), function(i) 2 * G[[6]][i + 1L] + 0.7 *
 #'     G[[13]][i + 1L] + (((i * 17)%%11) - 5)/10, numeric(1))
 #' morie_blinkg(Y, G)
+#' @keywords internal
 morie_blinkg <- function(y, geno, positions = NULL, covars = NULL,
                          selection = "ld", criterion = "bic",
                          ld_threshold = .BLINKG_LD_THRESHOLD,
@@ -459,6 +464,7 @@ morie_blinkg <- function(y, geno, positions = NULL, covars = NULL,
 #' @export
 #' @examples
 #' morie_blinkg_cheatsheet()
+#' @keywords internal
 morie_blinkg_cheatsheet <- function()
   paste0("blinkg: BLINK iterative fixed-effect GWAS. selections ",
          paste(.BLINKG_SELECTIONS, collapse = ", "), "; criteria ",

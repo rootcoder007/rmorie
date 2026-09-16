@@ -841,6 +841,7 @@ morie_iv_split_sample <- function(data, outcome, endogenous, instruments,
 #' df <- data.frame(y, d, z)
 #' morie_iv_control_function(df, "y", "d", "z")
 #' @export
+#' @keywords internal
 morie_iv_control_function <- function(data, outcome, endogenous,
                                       instruments, exogenous = NULL,
                                       robust = TRUE, alpha = 0.05,

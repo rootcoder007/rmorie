@@ -39,6 +39,7 @@
 #' @export
 #' @examples
 #' urn_weights(counts = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+#' @keywords internal
 urn_weights <- function(counts, alpha) {
   if (length(counts) == 0L) c <- numeric(0) else c <- as.numeric(counts)
   a <- as.numeric(alpha)
@@ -75,6 +76,7 @@ urn_weights <- function(counts, alpha) {
 #' @export
 #' @examples
 #' morie_posspr(n = 5L, alpha = 0.5)
+#' @keywords internal
 morie_posspr <- function(n, alpha, seed = 0) {
   a <- as.numeric(alpha)
   N <- as.integer(n)
@@ -145,6 +147,7 @@ sample_urn <- morie_posspr
 #' @references Muller, P. & Quintana, F. A. (2004). Statistical
 #'   Science, 19(1), 95-110.
 #' @export
+#' @keywords internal
 predictive_density <- function(grid, cluster_params, counts, alpha,
                                kernel, base_predictive) {
   w <- urn_weights(counts, alpha)
@@ -193,6 +196,7 @@ predictive_density <- function(grid, cluster_params, counts, alpha,
 #' @export
 #' @examples
 #' expected_clusters(n = 5L, alpha = 0.5)
+#' @keywords internal
 expected_clusters <- function(n, alpha) {
   a <- as.numeric(alpha)
   N <- as.integer(n)
@@ -222,6 +226,7 @@ expected_clusters <- function(n, alpha) {
 #' @export
 #' @examples
 #' tie_probability(alpha = 0.5)
+#' @keywords internal
 tie_probability <- function(alpha) {
   a <- as.numeric(alpha)
   if (a <= 0)

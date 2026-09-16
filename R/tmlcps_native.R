@@ -119,6 +119,7 @@
 #' @examples
 #' pseudo_outcome(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 pseudo_outcome <- function(y, A, X, ridge = 1e-8) {
   yv <- as.numeric(y)
   av <- as.numeric(A)
@@ -199,6 +200,7 @@ pseudo_outcome <- function(y, A, X, ridge = 1e-8) {
 #' @examples
 #' effect_curve(xi = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 effect_curve <- function(xi, A, grid, fit = "kernel",
                          bandwidth = NULL, n_folds = 5) {
   if (!fit %in% .FITS)
@@ -239,6 +241,7 @@ effect_curve <- function(xi, A, grid, fit = "kernel",
 #' @examples
 #' morie_tmlcps(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tmlcps <- function(y, A, X, a_grid = NULL, fit = "kernel",
                          bandwidth = NULL, n_folds = 5) {
   av <- as.numeric(A)

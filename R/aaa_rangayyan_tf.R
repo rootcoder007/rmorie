@@ -927,6 +927,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CDemod(V)
+#' @keywords internal
 CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -1005,6 +1006,7 @@ CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' BiorDwt(V)
+#' @keywords internal
 BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   w <- gsub("[-_]", "", tolower(trimws(as.character(wavelet))))
@@ -1091,6 +1093,7 @@ BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ExpKerTfd(V)
+#' @keywords internal
 ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
   v <- .tf_need(x, "x", 8L)
   fs <- as.numeric(fs)
@@ -1173,6 +1176,7 @@ ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
 #' tvec <- seq(0, 2, by = 1 / fs)
 #' ecg <- sin(2 * pi * 8 * tvec) + 0.2 * rnorm(length(tvec))
 #' CprWt(ecg, fs = fs)
+#' @keywords internal
 CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
   v <- .tf_need(ecg, "ecg", 16L)
   fs <- as.numeric(fs)
@@ -1258,6 +1262,7 @@ CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Cwt(V)
+#' @keywords internal
 Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -1321,6 +1326,7 @@ Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Gtfd(V)
+#' @keywords internal
 Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
                  tsmooth = NULL, fsmooth = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -1376,6 +1382,7 @@ Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
 #' @export
 #' @examples
 #' OrthFilt()
+#' @keywords internal
 OrthFilt <- function(order = 4) {
   k <- as.integer(order)
   if (is.null(.TF_DBTAPS[[as.character(k)]])) {
@@ -1427,6 +1434,7 @@ OrthFilt <- function(order = 4) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' AtomTfd(V)
+#' @keywords internal
 AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
                     nfreq = NULL, min_decay = 1e-3) {
   v <- .tf_need(x, "x", 8L)
@@ -1541,6 +1549,7 @@ AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
 #' set.seed(1)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
 #' str(Dwt(x, wavelet = "db4", levels = 3), max.level = 1)
+#' @keywords internal
 Dwt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -1580,6 +1589,7 @@ Dwt <- function(x, wavelet = "db4", levels = 3) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' EmdEns(V)
+#' @keywords internal
 EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0) {
   v <- .tf_need(x, "x", 8L)
   ne <- as.integer(n_ensembles)
@@ -1657,6 +1667,7 @@ EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Sift(V)
+#' @keywords internal
 Sift <- function(x, max_imfs = 10, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   mi <- as.integer(max_imfs)
@@ -1701,6 +1712,7 @@ Sift <- function(x, max_imfs = 10, tol = 0.05) {
 #' @export
 #' @examples
 #' Imf(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+#' @keywords internal
 Imf <- function(x, max_iter = 50, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   mi <- as.integer(max_iter)
@@ -1780,6 +1792,7 @@ Imf <- function(x, max_iter = 50, tol = 0.05) {
 #' ecg <- ecg + rnorm(length(tv), 0, 0.02)
 #' r <- TwaEmd(ecg, fs = fs)
 #' str(r, max.level = 1)
+#' @keywords internal
 TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
                    max_imfs = 6) {
   v <- .tf_need(ecg, "ecg", 32L)
@@ -1889,6 +1902,7 @@ TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
 #'   0.1 * rnorm(length(tv))
 #' str(VfEmd(vf, fs = fs), max.level = 1)
 #' }
+#' @keywords internal
 VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
   v <- .tf_need(ecg, "ecg", 16L)
   fs <- as.numeric(fs)
@@ -1960,6 +1974,7 @@ VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
 #' set.seed(2)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
 #' WtEntropy(x, wavelet = "db4", levels = 3)
+#' @keywords internal
 WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
   b <- tolower(trimws(as.character(base)))
   if (!(b %in% c("e", "2"))) stop("base must be 'e' or '2'")
@@ -2002,6 +2017,7 @@ WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dwt2Tap(V)
+#' @keywords internal
 Dwt2Tap <- function(x, levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -2042,6 +2058,7 @@ Dwt2Tap <- function(x, levels = 3) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' EmdSpec(V)
+#' @keywords internal
 EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
   fs <- as.numeric(fs)
@@ -2120,6 +2137,7 @@ EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' HrvTv(V)
+#' @keywords internal
 HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
                   noverlap = NULL, standard = "taskforce") {
   rr <- .tf_need(rr_intervals, "rr_intervals", 4L)
@@ -2226,6 +2244,7 @@ HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' IStft(M)
+#' @keywords internal
 IStft <- function(stft, window = "hann", hop = NULL) {
   frames <- if (is.matrix(stft)) {
     lapply(seq_len(nrow(stft)), function(i) stft[i, ])
@@ -2303,6 +2322,7 @@ IStft <- function(stft, window = "hann", hop = NULL) {
 #' set.seed(3)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
 #' str(Mra(x, wavelet = "db4", levels = 3), max.level = 1)
+#' @keywords internal
 Mra <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -2371,6 +2391,7 @@ Mra <- function(x, wavelet = "db4", levels = 3) {
 #' r <- PcgEnvAvg(pcg, ecg, fs = fs)
 #' str(r, max.level = 1)
 #' }
+#' @keywords internal
 PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
                       envelope_smoothing = NULL) {
   p <- .tf_need(pcg, "pcg", 16L)
@@ -2478,6 +2499,7 @@ PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
 #' tv <- seq(0, 5, by = 1 / fs)
 #' ppg <- sin(2 * pi * 1.2 * tv) + 0.2 * rnorm(length(tv))
 #' str(PpgWtDen(ppg, fs = fs), max.level = 1)
+#' @keywords internal
 PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
                      threshold_type = "soft") {
   v <- .tf_need(ppg, "ppg", 8L)
@@ -2524,6 +2546,7 @@ PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Scalogram(V)
+#' @keywords internal
 Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
   r <- Cwt(x, fs = fs, wavelet = wavelet, scales = scales, w0 = w0)
   sg <- do.call(rbind, lapply(r$coeffs, function(row) Mod(row)^2))
@@ -2572,6 +2595,7 @@ Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
 #' fs <- 100
 #' eeg <- c(rnorm(fs * 4, 0, 1), rnorm(fs * 2, 0, 4), rnorm(fs * 2, 0, 1))
 #' str(SeizWt(eeg, fs = fs), max.level = 1)
+#' @keywords internal
 SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
                    scales = c(3, 4, 5), threshold = NULL) {
   v <- .tf_need(eeg, "eeg", 8L)
@@ -2630,6 +2654,7 @@ SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
 #' @export
 #' @examples
 #' StftParam(fs = 250, desired_t_res = 0.2, desired_f_res = 2)
+#' @keywords internal
 StftParam <- function(fs, desired_t_res, desired_f_res) {
   fs <- as.numeric(fs)
   dt <- as.numeric(desired_t_res)
@@ -2674,6 +2699,7 @@ StftParam <- function(fs, desired_t_res, desired_f_res) {
 #' fs <- 200
 #' x <- sin(2 * pi * 20 * seq(0, 2, by = 1 / fs)) + 0.1 * rnorm(401)
 #' str(Spectrogram(x, fs = fs, nperseg = 64), max.level = 1)
+#' @keywords internal
 Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
                         window = "hann") {
   v <- .tf_need(x, "x", 2L)
@@ -2735,6 +2761,7 @@ Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Swt(V)
+#' @keywords internal
 Swt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -2785,6 +2812,7 @@ Swt <- function(x, wavelet = "db4", levels = 3) {
 #' set.seed(5)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.3)
 #' str(SwtDen(x, wavelet = "db4", levels = 3), max.level = 1)
+#' @keywords internal
 SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
                    threshold_type = "soft") {
   v <- .tf_need(x, "x", 4L)
@@ -2866,6 +2894,7 @@ SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' VModes(V)
+#' @keywords internal
 VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
                    tol = 1e-7, max_iter = 300) {
   v <- .tf_need(x, "x", 8L)
@@ -2967,6 +2996,7 @@ VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CwtRidge(V)
+#' @keywords internal
 CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
                      min_prominence = 0.1) {
   p <- as.numeric(min_prominence)
@@ -3028,6 +3058,7 @@ CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' WtXcor(V, V)
+#' @keywords internal
 WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
   a <- .tf_need(x, "x", 4L)
   b <- .tf_need(y, "y", 4L)
@@ -3122,6 +3153,7 @@ WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' WvDist(V)
+#' @keywords internal
 WvDist <- function(x, fs = 1, nfreq = NULL) {
   v <- .tf_need(x, "x", 4L)
   fs <- as.numeric(fs)
@@ -3163,6 +3195,7 @@ WvDist <- function(x, fs = 1, nfreq = NULL) {
 #' set.seed(6)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
 #' WtEnergy(x, wavelet = "db4", levels = 3)
+#' @keywords internal
 WtEnergy <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -3202,6 +3235,7 @@ WtEnergy <- function(x, wavelet = "db4", levels = 3) {
 #' set.seed(6)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
 #' WtMoment(x, wavelet = "db4", levels = 3)
+#' @keywords internal
 WtMoment <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
   lv <- as.integer(levels)
@@ -3255,6 +3289,7 @@ WtMoment <- function(x, wavelet = "db4", levels = 3) {
 #' set.seed(7)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.1)
 #' str(Wpt(x, wavelet = "db4", levels = 3), max.level = 1)
+#' @keywords internal
 Wpt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -3319,6 +3354,7 @@ Wpt <- function(x, wavelet = "db4", levels = 3) {
 #' set.seed(7)
 #' x <- sin(2 * pi * (1:128) / 16) + rnorm(128, 0, 0.3)
 #' str(WtThresh(x, wavelet = "db4", levels = 3), max.level = 1)
+#' @keywords internal
 WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
                      threshold = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -3377,6 +3413,7 @@ WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' WtVar(V)
+#' @keywords internal
 WtVar <- function(x, wavelet = "db1", levels = 3) {
   v <- .tf_need(x, "x", 4L)
   lv <- as.integer(levels)
@@ -3467,6 +3504,7 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 #' @export
 #' @examples
 #' EchoImp(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, n = 5L)
+#' @keywords internal
 EchoImp <- function(a, n_0, n) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3503,6 +3541,7 @@ EchoImp <- function(a, n_0, n) {
 #' @export
 #' @examples
 #' EchoSig(h = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L)
+#' @keywords internal
 EchoSig <- function(h, a, n_0, n = NULL) {
   hh <- as.numeric(h)
   if (!length(hh)) stop("h must contain at least one sample")
@@ -3543,6 +3582,7 @@ EchoSig <- function(h, a, n_0, n = NULL) {
 #' @export
 #' @examples
 #' EchoZ(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 EchoZ <- function(a, n_0, z, H = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3593,6 +3633,7 @@ EchoZ <- function(a, n_0, z, H = NULL) {
 #' @export
 #' @examples
 #' EchoSpec(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 EchoSpec <- function(a, n_0, omega, H = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3649,6 +3690,7 @@ EchoSpec <- function(a, n_0, omega, H = NULL) {
 #' @export
 #' @examples
 #' EchoLogSp(a = 0.5, n_0 = 8L, omega = seq(0, pi, length.out = 16))
+#' @keywords internal
 EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3729,6 +3771,7 @@ EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
 #' @return A list with \code{y_hat}, \code{n}, \code{impulses}, \code{n_impulses},
 #' \code{echo_delay}, \code{a}, \code{method}.
 #' @export
+#' @keywords internal
 EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
   hh <- as.numeric(h_hat)
   a <- as.numeric(a)
@@ -3789,6 +3832,7 @@ EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
 #' @export
 #' @examples
 #' EchoPsd(H = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 EchoPsd <- function(H, a, n_0, z) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)
@@ -3836,6 +3880,7 @@ EchoPsd <- function(H, a, n_0, z) {
 #' @export
 #' @examples
 #' EchoLogPsd(H = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 EchoLogPsd <- function(H, a, n_0, omega) {
   a <- as.numeric(a)
   n0 <- as.integer(n_0)

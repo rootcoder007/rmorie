@@ -56,6 +56,7 @@
 #' @export
 #' @examples
 #' morie_yolovx_decoupled_head(channels = 5L)
+#' @keywords internal
 morie_yolovx_decoupled_head <- function(channels, reduced = 256,
                                         n_classes = 80) {
   # 1x1 to reduce, then TWO parallel 3x3 branches.
@@ -93,6 +94,7 @@ morie_yolovx_decoupled_head <- function(channels, reduced = 256,
 #' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{ltrb}, \code{center}, \code{stride}.
 #' @export
+#' @keywords internal
 morie_yolovx_encode_box <- function(box, cx, cy, stride = 1.0) {
   # Four distances from a location to the box sides.
   b <- as.numeric(box)
@@ -133,6 +135,7 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride = 1.0) {
 #' @examples
 #' morie_yolovx_decode_box(ltrb = c(1, 2, 3, 4, 5, 6, 7, 8), cx = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   cy = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_yolovx_decode_box <- function(ltrb, cx, cy, stride = 1.0) {
   # Back to corners. Inverts encode_box exactly.
   v <- .s03vec(ltrb)
@@ -162,6 +165,7 @@ morie_yolovx_decode_box <- function(ltrb, cx, cy, stride = 1.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_yolovx_box_iou(V, V)
+#' @keywords internal
 morie_yolovx_box_iou <- function(a, b) {
   # Intersection over union of two corner boxes.
   a <- as.numeric(a)
@@ -191,6 +195,7 @@ morie_yolovx_box_iou <- function(a, b) {
 #' @examples
 #' morie_yolovx_center_sampling(box = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   grid_w = c(1, 2, 3, 4, 5, 6, 7, 8), grid_h = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride = 1.0,
                                          radius = 1.5) {
   # The center 3x3 area is positive, not only the center cell. Grid
@@ -262,6 +267,7 @@ morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride = 1.0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_yolovx_simota_assign(V, V)
+#' @keywords internal
 morie_yolovx_simota_assign <- function(costs, ious, top_q = 10, max_k = NULL) {
   # Dynamic top-k, an approximation to optimal transport. k_g is the
   # rounded sum of the q largest IoUs for that ground truth. Returns
@@ -333,6 +339,7 @@ morie_yolovx_simota_assign <- function(costs, ious, top_q = 10, max_k = NULL) {
 #' @export
 #' @examples
 #' morie_yolovx_cheatsheet()
+#' @keywords internal
 morie_yolovx_cheatsheet <- function() {
   paste0(
     "yolovx: fold three advances into YOLO. DECOUPLED HEAD -- ",

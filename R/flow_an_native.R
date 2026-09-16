@@ -255,6 +255,7 @@
 #' @param reference Passed to \code{.anomaly_score}.
 #' @return The value of \code{.anomaly_score}.
 #' @export
+#' @keywords internal
 morie_flow_an <- function(X, layers, threshold_quantile = 0.95, reference = NULL) {
   .anomaly_score(X = X, layers = layers, threshold_quantile = threshold_quantile, reference = reference)
 }

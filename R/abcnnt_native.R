@@ -124,6 +124,7 @@
 #' fw <- flow_forward(flow, x = c(0.4, -0.7), t = c(0.1, 0.2))
 #' fw$u        # the latent point x maps to
 #' fw$total    # the log-Jacobian of the map
+#' @keywords internal
 flow_forward <- function(flow, x, t) {
   u <- as.numeric(x)
   total <- 0
@@ -148,6 +149,7 @@ flow_forward <- function(flow, x, t) {
 #' g <- seq(-12, 12, length.out = 2001)
 #' d <- vapply(g, function(x) exp(flow_logprob(f1, x, 0.3)), numeric(1))
 #' round(sum((d[-1] + d[-length(d)]) / 2) * (g[2] - g[1]), 3)
+#' @keywords internal
 flow_logprob <- function(flow, x, t) {
   fw <- flow_forward(flow, x, t)
   d <- length(fw$u)
@@ -167,6 +169,7 @@ flow_logprob <- function(flow, x, t) {
 #' # the autoregressive ordering alternates between layers
 #' flow$layers[[1]]$order
 #' flow$layers[[2]]$order
+#' @keywords internal
 MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
   if (dim_x < 1L || dim_t < 1L) stop("abcnnt: dimensions must be positive")
   if (n_layers < 1L || hidden < 1L) {
@@ -288,6 +291,7 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' trained <- train_flow(flow, D, epochs = 10L, lr = 0.02, seed = 1L)
 #' round(c(before = ll(flow), after = ll(trained)), 3)
 #' }
+#' @keywords internal
 train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
                        batch = NULL) {
   if (length(D) == 0L) stop("abcnnt: no training pairs")
@@ -333,6 +337,7 @@ train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
 #' lp <- function(x) -0.5 * sum(x^2)
 #' mc <- mcmc_sample(lp, 0, 2000L, burn = 200L, step = 1.5, seed = 1L)
 #' round(c(mean = mean(mc$samples[, 1]), sd = sd(mc$samples[, 1])), 2)
+#' @keywords internal
 mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
                         seed = 0L) {
   if (n < 1L) stop("abcnnt: n must be positive")
@@ -381,6 +386,7 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
 #'               seed = 1L, mcmc_burn = 50L, mcmc_step = 0.8)
 #' names(res)
 #' }
+#' @keywords internal
 abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
                    n_per_round = 50L, n_layers = 5L, hidden = 20L,
                    epochs = 40L, lr = 0.01, mcmc_burn = 100L,

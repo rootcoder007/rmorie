@@ -29,6 +29,7 @@
 #' @examples
 #' centrality_encoding(adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n = 5L,
 #'   z_in = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 centrality_encoding <- function(adj, n, z_in, z_out = NULL,
                                  directed = FALSE) {
   N <- as.integer(n)
@@ -76,6 +77,7 @@ centrality_encoding <- function(adj, n, z_in, z_out = NULL,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' shortest_path_matrix(D, V)
+#' @keywords internal
 shortest_path_matrix <- function(adj, n) {
   N <- as.integer(n)
   D <- matrix(.GRPHMR_UNREACHABLE, nrow = N, ncol = N)
@@ -119,6 +121,7 @@ shortest_path_matrix <- function(adj, n) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' spatial_bias(M, V)
+#' @keywords internal
 spatial_bias <- function(distance, b_table, unreachable_bias = NULL) {
   D <- matrix(as.integer(distance), nrow = nrow(distance))
   ub <- if (is.null(unreachable_bias)) -10.0 else as.numeric(unreachable_bias)
@@ -146,6 +149,7 @@ spatial_bias <- function(distance, b_table, unreachable_bias = NULL) {
 #' @examples
 #' edge_encoding(paths = c(1, 2, 3, 4, 5, 6, 7, 8), edge_features = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   w_table = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 edge_encoding <- function(paths, edge_features, w_table) {
   out <- list()
   for (key in names(paths)) {
@@ -191,6 +195,7 @@ edge_encoding <- function(paths, edge_features, w_table) {
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' spatial_bias(M, V)
 #' graphormer_attention(H = M, WQ = M, WK = M, WV = M, bias = M)
+#' @keywords internal
 graphormer_attention <- function(H, WQ, WK, WV, bias, edge_bias = NULL) {
   X <- as.matrix(H)
   storage.mode(X) <- "double"

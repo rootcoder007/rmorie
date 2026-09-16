@@ -71,6 +71,7 @@
 #' @export
 #' @examples
 #' t5enc_task_prefix(task = 5L, text = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 t5enc_task_prefix <- function(task, text) {
   t <- trimws(as.character(task))
   if (nchar(t) == 0L) {
@@ -97,6 +98,7 @@ t5enc_task_prefix <- function(task, text) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' t5enc_span_corruption(V)
+#' @keywords internal
 t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
                                    seed = 0,
                                    sentinel = "<extra_id_%d>") {
@@ -189,6 +191,7 @@ t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
 #' @export
 #' @examples
 #' t5enc_relative_bucket(relative_position = 5L)
+#' @keywords internal
 t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
                                    num_buckets = 32L, max_distance = 128) {
   nb <- as.integer(num_buckets)
@@ -229,6 +232,7 @@ t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' t5enc_format_regression(V)
+#' @keywords internal
 t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) {
   v <- min(max(as.numeric(value), as.numeric(lo)), as.numeric(hi))
   inc <- as.numeric(increment)
@@ -251,6 +255,7 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
 #' @export
 #' @examples
 #' t5enc_parse_prediction(text = 5L)
+#' @keywords internal
 t5enc_parse_prediction <- function(text, labels = NULL) {
   s <- trimws(as.character(text))
   if (is.null(labels)) {
@@ -280,6 +285,7 @@ t5enc_parse_prediction <- function(text, labels = NULL) {
 #' @export
 #' @examples
 #' t5enc_cheatsheet()
+#' @keywords internal
 t5enc_cheatsheet <- function() {
   paste(
     "t5enc: EVERY task as text-to-text -- classification emits ",
@@ -314,6 +320,7 @@ t5 <- t5enc_span_corruption
 #' @param ... Passed through.
 #' @return The value of \code{switch}.
 #' @export
+#' @keywords internal
 morie_t5enc <- function(method = c("task_prefix", "span_corruption",
                                     "relative_bucket", "format_regression",
                                     "parse_prediction", "cheatsheet"), ...) {

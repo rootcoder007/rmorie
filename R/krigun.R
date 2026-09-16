@@ -13,10 +13,10 @@
 #
 # Cressie (1993) sec. 3.4.5; Schabenberger & Gotway (2005) ch. 5.
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_krigun(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   s_predict = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_krigun <- function(coords, values, s_predict, trend_order = 1,
                                     model = "exponential", nugget = 0,
                                     sill = 1, range_ = 1) {

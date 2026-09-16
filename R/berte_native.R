@@ -18,6 +18,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' gelu(V)
+#' @keywords internal
 gelu <- function(x) {
   # GELU exact using erf; avoid pnorm dependency for portability
   x <- as.numeric(x)
@@ -51,6 +52,7 @@ gelu <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' layer_norm(V)
+#' @keywords internal
 layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
   x <- as.numeric(x)
   d <- length(x)
@@ -111,6 +113,7 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #' K <- matrix(rnorm(12), 3, 4)
 #' w <- attention_weights(Q, K, n_heads = 2)
 #' str(w, max.level = 1)
+#' @keywords internal
 attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
   Q <- as.matrix(Q)
   storage.mode(Q) <- "double"
@@ -165,6 +168,7 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
 #' V <- matrix(rnorm(12), 3, 4)
 #' r <- multi_head_attention(Q, K, V, n_heads = 2)
 #' str(r, max.level = 1)
+#' @keywords internal
 multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
                                  causal = FALSE) {
   Q <- as.matrix(Q)
@@ -216,6 +220,7 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
 #'                    W2 = matrix(rnorm(32, 0, 0.4), 4, 8), b2 = rep(0, 4),
 #'                    n_heads = 2)
 #' str(r, max.level = 1)
+#' @keywords internal
 encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
                           pad_mask = NULL, gain1 = NULL, bias1 = NULL,
                           gain2 = NULL, bias2 = NULL, pre_norm = FALSE) {
@@ -272,6 +277,7 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #'             W2 = matrix(rnorm(32, 0, 0.4), 4, 8), b2 = rep(0, 4))
 #' r <- bert_encoder(X, list(blk), n_heads = 2)
 #' str(r, max.level = 1)
+#' @keywords internal
 bert_encoder <- function(X, blocks, n_heads, pad_mask = NULL,
                          pre_norm = FALSE) {
   cur <- as.matrix(X)

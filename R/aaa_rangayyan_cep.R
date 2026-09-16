@@ -100,6 +100,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Cepstrum(V)
+#' @keywords internal
 Cepstrum <- function(x) {
   # real cepstrum: c(n) = IDFT(log|DFT(x)|).  Keeps only the magnitude,
   # so it discards the phase and is NOT invertible -- the whole
@@ -134,6 +135,7 @@ Cepstrum <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CCepstrum(V)
+#' @keywords internal
 CCepstrum <- function(x) {
   # eqs (4.63)-(4.64): the inverse transform of log|X| + j angle(X).
   # The phase is unwrapped over k = 0..N/2 and mirrored by odd symmetry;
@@ -176,6 +178,7 @@ CCepstrum <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CCepX(V)
+#' @keywords internal
 CCepX <- function(x) {
   # eqs (4.63)-(4.64) with the unwrapping diagnostics the book calls "an
   # important consideration": a 2-pi jump at nearly every bin means the
@@ -205,6 +208,7 @@ CCepX <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MultModel(V, V)
+#' @keywords internal
 MultModel <- function(x, p) {
   # eq (4.58): y(t) = x(t) p(t), the model a multiplicative homomorphic
   # system addresses.
@@ -232,6 +236,7 @@ MultModel <- function(x, p) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LogSep(V, V)
+#' @keywords internal
 LogSep <- function(x, p) {
   # eq (4.59): log[y] = log[x] + log[p], for x != 0 and p != 0.  The
   # book states that side condition, so a zero is rejected rather than
@@ -267,6 +272,7 @@ LogSep <- function(x, p) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ConvModel(V, V)
+#' @keywords internal
 ConvModel <- function(x, h) {
   # eq (4.61): y(t) = x(t) * h(t), the model homomorphic DEconvolution
   # addresses.
@@ -296,6 +302,7 @@ ConvModel <- function(x, h) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CCepSum(V, V)
+#' @keywords internal
 CCepSum <- function(x, h) {
   # eq (4.66): y_hat = x_hat + h_hat.  The residual is not exactly zero
   # because the cepstrum is of infinite duration (eq 4.73) and the DFT
@@ -341,6 +348,7 @@ CCepSum <- function(x, h) {
 #' @param z Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
                  z = NULL) {
   # The rational form whose complex log the book expands at eq (4.68).
@@ -414,6 +422,7 @@ RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
 #' CCepClosed(gain = 5L, zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8), poles_in = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
                        nmax = 32) {
   # eq (4.72): x_hat(0) = log|A|; for n > 0, -sum a^n/n + sum c^n/n; for
@@ -466,6 +475,7 @@ CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
 #' @examples
 #' CCepDecay(zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8), zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   poles_in = c(1, 2, 3, 4, 5, 6, 7, 8), poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
                       constant = NULL) {
   # eq (4.73): |x_hat(n)| < K |alpha^n / n| with alpha the largest root
@@ -505,6 +515,7 @@ CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
 #' @export
 #' @examples
 #' EchoSeries(0.5, 8, terms = 4)
+#' @keywords internal
 EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
   # eqs (4.79)-(4.80): the complex cepstrum of a wavelet plus one echo
   # is the wavelet's cepstrum plus impulses at n0 and its multiples,
@@ -561,6 +572,7 @@ EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PCepstrum(V)
+#' @keywords internal
 PCepstrum <- function(x, square = TRUE) {
   # eq (4.81).  The book notes the final squaring is omitted in some
   # definitions, and that it matters: WITH the square, eq (4.82) holds
@@ -599,6 +611,7 @@ PCepstrum <- function(x, square = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PCepSum(V, V)
+#' @keywords internal
 PCepSum <- function(x, h, square = FALSE) {
   # eq (4.82): the power cepstra of a convolution add, exactly when the
   # squaring of eq (4.81) is omitted.  square defaults to FALSE here for
@@ -640,6 +653,7 @@ PCepSum <- function(x, h, square = FALSE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PCepRel(V)
+#' @keywords internal
 PCepRel <- function(x) {
   # eq (4.83): y_hat_p(n) = [y_hat(n) + y_hat(-n)]^2 -- the squared even
   # part of the complex cepstrum.  The odd part, where the phase lives,
@@ -681,6 +695,7 @@ PCepRel <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Lifter(V)
+#' @keywords internal
 Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
   # Section 4.7.3: the vocal tract lives at LOW quefrency, the glottal
   # excitation at the pitch period and its multiples.  The window is
@@ -728,6 +743,7 @@ Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
 #' @export
 #' @examples
 #' HomoFilt(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5)
+#' @keywords internal
 HomoFilt <- function(y, cutoff, keep = "low") {
   # Section 4.7.1, Figure 4.23: log -> linear filter -> exp.  The signal
   # must be strictly positive (eq 4.59's side condition); a signal that
@@ -772,6 +788,7 @@ HomoFilt <- function(y, cutoff, keep = "low") {
 #' @export
 #' @examples
 #' HomDeconv(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 0.5)
+#' @keywords internal
 HomDeconv <- function(y, cutoff, keep = "low") {
   # Section 4.7.2: DFT -> complex log -> IDFT -> lifter -> DFT -> exp ->
   # IDFT.  Low quefrency estimates the slowly varying component (the
@@ -814,6 +831,7 @@ HomDeconv <- function(y, cutoff, keep = "low") {
 #' @export
 #' @examples
 #' HomPred(y = c(1, 2, 3, 4, 5, 6, 7, 8), cutoff = 1)
+#' @keywords internal
 HomPred <- function(y, cutoff) {
   # Section 4.7.3.  The two lifters must PARTITION the quefrency axis
   # (|q| <= k and |q| > k); sharing the cutoff keeps q = 0 and q = k in
@@ -870,6 +888,7 @@ HomPred <- function(y, cutoff) {
 #' y <- sin(2 * pi * 120 * (0:1599) / 8000) + rnorm(1600) * 0.01
 #' VocalTract(y, fs = 8000)
 #' }
+#' @keywords internal
 VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
                        pitch_range = c(0.002, 0.020)) {
   # Section 4.7.3: the vocal tract contributes only below the pitch
@@ -928,6 +947,7 @@ VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MinPhase(V)
+#' @keywords internal
 MinPhase <- function(x) {
   # Section 4.7.2, after eq (4.73): a minimum-phase signal has a CAUSAL
   # complex cepstrum.  Folding the anticausal half onto the causal half
@@ -985,6 +1005,7 @@ MinPhase <- function(x) {
 #' @export
 #' @examples
 #' Mfcc(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 Mfcc <- function(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0,
                  fmax = NULL) {
   # Davis and Mermelstein (1980): power spectrum, triangular mel

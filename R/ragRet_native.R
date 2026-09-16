@@ -22,6 +22,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_ragRet_normalise(V)
+#' @keywords internal
 morie_ragRet_normalise <- function(v) {
   x <- as.numeric(v)
   n <- sqrt(sum(x^2))
@@ -44,6 +45,7 @@ morie_ragRet_normalise <- function(v) {
 #' @export
 #' @examples
 #' morie_ragRet_top_k(query = 5L, corpus = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
                                metric = "inner_product") {
   if (!(metric %in% .METRICS))
@@ -84,6 +86,7 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_ragRet_ivf_index(V)
+#' @keywords internal
 morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
                                    seed = 0L) {
   D <- lapply(corpus, as.numeric)
@@ -148,6 +151,7 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
 #' @return A list with \code{indices}, \code{scores}, \code{comparisons}, \code{probed},
 #' \code{n.cells}, \code{fraction.scanned}, \code{note}.
 #' @export
+#' @keywords internal
 morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
                                     nprobe = 1L, metric = "inner_product") {
   q <- as.numeric(query)
@@ -184,6 +188,7 @@ morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_ragRet_recall_at_k(V, V)
+#' @keywords internal
 morie_ragRet_recall_at_k <- function(approximate, exact) {
   A <- as.integer(approximate)
   E <- as.integer(exact)
@@ -207,6 +212,7 @@ morie_ragRet_recall_at_k <- function(approximate, exact) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_ragRet_marginalise(V, V)
+#' @keywords internal
 morie_ragRet_marginalise <- function(doc.scores, token.probs,
                                      mode = "sequence") {
   p <- as.numeric(doc.scores)

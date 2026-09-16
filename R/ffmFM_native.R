@@ -37,6 +37,7 @@
 #' @examples
 #' n_parameters(n_features = c(1, 2, 3, 4, 5, 6, 7, 8), n_fields = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   k_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 n_parameters <- function(n_features, n_fields, k_dim,
                          model = "ffm") {
   n <- as.integer(n_features)
@@ -64,6 +65,7 @@ n_parameters <- function(n_features, n_fields, k_dim,
 #' W <- lapply(1:4, function(j) lapply(1:2, function(f) rnorm(3, 0, 0.3)))
 #' x <- list(list(0L, 1.0), list(2L, 1.0))
 #' phi(x, fields = c(0L, 0L, 1L, 1L), W)
+#' @keywords internal
 phi <- function(x, fields, W) {
   nz <- list()
   for (pair in x) {
@@ -102,6 +104,7 @@ phi <- function(x, fields, W) {
 #' @export
 #' @examples
 #' logistic_loss(y = 1, phi_val = 0.7)
+#' @keywords internal
 logistic_loss <- function(y, phi_val) {
   yv <- as.numeric(y)
   if (!(yv == -1 || yv == 1))
@@ -140,6 +143,7 @@ logistic_loss <- function(y, phi_val) {
 #' r <- fit_ffm(rows, labels, fields = c(0L, 0L, 1L, 1L),
 #'              n_features = 4, n_fields = 2, k_dim = 2, epochs = 5)
 #' str(r, max.level = 1)
+#' @keywords internal
 fit_ffm <- function(rows, labels, fields, n_features, n_fields,
                     k_dim = 4, eta = 0.1, lam = 2e-5, epochs = 10,
                     seed = 0) {
@@ -268,6 +272,7 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
 #' r <- morie_ffmFM(rows, labels, fields = c(0L, 0L, 1L, 1L),
 #'                  n_features = 4, n_fields = 2, k_dim = 2, epochs = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
                         k_dim = 4, eta = 0.1, lam = 2e-5,
                         epochs = 10, seed = 0) {
@@ -301,6 +306,7 @@ morie_ffmFM <- function(rows, labels, fields, n_features, n_fields,
 #' r <- fieldawarefm(rows, labels, fields = c(0L, 0L, 1L, 1L),
 #'                   n_features = 4, n_fields = 2, k_dim = 2, epochs = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
                          k_dim = 4, eta = 0.1, lam = 2e-5,
                          epochs = 10, seed = 0) {
@@ -334,6 +340,7 @@ fieldawarefm <- function(rows, labels, fields, n_features, n_fields,
 #' r <- field_aware_fm(rows, labels, fields = c(0L, 0L, 1L, 1L),
 #'                     n_features = 4, n_fields = 2, k_dim = 2, epochs = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
                            k_dim = 4, eta = 0.1, lam = 2e-5,
                            epochs = 10, seed = 0) {

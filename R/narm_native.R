@@ -15,6 +15,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' narm_softmax(V)
+#' @keywords internal
 narm_softmax <- function(z) {
   v <- as.numeric(z)
   m <- max(v)
@@ -38,6 +39,7 @@ narm_softmax <- function(z) {
 #' @examples
 #' narm_attention_weights(h_t = 5L, H = 0.5, A1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   A2 = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 narm_attention_weights <- function(h_t, H, A1, A2, v) {
   ht <- as.numeric(h_t)
   Hm <- as.matrix(H)
@@ -67,6 +69,7 @@ narm_attention_weights <- function(h_t, H, A1, A2, v) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' narm_local_encoder(V, V)
+#' @keywords internal
 narm_local_encoder <- function(H, alpha) {
   Hm <- as.matrix(H)
   a <- as.numeric(alpha)
@@ -89,6 +92,7 @@ narm_local_encoder <- function(H, alpha) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' narm_session_repr(V, V)
+#' @keywords internal
 narm_session_repr <- function(h_t_global, c_local) {
   c(as.numeric(h_t_global), as.numeric(c_local))
 }
@@ -107,6 +111,7 @@ narm_session_repr <- function(h_t_global, c_local) {
 #' @export
 #' @examples
 #' narm_bilinear_scores(embeddings = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L, c_t = 5L)
+#' @keywords internal
 narm_bilinear_scores <- function(embeddings, B, c_t) {
   E <- as.matrix(embeddings)
   B <- as.matrix(B)
@@ -140,6 +145,7 @@ narm_bilinear_scores <- function(embeddings, B, c_t) {
 #' @examples
 #' narm_decoder_parameters(n_items = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   hidden = c(1, 2, 3, 4, 5, 6, 7, 8), emb_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
   N <- as.integer(n_items)
   H <- as.integer(hidden)
@@ -160,6 +166,7 @@ narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
 #' @export
 #' @examples
 #' narm_cheatsheet()
+#' @keywords internal
 narm_cheatsheet <- function() {
   paste(paste0(
     "narm: a purely sequential session model recommends trousers ",

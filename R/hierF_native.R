@@ -26,6 +26,7 @@
 #' @examples
 #' S <- summing_matrix(list(c(0L, 1L, 2L, 3L), c(0L, 1L), c(2L, 3L)), 4L)
 #' S
+#' @keywords internal
 summing_matrix <- function(groups, n_bottom) {
   if (n_bottom < 1L) stop("hierF: need at least one bottom series")
   S <- matrix(0.0, length(groups), n_bottom)
@@ -56,6 +57,7 @@ summing_matrix <- function(groups, n_bottom) {
 #' S <- summing_matrix(list(c(0L, 1L)), 2L)
 #' b <- c(1, 2)
 #' is_coherent(c(sum(b), b), S)
+#' @keywords internal
 is_coherent <- function(y, S, tol = 1e-9) {
   m <- nrow(S)
   n <- ncol(S)
@@ -76,6 +78,7 @@ is_coherent <- function(y, S, tol = 1e-9) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' shrink_covariance(M)
+#' @keywords internal
 shrink_covariance <- function(residuals, lam = NULL) {
   T <- nrow(residuals)
   if (T < 2L) {
@@ -155,6 +158,7 @@ shrink_covariance <- function(residuals, lam = NULL) {
 #' S <- summing_matrix(list(c(0L, 1L)), 2L)
 #' res <- matrix(rnorm(30), 10, 3)
 #' str(mint_P(S, method = "shrink", residuals = res), max.level = 1)
+#' @keywords internal
 mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
                    ridge = 1e-10) {
   if (!(method %in% c("ols", "wls", "shrink", "custom"))) {
@@ -224,6 +228,7 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 #' r <- mint_reconcile(base, S, residuals = res)
 #' stopifnot(r$coherent)
 #' r$reconciled
+#' @keywords internal
 mint_reconcile <- function(base, S, method = "shrink", residuals = NULL,
                            W = NULL, ridge = 1e-10) {
   Sm <- as.matrix(S)
@@ -274,6 +279,7 @@ hierarchical_forecast <- mint_reconcile
 #' res <- matrix(rnorm(30), 10, 3)
 #' r <- morie_hierF(c(10.5, 4.9, 5.4), S, residuals = res)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
                         W = NULL, ridge = 1e-10) {
   mint_reconcile(base, S, method, residuals, W, ridge)

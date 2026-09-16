@@ -497,6 +497,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_stahdo(D)
+#' @keywords internal
 morie_stahdo <- function(X, directions = "subsample",
                         n_directions = 500, seed = 1,
                         cutoff = NULL) {

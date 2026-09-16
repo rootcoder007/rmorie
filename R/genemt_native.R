@@ -143,6 +143,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_genemt_ld_principal_components(V)
+#' @keywords internal
 morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
   M <- as.matrix(G)
   storage.mode(M) <- "numeric"
@@ -205,6 +206,7 @@ morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_genemt_gene_statistic(V, V)
+#' @keywords internal
 morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
   yv <- as.numeric(y)
   pc <- morie_genemt_ld_principal_components(G, keep)
@@ -252,6 +254,7 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_genemt_gene_covariates(V, V)
+#' @keywords internal
 morie_genemt_gene_covariates <- function(n_markers, gene_length,
                                          ld_scores = NULL) {
   nm <- as.numeric(n_markers)
@@ -292,6 +295,7 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_genemt_gene_set_regression(V, V)
+#' @keywords internal
 morie_genemt_gene_set_regression <- function(z_scores, membership,
                                              covariates = NULL) {
   z <- as.numeric(z_scores)
@@ -346,6 +350,7 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
 #' @examples
 #' morie_genemt_conditional_set_test(z_scores = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   set_a = c(1, 2, 3, 4, 5, 6, 7, 8), set_b = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
                                              covariates = NULL) {
   z <- as.numeric(z_scores)
@@ -388,6 +393,7 @@ morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
 #' @export
 #' @examples
 #' morie_genemt_cheatsheet()
+#' @keywords internal
 morie_genemt_cheatsheet <- function() {
   paste("genemt: single markers are underpowered, so aggregate -- ",
         "but existing tools lost power to LINKAGE DISEQUILIBRIUM ",

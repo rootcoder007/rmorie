@@ -92,6 +92,7 @@
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_lcfsdq_nn(M)
+#' @keywords internal
 morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
   n <- nrow(coords)
   k <- as.integer(k)
@@ -146,6 +147,7 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 #' @examples
 #' morie_lcfsdq_clark_evans(dists = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, area = 5L,
 #'   perimeter = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_lcfsdq_clark_evans <- function(dists, n, area, perimeter,
                                      edge = "none") {
   if (!(edge %in% .LCFSDQ_EDGE))
@@ -195,6 +197,7 @@ morie_lcfsdq_clark_evans <- function(dists, n, area, perimeter,
 #' LAT <- cbind(ii%%6L, ii%/%6L)
 #' XATT <- sin(0.7 * ii) + 0.4 * (ii%%4L)
 #' morie_lcfsdq(XATT, LAT)
+#' @keywords internal
 morie_lcfsdq <- function(x, coords, k = 1L, metric = "euclidean",
                          edge = "none", sd_multiplier = 1, area = NULL,
                          perimeter = NULL, grid = NULL) {
@@ -284,6 +287,7 @@ morie_lcfsdq <- function(x, coords, k = 1L, metric = "euclidean",
 #' @export
 #' @examples
 #' morie_lcfsdq_cheatsheet()
+#' @keywords internal
 morie_lcfsdq_cheatsheet <- function()
   paste0("lcfsdq: first-order nearest-neighbour cluster query. metrics ",
          paste(.LCFSDQ_METRICS, collapse = ", "), "; edge ",

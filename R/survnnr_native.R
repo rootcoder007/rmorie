@@ -121,6 +121,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 #' @export
 #' @examples
 #' morie_survnnr_forward(W = 5L, b = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
   a <- as.numeric(x)
   pre <- list()
@@ -152,6 +153,7 @@ morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
 #' @examples
 #' morie_survnnr_partial_loglik(times = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   events = c(1, 2, 3, 4, 5, 6, 7, 8), risk = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survnnr_partial_loglik <- function(times, events, risk) {
   n <- length(times)
   if (!(n == length(events) && n == length(risk))) {
@@ -228,6 +230,7 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 #' fit <- morie_survnnr_fit(X, tm, ev, hidden = c(4L), n_epochs = 20)
 #' fit$risk
 #' fit$epochs >= 2
+#' @keywords internal
 morie_survnnr_fit <- function(X, times, events, hidden = c(),
                               activation = "tanh", l2 = 0.0, lr = 0.1,
                               n_epochs = 400, seed = 0, tol = 1e-10) {
@@ -315,6 +318,7 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_survnnr_risk_score(D, V)
+#' @keywords internal
 morie_survnnr_risk_score <- function(fit_result, X) {
   sapply(X, function(x) morie_survnnr_forward(fit_result$W, fit_result$b, x,
                                               fit_result$activation)$output)
@@ -329,6 +333,7 @@ morie_survnnr_risk_score <- function(fit_result, X) {
 #' @param fit_result A list; the body reads \code{$events}, \code{$risk}, \code{$times} from it.
 #' @return A list with \code{time}, \code{cumulative_hazard}.
 #' @export
+#' @keywords internal
 morie_survnnr_baseline_hazard <- function(fit_result) {
   t <- fit_result$times
   e <- fit_result$events
@@ -362,6 +367,7 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
 #' \code{as.numeric}.
 #' @return A list with \code{time}, \code{survival}.
 #' @export
+#' @keywords internal
 morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
   base <- morie_survnnr_baseline_hazard(fit_result)
   r <- exp(morie_survnnr_risk_score(fit_result, list(x))[[1]])
@@ -431,6 +437,7 @@ morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
 #' morie_survnnr_concordance(fit_result = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   events = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_survnnr_concordance <- function(fit_result, X, times, events) {
   .survnnr_c_index(times, events, morie_survnnr_risk_score(fit_result, X))
 }
@@ -445,6 +452,7 @@ morie_survnnr_concordance <- function(fit_result, X, times, events) {
 #' @export
 #' @examples
 #' morie_survnnr_cheatsheet()
+#' @keywords internal
 morie_survnnr_cheatsheet <- function() {
   paste("survnnr: DeepSurv = Cox's partial likelihood with the linear",
         "predictor replaced by an MLP output. Loss is the AVERAGE negative",

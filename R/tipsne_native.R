@@ -525,6 +525,7 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_tipsne(V, M)
+#' @keywords internal
 morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
                          delta_treat = NULL, delta_control = NULL,
                          n_imputations = 20L, seed = 1, alpha = 0.05,
@@ -629,6 +630,7 @@ morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
 #' @export
 #' @examples
 #' morie_tipsne_cheatsheet()
+#' @keywords internal
 morie_tipsne_cheatsheet <- function()
   paste0("tipsne: delta-adjusted tipping-point sensitivity analysis for ",
          "MNAR missingness. mi routes ", paste(.TIPSNE_MI, collapse = ", "),

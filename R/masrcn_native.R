@@ -89,6 +89,7 @@
 #' features <- matrix(as.numeric(1:36), 6, 6)
 #' p <- roi_pool(features, box = c(0, 0, 4, 4), out_size = 2L)
 #' is.list(p)
+#' @keywords internal
 roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
   F <- .masrcn_mat(features)
   y0 <- as.numeric(box[1L]) / as.numeric(stride)
@@ -145,6 +146,7 @@ roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' roi_align(V, V)
+#' @keywords internal
 roi_align <- function(features, box, out_size = 2L, stride = 1.0,
                       samples = 2L) {
   F <- .masrcn_mat(features)
@@ -196,6 +198,7 @@ roi_align <- function(features, box, out_size = 2L, stride = 1.0,
 #' features <- matrix(as.numeric(1:36), 6, 6)
 #' a <- alignment_error(features, box = c(0.3, 0.3, 4.7, 4.7))
 #' is.list(a)
+#' @keywords internal
 alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
   p <- roi_pool(features, box, out_size, stride)
   shift <- p$quantisation_shift
@@ -220,6 +223,7 @@ alignment_error <- function(features, box, out_size = 2L, stride = 1.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' mask_loss(V, V)
+#' @keywords internal
 mask_loss <- function(logits, target, decoupled = TRUE) {
   L <- .masrcn_mat(logits)
   T <- .masrcn_mat(target)
@@ -268,6 +272,7 @@ mask_loss <- function(logits, target, decoupled = TRUE) {
 #' @examples
 #' multitask_loss(l_cls = c(1, 2, 3, 4, 5, 6, 7, 8), l_box = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   l_mask = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 multitask_loss <- function(l_cls, l_box, l_mask) {
   list(total = as.numeric(l_cls) + as.numeric(l_box) + as.numeric(l_mask),
        cls = as.numeric(l_cls), box = as.numeric(l_box),
@@ -317,6 +322,7 @@ mask_rcnn_segmentation <- roi_align
 #' r <- morie_masrcn("roi_pool", features, box = c(0, 0, 4, 4),
 #'                   out_size = 2L)
 #' is.list(r)
+#' @keywords internal
 morie_masrcn <- function(op, ...) {
   if (missing(op) || length(op) != 1L)
     stop("masrcn: op must be one of roi_pool, roi_align, alignment_error, mask_loss, multitask_loss, cheatsheet")

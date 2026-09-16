@@ -92,6 +92,7 @@
 #' @export
 #' @examples
 #' morie_funBand_influence_matrix(x = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+#' @keywords internal
 morie_funBand_influence_matrix <- function(x, lam) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -119,6 +120,7 @@ morie_funBand_influence_matrix <- function(x, lam) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_funBand_gcv_score(V, V)
+#' @keywords internal
 morie_funBand_gcv_score <- function(y, A) {
   n <- length(y)
   fit <- as.numeric(A %*% y)
@@ -145,6 +147,7 @@ morie_funBand_gcv_score <- function(y, A) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_funBand(V)
+#' @keywords internal
 morie_funBand <- function(Y, alpha = 0.05, x = NULL, lam = NULL,
                           quantile = "t", truth = NULL, n_lambda = 40L,
                           log_lambda_range = c(-8.0, 8.0)) {
@@ -263,6 +266,7 @@ morie_functional_band <- morie_funBand
 #' @export
 #' @examples
 #' morie_funBand_cheatsheet()
+#' @keywords internal
 morie_funBand_cheatsheet <- function() {
   paste0("funBand: smoothing-spline band. Theorem 1 of Wahba (1983): ",
          "cov(g_hat|Y) = sigma^2 A(lambda), so the interval at t_i is ",

@@ -53,6 +53,7 @@
 #' \code{n_clumps}, \code{n_variants}, \code{n_individuals}, \code{r2}, \code{window},
 #' \code{standardized}, \code{weights}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
                                       r2 = 0.1, window = 250000.0,
                                       genotypes = NULL,

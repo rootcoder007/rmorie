@@ -75,6 +75,7 @@
 #' @examples
 #' morie_rnacov_counts(alignment = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   j = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_rnacov_counts <- function(alignment, i, j) {
   joint <- matrix(0L, 4L, 4L)
   n <- 0L
@@ -106,6 +107,7 @@ morie_rnacov_counts <- function(alignment, i, j) {
 #' @examples
 #' morie_rnacov_mi(alignment = c(1, 2, 3, 4, 5, 6, 7, 8), i = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   j = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
   cc <- morie_rnacov_counts(alignment, i, j)
   n <- cc$n
@@ -147,6 +149,7 @@ morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
 #' @examples
 #' STRUCT <- "(((((...))))).."
 #' morie_rnacov_parse(STRUCT)
+#' @keywords internal
 morie_rnacov_parse <- function(s) {
   chars <- strsplit(s, "", fixed = TRUE)[[1]]
   stack <- integer(0)
@@ -202,6 +205,7 @@ morie_rnacov_parse <- function(s) {
 #' @examples
 #' S <- c("a", "b", "c")
 #' morie_rnacov_nussinov(S)
+#' @keywords internal
 morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
   ch <- strsplit(seq, "", fixed = TRUE)[[1]]
   n <- length(ch)
@@ -288,6 +292,7 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
 #'     paste(row, collapse = "")
 #' }, character(1))
 #' morie_rnacov(ALN, STRUCT)
+#' @keywords internal
 morie_rnacov <- function(alignment, structure = NULL,
                          correction = "none", mode = "given",
                          min_loop = 3L, min_sequences = 4L) {
@@ -351,6 +356,7 @@ morie_rnacov <- function(alignment, structure = NULL,
 #' @export
 #' @examples
 #' morie_rnacov_cheatsheet()
+#' @keywords internal
 morie_rnacov_cheatsheet <- function()
   paste0("rnacov: RNA covariance model scoring. modes ",
          paste(.RNACOV_STRUCTURES, collapse = ", "),

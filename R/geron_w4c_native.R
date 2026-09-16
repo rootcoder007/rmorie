@@ -319,6 +319,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_mixed_precision(V)
+#' @keywords internal
 morie_geron_mixed_precision <- function(model, loss_scale = 1024.0, grads = NULL) {
   FP16_MAX <- 65504.0
   FP16_MIN_NORMAL <- 6.103515625e-05
@@ -368,6 +369,7 @@ morie_geron_mixed_precision <- function(model, loss_scale = 1024.0, grads = NULL
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_ncsn(V)
+#' @keywords internal
 morie_geron_ncsn <- function(X, sigmas = 1.0, epochs = 400, lr = 0.5, n_noise = 32, seed = 0,
                              n_samples = 0, langevin_steps = 20, step_eps = 0.05) {
   A <- .morie_gr_mat(X, "X")
@@ -453,6 +455,7 @@ morie_geron_ncsn <- function(X, sigmas = 1.0, epochs = 400, lr = 0.5, n_noise = 
 #' @examples
 #' x <- matrix(c(1, 0, 0, 1, 1, 1), ncol = 2, byrow = TRUE)
 #' morie_geron_numerical_diff(function(x) x^3, 2)
+#' @keywords internal
 morie_geron_numerical_diff <- function(f, x, h = 1e-5) {
   .morie_gr_need(is.function(f), "geron_numerical_diff: f must be callable")
   step <- as.numeric(h)
@@ -501,6 +504,7 @@ morie_geron_numerical_diff <- function(f, x, h = 1e-5) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_geron_nmf(M)
+#' @keywords internal
 morie_geron_nmf <- function(X, n_components = 2, max_iter = 400, tol = 1e-6, seed = 42) {
   A <- .morie_gr_mat(X, "X")
   .morie_gr_need(all(A >= 0), "geron_nmf: X must be non-negative")
@@ -530,6 +534,7 @@ morie_geron_nmf <- function(X, n_components = 2, max_iter = 400, tol = 1e-6, see
 #' model <- list(encode = function(s) length(s), decode = function(z,
 #'     prefix) c(0.2, 0.5, 0.3))
 #' morie_geron_encoder_decoder_nmt(c(9, 9), c(1, 1), model)
+#' @keywords internal
 morie_geron_encoder_decoder_nmt <- function(src, tgt, model, max_len = NULL, eos = NULL) {
   .morie_gr_need(is.function(model$encode) && is.function(model$decode), "geron_encoder_decoder_nmt: model needs encode/decode")
   s <- src
@@ -574,6 +579,7 @@ morie_geron_encoder_decoder_nmt <- function(src, tgt, model, max_len = NULL, eos
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_novelty_detection(V, V)
+#' @keywords internal
 morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
   B <- .morie_gr_mat(X_new, "X_new")
   ref <- if (is.null(reference)) NULL else as.numeric(reference)
@@ -623,6 +629,7 @@ morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_next_sentence_prediction(V, V)
+#' @keywords internal
 morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL, w = NULL, b = 0.0, label = NULL) {
   A <- as.character(sent_A)
   Bs <- as.character(sent_B)
@@ -684,6 +691,7 @@ morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_one_class_svm(V)
+#' @keywords internal
 morie_geron_one_class_svm <- function(X, nu = 0.5, gamma = 1.0, max_iter = 2000, tol = 1e-9) {
   A <- .morie_gr_mat(X, "X")
   n <- nrow(A)
@@ -747,6 +755,7 @@ morie_geron_one_class_svm <- function(X, nu = 0.5, gamma = 1.0, max_iter = 2000,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_online_learning(V, V)
+#' @keywords internal
 morie_geron_online_learning <- function(X_stream, y_stream, eta = 0.1, theta = NULL, decay = 0.0) {
   A <- .morie_gr_mat(X_stream, "X_stream")
   yv <- as.numeric(y_stream)
@@ -783,6 +792,7 @@ morie_geron_online_learning <- function(X_stream, y_stream, eta = 0.1, theta = N
 #' m <- list(list(op = "Gemm", in_features = 3, out_features = 2),
 #'     list(op = "Relu"))
 #' morie_geron_onnx_export(m, matrix(0, 1, 3))
+#' @keywords internal
 morie_geron_onnx_export <- function(model, args, file = NULL) {
   shape_preserving <- c("relu", "tanh", "sigmoid", "softmax", "dropout", "identity", "erf", "gelu")
   layers <- model
@@ -838,6 +848,7 @@ morie_geron_onnx_export <- function(model, args, file = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' jsonlite_toJSON_or_stub(V)
+#' @keywords internal
 jsonlite_toJSON_or_stub <- function(x) {
   if (requireNamespace("jsonlite", quietly = TRUE)) {
     .s03json_toJSON(x, auto_unbox = TRUE, pretty = TRUE)
@@ -857,6 +868,7 @@ jsonlite_toJSON_or_stub <- function(x) {
 #' f <- function(A) as.numeric(A[, 1])
 #' morie_geron_oob_score(matrix(c(0, 1), ncol = 1), c(0, 1), list(list(f,
 #'     c(TRUE, FALSE)), list(f, c(FALSE, TRUE))))
+#' @keywords internal
 morie_geron_oob_score <- function(X, y, models, task = "auto") {
   A <- .morie_gr_mat(X, "X")
   yv <- as.numeric(y)
@@ -909,6 +921,7 @@ morie_geron_oob_score <- function(X, y, models, task = "auto") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_optics(V)
+#' @keywords internal
 morie_geron_optics <- function(X, min_samples = 5, max_eps = Inf, eps_cluster = NULL) {
   A <- .morie_gr_mat(X, "X")
   n <- nrow(A)
@@ -989,6 +1002,7 @@ morie_geron_optics <- function(X, min_samples = 5, max_eps = Inf, eps_cluster = 
 #' @examples
 #' copy <- function(prompt) prompt[[1]][[2]]
 #' morie_geron_one_shot(copy, list("hello", "greeting"), "goodbye")
+#' @keywords internal
 morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
   .morie_gr_need(is.function(model), "geron_one_shot: model must be callable")
   if (!is.null(names(example)) && all(c("input", "label") %in% names(example))) {
@@ -1041,6 +1055,7 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_one_vs_one_hm(V, V)
+#' @keywords internal
 morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL) {
   A <- .morie_gr_mat(X, "X")
   yv <- as.vector(y)
@@ -1118,6 +1133,7 @@ morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_one_vs_rest_hm(V, V)
+#' @keywords internal
 morie_geron_one_vs_rest_hm <- function(X, y, base_estimator = NULL, X_new = NULL) {
   A <- .morie_gr_mat(X, "X")
   yv <- as.vector(y)
@@ -1167,6 +1183,7 @@ morie_geron_one_vs_rest_hm <- function(X, y, base_estimator = NULL, X_new = NULL
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_pasting(V, V)
+#' @keywords internal
 morie_geron_pasting <- function(X, y, base_estimator = NULL, n_estimators = 10, sample_size = NULL,
                                 seed = 0, task = "auto") {
   A <- .morie_gr_mat(X, "X")
@@ -1229,6 +1246,7 @@ morie_geron_pasting <- function(X, y, base_estimator = NULL, n_estimators = 10, 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_principal_components(V)
+#' @keywords internal
 morie_geron_principal_components <- function(X, n_components = NULL, center = TRUE, scale = FALSE) {
   A <- .morie_gr_mat(X, "X")
   m <- nrow(A)
@@ -1263,6 +1281,7 @@ morie_geron_principal_components <- function(X, n_components = NULL, center = TR
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_pca_variance(V)
+#' @keywords internal
 morie_geron_pca_variance <- function(X, n_components = NULL, threshold = 0.95, n_probes = 64, seed = 0) {
   A <- .morie_gr_mat(X, "X")
   base <- morie_geron_principal_components(A, n_components = n_components)
@@ -1305,6 +1324,7 @@ morie_geron_pca_variance <- function(X, n_components = NULL, threshold = 0.95, n
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_geron_padding(M)
+#' @keywords internal
 morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NULL, stride = 1) {
   a <- x
   nd <- length(dim(a))
@@ -1361,6 +1381,7 @@ morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NUL
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_geron_pretrained_embeddings(V, D)
+#' @keywords internal
 morie_geron_pretrained_embeddings <- function(vocab, pretrained, freeze = TRUE, seed = 0, oov_scale = 0.05) {
   words <- as.character(vocab)
   dims <- unique(vapply(pretrained, function(v) length(as.numeric(v)), integer(1)))
@@ -1405,6 +1426,7 @@ morie_geron_pretrained_embeddings <- function(vocab, pretrained, freeze = TRUE, 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_prioritized_replay(V)
+#' @keywords internal
 morie_geron_prioritized_replay <- function(buffer, alpha = 0.6, beta = 0.4, eps = 1e-6, batch_size = NULL, seed = 0) {
   items <- buffer
   deltas <- vapply(items, function(it) {
@@ -1451,6 +1473,7 @@ morie_geron_prioritized_replay <- function(buffer, alpha = 0.6, beta = 0.4, eps 
 #' @examples
 #' g <- function(s, a) c(1, 0)
 #' morie_geron_policy_gradient(list(list(list(0, 0, 2))), g, gamma = 1)
+#' @keywords internal
 morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, baseline = FALSE) {
   g <- as.numeric(gamma)
   all_steps <- list()
@@ -1518,6 +1541,7 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
 #' W <- list(W_x = matrix(c(0, 0, 1, 0), ncol = 1), W_h = matrix(0,
 #'     4, 1), b = rep(0, 4))
 #' morie_geron_peephole_lstm(1, 0, 0, W)
+#' @keywords internal
 morie_geron_peephole_lstm <- function(x_t, h_prev, c_prev, weights) {
   x <- as.numeric(x_t)
   h <- as.numeric(h_prev)
@@ -1556,6 +1580,7 @@ morie_geron_peephole_lstm <- function(x_t, h_prev, c_prev, weights) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_polynomial_features_hm(V, V)
+#' @keywords internal
 morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, interaction_only = FALSE) {
   A <- .morie_gr_mat(X, "X")
   n <- ncol(A)
@@ -1631,6 +1656,7 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_mps_acceleration(V)
+#' @keywords internal
 morie_geron_mps_acceleration <- function(tensor, dtype = NULL) {
   a <- tensor
   is_int <- is.integer(a) || (is.numeric(a) && !is.null(attr(a, "int64")))
@@ -1673,6 +1699,7 @@ morie_geron_mps_acceleration <- function(tensor, dtype = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_policy(V, V)
+#' @keywords internal
 morie_geron_policy <- function(state, pi, seed = 0) {
   if (is.function(pi)) {
     raw <- pi(state)
@@ -1740,6 +1767,7 @@ morie_geron_policy <- function(state, pi, seed = 0) {
 #' step <- function(a) list(0, as.numeric(a), TRUE)
 #' morie_geron_ppo(list(reset = reset, step = step), matrix(c(0,
 #'     0), nrow = 1), epochs = 30, lr = 0.5, seed = 1)
+#' @keywords internal
 morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, gamma = 0.99,
                             n_episodes = 8, max_steps = 50, n_updates = 4, seed = 0) {
   eb <- .morie_w4c_bind_env(env)
@@ -1845,6 +1873,7 @@ morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, 
 #' @export
 #' @examples
 #' morie_geron_pipeline_parallelism(model = c(1, 2, 3, 4, 5, 6, 7, 8), n_stages = 5L)
+#' @keywords internal
 morie_geron_pipeline_parallelism <- function(model, n_stages, n_microbatches = 4) {
   sizes <- vapply(model, function(v) length(as.numeric(v)), numeric(1))
   base <- .morie_w4c_model_parallel(sizes, as.integer(n_stages))
@@ -1872,6 +1901,7 @@ morie_geron_pipeline_parallelism <- function(model, n_stages, n_microbatches = 4
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_precision_recall_curve_hm(V, V)
+#' @keywords internal
 morie_geron_precision_recall_curve_hm <- function(y_true, scores, pos_label = 1) {
   yt <- as.vector(y_true)
   s <- as.numeric(scores)
@@ -1904,6 +1934,7 @@ morie_geron_precision_recall_curve_hm <- function(y_true, scores, pos_label = 1)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_perceiver(V, V)
+#' @keywords internal
 morie_geron_perceiver <- function(x, latents, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) {
   X <- .morie_gr_mat(x, "x")
   L <- .morie_gr_mat(latents, "latents")
@@ -1937,6 +1968,7 @@ morie_geron_perceiver <- function(x, latents, n_iter = 2, W_q = NULL, W_k = NULL
 #' @examples
 #' morie_geron_perceiver_io_hm(x = c(1, 2, 3, 4, 5, 6, 7, 8), latents = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   queries = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_geron_perceiver_io_hm <- function(x, latents, queries, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) {
   enc <- morie_geron_perceiver(x, latents, n_iter = n_iter, W_q = W_q, W_k = W_k, W_v = W_v)
   Z <- enc$latents
@@ -1964,6 +1996,7 @@ morie_geron_perceiver_io_hm <- function(x, latents, queries, n_iter = 2, W_q = N
 #' r <- morie_geron_pvt(img, list(list(patch_size = 2, dim = 1, W = Wm)))
 #' r$output_shape
 #' r$tokens[1, 1, 1]
+#' @keywords internal
 morie_geron_pvt <- function(image, stage_cfgs, seed = 0) {
   img <- image
   if (length(dim(img)) == 2L) img <- array(img, dim = c(dim(img), 1L))
@@ -2039,6 +2072,7 @@ morie_geron_pvt <- function(image, stage_cfgs, seed = 0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_precision_hm(V, V)
+#' @keywords internal
 morie_geron_precision_hm <- function(y_true, y_pred, pos_label = 1) {
   yt <- as.vector(y_true)
   yp <- as.vector(y_pred)
@@ -2066,6 +2100,7 @@ morie_geron_precision_hm <- function(y_true, y_pred, pos_label = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_prelu(V)
+#' @keywords internal
 morie_geron_prelu <- function(z, alpha = 0.25, upstream = NULL) {
   a <- as.numeric(z)
   C <- length(a) # 1-D case; matches the doctest shapes exercised here
@@ -2093,6 +2128,7 @@ morie_geron_prelu <- function(z, alpha = 0.25, upstream = NULL) {
 #' @export
 #' @examples
 #' morie_geron_weight_pruning_hm(model = c(1, 2, 3, 4, 5, 6, 7, 8), sparsity = 5L)
+#' @keywords internal
 morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
   sp <- as.numeric(sparsity)
   Rr <- as.integer(n_rounds)
@@ -2142,6 +2178,7 @@ morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_static_quantization_ptq(V, V)
+#' @keywords internal
 morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 8, percentile = 100.0) {
   b <- as.integer(bits)
   pct <- as.numeric(percentile)
@@ -2200,6 +2237,7 @@ morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_pytorch_tensor(V)
+#' @keywords internal
 morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
   dev <- tolower(strsplit(as.character(device), ":")[[1]][1])
   .morie_gr_need(dev %in% c("cpu", "cuda", "mps"), "geron_pytorch_tensor: unknown device")
@@ -2248,6 +2286,7 @@ morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
 #' @examples
 #' morie_geron_quantization_aware_training_hm(model = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200, lr = 0.1, bits = 8) {
   w <- as.numeric(model)
   A <- .morie_gr_mat(X, "X")
@@ -2291,6 +2330,7 @@ morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200
 #' @examples
 #' morie_geron_reverse_autodiff(function(v) v[[1]] * v[[2]], c(3,
 #'     4))
+#' @keywords internal
 morie_geron_reverse_autodiff <- function(f, x) {
   base <- morie_geron_autograd(f, x)
   grad <- as.numeric(base$grad)
@@ -2431,6 +2471,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_regression_tree(V, V)
+#' @keywords internal
 morie_geron_regression_tree <- function(X, y, max_depth = 3, min_samples_leaf = 1) {
   A <- .morie_gr_mat(X, "X")
   yv <- as.numeric(y)
@@ -2471,6 +2512,7 @@ morie_geron_regression_tree <- function(X, y, max_depth = 3, min_samples_leaf = 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_recall_hm(V, V)
+#' @keywords internal
 morie_geron_recall_hm <- function(y_true, y_pred, pos_label = 1) {
   yt <- as.vector(y_true)
   yp <- as.vector(y_pred)
@@ -2498,6 +2540,7 @@ morie_geron_recall_hm <- function(y_true, y_pred, pos_label = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_regression_mlp(V, V)
+#' @keywords internal
 morie_geron_regression_mlp <- function(X, y, hidden_sizes = 8, epochs = 400, lr = 0.05, seed = 0) {
   A <- .morie_gr_mat(X, "X")
   Y <- if (is.matrix(y)) y else matrix(as.numeric(y), ncol = 1)
@@ -2565,6 +2608,7 @@ morie_geron_regression_mlp <- function(X, y, hidden_sizes = 8, epochs = 400, lr 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_relu(V)
+#' @keywords internal
 morie_geron_relu <- function(z, leaky = 0.0) {
   a <- as.numeric(z)
   slope <- as.numeric(leaky)
@@ -2609,6 +2653,7 @@ morie_geron_relu <- function(z, leaky = 0.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_random_forest(V, V)
+#' @keywords internal
 morie_geron_random_forest <- function(X, y, n_estimators = 10, max_features = "sqrt", seed = 0,
                                       max_depth = 4, min_samples_leaf = 1, task = "auto") {
   A <- .morie_gr_mat(X, "X")
@@ -2704,6 +2749,7 @@ morie_geron_random_forest <- function(X, y, n_estimators = 10, max_features = "s
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_regression_mlp_pytorch(V, V)
+#' @keywords internal
 morie_geron_regression_mlp_pytorch <- function(X, y, hidden = 8, epochs = 400, lr = 0.05, seed = 0) {
   base <- morie_geron_regression_mlp(X, y, hidden_sizes = hidden, epochs = epochs, lr = lr, seed = seed)
   sizes <- base$sizes
@@ -2732,6 +2778,7 @@ morie_geron_regression_mlp_pytorch <- function(X, y, hidden = 8, epochs = 400, l
 #' step <- function(a) list(0, as.numeric(a), TRUE)
 #' morie_geron_reinforcement_learning(list(reset = reset, step = step),
 #'     function(s) 0, gamma = 0.5)
+#' @keywords internal
 morie_geron_reinforcement_learning <- function(env, pi, gamma = 0.99, n_episodes = 1, max_steps = 1000, seed = 0) {
   eb <- .morie_w4c_bind_env(env)
   g <- as.numeric(gamma)
@@ -2790,6 +2837,7 @@ morie_geron_reinforcement_learning <- function(env, pi, gamma = 0.99, n_episodes
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_geron_rlhf(M, M)
+#' @keywords internal
 morie_geron_rlhf <- function(policy, reward_model, prompts = NULL, beta = 0.1, lr = 0.5, epochs = 500) {
   Z0 <- .morie_gr_mat(policy, "policy")
   Pn <- nrow(Z0)
@@ -2841,6 +2889,7 @@ morie_geron_rlhf <- function(policy, reward_model, prompts = NULL, beta = 0.1, l
 #' gs <- function(s, a) if (a == 0) c(1, 0) else c(0, 1)
 #' morie_geron_reinforce(list(list(list(0, 0, 1), list(1, 1, 1))),
 #'     gs, gamma = 0.5, eta = 0.1)
+#' @keywords internal
 morie_geron_reinforce <- function(episodes, policy, gamma = 0.99, eta = 0.01, theta = NULL, baseline = TRUE) {
   lr <- as.numeric(eta)
   base <- morie_geron_policy_gradient(episodes, policy, gamma = gamma, baseline = baseline)
@@ -2865,6 +2914,7 @@ morie_geron_reinforce <- function(episodes, policy, gamma = 0.99, eta = 0.01, th
 #' @examples
 #' morie_geron_recurrent_neuron(x_t = 5L, h_prev = 5L, Wx = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Wh = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+#' @keywords internal
 morie_geron_recurrent_neuron <- function(x_t, h_prev, Wx, Wh, b, activation = "tanh") {
   x <- as.numeric(x_t)
   h <- as.numeric(h_prev)
@@ -2897,6 +2947,7 @@ morie_geron_recurrent_neuron <- function(x_t, h_prev, Wx, Wh, b, activation = "t
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_roc_curve_hm(V, V)
+#' @keywords internal
 morie_geron_roc_curve_hm <- function(y_true, scores, pos_label = 1) {
   base <- morie_geron_auc_roc(y_true, scores, pos_label = pos_label)
   fpr <- base$fpr
@@ -2921,6 +2972,7 @@ morie_geron_roc_curve_hm <- function(y_true, scores, pos_label = 1) {
 #' @examples
 #' morie_geron_randomized_pca(matrix(c(1, 2, 3, 1, 2, 3), ncol = 2),
 #'     1)
+#' @keywords internal
 morie_geron_randomized_pca <- function(X, n_components, seed = 0, n_oversamples = 10, n_power_iter = 2) {
   A <- .morie_gr_mat(X, "X")
   m <- nrow(A)
@@ -2966,6 +3018,7 @@ morie_geron_randomized_pca <- function(X, n_components, seed = 0, n_oversamples 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_random_patches(V, V)
+#' @keywords internal
 morie_geron_random_patches <- function(X, y, base_estimator = NULL, n_estimators = 10, max_samples = NULL,
                                        max_features = NULL, seed = 0, task = "auto", bootstrap = FALSE) {
   A <- .morie_gr_mat(X, "X")
@@ -3058,6 +3111,7 @@ morie_geron_random_patches <- function(X, y, base_estimator = NULL, n_estimators
 #' @examples
 #' morie_geron_randomized_search(param_dist = c(1, 2, 3, 4, 5, 6, 7, 8), n_iter = 5L,
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_geron_randomized_search <- function(param_dist, n_iter, X, y, estimator = NULL, K = 3, seed = 0, score = NULL) {
   N <- as.integer(n_iter)
   est <- if (is.null(estimator)) .morie_w4c_ridge_estimator else estimator
@@ -3107,6 +3161,7 @@ morie_geron_randomized_search <- function(param_dist, n_iter, X, y, estimator = 
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_random_subspaces(V, V)
+#' @keywords internal
 morie_geron_random_subspaces <- function(X, y, base_estimator = NULL, n_estimators = 10, max_features = NULL,
                                          seed = 0, task = "auto") {
   A <- .morie_gr_mat(X, "X")
@@ -3160,6 +3215,7 @@ morie_geron_random_subspaces <- function(X, y, base_estimator = NULL, n_estimato
 #' @examples
 #' morie_geron_rnn_visual_attention(features = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5,
 #'   W = c(1, 2, 3, 4, 5, 6, 7, 8), U = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_geron_rnn_visual_attention <- function(features, h, W, U, v) {
   F_ <- features
   grid <- NULL
@@ -3197,6 +3253,7 @@ morie_geron_rnn_visual_attention <- function(features, h, W, U, v) {
 #' @examples
 #' morie_geron_revnet(c(1, 2, 3, 4), function(a) 2 * a, function(a) a +
 #'     1)
+#' @keywords internal
 morie_geron_revnet <- function(x, F, G) {
   X <- as.numeric(x)
   half <- length(X) %/% 2L
@@ -3233,6 +3290,7 @@ morie_geron_revnet <- function(x, F, G) {
 #' tbl <- array(c(0, 0, 2, 0, 1, 0, 0, 2), dim = c(2, 2, 2))
 #' morie_geron_reward_function(c(0, 1, 1), c(0, 0, 1), c(1, 0, 1),
 #'     R = tbl, gamma = 0.5)
+#' @keywords internal
 morie_geron_reward_function <- function(s, a, s_next, R = NULL, gamma = 1.0) {
   .morie_gr_need(!is.null(R), "geron_reward_function: R is required")
   g <- as.numeric(gamma)

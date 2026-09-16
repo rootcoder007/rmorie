@@ -64,6 +64,7 @@
 #' @examples
 #' rng <- rmorie:::.ghc_rng(1)
 #' corrupt(c(1, 0, 1, 1, 0), q = 0.4, rng)
+#' @keywords internal
 corrupt <- function(y, q, rng) {
   qq <- as.numeric(q)
   if (!(qq >= 0.0 && qq < 1.0))
@@ -89,6 +90,7 @@ corrupt <- function(y, q, rng) {
 #' @examples
 #' encode(y_tilde = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   V_u = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+#' @keywords internal
 encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
   K <- length(b)
   z <- numeric(K)
@@ -120,6 +122,7 @@ encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
 #' @examples
 #' decode(z = c(1, 2, 3, 4, 5, 6, 7, 8), Wp = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   bp = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
   if (is.null(items)) idx <- seq_along(bp) else idx <- as.integer(items)
   sapply(idx, function(i) {
@@ -143,6 +146,7 @@ decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' loss(V, V)
+#' @keywords internal
 loss <- function(y, y_hat, kind = "square") {
   if (!(kind %in% .cdae_losses))
     stop(sprintf("cdaeRC: loss must be one of %s, got %s",
@@ -189,6 +193,7 @@ loss <- function(y, y_hat, kind = "square") {
 #' pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
 #' m <- fit_cdae(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
 #' str(m, max.level = 1)
+#' @keywords internal
 fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                      alpha = 0.05, lam = 0.01, iters = 30L,
                      n_neg = 5L, seed = 0, activation = "sigmoid",
@@ -292,6 +297,7 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #' pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
 #' m <- fit_cdae(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
 #' recommend(m, pos, u = 0L, n_items = 4, top_k = 2)
+#' @keywords internal
 recommend <- function(model, pos, u, n_items, top_k = 5L,
                       activation = "sigmoid") {
   W <- model$W
@@ -339,6 +345,7 @@ recommend <- function(model, pos, u, n_items, top_k = 5L,
 #' pos <- list(c(0L, 1L), c(1L, 2L), c(0L, 2L), c(2L, 3L))
 #' r <- morie_cdaeRC(pos, n_users = 4, n_items = 4, k_dim = 3, iters = 5)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                          alpha = 0.05, lam = 0.01, iters = 30L,
                          n_neg = 5L, seed = 0, activation = "sigmoid",

@@ -165,6 +165,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' entropy(V)
+#' @keywords internal
 entropy <- function(q) {
   q <- as.numeric(q)
   tot <- sum(q)
@@ -188,6 +189,7 @@ entropy <- function(q) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' curriculum_schedule(V)
+#' @keywords internal
 curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
   d <- .prgrl_to_vec(difficulty)
   n <- length(d)
@@ -231,6 +233,7 @@ curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
 #' @export
 #' @examples
 #' is_curriculum(list(c(1, 1, 1), c(1, 1, 0), c(1, 0, 0)))
+#' @keywords internal
 is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
   if (length(weights) < 2) stop("prgrl: need at least two steps to check")
   n <- length(weights[[1]])
@@ -368,6 +371,7 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' \code{updates}, \code{order}, \code{n_repeats}, \code{lambdas}, \code{weights},
 #' \code{entropies}, \code{is_curriculum}, \code{n}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
                   updates = 200, n_steps = 5, seed = 0, n_repeats = 50,
                   order = "sampled") {
@@ -499,6 +503,7 @@ prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
 #' easy_only_fit(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   difficulty = c(1, 2, 3, 4, 5, 6, 7, 8), X_test = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   y_test = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
                           updates = 200, seed = 0, n_repeats = 50) {
   Xr <- .prgrl_to_rows(X)

@@ -258,6 +258,7 @@
 #' @export
 #' @examples
 #' morie_ecsTCR_integrate(forcing = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
+#' @keywords internal
 morie_ecsTCR_integrate <- function(forcing, lam, gamma = 0.7,
                                    epsilon = 1, C = 8, C_deep = 100,
                                    solver = "analytic", dt = 1, T0 = 0,
@@ -360,6 +361,7 @@ morie_ecsTCR_co2_forcing <- function(ratio, f2x = .ECSTCR_F2X)
 #'   deep_temperature, imbalance, fitted, charney_range, within_charney,
 #'   route, solver and method.
 #' @export
+#' @keywords internal
 morie_ecsTCR <- function(model_run = NULL, CO2_traj = NULL,
                          route = "parameters", lam = NULL, gamma = 0.7,
                          epsilon = 1, C = 8, C_deep = 100,

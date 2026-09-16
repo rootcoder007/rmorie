@@ -318,6 +318,7 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::summary negbin
+#' @keywords internal
 summary.negbin <- function(object, dispersion = 1, ...) {
   s <- stats::summary.glm(object, dispersion = dispersion, ...)
   s$theta <- object$theta
@@ -338,6 +339,7 @@ summary.negbin <- function(object, dispersion = 1, ...) {
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::logLik negbin
+#' @keywords internal
 logLik.negbin <- function(object, ...) {
   val <- object$twologlik / 2
   attr(val, "df") <- object$rank + 1L
@@ -439,6 +441,7 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::summary morie_rlm
+#' @keywords internal
 summary.morie_rlm <- function(object, ...) {
   s <- object$s
   coef <- object$coefficients
@@ -581,6 +584,7 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
 #'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::logLik morie_polr
+#' @keywords internal
 logLik.morie_polr <- function(object, ...) {
   val <- -object$deviance / 2
   attr(val, "df") <- object$edf

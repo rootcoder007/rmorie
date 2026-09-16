@@ -278,6 +278,7 @@ morie_lord_chisq <- function(b_R, b_F, V_R, V_F = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_cochran_q(V, V)
+#' @keywords internal
 morie_cochran_q <- function(yi, vi) morie_ma_cochran_q(yi, vi)
 
 #' Tarone-Ware and the weighted log-rank family

@@ -225,6 +225,7 @@
 #' @examples
 #' morie_hibrid_hibrid_prediction(y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   p1_geno = c(1, 2, 3, 4, 5, 6, 7, 8), p2_geno = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
                                            sigma2_sca = NULL, X = NULL,
                                            p1_new = NULL, p2_new = NULL,

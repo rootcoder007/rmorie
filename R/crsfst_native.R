@@ -63,6 +63,7 @@
 #' @export
 #' @examples
 #' morie_crsfst_rmst(curve = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), tau = 0.5)
+#' @keywords internal
 morie_crsfst_rmst <- function(curve, tau) {
   tau <- as.numeric(tau)
   if (tau <= 0) stop("the horizon must be positive")
@@ -91,6 +92,7 @@ morie_crsfst_rmst <- function(curve, tau) {
 #' @export
 #' @examples
 #' morie_crsfst_folds(n = 5L, k = 5L)
+#' @keywords internal
 morie_crsfst_folds <- function(n, k, seed = 0) {
   k <- as.integer(k)
   if (k < 2L) stop("cross-fitting needs at least two folds")
@@ -140,6 +142,7 @@ morie_crsfst_folds <- function(n, k, seed = 0) {
 #' E <- vapply(0:(N - 1L), function(i) if (i%%5 == 0) 0L else 1L,
 #'     integer(1))
 #' morie_crsfst(T, E, D, X, 3L, NULL, 4L, 3L, 2L, TRUE, 2)
+#' @keywords internal
 morie_crsfst <- function(time, event, D, X, K = 3L, tau = NULL,
                          n_trees = 8L, min_leaf = 3L, max_depth = 3L,
                          honest = TRUE, seed = 0, rule = "logrank") {
@@ -223,6 +226,7 @@ morie_crsfst <- function(time, event, D, X, K = 3L, tau = NULL,
 #' @export
 #' @examples
 #' morie_crsfst_cheatsheet()
+#' @keywords internal
 morie_crsfst_cheatsheet <- function()
   paste0("crsfst: cross-fitted random survival forest. K-fold ",
          "out-of-fold prediction, effect on restricted mean survival ",

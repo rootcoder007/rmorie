@@ -16,6 +16,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02fe(V, V)
+#' @keywords internal
 k02fe <- function(y, v) {
   y <- as.numeric(y)
   v <- as.numeric(v)
@@ -40,6 +41,7 @@ k02fe <- function(y, v) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02dl(V, V)
+#' @keywords internal
 k02dl <- function(y, v) {
   y <- as.numeric(y)
   v <- as.numeric(v)
@@ -66,6 +68,7 @@ k02dl <- function(y, v) {
 #' @examples
 #' k02mm(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   tau0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 k02mm <- function(y, v, tau0) {
   y <- as.numeric(y)
   v <- as.numeric(v)
@@ -91,6 +94,7 @@ k02mm <- function(y, v, tau0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02z(V)
+#' @keywords internal
 k02z <- function(p) stats::qnorm(p)
 #' k02tq
 #'
@@ -105,6 +109,7 @@ k02z <- function(p) stats::qnorm(p)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02tq(V, V)
+#' @keywords internal
 k02tq <- function(p, df) stats::qt(p, df)
 #' k02p2z
 #'
@@ -118,6 +123,7 @@ k02tq <- function(p, df) stats::qt(p, df)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02p2z(V)
+#' @keywords internal
 k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
 #' k02p2t
 #'
@@ -132,6 +138,7 @@ k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02p2t(V, V)
+#' @keywords internal
 k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
 #' k02pchi
 #'
@@ -147,6 +154,7 @@ k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02pchi(V, V)
+#' @keywords internal
 k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 
 .k02invphi <- 0.6180339887498949
@@ -163,6 +171,7 @@ k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{80L}.
 #' @return A numeric value.
 #' @export
+#' @keywords internal
 k02gold <- function(f, lo, hi, iters = 80L) {
   a <- as.numeric(lo)
   b <- as.numeric(hi)
@@ -199,6 +208,7 @@ k02gold <- function(f, lo, hi, iters = 80L) {
 #' @export
 #' @examples
 #' k02gh(n = 5L)
+#' @keywords internal
 k02gh <- function(n) {
   n <- as.integer(n)
   pim4 <- 0.7511255444649425
@@ -255,6 +265,7 @@ k02gh <- function(n) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' k02mod(M, V)
+#' @keywords internal
 k02mod <- function(A, comm) {
   a <- as.matrix(A)
   n <- nrow(a)
@@ -280,6 +291,7 @@ k02mod <- function(A, comm) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' k02bfs(V)
+#' @keywords internal
 k02bfs <- function(A) {
   a <- as.matrix(A)
   n <- nrow(a)

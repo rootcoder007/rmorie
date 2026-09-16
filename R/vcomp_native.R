@@ -72,6 +72,7 @@
 #' @examples
 #' set.seed(1)
 #' r <- morie_vcomp(y = rnorm(10), group = rbinom(10, 1, 0.5)); TRUE
+#' @keywords internal
 morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
   if (!(method %in% c("reml", "anova"))) {
     stop("method must be 'reml' or 'anova'")

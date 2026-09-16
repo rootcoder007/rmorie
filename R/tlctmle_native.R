@@ -52,6 +52,7 @@
 #' Q0 <- plogis(W[, 2])
 #' g_models <- list(1, c(1, 2), c(1, 2, 3))
 #' morie_tlctmle(A, Y, Q1, Q0, W, g_models, V = 3L)
+#' @keywords internal
 morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
                           seed = 0L, penalty = TRUE) {
   ctmle(A, Y, Q1, Q0, W, g_models, V = V, seed = seed,
@@ -143,6 +144,7 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' targeted_loss(V, V)
+#' @keywords internal
 targeted_loss <- function(Q_star, Y) {
   q <- as.numeric(Q_star)
   y <- as.numeric(Y)
@@ -169,6 +171,7 @@ targeted_loss <- function(Q_star, Y) {
 #' @examples
 #' candidate_sequence(A = c(1, 2, 3, 4, 5, 6, 7, 8), W = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
 #'   g_models = list(a = 1, b = 2))
+#' @keywords internal
 candidate_sequence <- function(A, W, g_models) {
   a <- as.numeric(A)
   rows <- as.matrix(W)
@@ -224,6 +227,7 @@ candidate_sequence <- function(A, W, g_models) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' instrument_penalty(V, V)
+#' @keywords internal
 instrument_penalty <- function(g_small, g_large) {
   gs <- as.numeric(g_small)
   gl <- as.numeric(g_large)
@@ -264,6 +268,7 @@ instrument_penalty <- function(g_small, g_large) {
 #' Q0 <- plogis(W[, 2])
 #' g_models <- list(1, c(1, 2), c(1, 2, 3))
 #' ctmle(A, Y, Q1, Q0, W, g_models, V = 3L)
+#' @keywords internal
 ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
                   penalty = TRUE) {
   a <- as.numeric(A)

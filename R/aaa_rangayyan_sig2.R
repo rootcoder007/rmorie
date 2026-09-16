@@ -22,6 +22,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LinConv(V, V)
+#' @keywords internal
 LinConv <- function(x, h, causal = TRUE) {
   # eqs (3.36)-(3.37): y(n) = sum_k x(k) h(n-k) = sum_k h(k) x(n-k),
   # causality assumed as the book states under eq (3.37).  eq (3.39)
@@ -62,6 +63,7 @@ LinConv <- function(x, h, causal = TRUE) {
 #' @examples
 #' LsiSer(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LsiSer <- function(x, h1, h2) {
   # eqs (3.43)-(3.45): s = x*h1, y = s*h2 = x*h, h = h1*h2.  One method,
   # so one function; the equivalence in eq (3.44) is measured, not
@@ -98,6 +100,7 @@ LsiSer <- function(x, h1, h2) {
 #' @examples
 #' LsiSerY(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LsiSerY <- function(x, h1, h2) {
   # eq (3.44): the cascade output, read off LsiSer rather than convolved
   # a second time -- the content of the equation is that the cascade IS a
@@ -124,6 +127,7 @@ LsiSerY <- function(x, h1, h2) {
 #' @examples
 #' LsiPar(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LsiPar <- function(x, h1, h2) {
   # eqs (3.46)-(3.49): s1 = x*h1, s2 = x*h2, y = s1 + s2 = x*(h1+h2).
   # The shorter response is zero-extended before the addition; truncating
@@ -160,6 +164,7 @@ LsiPar <- function(x, h1, h2) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' LsiPar2(V, V)
+#' @keywords internal
 LsiPar2 <- function(x, h2) {
   # eq (3.47): identical in form to eq (3.46) -- both branches of a
   # parallel structure see the same input.
@@ -185,6 +190,7 @@ LsiPar2 <- function(x, h2) {
 #' @examples
 #' LsiParY(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 LsiParY <- function(x, h1, h2) {
   # eqs (3.48)-(3.49): the parallel counterpart of eq (3.44) -- here the
   # impulse responses ADD where a cascade convolves them.
@@ -213,6 +219,7 @@ LsiParY <- function(x, h1, h2) {
 #' @examples
 #' LtiProd(c(1, 2, 1), c(1, -1), s = complex(real = 0.3, imaginary = 1.1),
 #'     dt = 0.5)
+#' @keywords internal
 LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
   # eqs (3.50), (3.53): convolution in time is multiplication in the s
   # and omega domains.  s = j omega recovers the frequency-domain form,
@@ -266,6 +273,7 @@ LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PerConv(V, V)
+#' @keywords internal
 PerConv <- function(x, h, npoints = NULL) {
   # eq (3.90); the same equation CircConv implements, so it delegates --
   # two copies of one equation is how the two drift apart.
@@ -292,6 +300,7 @@ PerConv <- function(x, h, npoints = NULL) {
 #' @export
 #' @examples
 #' AmSig(rep(1, 8), fc = 1, fs = 8)
+#' @keywords internal
 AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
   # Section 5.5.1: y(t) = x(t) cos(wc t) -- double-sideband SUPPRESSED
   # carrier -- with synchronous demodulation x_d = y cos(wc t) =
@@ -338,6 +347,7 @@ AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
 #' @export
 #' @examples
 #' FmSig(c(rep(0, 10), rep(50, 10)), fc = 100, fs = 1000, kf = 1)
+#' @keywords internal
 FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {
   # Rangayyan names FM as a signal model but prints no equation for it,
   # unlike AM in Section 5.5.1, so the standard definition is used and
@@ -385,6 +395,7 @@ FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' TvLsi(V, V)
+#' @keywords internal
 TvLsi <- function(x, h) {
   # A time-variant system needs h(n, m), one response per output instant:
   #   y(n) = sum_m h(n, m) x(n - m).

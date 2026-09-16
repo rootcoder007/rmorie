@@ -157,6 +157,7 @@
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' S <- c("a", "b", "c")
 #' morie_vidgen_space_only_conv(D, S)
+#' @keywords internal
 morie_vidgen_space_only_conv <- function(video, kernel) {
   V <- lapply(video, .vidgen_mat)
   K <- .vidgen_mat(kernel)
@@ -203,6 +204,7 @@ morie_vidgen_space_only_conv <- function(video, kernel) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_vidgen_spatial_attention(V)
+#' @keywords internal
 morie_vidgen_spatial_attention <- function(video) {
   out <- list()
   weights <- list()
@@ -232,6 +234,7 @@ morie_vidgen_spatial_attention <- function(video) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_vidgen_temporal_attention(V)
+#' @keywords internal
 morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
   V <- lapply(video, .vidgen_mat)
   F <- length(V)
@@ -280,6 +283,7 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
 #' @param block Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{video}, \code{note}.
 #' @export
+#' @keywords internal
 morie_vidgen_as_image_model <- function(video, block) {
   list(
     video = lapply(video, function(fr) block(list(fr))$video[[1]]),
@@ -299,6 +303,7 @@ morie_vidgen_as_image_model <- function(video, block) {
 #' @export
 #' @examples
 #' morie_vidgen_attention_cost(frames = 5L, spatial_positions = 5L)
+#' @keywords internal
 morie_vidgen_attention_cost <- function(frames, spatial_positions) {
   F <- as.integer(frames)
   S <- as.integer(spatial_positions)
@@ -333,6 +338,7 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 #' morie_vidgen_reconstruction_guidance(x_hat = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   observed = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
 #'   index = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+#' @keywords internal
 morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
                                                   weight = 2.0,
                                                   downsample = NULL) {
@@ -395,6 +401,7 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
 #' @export
 #' @examples
 #' morie_vidgen_cheatsheet()
+#' @keywords internal
 morie_vidgen_cheatsheet <- function() {
   paste0(
     "vidgen: a 3D U-Net FACTORISED over space and time -- each 3x",

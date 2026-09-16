@@ -21,6 +21,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' S_function(V)
+#' @keywords internal
 S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   v <- as.numeric(std_moments)
   J <- length(v)
@@ -50,6 +51,7 @@ S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' weighted_moments(V, V)
+#' @keywords internal
 weighted_moments <- function(m, g) {
   if (is.matrix(m)) M <- split(m, row(m)) else M <- m
   M <- lapply(M, as.numeric)
@@ -84,6 +86,7 @@ weighted_moments <- function(m, g) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' hypercube_instruments(M)
+#' @keywords internal
 hypercube_instruments <- function(X, n_levels = 3L) {
   if (!is.list(X) && !is.matrix(X)) stop("bnskmt: X must be a matrix or list of rows")
   if (is.matrix(X)) Xm <- split(X, row(X)) else Xm <- X
@@ -140,6 +143,7 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 #' inst <- hypercube_instruments(X, n_levels = 2L)
 #' r <- ks_statistic(X[, 1] - 0.4, inst)
 #' str(r, max.level = 1)
+#' @keywords internal
 ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
     instruments$instruments else instruments
@@ -185,6 +189,7 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
 #' inst <- hypercube_instruments(X, n_levels = 2L)
 #' r <- ks_critical_value(X[, 1] - 0.4, inst)
 #' str(r, max.level = 1)
+#' @keywords internal
 ks_critical_value <- function(m, instruments, form = "sum",
                               n_equality = 0L, level = 0.95,
                               reps = 200L, seed = 0L, kappa = NULL) {
@@ -245,6 +250,7 @@ ks_critical_value <- function(m, instruments, form = "sum",
 #' mfn <- function(theta) X[, 1] - theta
 #' r <- ks_confidence_set(mfn, theta_grid = seq(0.2, 0.8, by = 0.1), X)
 #' str(r, max.level = 1)
+#' @keywords internal
 ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                               n_equality = 0L, level = 0.95,
                               n_levels = 2L, reps = 100L, seed = 0L) {
@@ -287,6 +293,7 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
 #' inst <- hypercube_instruments(X, n_levels = 2L)
 #' r <- cvm_statistic(X[, 1] - 0.4, inst)
 #' str(r, max.level = 1)
+#' @keywords internal
 cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
                           weights = NULL) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
@@ -332,6 +339,7 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
 #' inst <- hypercube_instruments(X, n_levels = 2L)
 #' r <- compare_forms(X[, 1] - 0.4, inst)
 #' str(r, max.level = 1)
+#' @keywords internal
 compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
   cv <- cvm_statistic(m, instruments, form = form, n_equality = n_equality)
   ks <- ks_statistic(m, instruments, form = form, n_equality = n_equality)

@@ -42,6 +42,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' beta_fletcher_reeves(V, V)
+#' @keywords internal
 beta_fletcher_reeves <- function(g_new, g_old) {
   den <- .cgnonl_dot(g_old, g_old)
   if (den <= 0.0) return(0.0)
@@ -62,6 +63,7 @@ beta_fletcher_reeves <- function(g_new, g_old) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' beta_polak_ribiere(V, V)
+#' @keywords internal
 beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
   den <- .cgnonl_dot(g_old, g_old)
   if (den <= 0.0) return(0.0)
@@ -105,6 +107,7 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #' @export
 #' @examples
 #' cubic_interpolate(ta = 0, fa = 1, da = -1, tb = 1, fb = 0.5, db = 0.2)
+#' @keywords internal
 cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
   h <- tb - ta
   if (h == 0.0) return(ta)
@@ -143,6 +146,7 @@ cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 #' x0 <- c(0, 0)
 #' r <- line_search_fr(f, g, x0, p = -g(x0), f0 = f(x0), g0 = g(x0))
 #' str(r, max.level = 1)
+#' @keywords internal
 line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
                            max_double = 60L, max_cubic = 40L,
                            tol = 1e-12) {
@@ -281,6 +285,7 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #'                    2 * (x[2] - 2) + x[1]^2 * x[2])
 #' r <- nonlinear_cg(f, g, x0 = c(0, 0))
 #' str(r, max.level = 1)
+#' @keywords internal
 nonlinear_cg <- function(f, grad, x0, beta = "fletcher-reeves",
                          restart = NULL, max_iter = NULL, tol = 1e-10,
                          est = NULL, line_search = "fletcher-reeves",
@@ -400,6 +405,7 @@ cgnonl <- nonlinear_cg
 #' g <- function(x) 2 * (x - c(1, 2))
 #' r <- morie_cgnonl(f, g, x0 = c(0, 0))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_cgnonl <- function(f, grad, x0, beta = "fletcher-reeves",
                          restart = NULL, max_iter = NULL, tol = 1e-10,
                          est = NULL, line_search = "fletcher-reeves",

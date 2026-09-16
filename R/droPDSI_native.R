@@ -24,6 +24,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_droPDSI_palmer_pdsi(V, V)
+#' @keywords internal
 morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
                                       month = NULL) {
   P <- as.numeric(precip)

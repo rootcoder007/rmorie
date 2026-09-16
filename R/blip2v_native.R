@@ -20,6 +20,7 @@
 #' @export
 #' @examples
 #' query_tokens(n_queries = 5L, dim = 5L)
+#' @keywords internal
 query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
   n <- as.integer(n_queries)
   d <- as.integer(dim)
@@ -49,6 +50,7 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
 #' Im <- matrix(rnorm(12), 3, 4)
 #' W <- matrix(rnorm(16), 4, 4)
 #' qformer_attend(Q, Im, W, W, W)
+#' @keywords internal
 qformer_attend <- function(queries, image_features, WQ, WK, WV) {
   Q <- as.matrix(queries)
   storage.mode(Q) <- "double"
@@ -94,6 +96,7 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
 #' @export
 #' @examples
 #' trainable_fraction(1e6, 3e8, 7e9)
+#' @keywords internal
 trainable_fraction <- function(qformer_params, frozen_vision_params,
                                frozen_llm_params) {
   q <- as.numeric(qformer_params)
@@ -121,6 +124,7 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' stage_one_objectives(V, V)
+#' @keywords internal
 stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
   Q <- as.matrix(query_out)
   storage.mode(Q) <- "double"
@@ -158,6 +162,7 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' project_to_llm(V, V)
+#' @keywords internal
 project_to_llm <- function(query_out, W, b = NULL) {
   Q <- as.matrix(query_out)
   storage.mode(Q) <- "double"

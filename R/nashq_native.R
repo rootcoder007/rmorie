@@ -169,6 +169,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' nash_equilibria_bimatrix(V, V)
+#' @keywords internal
 nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
   B <- .nashq_mat(B, "B")
@@ -262,6 +263,7 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' stage_game_type(V, V)
+#' @keywords internal
 stage_game_type <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
   B <- .nashq_mat(B, "B")
@@ -399,6 +401,7 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #' \code{stage_game_types}, \code{returns}, \code{mean_return_last}, \code{selection},
 #' \code{method}.
 #' @export
+#' @keywords internal
 morie_nashq <- function(states, actions, step, rewards,
                         gamma = 0.9, alpha = 0.5, epsilon = 0.1,
                         episodes = 500, horizon = 50, start = NULL,

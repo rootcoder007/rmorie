@@ -241,6 +241,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rkmeans(V)
+#' @keywords internal
 morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
                           n_start = 20, max_iter = 100,
                           huber_c = 1.345, seed = 0, centers = NULL) {

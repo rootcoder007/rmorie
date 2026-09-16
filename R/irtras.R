@@ -18,9 +18,9 @@
 #
 # Helpers live in aaa_helpers_irt.R.
 
-#' @noRd
 #' @examples
 #' rmorie:::morie_rating_scale_model(theta = 0.5, b = 5L, tau = 0.5)
+#' @keywords internal
 morie_rating_scale_model <- function(theta, b, tau) {
   th <- as.numeric(theta)
   n <- length(th)

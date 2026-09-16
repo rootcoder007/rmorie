@@ -181,6 +181,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cbs_statistic(V)
+#' @keywords internal
 cbs_statistic <- function(x) {
   v <- as.numeric(x)
   v <- v[is.finite(v)]
@@ -216,6 +217,7 @@ cbs_statistic <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' copynm(V)
+#' @keywords internal
 copynm <- function(x, alpha = 0.01, permutations = 1000L, min_width = 2L,
                    undo_splits = TRUE, seed = 0L, max_depth = 50L) {
   v <- as.numeric(x)

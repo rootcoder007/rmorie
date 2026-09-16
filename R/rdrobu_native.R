@@ -45,6 +45,7 @@
 #' x <- runif(200, -1, 1)
 #' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
 #' morie_rdrobu(y, x)
+#' @keywords internal
 morie_rdrobu <- function(y, x, cutoff = 0.0, alpha = 0.05, ...) {
   fit <- morie_causrddc(y, x, cutoff = cutoff, alpha = alpha, ...)
   ci_c <- fit$ci_conventional
@@ -92,6 +93,7 @@ morie_rdrobu <- function(y, x, cutoff = 0.0, alpha = 0.05, ...) {
 #' x <- runif(200, -1, 1)
 #' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
 #' morie_calonico_cattaneo_titiunik(y, x)
+#' @keywords internal
 morie_calonico_cattaneo_titiunik <- function(y, x, cutoff = 0.0, ...) {
   morie_rdrobu(y, x, cutoff, ...)
 }

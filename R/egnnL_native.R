@@ -62,6 +62,7 @@
 #' @examples
 #' phi_e <- function(hi, hj, d2, a) c(hi + hj, d2)
 #' edge_message(c(0.2, -0.1), c(0.4, 0.3), c(1, 0, 0), c(0, 1, 0), phi_e)
+#' @keywords internal
 edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
   # Eq. (3). Positions enter ONLY as ||x_i - x_j||^2, which is what
   # makes the message invariant.
@@ -90,6 +91,7 @@ edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
 #'   M[[i]][[j]] <- edge_message(rnorm(2), rnorm(2), X[[i]], X[[j]], phi_e)
 #' Xn <- coord_update(X, M, phi_x)
 #' length(Xn)
+#' @keywords internal
 coord_update <- function(X, M, phi_x, C = NULL) {
   # Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_{ij}).
   n <- length(X)
@@ -139,6 +141,7 @@ coord_update <- function(X, M, phi_x, C = NULL) {
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- egcl(H, X, phi_e, phi_x, phi_h)
 #' names(r)
+#' @keywords internal
 egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
                  V = NULL, mode = "position", phi_v = NULL,
                  dt = 1) {
@@ -222,6 +225,7 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- run_egnn(H, X, 2L, phi_e, phi_x, phi_h)
 #' str(r, max.level = 1)
+#' @keywords internal
 run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                      C = NULL) {
   # Compose layers; equivariance is preserved inductively.
@@ -270,6 +274,7 @@ run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' r <- morie_egnnL_equivariance_error(H, X, phi_e, phi_x, phi_h, Q, g,
 #'                                     layers = 2L)
 #' c(r$equivariant, r$invariant)
+#' @keywords internal
 morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
                                layers = 2, C = NULL) {
   # Transform the input, run, and compare against transforming the
@@ -357,6 +362,7 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- equivariantgnn(H, X, layers = 2L, phi_e, phi_x, phi_h)
 #' length(r$X)
+#' @keywords internal
 equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                            C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -388,6 +394,7 @@ equivariantgnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- egnn_layer(H, X, layers = 1L, phi_e, phi_x, phi_h)
 #' length(r$H)
+#' @keywords internal
 egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                        C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -417,6 +424,7 @@ egnn_layer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- egnnlayer(H, X, layers = 1L, phi_e, phi_x, phi_h)
 #' length(r$X)
+#' @keywords internal
 egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                       C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)
@@ -448,6 +456,7 @@ egnnlayer <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' phi_h <- function(hi, agg) hi + 0.1 * agg[seq_along(hi)]
 #' r <- morie_egnnL(H, X, layers = 2L, phi_e, phi_x, phi_h)
 #' length(r$H)
+#' @keywords internal
 morie_egnnL <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                         C = NULL) {
   run_egnn(H, X, layers, phi_e, phi_x, phi_h, A, C)

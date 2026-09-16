@@ -600,6 +600,7 @@ morie_jsonlt_base64url_dec <- function(input) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_jsonlt_to_json(V)
 #' @export
+#' @keywords internal
 morie_jsonlt_to_json <- function(x, dataframe = c("rows", "columns", "values"),
                                  matrix = c("rowmajor", "columnmajor"),
                                  Date = c("ISO8601", "epoch"),
@@ -635,6 +636,7 @@ morie_jsonlt_to_json <- function(x, dataframe = c("rows", "columns", "values"),
 #' @export
 #' @examples
 #' morie_jsonlt_unbox(x = 5L)
+#' @keywords internal
 morie_jsonlt_unbox <- function(x) {
   if (is.null(x)) return(x)
   if (is.data.frame(x)) {
@@ -1019,6 +1021,7 @@ print.json <- function(x, ...) {
 #' morie_jsonlt_from_json('[{"a":1,"b":"x"},{"a":2,"b":"y"}]')
 #' morie_jsonlt_from_json('[[1,2],[3,4]]')
 #' @export
+#' @keywords internal
 morie_jsonlt_from_json <- function(txt, simplifyVector = TRUE,
                                    simplifyDataFrame = simplifyVector,
                                    simplifyMatrix = simplifyVector,
@@ -1300,6 +1303,7 @@ morie_jsonlt_validate <- function(txt) {
 #' @export
 #' @examples
 #' cat(morie_jsonlt_prettify('{"a":[1,2,{"b":null}]}'))
+#' @keywords internal
 morie_jsonlt_prettify <- function(txt, indent = 4) {
   stopifnot(is.numeric(indent))
   indent_string <- strrep(if (indent > 0) " " else "\t", as.integer(abs(indent)))
@@ -1313,6 +1317,7 @@ morie_jsonlt_prettify <- function(txt, indent = 4) {
 #' @export
 #' @examples
 #' morie_jsonlt_minify('{ "a" : [ 1 , 2 ] }')
+#' @keywords internal
 morie_jsonlt_minify <- function(txt) .jsonlt_reformat(txt, FALSE)
 
 #' Expand nested data.frame columns (jsonlite's flatten)
@@ -1324,6 +1329,7 @@ morie_jsonlt_minify <- function(txt) .jsonlt_reformat(txt, FALSE)
 #' @examples
 #' df <- morie_jsonlt_from_json('[{"a":{"b":1,"c":{"d":2}}},{"a":{"b":3,"c":{"d":4}}}]')
 #' morie_jsonlt_flatten(df)
+#' @keywords internal
 morie_jsonlt_flatten <- function(x, recursive = TRUE) {
   stopifnot(is.data.frame(x))
   nr <- nrow(x)
@@ -1551,6 +1557,7 @@ morie_jsonlt_rbind_pages <- function(pages) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_jsonlt_serialize(V)
+#' @keywords internal
 morie_jsonlt_serialize <- function(x, digits = 8, pretty = FALSE) {
   morie_jsonlt_to_json(.jsonlt_pack(x), digits = digits, pretty = pretty)
 }
@@ -1560,6 +1567,7 @@ morie_jsonlt_serialize <- function(x, digits = 8, pretty = FALSE) {
 #' @param txt JSON produced by [morie_jsonlt_serialize()].
 #' @return the original R object.
 #' @export
+#' @keywords internal
 morie_jsonlt_unserialize <- function(txt) .jsonlt_unpack(.jsonlt_parse(txt))
 
 # ================================================================ route
@@ -1574,6 +1582,7 @@ morie_jsonlt_unserialize <- function(txt) .jsonlt_unpack(.jsonlt_parse(txt))
 #' @export
 #' @examples
 #' morie_jsonlt()
+#' @keywords internal
 morie_jsonlt <- function(x = NULL, route = "to_json", ...) {
   routes <- c("to_json", "from_json", "prettify", "minify", "validate", "flatten",
               "serialize", "unserialize", "base64_enc", "base64_dec")

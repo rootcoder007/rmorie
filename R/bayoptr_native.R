@@ -279,6 +279,7 @@
 #' morie_bayoptr(f, bounds = list(c(0, 1), c(0, 1)), n_iter = 8L, n_init = 5L,
 #'               seed = 1L)
 #' }
+#' @keywords internal
 morie_bayoptr <- function(f, bounds, acquisition = "ei", n_iter = 20L,
                           n_init = 5L, kernel = "matern52",
                           amplitude = 1, length_scale = 1,

@@ -127,6 +127,7 @@
 #' @return A list with \code{estimate}, \code{mi_lower_bound}, \code{estimator},
 #' \code{n_patches}, \code{n_negative_patches}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_mienco <- function(summary, patches, other_patches, critic, estimator = "jsd") {
   estimators <- c("jsd", "dv")
   if (!(estimator %in% estimators)) {

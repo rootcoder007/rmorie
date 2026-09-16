@@ -25,6 +25,7 @@
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' tripartite_graph(D)
+#' @keywords internal
 tripartite_graph <- function(triples) {
   nodes <- character(0)
   edges <- list()
@@ -78,6 +79,7 @@ tripartite_graph <- function(triples) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' preference_vector(V, V)
+#' @keywords internal
 preference_vector <- function(nodes, focus, weight = 0.9) {
   N <- as.list(nodes)
   F <- intersect(focus, N)
@@ -120,6 +122,7 @@ preference_vector <- function(nodes, focus, weight = 0.9) {
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' S <- c("a", "b", "c")
 #' adapted_pagerank(D, S)
+#' @keywords internal
 adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
                              iters = 200, tol = 1e-12) {
   N <- as.list(nodes)
@@ -202,6 +205,7 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
 #' triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),
 #'                 c("u2", "t1", "r1"), c("u2", "t3", "r3"))
 #' folkrank(triples, focus = "t:t1")
+#' @keywords internal
 folkrank <- function(triples, focus, d = 0.7, weight = 0.9, iters = 200) {
   g <- tripartite_graph(triples)
   N <- g$nodes
@@ -270,6 +274,7 @@ tagawarerec <- folkrank
 #' triples <- list(c("u1", "t1", "r1"), c("u1", "t2", "r2"),
 #'                 c("u2", "t1", "r1"), c("u2", "t3", "r3"))
 #' morie_tagRC(triples, focus = "t:t1")
+#' @keywords internal
 morie_tagRC <- function(triples, focus, d = 0.7, weight = 0.9,
                         iters = 200) {
   folkrank(triples, focus, d = d, weight = weight, iters = iters)

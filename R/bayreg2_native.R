@@ -25,6 +25,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_bayreg2_student_t_regression(V, V)
+#' @keywords internal
 morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
                                                max_iter = 200, tol = 1e-10,
                                                add_intercept = TRUE) {

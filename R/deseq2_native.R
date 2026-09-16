@@ -117,6 +117,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' size_factors(V)
+#' @keywords internal
 size_factors <- function(counts) {
   K <- lapply(counts, function(r) as.numeric(r))
   if (length(K) == 0L || length(K[[1L]]) == 0L)
@@ -205,6 +206,7 @@ size_factors <- function(counts) {
 #' mu <- rep(c(50, 80), each = 3)
 #' K <- rpois(m, mu)
 #' cox_reid_loglik(0.1, K, mu, X)
+#' @keywords internal
 cox_reid_loglik <- function(alpha, K, mu, X) {
   if (alpha <= 0) stop("deseq2: alpha must be positive")
   .ghc_deseq2_nb_loglik(K, mu, alpha) -
@@ -236,6 +238,7 @@ cox_reid_loglik <- function(alpha, K, mu, X) {
 #' K <- c(rpois(3, 50), rpois(3, 90))
 #' r <- nb_glm_fit(K, X, alpha = 0.1)
 #' str(r, max.level = 1)
+#' @keywords internal
 nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
                        max_iter = 100L, tol = 1e-8, beta0 = NULL) {
   m <- length(K)
@@ -351,6 +354,7 @@ nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
 #' X <- cbind(1, rep(c(0, 1), each = 3))
 #' K <- c(rnbinom(3, mu = 50, size = 10), rnbinom(3, mu = 90, size = 10))
 #' dispersion_gene_wise(K, X, s = rep(1, m))
+#' @keywords internal
 dispersion_gene_wise <- function(K, X, s, alpha_init = 0.1) {
   fit0 <- nb_glm_fit(K, X, alpha_init, s)
   list(dispersion = .ghc_deseq2_maximise_log_alpha(
@@ -372,6 +376,7 @@ dispersion_gene_wise <- function(K, X, s, alpha_init = 0.1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' dispersion_trend(V, V)
+#' @keywords internal
 dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
   keep <- which(disp > 0 & mu_bar > 0)
   if (length(keep) < 3L)
@@ -511,6 +516,7 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' })
 #' r <- deseq2(counts, design)
 #' str(r, max.level = 1)
+#' @keywords internal
 deseq2 <- function(counts, design, contrast = NULL, size = NULL,
                     beta_prior = TRUE, quantile_p = 0.05,
                     alpha_init = 0.1, min_disp = 1e-8, log2 = TRUE) {

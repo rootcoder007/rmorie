@@ -7735,6 +7735,7 @@ morie_kamath_yarn_context_extrapolation <- function(theta, scale, d,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_kamath_rrf_score(V)
+#' @keywords internal
 morie_kamath_rrf_score <- function(r, k = 60) {
   r <- as.numeric(r)
   if (length(r) == 0L) {
@@ -7772,6 +7773,7 @@ morie_kamath_rrf_score <- function(r, k = 60) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_kamath_ragas_faithfulness(V, V)
+#' @keywords internal
 morie_kamath_ragas_faithfulness <- function(answer, context,
                                             entails = NULL) {
   toks <- function(x) {

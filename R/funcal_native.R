@@ -125,6 +125,7 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' @param searcher Passed to \code{\%in\%}. Defaults to \code{"diamond"}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
                                        query_cov = 0.2, target_cov = 0.2,
                                        searcher = "diamond") {
@@ -200,6 +201,7 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_funcal_assign_orthologs(V, V)
+#' @keywords internal
 morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
                                          target_taxa = NULL,
                                          target_types = NULL) {
@@ -292,6 +294,7 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_funcal_transfer_terms(V, V)
+#' @keywords internal
 morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL,
                                        min_support = 1) {
   if (min_support < 1) {
@@ -368,6 +371,7 @@ morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL
 #' \code{searcher}, \code{target_taxa}, \code{target_types}, \code{min_support},
 #' \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_funcal <- function(hits, groups, annotations, taxa = NULL,
                         target_taxa = NULL, target_types = NULL,
                         sources = NULL, evalue = 1e-3, score = 60.0,
@@ -435,6 +439,7 @@ morie_funcal_functional_annotation <- morie_funcal
 #' @export
 #' @examples
 #' morie_funcal_cheatsheet()
+#' @keywords internal
 morie_funcal_cheatsheet <- function() {
   paste("funcal: eggNOG-mapper v2 (Cantalapiedra et al. 2021).",
         "Function is transferred from ORTHOLOGS, not from the best",

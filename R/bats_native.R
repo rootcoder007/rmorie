@@ -50,6 +50,7 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_bats(V)
 #' }
+#' @keywords internal
 morie_bats <- function(y, seasonal_periods = numeric(0),
                        harmonics = NULL,
                        use_box_cox = NULL, use_trend = NULL,
@@ -141,6 +142,7 @@ morie_bats <- function(y, seasonal_periods = numeric(0),
 #' @export
 #' @examples
 #' box_cox(y = c(1, 2, 3, 4, 5, 6, 7, 8), omega = 5L)
+#' @keywords internal
 box_cox <- function(y, omega) {
   y <- as.numeric(y)
   if (any(y <= 0))
@@ -161,6 +163,7 @@ box_cox <- function(y, omega) {
 #' @export
 #' @examples
 #' inv_box_cox(z = c(1, 2, 3, 4, 5, 6, 7, 8), omega = 5L)
+#' @keywords internal
 inv_box_cox <- function(z, omega) {
   z <- as.numeric(z)
   if (omega == 0) return(exp(z))
@@ -183,6 +186,7 @@ inv_box_cox <- function(z, omega) {
 #' @export
 #' @examples
 #' seasonal_harmonics(m = 5L)
+#' @keywords internal
 seasonal_harmonics <- function(m, k = NULL) {
   m <- as.numeric(m)
   if (m <= 1) stop("bats: a seasonal period must exceed 1")
@@ -222,6 +226,7 @@ seasonal_harmonics <- function(m, k = NULL) {
 #' @export
 #' @examples
 #' BatsSpec()
+#' @keywords internal
 BatsSpec <- function(periods = numeric(0), harmonics = NULL,
                      use_box_cox = FALSE, use_trend = TRUE,
                      damped = FALSE, p = 0L, q = 0L) {
@@ -273,6 +278,7 @@ BatsSpec <- function(periods = numeric(0), harmonics = NULL,
 #' @examples
 #' spec <- BatsSpec(periods = c(4), use_trend = TRUE)
 #' n_states(spec)
+#' @keywords internal
 n_states <- function(spec) {
   n <- 1L + if (spec$use_trend) 1L else 0L
   if (!is.null(spec$harmonics))
@@ -295,6 +301,7 @@ n_states <- function(spec) {
 #' @examples
 #' spec <- BatsSpec(periods = c(4), use_trend = TRUE)
 #' n_free(spec)
+#' @keywords internal
 n_free <- function(spec) {
   n <- 1L
   if (spec$use_trend) {
@@ -322,6 +329,7 @@ n_free <- function(spec) {
 #' @examples
 #' spec <- BatsSpec(periods = c(4), use_trend = TRUE)
 #' label(spec)
+#' @keywords internal
 label <- function(spec) {
   head <- if (!is.null(spec$harmonics)) "TBATS" else "BATS"
   om <- if (spec$use_box_cox) "omega" else "1"
@@ -405,6 +413,7 @@ label <- function(spec) {
 #' theta <- rep(0.1, n_free(spec))
 #' r <- bats_filter(z, spec, theta, x0 = rep(0, n_states(spec)))
 #' str(r, max.level = 1)
+#' @keywords internal
 bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   u <- .unpack(spec, theta)
   alpha <- u$alpha
@@ -517,6 +526,7 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
 #' spec <- BatsSpec()
 #' theta <- rep(0.1, n_free(spec))
 #' fit_seed_state(z, spec, theta)
+#' @keywords internal
 fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
   n <- length(z)
   ns <- n_states(spec)
@@ -579,6 +589,7 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
 #' spec <- BatsSpec()
 #' theta <- rep(0.1, n_free(spec))
 #' state_matrices(spec, theta)
+#' @keywords internal
 state_matrices <- function(spec, theta) {
   ns <- n_states(spec)
   zero <- rep(0, ns)
@@ -616,6 +627,7 @@ state_matrices <- function(spec, theta) {
 #' spec <- BatsSpec()
 #' theta <- rep(0.1, n_free(spec))
 #' spectral_radius(spec, theta)
+#' @keywords internal
 spectral_radius <- function(spec, theta, tol = 1e-6) {
   sm <- state_matrices(spec, theta)
   ns <- length(sm$w)
@@ -639,6 +651,7 @@ spectral_radius <- function(spec, theta, tol = 1e-6) {
 #' spec <- BatsSpec()
 #' theta <- rep(0.1, n_free(spec))
 #' all_eigenvalues(spec, theta)
+#' @keywords internal
 all_eigenvalues <- function(spec, theta) {
   sm <- state_matrices(spec, theta)
   ns <- length(sm$w)
@@ -662,6 +675,7 @@ all_eigenvalues <- function(spec, theta) {
 #' spec <- BatsSpec()
 #' theta <- rep(0.1, n_free(spec))
 #' is_forecastable(spec, theta)
+#' @keywords internal
 is_forecastable <- function(spec, theta, tol = 1e-8) {
   spectral_radius(spec, theta) < 1 - tol
 }
@@ -679,6 +693,7 @@ is_forecastable <- function(spec, theta, tol = 1e-8) {
 #' @export
 #' @examples
 #' concentrated_loglik(y = c(1, 2, 3, 4, 5, 6, 7, 8), resid = c(1, 2, 3, 4, 5, 6, 7, 8), omega = 5L)
+#' @keywords internal
 concentrated_loglik <- function(y, resid, omega) {
   n <- length(resid)
   sse <- sum(resid^2)

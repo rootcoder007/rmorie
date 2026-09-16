@@ -252,6 +252,7 @@
 #' ks <- morie_secaead_chacha20_block(key, 1, nonce)
 #' stopifnot(ks[1] == 0x10, ks[2] == 0xf1, ks[3] == 0xe7)
 #' head(ks, 8)
+#' @keywords internal
 morie_secaead_chacha20_block <- function(key, counter, nonce, rounds = 20) {
   # One 64-byte keystream block. The permuted state is ADDED to the
   # original, which is what stops the block function being invertible.
@@ -303,6 +304,7 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds = 20) {
 #' ct <- morie_secaead_chacha20(key, 1, nonce, pt)
 #' stopifnot(ct[1] == 0x6e, ct[2] == 0x2e, ct[3] == 0x35, ct[4] == 0x9a)
 #' head(ct, 8)
+#' @keywords internal
 morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   # XOR the data with the keystream from counter onward.
   d <- .secaead_as_bytes(data)
@@ -572,6 +574,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' tag <- morie_secaead_poly1305_mac(msg, key)
 #' stopifnot(tag[1] == 0xa8, tag[2] == 0x06, tag[3] == 0x1d, tag[4] == 0xc1)
 #' tag
+#' @keywords internal
 morie_secaead_poly1305_mac <- function(message, key) {
   # The one-time authenticator over 2^130 - 5. key is 32 bytes: the
   # low 16 become r (clamped) and the high 16 become s.
@@ -621,6 +624,7 @@ morie_secaead_poly1305_mac <- function(message, key) {
 #' otk <- morie_secaead_poly1305_key_gen(key, nonce)
 #' stopifnot(otk[1] == 0x8a, otk[2] == 0xd5)
 #' head(otk, 8)
+#' @keywords internal
 morie_secaead_poly1305_key_gen <- function(key, nonce) {
   # Block 0 gives the one-time key; the message starts at 1.
   morie_secaead_chacha20_block(key, 0, nonce)[1:32]
@@ -709,6 +713,7 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' r <- morie_secaead_aead_encrypt(key, nonce, pt, aad)
 #' stopifnot(substr(r$tag_hex, 1, 8) == "1ae10b59")
 #' r$tag_hex
+#' @keywords internal
 morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad = NULL) {
   # Encrypt from counter 1, then authenticate AAD and ciphertext.
   otk <- morie_secaead_poly1305_key_gen(key, nonce)
@@ -755,6 +760,7 @@ morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad = NULL) {
 #' dec <- morie_secaead_aead_decrypt(key, nonce, enc$ciphertext, enc$tag, aad)
 #' stopifnot(dec$valid, identical(as.raw(dec$plaintext), pt))
 #' rawToChar(as.raw(dec$plaintext))
+#' @keywords internal
 morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
                                        aad = NULL) {
   # Verify FIRST, in constant time, and return nothing on failure.
@@ -787,6 +793,7 @@ morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
 #' @export
 #' @examples
 #' morie_secaead_cheatsheet()
+#' @keywords internal
 morie_secaead_cheatsheet <- function() {
   paste0(
     "secaead: a stream cipher alone lets an attacker flip a ",

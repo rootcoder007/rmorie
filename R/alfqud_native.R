@@ -122,6 +122,7 @@
 #' @param instr A list of the operation and its two locations.
 #' @return The state after the instruction.
 #' @export
+#' @keywords internal
 morie_alfqud_step <- function(st, instr) {
   op <- instr[[1]]
   if (!(op %in% .alfqud_ops)) stop("unknown instruction: ", op)
@@ -152,6 +153,7 @@ morie_alfqud_step <- function(st, instr) {
 #' @param n_reg How many registers.
 #' @return The memory the program leaves behind.
 #' @export
+#' @keywords internal
 morie_alfqud_run <- function(program, x, n_reg) {
   st <- list(
     mem = as.numeric(x), reg = rep(0, as.integer(n_reg)),
@@ -185,6 +187,7 @@ morie_alfqud_run <- function(program, x, n_reg) {
 #'         0), list("M", 1)))
 #' SOLN <- ACTS[1:4]
 #' morie_alfqud_correctness(SOLN, IN, TGT, 1L)
+#' @keywords internal
 morie_alfqud_correctness <- function(program, inputs, targets, n_reg) {
   got <- 0L
   for (q in seq_along(inputs)) {
@@ -208,6 +211,7 @@ morie_alfqud_correctness <- function(program, inputs, targets, n_reg) {
 #' @export
 #' @examples
 #' morie_alfqud_actions(n_mem = c(1, 2, 3, 4, 5, 6, 7, 8), n_reg = 5L)
+#' @keywords internal
 morie_alfqud_actions <- function(n_mem, n_reg) {
   locs <- list()
   for (i in 0:(as.integer(n_mem) - 1L)) {
@@ -245,6 +249,7 @@ morie_alfqud_actions <- function(n_mem, n_reg) {
 #'         0), list("M", 1)))
 #' SOLN <- ACTS[1:4]
 #' morie_alfqud_text(SOLN)
+#' @keywords internal
 morie_alfqud_text <- function(program) {
   if (!length(program)) {
     return("")
@@ -444,6 +449,7 @@ morie_alfqud_text <- function(program) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_alfqud(V)
+#' @keywords internal
 morie_alfqud <- function(target, action_space = NULL, reward_fn = NULL,
                          n_reg = 2L, max_len = 3L, latency_weight = 0,
                          search = "mcts", n_sim = 400L, c_puct = 1.25,
@@ -504,6 +510,7 @@ morie_alfqud <- function(target, action_space = NULL, reward_fn = NULL,
 #' @export
 #' @examples
 #' morie_alfqud_cheatsheet()
+#' @keywords internal
 morie_alfqud_cheatsheet <- function() {
   paste0(
     "alfqud: AlphaDev AssemblyGame. Programs of mov/cmp/cmovl/",

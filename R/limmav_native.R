@@ -649,6 +649,7 @@
 #' \code{lib_sizes}, \code{weighted}, \code{n_genes}, \code{n_samples}, \code{note},
 #' \code{method}.
 #' @export
+#' @keywords internal
 morie_limmav <- function(counts, design, contrast = NULL, lib_sizes = NULL,
                          span = 0.5, weights = TRUE, moderate = TRUE) {
   if (is.matrix(design)) {

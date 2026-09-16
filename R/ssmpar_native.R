@@ -61,6 +61,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' sequential_scan(V)
+#' @keywords internal
 sequential_scan <- function(pairs, x0 = 0.0) {
   # The recurrence as written: L steps, no parallelism.
   n <- length(pairs)
@@ -128,6 +129,7 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' parallel_scan(V)
+#' @keywords internal
 parallel_scan <- function(pairs, x0 = 0.0) {
   # Blelloch scan over the affine composition.
   # Same states as sequential_scan, O(log L) depth.
@@ -192,6 +194,7 @@ parallel_scan <- function(pairs, x0 = 0.0) {
 #' @export
 #' @examples
 #' check_associativity(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 check_associativity <- function(a, b, c, tol = 1e-12) {
   # Test (a o b) o c == a o (b o c) directly.
   left <- .ssmpar_compose(.ssmpar_compose(a, b), c)
@@ -215,6 +218,7 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 #' @export
 #' @examples
 #' scan_depth(length = 5L)
+#' @keywords internal
 scan_depth <- function(length) {
   # Sequential against parallel depth.
   n <- as.integer(length)

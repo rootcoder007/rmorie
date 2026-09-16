@@ -98,6 +98,7 @@
 #' @export
 #' @examples
 #' phmmsr_striped_layout(length = 5L)
+#' @keywords internal
 phmmsr_striped_layout <- function(length, vector_width = 4) {
   L <- as.integer(length)
   w <- as.integer(vector_width)
@@ -136,6 +137,7 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' phmmsr_msv_score(V, V)
+#' @keywords internal
 phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
   s <- as.list(seq)
   P <- .phmmsr_to_matrix(profile)
@@ -190,6 +192,7 @@ phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 phmmsr_gumbel_pvalue <- function(score, mu, lam) {
   l <- as.numeric(lam)
   if (l <= 0) {
@@ -218,6 +221,7 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' phmmsr_sparse_rescale(V)
+#' @keywords internal
 phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
   v <- as.numeric(values)
   if (length(v) == 0L) {
@@ -256,6 +260,7 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' phmmsr_search_pipeline(V, V)
+#' @keywords internal
 phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
                                   mu = 10.0, lam = 0.7, full_score = NULL) {
   passed <- integer(0)
@@ -302,6 +307,7 @@ phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
 #' @export
 #' @examples
 #' phmmsr_cheatsheet()
+#' @keywords internal
 phmmsr_cheatsheet <- function() {
   paste0(
     "phmmsr: profile HMMs are more sensitive and were far slower,",

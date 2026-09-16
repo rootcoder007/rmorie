@@ -36,6 +36,7 @@
 #' @export
 #' @examples
 #' smfd_knot_sequence(0, 1, nseg = 10L, degree = 3L)
+#' @keywords internal
 smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
   nseg   <- as.integer(nseg)
   degree <- as.integer(degree)
@@ -64,6 +65,7 @@ smfd_knot_sequence <- function(xmin, xmax, nseg = 10L, degree = 3L) {
 #' @export
 #' @examples
 #' smfd_bspline_one(x = 5L, k = 3L, degree = 3L, knots = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 smfd_bspline_one <- function(x, k, degree, knots) {
   if (degree == 0L) {
     last <- k == length(knots) - 1L
@@ -97,6 +99,7 @@ smfd_bspline_one <- function(x, k, degree, knots) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' smfd_bspline_basis(V, V)
+#' @keywords internal
 smfd_bspline_basis <- function(x, knots, degree = 3L) {
   degree <- as.integer(degree)
   p <- length(knots) - degree - 1L
@@ -125,6 +128,7 @@ smfd_bspline_basis <- function(x, knots, degree = 3L) {
 #' @export
 #' @examples
 #' smfd_difference_matrix(10L, order = 2L)
+#' @keywords internal
 smfd_difference_matrix <- function(p, order = 2L) {
   p     <- as.integer(p)
   order <- as.integer(order)
@@ -172,6 +176,7 @@ smfd_difference_matrix <- function(p, order = 2L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_smfd(V, V)
+#' @keywords internal
 morie_smfd <- function(x, y, nseg = 10L, degree = 3L, lam = 1.0,
                        order = 2L, weights = NULL) {
   x <- as.numeric(x)

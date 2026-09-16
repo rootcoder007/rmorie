@@ -73,6 +73,7 @@
 #' @export
 #' @examples
 #' morie_ddpest_dependence_kind("single_weights")
+#' @keywords internal
 morie_ddpest_dependence_kind <- function(kind) {
   if (!(kind %in% .MORIE_DDPEST_KINDS))
     stop(sprintf("ddpest: kind must be one of %s, got %s",
@@ -107,6 +108,7 @@ morie_ddpest_dependence_kind <- function(kind) {
 #' r <- morie_ddpest_single_weights(xs = c(0, 1), alpha = 1, K = 5,
 #'                                  atom_fn = function(x, h) h + 0.1 * x)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_ddpest_single_weights <- function(xs, alpha, K, atom_fn,
                                         seed = 0) {
   e <- .ghc_rng(seed)
@@ -151,6 +153,7 @@ morie_ddpest_single_weights <- function(xs, alpha, K, atom_fn,
 #'                                weight_fn = function(x, h)
 #'                                  exp(-abs(h - 2 * x)))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_ddpest_single_atoms <- function(xs, alpha, K, weight_fn,
                                       atom_sampler = NULL,
                                       seed = 0) {
@@ -193,6 +196,7 @@ morie_ddpest_single_atoms <- function(xs, alpha, K, weight_fn,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_ddpest_check_marginals(V)
+#' @keywords internal
 morie_ddpest_check_marginals <- function(G, tol = 1e-9) {
   tol <- as.numeric(tol)
   bad <- list()
@@ -223,6 +227,7 @@ morie_ddpest_check_marginals <- function(G, tol = 1e-9) {
 #'                                weight_fn = function(x, h)
 #'                                  exp(-abs(h - 2 * x)))$G
 #' morie_ddpest_correlation(G, 0, 1, region = function(a) a <= 2)
+#' @keywords internal
 morie_ddpest_correlation <- function(G, x1, x2, region) {
   if (!(as.character(x1) %in% names(G)) ||
       !(as.character(x2) %in% names(G)))
@@ -267,6 +272,7 @@ morie_ddpest_correlation <- function(G, x1, x2, region) {
 #' r <- morie_ddpest_predict_density(G, 0, grid = seq(-1, 5, by = 0.5),
 #'                                   kernel = function(y, a) dnorm(y - a))
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_ddpest_predict_density <- function(G, x, grid, kernel) {
   if (!(as.character(x) %in% names(G)))
     stop(sprintf("ddpest: no measure at x = %s",
@@ -293,6 +299,7 @@ morie_ddpest_predict_density <- function(G, x, grid, kernel) {
 #' @export
 #' @examples
 #' morie_ddpest_cheatsheet()
+#' @keywords internal
 morie_ddpest_cheatsheet <- function() {
   paste("ddpest: one G for all x ignores the covariate; an",
         "independent DP per x borrows no strength. The DDP writes",
@@ -323,6 +330,7 @@ morie_ddpest_cheatsheet <- function() {
 #' r <- morie_ddpest("single_weights", xs = c(0, 1), alpha = 1, K = 5,
 #'                   atom_fn = function(x, h) h + 0.1 * x)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_ddpest <- function(method, ...) {
   method <- as.character(method)
   ops <- list(dependence_kind = morie_ddpest_dependence_kind,

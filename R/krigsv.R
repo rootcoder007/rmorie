@@ -74,10 +74,10 @@
   c(c0 = c0, c = cc, wss = sum(w * (y - c0 - cc * x)^2))
 }
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_variogram_fit(V, V)
+#' @keywords internal
 morie_variogram_fit <- function(coords, values, model = "exponential",
                                 n_bins = 15, max_dist = NULL) {
   ev <- .sp_empirical_variogram(coords, values, n_bins, max_dist)

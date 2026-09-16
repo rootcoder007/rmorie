@@ -246,6 +246,7 @@
 #' @examples
 #' z <- .karpv_fnode("%", list(.karpv_tnode(1), .karpv_tnode(0)))
 #' morie_karpV_evaluate(z, list())
+#' @keywords internal
 morie_karpV_evaluate <- function(node, env) {
   if (.karpv_is_term(node)) {
     t <- node$term
@@ -267,6 +268,7 @@ morie_karpV_evaluate <- function(node, env) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_karpV_depth(D)
+#' @keywords internal
 morie_karpV_depth <- function(node) {
   if (.karpv_is_term(node)) return(1L)
   1L + max(vapply(node$args, morie_karpV_depth, integer(1)))
@@ -280,6 +282,7 @@ morie_karpV_depth <- function(node) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_karpV_size(D)
+#' @keywords internal
 morie_karpV_size <- function(node) {
   if (.karpv_is_term(node)) return(1L)
   1L + sum(vapply(node$args, morie_karpV_size, integer(1)))
@@ -293,6 +296,7 @@ morie_karpV_size <- function(node) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_karpV_to_string(D)
+#' @keywords internal
 morie_karpV_to_string <- function(node) {
   if (.karpv_is_term(node)) {
     t <- node$term
@@ -366,6 +370,7 @@ morie_karpV_to_string <- function(node) {
 #' @examples
 #' morie_karpV_ramped(.karpv_rng(3), 60L, rmorie:::.KARPV_FUNCTIONS, "x",
 #'     c(-5, 5), 6L)
+#' @keywords internal
 morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
   span <- max_depth - 1L
   lapply(seq_len(n), function(i) {
@@ -510,6 +515,7 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #'     list(.karpv_tnode("x"), .karpv_tnode("x"))), .karpv_tnode("x"))),
 #'     .karpv_tnode(1)))
 #' morie_karpV_raw_fitness(t, QUAD, "x")
+#' @keywords internal
 morie_karpV_raw_fitness <- function(node, cases, terminals) {
   errs <- numeric(length(cases))
   for (i in seq_along(cases)) {
@@ -529,6 +535,7 @@ morie_karpV_raw_fitness <- function(node, cases, terminals) {
 #' @export
 #' @examples
 #' morie_karpV_adjusted(raw = 5L)
+#' @keywords internal
 morie_karpV_adjusted <- function(raw) if (!is.finite(raw)) 0 else 1 / (1 + raw)
 
 #' .karpv_roulette
@@ -578,6 +585,7 @@ morie_karpV_adjusted <- function(raw) if (!is.finite(raw)) 0 else 1 / (1 + raw)
 #'   best_size, best_depth, generation_found, history, evaluations,
 #'   generations, pop_size, seed and method.
 #' @export
+#' @keywords internal
 morie_karpV <- function(fitness = NULL, ops = NULL, gens = 20L,
                         cases = NULL, terminals = "x", functions = NULL,
                         erc = c(-5, 5), pop_size = 100L,

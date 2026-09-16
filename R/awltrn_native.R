@@ -130,6 +130,7 @@
 #' A <- sample(c(-1, 1), n, replace = TRUE)
 #' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
 #' owl_weights(R, A, H)
+#' @keywords internal
 owl_weights <- function(R, A, H, propensity = NULL, shift = NULL) {
   chk <- .awltrn_check(R, A, H, propensity)
   r <- chk$r
@@ -185,6 +186,7 @@ owl_weights <- function(R, A, H, propensity = NULL, shift = NULL) {
 #' A <- sample(c(-1, 1), n, replace = TRUE)
 #' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
 #' aol_weights(R, A, H)
+#' @keywords internal
 aol_weights <- function(R, A, H, propensity = NULL, prognostic = NULL,
                         ridge = 1e-8) {
   chk <- .awltrn_check(R, A, H, propensity)
@@ -233,6 +235,7 @@ aol_weights <- function(R, A, H, propensity = NULL, prognostic = NULL,
 #' @export
 #' @examples
 #' weighted_rule(H = 0.5, labels = 5L, weights = 5L)
+#' @keywords internal
 weighted_rule <- function(H, labels, weights, ridge = 1e-6) {
   Hm <- .awltrn_to_Hm(H, length(labels))
   n <- nrow(Hm)
@@ -269,6 +272,7 @@ weighted_rule <- function(H, labels, weights, ridge = 1e-6) {
 #' A <- sample(c(-1, 1), n, replace = TRUE)
 #' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
 #' regimen_value(R, A, H, rule = function(h) if (h[1] > 0) 1 else -1)
+#' @keywords internal
 regimen_value <- function(R, A, H, rule, propensity = NULL) {
   chk <- .awltrn_check(R, A, H, propensity)
   r <- chk$r
@@ -317,6 +321,7 @@ regimen_value <- function(R, A, H, rule, propensity = NULL) {
 #' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
 #' r <- fit_aol(R, A, H)
 #' str(r, max.level = 1)
+#' @keywords internal
 fit_aol <- function(R, A, H, propensity = NULL, method = "aol",
                     prognostic = NULL, shift = NULL, ridge = 1e-6) {
   if (!(method %in% c("aol", "owl")))
@@ -365,6 +370,7 @@ fit_aol <- function(R, A, H, propensity = NULL, method = "aol",
 #' R2 <- 1 + A2 * H2[, 1] + rnorm(n, 0, 0.3)
 #' r <- fit_stages(list(list(R1, A1, H1), list(R2, A2, H2)))
 #' str(r, max.level = 1)
+#' @keywords internal
 fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
   if (length(stages) == 0L)
     stop("awltrn: no stages given")
@@ -461,6 +467,7 @@ fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
 #' R <- 1 + A * H[, 1] + rnorm(n, 0, 0.3)
 #' r <- morie_awltrn(R, A, H, method = "aol")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_awltrn <- function(R = NULL, A = NULL, H = NULL,
                           propensity = NULL, method = "aol",
                           prognostic = NULL, shift = NULL,

@@ -31,6 +31,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ess(V)
+#' @keywords internal
 ess <- function(weights) {
   tot <- sum(weights)
   if (tot <= 0)
@@ -78,6 +79,7 @@ ess <- function(weights) {
 #' @export
 #' @examples
 #' resample(weights = 5L, rng = list(a = 1, b = 2))
+#' @keywords internal
 resample <- function(weights, rng, scheme = "systematic") {
   tot <- sum(weights)
   if (tot <= 0)
@@ -145,6 +147,7 @@ resample <- function(weights, rng, scheme = "systematic") {
 #' @export
 #' @examples
 #' temperature_ladder(n_steps = 5L)
+#' @keywords internal
 temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
   n <- as.integer(n_steps)
   if (n < 2L)
@@ -208,6 +211,7 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 #' @export
 #' @examples
 #' random_walk_kernel()
+#' @keywords internal
 random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
   .smcsam_rwk(scale, n_moves)
 }
@@ -238,6 +242,7 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #' \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule},
 #' \code{method}.
 #' @export
+#' @keywords internal
 smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
                    n_steps = 20L, kernel = NULL, ess_threshold = 0.5,
                    scheme = "systematic", seed = 0L, weight_rule = "mcmc",

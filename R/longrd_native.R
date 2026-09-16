@@ -74,6 +74,7 @@
 #' @export
 #' @examples
 #' morie_longrd_align("ACGTACGT", "ACGAACGT")
+#' @keywords internal
 morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
                                gap = -2) {
   av <- if (nchar(a)) strsplit(a, "")[[1]] else character(0)
@@ -128,6 +129,7 @@ morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
 #' @export
 #' @examples
 #' morie_longrd_rle("AAACCGTT")
+#' @keywords internal
 morie_longrd_rle <- function(seq) {
   if (!nchar(seq)) return(list())
   v <- strsplit(seq, "")[[1]]
@@ -151,6 +153,7 @@ morie_longrd_rle <- function(seq) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_longrd_unrle(D)
+#' @keywords internal
 morie_longrd_unrle <- function(runs) {
   if (!length(runs)) return("")
   paste(vapply(runs, function(r)
@@ -176,6 +179,7 @@ morie_longrd_unrle <- function(runs) {
 #' DRAFT <- "ACGTTTGACCA"
 #' READS <- c(TRUTH, TRUTH, TRUTH, "ACGTTTTGACGA", TRUTH)
 #' morie_longrd_pileup(DRAFT, READS)
+#' @keywords internal
 morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
                                 gap = -2) {
   n <- nchar(draft)
@@ -270,6 +274,7 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_longrd_poa(V)
+#' @keywords internal
 morie_longrd_poa <- function(reads, match = 1, mismatch = -1, gap = -2,
                              sort_reads = TRUE) {
   rs <- as.character(reads)
@@ -308,6 +313,7 @@ morie_longrd_poa <- function(reads, match = 1, mismatch = -1, gap = -2,
 #' @export
 #' @examples
 #' morie_longrd(assembly = 5L, reads = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_longrd <- function(assembly, reads, method = "pileup",
                          min_depth = 3L, min_frac = 0.5,
                          ins_frac = 0.5, match = 1, mismatch = -1,
@@ -383,6 +389,7 @@ morie_longrd <- function(assembly, reads, method = "pileup",
 #' @export
 #' @examples
 #' morie_longrd_cheatsheet()
+#' @keywords internal
 morie_longrd_cheatsheet <- function()
   paste0("longrd: long-read consensus polishing. Needleman-Wunsch ",
          "pileup with a column majority, or a progressive ",

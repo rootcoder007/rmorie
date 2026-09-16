@@ -97,6 +97,7 @@
 #' set.seed(1)
 #' X <- matrix(rnorm(6), 3, 2)
 #' morie_hyper2_kernel(X, X, log_ls = 0, log_sf = 0)
+#' @keywords internal
 morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
                                 kind = "squared_exponential") {
   if (!(kind %in% .HYPER2_KERNELS))
@@ -151,6 +152,7 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
 #' @param kind Kernel name.
 #' @return The log marginal likelihood.
 #' @export
+#' @keywords internal
 morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
   n <- length(y)
   K <- .hyper2_jit(morie_hyper2_kernel(X, X, log_ls, log_sf, kind),
@@ -205,6 +207,7 @@ morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
 #' e <- rmorie:::.ghc_rng(11)
 #' v <- 0
 #' morie_hyper2_slice(function(v) -0.5 * v * v, xs, e, 1, 10L)
+#' @keywords internal
 morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
   ly <- logf(x0) + log(.ghc_unif(e, 1L))
   u <- .ghc_unif(e, 1L)
@@ -286,6 +289,7 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
 #' X <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
 #' y <- c(1.5, 2.1, 2.9)
 #' morie_hyper2(X, y)
+#' @keywords internal
 morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
                          route = "marginal", n_iter = 200L, burn = NULL,
                          thin = 1L, seed = 1, Xstar = NULL, w = 1,
@@ -494,6 +498,7 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
 #' @export
 #' @examples
 #' morie_hyper2_cheatsheet()
+#' @keywords internal
 morie_hyper2_cheatsheet <- function()
   paste0("hyper2: GP hyperparameter MCMC. kernels ",
          paste(.HYPER2_KERNELS, collapse = ", "), "; routes ",

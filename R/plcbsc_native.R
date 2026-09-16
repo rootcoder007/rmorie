@@ -193,6 +193,7 @@
 #' \code{placebo}, \code{pvalue}, \code{rank}, \code{n_donors}, \code{t0},
 #' \code{statistic}, \code{rmspe_pre}, \code{rmspe_post}, \code{note}, \code{method}.
 #' @export
+#' @keywords internal
 morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
                          x_donors = NULL, v = NULL,
                          statistic = "effect", ...) {

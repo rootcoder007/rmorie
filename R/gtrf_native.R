@@ -29,6 +29,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' laplacian(V, V)
+#' @keywords internal
 laplacian <- function(adj, n, normalized = TRUE) {
   N <- as.integer(n)
   A <- matrix(0, nrow = N, ncol = N)
@@ -66,6 +67,7 @@ laplacian <- function(adj, n, normalized = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' laplacian_positional_encoding(V, V)
+#' @keywords internal
 laplacian_positional_encoding <- function(adj, n, dim = 2L,
                                            normalized = TRUE) {
   L <- laplacian(adj, n, normalized)
@@ -91,6 +93,7 @@ laplacian_positional_encoding <- function(adj, n, dim = 2L,
 #' @export
 #' @examples
 #' random_sign_flip(pe = c(1, 2, 3, 4, 5, 6, 7, 8), rng = list(a = 1, b = 2))
+#' @keywords internal
 random_sign_flip <- function(pe, rng) {
   pe <- as.matrix(pe)
   storage.mode(pe) <- "double"
@@ -141,6 +144,7 @@ random_sign_flip <- function(pe, rng) {
 #'             "2" = c("0" = 1, "1" = 1))
 #' W <- matrix(rnorm(4), 2, 2)
 #' morie_gtrf_sparse_attention(H, adj, W, W, W)
+#' @keywords internal
 morie_gtrf_sparse_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
   H <- as.matrix(H)
   storage.mode(H) <- "double"
@@ -202,6 +206,7 @@ morie_gtrf_sparse_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
 #' W1 <- matrix(rnorm(8), 4, 2)
 #' W2 <- matrix(rnorm(8), 2, 4)
 #' graph_transformer_layer(H, adj, W, W, W, W1, W2)
+#' @keywords internal
 graph_transformer_layer <- function(H, adj, WQ, WK, WV, W1, W2,
                                     edge_bias = NULL,
                                     norm = "batch") {

@@ -202,6 +202,7 @@
 #' @examples
 #' morie_miprgr_solve_relaxation(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   c = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
                                           n = NULL,
                                           maximise = TRUE,
@@ -278,6 +279,7 @@ morie_miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_miprgr_fractional_variable(V, V)
+#' @keywords internal
 morie_miprgr_fractional_variable <- function(x, integer_vars,
                                               tol = .GHC_MIP_EPS) {
   best <- NA_integer_
@@ -304,6 +306,7 @@ morie_miprgr_fractional_variable <- function(x, integer_vars,
 #' @examples
 #' morie_miprgr_round_relaxation(x = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   b = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_miprgr_round_relaxation <- function(x, A, b, integer_vars) {
   xr <- as.numeric(x)
   for (j in as.integer(integer_vars)) xr[j] <- round(xr[j])
@@ -325,6 +328,7 @@ morie_miprgr_round_relaxation <- function(x, A, b, integer_vars) {
 #' @param upper Inclusive upper bound of every variable.
 #' @return A list with value, x, note.
 #' @export
+#' @keywords internal
 morie_miprgr_enumerate_integer <- function(A, b, c, integer_vars,
                                             upper = 10,
                                             maximise = TRUE) {
@@ -372,6 +376,7 @@ morie_miprgr_enumerate_integer <- function(A, b, c, integer_vars,
 #' @examples
 #' morie_miprgr_branch_and_bound(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   c = c(1, 2, 3, 4, 5, 6, 7, 8), integer_vars = c("a", "b", "c"))
+#' @keywords internal
 morie_miprgr_branch_and_bound <- function(A, b, c, integer_vars,
                                           maximise = TRUE,
                                           prune = TRUE,

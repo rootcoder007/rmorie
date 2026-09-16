@@ -24,6 +24,7 @@
 #' @examples
 #' metapath_neighbours(edges = c(1, 2, 3, 4, 5, 6, 7, 8), types = c("a", "b", "c"),
 #'   metapath = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 metapath_neighbours <- function(edges, types, metapath) {
   mp <- as.character(metapath)
   if (length(mp) < 2L) {
@@ -76,6 +77,7 @@ metapath_neighbours <- function(edges, types, metapath) {
 #' H <- list(`1` = rnorm(d), `2` = rnorm(d), `3` = rnorm(d))
 #' r <- node_attention(H[["1"]], c("2", "3"), H, a_vec, W)
 #' c(length(r$embedding), length(r$alpha))
+#' @keywords internal
 node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
   proj <- function(x) as.numeric(W %*% as.numeric(x))
   hi <- proj(h_i)
@@ -121,6 +123,7 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
 #' @examples
 #' semantic_attention(Z_per_metapath = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), W = 5L,
 #'   b = 5L, q = 0.5)
+#' @keywords internal
 semantic_attention <- function(Z_per_metapath, W, b, q) {
   names_v <- sort(names(Z_per_metapath))
   if (length(names_v) == 0L) {
@@ -181,6 +184,7 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 #' r <- han_forward(H, edges, types, metapaths, a_vec, W_node,
 #'                  W_sem, b_sem, q_sem)
 #' dim(r$embeddings)
+#' @keywords internal
 han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
                         W_sem, b_sem, q_sem, slope = 0.2) {
   if (is.matrix(H)) {
@@ -260,6 +264,7 @@ heterogeneous_gnn <- han_forward
 #' r <- morie_hetgnn(H, edges, types, metapaths, a_vec, W_node,
 #'                   W_sem, b_sem, q_sem)
 #' nrow(r$embeddings)
+#' @keywords internal
 morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
                          W_sem, b_sem, q_sem, slope = 0.2) {
   han_forward(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem,

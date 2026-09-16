@@ -121,6 +121,7 @@
 #' @export
 #' @examples
 #' morie_twoT_tower_embedding(features = 5L, W = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) {
   x <- .twoT_as_vec(features)
   Wm <- .twoT_as_mat(W)
@@ -157,6 +158,7 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
 #' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{corrected}, \code{raw}, \code{shift}, \code{note}.
 #' @export
+#' @keywords internal
 morie_twoT_corrected_logits <- function(scores, probabilities,
                                         temperature = 1.0) {
   s <- .twoT_as_vec(scores)
@@ -212,6 +214,7 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_twoT_streaming_frequency(V, V)
+#' @keywords internal
 morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
                                           init = NULL) {
   a <- as.numeric(alpha)
@@ -260,6 +263,7 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_twoT_batch_softmax_loss(V, V)
+#' @keywords internal
 morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
                                           probabilities = NULL,
                                           temperature = 0.05) {
@@ -311,6 +315,7 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_twoT_retrieve(V, V)
+#' @keywords internal
 morie_twoT_retrieve <- function(query_embedding, item_embeddings,
                                 probabilities = NULL, top_k = 5,
                                 temperature = 1.0) {
@@ -348,6 +353,7 @@ morie_twoT_retrieve <- function(query_embedding, item_embeddings,
 #' @export
 #' @examples
 #' morie_twoT_cheatsheet()
+#' @keywords internal
 morie_twoT_cheatsheet <- function() {
   paste("twoT: a softmax over millions of items is impossible, so ",
         "use IN-BATCH negatives -- which are drawn from the ",

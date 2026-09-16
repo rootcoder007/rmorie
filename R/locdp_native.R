@@ -72,6 +72,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_locdp(V)
+#' @keywords internal
 morie_locdp <- function(x, epsilon = 1.0, seed = NULL) {
   if (!is.numeric(epsilon) || length(epsilon) != 1L ||
       is.na(epsilon) || epsilon < 0) {
@@ -121,6 +122,7 @@ morie_localdp  <- morie_locdp
 #' @export
 #' @examples
 #' morie_locdp_cheatsheet()
+#' @keywords internal
 morie_locdp_cheatsheet <- function() {
   "locdp: local DP randomized response (alias of rrand.randomized_response)."
 }

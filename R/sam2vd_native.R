@@ -97,6 +97,7 @@
 #' @export
 #' @examples
 #' morie_sam2vd_memory_bank()
+#' @keywords internal
 morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
   N <- as.integer(n_recent)
   M <- as.integer(m_prompted)
@@ -126,6 +127,7 @@ morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
 #' @param object_pointer Optional; may be \code{NULL}. Passed to \code{.sam2vd_to_num}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @keywords internal
 morie_sam2vd_push_memory <- function(bank, frame_index, features,
                                     prompted = FALSE, object_pointer = NULL) {
   b <- bank
@@ -182,6 +184,7 @@ morie_sam2vd_push_memory <- function(bank, frame_index, features,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_sam2vd_temporal_embedding(D, V)
+#' @keywords internal
 morie_sam2vd_temporal_embedding <- function(entry, current_frame,
                                             dim = NULL, scale = 0.1) {
   v <- entry$features
@@ -227,6 +230,7 @@ morie_sam2vd_temporal_embedding <- function(entry, current_frame,
 #' morie_sam2vd_memory_attention(frame_features = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   bank = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
 #'   current_frame = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
                                           n_blocks = 1, include_pointers = TRUE) {
   x <- .sam2vd_to_num(frame_features)
@@ -301,6 +305,7 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
 #' @return A list with \code{estimate}, \code{masks}, \code{conditioned},
 #' \code{n_frames}, \code{first_frame_is_sam}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
                                    n_recent = 7, m_prompted = 1) {
   P <- if (is.null(prompts)) list() else prompts
@@ -351,6 +356,7 @@ morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
 #' @export
 #' @examples
 #' morie_sam2vd_cheatsheet()
+#' @keywords internal
 morie_sam2vd_cheatsheet <- function() {
   paste0(
     "sam2vd: video is the same objects deforming, occluding ",

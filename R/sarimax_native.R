@@ -82,6 +82,7 @@ ROOT_TOL <- 1.001
 #' @export
 #' @examples
 #' profile_beta(wy = 5L, wX = 5L)
+#' @keywords internal
 profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
                          filter = "exact") {
   n <- length(wy)
@@ -291,6 +292,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #'   V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #'   aic(V, V)
 #' }
+#' @keywords internal
 aic <- function(loglik, n_par) {
   -2.0 * as.numeric(loglik) + 2.0 * as.integer(n_par)
 }
@@ -308,6 +310,7 @@ aic <- function(loglik, n_par) {
 #' @export
 #' @examples
 #' aicc(loglik = c(1, 2, 3, 4, 5, 6, 7, 8), n_par = 5L, n = 5L)
+#' @keywords internal
 aicc <- function(loglik, n_par, n) {
   k <- as.integer(n_par)
   n <- as.integer(n)
@@ -326,6 +329,7 @@ aicc <- function(loglik, n_par, n) {
 #' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @keywords internal
 starting_models <- function(d, D, s) {
   # Each candidate is a PAIR: the non-seasonal order and the seasonal
   # one. Returning only the first half made the seasonal branch
@@ -360,6 +364,7 @@ starting_models <- function(d, D, s) {
 #' set.seed(1)
 #' r <- neighbours(order = rnorm(10), seasonal_order = rnorm(10), constant = rnorm(10), s = rnorm(10))
 #' TRUE
+#' @keywords internal
 neighbours <- function(order, seasonal_order, constant, s) {
   p <- order[1]
   d <- order[2]
@@ -436,6 +441,7 @@ neighbours <- function(order, seasonal_order, constant, s) {
 #' y <- as.numeric(stats::arima.sim(list(ar = 0.6), n = 60))
 #' auto_order(y, max_steps = 4)$order
 #' }
+#' @keywords internal
 auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
                        max_steps = 20) {
   d <- as.integer(d)
@@ -538,6 +544,7 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 #' @param ... Passed through.
 #' @return The value of \code{.sarimax_fit}.
 #' @export
+#' @keywords internal
 morie_sarimax <- function(...) {
   .sarimax_fit(...)
 }

@@ -103,6 +103,7 @@
 #' @export
 #' @examples
 #' substitution_matrix(t = 5L)
+#' @keywords internal
 substitution_matrix <- function(t, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   t <- as.numeric(t)
@@ -191,6 +192,7 @@ substitution_matrix <- function(t, pi = NULL, u = 1.0) {
 #' @examples
 #' site_likelihood(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"),
 #'   site = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   L <- .phylml_prune(tree, site, p, u, seqs)
@@ -212,6 +214,7 @@ site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
 #' @export
 #' @examples
 #' morie_phylml(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"))
+#' @keywords internal
 morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
   p <- .phylml_pi(pi)
   if (!(is.list(seqs) || is.character(seqs)) || length(seqs) == 0) {
@@ -272,6 +275,7 @@ morie_phylml <- function(tree, seqs, pi = NULL, u = 1.0) {
 #' @param max_iter Passed to \code{:}. Defaults to \code{200}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi = 10.0,
                             tol = 1e-10, max_iter = 200) {
   if (!is.function(make_tree)) {

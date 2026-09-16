@@ -90,6 +90,7 @@
 #' morie_varqc1_hard(records = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
 #'   fields = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
 #'   thresholds = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_varqc1_hard <- function(records, fields, thresholds) {
   n <- nrow(records)
   out <- character(n)
@@ -124,6 +125,7 @@ morie_varqc1_hard <- function(records, fields, thresholds) {
 #' @param chols Component Cholesky factors, a list of matrices.
 #' @return The log density.
 #' @export
+#' @keywords internal
 morie_varqc1_logpdf <- function(x, weights, means, chols) {
   d <- length(x)
   terms <- numeric(length(weights))
@@ -178,6 +180,7 @@ morie_varqc1_logpdf <- function(x, weights, means, chols) {
 #' VCF <- matrix(0, N, 7)
 #' morie_varqc1(VCF, fields = FIELDS, mode = "snp")
 #' morie_varqc1_mixture(X = VCF)
+#' @keywords internal
 morie_varqc1_mixture <- function(X, n_components = 2L, n_iter = 50L, seed = 1,
                                  covariance = "full", min_variance = 1e-6,
                                  jitter = 1e-8, shrinkage = 0.05) {
@@ -279,6 +282,7 @@ morie_varqc1_mixture <- function(X, n_components = 2L, n_iter = 50L, seed = 1,
 #' N <- 60L
 #' VCF <- matrix(0, N, 7)
 #' morie_varqc1(VCF, fields = FIELDS, mode = "snp")
+#' @keywords internal
 morie_varqc1 <- function(vcf, thresholds = NULL, fields = NULL, mode = "snp",
                          method = "hard", positive = NULL, negative = NULL,
                          n_components = 2L, n_iter = 50L, seed = 1,
@@ -397,6 +401,7 @@ morie_varqc1 <- function(vcf, thresholds = NULL, fields = NULL, mode = "snp",
 #' @export
 #' @examples
 #' morie_varqc1_cheatsheet()
+#' @keywords internal
 morie_varqc1_cheatsheet <- function()
   paste0("varqc1: variant quality filtering. methods ",
          paste(.VARQC1_METHODS, collapse = ", "), "; covariances ",

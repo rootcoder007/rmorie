@@ -45,6 +45,7 @@
 #' set.seed(1)
 #' models <- list(rnorm(10), rnorm(10), rnorm(10))
 #' caCMIP(models, obs = rnorm(10), sigma_d = 1, sigma_s = 1)
+#' @keywords internal
 caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
   mods <- lapply(models, function(m) as.numeric(m))
   ob <- as.numeric(obs)
@@ -106,6 +107,7 @@ caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cmip_ensemble(V, V)
+#' @keywords internal
 cmip_ensemble <- function(models, weights) {
   mods <- as.numeric(models)
   ws <- as.numeric(weights)
@@ -132,6 +134,7 @@ morie_caCMIP <- caCMIP
 #' @export
 #' @examples
 #' caCMIP_cheatsheet()
+#' @keywords internal
 caCMIP_cheatsheet <- function() {
   "caCMIP: Knutti 2017 performance+independence CMIP weighting"
 }

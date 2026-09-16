@@ -142,6 +142,7 @@ morie_mrm_reconcile <- function(primary, secondary, keys,
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_mrm_reconciliation(D)
 #' @export
+#' @keywords internal
 print.morie_mrm_reconciliation <- function(x, ...) {
   cat("MRM reconciliation\n")
   cat(sprintf("  keys       : %s\n", paste(x$schema$keys,
@@ -305,6 +306,7 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_mrm_effect(D)
 #' @export
+#' @keywords internal
 print.morie_mrm_effect <- function(x, ...) {
   cat(morie_mrm_report(x, format = "text"), sep = "\n")
   invisible(x)

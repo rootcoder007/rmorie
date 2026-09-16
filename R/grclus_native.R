@@ -50,6 +50,7 @@
 #' A <- (A + t(A) > 0) * 1
 #' diag(A) <- 0
 #' morie_grclus(A, k = 2L)
+#' @keywords internal
 morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
                          initial = "gggp", refinement = "bkl",
                          tolerance = 0.03, coarsest = 20L, seed = 17) {

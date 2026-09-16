@@ -138,6 +138,7 @@
 #' @return A list with policy, action, value, visits, Q, prior, and
 #'   bookkeeping.
 #' @export
+#' @keywords internal
 morie_muzero <- function(observation, actions, representation,
                           dynamics, prediction, simulations = 50,
                           gamma = 0.997, c1 = 1.25, c2 = 19652,

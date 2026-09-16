@@ -131,6 +131,7 @@
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_glides_vdw(D)
+#' @keywords internal
 morie_glides_vdw <- function(pairs, m = 6, n = 12) {
   terms <- vapply(pairs, function(p) {
     r <- as.numeric(p[[1]])
@@ -158,6 +159,7 @@ morie_glides_vdw <- function(pairs, m = 6, n = 12) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_glides_coulomb(D)
+#' @keywords internal
 morie_glides_coulomb <- function(pairs, dielectric = "constant",
                                  epsilon = 1) {
   if (!(dielectric %in% .GLIDES_DIELECTRICS))
@@ -189,6 +191,7 @@ morie_glides_coulomb <- function(pairs, dielectric = "constant",
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_glides_lipo(V)
+#' @keywords internal
 morie_glides_lipo <- function(distances, r1 = 4.1, r2 = 7.1) {
   if (r2 <= r1) stop("the outer radius must exceed the inner")
   terms <- vapply(distances, function(r) {
@@ -214,6 +217,7 @@ morie_glides_lipo <- function(distances, r1 = 4.1, r2 = 7.1) {
 #'     0.8), list("charged_charged", 0.6), list("neutral_neutral",
 #'     0.4))
 #' morie_glides_hbond(HBN)
+#' @keywords internal
 morie_glides_hbond <- function(bonds, weights = NULL) {
   w <- .glides_merge(.GLIDES_WEIGHTS, weights)
   by <- as.list(rep(0, length(.GLIDES_HBOND_CLASSES)))
@@ -251,6 +255,7 @@ morie_glides_hbond <- function(bonds, weights = NULL) {
 #' @export
 #' @examples
 #' morie_glides_score()
+#' @keywords internal
 morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
                                metal = 0, buryp = 0, rotb = 0, site = 0,
                                coefficients = NULL, weights = NULL) {
@@ -333,6 +338,7 @@ morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
 #'     0.4))
 #' morie_glides(REC, LIG, RAD, DEP, CHG, LIPS, HBN, metal = 1.2,
 #'     buryp = -0.8, n_rot = 3, site = 0.4)
+#' @keywords internal
 morie_glides <- function(receptor, ligand_pose, radii = list(),
                          depths = list(), charges = list(),
                          lipophilic = character(0), hbonds = list(),
@@ -399,6 +405,7 @@ morie_glides <- function(receptor, ligand_pose, radii = list(),
 #' @export
 #' @examples
 #' morie_glides_cheatsheet()
+#' @keywords internal
 morie_glides_cheatsheet <- function()
   paste0("glides: Glide-style empirical docking score. dielectrics ",
          paste(.GLIDES_DIELECTRICS, collapse = ", "),

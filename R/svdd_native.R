@@ -189,6 +189,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_svdd(V)
+#' @keywords internal
 morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
                         gamma = NULL, degree = 3, coef0 = 1.0,
                         tol = 1e-10, max_iter = 20000) {

@@ -79,6 +79,7 @@
 #' @export
 #' @examples
 #' morie_tlseqsl_cv_folds(50, V = 5, seed = 1)
+#' @keywords internal
 morie_tlseqsl_cv_folds <- function(n, V = 10, seed = 0) {
   if (V < 2 || V > n) {
     stop(sprintf("tlseqsl: V must lie in 2..%d, got %d", n, V))
@@ -127,6 +128,7 @@ morie_tlseqsl_cv_folds <- function(n, V = 10, seed = 0) {
 #'   function(xrow) sum(c(1, xrow) * b)
 #' }
 #' morie_tlseqsl_cv_risk(X, y, algo, V = 5, seed = 1)$risk
+#' @keywords internal
 morie_tlseqsl_cv_risk <- function(X, y, algorithm, V = 10, loss = "squared", seed = 0) {
   if (!(loss %in% .tlseqsl_LOSSES)) {
     stop(sprintf(
@@ -178,6 +180,7 @@ morie_tlseqsl_cv_risk <- function(X, y, algorithm, V = 10, loss = "squared", see
 #' @examples
 #' morie_tlseqsl_discrete_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   y = c(1, 2, 3, 4, 5, 6, 7, 8), library = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tlseqsl_discrete_super_learner <- function(X, y, library, V = 10,
                                                  loss = "squared", seed = 0) {
   if (length(library) == 0) {
@@ -226,6 +229,7 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V = 10,
 #' @examples
 #' morie_tlseqsl_ensemble_super_learner(X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   y = c(1, 2, 3, 4, 5, 6, 7, 8), library = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V = 10,
                                                  loss = "squared", seed = 0,
                                                  grid = 21) {
@@ -310,6 +314,7 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V = 10,
 #' @return A list with \code{estimate}, \code{mean}, \code{sequential_fits}, \code{T},
 #' \code{method}.
 #' @export
+#' @keywords internal
 morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
                                                    T, V = 5, seed = 0) {
   if (T < 1) {
@@ -376,6 +381,7 @@ morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
 #' @export
 #' @examples
 #' morie_tlseqsl_cheatsheet()
+#' @keywords internal
 morie_tlseqsl_cheatsheet <- function() {
   paste0(
     "tlseqsl: no algorithm is best everywhere, so choose by ",

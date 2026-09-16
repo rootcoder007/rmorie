@@ -229,6 +229,7 @@
 #' n_dw <- matrix(rpois(30, 3), 6, 5)
 #' r <- morie_plsa(n_dw, K = 2, iters = 40)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
   chk <- .plsa_check(n_dw)
   N <- chk$N
@@ -352,6 +353,7 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #' n_dw <- matrix(rpois(30, 3), 6, 5)
 #' r <- probabilisticlsa(n_dw, K = 2, iters = 40)
 #' str(r, max.level = 1)
+#' @keywords internal
 probabilisticlsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
   morie_plsa(n_dw, K, iters, tol, seed)
 }
@@ -376,6 +378,7 @@ plsa <- probabilisticlsa
 #' fit <- morie_plsa(n_dw, K = 2, iters = 10)
 #' post <- e_step(n_dw, fit$P_z, fit$P_d_given_z, fit$P_w_given_z)
 #' str(post)
+#' @keywords internal
 e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #' m_step
 #'
@@ -391,6 +394,7 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #' @examples
 #' m_step(n_dw = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   post = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), K = 5L)
+#' @keywords internal
 m_step <- function(n_dw, post, K) .plsa_m_step(n_dw, post, K)
 #' .plsa_log_likelihood
 #'
@@ -421,6 +425,7 @@ log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, 
 #' @examples
 #' joint_probability(Pz = c(1, 2, 3, 4, 5, 6, 7, 8), Pd_z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
 #'   Pw_z = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+#' @keywords internal
 joint_probability <- function(Pz, Pd_z, Pw_z) .plsa_joint_probability(Pz, Pd_z, Pw_z)
 #' perplexity
 #'
@@ -439,5 +444,6 @@ joint_probability <- function(Pz, Pd_z, Pw_z) .plsa_joint_probability(Pz, Pd_z, 
 #' n_dw <- matrix(rpois(30, 3), 6, 5)
 #' fit <- morie_plsa(n_dw, K = 2, iters = 10)
 #' perplexity(n_dw, fit$P_z, fit$P_d_given_z, fit$P_w_given_z)
+#' @keywords internal
 perplexity <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_perplexity(n_dw, Pz, Pd_z, Pw_z)
 .plsa_cheatsheet <- .plsa_cheatsheet

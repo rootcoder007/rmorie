@@ -35,6 +35,7 @@
 #' @export
 #' @examples
 #' morie_crfflt_ideal_weights(p_low = 3, p_high = 6, n = 100)
+#' @keywords internal
 morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
   pl <- as.numeric(p_low)
   pu <- as.numeric(p_high)
@@ -107,6 +108,7 @@ morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_crfflt_cf_filter(V)
+#' @keywords internal
 morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
                                    method = "asymmetric", p = NULL,
                                    drift = TRUE) {
@@ -204,6 +206,7 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_crfflt_frequency_response(V, V)
+#' @keywords internal
 morie_crfflt_frequency_response <- function(weights, omega) {
   w <- as.numeric(weights)
   n <- length(w)

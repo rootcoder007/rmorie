@@ -176,6 +176,7 @@
 #' \code{min_propensity}, \code{max_propensity}, \code{trim}, \code{n}, \code{level},
 #' \code{broken_outcome}, \code{broken_propensity}, \code{method}.
 #' @export
+#' @keywords internal
 morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
                          trim = 0.02, seed = 0, level = 0.95,
                          break_outcome = FALSE, break_propensity = FALSE) {

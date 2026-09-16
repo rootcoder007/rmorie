@@ -5254,6 +5254,7 @@ Math.morie_gvar <- function(x, ...) {
 #' @export
 #' @examples
 #' morie_gvar_relu(.morie_gvar(-1.5))$value
+#' @keywords internal
 morie_gvar_relu <- function(x) {
   .morie_gvar(max(x$value, 0), list(list(x, if (x$value > 0) 1 else 0)), "relu")
 }
@@ -5263,6 +5264,7 @@ morie_gvar_relu <- function(x) {
 #' @export
 #' @examples
 #' morie_gvar_sigmoid(.morie_gvar(0))$value
+#' @keywords internal
 morie_gvar_sigmoid <- function(x) {
   s <- 1 / (1 + exp(-x$value))
   .morie_gvar(s, list(list(x, s * (1 - s))), "sigmoid")

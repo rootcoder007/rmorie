@@ -136,6 +136,7 @@
 #'   expert_log_policy = rnorm(10), policy_states = rnorm(10), policy_actions = rnorm(10),
 #'   policy_next = rnorm(10), policy_log_policy = rnorm(10))
 #' TRUE
+#' @keywords internal
 morie_airl <- function(expert_states, expert_actions, expert_next,
                        expert_log_policy,
                        policy_states, policy_actions, policy_next,
@@ -321,6 +322,7 @@ morie_airl <- function(expert_states, expert_actions, expert_next,
 #'   Rewards with Adversarial Inverse Reinforcement Learning. ICLR.
 #'   arXiv:1710.11248.
 #' @export
+#' @keywords internal
 morie_soft_value_iteration <- function(states, actions, step, reward,
                                        gamma = 0.9, iters = 2000L,
                                        tol = 1e-14) {

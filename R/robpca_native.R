@@ -109,6 +109,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' univariate_mcd(V)
+#' @keywords internal
 univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
   v <- sort(as.numeric(values))
   n <- length(v)
@@ -200,6 +201,7 @@ univariate_mcd <- function(values, h = NULL, consistent = TRUE) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' outlyingness(M)
+#' @keywords internal
 outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
   rows <- .robpca_matrix(X)
   n <- nrow(rows)
@@ -357,6 +359,7 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 #' @param od_cut Passed to \code{>}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 classify_outliers <- function(sd, od, sd_cut, od_cut) {
   n <- length(sd)
   out <- character(n)
@@ -513,6 +516,7 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_robpca(D)
+#' @keywords internal
 morie_robpca <- function(X, k = NULL, alpha = 0.75, kmax = 10L,
                          n_dirs = 250L, n_start = 250L,
                          seed = 17L, reweight = TRUE) {

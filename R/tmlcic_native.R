@@ -172,6 +172,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tmlcic_default_library(V)
+#' @keywords internal
 morie_tmlcic_default_library <- function(p, interactions = TRUE) {
   # The chapter's example library: the unadjusted model, one main term
   # per covariate, and optionally one treatment interaction each. cols
@@ -289,6 +290,7 @@ morie_tmlcic_default_library <- function(p, interactions = TRUE) {
 #' cand <- list(name = "W1", cols = 0L, interact = FALSE)
 #' r <- morie_tmlcic_candidate_tmle(y, A, W, cand, g1 = function(i) 0.5)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows = NULL,
                                         eval_rows = NULL, ridge = 1e-8,
                                         target_step = TRUE) {
@@ -359,6 +361,7 @@ morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows = NULL,
 #'                                     rep(0.5, n), seq_len(n), psi, "SATE")
 #'   head(D)
 #' }
+#' @keywords internal
 morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
                                          target) {
   # Eq. (13.3) for the PATE and eq. (13.4) for the SATE.
@@ -436,6 +439,7 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 #' r <- morie_tmlcic_variance_estimate(D, y, qa, groups, n,
 #'                                     design = "unmatched", target = "SATE")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
                                            target) {
   # The design's variance estimator. Returns list(var, info).
@@ -580,6 +584,7 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #'                                             design = "unmatched",
 #'                                             target = "SATE")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
                                                    target, library = NULL,
                                                    g_library = NULL,
@@ -683,6 +688,7 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
 #' y <- plogis(-0.3 + 0.8 * D + 0.5 * X[, 1] + rnorm(n, 0, 0.5))
 #' r <- morie_tmlcic_tmle_cluster_ic(y, D, X)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster = NULL,
                                          target = "SATE", design = NULL,
                                          library = NULL, g_library = NULL,
@@ -827,6 +833,7 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_tmlcic_cluster_weights(V)
+#' @keywords internal
 morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
   # The per-individual weights alpha_ij and the cluster groups. Balzer
   # et al. (2019) require sum_i alpha_ij = 1 within each cluster. The
@@ -1051,6 +1058,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
 #' y <- plogis(-0.3 + 0.8 * E + 0.4 * W[, 1] + rnorm(nc * sz, 0, 0.5))
 #' r <- morie_tmlcic_tmle_hierarchical(y, A, E, W, cluster)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
                                            weights = NULL, known_g = NULL,
                                            trim = 0.01, ridge = 1e-8,
@@ -1193,6 +1201,7 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
 #' @export
 #' @examples
 #' morie_tmlcic_cheatsheet()
+#' @keywords internal
 morie_tmlcic_cheatsheet <- function() {
   paste0(
     "tmlcic: cluster randomized trial. Pre-specify a LIBRARY of ",

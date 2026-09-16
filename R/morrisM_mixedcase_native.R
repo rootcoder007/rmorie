@@ -37,6 +37,7 @@
 #' fn <- function(v) sum(v^2)
 #' res <- morie_morrisM(fun = fn, k = 3L)
 #' res
+#' @keywords internal
 morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
                           bounds = NULL) {
   k <- as.integer(k)

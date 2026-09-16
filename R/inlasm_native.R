@@ -81,6 +81,7 @@
 #'   log_lik_d2 = function(x) -1,
 #'   prior_mean = 0, prior_precision = 1)
 #' abs(ga$mode - 1) < 1e-8
+#' @keywords internal
 gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
                                     prior_mean, prior_precision,
                                     x0 = 0.0, iters = 60, tol = 1e-12) {
@@ -126,6 +127,7 @@ gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
 #' @export
 #' @examples
 #' skewness_correction(third_derivative = c(1, 2, 3, 4, 5, 6, 7, 8), precision = 5L)
+#' @keywords internal
 skewness_correction <- function(third_derivative, precision) {
   d3 <- as.numeric(third_derivative)
   prec <- as.numeric(precision)
@@ -155,6 +157,7 @@ skewness_correction <- function(third_derivative, precision) {
 #'   log_joint = function(x, theta) -0.5 * (x - theta)^2,
 #'   x_grid = seq(-4, 6, by = 0.05), theta = 2)
 #' abs(lm$mean - 2) < 0.01
+#' @keywords internal
 laplace_marginal <- function(log_joint, x_grid, theta) {
   xs <- as.numeric(x_grid)
   if (length(xs) < 2L) {
@@ -207,6 +210,7 @@ laplace_marginal <- function(log_joint, x_grid, theta) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' hyperparameter_design(M, V)
+#' @keywords internal
 hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
   m <- as.numeric(mode)
   d <- if (is.null(dim)) length(m) else as.integer(dim)
@@ -255,6 +259,7 @@ hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
 #' cm <- list(dnorm(xs, 0, 1), dnorm(xs, 3, 1))
 #' im <- integrate_marginals(cm, log_weights = c(log(0.5), log(0.5)), x_grid = xs)
 #' abs(im$mean - 1.5) < 0.05
+#' @keywords internal
 integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
   M <- lapply(conditional_marginals, function(row) as.numeric(row))
   lw <- as.numeric(log_weights)

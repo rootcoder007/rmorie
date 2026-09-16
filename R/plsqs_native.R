@@ -23,6 +23,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_plsqs_pls_regression(V, V)
+#' @keywords internal
 morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"

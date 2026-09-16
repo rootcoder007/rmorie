@@ -29,6 +29,7 @@
 #' @export
 #' @examples
 #' morie_qrntcq_gamma_generation_time()
+#' @keywords internal
 morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
                                               grid = NULL, t.max = 30,
                                               n = 3001L) {
@@ -98,6 +99,7 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #' @export
 #' @examples
 #' morie_qrntcq_quarantine_efficacy(t.Q = 5L, t.R = 5L)
+#' @keywords internal
 morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
                                               generation.time = NULL,
                                               t.E = 0) {
@@ -139,6 +141,7 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 #' \code{efficacy.released}, \code{false.negative}, \code{t.T}, \code{t.R}, \code{bound},
 #' \code{note}.
 #' @export
+#' @keywords internal
 morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
                                                    false.negative,
                                                    generation.time = NULL,
@@ -175,6 +178,7 @@ morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
 #' @export
 #' @examples
 #' morie_qrntcq_utility(efficacy = c(1, 2, 3, 4, 5, 6, 7, 8), days.in.quarantine = 5L)
+#' @keywords internal
 morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
   d <- as.numeric(days.in.quarantine)
   if (d <= 0) stop("qrntcq: the time in quarantine must be positive")
@@ -198,6 +202,7 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 #' @export
 #' @examples
 #' morie_qrntcq_relative_utility(t.R.a = 5L, t.R.b = 5L)
+#' @keywords internal
 morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
                                           generation.time = NULL,
                                           infected.fraction = NULL) {
@@ -231,6 +236,7 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
 #' @export
 #' @examples
 #' morie_qrntcq_optimal_duration()
+#' @keywords internal
 morie_qrntcq_optimal_duration <- function(t.Q = 3, generation.time = NULL,
                                           t.max = 20, step = 0.25) {
   g <- if (is.null(generation.time))

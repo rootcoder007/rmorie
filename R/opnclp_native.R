@@ -67,6 +67,7 @@
 #' @export
 #' @examples
 #' total_compute(samples_seen = 5L, model_params = 5L)
+#' @keywords internal
 total_compute <- function(samples_seen, model_params) {
   s <- as.numeric(samples_seen)
   p <- as.numeric(model_params)
@@ -94,6 +95,7 @@ total_compute <- function(samples_seen, model_params) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' fit_power_law(V, V)
+#' @keywords internal
 fit_power_law <- function(x, y) {
   X <- .opnclp_vec(x)
   Y <- .opnclp_vec(y)
@@ -177,6 +179,7 @@ fit_power_law <- function(x, y) {
 #' @examples
 #' compare_scaling(x_a = c(1, 2, 3, 4, 5, 6, 7, 8), y_a = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   x_b = c(1, 2, 3, 4, 5, 6, 7, 8), y_b = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 compare_scaling <- function(x_a, y_a, x_b, y_b,
                             label_a = "A", label_b = "B") {
   fa <- fit_power_law(x_a, y_a)
@@ -210,6 +213,7 @@ compare_scaling <- function(x_a, y_a, x_b, y_b,
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' infonce(M, M)
+#' @keywords internal
 infonce <- function(image_embeddings, text_embeddings,
                     temperature = 0.07) {
   I <- .opnclp_mat(image_embeddings)

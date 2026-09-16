@@ -53,6 +53,7 @@
 #' y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
 #' r <- morie_tlhal(X, y, lam = 1, iters = 300L)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
                         lam = 1.0, iters = 2000L, step = 0.05,
                         max_order = 2L, knots = NULL,
@@ -89,6 +90,7 @@ morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
 #' X <- matrix(runif(20), 10, 2)
 #' b <- indicator_basis(X, max_order = 1L)
 #' str(b, max.level = 1)
+#' @keywords internal
 indicator_basis <- function(X, knots = NULL, max_order = 2L) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
@@ -147,6 +149,7 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' variation_norm(V)
+#' @keywords internal
 variation_norm <- function(beta) {
   b <- as.numeric(beta)
   sum(abs(b))
@@ -176,6 +179,7 @@ variation_norm <- function(beta) {
 #' y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
 #' r <- hal_fit(X, y, lam = 1, iters = 300L)
 #' str(r, max.level = 1)
+#' @keywords internal
 hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
                     max_order = 2L, knots = NULL, intercept = TRUE) {
   B <- indicator_basis(X, knots, max_order)
@@ -260,6 +264,7 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' hal_predict(D, V)
+#' @keywords internal
 hal_predict <- function(model, X) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
@@ -302,6 +307,7 @@ hal_predict <- function(model, X) {
 #' y <- sin(3 * X[, 1]) + X[, 2] + rnorm(30, 0, 0.1)
 #' r <- cv_select_lambda(X, y, lambdas = c(0.5, 1, 2), V = 3L, iters = 150L)
 #' str(r, max.level = 1)
+#' @keywords internal
 cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
                              ...) {
   rows <- as.matrix(X)

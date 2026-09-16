@@ -279,6 +279,7 @@
 #' x <- runif(200, -1, 1)
 #' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
 #' morie_causrddc_rd_bandwidth(x, y)
+#' @keywords internal
 morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, prelim_order = NULL) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -392,6 +393,7 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 #' x <- runif(200, -1, 1)
 #' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
 #' morie_causrddc(y, x)
+#' @keywords internal
 morie_causrddc <- function(y, x, treatment = NULL, cutoff = 0.0, nu = 0, p = 1, q = NULL, h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", J = 3) {
   y <- as.numeric(y)
   x <- as.numeric(x) - as.numeric(cutoff)
@@ -530,6 +532,7 @@ morie_causrddc_local_poly_weights <- .causrddc_local_poly_weights
 #' @export
 #' @examples
 #' morie_causrddc_cheatsheet()
+#' @keywords internal
 morie_causrddc_cheatsheet <- function() {
   paste0(
     "causrddc: robust bias-corrected RD inference (Calonico, Catt",

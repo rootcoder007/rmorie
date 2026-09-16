@@ -119,6 +119,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' two_way_block(V, V)
+#' @keywords internal
 two_way_block <- function(prompt_tokens, image_tokens) {
   P <- .samdec_mat(prompt_tokens)
   I <- .samdec_mat(image_tokens)
@@ -156,6 +157,7 @@ two_way_block <- function(prompt_tokens, image_tokens) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' upsample(V)
+#' @keywords internal
 upsample <- function(grid, factor = 2) {
   G <- .samdec_mat(grid)
   f <- as.integer(factor)
@@ -202,6 +204,7 @@ upsample <- function(grid, factor = 2) {
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' S <- c("a", "b", "c")
 #' dynamic_mask_head(S, M)
+#' @keywords internal
 dynamic_mask_head <- function(output_token, image_grid_vectors,
                               mlp = NULL) {
   w <- .samdec_vec(output_token)
@@ -263,6 +266,7 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' focal_loss(V, V)
+#' @keywords internal
 focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
   p <- as.numeric(prob)
   t <- as.numeric(target)
@@ -299,6 +303,7 @@ focal_loss <- function(prob, target, gamma = 2.0, alpha = 0.25) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' dice_loss(V, V)
+#' @keywords internal
 dice_loss <- function(prob, target) {
   p <- as.numeric(prob)
   t <- as.numeric(target)
@@ -333,6 +338,7 @@ dice_loss <- function(prob, target) {
 #' @return A list with \code{estimate}, \code{mask}, \code{logits}, \code{shape},
 #' \code{n_blocks}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
                         n_blocks = 2, upsample_factor = 2,
                         output_index = 0) {
@@ -395,6 +401,7 @@ decode_mask <- function(prompt_tokens, image_tokens, grid_shape,
 #' @param output_index Passed to \code{decode_mask}. Defaults to \code{0}.
 #' @return The value of \code{decode_mask}.
 #' @export
+#' @keywords internal
 morie_samdec <- function(prompt_tokens, image_tokens, grid_shape,
                          n_blocks = 2, upsample_factor = 2,
                          output_index = 0) {

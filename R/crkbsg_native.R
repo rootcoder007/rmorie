@@ -156,6 +156,7 @@
 #' z <- rnorm(10)
 #' s_predict <- matrix(runif(4), 2, 2)
 #' morie_crkbsg_cokriging(coords, y, z, s_predict)
+#' @keywords internal
 morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
                                    cross_variogram = NULL, coords_z = NULL) {
   C1 <- .crkbsg_rows(coords)

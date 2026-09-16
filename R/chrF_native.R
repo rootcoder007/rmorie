@@ -97,6 +97,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' chrf_score(V, V)
+#' @keywords internal
 chrf_score <- function(hypothesis, reference, n_char = 6L, beta = 2.0,
                        remove_whitespace = TRUE, word_order = 0L) {
   N <- as.integer(n_char)
@@ -180,6 +181,7 @@ chrF <- chrf_score
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_chrF(V, V)
+#' @keywords internal
 morie_chrF <- function(hypothesis, reference, n_char = 6L, beta = 2.0,
                        remove_whitespace = TRUE, word_order = 0L) {
   chrf_score(hypothesis, reference, n_char, beta, remove_whitespace, word_order)

@@ -151,6 +151,7 @@
 #' @export
 #' @examples
 #' morie_se3T_rotation_matrix(axis = c(0, 0, 1), angle = pi / 4)
+#' @keywords internal
 morie_se3T_rotation_matrix <- function(axis, angle) {
   a <- .se3T_vec(axis)
   n <- sqrt(sum(a * a))
@@ -184,6 +185,7 @@ morie_se3T_rotation_matrix <- function(axis, angle) {
 #' @examples
 #' morie_se3T_invariant_features(positions = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   i = c(1, 2, 3, 4, 5, 6, 7, 8), j = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_se3T_invariant_features <- function(positions, i, j) {
   P <- .se3T_mat(positions)
   d <- P[j, ] - P[i, ]
@@ -209,6 +211,7 @@ morie_se3T_invariant_features <- function(positions, i, j) {
 #' @export
 #' @examples
 #' morie_se3T_radial_kernel(distance = 5L)
+#' @keywords internal
 morie_se3T_radial_kernel <- function(distance, weights = NULL, sigma = 1.0) {
   r <- as.numeric(distance)
   if (r < 0.0) stop("se3T: a distance cannot be negative")
@@ -244,6 +247,7 @@ morie_se3T_radial_kernel <- function(distance, weights = NULL, sigma = 1.0) {
 #' type0 <- rnorm(4)
 #' type1 <- matrix(rnorm(12), 4, 3)
 #' morie_se3T_se3_attention(positions, type0, type1)
+#' @keywords internal
 morie_se3T_se3_attention <- function(positions, type0, type1, weights = NULL,
                                      sigma = 1.0, temperature = 1.0) {
   P <- .se3T_mat(positions)
@@ -316,6 +320,7 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights = NULL,
 #' type0 <- rnorm(4)
 #' type1 <- matrix(rnorm(12), 4, 3)
 #' morie_se3T_check_equivariance(positions, type0, type1)
+#' @keywords internal
 morie_se3T_check_equivariance <- function(positions, type0, type1, layer = NULL,
                                           axis = c(0.3, -0.7, 0.4), angle = 1.1,
                                           translation = c(2.0, -1.0, 0.5),
@@ -375,6 +380,7 @@ morie_se3T_check_equivariance <- function(positions, type0, type1, layer = NULL,
 #' @export
 #' @examples
 #' morie_se3T_cheatsheet()
+#' @keywords internal
 morie_se3T_cheatsheet <- function() {
   paste0(
     "se3T: a point cloud has no canonical orientation, so ",

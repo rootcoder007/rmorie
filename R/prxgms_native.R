@@ -21,6 +21,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_prxgms_soft_threshold(V, V)
+#' @keywords internal
 morie_prxgms_soft_threshold <- function(v, tau) {
   v <- as.numeric(v)
   tau <- as.numeric(tau)
@@ -53,6 +54,7 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{objective},
 #' \code{iterations}, \code{L}, \code{accelerated}, \code{converged}, \code{method}.
 #' @export
+#' @keywords internal
 morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
                                         max.iter = 500L, tol = 1e-10,
                                         accelerate = TRUE, backtrack = FALSE,
@@ -122,6 +124,7 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
 #' @export
 #' @examples
 #' morie_prxgms_lasso_fista(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, lam = 5L)
+#' @keywords internal
 morie_prxgms_lasso_fista <- function(A, b, lam, max.iter = 500L, tol = 1e-10,
                                      accelerate = TRUE) {
   Am <- as.matrix(A)

@@ -211,6 +211,7 @@
 #'   Generalized Random Forests. Annals of Statistics, 47(2),
 #'   1148-1178.
 #' @export
+#' @keywords internal
 morie_crfsel <- function(y, W, X, n_trees = 200L, min_leaf = 5L,
                          max_depth = 4L, decay = 2.0, seed = 0L,
                          names = NULL, permutation = FALSE) {

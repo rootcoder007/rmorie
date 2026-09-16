@@ -172,6 +172,7 @@
 #' @export
 #' @examples
 #' PdfMean(x = seq(-4, 4, by = 0.01), p = dnorm(seq(-4, 4, by = 0.01)))
+#' @keywords internal
 PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.1): mu = E[eta] = integral eta p(eta) d eta
   mass <- .morie_rg_pdfint(function(v) 1, pdf, x, lower, upper)
@@ -194,6 +195,7 @@ PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' @export
 #' @examples
 #' PdfMS(x = seq(-4, 4, by = 0.01), p = dnorm(seq(-4, 4, by = 0.01)))
+#' @keywords internal
 PdfMS <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.2): E[eta^2].  Equal to the variance only when mu = 0, so both
   # are returned rather than one being assumed for the other.
@@ -226,6 +228,7 @@ PdfMS <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' unif01 <- function(v) if (v >= 0 && v <= 1) 1 else 0
 #' UGRID <- seq(0, 1, length.out = 4001)
 #' PdfVar(unif01, x = UGRID)
+#' @keywords internal
 PdfVar <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.3): sigma^2 = integral (eta - mu)^2 p(eta) d eta.  CV = sigma/mu
   # is left NULL once mu is negligible against sigma; the book warns it
@@ -260,6 +263,7 @@ PdfVar <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' @examples
 #' xg <- seq(0, 20, by = 0.01)
 #' PdfSkew(x = xg, p = dgamma(xg, shape = 2))
+#' @keywords internal
 PdfSkew <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.4): S = (1/sigma^3) integral (eta - mu)^3 p(eta) d eta
   mass <- .morie_rg_pdfint(function(v) 1, pdf, x, lower, upper)
@@ -292,6 +296,7 @@ PdfSkew <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' @examples
 #' xg <- seq(-6, 6, by = 0.01)
 #' PdfKurt(x = xg, p = dnorm(xg))
+#' @keywords internal
 PdfKurt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.5): K = (1/sigma^4) integral (eta - mu)^4 p(eta) d eta.  The book
   # gives 3 for a Gaussian and defines the excess K' = K - 3.
@@ -326,6 +331,7 @@ PdfKurt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' @examples
 #' xg <- seq(-6, 6, by = 0.01)
 #' DiffEnt(x = xg, p = dnorm(xg))
+#' @keywords internal
 DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # eq (3.6): H = - integral p log2(p) d eta, in bits.  p log p -> 0 as
   # p -> 0, so zero-density points contribute nothing.  This is a density
@@ -374,6 +380,7 @@ DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Smean(V)
+#' @keywords internal
 Smean <- function(x) {
   # eq (3.7): mu = (1/N) sum eta(n) -- the DC component of the signal
   xs <- .morie_rg_aslist(x)
@@ -395,6 +402,7 @@ Smean <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Srms(V)
+#' @keywords internal
 Srms <- function(x) {
   # eqs (3.8)-(3.10): MS, RMS, SD.  The divisor is N in all three; eq
   # (3.10) is the population SD, not the N-1 unbiased one.
@@ -425,6 +433,7 @@ Srms <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Shannon(V)
+#' @keywords internal
 Shannon <- function(p, levels = NULL) {
   # eq (3.11): H = - sum p(eta_l) log2 p(eta_l), over L quantized values
   vals <- .morie_rg_aslist(p)
@@ -474,6 +483,7 @@ Shannon <- function(p, levels = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' NoiseModel(V, V)
+#' @keywords internal
 NoiseModel <- function(x, eta) {
   # eqs (3.12)-(3.14).  Eq (3.14) holds only if x and eta are
   # uncorrelated, so the sample correlation is measured and both the
@@ -511,6 +521,7 @@ NoiseModel <- function(x, eta) {
 #' @export
 #' @examples
 #' MeanSum(c(1, 3), c(10, 20), 0.5)
+#' @keywords internal
 MeanSum <- function(...) {
   # eq (3.13): mu_y = mu_x + mu_eta.  Linearity of expectation needs no
   # independence -- that is what separates it from eq (3.14).
@@ -541,6 +552,7 @@ MeanSum <- function(...) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' EnsMean(V)
+#' @keywords internal
 EnsMean <- function(observations, index = NULL) {
   # eq (3.15): mu_x(t1) = (1/M) sum_k x_k(t1)
   if (is.null(index)) {
@@ -575,6 +587,7 @@ EnsMean <- function(observations, index = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' EnsAvg(V)
+#' @keywords internal
 EnsAvg <- function(observations) {
   # eq (3.18): x_bar(t) = (1/M) sum_k x_k(t) for all t -- the prototype
   # signal, a filtered version of the M observations.
@@ -614,6 +627,7 @@ EnsAvg <- function(observations) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CovXY(V, V)
+#' @keywords internal
 CovXY <- function(x, y, ddof = 0) {
   # eqs (3.21)-(3.22): C_xy and rho = C_xy / (sigma_x sigma_y)
   xs <- .morie_rg_aslist(x)
@@ -652,6 +666,7 @@ CovXY <- function(x, y, ddof = 0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DiracDelta(V)
+#' @keywords internal
 DiracDelta <- function(t, width = NULL) {
   # eq (3.24): delta(t) is undefined at t = 0 and 0 elsewhere.  A
   # generalized function has no pointwise value at the origin, so NA is
@@ -687,6 +702,7 @@ DiracDelta <- function(t, width = NULL) {
 #' @export
 #' @examples
 #' DeltaArea()
+#' @keywords internal
 DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
   # eq (3.25): integral delta(t) dt = 1.  The property defines the delta,
   # so the useful computation is the check on a candidate approximation.
@@ -732,6 +748,7 @@ DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
 #' @export
 #' @examples
 #' DeltaLim(t = seq(-1, 1, by = 0.05), a = 0.01)
+#' @keywords internal
 DeltaLim <- function(t, a) {
   # eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is
   # negative for every a in (0,1), so the function diverges at t = 0 (NA,
@@ -761,6 +778,7 @@ DeltaLim <- function(t, a) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ustep(V)
+#' @keywords internal
 Ustep <- function(t, shift = 0) {
   # eq (3.27): u(t) = 1 for t > 0, 0 otherwise.  Strict: u(0) = 0 here,
   # whereas the discrete step of eq (3.35) has u(0) = 1.  They are
@@ -787,6 +805,7 @@ Ustep <- function(t, shift = 0) {
 #' @export
 #' @examples
 #' Sifting(function(t) t^2 + 1, 2, 0, 5)
+#' @keywords internal
 Sifting <- function(x, t0, lower, upper) {
   # eq (3.28): integral_{T1}^{T2} x(t) delta(t - to) dt = x(to) if
   # T1 < to < T2, else 0.  Both inequalities are strict, so an impulse
@@ -817,6 +836,7 @@ Sifting <- function(x, t0, lower, upper) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DeltaDecomp(V)
+#' @keywords internal
 DeltaDecomp <- function(x, t = NULL) {
   # eq (3.29): x(t) = integral x(alpha) delta(t - alpha) d alpha.  The
   # weight at alpha_i is x(alpha_i) times a trapezoidal spacing, so the
@@ -862,6 +882,7 @@ DeltaDecomp <- function(x, t = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ContConv(V, V)
+#' @keywords internal
 ContConv <- function(x, h, dt = 1, t = NULL) {
   # eq (3.30): y(t) = integral x(tau) h(t - tau) d tau.  Tabulated on a
   # uniform grid this is the discrete convolution SCALED BY dt; dropping
@@ -912,6 +933,7 @@ ContConv <- function(x, h, dt = 1, t = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ContConvAlt(V, V)
+#' @keywords internal
 ContConvAlt <- function(x, h, dt = 1, t = NULL) {
   # eq (3.31): y(t) = integral h(tau) x(t - tau) d tau, given by the book
   # as an equivalent result.  Computed the other way round and compared
@@ -937,6 +959,7 @@ ContConvAlt <- function(x, h, dt = 1, t = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' KDelta(V)
+#' @keywords internal
 KDelta <- function(n, shift = 0, amplitude = 1) {
   # eq (3.34): delta(n) = 1 if n = 0, 0 otherwise.  Unlike eq (3.24) this
   # is an ordinary sequence, evaluable at the origin.
@@ -965,6 +988,7 @@ KDelta <- function(n, shift = 0, amplitude = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' StepSeq(V)
+#' @keywords internal
 StepSeq <- function(n, shift = 0) {
   # eq (3.35): u(n) = 1 for n >= 0, 0 otherwise.  Non-strict, so
   # u(0) = 1 -- the opposite of eq (3.27).
@@ -997,6 +1021,7 @@ StepSeq <- function(n, shift = 0) {
 #' @export
 #' @examples
 #' RampFilt()
+#' @keywords internal
 RampFilt <- function(x = NULL, fs = 2000, duration = 0.25, slope = 10) {
   # eq (3.42): h(t) = 10 (0.25 - t), 0 <= t <= 0.25 s, at fs = 2 kHz.  The
   # text immediately after states the output was divided by the sum of

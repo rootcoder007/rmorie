@@ -35,6 +35,7 @@
 #' morie_snmcox_blip_down(time = 5L,
 #'   treat_times = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
 #'   psi = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_snmcox_blip_down <- function(time, treat_times, psi) {
   T <- as.numeric(time)
   if (T < 0) stop("snmcox: a failure time cannot be negative")
@@ -129,6 +130,7 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' @param censor_time See Usage.
 #' @param ridge See Usage.
 #' @export
+#' @keywords internal
 morie_snmcox_gest_score <- function(psi, time, event, A, L, treat_times,
                                     censor_time = NULL, ridge = 1e-8) {
   n <- length(time)
@@ -189,6 +191,7 @@ morie_snmcox_gest_score <- function(psi, time, event, A, L, treat_times,
 #' @examples
 #' morie_snmcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
 #'   treatment_history = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_snmcox <- function(time, event, treatment_history,
                          covariate_history = NULL, treat_times = NULL,
                          censor_time = NULL, level = 0.95,
@@ -314,6 +317,7 @@ morie_snm_cox <- morie_snmcox
 #' @export
 #' @examples
 #' morie_snmcox_cheatsheet()
+#' @keywords internal
 morie_snmcox_cheatsheet <- function() {
   paste0("snmcox: structural nested failure time model by g-estimation. ",
          "Blip down U(psi) = int_0^T exp(psi A(u)) du; the true psi is the ",

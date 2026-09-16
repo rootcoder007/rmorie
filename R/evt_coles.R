@@ -75,6 +75,7 @@ morie_evt_gev_loglik <- function(x, mu, sigma, xi) {
 #' @export
 #' @examples
 #' morie_evt_gev_quantile(0.9, 5, 1.5, 0.1)
+#' @keywords internal
 morie_evt_gev_quantile <- function(p, mu, sigma, xi) {
   stopifnot(all(p > 0), all(p < 1))
   yp <- -log(p)
@@ -167,6 +168,7 @@ morie_evt_gev_mle <- function(x) {
 #' @export
 #' @examples
 #' MASS_ginv_fallback(H = 0.5)
+#' @keywords internal
 MASS_ginv_fallback <- function(H) {
   e <- eigen(H, symmetric = TRUE)
   pos <- e$values > max(e$values) * 1e-12
@@ -181,6 +183,7 @@ MASS_ginv_fallback <- function(H) {
 #' @export
 #' @examples
 #' morie_evt_gpd_cdf(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
+#' @keywords internal
 morie_evt_gpd_cdf <- function(y, sigma, xi) {
   out <- numeric(length(y))
   neg <- y < 0
@@ -199,6 +202,7 @@ morie_evt_gpd_cdf <- function(y, sigma, xi) {
 #' @export
 #' @examples
 #' morie_evt_gpd_loglik(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
+#' @keywords internal
 morie_evt_gpd_loglik <- function(y, sigma, xi) {
   if (sigma <= 0 || any(y < 0)) {
     return(-Inf)
@@ -219,6 +223,7 @@ morie_evt_gpd_loglik <- function(y, sigma, xi) {
 #' @export
 #' @examples
 #' morie_evt_gpd_quantile(p = 0.5, sigma = 0.5, xi = 5L)
+#' @keywords internal
 morie_evt_gpd_quantile <- function(p, sigma, xi) {
   stopifnot(all(p >= 0), all(p < 1))
   if (abs(xi) < .evt_xi_tiny) {
@@ -233,6 +238,7 @@ morie_evt_gpd_quantile <- function(p, sigma, xi) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_evt_gpd_mle(V)
+#' @keywords internal
 morie_evt_gpd_mle <- function(y) {
   y <- as.numeric(y)
   n <- length(y)
@@ -268,6 +274,7 @@ morie_evt_gpd_mle <- function(y) {
 #' @export
 #' @examples
 #' morie_evt_return_level(5, 1.5, 0.1, 100)
+#' @keywords internal
 morie_evt_return_level <- function(mu, sigma, xi, T) {
   stopifnot(T > 1)
   morie_evt_gev_quantile(1 - 1 / T, mu, sigma, xi)
@@ -280,6 +287,7 @@ morie_evt_return_level <- function(mu, sigma, xi, T) {
 #' @export
 #' @examples
 #' morie_evt_return_level_ci(x = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
+#' @keywords internal
 morie_evt_return_level_ci <- function(x, T, alpha = 0.05) {
   f <- morie_evt_gev_mle(x)
   z <- morie_evt_return_level(f$mu, f$sigma, f$xi, T)
@@ -310,6 +318,7 @@ morie_evt_return_level_ci <- function(x, T, alpha = 0.05) {
 #' @examples
 #' morie_evt_return_level_pot(u = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L,
 #'   zeta_u = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+#' @keywords internal
 morie_evt_return_level_pot <- function(u, sigma, xi, zeta_u, m) {
   stopifnot(m * zeta_u > 1)
   if (abs(xi) < .evt_xi_tiny) {
@@ -325,6 +334,7 @@ morie_evt_return_level_pot <- function(u, sigma, xi, zeta_u, m) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_evt_chi(V, V)
+#' @keywords internal
 morie_evt_chi <- function(x, y, u = 0.95) {
   n <- length(x)
   stopifnot(length(y) == n, n >= 4)
@@ -342,6 +352,7 @@ morie_evt_chi <- function(x, y, u = 0.95) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_evt_chibar(V, V)
+#' @keywords internal
 morie_evt_chibar <- function(x, y, u_grid = seq(0.5, 0.95,
                                length.out = 20
                              )) {
@@ -366,6 +377,7 @@ morie_evt_chibar <- function(x, y, u_grid = seq(0.5, 0.95,
 #' u <- runif(600)
 #' x <- morie_evt_gev_quantile(u, 10, 2, 0.1)
 #' morie_evt_xi_ci_profile(x)
+#' @keywords internal
 morie_evt_xi_ci_profile <- function(x, alpha = 0.05, model = "gev") {
   crit <- stats::qchisq(1 - alpha, 1) / 2
   if (model == "gev") {
@@ -427,6 +439,7 @@ morie_evt_xi_ci_profile <- function(x, alpha = 0.05, model = "gev") {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_evt_bayes_gev(V)
+#' @keywords internal
 morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
                                 prior_sd = c(100, 10, 1)) {
   set.seed(seed)
@@ -474,6 +487,7 @@ morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_evt_gev_trend(V)
+#' @keywords internal
 morie_evt_gev_trend <- function(x, t = seq_along(x) - 1) {
   n <- length(x)
   tz <- (t - mean(t)) / max(stats::sd(t) * sqrt((n - 1) / n), 1e-12)

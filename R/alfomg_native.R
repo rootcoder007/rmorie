@@ -83,6 +83,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_alfomg_softmax(V)
+#' @keywords internal
 morie_alfomg_softmax <- function(logits) {
   m <- logits[1]
   for (v in logits) if (v > m) m <- v
@@ -109,6 +110,7 @@ morie_alfomg_softmax <- function(logits) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_alfomg_opm(V)
+#' @keywords internal
 morie_alfomg_opm <- function(msa) {
   sh <- .alfomg_shape(msa)
   s <- sh[1]
@@ -154,6 +156,7 @@ morie_alfomg_opm <- function(msa) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_alfomg_bias(D)
+#' @keywords internal
 morie_alfomg_bias <- function(pair, w = NULL) {
   r <- length(pair)
   out <- matrix(0, r, r)
@@ -199,6 +202,7 @@ morie_alfomg_bias <- function(pair, w = NULL) {
 #' b1 <- morie_alfomg_bias(PAIR, WB)
 #' d <- 0
 #' morie_alfomg_row_attention(MSA, b1)
+#' @keywords internal
 morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
                                        gate = NULL) {
   sh <- .alfomg_shape(msa)
@@ -262,6 +266,7 @@ morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
 #' @export
 #' @examples
 #' morie_alfomg(msa = c(1, 2, 3, 4, 5, 6, 7, 8), pair = 5L)
+#' @keywords internal
 morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
                          scale = NULL, gate = NULL) {
   sh <- .alfomg_shape(msa)
@@ -338,6 +343,7 @@ morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
 #' @export
 #' @examples
 #' morie_alfomg_cheatsheet()
+#' @keywords internal
 morie_alfomg_cheatsheet <- function() {
   paste0(
     "alfomg: OpenFold MSA-pair head. Outer product mean for ",

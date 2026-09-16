@@ -17,6 +17,7 @@
 #' @export
 #' @examples
 #' morie_mtdrl_bandit_tasks()
+#' @keywords internal
 morie_mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100,
                                       seed = 0,
                                       structure = "independent") {
@@ -50,6 +51,7 @@ morie_mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100,
 #' @examples
 #' morie_mtdrl_history_features(history = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
 #'   n_arms = 5L)
+#' @keywords internal
 morie_mtdrl_history_features <- function(history, n_arms) {
   feat <- rep(0, n_arms + 2L)
   if (length(history) > 0L) {
@@ -121,6 +123,7 @@ morie_mtdrl_TabularHistoryAgent <- setRefClass(
 #'   reward_by_step, optimal_action_rate, episode_reward, n_episodes,
 #'   episode_length, n_arms, method.
 #' @export
+#' @keywords internal
 morie_mtdrl <- function(tasks, agent, episode_length = 100,
                          n_arms = NULL, seed = 0,
                          reset_between_episodes = TRUE) {

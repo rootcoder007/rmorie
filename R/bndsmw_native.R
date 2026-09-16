@@ -21,6 +21,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_hypercube_instruments(V)
+#' @keywords internal
 morie_hypercube_instruments <- function(X, n_levels = 3L) {
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"
@@ -72,6 +73,7 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_weighted_moments(V, V)
+#' @keywords internal
 morie_weighted_moments <- function(m, g) {
   M <- as.matrix(m)
   storage.mode(M) <- "double"
@@ -110,6 +112,7 @@ morie_weighted_moments <- function(m, g) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_S_function(V)
+#' @keywords internal
 morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   if (!(form %in% .S_FORMS))
     stop("bndsmw: form must be one of ", paste(.S_FORMS, collapse = ", "))
@@ -142,6 +145,7 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_cvm_statistic(D, D)
+#' @keywords internal
 morie_cvm_statistic <- function(m, instruments, form = "sum",
                                 n_equality = 0L, weights = NULL) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
@@ -190,6 +194,7 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_gms_critical_value(D, D)
+#' @keywords internal
 morie_gms_critical_value <- function(m, instruments, form = "sum",
                                      n_equality = 0L, level = 0.95,
                                      reps = 200L, seed = 0, kappa = NULL) {
@@ -248,6 +253,7 @@ morie_gms_critical_value <- function(m, instruments, form = "sum",
 #' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds},
 #' \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
 #' @export
+#' @keywords internal
 morie_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                                  n_equality = 0L, level = 0.95,
                                  n_levels = 2L, reps = 100L, seed = 0) {

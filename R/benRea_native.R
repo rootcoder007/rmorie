@@ -16,6 +16,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' bio_labels(V)
+#' @keywords internal
 bio_labels <- function(types) {
   ts <- as.character(types)
   if (length(ts) == 0) stop("benRea: no entity types given")
@@ -68,6 +69,7 @@ bio_labels <- function(types) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' valid_transitions(V)
+#' @keywords internal
 valid_transitions <- function(labels) {
   n <- length(labels)
   T <- matrix(TRUE, n, n)
@@ -96,6 +98,7 @@ valid_transitions <- function(labels) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' start_allowed(V)
+#' @keywords internal
 start_allowed <- function(labels) {
   substr(labels, 1, 1) != "I"
 }
@@ -112,6 +115,7 @@ start_allowed <- function(labels) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' is_valid_bio(V)
+#' @keywords internal
 is_valid_bio <- function(path) {
   prev <- "O"
   prev_t <- NA
@@ -139,6 +143,7 @@ is_valid_bio <- function(path) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' greedy_decode(V, V)
+#' @keywords internal
 greedy_decode <- function(emissions, labels) {
   em <- as.matrix(emissions)
   storage.mode(em) <- "double"
@@ -161,6 +166,7 @@ greedy_decode <- function(emissions, labels) {
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' S <- c("a", "b", "c")
 #' viterbi_decode(M, S)
+#' @keywords internal
 viterbi_decode <- function(emissions, labels, transitions = NULL,
                            transition_scores = NULL) {
   em <- as.matrix(emissions)
@@ -213,6 +219,7 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' extract_spans(V)
+#' @keywords internal
 extract_spans <- function(path) {
   spans <- list()
   cur_t <- NA
@@ -263,6 +270,7 @@ extract_spans <- function(path) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' span_f1(V, V)
+#' @keywords internal
 span_f1 <- function(pred, gold) {
   p <- extract_spans(pred)
   g <- extract_spans(gold)
@@ -292,6 +300,7 @@ span_f1 <- function(pred, gold) {
 #' @export
 #' @examples
 #' ner_decode(emissions = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), types = 5L)
+#' @keywords internal
 ner_decode <- function(emissions, types, decoder = "viterbi",
                        transition_scores = NULL, gold = NULL) {
   if (!(decoder %in% c("viterbi", "greedy")))

@@ -259,6 +259,7 @@ morie_tqipb_bits_required <- function(eps, delta, d, norm_sq = 1,
 #' @export
 #' @examples
 #' morie_tqipb(4L, norm_sq = 9, d = 512L, eps = 0.05, delta = 0.01)
+#' @keywords internal
 morie_tqipb <- function(bits, norm_sq = 1, d = NULL, eps = 0.1,
                         delta = NULL, x_norm_sq = 1, n_blocks = 1,
                         route = "table", tail = "chebyshev") {
@@ -300,6 +301,7 @@ morie_tqipb <- function(bits, norm_sq = 1, d = NULL, eps = 0.1,
 #' @export
 #' @examples
 #' morie_tqipb_cheatsheet()
+#' @keywords internal
 morie_tqipb_cheatsheet <- function()
   paste0("tqipb: TurboQuant inner-product distortion bounds. routes ",
          paste(.TQIPB_ROUTES, collapse = ", "), "; tails ",

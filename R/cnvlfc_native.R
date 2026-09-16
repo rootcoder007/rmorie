@@ -348,6 +348,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cnvlfc_embed(V)
+#' @keywords internal
 cnvlfc_embed <- function(series, E = 2, tau = 1) {
     em <- .cnvlfc_embed(series, E, tau)
     list(points = lapply(seq_len(nrow(em$points)),
@@ -374,6 +375,7 @@ cnvlfc_embed <- function(series, E = 2, tau = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cnvlfc_cross_map(V, V)
+#' @keywords internal
 cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
                              library = NULL, seed = 1L, exclude = 0L) {
     .cnvlfc_cross_map(driver, response, E, tau, library, seed, exclude)
@@ -397,6 +399,7 @@ cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cnvlfc_ccm(V, V)
+#' @keywords internal
 cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
                        seed = 1L, exclude = 0L) {
     .cnvlfc_ccm(x, y, E, tau, lib_sizes, seed, exclude)
@@ -420,6 +423,7 @@ cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
 #' @export
 #' @examples
 #' cnvlfc_coupled_logistic(n = 5L)
+#' @keywords internal
 cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
                                     byx = 0.1, x0 = 0.4, y0 = 0.2,
                                     burn = 300L) {
@@ -442,6 +446,7 @@ cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cnvlfc_convergent_cross_mapping(V, V)
+#' @keywords internal
 cnvlfc_convergent_cross_mapping <- function(x, y, E = 2L, tau = 1L, ...) {
     dots <- list(...)
     do.call(.cnvlfc_ccm,

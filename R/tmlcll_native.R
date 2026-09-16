@@ -279,6 +279,7 @@
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_clpm_coefficients(M, M)
+#' @keywords internal
 morie_clpm_coefficients <- function(X, Y) {
   xs <- .tmlcll_mat(X)
   ys <- .tmlcll_mat(Y)
@@ -334,6 +335,7 @@ morie_clpm_coefficients <- function(X, Y) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_within_between_decomposition(V)
+#' @keywords internal
 morie_within_between_decomposition <- function(P) {
   rows <- .tmlcll_mat(P)
   n <- nrow(rows)
@@ -364,6 +366,7 @@ morie_within_between_decomposition <- function(P) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_ri_clpm_coefficients(M, M)
+#' @keywords internal
 morie_ri_clpm_coefficients <- function(X, Y) {
   dx <- morie_within_between_decomposition(X)
   dy <- morie_within_between_decomposition(Y)
@@ -400,6 +403,7 @@ morie_ri_clpm_coefficients <- function(X, Y) {
 #' @examples
 #' morie_tmle_cross_lagged(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   X = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
   yv <- .tmlcll_vec(y)
   a <- .tmlcll_vec(D)

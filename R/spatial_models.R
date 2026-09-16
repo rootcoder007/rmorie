@@ -6,10 +6,10 @@
 # checked against spatialreg::lagsarlm and spatialreg::errorsarlm --
 # note those live in *spatialreg*, not *spdep*, since spdep was split.
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_logdet_I_minus(V, V)
+#' @keywords internal
 morie_logdet_I_minus <- function(rho, W) {
   determinant(diag(nrow(W)) - rho * W, logarithm = TRUE)$modulus[1]
 }
@@ -151,6 +151,7 @@ morie_ripley_k <- function(coords, r_grid, area = NULL,
 #' @examples
 #' morie_cokrig(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   z2 = c(1, 2, 3, 4, 5, 6, 7, 8), s0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_cokrig <- function(coords, z1, z2, s0, cross_vario = NULL,
                             model = NULL) {
   P <- as.matrix(coords)

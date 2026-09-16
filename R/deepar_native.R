@@ -28,6 +28,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_deepar_scale_factor(V)
+#' @keywords internal
 morie_deepar_scale_factor <- function(z, t0 = NULL) {
   zv <- as.numeric(z)
   n <- if (is.null(t0)) length(zv) else as.integer(t0)
@@ -47,6 +48,7 @@ morie_deepar_scale_factor <- function(z, t0 = NULL) {
 #' @examples
 #' morie_deepar_gaussian_loglik(z = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   sigma = 0.5)
+#' @keywords internal
 morie_deepar_gaussian_loglik <- function(z, mu, sigma) {
   s <- max(as.numeric(sigma), 1e-12)
   z <- as.numeric(z)
@@ -66,6 +68,7 @@ morie_deepar_gaussian_loglik <- function(z, mu, sigma) {
 #' @export
 #' @examples
 #' morie_deepar_negative_binomial_loglik(z = 5L, mu = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+#' @keywords internal
 morie_deepar_negative_binomial_loglik <- function(z, mu, alpha) {
   zz <- as.numeric(z)
   m <- max(as.numeric(mu), 1e-12)
@@ -176,6 +179,7 @@ morie_deepar_negative_binomial_loglik <- function(z, mu, alpha) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_deepar_fit(V)
+#' @keywords internal
 morie_deepar_fit <- function(z, n_lags = 2L,
                              likelihood = "negative-binomial",
                              ridge = 1e-6) {
@@ -229,6 +233,7 @@ morie_deepar_fit <- function(z, n_lags = 2L,
 #' @return A list of trajectories, each a length-\code{horizon} numeric
 #'   vector.
 #' @export
+#' @keywords internal
 morie_deepar_sample <- function(fit, z_history, horizon, n_samples = 200L,
                                 seed = 0L) {
   beta <- fit$beta
@@ -278,6 +283,7 @@ morie_deepar_sample <- function(fit, z_history, horizon, n_samples = 200L,
 #' \donttest{
 #' morie_deepar_forecast(z = c(1, 2, 3, 4, 5, 6, 7, 8), horizon = 5L)
 #' }
+#' @keywords internal
 morie_deepar_forecast <- function(z, horizon, n_lags = 2L,
                                   likelihood = "negative-binomial",
                                   n_samples = 300L,

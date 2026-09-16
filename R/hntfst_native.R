@@ -110,6 +110,7 @@
 #' y <- as.numeric(X[, 1] > 0) + rnorm(40, 0, 0.1)
 #' tr <- honest_tree(X, y)
 #' str(tr, max.level = 1)
+#' @keywords internal
 honest_tree <- function(X, y, W = NULL, kind = "double-sample",
                         min_leaf = 5L, alpha = 0.05, pi = 0.5,
                         max_depth = 12L, seed = 0L,
@@ -201,6 +202,7 @@ honest_tree <- function(X, y, W = NULL, kind = "double-sample",
 #' y <- as.numeric(X[, 1] > 0) + rnorm(40, 0, 0.1)
 #' tr <- honest_tree(X, y)
 #' str(leaf_of(tr$tree, X[1, ]), max.level = 1)
+#' @keywords internal
 leaf_of <- function(tree, x) {
   node <- tree
   path <- list()
@@ -247,6 +249,7 @@ leaf_of <- function(tree, x) {
 #' in_bag <- matrix(rbinom(B * n, 1, 0.5), B, n)
 #' r <- infinitesimal_jackknife(preds, in_bag, n = n, s = 15)
 #' str(r, max.level = 1)
+#' @keywords internal
 infinitesimal_jackknife <- function(preds, in_bag, n, s,
                                     correction = TRUE) {
   B <- length(preds)
@@ -304,6 +307,7 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
 #' y <- X[, 1] + rnorm(60, 0, 0.3)
 #' r <- honest_forest(X, y, n_trees = 20L)
 #' str(r, max.level = 1)
+#' @keywords internal
 honest_forest <- function(X, y, W = NULL, kind = "double-sample",
                           n_trees = 200L, subsample_frac = 0.5,
                           min_leaf = 5L, alpha = 0.05, pi = 0.5,
@@ -412,6 +416,7 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 #' y <- X[, 1] + rnorm(60, 0, 0.3)
 #' f <- grow_forest(X, y, n_trees = 10L)
 #' length(f$trees)
+#' @keywords internal
 grow_forest <- function(X, y, W = NULL, kind = "double-sample",
                         n_trees = 200L, subsample_frac = 0.5,
                         min_leaf = 5L, alpha = 0.05, pi = 0.5,
@@ -473,6 +478,7 @@ grow_forest <- function(X, y, W = NULL, kind = "double-sample",
 #' f <- grow_forest(X, y, n_trees = 10L)
 #' w <- forest_weights(f$trees, X, X[1, ])
 #' sum(w)
+#' @keywords internal
 forest_weights <- function(trees, X, x) {
   n <- nrow(as.matrix(X))
   w <- numeric(n)
@@ -525,6 +531,7 @@ honest_random_forest <- honest_forest
 #' y <- X[, 1] + rnorm(60, 0, 0.3)
 #' r <- morie_hntfst(X, y, n_trees = 10L)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
                          n_trees = 200L, subsample_frac = 0.5,
                          min_leaf = 5L, alpha = 0.05, pi = 0.5,

@@ -52,6 +52,7 @@
 #' @export
 #' @examples
 #' crtT(residues = 5L, moduli = 5L)
+#' @keywords internal
 crtT <- function(residues, moduli) {
   a <- as.integer(residues)
   m <- as.integer(moduli)
@@ -97,6 +98,7 @@ morie_crtT <- crtT
 #' @export
 #' @examples
 #' crtT_cheatsheet()
+#' @keywords internal
 crtT_cheatsheet <- function() {
   "crtT: fold pairs via x + (b-x)*c*m with cm+dn=1 (ext. Euclid)"
 }

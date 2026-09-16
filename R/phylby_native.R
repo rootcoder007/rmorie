@@ -436,6 +436,7 @@
 #' @export
 #' @examples
 #' morie_phylby_chain_temperature(j = 5L)
+#' @keywords internal
 morie_phylby_chain_temperature <- function(j, lam = 0.2) {
   if (lam < 0) stop("phylby: the heating parameter must be >= 0")
   if (j < 0) stop("phylby: the chain index must be >= 0")
@@ -458,6 +459,7 @@ morie_phylby_chain_temperature <- function(j, lam = 0.2) {
 #' morie_phylby_swap_acceptance(beta_j = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   beta_k = c(1, 2, 3, 4, 5, 6, 7, 8), logp_j = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   logp_k = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_phylby_swap_acceptance <- function(beta_j, beta_k, logp_j, logp_k) {
   min(1.0, exp(min((beta_j - beta_k) * (logp_k - logp_j), 700.0)))
 }
@@ -474,6 +476,7 @@ morie_phylby_swap_acceptance <- function(beta_j, beta_k, logp_j, logp_k) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_phylby_splits_of(V)
+#' @keywords internal
 morie_phylby_splits_of <- function(tree) {
   .phylby_splits_of(tree)
 }
@@ -490,6 +493,7 @@ morie_phylby_splits_of <- function(tree) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_phylby_topology_key(V)
+#' @keywords internal
 morie_phylby_topology_key <- function(tree) {
   .phylby_topology_key(tree)
 }
@@ -506,6 +510,7 @@ morie_phylby_topology_key <- function(tree) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_phylby_nni_neighbours(V)
+#' @keywords internal
 morie_phylby_nni_neighbours <- function(tree) {
   .phylby_nni_neighbours(tree)
 }
@@ -528,6 +533,7 @@ morie_phylby_nni_neighbours <- function(tree) {
 #' @export
 #' @examples
 #' morie_phylby_log_posterior(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"))
+#' @keywords internal
 morie_phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
                                        branch_prior_mean = 0.1,
                                        partitions = NULL, rates = NULL,
@@ -547,6 +553,7 @@ morie_phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_phylby_clade_credibility(V)
+#' @keywords internal
 morie_phylby_clade_credibility <- function(samples) {
   .phylby_clade_credibility(samples)
 }
@@ -576,6 +583,7 @@ morie_phylby_clade_credibility <- function(samples) {
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 morie_phylby <- function(alignment, n_iter = 2000, burnin = NULL, n_chains = 4,
                           lam = 0.2, swap_every = 10, sample_every = 10,
                           pi = NULL, rate = 1.0, branch_prior_mean = 0.1,
@@ -727,6 +735,7 @@ morie_bayesian_phylogeny <- morie_phylby
 #' @export
 #' @examples
 #' morie_phylby_cheatsheet()
+#' @keywords internal
 morie_phylby_cheatsheet <- function() {
   paste0(
     "phylby: MrBayes 3 (Ronquist & Huelsenbeck 2003). MCMC over (",

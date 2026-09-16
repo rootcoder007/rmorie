@@ -45,6 +45,7 @@
 #' @export
 #' @examples
 #' Ma8Imp()
+#' @keywords internal
 Ma8Imp <- function(n = NULL) {
   # eq (3.109): eight equal taps.  Equal weighting is why the stopband
   # attenuation is poor -- the book notes no more than about -20 dB at
@@ -75,6 +76,7 @@ Ma8Imp <- function(n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ma8Tf(V)
+#' @keywords internal
 Ma8Tf <- function(z) {
   # eq (3.110): seven zeros spaced evenly round the unit circle, at every
   # multiple of fs/8 except DC.  For fs = 1000 Hz the book puts them at
@@ -104,6 +106,7 @@ Ma8Tf <- function(z) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ma8Fr(V)
+#' @keywords internal
 Ma8Fr <- function(omega) {
   # eq (3.111).  The book's factored form is EXACT: the bracket is the sum
   # over lags -3..3, and exp(-j4w) shifts that to lags 1..7, which with
@@ -151,6 +154,7 @@ Ma8Fr <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ma8Rec(V)
+#' @keywords internal
 Ma8Rec <- function(x, n = NULL) {
   # eq (3.120): y(n) = y(n-1) + (1/8)x(n) - (1/8)x(n-8).  Two additions a
   # sample instead of eight, and it "clearly depicts the integration
@@ -199,6 +203,7 @@ Ma8Rec <- function(x, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ma8RecTf(V)
+#' @keywords internal
 Ma8RecTf <- function(z) {
   # eq (3.121): a pole at z = 1 cancelled by one of the numerator's zeros,
   # so the filter is still FIR despite the recursive implementation.  At
@@ -237,6 +242,7 @@ Ma8RecTf <- function(z) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ma8Sinc(V)
+#' @keywords internal
 Ma8Sinc <- function(omega) {
   # eq (3.122): the Dirichlet kernel, a real sinc-like envelope times a
   # pure delay of 7/2 samples.  The book states it "is equivalent to that
@@ -287,6 +293,7 @@ Ma8Sinc <- function(omega) {
 #' @export
 #' @examples
 #' RunInt(x = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+#' @keywords internal
 RunInt <- function(x, t, tau) {
   # eq (3.112): the continuous counterpart of the moving-average sum.  The
   # window is clipped at the start of the record, and how many windows
@@ -349,6 +356,7 @@ RunInt <- function(x, t, tau) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' RunIntAll(V, V)
+#' @keywords internal
 RunIntAll <- function(x, t) {
   # eq (3.113).  Over a finite record the lower limit is the first sample,
   # so any mass before it is unobserved and the constant of integration is
@@ -388,6 +396,7 @@ RunIntAll <- function(x, t) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IntFt(V, V)
+#' @keywords internal
 IntFt <- function(X, omega, X0 = NULL) {
   # eq (3.115): Y(w) = X(w)/(jw) + pi X(0) delta(w).  The delta carries
   # the DC content, which 1/(jw) cannot represent because it blows up
@@ -432,6 +441,7 @@ IntFt <- function(X, omega, X0 = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IntFr(V)
+#' @keywords internal
 IntFr <- function(omega) {
   # eq (3.116): H(w) = 1/(jw), the DC term of eq (3.115) set aside as the
   # book does.  The gain falls as frequency rises, so it is a lowpass, and
@@ -464,6 +474,7 @@ IntFr <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IntMag(V)
+#' @keywords internal
 IntMag <- function(omega) {
   # eq (3.117).  The book prints 1/w, which is right for w > 0 and is how
   # the response is plotted; a magnitude cannot be negative, so the
@@ -494,6 +505,7 @@ IntMag <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IntPh(V)
+#' @keywords internal
 IntPh <- function(omega) {
   # eq (3.118): a constant -pi/2, because 1/(jw) is a fixed quarter turn.
   # A constant phase is NOT a constant delay: the group delay is the
@@ -529,6 +541,7 @@ IntPh <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FDiff(V)
+#' @keywords internal
 FDiff <- function(x, T = 1, n = NULL) {
   # eq (3.123).  The 1/T is not cosmetic: the book is explicit that it "is
   # required in order to obtain the rate of change of the signal with
@@ -565,6 +578,7 @@ FDiff <- function(x, T = 1, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FDiffTf(V)
+#' @keywords internal
 FDiffTf <- function(z, T = 1) {
   # eq (3.124): one zero, at z = 1, the DC point -- that single zero is
   # the whole of the operator's highpass character.
@@ -592,6 +606,7 @@ FDiffTf <- function(z, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FDiffFr(V)
+#' @keywords internal
 FDiffFr <- function(omega, T = 1) {
   # eq (3.125).  The second form separates a half-sample delay from a real
   # gain; the factor of j is what puts the phase a quarter turn ahead, the
@@ -628,6 +643,7 @@ FDiffFr <- function(omega, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FDiffMag(V)
+#' @keywords internal
 FDiffMag <- function(omega, T = 1) {
   # eq (3.126).  The book prints (2/T) sin(w/2) without bars, right on
   # 0 <= w <= pi, the range plotted; the absolute value is needed outside
@@ -658,6 +674,7 @@ FDiffMag <- function(omega, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FDiffPh(V)
+#' @keywords internal
 FDiffPh <- function(omega) {
   # eq (3.127): slope -1/2, so half a sample of group delay plus the
   # quarter turn from the j of eq (3.125).  A half-sample delay cannot be
@@ -687,6 +704,7 @@ FDiffPh <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CDiff3(V)
+#' @keywords internal
 CDiff3 <- function(x, T = 1, n = NULL) {
   # eq (3.128): the mean of two successive first differences, which
   # controls the noise amplification.  The book warns the price is
@@ -731,6 +749,7 @@ CDiff3 <- function(x, T = 1, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CDiff3Tf(V)
+#' @keywords internal
 CDiff3Tf <- function(z, T = 1) {
   # eq (3.129).  The factored form is the point: the operator IS a
   # first-order difference in series with a two-point moving average, so
@@ -769,6 +788,7 @@ CDiff3Tf <- function(z, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CDiff3Mag(V)
+#' @keywords internal
 CDiff3Mag <- function(omega, T = 1) {
   # eq (3.130): (1/T)|sin w|.  Nought at BOTH ends -- at DC from the
   # highpass factor, at Nyquist from the moving-average factor -- peaking
@@ -798,6 +818,7 @@ CDiff3Mag <- function(omega, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CDiff3Ph(V)
+#' @keywords internal
 CDiff3Ph <- function(omega) {
   # eq (3.131): slope -1, so a WHOLE sample of group delay against the
   # half sample of the plain difference.  An integer delay can be undone
@@ -823,6 +844,7 @@ CDiff3Ph <- function(omega) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Diff1(V)
+#' @keywords internal
 Diff1 <- function(x, T = 1) {
   # eq (3.123) run over a record, with the coefficients reported so the
   # highpass character is visible.
@@ -852,6 +874,7 @@ Diff1 <- function(x, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Diff2(V)
+#' @keywords internal
 Diff2 <- function(x, T = 1, n = NULL) {
   # The second derivative has response (jw)(jw) = -w^2, a QUADRATIC rise
   # with frequency, and the book notes it "may be realized as a cascade of
@@ -902,6 +925,7 @@ Diff2 <- function(x, T = 1, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' BWander(V)
+#' @keywords internal
 BWander <- function(z, T = 1, pole = 0.995) {
   # eq (3.132): the first difference with a pole just inside the unit
   # circle at DC.  The pole nearly cancels the zero away from DC, so the
@@ -949,6 +973,7 @@ BWander <- function(z, T = 1, pole = 0.995) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' BWanderZ(V)
+#' @keywords internal
 BWanderZ <- function(z, T = 1, pole = 0.995) {
   # eq (3.133): the same filter in positive powers of z.  The book keeps
   # this form because the graphical method reads it directly -- numerator
@@ -993,6 +1018,7 @@ BWanderZ <- function(z, T = 1, pole = 0.995) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' BWanderEq(V)
+#' @keywords internal
 BWanderEq <- function(x, T = 1, pole = 0.995, n = NULL) {
   # eq (3.134).  Note the PLUS on the feedback: the pole's coefficient is
   # already on the right-hand side, so this does NOT carry the minus of
@@ -1043,6 +1069,7 @@ BWanderEq <- function(x, T = 1, pole = 0.995, n = NULL) {
 #' @export
 #' @examples
 #' BwSqMag(Omega = c(1, 2, 3, 4, 5, 6, 7, 8), Omega_c = 5L, N = 5L)
+#' @keywords internal
 BwSqMag <- function(Omega, Omega_c, N) {
   # eq (3.135): monotonic in both bands, no ripple anywhere -- the
   # defining Butterworth property.  At the cutoff the squared magnitude is
@@ -1078,6 +1105,7 @@ BwSqMag <- function(Omega, Omega_c, N) {
 #' @export
 #' @examples
 #' BwSqLap(s = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), Omega_c = 5L, N = 5L)
+#' @keywords internal
 BwSqLap <- function(s, Omega_c, N) {
   # eq (3.136): 2N poles, half in the right half-plane, so this is NOT a
   # filter until the N left-half-plane ones are selected by eq (3.138).
@@ -1115,6 +1143,7 @@ BwSqLap <- function(s, Omega_c, N) {
 #' @export
 #' @examples
 #' BwPoles(Omega_c = 5L, N = 5L)
+#' @keywords internal
 BwPoles <- function(Omega_c, N, k = NULL) {
   # eq (3.137): all 2N poles on a circle of radius Omega_c, spaced pi/N
   # apart, symmetric about the imaginary axis and never on it.  For odd N
@@ -1167,6 +1196,7 @@ BwPoles <- function(Omega_c, N, k = NULL) {
 #' @export
 #' @examples
 #' BwAnalog(Omega_c = 5L, N = 5L)
+#' @keywords internal
 BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
   # eq (3.138): built from the N LEFT-half-plane poles only.  With no gain
   # given, G normalizes the DC gain to unity, which makes it Omega_c^N.
@@ -1225,6 +1255,7 @@ BwAnalog <- function(Omega_c, N, G = NULL, s = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Bilinear(V)
+#' @keywords internal
 Bilinear <- function(z, T = 1) {
   # eq (3.139): maps the whole left half-plane into the unit disc, so a
   # stable analog filter always yields a stable digital one -- unlike
@@ -1265,6 +1296,7 @@ Bilinear <- function(z, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' BilinUnit(V)
+#' @keywords internal
 BilinUnit <- function(omega, T = 1) {
   # eq (3.140): on the unit circle sigma vanishes exactly, so the
   # imaginary axis maps onto the unit circle and nowhere else.  The
@@ -1306,6 +1338,7 @@ BilinUnit <- function(omega, T = 1) {
 #' @export
 #' @examples
 #' BilinWarp(omega = list(a = 1, b = 2))
+#' @keywords internal
 BilinWarp <- function(omega, T = 1) {
   # eq (3.141): the prewarping step.  Nonlinear, so a digital cutoff
   # cannot be handed to an analog design unchanged; skipping it puts the
@@ -1345,6 +1378,7 @@ BilinWarp <- function(omega, T = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' BilinUnwarp(V)
+#' @keywords internal
 BilinUnwarp <- function(Omega, T = 1) {
   # eq (3.142): the inverse of eq (3.141); the two compose to the
   # identity, which is checked.  Every finite analog frequency lands
@@ -1383,6 +1417,7 @@ BilinUnwarp <- function(Omega, T = 1) {
 #' @export
 #' @examples
 #' BwDigital(N = 4, fc = 100, fs = 1000)
+#' @keywords internal
 BwDigital <- function(Omega_c = NULL, N = NULL, T = 1, fc = NULL,
                       fs = NULL, z = NULL) {
   # eq (3.143).  The N zeros at z = -1 are not a design choice: the
@@ -1460,6 +1495,7 @@ BwDigital <- function(Omega_c = NULL, N = NULL, T = 1, fc = NULL,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IirDiffGen(V, V)
+#' @keywords internal
 IirDiffGen <- function(x, b_k, a_k = NULL, n = NULL) {
   # eq (3.144): the time-domain form of eq (3.143), and how a designed
   # filter is actually run over data.  The feedback is SUBTRACTED, as in
@@ -1482,6 +1518,7 @@ IirDiffGen <- function(x, b_k, a_k = NULL, n = NULL) {
 #' @export
 #' @examples
 #' BwDirect(omega = c(1, 2, 3, 4, 5, 6, 7, 8), omega_c = 5L, N = 5L)
+#' @keywords internal
 BwDirect <- function(omega, omega_c, N) {
   # eq (3.145): specified on the discrete-frequency axis outright, so
   # there is no warping to prewarp for.  The filter so defined has zero
@@ -1519,6 +1556,7 @@ BwDirect <- function(omega, omega_c, N) {
 #' @export
 #' @examples
 #' BwLpDft(16, kc = 4, N = 2)
+#' @keywords internal
 BwLpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
   # eq (3.146), valid for k = 0..K/2 with the upper half a reflection,
   # H(k) = H(K-k).  The book defines kc = ceil(K wc/ws) and that CEILING
@@ -1576,6 +1614,7 @@ BwLpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #' @export
 #' @examples
 #' BwHpDft(16, kc = 4, N = 2)
+#' @keywords internal
 BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
   # eq (3.149): the lowpass with the ratio inverted.  At k = 0 the ratio
   # is unbounded and the response is exactly nought -- the filter the book
@@ -1633,6 +1672,7 @@ BwHpDft <- function(K, kc = NULL, N = 2, fc = NULL, fs = NULL) {
 #' @export
 #' @examples
 #' Notch60(1000, 60)
+#' @keywords internal
 Notch60 <- function(fs, f0 = 60, z = NULL) {
   # A conjugate pair of zeros AT the interference frequency, so the gain
   # there is exactly nought.  With zeros alone the notch is wide, which is
@@ -1689,6 +1729,7 @@ Notch60 <- function(fs, f0 = 60, z = NULL) {
 #' @export
 #' @examples
 #' Notch(notch_freq = 60, bandwidth = 5, fs = 1000)
+#' @keywords internal
 Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
                   z = NULL) {
   # Zeros ON the unit circle at the interference frequency and poles just
@@ -1769,6 +1810,7 @@ Notch <- function(notch_freq, bandwidth = NULL, fs = 1000, r = NULL,
 #' @export
 #' @examples
 #' Comb(period_samples = 5L)
+#' @keywords internal
 Comb <- function(period_samples, fs = 1000, z = NULL) {
   # H(z) = (1/2)(1 - z^-N): N zeros spaced evenly round the unit circle,
   # so it notches DC and every harmonic of fs/N at once -- which is what
@@ -1812,6 +1854,7 @@ Comb <- function(period_samples, fs = 1000, z = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' FreqResp(V)
+#' @keywords internal
 FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
   # Evaluated on a uniform grid from DC to NYQUIST inclusive -- the
   # one-sided response, since for real coefficients the other half is the
@@ -1882,6 +1925,7 @@ FreqResp <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PhaseResp(V)
+#' @keywords internal
 PhaseResp <- function(b, a = NULL, fs = 1000, n_freqs = 512,
                       unwrap = TRUE) {
   # The principal value jumps by 2 pi at the branch cut, an artifact of
@@ -1941,6 +1985,7 @@ PhaseResp <- function(b, a = NULL, fs = 1000, n_freqs = 512,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' GrpDelay(V)
+#' @keywords internal
 GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
   # Computed from the COEFFICIENTS, not by differentiating a numerical
   # phase.  Differentiating is wrong at any zero on the unit circle, where
@@ -2010,6 +2055,7 @@ GrpDelay <- function(b, a = NULL, fs = 1000, n_freqs = 512) {
 #' @export
 #' @examples
 #' BwLp(cutoff_hz = 5L)
+#' @keywords internal
 BwLp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
   # The book's route end to end: prewarp by eq (3.141), place poles by
   # eq (3.137), keep the left-half-plane ones by eq (3.138), apply the
@@ -2054,6 +2100,7 @@ BwLp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' @export
 #' @examples
 #' BwHp(cutoff_hz = 5L)
+#' @keywords internal
 BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
   # The lowpass poles are reused -- a Butterworth highpass has the same
   # pole radius -- and the N zeros move from z = -1 to z = +1.  The gain
@@ -2109,6 +2156,7 @@ BwHp <- function(cutoff_hz, order = 4, fs = 1000, z = NULL) {
 #' @export
 #' @examples
 #' HammingW(N = 5L)
+#' @keywords internal
 HammingW <- function(N) {
   # w(n) = 0.54 - 0.46 cos(2 pi n/(N-1)).  The 0.54/0.46 split cancels the
   # rectangle's largest sidelobe, about -43 dB, at the cost of a wider
@@ -2149,6 +2197,7 @@ HammingW <- function(N) {
 #' @export
 #' @examples
 #' HannW(N = 5L)
+#' @keywords internal
 HannW <- function(N) {
   # w(n) = 0.5[1 - cos(2 pi n/(N-1))].  Reaches exactly zero at both ends,
   # so overlapped Hann windows add to a constant at 50 per cent overlap --
@@ -2192,6 +2241,7 @@ HannW <- function(N) {
 #' @export
 #' @examples
 #' BlackmanW(N = 5L)
+#' @keywords internal
 BlackmanW <- function(N) {
   # w(n) = 0.42 - 0.5 cos(2 pi n/(N-1)) + 0.08 cos(4 pi n/(N-1)).  A third
   # cosine buys much deeper sidelobes than the Hamming, about -58 dB, at
@@ -2232,6 +2282,7 @@ BlackmanW <- function(N) {
 #' @export
 #' @examples
 #' WindowFn(N = 5L)
+#' @keywords internal
 WindowFn <- function(N, window_type = "hamming") {
   # Section 3.4.  Truncating a record IS multiplying it by a rectangle,
   # whose transform has sidelobes that leak energy from strong components
@@ -2280,6 +2331,7 @@ WindowFn <- function(N, window_type = "hamming") {
 #' @export
 #' @examples
 #' SincKern(fc = 5L)
+#' @keywords internal
 SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {
   # The inverse transform of a rectangular passband, truncated to M+1 taps
   # and delayed by M/2 to make it causal.  Truncation is multiplying by a
@@ -2333,6 +2385,7 @@ SincKern <- function(fc, fs = 1000, M = 64, window = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MfiltH(V)
+#' @keywords internal
 MfiltH <- function(g, normalize = FALSE) {
   # h(n) = g(N-1-n): the template reversed in time, which makes the
   # filter's output the cross-correlation with the template.  Reversal is

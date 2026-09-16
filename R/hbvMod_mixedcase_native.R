@@ -70,6 +70,7 @@
 #' \code{$snow}, \code{$soil}, \code{$suz}, \code{$swater} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @keywords internal
 morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
   p <- as.numeric(precip)
   t <- as.numeric(temp)

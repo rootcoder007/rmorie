@@ -71,6 +71,7 @@
 #' @export
 #' @examples
 #' default_learners(p = 0.5)
+#' @keywords internal
 default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
   lib <- list(
     list(name = "intercept", kind = "intercept", penalty = 0),
@@ -343,6 +344,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' cv_risk(V, V)
+#' @keywords internal
 cv_risk <- function(y, Z, loss = "l2") {
   y <- as.numeric(y)
   Z <- as.matrix(Z)
@@ -390,6 +392,7 @@ cv_risk <- function(y, Z, loss = "l2") {
 #' y <- 1 + X[, 1] - 0.5 * X[, 2] + rnorm(n, 0, 0.3)
 #' r <- super_learner(y, X, n_folds = 4)
 #' str(r, max.level = 1)
+#' @keywords internal
 super_learner <- function(y, X, library = NULL, n_folds = 10,
                           meta = "nnls", binary = NULL, loss = "l2",
                           ridge = 1e-8, honest_level_one = TRUE) {
@@ -497,6 +500,7 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 #' A <- rbinom(n, 1, plogis(0.5 * H[, 1]))
 #' r <- flexible_iptw(A, H, n_folds = 4)
 #' str(r, max.level = 1)
+#' @keywords internal
 flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
                           meta = "nnls", trim = 0.01, ridge = 1e-8,
                           stabilize = FALSE) {
@@ -565,6 +569,7 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 #' y <- 1 + 0.8 * A + H[, 1] + rnorm(n, 0, 0.3)
 #' r <- iptw_ate(y, A, H, n_folds = 4)
 #' str(r, max.level = 1)
+#' @keywords internal
 iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
                      meta = "nnls", trim = 0.01, ridge = 1e-8,
                      level = 0.95) {

@@ -91,6 +91,7 @@
 #' @export
 #' @examples
 #' morie_frgrow_dg(kd = 5L)
+#' @keywords internal
 morie_frgrow_dg <- function(kd, temperature = .FRGROW_T_STANDARD) {
   kd <- as.numeric(kd)
   if (kd <= 0) stop("a dissociation constant must be positive")
@@ -113,6 +114,7 @@ morie_frgrow_dg <- function(kd, temperature = .FRGROW_T_STANDARD) {
 #' @export
 #' @examples
 #' morie_frgrow_le(kd = 5L, hac = 5L)
+#' @keywords internal
 morie_frgrow_le <- function(kd, hac, route = "rt",
                             temperature = .FRGROW_T_STANDARD) {
   if (!(route %in% .FRGROW_ENERGY_ROUTES))
@@ -140,6 +142,7 @@ morie_frgrow_le <- function(kd, hac, route = "rt",
 #' @param temperature Kelvin.
 #' @return The group efficiency.
 #' @export
+#' @keywords internal
 morie_frgrow_ge <- function(kd_parent, hac_parent, kd_grown, hac_grown,
                             route = "rt",
                             temperature = .FRGROW_T_STANDARD) {
@@ -174,6 +177,7 @@ morie_frgrow_ge <- function(kd_parent, hac_parent, kd_grown, hac_grown,
 #' @export
 #' @examples
 #' morie_frgrow_metrics(kd = 5L, hac = 5L)
+#' @keywords internal
 morie_frgrow_metrics <- function(kd, hac, logp = NULL, mw = NULL,
                                  psa = NULL, route = "rt",
                                  temperature = .FRGROW_T_STANDARD) {
@@ -227,6 +231,7 @@ morie_frgrow_metrics <- function(kd, hac, logp = NULL, mw = NULL,
 #'     list(0.004, 18, 2.2, 240, 58, "worse"), list(8e-07, 22, NULL,
 #'         NULL, NULL, "no_descriptors"))
 #' morie_frgrow(PARENT, LIB)
+#' @keywords internal
 morie_frgrow <- function(fragment, linker_lib, route = "rt",
                          temperature = .FRGROW_T_STANDARD) {
   unpack <- function(row) {
@@ -313,6 +318,7 @@ morie_frgrow <- function(fragment, linker_lib, route = "rt",
 #' @export
 #' @examples
 #' morie_frgrow_cheatsheet()
+#' @keywords internal
 morie_frgrow_cheatsheet <- function()
   paste0("frgrow: fragment growing by ligand and group efficiency. ",
          "routes ", paste(.FRGROW_ENERGY_ROUTES, collapse = ", "),

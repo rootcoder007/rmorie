@@ -51,6 +51,7 @@
 #' set.seed(1)
 #' Y <- matrix(rnorm(40, 10), 8, 5)
 #' morie_didfst_panel_differences(Y, event_time = 3)
+#' @keywords internal
 morie_didfst_panel_differences <- function(Y, event_time) {
   p <- .panel(Y)
   H <- as.integer(event_time)
@@ -81,6 +82,7 @@ morie_didfst_panel_differences <- function(Y, event_time) {
 #' Y[D == 1, 4:5] <- Y[D == 1, 4:5] + 2
 #' delta <- morie_didfst_panel_differences(Y, event_time = 3)
 #' morie_didfst_did_estimate(delta, D)
+#' @keywords internal
 morie_didfst_did_estimate <- function(delta, D, weights = NULL) {
   d <- as.numeric(delta)
   Dv <- as.numeric(D)
@@ -132,6 +134,7 @@ morie_didfst_did_estimate <- function(delta, D, weights = NULL) {
 #' Y[D == 1, 4:5] <- Y[D == 1, 4:5] + 2 + X[D == 1, 1]
 #' r <- morie_didfst_did_forest(Y, D, X, event_time = 3, n_trees = 20L)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
                                     n_trees = 200L, min_leaf = 5L,
                                     alpha = 0.05, max_depth = 12L,
@@ -191,6 +194,7 @@ morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #' D <- rep(c(1, 0), 4)
 #' r <- morie_didfst_placebo_did(Y, D, event_time = 4)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_didfst_placebo_did <- function(Y, D, event_time, split = NULL) {
   p <- .panel(Y)
   H <- as.integer(event_time)
@@ -229,6 +233,7 @@ morie_didfst_placebo_did <- function(Y, D, event_time, split = NULL) {
 #' ft[9:12] <- list(NULL)
 #' r <- morie_didfst_group_time_att(Y, ft)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_didfst_group_time_att <- function(Y, first_treated,
                                         comparison = "not-yet-treated") {
   p <- .panel(Y)
@@ -301,6 +306,7 @@ morie_didfst_group_time_att <- function(Y, first_treated,
 #' gt <- morie_didfst_group_time_att(Y, ft)
 #' r <- morie_didfst_aggregate_att(gt, scheme = "simple")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_didfst_aggregate_att <- function(gt, scheme = "simple",
                                        horizon = NULL) {
   if (!(scheme %in% c("simple", "event", "cohort")))

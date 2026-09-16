@@ -19,6 +19,7 @@
 #' @export
 #' @examples
 #' bartlett_kernel(x = 5L)
+#' @keywords internal
 bartlett_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 1) 1 - ax else 0
@@ -35,6 +36,7 @@ bartlett_kernel <- function(x) {
 #' @export
 #' @examples
 #' parzen_kernel(x = 5L)
+#' @keywords internal
 parzen_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 0.5) {
@@ -56,6 +58,7 @@ parzen_kernel <- function(x) {
 #' @export
 #' @examples
 #' quadratic_spectral_kernel(x = 5L)
+#' @keywords internal
 quadratic_spectral_kernel <- function(x) {
   x <- as.numeric(x)
   if (x == 0) {
@@ -76,6 +79,7 @@ quadratic_spectral_kernel <- function(x) {
 #' @export
 #' @examples
 #' tukey_hanning_kernel(x = 5L)
+#' @keywords internal
 tukey_hanning_kernel <- function(x) {
   ax <- abs(as.numeric(x))
   if (ax <= 1) 0.5 * (1 + cos(pi * ax)) else 0
@@ -136,6 +140,7 @@ tukey_hanning_kernel <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' moment_vectors(V, V)
+#' @keywords internal
 moment_vectors <- function(e, X) {
   e <- as.numeric(e)
   X <- as.matrix(X)
@@ -248,6 +253,7 @@ moment_vectors <- function(e, X) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' prewhiten_var(V)
+#' @keywords internal
 prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
   rows <- as.matrix(v)
   storage.mode(rows) <- "double"
@@ -358,6 +364,7 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' ar1_fit(V)
+#' @keywords internal
 ar1_fit <- function(x) {
   x <- as.numeric(x)
   n <- length(x)
@@ -383,6 +390,7 @@ ar1_fit <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' alpha_ar1(V)
+#' @keywords internal
 alpha_ar1 <- function(v, q = 2, weights = NULL) {
   rows <- as.matrix(v)
   storage.mode(rows) <- "double"
@@ -442,6 +450,7 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' automatic_bandwidth(V)
+#' @keywords internal
 automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
   ck <- .check_kernel(kernel)
   q <- ck$const[1]
@@ -474,6 +483,7 @@ automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
 #' @export
 #' @examples
 #' kernel_hac(v = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
+#' @keywords internal
 kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
   ck <- .check_kernel(kernel)
   kfun <- ck$fun
@@ -551,6 +561,7 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' andrews_monahan_hac(V)
+#' @keywords internal
 andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,
                                 var_order = 1, kernel = "qs",
                                 bandwidth = NULL, weights = NULL,
@@ -645,6 +656,7 @@ andmnh <- andrews_monahan_hac
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.andmnh(D)
+#' @keywords internal
 print.andmnh <- function(x, ...) {
   cat(sprintf("Andrews-Monahan VAR prewhitened kernel HAC\n"))
   cat(sprintf("  kernel        : %s\n", x$kernel))

@@ -314,6 +314,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_sacrb_bleu(V, V)
+#' @keywords internal
 morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
                              weights = NULL, tokenizer = "13a",
                              lowercase = FALSE) {

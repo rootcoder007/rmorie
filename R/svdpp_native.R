@@ -301,6 +301,7 @@
 #' @param implicit Passed to \code{.svdpp_fit}. Defaults to \code{TRUE}.
 #' @return The value of \code{.svdpp_fit}.
 #' @export
+#' @keywords internal
 morie_svdpp <- function(ratings, n_users, n_items,
                         factors = 4, epochs = 30,
                         lr = 0.007, reg = 0.015,

@@ -157,6 +157,7 @@
 #' @return The full dyadic grid of length 2^m + 1, with 0 and 1 at the
 #'   ends.
 #' @export
+#' @keywords internal
 morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
                               centring = "uniform", nullq = NULL) {
   m <- as.integer(m)
@@ -213,6 +214,7 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
 #' @examples
 #' set.seed(1)
 #' r <- morie_bnppvl_log_prior(q = matrix(rnorm(20), 5, 4), m = matrix(rnorm(20), 5, 4)); TRUE
+#' @keywords internal
 morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
                                    centring = "uniform", nullq = NULL) {
   m <- as.integer(m)
@@ -263,6 +265,7 @@ morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_bnppvl_counts(V, V)
+#' @keywords internal
 morie_bnppvl_counts <- function(u, q) {
   k <- length(q) - 1L
   n <- integer(k)
@@ -289,6 +292,7 @@ morie_bnppvl_counts <- function(u, q) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_bnppvl_loglik(V, V)
+#' @keywords internal
 morie_bnppvl_loglik <- function(u, q, kind = "exact") {
   if (!(kind %in% .BNPPVL_LIKELIHOODS))
     stop("kind must be one of ", paste(.BNPPVL_LIKELIHOODS, collapse = ", "))
@@ -459,6 +463,7 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' }, numeric(1))
 #' morie_bnppvl(X, m = 3L, c = 2.5, likelihood = "exact", sweeps = 400L,
 #'     burn = 100L, thin = 4L, seed = 7, init = "empirical")
+#' @keywords internal
 morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
                          centring = "uniform", nullq = NULL,
                          likelihood = "exact", lo = 0, hi = 1,
@@ -621,6 +626,7 @@ morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
 #' @export
 #' @examples
 #' morie_bnppvl_cheatsheet()
+#' @keywords internal
 morie_bnppvl_cheatsheet <- function()
   paste0("bnppvl: quantile-pyramid predictive for a new observation. ",
          "likelihoods ", paste(.BNPPVL_LIKELIHOODS, collapse = ", "),

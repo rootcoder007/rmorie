@@ -26,6 +26,7 @@
 #'   r <- morie_secrtt_generate_dek(seed, record_id = 7L)
 #'   r$dek_hex
 #' }
+#' @keywords internal
 morie_secrtt_generate_dek <- function(master_seed, record_id,
                                       salt = NULL) {
   info <- c(charToRaw("dek:"), as.raw(record_id))
@@ -55,6 +56,7 @@ morie_secrtt_generate_dek <- function(master_seed, record_id,
 #'   w <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(1:12))
 #'   w$kek_id
 #' }
+#' @keywords internal
 morie_secrtt_wrap_dek <- function(dek, kek, nonce, kek_id = "kek-1",
                                   aad = raw()) {
   d <- as.raw(dek)
@@ -88,6 +90,7 @@ morie_secrtt_wrap_dek <- function(dek, kek, nonce, kek_id = "kek-1",
 #'   u <- morie_secrtt_unwrap_dek(w, kek)
 #'   identical(u$dek, dek)
 #' }
+#' @keywords internal
 morie_secrtt_unwrap_dek <- function(wrapped, kek, audit_log = NULL) {
   aad <- c(as.raw(wrapped$aad %||% raw()),
            charToRaw(as.character(wrapped$kek_id)))
@@ -121,6 +124,7 @@ morie_secrtt_unwrap_dek <- function(wrapped, kek, audit_log = NULL) {
 #'                                 nonce = as.raw(13:24))
 #'   s$tag
 #' }
+#' @keywords internal
 morie_secrtt_seal_record <- function(plaintext, dek, nonce,
                                      aad = raw()) {
   r <- morie_secaead_aead_encrypt(dek, nonce, as.raw(plaintext),
@@ -144,6 +148,7 @@ morie_secrtt_seal_record <- function(plaintext, dek, nonce,
 #'                                 nonce = as.raw(13:24))
 #'   rawToChar(morie_secrtt_open_record(s, dek))
 #' }
+#' @keywords internal
 morie_secrtt_open_record <- function(sealed, dek) {
   r <- morie_secaead_aead_decrypt(dek, as.raw(sealed$nonce),
                                    as.raw(sealed$ciphertext),
@@ -181,6 +186,7 @@ morie_secrtt_open_record <- function(sealed, dek) {
 #'                                new_nonces = list(as.raw(2:13)))
 #'   r$kek_id
 #' }
+#' @keywords internal
 morie_secrtt_rotate_kek <- function(wrapped_deks, old_kek, new_kek,
                                     new_nonces, new_kek_id = "kek-2",
                                     audit_log = NULL) {
@@ -222,6 +228,7 @@ morie_secrtt_rotate_kek <- function(wrapped_deks, old_kek, new_kek,
 #'   r <- morie_secrtt_rotate_dek(s, dek1, dek2, new_nonce = as.raw(25:36))
 #'   rawToChar(morie_secrtt_open_record(r$sealed, dek2))
 #' }
+#' @keywords internal
 morie_secrtt_rotate_dek <- function(sealed, old_dek, new_dek,
                                     new_nonce) {
   pt <- morie_secrtt_open_record(sealed, old_dek)
@@ -245,6 +252,7 @@ morie_secrtt_rotate_dek <- function(sealed, old_dek, new_dek,
 #' if (morie_crypto_sodium_available()) {
 #'   morie_secrtt_rotation_cost(n_records = 5L, mean_record_bytes = 5L)
 #' }
+#' @keywords internal
 morie_secrtt_rotation_cost <- function(n_records, mean_record_bytes,
                                        dek_bytes = 32) {
   n <- as.integer(n_records)
@@ -280,6 +288,7 @@ morie_secrtt_rotation_cost <- function(n_records, mean_record_bytes,
 #'   w2 <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(2:13), kek_id = "kek-2")
 #'   morie_secrtt_crypto_shred("kek-1", list(w1, w2))
 #' }
+#' @keywords internal
 morie_secrtt_crypto_shred <- function(kek_id, wrapped_deks) {
   ids <- vapply(wrapped_deks, function(w) w$kek_id, character(1))
   covered <- which(ids == kek_id) - 1L

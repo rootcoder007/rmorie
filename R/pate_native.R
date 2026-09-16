@@ -46,6 +46,7 @@
 #' @param n_classes Defaults to \code{NULL}.
 #' @return The value of \code{split}.
 #' @export
+#' @keywords internal
 teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
   teachers <- as.list(teacher_predicts)
   if (length(teachers) == 0L)
@@ -94,6 +95,7 @@ teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
 #' @export
 #' @examples
 #' noisy_argmax(counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+#' @keywords internal
 noisy_argmax <- function(counts, gamma, seed = 0) {
   gamma <- as.numeric(gamma)
   if (gamma <= 0)
@@ -125,6 +127,7 @@ noisy_argmax <- function(counts, gamma, seed = 0) {
 #' @export
 #' @examples
 #' epsilon_data_independent(T = 5L, gamma = 0.5, delta = 0.5)
+#' @keywords internal
 epsilon_data_independent <- function(T, gamma, delta) {
   T <- as.numeric(T)
   gamma <- as.numeric(gamma)
@@ -149,6 +152,7 @@ epsilon_data_independent <- function(T, gamma, delta) {
 #' @export
 #' @examples
 #' lemma4_bound(counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+#' @keywords internal
 lemma4_bound <- function(counts, gamma) {
   gamma <- as.numeric(gamma)
   if (gamma <= 0)
@@ -179,6 +183,7 @@ lemma4_bound <- function(counts, gamma) {
 #' @export
 #' @examples
 #' theorem3_moment(q = 0.5, gamma = 0.5, l = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 theorem3_moment <- function(q, gamma, l) {
   q <- as.numeric(q)
   gamma <- as.numeric(gamma)
@@ -211,6 +216,7 @@ theorem3_moment <- function(q, gamma, l) {
 #' @export
 #' @examples
 #' moments_accountant(vote_counts = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5, delta = 0.5)
+#' @keywords internal
 moments_accountant <- function(vote_counts, gamma, delta,
                                lambdas = NULL,
                                data_dependent = TRUE) {
@@ -281,6 +287,7 @@ moments_accountant <- function(vote_counts, gamma, delta,
 #' \code{epsilon_data_independent}, \code{accountant}, \code{delta}, \code{gamma},
 #' \code{n_teachers}, \code{n_queries}, \code{student}, \code{note}, \code{method}.
 #' @export
+#' @keywords internal
 pate <- function(teacher_predicts, queries, gamma = 0.05,
                  delta = 1e-5, n_classes = NULL,
                  student_train_fn = NULL, student_features = NULL,

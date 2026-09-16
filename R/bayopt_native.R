@@ -101,6 +101,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' matern52(V, V)
+#' @keywords internal
 matern52 <- function(a, b, amplitude = 1, length_scale = 1) {
   d <- length(a)
   ls <- .lengths(length_scale, d)
@@ -124,6 +125,7 @@ matern52 <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' squared_exponential(V, V)
+#' @keywords internal
 squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
   d <- length(a)
   ls <- .lengths(length_scale, d)
@@ -259,6 +261,7 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @examples
 #' gp_posterior(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   Xs = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
                          length_scale = 1, noise = 1e-8, mean = NULL) {
   rows <- as.matrix(X)
@@ -328,6 +331,7 @@ gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
 #' @export
 #' @examples
 #' gp_posterior_gradient(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), xs = 5L)
+#' @keywords internal
 gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
                                   amplitude = 1, length_scale = 1,
                                   noise = 1e-8, mean = NULL) {
@@ -397,6 +401,7 @@ gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
 #' @examples
 #' probability_of_improvement(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L,
 #'   best = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 probability_of_improvement <- function(mu, sd, best, xi = 0) {
   if (sd <= 0) {
     return(0)
@@ -418,6 +423,7 @@ probability_of_improvement <- function(mu, sd, best, xi = 0) {
 #' @export
 #' @examples
 #' expected_improvement(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L, best = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 expected_improvement <- function(mu, sd, best, xi = 0) {
   if (sd <= 0) {
     return(0)
@@ -440,6 +446,7 @@ expected_improvement <- function(mu, sd, best, xi = 0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' lower_confidence_bound(V, V)
+#' @keywords internal
 lower_confidence_bound <- function(mu, sd, kappa = 2) {
   mu - kappa * sd
 }
@@ -460,6 +467,7 @@ lower_confidence_bound <- function(mu, sd, kappa = 2) {
 #' @export
 #' @examples
 #' acquire(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L, best = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 acquire <- function(mu, sd, best, acq = "ei", kappa = 2, xi = 0) {
   if (!(acq %in% c("ei", "pi", "lcb"))) {
     stop("bayopt: acq must be one of ei, pi, lcb")
@@ -493,6 +501,7 @@ acquire <- function(mu, sd, best, acq = "ei", kappa = 2, xi = 0) {
 #' r <- acquisition_gradient(gmu = c(0.2, -0.1), gsd = c(-0.05, 0.03),
 #'                           mu = 1.2, sd = 0.4, best = 1.0, acq = "ei")
 #' r
+#' @keywords internal
 acquisition_gradient <- function(gmu, gsd, mu, sd, best, acq = "ei",
                                  kappa = 2, xi = 0) {
   if (!(acq %in% c("ei", "pi", "lcb"))) {
@@ -549,6 +558,7 @@ acquisition_gradient <- function(gmu, gsd, mu, sd, best, acq = "ei",
 #'                           box = list(c(0, 1), c(0, 1)),
 #'                           acq = "ei", n_starts = 3, max_iter = 20)
 #' str(r, max.level = 1)
+#' @keywords internal
 maximise_acquisition <- function(X, y, best, box, acq = "ei",
                                  kernel = "matern52", amplitude = 1,
                                  length_scale = 1, noise = 1e-8,
@@ -673,6 +683,7 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
 #' r <- bayopt(f, bounds = list(c(0, 1), c(0, 1)), n_iter = 5,
 #'             n_init = 4, seed = 1)
 #' str(r, max.level = 1)
+#' @keywords internal
 bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
                    kernel = "matern52", amplitude = 1, length_scale = 1,
                    noise = 1e-8, kappa = 2, xi = 0, n_candidates = 200,

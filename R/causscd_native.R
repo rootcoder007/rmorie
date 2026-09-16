@@ -138,6 +138,7 @@
 #' for (i in 7:8) Y[[i]][7:10] <- Y[[i]][7:10] + 3
 #' treated <- c(rep(0L, 6), 1L, 1L)
 #' str(unit_weights(Y, treated, t_post = 6), max.level = 1)
+#' @keywords internal
 unit_weights <- function(Y, treated, t_post, zeta = NULL) {
   g <- .causscd_grid(Y, treated, t_post)
   rows <- g$rows
@@ -192,6 +193,7 @@ unit_weights <- function(Y, treated, t_post, zeta = NULL) {
 #' Y <- lapply(1:8, function(i) rnorm(10, 10))
 #' treated <- c(rep(0L, 6), 1L, 1L)
 #' str(time_weights(Y, treated, t_post = 6), max.level = 1)
+#' @keywords internal
 time_weights <- function(Y, treated, t_post) {
   g <- .causscd_grid(Y, treated, t_post)
   rows <- g$rows
@@ -238,6 +240,7 @@ time_weights <- function(Y, treated, t_post) {
 #' treated <- c(rep(0L, 6), 1L, 1L)
 #' r <- sdid(Y, treated, t_post = 6)
 #' str(r, max.level = 1)
+#' @keywords internal
 sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
   g <- .causscd_grid(Y, treated, t_post)
   rows <- g$rows
@@ -320,6 +323,7 @@ sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
 #' treated <- c(rep(0L, 6), 1L, 1L)
 #' r <- causscd(Y, treated, t_post = 6)
 #' str(r, max.level = 1)
+#' @keywords internal
 causscd <- function(Y, treated, t_post, zeta = NULL) {
   out <- sdid(Y, treated, t_post, "sdid", zeta)
   p <- out
@@ -348,6 +352,7 @@ causscd <- function(Y, treated, t_post, zeta = NULL) {
 #' treated <- c(rep(0L, 6), 1L, 1L)
 #' r <- morie_causscd(Y, treated, t_post = 6)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_causscd <- function(Y, treated, t_post, zeta = NULL) {
   causscd(Y, treated, t_post, zeta)
 }

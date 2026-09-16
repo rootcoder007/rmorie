@@ -14,6 +14,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' logmeanexp(V)
+#' @keywords internal
 logmeanexp <- function(values) {
   v <- as.numeric(values)
   if (length(v) == 0L) stop("pftrep: nothing to average")
@@ -44,6 +45,7 @@ logmeanexp <- function(values) {
 #' loglik <- function(p, obs) dnorm(obs, p, 1, log = TRUE)
 #' pf <- particle_filter_simple(y, 200L, init, step, loglik, seed = 1)
 #' is.list(pf)
+#' @keywords internal
 particle_filter_simple <- function(y, n_particles, init, step, loglik,
                                    seed = 0L) {
   set.seed(as.integer(seed))
@@ -95,6 +97,7 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 #' loglik <- function(p, obs) dnorm(obs, p, 1, log = TRUE)
 #' r <- replicated_pfilter(y, 200L, init, step, loglik, n_reps = 5L, seed = 1)
 #' is.list(r)
+#' @keywords internal
 replicated_pfilter <- function(y, n_particles, init, step, loglik,
                                n_reps = 10L, seed = 0L) {
   R <- as.integer(n_reps)
@@ -144,6 +147,7 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #' lp <- loglik_profile(y, grid = c(0.5, 1, 2), make_model,
 #'                      n_particles = 150L, n_reps = 3L, seed = 1)
 #' is.list(lp)
+#' @keywords internal
 loglik_profile <- function(y, grid, make_model, n_particles = 200L,
                            n_reps = 5L, seed = 0L) {
   g <- as.numeric(grid)

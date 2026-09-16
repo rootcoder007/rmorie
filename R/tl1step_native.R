@@ -383,6 +383,7 @@
 #' @param steps Passed to \code{.tl1step_one_step_tmle}. Defaults to \code{600}.
 #' @return The value of \code{.tl1step_one_step_tmle}.
 #' @export
+#' @keywords internal
 morie_tl1step <- function(Q, H_fn, Y, eps_max = 3.0, steps = 600) {
   .tl1step_one_step_tmle(Q, H_fn, Y, eps_max, steps)
 }

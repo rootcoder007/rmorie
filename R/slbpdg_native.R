@@ -73,6 +73,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_slbpdg_weights(V)
+#' @keywords internal
 morie_slbpdg_weights <- function(v) {
   n <- length(v)
   w <- numeric(n)
@@ -116,6 +117,7 @@ morie_slbpdg_weights <- function(v) {
 #' x <- -12
 #' morie_slbpdg_density(x, w, c(-2, 0, 1, 3, 5), c(0.5, 1, 0.25,
 #'     2, 0.75))
+#' @keywords internal
 morie_slbpdg_density <- function(x, w, mu, s2)
   .w3_csum(vapply(seq_along(w), function(k)
     w[k] * .slbpdg_dnorm(x, mu[k], s2[k]), numeric(1)))
@@ -284,6 +286,7 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #' morie_slbpdg(Y, alpha = 1, n_iter = 100L, burn = 40L, route = "walker",
 #'     seed = 7)
 #' }
+#' @keywords internal
 morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
                          thin = 1L, route = "walker", kappa = 0.5,
                          m0 = NULL, kappa0 = 0.01, a0 = 2, b0 = NULL,
@@ -461,6 +464,7 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
 #' @export
 #' @examples
 #' morie_slbpdg_cheatsheet()
+#' @keywords internal
 morie_slbpdg_cheatsheet <- function()
   paste0("slbpdg: slice-sampled Dirichlet-process mixture. routes ",
          paste(.SLBPDG_ROUTES, collapse = ", "))

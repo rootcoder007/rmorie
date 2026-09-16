@@ -51,6 +51,7 @@
 #' @export
 #' @examples
 #' draw_projections(m = 5L, d = 5L)
+#' @keywords internal
 draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
   m <- as.integer(m)
   d <- as.integer(d)
@@ -107,6 +108,7 @@ draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' favor_features(M, M)
+#' @keywords internal
 favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
   if (!kind %in% c("positive", "trig"))
     stop(sprintf("perfat: kind must be positive or trig, got %s", kind))
@@ -145,6 +147,7 @@ favor_features <- function(X, omegas, kind = "positive", eps = 1e-6) {
 #' @examples
 #' kernel_estimate(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   omegas = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+#' @keywords internal
 kernel_estimate <- function(x, y, omegas, kind = "positive") {
   f <- favor_features(rbind(x, y), omegas, kind = kind)
   .dot(f[1L, ], f[2L, ])
@@ -164,6 +167,7 @@ kernel_estimate <- function(x, y, omegas, kind = "positive") {
 #' @export
 #' @examples
 #' softmax_attention(Q = 0.5, K = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 softmax_attention <- function(Q, K, V, causal = FALSE) {
   Qm <- as.matrix(Q)
   Km <- as.matrix(K)
@@ -203,6 +207,7 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 #' @examples
 #' favor_attention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   V = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,
                             kind = "positive", orthogonal = TRUE,
                             causal = FALSE) {

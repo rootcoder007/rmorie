@@ -289,6 +289,7 @@
 #' @param trim Passed to \code{.tdcvar_ip_weights_history}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 morie_tdcvar <- function(y, A, L_t, time = NULL, contrast = "cumulative",
                          kind = "binary", stabilize = TRUE, trim = NULL) {
   if (!contrast %in% c("cumulative", "final", "everexposed")) {
@@ -423,6 +424,7 @@ morie_tdcvar <- function(y, A, L_t, time = NULL, contrast = "cumulative",
 #' @export
 #' @examples
 #' morie_tdcvar_cheatsheet()
+#' @keywords internal
 morie_tdcvar_cheatsheet <- function() {
   "tdcvar: time-varying IPTW MSM (H&R Ch.21). Returns the weighted MSM plus the two biased comparators -- adjusting for a treatment-affected confounder over-adjusts, omitting it under-adjusts, and Ch.20 says they straddle the truth."
 }

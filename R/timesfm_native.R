@@ -44,6 +44,7 @@
 #' @export
 #' @examples
 #' morie_timesfm_input_patches(x = c(1, 2, 3, 4, 5, 6, 7, 8), patch_len = 5L)
+#' @keywords internal
 morie_timesfm_input_patches <- function(x, patch_len, pad_value = 0) {
   v <- as.numeric(unlist(x))
   p <- as.integer(patch_len)
@@ -73,6 +74,7 @@ morie_timesfm_input_patches <- function(x, patch_len, pad_value = 0) {
 #' @export
 #' @examples
 #' morie_timesfm_causal_mask(n_patches = 5L)
+#' @keywords internal
 morie_timesfm_causal_mask <- function(n_patches) {
   n <- as.integer(n_patches)
   if (n < 1L) stop("timesfm: need at least one patch")
@@ -98,6 +100,7 @@ morie_timesfm_causal_mask <- function(n_patches) {
 #' @export
 #' @examples
 #' morie_timesfm_rollout_steps(horizon = 5L, output_patch_len = 5L)
+#' @keywords internal
 morie_timesfm_rollout_steps <- function(horizon, output_patch_len) {
   H <- as.integer(horizon)
   q <- as.integer(output_patch_len)
@@ -122,6 +125,7 @@ morie_timesfm_rollout_steps <- function(horizon, output_patch_len) {
 #' @export
 #' @examples
 #' morie_timesfm_horizon_plan(24, 32, 8)
+#' @keywords internal
 morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
                                        output_patch_len) {
   H <- as.integer(horizon)
@@ -152,6 +156,7 @@ morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
 #' \code{input_patch_len}, \code{output_patch_len}, \code{context_grew_to},
 #' \code{method}.
 #' @export
+#' @keywords internal
 morie_timesfm <- function(history, predictor, horizon, input_patch_len,
                           output_patch_len) {
   v <- as.numeric(unlist(history))
@@ -190,6 +195,7 @@ morie_timesfm <- function(history, predictor, horizon, input_patch_len,
 #' @export
 #' @examples
 #' morie_timesfm_cheatsheet()
+#' @keywords internal
 morie_timesfm_cheatsheet <- function() {
   paste("timesfm: decoder-only + input patching. Causal attention",
         "over patches means N patches give N training signals,",

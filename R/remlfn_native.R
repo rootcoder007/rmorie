@@ -261,6 +261,7 @@
 #' @examples
 #' set.seed(1)
 #' r <- morie_remlfn(y = rnorm(10), group = rbinom(10, 1, 0.5)); TRUE
+#' @keywords internal
 morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto") {
   y <- as.numeric(y)
 

@@ -148,6 +148,7 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #'               list(pos = 2L, seq = "GTTCGT"))
 #' r <- varcal_pileup_column(reads, position = 3L, reference = "ACGTACGTAC")
 #' str(r, max.level = 1)
+#' @keywords internal
 varcal_pileup_column <- function(reads, position, reference) {
   reads <- .varcal_norm_reads(reads)
   reference <- .varcal_chars(reference)
@@ -194,6 +195,7 @@ varcal_pileup_column <- function(reads, position, reference) {
 #'   lapply(1:3, function(i) list(pos = 0L, seq = "ACGTACGT")))
 #' r <- varcal_find_candidates(reads, reference = "ACGTACGTAC")
 #' str(r, max.level = 1)
+#' @keywords internal
 varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
                                    min_alt_fraction = 0.05, min_bq = 10) {
   reads <- .varcal_norm_reads(reads)
@@ -269,6 +271,7 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #' enc <- varcal_encode_pileup(reads, "ACGTACGTAC", cands[[1]], width = 7,
 #'                             height = 8)
 #' str(enc, max.level = 1)
+#' @keywords internal
 varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
                                  height = 100,
                                  channels = "base_quality_strand") {
@@ -349,6 +352,7 @@ varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' varcal_genotype_posterior(D)
+#' @keywords internal
 varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
   if (is.null(prior)) {
     prior <- c(0.9985, 0.001, 0.0005)
@@ -421,6 +425,7 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
 #'   lapply(1:3, function(i) list(pos = 0L, seq = "ACGTACGT")))
 #' r <- morie_varcal(reads, reference = "ACGTACGTAC")
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
                          ...) {
   reads <- .varcal_norm_reads(reads)
@@ -466,6 +471,7 @@ morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
 #' truth <- list(list(position = 4L, alternate = "T"),
 #'               list(position = 7L, alternate = "G"))
 #' varcal_evaluate(called, truth)
+#' @keywords internal
 varcal_evaluate <- function(called, truth, candidates = NULL) {
   tset <- character(0)
   for (t in truth) {
@@ -521,6 +527,7 @@ varcal_evaluate <- function(called, truth, candidates = NULL) {
 #' @export
 #' @examples
 #' varcal_cheatsheet()
+#' @keywords internal
 varcal_cheatsheet <- function() {
   paste0(
     "varcal: candidates are generated with HIGH sensitivity and l",

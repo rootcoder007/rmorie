@@ -83,6 +83,7 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' project_box(V)
+#' @keywords internal
 project_box <- function(x, lower = NULL, upper = NULL) {
   v <- as.numeric(x)
   n <- length(v)
@@ -123,6 +124,7 @@ project_box <- function(x, lower = NULL, upper = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' project_nonneg(V)
+#' @keywords internal
 project_nonneg <- function(x) {
   pmax(0.0, as.numeric(x))
 }
@@ -142,6 +144,7 @@ project_nonneg <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' project_ball(V)
+#' @keywords internal
 project_ball <- function(x, radius = 1.0, centre = NULL) {
   r <- as.numeric(radius)
   if (r <= 0) {
@@ -218,6 +221,7 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' \code{history}, \code{step}, \code{rule}, \code{n_backtracks},
 #' \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.
 #' @export
+#' @keywords internal
 projected_gradient <- function(f, grad, x0, project, step = NULL,
                                 rule = "backtracking", max_iter = 2000,
                                 tol = 1e-10) {

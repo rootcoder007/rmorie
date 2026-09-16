@@ -33,6 +33,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_mxetA(V)
+#' @keywords internal
 morie_mxetA <- function(F, n_sim = 1, seed = 0, max_points = 100000L) {
   Fm <- as.matrix(F)
   nt <- nrow(Fm)

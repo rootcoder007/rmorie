@@ -23,10 +23,10 @@
 #
 # Cressie (1993) secs. 3.4.2 and 3.4.5; Schabenberger & Gotway (2005) ch. 5.
 
-#' @noRd
 #' @examples
 #' rmorie:::KrigFDA(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   new_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 KrigFDA <- function(coords, values, new_coords, model = "exponential",
                           nugget = 0, sill = 1, range_ = 1, trend_order = 1) {
   z <- as.numeric(values)

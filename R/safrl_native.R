@@ -345,6 +345,7 @@
 #' g <- c(1, -1)
 #' H <- diag(2)
 #' morie_safrl(g, H)
+#' @keywords internal
 morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
                          tol = 1e-12, max_iter = 5000) {
   gv <- .safrl_vec(g, "g")
@@ -488,6 +489,7 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 #' @param tol Passed to \code{<}. Defaults to \code{1e-14}.
 #' @return A list with \code{estimate}, \code{J}, \code{J_C}, \code{gamma}, \code{method}.
 #' @export
+#' @keywords internal
 morie_safrl_cmdp_returns <- function(policy, states, actions, step,
                                       reward, costs, gamma = 0.9,
                                       start = NULL, iters = 5000,
@@ -559,6 +561,7 @@ morie_safrl_cmdp_returns <- function(policy, states, actions, step,
 #' @export
 #' @examples
 #' morie_safrl_worst_case_violation(delta = 0.5, gamma = 0.5, epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_safrl_worst_case_violation <- function(delta, gamma, epsilon) {
   delta <- as.numeric(delta)
   gamma <- as.numeric(gamma)

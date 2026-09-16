@@ -85,6 +85,7 @@
 #' @export
 #' @examples
 #' morie_baysmplr_choose(dim = 5L, has_grad = 5L)
+#' @keywords internal
 morie_baysmplr_choose <- function(dim, has_grad, has_conditionals = FALSE,
                                   nuts_threshold = 20L) {
   if (has_grad && dim >= nuts_threshold)
@@ -155,6 +156,7 @@ morie_baysmplr_choose <- function(dim, has_grad, has_conditionals = FALSE,
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
 #' morie_baysmplr_mh(lp3, c(0, 0, 0), 60L, e)
+#' @keywords internal
 morie_baysmplr_mh <- function(log_p, x0, n_iter, e, scale = NULL,
                               adapt = FALSE, target_accept = 0.234) {
   d <- length(x0)
@@ -210,6 +212,7 @@ morie_baysmplr_mh <- function(log_p, x0, n_iter, e, scale = NULL,
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
 #' morie_baysmplr_gibbs(MU3, Q3, c(0, 0, 0), 60L, e)
+#' @keywords internal
 morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
   d <- length(x0)
   x <- as.numeric(x0)
@@ -299,6 +302,7 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
 #' morie_baysmplr_hmc(lp3, gr3, c(0, 0, 0), 60L, e, 0.25, 8L)
+#' @keywords internal
 morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
                                steps = 10L) {
   d <- length(x0)
@@ -429,6 +433,7 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
 #' e <- rmorie:::.ghc_rng(13)
 #' e <- rmorie:::.ghc_rng(13)
 #' morie_baysmplr_nuts(lp3, gr3, c(0, 0, 0), 40L, e, 0.3, 6L)
+#' @keywords internal
 morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
                                 max_depth = 8L, dual_average = FALSE,
                                 target_accept = 0.8, warmup = NULL) {
@@ -520,6 +525,7 @@ morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_baysmplr_ess(V)
+#' @keywords internal
 morie_baysmplr_ess <- function(chain, max_lag = 200L) {
   n <- length(chain)
   d <- length(chain[[1]])
@@ -591,6 +597,7 @@ morie_baysmplr_ess <- function(chain, max_lag = 200L) {
 #' }
 #' morie_baysmplr(lp3, gr3, c(0, 0, 0), n_iter = 80L, burn = 30L,
 #'     seed = 5, eps = 0.25, steps = 8L)
+#' @keywords internal
 morie_baysmplr <- function(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L,
                            burn = NULL, seed = 1, sampler = NULL,
                            cov_inv = NULL, mean = NULL, eps = 0.1,
@@ -657,6 +664,7 @@ morie_baysmplr <- function(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L,
 #' @export
 #' @examples
 #' morie_baysmplr_cheatsheet()
+#' @keywords internal
 morie_baysmplr_cheatsheet <- function()
   paste0("baysmplr: MCMC sampler dispatch and the samplers themselves. ",
          paste(.BAYSMPLR_SAMPLERS, collapse = ", "))

@@ -88,6 +88,7 @@
 #'     5, 0.2), ncol = 2))
 #' morie_dbscan_clustering(x, eps = 0.6, min_samples = 4L)
 #' @export
+#' @keywords internal
 morie_dbscan_clustering <- function(x, eps = 0.5, min_samples = 5L,
                                     metric = "euclidean") {
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)

@@ -20,6 +20,7 @@
 #' order does not matter at load time; the body is a single call to the
 #' target, so outputs are exactly identical.
 #' @export
+#' @keywords internal
 Ldiff <- function(X, quasi_ids, sensitive, l, c = 1) {
   Dpld(X, quasi_ids, sensitive, l, c = c)
 }

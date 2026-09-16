@@ -798,6 +798,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MlpBp(V, V)
+#' @keywords internal
 MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
                   tol = 1e-4, seed = 1) {
   # Section 10.8, Figure 10.5.  Forward pass eqs (10.79)-(10.81), weight
@@ -923,6 +924,7 @@ MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
 #' @export
 #' @examples
 #' Bbb(qrsdur = 5L)
+#' @keywords internal
 Bbb <- function(qrsdur, criteria = NULL) {
   # Section 10.2.1.  Bundle-branch block desynchronises ventricular
   # contraction and shows as a wider-than-normal QRS; the published logic
@@ -1005,6 +1007,7 @@ Bbb <- function(qrsdur, criteria = NULL) {
 #' f <- rbind(matrix(rnorm(40, 0), 20, 2), matrix(rnorm(40, 2), 20, 2))
 #' lab <- rep(c(0L, 1L), each = 20)
 #' PvcBayes(f, lab)
+#' @keywords internal
 PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
   # Section 10.11.2 with the normal-pattern Bayes classifier of 10.6.2.
   # The linear rule of 10.11.1 commits to a hard boundary; the Bayes rule
@@ -1194,6 +1197,7 @@ PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
 #' trials[2, ] <- trials[2, ] + sin(2 * pi * (1:200) / 20)
 #' r <- BciChSel(trials, nselect = 3, rank = 3)
 #' r$selected
+#' @keywords internal
 BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
   # Section 9.12.1 in full: a BCI runs under hardware complexity limits and
@@ -1234,6 +1238,7 @@ BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
 #' @export
 #' @examples
 #' BPursuit(x = 5L, D = 5L)
+#' @keywords internal
 BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
   # NOT from Rangayyan: the book covers matching pursuit (9.3) and EMD
   # dictionary learning (9.5), not basis pursuit.  Chen, Donoho and
@@ -1321,6 +1326,7 @@ BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
 #' y <- rep(c(0L, 1L), each = 30)
 #' r <- CadPipe(F, y, k = 5)
 #' str(r, max.level = 1)
+#' @keywords internal
 CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
   # Chapter 10: a CAD system is a chain, not a classifier, and the accuracy
   # quoted for it means nothing unless the test patterns were unseen.
@@ -1418,6 +1424,7 @@ CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' CnnSig(V, V)
+#' @keywords internal
 CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
   # Section 10.8.2 names CNNs as the common deep model but gives no layer
   # equations; the convolution, rectifier and pooling used here are those
@@ -1527,6 +1534,7 @@ CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
 #' r <- FecgNmf(x, fs = fs, nwin = 64, rank = 4)
 #' str(r, max.level = 1)
 #' }
+#' @keywords internal
 FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
                     maxiter = 150, taum = 0.6, tauf = 0.45, seed = 1) {
   # Section 9.11.  The fetal and maternal ECG overlap in the spectrum so no
@@ -1634,6 +1642,7 @@ FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' PvcLinDf(V, V)
+#' @keywords internal
 PvcLinDf <- function(rr, ff, train = NULL) {
   # Section 10.11.1, eq (10.131).  A PVC has both a shorter preceding RR
   # interval and a more complex waveshape, and the form factor of eq (5.26)
@@ -1709,6 +1718,7 @@ PvcLinDf <- function(rr, ff, train = NULL) {
 #' fs <- 100
 #' eeg <- sin(2 * pi * 10 * seq(0, 4, by = 1 / fs)) + 0.3 * rnorm(401)
 #' EegBands(eeg, fs = fs)
+#' @keywords internal
 EegBands <- function(x, fs, bands = NULL) {
   # Band limits from Section 1.2.6, fractional power by eq (6.44) as used
   # in Section 10.2.3.  The clinical question -- is there an alpha rhythm
@@ -1794,6 +1804,7 @@ EegBands <- function(x, fs, bands = NULL) {
 #' y <- rep(c(0L, 1L), each = 4)
 #' r <- SeizDict(S, y, iterations = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
                      test = NULL) {
   # Section 9.8 with the framework of 9.5, Algorithm 9.2 verbatim.  The EEG
@@ -1948,6 +1959,7 @@ SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
 #' X <- A %*% S + 0.02 * matrix(rnorm(600), 2, 300)
 #' r <- IcaFix(X)
 #' str(r, max.level = 1)
+#' @keywords internal
 IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
   # Section 9.7.2: model eq (9.43), unmixing eq (9.44).  PCA can only make
   # components uncorrelated, which is independence only for Gaussians, and
@@ -2070,6 +2082,7 @@ IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
 #' X <- A %*% S
 #' r <- IcaClean(X)
 #' str(r, max.level = 1)
+#' @keywords internal
 IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
                      maxiter = 200, seed = 1) {
   # Section 9.7.2 with the kurtosis excess of eq (3.5).  Blinks, muscle and
@@ -2144,6 +2157,7 @@ IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
 #' X <- A %*% S
 #' r <- Infomax(X, maxiter = 100)
 #' str(r, max.level = 1)
+#' @keywords internal
 Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
                     seed = 1) {
   # NOT from Rangayyan: Section 9.7.2 gives only the generic gradient rule
@@ -2236,6 +2250,7 @@ Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' VagClass(V)
+#' @keywords internal
 VagClass <- function(segments, durations = NULL, segclass = NULL,
                      arthro = NULL) {
   # Section 10.12.  VAG signals are nonstationary so each locally
@@ -2340,6 +2355,7 @@ VagClass <- function(segments, durations = NULL, segclass = NULL,
 #' Y <- matrix(rnorm(16 * 30), 16, 30)
 #' r <- KsvdFit(Y, natoms = 8, sparsity = 3, maxiter = 4)
 #' str(r, max.level = 1)
+#' @keywords internal
 KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
                     seed = 1) {
   # NOT from Rangayyan: Section 9.5 gives EMD-based dictionary learning
@@ -2460,6 +2476,7 @@ KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
 #' @export
 #' @examples
 #' DictCode(Y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), sparsity = 5L)
+#' @keywords internal
 DictCode <- function(Y, D, sparsity, tol = 1e-12) {
   # Section 9.5 for the greedy stage and 9.8 for the use of the resulting
   # coefficients and reconstruction error as features; the least-squares
@@ -2523,6 +2540,7 @@ DictCode <- function(Y, D, sparsity, tol = 1e-12) {
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' Lstm(D)
+#' @keywords internal
 Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
                  seed = 1, weights = NULL) {
   # NOT from Rangayyan: Section 10.8.2 discusses deep learning in prose and
@@ -2655,6 +2673,7 @@ Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' MPursuit(V)
+#' @keywords internal
 MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
                      decaystop = NULL) {
   # Section 9.3, eqs (9.1)-(9.7) with the Gabor dictionary of (9.2)-(9.3).
@@ -2751,6 +2770,7 @@ MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' BmiDec(D, M)
+#' @keywords internal
 BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
                    p0 = 1e-2) {
   # Section 8.18 with the filter of 8.7: a BMI has no ground truth about
@@ -2861,6 +2881,7 @@ BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
 #' V <- matrix(runif(48, 0.1, 1), 8, 6)
 #' r <- NmfMu(V, r = 3, maxiter = 50)
 #' str(r, max.level = 1)
+#' @keywords internal
 NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
   # Section 9.7.3, eqs (9.46), (9.49)-(9.50) and (9.53)-(9.55).  PCA and
   # ICA are free to use negative coefficients so their components cancel;
@@ -2918,6 +2939,7 @@ NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
 #' trials[2, ] <- trials[2, ] + sin(2 * pi * (1:200) / 20)
 #' r <- NmfChSel(trials, nselect = 3, rank = 3)
 #' r$selected
+#' @keywords internal
 NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
   # Section 9.12.1, eqs (9.94)-(9.96).  Channel relevance varies strongly
@@ -2957,6 +2979,7 @@ NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
 #' @export
 #' @examples
 #' OmpFit(x = 5L, D = 5L)
+#' @keywords internal
 OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
   # NOT from Rangayyan: Section 9.3 gives plain matching pursuit, not the
   # orthogonalised variant.  Pati, Rezaiifar and Krishnaprasad, Proc. 27th
@@ -3006,6 +3029,7 @@ OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' PcaSig(M)
+#' @keywords internal
 PcaSig <- function(X, ncomp = NULL) {
   # Section 9.7.1, eqs (9.37)-(9.41).  Multichannel recordings pick up the
   # same sources through different paths, so the channels are redundant;
@@ -3072,6 +3096,7 @@ PcaSig <- function(X, ncomp = NULL) {
 #' X <- A %*% S + 0.05 * matrix(rnorm(600), 2, 300)
 #' r <- MixCmp(X, ncomp = 2, maxiter = 50)
 #' str(r, max.level = 1)
+#' @keywords internal
 MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
   # Section 9.7.4.  The three decompositions answer different questions of
   # the same data -- uncorrelated, independent, nonnegative-parts -- and
@@ -3138,6 +3163,7 @@ MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Rbfn(V, V)
+#' @keywords internal
 Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
                  ridge = 1e-8, query = NULL) {
   # Section 10.8.1, eqs (10.86)-(10.87).  Cover's theorem: a set that is
@@ -3266,6 +3292,7 @@ Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
 #' @export
 #' @examples
 #' Ahi(airflow = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
                 hypofrac = 0.50, minsec = 10, desat = 0, envsec = 1) {
   # Section 10.13.  Severity is reported as one number, so the whole
@@ -3382,6 +3409,7 @@ Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
 #' x <- D[3, ] * 1.5 - D[10, ] * 0.7
 #' r <- SparseCode(x, D, sparsity = 2)
 #' str(r, max.level = 1)
+#' @keywords internal
 SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
                        tol = 1e-10) {
   # Section 9.5 for the greedy framing -- the book calls it a greedy
@@ -3455,6 +3483,7 @@ SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
 #' @export
 #' @examples
 #' VagTfd(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' @keywords internal
 VagTfd <- function(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12) {
   # Section 9.6 applied to VAG in Section 9.9.  Bilinear TFDs buy
   # resolution with cross-terms; decompose first and the interaction is

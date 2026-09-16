@@ -35,6 +35,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' clrgrf_cluster_index(V)
+#' @keywords internal
 clrgrf_cluster_index <- function(clusters) {
   lab <- as.character(clusters)
   order <- character(0)
@@ -64,6 +65,7 @@ clrgrf_cluster_index <- function(clusters) {
 #' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{variance}, \code{info}.
 #' @export
+#' @keywords internal
 clrgrf_cluster_jackknife <- function(preds, bags, groups,
                                       correction = TRUE) {
   B <- length(preds)
@@ -113,6 +115,7 @@ clrgrf_cluster_jackknife <- function(preds, bags, groups,
 #' \code{clusters_subsampled}, \code{cluster_sizes}, \code{cluster_labels}, \code{unit},
 #' \code{cluster_sampling}, \code{n_trees}, \code{level}, \code{method}.
 #' @export
+#' @keywords internal
 morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
                           min_leaf = 5L, subsample_frac = 0.5, seed = 0L,
                           unit = "cluster", level = 0.95,
@@ -207,6 +210,7 @@ morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
 #' @export
 #' @examples
 #' clrgrf_cheatsheet()
+#' @keywords internal
 clrgrf_cheatsheet <- function() {
   paste0("clrgrf: draw whole CLUSTERS into the subsample -- row-wise ",
          "draws split clusters across the split and estimate halves, ",

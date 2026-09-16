@@ -19,10 +19,10 @@
 # that an undefined K -- the border correction retaining no events at that
 # distance -- stays NA instead of being clamped to zero by max(K, 0).
 
-#' @noRd
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::morie_ripley_l_function(M)
+#' @keywords internal
 morie_ripley_l_function <- function(points, window = NULL, r = NULL,
                                     correction = "border") {
   p <- as.matrix(points)

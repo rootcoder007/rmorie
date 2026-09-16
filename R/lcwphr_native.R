@@ -121,6 +121,7 @@
 #' \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{Q}, \code{stabilized},
 #' \code{trim}, \code{method}, \code{note}.
 #' @export
+#' @keywords internal
 morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
                                                stabilize = TRUE,
                                                max_iter = 500L,

@@ -10,10 +10,10 @@
 # Controlled Clinical Trials 7(3):177-188; Higgins & Thompson (2002)
 # Statistics in Medicine 21(11):1539-1558.
 
-#' @noRd
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_ma_cochran_q(V, V)
+#' @keywords internal
 morie_ma_cochran_q <- function(yi, vi) {
   y <- as.numeric(yi)
   v <- as.numeric(vi)

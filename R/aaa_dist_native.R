@@ -303,6 +303,7 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dnorm(V)
+#' @keywords internal
 Dnorm <- function(x, mean = 0, sd = 1, log = FALSE) {
   if (sd <= 0) stop("sd must be positive")
   z <- (x - mean) / sd
@@ -325,6 +326,7 @@ Dnorm <- function(x, mean = 0, sd = 1, log = FALSE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Pnorm(V)
+#' @keywords internal
 Pnorm <- function(q, mean = 0, sd = 1, lower_tail = TRUE) {
   if (sd <= 0) stop("sd must be positive")
   z <- (q - mean) / sd
@@ -351,6 +353,7 @@ Pnorm <- function(q, mean = 0, sd = 1, lower_tail = TRUE) {
 #' @export
 #' @examples
 #' Qnorm(p = 0.5)
+#' @keywords internal
 Qnorm <- function(p, mean = 0, sd = 1, lower_tail = TRUE) {
   if (sd <= 0) stop("sd must be positive")
   pp <- if (lower_tail) p else 1 - p
@@ -371,6 +374,7 @@ Qnorm <- function(p, mean = 0, sd = 1, lower_tail = TRUE) {
 #' @export
 #' @examples
 #' Rnorm(n = 5L)
+#' @keywords internal
 Rnorm <- function(n, mean = 0, sd = 1, seed = 0, stream = 0) {
   # inversion of the Philox uniform stream: draw k depends only on
   # uniform k, so the stream is stable when n changes
@@ -395,6 +399,7 @@ Rnorm <- function(n, mean = 0, sd = 1, seed = 0, stream = 0) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dexp(V)
+#' @keywords internal
 Dexp <- function(x, rate = 1, log = FALSE) {
   if (rate <= 0) stop("rate must be positive")
   lg <- ifelse(x < 0, -Inf, log(rate) - rate * x)
@@ -415,6 +420,7 @@ Dexp <- function(x, rate = 1, log = FALSE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Pexp(V)
+#' @keywords internal
 Pexp <- function(q, rate = 1, lower_tail = TRUE) {
   if (rate <= 0) stop("rate must be positive")
   p <- ifelse(q < 0, 0, -expm1(-rate * q))
@@ -433,6 +439,7 @@ Pexp <- function(q, rate = 1, lower_tail = TRUE) {
 #' @export
 #' @examples
 #' Qexp(p = 0.5)
+#' @keywords internal
 Qexp <- function(p, rate = 1) {
   if (rate <= 0) stop("rate must be positive")
   if (any(p < 0 | p >= 1)) stop("p must lie in [0, 1)")
@@ -453,6 +460,7 @@ Qexp <- function(p, rate = 1) {
 #' @export
 #' @examples
 #' Rexp(n = 5L)
+#' @keywords internal
 Rexp <- function(n, rate = 1, seed = 0, stream = 0) {
   u <- .morie_random_uniform(n, seed = seed, stream = stream)
   Qexp(pmin(u, 1 - 1e-16), rate)
@@ -474,6 +482,7 @@ Rexp <- function(n, rate = 1, seed = 0, stream = 0) {
 #' @export
 #' @examples
 #' Dgamma(x = c(1, 2, 3, 4, 5, 6, 7, 8), shape = 5L)
+#' @keywords internal
 Dgamma <- function(x, shape, rate = 1, log = FALSE) {
   if (shape <= 0 || rate <= 0) stop("shape and rate must be positive")
   lg <- ifelse(x <= 0, -Inf,
@@ -497,6 +506,7 @@ Dgamma <- function(x, shape, rate = 1, log = FALSE) {
 #' @export
 #' @examples
 #' Pgamma(q = 0.5, shape = 5L)
+#' @keywords internal
 Pgamma <- function(q, shape, rate = 1, lower_tail = TRUE) {
   p <- vapply(q, function(v) {
     if (v <= 0) 0 else .morie_gammainc_p(shape, rate * v)
@@ -518,6 +528,7 @@ Pgamma <- function(q, shape, rate = 1, lower_tail = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Qgamma(V, V)
+#' @keywords internal
 Qgamma <- function(p, shape, rate = 1) {
   vapply(
     p, function(pp) {
@@ -540,6 +551,7 @@ Qgamma <- function(p, shape, rate = 1) {
 #' @export
 #' @examples
 #' Dchisq(3, df = 2)
+#' @keywords internal
 Dchisq <- function(x, df, log = FALSE) Dgamma(x, df / 2, 0.5, log)
 #' Pchisq
 #'
@@ -554,6 +566,7 @@ Dchisq <- function(x, df, log = FALSE) Dgamma(x, df / 2, 0.5, log)
 #' @export
 #' @examples
 #' Pchisq(3.84, 1)
+#' @keywords internal
 Pchisq <- function(q, df, lower_tail = TRUE) {
   Pgamma(q, df / 2, 0.5, lower_tail)
 }
@@ -570,6 +583,7 @@ Pchisq <- function(q, df, lower_tail = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Qchisq(V, V)
+#' @keywords internal
 Qchisq <- function(p, df) Qgamma(p, df / 2, 0.5)
 
 # ---- Poisson / binomial ---------------------------------------------
@@ -587,6 +601,7 @@ Qchisq <- function(p, df) Qgamma(p, df / 2, 0.5)
 #' @export
 #' @examples
 #' Dpois(x = c(1, 2, 3, 4, 5, 6, 7, 8), lambda = 0.5)
+#' @keywords internal
 Dpois <- function(x, lambda, log = FALSE) {
   if (lambda < 0) stop("lambda must be non-negative")
   k <- round(x)
@@ -613,6 +628,7 @@ Dpois <- function(x, lambda, log = FALSE) {
 #' @export
 #' @examples
 #' Ppois(q = 0.5, lambda = 0.5)
+#' @keywords internal
 Ppois <- function(q, lambda, lower_tail = TRUE) {
   # P(X <= k) = Q(k+1, lambda), the UPPER regularized incomplete gamma
   p <- vapply(q, function(v) {
@@ -634,6 +650,7 @@ Ppois <- function(q, lambda, lower_tail = TRUE) {
 #' @export
 #' @examples
 #' Qpois(p = 0.5, lambda = 0.5)
+#' @keywords internal
 Qpois <- function(p, lambda) {
   # smallest k with cdf(k) >= p, as R defines it
   vapply(p, function(pp) {
@@ -658,6 +675,7 @@ Qpois <- function(p, lambda) {
 #' @export
 #' @examples
 #' Dbinom(x = c(1, 2, 3, 4, 5, 6, 7, 8), size = 5L, prob = 0.5)
+#' @keywords internal
 Dbinom <- function(x, size, prob, log = FALSE) {
   if (prob < 0 || prob > 1) stop("prob must lie in [0, 1]")
   k <- round(x)
@@ -691,6 +709,7 @@ Dbinom <- function(x, size, prob, log = FALSE) {
 #' @export
 #' @examples
 #' Pbinom(q = 0.5, size = 5L, prob = 0.5)
+#' @keywords internal
 Pbinom <- function(q, size, prob, lower_tail = TRUE) {
   # P(X <= k) = I_{1-p}(n - k, k + 1)
   p <- vapply(q, function(v) {
@@ -719,6 +738,7 @@ Pbinom <- function(q, size, prob, lower_tail = TRUE) {
 #' @export
 #' @examples
 #' Qbinom(p = 0.5, size = 5L, prob = 0.5)
+#' @keywords internal
 Qbinom <- function(p, size, prob) {
   vapply(p, function(pp) {
     if (pp < 0 || pp > 1) stop("p must lie in [0, 1]")
@@ -744,6 +764,7 @@ Qbinom <- function(p, size, prob) {
 #' @export
 #' @examples
 #' Dbeta(0.5, 2, 3)
+#' @keywords internal
 Dbeta <- function(x, shape1, shape2, log = FALSE) {
   if (shape1 <= 0 || shape2 <= 0) stop("shape parameters must be positive")
   lg <- ifelse(x <= 0 | x >= 1, -Inf,
@@ -767,6 +788,7 @@ Dbeta <- function(x, shape1, shape2, log = FALSE) {
 #' @export
 #' @examples
 #' Pbeta(q = 1, shape1 = c(1, 2, 3, 4, 5, 6, 7, 8), shape2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 Pbeta <- function(q, shape1, shape2, lower_tail = TRUE) {
   p <- vapply(q, function(v) .morie_betainc(shape1, shape2, v), numeric(1))
   if (lower_tail) p else 1 - p
@@ -785,6 +807,7 @@ Pbeta <- function(q, shape1, shape2, lower_tail = TRUE) {
 #' @export
 #' @examples
 #' Qbeta(p = 1, shape1 = c(1, 2, 3, 4, 5, 6, 7, 8), shape2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 Qbeta <- function(p, shape1, shape2) {
   vapply(
     p, function(pp) {
@@ -809,6 +832,7 @@ Qbeta <- function(p, shape1, shape2) {
 #' @export
 #' @examples
 #' Dt(0, 5)
+#' @keywords internal
 Dt <- function(x, df, log = FALSE) {
   if (df <= 0) stop("df must be positive")
   lg <- lgamma((df + 1) / 2) - lgamma(df / 2) - 0.5 * log(df * pi) -
@@ -829,6 +853,7 @@ Dt <- function(x, df, log = FALSE) {
 #' @export
 #' @examples
 #' Pt(2.015, 5)
+#' @keywords internal
 Pt <- function(q, df, lower_tail = TRUE) {
   p <- vapply(q, function(v) {
     xb <- df / (df + v * v)
@@ -851,6 +876,7 @@ Pt <- function(q, df, lower_tail = TRUE) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Qt(V, V)
+#' @keywords internal
 Qt <- function(p, df) {
   # The t is symmetric: qt(p) = -qt(1 - p) and qt(0.5) = 0 exactly.
   # Without this, bisection lands on the cdf plateau around zero --
@@ -881,6 +907,7 @@ Qt <- function(p, df) {
 #' @export
 #' @examples
 #' Pf(4.26, 3, 10)
+#' @keywords internal
 Pf <- function(q, df1, df2, lower_tail = TRUE) {
   p <- vapply(q, function(v) {
     if (v <= 0) {
@@ -905,6 +932,7 @@ Pf <- function(q, df1, df2, lower_tail = TRUE) {
 #' @export
 #' @examples
 #' Qf(p = 1, df1 = c(1, 2, 3, 4, 5, 6, 7, 8), df2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 Qf <- function(p, df1, df2) {
   vapply(p, function(pp) {
     .morie_bisect_q(function(v) Pf(v, df1, df2), pp, 0, 1)

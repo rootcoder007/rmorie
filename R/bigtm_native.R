@@ -21,6 +21,7 @@
 #' @examples
 #' dirichlet_predictive(N_ij = c(3, 5, 2), N_j = 10, beta = 0.5,
 #'                      m = c(0.2, 0.3, 0.5))
+#' @keywords internal
 dirichlet_predictive <- function(N_ij, N_j, beta, m) {
   n <- as.numeric(N_ij)
   mm <- as.numeric(m)
@@ -54,6 +55,7 @@ dirichlet_predictive <- function(N_ij, N_j, beta, m) {
 #' @export
 #' @examples
 #' lda_predictive(N_ik = c(1, 2, 3, 4, 5, 6, 7, 8), N_k = 5L, beta = 0.5, m = 5L)
+#' @keywords internal
 lda_predictive <- function(N_ik, N_k, beta, m) {
   n <- as.numeric(N_ik)
   mm <- as.numeric(m)
@@ -86,6 +88,7 @@ lda_predictive <- function(N_ik, N_k, beta, m) {
 #' @examples
 #' bigram_topic_predictive(N_ijk = c(1, 2, 3, 4, 5, 6, 7, 8), N_jk = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   beta = 0.5, m = 5L)
+#' @keywords internal
 bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
   if (!(as.integer(prior) %in% .PRIORS))
     stop(sprintf("bigtm: prior must be 1 or 2, got %s", prior))
@@ -179,6 +182,7 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' @examples
 #' docs <- list(c(0, 1, 2, 0), c(1, 2, 0, 1), c(2, 0, 1, 2))
 #' gibbs_bigram_topic(docs, T = 2, V = 3, iters = 20L, burn = 5L)
+#' @keywords internal
 gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
                                m = NULL, n = NULL, prior = 1,
                                iters = 200L, seed = 0L, burn = 50L) {
@@ -343,6 +347,7 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 #' @examples
 #' log_evidence(docs = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 log_evidence <- function(docs, T, V, z, alpha = 0.5, beta = 0.5,
                          m = NULL, n = NULL) {
   D <- lapply(docs, function(d) as.integer(d))

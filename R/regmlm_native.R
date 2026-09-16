@@ -112,6 +112,7 @@ CV_SCHEMES <- c("kfold", "loo")
 #' @export
 #' @examples
 #' make_blocks(n_markers = 5L)
+#' @keywords internal
 make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
   n <- as.integer(n_markers)
   b <- as.integer(block_size)
@@ -163,6 +164,7 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
 #' X <- matrix(rnorm(60), 20, 3)
 #' y <- X %*% c(1, -0.5, 0.2) + rnorm(20, 0, 0.3)
 #' str(ridge_fit(X, as.numeric(y), lam = 0.5), max.level = 1)
+#' @keywords internal
 ridge_fit <- function(X, y, lam) {
   n <- length(y)
   if (!is.matrix(X)) {
@@ -204,6 +206,7 @@ ridge_fit <- function(X, y, lam) {
 #' blocks <- make_blocks(20, block_size = 10)
 #' r <- level0_predictors(G, y, blocks, n_ridge = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 level0_predictors <- function(G, y, blocks, n_ridge = 5) {
   n <- length(y)
   if (!is.matrix(G)) G <- do.call(rbind, G)
@@ -254,6 +257,7 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
 #' @export
 #' @examples
 #' level1_stack(preds = list(a = 1, b = 2), y = 5L)
+#' @keywords internal
 level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
   if (!cv %in% CV_SCHEMES) {
     stop(sprintf("regmlm: cv must be one of %s, got %s",
@@ -314,6 +318,7 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 #' l1 <- level1_stack(l0$predictors, y)
 #' r <- loco_predictions(l0$predictors, l0$meta, l1$weights)
 #' str(r, max.level = 1)
+#' @keywords internal
 loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
   n <- length(preds[[1]])
 
@@ -356,6 +361,7 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' test_variant(V, V)
+#' @keywords internal
 test_variant <- function(g, y, offset = NULL, covariates = list()) {
   n <- length(y)
   if (n != length(g)) stop("regmlm: genotype and phenotype lengths differ")
@@ -420,6 +426,7 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
 #' y <- G[, 1] - G[, 10] + rnorm(n, 0, 0.5)
 #' r <- morie_regmlm(G, y, block_size = 10, n_ridge = 3)
 #' str(r, max.level = 1)
+#' @keywords internal
 morie_regmlm <- function(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5,
                         cv = "kfold", k = 5) {
   if (!is.matrix(G)) G <- do.call(rbind, G)

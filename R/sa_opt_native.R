@@ -84,6 +84,7 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @keywords internal
 morie_sa_opt <- function(fun, x0, step = 1.0, T0 = 1.0, n_iter = 1000,
                          schedule = "geometric", alpha = 0.99, lower = NULL,
                          upper = NULL, seed = 0) {

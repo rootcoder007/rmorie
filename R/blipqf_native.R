@@ -15,6 +15,7 @@
 #' @param ... Passed through.
 #' @return The value of \code{morie_blip2v}.
 #' @export
+#' @keywords internal
 morie_blipqf <- function(...) {
   if (!exists("morie_blip2v", mode = "function")) {
     stop(paste0("blipqf: the blip2v arm must be loaded first; this ",

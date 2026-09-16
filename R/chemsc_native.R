@@ -105,6 +105,7 @@
 #' @export
 #' @examples
 #' morie_chemsc_block(2.5, 2.0, 4.0)
+#' @keywords internal
 morie_chemsc_block <- function(d, d_ideal, d_max) {
   d <- abs(as.numeric(d))
   if (d_max <= d_ideal)
@@ -132,6 +133,7 @@ morie_chemsc_block <- function(d, d_ideal, d_max) {
 #' @export
 #' @examples
 #' morie_chemsc_smooth_block(2.5, 2.0, 4.0, 0.5)
+#' @keywords internal
 morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
   if (sigma <= 0) return(morie_chemsc_block(d, d_ideal, d_max))
   d <- abs(as.numeric(d))
@@ -206,6 +208,7 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 #' @export
 #' @examples
 #' morie_chemsc_hbond(r = 5L, alpha = 0.5, betas = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
                                par = NULL) {
   p <- .chemsc_par(.CHEMSC_HBOND, par)
@@ -259,6 +262,7 @@ morie_chemsc_hbond <- function(r, alpha, betas, smoothing = "gaussian",
 #' @export
 #' @examples
 #' morie_chemsc_metal(r = 5L)
+#' @keywords internal
 morie_chemsc_metal <- function(r, smoothing = "gaussian", par = NULL) {
   p <- .chemsc_par(.CHEMSC_METAL, par)
   .chemsc_B(.chemsc_over(r, p$METAL_R1), 0, p$METAL_R2 - p$METAL_R1,
@@ -274,6 +278,7 @@ morie_chemsc_metal <- function(r, smoothing = "gaussian", par = NULL) {
 #' @export
 #' @examples
 #' morie_chemsc_lipophilic(r = 5L)
+#' @keywords internal
 morie_chemsc_lipophilic <- function(r, smoothing = "gaussian",
                                     par = NULL) {
   p <- .chemsc_par(.CHEMSC_LIPO, par)
@@ -297,6 +302,7 @@ morie_chemsc_lipophilic <- function(r, smoothing = "gaussian",
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_chemsc_rot(D)
+#' @keywords internal
 morie_chemsc_rot <- function(fractions) {
   n <- length(fractions)
   if (n == 0L) return(0)
@@ -324,6 +330,7 @@ morie_chemsc_rot <- function(fractions) {
 #' @export
 #' @examples
 #' morie_chemsc_clash(r = 5L)
+#' @keywords internal
 morie_chemsc_clash <- function(r, kind = "general", slope = 1,
                                par = NULL) {
   p <- .chemsc_par(.CHEMSC_CLASH, par)
@@ -352,6 +359,7 @@ morie_chemsc_clash <- function(r, kind = "general", slope = 1,
 #' @examples
 #' morie_chemsc_torsion(phi = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L,
 #'   phi0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_chemsc_torsion <- function(phi, A, n, phi0)
   as.numeric(A) * (1 + cos(as.numeric(n) * as.numeric(phi) * pi / 180 -
                              as.numeric(phi0)))
@@ -381,6 +389,7 @@ morie_chemsc_torsion <- function(phi, A, n, phi0)
 #' @export
 #' @examples
 #' morie_chemsc_score()
+#' @keywords internal
 morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
                                lipophilic = numeric(0),
                                rotatable = list(), clashes = list(),
@@ -497,6 +506,7 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' morie_chemsc(D, D)
+#' @keywords internal
 morie_chemsc <- function(receptor, ligand, smoothing = "gaussian",
                          dg0 = 0, clash_slope = 1, intra_coefficient = 1,
                          rotatable = list(), torsions = list(),
@@ -563,6 +573,7 @@ morie_chemsc <- function(receptor, ligand, smoothing = "gaussian",
 #' @export
 #' @examples
 #' morie_chemsc_cheatsheet()
+#' @keywords internal
 morie_chemsc_cheatsheet <- function()
   paste0("chemsc: ChemScore empirical docking. smoothings ",
          paste(.CHEMSC_SMOOTHINGS, collapse = ", "),

@@ -43,6 +43,7 @@
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' term_weighting(M)
+#' @keywords internal
 term_weighting <- function(X, how = "log_entropy") {
   if (!(how %in% .WEIGHTS))
     stop(sprintf("lsa: weighting must be one of %s, got %s",
@@ -92,6 +93,7 @@ term_weighting <- function(X, how = "log_entropy") {
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' lsa_decompose(M)
+#' @keywords internal
 lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
   A <- term_weighting(X, how = how)
   sv <- .ghc_svd(A)
@@ -125,6 +127,7 @@ lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
 #' model <- lsa_decompose(X, k_dim = 2)
 #' approx <- reconstruct(model)
 #' dim(approx)
+#' @keywords internal
 reconstruct <- function(model) {
   T <- model$T
   S <- model$S
@@ -158,6 +161,7 @@ reconstruct <- function(model) {
 #' model <- lsa_decompose(X, k_dim = 2)
 #' q_hat <- fold_in(c(1, 0, 2), model)
 #' length(q_hat)
+#' @keywords internal
 fold_in <- function(query, model) {
   q <- as.numeric(query)
   T <- model$T
@@ -192,6 +196,7 @@ fold_in <- function(query, model) {
 #' q_hat <- fold_in(c(1, 0, 2), model)
 #' r <- cosine_ranking(q_hat, model, top_k = 3)
 #' r$n_documents
+#' @keywords internal
 cosine_ranking <- function(q_hat, model, top_k = 5) {
   D <- model$D
   S <- model$S
@@ -263,6 +268,7 @@ lsa <- lsa_decompose
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' morie_lsa(M)
+#' @keywords internal
 morie_lsa <- function(X, k_dim = NULL, how = "log_entropy", query = NULL,
                       top_k = 5L) {
   if (!is.null(query)) {

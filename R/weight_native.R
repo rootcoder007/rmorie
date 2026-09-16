@@ -45,6 +45,7 @@
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_weight(D)
 #' @export
+#' @keywords internal
 print.morie_weight <- function(x, ...) {
   cat(sprintf("morie_weight: %s (estimand %s)\n", x$method, x$estimand))
   cat(sprintf("  n = %d  ESS = %.1f  weight range [%.3f, %.3f]\n",

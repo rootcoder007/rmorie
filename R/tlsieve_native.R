@@ -225,6 +225,7 @@
 #' morie_tlsieve(F_vac_matched = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   F_pla_matched = c(1, 2, 3, 4, 5, 6, 7, 8), F_vac_mismatched = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   F_pla_mismatched = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' @keywords internal
 morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
                           F_pla_mismatched) {
   ve_m <- .tlsieve_vaccine_efficacy(F_vac_matched, F_pla_matched)
