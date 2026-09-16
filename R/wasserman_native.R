@@ -92,7 +92,7 @@ morie_wasserman_empirical_cdf <- function(x, data) {
   )
 }
 
-#' Expectation E[X] = int x f(x) dx by trapezoid (Ch 3, wsmexp)
+#' Expectation E\[X\] = int x f(x) dx by trapezoid (Ch 3, wsmexp)
 #'
 #' @param x Strictly increasing support grid, at least 2 points.
 #' @param f Non-negative density values on the grid.

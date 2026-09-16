@@ -244,7 +244,7 @@ morie_two_way_mundlak <- function(Y, unit, period, X) {
 #' The saturated cohort-by-period regression of Sec. 5
 #'
 #' Every \eqn{(g, t)}{(g, t)} cell with \eqn{t \ge g}{t >= g} gets
-#' its own coefficient, so the fitted coefficients **are** the
+#' its own coefficient, so the fitted coefficients *&#42;are&#42;* the
 #' \eqn{ATT(g, t)}{ATT(g, t)}.  Nothing is averaged, so nothing can
 #' be averaged with a negative weight.
 #'
@@ -339,7 +339,7 @@ morie_etwfe <- function(Y, unit, period, first_treated, X = NULL) {
 
 #' The two-step imputation estimator of Sec. 4
 #'
-#' Fit the two-way model on **untreated** observations only, impute
+#' Fit the two-way model on *&#42;untreated&#42;* observations only, impute
 #' the untreated potential outcome everywhere, and average the
 #' residual within each \eqn{(g, t)}{(g, t)} cell.  Sec. 5 proves
 #' this is numerically identical to \code{morie_etwfe}.

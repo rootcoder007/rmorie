@@ -1086,7 +1086,7 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
 #' define
 #'
 #' them; the definitions are the Task Force ones, Circulation
-#' 93(5):1043- 1065, 1996, reference [84] of the book\'s Chapter 8.
+#' 93(5):1043- 1065, 1996, reference \[84\] of the book\'s Chapter 8.
 #'
 #' @param rr Numeric; combined arithmetically in the body.
 #' @return A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50},
@@ -1805,7 +1805,7 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
 #' Section 2.2.4 for the physiology; the estimator is Arunachalam and
 #' Brown,
 #'
-#' Proc. IEEE EMBC 2009, pp. 5681-5684 (reference [52] of Chapter 2).
+#' Proc. IEEE EMBC 2009, pp. 5681-5684 (reference \[52\] of Chapter 2).
 #' Chest motion swings the cardiac electrical axis, so the R amplitude
 #' sampled once per beat is a respiratory signal without a respiration
 #' sensor.

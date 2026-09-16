@@ -10,7 +10,7 @@
 #'
 #' Mechanism: `SHA-256(paste0(name, ":", seed))` is truncated to 32 bytes;
 #' bytes `[9:12]` (1-indexed, i.e. hex chars 17..24) form a 32-bit value
-#' reduced modulo `2^31 - 1` and passed to [set.seed()].  Bytes `[1:8]`
+#' reduced modulo `2^31 - 1` and passed to \[set.seed()\].  Bytes `[1:8]`
 #' are reserved for the Python Philox key.  See `inst/python-stub/det_rng.py`
 #' (or the parent `morie/_det_rng.py`) for the Python counterpart.
 #'

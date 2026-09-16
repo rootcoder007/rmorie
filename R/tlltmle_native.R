@@ -27,7 +27,7 @@
 #' \eqn{P_n D^* = 0}.
 #'
 #' **Double robustness, stated exactly.** The estimator is consistent if
-#' *either* the sequential outcome regressions *or* the treatment
+#' &#42;either&#42; the sequential outcome regressions &#42;or&#42; the treatment
 #' mechanism are consistently estimated -- not both. The anchor exploits
 #' that: it breaks each arm separately and requires the estimate to
 #' survive, then breaks both and requires it to fail. Two wrong arms are

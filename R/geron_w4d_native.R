@@ -3415,7 +3415,7 @@ morie_geron_vilbert <- function(image, text, d_model = 8, seed = 0) {
 #'
 #' Patchify image, linear-embed patches, prepend \[CLS\], add sinusoidal
 #' position encodings, run \code{morie_geron_transformer}, linear head
-#' on the [CLS] row.
+#' on the \[CLS\] row.
 #'
 #' @param image (H,W) or (H,W,C) array.
 #' @param patch_size Patch side length.

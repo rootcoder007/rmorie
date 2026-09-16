@@ -587,7 +587,7 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
 
 #' Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states
 #'
-#' the approach but does not print Eg[M2] or Varg[M2]; both are derived
+#' the approach but does not print Eg\[M2\] or Varg[M2]; both are derived
 #' from the quadratic-form moments and are stated in the Python
 #' docstring.  Only the SYMMETRIC part of W contributes.
 #'

@@ -1554,7 +1554,7 @@ morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
 #' "yhat = sum_l yhat_l; y_\{l+1\} = y_l - ytilde_l" -- Challu, C.,
 #' Olivares, K. G., Oreshkin, B. N., Garza, F., Mergenthaler-Canseco,
 #' M. and Dubrawski, A., N-HiTS, AAAI 2023 (arXiv:2201.12886).
-#' wf[\[l\]] and wb[[l]] stand in for MLP_l followed by LINEAR: a single
+#' wf[\[l\]] and wb[\[l\]] stand in for MLP_l followed by LINEAR: a single
 #' caller-supplied linear map. That collapse is stated rather than
 #' hidden; the expressivity ratio r_l still governs the coefficient
 #' count, which is the hierarchical part the paper is about.

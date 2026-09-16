@@ -47,7 +47,7 @@ LinConv <- function(x, h, causal = TRUE) {
   )
 }
 
-#' Eqs (3.43)-(3.45): s = x*h1, y = s*h2 = x*h, h = h1*h2.  One method,
+#' Eqs (3.43)-(3.45): s = x&#42;h1, y = s&#42;h2 = x&#42;h, h = h1&#42;h2.  One method,
 #'
 #' so one function; the equivalence in eq (3.44) is measured, not
 #' asserted -- filtering twice is compared against filtering once with
@@ -110,7 +110,7 @@ LsiSerY <- function(x, h1, h2) {
   )
 }
 
-#' Eqs (3.46)-(3.49): s1 = x*h1, s2 = x*h2, y = s1 + s2 = x*(h1+h2)
+#' Eqs (3.46)-(3.49): s1 = x&#42;h1, s2 = x&#42;h2, y = s1 + s2 = x*(h1+h2)
 #'
 #' The shorter response is zero-extended before the addition; truncating
 #' instead would silently drop the tail of the longer filter.
