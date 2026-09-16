@@ -884,8 +884,8 @@ morie_geron_sft <- function(model = NULL, instruction_data, epochs = 200, lr = 0
 
 #' SGD classifier with hinge loss (linear SVM) trained by stochastic gradient descent
 #'
-#' Subgradient update: violated margin (y\_i f(x\_i) < 1) -> w -= lr\*(alpha\*w - y\_i x\_i),
-#' b += lr\*y\_i; satisfied -> w -= lr\*alpha\*w. Sample order drawn from a
+#' Subgradient update: violated margin (y&#95;i f(x&#95;i) < 1) -> w -= lr&#42;(alpha&#42;w - y&#95;i x&#95;i),
+#' b += lr&#42;y&#95;i; satisfied -> w -= lr&#42;alpha&#42;w. Sample order drawn from a
 #' deterministic LCG Fisher-Yates shuffle.
 #'
 #' @param X Design matrix (n, d).
@@ -3866,7 +3866,7 @@ morie_geron_separable_params <- function(k, c_in, c_out) {
 #' Xception: extreme inception using depthwise separable convolutions
 #'
 #' Resolves the entry/middle(x8)/exit flow into concrete layers, shapes
-#' and parameter counts; separable convs cost k\*k\*c\_in + c\_in\*c\_out,
+#' and parameter counts; separable convs cost k&#42;k&#42;c&#95;in + c&#95;in&#42;c&#95;out,
 #' batch norm 2\*C trainable + 2\*C non-trainable per layer.
 #'
 #' @param n_classes,in_channels,input_size As in Python original.
@@ -4296,7 +4296,7 @@ morie_geron_box_iou <- function(a, b) {
 #' YOLO: single-shot object detection via grid regression
 #'
 #' Decodes an (S,S,B\*5+C) prediction tensor (tx,ty,tw,th,conf per box,
-#' shared class probs per cell), score = conf\*class\_prob, greedy
+#' shared class probs per cell), score = conf&#42;class&#95;prob, greedy
 #' per-class NMS at iou_threshold.
 #'
 #' @param image Passed to model unchanged.

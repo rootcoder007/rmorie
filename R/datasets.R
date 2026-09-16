@@ -1335,7 +1335,8 @@ morie_datasets_nyc_stop_and_frisk <- function(year = NULL,
 #' @param billing_project GCP project to bill; `NULL` uses ADC-discovered.
 #' @return A `data.frame`.
 #' @examples
-#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
+#'   requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 #' # Keyless alternatives: the bundled samples in 'rmoriedata' and the
 #' # morie_datasets_*() open-data fetchers (Socrata / CKAN, no account).
@@ -1545,7 +1546,8 @@ morie_datasets_namus_missing_persons <- function(state = NULL,
 #' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame` with the NIST RDS catalog schema.
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) ||
+#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_nist_rds(offline = TRUE)
 #' head(df)
 #' \dontshow{\}) # examplesIf}
@@ -1614,7 +1616,9 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #' @references City of Chicago Data Portal, "Boundaries -
 #'   Neighborhoods"; based on Neighborhoods_2012b.
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_neighborhoods.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(system.file("extdata", "chicago_neighborhoods.csv",
+#'   package = "rmorie")) ||
+#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
 #' head(df[, c("pri_neigh", "sec_neigh")])
 #' \dontshow{\}) # examplesIf}
@@ -2129,7 +2133,9 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
 #' @references City of Chicago Data Portal, "Boundaries - Police
 #'   Districts (current)" (`24zt-jpfn`).
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_police_districts.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(system.file("extdata", "chicago_police_districts.csv",
+#'   package = "rmorie")) ||
+#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_police_districts(offline = TRUE)
 #' head(df)
 #' \dontshow{\}) # examplesIf}
@@ -2237,7 +2243,8 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
 #' @return A wide `data.frame`: crime columns first, then the
 #'   joined resolver columns with their canonical prefixes.
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) ||
+#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_crime_resolved(
 #'   offline = TRUE,
 #'   max_features = 5L,
@@ -2487,7 +2494,9 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
 #' @references City of Chicago Data Portal, "Boundaries - Community
 #'   Areas (current)" (`cauq-8yn6`).
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_community_areas.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(system.file("extdata", "chicago_community_areas.csv",
+#'   package = "rmorie")) ||
+#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_community_areas(offline = TRUE)
 #' head(df[, c("area_numbe", "community")])
 #' \dontshow{\}) # examplesIf}
@@ -2586,7 +2595,8 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
 #'   Department - Illinois Uniform Crime Reporting (IUCR) Codes"
 #'   (`c7ck-438e`).
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) ||
+#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_iucr_codes(offline = TRUE)
 #' subset(df, primary_description == "HOMICIDE")
 #' \dontshow{\}) # examplesIf}

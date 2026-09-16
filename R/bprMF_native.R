@@ -236,11 +236,11 @@
 
 # LearnBPR: bootstrap-sampled stochastic gradient ascent over triples
 # drawn from D_S. Mirrors morie.fn.bprMF.learn_bpr step for step, with
-# the same draw order from the shared SplitMix64 stream: U*K uniforms
-# fill W, I*K uniforms fill H, then per iteration three uniforms (user
+# the same draw order from the shared SplitMix64 stream: U&#42;K uniforms
+# fill W, I&#42;K uniforms fill H, then per iteration three uniforms (user
 # index, positive item, negative item) plus up to 100 negative-item
 # rejection-guard uniforms.  regularizer_sign="paper" reproduces the
-# printed Figure 4 update whose +lambda*Theta term diverges; the
+# printed Figure 4 update whose +lambda&#42;Theta term diverges; the
 # default is the sign that actually ascends BPR-Opt.
 #' LearnBPR: bootstrap-sampled stochastic gradient ascent over triples
 #'
@@ -249,7 +249,7 @@
 #' fill W, I&#42;K uniforms fill H, then per iteration three uniforms (user
 #' index, positive item, negative item) plus up to 100 negative-item
 #' rejection-guard uniforms.  regularizer_sign="paper" reproduces the
-#' printed Figure 4 update whose +lambda*Theta term diverges; the
+#' printed Figure 4 update whose +lambda&#42;Theta term diverges; the
 #' default is the sign that actually ascends BPR-Opt.
 #'
 #' @param pos A vector; indexed elementwise.
@@ -352,7 +352,7 @@
        regularizer_sign = reg,
        method = "LearnBPR, bootstrap SGD; Rendle et al. (2009) Fig. 4",
        caveat = if (reg == "paper")
-         "the printed update adds +lambda*Theta, which grows the parameters; this run used that sign"
+         "the printed update adds +lambda&#42;Theta, which grows the parameters; this run used that sign"
        else
          "regulariser sign corrected to -lambda*Theta, which is what ascending BPR-Opt requires")
 }
@@ -470,7 +470,7 @@ bpr_auc_R <- function(W, H, pos, n_items)
 #'
 #' Mirrors morie.fn.bprMF.learn_bpr step for step, draw for draw.
 #' \code{regularizer_sign="paper"} reproduces the printed Figure 4
-#' update, whose \code{+lambda*Theta} term diverges; the default
+#' update, whose \code{+lambda&#42;Theta} term diverges; the default
 #' \code{"correct"} is the sign that actually ascends BPR-Opt.
 #'
 #' @param pos Named list of positive-item indices per user (0-based).
@@ -549,7 +549,7 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
         "with the Heaviside replaced by ln sigma -- and that",
         "substitution comes from the MLE, not from convenience.",
         "LearnBPR SAMPLES triples rather than sweeping them. The",
-        "printed update's +lambda*Theta is a sign error and diverges.")
+        "printed update's +lambda&#42;Theta is a sign error and diverges.")
 }
 
 #' @rdname bpr_sigmoid

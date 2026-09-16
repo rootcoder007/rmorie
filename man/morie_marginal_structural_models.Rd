@@ -17,7 +17,8 @@ morie_msm_logistic(y, treatment_history, weights = NULL)
 
 morie_msm_poisson(y, treatment_history, offset = NULL, weights = NULL) 
 
-morie_msm_negative_binomial(y, treatment_history, alpha = 1, offset = NULL, weights = NULL) 
+morie_msm_negative_binomial(y, treatment_history, alpha = 1, offset = NULL,
+  weights = NULL) 
 
 morie_msm_cox_marginal(time, event, treatment_history, weights = NULL) 
 

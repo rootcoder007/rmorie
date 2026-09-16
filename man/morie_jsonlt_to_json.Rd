@@ -25,7 +25,7 @@ morie_jsonlt_to_json(
 \arguments{
 \item{x}{the object to encode.}
 
-\item{dataframe, matrix, Date, POSIXt, factor, complex, raw, null, na, auto_unbox, digits, pretty, force, ...}{as in jsonlite.}
+\item{dataframe, matrix, Date, POSIXt, factor, complex, raw, null, na, auto_unbox, digits, force}{as in jsonlite.}
 
 \item{pretty}{FALSE, TRUE, or an indent width.}
 

@@ -46,7 +46,9 @@ MTM zone 8 NAD83 / EPSG:32188), LONGITUDE, LATITUDE (WGS84,
 obfuscated to intersections per privacy policy).
 }
 \examples{
-\dontshow{if (nzchar(system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (nzchar(system.file("extdata", "montreal_sim_interventions_sample.csv",
+  package = "rmorie")) ||
+  requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
 nrow(df) # 349
 table(df$DESCRIPTION_GROUPE)

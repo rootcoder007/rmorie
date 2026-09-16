@@ -36,7 +36,8 @@ implementation is retained because rmorie's API takes naked
 downstream MRM code.
 }
 \examples{
-if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) && requireNamespace("rsample", quietly = TRUE)) {
+if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) &&
+  requireNamespace("rsample", quietly = TRUE)) {
   set.seed(1)
   X <- matrix(rnorm(25 * 2), ncol = 2)
   y <- rnorm(25)

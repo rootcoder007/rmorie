@@ -28,7 +28,7 @@ running residual r, the sifting loop of Huang et al (1998) sec. 4 is
 \item cubic-spline the maxima into an upper envelope u and the
 minima into a lower envelope l;
 \item m = (u + l) / 2 ; h <- h - m;
-\item stop when SD = sum (h_k - h_{k-1})^2 / sum h_{k-1}^2 < sd_tol
+\item stop when SD = sum (h_k - h_\{k-1\})^2 / sum h_\{k-1\}^2 < sd_tol
 (Huang eq. 5.5, recommended 0.2-0.3).
 }
 The extracted h is an IMF; it is subtracted from r and the loop

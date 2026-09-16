@@ -158,7 +158,8 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #' @references VPD GeoDASH Open Data,
 #'   \url{https://geodash.vpd.ca/opendata/}.
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) ||
+#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_vpd_crime(offline = TRUE)
 #' nrow(df) # 550
 #' table(df$TYPE)

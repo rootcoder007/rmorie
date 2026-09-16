@@ -1523,7 +1523,9 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   models. *Annals of Applied Statistics*, 9(1):247-274.
 #' @examples
 #' set.seed(1)
-#' if (requireNamespace("CausalImpact", quietly = TRUE) && requireNamespace("WeightIt", quietly = TRUE) && requireNamespace("cobalt", quietly = TRUE) && requireNamespace("survey", quietly = TRUE)) {
+#' if (requireNamespace("CausalImpact", quietly = TRUE) &&
+#'   requireNamespace("WeightIt", quietly = TRUE) &&
+#'   requireNamespace("cobalt", quietly = TRUE) && requireNamespace("survey", quietly = TRUE)) {
 #'   morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
 #'       pre_period = c(1, 5), post_period = c(6, 10))
 #' }

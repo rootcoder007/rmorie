@@ -25,7 +25,8 @@
 #' @importFrom stats predict
 #' @examples
 #' set.seed(1)
-#' \dontshow{if (requireNamespace("xgboost", quietly = TRUE) || requireNamespace("gbm", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("xgboost", quietly = TRUE) ||
+#'   requireNamespace("gbm", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_xgboost_objective(x = rnorm(50), y = rnorm(50))
 #' \dontshow{\}) # examplesIf}
 #' @export

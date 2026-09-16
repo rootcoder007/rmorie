@@ -18,7 +18,8 @@ morie_multinomial_probs(X, beta0, beta, baseline_last = TRUE)
 
 morie_multinomial_loglik(X, y, beta0, beta, baseline_last = TRUE) 
 
-morie_penalized_multinomial(X, y, beta0, beta, lambda, penalty = "ridge", baseline_last = TRUE) 
+morie_penalized_multinomial(X, y, beta0, beta, lambda, penalty = "ridge",
+  baseline_last = TRUE) 
 
 morie_penalized_poisson(X, y, lambda = 1, penalty = "ridge", n_iter = 100L, tol = 1e-10, 
     add_intercept = TRUE) 

@@ -24,7 +24,9 @@ six-field regex parse used by \code{morie_siu_fetch_cases()}, which
 itself now routes through the same compiled parser when available.
 }
 \examples{
-\dontshow{if (requireNamespace("rmoriebricklayer", quietly = TRUE) && exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("rmoriebricklayer", quietly = TRUE) &&
+  exists("bricklayer_parse_siu",
+  envir = asNamespace("rmoriebricklayer"))) withAutoprint(\{ # examplesIf}
 f <- morie_siu_parse_report(system.file("extdata",
   "siu_synthetic_report.html", package = "rmoriebricklayer"))
 f[["number_of_subject_officers"]]

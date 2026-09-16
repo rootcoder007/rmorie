@@ -31,7 +31,8 @@ resolves to \code{ocp21}.
 }
 \examples{
 \donttest{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # CPADS 2021-2022 (default DuckDB cache); try() so a transient
 # upstream outage does not fail the check
@@ -46,7 +47,8 @@ df <- try(morie_load_dataset("ocp21", refresh = TRUE)) # force re-fetch
 \dontshow{\}) # examplesIf}
 }
 \donttest{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # CPADS 2021-2022 (default DuckDB cache); try() so a transient
 # upstream outage does not fail the check

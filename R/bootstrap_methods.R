@@ -1124,7 +1124,8 @@ subsampling <- function(data, statistic, subsample_size = NULL,
 #'   error_632, error_632plus.
 #' @seealso \code{ipred::errorest}.
 #' @examples
-#' if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) && requireNamespace("rsample", quietly = TRUE)) {
+#' if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) &&
+#'   requireNamespace("rsample", quietly = TRUE)) {
 #'   set.seed(1)
 #'   X <- matrix(rnorm(25 * 2), ncol = 2)
 #'   y <- rnorm(25)
@@ -1315,7 +1316,8 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 #' @return A \code{morie_cv_result} pooling scores across repeats.
 #' @seealso \code{caret::trainControl}, \code{rsample::vfold_cv}.
 #' @examples
-#' if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) && requireNamespace("rsample", quietly = TRUE)) {
+#' if (requireNamespace("caret", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE) &&
+#'   requireNamespace("rsample", quietly = TRUE)) {
 #'   set.seed(1)
 #'   X <- matrix(rnorm(80), ncol = 2)
 #'   y <- rnorm(40)
