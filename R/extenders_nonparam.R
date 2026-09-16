@@ -202,7 +202,7 @@ morie_quantile_reg <- function(formula, tau = 0.5, data, ...) {
 #'   (e.g. \code{bwmethod}, \code{bwtype}, \code{ckertype},
 #'   \code{regtype}, \code{tol}, \code{ftol}).
 #'
-#' @return A list with \code{$method = "np::npreg (bws via
+#' @return A list with \eqn{$method = "np::npreg (bws via
 #'   npregbw)"} and \code{$raw}, where \code{$raw} is itself a
 #'   list with \code{$bws} (the \code{rbandwidth} object from
 #'   \code{np::npregbw}) and \code{$fit} (the \code{npregression}

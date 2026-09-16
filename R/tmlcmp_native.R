@@ -170,6 +170,28 @@
 #' @param arm Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.tmlcmp_vec}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}, \code{n}.
+#' @references ----------
+#'   Rytgaard, H. C., Gerds, T. A. & van der Laan, M. J. (2022)
+#'   "Continuous-time targeted minimum loss-based estimation of
+#'   intervention-specific mean outcomes", The Annals of Statistics
+#'   50(5), 2469-2491, doi:10.1214/21-AOS2114, arXiv:2105.02088. The
+#'   generalisation of TMLE to time-varying interventions where
+#'   interventions, covariates and outcome occur at subject-specific
+#'   time-points on an arbitrarily fine time-scale. (The ledger previously
+#'   dated this 2023; the Annals publication is 2022.)
+#'   
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 11
+#'   (Benkeser, Carone & Gilbert): the competing risks framework with
+#'   each endpoint type a separate risk; cumulative incidence as the
+#'   cumulative parameter; the Aalen-Johansen estimator\'s consistency
+#'   under uninformative censoring and its efficiency absent covariates;
+#'   and the drawback that semiparametric hazard-based alternatives
+#'   require a correctly specified finite-dimensional regression model.
+#'   
+#'   Aalen, O. O. & Johansen, S. (1978) "An Empirical Transition Matrix
+#'   for Non-Homogeneous Markov Chains Based on Censored Observations",
+#'   Scandinavian Journal of Statistics 5(3), 141-150.
 #' @export
 #' @examples
 #' cause_specific_hazards(time = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -232,6 +254,28 @@ cause_specific_hazards <- function(time, event_type, times,
 #' @param hazards A vector; indexed elementwise.
 #' @param times A vector; its length is taken.
 #' @return A list with \code{F}, \code{survival}, \code{types}, \code{closure}.
+#' @references ----------
+#'   Rytgaard, H. C., Gerds, T. A. & van der Laan, M. J. (2022)
+#'   "Continuous-time targeted minimum loss-based estimation of
+#'   intervention-specific mean outcomes", The Annals of Statistics
+#'   50(5), 2469-2491, doi:10.1214/21-AOS2114, arXiv:2105.02088. The
+#'   generalisation of TMLE to time-varying interventions where
+#'   interventions, covariates and outcome occur at subject-specific
+#'   time-points on an arbitrarily fine time-scale. (The ledger previously
+#'   dated this 2023; the Annals publication is 2022.)
+#'   
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 11
+#'   (Benkeser, Carone & Gilbert): the competing risks framework with
+#'   each endpoint type a separate risk; cumulative incidence as the
+#'   cumulative parameter; the Aalen-Johansen estimator\'s consistency
+#'   under uninformative censoring and its efficiency absent covariates;
+#'   and the drawback that semiparametric hazard-based alternatives
+#'   require a correctly specified finite-dimensional regression model.
+#'   
+#'   Aalen, O. O. & Johansen, S. (1978) "An Empirical Transition Matrix
+#'   for Non-Homogeneous Markov Chains Based on Censored Observations",
+#'   Scandinavian Journal of Statistics 5(3), 141-150.
 #' @export
 #' @examples
 #' hazards <- list("1" = c(0.10, 0.15, 0.20), "2" = c(0.05, 0.05, 0.10))
@@ -283,6 +327,28 @@ cumulative_incidence <- function(hazards, times) {
 #' @param times A vector; its length is taken.
 #' @param cause Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{estimate}, \code{caveat}.
+#' @references ----------
+#'   Rytgaard, H. C., Gerds, T. A. & van der Laan, M. J. (2022)
+#'   "Continuous-time targeted minimum loss-based estimation of
+#'   intervention-specific mean outcomes", The Annals of Statistics
+#'   50(5), 2469-2491, doi:10.1214/21-AOS2114, arXiv:2105.02088. The
+#'   generalisation of TMLE to time-varying interventions where
+#'   interventions, covariates and outcome occur at subject-specific
+#'   time-points on an arbitrarily fine time-scale. (The ledger previously
+#'   dated this 2023; the Annals publication is 2022.)
+#'   
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 11
+#'   (Benkeser, Carone & Gilbert): the competing risks framework with
+#'   each endpoint type a separate risk; cumulative incidence as the
+#'   cumulative parameter; the Aalen-Johansen estimator\'s consistency
+#'   under uninformative censoring and its efficiency absent covariates;
+#'   and the drawback that semiparametric hazard-based alternatives
+#'   require a correctly specified finite-dimensional regression model.
+#'   
+#'   Aalen, O. O. & Johansen, S. (1978) "An Empirical Transition Matrix
+#'   for Non-Homogeneous Markov Chains Based on Censored Observations",
+#'   Scandinavian Journal of Statistics 5(3), 141-150.
 #' @export
 #' @examples
 #' hazards <- list("1" = c(0.10, 0.15, 0.20), "2" = c(0.05, 0.05, 0.10))
@@ -329,6 +395,28 @@ one_minus_km <- function(hazards, times, cause) {
 #' @return A list with \code{estimate}, \code{psi}, \code{F_treated}, \code{F_control},
 #' \code{curve_treated}, \code{curve_control}, \code{se}, \code{ci}, \code{horizon},
 #' \code{cause}, \code{times}, \code{closure_treated}, \code{method}, \code{note}.
+#' @references ----------
+#'   Rytgaard, H. C., Gerds, T. A. & van der Laan, M. J. (2022)
+#'   "Continuous-time targeted minimum loss-based estimation of
+#'   intervention-specific mean outcomes", The Annals of Statistics
+#'   50(5), 2469-2491, doi:10.1214/21-AOS2114, arXiv:2105.02088. The
+#'   generalisation of TMLE to time-varying interventions where
+#'   interventions, covariates and outcome occur at subject-specific
+#'   time-points on an arbitrarily fine time-scale. (The ledger previously
+#'   dated this 2023; the Annals publication is 2022.)
+#'   
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 11
+#'   (Benkeser, Carone & Gilbert): the competing risks framework with
+#'   each endpoint type a separate risk; cumulative incidence as the
+#'   cumulative parameter; the Aalen-Johansen estimator\'s consistency
+#'   under uninformative censoring and its efficiency absent covariates;
+#'   and the drawback that semiparametric hazard-based alternatives
+#'   require a correctly specified finite-dimensional regression model.
+#'   
+#'   Aalen, O. O. & Johansen, S. (1978) "An Empirical Transition Matrix
+#'   for Non-Homogeneous Markov Chains Based on Censored Observations",
+#'   Scandinavian Journal of Statistics 5(3), 141-150.
 #' @export
 #' @examples
 #' set.seed(1)

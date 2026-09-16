@@ -7731,6 +7731,7 @@ morie_kamath_yarn_context_extrapolation <- function(theta, scale, d,
 #'
 #' @param r 1-based rank(s).
 #' @param k Damping constant.
+#' @return A list with `estimate`, `scores`, `ranks`, `k`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -7769,6 +7770,7 @@ morie_kamath_rrf_score <- function(r, k = 60) {
 #' @param answer Claims.
 #' @param context Retrieved passage(s).
 #' @param entails Optional judge.
+#' @return A list with `estimate`, `supported`, `n_claims`, `claims`, `claim_supported`, `judge`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

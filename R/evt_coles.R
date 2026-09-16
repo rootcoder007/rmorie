@@ -72,6 +72,7 @@ morie_evt_gev_loglik <- function(x, mu, sigma, xi) {
 #' GEV quantile (Coles 2001 eq. 3.4, non-exceedance p)
 #' @param p probability in (0, 1)
 #' @inheritParams morie_evt_gev_cdf
+#' @return A numeric value.
 #' @export
 #' @examples
 #' morie_evt_gev_quantile(0.9, 5, 1.5, 0.1)
@@ -180,6 +181,7 @@ MASS_ginv_fallback <- function(H) {
 #' GPD distribution function (Coles 2001 eq. 4.2-4.4)
 #' @param y excess(es) over the threshold, y >= 0
 #' @param sigma,xi GPD scale (> 0) and shape
+#' @return The value of `out`, as built in the body.
 #' @export
 #' @examples
 #' morie_evt_gpd_cdf(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
@@ -199,6 +201,7 @@ morie_evt_gpd_cdf <- function(y, sigma, xi) {
 
 #' GPD log-likelihood over excesses (Coles 2001 eq. 4.10)
 #' @inheritParams morie_evt_gpd_cdf
+#' @return A numeric value.
 #' @export
 #' @examples
 #' morie_evt_gpd_loglik(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L)
@@ -220,6 +223,7 @@ morie_evt_gpd_loglik <- function(y, sigma, xi) {
 #' GPD quantile (inverse of Coles 2001 eq. 4.2)
 #' @param p probability in [0, 1)
 #' @inheritParams morie_evt_gpd_cdf
+#' @return A numeric value.
 #' @export
 #' @examples
 #' morie_evt_gpd_quantile(p = 0.5, sigma = 0.5, xi = 5L)
@@ -234,6 +238,7 @@ morie_evt_gpd_quantile <- function(p, sigma, xi) {
 
 #' GPD maximum-likelihood fit (Coles 2001 sec. 4.3.2)
 #' @param y threshold excesses
+#' @return A list with `sigma`, `xi`, `loglik`, `cov`, `n`, `converged`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -271,6 +276,7 @@ morie_evt_gpd_mle <- function(y) {
 #' GEV T-period return level (Coles 2001 eq. 3.4/3.10)
 #' @param T return period (> 1)
 #' @inheritParams morie_evt_gev_cdf
+#' @return The value of `morie_evt_gev_quantile`.
 #' @export
 #' @examples
 #' morie_evt_return_level(5, 1.5, 0.1, 100)
@@ -284,6 +290,7 @@ morie_evt_return_level <- function(mu, sigma, xi, T) {
 #' @param x block maxima to fit
 #' @param T return period
 #' @param alpha 1 - confidence level
+#' @return A list with `z_T`, `ci_lo`, `ci_hi`, `se`.
 #' @export
 #' @examples
 #' morie_evt_return_level_ci(x = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
@@ -314,6 +321,7 @@ morie_evt_return_level_ci <- function(x, T, alpha = 0.05) {
 #' @param xi See Usage.
 #' @param zeta_u See Usage.
 #' @param m See Usage.
+#' @return A numeric value.
 #' @export
 #' @examples
 #' morie_evt_return_level_pot(u = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L,
@@ -330,6 +338,7 @@ morie_evt_return_level_pot <- function(u, sigma, xi, zeta_u, m) {
 #' Empirical chi(u) tail dependence (Coles 2001 sec. 8.4 p.164)
 #' @param x,y equal-length series; u quantile level
 #' @param u See Usage.
+#' @return A numeric value.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -348,6 +357,7 @@ morie_evt_chi <- function(x, y, u = 0.95) {
 #' Empirical chibar(u) (Coles 2001 sec. 8.4 p.164)
 #' @inheritParams morie_evt_chi
 #' @param u_grid quantile grid
+#' @return A vector.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -371,6 +381,7 @@ morie_evt_chibar <- function(x, y, u_grid = seq(0.5, 0.95,
 #' @param x data (block maxima or excesses); model "gev" or "gpd"
 #' @param alpha 1 - confidence level
 #' @param model See Usage.
+#' @return A list with `ci_lo`, `ci_hi`, `xi_hat`.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -435,6 +446,7 @@ morie_evt_xi_ci_profile <- function(x, alpha = 0.05, model = "gev") {
 #' @param prior_sd prior standard deviations for (mu, log sigma, xi)
 #' @param n_draws See Usage.
 #' @param seed See Usage.
+#' @return A list with `draws`, `accept_rate`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -483,6 +495,7 @@ morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
 #' (Coles 2001 sec. 6.2)
 #' @param x series of maxima; t optional time index
 #' @param t See Usage.
+#' @return A list with `beta0`, `beta1`, `sigma`, `xi`, `loglik`, `lr_vs_stationary`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

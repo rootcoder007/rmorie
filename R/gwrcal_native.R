@@ -384,6 +384,7 @@
 #' @param y See Usage.
 #' @param X See Usage.
 #' @param coords See Usage.
+#' @return A list with `y`, `X`, `coords`, `n`, `p`.
 #' @export
 #' @examples
 #' morie_gwrcal_prepare(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -411,6 +412,7 @@ morie_gwrcal_prepare <- function(y, X, coords) {
 #'
 #' @param y See Usage.
 #' @param X See Usage.
+#' @return The value of `.gwr_aicc`.
 #' @export
 #' @examples
 #' set.seed(1)

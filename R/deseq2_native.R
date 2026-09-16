@@ -676,10 +676,13 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
         "implemented.")
 }
 
+#' @rdname deseq2
 #' @export
 differential_expression <- deseq2
+#' @rdname deseq2
 #' @export
 deseq2_de <- deseq2
+#' @rdname deseq2
 #' @export
 deseq2_differential <- deseq2
 

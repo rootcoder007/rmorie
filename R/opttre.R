@@ -7,7 +7,7 @@
 #' thing: a small error in the outcome model where the two arms are
 #' close flips the recommendation. Their tree instead maximizes the
 #' ESTIMATED VALUE directly,
-#' \code{V(d) = sum Y_i 1{A_i = d(W_i)} / pi_i / sum 1{A_i = d(W_i)} /
+#' \eqn{V(d) = sum Y_i 1{A_i = d(W_i)} / pi_i / sum 1{A_i = d(W_i)} /
 #' pi_i}, over axis-aligned splits. This implementation enumerates
 #' every split of every covariate at every observed value and recurses.
 #'

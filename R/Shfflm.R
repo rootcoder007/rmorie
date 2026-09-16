@@ -9,7 +9,7 @@
 #' \code{epsilon <= e1 sqrt(2 n log(1/delta)) + n e1 (exp(e1) - 1)} for
 #' \code{e1 = 2 exp(2 epsilon0) (exp(epsilon0) - 1) / n}.  In particular,
 #' for \code{epsilon0 <= log(n/4)/3},
-#' \code{epsilon <= exp(2 epsilon0) (exp(epsilon0) - 1) sqrt(8 log(1/delta)/n)
+#' \eqn{epsilon <= exp(2 epsilon0) (exp(epsilon0) - 1) sqrt(8 log(1/delta)/n)
 #' + 6 exp(4 epsilon0) (exp(epsilon0) - 1)^2 / n}, and for any
 #' \code{n >= 1000}, \code{0 < epsilon0 < 1/2} and \code{0 < delta < 1/100}
 #' the simple form \code{epsilon <= 12 epsilon0 sqrt(log(1/delta)/n)}, which

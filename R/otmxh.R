@@ -9,7 +9,7 @@
 #' ground cost is the closed-form Gaussian \code{W_2^2}. The restriction
 #' can only raise the cost, so \code{MW_2 >= W_2} always.
 #'
-#' Formula: \code{MW_2^2 = min_{w in Pi(p,q)} sum_kl w_kl W_2^2(N(m_k,S_k),
+#' Formula: \eqn{MW_2^2 = min_{w in Pi(p,q)} sum_kl w_kl W_2^2(N(m_k,S_k),
 #' N(m'_l,S'_l))} -- Delon and Desolneux (2020) Definition 4.1.
 #'
 #' @param mus1 Component means of the first mixture, K1 by d.

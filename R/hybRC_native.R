@@ -121,6 +121,30 @@
 #'
 #' @param method Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{method}, \code{order_sensitive}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' is_order_sensitive("mixed")
@@ -148,6 +172,30 @@ is_order_sensitive <- function(method) {
 #' @param scores Iterated over elementwise, with \code{lapply}.
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.hybRC_vec}.
 #' @return A list with \code{scores}, \code{ranking}, \code{partially_scored}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -206,6 +254,30 @@ weighted <- function(scores, weights = NULL) {
 #' @param criterion Accepted by the signature and not used anywhere in the body.
 #' @param context Passed to \code{criterion}.
 #' @return A list with \code{scores}, \code{chosen}, \code{ranking}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' r <- switching(list(content = c(a = 0.9, b = 0.2),
@@ -246,6 +318,30 @@ switching <- function(scores, criterion, context = NULL) {
 #' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with
 #' \code{as.integer}.
 #' @return A list with \code{presented}, \code{n_sources}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -293,6 +389,30 @@ mixed <- function(recommendations, top_k = NULL) {
 #' @param content_features Passed to \code{.hybRC_mat}.
 #' @param collaborative_features Passed to \code{.hybRC_mat}.
 #' @return A list with \code{features}, \code{content_dim}, \code{collaborative_dim}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -336,6 +456,30 @@ feature_combination <- function(content_features, collaborative_features) {
 #' @param tol Numeric; passed to \code{max}. Defaults to \code{1e-09}.
 #' @return A list with \code{ranking}, \code{tie_groups_broken},
 #' \code{primary_respected}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' cascade(primary = list(a = 1, b = 2), secondary = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -377,6 +521,30 @@ cascade <- function(primary, secondary, tol = 1e-9) {
 #' @param base_output Passed to \code{consumer}.
 #' @param consumer Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{result}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' if (requireNamespace("ranger", quietly = TRUE)) {
@@ -403,6 +571,30 @@ feature_augmentation <- function(base_output, consumer) {
 #' @param consumer Accepted by the signature and not used anywhere in the body.
 #' @param data Passed to \code{model_builder}.
 #' @return A list with \code{estimate}, \code{result}, \code{model}, \code{method}, \code{note}.
+#' @references ----------
+#'   Burke, R. (2002) "Hybrid Recommender Systems: Survey and
+#'   Experiments", *User Modeling and User-Adapted Interaction* 12(4),
+#'   331-370, doi:10.1023/A:1021240730564. [PDF supplied by Vee.] The
+#'   taxonomy of seven hybridisation methods -- weighted, switching, mixed,
+#'   feature combination, cascade, feature augmentation and meta-level --
+#'   with the weighted hybrid\'s implicit assumption that the relative value
+#'   of the techniques is more or less uniform across the space of possible
+#'   items; the note that switching hybrids introduce additional complexity
+#'   because the switching criteria must be determined, adding another
+#'   level of parameterisation, in exchange for sensitivity to the
+#'   components\' strengths and weaknesses; and the observation that four
+#'   techniques -- weighted, mixed, switching and feature combination --
+#'   are order-insensitive, so a CN/CF mixed system is no different from a
+#'   CF/CN one.
+#'   
+#'   Balabanovic, M. & Shoham, Y. (1997) "Fab: content-based,
+#'   collaborative recommendation", *Communications of the ACM* 40(3),
+#'   66-72, doi:10.1145/245108.245124. An early hybrid.
+#'   
+#'   Resnick, P. et al. (1994) "GroupLens", *CSCW \'94*, 175-186,
+#'   doi:10.1145/192844.192905. The collaborative half; implemented in
+#'   :mod:`ucfR`.
+#'   """
 #' @export
 #' @examples
 #' set.seed(1)

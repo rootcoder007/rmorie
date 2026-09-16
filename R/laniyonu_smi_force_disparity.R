@@ -48,7 +48,7 @@
 #' @name morie_laniyonu_smi_force_disparity
 #' @examples
 #' set.seed(1)
-#' g <- expand.grid(tract_id = sprintf("T\%02d", 1:30), year = 2020:2023,
+#' g <- expand.grid(tract_id = sprintf("T%02d", 1:30), year = 2020:2023,
 #'                  stringsAsFactors = FALSE)
 #' g$pop_18plus <- sample(500:5000, nrow(g), TRUE)
 #' g$poverty_rate <- runif(nrow(g), 0.05, 0.45)

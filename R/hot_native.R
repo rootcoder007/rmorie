@@ -35,7 +35,7 @@
 #' early abandon only discards candidates that provably cannot win.
 #'
 #' @param x Numeric series.
-#' @param window Subsequence length; needs \code{2 <= window <=
+#' @param window Subsequence length; needs \eqn{2 <= window <=
 #'   length(x)/2}.
 #' @param alphabet SAX alphabet size for the ordering heuristic,
 #'   default 3.

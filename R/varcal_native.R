@@ -142,6 +142,26 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' @param position Numeric; combined arithmetically in the body.
 #' @param reference A vector; its length is taken and its elements indexed.
 #' @return A list with \code{observations}, \code{reference}, \code{depth}.
+#' @references ----------
+#'   Poplin, R., Newburger, D., Dijamco, J., Nguyen, N., Loy, D., Gross,
+#'   S. S., McLean, C. Y. & DePristo, M. A. (2016) "Creating a universal
+#'   SNP and small indel variant caller with deep neural networks",
+#'   bioRxiv 092890, doi:10.1101/092890 (published as Poplin et al. (2018)
+#'   *Nature Biotechnology* 36(10), 983-987,
+#'   doi:10.1038/nbt.4235). The high-sensitivity/low-specificity candidate
+#'   stage, the pileup image of reference and read data around each
+#'   candidate, the Inception-v2 classifier emitting the three diploid
+#'   genotype probabilities, the calibration argument for why an image of
+#'   all reads captures inter-read dependence, and the printed accounting:
+#'   candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
+#'   of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+#'   sensitivity.
+#'   
+#'   Li, H. (2011) "A statistical framework for SNP calling, mutation
+#'   discovery, association mapping and population genetical parameter
+#'   estimation from sequencing data", *Bioinformatics* 27(21), 2987-2993,
+#'   doi:10.1093/bioinformatics/btr509, for the conventional genotype
+#'   likelihood this replaces.
 #' @export
 #' @examples
 #' reads <- list(list(pos = 0L, seq = "ACGTACGT"),
@@ -188,6 +208,26 @@ varcal_pileup_column <- function(reads, position, reference) {
 #' 1\]. Defaults to \code{0.05}.
 #' @param min_bq Passed to \code{>=}. Defaults to \code{10}.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Poplin, R., Newburger, D., Dijamco, J., Nguyen, N., Loy, D., Gross,
+#'   S. S., McLean, C. Y. & DePristo, M. A. (2016) "Creating a universal
+#'   SNP and small indel variant caller with deep neural networks",
+#'   bioRxiv 092890, doi:10.1101/092890 (published as Poplin et al. (2018)
+#'   *Nature Biotechnology* 36(10), 983-987,
+#'   doi:10.1038/nbt.4235). The high-sensitivity/low-specificity candidate
+#'   stage, the pileup image of reference and read data around each
+#'   candidate, the Inception-v2 classifier emitting the three diploid
+#'   genotype probabilities, the calibration argument for why an image of
+#'   all reads captures inter-read dependence, and the printed accounting:
+#'   candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
+#'   of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+#'   sensitivity.
+#'   
+#'   Li, H. (2011) "A statistical framework for SNP calling, mutation
+#'   discovery, association mapping and population genetical parameter
+#'   estimation from sequencing data", *Bioinformatics* 27(21), 2987-2993,
+#'   doi:10.1093/bioinformatics/btr509, for the conventional genotype
+#'   likelihood this replaces.
 #' @export
 #' @examples
 #' reads <- c(
@@ -262,6 +302,26 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #' to \code{"base_quality_strand"}.
 #' @return A list with \code{reference_row}, \code{read_rows}, \code{n_reads},
 #' \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
+#' @references ----------
+#'   Poplin, R., Newburger, D., Dijamco, J., Nguyen, N., Loy, D., Gross,
+#'   S. S., McLean, C. Y. & DePristo, M. A. (2016) "Creating a universal
+#'   SNP and small indel variant caller with deep neural networks",
+#'   bioRxiv 092890, doi:10.1101/092890 (published as Poplin et al. (2018)
+#'   *Nature Biotechnology* 36(10), 983-987,
+#'   doi:10.1038/nbt.4235). The high-sensitivity/low-specificity candidate
+#'   stage, the pileup image of reference and read data around each
+#'   candidate, the Inception-v2 classifier emitting the three diploid
+#'   genotype probabilities, the calibration argument for why an image of
+#'   all reads captures inter-read dependence, and the printed accounting:
+#'   candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
+#'   of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+#'   sensitivity.
+#'   
+#'   Li, H. (2011) "A statistical framework for SNP calling, mutation
+#'   discovery, association mapping and population genetical parameter
+#'   estimation from sequencing data", *Bioinformatics* 27(21), 2987-2993,
+#'   doi:10.1093/bioinformatics/btr509, for the conventional genotype
+#'   likelihood this replaces.
 #' @export
 #' @examples
 #' reads <- c(
@@ -348,6 +408,26 @@ varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
 #' @param scorer The body requires: varcal: the scorer must return three non-negative scores.
 #' @param prior Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{posterior}, \code{call}, \code{quality}, \code{scores}, \code{source}.
+#' @references ----------
+#'   Poplin, R., Newburger, D., Dijamco, J., Nguyen, N., Loy, D., Gross,
+#'   S. S., McLean, C. Y. & DePristo, M. A. (2016) "Creating a universal
+#'   SNP and small indel variant caller with deep neural networks",
+#'   bioRxiv 092890, doi:10.1101/092890 (published as Poplin et al. (2018)
+#'   *Nature Biotechnology* 36(10), 983-987,
+#'   doi:10.1038/nbt.4235). The high-sensitivity/low-specificity candidate
+#'   stage, the pileup image of reference and read data around each
+#'   candidate, the Inception-v2 classifier emitting the three diploid
+#'   genotype probabilities, the calibration argument for why an image of
+#'   all reads captures inter-read dependence, and the printed accounting:
+#'   candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
+#'   of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+#'   sensitivity.
+#'   
+#'   Li, H. (2011) "A statistical framework for SNP calling, mutation
+#'   discovery, association mapping and population genetical parameter
+#'   estimation from sequencing data", *Bioinformatics* 27(21), 2987-2993,
+#'   doi:10.1093/bioinformatics/btr509, for the conventional genotype
+#'   likelihood this replaces.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -418,6 +498,26 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
 #' @param ... Passed through.
 #' @return A list with \code{estimate}, \code{candidates}, \code{n_candidates},
 #' \code{calls}, \code{n_called}, \code{method}.
+#' @references ----------
+#'   Poplin, R., Newburger, D., Dijamco, J., Nguyen, N., Loy, D., Gross,
+#'   S. S., McLean, C. Y. & DePristo, M. A. (2016) "Creating a universal
+#'   SNP and small indel variant caller with deep neural networks",
+#'   bioRxiv 092890, doi:10.1101/092890 (published as Poplin et al. (2018)
+#'   *Nature Biotechnology* 36(10), 983-987,
+#'   doi:10.1038/nbt.4235). The high-sensitivity/low-specificity candidate
+#'   stage, the pileup image of reference and read data around each
+#'   candidate, the Inception-v2 classifier emitting the three diploid
+#'   genotype probabilities, the calibration argument for why an image of
+#'   all reads captures inter-read dependence, and the printed accounting:
+#'   candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
+#'   of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+#'   sensitivity.
+#'   
+#'   Li, H. (2011) "A statistical framework for SNP calling, mutation
+#'   discovery, association mapping and population genetical parameter
+#'   estimation from sequencing data", *Bioinformatics* 27(21), 2987-2993,
+#'   doi:10.1093/bioinformatics/btr509, for the conventional genotype
+#'   likelihood this replaces.
 #' @export
 #' @examples
 #' reads <- c(
@@ -465,6 +565,26 @@ morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
 #' @param truth See Usage.
 #' @param candidates Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Poplin, R., Newburger, D., Dijamco, J., Nguyen, N., Loy, D., Gross,
+#'   S. S., McLean, C. Y. & DePristo, M. A. (2016) "Creating a universal
+#'   SNP and small indel variant caller with deep neural networks",
+#'   bioRxiv 092890, doi:10.1101/092890 (published as Poplin et al. (2018)
+#'   *Nature Biotechnology* 36(10), 983-987,
+#'   doi:10.1038/nbt.4235). The high-sensitivity/low-specificity candidate
+#'   stage, the pileup image of reference and read data around each
+#'   candidate, the Inception-v2 classifier emitting the three diploid
+#'   genotype probabilities, the calibration argument for why an image of
+#'   all reads captures inter-read dependence, and the printed accounting:
+#'   candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
+#'   of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+#'   sensitivity.
+#'   
+#'   Li, H. (2011) "A statistical framework for SNP calling, mutation
+#'   discovery, association mapping and population genetical parameter
+#'   estimation from sequencing data", *Bioinformatics* 27(21), 2987-2993,
+#'   doi:10.1093/bioinformatics/btr509, for the conventional genotype
+#'   likelihood this replaces.
 #' @export
 #' @examples
 #' called <- list(list(position = 4L, alternate = "T"))
@@ -524,6 +644,26 @@ varcal_evaluate <- function(called, truth, candidates = NULL) {
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Poplin, R., Newburger, D., Dijamco, J., Nguyen, N., Loy, D., Gross,
+#'   S. S., McLean, C. Y. & DePristo, M. A. (2016) "Creating a universal
+#'   SNP and small indel variant caller with deep neural networks",
+#'   bioRxiv 092890, doi:10.1101/092890 (published as Poplin et al. (2018)
+#'   *Nature Biotechnology* 36(10), 983-987,
+#'   doi:10.1038/nbt.4235). The high-sensitivity/low-specificity candidate
+#'   stage, the pileup image of reference and read data around each
+#'   candidate, the Inception-v2 classifier emitting the three diploid
+#'   genotype probabilities, the calibration argument for why an image of
+#'   all reads captures inter-read dependence, and the printed accounting:
+#'   candidate PPV 8.1% raised to 99.7% on Ion Torrent, a mean loss of 2.3%
+#'   of candidate sensitivity, and the SOLiD figures of 13.9% PPV at 96.2%
+#'   sensitivity.
+#'   
+#'   Li, H. (2011) "A statistical framework for SNP calling, mutation
+#'   discovery, association mapping and population genetical parameter
+#'   estimation from sequencing data", *Bioinformatics* 27(21), 2987-2993,
+#'   doi:10.1093/bioinformatics/btr509, for the conventional genotype
+#'   likelihood this replaces.
 #' @export
 #' @examples
 #' varcal_cheatsheet()

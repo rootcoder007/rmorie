@@ -136,6 +136,23 @@
 #' @param outcome_model Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return A numeric value.
+#' @references Laber, E. B. & Zhao, Y. Q. (2015) "Tree-based methods for
+#'   individualized treatment regimes", Biometrika 102(3), 501-514,
+#'   doi:10.1093/biomet/asv028. Sec. 2.1 (the optimal rule and Assumptions
+#'   1-3: positivity, strong ignorability, consistency), Sec. 2.2 (purity
+#'   measures for treatment allocation and the rectangular-region
+#'   representation), and the treatment of continuous treatments by kernel
+#'   smoothing.
+#'   Tao, Y. & Wang, L. (2017) "Adaptive Contrast Weighted Learning for
+#'   Multi-Stage Multi-Treatment Decision-Making", Biometrics 73,
+#'   145-155, doi:10.1111/biom.12539. The adaptive contrast that augments
+#'   the weighted-learning objective with an outcome model, implemented
+#'   here as method="augmented".
+#'   Zhang, B., Tsiatis, A. A., Laber, E. B. & Davidian, M. (2012) "A robust
+#'   method for estimating optimal treatment regimes", Biometrics 68(4),
+#'   1010-1018, doi:10.1111/j.1541-0420.2012.01763.x. The recasting of
+#'   treatment selection as a weighted classification problem that the
+#'   tree search rests on.
 #' @export
 #' @keywords internal
 trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
@@ -228,6 +245,23 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #' to \code{20}.
 #' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return The value of \code{result}, as built in the body.
+#' @references Laber, E. B. & Zhao, Y. Q. (2015) "Tree-based methods for
+#'   individualized treatment regimes", Biometrika 102(3), 501-514,
+#'   doi:10.1093/biomet/asv028. Sec. 2.1 (the optimal rule and Assumptions
+#'   1-3: positivity, strong ignorability, consistency), Sec. 2.2 (purity
+#'   measures for treatment allocation and the rectangular-region
+#'   representation), and the treatment of continuous treatments by kernel
+#'   smoothing.
+#'   Tao, Y. & Wang, L. (2017) "Adaptive Contrast Weighted Learning for
+#'   Multi-Stage Multi-Treatment Decision-Making", Biometrics 73,
+#'   145-155, doi:10.1111/biom.12539. The adaptive contrast that augments
+#'   the weighted-learning objective with an outcome model, implemented
+#'   here as method="augmented".
+#'   Zhang, B., Tsiatis, A. A., Laber, E. B. & Davidian, M. (2012) "A robust
+#'   method for estimating optimal treatment regimes", Biometrics 68(4),
+#'   1010-1018, doi:10.1111/j.1541-0420.2012.01763.x. The recasting of
+#'   treatment selection as a weighted classification problem that the
+#'   tree search rests on.
 #' @export
 #' @examples
 #' trclrn_fit_tree(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -365,6 +399,23 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
 #' @param tree See Usage.
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
+#' @references Laber, E. B. & Zhao, Y. Q. (2015) "Tree-based methods for
+#'   individualized treatment regimes", Biometrika 102(3), 501-514,
+#'   doi:10.1093/biomet/asv028. Sec. 2.1 (the optimal rule and Assumptions
+#'   1-3: positivity, strong ignorability, consistency), Sec. 2.2 (purity
+#'   measures for treatment allocation and the rectangular-region
+#'   representation), and the treatment of continuous treatments by kernel
+#'   smoothing.
+#'   Tao, Y. & Wang, L. (2017) "Adaptive Contrast Weighted Learning for
+#'   Multi-Stage Multi-Treatment Decision-Making", Biometrics 73,
+#'   145-155, doi:10.1111/biom.12539. The adaptive contrast that augments
+#'   the weighted-learning objective with an outcome model, implemented
+#'   here as method="augmented".
+#'   Zhang, B., Tsiatis, A. A., Laber, E. B. & Davidian, M. (2012) "A robust
+#'   method for estimating optimal treatment regimes", Biometrics 68(4),
+#'   1010-1018, doi:10.1111/j.1541-0420.2012.01763.x. The recasting of
+#'   treatment selection as a weighted classification problem that the
+#'   tree search rests on.
 #' @export
 #' @keywords internal
 trclrn_predict_rule <- function(tree, X) {
@@ -402,6 +453,23 @@ trclrn_predict_rule <- function(tree, X) {
 #' @param names Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param indent A count; the body uses it as \code{rep(...)}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
+#' @references Laber, E. B. & Zhao, Y. Q. (2015) "Tree-based methods for
+#'   individualized treatment regimes", Biometrika 102(3), 501-514,
+#'   doi:10.1093/biomet/asv028. Sec. 2.1 (the optimal rule and Assumptions
+#'   1-3: positivity, strong ignorability, consistency), Sec. 2.2 (purity
+#'   measures for treatment allocation and the rectangular-region
+#'   representation), and the treatment of continuous treatments by kernel
+#'   smoothing.
+#'   Tao, Y. & Wang, L. (2017) "Adaptive Contrast Weighted Learning for
+#'   Multi-Stage Multi-Treatment Decision-Making", Biometrics 73,
+#'   145-155, doi:10.1111/biom.12539. The adaptive contrast that augments
+#'   the weighted-learning objective with an outcome model, implemented
+#'   here as method="augmented".
+#'   Zhang, B., Tsiatis, A. A., Laber, E. B. & Davidian, M. (2012) "A robust
+#'   method for estimating optimal treatment regimes", Biometrics 68(4),
+#'   1010-1018, doi:10.1111/j.1541-0420.2012.01763.x. The recasting of
+#'   treatment selection as a weighted classification problem that the
+#'   tree search rests on.
 #' @export
 #' @keywords internal
 trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
@@ -426,6 +494,23 @@ trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
 #' source it follows.
 #'
 #' @return A character value.
+#' @references Laber, E. B. & Zhao, Y. Q. (2015) "Tree-based methods for
+#'   individualized treatment regimes", Biometrika 102(3), 501-514,
+#'   doi:10.1093/biomet/asv028. Sec. 2.1 (the optimal rule and Assumptions
+#'   1-3: positivity, strong ignorability, consistency), Sec. 2.2 (purity
+#'   measures for treatment allocation and the rectangular-region
+#'   representation), and the treatment of continuous treatments by kernel
+#'   smoothing.
+#'   Tao, Y. & Wang, L. (2017) "Adaptive Contrast Weighted Learning for
+#'   Multi-Stage Multi-Treatment Decision-Making", Biometrics 73,
+#'   145-155, doi:10.1111/biom.12539. The adaptive contrast that augments
+#'   the weighted-learning objective with an outcome model, implemented
+#'   here as method="augmented".
+#'   Zhang, B., Tsiatis, A. A., Laber, E. B. & Davidian, M. (2012) "A robust
+#'   method for estimating optimal treatment regimes", Biometrics 68(4),
+#'   1010-1018, doi:10.1111/j.1541-0420.2012.01763.x. The recasting of
+#'   treatment selection as a weighted classification problem that the
+#'   tree search rests on.
 #' @export
 #' @examples
 #' trclrn_cheatsheet()

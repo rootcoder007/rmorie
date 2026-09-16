@@ -6,7 +6,7 @@
 #' bias. Two raters who agree on the ordering but differ by a constant
 #' score high on consistency and low here.
 #'
-#' Formula: \code{ICC(A,1) = (MS_R - MS_E) /
+#' Formula: \eqn{ICC(A,1) = (MS_R - MS_E) /
 #' [MS_R + (k-1) MS_E + k (MS_C - MS_E)/n]}.
 #'
 #' @param y Ratings.

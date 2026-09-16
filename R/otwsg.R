@@ -7,7 +7,7 @@
 #' with a closed form, which makes it the natural anchor for every
 #' numerical transport solver.
 #'
-#' Formula: \code{W_2^2 = ||m1 - m2||^2 + tr(S1 + S2 - 2 (S1^{1/2} S2
+#' Formula: \eqn{W_2^2 = ||m1 - m2||^2 + tr(S1 + S2 - 2 (S1^{1/2} S2
 #' S1^{1/2})^{1/2})} -- Peyre and Cuturi (2019) eq. (2.41)-(2.42), p. 34;
 #' Olkin and Pukelsheim (1982).
 #'

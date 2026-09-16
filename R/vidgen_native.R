@@ -152,6 +152,30 @@
 #' @param video Iterated over elementwise, with \code{lapply}.
 #' @param kernel Passed to \code{.vidgen_mat}.
 #' @return A list with \code{video}, \code{frames}, \code{note}.
+#' @references ----------
+#'   Ho, J., Salimans, T., Gritsenko, A., Chan, W., Norouzi, M. & Fleet,
+#'   D. J. (2022) "Video Diffusion Models", Advances in Neural
+#'   Information Processing Systems 35 (NeurIPS 2022), arXiv:2204.03458.
+#'   Sec. 3: the 3D U-Net factorised over space and time, changing each
+#'   3x3 convolution into a 1x3x3 space-only convolution, keeping spatial
+#'   attention with the frame axis as a batch axis, and inserting a
+#'   temporal attention block after each spatial attention block; that
+#'   the factorisation makes it straightforward to mask the model to run
+#'   on independent images by fixing the temporal attention matrix to
+#'   match each key and query at the same timestep, enabling JOINT
+#'   training on video and image objectives, which the experiments find
+#'   important for sample quality; and Sec. 4 (reconstruction guidance
+#'   for conditional generation, with a weighting factor w_r > 1
+#'   improving sample quality, extended to spatial interpolation and
+#'   super-resolution by imposing the squared error on a downsampled
+#'   model prediction and backpropagating through the downsampling).
+#'   
+#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
+#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239. The diffusion
+#'   model being inflated.
+#'   
+#'   Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
+#'   arXiv:2207.12598. The guidance framework this parallels.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -200,6 +224,30 @@ morie_vidgen_space_only_conv <- function(video, kernel) {
 #'
 #' @param video See Usage.
 #' @return A list with \code{video}, \code{weights}, \code{note}.
+#' @references ----------
+#'   Ho, J., Salimans, T., Gritsenko, A., Chan, W., Norouzi, M. & Fleet,
+#'   D. J. (2022) "Video Diffusion Models", Advances in Neural
+#'   Information Processing Systems 35 (NeurIPS 2022), arXiv:2204.03458.
+#'   Sec. 3: the 3D U-Net factorised over space and time, changing each
+#'   3x3 convolution into a 1x3x3 space-only convolution, keeping spatial
+#'   attention with the frame axis as a batch axis, and inserting a
+#'   temporal attention block after each spatial attention block; that
+#'   the factorisation makes it straightforward to mask the model to run
+#'   on independent images by fixing the temporal attention matrix to
+#'   match each key and query at the same timestep, enabling JOINT
+#'   training on video and image objectives, which the experiments find
+#'   important for sample quality; and Sec. 4 (reconstruction guidance
+#'   for conditional generation, with a weighting factor w_r > 1
+#'   improving sample quality, extended to spatial interpolation and
+#'   super-resolution by imposing the squared error on a downsampled
+#'   model prediction and backpropagating through the downsampling).
+#'   
+#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
+#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239. The diffusion
+#'   model being inflated.
+#'   
+#'   Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
+#'   arXiv:2207.12598. The guidance framework this parallels.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -230,6 +278,30 @@ morie_vidgen_spatial_attention <- function(video) {
 #' @param video Iterated over elementwise, with \code{lapply}.
 #' @param identity A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{video}, \code{identity}, \code{note}.
+#' @references ----------
+#'   Ho, J., Salimans, T., Gritsenko, A., Chan, W., Norouzi, M. & Fleet,
+#'   D. J. (2022) "Video Diffusion Models", Advances in Neural
+#'   Information Processing Systems 35 (NeurIPS 2022), arXiv:2204.03458.
+#'   Sec. 3: the 3D U-Net factorised over space and time, changing each
+#'   3x3 convolution into a 1x3x3 space-only convolution, keeping spatial
+#'   attention with the frame axis as a batch axis, and inserting a
+#'   temporal attention block after each spatial attention block; that
+#'   the factorisation makes it straightforward to mask the model to run
+#'   on independent images by fixing the temporal attention matrix to
+#'   match each key and query at the same timestep, enabling JOINT
+#'   training on video and image objectives, which the experiments find
+#'   important for sample quality; and Sec. 4 (reconstruction guidance
+#'   for conditional generation, with a weighting factor w_r > 1
+#'   improving sample quality, extended to spatial interpolation and
+#'   super-resolution by imposing the squared error on a downsampled
+#'   model prediction and backpropagating through the downsampling).
+#'   
+#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
+#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239. The diffusion
+#'   model being inflated.
+#'   
+#'   Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
+#'   arXiv:2207.12598. The guidance framework this parallels.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -282,6 +354,30 @@ morie_vidgen_temporal_attention <- function(video, identity = FALSE) {
 #' @param video Iterated over elementwise, with \code{lapply}.
 #' @param block Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{video}, \code{note}.
+#' @references ----------
+#'   Ho, J., Salimans, T., Gritsenko, A., Chan, W., Norouzi, M. & Fleet,
+#'   D. J. (2022) "Video Diffusion Models", Advances in Neural
+#'   Information Processing Systems 35 (NeurIPS 2022), arXiv:2204.03458.
+#'   Sec. 3: the 3D U-Net factorised over space and time, changing each
+#'   3x3 convolution into a 1x3x3 space-only convolution, keeping spatial
+#'   attention with the frame axis as a batch axis, and inserting a
+#'   temporal attention block after each spatial attention block; that
+#'   the factorisation makes it straightforward to mask the model to run
+#'   on independent images by fixing the temporal attention matrix to
+#'   match each key and query at the same timestep, enabling JOINT
+#'   training on video and image objectives, which the experiments find
+#'   important for sample quality; and Sec. 4 (reconstruction guidance
+#'   for conditional generation, with a weighting factor w_r > 1
+#'   improving sample quality, extended to spatial interpolation and
+#'   super-resolution by imposing the squared error on a downsampled
+#'   model prediction and backpropagating through the downsampling).
+#'   
+#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
+#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239. The diffusion
+#'   model being inflated.
+#'   
+#'   Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
+#'   arXiv:2207.12598. The guidance framework this parallels.
 #' @export
 #' @keywords internal
 morie_vidgen_as_image_model <- function(video, block) {
@@ -300,6 +396,30 @@ morie_vidgen_as_image_model <- function(video, block) {
 #' @param frames Coerced to integer by the body, with \code{as.integer}.
 #' @param spatial_positions Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{joint}, \code{factorised}, \code{ratio}, \code{note}.
+#' @references ----------
+#'   Ho, J., Salimans, T., Gritsenko, A., Chan, W., Norouzi, M. & Fleet,
+#'   D. J. (2022) "Video Diffusion Models", Advances in Neural
+#'   Information Processing Systems 35 (NeurIPS 2022), arXiv:2204.03458.
+#'   Sec. 3: the 3D U-Net factorised over space and time, changing each
+#'   3x3 convolution into a 1x3x3 space-only convolution, keeping spatial
+#'   attention with the frame axis as a batch axis, and inserting a
+#'   temporal attention block after each spatial attention block; that
+#'   the factorisation makes it straightforward to mask the model to run
+#'   on independent images by fixing the temporal attention matrix to
+#'   match each key and query at the same timestep, enabling JOINT
+#'   training on video and image objectives, which the experiments find
+#'   important for sample quality; and Sec. 4 (reconstruction guidance
+#'   for conditional generation, with a weighting factor w_r > 1
+#'   improving sample quality, extended to spatial interpolation and
+#'   super-resolution by imposing the squared error on a downsampled
+#'   model prediction and backpropagating through the downsampling).
+#'   
+#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
+#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239. The diffusion
+#'   model being inflated.
+#'   
+#'   Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
+#'   arXiv:2207.12598. The guidance framework this parallels.
 #' @export
 #' @examples
 #' morie_vidgen_attention_cost(frames = 5L, spatial_positions = 5L)
@@ -333,6 +453,30 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 #' @param downsample Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight},
 #' \code{guided_frames}, \code{method}, \code{note}.
+#' @references ----------
+#'   Ho, J., Salimans, T., Gritsenko, A., Chan, W., Norouzi, M. & Fleet,
+#'   D. J. (2022) "Video Diffusion Models", Advances in Neural
+#'   Information Processing Systems 35 (NeurIPS 2022), arXiv:2204.03458.
+#'   Sec. 3: the 3D U-Net factorised over space and time, changing each
+#'   3x3 convolution into a 1x3x3 space-only convolution, keeping spatial
+#'   attention with the frame axis as a batch axis, and inserting a
+#'   temporal attention block after each spatial attention block; that
+#'   the factorisation makes it straightforward to mask the model to run
+#'   on independent images by fixing the temporal attention matrix to
+#'   match each key and query at the same timestep, enabling JOINT
+#'   training on video and image objectives, which the experiments find
+#'   important for sample quality; and Sec. 4 (reconstruction guidance
+#'   for conditional generation, with a weighting factor w_r > 1
+#'   improving sample quality, extended to spatial interpolation and
+#'   super-resolution by imposing the squared error on a downsampled
+#'   model prediction and backpropagating through the downsampling).
+#'   
+#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
+#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239. The diffusion
+#'   model being inflated.
+#'   
+#'   Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
+#'   arXiv:2207.12598. The guidance framework this parallels.
 #' @export
 #' @examples
 #' morie_vidgen_reconstruction_guidance(x_hat = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -398,6 +542,30 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Ho, J., Salimans, T., Gritsenko, A., Chan, W., Norouzi, M. & Fleet,
+#'   D. J. (2022) "Video Diffusion Models", Advances in Neural
+#'   Information Processing Systems 35 (NeurIPS 2022), arXiv:2204.03458.
+#'   Sec. 3: the 3D U-Net factorised over space and time, changing each
+#'   3x3 convolution into a 1x3x3 space-only convolution, keeping spatial
+#'   attention with the frame axis as a batch axis, and inserting a
+#'   temporal attention block after each spatial attention block; that
+#'   the factorisation makes it straightforward to mask the model to run
+#'   on independent images by fixing the temporal attention matrix to
+#'   match each key and query at the same timestep, enabling JOINT
+#'   training on video and image objectives, which the experiments find
+#'   important for sample quality; and Sec. 4 (reconstruction guidance
+#'   for conditional generation, with a weighting factor w_r > 1
+#'   improving sample quality, extended to spatial interpolation and
+#'   super-resolution by imposing the squared error on a downsampled
+#'   model prediction and backpropagating through the downsampling).
+#'   
+#'   Ho, J., Jain, A. & Abbeel, P. (2020) "Denoising Diffusion
+#'   Probabilistic Models", NeurIPS 2020, arXiv:2006.11239. The diffusion
+#'   model being inflated.
+#'   
+#'   Ho, J. & Salimans, T. (2022) "Classifier-Free Diffusion Guidance",
+#'   arXiv:2207.12598. The guidance framework this parallels.
 #' @export
 #' @examples
 #' morie_vidgen_cheatsheet()

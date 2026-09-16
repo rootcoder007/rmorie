@@ -67,6 +67,19 @@
 #' @param mu The posterior means.
 #' @param logvar The posterior log-variances.
 #' @return A non-negative number.
+#' @references Gomez-Bombarelli, R. et al. (2018) "Automatic chemical design using
+#'       a data-driven continuous representation of molecules." ACS
+#'       Central Science 4(2), 268-276. doi:10.1021/acscentsci.7b00572.
+#'     Sanchez-Lengeling, B. and Aspuru-Guzik, A. (2018) "Inverse
+#'       molecular design using machine learning." Science 361(6400),
+#'       360-365. doi:10.1126/science.aat2663.
+#'     Kingma, D.P. and Welling, M. (2014) "Auto-encoding variational
+#'       Bayes." ICLR.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Polykovskiy, D. et al. (2020) "Molecular sets (MOSES): a
+#'       benchmarking platform for molecular generation models."
+#'       Frontiers in Pharmacology 11, 565644.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -91,6 +104,19 @@ morie_genmol_kl <- function(mu, logvar) {
 #' @param mu,logvar The posterior parameters.
 #' @param beta The weight on the divergence.
 #' @return The bound.
+#' @references Gomez-Bombarelli, R. et al. (2018) "Automatic chemical design using
+#'       a data-driven continuous representation of molecules." ACS
+#'       Central Science 4(2), 268-276. doi:10.1021/acscentsci.7b00572.
+#'     Sanchez-Lengeling, B. and Aspuru-Guzik, A. (2018) "Inverse
+#'       molecular design using machine learning." Science 361(6400),
+#'       360-365. doi:10.1126/science.aat2663.
+#'     Kingma, D.P. and Welling, M. (2014) "Auto-encoding variational
+#'       Bayes." ICLR.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Polykovskiy, D. et al. (2020) "Molecular sets (MOSES): a
+#'       benchmarking platform for molecular generation models."
+#'       Frontiers in Pharmacology 11, 565644.
 #' @export
 #' @examples
 #' morie_genmol_elbo(reconstruction = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -111,6 +137,19 @@ morie_genmol_elbo <- function(reconstruction, mu, logvar, beta = 1)
 #' @param temperature The multiplier on the standard deviation.
 #' @param seed The random stream.
 #' @return A list of latent vectors.
+#' @references Gomez-Bombarelli, R. et al. (2018) "Automatic chemical design using
+#'       a data-driven continuous representation of molecules." ACS
+#'       Central Science 4(2), 268-276. doi:10.1021/acscentsci.7b00572.
+#'     Sanchez-Lengeling, B. and Aspuru-Guzik, A. (2018) "Inverse
+#'       molecular design using machine learning." Science 361(6400),
+#'       360-365. doi:10.1126/science.aat2663.
+#'     Kingma, D.P. and Welling, M. (2014) "Auto-encoding variational
+#'       Bayes." ICLR.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Polykovskiy, D. et al. (2020) "Molecular sets (MOSES): a
+#'       benchmarking platform for molecular generation models."
+#'       Frontiers in Pharmacology 11, 565644.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -147,6 +186,19 @@ morie_genmol_sample <- function(mu, logvar, n = 1L, temperature = 1,
 #' @param lr The step size.
 #' @param eps The finite-difference spacing.
 #' @return A list with the endpoint, the trajectory and the values.
+#' @references Gomez-Bombarelli, R. et al. (2018) "Automatic chemical design using
+#'       a data-driven continuous representation of molecules." ACS
+#'       Central Science 4(2), 268-276. doi:10.1021/acscentsci.7b00572.
+#'     Sanchez-Lengeling, B. and Aspuru-Guzik, A. (2018) "Inverse
+#'       molecular design using machine learning." Science 361(6400),
+#'       360-365. doi:10.1126/science.aat2663.
+#'     Kingma, D.P. and Welling, M. (2014) "Auto-encoding variational
+#'       Bayes." ICLR.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Polykovskiy, D. et al. (2020) "Molecular sets (MOSES): a
+#'       benchmarking platform for molecular generation models."
+#'       Frontiers in Pharmacology 11, 565644.
 #' @export
 #' @examples
 #' prop <- function(z) -((z[1] - 1)^2 + (z[2] + 0.5)^2)
@@ -182,6 +234,19 @@ morie_genmol_optimise <- function(z0, property_fn, steps = 20L,
 #'
 #' @param smiles_list The decoded strings.
 #' @return A logical vector.
+#' @references Gomez-Bombarelli, R. et al. (2018) "Automatic chemical design using
+#'       a data-driven continuous representation of molecules." ACS
+#'       Central Science 4(2), 268-276. doi:10.1021/acscentsci.7b00572.
+#'     Sanchez-Lengeling, B. and Aspuru-Guzik, A. (2018) "Inverse
+#'       molecular design using machine learning." Science 361(6400),
+#'       360-365. doi:10.1126/science.aat2663.
+#'     Kingma, D.P. and Welling, M. (2014) "Auto-encoding variational
+#'       Bayes." ICLR.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Polykovskiy, D. et al. (2020) "Molecular sets (MOSES): a
+#'       benchmarking platform for molecular generation models."
+#'       Frontiers in Pharmacology 11, 565644.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -211,6 +276,19 @@ morie_genmol_validity <- function(smiles_list)
 #' @param beta The weight on the divergence in the bound.
 #' @return A list with the latents, the decoded strings, and validity,
 #'   uniqueness and novelty as fractions of the sample.
+#' @references Gomez-Bombarelli, R. et al. (2018) "Automatic chemical design using
+#'       a data-driven continuous representation of molecules." ACS
+#'       Central Science 4(2), 268-276. doi:10.1021/acscentsci.7b00572.
+#'     Sanchez-Lengeling, B. and Aspuru-Guzik, A. (2018) "Inverse
+#'       molecular design using machine learning." Science 361(6400),
+#'       360-365. doi:10.1126/science.aat2663.
+#'     Kingma, D.P. and Welling, M. (2014) "Auto-encoding variational
+#'       Bayes." ICLR.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Polykovskiy, D. et al. (2020) "Molecular sets (MOSES): a
+#'       benchmarking platform for molecular generation models."
+#'       Frontiers in Pharmacology 11, 565644.
 #' @export
 #' @examples
 #' morie_genmol(model = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n_samples = 5L)
@@ -311,6 +389,19 @@ morie_genmol <- function(model, n_samples, conditions = NULL,
 #' One-line summary of the genmol module
 #'
 #' @return A character scalar.
+#' @references Gomez-Bombarelli, R. et al. (2018) "Automatic chemical design using
+#'       a data-driven continuous representation of molecules." ACS
+#'       Central Science 4(2), 268-276. doi:10.1021/acscentsci.7b00572.
+#'     Sanchez-Lengeling, B. and Aspuru-Guzik, A. (2018) "Inverse
+#'       molecular design using machine learning." Science 361(6400),
+#'       360-365. doi:10.1126/science.aat2663.
+#'     Kingma, D.P. and Welling, M. (2014) "Auto-encoding variational
+#'       Bayes." ICLR.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Polykovskiy, D. et al. (2020) "Molecular sets (MOSES): a
+#'       benchmarking platform for molecular generation models."
+#'       Frontiers in Pharmacology 11, 565644.
 #' @export
 #' @examples
 #' morie_genmol_cheatsheet()

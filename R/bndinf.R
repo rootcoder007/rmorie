@@ -10,7 +10,7 @@
 #' same number in both language arms.
 #'
 #' Formula: \code{CS = {theta : Q_n(theta) <= z^2}} with
-#' \code{Q_n(theta) = [sqrt(n)(mL - theta)/sL]_+^2 +
+#' \eqn{Q_n(theta) = [sqrt(n)(mL - theta)/sL]_+^2 +
 #' [sqrt(n)(theta - mU)/sU]_+^2}, whose endpoints are
 #' \code{mL - z sL / sqrt(n)} and \code{mU + z sU / sqrt(n)}.
 #'

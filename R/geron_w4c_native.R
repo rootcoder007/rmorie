@@ -315,6 +315,7 @@
 #' @param model Numeric vector or named list of numeric vectors (weights).
 #' @param loss_scale Positive finite scale.
 #' @param grads Optional gradients matching `model`.
+#' @return A list with `fp16_weights`, `overflow`, `weight_overflow`, `n_underflow`, `loss_scale`, `max_safe_loss_scale`, `recommended_loss_scale`, `memory_bytes_fp32`, `memory_bytes_fp16`, `fp16_max`, `fp16_min_normal`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -365,6 +366,7 @@ morie_geron_mixed_precision <- function(model, loss_scale = 1024.0, grads = NULL
 #' @param X Training data (m, d).
 #' @param sigmas Noise ladder.
 #' @param epochs,lr,n_noise,seed,n_samples,langevin_steps,step_eps Training/sampling controls.
+#' @return A list with `models`, `analytic`, `max_deviation`, `loss_history`, `samples`, `sigmas`, `mean`, `covariance`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -451,6 +453,7 @@ morie_geron_ncsn <- function(X, sigmas = 1.0, epochs = 400, lr = 0.5, n_noise = 
 #' @param f Function `f(x) -> scalar`.
 #' @param x Point (scalar or vector).
 #' @param h Step size.
+#' @return A list with `derivative`, `richardson`, `error_estimate`, `n_evals`, `h`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' x <- matrix(c(1, 0, 0, 1, 1, 1), ncol = 2, byrow = TRUE)
@@ -500,6 +503,7 @@ morie_geron_numerical_diff <- function(f, x, h = 1e-5) {
 #' @param X Non-negative matrix (m, p).
 #' @param n_components Inner rank k.
 #' @param max_iter,tol,seed Fit controls.
+#' @return A list with `W`, `H`, `reconstruction`, `reconstruction_error`, `relative_error`, `n_iter`, `n_components`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -529,6 +533,7 @@ morie_geron_nmf <- function(X, n_components = 2, max_iter = 400, tol = 1e-6, see
 #' @param tgt Target token ids (reference).
 #' @param model List with `encode(src)` and `decode(z, prefix)` functions.
 #' @param max_len,eos Greedy decode cap and stop id.
+#' @return A list with `loss`, `mean_loss`, `token_losses`, `perplexity`, `greedy`, `exact_match`, `z`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' model <- list(encode = function(s) length(s), decode = function(z,
@@ -575,6 +580,7 @@ morie_geron_encoder_decoder_nmt <- function(src, tgt, model, max_len = NULL, eos
 #' @param model Callable log-density, list with `log_density`/`reference`, or clean training matrix.
 #' @param X_new Points to test.
 #' @param reference Optional log reference density override.
+#' @return A list with `ratio`, `log_ratio`, `is_novel`, `log_density`, `reference`, `novel_fraction`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -625,6 +631,7 @@ morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
 #' @param encoder Optional `encoder(tokens, segments) -> h`.
 #' @param w,b Head weights/bias.
 #' @param label Optional 0/1 label for the loss.
+#' @return A list with `tokens`, `segment_ids`, `cls_vector`, `logit`, `probability`, `prediction`, `loss`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -687,6 +694,7 @@ morie_geron_next_sentence_prediction <- function(sent_A, sent_B, encoder = NULL,
 #' @param nu Outlier-fraction knob in (0, 1].
 #' @param gamma RBF width.
 #' @param max_iter,tol SMO controls.
+#' @return A list with `alpha`, `rho`, `decision`, `is_outlier`, `support_vectors`, `outlier_fraction`, `decision_function`, `n_iter`, `C`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -751,6 +759,7 @@ morie_geron_one_class_svm <- function(X, nu = 0.5, gamma = 1.0, max_iter = 2000,
 #' @param eta Base learning rate.
 #' @param theta Optional start (default zeros).
 #' @param decay Robbins-Monro decay.
+#' @return A list with `theta`, `trajectory`, `losses`, `cumulative_loss`, `mean_loss`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -787,6 +796,7 @@ morie_geron_online_learning <- function(X_stream, y_stream, eta = 0.1, theta = N
 #' @param model List of layer specs (`op`, `in_features`, `out_features`, ...).
 #' @param args Example input.
 #' @param file Optional path for the traced graph (written as JSON).
+#' @return A list with `nodes`, `graph`, `input_shape`, `output_shape`, `n_parameters`, `file`, `is_protobuf`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' m <- list(list(op = "Gemm", in_features = 3, out_features = 2),
@@ -863,6 +873,7 @@ jsonlite_toJSON_or_stub <- function(x) {
 #' @param X,y Data and targets.
 #' @param models List of `(predict, in_bag)` pairs or lists with those names.
 #' @param task "auto", "classification" or "regression".
+#' @return A list with `oob_score`, `oob_predictions`, `covered`, `votes`, `mean_oob_votes`, `task`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' f <- function(A) as.numeric(A[, 1])
@@ -917,6 +928,7 @@ morie_geron_oob_score <- function(X, y, models, task = "auto") {
 #' @param min_samples Core-distance neighbourhood size.
 #' @param max_eps Largest radius considered.
 #' @param eps_cluster Cut for extracting labels.
+#' @return A list with `ordering`, `reachability`, `reachability_plot`, `core_distances`, `labels`, `n_clusters`, `eps_cluster`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -998,6 +1010,7 @@ morie_geron_optics <- function(X, min_samples = 5, max_eps = Inf, eps_cluster = 
 #' @param example `(x1, y1)` pair or list.
 #' @param query Input to label.
 #' @param verbalizer Optional `verbalizer(label) -> str`.
+#' @return A list with `prediction`, `prompt`, `prompt_text`, `shots`, `demo_label`, `query`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' copy <- function(prompt) prompt[[1]][[2]]
@@ -1051,6 +1064,7 @@ morie_geron_one_shot <- function(model, example, query, verbalizer = NULL) {
 #' @param X,y Data and class labels.
 #' @param base_estimator Optional `base_estimator(Xp, yp) -> predict`.
 #' @param X_new Optional rows to classify (default `X`).
+#' @return A list with `predict`, `predictions`, `classes`, `pairs`, `n_classifiers`, `votes`, `accuracy`, `tie_fraction`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1129,6 +1143,7 @@ morie_geron_one_vs_one_hm <- function(X, y, base_estimator = NULL, X_new = NULL)
 #' @param X,y Data and class labels.
 #' @param base_estimator Optional `base_estimator(X, yb) -> score fn`.
 #' @param X_new Optional rows to classify.
+#' @return A list with `predict`, `predictions`, `classes`, `n_classifiers`, `scores`, `margin`, `positive_rate`, `accuracy`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1179,6 +1194,7 @@ morie_geron_one_vs_rest_hm <- function(X, y, base_estimator = NULL, X_new = NULL
 #' @param sample_size Rows per model (int or fraction).
 #' @param seed Integer-LCG seed.
 #' @param task "auto", "regression" or "classification".
+#' @return A list with `predict`, `train_pred`, `train_mse`, `oob_pred`, `oob_mse`, `samples`, `estimators`, `sample_size`, `task`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1242,6 +1258,7 @@ morie_geron_pasting <- function(X, y, base_estimator = NULL, n_estimators = 10, 
 #' @param X Data (m, p).
 #' @param n_components Components to keep (default all).
 #' @param center,scale Preprocessing flags.
+#' @return A list with `components`, `scores`, `explained_variance`, `explained_variance_ratio`, `reconstruction_error`, `n_components`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1277,6 +1294,7 @@ morie_geron_principal_components <- function(X, n_components = NULL, center = TR
 #' @param n_components Optional cap passed through to PCA.
 #' @param threshold Variance fraction to reach.
 #' @param n_probes,seed Random-direction check controls.
+#' @return A list with `explained_variance`, `explained_variance_ratio`, `cumulative`, `n_components_for_threshold`, `top_variance`, `probe_max`, `covariance`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1320,6 +1338,7 @@ morie_geron_pca_variance <- function(X, n_components = NULL, threshold = 0.95, n
 #' @param pad_h,pad_w Explicit padding.
 #' @param kernel_size Compute same-padding from a kernel instead.
 #' @param stride Output-size bookkeeping.
+#' @return A list with `padded`, `pad_h`, `pad_w`, `output_shape`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -1376,6 +1395,7 @@ morie_geron_padding <- function(x, pad_h = NULL, pad_w = NULL, kernel_size = NUL
 #' @param pretrained Named list token -> vector.
 #' @param freeze Whether the table is held fixed.
 #' @param seed,oov_scale OOV row controls.
+#' @return A list with `embeddings`, `coverage`, `oov`, `oov_indices`, `dim`, `freeze`, `trainable`, `n_parameters`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1422,6 +1442,7 @@ morie_geron_pretrained_embeddings <- function(vocab, pretrained, freeze = TRUE, 
 #' @param buffer TD errors, or a list of transitions with a `td_error` field.
 #' @param alpha,beta,eps Prioritisation, IS and floor controls.
 #' @param batch_size,seed Optional draw.
+#' @return A list with `priorities`, `probabilities`, `weights`, `indices`, `alpha`, `beta`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1469,6 +1490,7 @@ morie_geron_prioritized_replay <- function(buffer, alpha = 0.6, beta = 0.4, eps 
 #' @param policy Function `policy(state, action) -> grad log pi` (or `(logp, grad)`).
 #' @param gamma Discount.
 #' @param baseline Subtract the mean return.
+#' @return A list with `gradient`, `returns`, `mean_return`, `n_steps`, `n_episodes`, `baseline_value`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' g <- function(s, a) c(1, 0)
@@ -1536,6 +1558,7 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
 #' Peephole LSTM cell forward step: gates also see the cell state (Geron Ch 13, hmphp)
 #' @param x_t,h_prev,c_prev Input and previous state.
 #' @param weights List with W_x, W_h, b, p_i, p_f, p_o.
+#' @return A list with `h`, `c`, `i`, `f`, `g`, `o`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' W <- list(W_x = matrix(c(0, 0, 1, 0), ncol = 1), W_h = matrix(0,
@@ -1576,6 +1599,7 @@ morie_geron_peephole_lstm <- function(x_t, h_prev, c_prev, weights) {
 #' @param X Data (m, n) or (m,).
 #' @param degree Max total degree.
 #' @param include_bias,interaction_only Expansion flags.
+#' @return A list with `features`, `powers`, `names`, `n_output_features`, `degree`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1652,6 +1676,7 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
 #' Apple MPS placement plan: dtype demotion cost, no Metal call made (Geron Ch 10, hmpmps)
 #' @param tensor Data.
 #' @param dtype Optional forced target dtype name.
+#' @return A list with `tensor`, `source_dtype`, `dtype_on_device`, `downcast`, `max_abs_error`, `relative_error`, `overflow`, `unified_memory`, `nbytes`, `executes_on_metal`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1695,6 +1720,7 @@ morie_geron_mps_acceleration <- function(tensor, dtype = NULL) {
 #' @param state Current state (0-based).
 #' @param pi Function, matrix, vector or named list.
 #' @param seed Integer-LCG seed for the sampled action.
+#' @return A list with `probabilities`, `action`, `greedy_action`, `entropy`, `deterministic`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1761,6 +1787,7 @@ morie_geron_policy <- function(state, pi, seed = 0) {
 #' @param env List with `reset()` / `step(a)`.
 #' @param policy Initial (n_states, n_actions) logits.
 #' @param epochs,lr,clip_eps,gamma,n_episodes,max_steps,n_updates,seed Training controls.
+#' @return A list with `theta`, `probabilities`, `return_history`, `surrogate_history`, `clip_fraction`, `clip_eps`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' reset <- function() 0
@@ -1870,6 +1897,7 @@ morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, 
 #' @param model Sequence of layer sizes (or weight arrays; lengths are used).
 #' @param n_stages Pipeline stages.
 #' @param n_microbatches Microbatches per batch.
+#' @return A list with `assignment`, `stage_loads`, `max_load`, `imbalance`, `bubble_fraction`, `utilisation`, `schedule`, `n_slots`, `n_microbatches`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_pipeline_parallelism(model = c(1, 2, 3, 4, 5, 6, 7, 8), n_stages = 5L)
@@ -1897,6 +1925,7 @@ morie_geron_pipeline_parallelism <- function(model, n_stages, n_microbatches = 4
 #' @param y_true Binary labels.
 #' @param scores Decision scores.
 #' @param pos_label Positive label.
+#' @return A list with `precision`, `recall`, `thresholds`, `average_precision`, `f1`, `best_f1`, `best_threshold`, `recall_at_90_precision`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1930,6 +1959,7 @@ morie_geron_precision_recall_curve_hm <- function(y_true, scores, pos_label = 1)
 #' @param latents Learned latents (L, D_lat).
 #' @param n_iter Cross-attention rounds.
 #' @param W_q,W_k,W_v Optional projections.
+#' @return A list with `latents`, `attention`, `attention_cost`, `self_attention_cost`, `n_iter`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1964,6 +1994,7 @@ morie_geron_perceiver <- function(x, latents, n_iter = 2, W_q = NULL, W_k = NULL
 #' Perceiver IO: adds a cross-attention output decoder (Geron Ch 16, hmprio)
 #' @param x,latents,queries Input, latents and output queries.
 #' @param n_iter,W_q,W_k,W_v Encoder controls.
+#' @return A list with `outputs`, `decoder_attention`, `latents`, `encoder_attention`, `decoder_cost`, `encoder_cost`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_perceiver_io_hm(x = c(1, 2, 3, 4, 5, 6, 7, 8), latents = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -1988,6 +2019,7 @@ morie_geron_perceiver_io_hm <- function(x, latents, queries, n_iter = 2, W_q = N
 #' @param image Array (H, W, C) or (H, W).
 #' @param stage_cfgs List of stage specs.
 #' @param seed LCG seed for default projections.
+#' @return A list with `tokens`, `stages`, `output_shape`, `n_parameters`, `attention_cost`, `full_attention_cost`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' img <- array(0:47, dim = c(3, 4, 4))
@@ -2068,6 +2100,7 @@ morie_geron_pvt <- function(image, stage_cfgs, seed = 0) {
 #' Precision = TP / (TP + FP) (Geron Ch 3, hmpre)
 #' @param y_true,y_pred Labels, same length.
 #' @param pos_label Positive label.
+#' @return A list with `precision`, `tp`, `fp`, `fn`, `f1`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2096,6 +2129,7 @@ morie_geron_precision_hm <- function(y_true, y_pred, pos_label = 1) {
 #' @param z Pre-activations, channels on last axis.
 #' @param alpha Scalar or per-channel slope.
 #' @param upstream Optional dL/da from the next layer.
+#' @return A list with `a`, `output`, `grad_z`, `grad_alpha`, `alpha`, `negative_fraction`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2125,6 +2159,7 @@ morie_geron_prelu <- function(z, alpha = 0.25, upstream = NULL) {
 #' @param model Numeric vector or named list.
 #' @param sparsity Target fraction of zeros in [0, 1).
 #' @param n_rounds Rounds in the returned schedule.
+#' @return A list with `pruned`, `mask`, `threshold`, `achieved_sparsity`, `n_pruned`, `n_weights`, `schedule`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_weight_pruning_hm(model = c(1, 2, 3, 4, 5, 6, 7, 8), sparsity = 5L)
@@ -2174,6 +2209,7 @@ morie_geron_weight_pruning_hm <- function(model, sparsity, n_rounds = 1) {
 #' @param calibration_data Representative activations.
 #' @param bits Bit width, 2 to 16.
 #' @param percentile Range-clipping percentile in (0, 100].
+#' @return A list with `quantized_weights`, `dequantized_weights`, `weight_scale`, `activation_scale`, `zero_point`, `activation_range`, `max_weight_error`, `compression`, `bits`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2233,6 +2269,7 @@ morie_geron_static_quantization_ptq <- function(model, calibration_data, bits = 
 #' @param x Data.
 #' @param device "cpu", "cuda" or "mps".
 #' @param dtype Optional torch dtype name.
+#' @return A list with `tensor`, `dtype`, `numpy_dtype`, `device`, `shape`, `ndim`, `itemsize`, `nbytes`, `strides`, `dtype_changed`, `on_device`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2282,6 +2319,7 @@ morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
 #' @param model Initial full-precision weights.
 #' @param X,y Data.
 #' @param epochs,lr,bits Controls.
+#' @return A list with `weights`, `quantized_weights`, `scale`, `loss`, `fp_loss`, `loss_history`, `bits`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_quantization_aware_training_hm(model = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -2326,6 +2364,7 @@ morie_geron_quantization_aware_training_hm <- function(model, X, y, epochs = 200
 #' Reverse-mode automatic differentiation, delegated to morie_geron_autograd (Geron App A, hmrad)
 #' @param f Function `f(vars) -> tape node` (built from the supplied leaves).
 #' @param x Point.
+#' @return A list with `gradient`, `grad`, `value`, `tape_size`, `n_passes`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_reverse_autodiff(function(v) v[[1]] * v[[2]], c(3,
@@ -2467,6 +2506,7 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' CART regression tree minimising per-leaf MSE (Geron Ch 5, hmrdt)
 #' @param X,y Data and targets.
 #' @param max_depth,min_samples_leaf Regularisation.
+#' @return A list with `tree`, `predict`, `predictions`, `mse`, `n_leaves`, `depth`, `feature_importance`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2508,6 +2548,7 @@ morie_geron_regression_tree <- function(X, y, max_depth = 3, min_samples_leaf = 
 #' Recall (true positive rate) = TP / (TP + FN) (Geron Ch 3, hmrec)
 #' @param y_true,y_pred Labels, same length.
 #' @param pos_label Positive label.
+#' @return A list with `recall`, `tp`, `fn`, `fp`, `f1`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2536,6 +2577,7 @@ morie_geron_recall_hm <- function(y_true, y_pred, pos_label = 1) {
 #' @param X,y Data and targets.
 #' @param hidden_sizes Hidden widths.
 #' @param epochs,lr,seed Training controls.
+#' @return A list with `predict`, `predictions`, `mse`, `loss_history`, `weights`, `biases`, `sizes`, `n_parameters`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2604,6 +2646,7 @@ morie_geron_regression_mlp <- function(X, y, hidden_sizes = 8, epochs = 400, lr 
 #' diagnostic (Geron Ch 9, hmrelu)
 #' @param z Pre-activations.
 #' @param leaky Negative slope; 0 is plain ReLU.
+#' @return A list with `a`, `output`, `gradient`, `dead_fraction`, `leaky`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2649,6 +2692,7 @@ morie_geron_relu <- function(z, leaky = 0.0) {
 #' Random forest: bagged CART trees with random per-split feature subsets (Geron Ch 6, hmrfc)
 #' @param X,y Data and targets.
 #' @param n_estimators,max_features,seed,max_depth,min_samples_leaf,task Controls.
+#' @return The value of `out`, as built in the body.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2745,6 +2789,7 @@ morie_geron_random_forest <- function(X, y, n_estimators = 10, max_features = "s
 #' (Geron Ch 10, hmrgpt)
 #' @param X,y Data and targets.
 #' @param hidden,epochs,lr,seed Passed to `morie_geron_regression_mlp`.
+#' @return A list with `layers`, `sizes`, `n_parameters`, `predict`, `predictions`, `mse`, `loss_history`, `weights`, `biases`, `uses_torch`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2772,6 +2817,7 @@ morie_geron_regression_mlp_pytorch <- function(X, y, hidden = 8, epochs = 400, l
 #' @param env List with `reset()` / `step(action)`.
 #' @param pi Function `pi(state) -> action or probs`.
 #' @param gamma,n_episodes,max_steps,seed Controls.
+#' @return A list with `mean_return`, `returns`, `lengths`, `se`, `effective_horizon`, `truncated`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' reset <- function() 0
@@ -2833,6 +2879,7 @@ morie_geron_reinforcement_learning <- function(env, pi, gamma = 0.99, n_episodes
 #' @param reward_model Function or matrix.
 #' @param prompts Optional prompt identifiers.
 #' @param beta,lr,epochs Controls.
+#' @return A list with `policy`, `reference_policy`, `optimal_policy`, `max_deviation`, `objective`, `objective_history`, `mean_reward`, `kl`, `beta`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -2884,6 +2931,7 @@ morie_geron_rlhf <- function(policy, reward_model, prompts = NULL, beta = 0.1, l
 #' @param episodes List of episodes.
 #' @param policy Function `policy(state, action) -> grad log pi`.
 #' @param gamma,eta,theta,baseline Controls.
+#' @return A list with `theta`, `theta_next`, `step`, `gradient`, `returns`, `mean_return`, `baseline_value`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' gs <- function(s, a) if (a == 0) c(1, 0) else c(0, 1)
@@ -2910,6 +2958,7 @@ morie_geron_reinforce <- function(episodes, policy, gamma = 0.99, eta = 0.01, th
 #' @param x_t,h_prev Input and previous state.
 #' @param Wx,Wh,b Weights.
 #' @param activation One of tanh/relu/sigmoid/identity.
+#' @return A list with `h`, `h_next`, `z`, `jacobian`, `jacobian_norm`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_recurrent_neuron(x_t = 5L, h_prev = 5L, Wx = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -2943,6 +2992,7 @@ morie_geron_recurrent_neuron <- function(x_t, h_prev, Wx, Wh, b, activation = "t
 #' @param y_true Binary labels.
 #' @param scores Decision scores.
 #' @param pos_label Positive label.
+#' @return A list with `fpr`, `tpr`, `thresholds`, `auc`, `auc_trapezoid`, `youden_j`, `best_threshold`, `n_pos`, `n_neg`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2968,6 +3018,7 @@ morie_geron_roc_curve_hm <- function(y_true, scores, pos_label = 1) {
 #' @param X Data (m, p).
 #' @param n_components Components to recover.
 #' @param seed,n_oversamples,n_power_iter Sketch controls.
+#' @return A list with `components`, `scores`, `singular_values`, `explained_variance`, `explained_variance_ratio`, `spectral_gap`, `sketch_width`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_randomized_pca(matrix(c(1, 2, 3, 1, 2, 3), ncol = 2),
@@ -3014,6 +3065,7 @@ morie_geron_randomized_pca <- function(X, n_components, seed = 0, n_oversamples 
 #' @param X,y Data and targets.
 #' @param base_estimator Optional `base_estimator(Xp, yp) -> predict`.
 #' @param n_estimators,max_samples,max_features,seed,task,bootstrap Controls.
+#' @return A list with `predict`, `train_pred`, `train_mse`, `patches`, `feature_usage`, `row_usage`, `estimators`, `max_samples`, `max_features`, `task`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -3107,6 +3159,7 @@ morie_geron_random_patches <- function(X, y, base_estimator = NULL, n_estimators
 #'   INTERVAL (Python's `(lo, hi)` tuple); a plain vector is a discrete CHOICE list (Python's
 #'   `[...]`), matching Python's own tuple-vs-list distinction. A function is `f(u)`.
 #' @param n_iter,X,y,estimator,K,seed,score Controls; `estimator(params) -> list(fit=, predict=)`.
+#' @return A list with `best_params`, `best_score`, `best_index`, `candidates`, `scores`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_randomized_search(param_dist = c(1, 2, 3, 4, 5, 6, 7, 8), n_iter = 5L,
@@ -3157,6 +3210,7 @@ morie_geron_randomized_search <- function(param_dist, n_iter, X, y, estimator = 
 #' @param X,y Data and targets.
 #' @param base_estimator Optional `base_estimator(X_sub, y) -> predict`.
 #' @param n_estimators,max_features,seed,task Controls.
+#' @return A list with `predict`, `train_pred`, `train_mse`, `feature_sets`, `feature_usage`, `estimators`, `max_features`, `task`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -3211,6 +3265,7 @@ morie_geron_random_subspaces <- function(X, y, base_estimator = NULL, n_estimato
 #' @param features Spatial map (H, W, D) or (N, D).
 #' @param h Decoder state.
 #' @param W,U,v Attention parameters.
+#' @return A list with `context`, `alpha`, `alpha_map`, `scores`, `entropy`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_rnn_visual_attention(features = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5,
@@ -3249,6 +3304,7 @@ morie_geron_rnn_visual_attention <- function(features, h, W, U, v) {
 #' RevNet: reversible residual block, verified by explicit inversion (Geron Ch 12, hmrvn)
 #' @param x Input, even width on last axis.
 #' @param F,G Shape-preserving residual functions.
+#' @return A list with `y`, `y1`, `y2`, `x1`, `x2`, `x_reconstructed`, `reconstruction_error`, `reversible`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' morie_geron_revnet(c(1, 2, 3, 4), function(a) 2 * a, function(a) a +
@@ -3285,6 +3341,7 @@ morie_geron_revnet <- function(x, F, G) {
 #' @param s,a,s_next Transition or trajectory arrays.
 #' @param R Callable `R(s,a,s')` or a 2-D/3-D lookup table.
 #' @param gamma Discount in \[0, 1\].
+#' @return A list with `rewards`, `total_reward`, `returns`, `discounted_return`, `gamma`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' tbl <- array(c(0, 0, 2, 0, 1, 0, 0, 2), dim = c(2, 2, 2))

@@ -67,6 +67,15 @@
 #' @param beta_start The first variance.
 #' @param beta_end The last variance.
 #' @return A list with betas, alphas and abar.
+#' @references Watson, J.L. et al. (2023) "De novo design of protein structure and
+#'       function with RFdiffusion." Nature 620, 1089-1100.
+#'       doi:10.1038/s41586-023-06415-8.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Lugmayr, A. et al. (2022) "RePaint: inpainting using denoising
+#'       diffusion probabilistic models." CVPR, 11461-11471.
+#'     Kabsch, W. (1976) "A solution for the best rotation to relate two
+#'       sets of vectors." Acta Crystallographica A32(5), 922-923.
 #' @export
 #' @examples
 #' morie_alfrf2_schedule(T = 5L)
@@ -99,6 +108,15 @@ morie_alfrf2_schedule <- function(T, beta_start = 1e-4, beta_end = 0.02) {
 #' @param abar_t The cumulative alpha at the step wanted.
 #' @param eps Standard normal deviates of the same shape.
 #' @return The noised structure.
+#' @references Watson, J.L. et al. (2023) "De novo design of protein structure and
+#'       function with RFdiffusion." Nature 620, 1089-1100.
+#'       doi:10.1038/s41586-023-06415-8.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Lugmayr, A. et al. (2022) "RePaint: inpainting using denoising
+#'       diffusion probabilistic models." CVPR, 11461-11471.
+#'     Kabsch, W. (1976) "A solution for the best rotation to relate two
+#'       sets of vectors." Acta Crystallographica A32(5), 922-923.
 #' @export
 #' @examples
 #' morie_alfrf2_noise(x0 = c(1, 2, 3, 4, 5, 6, 7, 8), abar_t = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
@@ -160,6 +178,15 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #' @param Q The reference points.
 #' @return A list with the rotation, the translation, the root-mean-
 #'   square deviation and the moved points.
+#' @references Watson, J.L. et al. (2023) "De novo design of protein structure and
+#'       function with RFdiffusion." Nature 620, 1089-1100.
+#'       doi:10.1038/s41586-023-06415-8.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Lugmayr, A. et al. (2022) "RePaint: inpainting using denoising
+#'       diffusion probabilistic models." CVPR, 11461-11471.
+#'     Kabsch, W. (1976) "A solution for the best rotation to relate two
+#'       sets of vectors." Acta Crystallographica A32(5), 922-923.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -254,6 +281,15 @@ morie_alfrf2_kabsch <- function(P, Q) {
 #' @param P The moving points.
 #' @param Q The reference points.
 #' @return A numeric scalar.
+#' @references Watson, J.L. et al. (2023) "De novo design of protein structure and
+#'       function with RFdiffusion." Nature 620, 1089-1100.
+#'       doi:10.1038/s41586-023-06415-8.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Lugmayr, A. et al. (2022) "RePaint: inpainting using denoising
+#'       diffusion probabilistic models." CVPR, 11461-11471.
+#'     Kabsch, W. (1976) "A solution for the best rotation to relate two
+#'       sets of vectors." Acta Crystallographica A32(5), 922-923.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -279,6 +315,15 @@ morie_alfrf2_rmsd <- function(P, Q) morie_alfrf2_kabsch(P, Q)$rmsd
 #' @param spacing The target separation.
 #' @param passes How many relaxation passes.
 #' @return The relaxed structure.
+#' @references Watson, J.L. et al. (2023) "De novo design of protein structure and
+#'       function with RFdiffusion." Nature 620, 1089-1100.
+#'       doi:10.1038/s41586-023-06415-8.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Lugmayr, A. et al. (2022) "RePaint: inpainting using denoising
+#'       diffusion probabilistic models." CVPR, 11461-11471.
+#'     Kabsch, W. (1976) "A solution for the best rotation to relate two
+#'       sets of vectors." Acta Crystallographica A32(5), 922-923.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -356,6 +401,15 @@ morie_alfrf2_ideal <- function(x, fixed, spacing = .alfrf2_ca_spacing,
 #' @return A list with the designed backbone, the motif it was built
 #'   around, the motif RMSD -- which must be zero -- and the chain
 #'   geometry it came out with.
+#' @references Watson, J.L. et al. (2023) "De novo design of protein structure and
+#'       function with RFdiffusion." Nature 620, 1089-1100.
+#'       doi:10.1038/s41586-023-06415-8.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Lugmayr, A. et al. (2022) "RePaint: inpainting using denoising
+#'       diffusion probabilistic models." CVPR, 11461-11471.
+#'     Kabsch, W. (1976) "A solution for the best rotation to relate two
+#'       sets of vectors." Acta Crystallographica A32(5), 922-923.
 #' @export
 #' @examples
 #' morie_alfrf2(target_motif = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), scaffold = 5L)
@@ -468,6 +522,15 @@ morie_alfrf2 <- function(target_motif, scaffold, T = 20L,
 #' One-line summary of the alfrf2 module
 #'
 #' @return A character scalar.
+#' @references Watson, J.L. et al. (2023) "De novo design of protein structure and
+#'       function with RFdiffusion." Nature 620, 1089-1100.
+#'       doi:10.1038/s41586-023-06415-8.
+#'     Ho, J., Jain, A. and Abbeel, P. (2020) "Denoising diffusion
+#'       probabilistic models." NeurIPS 33, 6840-6851.
+#'     Lugmayr, A. et al. (2022) "RePaint: inpainting using denoising
+#'       diffusion probabilistic models." CVPR, 11461-11471.
+#'     Kabsch, W. (1976) "A solution for the best rotation to relate two
+#'       sets of vectors." Acta Crystallographica A32(5), 922-923.
 #' @export
 #' @examples
 #' morie_alfrf2_cheatsheet()

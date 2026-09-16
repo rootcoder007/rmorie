@@ -13,6 +13,8 @@
 # Box, Jenkins, Reinsel & Ljung (2015) sec. 3.2.6; Durbin (1960),
 # Revue de l'Institut International de Statistique 28(3):233-244.
 
+#' morie_partial_autocorrelation
+#'
 #' @examples
 #' rmorie:::morie_partial_autocorrelation(y = c(1, 2, 3, 4, 5, 6, 7, 8), lag_max = 5L)
 #' @keywords internal

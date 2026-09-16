@@ -58,7 +58,7 @@
 #'
 #' GAIL's whole framing is that imitation is occupancy-measure
 #' matching, so this is worth being able to look at directly. Returns
-#' a named numeric vector whose names are stringified \code{(state,
+#' a named numeric vector whose names are stringified \eqn{(state,
 #' action)} pairs and whose values are the empirical frequencies over
 #' the supplied samples.
 #'

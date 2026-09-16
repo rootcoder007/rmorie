@@ -1,6 +1,6 @@
 #' Mean/standard-deviation outlier rule
 #'
-#' Declare an observation an outlier when \code{|x - mean(x)| / sd(x) >
+#' Declare an observation an outlier when \eqn{|x - mean(x)| / sd(x) >
 #' crit}, with \code{crit = 2} by default.
 #'
 #' This rule is provided because it is commonly used, not because it is

@@ -63,6 +63,8 @@ morie_unclr_Phi <- function(z) stats::pnorm(z)
 # ====================================================================
 
 #' Joint likelihood of independent observations (Lawson eq. 3.1)
+#' @param dens Argument `dens`; see Usage.
+#' @return A list with `likelihood`, `loglik`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Likprod(V)
@@ -76,6 +78,8 @@ Likprod <- function(dens) {
 }
 
 #' Log-likelihood of independent observations (Lawson eq. 3.2)
+#' @param dens Argument `dens`; see Usage.
+#' @return A list with `loglik`, `terms`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Loglksum(V)
@@ -87,6 +91,10 @@ Loglksum <- function(dens) {
 }
 
 #' Posterior-averaged Poisson residual (Lawson eq. 5.2)
+#' @param y Argument `y`; see Usage.
+#' @param e Argument `e`; see Usage.
+#' @param theta_draws Argument `theta_draws`; see Usage.
+#' @return A list with `residual`, `fitted`, `n`, `n_draws`.
 #' @examples
 #' set.seed(1)
 #' e <- runif(20, 5, 15)
@@ -107,6 +115,9 @@ Postres <- function(y, e, theta_draws) {
 }
 
 #' Modulated point-process intensity (Lawson eq. 6.3)
+#' @param lam0 Argument `lam0`; see Usage.
+#' @param lam1 Argument `lam1`; see Usage.
+#' @return A list with `intensity`, `total`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Intmod(V, V)
@@ -121,6 +132,9 @@ Intmod <- function(lam0, lam1) {
 }
 
 #' Case-control logistic likelihood (Lawson eq. 6.6)
+#' @param eta Argument `eta`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `loglik`, `p`, `n_cases`, `n`.
 #' @examples
 #' set.seed(4)
 #' rmorie:::Cclogl(eta = rnorm(8), y = rbinom(8, 1, 0.5))
@@ -136,6 +150,10 @@ Cclogl <- function(eta, y) {
 }
 
 #' Contextual multilevel logit predictor (Lawson eq. 6.8)
+#' @param f Argument `f`; see Usage.
+#' @param g Argument `g`; see Usage.
+#' @param R Argument `R`; see Usage.
+#' @return A list with `eta`, `p`, `n`.
 #' @examples
 #' rmorie:::Mlogitlp(f = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   R = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -151,6 +169,10 @@ Mlogitlp <- function(f, g, R) {
 }
 
 #' Log-Gaussian Cox process intensity (Lawson eq. 6.18)
+#' @param lam0 Argument `lam0`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @param S Argument `S`; see Usage.
+#' @return A list with `intensity`, `total`, `beta`, `n`.
 #' @examples
 #' rmorie:::Lgcpint(lam0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, S = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
@@ -163,6 +185,10 @@ Lgcpint <- function(lam0, beta, S) {
 }
 
 #' Spatial factor Poisson log-risk (Lawson eq. 11.1)
+#' @param alpha0 Argument `alpha0`; see Usage.
+#' @param W Argument `W`; see Usage.
+#' @param phi Argument `phi`; see Usage.
+#' @return A list with `logrisk`, `risk`, `n`, `n_components`.
 #' @examples
 #' rmorie:::Facrisk(alpha0 = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), phi = 0.5)
 #' @keywords internal
@@ -175,6 +201,10 @@ Facrisk <- function(alpha0, W, phi) {
 }
 
 #' Shared-factor multivariate disease mean (Lawson eq. 14.1)
+#' @param e Argument `e`; see Usage.
+#' @param lam Argument `lam`; see Usage.
+#' @param f Argument `f`; see Usage.
+#' @return A list with `rho`, `mu`, `n`, `n_disease`.
 #' @examples
 #' rmorie:::Mvfacmu(e = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
@@ -189,6 +219,13 @@ Mvfacmu <- function(e, lam, f) {
 }
 
 #' Multilevel Poisson log-rate (Lawson eq. 15.2)
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta1 Argument `beta1`; see Usage.
+#' @param age Argument `age`; see Usage.
+#' @param race_effect Argument `race_effect`; see Usage.
+#' @param v Argument `v`; see Usage.
+#' @param W Argument `W`; see Usage.
+#' @return A list with `lograte`, `rate`, `n`.
 #' @examples
 #' rmorie:::Mlpois(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   age = c(1, 2, 3, 4, 5, 6, 7, 8), race_effect = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -206,6 +243,11 @@ Mlpois <- function(beta0, beta1, age, race_effect, v, W) {
 }
 
 #' Measurement-error normal outcome model (Lawson eq. 16.1)
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta1 Argument `beta1`; see Usage.
+#' @param x_true Argument `x_true`; see Usage.
+#' @param tau Argument `tau`; see Usage.
+#' @return A list with `mu`, `var`, `sd`, `n`.
 #' @examples
 #' rmorie:::Menorm(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   x_true = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
@@ -219,6 +261,13 @@ Menorm <- function(beta0, beta1, x_true, tau) {
 }
 
 #' Binary spatial regression with random effect (Lawson eq. 17.1)
+#' @param gamma0 Argument `gamma0`; see Usage.
+#' @param gamma1 Argument `gamma1`; see Usage.
+#' @param d Argument `d`; see Usage.
+#' @param gamma2 Argument `gamma2`; see Usage.
+#' @param x Argument `x`; see Usage.
+#' @param R Argument `R`; see Usage.
+#' @return A list with `eta`, `p`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_unclr_dft_amp(V)
@@ -235,6 +284,11 @@ Logitre <- function(gamma0, gamma1, d, gamma2, x, R) {
 }
 
 #' Epidemic log-autoregression (Lawson eq. 18.3)
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta1 Argument `beta1`; see Usage.
+#' @param i_lag Argument `i_lag`; see Usage.
+#' @param b1 Argument `b1`; see Usage.
+#' @return A list with `logf`, `f`, `n`.
 #' @examples
 #' rmorie:::Epiar(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   i_lag = c(1, 2, 3, 4, 5, 6, 7, 8), b1 = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -249,6 +303,12 @@ Epiar <- function(beta0, beta1, i_lag, b1) {
 }
 
 #' Epidemic log-autoregression with neighbours (Lawson eq. 18.4)
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta1 Argument `beta1`; see Usage.
+#' @param i_lag Argument `i_lag`; see Usage.
+#' @param nb_lag Argument `nb_lag`; see Usage.
+#' @param b1 Argument `b1`; see Usage.
+#' @return A list with `logf`, `f`, `total_lag`, `n`.
 #' @examples
 #' rmorie:::Epiarnb(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   i_lag = c(1, 2, 3, 4, 5, 6, 7, 8), nb_lag = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -272,6 +332,11 @@ Epiarnb <- function(beta0, beta1, i_lag, nb_lag, b1) {
 # ====================================================================
 
 #' Characteristic-function inversion for a pmf (Deshmukh eq. 4.9)
+#' @param t Argument `t`; see Usage.
+#' @param phi_re Argument `phi_re`; see Usage.
+#' @param phi_im Argument `phi_im`; see Usage.
+#' @param x Argument `x`; see Usage.
+#' @return A list with `pmf`, `x`, `n_nodes`.
 #' @examples
 #' rmorie:::Cfinvpmf(t = c(1, 2, 3, 4, 5, 6, 7, 8), phi_re = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   phi_im = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -294,6 +359,9 @@ Cfinvpmf <- function(t, phi_re, phi_im, x) {
 }
 
 #' Independence of k events (Deshmukh eq. 5.1)
+#' @param p Argument `p`; see Usage.
+#' @param joint Argument `joint`; see Usage.
+#' @return A list with `n_conditions`, `max_deviation`, `independent`, `k`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' S <- c("a", "b", "c")
@@ -316,6 +384,8 @@ Indevk <- function(p, joint) {
 }
 
 #' Independence of two random variables (Deshmukh eq. 5.3)
+#' @param joint Argument `joint`; see Usage.
+#' @return A list with `max_deviation`, `independent`, `margin_row`, `margin_col`.
 #' @examples
 #' J <- outer(c(0.3, 0.7), c(0.4, 0.6))
 #' rmorie:::Indrv2(J)
@@ -332,6 +402,9 @@ Indrv2 <- function(joint) {
 }
 
 #' Limit-superior event, infinitely often (Deshmukh eq. 6.1)
+#' @param dev Argument `dev`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @return A list with `threshold`, `in_event`, `prob`, `n_paths`.
 #' @examples
 #' rmorie:::Limsupio(dev = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 #' @keywords internal
@@ -346,6 +419,9 @@ Limsupio <- function(dev, k) {
 }
 
 #' Degenerate limiting distribution of the sample mean (Deshmukh eq. 10.3)
+#' @param x Argument `x`; see Usage.
+#' @param mu Argument `mu`; see Usage.
+#' @return A list with `cdf`, `mu`, `x`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Degencdf(V, V)
@@ -363,6 +439,9 @@ Degencdf <- function(x, mu) {
 # ====================================================================
 
 #' Graph Laplacian pseudoinverse (Klein & Randic 1993)
+#' @param A Argument `A`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `Lplus`, `eigenvalues`, `rank`, `n`.
 #' @examples
 #' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
 #' rmorie:::Lappinv(A)
@@ -384,6 +463,9 @@ Lappinv <- function(A, tol = 1e-9) {
 }
 
 #' Resistance distance matrix (Klein & Randic 1993)
+#' @param A Argument `A`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `R`, `Lplus`, `n`, `rank`.
 #' @examples
 #' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
 #' rmorie:::Resdist(A)
@@ -398,6 +480,9 @@ Resdist <- function(A, tol = 1e-9) {
 }
 
 #' Commute-time distance (Klein & Randic 1993; Chandra et al. 1989)
+#' @param A Argument `A`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `C`, `R`, `two_m`, `n`.
 #' @examples
 #' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
 #' rmorie:::Commdist(A)
@@ -409,6 +494,9 @@ Commdist <- function(A, tol = 1e-9) {
 }
 
 #' Kirchhoff index (Klein & Randic 1993)
+#' @param A Argument `A`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `Kf`, `Kf_spectral`, `n`, `rank`.
 #' @examples
 #' A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
 #' rmorie:::Kirchidx(A)
@@ -428,6 +516,14 @@ Kirchidx <- function(A, tol = 1e-9) {
 # ====================================================================
 
 #' Gromov-Wasserstein discrepancy (Memoli 2011)
+#' @param Cx Argument `Cx`; see Usage.
+#' @param Cy Argument `Cy`; see Usage.
+#' @param a Argument `a`; see Usage.
+#' @param b Argument `b`; see Usage.
+#' @param n_iter Argument `n_iter`; see Usage.
+#' @param epsilon Argument `epsilon`; see Usage.
+#' @param n_sinkhorn Argument `n_sinkhorn`; see Usage.
+#' @return A list with `T`, `cost`, `cost_product`, `n_iter`, `n`, `m`.
 #' @examples
 #' set.seed(5)
 #' Cx <- as.matrix(dist(matrix(rnorm(10), 5, 2)))
@@ -592,12 +688,21 @@ morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
 }
 
 #' Log-ratio EM below a detection limit (Palarea-Albaladejo & Martin-Fernandez 2008)
+#' @param X Argument `X`; see Usage.
+#' @param dl Argument `dl`; see Usage.
+#' @param n_iter Argument `n_iter`; see Usage.
+#' @return The value of `morie_unclr_lr_impute`.
 #' @examples
 #' rmorie:::Lrem(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L)
 #' @keywords internal
 Lrem <- function(X, dl, n_iter = 20) morie_unclr_lr_impute(X, dl, n_iter, NULL)
 
 #' Log-ratio data augmentation below a detection limit (Palarea-Albaladejo et al. 2013)
+#' @param X Argument `X`; see Usage.
+#' @param dl Argument `dl`; see Usage.
+#' @param draw Argument `draw`; see Usage.
+#' @param n_iter Argument `n_iter`; see Usage.
+#' @return The value of `morie_unclr_lr_impute`.
 #' @examples
 #' rmorie:::Lrda(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, draw = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
@@ -611,6 +716,10 @@ Lrda <- function(X, dl, draw, n_iter = 20) {
 # ====================================================================
 
 #' Delete-d jackknife variance (Shao & Wu 1989)
+#' @param theta Argument `theta`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param d Argument `d`; see Usage.
+#' @return A list with `variance`, `se`, `mean`, `n_subsets`, `n`, `d`.
 #' @examples
 #' set.seed(4)
 #' rmorie:::Jackd(theta = rnorm(10, 2, 0.1), n = 10, d = 1)
@@ -635,6 +744,9 @@ Jackd <- function(theta, n, d) {
 # ====================================================================
 
 #' Moments of a linear rank statistic (Gibbons & Chakraborti Thm 7.3.1-7.3.2)
+#' @param a Argument `a`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @return A list with `mean`, `variance`, `se`, `score_mean`, `N`, `m`, `n`.
 #' @examples
 #' rmorie:::Lrankmom(a = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
 #' @keywords internal
@@ -656,6 +768,9 @@ Lrankmom <- function(a, m) {
 # ====================================================================
 
 #' Inverse-probability weight truncation (Cole & Hernan 2008)
+#' @param w Argument `w`; see Usage.
+#' @param q Argument `q`; see Usage.
+#' @return A list with `weights`, `cap`, `n_truncated`, `n`, `mean_before`, `mean_after`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wtrunc(V)
@@ -675,6 +790,11 @@ Wtrunc <- function(w, q = 0.99) {
 # ====================================================================
 
 #' Unified mixed-model per-SNP association test (Yu et al. 2006)
+#' @param y Argument `y`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param snp Argument `snp`; see Usage.
+#' @param Vinv Argument `Vinv`; see Usage.
+#' @return A list with `beta`, `se`, `statistic`, `df`, `coefficients`, `sigma2`, `n`.
 #' @examples
 #' set.seed(2)
 #' n <- 30
@@ -713,6 +833,9 @@ Gwasmlm <- function(y, X, snp, Vinv) {
 # ====================================================================
 
 #' Multiply-imputed Wald test (Li et al. 1991)
+#' @param theta Argument `theta`; see Usage.
+#' @param U Argument `U`; see Usage.
+#' @return A list with `statistic`, `df1`, `df2`, `r`, `estimate`, `m`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Mitest(V, V)
@@ -741,6 +864,12 @@ Mitest <- function(theta, U) {
 # ====================================================================
 
 #' Continuous-shrinkage polygenic effects (Ge et al. 2019)
+#' @param beta_hat Argument `beta_hat`; see Usage.
+#' @param D Argument `D`; see Usage.
+#' @param psi Argument `psi`; see Usage.
+#' @param n Argument `n`; see Usage.
+#' @param sigma2 Argument `sigma2`; see Usage.
+#' @return A list with `beta`, `shrinkage`, `n`, `sigma2`, `n_snp`.
 #' @examples
 #' rmorie:::Csshrink(beta_hat = 5L, D = 5L, psi = 5L, n = 5L)
 #' @keywords internal
@@ -766,6 +895,11 @@ Csshrink <- function(beta_hat, D, psi, n, sigma2 = 1) {
 # ====================================================================
 
 #' Piecewise log-linear shedding curve (standard)
+#' @param days Argument `days`; see Usage.
+#' @param load Argument `load`; see Usage.
+#' @param t_peak Argument `t_peak`; see Usage.
+#' @param t_plateau Argument `t_plateau`; see Usage.
+#' @return A list with `rise_slope`, `rise_intercept`, `plateau_level`, `decay_slope`, `decay_intercept`, `peak_load`, `peak_day`, `n`, `n_rise`, `n_plateau`, `n_decay`.
 #' @examples
 #' set.seed(2)
 #' days <- 0:14
@@ -813,6 +947,14 @@ Shedcurve <- function(days, load, t_peak, t_plateau) {
 # ====================================================================
 
 #' Cross-validated TMLE of the ATE (Zheng & van der Laan 2011)
+#' @param y Argument `y`; see Usage.
+#' @param a Argument `a`; see Usage.
+#' @param q0 Argument `q0`; see Usage.
+#' @param q1 Argument `q1`; see Usage.
+#' @param g Argument `g`; see Usage.
+#' @param fold Argument `fold`; see Usage.
+#' @param n_newton Argument `n_newton`; see Usage.
+#' @return A list with `estimate`, `se`, `psi_fold`, `eps_fold`, `n_folds`, `n`.
 #' @examples
 #' set.seed(3)
 #' n <- 60
@@ -867,6 +1009,9 @@ Cvtmle <- function(y, a, q0, q1, g, fold, n_newton = 50) {
 }
 
 #' Natural direct effect (Zheng & van der Laan 2012)
+#' @param y10 Argument `y10`; see Usage.
+#' @param y00 Argument `y00`; see Usage.
+#' @return A list with `estimate`, `se`, `mean_y10`, `mean_y00`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Ndeff(V, V)
@@ -882,6 +1027,9 @@ Ndeff <- function(y10, y00) {
 }
 
 #' Natural indirect effect (Zheng & van der Laan 2012)
+#' @param y11 Argument `y11`; see Usage.
+#' @param y10 Argument `y10`; see Usage.
+#' @return A list with `estimate`, `se`, `mean_y11`, `mean_y10`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Nieff(V, V)
@@ -901,6 +1049,10 @@ Nieff <- function(y11, y10) {
 # ====================================================================
 
 #' X-learner heterogeneous treatment effect (Kunzel et al. 2019)
+#' @param tau1 Argument `tau1`; see Usage.
+#' @param tau0 Argument `tau0`; see Usage.
+#' @param g Argument `g`; see Usage.
+#' @return A list with `tau`, `ate`, `se`, `n`.
 #' @examples
 #' set.seed(3)
 #' rmorie:::Xlearn(tau1 = rnorm(20, 1), tau0 = rnorm(20, 0.8), g = runif(20, 0.3, 0.7))
@@ -925,6 +1077,10 @@ Xlearn <- function(tau1, tau0, g) {
 # ====================================================================
 
 #' Rotary position embedding (Su et al. 2021, RoFormer)
+#' @param q Argument `q`; see Usage.
+#' @param m Argument `m`; see Usage.
+#' @param theta Argument `theta`; see Usage.
+#' @return A list with `q`, `m`, `norm`, `n`.
 #' @examples
 #' rmorie:::Rope(q = c(1, 0, 0.5, -0.5), m = 3,
 #'      theta = 10000^(-c(0, 1) / 2))
@@ -949,6 +1105,10 @@ Rope <- function(q, m, theta) {
 }
 
 #' Group normalisation (Wu & He 2018)
+#' @param x Argument `x`; see Usage.
+#' @param n_groups Argument `n_groups`; see Usage.
+#' @param eps Argument `eps`; see Usage.
+#' @return A list with `x`, `mean`, `sd`, `n_groups`, `group_size`.
 #' @examples
 #' set.seed(4)
 #' rmorie:::Grpnorm(rnorm(12), n_groups = 3)
@@ -975,6 +1135,8 @@ Grpnorm <- function(x, n_groups, eps = 1e-5) {
 }
 
 #' Graph readout by sum pooling (standard; Xu et al. 2019 for its power)
+#' @param H Argument `H`; see Usage.
+#' @return A list with `sum`, `mean`, `max`, `n_nodes`, `dim`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Sumpl(V)
@@ -987,6 +1149,10 @@ Sumpl <- function(H) {
 }
 
 #' Graph isomorphism network aggregation (Xu et al. 2019)
+#' @param A Argument `A`; see Usage.
+#' @param H Argument `H`; see Usage.
+#' @param eps Argument `eps`; see Usage.
+#' @return A list with `H`, `eps`, `n_nodes`, `dim`.
 #' @examples
 #' A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
 #' H <- matrix(1:6, 3, 2)
@@ -1024,6 +1190,10 @@ morie_unclr_sym_norm <- function(A, self_loops) {
 }
 
 #' Simplified graph convolution propagation (Wu et al. 2019, SGC)
+#' @param A Argument `A`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param K Argument `K`; see Usage.
+#' @return A list with `X`, `K`, `n_nodes`, `dim`.
 #' @examples
 #' A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
 #' X <- matrix(1:6, 3, 2)
@@ -1037,6 +1207,11 @@ Sgcprop <- function(A, X, K) {
 }
 
 #' LightGCN layer combination (He et al. 2020)
+#' @param A Argument `A`; see Usage.
+#' @param E Argument `E`; see Usage.
+#' @param K Argument `K`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `E`, `K`, `alpha`, `n_nodes`, `dim`.
 #' @examples
 #' set.seed(1)
 #' A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
@@ -1059,6 +1234,11 @@ Lgcnprop <- function(A, E, K, alpha = NULL) {
 }
 
 #' LinUCB arm scores (Li et al. 2010)
+#' @param x Argument `x`; see Usage.
+#' @param theta Argument `theta`; see Usage.
+#' @param Ainv Argument `Ainv`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `score`, `mean`, `bonus`, `arm`, `n_arms`, `alpha`.
 #' @examples
 #' rmorie:::Linucb(x = 5L, theta = c(1, 2, 3, 4, 5, 6, 7, 8), Ainv = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
@@ -1085,6 +1265,11 @@ Linucb <- function(x, theta, Ainv, alpha = 1) {
 }
 
 #' Structured state-space convolution kernel (Gu, Goel & Re 2022, S4)
+#' @param A Argument `A`; see Usage.
+#' @param B Argument `B`; see Usage.
+#' @param C Argument `C`; see Usage.
+#' @param L Argument `L`; see Usage.
+#' @return A list with `K`, `L`, `state_dim`.
 #' @examples
 #' rmorie:::Ssmk(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   C = c(1, 2, 3, 4, 5, 6, 7, 8), L = 5L)
@@ -1106,6 +1291,9 @@ Ssmk <- function(A, B, C, L) {
 }
 
 #' Causal convolution y_t = sum_l K_l x_\{t-l\} (standard)
+#' @param K Argument `K`; see Usage.
+#' @param x Argument `x`; see Usage.
+#' @return A vector.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Ssmconv(V, V)
@@ -1120,6 +1308,9 @@ Ssmconv <- function(K, x) {
 }
 
 #' Dominant periods from the amplitude spectrum (Wu et al. 2023, TimesNet)
+#' @param x Argument `x`; see Usage.
+#' @param k Argument `k`; see Usage.
+#' @return A list with `frequency`, `period`, `amplitude`, `spectrum`, `n`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Fftperiod(V)
@@ -1139,6 +1330,9 @@ Fftperiod <- function(x, k = 1) {
 }
 
 #' Series decomposition and autocorrelation (Wu et al. 2021, Autoformer)
+#' @param x Argument `x`; see Usage.
+#' @param kernel Argument `kernel`; see Usage.
+#' @return A list with `trend`, `seasonal`, `acf`, `kernel`, `n`.
 #' @examples
 #' set.seed(5)
 #' x <- sin(2 * pi * (1:60) / 12) + 0.1 * (1:60) / 10 + rnorm(60, 0, 0.1)

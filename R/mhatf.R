@@ -17,7 +17,7 @@
 #'   seed from \code{\link{morie_det_rng}("mhatf", deterministic_seed)} is
 #'   installed before sampling so Py<->R streams agree.  Overrides
 #'   \code{seed} when set.
-#' @return Named list \code{(output, estimate, heads, num_heads, d_k,
+#' @return Named list \eqn{(output, estimate, heads, num_heads, d_k,
 #'   d_model, method)}.
 #' @references Vaswani et al. (2017), NeurIPS.
 #' @examples

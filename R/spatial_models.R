@@ -6,6 +6,8 @@
 # checked against spatialreg::lagsarlm and spatialreg::errorsarlm --
 # note those live in *spatialreg*, not *spdep*, since spdep was split.
 
+#' morie_logdet_I_minus
+#'
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_logdet_I_minus(V, V)

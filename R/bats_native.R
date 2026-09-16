@@ -36,7 +36,7 @@
 #' @param h Forecast horizon.
 #' @param maxiter Maximum Nelder-Mead iterations per starting point.
 #' @return A named list matching the Python payload keys:
-#'   \code{model, omega, phi, alpha, beta, gamma, ar, ma, seed_state,
+#'   \eqn{model, omega, phi, alpha, beta, gamma, ar, ma, seed_state,
 #'   fitted, fitted_transformed, residuals, loglik, aic, n_par,
 #'   sigma2, spectral_radius, forecastable, forecast,
 #'   forecast_transformed, candidates, spec, method, note}.

@@ -69,6 +69,13 @@
 #' @param mu Component means.
 #' @param s2 Component variances.
 #' @return sum_k w_k Phi((x - mu_k)/sqrt(s2_k)).
+#' @references Kottas, A. and Krnjajic, M. (2009) "Bayesian semiparametric
+#'       modelling in quantile regression." Scandinavian Journal of
+#'       Statistics 36(2), 297-319.
+#'     Rubin, D.B. (1981) "The Bayesian bootstrap." Annals of Statistics
+#'       9(1), 130-134.
+#'     Walker (2007); Kalli, Griffin and Walker (2011) -- the sampler,
+#'       through morie_slbpdg.
 #' @export
 #' @examples
 #' morie_bnppct_cdf(x = 5L, w = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -89,6 +96,13 @@ morie_bnppct_cdf <- function(x, w, mu, s2)
 #' @param hi Upper end.
 #' @param iters Maximum doublings.
 #' @return A list with the widened lo and hi.
+#' @references Kottas, A. and Krnjajic, M. (2009) "Bayesian semiparametric
+#'       modelling in quantile regression." Scandinavian Journal of
+#'       Statistics 36(2), 297-319.
+#'     Rubin, D.B. (1981) "The Bayesian bootstrap." Annals of Statistics
+#'       9(1), 130-134.
+#'     Walker (2007); Kalli, Griffin and Walker (2011) -- the sampler,
+#'       through morie_slbpdg.
 #' @export
 #' @examples
 #' morie_bnppct_expand(function(x) x - 1, lo = 0, hi = 0.5)
@@ -111,6 +125,8 @@ morie_bnppct_expand <- function(f, lo, hi, iters = 60L) {
 
 #' Invert the mixture CDF at q, normalising by the carried mass
 #'
+#' Bisection rather than Newton: the CDF is monotone but its derivative is a mixture of narrow normals, and a Newton step off a flat stretch between two well-separated components lands anywhere. The bracket is taken from the COMPONENTS, not from the data. A slice sampler instantiates components from the prior to cover the slice, and an inverse-gamma prior draw can be enormous; such a component leaves the CDF far short of one anywhere near the data, so a data-width bracket fails to contain the root. That is not a numerical nuisance -- it is the model saying this draw of F has a very heavy tail -- so the bracket follows the components and is then widened until it genuinely brackets.
+#'
 #' Bisection rather than Newton: the CDF is monotone but its derivative
 #' is a mixture of narrow normals, and a Newton step off a flat stretch
 #' between two well-separated components lands anywhere.
@@ -132,6 +148,13 @@ morie_bnppct_expand <- function(f, lo, hi, iters = 60L) {
 #'   components.
 #' @param hi Upper end of the bracket, or NULL.
 #' @return The quantile.
+#' @references Kottas, A. and Krnjajic, M. (2009) "Bayesian semiparametric
+#'       modelling in quantile regression." Scandinavian Journal of
+#'       Statistics 36(2), 297-319.
+#'     Rubin, D.B. (1981) "The Bayesian bootstrap." Annals of Statistics
+#'       9(1), 130-134.
+#'     Walker (2007); Kalli, Griffin and Walker (2011) -- the sampler,
+#'       through morie_slbpdg.
 #' @export
 #' @examples
 #' morie_bnppct_quantile(q = 0.5, w = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -195,6 +218,13 @@ morie_bnppct_quantile <- function(q, w, mu, s2, lo = NULL, hi = NULL) {
 #' @param alpha_update Passed through to the sampler.
 #' @return A list with, per quantile, the posterior mean, standard
 #'   deviation, median and credible bounds, plus the draws themselves.
+#' @references Kottas, A. and Krnjajic, M. (2009) "Bayesian semiparametric
+#'       modelling in quantile regression." Scandinavian Journal of
+#'       Statistics 36(2), 297-319.
+#'     Rubin, D.B. (1981) "The Bayesian bootstrap." Annals of Statistics
+#'       9(1), 130-134.
+#'     Walker (2007); Kalli, Griffin and Walker (2011) -- the sampler,
+#'       through morie_slbpdg.
 #' @export
 #' @examples
 #' \donttest{
@@ -305,6 +335,13 @@ morie_bnppct <- function(y, quantile = 0.5, route = "mixture", alpha = 1,
 #' One-line summary of the bnppct module
 #'
 #' @return A character scalar.
+#' @references Kottas, A. and Krnjajic, M. (2009) "Bayesian semiparametric
+#'       modelling in quantile regression." Scandinavian Journal of
+#'       Statistics 36(2), 297-319.
+#'     Rubin, D.B. (1981) "The Bayesian bootstrap." Annals of Statistics
+#'       9(1), 130-134.
+#'     Walker (2007); Kalli, Griffin and Walker (2011) -- the sampler,
+#'       through morie_slbpdg.
 #' @export
 #' @examples
 #' morie_bnppct_cheatsheet()

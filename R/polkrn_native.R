@@ -246,6 +246,18 @@
 #' @param how One of \code{"cumulative"}, \code{"duration"}, \code{"final"}. Defaults to
 #' \code{"cumulative"}.
 #' @return The value of \code{rowSums}.
+#' @references ----------
+#'   Hernan, M. A., Brumback, B. & Robins, J. M. (2002) "Estimating the
+#'   causal effect of zidovudine on CD4 count with a marginal structural
+#'   model for repeated measures", Statistics in Medicine 21(12),
+#'   1689-1709, doi:10.1002/sim.1144.
+#'   
+#'   Robins, J. M., Hernan, M. A. & Brumback, B. (2000) "Marginal structural
+#'   models and causal inference in epidemiology", Epidemiology 11(5),
+#'   550-560, doi:10.1097/00001648-200009000-00011 -- the weights.
+#'   
+#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
+#'   Chapman & Hall/CRC, Sec. 21.2.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -290,6 +302,18 @@ exposure_summary <- function(A_history, how = "cumulative") {
 #' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
 #' @return A list with \code{X}, \code{centres}, \code{width}.
+#' @references ----------
+#'   Hernan, M. A., Brumback, B. & Robins, J. M. (2002) "Estimating the
+#'   causal effect of zidovudine on CD4 count with a marginal structural
+#'   model for repeated measures", Statistics in Medicine 21(12),
+#'   1689-1709, doi:10.1002/sim.1144.
+#'   
+#'   Robins, J. M., Hernan, M. A. & Brumback, B. (2000) "Marginal structural
+#'   models and causal inference in epidemiology", Epidemiology 11(5),
+#'   550-560, doi:10.1097/00001648-200009000-00011 -- the weights.
+#'   
+#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
+#'   Chapman & Hall/CRC, Sec. 21.2.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -346,6 +370,18 @@ rbf_basis <- function(x, n_centres = 5, width = NULL) {
 #' @param trim Passed to \code{.polkrn_ip_weights_history}.
 #' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Hernan, M. A., Brumback, B. & Robins, J. M. (2002) "Estimating the
+#'   causal effect of zidovudine on CD4 count with a marginal structural
+#'   model for repeated measures", Statistics in Medicine 21(12),
+#'   1689-1709, doi:10.1002/sim.1144.
+#'   
+#'   Robins, J. M., Hernan, M. A. & Brumback, B. (2000) "Marginal structural
+#'   models and causal inference in epidemiology", Epidemiology 11(5),
+#'   550-560, doi:10.1097/00001648-200009000-00011 -- the weights.
+#'   
+#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If,
+#'   Chapman & Hall/CRC, Sec. 21.2.
 #' @export
 #' @keywords internal
 morie_polkrn <- function(y, A_history, H_history, degree = 2,

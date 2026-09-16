@@ -94,6 +94,15 @@
 #' @param x_max Numeric; combined arithmetically in the body. Defaults to \code{100}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.75}.
 #' @return A numeric value.
+#' @references ----------
+#'   Pennington, J., Socher, R. & Manning, C. D. (2014) "GloVe: Global
+#'   Vectors for Word Representation", Proceedings of EMNLP 2014,
+#'   1532-1543, doi:10.3115/v1/D14-1162.  Equations (8) and (9), Sec. 4.2
+#'   for the harmonic weighting and the AdaGrad training.
+#'   
+#'   Duchi, J., Hazan, E. & Singer, Y. (2011) "Adaptive subgradient methods
+#'   for online learning and stochastic optimization", JMLR 12, 2121-2159
+#'   -- the AdaGrad the paper uses.
 #' @export
 #' @examples
 #' glove_weight(x = 5L)
@@ -125,6 +134,15 @@ glove_weight <- function(x, x_max = 100.0, alpha = 0.75) {
 #' @param harmonic A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param min_count Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{X}, \code{vocab}, \code{index}.
+#' @references ----------
+#'   Pennington, J., Socher, R. & Manning, C. D. (2014) "GloVe: Global
+#'   Vectors for Word Representation", Proceedings of EMNLP 2014,
+#'   1532-1543, doi:10.3115/v1/D14-1162.  Equations (8) and (9), Sec. 4.2
+#'   for the harmonic weighting and the AdaGrad training.
+#'   
+#'   Duchi, J., Hazan, E. & Singer, Y. (2011) "Adaptive subgradient methods
+#'   for online learning and stochastic optimization", JMLR 12, 2121-2159
+#'   -- the AdaGrad the paper uses.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -195,6 +213,15 @@ cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
 #' @param x_max Passed to \code{glove_weight}. Defaults to \code{100}.
 #' @param alpha Passed to \code{glove_weight}. Defaults to \code{0.75}.
 #' @return The value of \code{total}, as built in the body.
+#' @references ----------
+#'   Pennington, J., Socher, R. & Manning, C. D. (2014) "GloVe: Global
+#'   Vectors for Word Representation", Proceedings of EMNLP 2014,
+#'   1532-1543, doi:10.3115/v1/D14-1162.  Equations (8) and (9), Sec. 4.2
+#'   for the harmonic weighting and the AdaGrad training.
+#'   
+#'   Duchi, J., Hazan, E. & Singer, Y. (2011) "Adaptive subgradient methods
+#'   for online learning and stochastic optimization", JMLR 12, 2121-2159
+#'   -- the AdaGrad the paper uses.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -247,6 +274,15 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' \code{loss_history}, \code{running_loss}, \code{final_loss}, \code{n_vocab},
 #' \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max},
 #' \code{alpha}, \code{combine}, \code{method}.
+#' @references ----------
+#'   Pennington, J., Socher, R. & Manning, C. D. (2014) "GloVe: Global
+#'   Vectors for Word Representation", Proceedings of EMNLP 2014,
+#'   1532-1543, doi:10.3115/v1/D14-1162.  Equations (8) and (9), Sec. 4.2
+#'   for the harmonic weighting and the AdaGrad training.
+#'   
+#'   Duchi, J., Hazan, E. & Singer, Y. (2011) "Adaptive subgradient methods
+#'   for online learning and stochastic optimization", JMLR 12, 2121-2159
+#'   -- the AdaGrad the paper uses.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

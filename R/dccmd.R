@@ -50,7 +50,7 @@
 #' Two-step DCC(1,1) on a panel of return series.
 #'
 #' @param x Numeric matrix of returns (T x k).
-#' @return Named list with \code{a, b, unconditional_correlation,
+#' @return Named list with \eqn{a, b, unconditional_correlation,
 #'   conditional_correlation, conditional_variance, loglik, n, k, method}.
 #' @examples
 #' set.seed(1)

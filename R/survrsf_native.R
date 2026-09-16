@@ -62,6 +62,20 @@ morie_survrsf_SPLIT_RULES <- c(
 #'
 #' @param rule Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{rule}, \code{available}, \code{reason}.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' morie_survrsf_rule_status()
@@ -177,6 +191,20 @@ morie_survrsf_rule_status <- function(rule = NULL) {
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param events A vector; its length is taken and its elements indexed.
 #' @return A list with \code{time}, \code{chf}, \code{n}, \code{deaths}.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -252,6 +280,20 @@ morie_survrsf_nelson_aalen <- function(times, events) {
 #' @param times Passed to \code{morie_survrsf_nelson_aalen}.
 #' @param events Passed to \code{morie_survrsf_nelson_aalen}.
 #' @return A list with \code{sum_chf}, \code{deaths}, \code{difference}, \code{conserved}.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -282,6 +324,20 @@ morie_survrsf_conservation_check <- function(times, events) {
 #' @param events A vector; its length is taken and its elements indexed.
 #' @param group A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -340,6 +396,20 @@ morie_survrsf_logrank_statistic <- function(times, events, group) {
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param events A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -385,6 +455,20 @@ morie_survrsf_logrank_scores <- function(times, events) {
 #' @param scores Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
 #' @return A numeric value.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -427,6 +511,20 @@ morie_survrsf_logrank_score_statistic <- function(times, events, group,
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param events A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -465,6 +563,20 @@ morie_survrsf_conservation_residuals <- function(times, events) {
 #' @param events A vector; its length is taken and its elements indexed.
 #' @param group A vector; its length is taken.
 #' @return A numeric value.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -509,6 +621,20 @@ morie_survrsf_conserve_statistic <- function(times, events, group) {
 #' Defaults to \code{"logrank"}.
 #' @param rng Optional; may be \code{NULL}. A list; the body reads \code{$randint} from it.
 #' @return The value of \code{best}, as built in the body.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -588,6 +714,20 @@ morie_survrsf_best_split <- function(X, times, events, features,
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{0}.
 #' @param rng Optional; may be \code{NULL}. A list; the body reads \code{$sample_} from it.
 #' @return A list with \code{root}, \code{rule}, \code{mtry}, \code{min_deaths}, \code{n}.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' morie_survrsf_grow_tree(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -661,6 +801,20 @@ morie_survrsf_grow_tree <- function(X, times, events, mtry = NULL,
 #' @param random_variable Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param rng Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{node}, as built in the body.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -706,6 +860,20 @@ morie_survrsf_predict_tree <- function(tree, x, random_variable = NULL,
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{0}.
 #' @return A list with \code{trees}, \code{inbag}, \code{n}, \code{rule}, \code{n_trees},
 #' \code{oob_fraction}, \code{times}, \code{events}.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' morie_survrsf_forest(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -766,6 +934,20 @@ morie_survrsf_forest <- function(X, times, events, n_trees = 50, mtry = NULL,
 #' @param random_variable Passed to \code{morie_survrsf_predict_tree}.
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' morie_survrsf_ensemble_chf(fit = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
@@ -809,6 +991,20 @@ morie_survrsf_ensemble_chf <- function(fit, X, t, oob = TRUE,
 #' @param random_variable Passed to \code{morie_survrsf_predict_tree}.
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -856,6 +1052,20 @@ morie_survrsf_mortality <- function(fit, X, oob = TRUE,
 #' @param predicted A vector; its length is taken and its elements indexed.
 #' @return A list with \code{c_index}, \code{concordance}, \code{permissible},
 #' \code{prediction_error}.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' morie_survrsf_c_index(times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -942,6 +1152,20 @@ morie_survrsf_c_index <- function(times, events, predicted) {
 #' @param seed Passed to \code{morie_survrsf_mortality}. Defaults to \code{1}.
 #' @return A list with \code{estimate}, \code{vimp}, \code{baseline_error}, \code{note},
 #' \code{method}.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @keywords internal
 morie_survrsf_vimp <- function(fit, X, variables = NULL, seed = 1) {
@@ -993,6 +1217,20 @@ morie_survrsf_vimp <- function(fit, X, variables = NULL, seed = 1) {
 #' the source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+#'   (2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+#'   841-860, doi:10.1214/08-AOAS169.
+#'   
+#'   Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+#'   JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+#'   
+#'   Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+#'   maximally selected rank statistics", Computational Statistics & Data
+#'   Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+#'   
+#'   Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+#'   R", R News 7(2), 25-31.
 #' @export
 #' @examples
 #' morie_survrsf_cheatsheet()
@@ -1014,5 +1252,6 @@ morie_survrsf_cheatsheet <- function() {
 # compact alias per ledger/NAMING.md
 morie_survrsf_random_survival_forest <- morie_survrsf_forest
 
+#' @rdname morie_survrsf_forest
 #' @export
 morie_survrsf <- morie_survrsf_forest

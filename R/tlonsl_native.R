@@ -67,6 +67,18 @@
 #' @param history Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lags Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return The value of \code{z}, as built in the body.
+#' @references ----------
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 18 (van der
+#'   Laan & Benkeser).
+#'   
+#'   Benkeser, D., Ju, C., Lendle, S. & van der Laan, M. J. (2018)
+#'   "Online cross-validation-based ensemble learning", Statistics in
+#'   Medicine 37(2), 249-260, doi:10.1002/sim.7320.
+#'   
+#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
+#'   Learner", Statistical Applications in Genetics and Molecular
+#'   Biology 6(1), Article 25, doi:10.2202/1544-6115.1309.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -103,6 +115,18 @@ morie_tlonsl_summary_measure <- function(history, lags = 1) {
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param lags Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.
 #' @return A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \code{note}.
+#' @references ----------
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 18 (van der
+#'   Laan & Benkeser).
+#'   
+#'   Benkeser, D., Ju, C., Lendle, S. & van der Laan, M. J. (2018)
+#'   "Online cross-validation-based ensemble learning", Statistics in
+#'   Medicine 37(2), 249-260, doi:10.1002/sim.7320.
+#'   
+#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
+#'   Learner", Statistical Applications in Genetics and Molecular
+#'   Biology 6(1), Article 25, doi:10.2202/1544-6115.1309.
 #' @export
 #' @keywords internal
 morie_tlonsl_sequential_risk <- function(y, algorithm, loss = "squared",
@@ -153,6 +177,18 @@ morie_tlonsl_sequential_risk <- function(y, algorithm, loss = "squared",
 #' @param cum_losses Coerced to numeric by the body, with \code{as.numeric}.
 #' @param eta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
+#' @references ----------
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 18 (van der
+#'   Laan & Benkeser).
+#'   
+#'   Benkeser, D., Ju, C., Lendle, S. & van der Laan, M. J. (2018)
+#'   "Online cross-validation-based ensemble learning", Statistics in
+#'   Medicine 37(2), 249-260, doi:10.1002/sim.7320.
+#'   
+#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
+#'   Learner", Statistical Applications in Genetics and Molecular
+#'   Biology 6(1), Article 25, doi:10.2202/1544-6115.1309.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -185,6 +221,18 @@ morie_tlonsl_update_weights <- function(cum_losses, eta = 1.0) {
 #' @return A list with \code{estimate}, \code{weights}, \code{risk}, \code{member_risks},
 #' \code{best_single}, \code{best_member}, \code{weight_path}, \code{n_scored},
 #' \code{method}, \code{note}.
+#' @references ----------
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 18 (van der
+#'   Laan & Benkeser).
+#'   
+#'   Benkeser, D., Ju, C., Lendle, S. & van der Laan, M. J. (2018)
+#'   "Online cross-validation-based ensemble learning", Statistics in
+#'   Medicine 37(2), 249-260, doi:10.1002/sim.7320.
+#'   
+#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
+#'   Learner", Statistical Applications in Genetics and Molecular
+#'   Biology 6(1), Article 25, doi:10.2202/1544-6115.1309.
 #' @export
 #' @keywords internal
 morie_tlonsl_online_super_learner <- function(y, library, loss = "squared",
@@ -250,6 +298,18 @@ morie_tlonsl_online_super_learner <- function(y, library, loss = "squared",
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
+#'   Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 18 (van der
+#'   Laan & Benkeser).
+#'   
+#'   Benkeser, D., Ju, C., Lendle, S. & van der Laan, M. J. (2018)
+#'   "Online cross-validation-based ensemble learning", Statistics in
+#'   Medicine 37(2), 249-260, doi:10.1002/sim.7320.
+#'   
+#'   van der Laan, M. J., Polley, E. C. & Hubbard, A. E. (2007) "Super
+#'   Learner", Statistical Applications in Genetics and Molecular
+#'   Biology 6(1), Article 25, doi:10.2202/1544-6115.1309.
 #' @export
 #' @examples
 #' morie_tlonsl_cheatsheet()
@@ -273,5 +333,6 @@ morie_tlonsl_cheatsheet <- function() {
 # compact alias per ledger/NAMING.md
 morie_tlonsl_onlinesuperlearner <- morie_tlonsl_online_super_learner
 
+#' @rdname morie_tlonsl_online_super_learner
 #' @export
 morie_tlonsl <- morie_tlonsl_online_super_learner

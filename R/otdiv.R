@@ -7,8 +7,8 @@
 #' self-cost fixes that: the result is zero exactly when the two measures
 #' coincide.
 #'
-#' Formula: \code{S_eps(mu,nu) = OT_eps(mu,nu) - 0.5 (OT_eps(mu,mu) +
-#' OT_eps(nu,nu))} with \code{OT_eps(mu,nu) = <T*,C> + eps KL(T* | mu x
+#' Formula: \eqn{S_eps(mu,nu) = OT_eps(mu,nu) - 0.5 (OT_eps(mu,mu) +
+#' OT_eps(nu,nu))} with \eqn{OT_eps(mu,nu) = <T*,C> + eps KL(T* | mu x
 #' nu)} -- Genevay, Peyre and Cuturi (2018) eq. (3)-(4).
 #'
 #' @param a,b The two histograms.

@@ -195,8 +195,10 @@ mrr_at_k <- function(ranked, target, kk = 20L) {
 }
 
 # Compact aliases
+#' @rdname session_parallel_batches
 #' @export
 gruforrecommendation <- session_parallel_batches
+#' @rdname session_parallel_batches
 #' @export
 gru4rec <- session_parallel_batches
 

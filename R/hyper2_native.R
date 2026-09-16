@@ -92,6 +92,14 @@
 #' @param log_sf log signal standard deviation.
 #' @param kind A member of the kernel list.
 #' @return The covariance matrix.
+#' @references Murray, I. and Adams, R.P. (2010) "Slice sampling covariance
+#'       hyperparameters of latent Gaussian models." NIPS 23, 1732-1740.
+#'     Murray, I., Adams, R.P. and MacKay, D.J.C. (2010) "Elliptical slice
+#'       sampling." AISTATS 9, 541-548.
+#'     Neal, R.M. (2003) "Slice sampling." Annals of Statistics 31(3),
+#'       705-767.
+#'     Rasmussen, C.E. and Williams, C.K.I. (2006) "Gaussian Processes for
+#'       Machine Learning." MIT Press, chapters 2 and 4.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -151,6 +159,14 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
 #' @param log_sn log noise standard deviation.
 #' @param kind Kernel name.
 #' @return The log marginal likelihood.
+#' @references Murray, I. and Adams, R.P. (2010) "Slice sampling covariance
+#'       hyperparameters of latent Gaussian models." NIPS 23, 1732-1740.
+#'     Murray, I., Adams, R.P. and MacKay, D.J.C. (2010) "Elliptical slice
+#'       sampling." AISTATS 9, 541-548.
+#'     Neal, R.M. (2003) "Slice sampling." Annals of Statistics 31(3),
+#'       705-767.
+#'     Rasmussen, C.E. and Williams, C.K.I. (2006) "Gaussian Processes for
+#'       Machine Learning." MIT Press, chapters 2 and 4.
 #' @export
 #' @keywords internal
 morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
@@ -198,6 +214,14 @@ morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
 #' @param w Stepping-out width.
 #' @param m Maximum stepping-out steps.
 #' @return The next value.
+#' @references Murray, I. and Adams, R.P. (2010) "Slice sampling covariance
+#'       hyperparameters of latent Gaussian models." NIPS 23, 1732-1740.
+#'     Murray, I., Adams, R.P. and MacKay, D.J.C. (2010) "Elliptical slice
+#'       sampling." AISTATS 9, 541-548.
+#'     Neal, R.M. (2003) "Slice sampling." Annals of Statistics 31(3),
+#'       705-767.
+#'     Rasmussen, C.E. and Williams, C.K.I. (2006) "Gaussian Processes for
+#'       Machine Learning." MIT Press, chapters 2 and 4.
 #' @export
 #' @examples
 #' e <- rmorie:::.ghc_rng(11)
@@ -284,6 +308,14 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
 #' @return A list with the hyperparameter draws, their posterior means
 #'   and standard deviations, and the predictive mean and standard
 #'   deviation at Xstar averaged over the draws.
+#' @references Murray, I. and Adams, R.P. (2010) "Slice sampling covariance
+#'       hyperparameters of latent Gaussian models." NIPS 23, 1732-1740.
+#'     Murray, I., Adams, R.P. and MacKay, D.J.C. (2010) "Elliptical slice
+#'       sampling." AISTATS 9, 541-548.
+#'     Neal, R.M. (2003) "Slice sampling." Annals of Statistics 31(3),
+#'       705-767.
+#'     Rasmussen, C.E. and Williams, C.K.I. (2006) "Gaussian Processes for
+#'       Machine Learning." MIT Press, chapters 2 and 4.
 #' @export
 #' @examples
 #' X <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
@@ -495,6 +527,14 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
 #' One-line summary of the hyper2 module
 #'
 #' @return A character scalar.
+#' @references Murray, I. and Adams, R.P. (2010) "Slice sampling covariance
+#'       hyperparameters of latent Gaussian models." NIPS 23, 1732-1740.
+#'     Murray, I., Adams, R.P. and MacKay, D.J.C. (2010) "Elliptical slice
+#'       sampling." AISTATS 9, 541-548.
+#'     Neal, R.M. (2003) "Slice sampling." Annals of Statistics 31(3),
+#'       705-767.
+#'     Rasmussen, C.E. and Williams, C.K.I. (2006) "Gaussian Processes for
+#'       Machine Learning." MIT Press, chapters 2 and 4.
 #' @export
 #' @examples
 #' morie_hyper2_cheatsheet()

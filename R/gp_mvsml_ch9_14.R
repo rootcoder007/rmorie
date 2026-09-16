@@ -45,6 +45,14 @@ morie_khatri_rao_rows <- function(A, B) {
 #' records, and P_u2 = P_u1 : Z_E is the row-wise Kronecker interaction
 #' with the environment design.
 #' @keywords internal
+#' @param X Argument `X`; see Usage.
+#' @param m_index Argument `m_index`; see Usage.
+#' @param Z_u1 Argument `Z_u1`; see Usage.
+#' @param Z_E Argument `Z_E`; see Usage.
+#' @param kernel Argument `kernel`; see Usage.
+#' @param gamma Argument `gamma`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `P`, `P_u1`, `P_u2`, `design`, `widths`, `rank`.
 Apxkern <- function(X, m_index, Z_u1, Z_E, kernel = "linear",
                     gamma = NULL, tol = 1e-10) {
   sk <- morie_sparse_kernel_design(X, m_index, kernel, gamma, tol)
@@ -71,6 +79,10 @@ Apxkern <- function(X, m_index, Z_u1, Z_E, kernel = "linear",
 #' flat subspace (eq. 9.1 for p = 3, eq. 9.2 in general).  A left-hand
 #' side < 0 satisfies (9.3) and puts the point on one side, > 0 satisfies
 #' (9.4) and puts it on the other.
+#' @param X Argument `X`; see Usage.
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @return A list with `value`, `side`, `below`, `above`, `on_plane`, `distance`, `norm_beta`.
 #' @examples
 #' rmorie:::Hyperpl(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 #' @keywords internal
@@ -95,6 +107,9 @@ Hyperpl <- function(X, beta0, beta) {
 #' y_i(beta_0 + x_i beta) >= M.  Since M = 1 / ||beta|| once the scale is
 #' fixed, that is equivalent to minimizing (1/2)||beta||^2 (9.7) subject
 #' to y_i(beta_0 + x_i beta) >= 1 (9.8); the street is 2 / ||beta||.
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @return A list with `beta`, `beta0`, `norm_beta`, `margin`, `street_width`, `objective`, `functional_margin`, `min_functional_margin`, `constraint_ok`, `alpha`, `support_vectors`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Hardsvm(V, V)
@@ -127,6 +142,15 @@ Hardsvm <- function(X, y, ...) {
 #' alpha_i >= 0 (9.14).  The book warns under (9.14) that the sign of
 #' the inequality term is crucial; its own worked examples supply the
 #' constraint in the >= form and subtract it, the convention used here.
+#' @param f Argument `f`; see Usage.
+#' @param grad_f Argument `grad_f`; see Usage.
+#' @param h Argument `h`; see Usage.
+#' @param grad_h Argument `grad_h`; see Usage.
+#' @param g Argument `g`; see Usage.
+#' @param grad_g Argument `grad_g`; see Usage.
+#' @param lam Argument `lam`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `L`, `stationarity`, `max_stationarity`, `alpha_nonnegative`, `n_equality`, `n_inequality`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Wolfedual(V, V)
@@ -176,6 +200,9 @@ Wolfedual <- function(f, grad_f, h = NULL, grad_h = NULL, g = NULL,
 #' (9.19), maximized at alpha = c / (a'a) >= 0 (9.20).  Illustrative
 #' Example 9.1 is a = 1, c = 1; Illustrative Example 9.2 is a = (1, 1),
 #' c = 2.  The two are the same problem, so one routine answers both.
+#' @param a Argument `a`; see Usage.
+#' @param c Argument `c`; see Usage.
+#' @return A list with `x`, `alpha`, `dual_quadratic`, `dual_linear`, `dual_value`, `primal_value`, `constraint`, `active`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Qplincon(V, V)
@@ -202,6 +229,12 @@ Qplincon <- function(a, c) {
 #' L = (1/2)||beta||^2 - sum_i alpha_i \[ y_i(beta_0 + x_i beta) - 1 \].
 #' Its derivatives with respect to beta and beta_0 are (9.28) and (9.29),
 #' both zero at the optimum.
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @return A list with `L`, `quadratic_term`, `slack`, `grad_beta`, `grad_beta0`.
 #' @examples
 #' rmorie:::Svmlagr(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, alpha = 0.5)
@@ -231,6 +264,10 @@ Svmlagr <- function(X, y, beta0, beta, alpha) {
 #' that slack budget and for the box bound on the multipliers in (9.45);
 #' only (9.45) is directly solvable, so T is the box bound here and the
 #' realized sum of slacks is returned as slack_sum.
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param T Argument `T`; see Usage.
+#' @return A list with `beta`, `beta0`, `norm_beta`, `margin`, `zeta`, `slack_sum`, `n_violating`, `n_misclassified`, `alpha`, `support_vectors`, `objective`.
 #' @examples
 #' rmorie:::Softsvm(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   T = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -267,6 +304,15 @@ Softsvm <- function(X, y, T, ...) {
 #' The printed sign of the delta term on p.356 is inconsistent with the
 #' book's own (9.41), which states dL/dzeta_i = T - alpha_i - delta_i;
 #' that requires the term to enter with a minus, and it does so here.
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param beta0 Argument `beta0`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @param alpha Argument `alpha`; see Usage.
+#' @param delta Argument `delta`; see Usage.
+#' @param zeta Argument `zeta`; see Usage.
+#' @param T Argument `T`; see Usage.
+#' @return A list with `L`, `stationarity_beta`, `balance`, `multiplier_sum`, `complementary_alpha`, `complementary_delta`, `max_residual`, `kkt_satisfied`.
 #' @examples
 #' set.seed(1)
 #' r <- rmorie:::Svmkkt(X = rnorm(10), y = rnorm(10), beta0 = 0.5, beta = 0.5, alpha = 0.5,
@@ -306,6 +352,11 @@ Svmkkt <- function(X, y, beta0, beta, alpha, delta, zeta, T) {
 #' - (1/2) sum_i sum_j alpha_i alpha_j y_i y_j (x_i . x_j) subject to
 #' 0 <= alpha_i <= T and sum_i alpha_i y_i = 0.  It differs from the hard
 #' margin dual (9.32)-(9.33) only by the upper bound T.
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param T Argument `T`; see Usage.
+#' @param K Argument `K`; see Usage.
+#' @return A list with `alpha`, `beta`, `beta0`, `objective`, `support_vectors`, `balance`, `bounded`, `at_bound`.
 #' @examples
 #' rmorie:::Svmsdual(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   T = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -333,6 +384,13 @@ Svmsdual <- function(X, y, T, K = NULL, ...) {
 #' kernel K(x_i, x_j), which implicitly defines an inner product in an
 #' enlarged feature space.  That substitution is the whole difference
 #' between (9.44) and (9.46); the constraints (9.47) are unchanged.
+#' @param X Argument `X`; see Usage.
+#' @param y Argument `y`; see Usage.
+#' @param T Argument `T`; see Usage.
+#' @param kernel Argument `kernel`; see Usage.
+#' @param gamma Argument `gamma`; see Usage.
+#' @param K Argument `K`; see Usage.
+#' @return The value of `out`, as built in the body.
 #' @examples
 #' rmorie:::Ksvmdual(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   T = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -358,6 +416,11 @@ Ksvmdual <- function(X, y, T, kernel = "linear", gamma = NULL,
 #' the centered covariate curve and the coefficient function is taken by
 #' the trapezoid rule on the observation grid, the same quadrature the
 #' chapter uses for its inner products on p.581.
+#' @param t Argument `t`; see Usage.
+#' @param x_values Argument `x_values`; see Usage.
+#' @param beta_values Argument `beta_values`; see Usage.
+#' @param mu Argument `mu`; see Usage.
+#' @return A list with `integral`, `fitted`, `mu`, `n_points`.
 #' @examples
 #' rmorie:::Flmint(t = c(1, 2, 3, 4, 5, 6, 7, 8), x_values = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   beta_values = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -381,6 +444,11 @@ Flmint <- function(t, x_values, beta_values, mu = 0) {
 #' beta(t) = sum_\{l=1\}^\{L1\} beta_l phi_l(t), the device that makes (14.1)
 #' estimable: an infinite-dimensional unknown function is replaced by L1
 #' scalars, after which (14.1) collapses to the linear model (14.3).
+#' @param t Argument `t`; see Usage.
+#' @param beta_coef Argument `beta_coef`; see Usage.
+#' @param kind Argument `kind`; see Usage.
+#' @param period Argument `period`; see Usage.
+#' @return A list with `beta_t`, `t`, `n_basis`.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Basexp(V, V)
@@ -401,6 +469,11 @@ Basexp <- function(t, beta_coef, kind = "fourier", period = NULL) {
 #' are the times at which the covariate curve was observed, columns the
 #' L2 basis functions.  It is what turns a discretely sampled curve into
 #' basis coefficients through (14.7).
+#' @param t Argument `t`; see Usage.
+#' @param n_basis Argument `n_basis`; see Usage.
+#' @param kind Argument `kind`; see Usage.
+#' @param period Argument `period`; see Usage.
+#' @return A list with `Psi`, `m`, `L2`, `PsiTPsi`.
 #' @examples
 #' rmorie:::Basmat(t = c(1, 2, 3, 4, 5, 6, 7, 8), n_basis = 5L)
 #' @keywords internal
@@ -484,6 +557,13 @@ morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
 #' expansion (14.2) the book writes J_beta = beta' P beta with
 #' P_ij = int_0^T phi_i^(p)(t) phi_j^(p)(t) dt.  The chapter says p is
 #' typically 1 or 2.  Integrals by the trapezoid rule on the grid t.
+#' @param t Argument `t`; see Usage.
+#' @param L1 Argument `L1`; see Usage.
+#' @param p Argument `p`; see Usage.
+#' @param kind Argument `kind`; see Usage.
+#' @param period Argument `period`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @return The value of `out`, as built in the body.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::Penmat(V, V)
@@ -519,6 +599,13 @@ Penmat <- function(t, L1, p = 2L, kind = "fourier", period = NULL,
 #' + lambda J_beta, with J_beta the penalty (14.11).  lambda trades fit
 #' against smoothness: at lambda = 0 it is least squares, and as lambda
 #' grows beta(t) is driven towards a constant.
+#' @param y Argument `y`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param beta Argument `beta`; see Usage.
+#' @param lam Argument `lam`; see Usage.
+#' @param P Argument `P`; see Usage.
+#' @param mu Argument `mu`; see Usage.
+#' @return A list with `sse`, `penalty`, `lambda`, `objective`, `fitted`, `residuals`.
 #' @examples
 #' rmorie:::Pensse(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5,
 #'   lam = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5)
@@ -549,6 +636,13 @@ Pensse <- function(y, X, beta, lam, P, mu = 0) {
 #' beta*, minimized at beta* = (X*'X* + lambda D)^-1 X*'(y - 1_n mu),
 #' with beta = Gamma beta*.  Zero eigenvalues of a rank-deficient P
 #' contribute nothing, the reduction the book notes.
+#' @param y Argument `y`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param P Argument `P`; see Usage.
+#' @param lam Argument `lam`; see Usage.
+#' @param mu Argument `mu`; see Usage.
+#' @param tol Argument `tol`; see Usage.
+#' @return A list with `beta`, `beta_star`, `Gamma`, `eigenvalues`, `X_star`, `mu`, `fitted`, `residuals`, `sse`, `penalty`, `objective`, `rank`.
 #' @examples
 #' rmorie:::Penfreg(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5,
 #'   lam = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -640,6 +734,13 @@ morie_fda_env_interaction <- function(X, env, reference = TRUE) {
 #' carries the L1 functional scores of (14.4)-(14.5).  Passing X_EF =
 #' NULL gives (14.13) and passing it gives (14.14); the two differ by
 #' that block alone, which is why one routine covers both.
+#' @param y Argument `y`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param X_E Argument `X_E`; see Usage.
+#' @param X_EF Argument `X_EF`; see Usage.
+#' @param lam Argument `lam`; see Usage.
+#' @param P Argument `P`; see Usage.
+#' @return A list with `coef`, `mu`, `beta_E`, `beta`, `beta_EF`, `widths`, `design`, `fitted`, `residuals`, `sse`, `n_columns`, `has_interaction`.
 #' @examples
 #' rmorie:::Fregenv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   X_E = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -690,6 +791,15 @@ Fregenv <- function(y, X, X_E, X_EF = NULL, lam = 0, P = NULL) {
 #' (14.13) the environment-by-reflectance interaction.  Pass env, the
 #' environment label of each record, to have the block-diagonal X_EF of
 #' p.610 built, or pass X_EF directly.
+#' @param y Argument `y`; see Usage.
+#' @param X Argument `X`; see Usage.
+#' @param X_E Argument `X_E`; see Usage.
+#' @param X_EF Argument `X_EF`; see Usage.
+#' @param env Argument `env`; see Usage.
+#' @param lam Argument `lam`; see Usage.
+#' @param P Argument `P`; see Usage.
+#' @param reference Argument `reference`; see Usage.
+#' @return The value of `out`, as built in the body.
 #' @examples
 #' rmorie:::Fregint(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
 #'   X_E = c(1, 2, 3, 4, 5, 6, 7, 8))

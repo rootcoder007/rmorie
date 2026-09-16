@@ -106,6 +106,7 @@ morie_crim_etas <- function(times, magnitudes = NULL, m0 = NULL,
 #'
 #' @param x A \code{morie_etas} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' set.seed(1)
 #' times <- sort(runif(80, 0, 200))
@@ -216,6 +217,7 @@ morie_crim_hawkes_multivariate <- function(times, marks, t_max = NULL,
 #'
 #' @param x A \code{morie_mv_hawkes} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' set.seed(1)
 #' times <- sort(runif(60, 0, 200))
@@ -300,6 +302,7 @@ morie_crim_near_repeat <- function(x, y, times, s_threshold,
 #'
 #' @param x A \code{morie_knox} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_knox(D)
@@ -394,6 +397,7 @@ morie_crim_risk_terrain <- function(incidents, layers, n_grid = 25L,
 #'
 #' @param x A \code{morie_rtm} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' set.seed(1)
 #' incidents <- cbind(runif(50), runif(50))

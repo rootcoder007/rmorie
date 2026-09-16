@@ -4,7 +4,7 @@
 #'
 #' @inheritParams morie_garch_fit
 #' @param lambda Decay factor in (0,1). Default 0.94 (daily RiskMetrics).
-#' @return Named list with \code{conditional_variance, conditional_volatility,
+#' @return Named list with \eqn{conditional_variance, conditional_volatility,
 #'   lambda, n, last_variance, last_volatility, method}.
 #' @examples
 #' set.seed(1)

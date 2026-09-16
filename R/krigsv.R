@@ -74,6 +74,8 @@
   c(c0 = c0, c = cc, wss = sum(w * (y - c0 - cc * x)^2))
 }
 
+#' morie_variogram_fit
+#'
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_variogram_fit(V, V)

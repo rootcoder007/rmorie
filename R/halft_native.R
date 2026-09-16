@@ -76,6 +76,14 @@
 #' @param CL Elimination clearance.
 #' @param Q Inter-compartmental clearance.
 #' @return A list with alpha, beta and the micro rate constants.
+#' @references Rowland, M. and Tozer, T.N. (2011) "Clinical Pharmacokinetics and
+#'       Pharmacodynamics: Concepts and Applications," 4th edition. Wolters
+#'       Kluwer.
+#'     Gibaldi, M. and Perrier, D. (1982) "Pharmacokinetics," 2nd edition.
+#'       Marcel Dekker, chapter 2.
+#'     Boxenbaum, H. and Battle, M. (1995) "Effective half-life in clinical
+#'       pharmacokinetics." Journal of Clinical Pharmacology 35(8),
+#'       763-766.
 #' @export
 #' @examples
 #' morie_halft_rates(V1 = 50, V2 = 30, CL = 5, Q = 2)
@@ -116,6 +124,14 @@ morie_halft_rates <- function(V1, V2, CL, Q) {
 #'   mean residence time, and for the two-compartment route both phase
 #'   half-lives, the fraction of area in each and the effective
 #'   half-life.
+#' @references Rowland, M. and Tozer, T.N. (2011) "Clinical Pharmacokinetics and
+#'       Pharmacodynamics: Concepts and Applications," 4th edition. Wolters
+#'       Kluwer.
+#'     Gibaldi, M. and Perrier, D. (1982) "Pharmacokinetics," 2nd edition.
+#'       Marcel Dekker, chapter 2.
+#'     Boxenbaum, H. and Battle, M. (1995) "Effective half-life in clinical
+#'       pharmacokinetics." Journal of Clinical Pharmacology 35(8),
+#'       763-766.
 #' @export
 #' @examples
 #' morie_halft(Vd = 50, Cl = 5)
@@ -199,6 +215,14 @@ morie_halft <- function(smiles = NULL, Vd = NULL, Cl = NULL,
 #' One-line summary of the halft module
 #'
 #' @return A character scalar.
+#' @references Rowland, M. and Tozer, T.N. (2011) "Clinical Pharmacokinetics and
+#'       Pharmacodynamics: Concepts and Applications," 4th edition. Wolters
+#'       Kluwer.
+#'     Gibaldi, M. and Perrier, D. (1982) "Pharmacokinetics," 2nd edition.
+#'       Marcel Dekker, chapter 2.
+#'     Boxenbaum, H. and Battle, M. (1995) "Effective half-life in clinical
+#'       pharmacokinetics." Journal of Clinical Pharmacology 35(8),
+#'       763-766.
 #' @export
 #' @examples
 #' morie_halft_cheatsheet()

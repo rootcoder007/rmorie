@@ -563,7 +563,7 @@ morie_siu_decision_timing <- function(data = NULL) {
 #' Chi-square: charges-recommended independent of year?
 #'
 #' Cross-tabulates \code{charges_recommended} against incident-year
-#' and tests independence with a Pearson chi-square (\code{
+#' and tests independence with a Pearson chi-square (\eqn{
 #' stats::chisq.test}; p-value via \code{stats::pchisq}). Years with
 #' zero charge-decided cases are dropped. Complements
 #' \code{\link{morie_siu_verify_chi2}} in \code{sprott_doob.R}, which

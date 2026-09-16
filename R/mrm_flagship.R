@@ -138,6 +138,7 @@ morie_mrm_reconcile <- function(primary, secondary, keys,
 #'
 #' @param x A \code{morie_mrm_reconciliation} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_mrm_reconciliation(D)
@@ -167,7 +168,7 @@ print.morie_mrm_reconciliation <- function(x, ...) {
 #'   \code{morie_mrm_reconciliation}, whose matched rows are used).
 #' @param treatment,outcome Column names (binary 0/1 treatment).
 #' @param covariates Character vector of adjustment covariates.
-#' @param methods Subset of \code{c("matching", "ate", "aipw",
+#' @param methods Subset of \eqn{c("matching", "ate", "aipw",
 #'   "dml")} (default all four).
 #' @param correction Multiple-testing correction passed to
 #'   \code{stats::p.adjust} (default \code{"holm"}).
@@ -302,6 +303,7 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
 #'
 #' @param x A \code{morie_mrm_effect} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `invisible`.
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' rmorie:::print.morie_mrm_effect(D)

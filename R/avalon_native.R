@@ -125,6 +125,19 @@
 #' @param s A character scalar.
 #' @param seed The FNV offset basis.
 #' @return A number below two to the thirty-second.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' S <- c("a", "b", "c")
@@ -155,6 +168,19 @@ morie_avalon_fnv <- function(s, seed = 2166136261) {
 #'
 #' @param smiles The molecule, in the subset the parser accepts.
 #' @return A list with el, arom, chg, hexp, bonds and closures.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' p <- morie_avalon_parse("c1ccccc1O")
@@ -362,6 +388,19 @@ morie_avalon_parse <- function(smiles) {
 #' @param hexp Explicit hydrogen counts, or minus one.
 #' @param bonds The bond list.
 #' @return One count per atom.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' p <- morie_avalon_parse("CCO")
@@ -435,6 +474,19 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 #' @param bonds The bond list.
 #' @param closures Which bonds were ring closures.
 #' @return A list with the rings and a per-atom ring-membership flag.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' p <- morie_avalon_parse("c1ccccc1")
@@ -566,6 +618,19 @@ morie_avalon_rings <- function(n, bonds, closures) {
 #' @param maxpath The longest path feature, in bonds.
 #' @param classes Which feature classes to use, or NULL for all five.
 #' @return A sorted character vector.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' morie_avalon_features("CCC", 5L, "path")
@@ -630,6 +695,19 @@ morie_avalon_features <- function(smiles, maxpath = 5L, classes = NULL) {
 #'
 #' @param a,b Bit vectors.
 #' @return A number between zero and one.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -654,6 +732,19 @@ morie_avalon_tanimoto <- function(a, b) {
 #'   Restricted to bond and path the fingerprint is subgraph monotone.
 #' @return A list with the bits, the features that set them, and the
 #'   collision count.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' fp <- morie_avalon("c1ccccc1O", n_bits = 128L)
@@ -689,6 +780,19 @@ morie_avalon <- function(smiles, n_bits = 512L, maxpath = 5L,
 #' One-line summary of the avalon module
 #'
 #' @return A character scalar.
+#' @references Gedeck, P., Rohde, B. and Bartels, C. (2006) "QSAR -- how good is it
+#'       in practice? Comparison of descriptor sets on an unbiased cross
+#'       section of database candidates." Journal of Chemical Information
+#'       and Modeling 46(5), 1924-1936. doi:10.1021/ci050413p.
+#'     Carhart, R.E., Smith, D.H. and Venkataraghavan, R. (1985) "Atom
+#'       pairs as molecular features in structure-activity studies."
+#'       Journal of Chemical Information and Computer Sciences 25(2),
+#'       64-73.
+#'     Weininger, D. (1988) "SMILES, a chemical language and information
+#'       system. 1." Journal of Chemical Information and Computer Sciences
+#'       28(1), 31-36.
+#'     Fowler, G., Noll, L.C. and Vo, K.-P. FNV-1a, the 32-bit
+#'       multiply-and-xor hash used to fold a feature into a bit.
 #' @export
 #' @examples
 #' morie_avalon_cheatsheet()

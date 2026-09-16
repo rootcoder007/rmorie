@@ -7,7 +7,7 @@
 #' minus a critical value times each study's own standard error, which is
 #' why the plot is a funnel rather than a band.
 #'
-#' Formula: points \code{(y_i, se_i)}; contour \code{theta_FE +-
+#' Formula: points \code{(y_i, se_i)}; contour \eqn{theta_FE +-
 #' z_{1-alpha/2} se} with \code{theta_FE = sum(y_i/v_i)/sum(1/v_i)} --
 #' Light and Pillemer (1984), Chapter 3.
 #'

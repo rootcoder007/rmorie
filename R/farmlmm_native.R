@@ -339,6 +339,16 @@
 #' @param threshold Passed to \code{.farmcpu}.
 #' @param seed Passed to \code{.farmcpu}. Defaults to \code{0L}.
 #' @return The value of \code{.farmcpu}.
+#' @references Liu, X., Huang, M., Fan, B., Buckler, E. S. & Zhang, Z. (2016)
+#'   "Iterative Usage of Fixed and Random Effect Models for Powerful and
+#'   Efficient Genome-Wide Association Studies", PLoS Genetics 12(2),
+#'   e1005767, doi:10.1371/journal.pgen.1005767.
+#'   Yu, J. et al. (2006) "A unified mixed-model method for association
+#'   mapping that accounts for multiple levels of relatedness", Nature
+#'   Genetics 38(2), 203-208.
+#'   Segura, V. et al. (2012) "An efficient multi-locus mixed-model
+#'   approach for genome-wide association studies in structured
+#'   populations", Nature Genetics 44(7), 825-830.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -356,6 +366,16 @@ morie_farmlmm <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
 #'
 #' @param x Passed to \code{pnorm}.
 #' @return A numeric value.
+#' @references Liu, X., Huang, M., Fan, B., Buckler, E. S. & Zhang, Z. (2016)
+#'   "Iterative Usage of Fixed and Random Effect Models for Powerful and
+#'   Efficient Genome-Wide Association Studies", PLoS Genetics 12(2),
+#'   e1005767, doi:10.1371/journal.pgen.1005767.
+#'   Yu, J. et al. (2006) "A unified mixed-model method for association
+#'   mapping that accounts for multiple levels of relatedness", Nature
+#'   Genetics 38(2), 203-208.
+#'   Segura, V. et al. (2012) "An efficient multi-locus mixed-model
+#'   approach for genome-wide association studies in structured
+#'   populations", Nature Genetics 44(7), 825-830.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

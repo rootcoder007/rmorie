@@ -59,6 +59,19 @@
 #' @param relevance The graded relevance of the ranked list.
 #' @param k The cut-off.
 #' @return A number between zero and one.
+#' @references Zhao, X., Zhang, L., Ding, Z., Xia, L., Tang, J. and Yin, D. (2018)
+#'       "Recommendations with negative feedback via pairwise deep
+#'       reinforcement learning." KDD, 1040-1048.
+#'       doi:10.1145/3219819.3219886.
+#'     Horvitz, D.G. and Thompson, D.J. (1952) "A generalization of
+#'       sampling without replacement from a finite universe." JASA
+#'       47(260), 663-685.
+#'     Swaminathan, A. and Joachims, T. (2015) "The self-normalized
+#'       estimator for counterfactual learning." NeurIPS 28, 3231-3239.
+#'     Dudik, M., Langford, J. and Li, L. (2011) "Doubly robust policy
+#'       evaluation and learning." ICML, 1097-1104.
+#'     Jarvelin, K. and Kekalainen, J. (2002) "Cumulated gain-based
+#'       evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 #' @export
 #' @examples
 #' morie_rlhfRS_precision(relevance = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
@@ -85,6 +98,19 @@ morie_rlhfRS_precision <- function(relevance, k) {
 #' @param relevance The graded relevance of the ranked list.
 #' @param k The cut-off.
 #' @return A number between zero and one.
+#' @references Zhao, X., Zhang, L., Ding, Z., Xia, L., Tang, J. and Yin, D. (2018)
+#'       "Recommendations with negative feedback via pairwise deep
+#'       reinforcement learning." KDD, 1040-1048.
+#'       doi:10.1145/3219819.3219886.
+#'     Horvitz, D.G. and Thompson, D.J. (1952) "A generalization of
+#'       sampling without replacement from a finite universe." JASA
+#'       47(260), 663-685.
+#'     Swaminathan, A. and Joachims, T. (2015) "The self-normalized
+#'       estimator for counterfactual learning." NeurIPS 28, 3231-3239.
+#'     Dudik, M., Langford, J. and Li, L. (2011) "Doubly robust policy
+#'       evaluation and learning." ICML, 1097-1104.
+#'     Jarvelin, K. and Kekalainen, J. (2002) "Cumulated gain-based
+#'       evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 #' @export
 #' @examples
 #' morie_rlhfRS_ndcg(relevance = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
@@ -107,6 +133,19 @@ morie_rlhfRS_ndcg <- function(relevance, k) {
 #'
 #' @param relevance The graded relevance of the ranked list.
 #' @return A number between zero and one.
+#' @references Zhao, X., Zhang, L., Ding, Z., Xia, L., Tang, J. and Yin, D. (2018)
+#'       "Recommendations with negative feedback via pairwise deep
+#'       reinforcement learning." KDD, 1040-1048.
+#'       doi:10.1145/3219819.3219886.
+#'     Horvitz, D.G. and Thompson, D.J. (1952) "A generalization of
+#'       sampling without replacement from a finite universe." JASA
+#'       47(260), 663-685.
+#'     Swaminathan, A. and Joachims, T. (2015) "The self-normalized
+#'       estimator for counterfactual learning." NeurIPS 28, 3231-3239.
+#'     Dudik, M., Langford, J. and Li, L. (2011) "Doubly robust policy
+#'       evaluation and learning." ICML, 1097-1104.
+#'     Jarvelin, K. and Kekalainen, J. (2002) "Cumulated gain-based
+#'       evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -136,6 +175,19 @@ morie_rlhfRS_mrr <- function(relevance) {
 #' @param seed The random stream.
 #' @return A list with the returns, their mean and standard error, and
 #'   the visitation counts.
+#' @references Zhao, X., Zhang, L., Ding, Z., Xia, L., Tang, J. and Yin, D. (2018)
+#'       "Recommendations with negative feedback via pairwise deep
+#'       reinforcement learning." KDD, 1040-1048.
+#'       doi:10.1145/3219819.3219886.
+#'     Horvitz, D.G. and Thompson, D.J. (1952) "A generalization of
+#'       sampling without replacement from a finite universe." JASA
+#'       47(260), 663-685.
+#'     Swaminathan, A. and Joachims, T. (2015) "The self-normalized
+#'       estimator for counterfactual learning." NeurIPS 28, 3231-3239.
+#'     Dudik, M., Langford, J. and Li, L. (2011) "Doubly robust policy
+#'       evaluation and learning." ICML, 1097-1104.
+#'     Jarvelin, K. and Kekalainen, J. (2002) "Cumulated gain-based
+#'       evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 #' @export
 #' @keywords internal
 morie_rlhfRS_rollout <- function(env, policy, n_episodes = 20L,
@@ -207,6 +259,19 @@ morie_rlhfRS_rollout <- function(env, policy, n_episodes = 20L,
 #' @param reward_model A per-state-action reward model, for dr.
 #' @param clip A cap on the importance weight, or NULL.
 #' @return A list with the estimate, the weights and the diagnostics.
+#' @references Zhao, X., Zhang, L., Ding, Z., Xia, L., Tang, J. and Yin, D. (2018)
+#'       "Recommendations with negative feedback via pairwise deep
+#'       reinforcement learning." KDD, 1040-1048.
+#'       doi:10.1145/3219819.3219886.
+#'     Horvitz, D.G. and Thompson, D.J. (1952) "A generalization of
+#'       sampling without replacement from a finite universe." JASA
+#'       47(260), 663-685.
+#'     Swaminathan, A. and Joachims, T. (2015) "The self-normalized
+#'       estimator for counterfactual learning." NeurIPS 28, 3231-3239.
+#'     Dudik, M., Langford, J. and Li, L. (2011) "Doubly robust policy
+#'       evaluation and learning." ICML, 1097-1104.
+#'     Jarvelin, K. and Kekalainen, J. (2002) "Cumulated gain-based
+#'       evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 #' @export
 #' @keywords internal
 morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
@@ -284,6 +349,19 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
 #' @param k The ranking cut-off.
 #' @return A list with the value estimate or estimates, the visitation,
 #'   the ranking metrics, and the off-policy diagnostics.
+#' @references Zhao, X., Zhang, L., Ding, Z., Xia, L., Tang, J. and Yin, D. (2018)
+#'       "Recommendations with negative feedback via pairwise deep
+#'       reinforcement learning." KDD, 1040-1048.
+#'       doi:10.1145/3219819.3219886.
+#'     Horvitz, D.G. and Thompson, D.J. (1952) "A generalization of
+#'       sampling without replacement from a finite universe." JASA
+#'       47(260), 663-685.
+#'     Swaminathan, A. and Joachims, T. (2015) "The self-normalized
+#'       estimator for counterfactual learning." NeurIPS 28, 3231-3239.
+#'     Dudik, M., Langford, J. and Li, L. (2011) "Doubly robust policy
+#'       evaluation and learning." ICML, 1097-1104.
+#'     Jarvelin, K. and Kekalainen, J. (2002) "Cumulated gain-based
+#'       evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 #' @export
 #' @examples
 #' P <- list(list(c(0.7, 0.3), c(0.5, 0.5), c(0.2, 0.8)), list(c(0.6,
@@ -366,6 +444,19 @@ morie_rlhfRS <- function(env, policy, n_episodes = 20L, horizon = 10L,
 #' One-line summary of the rlhfRS module
 #'
 #' @return A character scalar.
+#' @references Zhao, X., Zhang, L., Ding, Z., Xia, L., Tang, J. and Yin, D. (2018)
+#'       "Recommendations with negative feedback via pairwise deep
+#'       reinforcement learning." KDD, 1040-1048.
+#'       doi:10.1145/3219819.3219886.
+#'     Horvitz, D.G. and Thompson, D.J. (1952) "A generalization of
+#'       sampling without replacement from a finite universe." JASA
+#'       47(260), 663-685.
+#'     Swaminathan, A. and Joachims, T. (2015) "The self-normalized
+#'       estimator for counterfactual learning." NeurIPS 28, 3231-3239.
+#'     Dudik, M., Langford, J. and Li, L. (2011) "Doubly robust policy
+#'       evaluation and learning." ICML, 1097-1104.
+#'     Jarvelin, K. and Kekalainen, J. (2002) "Cumulated gain-based
+#'       evaluation of IR techniques." ACM TOIS 20(4), 422-446.
 #' @export
 #' @examples
 #' morie_rlhfRS_cheatsheet()

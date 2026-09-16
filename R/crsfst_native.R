@@ -60,6 +60,21 @@
 #' @param curve A curve from the Kaplan-Meier function.
 #' @param tau The horizon.
 #' @return The restricted mean.
+#' @references Cui, Y., Kosorok, M.R., Sverdrup, E., Wager, S. and Zhu, R. (2023)
+#'       "Estimating heterogeneous treatment effects with right-censored
+#'       data via causal survival forests." Journal of the Royal
+#'       Statistical Society Series B 85(2), 179-211.
+#'       doi:10.1093/jrsssb/qkac001.
+#'     Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Royston, P. and Parmar, M.K.B. (2013) "Restricted mean survival
+#'       time: an alternative to the hazard ratio." BMC Medical Research
+#'       Methodology 13, 152.
+#'     Uno, H. et al. (2014) "Moving beyond the hazard ratio in quantifying
+#'       the clinical benefit-risk of therapies." Journal of Clinical
+#'       Oncology 32(22), 2380-2385.
 #' @export
 #' @examples
 #' morie_crsfst_rmst(curve = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), tau = 0.5)
@@ -89,6 +104,21 @@ morie_crsfst_rmst <- function(curve, tau) {
 #' @param k The number of folds.
 #' @param seed The random stream.
 #' @return A zero-based fold index per observation.
+#' @references Cui, Y., Kosorok, M.R., Sverdrup, E., Wager, S. and Zhu, R. (2023)
+#'       "Estimating heterogeneous treatment effects with right-censored
+#'       data via causal survival forests." Journal of the Royal
+#'       Statistical Society Series B 85(2), 179-211.
+#'       doi:10.1093/jrsssb/qkac001.
+#'     Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Royston, P. and Parmar, M.K.B. (2013) "Restricted mean survival
+#'       time: an alternative to the hazard ratio." BMC Medical Research
+#'       Methodology 13, 152.
+#'     Uno, H. et al. (2014) "Moving beyond the hazard ratio in quantifying
+#'       the clinical benefit-risk of therapies." Journal of Clinical
+#'       Oncology 32(22), 2380-2385.
 #' @export
 #' @examples
 #' morie_crsfst_folds(n = 5L, k = 5L)
@@ -130,6 +160,21 @@ morie_crsfst_folds <- function(n, k, seed = 0) {
 #' @return A list with the per-observation conditional effect, the
 #'   average effect, the two arms' restricted means, the fold
 #'   assignment, and the leakage count -- which must be zero.
+#' @references Cui, Y., Kosorok, M.R., Sverdrup, E., Wager, S. and Zhu, R. (2023)
+#'       "Estimating heterogeneous treatment effects with right-censored
+#'       data via causal survival forests." Journal of the Royal
+#'       Statistical Society Series B 85(2), 179-211.
+#'       doi:10.1093/jrsssb/qkac001.
+#'     Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Royston, P. and Parmar, M.K.B. (2013) "Restricted mean survival
+#'       time: an alternative to the hazard ratio." BMC Medical Research
+#'       Methodology 13, 152.
+#'     Uno, H. et al. (2014) "Moving beyond the hazard ratio in quantifying
+#'       the clinical benefit-risk of therapies." Journal of Clinical
+#'       Oncology 32(22), 2380-2385.
 #' @export
 #' @examples
 #' N <- 36L
@@ -223,6 +268,21 @@ morie_crsfst <- function(time, event, D, X, K = 3L, tau = NULL,
 #' One-line summary of the crsfst module
 #'
 #' @return A character scalar.
+#' @references Cui, Y., Kosorok, M.R., Sverdrup, E., Wager, S. and Zhu, R. (2023)
+#'       "Estimating heterogeneous treatment effects with right-censored
+#'       data via causal survival forests." Journal of the Royal
+#'       Statistical Society Series B 85(2), 179-211.
+#'       doi:10.1093/jrsssb/qkac001.
+#'     Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo, E., Hansen,
+#'       C., Newey, W. and Robins, J. (2018) "Double/debiased machine
+#'       learning for treatment and structural parameters." The
+#'       Econometrics Journal 21(1), C1-C68.
+#'     Royston, P. and Parmar, M.K.B. (2013) "Restricted mean survival
+#'       time: an alternative to the hazard ratio." BMC Medical Research
+#'       Methodology 13, 152.
+#'     Uno, H. et al. (2014) "Moving beyond the hazard ratio in quantifying
+#'       the clinical benefit-risk of therapies." Journal of Clinical
+#'       Oncology 32(22), 2380-2385.
 #' @export
 #' @examples
 #' morie_crsfst_cheatsheet()

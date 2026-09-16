@@ -128,6 +128,8 @@ random_sign_flip <- function(pe, rng) {
 
 #' Sparse (neighbour-restricted) attention
 #'
+#' Graph transformer: attention that respects the graph. Transformer Networks to Graphs, AAAI Workshop on Deep Learning on Graphs (arXiv:2012.09699) -- neighbour-restricted attention, Laplacian-eigenvector positional encoding, batch normalisation instead of layer normalisation, and the edge-feature pipeline; the architecture being generalised; Belkin, M. and Niyogi, M. Representation, Neural Computation 15(6) -- the eigenvectors used as the positional encoding. Native implementation mirroring Python morie.fn.gtrf exactly: the same normalised Laplacian L = I - D^\{-1/2\} A D^\{-1/2\}, the same k smallest non-trivial eigenvectors as positional encoding, the same random sign flip during training, the same neighbour-restricted softmax attention with optional edge bias, and the same attention-residual-norm, feed-forward-residual-norm block.
+#'
 #' @param H Node feature matrix.
 #' @param adj Adjacency list keyed by character 0..n-1.
 #' @param WQ Query projection.
@@ -135,6 +137,9 @@ random_sign_flip <- function(pe, rng) {
 #' @param WV Value projection.
 #' @param edge_bias Optional list of edge biases keyed by (i, j).
 #' @return List with output, note.
+#' @references Sources: Dwivedi, V. P. and Bresson, X. (2020), A Generalization of
+#'   Vaswani, A. et al. (2017), Attention Is All You Need, NIPS 2017 --
+#'   (2003), Laplacian Eigenmaps for Dimensionality Reduction and Data
 #' @export
 #' @examples
 #' set.seed(1)
@@ -229,8 +234,10 @@ graph_transformer_layer <- function(H, adj, WQ, WK, WV, W1, W2,
 }
 
 # Compact aliases
+#' @rdname graph_transformer_layer
 #' @export
 graphtransformer <- graph_transformer_layer
+#' @rdname graph_transformer_layer
 #' @export
 graph_transformer <- graph_transformer_layer
 

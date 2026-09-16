@@ -15,7 +15,7 @@
 #' @param fan_out Number of output units.
 #' @param seed RNG seed.
 #' @param uniform Use uniform (TRUE, default) or normal (FALSE).
-#' @return Named list \code{(weights, value, fan_in, fan_out, mean, std,
+#' @return Named list \eqn{(weights, value, fan_in, fan_out, mean, std,
 #'   shape, method)}.
 #' @references Glorot & Bengio (2010), AISTATS.
 #' @examples

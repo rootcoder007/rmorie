@@ -37,7 +37,7 @@
 #' admissible region.
 #'
 #' @param x Numeric return series.
-#' @return Named list with \code{omega, alpha, beta, persistence, loglik,
+#' @return Named list with \eqn{omega, alpha, beta, persistence, loglik,
 #'   conditional_variance, n, method}.
 #' @references
 #' Bollerslev, T. (1986). Generalized autoregressive conditional

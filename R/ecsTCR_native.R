@@ -255,6 +255,21 @@
 #' @param T0 initial surface anomaly.
 #' @param TD0 initial deep anomaly.
 #' @return a list with temperature, deep_temperature and imbalance.
+#' @references Charney, J.G. et al. (1979) "Carbon Dioxide and Climate: A Scientific
+#'       Assessment." National Academy of Sciences, Washington DC.
+#'     Forster, P. et al. (2021) "The Earth's Energy Budget, Climate
+#'       Feedbacks, and Climate Sensitivity", Chapter 7 of IPCC AR6 WG1,
+#'       Cambridge University Press, 923-1054,
+#'       doi:10.1017/9781009157896.009
+#'     Gregory, J.M. et al. (2004) "A new method for diagnosing radiative
+#'       forcing and climate sensitivity", Geophysical Research Letters
+#'       31(3), L03205, doi:10.1029/2003GL018747
+#'     Held, I.M. et al. (2010) "Probing the fast and slow components of
+#'       global warming by returning abruptly to preindustrial forcing",
+#'       Journal of Climate 23(9), 2418-2427, doi:10.1175/2009JCLI3466.1
+#'     Geoffroy, O. et al. (2013) "Transient climate response in a two-layer
+#'       energy-balance model. Part I", Journal of Climate 26(6), 1841-1857,
+#'       doi:10.1175/JCLI-D-12-00195.1
 #' @export
 #' @examples
 #' morie_ecsTCR_integrate(forcing = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
@@ -360,6 +375,21 @@ morie_ecsTCR_co2_forcing <- function(ratio, f2x = .ECSTCR_F2X)
 #'   doubling_year, realised_warming_fraction, temperature,
 #'   deep_temperature, imbalance, fitted, charney_range, within_charney,
 #'   route, solver and method.
+#' @references Charney, J.G. et al. (1979) "Carbon Dioxide and Climate: A Scientific
+#'       Assessment." National Academy of Sciences, Washington DC.
+#'     Forster, P. et al. (2021) "The Earth's Energy Budget, Climate
+#'       Feedbacks, and Climate Sensitivity", Chapter 7 of IPCC AR6 WG1,
+#'       Cambridge University Press, 923-1054,
+#'       doi:10.1017/9781009157896.009
+#'     Gregory, J.M. et al. (2004) "A new method for diagnosing radiative
+#'       forcing and climate sensitivity", Geophysical Research Letters
+#'       31(3), L03205, doi:10.1029/2003GL018747
+#'     Held, I.M. et al. (2010) "Probing the fast and slow components of
+#'       global warming by returning abruptly to preindustrial forcing",
+#'       Journal of Climate 23(9), 2418-2427, doi:10.1175/2009JCLI3466.1
+#'     Geoffroy, O. et al. (2013) "Transient climate response in a two-layer
+#'       energy-balance model. Part I", Journal of Climate 26(6), 1841-1857,
+#'       doi:10.1175/JCLI-D-12-00195.1
 #' @export
 #' @keywords internal
 morie_ecsTCR <- function(model_run = NULL, CO2_traj = NULL,

@@ -18,6 +18,8 @@
 # (contact distribution or 'point-to-event' distribution)". Schabenberger &
 # Gotway (2005) sec. 3.3.4, pp. 97-98.
 
+#' morie_empty_space_function
+#'
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' rmorie:::morie_empty_space_function(M)

@@ -19,6 +19,8 @@
 #
 # Cressie (1993), Statistics for Spatial Data, rev. edn., sec. 2.3.1.
 
+#' morie_gaussian_variogram_model
+#'
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_gaussian_variogram_model(V)

@@ -35,7 +35,7 @@
 #' ARCH(1)-in-mean model
 #'
 #' @inheritParams morie_garch_fit
-#' @return Named list with \code{mu, delta, omega, alpha, loglik,
+#' @return Named list with \eqn{mu, delta, omega, alpha, loglik,
 #'   conditional_variance, n, method}.
 #' @examples
 #' set.seed(1)

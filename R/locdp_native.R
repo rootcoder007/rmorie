@@ -68,6 +68,15 @@
 #' @param epsilon A vector; its length is taken. Defaults to \code{1}.
 #' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{y}, \code{epsilon}, \code{p}, \code{n}, \code{rng}.
+#' @references ----------
+#'   Kasiviswanathan, S. P., Lee, H. K., Nissim, K., Raskhodnikova, S., &
+#'       Smith, A. (2011). What can we learn privately? *SIAM Journal on
+#'       Computing*, 40(3), 793-826. (Local model, section 1; randomized
+#'       response as the basic local protocol.)
+#'   Warner, S. L. (1965). Randomized response: a survey technique for
+#'       eliminating evasive answer bias. *JASA*, 60(309), 63-69.
+#'   Dwork, C., & Roth, A. (2014). *FnT-TCS*, 9(3-4), section 3.2.
+#'       Local source: /run/media/rootcoder/WD_BLACK/library/pdf/fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -119,6 +128,15 @@ morie_localdp  <- morie_locdp
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Kasiviswanathan, S. P., Lee, H. K., Nissim, K., Raskhodnikova, S., &
+#'       Smith, A. (2011). What can we learn privately? *SIAM Journal on
+#'       Computing*, 40(3), 793-826. (Local model, section 1; randomized
+#'       response as the basic local protocol.)
+#'   Warner, S. L. (1965). Randomized response: a survey technique for
+#'       eliminating evasive answer bias. *JASA*, 60(309), 63-69.
+#'   Dwork, C., & Roth, A. (2014). *FnT-TCS*, 9(3-4), section 3.2.
+#'       Local source: /run/media/rootcoder/WD_BLACK/library/pdf/fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
 #' @export
 #' @examples
 #' morie_locdp_cheatsheet()

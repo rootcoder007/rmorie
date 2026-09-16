@@ -109,6 +109,14 @@
 #' @param ridge Passed to \code{.s03logit}. Defaults to \code{1e-06}.
 #' @return A list with \code{weights}, \code{pi}, \code{max_weight}, \code{ess},
 #' \code{ess_fraction}, \code{n_source}, \code{coef}, \code{method}.
+#' @references ----------
+#'   Wager, S. (2025) Causal Inference: A Statistical Learning Approach,
+#'   Stanford University, draft of 26 November 2025. Chapters 2 (Sec.
+#'   2.2), 3, and 7 (Secs. 7.1-7.2).
+#'   
+#'   Notes: the ledger recorded this as "Athey-Wager (2019),
+#'   transfer-learning MSM across cohorts"; no paper of that title was
+#'   located and the implementation follows Wager (2025).
 #' @export
 #' @examples
 #' set.seed(1)
@@ -174,6 +182,14 @@ morie_trnsfr_transport_weights <- function(X, S, trim = 1e-3, ridge = 1e-6) {
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
 #' @return A list with \code{weights}, \code{target_moments}, \code{achieved},
 #' \code{max_imbalance}, \code{n_negative}, \code{positive_mass}, \code{method}.
+#' @references ----------
+#'   Wager, S. (2025) Causal Inference: A Statistical Learning Approach,
+#'   Stanford University, draft of 26 November 2025. Chapters 2 (Sec.
+#'   2.2), 3, and 7 (Secs. 7.1-7.2).
+#'   
+#'   Notes: the ledger recorded this as "Athey-Wager (2019),
+#'   transfer-learning MSM across cohorts"; no paper of that title was
+#'   located and the implementation follows Wager (2025).
 #' @export
 #' @examples
 #' set.seed(1)
@@ -241,6 +257,14 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge = 1e-8) {
 #' @return A list with \code{estimate}, \code{source_ate}, \code{outcome_route},
 #' \code{n_source}, \code{n_target}, \code{method}, \code{diagnostics},
 #' \code{assumption}.
+#' @references ----------
+#'   Wager, S. (2025) Causal Inference: A Statistical Learning Approach,
+#'   Stanford University, draft of 26 November 2025. Chapters 2 (Sec.
+#'   2.2), 3, and 7 (Secs. 7.1-7.2).
+#'   
+#'   Notes: the ledger recorded this as "Athey-Wager (2019),
+#'   transfer-learning MSM across cohorts"; no paper of that title was
+#'   located and the implementation follows Wager (2025).
 #' @export
 #' @examples
 #' set.seed(2)
@@ -372,6 +396,14 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method = "dr", e = NULL,
 #' @return A list with \code{estimate}, \code{intercept}, \code{coef}, \code{weights},
 #' \code{transport_weights}, \code{msm_weights}, \code{target}, \code{cohorts}, \code{n},
 #' \code{method}.
+#' @references ----------
+#'   Wager, S. (2025) Causal Inference: A Statistical Learning Approach,
+#'   Stanford University, draft of 26 November 2025. Chapters 2 (Sec.
+#'   2.2), 3, and 7 (Secs. 7.1-7.2).
+#'   
+#'   Notes: the ledger recorded this as "Athey-Wager (2019),
+#'   transfer-learning MSM across cohorts"; no paper of that title was
+#'   located and the implementation follows Wager (2025).
 #' @export
 #' @examples
 #' set.seed(3)
@@ -455,6 +487,14 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target = 0, e = NULL,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Wager, S. (2025) Causal Inference: A Statistical Learning Approach,
+#'   Stanford University, draft of 26 November 2025. Chapters 2 (Sec.
+#'   2.2), 3, and 7 (Secs. 7.1-7.2).
+#'   
+#'   Notes: the ledger recorded this as "Athey-Wager (2019),
+#'   transfer-learning MSM across cohorts"; no paper of that title was
+#'   located and the implementation follows Wager (2025).
 #' @export
 #' @examples
 #' morie_trnsfr_cheatsheet()
@@ -477,5 +517,6 @@ morie_trnsfr_cheatsheet <- function() {
 morie_trnsfr_transferlearningmsm <- morie_trnsfr_transfer_msm
 morie_trnsfr_transfer_learning_msm <- morie_trnsfr_transfer_msm
 
+#' @rdname morie_trnsfr_transport_ate
 #' @export
 morie_trnsfr <- morie_trnsfr_transport_ate

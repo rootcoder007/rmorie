@@ -25,7 +25,7 @@
 #' @param x High-frequency regressor matrix (n_t x K) or flat vector.
 #' @param y Low-frequency target (length n_t).
 #' @param K Number of high-frequency lags (required when x is flat).
-#' @return Named list with \code{beta0, beta1, theta1, theta2, weights,
+#' @return Named list with \eqn{beta0, beta1, theta1, theta2, weights,
 #'   r2, n, K, method}.
 #' @examples
 #' # See the package vignettes for usage examples:

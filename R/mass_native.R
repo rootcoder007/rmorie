@@ -307,6 +307,7 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
 #' @param object A \code{negbin} object.
 #' @param dispersion A \code{negbin} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `s`, as built in the body.
 #' @examples
 #' set.seed(1)
 #' x <- rnorm(60)
@@ -330,6 +331,7 @@ summary.negbin <- function(object, dispersion = 1, ...) {
 #'
 #' @param object A \code{negbin} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `val`, as built in the body.
 #' @examples
 #' if (requireNamespace("MASS", quietly = TRUE)) {
 #'   D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -429,6 +431,7 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
 #'
 #' @param object A \code{morie_rlm} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return A list with `coefficients`, `s`, `stddev`.
 #' @examples
 #' set.seed(1)
 #' x <- rnorm(50)
@@ -571,6 +574,7 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
 #'
 #' @param object A \code{morie_polr} object.
 #' @param ... Ignored; accepted for S3 consistency.
+#' @return The value of `val`, as built in the body.
 #' @examples
 #' if (requireNamespace("MASS", quietly = TRUE)) {
 #'   set.seed(1)

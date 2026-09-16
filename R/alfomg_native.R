@@ -79,6 +79,14 @@
 #'
 #' @param logits A numeric vector.
 #' @return A vector of the same length summing to one.
+#' @references Jumper, J. et al. (2021) "Highly accurate protein structure
+#'       prediction with AlphaFold." Nature 596, 583-589.
+#'       doi:10.1038/s41586-021-03819-2. Supplementary Algorithms 7 and 10.
+#'     Ahdritz, G. et al. (2022) "OpenFold: retraining AlphaFold2 yields
+#'       new insights into its learning mechanisms and capacity for
+#'       generalization." bioRxiv 2022.11.20.517210.
+#'     Vaswani, A. et al. (2017) "Attention is all you need." NeurIPS 30,
+#'       5998-6008.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -106,6 +114,14 @@ morie_alfomg_softmax <- function(logits) {
 #' @param msa The alignment, a list of sequences, each a list of
 #'   channel vectors.
 #' @return A list of lists of numeric vectors.
+#' @references Jumper, J. et al. (2021) "Highly accurate protein structure
+#'       prediction with AlphaFold." Nature 596, 583-589.
+#'       doi:10.1038/s41586-021-03819-2. Supplementary Algorithms 7 and 10.
+#'     Ahdritz, G. et al. (2022) "OpenFold: retraining AlphaFold2 yields
+#'       new insights into its learning mechanisms and capacity for
+#'       generalization." bioRxiv 2022.11.20.517210.
+#'     Vaswani, A. et al. (2017) "Attention is all you need." NeurIPS 30,
+#'       5998-6008.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -152,6 +168,14 @@ morie_alfomg_opm <- function(msa) {
 #' @param pair The pair representation, a list of rows of vectors.
 #' @param w The learned map, or NULL.
 #' @return An r by r numeric matrix.
+#' @references Jumper, J. et al. (2021) "Highly accurate protein structure
+#'       prediction with AlphaFold." Nature 596, 583-589.
+#'       doi:10.1038/s41586-021-03819-2. Supplementary Algorithms 7 and 10.
+#'     Ahdritz, G. et al. (2022) "OpenFold: retraining AlphaFold2 yields
+#'       new insights into its learning mechanisms and capacity for
+#'       generalization." bioRxiv 2022.11.20.517210.
+#'     Vaswani, A. et al. (2017) "Attention is all you need." NeurIPS 30,
+#'       5998-6008.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -186,6 +210,14 @@ morie_alfomg_bias <- function(pair, w = NULL) {
 #' @param scale The attention temperature; NULL is one over root c.
 #' @param gate A per-channel output multiplier, or NULL for ungated.
 #' @return A list with the attention weights and the attended output.
+#' @references Jumper, J. et al. (2021) "Highly accurate protein structure
+#'       prediction with AlphaFold." Nature 596, 583-589.
+#'       doi:10.1038/s41586-021-03819-2. Supplementary Algorithms 7 and 10.
+#'     Ahdritz, G. et al. (2022) "OpenFold: retraining AlphaFold2 yields
+#'       new insights into its learning mechanisms and capacity for
+#'       generalization." bioRxiv 2022.11.20.517210.
+#'     Vaswani, A. et al. (2017) "Attention is all you need." NeurIPS 30,
+#'       5998-6008.
 #' @export
 #' @examples
 #' S <- 3L
@@ -263,6 +295,14 @@ morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
 #' @param gate A per-channel output gate; NULL is ungated.
 #' @return A list with the outer product mean, the attention bias and
 #'   weights, the updated alignment, and the pair representation.
+#' @references Jumper, J. et al. (2021) "Highly accurate protein structure
+#'       prediction with AlphaFold." Nature 596, 583-589.
+#'       doi:10.1038/s41586-021-03819-2. Supplementary Algorithms 7 and 10.
+#'     Ahdritz, G. et al. (2022) "OpenFold: retraining AlphaFold2 yields
+#'       new insights into its learning mechanisms and capacity for
+#'       generalization." bioRxiv 2022.11.20.517210.
+#'     Vaswani, A. et al. (2017) "Attention is all you need." NeurIPS 30,
+#'       5998-6008.
 #' @export
 #' @examples
 #' morie_alfomg(msa = c(1, 2, 3, 4, 5, 6, 7, 8), pair = 5L)
@@ -340,6 +380,14 @@ morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
 #' One-line summary of the alfomg module
 #'
 #' @return A character scalar.
+#' @references Jumper, J. et al. (2021) "Highly accurate protein structure
+#'       prediction with AlphaFold." Nature 596, 583-589.
+#'       doi:10.1038/s41586-021-03819-2. Supplementary Algorithms 7 and 10.
+#'     Ahdritz, G. et al. (2022) "OpenFold: retraining AlphaFold2 yields
+#'       new insights into its learning mechanisms and capacity for
+#'       generalization." bioRxiv 2022.11.20.517210.
+#'     Vaswani, A. et al. (2017) "Attention is all you need." NeurIPS 30,
+#'       5998-6008.
 #' @export
 #' @examples
 #' morie_alfomg_cheatsheet()

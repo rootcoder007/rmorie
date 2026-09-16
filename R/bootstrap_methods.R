@@ -1105,7 +1105,7 @@ subsampling <- function(data, statistic, subsample_size = NULL,
 #'
 #' Computes apparent error, mean OOB bootstrap error, the .632
 #' estimator (Efron 1983), and the .632+ no-information-adjusted
-#' estimator (Efron and Tibshirani 1997). \code{ipred::errorest(...,
+#' estimator (Efron and Tibshirani 1997). \eqn{ipred::errorest(...,
 #' estimator = "632plus")} implements the same family in
 #' \pkg{ipred}; it is cross-referenced for users who already work
 #' with \pkg{ipred}'s `predict.\<learner\>` ecosystem. The inline

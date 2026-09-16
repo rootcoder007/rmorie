@@ -34,6 +34,8 @@
   v
 }
 
+#' morie_item_characteristic_curve
+#'
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' rmorie:::morie_item_characteristic_curve(V)

@@ -284,6 +284,22 @@
 #' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param deltas Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{L}, \code{R}.
+#' @references ----------
+#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
+#'   Raton: Chapman & Hall/CRC, Ch. 17 "Causal survival analysis" --
+#'   Sec. 17.2 hazards to risks, Sec. 17.3 why censoring matters, Sec. 17.4
+#'   IP weighting of marginal structural models.
+#'   
+#'   van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in
+#'   Data Science, Springer Series in Statistics,
+#'   doi:10.1007/978-3-319-65304-4, Sec. 8.5 "Causal Effect of Binary
+#'   Treatment on Interval Censored Time to Event" -- the data structure,
+#'   the coarsening C(o) = (L(o), R(o)], and the IPCW estimator above.
+#'   
+#'   Note on the ledger citation: its key "Stitelman-Lendle-vdL (2011)" does
+#'   not resolve to any paper; a bibliographic search returns the ltmle
+#'   software package instead. The two sources above are what this is built
+#'   from.
 #' @export
 #' @examples
 #' times <- c(1.2, 3.4, 2.1, 5.0)
@@ -330,6 +346,22 @@ morie_coarsen_interval <- function(times, deltas) {
 #' Defaults to \code{TRUE}.
 #' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
 #' @return A list with \code{G}, \code{grid}, \code{b}.
+#' @references ----------
+#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
+#'   Raton: Chapman & Hall/CRC, Ch. 17 "Causal survival analysis" --
+#'   Sec. 17.2 hazards to risks, Sec. 17.3 why censoring matters, Sec. 17.4
+#'   IP weighting of marginal structural models.
+#'   
+#'   van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in
+#'   Data Science, Springer Series in Statistics,
+#'   doi:10.1007/978-3-319-65304-4, Sec. 8.5 "Causal Effect of Binary
+#'   Treatment on Interval Censored Time to Event" -- the data structure,
+#'   the coarsening C(o) = (L(o), R(o)], and the IPCW estimator above.
+#'   
+#'   Note on the ledger citation: its key "Stitelman-Lendle-vdL (2011)" does
+#'   not resolve to any paper; a bibliographic search returns the ltmle
+#'   software package instead. The two sources above are what this is built
+#'   from.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -412,6 +444,22 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 #' @param gc Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
 #' @return A numeric value.
+#' @references ----------
+#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
+#'   Raton: Chapman & Hall/CRC, Ch. 17 "Causal survival analysis" --
+#'   Sec. 17.2 hazards to risks, Sec. 17.3 why censoring matters, Sec. 17.4
+#'   IP weighting of marginal structural models.
+#'   
+#'   van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in
+#'   Data Science, Springer Series in Statistics,
+#'   doi:10.1007/978-3-319-65304-4, Sec. 8.5 "Causal Effect of Binary
+#'   Treatment on Interval Censored Time to Event" -- the data structure,
+#'   the coarsening C(o) = (L(o), R(o)], and the IPCW estimator above.
+#'   
+#'   Note on the ledger citation: its key "Stitelman-Lendle-vdL (2011)" does
+#'   not resolve to any paper; a bibliographic search returns the ltmle
+#'   software package instead. The two sources above are what this is built
+#'   from.
 #' @export
 #' @keywords internal
 morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
@@ -489,6 +537,22 @@ morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
 #' @param gc Passed to \code{morie_ipcw_interval}.
 #' @param trim Numeric; passed to \code{max}. Defaults to \code{0.001}.
 #' @return The value of \code{.tmlcen_RichResult}.
+#' @references ----------
+#'   Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
+#'   Raton: Chapman & Hall/CRC, Ch. 17 "Causal survival analysis" --
+#'   Sec. 17.2 hazards to risks, Sec. 17.3 why censoring matters, Sec. 17.4
+#'   IP weighting of marginal structural models.
+#'   
+#'   van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in
+#'   Data Science, Springer Series in Statistics,
+#'   doi:10.1007/978-3-319-65304-4, Sec. 8.5 "Causal Effect of Binary
+#'   Treatment on Interval Censored Time to Event" -- the data structure,
+#'   the coarsening C(o) = (L(o), R(o)], and the IPCW estimator above.
+#'   
+#'   Note on the ledger citation: its key "Stitelman-Lendle-vdL (2011)" does
+#'   not resolve to any paper; a bibliographic search returns the ltmle
+#'   software package instead. The two sources above are what this is built
+#'   from.
 #' @export
 #' @examples
 #' morie_tmle_censoring(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(1, 2, 3, 4, 5, 6, 7, 8),

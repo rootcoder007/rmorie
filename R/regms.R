@@ -7,7 +7,7 @@
 #'
 #' @param x Numeric univariate series.
 #' @param k_regimes Number of latent regimes. Default 2.
-#' @return Named list with \code{mu, sigma, transition,
+#' @return Named list with \eqn{mu, sigma, transition,
 #'   smoothed_probabilities, loglik, n, k_regimes, method}.
 #' @examples
 #' set.seed(1)

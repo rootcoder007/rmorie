@@ -150,6 +150,13 @@
 #'
 #' @param name Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{list}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -168,6 +175,13 @@ morie_unifAlg_var <- function(name) {
 #' @param symbol Coerced to character by the body, with \code{as.character}.
 #' @param ... Passed through.
 #' @return The value of \code{list}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -186,6 +200,13 @@ morie_unifAlg_app <- function(symbol, ...) {
 #'
 #' @param symbol Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{list}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -203,6 +224,13 @@ morie_unifAlg_const <- function(symbol) {
 #'
 #' @param t Passed to \code{.unifAlg_is_var}.
 #' @return The value of \code{.unifAlg_is_var}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -221,6 +249,13 @@ morie_unifAlg_is_var <- function(t) {
 #'
 #' @param t Passed to \code{.unifAlg_check}.
 #' @return The value of \code{$}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -260,6 +295,13 @@ morie_unifAlg_variables <- function(t) {
 #' @param name Coerced to character by the body, with \code{as.character}.
 #' @param t Passed to \code{morie_unifAlg_variables}.
 #' @return The value of \code{%in%}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -280,6 +322,13 @@ morie_unifAlg_occurs <- function(name, t) {
 #' @param t Passed to \code{.unifAlg_check}.
 #' @param subst Passed to \code{.unifAlg_apply_once}.
 #' @return Nothing; this branch always raises.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -309,6 +358,13 @@ morie_unifAlg_apply_subst <- function(t, subst) {
 #' @param t Passed to \code{.unifAlg_check}.
 #' @param subst Passed to \code{.unifAlg_apply_once}.
 #' @return The value of \code{.unifAlg_apply_once}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -328,6 +384,13 @@ morie_unifAlg_substitute <- function(t, subst) {
 #' @param outer A vector; indexed elementwise.
 #' @param inner A vector; indexed elementwise.
 #' @return The value of \code{[}.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -360,6 +423,13 @@ morie_unifAlg_compose <- function(outer, inner) {
 #' @param t1 Passed to \code{.unifAlg_check}.
 #' @param t2 Passed to \code{.unifAlg_check}.
 #' @return Nothing; the function is called for its effect.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' a <- morie_unifAlg_app("f", morie_unifAlg_var("x"), morie_unifAlg_const("b"))
@@ -397,6 +467,13 @@ morie_unifAlg_disagreement <- function(t1, t2) {
 #' @param t2 Passed to \code{.unifAlg_check}.
 #' @param occurs_check A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return Nothing; this branch always raises.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' a <- morie_unifAlg_app("f", morie_unifAlg_var("x"), morie_unifAlg_const("b"))
@@ -470,6 +547,13 @@ morie_unifAlg_unify <- function(t1, t2, occurs_check = TRUE) {
 #' @param pattern Passed to \code{.unifAlg_check}.
 #' @param subject Passed to \code{.unifAlg_check}.
 #' @return The value of \code{sub}, as built in the body.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' pat <- morie_unifAlg_app("f", morie_unifAlg_var("x"))
@@ -520,6 +604,13 @@ morie_unifAlg_match <- function(pattern, subject) {
 #' @param other Passed to \code{morie_unifAlg_apply_subst}.
 #' @param over See Usage.
 #' @return The value of \code{delta}, as built in the body.
+#' @references ----------
+#'   Robinson, J. A. (1965) "A Machine-Oriented Logic Based on the
+#'   Resolution Principle", *Journal of the ACM* 12(1), 23-41,
+#'   doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
+#'   unifiable set has a most general unifier), the disagreement-set
+#'   algorithm, the occurs check, and the factorisation
+#'   \eqn{\theta = \delta \circ \sigma} reproduced above.
 #' @export
 #' @examples
 #' morie_unifAlg_factor_through(general = c(1, 2, 3, 4, 5, 6, 7, 8),

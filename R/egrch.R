@@ -78,7 +78,7 @@
 #' loaded or called.
 #'
 #' @inheritParams morie_garch_fit
-#' @return Named list with \code{omega, alpha, gamma, beta, loglik,
+#' @return Named list with \eqn{omega, alpha, gamma, beta, loglik,
 #'   conditional_variance, n, method}.
 #' @references
 #' Nelson, D. B. (1991). Conditional heteroskedasticity in asset returns:

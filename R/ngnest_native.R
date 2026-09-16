@@ -190,6 +190,22 @@
 #' @param how Passed to \code{.ngnest_aggregate_forecasts}. Defaults to \code{"median"}.
 #' @param ridge Passed to \code{.ngnest_ensemble_members}. Defaults to \code{1e-08}.
 #' @return The value of \code{result}, as built in the body.
+#' @references ----------
+#'   Oreshkin, B. N., Carpov, D., Chapados, N. & Bengio, Y. (2020)
+#'   "N-BEATS: Neural basis expansion analysis for interpretable time series
+#'   forecasting", *International Conference on Learning Representations*,
+#'   arXiv:1905.10437. Sec. 3.3 (ensembling), Sec. 5.
+#'   
+#'   Makridakis, S., Spiliotis, E. & Assimakopoulos, V. (2020) "The M4
+#'   Competition: 100,000 time series and 61 forecasting methods",
+#'   *International Journal of Forecasting* 36(1), 54-74,
+#'   doi:10.1016/j.ijforecast.2019.04.014. The benchmark those numbers come
+#'   from, and where combination dominated.
+#'   
+#'   Bates, J. M. & Granger, C. W. J. (1969) "The Combination of Forecasts",
+#'   *Journal of the Operational Research Society* 20(4), 451-468,
+#'   doi:10.1057/jors.1969.103. Why combining decorrelated forecasts beats
+#'   choosing among them.
 #' @export
 #' @keywords internal
 morie_ngnest <- function(y, horizon,

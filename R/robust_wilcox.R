@@ -11,6 +11,8 @@
 # re-deriving the distribution functions, which the Python side must do
 # because it carries no numeric dependency.
 
+#' morie_robust_trim_counts
+#'
 #' @examples
 #' rmorie:::morie_robust_trim_counts(n = 20, tr = 0.2)
 #' @keywords internal
@@ -549,6 +551,10 @@ morie_brunner_dette_munk <- function(groups) {
 #' @param tr amount of trimming or Winsorizing
 #' @param equal_variance pool the Winsorized variances
 #' @return a list; see each method's description
+#' @param x, y numeric vectors
+#' @param X Argument `X`; see Usage.
+#' @param n_iter Argument `n_iter`; see Usage.
+#' @param tol Argument `tol`; see Usage.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

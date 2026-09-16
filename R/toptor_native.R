@@ -256,6 +256,7 @@ morie_toptor <- function(elements, bonds, reference = NULL,
   out
 }
 
+#' @rdname morie_toptor
 #' Compact alias per ledger/NAMING.md
 #' @export
 #' @noRd

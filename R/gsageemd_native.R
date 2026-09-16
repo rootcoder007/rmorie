@@ -166,6 +166,8 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 
 #' Inductive node embeddings by K GraphSAGE layers
 #'
+#' GraphSAGE: embeddings for nodes the model has never seen. Inductive Representation Learning on Large Graphs, NeurIPS 2017 (arXiv:1706.02216) -- Algorithm 1, the three aggregators and Supervised Classification with Graph Convolutional Networks, ICLR 2017 (arXiv:1609.02907) -- the transductive convolution that GraphSAGE extends. Native implementation mirroring Python morie.fn.gsageemd exactly: the same mean, max_pool and lstm_order aggregators, the same fixed-size neighbour sampling with replacement when the budget exceeds the neighbourhood, the same L2 normalisation after each layer, and the same unsupervised graph-based loss.
+#'
 #' @param features Node feature matrix.
 #' @param adj Adjacency list.
 #' @param Ws List of weight matrices, one per layer.
@@ -174,6 +176,8 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 #' @param seed Seed for the shared generator.
 #' @return List with estimate, embeddings, depth, aggregator,
 #'   per_batch_bound, method, note.
+#' @references Sources: Hamilton, W. L., Ying, R. and Leskovec, J. (2017),
+#'   the unsupervised loss; Kipf, T. N. and Welling, M. (2017), Semi-
 #' @export
 #' @examples
 #' set.seed(1)
@@ -223,6 +227,7 @@ unsupervised_loss <- function(z_u, z_v, z_negatives) {
   -(pos + neg)
 }
 
+#' @rdname morie_gsageemd_embed
 #' @export
 graphsage <- morie_gsageemd_embed
 

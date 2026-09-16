@@ -53,6 +53,17 @@
 #' @return A list with \code{reduce_params}, \code{cls_params}, \code{reg_params},
 #' \code{total}, \code{coupled_total}, \code{branches}, \code{extra_latency_ms},
 #' \code{note}.
+#' @references ----------
+#'   Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
+#'   YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
+#'   
+#'   Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
+#'   Transport Assignment for Object Detection", CVPR 2021, 303-312,
+#'   arXiv:2103.14259.
+#'   
+#'   Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
+#'   Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
+#'   arXiv:1904.01355.
 #' @export
 #' @examples
 #' morie_yolovx_decoupled_head(channels = 5L)
@@ -93,6 +104,17 @@ morie_yolovx_decoupled_head <- function(channels, reduced = 256,
 #' @param cy Coerced to numeric by the body, with \code{as.numeric}.
 #' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{ltrb}, \code{center}, \code{stride}.
+#' @references ----------
+#'   Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
+#'   YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
+#'   
+#'   Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
+#'   Transport Assignment for Object Detection", CVPR 2021, 303-312,
+#'   arXiv:2103.14259.
+#'   
+#'   Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
+#'   Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
+#'   arXiv:1904.01355.
 #' @export
 #' @keywords internal
 morie_yolovx_encode_box <- function(box, cx, cy, stride = 1.0) {
@@ -131,6 +153,17 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride = 1.0) {
 #' @param cy Coerced to numeric by the body, with \code{as.numeric}.
 #' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A vector, from \code{c}.
+#' @references ----------
+#'   Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
+#'   YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
+#'   
+#'   Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
+#'   Transport Assignment for Object Detection", CVPR 2021, 303-312,
+#'   arXiv:2103.14259.
+#'   
+#'   Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
+#'   Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
+#'   arXiv:1904.01355.
 #' @export
 #' @examples
 #' morie_yolovx_decode_box(ltrb = c(1, 2, 3, 4, 5, 6, 7, 8), cx = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -161,6 +194,17 @@ morie_yolovx_decode_box <- function(ltrb, cx, cy, stride = 1.0) {
 #' @param a A vector; indexed elementwise.
 #' @param b A vector; indexed elementwise.
 #' @return One of two values, depending on the branch taken.
+#' @references ----------
+#'   Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
+#'   YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
+#'   
+#'   Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
+#'   Transport Assignment for Object Detection", CVPR 2021, 303-312,
+#'   arXiv:2103.14259.
+#'   
+#'   Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
+#'   Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
+#'   arXiv:1904.01355.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -191,6 +235,17 @@ morie_yolovx_box_iou <- function(a, b) {
 #' @param radius Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
 #' @return A list with \code{in_box}, \code{in_center}, \code{candidates},
 #' \code{n_candidates}, \code{single_center}, \code{note}.
+#' @references ----------
+#'   Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
+#'   YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
+#'   
+#'   Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
+#'   Transport Assignment for Object Detection", CVPR 2021, 303-312,
+#'   arXiv:2103.14259.
+#'   
+#'   Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
+#'   Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
+#'   arXiv:1904.01355.
 #' @export
 #' @examples
 #' morie_yolovx_center_sampling(box = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -263,6 +318,17 @@ morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride = 1.0,
 #' \code{as.integer}.
 #' @return A list with \code{estimate}, \code{assignment}, \code{dynamic_k},
 #' \code{n_positives}, \code{contested}, \code{method}, \code{note}.
+#' @references ----------
+#'   Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
+#'   YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
+#'   
+#'   Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
+#'   Transport Assignment for Object Detection", CVPR 2021, 303-312,
+#'   arXiv:2103.14259.
+#'   
+#'   Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
+#'   Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
+#'   arXiv:1904.01355.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -336,6 +402,17 @@ morie_yolovx_simota_assign <- function(costs, ious, top_q = 10, max_k = NULL) {
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Ge, Z., Liu, S., Wang, F., Li, Z. & Sun, J. (2021) "YOLOX: Exceeding
+#'   YOLO Series in 2021", arXiv:2107.08430. Sec. 2.
+#'   
+#'   Ge, Z., Liu, S., Li, Z., Yoshie, O. & Sun, J. (2021) "OTA: Optimal
+#'   Transport Assignment for Object Detection", CVPR 2021, 303-312,
+#'   arXiv:2103.14259.
+#'   
+#'   Tian, Z., Shen, C., Chen, H. & He, T. (2019) "FCOS: Fully
+#'   Convolutional One-Stage Object Detection", ICCV 2019, 9627-9636,
+#'   arXiv:1904.01355.
 #' @export
 #' @examples
 #' morie_yolovx_cheatsheet()
@@ -361,5 +438,6 @@ morie_yolovx_yoloxhead <- morie_yolovx_simota_assign
 # public names resolved by fn/_lazy_map.json
 morie_yolovx_yolo_decoupled_head <- morie_yolovx_simota_assign
 
+#' @rdname morie_yolovx_simota_assign
 #' @export
 morie_yolovx <- morie_yolovx_simota_assign

@@ -606,5 +606,6 @@ morie_wrd2v_cheatsheet <- function() {
 # compact alias per ledger/NAMING.md
 morie_wrd2v_word2vec <- morie_wrd2v_wrd2v
 
+#' @rdname morie_wrd2v_wrd2v
 #' @export
 morie_wrd2v <- morie_wrd2v_wrd2v

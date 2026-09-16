@@ -5,7 +5,7 @@
 #' @param x Numeric univariate series.
 #' @param wavelet Wavelet family. Default "haar".
 #' @param level Decomposition depth. Default floor(log2 n) capped at 6.
-#' @return Named list with \code{approximation, details, energies, level,
+#' @return Named list with \eqn{approximation, details, energies, level,
 #'   n, wavelet, method}.
 #' @examples
 #' set.seed(1)

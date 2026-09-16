@@ -80,6 +80,18 @@
 #' @param lhs Passed to \code{.trmRew_is_var}.
 #' @param rhs Passed to \code{morie_unifAlg_variables}.
 #' @return The value of \code{list}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -116,6 +128,18 @@ morie_trmRew_rule <- function(lhs, rhs) {
 #'
 #' @param t A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -147,6 +171,18 @@ morie_trmRew_positions <- function(t) {
 #' @param t See Usage.
 #' @param pos See Usage.
 #' @return The value of \code{cur}, as built in the body.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -176,6 +212,18 @@ morie_trmRew_subterm_at <- function(t, pos) {
 #' @param pos A vector; its length is taken and its elements indexed.
 #' @param new Passed to \code{morie_trmRew_replace_at}.
 #' @return The value of \code{.trmRew_app}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -207,6 +255,18 @@ morie_trmRew_replace_at <- function(t, pos, new) {
 #' @param rules A vector; its length is taken and its elements indexed.
 #' @param strategy Compared against \code{"innermost"}. Defaults to \code{"innermost"}.
 #' @return Nothing; the function is called for its effect.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -269,6 +329,18 @@ morie_trmRew_rewrite_step <- function(t, rules, strategy = "innermost") {
 #' @param max_steps Coerced to integer by the body, with \code{as.integer}. Defaults to
 #' \code{10000}.
 #' @return Nothing; this branch always raises.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -330,6 +402,18 @@ morie_trmRew_normal_form <- function(t, rules, strategy = "innermost",
 #' @param t A vector; indexed elementwise.
 #' @param precedence Passed to \code{morie_trmRew_lpo_greater}.
 #' @return A logical value.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' morie_trmRew_lpo_greater(s = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8),
@@ -391,6 +475,18 @@ morie_trmRew_lpo_greater <- function(s, t, precedence) {
 #' @param rules A vector; its length is taken and its elements indexed.
 #' @param precedence Passed to \code{morie_trmRew_lpo_greater}.
 #' @return A list with \code{terminating}, \code{unoriented}, \code{method}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -483,6 +579,18 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
 #'
 #' @param rules A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -516,6 +624,18 @@ morie_trmRew_critical_pairs <- function(rules) {
 #' @param rules Passed to \code{morie_trmRew_normal_form}.
 #' @param max_steps Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.
 #' @return The value of \code{res}, as built in the body.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' morie_trmRew_joinable(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, rules = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -543,6 +663,18 @@ morie_trmRew_joinable <- function(a, b, rules, max_steps = 10000) {
 #' @param max_steps Passed to \code{morie_trmRew_joinable}. Defaults to \code{10000}.
 #' @return A list with \code{estimate}, \code{locally_confluent},
 #' \code{n_critical_pairs}, \code{unjoinable}, \code{method}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -578,6 +710,18 @@ morie_trmRew_is_locally_confluent <- function(rules, max_steps = 10000) {
 #' @param max_steps Passed to \code{morie_trmRew_is_locally_confluent}. Defaults to \code{10000}.
 #' @return A list with \code{estimate}, \code{confluent}, \code{terminating},
 #' \code{locally_confluent}, \code{n_critical_pairs}, \code{unjoinable}, \code{method}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -705,6 +849,18 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #' @param max_steps Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4000}.
 #' @return The value of \code{.trmRew_incomplete}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -805,6 +961,18 @@ morie_trmRew_complete <- function(equations, precedence, max_rules = 60,
 #' @param rules Passed to \code{morie_trmRew_normal_form}.
 #' @param max_steps Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.
 #' @return A list with \code{equal}, \code{left}, \code{right}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -833,6 +1001,18 @@ morie_trmRew_decides <- function(s, t, rules, max_steps = 10000) {
 #' @param max_steps Passed to \code{morie_trmRew_normal_form}. Defaults to \code{10000}.
 #' @return A list with \code{estimate}, \code{normal_form}, \code{steps}, \code{trace},
 #' \code{strategy}, \code{method}.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' x <- morie_unifAlg_var("x")
@@ -859,6 +1039,18 @@ morie_trmRew_term_rewriting <- function(term, rules, strategy = "innermost",
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Knuth, D. E. & Bendix, P. B. (1970) "Simple word problems in
+#'   universal algebras", in J. Leech (ed.) Computational Problems in
+#'   Abstract Algebra, Pergamon Press, 263-297,
+#'   doi:10.1016/B978-0-08-012975-4.50028-X.
+#'   
+#'   Newman, M. H. A. (1942) "On theories with a combinatorial definition
+#'   of \'equivalence\'", Annals of Mathematics 43(2), 223-243,
+#'   doi:10.2307/1968867.
+#'   
+#'   Baader, F. & Nipkow, T. (1998) Term Rewriting and All That,
+#'   Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 #' @export
 #' @examples
 #' morie_trmRew_cheatsheet()

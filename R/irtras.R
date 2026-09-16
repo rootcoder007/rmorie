@@ -18,6 +18,8 @@
 #
 # Helpers live in aaa_helpers_irt.R.
 
+#' morie_rating_scale_model
+#'
 #' @examples
 #' rmorie:::morie_rating_scale_model(theta = 0.5, b = 5L, tau = 0.5)
 #' @keywords internal

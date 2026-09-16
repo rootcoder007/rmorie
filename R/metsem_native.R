@@ -57,6 +57,15 @@
 #' @param seq A sequence.
 #' @param k The k-mer length.
 #' @return A character vector.
+#' @references Nurk, S., Meleshko, D., Korobeynikov, A. and Pevzner, P.A. (2017)
+#'       "metaSPAdes: a new versatile metagenomic assembler." Genome
+#'       Research 27(5), 824-834. doi:10.1101/gr.213959.116.
+#'     Pevzner, P.A., Tang, H. and Waterman, M.S. (2001) "An Eulerian path
+#'       approach to DNA fragment assembly." PNAS 98(17), 9748-9753.
+#'     Bankevich, A. et al. (2012) "SPAdes: a new genome assembly
+#'       algorithm and its applications to single-cell sequencing."
+#'       Journal of Computational Biology 19(5), 455-477.
+#'       doi:10.1089/cmb.2012.0021.
 #' @export
 #' @examples
 #' morie_metsem_kmers(seq = 5L, k = 5L)
@@ -106,6 +115,15 @@ morie_metsem_kmers <- function(seq, k) {
 #' @param k The k-mer length.
 #' @return A list with the edge weights, the adjacency, the nodes and
 #'   the read counts.
+#' @references Nurk, S., Meleshko, D., Korobeynikov, A. and Pevzner, P.A. (2017)
+#'       "metaSPAdes: a new versatile metagenomic assembler." Genome
+#'       Research 27(5), 824-834. doi:10.1101/gr.213959.116.
+#'     Pevzner, P.A., Tang, H. and Waterman, M.S. (2001) "An Eulerian path
+#'       approach to DNA fragment assembly." PNAS 98(17), 9748-9753.
+#'     Bankevich, A. et al. (2012) "SPAdes: a new genome assembly
+#'       algorithm and its applications to single-cell sequencing."
+#'       Journal of Computational Biology 19(5), 455-477.
+#'       doi:10.1089/cmb.2012.0021.
 #' @export
 #' @examples
 #' morie_metsem_graph(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
@@ -203,6 +221,15 @@ morie_metsem_graph <- function(reads, k) {
 #'
 #' @param g A graph from the graph builder.
 #' @return A list of unitigs, longest first.
+#' @references Nurk, S., Meleshko, D., Korobeynikov, A. and Pevzner, P.A. (2017)
+#'       "metaSPAdes: a new versatile metagenomic assembler." Genome
+#'       Research 27(5), 824-834. doi:10.1101/gr.213959.116.
+#'     Pevzner, P.A., Tang, H. and Waterman, M.S. (2001) "An Eulerian path
+#'       approach to DNA fragment assembly." PNAS 98(17), 9748-9753.
+#'     Bankevich, A. et al. (2012) "SPAdes: a new genome assembly
+#'       algorithm and its applications to single-cell sequencing."
+#'       Journal of Computational Biology 19(5), 455-477.
+#'       doi:10.1089/cmb.2012.0021.
 #' @export
 #' @examples
 #' ABUNDANT <- "ACGTACGGTCAGTTGCAAGT"
@@ -256,6 +283,15 @@ morie_metsem_unitigs <- function(g) {
 #'
 #' @param lengths The contig lengths.
 #' @return An integer.
+#' @references Nurk, S., Meleshko, D., Korobeynikov, A. and Pevzner, P.A. (2017)
+#'       "metaSPAdes: a new versatile metagenomic assembler." Genome
+#'       Research 27(5), 824-834. doi:10.1101/gr.213959.116.
+#'     Pevzner, P.A., Tang, H. and Waterman, M.S. (2001) "An Eulerian path
+#'       approach to DNA fragment assembly." PNAS 98(17), 9748-9753.
+#'     Bankevich, A. et al. (2012) "SPAdes: a new genome assembly
+#'       algorithm and its applications to single-cell sequencing."
+#'       Journal of Computational Biology 19(5), 455-477.
+#'       doi:10.1089/cmb.2012.0021.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -309,6 +345,15 @@ morie_metsem_n50 <- function(lengths) {
 #'   rather than thrown away.
 #' @return A list with the contigs longest first, their coverage, the
 #'   N50, and what the cleaning removed.
+#' @references Nurk, S., Meleshko, D., Korobeynikov, A. and Pevzner, P.A. (2017)
+#'       "metaSPAdes: a new versatile metagenomic assembler." Genome
+#'       Research 27(5), 824-834. doi:10.1101/gr.213959.116.
+#'     Pevzner, P.A., Tang, H. and Waterman, M.S. (2001) "An Eulerian path
+#'       approach to DNA fragment assembly." PNAS 98(17), 9748-9753.
+#'     Bankevich, A. et al. (2012) "SPAdes: a new genome assembly
+#'       algorithm and its applications to single-cell sequencing."
+#'       Journal of Computational Biology 19(5), 455-477.
+#'       doi:10.1089/cmb.2012.0021.
 #' @export
 #' @examples
 #' morie_metsem(reads = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), k = 5L)
@@ -408,6 +453,15 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
 #' One-line summary of the metsem module
 #'
 #' @return A character scalar.
+#' @references Nurk, S., Meleshko, D., Korobeynikov, A. and Pevzner, P.A. (2017)
+#'       "metaSPAdes: a new versatile metagenomic assembler." Genome
+#'       Research 27(5), 824-834. doi:10.1101/gr.213959.116.
+#'     Pevzner, P.A., Tang, H. and Waterman, M.S. (2001) "An Eulerian path
+#'       approach to DNA fragment assembly." PNAS 98(17), 9748-9753.
+#'     Bankevich, A. et al. (2012) "SPAdes: a new genome assembly
+#'       algorithm and its applications to single-cell sequencing."
+#'       Journal of Computational Biology 19(5), 455-477.
+#'       doi:10.1089/cmb.2012.0021.
 #' @export
 #' @examples
 #' morie_metsem_cheatsheet()

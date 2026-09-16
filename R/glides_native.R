@@ -127,6 +127,22 @@
 #' @param m The attractive exponent.
 #' @param n The repulsive exponent.
 #' @return A list with the total and the per-contact energies.
+#' @references Friesner, R.A., Banks, J.L., Murphy, R.B., Halgren, T.A., Klicic,
+#'       J.J., Mainz, D.T., Repasky, M.P., Knoll, E.H., Shelley, M., Perry,
+#'       J.K., Shaw, D.E., Francis, P. and Shenkin, P.S. (2004) "Glide: a
+#'       new approach for rapid, accurate docking and scoring. 1. Method
+#'       and assessment of docking accuracy." Journal of Medicinal
+#'       Chemistry 47(7), 1739-1749. doi:10.1021/jm0306430.
+#'     Halgren, T.A., Murphy, R.B., Friesner, R.A., Beard, H.S., Frye,
+#'       L.L., Pollard, W.T. and Banks, J.L. (2004) "Glide ... 2.
+#'       Enrichment factors in database screening." Journal of Medicinal
+#'       Chemistry 47(7), 1750-1759.
+#'     Friesner, R.A., Murphy, R.B., Repasky, M.P., Frye, L.L., Greenwood,
+#'       J.R., Halgren, T.A., Sanschagrin, P.C. and Mainz, D.T. (2006)
+#'       "Extra precision Glide." Journal of Medicinal Chemistry 49(21),
+#'       6177-6196.
+#'     Eldridge, M.D. et al. (1997) "Empirical scoring functions: I."
+#'       Journal of Computer-Aided Molecular Design 11(5), 425-445.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -155,6 +171,22 @@ morie_glides_vdw <- function(pairs, m = 6, n = 12) {
 #' @param dielectric A member of the dielectric list.
 #' @param epsilon The permittivity scale.
 #' @return A list with the total and the per-contact energies.
+#' @references Friesner, R.A., Banks, J.L., Murphy, R.B., Halgren, T.A., Klicic,
+#'       J.J., Mainz, D.T., Repasky, M.P., Knoll, E.H., Shelley, M., Perry,
+#'       J.K., Shaw, D.E., Francis, P. and Shenkin, P.S. (2004) "Glide: a
+#'       new approach for rapid, accurate docking and scoring. 1. Method
+#'       and assessment of docking accuracy." Journal of Medicinal
+#'       Chemistry 47(7), 1739-1749. doi:10.1021/jm0306430.
+#'     Halgren, T.A., Murphy, R.B., Friesner, R.A., Beard, H.S., Frye,
+#'       L.L., Pollard, W.T. and Banks, J.L. (2004) "Glide ... 2.
+#'       Enrichment factors in database screening." Journal of Medicinal
+#'       Chemistry 47(7), 1750-1759.
+#'     Friesner, R.A., Murphy, R.B., Repasky, M.P., Frye, L.L., Greenwood,
+#'       J.R., Halgren, T.A., Sanschagrin, P.C. and Mainz, D.T. (2006)
+#'       "Extra precision Glide." Journal of Medicinal Chemistry 49(21),
+#'       6177-6196.
+#'     Eldridge, M.D. et al. (1997) "Empirical scoring functions: I."
+#'       Journal of Computer-Aided Molecular Design 11(5), 425-445.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
@@ -187,6 +219,22 @@ morie_glides_coulomb <- function(pairs, dielectric = "constant",
 #' @param r1 The inner radius.
 #' @param r2 The outer radius.
 #' @return A list with the total and the per-pair contributions.
+#' @references Friesner, R.A., Banks, J.L., Murphy, R.B., Halgren, T.A., Klicic,
+#'       J.J., Mainz, D.T., Repasky, M.P., Knoll, E.H., Shelley, M., Perry,
+#'       J.K., Shaw, D.E., Francis, P. and Shenkin, P.S. (2004) "Glide: a
+#'       new approach for rapid, accurate docking and scoring. 1. Method
+#'       and assessment of docking accuracy." Journal of Medicinal
+#'       Chemistry 47(7), 1739-1749. doi:10.1021/jm0306430.
+#'     Halgren, T.A., Murphy, R.B., Friesner, R.A., Beard, H.S., Frye,
+#'       L.L., Pollard, W.T. and Banks, J.L. (2004) "Glide ... 2.
+#'       Enrichment factors in database screening." Journal of Medicinal
+#'       Chemistry 47(7), 1750-1759.
+#'     Friesner, R.A., Murphy, R.B., Repasky, M.P., Frye, L.L., Greenwood,
+#'       J.R., Halgren, T.A., Sanschagrin, P.C. and Mainz, D.T. (2006)
+#'       "Extra precision Glide." Journal of Medicinal Chemistry 49(21),
+#'       6177-6196.
+#'     Eldridge, M.D. et al. (1997) "Empirical scoring functions: I."
+#'       Journal of Computer-Aided Molecular Design 11(5), 425-445.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -211,6 +259,22 @@ morie_glides_lipo <- function(distances, r1 = 4.1, r2 = 7.1) {
 #' @param weights Overrides for the class weights, or NULL.
 #' @return A list with the total, the per-bond contributions and the
 #'   three class subtotals.
+#' @references Friesner, R.A., Banks, J.L., Murphy, R.B., Halgren, T.A., Klicic,
+#'       J.J., Mainz, D.T., Repasky, M.P., Knoll, E.H., Shelley, M., Perry,
+#'       J.K., Shaw, D.E., Francis, P. and Shenkin, P.S. (2004) "Glide: a
+#'       new approach for rapid, accurate docking and scoring. 1. Method
+#'       and assessment of docking accuracy." Journal of Medicinal
+#'       Chemistry 47(7), 1739-1749. doi:10.1021/jm0306430.
+#'     Halgren, T.A., Murphy, R.B., Friesner, R.A., Beard, H.S., Frye,
+#'       L.L., Pollard, W.T. and Banks, J.L. (2004) "Glide ... 2.
+#'       Enrichment factors in database screening." Journal of Medicinal
+#'       Chemistry 47(7), 1750-1759.
+#'     Friesner, R.A., Murphy, R.B., Repasky, M.P., Frye, L.L., Greenwood,
+#'       J.R., Halgren, T.A., Sanschagrin, P.C. and Mainz, D.T. (2006)
+#'       "Extra precision Glide." Journal of Medicinal Chemistry 49(21),
+#'       6177-6196.
+#'     Eldridge, M.D. et al. (1997) "Empirical scoring functions: I."
+#'       Journal of Computer-Aided Molecular Design 11(5), 425-445.
 #' @export
 #' @examples
 #' HBN <- list(list("neutral_neutral", 1), list("neutral_charged",
@@ -252,6 +316,22 @@ morie_glides_hbond <- function(bonds, weights = NULL) {
 #' @param coefficients Overrides for the two published coefficients.
 #' @param weights Overrides for the six unit weights.
 #' @return A list with the total, the weighted parts and their order.
+#' @references Friesner, R.A., Banks, J.L., Murphy, R.B., Halgren, T.A., Klicic,
+#'       J.J., Mainz, D.T., Repasky, M.P., Knoll, E.H., Shelley, M., Perry,
+#'       J.K., Shaw, D.E., Francis, P. and Shenkin, P.S. (2004) "Glide: a
+#'       new approach for rapid, accurate docking and scoring. 1. Method
+#'       and assessment of docking accuracy." Journal of Medicinal
+#'       Chemistry 47(7), 1739-1749. doi:10.1021/jm0306430.
+#'     Halgren, T.A., Murphy, R.B., Friesner, R.A., Beard, H.S., Frye,
+#'       L.L., Pollard, W.T. and Banks, J.L. (2004) "Glide ... 2.
+#'       Enrichment factors in database screening." Journal of Medicinal
+#'       Chemistry 47(7), 1750-1759.
+#'     Friesner, R.A., Murphy, R.B., Repasky, M.P., Frye, L.L., Greenwood,
+#'       J.R., Halgren, T.A., Sanschagrin, P.C. and Mainz, D.T. (2006)
+#'       "Extra precision Glide." Journal of Medicinal Chemistry 49(21),
+#'       6177-6196.
+#'     Eldridge, M.D. et al. (1997) "Empirical scoring functions: I."
+#'       Journal of Computer-Aided Molecular Design 11(5), 425-445.
 #' @export
 #' @examples
 #' morie_glides_score()
@@ -320,6 +400,22 @@ morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
 #' @param cutoff Drop contacts beyond this separation, or NULL.
 #' @return A list with the GScore, each weighted contribution, and the
 #'   raw energies.
+#' @references Friesner, R.A., Banks, J.L., Murphy, R.B., Halgren, T.A., Klicic,
+#'       J.J., Mainz, D.T., Repasky, M.P., Knoll, E.H., Shelley, M., Perry,
+#'       J.K., Shaw, D.E., Francis, P. and Shenkin, P.S. (2004) "Glide: a
+#'       new approach for rapid, accurate docking and scoring. 1. Method
+#'       and assessment of docking accuracy." Journal of Medicinal
+#'       Chemistry 47(7), 1739-1749. doi:10.1021/jm0306430.
+#'     Halgren, T.A., Murphy, R.B., Friesner, R.A., Beard, H.S., Frye,
+#'       L.L., Pollard, W.T. and Banks, J.L. (2004) "Glide ... 2.
+#'       Enrichment factors in database screening." Journal of Medicinal
+#'       Chemistry 47(7), 1750-1759.
+#'     Friesner, R.A., Murphy, R.B., Repasky, M.P., Frye, L.L., Greenwood,
+#'       J.R., Halgren, T.A., Sanschagrin, P.C. and Mainz, D.T. (2006)
+#'       "Extra precision Glide." Journal of Medicinal Chemistry 49(21),
+#'       6177-6196.
+#'     Eldridge, M.D. et al. (1997) "Empirical scoring functions: I."
+#'       Journal of Computer-Aided Molecular Design 11(5), 425-445.
 #' @export
 #' @examples
 #' RAD <- list(list("C", 1.9), list("N", 1.7), list("O", 1.6), list("S",
@@ -402,6 +498,22 @@ morie_glides <- function(receptor, ligand_pose, radii = list(),
 #' One-line summary of the glides module
 #'
 #' @return A character scalar.
+#' @references Friesner, R.A., Banks, J.L., Murphy, R.B., Halgren, T.A., Klicic,
+#'       J.J., Mainz, D.T., Repasky, M.P., Knoll, E.H., Shelley, M., Perry,
+#'       J.K., Shaw, D.E., Francis, P. and Shenkin, P.S. (2004) "Glide: a
+#'       new approach for rapid, accurate docking and scoring. 1. Method
+#'       and assessment of docking accuracy." Journal of Medicinal
+#'       Chemistry 47(7), 1739-1749. doi:10.1021/jm0306430.
+#'     Halgren, T.A., Murphy, R.B., Friesner, R.A., Beard, H.S., Frye,
+#'       L.L., Pollard, W.T. and Banks, J.L. (2004) "Glide ... 2.
+#'       Enrichment factors in database screening." Journal of Medicinal
+#'       Chemistry 47(7), 1750-1759.
+#'     Friesner, R.A., Murphy, R.B., Repasky, M.P., Frye, L.L., Greenwood,
+#'       J.R., Halgren, T.A., Sanschagrin, P.C. and Mainz, D.T. (2006)
+#'       "Extra precision Glide." Journal of Medicinal Chemistry 49(21),
+#'       6177-6196.
+#'     Eldridge, M.D. et al. (1997) "Empirical scoring functions: I."
+#'       Journal of Computer-Aided Molecular Design 11(5), 425-445.
 #' @export
 #' @examples
 #' morie_glides_cheatsheet()

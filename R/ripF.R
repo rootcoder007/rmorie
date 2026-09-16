@@ -2,7 +2,7 @@
 
 #' F function -- empty-space (point-to-nearest-event) distance function
 #'
-#' \code{F(y) = P(distance from an arbitrary location to the nearest
+#' \eqn{F(y) = P(distance from an arbitrary location to the nearest
 #' event <= y)}. The location distribution is uniform over the window; a
 #' \emph{deterministic} 20-by-20 lattice of cell centres is used as the
 #' quadrature sample so that both language arms land on identical

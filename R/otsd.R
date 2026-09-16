@@ -8,7 +8,7 @@
 #' clouds do have the same size the grid reproduces the order statistics
 #' exactly, so this agrees with the sorted estimator.
 #'
-#' Formula: \code{SW_p^p = E_theta int_0^1 |Finv_mu(q) - Finv_nu(q)|^p
+#' Formula: \eqn{SW_p^p = E_theta int_0^1 |Finv_mu(q) - Finv_nu(q)|^p
 #' dq}, on the midpoint grid \code{q_k = (k - 1/2)/G} -- Rabin et al.
 #' (2012) Section 3.
 #'

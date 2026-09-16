@@ -36,7 +36,7 @@
 #' @param alert_cols Three b01 alert columns (\code{"Yes"} = active).
 #' @param contact_proxies Subset of
 #'   \code{c("none","any_alert","no_alert")}.
-#' @param denominators Subset of \code{c("row","individual_any",
+#' @param denominators Subset of \eqn{c("row","individual_any",
 #'   "individual_cumulative","c11_aggregate")}.
 #' @param c11_data Optional c11 aggregate frame for the
 #'   \code{c11_aggregate} denominator.

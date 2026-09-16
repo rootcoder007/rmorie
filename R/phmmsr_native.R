@@ -95,6 +95,27 @@
 #' @param length Coerced to integer by the body, with \code{as.integer}.
 #' @param vector_width Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @return A list with \code{order}, \code{segments}, \code{width}, \code{note}.
+#' @references ----------
+#'   Eddy, S. R. (2011) "Accelerated Profile HMM Searches", *PLoS
+#'   Computational Biology* 7(10), e1002195,
+#'   doi:10.1371/journal.pcbi.1002195. The MSV algorithm computing an
+#'   optimal sum of multiple ungapped local alignment segments by a striped
+#'   vector-parallel approach; MSV scores following the same statistical
+#'   distribution as gapped optimal local alignment scores, allowing rapid
+#'   evaluation of significance and use as a heuristic filter; the 20-fold
+#'   acceleration of Forward/Backward by sparse rescaling; the pipeline in
+#'   which high-scoring MSV hits are reanalysed with the full HMM; and the
+#'   benchmarks showing negligible sensitivity sacrificed, with HMMER3
+#'   100-1000 fold faster than HMMER2 and about as fast as BLAST for
+#'   protein searches.
+#'   
+#'   Farrar, M. (2007) "Striped Smith-Waterman speeds database searches six
+#'   times over other SIMD implementations", *Bioinformatics* 23(2),
+#'   156-161, doi:10.1093/bioinformatics/btl582. The striped layout reused.
+#'   
+#'   Durbin, R., Eddy, S. R., Krogh, A. & Mitchison, G. (1998)
+#'   *Biological Sequence Analysis*, Cambridge University Press,
+#'   doi:10.1017/CBO9780511790492. Profile HMMs.
 #' @export
 #' @examples
 #' phmmsr_striped_layout(length = 5L)
@@ -133,6 +154,27 @@ phmmsr_striped_layout <- function(length, vector_width = 4) {
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
 #' @param lam Accepted by the signature and not used anywhere in the body. Defaults to \code{0.7}.
 #' @return A list with \code{score}, \code{note}.
+#' @references ----------
+#'   Eddy, S. R. (2011) "Accelerated Profile HMM Searches", *PLoS
+#'   Computational Biology* 7(10), e1002195,
+#'   doi:10.1371/journal.pcbi.1002195. The MSV algorithm computing an
+#'   optimal sum of multiple ungapped local alignment segments by a striped
+#'   vector-parallel approach; MSV scores following the same statistical
+#'   distribution as gapped optimal local alignment scores, allowing rapid
+#'   evaluation of significance and use as a heuristic filter; the 20-fold
+#'   acceleration of Forward/Backward by sparse rescaling; the pipeline in
+#'   which high-scoring MSV hits are reanalysed with the full HMM; and the
+#'   benchmarks showing negligible sensitivity sacrificed, with HMMER3
+#'   100-1000 fold faster than HMMER2 and about as fast as BLAST for
+#'   protein searches.
+#'   
+#'   Farrar, M. (2007) "Striped Smith-Waterman speeds database searches six
+#'   times over other SIMD implementations", *Bioinformatics* 23(2),
+#'   156-161, doi:10.1093/bioinformatics/btl582. The striped layout reused.
+#'   
+#'   Durbin, R., Eddy, S. R., Krogh, A. & Mitchison, G. (1998)
+#'   *Biological Sequence Analysis*, Cambridge University Press,
+#'   doi:10.1017/CBO9780511790492. Profile HMMs.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -191,6 +233,27 @@ phmmsr_msv_score <- function(seq, profile, tau = 0.02, lam = 0.7) {
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
+#' @references ----------
+#'   Eddy, S. R. (2011) "Accelerated Profile HMM Searches", *PLoS
+#'   Computational Biology* 7(10), e1002195,
+#'   doi:10.1371/journal.pcbi.1002195. The MSV algorithm computing an
+#'   optimal sum of multiple ungapped local alignment segments by a striped
+#'   vector-parallel approach; MSV scores following the same statistical
+#'   distribution as gapped optimal local alignment scores, allowing rapid
+#'   evaluation of significance and use as a heuristic filter; the 20-fold
+#'   acceleration of Forward/Backward by sparse rescaling; the pipeline in
+#'   which high-scoring MSV hits are reanalysed with the full HMM; and the
+#'   benchmarks showing negligible sensitivity sacrificed, with HMMER3
+#'   100-1000 fold faster than HMMER2 and about as fast as BLAST for
+#'   protein searches.
+#'   
+#'   Farrar, M. (2007) "Striped Smith-Waterman speeds database searches six
+#'   times over other SIMD implementations", *Bioinformatics* 23(2),
+#'   156-161, doi:10.1093/bioinformatics/btl582. The striped layout reused.
+#'   
+#'   Durbin, R., Eddy, S. R., Krogh, A. & Mitchison, G. (1998)
+#'   *Biological Sequence Analysis*, Cambridge University Press,
+#'   doi:10.1017/CBO9780511790492. Profile HMMs.
 #' @export
 #' @keywords internal
 phmmsr_gumbel_pvalue <- function(score, mu, lam) {
@@ -217,6 +280,27 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
 #' @param target Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{values}, \code{rescaled}, \code{factor}, \code{log_offset},
 #' \code{note}.
+#' @references ----------
+#'   Eddy, S. R. (2011) "Accelerated Profile HMM Searches", *PLoS
+#'   Computational Biology* 7(10), e1002195,
+#'   doi:10.1371/journal.pcbi.1002195. The MSV algorithm computing an
+#'   optimal sum of multiple ungapped local alignment segments by a striped
+#'   vector-parallel approach; MSV scores following the same statistical
+#'   distribution as gapped optimal local alignment scores, allowing rapid
+#'   evaluation of significance and use as a heuristic filter; the 20-fold
+#'   acceleration of Forward/Backward by sparse rescaling; the pipeline in
+#'   which high-scoring MSV hits are reanalysed with the full HMM; and the
+#'   benchmarks showing negligible sensitivity sacrificed, with HMMER3
+#'   100-1000 fold faster than HMMER2 and about as fast as BLAST for
+#'   protein searches.
+#'   
+#'   Farrar, M. (2007) "Striped Smith-Waterman speeds database searches six
+#'   times over other SIMD implementations", *Bioinformatics* 23(2),
+#'   156-161, doi:10.1093/bioinformatics/btl582. The striped layout reused.
+#'   
+#'   Durbin, R., Eddy, S. R., Krogh, A. & Mitchison, G. (1998)
+#'   *Biological Sequence Analysis*, Cambridge University Press,
+#'   doi:10.1017/CBO9780511790492. Profile HMMs.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -256,6 +340,27 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 #' @return A list with \code{estimate}, \code{passed}, \code{msv_scores},
 #' \code{discarded}, \code{survivor_fraction}, \code{full_scores}, \code{method},
 #' \code{note}.
+#' @references ----------
+#'   Eddy, S. R. (2011) "Accelerated Profile HMM Searches", *PLoS
+#'   Computational Biology* 7(10), e1002195,
+#'   doi:10.1371/journal.pcbi.1002195. The MSV algorithm computing an
+#'   optimal sum of multiple ungapped local alignment segments by a striped
+#'   vector-parallel approach; MSV scores following the same statistical
+#'   distribution as gapped optimal local alignment scores, allowing rapid
+#'   evaluation of significance and use as a heuristic filter; the 20-fold
+#'   acceleration of Forward/Backward by sparse rescaling; the pipeline in
+#'   which high-scoring MSV hits are reanalysed with the full HMM; and the
+#'   benchmarks showing negligible sensitivity sacrificed, with HMMER3
+#'   100-1000 fold faster than HMMER2 and about as fast as BLAST for
+#'   protein searches.
+#'   
+#'   Farrar, M. (2007) "Striped Smith-Waterman speeds database searches six
+#'   times over other SIMD implementations", *Bioinformatics* 23(2),
+#'   156-161, doi:10.1093/bioinformatics/btl582. The striped layout reused.
+#'   
+#'   Durbin, R., Eddy, S. R., Krogh, A. & Mitchison, G. (1998)
+#'   *Biological Sequence Analysis*, Cambridge University Press,
+#'   doi:10.1017/CBO9780511790492. Profile HMMs.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -304,6 +409,27 @@ phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
 #' source it follows.
 #'
 #' @return A character value.
+#' @references ----------
+#'   Eddy, S. R. (2011) "Accelerated Profile HMM Searches", *PLoS
+#'   Computational Biology* 7(10), e1002195,
+#'   doi:10.1371/journal.pcbi.1002195. The MSV algorithm computing an
+#'   optimal sum of multiple ungapped local alignment segments by a striped
+#'   vector-parallel approach; MSV scores following the same statistical
+#'   distribution as gapped optimal local alignment scores, allowing rapid
+#'   evaluation of significance and use as a heuristic filter; the 20-fold
+#'   acceleration of Forward/Backward by sparse rescaling; the pipeline in
+#'   which high-scoring MSV hits are reanalysed with the full HMM; and the
+#'   benchmarks showing negligible sensitivity sacrificed, with HMMER3
+#'   100-1000 fold faster than HMMER2 and about as fast as BLAST for
+#'   protein searches.
+#'   
+#'   Farrar, M. (2007) "Striped Smith-Waterman speeds database searches six
+#'   times over other SIMD implementations", *Bioinformatics* 23(2),
+#'   156-161, doi:10.1093/bioinformatics/btl582. The striped layout reused.
+#'   
+#'   Durbin, R., Eddy, S. R., Krogh, A. & Mitchison, G. (1998)
+#'   *Biological Sequence Analysis*, Cambridge University Press,
+#'   doi:10.1017/CBO9780511790492. Profile HMMs.
 #' @export
 #' @examples
 #' phmmsr_cheatsheet()

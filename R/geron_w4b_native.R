@@ -1477,6 +1477,7 @@ morie_geron_kmeans_limits <- function(X, n_clusters = 2, seed = 0) {
 
 #' Centre a Gram matrix in feature space (Geron Ch 7, morie.fn hmkprbf helper)
 #' @param K Gram matrix. @return Centred Gram matrix.
+#' @return A numeric value.
 #' @export
 #' @examples
 #' morie_geron_center_gram(K = 5L)
@@ -1878,6 +1879,7 @@ morie_geron_learning_curves_hmlcv <- function(X, y, n_splits = 10, val_fraction 
 
 #' Euclidean pairwise distance matrix (Geron Ch 7, morie.fn hmmds helper)
 #' @param X Data matrix. @return Distance matrix.
+#' @return The value of `.morie_gr_w4b_pairwise_distances`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1887,6 +1889,7 @@ morie_geron_pairwise_distances <- function(X) .morie_gr_w4b_pairwise_distances(X
 
 #' Double-centre a squared-distance matrix (Geron Ch 7, morie.fn hmmds helper)
 #' @param D Distance matrix. @return Gram matrix B.
+#' @return The value of `.morie_gr_w4b_double_center`.
 #' @export
 #' @examples
 #' morie_geron_double_center(D = 5L)
@@ -2964,6 +2967,7 @@ morie_geron_mistral7b <- function(prompt, n_tokens, n_layers = 32, d_model = 409
 #' Mish activation z*tanh(softplus(z)) (Geron Ch 11, morie.fn hmmish)
 #' @param z Pre-activations. @return List with activation, derivative, softplus, minimum,
 #' estimate, n, method.
+#' @return A list with `activation`, `derivative`, `softplus`, `minimum`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

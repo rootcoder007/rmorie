@@ -112,6 +112,21 @@
 #'   of keys.
 #' @param tau_floor The lower bound on tau.
 #' @return A list with the logit matrix and the scale actually applied.
+#' @references Chiang, D. and Cholak, P. (2022) "Overcoming a theoretical
+#'       limitation of self-attention." Proceedings of the 60th Annual
+#'       Meeting of the Association for Computational Linguistics
+#'       (Volume 1: Long Papers), 7654-7664, Dublin. arXiv:2202.12172.
+#'       Their equation (2) and section 5.3.
+#'     Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao,
+#'       Y., Zhang, Z., Dong, L., Wei, F. and Guo, B. (2022) "Swin
+#'       Transformer V2: scaling up capacity and resolution." Proceedings
+#'       of the IEEE/CVF Conference on Computer Vision and Pattern
+#'       Recognition (CVPR), 12009-12019. arXiv:2111.09883. Their
+#'       equations (2) and (4).
+#'     Vaswani, A. et al. (2017) "Attention is all you need." Advances in
+#'       Neural Information Processing Systems 30.
+#'     Hahn, M. (2020) "Theoretical limitations of self-attention in neural
+#'       sequence models." Transactions of the ACL 8, 156-171.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -175,6 +190,21 @@ morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
 #' @param logits The logit matrix.
 #' @param mask A logical matrix, TRUE where a key is visible, or NULL.
 #' @return The attention weight matrix.
+#' @references Chiang, D. and Cholak, P. (2022) "Overcoming a theoretical
+#'       limitation of self-attention." Proceedings of the 60th Annual
+#'       Meeting of the Association for Computational Linguistics
+#'       (Volume 1: Long Papers), 7654-7664, Dublin. arXiv:2202.12172.
+#'       Their equation (2) and section 5.3.
+#'     Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao,
+#'       Y., Zhang, Z., Dong, L., Wei, F. and Guo, B. (2022) "Swin
+#'       Transformer V2: scaling up capacity and resolution." Proceedings
+#'       of the IEEE/CVF Conference on Computer Vision and Pattern
+#'       Recognition (CVPR), 12009-12019. arXiv:2111.09883. Their
+#'       equations (2) and (4).
+#'     Vaswani, A. et al. (2017) "Attention is all you need." Advances in
+#'       Neural Information Processing Systems 30.
+#'     Hahn, M. (2020) "Theoretical limitations of self-attention in neural
+#'       sequence models." Transactions of the ACL 8, 156-171.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -205,6 +235,21 @@ morie_vit2lf_softmax <- function(logits, mask = NULL) {
 #'
 #' @param w The attention weight matrix.
 #' @return One entropy per query row.
+#' @references Chiang, D. and Cholak, P. (2022) "Overcoming a theoretical
+#'       limitation of self-attention." Proceedings of the 60th Annual
+#'       Meeting of the Association for Computational Linguistics
+#'       (Volume 1: Long Papers), 7654-7664, Dublin. arXiv:2202.12172.
+#'       Their equation (2) and section 5.3.
+#'     Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao,
+#'       Y., Zhang, Z., Dong, L., Wei, F. and Guo, B. (2022) "Swin
+#'       Transformer V2: scaling up capacity and resolution." Proceedings
+#'       of the IEEE/CVF Conference on Computer Vision and Pattern
+#'       Recognition (CVPR), 12009-12019. arXiv:2111.09883. Their
+#'       equations (2) and (4).
+#'     Vaswani, A. et al. (2017) "Attention is all you need." Advances in
+#'       Neural Information Processing Systems 30.
+#'     Hahn, M. (2020) "Theoretical limitations of self-attention in neural
+#'       sequence models." Transactions of the ACL 8, 156-171.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
@@ -227,6 +272,21 @@ morie_vit2lf_entropy <- function(w) {
 #' @param dx Horizontal offset.
 #' @param dy Vertical offset.
 #' @return The two log-spaced offsets.
+#' @references Chiang, D. and Cholak, P. (2022) "Overcoming a theoretical
+#'       limitation of self-attention." Proceedings of the 60th Annual
+#'       Meeting of the Association for Computational Linguistics
+#'       (Volume 1: Long Papers), 7654-7664, Dublin. arXiv:2202.12172.
+#'       Their equation (2) and section 5.3.
+#'     Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao,
+#'       Y., Zhang, Z., Dong, L., Wei, F. and Guo, B. (2022) "Swin
+#'       Transformer V2: scaling up capacity and resolution." Proceedings
+#'       of the IEEE/CVF Conference on Computer Vision and Pattern
+#'       Recognition (CVPR), 12009-12019. arXiv:2111.09883. Their
+#'       equations (2) and (4).
+#'     Vaswani, A. et al. (2017) "Attention is all you need." Advances in
+#'       Neural Information Processing Systems 30.
+#'     Hahn, M. (2020) "Theoretical limitations of self-attention in neural
+#'       sequence models." Transactions of the ACL 8, 156-171.
 #' @export
 #' @examples
 #' morie_vit2lf_log_coords(dx = 5L, dy = 5L)
@@ -251,6 +311,21 @@ morie_vit2lf_log_coords <- function(dx, dy) {
 #' @param window The window size.
 #' @param log_spaced Whether to transform the offsets first.
 #' @return The bias matrix.
+#' @references Chiang, D. and Cholak, P. (2022) "Overcoming a theoretical
+#'       limitation of self-attention." Proceedings of the 60th Annual
+#'       Meeting of the Association for Computational Linguistics
+#'       (Volume 1: Long Papers), 7654-7664, Dublin. arXiv:2202.12172.
+#'       Their equation (2) and section 5.3.
+#'     Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao,
+#'       Y., Zhang, Z., Dong, L., Wei, F. and Guo, B. (2022) "Swin
+#'       Transformer V2: scaling up capacity and resolution." Proceedings
+#'       of the IEEE/CVF Conference on Computer Vision and Pattern
+#'       Recognition (CVPR), 12009-12019. arXiv:2111.09883. Their
+#'       equations (2) and (4).
+#'     Vaswani, A. et al. (2017) "Attention is all you need." Advances in
+#'       Neural Information Processing Systems 30.
+#'     Hahn, M. (2020) "Theoretical limitations of self-attention in neural
+#'       sequence models." Transactions of the ACL 8, 156-171.
 #' @export
 #' @examples
 #' mk <- function(nr, nc, f) {
@@ -313,6 +388,21 @@ morie_vit2lf_relative_bias <- function(coords, table, window,
 #'   logits, the scale actually applied, the per-row entropy and the
 #'   largest weight -- the last two being how you see the scaling
 #'   working.
+#' @references Chiang, D. and Cholak, P. (2022) "Overcoming a theoretical
+#'       limitation of self-attention." Proceedings of the 60th Annual
+#'       Meeting of the Association for Computational Linguistics
+#'       (Volume 1: Long Papers), 7654-7664, Dublin. arXiv:2202.12172.
+#'       Their equation (2) and section 5.3.
+#'     Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao,
+#'       Y., Zhang, Z., Dong, L., Wei, F. and Guo, B. (2022) "Swin
+#'       Transformer V2: scaling up capacity and resolution." Proceedings
+#'       of the IEEE/CVF Conference on Computer Vision and Pattern
+#'       Recognition (CVPR), 12009-12019. arXiv:2111.09883. Their
+#'       equations (2) and (4).
+#'     Vaswani, A. et al. (2017) "Attention is all you need." Advances in
+#'       Neural Information Processing Systems 30.
+#'     Hahn, M. (2020) "Theoretical limitations of self-attention in neural
+#'       sequence models." Transactions of the ACL 8, 156-171.
 #' @export
 #' @examples
 #' morie_vit2lf(q = 0.5, k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
@@ -351,6 +441,21 @@ morie_vit2lf <- function(q, k, v, mode = "logn", tau = 1, bias = NULL,
 #' One-line summary of the vit2lf module
 #'
 #' @return A character scalar.
+#' @references Chiang, D. and Cholak, P. (2022) "Overcoming a theoretical
+#'       limitation of self-attention." Proceedings of the 60th Annual
+#'       Meeting of the Association for Computational Linguistics
+#'       (Volume 1: Long Papers), 7654-7664, Dublin. arXiv:2202.12172.
+#'       Their equation (2) and section 5.3.
+#'     Liu, Z., Hu, H., Lin, Y., Yao, Z., Xie, Z., Wei, Y., Ning, J., Cao,
+#'       Y., Zhang, Z., Dong, L., Wei, F. and Guo, B. (2022) "Swin
+#'       Transformer V2: scaling up capacity and resolution." Proceedings
+#'       of the IEEE/CVF Conference on Computer Vision and Pattern
+#'       Recognition (CVPR), 12009-12019. arXiv:2111.09883. Their
+#'       equations (2) and (4).
+#'     Vaswani, A. et al. (2017) "Attention is all you need." Advances in
+#'       Neural Information Processing Systems 30.
+#'     Hahn, M. (2020) "Theoretical limitations of self-attention in neural
+#'       sequence models." Transactions of the ACL 8, 156-171.
 #' @export
 #' @examples
 #' morie_vit2lf_cheatsheet()
