@@ -361,7 +361,7 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
 
   crit_idx <- which(p_upper > 0.05)
   critical_gamma <- if (length(crit_idx))
-    as.numeric(gamma_range[crit_idx\[1\]])
+    as.numeric(gamma_range[crit_idx[1]])
   else as.numeric(gamma_range[length(gamma_range)])
 
   interpretation <- sprintf(
@@ -416,11 +416,11 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
   tipping_point <- if (all(significant)) {
     delta_range[length(delta_range)]
   } else if (!any(significant)) {
-    delta_range\[1\]
+    delta_range[1]
   } else {
     transitions <- diff(as.integer(significant))
     cross_idx <- which(transitions != 0)
-    if (length(cross_idx)) delta_range[cross_idx\[1\]] else NA_real_
+    if (length(cross_idx)) delta_range[cross_idx[1]] else NA_real_
   }
   robust <- abs(tipping_point) > abs(estimate)
   robust_msg <- if (isTRUE(robust))
@@ -647,7 +647,7 @@ manski_bounds <- function(outcome_treated, outcome_control,
   y1 <- as.numeric(outcome_treated)
   y0 <- as.numeric(outcome_control)
   if (is.null(outcome_range)) outcome_range <- c(0, 1)
-  y_min <- outcome_range\[1\]
+  y_min <- outcome_range[1]
   y_max <- outcome_range[2]
   e1 <- mean(y1)
   e0 <- mean(y0)
@@ -739,11 +739,11 @@ probabilistic_bias_analysis <- function(estimate, se,
                         prevalence = c(0.3, 0.1))
   }
   rr_ud <- abs(stats::rnorm(n_simulations,
-                              bias_parms$rr_ud\[1\], bias_parms$rr_ud[2]))
+                              bias_parms$rr_ud[1], bias_parms$rr_ud[2]))
   rr_eu <- abs(stats::rnorm(n_simulations,
-                              bias_parms$rr_eu\[1\], bias_parms$rr_eu[2]))
+                              bias_parms$rr_eu[1], bias_parms$rr_eu[2]))
   prev  <- pmin(pmax(stats::rnorm(n_simulations,
-                                     bias_parms$prevalence\[1\],
+                                     bias_parms$prevalence[1],
                                      bias_parms$prevalence[2]),
                        0.01), 0.99)
   estimates_with_error <- stats::rnorm(n_simulations, estimate, se)

@@ -52,7 +52,7 @@ Alnnw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
   for (j in seq_len(m)) F[1L, j + 1L] <- -g * j
   for (i in seq_len(n)) {
     for (j in seq_len(m)) {
-      d <- F\[i, j\] + sf(a[i], b[j])
+      d <- F[i, j] + sf(a[i], b[j])
       u <- F[i, j + 1L] - g
       l <- F[i + 1L, j] - g
       best <- d
@@ -66,7 +66,7 @@ Alnnw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
   i <- n
   j <- m
   while (i > 0L || j > 0L) {
-    if (i > 0L && j > 0L && F[i + 1L, j + 1L] == F\[i, j\] + sf(a[i], b[j])) {
+    if (i > 0L && j > 0L && F[i + 1L, j + 1L] == F[i, j] + sf(a[i], b[j])) {
       o1 <- c(a[i], o1)
       o2 <- c(b[j], o2)
       i <- i - 1L
@@ -97,7 +97,7 @@ Alnnw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
 
 #' @noRd
 .aln_symbols <- function(s) {
-  if (is.character(s) && length(s) == 1L) strsplit(s, "", fixed = TRUE)[\[1\]] else as.character(s)
+  if (is.character(s) && length(s) == 1L) strsplit(s, "", fixed = TRUE)[[1]] else as.character(s)
 }
 
 #' @noRd

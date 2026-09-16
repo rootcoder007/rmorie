@@ -87,7 +87,7 @@
 #' @return The value of \code{j}, as built in the body.
 #' @export
 .sccsno_band <- function(t, age_breaks) {
-  # Index of the age band containing t (0-based, matching alpha\[j+1\]).
+  # Index of the age band containing t (0-based, matching alpha[j+1]).
   j <- 0L
   for (b in age_breaks) {
     if (t >= as.numeric(b)) {

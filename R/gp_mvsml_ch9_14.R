@@ -497,7 +497,7 @@ Penmat <- function(t, L1, p = 2L, kind = "fourier", period = NULL,
   for (i in seq_len(L)) {
     for (j in i:L) {
       s <- sum(0.5 * dt * (D[-m, i] * D[-m, j] + D[-1, i] * D[-1, j]))
-      P\[i, j\] <- s
+      P[i, j] <- s
       P[j, i] <- s
     }
   }
@@ -674,7 +674,7 @@ Fregenv <- function(y, X, X_E, X_EF = NULL, lam = 0, P = NULL) {
   off <- off + widths[["functional"]]
   beta_EF <- if (is.null(X_EF)) numeric(0) else coef[-seq_len(off)]
   list(
-    coef = coef, mu = coef\[1\], beta_E = beta_E, beta = beta,
+    coef = coef, mu = coef[1], beta_E = beta_E, beta = beta,
     beta_EF = beta_EF, widths = widths, design = D,
     fitted = fitted, residuals = resid, sse = sum(resid^2),
     n_columns = ncol(D), has_interaction = !is.null(X_EF)

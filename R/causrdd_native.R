@@ -50,7 +50,7 @@
   meat <- (XtW * rep(e^2, each = 2L)) %*% (X * w)
   Ainv <- solve(A)
   V <- Ainv %*% meat %*% Ainv
-  list(a = b\[1\], b = b[2], v = V\[1, 1\])
+  list(a = b[1], b = b[2], v = V[1, 1])
 }
 
 #' Sharp regression discontinuity, local linear

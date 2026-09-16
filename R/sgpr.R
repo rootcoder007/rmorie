@@ -34,7 +34,7 @@ Sparsegp <- function(X, y, M = 3, X_test = NULL, gamma = 1, sigma2 = 1e-2) {
   Z <- Xm[idx + 1L, , drop = FALSE]
   f <- Fitcgp(X, y, X_test, Z, gamma, sigma2, 1e-8, "fitc")
   d <- Fitcgp(X, y, X_test, Z, gamma, sigma2, 1e-8, "dtc")
-  list(estimate = if (length(f$pred)) f$pred\[1\] else NaN,
+  list(estimate = if (length(f$pred)) f$pred[1] else NaN,
        pred_fitc = f$pred, pred_dtc = d$pred, var_fitc = f$var,
        var_dtc = d$var, inducing = idx,
        method = "FITC and DTC sparse GP (Snelson and Ghahramani 2006; Quinonero-Candela and Rasmussen 2005)")

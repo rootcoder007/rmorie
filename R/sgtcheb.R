@@ -50,7 +50,7 @@ Sgtcheegerbound <- function(W, max_n = 20) {
   diag(L) <- d - diag(W)
   vals <- rev(.t1_eigsym(diag(s, n) %*% L %*% diag(s, n))$values)
   nz <- vals[vals > 1e-10]
-  lam1 <- if (length(nz)) nz\[1\] else 0
+  lam1 <- if (length(nz)) nz[1] else 0
   sharp <- if (best <= 1) 1 - sqrt(max(0, 1 - best^2)) else 1
   .t1_result(h = best, argmin = arg, cut = cut, vol_S = vs,
              vol_complement = vol - vs, lambda1 = lam1,

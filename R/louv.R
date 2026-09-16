@@ -40,7 +40,7 @@ louv <- function(A, max_levels = 20L) {
     nc <- length(unique(comm))
     agg <- matrix(0, nc, nc)
     for (i in seq_len(n)) for (j in seq_len(n))
-      agg[comm[i] + 1L, comm[j] + 1L] <- agg[comm[i] + 1L, comm[j] + 1L] + a\[i, j\]
+      agg[comm[i] + 1L, comm[j] + 1L] <- agg[comm[i] + 1L, comm[j] + 1L] + a[i, j]
     a <- agg
   }
   list(estimate = k02mod(a0, labels), communities = .k02relabel(labels),

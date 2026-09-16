@@ -59,7 +59,7 @@ morie_linkqp <- function(items_from, items_to, symmetric = FALSE,
     as.numeric(theta_points)
   l_norm <- length(grid)
   crit <- function(x) {
-    A <- x\[1\]
+    A <- x[1]
     B <- x[2]
     if (A <= 0) return(1e10)
     f1 <- 0
@@ -84,7 +84,7 @@ morie_linkqp <- function(items_from, items_to, symmetric = FALSE,
   }
   res <- stats::optim(c(1, 0), crit, method = "Nelder-Mead",
                       control = list(reltol = 1e-14, maxit = 5000))
-  list(A = res$par\[1\], B = res$par[2],
+  list(A = res$par[1], B = res$par[2],
        criterion = res$value,
        symmetric = symmetric,
        n_common = s,

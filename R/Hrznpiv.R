@@ -84,7 +84,7 @@ Hrznpiv <- function(x, y, w, bandwidth = NULL, grid = 25L, tol = 1e-5) {
   # f_W(w) = int f_XW(x, w) dx.
   fW <- as.numeric(wq %*% fxw)
 
-  # E(Y | W = w) by Nadaraya-Watson on the \[0, 1\] scale.
+  # E(Y | W = w) by Nadaraya-Watson on the [0, 1] scale.
   den <- as.numeric(KW %*% rep(1, n))
   mW <- ifelse(den > 1e-300, as.numeric(KW %*% y) / den, 0)
 

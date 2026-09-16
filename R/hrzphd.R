@@ -84,14 +84,14 @@ Hrzphd <- function(t_discrete, x, event = NULL, K = NULL, cycles = 40L,
     A
   }
   negll <- function(par) {
-    tau <- par\[1\]
+    tau <- par[1]
     b <- par[seq_len(p) + 1L]
     A <- cumA(par[seq_len(kk) + 1L + p])
     th <- exp(min(max(tau, -30), 30))
     tot <- 0
     for (i in seq_len(n)) {
       e <- 0
-      for (k in seq_len(p)) e <- e + XX\[i, k\] * b[k]
+      for (k in seq_len(p)) e <- e + XX[i, k] * b[k]
       w <- exp(min(max(-e, -300), 300))
       if (ev[i] != 0) {
         j <- as.integer(jj[i])
@@ -149,7 +149,7 @@ Hrzphd <- function(t_discrete, x, event = NULL, K = NULL, cycles = 40L,
     }
     if (moved < 1e-10) break
   }
-  th <- exp(min(max(par\[1\], -30), 30))
+  th <- exp(min(max(par[1], -30), 30))
   beta <- par[seq_len(p) + 1L]
   A <- cumA(par[seq_len(kk) + 1L + p])
   jumps <- numeric(kk)

@@ -135,7 +135,7 @@ morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
     }
     acts[[k + 1L]] <- a
   }
-  list(output = a\[1\], pre = pre, acts = acts)
+  list(output = a[1], pre = pre, acts = acts)
 }
 
 #' morie_survnnr_partial_loglik
@@ -242,7 +242,7 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
   if (n == 0) {
     stop("survnnr: no observations")
   }
-  d <- length(X[\[1\]])
+  d <- length(X[[1]])
   init <- .survnnr_init(d, hidden, seed)
   W <- init$W
   b <- init$b
@@ -289,7 +289,7 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
     l2 = as.numeric(l2), loss_history = history,
     risk = risk,
     centred_risk = risk - mean_risk,
-    coefficients = if (length(hidden) == 0L) as.numeric(W[\[1\]][1, ]) else NULL,
+    coefficients = if (length(hidden) == 0L) as.numeric(W[[1]][1, ]) else NULL,
     times = as.numeric(times), events = as.logical(events),
     epochs = length(history), ties = "Breslow",
     scale_note = paste("the partial likelihood is invariant to adding",
@@ -364,7 +364,7 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
 #' @export
 morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
   base <- morie_survnnr_baseline_hazard(fit_result)
-  r <- exp(morie_survnnr_risk_score(fit_result, list(x))[\[1\]])
+  r <- exp(morie_survnnr_risk_score(fit_result, list(x))[[1]])
   ts <- if (is.null(times)) base$time else as.numeric(times)
   out <- numeric(length(ts))
   for (idx in seq_along(ts)) {

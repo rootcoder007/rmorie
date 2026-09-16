@@ -342,10 +342,10 @@ sdpwts_min_eigenvalue_sdp <- function(A, t0 = 1.0, mu = 10.0,
   diag(F1) <- -1
   start <- lam - 1
   r <- sdpwts_solve_sdp(-1, F0, list(F1), start, t0, mu, tol)
-  list(estimate = r$x\[1\],
-       t = r$x\[1\],
+  list(estimate = r$x[1],
+       t = r$x[1],
        lambda_min = lam,
-       error = abs(r$x\[1\] - lam),
+       error = abs(r$x[1] - lam),
        outer_iterations = r$outer_iterations,
        gap = r$gap,
        method = "eigenvalue problem as an SDP; Vandenberghe & Boyd (1996)",

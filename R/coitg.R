@@ -27,7 +27,7 @@ morie_eg_coint <- function(y1, y2, max_lag = NULL) {
       type = "none", lags = max_lag,
       selectlags = "AIC"
     )
-    stat <- as.numeric(adf@teststat\[1\])
+    stat <- as.numeric(adf@teststat[1])
   } else {
     # Plain ADF-style t-stat on residuals.
     dr <- diff(resid)
@@ -45,8 +45,8 @@ morie_eg_coint <- function(y1, y2, max_lag = NULL) {
     b <- lsfit(Xr, dep, intercept = FALSE)
     e <- dep - Xr %*% b$coef
     sig2 <- sum(e^2) / (n_eff - ncol(Xr))
-    se <- sqrt(sig2 * solve(crossprod(Xr))\[1, 1\])
-    stat <- b$coef\[1\] / se
+    se <- sqrt(sig2 * solve(crossprod(Xr))[1, 1])
+    stat <- b$coef[1] / se
   }
   crit <- c(`1%` = -3.90, `5%` = -3.34, `10%` = -3.04)
   approx_p <- if (stat < crit["1%"]) {

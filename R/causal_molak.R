@@ -493,7 +493,7 @@ morie_collider <- function(dag, triple = NULL) {
   hit <- FALSE
   shielded <- FALSE
   if (!is.null(triple)) {
-    a <- triple\[1\]
+    a <- triple[1]
     cc <- triple[2]
     b <- triple[3]
     hit <- paste(a, cc, b, sep = "\r") %in% cols ||
@@ -734,7 +734,7 @@ morie_causrung <- function(rung) {
     stop("rung must be 1, 2 or 3.", call. = FALSE)
   }
   r <- tab[[key]]
-  list(level = rung, name = r\[1\], action = r[2], question = r[3],
+  list(level = rung, name = r[1], action = r[2], question = r[3],
        needsgraph = rung >= 2L, needsscm = rung >= 3L)
 }
 

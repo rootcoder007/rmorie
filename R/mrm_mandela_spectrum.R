@@ -130,7 +130,7 @@ mrm_otis_mandela_spectrum <- function(
           if (!"Aggregate_Duration" %in% names(sub)) next
           n_d <- sum(sub[["NumberIndividuals_Segregation"]])
           ab <- vapply(as.character(sub[["Aggregate_Duration"]]), function(b) {
-            grepl("Greater than", b) | any(as.integer(regmatches(b, gregexpr("[0-9]+", b))[\[1\]]) > threshold_days)
+            grepl("Greater than", b) | any(as.integer(regmatches(b, gregexpr("[0-9]+", b))[[1]]) > threshold_days)
           }, logical(1))
           n_m <- sum(sub[["NumberIndividuals_Segregation"]][ab])
         } else {

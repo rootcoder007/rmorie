@@ -156,7 +156,7 @@ NULL
     stop("p_values contain non-finite entries")
   }
   if (any(p < 0 - 1e-12) || any(p > 1 + 1e-12)) {
-    stop("p_values must lie in \[0, 1\]")
+    stop("p_values must lie in [0, 1]")
   }
   pmin(pmax(p, 0), 1)
 }
@@ -820,13 +820,13 @@ fixed_sequence <- function(p_values, alpha = 0.05, labels = NULL) {
       break
     }
   }
-  first_fail <- which(!rejected)\[1\]
+  first_fail <- which(!rejected)[1]
   note <- if (is.na(first_fail)) {
     "All hypotheses in the predetermined sequence were rejected."
   } else if (first_fail == 1L) {
     sprintf(
       "The first hypothesis failed (p=%.4g > alpha=%.4f); no rejections.",
-      p\[1\], alpha
+      p[1], alpha
     )
   } else {
     sprintf(

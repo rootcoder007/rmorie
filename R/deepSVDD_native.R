@@ -56,7 +56,7 @@ svdd <- function(X, C = 1.0, kernel = "linear", gamma = 1.0,
   K <- matrix(0, n, n)
   for (i in seq_len(n))
     for (j in seq_len(n))
-      K\[i, j\] <- .deep_svdd_kernel(Xv[[i]], Xv[[j]], kern, gamma)
+      K[i, j] <- .deep_svdd_kernel(Xv[[i]], Xv[[j]], kern, gamma)
   alpha <- rep(1.0 / n, n)
 
   .grad_i <- function(i) {
@@ -71,7 +71,7 @@ svdd <- function(X, C = 1.0, kernel = "linear", gamma = 1.0,
         lo <- max(0.0, s - C)
         hi <- min(C, s)
         if (hi - lo < 1e-15) next
-        denom <- 2.0 * (K[i, i] - 2.0 * K\[i, j\] + K[j, j])
+        denom <- 2.0 * (K[i, i] - 2.0 * K[i, j] + K[j, j])
         gi <- .grad_i(i)
         gj <- .grad_i(j)
         if (denom <= 1e-300) {

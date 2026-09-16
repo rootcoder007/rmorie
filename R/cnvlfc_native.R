@@ -47,7 +47,7 @@
     for (i in seq_len(m)) {
         ii <- idx[i]
         for (k in seq_len(e)) {
-            pts\[i, k\] <- v[ii - (k - 1L) * t]
+            pts[i, k] <- v[ii - (k - 1L) * t]
         }
     }
     # index is REPORTED, so it follows the Python 0-based

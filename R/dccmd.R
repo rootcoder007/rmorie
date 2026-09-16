@@ -20,7 +20,7 @@
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .dccmd_negll <- function(p, Q_bar, n, Z) {
-  a <- p\[1\]
+  a <- p[1]
   b <- p[2]
   if (a < 0 || b < 0 || a + b >= 0.9999) {
     return(1e10)
@@ -79,7 +79,7 @@ morie_dcc_multivariate_garch <- function(x) {
     lower = c(1e-6, 1e-6),
     upper = c(0.5, 0.999)
   )
-  a <- opt$par\[1\]
+  a <- opt$par[1]
   b <- opt$par[2]
   Q <- Q_bar
   R_path <- array(NA_real_, c(n, k, k))

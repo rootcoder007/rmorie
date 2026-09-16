@@ -18,7 +18,7 @@ BinomMom2 <- function(n, p) {
   }
   p <- as.numeric(p)
   if (length(p) != 1L || is.na(p) || p < 0 || p > 1) {
-    stop("p must be a single value in \[0, 1\].", call. = FALSE)
+    stop("p must be a single value in [0, 1].", call. = FALSE)
   }
   n <- as.integer(n)
   ks <- 0:n

@@ -36,7 +36,7 @@ hermitS <- function(x, K = 3L, kind = "physicist") {
 
 # CANONICAL TEST
 # b <- hermitS(c(2), K = 3)$basis
-# stopifnot(abs(b\[1, 1\] - 1) < 1e-12, abs(b\[1, 2\] - 4) < 1e-12,
+# stopifnot(abs(b[1, 1] - 1) < 1e-12, abs(b[1, 2] - 4) < 1e-12,
 #           abs(b[1, 3] - 14) < 1e-12, abs(b[1, 4] - 40) < 1e-12)
 
 #' @rdname hermitS

@@ -44,7 +44,7 @@ Colbrt <- function(query, docs) {
       best <- NA_real_
       for (j in seq_len(nrow(Dn))) {
         v <- 0
-        for (k in seq_len(d)) v <- v + Qn\[i, k\] * Dn[j, k]
+        for (k in seq_len(d)) v <- v + Qn[i, k] * Dn[j, k]
         if (is.na(best) || v > best) best <- v
       }
       maxsim[q, i] <- best
@@ -53,8 +53,8 @@ Colbrt <- function(query, docs) {
     scores[q] <- s
   }
   order_ <- order(-scores, seq_along(scores))
-  .t1_result(estimate = scores[order_\[1\]], scores = scores,
-             ranking = order_ - 1L, best = order_\[1\] - 1L,
+  .t1_result(estimate = scores[order_[1]], scores = scores,
+             ranking = order_ - 1L, best = order_[1] - 1L,
              max_sim = maxsim, nq = nq, n_docs = length(dl),
              method = "ColBERT late-interaction retrieval scoring")
 }

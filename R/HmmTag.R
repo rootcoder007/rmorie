@@ -47,7 +47,7 @@ HmmTag <- function(X, tagset, start = NULL, trans = NULL, emit = NULL) {
   lg <- function(p) if (p > 0) log(p) else -Inf
   delta <- matrix(-Inf, T, S)
   psi <- matrix(0L, T, S)
-  for (s in seq_len(S)) delta[1, s] <- lg(pi0[s]) + lg(B[s, xs\[1\] + 1L])
+  for (s in seq_len(S)) delta[1, s] <- lg(pi0[s]) + lg(B[s, xs[1] + 1L])
   if (T > 1L) for (t in 2:T) for (s in seq_len(S)) {
     best <- -Inf
     arg <- 1L

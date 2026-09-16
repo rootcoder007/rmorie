@@ -90,7 +90,7 @@ morie_locp <- function(x, y, x0 = NULL, degree = 1, bandwidth = NULL,
       fitted[ip] <- NaN
       slope[ip] <- NaN
     } else {
-      fitted[ip] <- beta\[1\]
+      fitted[ip] <- beta[1]
       slope[ip] <- if (d >= 1) beta[2] else NaN
     }
     neff[ip] <- sw

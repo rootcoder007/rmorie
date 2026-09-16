@@ -82,7 +82,7 @@ Hrzplrq <- function(x, y, z, bandwidth = NULL, tau = 0.5, niter = 12L) {
     out <- numeric(n)
     for (i in seq_len(n)) {
       s <- 0
-      for (k in seq_len(p)) s <- s + X\[i, k\] * b[k]
+      for (k in seq_len(p)) s <- s + X[i, k] * b[k]
       out[i] <- y[i] - s
     }
     out
@@ -98,7 +98,7 @@ Hrzplrq <- function(x, y, z, bandwidth = NULL, tau = 0.5, niter = 12L) {
     acc <- numeric(p)
     for (i in seq_len(n)) {
       ind <- if ((r[i] - g[i]) <= 0) 1 else 0
-      for (k in seq_len(p)) acc[k] <- acc[k] + X\[i, k\] * (tau - ind)
+      for (k in seq_len(p)) acc[k] <- acc[k] + X[i, k] * (tau - ind)
     }
     sum((acc / n)^2)
   }

@@ -530,7 +530,7 @@ morie_esl_oob_632 <- function(err_train, err_loo_boot, gamma = NULL,
     pp <- as.numeric(p1)
     qq <- as.numeric(q1)
     if (pp < 0 || pp > 1 || qq < 0 || qq > 1) {
-      stop("p1 and q1 are proportions and must lie in \[0, 1\].", call. = FALSE)
+      stop("p1 and q1 are proportions and must lie in [0, 1].", call. = FALSE)
     }
     gamma <- pp * (1 - qq) + (1 - pp) * qq
   }

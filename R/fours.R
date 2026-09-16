@@ -50,6 +50,6 @@ Fours <- function(t, n_harmonics, period = NULL) {
       Fm[i, 2L * h + 1L] <- ck * cos(h * w * tt[i])
     }
   }
-  list(estimate = Fm\[1, 1\], F = Fm, omega = w, period = P, n = n,
+  list(estimate = Fm[1, 1], F = Fm, omega = w, period = P, n = n,
        method = "Chapter 14 Sect. 14.2.1 Fourier basis, phi_1 = 1/sqrt(P), sin/cos pairs scaled by 1/sqrt(P/2)")
 }

@@ -87,7 +87,7 @@ morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
   icc <- if (denom > 0) s2a / denom else 0.0
   lo <- hi <- NULL
   if (isTRUE(av$balanced)) {
-    n <- av$n_i\[1\]
+    n <- av$n_i[1]
     a <- as.integer(av$a)
     N <- as.integer(av$N)
     alpha <- 1.0 - conf_level

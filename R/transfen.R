@@ -38,7 +38,7 @@ Transent <- function(x, y, lag = 1) {
     if (tot <= 0) return(NaN)
     p3 <- cnt / tot
     parts <- strsplit(keys, "\037", fixed = TRUE)
-    ka <- vapply(parts, function(z) z\[1\], "")
+    ka <- vapply(parts, function(z) z[1], "")
     kb <- vapply(parts, function(z) z[2], "")
     kc <- vapply(parts, function(z) z[3], "")
     kxy <- paste(kb, kc, sep = "\037")

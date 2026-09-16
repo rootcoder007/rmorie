@@ -189,7 +189,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
   seen <- character(0)
   stack <- node
   while (length(stack)) {
-    cur <- stack\[1\]
+    cur <- stack[1]
     stack <- stack[-1]
     for (c in ch[[cur]]) {
       if (!(c %in% seen)) {
@@ -217,7 +217,7 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
   out <- list()
   stack <- list(list(cur = x, path = x, dirs = character(0)))
   while (length(stack)) {
-    s <- stack[\[1\]]
+    s <- stack[[1]]
     stack <- stack[-1]
     if (s$cur == y) {
       out[[length(out) + 1L]] <- s
@@ -312,7 +312,7 @@ morie_backdoor_criterion <- function(dag, x, y, z = character(0)) {
 
   bad <- sort(intersect(Z, .bd_desc(x, g$children)))
   back <- Filter(
-    function(s) length(s$dirs) && s$dirs\[1\] == "<-",
+    function(s) length(s$dirs) && s$dirs[1] == "<-",
     .bd_paths(x, y, g$children, g$parents)
   )
   open <- Filter(function(s) !.bd_blocked(s$path, s$dirs, Z, g$children), back)

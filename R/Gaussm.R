@@ -38,7 +38,7 @@ Gaussm <- function(f_value, l2_sens, epsilon, delta, draw = 1) {
   k <- as.integer(draw)
   noise <- vapply(seq_along(fv) - 1L, function(i) sigma * .s03qnorm(.s03vdc(k + i)), 0)
   out <- fv + noise
-  .t1_result(estimate = out\[1\], released = out, noise = noise, sigma = sigma,
+  .t1_result(estimate = out[1], released = out, noise = noise, sigma = sigma,
              c = cc, epsilon = e, delta = d, n = length(fv),
              method = "f(D) + N(0, sigma^2) with sigma = sqrt(2 ln(1.25/delta)) Delta_2 f / eps, Dwork & Roth (2014) Thm A.1")
 }

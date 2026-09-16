@@ -134,7 +134,7 @@ morie_mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
   for (i in seq_len(L)) {
     for (j in seq_len(L)) {
       ok <- (j <= i || !causal) && (i - j) < window
-      mask\[i, j\] <- ok
+      mask[i, j] <- ok
     }
   }
   mask

@@ -38,14 +38,14 @@ Tfcells <- function(X_i, A_epsilon, n = NULL) {
     if (is.function(A)) {
       sum(vapply(x, function(v) isTRUE(as.logical(A(v))), logical(1)))
     } else {
-      sum(x >= as.numeric(A\[1\]) & x < as.numeric(A[2]))
+      sum(x >= as.numeric(A[1]) & x < as.numeric(A[2]))
     }
   }
   counts <- vapply(cells, member, numeric(1))
   prop <- if (nn > 0) counts / nn else rep(NaN, length(counts))
   if (single) {
-    counts <- counts[\[1\]]
-    prop <- prop[\[1\]]
+    counts <- counts[[1]]
+    prop <- prop[[1]]
   }
   list(
     N_epsilon = as.integer(counts), proportion = prop, n = nn,

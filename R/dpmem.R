@@ -40,7 +40,7 @@ Dpmem <- function(y, alpha = 1, base_distribution = NULL, n_iter = 50,
   } else {
     b <- .s03vec(base_distribution)
     if (length(b) != 2L) stop("base_distribution must be (mu0, tau2)")
-    mu0 <- b\[1\]
+    mu0 <- b[1]
     tau2 <- b[2]
   }
   if (!(tau2 > 0 && sigma2 > 0))

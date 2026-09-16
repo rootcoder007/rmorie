@@ -32,11 +32,11 @@ Relbt <- function(r, h2) {
   for (i in seq_len(n)) {
     a <- rr[((i - 1L) %% length(rr)) + 1L]
     b <- hh[((i - 1L) %% length(hh)) + 1L]
-    if (a < -1 || a > 1) stop("reliability_metric: r must lie in \[-1, 1\]")
+    if (a < -1 || a > 1) stop("reliability_metric: r must lie in [-1, 1]")
     if (b <= 0 || b > 1) stop("reliability_metric: h2 must lie in (0, 1]")
     rel[i] <- a * a / b
     acc[i] <- a / sqrt(b)
   }
-  list(estimate = rel\[1\], reliability = rel, accuracy = acc, n = n,
+  list(estimate = rel[1], reliability = rel, accuracy = acc, n = n,
        method = "rel = r^2 / h^2, with r the Chapter 4 eq. (4.2) predictive ability (Dekkers 2007)")
 }

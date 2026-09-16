@@ -28,12 +28,12 @@
 #' @export
 spcont <- function(cov_func, tol = 1e-8) {
   if (!is.function(cov_func)) stop("`cov_func` must be a function C(h)")
-  c0 <- as.numeric(cov_func(0))\[1\]
+  c0 <- as.numeric(cov_func(0))[1]
   hs <- c(1e-2, 1e-3, 1e-4, 1e-5, 1e-6)
   approach <- as.numeric(cov_func(hs))
   gaps <- c0 - approach
-  ratio <- if (abs(gaps\[1\]) > 0) gaps[length(gaps)] / gaps\[1\] else 0
-  shrinking <- abs(gaps[length(gaps)]) < abs(gaps\[1\]) * 0.1 || abs(gaps\[1\]) <= tol
+  ratio <- if (abs(gaps[1]) > 0) gaps[length(gaps)] / gaps[1] else 0
+  shrinking <- abs(gaps[length(gaps)]) < abs(gaps[1]) * 0.1 || abs(gaps[1]) <= tol
   plateau <- abs(gaps[length(gaps)]) > tol && ratio > 0.5
   is_cont <- isTRUE(shrinking && !plateau)
   nugget <- if (is_cont) 0 else gaps[length(gaps)]

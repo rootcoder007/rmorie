@@ -46,7 +46,7 @@ morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
     bounds <- lapply(seq_len(k), function(i) c(0, 1))
   }
   if (length(bounds) != k ||
-      any(vapply(bounds, function(b) b[2] <= b\[1\], logical(1)))) {
+      any(vapply(bounds, function(b) b[2] <= b[1], logical(1)))) {
     stop("bounds must be k pairs with low < high")
   }
   delta <- p / (2 * (p - 1))
@@ -58,7 +58,7 @@ morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
   unif <- function() .ghc_unif(e, 1L)
   scale_x <- function(u) {
     vapply(seq_len(k), function(i)
-      bounds[[i]]\[1\] + u[i] * (bounds[[i]][2] - bounds[[i]]\[1\]),
+      bounds[[i]][1] + u[i] * (bounds[[i]][2] - bounds[[i]][1]),
       numeric(1))
   }
 

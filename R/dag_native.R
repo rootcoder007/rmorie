@@ -30,7 +30,7 @@
 #' @export
 morie_dag <- function(edges, exposure, outcome, latent = character()) {
   em <- do.call(rbind, lapply(edges, function(e) {
-    p <- trimws(strsplit(e, "->", fixed = TRUE)[\[1\]])
+    p <- trimws(strsplit(e, "->", fixed = TRUE)[[1]])
     if (length(p) != 2L || !all(nzchar(p))) {
       stop("edge must look like 'A -> B': ", e, call. = FALSE)
     }
@@ -46,7 +46,7 @@ morie_dag <- function(edges, exposure, outcome, latent = character()) {
   seen <- 0L
   indeg2 <- indeg
   while (length(q)) {
-    v <- q\[1\]
+    v <- q[1]
     q <- q[-1]
     seen <- seen + 1L
     for (w in em[em[, "from"] == v, "to"]) {
@@ -88,7 +88,7 @@ print.morie_dag <- function(x, ...) {
   )
   cat("  exposure:", x$exposure, " outcome:", x$outcome, "\n")
   if (length(x$latent)) cat("  latent:", paste(x$latent, collapse = ", "), "\n")
-  apply(x$edges, 1, function(e) cat("  ", e\[1\], "->", e[2], "\n"))
+  apply(x$edges, 1, function(e) cat("  ", e[1], "->", e[2], "\n"))
   invisible(x)
 }
 
@@ -130,12 +130,12 @@ print.morie_dag <- function(x, ...) {
   visit <- list(c(x, "up"))
   seen <- character(0)
   while (length(visit)) {
-    cur <- visit[\[1\]]
+    cur <- visit[[1]]
     visit <- visit[-1]
     key <- paste(cur, collapse = "|")
     if (key %in% seen) next
     seen <- c(seen, key)
-    v <- cur\[1\]
+    v <- cur[1]
     dir <- cur[2]
     if (v %in% y && !(v %in% z)) {
       return(FALSE)

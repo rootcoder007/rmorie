@@ -24,7 +24,7 @@ Wsdt2d <- function(X_samples, Y_samples, p = 2) {
   n <- nrow(A)
   Cst <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    Cst\[i, j\] <- sum(abs(A[i, ] - B[j, ])^2)^(p / 2)
+    Cst[i, j] <- sum(abs(A[i, ] - B[j, ])^2)^(p / 2)
   }
   asg <- .s4_hungarian(Cst)
   tot <- sum(vapply(seq_len(n), function(i) Cst[i, asg[i] + 1L], 0)) / n

@@ -73,7 +73,7 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
   G <- matrix(0.0, n + 1L, n + 1L)
   for (i in seq_len(n)) {
     for (j in seq_len(n))
-      G\[i, j\] <- .krpkrg_gamma(dist2(C[i, ], C[j, ]), model, nugget, sill, rng)
+      G[i, j] <- .krpkrg_gamma(dist2(C[i, ], C[j, ]), model, nugget, sill, rng)
     G[i, n + 1L] <- 1.0
     G[n + 1L, i] <- 1.0
   }

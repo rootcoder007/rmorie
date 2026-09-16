@@ -111,7 +111,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
   A <- matrix(0.0, k, k)
   for (i in seq_len(k)) {
     for (j in seq_len(k)) {
-      A\[i, j\] <- sum(vx[[i]] * vx[[j]] / f)
+      A[i, j] <- sum(vx[[i]] * vx[[j]] / f)
     }
   }
   b <- numeric(k)
@@ -184,10 +184,10 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
     stop(sprintf("sarimax: method must be 'ml', 'uls' or 'css', got %s", method))
   }
   y <- as.numeric(y)
-  p <- as.integer(order\[1\])
+  p <- as.integer(order[1])
   d <- as.integer(order[2])
   q <- as.integer(order[3])
-  P <- as.integer(seasonal_order\[1\])
+  P <- as.integer(seasonal_order[1])
   D <- as.integer(seasonal_order[2])
   Q <- as.integer(seasonal_order[3])
   s <- as.integer(s)
@@ -361,10 +361,10 @@ starting_models <- function(d, D, s) {
 #' r <- neighbours(order = rnorm(10), seasonal_order = rnorm(10), constant = rnorm(10), s = rnorm(10))
 #' TRUE
 neighbours <- function(order, seasonal_order, constant, s) {
-  p <- order\[1\]
+  p <- order[1]
   d <- order[2]
   q <- order[3]
-  P <- seasonal_order\[1\]
+  P <- seasonal_order[1]
   D <- seasonal_order[2]
   Q <- seasonal_order[3]
   out <- list()

@@ -68,6 +68,6 @@ Btpair <- function(X, y, B = 200, seed = 1, alpha = 0.05) {
     hi[j] <- .s03quantile7(col, 1 - a / 2)
   }
   list(beta_b = reps, beta_hat = bh, se = se, lo = lo, hi = hi,
-       n_illcond = ill, n = n, p = p, B = as.integer(B), estimate = bh\[1\],
+       n_illcond = ill, n = n, p = p, B = as.integer(B), estimate = bh[1],
        method = "Freedman (1981) Ann. Statist. 9(6):1218-1228, case resampling")
 }

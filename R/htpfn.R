@@ -134,7 +134,7 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
   }
   Q <- matrix(0, L, L)
   for (l in seq_len(L)) {
-    for (o in seq_len(L)) Q\[l, o\] <- sum(wq * Psi[, l] * Psi[, o])
+    for (o in seq_len(L)) Q[l, o] <- sum(wq * Psi[, l] * Psi[, o])
   }
   Xd <- matrix(0, n, L)
   for (i in seq_len(n)) {
@@ -157,7 +157,7 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
   }
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      C[K + i, K + j] <- lam * Ginv\[i, j\] + (if (i == j) 1 else 0)
+      C[K + i, K + j] <- lam * Ginv[i, j] + (if (i == j) 1 else 0)
     }
   }
   rhs <- c(vapply(seq_len(K), function(k) sum(Xs[, k] * yv), 0), yv)
@@ -176,7 +176,7 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
   worst <- 0
   for (i in seq_len(K + n)) {
     acc <- 0
-    for (j in seq_len(K + n)) acc <- acc + C\[i, j\] * sol[j]
+    for (j in seq_len(K + n)) acc <- acc + C[i, j] * sol[j]
     worst <- max(worst, abs(acc - rhs[i]))
   }
   if (!(worst <= 1e-6 * scale)) {
@@ -209,7 +209,7 @@ Htpfn <- function(y, markers, W_functional, n_basis = 5, lam = 1, a = 0, b = 1,
       for (l in seq_len(L)) rr[l] <- sum(rows[, l] * xs_)
       cj <- .s03ridgesolve(A, rr, 1e-12)
       pred <- sum(cj * Psi[j, ])
-      cv1 <- cv1 + (Wm\[i, j\] - pred)^2
+      cv1 <- cv1 + (Wm[i, j] - pred)^2
     }
   }
 

@@ -74,9 +74,9 @@ Bxprfl <- function(y, p_low = 6, p_high = 32, K = 12) {
   w_high <- 2 * pi / as.numeric(p_low)
   w_low <- 2 * pi / as.numeric(p_high)
   b <- numeric(K + 1L)
-  b\[1\] <- (w_high - w_low) / pi
+  b[1] <- (w_high - w_low) / pi
   for (h in seq_len(K)) b[h + 1L] <- (sin(h * w_high) - sin(h * w_low)) / (pi * h)
-  tot <- b\[1\] + 2 * sum(b[-1])
+  tot <- b[1] + 2 * sum(b[-1])
   theta <- -tot / (2 * K + 1)
   vapply((-K):K, function(h) b[abs(h) + 1L] + theta, 0)
 }

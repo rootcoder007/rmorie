@@ -38,7 +38,7 @@ Tmlecat <- function(Y, A, Q, G, ref = 1, gbound = 0.025, level = 0.95) {
     stop("A must hold one-based level labels in 1..L")
   ref <- as.integer(ref)
   if (ref < 1L || ref > L) stop("ref must be a level in 1..L")
-  if (any(Y < 0 | Y > 1)) stop("Y must lie in \[0, 1\]")
+  if (any(Y < 0 | Y > 1)) stop("Y must lie in [0, 1]")
   psi <- ses <- mg <- numeric(L)
   ics <- matrix(0, n, L)
   for (a in seq_len(L)) {

@@ -28,10 +28,10 @@ morie_one_sample_coverage <- function(x) {
   coverages <- diff(c(0, ranks, 1))
   list(
     coverages = coverages,
-    cumulative = ranks[n] - ranks\[1\],
+    cumulative = ranks[n] - ranks[1],
     expected = 1 / (n + 1),
     n = n,
-    sample_min = xs\[1\],
+    sample_min = xs[1],
     sample_max = xs[n],
     method = "One-sample coverage probability"
   )

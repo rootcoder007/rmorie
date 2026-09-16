@@ -506,11 +506,11 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
       paste(missing_cols, collapse = ", ")
     )
   }
-  if (gamma_range\[1\] < 1) {
-    stop("Minimum Gamma must be >= 1.0, got ", gamma_range\[1\])
+  if (gamma_range[1] < 1) {
+    stop("Minimum Gamma must be >= 1.0, got ", gamma_range[1])
   }
-  if (gamma_range[2] <= gamma_range\[1\]) {
-    stop("gamma_range[2] must be > gamma_range\[1\].")
+  if (gamma_range[2] <= gamma_range[1]) {
+    stop("gamma_range[2] must be > gamma_range[1].")
   }
   if (n_gamma < 2L) {
     stop("n_gamma must be >= 2, got ", n_gamma)
@@ -529,7 +529,7 @@ sensitivity_rosenbaum <- function(data, treatment, outcome,
   treated_sorted <- sort(treated)[seq_len(min_n)]
   control_sorted <- sort(control)[seq_len(min_n)]
   differences <- treated_sorted - control_sorted
-  gammas <- seq(gamma_range\[1\], gamma_range[2],
+  gammas <- seq(gamma_range[1], gamma_range[2],
     length.out = n_gamma
   )
 
@@ -802,7 +802,7 @@ morie_effects_tidy <- function(model, ...) {
   cf <- as.data.frame(cf)
   data.frame(
     term = rownames(cf),
-    estimate = cf[\[1\]],
+    estimate = cf[[1]],
     std.error = if (ncol(cf) >= 2L) cf[[2]] else NA_real_,
     statistic = if (ncol(cf) >= 3L) cf[[3]] else NA_real_,
     p.value = if (ncol(cf) >= 4L) cf[[4]] else NA_real_,

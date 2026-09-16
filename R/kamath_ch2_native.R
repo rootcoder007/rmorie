@@ -46,7 +46,7 @@
   p <- as.numeric(p)
   if (length(p) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)
   if (any(p < 0 | p > 1)) {
-    stop(sprintf("every entry of %s must lie in \[0, 1\].", name),
+    stop(sprintf("every entry of %s must lie in [0, 1].", name),
          call. = FALSE)
   }
   p
@@ -71,7 +71,7 @@ morie_kamath_encoder_state <- function(h_t_1, x_t, f = NULL) {
   } else {
     out <- as.numeric(f(h, x))
   }
-  list(h = out, estimate = out\[1\], n = length(out),
+  list(h = out, estimate = out[1], n = length(out),
        method = "Encoder recurrence h_t = f(h_t-1, x_t) (Kamath Eq 2.1)")
 }
 
@@ -102,7 +102,7 @@ morie_kamath_context_vector <- function(h_1_h_T, mapping = "mean") {
     stop(sprintf("mapping must be mean, last, max or a function; got '%s'.",
                  mapping), call. = FALSE)
   }
-  list(context = as.numeric(c_), mapping = name, estimate = c_\[1\],
+  list(context = as.numeric(c_), mapping = name, estimate = c_[1],
        n = nrow(H),
        method = "Context vector c = m(h_1..h_T) (Kamath Eq 2.2)")
 }
@@ -125,7 +125,7 @@ morie_kamath_context_simplest <- function(h_T, all_states = NULL) {
            call. = FALSE)
     }
   }
-  list(context = h, agrees_with_eq22 = agrees, estimate = h\[1\],
+  list(context = h, agrees_with_eq22 = agrees, estimate = h[1],
        n = length(h),
        method = "Simplest context c = h_T (Kamath Eq 2.3)")
 }
@@ -150,7 +150,7 @@ morie_kamath_decoder_state <- function(s_t_1, y_t_1, c, g = NULL) {
   } else {
     out <- as.numeric(g(s, y, cc))
   }
-  list(s = out, estimate = out\[1\], n = length(out),
+  list(s = out, estimate = out[1], n = length(out),
        method = "Decoder recurrence s = g(s, y, c) (Kamath Eq 2.4)")
 }
 
@@ -258,7 +258,7 @@ morie_kamath_attention_softmax <- function(a) {
   a <- as.numeric(a)
   if (length(a) == 0L) stop("no scores supplied.", call. = FALSE)
   b <- .morie_km_softmax(a)
-  list(weights = b, estimate = b\[1\], n = length(a),
+  list(weights = b, estimate = b[1], n = length(a),
        method = "Attention softmax weights (Kamath Eq 2.8)")
 }
 
@@ -276,7 +276,7 @@ morie_kamath_softmax_element <- function(a_i, a) {
          call. = FALSE)
   }
   full <- morie_kamath_attention_softmax(a)$weights
-  list(estimate = full[hit\[1\]], index = hit\[1\] - 1L,
+  list(estimate = full[hit[1]], index = hit[1] - 1L,
        full_weights = full, n = length(a),
        method = "Softmax element (Kamath Eq 2.9)")
 }
@@ -297,7 +297,7 @@ morie_kamath_attention_output <- function(b, v) {
   }
   o <- as.numeric(b %*% V)
   convex <- all(b >= 0) && abs(sum(b) - 1) < 1e-9
-  list(output = o, is_convex_combination = convex, estimate = o\[1\],
+  list(output = o, is_convex_combination = convex, estimate = o[1],
        n = length(b),
        method = "Attention output sum b_i v_i (Kamath Eq 2.10)")
 }
@@ -361,7 +361,7 @@ morie_kamath_multihead_head_i <- function(Q, K, V, W_Qi, W_Ki, W_Vi) {
                     list("V", V, Wv))) {
     if (ncol(pair[[2]]) != nrow(pair[[3]])) {
       stop(sprintf("%s has width %d but its projection has %d rows.",
-                   pair[\[1\]], ncol(pair[[2]]), nrow(pair[[3]])),
+                   pair[[1]], ncol(pair[[2]]), nrow(pair[[3]])),
            call. = FALSE)
     }
   }
@@ -381,7 +381,7 @@ morie_kamath_multihead_head_i <- function(Q, K, V, W_Qi, W_Ki, W_Vi) {
 morie_kamath_multihead_concat <- function(heads, W_O) {
   hs <- lapply(heads, as.matrix)
   if (length(hs) == 0L) stop("no heads supplied.", call. = FALSE)
-  rows <- nrow(hs[\[1\]])
+  rows <- nrow(hs[[1]])
   if (any(vapply(hs, nrow, integer(1)) != rows)) {
     stop("every head must have the same number of rows.", call. = FALSE)
   }
@@ -392,7 +392,7 @@ morie_kamath_multihead_concat <- function(heads, W_O) {
                  ncol(concat), nrow(Wo)), call. = FALSE)
   }
   out <- concat %*% Wo
-  list(output = out, heads = length(hs), estimate = out\[1, 1\], n = rows,
+  list(output = out, heads = length(hs), estimate = out[1, 1], n = rows,
        method = "Multi-head concat + output projection (Kamath Eq 2.16)")
 }
 
@@ -423,7 +423,7 @@ morie_kamath_masked_attention <- function(Q, K, V, M, d_k = NULL) {
   z <- scores - apply(scores, 1, max)
   A <- exp(z) / rowSums(exp(z))
   out <- A %*% V
-  list(output = out, attention = A, estimate = out\[1, 1\], n = nrow(Q),
+  list(output = out, attention = A, estimate = out[1, 1], n = nrow(Q),
        method = "Masked attention, mask inside the scaling (Kamath Eq 2.19)")
 }
 
@@ -498,7 +498,7 @@ morie_kamath_ffn_relu <- function(z, W_1, W_2, b_1, b_2) {
   hidden <- pmax(Z %*% W1 + matrix(b1, nrow(Z), length(b1),
                                    byrow = TRUE), 0)
   out <- hidden %*% W2 + matrix(b2, nrow(Z), length(b2), byrow = TRUE)
-  list(output = out, hidden = hidden, estimate = out\[1, 1\], n = nrow(Z),
+  list(output = out, hidden = hidden, estimate = out[1, 1], n = nrow(Z),
        method = "Position-wise FFN ReLU(zW1+b1)W2+b2 (Kamath Eq 2.17)")
 }
 
@@ -536,7 +536,7 @@ morie_kamath_layer_norm <- function(h_i, mu = NULL, sigma = NULL, g = 1,
     sqrt(mean((h - m)^2) + as.numeric(eps)) else s
   out <- as.numeric(g) * (h - m) / denom
   list(output = out, normalised = (h - m) / denom, mu = m, sigma = s,
-       estimate = out\[1\], n = length(h),
+       estimate = out[1], n = length(h),
        method = "Layer normalisation g(h - mu)/sigma (Kamath Eq 2.18)")
 }
 
@@ -643,7 +643,7 @@ morie_kamath_tlm_loss <- function(x, y, M_x, M_y) {
 morie_kamath_nsp_loss <- function(x, y, d) {
   p <- as.numeric(x)
   if (p < 0 || p > 1) {
-    stop("the model probability must lie in \[0, 1\].", call. = FALSE)
+    stop("the model probability must lie in [0, 1].", call. = FALSE)
   }
   d <- as.integer(d)
   if (!(d %in% c(0L, 1L))) stop("d must be 0 or 1.", call. = FALSE)
@@ -661,7 +661,7 @@ morie_kamath_nsp_loss <- function(x, y, d) {
 morie_kamath_span_loss <- function(x, xhat, i, j) {
   p <- as.numeric(x)
   if (any(p < 0 | p > 1)) {
-    stop("probabilities must lie in \[0, 1\].", call. = FALSE)
+    stop("probabilities must lie in [0, 1].", call. = FALSE)
   }
   i <- as.integer(i)
   j <- as.integer(j)
@@ -742,7 +742,7 @@ morie_kamath_moe_output <- function(x, G, E_i) {
          call. = FALSE)
   }
   list(output = total, gate_weights = g, experts_evaluated = ran,
-       estimate = total\[1\], n = length(E_i),
+       estimate = total[1], n = length(E_i),
        method = "Mixture-of-experts combination (Kamath Eq 2.39)")
 }
 
@@ -794,7 +794,7 @@ morie_kamath_mixtral_moe <- function(x, W_g, expert_weights = NULL) {
                    length(expert_weights), n), call. = FALSE)
     }
     experts <- lapply(expert_weights, function(ws) {
-      W1 <- as.matrix(ws[\[1\]])
+      W1 <- as.matrix(ws[[1]])
       W3 <- as.matrix(ws[[2]])
       W2 <- as.matrix(ws[[3]])
       if (!all(dim(W1) == dim(W3))) {

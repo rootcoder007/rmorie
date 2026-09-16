@@ -30,7 +30,7 @@ spnsr <- function(nugget = 0, sill = 1, range = 1, target_dist = NULL,
   cm <- list(nugget = nugget, sill = sill, range = range, model = model)
   r <- .sp_simple_kriging(coords, z, matrix(d, 1, 1), cm)
   w <- as.numeric(r$weights[, 1])
-  list(prediction = r$prediction\[1\], variance = r$variance\[1\], weights = w,
+  list(prediction = r$prediction[1], variance = r$variance[1], weights = w,
        weight_spread = max(w) - min(w), mean = mean(z),
        nugget = nugget, sill = sill, range = range, model = model)
 }

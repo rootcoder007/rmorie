@@ -34,7 +34,7 @@ GcnII <- function(A, H0, alpha = 0.1, beta = 0.5, K = 4) {
   H <- .s03mat(H0)
   if (nrow(H) != n) stop("gcnii: H0 must have one row per node")
   a <- as.numeric(alpha)
-  if (a < 0 || a > 1) stop("gcnii: alpha must lie in \[0, 1\]")
+  if (a < 0 || a > 1) stop("gcnii: alpha must lie in [0, 1]")
   if (as.numeric(beta) < 0) stop("gcnii: beta must be non-negative")
   layers <- as.integer(K)
   if (layers < 1L) stop("gcnii: K must be at least 1")

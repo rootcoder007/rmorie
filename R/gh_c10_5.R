@@ -42,7 +42,7 @@ Ghosalwnadapt <- function(y = NULL, n = 400, pi_incl = 0.2, tau2 = 1,
     log(pi_incl)
   l0 <- -0.5 * log(2 * pi * v) - 0.5 * y * y / v + log(1 - pi_incl)
   incl <- 1 / (1 + exp(l0 - l1))
-  .t1_result(estimate = incl\[1\],
+  .t1_result(estimate = incl[1],
              inclusion_probs = incl,
              method = "spike-slab adaptation (GvdV 2017 sec. 10.3.2)")
 }

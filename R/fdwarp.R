@@ -46,12 +46,12 @@ Fdwarp <- function(x, y, cost = "abs", window = NULL) {
     hi <- if (is.null(w)) m - 1L else min(m - 1L, i + w)
     if (hi < lo) next
     for (j in lo:hi) {
-      if (i == 0L && j == 0L) { g\[1, 1\] <- dfun(0L, 0L)
+      if (i == 0L && j == 0L) { g[1, 1] <- dfun(0L, 0L)
       next }
       best <- Inf
       if (i > 0L && g[i, j + 1L] < best) best <- g[i, j + 1L]
       if (j > 0L && g[i + 1L, j] < best) best <- g[i + 1L, j]
-      if (i > 0L && j > 0L && g\[i, j\] < best) best <- g\[i, j\]
+      if (i > 0L && j > 0L && g[i, j] < best) best <- g[i, j]
       g[i + 1L, j + 1L] <- if (is.finite(best)) dfun(i, j) + best else Inf
     }
   }
@@ -69,7 +69,7 @@ Fdwarp <- function(x, y, cost = "abs", window = NULL) {
     bi <- i
     bj <- j
     seen <- FALSE
-    if (i > 0L && j > 0L) { bv <- g\[i, j\]
+    if (i > 0L && j > 0L) { bv <- g[i, j]
     bi <- i - 1L
     bj <- j - 1L
     seen <- TRUE }

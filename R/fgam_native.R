@@ -1,5 +1,5 @@
 # R arm of fgam -- the functional generalized additive model
-#   E\[Y|X\] = theta0 + int F(X(t), t) dt
+#   E[Y|X] = theta0 + int F(X(t), t) dt
 # with F a tensor product of cubic B-splines and separate second-difference
 # penalties in the level and time directions.
 #
@@ -189,10 +189,10 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
   Px <- .fgam_diff_penalty(n_x)
   Pt <- .fgam_diff_penalty(n_t)
   for (a in seq_len(n_x)) for (b in seq_len(n_x)) {
-    if (abs(Px\[a, b\]) <= .fgam_EPS) next
+    if (abs(Px[a, b]) <= .fgam_EPS) next
     for (c in seq_len(n_t))
       ZtZ[(a - 1L) * n_t + c, (b - 1L) * n_t + c] <-
-        ZtZ[(a - 1L) * n_t + c, (b - 1L) * n_t + c] + lam_x * Px\[a, b\]
+        ZtZ[(a - 1L) * n_t + c, (b - 1L) * n_t + c] + lam_x * Px[a, b]
   }
   for (c in seq_len(n_t)) for (d in seq_len(n_t)) {
     if (abs(Pt[c, d]) <= .fgam_EPS) next
@@ -273,7 +273,7 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
 #' res
 .fgam_cheatsheet <- function() {
   paste0("fgam: morie_fgam_functional_gam(X, Y, n_x, n_t, lam_x, lam_t) -> ",
-         "E\[Y|X\] = theta0 + int F(X(t), t) dt by tensor-product penalised ",
+         "E[Y|X] = theta0 + int F(X(t), t) dt by tensor-product penalised ",
          "splines (McLean et al. 2014, JCGS 23(1), 249-269)")
 }
 

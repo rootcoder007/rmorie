@@ -27,10 +27,10 @@ Alfbkb <- function(s, w, b = NULL, frames = NULL) {
   quats <- matrix(0, n, 4)
   for (i in seq_len(n)) {
     p <- alfLin(s[i, ], w, b)
-    R <- alfQ2rot(p\[1\], p[2], p[3])
+    R <- alfQ2rot(p[1], p[2], p[3])
     tv <- c(p[4], p[5], p[6])
-    nq <- sqrt(1 + p\[1\]^2 + p[2]^2 + p[3]^2)
-    quats[i, ] <- c(1, p\[1\], p[2], p[3]) / nq
+    nq <- sqrt(1 + p[1]^2 + p[2]^2 + p[3]^2)
+    quats[i, ] <- c(1, p[1], p[2], p[3]) / nq
     Tf <- list(R = R, t = tv)
     if (!is.null(frames)) Tf <- alfRcomp(frames[[i]], Tf)
     out[[i]] <- Tf

@@ -39,12 +39,12 @@ Alfembed <- function(target_feat, residue_index, msa_feat, wa, wb, wrel,
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       p <- alfLin(alfOnehot(residue_index[i] - residue_index[j], bins), wrel)
-      pos\[i, j, \] <- p
-      z\[i, j, \] <- a[i, ] + b[j, ] + p
+      pos[i, j, ] <- p
+      z[i, j, ] <- a[i, ] + b[j, ] + p
     }
   }
 
-  s <- dim(msa_feat)\[1\]
+  s <- dim(msa_feat)[1]
   cm <- nrow(wmsa)
   m <- array(0, c(s, n, cm))
   for (si in seq_len(s)) {

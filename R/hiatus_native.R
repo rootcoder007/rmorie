@@ -45,9 +45,9 @@
   }
   for (i in 1:n) {
     for (j in 1:n) {
-      v <- Sm\[i, j\]
+      v <- Sm[i, j]
       if (!(0.0 <= v && v <= 1.0)) {
-        stop(sprintf("hiatus: sigma entries are probabilities and must lie in \[0, 1\], got %s", v))
+        stop(sprintf("hiatus: sigma entries are probabilities and must lie in [0, 1], got %s", v))
       }
     }
   }
@@ -146,7 +146,7 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
   for (i in 1:n) {
     acc <- 0.0
     for (j in 1:n) {
-      acc <- acc + b[j] * Sv[i] * sg\[i, j\] * Iv[j]
+      acc <- acc + b[j] * Sv[i] * sg[i, j] * Iv[j]
     }
     dS[i] <- m - acc - m * Sv[i]
   }
@@ -285,7 +285,7 @@ linear_strain_space <- function(n, width = 2.0, floor = 0.0) {
   for (i in 1:N) {
     for (j in 1:N) {
       v <- exp(-((i - j)^2) / (w * w))
-      out\[i, j\] <- max(as.numeric(floor), v)
+      out[i, j] <- max(as.numeric(floor), v)
     }
   }
   out

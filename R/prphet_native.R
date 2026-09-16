@@ -25,11 +25,11 @@
 .changepoints <- function(t, n.cp, range = 0.8, cps = NULL) {
   if (!is.null(cps)) return(as.numeric(cps))
   n <- length(t)
-  hi <- t\[1\] + range * (t[length(t)] - t\[1\])
+  hi <- t[1] + range * (t[length(t)] - t[1])
   m <- as.integer(n.cp)
   if (m < 1L) return(numeric(0))
-  step <- (hi - t\[1\]) / (m + 1L)
-  t\[1\] + step * seq_len(m)
+  step <- (hi - t[1]) / (m + 1L)
+  t[1] + step * seq_len(m)
 }
 
 #' morie_prphet_piecewise_trend
@@ -140,7 +140,7 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
     for (k in seq_along(names.v)) {
       ds <- holidays[[names.v[k]]]
       hit <- any(tv >= ds - lower & tv <= ds + upper)
-      rows\[i, k\] <- as.numeric(hit)
+      rows[i, k] <- as.numeric(hit)
     }
   }
   list(rows = rows, names = names.v)
@@ -170,7 +170,7 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
   blocks <- list(tm)
   seas <- if (is.null(seasonalities)) list() else seasonalities
   for (s in seas) {
-    nm <- s[\[1\]]
+    nm <- s[[1]]
     per <- s[[2]]
     ord <- s[[3]]
     blocks[[length(blocks) + 1L]] <- morie_prphet_fourier_terms(t, per, ord)
@@ -180,7 +180,7 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
   }
   hn <- character(0)
   if (!is.null(holidays) && length(holidays) > 0L) {
-    hm <- morie_prphet_holiday_matrix(t, holidays, holiday_window\[1\],
+    hm <- morie_prphet_holiday_matrix(t, holidays, holiday_window[1],
                                       holiday_window[2])
     blocks[[length(blocks) + 1L]] <- hm$rows
     hn <- hm$names
@@ -274,7 +274,7 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
        n.active.changepoints = sum(deltas != 0),
        sigma = sqrt(sum(resid^2) / max(n - p, 1)),
        seasonalities = if (is.null(seasonalities)) character(0)
-         else vapply(seasonalities, function(s) s[\[1\]], character(1)),
+         else vapply(seasonalities, function(s) s[[1]], character(1)),
        method = "Prophet decomposable model, Taylor & Letham (2018) eq. (1) and (4)")
 }
 

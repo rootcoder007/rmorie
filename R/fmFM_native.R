@@ -32,7 +32,7 @@ predict_naive <- function(x, w0, w, V) {
   xs <- as.numeric(x)
   n <- length(xs)
   s <- as.numeric(w0) + sum(w * xs)
-  kk <- length(V[\[1\]])
+  kk <- length(V[[1]])
   for (i in 1:(n - 1L)) {
     if (xs[i] == 0) next
     for (j in (i + 1L):n) {
@@ -60,7 +60,7 @@ predict_naive <- function(x, w0, w, V) {
 .fmFM_predict <- function(x, w0, w, V) {
   xs <- as.numeric(x)
   n <- length(xs)
-  kk <- length(V[\[1\]])
+  kk <- length(V[[1]])
   s <- as.numeric(w0) + sum(w * xs)
   for (f in seq_len(kk)) {
     a <- sum(vapply(seq_len(n), function(i) V[[i]][f] * xs[i],

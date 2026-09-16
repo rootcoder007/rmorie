@@ -40,7 +40,7 @@
 Thomp <- function(p, T, alpha0 = NULL, beta0 = NULL, seed = 0) {
   p <- as.numeric(p)
   K <- length(p)
-  if (any(p < 0) || any(p > 1)) stop("p must lie in \[0, 1\]", call. = FALSE)
+  if (any(p < 0) || any(p > 1)) stop("p must lie in [0, 1]", call. = FALSE)
   T <- as.integer(T)
   a <- if (is.null(alpha0)) rep(1, K) else as.numeric(alpha0)
   b <- if (is.null(beta0)) rep(1, K) else as.numeric(beta0)

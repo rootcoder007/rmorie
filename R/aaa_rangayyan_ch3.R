@@ -49,15 +49,15 @@
   if (length(x) != n) stop("x and y must have the same length")
   h <- diff(x)
   if (any(h <= 0)) stop("x must be strictly increasing")
-  uniform <- all(abs(h - h\[1\]) <= 1e-12 * max(1, abs(h\[1\])))
+  uniform <- all(abs(h - h[1]) <= 1e-12 * max(1, abs(h[1])))
   if (uniform && (n - 1L) %% 2L == 0L) {
     odd <- seq(2L, n - 1L, by = 2L)
     even <- if (n >= 4L) seq(3L, n - 1L, by = 2L) else integer(0)
     s <- .morie_fsum(c(
-      y\[1\], y[n], 4 * y[odd],
+      y[1], y[n], 4 * y[odd],
       if (length(even)) 2 * y[even] else numeric(0)
     ))
-    return(s * h\[1\] / 3)
+    return(s * h[1] / 3)
   }
   .morie_fsum(0.5 * (y[-n] + y[-1]) * h)
 }
@@ -581,7 +581,7 @@ EnsAvg <- function(observations) {
   recs <- lapply(observations, .morie_rg_aslist)
   m <- length(recs)
   if (!m) stop("need at least one observation")
-  n <- length(recs[\[1\]])
+  n <- length(recs[[1]])
   if (!n) stop("records must be nonempty")
   if (any(vapply(recs, length, integer(1)) != n)) {
     stop("all records must have the same length")
@@ -877,7 +877,7 @@ ContConv <- function(x, h, dt = 1, t = NULL) {
   if (!is.null(t)) {
     ts <- .morie_rg_aslist(t)
     if (length(ts) != length(xs)) stop("t must match x in length")
-    if (length(ts) > 1L) step <- ts[2] - ts\[1\]
+    if (length(ts) > 1L) step <- ts[2] - ts[1]
   }
   if (step <= 0) stop("dt must be positive")
   n <- length(xs)
@@ -890,7 +890,7 @@ ContConv <- function(x, h, dt = 1, t = NULL) {
     y[k] <- .morie_fsum(xs[idx] * hs[k - idx + 1L]) * step
   }
   t_out <- (seq_along(y) - 1) * step
-  if (!is.null(ts) && length(ts)) t_out <- ts\[1\] + (seq_along(y) - 1) * step
+  if (!is.null(ts) && length(ts)) t_out <- ts[1] + (seq_along(y) - 1) * step
   list(
     y = y, t = t_out, dt = step, n = n, m = m,
     integral = if (length(y) > 1L) .morie_rg_gridint(y, t_out) else 0,
@@ -975,7 +975,7 @@ StepSeq <- function(n, shift = 0) {
   }
   s <- as.integer(shift)
   u <- ifelse(idx - s >= 0L, 1, 0)
-  d <- c(u\[1\], if (length(u) > 1L) diff(u) else numeric(0))
+  d <- c(u[1], if (length(u) > 1L) diff(u) else numeric(0))
   list(
     u = u, n = idx, shift = s, first_difference = d,
     value_at_origin = 1, method = "Rangayyan (2024) eq. (3.35)"

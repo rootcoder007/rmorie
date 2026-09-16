@@ -48,7 +48,7 @@ Nnet1lay <- function(X, alpha, b, beta = NULL, y = NULL) {
   fitted <- as.numeric(.s03matvec(Z, bw))
   rss <- NaN
   if (!is.null(y)) rss <- sum((.s03vec(y) - fitted)^2)
-  list(estimate = fitted\[1\], fitted = fitted, hidden = Z, beta = bw, rss = rss,
+  list(estimate = fitted[1], fitted = fitted, hidden = Z, beta = bw, rss = rss,
        n = n, p = p, M = M,
        method = "Hastie-Tibshirani-Friedman (2009) ESL eq. (2.45)")
 }

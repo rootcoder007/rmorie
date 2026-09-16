@@ -18,7 +18,7 @@ RevSlope <- function(r, sigma_x, sigma_y) {
   sigma_x <- as.numeric(sigma_x)
   sigma_y <- as.numeric(sigma_y)
   if (length(r) != 1L || is.na(r) || r < -1 || r > 1) {
-    stop("r must be a single value in \[-1, 1\].", call. = FALSE)
+    stop("r must be a single value in [-1, 1].", call. = FALSE)
   }
   if (length(sigma_y) != 1L || is.na(sigma_y) || sigma_y <= 0 ||
         length(sigma_x) != 1L || is.na(sigma_x) || sigma_x < 0) {

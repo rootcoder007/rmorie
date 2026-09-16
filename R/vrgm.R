@@ -36,7 +36,7 @@ vrgm <- function(x, coords, n_bins = 10, max_dist = NULL) {
   gamma <- rep(NA_real_, n_bins)
   npairs <- integer(n_bins)
   for (k in seq_len(n_bins)) {
-    m <- dists > edges[k] & dists <= edges\[k + 1\]
+    m <- dists > edges[k] & dists <= edges[k + 1]
     npairs[k] <- sum(m)
     if (npairs[k] > 0) gamma[k] <- 0.5 * mean(diffs2[m])
   }

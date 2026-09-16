@@ -55,9 +55,9 @@ mrm_anova_bonferroni <- function(data, response_col, group_col, alpha = 0.05) {
   fit <- stats::aov(stats::as.formula(paste(response_col, "~", group_col)),
     data = d
   )
-  summ <- summary(fit)[\[1\]]
-  f <- summ[["F value"]]\[1\]
-  p_anova <- summ[["Pr(>F)"]]\[1\]
+  summ <- summary(fit)[[1]]
+  f <- summ[["F value"]][1]
+  p_anova <- summ[["Pr(>F)"]][1]
   groups <- levels(d[[group_col]])
   pairs_list <- list()
   k <- 0L
@@ -132,7 +132,7 @@ mrm_rcbd <- function(data, response_col, treatment_col, block_col) {
     )),
     data = d
   )
-  summ <- as.data.frame(summary(fit)[\[1\]])
+  summ <- as.data.frame(summary(fit)[[1]])
   summ$source <- trimws(rownames(summ))
   rownames(summ) <- NULL
   list(
@@ -181,7 +181,7 @@ mrm_latin_square <- function(data, response_col, row_col, col_col,
     )),
     data = d
   )
-  summ <- as.data.frame(summary(fit)[\[1\]])
+  summ <- as.data.frame(summary(fit)[[1]])
   summ$source <- trimws(rownames(summ))
   rownames(summ) <- NULL
   list(
@@ -242,7 +242,7 @@ mrm_graeco_latin <- function(data, response_col, row_col, col_col,
     )),
     data = d
   )
-  summ <- as.data.frame(summary(fit)[\[1\]])
+  summ <- as.data.frame(summary(fit)[[1]])
   summ$source <- trimws(rownames(summ))
   rownames(summ) <- NULL
   list(
@@ -295,9 +295,9 @@ mrm_fractional_factorial <- function(data, response_col, factor_cols,
   names(main) <- factor_cols
   aliases <- list()
   if (!is.null(generator) && nzchar(generator)) {
-    for (clause in strsplit(generator, ",")[\[1\]]) {
-      parts <- strsplit(trimws(clause), "=")[\[1\]]
-      aliases[[trimws(parts\[1\])]] <- trimws(parts[2])
+    for (clause in strsplit(generator, ",")[[1]]) {
+      parts <- strsplit(trimws(clause), "=")[[1]]
+      aliases[[trimws(parts[1])]] <- trimws(parts[2])
     }
   }
   big <- names(main)[which.max(abs(main))]
@@ -366,13 +366,13 @@ mrm_response_surface <- function(data, response_col, factor_cols) {
   for (i in seq_len(k - 1L)) {
     for (j in seq.int(i + 1L, k)) {
       idx <- idx + 1L
-      B\[i, j\] <- beta[idx] / 2
-      B[j, i] <- B\[i, j\]
+      B[i, j] <- beta[idx] / 2
+      B[j, i] <- B[i, j]
     }
   }
   x_star <- tryCatch(-0.5 * solve(B, b), error = function(e) NULL)
   if (!is.null(x_star)) {
-    y_star <- as.numeric(beta\[1\] + b %*% x_star + t(x_star) %*% B %*% x_star)
+    y_star <- as.numeric(beta[1] + b %*% x_star + t(x_star) %*% B %*% x_star)
   } else {
     y_star <- NA_real_
   }
@@ -589,7 +589,7 @@ mrm_random_latin <- function(k, seed = 42L) {
   base <- matrix(0L, k, k)
   for (i in seq_len(k)) {
     for (j in seq_len(k)) {
-      base\[i, j\] <- ((i + j - 2L) %% k)
+      base[i, j] <- ((i + j - 2L) %% k)
     }
   }
   row_perm <- sample.int(k)

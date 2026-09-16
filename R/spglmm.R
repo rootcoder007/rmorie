@@ -55,7 +55,7 @@ spglmm <- function(X, beta, S, sigma2 = 1, family = "poisson",
     out$marginal_ratio <- exp(s2S / 2)
     if (!is.null(correlation)) out$marginal_covariance <- mom$covariance
     out$marginal_note <- sprintf(
-      paste("E\[Z(s)\] is NOT g^-1(x(s)'beta): under the log link the marginal",
+      paste("E[Z(s)] is NOT g^-1(x(s)'beta): under the log link the marginal",
             "mean exceeds the naive value by exp(sigma_S^2/2) = %.4f"),
       out$marginal_ratio)
   } else {

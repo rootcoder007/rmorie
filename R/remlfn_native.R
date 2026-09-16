@@ -181,7 +181,7 @@
     # against the best, and uses <= rather than <. With more than one
     # parameter the two rules stop on different iterations -- which is why
     # n_iter came out 117 against 125 while the estimates agreed.
-    spread <- max(abs(fv[2:(n + 1)] - fv\[1\]))
+    spread <- max(abs(fv[2:(n + 1)] - fv[1]))
     width <- max(abs(sweep(simplex[2:(n + 1), , drop = FALSE], 2,
                            simplex[1, ], "-")))
     if (spread <= fatol && width <= xatol) {
@@ -196,10 +196,10 @@
     xr <- xbar + alpha * (xbar - simplex[n + 1, ])
     fr <- fn(xr)
 
-    if (fv\[1\] <= fr && fr < fv[n]) {
+    if (fv[1] <= fr && fr < fv[n]) {
       simplex[n + 1, ] <- xr
       fv[n + 1] <- fr
-    } else if (fr < fv\[1\]) {
+    } else if (fr < fv[1]) {
       # Expansion
       xe <- xbar + gamma * (xr - xbar)
       fe <- fn(xe)
@@ -237,7 +237,7 @@
 
   list(
     x = simplex[1, ],
-    fun = fv\[1\],
+    fun = fv[1],
     nit = nit,
     success = converged
   )
@@ -327,7 +327,7 @@ morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto"
 
   # Maximize the restricted log-likelihood by Nelder-Mead on log-variances
   neg <- function(par) {
-    va <- exp(par\[1\])
+    va <- exp(par[1])
     ve <- exp(par[2])
     if (is.infinite(va) || is.infinite(ve) || va <= 0 || ve <= 0) {
       return(1e300)
@@ -386,7 +386,7 @@ morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto"
     if (moved < 1e-13) break
   }
 
-  s2a <- exp(xb\[1\])
+  s2a <- exp(xb[1])
   s2e <- exp(xb[2])
   ll_mu <- .remlfn_loglik(gs, ns, s2a, s2e)
   ll <- ll_mu$loglik

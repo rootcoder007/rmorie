@@ -34,7 +34,7 @@ Rmsnorm <- function(y, x = NULL, g = NULL, eps = 0, p = 1, b = NULL) {
   bb <- if (!is.null(b)) .s03vec(b) else numeric(n)
   out <- numeric(n)
   for (i in seq_len(n)) out[i] <- if (rms > 0) (a[i] / rms) * gg[i] + bb[i] else 0
-  list(estimate = if (n) out\[1\] else NaN, out = out, rms = rms,
+  list(estimate = if (n) out[1] else NaN, out = out, rms = rms,
        k_partial = kp, n = n,
        method = "RMSNorm (Zhang and Sennrich 2019, eq. 4)")
 }

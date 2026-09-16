@@ -77,7 +77,7 @@
   ch <- as.list(covariate_history)
   if (length(ch) != 2L)
     stop("tmldyn: covariate_history must be two blocks [L0, L1]")
-  L0 <- as.matrix(ch[\[1\]])
+  L0 <- as.matrix(ch[[1]])
   storage.mode(L0) <- "double"
   L1 <- as.matrix(ch[[2]])
   storage.mode(L1) <- "double"
@@ -168,7 +168,7 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
                                     known = NULL, penalty = 0) {
   n <- length(A0)
   if (!is.null(known)) {
-    p0 <- as.numeric(known[\[1\]])
+    p0 <- as.numeric(known[[1]])
     p1 <- as.numeric(known[[2]])
     if (length(p0) != n || length(p1) != n)
       stop("tmldyn: known g has the wrong length")
@@ -471,12 +471,12 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
   if (is.character(regime))
     stop("tmldyn: regime must be 'optimal' or an array")
   r <- as.list(regime)
-  if (length(r) == 2L && is.matrix(r[\[1\]]) == FALSE &&
-      length(r[\[1\]]) == n) {
-    d0 <- as.numeric(r[\[1\]])
+  if (length(r) == 2L && is.matrix(r[[1]]) == FALSE &&
+      length(r[[1]]) == n) {
+    d0 <- as.numeric(r[[1]])
     second <- r[[2]]
     if (length(second) == 2L && is.matrix(second) == FALSE &&
-        length(second[\[1\]]) == n) {
+        length(second[[1]]) == n) {
       d1 <- lapply(second, function(s) as.numeric(s))
     } else if (length(second) == n) {
       d1 <- list(as.numeric(second), as.numeric(second))
@@ -491,7 +491,7 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
     return(list(d0 = d0, d1 = list(col, col)))
   }
   if (length(r) == n) {
-    d0 <- vapply(r, function(rr) as.numeric(rr\[1\]), numeric(1))
+    d0 <- vapply(r, function(rr) as.numeric(rr[1]), numeric(1))
     col <- vapply(r, function(rr) as.numeric(rr[2]), numeric(1))
     return(list(d0 = d0, d1 = list(col, col)))
   }
@@ -684,7 +684,7 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
               known_g = ginfo$known,
               exceptional_share_1 = exceptional_law_share(blip1),
               exceptional_share_2 = max(
-                exceptional_law_share(blip2[\[1\]]),
+                exceptional_law_share(blip2[[1]]),
                 exceptional_law_share(blip2[[2]])),
               value_gcomp = ymin + rng * mean(q1d),
               best_static = max(unlist(static)),

@@ -79,13 +79,13 @@ Vaeber <- function(x, encoder = NULL, decoder = NULL, latent_dim = 2,
   }
   eps <- .vitdraw(L, m, skip + 2L * d * m + m * d, 1)
   sig <- matrix(0, n, m)
-  for (i in seq_len(n)) for (j in seq_len(m)) sig\[i, j\] <- exp(0.5 * lv\[i, j\])
+  for (i in seq_len(n)) for (j in seq_len(m)) sig[i, j] <- exp(0.5 * lv[i, j])
   klp <- numeric(n)
   for (i in seq_len(n)) {
     t <- 0
     for (j in seq_len(m)) {
-      v <- sig\[i, j\] * sig\[i, j\]
-      t <- t + mu\[i, j\] * mu\[i, j\] + v - 1 - lv\[i, j\]
+      v <- sig[i, j] * sig[i, j]
+      t <- t + mu[i, j] * mu[i, j] + v - 1 - lv[i, j]
     }
     klp[i] <- 0.5 * t
   }
@@ -96,12 +96,12 @@ Vaeber <- function(x, encoder = NULL, decoder = NULL, latent_dim = 2,
     acc <- 0
     for (l in seq_len(L)) {
       z <- numeric(m)
-      for (j in seq_len(m)) z[j] <- mu\[i, j\] + sig\[i, j\] * eps[l, j]
+      for (j in seq_len(m)) z[j] <- mu[i, j] + sig[i, j] * eps[l, j]
       t <- 0
       for (k in seq_len(d)) {
         r <- bd[k]
         for (j in seq_len(m)) r <- r + z[j] * Wd[j, k]
-        t <- t + cc + (X\[i, k\] - r) * (X\[i, k\] - r) / (s * s)
+        t <- t + cc + (X[i, k] - r) * (X[i, k] - r) / (s * s)
       }
       acc <- acc + -0.5 * t
     }
@@ -109,10 +109,10 @@ Vaeber <- function(x, encoder = NULL, decoder = NULL, latent_dim = 2,
     t <- 0
     for (k in seq_len(d)) {
       r <- bd[k]
-      for (j in seq_len(m)) r <- r + mu\[i, j\] * Wd[j, k]
+      for (j in seq_len(m)) r <- r + mu[i, j] * Wd[j, k]
       q <- 0
-      for (j in seq_len(m)) q <- q + sig\[i, j\] * sig\[i, j\] * Wd[j, k] * Wd[j, k]
-      t <- t + cc + ((X\[i, k\] - r) * (X\[i, k\] - r) + q) / (s * s)
+      for (j in seq_len(m)) q <- q + sig[i, j] * sig[i, j] * Wd[j, k] * Wd[j, k]
+      t <- t + cc + ((X[i, k] - r) * (X[i, k] - r) + q) / (s * s)
     }
     anap[i] <- -0.5 * t
   }

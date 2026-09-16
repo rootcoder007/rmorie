@@ -96,7 +96,7 @@
 #' \code{note}.
 #' @export
 .infmax_jsd_estimator <- function(joint_scores, marginal_scores) {
-  # I_JSD = E_P\[-sp(-T)\] - E_{PxP~}\[sp(T)\].
+  # I_JSD = E_P[-sp(-T)] - E_{PxP~}[sp(T)].
   J <- as.numeric(unlist(joint_scores))
   M <- as.numeric(unlist(marginal_scores))
   if (length(J) == 0L || length(M) == 0L) {
@@ -123,7 +123,7 @@
 #' \code{bounded}, \code{note}.
 #' @export
 .infmax_dv_estimator <- function(joint_scores, marginal_scores) {
-  # I_DV = E_P[T] - log E_{PxP~}\[exp(T)\].
+  # I_DV = E_P[T] - log E_{PxP~}[exp(T)].
   J <- as.numeric(unlist(joint_scores))
   M <- as.numeric(unlist(marginal_scores))
   if (length(J) == 0L || length(M) == 0L) {
@@ -217,7 +217,7 @@
   if (n < 2L) {
     stop("infmax: at least 2 examples are needed for negatives")
   }
-  L <- length(M[\[1\]])
+  L <- length(M[[1]])
   if (any(vapply(M, length, integer(1)) != L)) {
     stop("infmax: the feature maps have differing numbers of locations")
   }

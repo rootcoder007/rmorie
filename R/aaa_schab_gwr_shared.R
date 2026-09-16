@@ -503,7 +503,7 @@
   if (adaptive) {
     n <- nrow(D)
     rng <- if (is.null(bounds)) c(2, n) else bounds
-    grid <- seq.int(ceiling(rng\[1\]), floor(rng[2]))
+    grid <- seq.int(ceiling(rng[1]), floor(rng[2]))
     scores <- vapply(grid, function(k) {
       .schab_gwr_criterion(y, X, D, k, kernel, TRUE, criterion)
     }, numeric(1))
@@ -511,14 +511,14 @@
     return(list(
       bandwidth = as.integer(best), score = min(scores),
       criterion = criterion,
-      bounds = c(grid\[1\], grid\[length(grid)\]),
+      bounds = c(grid[1], grid[length(grid)]),
       adaptive = TRUE, grid = grid, scores = scores
     ))
   }
   rng <- if (is.null(bounds)) .schab_default_bounds(coords) else bounds
   opt <- .schab_golden_section(
     function(h) .schab_gwr_criterion(y, X, D, h, kernel, FALSE, criterion),
-    rng\[1\], rng[2],
+    rng[1], rng[2],
     tol = tol
   )
   list(

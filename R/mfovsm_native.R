@@ -122,7 +122,7 @@
   x <- sort(as.numeric(x))
   n <- length(x)
   if (n == 0) return(NA_real_)
-  if (n == 1) return(x\[1\])
+  if (n == 1) return(x[1])
   h <- (n - 1) * q
   lo <- max(1, min(n, floor(h) + 1L))
   hi <- max(1, min(n, ceiling(h) + 1L))
@@ -421,7 +421,7 @@ morie_mfovsm <- function(y, feature, A, H, v_in_numerator = TRUE,
     main_effect = fit$coef[2],
     main_effect_se = fit$se[2],
     feature_effect = fit$coef[3],
-    intercept = fit$coef\[1\],
+    intercept = fit$coef[1],
     coef = fit$coef,
     vcov = fit$vcov,
     weights = w,

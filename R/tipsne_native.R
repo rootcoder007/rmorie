@@ -142,12 +142,12 @@
   lo <- matrix(0, p, p)
   for (i in seq_len(p)) {
     for (j in seq_len(i)) {
-      s <- a\[i, j\] - if (j > 1L) .tipsne_dot(lo[i, seq_len(j - 1L)],
+      s <- a[i, j] - if (j > 1L) .tipsne_dot(lo[i, seq_len(j - 1L)],
                                              lo[j, seq_len(j - 1L)]) else 0
       if (i == j) {
         if (s <= 0) stop("design matrix is not full rank")
-        lo\[i, j\] <- sqrt(s)
-      } else lo\[i, j\] <- s / lo[j, j]
+        lo[i, j] <- sqrt(s)
+      } else lo[i, j] <- s / lo[j, j]
     }
   }
   lo
@@ -199,7 +199,7 @@
     .tipsne_solve_chol(lo, e)
   })
   out <- matrix(0, p, p)
-  for (i in seq_len(p)) for (j in seq_len(p)) out\[i, j\] <- cols[[j]][i]
+  for (i in seq_len(p)) for (j in seq_len(p)) out[i, j] <- cols[[j]][i]
   out
 }
 
@@ -229,7 +229,7 @@ morie_tipsne_ancova <- function(y, design) {
   p <- ncol(design)
   xtx <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p))
-    xtx\[a, b\] <- .tipsne_csum(design[, a] * design[, b])
+    xtx[a, b] <- .tipsne_csum(design[, a] * design[, b])
   xty <- vapply(seq_len(p), function(a) .tipsne_csum(design[, a] * y), numeric(1))
   lo <- .tipsne_chol(xtx)
   beta <- .tipsne_solve_chol(lo, xty)

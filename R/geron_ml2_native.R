@@ -2315,7 +2315,7 @@ morie_geron_td_learning <- function(V, s, r, s_next, alpha = 0.1,
   a <- as.numeric(alpha)
   g <- as.numeric(gamma)
   .morie_gr_need(a > 0 && a <= 1, "geron_td_learning: alpha must lie in (0, 1]")
-  .morie_gr_need(g >= 0 && g <= 1, "geron_td_learning: gamma must lie in \[0, 1\]")
+  .morie_gr_need(g >= 0 && g <= 1, "geron_td_learning: gamma must lie in [0, 1]")
   term <- if (is.null(terminal)) rep(FALSE, length(sa)) else as.logical(terminal)
   .morie_gr_need(
     length(term) == length(sa),
@@ -2368,7 +2368,7 @@ morie_geron_q_learning <- function(Q, s, a, r, s_next, alpha, gamma,
   al <- as.numeric(alpha)
   ga <- as.numeric(gamma)
   .morie_gr_need(al > 0 && al <= 1, "geron_q_learning: alpha must lie in (0, 1]")
-  .morie_gr_need(ga >= 0 && ga <= 1, "geron_q_learning: gamma must lie in \[0, 1\]")
+  .morie_gr_need(ga >= 0 && ga <= 1, "geron_q_learning: gamma must lie in [0, 1]")
   rr <- as.numeric(r)
   .morie_gr_need(is.finite(rr), "geron_q_learning: r must be finite")
   if (isTRUE(done)) {
@@ -2426,9 +2426,9 @@ morie_geron_credit_assignment <- function(trajectory, gamma = 0.95,
     "geron_credit_assignment: trajectory contains non-finite rewards"
   )
   g <- as.numeric(gamma)
-  .morie_gr_need(g >= 0 && g <= 1, "geron_credit_assignment: gamma must lie in \[0, 1\]")
+  .morie_gr_need(g >= 0 && g <= 1, "geron_credit_assignment: gamma must lie in [0, 1]")
   l <- if (is.null(lam)) g else as.numeric(lam)
-  .morie_gr_need(l >= 0 && l <= 1, "geron_credit_assignment: lam must lie in \[0, 1\]")
+  .morie_gr_need(l >= 0 && l <= 1, "geron_credit_assignment: lam must lie in [0, 1]")
   T_ <- length(rewards)
   ret <- numeric(T_)
   acc <- 0
@@ -3089,7 +3089,7 @@ morie_geron_confusion_matrix_labeled <- function(y_true, y_pred,
     support = base$support, predicted_totals = as.integer(colSums(cm)),
     macro_f1 = base$macro_f1, n_classes = K,
     estimate = base$accuracy, n = length(yt),
-    method = "confusion matrix C\[i,j\] = count(actual i, predicted j); counting delegated to grcfm"
+    method = "confusion matrix C[i,j] = count(actual i, predicted j); counting delegated to grcfm"
   )
 }
 
@@ -3795,7 +3795,7 @@ morie_geron_conv_autoencoder_trained <- function(X, filters = 2, epochs = 100,
       for (j in seq_len(pw)) {
         out[((i - 1L) * P + 1L):(i * P), ((j - 1L) * P + 1L):(j * P)] <-
           t(matrix(recon[row, ], nrow = P, ncol = P))
-        for (f in seq_len(F_)) cgrid[[f]]\[i, j\] <- code[row, f]
+        for (f in seq_len(F_)) cgrid[[f]][i, j] <- code[row, f]
         row <- row + 1L
       }
     }

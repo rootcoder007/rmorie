@@ -44,7 +44,7 @@ Kpmnci <- function(fit, alpha) {
   hi <- pmin(S + z * se, 1)
   .t1_result(estimate = S[m], time = rt$t, surv = S, se = se, sigma2 = sig2,
              lower = lo, upper = hi, z = z, alpha = a, n_times = m,
-             n_risk_start = nr\[1\], n = m,
+             n_risk_start = nr[1], n = m,
              method = "S(t) +/- z sqrt(S^2 sum d/(n(n-d))), Greenwood (1926)")
 }
 

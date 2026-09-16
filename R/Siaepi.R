@@ -38,7 +38,7 @@ Siaepi <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
   if (n == 0L || ncol(A) != n) stop("sir_epidemic: G must be a square adjacency matrix")
   I <- .s03vec(initial)
   if (length(I) != n) stop("sir_epidemic: initial must have one entry per node")
-  if (any(I < 0) || any(I > 1)) stop("sir_epidemic: initial probabilities must lie in \[0, 1\]")
+  if (any(I < 0) || any(I > 1)) stop("sir_epidemic: initial probabilities must lie in [0, 1]")
   beta <- as.numeric(beta)
   gamma <- as.numeric(gamma)
   t_max <- as.numeric(t_max)
@@ -55,7 +55,7 @@ Siaepi <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
     dr <- numeric(n)
     for (a in seq_len(n)) {
       f <- 0
-      for (b in seq_len(n)) f <- f + A\[a, b\] * i[b]
+      for (b in seq_len(n)) f <- f + A[a, b] * i[b]
       f <- beta * s[a] * f
       ds[a] <- -f
       di[a] <- f - gamma * i[a]
@@ -69,10 +69,10 @@ Siaepi <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
   peak_time <- 0
   for (step in seq_len(nsteps)) {
     k1 <- deriv(S, I, R)
-    k2 <- deriv(S + 0.5 * dt * k1[\[1\]], I + 0.5 * dt * k1[[2]], R + 0.5 * dt * k1[[3]])
-    k3 <- deriv(S + 0.5 * dt * k2[\[1\]], I + 0.5 * dt * k2[[2]], R + 0.5 * dt * k2[[3]])
-    k4 <- deriv(S + dt * k3[\[1\]], I + dt * k3[[2]], R + dt * k3[[3]])
-    S <- S + (dt / 6) * (k1[\[1\]] + 2 * k2[\[1\]] + 2 * k3[\[1\]] + k4[\[1\]])
+    k2 <- deriv(S + 0.5 * dt * k1[[1]], I + 0.5 * dt * k1[[2]], R + 0.5 * dt * k1[[3]])
+    k3 <- deriv(S + 0.5 * dt * k2[[1]], I + 0.5 * dt * k2[[2]], R + 0.5 * dt * k2[[3]])
+    k4 <- deriv(S + dt * k3[[1]], I + dt * k3[[2]], R + dt * k3[[3]])
+    S <- S + (dt / 6) * (k1[[1]] + 2 * k2[[1]] + 2 * k3[[1]] + k4[[1]])
     I <- I + (dt / 6) * (k1[[2]] + 2 * k2[[2]] + 2 * k3[[2]] + k4[[2]])
     R <- R + (dt / 6) * (k1[[3]] + 2 * k2[[3]] + 2 * k3[[3]] + k4[[3]])
     cur <- sum(I) / n

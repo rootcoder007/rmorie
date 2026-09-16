@@ -35,7 +35,7 @@
   u <- rep_len(u, n)
   v <- rep_len(v, n)
   if (any(u < 0 | u > 1) || any(v < 0 | v > 1)) {
-    stop("u and v must lie in \[0, 1\].", call. = FALSE)
+    stop("u and v must lie in [0, 1].", call. = FALSE)
   }
   list(u = pmin(pmax(u, 1e-12), 1 - 1e-12), v = pmin(pmax(v, 1e-12), 1 - 1e-12))
 }

@@ -8,17 +8,17 @@
 #' #   vignette(package = "rmorie")
 #' @export
 morie_build_prompt <- function(question, context = NULL) {
-  question <- trimws(as.character(question)\[1\])
+  question <- trimws(as.character(question)[1])
   if (!nzchar(question)) {
     stop("`question` must be non-empty.", call. = FALSE)
   }
 
-  if (is.null(context) || !nzchar(trimws(as.character(context)\[1\]))) {
+  if (is.null(context) || !nzchar(trimws(as.character(context)[1]))) {
     return(question)
   }
 
   paste0(
-    "Context:\n", trimws(as.character(context)\[1\]),
+    "Context:\n", trimws(as.character(context)[1]),
     "\n\nQuestion:\n", question
   )
 }
@@ -39,7 +39,7 @@ morie_ask_percy <- function(question, context = NULL, python_bin = Sys.getenv("M
   code <- paste(
     "import json, sys",
     "from morie.perseus import morie_ask_percy",
-    "payload = morie_ask_percy(question=sys.argv\[1\])",
+    "payload = morie_ask_percy(question=sys.argv[1])",
     "print(payload['output_text'])",
     sep = "; "
   )

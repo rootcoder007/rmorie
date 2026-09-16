@@ -147,7 +147,7 @@ morie_eda_summary <- function(x, digits = 3L) {
     num <- is.numeric(col)
     data.frame(
       variable = nm,
-      class = class(col)\[1\],
+      class = class(col)[1],
       storage_mode = storage.mode(col), # EA5.3
       n_missing = sum(is.na(col)),
       mean = if (num) round(mean(col, na.rm = TRUE), digits) else NA_real_,

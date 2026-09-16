@@ -52,7 +52,7 @@ Klmsmh <- function(y, model, filtered, ridge = 1e-12) {
     xsm[[t]] <- xs[[t]] + as.numeric(C %*% (xsm[[t + 1L]] - xp[[t + 1L]]))
     Psm[[t]] <- Ps[[t]] + C %*% (Psm[[t + 1L]] - Pp[[t + 1L]]) %*% t(C)
   }
-  .t1_result(estimate = xsm[\[1\]]\[1\], smoothed = xsm, smoothed_cov = Psm,
+  .t1_result(estimate = xsm[[1]][1], smoothed = xsm, smoothed_cov = Psm,
              n = n,
              method = "backward RTS pass over supplied filtered quantities, Rauch, Tung & Striebel (1965)")
 }

@@ -55,7 +55,7 @@ morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
   if (as.integer(batch_size) < 1L)
     stop("propinf: batch_size must be at least 1")
   rnd <- .propinf_rng(as.integer(seed) + 1L)
-  net <- .propinf_init_net(length(rows[\[1\]]), as.integer(hidden), rnd)
+  net <- .propinf_init_net(length(rows[[1]]), as.integer(hidden), rnd)
   n <- length(rows)
   order <- seq_len(n) - 1L
   for (ep in seq_len(as.integer(epochs))) {
@@ -69,7 +69,7 @@ morie_propinf_train_fcnn <- function(X, y, hidden = c(8L, 4L), epochs = 40L,
     }
     for (start in seq(0L, n - 1L, by = as.integer(batch_size))) {
       chunk_idx <- order[(start + 1L):min(n, start + as.integer(batch_size))]
-      # W is a matrix; L$W[\[1\]] is its first ELEMENT, so the gradient
+      # W is a matrix; L$W[[1]] is its first ELEMENT, so the gradient
       # buffer came out one column wide and every row write failed
       gW <- lapply(net, function(L) matrix(0, nrow = length(L$b),
                                             ncol = ncol(L$W)))
@@ -354,9 +354,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     stop("propinf: shadow_labels must be 0/1")
   if (length(unique(lab)) < 2L)
     stop("propinf: shadow_labels must contain both classes")
-  arch <- lapply(nets[\[1\]], function(L) c(length(L$W), length(L$W[\[1\]])))
+  arch <- lapply(nets[[1]], function(L) c(length(L$W), length(L$W[[1]])))
   for (net in nets) {
-    a <- lapply(net, function(L) c(length(L$W), length(L$W[\[1\]])))
+    a <- lapply(net, function(L) c(length(L$W), length(L$W[[1]])))
     if (!identical(a, arch))
       stop("propinf: all shadow models must share one architecture")
   }
@@ -374,7 +374,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     targets <- lapply(target_models, function(n) n)
   }
   for (net in targets) {
-    a <- lapply(net, function(L) c(length(L$W), length(L$W[\[1\]])))
+    a <- lapply(net, function(L) c(length(L$W), length(L$W[[1]])))
     if (!identical(a, arch))
       stop("propinf: target model architecture differs from the shadow models")
   }
@@ -606,7 +606,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     s <- sqrt(2 / fan_in)
     W <- matrix(0, nrow = sizes[t], ncol = fan_in)
     for (i in seq_len(sizes[t])) for (j in seq_len(fan_in))
-      W\[i, j\] <- .propinf_normal_lcg(rnd, s)
+      W[i, j] <- .propinf_normal_lcg(rnd, s)
     b <- rep(0, sizes[t])
     net[[length(net) + 1L]] <- list(W = W, b = b)
   }
@@ -847,7 +847,7 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     s <- sqrt(2 / sizes[t - 1L])
     W <- matrix(0, nrow = sizes[t], ncol = sizes[t - 1L])
     for (i in seq_len(sizes[t])) for (j in seq_len(sizes[t - 1L]))
-      W\[i, j\] <- .propinf_normal_lcg(rnd, s)
+      W[i, j] <- .propinf_normal_lcg(rnd, s)
     b <- rep(0, sizes[t])
     net[[length(net) + 1L]] <- list(W = W, b = b)
   }

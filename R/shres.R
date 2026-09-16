@@ -69,7 +69,7 @@ Schoenres <- function(time, event, X, beta = NULL) {
     col <- vapply(scaled, function(z) z[a], 0)
     rho[a] <- if (d > 1L) .s03corr(ets, col) else NaN
   }
-  list(estimate = if (p) rho\[1\] else NaN, residuals = res, scaled = scaled,
+  list(estimate = if (p) rho[1] else NaN, residuals = res, scaled = scaled,
        event_times = ets, rho = rho, V = Vm, n_events = d,
        method = "Schoenfeld (1982) residuals with the Grambsch-Therneau (1994) scaling")
 }

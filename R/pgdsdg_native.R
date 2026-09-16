@@ -188,7 +188,7 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
   u <- sort(v, decreasing = TRUE)
   css <- 0.0
   rho <- 0
-  theta <- u\[1\] - s
+  theta <- u[1] - s
   for (i in seq_len(n)) {
     css <- css + u[i]
     t_val <- (css - s) / i

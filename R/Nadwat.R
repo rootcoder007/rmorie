@@ -53,11 +53,11 @@ Nadwat <- function(x, y, x0, lam, degree = 0) {
     D[, 1L] <- 1
     for (a in seq_len(p)) D[, a + 1L] <- Xm[, a] - z[a]
     A <- matrix(0, q, q)
-    for (a in seq_len(q)) for (b in seq_len(q)) A\[a, b\] <- sum(w * D[, a] * D[, b])
+    for (a in seq_len(q)) for (b in seq_len(q)) A[a, b] <- sum(w * D[, a] * D[, b])
     rhs <- numeric(q)
     for (a in seq_len(q)) rhs[a] <- sum(w * D[, a] * yv)
     coef <- .s03ridgesolve(A, rhs, 0)
-    fit <- coef\[1\]
+    fit <- coef[1]
   }
   list(estimate = fit, fit = fit, weights = w, wsum = wsum, coef = coef,
        lam = lam, n = n, p = p, degree = degree,

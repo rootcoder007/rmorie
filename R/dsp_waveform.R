@@ -371,7 +371,7 @@ morie_dsp_centroidal_time <- function(x, fs = 1) {
 #' @export
 morie_dsp_amplitude_histogram <- function(x, n_bins = 50L) {
   rng <- range(x)
-  edges <- seq(rng\[1\], rng[2], length.out = n_bins + 1L)
+  edges <- seq(rng[1], rng[2], length.out = n_bins + 1L)
   h <- graphics::hist(x,
     breaks = edges, plot = FALSE,
     include.lowest = TRUE, right = TRUE

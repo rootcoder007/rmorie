@@ -110,7 +110,7 @@ morie_median_voter_ci <- function(x, alpha = 0.05) {
     unique_w <- TRUE
   } else {
     interval <- c(xs[n %/% 2L], xs[n %/% 2L + 1L])
-    unique_w <- interval\[1\] == interval[2]
+    unique_w <- interval[1] == interval[2]
   }
   if (n > 1L) {
     se_normal <- 1.2533141373155003 * stats::sd(xs) / sqrt(n)
@@ -144,7 +144,7 @@ morie_median_voter_ci <- function(x, alpha = 0.05) {
     warns <- c(warns, sprintf(paste(
       "With an even electorate (n = %d) every point in [%g, %g] is a",
       "Condorcet winner. The reported estimate is the midpoint, which is a",
-      "convention rather than a result."), n, interval\[1\], interval[2]))
+      "convention rather than a result."), n, interval[1], interval[2]))
   }
   if (is.finite(se) && is.finite(se_normal) && se > 0) {
     ratio <- se_normal / se
@@ -268,16 +268,16 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
   } else {
     th <- as.numeric(theta)
     if (th < 0 || th > 1) {
-      stop(sprintf("theta must lie in \[0, 1\]; got %s", theta), call. = FALSE)
+      stop(sprintf("theta must lie in [0, 1]; got %s", theta), call. = FALSE)
     }
     src <- "user"
   }
-  overlap_est <- th * taba\[1\] + (1 - th) * tabb\[1\]
-  est <- ta\[1\] + overlap_est + tb\[1\]
+  overlap_est <- th * taba[1] + (1 - th) * tabb[1]
+  est <- ta[1] + overlap_est + tb[1]
   vr <- ta[2] + tb[2] + th^2 * taba[2] + (1 - th)^2 * tabb[2]
   vopt <- ta[2] + tb[2] + th_opt^2 * taba[2] + (1 - th_opt)^2 * tabb[2]
   se <- sqrt(max(vr, 0))
-  naive <- ta\[1\] + taba\[1\] + tabb\[1\] + tb\[1\]
+  naive <- ta[1] + taba[1] + tabb[1] + tb[1]
   zc <- .morie_z(1 - alpha / 2)
 
   warns <- character(0)
@@ -298,8 +298,8 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
        variance_optimal = vopt,
        variance_ratio_vs_optimal = if (vopt > 0) vr / vopt else NA_real_,
        ci_lower = est - zc * se, ci_upper = est + zc * se,
-       total_a_only = ta\[1\], total_b_only = tb\[1\],
-       total_overlap_via_a = taba\[1\], total_overlap_via_b = tabb\[1\],
+       total_a_only = ta[1], total_b_only = tb[1],
+       total_overlap_via_a = taba[1], total_overlap_via_b = tabb[1],
        overlap_estimate = overlap_est, naive_pooled_total = naive,
        overlap_double_count = naive - est,
        n_a = length(ya), n_b = length(yb),
@@ -335,7 +335,7 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
   }
   beta <- rep(0, ncol(X))
   p0 <- min(max(sum(k) / max(sum(n), 1), 0.02), 0.98)
-  beta\[1\] <- if (link == "logit") log(p0 / (1 - p0)) else stats::qnorm(p0)
+  beta[1] <- if (link == "logit") log(p0 / (1 - p0)) else stats::qnorm(p0)
   converged <- FALSE
   for (i in seq_len(max_iter)) {
     eta <- as.vector(X %*% beta)
@@ -407,7 +407,7 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
   t <- .morie_z(1 - alpha / 2)
   ap <- a - g_p
   g <- t * t * V[2, 2] / (b * b)
-  se_delta <- sqrt(max(V\[1, 1\] + 2 * x * V\[1, 2\] + x * x * V[2, 2], 0)) / abs(b)
+  se_delta <- sqrt(max(V[1, 1] + 2 * x * V[1, 2] + x * x * V[2, 2], 0)) / abs(b)
 
   if (g >= 1) {
     lo <- -Inf
@@ -415,8 +415,8 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
     bounded <- FALSE
   } else {
     A <- b * b - t * t * V[2, 2]
-    B <- 2 * (ap * b - t * t * V\[1, 2\])
-    C <- ap * ap - t * t * V\[1, 1\]
+    B <- 2 * (ap * b - t * t * V[1, 2])
+    C <- ap * ap - t * t * V[1, 1]
     disc <- B * B - 4 * A * C
     if (disc < 0) {
       lo <- NA_real_
@@ -496,7 +496,7 @@ morie_ld50 <- function(dose, n_dead, n_total, link = c("probit", "logit"),
   x <- if (isTRUE(log_dose)) log(d) else d
   X <- cbind(1, x)
   fit <- .morie_glm_quantal(X, k, n, link)
-  ed <- morie_effective_dose(fit$beta\[1\], fit$beta[2], fit$cov, level = level,
+  ed <- morie_effective_dose(fit$beta[1], fit$beta[2], fit$cov, level = level,
                              alpha = alpha, link = link, log_scale = log_dose)
 
   p_obs <- k / n
@@ -536,7 +536,7 @@ morie_ld50 <- function(dose, n_dead, n_total, link = c("probit", "logit"),
   }
   list(estimate = est, ed_log = ed$ed, ci_lower = lo, ci_upper = hi,
        ci_lower_log = ed$lower, ci_upper_log = ed$upper,
-       se_log = ed$se_delta, intercept = fit$beta\[1\], slope = fit$beta[2],
+       se_log = ed$se_delta, intercept = fit$beta[1], slope = fit$beta[2],
        cov = fit$cov, fitted = ph, fieller_g = ed$fieller_g,
        bounded = ed$bounded, deviance = dev, df_residual = df,
        heterogeneity_factor = het, heterogeneity_p = het_p,

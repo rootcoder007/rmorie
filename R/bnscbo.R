@@ -38,7 +38,7 @@ Bnscbo <- function(y_components, D, X) {
   y0 <- min(z$y)
   y1 <- max(z$y)
   b <- .bnd_wc_ate(z$y, z$d, y0, y1)
-  .t1_result(lower = b\[1\], upper = b[2], width = b[2] - b\[1\],
-             estimate = 0.5 * (b\[1\] + b[2]), k = k, n = n,
+  .t1_result(lower = b[1], upper = b[2], width = b[2] - b[1],
+             estimate = 0.5 * (b[1] + b[2]), k = k, n = n,
              method = "Compound-outcome bound")
 }

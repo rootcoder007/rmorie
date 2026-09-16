@@ -81,7 +81,7 @@
   folds <- lapply(seq_len(nf) - 1L, function(f)
     which(seq_len(n) %% nf == f))
   best <- NULL
-  best_h <- grid\[1\]
+  best_h <- grid[1]
   for (h in grid) {
     err <- 0
     for (f in folds) {
@@ -210,7 +210,7 @@ effect_curve <- function(xi, A, grid, fit = "kernel",
   if (fit == "polynomial") {
     X <- cbind(1, av, av^2, av^3)
     b <- as.numeric(solve(crossprod(X), crossprod(X, xv)))
-    curve <- b\[1\] + b[2] * gr + b[3] * gr^2 + b[4] * gr^3
+    curve <- b[1] + b[2] * gr + b[3] * gr^2 + b[4] * gr^3
     return(list(curve = curve, info = list(coef = b, bandwidth = NULL)))
   }
   h <- if (is.null(bandwidth)) .cv_bandwidth(xv, av, fit, n_folds)

@@ -50,7 +50,7 @@ Ddimst <- function(x_t, t, eps_theta, eta = 0, T = 1000,
   if (length(e) != n) stop("x_t and eps_theta must have the same length")
   t <- as.integer(t)
   if (t < 1L) stop("t must be at least 1")
-  if (!(eta >= 0 && eta <= 1)) stop("eta must lie in \[0, 1\]")
+  if (!(eta >= 0 && eta <= 1)) stop("eta must lie in [0, 1]")
   at <- if (is.null(alpha_bar_t)) .ddim_alpha_bar(t, T) else as.numeric(alpha_bar_t)
   ap <- if (is.null(alpha_bar_prev)) .ddim_alpha_bar(t - 1, T) else
     as.numeric(alpha_bar_prev)

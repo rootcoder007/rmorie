@@ -120,7 +120,7 @@ Aitdrr <- function(X_cov, Y_comp, ref = NULL, max_iter = 400L, step0 = 0.05, tol
       for (m in seq_len(p)) s <- s + Xm[i, m] * B[m, j]
       if (s > 500) s <- 500
       if (s < -500) s <- -500
-      A\[i, j\] <- exp(s)
+      A[i, j] <- exp(s)
     }
   }
   A
@@ -134,8 +134,8 @@ Aitdrr <- function(X_cov, Y_comp, ref = NULL, max_iter = 400L, step0 = 0.05, tol
     for (v in A[i, ]) a0 <- a0 + v
     t <- lgamma(a0)
     for (j in seq_len(ncol(A))) {
-      t <- t - lgamma(A\[i, j\])
-      t <- t + (A\[i, j\] - 1) * LY\[i, j\]
+      t <- t - lgamma(A[i, j])
+      t <- t + (A[i, j] - 1) * LY[i, j]
     }
     ll <- ll + t
   }
@@ -153,7 +153,7 @@ Aitdrr <- function(X_cov, Y_comp, ref = NULL, max_iter = 400L, step0 = 0.05, tol
     for (v in A[i, ]) a0 <- a0 + v
     d0 <- .s03digamma(a0)
     for (j in seq_len(D)) {
-      w <- A\[i, j\] * (d0 - .s03digamma(A\[i, j\]) + LY\[i, j\])
+      w <- A[i, j] * (d0 - .s03digamma(A[i, j]) + LY[i, j])
       for (m in seq_len(p)) G[m, j] <- G[m, j] + Xm[i, m] * w
     }
   }

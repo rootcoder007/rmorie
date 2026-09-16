@@ -223,7 +223,7 @@
     if (mode == "episodic") {
       r <- as.numeric(reward_fn(ys, NULL))
     } else {
-      r <- as.numeric(reward_fn(ys[\[1\]], NULL))
+      r <- as.numeric(reward_fn(ys[[1]], NULL))
     }
     b <- .reinfc_running_baseline(state, baseline, gamma)
     for (i in seq_len(n)) {
@@ -283,7 +283,7 @@
       for (i in seq_len(n_units)) {
         ref <- if (eligibility == "ybar") ybar[i] else pi_vec[i]
         for (j in seq_len(n_in)) {
-          elig\[i, j\] <- elig\[i, j\] + (y[i] - ref) * xrow[j]
+          elig[i, j] <- elig[i, j] + (y[i] - ref) * xrow[j]
         }
       }
     }
@@ -292,7 +292,7 @@
     if (mode == "episodic") {
       r <- as.numeric(reward_fn(ys, x_input))
     } else {
-      r <- as.numeric(reward_fn(ys[\[1\]], x_input))
+      r <- as.numeric(reward_fn(ys[[1]], x_input))
     }
     b <- .reinfc_running_baseline(state, baseline, gamma)
     w <- w + alpha * (r - b) * elig
@@ -359,7 +359,7 @@
     if (mode == "episodic") {
       r <- as.numeric(reward_fn(ys, NULL))
     } else {
-      r <- as.numeric(reward_fn(ys\[1\], NULL))
+      r <- as.numeric(reward_fn(ys[1], NULL))
     }
     b <- .reinfc_running_baseline(state, baseline, gamma)
     rate <- if (rate_scaling == "sigma2") alpha * sigma * sigma else alpha

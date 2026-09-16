@@ -164,7 +164,7 @@ morie_anova_one_way <- function(...) {
     data.frame(y = groups[[i]], grp = factor(i))
   }))
   fit <- stats::aov(y ~ grp, data = df_long)
-  s <- summary(fit)[\[1\]]
+  s <- summary(fit)[[1]]
   f_val <- s["grp", "F value"]
   df_b <- s["grp", "Df"]
   df_w <- s["Residuals", "Df"]
@@ -277,7 +277,7 @@ morie_levene_test <- function(...) {
   # Levene statistic via absolute deviations from group medians
   df_long$dev <- abs(df_long$y - ave(df_long$y, df_long$grp, FUN = median))
   fit <- stats::aov(dev ~ grp, data = df_long)
-  s <- summary(fit)[\[1\]]
+  s <- summary(fit)[[1]]
   list(F = s["grp", "F value"], p_value = s["grp", "Pr(>F)"])
 }
 
@@ -321,7 +321,7 @@ morie_proportion_ci <- function(successes, n, alpha = 0.05,
     ci <- c(p - margin, p + margin)
   }
 
-  list(p_hat = p, ci_lower = pmax(0, ci\[1\]), ci_upper = pmin(1, ci[2]))
+  list(p_hat = p, ci_lower = pmax(0, ci[1]), ci_upper = pmin(1, ci[2]))
 }
 
 #' Odds ratio and confidence interval from a 2x2 contingency table
@@ -348,8 +348,8 @@ morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05) {
   if (!(alpha > 0 && alpha < 1)) {
     stop("alpha must be in (0, 1); got ", alpha, ".", call. = FALSE)
   }
-  a <- m\[1, 1\]
-  b <- m\[1, 2\]
+  a <- m[1, 1]
+  b <- m[1, 2]
   cc <- m[2, 1]
   d <- m[2, 2]
   # The point estimate is the sample odds ratio, which is what
@@ -394,8 +394,8 @@ morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05) {
 #' @export
 morie_risk_ratio_ci <- function(table_2x2, alpha = 0.05) {
   m <- as.matrix(table_2x2)
-  a <- m\[1, 1\]
-  b <- m\[1, 2\]
+  a <- m[1, 1]
+  b <- m[1, 2]
   c <- m[2, 1]
   d <- m[2, 2]
   n1 <- a + b
@@ -430,8 +430,8 @@ morie_risk_difference_ci <- function(table_2x2, alpha = 0.05) {
   # The simple Wald form (rd +- z*sqrt(p1q1/n1 + p2q2/n2)) does not
   # have the correct coverage near 0/1; was the pre-2026-05-22 form.
   m <- as.matrix(table_2x2)
-  a <- m\[1, 1\]
-  b <- m\[1, 2\]
+  a <- m[1, 1]
+  b <- m[1, 2]
   cc <- m[2, 1]
   d <- m[2, 2]  # 'c' shadows base c()
   n1 <- a + b
@@ -450,9 +450,9 @@ morie_risk_difference_ci <- function(table_2x2, alpha = 0.05) {
   }
   ci1 <- wilson(a,  n1, z)
   ci2 <- wilson(cc, n2, z)
-  l1 <- ci1\[1\]
+  l1 <- ci1[1]
   u1 <- ci1[2]
-  l2 <- ci2\[1\]
+  l2 <- ci2[1]
   u2 <- ci2[2]
   delta_lo <- sqrt((p1 - l1)^2 + (u2 - p2)^2)
   delta_hi <- sqrt((u1 - p1)^2 + (p2 - l2)^2)

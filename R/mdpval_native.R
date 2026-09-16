@@ -23,16 +23,16 @@
 .mdp_args <- function(P, R) {
   Pm <- lapply(P, function(Pa) as.matrix(Pa))
   A <- length(Pm)
-  if (A < 1 || nrow(Pm[\[1\]]) != ncol(Pm[\[1\]]))
+  if (A < 1 || nrow(Pm[[1]]) != ncol(Pm[[1]]))
     stop("P must be a sequence of square (S, S) matrices")
-  S <- nrow(Pm[\[1\]])
+  S <- nrow(Pm[[1]])
   for (a in seq_len(A)) {
     if (!all(dim(Pm[[a]]) == c(S, S))) stop(sprintf("P[%d] is not (S, S)", a))
     for (s in seq_len(S))
       if (abs(sum(Pm[[a]][s, ]) - 1) > 1e-8)
         stop(sprintf("P[%d] row %d does not sum to 1", a, s))
   }
-  if (is.list(R) && length(R) == A && is.matrix(as.matrix(R[\[1\]]))) {
+  if (is.list(R) && length(R) == A && is.matrix(as.matrix(R[[1]]))) {
     Rsa <- matrix(0, S, A)
     for (a in seq_len(A)) {
       Ra <- as.matrix(R[[a]])

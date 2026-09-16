@@ -137,9 +137,9 @@ morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
       Xw <- X * w
       XtX <- crossprod(Xw, X)
       Xty <- as.numeric(crossprod(Xw, yv))
-      fit <- tryCatch(.s03ridgesolve(XtX, Xty, 1e-10)\[1\],
+      fit <- tryCatch(.s03ridgesolve(XtX, Xty, 1e-10)[1],
                       error = function(e) sum(w * yv) / sum(w))
-      out\[a, b\] <- fit
+      out[a, b] <- fit
     }
   }
   out
@@ -318,7 +318,7 @@ morie_pace <- function(Y, argvals, K = 2L, n_grid = 21L, bw_mu = NULL,
     if (isTRUE(shrink)) {
       S <- matrix(0, m, m)
       for (a in seq_len(m)) for (b in seq_len(m)) {
-        S\[a, b\] <- sum(lam * P[a, ] * P[b, ]) + if (a == b) sigma2 else 0
+        S[a, b] <- sum(lam * P[a, ] * P[b, ]) + if (a == b) sigma2 else 0
       }
       z <- tryCatch(as.numeric(.s03ridgesolve(S, cen, 1e-10)),
                     error = function(e) rep(0, m))

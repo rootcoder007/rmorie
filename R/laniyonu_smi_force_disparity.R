@@ -382,7 +382,7 @@ morie_laniyonu_smi_force_disparity <- function(
     }
   }
   area_levels <- sort(unique(long_df$.geog))
-  baseline_area <- area_levels\[1\]
+  baseline_area <- area_levels[1]
   if (include_area_re && length(area_levels) > 1L) {
     for (a in area_levels[-1]) {
       X_pieces[[paste0("area_", a)]] <- as.numeric(long_df$.geog == a)

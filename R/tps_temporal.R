@@ -470,7 +470,7 @@ morie_tps_arima_forecast <- function(df, h = 12L, ds_name = "?") {
     ))
   }
 
-  first <- as.POSIXlt(monthly$dates\[1\])
+  first <- as.POSIXlt(monthly$dates[1])
   start_year <- first$year + 1900L
   start_month <- first$mon + 1L
   ts_obj <- stats::ts(monthly$counts,

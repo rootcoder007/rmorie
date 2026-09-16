@@ -59,14 +59,14 @@ Clipsi <- function(I_emb, T_emb, tau = 0.01) {
   cosm <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
     s <- 0
-    for (k in seq_len(d)) s <- s + In\[i, k\] * Tn[j, k]
-    cosm\[i, j\] <- s
+    for (k in seq_len(d)) s <- s + In[i, k] * Tn[j, k]
+    cosm[i, j] <- s
   }
   logits <- cosm / tau
   retrieved <- integer(n)
   for (i in seq_len(n)) {
     b <- 1L
-    for (j in seq_len(n)) if (cosm\[i, j\] > cosm[i, b]) b <- j
+    for (j in seq_len(n)) if (cosm[i, j] > cosm[i, b]) b <- j
     retrieved[i] <- b
   }
   acc <- sum(retrieved == seq_len(n)) / n

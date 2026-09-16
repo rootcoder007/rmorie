@@ -47,15 +47,15 @@ Aitzmu <- function(X, delta) {
     f <- 1 - sd / tot
     for (j in seq_len(D)) {
       if (r[j] == 0) {
-        out\[i, j\] <- dl[j]
+        out[i, j] <- dl[j]
         nz <- nz + 1L
       } else {
-        out\[i, j\] <- r[j] * f
+        out[i, j] <- r[j] * f
       }
     }
   }
   list(
-    X_imp = if (was_matrix) out else as.numeric(out[1, ]), estimate = out\[1, 1\],
+    X_imp = if (was_matrix) out else as.numeric(out[1, ]), estimate = out[1, 1],
     n_zero = nz, n = nrow(rows), D = D,
     method = "Martin-Fernandez et al. (2003) multiplicative replacement"
   )

@@ -599,7 +599,7 @@ morie_transform_prediction <- function(x, y_threshold, T_hat, F_hat, beta_hat,
     ), call. = FALSE)
   }
   if (any(fg < 0) || any(fg > 1)) {
-    stop("F_hat must lie in \[0, 1\].", call. = FALSE)
+    stop("F_hat must lie in [0, 1].", call. = FALSE)
   }
   t_of <- function(v) stats::approx(yg, tg, xout = v, rule = 2L)$y
   f_of <- function(v) stats::approx(ug, fg, xout = v, rule = 2L)$y

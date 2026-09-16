@@ -386,7 +386,7 @@ morie_tps_sarima_forecast <- function(df, ds_name = "?", h = 12L,
   test  <- monthly$counts[(train_n + 1L):n_total]
   test_dates <- monthly$dates[(train_n + 1L):n_total]
 
-  first <- as.POSIXlt(monthly$dates\[1\])
+  first <- as.POSIXlt(monthly$dates[1])
   start_year <- first$year + 1900L
   start_month <- first$mon + 1L
   ts_train <- stats::ts(train, start = c(start_year, start_month),
@@ -427,9 +427,9 @@ morie_tps_sarima_forecast <- function(df, ds_name = "?", h = 12L,
        (if ("sigma2" %in% names(fit)) 1L else 0L)
   bic <- aic + k * (log(train_n) - 2)
 
-  ord_str <- sprintf("(%d,%d,%d)", order\[1\], order[2], order[3])
+  ord_str <- sprintf("(%d,%d,%d)", order[1], order[2], order[3])
   seas_str <- sprintf("(%d,%d,%d)_%d",
-                       seasonal\[1\], seasonal[2], seasonal[3], seasonal[4])
+                       seasonal[1], seasonal[2], seasonal[3], seasonal[4])
 
   .tps_stoch_result(
     sprintf("SARIMA%s x %s forecast -- %s",
@@ -442,7 +442,7 @@ morie_tps_sarima_forecast <- function(df, ds_name = "?", h = 12L,
       `Hold-out MAPE` = sprintf("%.1f%%", mape),
       `Hold-out RMSE` = .tps_stoch_round(rmse, 1),
       `Forecast mean` = .tps_stoch_round(mean(fc), 1),
-      `First test month` = format(test_dates\[1\], "%Y-%m-%d"),
+      `First test month` = format(test_dates[1], "%Y-%m-%d"),
       `Last test month` =
         format(test_dates[length(test_dates)], "%Y-%m-%d")
     ),
@@ -519,7 +519,7 @@ morie_tps_langevin_simulate <- function(df, ds_name = "?",
   x_lag <- x[-length(x)]
   fit_ols <- stats::lm(dx ~ x_lag)
   ab <- stats::coef(fit_ols)
-  a <- as.numeric(ab\[1\])
+  a <- as.numeric(ab[1])
   b <- as.numeric(ab[2])
   theta <- max(1e-6, -b)
   mu <- if (b != 0) -a / b else mean(x)
@@ -555,7 +555,7 @@ morie_tps_langevin_simulate <- function(df, ds_name = "?",
       `Simulated paths` = as.integer(n_paths),
       `Forecast horizon (days)` = as.integer(T_days),
       `Final day p5 / median / p95` = sprintf(
-        "%.1f / %.1f / %.1f", qs\[1\], qs[2], qs[3])
+        "%.1f / %.1f / %.1f", qs[1], qs[2], qs[3])
     ),
     interpretation = sprintf(
       paste0("OU mean-reversion strength theta=%.3f -> shocks ",
@@ -568,7 +568,7 @@ morie_tps_langevin_simulate <- function(df, ds_name = "?",
     theta = theta, mu = mu, sigma = sigma,
     n_paths = as.integer(n_paths),
     T_days = as.integer(T_days),
-    p5 = as.numeric(qs\[1\]),
+    p5 = as.numeric(qs[1]),
     median = as.numeric(qs[2]),
     p95 = as.numeric(qs[3]),
     paths = paths
@@ -635,7 +635,7 @@ morie_tps_fokker_planck_grid <- function(df, ds_name = "?",
   x_lag <- x[-length(x)]
   fit_ols <- stats::lm(dx_obs ~ x_lag)
   ab <- stats::coef(fit_ols)
-  a <- as.numeric(ab\[1\])
+  a <- as.numeric(ab[1])
   b <- as.numeric(ab[2])
   theta <- max(1e-6, -b)
   mu <- if (b != 0) -a / b else mean(x)

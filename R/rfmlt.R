@@ -60,7 +60,7 @@ Rfmlt <- function(X, Y_matrix, n_trees = 100L, mtry = NULL, nodesize = 5L,
   XX <- .s03mat(X)
   YY <- .s03mat(Y_matrix)
   d <- .rfcheck(XX, YY)
-  n <- d\[1\]
+  n <- d[1]
   p <- d[2]
   q <- d[3]
   B <- as.integer(n_trees)

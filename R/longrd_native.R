@@ -76,15 +76,15 @@
 #' morie_longrd_align("ACGTACGT", "ACGAACGT")
 morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
                                gap = -2) {
-  av <- if (nchar(a)) strsplit(a, "")[\[1\]] else character(0)
-  bv <- if (nchar(b)) strsplit(b, "")[\[1\]] else character(0)
+  av <- if (nchar(a)) strsplit(a, "")[[1]] else character(0)
+  bv <- if (nchar(b)) strsplit(b, "")[[1]] else character(0)
   n <- length(av)
   m <- length(bv)
   s <- matrix(0, n + 1L, m + 1L)
   if (n > 0L) for (i in seq_len(n)) s[i + 1L, 1] <- s[i, 1] + gap
   if (m > 0L) for (j in seq_len(m)) s[1, j + 1L] <- s[1, j] + gap
   if (n > 0L && m > 0L) for (i in seq_len(n)) for (j in seq_len(m)) {
-    d <- s\[i, j\] + (if (av[i] == bv[j]) match else mismatch)
+    d <- s[i, j] + (if (av[i] == bv[j]) match else mismatch)
     u <- s[i, j + 1L] + gap
     l <- s[i + 1L, j] + gap
     best <- d
@@ -98,7 +98,7 @@ morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
   j <- m
   while (i > 0L || j > 0L) {
     if (i > 0L && j > 0L &&
-        s[i + 1L, j + 1L] == s\[i, j\] +
+        s[i + 1L, j + 1L] == s[i, j] +
           (if (av[i] == bv[j]) match else mismatch)) {
       ga <- c(av[i], ga)
       gb <- c(bv[j], gb)
@@ -130,11 +130,11 @@ morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
 #' morie_longrd_rle("AAACCGTT")
 morie_longrd_rle <- function(seq) {
   if (!nchar(seq)) return(list())
-  v <- strsplit(seq, "")[\[1\]]
+  v <- strsplit(seq, "")[[1]]
   out <- list()
   for (ch in v) {
     k <- length(out)
-    if (k > 0L && out[[k]][\[1\]] == ch) {
+    if (k > 0L && out[[k]][[1]] == ch) {
       out[[k]][[2]] <- out[[k]][[2]] + 1L
     } else {
       out[[k + 1L]] <- list(ch, 1L)
@@ -154,7 +154,7 @@ morie_longrd_rle <- function(seq) {
 morie_longrd_unrle <- function(runs) {
   if (!length(runs)) return("")
   paste(vapply(runs, function(r)
-    paste(rep(r[\[1\]], as.integer(r[[2]])), collapse = ""),
+    paste(rep(r[[1]], as.integer(r[[2]])), collapse = ""),
     character(1)), collapse = "")
 }
 
@@ -186,8 +186,8 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
   for (i in seq_len(n + 1L)) ins[[i]] <- list()
   for (read in reads) {
     al <- morie_longrd_align(draft, read, match, mismatch, gap)
-    gd <- strsplit(al$a, "")[\[1\]]
-    gr <- strsplit(al$b, "")[\[1\]]
+    gd <- strsplit(al$a, "")[[1]]
+    gr <- strsplit(al$b, "")[[1]]
     pos <- 0L
     pend <- ""
     for (k in seq_along(gd)) {
@@ -275,11 +275,11 @@ morie_longrd_poa <- function(reads, match = 1, mismatch = -1, gap = -2,
   rs <- as.character(reads)
   if (!length(rs)) stop("a consensus needs at least one read")
   if (isTRUE(sort_reads)) rs <- sort(rs, method = "radix")
-  cons <- rs\[1\]
+  cons <- rs[1]
   if (length(rs) > 1L) for (k in 2:length(rs)) {
     al <- morie_longrd_align(cons, rs[k], match, mismatch, gap)
-    gc <- strsplit(al$a, "")[\[1\]]
-    gr <- strsplit(al$b, "")[\[1\]]
+    gc <- strsplit(al$a, "")[[1]]
+    gr <- strsplit(al$b, "")[[1]]
     out <- character(length(gc))
     for (q in seq_along(gc)) {
       out[q] <- if (gc[q] == "-") gr[q] else gc[q]
@@ -322,7 +322,7 @@ morie_longrd <- function(assembly, reads, method = "pileup",
   pu <- morie_longrd_pileup(draft, rs, match, mismatch, gap)
   cols <- pu$cols
   ins <- pu$ins
-  dv <- strsplit(draft, "")[\[1\]]
+  dv <- strsplit(draft, "")[[1]]
   n <- length(dv)
   depth <- integer(n)
   support <- numeric(n)
@@ -330,7 +330,7 @@ morie_longrd <- function(assembly, reads, method = "pileup",
   protected <- 0L
   for (p in seq_len(n)) {
     r <- .longrd_call(cols[[p]], dv[p], min_depth, min_frac)
-    called[p] <- r[\[1\]]
+    called[p] <- r[[1]]
     depth[p] <- r[[2]]
     support[p] <- r[[3]]
     if (isTRUE(r[[4]])) protected <- protected + 1L
@@ -356,7 +356,7 @@ morie_longrd <- function(assembly, reads, method = "pileup",
     polished <- morie_longrd_poa(rs, match, mismatch, gap, sort_reads)
   }
 
-  pv <- if (nchar(polished)) strsplit(polished, "")[\[1\]] else
+  pv <- if (nchar(polished)) strsplit(polished, "")[[1]] else
     character(0)
   changed <- 0L
   lim <- min(n, length(pv))

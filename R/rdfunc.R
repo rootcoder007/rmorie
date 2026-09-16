@@ -43,15 +43,15 @@ Ratedist <- function(px, distortion = NULL, D = 0.1, beta_hi = 1e4,
       for (i in seq_len(n)) {
         lw <- numeric(m)
         for (j in seq_len(m)) {
-          lw[j] <- log(if (q[j] > 1e-300) q[j] else 1e-300) - beta * Dm\[i, j\]
+          lw[j] <- log(if (q[j] > 1e-300) q[j] else 1e-300) - beta * Dm[i, j]
         }
         z <- .s03logsumexp(lw)
-        for (j in seq_len(m)) Q\[i, j\] <- exp(lw[j] - z)
+        for (j in seq_len(m)) Q[i, j] <- exp(lw[j] - z)
       }
       nq <- numeric(m)
       for (j in seq_len(m)) {
         s <- 0
-        for (i in seq_len(n)) s <- s + p[i] * Q\[i, j\]
+        for (i in seq_len(n)) s <- s + p[i] * Q[i, j]
         nq[j] <- s
       }
       delta <- 0
@@ -62,8 +62,8 @@ Ratedist <- function(px, distortion = NULL, D = 0.1, beta_hi = 1e4,
     R <- 0
     dist <- 0
     for (i in seq_len(n)) for (j in seq_len(m)) {
-      if (Q\[i, j\] > 0 && q[j] > 0) R <- R + p[i] * Q\[i, j\] * log(Q\[i, j\] / q[j])
-      dist <- dist + p[i] * Q\[i, j\] * Dm\[i, j\]
+      if (Q[i, j] > 0 && q[j] > 0) R <- R + p[i] * Q[i, j] * log(Q[i, j] / q[j])
+      dist <- dist + p[i] * Q[i, j] * Dm[i, j]
     }
     list(R = R, dist = dist, q = q)
   }

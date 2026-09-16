@@ -47,7 +47,7 @@
 # the data distribution; and an iterative update towards target values
 # that are only periodically updated, with theta^- held fixed between
 # updates and refreshed every C steps. The Methods section gives the
-# reward clipping to \[-1, 1\].
+# reward clipping to [-1, 1].
 #
 # Watkins, C. J. C. H. & Dayan, P. (1992) "Q-learning", *Machine
 # Learning* 8, 279-292, doi:10.1007/BF00992698. The learning rule

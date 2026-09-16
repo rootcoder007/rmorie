@@ -151,7 +151,7 @@
 .clusmd_neighbour_lists <- function(fps, threshold = 0.8) {
   th <- as.numeric(threshold)
   if (is.na(th) || th < 0.0 || th > 1.0)
-    stop("clusmd: the threshold must lie in \[0, 1\], got ", th)
+    stop("clusmd: the threshold must lie in [0, 1], got ", th)
   if (length(fps) < 1L)
     stop("clusmd: no compounds given")
   F <- lapply(fps, .clusmd_fp)

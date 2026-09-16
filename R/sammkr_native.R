@@ -31,11 +31,11 @@
 .sammkr_flat <- function(m) {
   M <- m
   if (is.list(M) && !is.matrix(M)) {
-    if (length(M) > 0 && is.list(M[\[1\]])) {
+    if (length(M) > 0 && is.list(M[[1]])) {
       nr <- length(M)
-      nc <- length(M[\[1\]])
+      nc <- length(M[[1]])
       M <- matrix(0, nrow = nr, ncol = nc)
-      for (i in 1:nr) for (j in 1:nc) M\[i, j\] <- M[[i]][[j]]
+      for (i in 1:nr) for (j in 1:nc) M[i, j] <- M[[i]][[j]]
     } else {
       M <- unlist(M)
     }
@@ -59,7 +59,7 @@ average_of_valid_masks <- function(masks) {
   if (length(masks) == 0)
     stop("sammkr: no masks given")
   F <- lapply(masks, .sammkr_flat)
-  n <- length(F[\[1\]])
+  n <- length(F[[1]])
   if (any(lengths(F) != n))
     stop("sammkr: the masks differ in size")
   acc <- numeric(n)
@@ -173,17 +173,17 @@ rank_masks <- function(masks, predicted_iou, target = NULL) {
     stop(sprintf("sammkr: %d masks but %d predicted IoUs",
                  length(masks), length(p)))
   order_idx <- order(-p) - 1L
-  out <- list(order = order_idx, best = order_idx\[1\], predicted_iou = p)
+  out <- list(order = order_idx, best = order_idx[1], predicted_iou = p)
   if (!is.null(target)) {
     true <- sapply(masks, function(m) iou(m, target))
     best_true <- which.max(true) - 1L
     out$true_iou <- true
     out$best_true <- best_true
-    out$correct <- order_idx\[1\] == best_true
+    out$correct <- order_idx[1] == best_true
     out$calibration_error <- sum(abs(p - true)) / length(p)
-    out$regret <- true[best_true + 1L] - true[order_idx\[1\] + 1L]
+    out$regret <- true[best_true + 1L] - true[order_idx[1] + 1L]
   }
-  out$estimate <- order_idx\[1\]
+  out$estimate <- order_idx[1]
   out$method <- "multi-mask output with IoU ranking; Kirillov et al. (2023)"
   out$note <- paste("the score is a LEARNED estimate, so its error is ",
                     "reported rather than assumed away", sep = "")

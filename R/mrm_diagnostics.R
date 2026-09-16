@@ -238,7 +238,7 @@ mrm_median_causal_effect <- function(data, treatment_col, outcome_col,
   }
   pairs <- pairs[seq_len(k)]
   if (!length(pairs)) stop("no valid matches")
-  Y1 <- vapply(pairs, function(p) Y[p\[1\]], numeric(1))
+  Y1 <- vapply(pairs, function(p) Y[p[1]], numeric(1))
   Y0 <- vapply(pairs, function(p) Y[p[2]], numeric(1))
   m1 <- stats::median(Y1)
   m0 <- stats::median(Y0)

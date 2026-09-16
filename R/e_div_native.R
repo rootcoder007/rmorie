@@ -36,7 +36,7 @@
 #' res
 .mor_ed_dist <- function(z, alpha) as.matrix(dist(z))^alpha
 
-# P\[i + 1, j + 1\] = sum of D\[1..i, 1..j\]
+# P[i + 1, j + 1] = sum of D[1..i, 1..j]
 #' P\[i + 1, j + 1\] = sum of D\[1..i, 1..j\]
 #'
 #' A step of the e_div_native implementation. Called by \code{morie_e_div}.
@@ -126,7 +126,7 @@
   c(bestq, bt, bk)
 }
 
-# Fisher-Yates within each cluster, consuming us\[pos ...\] in the same
+# Fisher-Yates within each cluster, consuming us[pos ...] in the same
 # order as the Python arm.
 #' Fisher-Yates within each cluster, consuming us\[pos ...\] in the same
 #'
@@ -208,7 +208,7 @@ morie_e_div <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
       b <- clusters[ci, 2L]
       if (b - a >= 2L * min_size) {
         r_ <- .mor_ed_best_split(P, a, b, min_size)
-        if (r_\[1\] > bestq) { bestq <- r_\[1\]
+        if (r_[1] > bestq) { bestq <- r_[1]
         tau_hat <- as.integer(r_[2]) }
       }
     }
@@ -226,7 +226,7 @@ morie_e_div <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
         a <- clusters[ci, 1L]
         b <- clusters[ci, 2L]
         if (b - a >= 2L * min_size) {
-          q <- .mor_ed_best_split(Pp, a, b, min_size)\[1\]
+          q <- .mor_ed_best_split(Pp, a, b, min_size)[1]
           if (q > bq) bq <- q
         }
       }

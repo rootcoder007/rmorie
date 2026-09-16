@@ -118,7 +118,7 @@
   st <- sin(t)
   out <- P
   for (i in seq_len(nrow(P))) {
-    x <- P[i, 1] - cen\[1\]
+    x <- P[i, 1] - cen[1]
     y <- P[i, 2] - cen[2]
     z <- P[i, 3] - cen[3]
     if (axis == 0L) {
@@ -137,7 +137,7 @@
       x <- nx
       y <- ny
     }
-    out[i, ] <- c(x + cen\[1\], y + cen[2], z + cen[3])
+    out[i, ] <- c(x + cen[1], y + cen[2], z + cen[3])
   }
   out
 }

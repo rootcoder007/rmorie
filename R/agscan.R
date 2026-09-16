@@ -45,7 +45,7 @@ Selfconsis <- function(policy_net, seeds = NULL) {
     for (x in p) t <- t + x
     if (t > 0) p / t else p
   })
-  K <- length(norm[\[1\]])
+  K <- length(norm[[1]])
   pbar <- numeric(K)
   for (p in norm) for (a in seq_len(K)) pbar[a] <- pbar[a] + p[a] / m
   ent <- vapply(norm, ent1, 0)

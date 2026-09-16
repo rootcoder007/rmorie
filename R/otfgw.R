@@ -36,7 +36,7 @@ Otfgw <- function(M, Cx, Cy, a, b, alpha = 0.5, max_iter = 20) {
   if (nrow(A) != n || nrow(B) != m)
     stop("structure matrices must match the marginals")
   al <- as.numeric(alpha)
-  if (al < 0 || al > 1) stop("alpha must lie in \[0, 1\]")
+  if (al < 0 || al > 1) stop("alpha must lie in [0, 1]")
   t1 <- sum(outer(aa, aa) * A^2)
   t3 <- sum(outer(bb, bb) * B^2)
   T <- outer(aa, bb)

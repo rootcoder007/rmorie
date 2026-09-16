@@ -43,7 +43,7 @@ Azsearch <- function(state, net, num_sim, step = NULL, c_puct = 1.25,
   expand <- function(s) {
     out <- net(s)
     if (is.list(out) && length(out) == 2L) {
-      p <- .s03vec(out[\[1\]])
+      p <- .s03vec(out[[1]])
       v <- as.numeric(out[[2]])
     } else {
       p <- .s03vec(out)
@@ -107,7 +107,7 @@ Azsearch <- function(state, net, num_sim, step = NULL, c_puct = 1.25,
     acc <- v
     if (length(path) > 0L) for (i in seq(length(path), 1L)) {
       if (alternate) acc <- -acc
-      nd <- path[[i]]\[1\]
+      nd <- path[[i]][1]
       a <- path[[i]][2]
       N[[nd]][a] <- N[[nd]][a] + 1
       W[[nd]][a] <- W[[nd]][a] + acc

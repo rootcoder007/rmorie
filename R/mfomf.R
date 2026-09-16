@@ -84,7 +84,7 @@ Modelrl <- function(env, model = NULL, planner = "vi", n_states = NULL,
     }
     pol[s] <- ba
   }
-  list(estimate = if (ns) V\[1\] else NaN, v = V, policy = pol, sweeps = sweeps,
+  list(estimate = if (ns) V[1] else NaN, v = V, policy = pol, sweeps = sweeps,
        n_states = ns, n_actions = na,
        method = "Maximum-likelihood tabular model plus value iteration (Dyna)")
 }

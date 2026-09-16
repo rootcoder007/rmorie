@@ -14,14 +14,14 @@
 #' @return A numeric value.
 #' @export
 .garch_negll <- function(p, r, n) {
-  omega <- p\[1\]
+  omega <- p[1]
   alpha <- p[2]
   beta <- p[3]
   if (omega <= 0 || alpha < 0 || beta < 0 || alpha + beta >= 1) {
     return(1e10)
   }
   s2 <- numeric(n)
-  s2\[1\] <- var(r)
+  s2[1] <- var(r)
   for (t in 2:n) s2[t] <- max(omega + alpha * r[t - 1]^2 + beta * s2[t - 1], 1e-12)
   0.5 * sum(log(2 * pi * s2) + r^2 / s2)
 }
@@ -56,11 +56,11 @@ morie_garch_fit <- function(x) {
     lower = c(1e-8, 1e-8, 1e-8),
     upper = c(var_r * 10, 0.999, 0.999)
   )
-  omega <- opt$par\[1\]
+  omega <- opt$par[1]
   alpha <- opt$par[2]
   beta <- opt$par[3]
   s2 <- numeric(n)
-  s2\[1\] <- var_r
+  s2[1] <- var_r
   for (t in 2:n) s2[t] <- omega + alpha * r[t - 1]^2 + beta * s2[t - 1]
   list(
     omega = omega, alpha = alpha, beta = beta,

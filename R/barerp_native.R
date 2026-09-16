@@ -239,7 +239,7 @@ centering_steps <- function(m, eps, t0, mu) {
       } else {
         val <- (f(xpp) - f(xpm) - f(xmp) + f(xmm)) / (4.0 * sa * sb)
       }
-      out\[a, b\] <- val
+      out[a, b] <- val
       out[b, a] <- val
     }
   }

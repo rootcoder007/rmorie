@@ -44,19 +44,19 @@ Esmoeg <- function(loadings, target, iters = 200, tol = 1e-13) {
   if (nspec == 0L) stop("target specifies no elements")
   .proc <- function(H) {
     M <- matrix(0, m, m)
-    for (a in seq_len(m)) for (b in seq_len(m)) M\[a, b\] <- sum(L[, a] * H[, b])
+    for (a in seq_len(m)) for (b in seq_len(m)) M[a, b] <- sum(L[, a] * H[, b])
     MtM <- matrix(0, m, m)
-    for (a in seq_len(m)) for (b in seq_len(m)) MtM\[a, b\] <- sum(M[, a] * M[, b])
+    for (a in seq_len(m)) for (b in seq_len(m)) MtM[a, b] <- sum(M[, a] * M[, b])
     ej <- .s03jacobi(MtM)
     vals <- ej$values
     vecs <- ej$vectors
     if (any(vals <= 1e-24))
       stop("target rotation is degenerate (Lambda' H is rank deficient)")
     MV <- matrix(0, m, m)
-    for (a in seq_len(m)) for (b in seq_len(m)) MV\[a, b\] <- sum(M[a, ] * vecs[, b])
-    for (a in seq_len(m)) for (b in seq_len(m)) MV\[a, b\] <- MV\[a, b\] / sqrt(vals[b])
+    for (a in seq_len(m)) for (b in seq_len(m)) MV[a, b] <- sum(M[a, ] * vecs[, b])
+    for (a in seq_len(m)) for (b in seq_len(m)) MV[a, b] <- MV[a, b] / sqrt(vals[b])
     Tn <- matrix(0, m, m)
-    for (a in seq_len(m)) for (b in seq_len(m)) Tn\[a, b\] <- sum(MV[a, ] * vecs[b, ])
+    for (a in seq_len(m)) for (b in seq_len(m)) Tn[a, b] <- sum(MV[a, ] * vecs[b, ])
     Tn
   }
   T <- diag(1, m)

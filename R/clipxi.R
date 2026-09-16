@@ -93,7 +93,7 @@ Clipxi <- function(image, backbone = "vit-l/14", seed = 42) {
     emb[j] <- s
   }
   emb <- .clip_l2norm(emb)
-  .t1_result(estimate = emb\[1\], embedding = emb, n_patches = npatch,
+  .t1_result(estimate = emb[1], embedding = emb, n_patches = npatch,
              grid = c(gh, gw), patch = P,
              width = as.integer(cfg[["width"]]),
              embed_dim = as.integer(cfg[["embed"]]),

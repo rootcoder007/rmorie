@@ -25,10 +25,10 @@
 spcsr <- function(points, region = NULL) {
   p <- as.matrix(points)
   reg <- .sp_region(region, p)
-  area <- (reg[3] - reg\[1\]) * (reg[4] - reg[2])
+  area <- (reg[3] - reg[1]) * (reg[4] - reg[2])
   lam <- nrow(p) / area
   k <- max(2, as.integer(sqrt(nrow(p) / 5)))
-  xe <- seq(reg\[1\], reg[3], length.out = k + 1)
+  xe <- seq(reg[1], reg[3], length.out = k + 1)
   ye <- seq(reg[2], reg[4], length.out = k + 1)
   xi <- pmin(pmax(findInterval(p[, 1], xe, rightmost.closed = TRUE), 1), k)
   yi <- pmin(pmax(findInterval(p[, 2], ye, rightmost.closed = TRUE), 1), k)

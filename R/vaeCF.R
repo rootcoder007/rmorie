@@ -105,7 +105,7 @@ Vaecf <- function(R, K = 5, latent_dim = 2, beta = 0.2, n_samples = 16,
         for (j in seq_len(m)) s <- s + z[j] * Wd[j, i]
         lg[i] <- s
       }
-      mx <- lg\[1\]
+      mx <- lg[1]
       for (v in lg) if (v > mx) mx <- v
       se <- 0
       for (v in lg) se <- se + exp(v - mx)

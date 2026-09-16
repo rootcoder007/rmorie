@@ -67,7 +67,7 @@ n_parameters <- function(n_features, n_fields, k_dim,
 phi <- function(x, fields, W) {
   nz <- list()
   for (pair in x) {
-    j <- as.integer(pair[\[1\]])
+    j <- as.integer(pair[[1]])
     v <- as.numeric(pair[[2]])
     if (v != 0) nz[[length(nz) + 1L]] <- list(j = j, v = v)
   }
@@ -177,7 +177,7 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
       g0 <- -yv / (1 + exp(min(700, yv * p)))
       nz <- list()
       for (pair in rows[[r]]) {
-        j <- as.integer(pair[\[1\]])
+        j <- as.integer(pair[[1]])
         v <- as.numeric(pair[[2]])
         if (v != 0) nz[[length(nz) + 1L]] <- list(j = j, v = v)
       }

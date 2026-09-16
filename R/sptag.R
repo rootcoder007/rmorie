@@ -32,10 +32,10 @@ sptag <- function(x) {
       both <- valid[i, ] & valid[j, ]
       denom <- sum(both)
       if (denom == 0L) {
-        A\[i, j\] <- A[j, i] <- NA_real_
+        A[i, j] <- A[j, i] <- NA_real_
       } else {
         same <- sum(M[i, both] == M[j, both])
-        A\[i, j\] <- A[j, i] <- same / denom
+        A[i, j] <- A[j, i] <- same / denom
       }
     }
   }

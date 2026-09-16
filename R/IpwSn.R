@@ -51,7 +51,7 @@ IpwSn <- function(Y, X, C, lam_grid) {
     if (den <= 0) stop("ipw_sensitivity: tilted weights vanished; lambda too extreme")
     sum(u * yv[obs]) / den
   }, 0)
-  zero <- if (any(lam == 0)) mus[which(lam == 0)\[1\]] else mus\[1\]
+  zero <- if (any(lam == 0)) mus[which(lam == 0)[1]] else mus[1]
   .t1_result(estimate = zero, mu = mus, lambda = lam, mu_min = min(mus),
              mu_max = max(mus), range = max(mus) - min(mus),
              propensity = pi, gamma = gam, n_observed = sum(cc), n = n,

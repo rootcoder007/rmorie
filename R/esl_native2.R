@@ -103,7 +103,7 @@
           Hi <- min(C, ai_old + aj_old)
         }
         if (L >= Hi) next
-        eta <- 2 * K\[i, j\] - K[i, i] - K[j, j]
+        eta <- 2 * K[i, j] - K[i, i] - K[j, j]
         if (eta >= 0) next
         alpha[j] <- min(max(aj_old - y[j] * (Ei - Ej) / eta, L), Hi)
         if (abs(alpha[j] - aj_old) < 1e-12) {
@@ -112,8 +112,8 @@
         }
         alpha[i] <- ai_old + y[i] * y[j] * (aj_old - alpha[j])
         b1 <- b - Ei - y[i] * (alpha[i] - ai_old) * K[i, i] -
-          y[j] * (alpha[j] - aj_old) * K\[i, j\]
-        b2 <- b - Ej - y[i] * (alpha[i] - ai_old) * K\[i, j\] -
+          y[j] * (alpha[j] - aj_old) * K[i, j]
+        b2 <- b - Ej - y[i] * (alpha[i] - ai_old) * K[i, j] -
           y[j] * (alpha[j] - aj_old) * K[j, j]
         b <- if (alpha[i] > 0 && alpha[i] < C) b1 else if (alpha[j] > 0 && alpha[j] < C) b2 else (b1 + b2) / 2
         changed <- changed + 1L

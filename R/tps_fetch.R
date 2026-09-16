@@ -169,7 +169,7 @@ morie_tps_fetch_category <- function(category,
       if (!is.null(geom) && identical(geom$type, "Point") &&
           !is.null(geom$coordinates)) {
         if (is.null(props$LONG_WGS84)) {
-          props$LONG_WGS84 <- geom$coordinates[\[1\]]
+          props$LONG_WGS84 <- geom$coordinates[[1]]
         }
         if (is.null(props$LAT_WGS84)) {
           props$LAT_WGS84 <- geom$coordinates[[2]]

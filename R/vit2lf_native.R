@@ -159,8 +159,8 @@ morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
       s <- if (den <= 0) 0 else s / den
     }
     s <- s * scale
-    if (!is.null(bias)) s <- s + as.numeric(bias\[i, j\])
-    out\[i, j\] <- s
+    if (!is.null(bias)) s <- s + as.numeric(bias[i, j])
+    out[i, j] <- s
   }
   list(logits = out, scale = scale)
 }
@@ -185,10 +185,10 @@ morie_vit2lf_softmax <- function(logits, mask = NULL) {
   for (i in seq_len(nq)) {
     live <- if (is.null(mask)) seq_len(nk) else which(mask[i, ])
     if (!length(live)) stop("row ", i - 1L, " is masked out entirely")
-    mx <- logits[i, live\[1\]]
-    for (j in live) if (logits\[i, j\] > mx) mx <- logits\[i, j\]
+    mx <- logits[i, live[1]]
+    for (j in live) if (logits[i, j] > mx) mx <- logits[i, j]
     ex <- numeric(nk)
-    for (j in live) ex[j] <- exp(logits\[i, j\] - mx)
+    for (j in live) ex[j] <- exp(logits[i, j] - mx)
     tot <- .w3_csum(ex[live])
     out[i, ] <- ex / tot
   }
@@ -270,22 +270,22 @@ morie_vit2lf_relative_bias <- function(coords, table, window,
   if (nrow(table) != span || ncol(table) != span)
     stop("the table must be (2 window - 1) square")
   grid <- vapply(seq_len(span), function(t)
-    morie_vit2lf_log_coords(t - 1L - (window - 1L), 0)\[1\], numeric(1))
+    morie_vit2lf_log_coords(t - 1L - (window - 1L), 0)[1], numeric(1))
   out <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
     dx <- coords[i, 1] - coords[j, 1]
     dy <- coords[i, 2] - coords[j, 2]
     if (log_spaced) {
       lc <- morie_vit2lf_log_coords(dx, dy)
-      a <- order(abs(grid - lc\[1\]), seq_len(span))\[1\]
-      b <- order(abs(grid - lc[2]), seq_len(span))\[1\]
+      a <- order(abs(grid - lc[1]), seq_len(span))[1]
+      b <- order(abs(grid - lc[2]), seq_len(span))[1]
     } else {
       a <- as.integer(dx) + window
       b <- as.integer(dy) + window
       if (a < 1L || a > span || b < 1L || b > span)
         stop("a relative offset falls outside the table")
     }
-    out\[i, j\] <- as.numeric(table\[a, b\])
+    out[i, j] <- as.numeric(table[a, b])
   }
   out
 }

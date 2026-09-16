@@ -40,7 +40,7 @@ Ctomeg <- function(X, factor_loadings) {
     mu <- colSums(M) / n
     S <- matrix(0, p, p)
     for (a in seq_len(p)) for (b in seq_len(p))
-      S\[a, b\] <- sum((M[, a] - mu[a]) * (M[, b] - mu[b])) / (n - 1)
+      S[a, b] <- sum((M[, a] - mu[a]) * (M[, b] - mu[b])) / (n - 1)
   }
   var_total <- sum(S)
   if (var_total <= 0) stop("total score variance is not positive")

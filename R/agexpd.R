@@ -22,7 +22,7 @@ Mctsexpand <- function(state, policy_net, legal = NULL, logits = FALSE) {
   out <- if (is.function(policy_net)) policy_net(state) else policy_net
   v <- NaN
   if (is.list(out) && length(out) == 2L) {
-    raw <- .s03vec(out[\[1\]])
+    raw <- .s03vec(out[[1]])
     v <- as.numeric(out[[2]])
   } else {
     raw <- .s03vec(out)

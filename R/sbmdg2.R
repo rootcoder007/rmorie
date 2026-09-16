@@ -25,7 +25,7 @@ sbmdg2 <- function(A, blocks) {
   b <- length(keys)
   idx <- match(lab, keys)
   m <- matrix(0, b, b)
-  for (i in seq_len(n)) for (j in seq_len(n)) m[idx[i], idx[j]] <- m[idx[i], idx[j]] + a\[i, j\]
+  for (i in seq_len(n)) for (j in seq_len(n)) m[idx[i], idx[j]] <- m[idx[i], idx[j]] + a[i, j]
   deg <- rowSums(a)
   kappa <- numeric(b)
   for (i in seq_len(n)) kappa[idx[i]] <- kappa[idx[i]] + deg[i]

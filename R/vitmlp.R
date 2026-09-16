@@ -50,10 +50,10 @@ Vitmlp <- function(x, hidden_dim = NULL, w_scale = 1, skip = 0) {
   W2 <- .vitdraw(h, d, as.integer(skip) + d * h, w_scale)
   pre <- .s03matmul(X, W1)
   act <- pre
-  for (i in seq_len(n)) for (j in seq_len(h)) act\[i, j\] <- .s03gelu(pre\[i, j\])
+  for (i in seq_len(n)) for (j in seq_len(h)) act[i, j] <- .s03gelu(pre[i, j])
   out <- .s03matmul(act, W2)
   tot <- 0
-  for (i in seq_len(n)) for (j in seq_len(d)) tot <- tot + out\[i, j\]
+  for (i in seq_len(n)) for (j in seq_len(d)) tot <- tot + out[i, j]
   list(estimate = tot / (n * d), output = out, hidden_pre = pre, hidden = act,
        w1 = W1, w2 = W2, embed_dim = d, hidden_dim = h, n = n,
        skip_used = as.integer(skip) + 2L * d * h,

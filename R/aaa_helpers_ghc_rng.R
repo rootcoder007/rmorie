@@ -130,7 +130,7 @@
   r <- .ghc_mul32(a$lo, b[2])
   list(
     hi = (r$hi + .ghc_mul32(a$hi, b[2])$lo +
-      .ghc_mul32(a$lo, b\[1\])$lo) %% .ghc_M32,
+      .ghc_mul32(a$lo, b[1])$lo) %% .ghc_M32,
     lo = r$lo
   )
 }
@@ -164,7 +164,7 @@
   e$i <- e$i + n
   # state_i = s0 + i * GOLDEN  (mod 2^64), the SplitMix64 counter
   z <- .ghc_add64(
-    list(hi = rep(e$s0\[1\], n), lo = rep(e$s0[2], n)),
+    list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
     .ghc_mul64(list(
       hi = floor(idx / .ghc_M32),
       lo = idx %% .ghc_M32
@@ -191,7 +191,7 @@
   idx <- e$i + seq_len(n)
   e$i <- e$i + n
   z <- .ghc_add64(
-    list(hi = rep(e$s0\[1\], n), lo = rep(e$s0[2], n)),
+    list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
     .ghc_mul64(list(
       hi = floor(idx / .ghc_M32),
       lo = idx %% .ghc_M32
@@ -226,7 +226,7 @@
 #' @noRd
 .ghc_choice_p <- function(e, vals, w) {
   u <- .ghc_unif(e, 1L) * sum(w)
-  i <- which(u <= cumsum(w))\[1\]
+  i <- which(u <= cumsum(w))[1]
   if (is.na(i)) i <- length(w)
   vals[i]
 }

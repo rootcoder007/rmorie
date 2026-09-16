@@ -39,8 +39,8 @@ Ghosalparamrate <- function(d_true = 2, ns = c(100, 1000, 10000),
   }
   if (any(risks <= 0))
     stop("risk is zero at some n; the log-log slope is undefined")
-  rate_hat <- log(risks\[1\] / risks[length(risks)]) /
-    log(ns[length(ns)] / ns\[1\])
+  rate_hat <- log(risks[1] / risks[length(risks)]) /
+    log(ns[length(ns)] / ns[1])
   .t1_result(estimate = rate_hat,
              risk_by_n = risks,
              parametric = abs(rate_hat - 1) < 0.25,

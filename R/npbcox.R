@@ -110,7 +110,7 @@ Npbcox <- function(time, event, X, c = 1.0, lam0 = NULL, n_iter = 50L,
     surv <- surv * f
     S[k] <- surv
   }
-  .t1_result(beta = beta, se = se, estimate = beta\[1\], loglik = pr$ll,
+  .t1_result(beta = beta, se = se, estimate = beta[1], loglik = pr$ll,
              times = ev, dH = dH, H = Hc, S = S, grad_norm = gn,
              iterations = it, converged = if (gn <= as.numeric(tol)) 1 else 0,
              n = n, n_events = sum(d), c = cc, lam0 = l0,

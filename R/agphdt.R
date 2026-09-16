@@ -47,7 +47,7 @@ Policyhead <- function(x, action_space = NULL, W = NULL, legal = NULL) {
   h <- 0
   for (q in out) if (q > 0) h <- h - q * log(q)
   list(
-    estimate = if (m > 0L) out\[1\] else NaN, p = out, logits = logits,
+    estimate = if (m > 0L) out[1] else NaN, p = out, logits = logits,
     entropy = h,
     method = "AlphaZero policy head: linear logits, mask, softmax"
   )

@@ -59,7 +59,7 @@ Krpalp <- function(data, level = "nominal") {
   de <- 0
   for (i in seq_len(V)) for (j in seq_len(V)) {
     dd <- d2(i, j)
-    do <- do + o\[i, j\] * dd
+    do <- do + o[i, j] * dd
     de <- de + nc[i] * nc[j] * dd
   }
   do <- do / n

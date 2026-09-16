@@ -66,7 +66,7 @@
   tb <- .w501_cost_tables(x)
   beta <- penalty
   F <- rep(0, n + 1)
-  F\[1\] <- -beta
+  F[1] <- -beta
   cp <- rep(0L, n + 1)
   Rset <- c(0L)
   K <- 0
@@ -227,7 +227,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   while (length(ord) < K) {
     cand <- NULL
     for (si in seq_along(segments)) {
-      a <- segments[[si]]\[1\]
+      a <- segments[[si]][1]
       b <- segments[[si]][2]
       if (b - a < 2L * min_seglen) next
       sp <- best_split(a, b)
@@ -278,8 +278,8 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
     for (j in seq_len(n)) {
       if (j > i) {
         d <- sqrt(sum((Z[i, ] - Z[j, ])^2))
-        D\[i, j\] <- d^alpha
-        D[j, i] <- D\[i, j\]
+        D[i, j] <- d^alpha
+        D[j, i] <- D[i, j]
       }
     }
   }
@@ -299,7 +299,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   P <- matrix(0, n + 1, n + 1)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
-      P\[i + 1, j + 1\] <- P[i + 1, j] + P[i, j + 1] - P\[i, j\] + D\[i, j\]
+      P[i + 1, j + 1] <- P[i + 1, j] + P[i, j + 1] - P[i, j] + D[i, j]
     }
   }
   P
@@ -384,7 +384,7 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   # Fisher-Yates within each 0-based half-open cluster, mirroring the
   # Python arm swap-for-swap.
   for (cl in clusters) {
-    a <- cl\[1\]
+    a <- cl[1]
     b <- cl[2]
     L <- b - a
     if (L > 1L) {
@@ -453,15 +453,15 @@ EDivisive <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
     best_q <- -Inf
     best_tau <- -1L
     for (cl in clusters) {
-      if (cl[2] - cl\[1\] >= 2L * min_size) {
-        sp <- .w501_best_split(P, cl\[1\], cl[2], min_size)
+      if (cl[2] - cl[1] >= 2L * min_size) {
+        sp <- .w501_best_split(P, cl[1], cl[2], min_size)
         if (sp$q > best_q) { best_q <- sp$q
         best_tau <- sp$tau }
       }
     }
     if (best_tau < 0L) break
     needed <- 0L
-    for (cl in clusters) if (cl[2] - cl\[1\] > 1L) needed <- needed + cl[2] - cl\[1\] - 1L
+    for (cl in clusters) if (cl[2] - cl[1] > 1L) needed <- needed + cl[2] - cl[1] - 1L
     count_ge <- 0L
     for (r in seq_len(R)) {
       us <- .morie_random_uniform(needed, seed = seed, stream = r)
@@ -472,8 +472,8 @@ EDivisive <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
       Pp <- .w501_prefix2d(Dp)
       bq <- -Inf
       for (cl in clusters) {
-        if (cl[2] - cl\[1\] >= 2L * min_size) {
-          sp <- .w501_best_split(Pp, cl\[1\], cl[2], min_size)
+        if (cl[2] - cl[1] >= 2L * min_size) {
+          sp <- .w501_best_split(Pp, cl[1], cl[2], min_size)
           if (sp$q > bq) bq <- sp$q
         }
       }

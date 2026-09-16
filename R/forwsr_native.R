@@ -207,7 +207,7 @@ morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
   # a different summation order there picks a different subset.
   A <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p))
-    A\[a, b\] <- .forwsr_dsum(M[ridx, a] * M[ridx, b])
+    A[a, b] <- .forwsr_dsum(M[ridx, a] * M[ridx, b])
   v <- vapply(seq_len(p), function(a) .forwsr_dsum(M[ridx, a] * yy[ridx]),
               numeric(1))
   beta <- .forwsr_solve(A, v)

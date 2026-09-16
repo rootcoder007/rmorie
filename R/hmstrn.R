@@ -47,7 +47,7 @@ Hmstrn <- function(y, treatment_history, covariate_history, time, regime) {
   }
   beta <- .s4_ols(cbind(1, times), means)$beta
   ok0 <- apply(abs(A - matrix(d, n, T_, byrow = TRUE)) < 0.5, 1, all)
-  .t1_result(estimate = beta[2], intercept = beta\[1\], by_time = means,
+  .t1_result(estimate = beta[2], intercept = beta[1], by_time = means,
              n_consistent = sum(ok0), n = n,
              method = "History-adjusted marginal structural model")
 }

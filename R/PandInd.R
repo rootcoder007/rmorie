@@ -15,11 +15,11 @@
 PandInd <- function(ps) {
   ps <- as.numeric(ps)
   if (length(ps) == 0L || any(is.na(ps)) || any(ps < 0) || any(ps > 1)) {
-    stop("ps must be a non-empty vector of probabilities in \[0, 1\].", call. = FALSE)
+    stop("ps must be a non-empty vector of probabilities in [0, 1].", call. = FALSE)
   }
   out <- list(ps = ps, p_and = prod(ps))
   if (length(ps) == 2L) {
-    out$p_a <- ps\[1\]
+    out$p_a <- ps[1]
     out$p_b <- ps[2]
   }
   out

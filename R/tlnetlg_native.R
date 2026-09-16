@@ -234,7 +234,7 @@ morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {
 
   vals <- numeric(N)
   for (i in seq_len(N)) {
-    vals[i] <- as.numeric(Q_fn(es[[i]][\[1\]], es[[i]][[2]], rows[i, ]))
+    vals[i] <- as.numeric(Q_fn(es[[i]][[1]], es[[i]][[2]], rows[i, ]))
   }
 
   list(

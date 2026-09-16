@@ -30,7 +30,7 @@ Lapspec <- function(W, tol = 1e-10) {
   vals <- rev(.t1_eigsym(Lc)$values)
   nz <- vals[vals > tol]
   .t1_result(values = vals,
-             lambda1 = if (length(nz)) nz\[1\] else NaN,
+             lambda1 = if (length(nz)) nz[1] else NaN,
              n_components = sum(vals <= tol), max_value = vals[n], n = n,
              method = "Spectrum of the normalised Laplacian")
 }

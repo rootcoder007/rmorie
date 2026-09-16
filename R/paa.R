@@ -43,7 +43,7 @@ Paa <- function(x, N) {
     }
     out[i] <- s / w
   }
-  .t1_result(paa = out, estimate = out\[1\], segment_width = w,
+  .t1_result(paa = out, estimate = out[1], segment_width = w,
              N = k, n = n,
              method = "Piecewise aggregate approximation")
 }

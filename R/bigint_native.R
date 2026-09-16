@@ -57,7 +57,7 @@
 #' @export
 .morie_big_new <- function(sign, limbs) {
   limbs <- .morie_big_trim(limbs)
-  if (length(limbs) == 1L && limbs\[1\] == 0) sign <- 0
+  if (length(limbs) == 1L && limbs[1] == 0) sign <- 0
   structure(list(sign = sign, limbs = limbs), class = "morie_bigint")
 }
 
@@ -120,7 +120,7 @@ as.character.morie_bigint <- function(x, ...) {
   }
   n <- length(x$limbs)
   parts <- character(n)
-  parts\[1\] <- format(x$limbs[n], scientific = FALSE, trim = TRUE)
+  parts[1] <- format(x$limbs[n], scientific = FALSE, trim = TRUE)
   if (n > 1L) {
     for (i in seq.int(n - 1L, 1L)) {
       parts[n - i + 1L] <- formatC(x$limbs[i],

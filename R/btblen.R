@@ -67,7 +67,7 @@ Btblen <- function(x, method = "circular", c = 2, m_max = NULL) {
     if (n - k >= 1L) for (i in seq_len(n - k)) s <- s + (xx[i] - xb) * (xx[i + k] - xb)
     R[k + 1L] <- s / n
   }
-  if (R\[1\] <= 0) stop("boot_block_length_pr: the series has zero variance")
+  if (R[1] <= 0) stop("boot_block_length_pr: the series has zero variance")
   KN <- as.integer(max(5, sqrt(log10(n))))
   thr <- cc * sqrt(log10(n) / n)
   if (is.null(m_max)) m_max <- as.integer(ceiling(sqrt(n))) + KN
@@ -79,7 +79,7 @@ Btblen <- function(x, method = "circular", c = 2, m_max = NULL) {
     for (kk in seq_len(KN)) {
       idx <- m + kk
       if (idx > kmax) break
-      if (abs(R[idx + 1L] / R\[1\]) >= thr) { okm <- FALSE
+      if (abs(R[idx + 1L] / R[1]) >= thr) { okm <- FALSE
       break }
     }
     if (okm) { mhat <- m

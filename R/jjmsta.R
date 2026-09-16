@@ -59,11 +59,11 @@ Joincnt <- function(x, W) {
   n1 <- sum(x)
   m1 <- mom(n1)
   m0 <- mom(N - n1)
-  zb <- if (!is.nan(m1[2]) && m1[2] > 0) (bb - m1\[1\]) / sqrt(m1[2]) else NaN
-  zw <- if (!is.nan(m0[2]) && m0[2] > 0) (ww - m0\[1\]) / sqrt(m0[2]) else NaN
+  zb <- if (!is.nan(m1[2]) && m1[2] > 0) (bb - m1[1]) / sqrt(m1[2]) else NaN
+  zw <- if (!is.nan(m0[2]) && m0[2] > 0) (ww - m0[1]) / sqrt(m0[2]) else NaN
   list(
     BB = bb, WW = ww, BW = bw,
-    E_BB = m1\[1\], E_WW = m0\[1\], V_BB = m1[2], V_WW = m0[2],
+    E_BB = m1[1], E_WW = m0[1], V_BB = m1[2], V_WW = m0[2],
     z_BB = zb, z_WW = zw,
     p_BB = if (is.nan(zb)) NaN else stats::pnorm(zb, lower.tail = FALSE),
     p_WW = if (is.nan(zw)) NaN else stats::pnorm(zw, lower.tail = FALSE),

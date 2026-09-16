@@ -224,7 +224,7 @@ Otsinkit <- function(a, b, C, epsilon, tol, max_iter = 200L) {
   tr <- .b2sinkhorn(a, b, C, epsilon, max_iter, trace = TRUE)$trace
   hit <- which(tr < tol)
   reached <- length(hit) > 0L
-  list(estimate = if (reached) as.numeric(hit\[1\]) else as.numeric(max_iter),
+  list(estimate = if (reached) as.numeric(hit[1]) else as.numeric(max_iter),
        reached = reached,
        final_error = if (length(tr)) tr[length(tr)] else NaN,
        trace = tr,
@@ -344,7 +344,7 @@ Otcostsq <- function(X, Y) {
   if (ncol(A) != ncol(B)) stop("X and Y must have the same dimension", call. = FALSE)
   C <- matrix(0, nrow(A), nrow(B))
   for (i in seq_len(nrow(A))) {
-    for (j in seq_len(nrow(B))) C\[i, j\] <- sum((A[i, ] - B[j, ])^2)
+    for (j in seq_len(nrow(B))) C[i, j] <- sum((A[i, ] - B[j, ])^2)
   }
   list(estimate = C, nrow = nrow(A), ncol = nrow(B), total = sum(C),
        method = "Squared-Euclidean ground cost -- Peyre & Cuturi (2019) Sec. 2.4")
@@ -373,7 +373,7 @@ Otcostlp <- function(X, Y, p = 2) {
   for (i in seq_len(nrow(A))) {
     for (j in seq_len(nrow(B))) {
       d <- abs(A[i, ] - B[j, ])
-      C\[i, j\] <- if (is.infinite(pv)) max(d) else sum(d^pv)^(1 / pv)
+      C[i, j] <- if (is.infinite(pv)) max(d) else sum(d^pv)^(1 / pv)
     }
   }
   list(estimate = C, p = pv, nrow = nrow(A), ncol = nrow(B), total = sum(C),

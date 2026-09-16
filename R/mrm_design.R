@@ -104,9 +104,9 @@ mrm_anova_oneway <- function(data, response_col, group_col, alpha = 0.05) {
   d <- d[stats::complete.cases(d), , drop = FALSE]
   d[[group_col]] <- factor(d[[group_col]])
   fit <- stats::aov(as.formula(paste(response_col, "~", group_col)), data = d)
-  summ <- summary(fit)[\[1\]]
-  f <- summ[["F value"]]\[1\]
-  p <- summ[["Pr(>F)"]]\[1\]
+  summ <- summary(fit)[[1]]
+  f <- summ[["F value"]][1]
+  p <- summ[["Pr(>F)"]][1]
   tk <- stats::TukeyHSD(fit, conf.level = 1 - alpha)
   tk_df <- as.data.frame(tk[[group_col]])
   tk_df$pair <- rownames(tk_df)
@@ -116,14 +116,14 @@ mrm_anova_oneway <- function(data, response_col, group_col, alpha = 0.05) {
   list(
     f_statistic = round(as.numeric(f), 4),
     p_value = as.numeric(p),
-    df_between = summ[["Df"]]\[1\],
+    df_between = summ[["Df"]][1],
     df_within = summ[["Df"]][2],
     means = as.list(round(means, 4)),
     n_per_group = as.list(ns),
     tukey_hsd = tk_df,
     interpretation = sprintf(
       "F(%d,%d) = %.3f, p = %.3g%s",
-      summ[["Df"]]\[1\], summ[["Df"]][2], f, p,
+      summ[["Df"]][1], summ[["Df"]][2], f, p,
       if (p < alpha) "; reject H0 of equal means" else ""
     )
   )

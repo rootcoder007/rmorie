@@ -17,7 +17,7 @@
 PiidInt <- function(p, k = 2) {
   p <- as.numeric(p)
   if (length(p) != 1L || is.na(p) || p < 0 || p > 1) {
-    stop("p must be a single value in \[0, 1\].", call. = FALSE)
+    stop("p must be a single value in [0, 1].", call. = FALSE)
   }
   k <- as.integer(k)
   if (length(k) != 1L || is.na(k) || k < 0L) {

@@ -198,7 +198,7 @@ morie_pmfsc_derive <- function(observations, n_complexes = 1,
   for (ob in observations) {
     k <- morie_pmfsc_bin(ob[[3]], r_max, n_bins)
     if (k < 0L) next
-    key <- .pmfsc_key(as.character(ob[\[1\]]), as.character(ob[[2]]))
+    key <- .pmfsc_key(as.character(ob[[1]]), as.character(ob[[2]]))
     if (is.null(counts[[key]])) counts[[key]] <- integer(n_bins)
     counts[[key]][k + 1L] <- counts[[key]][k + 1L] + 1L
   }
@@ -260,7 +260,7 @@ morie_pmfsc_score <- function(pairs, potential,
     k <- morie_pmfsc_bin(pr[[3]], r_max, n_bins)
     if (k < 0L) { beyond <- beyond + 1L
     next }
-    key <- .pmfsc_key(as.character(pr[\[1\]]), as.character(pr[[2]]))
+    key <- .pmfsc_key(as.character(pr[[1]]), as.character(pr[[2]]))
     if (is.null(potential[[key]])) {
       unknown <- unknown + 1L
       terms <- c(terms, as.numeric(missing))
@@ -342,10 +342,10 @@ morie_pmfsc <- function(receptor, ligand, potential = NULL,
                                     occupied, kT, cap)
   }
   rec <- lapply(receptor, function(a)
-    list(xyz = c(as.numeric(a[\[1\]]), as.numeric(a[[2]]),
+    list(xyz = c(as.numeric(a[[1]]), as.numeric(a[[2]]),
                  as.numeric(a[[3]])), type = as.character(a[[4]])))
   lig <- lapply(ligand, function(a)
-    list(xyz = c(as.numeric(a[\[1\]]), as.numeric(a[[2]]),
+    list(xyz = c(as.numeric(a[[1]]), as.numeric(a[[2]]),
                  as.numeric(a[[3]])), type = as.character(a[[4]])))
   pairs <- list()
   for (ra in rec) for (la in lig)

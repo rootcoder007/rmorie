@@ -41,7 +41,7 @@ Mskbnd2 <- function(y, D, X, y_min, y_max) {
   lo <- as.numeric(y_min)
   hi <- as.numeric(y_max)
   if (lo > hi) stop("y_min must not exceed y_max")
-  if (any(yv < lo | yv > hi)) stop("observed outcomes must lie in \[y_min, y_max\]")
+  if (any(yv < lo | yv > hi)) stop("observed outcomes must lie in [y_min, y_max]")
   if (any(d != 0 & d != 1)) stop("D must be binary 0/1")
   levels <- unique(xs)
   tot_lo <- 0

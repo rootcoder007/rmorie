@@ -47,13 +47,13 @@ BleuS <- function(candidate, references, max_n = 4) {
   den <- numeric(N)
   for (n in seq_len(N)) {
     ab <- .bleu_mp(cand, refs, n)
-    num[n] <- ab\[1\]
+    num[n] <- ab[1]
     den[n] <- ab[2]
-    pn[n] <- if (ab[2] > 0) ab\[1\] / ab[2] else 0
+    pn[n] <- if (ab[2] > 0) ab[1] / ab[2] else 0
   }
   cc <- length(cand)
   rlens <- sort(vapply(refs, length, 0L))
-  best <- rlens\[1\]
+  best <- rlens[1]
   for (rr in rlens) if (abs(rr - cc) < abs(best - cc)) best <- rr
   bp <- if (cc > best) 1 else exp(1 - best / cc)
   w <- 1 / N
@@ -73,7 +73,7 @@ BleuS <- function(candidate, references, max_n = 4) {
 #' @noRd
 .bleu_tok <- function(s) {
   if (is.character(s) && length(s) == 1L) {
-    t <- strsplit(tolower(s), "[[:space:]]+")[\[1\]]
+    t <- strsplit(tolower(s), "[[:space:]]+")[[1]]
     t[nzchar(t)]
   } else tolower(as.character(s))
 }

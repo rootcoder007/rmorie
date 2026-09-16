@@ -26,7 +26,7 @@ morie_bdtrns <- function(y_obs, p_obs, y_lo, y_hi) {
   yv <- as.numeric(y_obs)
   if (!length(yv)) stop("need at least one observed outcome")
   p <- as.numeric(p_obs)
-  if (p < 0 || p > 1) stop("p_obs must be in \[0, 1\]")
+  if (p < 0 || p > 1) stop("p_obs must be in [0, 1]")
   if (y_hi < y_lo) stop("y_hi must be >= y_lo")
   if (any(yv < y_lo - 1e-12 | yv > y_hi + 1e-12)) {
     stop("observed outcomes violate the stated bounds")

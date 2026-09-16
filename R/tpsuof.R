@@ -59,7 +59,7 @@ morie_tps_use_of_force <- function(force_types, n_encounters) {
 
   top_type <- if (n_types > 0L) {
     sort_idx <- order(-unlist(counts))
-    names(counts)[sort_idx\[1\]]
+    names(counts)[sort_idx[1]]
   } else "-"
 
   out <- list(

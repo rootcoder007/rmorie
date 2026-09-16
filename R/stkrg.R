@@ -57,8 +57,8 @@ stkrg <- function(x, coords, times, target,
     ses[k] <- sqrt(max(var_total - sum(lam * c_vec) - mu, 0))
   }
   list(
-    estimate = if (m == 1) ests\[1\] else ests,
-    se = if (m == 1) ses\[1\] else ses, n = n,
+    estimate = if (m == 1) ests[1] else ests,
+    se = if (m == 1) ses[1] else ses, n = n,
     method = "Spatiotemporal ordinary kriging (separable exponential)"
   )
 }

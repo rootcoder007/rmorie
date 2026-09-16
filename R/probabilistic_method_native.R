@@ -32,7 +32,7 @@ morie_union_bound_exists <- function(n_events, event_probability) {
          call. = FALSE)
   }
   if (p < 0 || p > 1) {
-    stop(sprintf("event_probability must lie in \[0, 1\]; got %s", p),
+    stop(sprintf("event_probability must lie in [0, 1]; got %s", p),
          call. = FALSE)
   }
   expected <- m * p
@@ -167,7 +167,7 @@ morie_lovasz_local_lemma <- function(p, d) {
   p <- as.numeric(p)
   d <- as.integer(d)
   if (p < 0 || p > 1) {
-    stop(sprintf("p must lie in \[0, 1\]; got %s", p), call. = FALSE)
+    stop(sprintf("p must lie in [0, 1]; got %s", p), call. = FALSE)
   }
   if (is.na(d) || d < 0L) {
     stop(sprintf("d must be non-negative; got %s", d), call. = FALSE)
@@ -204,7 +204,7 @@ morie_chernoff_bound <- function(n, p, t, tail = c("upper", "lower")) {
     stop(sprintf("n must be positive; got %s", n), call. = FALSE)
   }
   if (p < 0 || p > 1) {
-    stop(sprintf("p must lie in \[0, 1\]; got %s", p), call. = FALSE)
+    stop(sprintf("p must lie in [0, 1]; got %s", p), call. = FALSE)
   }
   mu <- n * p
   if (mu <= 0) {

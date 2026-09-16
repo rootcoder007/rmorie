@@ -49,7 +49,7 @@ Asorxx <- function(G, attribute) {
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       if (i == j) next
-      w <- A\[i, j\]
+      w <- A[i, j]
       if (w == 0) next
       if (w < 0) stop("assortativity: negative edge weight")
       ti <- match(att[i], types)
@@ -66,7 +66,7 @@ Asorxx <- function(G, attribute) {
   for (i in seq_len(T)) {
     sa <- 0
     sb <- 0
-    for (j in seq_len(T)) { sa <- sa + e\[i, j\]
+    for (j in seq_len(T)) { sa <- sa + e[i, j]
     sb <- sb + e[j, i] }
     a[i] <- sa
     b[i] <- sb

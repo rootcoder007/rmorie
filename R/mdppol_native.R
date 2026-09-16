@@ -25,7 +25,7 @@
     }
   })
   A <- length(Pm)
-  S <- nrow(Pm[\[1\]])
+  S <- nrow(Pm[[1]])
   if (is.list(R) && !is.matrix(R) && length(R) == A) {
     Rmat <- matrix(0, S, A)
     for (a in seq_len(A)) {
@@ -115,7 +115,7 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
         qs[a] <- R[s, a] + gamma * sum(Pm[[a]][s, ] * V)
       }
       best <- 1L
-      best_val <- qs\[1\]
+      best_val <- qs[1]
       for (a in seq_len(A)) {
         if (qs[a] > best_val) {
           best_val <- qs[a]

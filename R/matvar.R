@@ -42,7 +42,7 @@ Maternvg <- function(h, c0 = 0, c = 1, a = 1, nu = 0.5) {
     out[i] <- as.numeric(c0) + as.numeric(c) * (1 - C)
     expo[i] <- as.numeric(c0) + as.numeric(c) * (1 - exp(-u))
   }
-  list(estimate = if (length(out)) out\[1\] else NaN, gamma = out, corr = cor,
+  list(estimate = if (length(out)) out[1] else NaN, gamma = out, corr = cor,
        exponential = expo, nugget = as.numeric(c0),
        sill = as.numeric(c0) + as.numeric(c),
        method = "Matern semivariogram c0 + c (1 - C(h)) with C the Matern correlation")

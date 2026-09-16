@@ -38,27 +38,27 @@ Pcgxe <- function(GxE_matrix, k, scale = FALSE) {
   mu <- numeric(p)
   for (j in seq_len(p)) {
     s <- 0
-    for (i in seq_len(n)) s <- s + X\[i, j\]
+    for (i in seq_len(n)) s <- s + X[i, j]
     mu[j] <- s / n
   }
   C <- matrix(0, n, p)
-  for (i in seq_len(n)) for (j in seq_len(p)) C\[i, j\] <- X\[i, j\] - mu[j]
+  for (i in seq_len(n)) for (j in seq_len(p)) C[i, j] <- X[i, j] - mu[j]
   sc <- rep(1, p)
   if (isTRUE(scale)) {
     for (j in seq_len(p)) {
       s <- 0
-      for (i in seq_len(n)) s <- s + C\[i, j\] * C\[i, j\]
+      for (i in seq_len(n)) s <- s + C[i, j] * C[i, j]
       s <- sqrt(s / (n - 1L))
       if (s <= 0) stop("pc_gxe_reduction: a column has zero variance and cannot be scaled")
       sc[j] <- s
-      for (i in seq_len(n)) C\[i, j\] <- C\[i, j\] / s
+      for (i in seq_len(n)) C[i, j] <- C[i, j] / s
     }
   }
   Q <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p)) {
     s <- 0
     for (i in seq_len(n)) s <- s + C[i, a] * C[i, b]
-    Q\[a, b\] <- s / (n - 1L)
+    Q[a, b] <- s / (n - 1L)
   }
   eg <- .s03jacobi(Q)
   ord <- rev(seq_len(p))
@@ -68,12 +68,12 @@ Pcgxe <- function(GxE_matrix, k, scale = FALSE) {
   for (i in seq_len(n)) for (j in seq_len(kk)) {
     s <- 0
     for (a in seq_len(p)) s <- s + C[i, a] * W[a, j]
-    scores\[i, j\] <- s
+    scores[i, j] <- s
   }
   approx <- matrix(0, n, p)
   for (i in seq_len(n)) for (a in seq_len(p)) {
     s <- 0
-    for (j in seq_len(kk)) s <- s + scores\[i, j\] * W[a, j]
+    for (j in seq_len(kk)) s <- s + scores[i, j] * W[a, j]
     approx[i, a] <- s
   }
   tot <- 0

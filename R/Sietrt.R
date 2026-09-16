@@ -38,7 +38,7 @@ Sietrt <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
   if (n == 0L || ncol(A) != n) stop("sis_epidemic: G must be a square adjacency matrix")
   p <- .s03vec(initial)
   if (length(p) != n) stop("sis_epidemic: initial must have one entry per node")
-  if (any(p < 0) || any(p > 1)) stop("sis_epidemic: initial probabilities must lie in \[0, 1\]")
+  if (any(p < 0) || any(p > 1)) stop("sis_epidemic: initial probabilities must lie in [0, 1]")
   beta <- as.numeric(beta)
   gamma <- as.numeric(gamma)
   t_max <- as.numeric(t_max)
@@ -50,7 +50,7 @@ Sietrt <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
     out <- numeric(n)
     for (i in seq_len(n)) {
       s <- 0
-      for (j in seq_len(n)) s <- s + A\[i, j\] * x[j]
+      for (j in seq_len(n)) s <- s + A[i, j] * x[j]
       out[i] <- -gamma * x[i] + beta * (1 - x[i]) * s
     }
     out

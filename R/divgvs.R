@@ -30,7 +30,7 @@ Divgvs <- function(AVE, factor_correlations) {
   R <- .s03mat(factor_correlations)
   if (nrow(R) != k || ncol(R) != k)
     stop("factor_correlations must be a k x k matrix")
-  if (any(ave < 0 | ave > 1)) stop("AVE must lie in \[0, 1\]")
+  if (any(ave < 0 | ave > 1)) stop("AVE must lie in [0, 1]")
   sq <- sqrt(ave)
   margin <- Inf
   viol <- 0L
@@ -39,7 +39,7 @@ Divgvs <- function(AVE, factor_correlations) {
     ok <- 1L
     for (j in seq_len(k)) {
       if (i == j) next
-      m <- sq[i] - abs(R\[i, j\])
+      m <- sq[i] - abs(R[i, j])
       if (m < margin) margin <- m
       if (m <= 0) { ok <- 0L
       viol <- viol + 1L }

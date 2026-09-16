@@ -379,7 +379,7 @@ mrm_uof_weapon_diversity <- function(df, weapon_col, force_col) {
   interp <- sprintf(
     "The chi-square test on a %d x %d table yields chi2=%.4f on %d df (p=%.4g). %s The strongest deviation from independence sits at (%s, %s) with a standardised residual of %+.2f.",
     r, c, chi2, dof, pvalue, assoc_text,
-    top_resid[\[1\]]$weapon, top_resid[\[1\]]$force, top_resid[\[1\]]$std_residual
+    top_resid[[1]]$weapon, top_resid[[1]]$force, top_resid[[1]]$std_residual
   )
 
   .uof_result(
@@ -539,7 +539,7 @@ mrm_uof_yoy_change <- function(dfs_by_year = NULL, df = NULL,
 
   interp <- sprintf(
     "Series spans %d year(s) (%d-%d) with a total of %d incident(s). %s %s",
-    n_years, yrs\[1\], yrs[n_years], sum(counts), vol_text, cp_text
+    n_years, yrs[1], yrs[n_years], sum(counts), vol_text, cp_text
   )
 
   .uof_result(
@@ -844,7 +844,7 @@ mrm_uof_demographic_disparity <- function(df, demo_col, outcome_col,
     }
     per_cat[[i]] <- list(
       category = row$category, n = row$n, k = row$k,
-      rate = row$rate, lo = wci\[1\], hi = wci[2],
+      rate = row$rate, lo = wci[1], hi = wci[2],
       rr = rr, rr_lo = rr_lo, rr_hi = rr_hi,
       baseline = row$category == baseline
     )
@@ -855,7 +855,7 @@ mrm_uof_demographic_disparity <- function(df, demo_col, outcome_col,
   if (length(non_base_rr) > 0L) {
     max_rr <- max(non_base_rr)
     max_cat <- vapply(per_cat, function(e) e$category, character(1))[
-      which(vapply(per_cat, function(e) !e$baseline && is.finite(e$rr) && e$rr == max_rr, logical(1)))\[1\]
+      which(vapply(per_cat, function(e) !e$baseline && is.finite(e$rr) && e$rr == max_rr, logical(1)))[1]
     ]
     rr_text <- sprintf(
       "The largest disparity is for group '%s' with a risk ratio of %.3f relative to the baseline ('%s', rate=%.4f).",
@@ -930,7 +930,7 @@ mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NUL
     pct_unique <- if (n_rows > 0L) n_unique / n_rows else NA_real_
     entry <- list(
       column = col_name,
-      dtype = class(s)\[1\],
+      dtype = class(s)[1],
       n_null = n_null,
       pct_null = pct_null,
       n_unique = n_unique,
@@ -941,7 +941,7 @@ mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NUL
       entry$min <- if (length(nn) > 0L) min(nn) else NA_real_
       entry$max <- if (length(nn) > 0L) max(nn) else NA_real_
     } else {
-      mt <- tryCatch(names(sort(table(s[!is.na(s)]), decreasing = TRUE))\[1\], error = function(e) NA)
+      mt <- tryCatch(names(sort(table(s[!is.na(s)]), decreasing = TRUE))[1], error = function(e) NA)
       entry$mode <- mt
     }
     per_column[[i]] <- entry
@@ -979,7 +979,7 @@ mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NUL
     extra_columns <- setdiff(actual_names, expected_names)
     for (e in expected_cols) {
       if (e$name %in% actual_names && !is.na(e$dtype)) {
-        actual_dt <- class(df[[e$name]])\[1\]
+        actual_dt <- class(df[[e$name]])[1]
         if (!grepl(tolower(e$dtype), tolower(actual_dt), fixed = TRUE) &&
             !grepl(tolower(actual_dt), tolower(e$dtype), fixed = TRUE)) {
           dtype_mismatches[[length(dtype_mismatches) + 1L]] <- list(

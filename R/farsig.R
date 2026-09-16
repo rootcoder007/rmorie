@@ -49,7 +49,7 @@ Farsig <- function(counts, baseline_years = 5, reference_window = 3,
     p <- ncol(X)
     b <- numeric(p)
     m <- sum(y * w) / max(sum(w), 1e-300)
-    b\[1\] <- log(if (m > 0) m else 0.5)
+    b[1] <- log(if (m > 0) m else 0.5)
     for (.k in seq_len(iters)) {
       eta <- as.numeric(X %*% b)
       mu <- exp(eta)

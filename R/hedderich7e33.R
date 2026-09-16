@@ -48,7 +48,7 @@ Adcore <- function(u) {
   n <- length(u)
   if (n < 2) stop("need at least 2 observations")
   us <- sort(u)
-  if (us\[1\] <= 0 || us[n] >= 1) {
+  if (us[1] <= 0 || us[n] >= 1) {
     return(Inf)
   }
   i <- seq_len(n)

@@ -5,7 +5,7 @@
 # Prediction", *ICML*, arXiv:1705.05363. Eq. (2)-(3) for the inverse
 # model, eq. (4)-(5) for the forward model, eq. (6) for the
 # intrinsic reward, eq. (7) for the joint policy/inverse/forward
-# objective with beta in \[0, 1\] and lambda > 0.
+# objective with beta in [0, 1] and lambda > 0.
 #
 # Native implementation mirroring Python morie.fn.explor exactly: the
 # same ICM structure (feature map phi trained ONLY through the
@@ -117,15 +117,15 @@ explor <- function(states, actions, next_states, n_actions = NULL,
     stop("explor: eta must be > 0")
   beta <- as.numeric(beta)
   if (!(beta >= 0 && beta <= 1))
-    stop("explor: beta must lie in \[0, 1\]")
+    stop("explor: beta must lie in [0, 1]")
   S <- .mat(states, "states")
   S1 <- .mat(next_states, "next_states")
   if (length(S) != length(S1))
     stop("explor: states and next_states must have the same length")
-  if (length(S[\[1\]]) != length(S1[\[1\]]))
+  if (length(S[[1]]) != length(S1[[1]]))
     stop("explor: states and next_states must have the same width")
   T <- length(S)
-  d <- length(S[\[1\]])
+  d <- length(S[[1]])
 
   if (discrete) {
     A <- as.integer(as.numeric(actions))
@@ -141,7 +141,7 @@ explor <- function(states, actions, next_states, n_actions = NULL,
     Ac <- .mat(actions, "actions")
     if (length(Ac) != T)
       stop("explor: got ", length(Ac), " actions for ", T, " transitions")
-    a_dim <- length(Ac[\[1\]])
+    a_dim <- length(Ac[[1]])
   }
 
   e <- .ghc_rng(as.numeric(seed))
@@ -246,13 +246,13 @@ explor <- function(states, actions, next_states, n_actions = NULL,
         xj <- inp_i[j]
         if (xj == 0) next
         for (o in seq_len(a_dim))
-          Winv\[j, o\] <- Winv\[j, o\] - lr * (1 - beta) * gi[o] * xj
+          Winv[j, o] <- Winv[j, o] - lr * (1 - beta) * gi[o] * xj
       }
       for (j in seq_len(k + a_dim)) {
         xj <- inp_f[j]
         if (xj == 0) next
         for (o in seq_len(k))
-          Wfwd\[j, o\] <- Wfwd\[j, o\] - lr * beta * ef[o] * xj
+          Wfwd[j, o] <- Wfwd[j, o] - lr * beta * ef[o] * xj
       }
     }
     curve <- c(curve, ((1 - beta) * li_tot + beta * lf_tot) / T)

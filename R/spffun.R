@@ -22,7 +22,7 @@
 spffun <- function(points, region = NULL, r = NULL, n_grid = 40) {
   p <- as.matrix(points)
   reg <- .sp_region(region, p)
-  gx <- seq(reg\[1\], reg[3], length.out = n_grid)
+  gx <- seq(reg[1], reg[3], length.out = n_grid)
   gy <- seq(reg[2], reg[4], length.out = n_grid)
   grid <- as.matrix(expand.grid(x = gx, y = gy))
   d <- apply(grid, 1, function(g) sqrt(min(colSums((t(p) - g)^2))))

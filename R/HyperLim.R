@@ -22,7 +22,7 @@ HyperLim <- function(k, n, p, N) {
   p <- as.numeric(p)
   if (any(is.na(c(N, n, k))) || is.na(p) || N < 0L || n < 0L || k < 0L ||
         p < 0 || p > 1) {
-    stop("need k, n, N >= 0 integers and p in \[0, 1\].", call. = FALSE)
+    stop("need k, n, N >= 0 integers and p in [0, 1].", call. = FALSE)
   }
   K <- as.integer(round(p * N))
   if (K > N || n > N) stop("need K <= N and n <= N.", call. = FALSE)

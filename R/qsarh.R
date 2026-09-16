@@ -43,7 +43,7 @@ qsarh <- function(activities, logP, sigma = NULL, es = NULL, parabolic = TRUE) {
   a <- if (parabolic) -beta[3] else 0
   logp0 <- if (a != 0) b / (2 * a) else NA_real_
   rho <- if ("sigma" %in% nms) beta[which(nms == "sigma")] else NA_real_
-  list(estimate = as.numeric(beta\[1\]), coefficients = beta, names = nms,
+  list(estimate = as.numeric(beta[1]), coefficients = beta, names = nms,
        r2 = as.numeric(r2), s = as.numeric(s), rss = as.numeric(rss),
        logp0 = as.numeric(logp0), rho = as.numeric(rho), n = as.integer(n),
        method = "Hansch rho-sigma-pi QSAR (Hansch & Fujita 1964)")

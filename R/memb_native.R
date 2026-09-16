@@ -352,7 +352,7 @@ synthesize_marginals <- function(X, n, seed = 0) {
 synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
                               seed = 0) {
   if (!(fraction >= 0 && fraction <= 1))
-    stop("memb: fraction must lie in \[0, 1\]")
+    stop("memb: fraction must lie in [0, 1]")
   e <- .ghc_rng(as.numeric(seed))
   d <- length(X[[1L]])
   Xmat <- do.call(rbind, lapply(X, as.numeric))

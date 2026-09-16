@@ -80,11 +80,11 @@
     ord <- order(fv)
     simplex <- simplex[ord, , drop = FALSE]
     fv <- fv[ord]
-    if (abs(fv[n + 1] - fv\[1\]) < tol * (abs(fv\[1\]) + tol)) break
+    if (abs(fv[n + 1] - fv[1]) < tol * (abs(fv[1]) + tol)) break
     centroid <- colMeans(simplex[1:n, , drop = FALSE])
     xr <- centroid + (centroid - simplex[n + 1, ])
     fr <- f(xr)
-    if (fr < fv\[1\]) {
+    if (fr < fv[1]) {
       xe <- centroid + 2 * (centroid - simplex[n + 1, ])
       fe <- f(xe)
       if (fe < fr) {
@@ -191,7 +191,7 @@ Counterfactual <- function(evidence, equations, exogenous, do, query,
     }
   }
   if (length(solutions)) {
-    u_hat <- solutions[\[1\]]
+    u_hat <- solutions[[1]]
     resid <- 0
     method <- sprintf(
       "discrete abduction over support (%s)",
@@ -224,11 +224,11 @@ Counterfactual <- function(evidence, equations, exogenous, do, query,
   names(abducted) <- exogenous
 
   list(
-    counterfactual = cfs\[1\],
+    counterfactual = cfs[1],
     factual = factual,
     abducted = abducted,
     n_compatible_u = length(solutions),
-    counterfactual_unique = all(abs(cfs - cfs\[1\]) < 1e-12),
+    counterfactual_unique = all(abs(cfs - cfs[1]) < 1e-12),
     residual = resid,
     do = do,
     query = query,

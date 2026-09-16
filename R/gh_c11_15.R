@@ -45,10 +45,10 @@ Ghosalepgp <- function(x = NULL, y = NULL, length = 0.5) {
     mu <- 0.7 * mu + 0.3 * (mu + as.numeric(K %*% (ys - p)))
   }
   B <- solve(K) + diag(Lam, n)
-  var0 <- solve(B, c(1, numeric(n - 1)))\[1\]
+  var0 <- solve(B, c(1, numeric(n - 1)))[1]
   p <- 1 / (1 + exp(-mu))
   .t1_result(estimate = p[n], site_precisions = Lam,
              ep_var_site0 = var0,
-             separates = p[n] > 0.5 && 0.5 > p\[1\],
+             separates = p[n] > 0.5 && 0.5 > p[1],
              method = "EP for GP classification (GvdV 2017 sec. 11.7.4)")
 }

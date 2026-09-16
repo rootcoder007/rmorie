@@ -96,12 +96,12 @@ morie_varqc1_hard <- function(records, fields, thresholds) {
   for (i in seq_len(n)) {
     failed <- character(0)
     for (tr in thresholds) {
-      ann <- tr\[1\]
+      ann <- tr[1]
       direction <- tr[2]
       cut <- as.numeric(tr[3])
       j <- match(ann, fields)
       if (is.na(j)) next
-      v <- records\[i, j\]
+      v <- records[i, j]
       if (is.na(v)) next
       bad <- if (direction == "lt") v < cut else v > cut
       if (bad)
@@ -220,11 +220,11 @@ morie_varqc1_mixture <- function(X, n_components = 2L, n_iter = 50L, seed = 1,
         cov <- matrix(0, d, d)
         for (a in seq_len(d)) for (b in seq_len(d)) {
           if (covariance == "diagonal" && a != b) next
-          cov\[a, b\] <- .w3_csum(resp[, k] * (X[, a] - means[[k]][a]) *
+          cov[a, b] <- .w3_csum(resp[, k] * (X[, a] - means[[k]][a]) *
                                   (X[, b] - means[[k]][b])) / nk
         }
         for (a in seq_len(d)) {
-          for (b in seq_len(d)) cov\[a, b\] <- cov\[a, b\] * (1 - lam)
+          for (b in seq_len(d)) cov[a, b] <- cov[a, b] * (1 - lam)
           cov[a, a] <- cov[a, a] + lam * gvar[a]
           if (cov[a, a] < min_variance) cov[a, a] <- min_variance
           cov[a, a] <- cov[a, a] + jitter
@@ -296,13 +296,13 @@ morie_varqc1 <- function(vcf, thresholds = NULL, fields = NULL, mode = "snp",
   n <- nrow(recs)
   if (n < 1L) stop("no records")
   thr <- if (is.null(thresholds)) .VARQC1_DEFAULTS[[mode]] else
-    lapply(thresholds, function(t) c(as.character(t\[1\]), as.character(t[2]),
+    lapply(thresholds, function(t) c(as.character(t[1]), as.character(t[2]),
                                      as.character(t[3])))
 
   hf <- morie_varqc1_hard(recs, fields, thr)
   res <- list(filter = hf$filter, counts = hf$counts, n = n, mode = mode,
               method = method,
-              thresholds = lapply(thr, function(t) c(t\[1\], t[2], t[3])),
+              thresholds = lapply(thr, function(t) c(t[1], t[2], t[3])),
               n_pass_hard = sum(hf$filter == "PASS"), fields = fields,
               method_name = "variant quality filtering")
 

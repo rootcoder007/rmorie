@@ -30,9 +30,9 @@
       ci <- comm[i]
       tot[ci + 1L] <- tot[ci + 1L] - kdeg[i]
       links <- list()
-      for (j in seq_len(n)) if (j != i && a\[i, j\] != 0) {
+      for (j in seq_len(n)) if (j != i && a[i, j] != 0) {
         key <- as.character(comm[j])
-        links[[key]] <- (if (is.null(links[[key]])) 0 else links[[key]]) + a\[i, j\]
+        links[[key]] <- (if (is.null(links[[key]])) 0 else links[[key]]) + a[i, j]
       }
       kci <- as.character(ci)
       if (is.null(links[[kci]])) links[[kci]] <- 0
@@ -68,7 +68,7 @@
     w <- which(seen == comm[i])
     if (length(w) == 0L) { seen <- c(seen, comm[i])
     out[i] <- length(seen) - 1L }
-    else out[i] <- w\[1\] - 1L
+    else out[i] <- w[1] - 1L
   }
   out
 }

@@ -63,7 +63,7 @@ Fcfp4 <- function(adjacency, features, nbits = 2048, radius = 2) {
     code <- numeric(B$a)
     for (i in seq_len(B$a)) {
       v <- 0
-      for (k in seq_len(6L)) if (F\[i, k\] != 0) v <- v + 2^(k - 1L)
+      for (k in seq_len(6L)) if (F[i, k] != 0) v <- v + 2^(k - 1L)
       code[i] <- v
     }
   } else {

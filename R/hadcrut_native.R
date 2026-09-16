@@ -95,9 +95,9 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
   if (!(rule %in% .HADCRUT_WEIGHT_RULES))
     stop("rule must be one of ", paste(.HADCRUT_WEIGHT_RULES, collapse = ", "))
   lf <- as.numeric(land_fraction)
-  if (lf < 0 || lf > 1) stop("land_fraction must lie in \[0, 1\]")
+  if (lf < 0 || lf > 1) stop("land_fraction must lie in [0, 1]")
   ice <- as.numeric(sea_ice)
-  if (ice < 0 || ice > 1) stop("sea_ice must lie in \[0, 1\]")
+  if (ice < 0 || ice > 1) stop("sea_ice must lie in [0, 1]")
   if (rule == "land_only") return(if (has_land) c(1, 0) else c(0, 0))
   if (rule == "sst_only") return(if (has_sst) c(0, 1) else c(0, 0))
   # Ice-covered water is land for the purpose of the weights. Below the
@@ -180,33 +180,33 @@ morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
   wl <- matrix(0, n_lat, n_lon)
   seen <- matrix(FALSE, n_lat, n_lon)
   for (i in seq_len(n_lat)) for (j in seq_len(n_lon)) {
-    tl <- T\[i, j\]
-    ts <- sst\[i, j\]
+    tl <- T[i, j]
+    ts <- sst[i, j]
     hl <- !is.na(tl)
     hs <- !is.na(ts)
-    ice <- if (is.null(sea_ice)) 0 else as.numeric(sea_ice\[i, j\])
-    ab <- morie_hadcrut_weights(land_fraction\[i, j\], ice, hl, hs, rule)
-    a <- ab\[1\]
+    ice <- if (is.null(sea_ice)) 0 else as.numeric(sea_ice[i, j])
+    ab <- morie_hadcrut_weights(land_fraction[i, j], ice, hl, hs, rule)
+    a <- ab[1]
     b <- ab[2]
     if (a + b <= 0) next
     v <- 0
     if (a > 0) v <- v + a * as.numeric(tl)
     if (b > 0) v <- v + b * as.numeric(ts)
-    anom\[i, j\] <- v
+    anom[i, j] <- v
     if (!(is.null(T_var) && is.null(sst_var))) {
       # Independent sources, so the variances add through the SQUARED
       # weights -- the usual trap is to add them through the weights
       # themselves, which understates a near-even blend and overstates
       # a lopsided one.
       q <- 0
-      if (a > 0 && !is.null(T_var) && !is.na(T_var\[i, j\]))
-        q <- q + a * a * as.numeric(T_var\[i, j\])
-      if (b > 0 && !is.null(sst_var) && !is.na(sst_var\[i, j\]))
-        q <- q + b * b * as.numeric(sst_var\[i, j\])
-      var\[i, j\] <- q
+      if (a > 0 && !is.null(T_var) && !is.na(T_var[i, j]))
+        q <- q + a * a * as.numeric(T_var[i, j])
+      if (b > 0 && !is.null(sst_var) && !is.na(sst_var[i, j]))
+        q <- q + b * b * as.numeric(sst_var[i, j])
+      var[i, j] <- q
     }
-    wl\[i, j\] <- a
-    seen\[i, j\] <- TRUE
+    wl[i, j] <- a
+    seen[i, j] <- TRUE
   }
   list(anomaly = anom, variance = var, land_weight = wl, observed = seen)
 }
@@ -233,12 +233,12 @@ morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
   for (i in rows) {
     w <- .hadcrut_band_weight(i, n_lat)
     for (j in seq_len(ncol(grid))) {
-      if (is.na(grid\[i, j\])) next
-      num <- c(num, w * grid\[i, j\])
+      if (is.na(grid[i, j])) next
+      num <- c(num, w * grid[i, j])
       den <- c(den, w)
       n <- n + 1L
-      if (!is.null(var) && !is.na(var\[i, j\]))
-        qnum <- c(qnum, w * w * var\[i, j\])
+      if (!is.null(var) && !is.na(var[i, j]))
+        qnum <- c(qnum, w * w * var[i, j])
     }
   }
   if (!length(den)) return(list(mean = NA_real_, var = NA_real_,
@@ -283,7 +283,7 @@ morie_hadcrut_area_mean <- function(grid, route = "hemispheric", var = NULL) {
                 n_cells = g$n)
   } else {
     ab <- if (route == "hemispheric") c(0.5, 0.5) else c(2 / 3, 1 / 3)
-    a <- ab\[1\]
+    a <- ab[1]
     b <- ab[2]
     if (is.na(nn$mean) && is.na(s$mean)) {
       out <- list(mean = NA_real_, var = NA_real_, weight = 0, n_cells = 0L)

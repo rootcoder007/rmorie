@@ -288,7 +288,7 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex = NULL,
     obs_hom <- 0.0
     exp_hom <- 0.0
     for (j in seq_len(m)) {
-      g <- G\[i, j\]
+      g <- G[i, j]
       if (is.na(g)) {
         next
       }
@@ -386,7 +386,7 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction = TRUE) {
 morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
   # PLINK's method-of-moments IBD estimates for every pair. Returns
   # list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2))
-  # after the paper's bounding rules and pihat\[i, k\] = P(Z=2) +
+  # after the paper's bounding rules and pihat[i, k] = P(Z=2) +
   # P(Z=1)/2.
   ch <- .snpqc1_check(genotypes)
   G <- ch$G
@@ -419,7 +419,7 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
         if (is.null(tables[[j]])) {
           next
         }
-        gi <- G\[i, j\]
+        gi <- G[i, j]
         gk <- G[k, j]
         if (is.na(gi) || is.na(gk)) {
           next
@@ -428,13 +428,13 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
         obs[ibs + 1L] <- obs[ibs + 1L] + 1.0
         exp_ <- exp_ + tables[[j]]
       }
-      if (exp_\[1, 1\] <= 0) {
-        Z[\[i, k\]] <- c(1.0, 0.0, 0.0)
+      if (exp_[1, 1] <= 0) {
+        Z[[i, k]] <- c(1.0, 0.0, 0.0)
         Z[[k, i]] <- c(1.0, 0.0, 0.0)
         next
       }
-      z0 <- obs\[1\] / exp_\[1, 1\]
-      z1 <- if (exp_[2, 2] > 0) (obs[2] - z0 * exp_\[1, 2\]) / exp_[2, 2] else 0.0
+      z0 <- obs[1] / exp_[1, 1]
+      z1 <- if (exp_[2, 2] > 0) (obs[2] - z0 * exp_[1, 2]) / exp_[2, 2] else 0.0
       z2 <- if (exp_[3, 3] > 0) {
         (obs[3] - z0 * exp_[1, 3] - z1 * exp_[2, 3]) / exp_[3, 3]
       } else {
@@ -464,9 +464,9 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
         z1 <- z1 / tot
         z2 <- z2 / tot
       }
-      Z[\[i, k\]] <- c(z0, z1, z2)
+      Z[[i, k]] <- c(z0, z1, z2)
       Z[[k, i]] <- c(z0, z1, z2)
-      P\[i, k\] <- z2 + 0.5 * z1
+      P[i, k] <- z2 + 0.5 * z1
       P[k, i] <- z2 + 0.5 * z1
     }
   }
@@ -531,7 +531,7 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
       tot <- 0.0
       cnt <- 0L
       for (j in use) {
-        gi <- G\[i, j\]
+        gi <- G[i, j]
         gk <- G[k, j]
         if (is.na(gi) || is.na(gk)) {
           next
@@ -541,7 +541,7 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
         cnt <- cnt + 1L
       }
       v <- if (cnt > 0L) tot / cnt else 0.0
-      K\[i, k\] <- v
+      K[i, k] <- v
       K[k, i] <- v
     }
   }
@@ -669,7 +669,7 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
   for (nm in c("geno", "mind", "geno_relaxed", "mind_relaxed")) {
     v <- get(nm)
     if (!(v >= 0.0 && v <= 1.0)) {
-      stop(sprintf("snpqc1: %s must lie in \[0, 1\]", nm))
+      stop(sprintf("snpqc1: %s must lie in [0, 1]", nm))
     }
   }
   if (!(maf_threshold >= 0.0 && maf_threshold < 0.5)) {
@@ -747,7 +747,7 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
     h <- 0L
     b <- 0L
     for (i in rows) {
-      g <- G\[i, j\]
+      g <- G[i, j]
       if (is.na(g)) {
         next
       }
@@ -764,7 +764,7 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
   for (j in snps) {
     if (trait == "quantitative" || is.null(pheno)) {
       cc <- counts(inds, j)
-      p <- morie_snpqc1_hwe_pvalue(cc\[1\], cc[2], cc[3], hwe_test)
+      p <- morie_snpqc1_hwe_pvalue(cc[1], cc[2], cc[3], hwe_test)
       hwe_p <- c(hwe_p, p)
       if (p < hwe_quantitative) {
         drop <- c(drop, j)
@@ -774,13 +774,13 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
       ctrls <- inds[pheno == 0]
       pc <- if (length(cases) > 0L) {
         cc <- counts(cases, j)
-        morie_snpqc1_hwe_pvalue(cc\[1\], cc[2], cc[3], hwe_test)
+        morie_snpqc1_hwe_pvalue(cc[1], cc[2], cc[3], hwe_test)
       } else {
         1.0
       }
       pk <- if (length(ctrls) > 0L) {
         cc <- counts(ctrls, j)
-        morie_snpqc1_hwe_pvalue(cc\[1\], cc[2], cc[3], hwe_test)
+        morie_snpqc1_hwe_pvalue(cc[1], cc[2], cc[3], hwe_test)
       } else {
         1.0
       }
@@ -826,7 +826,7 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
   ni <- length(inds)
   for (a in seq_len(ni)) {
     for (b in seq.int(a + 1L, length.out = max(0L, ni - a))) {
-      if (K\[a, b\] > pihat && !(inds[b] %in% drop)) {
+      if (K[a, b] > pihat && !(inds[b] %in% drop)) {
         drop <- c(drop, inds[b])
       }
     }

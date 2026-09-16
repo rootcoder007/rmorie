@@ -93,7 +93,7 @@ Hrzaul <- function(x, y, bandwidth = NULL, degree = 3L, link_degree = 3L,
 
   kk <- seq_len(p)
   U <- lapply(seq_len(d), function(j) .hrz3_u01(X[, j]))
-  # B[[j]]\[i, k\] = phi_k(u_ij), phi_k(v) = v^k - 1/(k+1).
+  # B[[j]][i, k] = phi_k(u_ij), phi_k(v) = v^k - 1/(k+1).
   B <- lapply(seq_len(d), function(j) {
     outer(U[[j]], kk, "^") - rep(1 / (kk + 1), each = n)
   })

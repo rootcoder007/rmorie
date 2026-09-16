@@ -47,7 +47,7 @@ Grmsam <- function(y, theta, a, b_k) {
     ll <- ll + log(pobs[i])
   }
   .t1_result(estimate = mean(pobs), p_observed = pobs,
-             probs_first = probs(th\[1\]), loglik = ll, categories = m + 1L,
+             probs_first = probs(th[1]), loglik = ll, categories = m + 1L,
              n = length(ys),
              method = "P_k = P*_k - P*_{k+1} with logistic P*, Samejima (1969)")
 }

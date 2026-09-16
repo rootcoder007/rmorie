@@ -39,7 +39,7 @@ Bndmoq <- function(y, D, X, quantile) {
   xv <- unlist(X)
   n <- length(z$y)
   if (length(xv) != n) stop("Bndmoq: X must have one value per unit")
-  a <- as.numeric(quantile)\[1\]
+  a <- as.numeric(quantile)[1]
   if (!(a > 0 && a < 1)) stop("Bndmoq: quantile must lie in (0, 1)")
   y0 <- min(z$y)
   y1 <- max(z$y)
@@ -58,10 +58,10 @@ Bndmoq <- function(y, D, X, quantile) {
   for (g in grp) {
     sel <- xv == g
     bg <- band(z$y[sel], z$d[sel])
-    if (bg[2] - bg\[1\] > mw) mw <- bg[2] - bg\[1\]
+    if (bg[2] - bg[1] > mw) mw <- bg[2] - bg[1]
   }
-  .t1_result(lower = b\[1\], upper = b[2], width = b[2] - b\[1\],
-             estimate = 0.5 * (b\[1\] + b[2]), max_width = mw,
+  .t1_result(lower = b[1], upper = b[2], width = b[2] - b[1],
+             estimate = 0.5 * (b[1] + b[2]), max_width = mw,
              n_strata = length(grp), p_observed = b[3], n = n,
              method = "Quantile-equivariant bound")
 }

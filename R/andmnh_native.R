@@ -289,13 +289,13 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
     block <- matrix(coef[((r - 1) * p + 1):(r * p), , drop = FALSE],
       nrow = p, ncol = p
     )
-    # coef currently has rows indexed by [var][lag]; we want A\[i,j\] such
-    # that pred_i += A\[i,j\] * v_{t-r-1}[j].  Build a_list[[r]] with the
-    # entry \[i, j\] = coef[r*p_block + j, i] of the LS coefficient matrix.
+    # coef currently has rows indexed by [var][lag]; we want A[i,j] such
+    # that pred_i += A[i,j] * v_{t-r-1}[j].  Build a_list[[r]] with the
+    # entry [i, j] = coef[r*p_block + j, i] of the LS coefficient matrix.
     blk <- matrix(0, p, p)
     for (i in 1:p) {
       for (j in 1:p) {
-        blk\[i, j\] <- coef[(r - 1) * p + j, i]
+        blk[i, j] <- coef[(r - 1) * p + j, i]
       }
     }
     a_list[[r]] <- blk
@@ -305,7 +305,7 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
     a_list <- lapply(a_list, .singular_value_adjust, cap = cap)
     if (order > 1) {
       for (iter in 1:200) {
-        tot <- a_list[\[1\]]
+        tot <- a_list[[1]]
         if (length(a_list) > 1) {
           for (k in 2:length(a_list)) tot <- tot + a_list[[k]]
         }
@@ -324,7 +324,7 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
       ar <- a_list[[r]]
       for (i in 1:p) {
         for (j in 1:p) {
-          pred[i] <- pred[i] + ar\[i, j\] * rows[t - r, j]
+          pred[i] <- pred[i] + ar[i, j] * rows[t - r, j]
         }
       }
     }
@@ -334,7 +334,7 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
   }
   storage.mode(resid) <- "double"
 
-  tot <- a_list[\[1\]]
+  tot <- a_list[[1]]
   if (length(a_list) > 1) {
     for (k in 2:length(a_list)) tot <- tot + a_list[[k]]
   }
@@ -444,7 +444,7 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
 #' automatic_bandwidth(V)
 automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
   ck <- .check_kernel(kernel)
-  q <- ck$const\[1\]
+  q <- ck$const[1]
   kq <- ck$const[2]
   ik2 <- ck$const[3]
   rows <- as.matrix(v)

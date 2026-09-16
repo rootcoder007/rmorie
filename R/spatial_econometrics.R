@@ -130,7 +130,7 @@ morie_spatial_2sls <- function(y, X, W, add_intercept = TRUE) {
   Wy_hat <- as.numeric(inst %*% g)
   D <- cbind(Wy_hat, X)
   coefs <- as.numeric(solve(crossprod(D), crossprod(D, y)))
-  rho <- coefs\[1\]
+  rho <- coefs[1]
   beta <- coefs[-1]
   resid <- as.numeric(y - rho * Wy - X %*% beta)
   list(rho = rho, beta = beta, coefficients = coefs,

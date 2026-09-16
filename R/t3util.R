@@ -88,7 +88,7 @@ t3bfs <- function(A, s) {
   while (length(frontier) > 0) {
     nxt <- integer(0)
     for (i in frontier) for (j in seq_len(n)) {
-      if (A\[i, j\] != 0 && is.infinite(d[j])) { d[j] <- d[i] + 1
+      if (A[i, j] != 0 && is.infinite(d[j])) { d[j] <- d[i] + 1
       nxt <- c(nxt, j) }
     }
     frontier <- nxt

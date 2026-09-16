@@ -56,15 +56,15 @@ Leidenclus <- function(graph, resolution = 1, quality = "modularity",
   }
   modq <- function(lab) {
     m2 <- 0
-    for (i in seq_len(n)) for (j in seq_len(n)) m2 <- m2 + W\[i, j\]
+    for (i in seq_len(n)) for (j in seq_len(n)) m2 <- m2 + W[i, j]
     if (m2 <= 0) return(0)
     deg <- numeric(n)
     for (i in seq_len(n)) { s <- 0
-    for (j in seq_len(n)) s <- s + W\[i, j\]
+    for (j in seq_len(n)) s <- s + W[i, j]
     deg[i] <- s }
     q <- 0
     for (i in seq_len(n)) for (j in seq_len(n)) {
-      if (lab[i] == lab[j]) q <- q + (W\[i, j\] - g * deg[i] * deg[j] / m2) / m2
+      if (lab[i] == lab[j]) q <- q + (W[i, j] - g * deg[i] * deg[j] / m2) / m2
     }
     q
   }

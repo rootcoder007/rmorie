@@ -402,7 +402,7 @@ Resaln <- function(p, q) {
                                      sylvester = S, deg_p = m, deg_q = n,
                                      share_root = TRUE,
                                      method = "resultant via the Sylvester matrix (Bareiss)"))
-        sw <- k + sw\[1\]
+        sw <- k + sw[1]
         tmp <- A[k, ]
         A[k, ] <- A[sw, ]
         A[sw, ] <- tmp
@@ -410,9 +410,9 @@ Resaln <- function(p, q) {
       }
       for (i in (k + 1):size) {
         for (j in (k + 1):size) {
-          A\[i, j\] <- (A\[i, j\] * A[k, k] - A\[i, k\] * A[k, j]) / prev
+          A[i, j] <- (A[i, j] * A[k, k] - A[i, k] * A[k, j]) / prev
         }
-        A\[i, k\] <- 0
+        A[i, k] <- 0
       }
       prev <- A[k, k]
     }

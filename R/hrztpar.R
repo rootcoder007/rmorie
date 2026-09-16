@@ -67,7 +67,7 @@ Hrztpar <- function(x, y, T_family = "boxcox", a_lo = -2, a_hi = 2,
   XtW <- matrix(0, p, q)
   for (i in seq_len(n)) {
     for (a in seq_len(p)) {
-      for (b in seq_len(q)) XtW\[a, b\] <- XtW\[a, b\] + XX[i, a] * W[i, b]
+      for (b in seq_len(q)) XtW[a, b] <- XtW[a, b] + XX[i, a] * W[i, b]
     }
   }
   solve_b <- function(Ty) {
@@ -83,11 +83,11 @@ Hrztpar <- function(x, y, T_family = "boxcox", a_lo = -2, a_hi = 2,
     for (a in seq_len(p)) {
       for (cc in seq_len(p)) {
         s <- 0
-        for (b in seq_len(q)) s <- s + XtW\[a, b\] * OWX[cc, b]
+        for (b in seq_len(q)) s <- s + XtW[a, b] * OWX[cc, b]
         A[a, cc] <- s
       }
       s <- 0
-      for (b in seq_len(q)) s <- s + XtW\[a, b\] * OWT[b]
+      for (b in seq_len(q)) s <- s + XtW[a, b] * OWT[b]
       rhs[a] <- s
     }
     .s03ridgesolve(A, rhs, 1e-12)
@@ -98,7 +98,7 @@ Hrztpar <- function(x, y, T_family = "boxcox", a_lo = -2, a_hi = 2,
     g <- numeric(q)
     for (i in seq_len(n)) {
       r <- Ty[i]
-      for (k in seq_len(p)) r <- r - XX\[i, k\] * b[k]
+      for (k in seq_len(p)) r <- r - XX[i, k] * b[k]
       for (cc in seq_len(q)) g[cc] <- g[cc] + W[i, cc] * r
     }
     g <- g / n
@@ -154,7 +154,7 @@ Hrztpar <- function(x, y, T_family = "boxcox", a_lo = -2, a_hi = 2,
   resid <- numeric(n)
   for (i in seq_len(n)) {
     r <- Ty[i]
-    for (k in seq_len(p)) r <- r - XX\[i, k\] * b_hat[k]
+    for (k in seq_len(p)) r <- r - XX[i, k] * b_hat[k]
     resid[i] <- r
   }
   list(estimate = a_hat, theta_hat = a_hat, alpha_hat = a_hat,

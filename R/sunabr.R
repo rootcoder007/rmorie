@@ -46,7 +46,7 @@ Iwdid <- function(y, unit, time, cohort, never = 0) {
       g <- treated[j]
       v <- c(gm(g, g + e), gm(g, g - 1), gm(nev, g + e), gm(nev, g - 1))
       if (!any(is.na(v))) {
-        num <- num + size[j] * ((v\[1\] - v[2]) - (v[3] - v[4]))
+        num <- num + size[j] * ((v[1] - v[2]) - (v[3] - v[4]))
         den <- den + size[j]
       }
     }

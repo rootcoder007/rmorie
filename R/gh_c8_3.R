@@ -38,7 +38,7 @@ Testcond <- function(prior_ball, log_entropy, sieve_mass, eps_bar, eps, n,
   Cc <- as.numeric(Cconst)
   if (pb <= 0 || pb > 1) stop("the prior ball mass must lie in (0, 1]")
   if (le < 0) stop("the log entropy must be non-negative")
-  if (sm < 0 || sm > 1) stop("the sieve mass must lie in \[0, 1\]")
+  if (sm < 0 || sm > 1) stop("the sieve mass must lie in [0, 1]")
   if (eb <= 0 || ep <= 0) stop("the rates must be positive")
   if (ep < eb) stop("eps_n must be at least eps_bar_n")
   if (n < 1L) stop("n must be at least 1")

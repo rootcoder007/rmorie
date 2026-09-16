@@ -43,7 +43,7 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
       for (i in seq_len(n)) {
         inside <- TRUE
         for (j in seq_len(d)) {
-          u <- (Xm\[i, j\] - lo[j]) / span[j]
+          u <- (Xm[i, j] - lo[j]) / span[j]
           hi_ <- if (idx[j] == cells - 1L) 1.0 + 1e-12 else 1.0
           if (!(idx[j] / cells <= u && u < hi_)) { inside <- FALSE
           break }

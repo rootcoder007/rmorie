@@ -79,7 +79,7 @@
 #' morie_phacf3_bin(d = 5L, edges = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_phacf3_bin <- function(d, edges) {
   d <- as.numeric(d)
-  if (d < edges\[1\] || d >= edges[length(edges)]) return(-1L)
+  if (d < edges[1] || d >= edges[length(edges)]) return(-1L)
   for (k in seq_len(length(edges) - 1L))
     if (d < edges[k + 1L]) return(k - 1L)
   as.integer(length(edges) - 2L)
@@ -135,7 +135,7 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
                 c(3, 1, 2), c(3, 2, 1))
   tt <- c(t1, t2, t3)
   dd <- matrix(0L, 3L, 3L)
-  dd\[1, 2\] <- d12
+  dd[1, 2] <- d12
   dd[2, 1] <- d12
   dd[1, 3] <- d13
   dd[3, 1] <- d13
@@ -143,10 +143,10 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
   dd[3, 2] <- d23
   best <- NULL
   for (p in perms) {
-    i <- p\[1\]
+    i <- p[1]
     j <- p[2]
     k <- p[3]
-    cand <- c(tt[i], tt[j], tt[k], dd\[i, j\], dd\[i, k\], dd[j, k])
+    cand <- c(tt[i], tt[j], tt[k], dd[i, j], dd[i, k], dd[j, k])
     if (is.null(best) || .phacf3_less(cand, best)) best <- cand
   }
   as.integer(best)
@@ -167,7 +167,7 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 #' res <- .phacf3_str(k = 3L)
 #' res
 .phacf3_str <- function(k)
-  sprintf("%02d,%02d,%02d,%02d,%02d,%02d", k\[1\], k[2], k[3], k[4], k[5],
+  sprintf("%02d,%02d,%02d,%02d,%02d,%02d", k[1], k[2], k[3], k[4], k[5],
           k[6])
 
 #' Every canonical triangle the alphabet allows, in a fixed order
@@ -297,9 +297,9 @@ morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
     t <- as.character(row[[4]])
     if (!(t %in% feats))
       stop("feature type ", t, " is not in the alphabet")
-    list(xyz = c(as.numeric(row[\[1\]]), as.numeric(row[[2]]),
+    list(xyz = c(as.numeric(row[[1]]), as.numeric(row[[2]]),
                  as.numeric(row[[3]])),
-         type = which(feats == t)\[1\] - 1L)
+         type = which(feats == t)[1] - 1L)
   })
   n <- length(pts)
   if (is.null(space))

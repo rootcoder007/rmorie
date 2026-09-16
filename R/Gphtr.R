@@ -44,7 +44,7 @@ Gphtr <- function(X, y, X_test = NULL, lengthscale = 1, variance = 1,
   kf <- function(P, Q, e, v) {
     o <- matrix(0, nrow(P), nrow(Q))
     for (i in seq_len(nrow(P))) for (j in seq_len(nrow(Q)))
-      o\[i, j\] <- v * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (e * e))
+      o[i, j] <- v * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (e * e))
     o
   }
   K <- kf(A, A, ell, var)
@@ -78,7 +78,7 @@ Gphtr <- function(X, y, X_test = NULL, lengthscale = 1, variance = 1,
   }
   L <- .s03chol(M)
   ll <- -0.5 * sum(yv * al) - sum(log(diag(L))) - 0.5 * n * log(2 * pi)
-  .t1_result(estimate = mu\[1\], mean = mu, variance = sd, noise = noise,
+  .t1_result(estimate = mu[1], mean = mu, variance = sd, noise = noise,
              noise_test = noise_test, loglik = ll, n = n,
              method = "alternating mean GP and log-variance GP, Goldberg, Williams & Bishop (1998)")
 }

@@ -34,17 +34,17 @@
 Emdtsm <- function(y, max_imf = 10, max_sift = 50, sd_tol = 0.2) {
   .nspline <- function(xk, yk, xq) {
     m <- length(xk)
-    if (m == 1L) return(rep(yk\[1\], length(xq)))
+    if (m == 1L) return(rep(yk[1], length(xq)))
     if (m == 2L) {
-      s <- (yk[2] - yk\[1\]) / (xk[2] - xk\[1\])
-      return(yk\[1\] + s * (xq - xk\[1\]))
+      s <- (yk[2] - yk[1]) / (xk[2] - xk[1])
+      return(yk[1] + s * (xq - xk[1]))
     }
     h <- xk[2:m] - xk[1:(m - 1L)]
     a <- numeric(m)
     b <- numeric(m)
     cc <- numeric(m)
     d <- numeric(m)
-    b\[1\] <- 1
+    b[1] <- 1
     b[m] <- 1
     for (i in 2:(m - 1L)) {
       a[i] <- h[i - 1L]
@@ -54,8 +54,8 @@ Emdtsm <- function(y, max_imf = 10, max_sift = 50, sd_tol = 0.2) {
     }
     cp <- numeric(m)
     dp <- numeric(m)
-    cp\[1\] <- cc\[1\] / b\[1\]
-    dp\[1\] <- d\[1\] / b\[1\]
+    cp[1] <- cc[1] / b[1]
+    dp[1] <- d[1] / b[1]
     for (i in 2:m) {
       den <- b[i] - a[i] * cp[i - 1L]
       cp[i] <- cc[i] / den
@@ -73,7 +73,7 @@ Emdtsm <- function(y, max_imf = 10, max_sift = 50, sd_tol = 0.2) {
     out <- numeric(length(xq))
     for (q in seq_along(xq)) {
       t <- xq[q]
-      if (t <= xk\[1\]) i <- 1L
+      if (t <= xk[1]) i <- 1L
       else if (t >= xk[m]) i <- m - 1L
       else {
         i <- 1L

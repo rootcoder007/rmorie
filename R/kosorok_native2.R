@@ -40,7 +40,7 @@ morie_bridge_covariance <- function(s, t, F = NULL) {
   cv <- cdf(pmin(s, t)) - cdf(s) * cdf(t)
   list(covariance = cv, variance_s = cdf(pmin(s, s)) - cdf(s)^2,
        s = s, t = t,
-       method = "cov\[G(s), G(t)\] = F(s ^ t) - F(s)F(t) (Kosorok Ch. 2)")
+       method = "cov[G(s), G(t)] = F(s ^ t) - F(s)F(t) (Kosorok Ch. 2)")
 }
 
 #' Exact uniform norm of the empirical process
@@ -283,7 +283,7 @@ morie_frechet_check <- function(phi, theta, h_n) {
   }, 0)
   ord <- order(-norms)
   list(ratios = ratios, norms = norms, derivative = jac,
-       ratio_shrinking = ratios[ord][length(ord)] <= ratios[ord]\[1\] + 1e-12,
+       ratio_shrinking = ratios[ord][length(ord)] <= ratios[ord][1] + 1e-12,
        method = "single Jacobian applied linearly -- Hadamard would be vacuous")
 }
 
@@ -348,7 +348,7 @@ morie_dqm_check <- function(density, score, t_grid = c(0.1, 0.05, 0.02, 0.01),
     -Inf, Inf, rel.tol = 1e-8, stop.on.error = FALSE
   )$value
   list(t_grid = t_grid, dqm_integrals = vals,
-       shrinking = vals[length(vals)] <= vals\[1\] + 1e-12, score_mean = sm,
+       shrinking = vals[length(vals)] <= vals[1] + 1e-12, score_mean = sm,
        method = "DQM on sqrt(density); covers non-differentiable densities")
 }
 
@@ -462,6 +462,6 @@ morie_tightness_check <- function(X_n, rho = NULL, eps = 0.1,
     mean(osc > eps)
   }, 0)
   list(delta_grid = delta_grid, probabilities = probs,
-       decreasing = probs[length(probs)] <= probs\[1\] + 1e-12, eps = eps,
+       decreasing = probs[length(probs)] <= probs[1] + 1e-12, eps = eps,
        method = "P*(modulus of continuity > eps) at shrinking delta")
 }

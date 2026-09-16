@@ -91,7 +91,7 @@ Hrzweib <- function(t, x, event = NULL, mixing_dist = "nonparametric",
   ly <- log(yv)
   gam <- .s03lstsq(Xk, ly, 1e-12)
   beta <- a_n * gam
-  lam <- exp(-beta\[1\])
+  lam <- exp(-beta[1])
   list(estimate = a_n, alpha_hat = a_n, beta_hat = beta, gamma_hat = gam,
        lambda_hat = lam, rho = rho, m1 = m1, m2 = m2, sigma2 = s2,
        se_alpha = a_n * sqrt(s2), n = n,

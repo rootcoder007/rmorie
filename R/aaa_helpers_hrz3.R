@@ -13,8 +13,8 @@ NULL
 
 .hrz3_sqrt2pi <- 2.5066282746310002
 
-# Mid-rank transform onto \[0, 1\].  Horowitz (2009) p. 156 observes the
-# support of (X, W) may be taken to be \[0, 1\]^2 with no loss of
+# Mid-rank transform onto [0, 1].  Horowitz (2009) p. 156 observes the
+# support of (X, W) may be taken to be [0, 1]^2 with no loss of
 # generality, "because it can always be satisfied by, if necessary,
 # carrying out a monotone increasing transformation of (X, W)".  The
 # mid-rank map is such a transformation and is exactly reproducible in
@@ -41,7 +41,7 @@ NULL
   (.s03rank(v) - 0.5) / n
 }
 
-# Equispaced grid on \[0, 1\] with trapezoid quadrature weights.
+# Equispaced grid on [0, 1] with trapezoid quadrature weights.
 #' Equispaced grid on \[0, 1\] with trapezoid quadrature weights
 #'
 #' A step of the helpers_hrz3 implementation. Called by \code{Hrznpiv}, \code{Hrztiku}.
@@ -166,7 +166,7 @@ NULL
 }
 
 # Density-weighted average derivative, Horowitz Sec. 2.6.1:
-#   delta = E\[f_X(X) dE(Y|X)/dX\] = -2 E[f_X'(X) Y].
+#   delta = E[f_X(X) dE(Y|X)/dX] = -2 E[f_X'(X) Y].
 # In a single-index model delta is proportional to beta, so it fixes
 # the index DIRECTION without optimising over it.  The leave-one-out
 # form is used: the own-observation term of a kernel density derivative
@@ -244,8 +244,8 @@ NULL
   d / abs(lead)
 }
 
-# Default bandwidth on the mid-rank \[0, 1\] scale.  After .hrz3_u01 the
-# marginals are exactly uniform on \[0, 1\], whose standard deviation is
+# Default bandwidth on the mid-rank [0, 1] scale.  After .hrz3_u01 the
+# marginals are exactly uniform on [0, 1], whose standard deviation is
 # 1/sqrt(12), so Silverman's constant gives a scale rather than only a
 # rate.  n^(-1/6) alone is a rate and on the unit interval is far too
 # wide: at n = 40 it puts two thirds of the kernel mass outside support.
@@ -270,12 +270,12 @@ NULL
 }
 
 # Bivariate kernel density of (X, W) on the grid, mass-corrected.
-# A Gaussian kernel has unbounded support, so on the compact \[0, 1\]^2 a
+# A Gaussian kernel has unbounded support, so on the compact [0, 1]^2 a
 # fixed share of its mass falls outside and the raw estimate does NOT
 # integrate to one.  Horowitz (2009) p. 173 requires a compactly
 # supported kernel (HH5) and notes boundary effects "can be
 # accommodated by replacing the kernel K with a boundary kernel".
-# Renormalising the discretised density to unit mass on \[0, 1\]^2 is
+# Renormalising the discretised density to unit mass on [0, 1]^2 is
 # such a correction, and it makes mass == 1 an exact identity that
 # fails loudly if the 1/(n h^2) constant is mis-wired.
 #' Bivariate kernel density of (X, W) on the grid, mass-corrected
@@ -311,7 +311,7 @@ NULL
   list(f = f / mass, mass = mass)
 }
 
-# Series basis on \[0, 1\], eq. (5.79).  "cos" is the orthonormal cosine
+# Series basis on [0, 1], eq. (5.79).  "cos" is the orthonormal cosine
 # basis {1, sqrt(2) cos(pi k v)}, for which the coefficients in (5.79)
 # are literally the inner products beta_j = <g, psi_j> as the text
 # notes.  "poly" is the monomial basis, which spans the same spaces but

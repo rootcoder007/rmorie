@@ -28,7 +28,7 @@ Sgtmodq <- function(A, labels) {
   if (m2 <= 0) stop("Sgtmodq: graph has no edge weight")
   q <- 0
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    if (lab[i] == lab[j]) q <- q + M\[i, j\] - k[i] * k[j] / m2
+    if (lab[i] == lab[j]) q <- q + M[i, j] - k[i] * k[j] / m2
   }
   q <- q / m2
   .t1_result(Q = q, estimate = q, n_communities = length(unique(lab)),

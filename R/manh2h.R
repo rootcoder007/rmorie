@@ -34,11 +34,11 @@ Manh2h <- function(yi, vi, design, edge) {
   D <- as.matrix(design)
   if (nrow(D) != n || ncol(D) != 2L) stop("design must be n by 2")
   e <- as.integer(edge)
-  if (length(e) != 2L || e\[1\] == e[2])
+  if (length(e) != 2L || e[1] == e[2])
     stop("edge must be two distinct treatment labels")
   sgn <- rep(0, n)
-  sgn[D[, 1] == e\[1\] & D[, 2] == e[2]] <- 1
-  sgn[D[, 1] == e[2] & D[, 2] == e\[1\]] <- -1
+  sgn[D[, 1] == e[1] & D[, 2] == e[2]] <- 1
+  sgn[D[, 1] == e[2] & D[, 2] == e[1]] <- -1
   di <- which(sgn != 0)
   rest <- which(sgn == 0)
   if (!length(di)) stop("no study makes that comparison directly")
@@ -51,7 +51,7 @@ Manh2h <- function(yi, vi, design, edge) {
   Xr <- nd$X
   treats <- nd$treats
   T <- nd$T
-  if (!(e\[1\] %in% treats) || !(e[2] %in% treats))
+  if (!(e[1] %in% treats) || !(e[2] %in% treats))
     stop("the split edge is disconnected from the rest")
   p <- T - 1L
   w <- 1 / v[rest]
@@ -61,7 +61,7 @@ Manh2h <- function(yi, vi, design, edge) {
   cv <- fit$cov
   pos <- match(e, treats)
   cvec <- numeric(p)
-  if (pos\[1\] > 1L) cvec[pos\[1\] - 1L] <- cvec[pos\[1\] - 1L] - 1
+  if (pos[1] > 1L) cvec[pos[1] - 1L] <- cvec[pos[1] - 1L] - 1
   if (pos[2] > 1L) cvec[pos[2] - 1L] <- cvec[pos[2] - 1L] + 1
   indirect <- sum(cvec * beta)
   v_ind <- as.numeric(t(cvec) %*% cv %*% cvec)

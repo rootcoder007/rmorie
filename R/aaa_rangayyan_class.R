@@ -261,8 +261,8 @@ Sens <- function(tp, fn = NULL) {
     if (nrow(t) != 2L || ncol(t) != 2L) {
       stop("give TP and FN, or a 2x2 table [[TP, FN], [FP, TN]]")
     }
-    TP <- t\[1, 1\]
-    FN <- t\[1, 2\]
+    TP <- t[1, 1]
+    FN <- t[1, 2]
   } else {
     TP <- as.numeric(tp)
     FN <- as.numeric(fn)
@@ -347,7 +347,7 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
     if (nrow(t) != 2L || ncol(t) != 2L) {
       stop("give TP and FP, or a 2x2 table [[TP, FN], [FP, TN]]")
     }
-    TP <- t\[1, 1\]
+    TP <- t[1, 1]
     FP <- t[2, 1]
   } else {
     if (is.null(fp)) stop("give TP and FP, or a 2x2 table")
@@ -370,7 +370,7 @@ Ppv <- function(tp, fp = NULL, prevalence = NULL, sensitivity = NULL,
       )
     }
     p <- as.numeric(prevalence)
-    if (p < 0 || p > 1) stop("the prevalence must lie in \[0, 1\]")
+    if (p < 0 || p > 1) stop("the prevalence must lie in [0, 1]")
     se <- as.numeric(sensitivity)
     sp <- as.numeric(specificity)
     den <- se * p + (1 - sp) * (1 - p)
@@ -422,8 +422,8 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
     if (nrow(t) != 2L || ncol(t) != 2L) {
       stop("the table must be 2x2, [[TP, FN], [FP, TN]]")
     }
-    TP <- t\[1, 1\]
-    FN <- t\[1, 2\]
+    TP <- t[1, 1]
+    FN <- t[1, 2]
     FP <- t[2, 1]
     TN <- t[2, 2]
   } else {
@@ -475,7 +475,7 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
     if (exact) {
       prev <- .morie_rg_asfrac(prevalence)
       if (prev$n < 0 || prev$n > prev$d) {
-        stop("the prevalence must lie in \[0, 1\]")
+        stop("the prevalence must lie in [0, 1]")
       }
       one <- .morie_rg_frac(1, 1)
       weighted <- .morie_rg_fadd(
@@ -484,7 +484,7 @@ Accuracy <- function(table = NULL, tp = NULL, tn = NULL, fp = NULL,
       )
     } else {
       prev <- as.numeric(prevalence)
-      if (prev < 0 || prev > 1) stop("the prevalence must lie in \[0, 1\]")
+      if (prev < 0 || prev > 1) stop("the prevalence must lie in [0, 1]")
       weighted <- se * prev + sp * (1 - prev)
     }
   }
@@ -618,7 +618,7 @@ McNemar <- function(table, correct = NULL) {
   for (i in seq_len(k)) {
     for (j in seq_len(k)) {
       if (j <= i) next
-      a <- t\[i, j\]
+      a <- t[i, j]
       b <- t[j, i]
       if (a + b <= 0) next
       d <- abs(a - b)
@@ -784,7 +784,7 @@ DivAv <- function(means, covs) {
   list(
     average = mean(vals), pairwise = pairs,
     minimum = pairs[[w]][3],
-    worst_pair = c(pairs[[w]]\[1\], pairs[[w]][2]),
+    worst_pair = c(pairs[[w]][1], pairs[[w]][2]),
     n_classes = m, n_pairs = length(vals),
     average_hides_the_worst_pair = TRUE,
     method = "Rangayyan (2024) Section 10.10.1 (average divergence)"
@@ -871,7 +871,7 @@ Kld <- function(p1, p2) {
 #' PdfOverlap(V, V)
 PdfOverlap <- function(p1, p2) {
   # BC(p1, p2) = sum_l sqrt(p1 p2): the OVERLAP between two PDFs,
-  # bounded in \[0, 1\].  This is what the Bhattacharyya DISTANCE is built
+  # bounded in [0, 1].  This is what the Bhattacharyya DISTANCE is built
   # from, D_B = -ln BC, and what makes the error bound work: the overlap
   # of the two class-conditional densities IS the region where the
   # optimal classifier must make mistakes.  NOT FROM THIS BOOK.
@@ -948,7 +948,7 @@ Chernoff <- function(p1, p2, alpha = NULL, n_grid = 201) {
   rho <- function(t) .morie_fsum(a[k]^t * b[k]^(1 - t))
   if (!is.null(alpha)) {
     av <- as.numeric(alpha)
-    if (av < 0 || av > 1) stop("alpha must lie in \[0, 1\]")
+    if (av < 0 || av > 1) stop("alpha must lie in [0, 1]")
     best_a <- av
     best_rho <- rho(av)
     searched <- FALSE
@@ -1011,7 +1011,7 @@ Hellinger <- function(p1, p2) {
   # H = sqrt(1 - BC), so H^2 = 1 - BC.  The Python arm delegates to
   # morie.fn.helld.hellinger_dist; this is the same arithmetic, kept here
   # because the R tree has no separate helld module.  Unlike the Bhattacharyya distance
-  # -ln BC, this is a TRUE METRIC: bounded in \[0, 1\], symmetric, and it
+  # -ln BC, this is a TRUE METRIC: bounded in [0, 1], symmetric, and it
   # satisfies the triangle inequality, which -ln BC does not.  That is
   # the reason to reach for it -- anything needing a metric over
   # distributions needs this and not D_B.  The 1/2 normalization is the
@@ -1305,7 +1305,7 @@ FishLda <- function(X, y) {
       "got ", length(g$order), " classes"
     )
   }
-  a <- g$groups[\[1\]]
+  a <- g$groups[[1]]
   b <- g$groups[[2]]
   if (nrow(a) < 2L || nrow(b) < 2L) {
     stop("each class needs at least two samples")
@@ -1406,7 +1406,7 @@ LinDisc <- function(x, weights, w0 = NULL) {
   d <- as.numeric(W %*% xs) + b
   srt <- sort(d, decreasing = TRUE)
   list(
-    d = d, assigned = which.max(d) - 1L, margin = srt\[1\] - srt[2],
+    d = d, assigned = which.max(d) - 1L, margin = srt[1] - srt[2],
     n_classes = m, regions_are_convex = TRUE,
     decision_surfaces_are_hyperplanes = TRUE,
     method = paste(
@@ -1445,9 +1445,9 @@ LinDSep <- function(X, y) {
   # data that chose the cut -- so they are optimistic; Section 10.10.3 is
   # the book's warning, and KFoldCv or LooCv gives an honest figure.
   f <- FishLda(X, y)
-  a <- f$projected[\[1\]]
+  a <- f$projected[[1]]
   b <- f$projected[[2]]
-  ma <- f$projected_means\[1\]
+  ma <- f$projected_means[1]
   mb <- f$projected_means[2]
   mid <- 0.5 * (ma + mb)
   hi_first <- ma > mb
@@ -1455,7 +1455,7 @@ LinDSep <- function(X, y) {
   errf <- function(t) {
     if (hi_first) sum(a <= t) + sum(b > t) else sum(a > t) + sum(b <= t)
   }
-  cuts <- c(cand\[1\] - 1, cand, cand[length(cand)] + 1)
+  cuts <- c(cand[1] - 1, cand, cand[length(cand)] + 1)
   ts <- 0.5 * (cuts[-length(cuts)] + cuts[-1])
   errs <- vapply(ts, errf, numeric(1))
   w <- which.min(errs)
@@ -1543,7 +1543,7 @@ Knn <- function(X, y, query, k = 1, metric = "euclidean", C = NULL) {
       )
     }),
     tie = length(tied) > 1L, tied_classes = tied,
-    nearest_distance = dist[ord]\[1\], nearest_label = labs\[1\],
+    nearest_distance = dist[ord][1], nearest_label = labs[1],
     single_neighbour_may_be_an_outlier = kk == 1L,
     method = "Rangayyan (2024) eq. (10.29) and Section 10.4.4"
   )
@@ -1656,7 +1656,7 @@ BayesNorm <- function(x, means, covs, priors = NULL, full = FALSE) {
   dfull <- dshort - const
   use <- if (full) dfull else dshort
   eq <- all(vapply(covs, function(S) {
-    max(abs(as.matrix(S) - as.matrix(covs[\[1\]]))) < 1e-12
+    max(abs(as.matrix(S) - as.matrix(covs[[1]]))) < 1e-12
   }, logical(1)))
   list(
     d = use, d_full = dfull, d_dropped_constant = dshort,
@@ -1804,7 +1804,7 @@ LogReg <- function(X, y, maxiter = 100, tol = 1e-8, ridge = 1e-8) {
   ll <- sum(ys * log(pmax(mu, 1e-300)) + (1 - ys) * log(pmax(1 - mu, 1e-300)))
   pred <- as.numeric(mu >= 0.5)
   list(
-    intercept = w\[1\], coefficients = w[-1], w = w, fitted = mu,
+    intercept = w[1], coefficients = w[-1], w = w, fitted = mu,
     predicted = pred, loglik = ll, iterations = it,
     converged = it < as.integer(maxiter), separable = sep,
     ridge = lam, training_accuracy = mean(pred == ys), n = n,
@@ -1931,13 +1931,13 @@ Elbow <- function(X, kmax = 8, kmin = 1) {
   if (hi <= lo) stop("kmax must exceed kmin")
   ks <- lo:hi
   wcss <- vapply(ks, function(k) KMeans(Xs, k)$wcss, numeric(1))
-  x1 <- ks\[1\]
-  y1 <- wcss\[1\]
+  x1 <- ks[1]
+  y1 <- wcss[1]
   x2 <- ks[length(ks)]
   y2 <- wcss[length(wcss)]
   den <- sqrt((x2 - x1)^2 + (y2 - y1)^2)
   knee <- if (den <= 0) {
-    ks\[1\]
+    ks[1]
   } else {
     ks[which.max(abs((y2 - y1) * ks - (x2 - x1) * wcss +
       x2 * y1 - y2 * x1) / den)]
@@ -2025,7 +2025,7 @@ HClust <- function(X, linkage = "single", k = NULL) {
     names(g) <- as.character(seq_len(n))
     for (step in history) {
       if (length(g) == kk) break
-      ka <- as.character(step$merged\[1\] + 1L)
+      ka <- as.character(step$merged[1] + 1L)
       kb <- as.character(step$merged[2] + 1L)
       g[[ka]] <- c(g[[ka]], g[[kb]])
       g[[kb]] <- NULL
@@ -2223,14 +2223,14 @@ LooCv <- function(X, y, classifier = NULL) {
           H <- min(Cv, ai + aj)
         }
         if (H - L < 1e-12) next
-        eta <- 2 * K\[i, j\] - K[i, i] - K[j, j]
+        eta <- 2 * K[i, j] - K[i, i] - K[j, j]
         if (eta >= -1e-12) next
         anj <- min(H, max(L, aj - ys[j] * (Ei - Ej) / eta))
         if (abs(anj - aj) < 1e-12) next
         ani <- ai + ys[i] * ys[j] * (aj - anj)
         b1 <- b - Ei - ys[i] * (ani - ai) * K[i, i] -
-          ys[j] * (anj - aj) * K\[i, j\]
-        b2 <- b - Ej - ys[i] * (ani - ai) * K\[i, j\] -
+          ys[j] * (anj - aj) * K[i, j]
+        b2 <- b - Ej - ys[i] * (ani - ai) * K[i, j] -
           ys[j] * (anj - aj) * K[j, j]
         b <- if (ani > 0 && ani < Cv) b1 else if (anj > 0 && anj < Cv) b2 else 0.5 * (b1 + b2)
         a[i] <- ani
@@ -2359,7 +2359,7 @@ SvmKern <- function(X, y, query = NULL, kernel = "rbf", gamma = NULL,
     )
   }
   K <- matrix(0, n, n)
-  for (i in seq_len(n)) for (j in seq_len(n)) K\[i, j\] <- kf(Xs[i, ], Xs[j, ])
+  for (i in seq_len(n)) for (j in seq_len(n)) K[i, j] <- kf(Xs[i, ], Xs[j, ])
   Cv <- as.numeric(C)
   r <- .morie_rg_smo(K, ys, Cv, maxiter, tol)
   sv <- which(r$a > 1e-8)

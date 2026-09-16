@@ -65,7 +65,7 @@ morie_catstop <- function(items, theta, se_target, estimator = "ML",
   if (!est %in% c("ML", "BM")) stop("estimator must be 'ML' or 'BM'")
   infos <- vapply(items, function(it) {
     it <- as.numeric(it)
-    a <- it\[1\]
+    a <- it[1]
     b <- it[2]
     c_ <- it[3]
     d <- it[4]

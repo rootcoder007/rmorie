@@ -30,7 +30,7 @@ Coslrate <- function(t, T, lr_0 = 0.2, kind = "cosine", floor = 0) {
   if (identical(kind, "step")) {
     idx <- as.integer(frac * 4)
     if (idx > 3L) idx <- 3L
-    lr <- as.numeric(lr_0) * (steps[idx + 1L] / steps\[1\])
+    lr <- as.numeric(lr_0) * (steps[idx + 1L] / steps[1])
   } else {
     lr <- as.numeric(floor) + (as.numeric(lr_0) - as.numeric(floor)) * 0.5 *
       (1 + cos(pi * frac))

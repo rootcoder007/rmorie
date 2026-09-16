@@ -230,7 +230,7 @@ one_sample_ttest <- function(x, mu0 = 0, confidence = 0.95) {
     method = "One-sample t-test",
     test_statistic = unname(tt$statistic),
     p_value = tt$p.value, df = n - 1,
-    ci_lower = ci\[1\], ci_upper = ci[2],
+    ci_lower = ci[1], ci_upper = ci[2],
     effect_size = .cohens_d_one(x, mu0),
     estimate = mean(x), n = n
   )
@@ -267,7 +267,7 @@ two_sample_ttest <- function(x, y, equal_var = TRUE, confidence = 0.95) {
     method = label,
     test_statistic = unname(tt$statistic),
     p_value = tt$p.value, df = df_val,
-    ci_lower = ci\[1\], ci_upper = ci[2],
+    ci_lower = ci[1], ci_upper = ci[2],
     effect_size = .cohens_d_ind(x, y),
     estimate = mean(x) - mean(y),
     n = nx + ny
@@ -306,7 +306,7 @@ paired_ttest <- function(x, y, confidence = 0.95) {
     method = "Paired t-test",
     test_statistic = unname(tt$statistic),
     p_value = tt$p.value, df = n - 1,
-    ci_lower = ci\[1\], ci_upper = ci[2],
+    ci_lower = ci[1], ci_upper = ci[2],
     effect_size = .cohens_d_paired(d),
     estimate = mean(d), n = n
   )
@@ -332,8 +332,8 @@ one_way_anova <- function(...) {
   grp <- factor(rep(seq_along(cleaned), lengths(cleaned)))
   fit <- stats::aov(vals ~ grp)
   s <- summary(fit)[[1L]]
-  f_stat <- s[["F value"]]\[1\]
-  p_val <- s[["Pr(>F)"]]\[1\]
+  f_stat <- s[["F value"]][1]
+  p_val <- s[["Pr(>F)"]][1]
   grand <- mean(vals)
   ss_b <- sum(lengths(cleaned) * (vapply(cleaned, mean, 0) - grand)^2)
   ss_t <- sum((vals - grand)^2)
@@ -451,7 +451,7 @@ friedman_test <- function(...) {
   mat <- do.call(cbind, cleaned)
   fr <- stats::friedman.test(mat)
   k <- length(cleaned)
-  n <- ln\[1\]
+  n <- ln[1]
   chi2 <- unname(fr$statistic)
   w <- if (n * (k - 1) > 0) chi2 / (n * (k - 1)) else 0
   .stat_result(
@@ -531,7 +531,7 @@ chi2_independence <- function(contingency_table, correction = TRUE) {
 mcnemar_test <- function(contingency_table, exact = FALSE) {
   tab <- as.matrix(contingency_table)
   if (!all(dim(tab) == c(2, 2))) stop("McNemar test requires a 2x2 table.")
-  b <- tab\[1, 2\]
+  b <- tab[1, 2]
   c <- tab[2, 1]
   n <- sum(tab)
   if (exact) {
@@ -563,7 +563,7 @@ mcnemar_test <- function(contingency_table, exact = FALSE) {
 #' @export
 cochrans_q <- function(...) {
   groups <- lapply(list(...), as.numeric)
-  n <- length(groups[\[1\]])
+  n <- length(groups[[1]])
   k <- length(groups)
   if (any(vapply(groups, length, 0L) != n))
     stop("All groups must have the same length.")
@@ -616,7 +616,7 @@ pearson_correlation <- function(x, y, confidence = 0.95) {
   .stat_result(
     method = "Pearson correlation",
     test_statistic = r, p_value = ct$p.value, df = n - 2,
-    ci_lower = ci\[1\], ci_upper = ci[2],
+    ci_lower = ci[1], ci_upper = ci[2],
     effect_size = r^2, estimate = r, n = n
   )
 }
@@ -641,7 +641,7 @@ spearman_correlation <- function(x, y, confidence = 0.95) {
   .stat_result(
     method = "Spearman correlation",
     test_statistic = rho, p_value = ct$p.value, df = n - 2,
-    ci_lower = ci\[1\], ci_upper = ci[2],
+    ci_lower = ci[1], ci_upper = ci[2],
     effect_size = rho^2, estimate = rho, n = n
   )
 }
@@ -692,7 +692,7 @@ point_biserial_correlation <- function(binary, continuous, confidence = 0.95) {
   .stat_result(
     method = "Point-biserial correlation",
     test_statistic = r, p_value = ct$p.value, df = n - 2,
-    ci_lower = ci\[1\], ci_upper = ci[2],
+    ci_lower = ci[1], ci_upper = ci[2],
     effect_size = r^2, estimate = r, n = n
   )
 }
@@ -890,8 +890,8 @@ levene_test <- function(..., center = "median") {
   n_total <- length(vals)
   .stat_result(
     method = sprintf("Levene's test (center=%s)", center),
-    test_statistic = s[["F value"]]\[1\],
-    p_value = s[["Pr(>F)"]]\[1\],
+    test_statistic = s[["F value"]][1],
+    p_value = s[["Pr(>F)"]][1],
     df = k - 1, n = n_total
   )
 }
@@ -1063,7 +1063,7 @@ dagostino_pearson <- function(x) {
     return(asy / sqrt(n))
   }
   tab <- if (identical(dist, "norm")) .GOF_LILLIE_NORM else .GOF_LILLIE_EXP
-  if (n <= .GOF_LILLIE_N\[1\]) {
+  if (n <= .GOF_LILLIE_N[1]) {
     return(tab[1, ])
   }
   # Interpolate each tabulated significance level linearly in N.
@@ -1083,7 +1083,7 @@ dagostino_pearson <- function(x) {
   ord <- order(crit)
   crit <- crit[ord]
   alpha <- alpha[ord]
-  if (stat <= crit\[1\]) {
+  if (stat <= crit[1]) {
     return(list(p = max(alpha), bounded = "upper"))
   }
   k <- length(crit)
@@ -1158,7 +1158,7 @@ anderson_darling <- function(x, dist = c("norm", "expon")) {
     mult <- 1 + 0.75 / n + 2.25 / n^2
   } else {
     mu <- mean(xs)
-    if (!is.finite(mu) || mu <= 0 || xs\[1\] < 0) {
+    if (!is.finite(mu) || mu <= 0 || xs[1] < 0) {
       stop("anderson_darling: dist = \"expon\" needs non-negative 'x' with a positive mean.")
     }
     z <- xs / mu
@@ -1224,7 +1224,7 @@ lilliefors_test <- function(x, dist = c("norm", "expon")) {
     f <- stats::pnorm((xs - mean(xs)) / s)
   } else {
     mu <- mean(xs)
-    if (!is.finite(mu) || mu <= 0 || xs\[1\] < 0) {
+    if (!is.finite(mu) || mu <= 0 || xs[1] < 0) {
       stop("lilliefors_test: dist = \"expon\" needs non-negative 'x' with a positive mean.")
     }
     f <- stats::pexp(xs / mu)
@@ -1528,14 +1528,14 @@ correlation_matrix <- function(data, method = "pearson") {
   r_mat <- matrix(0, n, n, dimnames = list(cols, cols))
   p_mat <- matrix(0, n, n, dimnames = list(cols, cols))
   for (i in seq_len(n)) for (j in seq(i, n)) {
-    if (i == j) { r_mat\[i, j\] <- 1
-    p_mat\[i, j\] <- 0
+    if (i == j) { r_mat[i, j] <- 1
+    p_mat[i, j] <- 0
     next }
     valid <- stats::complete.cases(num[, c(i, j)])
     ct <- suppressWarnings(stats::cor.test(
       num[valid, i], num[valid, j], method = method))
-    r_mat\[i, j\] <- r_mat[j, i] <- unname(ct$estimate)
-    p_mat\[i, j\] <- p_mat[j, i] <- ct$p.value
+    r_mat[i, j] <- r_mat[j, i] <- unname(ct$estimate)
+    p_mat[i, j] <- p_mat[j, i] <- ct$p.value
   }
   list(r = as.data.frame(r_mat), p = as.data.frame(p_mat))
 }

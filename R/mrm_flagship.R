@@ -264,7 +264,7 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
   ok <- !vapply(rows, inherits, logical(1), "error")
   if (!any(ok)) {
     stop("every requested estimator failed; first error: ",
-         conditionMessage(rows[\[1\]]), call. = FALSE)
+         conditionMessage(rows[[1]]), call. = FALSE)
   }
   est <- vapply(rows[ok], function(r) r$estimate, numeric(1))
   se <- vapply(rows[ok], function(r) r$se, numeric(1))

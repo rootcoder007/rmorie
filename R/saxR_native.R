@@ -11,7 +11,7 @@
 # the near-constant guard, and the >= convention when a PAA value
 # lands exactly on a breakpoint.
 
-.MOR_SAX_LETTERS <- strsplit("abcdefghijklmnopqrstuvwxyz", "")[\[1\]]
+.MOR_SAX_LETTERS <- strsplit("abcdefghijklmnopqrstuvwxyz", "")[[1]]
 
 #' Equiprobable Gaussian breakpoints for SAX
 #'
@@ -110,8 +110,8 @@ morie_saxR <- function(x, window, alphabet, eps = 1e-8) {
 #'   symbolic representation of time series. DMKD 2003.
 #' @export
 morie_sax_mindist <- function(word1, word2, n, alphabet) {
-  s1 <- strsplit(as.character(word1), "")[\[1\]]
-  s2 <- strsplit(as.character(word2), "")[\[1\]]
+  s1 <- strsplit(as.character(word1), "")[[1]]
+  s2 <- strsplit(as.character(word2), "")[[1]]
   if (length(s1) != length(s2)) stop("words must have equal length")
   w <- length(s1)
   a <- as.integer(alphabet)

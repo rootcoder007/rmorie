@@ -551,7 +551,7 @@ phi_coefficient <- function(contingency_table) {
   chi2 <- as.numeric(cs$statistic)
   n <- sum(tbl)
   phi <- if (n > 0) sqrt(chi2 / n) else 0
-  if (tbl\[1, 1\] * tbl[2, 2] < tbl\[1, 2\] * tbl[2, 1]) phi <- -phi
+  if (tbl[1, 1] * tbl[2, 2] < tbl[1, 2] * tbl[2, 1]) phi <- -phi
   effect_size_result("Phi coefficient", phi, n = as.integer(n))
 }
 

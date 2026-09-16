@@ -158,7 +158,7 @@ strec_session_average <- function(embeddings) {
   if (t < 1) {
     stop("strec: the session prefix is empty")
   }
-  d <- length(X[\[1\]])
+  d <- length(X[[1]])
   m_s <- numeric(d)
   for (a in seq_len(d)) {
     s <- 0.0
@@ -233,7 +233,7 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
   if (t < 1) {
     stop("strec: the session prefix is empty")
   }
-  d <- length(X[\[1\]])
+  d <- length(X[[1]])
   xt <- X[[t]]
   ms <- strec_session_average(X)$m_s
   W1 <- as.matrix(W1)
@@ -327,7 +327,7 @@ strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = N
   order <- order(-y)
 
   list(
-    estimate = order\[1\],
+    estimate = order[1],
     ranking = order,
     probability = y,
     score = z,

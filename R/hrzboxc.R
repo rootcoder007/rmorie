@@ -62,7 +62,7 @@ Hrzboxc <- function(x, y, a_lo = -2, a_hi = 2, ngrid = 81L, refine = 60L,
     uh <- numeric(n)
     for (i in seq_len(n)) {
       r <- Ty[i]
-      for (k in seq_len(p)) r <- r - XX\[i, k\] * b[k]
+      for (k in seq_len(p)) r <- r - XX[i, k] * b[k]
       uh[i] <- r
     }
     list(Ty = Ty, b = b, uh = uh)
@@ -77,7 +77,7 @@ Hrzboxc <- function(x, y, a_lo = -2, a_hi = 2, ngrid = 81L, refine = 60L,
       tu <- bc(u, a)
       for (i in seq_len(n)) {
         xb <- 0
-        for (j in seq_len(p)) xb <- xb + XX\[i, j\] * b[j]
+        for (j in seq_len(p)) xb <- xb + XX[i, j] * b[j]
         z <- tu - xb
         lo <- 0L
         hi <- n

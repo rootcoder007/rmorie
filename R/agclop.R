@@ -40,7 +40,7 @@ Sgdmomstep <- function(theta, grad, momentum = 0.9, weight_decay = 1e-4,
     s2 <- s2 + step * step
   }
   list(
-    estimate = if (length(nt)) nt\[1\] else NaN, theta_new = nt, buf = nb,
+    estimate = if (length(nt)) nt[1] else NaN, theta_new = nt, buf = nb,
     step_norm = sqrt(s2),
     method = "SGD with momentum and L2 weight decay (AlphaZero training)"
   )

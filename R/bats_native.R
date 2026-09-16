@@ -414,7 +414,7 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   ar <- u$ar
   ma <- u$ma
   n <- length(z)
-  lev <- as.numeric(x0\[1\])
+  lev <- as.numeric(x0[1])
   i <- 2L
   trend <- 0
   if (spec$use_trend) {
@@ -451,7 +451,7 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   fitted <- numeric(n)
   for (t in seq_len(n)) {
     if (trig) seas <- sum(unlist(s))
-    else seas <- sum(vapply(buf, function(b) b\[1\], numeric(1)))
+    else seas <- sum(vapply(buf, function(b) b[1], numeric(1)))
     darma <- sum(ar * dlag) + sum(ma * elag)
     pred <- lev + phi * trend + seas + darma
     eps <- z[t] - pred
@@ -465,7 +465,7 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
 
     if (trig) {
       for (a in seq_along(spec$periods)) {
-        g1 <- gam[\[1\]][a]
+        g1 <- gam[[1]][a]
         g2 <- gam[[2]][a]
         for (j in seq_len(spec$harmonics[a])) {
           c <- cos(lam[[a]][j])
@@ -478,7 +478,7 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
       }
     } else {
       for (a in seq_along(spec$periods)) {
-        oldest <- buf[[a]]\[1\]
+        oldest <- buf[[a]][1]
         buf[[a]] <- c(buf[[a]][-1], oldest + gam[a] * d)
       }
     }
@@ -589,7 +589,7 @@ state_matrices <- function(spec, theta) {
     e[j] <- 1
     # z chosen so that eps = 0, which leaves x_1 = F e_j
     r1 <- bats_filter(0, spec, theta, e)
-    wj <- r1$fitted\[1\]
+    wj <- r1$fitted[1]
     w[j] <- wj
     r2 <- bats_filter(wj, spec, theta, e)
     fcols[, j] <- .flatten_carry(spec, r2$carry)
@@ -864,7 +864,7 @@ concentrated_loglik <- function(y, resid, omega) {
   out <- numeric(h)
   for (k in seq_len(h)) {
     if (trig) seas <- sum(unlist(s))
-    else seas <- sum(vapply(buf, function(b) b\[1\], numeric(1)))
+    else seas <- sum(vapply(buf, function(b) b[1], numeric(1)))
     d <- sum(ar * dlag) + sum(ma * elag)
     out[k] <- lev + phi * trend + seas + d
 
@@ -874,7 +874,7 @@ concentrated_loglik <- function(y, resid, omega) {
 
     if (trig) {
       for (a in seq_along(spec$periods)) {
-        g1 <- gam[\[1\]][a]
+        g1 <- gam[[1]][a]
         g2 <- gam[[2]][a]
         for (j in seq_len(spec$harmonics[a])) {
           cc <- cos(lam[[a]][j])
@@ -887,7 +887,7 @@ concentrated_loglik <- function(y, resid, omega) {
       }
     } else {
       for (a in seq_along(spec$periods)) {
-        oldest <- buf[[a]]\[1\]
+        oldest <- buf[[a]][1]
         buf[[a]] <- c(buf[[a]][-1], oldest + gam[a] * d)
       }
     }

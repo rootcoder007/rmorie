@@ -295,7 +295,7 @@ morie_tmle_sensitivity <- function(y, d, x, gamma_grid = NULL, trunc = 0.01) {
   }
   crosses <- lows <= 0 & highs >= 0
   list(gamma = grid, lower = lows, upper = highs, ate = base$ate,
-       gamma_critical = if (any(crosses)) grid[which(crosses)\[1\]] else NULL,
+       gamma_critical = if (any(crosses)) grid[which(crosses)[1]] else NULL,
        n = base$n)
 }
 
@@ -332,7 +332,7 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
   for (i in seq_len(k)) {
     ind <- as.numeric(y <= grid[i])
     if (min(ind) == max(ind)) {
-      f1[i] <- f0[i] <- ind\[1\]
+      f1[i] <- f0[i] <- ind[1]
       next
     }
     out <- morie_tmle_ate(ind, d, x, trunc = trunc, scale_outcome = FALSE)
@@ -341,7 +341,7 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
   }
   f1 <- pmin(pmax(cummax(f1), 0), 1)
   f0 <- pmin(pmax(cummax(f0), 0), 1)
-  invert <- function(F) grid[min(which(F >= q)\[1\], k, na.rm = TRUE)]
+  invert <- function(F) grid[min(which(F >= q)[1], k, na.rm = TRUE)]
   q1 <- invert(f1)
   q0 <- invert(f0)
   list(qte = q1 - q0, q1 = q1, q0 = q0, quantile = q, grid = grid,

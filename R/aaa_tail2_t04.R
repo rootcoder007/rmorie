@@ -38,7 +38,7 @@
     if (A[i, i] != 0) stop("adjacency matrix must have a zero diagonal")
     j <- i + 1L
     while (j <= n) {
-      if (abs(A\[i, j\] - A[j, i]) > 1e-12 * (1 + abs(A\[i, j\]))) {
+      if (abs(A[i, j] - A[j, i]) > 1e-12 * (1 + abs(A[i, j]))) {
         stop("adjacency matrix must be symmetric")
       }
       j <- j + 1L

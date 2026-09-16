@@ -25,7 +25,7 @@ Martcons <- function(dh2, variances = NULL) {
   n <- length(d)
   if (n < 1L) stop("at least one discrepancy is required")
   if (any(d < 0 | d > 1))
-    stop("squared Hellinger distances must lie in \[0, 1\]")
+    stop("squared Hellinger distances must lie in [0, 1]")
   ces <- cumsum(d) / seq_len(n)
   half <- n %/% 2L
   tail <- sum(d[(half + 1L):n]) / (n - half)

@@ -44,7 +44,7 @@ Evmsexp <- function(x, y, alpha) {
     FF[i] <- exp(-V[i])
   }
   a_half <- (0.5^(1 / alpha) + 0.5^(1 / alpha))^alpha
-  .t1_result(F = FF, estimate = FF\[1\], V = V, A_half = a_half,
+  .t1_result(F = FF, estimate = FF[1], V = V, A_half = a_half,
              chi = 2 - 2^alpha, n = length(xs),
              method = "bivariate logistic max-stable distribution")
 }

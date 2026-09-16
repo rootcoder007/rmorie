@@ -127,7 +127,7 @@
 .prsLL_grammar <- function(rules, start = NULL) {
   R <- list()
   for (item in rules) {
-    lhs <- item[\[1\]]
+    lhs <- item[[1]]
     rhs <- item[[2]]
     if (!is.character(lhs) || length(lhs) == 0L || lhs == "") {
       stop(sprintf("prsLL: a left-hand side must be a non-empty symbol, got %s",
@@ -145,8 +145,8 @@
   if (length(R) == 0L) {
     stop("prsLL: the grammar has no productions")
   }
-  S <- if (is.null(start)) R[\[1\]][\[1\]] else as.character(start)
-  lhs_list <- vapply(R, function(x) x[\[1\]], character(1))
+  S <- if (is.null(start)) R[[1]][[1]] else as.character(start)
+  lhs_list <- vapply(R, function(x) x[[1]], character(1))
   if (!(S %in% lhs_list)) {
     stop(sprintf("prsLL: the start symbol %s has no production", S))
   }
@@ -193,7 +193,7 @@
     A <- stack[length(stack)]
     stack <- stack[-length(stack)]
     for (rule in g$rules) {
-      if (rule[\[1\]] != A) next
+      if (rule[[1]] != A) next
       for (s in rule[[2]]) {
         if (s %in% nts && !(s %in% seen)) {
           seen <- c(seen, s)
@@ -234,7 +234,7 @@
 .prsLL_nonterminals <- function(g) {
   out <- character(0)
   for (rule in g$rules) {
-    lhs <- rule[\[1\]]
+    lhs <- rule[[1]]
     if (!(lhs %in% out)) {
       out <- c(out, lhs)
     }
@@ -317,7 +317,7 @@
   while (changed) {
     changed <- FALSE
     for (rule in g$rules) {
-      A <- rule[\[1\]]
+      A <- rule[[1]]
       rhs <- rule[[2]]
       add <- .prsLL_first_seq(rhs, first, nts)
       if (!.prsLL_subset(add, first[[A]])) {
@@ -447,7 +447,7 @@
   while (changed) {
     changed <- FALSE
     for (rule in g$rules) {
-      A <- rule[\[1\]]
+      A <- rule[[1]]
       rhs <- rule[[2]]
       n <- length(rhs)
       for (i in seq_len(n)) {
@@ -505,7 +505,7 @@
   conflicts <- list()
   for (i in seq_along(g$rules)) {
     rule <- g$rules[[i]]
-    A <- rule[\[1\]]
+    A <- rule[[1]]
     rhs <- rule[[2]]
     look <- .prsLL_first_seq(rhs, first, nts)
     cells <- .prsLL_setdiff(look, .prsLL_EPSILON)
@@ -597,7 +597,7 @@
   edges <- list()
   for (A in nts) edges[[A]] <- character(0)
   for (rule in g$rules) {
-    A <- rule[\[1\]]
+    A <- rule[[1]]
     rhs <- rule[[2]]
     for (s in rhs) {
       if (!(s %in% nts)) break
@@ -656,19 +656,19 @@
   for (A in nts) {
     prods <- list()
     for (rule in g$rules) {
-      if (rule[\[1\]] == A) {
+      if (rule[[1]] == A) {
         prods[[length(prods) + 1L]] <- rule[[2]]
       }
     }
     rec <- list()
     for (p in prods) {
-      if (length(p) > 0L && p\[1\] == A) {
+      if (length(p) > 0L && p[1] == A) {
         rec[[length(rec) + 1L]] <- p[-1L]
       }
     }
     base <- list()
     for (p in prods) {
-      if (!(length(p) > 0L && p\[1\] == A)) {
+      if (!(length(p) > 0L && p[1] == A)) {
         base[[length(base) + 1L]] <- p
       }
     }
@@ -808,7 +808,7 @@
   for (s in rhs) {
     if (s %in% nts) {
       result <- .prsLL_parse_rd(g, table, toks, s, pos)
-      sub <- result[\[1\]]
+      sub <- result[[1]]
       pos <- result[[2]]
       kids[[length(kids) + 1L]] <- sub
     } else {
@@ -935,8 +935,8 @@
   if (length(t$conflicts) > 0L) {
     stop(sprintf("prsLL: the grammar is not LL(1) -- %d conflict(s), first at (%s, %s)",
                  length(t$conflicts),
-                 t$conflicts[\[1\]]$nonterminal,
-                 t$conflicts[\[1\]]$lookahead))
+                 t$conflicts[[1]]$nonterminal,
+                 t$conflicts[[1]]$lookahead))
   }
   toks <- c(as.character(tokens), .prsLL_END)
   if (route == "table") {
@@ -944,7 +944,7 @@
   } else {
     result <- .prsLL_parse_rd(g, t$table, toks, g$start, 0L)
   }
-  tree <- result[\[1\]]
+  tree <- result[[1]]
   pos <- result[[2]]
   if (pos != length(toks) - 1L) {
     stop(sprintf("prsLL: input not consumed -- stopped at token %d (%s)",

@@ -124,7 +124,7 @@ morie_dml_clustered <- function(data, treatment, outcome, covariates,
     } else {
       "cluster-robust (2-way, CGM)"
     }
-    n_clusters <- length(unique(cls[\[1\]]))
+    n_clusters <- length(unique(cls[[1]]))
   }
   z <- if (se > 0) ate / se else 0
   out <- list(
@@ -170,7 +170,7 @@ print.morie_dml_clustered <- function(x, ...) {
   ))
   cat(sprintf(
     "  95%% CI = [%.4g, %.4g]  z = %.3f  p = %.3g\n",
-    x$ci95\[1\], x$ci95[2], x$z, x$pval
+    x$ci95[1], x$ci95[2], x$z, x$pval
   ))
   cat(sprintf(
     "  n = %d%s\n", x$n,
@@ -231,9 +231,9 @@ print.morie_dml_clustered <- function(x, ...) {
 #' @noRd
 .dmlc_multiway_se <- function(infl, clusters, n) {
   if (length(clusters) == 1L) {
-    return(.dmlc_cluster_se(infl, clusters[\[1\]], n))
+    return(.dmlc_cluster_se(infl, clusters[[1]], n))
   }
-  a <- clusters[\[1\]]
+  a <- clusters[[1]]
   b <- clusters[[2]]
   inter <- paste(a, b, sep = "|")
   va <- .dmlc_cluster_se(infl, a, n)^2

@@ -62,8 +62,8 @@ Hittime <- function(G, start = NULL, target = 0L) {
       if (deg <= 0) stop(sprintf("vertex %d reaches the target but has no outgoing weight", i))
       A[r, r] <- 1
       for (j in seq_len(n)) {
-        if (W\[i, j\] <= 0 || j == target) next
-        if (pos[j] > 0L) A[r, pos[j]] <- A[r, pos[j]] - W\[i, j\] / deg
+        if (W[i, j] <= 0 || j == target) next
+        if (pos[j] > 0L) A[r, pos[j]] <- A[r, pos[j]] - W[i, j] / deg
       }
     }
     H[idx] <- as.numeric(solve(A, b))

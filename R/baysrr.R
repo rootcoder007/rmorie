@@ -31,7 +31,7 @@ Baysrr <- function(y, M = NULL, lam = NULL) {
   if (is.null(M)) stop("bayes_ridge: a marker matrix is required")
   r <- morie_bayesian_ridge_regression(M, y, lam)
   beta <- as.numeric(r$beta)
-  list(u = beta, beta = beta, estimate = if (length(beta)) beta\[1\] else NA_real_,
+  list(u = beta, beta = beta, estimate = if (length(beta)) beta[1] else NA_real_,
        lam = r$lam, n = r$n, p = r$p,
        method = "posterior mode of a conjugate normal prior = ridge; shared implementation with morie.fn.brreg")
 }

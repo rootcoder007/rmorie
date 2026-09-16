@@ -30,8 +30,8 @@ fzcvm <- function(x, cdf = "norm", args = NULL, h = NULL) {
   } else if (identical(cdf, "norm")) {
     if (is.null(args)) args <- list(mean(x), stats::sd(x))
     u <- (seq_len(n) - 0.5) / n
-    t_grid <- stats::qnorm(u, mean = args[\[1\]], sd = args[[2]])
-    F_ref <- stats::pnorm(t_grid, mean = args[\[1\]], sd = args[[2]])
+    t_grid <- stats::qnorm(u, mean = args[[1]], sd = args[[2]])
+    F_ref <- stats::pnorm(t_grid, mean = args[[1]], sd = args[[2]])
   } else {
     stop("supply a function for non-normal cdf")
   }
@@ -63,17 +63,17 @@ fzcvm <- function(x, cdf = "norm", args = NULL, h = NULL) {
     c(0.347, 0.10), c(0.461, 0.05), c(0.581, 0.025),
     c(0.743, 0.01), c(1.168, 0.001)
   )
-  if (w2 < tbl[\[1\]]\[1\]) {
+  if (w2 < tbl[[1]][1]) {
     return(0.5)
   }
-  if (w2 > tbl[[length(tbl)]]\[1\]) {
+  if (w2 > tbl[[length(tbl)]][1]) {
     return(tbl[[length(tbl)]][2] * 0.5)
   }
   for (i in seq_len(length(tbl) - 1)) {
     a <- tbl[[i]]
     b <- tbl[[i + 1]]
-    if (w2 >= a\[1\] && w2 <= b\[1\]) {
-      lp <- log(a[2]) + (log(b[2]) - log(a[2])) * (w2 - a\[1\]) / (b\[1\] - a\[1\])
+    if (w2 >= a[1] && w2 <= b[1]) {
+      lp <- log(a[2]) + (log(b[2]) - log(a[2])) * (w2 - a[1]) / (b[1] - a[1])
       return(exp(lp))
     }
   }

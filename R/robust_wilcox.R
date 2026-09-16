@@ -39,7 +39,7 @@ morie_ideal_fourths <- function(x) {
   h <- n / 4 + 5 / 12 - j
   k <- n - j + 1
   list(q1 = (1 - h) * v[j] + h * v[j + 1],
-       q2 = (1 - h) * v[k] + h * v\[k - 1\], j = j, h = h, k = k)
+       q2 = (1 - h) * v[k] + h * v[k - 1], j = j, h = h, k = k)
 }
 
 #' @rdname morie_ideal_fourths
@@ -529,7 +529,7 @@ morie_brunner_dette_munk <- function(groups) {
   VN <- diag(N * svec / nvec, J, J)
   C <- diag(1, J, J) - matrix(1, J, J) / J
   trVN <- sum(diag(VN))
-  c11 <- C\[1, 1\]
+  c11 <- C[1, 1]
   F <- N * as.numeric(t(phat) %*% C %*% phat) / (c11 * trVN)
   nu1 <- c11^2 * trVN^2 / sum(diag(C %*% VN %*% C %*% VN))
   lam <- diag(1 / (nvec - 1), J, J)
@@ -600,7 +600,7 @@ morie_winsorized_regression <- function(X, y, tr = 0.2, n_iter = 20,
   mvals <- apply(Xm, 2, function(c) morie_winsorized_mean(c, tr))
   M <- matrix(0, p, p)
   for (i in seq_len(p)) for (j in seq_len(p))
-    M\[i, j\] <- morie_winsorized_correlation(Xm[, i], Xm[, j], tr)$cov
+    M[i, j] <- morie_winsorized_correlation(Xm[, i], Xm[, j], tr)$cov
   ma <- vapply(seq_len(p), function(i)
     morie_winsorized_correlation(Xm[, i], y, tr)$cov, numeric(1))
   slope <- solve(M, ma)

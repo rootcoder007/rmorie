@@ -36,7 +36,7 @@ Evhrid <- function(x, y, lam) {
       b * .s03pnorm(lam + log(a / b) / (2 * lam))
     FF[i] <- exp(-V[i])
   }
-  .t1_result(F = FF, estimate = FF\[1\], V = V, A_half = .s03pnorm(lam),
+  .t1_result(F = FF, estimate = FF[1], V = V, A_half = .s03pnorm(lam),
              chi = 2 - 2 * .s03pnorm(lam), n = length(xs),
              method = "Husler-Reiss bivariate extreme-value dependence")
 }

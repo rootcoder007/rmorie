@@ -52,7 +52,7 @@ DiffP <- function(A, X, K_clusters = 2, S = NULL, seed = 42) {
   for (r in seq_len(K)) for (s in seq_len(K)) {
     acc <- 0
     for (i in seq_len(n)) for (j in seq_len(n))
-      acc <- acc + Sm[i, r] * Am\[i, j\] * Sm[j, s]
+      acc <- acc + Sm[i, r] * Am[i, j] * Sm[j, s]
     Ap[r, s] <- acc
   }
   Hp <- matrix(0, K, f)
@@ -65,7 +65,7 @@ DiffP <- function(A, X, K_clusters = 2, S = NULL, seed = 42) {
   for (i in seq_len(n)) for (j in seq_len(n)) {
     s <- 0
     for (r in seq_len(K)) s <- s + Sm[i, r] * Sm[j, r]
-    ll <- ll + (Am\[i, j\] - s)^2
+    ll <- ll + (Am[i, j] - s)^2
   }
   ll <- sqrt(ll) / n
   ent <- 0

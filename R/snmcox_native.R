@@ -43,9 +43,9 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
   last <- 0.0
   if (length(treat_times)) {
     iv <- lapply(treat_times, function(v) as.numeric(v))
-    ord <- order(vapply(iv, function(v) v\[1\], numeric(1)))
+    ord <- order(vapply(iv, function(v) v[1], numeric(1)))
     for (idx in ord) {
-      a <- iv[[idx]]\[1\]
+      a <- iv[[idx]][1]
       b <- iv[[idx]][2]
       lo <- max(a, last, 0.0)
       hi <- min(b, T)
@@ -59,7 +59,7 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
   off + on * exp(p)
 }
 
-# fitted E\[A | L\]: logistic when the treatment is binary, least squares else
+# fitted E[A | L]: logistic when the treatment is binary, least squares else
 #' Fitted E\[A | L\]: logistic when the treatment is binary, least squares
 #' else
 #'
@@ -225,7 +225,7 @@ morie_snmcox <- function(time, event, treatment_history,
   }
   ct <- if (is.null(censor_time)) NULL else as.numeric(censor_time)
 
-  lo <- as.numeric(psi_range\[1\])
+  lo <- as.numeric(psi_range[1])
   hi <- as.numeric(psi_range[2])
   if (!(lo < hi)) stop("snmcox: psi_range must be increasing")
   ng <- as.integer(n_grid)

@@ -278,7 +278,7 @@ bert_encoder <- function(X, blocks, n_heads, pad_mask = NULL,
   storage.mode(cur) <- "double"
   attn <- list()
   for (b in blocks) {
-    eb <- encoder_block(cur, b[\[1\]], b[[2]], b[[3]], b[[4]],
+    eb <- encoder_block(cur, b[[1]], b[[2]], b[[3]], b[[4]],
                         b[[5]], b[[6]], b[[7]], b[[8]], n_heads,
                         pad_mask = pad_mask, gain1 = b$gain1,
                         bias1 = b$bias1, gain2 = b$gain2,

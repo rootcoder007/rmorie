@@ -57,7 +57,7 @@ morie_forsnp <- function(genotype, freqs, theta = 0) {
   locus <- numeric(length(genotype))
   rmp <- 1
   for (i in seq_along(genotype)) {
-    a1 <- as.character(genotype[[i]]\[1\])
+    a1 <- as.character(genotype[[i]][1])
     a2 <- as.character(genotype[[i]][2])
     fr <- freqs[[i]]
     if (is.null(fr[[a1]]) || is.null(fr[[a2]])) {

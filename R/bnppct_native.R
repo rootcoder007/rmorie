@@ -286,9 +286,9 @@ morie_bnppct <- function(y, quantile = 0.5, route = "mixture", alpha = 1,
          draws = draws[[j]])
   })
 
-  res <- list(quantiles = out, estimate = out[\[1\]]$estimate,
-              se = out[\[1\]]$sd, n = n, route = route,
-              cred = as.numeric(cred), n_draws = length(draws[\[1\]]),
+  res <- list(quantiles = out, estimate = out[[1]]$estimate,
+              se = out[[1]]$sd, n = n, route = route,
+              cred = as.numeric(cred), n_draws = length(draws[[1]]),
               min_mass_carried = min_mass, seed = as.integer(seed),
               method = "nonparametric Bayes posterior of the quantile function")
   if (!is.null(fit)) {

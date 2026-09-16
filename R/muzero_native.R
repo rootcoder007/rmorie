@@ -32,7 +32,7 @@
 .ghc_muzero_add_noise <- function(prior, alpha, frac, seed) {
   if (alpha <= 0) stop("muzero: dirichlet_alpha must be > 0")
   if (frac < 0 || frac > 1)
-    stop("muzero: exploration_fraction must lie in \[0, 1\]")
+    stop("muzero: exploration_fraction must lie in [0, 1]")
   e <- .ghc_rng(seed)
   g <- vapply(prior, function(p) .ghc_muzero_gamma_rv(alpha, e),
               numeric(1))
@@ -94,7 +94,7 @@
                        integer(1)))
   sqrt_total <- if (total > 0L) sqrt(total) else 0
   best <- -Inf
-  best_a <- A\[1\]
+  best_a <- A[1]
   for (a in A) {
     ch <- node$children[[a]]
     expl <- ch$prior * sqrt_total / (1 + ch$visits) *
@@ -156,7 +156,7 @@ morie_muzero <- function(observation, actions, representation,
   predict <- function(s) {
     calls[2] <<- calls[2] + 1L
     out <- prediction(s)
-    p <- as.numeric(out[\[1\]])
+    p <- as.numeric(out[[1]])
     if (length(p) != length(A))
       stop(paste0("muzero: prediction returned ", length(p),
                   " priors for ", length(A), " actions"))
@@ -183,9 +183,9 @@ morie_muzero <- function(observation, actions, representation,
       path[[length(path) + 1L]] <- node
     }
     parent <- path[[length(path) - 1L]]
-    calls\[1\] <- calls\[1\] + 1L
+    calls[1] <- calls[1] + 1L
     rd <- dynamics(parent$state, acts[[length(acts)]])
-    node$reward <- as.numeric(rd[\[1\]])
+    node$reward <- as.numeric(rd[[1]])
     prp <- predict(rd[[2]])
     node <- .ghc_muzero_node_expand(node, rd[[2]], prp$p, A)
     path[[length(path)]] <- node
@@ -215,7 +215,7 @@ morie_muzero <- function(observation, actions, representation,
          .ghc_muzero_node_value(root$children[[a]])), as.character(A)),
        prior = setNames(lapply(A, function(a)
          root$children[[a]]$prior), as.character(A)),
-       n_dynamics_calls = calls\[1\], n_prediction_calls = calls[2],
+       n_dynamics_calls = calls[1], n_prediction_calls = calls[2],
        simulations = simulations,
        method = "MuZero MCTS (Schrittwieser et al. 2020, eqs. 2-5)")
 }

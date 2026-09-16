@@ -65,7 +65,7 @@ Aitilr <- function(x, V = NULL) {
   }
   a2 <- a2 / D
   list(
-    y = y, estimate = if (p > 0L) y\[1\] else NA_real_, clr = z, norm = nrm,
+    y = y, estimate = if (p > 0L) y[1] else NA_real_, clr = z, norm = nrm,
     aitchison_norm = sqrt(a2), D = D,
     method = "ilr(x) = V' clr(x), V the Egozcue et al. (2003) SBP basis, eq. (11)"
   )

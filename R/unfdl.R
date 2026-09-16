@@ -50,7 +50,7 @@ unfdl <- function(x, k = 2L, n_iter = 5000L, tol = 1e-6) {
     out <- matrix(0, nrow(A), nrow(B))
     for (i in seq_len(nrow(A))) {
       for (j in seq_len(nrow(B))) {
-        out\[i, j\] <- sqrt(sum((A[i, ] - B[j, ])^2))
+        out[i, j] <- sqrt(sum((A[i, ] - B[j, ])^2))
       }
     }
     out

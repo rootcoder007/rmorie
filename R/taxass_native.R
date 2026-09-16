@@ -103,7 +103,7 @@ Taxass <- function(kmer_taxa, parent) {
     while (!(x %in% pa)) x <- par_of(x)
     x
   }
-  label <- top\[1\]
+  label <- top[1]
   if (length(top) > 1L) {
     for (o in top[-1]) label <- lca2(label, o)
   }

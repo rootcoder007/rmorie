@@ -53,7 +53,7 @@
 normalise_bbox <- function(box, width, height, scale = 1000) {
   if (length(box) < 4L)
     stop("ocrwit: the box must have four coordinates")
-  x0 <- as.numeric(box\[1\])
+  x0 <- as.numeric(box[1])
   y0 <- as.numeric(box[2])
   x1 <- as.numeric(box[3])
   y1 <- as.numeric(box[4])

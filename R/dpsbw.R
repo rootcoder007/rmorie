@@ -36,7 +36,7 @@ Stickw <- function(alpha = 1, truncation = 10, V = NULL, base = 2) {
   rest <- rest * (1 - Vs[i]) }
   tot <- 0
   for (x in pi_) tot <- tot + x
-  list(estimate = if (length(pi_)) pi_\[1\] else NaN, pi = pi_, V = Vs,
+  list(estimate = if (length(pi_)) pi_[1] else NaN, pi = pi_, V = Vs,
        remainder = rest, mass = tot,
        method = "Sethuraman (1994) stick-breaking, Beta quantiles at low-discrepancy points")
 }

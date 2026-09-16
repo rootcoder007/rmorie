@@ -42,7 +42,7 @@ Emkfst <- function(y, init = NULL, max_iter = 50) {
   } else {
     init <- as.numeric(init)
     if (length(init) != 3L) stop("init must be (phi, Q, R)")
-    phi <- init\[1\]
+    phi <- init[1]
     Q <- init[2]
     R <- init[3]
   }
@@ -57,8 +57,8 @@ Emkfst <- function(y, init = NULL, max_iter = 50) {
     xf <- numeric(n + 1L)
     Pf <- numeric(n + 1L)
     Kg <- numeric(n + 1L)
-    xf\[1\] <- mu0
-    Pf\[1\] <- Sig0
+    xf[1] <- mu0
+    Pf[1] <- Sig0
     loglik <- 0
     for (t in seq_len(n)) {
       xp[t + 1L] <- phi * xf[t]

@@ -92,7 +92,7 @@ Hcoreg <- function(coords, r, lam, model = 2) {
     }
   }
   d <- sort(d)
-  min_dist <- if (length(d)) d\[1\] else Inf
+  min_dist <- if (length(d)) d[1] else Inf
   feasible <- !any(close)
   retained <- ifelse(close, 0, 1)
   n_retained <- sum(retained)

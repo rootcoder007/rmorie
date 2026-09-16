@@ -113,7 +113,7 @@
 .morie_philox4x32 <- function(counter, key, rounds = .MORIE_PHILOX_ROUNDS) {
   # counter: an (n x 4) numeric matrix of 32-bit words; key: length-2 numeric.
   ctr <- matrix(as.numeric(counter), ncol = 4)
-  k0 <- key\[1\] %% 4294967296
+  k0 <- key[1] %% 4294967296
   k1 <- key[2] %% 4294967296
   for (r in seq_len(rounds)) {
     p0 <- .morie_mulhilo32(.MORIE_PHILOX_M0, ctr[, 1])

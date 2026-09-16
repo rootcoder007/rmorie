@@ -26,7 +26,7 @@ morie_state_space_model <- function(x) {
   kf <- function(R, Q) {
     a <- numeric(n)
     P <- numeric(n)
-    a_prev <- y\[1\]
+    a_prev <- y[1]
     P_prev <- 1e7
     ll <- 0
     for (t in seq_len(n)) {
@@ -46,9 +46,9 @@ morie_state_space_model <- function(x) {
   # what dlm::dlmMLE does for this model.
   v0 <- stats::var(diff(y)) / 2
   opt <- stats::optim(c(log(v0), log(v0)), function(p) {
-    -kf(exp(p\[1\]), exp(p[2]))$ll
+    -kf(exp(p[1]), exp(p[2]))$ll
   }, method = "Nelder-Mead")
-  R <- exp(opt$par\[1\])
+  R <- exp(opt$par[1])
   Q <- exp(opt$par[2])
   f <- kf(R, Q)
   a <- f$a

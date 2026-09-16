@@ -32,7 +32,7 @@ Baysrnd <- function(y, X = NULL, group = NULL, sigma2 = NULL, tau2 = NULL) {
   if (is.null(g)) stop("shrinkage_random: a grouping vector is required")
   r <- Bayhier(y, g, sigma2 = sigma2, tau2 = tau2)
   u <- r$theta - r$mu
-  list(u_g = u, estimate = u\[1\], theta = r$theta, lambda_g = r$lambda_g,
+  list(u_g = u, estimate = u[1], theta = r$theta, lambda_g = r$lambda_g,
        theta_nopool = r$theta_nopool, mu = r$mu, sigma2 = r$sigma2, tau2 = r$tau2,
        n_g = r$n_g, G = r$G, n = r$n,
        method = "u_g = lambda_g (ybar_g - mu); shared implementation with morie.fn.bayhier")

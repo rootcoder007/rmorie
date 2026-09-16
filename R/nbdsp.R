@@ -56,7 +56,7 @@ Nbdsp <- function(y, X, link = "log", max_iter = 100L, tol = 1e-12) {
     b <- numeric(p)
     for (i in seq_len(n)) {
       eta <- 0
-      for (j in seq_len(p)) eta <- eta + XX\[i, j\] * beta[j]
+      for (j in seq_len(p)) eta <- eta + XX[i, j] * beta[j]
       eta <- min(max(eta, -300), 300)
       m <- exp(eta)
       mu[i] <- m
@@ -72,7 +72,7 @@ Nbdsp <- function(y, X, link = "log", max_iter = 100L, tol = 1e-12) {
     sm <- 0
     for (i in seq_len(n)) {
       eta <- 0
-      for (j in seq_len(p)) eta <- eta + XX\[i, j\] * beta[j]
+      for (j in seq_len(p)) eta <- eta + XX[i, j] * beta[j]
       m <- exp(min(max(eta, -300), 300))
       mu[i] <- m
       s2 <- s2 + (yy[i] - m)^2 - m

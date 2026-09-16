@@ -80,7 +80,7 @@ morie_km_native <- function(time, event, alpha = 0.05,
     lo[is.na(lo)] <- 0
     hi[is.na(hi)] <- 1
   }
-  med <- if (any(surv <= 0.5)) times[which(surv <= 0.5)\[1\]] else NA_real_
+  med <- if (any(surv <= 0.5)) times[which(surv <= 0.5)[1]] else NA_real_
   rmst <- if (length(times)) {
     edges <- c(0, times)
     heights <- c(1, surv)[-(length(surv) + 1L)]

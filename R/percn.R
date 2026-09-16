@@ -34,7 +34,7 @@ Percn <- function(X, w, b, y = NULL, eta = 1) {
   p <- ncol(XX)
   if (length(ww) != p) stop("perceptron_activation: w does not match the columns of X")
   if (length(bb) != 1L) stop("perceptron_activation: b must be a single value")
-  b0 <- bb\[1\]
+  b0 <- bb[1]
   yy <- if (!is.null(y)) .s03vec(y) else NULL
   if (!is.null(yy) && length(yy) != nrow(XX)) {
     stop("perceptron_activation: y does not match the rows of X")
@@ -47,15 +47,15 @@ Percn <- function(X, w, b, y = NULL, eta = 1) {
   upd_b <- 0
   for (i in seq_len(n)) {
     s <- b0
-    for (j in seq_len(p)) s <- s + XX\[i, j\] * ww[j]
+    for (j in seq_len(p)) s <- s + XX[i, j] * ww[j]
     v[i] <- s
     a[i] <- if (s > 0) 1 else 0
     sg[i] <- if (s > 0) 1 else if (s < 0) -1 else 0
     if (!is.null(yy) && yy[i] * s <= 0) {
-      for (j in seq_len(p)) upd[j] <- upd[j] + as.numeric(eta) * yy[i] * XX\[i, j\]
+      for (j in seq_len(p)) upd[j] <- upd[j] + as.numeric(eta) * yy[i] * XX[i, j]
       upd_b <- upd_b + as.numeric(eta) * yy[i]
     }
   }
-  list(estimate = a\[1\], a = a, v = v, sign = sg, update = upd, update_b = upd_b,
+  list(estimate = a[1], a = a, v = v, sign = sg, update = upd, update_b = upd_b,
        n = n, method = "v = Xw + b with the unit-step g of Chapter 10 Sect. 10.2 (1 if v > 0, else 0)")
 }

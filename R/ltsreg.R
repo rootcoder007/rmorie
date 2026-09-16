@@ -92,7 +92,7 @@ Ltsreg <- function(y, X, h = NULL, max_starts = 200000, max_iter = 100L) {
   res <- numeric(n)
   for (i in seq_len(n)) {
     s <- yy[i]
-    for (j in seq_len(p)) s <- s - bth[j] * Xm\[i, j\]
+    for (j in seq_len(p)) s <- s - bth[j] * Xm[i, j]
     res[i] <- s
   }
   list(estimate = bobj, coef = bth, subset = as.numeric(bidx - 1L), residual = res,

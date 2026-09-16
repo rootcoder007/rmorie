@@ -72,7 +72,7 @@ Btnpqr <- function(X, y, tau = 0.5, B = 200, alpha = 0.05, seed = 1) {
   }
   list(beta_b = reps, beta_hat = bh, se = se, lo = lo, hi = hi,
        loss = .btnpqr_loss(Xm, yy, bh, t), tau = t, n = n, p = p,
-       B = as.integer(B), estimate = bh\[1\],
+       B = as.integer(B), estimate = bh[1],
        method = "Koenker (2005) Quantile Regression, CUP, sec. 3.9 (xy-pair bootstrap)")
 }
 

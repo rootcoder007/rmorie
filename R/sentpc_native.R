@@ -58,7 +58,7 @@ morie_sentpc_unescape_whitespace <- function(text,
 #' @keywords internal
 #' @noRd
 .sentpc_units <- function(escaped) {
-  s <- strsplit(escaped, "")[\[1\]]
+  s <- strsplit(escaped, "")[[1]]
   out <- character(0)
   cur <- ""
   for (ch in s) {
@@ -117,7 +117,7 @@ morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
   # rebuild keys: store raw character vectors
   words2 <- list()
   for (k in names(words)) {
-    words2[[k]] <- list(rep = strsplit(substr(k, 1L, nchar(k) - 1L), "")[\[1\]],
+    words2[[k]] <- list(rep = strsplit(substr(k, 1L, nchar(k) - 1L), "")[[1]],
                        f = words[[k]])
   }
   alphabet <- sort(unique(unlist(lapply(words2, function(x) x$rep), use.names = FALSE)))
@@ -139,7 +139,7 @@ morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
     keys <- names(pairs)
     best_i <- which.max(counts)
     best_key <- keys[best_i]
-    best <- strsplit(best_key, "\r", fixed = TRUE)[\[1\]]
+    best <- strsplit(best_key, "\r", fixed = TRUE)[[1]]
     merges[[length(merges) + 1L]] <- best
     vocab <- unique(c(vocab, paste0(best, collapse = "")))
     nw <- list()
@@ -149,7 +149,7 @@ morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
       out <- character(0)
       i <- 1L
       while (i <= length(r)) {
-        if (i < length(r) && r[i] == best\[1\] && r[i + 1L] == best[2]) {
+        if (i < length(r) && r[i] == best[1] && r[i + 1L] == best[2]) {
           out <- c(out, paste0(best, collapse = ""))
           i <- i + 2L
         } else { out <- c(out, r[i])
@@ -158,7 +158,7 @@ morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
       key <- paste0(out, collapse = "\r")
       if (is.null(nw[[key]])) nw[[key]] <- f else nw[[key]] <- nw[[key]] + f
     }
-    words2 <- lapply(names(nw), function(k) list(rep = strsplit(k, "\r", fixed = TRUE)[\[1\]], f = nw[[k]]))
+    words2 <- lapply(names(nw), function(k) list(rep = strsplit(k, "\r", fixed = TRUE)[[1]], f = nw[[k]]))
     names(words2) <- names(nw)
   }
   list(merges = merges, vocab = sort(vocab),
@@ -181,9 +181,9 @@ morie_sentpc_encode_bpe <- function(text, model, add_prefix = TRUE) {
   esc <- morie_sentpc_escape_whitespace(text, add_prefix)
   out <- character(0)
   for (w in .sentpc_units(esc)) {
-    toks <- strsplit(w, "", fixed = TRUE)[\[1\]]
+    toks <- strsplit(w, "", fixed = TRUE)[[1]]
     for (ab in model$merges) {
-      a <- ab\[1\]
+      a <- ab[1]
       b <- ab[2]
       ab_join <- paste0(ab, collapse = "")
       i <- 1L
@@ -246,7 +246,7 @@ morie_sentpc_viterbi_segment <- function(text, piece_logp,
   while (i > 1L) {
     st <- back[[i]]
     pieces <- c(st[2], pieces)
-    i <- as.integer(st\[1\])
+    i <- as.integer(st[1])
   }
   list(pieces = pieces, logp = best[n + 1L], n_pieces = length(pieces),
        algorithm = "unigram (Viterbi)")

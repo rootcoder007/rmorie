@@ -21,8 +21,8 @@
 #' @export
 agset <- function(options, setter_ideal, reversion) {
   options <- as.numeric(options)
-  setter_ideal <- as.numeric(setter_ideal)\[1\]
-  reversion <- as.numeric(reversion)\[1\]
+  setter_ideal <- as.numeric(setter_ideal)[1]
+  reversion <- as.numeric(reversion)[1]
   if (length(options) == 0L) {
     return(list(
       chosen = NA_real_, power = 0,

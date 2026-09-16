@@ -66,7 +66,7 @@ Atalib <- function(y = NULL, Q = NULL, K = NULL, V = NULL, slopes = NULL, causal
       for (j in seq_len(nk)) {
         dot <- 0
         for (t in seq_len(d)) dot <- dot + Qm[i, t] * Km[j, t]
-        row[j] <- dot * sc + B\[i, j\]
+        row[j] <- dot * sc + B[i, j]
       }
       w <- .atalib_softmax(row)
       Wh[i, ] <- w
@@ -76,7 +76,7 @@ Atalib <- function(y = NULL, Q = NULL, K = NULL, V = NULL, slopes = NULL, causal
     if (h == 1L) { W0 <- Wh
     B0 <- B }
   }
-  list(output = if (length(sl) == 1L) outs[\[1\]] else outs, estimate = outs[\[1\]]\[1, 1\],
+  list(output = if (length(sl) == 1L) outs[[1]] else outs, estimate = outs[[1]][1, 1],
        weights = W0, bias = B0, slopes = sl, n_q = nq, n_k = nk, d = d, d_v = dv,
        causal = isTRUE(causal),
        method = "softmax(QK'/sqrt(d) - m|i-j|) V; Press, Smith and Lewis (2022), arXiv:2108.12409")
@@ -94,7 +94,7 @@ Atalib <- function(y = NULL, Q = NULL, K = NULL, V = NULL, slopes = NULL, causal
   B <- matrix(0, nrow = n_q, ncol = n_k)
   for (i in seq_len(n_q)) {
     for (j in seq_len(n_k)) {
-      B\[i, j\] <- if (isTRUE(causal) && j > i) -Inf else -as.numeric(slope) * abs(i - j)
+      B[i, j] <- if (isTRUE(causal) && j > i) -Inf else -as.numeric(slope) * abs(i - j)
     }
   }
   B

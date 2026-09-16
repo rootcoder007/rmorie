@@ -38,7 +38,7 @@ Clcrp <- function(y, distances, alpha = 1, decay = 1, seed = 42) {
   links <- integer(n)
   for (i in seq_len(n)) {
     w <- numeric(n)
-    for (j in seq_len(n)) w[j] <- if (j == i) alpha else exp(-D\[i, j\] / decay)
+    for (j in seq_len(n)) w[j] <- if (j == i) alpha else exp(-D[i, j] / decay)
     tot <- 0
     for (v in w) tot <- tot + v
     u <- .ghc_unif(e, 1L) * tot
@@ -69,7 +69,7 @@ Clcrp <- function(y, distances, alpha = 1, decay = 1, seed = 42) {
   for (i in seq_len(n)) {
     r <- find(i)
     if (!(r %in% roots)) roots <- c(roots, r)
-    z[i] <- which(roots == r)\[1\]
+    z[i] <- which(roots == r)[1]
   }
   K <- length(roots)
   counts <- vapply(seq_len(K), function(c) sum(z == c), 0L)

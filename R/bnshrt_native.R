@@ -257,7 +257,7 @@ morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
     return(list(estimate = NULL, set = list(), n_feasible = 0L,
                 discrepancy = disc,
                 note = "no grid point is feasible at this tolerance"))
-  bs <- vapply(keep, function(p) p\[1\], numeric(1))
+  bs <- vapply(keep, function(p) p[1], numeric(1))
   gs <- vapply(keep, function(p) p[2], numeric(1))
   list(estimate = list(beta = mean(bs), gamma = mean(gs)),
        set = keep, n_feasible = length(keep),

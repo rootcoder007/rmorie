@@ -36,7 +36,7 @@ RipG <- function(points, window, r) {
   if (n < 2L) stop("`points` needs at least 2 events")
   w <- as.numeric(window)
   if (length(w) != 4L) stop("`window` must be (xmin, xmax, ymin, ymax)")
-  x0 <- w\[1\]
+  x0 <- w[1]
   x1 <- w[2]
   y0 <- w[3]
   y1 <- w[4]

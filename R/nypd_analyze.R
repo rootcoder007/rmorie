@@ -162,7 +162,7 @@ morie_nypd_all_analyses <- function(arrests_df = NULL, complaint_df = NULL,
   for (nm in names(fns)) {
     results[[nm]] <- tryCatch(fns[[nm]](), error = function(e) {
       .morie_nypd_result(sprintf("nypd.%s (failed)", nm),
-                         warnings = sprintf("%s: %s", class(e)\[1\],
+                         warnings = sprintf("%s: %s", class(e)[1],
                                             conditionMessage(e)))
     })
     if (!is.null(out_dir)) {

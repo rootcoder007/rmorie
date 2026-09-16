@@ -45,7 +45,7 @@ morie_solve <- function(A, b = NULL) {
 #' @export
 morie_one_way <- function(groups) {
   G <- lapply(groups, as.numeric)
-  r <- length(G[\[1\]])
+  r <- length(G[[1]])
   a <- length(G)
   if (any(vapply(G, length, 1L) != r)) {
     stop("need a balanced layout (equal group sizes)")
@@ -183,7 +183,7 @@ morie_ridge <- function(X, y, lambda, add_intercept = TRUE) {
   y <- as.numeric(y)
   p <- ncol(X)
   D <- diag(p)
-  if (add_intercept) D\[1, 1\] <- 0
+  if (add_intercept) D[1, 1] <- 0
   beta <- as.numeric(morie_solve(
     t(X) %*% X + lambda * D,
     t(X) %*% y
@@ -330,8 +330,8 @@ morie_reml_loglik <- function(X, Z, y, D, R = NULL) {
   A <- t(X) %*% Vi %*% X
   beta <- morie_solve(A, t(X) %*% Vi %*% y)
   r <- y - X %*% beta
-  ll <- -0.5 * determinant(A, logarithm = TRUE)$modulus\[1\] -
-    0.5 * determinant(V, logarithm = TRUE)$modulus\[1\] -
+  ll <- -0.5 * determinant(A, logarithm = TRUE)$modulus[1] -
+    0.5 * determinant(V, logarithm = TRUE)$modulus[1] -
     0.5 * as.numeric(t(r) %*% Vi %*% r)
   list(loglik = ll, beta = as.numeric(beta))
 }
@@ -348,7 +348,7 @@ morie_lmm_loglik <- function(X, Z, y, D, R = NULL, beta = NULL) {
   }
   r <- y - X %*% beta
   ll <- -0.5 * n * log(2 * pi) -
-    0.5 * determinant(V, logarithm = TRUE)$modulus\[1\] -
+    0.5 * determinant(V, logarithm = TRUE)$modulus[1] -
     0.5 * as.numeric(t(r) %*% Vi %*% r)
   list(loglik = ll, beta = as.numeric(beta))
 }
@@ -401,7 +401,7 @@ morie_gblup_model <- function(y, Z_L, G, sigma2_g,
     X, Z_L, y, sigma2_g * as.matrix(G),
     diag(sigma2_e, n)
   )
-  list(mu = fit$blue\[1\], b = fit$blup)
+  list(mu = fit$blue[1], b = fit$blup)
 }
 
 #' @noRd
@@ -863,11 +863,11 @@ morie_multinomial_block <- function(X, y, beta0, beta, lambda,
   eta <- as.numeric(Xs %*% b_cur)
   ystar <- eta + ((as.integer(y) == cls) - pc) / w
   D <- diag(p + 1)
-  D\[1, 1\] <- 0
+  D[1, 1] <- 0
   A <- t(Xs) %*% (Xs * w) + lambda * D
   sol <- as.numeric(morie_solve(A, t(Xs) %*% (w * ystar)))
   list(
-    beta0 = sol\[1\], beta = sol[-1], weights = w,
+    beta0 = sol[1], beta = sol[-1], weights = w,
     working_response = ystar
   )
 }
@@ -893,9 +893,9 @@ morie_penalized_poisson <- function(X, y, lambda = 1,
   n <- length(y)
   p <- ncol(X)
   beta <- rep(0, p)
-  if (add_intercept) beta\[1\] <- log(max(mean(y), 1e-6))
+  if (add_intercept) beta[1] <- log(max(mean(y), 1e-6))
   D <- diag(p)
-  if (add_intercept) D\[1, 1\] <- 0
+  if (add_intercept) D[1, 1] <- 0
   it <- 0L
   for (i in seq_len(n_iter)) {
     it <- i
@@ -986,15 +986,15 @@ morie_rkhs_fit <- function(K, y, lambda = 1) {
   n <- length(y)
   A <- matrix(0, n + 1, n + 1)
   rhs <- numeric(n + 1)
-  A\[1, 1\] <- 1
+  A[1, 1] <- 1
   A[1, -1] <- colSums(K) / n
-  rhs\[1\] <- mean(y)
+  rhs[1] <- mean(y)
   KtK <- t(K) %*% K
-  A\[-1, 1\] <- colSums(K) * 2 / n
+  A[-1, 1] <- colSums(K) * 2 / n
   A[-1, -1] <- 2 * KtK / n + lambda * K
   rhs[-1] <- 2 * as.numeric(t(K) %*% y) / n
   sol <- as.numeric(morie_solve(A, rhs))
-  eta0 <- sol\[1\]
+  eta0 <- sol[1]
   beta <- sol[-1]
   fitted <- morie_rkhs_predict(K, beta, eta0)
   resid <- y - fitted

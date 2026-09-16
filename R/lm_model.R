@@ -80,7 +80,7 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
   na_predictor <- match.arg(na_predictor)
   na_response <- match.arg(na_response)
   data <- .morie_check_data(data, arg = "data")
-  resp <- all.vars(formula)\[1\]
+  resp <- all.vars(formula)[1]
   preds <- setdiff(all.vars(formula), resp)
 
   if (isTRUE(nofit)) {

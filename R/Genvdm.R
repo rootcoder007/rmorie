@@ -22,7 +22,7 @@ Genvdm <- function(G_components, n_proposed, target = 0.8) {
   g <- .s03vec(G_components)
   if (length(g) != 3L) stop("d_study_decision: G_components must hold three variances")
   if (any(g < 0)) stop("d_study_decision: variance components must be non-negative")
-  vp <- g\[1\]
+  vp <- g[1]
   vi <- g[2]
   vpi <- g[3]
   ns <- as.integer(.s03vec(n_proposed))

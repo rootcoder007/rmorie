@@ -18,7 +18,7 @@ Edfbinom <- function(n, fx, i = NULL) {
   n <- as.integer(n)
   fx <- as.numeric(fx)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
-  if (fx < 0 || fx > 1) stop("fx must lie in \[0, 1\].", call. = FALSE)
+  if (fx < 0 || fx > 1) stop("fx must lie in [0, 1].", call. = FALSE)
   pmf <- NaN
   cdf <- NaN
   if (!is.null(i)) {
@@ -40,7 +40,7 @@ Ostatcdf <- function(t, r, n, cdf) {
   n <- as.integer(n)
   if (r < 1L || r > n) stop("need 1 <= r <= n.", call. = FALSE)
   p <- if (is.function(cdf)) as.numeric(cdf(t)) else as.numeric(cdf)
-  if (p < 0 || p > 1) stop("F_X(t) must lie in \[0, 1\].", call. = FALSE)
+  if (p < 0 || p > 1) stop("F_X(t) must lie in [0, 1].", call. = FALSE)
   ii <- r:n
   val <- sum(choose(n, ii) * p^ii * (1 - p)^(n - ii))
   list(cdf = val, sf = 1 - val, fx = p, r = r, n = n, t = as.numeric(t))
@@ -71,7 +71,7 @@ Ostatbeta <- function(u, r, n) {
   n <- as.integer(n)
   u <- as.numeric(u)
   if (r < 1L || r > n) stop("need 1 <= r <= n.", call. = FALSE)
-  if (u < 0 || u > 1) stop("u must lie in \[0, 1\].", call. = FALSE)
+  if (u < 0 || u > 1) stop("u must lie in [0, 1].", call. = FALSE)
   a <- as.numeric(r)
   b <- as.numeric(n - r + 1)
   coef <- factorial(n) / (factorial(r - 1) * factorial(n - r))
@@ -238,7 +238,7 @@ Placement <- function(x, y) {
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   plc <- vapply(ys, function(v) sum(xs <= v), 0)
   list(placements = plc, ranks = plc + seq_len(n),
-       blocks = c(plc\[1\], diff(plc)), total = sum(plc), m = m, n = n)
+       blocks = c(plc[1], diff(plc)), total = sum(plc), m = m, n = n)
 }
 
 #' Distribution-free quantile confidence interval -- Sec. 5.2, p. 158
@@ -653,7 +653,7 @@ Wsrn <- function(p2, alpha = 0.05, beta = 0.05, twosided = FALSE) {
 .gbWsrNull <- function(n) {
   total <- n * (n + 1) / 2
   counts <- numeric(total + 1)
-  counts\[1\] <- 1
+  counts[1] <- 1
   for (r in 1:n) {
     for (t in seq(total, r, by = -1)) counts[t + 1] <- counts[t + 1] + counts[t - r + 1]
   }
@@ -1018,14 +1018,14 @@ Ksexact <- function(d, n) {
   t <- k - n * d
   m <- 2L * k - 1L
   h <- matrix(0, m, m)
-  for (i in seq_len(m)) for (j in seq_len(m)) if (i - j + 1 >= 0) h\[i, j\] <- 1
+  for (i in seq_len(m)) for (j in seq_len(m)) if (i - j + 1 >= 0) h[i, j] <- 1
   for (i in seq_len(m)) {
     h[i, 1] <- h[i, 1] - t^i
     h[m, i] <- h[m, i] - t^(m - i + 1)
   }
   h[m, 1] <- h[m, 1] + if (2 * t - 1 > 0) (2 * t - 1)^m else 0
   for (i in seq_len(m)) for (j in seq_len(m)) {
-    if (i - j + 1 > 0) for (g in seq_len(i - j + 1)) h\[i, j\] <- h\[i, j\] / g
+    if (i - j + 1 > 0) for (g in seq_len(i - j + 1)) h[i, j] <- h[i, j] / g
   }
   eq <- 0
   res <- diag(m)
@@ -1783,7 +1783,7 @@ Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
   n <- as.integer(n)
   total <- m * n
   counts <- numeric(total + 1)
-  counts\[1\] <- 1
+  counts[1] <- 1
   # The number of arrangements giving U = u is the coefficient of q^u in
   # the Gaussian binomial coefficient
   #
@@ -2476,7 +2476,7 @@ Kctrlmed <- function(samples, p = c(0.5)) {
   ps <- sort(as.numeric(p))
   if (!length(ps) || any(ps <= 0 | ps >= 1))
     stop("p must lie strictly inside (0, 1).", call. = FALSE)
-  ctrl <- sort(ss[\[1\]])
+  ctrl <- sort(ss[[1]])
   n1 <- length(ctrl)
   r <- as.integer(floor(n1 * ps)) + 1L
   if (any(r > n1))
@@ -2523,9 +2523,9 @@ Kctrlasymp <- function(lam, dens, pval) {
   if (any(lam <= 0 | lam >= 1))
     stop("every lambda must lie strictly inside (0, 1).", call. = FALSE)
   if (any(dens <= 0)) stop("densities must be strictly positive.", call. = FALSE)
-  p <- fv\[1\]
-  qs <- dens[-1] / dens\[1\]
-  sig <- outer(qs, qs) * p * (1 - p) / lam\[1\]
+  p <- fv[1]
+  qs <- dens[-1] / dens[1]
+  sig <- outer(qs, qs) * p * (1 - p) / lam[1]
   diag(sig) <- diag(sig) + fv[-1] * (1 - fv[-1]) / lam[-1]
   list(sigma = sig, q = qs, p = p, k = k)
 }
@@ -2617,8 +2617,8 @@ Kwmc <- function(rank_means, ns, alpha = 0.20) {
   for (i in seq_len(k)) for (j in seq_len(k)) {
     b <- zstar * sqrt(nn * (nn + 1) / 12 * (1 / nv[i] + 1 / nv[j]))
     d <- abs(rm[i] - rm[j])
-    bounds\[i, j\] <- b
-    diffs\[i, j\] <- d
+    bounds[i, j] <- b
+    diffs[i, j] <- d
     if (i < j && d >= b) sig[[length(sig) + 1L]] <- c(i - 1L, j - 1L)
   }
   eq <- if (length(unique(nv)) == 1L) zstar * sqrt(k * (nn + 1) / 6) else NaN
@@ -2711,7 +2711,7 @@ Jtsum <- function(samples) {
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   u <- matrix(0, k, k)
   for (i in seq_len(k - 1L)) for (j in (i + 1L):k) {
-    u\[i, j\] <- sum(outer(ss[[i]], ss[[j]], "<")) +
+    u[i, j] <- sum(outer(ss[[i]], ss[[j]], "<")) +
       0.5 * sum(outer(ss[[i]], ss[[j]], "=="))
   }
   list(u = u, statistic = sum(u[upper.tri(u)]),
@@ -2728,7 +2728,7 @@ Ctrltree <- function(samples, r = NULL) {
   ss <- lapply(samples, as.numeric)
   k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
-  ctrl <- sort(ss[\[1\]])
+  ctrl <- sort(ss[[1]])
   n1 <- length(ctrl)
   if (n1 < 1L) stop("the control sample must be non-empty.", call. = FALSE)
   rr <- if (is.null(r)) (n1 %/% 2L) + 1L else as.integer(r)
@@ -2754,7 +2754,7 @@ Taunull <- function(n, s = NULL) {
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
   maxinv <- (n * (n - 1L)) %/% 2L
   counts <- numeric(maxinv + 1L)
-  counts\[1\] <- 1
+  counts[1] <- 1
   for (i in 2:n) {
     new <- numeric(maxinv + 1L)
     run <- 0
@@ -2838,7 +2838,7 @@ Rhotest <- function(r, n, alternative = "two-sided") {
   r <- as.numeric(r)
   n <- as.integer(n)
   if (n < 3L) stop("n must be at least 3.", call. = FALSE)
-  if (r < -1 || r > 1) stop("r must lie in \[-1, 1\].", call. = FALSE)
+  if (r < -1 || r > 1) stop("r must lie in [-1, 1].", call. = FALSE)
   z <- r * sqrt(n - 1)
   t <- if (abs(r) >= 1) sign(r) * Inf else r * sqrt((n - 2) / (1 - r^2))
   if (alternative == "greater") {
@@ -2928,7 +2928,7 @@ Taupartial <- function(x, y, z) {
 #' @noRd
 .gbFriedRanks <- function(rows) {
   k <- length(rows)
-  n <- length(rows[\[1\]])
+  n <- length(rows[[1]])
   rsum <- numeric(n)
   tiesum <- 0
   for (r in rows) {
@@ -2951,7 +2951,7 @@ Friedq <- function(data, correct = TRUE) {
   rows <- lapply(data, as.numeric)
   k <- length(rows)
   if (k < 2L) stop("need at least 2 blocks.", call. = FALSE)
-  n <- length(rows[\[1\]])
+  n <- length(rows[[1]])
   if (n < 2L) stop("need at least 2 treatments.", call. = FALSE)
   fr <- .gbFriedRanks(rows)
   rsum <- fr$rsum
@@ -2974,7 +2974,7 @@ Friedties <- function(data) {
   rows <- lapply(data, as.numeric)
   k <- length(rows)
   if (k < 2L) stop("need at least 2 blocks.", call. = FALSE)
-  n <- length(rows[\[1\]])
+  n <- length(rows[[1]])
   if (n < 2L) stop("need at least 2 treatments.", call. = FALSE)
   fr <- .gbFriedRanks(rows)
   rsum <- fr$rsum
@@ -3043,7 +3043,7 @@ Friedmc <- function(rank_sums, k, alpha = 0.20) {
   sig <- list()
   for (i in seq_len(n)) for (j in seq_len(n)) {
     d <- abs(rs[i] - rs[j])
-    diffs\[i, j\] <- d
+    diffs[i, j] <- d
     if (i < j && d >= bound) sig[[length(sig) + 1L]] <- c(i - 1L, j - 1L)
   }
   list(bound = bound, zstar = zstar, diffs = diffs, significant = sig,
@@ -3059,7 +3059,7 @@ Pagel <- function(data, weights = NULL) {
   rows <- lapply(data, as.numeric)
   k <- length(rows)
   if (k < 2L) stop("need at least 2 blocks.", call. = FALSE)
-  n <- length(rows[\[1\]])
+  n <- length(rows[[1]])
   if (n < 2L) stop("need at least 2 treatments.", call. = FALSE)
   w <- if (is.null(weights)) as.numeric(seq_len(n)) else as.numeric(weights)
   if (length(w) != n) stop("weights must have length n.", call. = FALSE)
@@ -3147,7 +3147,7 @@ Wsignif <- function(w, k, n) {
   w <- as.numeric(w)
   k <- as.integer(k)
   n <- as.integer(n)
-  if (w < 0 || w > 1) stop("w must lie in \[0, 1\].", call. = FALSE)
+  if (w < 0 || w > 1) stop("w must lie in [0, 1].", call. = FALSE)
   if (k < 2L || n < 2L)
     stop("need k >= 2 rankings of n >= 2 objects.", call. = FALSE)
   q <- k * (n - 1) * w
@@ -3313,8 +3313,8 @@ Chik2 <- function(successes, ns) {
 Fisherex <- function(table, alternative = "two-sided") {
   tb <- round(as.matrix(table))
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  a <- tb\[1, 1\]
-  b <- tb\[1, 2\]
+  a <- tb[1, 1]
+  b <- tb[1, 2]
   cc <- tb[2, 1]
   d <- tb[2, 2]
   if (min(a, b, cc, d) < 0) stop("counts must be non-negative.", call. = FALSE)
@@ -3344,8 +3344,8 @@ Fisherex <- function(table, alternative = "two-sided") {
 Fisherex1 <- function(table, alternative = "greater") {
   tb <- round(as.matrix(table))
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  a <- tb\[1, 1\]
-  b <- tb\[1, 2\]
+  a <- tb[1, 1]
+  b <- tb[1, 2]
   cc <- tb[2, 1]
   d <- tb[2, 2]
   if (min(a, b, cc, d) < 0) stop("counts must be non-negative.", call. = FALSE)
@@ -3371,7 +3371,7 @@ Mcnemarq <- function(table, correct = FALSE) {
   tb <- as.matrix(table)
   storage.mode(tb) <- "double"
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  x12 <- tb\[1, 2\]
+  x12 <- tb[1, 2]
   x21 <- tb[2, 1]
   nd <- x12 + x21
   if (nd <= 0) stop("there are no discordant pairs.", call. = FALSE)
@@ -3399,7 +3399,7 @@ Mcnemarci <- function(table, alpha = 0.05) {
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
   nn <- sum(tb)
   if (nn <= 0) stop("the table must contain positive counts.", call. = FALSE)
-  p12 <- tb\[1, 2\] / nn
+  p12 <- tb[1, 2] / nn
   p21 <- tb[2, 1] / nn
   est <- p12 - p21
   se <- sqrt(max(0, (p12 + p21 - est^2) / nn))
@@ -3475,8 +3475,8 @@ Oddsrat <- function(table, alpha = 0.05, cc = 0) {
   storage.mode(tb) <- "double"
   tb <- tb + as.numeric(cc)
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  a <- tb\[1, 1\]
-  b <- tb\[1, 2\]
+  a <- tb[1, 1]
+  b <- tb[1, 2]
   c2 <- tb[2, 1]
   d <- tb[2, 2]
   if (min(a, b, c2, d) <= 0)

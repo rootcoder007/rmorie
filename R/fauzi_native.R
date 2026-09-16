@@ -868,7 +868,7 @@ morie_fauzi_b3_coefficient <- function(t, f_X, f_X_prime = NULL,
     )
   }
   if (any(sx < 0 | sx > 1)) {
-    stop("S_X must lie in \[0, 1\].", call. = FALSE)
+    stop("S_X must lie in [0, 1].", call. = FALSE)
   }
   c(
     list(t = cm$tv, b_3 = cm$gp^2 * cm$fx - cm$gpp * sx),
@@ -1105,7 +1105,7 @@ morie_fauzi_theorem_4_4 <- function(mrl_hat, mrl_true, variance) {
     z = z, p_two_sided = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
     holds_for = "both m_tilde_{X,1} and m_tilde_{X,2}",
     why_lyapunov_works = paste(
-      "V is bounded in \[0, 1\], so every moment",
+      "V is bounded in [0, 1], so every moment",
       "exists automatically and the Lyapunov",
       "condition needs no extra assumption"
     ),

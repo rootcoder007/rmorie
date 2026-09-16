@@ -245,19 +245,19 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
   naive_m0 <- numeric(K)
   for (j in seq_len(K)) {
     r1 <- contrast(post[, j] * w)
-    class_ate[j] <- r1\[1\]
+    class_ate[j] <- r1[1]
     class_m1[j] <- r1[2]
     class_m0[j] <- r1[3]
     r0 <- contrast(post[, j])
-    naive_ate[j] <- r0\[1\]
+    naive_ate[j] <- r0[1]
     naive_m1[j] <- r0[2]
     naive_m0[j] <- r0[3]
   }
 
   ate <- sum(pi_ * class_ate)
   naive <- sum(pi_ * naive_ate)
-  marginal_ate <- contrast(w)\[1\]
-  unweighted_ate <- contrast(rep(1.0, n))\[1\]
+  marginal_ate <- contrast(w)[1]
+  unweighted_ate <- contrast(rep(1.0, n))[1]
 
   nfree <- K - 1L + K * Q
   bic <- -2.0 * ll + nfree * log(n)

@@ -56,7 +56,7 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #' res
 .tncomp_fingerprint <- function(x) {
   if (is.character(x)) {
-    chars <- strsplit(x, "")[\[1\]]
+    chars <- strsplit(x, "")[[1]]
     which(chars == "1")
   } else if (is.logical(x)) {
     which(x)
@@ -111,7 +111,7 @@ distance_matrix <- function(fps) {
   for (i in 1:(n - 1L)) {
     for (j in (i + 1L):n) {
       d <- 1.0 - .tncomp_tanimoto(F[[i]], F[[j]])
-      D\[i, j\] <- d
+      D[i, j] <- d
       D[j, i] <- d
     }
   }
@@ -279,7 +279,7 @@ morie_tncomp <- function(fps, k, objective = "maxmin", seed = NULL) {
     selection = chosen,
     objective = objective,
     k = as.integer(k),
-    seed = chosen\[1\],
+    seed = chosen[1],
     n_compounds = nrow(M),
     method = sprintf("Snarey et al. (1997) greedy %s selection on Tanimoto distance",
                      objective)

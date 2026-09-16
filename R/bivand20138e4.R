@@ -43,7 +43,7 @@ Svariog <- function(coords, z, breaks = NULL, nbins = 10, cutoff = NULL) {
   ssq <- numeric(nb)
   sdi <- numeric(nb)
   cnt <- integer(nb)
-  keep <- which(d > br\[1\] & d <= br[nb + 1L])
+  keep <- which(d > br[1] & d <= br[nb + 1L])
   for (t in keep) {
     b <- 1L
     while (b < nb && d[t] > br[b + 1L]) b <- b + 1L

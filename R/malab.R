@@ -31,7 +31,7 @@ malab <- function(ai, n1i, ci, n2i) {
 
 # CANONICAL TEST
 # r <- malab(c(12,20), c(50,60), c(7,15), c(50,55))
-# stopifnot(abs(r$x\[1\] - 0.14) < 1e-15)
+# stopifnot(abs(r$x[1] - 0.14) < 1e-15)
 
 #' @rdname malab
 #' @keywords internal

@@ -132,17 +132,17 @@ validate_schema <- function(data, rules, raise_on_error = FALSE) {
     if (!is.null(rule$dtype)) {
       if (rule$dtype == "numeric" && !is.numeric(col)) {
         errors <- c(errors, sprintf("Column '%s' expected numeric, got %s",
-                                    rule$name, class(col)\[1\]))
+                                    rule$name, class(col)[1]))
                                     passed <- FALSE
       } else if (rule$dtype %in% c("character", "object") &&
                  !is.character(col) && !is.factor(col)) {
         warnings_ <- c(warnings_,
           sprintf("Column '%s' expected character, got %s",
-                  rule$name, class(col)\[1\]))
+                  rule$name, class(col)[1]))
       } else if (rule$dtype == "datetime" &&
                  !inherits(col, c("POSIXct", "POSIXlt", "Date"))) {
         errors <- c(errors, sprintf("Column '%s' expected datetime, got %s",
-                                    rule$name, class(col)\[1\]))
+                                    rule$name, class(col)[1]))
                                     passed <- FALSE
       }
     }
@@ -681,7 +681,7 @@ assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
                   (1 - pmax(pmin(y_pred, 1 - 1e-10), 1e-10)))
   fit <- stats::glm(y_true ~ logit_p, family = stats::binomial())
   cal_slope <- unname(stats::coef(fit)[2])
-  cal_intercept <- unname(stats::coef(fit)\[1\])
+  cal_intercept <- unname(stats::coef(fit)[1])
   brier <- .val_brier(y_true, y_pred)
   prev <- mean(y_true)
   brier_max <- prev * (1 - prev)

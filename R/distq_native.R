@@ -164,7 +164,7 @@ categorical_projection <- function(reward, gamma, next_probs, v_min, v_max,
     stop(sprintf("distq: next_probs sums to %.9f, not 1", tot))
   g <- if (isTRUE(done)) 0.0 else as.numeric(gamma)
   if (!(g >= 0 && g <= 1))
-    stop(sprintf("distq: gamma must be in \[0, 1\], got %s", gamma))
+    stop(sprintf("distq: gamma must be in [0, 1], got %s", gamma))
   a <- .distq_atoms_full(v_min, v_max, n)
   z <- a$z
   dz <- a$dz
@@ -322,7 +322,7 @@ bernoulli_algorithm <- function(reward, gamma, next_probs, v_min, v_max,
   dz <- a$dz
   g <- if (isTRUE(done)) 0.0 else as.numeric(gamma)
   if (!(g >= 0 && g <= 1))
-    stop(sprintf("distq: gamma must be in \[0, 1\], got %s", gamma))
+    stop(sprintf("distq: gamma must be in [0, 1], got %s", gamma))
   ex <- as.numeric(reward) + g * distribution_mean(p, z)
   min(max((ex - as.numeric(v_min)) / dz, 0.0), 1.0)
 }

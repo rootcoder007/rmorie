@@ -59,7 +59,7 @@ Basisexp <- function(x, y, kind = "poly", M = 3, knots = NULL) {
   rss <- sum(resid * resid)
   ybar <- sum(yv) / n
   tss <- sum((yv - ybar)^2)
-  list(estimate = theta\[1\], theta = theta, basis = H, fitted = fitted,
+  list(estimate = theta[1], theta = theta, basis = H, fitted = fitted,
        residuals = resid, rss = rss, tss = tss,
        r2 = if (tss > 0) 1 - rss / tss else NaN, K = K, n = n,
        method = "Hastie-Tibshirani-Friedman (2009) ESL eqs. (2.30), (2.32), (2.43)")

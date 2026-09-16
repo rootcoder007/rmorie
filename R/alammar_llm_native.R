@@ -112,7 +112,7 @@ morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
   A <- .morie_al_softmax_rows(scores)
   list(
     output = A %*% V, attention = A, d_k = ncol(Q), n = nrow(Q),
-    estimate = (A %*% V)\[1, 1\],
+    estimate = (A %*% V)[1, 1],
     method = "Scaled dot-product attention (Vaswani et al. 2017)"
   )
 }
@@ -168,7 +168,7 @@ morie_alammar_multi_head_attention <- function(Q, K, V, Wq, Wk, Wv, Wo,
   }
   out <- concat %*% Wo
   list(
-    output = out, heads = heads, estimate = out\[1, 1\], n = nrow(Q),
+    output = out, heads = heads, estimate = out[1, 1], n = nrow(Q),
     method = "Multi-head attention (Vaswani et al. 2017)"
   )
 }
@@ -227,7 +227,7 @@ morie_alammar_grouped_query_attention <- function(Q_heads, K_groups,
   concat <- do.call(cbind, outs)
   list(
     output = concat, group_assignment = assignment,
-    kv_cache_ratio = G / H, estimate = concat\[1, 1\], n = H,
+    kv_cache_ratio = G / H, estimate = concat[1, 1], n = H,
     method = "Grouped-query attention (Ainslie et al. 2023)"
   )
 }
@@ -255,7 +255,7 @@ morie_alammar_multi_query_attention <- function(Q_heads, K_shared,
   })
   concat <- do.call(cbind, outs)
   list(
-    output = concat, kv_cache_ratio = 1 / H, estimate = concat\[1, 1\],
+    output = concat, kv_cache_ratio = 1 / H, estimate = concat[1, 1],
     n = H, method = "Multi-query attention (Shazeer 2019)"
   )
 }
@@ -355,7 +355,7 @@ morie_alammar_classification_head <- function(h_cls, W_cls, b) {
   list(
     logits = logits, probabilities = p,
     predicted_class = which.max(logits) - 1L,
-    estimate = logits\[1\], n = length(b),
+    estimate = logits[1], n = length(b),
     method = "Linear classification head + softmax (Alammar Ch 4)"
   )
 }
@@ -388,7 +388,7 @@ morie_alammar_ner_token_head <- function(h_tokens, W, b, tags = NULL) {
   list(
     probabilities = P, predicted_tags = as.integer(pred),
     cross_entropy = loss,
-    estimate = if (!is.null(loss)) loss else as.numeric(pred\[1\]),
+    estimate = if (!is.null(loss)) loss else as.numeric(pred[1]),
     n = nrow(H), method = "Per-token NER head + CE (Alammar Ch 4)"
   )
 }
@@ -408,14 +408,14 @@ morie_alammar_token_embedding_lookup <- function(ids, E_tok) {
     stop(
       sprintf(
         "token id %d is outside the vocabulary of %d.",
-        ids[which(ids < 0L | ids >= nrow(E))\[1\]], nrow(E)
+        ids[which(ids < 0L | ids >= nrow(E))[1]], nrow(E)
       ),
       call. = FALSE
     )
   }
   out <- E[ids + 1L, , drop = FALSE]
   list(
-    embeddings = out, estimate = out\[1, 1\], vocab_size = nrow(E),
+    embeddings = out, estimate = out[1, 1], vocab_size = nrow(E),
     dim = ncol(E), n = length(ids),
     method = "Token embedding lookup (Alammar Ch 2)"
   )
@@ -447,7 +447,7 @@ morie_alammar_document_embedding_pool <- function(token_embeddings,
   d <- colSums(H * m) / sum(m)
   list(
     embedding = as.numeric(d), tokens_pooled = sum(m),
-    estimate = d\[1\], n = nrow(H),
+    estimate = d[1], n = nrow(H),
     method = "Masked mean pooling (Alammar Ch 8)"
   )
 }
@@ -465,7 +465,7 @@ morie_alammar_contextualized_embedding <- function(layer_outputs,
   if (length(dim(L)) != 3L) {
     stop("layer_outputs must be (n_layers, seq_len, dim).", call. = FALSE)
   }
-  nl <- dim(L)\[1\]
+  nl <- dim(L)[1]
   sq <- dim(L)[2]
   li <- as.integer(layer_idx)
   pos <- as.integer(position)
@@ -488,7 +488,7 @@ morie_alammar_contextualized_embedding <- function(layer_outputs,
   ))
   list(
     embedding = as.numeric(v), context_varies = varies,
-    estimate = v\[1\], layer = layer_idx, position = position, n = sq,
+    estimate = v[1], layer = layer_idx, position = position, n = sq,
     method = "Contextualised embedding extraction (Alammar Ch 2)"
   )
 }
@@ -548,7 +548,7 @@ morie_alammar_vit_patch_embedding <- function(image, patch_size, E,
   }
   rownames(Z) <- NULL
   list(
-    sequence = Z, n_patches = length(patches), estimate = Z\[1, 1\],
+    sequence = Z, n_patches = length(patches), estimate = Z[1, 1],
     n = nrow(Z),
     method = "ViT patch embedding (Dosovitskiy et al. 2021)"
   )
@@ -577,7 +577,7 @@ morie_alammar_cosine_similarity_loss <- function(a, b, y_true) {
     stop("need matched pairs and one target per pair.", call. = FALSE)
   }
   if (any(abs(y) > 1)) {
-    stop("targets are cosine values and must lie in \[-1, 1\].",
+    stop("targets are cosine values and must lie in [-1, 1].",
       call. = FALSE
     )
   }
@@ -946,11 +946,11 @@ morie_alammar_greedy_decoding <- function(logits) {
   for (i in seq_len(nrow(Z))) {
     m <- max(Z[i, ])
     winners <- which(Z[i, ] == m)
-    toks[i] <- winners\[1\] - 1L
+    toks[i] <- winners[1] - 1L
     ties[i] <- length(winners) > 1L
   }
   list(
-    tokens = toks, had_ties = ties, estimate = as.numeric(toks\[1\]),
+    tokens = toks, had_ties = ties, estimate = as.numeric(toks[1]),
     n = length(toks), method = "Greedy decoding argmax (Alammar Ch 6)"
   )
 }
@@ -975,7 +975,7 @@ morie_alammar_sampling_decoding <- function(logits, seed = 0) {
     toks[i] <- sum(cumsum(p) <= u) # smallest v with cum > u, 0-based
   }
   list(
-    tokens = toks, uniforms = us, estimate = as.numeric(toks\[1\]),
+    tokens = toks, uniforms = us, estimate = as.numeric(toks[1]),
     n = length(toks),
     method = "Ancestral sampling via shared LCG (Alammar Ch 6)"
   )
@@ -1004,7 +1004,7 @@ morie_alammar_bag_of_words <- function(tokens, vocab) {
   oov <- sum(!(toks %in% voc))
   list(
     bow_vector = unname(bow), oov_count = oov,
-    estimate = as.numeric(bow\[1\]), vocab_size = length(voc),
+    estimate = as.numeric(bow[1]), vocab_size = length(voc),
     n = length(toks),
     method = "Bag-of-words counts over a fixed vocabulary (Alammar Ch 1)"
   )
@@ -1035,7 +1035,7 @@ morie_alammar_c_tfidf <- function(term_counts_by_class, corpus_freq = NULL,
   list(
     weights = W, A = a, corpus_freq = f_t,
     top_term_per_class = apply(W, 1, which.max) - 1L,
-    estimate = W\[1, 1\], n = nrow(M),
+    estimate = W[1, 1], n = nrow(M),
     method = "c-TF-IDF (Grootendorst 2022, Eq 3)"
   )
 }
@@ -1062,7 +1062,7 @@ morie_alammar_bio_tagging <- function(tokens, entity_spans,
   tags <- rep("O", n)
   claimed <- rep(FALSE, n)
   for (span in entity_spans) {
-    s <- as.integer(span[\[1\]])
+    s <- as.integer(span[[1]])
     e <- as.integer(span[[2]])
     typ <- as.character(span[[3]])
     if (s < 0L || e <= s || e > n) {
@@ -1153,7 +1153,7 @@ morie_alammar_recursive_chunking <- function(text, separators = NULL,
         substr(piece, i, min(i + size - 1L, nchar(piece)))
       }, character(1)))
     }
-    parts <- strsplit(piece, seps[tier], fixed = TRUE)[\[1\]]
+    parts <- strsplit(piece, seps[tier], fixed = TRUE)[[1]]
     if (length(parts) == 1L) {
       return(split_rec(piece, tier + 1L))
     }
@@ -1188,7 +1188,7 @@ morie_alammar_conversation_buffer_memory <- function(conversation, N) {
   if (n < 1L) stop("N must be positive.", call. = FALSE)
   turns <- lapply(conversation, function(t) {
     c(
-      as.character(t[\[1\]]),
+      as.character(t[[1]]),
       as.character(t[[2]])
     )
   })
@@ -1219,7 +1219,7 @@ morie_alammar_chat_template <- function(turns, template_tokens = NULL) {
   }
   parts <- character(0)
   for (turn in turns) {
-    role <- as.character(turn[\[1\]])
+    role <- as.character(turn[[1]])
     if (is.null(tt[[role]])) {
       stop(sprintf(
         "role '%s' has no template tokens; rendering it unmarked would hide the turn from the model.",
@@ -1227,7 +1227,7 @@ morie_alammar_chat_template <- function(turns, template_tokens = NULL) {
       ), call. = FALSE)
     }
     oc <- tt[[role]]
-    parts <- c(parts, paste0(oc\[1\], turn[[2]], oc[2]))
+    parts <- c(parts, paste0(oc[1], turn[[2]], oc[2]))
   }
   prompt <- paste(parts, collapse = "")
   list(
@@ -1340,7 +1340,7 @@ morie_alammar_tokenization_pipeline <- function(text, vocab,
   }
   s <- as.character(text)
   if (isTRUE(lowercase)) s <- tolower(s)
-  words <- strsplit(trimws(s), "\\s+")[\[1\]]
+  words <- strsplit(trimws(s), "\\s+")[[1]]
   toks <- character(0)
   for (w in words) {
     i <- 1L
@@ -1378,7 +1378,7 @@ morie_alammar_tokenization_pipeline <- function(text, vocab,
         paste(missing, collapse = ", ")
       ), call. = FALSE)
     }
-    toks <- c(specials\[1\], toks, specials[2])
+    toks <- c(specials[1], toks, specials[2])
   }
   list(
     tokens = toks, n_unk = sum(toks == unk_token),
@@ -1424,11 +1424,11 @@ morie_alammar_hdbscan_cluster <- function(X, min_cluster_size = 3,
   MR <- pmax(outer(core, rep(1, n)), outer(rep(1, n), core), D)
   diag(MR) <- 0
   visited <- rep(FALSE, n)
-  visited\[1\] <- TRUE
+  visited[1] <- TRUE
   edges <- matrix(0, n - 1L, 3L)
   dist_ <- MR[1, ]
   src <- rep(1L, n)
-  dist_\[1\] <- Inf
+  dist_[1] <- Inf
   for (step in seq_len(n - 1L)) {
     j <- which.min(dist_)
     edges[step, ] <- c(dist_[j], src[j], j)
@@ -1515,7 +1515,7 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
     ord <- order(D[i, ])
     nb <- ord[2:(k + 1L)]
     dists <- D[i, nb]
-    rho <- dists\[1\]
+    rho <- dists[1]
     lo <- 1e-8
     hi <- 1e4
     for (it in seq_len(64L)) {
@@ -1557,7 +1557,7 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
     grad <- matrix(0, n, dd)
     for (d in seq_len(dd)) {
       diffd <- outer(Z[, d], Z[, d], "-")
-      # Clip each pairwise contribution to \[-4, 4\] exactly as the
+      # Clip each pairwise contribution to [-4, 4] exactly as the
       # reference implementation does (McInnes et al. 2018,
       # umap-learn's _optimize_layout_euclidean). Without it the
       # repulsive term 1/(1 - Q + eps) reaches ~1e12 for a
@@ -1647,7 +1647,7 @@ morie_alammar_lda_topic_distribution <- function(documents, n_topics,
   phi <- (n_kw + b) / (rowSums(n_kw) + V * b)
   list(
     theta = theta, phi = phi, vocabulary = vocab,
-    estimate = theta\[1, 1\], n = length(docs),
+    estimate = theta[1, 1], n = length(docs),
     method = "LDA collapsed Gibbs (Griffiths and Steyvers 2004)"
   )
 }
@@ -2245,7 +2245,7 @@ morie_alammar_continued_pretraining <- function(domain_corpus,
   }, numeric(1))
   list(
     mlm_loss_curve = curve,
-    mlm_improved = if (steps > 1L) curve[steps] < curve\[1\] else NA,
+    mlm_improved = if (steps > 1L) curve[steps] < curve[1] else NA,
     task_loss = if (is.function(task_loss_fn)) {
       as.numeric(task_loss_fn())
     } else {
@@ -2281,7 +2281,7 @@ morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
     stop("no unlabeled pairs supplied.", call. = FALSE)
   }
   silver <- vapply(unlabeled_pairs, function(p) {
-    as.numeric(cross_encoder(as.character(p[\[1\]]), as.character(p[[2]])))
+    as.numeric(cross_encoder(as.character(p[[1]]), as.character(p[[2]])))
   }, numeric(1))
   agreement <- NULL
   n_gold <- 0L
@@ -2293,7 +2293,7 @@ morie_alammar_augmented_sbert <- function(unlabeled_pairs, cross_encoder,
     n_gold <- length(gl)
     pred <- vapply(gold_pairs, function(p) {
       as.numeric(cross_encoder(
-        as.character(p[\[1\]]),
+        as.character(p[[1]]),
         as.character(p[[2]])
       ))
     }, numeric(1))
@@ -2340,7 +2340,7 @@ morie_alammar_tsdae_objective <- function(tokens, delete_ratio = 0.6,
   kept <- toks[keep_mask]
   deleted <- toks[!keep_mask]
   if (length(kept) == 0L) {
-    kept <- toks\[1\]
+    kept <- toks[1]
     deleted <- toks[-1]
   }
   loss <- NULL

@@ -38,7 +38,7 @@ Ovbnk <- function(beta_short, beta_long, R_short, R_long,
   if (!(rl > rs)) stop("Ovbnk: R_long must exceed R_short")
   if (rm_ < rl) stop("Ovbnk: R_max must be at least R_long")
   if (!(rs >= 0 && rs <= 1 && rl >= 0 && rl <= 1 && rm_ >= 0 && rm_ <= 1))
-    stop("Ovbnk: R-squared values must lie in \[0, 1\]")
+    stop("Ovbnk: R-squared values must lie in [0, 1]")
   scale <- (rm_ - rl) / (rl - rs)
   bias <- d * (bs - bl) * scale
   beta_star <- bl - bias

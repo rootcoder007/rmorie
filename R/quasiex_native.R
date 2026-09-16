@@ -130,7 +130,7 @@ morie_did <- function(data, outcome, unit, time, treatment_time,
 print.morie_did <- function(x, ...) {
   cat("Difference-in-differences --", x$method, "\n")
   cat(sprintf("  ATT: %.4f  (SE %.4f)  95%% CI [%.4f, %.4f]  p = %.3g\n",
-              x$estimate, x$std.error, x$conf.int\[1\], x$conf.int[2],
+              x$estimate, x$std.error, x$conf.int[1], x$conf.int[2],
               x$p.value))
   cat(sprintf("  Units: %d  Periods: %d\n", x$n_units, x$n_periods))
   invisible(x)
@@ -260,10 +260,10 @@ print.morie_iv <- function(x, ...) {
     cat(sprintf("  WEAK INSTRUMENTS (first-stage F = %.2f < 10)\n",
                 x$first_stage_F))
     cat(sprintf("  Anderson-Rubin 95%% confidence set: [%.4f, %.4f]\n",
-                x$ar_confidence_set\[1\], x$ar_confidence_set[2]))
+                x$ar_confidence_set[1], x$ar_confidence_set[2]))
   } else {
     cat(sprintf("  Estimate: %.4f  (SE %.4f)  95%% CI [%.4f, %.4f]\n",
-                x$estimate, x$std.error, x$conf.int\[1\], x$conf.int[2]))
+                x$estimate, x$std.error, x$conf.int[1], x$conf.int[2]))
     cat(sprintf("  First-stage F = %.2f (Stock-Yogo 10%% crit = %.2f)\n",
                 x$first_stage_F, x$stock_yogo_10))
   }
@@ -384,7 +384,7 @@ print.morie_rdd <- function(x, ...) {
   cat(sprintf("Regression discontinuity (%s), bandwidth = %.4f\n",
               x$kind, x$bandwidth))
   cat(sprintf("  Estimate: %.4f  (SE %.4f)  95%% CI [%.4f, %.4f]  p = %.3g\n",
-              x$estimate, x$std.error, x$conf.int\[1\], x$conf.int[2],
+              x$estimate, x$std.error, x$conf.int[1], x$conf.int[2],
               x$p.value))
   cat(sprintf("  Manipulation check (McCrary): stat = %.2f, p = %.3g%s\n",
               x$manipulation$statistic, x$manipulation$p.value,

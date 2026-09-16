@@ -77,7 +77,7 @@
 #' morie_bndest(y = rnorm(40), observed = rbinom(40, 1, 0.7), support = c(-3, 3))
 morie_bndest <- function(y, observed, support, treatment = NULL) {
   yv <- as.numeric(y)
-  k0 <- as.numeric(support\[1\])
+  k0 <- as.numeric(support[1])
   k1 <- as.numeric(support[2])
   if (!(k0 < k1))
     stop(sprintf("the support must satisfy K0 < K1, got (%g, %g).", k0, k1))
@@ -87,7 +87,7 @@ morie_bndest <- function(y, observed, support, treatment = NULL) {
     if (length(obs) != n)
       stop(sprintf("observed has %d entries for %d.", length(obs), n))
     r <- .mor_bnd_one_mean(yv, obs, k0, k1)
-    return(list(lower = r\[1\], upper = r[2], width = r[2] - r\[1\],
+    return(list(lower = r[1], upper = r[2], width = r[2] - r[1],
                 p_observed = r[3], identified = isTRUE(r[3] == 1),
                 width_identity = "(K1 - K0)(1 - P(obs)) exactly",
                 assumptions = paste("the outcome's support alone;",
@@ -101,11 +101,11 @@ morie_bndest <- function(y, observed, support, treatment = NULL) {
   if (!all(Tv %in% c(0, 1))) stop("treatment must be binary 0/1.")
   r1 <- .mor_bnd_one_mean(yv, Tv == 1, k0, k1)
   r0 <- .mor_bnd_one_mean(yv, Tv == 0, k0, k1)
-  ate_lo <- r1\[1\] - r0[2]
-  ate_hi <- r1[2] - r0\[1\]
+  ate_lo <- r1[1] - r0[2]
+  ate_hi <- r1[2] - r0[1]
   list(ate_lower = ate_lo, ate_upper = ate_hi,
        ate_width = ate_hi - ate_lo,
-       y1_bounds = c(r1\[1\], r1[2]), y0_bounds = c(r0\[1\], r0[2]),
+       y1_bounds = c(r1[1], r1[2]), y0_bounds = c(r0[1], r0[2]),
        p_treated = r1[3],
        contains_zero = isTRUE(ate_lo <= 0 && 0 <= ate_hi),
        width_identity = paste("the ATE bounds always have width exactly",

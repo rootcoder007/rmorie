@@ -44,7 +44,7 @@ Bndlpm <- function(y, D, Z, moment_eqs = NULL) {
   if (any(!(c(yv, dv, zv) %in% c(0, 1))))
     stop("Bndlpm: y, D and Z must be coded 0/1")
   nz <- c(sum(zv == 0), sum(zv == 1))
-  if (nz\[1\] == 0L || nz[2] == 0L)
+  if (nz[1] == 0L || nz[2] == 0L)
     stop("Bndlpm: the instrument takes only one value")
   DZ <- rbind(c(0, 0), c(0, 1), c(1, 0), c(1, 1))
   YK <- rbind(c(0, 0), c(0, 1), c(1, 0), c(1, 1))

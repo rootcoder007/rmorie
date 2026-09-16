@@ -115,7 +115,7 @@
   if (length(roots) != 1L)
     stop("morie_tcls: hierarchy must have exactly one root, found ",
          length(roots))
-  H <- .morie_tcls_height(roots\[1\], children)
+  H <- .morie_tcls_height(roots[1], children)
   if (H == 0L) stop("morie_tcls: hierarchy has no internal nodes")
 
   cost <- 0
@@ -135,7 +135,7 @@
     cost <<- cost + (.morie_tcls_height(n, children) / H) * min(pos, neg)
     sum(kids)
   }
-  extra(roots\[1\])
+  extra(roots[1])
   cost
 }
 
@@ -156,7 +156,7 @@
 #' morie_emd(V, V)
 morie_emd <- function(p, q, ground = "ordered", hierarchy = NULL,
                       domain = NULL) {
-  g <- tolower(as.character(ground)\[1\])
+  g <- tolower(as.character(ground)[1])
   if (!g %in% c("equal", "ordered", "hierarchical"))
     stop("morie_emd: ground must be equal, ordered or hierarchical")
   p <- as.numeric(p)
@@ -202,7 +202,7 @@ morie_tcls <- function(X, quasi_ids, sensitive, t, ground = "ordered",
   sv <- sensitive
   if (length(qs) != n || length(sv) != n)
     stop("morie_tcls: X, quasi_ids and sensitive must agree in length")
-  t <- as.numeric(t)\[1\]
+  t <- as.numeric(t)[1]
   if (t < 0) stop("morie_tcls: t must be non-negative")
 
   dom <- if (!is.null(domain)) domain else sort(unique(sv))
@@ -229,7 +229,7 @@ morie_tcls <- function(X, quasi_ids, sensitive, t, ground = "ordered",
        min_class_size = if (length(sizes)) min(sizes) else 0L,
        overall_distribution = q,
        domain = as.character(dom),
-       ground = tolower(as.character(ground)\[1\]),
+       ground = tolower(as.character(ground)[1]),
        t = t,
        n = as.integer(n),
        method = "t-closeness via EMD (Li, Li & Venkatasubramanian 2007)")
