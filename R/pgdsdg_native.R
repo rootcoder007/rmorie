@@ -324,7 +324,3 @@ projected_gradient <- function(f, grad, x0, project, step = NULL,
 morie_pgdsdg <- projected_gradient_descent <- function(f, grad, x0, project, ...) {
   projected_gradient(f, grad, x0, project, ...)
 }
-
-#' @rdname project_box
-#' @export
-morie_pgdsdg <- project_box
