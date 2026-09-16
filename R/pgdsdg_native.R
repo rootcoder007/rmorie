@@ -317,9 +317,10 @@ projected_gradient <- function(f, grad, x0, project, step = NULL,
 #' @param ... Further arguments: step size, rule, iteration and tolerance controls; see the source.
 #' @return A list with the iterate, objective value and convergence trace.
 #' @examples
-#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
-#' res <- morie_pgdsdg(x = x)
-#' res
+#' f <- function(v) sum((v - c(2, -1))^2)
+#' g <- function(v) 2 * (v - c(2, -1))
+#' res <- morie_pgdsdg(f, g, x0 = c(0, 0), project = project_nonneg)
+#' res$x
 #' @export
 morie_pgdsdg <- projected_gradient_descent <- function(f, grad, x0, project, ...) {
   projected_gradient(f, grad, x0, project, ...)
