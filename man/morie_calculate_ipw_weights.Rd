@@ -23,7 +23,7 @@ scores.}
 \item{stabilized}{If \code{TRUE}, return stabilised IPW weights. Default \code{FALSE}.}
 
 \item{trim_quantiles}{Optional length-2 numeric vector \eqn{(q_l, q_u)}
-in \eqn{`[0, 1]`}; if supplied, weights are clipped to the
+between 0 and 1; if supplied, weights are clipped to the
 \eqn{q_l}-th and \eqn{q_u}-th quantiles of the unclipped weight
 distribution (Crump et al. 2009 trimming). Default \code{NULL}.}
 }

@@ -229,7 +229,7 @@ mrm_spatial_spillover_decomposition <- function(rho,
 #'   \frac{e^\top W e}{e^\top e}, \quad e = r - \bar r.}{I = frac{n}{sum_ij w_ij} *
 #' (e^top W e)/(e^top e), e = r - bar r.}
 #'
-#' \eqn{I \in `[-1, 1]`}{I in `[-1, 1]`}. Positive -> clustering, negative ->
+#' \eqn{-1 \le I \le 1}{-1 <= I <= 1}. Positive -> clustering, negative ->
 #' dispersion, ~0 -> spatial randomness.
 #'
 #' @param residuals Numeric vector of length N (e.g. OLS residuals).
