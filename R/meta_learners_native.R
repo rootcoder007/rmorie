@@ -39,7 +39,7 @@
                                    random_state = 42L) {
   if (length(unique(d)) < 2L)
     stop("dr_learner needs both treatment arms", call. = FALSE)
-  set.seed(random_state)
+  .rmorie_local_seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = nrow(X)))
   mu1 <- numeric(nrow(X))
   mu0 <- numeric(nrow(X))

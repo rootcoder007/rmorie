@@ -23,7 +23,7 @@
 morie_gradient_boosting_genomic <- function(x, y, markers, n_estimators = 100,
                                             learning_rate = 0.1, max_depth = 3,
                                             seed = 0) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   y <- as.numeric(y)
   n <- length(y)
   M <- as.matrix(markers)

@@ -78,7 +78,7 @@ morie_diffu_diffusion_forward <- function(x0, t, betas = NULL, num_steps = 1000L
   alphas <- 1 - betas
   alpha_bar <- prod(alphas[1:t])
   if (is.null(noise)) {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
     noise <- stats::rnorm(length(x0))
   }
   noise <- as.numeric(noise)

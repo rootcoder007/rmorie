@@ -303,7 +303,7 @@ morie_dag_refute <- function(dag, data,
                              n_reps = 20L, seed = 42L) {
   method <- match.arg(method)
   orig <- morie_dag_estimate(dag, data, method = estimator)$ate
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   x <- dag$exposure
   reps <- vapply(seq_len(n_reps), function(i) {
     d2 <- data

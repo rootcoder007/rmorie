@@ -28,7 +28,7 @@ morie_bayesian_lasso_full <- function(x, y, n_iter = 200, burn = 50,
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("blasf", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   X <- as.matrix(x)
   y <- as.numeric(y)

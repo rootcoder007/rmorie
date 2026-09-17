@@ -1363,7 +1363,7 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
                             random_state = 42L) {
   n <- nrow(X)
   p <- ncol(X)
-  set.seed(random_state)
+  .rmorie_local_seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = n))
   pred <- numeric(n)
   Xs <- scale(X)

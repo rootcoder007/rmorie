@@ -354,7 +354,7 @@ morie_kriging_pred_error <- function(coords, z, target,
     tm[k] <- max(tm[k] - step, 1e-12)
     dlam[k, , ] <- (krige(tp)$lam - krige(tm)$lam) / (tp[k] - tm[k])
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   draws <- matrix(rep(theta, each = n_jitter), nrow = n_jitter) *
     (1 + jitter * matrix(stats::rnorm(n_jitter * 3L), nrow = n_jitter))
   draws <- pmax(draws, 1e-10)

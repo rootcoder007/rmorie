@@ -203,7 +203,7 @@ morie_causal_mediation <- function(y, d, m, x, link = c("probit", "logit"),
 
   se <- NULL
   if (boot > 0L) {
-    if (!is.null(seed)) set.seed(seed)
+    .rmorie_local_seed(seed)
     reps <- matrix(NA_real_, nrow = boot, ncol = 5L)
     for (b in seq_len(boot)) {
       r <- fit(sample.int(n, n, replace = TRUE))

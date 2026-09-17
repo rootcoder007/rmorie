@@ -29,7 +29,7 @@ morie_wilcoxon_power <- function(x, effect_size = 0.5, alpha = 0.05,
       method = "Wilcoxon signed-rank power (Monte Carlo)"
     ))
   }
-  if (!is.null(seed)) set.seed(seed)
+  .rmorie_local_seed(seed)
   rejections <- 0L
   for (i in seq_len(nsim)) {
     s <- stats::rnorm(n, mean = effect_size, sd = 1)

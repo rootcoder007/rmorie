@@ -36,7 +36,7 @@ permt <- function(x, y, statistic = NULL, B = 5000L,
   T_obs <- statistic(x, y)
   pool <- c(x, y)
   m <- length(pool)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   T_perm <- numeric(B)
   for (b in seq_len(B)) {
     ord <- sample.int(m)

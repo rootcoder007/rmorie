@@ -357,7 +357,7 @@ NULL
   boot_se <- rep(NA_real_, length(race_cols))
   names(boot_se) <- race_cols
   if (bootstrap_replicates > 0L) {
-    set.seed(random_state)
+    .rmorie_local_seed(random_state)
     n <- nrow(df_fit)
     draws <- matrix(NA_real_, nrow = bootstrap_replicates,
                     ncol = length(race_cols),

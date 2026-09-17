@@ -38,7 +38,7 @@ hrzw2 <- function(x, y, B = 50, n_h = 15, seed = 0) {
   h_grid <- seq(0.5 * h_sil, 2.5 * h_sil, length.out = n_h)
   m_pilot <- nw_fit(x, y, x, h_sil)
   r <- y - m_pilot
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   mise <- numeric(n_h)
   for (j in seq_along(h_grid)) {
     ise <- 0

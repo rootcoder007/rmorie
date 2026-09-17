@@ -22,7 +22,7 @@ morie_rnn_genomic <- function(x, y, markers, hidden = 8, n_epochs = 150,
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("rnnge", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   y <- as.numeric(y)
   n <- length(y)

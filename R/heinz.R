@@ -29,7 +29,7 @@ morie_heinz_he_initialization <- function(fan_in, fan_out = NULL, seed = 42L,
   if (!is.null(deterministic_seed)) {
     morie_det_rng("heinz", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   if (is.null(fan_out)) {
     n <- fan_in

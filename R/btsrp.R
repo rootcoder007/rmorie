@@ -29,6 +29,8 @@ btsrp <- function(x, statistic = NULL, B = 2000L, alpha = 0.05,
   x <- as.numeric(x)
   n <- length(x)
   if (n < 2L) {
+    warning("`x` has fewer than two observations; the bootstrap is ",
+            "undefined and every field is NA.", call. = FALSE)
     return(list(
       estimate = NA_real_, se = NA_real_,
       ci_lower = NA_real_, ci_upper = NA_real_,
@@ -36,7 +38,7 @@ btsrp <- function(x, statistic = NULL, B = 2000L, alpha = 0.05,
     ))
   }
   if (is.null(statistic)) statistic <- mean
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   theta_hat <- statistic(x)
   boot <- replicate(B, statistic(sample(x, n, replace = TRUE)))
   se <- stats::sd(boot)

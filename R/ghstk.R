@@ -24,7 +24,7 @@ morie_ghosal_stick_breaking_trunc <- function(x, alpha = 1.0, K = 50, seed = 0,
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("ghstk", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   x <- as.numeric(x)
   n <- length(x)

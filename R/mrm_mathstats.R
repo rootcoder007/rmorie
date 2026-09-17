@@ -211,7 +211,7 @@ mrm_clt_demo <- function(base_distribution = "unif",
                          n_samples = 1000L,
                          sample_size = 30L,
                          seed = 42L, ...) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   rfun <- get(paste0("r", base_distribution), envir = asNamespace("stats"))
   means <- vapply(
     seq_len(n_samples),

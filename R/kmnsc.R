@@ -19,7 +19,7 @@ morie_kmeans_clustering <- function(x, n_clusters = 3L, n_init = 10L,
                               max_iter = 300L, seed = 0L) {
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)
   x <- as.matrix(x)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   fit <- stats::kmeans(x,
     centers = n_clusters, iter.max = max_iter,
     nstart = n_init, algorithm = "Hartigan-Wong"

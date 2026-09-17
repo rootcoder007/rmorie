@@ -595,7 +595,7 @@ morie_otis_otdml <- function(df,
   d <- as.numeric(data[[treatment]])
   n <- length(y)
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   perm <- sample.int(n)
   fold_size <- n %/% n_folds
   y_res <- numeric(n)

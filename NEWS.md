@@ -1,5 +1,38 @@
 # rmorie 1.2.4 - 2026-09-16
 
+## Functions that seed the RNG now leave the caller's stream alone
+
+Two hundred and thirty-six functions called `set.seed()` internally and
+left the session's random stream replaced, so a user who had seeded their
+session for reproducibility got identical downstream draws whatever seed
+they had chosen. Every one of those sites now seeds for the rest of that
+call only and restores the caller's stream (or its absence) on exit; the
+seeded results themselves are unchanged. `morie_det_rng()` still seeds the
+session, which is its documented purpose.
+
+## The compiled mean no longer overflows where base R does not
+
+`morie::core::mean()` in `src/morie_core.h`, reached by `morie_mean_cpp()`
+and by everything built on it (variance, standard deviation, moments,
+bootstrap means), summed naively: `rep(1e308, 3)` gave `Inf` and
+`rep(1e120, 3)` was off by 1.4e104, so the variance of three identical
+values came back as 3e208. It now uses base R's algorithm (extended
+precision sum plus one corrective pass) with a running mean as the
+fallback when the sum overflows although every input is finite. Results on
+ordinary data are bit-identical to `mean()`.
+
+## Undefined effect sizes and bootstraps warn
+
+`morie_cohens_d()` warns when the denominator standard deviation is zero
+or missing instead of returning `Inf` or `NaN` silently, and
+`morie_bootstrap_ci()` warns when `x` has fewer than two observations.
+
+## Fixed
+
+* The release notes named the Lakner decomposition `morie_otis_stock_flow()`;
+  the exported name is `mrm_otis_stock_flow()`.
+* The README said "over 2,000 exported functions"; there are over 11,000.
+
 ## Installation is about twice as fast
 
 `ByteCompile: no`. Byte-compiling the package at install time took half of
@@ -22,7 +55,7 @@ directly.
 requires.
 
 
-## morie_otis_stock_flow, and the Lakner stock/flow measures
+## mrm_otis_stock_flow, and the Lakner stock/flow measures
 
 The MRM OTIS family gained the Lakner (1976) decomposition: average daily
 population as a stock (`sum(x_i)/t`, days per day), average length of stay

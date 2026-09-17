@@ -636,7 +636,13 @@ morie_cohens_d <- function(x1, x2, pooled = TRUE) {
   } else {
     s2
   }
-  (m1 - m2) / sd_denom
+  d <- (m1 - m2) / sd_denom
+  if (!is.finite(d)) {
+    warning("Cohen's d is undefined here: the standard deviation in the ",
+            "denominator is zero or missing (fewer than two observations, ",
+            "or no within-group variation).", call. = FALSE)
+  }
+  d
 }
 
 #' Cramer's V for categorical association

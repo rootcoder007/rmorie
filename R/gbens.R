@@ -42,7 +42,7 @@ morie_gradient_boosting_ensemble <- function(x, y, n_estimators = 100L,
   if (!is.null(deterministic_seed)) {
     morie_det_rng("gbens", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   fit <- .morie_gb_fit(
     x, y,

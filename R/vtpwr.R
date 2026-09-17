@@ -49,7 +49,7 @@
 #' Internal helper: Vtpwr Mc
 #' @noRd
 .vtpwr_mc <- function(w, quota, n) {
-  set.seed(0L)
+  .rmorie_local_seed(0L)
   n_mc <- 20000L
   swings <- rep(0, n)
   ss <- rep(0, n)

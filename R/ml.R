@@ -39,7 +39,7 @@ morie_ml_eval_robustness <- function(X, y, test_X, test_y,
                                      random_state = 42L) {
   y <- as.factor(y)
   test_y <- factor(as.character(test_y), levels = levels(y))
-  set.seed(random_state)
+  .rmorie_local_seed(random_state)
   fit <- .morie_rf_fit(as.matrix(as.data.frame(X)), y, task = "classification",
                        n_estimators = as.integer(n_estimators))
   preds <- .morie_rf_predict(fit, as.matrix(as.data.frame(test_X)))
@@ -113,7 +113,7 @@ morie_ml_apply_smote <- function(X, y, random_state = 42L,
     # Native SMOTE (Chawla et al. 2002): interpolate towards random
     # minority k-NN until classes balance. Cross-validated against
     # smotefamily::SMOTE in tests.
-    set.seed(random_state)
+    .rmorie_local_seed(random_state)
     res <- try(
       .morie_smote(as.matrix(as.data.frame(X)), y_chr,
                    k = as.integer(k_neighbors)),
@@ -133,7 +133,7 @@ morie_ml_apply_smote <- function(X, y, random_state = 42L,
     minority_idx <- which(y_chr == minority_label)
     n_needed <- majority_count - minority_count
     if (n_needed > 0 && minority_count > 0) {
-      set.seed(random_state)
+      .rmorie_local_seed(random_state)
       sample_idx <- sample(minority_idx, size = n_needed, replace = TRUE)
       X_res <- rbind(as.data.frame(X),
                      as.data.frame(X)[sample_idx, , drop = FALSE])

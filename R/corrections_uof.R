@@ -290,7 +290,7 @@ morie_datasets_corrections_uof_religion <- function(offline = TRUE,
 #' df <- morie_synth_corrections_uof("incidents", n = 10)
 #' nrow(df)
 morie_synth_corrections_uof <- function(key, n = 30L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n <- as.integer(n)
   # Pull the column names from the included real CKAN sample so the
   # synthetic frame matches exactly what the offline path returns.

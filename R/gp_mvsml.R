@@ -582,7 +582,7 @@ morie_brr_gibbs <- function(y, X, n_iter = 2000L,
                             burn_in = 500L, nu = 5,
                             nu_beta = 5, R2 = 0.5,
                             seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   y <- as.numeric(y)
   X <- as.matrix(X)
   n <- length(y)
@@ -813,7 +813,7 @@ morie_ordinal_probit_gibbs <- function(y, X, n_iter = 1500L,
                                        nu_beta = 5,
                                        S_beta = 1,
                                        seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   y <- as.integer(y)
   X <- as.matrix(X)
   n <- length(y)

@@ -62,7 +62,7 @@ Causdr2 <- function(y, d, X, K = 2L, seed = 1L) {
   if (K == 1L) {
     folds <- rep(0L, n)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
     perm <- sample.int(n)
     folds <- integer(n)
     folds[perm] <- (seq_len(n) - 1L) %% K

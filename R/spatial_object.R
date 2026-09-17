@@ -285,7 +285,7 @@ morie_spatial_moran <- function(x, var, neighbors = NULL) {
 #' @export
 morie_spatial_sample <- function(x, size, by_density = TRUE, seed = 42L) {
   stopifnot(inherits(x, "morie_spatial"))
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   if (!by_density) return(sample.int(x$n, size))
   dm <- morie_spatial_distance(x)
   bw <- stats::median(dm[dm > 0])

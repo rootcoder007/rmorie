@@ -221,7 +221,7 @@ morie_local_dp_randomised_response <- function(truth, k, epsilon,
   e <- exp(epsilon)
   p_keep <- e / (k - 1 + e)
   p_flip <- 1 / (k - 1 + e)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   reports <- vapply(v, function(u) {
     if (stats::runif(1) < p_keep) u
     else sample(setdiff(0:(k - 1), u), 1)

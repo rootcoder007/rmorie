@@ -30,7 +30,7 @@ morie_deep_learning_genomic <- function(x, y, markers, hidden = 16,
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("dlgen", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   y <- as.numeric(y)
   n <- length(y)

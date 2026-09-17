@@ -88,7 +88,7 @@ mrm_tps_lisa <- function(
 ) {
   stopifnot(is.data.frame(data), count_col %in% names(data))
   stopifnot(lat_col %in% names(data), lon_col %in% names(data))
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
 
   keep <- stats::complete.cases(data[, c(count_col, lat_col, lon_col)])
   d <- data[keep, , drop = FALSE]
@@ -203,7 +203,7 @@ mrm_tps_polygon_moran_per_year <- function(
     if (is.null(res)) next
     # Global p-value via permutation of the z-surface (mirrors
     # mrm_lisa.py:204-219 -- was missing in the R port; added 2026-05-22).
-    set.seed(seed)
+    .rmorie_local_seed(seed)
     x <- as.numeric(data[[c]])
     x <- x[!is.na(x)]
     zsd <- stats::sd(x)

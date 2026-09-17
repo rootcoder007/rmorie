@@ -81,7 +81,7 @@
   n <- length(y)
   alpha <- numeric(n)
   b <- 0
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   passes <- 0L
   it <- 0L
   while (passes < max_passes && it < max_iter) {
@@ -595,7 +595,7 @@ morie_esl_ica <- function(X, k = NULL, fun = "logcosh", max_iter = 500L,
     cube = function(u) 3 * u^2
   )
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   W <- matrix(0, k, k)
   iters <- integer(k)
   converged <- TRUE
@@ -858,7 +858,7 @@ morie_esl_self_organize <- function(X, grid = c(5L, 5L), eta = 0.5,
   Dlat <- outer(rowSums(lattice^2), rowSums(lattice^2), "+") -
     2 * tcrossprod(lattice)
   sigma0 <- if (is.null(sigma0)) max(rows, cols) / 2 else as.numeric(sigma0)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   M <- X[sample.int(n, K), , drop = FALSE]
   for (ep in seq_len(n_epochs)) {
     frac <- (ep - 1L) / max(n_epochs - 1L, 1L)
@@ -925,7 +925,7 @@ morie_esl_prototype_lvq <- function(X, y, n_prototypes = 2, eta = 0.1,
     )
   }
   classes <- sort(unique(yr))
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   protos <- NULL
   mc <- NULL
   for (cl in classes) {
@@ -1116,7 +1116,7 @@ morie_esl_neural_net <- function(X, y, M = 5L, lambda_ = 0, lr = 0.1,
     stop('task must be "regression" or "classification"', call. = FALSE)
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   a <- matrix(stats::runif(p * M, -0.7, 0.7), p, M)
   a0 <- numeric(M)
   b <- matrix(stats::runif(M * K, -0.7, 0.7), M, K)
@@ -1303,7 +1303,7 @@ morie_esl_boltzmann <- function(v, h = 4L, lr = 0.1, n_epochs = 200L,
   if (h < 1L) stop("h must be at least 1", call. = FALSE)
   if (k_cd < 1L) stop("k_cd must be at least 1", call. = FALSE)
   bs <- if (is.null(batch_size)) n else min(as.integer(batch_size), n)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   W <- matrix(stats::rnorm(d * h, 0, 0.01), d, h)
   a <- numeric(d)
   b <- numeric(h)
@@ -1375,7 +1375,7 @@ morie_esl_dirichlet_proc <- function(alpha = 1, G0 = NULL, n_atoms = 50L,
   if (alpha <= 0) stop("alpha must be positive", call. = FALSE)
   n_atoms <- as.integer(n_atoms)
   if (n_atoms < 1L) stop("n_atoms must be at least 1", call. = FALSE)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   betas <- stats::rbeta(n_atoms, 1, alpha)
   remain <- c(1, cumprod(1 - betas)[-n_atoms])
   weights <- betas * remain

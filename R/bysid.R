@@ -25,7 +25,7 @@ bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("bysid", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   M <- if (is.matrix(x)) x else matrix(as.numeric(x), ncol = 1L)
   n <- nrow(M)

@@ -332,7 +332,7 @@ print.morie_synth <- function(x, ...) {
   if (identical(method, "placebo")) {
     # Assign N_tr placebo-treated units among the controls.
     if (N_co > N_tr + 1L) {
-      set.seed(seed)
+      .rmorie_local_seed(seed)
       reps <- min(n_boot, 200L)
       placebo_effects <- vapply(seq_len(reps), function(b) {
         idx <- sample(N_co)
@@ -351,7 +351,7 @@ print.morie_synth <- function(x, ...) {
       se <- sqrt((N - 1) / N * sum((jk - mean(jk))^2))
     }
   } else if (identical(method, "bootstrap")) {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
     boot <- rep(NA_real_, n_boot)
     for (b in seq_len(n_boot)) {
       co_idx <- sample(seq_len(N_co), N_co, replace = TRUE)

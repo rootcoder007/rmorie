@@ -203,7 +203,7 @@ morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
   }
   if (is.null(mtry)) mtry <- max(1L, ceiling(sqrt(ncol(X))))
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   m <- max(4L * min_leaf, as.integer(subsample * n))
   trees <- vector("list", n_trees)
   in_bag <- matrix(FALSE, nrow = n_trees, ncol = n)
@@ -306,7 +306,7 @@ morie_causal_forest_bootstrap <- function(y, d, x, B = 40L, n_trees = 60L,
   }
   draws <- matrix(NA_real_, nrow = B, ncol = n)
   for (b in seq_len(B)) {
-    set.seed(seed + b)
+    .rmorie_local_seed(seed + b)
     idx <- sample.int(n, n, replace = TRUE)
     fit <- morie_causal_forest(y[idx], d[idx], X[idx, , drop = FALSE],
       n_trees = n_trees, min_leaf = min_leaf,
@@ -643,7 +643,7 @@ morie_dr_learner <- function(y, t, x, n_folds = 5L, seed = 0L, trunc = 0.01) {
     stop("trunc must lie in (0, 0.5).", call. = FALSE)
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   folds <- sample(rep_len(seq_len(k), n))
   e_all <- pmin(pmax(.morie_logit_fit(X, t), trunc), 1 - trunc)
   psi <- numeric(n)
@@ -729,7 +729,7 @@ morie_interventional_effects <- function(y, x, m, c = NULL, n_draws = 2000L,
   resid <- m - as.vector(Dm %*% bm)
   cbar <- if (ncol(C)) colMeans(C) else numeric(0)
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   draw <- function(xv) {
     mu <- bm[1] + bm[2] * xv + if (ncol(C)) sum(bm[-(1:2)] * cbar) else 0
     mu + sample(resid, B, replace = TRUE)

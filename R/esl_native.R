@@ -59,7 +59,7 @@ morie_esl_em_gmm <- function(X, k = 2, max_iter = 200L, tol = 1e-6,
       call. = FALSE
     )
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   centres <- X[sample.int(n, 1L), , drop = FALSE]
   if (k > 1L) {
     for (i in seq_len(k - 1L)) {
@@ -358,7 +358,7 @@ morie_esl_cv_score <- function(X, y, model = NULL, k = 5L, loss = "mse",
       cbind(1, Xte) %*% qr.solve(A, ytr)
     }
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   fold <- integer(n)
   if (stratify) {
     for (cl in unique(y)) {
@@ -558,7 +558,7 @@ morie_esl_dropout <- function(X, p = 0.5, training = TRUE, seed = 0L) {
       method = "esl_dropout"
     ))
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   mask <- matrix(as.numeric(stats::runif(length(A)) < p), nrow(A), ncol(A))
   list(
     output = A * mask / p, mask = mask, kept_fraction = mean(mask),

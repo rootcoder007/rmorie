@@ -40,7 +40,7 @@ morie_grid_search_cv <- function(x, y, method = NULL, tune_grid = NULL,
       "regression"
     }
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   ctrl <- caret::trainControl(method = "cv", number = cv, classProbs = FALSE)
   if (is.null(method)) {
     if (task == "classification") {

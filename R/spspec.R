@@ -29,7 +29,7 @@ spspec <- function(h, sigma2 = NULL, omega = NULL, mu = 0, seed = NULL) {
   }
   if (any(sigma2 < 0)) stop("`sigma2` entries must be non-negative variances")
   cov <- vapply(h, function(hh) sum(sigma2 * cos(omega * hh)), numeric(1))
-  if (!is.null(seed)) set.seed(seed)
+  .rmorie_local_seed(seed)
   amp <- sqrt(2 * sigma2)
   phase <- stats::runif(length(omega), 0, 2 * pi)
   realisation <- mu + vapply(h, function(s) sum(amp * cos(omega * s + phase)),

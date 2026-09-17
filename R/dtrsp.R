@@ -32,7 +32,7 @@ morie_decision_tree_split <- function(x, y, criterion = "gini", max_depth = 30L,
   yf <- as.factor(y)
   colnames(x) <- colnames(x) %||% paste0("x", seq_len(ncol(x)) - 1L)
   parms_split <- if (criterion == "entropy") "information" else "gini"
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   df <- as.data.frame(x)
   df$.y <- yf
   ctrl <- rpart::rpart.control(

@@ -80,7 +80,7 @@ Gnsetenr <- function(correlations, in_set, p = 1, nperm = 0L,
               n = n, n_hits = nh, nperm = as.integer(nperm),
               method = "GSEA enrichment score (Subramanian et al. 2005)")
   if (nperm > 0) {
-    if (!is.null(seed)) set.seed(seed)
+    .rmorie_local_seed(seed)
     same_sign <- 0L
     as_extreme <- 0L
     for (b in seq_len(nperm)) {

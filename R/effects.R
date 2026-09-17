@@ -148,7 +148,7 @@ estimate_plr <- function(data, treatment, outcome, covariates,
   # Native cross-fit PLR (Chernozhukov et al. 2018) with ridge nuisance
   # learners -- the same estimator the DoubleML delegation computed,
   # cross-validated against DoubleML in tests/cross/.
-  set.seed(random_state)
+  .rmorie_local_seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = n_obs))
   d <- as.numeric(df[[treatment]])
   y <- as.numeric(df[[outcome]])
@@ -248,7 +248,7 @@ estimate_pliv <- function(data, treatment, outcome, instrument,
   # Y|X, D|X, Z|X, then IV regression of the Y-residual on the
   # D-residual instrumented by the Z-residual -- the DoubleMLPLIV
   # estimand (Chernozhukov et al. 2018), cross-validated in tests.
-  set.seed(random_state)
+  .rmorie_local_seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = n_obs))
   y_v <- as.numeric(df[[outcome]])
   d_v <- as.numeric(df[[treatment]])
@@ -430,7 +430,7 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
   }
 
   ate <- fit_and_predict_ate(df)
-  set.seed(42)
+  .rmorie_local_seed(42)
   boot_ates <- rep(NA_real_, 500L)
   for (b in seq_len(500L)) {
     idx <- sample.int(n_obs, n_obs, replace = TRUE)

@@ -227,7 +227,7 @@ morie_tps_hawkes_temporal_fit <- function(df, ds_name = "?",
     ))
   }
   if (length(dt) > as.integer(max_n)) {
-    set.seed(42L)
+    .rmorie_local_seed(42L)
     dt <- sort(dt[sample.int(length(dt), as.integer(max_n))])
   }
   t0 <- min(dt)
@@ -528,7 +528,7 @@ morie_tps_langevin_simulate <- function(df, ds_name = "?",
   if (!is.finite(sigma)) sigma <- 0.0
 
   n_steps <- max(1L, as.integer(T_days / dt))
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   paths <- matrix(0.0, nrow = as.integer(n_paths), ncol = n_steps)
   paths[, 1L] <- x[length(x)]
   sqrtdt <- sqrt(dt)

@@ -170,7 +170,7 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
   }
 
   run_chain <- function(ci) {
-    set.seed(chain_seeds[ci])
+    .rmorie_local_seed(chain_seeds[ci])
     th <- if (is.list(starting_values)) {
       starting_values[[ci]]
     } else if (!is.null(starting_values)) {

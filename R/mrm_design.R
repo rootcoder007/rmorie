@@ -271,7 +271,7 @@ mrm_causal_design <- function(
     w0 <- (1 - D) / (1 - e)
     tau <- sum(w1 * Y) / sum(w1) - sum(w0 * Y) / sum(w0)
     # bootstrap SE
-    set.seed(42)
+    .rmorie_local_seed(42)
     boots <- replicate(199, {
       idx <- sample.int(n, replace = TRUE)
       sub <- d[idx, , drop = FALSE]

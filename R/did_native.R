@@ -341,7 +341,7 @@
       as.numeric(table(cluster)[unique(as.character(cluster))])
     n <- nrow(IF_mat)
   }
-  if (!is.null(seed)) set.seed(seed)
+  .rmorie_local_seed(seed)
   sq5 <- sqrt(5)
   k1 <- 0.5 * (1 - sq5)
   k2 <- 0.5 * (1 + sq5)
@@ -566,7 +566,7 @@
   est <- .morie_didm_point(df, outcome, treatment, unit, time)
   se <- NA_real_
   if (n_bootstrap > 0L) {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
     groups <- unique(df[[unit]])
     boot <- numeric(n_bootstrap)
     for (b in seq_len(n_bootstrap)) {

@@ -118,7 +118,7 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
 .entheo_synthetic_record <- function(subject_id,
                                      n_tp = 480L, n_chan = 32L,
                                      n_parcels = 100L) {
-  set.seed(7L + as.integer(subject_id))
+  .rmorie_local_seed(7L + as.integer(subject_id))
   list(
     subject_id = subject_id,
     condition_order = c("DMT", "PCB"),

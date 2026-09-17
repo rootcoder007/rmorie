@@ -378,7 +378,7 @@ morie_maximum_score <- function(X, y, smoothed = FALSE, h = NULL, r = 2L) {
   neg <- function(rest) -sum(s * (as.numeric(X %*% c(1, rest)) > 0))
   best <- NULL
   bestv <- Inf
-  set.seed(1)
+  .rmorie_local_seed(1)
   if (d == 2L) {
     # scalar free parameter: the objective is a step function, so scan
     # a dense grid and polish, rather than using Nelder-Mead, which R

@@ -55,7 +55,7 @@ Bsmed <- function(x, m, y, B = 1000L, alpha = 0.05, seed = 1L) {
     c(a = ca[2L], b = cb[3L], c_prime = cb[2L])
   }
   p0 <- ab_paths(x, m, y)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   boots <- numeric(B)
   for (r in seq_len(B)) {
     idx <- sample.int(n, n, replace = TRUE)

@@ -74,7 +74,7 @@ morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
   prob <- 1.0 - (1.0 - p_detect)^k
   detected <- NULL
   if (!is.null(seed)) {
-    set.seed(as.integer(seed))
+    .rmorie_local_seed(as.integer(seed))
     detected <- as.integer(stats::runif(length(prob)) < prob)
   }
   mean_p <- if (length(prob)) mean(prob) else NA_real_
@@ -143,7 +143,7 @@ morie_fairness_simulate_biased_crime_data <- function(n = 2000L,
   if (!(bias >= -1.0 && bias <= 1.0)) stop("bias must be in [-1, 1]")
   if (n_areas < G) stop("n_areas must be >= the number of groups")
 
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   if (is.null(group_props)) {
     props <- rep(1.0 / G, G)
   } else {

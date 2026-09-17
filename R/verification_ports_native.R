@@ -206,7 +206,7 @@ morie_regime_value <- function(y, d, X, regime, propensity = NULL,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_bayesian_horseshoe(V, V)
 morie_bayesian_horseshoe <- function(X, y, n_iter = 3000L, seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   X <- as.matrix(X)
   y <- as.numeric(y)
   n <- nrow(X)
@@ -288,7 +288,7 @@ morie_neural_kantorovich_map <- function(source, target, n_iter = 400L,
   if (sd == 0) sd <- 1
   z <- (a - mu) / sd
   knots <- seq(min(z), max(z), length.out = K)   # linspace, as in Python
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   w <- stats::rnorm(K, sd = 0.1)
   c0 <- mean(b)
   sp <- function(v) log1p(exp(-abs(v))) + pmax(v, 0)   # softplus, stable

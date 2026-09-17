@@ -57,7 +57,7 @@ hrzt1 <- function(x, y, treatment, bandwidth = NULL, .bootstrap = TRUE) {
   # Bootstrap SE (guarded against recursive blow-up)
   se <- NA_real_
   if (.bootstrap) {
-    set.seed(0)
+    .rmorie_local_seed(0)
     B <- 50
     boot <- numeric(B)
     for (b in 1:B) {

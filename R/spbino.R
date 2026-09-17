@@ -23,7 +23,7 @@ spbino <- function(n = 100, region = NULL, seed = NULL) {
   if (n < 0) stop("`n` must be >= 0")
   reg <- if (is.null(region)) c(0, 0, 1, 1) else .sp_region(region)
   area <- (reg[3] - reg[1]) * (reg[4] - reg[2])
-  if (!is.null(seed)) set.seed(seed)
+  .rmorie_local_seed(seed)
   pts <- cbind(stats::runif(n, reg[1], reg[3]), stats::runif(n, reg[2], reg[4]))
   counts_in_fraction <- function(p) c(mean = n * p, var = n * p * (1 - p))
   h <- counts_in_fraction(0.5)

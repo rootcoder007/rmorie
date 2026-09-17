@@ -57,7 +57,7 @@ draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
   d <- as.integer(d)
   if (m < 1L || d < 1L)
     stop(sprintf("perfat: need m >= 1 and d >= 1, got %d and %d", m, d))
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   rows <- matrix(stats::rnorm(m * d), nrow = m, ncol = d)
   if (!isTRUE(orthogonal)) return(rows)
   out <- matrix(0, nrow = m, ncol = d)

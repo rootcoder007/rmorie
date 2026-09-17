@@ -40,7 +40,7 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
   if (!is.null(deterministic_seed)) {
     morie_det_rng("tsnrd", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   fit <- .morie_tsne(x, dims = as.integer(n_components),
                      perplexity = perplexity,

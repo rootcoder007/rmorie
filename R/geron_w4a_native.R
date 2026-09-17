@@ -3357,7 +3357,7 @@ morie_geron_gaussian_rand_projection <- function(X, d_out, seed = 0) {
   m <- nrow(A)
   d_in <- ncol(A)
   k <- as.integer(d_out)
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   R <- matrix(rnorm(d_in * k, 0, 1 / sqrt(k)), d_in, k)
   Z <- A %*% R
   if (m >= 2) {

@@ -23,7 +23,7 @@ morie_ghosal_hierarchical_bayes <- function(x, a_prior = 1.0, b_prior = 1.0,
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("ghhbp", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   x <- as.numeric(x)
   n <- length(x)

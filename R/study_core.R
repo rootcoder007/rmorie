@@ -324,7 +324,7 @@
   cor_mat <- stats::cor(data[, cor_vars, drop = FALSE], use = "pairwise.complete.obs")
   cor_df <- data.frame(variable = rownames(cor_mat), cor_mat, row.names = NULL, check.names = FALSE)
 
-  set.seed(42)
+  .rmorie_local_seed(42)
   x <- data$heavy_drinking_30d[!is.na(data$heavy_drinking_30d)]
   sample_sizes <- c(25, 50, 100, 250, 500)
   clt_rows <- list()

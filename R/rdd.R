@@ -807,7 +807,7 @@ morie_rdd_kink <- function(data, outcome, running, cutoff = 0,
 morie_rdd_local_randomisation <- function(data, outcome, running, cutoff = 0,
                                           window = 1, n_permutations = 1000,
                                           seed = 42, alpha = 0.05) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   in_w <- abs(data[[running]] - cutoff) <= window
   sub  <- data[in_w, , drop = FALSE]
   z    <- as.integer(sub[[running]] >= cutoff)

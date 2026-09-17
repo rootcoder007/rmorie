@@ -181,7 +181,7 @@ morie_ml_split <- function(data,
   if (!is.null(strata) && !strata %in% names(data)) {
     stop(sprintf("strata column '%s' not found", strata), call. = FALSE)
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n <- nrow(data)
   if (is.null(strata)) {
     # deterministic proportional counts, then shuffle the assignment
@@ -550,7 +550,7 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
   if (length(feats)) {
     Xs[, feats] <- sweep(sweep(X[, feats, drop = FALSE], 2, ctr), 2, scl, "/")
   }
-  set.seed(model$seed)
+  .rmorie_local_seed(model$seed)
   w <- rep(0, ncol(X))
   loss_path <- numeric(model$epochs)
   grad_norm <- numeric(0)
@@ -786,7 +786,7 @@ morie_ml_resample <- function(model, x, y, n_folds = 5L,
                                        else "rmse", seed = 42L) {
   x <- as.data.frame(x)
   y <- as.numeric(y)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = nrow(x)))
   scores <- vapply(seq_len(n_folds), function(k) {
     tr <- folds != k

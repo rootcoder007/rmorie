@@ -43,7 +43,7 @@
 #' @export
 morie_laplc <- function(value, sensitivity, epsilon, seed = NULL) {
   if (!is.null(seed)) {
-    set.seed(as.integer(seed))
+    .rmorie_local_seed(as.integer(seed))
   }
 
   scale <- sensitivity / epsilon

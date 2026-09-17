@@ -22,7 +22,7 @@ morie_svm_hinge_primal <- function(x, y, C = 1.0, seed = 0L) {
   y <- as.factor(y)
   classes <- levels(y)
   if (length(classes) != 2) stop("morie_svm_hinge_primal requires binary y")
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   ypm <- ifelse(y == classes[2L], 1, -1)
   fit <- .svm_fit_binary(x, ypm, C, 0L, 1, 0, 3)   # linear kernel
   # For the linear kernel the primal weight vector is recoverable in closed
