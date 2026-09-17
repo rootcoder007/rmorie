@@ -33,7 +33,7 @@ morie_drpfw_dropout_forward <- function(x, p = 0.5, seed = 0L, training = TRUE,
     ))
   }
   if (!is.null(deterministic_seed)) {
-    morie_det_rng("drpfw", deterministic_seed)
+    .rmorie_local_det_rng("drpfw", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }

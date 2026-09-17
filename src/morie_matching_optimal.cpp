@@ -29,6 +29,15 @@ Rcpp::IntegerVector morie_match_optimal_1d_cpp(Rcpp::NumericVector treated_val,
   const int nc = control_val.size();
   if (nt == 0 || nc < nt)
     Rcpp::stop("optimal 1:1 matching needs n_control >= n_treated >= 1");
+  // std::sort with `<` on NaN is not a strict weak ordering: under the
+  // libstdc++ assertions many distributions compile with, it aborts the
+  // process instead of returning. Refuse non-finite scores up front.
+  for (int i = 0; i < nt; ++i)
+    if (!R_finite(treated_val[i]))
+      Rcpp::stop("treated_val must be finite (element %d is not)", i + 1);
+  for (int j = 0; j < nc; ++j)
+    if (!R_finite(control_val[j]))
+      Rcpp::stop("control_val must be finite (element %d is not)", j + 1);
   const double big = std::numeric_limits<double>::infinity();
 
   std::vector<int> ord_t(nt), ord_c(nc);
@@ -90,6 +99,15 @@ Rcpp::IntegerVector morie_match_optimal_assign_cpp(Rcpp::NumericMatrix treated,
   const int k = treated.ncol();
   if (nt == 0 || nc < nt)
     Rcpp::stop("optimal 1:1 matching needs n_control >= n_treated >= 1");
+  // std::sort with `<` on NaN is not a strict weak ordering: under the
+  // libstdc++ assertions many distributions compile with, it aborts the
+  // process instead of returning. Refuse non-finite scores up front.
+  for (int i = 0; i < treated.size(); ++i)
+    if (!R_finite(treated[i]))
+      Rcpp::stop("treated must be finite (element %d is not)", i + 1);
+  for (int j = 0; j < control.size(); ++j)
+    if (!R_finite(control[j]))
+      Rcpp::stop("control must be finite (element %d is not)", j + 1);
   if (static_cast<double>(nt) * nc > 5e7)
     Rcpp::stop("distance matrix too large for multivariate optimal "
                "matching (%d x %d); use distance = \"propensity\"",

@@ -39,3 +39,21 @@
           envir = envir)
   invisible(seed)
 }
+
+# morie_det_rng() seeds the session by contract. A function that calls it
+# internally (the deterministic_seed paths) must still hand the caller's
+# stream back, so those sites go through this wrapper: same seeding, same
+# return value, restore on exit.
+.rmorie_local_det_rng <- function(name, seed, envir = parent.frame()) {
+  old <- if (exists(".Random.seed", envir = globalenv(), inherits = FALSE)) {
+    get(".Random.seed", envir = globalenv(), inherits = FALSE)
+  } else {
+    NULL
+  }
+  raw <- morie_det_rng(name, seed)
+  do.call(on.exit,
+          list(bquote((.(.rmorie_restore_seed))(.(old))),
+               add = TRUE, after = FALSE),
+          envir = envir)
+  invisible(raw)
+}

@@ -23,7 +23,7 @@ bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,
                   deterministic_seed = NULL) {
   logistic <- function(z) 1 / (1 + exp(-pmin(pmax(z, -30), 30)))
   if (!is.null(deterministic_seed)) {
-    rmorie::morie_det_rng("bysid", deterministic_seed)
+    .rmorie_local_det_rng("bysid", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }

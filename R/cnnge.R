@@ -21,7 +21,7 @@ morie_cnn_genomic <- function(x, y, markers, n_filters = 8, kernel = 3,
                               l2 = 1e-3, seed = 0,
                               deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
-    rmorie::morie_det_rng("cnnge", deterministic_seed)
+    .rmorie_local_det_rng("cnnge", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }

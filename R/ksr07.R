@@ -37,7 +37,7 @@ Bootemp <- function(x, B = 200, seed = 1,
     # SHA-keyed seed: this and morie._det_rng.r_seed derive the SAME
     # integer from ("ksr07_bootstrap", deterministic_seed), so both arms drive
     # the pinned LCG from an identical start.
-    g <- .t1_lcg(morie_det_rng("ksr07_bootstrap", deterministic_seed))
+    g <- .t1_lcg(.rmorie_local_det_rng("ksr07_bootstrap", deterministic_seed))
   } else {
     g <- .t1_lcg(seed)
   }

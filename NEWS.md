@@ -8,7 +8,9 @@ session for reproducibility got identical downstream draws whatever seed
 they had chosen. Every one of those sites now seeds for the rest of that
 call only and restores the caller's stream (or its absence) on exit; the
 seeded results themselves are unchanged. `morie_det_rng()` still seeds the
-session, which is its documented purpose.
+session, which is its documented purpose, but the twenty-six functions that
+call it on their `deterministic_seed` path now restore the caller's stream
+as well.
 
 ## The compiled mean no longer overflows where base R does not
 
@@ -25,6 +27,14 @@ rmoriebricklayer kernel and `FALSE` the identical kernel rmorie vendors;
 `morie_mean()` and `morie_var()` pick the vendored one whenever the
 installed rmoriebricklayer predates 0.5.1, so the answer never depends on
 which bricklayer build resolved.
+
+## Non-finite propensity scores no longer abort optimal matching
+
+The exact 1-D optimal matching kernel sorted its scores with `<`, which
+is not a strict weak ordering when a score is NaN or Inf; under the
+libstdc++ assertions that Fedora and Debian compile R packages with, that
+aborted the whole R session. The kernel now refuses non-finite scores with
+an error naming the element.
 
 ## Undefined effect sizes and bootstraps warn
 

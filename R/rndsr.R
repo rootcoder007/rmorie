@@ -41,7 +41,7 @@ morie_random_search_cv <- function(x, y, method = NULL, n_iter = 20L, cv = 5L,
     }
   }
   if (!is.null(deterministic_seed)) {
-    morie_det_rng("rndsr", deterministic_seed)
+    .rmorie_local_det_rng("rndsr", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }
