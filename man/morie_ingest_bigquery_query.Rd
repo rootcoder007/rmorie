@@ -43,8 +43,7 @@ none of those yields a project the call errors out with a clear
 message before contacting BigQuery.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
-  requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 # Keyless alternative for the same data: morie_ingest_chicago_crime()
 # (Socrata, no account) or the bundled samples in 'rmoriedata'.
@@ -56,8 +55,7 @@ df <- morie_ingest_bigquery_query(
 )
 head(df)
 \dontshow{\}) # examplesIf}
-\dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
-  requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 # Keyless alternative for the same data: morie_ingest_chicago_crime()
 # (Socrata, no account) or the bundled samples in 'rmoriedata'.

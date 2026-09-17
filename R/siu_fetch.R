@@ -562,9 +562,7 @@ morie_siu_fetch_dataframe <- function(...) {
 #' @return A named character vector: the 16 schema fields plus
 #'   \code{_language}.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriebricklayer", quietly = TRUE) &&
-#'   exists("bricklayer_parse_siu",
-#'   envir = asNamespace("rmoriebricklayer"))) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriebricklayer", quietly = TRUE) && exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer"))) withAutoprint(\{ # examplesIf}
 #' f <- morie_siu_parse_report(system.file("extdata",
 #'   "siu_synthetic_report.html", package = "rmoriebricklayer"))
 #' f[["number_of_subject_officers"]]

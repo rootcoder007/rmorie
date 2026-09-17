@@ -26,8 +26,7 @@ Resolution order:
 }
 }
 \examples{
-\dontshow{if (requireNamespace("httr2", quietly = TRUE) &&
-  requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Local-first and offline: use_ckan = FALSE consults the bundled copy
 # and the local cache only, and errors when neither is present.
 cpads <- try(morie_load_cpads(use_ckan = FALSE), silent = TRUE)

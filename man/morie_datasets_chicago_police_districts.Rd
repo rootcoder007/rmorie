@@ -75,9 +75,7 @@ you'd typically hit the GeoJSON variant via \code{sf::st_read()}
 yourself rather than going through this loader).
 }
 \examples{
-\dontshow{if (nzchar(system.file("extdata", "chicago_police_districts.csv",
-  package = "rmorie")) ||
-  requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (nzchar(system.file("extdata", "chicago_police_districts.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_police_districts(offline = TRUE)
 head(df)
 \dontshow{\}) # examplesIf}
