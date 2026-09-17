@@ -66,6 +66,23 @@ inline const double kBig = 1e12;
 // bit on ordinary data. If the sum overflows although every input is
 // finite (rep(1e308, 3) on a platform whose long double is 64-bit), a
 // running mean, which cannot overflow, is used instead.
+// Running mean: cannot overflow on finite input. The update is written
+// as a/k - m/k rather than (a - m)/k because a - m itself overflows for
+// inputs of opposite sign near the largest double; each term here is
+// bounded by the largest |a|. mean() falls back to it when the
+// extended-precision sum overflows, which only happens where long double
+// is 64-bit, so it is also reachable directly (through
+// rmbl_mean_running()) and tested on every platform.
+inline double mean_running(const double *a, std::size_t n) {
+    if (n == 0) return std::nan("");
+    double m = 0.0;
+    for (std::size_t i = 0; i < n; ++i) {
+        const double k = static_cast<double>(i + 1);
+        m += a[i] / k - m / k;
+    }
+    return m;
+}
+
 inline double mean(const double *a, std::size_t n) {
     if (n == 0) return std::nan("");
     long double s = 0.0L;
@@ -80,11 +97,7 @@ inline double mean(const double *a, std::size_t n) {
     for (std::size_t i = 0; i < n; ++i) {
         if (!std::isfinite(a[i])) return static_cast<double>(s);
     }
-    double m = 0.0;
-    for (std::size_t i = 0; i < n; ++i) {
-        m += (a[i] - m) / static_cast<double>(i + 1);
-    }
-    return m;
+    return mean_running(a, n);
 }
 
 inline double variance(const double *a, std::size_t n, int ddof) {
