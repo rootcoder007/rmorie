@@ -72,6 +72,15 @@ jobs:
         run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
 
+      - name: Make apt resilient (retries, timeouts, primary mirror first)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          printf 'Acquire::Retries "5";\nAcquire::http::Timeout "60";\nAcquire::https::Timeout "60";\n' | sudo tee /etc/apt/apt.conf.d/80-retries >/dev/null
+          if [ -f /etc/apt/apt-mirrors.txt ]; then
+            printf 'http://archive.ubuntu.com/ubuntu/\tpriority:1\nhttp://azure.archive.ubuntu.com/ubuntu/\tpriority:2\n' | sudo tee /etc/apt/apt-mirrors.txt >/dev/null
+          fi
+          sudo apt-get update -qq 2>/dev/null || sudo apt-get update -qq || true
       - uses: r-lib/actions/setup-r-dependencies@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
