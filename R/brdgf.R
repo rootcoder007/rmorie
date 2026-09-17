@@ -25,7 +25,7 @@ morie_bayes_ridge_gibbs <- function(x, y, n_iter = 200, burn = 50,
                                     df0 = 4, S0 = NULL, seed = 0,
                                     deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
-    rmorie::morie_det_rng("brdgf", deterministic_seed)
+    .rmorie_local_det_rng("brdgf", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }

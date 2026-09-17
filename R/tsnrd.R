@@ -38,7 +38,7 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
   max_perplexity <- max(1, floor((n - 1) / 3))
   if (perplexity > max_perplexity) perplexity <- max_perplexity
   if (!is.null(deterministic_seed)) {
-    morie_det_rng("tsnrd", deterministic_seed)
+    .rmorie_local_det_rng("tsnrd", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }

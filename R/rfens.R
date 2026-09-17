@@ -37,7 +37,7 @@ morie_random_forest_ensemble <- function(x, y, n_estimators = 100L,
     }
   }
   if (!is.null(deterministic_seed)) {
-    morie_det_rng("rfens", deterministic_seed)
+    .rmorie_local_det_rng("rfens", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }

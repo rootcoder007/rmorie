@@ -58,3 +58,17 @@ test_that("morie_det_rng() still seeds the session by contract", {
   morie_det_rng("test", 1L)
   expect_identical(a, stats::runif(1))
 })
+
+test_that("the deterministic_seed path restores the caller's stream too", {
+  f <- function() {
+    rmorie:::.rmorie_local_det_rng("t", 1L)
+    stats::runif(1)
+  }
+  set.seed(5)
+  ref <- stats::runif(1)
+  set.seed(5)
+  a <- f()
+  expect_identical(stats::runif(1), ref)
+  set.seed(9)
+  expect_identical(f(), a)
+})

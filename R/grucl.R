@@ -41,7 +41,7 @@ morie_grucl_gru_cell <- function(x, h_prev = NULL, W = NULL, U = NULL, b = NULL,
   H <- as.integer(hidden_size)
   if (is.null(h_prev)) h_prev <- rep(0, H)
   if (!is.null(deterministic_seed)) {
-    morie_det_rng("grucl", deterministic_seed)
+    .rmorie_local_det_rng("grucl", deterministic_seed)
   } else {
     .rmorie_local_seed(seed)
   }

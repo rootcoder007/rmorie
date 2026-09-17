@@ -36,7 +36,7 @@ morie_trfbl_transformer_block <- function(x, num_heads = 2L, d_ff = NULL,
   h1 <- .trfbl_layer_norm(x + attn$output)
 
   if (!is.null(deterministic_seed)) {
-    morie_det_rng("trfbl", deterministic_seed)
+    .rmorie_local_det_rng("trfbl", deterministic_seed)
   } else {
     .rmorie_local_seed(seed + 1L)
   }
