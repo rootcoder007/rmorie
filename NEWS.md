@@ -1,5 +1,11 @@
 # rmorie 1.2.4 - 2026-09-16
 
+## Installation is about twice as fast
+
+`ByteCompile: no`. Byte-compiling the package at install time took half of
+the install (about four minutes on a laptop); R compiles functions on first
+use anyway, so nothing is lost at run time.
+
 ## Eighty-eight documented functions are now exported
 
 Eighty-eight functions carried full roxygen documentation, references and
