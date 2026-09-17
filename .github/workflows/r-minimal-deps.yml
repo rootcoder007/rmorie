@@ -64,6 +64,15 @@ jobs:
           install.packages(c("here", "Rcpp", "RcppArmadillo",
                              "rmoriebricklayer", "rmoriedata", "testthat", "pkgload"),
                            repos = repos, Ncpus = 2)
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
+          }
           missing <- setdiff(c("here", "Rcpp", "RcppArmadillo",
                                "rmoriebricklayer", "rmoriedata", "testthat", "pkgload"),
                              rownames(installed.packages()))
@@ -142,6 +151,15 @@ jobs:
                             error = function(e) FALSE)
             if (got) try(install.packages(tf, repos = NULL, type = "source"))
           }
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
+          }
           missing <- setdiff(pkgs, rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",
                                         paste(missing, collapse = ", "))
@@ -204,6 +222,15 @@ jobs:
             # one bad download from r-universe or P3M must not fail the job
             try(install.packages(missing, repos = repos, Ncpus = 2))
             if (attempt < 4) Sys.sleep(30 * attempt)
+          }
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
           }
           missing <- setdiff(pkgs, rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",

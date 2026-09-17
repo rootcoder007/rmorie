@@ -51,7 +51,17 @@ jobs:
           sudo apt-get install -y -qq libcurl4-openssl-dev libssl-dev libxml2-dev
 
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
-        run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+        run: |
+          install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
+          }
         shell: Rscript {0}
 
       - name: Make apt resilient (retries, timeouts, primary mirror first)

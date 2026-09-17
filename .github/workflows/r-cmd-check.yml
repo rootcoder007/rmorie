@@ -164,7 +164,17 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends libcurl4-openssl-dev libssl-dev
       - name: Pre-install rmoriebricklayer (r-universe; not yet on CRAN)
-        run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+        run: |
+          install.packages(c("rmoriebricklayer", "rmoriedata"), repos = c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org"))
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
+          }
         shell: Rscript {0}
 
       # rmoriebricklayer ships a compiled libcurl fetch core; on a cold
@@ -236,7 +246,17 @@ jobs:
         run: Rscript scripts/audit/check_r_undefined.R .
 
       - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
-        run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = "https://rootcoder007.r-universe.dev")
+        run: |
+          install.packages(c("rmoriebricklayer", "rmoriedata"), repos = "https://rootcoder007.r-universe.dev")
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
+          }
         shell: Rscript {0}
 
       # Belt-and-suspenders: pak resolves Suggests, but anything its solver
@@ -369,6 +389,15 @@ jobs:
             got <- tryCatch({ download.file(gh[[p]], tf, mode = "wb", quiet = TRUE); TRUE },
                             error = function(e) FALSE)
             if (got) try(install.packages(tf, repos = NULL, type = "source"))
+          }
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
           }
           missing <- setdiff(pkgs, rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",
