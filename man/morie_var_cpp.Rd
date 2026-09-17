@@ -7,6 +7,9 @@
 \item{x}{Passed to \code{.Call}.}
 
 \item{ddof}{Passed to \code{.Call}. Defaults to \code{1L}.}
+
+\item{shared}{Use the rmoriebricklayer kernel (\code{TRUE}) or the
+identical kernel rmorie vendors (\code{FALSE}). Defaults to \code{TRUE}.}
 }
 \value{
 The value of \code{.Call}.
@@ -15,4 +18,10 @@ The value of \code{.Call}.
 A step of the RcppExports implementation. Called by \code{morie_var}.
 See the file header for the source the module follows.
 source it follows.
+}
+\examples{
+x <- c(2, 4, 4, 4, 5, 5, 7, 9)
+morie_var_cpp(x)            # sample variance, as var(x)
+morie_var_cpp(x, ddof = 0L) # population variance
+morie_var_cpp(rep(1e120, 3), shared = FALSE) # 0, not 3e208
 }

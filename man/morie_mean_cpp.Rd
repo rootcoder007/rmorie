@@ -5,6 +5,9 @@
 \title{morie_mean_cpp}
 \arguments{
 \item{x}{Passed to \code{.Call}.}
+
+\item{shared}{Use the rmoriebricklayer kernel (\code{TRUE}) or the
+identical kernel rmorie vendors (\code{FALSE}). Defaults to \code{TRUE}.}
 }
 \value{
 The value of \code{.Call}.
@@ -13,4 +16,11 @@ The value of \code{.Call}.
 A step of the RcppExports implementation. Called by \code{morie_mean}.
 See the file header for the source the module follows.
 source it follows.
+}
+\examples{
+x <- c(2, 4, 4, 4, 5, 5, 7, 9)
+morie_mean_cpp(x)
+morie_mean_cpp(x, shared = FALSE)
+# neither kernel overflows where base R's mean() does not
+morie_mean_cpp(rep(1e308, 3), shared = FALSE)
 }

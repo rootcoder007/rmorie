@@ -525,7 +525,15 @@ NULL
 #' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
+#' @param shared Use the rmoriebricklayer kernel (\code{TRUE}) or the
+#'   identical kernel rmorie vendors (\code{FALSE}). Defaults to \code{TRUE}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' x <- c(2, 4, 4, 4, 5, 5, 7, 9)
+#' morie_mean_cpp(x)
+#' morie_mean_cpp(x, shared = FALSE)
+#' # neither kernel overflows where base R's mean() does not
+#' morie_mean_cpp(rep(1e308, 3), shared = FALSE)
 #' @export
 #' @name morie_mean_cpp
 #' @rdname morie_mean_cpp
@@ -539,7 +547,14 @@ NULL
 #'
 #' @param x Passed to \code{.Call}.
 #' @param ddof Passed to \code{.Call}. Defaults to \code{1L}.
+#' @param shared Use the rmoriebricklayer kernel (\code{TRUE}) or the
+#'   identical kernel rmorie vendors (\code{FALSE}). Defaults to \code{TRUE}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' x <- c(2, 4, 4, 4, 5, 5, 7, 9)
+#' morie_var_cpp(x)            # sample variance, as var(x)
+#' morie_var_cpp(x, ddof = 0L) # population variance
+#' morie_var_cpp(rep(1e120, 3), shared = FALSE) # 0, not 3e208
 #' @export
 #' @name morie_var_cpp
 #' @rdname morie_var_cpp

@@ -145,12 +145,12 @@ morie_normal_pdf_cpp <- function(x, mean, sd) {
     .Call(`_rmorie_morie_normal_pdf_cpp`, x, mean, sd)
 }
 
-morie_mean_cpp <- function(x) {
-    .Call(`_rmorie_morie_mean_cpp`, x)
+morie_mean_cpp <- function(x, shared = TRUE) {
+    .Call(`_rmorie_morie_mean_cpp`, x, shared)
 }
 
-morie_var_cpp <- function(x, ddof = 1L) {
-    .Call(`_rmorie_morie_var_cpp`, x, ddof)
+morie_var_cpp <- function(x, ddof = 1L, shared = TRUE) {
+    .Call(`_rmorie_morie_var_cpp`, x, ddof, shared)
 }
 
 morie_cor_pearson_cpp <- function(x, y) {
