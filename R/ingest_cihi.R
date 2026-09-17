@@ -82,8 +82,7 @@ morie_datasets_cihi_data_tables <- function() {
 #' @param ... forwarded to readxl::read_excel.
 #' @return base R data.frame.
 #' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE) &&
-#'   requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Any table from the catalogue, e.g. the injury/trauma ED table:
 #' u <- morie_datasets_cihi_data_tables()$url[1]

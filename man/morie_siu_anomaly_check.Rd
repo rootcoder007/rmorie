@@ -53,8 +53,7 @@ One API call is made per case (all fields batched into a single
 prompt with structured-JSON output).
 }
 \examples{
-\dontshow{if (morie_llm_probe_ollama() &&
-  requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Local Ollama is the default provider (free, no key); the report
 # HTML is fetched live, so try() keeps offline checks graceful.

@@ -29,15 +29,13 @@ opted in to persistent caching by passing
 fetchers.
 }
 \examples{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
-  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Non-interactive: skip the confirmation prompt.
 morie_cache_clear("siu", confirm = FALSE)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
-  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Non-interactive: skip the confirmation prompt.
 morie_cache_clear("siu", confirm = FALSE)

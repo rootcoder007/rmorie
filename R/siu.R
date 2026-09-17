@@ -1901,8 +1901,7 @@ morie_siu_llm_extract <- function(case_number,
 #'   \code{"agree"} / \code{"disagree"} / \code{"unclear"}), and
 #'   \code{reason} (a short sentence pointing to the report passage).
 #' @examples
-#' \dontshow{if (morie_llm_probe_ollama() &&
-#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Local Ollama is the default provider (free, no key); the report
 #' # HTML is fetched live, so try() keeps offline checks graceful.
@@ -2263,8 +2262,7 @@ morie_siu_sanity_check <- function(df) {
 #' @return Invisibly, a data frame of newly-recorded
 #'   (case_number, field, verified_value) translations.
 #' @examples
-#' \dontshow{if (morie_llm_probe_ollama() &&
-#'   requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Uses the local Ollama server (OLLAMA_HOST, default
 #' # http://localhost:11434; model via OLLAMA_MODEL, e.g.
 #' # translategemma:latest). Corpus cache first:
