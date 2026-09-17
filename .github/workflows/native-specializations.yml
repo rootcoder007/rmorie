@@ -62,6 +62,15 @@ jobs:
             try(install.packages(missing, repos = repos, Ncpus = 2))
             if (attempt < 4) Sys.sleep(30 * attempt)
           }
+          # r-universe unreachable: build the two in-house packages from GitHub
+          gh <- c(rmoriebricklayer = "https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                  rmoriedata = "https://github.com/rootcoder007/rmoriedata/archive/refs/heads/main.tar.gz")
+          for (p in intersect(names(gh), setdiff(pkgs, rownames(installed.packages())))) {
+            tf <- tempfile(fileext = ".tar.gz")
+            got <- tryCatch({ download.file(gh[[p]], tf, mode = "wb", quiet = TRUE); TRUE },
+                            error = function(e) FALSE)
+            if (got) try(install.packages(tf, repos = NULL, type = "source"))
+          }
           missing <- setdiff(pkgs, rownames(installed.packages()))
           if (length(missing) > 0) stop("failed to install: ",
                                         paste(missing, collapse = ", "))
