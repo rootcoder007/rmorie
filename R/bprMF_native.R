@@ -352,7 +352,7 @@
        regularizer_sign = reg,
        method = "LearnBPR, bootstrap SGD; Rendle et al. (2009) Fig. 4",
        caveat = if (reg == "paper")
-         "the printed update adds +lambda&#42;Theta, which grows the parameters; this run used that sign"
+         "the printed update adds +lambda*Theta, which grows the parameters; this run used that sign"
        else
          "regulariser sign corrected to -lambda*Theta, which is what ascending BPR-Opt requires")
 }
@@ -549,7 +549,7 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
         "with the Heaviside replaced by ln sigma -- and that",
         "substitution comes from the MLE, not from convenience.",
         "LearnBPR SAMPLES triples rather than sweeping them. The",
-        "printed update's +lambda&#42;Theta is a sign error and diverges.")
+        "printed update's +lambda*Theta is a sign error and diverges.")
 }
 
 #' @rdname bpr_sigmoid
