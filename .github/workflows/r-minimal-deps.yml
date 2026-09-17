@@ -58,8 +58,8 @@ jobs:
             paste(getRversion(), R.version["platform"],
                   R.version["arch"], R.version["os"])))
           repos <- c(
-            CRAN = "https://cloud.r-project.org",   # rmoriebricklayer is on CRAN; first repo wins
-            P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest",
+            P3M = "https://packagemanager.posit.co/cran/__linux__/noble/latest",      # CRAN binaries for this distro
+            CRAN = "https://cloud.r-project.org",   # rmoriebricklayer 0.5.0 until P3M mirrors it
             runiverse = "https://rootcoder007.r-universe.dev")  # rmoriedata until it clears CRAN review
           install.packages(c("here", "Rcpp", "RcppArmadillo",
                              "rmoriebricklayer", "rmoriedata", "testthat", "pkgload"),
@@ -121,8 +121,8 @@ jobs:
             paste(getRversion(), R.version["platform"],
                   R.version["arch"], R.version["os"])))
           repos <- c(
-            CRAN = "https://cloud.r-project.org",   # rmoriebricklayer is on CRAN; first repo wins
-            P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",
+            P3M = "https://packagemanager.posit.co/cran/__linux__/bookworm/latest",      # CRAN binaries for this distro
+            CRAN = "https://cloud.r-project.org",   # rmoriebricklayer 0.5.0 until P3M mirrors it
             runiverse = "https://rootcoder007.r-universe.dev")  # rmoriedata until it clears CRAN review
           pkgs <- c("here", "Rcpp", "RcppArmadillo",
                     "rmoriebricklayer", "rmoriedata", "testthat", "pkgload")
