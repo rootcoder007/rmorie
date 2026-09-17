@@ -1,9 +1,6 @@
-test_that("the compiled mean does not overflow where base R does not", {
-  # The kernel lives in rmoriebricklayer; the fix shipped in 0.5.1.
-  skip_if(utils::packageVersion("rmoriebricklayer") < "0.5.1",
-          "needs rmoriebricklayer >= 0.5.1 for the corrected mean kernel")
-  m <- rmorie:::morie_mean_cpp
-  v <- rmorie:::morie_var_cpp
+test_that("the mean does not overflow where base R does not, on either kernel", {
+  m <- rmorie:::morie_mean
+  v <- rmorie:::morie_var
   expect_identical(m(rep(1e308, 3)), 1e308)
   expect_identical(m(rep(1e120, 3)), 1e120)
   expect_identical(v(rep(1e308, 3), 1L), 0)
@@ -18,4 +15,14 @@ test_that("the compiled mean does not overflow where base R does not", {
   x <- stats::rnorm(1000, 1e6, 1)
   expect_identical(m(x), mean(x))
   expect_equal(v(x, 1L), stats::var(x), tolerance = 1e-14)
+  # the vendored kernel, whatever bricklayer is installed
+  expect_identical(rmorie:::morie_mean_cpp(rep(1e308, 3), shared = FALSE), 1e308)
+  expect_identical(rmorie:::morie_var_cpp(rep(1e120, 3), 1L, shared = FALSE), 0)
+  expect_identical(rmorie:::morie_mean_cpp(x, shared = FALSE), mean(x))
+  # the shared kernel once bricklayer carries the fix
+  if (utils::packageVersion("rmoriebricklayer") >= "0.5.1") {
+    expect_identical(rmorie:::morie_mean_cpp(rep(1e308, 3), shared = TRUE), 1e308)
+    expect_identical(rmorie:::morie_var_cpp(rep(1e120, 3), 1L, shared = TRUE), 0)
+  }
+  expect_type(rmorie:::.rmorie_shared_core(), "logical")
 })

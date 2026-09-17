@@ -48,14 +48,20 @@ NumericVector morie_normal_pdf_cpp(NumericVector x, double mean, double sd) {
     return out;
 }
 
+// `shared = TRUE` uses the rmoriebricklayer callable (the shared core);
+// `shared = FALSE` uses the identical kernel rmorie vendors. The R wrapper
+// passes FALSE when the installed bricklayer predates 0.5.1, whose mean
+// still summed naively, so the answer never depends on which bricklayer
+// build resolved.
 // [[Rcpp::export]]
-double morie_mean_cpp(NumericVector x) {
-    return rmbl_mean(x.begin(), len(x));  // shared core
+double morie_mean_cpp(NumericVector x, bool shared = true) {
+    if (shared) return rmbl_mean(x.begin(), len(x));  // shared core
+    return morie::core::mean(x.begin(), len(x));      // vendored copy
 }
 
 // [[Rcpp::export]]
-double morie_var_cpp(NumericVector x, int ddof = 1) {
-    if (ddof == 1) {
+double morie_var_cpp(NumericVector x, int ddof = 1, bool shared = true) {
+    if (ddof == 1 && shared) {
         return rmbl_var(x.begin(), len(x));  // shared core (n-1 denominator)
     }
     return morie::core::variance(x.begin(), len(x), ddof);

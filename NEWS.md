@@ -19,7 +19,12 @@ bootstrap means), summed naively: `rep(1e308, 3)` gave `Inf` and
 values came back as 3e208. It now uses base R's algorithm (extended
 precision sum plus one corrective pass) with a running mean as the
 fallback when the sum overflows although every input is finite. Results on
-ordinary data are bit-identical to `mean()`.
+ordinary data are bit-identical to `mean()`. `morie_mean_cpp()` and
+`morie_var_cpp()` gain a `shared` argument: `TRUE` (the default) uses the
+rmoriebricklayer kernel and `FALSE` the identical kernel rmorie vendors;
+`morie_mean()` and `morie_var()` pick the vendored one whenever the
+installed rmoriebricklayer predates 0.5.1, so the answer never depends on
+which bricklayer build resolved.
 
 ## Undefined effect sizes and bootstraps warn
 

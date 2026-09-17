@@ -2,7 +2,7 @@
 % Please edit documentation in R/krigun.R
 \name{morie_krigun}
 \alias{morie_krigun}
-\title{R arm of morie/fn/krigun.py -- universal kriging with a polynomial trend}
+\title{Universal kriging with a polynomial trend}
 \usage{
 morie_krigun(
   coords,
@@ -16,30 +16,52 @@ morie_krigun(
 )
 }
 \arguments{
-\item{coords}{Argument \code{coords}; see Usage.}
+\item{coords}{Numeric vector (one dimension) or matrix with one row per
+observation giving the locations of \code{values}.}
 
-\item{values}{Argument \code{values}; see Usage.}
+\item{values}{Numeric vector of observations, one per row of \code{coords}.}
 
-\item{s_predict}{Argument \code{s_predict}; see Usage.}
+\item{s_predict}{Locations to predict at, in the same layout as \code{coords}.}
 
-\item{trend_order}{Argument \code{trend_order}; see Usage.}
+\item{trend_order}{Polynomial order of the trend; 0 gives ordinary kriging.}
 
-\item{model}{Argument \code{model}; see Usage.}
+\item{model}{Covariance model: \code{"exponential"}, \code{"gaussian"} or
+\code{"spherical"}.}
 
-\item{nugget}{Argument \code{nugget}; see Usage.}
+\item{nugget}{Nugget variance added at zero distance.}
 
-\item{sill}{Argument \code{sill}; see Usage.}
+\item{sill}{Partial sill (the covariance at zero distance beyond the
+nugget).}
 
-\item{range_}{Argument \code{range_}; see Usage.}
+\item{range_}{Range parameter of the covariance model.}
 }
 \value{
-A list with components \code{estimate}, \code{se}, \code{n}, \code{trend_order}, \code{method}.
+A list with \code{estimate} and \code{se} (one per prediction location),
+\code{n} (number of observations), \code{trend_order} and a \code{method} label.
 }
 \description{
-R arm of morie/fn/krigun.py -- universal kriging with a polynomial trend. The Python body was a placeholder: it averaged \code{coords} and used neither \code{values}, \code{s_predict} nor \code{trend_order}. There was no R arm at all.   Z(s) = mu(s) + delta(s),  mu(s) = sum_k beta_k f_k(s) with delta zero-mean second-order stationary. The predictor solves the augmented system that enforces unbiasedness on every trend basis function, so the trend coefficients never have to be estimated separately. Order 0 makes the basis a single column of ones, which is exactly the ordinary kriging constraint sum_i lambda_i = 1. ' @noRd
+Predicts a spatial field at new locations under the model
+\code{Z(s) = mu(s) + delta(s)}, where the trend \code{mu(s)} is a polynomial in the
+coordinates of order \code{trend_order} and \code{delta(s)} is zero-mean and
+second-order stationary. The predictor solves the augmented kriging
+system that enforces unbiasedness on every trend basis function, so the
+trend coefficients are never estimated separately. Order 0 reduces the
+basis to a single column of ones, which is ordinary kriging with the
+constraint that the weights sum to one.
 }
 \examples{
-rmorie:::morie_krigun(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
-  s_predict = c(1, 2, 3, 4, 5, 6, 7, 8))
+coords <- c(1, 2, 3, 4, 5, 6, 7, 8)
+values <- c(1.1, 2.3, 2.9, 4.2, 4.8, 6.1, 7.2, 7.9)
+fit <- rmorie:::morie_krigun(coords, values, s_predict = c(2.5, 9),
+                             trend_order = 1, range_ = 2)
+fit$estimate
+fit$se
+}
+\references{
+Cressie, N. (1993). \emph{Statistics for Spatial Data}, revised
+edition, section 3.4.5. Wiley.
+
+Schabenberger, O. and Gotway, C. A. (2005). \emph{Statistical Methods for
+Spatial Data Analysis}, chapter 5. Chapman and Hall/CRC.
 }
 \keyword{internal}

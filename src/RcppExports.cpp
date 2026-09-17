@@ -458,25 +458,27 @@ BEGIN_RCPP
 END_RCPP
 }
 // morie_mean_cpp
-double morie_mean_cpp(NumericVector x);
-RcppExport SEXP _rmorie_morie_mean_cpp(SEXP xSEXP) {
+double morie_mean_cpp(NumericVector x, bool shared);
+RcppExport SEXP _rmorie_morie_mean_cpp(SEXP xSEXP, SEXP sharedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(morie_mean_cpp(x));
+    Rcpp::traits::input_parameter< bool >::type shared(sharedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_mean_cpp(x, shared));
     return rcpp_result_gen;
 END_RCPP
 }
 // morie_var_cpp
-double morie_var_cpp(NumericVector x, int ddof);
-RcppExport SEXP _rmorie_morie_var_cpp(SEXP xSEXP, SEXP ddofSEXP) {
+double morie_var_cpp(NumericVector x, int ddof, bool shared);
+RcppExport SEXP _rmorie_morie_var_cpp(SEXP xSEXP, SEXP ddofSEXP, SEXP sharedSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
     Rcpp::traits::input_parameter< int >::type ddof(ddofSEXP);
-    rcpp_result_gen = Rcpp::wrap(morie_var_cpp(x, ddof));
+    Rcpp::traits::input_parameter< bool >::type shared(sharedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_var_cpp(x, ddof, shared));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1179,8 +1181,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_dsp_cross_correlation_cpp", (DL_FUNC) &_rmorie_morie_dsp_cross_correlation_cpp, 3},
     {"_rmorie_morie_dsp_median_filter_cpp", (DL_FUNC) &_rmorie_morie_dsp_median_filter_cpp, 2},
     {"_rmorie_morie_normal_pdf_cpp", (DL_FUNC) &_rmorie_morie_normal_pdf_cpp, 3},
-    {"_rmorie_morie_mean_cpp", (DL_FUNC) &_rmorie_morie_mean_cpp, 1},
-    {"_rmorie_morie_var_cpp", (DL_FUNC) &_rmorie_morie_var_cpp, 2},
+    {"_rmorie_morie_mean_cpp", (DL_FUNC) &_rmorie_morie_mean_cpp, 2},
+    {"_rmorie_morie_var_cpp", (DL_FUNC) &_rmorie_morie_var_cpp, 3},
     {"_rmorie_morie_cor_pearson_cpp", (DL_FUNC) &_rmorie_morie_cor_pearson_cpp, 2},
     {"_rmorie_morie_hawkes_ll_exp_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_exp_const_cpp, 5},
     {"_rmorie_morie_hawkes_ll_weibull_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_weibull_const_cpp, 6},
