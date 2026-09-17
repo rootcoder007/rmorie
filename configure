@@ -14,10 +14,19 @@ fi
 # If neither succeeds, leave the sodium flags empty -- src/morie_crypto_sym.cpp
 # is gated on MORIE_HAVE_SODIUM and will fall through to a clear runtime
 # error when the corresponding R wrappers are called.
+# All compile probes share one scratch directory that is removed when the
+# script exits, whatever the outcome; R CMD check counts anything left in
+# the temp directory as detritus.
+PROBE_ROOT=`mktemp -d 2>/dev/null || echo ""`
+if [ -z "${PROBE_ROOT}" ]; then
+  PROBE_ROOT="${TMPDIR:-/tmp}/morie_configure_probe.$$"
+  mkdir -p "${PROBE_ROOT}"
+fi
+trap 'rm -rf "${PROBE_ROOT}"' 0
 SODIUM_CFLAGS=`pkg-config --cflags libsodium 2>/dev/null`
 SODIUM_LIBS=`pkg-config --libs libsodium 2>/dev/null`
 if [ -z "${SODIUM_LIBS}" ]; then
-  PROBE_DIR=`mktemp -d 2>/dev/null || echo /tmp`
+  PROBE_DIR="${PROBE_ROOT}"
   PROBE_SRC="${PROBE_DIR}/morie_sodium_probe.c"
   PROBE_OUT="${PROBE_DIR}/morie_sodium_probe"
   printf '#include <sodium.h>\nint main(void){return sodium_init();}\n' > "${PROBE_SRC}"
@@ -44,7 +53,7 @@ if [ -z "${OQS_LIBS}" ]; then
   OQS_LIBS=`pkg-config --libs liboqs 2>/dev/null`
 fi
 if [ -z "${OQS_LIBS}" ]; then
-  PROBE_DIR=`mktemp -d 2>/dev/null || echo /tmp`
+  PROBE_DIR="${PROBE_ROOT}"
   PROBE_SRC="${PROBE_DIR}/morie_oqs_probe.c"
   PROBE_OUT="${PROBE_DIR}/morie_oqs_probe"
   printf '#include <oqs/oqs.h>\nint main(void){OQS_init();OQS_destroy();return 0;}\n' > "${PROBE_SRC}"
@@ -67,7 +76,7 @@ fi
 # without liboqs -- the PQC entry points are gated on MORIE_HAVE_LIBOQS
 # and degrade cleanly.
 if [ -n "${OQS_LIBS}" ]; then
-  RUN_DIR=`mktemp -d 2>/dev/null || echo /tmp`
+  RUN_DIR="${PROBE_ROOT}"
   RUN_SRC="${RUN_DIR}/morie_oqs_run.c"
   RUN_OUT="${RUN_DIR}/morie_oqs_run"
   printf '#include <oqs/oqs.h>\nint main(void){OQS_init();OQS_destroy();return 0;}\n' > "${RUN_SRC}"
@@ -92,7 +101,7 @@ fi
 # flag is a hard error so emit empty.
 AS_NEEDED_OPEN=""
 AS_NEEDED_CLOSE=""
-PROBE_DIR=`mktemp -d 2>/dev/null || echo /tmp`
+PROBE_DIR="${PROBE_ROOT}"
 PROBE_SRC="${PROBE_DIR}/morie_as_needed_probe.c"
 PROBE_OUT="${PROBE_DIR}/morie_as_needed_probe"
 printf 'int main(void){return 0;}\n' > "${PROBE_SRC}"
