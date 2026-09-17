@@ -74,6 +74,16 @@ jobs:
           - { os: ubuntu-22.04,   r: 'oldrel-1' }
 
     env:
+      # Ubuntu 22.04 ships OpenBLAS 0.3.20 (pthread build). On some of the
+      # newer GitHub runner CPUs it selects the wrong kernel and returns
+      # garbage from dgemm/dpotrf, which surfaced on 2026-09-17 as 35
+      # wrong-number failures (Cholesky, kriging, GP, L-BFGS), a Matern
+      # kernel that would not factorise, and a malloc() abort -- on one
+      # runner, green on the next. Pin a kernel every runner has and one
+      # thread; the package's own OpenMP region is pinned with it.
+      OPENBLAS_CORETYPE: Haswell
+      OPENBLAS_NUM_THREADS: "1"
+      OMP_NUM_THREADS: "1"
       _R_CHECK_FORCE_SUGGESTS_: false
       # The eight slowest test files skip unless this is set; the reduced
       # suite is for the constrained builders (r-universe kills a job at
