@@ -1,4 +1,7 @@
 test_that("the compiled mean does not overflow where base R does not", {
+  # The kernel lives in rmoriebricklayer; the fix shipped in 0.5.1.
+  skip_if(utils::packageVersion("rmoriebricklayer") < "0.5.1",
+          "needs rmoriebricklayer >= 0.5.1 for the corrected mean kernel")
   m <- rmorie:::morie_mean_cpp
   v <- rmorie:::morie_var_cpp
   expect_identical(m(rep(1e308, 3)), 1e308)
