@@ -63,7 +63,7 @@ Prehay <- function(x, M, y, B = 1000L, alpha = 0.05, seed = 1L) {
   p0 <- paths(x, M, y)
   spec <- p0$a * p0$b
   total <- sum(spec)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   boot_spec <- matrix(0, B, j)
   boot_tot <- numeric(B)
   for (r in seq_len(B)) {

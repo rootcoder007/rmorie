@@ -14,7 +14,7 @@
 #' morie_genomic_cross_validation(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_genomic_cross_validation <- function(x, y, K = 5, lam = 1.0, seed = 0) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   X <- as.matrix(x)
   y <- as.numeric(y)
   n <- nrow(X)

@@ -22,7 +22,7 @@
 #' Internal helper: Morie Otis A01 Panel
 #' @noRd
 .morie_otis_a01_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     UniqueIndividual_ID = sprintf("syn-%05d", sample.int(max(2L, n %/% 4L), n, replace = TRUE)),
@@ -41,7 +41,7 @@
 #' Internal helper: Morie Otis B01 Panel
 #' @noRd
 .morie_otis_b01_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     UniqueIndividual_ID = sprintf("syn-%05d", sample.int(max(2L, n %/% 4L), n, replace = TRUE)),
@@ -68,7 +68,7 @@
 #' Internal helper: Morie Otis B02 Panel
 #' @noRd
 .morie_otis_b02_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     UniqueIndividual_ID = sprintf("syn-%05d", sample.int(max(2L, n %/% 4L), n, replace = TRUE)),
@@ -83,7 +83,7 @@
 #' Internal helper: Morie Otis B03 Panel
 #' @noRd
 .morie_otis_b03_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_AtTimeOfPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -101,7 +101,7 @@
 #' Internal helper: Morie Otis B04 Panel
 #' @noRd
 .morie_otis_b04_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_AtTimeOfPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -115,7 +115,7 @@
 #' Internal helper: Morie Otis B05 Panel
 #' @noRd
 .morie_otis_b05_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Consecutive_Duration = sample(c("1 day", "2 days", "3 days", "4 days", "5 days", "6 to 10 days", "11 to 15 days", "16 to 20 days", "21 to 25 days", "26 to 30 days", "Greater than 30 days"), n, replace = TRUE),
@@ -127,7 +127,7 @@
 #' Internal helper: Morie Otis B06 Panel
 #' @noRd
 .morie_otis_b06_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_AtTimeOfPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -146,7 +146,7 @@
 #' Internal helper: Morie Otis B07 Panel
 #' @noRd
 .morie_otis_b07_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Alert_Type = sample(c("Immigration Hold Flag", "Mental Health Alert", "Serious Mental Illness Alert", "Suicide Risk Alert", "Suicide Watch Alert", "Transgender Alert"), n, replace = TRUE),
@@ -160,7 +160,7 @@
 #' Internal helper: Morie Otis B08 Panel
 #' @noRd
 .morie_otis_b08_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_AtTimeOfPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -178,7 +178,7 @@
 #' Internal helper: Morie Otis B09 Panel
 #' @noRd
 .morie_otis_b09_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     NumberPlacements_Segregation = sample(c("1 placement", "2 placements", "3 placements", "4 placements", "5 placements", "6 to 10 placements", "11 to 15 placements", "16 to 20 placements", "21 to 25 placements", "26 to 30 placements",
@@ -192,7 +192,7 @@
 #' Internal helper: Morie Otis C01 Panel
 #' @noRd
 .morie_otis_c01_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     NumberIndividuals_InCustody = sample(0:80, n, replace = TRUE),
@@ -206,7 +206,7 @@
 #' Internal helper: Morie Otis C02 Panel
 #' @noRd
 .morie_otis_c02_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -224,7 +224,7 @@
 #' Internal helper: Morie Otis C03 Panel
 #' @noRd
 .morie_otis_c03_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Race = sample(c("Another Race Category", "Black", "East Asian", "Indigenous", "Latino", "Middle Eastern", "More Than One Reported Race Category", "South Asian", "Unknown Or Not Reported", "White"), n, replace = TRUE),
@@ -239,7 +239,7 @@
 #' Internal helper: Morie Otis C04 Panel
 #' @noRd
 .morie_otis_c04_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -253,7 +253,7 @@
 #' Internal helper: Morie Otis C05 Panel
 #' @noRd
 .morie_otis_c05_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -268,7 +268,7 @@
 #' Internal helper: Morie Otis C06 Panel
 #' @noRd
 .morie_otis_c06_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -282,7 +282,7 @@
 #' Internal helper: Morie Otis C07 Panel
 #' @noRd
 .morie_otis_c07_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Alert_Type = sample(c("Immigration Hold Flag", "Mental Health Alert", "Serious Mental Illness Alert", "Suicide Risk Alert", "Suicide Watch Alert", "Transgender Alert"), n, replace = TRUE),
@@ -297,7 +297,7 @@
 #' Internal helper: Morie Otis C08 Panel
 #' @noRd
 .morie_otis_c08_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "More Than One Reported Religion or Spiritual Affiliation", "Muslim", "No Religion", "Sikh",
@@ -313,7 +313,7 @@
 #' Internal helper: Morie Otis C09 Panel
 #' @noRd
 .morie_otis_c09_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Age_Category = sample(c("18 to 24", "25 to 49", "50+"), n, replace = TRUE),
@@ -328,7 +328,7 @@
 #' Internal helper: Morie Otis C10 Panel
 #' @noRd
 .morie_otis_c10_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -347,7 +347,7 @@
 #' Internal helper: Morie Otis C11 Panel
 #' @noRd
 .morie_otis_c11_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Aggregate_Duration = sample(c("1 day", "2 days", "3 days", "4 days", "5 days", "6 to 10 days", "11 to 15 days", "16 to 20 days", "21 to 25 days", "26 to 30 days", "Greater than 30 days"), n, replace = TRUE),
@@ -360,7 +360,7 @@
 #' Internal helper: Morie Otis C12 Panel
 #' @noRd
 .morie_otis_c12_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
@@ -375,7 +375,7 @@
 #' Internal helper: Morie Otis D01 Panel
 #' @noRd
 .morie_otis_d01_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
     UniqueIndividual_ID = sprintf("syn-%05d", sample.int(max(2L, n %/% 4L), n, replace = TRUE)),
@@ -390,7 +390,7 @@
 #' Internal helper: Morie Otis D02 Panel
 #' @noRd
 .morie_otis_d02_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
     Gender = sample(c("Female", "Male"), n, replace = TRUE),
@@ -402,7 +402,7 @@
 #' Internal helper: Morie Otis D03 Panel
 #' @noRd
 .morie_otis_d03_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
     Race = sample(c("Another Race Category Black", "East Asian", "Indigenous", "Latino", "Middle Eastern", "More Than One Reported Race Category", "South Asian", "Unknown Or Not Reported", "White"), n, replace = TRUE),
@@ -414,7 +414,7 @@
 #' Internal helper: Morie Otis D04 Panel
 #' @noRd
 .morie_otis_d04_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
     Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "Muslim", "More Than One Reported Religion or Spiritual Affiliation", "No Religion", "Sikh",
@@ -427,7 +427,7 @@
 #' Internal helper: Morie Otis D05 Panel
 #' @noRd
 .morie_otis_d05_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
     Age_Category = sample(c("18 to 24", "25 to 49", "50+"), n, replace = TRUE),
@@ -439,7 +439,7 @@
 #' Internal helper: Morie Otis D06 Panel
 #' @noRd
 .morie_otis_d06_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
     Alert_Type = sample(c("Mental Health Alert", "Suicide Risk Alert", "Suicide Watch Alert"), n, replace = TRUE),
@@ -452,7 +452,7 @@
 #' Internal helper: Morie Otis D07 Panel
 #' @noRd
 .morie_otis_d07_panel <- function(n = 200L, seed = 1L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
     Alert_Type = sample(c("Mental Health Alert", "Suicide Risk Alert", "Suicide Watch Alert"), n, replace = TRUE),

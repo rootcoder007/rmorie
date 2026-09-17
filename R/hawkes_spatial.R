@@ -158,7 +158,7 @@ morie_hawkes_st_simulate <- function(params, end_time, region, seed = NULL,
   if (length(region) != 4L) {
     stop("`region` must be c(xmin, xmax, ymin, ymax)", call. = FALSE)
   }
-  if (!is.null(seed)) set.seed(seed)
+  .rmorie_local_seed(seed)
   xmin <- region[1]
   xmax <- region[2]
   ymin <- region[3]

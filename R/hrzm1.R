@@ -24,7 +24,7 @@ hrzm1 <- function(y, k = 2, maxit = 200, tol = 1e-6, seed = 0) {
       method = "mixture-EM (insufficient data)"
     ))
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   mu <- as.numeric(stats::quantile(y, seq(0.1, 0.9, length.out = k)))
   sigma <- rep(stats::sd(y) / k + 1e-3, k)
   pii <- rep(1 / k, k)

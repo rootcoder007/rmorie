@@ -262,7 +262,7 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
     stop(sprintf("Unknown ci_method: %s", ci_method))
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
 
@@ -462,7 +462,7 @@ parametric_bootstrap <- function(data, statistic, distribution = "normal",
     stop(sprintf("Unknown distribution: %s", distribution))
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   data <- as.numeric(data)
   n <- length(data)
   original <- as.numeric(statistic(data))
@@ -584,7 +584,7 @@ wild_bootstrap <- function(y, X, statistic_idx = 2L, n_boot = 999L,
     stop(sprintf("Unknown weight_distribution: %s", weight_distribution))
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   y <- as.numeric(y)
   X <- as.matrix(X)
   n <- length(y)
@@ -673,7 +673,7 @@ block_bootstrap <- function(data, statistic, block_size,
   if (!method %in% c("moving", "circular", "stationary")) {
     stop(sprintf("Unknown method: %s", method))
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
 
@@ -839,7 +839,7 @@ jackknife <- function(data, statistic, ci_level = 0.95) {
 delete_d_jackknife <- function(data, statistic, d = 2L,
                                ci_level = 0.95, max_subsets = 5000L,
                                seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
   total_subsets <- choose(n, d)
@@ -923,7 +923,7 @@ permutation_test <- function(group1, group2, statistic = "mean_diff",
 
   stat_fn <- .perm_stat_fn(statistic)
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   g1 <- as.numeric(group1)
   g2 <- as.numeric(group2)
   combined <- c(g1, g2)
@@ -1008,7 +1008,7 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
     stop(sprintf("Unknown statistic: %s", statistic))
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   diffs <- as.numeric(x) - as.numeric(y)
   n <- length(diffs)
 
@@ -1065,7 +1065,7 @@ paired_permutation_test <- function(x, y, statistic = "mean_diff",
 subsampling <- function(data, statistic, subsample_size = NULL,
                         n_subsamples = 1000L, ci_level = 0.95,
                         seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n <- .nrow_like(data)
   original <- as.numeric(statistic(data))
 
@@ -1144,7 +1144,7 @@ subsampling <- function(data, statistic, subsample_size = NULL,
 #' @export
 bootstrap_632 <- function(X, y, model_fn, score_fn,
                           n_boot = 200L, seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   X <- as.matrix(X)
   y <- as.numeric(y)
   n <- length(y)
@@ -1229,7 +1229,7 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 .boot_cross_validate <- function(X, y, model_fn, score_fn,
                                  n_folds = 10L, stratify = NULL,
                                  groups = NULL, seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   X <- as.matrix(X)
   y <- as.numeric(y)
   n <- length(y)

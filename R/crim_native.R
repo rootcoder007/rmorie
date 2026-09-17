@@ -282,7 +282,7 @@ morie_crim_near_repeat <- function(x, y, times, s_threshold,
     sum(close_s & dt <= t_threshold) / 2
   }
   obs <- knox_stat(tt)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   perm <- vapply(
     seq_len(n_perm), function(b) knox_stat(sample(tt)),
     numeric(1)

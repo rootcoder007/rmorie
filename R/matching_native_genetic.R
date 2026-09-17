@@ -68,7 +68,7 @@
   Xc <- X[idx_c, , drop = FALSE]
   k <- ncol(X)
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   # real-coded GA on log10-weights in [-2, 2]; row 1 = equal weights
   # (plain Mahalanobis) so the search can never do worse than module 2
   pop <- matrix(stats::runif(pop_size * k, -2, 2), nrow = pop_size)

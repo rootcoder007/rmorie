@@ -424,12 +424,12 @@ NULL
   dt <- .morie_tps_parse_datetime(df[[date_col]])
   dt <- dt[!is.na(dt)]
   if (length(dt) > max_n) {
-    set.seed(42L)
+    .rmorie_local_seed(42L)
     dt <- sort(sample(dt, max_n))
   }
   t0 <- min(dt)
   t <- as.numeric(difftime(dt, t0, units = "days"))
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   # Uniform(0,1) jitter to break daily ties (sub-day resolution is
   # not observed in TPS data, so jitter preserves event-day order).
   t <- t + stats::runif(length(t))

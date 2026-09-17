@@ -126,7 +126,7 @@ morie_fairness_xai_permutation_importance <- function(predict_fn, X,
   n <- nrow(X)
   d <- ncol(X)
   nm <- .xai_names(feature_names, d)
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   base <- .xai_predict(predict_fn, X)
 
   importances <- numeric(d)
@@ -443,7 +443,7 @@ morie_fairness_xai_shap_values <- function(predict_fn, x, background,
   nm <- .xai_names(feature_names, d)
   x <- as.numeric(x)
   if (length(x) != d) stop("x must have one value per background feature")
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   nb <- nrow(background)
 
   contrib <- numeric(d)

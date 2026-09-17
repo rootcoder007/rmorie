@@ -727,7 +727,7 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
   eff <- ef[1]
   se <- ef[2]
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   placebo <- numeric(n_refute)
   common <- numeric(n_refute)
   subset <- numeric(n_refute)

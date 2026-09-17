@@ -283,7 +283,7 @@ morie_psymet_bartlett <- function(data) {
 morie_psymet_parallel <- function(data, nsim = 100, seed = 42) {
   X <- .as_item_matrix(data)
   # Native Horn's parallel analysis (module 18).
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n <- nrow(X)
   k <- ncol(X)
   obs <- sort(eigen(cor(X), symmetric = TRUE, only.values = TRUE)$values,

@@ -160,7 +160,7 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
   n <- ncol(rows)
   kk <- as.integer(k_dim)
   if (kk < 1L) stop("fmFM: k must be at least 1")
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   w0 <- 0
   w <- rep(0, n)
   V <- replicate(kk, runif(n) - 0.5) * 0.1

@@ -113,7 +113,7 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
     xm <- scale(xm)
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   km <- stats::kmeans(xm, centers = k, nstart = 10L)
 
   # relabel clusters by decreasing size (UL3.0)

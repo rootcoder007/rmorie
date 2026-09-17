@@ -17,7 +17,7 @@
 #' @export
 morie_ghosal_posterior_consistency <- function(x, ref_loc = NULL, ref_scale = NULL,
                                                eps = 0.1, K = 200, seed = 0) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   x <- as.numeric(x)
   n <- length(x)
   if (n == 0) {

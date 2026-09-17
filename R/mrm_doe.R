@@ -476,7 +476,7 @@ mrm_anova_power <- function(k_groups, n_per_group, effect_size_f,
 #' res$ci95_upper
 #' @export
 mrm_mc_power <- function(simulator, n_sims = 1000L, alpha = 0.05, seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   p_values <- vapply(
     seq_len(n_sims),
     function(i) simulator(sample.int(.Machine$integer.max, 1)),
@@ -539,7 +539,7 @@ mrm_perm_block <- function(data, response_col, treatment_col, block_col,
     as.numeric(diff(m))[length(m) - 1]
   }
   obs <- diff_obs(trt)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   perm_stats <- numeric(n_perm)
   blocks <- unique(blk)
   for (k in seq_len(n_perm)) {
@@ -585,7 +585,7 @@ mrm_perm_block <- function(data, response_col, treatment_col, block_col,
 #' )
 #' @export
 mrm_random_latin <- function(k, seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   base <- matrix(0L, k, k)
   for (i in seq_len(k)) {
     for (j in seq_len(k)) {

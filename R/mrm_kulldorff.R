@@ -120,7 +120,7 @@ mrm_tps_kulldorff_scan <- function(
   }
   stopifnot(is.data.frame(data))
   stopifnot(all(c(date_col, lat_col, lon_col) %in% names(data)))
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
 
   df <- data[, c(date_col, lat_col, lon_col)]
   d <- suppressWarnings(as.POSIXct(df[[date_col]],

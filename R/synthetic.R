@@ -199,7 +199,7 @@ morie_generate_synthetic_data <- function(
   profile <- match.arg(profile)
   map <- resolve_synthetic_name_map(name_map = name_map, profile = profile)
 
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
 
   id <- seq_len(n)
   age_group <- sample(1:4, n, replace = TRUE, prob = c(0.27, 0.34, 0.23, 0.16))

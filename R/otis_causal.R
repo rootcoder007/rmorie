@@ -331,7 +331,7 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
   n_treated <- sum(d)
   p_treat <- mean(d)
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = n))
   e_hat <- numeric(n)
   mu1_hat <- numeric(n)
@@ -498,7 +498,7 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
       logit_e <- log(e_all / (1 - e_all))
       sd_logit <- stats::sd(logit_e)
       caliper <- match_caliper_sd * sd_logit
-      set.seed(seed + 7L)
+      .rmorie_local_seed(seed + 7L)
       treated_idx <- which(d_all == 1L)
       control_idx <- which(d_all == 0L)
       treated_order <- sample(treated_idx)
@@ -542,7 +542,7 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
   }
 
   # ---- Cross-fit nuisance models ------------------------------------
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = n))
   e_hat <- numeric(n)
   mu1_hat <- numeric(n)
@@ -1294,7 +1294,7 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
     as.numeric(P %*% a)
   }
 
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = n))
   e_hat <- numeric(n)
   mu1_hat <- numeric(n)
@@ -1400,7 +1400,7 @@ morie_otis_psm <- function(df, treatment, outcome, covariates,
   cal <- caliper * stats::sd(lps)
   t_idx <- which(d == 1L)
   c_idx <- which(d == 0L)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   t_idx <- t_idx[order(stats::runif(length(t_idx)))]
   used <- logical(length(c_idx))
   diffs <- numeric(0)

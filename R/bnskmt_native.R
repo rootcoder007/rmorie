@@ -199,7 +199,7 @@ ks_critical_value <- function(m, instruments, form = "sum",
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
     instruments$instruments else instruments
   kap <- if (is.null(kappa)) sqrt(log(max(n, 3L))) else as.numeric(kappa)
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   draws <- numeric(as.integer(reps))
   for (r in seq_along(draws)) {
     idx <- sample.int(n, n, replace = TRUE)

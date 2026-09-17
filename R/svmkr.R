@@ -29,7 +29,7 @@ morie_svm_kernel_trick <- function(x, y, kernel = "rbf", C = 1.0,
   if (length(lev) < 2L) stop("morie_svm_kernel_trick needs at least two classes.")
   ktype <- .svm_kernel_code(kernel)
   g <- .svm_gamma(gamma, x)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
 
   if (length(lev) == 2L) {
     ypm <- ifelse(y == lev[2L], 1, -1)

@@ -23,7 +23,7 @@ morie_learning_curve <- function(x, y, sizes = NULL, cv = 5L, seed = 0L) {
   y <- as.numeric(y)
   n <- nrow(x)
   if (is.null(sizes)) sizes <- seq(0.1, 1.0, length.out = 5)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   idx <- sample.int(n)
   folds <- cut(seq_len(n), breaks = cv, labels = FALSE)
   fold_idx <- split(idx, folds)

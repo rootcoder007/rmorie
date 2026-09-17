@@ -28,7 +28,7 @@ mnpbt <- function(x, n_draws = 2000L, seed = 0L) {
       method = "multinomial_probit"
     ))
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   draws <- array(stats::rnorm(n_draws * n * J), dim = c(n_draws, n, J))
   Y <- sweep(draws, c(2L, 3L), U, FUN = "+")
   picks <- apply(Y, c(1L, 2L), which.max) # n_draws by n

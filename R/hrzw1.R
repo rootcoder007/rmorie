@@ -35,7 +35,7 @@ hrzw1 <- function(x, y, residuals = NULL, B = 500, seed = 0) {
   } else {
     as.numeric(residuals)
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   XtX_inv <- .morie_ginv(t(X) %*% X)
   boot <- matrix(0, B, p)
   for (b in 1:B) {

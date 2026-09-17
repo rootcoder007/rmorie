@@ -802,7 +802,7 @@ morie_iv_jive <- function(data, outcome, endogenous, instruments,
 morie_iv_split_sample <- function(data, outcome, endogenous, instruments,
                                   exogenous = NULL, split_fraction = 0.5,
                                   seed = 42, alpha = 0.05) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   n  <- nrow(data)
   idx1 <- sample.int(n, floor(n * split_fraction))
   d1 <- data[idx1, , drop = FALSE]

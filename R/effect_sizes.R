@@ -77,7 +77,7 @@ effect_size_result <- function(measure, estimate,
 #' @noRd
 .bootstrap_ci <- function(func, args, n_boot = 2000L,
                           confidence = 0.95, seed = 42L) {
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   boot_vals <- rep(NA_real_, n_boot)
   for (b in seq_len(n_boot)) {
     resampled <- lapply(args, function(a) {

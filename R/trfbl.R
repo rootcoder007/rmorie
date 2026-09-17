@@ -38,7 +38,7 @@ morie_trfbl_transformer_block <- function(x, num_heads = 2L, d_ff = NULL,
   if (!is.null(deterministic_seed)) {
     morie_det_rng("trfbl", deterministic_seed)
   } else {
-    set.seed(seed + 1L)
+    .rmorie_local_seed(seed + 1L)
   }
   W1 <- matrix(stats::rnorm(d_model * d_ff, 0, 1 / sqrt(d_model)), d_model, d_ff)
   W2 <- matrix(stats::rnorm(d_ff * d_model, 0, 1 / sqrt(d_ff)), d_ff, d_model)

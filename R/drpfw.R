@@ -35,7 +35,7 @@ morie_drpfw_dropout_forward <- function(x, p = 0.5, seed = 0L, training = TRUE,
   if (!is.null(deterministic_seed)) {
     morie_det_rng("drpfw", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   mask <- array((stats::runif(length(x)) >= p) * 1.0, dim = dim(x))
   y <- x * mask / (1 - p)

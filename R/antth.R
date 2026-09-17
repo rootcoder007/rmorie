@@ -19,7 +19,7 @@
 #' @export
 antth <- function(x = NULL, f = NULL, N = 1000L, seed = 42L) {
   if (is.null(f)) f <- function(u) u
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   if (is.null(x)) {
     u <- stats::runif(N)
   } else {

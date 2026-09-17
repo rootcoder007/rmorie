@@ -455,7 +455,7 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
   A <- (H + 0.05) / (Hmax + 0.05)
   rho <- matrix(0.5, nrow = nrow(A), ncol = ncol(A))
 
-  set.seed(7L)
+  .rmorie_local_seed(7L)
   for (s in seq_len(n_steps)) {
     logA <- pmax(log(pmax(A, 1e-3)), -50)
     gA <- .tps_sp_grad(logA, dx, dy)
@@ -620,7 +620,7 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
   steps <- steps[mask]
   n     <- length(steps)
   alpha <- 1 + n / sum(log(steps / lmin_km))
-  set.seed(11L)
+  .rmorie_local_seed(11L)
   boots <- vapply(seq_len(200L), function(i) {
     s <- sample(steps, n, replace = TRUE)
     1 + n / sum(log(s / lmin_km))
@@ -973,7 +973,7 @@ morie_tps_sdb_turing_demo <- function(eta = 0.20, omega = 0.033,
                                         n_steps = 6000L, dt = 0.005,
                                         n = 80L, save_fig = TRUE,
                         fig_dir = NULL) {
-  set.seed(7L)
+  .rmorie_local_seed(7L)
   A0 <- theta * gamma / max(omega, 1e-6) ^ 2
   A <- A0 + 0.02 * A0 * matrix(stats::rnorm(n * n), n, n)
   rho <- (gamma / max(A0, 1e-6)) * matrix(1, n, n)
@@ -1080,7 +1080,7 @@ morie_tps_inspection_game_phase <- function(n_temptations = 20L,
   Ts <- seq(0.05, 1.8, length.out = n_temptations)
   gs <- seq(0.05, 1.2, length.out = n_costs)
   crime <- matrix(0, nrow = n_temptations, ncol = n_costs)
-  set.seed(3L)
+  .rmorie_local_seed(3L)
   for (i in seq_along(Ts)) {
     for (j in seq_along(gs)) {
       Tv <- Ts[i]

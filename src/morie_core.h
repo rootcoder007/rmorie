@@ -61,11 +61,30 @@ inline const double kBig = 1e12;
 
 // --- summary statistics ------------------------------------------------------
 
+// Base R's algorithm: an extended-precision sum, then one corrective
+// pass over the residuals, so the result agrees with mean() to the last
+// bit on ordinary data. If the sum overflows although every input is
+// finite (rep(1e308, 3) on a platform whose long double is 64-bit), a
+// running mean, which cannot overflow, is used instead.
 inline double mean(const double *a, std::size_t n) {
     if (n == 0) return std::nan("");
-    double s = 0.0;
+    long double s = 0.0L;
     for (std::size_t i = 0; i < n; ++i) s += a[i];
-    return s / static_cast<double>(n);
+    s /= static_cast<long double>(n);
+    if (std::isfinite(static_cast<double>(s))) {
+        long double t = 0.0L;
+        for (std::size_t i = 0; i < n; ++i) t += (a[i] - s);
+        s += t / static_cast<long double>(n);
+        return static_cast<double>(s);
+    }
+    for (std::size_t i = 0; i < n; ++i) {
+        if (!std::isfinite(a[i])) return static_cast<double>(s);
+    }
+    double m = 0.0;
+    for (std::size_t i = 0; i < n; ++i) {
+        m += (a[i] - m) / static_cast<double>(i + 1);
+    }
+    return m;
 }
 
 inline double variance(const double *a, std::size_t n, int ddof) {
@@ -159,11 +178,11 @@ inline void bootstrap_mean(const double *a, std::size_t n, std::size_t B,
     std::mt19937_64 rng(seed);
     std::uniform_int_distribution<std::size_t> idx(0, n - 1);
     for (std::size_t b = 0; b < B; ++b) {
-        double s = 0.0;
+        long double s = 0.0L;
         for (std::size_t i = 0; i < n; ++i) {
             s += a[idx(rng)];
         }
-        out[b] = s / static_cast<double>(n);
+        out[b] = static_cast<double>(s / static_cast<long double>(n));
     }
 }
 

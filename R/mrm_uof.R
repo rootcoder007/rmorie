@@ -827,7 +827,7 @@ mrm_uof_demographic_disparity <- function(df, demo_col, outcome_col,
       sub_cat <- sub$._outcome[sub[[demo_col]] == row$category]
       sub_base <- sub$._outcome[sub[[demo_col]] == baseline]
       if (length(sub_cat) > 0L && length(sub_base) > 0L) {
-        set.seed(0)
+        .rmorie_local_seed(0)
         draws <- numeric(bootstrap_reps)
         for (b in seq_len(bootstrap_reps)) {
           bi <- sample(sub_cat, length(sub_cat), replace = TRUE)

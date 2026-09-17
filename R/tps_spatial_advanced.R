@@ -151,7 +151,7 @@ morie_tps_ripley_k <- function(df,
     ))
   }
   if (n0 > max_n) {
-    set.seed(42L)
+    .rmorie_local_seed(42L)
     coords <- coords[sample.int(n0, max_n), , drop = FALSE]
   }
   n <- nrow(coords)
@@ -443,7 +443,7 @@ morie_tps_dbscan_clusters <- function(df,
     ))
   }
   if (n0 > max_n) {
-    set.seed(42L)
+    .rmorie_local_seed(42L)
     coords <- coords[sample.int(n0, max_n), , drop = FALSE]
   }
   n <- nrow(coords)

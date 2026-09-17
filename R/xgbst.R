@@ -49,7 +49,7 @@ morie_xgboost_objective <- function(x, y, n_estimators = 100L, learning_rate = 0
   if (!is.null(deterministic_seed)) {
     morie_det_rng("xgbst", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   fit <- .morie_gb_fit(
     x, y, task = task, n_estimators = as.integer(n_estimators),

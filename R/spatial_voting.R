@@ -393,7 +393,7 @@ morie_spatial_voting_optimal_classification <- function(votes,
   votes <- .sv_as_matrix(votes)
   n_leg <- nrow(votes)
   n_vote <- ncol(votes)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   best_errors <- Inf
   best_result <- NULL
 
@@ -559,7 +559,7 @@ morie_spatial_voting_smacof <- function(D,
   V <- diag(rowSums(W))
   V_inv <- .sv_safe_pinv(V)
   if (is.null(init)) {
-    set.seed(42L)
+    .rmorie_local_seed(42L)
     X <- matrix(stats::rnorm(n * n_dims), n, n_dims)
   } else {
     X <- as.matrix(init)
@@ -626,7 +626,7 @@ morie_spatial_voting_nonmetric_mds <- function(D,
                                                tol      = 1e-6) {
   D <- as.matrix(D)
   n <- nrow(D)
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   X <- matrix(stats::rnorm(n * n_dims), n, n_dims)
   idx <- which(upper.tri(D), arr.ind = TRUE)
   d_orig <- D[upper.tri(D)]
@@ -738,7 +738,7 @@ morie_spatial_voting_mlsmu6 <- function(D,
   D <- as.matrix(D)
   n_r <- nrow(D)
   n_s <- ncol(D)
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   best_stress <- Inf
   best <- NULL
   for (r in seq_len(n_restarts)) {
@@ -826,7 +826,7 @@ morie_spatial_voting_smacof_unfolding <- function(D,
   n_r <- nrow(D)
   n_s <- ncol(D)
   n <- n_r + n_s
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   X_r <- matrix(stats::rnorm(n_r * n_dims), n_r, n_dims)
   X_s <- matrix(stats::rnorm(n_s * n_dims), n_s, n_dims)
   D_full <- matrix(0, n, n)
@@ -1315,7 +1315,7 @@ morie_spatial_voting_ordered_oc <- function(Y,
   n <- nrow(Y)
   m <- ncol(Y)
   mask <- !is.na(Y)
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   X <- matrix(stats::rnorm(n * n_dims), n, n_dims)
   cats_list <- vector("list", m)
   cutpoints <- vector("list", m)
@@ -1629,7 +1629,7 @@ morie_spatial_voting_dw_nominate <- function(votes, n_dims = 2L,
   n_leg <- nrow(votes)
   n_votes <- ncol(votes)
   mask <- !is.na(votes)
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   X <- matrix(stats::rnorm(n_leg * n_dims) * 0.5, n_leg, n_dims)
   w <- rep(1 / n_dims, n_dims)
   beta <- 15.0
@@ -1748,7 +1748,7 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
   n_votes <- ncol(votes)
   n_dims <- ncol(X)
   mask <- !is.na(votes)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   beta <- 15.0
   probs <- matrix(0.5, n_leg, n_votes)
   for (j in seq_len(n_votes)) {
@@ -1817,7 +1817,7 @@ morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
   # call returns a usable result instead of raising NotYetPorted;
   # dimensionality and sign conventions match. Engine tag flags the
   # substitution.
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   fit <- morie_spatial_voting_em_irt(as.matrix(votes),
                                       n_dims = as.integer(n_dims))
   list(
@@ -1917,7 +1917,7 @@ morie_spatial_voting_dynamic_irt <- function(votes, time_periods,
   # Martin-Quinn dynamic-IRT) but each per-period fit is itself a
   # valid IRT estimate, so the call returns instead of raising
   # NotYetPorted. Engine tag flags the approximation.
-  set.seed(as.integer(seed))
+  .rmorie_local_seed(as.integer(seed))
   votes <- as.matrix(votes)
   time_periods <- as.integer(time_periods)
   if (length(time_periods) != ncol(votes)) {
@@ -1983,7 +1983,7 @@ morie_spatial_voting_em_irt <- function(votes,
   n_leg <- nrow(votes)
   n_votes <- ncol(votes)
   mask <- !is.na(votes)
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   theta <- matrix(stats::rnorm(n_leg * n_dims) * 0.5, n_leg, n_dims)
   a     <- matrix(stats::rnorm(n_votes * n_dims) * 0.5, n_votes, n_dims)
   d     <- numeric(n_votes)
@@ -2071,7 +2071,7 @@ morie_spatial_voting_nonparametric_bootstrap <- function(Z,
                                                          seed     = 42L) {
   Z <- as.matrix(Z)
   n_resp <- nrow(Z)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   boot_positions <- vector("list", n_boot)
   for (b in seq_len(n_boot)) {
     idx <- sample.int(n_resp, n_resp, replace = TRUE)
@@ -2125,7 +2125,7 @@ morie_spatial_voting_wordfish <- function(dtm,
   storage.mode(dtm) <- "double"
   n_docs <- nrow(dtm)
   n_words <- ncol(dtm)
-  set.seed(42L)
+  .rmorie_local_seed(42L)
   omega <- stats::rnorm(n_docs) * 0.5
   psi   <- log(rowSums(dtm) + 1)
   alpha <- log(colSums(dtm) / sum(dtm) + 1e-10)

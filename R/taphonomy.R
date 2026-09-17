@@ -293,7 +293,7 @@ morie_taphonomy_preservation_delta <- function(data,
       # Valid inference: resample rows and refit the whole CATE procedure, so
       # the SE reflects sampling + estimation uncertainty of the mean effect
       # (not the correlated per-unit dispersion).
-      set.seed(boot_seed)
+      .rmorie_local_seed(boot_seed)
       nb <- as.integer(n_boot)
       boot <- vapply(seq_len(nb), function(b) {
         idx <- sample.int(nrow(data), replace = TRUE)
@@ -514,7 +514,7 @@ morie_taphonomy_decay_simulate <- function(chain, start = chain$transient[1],
   if (!start %in% chain$transient) {
     stop("`start` must be a transient state", call. = FALSE)
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   s <- start
   path <- character(n_steps + 1L)
   path[1] <- s
@@ -1130,7 +1130,7 @@ morie_taphonomy_simulate_pxrf <- function(n,
                                           as_ppm = FALSE,
                                           total_ppm = 1e6) {
   condition <- match.arg(condition)
-  if (!is.null(seed)) set.seed(seed)
+  .rmorie_local_seed(seed)
   if (is.null(alpha)) {
     alpha <- if (condition == "control") {
       c(30, 15, 5, 1, 0.5, 0.5)          # natural soil/bone matrix

@@ -55,7 +55,7 @@ hrzn1 <- function(x, y, z, J = 5, alpha = 1e-3, grid = NULL,
   g_hat <- as.numeric(Bx_g %*% coef)
   # Bootstrap SE (guarded against recursion explosion)
   if (.bootstrap) {
-    set.seed(0)
+    .rmorie_local_seed(0)
     B <- 30
     boot <- matrix(0, B, length(grid))
     for (b in 1:B) {

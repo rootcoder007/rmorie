@@ -62,7 +62,7 @@
     k <- which.min(vals)
     return(list(beta = c(1, grid[k]), value = vals[k]))
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   starts <- list(if (is.null(x0)) numeric(d - 1L) else utils::tail(as.numeric(x0), d - 1L))
   for (i in seq_len(as.integer(n_restarts))) starts[[i + 1L]] <- stats::rnorm(d - 1L)
   best <- NULL
@@ -461,7 +461,7 @@ morie_ordered_max_score <- function(x, y, thresholds = NULL, smoothed = FALSE,
     ))
   }
   k <- (d - 1L) + max(m_cat - 2L, 0L)
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   starts <- list(numeric(k))
   for (i in seq_len(as.integer(n_restarts))) starts[[i + 1L]] <- stats::rnorm(k)
   best <- NULL

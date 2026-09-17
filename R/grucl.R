@@ -43,7 +43,7 @@ morie_grucl_gru_cell <- function(x, h_prev = NULL, W = NULL, U = NULL, b = NULL,
   if (!is.null(deterministic_seed)) {
     morie_det_rng("grucl", deterministic_seed)
   } else {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
   }
   if (is.null(W)) W <- matrix(stats::rnorm(3 * H * n_in, 0, 0.1), 3 * H, n_in)
   if (is.null(U)) U <- matrix(stats::rnorm(3 * H * H, 0, 0.1), 3 * H, H)

@@ -141,7 +141,7 @@ morie_multi_horizon_ks <- function(r, horizons = c(1L, 5L, 20L), cdf = NULL,
     stop("Need at least 8 aggregates at the longest horizon; n=", n,
          " gives ", n %/% hmax, " at h=", hmax, ".", call. = FALSE)
   }
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   rows <- lapply(horizons, function(h) {
     m <- n %/% h
     agg <- sort(colSums(matrix(r[seq_len(m * h)], nrow = h)))

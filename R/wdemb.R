@@ -16,7 +16,7 @@ word_embedding <- function(x, E = NULL, vocab_size = 100L,
                            d_model = 16L, seed = 0L) {
   ids <- as.integer(x)
   if (is.null(E)) {
-    set.seed(seed)
+    .rmorie_local_seed(seed)
     lim <- sqrt(6 / (vocab_size + d_model))
     E <- matrix(stats::runif(vocab_size * d_model, -lim, lim),
       nrow = vocab_size, ncol = d_model

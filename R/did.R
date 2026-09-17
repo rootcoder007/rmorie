@@ -1387,7 +1387,7 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
                                              seed = 42L, alpha = 0.05) {
   df <- .morie_did_drop_na(data, c(outcome, treatment, post, cluster))
   df[["dp_interact"]] <- as.numeric(df[[treatment]]) * as.numeric(df[[post]])
-  set.seed(seed)
+  .rmorie_local_seed(seed)
   d <- as.numeric(df[[treatment]])
   p <- as.numeric(df[[post]])
   y <- as.numeric(df[[outcome]])
