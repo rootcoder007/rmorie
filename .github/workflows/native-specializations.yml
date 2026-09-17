@@ -40,7 +40,7 @@ jobs:
           CODENAME="${VERSION_CODENAME:-noble}"
           RHOME=$(R RHOME)
           echo "container: $ID $VERSION_ID ($CODENAME)"
-          printf 'options(repos = c(runiverse = "https://rootcoder007.r-universe.dev", P3M = "https://packagemanager.posit.co/cran/__linux__/%s/latest", CRAN = "https://cloud.r-project.org"))\n' "$CODENAME" >> "$RHOME/etc/Rprofile.site"
+          printf 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/%s/latest", CRAN = "https://cloud.r-project.org", runiverse = "https://rootcoder007.r-universe.dev"))\n' "$CODENAME" >> "$RHOME/etc/Rprofile.site"
           Rscript -e 'cat("repos now:\n"); print(getOption("repos"))'
         shell: bash
       - name: Install hard dependencies + tooling
