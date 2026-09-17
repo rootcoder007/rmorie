@@ -13,7 +13,7 @@ Named list (ok / error / model / project / location / reply).
 Tiny smoke test for the Vertex AI client
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
 # Runs only when a Google Cloud project is configured.
 morie_vertex_health_check()
 \dontshow{\}) # examplesIf}

@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 ## Default exposure summary: fraction of neighbours treated.
-#' SPDX-License-Identifier: AGPL-3.0-or-later
+#' Default exposure summary: fraction of neighbours treated
 #'
-#' # Default exposure summary: fraction of neighbours treated.
+#' The share of each unit's neighbours (rows of the adjacency matrix)
+#' that received the treatment.
 #'
 #' @param D A vector; its length is taken and its elements indexed.
 #' @param A A matrix; indexed by row and column.

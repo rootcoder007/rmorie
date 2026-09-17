@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlmpi.R
 \name{.tmlmpi_cdf_bank}
 \alias{.tmlmpi_cdf_bank}
-\title{SPDX-License-Identifier: AGPL-3.0-or-later}
+\title{Targeted counterfactual CDFs and their influence curves on a grid}
 \usage{
 .tmlmpi_cdf_bank(yv, Dv, W, g, grid)
 }
@@ -21,16 +21,10 @@
 A list with \code{F}, \code{IC}.
 }
 \description{
-SPDX-License-Identifier: AGPL-3.0-or-later
-}
-\section{Targeted counterfactual CDFs and their influence curves on a grid.}{
-
-}
-
-\section{One point-treatment TMLE per threshold on the binary outcome # I(Y}{
-<= t), with an arm-specific clever covariate H_a = I(D = a)/g_a so #
-that each arm mean -- not just the contrast -- solves its own #
-efficient score. Monotonicity is restored by a running maximum, the #
-cheapest rearrangement that cannot move a correctly ordered pair.
+One point-treatment TMLE per threshold on the binary outcome
+I(Y <= t), with an arm-specific clever covariate H_a = I(D = a)/g_a so
+that each arm mean, not just the contrast, solves its own efficient
+score. Monotonicity is restored by a running maximum, the cheapest
+rearrangement that cannot move a correctly ordered pair.
 }
 

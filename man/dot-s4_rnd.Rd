@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_s04core.R
 \name{.s4_rnd}
 \alias{.s4_rnd}
-\title{Half-away-from-zero. Deliberately not round(): both languages round}
+\title{Round half away from zero}
 \usage{
 .s4_rnd(v)
 }
@@ -13,10 +13,8 @@
 A numeric value.
 }
 \description{
-Half-away-from-zero. Deliberately not round(): both languages round
-}
-\section{half to even but disagree about which values are exactly half.}{
-
+Deliberately not round(): both languages round half to even but
+disagree about which values are exactly half.
 }
 
 \examples{

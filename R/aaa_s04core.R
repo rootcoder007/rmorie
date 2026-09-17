@@ -306,9 +306,10 @@ NULL
 
 ## Half-away-from-zero. Deliberately not round(): both languages round
 ## half to even but disagree about which values are exactly half.
-#' Half-away-from-zero. Deliberately not round(): both languages round
+#' Round half away from zero
 #'
-#' # half to even but disagree about which values are exactly half.
+#' Deliberately not round(): both languages round half to even but
+#' disagree about which values are exactly half.
 #'
 #' @param v Numeric; passed to \code{abs}.
 #' @return A numeric value.
