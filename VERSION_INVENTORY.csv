@@ -513,7 +513,7 @@ File,Line,Status,Version,Context
 ./R/aaa_schab_st_shared.R,241,STALE_OR_DEP,6.2.3,"# Sec. 6.2.3 states the rule outright: on the boundary of the parameter"
 ./R/aaa_schab_st_shared.R,254,STALE_OR_DEP,9.3.3,"# --- Sec. 9.3.3; Ma's mixtures ---------------------------------------------"
 ./R/aaa_schab_st_shared.R,360,STALE_OR_DEP,9.3.4,"# --- Sec. 9.3.4; the differential equation approach ------------------------"
-./R/aaa_schab_st_shared.R,991,STALE_OR_DEP,9.5.3,"# analogy Sec. 9.5.3 itself draws."
+./R/aaa_schab_st_shared.R,1016,STALE_OR_DEP,9.5.3,"# analogy Sec. 9.5.3 itself draws."
 ./R/aaa_sp_fill.R,8,STALE_OR_DEP,6.2.2.1,"# (6.35)-(6.38); and the rho bound in the prose of Sec. 6.2.2.1 p. 336."
 ./R/aaa_sp_fill.R,406,STALE_OR_DEP,1.4.2,"#' Sec. 1.4.2 and Chapter problem 1.14.  C(0) uses the 1/n divisor."
 ./R/aaa_sp_fill.R,423,STALE_OR_DEP,1.4.2,"# Sec. 1.4.2 and Chapter problem 1.14.  C(0) uses the 1/n divisor."
