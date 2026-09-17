@@ -49,17 +49,15 @@ NumericVector morie_normal_pdf_cpp(NumericVector x, double mean, double sd) {
 }
 
 // [[Rcpp::export]]
-// The mean and variance use the vendored kernel rather than the
-// rmoriebricklayer callable: the two are the same code, but an installed
-// bricklayer older than 0.5.1 still carries the naive sum that overflowed
-// on rep(1e308, 3), and rmorie's result must not depend on which
-// bricklayer build is present.
 double morie_mean_cpp(NumericVector x) {
-    return morie::core::mean(x.begin(), len(x));
+    return rmbl_mean(x.begin(), len(x));  // shared core
 }
 
 // [[Rcpp::export]]
 double morie_var_cpp(NumericVector x, int ddof = 1) {
+    if (ddof == 1) {
+        return rmbl_var(x.begin(), len(x));  // shared core (n-1 denominator)
+    }
     return morie::core::variance(x.begin(), len(x), ddof);
 }
 
