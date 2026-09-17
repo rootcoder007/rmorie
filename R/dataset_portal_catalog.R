@@ -142,8 +142,10 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #' # Full catalog: bulk portals (NYC OpenData, Chicago, Toronto Hub,
 #' # etc.) prefer the rmoriedata companion when installed, otherwise
 #' # contribute zero rows with a one-time warning per portal.
-#' cat_df <- morie_dataset_portal_catalog()
+#' \donttest{
+#' cat_df <- morie_dataset_portal_catalog()   # builds every portal, ~6 s
 #' table(cat_df$source)
+#' }
 #' \dontshow{\}) # examplesIf}
 #' @seealso [morie_dataset_portal_catalog_clear_cache()],
 #'   [morie_datasets_load_by_key()], [morie_datasets_browse()]
@@ -157,8 +159,10 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #' # Full catalog: bulk portals (NYC OpenData, Chicago, Toronto Hub,
 #' # etc.) prefer the rmoriedata companion when installed, otherwise
 #' # contribute zero rows with a one-time warning per portal.
-#' cat_df <- morie_dataset_portal_catalog()
+#' \donttest{
+#' cat_df <- morie_dataset_portal_catalog()   # builds every portal, ~6 s
 #' table(cat_df$source)
+#' }
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_dataset_portal_catalog <- function(portal = NULL) {

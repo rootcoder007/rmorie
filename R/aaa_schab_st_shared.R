@@ -359,6 +359,9 @@
 
 # --- Sec. 9.3.4, the differential equation approach ------------------------
 
+## Session cache for Gauss-Legendre rules, keyed by n (see .schab_gauss_legendre).
+.schab_gl_cache <- new.env(parent = emptyenv())
+
 #' Golub and Welsch (1969), Math. Comp. 23(106):221-230 -- NOT a
 #'
 #' Schabenberger & Gotway result. Nodes are the eigenvalues of the
@@ -385,6 +388,15 @@
   if (n == 1L) {
     return(list(nodes = 0, weights = 2))
   }
+  # The rule for a given n never changes, and the eigen-decomposition of
+  # the n x n Jacobi matrix is the whole cost of every Bessel/Whittle
+  # call that uses it (12 s of CPU for the default n = 400 under a
+  # threaded BLAS). Build it once per session.
+  key <- as.character(n)
+  hit <- .schab_gl_cache[[key]]
+  if (!is.null(hit)) {
+    return(hit)
+  }
   k <- seq_len(n - 1L)
   off <- k / sqrt(4 * k * k - 1)
   jac <- matrix(0, n, n)
@@ -392,7 +404,9 @@
   jac[cbind(k + 1L, k)] <- off
   e <- eigen(jac, symmetric = TRUE)
   ord <- order(e$values)
-  list(nodes = e$values[ord], weights = 2 * (e$vectors[1, ord])^2)
+  out <- list(nodes = e$values[ord], weights = 2 * (e$vectors[1, ord])^2)
+  .schab_gl_cache[[key]] <- out
+  out
 }
 
 #' J_0(x) = (1/pi) integral_0^pi cos(x sin theta) dtheta. The integrand
