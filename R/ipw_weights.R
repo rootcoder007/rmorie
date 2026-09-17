@@ -14,7 +14,7 @@
 #' @param ps_col Column name (string) of the propensity scores.
 #' @param stabilized If `TRUE`, return stabilised IPW weights. Default `FALSE`.
 #' @param trim_quantiles Optional length-2 numeric vector \eqn{(q_l, q_u)}
-#'   in \eqn{`[0, 1]`}; if supplied, weights are clipped to the
+#'   between 0 and 1; if supplied, weights are clipped to the
 #'   \eqn{q_l}-th and \eqn{q_u}-th quantiles of the unclipped weight
 #'   distribution (Crump et al. 2009 trimming). Default `NULL`.
 #'

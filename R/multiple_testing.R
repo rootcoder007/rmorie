@@ -1241,7 +1241,7 @@ print.morie_multiple_testing_result <- function(x, ...) {
 #' proportion of null hypotheses estimated by the Storey-style cutoff
 #' at \eqn{p > 0.5}.
 #'
-#' @param p_values Numeric vector of raw p-values in \eqn{`[0, 1]`}.
+#' @param p_values Numeric vector of raw p-values between 0 and 1.
 #' @param pi0_method Pi-zero estimator. Accepted: \code{"bootstrap"}
 #'   (alias for the Storey-style cutoff at 0.5; retained for API
 #'   parity with the Python sibling).
