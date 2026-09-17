@@ -47,6 +47,7 @@ Description: Self-contained multi-domain scientific computing toolkit for
 License: AGPL (>= 3)
 LazyData: true
 Encoding: UTF-8
+ByteCompile: no
 Language: en-US
 Roxygen: list(markdown = TRUE, roclets = c("namespace", "rd", "srr::srr_stats_roclet"))
 RoxygenNote: 8.0.0
