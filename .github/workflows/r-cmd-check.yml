@@ -106,7 +106,7 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
 
-      - uses: r-lib/actions/setup-r@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
+      - uses: r-lib/actions/setup-r@196dc04f2cf1bc6b642b368cb754a7b98eb9eec6 # v2
         with:
           r-version: ${{ matrix.config.r }}
           use-public-rspm: true
