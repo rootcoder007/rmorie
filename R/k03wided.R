@@ -5,9 +5,10 @@
 
 ## One MINSTD step. Exact in double precision (a * m < 2^53), so both
 ## language arms produce bit-identical initial weights.
-#' One MINSTD step. Exact in double precision (a * m < 2^53), so both
+#' One MINSTD linear congruential step
 #'
-#' # language arms produce bit-identical initial weights.
+#' Exact in double precision (a * m < 2^53), so both language arms
+#' produce bit-identical initial weights.
 #'
 #' @param state Numeric; combined arithmetically in the body.
 #' @return A numeric value.

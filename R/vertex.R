@@ -17,6 +17,13 @@ if (!exists("%||%", mode = "function")) {
   `%||%` <- function(a, b) if (is.null(a)) b else a
 }
 
+## Examples run only where a Vertex project is configured. Kept as a
+## function so the examplesIf line stays under the Rd width limit.
+.vertex_examples_ok <- function() {
+  nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) ||
+    nzchar(Sys.getenv("MORIE_EE_PROJECT"))
+}
+
 #' Resolve Vertex AI configuration from environment variables
 #' @return Named list: project / location / model / token_ttl_s / gcloud_path.
 #' @examples
@@ -59,7 +66,7 @@ morie_vertex_resolve_config <- function() {
 #' @return Character bearer token.
 #' @examples
 #' \dontrun{
-#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
 #' # Runs only when a Google Cloud project is configured; Vertex is an
 #' # OPTIONAL fallback -- the default LLM path is local Ollama (see
 #' # morie_siu_panel / morie_llm_* helpers).
@@ -68,7 +75,7 @@ morie_vertex_resolve_config <- function() {
 #' }
 #' @examples
 #' \dontrun{
-#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
 #' # Runs only when a Google Cloud project is configured; Vertex is an
 #' # OPTIONAL fallback -- the default LLM path is local Ollama (see
 #' # morie_siu_panel / morie_llm_* helpers).
@@ -119,7 +126,7 @@ morie_vertex_access_token <- function(cfg = NULL) {
 #' @return Character scalar -- trimmed generated text.
 #' @examples
 #' \dontrun{
-#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
 #' # Runs only when a Google Cloud project is configured; Vertex is an
 #' # OPTIONAL fallback -- the default LLM path is local Ollama.
 #' morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
@@ -127,7 +134,7 @@ morie_vertex_access_token <- function(cfg = NULL) {
 #' }
 #' @examples
 #' \dontrun{
-#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
 #' # Runs only when a Google Cloud project is configured; Vertex is an
 #' # OPTIONAL fallback -- the default LLM path is local Ollama.
 #' morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
@@ -194,7 +201,7 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
 #' Tiny smoke test for the Vertex AI client
 #' @return Named list (ok / error / model / project / location / reply).
 #' @examples
-#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
 #' # Runs only when a Google Cloud project is configured.
 #' morie_vertex_health_check()
 #' \dontshow{\}) # examplesIf}

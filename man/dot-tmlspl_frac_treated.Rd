@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlspl.R
 \name{.tmlspl_frac_treated}
 \alias{.tmlspl_frac_treated}
-\title{SPDX-License-Identifier: AGPL-3.0-or-later}
+\title{Default exposure summary: fraction of neighbours treated}
 \usage{
 .tmlspl_frac_treated(D, A)
 }
@@ -15,10 +15,8 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-SPDX-License-Identifier: AGPL-3.0-or-later
-}
-\section{Default exposure summary: fraction of neighbours treated.}{
-
+The share of each unit's neighbours (rows of the adjacency matrix)
+that received the treatment.
 }
 
 \examples{
