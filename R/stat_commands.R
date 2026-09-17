@@ -523,8 +523,11 @@ print.morie_stat_command <- function(x, ...) {
 #' @keywords internal
 #' @export
 #' @examples
+#' \donttest{
+#' # registers every stat command; about 7 s, so not run on CRAN
 #' set.seed(1)
 #' r <- .morie_auto_register_stat_commands(); TRUE
+#' }
 .morie_auto_register_stat_commands <- function() {
   exports <- tryCatch(getNamespaceExports("rmorie"),
                       error = function(e) character(0))
