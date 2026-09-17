@@ -2,7 +2,13 @@
 
 #' Child-2019 sparse attention mask
 #'
-#' SPDX-License-Identifier: AGPL-3.0-or-later ' Child-2019 sparse attention mask ' ' @param x Sequence length (integer) or tensor whose second-to-last '   dim is the sequence length. ' @param window Integer local window radius (default 4). ' @param stride Integer strided-attention period (default 8). ' @param n_random Integer per-row random links (default 0). ' @param seed Integer RNG seed (default 0). ' @return Named list with tensor (additive mask), boolean, density, method. ' @keywords internal
+#' SPDX-License-Identifier: AGPL-3.0-or-later ' Child-2019 sparse attention mask
+#' ' ' @param x Sequence length (integer) or tensor whose second-to-last '   dim
+#' is the sequence length. ' @param window Integer local window radius (default
+#' 4). ' @param stride Integer strided-attention period (default 8). ' @param
+#' n_random Integer per-row random links (default 0). ' @param seed Integer RNG
+#' seed (default 0). ' @return Named list with tensor (additive mask), boolean,
+#' density, method. ' @keywords internal
 #'
 #' @param x Sequence length (integer) or tensor whose second-to-last
 #'   dim is the sequence length.

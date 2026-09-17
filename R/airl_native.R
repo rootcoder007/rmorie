@@ -86,7 +86,17 @@
 
 #' Adversarial Inverse Reinforcement Learning
 #'
-#' Fits the AIRL discriminator (Fu, Luo & Levine 2018, eq. 4) on expert and policy transitions and reads off the recovered reward `log D - log(1 - D)` for each policy transition (line 6 of Algorithm 1). The discriminator `D = exp(f) / (exp(f) + pi)` with `f = g(s) + gamma h(s') - h(s)` separates expert (`D -> 1`) from policy (`D -> 0`) data. `state_only = TRUE` (the default, Theorem C.1) parameterises `g` on the state alone so the recovered `g*` is the ground truth reward up to a constant. `state_only = FALSE` uses the `g(s, a)` of eq. 4 as written, which fits at least as well but recovers the advantage rather than a transferable reward. AIRL has no random draws: the result is fully determined by the inputs, so no RNG is consulted and `set.seed()` is neither needed nor called.
+#' Fits the AIRL discriminator (Fu, Luo & Levine 2018, eq. 4) on expert and
+#' policy transitions and reads off the recovered reward `log D - log(1 - D)` for
+#' each policy transition (line 6 of Algorithm 1). The discriminator `D = exp(f)
+#' / (exp(f) + pi)` with `f = g(s) + gamma h(s') - h(s)` separates expert (`D ->
+#' 1`) from policy (`D -> 0`) data. `state_only = TRUE` (the default, Theorem
+#' C.1) parameterises `g` on the state alone so the recovered `g*` is the ground
+#' truth reward up to a constant. `state_only = FALSE` uses the `g(s, a)` of eq.
+#' 4 as written, which fits at least as well but recovers the advantage rather
+#' than a transferable reward. AIRL has no random draws: the result is fully
+#' determined by the inputs, so no RNG is consulted and `set.seed()` is neither
+#' needed nor called.
 #'
 #' Fits the AIRL discriminator (Fu, Luo & Levine 2018, eq. 4) on
 #' expert and policy transitions and reads off the recovered reward

@@ -182,7 +182,17 @@ morie_forwsr_consistency_factor <- function(m, n) {
 
 #' Least squares on a subset
 #'
-#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,   least-median-of-squares start, the residual ordering that defines   each subset, and the monitoring of the deletion residuals.   unknown number of multivariate outliers", Journal of the Royal   Statistical Society Series B 71(2), 447-454 -- equation (12), the   consistency factor for a scale estimated from a truncated sample, Native implementation mirroring Python morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting, the same SplitMix64 draws for the LMS start, the same residual ordering, and the same consistency correction. Row indices are 0-based here, as they are in the Python arm; R subscripts add one at the point of use.
+#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file
+#' (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,
+#' least-median-of-squares start, the residual ordering that defines   each
+#' subset, and the monitoring of the deletion residuals.   unknown number of
+#' multivariate outliers", Journal of the Royal   Statistical Society Series B
+#' 71(2), 447-454 -- equation (12), the   consistency factor for a scale
+#' estimated from a truncated sample, Native implementation mirroring Python
+#' morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting,
+#' the same SplitMix64 draws for the LMS start, the same residual ordering, and
+#' the same consistency correction. Row indices are 0-based here, as they are in
+#' the Python arm; R subscripts add one at the point of use.
 #'
 #' @param X Design matrix; supply your own intercept column.
 #' @param y Response.
@@ -225,7 +235,17 @@ morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
 
 #' Least median of squares start
 #'
-#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,   least-median-of-squares start, the residual ordering that defines   each subset, and the monitoring of the deletion residuals.   unknown number of multivariate outliers", Journal of the Royal   Statistical Society Series B 71(2), 447-454 -- equation (12), the   consistency factor for a scale estimated from a truncated sample, Native implementation mirroring Python morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting, the same SplitMix64 draws for the LMS start, the same residual ordering, and the same consistency correction. Row indices are 0-based here, as they are in the Python arm; R subscripts add one at the point of use.
+#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file
+#' (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,
+#' least-median-of-squares start, the residual ordering that defines   each
+#' subset, and the monitoring of the deletion residuals.   unknown number of
+#' multivariate outliers", Journal of the Royal   Statistical Society Series B
+#' 71(2), 447-454 -- equation (12), the   consistency factor for a scale
+#' estimated from a truncated sample, Native implementation mirroring Python
+#' morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting,
+#' the same SplitMix64 draws for the LMS start, the same residual ordering, and
+#' the same consistency correction. Row indices are 0-based here, as they are in
+#' the Python arm; R subscripts add one at the point of use.
 #'
 #' The p-subset whose fit has the smallest median squared residual: a
 #' starting point unlikely to contain an outlier.
@@ -269,7 +289,17 @@ morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
 
 #' Run the forward search, monitoring as it goes
 #'
-#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,   least-median-of-squares start, the residual ordering that defines   each subset, and the monitoring of the deletion residuals.   unknown number of multivariate outliers", Journal of the Royal   Statistical Society Series B 71(2), 447-454 -- equation (12), the   consistency factor for a scale estimated from a truncated sample, Native implementation mirroring Python morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting, the same SplitMix64 draws for the LMS start, the same residual ordering, and the same consistency correction. Row indices are 0-based here, as they are in the Python arm; R subscripts add one at the point of use.
+#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file
+#' (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,
+#' least-median-of-squares start, the residual ordering that defines   each
+#' subset, and the monitoring of the deletion residuals.   unknown number of
+#' multivariate outliers", Journal of the Royal   Statistical Society Series B
+#' 71(2), 447-454 -- equation (12), the   consistency factor for a scale
+#' estimated from a truncated sample, Native implementation mirroring Python
+#' morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting,
+#' the same SplitMix64 draws for the LMS start, the same residual ordering, and
+#' the same consistency correction. Row indices are 0-based here, as they are in
+#' the Python arm; R subscripts add one at the point of use.
 #'
 #' @param X Design matrix.
 #' @param y Response.
@@ -322,7 +352,17 @@ morie_forwsr_forward_search <- function(X, y, start = NULL,
 
 #' The monitored series along the search
 #'
-#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,   least-median-of-squares start, the residual ordering that defines   each subset, and the monitoring of the deletion residuals.   unknown number of multivariate outliers", Journal of the Royal   Statistical Society Series B 71(2), 447-454 -- equation (12), the   consistency factor for a scale estimated from a truncated sample, Native implementation mirroring Python morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting, the same SplitMix64 draws for the LMS start, the same residual ordering, and the same consistency correction. Row indices are 0-based here, as they are in the Python arm; R subscripts add one at the point of use.
+#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file
+#' (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,
+#' least-median-of-squares start, the residual ordering that defines   each
+#' subset, and the monitoring of the deletion residuals.   unknown number of
+#' multivariate outliers", Journal of the Royal   Statistical Society Series B
+#' 71(2), 447-454 -- equation (12), the   consistency factor for a scale
+#' estimated from a truncated sample, Native implementation mirroring Python
+#' morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting,
+#' the same SplitMix64 draws for the LMS start, the same residual ordering, and
+#' the same consistency correction. Row indices are 0-based here, as they are in
+#' the Python arm; R subscripts add one at the point of use.
 #'
 #' @param steps Output of \code{morie_forwsr_forward_search}.
 #' @param key Which monitored quantity to return.
@@ -343,7 +383,17 @@ morie_forwsr_forward_plot <- function(steps,
 
 #' Forward search regression: run the search and report where it jumps
 #'
-#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,   least-median-of-squares start, the residual ordering that defines   each subset, and the monitoring of the deletion residuals.   unknown number of multivariate outliers", Journal of the Royal   Statistical Society Series B 71(2), 447-454 -- equation (12), the   consistency factor for a scale estimated from a truncated sample, Native implementation mirroring Python morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting, the same SplitMix64 draws for the LMS start, the same residual ordering, and the same consistency correction. Row indices are 0-based here, as they are in the Python arm; R subscripts add one at the point of use.
+#' SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file
+#' (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,
+#' least-median-of-squares start, the residual ordering that defines   each
+#' subset, and the monitoring of the deletion residuals.   unknown number of
+#' multivariate outliers", Journal of the Royal   Statistical Society Series B
+#' 71(2), 447-454 -- equation (12), the   consistency factor for a scale
+#' estimated from a truncated sample, Native implementation mirroring Python
+#' morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting,
+#' the same SplitMix64 draws for the LMS start, the same residual ordering, and
+#' the same consistency correction. Row indices are 0-based here, as they are in
+#' the Python arm; R subscripts add one at the point of use.
 #'
 #' \code{threshold} is on the minimum deletion residual; the units
 #' flagged are those entering after the first exceedance -- candidates,

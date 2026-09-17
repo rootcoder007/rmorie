@@ -161,7 +161,14 @@ morie_rfppos_dihedral <- function(a, b, c, d) {
 
 #' Locate the electrophilic carbon and the atom that orients it
 #'
-#' For the Buergi-Dunitz route: a carbon holding a double bond to oxygen or nitrogen, or a triple bond to nitrogen. The electrophile is that carbon and the reference is the heteroatom, because the approach angle is measured to the carbon-heteroatom axis. For the Michael route: a carbon-carbon double bond with one end attached to a carbonyl carbon. The electrophile is the FAR end -- the beta carbon, which is where the sulfur adds -- and the reference is the alpha carbon it is doubly bonded to. Getting these two the wrong way round would measure a real angle at the wrong atom.
+#' For the Buergi-Dunitz route: a carbon holding a double bond to oxygen or
+#' nitrogen, or a triple bond to nitrogen. The electrophile is that carbon and
+#' the reference is the heteroatom, because the approach angle is measured to the
+#' carbon-heteroatom axis. For the Michael route: a carbon-carbon double bond
+#' with one end attached to a carbonyl carbon. The electrophile is the FAR end --
+#' the beta carbon, which is where the sulfur adds -- and the reference is the
+#' alpha carbon it is doubly bonded to. Getting these two the wrong way round
+#' would measure a real angle at the wrong atom.
 #'
 #' For the Buergi-Dunitz route: a carbon holding a double bond to oxygen
 #' or nitrogen, or a triple bond to nitrogen. The electrophile is that

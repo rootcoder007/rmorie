@@ -177,7 +177,14 @@ morie_cypin_logistic <- function(z) {
 
 #' Logistic regression by iteratively reweighted least squares
 #'
-#' An intercept is prepended, so the returned vector is one longer than a descriptor row and its first entry is the intercept. The ridge is a small quadratic penalty on the slopes and not on the intercept. It is there because inhibition data is routinely separable -- every compound above some lipophilicity inhibits -- and a separable logistic fit has no finite maximum, so without it the coefficients run off to infinity and the iteration reports a number that only means "it kept going". The penalty is a parameter and it is reported back.
+#' An intercept is prepended, so the returned vector is one longer than a
+#' descriptor row and its first entry is the intercept. The ridge is a small
+#' quadratic penalty on the slopes and not on the intercept. It is there because
+#' inhibition data is routinely separable -- every compound above some
+#' lipophilicity inhibits -- and a separable logistic fit has no finite maximum,
+#' so without it the coefficients run off to infinity and the iteration reports a
+#' number that only means "it kept going". The penalty is a parameter and it is
+#' reported back.
 #'
 #' An intercept is prepended, so the returned vector is one longer than
 #' a descriptor row and its first entry is the intercept.
