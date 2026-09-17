@@ -15,7 +15,15 @@
 
 #' R arm of morie/fn/krigun.py -- universal kriging with a polynomial trend
 #'
-#' R arm of morie/fn/krigun.py -- universal kriging with a polynomial trend. The Python body was a placeholder: it averaged `coords` and used neither `values`, `s_predict` nor `trend_order`. There was no R arm at all.   Z(s) = mu(s) + delta(s),  mu(s) = sum_k beta_k f_k(s) with delta zero-mean second-order stationary. The predictor solves the augmented system that enforces unbiasedness on every trend basis function, so the trend coefficients never have to be estimated separately. Order 0 makes the basis a single column of ones, which is exactly the ordinary kriging constraint sum_i lambda_i = 1. ' @noRd
+#' R arm of morie/fn/krigun.py -- universal kriging with a polynomial trend. The
+#' Python body was a placeholder: it averaged `coords` and used neither `values`,
+#' `s_predict` nor `trend_order`. There was no R arm at all.   Z(s) = mu(s) +
+#' delta(s),  mu(s) = sum_k beta_k f_k(s) with delta zero-mean second-order
+#' stationary. The predictor solves the augmented system that enforces
+#' unbiasedness on every trend basis function, so the trend coefficients never
+#' have to be estimated separately. Order 0 makes the basis a single column of
+#' ones, which is exactly the ordinary kriging constraint sum_i lambda_i = 1. '
+#' @noRd
 #'
 #' @param coords Argument `coords`; see Usage.
 #' @param values Argument `values`; see Usage.

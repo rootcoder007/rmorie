@@ -145,7 +145,10 @@ morie_funBand_gcv_score <- function(y, A) {
 #' @references
 #' Wahba, G. (1983) Journal of the Royal Statistical Society Series B 45(1),
 #' 133-150, doi:10.1111/j.2517-6161.1983.tb01239.x.
-#' @return A list with `estimate`, `fitted`, `lower`, `upper`, `half_width`, `residuals`, `diag_A`, `posterior_variance`, `sigma2`, `sigma`, `lambda`, `gcv`, `edf_signal`, `edf_error`, `rss`, `multiplier`, `quantile`, `coverage`, `alpha`, `n`, `x`, `method`, `note`.
+#' @return A list with `estimate`, `fitted`, `lower`, `upper`, `half_width`,
+#'   `residuals`, `diag_A`, `posterior_variance`, `sigma2`, `sigma`,
+#'   `lambda`, `gcv`, `edf_signal`, `edf_error`, `rss`, `multiplier`,
+#'   `quantile`, `coverage`, `alpha`, `n`, `x`, `method`, `note`.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

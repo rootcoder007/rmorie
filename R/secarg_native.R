@@ -202,7 +202,12 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 
 #' Argon2 compression function G(X, Y)
 #'
-#' Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A., Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302, Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0 over every parameter, the same block init from H_0, the same J_1/J_2 reference indices and the same G (rows then columns) under BLAKE2b.
+#' Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A.,
+#' Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions
+#' for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302,
+#' Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0
+#' over every parameter, the same block init from H_0, the same J_1/J_2 reference
+#' indices and the same G (rows then columns) under BLAKE2b.
 #'
 #' Applies the BLAKE2b permutation to rows then columns of the 1024-byte
 #' block and XORs back. Rows alone would not diffuse across the block.
@@ -304,7 +309,12 @@ morie_secarg_compress <- function(X, Y) {
 
 #' Argon2 password hash
 #'
-#' Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A., Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302, Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0 over every parameter, the same block init from H_0, the same J_1/J_2 reference indices and the same G (rows then columns) under BLAKE2b.
+#' Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A.,
+#' Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions
+#' for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302,
+#' Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0
+#' over every parameter, the same block init from H_0, the same J_1/J_2 reference
+#' indices and the same G (rows then columns) under BLAKE2b.
 #'
 #' Computes the tag and returns the parameters it was computed under,
 #' since a tag compared across different parameters is meaningless.
@@ -357,7 +367,12 @@ morie_secarg_argon2 <- function(password, salt, memory = 32, passes = 3,
 
 #' RFC 9106 recommended Argon2id configurations
 #'
-#' Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A., Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302, Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0 over every parameter, the same block init from H_0, the same J_1/J_2 reference indices and the same G (rows then columns) under BLAKE2b.
+#' Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A.,
+#' Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions
+#' for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302,
+#' Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0
+#' over every parameter, the same block init from H_0, the same J_1/J_2 reference
+#' indices and the same G (rows then columns) under BLAKE2b.
 #'
 #' @param profile \code{first} or \code{second}.
 #' @return List with \code{variant}, \code{memory}, \code{memory_gib},

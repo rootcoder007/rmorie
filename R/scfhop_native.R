@@ -150,7 +150,15 @@ morie_scfhop_types <- function(smiles) {
 
 #' The CATS correlation vector: type pairs by topological distance
 #'
-#' Laid out pair-major, distance-minor, so entry `p * (maxdist + 1) + d` is the count of pairs of the p-th type combination exactly d bonds apart. Distance zero is an atom with itself, which is how an atom carrying two types registers at all. Scaling routes, all three defensible and all giving different answers, so the choice is the caller's. `type` divides each entry by the number of atoms carrying the two types, which is Schneider's scaling and stops a large molecule dominating simply by being large. `count` divides by the total pairs counted. `none` leaves raw counts, which is what you want if you intend to compare absolute frequencies.
+#' Laid out pair-major, distance-minor, so entry `p * (maxdist + 1) + d` is the
+#' count of pairs of the p-th type combination exactly d bonds apart. Distance
+#' zero is an atom with itself, which is how an atom carrying two types registers
+#' at all. Scaling routes, all three defensible and all giving different answers,
+#' so the choice is the caller's. `type` divides each entry by the number of
+#' atoms carrying the two types, which is Schneider's scaling and stops a large
+#' molecule dominating simply by being large. `count` divides by the total pairs
+#' counted. `none` leaves raw counts, which is what you want if you intend to
+#' compare absolute frequencies.
 #'
 #' Laid out pair-major, distance-minor, so entry
 #' \code{p * (maxdist + 1) + d} is the count of pairs of the p-th type

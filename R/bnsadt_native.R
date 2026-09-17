@@ -236,7 +236,17 @@ morie_bnsadt_group_counts <- function(x, sigma, family) {
 
 #' Maximum likelihood over the selection model, by Nelder-Mead
 #'
-#' tau and every beta are optimised on the log scale, so the simplex cannot step to a negative variance or a negative probability and the run needs no penalty term to stay inside the parameter space. Betas are squashed by the logistic, which bounds them by 1 -- a publication probability above the normalisation would be the likelihood saying the significant region is SUPPRESSED, which the family does not describe. Two guards, both statements about identification and not numerical tape: a group with no observed studies is HELD at 1 and reported in `unidentified`, because its beta is bounded only from above; and tau is floored at 1e-6 times the mean standard error, below which the between-study spread is far under the within-study noise and the likelihood is flat in it. The floor is reported in `tau_at_floor` rather than hidden.
+#' tau and every beta are optimised on the log scale, so the simplex cannot step
+#' to a negative variance or a negative probability and the run needs no penalty
+#' term to stay inside the parameter space. Betas are squashed by the logistic,
+#' which bounds them by 1 -- a publication probability above the normalisation
+#' would be the likelihood saying the significant region is SUPPRESSED, which the
+#' family does not describe. Two guards, both statements about identification and
+#' not numerical tape: a group with no observed studies is HELD at 1 and reported
+#' in `unidentified`, because its beta is bounded only from above; and tau is
+#' floored at 1e-6 times the mean standard error, below which the between-study
+#' spread is far under the within-study noise and the likelihood is flat in it.
+#' The floor is reported in `tau_at_floor` rather than hidden.
 #'
 #' tau and every beta are optimised on the log scale, so the simplex
 #' cannot step to a negative variance or a negative probability and the
