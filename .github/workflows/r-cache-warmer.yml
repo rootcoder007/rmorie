@@ -20,7 +20,7 @@ jobs:
       MAKEFLAGS: "-j1" # ECOSolveR SuiteSparse Makefile races under parallel make
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: r-lib/actions/setup-r@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
+      - uses: r-lib/actions/setup-r@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         with:
           r-version: 'release'
           use-public-rspm: true
