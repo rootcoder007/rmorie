@@ -4,7 +4,13 @@
 \alias{morie_transfer_verify}
 \title{Verify a categorical variable that crossed from one program to another}
 \usage{
-morie_transfer_verify(imported, source_counts, code_book = NULL, tolerance = 0)
+morie_transfer_verify(
+  imported,
+  source_counts,
+  code_book = NULL,
+  tolerance = 0,
+  strict = TRUE
+)
 }
 \arguments{
 \item{imported}{The vector as it arrived: a haven-style labelled vector,

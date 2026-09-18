@@ -8,6 +8,15 @@
   observed permutation. The OHRC 2023 correction's four-way rotation is the
   documented case and the test fixture.
 
+* `morie_marginals_verify()` and `morie_transfer_verify()` gain `strict`;
+  with `strict = FALSE` a mismatch comes back as `ok = FALSE` with the
+  `permutation` and `message` instead of an error, so
+  `morie_relabel_forensics()` is reachable from the public path.
+  `morie_audit_categories()` now flags leading/trailing (incl. non-breaking)
+  whitespace, whitespace-variant duplicates, empty-string labels,
+  missing-value sentinels stored as labels, and a reference level that is
+  any of those. The identity permutation is reported as no permutation.
+  The shared C++ `cor_pearson` is centred and clamped to [-1, 1].
 * The greedy one-dimensional matcher refuses NA or NaN scores, a NaN
   caliper and a ratio below one instead of handing them to the sort,
   where a NaN comparator is undefined behaviour and corrupted the heap

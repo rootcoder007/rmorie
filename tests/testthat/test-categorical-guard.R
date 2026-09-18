@@ -234,8 +234,10 @@ test_that("morie_relabel_forensics reproduces the OHRC rotation from an alphabet
   expect_false(any(none$matches))
   expect_match(attr(none, "verdict"), "No positional")
   expect_error(morie_relabel_forensics(vl, c(White = "Black")), "permutation")
-  fr <- morie_relabel_forensics(vl, c(White = "White", Black = "Black", Other = "Other", Unknown = "Unknown"),
-             counts = c(White = 9000, Black = 2000, Other = 1500, Unknown = 60))
+  # decreasing frequency: Black, Unknown, White, Other assigned to codes 1..4
+  fr <- morie_relabel_forensics(vl, c(White = "Black", Black = "Unknown",
+                               Other = "White", Unknown = "Other"),
+                               counts = c(White = 100, Black = 9000, Other = 50, Unknown = 500))
   expect_true(fr$matches[fr$mechanism == "labels ordered by decreasing frequency, assigned by code position"])
 })
 
@@ -257,4 +259,38 @@ test_that("morie_transfer_verify accepts a faithful SPSS-style import and names 
                "disagree with the source code book")
   expect_error(morie_transfer_verify(c("Black", "Black", "Other", "White", "Black"), c(White = 3, Black = 1, Unknown = 1)),
                "do not match|permuted|not in the published")
+})
+
+test_that("audit flags whitespace, empty and sentinel labels (round 3)", {
+  df <- data.frame(trailing = c("White ", "White", "Black", "Black"),
+                   leading = c(" White", "White", "Black", "Black"),
+                   na_string = c("White", "NA", "Black", "Black"),
+                   empty_str = c("", "White", "Black", "Black"),
+                   unicode_ws = c("White\u00a0", "White", "Black", "Black"),
+                   stringsAsFactors = FALSE)
+  a <- morie_audit_categories(df)
+  h <- stats::setNames(a$hazards, a$column)
+  expect_match(h[["trailing"]], "trailing whitespace")
+  expect_match(h[["leading"]], "REFERENCE level")
+  expect_match(h[["na_string"]], "sentinel")
+  expect_match(h[["empty_str"]], "empty-string")
+  expect_match(h[["unicode_ws"]], "non-breaking")
+})
+
+test_that("strict = FALSE returns ok = FALSE with the permutation (round 3)", {
+  x <- c("White", "White", "Black", "Indigenous", "White", "Black")
+  r <- morie_marginals_verify(x, c(White = 2, Black = 3, Indigenous = 1),
+                              strict = FALSE)
+  expect_false(r$ok)
+  expect_equal(unname(r$permutation[["White"]]), "Black")
+  expect_match(r$message, "permuted")
+  t2 <- morie_transfer_verify(c("Black", "White", "White", "Black", "Black"),
+                              c(White = 3, Black = 2), strict = FALSE)
+  expect_false(t2$ok)
+  expect_equal(unname(t2$marginals$permutation[["White"]]), "Black")
+  expect_true(length(t2$reasons) >= 1)
+  vl <- c("1" = "White", "2" = "Black")
+  id <- morie_relabel_forensics(vl, c(White = "White", Black = "Black"))
+  expect_false(any(id$matches))
+  expect_match(attr(id, "verdict"), "no permutation")
 })
