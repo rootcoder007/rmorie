@@ -1,5 +1,11 @@
 # rmorie 1.2.5 - 2026-09-18
 
+* `agent()` quotes every argument it hands to the CLI. Unquoted, a
+  parenthesis in the task was a shell syntax error, a space split the task
+  in two and a `;` ran the rest as a command. `task`, `model` and
+  `backend` are validated, and a stub binary on `PATH` now exercises the
+  branch the tests never reached.
+
 * `morie_safe_relabel()`, `morie_decode_labelled()`, `morie_transfer_verify()`
   and `morie_relabel_forensics()`: relabel by name only, decode labelled
   imports by code, verify an SPSS/Stata/SAS import against the source

@@ -28,15 +28,20 @@
 #' }
 #' @export
 agent <- function(task, model = NULL, backend = "auto", dry_run = FALSE) {
-  stopifnot(is.character(task), length(task) == 1L, nzchar(task))
+  .morie_agent_arg(task, "task")
+  .morie_agent_arg(backend, "backend")
+  if (!is.null(model)) .morie_agent_arg(model, "model")
   bin <- Sys.which("rmorie")
   if (!nzchar(bin)) {
     return("rmorie CLI not found on PATH. Install rmorie-cli to use agent().")
   }
-  args <- c("agent", "--backend", backend)
-  if (!is.null(model)) args <- c(args, "-m", model)
+  # system2() hands `args` to a shell: quote every value, or a parenthesis
+  # in the task is a shell syntax error, a space splits it in two and a ";"
+  # runs the rest as a command.
+  args <- c("agent", "--backend", shQuote(backend))
+  if (!is.null(model)) args <- c(args, "-m", shQuote(model))
   if (isTRUE(dry_run)) args <- c(args, "--dry-run")
-  args <- c(args, task)
+  args <- c(args, shQuote(task))
   .morie_ensure_exec_allowed("rmorie agent execution")
   out <- suppressWarnings(
     system2(bin, args = args, stdout = TRUE, stderr = TRUE)
@@ -51,3 +56,12 @@ agent <- function(task, model = NULL, backend = "auto", dry_run = FALSE) {
 #' agent_available()
 #' @export
 agent_available <- function() nzchar(Sys.which("rmorie"))
+
+# A non-NA, non-blank character scalar, or an error naming the argument.
+.morie_agent_arg <- function(x, what) {
+  if (!is.character(x) || length(x) != 1L || is.na(x) || !nzchar(trimws(x))) {
+    stop(sprintf("`%s` must be a single non-empty string.", what),
+         call. = FALSE)
+  }
+  invisible(TRUE)
+}
