@@ -1,6 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 url: https://rootcoder007.github.io/rmorie/
 
+# pkgdown 2.2 would otherwise convert every rendered page to Markdown
+# for llms.txt; with eleven thousand reference pages that pass has
+# killed the hosted runner mid-build.
+llm-docs: false
+
 template:
   bootstrap: 5
   includes:
