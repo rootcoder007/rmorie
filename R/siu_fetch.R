@@ -26,7 +26,7 @@
 #'
 #' @section Cache directory:
 #' By default this writes \code{SIU.csv} under \code{\link[base]{tempdir}()}
-#' so R cleans it up at end of session. Pass \eqn{cache_dir =
+#' so R cleans it up at end of session. Pass \code{cache_dir =
 #' morie_cache_dir("siu")} explicitly to opt into a persistent cross-
 #' session cache; see \code{\link{morie_cache_dir}} and
 #' \code{\link{morie_cache_clear}} (no implicit writes to \code{~/.cache}).
@@ -59,7 +59,7 @@ morie_siu_index_url <- function() {
 #' Cache-path helper for the lightweight SIU scraper
 #'
 #' Returns the path \code{<cache_dir>/SIU.csv}, creating
-#' \code{cache_dir} if needed. Default is \eqn{file.path(tempdir(),
+#' \code{cache_dir} if needed. Default is \code{file.path(tempdir(),
 #' "morie", "siu")}; pass \code{morie_cache_dir("siu")} for persistent
 #' caching.
 #'
