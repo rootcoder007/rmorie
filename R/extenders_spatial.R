@@ -227,6 +227,22 @@ morie_copula_sample <- function(n, copula, ...) {
 # kernlab
 # ---------------------------------------------------------------------
 
+# kernlab's C code does not check its inputs: an empty list or a
+# zero-row matrix reaches it and the process dies with a segmentation
+# fault. Every extender that hands a feature matrix to kernlab goes
+# through this check first, so bad input is an R error, not a crash.
+.morie_spatial_feature_matrix <- function(x, what) {
+  if (is.data.frame(x)) x <- as.matrix(x)
+  if (!is.matrix(x) || !is.numeric(x) || nrow(x) < 2L || ncol(x) < 1L) {
+    stop(what, ": `x` must be a numeric matrix or data frame with at ",
+         "least two rows and one column", call. = FALSE)
+  }
+  if (anyNA(x) || any(!is.finite(x))) {
+    stop(what, ": `x` contains missing or non-finite values", call. = FALSE)
+  }
+  x
+}
+
 #' Kernel principal components analysis via \pkg{kernlab}
 #'
 #' Thin extender over \code{kernlab::kpca} that performs PCA in a
@@ -252,6 +268,7 @@ morie_copula_sample <- function(n, copula, ...) {
 #' }
 morie_kernel_pca <- function(x, ...) {
   .morie_spatial_need("kernlab", "morie_kernel_pca")
+  x <- .morie_spatial_feature_matrix(x, "morie_kernel_pca")
   raw <- kernlab::kpca(x, ...)
   list(method = "kernlab::kpca", raw = raw)
 }
@@ -286,6 +303,7 @@ morie_kernel_pca <- function(x, ...) {
 #' }
 morie_spectral_cluster <- function(x, centers, ...) {
   .morie_spatial_need("kernlab", "morie_spectral_cluster")
+  x <- .morie_spatial_feature_matrix(x, "morie_spectral_cluster")
   raw <- kernlab::specc(x, centers = centers, ...)
   list(method = "kernlab::specc", raw = raw)
 }

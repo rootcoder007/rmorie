@@ -12,6 +12,12 @@
   caliper and a ratio below one instead of handing them to the sort,
   where a NaN comparator is undefined behaviour and corrupted the heap
   under the degenerate-input sweep.
+* Two more process-killers from the degenerate-input sweep are R errors
+  now: `morie_kernel_pca()` and `morie_spectral_cluster()` check the
+  feature matrix before kernlab's C code sees it (an empty list or a
+  zero-row matrix used to segfault), and `morie_install_extras()` refuses
+  empty or missing package names instead of handing them to
+  `install.packages()`.
 
 ## Twenty-one modules from morie's R arm, three-way verified
 
