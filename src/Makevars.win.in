@@ -7,3 +7,15 @@ PKG_CPPFLAGS = @cflags@
 # (Windows linker doesn't honour --no-as-needed so plain append is
 # fine; the flag is GNU-ld-specific and only matters on Linux.)
 PKG_LIBS = @libs@ @as_needed_open@ $(LAPACK_LIBS) $(BLAS_LIBS) @as_needed_close@ $(FLIBS)
+
+# Header dependencies. R's default rules rebuild an object when its .cpp
+# changes but not when a header it includes changes; a warm build then
+# tests stale code and a header fix looks as though it never landed
+# (the shared morie_core.h, 2026-09-18). Explicit prerequisite lines are
+# portable make, so every editor and every CI cache rebuilds correctly.
+# `all` must stay the first target (Writing R Extensions 1.2.1): a rule
+# listed before it would become the default goal and the shared object
+# would never be linked.
+all: $(SHLIB)
+morie_fast.o: morie_core.h
+morie_http.o: morie_http.h
