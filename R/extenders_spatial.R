@@ -267,8 +267,8 @@ morie_copula_sample <- function(n, copula, ...) {
 #' }
 #' }
 morie_kernel_pca <- function(x, ...) {
-  .morie_spatial_need("kernlab", "morie_kernel_pca")
   x <- .morie_spatial_feature_matrix(x, "morie_kernel_pca")
+  .morie_spatial_need("kernlab", "morie_kernel_pca")
   raw <- kernlab::kpca(x, ...)
   list(method = "kernlab::kpca", raw = raw)
 }
@@ -302,8 +302,8 @@ morie_kernel_pca <- function(x, ...) {
 #' }
 #' }
 morie_spectral_cluster <- function(x, centers, ...) {
-  .morie_spatial_need("kernlab", "morie_spectral_cluster")
   x <- .morie_spatial_feature_matrix(x, "morie_spectral_cluster")
+  .morie_spatial_need("kernlab", "morie_spectral_cluster")
   raw <- kernlab::specc(x, centers = centers, ...)
   list(method = "kernlab::specc", raw = raw)
 }
