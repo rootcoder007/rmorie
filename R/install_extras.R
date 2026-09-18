@@ -95,7 +95,11 @@ morie_install_extras <- function(which = "missing",
   } else if (is.character(which) && length(which) == 1L && which == "all") {
     needs <- suggests
   } else if (is.character(which)) {
-    needs <- which
+    needs <- unique(which[!is.na(which) & nzchar(trimws(which))])
+    if (!length(needs)) {
+      stop("`which` names no package: it holds only empty or missing strings.",
+           call. = FALSE)
+    }
   } else {
     stop("`which` must be \"missing\", \"all\", or a character vector.",
          call. = FALSE)
