@@ -12,6 +12,11 @@ morie_marginals_verify(x, published, tolerance = 0, strict = TRUE)
 \item{published}{Named numeric vector: label = published count.}
 
 \item{tolerance}{Absolute count tolerance per label (default 0).}
+
+\item{strict}{When \code{TRUE} (the default) a mismatch is an error, so a
+  pipeline stops on the day. When \code{FALSE} the result is returned with
+  \code{ok = FALSE}, the \code{permutation} that would explain the counts
+  and the \code{message} the error would have carried.}
 }
 \value{
 Invisibly, a list with \code{counts} (observed), \code{published},

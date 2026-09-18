@@ -381,6 +381,10 @@ morie_crosstab_verify <- function(original, recoded, declared) {
 #' @param x A character or factor vector after recoding.
 #' @param published Named numeric vector: label = published count.
 #' @param tolerance Absolute count tolerance per label (default 0).
+#' @param strict When \code{TRUE} (the default) a mismatch is an error, so a
+#'   pipeline stops on the day. When \code{FALSE} the result is returned with
+#'   \code{ok = FALSE}, the \code{permutation} that would explain the counts
+#'   and the \code{message} the error would have carried.
 #' @return Invisibly, a list with \code{counts} (observed), \code{published},
 #'   \code{ok}, and \code{permutation} (the relabelling under which the
 #'   observed counts match the published ones, or \code{NULL}). Errors
@@ -785,6 +789,10 @@ print.bricklayer_morie_relabel_forensics <- function(x, ...) {
 #'   source program's variable view. When `imported` carries a `labels`
 #'   attribute the two are compared and any disagreement is an error.
 #' @param tolerance Passed to \code{\link{morie_marginals_verify}}.
+#' @param strict When \code{TRUE} (the default) any disagreement is an error.
+#'   When \code{FALSE} the result comes back with \code{ok = FALSE},
+#'   \code{reasons}, and \code{marginals$permutation} ready for
+#'   \code{\link{morie_relabel_forensics}}.
 #' @return A list with `ok`, `decoded` (a factor in code order), `marginals`
 #'   (the \code{\link{morie_marginals_verify}} result) and `code_book_ok`.
 #' @seealso \code{\link{morie_decode_labelled}},

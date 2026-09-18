@@ -24,6 +24,11 @@ source program's variable view. When \code{imported} carries a \code{labels}
 attribute the two are compared and any disagreement is an error.}
 
 \item{tolerance}{Passed to \code{\link{morie_marginals_verify}}.}
+
+\item{strict}{When \code{TRUE} (the default) any disagreement is an error.
+  When \code{FALSE} the result comes back with \code{ok = FALSE},
+  \code{reasons}, and \code{marginals$permutation} ready for
+  \code{\link{morie_relabel_forensics}}.}
 }
 \value{
 A list with \code{ok}, \code{decoded} (a factor in code order), \code{marginals}
