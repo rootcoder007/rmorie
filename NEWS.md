@@ -1,4 +1,4 @@
-# rmorie 1.2.4 - 2026-09-16
+# rmorie 1.2.5 - 2026-09-18
 
 * `morie_safe_relabel()`, `morie_decode_labelled()`, `morie_transfer_verify()`
   and `morie_relabel_forensics()`: relabel by name only, decode labelled
