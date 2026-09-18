@@ -181,14 +181,47 @@ morie_audit_categories <- function(data, cols = NULL) {
         "order; any positional relabel with labels in another order rotates ",
         "the groups. Decode by code (morie_safe_recode / morie_safe_relabel), never by position"))
     }
-    lc <- tolower(lv)
-    if (anyDuplicated(lc)) {
-      dup <- lv[lc %in% lc[duplicated(lc)]]
+    inv <- "[\\s\u00a0\u1680\u2000-\u200b\u2028\u2029\u202f\u205f\u3000\ufeff]"
+    padded <- lv[grepl(paste0("^", inv, "|", inv, "$"), lv, perl = TRUE)]
+    if (length(padded)) {
+      hazards <- c(hazards, paste0(
+        "labels with leading/trailing whitespace (incl. non-breaking): ",
+        paste(sQuote(padded), collapse = ", "),
+        ": a space splits one category into two"))
+    }
+    core <- gsub(paste0("^", inv, "+|", inv, "+$"), "", lv, perl = TRUE)
+    if (anyDuplicated(core)) {
+      hazards <- c(hazards, paste0(
+        "whitespace-variant duplicate labels: ",
+        paste(sQuote(lv[core %in% core[duplicated(core)]]), collapse = ", ")))
+    }
+    if (any(!nzchar(core))) {
+      hazards <- c(hazards,
+        "empty-string label \"\": missingness stored as a category")
+    }
+    sentinels <- c("NA", "N/A", "NAN", "NULL", "NONE", ".", "-", "?")
+    sentinel <- lv[toupper(core) %in% sentinels]
+    if (length(sentinel)) {
+      hazards <- c(hazards, paste0("missing-value sentinel stored as a label: ",
+                                   paste(sQuote(sentinel), collapse = ", ")))
+    }
+    if (length(lv) && (!nzchar(core[1]) || lv[1] != core[1] ||
+                         lv[1] %in% sentinel)) {
+      hazards <- c(hazards, paste0(
+        "the REFERENCE level ", sQuote(lv[1]),
+        " is empty, a sentinel, or differs from a real label only by ",
+        "invisible characters: every model on this column is baselined on it"))
+    }
+    lc <- tolower(core)
+    # a case-variant pair is two DIFFERENT trimmed labels that agree once
+    # lower-cased; a pair that differs only by whitespace was reported above
+    case_groups <- split(core, lc)
+    case_groups <- case_groups[vapply(case_groups, function(g) length(unique(g)) > 1L, TRUE)]
+    if (length(case_groups)) {
+      cv <- lv[lc %in% names(case_groups)]
       hazards <- c(hazards, paste0(
         "case-variant duplicate labels: ",
-        paste(sQuote(dup),
-          collapse = ", "
-        )
+        paste(sQuote(cv), collapse = ", ")
       ))
     }
     if (is.factor(v) && length(setdiff(lv, obs))) {
@@ -356,7 +389,8 @@ morie_crosstab_verify <- function(original, recoded, declared) {
 #' x <- c("White", "White", "Black", "Indigenous", "White", "Black")
 #' morie_marginals_verify(x, c(White = 3, Black = 2, Indigenous = 1))
 #' @export
-morie_marginals_verify <- function(x, published, tolerance = 0) {
+morie_marginals_verify <- function(x, published, tolerance = 0,
+                                   strict = TRUE) {
   if (is.factor(x)) x <- as.character(x)
   stopifnot(is.numeric(published), !is.null(names(published)),
             all(nzchar(names(published))))
@@ -364,9 +398,12 @@ morie_marginals_verify <- function(x, published, tolerance = 0) {
   obs <- vapply(labs, function(l) sum(!is.na(x) & x == l), numeric(1))
   extra <- setdiff(unique(x[!is.na(x)]), labs)
   if (length(extra)) {
-    stop("morie_marginals_verify: labels present in the data but not in ",
-         "the published counts: ", paste(sQuote(extra), collapse = ", "),
-         call. = FALSE)
+    msg <- paste0("morie_marginals_verify: labels present in the data but ",
+                  "not in the published counts: ",
+                  paste(sQuote(extra), collapse = ", "))
+    if (strict) stop(msg, call. = FALSE)
+    return(list(counts = obs, published = published[labs], ok = FALSE,
+                permutation = NULL, message = msg))
   }
   ok <- all(abs(obs - published[labs]) <= tolerance)
   perm <- NULL
@@ -381,7 +418,7 @@ morie_marginals_verify <- function(x, published, tolerance = 0) {
     }
   }
   out <- list(counts = obs, published = published[labs], ok = ok,
-              permutation = perm)
+              permutation = perm, message = NULL)
   if (!ok) {
     detail <- paste(sprintf("%s: observed %s, published %s", labs, obs,
                             published[labs]), collapse = "; ")
@@ -394,8 +431,10 @@ morie_marginals_verify <- function(x, published, tolerance = 0) {
     } else {
       ""
     }
-    stop("morie_marginals_verify: recoded counts do not match the ",
-         "published counts. ", detail, ".", hint, call. = FALSE)
+    out$message <- paste0("morie_marginals_verify: recoded counts do not ",
+                          "match the published counts. ", detail, ".", hint)
+    if (strict) stop(out$message, call. = FALSE)
+    return(out)
   }
   invisible(out)
 }
@@ -689,6 +728,14 @@ morie_relabel_forensics <- function(value_labels, observed, counts = NULL) {
                matches = identical(perm, obs), stringsAsFactors = FALSE)
   })
   out <- do.call(rbind, rows)
+  if (identical(obs, L)) {
+    out$matches[] <- FALSE
+    attr(out, "verdict") <- paste0(
+      "The labels are in place: every label was seen under itself, so ",
+      "there is no permutation to explain.")
+    class(out) <- c("morie_relabel_forensics_result", "data.frame")
+    return(out)
+  }
   hit <- out$mechanism[out$matches]
   attr(out, "verdict") <- if (length(hit)) {
     paste0("The observed permutation is reproduced EXACTLY by: ",
@@ -747,7 +794,8 @@ print.bricklayer_morie_relabel_forensics <- function(x, ...) {
 #' x <- structure(c(1, 1, 2, 4, 1), labels = c(White = 1, Black = 2, Other = 3, Unknown = 4))
 #' morie_transfer_verify(x, c(White = 3, Black = 1, Unknown = 1))$ok
 #' @export
-morie_transfer_verify <- function(imported, source_counts, code_book = NULL, tolerance = 0) {
+morie_transfer_verify <- function(imported, source_counts, code_book = NULL,
+                                  tolerance = 0, strict = TRUE) {
   lab <- attr(imported, "labels", exact = TRUE)
   code_book_ok <- NA
   if (!is.null(lab) && !is.null(code_book)) {
@@ -756,7 +804,7 @@ morie_transfer_verify <- function(imported, source_counts, code_book = NULL, tol
     bad <- setdiff(union(names(got), names(want)),
                    names(got)[names(got) %in% names(want) & got == want[names(got)]])
     code_book_ok <- !length(bad)
-    if (!code_book_ok) {
+    if (!code_book_ok && strict) {
       stop("morie_transfer_verify: the value labels that arrived disagree with the source code ",
            "book at code(s) ", paste(bad, collapse = ", "), ": arrived ",
            paste(paste0(bad, "=", got[bad]), collapse = ", "), "; source ",
@@ -773,7 +821,13 @@ morie_transfer_verify <- function(imported, source_counts, code_book = NULL, tol
     lab_all <- as.character(imported)
     factor(lab_all, levels = unique(c(names(source_counts), lab_all[!is.na(lab_all)])))
   }
-  m <- morie_marginals_verify(as.character(decoded), source_counts, tolerance = tolerance)
-  list(ok = isTRUE(m$ok) && !isFALSE(code_book_ok), decoded = decoded,
-       marginals = m, code_book_ok = code_book_ok)
+  m <- morie_marginals_verify(as.character(decoded), source_counts,
+                              tolerance = tolerance, strict = strict)
+  ok <- isTRUE(m$ok) && !isFALSE(code_book_ok)
+  reasons <- c(
+    if (isFALSE(code_book_ok)) "value labels disagree with the source code book",
+    if (!isTRUE(m$ok)) m$message
+  )
+  list(ok = ok, decoded = decoded, marginals = m, code_book_ok = code_book_ok,
+       reasons = reasons)
 }

@@ -4,7 +4,7 @@
 \alias{morie_marginals_verify}
 \title{Verify recoded category counts against the counts a release published}
 \usage{
-morie_marginals_verify(x, published, tolerance = 0)
+morie_marginals_verify(x, published, tolerance = 0, strict = TRUE)
 }
 \arguments{
 \item{x}{A character or factor vector after recoding.}

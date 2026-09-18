@@ -115,22 +115,27 @@ inline double stddev(const double *a, std::size_t n, int ddof) {
     return std::sqrt(variance(a, n, ddof));
 }
 
+// Centred two-pass form. The one-pass n*sxy - sx*sy expansion cancels
+// catastrophically once the spread is small relative to the mean (wrong at
+// the 2nd decimal for CV 1e-7, NaN by 1e-8, |r| > 1 by 1e-15); the centred
+// sums are exact to rounding, and the result is clamped to [-1, 1] so that
+// rounding can never report a correlation outside the definition.
 inline double cor_pearson(const double *x, const double *y, std::size_t n) {
     if (n < 2) return std::nan("");
-    double sx = 0.0, sy = 0.0, sxx = 0.0, syy = 0.0, sxy = 0.0;
+    const double mx = mean(x, n), my = mean(y, n);
+    if (!std::isfinite(mx) || !std::isfinite(my)) return std::nan("");
+    long double sxy = 0.0L, sxx = 0.0L, syy = 0.0L;
     for (std::size_t i = 0; i < n; ++i) {
-        const double a = x[i], b = y[i];
-        sx += a;
-        sy += b;
+        const long double a = x[i] - mx, b = y[i] - my;
+        sxy += a * b;
         sxx += a * a;
         syy += b * b;
-        sxy += a * b;
     }
-    const double dn = static_cast<double>(n);
-    const double num = dn * sxy - sx * sy;
-    const double den_sq = (dn * sxx - sx * sx) * (dn * syy - sy * sy);
-    if (den_sq <= 0.0) return std::nan("");
-    return num / std::sqrt(den_sq);
+    if (sxx <= 0.0L || syy <= 0.0L) return std::nan("");
+    long double r = sxy / std::sqrt(sxx * syy);
+    if (r > 1.0L) r = 1.0L;
+    if (r < -1.0L) r = -1.0L;
+    return static_cast<double>(r);
 }
 
 inline double euclid_dist(const double *a, const double *b, std::size_t n) {
