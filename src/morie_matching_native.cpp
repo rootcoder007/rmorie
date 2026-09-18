@@ -16,6 +16,20 @@ IntegerMatrix morie_match_greedy_1d_cpp(NumericVector treated_val,
                                         bool replace) {
   const int nt = treated_val.size();
   const int nc = control_val.size();
+  // std::sort on a vector holding NaN is undefined behaviour (the
+  // comparator is no longer a strict weak ordering) and corrupts the
+  // heap on glibc; a caliper of NaN and a ratio below one are refused for
+  // the same reason rather than producing a shape that cannot be filled.
+  for (int i = 0; i < nt; ++i) {
+    if (ISNAN(treated_val[i]))
+      stop("treated_val contains NA or NaN at position %d", i + 1);
+  }
+  for (int i = 0; i < nc; ++i) {
+    if (ISNAN(control_val[i]))
+      stop("control_val contains NA or NaN at position %d", i + 1);
+  }
+  if (ratio == NA_INTEGER || ratio < 1) stop("ratio must be a positive integer");
+  if (ISNAN(caliper_width)) stop("caliper_width must not be NA or NaN");
   IntegerMatrix out(nt, ratio);
   std::fill(out.begin(), out.end(), NA_INTEGER);
   if (nt == 0 || nc == 0) return out;

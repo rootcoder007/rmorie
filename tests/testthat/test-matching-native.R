@@ -648,3 +648,16 @@ test_that("bundled MRM DAGs identify cleanly", {
     expect_gt(length(id$adjustment_set), 0)
   }
 })
+
+test_that("greedy matcher refuses NA scores instead of sorting them", {
+  expect_error(.morie_match_greedy_1d_cpp(c(1.5, NA, 3), c(1, 2, 3), 1L, Inf, FALSE),
+               "treated_val contains NA")
+  expect_error(.morie_match_greedy_1d_cpp(c(1, 2), c(NaN, 2), 1L, Inf, FALSE),
+               "control_val contains NA")
+  expect_error(.morie_match_greedy_1d_cpp(c(1, 2), c(1, 2), 0L, Inf, FALSE),
+               "ratio must be")
+  expect_error(.morie_match_greedy_1d_cpp(c(1, 2), c(1, 2), 1L, NaN, FALSE),
+               "caliper_width")
+  m <- .morie_match_greedy_1d_cpp(c(1, 2), c(0.9, 2.1), 1L, Inf, FALSE)
+  expect_equal(as.integer(m), c(1L, 2L))
+})
