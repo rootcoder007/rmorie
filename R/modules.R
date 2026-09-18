@@ -27,7 +27,9 @@ morie_list_morie_modules <- function() {
       "ebac-gender-smote-sensitivity",
       "figures",
       "tables",
-      "final-report"
+      "final-report",
+      "otis-analysis",
+      "mapq-psychometrics"
     ),
     description = c(
       "Canonicalize and validate the real CPADS PUMF input.",
@@ -50,7 +52,9 @@ morie_list_morie_modules <- function() {
       "eBAC interaction and SMOTE-sensitivity status outputs.",
       "Figure exports for the documented analysis workflow.",
       "HTML table exports for the documented analysis workflow.",
-      "Final report and output-audit summaries."
+      "Final report and output-audit summaries.",
+      "OTIS restrictive-confinement analysis (descriptives, alert combos, cross-fitted DML, trends) on the bundled b01 sample.",
+      "MAPQ psychometric validation (reliability, factor loadings) + DML (gender -> KS) on a synthetic MAPQII panel."
     ),
     stringsAsFactors = FALSE
   )
@@ -226,6 +230,8 @@ morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv()
     "figures" = .run_figures_module_internal(data, output_dir = output_dir),
     "tables" = .run_tables_module_internal(data, output_dir = output_dir),
     "final-report" = .run_final_report_module_internal(data, output_dir = output_dir),
+    "otis-analysis" = .run_otis_analysis_module_internal(),
+    "mapq-psychometrics" = .run_mapq_psychometrics_module_internal(),
     stop("Unknown module: ", module_name, call. = FALSE)
   )
 

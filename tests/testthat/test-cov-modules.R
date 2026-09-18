@@ -94,10 +94,10 @@ make_raw_cpads <- function(n = 900L, seed = 202L) {
   res
 }
 
-test_that("morie_list_morie_modules returns the documented 21-module surface", {
+test_that("morie_list_morie_modules returns the documented 23-module surface", {
   mods <- morie_list_morie_modules()
   expect_s3_class(mods, "data.frame")
-  expect_equal(nrow(mods), 21L)
+  expect_equal(nrow(mods), 23L)
   expect_true(all(c("name", "description") %in% names(mods)))
 })
 

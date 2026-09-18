@@ -27,4 +27,3 @@ that each arm mean, not just the contrast, solves its own efficient
 score. Monotonicity is restored by a running maximum, the cheapest
 rearrangement that cannot move a correctly ordered pair.
 }
-
