@@ -69,10 +69,10 @@ test_that("indkr errors on bad dims", {
   )
 })
 
-test_that("morie_list_morie_modules returns a 21-row data.frame", {
+test_that("morie_list_morie_modules returns a 23-row data.frame", {
   out <- morie_list_morie_modules()
   expect_s3_class(out, "data.frame")
-  expect_equal(nrow(out), 21L)
+  expect_equal(nrow(out), 23L)
   expect_named(out, c("name", "description"))
 })
 

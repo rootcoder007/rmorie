@@ -188,3 +188,34 @@
   rn <- sqrt(st$n)
   max(rn * (st$mL - theta) / st$sL, rn * (theta - st$mU) / st$sU, 0)
 }
+
+# Arm bounds intersected over the cells of a discrete variable:
+# Molinari (2021) eq (2.15). Returns c(lo1, hi1, lo0, hi0).
+#' Arm bounds intersected over the cells of a discrete variable:
+#'
+#' Molinari (2021) eq (2.15). Returns c(lo1, hi1, lo0, hi0).
+#'
+#' @param yv A vector; indexed elementwise.
+#' @param dv A vector; indexed elementwise.
+#' @param cellv Passed to \code{unique}.
+#' @param lo Passed to \code{.bnd_wc_arm}.
+#' @param hi Passed to \code{.bnd_wc_arm}.
+#' @return A vector, from \code{c}.
+#' @export
+.bnd_wc_intersect <- function(yv, dv, cellv, lo, hi) {
+  lo1 <- -Inf
+  hi1 <- Inf
+  lo0 <- -Inf
+  hi0 <- Inf
+  for (g in unique(cellv)) {
+    sel <- cellv == g
+    cm <- .bnd_cellmeans(yv[sel], dv[sel])
+    a1 <- .bnd_wc_arm(cm$m1, cm$p1, lo, hi)
+    a0 <- .bnd_wc_arm(cm$m0, cm$p0, lo, hi)
+    if (a1[1] > lo1) lo1 <- a1[1]
+    if (a1[2] < hi1) hi1 <- a1[2]
+    if (a0[1] > lo0) lo0 <- a0[1]
+    if (a0[2] < hi0) hi0 <- a0[2]
+  }
+  c(lo1, hi1, lo0, hi0)
+}

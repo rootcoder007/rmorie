@@ -8,8 +8,11 @@
 # reassign groups wholesale, and alphabetical releveling silently
 # changes the reference category -- any of which can relabel entire
 # demographic groups and multiply reported odds ratios severalfold
-# without a single warning. Published analyses have carried exactly
-# this class of error for years before correction.
+# without a single warning. The Ontario Human Rights Commission's 2020
+# report *A Disparate Impact* carried exactly this error for two and a half
+# years: the four race codes rotated one place between the SPSS file and the
+# R analysis, and reported odds ratios of 30 to 58 corrected to 4 to 5
+# (OHRC correction, 26 January 2023; Jung 2022 independent review).
 #
 # rmorie's answer: (1) explicit name-based recoding that ERRORS on
 # anything unmapped, (2) an import audit that flags every known
@@ -158,7 +161,7 @@ morie_audit_categories <- function(data, cols = NULL) {
     lv <- if (is.factor(v)) {
       levels(v)
     } else {
-      as.character(sort(unique(v[!is.na(v)])))
+      as.character(sort(unique(v[!is.na(v)]), method = "radix"))
     }
     obs <- unique(as.character(v[!is.na(v)]))
     if (length(lv) && all(grepl("^[0-9.]+$", lv))) {
@@ -170,6 +173,13 @@ morie_audit_categories <- function(data, cols = NULL) {
         "as.numeric() on this column returns level INDICES, not ",
         "data"
       ))
+    }
+    if (length(lv) && all(grepl("^[0-9]+[.):]? ?[A-Za-z]", lv))) {
+      hazards <- c(hazards, paste0(
+        "labels carry code prefixes (", paste(utils::head(lv, 3), collapse = ","),
+        "...): the code is part of the string, so the level order is the CODE ",
+        "order; any positional relabel with labels in another order rotates ",
+        "the groups. Decode by code (morie_safe_recode / morie_safe_relabel), never by position"))
     }
     lc <- tolower(lv)
     if (anyDuplicated(lc)) {
@@ -326,6 +336,179 @@ morie_crosstab_verify <- function(original, recoded, declared) {
   invisible(as.data.frame(tab))
 }
 
+#' Verify recoded category counts against the counts a release published
+#'
+#' The check that would have caught a swapped race label on the day: after
+#' a recode, the number of rows per label must equal the counts the source
+#' published for those labels. If they do not, the function also tries
+#' every permutation of the labels and says whether the observed counts
+#' match the published ones under some relabelling, which is the
+#' signature of labels attached to the wrong groups.
+#'
+#' @param x A character or factor vector after recoding.
+#' @param published Named numeric vector: label = published count.
+#' @param tolerance Absolute count tolerance per label (default 0).
+#' @return Invisibly, a list with \code{counts} (observed), \code{published},
+#'   \code{ok}, and \code{permutation} (the relabelling under which the
+#'   observed counts match the published ones, or \code{NULL}). Errors
+#'   when the counts disagree.
+#' @examples
+#' x <- c("White", "White", "Black", "Indigenous", "White", "Black")
+#' morie_marginals_verify(x, c(White = 3, Black = 2, Indigenous = 1))
+#' @export
+morie_marginals_verify <- function(x, published, tolerance = 0) {
+  if (is.factor(x)) x <- as.character(x)
+  stopifnot(is.numeric(published), !is.null(names(published)),
+            all(nzchar(names(published))))
+  labs <- names(published)
+  obs <- vapply(labs, function(l) sum(!is.na(x) & x == l), numeric(1))
+  extra <- setdiff(unique(x[!is.na(x)]), labs)
+  if (length(extra)) {
+    stop("morie_marginals_verify: labels present in the data but not in ",
+         "the published counts: ", paste(sQuote(extra), collapse = ", "),
+         call. = FALSE)
+  }
+  ok <- all(abs(obs - published[labs]) <= tolerance)
+  perm <- NULL
+  if (!ok && length(labs) <= 7L) {
+    for (p in .morie_label_perms(labs)) {
+      relabelled <- stats::setNames(obs, p)[labs]
+      if (all(abs(relabelled - published[labs]) <= tolerance) &&
+          !identical(p, labs)) {
+        perm <- stats::setNames(p, labs)
+        break
+      }
+    }
+  }
+  out <- list(counts = obs, published = published[labs], ok = ok,
+              permutation = perm)
+  if (!ok) {
+    detail <- paste(sprintf("%s: observed %s, published %s", labs, obs,
+                            published[labs]), collapse = "; ")
+    hint <- if (!is.null(perm)) {
+      moved <- names(perm)[perm != names(perm)]
+      paste0(" The observed counts match the published ones if the labels ",
+             "are permuted (", paste(sprintf("%s -> %s", moved, perm[moved]),
+                                     collapse = ", "),
+             "): the labels are attached to the wrong groups.")
+    } else {
+      ""
+    }
+    stop("morie_marginals_verify: recoded counts do not match the ",
+         "published counts. ", detail, ".", hint, call. = FALSE)
+  }
+  invisible(out)
+}
+
+#' Check reported odds ratios against a labelled table, under every relabelling
+#'
+#' Given a k-by-2 table of counts (rows = groups, columns = outcome absent /
+#' present), a reference group and the odds ratios a report states for the
+#' other groups, this recomputes the odds ratios from the table and then
+#' recomputes them under every permutation of the row labels (and with the
+#' outcome columns swapped). It says whether the reported values follow
+#' from the table as labelled, and if not, which relabelling reproduces
+#' them. A four-fold odds ratio that a report gives as thirty-six-fold is
+#' typically reproduced exactly by one such permutation.
+#'
+#' @param counts Numeric matrix with row names (groups) and two columns
+#'   (outcome absent, outcome present), in that order.
+#' @param reference Row name of the reference group.
+#' @param reported Named numeric vector of the reported odds ratios, one per
+#'   non-reference row.
+#' @param tolerance Relative tolerance for a match (default 0.05).
+#' @return A list: \code{computed} (odds ratios from the table as labelled),
+#'   \code{reported}, \code{consistent} (the reported values follow from the
+#'   labels as given), \code{matches} (a data frame of the relabellings that
+#'   reproduce the reported values, possibly none), and \code{verdict}.
+#' @examples
+#' tab <- matrix(c(900, 100, 700, 300, 400, 600), ncol = 2, byrow = TRUE,
+#'               dimnames = list(c("A", "B", "C"), c("no", "yes")))
+#' morie_odds_ratio_check(tab, "A", c(B = 3.857, C = 13.5))
+#' @export
+morie_odds_ratio_check <- function(counts, reference, reported,
+                                   tolerance = 0.05) {
+  counts <- as.matrix(counts)
+  if (ncol(counts) != 2L || is.null(rownames(counts))) {
+    stop("morie_odds_ratio_check: `counts` must be a k-by-2 matrix with ",
+         "row names (groups) and columns outcome-absent, outcome-present.",
+         call. = FALSE)
+  }
+  labs <- rownames(counts)
+  if (!reference %in% labs) {
+    stop("morie_odds_ratio_check: reference ", sQuote(reference),
+         " is not a row of `counts`.", call. = FALSE)
+  }
+  others <- setdiff(labs, reference)
+  if (is.null(names(reported)) || !all(others %in% names(reported))) {
+    stop("morie_odds_ratio_check: `reported` must be named by every ",
+         "non-reference row: ", paste(sQuote(others), collapse = ", "),
+         call. = FALSE)
+  }
+  reported <- reported[others]
+  or_of <- function(m) {
+    ref_odds <- m[reference, 2L] / m[reference, 1L]
+    vapply(others, function(r) (m[r, 2L] / m[r, 1L]) / ref_odds, numeric(1))
+  }
+  close_to <- function(a, b) {
+    all(is.finite(a) & is.finite(b)) &&
+      all(abs(a - b) <= tolerance * pmax(abs(b), .Machine$double.eps))
+  }
+  computed <- or_of(counts)
+  consistent <- close_to(computed, reported)
+  rows <- list()
+  if (length(labs) <= 7L) {
+    for (p in .morie_label_perms(labs)) {
+      for (swap_cols in c(FALSE, TRUE)) {
+        m <- counts
+        if (swap_cols) m <- m[, 2:1, drop = FALSE]
+        rownames(m) <- p
+        m <- m[labs, , drop = FALSE]
+        if (identical(p, labs) && !swap_cols) next
+        if (close_to(or_of(m), reported)) {
+          moved <- labs[p != labs]
+          rows[[length(rows) + 1L]] <- data.frame(
+            relabelling = if (length(moved)) {
+              paste(sprintf("%s -> %s", moved, p[p != labs]), collapse = ", ")
+            } else {
+              "none"
+            },
+            outcome_columns_swapped = swap_cols,
+            stringsAsFactors = FALSE)
+        }
+      }
+    }
+  }
+  matches <- if (length(rows)) do.call(rbind, rows) else
+    data.frame(relabelling = character(), outcome_columns_swapped = logical(),
+               stringsAsFactors = FALSE)
+  verdict <- if (consistent) {
+    "the reported odds ratios follow from the table as labelled"
+  } else if (nrow(matches)) {
+    paste0("the reported odds ratios do NOT follow from the table as ",
+           "labelled; they are reproduced under a relabelling (",
+           matches$relabelling[1L],
+           if (matches$outcome_columns_swapped[1L]) "; outcome columns swapped" else "",
+           "): the groups were mislabelled, not the software")
+  } else {
+    "the reported odds ratios follow from no relabelling of this table"
+  }
+  list(computed = computed, reported = reported, consistent = consistent,
+       matches = matches, verdict = verdict)
+}
+
+# All permutations of a character vector, in lexicographic order of index
+# (the same order Python's itertools.permutations produces).
+.morie_label_perms <- function(v) {
+  n <- length(v)
+  if (n <= 1L) return(list(v))
+  out <- list()
+  for (i in seq_len(n)) {
+    for (rest in .morie_label_perms(v[-i])) out[[length(out) + 1L]] <- c(v[i], rest)
+  }
+  out
+}
+
 #' Internal guard: refuse silent factor-to-numeric treatment coercion
 #'
 #' Called by the MRM pipeline (and available to every estimator):
@@ -354,4 +537,243 @@ morie_crosstab_verify <- function(original, recoded, declared) {
     )
   }
   invisible(TRUE)
+}
+
+# ---- positional relabels, labelled imports, and forensics ------------------
+# The documented case (OHRC, Correction to "A Disparate Impact", 26 January
+# 2023): codes 1 = White, 2 = Black, 3 = Other, 4 = Unknown; the labels in
+# alphabetical order are Black, Other, Unknown, White; assigning them by
+# position gives exactly the reported rotation (White read as Black, Black
+# as Other, Other as Unknown, Unknown as White). Nothing in a file transfer
+# picks the sort order of your labels. A positional relabel does.
+
+#' Relabel a categorical variable by name, never by position
+#'
+#' A relabel is only safe when every old level is mapped BY NAME to its new
+#' label. Assigning a vector of labels by position (the `levels<-` idiom,
+#' or `factor(x, labels = ...)` with labels in a different order from the
+#' codes) is the mechanism behind the documented four-way rotation in the
+#' OHRC 2023 correction, so this function refuses unnamed mappings outright.
+#'
+#' @param x A factor or character vector.
+#' @param mapping Named character vector, old label to new label. Every
+#'   observed level must appear as a name unless listed in `keep`.
+#' @param keep Levels allowed to pass through unchanged.
+#' @return A factor with the new labels, levels in the order of `mapping`,
+#'   carrying a `morie_recode_audit` attribute (see
+#'   \code{\link{morie_safe_recode}}).
+#' @seealso \code{\link{morie_safe_recode}},
+#'   \code{\link{morie_relabel_forensics}},
+#'   \code{\link{morie_decode_labelled}}
+#' @examples
+#' f <- factor(c("W", "B", "O", "W"))
+#' morie_safe_relabel(f, c(W = "White", B = "Black", O = "Other"))
+#' try(morie_safe_relabel(f, c("Black", "Other", "White")))
+#' @export
+morie_safe_relabel <- function(x, mapping, keep = character()) {
+  if (is.null(names(mapping)) || !all(nzchar(names(mapping)))) {
+    stop("morie_safe_relabel: `mapping` must be NAMED (old label = new label). ",
+         "Assigning labels by POSITION is how four race codes were rotated ",
+         "in a published analysis (OHRC correction, 26 January 2023): the ",
+         "labels were in alphabetical order, the codes were not.",
+         call. = FALSE)
+  }
+  old <- if (is.factor(x)) levels(x) else as.character(sort(unique(x[!is.na(x)]), method = "radix"))
+  unmapped <- setdiff(old, c(names(mapping), keep))
+  if (length(unmapped)) {
+    stop("morie_safe_relabel: level(s) with NO mapping: ", paste(paste0("'", unmapped, "'"), collapse = ", "),
+         ". Name every level or list it in `keep`.", call. = FALSE)
+  }
+  out <- morie_safe_recode(as.character(x), mapping, keep = keep)
+  lev <- unique(c(unname(mapping), keep))
+  f <- factor(as.character(out), levels = lev[lev %in% as.character(out) | lev %in% unname(mapping)])
+  attr(f, "morie_recode_audit") <- attr(out, "morie_recode_audit")
+  f
+}
+
+#' Decode a labelled import by its value labels, by code
+#'
+#' Vectors read from SPSS, Stata or SAS carry their categories as numeric
+#' codes with a `labels` attribute (label = code). The categories are the
+#' labels looked up BY CODE; the codes themselves, their order, and the
+#' alphabetical order of the labels are all irrelevant, and treating any of
+#' them as the category is the documented failure. This function looks each
+#' code up in the attribute and refuses codes that have no label.
+#'
+#' @param x A vector with a `labels` attribute (as produced by haven), or a
+#'   plain numeric vector with `value_labels` supplied.
+#' @param value_labels Optional named vector, code = label, used when `x`
+#'   carries no attribute.
+#' @return A factor whose levels are the labels in CODE order (not
+#'   alphabetical), with a `morie_recode_audit` attribute.
+#' @seealso \code{\link{morie_safe_recode}}, \code{\link{morie_safe_relabel}}
+#' @examples
+#' x <- structure(c(1, 2, 2, 4), labels = c(White = 1, Black = 2, Other = 3, Unknown = 4))
+#' morie_decode_labelled(x)
+#' @export
+morie_decode_labelled <- function(x, value_labels = NULL) {
+  lab <- attr(x, "labels", exact = TRUE)
+  if (!is.null(lab)) {
+    if (is.null(names(lab))) stop("morie_decode_labelled: the `labels` attribute has no names", call. = FALSE)
+    value_labels <- stats::setNames(names(lab), as.character(unname(lab)))
+  }
+  if (is.null(value_labels)) {
+    stop("morie_decode_labelled: `x` carries no `labels` attribute and `value_labels` was not ",
+         "supplied; the codes alone are NOT the categories", call. = FALSE)
+  }
+  codes <- as.character(unclass(x))
+  out <- morie_safe_recode(codes, value_labels)
+  f <- factor(as.character(out), levels = unname(value_labels[order(suppressWarnings(as.numeric(names(value_labels))), names(value_labels))]))
+  attr(f, "morie_recode_audit") <- attr(out, "morie_recode_audit")
+  f
+}
+
+#' Name the mechanical step that reproduces a label permutation
+#'
+#' When categories came out permuted and the transfer between two programs
+#' is being blamed, the question is which deterministic step, applied to
+#' the code book, yields exactly the observed permutation. This function
+#' tries the known ones: labels sorted alphabetically (or reversed, or
+#' case-insensitively) and assigned by code position, labels reversed,
+#' every rotation, codes sorted as strings, and labels ordered by frequency
+#' when counts are supplied. A match is a reconstruction, not a proof of
+#' intent; but a transfer fault has no reason to select the sort order of
+#' the labels, so a match on a sort-based mechanism exonerates the software.
+#'
+#' @param value_labels Named character vector, code = true label, in code
+#'   order.
+#' @param observed Named character vector, true label = label it was seen
+#'   under.
+#' @param counts Optional named numeric vector of frequencies per true
+#'   label, enabling the frequency-order mechanism.
+#' @return A data frame with one row per mechanism (`mechanism`,
+#'   `permutation`, `matches`) and a `verdict` attribute.
+#' @examples
+#' vl <- c("1" = "White", "2" = "Black", "3" = "Other", "4" = "Unknown")
+#' obs <- c(White = "Black", Black = "Other", Other = "Unknown", Unknown = "White")
+#' attr(morie_relabel_forensics(vl, obs), "verdict")
+#' @export
+morie_relabel_forensics <- function(value_labels, observed, counts = NULL) {
+  if (is.null(names(value_labels)) || is.null(names(observed))) {
+    stop("morie_relabel_forensics: `value_labels` (code = label) and `observed` (true = seen) ",
+         "must both be named", call. = FALSE)
+  }
+  L <- unname(value_labels)
+  k <- length(L)
+  if (!setequal(names(observed), L) || !setequal(unname(observed), L)) {
+    stop("morie_relabel_forensics: `observed` must be a permutation of the labels in `value_labels`",
+         call. = FALSE)
+  }
+  obs <- unname(observed[L])
+  mech <- list(
+    "labels sorted alphabetically, assigned by code position" = sort(L, method = "radix"),
+    "labels sorted case-insensitively, assigned by code position" = L[order(tolower(L), method = "radix")],
+    "labels sorted in reverse, assigned by code position" = rev(sort(L, method = "radix")),
+    "labels reversed" = rev(L),
+    "codes sorted as strings, labels assigned in that order" =
+      L[order(as.character(names(value_labels)), method = "radix")])
+  for (r in seq_len(k - 1L)) {
+    mech[[sprintf("rotation by %d position(s)", r)]] <- L[((seq_len(k) - 1L + r) %% k) + 1L]
+  }
+  if (!is.null(counts)) {
+    cnt <- counts[L]
+    mech[["labels ordered by decreasing frequency, assigned by code position"]] <-
+      L[order(-as.numeric(cnt), method = "radix")]
+    mech[["labels ordered by increasing frequency, assigned by code position"]] <-
+      L[order(as.numeric(cnt), method = "radix")]
+  }
+  rows <- lapply(names(mech), function(nm) {
+    perm <- mech[[nm]]
+    data.frame(mechanism = nm,
+               permutation = paste(paste0(L, " -> ", perm), collapse = ", "),
+               matches = identical(perm, obs), stringsAsFactors = FALSE)
+  })
+  out <- do.call(rbind, rows)
+  hit <- out$mechanism[out$matches]
+  attr(out, "verdict") <- if (length(hit)) {
+    paste0("The observed permutation is reproduced EXACTLY by: ",
+           paste(hit, collapse = "; "), ". No import routine (haven, foreign, pandas, ",
+           "pyreadstat) reorders value labels; each carries them keyed by code. A ",
+           "transfer fault does not select the sort order of the labels. The step ",
+           "that did this was a positional relabel in the analysis, and it is ",
+           "reproducible from the code book alone.")
+  } else {
+    paste0("No positional or sort-based mechanism reproduces the observed permutation. ",
+           "Look at merges/joins on the category column, manual edits, and the file ",
+           "itself before blaming either program.")
+  }
+  class(out) <- c("bricklayer_morie_relabel_forensics", "data.frame")
+  out
+}
+
+#' @export
+print.bricklayer_morie_relabel_forensics <- function(x, ...) {
+  m <- x[x$matches, , drop = FALSE]
+  if (nrow(m)) {
+    cat("Mechanism(s) reproducing the observed permutation:\n")
+    for (i in seq_len(nrow(m))) cat("  * ", m$mechanism[i], "\n      ", m$permutation[i], "\n", sep = "")
+  } else {
+    cat("No mechanism among ", nrow(x), " reproduces the observed permutation.\n", sep = "")
+  }
+  cat("\n", attr(x, "verdict"), "\n", sep = "")
+  invisible(x)
+}
+
+#' Verify a categorical variable that crossed from one program to another
+#'
+#' The transfer that matters is SPSS/Stata/SAS to R or Python: the source
+#' program stores codes plus value labels, the destination is handed the
+#' codes, and the labels are re-attached in the analysis. This function
+#' takes what the source program printed for that variable (its frequency
+#' table, label = count, and optionally its code book, code = label) and
+#' refuses to continue unless the imported vector reproduces it exactly.
+#' Rotated, swapped or positionally relabelled groups fail here, on the day
+#' of the import, with the permutation named.
+#'
+#' @param imported The vector as it arrived: a haven-style labelled vector,
+#'   plain codes (with `code_book`), or already-decoded labels.
+#' @param source_counts Named numeric vector, label = count, as printed by
+#'   the source program (SPSS FREQUENCIES, Stata tabulate).
+#' @param code_book Optional named character vector, code = label, from the
+#'   source program's variable view. When `imported` carries a `labels`
+#'   attribute the two are compared and any disagreement is an error.
+#' @param tolerance Passed to \code{\link{morie_marginals_verify}}.
+#' @return A list with `ok`, `decoded` (a factor in code order), `marginals`
+#'   (the \code{\link{morie_marginals_verify}} result) and `code_book_ok`.
+#' @seealso \code{\link{morie_decode_labelled}},
+#'   \code{\link{morie_marginals_verify}},
+#'   \code{\link{morie_relabel_forensics}}
+#' @examples
+#' x <- structure(c(1, 1, 2, 4, 1), labels = c(White = 1, Black = 2, Other = 3, Unknown = 4))
+#' morie_transfer_verify(x, c(White = 3, Black = 1, Unknown = 1))$ok
+#' @export
+morie_transfer_verify <- function(imported, source_counts, code_book = NULL, tolerance = 0) {
+  lab <- attr(imported, "labels", exact = TRUE)
+  code_book_ok <- NA
+  if (!is.null(lab) && !is.null(code_book)) {
+    got <- stats::setNames(names(lab), as.character(unname(lab)))
+    want <- stats::setNames(unname(code_book), as.character(names(code_book)))
+    bad <- setdiff(union(names(got), names(want)),
+                   names(got)[names(got) %in% names(want) & got == want[names(got)]])
+    code_book_ok <- !length(bad)
+    if (!code_book_ok) {
+      stop("morie_transfer_verify: the value labels that arrived disagree with the source code ",
+           "book at code(s) ", paste(bad, collapse = ", "), ": arrived ",
+           paste(paste0(bad, "=", got[bad]), collapse = ", "), "; source ",
+           paste(paste0(bad, "=", want[bad]), collapse = ", "), call. = FALSE)
+    }
+  }
+  decoded <- if (!is.null(lab)) {
+    morie_decode_labelled(imported)
+  } else if (!is.null(code_book)) {
+    morie_decode_labelled(imported, value_labels = code_book)
+  } else {
+    # keep every label that arrived: one absent from the source counts must
+    # be reported by the marginals check, never dropped as NA
+    lab_all <- as.character(imported)
+    factor(lab_all, levels = unique(c(names(source_counts), lab_all[!is.na(lab_all)])))
+  }
+  m <- morie_marginals_verify(as.character(decoded), source_counts, tolerance = tolerance)
+  list(ok = isTRUE(m$ok) && !isFALSE(code_book_ok), decoded = decoded,
+       marginals = m, code_book_ok = code_book_ok)
 }

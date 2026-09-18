@@ -66,6 +66,8 @@ Imports:
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
 Suggests:
+  reticulate,
+  torch,
   AER,
   AIPW,
   anominate,

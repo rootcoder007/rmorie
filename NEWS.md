@@ -1,5 +1,28 @@
 # rmorie 1.2.4 - 2026-09-16
 
+* `morie_safe_relabel()`, `morie_decode_labelled()`, `morie_transfer_verify()`
+  and `morie_relabel_forensics()`: relabel by name only, decode labelled
+  imports by code, verify an SPSS/Stata/SAS import against the source
+  program's code book and frequency table, and name the mechanical step
+  (alphabetical positional relabel, rotation, ...) that reproduces an
+  observed permutation. The OHRC 2023 correction's four-way rotation is the
+  documented case and the test fixture.
+
+## Twenty-one modules from morie's R arm, three-way verified
+
+Sixteen modules that morie added in September and rmorie lacked now ship
+here too, each checked against the Python arm and morie's R arm on
+identical inputs to twelve digits with falsifiable anchors
+(`ledger/wave3/run3.sh`): the bound families `Bndcvr`, `Bndlgt`,
+`Bndnmt`, `Bndsdo`, `Bnsipv`; the clustered-design family `Ccdsgn`,
+`Ccmem`, `Ccngg`; `Cluseq`, `Cnsint`, `Crrcim`, `Cumcif`, `DepthP`,
+`DepthS`, `Difpst` and `Rdmcbw`. Five more come across without a Python
+twin: `morie_fairness_spatial_gan()` and its family, the BPE tokenizer
+(`morie_tokenizer_new()` and friends), the OTIS MAPQ study module, the
+`plot()` method for `morie_rich_result` objects, and `Qrf` (quantile
+forest pinball loss). `torch` and `reticulate` join Suggests as the
+optional backends the fairness GAN and tokenizer can use.
+
 ## Functions that seed the RNG now leave the caller's stream alone
 
 Two hundred and thirty-six functions called `set.seed()` internally and

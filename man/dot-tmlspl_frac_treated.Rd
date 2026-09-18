@@ -18,7 +18,6 @@ The value of \code{out}, as built in the body.
 The share of each unit's neighbours (rows of the adjacency matrix)
 that received the treatment.
 }
-
 \examples{
 A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
 res <- .tmlspl_frac_treated(D = 3L, A = A)
