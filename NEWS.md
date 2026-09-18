@@ -8,6 +8,11 @@
   observed permutation. The OHRC 2023 correction's four-way rotation is the
   documented case and the test fixture.
 
+* The greedy one-dimensional matcher refuses NA or NaN scores, a NaN
+  caliper and a ratio below one instead of handing them to the sort,
+  where a NaN comparator is undefined behaviour and corrupted the heap
+  under the degenerate-input sweep.
+
 ## Twenty-one modules from morie's R arm, three-way verified
 
 Sixteen modules that morie added in September and rmorie lacked now ship
