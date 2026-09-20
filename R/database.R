@@ -146,13 +146,6 @@
 #'   root itself is returned.
 #' @return A file path string. The directory is \emph{not} created;
 #'   callers create it lazily only when they actually persist to disk.
-#' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' # Persistent cache root (does not write anything to disk):
-#' morie_cache_dir()
-#' # Per-subsystem persistent path:
-#' morie_cache_dir("siu")
-#' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_cache_clear}}
 #' @examples
 #' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -190,13 +183,6 @@ morie_cache_dir <- function(subdir = NULL) {
 #'   prompts the user before deleting. Set \code{FALSE} in scripts /
 #'   batch use to skip the prompt.
 #' @return Invisibly, the number of files removed.
-#' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
-#' # Non-interactive: skip the confirmation prompt.
-#' morie_cache_clear("siu", confirm = FALSE)
-#' }
-#' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_cache_dir}}
 #' @examples
 #' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -763,22 +749,6 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #'   (overrides `db_path`). The built-in DB read is always SQLite-based
 #'   and is unaffected by `con`.
 #' @return A data.frame.
-#' @examples
-#' \donttest{
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
-#' # CPADS 2021-2022 (default DuckDB cache); try() so a transient
-#' # upstream outage does not fail the check
-#' df <- try(morie_load_dataset("ocp21"))
-#' df <- try(morie_load_dataset("ocp21", refresh = TRUE)) # force re-fetch
-#'
-#' # PostgreSQL cache (run a server first):
-#' # con <- DBI::dbConnect(RPostgres::Postgres(),
-#' #   host = "localhost", dbname = "morie", user = "...")
-#' # df <- morie_load_dataset("ocp21", con = con)
-#' }
-#' \dontshow{\}) # examplesIf}
-#' }
 #' @seealso \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}
 #' @examples
 #' \donttest{

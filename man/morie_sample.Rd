@@ -23,8 +23,4 @@ network or external data dependency.
 b01 <- morie_sample("otis_b01")
 head(b01)
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-b01 <- morie_sample("otis_b01")
-head(b01)
-\dontshow{\}) # examplesIf}
 }

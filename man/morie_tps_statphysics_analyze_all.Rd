@@ -38,12 +38,6 @@ and then by method.
                                              save_fig = FALSE)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
-  res <- morie_tps_statphysics_analyze_all(c("Assault", "Robbery"),
-                                             save_fig = FALSE)
-}
-\dontshow{\}) # examplesIf}
 }
 \references{
 D'Orsogna MR, Perc M (2015). \emph{Physics of Life

@@ -45,11 +45,4 @@ the first candidate.
 morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
 \dontshow{\}) # examplesIf}
 }
-\dontrun{
-\dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
-# Runs only when a Google Cloud project is configured; Vertex is an
-# OPTIONAL fallback -- the default LLM path is local Ollama.
-morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
-\dontshow{\}) # examplesIf}
-}
 }

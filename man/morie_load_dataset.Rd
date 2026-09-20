@@ -45,21 +45,6 @@ df <- try(morie_load_dataset("ocp21", refresh = TRUE)) # force re-fetch
 }
 \dontshow{\}) # examplesIf}
 }
-\donttest{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
-# CPADS 2021-2022 (default DuckDB cache); try() so a transient
-# upstream outage does not fail the check
-df <- try(morie_load_dataset("ocp21"))
-df <- try(morie_load_dataset("ocp21", refresh = TRUE)) # force re-fetch
-
-# PostgreSQL cache (run a server first):
-# con <- DBI::dbConnect(RPostgres::Postgres(),
-#   host = "localhost", dbname = "morie", user = "...")
-# df <- morie_load_dataset("ocp21", con = con)
-}
-\dontshow{\}) # examplesIf}
-}
 }
 \seealso{
 \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}

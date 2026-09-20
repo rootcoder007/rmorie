@@ -246,13 +246,6 @@ morie_ingest_chicago_socrata <- function(resource_url,
 #'   limits.
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
-#' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
-#' df <- morie_ingest_chicago_crime(year = 2024, max_features = 10000L)
-#' head(df)
-#' }
-#' \dontshow{\}) # examplesIf}
 #' @seealso \code{\link{morie_ingest_chicago_socrata}},
 #'   \code{\link{morie_ingest_bigquery_table}} for the BigQuery
 #'   public-data mirror (\code{bigquery-public-data.chicago_crime}).
@@ -316,12 +309,6 @@ morie_ingest_chicago_crime <- function(year = NULL,
 #' @return A base R \code{data.frame}.
 #' @seealso \code{\link{morie_ingest_chicago_crime}},
 #'   \code{\link{morie_ingest_bigquery_table}}
-#' @examples
-#' \donttest{
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{try(morie_ingest_chicago_crime_bigquery())}
-#' \dontshow{\}) # examplesIf}
-#' }
 #' @examples
 #' \donttest{
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}

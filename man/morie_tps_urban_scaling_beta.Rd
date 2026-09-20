@@ -45,13 +45,6 @@ grows faster than population), \eqn{\beta = 1}{beta = 1} linear, and
   print(rr$summary_lines)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
-  rr <- morie_tps_urban_scaling_beta("Assault", year = 2024,
-                                      save_fig = FALSE)
-  print(rr$summary_lines)
-}
-\dontshow{\}) # examplesIf}
 }
 \references{
 Bettencourt LMA, Lobo J, Helbing D, Kuhnert C, West GB

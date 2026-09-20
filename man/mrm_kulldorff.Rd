@@ -27,12 +27,6 @@ if (FALSE) {
   mrm_tps_kulldorff_scan(tps, n_permutations = 49)
 }
 \dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-if (FALSE) {
-  tps <- morie_sample("tps_assault")
-  mrm_tps_kulldorff_scan(tps, n_permutations = 49)
-}
-\dontshow{\}) # examplesIf}
 }
 \references{
 Kulldorff, M. (1997). A spatial scan statistic. Communications in

@@ -21,13 +21,6 @@
 #'   \code{morie_fetch_siu()}) return the file path to the downloaded or
 #'   cached CSV; \code{morie_load_dataset()} returns the loaded
 #'   \code{data.frame}.
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' if (FALSE) {
-#'   b01 <- morie_load_dataset("otisb01")
-#'   head(b01)
-#' }
-#' \dontshow{\}) # examplesIf}
 #' @name mrm_samples
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
@@ -48,11 +41,6 @@ NULL
 #' @param name One of `"otis_b01"`, `"otis_b09"`, `"otis_c11"`,
 #'   `"tps_assault"`.
 #' @return A data.frame.
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' b01 <- morie_sample("otis_b01")
-#' head(b01)
-#' \dontshow{\}) # examplesIf}
 #' @export
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' b01 <- morie_sample("otis_b01")

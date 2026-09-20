@@ -132,21 +132,6 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #'   warning when the companion is absent.
 #' @return A `data.frame` with columns `dataset_key`, `source`,
 #'   `id`, `api_modes`, `loader`, `dict_url`, `n_rows_bundled`.
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' # Per-portal slice: registry lives in code, fastest path.
-#' nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
-#' nrow(nypd)
-#' head(nypd$dataset_key)
-#'
-#' # Full catalog: bulk portals (NYC OpenData, Chicago, Toronto Hub,
-#' # etc.) prefer the rmoriedata companion when installed, otherwise
-#' # contribute zero rows with a one-time warning per portal.
-#' \donttest{
-#' cat_df <- morie_dataset_portal_catalog()   # builds every portal, ~6 s
-#' table(cat_df$source)
-#' }
-#' \dontshow{\}) # examplesIf}
 #' @seealso [morie_dataset_portal_catalog_clear_cache()],
 #'   [morie_datasets_load_by_key()], [morie_datasets_browse()]
 #' @examples

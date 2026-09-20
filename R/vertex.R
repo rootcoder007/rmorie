@@ -73,15 +73,6 @@ morie_vertex_resolve_config <- function() {
 #' tok <- morie_vertex_access_token()
 #' \dontshow{\}) # examplesIf}
 #' }
-#' @examples
-#' \dontrun{
-#' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
-#' # Runs only when a Google Cloud project is configured; Vertex is an
-#' # OPTIONAL fallback -- the default LLM path is local Ollama (see
-#' # morie_siu_panel / morie_llm_* helpers).
-#' tok <- morie_vertex_access_token()
-#' \dontshow{\}) # examplesIf}
-#' }
 #' @export
 morie_vertex_access_token <- function(cfg = NULL) {
   if (is.null(cfg)) cfg <- morie_vertex_resolve_config()
@@ -124,14 +115,6 @@ morie_vertex_access_token <- function(cfg = NULL) {
 #' @param timeout_s Numeric HTTP timeout. Default 120.
 #' @param cfg Pre-resolved config list, or NULL to auto-resolve.
 #' @return Character scalar -- trimmed generated text.
-#' @examples
-#' \dontrun{
-#' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
-#' # Runs only when a Google Cloud project is configured; Vertex is an
-#' # OPTIONAL fallback -- the default LLM path is local Ollama.
-#' morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
-#' \dontshow{\}) # examplesIf}
-#' }
 #' @examples
 #' \dontrun{
 #' \dontshow{if (rmorie:::.vertex_examples_ok()) withAutoprint(\{ # examplesIf}
