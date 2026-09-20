@@ -1,0 +1,251 @@
+---
+title: "Designing and measuring for a small subpopulation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Designing and measuring for a small subpopulation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", eval = FALSE)
+```
+
+## What this vignette is for
+
+Research on a subpopulation that is a small share of the general frame runs
+into three problems at once, and they compound. The group is small, so a
+general sample yields few of its members. It is often reached through
+clustered or otherwise non-random designs, so the effective sample is smaller
+than the nominal one. And the frame may identify the group imperfectly, so
+even the members who are sampled may not be counted as such.
+
+The functions here address all three. They are written as general survey
+methodology; the running application is estimation for Indigenous populations
+in Canada, where all three conditions hold together.
+
+## 1. How large must the sample be?
+
+The naive calculation is the textbook one for a proportion:
+
+```{r}
+library(rmorie)
+morie_sample_size_proportion(p = 0.5, moe = 0.05)
+```
+
+which returns about 385. That number is almost never the answer for
+subpopulation work, because it is the number of *subgroup members* needed,
+not the number of interviews. If the group is 5% of the frame and members are
+selected at the same rate as everyone else, the general sample has to be
+roughly twenty times larger:
+
+```{r}
+morie_sample_size_domain(p = 0.5, moe = 0.05, domain_prevalence = 0.05)
+```
+
+The `n_overall` element is near 7,700. This is the single most common reason
+that general-population surveys cannot report on small subpopulations: they
+were never sized to.
+
+Three further factors move the requirement, and all of them move it upward.
+
+```{r}
+morie_sample_size_domain(
+  p = 0.5, moe = 0.05,
+  domain_prevalence = 0.05,
+  deff = 1.8,            # clustering by community and unequal weights
+  response_rate = 0.55,  # realistic fieldwork
+  coverage = 0.82        # the frame misses some members
+)
+```
+
+The design effect multiplies the requirement, the response rate divides it,
+and the coverage rate divides it again. `deff` can be built from its parts:
+`morie_deff_cluster()` for the clustering component and
+`morie_design_effect()` for the weight component. They multiply.
+
+```{r}
+morie_deff_cluster(m = 25, icc = 0.02)   # 25 interviews per community
+morie_neff_cluster(n = 500, m = 25, icc = 0.02)
+```
+
+## 2. Reaching the group: oversampling and screening
+
+Two designs raise subgroup yield. The first is disproportionate selection:
+sample the group at a higher rate than the rest of the frame.
+
+```{r}
+morie_oversample_factor(domain_prevalence = 0.05, target_share = 0.20)
+```
+
+`factor` is how much higher the selection probability must be. Note
+`deff_weights`: oversampling is not free. It creates unequal weights, which
+inflate the design effect, which raises the sample size requirement. Plan the
+two together rather than in sequence.
+
+The second design is screening, used when the frame does not identify the
+group at all.
+
+```{r}
+morie_screen_design(
+  prevalence = 0.05, target_n = 400,
+  cost_screen = 5, cost_interview = 120,
+  screen_response = 0.7, interview_response = 0.85
+)
+```
+
+`screening_share_of_cost` is the quantity to look at when deciding whether
+screening is viable: for a rare group most of the budget is spent finding
+people rather than interviewing them.
+
+When strata differ in cost, as remote communities usually do, allocation
+should account for it:
+
+```{r}
+morie_alloc_optimal(
+  N_h = c(8000, 1500, 500), S_h = c(1, 1.4, 2),
+  n = 900, cost_h = c(1, 3, 9)
+)
+```
+
+With equal costs this reduces to Neyman allocation, also available directly
+as `Neyman()`.
+
+## 3. Making the sample agree with known totals
+
+Where population totals are published for the group but their joint
+distribution is not, raking adjusts the weights to match each margin in turn:
+
+```{r}
+df <- data.frame(
+  region = c("north", "north", "south", "south"),
+  group  = c("a", "b", "a", "b")
+)
+morie_rake(df, list(region = c(north = 60, south = 40),
+                    group  = c(a = 70, b = 30)))
+```
+
+Always check `converged`. Raking can fail to converge when margins are
+inconsistent or a cell is empty, and a non-converged weight vector should not
+be used.
+
+## 4. When the identifier is wrong
+
+If group membership is recorded by an administrative identifier rather than
+by self-identification, the identifier has a sensitivity and a specificity,
+and neither is 1. Sensitivity below 1 means true members are recorded as
+non-members. Every rate computed on the recorded counts is then biased, and
+usually biased downward, because the group's cases are undercounted while the
+denominator is not.
+
+```{r}
+morie_misclass_correct(p_obs = 0.04, sensitivity = 0.75,
+                       specificity = 0.999, n = 10000)
+```
+
+The correction is the Rogan-Gladen estimator. Applied to counts, it reports
+how many members the records miss:
+
+```{r}
+morie_misclass_count(observed_count = 400, n = 10000,
+                     sensitivity = 0.75, specificity = 0.999)
+```
+
+Two cautions. The correction needs external estimates of sensitivity and
+specificity, normally from a linkage or validation study; it cannot be
+obtained from the misclassified data alone. And the interval widens sharply
+as the classifier degrades, which is itself the finding worth reporting when
+no validation study exists.
+
+## 5. Measurement: does the instrument mean the same thing in both groups?
+
+Comparing scale scores across groups presupposes that the scale measures the
+same construct in each. That is an empirical claim, and it is testable.
+
+Plan the test first. Power for differential item functioning is governed by
+the *smaller* group, so a small focal group caps detection regardless of the
+total sample:
+
+```{r}
+morie_dif_sample_size(p_reference = 0.6, odds_ratio = 1.5)              # equal groups
+morie_dif_sample_size(p_reference = 0.6, odds_ratio = 1.5, ratio = 4)   # focal is a fifth
+```
+
+An instrument reported as invariant on an underpowered comparison has not
+been shown to be invariant; it has been shown to be untested. Report the
+detectable effect size alongside the DIF result.
+
+Fit the DIF models with `Difmh()` (Mantel-Haenszel) or `Difsib()` (SIBTEST),
+then convert the odds ratios to the scale used for operational review:
+
+```{r}
+morie_dif_delta_mh(c(1.0, 1.35, 1.9, 0.5))
+```
+
+Magnitude A is negligible, B moderate, C large; `favours` names the group the
+item is easier for. For scale-level invariance, compare the nested sequence:
+
+```{r}
+fits <- data.frame(
+  model = c("configural", "metric", "scalar"),
+  chisq = c(120.3, 128.9, 162.4),
+  df    = c(48, 54, 60),
+  cfi   = c(0.981, 0.979, 0.964),
+  rmsea = c(0.041, 0.040, 0.052)
+)
+morie_invariance_compare(fits)
+```
+
+Metric invariance holds here and scalar invariance does not, which means
+factor loadings are comparable but intercepts are not: group *means* on this
+scale are not comparable, though associations may be. Reporting a mean
+difference in that situation describes the instrument, not the groups.
+
+Finally, report precision by group as well. A scale can be reliable in one
+group and not in another, and pooling conceals it:
+
+```{r}
+morie_irt_theta_se(information = c(4, 9, 16))
+morie_irt_marginal_reliability(se = c(0.3, 0.35, 0.4, 0.5))
+```
+
+## 6. Governance is part of the method
+
+For research with Indigenous communities in Canada, the design questions
+above sit inside a governance framework that is not optional and is not
+supplied by any software package. First Nations data governance is
+articulated through the OCAP principles -- ownership, control, access and
+possession -- which are a registered trademark of the First Nations
+Information Governance Centre and are set out by that body; Inuit and Metis
+governance frameworks are distinct and are articulated by their own
+representative organisations. A distinctions-based approach means First
+Nations, Inuit and Metis data are not aggregated into a single category
+without a reason that the relevant nations accept.
+
+Practical consequences for the calculations above: who holds the data and
+who decides what is published are determined before the sample is drawn, not
+after the analysis; the community, not only the researcher, has a stake in
+whether a subgroup estimate is precise enough to publish; and a
+non-converged raking or an undercounted identifier is a reporting obligation,
+not a technical footnote.
+
+None of this is enforced by the functions in this package. It is stated here
+because a design that is statistically sound and governance-blind is not
+usable for this work.
+
+## Summary
+
+| Question | Function |
+|---|---|
+| How many subgroup members do I need? | `morie_sample_size_proportion()` |
+| How large must the whole sample be? | `morie_sample_size_domain()` |
+| What does clustering cost me? | `morie_deff_cluster()`, `morie_neff_cluster()` |
+| How hard do I oversample, and at what price? | `morie_oversample_factor()` |
+| Is screening affordable? | `morie_screen_design()` |
+| How do I allocate across costly strata? | `morie_alloc_optimal()`, `Neyman()` |
+| How do I match published totals? | `morie_rake()`, `Postrt()` |
+| The identifier is imperfect | `morie_misclass_correct()`, `morie_misclass_count()` |
+| Can I even detect DIF? | `morie_dif_sample_size()` |
+| How large is the DIF? | `Difmh()`, `morie_dif_delta_mh()` |
+| Are scores comparable across groups? | `morie_invariance_compare()` |
+| How precise are the scores, by group? | `morie_irt_theta_se()`, `morie_irt_marginal_reliability()` |

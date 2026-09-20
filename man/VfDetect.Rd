@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_qrs.R
 \name{VfDetect}
 \alias{VfDetect}
-\title{Sections 1.2.4 and 8.11 describe VF but give NO detector and NO}
+\title{Sections 1.2.5 and 8.11 describe VF but give NO detector and NO}
 \usage{
 VfDetect(x, fs, win = 4, conc = 0.6, crest = 4)
 }

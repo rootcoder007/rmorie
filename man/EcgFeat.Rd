@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_qrs.R
 \name{EcgFeat}
 \alias{EcgFeat}
-\title{Section 1.2.4 waves and intervals.  Amplitudes are measured against
+\title{Section 1.2.5 waves and intervals.  Amplitudes are measured against
 the}
 \usage{
 EcgFeat(x, qrs, fs)

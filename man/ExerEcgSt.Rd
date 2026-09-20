@@ -24,7 +24,7 @@ A list with \code{stdev}, \code{stslope}, \code{pattern}, \code{stdevmean},
 \code{fs}, \code{method}.
 }
 \description{
-of the segment that follows (Section 1.2.4).  The 0.1 mV threshold is
+of the segment that follows (Section 1.2.5).  The 0.1 mV threshold is
 the conventional clinical figure, NOT a book value -- the payload
 says so.
 }

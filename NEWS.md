@@ -1,3 +1,47 @@
+# rmorie 1.3.0 - 2026-09-19
+
+## Design and measurement for small or under-enumerated subpopulations
+
+Fifteen functions for studies whose target group is a small share of the
+frame, is reached by a design that is not simple random sampling, or is
+imperfectly identified by the frame itself. The three problems compound, and
+the package previously covered only the estimators, not the planning.
+
+Sample size and design: `morie_sample_size_proportion()` composes the finite
+population correction, a design effect and a non-response inflation in that
+order; `morie_sample_size_domain()` answers the question the estimators could
+not, namely how large the whole sample must be for the subgroup to reach a
+stated precision, dividing by both the subgroup share of the frame and the
+rate at which the frame identifies it. `morie_deff_cluster()` and
+`morie_neff_cluster()` give the clustering component of the design effect,
+which multiplies with the weight component from `morie_design_effect()`.
+`morie_oversample_factor()` returns the selection multiplier for a target
+composition together with the weight-induced design effect it creates, so the
+two are planned together rather than in sequence. `morie_screen_design()`
+costs a two-phase screen for a rare group. `morie_alloc_optimal()` allocates
+across strata with unequal per-unit costs, reducing to `Neyman()` when costs
+are equal.
+
+Weighting: `morie_rake()` performs iterative proportional fitting to known
+margins, reporting convergence rather than assuming it.
+
+Identification error: `morie_misclass_correct()` and `morie_misclass_count()`
+implement the Rogan-Gladen correction, which recovers a prevalence from an
+observed one when the classifier has known sensitivity and specificity. Where
+group membership is recorded administratively rather than self-reported,
+sensitivity below one biases every rate computed on the recorded counts.
+
+Measurement equivalence: `morie_dif_sample_size()` sizes a differential item
+functioning comparison, whose power is governed by the smaller group;
+`morie_dif_delta_mh()` puts a Mantel-Haenszel odds ratio on the ETS delta
+scale with its A/B/C classification; `morie_invariance_compare()` runs the
+nested configural/metric/scalar sequence on chi-square, CFI and RMSEA;
+`morie_irt_theta_se()` and `morie_irt_marginal_reliability()` report score
+precision, which is worth reporting by group for the same reason DIF is.
+
+New vignette `subpopulation-design`, including the governance framework the
+arithmetic sits inside.
+
 # rmorie 1.2.5 - 2026-09-18
 
 * `agent()` quotes every argument it hands to the CLI. Unquoted, a
