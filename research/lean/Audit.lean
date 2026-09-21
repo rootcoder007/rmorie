@@ -114,3 +114,7 @@ open Research.P4
 #print axioms Research.P8.certainty_monotone
 #print axioms Research.P8.severity_monotone
 #print axioms Research.P8.aggregate_monotone
+#print axioms Research.P2.rate_per_offender_group
+#print axioms Research.P2.null_slope_positive
+#print axioms Research.P2.dyad_ratio
+#print axioms Research.P2.pair_exposure_rate_constant

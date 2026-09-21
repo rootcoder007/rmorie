@@ -117,6 +117,14 @@ field has no agreed estimand, let alone estimator.
   `morie_relative_risk_from_or()`, point-identifying the risks when a base
   rate is supplied.
 
+- Progress 2026-09-21 (interracial rates): `Research.P2.rate_per_offender_group`,
+  `null_slope_positive`, `dyad_ratio`, `pair_exposure_rate_constant`
+  (P2Interracial.lean): under random mixing the per-offender-group dyad
+  rate is k p_victim, so "percent Black predicts interracial offending"
+  and "Black-on-White exceeds White-on-Black per capita" are exposure
+  arithmetic; the pair-exposure denominator is the null that a test of
+  targeting needs (library scan A20). R: `morie_interracial_rates()`.
+
 ## P3. Causal effects of policing under interference and displacement
 
 "No interference" fails by construction: hot-spot policing displaces or

@@ -123,3 +123,21 @@ test_that("optimal offending is non-increasing in certainty for arbitrary benefi
   expect_true(all(diff(agg) <= 0))
   expect_error(morie_deterrence_response(0:2, 1:3, c(1, 1, 2), 0.5), "strictly increasing")
 })
+
+test_that("random mixing makes per-offender-group rates load on victim share; pair exposure removes it (rate_per_offender_group, dyad_ratio)", {
+  set.seed(10)
+  for (i in 1:100) {
+    pop <- c(A = runif(1, 1e4, 1e5), B = runif(1, 1e4, 1e5)); N <- sum(pop); p <- pop / N; k <- runif(1, 0.001, 0.01)
+    off <- c(A_on_B = k * p["A"] * p["B"] * N, B_on_A = k * p["B"] * p["A"] * N,
+             A_on_A = k * p["A"]^2 * N, B_on_B = k * p["B"]^2 * N)
+    names(off) <- c("A_on_B", "B_on_A", "A_on_A", "B_on_B")
+    r <- morie_interracial_rates(off, pop)
+    expect_equal(r$rate_per_offender_group[r$offender == "A" & r$victim == "B"], unname(k * p["B"]), tolerance = 1e-12)
+    expect_equal(r$rate_per_offender_group[1] / r$rate_per_offender_group[2], unname(p["B"] / p["A"]), tolerance = 1e-12)
+    expect_true(all(abs(r$ratio_to_null - 1) < 1e-10))          # pair exposure: constant k, ratio 1 everywhere
+  }
+  # a real departure shows up only in the pair-exposure ratio
+  r <- morie_interracial_rates(c(A_on_B = 2 * 0.8 * 0.2 * 1e5 * 0.005, B_on_A = 0.2 * 0.8 * 1e5 * 0.005), c(A = 8e4, B = 2e4))
+  expect_gt(r$ratio_to_null[1], r$ratio_to_null[2])
+  expect_error(morie_interracial_rates(c(AB = 1), c(A = 1, B = 1)), "offender_on_victim")
+})

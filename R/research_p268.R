@@ -274,3 +274,48 @@ morie_deterrence_response <- function(x, benefit, sanction, p) {
   attr(res, "theorems") <- c("Research.P8.certainty_monotone", "Research.P8.severity_monotone", "Research.P8.aggregate_monotone")
   res
 }
+
+
+#' Interracial offending rates against the random-mixing null
+#'
+#' Under random mixing the expected number of A-on-B offences is
+#' \eqn{k p_A p_B N}, so the conventional "A-on-B rate per A resident" equals
+#' \eqn{k p_B}: a linear function of percent B with no behavioural content
+#' (\code{Research.P2.rate_per_offender_group}, \code{null_slope_positive}),
+#' and the ratio of the two dyadic per-offender-group rates is \eqn{p_B/p_A}
+#' (\code{dyad_ratio}). Per pair-exposure \eqn{p_A p_B N} the null rate is a
+#' constant for every composition (\code{pair_exposure_rate_constant}), so
+#' that is the denominator a test of differential targeting needs
+#' (Stolzenberg, Eitle & D'Alessio 2006 use the offender-group denominator).
+#'
+#' @param offences Named numeric vector of dyad counts, names like
+#'   \code{"A_on_B"}: offender group, \code{"_on_"}, victim group.
+#' @param population Named numeric vector of group populations (all groups
+#'   appearing in \code{offences}).
+#' @return A data frame with one row per dyad: \code{offender}, \code{victim},
+#'   \code{count}, \code{rate_per_offender_group}, \code{rate_per_pair_exposure}
+#'   (count over \eqn{p_A p_B N}), \code{null_rate_per_offender_group} (what
+#'   random mixing at the pooled pair-exposure rate predicts) and
+#'   \code{ratio_to_null}; attribute \code{"theorems"}.
+#' @examples
+#' morie_interracial_rates(c(A_on_B = 120, B_on_A = 200, A_on_A = 900, B_on_B = 300),
+#'                         population = c(A = 80000, B = 20000))
+#' @export
+morie_interracial_rates <- function(offences, population) {
+  parts <- strsplit(names(offences), "_on_", fixed = TRUE)
+  if (any(lengths(parts) != 2L)) stop("offence names must be of the form offender_on_victim", call. = FALSE)
+  off <- vapply(parts, `[`, "", 1L); vic <- vapply(parts, `[`, "", 2L)
+  if (!all(c(off, vic) %in% names(population))) stop("every group in offences must appear in population", call. = FALSE)
+  if (any(population <= 0)) stop("populations must be positive", call. = FALSE)
+  N <- sum(population); p <- population / N
+  pair <- p[off] * p[vic] * N
+  k_hat <- sum(offences) / sum(pair)                    # pooled pair-exposure rate
+  data.frame(offender = off, victim = vic, count = as.numeric(offences),
+             rate_per_offender_group = as.numeric(offences / population[off]),
+             rate_per_pair_exposure = as.numeric(offences / pair),
+             null_rate_per_offender_group = as.numeric(k_hat * p[vic]),
+             ratio_to_null = as.numeric((offences / pair) / k_hat),
+             row.names = NULL) |>
+    (\(d) { attr(d, "theorems") <- c("Research.P2.rate_per_offender_group", "Research.P2.null_slope_positive",
+                                      "Research.P2.dyad_ratio", "Research.P2.pair_exposure_rate_constant"); d })()
+}
