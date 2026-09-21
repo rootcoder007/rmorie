@@ -37,9 +37,13 @@ signed off.
 | P6 age-crime | `Research.P6.aggregate_not_identifying`, `invariance_sufficient`, `invariance_not_necessary` | `morie_age_crime_aggregate()` |
 | P7 concentration | `Research.P7.gini_zero_decomposition`, `poisson_zero_prob` | `morie_concentration_gini()`, `morie_concentration_decompose()` |
 | P7 concentration | `Research.P7.Mixture.mixture_zero_ge_exp_neg_mean`, `variance_eq`, `mixture_var_ge_mean`, `mixture_var_eq_mean_iff` | `morie_concentration_dispersion()`, `morie_concentration_decompose()` (`null_zero_share` is a lower bound) |
+| P7 concentration | `Research.P7.log_le_S`, `S_le_log`, `expectedDistinct_bounds` | `morie_concentration_distinct_growth()` |
 | P8 deterrence | `Research.P8.constant_dimension_not_identified`, `identified_iff_injective`, `corner_design_identified` | `morie_deterrence_design_check()` |
 | P9 recording map | `Research.P9.total_invariant_of_colStochastic`, `total_le_of_colSubstochastic`, `reclassification_moves_ratio`, `detection_rate_rises` | `morie_recording_map()`, `morie_detection_rate_shift()` |
 | P10 contagion | `Research.P10.generation_mean`, `cluster_size_of_lt_one`, `stationary_rate`, `cluster_size_diverges_of_ge_one`, `endogeneity_share` | `morie_contagion_branching()` |
+| P11 sentencing bounds | `Research.P11.Pop.outcome_bounds`, `lower_attained`, `upper_attained`, `ate_width_one`, `ate_contains_zero` | `morie_sentence_effect_bounds()` |
+| P12 ecological | `Research.P12.within_orth`, `cov_decomp`, `var_decomp`, `var_nonneg`, `ecological_ge` | `morie_ecological_decompose()` |
+| P11 sentencing bounds | `Research.P11.clean_bounds`, `clean_lower_attained`, `clean_upper_attained`, `clean_width`, `clean_informative` | `morie_contaminated_bounds()` |
 
 C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),
 `src/morie_spillover.cpp` (treated-neighbour counts on a place network).

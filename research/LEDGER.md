@@ -310,6 +310,14 @@ counts are sparse relative to units.
   Gini above the null separates "criminology of place" from unequal
   exposure. R: `morie_concentration_dispersion()`.
 
+- Progress 2026-09-21 (distinct places): `Research.P7` (P7Distinct.lean):
+  `log_le_S`, `S_le_log`, `expectedDistinct_bounds` — under Polya
+  allocation with concentration M the expected number of distinct places
+  after n events lies between M log((M+n)/M) and 1 + M log((M+n-1)/M):
+  logarithmic growth, so polynomial growth of distinct addresses rejects a
+  concentration-only mechanism (library scan C13). R:
+  `morie_concentration_distinct_growth()` with a log-log slope diagnostic.
+
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
 Every punishment has all three dimensions; studies manipulate one and
@@ -427,3 +435,42 @@ cluster size, the stationary rate and the share of "contagious" events.
   non-identification of contagion vs heterogeneity from the K-function
   (library scan B20), and an application to TPS break-and-enter with
   constant vs KDE background (A17).
+
+
+## P11. Sentencing effects as intervals: what observational data can say before assumptions
+
+Manski's worst-case selection bounds (Identification for Prediction and
+Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
+
+- Progress 2026-09-21: `Research.P11` (P11Bounds.lean), finite weighted
+  population: `outcome_bounds` with `lower_attained` / `upper_attained`
+  (P(y=1,z=t) <= P[y(t)=1] <= P(y=1,z=t) + P(z!=t), sharp), `ate_width_one`
+  and `ate_contains_zero` (the contrast interval has width exactly one and
+  contains zero: data alone cannot sign a sentencing effect). R:
+  `morie_sentence_effect_bounds()`; the test attains both ends by filling
+  the unobserved arm.
+- Progress 2026-09-21 (contamination): `clean_bounds`, attained ends,
+  `clean_width` (p/(1-p)) and `clean_informative` (P11Contaminated.lean;
+  library scan B2). R: `morie_contaminated_bounds()`.
+- Open: monotone treatment response and monotone treatment selection
+  bounds (Manski sec. 9.3, library scan B4), Imbens-Manski confidence sets (B25); application to OTIS/CPADS
+  custody-vs-community sentences and reconviction.
+
+
+## P12. Ecological inference: when group-level correlations say anything about people
+
+Neighbourhood crime rates regressed on neighbourhood composition are the
+workhorse of place-based criminology; Robinson (1950) showed the
+group-level correlation can differ in size and sign from the individual one.
+
+- Progress 2026-09-21: `Research.P12` (P12Ecological.lean): `within_orth`
+  (the within-group residual is orthogonal to every group-level function),
+  exact `cov_decomp` / `var_decomp`, `var_nonneg`, and `ecological_ge`
+  (zero within-group covariance gives corr(x,y)^2 <= corr(group means)^2:
+  the ecological correlation overstates). R:
+  `morie_ecological_decompose()`; the test builds an exactly-orthogonal
+  within part and reproduces Robinson's four-person sign reversal
+  (individual +0.6, ecological -1).
+- Open: Duncan-Davis bounds for the individual proportion from group
+  marginals (Manski sec. 5.1; library scan B22), and an application with
+  PSDP/CPADS individual records against TPS neighbourhood aggregates.

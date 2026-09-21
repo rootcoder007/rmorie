@@ -20,3 +20,7 @@ import Researchproofs.P2Benchmark
 import Researchproofs.P9Recording
 import Researchproofs.P10Contagion
 import Researchproofs.P3SYG
+import Researchproofs.P11Bounds
+import Researchproofs.P12Ecological
+import Researchproofs.P7Distinct
+import Researchproofs.P11Contaminated

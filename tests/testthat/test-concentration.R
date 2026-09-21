@@ -81,3 +81,47 @@ test_that("Poisson mixtures obey the proved inequalities (mixture_zero_ge_exp_ne
   expect_error(morie_concentration_dispersion(c(0, 0)), "positive total")
   expect_true("Research.P7.Mixture.mixture_zero_ge_exp_neg_mean" %in% morie_concentration_decompose(x_het)$theorems)
 })
+
+test_that("distinct-place growth: the Polya expectation sits inside the proved envelope, and simulated Polya series stay near it (expectedDistinct_bounds)", {
+  set.seed(4)
+  for (M in c(0.5, 2, 10)) for (n in c(10, 100, 1000)) {
+    S <- sum(1 / (M + 0:(n - 1)))
+    expect_gte(M * S, M * log((M + n) / M) - 1e-12)
+    expect_lte(M * S, 1 + M * log((M + n - 1) / M) + 1e-12)
+  }
+  sim_polya <- function(M, n) { place <- integer(n); k <- 0
+    for (i in seq_len(n)) { if (stats::runif(1) < M / (M + i - 1)) { k <- k + 1; place[i] <- k } else place[i] <- place[sample.int(i - 1, 1)] }
+    place }
+  n <- 2000; M <- 4
+  Ks <- replicate(200, max(morie_concentration_distinct_growth(sim_polya(M, n))$distinct))
+  expect_gte(mean(Ks), M * log((M + n) / M) - 1); expect_lte(mean(Ks), 1 + M * log((M + n - 1) / M) + 1)
+  g <- morie_concentration_distinct_growth(sim_polya(M, n))
+  expect_true(all(g$lower <= g$expected + 1e-9) && all(g$expected <= g$upper + 1e-9))
+  expect_lt(g$loglog_slope, 0.5)
+  # a power-law series (every third event is a new place) has slope near 1
+  pl <- rep(seq_len(700), each = 3)
+  expect_gt(morie_concentration_distinct_growth(pl)$loglog_slope, 0.9)
+  expect_error(morie_concentration_distinct_growth(1), "at least two")
+})
+
+test_that("distinct-place growth: the Polya expectation sits inside the proved envelope, and simulated Polya series stay near it (expectedDistinct_bounds)", {
+  set.seed(4)
+  for (M in c(0.5, 2, 10)) for (n in c(10, 100, 1000)) {
+    S <- sum(1 / (M + 0:(n - 1)))
+    expect_gte(M * S, M * log((M + n) / M) - 1e-12)
+    expect_lte(M * S, 1 + M * log((M + n - 1) / M) + 1e-12)
+  }
+  sim_polya <- function(M, n) { place <- integer(n); k <- 0
+    for (i in seq_len(n)) { if (stats::runif(1) < M / (M + i - 1)) { k <- k + 1; place[i] <- k } else place[i] <- place[sample.int(i - 1, 1)] }
+    place }
+  n <- 2000; M <- 4
+  Ks <- replicate(200, max(morie_concentration_distinct_growth(sim_polya(M, n))$distinct))
+  expect_gte(mean(Ks), M * log((M + n) / M) - 1); expect_lte(mean(Ks), 1 + M * log((M + n - 1) / M) + 1)
+  g <- morie_concentration_distinct_growth(sim_polya(M, n))
+  expect_true(all(g$lower <= g$expected + 1e-9) && all(g$expected <= g$upper + 1e-9))
+  expect_lt(g$loglog_slope, 0.5)
+  # a power-law series (every third event is a new place) has slope near 1
+  pl <- rep(seq_len(700), each = 3)
+  expect_gt(morie_concentration_distinct_growth(pl)$loglog_slope, 0.9)
+  expect_error(morie_concentration_distinct_growth(1), "at least two")
+})
