@@ -231,18 +231,38 @@ morie_spillover_ht <- function(y, exposure, probs, joint = NULL) {
 #' @param y_pot Potential outcome per place at the level of interest.
 #' @param pi Marginal exposure probability per place at that level.
 #' @param pij \code{n} by \code{n} joint exposure probabilities at that level.
-#' @return The variance (a number).
+#' @param form \code{"ht"} (the Horvitz-Thompson form above), \code{"syg"}
+#'   (the Sen-Yates-Grundy form
+#'   \eqn{\tfrac12\sum_{i,k}(\pi_i\pi_k-\pi_{ik})(c_i-c_k)^2}, \eqn{c_i = Y_i/\pi_i})
+#'   or \code{"both"}. The two agree exactly on a fixed-size design, one in
+#'   which \eqn{\sum_k \pi_{ik} = m\pi_i} with \eqn{m} the constant number of
+#'   places at the level (\code{Research.P3.SYG.syg_eq_ht}); the SYG form is
+#'   zero when the potential outcomes are proportional to the inclusion
+#'   probabilities (\code{syg_zero_of_const}). Exposure levels of a
+#'   randomised deployment are rarely fixed-size, so \code{"both"} also
+#'   reports whether the condition holds.
+#' @return The variance (a number) for \code{"ht"} or \code{"syg"}; for
+#'   \code{"both"} a list with \code{ht}, \code{syg}, \code{fixed_size},
+#'   \code{level_count} and \code{theorems}.
 #' @examples
 #' pr <- morie_spillover_exposure_probs(n = 6, edges = cbind(1:5, 2:6), n_treated = 2, joint = TRUE)
 #' morie_spillover_ht_variance(rep(1, 6), pr$marginal[, "2"], pr$joint[, , 3])
 #' @export
-morie_spillover_ht_variance <- function(y_pot, pi, pij) {
+morie_spillover_ht_variance <- function(y_pot, pi, pij, form = c("ht", "syg", "both")) {
+  form <- match.arg(form)
   n <- length(y_pot)
   pij <- as.matrix(pij)
   if (length(pi) != n || !identical(dim(pij), c(n, n))) stop("y_pot, pi and pij must describe the same places", call. = FALSE)
   if (any(pi <= 0)) stop("every marginal probability must be positive", call. = FALSE)
   c_ <- y_pot / pi
-  sum((pij - outer(pi, pi)) * outer(c_, c_))
+  ht <- sum((pij - outer(pi, pi)) * outer(c_, c_))
+  if (form == "ht") return(ht)
+  syg <- 0.5 * sum((outer(pi, pi) - pij) * outer(c_, c_, "-")^2)
+  m <- sum(pi)
+  fixed_size <- max(abs(rowSums(pij) - m * pi)) < 1e-10
+  if (form == "syg") return(syg)
+  list(ht = ht, syg = syg, fixed_size = fixed_size, level_count = m,
+       theorems = c("Research.P3.Design.ht_variance", "Research.P3.SYG.syg_eq_ht", "Research.P3.SYG.syg_zero_of_const"))
 }
 
 #' Exposure probabilities of a completely randomised deployment

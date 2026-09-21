@@ -68,3 +68,6 @@ open Research.P4
 #print axioms Research.P10.stationary_rate
 #print axioms Research.P10.cluster_size_diverges_of_ge_one
 #print axioms Research.P10.endogeneity_share
+#print axioms Research.P3.SYG.row_sum_zero
+#print axioms Research.P3.SYG.syg_eq_ht
+#print axioms Research.P3.SYG.syg_zero_of_const

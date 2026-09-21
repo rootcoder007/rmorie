@@ -19,3 +19,4 @@ import Researchproofs.P1ThreeList
 import Researchproofs.P2Benchmark
 import Researchproofs.P9Recording
 import Researchproofs.P10Contagion
+import Researchproofs.P3SYG

@@ -142,6 +142,15 @@ spillover.
   mis-specification bound as a function of the d+1 ring's exposure share;
   variance of the HT estimator; TPS street-segment application.
 
+- Progress 2026-09-21 (SYG): `Research.P3.SYG` (P3SYG.lean): on a
+  fixed-size symmetric design the Sen-Yates-Grundy form equals the
+  Horvitz-Thompson variance (`syg_eq_ht`) and vanishes for outcomes
+  proportional to the inclusion probabilities (`syg_zero_of_const`).
+  Exposure levels of a randomised deployment are not fixed-size in
+  general, so `morie_spillover_ht_variance(form = "both")` reports the
+  condition; the path-graph test shows the two forms differing when it
+  fails (library scan B7).
+
 ## P4. Predictive policing feedback: when does the loop run away?
 
 Ensign et al. prove with a Polya-urn model that a system trained on its

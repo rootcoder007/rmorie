@@ -4,7 +4,7 @@
 \alias{morie_spillover_ht_variance}
 \title{Design variance of the Horvitz-Thompson total (population formula)}
 \usage{
-morie_spillover_ht_variance(y_pot, pi, pij)
+morie_spillover_ht_variance(y_pot, pi, pij, form = c("ht", "syg", "both"))
 }
 \arguments{
 \item{y_pot}{Potential outcome per place at the level of interest.}
@@ -12,9 +12,22 @@ morie_spillover_ht_variance(y_pot, pi, pij)
 \item{pi}{Marginal exposure probability per place at that level.}
 
 \item{pij}{\code{n} by \code{n} joint exposure probabilities at that level.}
+
+\item{form}{\code{"ht"} (the Horvitz-Thompson form above), \code{"syg"}
+(the Sen-Yates-Grundy form
+\eqn{\tfrac12\sum_{i,k}(\pi_i\pi_k-\pi_{ik})(c_i-c_k)^2}, \eqn{c_i = Y_i/\pi_i})
+or \code{"both"}. The two agree exactly on a fixed-size design, one in
+which \eqn{\sum_k \pi_{ik} = m\pi_i} with \eqn{m} the constant number of
+places at the level (\code{Research.P3.SYG.syg_eq_ht}); the SYG form is
+zero when the potential outcomes are proportional to the inclusion
+probabilities (\code{syg_zero_of_const}). Exposure levels of a
+randomised deployment are rarely fixed-size, so \code{"both"} also
+reports whether the condition holds.}
 }
 \value{
-The variance (a number).
+The variance (a number) for \code{"ht"} or \code{"syg"}; for
+\code{"both"} a list with \code{ht}, \code{syg}, \code{fixed_size},
+\code{level_count} and \code{theorems}.
 }
 \description{
 The exact variance

@@ -125,3 +125,21 @@ test_that("Horvitz-Thompson variance: exact design variance equals the formula a
   expect_true(any(vapply(1:3, function(l) all(pr$joint[, , l] > 0), logical(1))))
   expect_error(morie_spillover_ht(y0, rep(0, n), pr$marginal, joint = matrix(1, n, n)), "n x n x 3")
 })
+
+test_that("Sen-Yates-Grundy equals Horvitz-Thompson on fixed-size designs and is zero for proportional outcomes (syg_eq_ht, syg_zero_of_const)", {
+  set.seed(3)
+  # fixed-size design: simple random sampling of m out of n places, exact inclusion probabilities
+  n <- 8; m <- 3
+  pi <- rep(m / n, n); pij <- matrix(m * (m - 1) / (n * (n - 1)), n, n); diag(pij) <- m / n
+  y <- rnorm(n)
+  v <- morie_spillover_ht_variance(y, pi, pij, form = "both")
+  expect_true(v$fixed_size)
+  expect_equal(v$syg, v$ht, tolerance = 1e-12)
+  expect_equal(morie_spillover_ht_variance(2.5 * pi, pi, pij, form = "syg"), 0, tolerance = 1e-12)
+  # exposure levels of a path-graph deployment are not fixed-size: forms differ and the flag says so
+  edges <- cbind(1:7, 2:8)
+  pr <- morie_spillover_exposure_probs(8, edges, 3, joint = TRUE)
+  w <- morie_spillover_ht_variance(10 + 1:8, pr$marginal[, "1"], pr$joint[, , 2], form = "both")
+  expect_false(w$fixed_size)
+  expect_false(isTRUE(all.equal(w$syg, w$ht)))
+})
