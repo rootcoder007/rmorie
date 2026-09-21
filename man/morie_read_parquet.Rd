@@ -18,7 +18,10 @@ A \code{data.frame}.
 \description{
 Native Parquet reader: no nanoparquet, no arrow. Handles the v1
 format with PLAIN, RLE and dictionary encodings, Snappy or no
-compression. Nested and repeated columns are refused.
+compression. Flat columns and three-level \code{LIST} columns of a
+primitive type are decoded; a \code{LIST} column comes back as a
+list column (class \code{AsIs}) holding one vector per row,
+\code{NULL} for a null list. Other nesting is refused.
 }
 \examples{
 if (requireNamespace("arrow", quietly = TRUE)) {

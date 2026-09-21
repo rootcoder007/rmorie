@@ -1013,20 +1013,86 @@
   .pq_struct(.pq_reader(readBin(con, "raw", n)))
 }
 
+#' .pq_read_levels
+#'
+#' One RLE level run of a v1 data page: a 4-byte length, then the run.
+#' Repetition levels and definition levels are both stored this way.
+#'
+#' @param page Raw page bytes.
+#' @param p Start position (1-based).
+#' @param maxlevel Largest level value; sets the bit width.
+#' @param n Number of level slots in the page.
+#' @param encoding Level encoding from the data page header.
+#' @return A list with \code{levels} and \code{pos}.
+#' @noRd
+.pq_read_levels <- function(page, p, maxlevel, n, encoding) {
+  if (encoding == .pqEBitPacked) {
+    stop("BIT_PACKED levels not implemented", call. = FALSE)
+  }
+  if (encoding != .pqERle) {
+    return(list(levels = rep(as.integer(maxlevel), n), pos = p))
+  }
+  ln <- .pq_u32(page[seq.int(p, length.out = 4L)])
+  p <- p + 4L
+  rr <- .pq_read_rle(page, p, .pq_bit_width(maxlevel), n, p + ln - 1L)
+  list(levels = rr$values, pos = p + ln)
+}
+
+#' .pq_assemble_lists
+#'
+#' Fold level slots into one list per row. A slot whose definition level
+#' is below \code{repdef - 1} is a null list, exactly \code{repdef - 1}
+#' is an empty list, and anything at or above \code{repdef} is an
+#' element (\code{NULL} when it stops short of the leaf's max level).
+#'
+#' @param reps Integer repetition levels, one per slot.
+#' @param defs Integer definition levels, one per slot.
+#' @param slot_vals List of decoded values, \code{NULL} where absent.
+#' @param repdef Definition level of the REPEATED node.
+#' @return A list with one entry per row.
+#' @noRd
+.pq_assemble_lists <- function(reps, defs, slot_vals, repdef) {
+  rows <- list()
+  for (i in seq_along(reps)) {
+    d <- defs[i]
+    if (reps[i] == 0L) {
+      k <- length(rows) + 1L
+      if (d < repdef - 1L) {
+        rows[k] <- list(NULL)
+      } else if (d == repdef - 1L) {
+        rows[[k]] <- list()
+      } else {
+        rows[[k]] <- list(slot_vals[[i]])
+      }
+    } else {
+      k <- length(rows)
+      rows[[k]] <- c(rows[[k]], list(slot_vals[[i]]))
+    }
+  }
+  rows
+}
+
 #' .pq_column_values
 #'
 #' A step of the parquet implementation. Called by \code{morie_read_parquet}.
 #' See the file header for the source the module follows.
-#' source it follows.
+#'
+#' A flat column gives one value (or \code{NULL}) per row. A LIST column
+#' (\code{maxrep = 1}) gives one list per row: \code{NULL} for a null
+#' list, \code{list()} for an empty one, and \code{NULL} inside the list
+#' for a null element.
 #'
 #' @param con Passed to \code{seek}.
 #' @param cm Passed to \code{.pq_f}.
 #' @param num_rows A count; the body uses it as \code{seq_len(...)}.
-#' @param maxdef Passed to \code{.pq_bit_width}.
+#' @param maxdef Largest definition level of the leaf.
 #' @param typelen Passed to \code{.pq_decode_plain}.
+#' @param maxrep Largest repetition level of the leaf (0 for flat).
+#' @param repdef Definition level of the REPEATED node (LIST only).
 #' @return The value of \code{[}.
 #' @export
-.pq_column_values <- function(con, cm, num_rows, maxdef, typelen) {
+.pq_column_values <- function(con, cm, num_rows, maxdef, typelen,
+                              maxrep = 0L, repdef = 0L) {
   ptype <- as.integer(.pq_f(cm, 1))
   codec <- as.integer(.pq_f(cm, 4))
   total_values <- .pq_f(cm, 5)
@@ -1045,6 +1111,8 @@
   pos <- 1L
   dictionary <- NULL
   values <- list()
+  all_reps <- integer()
+  all_defs <- integer()
   got <- 0
 
   while (got < total_values && pos <= length(blob)) {
@@ -1084,24 +1152,24 @@
     encoding <- as.integer(.pq_f(dph, 2))
     p <- 1L
 
+    # Repetition levels come first and only exist under a REPEATED
+    # node; then definition levels. A flat OPTIONAL column has max
+    # definition level 1; REQUIRED has 0 and writes nothing.
+    reps <- rep(0L, n)
+    if (maxrep > 0L) {
+      rl <- .pq_read_levels(page, p, maxrep, n, as.integer(.pq_f(dph, 4)))
+      reps <- rl$levels
+      p <- rl$pos
+    }
     if (maxdef > 0L) {
-      width <- .pq_bit_width(maxdef)
-      if (as.integer(.pq_f(dph, 3)) == .pqERle) {
-        ln <- .pq_u32(page[seq.int(p, length.out = 4L)])
-        p <- p + 4L
-        rr <- .pq_read_rle(page, p, width, n, p + ln - 1L)
-        defs <- rr$values
-        p <- p + ln
-      } else {
-        stop("BIT_PACKED definition levels not implemented",
-          call. = FALSE
-        )
-      }
+      dl <- .pq_read_levels(page, p, maxdef, n, as.integer(.pq_f(dph, 3)))
+      defs <- dl$levels
+      p <- dl$pos
     } else {
-      defs <- rep(1L, n)
+      defs <- rep(0L, n)
     }
 
-    present <- sum(defs != 0L)
+    present <- sum(defs == maxdef)
     if (encoding == .pqEPlainDict || encoding == .pqERleDict) {
       if (is.null(dictionary)) {
         stop("dictionary-encoded page with no dictionary page",
@@ -1125,7 +1193,7 @@
     col <- vector("list", n)
     j <- 0L
     for (i in seq_len(n)) {
-      if (defs[i] != 0L) {
+      if (defs[i] == maxdef) {
         j <- j + 1L
         col[[i]] <- if (is.list(vals)) vals[[j]] else vals[j]
       } else {
@@ -1133,20 +1201,132 @@
       }
     }
     values <- c(values, col)
+    all_reps <- c(all_reps, as.integer(reps))
+    all_defs <- c(all_defs, as.integer(defs))
     got <- got + n
   }
 
+  if (maxrep > 0L) {
+    values <- .pq_assemble_lists(all_reps, all_defs, values, repdef)
+  }
   if (length(values) < num_rows) {
     values <- c(values, vector("list", num_rows - length(values)))
   }
   values[seq_len(num_rows)]
 }
 
+#' .pq_schema_leaves
+#'
+#' Walk the flattened schema tree into one entry per leaf column. The
+#' supported shapes are a flat leaf and the three-level LIST group
+#' (LIST group, REPEATED "list" group, one element leaf). Anything else
+#' stops rather than decoding to a wrong row count.
+#'
+#' @param schema The footer's schema list; element 1 is the root.
+#' @return A list of leaf descriptors.
+#' @noRd
+.pq_schema_leaves <- function(schema) {
+  root <- schema[[1L]]
+  leaves <- list()
+  # stack rows: children_left, maxdef, maxrep, repdef, list_name
+  stack <- list(list(
+    left = .pq_f(root, 5, 0L), maxdef = 0L, maxrep = 0L, repdef = 0L,
+    list_name = NULL
+  ))
+  for (i in seq.int(2L, length.out = length(schema) - 1L)) {
+    el <- schema[[i]]
+    while (length(stack) && stack[[length(stack)]]$left == 0L) {
+      stack[[length(stack)]] <- NULL
+    }
+    if (!length(stack)) {
+      stop("schema has more elements than the root declares",
+        call. = FALSE
+      )
+    }
+    parent <- stack[[length(stack)]]
+    stack[[length(stack)]]$left <- parent$left - 1L
+    rep_type <- .pq_f(el, 3, .pqRequired)
+    name <- rawToChar(.pq_f(el, 4))
+    maxdef <- parent$maxdef + as.integer(rep_type != .pqRequired)
+    maxrep <- parent$maxrep + as.integer(rep_type == .pqRepeated)
+    repdef <- if (rep_type == .pqRepeated) maxdef else parent$repdef
+    nchild <- .pq_f(el, 5, 0L)
+    if (nchild > 0L) {
+      logical <- .pq_f(el, 10)
+      is_list <- identical(as.integer(.pq_f(el, 6, -1L)), 3L) ||
+        (!is.null(logical) && !is.null(logical[["3"]]))
+      if (rep_type == .pqRepeated && !is.null(parent$list_name) &&
+        nchild == 1L) {
+        stack[[length(stack) + 1L]] <- list(
+          left = 1L, maxdef = maxdef, maxrep = maxrep, repdef = repdef,
+          list_name = parent$list_name
+        )
+        next
+      }
+      if (is_list && rep_type != .pqRepeated &&
+        is.null(parent$list_name) && nchild == 1L) {
+        stack[[length(stack) + 1L]] <- list(
+          left = 1L, maxdef = maxdef, maxrep = maxrep, repdef = repdef,
+          list_name = name
+        )
+        next
+      }
+      stop("nested schema not implemented: group field ", name,
+        " has ", nchild, " children",
+        call. = FALSE
+      )
+    }
+    if (maxrep > 1L || (maxrep == 1L && is.null(parent$list_name))) {
+      stop("repeated column ", name, " not implemented; decoding it ",
+        "as flat would silently change the row count",
+        call. = FALSE
+      )
+    }
+    leaves[[length(leaves) + 1L]] <- list(
+      name = if (is.null(parent$list_name)) name else parent$list_name,
+      type = as.integer(.pq_f(el, 1)),
+      typelen = .pq_f(el, 2),
+      converted = .pq_f(el, 6),
+      maxdef = maxdef,
+      maxrep = maxrep,
+      repdef = repdef
+    )
+  }
+  leaves
+}
+
+#' .pq_leaf_vector
+#'
+#' Turn one leaf's decoded slots into an R vector of the leaf's type,
+#' applying the converted (logical) type.
+#'
+#' @param col List of decoded values, \code{NULL} where absent.
+#' @param leaf A leaf descriptor from \code{.pq_schema_leaves}.
+#' @return An atomic vector.
+#' @noRd
+.pq_leaf_vector <- function(col, leaf) {
+  if (leaf$type == .pqByteArray) {
+    return(.pq_convert(col, leaf$type, leaf$converted))
+  }
+  v <- vapply(col, function(x) {
+    if (is.null(x)) NA_real_ else as.numeric(x)
+  }, numeric(1))
+  if (leaf$type == .pqBoolean) {
+    v <- as.logical(v)
+  } else if (leaf$type == .pqInt32) {
+    v <- as.integer(v)
+  }
+  .pq_apply_logical(v, leaf$type, leaf$converted)
+}
+
 #' Read a Parquet file
 #'
 #' Native Parquet reader: no nanoparquet, no arrow. Handles the v1
 #' format with PLAIN, RLE and dictionary encodings, Snappy or no
-#' compression. Nested and repeated columns are refused.
+#' compression. Flat columns and three-level \code{LIST} columns of a
+#' primitive type are decoded; a \code{LIST} column comes back as a
+#' list column (class \code{AsIs}) holding one vector per row,
+#' \code{NULL} for a null list. Other nesting is refused.
 #'
 #' @param path Path to a `.parquet` file.
 #' @param columns Optional character vector of column names to decode;
@@ -1172,31 +1352,7 @@ morie_read_parquet <- function(path, columns = NULL) {
   row_groups <- .pq_f(meta, 4)
   if (is.null(row_groups)) row_groups <- list()
 
-  leaves <- list()
-  for (i in seq.int(2L, length(schema))) {
-    el <- schema[[i]]
-    if (!is.null(.pq_f(el, 5))) {
-      stop("nested schema not implemented: group field ",
-        rawToChar(.pq_f(el, 4)), " has ", .pq_f(el, 5), " children",
-        call. = FALSE
-      )
-    }
-    rep_type <- .pq_f(el, 3, .pqRequired)
-    if (rep_type == .pqRepeated) {
-      stop("repeated column ", rawToChar(.pq_f(el, 4)), " not ",
-        "implemented; decoding it as flat would silently change ",
-        "the row count",
-        call. = FALSE
-      )
-    }
-    leaves[[length(leaves) + 1L]] <- list(
-      name = rawToChar(.pq_f(el, 4)),
-      type = as.integer(.pq_f(el, 1)),
-      typelen = .pq_f(el, 2),
-      converted = .pq_f(el, 6),
-      maxdef = if (rep_type == .pqOptional) 1L else 0L
-    )
-  }
+  leaves <- .pq_schema_leaves(schema)
 
   wanted <- seq_along(leaves)
   if (!is.null(columns)) {
@@ -1220,23 +1376,16 @@ morie_read_parquet <- function(path, columns = NULL) {
       cm <- .pq_f(chunk, 3)
       col <- c(col, .pq_column_values(
         con, cm, .pq_f(rg, 3),
-        leaf$maxdef, leaf$typelen
+        leaf$maxdef, leaf$typelen, leaf$maxrep, leaf$repdef
       ))
     }
-    if (leaf$type == .pqByteArray) {
-      v <- .pq_convert(col, leaf$type, leaf$converted)
+    if (leaf$maxrep > 0L) {
+      out[[leaf$name]] <- I(lapply(col, function(row) {
+        if (is.null(row)) NULL else .pq_leaf_vector(row, leaf)
+      }))
     } else {
-      v <- vapply(col, function(x) {
-        if (is.null(x)) NA_real_ else as.numeric(x)
-      }, numeric(1))
-      if (leaf$type == .pqBoolean) {
-        v <- as.logical(v)
-      } else if (leaf$type == .pqInt32) {
-        v <- as.integer(v)
-      }
-      v <- .pq_apply_logical(v, leaf$type, leaf$converted)
+      out[[leaf$name]] <- .pq_leaf_vector(col, leaf)
     }
-    out[[leaf$name]] <- v
   }
 
   df <- as.data.frame(out,

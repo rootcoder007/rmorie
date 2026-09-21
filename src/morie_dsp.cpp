@@ -108,7 +108,7 @@ List morie_dsp_rls_cpp(NumericVector x, NumericVector d,
 
         for (int r = 0; r < order; ++r) {
             double s = 0.0;
-            const double *Pr = &P[r * order];
+            const double *Pr = &P[static_cast<std::size_t>(r) * static_cast<std::size_t>(order)];
             for (int c = 0; c < order; ++c) s += Pr[c] * seg[c];
             Pseg[r] = s;
         }
@@ -119,7 +119,7 @@ List morie_dsp_rls_cpp(NumericVector x, NumericVector d,
         for (int r = 0; r < order; ++r) w[r] += kg[r] * err;
         const double inv_lam = 1.0 / lam;
         for (int r = 0; r < order; ++r) {
-            double *Pr = &P[r * order];
+            double *Pr = &P[static_cast<std::size_t>(r) * static_cast<std::size_t>(order)];
             const double kgr = kg[r];
             for (int c = 0; c < order; ++c) {
                 Pr[c] = (Pr[c] - kgr * Pseg[c]) * inv_lam;

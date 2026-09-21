@@ -178,6 +178,61 @@ mrm_otis_mortification_cooccurrence(b01)
 For a full-data version, swap `morie_sample("otis_b01")` for
 `morie_load_dataset("otisb01")` and re-run the same callables.
 
+# Canadian case law and legislation via A2AJ and CanLII
+
+Access to Algorithmic Justice (A2AJ) publishes about 226,000 Canadian
+court and tribunal decisions and 27,000 statutes and regulations as
+open data, through a REST API and as one Parquet file per court on
+Hugging Face. The `morie_ingest_a2aj_*` functions wrap both channels.
+
+```{r a2aj-coverage, eval = FALSE}
+cov <- morie_ingest_a2aj_coverage("cases")
+cov[cov$dataset %in% c("SCC", "ONCA", "FC"),
+    c("dataset", "earliest_document_date", "number_of_documents")]
+```
+
+Search is full-text or by name, capped at 50 hits per call, and a
+single decision comes back with its unofficial text:
+
+```{r a2aj-search, eval = FALSE}
+hits <- morie_ingest_a2aj_search("right to housing",
+                                 dataset = c("SCC", "ONCA"),
+                                 start_date = "2020-01-01")
+doc <- morie_ingest_a2aj_fetch("2023 SCC 17", include_citations = TRUE)
+substr(doc$unofficial_text_en, 1, 300)
+doc$cases_cited_en[[1]]
+```
+
+For a whole court, load its Parquet file. The native reader decodes
+the `LIST`-typed citation columns without `arrow`; pass `columns` to
+skip the full texts, which dominate the file:
+
+```{r a2aj-load, eval = FALSE}
+sct <- morie_ingest_a2aj_load("SCT",
+  columns = c("citation_en", "document_date_en", "cases_cited_en"))
+edges <- morie_ingest_a2aj_citation_edges(sct)
+head(sort(table(edges$to), decreasing = TRUE))
+```
+
+A2AJ does not yet carry the Human Rights Tribunal of Ontario, the BC
+Human Rights Tribunal, the Ontario Superior Court, Alberta, Quebec or
+the remaining provinces (its issues #1, #3 and #4), and individual
+decisions can be missing (`2007 BCSC 1700`, issue #2). Those are
+reachable through CanLII's API, which needs a free key
+(`CANLII_API_KEY`) and returns metadata plus the citation network
+rather than full text:
+
+```{r canlii, eval = FALSE}
+morie_ingest_a2aj_gaps()[, c("code", "canlii_database_id")]
+hrto <- morie_ingest_canlii_cases("onhrt", result_count = 200,
+                                  decision_date_after = "2024-01-01")
+ids <- morie_ingest_canlii_case_id("2007 BCSC 1700")
+morie_ingest_canlii_case(ids$database_id, ids$case_id)
+```
+
+Every A2AJ record carries an `upstream_license` field; check it before
+any commercial use, and treat all texts as unofficial copies.
+
 # Caching layout
 
 | Cache path | Populated by | Size (full) |

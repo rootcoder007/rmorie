@@ -1429,7 +1429,7 @@ File,Line,Status,Version,Context
 ./R/wsmstn.R,13,STALE_OR_DEP,9.13.2,"#' @references Wasserman (2004); All of Statistics; Section 9.13.2;"
 ./R/wsrpw.R,4,STALE_OR_DEP,5.7.3,"#' (Gibbons Ch 5.7.3)"
 ./README.md,130,STALE_OR_DEP,1.1.4,"## What's in v1.1.4"
-./README.md,297,STALE_OR_DEP,1.1.4,"Since 1.1.4 the subsystem is layered on the compiled SIU core in"
+./README.md,301,STALE_OR_DEP,1.1.4,"Since 1.1.4 the subsystem is layered on the compiled SIU core in"
 ./cran-comments.md,1,STALE_OR_DEP,1.2.3,"# cran-comments.md — rmorie 1.2.3"
 ./cran-comments.md,8,STALE_OR_DEP,4.6.1,"* local (Fedora; R 4.6.1): `R CMD check --as-cran`"
 ./data-raw/srr-ledger.md,3,STALE_OR_DEP,1.0.0,"Generated 2026-07-10 from `R/srr-stats-standards.R` (`srr::srr_stats_roxygen`; srr 1.0.0)."

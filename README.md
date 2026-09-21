@@ -163,6 +163,10 @@ prove, on every CI run, that the native engines match them.
   (cmdstanr / brms / rstanarm HMC backends), absorbing-DTMC decay chains,
   forensic likelihood ratios, pXRF compositional transforms, and USGS
   NGDB / MorphoSource open-data ingest.
+- **Canadian legal data** — `morie_ingest_a2aj_*()` for the A2AJ corpus
+  of court decisions, statutes and regulations (REST API and per-court
+  Parquet files, citation network edges) and `morie_ingest_canlii_*()`
+  for the courts A2AJ does not carry, through CanLII's API.
 - **`agent()`** — call the rmorie CLI agent from R (with
   `agent_available()` to probe for the binary).
 

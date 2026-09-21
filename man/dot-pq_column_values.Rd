@@ -4,7 +4,7 @@
 \alias{.pq_column_values}
 \title{.pq_column_values}
 \usage{
-.pq_column_values(con, cm, num_rows, maxdef, typelen)
+.pq_column_values(con, cm, num_rows, maxdef, typelen, maxrep = 0L, repdef = 0L)
 }
 \arguments{
 \item{con}{Passed to \code{seek}.}
@@ -13,9 +13,13 @@
 
 \item{num_rows}{A count; the body uses it as \code{seq_len(...)}.}
 
-\item{maxdef}{Passed to \code{.pq_bit_width}.}
+\item{maxdef}{Largest definition level of the leaf.}
 
 \item{typelen}{Passed to \code{.pq_decode_plain}.}
+
+\item{maxrep}{Largest repetition level of the leaf (0 for flat).}
+
+\item{repdef}{Definition level of the REPEATED node (LIST only).}
 }
 \value{
 The value of \code{[}.
@@ -23,5 +27,10 @@ The value of \code{[}.
 \description{
 A step of the parquet implementation. Called by \code{morie_read_parquet}.
 See the file header for the source the module follows.
-source it follows.
+}
+\details{
+A flat column gives one value (or \code{NULL}) per row. A LIST column
+(\code{maxrep = 1}) gives one list per row: \code{NULL} for a null
+list, \code{list()} for an empty one, and \code{NULL} inside the list
+for a null element.
 }
