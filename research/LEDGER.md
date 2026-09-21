@@ -38,6 +38,17 @@ assumptions the dark figure is an interval, not a point.
   survey/recorded pair (CSEW small-area style, or Canadian GSS + UCR).
 - rmorie now: nothing on partial identification of counts. Hawkes and
   sensitivity modules exist but do not address this.
+- Progress 2026-09-21: Lean `Research.P1` (research/lean/P1DarkFigure.lean):
+  Petersen identity N = θ n₁n₂/m for a two-source model with dependence
+  factor θ, Lincoln–Petersen as the θ = 1 case, the interval
+  [n₁n₂/(κm), κn₁n₂/m] for θ ∈ [1/κ, κ] with both ends attained, and the
+  survey+record interval max(r, (v_obs−ᾱ)/(1−ᾱ)) ≤ v ≤ v_obs/(1−β̄) built on
+  the P5 noise theorems, plus the dark-figure version; 8 theorems, 0
+  sorry. R: `morie_dark_figure_two_source` (with Chapman), `morie_dark_figure_bounds`.
+  Next: breakdown analysis (how large must β̄ be to move a conclusion), the
+  small-area application on a real survey/record pair, and the
+  three-source log-linear case with proved identification under one
+  interaction.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -86,6 +97,17 @@ spillover.
   the network exposure counts.
 - rmorie now: `mrm_primitives_spatial_spillover.R` (primitives only), the
   DiD family, Kulldorff scan. No exposure-mapping estimator.
+- Progress 2026-09-21: Lean `Research.P3` (research/lean/P3Interference.lean):
+  finite-population exposure adjustment (E[Y(ℓ)] identified by stratified
+  observed means under positivity + exposure ignorability), the
+  direct/spillover decomposition, the pooled-mean mixture identity and the
+  pooling-bias formula share(1)·(mean(1) − mean(0)); 5 theorems, 0 sorry.
+  R: `morie_spillover_exposure` (C++ neighbour-count kernel, three-level
+  exposure on a stated ring) and `morie_spillover_effects` (adjusted means,
+  spillover, direct, total, pooling bias, positivity check). Next: the
+  Horvitz–Thompson version with known assignment probabilities and its
+  unbiasedness proof; ring mis-specification bound as a function of the
+  d+1 ring's exposure share; TPS street-segment application.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
