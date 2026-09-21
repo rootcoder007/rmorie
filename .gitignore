@@ -59,3 +59,4 @@ data/private/
 .opencode/
 .windsurf/
 .github/copilot-instructions.md
+cran-comments.md
