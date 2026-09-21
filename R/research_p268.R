@@ -352,3 +352,32 @@ morie_probability_of_necessity <- function(p_treated, p_control) {
        identified = isTRUE(all.equal(lo, hi)),
        theorems = c("Research.P8.necessity_bounds", "Research.P8.necessity_of_monotone", "Research.P8.necessity_of_disjoint"))
 }
+
+
+#' Collider bias from conditioning on arrest: the odds ratio among arrestees
+#'
+#' Two independent risk factors with prevalences \code{a} and \code{e} and a
+#' background cause of arrest with prevalence \code{pi_bg}, combined by an
+#' "or" mechanism, are independent in the population (odds ratio one,
+#' \code{Research.P2.population_or_one}) but have odds ratio exactly
+#' \code{pi_bg} among arrestees (\code{collider_or_eq_background},
+#' \code{collider_or_lt_one}): a negative association manufactured by
+#' conditioning on being in the record, tending to complete negative
+#' dependence as arrests for other reasons become rare (Hernan & Robins,
+#' Fine Point 8.2).
+#'
+#' @param a,e Prevalences of the two risk factors in (0, 1).
+#' @param pi_bg Prevalence of the background cause of arrest in [0, 1].
+#' @return A list with \code{population_or} (1), \code{arrestee_or}
+#'   (\code{pi_bg}), \code{arrestee_log_or}, the four joint cells among
+#'   arrestees and \code{theorems}.
+#' @examples
+#' morie_collider_arrest(a = 0.3, e = 0.2, pi_bg = 0.1)
+#' @export
+morie_collider_arrest <- function(a, e, pi_bg) {
+  if (a <= 0 || a >= 1 || e <= 0 || e >= 1 || pi_bg < 0 || pi_bg > 1) stop("a and e must lie in (0, 1) and pi_bg in [0, 1]", call. = FALSE)
+  cells <- c(A1E1 = a * e, A1E0 = a * (1 - e), A0E1 = (1 - a) * e, A0E0 = (1 - a) * (1 - e) * pi_bg)
+  or <- unname((cells["A1E1"] * cells["A0E0"]) / (cells["A1E0"] * cells["A0E1"]))
+  list(population_or = 1, arrestee_or = or, arrestee_log_or = log(or), cells_among_arrestees = cells / sum(cells),
+       theorems = c("Research.P2.population_or_one", "Research.P2.collider_or_eq_background", "Research.P2.collider_or_lt_one"))
+}

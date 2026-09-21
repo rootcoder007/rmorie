@@ -162,3 +162,18 @@ test_that("probability of necessity: Frechet bounds contain every joint, ends at
   expect_equal(morie_probability_of_necessity(0.6, 0.4)$pn_monotone, 1 / 3)
   expect_error(morie_probability_of_necessity(1.2, 0.1), "in \\[0, 1\\]")
 })
+
+test_that("conditioning on arrest gives odds ratio pi_bg between independent factors (collider_or_eq_background)", {
+  set.seed(13)
+  for (k in 1:100) {
+    a <- runif(1, 0.05, 0.95); e <- runif(1, 0.05, 0.95); pb <- runif(1, 0.01, 0.99)
+    r <- morie_collider_arrest(a, e, pb)
+    expect_equal(r$arrestee_or, pb, tolerance = 1e-12); expect_lt(r$arrestee_or, 1)
+  }
+  # simulation of the mechanism
+  n <- 400000; A <- rbinom(n, 1, 0.3); E <- rbinom(n, 1, 0.2); U <- rbinom(n, 1, 0.1); Y <- pmax(A, E, U)
+  tab <- table(A[Y == 1], E[Y == 1]); or_hat <- (tab[2, 2] * tab[1, 1]) / (tab[2, 1] * tab[1, 2])
+  expect_equal(unname(or_hat), 0.1, tolerance = 0.08)
+  tab0 <- table(A, E); expect_equal(unname((tab0[2, 2] * tab0[1, 1]) / (tab0[2, 1] * tab0[1, 2])), 1, tolerance = 0.05)
+  expect_error(morie_collider_arrest(1, 0.5, 0.5), "in \\(0, 1\\)")
+})

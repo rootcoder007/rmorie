@@ -125,6 +125,13 @@ field has no agreed estimand, let alone estimator.
   arithmetic; the pair-exposure denominator is the null that a test of
   targeting needs (library scan A20). R: `morie_interracial_rates()`.
 
+- Progress 2026-09-21 (collider): `Research.P2.population_or_one`,
+  `collider_or_eq_background`, `collider_or_lt_one` (P2Collider.lean):
+  under an "or" arrest mechanism two independent risk factors have odds
+  ratio exactly pi (the background arrest prevalence) among arrestees:
+  a manufactured negative association (Hernan & Robins Fine Point 8.2;
+  library scan B16). R: `morie_collider_arrest()`.
+
 ## P3. Causal effects of policing under interference and displacement
 
 "No interference" fails by construction: hot-spot policing displaces or

@@ -119,3 +119,6 @@
 'Research.P8.necessity_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P8.necessity_of_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P8.necessity_of_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P2.collider_or_eq_background' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P2.collider_or_lt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P2.population_or_one' depends on axioms: [propext, Classical.choice, Quot.sound]

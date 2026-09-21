@@ -121,3 +121,6 @@ open Research.P4
 #print axioms Research.P8.necessity_bounds
 #print axioms Research.P8.necessity_of_monotone
 #print axioms Research.P8.necessity_of_disjoint
+#print axioms Research.P2.collider_or_eq_background
+#print axioms Research.P2.collider_or_lt_one
+#print axioms Research.P2.population_or_one

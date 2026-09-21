@@ -26,6 +26,7 @@ signed off.
 | P2 selection | `Research.P2.offset_shift`, `disparity_ratio_shift`, `benchmark_product`, `benchmark_not_additive` | `morie_disparity_benchmark()` |
 | P2 selection | `Research.P2.or_eq_rr_mul`, `rr_between`, `or_overstates` | `morie_relative_risk_from_or()` |
 | P2 selection | `Research.P2.rate_per_offender_group`, `null_slope_positive`, `dyad_ratio`, `pair_exposure_rate_constant` | `morie_interracial_rates()` |
+| P2 selection | `Research.P2.population_or_one`, `collider_or_eq_background`, `collider_or_lt_one` | `morie_collider_arrest()` |
 | P3 interference | `Research.P3.Model.exposure_adjustment`, `direct_spillover_decomposition`, `pooled_mean_mixture`, `misspecified_exposure_bias` | `morie_spillover_exposure()`, `morie_spillover_effects()` |
 | P3 interference | `Research.P3.Design.ht_second_moment`, `ht_variance`, `ht_variance_estimator_unbiased` | `morie_spillover_ht(joint = ...)`, `morie_spillover_ht_variance()`, `morie_spillover_exposure_probs(joint = TRUE)` |
 | P3 interference | `Research.P3.SYG.row_sum_zero`, `syg_eq_ht`, `syg_zero_of_const` | `morie_spillover_ht_variance(form = "both")` |

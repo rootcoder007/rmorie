@@ -33,3 +33,4 @@ import Researchproofs.P5Hazard
 import Researchproofs.P8Comparative
 import Researchproofs.P2Interracial
 import Researchproofs.P8Necessity
+import Researchproofs.P2Collider
