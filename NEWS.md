@@ -1,5 +1,14 @@
 # rmorie 1.3.1 - 2026-09-21
 
+## Clustering
+
+`predict.morie_cluster()` computes the n x k distances to the centroids
+directly. It built the full (n + k)^2 distance matrix and kept n x k of
+it: 6 s and 2.8 GB at n = 10,000 for a 4 ms job, and out of memory at
+n = 20,000. `morie_cluster()` gains `iter_max` for the k-means iteration
+cap. One example and one test used R 4.4 idioms (`%||%`,
+`psmirnov(alternative =)`) on a package that declares R >= 4.3.0.
+
 ## Canadian legal data: A2AJ and CanLII clients
 
 Seven `morie_ingest_a2aj_*()` functions cover the A2AJ Canadian Legal

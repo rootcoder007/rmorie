@@ -25,7 +25,7 @@
 #' @export
 #' @examples
 #' r <- morie_seckdf_extract(rep(as.raw(0x0b), 22), as.raw(0:12))
-#' stopifnot(substr(r$prk_hex %||% .kdf_hex(r$prk), 1, 8) == "07770936")
+#' stopifnot(substr(r$prk_hex, 1, 8) == "07770936")
 #' str(r, max.level = 1)
 #' @keywords internal
 morie_seckdf_extract <- function(ikm, salt = NULL) {

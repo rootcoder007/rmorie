@@ -11,7 +11,8 @@ morie_cluster(
   na_action = c("omit", "fail"),
   case_labels = NULL,
   nofit = FALSE,
-  seed = 42L
+  seed = 42L,
+  iter_max = 10L
 )
 }
 \arguments{
@@ -30,6 +31,10 @@ them dominate the distance metric -- the examples contrast both.}
 \item{nofit}{If TRUE, return an unfitted specification.}
 
 \item{seed}{RNG seed.}
+
+\item{iter_max}{Maximum number of k-means iterations (passed to
+\code{\link[stats:kmeans]{stats::kmeans()}} as \code{iter.max}); raise it when the fit warns that it
+did not converge.}
 }
 \value{
 A \code{morie_cluster} object (or \code{morie_cluster_spec} if

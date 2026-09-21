@@ -61,6 +61,9 @@ NULL
 #' @param case_labels Optional labels for cases when `x` has no row names.
 #' @param nofit If TRUE, return an unfitted specification.
 #' @param seed RNG seed.
+#' @param iter_max Maximum number of k-means iterations (passed to
+#'   [stats::kmeans()] as `iter.max`); raise it when the fit warns that it
+#'   did not converge.
 #' @return A `morie_cluster` object (or `morie_cluster_spec` if
 #'   `nofit = TRUE`) whose cluster labels are ordered by decreasing size.
 #' @examples
@@ -70,7 +73,8 @@ NULL
 #' @export
 morie_cluster <- function(x, k = 2L, scale = FALSE,
                           na_action = c("omit", "fail"),
-                          case_labels = NULL, nofit = FALSE, seed = 42L) {
+                          case_labels = NULL, nofit = FALSE, seed = 42L,
+                          iter_max = 10L) {
   na_action <- match.arg(na_action)
   if (isTRUE(nofit)) {
     spec <- list(k = k, scale = scale)
@@ -114,7 +118,7 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
   }
 
   .rmorie_local_seed(seed)
-  km <- stats::kmeans(xm, centers = k, nstart = 10L)
+  km <- stats::kmeans(xm, centers = k, nstart = 10L, iter.max = iter_max)
 
   # relabel clusters by decreasing size (UL3.0)
   ord <- order(-tabulate(km$cluster, nbins = k))
@@ -152,10 +156,12 @@ predict.morie_cluster <- function(object, newdata, ...) {
       object$scale_params$s, "/"
     )
   }
-  # nearest centroid (no re-optimisation)
-  d <- as.matrix(stats::dist(rbind(object$centers, xm)))
-  d <- d[(object$k + 1):nrow(d), seq_len(object$k), drop = FALSE]
-  lab <- apply(d, 1, which.min)
+  # nearest centroid (no re-optimisation): the n x k squared distances
+  # directly, not the (n + k)^2 matrix stats::dist() would build and
+  # mostly discard (2.8 GB at n = 10,000)
+  ctr <- object$centers
+  d <- outer(rowSums(xm^2), rowSums(ctr^2), "+") - 2 * xm %*% t(ctr)
+  lab <- max.col(-d, ties.method = "first")
   stats::setNames(lab, rownames(newdata))
 }
 

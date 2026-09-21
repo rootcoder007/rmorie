@@ -192,9 +192,13 @@ test_that("the exact Smirnov distributions match stats::psmirnov", {
         two <- rmorie:::Smirnov2(d, m, n)
         # psmirnov is the distribution function of the two-sample
         # statistic, so its upper tail is this survival function
-        want <- stats::psmirnov(d, sizes = c(m, n),
-                                alternative = "two.sided",
-                                exact = TRUE, lower.tail = FALSE)
+        want <- if (getRversion() >= "4.4.0") {
+          stats::psmirnov(d, sizes = c(m, n), alternative = "two.sided",
+                          exact = TRUE, lower.tail = FALSE)
+        } else { # `alternative` arrived in R 4.4.0; before it, `two.sided`
+          stats::psmirnov(d, sizes = c(m, n), two.sided = TRUE,
+                          exact = TRUE, lower.tail = FALSE)
+        }
         expect_equal(two$sf, want, tolerance = 1e-9)
         expect_equal(two$cdf, 1 - two$sf)
         expect_equal(two$npaths, choose(m + n, m))

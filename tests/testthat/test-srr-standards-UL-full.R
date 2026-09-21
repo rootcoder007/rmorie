@@ -105,7 +105,22 @@ test_that("UL7.4 predicting new data is faster than a full re-fit", {
     system.time(predict(cl, big))[["elapsed"]], numeric(1)))
   t_fit <- median(vapply(1:3, function(i)
     system.time(morie_cluster(big, k = 5))[["elapsed"]], numeric(1)))
-  expect_lt(t_pred, t_fit * 3 + 1.0)                 # not pathologically slower
+  expect_lt(t_pred, t_fit * 2 + 0.05)
+})
+
+test_that("UL3.3 predict assigns by nearest centroid in n x k work", {
+  skip_heavy()
+  x <- as.data.frame(matrix(rnorm(10000 * 5), 10000, 5))
+  cl <- morie_cluster(x, k = 5)
+  t <- system.time(lab <- predict(cl, x))[["elapsed"]]
+  # the (n + k)^2 route took 6 s and 2.8 GB here
+  expect_lt(t, 1)
+  xm <- as.matrix(x)
+  want <- apply(xm, 1, function(r) {
+    which.min(colSums((t(cl$centers) - r)^2))
+  })
+  expect_identical(unname(lab), unname(want))
+  expect_identical(unname(lab), unname(cl$assignments))
 })
 
 test_that("UL7.5/UL7.5a batch clustering equals per-item fits", {
