@@ -239,6 +239,15 @@ biased is open.
   `morie_fairness_compare_groups` reporting the breakdown β̄. Next: bounds
   on group-wise FPR/FNR (not only base rates) under the same noise boxes.
 
+- Progress 2026-09-21 (rescaling): `Research.P5.rescale_*`,
+  `reduced_coefficient`, `ratio_is_rescaling` (P5Rescale.lean): dropping an
+  orthogonal covariate with latent variance v rescales every identified
+  logit coefficient by sqrt((pi^2/3)/(pi^2/3+v)) with no confounding, so
+  odds ratios of a risk score are not comparable across covariate sets
+  without a variance normalisation (Karlson-Holm-Breen; library scan A5).
+  R: `morie_logit_rescale()`; the test recovers the factor from two
+  fitted logits on 200,000 simulated cases.
+
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
 Hirschi and Gottfredson's invariance claim is contradicted by cross-national

@@ -77,3 +77,19 @@ test_that("group comparison is decided exactly when the intervals are disjoint (
   r <- morie_fairness_compare_groups(0.35, 0.55, alpha_max = 0.05, beta_max = u$breakdown_beta_max - 1e-6)
   expect_true(r$decided)
 })
+
+test_that("dropping an orthogonal covariate rescales a logit coefficient by sqrt(s/(s+v)) (reduced_coefficient, ratio_is_rescaling)", {
+  r <- morie_logit_rescale(0.8, omitted_var = 1)
+  expect_equal(r$rescale, sqrt((pi^2 / 3) / (pi^2 / 3 + 1)))
+  expect_lt(r$rescale, 1); expect_equal(morie_logit_rescale(0.8, 0)$rescale, 1)
+  expect_equal(r$apparent_change, r$odds_ratio_reduced / r$odds_ratio_full, tolerance = 1e-12)
+  # simulation: x and u independent, latent y* = b x + g u + logistic error
+  set.seed(11)
+  n <- 200000; x <- rnorm(n); u <- rnorm(n); b <- 0.8; g <- 1.2
+  ystar <- b * x + g * u + rlogis(n); y <- as.integer(ystar > 0)
+  full <- stats::glm(y ~ x + u, family = stats::binomial)
+  red <- stats::glm(y ~ x, family = stats::binomial)
+  ratio <- unname(stats::coef(red)["x"] / stats::coef(full)["x"])
+  expect_equal(ratio, morie_logit_rescale(b, omitted_var = g^2)$rescale, tolerance = 0.03)
+  expect_error(morie_logit_rescale(1, -1), "non-negative")
+})

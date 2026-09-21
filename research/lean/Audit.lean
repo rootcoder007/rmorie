@@ -93,3 +93,9 @@ open Research.P4
 #print axioms Research.P11.Pop.mtr_lower
 #print axioms Research.P11.Pop.mtr_upper
 #print axioms Research.P11.Pop.mtr_upper_attained
+#print axioms Research.P5.rescale_pos
+#print axioms Research.P5.rescale_le_one
+#print axioms Research.P5.rescale_lt_one
+#print axioms Research.P5.rescale_eq_one_iff
+#print axioms Research.P5.reduced_coefficient
+#print axioms Research.P5.ratio_is_rescaling

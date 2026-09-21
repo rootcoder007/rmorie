@@ -173,3 +173,38 @@ morie_fairness_compare_groups <- function(p_obs_a, p_obs_b, alpha_max, beta_max)
        breakdown_beta_max = breakdown,
        theorem = if (order != "undecided") "Research.P5.compare_decided" else "Research.P5.compare_undecided")
 }
+
+
+#' Rescaling of logit coefficients across nested models
+#'
+#' In a latent-index model with logistic error (variance \eqn{\pi^2/3}) and an
+#' omitted covariate independent of the others carrying latent variance
+#' \code{omitted_var}, the coefficient a logit identifies shrinks by the
+#' factor \eqn{\sqrt{(\pi^2/3)/(\pi^2/3 + v)}} when that covariate is dropped,
+#' with no confounding at all (\code{Research.P5.reduced_coefficient},
+#' \code{rescale_lt_one}, \code{rescale_eq_one_iff}); the apparent odds-ratio
+#' change is \eqn{\exp((c-1)\beta)} (\code{ratio_is_rescaling}). Coefficients
+#' or odds ratios of a risk score therefore cannot be compared across models
+#' with different covariate sets without a variance normalisation
+#' (Karlson, Holm & Breen 2012).
+#'
+#' @param beta Identified coefficient(s) in the full model.
+#' @param omitted_var Latent variance carried by the omitted independent
+#'   covariate(s) (\eqn{\gamma^2\tau^2}), non-negative.
+#' @param error_var Error variance of the latent index; \eqn{\pi^2/3} for the
+#'   logit, 1 for the probit.
+#' @return A list with \code{rescale}, \code{beta_reduced} (what the reduced
+#'   model identifies), \code{odds_ratio_full}, \code{odds_ratio_reduced},
+#'   \code{apparent_change} (their ratio, pure rescaling) and \code{theorems}.
+#' @examples
+#' morie_logit_rescale(beta = 0.8, omitted_var = 1)
+#' @export
+morie_logit_rescale <- function(beta, omitted_var, error_var = pi^2 / 3) {
+  if (any(omitted_var < 0) || error_var <= 0) stop("omitted_var must be non-negative and error_var positive", call. = FALSE)
+  c_ <- sqrt(error_var / (error_var + omitted_var))
+  list(rescale = c_, beta_reduced = beta * c_,
+       odds_ratio_full = exp(beta), odds_ratio_reduced = exp(beta * c_),
+       apparent_change = exp((c_ - 1) * beta),
+       theorems = c("Research.P5.rescale_lt_one", "Research.P5.rescale_eq_one_iff",
+                    "Research.P5.reduced_coefficient", "Research.P5.ratio_is_rescaling"))
+}
