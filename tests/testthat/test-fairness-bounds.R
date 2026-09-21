@@ -114,3 +114,21 @@ test_that("ranking resolution: reversal below 2 delta, stability above (rank_rev
   expect_equal(b$share_unidentified, 1)
   expect_error(morie_ranking_resolution(0.5, 0.1), "at least two")
 })
+
+test_that("period-2 hazard ratio departs from 1 with zero period-2 effect (hr2_gt_one_of_depletion, hr2_witness)", {
+  r <- morie_hazard_selection(0.5, 0.5, 0.1, survive_high = c(0.5, 0.8), survive_low = c(0.9, 0.9))
+  expect_equal(unname(r$period2_hazard["control"]), 0.5 * (5 / 14) + 0.1 * (9 / 14), tolerance = 1e-12)
+  expect_gt(r$period2_hazard_ratio, 1)
+  set.seed(8)
+  for (k in 1:200) {
+    s <- runif(1, 0.05, 0.95); l <- runif(1, 0, 0.5); h <- runif(1, l + 0.01, 1); a1 <- runif(1, 0.05, 0.9); a2 <- runif(1, a1, 1); b <- runif(1, 0.05, 1)
+    r <- morie_hazard_selection(s, h, l, c(a1, a2), c(b, b))
+    expect_gte(r$period2_hazard_ratio, 1 - 1e-12)
+    # simulation: two types, no period-2 effect, the arm depleting fewer high-risk shows the higher period-2 hazard
+  }
+  n <- 400000; type <- stats::rbinom(n, 1, 0.5)
+  sim_arm <- function(a) { surv <- ifelse(type == 1, stats::rbinom(n, 1, a), stats::rbinom(n, 1, 0.9)) == 1
+    mean(ifelse(type[surv] == 1, 0.5, 0.1)) }
+  expect_equal(sim_arm(0.8) / sim_arm(0.5), morie_hazard_selection(0.5, 0.5, 0.1, c(0.5, 0.8), c(0.9, 0.9))$period2_hazard_ratio, tolerance = 0.02)
+  expect_error(morie_hazard_selection(0.5, 0.1, 0.5, c(1, 1), c(1, 1)), "l < h")
+})

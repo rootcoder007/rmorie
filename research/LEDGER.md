@@ -271,6 +271,12 @@ biased is open.
   [0,1]) identifies no pair (library scan A3). R:
   `morie_ranking_resolution()`.
 
+- Progress 2026-09-21 (hazard ratios): `Research.P5.survivor_hazard_mono`,
+  `hr2_gt_one_of_depletion`, `hr2_witness` (P5Hazard.lean): with two risk
+  types and no period-2 effect, the arm that depletes the high-risk type
+  less in period 1 shows a period-2 hazard ratio above one (Hernan &
+  Robins Fine Point 17.2; library scan B15). R: `morie_hazard_selection()`.
+
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
 Hirschi and Gottfredson's invariance claim is contradicted by cross-national

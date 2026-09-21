@@ -38,6 +38,7 @@ signed off.
 | P5 fairness | `Research.P5.compare_decided`, `compare_undecided` | `morie_fairness_compare_groups()` |
 | P5 fairness | `Research.P5.rescale_lt_one`, `rescale_eq_one_iff`, `reduced_coefficient`, `ratio_is_rescaling` | `morie_logit_rescale()` |
 | P5 fairness | `Research.P5.rank_reversal_exists`, `rank_stable_of_gap`, `identified_scores_le` | `morie_ranking_resolution()` |
+| P5 fairness | `Research.P5.survivor_hazard_mono`, `hr2_gt_one_of_depletion`, `hr2_witness` | `morie_hazard_selection()` |
 | P6 age-crime | `Research.P6.aggregate_not_identifying`, `invariance_sufficient`, `invariance_not_necessary` | `morie_age_crime_aggregate()` |
 | P7 concentration | `Research.P7.gini_zero_decomposition`, `poisson_zero_prob` | `morie_concentration_gini()`, `morie_concentration_decompose()` |
 | P7 concentration | `Research.P7.Mixture.mixture_zero_ge_exp_neg_mean`, `variance_eq`, `mixture_var_ge_mean`, `mixture_var_eq_mean_iff` | `morie_concentration_dispersion()`, `morie_concentration_decompose()` (`null_zero_share` is a lower bound) |

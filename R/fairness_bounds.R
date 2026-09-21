@@ -249,3 +249,40 @@ morie_ranking_resolution <- function(estimate, half_width) {
        theorems = c("Research.P5.rank_reversal_exists", "Research.P5.rank_stable_of_gap",
                     "Research.P5.identified_scores_le"))
 }
+
+
+#' Built-in selection in period-by-period hazard ratios
+#'
+#' Two risk types with per-period reconviction probabilities \code{h} (high)
+#' and \code{l} (low), initial high-risk share \code{s}. Whatever the
+#' programme does in period 1, the period-2 hazard among survivors is a
+#' weighted average of \code{h} and \code{l} with weight the surviving
+#' high-risk share (\code{Research.P5.survivor_hazard_mono}); an arm that
+#' depletes the high-risk type less in period 1 has a higher period-2 hazard
+#' with no individual effect in period 2 at all
+#' (\code{hr2_gt_one_of_depletion}, \code{hr2_witness}). A period-specific
+#' hazard ratio is therefore not a causal contrast; fixed-horizon risk
+#' differences are.
+#'
+#' @param s Initial high-risk share in (0, 1).
+#' @param h,l Per-period hazards of the high- and low-risk types, \code{l < h}.
+#' @param survive_high,survive_low Period-1 survival probabilities of the two
+#'   types in each arm, as length-2 vectors \code{c(control, treated)}.
+#' @return A list with \code{surviving_high_share} per arm,
+#'   \code{period2_hazard} per arm, \code{period2_hazard_ratio} (treated over
+#'   control) and \code{theorems}.
+#' @examples
+#' morie_hazard_selection(s = 0.5, h = 0.5, l = 0.1,
+#'                        survive_high = c(control = 0.5, treated = 0.8),
+#'                        survive_low = c(control = 0.9, treated = 0.9))
+#' @export
+morie_hazard_selection <- function(s, h, l, survive_high, survive_low) {
+  if (s <= 0 || s >= 1) stop("s must lie in (0, 1)", call. = FALSE)
+  if (!(l < h) || l < 0 || h > 1) stop("need 0 <= l < h <= 1", call. = FALSE)
+  if (length(survive_high) != 2L || length(survive_low) != 2L || any(c(survive_high, survive_low) <= 0)) stop("survival probabilities must be length-2 positive vectors", call. = FALSE)
+  w <- s * survive_high / (s * survive_high + (1 - s) * survive_low)
+  hz <- w * h + (1 - w) * l
+  names(w) <- names(hz) <- c("control", "treated")
+  list(surviving_high_share = w, period2_hazard = hz, period2_hazard_ratio = unname(hz[2] / hz[1]),
+       theorems = c("Research.P5.survivor_hazard_mono", "Research.P5.hr2_gt_one_of_depletion", "Research.P5.hr2_witness"))
+}
