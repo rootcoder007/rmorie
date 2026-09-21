@@ -37,3 +37,5 @@ open Research.P4
 #print axioms Research.P5.compare_undecided
 #print axioms Research.P1.conclusion_holds_below_breakdown
 #print axioms Research.P1.conclusion_fails_above_breakdown
+#print axioms Research.P3.Design.ht_unbiased
+#print axioms Research.P3.Design.ht_contrast_unbiased

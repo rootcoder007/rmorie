@@ -71,3 +71,21 @@ test_that("argument checks", {
   expect_error(morie_spillover_effects(1:3, c(0, 1, 2), c("a", "a")), "equal length")
   expect_error(morie_spillover_effects(1:3, c(0, 1, 2), c("a", "a", "a"), weights = c(-1, 1, 1)), "non-negative")
 })
+
+test_that("Horvitz-Thompson is unbiased over the design (ht_unbiased, ht_contrast_unbiased)", {
+  set.seed(1)
+  n <- 8; edges <- cbind(1:7, 2:8); n_treated <- 3
+  y0 <- 10 + seq_len(n); y1 <- y0 - 1; y2 <- y0 - 3       # potential outcomes per place
+  pr <- morie_spillover_exposure_probs(n, edges, n_treated)   # exact enumeration (56 assignments)
+  expect_true(all(pr > 0))
+  cmb <- utils::combn(n, n_treated)
+  est <- t(sapply(seq_len(ncol(cmb)), function(k) {
+    e <- morie_spillover_exposure(seq_len(n) %in% cmb[, k], edges)$exposure
+    y <- ifelse(e == 0, y0, ifelse(e == 1, y1, y2))
+    h <- morie_spillover_ht(y, e, pr)
+    c(h$totals, total_effect = h$total_effect)
+  }))
+  # exact design expectation (uniform over assignments) equals the population totals
+  expect_equal(unname(colMeans(est)[1:3]), c(sum(y0), sum(y1), sum(y2)), tolerance = 1e-10)
+  expect_equal(unname(colMeans(est)[4]), (sum(y2) - sum(y0)) / n, tolerance = 1e-10)
+})

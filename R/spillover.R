@@ -123,3 +123,84 @@ morie_spillover_effects <- function(y, exposure, stratum, weights = NULL) {
                  "Research.P3.Model.misspecified_exposure_bias")
   )
 }
+
+#' Horvitz-Thompson totals and contrasts under a randomised deployment
+#'
+#' When the deployment was randomised, every place's exposure probability
+#' \eqn{\pi_i(\ell) = P(E_i = \ell)} is known from the design (or can be
+#' computed by re-drawing assignments, see
+#' \code{\link{morie_spillover_exposure_probs}}). The estimator
+#' \eqn{\hat T(\ell) = \sum_i 1\{E_i=\ell\}\, y_i / \pi_i(\ell)} is unbiased
+#' for the population total of \eqn{Y(\ell)} whenever every
+#' \eqn{\pi_i(\ell) > 0}, and so is any contrast between levels
+#' (\code{Research.P3.Design.ht_unbiased},
+#' \code{Research.P3.Design.ht_contrast_unbiased}). No ignorability
+#' assumption is used: the design supplies it.
+#'
+#' @param y Observed outcome per place.
+#' @param exposure Realised exposure per place (0, 1, 2).
+#' @param probs Matrix with one row per place and columns \code{"0"},
+#'   \code{"1"}, \code{"2"} giving \eqn{\pi_i(\ell)}; all entries positive.
+#' @return A list with \code{totals} (\eqn{\hat T(0), \hat T(1), \hat T(2)}),
+#'   \code{means} (totals divided by the number of places), \code{spillover},
+#'   \code{direct}, \code{total_effect} (per-place means) and
+#'   \code{theorems}.
+#' @examples
+#' set.seed(2)
+#' edges <- cbind(1:19, 2:20)
+#' pr <- morie_spillover_exposure_probs(n = 20, edges, n_treated = 6, n_draws = 2000)
+#' trt <- sample(20, 6); exposure <- morie_spillover_exposure(seq_len(20) %in% trt, edges)$exposure
+#' y <- 5 - 1.5 * (exposure == 2) - 0.5 * (exposure == 1)
+#' morie_spillover_ht(y, exposure, pr)[c("spillover", "direct", "total_effect")]
+#' @export
+morie_spillover_ht <- function(y, exposure, probs) {
+  n <- length(y)
+  probs <- as.matrix(probs)
+  if (length(exposure) != n || nrow(probs) != n || ncol(probs) != 3L) {
+    stop("y, exposure and probs (n x 3) must describe the same places", call. = FALSE)
+  }
+  if (any(probs <= 0)) stop("every exposure probability must be positive (positivity)", call. = FALSE)
+  if (!all(exposure %in% 0:2)) stop("exposure must take values 0, 1, 2", call. = FALSE)
+  totals <- vapply(0:2, function(l) sum(ifelse(exposure == l, y / probs[, l + 1L], 0)), numeric(1))
+  names(totals) <- paste0("T", 0:2)
+  means <- totals / n
+  list(totals = totals, means = means,
+       spillover = unname(means[2] - means[1]), direct = unname(means[3] - means[2]),
+       total_effect = unname(means[3] - means[1]),
+       theorems = c("Research.P3.Design.ht_unbiased", "Research.P3.Design.ht_contrast_unbiased"))
+}
+
+#' Exposure probabilities of a completely randomised deployment
+#'
+#' Draws \code{n_draws} assignments of \code{n_treated} treated places out
+#' of \code{n} and returns, per place, the share of draws in which it sat
+#' at each exposure level of \code{\link{morie_spillover_exposure}}. Exact
+#' enumeration is used when it is small enough.
+#'
+#' @param n Number of places.
+#' @param edges Adjacency as in \code{\link{morie_spillover_exposure}}.
+#' @param n_treated Number of treated places per assignment.
+#' @param n_draws Monte Carlo draws (ignored when exact enumeration is feasible).
+#' @param exact_max Enumerate all assignments when \code{choose(n, n_treated)}
+#'   is at most this.
+#' @return An \code{n} by 3 matrix of exposure probabilities (columns
+#'   \code{"0"}, \code{"1"}, \code{"2"}).
+#' @examples
+#' morie_spillover_exposure_probs(n = 6, edges = cbind(1:5, 2:6), n_treated = 2)
+#' @export
+morie_spillover_exposure_probs <- function(n, edges, n_treated, n_draws = 5000L, exact_max = 20000) {
+  if (n_treated < 1 || n_treated >= n) stop("n_treated must lie in 1..n-1", call. = FALSE)
+  counts <- matrix(0, n, 3L, dimnames = list(NULL, c("0", "1", "2")))
+  tally <- function(trt) {
+    e <- morie_spillover_exposure(seq_len(n) %in% trt, edges)$exposure
+    for (l in 0:2) counts[e == l, l + 1L] <<- counts[e == l, l + 1L] + 1
+  }
+  if (choose(n, n_treated) <= exact_max) {
+    cmb <- utils::combn(n, n_treated)
+    for (k in seq_len(ncol(cmb))) tally(cmb[, k])
+    counts / ncol(cmb)
+  } else {
+    for (k in seq_len(n_draws)) tally(sample.int(n, n_treated))
+    counts / n_draws
+  }
+}
