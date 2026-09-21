@@ -67,3 +67,18 @@ test_that("argument checks", {
   expect_error(morie_dark_figure_bounds(0.5, 0.1, 0.6, 0.5), "below 1")
   expect_error(morie_dark_figure_bounds(c(0.5, 0.4), c(0.1, 0.1, 0.1), 0.1, 0.1), "length")
 })
+
+test_that("breakdown value separates surviving from failing conclusions (conclusion_*_breakdown)", {
+  set.seed(1)
+  b <- morie_dark_figure_breakdown(0.06, threshold = 0.10)
+  expect_equal(b$breakdown_beta_max, 0.4)
+  # below the breakdown every admissible noise pair keeps v below the threshold
+  for (i in 1:200) {
+    al <- stats::runif(1, 0, 0.01); be <- stats::runif(1, 0, 0.39)
+    v <- (0.06 - al) / (1 - al - be)
+    expect_lt(v, 0.10)
+  }
+  # at or above it the witness alpha = 0, beta = beta_max reaches the threshold
+  expect_gte(0.06 / (1 - 0.4), 0.10 - 1e-12)
+  expect_error(morie_dark_figure_breakdown(0.06, threshold = 0.05), "above v_obs")
+})

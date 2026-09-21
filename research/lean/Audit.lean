@@ -35,3 +35,5 @@ open Research.P4
 #print axioms Research.P8.corner_design_identified
 #print axioms Research.P5.compare_decided
 #print axioms Research.P5.compare_undecided
+#print axioms Research.P1.conclusion_holds_below_breakdown
+#print axioms Research.P1.conclusion_fails_above_breakdown

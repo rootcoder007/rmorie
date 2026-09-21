@@ -13,6 +13,8 @@
 #   Research.P1.petersen_lower_attained / petersen_upper_attained: both ends reached
 #   Research.P1.true_rate_bounds             max(r, (v_obs - a)/(1 - a)) <= v <= v_obs/(1 - b)
 #   Research.P1.dark_figure_bounds           the same interval shifted by r, floored at 0
+#   Research.P1.conclusion_holds_below_breakdown / conclusion_fails_above_breakdown:
+#                                            "v < t" survives every admissible noise iff beta_max < 1 - v_obs/t
 #
 # The theorems are about expected counts and rates. Whether two lists are
 # independent, or what the misreporting boxes are, is a claim about the
@@ -119,4 +121,38 @@ morie_dark_figure_bounds <- function(v_obs, r, alpha_max, beta_max) {
     dark_lower = v_lower - r, dark_upper = v_upper - r,
     ratio_upper = ifelse(r > 0, v_upper / r, NA_real_)
   )
+}
+
+#' Breakdown analysis for a dark-figure conclusion
+#'
+#' How much survey under-reporting would it take to overturn "the true
+#' victimisation rate is below \code{threshold}"? The conclusion holds for
+#' every admissible noise pair while the under-reporting box
+#' \eqn{\bar\beta} stays below \eqn{1 - v_{obs}/t}
+#' (\code{Research.P1.conclusion_holds_below_breakdown}); at or above that
+#' value there is an admissible noise pair with a true rate of at least
+#' \code{threshold} (\code{Research.P1.conclusion_fails_above_breakdown}).
+#' Report the breakdown value next to the interval so a reader can judge
+#' whether the required under-reporting is plausible.
+#'
+#' @param v_obs Survey victimisation rate in (0, 1].
+#' @param threshold The rate the conclusion claims is not reached; above
+#'   \code{v_obs}.
+#' @return A list with \code{breakdown_beta_max} (\eqn{1 - v_{obs}/t}), the
+#'   \code{ratio} \eqn{t/v_{obs}} of the threshold to the survey rate, and
+#'   \code{theorems}.
+#' @examples
+#' # survey 6 percent; does the true rate stay below 10 percent?
+#' morie_dark_figure_breakdown(0.06, threshold = 0.10)   # only if under-reporting < 40 percent
+#' @export
+morie_dark_figure_breakdown <- function(v_obs, threshold) {
+  if (!is.numeric(v_obs) || length(v_obs) != 1L || is.na(v_obs) || v_obs <= 0 || v_obs > 1) {
+    stop("v_obs must be a single number in (0, 1]", call. = FALSE)
+  }
+  if (!is.numeric(threshold) || length(threshold) != 1L || is.na(threshold) || threshold <= v_obs) {
+    stop("threshold must be a single number above v_obs", call. = FALSE)
+  }
+  list(breakdown_beta_max = 1 - v_obs / threshold, ratio = threshold / v_obs,
+       theorems = c("Research.P1.conclusion_holds_below_breakdown",
+                    "Research.P1.conclusion_fails_above_breakdown"))
 }

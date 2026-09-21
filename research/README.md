@@ -1,0 +1,51 @@
+# research/ — the hardest problems in criminology, with proofs
+
+This directory holds the research programme started 2026-09-21 on a
+separate clone of rmorie. Nothing here is merged into rmorie main until
+it has passed the same gates as the rest of the package and has been
+signed off.
+
+- `LEDGER.md`: the eight problems, each with estimand, identifying
+  assumptions, what must be proved, what "cracked" means, sources, and a
+  progress log.
+- `lean/`: the Lean 4 sources (Mathlib, project `~/work/researchproofs`
+  on l14). `Audit.lean` prints the axioms of every theorem; all depend on
+  `propext`, `Classical.choice`, `Quot.sound` only, and no file contains
+  `sorry`.
+
+## Theorem index: which function rests on which proof
+
+| Problem | Lean theorem | R function(s) in `R/` |
+|---|---|---|
+| P1 dark figure | `Research.P1.TwoSource.petersen_identity`, `lincoln_petersen`, `petersen_bounds`, `petersen_lower_attained`, `petersen_upper_attained` | `morie_dark_figure_two_source()` |
+| P1 dark figure | `Research.P1.true_rate_bounds`, `dark_figure_bounds` | `morie_dark_figure_bounds()` |
+| P1 dark figure | `Research.P1.conclusion_holds_below_breakdown`, `conclusion_fails_above_breakdown` | `morie_dark_figure_breakdown()` |
+| P2 selection | `Research.P2.rate_bounds`, `rate_lower_attained`, `rate_upper_attained`, `disparity_bounds`, `disparity_sign_identified` | `morie_disparity_exposure_bounds()` |
+| P3 interference | `Research.P3.Model.exposure_adjustment`, `direct_spillover_decomposition`, `pooled_mean_mixture`, `misspecified_exposure_bias` | `morie_spillover_exposure()`, `morie_spillover_effects()` |
+| P4 feedback loops | `Research.P4.naive_step_drift`, `naive_share_increasing`, `naiveShare_strictMono`, `naiveShare_tendsto_one`, `not_summable_shifted_harmonic` | `morie_feedback_loop_meanfield()`, `morie_feedback_loop_limit()`, `morie_feedback_loop_sim()` |
+| P4 feedback loops | `Research.P4.corrected_share_closed_form`, `corrected_share_tendsto` | same, `update = "corrected"` |
+| P4 feedback loops | `Research.P4.naiveTotal_ge`, `naiveShare_gain_le`, `naiveShare_rate_bound` | `morie_feedback_loop_bound()` |
+| P5 fairness | `Research.P5.Table.chouldechova`, `impossibility` | `morie_fairness_rates()`, `morie_fairness_implied_fpr()` |
+| P5 fairness | `Research.P5.true_base_rate_bounds`, `lower_bound_attained`, `upper_bound_attained`, `trueRate_observedRate` | `morie_fairness_base_rate_bounds()`, `morie_fairness_true_rate()` |
+| P5 fairness | `Research.P5.compare_decided`, `compare_undecided` | `morie_fairness_compare_groups()` |
+| P6 age-crime | `Research.P6.aggregate_not_identifying`, `invariance_sufficient`, `invariance_not_necessary` | `morie_age_crime_aggregate()` |
+| P7 concentration | `Research.P7.gini_zero_decomposition`, `poisson_zero_prob` | `morie_concentration_gini()`, `morie_concentration_decompose()` |
+| P8 deterrence | `Research.P8.constant_dimension_not_identified`, `identified_iff_injective`, `corner_design_identified` | `morie_deterrence_design_check()` |
+
+C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),
+`src/morie_spillover.cpp` (treated-neighbour counts on a place network).
+
+## The honesty rule
+
+Lean certifies the implication, never the antecedent. Every function's
+help page says which theorem covers which step and where the empirical
+assumption (independence of two lists, the noise boxes, the exposure
+ring, the discovery model) enters. A proof here never shows that an
+assumption holds in Toronto, Ontario, or anywhere else.
+
+## Reproducing the checks
+
+```
+cd ~/work/researchproofs && lake build && lake env lean Audit.lean
+cd ~/work/rmorie-research && Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268")'
+```
