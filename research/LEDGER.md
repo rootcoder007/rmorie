@@ -71,6 +71,13 @@ field has no agreed estimand, let alone estimator.
   for a given exposure-proxy error bound, with the theorem that no narrower
   interval is possible without more assumptions.
 - rmorie now: nothing.
+- Progress 2026-09-21: Lean `Research.P2` (research/lean/P2Selection.lean):
+  rate interval [y/(γm), γy/m] under exposure within a factor γ of the
+  proxy, both ends attained; disparity ratio within γ² of the proxy
+  ratio; sign identified when the proxy ratio exceeds γ²; 5 theorems, 0
+  sorry. R: `morie_disparity_exposure_bounds`. Next: the veil-of-darkness
+  contrast as a formal sign test, and a Toronto stops application with a
+  stated mobility proxy.
 
 ## P3. Causal effects of policing under interference and displacement
 
@@ -197,6 +204,14 @@ would.
 - Cracked means: a test of invariance that says exactly what data can and
   cannot decide it, with the counterexample as part of the documentation.
 - rmorie now: group-based trajectory tooling is absent.
+- Progress 2026-09-21: Lean `Research.P6` (research/lean/P6AgeCrime.lean):
+  every mixture's aggregate curve is a one-type curve (non-identification
+  from the aggregate), invariance of types is sufficient for aggregate
+  invariance and explicitly not necessary (two-type witness); 4 theorems,
+  0 sorry. R: `morie_age_crime_aggregate` returning the equivalent
+  one-type curve. Next: panel identifiability under a separation
+  condition (finite mixture of Poisson trajectories) and the invariance
+  test with a proved null.
 
 ## P7. The law of crime concentration: how much is chance?
 
@@ -247,6 +262,14 @@ model. Identification is the unsolved part.
   variation and reports which partial effects are identified, with the
   theorem behind the verdict.
 - rmorie now: nothing.
+- Progress 2026-09-21: Lean `Research.P8` (research/lean/P8Deterrence.lean):
+  a sanction dimension held fixed in the design has an unidentified
+  partial effect (explicit second coefficient vector with identical fits),
+  identification ⇔ injectivity of the coefficient-to-fit map, and a
+  corner design that identifies all three; 3 theorems, 0 sorry. R:
+  `morie_deterrence_design_check` (rank of (1,p,s,c) and per-dimension
+  identification). Next: the nonlinear expected-cost response with
+  discounting, and the instrument condition for one dimension.
 
 ## Order of attack
 
