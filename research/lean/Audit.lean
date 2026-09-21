@@ -24,3 +24,5 @@ open Research.P4
 #print axioms Research.P3.Model.exposure_adjustment
 #print axioms Research.P3.Model.misspecified_exposure_bias
 #print axioms Research.P3.Model.pooled_mean_mixture
+#print axioms Research.P7.gini_zero_decomposition
+#print axioms Research.P7.poisson_zero_prob
