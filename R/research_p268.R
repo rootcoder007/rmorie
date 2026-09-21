@@ -228,7 +228,7 @@ morie_relative_risk_from_or <- function(odds_ratio, base_rate = NULL, exposed_sh
     if (base_rate <= 0 || base_rate >= 1 || exposed_share <= 0 || exposed_share >= 1) stop("base_rate and exposed_share must lie in (0, 1)", call. = FALSE)
     # solve for b: q = s a + (1 - s) b with a = OR b / (1 - b + OR b)
     f <- function(b) exposed_share * (odds_ratio * b / (1 - b + odds_ratio * b)) + (1 - exposed_share) * b - base_rate
-    b <- stats::uniroot(f, c(1e-12, 1 - 1e-12))$root
+    b <- stats::uniroot(f, c(1e-12, 1 - 1e-12), tol = 1e-12)$root
     a <- odds_ratio * b / (1 - b + odds_ratio * b)
     out$risks <- c(exposed = a, unexposed = b, relative_risk = a / b)
     out$overstatement_factor <- odds_ratio / (a / b)
