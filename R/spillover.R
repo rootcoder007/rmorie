@@ -13,6 +13,16 @@
 #                                                   E[Y(2)] - E[Y(0)] = (E[Y(1)] - E[Y(0)]) + (E[Y(2)] - E[Y(1)])
 #   Research.P3.Model.misspecified_exposure_bias   mean(pooled 0+1) - mean(0) = share(1) * (mean(1) - mean(0))
 #
+# and in research/lean/P3HorvitzThompson.lean and P3Variance.lean, over a
+# finite randomised design with assignment probabilities q(a):
+#
+#   Research.P3.Design.ht_unbiased                  E_q[T_hat(l)] = sum_i Y_i(l) when every pi_i(l) > 0
+#   Research.P3.Design.ht_contrast_unbiased         same for T_hat(l2) - T_hat(l0)
+#   Research.P3.Design.ht_variance                  Var T_hat(l) = sum_ij (pi_ij - pi_i pi_j) Y_i Y_j / (pi_i pi_j)
+#   Research.P3.Design.ht_variance_estimator_unbiased
+#                                                   E_q[V_hat(l)] = Var T_hat(l) when every joint pi_ij(l) > 0,
+#                                                   V_hat(l) = sum_ij 1{E_i=E_j=l} (pi_ij - pi_i pi_j)/pi_ij * Y_i Y_j/(pi_i pi_j)
+#
 # The theorems say what is identified given an exposure mapping and
 # ignorability; whether patrols only spill over to the ring the analyst
 # named is a claim about the world, which is why the pooling bias is
@@ -137,23 +147,40 @@ morie_spillover_effects <- function(y, exposure, stratum, weights = NULL) {
 #' \code{Research.P3.Design.ht_contrast_unbiased}). No ignorability
 #' assumption is used: the design supplies it.
 #'
+#' When the joint exposure probabilities \eqn{\pi_{ij}(\ell) = P(E_i = \ell, E_j = \ell)}
+#' are supplied, the variance of each total is estimated by the
+#' Horvitz-Thompson variance estimator
+#' \eqn{\hat V(\ell) = \sum_{i,j} 1\{E_i = E_j = \ell\}\,(\pi_{ij} - \pi_i\pi_j)/\pi_{ij}\; y_i y_j/(\pi_i \pi_j)},
+#' which is unbiased for
+#' \eqn{\mathrm{Var}\,\hat T(\ell) = \sum_{i,j} (\pi_{ij} - \pi_i\pi_j)\, Y_i(\ell) Y_j(\ell)/(\pi_i\pi_j)}
+#' whenever every \eqn{\pi_{ij}(\ell) > 0}
+#' (\code{Research.P3.Design.ht_variance},
+#' \code{Research.P3.Design.ht_variance_estimator_unbiased}). A pair of
+#' places that can never share a level leaves that variance unidentified,
+#' and the function then reports \code{NA} for it rather than a number.
+#'
 #' @param y Observed outcome per place.
 #' @param exposure Realised exposure per place (0, 1, 2).
 #' @param probs Matrix with one row per place and columns \code{"0"},
 #'   \code{"1"}, \code{"2"} giving \eqn{\pi_i(\ell)}; all entries positive.
+#' @param joint Optional \code{n} by \code{n} by 3 array of joint exposure
+#'   probabilities \eqn{\pi_{ij}(\ell)}, as returned in the \code{joint}
+#'   element of \code{morie_spillover_exposure_probs(..., joint = TRUE)}.
 #' @return A list with \code{totals} (\eqn{\hat T(0), \hat T(1), \hat T(2)}),
 #'   \code{means} (totals divided by the number of places), \code{spillover},
-#'   \code{direct}, \code{total_effect} (per-place means) and
+#'   \code{direct}, \code{total_effect} (per-place means), and when
+#'   \code{joint} is given \code{variance} and \code{se} of the three
+#'   totals (\code{NA} where a joint probability is zero), and
 #'   \code{theorems}.
 #' @examples
 #' set.seed(2)
 #' edges <- cbind(1:19, 2:20)
-#' pr <- morie_spillover_exposure_probs(n = 20, edges, n_treated = 6, n_draws = 2000)
+#' pr <- morie_spillover_exposure_probs(n = 20, edges, n_treated = 6, n_draws = 2000, joint = TRUE)
 #' trt <- sample(20, 6); exposure <- morie_spillover_exposure(seq_len(20) %in% trt, edges)$exposure
 #' y <- 5 - 1.5 * (exposure == 2) - 0.5 * (exposure == 1)
-#' morie_spillover_ht(y, exposure, pr)[c("spillover", "direct", "total_effect")]
+#' morie_spillover_ht(y, exposure, pr$marginal, pr$joint)[c("spillover", "direct", "total_effect", "se")]
 #' @export
-morie_spillover_ht <- function(y, exposure, probs) {
+morie_spillover_ht <- function(y, exposure, probs, joint = NULL) {
   n <- length(y)
   probs <- as.matrix(probs)
   if (length(exposure) != n || nrow(probs) != n || ncol(probs) != 3L) {
@@ -164,10 +191,58 @@ morie_spillover_ht <- function(y, exposure, probs) {
   totals <- vapply(0:2, function(l) sum(ifelse(exposure == l, y / probs[, l + 1L], 0)), numeric(1))
   names(totals) <- paste0("T", 0:2)
   means <- totals / n
-  list(totals = totals, means = means,
-       spillover = unname(means[2] - means[1]), direct = unname(means[3] - means[2]),
-       total_effect = unname(means[3] - means[1]),
-       theorems = c("Research.P3.Design.ht_unbiased", "Research.P3.Design.ht_contrast_unbiased"))
+  out <- list(totals = totals, means = means,
+              spillover = unname(means[2] - means[1]), direct = unname(means[3] - means[2]),
+              total_effect = unname(means[3] - means[1]))
+  theorems <- c("Research.P3.Design.ht_unbiased", "Research.P3.Design.ht_contrast_unbiased")
+  if (!is.null(joint)) {
+    if (!is.array(joint) || !identical(dim(joint), c(n, n, 3L))) {
+      stop("joint must be an n x n x 3 array of joint exposure probabilities", call. = FALSE)
+    }
+    variance <- vapply(0:2, function(l) {
+      pij <- joint[, , l + 1L]
+      pi_l <- probs[, l + 1L]
+      ind <- as.numeric(exposure == l)
+      if (any(pij[outer(ind, ind) > 0] <= 0)) return(NA_real_)
+      w <- outer(ind, ind) * (pij - outer(pi_l, pi_l)) / ifelse(pij > 0, pij, 1)
+      sum(w * outer(y / pi_l, y / pi_l))
+    }, numeric(1))
+    names(variance) <- paste0("T", 0:2)
+    out$variance <- variance
+    out$se <- sqrt(pmax(variance, 0))
+    out$variance_identified <- vapply(0:2, function(l) all(joint[, , l + 1L] > 0), logical(1))
+    theorems <- c(theorems, "Research.P3.Design.ht_variance",
+                  "Research.P3.Design.ht_variance_estimator_unbiased")
+  }
+  out$theorems <- theorems
+  out
+}
+
+#' Design variance of the Horvitz-Thompson total (population formula)
+#'
+#' The exact variance
+#' \eqn{\sum_{i,j} (\pi_{ij} - \pi_i\pi_j)\, Y_i Y_j/(\pi_i\pi_j)}
+#' of the Horvitz-Thompson total of a known potential-outcome vector
+#' under a design with marginal and joint exposure probabilities
+#' (\code{Research.P3.Design.ht_variance}). Used to plan a deployment:
+#' it says how precisely a given design can estimate a given effect size
+#' before any outcome is observed.
+#'
+#' @param y_pot Potential outcome per place at the level of interest.
+#' @param pi Marginal exposure probability per place at that level.
+#' @param pij \code{n} by \code{n} joint exposure probabilities at that level.
+#' @return The variance (a number).
+#' @examples
+#' pr <- morie_spillover_exposure_probs(n = 6, edges = cbind(1:5, 2:6), n_treated = 2, joint = TRUE)
+#' morie_spillover_ht_variance(rep(1, 6), pr$marginal[, "2"], pr$joint[, , 3])
+#' @export
+morie_spillover_ht_variance <- function(y_pot, pi, pij) {
+  n <- length(y_pot)
+  pij <- as.matrix(pij)
+  if (length(pi) != n || !identical(dim(pij), c(n, n))) stop("y_pot, pi and pij must describe the same places", call. = FALSE)
+  if (any(pi <= 0)) stop("every marginal probability must be positive", call. = FALSE)
+  c_ <- y_pot / pi
+  sum((pij - outer(pi, pi)) * outer(c_, c_))
 }
 
 #' Exposure probabilities of a completely randomised deployment
@@ -183,24 +258,36 @@ morie_spillover_ht <- function(y, exposure, probs) {
 #' @param n_draws Monte Carlo draws (ignored when exact enumeration is feasible).
 #' @param exact_max Enumerate all assignments when \code{choose(n, n_treated)}
 #'   is at most this.
+#' @param joint Also return the joint probabilities
+#'   \eqn{\pi_{ij}(\ell) = P(E_i = \ell, E_j = \ell)} needed for the variance
+#'   in \code{\link{morie_spillover_ht}}.
 #' @return An \code{n} by 3 matrix of exposure probabilities (columns
-#'   \code{"0"}, \code{"1"}, \code{"2"}).
+#'   \code{"0"}, \code{"1"}, \code{"2"}); with \code{joint = TRUE} a list
+#'   with \code{marginal} (that matrix) and \code{joint} (an \code{n} by
+#'   \code{n} by 3 array).
 #' @examples
 #' morie_spillover_exposure_probs(n = 6, edges = cbind(1:5, 2:6), n_treated = 2)
 #' @export
-morie_spillover_exposure_probs <- function(n, edges, n_treated, n_draws = 5000L, exact_max = 20000) {
+morie_spillover_exposure_probs <- function(n, edges, n_treated, n_draws = 5000L, exact_max = 20000,
+                                           joint = FALSE) {
   if (n_treated < 1 || n_treated >= n) stop("n_treated must lie in 1..n-1", call. = FALSE)
   counts <- matrix(0, n, 3L, dimnames = list(NULL, c("0", "1", "2")))
+  jcounts <- if (joint) array(0, c(n, n, 3L), dimnames = list(NULL, NULL, c("0", "1", "2"))) else NULL
   tally <- function(trt) {
     e <- morie_spillover_exposure(seq_len(n) %in% trt, edges)$exposure
-    for (l in 0:2) counts[e == l, l + 1L] <<- counts[e == l, l + 1L] + 1
+    for (l in 0:2) {
+      ind <- e == l
+      counts[ind, l + 1L] <<- counts[ind, l + 1L] + 1
+      if (joint) jcounts[, , l + 1L] <<- jcounts[, , l + 1L] + outer(ind, ind)
+    }
   }
   if (choose(n, n_treated) <= exact_max) {
     cmb <- utils::combn(n, n_treated)
     for (k in seq_len(ncol(cmb))) tally(cmb[, k])
-    counts / ncol(cmb)
+    m <- ncol(cmb)
   } else {
     for (k in seq_len(n_draws)) tally(sample.int(n, n_treated))
-    counts / n_draws
+    m <- n_draws
   }
+  if (joint) list(marginal = counts / m, joint = jcounts / m) else counts / m
 }

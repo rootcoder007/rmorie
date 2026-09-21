@@ -324,3 +324,8 @@ implementation, C++ network kernels), then P7, P6, P2, P8.
   https://journals.sagepub.com/doi/10.1177/14773708211072415
 - Challenges and prospects for evidence-informed policy (Annual Review of
   Criminology): https://poodle-banjo-jhsp.squarespace.com/s/blomberg-et-al-2024-challenges-and-prospects-for-evidence-informed-policy-in-criminology.pdf
+
+
+## Library scan (2026-09-21)
+
+Three readers went through the criminology, statistics and mathematics shelves of the WD library and the full-text corpus index; 74 candidate problems with page citations, and a ten-step priority queue, are in research/LIBRARY-SCAN-2026-09-21.md. First in the queue: the stochastic urn for P4 (martingale share, Friedman contrast, Azuma drift envelope), then the Jensen sharpening of the P7 Poisson null and Cox overdispersion, then the Petersen/Chapman floor and k-list non-identification for P1.

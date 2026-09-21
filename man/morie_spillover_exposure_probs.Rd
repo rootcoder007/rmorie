@@ -9,7 +9,8 @@ morie_spillover_exposure_probs(
   edges,
   n_treated,
   n_draws = 5000L,
-  exact_max = 20000
+  exact_max = 20000,
+  joint = FALSE
 )
 }
 \arguments{
@@ -23,10 +24,16 @@ morie_spillover_exposure_probs(
 
 \item{exact_max}{Enumerate all assignments when \code{choose(n, n_treated)}
 is at most this.}
+
+\item{joint}{Also return the joint probabilities
+\eqn{\pi_{ij}(\ell) = P(E_i = \ell, E_j = \ell)} needed for the variance
+in \code{\link{morie_spillover_ht}}.}
 }
 \value{
 An \code{n} by 3 matrix of exposure probabilities (columns
-\code{"0"}, \code{"1"}, \code{"2"}).
+\code{"0"}, \code{"1"}, \code{"2"}); with \code{joint = TRUE} a list
+with \code{marginal} (that matrix) and \code{joint} (an \code{n} by
+\code{n} by 3 array).
 }
 \description{
 Draws \code{n_draws} assignments of \code{n_treated} treated places out

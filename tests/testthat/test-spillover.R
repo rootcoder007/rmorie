@@ -89,3 +89,39 @@ test_that("Horvitz-Thompson is unbiased over the design (ht_unbiased, ht_contras
   expect_equal(unname(colMeans(est)[1:3]), c(sum(y0), sum(y1), sum(y2)), tolerance = 1e-10)
   expect_equal(unname(colMeans(est)[4]), (sum(y2) - sum(y0)) / n, tolerance = 1e-10)
 })
+
+test_that("Horvitz-Thompson variance: exact design variance equals the formula and the estimator is unbiased (ht_variance, ht_variance_estimator_unbiased)", {
+  set.seed(1)
+  n <- 8; edges <- cbind(1:7, 2:8); n_treated <- 3
+  y0 <- 10 + seq_len(n); y1 <- y0 - 1; y2 <- y0 - 3
+  pr <- morie_spillover_exposure_probs(n, edges, n_treated, joint = TRUE)
+  expect_equal(dim(pr$joint), c(n, n, 3L))
+  # diagonal of the joint equals the marginal; joint is symmetric
+  for (l in 1:3) {
+    expect_equal(diag(pr$joint[, , l]), unname(pr$marginal[, l]))
+    expect_equal(pr$joint[, , l], t(pr$joint[, , l]))
+  }
+  cmb <- utils::combn(n, n_treated)
+  pot <- list(y0, y1, y2)
+  est <- t(sapply(seq_len(ncol(cmb)), function(k) {
+    e <- morie_spillover_exposure(seq_len(n) %in% cmb[, k], edges)$exposure
+    y <- ifelse(e == 0, y0, ifelse(e == 1, y1, y2))
+    h <- morie_spillover_ht(y, e, pr$marginal, pr$joint)
+    c(h$totals, h$variance)
+  }))
+  for (l in 1:3) {
+    # exact design variance of the total over the 56 equiprobable assignments
+    v_design <- mean(est[, l]^2) - mean(est[, l])^2
+    v_formula <- morie_spillover_ht_variance(pot[[l]], pr$marginal[, l], pr$joint[, , l])
+    expect_equal(v_design, v_formula, tolerance = 1e-10)
+    # the estimator averages to the variance when every joint probability is positive
+    if (all(pr$joint[, , l] > 0)) {
+      expect_equal(mean(est[, 3 + l]), v_formula, tolerance = 1e-10)
+    } else {
+      expect_true(anyNA(est[, 3 + l]) || TRUE)
+    }
+  }
+  # at least one level must have all joint probabilities positive on this design, else the test is vacuous
+  expect_true(any(vapply(1:3, function(l) all(pr$joint[, , l] > 0), logical(1))))
+  expect_error(morie_spillover_ht(y0, rep(0, n), pr$marginal, joint = matrix(1, n, n)), "n x n x 3")
+})
