@@ -375,3 +375,27 @@ implementation, C++ network kernels), then P7, P6, P2, P8.
 ## Library scan (2026-09-21)
 
 Three readers went through the criminology, statistics and mathematics shelves of the WD library and the full-text corpus index; 74 candidate problems with page citations, and a ten-step priority queue, are in research/LIBRARY-SCAN-2026-09-21.md. First in the queue: the stochastic urn for P4 (martingale share, Friedman contrast, Azuma drift envelope), then the Jensen sharpening of the P7 Poisson null and Cox overdispersion, then the Petersen/Chapman floor and k-list non-identification for P1.
+
+
+## P9. Crime recording as a linear map: what counting rules can hide
+
+Recorded counts are a linear image r = M c of true counts, with M_ij the
+share of true category-j offences recorded as category i (Eterno, Verma &
+Silverman 2012, ch. 14-15: NYPD downgrading; UK "cuffing"). What is
+invariant under re-classification, what cuffing destroys, and why an
+aggregate clearance rate is not a performance measure.
+
+- Progress 2026-09-21: `Research.P9` (P9Recording.lean):
+  `total_invariant_of_colStochastic` (pure re-classification leaves the
+  total unchanged), `total_le_of_colSubstochastic` (cuffing lowers it by
+  exactly the dropped mass), `reclassification_moves_ratio` (a share q of
+  category j moved into i keeps the total and moves the ratio r_i/r_j from
+  c_i/c_j to c_i/c_j + q/(1-q)(1 + c_i/c_j)), `detection_rate_rises`
+  (moving a share q of a class with detection rate d into a disposal
+  detected with probability one raises the aggregate rate by q n (1-d)/N).
+  R: `morie_recording_map()`, `morie_detection_rate_shift()`.
+- Open: the two regimes (re-classification vs cuffing) are not
+  distinguishable from a single recorded series (a formal
+  non-identification statement with a second source as the fix);
+  application to TPS MCI 2014-2024 robbery/theft and assault ratios with
+  CSUS victimisation as the second source (library scan A12, A13, A15).

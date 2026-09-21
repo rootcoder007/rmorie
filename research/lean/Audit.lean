@@ -59,3 +59,7 @@ open Research.P4
 #print axioms Research.P2.disparity_ratio_shift
 #print axioms Research.P2.benchmark_product
 #print axioms Research.P2.benchmark_not_additive
+#print axioms Research.P9.total_invariant_of_colStochastic
+#print axioms Research.P9.total_le_of_colSubstochastic
+#print axioms Research.P9.reclassification_moves_ratio
+#print axioms Research.P9.detection_rate_rises
