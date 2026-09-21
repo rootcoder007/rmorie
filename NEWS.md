@@ -1,3 +1,41 @@
+# rmorie 1.3.1 - 2026-09-21
+
+## Canadian legal data: A2AJ and CanLII clients
+
+Seven `morie_ingest_a2aj_*()` functions cover the A2AJ Canadian Legal
+Data corpus (about 226,000 court and tribunal decisions and 27,000
+statutes and regulations, maintained by Access to Algorithmic Justice at
+Osgoode Hall and Toronto Metropolitan University): `_coverage()` lists
+what the corpus holds, `_search()` and `_fetch()` wrap the REST API,
+`_download()` and `_load()` bring one court's Parquet file from Hugging
+Face into a data.frame, `_citation_edges()` turns the cited-cases field
+into an edge list, and `_gaps()` tabulates the courts the corpus does not
+carry. Every record carries its `upstream_license`.
+
+Eight `morie_ingest_canlii_*()` functions wrap CanLII's REST API for
+those gaps (the Human Rights Tribunal of Ontario, the BC Human Rights
+Tribunal, the Ontario Superior Court, Alberta, Quebec and the remaining
+provinces): databases, per-court decision lists with date filters, one
+decision's metadata, the citator (cited cases, citing cases, cited
+legislation), and the legislation browse; `_case_id()` derives CanLII's
+identifiers from a neutral citation. A free key is read from
+`CANLII_API_KEY`.
+
+The native Parquet reader now decodes three-level `LIST` columns (one
+vector per row, `NULL` for a null list), which is how the A2AJ citation
+network fields are stored; other nesting is still refused rather than
+silently mis-counted. The `mrm-dataset-fetchers` vignette gains a
+section on both sources.
+
+## Fixes
+
+* Two CodeQL findings in the recursive least-squares filter
+  (`src/morie_dsp.cpp`): the row offset into the covariance matrix was
+  an `int` product widened after the multiplication; it is now computed
+  in `size_t`.
+* Twelve roxygen blocks in the R sources carried two `@examples`
+  sections, so their Rd pages ran every example twice.
+
 # rmorie 1.3.0 - 2026-09-19
 
 ## Design and measurement for small or under-enumerated subpopulations
