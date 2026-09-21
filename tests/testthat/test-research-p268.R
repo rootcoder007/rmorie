@@ -90,3 +90,20 @@ test_that("benchmark disparities multiply, never add, and offsets shift by -log 
   expect_equal(bc$resident_disparity_corrected[bc$group == "A"], 6 / 4)
   expect_error(morie_disparity_benchmark(c(A = 1), c(B = 1), c(A = 1), "A"), "same group names")
 })
+
+test_that("relative risk sits between 1 and the odds ratio and OR overstates it (rr_between, or_overstates)", {
+  set.seed(5)
+  for (k in 1:300) {
+    a <- runif(1); b <- runif(1)
+    OR <- (a / (1 - a)) / (b / (1 - b)); RR <- a / b
+    expect_gte(RR, min(1, OR) - 1e-12); expect_lte(RR, max(1, OR) + 1e-12)
+    expect_lte(abs(log(RR)), abs(log(OR)) + 1e-12)
+    expect_equal(OR, RR * (1 - b) / (1 - a), tolerance = 1e-12)
+    r <- morie_relative_risk_from_or(OR, base_rate = 0.3 * a + 0.7 * b, exposed_share = 0.3)
+    expect_equal(unname(r$risks["relative_risk"]), RR, tolerance = 1e-6)
+    expect_gte(r$overstatement_factor * sign(log(OR) + (OR == 1)), 0)   # same side as OR
+  }
+  expect_equal(morie_relative_risk_from_or(3)$rr_bounds, c(lower = 1, upper = 3))
+  expect_equal(morie_relative_risk_from_or(0.25)$rr_bounds, c(lower = 0.25, upper = 1))
+  expect_error(morie_relative_risk_from_or(-1), "positive")
+})

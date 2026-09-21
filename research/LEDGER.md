@@ -101,6 +101,14 @@ field has no agreed estimand, let alone estimator.
   `morie_disparity_benchmark()`; test refits a Poisson GLM with a scaled
   offset and recovers -log kappa.
 
+- Progress 2026-09-21 (relative risk): `Research.P2.or_eq_rr_mul`,
+  `rr_between`, `or_overstates` (P2RelativeRisk.lean): from arrest-only or
+  case-control data the relative risk is squeezed between 1 and the
+  identified odds ratio and the rare-outcome substitution always
+  overstates it in log magnitude (Manski sec. 6.2; library scan B3). R:
+  `morie_relative_risk_from_or()`, point-identifying the risks when a base
+  rate is supplied.
+
 ## P3. Causal effects of policing under interference and displacement
 
 "No interference" fails by construction: hot-spot policing displaces or

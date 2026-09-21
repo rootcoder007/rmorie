@@ -99,3 +99,12 @@ open Research.P4
 #print axioms Research.P5.rescale_eq_one_iff
 #print axioms Research.P5.reduced_coefficient
 #print axioms Research.P5.ratio_is_rescaling
+#print axioms Research.P2.or_eq_rr_mul
+#print axioms Research.P2.rr_between
+#print axioms Research.P2.or_overstates
+#print axioms Research.P5.rank_reversal_exists
+#print axioms Research.P5.rank_stable_of_gap
+#print axioms Research.P5.identified_scores_le
+#print axioms Research.P1.offence_count_bounds
+#print axioms Research.P1.offence_count_eq
+#print axioms Research.P1.category_not_identified

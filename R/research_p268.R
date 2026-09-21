@@ -196,3 +196,42 @@ morie_disparity_benchmark <- function(pop, contact, force, reference, exposure_e
                              "Research.P2.offset_shift", "Research.P2.disparity_ratio_shift")
   out
 }
+
+
+#' Relative risk from an odds ratio: the interval that arrest-only data allow
+#'
+#' Case-control and arrest-only samples identify the odds ratio of an outcome
+#' between two groups but not the two risks themselves. The relative risk
+#' nevertheless lies between 1 and the odds ratio
+#' (\code{Research.P2.rr_between}), since \eqn{OR = RR (1-b)/(1-a)}
+#' (\code{or_eq_rr_mul}), and the rare-outcome substitution \eqn{RR \approx OR}
+#' always overstates the relative risk in log magnitude (\code{or_overstates}).
+#' With a base rate supplied the two risks and the relative risk are point
+#' identified.
+#'
+#' @param odds_ratio Identified odds ratio, positive.
+#' @param base_rate Optional overall outcome rate \eqn{P(y=1)}; with
+#'   \code{exposed_share} it point-identifies the two risks.
+#' @param exposed_share Share of the population with \eqn{x = 1}.
+#' @return A list with \code{rr_bounds} (between 1 and the odds ratio),
+#'   \code{overstatement_factor} (\eqn{OR/RR} when identified),
+#'   \code{risks} (when identified) and \code{theorems}.
+#' @examples
+#' morie_relative_risk_from_or(3)
+#' morie_relative_risk_from_or(3, base_rate = 0.2, exposed_share = 0.3)
+#' @export
+morie_relative_risk_from_or <- function(odds_ratio, base_rate = NULL, exposed_share = NULL) {
+  if (length(odds_ratio) != 1L || is.na(odds_ratio) || odds_ratio <= 0) stop("odds_ratio must be a single positive number", call. = FALSE)
+  out <- list(rr_bounds = c(lower = min(1, odds_ratio), upper = max(1, odds_ratio)),
+              theorems = c("Research.P2.or_eq_rr_mul", "Research.P2.rr_between", "Research.P2.or_overstates"))
+  if (!is.null(base_rate) && !is.null(exposed_share)) {
+    if (base_rate <= 0 || base_rate >= 1 || exposed_share <= 0 || exposed_share >= 1) stop("base_rate and exposed_share must lie in (0, 1)", call. = FALSE)
+    # solve for b: q = s a + (1 - s) b with a = OR b / (1 - b + OR b)
+    f <- function(b) exposed_share * (odds_ratio * b / (1 - b + odds_ratio * b)) + (1 - exposed_share) * b - base_rate
+    b <- stats::uniroot(f, c(1e-12, 1 - 1e-12))$root
+    a <- odds_ratio * b / (1 - b + odds_ratio * b)
+    out$risks <- c(exposed = a, unexposed = b, relative_risk = a / b)
+    out$overstatement_factor <- odds_ratio / (a / b)
+  }
+  out
+}
