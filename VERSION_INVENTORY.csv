@@ -1431,8 +1431,6 @@ File,Line,Status,Version,Context
 ./R/wsrpw.R,4,STALE_OR_DEP,5.7.3,"#' (Gibbons Ch 5.7.3)"
 ./README.md,130,STALE_OR_DEP,1.1.4,"## What's in v1.1.4"
 ./README.md,301,STALE_OR_DEP,1.1.4,"Since 1.1.4 the subsystem is layered on the compiled SIU core in"
-./cran-comments.md,1,STALE_OR_DEP,1.2.3,"# cran-comments.md — rmorie 1.2.3"
-./cran-comments.md,8,STALE_OR_DEP,4.6.1,"* local (Fedora; R 4.6.1): `R CMD check --as-cran`"
 ./data-raw/srr-ledger.md,3,STALE_OR_DEP,1.0.0,"Generated 2026-07-10 from `R/srr-stats-standards.R` (`srr::srr_stats_roxygen`; srr 1.0.0)."
 ./man/ARtoCepstrum.Rd,20,STALE_OR_DEP,4.7.3,"cepstrum needs (Section 4.7.3)."
 ./man/Acfseg.Rd,5,STALE_OR_DEP,8.5.2,"\title{Section 8.5.2; eqs. (8.27)-(8.29); after Michael and Houchin}"
