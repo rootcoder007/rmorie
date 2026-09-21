@@ -33,6 +33,7 @@ signed off.
 | P5 fairness | `Research.P5.compare_decided`, `compare_undecided` | `morie_fairness_compare_groups()` |
 | P6 age-crime | `Research.P6.aggregate_not_identifying`, `invariance_sufficient`, `invariance_not_necessary` | `morie_age_crime_aggregate()` |
 | P7 concentration | `Research.P7.gini_zero_decomposition`, `poisson_zero_prob` | `morie_concentration_gini()`, `morie_concentration_decompose()` |
+| P7 concentration | `Research.P7.Mixture.mixture_zero_ge_exp_neg_mean`, `variance_eq`, `mixture_var_ge_mean`, `mixture_var_eq_mean_iff` | `morie_concentration_dispersion()`, `morie_concentration_decompose()` (`null_zero_share` is a lower bound) |
 | P8 deterrence | `Research.P8.constant_dimension_not_identified`, `identified_iff_injective`, `corner_design_identified` | `morie_deterrence_design_check()` |
 
 C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),

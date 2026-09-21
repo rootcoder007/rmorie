@@ -267,6 +267,18 @@ counts are sparse relative to units.
   the expected Gini under the Poisson null (or a proved bound), the
   rank-persistence null, and a Toronto street-segment application.
 
+- Progress 2026-09-21 (mixture): `Research.P7.Mixture` (P7Mixture.lean): for
+  any finite Poisson mixture the zero share is at least exp(-mean)
+  (`mixture_zero_ge_exp_neg_mean`, Jensen), the variance is at least the
+  mean with excess equal to the variance of the intensity
+  (`variance_eq`, `mixture_var_ge_mean`), and equality holds iff the
+  intensity is constant on the support (`mixture_var_eq_mean_iff`). So the
+  Poisson null zero share of `poisson_zero_prob` is a lower bound for every
+  heterogeneous population with the same mean, and a dispersion index
+  above one is implied by any heterogeneity: neither excess zeros nor a
+  Gini above the null separates "criminology of place" from unequal
+  exposure. R: `morie_concentration_dispersion()`.
+
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
 Every punishment has all three dimensions; studies manipulate one and

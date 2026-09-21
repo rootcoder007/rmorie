@@ -50,3 +50,34 @@ test_that("argument checks", {
   expect_error(morie_concentration_gini(c(0, 0)), "positive total")
   expect_error(morie_concentration_decompose(c(-1, 2)), "non-negative")
 })
+
+test_that("Poisson mixtures obey the proved inequalities (mixture_zero_ge_exp_neg_mean, mixture_var_ge_mean, variance_eq)", {
+  set.seed(1)
+  # exact finite mixtures: weights w, intensities lam
+  for (k in 1:20) {
+    m <- sample(2:6, 1)
+    w <- runif(m); w <- w / sum(w)
+    lam <- runif(m, 0, 4)
+    mu <- sum(w * lam)
+    zero <- sum(w * exp(-lam))
+    expect_gte(zero, exp(-mu) - 1e-12)
+    second <- sum(w * (lam + lam^2))
+    v <- second - mu^2
+    expect_gte(v, mu - 1e-12)
+    expect_equal(v, mu + sum(w * (lam - mu)^2), tolerance = 1e-12)   # variance_eq
+  }
+  # equality iff constant intensity
+  expect_equal(sum(c(0.3, 0.7) * (2 + 2^2)) - 2^2, 2)
+  # a heterogeneous sample shows dispersion above one and excess zeros; a Poisson sample does not, on average
+  x_het <- rpois(20000, rgamma(20000, shape = 2, rate = 2))
+  d_het <- morie_concentration_dispersion(x_het)
+  expect_gt(d_het$dispersion_index, 1.2)
+  expect_gt(d_het$zero_share_gap, 0.02)
+  expect_equal(d_het$implied_intensity_variance, d_het$variance - d_het$mean_count)
+  x_poi <- rpois(20000, 1)
+  d_poi <- morie_concentration_dispersion(x_poi)
+  expect_lt(abs(d_poi$dispersion_index - 1), 0.05)
+  expect_lt(abs(d_poi$zero_share_gap), 0.02)
+  expect_error(morie_concentration_dispersion(c(0, 0)), "positive total")
+  expect_true("Research.P7.Mixture.mixture_zero_ge_exp_neg_mean" %in% morie_concentration_decompose(x_het)$theorems)
+})

@@ -78,6 +78,52 @@ morie_concentration_decompose <- function(x) {
     null_zero_share = z_null,
     null_gini_same_positive = z_null + (1 - z_null) * g_pos,
     excess_zero_share = z - z_null,
-    theorems = c("Research.P7.gini_zero_decomposition", "Research.P7.poisson_zero_prob")
+    theorems = c("Research.P7.gini_zero_decomposition", "Research.P7.poisson_zero_prob",
+                 "Research.P7.Mixture.mixture_zero_ge_exp_neg_mean")
+  )
+}
+
+#' Dispersion of place counts against the Poisson null and its mixtures
+#'
+#' For any finite mixture of Poisson counts (places with unequal
+#' intensities) the variance is at least the mean, the excess being the
+#' variance of the intensity, with equality exactly when the intensity is
+#' constant on the support (\code{Research.P7.Mixture.variance_eq},
+#' \code{mixture_var_ge_mean}, \code{mixture_var_eq_mean_iff}); and the
+#' zero share is at least \eqn{e^{-\mu}} (\code{mixture_zero_ge_exp_neg_mean}).
+#' So a dispersion index above one and a zero share above the Poisson null
+#' are implied by any heterogeneity of exposure and cannot by themselves
+#' separate a "criminology of place" from unequal exposure. This function
+#' reports the sample dispersion index, the implied intensity variance
+#' under the mixture reading, and the zero-share gap.
+#'
+#' @param x Non-negative counts per place; at least one positive.
+#' @return A list with \code{mean_count}, \code{variance} (sample, denominator
+#'   \code{n - 1}), \code{dispersion_index} (variance over mean),
+#'   \code{implied_intensity_variance} (variance minus mean, floored at 0),
+#'   \code{implied_intensity_sd}, \code{zero_share}, \code{null_zero_share}
+#'   (\eqn{e^{-\mu}}, a lower bound for every mixture with the same mean),
+#'   \code{zero_share_gap} and \code{theorems}.
+#' @examples
+#' set.seed(1)
+#' x <- rpois(2000, rgamma(2000, shape = 2, rate = 5))   # heterogeneous places
+#' unlist(morie_concentration_dispersion(x)[c("dispersion_index", "implied_intensity_sd", "zero_share_gap")])
+#' @export
+morie_concentration_dispersion <- function(x) {
+  if (!is.numeric(x) || anyNA(x) || any(x < 0) || sum(x) <= 0 || length(x) < 2L) {
+    stop("x must be at least two non-negative counts with a positive total", call. = FALSE)
+  }
+  mu <- mean(x)
+  v <- stats::var(x)
+  z <- mean(x == 0)
+  z_null <- exp(-mu)
+  list(
+    mean_count = mu, variance = v, dispersion_index = v / mu,
+    implied_intensity_variance = max(v - mu, 0),
+    implied_intensity_sd = sqrt(max(v - mu, 0)),
+    zero_share = z, null_zero_share = z_null, zero_share_gap = z - z_null,
+    theorems = c("Research.P7.Mixture.variance_eq", "Research.P7.Mixture.mixture_var_ge_mean",
+                 "Research.P7.Mixture.mixture_var_eq_mean_iff",
+                 "Research.P7.Mixture.mixture_zero_ge_exp_neg_mean")
   )
 }
