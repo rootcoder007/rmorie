@@ -24,20 +24,29 @@ B; positive.}
 produced it, so the increment is the true rate).}
 
 \item{rho}{Share of crimes that reach the record through public reports
-independent of patrol presence, in \code{[0, 1]}. No theorem covers
-\code{rho > 0} yet; the recursion is provided for exploration.}
+independent of patrol presence, in \code{[0, 1]}. With \code{rho > 0}
+the naive share is proved never to exceed
+\eqn{\max(x_0, \lambda_A/(\lambda_A + \rho\lambda_B))}
+(\code{Research.P4.rho_cap}): reports cap the loop strictly below 1
+but strictly above the true-rate proportion unless \code{rho = 1}.}
 }
 \value{
 A list with \code{share_a} (the limit, or \code{NA}),
-\code{theorem} (the Lean name, or \code{NA}) and \code{note}.
+\code{theorem} (the Lean name, or \code{NA}), \code{note}, and for
+\code{rho > 0} also \code{cap} and \code{cap_theorem}.
 }
 \description{
 Returns the long-run share of patrol sent to region A under the
 mean-field recursion, with the name of the Lean theorem that proves it.
-With \code{rho > 0} no theorem exists yet and \code{NA} is returned.
+With \code{rho > 0} under the naive update the limit is not proved, but
+the share is proved never to exceed the cap
+\eqn{\max(x_0, \lambda_A/(\lambda_A + \rho\lambda_B))}
+(\code{Research.P4.rho_cap}); \code{share_a} is then \code{NA} and
+\code{cap} carries the bound.
 }
 \examples{
 morie_feedback_loop_limit(0.3, 0.2, 10, 10)                 # 1
 morie_feedback_loop_limit(0.3, 0.2, 10, 10, "corrected")    # 0.6
 morie_feedback_loop_limit(0.3, 0.3, 10, 10)                 # stays at 0.5
+morie_feedback_loop_limit(0.3, 0.2, 10, 10, rho = 0.5)$cap # 0.3 / 0.4 = 0.75
 }

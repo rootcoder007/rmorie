@@ -102,3 +102,24 @@ test_that("the proved rate bound holds along the recursion (naiveShare_rate_boun
   expect_equal(b$theorem, "Research.P4.naiveShare_rate_bound")
   expect_error(morie_feedback_loop_bound(0.2, 0.3, 1, 1), "swap")
 })
+
+test_that("public reports cap the naive loop (rho_cap, cap_zero, cap_one)", {
+  set.seed(1)
+  for (rho in c(0.1, 0.5, 0.9, 1)) {
+    mf <- morie_feedback_loop_meanfield(0.3, 0.2, 10, 10, n_steps = 5000, rho = rho)
+    lim <- attr(mf, "limit")
+    expect_equal(lim$cap, max(0.5, 0.3 / (0.3 + rho * 0.2)))
+    expect_equal(lim$cap_theorem, "Research.P4.rho_cap")
+    expect_true(all(mf$share_a <= lim$cap + 1e-12))
+  }
+  # rho = 1: cap is the true-rate proportion (cap_one); the share stays below it from below
+  mf1 <- morie_feedback_loop_meanfield(0.3, 0.2, 1, 99, n_steps = 5000, rho = 1)
+  expect_true(all(mf1$share_a <= 0.6 + 1e-12))
+  # rho = 0: the cap is 1 (cap_zero) and the runaway limit applies
+  expect_equal(morie_feedback_loop_limit(0.3, 0.2, 10, 10)$share_a, 1)
+  # a small reporting share caps the loop far below 1 but above the truth
+  cap <- morie_feedback_loop_limit(0.3, 0.2, 10, 10, rho = 0.25)$cap
+  expect_lt(cap, 1); expect_gt(cap, 0.6); expect_equal(cap, 0.3 / 0.35)
+  # corrected update: reports cancel out and the closed-form limit is unchanged
+  expect_equal(morie_feedback_loop_limit(0.3, 0.2, 10, 10, "corrected", rho = 0.5)$share_a, 0.6)
+})

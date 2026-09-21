@@ -17,6 +17,9 @@
 #   Research.P4.naiveShare_tendsto_one  lamA > lamB  =>  x_n -> 1 for every start
 #   Research.P4.corrected_share_tendsto corrected update  =>  x_n -> lamA/(lamA+lamB)
 #   Research.P4.naiveShare_rate_bound   x_N - x_0 <= (lamA-lamB)/4 * sum_{k<N} 1/(c0 + k min(lamA,lamB))
+#   Research.P4.rho_cap                 (P4Mitigation.lean) with reporting share rho in [0,1],
+#                                       x_n <= max(x_0, lamA / (lamA + rho lamB)) for every n
+#   Research.P4.cap_zero, cap_one       the cap is 1 at rho = 0 and lamA/(lamA+lamB) at rho = 1
 #
 # What the theorems do NOT say: that a real department's discovery process
 # is this model. The mean-field recursion is the expected-count dynamics;
@@ -48,8 +51,11 @@
 #'   \code{"corrected"} (each discovery discounted by the presence that
 #'   produced it, so the increment is the true rate).
 #' @param rho Share of crimes that reach the record through public reports
-#'   independent of patrol presence, in \code{[0, 1]}. No theorem covers
-#'   \code{rho > 0} yet; the recursion is provided for exploration.
+#'   independent of patrol presence, in \code{[0, 1]}. With \code{rho > 0}
+#'   the naive share is proved never to exceed
+#'   \eqn{\max(x_0, \lambda_A/(\lambda_A + \rho\lambda_B))}
+#'   (\code{Research.P4.rho_cap}): reports cap the loop strictly below 1
+#'   but strictly above the true-rate proportion unless \code{rho = 1}.
 #' @return A data frame with \code{step}, \code{share_a} (share of patrol
 #'   sent to A), \code{c_a}, \code{c_b}, and the attribute
 #'   \code{"limit"} giving the proved limit of the share (see
@@ -109,15 +115,21 @@ morie_feedback_loop_meanfield <- function(lam_a, lam_b, c_a0, c_b0,
 #'
 #' Returns the long-run share of patrol sent to region A under the
 #' mean-field recursion, with the name of the Lean theorem that proves it.
-#' With \code{rho > 0} no theorem exists yet and \code{NA} is returned.
+#' With \code{rho > 0} under the naive update the limit is not proved, but
+#' the share is proved never to exceed the cap
+#' \eqn{\max(x_0, \lambda_A/(\lambda_A + \rho\lambda_B))}
+#' (\code{Research.P4.rho_cap}); \code{share_a} is then \code{NA} and
+#' \code{cap} carries the bound.
 #'
 #' @inheritParams morie_feedback_loop_meanfield
 #' @return A list with \code{share_a} (the limit, or \code{NA}),
-#'   \code{theorem} (the Lean name, or \code{NA}) and \code{note}.
+#'   \code{theorem} (the Lean name, or \code{NA}), \code{note}, and for
+#'   \code{rho > 0} also \code{cap} and \code{cap_theorem}.
 #' @examples
 #' morie_feedback_loop_limit(0.3, 0.2, 10, 10)                 # 1
 #' morie_feedback_loop_limit(0.3, 0.2, 10, 10, "corrected")    # 0.6
 #' morie_feedback_loop_limit(0.3, 0.3, 10, 10)                 # stays at 0.5
+#' morie_feedback_loop_limit(0.3, 0.2, 10, 10, rho = 0.5)$cap # 0.3 / 0.4 = 0.75
 #' @export
 morie_feedback_loop_limit <- function(lam_a, lam_b, c_a0, c_b0,
                                       update = c("naive", "corrected"),
@@ -125,8 +137,17 @@ morie_feedback_loop_limit <- function(lam_a, lam_b, c_a0, c_b0,
   update <- match.arg(update)
   .morie_feedback_check(lam_a, lam_b, c_a0, c_b0, rho)
   if (rho > 0) {
+    if (update == "corrected") {
+      # the corrected increments are (1 - rho) lam + rho lam = lam: the
+      # reporting share cancels and the closed form applies unchanged
+      return(list(share_a = lam_a / (lam_a + lam_b),
+                  theorem = "Research.P4.corrected_share_tendsto",
+                  note = "corrected update: reports do not change the increments"))
+    }
     return(list(share_a = NA_real_, theorem = NA_character_,
-                note = "no theorem for rho > 0 yet"))
+                note = "no limit theorem for rho > 0; the cap is proved",
+                cap = max(c_a0 / (c_a0 + c_b0), lam_a / (lam_a + rho * lam_b)),
+                cap_theorem = "Research.P4.rho_cap"))
   }
   if (update == "corrected") {
     return(list(share_a = lam_a / (lam_a + lam_b),

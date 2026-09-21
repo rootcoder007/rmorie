@@ -27,8 +27,11 @@ B; positive.}
 produced it, so the increment is the true rate).}
 
 \item{rho}{Share of crimes that reach the record through public reports
-independent of patrol presence, in \code{[0, 1]}. No theorem covers
-\code{rho > 0} yet; the recursion is provided for exploration.}
+independent of patrol presence, in \code{[0, 1]}. With \code{rho > 0}
+the naive share is proved never to exceed
+\eqn{\max(x_0, \lambda_A/(\lambda_A + \rho\lambda_B))}
+(\code{Research.P4.rho_cap}): reports cap the loop strictly below 1
+but strictly above the true-rate proportion unless \code{rho = 1}.}
 }
 \value{
 A data frame with \code{step}, \code{share_a} (share of patrol

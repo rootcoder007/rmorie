@@ -154,6 +154,13 @@ or of the initial condition?
   in 2·10^6 steps for a 5% rate gap from a 1/99 start), so the practically
   decisive object is the rate, not the limit. Next: a proved rate bound
   and the stochastic (martingale) version; then the ρ > 0 mitigation bound.
+- Progress 2026-09-21 (later): `Research.P4.rho_cap` (P4Mitigation.lean):
+  with a reporting share ρ ∈ [0, 1] the naive share never exceeds
+  max(x₀, λA/(λA + ρλB)); `cap_zero` and `cap_one` pin the ends (1 and the
+  true-rate proportion). Reports mitigate but do not remove the loop, and
+  the size of the residual is now an explicit number. R:
+  `morie_feedback_loop_limit(rho = ...)$cap`; test checks the cap on the
+  full trajectory. Still open: the stochastic urn (martingale) version.
 
 ## P5. Recidivism prediction under label bias: what can be certified?
 

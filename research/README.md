@@ -25,6 +25,7 @@ signed off.
 | P4 feedback loops | `Research.P4.naive_step_drift`, `naive_share_increasing`, `naiveShare_strictMono`, `naiveShare_tendsto_one`, `not_summable_shifted_harmonic` | `morie_feedback_loop_meanfield()`, `morie_feedback_loop_limit()`, `morie_feedback_loop_sim()` |
 | P4 feedback loops | `Research.P4.corrected_share_closed_form`, `corrected_share_tendsto` | same, `update = "corrected"` |
 | P4 feedback loops | `Research.P4.naiveTotal_ge`, `naiveShare_gain_le`, `naiveShare_rate_bound` | `morie_feedback_loop_bound()` |
+| P4 feedback loops | `Research.P4.inc_share_le_cap`, `rhoStep_share_le`, `rho_cap`, `cap_zero`, `cap_one` | `morie_feedback_loop_limit(rho = ...)$cap`, `morie_feedback_loop_meanfield(rho = ...)` |
 | P5 fairness | `Research.P5.Table.chouldechova`, `impossibility` | `morie_fairness_rates()`, `morie_fairness_implied_fpr()` |
 | P5 fairness | `Research.P5.true_base_rate_bounds`, `lower_bound_attained`, `upper_bound_attained`, `trueRate_observedRate` | `morie_fairness_base_rate_bounds()`, `morie_fairness_true_rate()` |
 | P5 fairness | `Research.P5.compare_decided`, `compare_undecided` | `morie_fairness_compare_groups()` |
