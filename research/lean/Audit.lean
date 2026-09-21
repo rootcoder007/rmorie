@@ -55,3 +55,7 @@ open Research.P4
 #print axioms Research.P1.chapman_ge_floor
 #print axioms Research.P1.three_list_saturated_fits
 #print axioms Research.P1.missing_cell_unconstrained
+#print axioms Research.P2.offset_shift
+#print axioms Research.P2.disparity_ratio_shift
+#print axioms Research.P2.benchmark_product
+#print axioms Research.P2.benchmark_not_additive

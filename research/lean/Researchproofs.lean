@@ -16,3 +16,4 @@ import Researchproofs.P3Variance
 import Researchproofs.P4Urn
 import Researchproofs.P7Mixture
 import Researchproofs.P1ThreeList
+import Researchproofs.P2Benchmark

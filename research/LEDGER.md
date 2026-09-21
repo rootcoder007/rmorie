@@ -89,6 +89,18 @@ field has no agreed estimand, let alone estimator.
   contrast as a formal sign test, and a Toronto stops application with a
   stated mobility proxy.
 
+- Progress 2026-09-21 (benchmarks): `Research.P2` (P2Benchmark.lean):
+  `offset_shift` and `disparity_ratio_shift` (a log-link rate model with
+  the exposure as offset moves a group coefficient by exactly -log kappa
+  when the exposure is scaled by kappa, so disparity ratios are identified
+  only up to the ratio of exposure errors: the mechanism behind the 2022
+  TPS use-of-force correction), `benchmark_product` (force-per-resident
+  disparity = contact-per-resident disparity x force-per-contact
+  disparity) and `benchmark_not_additive` (witness 3 x 2 = 6, not 5,
+  against the TPS methodological report's "additive"). R:
+  `morie_disparity_benchmark()`; test refits a Poisson GLM with a scaled
+  offset and recovers -log kappa.
+
 ## P3. Causal effects of policing under interference and displacement
 
 "No interference" fails by construction: hot-spot policing displaces or

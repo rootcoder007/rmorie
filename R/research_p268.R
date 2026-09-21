@@ -140,3 +140,59 @@ morie_deterrence_design_check <- function(p, s, c) {
                     celerity = length(unique(c)) == 1L),
        theorem = "Research.P8.constant_dimension_not_identified")
 }
+
+
+#' Disparity benchmarks: the product identity and the exposure-offset shift
+#'
+#' Two identities from \code{research/lean/P2Benchmark.lean}. First, with
+#' population, contact and force counts per group, the disparity of force
+#' per resident against a reference group equals the product of the
+#' disparity of contact per resident and the disparity of force per
+#' contact (\code{Research.P2.benchmark_product}); the two stages do not
+#' add (\code{benchmark_not_additive}). Second, in a log-link rate model
+#' with the exposure as an offset, scaling a group's exposure by a factor
+#' \eqn{\kappa} while fitting the same counts shifts that group's
+#' coefficient by exactly \eqn{-\log\kappa}
+#' (\code{Research.P2.offset_shift}), so a disparity ratio is identified
+#' only up to the ratio of the two groups' exposure errors
+#' (\code{disparity_ratio_shift}).
+#'
+#' @param pop,contact,force Named numeric vectors (same names) of residents,
+#'   police contacts and force incidents per group; all positive.
+#' @param reference Name of the reference group.
+#' @param exposure_error_factor Optional named vector of multiplicative
+#'   errors \eqn{\kappa_g} in each group's exposure (1 means none); the
+#'   resident-benchmark disparity is re-expressed under the corrected
+#'   exposure.
+#' @return A data frame with one row per group: \code{contact_disparity}
+#'   (contact per resident relative to the reference),
+#'   \code{force_given_contact_disparity}, \code{resident_disparity}
+#'   (their product), \code{additive_claim} (their sum, for comparison),
+#'   \code{log_shift} and \code{resident_disparity_corrected} when
+#'   exposure errors are given; attribute \code{"theorems"}.
+#' @examples
+#' morie_disparity_benchmark(pop = c(A = 100, B = 100), contact = c(A = 30, B = 10),
+#'                           force = c(A = 12, B = 2), reference = "B")
+#' @export
+morie_disparity_benchmark <- function(pop, contact, force, reference, exposure_error_factor = NULL) {
+  g <- names(pop)
+  if (is.null(g) || !identical(g, names(contact)) || !identical(g, names(force))) stop("pop, contact and force must share the same group names", call. = FALSE)
+  if (any(c(pop, contact, force) <= 0)) stop("all counts must be positive", call. = FALSE)
+  if (!reference %in% g) stop("reference must be one of the group names", call. = FALSE)
+  r <- reference
+  cd <- (contact / pop) / (contact[r] / pop[r])
+  fd <- (force / contact) / (force[r] / contact[r])
+  rd <- (force / pop) / (force[r] / pop[r])
+  out <- data.frame(group = g, contact_disparity = unname(cd), force_given_contact_disparity = unname(fd),
+                    resident_disparity = unname(rd), additive_claim = unname(cd + fd),
+                    product_check = unname(rd - cd * fd))
+  if (!is.null(exposure_error_factor)) {
+    k <- exposure_error_factor[g]
+    if (anyNA(k) || any(k <= 0)) stop("exposure_error_factor must be positive for every group", call. = FALSE)
+    out$log_shift <- unname(-log(k))
+    out$resident_disparity_corrected <- unname(rd * (k[r] / k))
+  }
+  attr(out, "theorems") <- c("Research.P2.benchmark_product", "Research.P2.benchmark_not_additive",
+                             "Research.P2.offset_shift", "Research.P2.disparity_ratio_shift")
+  out
+}

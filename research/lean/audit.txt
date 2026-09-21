@@ -53,3 +53,7 @@
 'Research.P1.chapman_ge_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P1.three_list_saturated_fits' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P1.missing_cell_unconstrained' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P2.offset_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P2.disparity_ratio_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P2.benchmark_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P2.benchmark_not_additive' depends on axioms: [propext, Classical.choice, Quot.sound]

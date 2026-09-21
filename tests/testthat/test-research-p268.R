@@ -62,3 +62,31 @@ test_that("a design that holds a dimension fixed cannot identify it (constant_di
   expect_false(col$identified[["severity"]])
   expect_false(col$identified[["celerity"]])
 })
+
+test_that("benchmark disparities multiply, never add, and offsets shift by -log kappa (P2Benchmark)", {
+  set.seed(1)
+  b <- morie_disparity_benchmark(pop = c(A = 100, B = 100), contact = c(A = 30, B = 10),
+                                 force = c(A = 12, B = 2), reference = "B")
+  a <- b[b$group == "A", ]
+  expect_equal(a$contact_disparity, 3); expect_equal(a$force_given_contact_disparity, 2)
+  expect_equal(a$resident_disparity, 6); expect_equal(a$additive_claim, 5)
+  expect_equal(max(abs(b$product_check)), 0, tolerance = 1e-12)
+  # random tables: the product identity is exact
+  for (k in 1:100) {
+    pop <- stats::setNames(runif(4, 50, 500), LETTERS[1:4]); con <- pop * runif(4, 0.05, 0.5); frc <- con * runif(4, 0.05, 0.5)
+    r <- morie_disparity_benchmark(pop, con, frc, reference = "C")
+    expect_equal(r$resident_disparity, r$contact_disparity * r$force_given_contact_disparity, tolerance = 1e-12)
+    expect_equal(r$resident_disparity[r$group == "C"], 1)
+  }
+  # offset shift: a rate model refit with a scaled offset moves the coefficient by exactly -log(kappa)
+  d <- data.frame(y = c(12, 2), grp = factor(c("A", "B"), levels = c("B", "A")), E = c(100, 100))
+  f1 <- stats::glm(y ~ grp + offset(log(E)), family = stats::poisson, data = d)
+  d$E2 <- d$E * c(A = 4, B = 1)[as.character(d$grp)]
+  f2 <- stats::glm(y ~ grp + offset(log(E2)), family = stats::poisson, data = d)
+  expect_equal(unname(stats::coef(f2)["grpA"] - stats::coef(f1)["grpA"]), -log(4), tolerance = 1e-8)
+  bc <- morie_disparity_benchmark(pop = c(A = 100, B = 100), contact = c(A = 30, B = 10), force = c(A = 12, B = 2),
+                                  reference = "B", exposure_error_factor = c(A = 4, B = 1))
+  expect_equal(bc$log_shift[bc$group == "A"], -log(4))
+  expect_equal(bc$resident_disparity_corrected[bc$group == "A"], 6 / 4)
+  expect_error(morie_disparity_benchmark(c(A = 1), c(B = 1), c(A = 1), "A"), "same group names")
+})
