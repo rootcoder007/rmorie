@@ -235,3 +235,42 @@ morie_relative_risk_from_or <- function(odds_ratio, base_rate = NULL, exposed_sh
   }
   out
 }
+
+
+#' Direction of deterrence without convexity: optimal offending under certainty and severity
+#'
+#' An offender chooses a level \code{x} from any finite menu to maximise
+#' \eqn{y(x) - p f(x)} with \eqn{f} strictly increasing. Any optimum at a higher
+#' certainty \eqn{p} is at most any optimum at a lower one
+#' (\code{Research.P8.certainty_monotone}), the same holds for a sanction
+#' schedule that grows faster in \eqn{x} (\code{severity_monotone}), and
+#' aggregate offending over heterogeneous offenders is non-increasing
+#' (\code{aggregate_monotone}). No concavity of the benefit, no
+#' differentiability, no interior solution: convexity buys uniqueness and
+#' smoothness of the response, not its direction. What remains open in P8 is
+#' separating certainty from severity in data, not the sign.
+#'
+#' @param x Numeric vector, the menu of offending levels.
+#' @param benefit Numeric vector, the benefit at each level (any shape).
+#' @param sanction Numeric vector, the sanction at each level, strictly increasing in \code{x}.
+#' @param p Numeric vector of certainty levels to evaluate.
+#' @return A data frame with one row per \code{p}: \code{p}, \code{x_opt} (the
+#'   largest optimal level), \code{value}; attribute \code{"theorems"}. The
+#'   \code{x_opt} column is non-increasing in \code{p}.
+#' @examples
+#' x <- 0:10; morie_deterrence_response(x, benefit = sqrt(x) * 3 - (x %% 3 == 0), sanction = x^1.5, p = c(0.1, 0.3, 0.5, 1))
+#' @export
+morie_deterrence_response <- function(x, benefit, sanction, p) {
+  n <- length(x)
+  if (length(benefit) != n || length(sanction) != n) stop("x, benefit and sanction must have equal length", call. = FALSE)
+  o <- order(x); x <- x[o]; benefit <- benefit[o]; sanction <- sanction[o]
+  if (any(diff(sanction) <= 0)) stop("sanction must be strictly increasing in x", call. = FALSE)
+  if (any(p < 0)) stop("p must be non-negative", call. = FALSE)
+  res <- do.call(rbind, lapply(p, function(pp) {
+    u <- benefit - pp * sanction
+    best <- which(u >= max(u) - 1e-12)
+    data.frame(p = pp, x_opt = max(x[best]), value = max(u))
+  }))
+  attr(res, "theorems") <- c("Research.P8.certainty_monotone", "Research.P8.severity_monotone", "Research.P8.aggregate_monotone")
+  res
+}

@@ -107,3 +107,19 @@ test_that("relative risk sits between 1 and the odds ratio and OR overstates it 
   expect_equal(morie_relative_risk_from_or(0.25)$rr_bounds, c(lower = 0.25, upper = 1))
   expect_error(morie_relative_risk_from_or(-1), "positive")
 })
+
+test_that("optimal offending is non-increasing in certainty for arbitrary benefit shapes (certainty_monotone, aggregate_monotone)", {
+  set.seed(9)
+  for (k in 1:200) {
+    x <- 0:15; benefit <- cumsum(rnorm(16, 0.5)) + rnorm(16, 0, 2)    # non-concave, non-monotone benefit
+    sanction <- cumsum(runif(16, 0.1, 2))                               # strictly increasing, any shape
+    p <- sort(runif(6, 0, 3))
+    r <- morie_deterrence_response(x, benefit, sanction, p)
+    expect_true(all(diff(r$x_opt) <= 0))
+  }
+  # aggregate over heterogeneous offenders is non-increasing too
+  agg <- sapply(c(0.2, 0.6, 1.5), function(pp) sum(sapply(1:30, function(i) { set.seed(i); b <- cumsum(rnorm(11, 0.4)); s <- cumsum(runif(11, 0.1, 1.5))
+    morie_deterrence_response(0:10, b, s, pp)$x_opt })))
+  expect_true(all(diff(agg) <= 0))
+  expect_error(morie_deterrence_response(0:2, 1:3, c(1, 1, 2), 0.5), "strictly increasing")
+})

@@ -432,6 +432,13 @@ implementation, C++ network kernels), then P7, P6, P2, P8.
 Three readers went through the criminology, statistics and mathematics shelves of the WD library and the full-text corpus index; 74 candidate problems with page citations, and a ten-step priority queue, are in research/LIBRARY-SCAN-2026-09-21.md. First in the queue: the stochastic urn for P4 (martingale share, Friedman contrast, Azuma drift envelope), then the Jensen sharpening of the P7 Poisson null and Cox overdispersion, then the Petersen/Chapman floor and k-list non-identification for P1.
 
 
+- Progress 2026-09-21 (comparative statics): `Research.P8.certainty_monotone`,
+  `severity_monotone`, `aggregate_monotone` (P8Comparative.lean): the
+  direction of deterrence follows from decreasing differences alone (any
+  benefit shape, any menu, sanction strictly increasing); convexity buys
+  uniqueness and smoothness, not the sign (library scan C19 corrected).
+  R: `morie_deterrence_response()`.
+
 ## P9. Crime recording as a linear map: what counting rules can hide
 
 Recorded counts are a linear image r = M c of true counts, with M_ij the
