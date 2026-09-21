@@ -2,8 +2,8 @@
 
 Rootcoder007, started 2026-09-21. Fresh start: nothing here is
 taken from earlier MRP/VSR work; those results are a later reproducibility
-target inside rmorie, not the seed. Workspace: l14 `~/work/rmorie-hard`
-(branch `hard`), Lean project to be created as `~/work/hardproofs`.
+target inside rmorie, not the seed. Workspace: l14 `~/work/rmorie-research`
+(branch `research`), Lean project to be created as `~/work/researchproofs`.
 
 Selection rule: a problem is on this list if the field itself calls it
 unsolved AND a correct, machine-checked method would change what the field
