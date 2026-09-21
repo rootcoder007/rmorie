@@ -111,10 +111,14 @@ spillover.
   pooling-bias formula share(1)·(mean(1) − mean(0)); 5 theorems, 0 sorry.
   R: `morie_spillover_exposure` (C++ neighbour-count kernel, three-level
   exposure on a stated ring) and `morie_spillover_effects` (adjusted means,
-  spillover, direct, total, pooling bias, positivity check). Next: the
-  Horvitz–Thompson version with known assignment probabilities and its
-  unbiasedness proof; ring mis-specification bound as a function of the
-  d+1 ring's exposure share; TPS street-segment application.
+  spillover, direct, total, pooling bias, positivity check). Same day:
+  `Research.P3.Design.ht_unbiased` / `ht_contrast_unbiased` (Horvitz–Thompson
+  over a finite randomised design, no ignorability needed) with
+  `morie_spillover_ht` and `morie_spillover_exposure_probs` (exact
+  enumeration or Monte Carlo of the design); the test checks exact design
+  unbiasedness over all 56 assignments of a path graph. Next: ring
+  mis-specification bound as a function of the d+1 ring's exposure share;
+  variance of the HT estimator; TPS street-segment application.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
