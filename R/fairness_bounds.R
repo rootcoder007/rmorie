@@ -186,7 +186,10 @@ morie_fairness_compare_groups <- function(p_obs_a, p_obs_b, alpha_max, beta_max)
 #' change is \eqn{\exp((c-1)\beta)} (\code{ratio_is_rescaling}). Coefficients
 #' or odds ratios of a risk score therefore cannot be compared across models
 #' with different covariate sets without a variance normalisation
-#' (Karlson, Holm & Breen 2012).
+#' (Karlson, Holm & Breen 2012). The identity is exact for a probit index
+#' (\code{error_var = 1}: normal plus normal is normal); for the logit the
+#' logistic-plus-normal mixture is not logistic and the factor is the
+#' standard approximation, accurate to a few percent in simulation.
 #'
 #' @param beta Identified coefficient(s) in the full model.
 #' @param omitted_var Latent variance carried by the omitted independent

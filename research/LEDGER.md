@@ -261,8 +261,10 @@ biased is open.
   logit coefficient by sqrt((pi^2/3)/(pi^2/3+v)) with no confounding, so
   odds ratios of a risk score are not comparable across covariate sets
   without a variance normalisation (Karlson-Holm-Breen; library scan A5).
-  R: `morie_logit_rescale()`; the test recovers the factor from two
-  fitted logits on 200,000 simulated cases.
+  R: `morie_logit_rescale()`; the test recovers the factor exactly from two
+  fitted probits on 200,000 simulated cases (normal + normal is normal) and
+  to within a few percent for logits, where the mixture is not logistic and
+  the factor is KHB's approximation.
 
 - Progress 2026-09-21 (ranking): `Research.P5.rank_reversal_exists`,
   `rank_stable_of_gap`, `identified_scores_le` (P5Ranking.lean): a ranking

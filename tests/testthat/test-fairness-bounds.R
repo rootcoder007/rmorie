@@ -83,14 +83,21 @@ test_that("dropping an orthogonal covariate rescales a logit coefficient by sqrt
   expect_equal(r$rescale, sqrt((pi^2 / 3) / (pi^2 / 3 + 1)))
   expect_lt(r$rescale, 1); expect_equal(morie_logit_rescale(0.8, 0)$rescale, 1)
   expect_equal(r$apparent_change, r$odds_ratio_reduced / r$odds_ratio_full, tolerance = 1e-12)
-  # simulation: x and u independent, latent y* = b x + g u + logistic error
+  # simulation with a probit index, where the identity is exact (normal error plus normal omitted
+  # variable is normal); for the logit the logistic-plus-normal mixture is not logistic, so the
+  # factor is only approximate there (Karlson-Holm-Breen use it as such)
   set.seed(11)
   n <- 200000; x <- rnorm(n); u <- rnorm(n); b <- 0.8; g <- 1.2
-  ystar <- b * x + g * u + rlogis(n); y <- as.integer(ystar > 0)
-  full <- stats::glm(y ~ x + u, family = stats::binomial)
-  red <- stats::glm(y ~ x, family = stats::binomial)
+  ystar <- b * x + g * u + rnorm(n); y <- as.integer(ystar > 0)
+  full <- stats::glm(y ~ x + u, family = stats::binomial(link = "probit"))
+  red <- stats::glm(y ~ x, family = stats::binomial(link = "probit"))
   ratio <- unname(stats::coef(red)["x"] / stats::coef(full)["x"])
-  expect_equal(ratio, morie_logit_rescale(b, omitted_var = g^2)$rescale, tolerance = 0.03)
+  expect_equal(ratio, morie_logit_rescale(b, omitted_var = g^2, error_var = 1)$rescale, tolerance = 0.03)
+  # logit: the same experiment lands within a few percent of the factor, not on it
+  ystar <- b * x + g * u + rlogis(n); y <- as.integer(ystar > 0)
+  ratio_l <- unname(stats::coef(stats::glm(y ~ x, family = stats::binomial))["x"] /
+                    stats::coef(stats::glm(y ~ x + u, family = stats::binomial))["x"])
+  expect_lt(abs(ratio_l - morie_logit_rescale(b, omitted_var = g^2)$rescale), 0.1)
   expect_error(morie_logit_rescale(1, -1), "non-negative")
 })
 

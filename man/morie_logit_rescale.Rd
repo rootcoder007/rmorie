@@ -30,7 +30,10 @@ with no confounding at all (\code{Research.P5.reduced_coefficient},
 change is \eqn{\exp((c-1)\beta)} (\code{ratio_is_rescaling}). Coefficients
 or odds ratios of a risk score therefore cannot be compared across models
 with different covariate sets without a variance normalisation
-(Karlson, Holm & Breen 2012).
+(Karlson, Holm & Breen 2012). The identity is exact for a probit index
+(\code{error_var = 1}: normal plus normal is normal); for the logit the
+logistic-plus-normal mixture is not logistic and the factor is the
+standard approximation, accurate to a few percent in simulation.
 }
 \examples{
 morie_logit_rescale(beta = 0.8, omitted_var = 1)
