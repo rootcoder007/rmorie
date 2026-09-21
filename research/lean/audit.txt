@@ -88,3 +88,6 @@
 'Research.P11.clean_upper_attained' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P11.clean_width' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P11.clean_informative' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P11.Pop.mtr_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P11.Pop.mtr_upper' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P11.Pop.mtr_upper_attained' depends on axioms: [propext, Classical.choice, Quot.sound]

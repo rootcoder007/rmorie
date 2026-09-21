@@ -91,3 +91,44 @@ morie_contaminated_bounds <- function(q, p) {
                              "Research.P11.clean_informative")
   out
 }
+
+
+#' Monotone-treatment-response bounds for a binary outcome under two sentences
+#'
+#' If a harsher sentence never lowers the outcome for any one person (monotone
+#' treatment response, Manski 1997), the contrast \eqn{E[y(b)] - E[y(a)]} is
+#' non-negative (\code{Research.P11.Pop.mtr_lower}) and at most
+#' \eqn{P(y=1, z=b) + P(y=0, z=a)}, the share of people whose observed outcome
+#' leaves room for the counterfactual to differ; the upper end is attained
+#' (\code{mtr_upper}, \code{mtr_upper_attained}). Against the assumption-free
+#' interval of \code{\link{morie_sentence_effect_bounds}} (width one, contains
+#' zero) MTR buys a sign at the price of a monotonicity assumption; reversing
+#' the direction gives the bounds for a "never criminogenic" assumption.
+#'
+#' @inheritParams morie_sentence_effect_bounds
+#' @param direction \code{"non-decreasing"} (harsher sentence never lowers the
+#'   outcome) or \code{"non-increasing"}.
+#' @return A list with \code{levels}, \code{bounds} (lower and upper on the
+#'   treatment-minus-comparison contrast), \code{width}, \code{naive_difference}
+#'   and \code{theorems}.
+#' @examples
+#' set.seed(1)
+#' z <- sample(c("community", "custody"), 500, replace = TRUE)
+#' y <- rbinom(500, 1, ifelse(z == "custody", 0.55, 0.35))
+#' morie_sentence_effect_mtr(y, z)$bounds
+#' @export
+morie_sentence_effect_mtr <- function(y, z, weights = NULL, contrast = NULL,
+                                      direction = c("non-decreasing", "non-increasing")) {
+  direction <- match.arg(direction)
+  b <- morie_sentence_effect_bounds(y, z, weights, contrast)
+  trt <- b$levels[["treatment"]]; ctl <- b$levels[["comparison"]]
+  # P(y=1, z=trt) + P(y=0, z=ctl)
+  up <- unname(b$joint[trt] + (b$pz[ctl] - b$joint[ctl]))
+  bounds <- if (direction == "non-decreasing") c(lower = 0, upper = up) else {
+    # non-increasing: the contrast is <= 0 and >= -(P(y=0, z=trt) + P(y=1, z=ctl))
+    c(lower = -unname((b$pz[trt] - b$joint[trt]) + b$joint[ctl]), upper = 0)
+  }
+  list(levels = b$levels, direction = direction, bounds = bounds, width = unname(bounds["upper"] - bounds["lower"]),
+       naive_difference = b$naive_difference,
+       theorems = c("Research.P11.Pop.mtr_lower", "Research.P11.Pop.mtr_upper", "Research.P11.Pop.mtr_upper_attained"))
+}

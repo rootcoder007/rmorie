@@ -44,6 +44,7 @@ signed off.
 | P11 sentencing bounds | `Research.P11.Pop.outcome_bounds`, `lower_attained`, `upper_attained`, `ate_width_one`, `ate_contains_zero` | `morie_sentence_effect_bounds()` |
 | P12 ecological | `Research.P12.within_orth`, `cov_decomp`, `var_decomp`, `var_nonneg`, `ecological_ge` | `morie_ecological_decompose()` |
 | P11 sentencing bounds | `Research.P11.clean_bounds`, `clean_lower_attained`, `clean_upper_attained`, `clean_width`, `clean_informative` | `morie_contaminated_bounds()` |
+| P11 sentencing bounds | `Research.P11.Pop.mtr_lower`, `mtr_upper`, `mtr_upper_attained` | `morie_sentence_effect_mtr()` |
 
 C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),
 `src/morie_spillover.cpp` (treated-neighbour counts on a place network).

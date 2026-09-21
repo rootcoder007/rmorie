@@ -452,8 +452,11 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
 - Progress 2026-09-21 (contamination): `clean_bounds`, attained ends,
   `clean_width` (p/(1-p)) and `clean_informative` (P11Contaminated.lean;
   library scan B2). R: `morie_contaminated_bounds()`.
-- Open: monotone treatment response and monotone treatment selection
-  bounds (Manski sec. 9.3, library scan B4), Imbens-Manski confidence sets (B25); application to OTIS/CPADS
+- Progress 2026-09-21 (MTR): `mtr_lower`, `mtr_upper`, `mtr_upper_attained`
+  (P11Monotone.lean): monotone treatment response gives the contrast the
+  sign and the sharp interval [0, P(y=1,z=b) + P(y=0,z=a)] (library scan
+  B4). R: `morie_sentence_effect_mtr()`.
+- Open: monotone treatment selection (Manski sec. 9.3), Imbens-Manski confidence sets (B25); application to OTIS/CPADS
   custody-vs-community sentences and reconviction.
 
 

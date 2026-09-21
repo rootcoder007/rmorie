@@ -40,3 +40,25 @@ test_that("contaminated-sample bounds: mixture algebra, attained ends, width p/(
   expect_equal(b$lower, c(0, 4 / 9, 0.87 / 0.9)); expect_equal(b$upper, c(0.05 / 0.9, 5 / 9, 1))
   expect_error(morie_contaminated_bounds(0.5, 1), "in \\[0, 1\\)")
 })
+
+test_that("MTR bounds: sign, sharp upper end, and containment of every monotone completion (mtr_lower, mtr_upper, mtr_upper_attained)", {
+  set.seed(3)
+  for (k in 1:100) {
+    n <- 200; z <- sample(c("a", "b"), n, replace = TRUE); y <- rbinom(n, 1, 0.4)
+    m <- morie_sentence_effect_mtr(y, z)
+    expect_equal(unname(m$bounds["lower"]), 0)
+    expect_equal(unname(m$bounds["upper"]), mean(ifelse(z == "b", y, 1 - y)), tolerance = 1e-12)
+    # every monotone completion consistent with the data lies inside
+    ya <- ifelse(z == "a", y, rbinom(n, 1, 0.5) * y)          # z=b: ya <= yb = y
+    yb <- ifelse(z == "b", y, pmax(y, rbinom(n, 1, 0.5)))     # z=a: yb >= ya = y
+    d <- mean(yb) - mean(ya)
+    expect_gte(d, -1e-12); expect_lte(d, m$bounds["upper"] + 1e-12)
+    # the extreme completion attains the upper end
+    expect_equal(mean(ifelse(z == "b", y, 1)) - mean(ifelse(z == "a", y, 0)), unname(m$bounds["upper"]), tolerance = 1e-12)
+    # the MTR interval sits inside the worst-case interval
+    w <- morie_sentence_effect_bounds(y, z)$ate_bounds
+    expect_gte(m$bounds["lower"], w["lower"] - 1e-12); expect_lte(m$bounds["upper"], w["upper"] + 1e-12)
+  }
+  m2 <- morie_sentence_effect_mtr(c(1, 0, 1, 0), c("a", "a", "b", "b"), direction = "non-increasing")
+  expect_equal(unname(m2$bounds["upper"]), 0)
+})

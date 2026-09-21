@@ -90,3 +90,6 @@ open Research.P4
 #print axioms Research.P11.clean_upper_attained
 #print axioms Research.P11.clean_width
 #print axioms Research.P11.clean_informative
+#print axioms Research.P11.Pop.mtr_lower
+#print axioms Research.P11.Pop.mtr_upper
+#print axioms Research.P11.Pop.mtr_upper_attained
