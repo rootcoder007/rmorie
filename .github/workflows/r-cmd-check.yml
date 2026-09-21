@@ -189,7 +189,16 @@ jobs:
             printf 'http://archive.ubuntu.com/ubuntu/\tpriority:1\nhttp://azure.archive.ubuntu.com/ubuntu/\tpriority:2\n' | sudo tee /etc/apt/apt-mirrors.txt >/dev/null
           fi
           sudo apt-get update -qq 2>/dev/null || sudo apt-get update -qq || true
+      # CRAN now ships macOS binaries zstd-compressed (R 4.6 NEWS: "binary
+      # packages can have the extensions .tar.bz2, .tar.xz, .tar.zst and
+      # .tar.zstd"). pak's installer only unpacks gzip, so on macOS the
+      # dependency install dies with "Cannot extract ... bayestestR_0.19.0.tgz,
+      # unknown archive type", and a cache purge does not help because the
+      # whole tree is zstd. Base R reads these archives natively, so macOS
+      # installs dependencies with base R and leaves pak to the platforms
+      # where it works (same fix as morie's r-cmd-check.yml).
       - id: deps
+        if: runner.os != 'macOS'
         continue-on-error: true
         uses: r-lib/actions/setup-r-dependencies@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         env:
@@ -222,7 +231,7 @@ jobs:
             printf 'http://archive.ubuntu.com/ubuntu/\tpriority:1\nhttp://azure.archive.ubuntu.com/ubuntu/\tpriority:2\n' | sudo tee /etc/apt/apt-mirrors.txt >/dev/null
           fi
           sudo apt-get update -qq 2>/dev/null || sudo apt-get update -qq || true
-      - if: steps.deps.outcome == 'failure'
+      - if: runner.os != 'macOS' && steps.deps.outcome == 'failure'
         uses: r-lib/actions/setup-r-dependencies@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
@@ -239,6 +248,27 @@ jobs:
           # / rbounds::psens don't crash with "no package called 'rgenoud'".
           extra-packages: any::rcmdcheck any::rgenoud github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
           needs: check
+
+      - name: Install dependencies with base R (macOS, zstd-capable)
+        if: runner.os == 'macOS'
+        shell: Rscript {0}
+        env:
+          # remotes queries api.github.com for the GitHub-hosted siblings;
+          # without an explicit token it picks up the git credential from
+          # actions/checkout, which the REST API rejects with HTTP 401.
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          install.packages(c("remotes", "rcmdcheck", "rgenoud"))
+          # r-universe carries binaries for the two sibling packages, so take
+          # them from there rather than building the GitHub sources.
+          install.packages(c("rmoriebricklayer", "rmoriedata"),
+                           repos = c("https://rootcoder007.r-universe.dev",
+                                     "https://cloud.r-project.org"))
+          # cmdstanr is not on CRAN; Suggests declares it, so provide it.
+          install.packages("cmdstanr",
+                           repos = c("https://stan-dev.r-universe.dev",
+                                     "https://cloud.r-project.org"))
+          remotes::install_deps(dependencies = TRUE, upgrade = "never")
 
       # Needs R, so it runs after setup-r; before it, Rscript does not
       # exist on the runner and the step died with exit 127.
