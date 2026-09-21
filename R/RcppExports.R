@@ -360,6 +360,10 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
     .Call(`_rmorie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
 }
 
+.morie_spillover_exposure_cpp <- function(treated, from, to) {
+    .Call(`_rmorie_morie_spillover_exposure_cpp`, treated, from, to)
+}
+
 #' Binary C-SVC via SMO (compiled)
 #' @noRd
 morie_svc_train_cpp <- function(X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter) {

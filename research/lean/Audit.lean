@@ -21,3 +21,6 @@ open Research.P4
 #print axioms Research.P1.petersen_upper_attained
 #print axioms Research.P1.true_rate_bounds
 #print axioms Research.P1.dark_figure_bounds
+#print axioms Research.P3.Model.exposure_adjustment
+#print axioms Research.P3.Model.misspecified_exposure_bias
+#print axioms Research.P3.Model.pooled_mean_mixture

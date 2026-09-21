@@ -994,6 +994,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_spillover_exposure_cpp
+List morie_spillover_exposure_cpp(IntegerVector treated, IntegerVector from, IntegerVector to);
+RcppExport SEXP _rmorie_morie_spillover_exposure_cpp(SEXP treatedSEXP, SEXP fromSEXP, SEXP toSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type treated(treatedSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type from(fromSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type to(toSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_spillover_exposure_cpp(treated, from, to));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_svc_train_cpp
 List morie_svc_train_cpp(NumericMatrix X, NumericVector y, double C, int kernel_type, double gamma, double coef0, double degree, double tol, int max_iter);
 RcppExport SEXP _rmorie_morie_svc_train_cpp(SEXP XSEXP, SEXP ySEXP, SEXP CSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP, SEXP tolSEXP, SEXP max_iterSEXP) {
@@ -1397,6 +1410,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},
     {"_rmorie_morie_spatial_classical_mds_cpp", (DL_FUNC) &_rmorie_morie_spatial_classical_mds_cpp, 2},
     {"_rmorie_morie_spatial_wordfish_omega_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_wordfish_omega_update_cpp, 5},
+    {"_rmorie_morie_spillover_exposure_cpp", (DL_FUNC) &_rmorie_morie_spillover_exposure_cpp, 3},
     {"_rmorie_morie_svc_train_cpp", (DL_FUNC) &_rmorie_morie_svc_train_cpp, 9},
     {"_rmorie_morie_svr_train_cpp", (DL_FUNC) &_rmorie_morie_svr_train_cpp, 10},
     {"_rmorie_morie_svm_decision_cpp", (DL_FUNC) &_rmorie_morie_svm_decision_cpp, 8},
