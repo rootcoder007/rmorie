@@ -26,3 +26,10 @@ open Research.P4
 #print axioms Research.P3.Model.pooled_mean_mixture
 #print axioms Research.P7.gini_zero_decomposition
 #print axioms Research.P7.poisson_zero_prob
+#print axioms Research.P2.rate_bounds
+#print axioms Research.P2.disparity_bounds
+#print axioms Research.P2.disparity_sign_identified
+#print axioms Research.P6.aggregate_not_identifying
+#print axioms Research.P6.invariance_not_necessary
+#print axioms Research.P8.constant_dimension_not_identified
+#print axioms Research.P8.corner_design_identified
