@@ -16,6 +16,7 @@
 #   Research.P4.naive_share_increasing  lamA > lamB and 0 < x < 1  =>  x < x'
 #   Research.P4.naiveShare_tendsto_one  lamA > lamB  =>  x_n -> 1 for every start
 #   Research.P4.corrected_share_tendsto corrected update  =>  x_n -> lamA/(lamA+lamB)
+#   Research.P4.naiveShare_rate_bound   x_N - x_0 <= (lamA-lamB)/4 * sum_{k<N} 1/(c0 + k min(lamA,lamB))
 #
 # What the theorems do NOT say: that a real department's discovery process
 # is this model. The mean-field recursion is the expected-count dynamics;
@@ -189,6 +190,42 @@ morie_feedback_loop_sim <- function(lam_a, lam_b, c_a0, c_b0, n_steps = 1000L,
     final = paths[, n_steps + 1L],
     limit = morie_feedback_loop_limit(lam_a, lam_b, c_a0, c_b0, update, rho)
   )
+}
+
+#' Proved upper bound on how far the naive loop can move in N steps
+#'
+#' The one-step gain of the naive recursion is at most
+#' \eqn{(\lambda_A-\lambda_B)/4} divided by the current total count, and
+#' the total count grows by at least \eqn{\min(\lambda_A,\lambda_B)} per
+#' step, so after \eqn{N} steps the share has moved by at most
+#' \deqn{\frac{\lambda_A-\lambda_B}{4} \sum_{k<N} \frac{1}{c_0 + k\min(\lambda_A,\lambda_B)},}
+#' a harmonic sum that grows like \eqn{\log N}
+#' (\code{Research.P4.naiveShare_rate_bound}). Use it to state the
+#' horizon over which a feedback loop can matter: if the bound is small,
+#' the loop cannot have moved the allocation, whatever the limit says.
+#'
+#' @inheritParams morie_feedback_loop_meanfield
+#' @param n_steps Horizon \eqn{N}.
+#' @return A list with \code{bound} (the maximum possible increase of the
+#'   share to A over \code{n_steps} steps, for \code{lam_a > lam_b}),
+#'   \code{share_a_max} (\code{c_a0/(c_a0+c_b0) + bound}, capped at 1) and
+#'   \code{theorem}.
+#' @examples
+#' morie_feedback_loop_bound(0.21, 0.20, 1, 99, n_steps = 2e6)$bound   # about 0.10
+#' morie_feedback_loop_bound(0.3, 0.2, 10, 10, n_steps = 2e4)$bound
+#' @export
+morie_feedback_loop_bound <- function(lam_a, lam_b, c_a0, c_b0, n_steps = 1000L) {
+  .morie_feedback_check(lam_a, lam_b, c_a0, c_b0, 0)
+  if (lam_a <= lam_b) {
+    stop("the bound is stated for lam_a > lam_b; swap the regions otherwise", call. = FALSE)
+  }
+  n_steps <- as.integer(n_steps)
+  if (is.na(n_steps) || n_steps < 0L) stop("n_steps must be a non-negative integer", call. = FALSE)
+  k <- seq_len(n_steps) - 1
+  bound <- (lam_a - lam_b) / 4 * sum(1 / (c_a0 + c_b0 + k * min(lam_a, lam_b)))
+  x0 <- c_a0 / (c_a0 + c_b0)
+  list(bound = bound, share_a_max = min(1, x0 + bound),
+       theorem = "Research.P4.naiveShare_rate_bound")
 }
 
 #' Internal: argument checks shared by the feedback-loop functions

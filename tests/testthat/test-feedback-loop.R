@@ -87,3 +87,18 @@ test_that("argument checks refuse what the theorems do not cover", {
   expect_error(morie_feedback_loop_sim(1.5, 0.2, 1, 1), "<= 1")
   expect_error(morie_feedback_loop_limit("a", 0.2, 1, 1), "single non-missing number")
 })
+
+test_that("the proved rate bound holds along the recursion (naiveShare_rate_bound)", {
+  set.seed(1)
+  for (n in c(10L, 1000L, 100000L)) {
+    mf <- morie_feedback_loop_meanfield(0.3, 0.2, 10, 10, n_steps = n)
+    b <- morie_feedback_loop_bound(0.3, 0.2, 10, 10, n_steps = n)
+    expect_lte(tail(mf$share_a, 1) - mf$share_a[1], b$bound)
+    expect_lte(tail(mf$share_a, 1), b$share_a_max)
+  }
+  # the 1/99 case: the bound explains why two million steps cannot move the share far
+  b <- morie_feedback_loop_bound(0.21, 0.20, 1, 99, n_steps = 2e6)
+  expect_lt(b$bound, 0.15)
+  expect_equal(b$theorem, "Research.P4.naiveShare_rate_bound")
+  expect_error(morie_feedback_loop_bound(0.2, 0.3, 1, 1), "swap")
+})
