@@ -55,3 +55,25 @@ test_that("argument checks", {
   expect_error(morie_fairness_base_rate_bounds(0.5, 0.6, 0.5), "below 1")
   expect_error(morie_fairness_true_rate(0.5, 0.6, 0.5), "alpha \\+ beta")
 })
+
+test_that("group comparison is decided exactly when the intervals are disjoint (compare_decided / compare_undecided)", {
+  set.seed(1)
+  d <- morie_fairness_compare_groups(0.35, 0.55, alpha_max = 0.05, beta_max = 0.20)
+  expect_true(d$decided); expect_equal(d$order, "a < b")
+  # every admissible noise pair keeps the order
+  for (i in 1:200) {
+    aA <- stats::runif(1, 0, 0.05); bA <- stats::runif(1, 0, 0.20)
+    aB <- stats::runif(1, 0, 0.05); bB <- stats::runif(1, 0, 0.20)
+    pA <- morie_fairness_true_rate(0.35, aA, bA); pB <- morie_fairness_true_rate(0.55, aB, bB)
+    expect_lt(pA, pB)
+  }
+  u <- morie_fairness_compare_groups(0.35, 0.55, alpha_max = 0.05, beta_max = 0.40)
+  expect_false(u$decided)
+  # and the witnesses from compare_undecided reverse the order
+  pA_hi <- 0.35 / (1 - 0.40); pB_lo <- (0.55 - 0.05) / (1 - 0.05)
+  expect_gt(pA_hi, pB_lo)
+  # breakdown beta restores decidability just below it
+  expect_false(is.na(u$breakdown_beta_max))
+  r <- morie_fairness_compare_groups(0.35, 0.55, alpha_max = 0.05, beta_max = u$breakdown_beta_max - 1e-6)
+  expect_true(r$decided)
+})

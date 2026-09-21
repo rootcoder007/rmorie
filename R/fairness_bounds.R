@@ -11,6 +11,8 @@
 #   Research.P5.true_base_rate_bounds  with noise alpha in [0, a], beta in [0, b], a + b < 1:
 #                                      (p_obs - a)/(1 - a) <= p <= p_obs/(1 - b)
 #   Research.P5.lower_bound_attained / upper_bound_attained: both ends are reached
+#   Research.P5.compare_decided        disjoint intervals order the true rates for every admissible noise
+#   Research.P5.compare_undecided      overlapping intervals admit noise pairs in either order
 #
 # The theorems are arithmetic on rates; whether the noise boxes are the
 # right ones for a jurisdiction is a substantive claim no proof supplies.
@@ -125,4 +127,49 @@ morie_fairness_true_rate <- function(p_obs, alpha, beta) {
     stop("alpha and beta must be non-negative with alpha + beta < 1", call. = FALSE)
   }
   (p_obs - alpha) / (1 - alpha - beta)
+}
+
+#' Can two groups' true base rates be ordered under label noise?
+#'
+#' Applies the sharp intervals of \code{\link{morie_fairness_base_rate_bounds}}
+#' to two recorded rates. When the intervals are disjoint the order of the
+#' true rates holds for every admissible noise pair
+#' (\code{Research.P5.compare_decided}); when they overlap there are
+#' admissible noise pairs that put either group first, so the data cannot
+#' settle the order without narrower noise boxes
+#' (\code{Research.P5.compare_undecided}). The function also reports the
+#' largest \code{beta_max} (holding \code{alpha_max}) at which the order
+#' would become decidable, a breakdown value.
+#'
+#' @param p_obs_a,p_obs_b Recorded base rates of the two groups.
+#' @inheritParams morie_fairness_base_rate_bounds
+#' @return A list with \code{decided} (logical), \code{order} (\code{"a < b"},
+#'   \code{"b < a"} or \code{"undecided"}), the two intervals, and
+#'   \code{breakdown_beta_max} (the largest \code{beta_max} that would make the
+#'   comparison decidable at the same \code{alpha_max}, \code{NA} if none).
+#' @examples
+#' morie_fairness_compare_groups(0.35, 0.55, alpha_max = 0.05, beta_max = 0.20)
+#' morie_fairness_compare_groups(0.35, 0.55, alpha_max = 0.05, beta_max = 0.40)
+#' @export
+morie_fairness_compare_groups <- function(p_obs_a, p_obs_b, alpha_max, beta_max) {
+  ba <- morie_fairness_base_rate_bounds(p_obs_a, alpha_max, beta_max)
+  bb <- morie_fairness_base_rate_bounds(p_obs_b, alpha_max, beta_max)
+  order <- if (ba$upper < bb$lower) "a < b" else if (bb$upper < ba$lower) "b < a" else "undecided"
+  # breakdown: with alpha_max fixed, the upper bound is p_obs / (1 - beta); the
+  # comparison a < b needs p_obs_a / (1 - beta) < (p_obs_b - alpha_max) / (1 - alpha_max)
+  breakdown <- NA_real_
+  lo_b <- (p_obs_b - alpha_max) / (1 - alpha_max)
+  lo_a <- (p_obs_a - alpha_max) / (1 - alpha_max)
+  if (p_obs_a < p_obs_b && lo_b > 0) {
+    b <- 1 - p_obs_a / lo_b
+    if (b > 0) breakdown <- min(b, 1 - alpha_max - 1e-12)
+  } else if (p_obs_b < p_obs_a && lo_a > 0) {
+    b <- 1 - p_obs_b / lo_a
+    if (b > 0) breakdown <- min(b, 1 - alpha_max - 1e-12)
+  }
+  list(decided = order != "undecided", order = order,
+       interval_a = c(lower = ba$lower, upper = ba$upper),
+       interval_b = c(lower = bb$lower, upper = bb$upper),
+       breakdown_beta_max = breakdown,
+       theorem = if (order != "undecided") "Research.P5.compare_decided" else "Research.P5.compare_undecided")
 }

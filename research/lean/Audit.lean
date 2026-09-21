@@ -33,3 +33,5 @@ open Research.P4
 #print axioms Research.P6.invariance_not_necessary
 #print axioms Research.P8.constant_dimension_not_identified
 #print axioms Research.P8.corner_design_identified
+#print axioms Research.P5.compare_decided
+#print axioms Research.P5.compare_undecided
