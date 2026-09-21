@@ -256,6 +256,13 @@ biased is open.
   R: `morie_logit_rescale()`; the test recovers the factor from two
   fitted logits on 200,000 simulated cases.
 
+- Progress 2026-09-21 (ranking): `Research.P5.rank_reversal_exists`,
+  `rank_stable_of_gap`, `identified_scores_le` (P5Ranking.lean): a ranking
+  by noisy scores has resolution exactly twice the noise half-width, so
+  the Baldus proportionality-review ordering (intervals covering most of
+  [0,1]) identifies no pair (library scan A3). R:
+  `morie_ranking_resolution()`.
+
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
 Hirschi and Gottfredson's invariance claim is contradicted by cross-national

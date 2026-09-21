@@ -29,3 +29,4 @@ import Researchproofs.P5Rescale
 import Researchproofs.P2RelativeRisk
 import Researchproofs.P5Ranking
 import Researchproofs.P1Hierarchy
+import Researchproofs.P5Hazard

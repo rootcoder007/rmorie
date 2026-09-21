@@ -108,3 +108,6 @@ open Research.P4
 #print axioms Research.P1.offence_count_bounds
 #print axioms Research.P1.offence_count_eq
 #print axioms Research.P1.category_not_identified
+#print axioms Research.P5.survivor_hazard_mono
+#print axioms Research.P5.hr2_gt_one_of_depletion
+#print axioms Research.P5.hr2_witness

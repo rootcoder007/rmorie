@@ -208,3 +208,44 @@ morie_logit_rescale <- function(beta, omitted_var, error_var = pi^2 / 3) {
        theorems = c("Research.P5.rescale_lt_one", "Research.P5.rescale_eq_one_iff",
                     "Research.P5.reduced_coefficient", "Research.P5.ratio_is_rescaling"))
 }
+
+
+#' Resolution of a ranking built from noisy risk scores
+#'
+#' Two people with true scores \eqn{t_1 < t_2} are ranked by estimates that
+#' noise can move by up to \eqn{\delta} each. Whenever the true gap is below
+#' \eqn{2\delta} an admissible noise pair reverses the order
+#' (\code{Research.P5.rank_reversal_exists}); whenever it exceeds
+#' \eqn{2\delta} no admissible noise can (\code{rank_stable_of_gap}). The
+#' resolution of a ranking is therefore twice the noise half-width; on a
+#' probability scale with interval half-widths near one half no pair has an
+#' identified order (\code{identified_scores_le}). Given point estimates and
+#' their half-widths, the function reports which pairs are identified and the
+#' share of pairs that are not (the Baldus proportionality-review situation
+#' in Weisburd & Britt ch. 1, where most intervals covered nearly all of [0, 1]).
+#'
+#' @param estimate Estimated scores (probabilities).
+#' @param half_width Half-width of the interval around each estimate (one
+#'   number, recycled, or one per estimate).
+#' @return A list with \code{n_pairs}, \code{identified_pairs} (a logical
+#'   matrix: order identified if the estimates differ by more than the sum of
+#'   the two half-widths), \code{share_unidentified}, \code{resolution}
+#'   (twice the largest half-width) and \code{theorems}.
+#' @examples
+#' morie_ranking_resolution(c(0.2, 0.35, 0.8), half_width = c(0.1, 0.1, 0.05))
+#' @export
+morie_ranking_resolution <- function(estimate, half_width) {
+  n <- length(estimate)
+  if (n < 2) stop("need at least two scores", call. = FALSE)
+  half_width <- rep_len(half_width, n)
+  if (any(half_width < 0)) stop("half_width must be non-negative", call. = FALSE)
+  gap <- abs(outer(estimate, estimate, "-"))
+  tol <- outer(half_width, half_width, "+")
+  ident <- gap > tol
+  diag(ident) <- NA
+  pairs <- ident[upper.tri(ident)]
+  list(n_pairs = length(pairs), identified_pairs = ident,
+       share_unidentified = mean(!pairs), resolution = 2 * max(half_width),
+       theorems = c("Research.P5.rank_reversal_exists", "Research.P5.rank_stable_of_gap",
+                    "Research.P5.identified_scores_le"))
+}

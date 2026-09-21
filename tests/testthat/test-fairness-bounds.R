@@ -93,3 +93,24 @@ test_that("dropping an orthogonal covariate rescales a logit coefficient by sqrt
   expect_equal(ratio, morie_logit_rescale(b, omitted_var = g^2)$rescale, tolerance = 0.03)
   expect_error(morie_logit_rescale(1, -1), "non-negative")
 })
+
+test_that("ranking resolution: reversal below 2 delta, stability above (rank_reversal_exists, rank_stable_of_gap)", {
+  set.seed(6)
+  for (k in 1:200) {
+    t1 <- runif(1); t2 <- t1 + runif(1, 0, 0.5); d <- runif(1, 0, 0.3)
+    if (t2 - t1 < 2 * d) {
+      expect_lt(t2 - d, t1 + d)                       # admissible noise reverses the order
+    } else if (t2 - t1 > 2 * d) {
+      e1 <- runif(1, -d, d); e2 <- runif(1, -d, d)
+      expect_lt(t1 + e1, t2 + e2)
+    }
+  }
+  r <- morie_ranking_resolution(c(0.2, 0.35, 0.8), half_width = c(0.1, 0.1, 0.05))
+  expect_false(r$identified_pairs[1, 2]); expect_true(r$identified_pairs[1, 3]); expect_true(r$identified_pairs[2, 3])
+  expect_equal(r$share_unidentified, 1 / 3)
+  expect_equal(r$resolution, 0.2)
+  # Baldus-type situation: intervals covering most of [0, 1] identify no pair
+  b <- morie_ranking_resolution(runif(20), half_width = 0.45)
+  expect_equal(b$share_unidentified, 1)
+  expect_error(morie_ranking_resolution(0.5, 0.1), "at least two")
+})

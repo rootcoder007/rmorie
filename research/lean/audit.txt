@@ -106,3 +106,6 @@
 'Research.P1.offence_count_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P1.offence_count_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P1.category_not_identified' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P5.survivor_hazard_mono' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P5.hr2_gt_one_of_depletion' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P5.hr2_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
