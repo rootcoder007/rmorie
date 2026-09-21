@@ -399,3 +399,22 @@ aggregate clearance rate is not a performance measure.
   non-identification statement with a second source as the fix);
   application to TPS MCI 2014-2024 robbery/theft and assault ratios with
   CSUS victimisation as the second source (library scan A12, A13, A15).
+
+
+## P10. Near-repeat contagion: what a branching ratio commits you to
+
+Self-exciting (Hawkes) models of near-repeat victimisation (Mohler et al.;
+D'Orsogna & Perc review) report a branching ratio n. The offspring of one
+background event form a Galton-Watson tree, so n fixes the expected
+cluster size, the stationary rate and the share of "contagious" events.
+
+- Progress 2026-09-21: `Research.P10` (P10Contagion.lean):
+  `generation_mean`, `cluster_size_of_lt_one` (1/(1-n)),
+  `stationary_rate` (mu/(1-n)), `cluster_size_diverges_of_ge_one`,
+  `endogeneity_share` (= n). R: `morie_contagion_branching()`; the test
+  simulates Poisson-offspring trees and recovers 1/(1-n).
+- Open: extinction probability as the smallest fixed point of the PGF
+  (needs convexity of the PGF; GS Theorem 5.4.5), the Bartlett
+  non-identification of contagion vs heterogeneity from the K-function
+  (library scan B20), and an application to TPS break-and-enter with
+  constant vs KDE background (A17).

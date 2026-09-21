@@ -63,3 +63,8 @@ open Research.P4
 #print axioms Research.P9.total_le_of_colSubstochastic
 #print axioms Research.P9.reclassification_moves_ratio
 #print axioms Research.P9.detection_rate_rises
+#print axioms Research.P10.generation_mean
+#print axioms Research.P10.cluster_size_of_lt_one
+#print axioms Research.P10.stationary_rate
+#print axioms Research.P10.cluster_size_diverges_of_ge_one
+#print axioms Research.P10.endogeneity_share

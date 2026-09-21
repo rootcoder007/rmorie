@@ -61,3 +61,8 @@
 'Research.P9.total_le_of_colSubstochastic' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P9.reclassification_moves_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P9.detection_rate_rises' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P10.generation_mean' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P10.cluster_size_of_lt_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P10.stationary_rate' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P10.cluster_size_diverges_of_ge_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P10.endogeneity_share' depends on axioms: [propext, Classical.choice, Quot.sound]
