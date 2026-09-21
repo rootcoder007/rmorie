@@ -217,6 +217,15 @@ counts are sparse relative to units.
 - Cracked means: `morie_concentration_excess()` with the proved null
   correction, so a "law" can be tested rather than eyeballed.
 - rmorie now: no concentration module.
+- Progress 2026-09-21: Lean `Research.P7` (research/lean/P7Concentration.lean):
+  the exact identity G(all) = z + (1−z)·G(positive places) for the Gini of
+  any count vector, and P(Poisson(μ)=0) = e^{−μ}; 2 theorems, 0 sorry. R:
+  `morie_concentration_gini`, `morie_concentration_decompose` (zero share,
+  positive-place Gini, Poisson-null zero share e^{−μ}, excess zero share).
+  This answers JQC question (4) directly: how much a "law" rests on
+  crime-free places is a mechanical function of the mean count. Next:
+  the expected Gini under the Poisson null (or a proved bound), the
+  rank-persistence null, and a Toronto street-segment application.
 
 ## P8. Deterrence: certainty, severity and celerity cannot be varied alone
 
