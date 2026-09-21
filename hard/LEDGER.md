@@ -1,6 +1,6 @@
 # The hardest open problems in criminology: a working ledger
 
-Anthropic + Rootcoder007, started 2026-09-21. Fresh start: nothing here is
+Rootcoder007, started 2026-09-21. Fresh start: nothing here is
 taken from earlier MRP/VSR work; those results are a later reproducibility
 target inside rmorie, not the seed. Workspace: l14 `~/work/rmorie-hard`
 (branch `hard`), Lean project to be created as `~/work/hardproofs`.
