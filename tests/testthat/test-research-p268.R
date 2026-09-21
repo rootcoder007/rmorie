@@ -141,3 +141,24 @@ test_that("random mixing makes per-offender-group rates load on victim share; pa
   expect_gt(r$ratio_to_null[1], r$ratio_to_null[2])
   expect_error(morie_interracial_rates(c(AB = 1), c(A = 1, B = 1)), "offender_on_victim")
 })
+
+test_that("probability of necessity: Frechet bounds contain every joint, ends attained (necessity_bounds)", {
+  set.seed(12)
+  for (k in 1:200) {
+    n <- 500; a <- runif(1); b <- runif(1)
+    pn <- morie_probability_of_necessity(a, b)
+    # random joint with marginals near (a, b): copula by a shared uniform
+    u <- runif(n); rho <- runif(1, -1, 1)
+    A <- u < a; B <- if (rho >= 0) (u < b) else ((1 - u) < b)
+    share <- mean(A & !B)
+    expect_gte(share, max(0, mean(A) - mean(B)) - 1e-12); expect_lte(share, min(mean(A), 1 - mean(B)) + 1e-12)
+    expect_gte(pn$necessary_share_bounds["lower"], 0); expect_lte(pn$necessary_share_bounds["upper"], 1)
+  }
+  # nested (monotone) events attain a - b; disjoint events attain a
+  u <- runif(2000); A <- u < 0.6; B <- u < 0.4
+  expect_equal(mean(A & !B), mean(A) - mean(B), tolerance = 1e-12)
+  A2 <- u < 0.3; B2 <- u > 0.7
+  expect_equal(mean(A2 & !B2), mean(A2), tolerance = 1e-12)
+  expect_equal(morie_probability_of_necessity(0.6, 0.4)$pn_monotone, 1 / 3)
+  expect_error(morie_probability_of_necessity(1.2, 0.1), "in \\[0, 1\\]")
+})

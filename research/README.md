@@ -46,6 +46,7 @@ signed off.
 | P7 concentration | `Research.P7.log_le_S`, `S_le_log`, `expectedDistinct_bounds` | `morie_concentration_distinct_growth()` |
 | P8 deterrence | `Research.P8.constant_dimension_not_identified`, `identified_iff_injective`, `corner_design_identified` | `morie_deterrence_design_check()` |
 | P8 deterrence | `Research.P8.certainty_monotone`, `severity_monotone`, `aggregate_monotone` | `morie_deterrence_response()` |
+| P8 deterrence | `Research.P8.necessity_bounds`, `necessity_of_monotone`, `necessity_of_disjoint` | `morie_probability_of_necessity()` |
 | P9 recording map | `Research.P9.total_invariant_of_colStochastic`, `total_le_of_colSubstochastic`, `reclassification_moves_ratio`, `detection_rate_rises` | `morie_recording_map()`, `morie_detection_rate_shift()` |
 | P10 contagion | `Research.P10.generation_mean`, `cluster_size_of_lt_one`, `stationary_rate`, `cluster_size_diverges_of_ge_one`, `endogeneity_share` | `morie_contagion_branching()` |
 | P11 sentencing bounds | `Research.P11.Pop.outcome_bounds`, `lower_attained`, `upper_attained`, `ate_width_one`, `ate_contains_zero` | `morie_sentence_effect_bounds()` |

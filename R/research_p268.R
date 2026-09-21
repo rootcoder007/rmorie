@@ -319,3 +319,36 @@ morie_interracial_rates <- function(offences, population) {
     (\(d) { attr(d, "theorems") <- c("Research.P2.rate_per_offender_group", "Research.P2.null_slope_positive",
                                       "Research.P2.dyad_ratio", "Research.P2.pair_exposure_rate_constant"); d })()
 }
+
+
+#' Probability of necessity: bounds for attributing an outcome to a sanction
+#'
+#' "Was the sanction necessary for this person's desistance?" With
+#' \eqn{a = P(y_x = 1)} and \eqn{b = P(y_{x'} = 1)} known (an experiment, or
+#' exogenous assignment), the share of people for whom the outcome occurs
+#' with the sanction and not without it lies in
+#' \eqn{[\max(0, a - b), \min(a, 1 - b)]}, both ends attained, and equals
+#' \eqn{a - b} exactly under monotonicity (nobody desists only without the
+#' sanction) (\code{Research.P8.necessity_bounds}, \code{necessity_of_monotone},
+#' \code{necessity_of_disjoint}). Dividing by \eqn{a} gives Pearl's bounds on
+#' the probability of necessity and the excess-risk-ratio identity under
+#' monotonicity (Pearl, Causality 2e, Thms 9.2.10-9.2.15).
+#'
+#' @param p_treated Outcome probability with the sanction, \eqn{a}.
+#' @param p_control Outcome probability without it, \eqn{b}.
+#' @return A list with \code{necessary_share_bounds}, \code{pn_bounds}
+#'   (divided by \eqn{a}), \code{pn_monotone} (the excess risk ratio),
+#'   \code{identified} (whether the interval is a point) and \code{theorems}.
+#' @examples
+#' morie_probability_of_necessity(p_treated = 0.6, p_control = 0.4)
+#' @export
+morie_probability_of_necessity <- function(p_treated, p_control) {
+  a <- p_treated; b <- p_control
+  if (any(c(a, b) < 0 | c(a, b) > 1) || length(a) != 1L || length(b) != 1L) stop("probabilities must be single numbers in [0, 1]", call. = FALSE)
+  lo <- max(0, a - b); hi <- min(a, 1 - b)
+  list(necessary_share_bounds = c(lower = lo, upper = hi),
+       pn_bounds = if (a > 0) c(lower = lo / a, upper = hi / a) else c(lower = NA_real_, upper = NA_real_),
+       pn_monotone = if (a > 0) (a - b) / a else NA_real_,
+       identified = isTRUE(all.equal(lo, hi)),
+       theorems = c("Research.P8.necessity_bounds", "Research.P8.necessity_of_monotone", "Research.P8.necessity_of_disjoint"))
+}

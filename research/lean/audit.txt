@@ -116,3 +116,6 @@
 'Research.P2.null_slope_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P2.dyad_ratio' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Research.P2.pair_exposure_rate_constant' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P8.necessity_bounds' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P8.necessity_of_monotone' depends on axioms: [propext, Classical.choice, Quot.sound]
+'Research.P8.necessity_of_disjoint' depends on axioms: [propext, Classical.choice, Quot.sound]

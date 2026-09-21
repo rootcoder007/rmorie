@@ -449,6 +449,13 @@ Three readers went through the criminology, statistics and mathematics shelves o
   uniqueness and smoothness, not the sign (library scan C19 corrected).
   R: `morie_deterrence_response()`.
 
+- Progress 2026-09-21 (necessity): `Research.P8.necessity_bounds`,
+  `necessity_of_monotone`, `necessity_of_disjoint` (P8Necessity.lean):
+  the share for whom the sanction was necessary lies in
+  [max(0, a-b), min(a, 1-b)] with both ends attained and equals a-b under
+  monotonicity, giving Pearl's PN bounds and the excess-risk-ratio
+  identity (library scan B13). R: `morie_probability_of_necessity()`.
+
 ## P9. Crime recording as a linear map: what counting rules can hide
 
 Recorded counts are a linear image r = M c of true counts, with M_ij the
