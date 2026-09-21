@@ -1,4 +1,4 @@
-# rmorie 1.3.1 - 2026-09-21
+# rmorie 1.3.2 - 2026-09-21
 
 ## Clustering
 
@@ -8,6 +8,8 @@ it: 6 s and 2.8 GB at n = 10,000 for a 4 ms job, and out of memory at
 n = 20,000. `morie_cluster()` gains `iter_max` for the k-means iteration
 cap. One example and one test used R 4.4 idioms (`%||%`,
 `psmirnov(alternative =)`) on a package that declares R >= 4.3.0.
+
+# rmorie 1.3.1 - 2026-09-21
 
 ## Canadian legal data: A2AJ and CanLII clients
 
