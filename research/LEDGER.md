@@ -144,6 +144,15 @@ biased is open.
   for each metric given noise bounds, plus a proof that the intervals are
   sharp, applied to COMPAS-style data.
 - rmorie now: no fairness module.
+- Progress 2026-09-21: Lean `Research.P5` (research/lean/P5Fairness.lean):
+  Chouldechova's identity on a confusion table, the impossibility theorem
+  as its corollary, the recorded-rate model p_obs = p(1-β) + (1-p)α, the
+  sharp interval for the true base rate under noise boxes [0,ᾱ]×[0,β̄]
+  with both ends attained, and exact inversion for known noise; 6
+  theorems, 0 sorry. R: `morie_fairness_rates/_implied_fpr/
+  _base_rate_bounds/_true_rate`. Next: (iii) which group comparisons stay
+  decidable when the two intervals overlap, and bounds on group-wise FPR/FNR
+  (not only base rates) under the same noise boxes.
 
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
