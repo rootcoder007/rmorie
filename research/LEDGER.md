@@ -179,9 +179,11 @@ biased is open.
   sharp interval for the true base rate under noise boxes [0,ᾱ]×[0,β̄]
   with both ends attained, and exact inversion for known noise; 6
   theorems, 0 sorry. R: `morie_fairness_rates/_implied_fpr/
-  _base_rate_bounds/_true_rate`. Next: (iii) which group comparisons stay
-  decidable when the two intervals overlap, and bounds on group-wise FPR/FNR
-  (not only base rates) under the same noise boxes.
+  _base_rate_bounds/_true_rate`. (iii) done the same day: `Research.P5.compare_decided`
+  (disjoint intervals order the true rates for every admissible noise) and
+  `compare_undecided` (overlapping intervals admit either order), with
+  `morie_fairness_compare_groups` reporting the breakdown β̄. Next: bounds
+  on group-wise FPR/FNR (not only base rates) under the same noise boxes.
 
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
