@@ -15,3 +15,9 @@ open Research.P4
 #print axioms Research.P5.lower_bound_attained
 #print axioms Research.P5.upper_bound_attained
 #print axioms Research.P5.trueRate_observedRate
+#print axioms Research.P1.TwoSource.petersen_identity
+#print axioms Research.P1.TwoSource.petersen_bounds
+#print axioms Research.P1.petersen_lower_attained
+#print axioms Research.P1.petersen_upper_attained
+#print axioms Research.P1.true_rate_bounds
+#print axioms Research.P1.dark_figure_bounds

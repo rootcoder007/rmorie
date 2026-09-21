@@ -1,0 +1,122 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Research P1: the dark figure of crime as a partial-identification problem.
+#
+# Every identity and bound here is a machine-checked theorem in
+# research/lean/P1DarkFigure.lean (Lean 4 + Mathlib, 0 sorry, standard
+# axioms only), building on research/lean/P5Fairness.lean:
+#
+#   Research.P1.TwoSource.petersen_identity  N = theta * n1 * n2 / m
+#   Research.P1.TwoSource.lincoln_petersen   theta = 1  =>  N = n1 * n2 / m
+#   Research.P1.TwoSource.petersen_bounds    theta in [1/kappa, kappa]  =>
+#                                            n1 n2 / (kappa m) <= N <= kappa n1 n2 / m
+#   Research.P1.petersen_lower_attained / petersen_upper_attained: both ends reached
+#   Research.P1.true_rate_bounds             max(r, (v_obs - a)/(1 - a)) <= v <= v_obs/(1 - b)
+#   Research.P1.dark_figure_bounds           the same interval shifted by r, floored at 0
+#
+# The theorems are about expected counts and rates. Whether two lists are
+# independent, or what the misreporting boxes are, is a claim about the
+# world that no proof supplies; the functions take those as arguments.
+
+#' Two-source (capture-recapture) count with a dependence box
+#'
+#' Two lists of the same events (police records and a survey, hospital or
+#' NGO register) of sizes \code{n1} and \code{n2} share \code{m} events.
+#' Under independence the true count is the Lincoln-Petersen ratio
+#' \eqn{n_1 n_2 / m}. Independence is rarely credible: events recorded by
+#' the police are often more (or less) likely to reach a second list. With
+#' the dependence factor \eqn{\theta} only known to lie in
+#' \eqn{[1/\kappa, \kappa]}, the true count lies in
+#' \eqn{[n_1 n_2/(\kappa m),\ \kappa n_1 n_2/m]} and both ends are
+#' attainable (\code{Research.P1.TwoSource.petersen_bounds}).
+#'
+#' @param n1,n2 Sizes of the two lists; positive.
+#' @param m Number of events on both lists; positive and at most
+#'   \code{min(n1, n2)}.
+#' @param kappa Largest credible dependence factor, at least 1;
+#'   \code{kappa = 1} asserts independence.
+#' @param chapman If \code{TRUE}, also return Chapman's small-sample
+#'   version \eqn{(n_1+1)(n_2+1)/(m+1) - 1} of the point estimate.
+#' @return A list with \code{point} (Lincoln-Petersen), \code{lower},
+#'   \code{upper}, \code{kappa}, \code{theorem}, and \code{chapman} when
+#'   requested.
+#' @references Petersen CGJ (1896); Lincoln FC (1930); Chapman DG (1951).
+#'   Bird SM, King R (2018). Multiple systems estimation (or
+#'   capture-recapture estimation) to inform public policy. Annual Review
+#'   of Statistics and Its Application 5, 95-118.
+#' @examples
+#' # police records 400, survey 250, 80 in both
+#' morie_dark_figure_two_source(400, 250, 80)              # independence: 1250
+#' morie_dark_figure_two_source(400, 250, 80, kappa = 2)   # [625, 2500]
+#' @export
+morie_dark_figure_two_source <- function(n1, n2, m, kappa = 1, chapman = FALSE) {
+  for (v in list(n1, n2, m, kappa)) {
+    if (!is.numeric(v) || length(v) != 1L || is.na(v)) {
+      stop("n1, n2, m and kappa must be single non-missing numbers", call. = FALSE)
+    }
+  }
+  if (n1 <= 0 || n2 <= 0 || m <= 0) stop("n1, n2 and m must be positive", call. = FALSE)
+  if (m > min(n1, n2)) stop("m cannot exceed the smaller list", call. = FALSE)
+  if (kappa < 1) stop("kappa must be at least 1", call. = FALSE)
+  point <- n1 * n2 / m
+  out <- list(point = point, lower = point / kappa, upper = kappa * point, kappa = kappa,
+              theorem = if (kappa == 1) "Research.P1.TwoSource.lincoln_petersen"
+                        else "Research.P1.TwoSource.petersen_bounds")
+  if (isTRUE(chapman)) out$chapman <- (n1 + 1) * (n2 + 1) / (m + 1) - 1
+  out
+}
+
+#' Sharp bounds on a true victimisation rate and its dark figure
+#'
+#' A recorded rate \code{r} (police records per capita) never exceeds the
+#' true rate \code{v}, and a survey rate \code{v_obs} is a noisy proxy
+#' \eqn{v(1-\beta) + (1-v)\alpha} with under-reporting \eqn{\beta} (stigma,
+#' non-recall) and over-reporting \eqn{\alpha} (misclassified incidents).
+#' With only the boxes \eqn{\alpha \in [0, a]}, \eqn{\beta \in [0, b]},
+#' \eqn{a + b < 1} credible, the true rate is identified exactly up to
+#' \deqn{\max\!\left(r, \frac{v_{obs}-a}{1-a}\right) \le v \le \frac{v_{obs}}{1-b},}
+#' and the dark figure \eqn{v - r} up to that interval shifted by \code{r}
+#' (\code{Research.P1.true_rate_bounds}, \code{Research.P1.dark_figure_bounds}).
+#' Both ends of the survey part are attained, so nothing narrower follows
+#' from the boxes alone.
+#'
+#' @param v_obs Survey victimisation rate(s) in [0, 1].
+#' @param r Recorded rate(s) in [0, 1], same length as \code{v_obs} or length 1.
+#' @param alpha_max Largest credible over-reporting rate.
+#' @param beta_max Largest credible under-reporting rate;
+#'   \code{alpha_max + beta_max} must be below 1.
+#' @return A data frame with \code{v_obs}, \code{r}, \code{v_lower},
+#'   \code{v_upper}, \code{dark_lower}, \code{dark_upper} and
+#'   \code{ratio_upper} (the largest credible ratio of true to recorded
+#'   rate, \code{NA} when \code{r = 0}).
+#' @examples
+#' # survey says 6 percent were victimised, police recorded 2 percent
+#' morie_dark_figure_bounds(v_obs = 0.06, r = 0.02, alpha_max = 0.01, beta_max = 0.30)
+#' @export
+morie_dark_figure_bounds <- function(v_obs, r, alpha_max, beta_max) {
+  if (!is.numeric(v_obs) || any(is.na(v_obs)) || any(v_obs < 0) || any(v_obs > 1)) {
+    stop("v_obs must be numeric in [0, 1]", call. = FALSE)
+  }
+  if (!is.numeric(r) || any(is.na(r)) || any(r < 0) || any(r > 1)) {
+    stop("r must be numeric in [0, 1]", call. = FALSE)
+  }
+  if (length(r) != 1L && length(r) != length(v_obs)) {
+    stop("r must have length 1 or the length of v_obs", call. = FALSE)
+  }
+  for (v in list(alpha_max, beta_max)) {
+    if (!is.numeric(v) || length(v) != 1L || is.na(v) || v < 0) {
+      stop("alpha_max and beta_max must be single non-negative numbers", call. = FALSE)
+    }
+  }
+  if (alpha_max + beta_max >= 1) stop("alpha_max + beta_max must be below 1", call. = FALSE)
+  r <- rep_len(r, length(v_obs))
+  v_lower <- pmax(r, (v_obs - alpha_max) / (1 - alpha_max))
+  v_upper <- pmin(1, v_obs / (1 - beta_max))
+  v_upper <- pmax(v_upper, v_lower)   # a recorded rate above the survey ceiling: interval collapses to r
+  data.frame(
+    v_obs = v_obs, r = r,
+    v_lower = v_lower, v_upper = v_upper,
+    dark_lower = v_lower - r, dark_upper = v_upper - r,
+    ratio_upper = ifelse(r > 0, v_upper / r, NA_real_)
+  )
+}
