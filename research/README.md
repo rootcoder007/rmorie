@@ -20,6 +20,7 @@ signed off.
 | P1 dark figure | `Research.P1.TwoSource.petersen_identity`, `lincoln_petersen`, `petersen_bounds`, `petersen_lower_attained`, `petersen_upper_attained` | `morie_dark_figure_two_source()` |
 | P1 dark figure | `Research.P1.true_rate_bounds`, `dark_figure_bounds` | `morie_dark_figure_bounds()` |
 | P1 dark figure | `Research.P1.conclusion_holds_below_breakdown`, `conclusion_fails_above_breakdown` | `morie_dark_figure_breakdown()` |
+| P1 dark figure | `Research.P1.petersen_ge_floor`, `chapman_ge_floor`, `three_list_saturated_fits`, `missing_cell_unconstrained` | `morie_dark_figure_three_list()` |
 | P2 selection | `Research.P2.rate_bounds`, `rate_lower_attained`, `rate_upper_attained`, `disparity_bounds`, `disparity_sign_identified` | `morie_disparity_exposure_bounds()` |
 | P3 interference | `Research.P3.Model.exposure_adjustment`, `direct_spillover_decomposition`, `pooled_mean_mixture`, `misspecified_exposure_bias` | `morie_spillover_exposure()`, `morie_spillover_effects()` |
 | P3 interference | `Research.P3.Design.ht_second_moment`, `ht_variance`, `ht_variance_estimator_unbiased` | `morie_spillover_ht(joint = ...)`, `morie_spillover_ht_variance()`, `morie_spillover_exposure_probs(joint = TRUE)` |

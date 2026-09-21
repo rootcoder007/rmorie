@@ -156,3 +156,72 @@ morie_dark_figure_breakdown <- function(v_obs, threshold) {
        theorems = c("Research.P1.conclusion_holds_below_breakdown",
                     "Research.P1.conclusion_fails_above_breakdown"))
 }
+
+
+#' Three-list capture-recapture: what is and is not identified
+#'
+#' With three lists the observed table has seven cells; the count of
+#' units on no list is the eighth. The saturated log-linear model (all
+#' pairwise interactions and the three-way interaction) reproduces any
+#' positive eight-cell table exactly (\code{Research.P1.three_list_saturated_fits}),
+#' so the missing cell can take any positive value while the seven
+#' observed cells are matched (\code{Research.P1.missing_cell_unconstrained}).
+#' The population size is identified only once the analyst fixes the
+#' three-way interaction; the conventional choice sets it to zero, which
+#' gives the closed form
+#' \eqn{m_{000} = m_{111} m_{100} m_{010} m_{001} / (m_{110} m_{101} m_{011})}.
+#' The function reports that estimate, the logical floor (the number of
+#' distinct units seen), the two-list Petersen and Chapman estimates for
+#' each pair of lists (each proved to respect the floor,
+#' \code{Research.P1.petersen_ge_floor}, \code{chapman_ge_floor}), and the
+#' three-way interaction that any candidate missing cell would imply.
+#'
+#' @param counts Named vector or list of the seven observed cells with
+#'   names \code{"100"}, \code{"010"}, \code{"001"}, \code{"110"},
+#'   \code{"101"}, \code{"011"}, \code{"111"} (digits: on list 1, list 2,
+#'   list 3); all positive.
+#' @param candidate_missing Optional positive values of the missing cell for
+#'   which the implied three-way interaction is reported.
+#' @return A list with \code{observed} (units seen, the floor),
+#'   \code{missing_no_three_way}, \code{N_no_three_way}, \code{pairwise}
+#'   (a data frame of Petersen and Chapman estimates per pair of lists with
+#'   the floor for that pair), \code{implied_three_way} (for
+#'   \code{candidate_missing}) and \code{theorems}.
+#' @examples
+#' morie_dark_figure_three_list(c("100" = 120, "010" = 90, "001" = 70,
+#'                                "110" = 40, "101" = 30, "011" = 25, "111" = 15))
+#' @export
+morie_dark_figure_three_list <- function(counts, candidate_missing = NULL) {
+  need <- c("100", "010", "001", "110", "101", "011", "111")
+  counts <- unlist(counts)
+  if (is.null(names(counts)) || !all(need %in% names(counts))) stop("counts must be named by the seven cells 100, 010, 001, 110, 101, 011, 111", call. = FALSE)
+  m <- as.numeric(counts[need]); names(m) <- need
+  if (anyNA(m) || any(m <= 0)) stop("all seven observed cells must be positive", call. = FALSE)
+  observed <- sum(m)
+  m000 <- m["111"] * m["100"] * m["010"] * m["001"] / (m["110"] * m["101"] * m["011"])
+  on <- function(cell, k) substr(cell, k, k) == "1"
+  pairs <- list(c(1, 2), c(1, 3), c(2, 3))
+  pairwise <- do.call(rbind, lapply(pairs, function(pr) {
+    n1 <- sum(m[on(need, pr[1])]); n2 <- sum(m[on(need, pr[2])])
+    mm <- sum(m[on(need, pr[1]) & on(need, pr[2])])
+    data.frame(lists = paste(pr, collapse = "-"), n1 = n1, n2 = n2, m = mm,
+               floor = n1 + n2 - mm, petersen = n1 * n2 / mm,
+               chapman = (n1 + 1) * (n2 + 1) / (mm + 1) - 1)
+  }))
+  implied <- NULL
+  if (!is.null(candidate_missing)) {
+    if (any(candidate_missing <= 0)) stop("candidate_missing must be positive", call. = FALSE)
+    lm_ <- log(m)
+    implied <- data.frame(
+      missing = candidate_missing,
+      N = observed + candidate_missing,
+      three_way = lm_["111"] - lm_["110"] - lm_["101"] - lm_["011"] +
+        lm_["100"] + lm_["010"] + lm_["001"] - log(candidate_missing))
+    rownames(implied) <- NULL
+  }
+  list(observed = observed, missing_no_three_way = unname(m000),
+       N_no_three_way = unname(observed + m000), pairwise = pairwise,
+       implied_three_way = implied,
+       theorems = c("Research.P1.three_list_saturated_fits", "Research.P1.missing_cell_unconstrained",
+                    "Research.P1.petersen_ge_floor", "Research.P1.chapman_ge_floor"))
+}

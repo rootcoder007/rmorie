@@ -82,3 +82,33 @@ test_that("breakdown value separates surviving from failing conclusions (conclus
   expect_gte(0.06 / (1 - 0.4), 0.10 - 1e-12)
   expect_error(morie_dark_figure_breakdown(0.06, threshold = 0.05), "above v_obs")
 })
+
+test_that("three lists: the no-three-way closed form agrees with the Poisson log-linear fit, the floor holds, the missing cell is free", {
+  set.seed(1)
+  counts <- c("100" = 120, "010" = 90, "001" = 70, "110" = 40, "101" = 30, "011" = 25, "111" = 15)
+  res <- morie_dark_figure_three_list(counts, candidate_missing = c(1, 50, 500, 5000))
+  expect_equal(res$observed, 390)
+  # closed form = fitted 000 cell of glm(count ~ (a+b+c)^2, poisson) on the seven cells
+  cells <- names(counts)
+  d <- data.frame(count = as.numeric(counts),
+                  a = as.numeric(substr(cells, 1, 1)), b = as.numeric(substr(cells, 2, 2)), c = as.numeric(substr(cells, 3, 3)))
+  fit <- stats::glm(count ~ (a + b + c)^2, family = stats::poisson, data = d)
+  m000 <- unname(exp(stats::coef(fit)["(Intercept)"]))
+  expect_equal(res$missing_no_three_way, m000, tolerance = 1e-6)
+  expect_equal(res$N_no_three_way, 390 + m000, tolerance = 1e-6)
+  # floors (petersen_ge_floor, chapman_ge_floor) for every pair, on many random tables
+  for (k in 1:200) {
+    cnt <- stats::setNames(sample(1:200, 7, replace = TRUE), cells)
+    pw <- morie_dark_figure_three_list(cnt)$pairwise
+    expect_true(all(pw$petersen >= pw$floor - 1e-9))
+    expect_true(all(pw$chapman >= pw$floor - 1e-9))
+  }
+  # every candidate missing cell is consistent with some saturated model: the implied three-way
+  # interaction is finite, decreasing in the candidate, and zero exactly at the closed form
+  im <- res$implied_three_way
+  expect_true(all(is.finite(im$three_way)))
+  expect_true(all(diff(im$three_way) < 0))
+  at_cf <- morie_dark_figure_three_list(counts, candidate_missing = res$missing_no_three_way)$implied_three_way$three_way
+  expect_equal(at_cf, 0, tolerance = 1e-12)
+  expect_error(morie_dark_figure_three_list(counts[-1]), "named by the seven cells")
+})

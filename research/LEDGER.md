@@ -50,6 +50,16 @@ assumptions the dark figure is an interval, not a point.
   three-source log-linear case with proved identification under one
   interaction.
 
+- Progress 2026-09-21 (three lists): `Research.P1` (P1ThreeList.lean):
+  `petersen_ge_floor`, `chapman_ge_floor` (both estimators respect the
+  logical floor n1+n2-m; the Wald interval does not), and
+  `three_list_saturated_fits` / `missing_cell_unconstrained` (the
+  saturated log-linear model reproduces any positive eight-cell table, so
+  the count of units on no list is free: N is identified only by the
+  analyst's choice of the three-way interaction, conventionally zero).
+  R: `morie_dark_figure_three_list()`; the test matches the closed form
+  against a Poisson GLM fit and sweeps the floor on 200 random tables.
+
 ## P2. Selection in police-recorded data: the record is the treatment
 
 Every recorded outcome (arrest, charge, use of force) is conditional on a
