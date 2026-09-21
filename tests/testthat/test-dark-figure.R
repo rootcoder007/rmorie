@@ -112,3 +112,16 @@ test_that("three lists: the no-three-way closed form agrees with the Poisson log
   expect_equal(at_cf, 0, tolerance = 1e-12)
   expect_error(morie_dark_figure_three_list(counts[-1]), "named by the seven cells")
 })
+
+test_that("hierarchy rule: offence count in [N, KN] and equal to N(1 + mean extra) (offence_count_bounds, offence_count_eq)", {
+  set.seed(7)
+  for (i in 1:100) {
+    k <- sample(1:5, 50, replace = TRUE)
+    h <- morie_dark_figure_hierarchy(k)
+    expect_gte(h$offences, h$bounds["lower"]); expect_lte(h$offences, h$bounds["upper"])
+    expect_equal(h$offences, h$incidents * (1 + h$mean_extra), tolerance = 1e-12)
+  }
+  expect_equal(morie_dark_figure_hierarchy(c(1, 1))$offences, 2)
+  expect_equal(morie_dark_figure_hierarchy(c(3, 3))$offences, 6)   # same incident count, different offence count
+  expect_error(morie_dark_figure_hierarchy(c(1, 0)), "at least one offence")
+})

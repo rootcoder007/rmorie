@@ -225,3 +225,34 @@ morie_dark_figure_three_list <- function(counts, candidate_missing = NULL) {
        theorems = c("Research.P1.three_list_saturated_fits", "Research.P1.missing_cell_unconstrained",
                     "Research.P1.petersen_ge_floor", "Research.P1.chapman_ge_floor"))
 }
+
+
+#' Incident versus offence counting: the hierarchy-rule arithmetic
+#'
+#' Under a hierarchy rule an incident with several offences is counted once
+#' (its most serious offence); an offence-based system counts every offence.
+#' With \eqn{N} incidents carrying \eqn{k_i \ge 1} offences each, bounded by
+#' \eqn{K}, the offence count lies in \eqn{[N, KN]} and equals
+#' \eqn{N(1 + \bar{e})} with \eqn{\bar{e}} the mean number of extra offences per
+#' incident (\code{Research.P1.offence_count_bounds},
+#' \code{offence_count_eq}); the offence total is not a function of the
+#' incident total (\code{category_not_identified}). A switch from incident
+#' to offence counting therefore raises recorded crime with no change in
+#' crime, by exactly the mean extra offences per incident.
+#'
+#' @param offences_per_incident Integer vector, one entry per incident, each at least 1.
+#' @return A list with \code{incidents}, \code{offences}, \code{ratio}
+#'   (offences per incident), \code{mean_extra}, \code{bounds} (\eqn{[N, KN]}
+#'   with \eqn{K} the observed maximum) and \code{theorems}.
+#' @examples
+#' morie_dark_figure_hierarchy(c(1, 1, 2, 1, 3, 1, 1, 2))
+#' @export
+morie_dark_figure_hierarchy <- function(offences_per_incident) {
+  k <- as.integer(offences_per_incident)
+  if (length(k) == 0L || anyNA(k) || any(k < 1L)) stop("every incident must carry at least one offence", call. = FALSE)
+  N <- length(k); tot <- sum(k)
+  list(incidents = N, offences = tot, ratio = tot / N, mean_extra = mean(k - 1),
+       bounds = c(lower = N, upper = max(k) * N),
+       theorems = c("Research.P1.offence_count_bounds", "Research.P1.offence_count_eq",
+                    "Research.P1.category_not_identified"))
+}

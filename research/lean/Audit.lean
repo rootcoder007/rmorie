@@ -111,3 +111,6 @@ open Research.P4
 #print axioms Research.P5.survivor_hazard_mono
 #print axioms Research.P5.hr2_gt_one_of_depletion
 #print axioms Research.P5.hr2_witness
+#print axioms Research.P8.certainty_monotone
+#print axioms Research.P8.severity_monotone
+#print axioms Research.P8.aggregate_monotone

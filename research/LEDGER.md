@@ -60,6 +60,14 @@ assumptions the dark figure is an interval, not a point.
   R: `morie_dark_figure_three_list()`; the test matches the closed form
   against a Poisson GLM fit and sweeps the floor on 200 random tables.
 
+- Progress 2026-09-21 (hierarchy rule): `Research.P1.offence_count_bounds`,
+  `offence_count_eq`, `category_not_identified` (P1Hierarchy.lean):
+  incident counting under a hierarchy rule versus offence counting differ
+  by exactly the mean extra offences per incident, bounded by the maximum
+  co-offence multiplicity (library scan A13). R:
+  `morie_dark_figure_hierarchy()`; empirical target: FBI CDE SRS-to-NIBRS
+  transition years by agency.
+
 ## P2. Selection in police-recorded data: the record is the treatment
 
 Every recorded outcome (arrest, charge, use of force) is conditional on a

@@ -21,6 +21,7 @@ signed off.
 | P1 dark figure | `Research.P1.true_rate_bounds`, `dark_figure_bounds` | `morie_dark_figure_bounds()` |
 | P1 dark figure | `Research.P1.conclusion_holds_below_breakdown`, `conclusion_fails_above_breakdown` | `morie_dark_figure_breakdown()` |
 | P1 dark figure | `Research.P1.petersen_ge_floor`, `chapman_ge_floor`, `three_list_saturated_fits`, `missing_cell_unconstrained` | `morie_dark_figure_three_list()` |
+| P1 dark figure | `Research.P1.offence_count_bounds`, `offence_count_eq`, `category_not_identified` | `morie_dark_figure_hierarchy()` |
 | P2 selection | `Research.P2.rate_bounds`, `rate_lower_attained`, `rate_upper_attained`, `disparity_bounds`, `disparity_sign_identified` | `morie_disparity_exposure_bounds()` |
 | P2 selection | `Research.P2.offset_shift`, `disparity_ratio_shift`, `benchmark_product`, `benchmark_not_additive` | `morie_disparity_benchmark()` |
 | P2 selection | `Research.P2.or_eq_rr_mul`, `rr_between`, `or_overstates` | `morie_relative_risk_from_or()` |
