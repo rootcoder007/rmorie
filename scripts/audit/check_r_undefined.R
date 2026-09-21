@@ -74,7 +74,9 @@ walk <- function(e) {
 }
 invisible(lapply(exprs, walk))
 
-missing <- setdiff(ls(called), defined)
+# ls() hides dot-prefixed names by default, so every .morie_* call was
+# invisible to this check until 2026-09-21; all.names = TRUE sees them.
+missing <- setdiff(ls(called, all.names = TRUE), defined)
 if (length(missing)) {
   cat("UNDEFINED morie symbols called from R/ (", length(missing), "):\n", sep = "")
   for (m in sort(missing)) {
@@ -84,4 +86,4 @@ if (length(missing)) {
   }
   quit(status = 1L)
 }
-cat("R undefined-symbol check: OK (", length(ls(called)), " morie calls, all defined)\n", sep = "")
+cat("R undefined-symbol check: OK (", length(ls(called, all.names = TRUE)), " morie calls, all defined)\n", sep = "")
