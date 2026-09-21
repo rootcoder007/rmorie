@@ -258,16 +258,18 @@ jobs:
           # actions/checkout, which the REST API rejects with HTTP 401.
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Rscript here has no mirror configured ("trying to use CRAN
+          # without setting a mirror"); name it, and put the r-universe
+          # repos ahead so the sibling packages and cmdstanr resolve.
+          options(repos = c(runiverse = "https://rootcoder007.r-universe.dev",
+                            standev = "https://stan-dev.r-universe.dev",
+                            CRAN = "https://cloud.r-project.org"))
           install.packages(c("remotes", "rcmdcheck", "rgenoud"))
           # r-universe carries binaries for the two sibling packages, so take
           # them from there rather than building the GitHub sources.
-          install.packages(c("rmoriebricklayer", "rmoriedata"),
-                           repos = c("https://rootcoder007.r-universe.dev",
-                                     "https://cloud.r-project.org"))
+          install.packages(c("rmoriebricklayer", "rmoriedata"))
           # cmdstanr is not on CRAN; Suggests declares it, so provide it.
-          install.packages("cmdstanr",
-                           repos = c("https://stan-dev.r-universe.dev",
-                                     "https://cloud.r-project.org"))
+          install.packages("cmdstanr")
           remotes::install_deps(dependencies = TRUE, upgrade = "never")
 
       # Needs R, so it runs after setup-r; before it, Rscript does not
