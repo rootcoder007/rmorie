@@ -101,7 +101,7 @@ test_that("relative risk sits between 1 and the odds ratio and OR overstates it 
     expect_equal(OR, RR * (1 - b) / (1 - a), tolerance = 1e-12)
     r <- morie_relative_risk_from_or(OR, base_rate = 0.3 * a + 0.7 * b, exposed_share = 0.3)
     expect_equal(unname(r$risks["relative_risk"]), RR, tolerance = 1e-6)
-    expect_gte(r$overstatement_factor * sign(log(OR) + (OR == 1)), 0)   # same side as OR
+    expect_gte((r$overstatement_factor - 1) * log(OR), -1e-12)          # OR/RR = (1-b)/(1-a) exceeds 1 exactly when OR > 1
   }
   expect_equal(morie_relative_risk_from_or(3)$rr_bounds, c(lower = 1, upper = 3))
   expect_equal(morie_relative_risk_from_or(0.25)$rr_bounds, c(lower = 0.25, upper = 1))
