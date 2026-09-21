@@ -557,6 +557,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_feedback_urn_cpp
+List morie_feedback_urn_cpp(double lamA, double lamB, double cA0, double cB0, int n_steps, int update, double rho);
+RcppExport SEXP _rmorie_morie_feedback_urn_cpp(SEXP lamASEXP, SEXP lamBSEXP, SEXP cA0SEXP, SEXP cB0SEXP, SEXP n_stepsSEXP, SEXP updateSEXP, SEXP rhoSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type lamA(lamASEXP);
+    Rcpp::traits::input_parameter< double >::type lamB(lamBSEXP);
+    Rcpp::traits::input_parameter< double >::type cA0(cA0SEXP);
+    Rcpp::traits::input_parameter< double >::type cB0(cB0SEXP);
+    Rcpp::traits::input_parameter< int >::type n_steps(n_stepsSEXP);
+    Rcpp::traits::input_parameter< int >::type update(updateSEXP);
+    Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_feedback_urn_cpp(lamA, lamB, cA0, cB0, n_steps, update, rho));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_hawkes_kernel_density_cpp
 NumericVector morie_hawkes_kernel_density_cpp(NumericVector u, std::string kind, NumericVector psi);
 RcppExport SEXP _rmorie_morie_hawkes_kernel_density_cpp(SEXP uSEXP, SEXP kindSEXP, SEXP psiSEXP) {
@@ -1349,6 +1366,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_hawkes_ll_weibull_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_weibull_const_cpp, 6},
     {"_rmorie_morie_hawkes_ll_lomax_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_lomax_const_cpp, 6},
     {"_rmorie_morie_hawkes_ll_gamma_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_gamma_const_cpp, 6},
+    {"_rmorie_morie_feedback_urn_cpp", (DL_FUNC) &_rmorie_morie_feedback_urn_cpp, 7},
     {"_rmorie_morie_hawkes_kernel_density_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_density_cpp, 3},
     {"_rmorie_morie_hawkes_kernel_cdf_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_cdf_cpp, 3},
     {"_rmorie_morie_hawkes_pair_excitation_sum_cpp", (DL_FUNC) &_rmorie_morie_hawkes_pair_excitation_sum_cpp, 4},

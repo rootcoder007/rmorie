@@ -112,6 +112,15 @@ or of the initial condition?
   diagnostic that, given a department's historical allocation and reports,
   estimates how far its observed rates are from the corrected ones.
 - rmorie now: nothing.
+- Progress 2026-09-21: Lean `Research.P4` (research/lean/P4Feedback.lean,
+  P4Limit.lean): mean-field drift identity, strict monotonicity, runaway
+  limit x_n → 1 for λA > λB (harmonic divergence argument), corrected
+  update closed form and limit λA/(λA+λB); 7 theorems, 0 sorry, standard
+  axioms only. R: `morie_feedback_loop_meanfield/_sim/_limit` with a C++
+  urn kernel. Finding: the runaway is logarithmically slow (0.010 → 0.015
+  in 2·10^6 steps for a 5% rate gap from a 1/99 start), so the practically
+  decisive object is the rate, not the limit. Next: a proved rate bound
+  and the stochastic (martingale) version; then the ρ > 0 mitigation bound.
 
 ## P5. Recidivism prediction under label bias: what can be certified?
 

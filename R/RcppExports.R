@@ -173,6 +173,10 @@ morie_hawkes_ll_gamma_const_cpp <- function(t, T_horizon, a0, eta, alpha, beta) 
     .Call(`_rmorie_morie_hawkes_ll_gamma_const_cpp`, t, T_horizon, a0, eta, alpha, beta)
 }
 
+.morie_feedback_urn_cpp <- function(lamA, lamB, cA0, cB0, n_steps, update, rho) {
+    .Call(`_rmorie_morie_feedback_urn_cpp`, lamA, lamB, cA0, cB0, n_steps, update, rho)
+}
+
 morie_hawkes_kernel_density_cpp <- function(u, kind, psi) {
     .Call(`_rmorie_morie_hawkes_kernel_density_cpp`, u, kind, psi)
 }
