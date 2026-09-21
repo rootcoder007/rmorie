@@ -123,3 +123,37 @@ test_that("public reports cap the naive loop (rho_cap, cap_zero, cap_one)", {
   # corrected update: reports cancel out and the closed-form limit is unchanged
   expect_equal(morie_feedback_loop_limit(0.3, 0.2, 10, 10, "corrected", rho = 0.5)$share_a, 0.6)
 })
+
+test_that("equal-rate urn law is uniform and never concentrates (polya_uniform, polya_no_concentration)", {
+  set.seed(1)
+  for (n in c(0, 1, 2, 5, 40)) {
+    law <- morie_feedback_loop_urn_law(n)
+    expect_equal(law$prob, rep(1 / (n + 1), n + 1))
+    expect_equal(sum(law$prob), 1)
+    expect_equal(law$share_a, (1 + 0:n) / (n + 2))
+    if (n >= 2) expect_gte(attr(law, "prob_middle"), 0.25)
+  }
+  # the one-step martingale identity, checked numerically for a few urns
+  for (r in c(1, 3, 10)) for (b in c(1, 2, 7)) for (a in c(0, 1, 2.5)) {
+    x <- r / (r + b)
+    expect_equal(x * (r + a) / (r + b + a) + (1 - x) * r / (r + b + a), x, tolerance = 1e-12)
+  }
+  # the mean field with equal rates is stuck at 1/2 while the urn law is uniform
+  lim <- morie_feedback_loop_limit(0.3, 0.3, 1, 1)
+  expect_equal(lim$share_a, 0.5)
+  expect_equal(lim$stochastic_theorem, "Research.P4.Urn.polya_no_concentration")
+  expect_error(morie_feedback_loop_urn_law(-1), "non-negative")
+})
+
+test_that("the simulated urn with equal unit rates follows the proved uniform law", {
+  # lam = 1 per visit and one count each: the simulator is exactly the Polya urn of P4Urn.lean
+  s <- morie_feedback_loop_sim(1, 1, 1, 1, n_steps = 20, n_sims = 4000, seed = 7)
+  law <- morie_feedback_loop_urn_law(20)
+  j_hat <- round(s$final * 22 - 1)
+  expect_true(all(j_hat >= 0 & j_hat <= 20))
+  freq <- tabulate(j_hat + 1, nbins = 21) / 4000
+  expect_lt(max(abs(freq - law$prob)), 0.025)          # 5 sd of a cell frequency is 0.017
+  middle <- mean(s$final >= 0.25 & s$final <= 0.75)
+  expect_gte(middle, 0.25)
+  expect_equal(middle, attr(law, "prob_middle"), tolerance = 0.06)
+})

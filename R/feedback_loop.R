@@ -20,10 +20,17 @@
 #   Research.P4.rho_cap                 (P4Mitigation.lean) with reporting share rho in [0,1],
 #                                       x_n <= max(x_0, lamA / (lamA + rho lamB)) for every n
 #   Research.P4.cap_zero, cap_one       the cap is 1 at rho = 0 and lamA/(lamA+lamB) at rho = 1
+#   Research.P4.Urn.urn_step_martingale (P4Urn.lean) one discovery per step: the share is a martingale
+#   Research.P4.Urn.polya_uniform       equal rates, one count each: A-discoveries after n draws are
+#                                       uniform on 0..n, so the share is uniform on its grid
+#   Research.P4.Urn.polya_no_concentration
+#                                       P(1/4 <= share_n <= 3/4) >= 1/4 for every n >= 2
 #
 # What the theorems do NOT say: that a real department's discovery process
 # is this model. The mean-field recursion is the expected-count dynamics;
-# the urn simulator is its stochastic counterpart and is not yet proved.
+# the urn simulator is its stochastic counterpart, and for equal rates its
+# exact law is proved (P4Urn.lean): the share is a martingale that
+# converges to a random limit, not to the mean-field constant.
 
 #' Mean-field feedback-loop recursion for two regions
 #'
@@ -162,8 +169,51 @@ morie_feedback_loop_limit <- function(lam_a, lam_b, c_a0, c_b0,
          note = "runaway (regions swapped): the higher-rate region absorbs the whole patrol")
   } else {
     list(share_a = c_a0 / (c_a0 + c_b0), theorem = "Research.P4.naive_step_drift",
-         note = "equal rates: the drift is zero, the share never moves")
+         note = paste("equal rates: the mean-field drift is zero and the share never moves;",
+                      "the stochastic urn instead converges to a random limit",
+                      "(Research.P4.Urn.polya_uniform, see morie_feedback_loop_urn_law)"),
+         stochastic_theorem = "Research.P4.Urn.polya_no_concentration")
   }
+}
+
+#' Exact law of the stochastic two-region urn with equal rates
+#'
+#' One discovery per step, credited to region A with probability equal to
+#' the current share of A and adding one count there. The share is a
+#' martingale for any reinforcement (\code{Research.P4.Urn.urn_step_martingale}).
+#' Started from one count each, the number of discoveries credited to A
+#' after \code{n_steps} draws is exactly uniform on \code{0:n_steps}
+#' (\code{Research.P4.Urn.polya_uniform}), so the share
+#' \eqn{(1 + j)/(n + 2)} is uniform on its grid and the probability that
+#' it lies in \eqn{[1/4, 3/4]} is at least \eqn{1/4} at every horizon
+#' \eqn{n \ge 2} (\code{Research.P4.Urn.polya_no_concentration}).
+#'
+#' The mean-field recursion with equal rates keeps the share at one half
+#' forever; the stochastic process locks in early luck and converges to a
+#' random limit that is uniform on (0, 1). "Equal rates, therefore no
+#' runaway" is false for the process a department actually runs.
+#'
+#' @param n_steps Number of draws (non-negative integer).
+#' @return A data frame with \code{j} (discoveries credited to A),
+#'   \code{share_a} and \code{prob}, with attributes \code{"prob_middle"}
+#'   (probability that the share lies in \eqn{[1/4, 3/4]}) and
+#'   \code{"theorems"}.
+#' @seealso \code{\link{morie_feedback_loop_sim}} for the simulated urn with
+#'   unequal rates.
+#' @examples
+#' law <- morie_feedback_loop_urn_law(10)
+#' law$prob                       # all 1/11
+#' attr(law, "prob_middle")       # at least 1/4
+#' @export
+morie_feedback_loop_urn_law <- function(n_steps) {
+  n_steps <- as.integer(n_steps)
+  if (length(n_steps) != 1L || is.na(n_steps) || n_steps < 0L) stop("n_steps must be a non-negative integer", call. = FALSE)
+  j <- 0:n_steps
+  out <- data.frame(j = j, share_a = (1 + j) / (n_steps + 2), prob = rep(1 / (n_steps + 1), n_steps + 1L))
+  attr(out, "prob_middle") <- sum(out$prob[out$share_a >= 0.25 & out$share_a <= 0.75])
+  attr(out, "theorems") <- c("Research.P4.Urn.urn_step_martingale", "Research.P4.Urn.polya_uniform",
+                             "Research.P4.Urn.polya_no_concentration")
+  out
 }
 
 #' Stochastic urn simulation of the two-region feedback loop

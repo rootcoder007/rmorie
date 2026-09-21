@@ -161,6 +161,18 @@ or of the initial condition?
   the size of the residual is now an explicit number. R:
   `morie_feedback_loop_limit(rho = ...)$cap`; test checks the cap on the
   full trajectory. Still open: the stochastic urn (martingale) version.
+- Progress 2026-09-21 (stochastic): `Research.P4.Urn` (P4Urn.lean), on the
+  finite path space: `urn_step_martingale` (the share is a martingale for
+  any reinforcement), `polya_uniform` (equal rates, one count each: the
+  number of A-discoveries after n draws is uniform on 0..n) and
+  `polya_no_concentration` (P(1/4 ≤ share ≤ 3/4) ≥ 1/4 for all n ≥ 2). So
+  "equal rates, no runaway" holds for the mean field and fails for the
+  process: the share converges to a random limit (uniform on (0, 1)) fixed
+  by early luck. R: `morie_feedback_loop_urn_law()`. Still open: the
+  unequal-rate urn (a Rubin-type reinforcement theorem; the library has no
+  source for it, see LIBRARY-SCAN-2026-09-21.md C1–C3), the Azuma drift
+  envelope, and the a.s. convergence statement itself (needs Mathlib's
+  martingale convergence on a genuine filtered space).
 
 ## P5. Recidivism prediction under label bias: what can be certified?
 
