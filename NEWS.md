@@ -8,6 +8,9 @@ is gated on a double matrix with at least two rows and two columns:
 basicspace 0.25's Fortran writes past its arrays on a single-row or
 single-column input and the process dies later (valgrind). Thin inputs
 take the native path.
+`morie_spatial_voting_aldrich_mckelvey()` reaches basicspace as documented:
+it passed `missing = NA`, which basicspace rejects, so every call had
+taken the fallback.
 
 ## Clustering
 

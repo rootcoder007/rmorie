@@ -366,3 +366,14 @@ test_that("single-row and single-column matrices never reach basicspace", {
     if (inherits(r, "error")) expect_false(grepl("reached basicspace", conditionMessage(r)))
   }
 })
+
+test_that("aldrich_mckelvey delegates to basicspace on a valid matrix", {
+  skip_if_not_installed("basicspace")
+  set.seed(1)
+  Z <- matrix(rnorm(100), 20, 5)
+  Z[3, 2] <- NA
+  fit <- morie_spatial_voting_aldrich_mckelvey(Z)
+  expect_identical(fit$engine, "basicspace")
+  expect_length(fit$zhat, 5L)
+  expect_length(fit$alpha, 20L)
+})

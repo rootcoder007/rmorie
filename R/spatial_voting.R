@@ -230,10 +230,10 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
 
   if (requireNamespace("basicspace", quietly = TRUE) &&
         .sv_basicspace_shape_ok(Z)) {
-    out <- try(basicspace::aldmck(Z,
-                                  respondent = 0,
-                                  polarity   = 1,
-                                  missing    = NA),
+    # aldmck's default treats NA cells as missing; passing `missing = NA`
+    # is rejected ("must only contain integers"), which sent every call
+    # down the fallback while the docs promised basicspace
+    out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
                silent = TRUE)
     if (!inherits(out, "try-error")) {
       zhat <- as.numeric(out$stimuli)
