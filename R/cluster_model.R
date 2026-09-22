@@ -157,10 +157,15 @@ predict.morie_cluster <- function(object, newdata, ...) {
     )
   }
   # nearest centroid (no re-optimisation): the n x k squared distances
-  # directly, not the (n + k)^2 matrix stats::dist() would build and
-  # mostly discard (2.8 GB at n = 10,000)
+  # one centroid at a time, not the (n + k)^2 matrix stats::dist() would
+  # build and mostly discard (2.8 GB at n = 10,000). Computed as
+  # sum((x - c)^2), never as |x|^2 + |c|^2 - 2 x.c: that expansion loses
+  # the distance in rounding once the coordinates reach about 1e8.
   ctr <- object$centers
-  d <- outer(rowSums(xm^2), rowSums(ctr^2), "+") - 2 * xm %*% t(ctr)
+  d <- matrix(0, nrow(xm), nrow(ctr))
+  for (j in seq_len(nrow(ctr))) {
+    d[, j] <- rowSums((xm - rep(ctr[j, ], each = nrow(xm)))^2)
+  }
   lab <- max.col(-d, ties.method = "first")
   stats::setNames(lab, rownames(newdata))
 }

@@ -120,6 +120,15 @@ test_that("UL3.3 predict assigns by nearest centroid in n x k work", {
     which.min(colSums((t(cl$centers) - r)^2))
   })
   expect_identical(unname(lab), unname(want))
+  # far from the origin the |x|^2 + |c|^2 - 2 x.c expansion would put
+  # four points in five with the wrong centroid; the exact form must not
+  far <- x + 1e9
+  cl_far <- morie_cluster(far, k = 5)
+  xf <- as.matrix(far)
+  want_far <- apply(xf, 1, function(r) {
+    which.min(colSums((t(cl_far$centers) - r)^2))
+  })
+  expect_identical(unname(predict(cl_far, far)), unname(want_far))
   # Hartigan-Wong does not leave every point with its nearest centroid
   # (and a fit capped at iter_max may not have converged), so the fit's
   # own labels agree closely, not exactly.

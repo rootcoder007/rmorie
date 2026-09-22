@@ -205,9 +205,13 @@ test_that("the exact Smirnov distributions match stats::psmirnov", {
         expect_true(two$sf >= 0 && two$sf <= 1)
 
         one <- rmorie:::Smirnov1(d, m, n)
-        wone <- stats::psmirnov(d, sizes = c(m, n),
-                                alternative = "greater",
-                                exact = TRUE, lower.tail = FALSE)
+        wone <- if (getRversion() >= "4.4.0") {
+          stats::psmirnov(d, sizes = c(m, n), alternative = "greater",
+                          exact = TRUE, lower.tail = FALSE)
+        } else {
+          stats::psmirnov(d, sizes = c(m, n), two.sided = FALSE,
+                          exact = TRUE, lower.tail = FALSE)
+        }
         expect_equal(one$sf, wone, tolerance = 1e-9)
         expect_equal(one$cdf, 1 - one$sf)
         # the one-sided tail is never the larger of the two
