@@ -106,6 +106,14 @@ NULL
   m
 }
 
+# basicspace's Fortran (aldmck, blackbox, blackbox_transpose) writes past
+# its arrays on a matrix with a single row or a single column and only
+# errors afterwards; the damage surfaces later as a segfault in whatever
+# allocates next. Such shapes never reach it (valgrind, 2026-09-22).
+.sv_basicspace_shape_ok <- function(M, min_rows = 2L, min_cols = 2L) {
+  is.matrix(M) && is.double(M) && nrow(M) >= min_rows && ncol(M) >= min_cols
+}
+
 #' Internal helper: Sv Nanmean Col
 #' @noRd
 .sv_nanmean_col <- function(M) {
@@ -220,7 +228,8 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
   n_resp <- nrow(Z)
   n_stim <- ncol(Z)
 
-  if (requireNamespace("basicspace", quietly = TRUE)) {
+  if (requireNamespace("basicspace", quietly = TRUE) &&
+        .sv_basicspace_shape_ok(Z)) {
     out <- try(basicspace::aldmck(Z,
                                   respondent = 0,
                                   polarity   = 1,
@@ -320,7 +329,10 @@ morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
   n <- nrow(X)
   p <- ncol(X)
 
-  if (requireNamespace("basicspace", quietly = TRUE)) {
+  # minscale = 8 below drops every respondent with fewer than eight
+  # responses, so fewer than eight stimuli would only error anyway
+  if (requireNamespace("basicspace", quietly = TRUE) &&
+        .sv_basicspace_shape_ok(X, min_cols = max(8L, n_dims + 1L))) {
     out <- try(basicspace::blackbox(X, missing = NA, dims = n_dims,
                                     minscale = 8, verbose = FALSE),
                silent = TRUE)
@@ -1062,12 +1074,13 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
                                              burn_in = 200L,
                                              prior_sd = 10.0) {
-  if (requireNamespace("basicspace", quietly = TRUE)) {
+  Z <- as.matrix(Z)
+  mode(Z) <- "numeric"
+  if (requireNamespace("basicspace", quietly = TRUE) &&
+        .sv_basicspace_shape_ok(Z)) {
     # basicspace::aldmck rejects `missing = NA` (it expects integer
     # sentinels). Letting it default + casting to numeric is the
     # safe path for arbitrary floating-point input matrices.
-    Z <- as.matrix(Z)
-    mode(Z) <- "numeric"
     out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
                silent = TRUE)
     if (!inherits(out, "try-error")) {

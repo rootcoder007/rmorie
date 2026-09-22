@@ -338,3 +338,31 @@ test_that("morie_spatial_voting_cjr_irt runs or skips on missing Stan", {
   }
   expect_true(is.list(out) || is.matrix(out))
 })
+
+test_that("single-row and single-column matrices never reach basicspace", {
+  # basicspace's Fortran writes out of bounds on these shapes and the
+  # process dies later (valgrind: mckalnew_, blackb_, blackboxt_)
+  ok <- rmorie:::.sv_basicspace_shape_ok
+  expect_false(ok(matrix(c(1, NA, 3), 3, 1)))
+  expect_false(ok(matrix(c(1, 2), 1, 2)))
+  expect_false(ok(matrix(1:4, 2))) # integer storage is refused by basicspace too
+  expect_true(ok(matrix(rnorm(4), 2, 2)))
+  expect_false(ok(matrix(rnorm(14), 2, 7), min_cols = 8L))
+  skip_if_not_installed("basicspace")
+  testthat::local_mocked_bindings(
+    aldmck = function(...) stop("reached basicspace"),
+    blackbox = function(...) stop("reached basicspace"),
+    .package = "basicspace"
+  )
+  thin <- matrix(c(1, NA, 3), 3, 1)
+  flat <- matrix(c(1, 2), 1, 2)
+  for (Z in list(thin, flat)) {
+    r <- tryCatch(morie_spatial_voting_aldrich_mckelvey(Z), error = identity)
+    if (inherits(r, "error")) expect_false(grepl("reached basicspace", conditionMessage(r)))
+    r <- tryCatch(morie_spatial_voting_blackbox(Z, n_dims = 1L), error = identity)
+    if (inherits(r, "error")) expect_false(grepl("reached basicspace", conditionMessage(r)))
+    r <- tryCatch(morie_spatial_voting_bayesian_am(Z, n_samples = 5L, burn_in = 1L),
+                  error = identity)
+    if (inherits(r, "error")) expect_false(grepl("reached basicspace", conditionMessage(r)))
+  }
+})

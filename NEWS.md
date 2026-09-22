@@ -1,5 +1,14 @@
 # rmorie 1.3.2 - 2026-09-21
 
+## Spatial voting
+
+Every `basicspace` call (`morie_spatial_voting_aldrich_mckelvey()`,
+`morie_spatial_voting_blackbox()`, `morie_spatial_voting_bayesian_am()`)
+is gated on a double matrix with at least two rows and two columns:
+basicspace 0.25's Fortran writes past its arrays on a single-row or
+single-column input and the process dies later (valgrind). Thin inputs
+take the native path.
+
 ## Clustering
 
 `predict.morie_cluster()` computes the n x k distances to the centroids
