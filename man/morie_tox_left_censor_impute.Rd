@@ -18,7 +18,8 @@ are treated as left-censored.}
 }
 \value{
 A list with the \code{imputed} vector, a logical \code{censored} mask,
-and the \code{fraction_censored}.
+the \code{fraction_censored} among measured values, and \code{n_missing}
+(\code{NA} is not measured, not below the limit; it stays \code{NA}).
 }
 \description{
 Forensic assays left-censor: results below the limit of detection are

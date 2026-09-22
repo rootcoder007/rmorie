@@ -398,12 +398,21 @@ NULL
 .morie_fairness_gini_core <- function(x) {
   # Sorted-rank formula. Returns 0.0 for an all-zero or single-element
   # input (no inequality defined), matching the Python helper.
-  x <- sort(as.numeric(x))
+  x <- as.numeric(x)
   n <- length(x)
-  total <- sum(x)
-  if (n < 2L || !is.finite(total) || total <= 0) {
+  if (n < 2L) {
     return(0.0)
   }
+  total <- sum(x)
+  if (!is.finite(total) || total < 0) {
+    # a missing, infinite or negative total: undefined. 0 would read as
+    # perfect equality on a data gap, matching the Python helper.
+    return(NA_real_)
+  }
+  if (total == 0) {
+    return(0.0)
+  }
+  x <- sort(x)
   idx <- seq_len(n)
   (2.0 * sum(idx * x)) / (n * total) - (n + 1.0) / n
 }
@@ -875,7 +884,13 @@ morie_fairness_gini <- function(values, group = NULL) {
     )
   }
 
-  interp <- paste0(
+  n_missing <- sum(!is.finite(vals))
+  if (n_missing > 0L) {
+    warnings <- c(warnings, sprintf("%d missing or non-finite value(s); the Gini coefficient is undefined (NA) until they are dropped or imputed.", n_missing))
+  }
+  interp <- if (is.na(overall)) {
+    sprintf("Gini is undefined: %d of %d values are missing or non-finite.", n_missing, length(vals))
+  } else paste0(
     sprintf("Gini = %.3f. ", overall),
     if (overall >= 0.5) {
       "The quantity is highly concentrated - a small share of units absorbs most of it."

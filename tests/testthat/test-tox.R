@@ -95,11 +95,15 @@ test_that("matrix reliability ranks protected matrices above diluting blood", {
 
 test_that("left-censor imputation substitutes below-LOD entries", {
   out <- morie_tox_left_censor_impute(c(0.4, NA, 0.9, 0.02), lod = 0.05)
-  expect_equal(out$imputed, c(0.4, 0.025, 0.9, 0.025))
-  expect_identical(out$censored, c(FALSE, TRUE, FALSE, TRUE))
-  expect_equal(out$fraction_censored, 0.5)
+  # NA is "not measured": it stays NA, is not censored, and is counted
+  expect_equal(out$imputed, c(0.4, NA, 0.9, 0.025))
+  expect_identical(out$censored, c(FALSE, FALSE, FALSE, TRUE))
+  expect_equal(out$fraction_censored, 1 / 3)
+  expect_identical(out$n_missing, 1L)
+  only_na <- morie_tox_left_censor_impute(c(NA), lod = 0.1, method = "sqrt2")
+  expect_true(is.na(only_na$imputed) && is.na(only_na$fraction_censored))
   expect_equal(
-    morie_tox_left_censor_impute(c(NA), lod = 0.1, method = "sqrt2")$imputed,
+    morie_tox_left_censor_impute(0.01, lod = 0.1, method = "sqrt2")$imputed,
     0.1 / sqrt(2)
   )
   expect_error(morie_tox_left_censor_impute(1, lod = 0), "> 0")

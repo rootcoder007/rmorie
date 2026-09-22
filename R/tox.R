@@ -352,7 +352,8 @@ morie_tox_matrix_reliability <- function(matrix = NULL, submersion_days = 0,
 #' @param method \code{"half"} (LOD/2, the common default), \code{"sqrt2"}
 #'   (LOD/sqrt(2), for moderate censoring), or \code{"lod"} (substitute LOD).
 #' @return A list with the \code{imputed} vector, a logical \code{censored} mask,
-#'   and the \code{fraction_censored}.
+#'   the \code{fraction_censored} among measured values, and \code{n_missing}
+#'   (\code{NA} is not measured, not below the limit; it stays \code{NA}).
 #' @examples
 #' morie_tox_left_censor_impute(c(0.4, NA, 0.9, 0.02), lod = 0.05)$imputed
 #' @export
@@ -368,13 +369,17 @@ morie_tox_left_censor_impute <- function(values, lod, method = "half") {
     lod   = lod,
     stop("`method` must be 'half', 'sqrt2', or 'lod'", call. = FALSE)
   )
-  censored <- is.na(values) | values < lod
+  # NA is "not measured", not "below the detection limit": it stays NA,
+  # is left out of the censoring fraction, and is counted in n_missing
+  measured <- !is.na(values)
+  censored <- measured & values < lod
   imputed <- values
   imputed[censored] <- sub
   list(
     imputed = imputed,
     censored = censored,
-    fraction_censored = mean(censored)
+    fraction_censored = if (any(measured)) sum(censored) / sum(measured) else NA_real_,
+    n_missing = sum(!measured)
   )
 }
 

@@ -1,5 +1,14 @@
 # rmorie 1.3.2 - 2026-09-21
 
+## Missing values
+
+`morie_fairness_gini()` is `NA` with a warning and an "undefined"
+interpretation when a value is missing or non-finite (it returned 0,
+"relatively evenly spread"). `morie_tox_left_censor_impute()` no longer
+counts `NA` as below the detection limit: it stays `NA`, is left out of
+`fraction_censored`, and is reported as `n_missing`. Same change in the
+Python arm.
+
 ## Spatial voting
 
 Every `basicspace` call (`morie_spatial_voting_aldrich_mckelvey()`,
