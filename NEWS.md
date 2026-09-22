@@ -10,13 +10,17 @@ single-column input and the process dies later (valgrind). Thin inputs
 take the native path.
 `morie_spatial_voting_aldrich_mckelvey()` reaches basicspace as documented:
 it passed `missing = NA`, which basicspace rejects, so every call had
-taken the fallback. **Its results change**: the stimulus positions are now
-basicspace's (standardised), which correlate about 0.04 with what the
-fallback returned on the same data, and the respondent intercepts and
-slopes are the per-respondent regression of the placements on those
-positions on either engine, so they are defined for every respondent
-(basicspace reports them only against a self-placement, which this
-function does not take; a 1-7 scale gave all-`NA` respondent parameters).
+taken the fallback. **Its numbers change**: the stimulus positions are
+now basicspace's, standardised to mean 0 and sd 1. On data with structure
+to recover the two engines agree closely (stimuli correlate about 0.97,
+intercepts 1.00) but not exactly; on structureless noise they do not
+agree at all (0.04), as nothing constrains either. The respondent
+intercepts and slopes are the per-respondent regression of the
+placements on those positions on either engine, so they are defined for
+every respondent; basicspace reports them only against a self-placement,
+which this function does not take, and a 1-7 scale had given all-`NA`
+respondent parameters. Non-finite stimuli from basicspace fall back to
+the native solver.
 
 ## Clustering
 

@@ -400,3 +400,17 @@ test_that("aldrich_mckelvey delegates to basicspace on a valid matrix", {
   expect_equal(unname(fs$alpha[i]), unname(co[1L]), tolerance = 1e-8)
   expect_equal(unname(fs$beta[i]), unname(co[2L]), tolerance = 1e-8)
 })
+
+test_that("non-finite stimuli from basicspace fall back to the native solver", {
+  skip_if_not_installed("basicspace")
+  testthat::local_mocked_bindings(
+    aldmck = function(...) list(stimuli = c(NA, 1, 2, 3, 4)),
+    .package = "basicspace"
+  )
+  set.seed(1)
+  Z <- matrix(rnorm(100), 20, 5)
+  fit <- morie_spatial_voting_aldrich_mckelvey(Z)
+  expect_identical(fit$engine, "fallback")
+  expect_true(all(is.finite(fit$zhat)))
+  expect_true(all(is.finite(fit$alpha)))
+})
