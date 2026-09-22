@@ -375,5 +375,28 @@ test_that("aldrich_mckelvey delegates to basicspace on a valid matrix", {
   fit <- morie_spatial_voting_aldrich_mckelvey(Z)
   expect_identical(fit$engine, "basicspace")
   expect_length(fit$zhat, 5L)
-  expect_length(fit$alpha, 20L)
+  expect_true(all(is.finite(fit$alpha)))
+  expect_true(all(is.finite(fit$beta)))
+  # the stimuli are basicspace's own, standardised
+  ref <- as.numeric(basicspace::aldmck(Z, respondent = 0, polarity = 1)$stimuli)
+  expect_equal(fit$zhat, (ref - mean(ref)) / sd(ref), tolerance = 1e-10)
+  # the canonical design: a 1-7 scale, which basicspace scales no
+  # respondent on without a self-placement; every intercept and slope is
+  # still defined here
+  set.seed(2)
+  truth <- c(-1.2, -0.4, 0.1, 0.9, 1.5)
+  S <- t(sapply(seq_len(40), function(i) {
+    round(pmin(pmax(4 + rnorm(1, 0, 0.3) + (1 + rnorm(1, 0, 0.2)) * truth +
+                      rnorm(5, 0, 0.4), 1), 7))
+  }))
+  fs <- morie_spatial_voting_aldrich_mckelvey(S)
+  expect_identical(fs$engine, "basicspace")
+  expect_true(all(is.finite(fs$alpha)))
+  expect_true(all(is.finite(fs$beta)))
+  expect_gt(cor(fs$zhat, truth), 0.95)
+  # every respondent's slope regresses that respondent's row on zhat
+  i <- 1L
+  co <- coef(lm(S[i, ] ~ fs$zhat))
+  expect_equal(unname(fs$alpha[i]), unname(co[1L]), tolerance = 1e-8)
+  expect_equal(unname(fs$beta[i]), unname(co[2L]), tolerance = 1e-8)
 })

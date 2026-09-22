@@ -31,8 +31,14 @@ Recovers latent stimulus positions from perceptual placement data by
 estimating respondent-specific intercepts \eqn{a_i} and slopes
 \eqn{b_i} in the model
 \deqn{z_{ij} = a_i + b_i \hat{z}_j + \epsilon_{ij}.}{z_ij = a_i + b_i z_hat_j + epsilon_ij.}
-Delegates to \code{basicspace::aldmck} when the \code{basicspace} package is
-installed; otherwise a hand-rolled EM/least-squares fallback is used.
+The stimulus positions come from \code{basicspace::aldmck} when the
+\code{basicspace} package is installed (standardised to mean 0, sd 1);
+otherwise from a hand-rolled EM/least-squares fallback. The respondent
+intercepts and slopes are, on either path, the per-respondent least
+squares regression of the reported placements on those positions, so
+they are defined for every respondent with at least two placements
+(\code{basicspace} itself reports them only for respondents it scales
+against a self-placement, which this function does not take).
 }
 \examples{
 if (requireNamespace("basicspace", quietly = TRUE)) {

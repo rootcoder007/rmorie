@@ -184,14 +184,42 @@ NULL
 # 1. Aldrich-McKelvey scaling
 # ===========================================================================
 
+# Respondent intercepts and slopes given stimulus positions: for each
+# respondent the least squares fit of Z[i, ] on zhat. Respondents with
+# fewer than two placements get (0, 1); a slope of zero is floored so the
+# stimulus update can divide by it.
+.sv_am_respondents <- function(Z, mask, zhat) {
+  n_resp <- nrow(Z)
+  alpha <- numeric(n_resp)
+  beta <- numeric(n_resp)
+  for (i in seq_len(n_resp)) {
+    valid <- mask[i, ]
+    if (sum(valid) < 2L) {
+      alpha[i] <- 0
+      beta[i] <- 1
+      next
+    }
+    pr <- qr.solve(cbind(1, zhat[valid]), Z[i, valid])
+    alpha[i] <- pr[1L]
+    beta[i] <- ifelse(abs(pr[2L]) > 1e-10, pr[2L], 1e-10)
+  }
+  list(alpha = alpha, beta = beta)
+}
+
 #' Aldrich-McKelvey scaling
 #'
 #' Recovers latent stimulus positions from perceptual placement data by
 #' estimating respondent-specific intercepts \eqn{a_i} and slopes
 #' \eqn{b_i} in the model
 #' \deqn{z_{ij} = a_i + b_i \hat{z}_j + \epsilon_{ij}.}{z_ij = a_i + b_i z_hat_j + epsilon_ij.}
-#' Delegates to `basicspace::aldmck` when the `basicspace` package is
-#' installed; otherwise a hand-rolled EM/least-squares fallback is used.
+#' The stimulus positions come from `basicspace::aldmck` when the
+#' `basicspace` package is installed (standardised to mean 0, sd 1);
+#' otherwise from a hand-rolled EM/least-squares fallback. The respondent
+#' intercepts and slopes are, on either path, the per-respondent least
+#' squares regression of the reported placements on those positions, so
+#' they are defined for every respondent with at least two placements
+#' (`basicspace` itself reports them only for respondents it scales
+#' against a self-placement, which this function does not take).
 #'
 #' @param Z A respondent-by-stimulus numeric matrix of perceptual
 #'   placements.  `NA` entries are treated as missing.
@@ -235,13 +263,16 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
     # down the fallback while the docs promised basicspace
     out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
                silent = TRUE)
-    if (!inherits(out, "try-error")) {
+    if (!inherits(out, "try-error") && all(is.finite(out$stimuli))) {
       zhat <- as.numeric(out$stimuli)
+      zhat <- zhat - mean(zhat)
+      if (stats::sd(zhat) > 0) zhat <- zhat / stats::sd(zhat)
+      rp <- .sv_am_respondents(Z, !is.na(Z), zhat)
       return(list(
         zhat       = zhat,
-        alpha      = as.numeric(out$respondents[, "intercept"]),
-        beta       = as.numeric(out$respondents[, "weight"]),
-        weights    = abs(as.numeric(out$respondents[, "weight"])),
+        alpha      = rp$alpha,
+        beta       = rp$beta,
+        weights    = abs(rp$beta) / sum(abs(rp$beta)) * n_resp,
         iterations = NA_integer_,
         converged  = TRUE,
         engine     = "basicspace"
@@ -260,20 +291,9 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
   iter <- 0L
   for (iter in seq_len(max_iter)) {
     zhat_old <- zhat
-    for (i in seq_len(n_resp)) {
-      valid <- mask[i, ]
-      if (sum(valid) < 2L) {
-        alpha[i] <- 0
-        beta[i] <- 1
-        next
-      }
-      zi <- Z[i, valid]
-      zh <- zhat[valid]
-      A  <- cbind(1, zh)
-      pr <- qr.solve(A, zi)
-      alpha[i] <- pr[1L]
-      beta[i]  <- ifelse(abs(pr[2L]) > 1e-10, pr[2L], 1e-10)
-    }
+    rp <- .sv_am_respondents(Z, mask, zhat)
+    alpha <- rp$alpha
+    beta <- rp$beta
     for (j in seq_len(n_stim)) {
       valid <- mask[, j]
       if (sum(valid) < 1L) next
