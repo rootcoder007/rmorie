@@ -2347,6 +2347,7 @@ File,Line,Status,Version,Context
 ./tests/testthat/test-gibbons-orderstat.R,229,STALE_OR_DEP,2.4.6,"# eq. (2.4.6) on the uniform: the coefficient times x^(r-1) (y-x)^(s-r-1)"
 ./tests/testthat/test-gibbons-twosample.R,195,STALE_OR_DEP,4.4.0,"want <- if (getRversion() >= 4.4.0) {"
 ./tests/testthat/test-gibbons-twosample.R,198,STALE_OR_DEP,4.4.0,"} else { # `alternative` arrived in R 4.4.0; before it; `two.sided`"
+./tests/testthat/test-gibbons-twosample.R,208,STALE_OR_DEP,4.4.0,"wone <- if (getRversion() >= 4.4.0) {"
 ./tests/testthat/test-grucl-det-seed.R,3,STALE_OR_DEP,0.4.0,"# Verifies that the `deterministic_seed` argument added in morie v0.4.0:"
 ./tests/testthat/test-heinz-det-seed.R,3,STALE_OR_DEP,0.4.0,"# Verifies that the `deterministic_seed` argument added in morie v0.4.0:"
 ./tests/testthat/test-ingest-extra.R,33,STALE_OR_DEP,192.0.2.123,"portal = http://192.0.2.123;"
