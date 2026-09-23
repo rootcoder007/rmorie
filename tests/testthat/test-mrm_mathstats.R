@@ -20,6 +20,15 @@ test_that("mrm_twoprop_test runs on two binomial samples", {
   expect_true(is.list(out) || is.data.frame(out))
 })
 
+test_that("mrm_twoprop_test: no events in either arm is chi2 0, p 1, with a warning", {
+  expect_warning(out <- mrm_twoprop_test(0L, 50L, 0L, 50L), "degenerate")
+  expect_identical(out$chi2, 0)
+  expect_identical(out$p_value_chi2, 1)
+  expect_identical(out$p_value_fisher, 1)
+  expect_warning(out <- mrm_twoprop_test(50L, 50L, 50L, 50L), "degenerate")
+  expect_identical(out$chi2, 0)
+})
+
 test_that("mrm_var_test runs against a known variance", {
   set.seed(1L)
   s <- stats::rnorm(50, sd = 2)

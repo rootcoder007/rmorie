@@ -1,5 +1,13 @@
 # rmorie 1.3.2 - 2026-09-21
 
+## Two-proportion test
+
+`mrm_twoprop_test()` with no events (or nothing but events) in both arms
+returns chi-square 0 with p = 1 and warns, instead of NaN from
+`chisq.test()`. This is morie's own convention (the limit of two
+identical arms), the same one the Python arm adopted in 1.3.2, so the
+two arms agree again on degenerate tables.
+
 ## Missing values
 
 `morie_fairness_gini()` is `NA` with a warning and an "undefined"

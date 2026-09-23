@@ -81,8 +81,20 @@ mrm_twoprop_test <- function(x1, n1, x2, n2, alpha = 0.05) {
   p1 <- x1 / n1
   p2 <- x2 / n2
   tbl <- matrix(c(x1, n1 - x1, x2, n2 - x2), nrow = 2, byrow = TRUE)
-  ch <- suppressWarnings(stats::chisq.test(tbl, correct = FALSE))
-  fi <- stats::fisher.test(tbl, alternative = "two.sided")
+  if (x1 + x2 == 0 || x1 + x2 == n1 + n2) {
+    # pooled proportion 0 or 1: the chi-square statistic is 0/0 and
+    # chisq.test returns NaN. morie's convention, shared with the Python
+    # arm, is the limit of two identical arms: 0 with p = 1, and a warning.
+    warning(
+      "both arms are degenerate (pooled proportion is 0 or 1); the ",
+      "chi-square and Fisher tests carry no information", call. = FALSE
+    )
+    ch <- list(statistic = 0, parameter = 1L, p.value = 1)
+    fi <- list(p.value = 1)
+  } else {
+    ch <- suppressWarnings(stats::chisq.test(tbl, correct = FALSE))
+    fi <- stats::fisher.test(tbl, alternative = "two.sided")
+  }
   se <- sqrt(p1 * (1 - p1) / n1 + p2 * (1 - p2) / n2)
   z_w <- if (se > 0) (p1 - p2) / se else NA_real_
   p_wald <- 2 * (1 - stats::pnorm(abs(z_w)))
