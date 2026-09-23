@@ -1089,10 +1089,20 @@ morie_sensitivity_konfound <- function(estimate, se, n,
                                        n_covariates = 0L,
                                        alpha = 0.05, ...) {
   .morie_sens_need("konfound", "morie_sensitivity_konfound")
-  raw <- konfound::pkonfound(
-    est_eff = estimate, std_err = se,
-    n_obs = n, n_covariates = n_covariates,
-    alpha = alpha, to_return = "raw_output", ...
+  # konfound still calls ggplot2 idioms ggplot2 has deprecated; those
+  # lifecycle warnings are konfound's to fix, not the caller's
+  raw <- withCallingHandlers(
+    konfound::pkonfound(
+      est_eff = estimate, std_err = se,
+      n_obs = n, n_covariates = n_covariates,
+      alpha = alpha, to_return = "raw_output", ...
+    ),
+    warning = function(w) {
+      if (inherits(w, "lifecycle_warning_deprecated") ||
+          grepl("deprecated", conditionMessage(w), fixed = TRUE)) {
+        invokeRestart("muffleWarning")
+      }
+    }
   )
   pct_bias <- tryCatch(as.numeric(raw$percent_bias_to_change_inference),
                        error = function(e) NA_real_)

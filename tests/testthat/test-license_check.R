@@ -47,8 +47,12 @@ test_that("morie_check_plugin_license accepts a compatible SPDX", {
 })
 
 test_that("morie_check_plugin_license flags an incompatible SPDX", {
-  out <- tryCatch(
+  expect_warning(
     morie_check_plugin_license(plugin_spdx = "Proprietary-Closed"),
+    "not on the FSF GPL-compatible list"
+  )
+  out <- tryCatch(
+    suppressWarnings(morie_check_plugin_license(plugin_spdx = "Proprietary-Closed")),
     error = function(e) e
   )
   # Either errors cleanly or returns FALSE / a structured failure

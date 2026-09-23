@@ -12,7 +12,7 @@ morie_cluster(
   case_labels = NULL,
   nofit = FALSE,
   seed = 42L,
-  iter_max = 10L
+  iter_max = 100L
 )
 }
 \arguments{
@@ -33,8 +33,8 @@ them dominate the distance metric -- the examples contrast both.}
 \item{seed}{RNG seed.}
 
 \item{iter_max}{Maximum number of k-means iterations (passed to
-\code{\link[stats:kmeans]{stats::kmeans()}} as \code{iter.max}); raise it when the fit warns that it
-did not converge.}
+\code{\link[stats:kmeans]{stats::kmeans()}} as \code{iter.max}, default 100); raise it when the fit
+warns that it did not converge.}
 }
 \value{
 A \code{morie_cluster} object (or \code{morie_cluster_spec} if

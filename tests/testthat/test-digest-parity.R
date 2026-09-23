@@ -88,7 +88,7 @@ test_that("morie_hmac, morie_digest2int, morie_sha1 and morie_aes match digest",
   skip_if_not_installed("digest")
   for (algo in c("md5", "sha1", "sha256", "sha512", "crc32")) {
     expect_identical(morie_hmac("key", "message", algo = algo), digest::hmac("key", "message", algo = algo), label = algo)
-    expect_identical(morie_hmac(as.raw(1:100), "message", algo = algo), digest::hmac(as.raw(1:100), "message", algo = algo), label = paste(algo, "longkey"))
+    expect_identical(morie_hmac(as.raw(1:100), "message", algo = algo), suppressWarnings(digest::hmac(as.raw(1:100), "message", algo = algo)), label = paste(algo, "longkey"))  # digest itself warns while coercing the long key
     expect_identical(morie_hmac("k", charToRaw("m"), algo = algo, raw = TRUE), digest::hmac("k", charToRaw("m"), algo = algo, raw = TRUE), label = paste(algo, "raw"))
   }
   expect_identical(morie_digest2int(c("abc", "", "é", "a longer string")), digest::digest2int(c("abc", "", "é", "a longer string")))

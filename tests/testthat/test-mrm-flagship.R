@@ -93,7 +93,10 @@ test_that("full MRM pipeline composes across modules (phase 17)", {
   expect_true(id$identified)
   expect_setequal(id$adjustment_set, c("re74", "age", "educ"))
   # 3. matching on the identified set (module 1)
-  m <- morie_matching_nearest_neighbor(d, "treat", id$adjustment_set)
+  expect_warning(
+    m <- morie_matching_nearest_neighbor(d, "treat", id$adjustment_set),
+    "Fewer control units"
+  )
   expect_gt(nrow(m$match_pairs), 50)
   # 4. estimation through the DAG (module 10 via 13)
   ate <- morie_dag_estimate(dag, d, method = "backdoor.dml")

@@ -19,7 +19,7 @@ test_that("morie_license_metadata returns expected named list", {
     "osi_approved", "kernel_compatible"
   ))
   expect_identical(md$package, "rmorie")
-  expect_identical(md$spdx, "GPL-2.0-only")
+  expect_identical(md$spdx, "AGPL-3.0-or-later")  # DESCRIPTION: AGPL (>= 3)
 })
 
 test_that("morie_check_plugin_license accepts compatible licences", {

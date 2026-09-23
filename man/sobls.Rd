@@ -16,22 +16,26 @@ morie_sobol_sequence(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L)
 
 \item{f}{optional integrand; returns scalar.}
 
-\item{scramble}{logical; ignored by this arm, which has no Owen
-scrambling. Asking for it warns; the sequence returned is
-always the unscrambled one, and \code{scrambled} in the
-result says so.}
+\item{scramble}{logical; \code{TRUE} applies the linear matrix scramble
+and digital shift, \code{FALSE} returns the raw sequence.}
 
-\item{seed}{integer; seeds nothing in this arm, since the
-sequence returned is deterministic and unscrambled.}
+\item{seed}{integer seed for the scramble (the unscrambled sequence is
+deterministic and ignores it). The R and Python arms draw their
+scrambles from different generators, so their scrambled point sets
+differ; the unscrambled sequences agree.}
 }
 \value{
 list: sample, estimate (if f given), se, N, d,
-\code{scrambled} (always \code{FALSE} in this arm) and method.
+\code{scrambled} and method.
 }
 \description{
 Native gray-code Sobol sequence with Joe-Kuo direction numbers
-(low-discrepancy in the unit cube, d <= 10); matches
-\code{randtoolbox::sobol}'s unscrambled output exactly.
+(low-discrepancy in the unit cube, d <= 10); unscrambled it matches
+\code{randtoolbox::sobol}'s output exactly. With \code{scramble = TRUE}
+(the default) the points are randomised by a linear matrix scramble
+plus a random digital shift (Matousek 1998), the same "LMS + shift"
+family \code{scipy.stats.qmc.Sobol(scramble = TRUE)} uses, so the
+sequence keeps its net structure while every point is randomised.
 }
 \examples{
 morie_sobol_sequence(N = 128L, d = 2L)

@@ -77,7 +77,8 @@ morie_run_propensity_ipw_analysis <- function(
   } else {
     stats::as.formula(paste(treatment, "~", paste(covariates, collapse = " + ")))
   }
-  ps_model <- stats::glm(ps_formula, data = frame, family = stats::binomial())
+  ps_model <- stats::glm(ps_formula, data = frame, family = stats::binomial(),
+                         control = stats::glm.control(maxit = 100L))
   frame$ps <- pmin(pmax(stats::predict(ps_model, type = "response"), 0.01), 0.99)
   frame$ipw <- ifelse(frame[[treatment]] == 1, 1 / frame$ps, 1 / (1 - frame$ps))
   q01 <- as.numeric(stats::quantile(frame$ipw, trim[[1]], na.rm = TRUE))
@@ -176,7 +177,8 @@ morie_run_ebac_selection_ipw_analysis <- function(
   obs_formula <- stats::as.formula(
     paste("R ~", paste(c(treatment, covariates), collapse = " + "))
   )
-  obs_model <- stats::glm(obs_formula, data = target, family = stats::binomial())
+  obs_model <- stats::glm(obs_formula, data = target, family = stats::binomial(),
+                          control = stats::glm.control(maxit = 100L))
   target$p_hat <- pmin(pmax(stats::predict(obs_model, type = "response"), 0.01), 0.99)
   p_obs <- mean(target$R)
 

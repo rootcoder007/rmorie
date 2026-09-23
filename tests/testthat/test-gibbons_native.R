@@ -35,7 +35,10 @@ test_that("tolerance coefficient matches Python and extends tolim", {
   # agrees with the Wilks confidence in R/tolim.R at (1, n)
   set.seed(1)
   x <- stats::rnorm(40)
-  wilks <- morie_tolerance_limits(x, coverage = 0.9)$confidence_achieved
+  expect_warning(
+    wilks <- morie_tolerance_limits(x, coverage = 0.9)$confidence_achieved,
+    "too small"
+  )
   expect_equal(morie_tolerance_beta(n = 40, p = 0.9)$gamma, wilks,
     tolerance = 1e-10
   )

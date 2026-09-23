@@ -22,7 +22,13 @@
   # prior weights enter through the environment so glm() treats them
   # as sampling weights (same as svyglm's internal call)
   env <- new.env(parent = environment(formula))
-  assign(".morie_w", weights, envir = env)
+  # svyglm rescales the sampling weights to mean 1 before its IRLS:
+  # the weighted MLE is invariant to the scale, but glm()'s binomial
+  # start point (w y + 1/2) / (w + 1) sits at the boundary for raw
+  # weights in the hundreds and the iterations run off from there
+  w <- as.numeric(weights)
+  w <- w / mean(w)
+  assign(".morie_w", w, envir = env)
   environment(formula) <- env
   fit <- eval(bquote(stats::glm(.(formula), data = .(quote(data)),
                                 weights = .morie_w,
@@ -31,7 +37,6 @@
   X <- stats::model.matrix(fit)
   mu <- stats::fitted(fit)
   y <- fit$y
-  w <- weights
   n <- nrow(X)
   p <- ncol(X)
   # working score contributions u_i = w_i (y_i - mu_i) x_i for the

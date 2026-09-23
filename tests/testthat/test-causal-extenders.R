@@ -67,11 +67,15 @@ test_that("morie_causal_impact returns expected result fields", {
   y[(pre_n + 1L):n] <- y[(pre_n + 1L):n] + 1.5
   d <- data.frame(y = y, x = as.numeric(x))
 
-  res <- morie_causal_impact(
-    data = d,
-    pre_period = c(1L, pre_n),
-    post_period = c(pre_n + 1L, n),
-    model_args = list(niter = 200L)
+  # niter = 200 keeps the test fast; CausalImpact flags the short chain
+  expect_warning(
+    res <- morie_causal_impact(
+      data = d,
+      pre_period = c(1L, pre_n),
+      post_period = c(pre_n + 1L, n),
+      model_args = list(niter = 200L)
+    ),
+    "MCMC"
   )
   expect_true(all(c("average_effect", "cumulative_effect",
                     "ci_lower", "ci_upper", "summary",

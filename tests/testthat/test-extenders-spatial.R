@@ -50,7 +50,8 @@ test_that("morie_geostat_krige wraps gstat::krige", {
   )
   sp::coordinates(grid) <- ~ x + y
   vg <- gstat::variogram(z ~ 1, data = df)
-  mod <- gstat::fit.variogram(vg, gstat::vgm(1, "Sph", 5, 1))
+  # random data gives gstat a singular variogram fit; the wrapper is under test
+  mod <- suppressWarnings(gstat::fit.variogram(vg, gstat::vgm(1, "Sph", 5, 1)))
   out <- morie_geostat_krige(z ~ 1, df, grid, mod)
   expect_type(out, "list")
   expect_identical(out$method, "gstat::krige")

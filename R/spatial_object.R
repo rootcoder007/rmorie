@@ -302,7 +302,9 @@ morie_spatial_sample <- function(x, size, by_density = TRUE, seed = 42L) {
 #' @export
 morie_spatial_cluster <- function(x, k = 3L) {
   stopifnot(inherits(x, "morie_spatial"))
-  cl <- morie_cluster(as.data.frame(x$coords), k = k)
+  # coordinates carry no case labels by construction: label positionally
+  cl <- morie_cluster(as.data.frame(x$coords), k = k,
+                      case_labels = seq_len(nrow(x$coords)))
   unname(cl$assignments)
 }
 

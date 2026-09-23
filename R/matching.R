@@ -1376,8 +1376,21 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
                                          seed = 42L, alpha = 0.05) {
   .rmorie_local_seed(seed)
   df <- .morie_matching_drop_na(data, c(outcome, treatment, covariates))
-  mr <- morie_matching_nearest_neighbor(df, treatment, covariates,
-                                        n_neighbors = 1L, ps = ps)
+  # Fold the per-match "Fewer control units than treated" warning (from
+  # the full-data match and from every bootstrap resample) into one
+  # summary at the end.
+  n_few_ctrl_warn <- 0L
+  data_few_ctrl <- FALSE
+  ctrl_warn_pattern <- "Fewer control units than treated"
+  mr <- withCallingHandlers(
+    morie_matching_nearest_neighbor(df, treatment, covariates,
+                                    n_neighbors = 1L, ps = ps),
+    warning = function(w) {
+      if (grepl(ctrl_warn_pattern, conditionMessage(w))) {
+        data_few_ctrl <<- TRUE
+        invokeRestart("muffleWarning")
+      }
+    })
   matched <- mr$matched_data
   c_mask <- matched[[treatment]] == 0
   t_mask <- matched[[treatment]] == 1
@@ -1391,14 +1404,15 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
 
   n <- nrow(df)
   boot_ests <- numeric(0)
-  # Track the "Fewer control units than treated" warning that MatchIt
-  # emits per-resample inside the bootstrap loop; we collapse N
-  # individual warnings into a single summary at the end so the user
-  # still gets the signal without 20+ duplicate messages.
-  n_few_ctrl_warn <- 0L
-  ctrl_warn_pattern <- "Fewer control units than treated"
+  # Resample within each arm so every replicate keeps the design's
+  # treated and control counts: the ATT is conditional on who was
+  # treated, and pooled resampling of a balanced sample would starve
+  # the control arm in about half of the replicates.
+  idx_t_all <- which(df[[treatment]] == 1)
+  idx_c_all <- which(df[[treatment]] == 0)
   for (b in seq_len(n_bootstrap)) {
-    idx <- sample.int(n, n, replace = TRUE)
+    idx <- c(sample(idx_t_all, length(idx_t_all), replace = TRUE),
+             sample(idx_c_all, length(idx_c_all), replace = TRUE))
     df_b <- df[idx, , drop = FALSE]
     rownames(df_b) <- as.character(seq_len(n))
     out_b <- tryCatch(
@@ -1424,10 +1438,13 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
       error = function(e) NA_real_)
     if (!is.na(out_b)) boot_ests <- c(boot_ests, out_b)
   }
-  if (n_few_ctrl_warn > 0L) {
-    warning(sprintf(
-      "%d of %d bootstrap resamples had fewer control units than treated; not all treated units in those resamples got a match.",
-      n_few_ctrl_warn, n_bootstrap), call. = FALSE)
+  if (data_few_ctrl || n_few_ctrl_warn > 0L) {
+    warning(paste0(
+      if (data_few_ctrl) "Fewer control units than treated units; not all treated units got a match. " else "",
+      if (n_few_ctrl_warn > 0L) sprintf(
+        "%d of %d bootstrap resamples had fewer control units than treated; not all treated units in those resamples got a match.",
+        n_few_ctrl_warn, n_bootstrap) else ""),
+      call. = FALSE)
   }
   se <- if (length(boot_ests) > 1L) stats::sd(boot_ests) else NA_real_
 

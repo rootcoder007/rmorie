@@ -117,11 +117,13 @@ morie_weights_design <- function(selection_probs) {
 morie_weights_poststratify <- function(weights, strata, population_totals) {
   w <- as.numeric(weights)
   s <- as.character(strata)
-  for (h in unique(s)) {
-    if (!h %in% as.character(names(population_totals))) {
-      warning(sprintf("Stratum '%s' missing from population_totals.", h))
-      next
-    }
+  missing <- setdiff(unique(s), as.character(names(population_totals)))
+  if (length(missing)) {
+    warning(sprintf("Stratum %s missing from population_totals.",
+                    paste0("'", missing, "'", collapse = ", ")),
+            call. = FALSE)
+  }
+  for (h in setdiff(unique(s), missing)) {
     mask <- s == h
     cur <- sum(w[mask])
     if (cur == 0) next

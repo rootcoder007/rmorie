@@ -552,8 +552,11 @@ morie_ts_select <- function(x, max_p = 3L, max_q = 3L, d = NULL,
   grid <- expand.grid(p = 0:max_p, q = 0:max_q)
   n <- length(x)
   score <- vapply(seq_len(nrow(grid)), function(i) {
-    m <- tryCatch(morie_ts_arima(x, order = c(grid$p[i], d, grid$q[i])),
-                  error = function(e) NULL)
+    # a candidate whose optimiser did not converge simply scores worse;
+    # only the refit of the chosen order below is allowed to warn
+    m <- tryCatch(suppressWarnings(
+      morie_ts_arima(x, order = c(grid$p[i], d, grid$q[i]))),
+      error = function(e) NULL)
     if (is.null(m)) return(Inf)
     if (ic == "aic") m$aic else stats::AIC(m$fit, k = log(n))
   }, numeric(1))

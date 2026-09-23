@@ -74,10 +74,13 @@ test_that("morie_weights_rake errors on missing column", {
 test_that("morie_weights_rake respects bounds clipping", {
   set.seed(1)
   df <- data.frame(s = c("a", "a", "b", "b"))
-  res <- morie_weights_rake(c(1, 1, 1, 1), df,
-                            list(s = c(a = 100, b = 100)),
-                            bounds = c(0.5, 1.5),
-                            max_iter = 5)
+  expect_warning(
+    res <- morie_weights_rake(c(1, 1, 1, 1), df,
+                              list(s = c(a = 100, b = 100)),
+                              bounds = c(0.5, 1.5),
+                              max_iter = 5),
+    "did not converge"
+  )
   expect_true(is.numeric(res$weights))
 })
 

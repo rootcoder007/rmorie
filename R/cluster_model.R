@@ -62,8 +62,8 @@ NULL
 #' @param nofit If TRUE, return an unfitted specification.
 #' @param seed RNG seed.
 #' @param iter_max Maximum number of k-means iterations (passed to
-#'   [stats::kmeans()] as `iter.max`); raise it when the fit warns that it
-#'   did not converge.
+#'   [stats::kmeans()] as `iter.max`, default 100); raise it when the fit
+#'   warns that it did not converge.
 #' @return A `morie_cluster` object (or `morie_cluster_spec` if
 #'   `nofit = TRUE`) whose cluster labels are ordered by decreasing size.
 #' @examples
@@ -74,7 +74,7 @@ NULL
 morie_cluster <- function(x, k = 2L, scale = FALSE,
                           na_action = c("omit", "fail"),
                           case_labels = NULL, nofit = FALSE, seed = 42L,
-                          iter_max = 10L) {
+                          iter_max = 100L) {
   na_action <- match.arg(na_action)
   if (isTRUE(nofit)) {
     spec <- list(k = k, scale = scale)

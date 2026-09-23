@@ -290,7 +290,7 @@ test_that("morie_sensitivity_evalue computes natively (no EValue needed)", {
 test_that("morie_sensitivity_tipping_point dispatches tipr::tip", {
   skip_if_not_installed("tipr")
   out <- tryCatch(
-    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5, r2 = 0.1),
+    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5),
     error = function(e) e
   )
   if (inherits(out, "error")) {
@@ -306,7 +306,7 @@ test_that("morie_sensitivity_tipping_point errors when tipr missing", {
     "tipr is installed; cannot test missing-package error path."
   )
   expect_error(
-    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5, r2 = 0.1),
+    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5),
     regexp = "tipr"
   )
 })

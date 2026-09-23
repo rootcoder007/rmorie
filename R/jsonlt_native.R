@@ -1534,7 +1534,7 @@ morie_jsonlt_rbind_pages <- function(pages) {
     integer = as.integer(.jsonlt_list_to_vec(vals)),
     numeric = , double = as.double(.jsonlt_list_to_vec(vals)),
     character = as.character(.jsonlt_list_to_vec(vals)),
-    complex = as.complex(.jsonlt_list_to_vec(vals)),
+    complex = .jsonlt_as_complex(.jsonlt_list_to_vec(vals)),
     list = , pairlist = , closure = lapply(vals, .jsonlt_unpack),
     symbol = , name = if (identical(unlist(vals), "")) quote(expr = ) else as.name(unlist(vals)),
     expression = parse(text = unlist(vals)),
@@ -1613,4 +1613,11 @@ morie_jsonlt <- function(x = NULL, route = "to_json", ...) {
     base64_enc = morie_jsonlt_base64_enc(x),
     base64_dec = morie_jsonlt_base64_dec(x))
   list(route = route, result = res, method = "jsonlite 2.0.0 mapping (Ooms 2014), RFC 8259")
+}
+
+# jsonlite writes a missing complex as the string "NA"; as.complex("NA")
+# would warn on the coercion, so map it to NA first
+.jsonlt_as_complex <- function(v) {
+  v[v %in% "NA"] <- NA
+  as.complex(v)
 }

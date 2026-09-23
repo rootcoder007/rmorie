@@ -12,8 +12,9 @@ Character vector of SPDX identifiers.
 \description{
 Mirrors the FSF list at
 \url{https://www.gnu.org/licenses/license-list.html}.  Apache-2.0
-is GPL-3 compatible but not GPL-2 compatible; morie is
-GPL-2.0-only so the choice rests with downstream consumers.
+is GPL-3 compatible but not GPL-2 compatible; rmorie itself is
+AGPL-3.0-or-later (see DESCRIPTION), so the choice rests with
+downstream consumers.
 }
 \examples{
 morie_gpl_compatible_licenses()

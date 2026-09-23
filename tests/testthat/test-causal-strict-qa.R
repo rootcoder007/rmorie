@@ -286,7 +286,11 @@ test_that("morie_matching_ate_matched recovers ATE without weights", {
 test_that("morie_matching_abadie_imbens_se returns non-negative scalar", {
   testthat::skip_if_not_installed("MatchIt")
   d <- make_ipw_dgp(n = 800L, tau = 2.5, seed = 65L)
-  res <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3"))
+  # this DGP draws more treated than control units at seed 65
+  expect_warning(
+    res <- morie_matching_nearest_neighbor(d, "d", c("x1", "x2", "x3")),
+    "Fewer control units"
+  )
   se <- morie_matching_abadie_imbens_se(d, "y", "d", res$match_pairs)
   # The kernel returns numeric or named list; coerce + sanity
   se_num <- if (is.list(se)) as.numeric(se[[1]]) else as.numeric(se)

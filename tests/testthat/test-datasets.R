@@ -229,8 +229,9 @@ test_that("chicago_crime call routes through socrata get (mocked)", {
     },
     .package = "rmorie"
   )
+  # the routing is under test, not the offline-fallback notice
   res <- tryCatch(
-    morie_datasets_chicago_crime(year = 2024, max_features = 1L),
+    suppressWarnings(morie_datasets_chicago_crime(year = 2024, max_features = 1L)),
     error = function(e) e)
   expect_true(is.data.frame(res) || inherits(res, "error"))
 })

@@ -101,7 +101,8 @@ test_that("prettify / minify / base64 / serialize agree with jsonlite", {
                  c(1 + 2i, NA), charToRaw("hi"), c(1, NA, NaN, Inf), NULL, TRUE, c(a = 1L))) {
     theirs <- as.character(jsonlite::serializeJSON(x))
     expect_identical(as.character(morie_jsonlt_serialize(x)), theirs)
-    expect_equal(morie_jsonlt_unserialize(theirs), jsonlite::unserializeJSON(theirs))
+    # jsonlite itself warns while coercing a missing complex
+    expect_equal(morie_jsonlt_unserialize(theirs), suppressWarnings(jsonlite::unserializeJSON(theirs)))
     # complex NA round-trips as NA+0i through jsonlite too; compare with its own result
     if (!is.complex(x)) expect_equal(morie_jsonlt_unserialize(morie_jsonlt_serialize(x)), x)
   }

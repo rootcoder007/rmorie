@@ -27,7 +27,15 @@ test_that("morie_matching_genetic returns match_result on synthetic data", {
 })
 
 test_that("morie_matching_variable_ratio matches multiple controls per treated", {
-  df <- make_match_df(n = 200, tau = 0.4, seed = 3L)
+  # one treated unit in four, so up to three controls are available
+  # for every treated unit
+  set.seed(3L)
+  n <- 300L
+  x1 <- stats::rnorm(n)
+  x2 <- stats::rnorm(n)
+  d <- stats::rbinom(n, 1, 0.25)
+  df <- data.frame(d = d, y = 0.4 * d + 0.5 * x1 + 0.3 * x2 + stats::rnorm(n, sd = 0.5),
+                   x1 = x1, x2 = x2)
   out <- tryCatch(
     morie_matching_variable_ratio(df, "d", c("x1", "x2"),
                                    min_ratio = 1L, max_ratio = 3L),
@@ -75,8 +83,9 @@ test_that("morie_matching_multi_treatment handles 3-arm treatment", {
     x1 = stats::rnorm(n),
     x2 = stats::rnorm(n)
   )
+  # three random arms: some pairwise comparisons have fewer controls
   out <- tryCatch(
-    morie_matching_multi_treatment(df, "d", c("x1", "x2")),
+    suppressWarnings(morie_matching_multi_treatment(df, "d", c("x1", "x2"))),
     error = function(e) e
   )
   if (inherits(out, "error")) {

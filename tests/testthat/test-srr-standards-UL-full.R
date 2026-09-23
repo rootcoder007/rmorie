@@ -19,7 +19,10 @@ test_that("UL1.3/UL7.3 input row names are propagated to output", {
 test_that("UL1.4b scaling changes the clustering (documented consequence)", {
   d <- .uln()
   d$Sepal.Length <- d$Sepal.Length * 100   # inflate one column
-  a <- morie_cluster(d, k = 3, scale = FALSE, seed = 1)
+  expect_warning(
+    a <- morie_cluster(d, k = 3, scale = FALSE, seed = 1),
+    "scales differ"
+  )
   b <- morie_cluster(d, k = 3, scale = TRUE, seed = 1)
   expect_false(identical(unname(a$assignments), unname(b$assignments)))
 })
@@ -111,7 +114,7 @@ test_that("UL7.4 predicting new data is faster than a full re-fit", {
 test_that("UL3.3 predict assigns by nearest centroid in n x k work", {
   skip_heavy()
   x <- as.data.frame(matrix(rnorm(10000 * 5), 10000, 5))
-  cl <- morie_cluster(x, k = 5)
+  cl <- morie_cluster(x, k = 5, case_labels = seq_len(nrow(x)))
   t <- system.time(lab <- predict(cl, x))[["elapsed"]]
   # the (n + k)^2 route took 6 s and 2.8 GB here
   expect_lt(t, 1)
@@ -123,7 +126,7 @@ test_that("UL3.3 predict assigns by nearest centroid in n x k work", {
   # far from the origin the |x|^2 + |c|^2 - 2 x.c expansion would put
   # four points in five with the wrong centroid; the exact form must not
   far <- x + 1e9
-  cl_far <- morie_cluster(far, k = 5)
+  cl_far <- morie_cluster(far, k = 5, case_labels = seq_len(nrow(far)))
   xf <- as.matrix(far)
   want_far <- apply(xf, 1, function(r) {
     which.min(colSums((t(cl_far$centers) - r)^2))

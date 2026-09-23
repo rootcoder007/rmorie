@@ -26,8 +26,9 @@ NULL
 #'
 #' Mirrors the FSF list at
 #' \url{https://www.gnu.org/licenses/license-list.html}.  Apache-2.0
-#' is GPL-3 compatible but not GPL-2 compatible; morie is
-#' GPL-2.0-only so the choice rests with downstream consumers.
+#' is GPL-3 compatible but not GPL-2 compatible; rmorie itself is
+#' AGPL-3.0-or-later (see DESCRIPTION), so the choice rests with
+#' downstream consumers.
 #'
 #' @return Character vector of SPDX identifiers.
 #' @examples
@@ -37,6 +38,7 @@ morie_gpl_compatible_licenses <- function() {
   c(
     "GPL-2.0-only", "GPL-2.0-or-later",
     "GPL-3.0-only", "GPL-3.0-or-later",
+    "AGPL-3.0-only", "AGPL-3.0-or-later",
     "LGPL-2.1-only", "LGPL-2.1-or-later",
     "LGPL-3.0-only", "LGPL-3.0-or-later",
     "Apache-2.0",
@@ -60,10 +62,10 @@ morie_gpl_compatible_licenses <- function() {
 morie_license_metadata <- function() {
   list(
     package = "rmorie",
-    spdx = "GPL-2.0-only",
+    spdx = "AGPL-3.0-or-later",
     fsf_libre = "yes",
     osi_approved = "yes",
-    kernel_compatible = "yes (MODULE_LICENSE(\"GPL v2\") accepts this)"
+    kernel_compatible = "no (AGPL-3.0 is not a kernel-compatible licence)"
   )
 }
 
@@ -93,7 +95,7 @@ morie_check_plugin_license <- function(plugin_spdx,
   ok <- plugin_spdx %in% morie_gpl_compatible_licenses()
   if (!ok) {
     msg <- sprintf(
-      "Plugin SPDX '%s' is not on the FSF GPL-compatible list; linking against morie may violate GPL-2.0-only.",
+      "Plugin SPDX '%s' is not on the FSF GPL-compatible list; linking against rmorie may violate its AGPL-3.0-or-later licence.",
       plugin_spdx
     )
     if (raise_on_incompatible) stop(msg) else warning(msg, call. = FALSE)

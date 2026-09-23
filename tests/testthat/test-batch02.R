@@ -317,7 +317,7 @@ test_that("btsrp accepts a custom statistic", {
 
 test_that("btsrp handles degenerate short input", {
   skip_heavy()
-  res <- btsrp(c(1.5), B = 50)
+  expect_warning(res <- btsrp(c(1.5), B = 50), "fewer than two observations")
   expect_true(is.na(res$estimate))
   expect_equal(res$n, 1L)
 })

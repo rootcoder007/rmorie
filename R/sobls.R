@@ -2,47 +2,75 @@
 #' Sobol quasi-random sequence (Sobol 1967)
 #'
 #' Native gray-code Sobol sequence with Joe-Kuo direction numbers
-#' (low-discrepancy in the unit cube, d <= 10); matches
-#' \code{randtoolbox::sobol}'s unscrambled output exactly.
+#' (low-discrepancy in the unit cube, d <= 10); unscrambled it matches
+#' \code{randtoolbox::sobol}'s output exactly. With \code{scramble = TRUE}
+#' (the default) the points are randomised by a linear matrix scramble
+#' plus a random digital shift (Matousek 1998), the same "LMS + shift"
+#' family \code{scipy.stats.qmc.Sobol(scramble = TRUE)} uses, so the
+#' sequence keeps its net structure while every point is randomised.
 #'
 #' @param N integer; default 128.
 #' @param d integer; default 1.
 #' @param f optional integrand; returns scalar.
-#' @param scramble logical; ignored by this arm, which has no Owen
-#'   scrambling. Asking for it warns; the sequence returned is
-#'   always the unscrambled one, and \code{scrambled} in the
-#'   result says so.
-#' @param seed integer; seeds nothing in this arm, since the
-#'   sequence returned is deterministic and unscrambled.
+#' @param scramble logical; \code{TRUE} applies the linear matrix scramble
+#'   and digital shift, \code{FALSE} returns the raw sequence.
+#' @param seed integer seed for the scramble (the unscrambled sequence is
+#'   deterministic and ignores it). The R and Python arms draw their
+#'   scrambles from different generators, so their scrambled point sets
+#'   differ; the unscrambled sequences agree.
 #' @return list: sample, estimate (if f given), se, N, d,
-#'   \code{scrambled} (always \code{FALSE} in this arm) and method.
+#'   \code{scrambled} and method.
 #' @importFrom utils getFromNamespace
 #' @examples
 #' morie_sobol_sequence(N = 128L, d = 2L)
 #' @keywords internal
 #' @export
 sobls <- function(N = 128L, d = 1L, f = NULL, scramble = TRUE, seed = 42L) {
-  # Native gray-code Sobol with Joe-Kuo direction numbers (d <= 10);
-  # matches randtoolbox's unscrambled sequence (cross-validated in
-  # tests). randtoolbox's Owen scrambling is disabled upstream anyway,
-  # so the unscrambled sequence is what callers always received.
-  if (isTRUE(scramble)) {
-    warning("sobls(): Owen scrambling is not implemented in the R arm; ",
-            "returning the unscrambled Sobol sequence. The Python arm ",
-            "scrambles through scipy.stats.qmc, so the two point sets ",
-            "differ. Pass scramble = FALSE to ask for this explicitly.",
-            call. = FALSE)
-  }
-  sample <- .morie_sobol(as.integer(N), as.integer(d))
+  N <- as.integer(N)
+  d <- as.integer(d)
+  sample <- .morie_sobol(N, d)
+  scramble <- isTRUE(scramble)
+  if (scramble) sample <- .morie_sobol_scramble(sample, seed)
   out <- list(
-    sample = sample, N = as.integer(N), d = as.integer(d),
-    scrambled = FALSE,
-    method = "Sobol QMC (Sobol 1967), unscrambled"
+    sample = sample, N = N, d = d,
+    scrambled = scramble,
+    method = if (scramble) {
+      "Sobol QMC (Sobol 1967), linear matrix scramble + digital shift (Matousek 1998)"
+    } else {
+      "Sobol QMC (Sobol 1967), unscrambled"
+    }
   )
   if (!is.null(f)) {
     fv <- apply(sample, 1, f)
     out$estimate <- mean(fv)
     out$se <- stats::sd(fv) / sqrt(N)
+  }
+  out
+}
+
+# Matousek (1998) linear matrix scrambling with a random digital shift in
+# base 2. The native generator carries nbits = 31 bits, so every point is
+# an exact multiple of 2^-31 and the bit matrix below is exact. For each
+# dimension a random lower-triangular 0/1 matrix L with unit diagonal maps
+# the bit vector x (most significant bit first) to y = L x (mod 2), which
+# preserves the (t, m, s)-net property; the digital shift then XORs a
+# random bit vector so the origin is no longer a sample point.
+.morie_sobol_scramble <- function(x, seed, nbits = 31L) {
+  .rmorie_local_seed(seed)
+  n <- nrow(x)
+  d <- ncol(x)
+  ints <- round(x * 2^nbits)
+  pow <- 2^(nbits - seq_len(nbits)) # bit weights, MSB first
+  out <- matrix(0, n, d)
+  for (j in seq_len(d)) {
+    bits <- outer(ints[, j], pow, function(a, b) floor(a / b)) %% 2
+    L <- matrix(stats::rbinom(nbits * nbits, 1L, 0.5), nbits, nbits)
+    L[upper.tri(L)] <- 0
+    diag(L) <- 1
+    y <- (bits %*% t(L)) %% 2
+    shift <- stats::rbinom(nbits, 1L, 0.5)
+    y <- (y + matrix(shift, n, nbits, byrow = TRUE)) %% 2
+    out[, j] <- as.numeric(y %*% pow) / 2^nbits
   }
   out
 }

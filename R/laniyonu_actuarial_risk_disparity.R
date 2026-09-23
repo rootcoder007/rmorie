@@ -537,8 +537,9 @@ morie_laniyonu_actuarial_risk_disparity <- function(
   stopifnot(is.data.frame(df), is.character(outcome), length(outcome) == 1L)
   if (is.null(control_cols)) control_cols <- character(0)
 
-  # Mandatory output-vs-predictive caveat on every call.
-  warning(paste(
+  # Mandatory output-vs-predictive caveat on every call: a message, not a
+  # warning, because nothing went wrong -- it is the interpretation rule.
+  message(paste(
     "morie_laniyonu_actuarial_risk_disparity reports OUTPUT disparity,",
     "not predictive-validity disparity.  A non-zero residual race",
     "coefficient could reflect disparate treatment OR a valid race",
