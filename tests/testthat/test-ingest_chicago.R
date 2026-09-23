@@ -95,7 +95,12 @@ test_that("ingest_chicago_crime_bigquery requires bigrquery", {
 
   )
   set.seed(1)
-  expect_error(morie_ingest_chicago_crime_bigquery(), "bigrquery")
+  # billing_project given explicitly: without one the loader falls back to
+  # the keyless Socrata portal and never touches bigrquery.
+  expect_error(
+    morie_ingest_chicago_crime_bigquery(billing_project = "test-project"),
+    "bigrquery"
+  )
 })
 
 test_that("registry urls look like Socrata data.cityofchicago.org", {

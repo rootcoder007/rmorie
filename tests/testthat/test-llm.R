@@ -16,6 +16,7 @@ test_that("env helper returns trimmed value or default", {
   set.seed(1)
   .clean_llm_env()
   Sys.setenv(MORIE_TEST_LLM_ENV = "  hi  ")
+  on.exit(Sys.unsetenv("MORIE_TEST_LLM_ENV"), add = TRUE)
   expect_equal(rmorie:::.morie_llm_env("MORIE_TEST_LLM_ENV"), "hi")
   expect_equal(rmorie:::.morie_llm_env("__no_such__", default = "x"), "x")
 })
@@ -24,6 +25,7 @@ test_that("ollama_base strips trailing slash", {
   set.seed(1)
   .clean_llm_env()
   Sys.setenv(OLLAMA_BASE_URL = "http://x/")
+  on.exit(Sys.unsetenv("OLLAMA_BASE_URL"), add = TRUE)
   expect_equal(rmorie:::.morie_llm_ollama_base(), "http://x")
 })
 

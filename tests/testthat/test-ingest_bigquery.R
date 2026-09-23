@@ -20,9 +20,10 @@ test_that("quote_ident rejects bad input", {
 test_that("billing_project resolves explicit > env > NULL", {
   set.seed(1)
   expect_equal(rmorie:::.morie_bq_billing_project("p1"), "p1")
-  old <- Sys.getenv("GCP_PROJECT", unset = "")
+  old <- Sys.getenv("GCP_PROJECT", unset = NA)
+  on.exit(if (is.na(old)) Sys.unsetenv("GCP_PROJECT") else
+            Sys.setenv(GCP_PROJECT = old), add = TRUE)
   Sys.unsetenv("GCP_PROJECT")
-  on.exit(if (nzchar(old)) Sys.setenv(GCP_PROJECT = old))
   expect_null(rmorie:::.morie_bq_billing_project())
   Sys.setenv(GCP_PROJECT = "envproj")
   expect_equal(rmorie:::.morie_bq_billing_project(), "envproj")
