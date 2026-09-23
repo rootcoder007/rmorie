@@ -85,6 +85,10 @@ jobs:
       OPENBLAS_NUM_THREADS: "1"
       OMP_NUM_THREADS: "1"
       _R_CHECK_FORCE_SUGGESTS_: false
+      # Config/testthat/parallel is for developer machines; on the 2-core
+      # runners it buys nothing and a Windows worker died mid-file
+      # (test-gibbons-median.R) that serial runs never do
+      TESTTHAT_PARALLEL: "FALSE"
       # The eight slowest test files skip unless this is set; the reduced
       # suite is for the constrained builders (r-universe kills a job at
       # ~75 min). Our own CI is where the whole thing runs.
@@ -382,6 +386,10 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       _R_CHECK_FORCE_SUGGESTS_: false
+      # Config/testthat/parallel is for developer machines; on the 2-core
+      # runners it buys nothing and a Windows worker died mid-file
+      # (test-gibbons-median.R) that serial runs never do
+      TESTTHAT_PARALLEL: "FALSE"
       # The eight slowest test files skip unless this is set; the reduced
       # suite is for the constrained builders (r-universe kills a job at
       # ~75 min). Our own CI is where the whole thing runs.
