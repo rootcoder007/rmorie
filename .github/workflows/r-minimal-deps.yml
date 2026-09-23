@@ -81,6 +81,9 @@ jobs:
         shell: Rscript {0}
       - name: Run tests without any Suggests packages
         run: |
+          # parallel testthat starts workers that load the *installed*
+          # package by name; a load_all() session has none, so run serially
+          Sys.setenv(TESTTHAT_PARALLEL = "FALSE")
           pkgload::load_all(quiet = TRUE)
           res <- testthat::test_dir("tests/testthat",
                                     stop_on_failure = FALSE,
@@ -166,6 +169,9 @@ jobs:
         shell: Rscript {0}
       - name: Run tests on Debian without any Suggests packages
         run: |
+          # parallel testthat starts workers that load the *installed*
+          # package by name; a load_all() session has none, so run serially
+          Sys.setenv(TESTTHAT_PARALLEL = "FALSE")
           pkgload::load_all(quiet = TRUE)
           res <- testthat::test_dir("tests/testthat",
                                     stop_on_failure = FALSE,
@@ -238,6 +244,9 @@ jobs:
         shell: Rscript {0}
       - name: Run tests on Fedora without any Suggests packages
         run: |
+          # parallel testthat starts workers that load the *installed*
+          # package by name; a load_all() session has none, so run serially
+          Sys.setenv(TESTTHAT_PARALLEL = "FALSE")
           pkgload::load_all(quiet = TRUE)
           res <- testthat::test_dir("tests/testthat",
                                     stop_on_failure = FALSE,
