@@ -11,6 +11,9 @@ on:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
+  # Config/testthat/parallel is for developer machines: on the runners a
+  # parallel worker died mid-file on Windows and covr lost a subprocess
+  TESTTHAT_PARALLEL: "FALSE"
   MAKEFLAGS: "-j4"
 
 permissions:
