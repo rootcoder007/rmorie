@@ -481,7 +481,7 @@ morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
     cl <- as.character(data[[cluster]])
     ids <- unique(cl)
     members <- split(seq_along(cl), cl)
-    .morie_local_seed(0L)
+    .rmorie_local_seed(0L)
     boots <- numeric(0)
     for (b in seq_len(200L)) {
       picked <- sample(ids, length(ids), replace = TRUE)
