@@ -19,7 +19,7 @@
 Msm043 <- function(sigma2, beta = NULL) {
   s2 <- as.numeric(sigma2)
   if (s2 <= 0) stop("sigma2 must be positive")
-  dens <- s2^-2
-  list(estimate = dens, density = dens, log_density = -2 * log(s2),
+  dens <- 1 / s2
+  list(estimate = dens, density = dens, log_density = -log(s2),
        proper = FALSE, method = "non-informative prior (MVSML 2022 eq. 6.2)")
 }
