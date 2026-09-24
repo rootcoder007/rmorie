@@ -920,7 +920,10 @@ random_effects_meta <- function(estimates, standard_errors,
         num <- sum(wt^2 * ((theta - mu)^2 - se^2)) + sum(wt^2) / sum(wt)
         max(num / sum(wt^2), 0)
       }
-      if (abs(new - tau2) < 1e-10) { tau2 <- new; break }
+      if (abs(new - tau2) < 1e-10) {
+        tau2 <- new
+        break
+      }
       tau2 <- new
     }
   } else if (method != "DL") {

@@ -756,7 +756,8 @@ morie_rdd_plot_data <- function(data, outcome, running, cutoff = 0,
   kfun <- .morie_rdd_kernels[[kernel]]
   if (is.null(kfun)) kfun <- .morie_rdd_kernels[["triangular"]]
   local_side <- function(sel) {
-    xs <- x[sel]; ys <- y[sel]
+    xs <- x[sel]
+    ys <- y[sel]
     w <- kfun(abs(xs - cutoff) / h)
     ok <- is.finite(w) & w > 0
     if (sum(ok) < p_local + 2L) return(NULL)
