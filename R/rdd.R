@@ -761,7 +761,7 @@ morie_rdd_plot_data <- function(data, outcome, running, cutoff = 0,
     ok <- is.finite(w) & w > 0
     if (sum(ok) < p_local + 2L) return(NULL)
     dd <- data.frame(u = xs[ok] - cutoff, yy = ys[ok], ww = w[ok])
-    fit <- stats::lm(yy ~ poly(u, p_local, raw = TRUE), data = dd, weights = ww)
+    fit <- stats::lm(yy ~ poly(u, p_local, raw = TRUE), data = dd, weights = dd$ww)
     grid <- seq(min(xs[ok]), max(xs[ok]), length.out = 50L)
     data.frame(x = grid, fitted = as.numeric(stats::predict(
       fit, newdata = data.frame(u = grid - cutoff))))
