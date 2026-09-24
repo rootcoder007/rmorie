@@ -3826,8 +3826,6 @@ morie_kamath_ch9_flamingo_factorized <- function(y, x = NULL, L = NULL,
 #' @param D_m List of datasets (each a list of probability vectors).
 #' @param lambda_m Dataset weights.
 #' @export
-#' @param x,y Carried for signature parity with the Python module; the
-#'   mixture loss is a function of `D_m` and `lambda_m` only.
 morie_kamath_ch9_flamingo_dataset_mix <- function(D_m, lambda_m, x = NULL,
                                                   y = NULL) {
   datasets <- as.list(D_m)

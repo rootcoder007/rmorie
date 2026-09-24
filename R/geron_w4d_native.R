@@ -3196,9 +3196,6 @@ morie_geron_digamma <- function(x) {
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_geron_variational_bayes_gmm(V)
-#' @param seed Carried for parity with the Python module; the
-#'   initialisation is deterministic (means at ordered quantiles of the
-#'   first coordinate), so it has no effect.
 morie_geron_variational_bayes_gmm <- function(X, n_components = 3, max_iter = 100, alpha0 = 1e-2,
                                               tol = 1e-6, var_floor = 1e-6, seed = 0) {
   A <- as.matrix(X)
