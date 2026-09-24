@@ -230,14 +230,26 @@ morie_weights_greg <- function(weights, X, population_totals,
                          warning("Singular XtWX; using pseudo-inverse.")
                          .morie_ginv(XtWX)
                        })
-  lambda <- XtWX_inv %*% (T_x - T_hat)
-  g <- 1 + Xm %*% lambda
-  w_cal <- as.numeric(w * g)
-  T_cal <- as.numeric(t(Xm) %*% w_cal)
-  max_adj <- max(abs(T_cal - T_x))
+  # linear calibration is one step; the step is repeated on the
+  # calibrated weights up to max_iter while the residual exceeds tol
+  w_cal <- w
+  iterations <- 0L
+  max_adj <- Inf
+  for (it in seq_len(as.integer(max_iter))) {
+    iterations <- it
+    T_hat <- t(Xm) %*% w_cal
+    XtWX <- t(Xm) %*% (Xm * w_cal)
+    XtWX_inv <- tryCatch(solve(XtWX), error = function(e) .morie_ginv(XtWX))
+    lambda <- XtWX_inv %*% (T_x - T_hat)
+    g <- 1 + Xm %*% lambda
+    w_cal <- as.numeric(w_cal * g)
+    T_cal <- as.numeric(t(Xm) %*% w_cal)
+    max_adj <- max(abs(T_cal - T_x))
+    if (max_adj < tol) break
+  }
   list(weights = w_cal,
        converged = max_adj < tol,
-       iterations = 1,
+       iterations = iterations,
        max_adjustment = max_adj,
        diagnostics = morie_weights_diagnostics(w_cal))
 }

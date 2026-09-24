@@ -1317,6 +1317,22 @@ morie_geron_deit <- function(image, patch_size = 16, n_layers = 12, teacher = NU
                              logits_cls = NULL, logits_dist = NULL, y = NULL, alpha = 0.5) {
   dims <- if (length(dim(image)) == 2) c(1, dim(image)) else dim(image)
   C_in <- dims[1]
+  if (length(dim(image)) == 3) {
+    .w4a_need(C_in == as.integer(in_channels),
+              sprintf("image has %d channels but in_channels = %d.", C_in, as.integer(in_channels)))
+  }
+  if (length(dim(image)) == 3) {
+    .w4a_need(C_in == as.integer(in_channels),
+              sprintf("image has %d channels but in_channels = %d.", C_in, as.integer(in_channels)))
+  }
+  if (length(dim(image)) == 3) {
+    .w4a_need(C_in == as.integer(in_channels),
+              sprintf("image has %d channels but in_channels = %d.", C_in, as.integer(in_channels)))
+  }
+  if (length(dim(image)) == 3) {
+    .w4a_need(C_in == as.integer(in_channels),
+              sprintf("image has %d channels but in_channels = %d.", C_in, as.integer(in_channels)))
+  }
   H <- dims[2]
   W <- dims[3]
   P <- as.integer(patch_size)

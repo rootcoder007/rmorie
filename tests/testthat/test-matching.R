@@ -409,3 +409,26 @@ test_that("morie_matching_overlap reports ESS and overlap region", {
   expect_true(res$effective_sample_size > 0)
   expect_true(res$overlap_region["lower"] <= res$overlap_region["upper"])
 })
+
+
+test_that("round four: morie_matching_att_matched honours a weight column", {
+  set.seed(4)
+  df <- data.frame(y = rnorm(40), d = rep(0:1, 20), x = rnorm(40), w = runif(40, 0.5, 2))
+  rownames(df) <- as.character(seq_len(40))
+  pairs <- data.frame(treated_idx = as.character(seq(2, 40, 2)),
+                      control_idx = as.character(seq(1, 39, 2)), stringsAsFactors = FALSE)
+  plain <- morie_matching_att_matched(df, "y", "d", pairs)
+  weighted <- morie_matching_att_matched(df, "y", "d", pairs, weights = "w")
+  expect_false(isTRUE(all.equal(plain$estimate, weighted$estimate)))
+})
+
+test_that("round four: abadie-imbens se uses the match count", {
+  set.seed(5)
+  df <- data.frame(y = rnorm(30), d = rep(0:1, 15))
+  rownames(df) <- as.character(seq_len(30))
+  pairs <- data.frame(treated_idx = as.character(c(2, 2, 4, 4)),
+                      control_idx = as.character(c(1, 3, 1, 5)), stringsAsFactors = FALSE)
+  se1 <- morie_matching_abadie_imbens_se(df, "y", "d", pairs, n_matches = 1L)
+  se2 <- morie_matching_abadie_imbens_se(df, "y", "d", pairs, n_matches = 2L)
+  expect_true(se2 <= se1)
+})

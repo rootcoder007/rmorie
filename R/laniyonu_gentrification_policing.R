@@ -308,6 +308,10 @@ morie_laniyonu_gentrification_policing <- function(
     growth_college_col = growth_college_col,
     growth_rent_col = growth_rent_col
   )
+  if (follow_income_col %in% names(baseline_frame) && baseline_income_col %in% names(baseline_frame)) {
+    gp$thresholds$median_income_growth <- stats::median(
+      baseline_frame[[follow_income_col]] - baseline_frame[[baseline_income_col]], na.rm = TRUE)
+  }
   gent_flag <- setNames(as.character(gp$flag), baseline_frame[[tract_id_col]])
   df$gentrification <- factor(
     gent_flag[as.character(df[[tract_id_col]])],

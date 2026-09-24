@@ -478,7 +478,7 @@ morie_iv_cragg_donald <- function(data, endogenous, instruments,
                         k_endogenous = length(endogenous),
                         k_instruments = k_ins,
                         k_exogenous = k_exo,
-                        outcome_used = NA_character_))
+                        outcome_used = if (is.null(outcome)) endogenous[1] else outcome))
 }
 
 #' Stock-Yogo critical values
@@ -564,7 +564,9 @@ morie_iv_anderson_rubin <- function(data, outcome, endogenous, instruments,
        F_statistic = unname(F_stat),
        p_value = unname(pval),
        name = "Anderson-Rubin", df = k_ins,
-       df_resid = df_resid, beta0 = beta0)
+       df_resid = df_resid, beta0 = beta0, alpha = alpha,
+       critical_value = stats::qchisq(1 - alpha, df = k_ins),
+       reject_at_alpha = isTRUE(unname(pval) < alpha))
 }
 
 #' Grid-based Anderson-Rubin confidence interval for a single endogenous

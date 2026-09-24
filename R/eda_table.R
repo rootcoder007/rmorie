@@ -221,7 +221,7 @@ morie_eda_plot <- function(x, xvar, yvar, group = NULL, units = NULL,
   plot(x[[xvar]], x[[yvar]],
     xlab = xlab, ylab = ylab,
     cex = cex, cex.lab = cex, cex.axis = cex, pch = 19, col = cols,
-    xaxp = c(range(pretty(x[[xvar]])), 5)
+    xaxp = c(round(range(pretty(x[[xvar]])), digits), 5)
   ) # EA5.4 pretty
   invisible(data.frame(
     x = x[[xvar]], y = x[[yvar]], colour = cols,

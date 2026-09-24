@@ -101,7 +101,8 @@ morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
   # 3YY: libcurl-backed binary fetch with httr2 fallback. On failure,
   # retry the Internet Archive snapshot (CIHI rotates its file paths).
   fetched <- tryCatch({
-    bytes <- .morie_dataset_http_bytes(url, timeout_s = as.integer(timeout))
+    bytes <- .morie_dataset_http_bytes(url, headers = paste0("User-Agent: ", user_agent),
+                                       timeout_s = as.integer(timeout))
     writeBin(bytes, tmp)
     TRUE
   }, error = function(e) FALSE)

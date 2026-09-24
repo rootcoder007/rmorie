@@ -694,7 +694,8 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
     # morie_siu_classify_mandela needs SIU-specific inputs we don't
     # have at this aggregation level.)
     days_n <- as.numeric(days)
-    mandela_cat <- if (days_n > 15) "torture"
+    mandela_cat <- if (as.numeric(hours_per_day) < 22) "not-solitary"
+                   else if (days_n > 15) "torture"
                    else if (days_n >= 1) "at-risk"
                    else "compliant"
   } else {

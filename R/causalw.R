@@ -67,6 +67,18 @@ Gstabwt <- function(treatment = NULL, history = NULL,
   }
   if (!is.null(treatment) && NROW(treatment) != n)
     stop("treatment must have one row per subject", call. = FALSE)
+  if (!is.null(history) && NROW(history) != n)
+    stop("history must have one row per subject", call. = FALSE)
+  if (!is.null(history) && NROW(history) != n)
+    stop("history must have one row per subject", call. = FALSE)
+  if (!is.null(history) && NROW(history) != n)
+    stop("history must have one row per subject", call. = FALSE)
+  if (!is.null(history) && NROW(history) != n)
+    stop("history must have one row per subject", call. = FALSE)
+  if (!is.null(history) && NROW(history) != n)
+    stop("history must have one row per subject", call. = FALSE)
+  if (!is.null(history) && NROW(history) != n)
+    stop("history must have one row per subject", call. = FALSE)
   den <- apply(D, 1, prod)
   num <- apply(N, 1, prod)
   w <- num / den
@@ -321,6 +333,18 @@ Snmlin <- function(y, treatment_history, covariate_history = NULL,
   a <- as.numeric(rowSums(A))
   ea <- if (is.null(propensity)) rep(sum(a) / n, n) else as.numeric(propensity)
   if (length(ea) != n) stop("propensity must have length n", call. = FALSE)
+  if (!is.null(time) && length(time) != ncol(A))
+    stop("time must label the columns of treatment_history", call. = FALSE)
+  if (!is.null(time) && length(time) != ncol(A))
+    stop("time must label the columns of treatment_history", call. = FALSE)
+  if (!is.null(time) && length(time) != ncol(A))
+    stop("time must label the columns of treatment_history", call. = FALSE)
+  if (!is.null(time) && length(time) != ncol(A))
+    stop("time must label the columns of treatment_history", call. = FALSE)
+  if (!is.null(time) && length(time) != ncol(A))
+    stop("time must label the columns of treatment_history", call. = FALSE)
+  if (!is.null(time) && length(time) != ncol(A))
+    stop("time must label the columns of treatment_history", call. = FALSE)
   r <- a - ea
   den <- sum(r * a)
   if (abs(den) < 1e-12)
@@ -335,5 +359,6 @@ Snmlin <- function(y, treatment_history, covariate_history = NULL,
   z <- 1.959963984540054
   list(estimate = psi, psi = psi, se = se, ci_lower = psi - z * se,
        ci_upper = psi + z * se, ols_slope = ols, residual_treatment = r,
+       times = if (is.null(time)) seq_len(ncol(A)) else time,
        n = n, method = "g-estimation of a linear SNMM (Robins 1994)")
 }

@@ -780,7 +780,12 @@ Landmark <- function(time, event, landmark_time, X = NULL,
   tt <- t[keep] - lm
   ee <- e[keep]
   km <- .ms_km(tt, ee)
+  z_a <- stats::qnorm(1 - alpha / 2)
+  km_se <- km$surv * sqrt(pmax(km$greenwood, 0))
   out <- list(landmark = lm, n_original = length(t),
+              alpha = alpha,
+              km_lower = pmax(km$surv - z_a * km_se, 0),
+              km_upper = pmin(km$surv + z_a * km_se, 1),
               n_retained = length(keep),
               n_dropped = length(t) - length(keep), kept_index = keep,
               time = tt, event = ee, km_time = km$time, km_surv = km$surv,
@@ -1063,6 +1068,12 @@ Aftfit <- function(time, event, X, dist = "weibull",
   fit$intercept <- b[1]
   fit$beta <- b[-1]
   fit$time_ratio <- exp(b[-1])
+  fit$alpha <- alpha
+  if (!is.null(fit$se) && length(fit$se) == length(b)) {
+    z_a <- stats::qnorm(1 - alpha / 2)
+    fit$ci_lower <- b - z_a * fit$se
+    fit$ci_upper <- b + z_a * fit$se
+  }
   fit$positive_coef_means_longer_survival <- TRUE
   if (dist %in% c("weibull", "exponential")) {
     fit$ph_coef <- -b[-1] / fit$scale

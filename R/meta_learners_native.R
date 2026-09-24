@@ -10,7 +10,7 @@
 #'   two-stage X-learner with propensity-weighted combination.
 #' @noRd
 .morie_cate_x_learner <- function(X, y, d, n_folds = 5L,
-                                  random_state = 42L) {
+                                  random_state = 42L, ps = NULL) {
   i1 <- which(d == 1)
   i0 <- which(d == 0)
   if (length(i1) < 2L || length(i0) < 2L)
@@ -25,7 +25,8 @@
   tau1 <- .morie_dml_ridge_predict(X[i1, , drop = FALSE], d1, X)
   tau0 <- .morie_dml_ridge_predict(X[i0, , drop = FALSE], d0, X)
   # combine with the propensity as the weight (Kuenzel et al. eq. 9)
-  g <- .morie_dml_xfit_logit(X, d, n_folds, random_state)
+  g <- if (is.null(ps)) .morie_dml_xfit_logit(X, d, n_folds, random_state)
+       else pmin(pmax(as.numeric(ps), 0.01), 0.99)
   g * tau0 + (1 - g) * tau1
 }
 
@@ -36,14 +37,15 @@
 #' @noRd
 .morie_cate_dr_learner <- function(X, y, d, n_folds = 5L,
                                    n_trees = 300L,
-                                   random_state = 42L) {
+                                   random_state = 42L, ps = NULL) {
   if (length(unique(d)) < 2L)
     stop("dr_learner needs both treatment arms", call. = FALSE)
   .rmorie_local_seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = nrow(X)))
   mu1 <- numeric(nrow(X))
   mu0 <- numeric(nrow(X))
-  ps <- .morie_dml_xfit_logit(X, d, n_folds, random_state)
+  ps <- if (is.null(ps)) .morie_dml_xfit_logit(X, d, n_folds, random_state)
+        else pmin(pmax(as.numeric(ps), 0.01), 0.99)
   for (k in seq_len(n_folds)) {
     te <- which(folds == k)
     tr <- setdiff(seq_len(nrow(X)), te)

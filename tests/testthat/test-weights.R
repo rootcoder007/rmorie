@@ -423,3 +423,13 @@ test_that("morie_weights_multiframe optimal returns interior theta", {
   expect_lt(res$theta, 1)
   expect_length(res$weights_a, 2L)
 })
+
+
+test_that("round four: greg calibration reports its iteration count", {
+  set.seed(8)
+  X <- cbind(1, rnorm(50))
+  w <- runif(50, 1, 3)
+  res <- morie_weights_greg(w, X, c(60, 5), max_iter = 5)
+  expect_true(res$iterations >= 1 && res$iterations <= 5)
+  expect_equal(as.numeric(t(X) %*% res$weights), c(60, 5), tolerance = 1e-6)
+})

@@ -125,6 +125,7 @@ morie_ingest_statcan_csv <- function(url,
     {
       # 3YY: libcurl-backed binary fetch with httr2 fallback.
       bytes <- .morie_dataset_http_bytes(url,
+                                           headers = paste0("User-Agent: ", user_agent),
                                            timeout_s = as.integer(timeout))
       writeBin(bytes, tmp)
     },
@@ -168,8 +169,9 @@ morie_ingest_statcan_csv <- function(url,
 #' @param table_id A StatCan / NDM table identifier, e.g.
 #'   \code{"35-10-0177"} or \code{"35-10-0177-01"}.
 #' @param language One of \code{"eng"} or \code{"fra"}.
-#' @param refresh If \code{TRUE}, force \pkg{cansim} to re-download
-#'   rather than using its on-disk cache.
+#' @param refresh Carried for interface compatibility: the native WDS
+#'   fetch keeps no on-disk cache, so every call re-downloads and the
+#'   argument has no effect.
 #' @param ... Further arguments forwarded to
 #'   \code{\link[cansim]{get_cansim}}.
 #' @return A base R \code{data.frame}.

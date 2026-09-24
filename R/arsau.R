@@ -683,7 +683,8 @@ morie_arsau_available_years <- function(data_dir = NULL, language = "en") {
 #'
 #' @param year Optional year; \code{NULL} lists everything.
 #' @param language "en" or "fr".
-#' @param data_dir Optional explicit ARSAU root.
+#' @param data_dir Optional explicit ARSAU root; when given, each entry
+#'   reports whether its CSV is present there (\code{cached}).
 #' @return An object of class \code{"morie_arsau_result"}.
 #' @examples
 #' r <- morie_arsau_available_datasets(year = "2023")
@@ -711,6 +712,8 @@ morie_arsau_available_datasets <- function(year = NULL, language = "en", data_di
       valid = if (e$is_valid) "yes" else "INVALID",
       rows = e$expected_rows,
       cols = e$expected_cols,
+      cached = if (is.null(data_dir)) NA else
+        file.exists(file.path(data_dir, e$csv_filename)),
       description = substr(desc, 1L, 80L)
     )
   })

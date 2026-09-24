@@ -448,7 +448,8 @@ test_that("mrm_otis_seg_duration_km() pools durations by default", {
   expect_named(res, c(
     "stratum", "n", "mean_days", "median_days",
     "q25_days", "pct_above_mandela",
-    "median_among_above_mandela"
+    "median_among_above_mandela",
+    "days_at_S50", "days_at_S25", "days_at_S10", "days_at_S05", "days_at_S01"
   ))
   expect_equal(res$stratum, "pooled")
   expect_true(res$n > 0)

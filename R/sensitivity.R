@@ -394,7 +394,8 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
 #' @param n_control    Number of control units.
 #' @param delta_range  Numeric vector of bias parameters (default
 #'   `seq(-3|est|, 3|est|, length.out = 101)`).
-#' @param outcome_type `"continuous"` or `"binary"` (advisory only).
+#' @param outcome_type `"continuous"` or `"binary"`; for a binary outcome
+#'   the default delta grid is capped at the unit interval.
 #' @return A `morie_tipping_point` named-list.
 #' @examples
 #' str(tipping_point_analysis(0.5, 0.15, n_treated = 100, n_control = 100),
@@ -403,8 +404,11 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
 tipping_point_analysis <- function(estimate, se, n_treated, n_control,
                                       delta_range = NULL,
                                       outcome_type = "continuous") {
+  outcome_type <- match.arg(outcome_type, c("continuous", "binary"))
   if (is.null(delta_range)) {
     max_d <- abs(estimate) * 3
+    # a risk difference cannot be shifted beyond the unit interval
+    if (outcome_type == "binary") max_d <- min(max_d, 1)
     delta_range <- seq(-max_d, max_d, length.out = 101L)
   }
   delta_range <- as.numeric(delta_range)

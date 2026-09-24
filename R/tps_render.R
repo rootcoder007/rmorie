@@ -491,9 +491,16 @@ morie_tps_render_points <- function(df,
             category, format(length(xk), big.mark = ","))
   }
 
+  # the legend shows the show_top largest clusters; the rest pool as "other"
+  legend_labels <- labels
+  if (n_clusters > as.integer(show_top)) {
+    sizes <- sort(table(labels[labels >= 0L]), decreasing = TRUE)
+    top <- as.integer(names(sizes))[seq_len(as.integer(show_top))]
+    legend_labels <- ifelse(labels >= 0L & !(labels %in% top), -2L, labels)
+  }
   if (use_gg) {
     df_plot <- data.frame(x = xk, y = yk,
-                          cluster = factor(labels))
+                          cluster = factor(ifelse(legend_labels == -2L, "other", legend_labels)))
     p <- ggplot2::ggplot(df_plot,
                           ggplot2::aes(x = .data$x, y = .data$y,
                                        colour = .data$cluster)) +

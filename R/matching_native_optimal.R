@@ -31,7 +31,14 @@
     dvec <- sqrt(rowSums((W[idx_t, , drop = FALSE] -
                             W[idx_c[mm], , drop = FALSE])^2))
   } else {
-    lp <- .morie_match_ps_logit(df, treatment, covariates)
+    lp <- if (!is.null(ps)) {
+      # the caller's propensity scores, on the logit scale
+      keep_idx <- match(rownames(df), rownames(data))
+      p_ <- pmin(pmax(as.numeric(ps)[keep_idx], 1e-6), 1 - 1e-6)
+      log(p_ / (1 - p_))
+    } else {
+      .morie_match_ps_logit(df, treatment, covariates)
+    }
     mm <- .morie_match_optimal_1d_cpp(lp[idx_t], lp[idx_c])
     dvec <- abs(lp[idx_t] - lp[idx_c[mm]])
   }

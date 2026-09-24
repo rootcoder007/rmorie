@@ -465,8 +465,10 @@ morie_brunner_munzel <- function(x, y, alpha = 0.05) {
   stat <- (R2 - R1) / se
   df <- (s1 / n2 + s2 / n1)^2 /
     ((s1 / n2)^2 / (n1 - 1) + (s2 / n1)^2 / (n2 - 1))
+  t_a <- stats::qt(1 - alpha / 2, df)
   list(statistic = stat, df = df, p_hat = phat, delta = 1 - 2 * phat,
        se = se, n1 = n1, n2 = n2, separated = FALSE,
+       ci_lower = phat - t_a * se / N, ci_upper = phat + t_a * se / N, alpha = alpha,
        p_value = 2 * (1 - stats::pt(abs(stat), df)))
 }
 

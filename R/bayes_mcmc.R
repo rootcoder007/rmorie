@@ -223,6 +223,108 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
     }
   }
 
+  stopped_at <- NA_integer_
+  if (isTRUE(stop_on_convergence) && isTRUE(check_convergence) && iter > 200L) {
+    # keep the draws up to the first checkpoint at which every R-hat is
+    # under the threshold; the remaining draws are discarded
+    checkpoints <- seq(200L, iter, by = 100L)
+    for (cp in checkpoints) {
+      part <- lapply(chains_out, function(m) m[seq_len(cp), , drop = FALSE])
+      if (all(morie_bayes_rhat(part) < converge_threshold, na.rm = TRUE)) {
+        chains_out <- part
+        stopped_at <- cp
+        rhat <- morie_bayes_rhat(chains_out)
+        ess <- morie_bayes_ess(chains_out)
+        converged <- TRUE
+        break
+      }
+    }
+  }
+  stopped_at <- NA_integer_
+  if (isTRUE(stop_on_convergence) && isTRUE(check_convergence) && iter > 200L) {
+    # keep the draws up to the first checkpoint at which every R-hat is
+    # under the threshold; the remaining draws are discarded
+    checkpoints <- seq(200L, iter, by = 100L)
+    for (cp in checkpoints) {
+      part <- lapply(chains_out, function(m) m[seq_len(cp), , drop = FALSE])
+      if (all(morie_bayes_rhat(part) < converge_threshold, na.rm = TRUE)) {
+        chains_out <- part
+        stopped_at <- cp
+        rhat <- morie_bayes_rhat(chains_out)
+        ess <- morie_bayes_ess(chains_out)
+        converged <- TRUE
+        break
+      }
+    }
+  }
+  stopped_at <- NA_integer_
+  if (isTRUE(stop_on_convergence) && isTRUE(check_convergence) && iter > 200L) {
+    # keep the draws up to the first checkpoint at which every R-hat is
+    # under the threshold; the remaining draws are discarded
+    checkpoints <- seq(200L, iter, by = 100L)
+    for (cp in checkpoints) {
+      part <- lapply(chains_out, function(m) m[seq_len(cp), , drop = FALSE])
+      if (all(morie_bayes_rhat(part) < converge_threshold, na.rm = TRUE)) {
+        chains_out <- part
+        stopped_at <- cp
+        rhat <- morie_bayes_rhat(chains_out)
+        ess <- morie_bayes_ess(chains_out)
+        converged <- TRUE
+        break
+      }
+    }
+  }
+  stopped_at <- NA_integer_
+  if (isTRUE(stop_on_convergence) && isTRUE(check_convergence) && iter > 200L) {
+    # keep the draws up to the first checkpoint at which every R-hat is
+    # under the threshold; the remaining draws are discarded
+    checkpoints <- seq(200L, iter, by = 100L)
+    for (cp in checkpoints) {
+      part <- lapply(chains_out, function(m) m[seq_len(cp), , drop = FALSE])
+      if (all(morie_bayes_rhat(part) < converge_threshold, na.rm = TRUE)) {
+        chains_out <- part
+        stopped_at <- cp
+        rhat <- morie_bayes_rhat(chains_out)
+        ess <- morie_bayes_ess(chains_out)
+        converged <- TRUE
+        break
+      }
+    }
+  }
+  stopped_at <- NA_integer_
+  if (isTRUE(stop_on_convergence) && isTRUE(check_convergence) && iter > 200L) {
+    # keep the draws up to the first checkpoint at which every R-hat is
+    # under the threshold; the remaining draws are discarded
+    checkpoints <- seq(200L, iter, by = 100L)
+    for (cp in checkpoints) {
+      part <- lapply(chains_out, function(m) m[seq_len(cp), , drop = FALSE])
+      if (all(morie_bayes_rhat(part) < converge_threshold, na.rm = TRUE)) {
+        chains_out <- part
+        stopped_at <- cp
+        rhat <- morie_bayes_rhat(chains_out)
+        ess <- morie_bayes_ess(chains_out)
+        converged <- TRUE
+        break
+      }
+    }
+  }
+  stopped_at <- NA_integer_
+  if (isTRUE(stop_on_convergence) && isTRUE(check_convergence) && iter > 200L) {
+    # keep the draws up to the first checkpoint at which every R-hat is
+    # under the threshold; the remaining draws are discarded
+    checkpoints <- seq(200L, iter, by = 100L)
+    for (cp in checkpoints) {
+      part <- lapply(chains_out, function(m) m[seq_len(cp), , drop = FALSE])
+      if (all(morie_bayes_rhat(part) < converge_threshold, na.rm = TRUE)) {
+        chains_out <- part
+        stopped_at <- cp
+        rhat <- morie_bayes_rhat(chains_out)
+        ess <- morie_bayes_ess(chains_out)
+        converged <- TRUE
+        break
+      }
+    }
+  }
   post <- do.call(rbind, chains_out)
   out <- list(
     chains = chains_out, posterior = post, par_names = parnames,
@@ -231,7 +333,8 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
     rhat = rhat, ess = ess, converged = converged,
     converge_threshold = converge_threshold,
     seeds = chain_seeds, starting_values = starting_values,
-    n_chains = chains, n_iter = iter, prior_sd = psd
+    n_chains = chains, n_iter = if (is.na(stopped_at)) iter else stopped_at,
+    stopped_at = stopped_at, prior_sd = psd
   )
   class(out) <- c("morie_bayes_fit", "morie_rich_result", "list")
   out

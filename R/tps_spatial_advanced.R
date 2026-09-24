@@ -756,7 +756,7 @@ morie_tps_bivariate_moran <- function(polygons,
     "morie_tps_bivariate_moran(x=%s, y=%s, k=%d)",
     x_col, y_col, as.integer(k_neighbours)
   )
-  title <- sprintf("Bivariate Moran's I -- %s vs %s", x_col, y_col)
+  title <- sprintf("Bivariate Moran's I -- %s vs %s (%s)", x_col, y_col, ds_name)
 
   cents <- .tps_polygon_centroids(polygons)
   df_attr <- if (inherits(polygons, "sf")) sf::st_drop_geometry(polygons) else polygons

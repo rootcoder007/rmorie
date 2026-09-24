@@ -455,8 +455,13 @@ Flmint <- function(t, x_values, beta_values, mu = 0) {
 #' @keywords internal
 Basexp <- function(t, beta_coef, kind = "fourier", period = NULL) {
   coefs <- as.numeric(beta_coef)
+  tt <- as.numeric(t)
+  if (!is.null(period) && identical(kind, "fourier")) {
+    # the basis is periodic on [0, 1]; rescale t to that unit period
+    tt <- tt / as.numeric(period)
+  }
   list(
-    beta_t = morie_fda_beta_function(t, coefs, length(coefs), kind),
+    beta_t = morie_fda_beta_function(tt, coefs, length(coefs), kind),
     t = as.numeric(t), n_basis = length(coefs)
   )
 }

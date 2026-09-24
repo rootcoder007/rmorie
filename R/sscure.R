@@ -26,6 +26,7 @@ Curemod <- function(time, event, X = NULL, Z = NULL, max_iter = 200,
   t <- .s03vec(time)
   e <- .s03vec(event)
   n <- length(t)
+  if (!is.null(X) && NROW(X) != n) stop("X must have one row per observation")
   Zd <- .s03design(Z, n)
   times <- sort(unique(t[e > 0.5]))
   tmax <- if (length(times)) max(times) else Inf

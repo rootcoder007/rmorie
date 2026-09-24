@@ -551,9 +551,29 @@ ramsey_reset_test <- function(y, X, powers = c(2, 3)) {
 #' r$name
 #' @export
 link_test <- function(y, X, model_type = "linear") {
+  model_type <- match.arg(model_type, c("linear", "logistic"))
   y <- as.numeric(y)
   X <- as.matrix(X)
   n <- length(y)
+  if (model_type == "logistic") {
+    # Pregibon's link test on the logit scale: the squared linear
+    # predictor should add nothing to a correctly specified logit
+    fit0 <- stats::glm.fit(X, y, family = stats::binomial())
+    eta <- drop(X %*% fit0$coefficients)
+    fit1 <- stats::glm.fit(cbind(1, eta, eta^2), y, family = stats::binomial())
+    vc <- tryCatch(solve(crossprod(cbind(1, eta, eta^2) * sqrt(fit1$weights))),
+                   error = function(e) NULL)
+    z <- if (is.null(vc)) NA_real_ else fit1$coefficients[3] / sqrt(vc[3, 3])
+    p_val <- if (is.na(z)) NA_real_ else 2 * stats::pnorm(-abs(z))
+    conclusion <- if (!is.na(p_val) && p_val < 0.05) {
+      "Reject link specification (p < 0.05): consider alternative link function."
+    } else {
+      "No evidence of link misspecification."
+    }
+    return(.new_spec_test(name = "link_test", statistic = as.numeric(z),
+                          p_value = as.numeric(p_val), df = n - 3,
+                          conclusion = conclusion))
+  }
 
   beta <- drop(.safe_solve(crossprod(X)) %*% crossprod(X, y))
   y_hat <- drop(X %*% beta)

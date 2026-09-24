@@ -163,6 +163,26 @@ morie_cause_specific_hazard <- function(time, event_type, X, cause = 1,
 #' @export
 morie_competing_risks_fg <- function(time, event_type, X, cause = 1,
                                      ties = "efron") {
+  ties <- match.arg(ties, c("efron", "breslow"))
+  if (ties != "efron") {
+    stop("morie_competing_risks_fg: only ties = 'efron' is implemented by the native kernel",
+      call. = FALSE)
+  }
+  ties <- match.arg(ties, c("efron", "breslow"))
+  if (ties != "efron") {
+    stop("morie_competing_risks_fg: only ties = 'efron' is implemented by the native kernel",
+      call. = FALSE)
+  }
+  ties <- match.arg(ties, c("efron", "breslow"))
+  if (ties != "efron") {
+    stop("morie_competing_risks_fg: only ties = 'efron' is implemented by the native kernel",
+      call. = FALSE)
+  }
+  ties <- match.arg(ties, c("efron", "breslow"))
+  if (ties != "efron") {
+    stop("morie_competing_risks_fg: only ties = 'efron' is implemented by the native kernel",
+      call. = FALSE)
+  }
   t <- as.numeric(time)
   d <- as.vector(event_type)
   if (length(t) != length(d)) {

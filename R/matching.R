@@ -1068,17 +1068,22 @@ morie_matching_att_matched <- function(data, outcome, treatment,
                                        alpha = 0.05) {
   if (!nrow(match_pairs)) return(.morie_matching_te_empty("ATT"))
   diffs <- numeric(0)
+  wts <- numeric(0)
   for (k in seq_len(nrow(match_pairs))) {
     t_id <- match_pairs$treated_idx[k]
     c_id <- match_pairs$control_idx[k]
     if (t_id %in% rownames(data) && c_id %in% rownames(data)) {
       diffs <- c(diffs, as.numeric(data[t_id, outcome]) -
                    as.numeric(data[c_id, outcome]))
+      # the treated unit's weight, when a weight column is named
+      wts <- c(wts, if (!is.null(weights) && weights %in% names(data))
+        as.numeric(data[t_id, weights]) else 1)
     }
   }
   if (!length(diffs)) return(.morie_matching_te_empty("ATT"))
-  att <- mean(diffs)
-  se  <- stats::sd(diffs) / sqrt(length(diffs))
+  att <- sum(wts * diffs) / sum(wts)
+  se  <- if (all(wts == wts[1])) stats::sd(diffs) / sqrt(length(diffs)) else
+    sqrt(sum(wts^2 * (diffs - att)^2)) / sum(wts)
   .morie_matching_te_result("ATT", att, se, length(diffs), alpha)
 }
 
@@ -1183,7 +1188,8 @@ morie_matching_atc_matched <- function(data, outcome, treatment,
 #' @param data Data frame.
 #' @param outcome,treatment Column names.
 #' @param match_pairs Data frame of matched indices.
-#' @param n_matches Number of matches per treated unit (carried for parity).
+#' @param n_matches Number of matches per treated unit, M in the
+#'   Abadie-Imbens variance (the control reuse count enters as K_M / M).
 #' @return Scalar numeric Abadie-Imbens SE.
 #' @references Abadie, A., & Imbens, G. W. (2006). Large sample properties
 #'   of matching estimators for average treatment effects.
@@ -1229,7 +1235,8 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
   #   V_ATT = (1/N_t^2) * [ sum_{i: D=1} sigma^2(X_i, 1)
   #                       + sum_{j: D=0} K_j^2 * sigma^2(X_j, 0) ]
   t_vec <- as.integer(df[[treatment]])
-  if (.morie_matching_have_cpp("morie_matching_abadie_imbens_kernel_cpp")) {
+  if (as.integer(n_matches) == 1L &&
+      .morie_matching_have_cpp("morie_matching_abadie_imbens_kernel_cpp")) {
     V <- morie_matching_abadie_imbens_kernel_cpp(
       y, t_vec,
       as.integer(seq_len(n)[match(match_pairs$treated_idx,
@@ -1240,7 +1247,8 @@ morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
   }
   is_t <- t_vec == 1L
   n_treated <- max(sum(is_t), 1L)
-  V <- (sum(sigma2[is_t]) + sum((K[!is_t]^2) * sigma2[!is_t])) /
+  # K_M(i) / M matches per treated unit (Abadie & Imbens 2006)
+  V <- (sum(sigma2[is_t]) + sum(((K[!is_t] / as.integer(n_matches))^2) * sigma2[!is_t])) /
     n_treated^2
   sqrt(max(V, 0))
 }

@@ -180,3 +180,17 @@ test_that("bootstrap_effect_size_ci wraps any function", {
   expect_s3_class(r, "morie_effect_size")
   expect_true(is.finite(r$estimate))
 })
+
+
+test_that("round four: random_effects_meta honours method", {
+  est <- c(0.2, 0.5, 0.35, 0.6, 0.1)
+  se <- c(0.1, 0.12, 0.08, 0.15, 0.2)
+  dl <- random_effects_meta(est, se, method = "DL")
+  pm <- random_effects_meta(est, se, method = "PM")
+  reml <- random_effects_meta(est, se, method = "REML")
+  expect_match(pm$measure, "PM")
+  expect_true(is.finite(pm$extra$tau_squared) && is.finite(reml$extra$tau_squared))
+  expect_false(isTRUE(all.equal(dl$extra$tau_squared, pm$extra$tau_squared)) &&
+                 isTRUE(all.equal(dl$extra$tau_squared, reml$extra$tau_squared)))
+  expect_error(random_effects_meta(est, se, method = "HS"), "method")
+})

@@ -34,6 +34,8 @@ Drdidblock <- function(y, D, unit = NULL, time = NULL, X = NULL,
   fit <- .s03drdid(dy, D, X)
   inf <- fit$inf
   n <- length(inf)
+  if (!is.null(time) && length(time) != n)
+    stop("time must have one entry per observation", call. = FALSE)
   src <- if (!is.null(clusters)) clusters else if (!is.null(unit)) unit else seq_len(n)
   lab <- as.character(src)
   ids <- character(0)
@@ -53,5 +55,11 @@ Drdidblock <- function(y, D, unit = NULL, time = NULL, X = NULL,
        se = if (length(boot) > 1L) .s03sd(boot, 1L) else NaN,
        ci_lo = .s03quantile7(boot, a / 2), ci_hi = .s03quantile7(boot, 1 - a / 2),
        boot = boot, n_clusters = G, n = n, B = as.integer(B),
+       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
+       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
+       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
+       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
+       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
+       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
        method = "DR-DiD with a deterministic cluster-block multiplier bootstrap")
 }

@@ -8,7 +8,8 @@
 #' @param normalise Divide by (n-1)(n-2)/2, the maximum possible value.
 
 #' @param A See Usage.
-#' @param normalise See Usage.
+#' @param normalise When `TRUE`, `betweenness` is divided by
+#'   `(n - 1)(n - 2) / 2`; the raw counts stay in `raw`.
 #' @return List with ``betweenness``, ``normalised``, ``n``.
 #' @references Brandes (2001), A faster algorithm for betweenness centrality, Journal of
 #' Mathematical Sociology 25:163-177. Paywalled and not held locally; the dependency
@@ -55,6 +56,7 @@ Btwcent <- function(A, normalise = FALSE) {
   }
   cb <- cb / 2
   denom <- if (n > 2) (n - 1) * (n - 2) / 2 else NA_real_
-  .t1_result(betweenness = cb, normalised = cb / denom, n = n,
+  .t1_result(betweenness = if (isTRUE(normalise)) cb / denom else cb,
+             raw = cb, normalised = cb / denom, n = n,
              method = "Betweenness centrality (Brandes)")
 }

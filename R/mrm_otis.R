@@ -297,15 +297,20 @@ mrm_otis_seg_duration_km <- function(
     d <- d[!is.na(d) & d > 0]
     n <- length(d)
     if (n == 0L) {
-      return(data.frame(
+      empty_q <- as.data.frame(as.list(stats::setNames(rep(NA_real_, length(probs)),
+                                                      sprintf("days_at_S%02d", round(100 * probs)))))
+      return(cbind(data.frame(
         stratum = s, n = 0, mean_days = NA_real_,
         median_days = NA_real_, q25_days = NA_real_,
         pct_above_mandela = NA_real_,
         median_among_above_mandela = NA_real_
-      ))
+      ), empty_q))
     }
     above <- d > mandela_threshold
-    data.frame(
+    # the days at which the survival function reaches each of probs
+    surv_q <- stats::quantile(d, 1 - probs, names = FALSE)
+    names(surv_q) <- sprintf("days_at_S%02d", round(100 * probs))
+    cbind(data.frame(
       stratum = s,
       n = n,
       mean_days = round(mean(d), 2),
@@ -313,7 +318,7 @@ mrm_otis_seg_duration_km <- function(
       q25_days = stats::quantile(d, 0.75, names = FALSE),
       pct_above_mandela = round(100 * mean(above), 2),
       median_among_above_mandela = if (any(above)) stats::median(d[above]) else NA_real_
-    )
+    ), as.data.frame(as.list(surv_q)))
   })
   do.call(rbind, rows)
 }

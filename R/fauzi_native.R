@@ -824,6 +824,14 @@ morie_fauzi_b1_coefficient <- function(t, f_X, f_X_prime = NULL,
 morie_fauzi_b2_coefficient <- function(t, f_X, f_X_prime = NULL,
                                        S_X = NULL, transform = "log") {
   cm <- .fz_bias_common(t, f_X, transform)
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
+  .fz_check_optional(S_X, "S_X", length(cm$tv))
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
+  .fz_check_optional(S_X, "S_X", length(cm$tv))
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
+  .fz_check_optional(S_X, "S_X", length(cm$tv))
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
+  .fz_check_optional(S_X, "S_X", length(cm$tv))
   b2 <- vapply(seq_along(cm$zt), function(i) {
     zz <- .fz_seq(cm$zt[i], cm$zt[i] + 12, 400L)
     fv <- stats::approx(cm$tv, cm$fx, xout = cm$tr$g(zz), rule = 1L)$y
@@ -858,6 +866,10 @@ morie_fauzi_b2_coefficient <- function(t, f_X, f_X_prime = NULL,
 morie_fauzi_b3_coefficient <- function(t, f_X, f_X_prime = NULL,
                                        S_X = NULL, transform = "log") {
   cm <- .fz_bias_common(t, f_X, transform)
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
+  .fz_check_optional(f_X_prime, "f_X_prime", length(cm$tv))
   if (is.null(S_X)) {
     stop("b_3 needs the survival function S_X.", call. = FALSE)
   }
@@ -1572,4 +1584,44 @@ morie_fauzi_lemma_3_1 <- function(x, p, h = NULL, q_true = NULL) {
       "quantile estimator"
     )
   )
+}
+
+
+# an optional curve, when supplied, must sit on the same grid as t
+.fz_check_optional <- function(v, name, n) {
+  if (is.null(v)) return(invisible(NULL))
+  if (length(v) != n) {
+    stop(sprintf("%s has %d entries for %d.", name, length(v), n), call. = FALSE)
+  }
+  invisible(NULL)
+}
+
+
+# an optional curve, when supplied, must sit on the same grid as t
+.fz_check_optional <- function(v, name, n) {
+  if (is.null(v)) return(invisible(NULL))
+  if (length(v) != n) {
+    stop(sprintf("%s has %d entries for %d.", name, length(v), n), call. = FALSE)
+  }
+  invisible(NULL)
+}
+
+
+# an optional curve, when supplied, must sit on the same grid as t
+.fz_check_optional <- function(v, name, n) {
+  if (is.null(v)) return(invisible(NULL))
+  if (length(v) != n) {
+    stop(sprintf("%s has %d entries for %d.", name, length(v), n), call. = FALSE)
+  }
+  invisible(NULL)
+}
+
+
+# an optional curve, when supplied, must sit on the same grid as t
+.fz_check_optional <- function(v, name, n) {
+  if (is.null(v)) return(invisible(NULL))
+  if (length(v) != n) {
+    stop(sprintf("%s has %d entries for %d.", name, length(v), n), call. = FALSE)
+  }
+  invisible(NULL)
 }

@@ -491,7 +491,10 @@
   } else {
     res$se <- res$se_analytic
   }
-  list(results = res, IF = IF_mat, n = n_ids)
+  z_a <- stats::qnorm(1 - alpha / 2)
+  res$ci_lower <- res$att - z_a * res$se
+  res$ci_upper <- res$att + z_a * res$se
+  list(results = res, IF = IF_mat, n = n_ids, alpha = alpha)
 }
 
 # ---------------------------------------------------------------------------

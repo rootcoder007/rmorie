@@ -226,6 +226,16 @@ morie_fairness_spatial_gan <- function(points, steps = 1500L,
                 nrow = length(idx), ncol = latent_dim)
     fake <- .fairness_mlp_forward(gp, z)
     loss <- mean((fake - std_pts[idx, , drop = FALSE])^2)
+    # a random-perturbation step of size lr on the generator, kept when
+    # it lowers the batch loss
+    cand <- lapply(gp, function(layer) list(
+      W = layer$W + as.numeric(lr) * matrix(stats::rnorm(length(layer$W)), nrow(layer$W)),
+      b = layer$b + as.numeric(lr) * stats::rnorm(length(layer$b))))
+    cand_loss <- mean((.fairness_mlp_forward(cand, z) - std_pts[idx, , drop = FALSE])^2)
+    if (cand_loss < loss) {
+      gp <- cand
+      loss <- cand_loss
+    }
     history <- c(history, loss)
   }
 
@@ -280,7 +290,9 @@ morie_fairness_spatial_gan <- function(points, steps = 1500L,
 #' @param favorable The favourable outcome value (default 1).
 #' @param privileged The group whose favourable rate is targeted.
 #' @param n Number of synthetic rows to return.
-#' @param steps Training iterations.
+#' @param steps Training iterations in the Python CTGAN; the native
+#'   debiaser resamples rows rather than training a generator, so this is
+#'   carried for interface parity and has no effect.
 #' @param seed Sampling/training seed.
 #' @return \code{morie_fairness_result}; \code{$debiased} carries the
 #'   synthesised data.frame when a backend is available.

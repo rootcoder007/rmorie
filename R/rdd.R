@@ -283,8 +283,16 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
   # Silverman's rule: the robust scale keeps a heavy tail from
   # inflating the window.
   h     <- 0.9 * min(sd_x, iqr_x / 1.349) * n^(-1 / 5)
+  side <- function(xs) {
+    if (length(xs) < 2L) return(NA_real_)
+    s_ <- sqrt(sum((xs - mean(xs))^2) / length(xs))
+    q_ <- stats::quantile(xs, c(0.25, 0.75), names = FALSE, type = 7)
+    0.9 * min(s_, (q_[2] - q_[1]) / 1.349) * length(xs)^(-1 / 5)
+  }
   .morie_rdd_bw_result(h, "ROT",
-                       list(sd_x = sd_x, iqr_x = iqr_x))
+                       list(sd_x = sd_x, iqr_x = iqr_x, cutoff = cutoff,
+                            h_left = side(x[x < cutoff]),
+                            h_right = side(x[x >= cutoff])))
 }
 
 #' Internal: weighted local polynomial fit at a point
@@ -467,7 +475,24 @@ morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
   if (is.null(bandwidth))
     bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
   fit <- .morie_rdd_jump_native(x, y, cutoff, bandwidth, p, kernel)
-  .morie_rdd_result(fit$estimate, fit$se, fit$n,
+  se_use <- fit$se
+  if (!is.null(cluster) && cluster %in% names(data)) {
+    # cluster-robust inference by a cluster bootstrap of the jump
+    cl <- as.character(data[[cluster]])
+    ids <- unique(cl)
+    members <- split(seq_along(cl), cl)
+    .morie_local_seed(0L)
+    boots <- numeric(0)
+    for (b in seq_len(200L)) {
+      picked <- sample(ids, length(ids), replace = TRUE)
+      idx <- unlist(members[picked], use.names = FALSE)
+      est <- tryCatch(.morie_rdd_jump_native(x[idx], y[idx], cutoff, bandwidth, p, kernel)$estimate,
+                      error = function(e) NA_real_)
+      if (is.finite(est)) boots <- c(boots, est)
+    }
+    if (length(boots) > 1L) se_use <- stats::sd(boots)
+  }
+  .morie_rdd_result(fit$estimate, se_use, fit$n,
                     method = "sharp RDD (rmorie native)",
                     alpha = alpha,
                     details = list(left = fit$left, right = fit$right,
@@ -555,7 +580,8 @@ morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
 #' @export
 morie_rdd_mccrary <- function(x, cutoff = 0, n_bins = 50,
                               bandwidth = NULL) {
-  fit <- .morie_rdd_mccrary_native(x, cutoff, bandwidth = bandwidth)
+  fit <- .morie_rdd_mccrary_native(x, cutoff, bin = 2 * stats::sd(x[is.finite(x)]) / sqrt(max(length(x), 2)) * (50 / n_bins),
+                                   bandwidth = bandwidth)
   list(statistic = fit$statistic,
        p_value   = fit$p_value,
        theta     = fit$theta,
@@ -724,7 +750,25 @@ morie_rdd_plot_data <- function(data, outcome, running, cutoff = 0,
   poly_fit <- stats::lm(y ~ poly(x, p_global))
   poly <- data.frame(x = sort(x), fitted = stats::predict(poly_fit,
                                             newdata = data.frame(x = sort(x))))
-  list(bins = bins, poly = poly)
+  # local polynomial fits of order p_local on each side of the cutoff,
+  # kernel-weighted within the bandwidth (IK when none is given)
+  h <- if (is.null(bandwidth)) .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth else bandwidth
+  kfun <- .morie_rdd_kernels[[kernel]]
+  if (is.null(kfun)) kfun <- .morie_rdd_kernels[["triangular"]]
+  local_side <- function(sel) {
+    xs <- x[sel]; ys <- y[sel]
+    w <- kfun(abs(xs - cutoff) / h)
+    ok <- is.finite(w) & w > 0
+    if (sum(ok) < p_local + 2L) return(NULL)
+    dd <- data.frame(u = xs[ok] - cutoff, yy = ys[ok], ww = w[ok])
+    fit <- stats::lm(yy ~ poly(u, p_local, raw = TRUE), data = dd, weights = ww)
+    grid <- seq(min(xs[ok]), max(xs[ok]), length.out = 50L)
+    data.frame(x = grid, fitted = as.numeric(stats::predict(
+      fit, newdata = data.frame(u = grid - cutoff))))
+  }
+  local <- list(left = local_side(x < cutoff & abs(x - cutoff) <= h),
+                right = local_side(x >= cutoff & abs(x - cutoff) <= h))
+  list(bins = bins, poly = poly, local = local, bandwidth = h, cutoff = cutoff)
 }
 
 #' Bandwidth sensitivity sweep

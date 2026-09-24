@@ -266,3 +266,15 @@ test_that("morie_iv_residual_analysis returns residual frame", {
   expect_s3_class(out, "data.frame")
   expect_true(all(c("residual", "abs_resid", "sq_resid") %in% names(out)))
 })
+
+
+test_that("round four: anderson-rubin reports the decision at alpha", {
+  set.seed(7)
+  n <- 150
+  z <- rnorm(n); d <- 0.7 * z + rnorm(n); y <- 0.5 * d + rnorm(n)
+  df <- data.frame(y = y, d = d, z = z)
+  res <- morie_iv_anderson_rubin(df, "y", "d", "z", alpha = 0.10)
+  expect_equal(res$alpha, 0.10)
+  expect_equal(res$critical_value, stats::qchisq(0.90, df = 1))
+  expect_equal(res$reject_at_alpha, res$p_value < 0.10)
+})

@@ -28,6 +28,7 @@
 #' @export
 Leidenclus <- function(graph, resolution = 1, quality = "modularity",
                        max_iter = 20) {
+  quality <- match.arg(quality, c("modularity", "cpm"))
   W <- .s03mat(graph)
   n <- nrow(W)
   g <- as.numeric(resolution)

@@ -52,6 +52,12 @@
   } else {
     character()
   }
+  if (!is.null(user_agent) && nzchar(user_agent)) {
+    headers <- c(headers, paste0("User-Agent: ", user_agent))
+  }
+  if (!is.null(user_agent) && nzchar(user_agent)) {
+    headers <- c(headers, paste0("User-Agent: ", user_agent))
+  }
   body <- tryCatch(
     .morie_dataset_http_text(url,
                               query = params,

@@ -66,8 +66,8 @@
     )
   }
   url <- sprintf(
-    "%s/datastore/dump/%s?format=json",
-    .MORIE_ONTARIO_CKAN_BASE, resource_id
+    "%s/datastore/dump/%s?format=json&limit=%d",
+    .MORIE_ONTARIO_CKAN_BASE, resource_id, as.integer(limit)
   )
   # 3XX: routes through the shared libcurl backend (with httr2
   # fallback). 120-second timeout preserved.

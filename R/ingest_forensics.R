@@ -150,6 +150,12 @@
   } else {
     character()
   }
+  if (!is.null(user_agent) && nzchar(user_agent)) {
+    hdr_vec <- c(hdr_vec, paste0("User-Agent: ", user_agent))
+  }
+  if (!is.null(user_agent) && nzchar(user_agent)) {
+    hdr_vec <- c(hdr_vec, paste0("User-Agent: ", user_agent))
+  }
   resp <- .morie_dataset_http_text_with_status(
     url, query = params, headers = hdr_vec,
     timeout_s = as.integer(timeout))
@@ -471,7 +477,9 @@ morie_ingest_forensics_namus_missing <- function(
     resp <- .morie_dataset_http_post_json_with_status(
       .MORIE_NAMUS_MISSING_BASE,
       body = body,
-      headers = "Accept: application/json",
+      headers = c("Accept: application/json",
+                  if (!is.null(user_agent) && nzchar(user_agent))
+                    paste0("User-Agent: ", user_agent)),
       timeout_s = as.integer(timeout),
       auto_unbox = TRUE)
     status <- resp$status_code

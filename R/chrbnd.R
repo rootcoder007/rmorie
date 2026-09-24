@@ -17,7 +17,8 @@
 #' @param instrument Cell label per observation, or NULL.
 #' @param alpha One-sided level of the reported bound.
 #' @param gamma Precision level of the contact set, or NULL.
-#' @param beta Retained for the contact-set width.
+#' @param beta Level of the preliminary contact-set step: when `gamma` is
+#'   not given it is `1 - beta / log(V + 1)` (Chernozhukov, Lee & Rosen).
 #' @return List with \code{estimate}, \code{bound}, \code{naive_min},
 #'   \code{cells}, \code{means}, \code{ses}, \code{contact_set},
 #'   \code{k_alpha}, \code{n_cells}, \code{n}, \code{method}.
@@ -53,7 +54,8 @@ Chrbnd <- function(y, X = NULL, instrument = NULL, alpha = 0.05,
     ses[q] <- sd / sqrt(m)
     sizes[q] <- m
   }
-  if (is.null(gamma)) gamma <- if (V > 1L) 1 - 1 / log(V + 1) else 0.9
+  if (!(beta > 0 && beta < 1)) stop("beta must lie strictly in (0, 1)")
+  if (is.null(gamma)) gamma <- if (V > 1L) 1 - beta / log(V + 1) else 1 - beta
   if (!(gamma > 0 && gamma < 1))
     stop("gamma must lie strictly in (0, 1)")
   k_gamma <- .s03qnorm(gamma)

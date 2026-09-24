@@ -2091,10 +2091,16 @@ morie_did_diagnostics <- function(data, outcome, treatment, post,
     })
     cov_balance <- do.call(rbind, Filter(Negate(is.null), rows))
   }
+  cluster_counts <- NULL
+  if (!is.null(cluster) && cluster %in% names(df)) {
+    cluster_counts <- tapply(df[[cluster]], list(df[[treatment]], df[[post]]),
+                             function(v) length(unique(v)))
+  }
   list(
     sample_sizes = sizes,
     outcome_stats = outcome_stats,
-    covariate_balance = cov_balance
+    covariate_balance = cov_balance,
+    cluster_counts = cluster_counts
   )
 }
 

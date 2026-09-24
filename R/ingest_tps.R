@@ -116,6 +116,8 @@ morie_ingest_tps_layers <- function() {
   body <- tryCatch(
     .morie_dataset_http_text(paste0(layer_url, "/query"),
                               query = params,
+                              headers = if (!is.null(user_agent) && nzchar(user_agent))
+                                paste0("User-Agent: ", user_agent) else character(),
                               timeout_s = as.integer(timeout)),
     error = function(e) {
       stop("morie TPS layer query failed (", layer_url, "): ",

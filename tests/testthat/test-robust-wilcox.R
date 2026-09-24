@@ -175,3 +175,11 @@ test_that("robust estimators resist an outlier that moves the mean", {
                tolerance = 1e-9)
   expect_gt(abs(mean(base) - mean(wild)), 900)
 })
+
+
+test_that("round four: brunner-munzel carries an interval for p_hat at alpha", {
+  set.seed(9)
+  r <- morie_brunner_munzel(rnorm(20), rnorm(25, 0.3), alpha = 0.10)
+  expect_equal(r$alpha, 0.10)
+  expect_true(r$ci_lower <= r$p_hat && r$p_hat <= r$ci_upper)
+})

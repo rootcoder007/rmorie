@@ -29,6 +29,7 @@
 #' LemR(blocks)
 #' @export
 LemR <- function(A, resolution = 1, quality = "modularity", max_iter = 20L) {
+  quality <- match.arg(quality, c("modularity"))
   W <- as.matrix(A)
   n <- nrow(W)
   if (ncol(W) != n) stop("A must be square")

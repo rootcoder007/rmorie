@@ -1031,9 +1031,14 @@ morie_estimate_cate <- function(data, treatment, outcome, covariates,
     X <- as.matrix(df[, covariates, drop = FALSE])
     y <- as.numeric(df[[outcome]])
     d <- as.numeric(df[[treatment]])
+    ps <- if (!is.null(propensity_col) && propensity_col %in% names(df)) {
+      as.numeric(df[[propensity_col]])
+    } else {
+      NULL
+    }
     return(if (meta_learner == "x_learner")
-      .morie_cate_x_learner(X, y, d)
-    else .morie_cate_dr_learner(X, y, d))
+      .morie_cate_x_learner(X, y, d, ps = ps)
+    else .morie_cate_dr_learner(X, y, d, ps = ps))
   }
   fam <- if (outcome_model == "logistic") {
     stats::binomial()

@@ -255,3 +255,14 @@ test_that("compute_vif rejects fewer observations than predictors", {
   expect_error(compute_vif(matrix(rnorm(12), 3, 4)),
                "more observations than predictors")
 })
+
+
+test_that("round four: link_test fits the logistic model type", {
+  set.seed(6)
+  X <- cbind(1, rnorm(120))
+  y <- as.numeric(runif(120) < plogis(X %*% c(-0.2, 1.1)))
+  r <- link_test(y, X, model_type = "logistic")
+  expect_equal(r$name, "link_test")
+  expect_true(is.na(r$p_value) || (r$p_value >= 0 && r$p_value <= 1))
+  expect_error(link_test(y, X, model_type = "poisson"))
+})

@@ -906,6 +906,26 @@ random_effects_meta <- function(estimates, standard_errors,
   Q <- sum(w * (theta - theta_fe)^2)
   c_val <- sum(w) - sum(w^2) / sum(w)
   tau2 <- if (c_val > 0) max((Q - (k - 1)) / c_val, 0) else 0
+  if (method %in% c("PM", "REML")) {
+    # Paule-Mandel and REML by fixed-point iteration from the DL start
+    for (it in seq_len(200L)) {
+      wt <- 1 / (se^2 + tau2)
+      mu <- sum(wt * theta) / sum(wt)
+      new <- if (method == "PM") {
+        q_t <- sum(wt * (theta - mu)^2)
+        if (q_t <= k - 1) {
+          if (tau2 == 0) 0 else tau2 * (k - 1) / q_t
+        } else if (tau2 > 0) tau2 * q_t / (k - 1) else mean((theta - mu)^2)
+      } else {
+        num <- sum(wt^2 * ((theta - mu)^2 - se^2)) + sum(wt^2) / sum(wt)
+        max(num / sum(wt^2), 0)
+      }
+      if (abs(new - tau2) < 1e-10) { tau2 <- new; break }
+      tau2 <- new
+    }
+  } else if (method != "DL") {
+    stop("method must be 'DL', 'PM' or 'REML'", call. = FALSE)
+  }
   w_re <- 1 / (se^2 + tau2)
   pooled <- sum(w_re * theta) / sum(w_re)
   pooled_se <- sqrt(1 / sum(w_re))
@@ -914,7 +934,7 @@ random_effects_meta <- function(estimates, standard_errors,
   pred_se <- sqrt(pooled_se^2 + tau2)
   t_crit <- qt((1 + confidence) / 2, max(k - 2, 1))
   effect_size_result(
-    "Random-effects meta-analysis (DL)", pooled,
+    sprintf("Random-effects meta-analysis (%s)", method), pooled,
     pooled - z * pooled_se, pooled + z * pooled_se, pooled_se, k,
     extra = list(
       tau_squared = tau2, tau = sqrt(tau2),

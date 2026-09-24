@@ -238,3 +238,35 @@ test_that("morie_rdd_power respects user-supplied bandwidth", {
   res <- morie_rdd_power(n = 500, tau = 0.5, sigma = 1, bandwidth = 0.2)
   expect_true(is.finite(res$power))
 })
+
+
+test_that("round four: rdd_plot_data returns the local fits around the cutoff", {
+  set.seed(10)
+  x <- runif(300, -1, 1)
+  y <- 1 + 2 * (x >= 0) + x + rnorm(300, 0, 0.3)
+  df <- data.frame(y = y, x = x)
+  pd <- morie_rdd_plot_data(df, "y", "x", cutoff = 0, bandwidth = 0.5, p_local = 1)
+  expect_true(all(c("bins", "poly", "local", "bandwidth", "cutoff") %in% names(pd)))
+  expect_equal(pd$bandwidth, 0.5)
+  expect_true(is.data.frame(pd$local$left) && is.data.frame(pd$local$right))
+  expect_true(all(pd$local$left$x < 0) && all(pd$local$right$x >= 0))
+})
+
+test_that("round four: bandwidth_rot reports both sides of the cutoff", {
+  set.seed(11)
+  x <- runif(200, -2, 2)
+  bw <- morie_rdd_bandwidth_rot(x, rnorm(200), cutoff = 0.5)
+  expect_equal(bw$details$cutoff, 0.5)
+  expect_true(is.finite(bw$details$h_left) && is.finite(bw$details$h_right))
+})
+
+test_that("round four: rdd_sharp runs a cluster bootstrap when asked", {
+  set.seed(12)
+  x <- runif(240, -1, 1)
+  df <- data.frame(y = 1 + 2 * (x >= 0) + x + rnorm(240, 0, 0.3), x = x,
+                   cl = rep(seq_len(24), each = 10))
+  plain <- morie_rdd_sharp(df, "y", "x", bandwidth = 0.5)
+  clus <- morie_rdd_sharp(df, "y", "x", bandwidth = 0.5, cluster = "cl")
+  expect_equal(clus$estimate, plain$estimate)
+  expect_true(is.finite(clus$std_error) && clus$std_error > 0)
+})

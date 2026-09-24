@@ -252,6 +252,10 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
                                                   n_dims  = 1L,
                                                   max_iter = 100L,
                                                   tol      = 1e-6) {
+  if (as.integer(n_dims) != 1L) {
+    stop("morie_spatial_voting_aldrich_mckelvey: this implementation recovers a single ",
+         "latent dimension; n_dims must be 1", call. = FALSE)
+  }
   Z <- .sv_as_matrix(Z)
   n_resp <- nrow(Z)
   n_stim <- ncol(Z)

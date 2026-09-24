@@ -1,5 +1,24 @@
 # rmorie 1.3.2 - 2026-09-21
 
+## Parameters that were accepted and not read
+
+An AST scan over the package found defaulted arguments never referenced
+in their bodies. Those documented as no-ops are unchanged; the rest now
+act: `cramers_v()` carries a noncentral chi-square interval at
+`confidence`, `random_effects_meta()` implements `method = "PM"` and
+`"REML"`, `link_test()` fits `model_type = "logistic"`,
+`morie_rdd_plot_data()` returns the local fits (`cutoff`, `p_local`,
+`bandwidth`, `kernel`), `morie_rdd_sharp()` bootstraps by `cluster`,
+`morie_rdd_bandwidth_rot()` reports both sides of `cutoff`,
+`morie_weights_greg()` iterates to `max_iter`,
+`morie_matching_att_matched()` weights by the named column,
+`morie_matching_abadie_imbens_se()` divides the reuse count by
+`n_matches`, `morie_brunner_munzel()`, `morie_iv_anderson_rubin()`,
+`Landmark()` and `Aftfit()` use `alpha`, the ingest helpers send
+`user_agent`, `morie_bayes_lm()` honours `stop_on_convergence`, and
+`morie_spatial_voting_aldrich_mckelvey()` refuses `n_dims != 1` instead
+of ignoring it.
+
 ## Two-proportion test
 
 `mrm_twoprop_test()` with no events (or nothing but events) in both arms

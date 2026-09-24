@@ -86,6 +86,9 @@ NULL
 #' @noRd
 .stat_validate <- function(x, name = "x") {
   x <- suppressWarnings(as.numeric(x))
+  if (length(x) && !any(is.finite(x))) {
+    warning(sprintf("%s has no finite values", name), call. = FALSE)
+  }
   x[is.finite(x)]
 }
 
