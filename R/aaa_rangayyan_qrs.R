@@ -1747,20 +1747,27 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
     lvl <- if (ra < a) .morie_fsum(x[(ra + 1L):a]) / (a - ra) else 0
     if (a < b) y[(a + 1L):b] <- lvl
   }
-  lo <- .morie_qrs_mavg(y, max(1L, as.integer(round(fs / 11))))
-  hi <- .morie_qrs_mavg(y, max(1L, as.integer(round(fs / 3))))
-  bp <- lo - hi
+  # the 3-11 Hz bandpass (-3 dB at 3 and 11 Hz, as the method specifies):
+  # second-order Butterworth, forwards and backwards for zero phase so the
+  # P wave stays where it is.  The difference of two causal moving
+  # averages it replaces had neither those corners nor zero phase, and
+  # its 0.33 s window carried the preceding T wave into the interval.
+  if (fs <= 22) stop("fs must exceed 22 Hz for the 3-11 Hz bandpass")
+  bw <- .morie_dsp_butter(2L, c(3, 11) / (fs / 2), "pass")
+  bp <- .morie_dsp_filtfilt(bw$b, bw$a, y)
 
   wins <- vector("list", length(q) - 1L)
   for (k in seq_len(length(q) - 1L) + 1L) {
     rr <- (q[k] - q[k - 1L]) / fs
-    qtmax <- 29 * rr + 0.250
-    start <- max(
-      q[k - 1L],
-      q[k - 1L] + as.integer(round(min(qtmax, 0.75 * rr) * fs))
-    )
-    stop_ <- max(start + 2L, q[k] - half)
-    wins[[k - 1L]] <- if (stop_ <= start || stop_ > n) NULL else c(start, stop_)
+    # Hengeveld and van Bemmel's T-end estimate, QTmax = (2/9) RR + 250 ms
+    # (it had been read as "29 RR" and capped at 0.75 RR). The interval
+    # ends where the deleted QRS begins; list(NULL) keeps a beat with no
+    # interval in place, where assigning NULL deleted it and shifted every
+    # later window onto the wrong beat.
+    qtmax <- (2 / 9) * rr + 0.250
+    start <- q[k - 1L] + as.integer(round(qtmax * fs))
+    stop_ <- q[k] - half
+    wins[k - 1L] <- if (stop_ - start < 2L || stop_ > n) list(NULL) else list(c(start, stop_))
   }
   usable <- Filter(Negate(is.null), wins)
   if (!length(usable)) {
@@ -1777,8 +1784,18 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
     ifelse(r >= 0.75, 2, ifelse(r >= 0.50, 1, 0))
   }
   if (is.null(template)) {
-    acc <- numeric(wlen)
-    for (w in usable) acc <- acc + bp[(w[1L] + 1L):(w[1L] + wlen)]
+    # a representative P wave: the P-length (120 ms) segment centred on
+    # each interval's strongest band-passed deflection, averaged and
+    # ternarised.  Averaging whole intervals made the template as long as
+    # the interval, so every "P wave" was the interval's midpoint.
+    plen <- max(3L, min(wlen, as.integer(round(0.120 * fs))))
+    acc <- numeric(plen)
+    for (w in usable) {
+      seg <- bp[(w[1L] + 1L):w[2L]]
+      cc <- which.max(abs(seg)) - 1L
+      st <- min(max(0L, cc - plen %/% 2L), length(seg) - plen)
+      acc <- acc + seg[(st + 1L):(st + plen)]
+    }
     template <- ternary(acc / length(usable))
   } else {
     template <- .morie_qrs_check(template, 2L, "template")
