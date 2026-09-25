@@ -4,17 +4,19 @@
 \alias{.morie_k05_gtime}
 \title{.morie_k05_gtime}
 \usage{
-.morie_k05_gtime(times, e_times, how)
+.morie_k05_gtime(times, t_all, e_all, how)
 }
 \arguments{
-\item{times}{A vector; its length is taken and its elements indexed.}
+\item{times}{Event times at which the transform is evaluated.}
 
-\item{e_times}{Passed to \code{>=}.}
+\item{t_all}{All follow-up times, censored ones included.}
 
-\item{how}{One of \code{"identity"}, \code{"log"}, \code{"rank"}.}
+\item{e_all}{Event indicators matching \code{t_all}.}
+
+\item{how}{One of \code{"km"}, \code{"identity"}, \code{"log"}, \code{"rank"}.}
 }
 \value{
-The value of \code{out}, as built in the body.
+The transformed times g(t), one per entry of \code{times}.
 }
 \description{
 A step of the k05_tranche2 implementation. Called by \code{morie_scaled_schoenfeld}.

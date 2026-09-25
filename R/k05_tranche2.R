@@ -385,10 +385,11 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param times A vector; its length is taken and its elements indexed.
-#' @param e_times Passed to \code{>=}.
-#' @param how One of \code{"identity"}, \code{"log"}, \code{"rank"}.
-#' @return The value of \code{out}, as built in the body.
+#' @param times Event times at which the transform is evaluated.
+#' @param t_all All follow-up times, censored ones included.
+#' @param e_all Event indicators matching \code{t_all}.
+#' @param how One of \code{"km"}, \code{"identity"}, \code{"log"}, \code{"rank"}.
+#' @return The transformed times g(t), one per entry of \code{times}.
 #' @export
 .morie_k05_gtime <- function(times, t_all, e_all, how) {
   # g(t) at the event times as survival::cox.zph computes it: "km" is
