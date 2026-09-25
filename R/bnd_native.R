@@ -429,6 +429,9 @@ morie_bnd_moment_inequality <- function(data, g, theta_grid, alpha = 0.05,
   Q <- numeric(length(grid))
   crit <- numeric(length(grid))
   J <- NULL
+  # one set of multipliers for the whole grid: every theta's critical
+  # value is read off the same bootstrap world
+  mult <- matrix(stats::rnorm(as.integer(B) * n), as.integer(B), n)
   for (i in seq_along(grid)) {
     G <- as.matrix(g(d, grid[i]))
     if (nrow(G) != n) G <- t(G)
@@ -442,7 +445,6 @@ morie_bnd_moment_inequality <- function(data, g, theta_grid, alpha = 0.05,
     tt <- sqrt(n) * gbar / sdv
     Q[i] <- sum(pmax(tt, 0)^2)
     Z <- sweep(sweep(G, 2L, gbar), 2L, sdv, "/")
-    mult <- matrix(stats::rnorm(as.integer(B) * n), as.integer(B), n)
     boot_t <- (mult %*% Z) / sqrt(n)
     binding <- tt > -sqrt(2 * log(log(max(n, 3))))
     bq <- if (any(binding)) {
