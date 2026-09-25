@@ -27,6 +27,6 @@ amplitude have to be satisfied -- a lag in band with a tiny peak is
 not a rhythm.
 }
 \examples{
-AlphaRhy(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+AlphaRhy(sin(2 * pi * 10 * (0:399) / 100), fs = 100)$present
 }
 \keyword{internal}

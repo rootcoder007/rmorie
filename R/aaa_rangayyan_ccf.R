@@ -626,32 +626,49 @@ EegAcf <- function(x, fs, maxlag = NULL) {
 #' \code{fs}, \code{method}.
 #' @export
 #' @examples
-#' AlphaRhy(x = c(1, 2, 3, 4, 5, 6, 7, 8), fs = 5L)
+#' AlphaRhy(sin(2 * pi * 10 * (0:399) / 100), fs = 100)$present
 #' @keywords internal
 AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
   # The alpha band by convention; the SAME test serves the other bands,
-  # so the band is an argument, not a constant.  Both the band AND the
-  # amplitude have to be satisfied -- a lag in band with a tiny peak is
-  # not a rhythm.
+  # so the band is an argument, not a constant.  The rhythm's period is
+  # the lag of the FIRST ACF peak that reaches the threshold, and the
+  # rhythm is present when that lag lies in the band.  Taking the largest
+  # value inside the band's lags reported the 2nd or 3rd period of a
+  # faster rhythm (25 Hz peaks at lags 4, 8, 12 at 100 Hz) as alpha.
   xs <- as.numeric(x)
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("fs must be positive")
   lo <- as.numeric(band)[1L]
   hi <- as.numeric(band)[2L]
-  if (!(lo > 0 && hi > lo)) stop("the band must be an increasing pair")
-  klo <- max(1L, as.integer(floor(fsv / hi)))
-  khi <- as.integer(ceiling(fsv / lo))
+  if (!(lo > 0 && hi > lo)) stop("the band must satisfy 0 < low < high")
+  if (hi >= fsv / 2) stop("the band exceeds the Nyquist frequency")
+  thr <- as.numeric(threshold)
+  if (!(thr >= 0 && thr <= 1)) {
+    stop("the threshold is a fraction of the zero-lag value and must lie in [0, 1]")
+  }
+  klo <- as.integer(fsv / hi)
+  khi <- as.integer(fsv / lo) + 1L
   r <- EegAcf(xs, fsv, maxlag = min(khi + 2L, length(xs) - 1L))
   a <- r$normalized
-  rng <- klo:min(khi, length(a) - 1L)
-  vals <- a[rng + 1L]
-  k <- rng[which.max(vals)]
-  peak <- max(vals)
+  nl <- length(a) - 1L
+  k <- NA_integer_
+  peak <- NA_real_
+  if (nl >= 2L) {
+    for (m in 2L:min(khi, nl)) {
+      right_ok <- m + 1L > nl || a[m + 1L] >= a[m + 2L]
+      if (a[m + 1L] > a[m] && right_ok && a[m + 1L] >= thr) {
+        k <- m
+        peak <- a[m + 1L]
+        break
+      }
+    }
+  }
   list(
     acf = a, band = c(lo, hi), lag_range = c(klo, khi),
-    peak_lag = k, peak = peak, frequency_hz = fsv / k,
-    threshold = as.numeric(threshold),
-    present = peak >= as.numeric(threshold),
+    peak_lag = k, peak = peak,
+    frequency_hz = if (is.na(k)) NA_real_ else fsv / k,
+    threshold = thr,
+    present = !is.na(k) && k >= klo && k <= khi,
     needs_both_the_band_and_the_amplitude = TRUE,
     same_test_serves_other_bands = TRUE, fs = fsv,
     method = "Rangayyan (2024) Ch. 4 (alpha rhythm by the ACF)"
