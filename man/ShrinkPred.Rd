@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_sp_fill.R
 \name{ShrinkPred}
 \alias{ShrinkPred}
-\title{Thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),}
+\title{Thetahat_j = muhat + (1 - lambda_j)(ybar_j - muhat),}
 \usage{
 ShrinkPred(y, cluster, sigma2_u, sigma2_e)
 }
@@ -21,7 +21,9 @@ A list with \code{clusters}, \code{shrunk}, \code{raw}, \code{lambda},
 \code{shrinkage_depends_on_cluster_size}, \code{n}, \code{method}.
 }
 \description{
-lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on
+lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u), and muhat the GLS mean
+sum_j w_j ybar_j / sum_j w_j with w_j = 1/(sigma2_u + sigma2_e/n_j)
+(reported as \code{grand_mean}).  lambda depends on
 the CLUSTER'S OWN SIZE; a common lambda over-shrinks the large
 clusters. Stein (1956); Morris (1983) JASA 78:47-55.  NOT in
 Schabenberger & Gotway -- a fixed-string search for "shrinkage"

@@ -167,7 +167,9 @@ morie_dp_adam <- function(grads, C = 1, sigma = 1, lr = 1e-3,
 #' @param seed optional integer seed.
 #' @return list with \code{centers}, \code{labels},
 #'   \code{epsilon_per_iteration}, \code{n_reinitialised},
-#'   \code{inertia}.
+#'   \code{inertia}, \code{private_outputs}, \code{privacy_note}.
+#'   Only \code{centers} is the private release; \code{labels} and
+#'   \code{inertia} are computed on the raw records.
 #' @references Su, D. et al. (2016). Differentially private k-means
 #'   clustering. \emph{CODASPY}, 26-37.
 #' @examples
@@ -208,7 +210,12 @@ morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
   eps_iter <- eps / (2 * n_iter)
   old <- .morie_dp_seed(seed)
   on.exit(.morie_dp_unseed(old), add = TRUE)
-  centers <- Xc[sample.int(n, k, replace = FALSE), , drop = FALSE]
+  # data-independent starting centres: sampling rows would publish a
+  # record verbatim if a centre were re-initialised on the last pass
+  centers <- matrix(lo + (hi - lo) * stats::runif(k * p), k, p)
+  # add/remove neighbours: a count moves by 1, a p-dimensional sum by at
+  # most p * max(|lo|, |hi|) in L1; clusters partition the records
+  sens_sum <- p * max(abs(lo), abs(hi))
   reinit <- 0L
   labels <- integer(n)
   assign_labels <- function(cen) {
@@ -229,9 +236,9 @@ morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
       } else {
         numeric(p)
       }
-      noisy_sum <- base_sum + .morie_dp_rlaplace(p, (hi - lo) / eps_iter)
+      noisy_sum <- base_sum + .morie_dp_rlaplace(p, sens_sum / eps_iter)
       if (noisy_count < 1) {
-        centers[j, ] <- Xc[sample.int(n, 1L), ]
+        centers[j, ] <- lo + (hi - lo) * stats::runif(p)
         reinit <- reinit + 1L
       } else {
         centers[j, ] <- noisy_sum / noisy_count
@@ -251,7 +258,11 @@ morie_dp_kmeans <- function(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL,
         "budget is thin for this k"
       )
     }),
-    method = "dp_kmeans"
+    method = "dp_kmeans",
+    private_outputs = "centers",
+    privacy_note = paste("only `centers` is the differentially private",
+                         "release; `labels` and `inertia` are computed on",
+                         "the raw records and must not be published")
   )
 }
 
@@ -430,7 +441,9 @@ morie_dp_synthetic_data <- function(X, epsilon = 1, n_synth = NULL, bins = 10,
   for (j in seq_len(p)) {
     idx <- pmin(pmax(findInterval(Xc[, j], edges), 1L), nb)
     counts <- tabulate(idx, nbins = nb)
-    noisy <- pmax(counts + .morie_dp_rlaplace(nb, 2 / eps), 0)
+    # every record enters all p marginals: sequential composition, so
+    # each marginal is released at eps / p
+    noisy <- pmax(counts + .morie_dp_rlaplace(nb, 2 * p / eps), 0)
     if (sum(noisy) <= 0) noisy <- rep(1, nb)
     prob <- noisy / sum(noisy)
     pick <- sample.int(nb, n_synth, replace = TRUE, prob = prob)

@@ -212,8 +212,10 @@ morie_synth_control <- function(data, outcome, unit, time,
   }
   main <- fit_one(tu, donors)
   # In-space placebos: every donor takes a turn as pseudo-treated.
+  # The placebo pool leaves out the treated unit, whose post-period
+  # carries the effect (Abadie, Diamond & Hainmueller 2010, sec. 5).
   placebo_ratios <- vapply(donors, function(d) {
-    fit_one(d, setdiff(rownames(Y), d))$ratio
+    fit_one(d, setdiff(donors, d))$ratio
   }, numeric(1))
   all_ratios <- c(main$ratio, placebo_ratios)
   pval <- mean(all_ratios >= main$ratio)

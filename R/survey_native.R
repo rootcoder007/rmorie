@@ -329,7 +329,9 @@ morie_calibration_chi2 <- function(y, X, weights, totals) {
 #' Stratified estimator of a proportion
 #'
 #' \eqn{\hat p_{st} = \sum_h W_h \hat p_h} with variance
-#' \eqn{\sum_h W_h^2 \hat p_h(1-\hat p_h)/(n_h - 1)}. The variance
+#' \eqn{\sum_h W_h^2 (1 - f_h) \hat p_h(1-\hat p_h)/(n_h - 1)}, where
+#' \eqn{f_h = n_h/N_h} when \code{N_h} is given (Cochran 1977, eq. 5.47)
+#' and 0 otherwise. The variance
 #' has no between-stratum term at all: that variation is removed by
 #' DESIGN rather than estimated, which is what stratification buys.
 #' The weights must be POPULATION shares -- sample shares silently
@@ -339,14 +341,16 @@ morie_calibration_chi2 <- function(y, X, weights, totals) {
 #' @param y binary 0/1 responses.
 #' @param stratum stratum labels.
 #' @param weights population share per stratum, in sorted label order.
+#' @param N_h population size per stratum, in sorted label order; gives
+#'   the shares and the finite population correction.
 #' @return list: proportion, variance, se, strata, p_h, n_h, W_h,
-#'   weights_are_population_shares, n, method.
+#'   weights_are_population_shares, fpc, n, method.
 #' @examples
 #' set.seed(1)
 #' y <- c(rbinom(50, 1, 0.1), rbinom(50, 1, 0.9))
 #' morie_stratified_proportion(y, rep(1:2, each = 50), c(0.5, 0.5))$se
 #' @export
-morie_stratified_proportion <- function(y, stratum, weights = NULL) {
+morie_stratified_proportion <- function(y, stratum, weights = NULL, N_h = NULL) {
   yv <- as.numeric(y)
   st <- stratum
   if (length(st) != length(yv)) {
@@ -370,8 +374,24 @@ morie_stratified_proportion <- function(y, stratum, weights = NULL) {
     nh[i] <- m
     ph[i] <- mean(yv[sel])
   }
-  W <- if (is.null(weights)) nh / sum(nh) else as.numeric(weights)
-  pop <- !is.null(weights)
+  fpc <- rep(1, length(labs))
+  if (!is.null(weights)) {
+    W <- as.numeric(weights)
+  } else if (!is.null(N_h)) {
+    Nv <- as.numeric(N_h)
+    if (length(Nv) != length(labs)) {
+      stop(sprintf("N_h has %d entries for %d strata.", length(Nv),
+                   length(labs)), call. = FALSE)
+    }
+    if (any(Nv < nh)) {
+      stop("a population stratum is smaller than its sample.", call. = FALSE)
+    }
+    W <- Nv / sum(Nv)
+    fpc <- 1 - nh / Nv
+  } else {
+    W <- nh / sum(nh)
+  }
+  pop <- !is.null(weights) || !is.null(N_h)
   if (length(W) != length(labs)) {
     stop(sprintf("weights has %d entries for %d strata.",
                  length(W), length(labs)), call. = FALSE)
@@ -380,10 +400,10 @@ morie_stratified_proportion <- function(y, stratum, weights = NULL) {
     stop(sprintf("stratum weights must sum to 1, got %g.", sum(W)),
          call. = FALSE)
   }
-  var <- sum(W^2 * ph * (1 - ph) / (nh - 1))
+  var <- sum(W^2 * fpc * ph * (1 - ph) / (nh - 1))
   list(proportion = sum(W * ph), variance = var, se = sqrt(max(var, 0)),
        strata = labs, p_h = ph, n_h = as.integer(nh), W_h = W,
-       weights_are_population_shares = pop,
+       weights_are_population_shares = pop, fpc = fpc,
        variance_note = paste("within-stratum only: between-stratum variation",
                              "is removed by DESIGN, not estimated"),
        n = length(yv),

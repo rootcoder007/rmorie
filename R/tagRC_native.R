@@ -211,7 +211,16 @@ folkrank <- function(triples, focus, d = 0.7, weight = 0.9, iters = 200) {
   N <- g$nodes
   pv <- preference_vector(N, focus, weight)
   with_p <- adapted_pagerank(g$adjacency, N, pv$p, d, iters)
-  without <- adapted_pagerank(g$adjacency, N, NULL, d, iters)
+  # baseline: the fixed point of Eq. (1) with beta = 1 (Hotho et al.
+  # 2006, sec. 4.1, step 2) -- on an undirected graph, the degree
+  # distribution
+  degs <- vapply(N, function(u) {
+    nb <- g$adjacency[[u]]
+    if (is.null(nb)) 0.0 else sum(as.numeric(unlist(nb)))
+  }, numeric(1))
+  wo <- list()
+  for (u in N) wo[[u]] <- degs[[u]] / sum(degs)
+  without <- list(w = wo, ranking = N[order(-degs)])
   diff <- list()
   for (u in N) diff[[u]] <- with_p$w[[u]] - without$w[[u]]
   order <- N[order(sapply(N, function(u) -diff[[u]]))]

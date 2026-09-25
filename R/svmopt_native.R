@@ -159,8 +159,9 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
     return(list(alpha = a, moved = 0.0, clipped = TRUE,
                 L = L, H = Hh,
                 note = "the box leaves no room for this pair"))
-  eta <- K[i, i] + K[j, j] - 2.0 * as.numeric(y[i]) *
-    as.numeric(y[j]) * K[i, j]
+  # curvature along a_i += y_i t, a_j -= y_j t is K_ii + K_jj - 2 K_ij
+  # for either label pairing (Platt 1998; LIBSVM quad_coef)
+  eta <- K[i, i] + K[j, j] - 2.0 * K[i, j]
   if (eta <= .SVMOPT_TAU) eta <- .SVMOPT_TAU
   step <- ((-as.numeric(y[i]) * grad[i]) -
              (-as.numeric(y[j]) * grad[j])) / eta

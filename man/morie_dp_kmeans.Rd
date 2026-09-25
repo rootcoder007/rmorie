@@ -22,7 +22,9 @@ morie_dp_kmeans(X, k = 3, epsilon = 1, n_iter = 5, bounds = NULL, seed = NULL)
 \value{
 list with \code{centers}, \code{labels},
 \code{epsilon_per_iteration}, \code{n_reinitialised},
-\code{inertia}.
+\code{inertia}, \code{private_outputs}, \code{privacy_note}.
+Only \code{centers} is the private release; \code{labels} and
+\code{inertia} are computed on the raw records.
 }
 \description{
 Lloyd iterations where each centre update uses a noisy count and a

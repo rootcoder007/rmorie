@@ -1074,10 +1074,14 @@ SpecRad <- function(g, iters = 400L) {
       "that is not the spectral radius"
     ))
   }
+  # Iterate on W^2: a symmetric W can have both +rho and -rho as extreme
+  # eigenvalues (any bipartite graph -- a rook grid, a path), and plain
+  # power iteration then oscillates and its Rayleigh quotient reports
+  # neither.  W^2 has the single dominant eigenvalue rho^2.
   v <- as.numeric(((seq_len(n) - 1L) %% 7L) + 1L)
   v <- v / sqrt(.morie_spx_dot(v, v))
   for (it in seq_len(iters)) {
-    u <- .morie_spx_matvec(W, v)
+    u <- .morie_spx_matvec(W, .morie_spx_matvec(W, v))
     s <- sqrt(.morie_spx_dot(u, u))
     if (s < 1e-300) {
       stop(paste(
@@ -1087,15 +1091,28 @@ SpecRad <- function(g, iters = 400L) {
     }
     v <- u / s
   }
-  lam <- .morie_spx_dot(v, .morie_spx_matvec(W, v))
-  rho <- abs(lam)
+  wv <- .morie_spx_matvec(W, v)
+  rho <- sqrt(.morie_spx_dot(wv, wv))
   if (rho <= 0) stop("the spectral radius is 0; `g` has no edges")
+  # split v into its +rho and -rho eigen-components; a non-negative W
+  # always carries +rho (Perron-Frobenius)
+  up <- v + wv / rho
+  um <- v - wv / rho
+  np_ <- sqrt(.morie_spx_dot(up, up))
+  nm_ <- sqrt(.morie_spx_dot(um, um))
+  if (np_ >= nm_) {
+    lam <- rho
+    v <- up / np_
+  } else {
+    lam <- -rho
+    v <- um / nm_
+  }
   v <- .morie_spx_fixsign(v)
   list(
     rho = rho, dominant_eigenvalue = lam, eigenvector = v,
     sar_rho_bound = 1 / rho, symmetric = TRUE, iterations = iters, n = n,
     method = paste(
-      "Spectral radius by power iteration (Golub & Van Loan",
+      "Spectral radius by power iteration on W^2 (Golub & Van Loan",
       "2013, Sec. 7.3); the SAR bound |rho| < 1/rho(W) is",
       "Schabenberger & Gotway (2005) Sec. 6.2.2.1, p. 336",
       "-- NOT eq (6.48)"
@@ -1181,13 +1198,16 @@ SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
   if (n_grid < 5L) stop("`n_grid` must be at least 5")
   v <- as.numeric(((seq_len(n) - 1L) %% 7L) + 1L)
   v <- v / sqrt(.morie_spx_dot(v, v))
+  # power iteration on W^2: a bipartite W (a rook grid) has both +rho
+  # and -rho extreme, and iterating W itself never settles
   for (it in seq_len(400L)) {
-    u <- .morie_spx_matvec(W, v)
+    u <- .morie_spx_matvec(W, .morie_spx_matvec(W, v))
     s <- sqrt(.morie_spx_dot(u, u))
     if (s < 1e-300) stop("`w` is numerically zero; no neighbours")
     v <- u / s
   }
-  srad <- abs(.morie_spx_dot(v, .morie_spx_matvec(W, v)))
+  wv <- .morie_spx_matvec(W, v)
+  srad <- sqrt(.morie_spx_dot(wv, wv))
   if (srad <= 0) stop("`w` has spectral radius 0; rho is unidentified")
   hi <- (1 / srad) * (1 - 1e-6)
   lo <- -hi
@@ -1497,9 +1517,11 @@ MedPolish <- function(values, grid = NULL, iters = 10L) {
   )
 }
 
-#' Thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),
+#' Thetahat_j = muhat + (1 - lambda_j)(ybar_j - muhat),
 #'
-#' lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on
+#' lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u), and muhat the GLS mean
+#' sum_j w_j ybar_j / sum_j w_j with w_j = 1/(sigma2_u + sigma2_e/n_j)
+#' (reported as \code{grand_mean}).  lambda depends on
 #' the CLUSTER'S OWN SIZE; a common lambda over-shrinks the large
 #' clusters. Stein (1956); Morris (1983) JASA 78:47-55.  NOT in
 #' Schabenberger & Gotway -- a fixed-string search for "shrinkage"
@@ -1520,7 +1542,7 @@ MedPolish <- function(values, grid = NULL, iters = 10L) {
 #' ShrinkPred(y, cl, sigma2_u = 0.5, sigma2_e = 1)
 #' @keywords internal
 ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
-  # thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),
+  # thetahat_j = muhat + (1 - lambda_j)(ybar_j - muhat),
   # lambda_j = sigma2_e / (sigma2_e + n_j sigma2_u).  lambda depends on the
   # CLUSTER'S OWN SIZE; a common lambda over-shrinks the large clusters.
   # Stein (1956); Morris (1983) JASA 78:47-55.  NOT in Schabenberger &
@@ -1539,21 +1561,21 @@ ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
   if (length(keys) < 2L) {
     stop("at least 2 clusters are needed for shrinkage to mean anything")
   }
-  grand <- .morie_fsum(yy) / n
   sizes <- numeric(0)
   raw <- numeric(0)
   lam <- numeric(0)
-  shrunk <- numeric(0)
   for (cval in keys) {
     vals <- yy[ci == cval]
     nj <- length(vals)
-    mj <- .morie_fsum(vals) / nj
-    lj <- se / (se + nj * su)
     sizes <- c(sizes, nj)
-    raw <- c(raw, mj)
-    lam <- c(lam, lj)
-    shrunk <- c(shrunk, grand + (1 - lj) * (mj - grand))
+    raw <- c(raw, .morie_fsum(vals) / nj)
+    lam <- c(lam, se / (se + nj * su))
   }
+  # shrink toward the GLS mean, weights 1/(s2u + s2e/n_j): the BLUP with
+  # known variance components (Henderson); ybar.. only when balanced
+  wts <- sizes / (se + sizes * su)
+  grand <- .morie_fsum(wts * raw) / .morie_fsum(wts)
+  shrunk <- grand + (1 - lam) * (raw - grand)
   list(
     clusters = as.numeric(keys), shrunk = shrunk, raw = raw,
     lambda = lam, sizes = sizes, grand_mean = grand,
@@ -1922,9 +1944,9 @@ SpecAnom <- function(x, q = 3L) {
 #' @keywords internal
 SpecClust <- function(a, k = 2L) {
   # L_sym = I - D^-1/2 A D^-1/2.  The clustering lives in the SMALLEST
-  # eigenvalues, so power iteration runs on 2I - L_sym and the values are
-  # mapped back; running it on L_sym and taking the top vectors gets this
-  # exactly backwards.  Ng, Jordan & Weiss (2001).  NOT in Schabenberger &
+  # eigenvalues, so the decomposition is of 2I - L_sym and the values are
+  # mapped back; taking the top vectors of L_sym gets this exactly
+  # backwards.  Ng, Jordan & Weiss (2001).  NOT in Schabenberger &
   # Gotway.  A zero-degree node RAISES rather than being quietly assigned.
   W <- .morie_spx_chkw(a, NULL)
   n <- nrow(W)
@@ -1944,9 +1966,12 @@ SpecClust <- function(a, k = 2L) {
   ds <- 1 / sqrt(deg)
   lsym <- diag(n) - (ds * W) * rep(ds, each = n)
   shifted <- diag(2, n) - lsym
-  te <- .morie_spx_topeigs(shifted, min(k, n))
-  eig <- 2 - te$values
-  fied <- if (length(te$vectors) > 1L) te$vectors[[2L]] else te$vectors[[1L]]
+  # a full symmetric decomposition, not power iteration: the Fiedler gap
+  # is tiny exactly when the clusters are well separated
+  te <- .t1_eigsym(shifted)
+  m <- min(k, n)
+  eig <- 2 - te$values[seq_len(m)]
+  fied <- te$vectors[, if (m > 1L) 2L else 1L]
   if (k == 2L) {
     labels <- as.numeric(fied >= 0)
   } else {

@@ -25,7 +25,7 @@
 #'   \code{n_states}, \code{n}.
 #' @references Liao, P., Klasnja, P. & Murphy, S. A. (2021). JASA
 #'   116(533):382-391, \doi{10.1080/01621459.2020.1807993} (the influence
-#'   curve \code{w(S) H (R + h(S') - h(S) - V)});
+#'   curve \code{w(S) H (R + h(S_next) - h(S) - V)}, S_next the following state);
 #'   Murphy, S. A. (2003). JRSS B 65(2):331-355; van der Laan,
 #'   M. J. & Rubin, D. (2006). IJB 2(1):11.
 #' @export

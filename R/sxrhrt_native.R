@@ -253,7 +253,10 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
                  asym))
   # the cross-sex block is the only source of information about rg
   cross <- max(abs(Km[outer(male, male, "!=")]))
-  Xm <- if (is.null(X)) matrix(1.0, n, 1L) else .sxrhrt_rows(X)
+  # the sexes are two traits, each with its OWN fixed effects (GCTA's
+  # bivariate REML, Lee et al. 2012): X crossed with sex, block diagonal
+  X0 <- if (is.null(X)) matrix(1.0, n, 1L) else .sxrhrt_rows(X)
+  Xm <- cbind(X0 * as.numeric(male), X0 * as.numeric(!male))
   p <- ncol(Xm)
 
   mu <- sum(yv) / n
@@ -319,24 +322,34 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
   th1 <- theta
   th1[3] <- 0.999999
   lrt_rg1 <- max(2.0 * (ll - at(th1)), 0.0)
-  # and against equal heritabilities
-  feq <- function(logv) { th <- theta
-  th[1] <- exp(logv)
-                          th[2] <- exp(logv)
-                          at(th) }
-  eq <- exp(.sxrhrt_gridmax(feq, lo, hi))
-  th2 <- c(eq, eq, theta[3], theta[4], theta[5])
-  for (i in seq_len(20L)) {
-    for (idx in c(4L, 5L)) {
+  # and against equal HERITABILITIES, h2_m = h2_f = h: each sex keeps its
+  # own phenotypic variance v, s2g = h v and s2e = (1 - h) v, rg held at
+  # its estimate (equal GENETIC VARIANCES is a different hypothesis)
+  th_of <- function(hv) {
+    vm_ <- exp(hv[2]); vf_ <- exp(hv[3])
+    c(hv[1] * vm_, hv[1] * vf_, theta[3], (1 - hv[1]) * vm_,
+      (1 - hv[1]) * vf_)
+  }
+  hq <- c(0.5 * (h2m + h2f), log(theta[1] + theta[4]),
+          log(theta[2] + theta[5]))
+  prev_hq <- NULL
+  for (cyc in seq_len(as.integer(max_cycles))) {
+    hq[1] <- .sxrhrt_gridmax(function(h_) at(th_of(c(h_, hq[2], hq[3]))),
+                             0.001, 0.999)
+    for (idx in c(2L, 3L)) {
       local({
         ii <- idx
-        f2 <- function(logv) { th <- th2
-        th[ii] <- exp(logv)
-        at(th) }
-        th2[ii] <<- exp(.sxrhrt_gridmax(f2, lo, hi))
+        hq[ii] <<- .sxrhrt_gridmax(function(logv) {
+          hv <- hq
+          hv[ii] <- logv
+          at(th_of(hv))
+        }, lo, hi)
       })
     }
+    if (!is.null(prev_hq) && identical(hq, prev_hq)) break
+    prev_hq <- hq
   }
+  th2 <- th_of(hq)
   lrt_equal <- max(2.0 * (ll - at(th2)), 0.0)
 
   list(estimate = c(h2m, h2f), h2_male = h2m, h2_female = h2f, rg = rg,

@@ -4,7 +4,7 @@
 \alias{morie_stratified_proportion}
 \title{Stratified estimator of a proportion}
 \usage{
-morie_stratified_proportion(y, stratum, weights = NULL)
+morie_stratified_proportion(y, stratum, weights = NULL, N_h = NULL)
 }
 \arguments{
 \item{y}{binary 0/1 responses.}
@@ -12,14 +12,19 @@ morie_stratified_proportion(y, stratum, weights = NULL)
 \item{stratum}{stratum labels.}
 
 \item{weights}{population share per stratum, in sorted label order.}
+
+\item{N_h}{population size per stratum, in sorted label order; gives
+the shares and the finite population correction.}
 }
 \value{
 list: proportion, variance, se, strata, p_h, n_h, W_h,
-weights_are_population_shares, n, method.
+weights_are_population_shares, fpc, n, method.
 }
 \description{
 \eqn{\hat p_{st} = \sum_h W_h \hat p_h} with variance
-\eqn{\sum_h W_h^2 \hat p_h(1-\hat p_h)/(n_h - 1)}. The variance
+\eqn{\sum_h W_h^2 (1 - f_h) \hat p_h(1-\hat p_h)/(n_h - 1)}, where
+\eqn{f_h = n_h/N_h} when \code{N_h} is given (Cochran 1977, eq. 5.47)
+and 0 otherwise. The variance
 has no between-stratum term at all: that variation is removed by
 DESIGN rather than estimated, which is what stratification buys.
 The weights must be POPULATION shares -- sample shares silently

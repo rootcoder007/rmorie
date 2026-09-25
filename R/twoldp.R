@@ -68,7 +68,8 @@ Dprime <- function(geno1, geno2) {
     num <- pab * (1 - pA - pB + pab)
     den <- num + (pA - pab) * (pB - pab)
     w <- if (den > 0) num / den else 0.5
-    pab <- (nAB + 2 * namb * w) / (2 * n)
+    # a double heterozygote in AB/ab phase carries ONE AB haplotype
+    pab <- (nAB + namb * w) / (2 * n)
     if (pab < lo) pab <- lo
     if (pab > hi) pab <- hi
   }

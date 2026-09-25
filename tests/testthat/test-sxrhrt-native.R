@@ -164,7 +164,8 @@ test_that("a small fit reports a coherent variance decomposition", {
   expect_equal(r$n, 16L)
   expect_equal(r$n_male, 8L)
   expect_equal(r$n_female, 8L)
-  expect_equal(r$p, 1L)
+  # one intercept per sex: the sexes are two traits with their own means
+  expect_equal(r$p, 2L)
   expect_match(r$method, "bivariate REML")
   # the likelihood-ratio statistics are non-negative by construction
   expect_true(r$lrt_rg_equals_one >= 0)
