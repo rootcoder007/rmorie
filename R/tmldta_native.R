@@ -36,7 +36,7 @@
 #' res <- .tmldta_logit(p = 0.5)
 #' res
 .tmldta_logit <- function(p) {
-  q <- min(max(as.numeric(p), .tmldta_EPS), 1 - .tmldta_EPS)
+  q <- pmin(pmax(as.numeric(p), .tmldta_EPS), 1 - .tmldta_EPS)
   log(q / (1 - q))
 }
 

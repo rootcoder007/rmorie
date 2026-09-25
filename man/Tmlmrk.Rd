@@ -42,6 +42,9 @@ Tmlmrk(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8),
   reward = c(1, 2, 3, 4, 5, 6, 7, 8), policy = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
+Liao, P., Klasnja, P. & Murphy, S. A. (2021). JASA
+116(533):382-391, \doi{10.1080/01621459.2020.1807993} (the influence
+curve \code{w(S) H (R + h(S') - h(S) - V)});
 Murphy, S. A. (2003). JRSS B 65(2):331-355; van der Laan,
 M. J. & Rubin, D. (2006). IJB 2(1):11.
 }

@@ -72,7 +72,7 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' res <- .ctmle_logit(p = 0.5)
 #' res
 .ctmle_logit <- function(p) {
-  q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
+  q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 

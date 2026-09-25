@@ -31,7 +31,7 @@
 #' res <- .tmlcou_logit(p = 0.5)
 #' res
 .tmlcou_logit <- function(p) {
-  q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
+  q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
@@ -136,8 +136,11 @@ linear_fluctuation_unsafe <- function(Q, H, Y) {
 #' @param X Covariate matrix (rows are observations).
 #' @param offset Optional exposure time.
 #' @param g Optional propensity score.
-#' @param Q1 Optional potential-outcome regression under treatment.
-#' @param Q0 Optional potential-outcome regression under control.
+#' @param Q1 Optional potential-outcome regression under treatment, on the
+#'   outcome's own scale (the rate scale when \code{offset} is given); it is
+#'   mapped to [0, 1] with the outcome's bounds.
+#' @param Q0 Optional potential-outcome regression under control, on the
+#'   same scale as \code{Q1}.
 #' @param lower Lower bound for the outcome.
 #' @param upper Upper bound for the outcome.
 #' @param iters Maximum number of Newton steps.
@@ -192,8 +195,10 @@ morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
     q0 <- pmin(pmax(vapply(seq_len(n), function(i) pred(0, i),
                             numeric(1)), 1e-6), 1 - 1e-6)
   } else {
-    q1 <- pmin(pmax(as.numeric(Q1), 1e-6), 1 - 1e-6)
-    q0 <- pmin(pmax(as.numeric(Q0), 1e-6), 1 - 1e-6)
+    ## supplied fits are on the outcome's own scale (the rate scale with
+    ## an offset) and go through the same affine map as the outcome
+    q1 <- pmin(pmax((as.numeric(Q1) - sc$lower) / sc$range, 1e-6), 1 - 1e-6)
+    q0 <- pmin(pmax((as.numeric(Q0) - sc$lower) / sc$range, 1e-6), 1 - 1e-6)
   }
   H <- a / gg - (1 - a) / (1 - gg)
   qa <- ifelse(a == 1, q1, q0)

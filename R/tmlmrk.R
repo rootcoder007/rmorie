@@ -23,7 +23,10 @@
 #'   state, in sorted order of the state labels.
 #' @return List with \code{estimate}, \code{se}, \code{eps},
 #'   \code{n_states}, \code{n}.
-#' @references Murphy, S. A. (2003). JRSS B 65(2):331-355; van der Laan,
+#' @references Liao, P., Klasnja, P. & Murphy, S. A. (2021). JASA
+#'   116(533):382-391, \doi{10.1080/01621459.2020.1807993} (the influence
+#'   curve \code{w(S) H (R + h(S') - h(S) - V)});
+#'   Murphy, S. A. (2003). JRSS B 65(2):331-355; van der Laan,
 #'   M. J. & Rubin, D. (2006). IJB 2(1):11.
 #' @export
 #' @examples
@@ -85,10 +88,21 @@ Tmlmrk <- function(state, action, reward, policy) {
   rhs[ns] <- 1
   d <- as.numeric(solve(A, rhs))
   V <- sum(d * rstar)
-  emp <- as.numeric(table(factor(si, levels = seq_len(ns)))) / n
-  w <- ifelse(emp > 0, d[si] / emp[si], 0)
-  ic <- w * H * (rv - Qobs - eps * H) + rstar[si] - V
-  se <- if (n > 1L) sqrt(sum((ic - mean(ic))^2) / (n - 1) / n) else NaN
+  ## differential value h: (I - P) h = r* - V, pinned by d'h = 0
+  Ah <- diag(ns) - P
+  bh <- rstar - V
+  Ah[ns, ] <- d
+  bh[ns] <- 0
+  h <- as.numeric(solve(Ah, bh))
+  ## influence curve per transition (Liao, Klasnja & Murphy 2021):
+  ## w(S) H (R + h(S') - h(S) - V); martingale differences, so the
+  ## variance of their mean is sum(D^2) / (n - 1)^2
+  m1 <- n - 1L
+  s0 <- si[seq_len(m1)]
+  emp <- as.numeric(table(factor(s0, levels = seq_len(ns)))) / m1
+  w <- ifelse(emp[s0] > 0, d[s0] / emp[s0], 0)
+  ic <- w * H[seq_len(m1)] * (rv[seq_len(m1)] + h[si[2:n]] - h[s0] - V)
+  se <- sqrt(sum(ic^2)) / m1
   .t1_result(estimate = V, se = se, eps = eps, n_states = ns, n = n,
              method = "TMLE for the long-run average reward of a policy in an MDP")
 }

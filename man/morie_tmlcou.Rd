@@ -42,9 +42,12 @@ morie_tmlcountoutcome(
 
 \item{g}{Optional propensity score.}
 
-\item{Q1}{Optional potential-outcome regression under treatment.}
+\item{Q1}{Optional potential-outcome regression under treatment, on the
+outcome's own scale (the rate scale when \code{offset} is given); it is
+mapped to [0, 1] with the outcome's bounds.}
 
-\item{Q0}{Optional potential-outcome regression under control.}
+\item{Q0}{Optional potential-outcome regression under control, on the
+same scale as \code{Q1}.}
 
 \item{lower}{Lower bound for the outcome.}
 

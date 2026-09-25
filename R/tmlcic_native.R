@@ -59,7 +59,7 @@
 #' res <- .tmlcic_logit(p = 0.5)
 #' res
 .tmlcic_logit <- function(p) {
-  q <- min(max(as.numeric(p), .tmlcic_EPS), 1.0 - .tmlcic_EPS)
+  q <- pmin(pmax(as.numeric(p), .tmlcic_EPS), 1.0 - .tmlcic_EPS)
   log(q / (1.0 - q))
 }
 

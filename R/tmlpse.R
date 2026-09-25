@@ -13,9 +13,12 @@
 #' linearly on treatment, covariates and the mediators before it.  The
 #' counterfactual mediator values are generated recursively at the
 #' path-assigned treatment values, so an upstream counterfactual feeds
-#' the downstream model.  The outcome regression is targeted with
-#' \code{H = D/g - (1 - D)/(1 - g)} and the path-specific mean is the
-#' plug-in through the targeted Q.
+#' the downstream model.  With every model linear the plug-in reduces to
+#' the product of coefficients along the selected paths, and its
+#' influence curve is the delta method on the stacked least-squares
+#' influence functions.  No fluctuation is applied: the point-treatment
+#' clever covariate \code{D/g - (1 - D)/(1 - g)} solves the score of the
+#' total effect, not the path-specific one (\code{eps} is 0).
 #'
 #' @param y Outcome.
 #' @param D Binary treatment.
@@ -41,35 +44,44 @@ Tmlpse <- function(y, D, M_chain, X, path) {
   K <- ncol(Mm)
   if (length(pv) != K) stop("Tmlpse: path must have one entry per mediator")
   W <- cbind(1, Xm)
-  gb <- .s4_glmbin(W, Dv)
-  g <- .s4_clip(.s4_expit(as.numeric(W %*% gb)), 0.025, 0.975)
+  p1 <- ncol(W)
+  asg <- ifelse(pv > 0.5, 1, 0)
+  ols_if <- function(des, t) {
+    f <- .s4_ols(des, t)
+    list(beta = f$beta, inf = n * (des %*% f$xtxinv) * f$resid)
+  }
   mb <- vector("list", K)
+  mif <- vector("list", K)
   for (k in seq_len(K)) {
     des <- if (k > 1L) cbind(Dv, W, Mm[, seq_len(k - 1L), drop = FALSE]) else cbind(Dv, W)
-    mb[[k]] <- .s4_ols(des, Mm[, k])$beta
+    f <- ols_if(des, Mm[, k])
+    mb[[k]] <- f$beta
+    mif[[k]] <- f$inf
   }
-  gen <- function(assign) {
-    out <- matrix(0, n, K)
-    for (k in seq_len(K)) {
-      row <- if (k > 1L) cbind(assign[k], W, out[, seq_len(k - 1L), drop = FALSE])
-             else cbind(assign[k], W)
-      out[, k] <- as.numeric(row %*% mb[[k]])
-    }
-    out
+  fq <- ols_if(cbind(Dv, W, Mm), yv)
+  qb <- fq$beta
+  ## under the linear models the covariate terms cancel and the
+  ## counterfactual mediator gap is the same for every subject:
+  ## delta_k = asg_k a_k + sum_{j<k} c_kj delta_j
+  delta <- numeric(K)
+  for (k in seq_len(K)) {
+    delta[k] <- asg[k] * mb[[k]][1L] +
+      (if (k > 1L) sum(mb[[k]][1L + p1 + seq_len(k - 1L)] * delta[seq_len(k - 1L)]) else 0)
   }
-  Mstar <- gen(ifelse(pv > 0.5, 1, 0))
-  Mnull <- gen(rep(0, K))
-  qdes <- cbind(Dv, W, Mm)
-  qb <- .s4_ols(qdes, yv)$beta
-  Qobs <- as.numeric(qdes %*% qb)
-  H <- Dv / g - (1 - Dv) / (1 - g)
-  den <- sum(H * H)
-  eps <- if (den != 0) sum(H * (yv - Qobs)) / den else 0
-  Q1 <- as.numeric(cbind(1, W, Mstar) %*% qb) + eps / g
-  Q0 <- as.numeric(cbind(0, W, Mnull) %*% qb) - eps / (1 - g)
-  psi <- sum(Q1 - Q0) / n
-  ic <- H * (yv - Qobs - eps * H) + Q1 - Q0 - psi
+  psi <- qb[1L] + sum(qb[1L + p1 + seq_len(K)] * delta)
+  lam <- numeric(K)
+  for (k in rev(seq_len(K))) {
+    lam[k] <- qb[1L + p1 + k] +
+      (if (k < K) sum(vapply((k + 1L):K, function(l) lam[l] * mb[[l]][1L + p1 + k], 0)) else 0)
+  }
+  ic <- fq$inf[, 1L] + as.numeric(fq$inf[, 1L + p1 + seq_len(K), drop = FALSE] %*% delta)
+  for (k in seq_len(K)) {
+    ic <- ic + lam[k] * asg[k] * mif[[k]][, 1L]
+    if (k > 1L)
+      ic <- ic + lam[k] * as.numeric(mif[[k]][, 1L + p1 + seq_len(k - 1L), drop = FALSE] %*% delta[seq_len(k - 1L)])
+  }
+  eps <- 0
   se <- if (n > 1L) sqrt(sum((ic - mean(ic))^2) / (n - 1) / n) else NaN
   .t1_result(estimate = psi, se = se, eps = eps, n_path = sum(pv), n = n,
-             method = "TMLE for a path-specific effect through a chosen mediator subset")
+             method = "Path-specific effect under linear structural models, delta-method influence curve")
 }

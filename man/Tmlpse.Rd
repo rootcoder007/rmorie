@@ -35,9 +35,12 @@ Mediators are taken in column order as a causal chain, each modelled
 linearly on treatment, covariates and the mediators before it.  The
 counterfactual mediator values are generated recursively at the
 path-assigned treatment values, so an upstream counterfactual feeds
-the downstream model.  The outcome regression is targeted with
-\code{H = D/g - (1 - D)/(1 - g)} and the path-specific mean is the
-plug-in through the targeted Q.
+the downstream model.  With every model linear the plug-in reduces to
+the product of coefficients along the selected paths, and its
+influence curve is the delta method on the stacked least-squares
+influence functions.  No fluctuation is applied: the point-treatment
+clever covariate \code{D/g - (1 - D)/(1 - g)} solves the score of the
+total effect, not the path-specific one (\code{eps} is 0).
 }
 \references{
 Miles, C. H. et al. (2017). JASA 112(520):1443-1452;
