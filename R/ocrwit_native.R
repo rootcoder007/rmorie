@@ -181,20 +181,27 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 #' @return A vector, from \code{sort}.
 #' @export
 #' @examples
-#' patch_of_box(box = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, height = 5L)
+#' patch_of_box(box = c(12, 3, 18, 8), width = 280, height = 140)
 #' @keywords internal
 patch_of_box <- function(box, width, height, patch_grid = 14) {
+  # every grid cell the box overlaps: floor(start g / size) to
+  # ceil(end g / size) - 1; rounding the corners moved a word in the
+  # right half of a patch into the next one
   g <- as.integer(patch_grid)
-  nb <- normalise_bbox(box, width, height, g)
-  x0 <- nb[1L]
-  y0 <- nb[2L]
-  x1 <- nb[3L]
-  y1 <- nb[4L]
-  rs <- seq.int(min(y0, g - 1L), min(max(y1, y0 + 1L), g) - 1L)
-  cs <- seq.int(min(x0, g - 1L), min(max(x1, x0 + 1L), g) - 1L)
-  if (length(rs) == 0L || length(cs) == 0L) return(integer(0))
+  b <- as.numeric(unlist(box))[1:4]
+  W <- as.numeric(width)
+  H <- as.numeric(height)
+  if (W <= 0 || H <= 0) stop("ocrwit: the page dimensions must be positive")
+  if (b[3] < b[1] || b[4] < b[2]) stop("ocrwit: the box is inverted")
+  span <- function(a, e, size) {
+    lo <- min(max(floor(a / size * g), 0), g - 1)
+    hi <- min(max(ceiling(e / size * g) - 1, lo), g - 1)
+    seq.int(lo, hi)
+  }
+  rs <- span(b[2], b[4], H)
+  cs <- span(b[1], b[3], W)
   out <- as.vector(outer(rs, cs, function(r, c) r * g + c))
-  sort(unique(out))
+  sort(unique(as.integer(out)))
 }
 
 #' word_patch_alignment
