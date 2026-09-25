@@ -82,8 +82,9 @@ test_that("the backup writes the discounted return into the tree", {
   # discounted plus the reward on the transition into the leaf
   expect_equal(n2$value_sum, 10)
   expect_equal(n1$value_sum, 2 + 0.9 * 10)
-  # and the tracker saw both node values
-  expect_equal(mm$lo, 10)
+  # the tracker sees EDGE values, Q = r + gamma V(child): only the edge
+  # into n2 is on this path, Q = 2 + 0.9 * 10 = 11
+  expect_equal(mm$lo, 11)
   expect_equal(mm$hi, 11)
   # a second backup accumulates rather than replacing
   .ghc_muzero_backup(list(n1, n2), value = 0, gamma = 0.9,
@@ -102,7 +103,7 @@ test_that("selection maximises the PUCT score", {
   c2 <- 19652
   # with no visits anywhere the exploration term is zero for both and the
   # first action wins the tie
-  expect_equal(.ghc_muzero_select(nd, A, list(lo = NULL, hi = NULL), c1, c2),
+  expect_equal(.ghc_muzero_select(nd, A, list(lo = NULL, hi = NULL), c1, c2, 0.9),
                "x")
   # give y a visit and a good value, x a visit and a bad one
   nd$children[["x"]]$visits <- 1L
@@ -110,19 +111,20 @@ test_that("selection maximises the PUCT score", {
   nd$children[["y"]]$visits <- 1L
   nd$children[["y"]]$value_sum <- 1
   mm <- list(lo = 0, hi = 1)
-  # recompute the score by hand: normalised Q plus the exploration bonus
+  # recompute the score by hand: normalised Q = r + gamma V (rewards 0
+  # here) plus the exploration bonus
   total <- 2
   bonus <- function(p, n) p * sqrt(total) / (1 + n) * (c1 + log((total + c2 + 1) / c2))
-  sx <- 0 + bonus(0.5, 1)
-  sy <- 1 + bonus(0.5, 1)
+  sx <- 0.9 * 0 + bonus(0.5, 1)
+  sy <- 0.9 * 1 + bonus(0.5, 1)
   expect_true(sy > sx)
-  expect_equal(.ghc_muzero_select(nd, A, mm, c1, c2), "y")
+  expect_equal(.ghc_muzero_select(nd, A, mm, c1, c2, 0.9), "y")
   # a large enough prior on the unvisited-looking side can outweigh a small
   # value gap, which is what the bonus is for
   nd$children[["x"]]$prior <- 1
   nd$children[["y"]]$prior <- 1e-6
   nd$children[["y"]]$value_sum <- 0.01
-  expect_equal(.ghc_muzero_select(nd, A, list(lo = 0, hi = 1), c1, c2), "x")
+  expect_equal(.ghc_muzero_select(nd, A, list(lo = 0, hi = 1), c1, c2, 0.9), "x")
 })
 
 test_that("root noise mixes the prior without leaving the simplex", {

@@ -89,7 +89,15 @@
 
 #' @keywords internal
 #' @noRd
-.ghc_muzero_select <- function(node, A, mm, c1, c2) {
+# Q(s, a) = r(s, a) + gamma V(s'): the pseudocode's
+# child.reward + discount * child.value()
+.ghc_muzero_edge_q <- function(child, gamma) {
+  if (child$visits > 0L) child$reward + gamma * .ghc_muzero_node_value(child) else 0
+}
+
+#' @keywords internal
+#' @noRd
+.ghc_muzero_select <- function(node, A, mm, c1, c2, gamma) {
   total <- sum(vapply(A, function(a) node$children[[a]]$visits,
                        integer(1)))
   sqrt_total <- if (total > 0L) sqrt(total) else 0
@@ -100,7 +108,7 @@
     expl <- ch$prior * sqrt_total / (1 + ch$visits) *
       (c1 + log((total + c2 + 1) / c2))
     q <- if (ch$visits > 0L) .ghc_muzero_minmax_norm(mm,
-                                                     .ghc_muzero_node_value(ch))
+                                                     .ghc_muzero_edge_q(ch, gamma))
          else 0
     sc <- q + expl
     if (sc > best) { best <- sc
@@ -117,7 +125,8 @@
     node <- path[[k]]
     node$value_sum <- node$value_sum + g
     node$visits <- node$visits + 1L
-    mm <- .ghc_muzero_minmax_update(mm, .ghc_muzero_node_value(node))
+    if (k > 1L)   # the edge into this node
+      mm <- .ghc_muzero_minmax_update(mm, node$reward + gamma * .ghc_muzero_node_value(node))
     g <- node$reward + gamma * g
   }
   list(mm = mm, path = path)
@@ -178,7 +187,7 @@ morie_muzero <- function(observation, actions, representation,
     path <- list(node)
     acts <- list()
     while (isTRUE(node$expanded)) {
-      a <- .ghc_muzero_select(node, A, mm, c1, c2)
+      a <- .ghc_muzero_select(node, A, mm, c1, c2, as.numeric(gamma))
       acts[[length(acts) + 1L]] <- a
       node <- node$children[[a]]
       path[[length(path) + 1L]] <- node
@@ -205,15 +214,13 @@ morie_muzero <- function(observation, actions, representation,
     w <- visits ^ (1 / as.numeric(temperature))
     policy <- w / sum(w)
   }
-  root_value <- sum(vapply(A, function(a)
-    root$children[[a]]$visits * .ghc_muzero_node_value(root$children[[a]]),
-    numeric(1))) / total
+  Qa <- lapply(A, function(a) .ghc_muzero_edge_q(root$children[[a]], as.numeric(gamma)))
+  root_value <- sum(visits * unlist(Qa)) / total
   list(estimate = policy, policy = policy,
        action = A[[which.max(policy)]],
        value = as.numeric(root_value),
        visits = setNames(as.list(visits), as.character(A)),
-       Q = setNames(lapply(A, function(a)
-         .ghc_muzero_node_value(root$children[[a]])), as.character(A)),
+       Q = setNames(Qa, as.character(A)),
        prior = setNames(lapply(A, function(a)
          root$children[[a]]$prior), as.character(A)),
        n_dynamics_calls = calls[1], n_prediction_calls = calls[2],
