@@ -360,36 +360,41 @@ hdecon <- function(x, cutoff, n_fft = NULL) {
   x <- as.numeric(x)
   n <- length(x)
   if (is.null(n_fft)) n_fft <- as.integer(2^ceiling(log2(max(n, 2))))
-  X <- stats::fft(c(x, rep(0, n_fft - n)))
-  log_abs <- log(abs(X) + 1e-30)
+  N <- as.integer(n_fft)
+  X <- stats::fft(c(x, rep(0, N - n)))
+  # complex cepstrum as Oppenheim and Schafer define it: the unwrapped
+  # phase with its linear (pure delay) term removed, which makes it odd and
+  # the cepstrum real (MATLAB cceps / rcunwrap).  Keeping the linear term
+  # left a large imaginary part that Re() then discarded.
   ph <- Arg(X)
-  d <- diff(ph)
-  jumps <- round(d / (2 * pi))
-  ph_unwrapped <- ph - c(0, cumsum(jumps) * 2 * pi)
-  log_X <- log_abs + 1i * ph_unwrapped
-  cepstrum <- stats::fft(log_X, inverse = TRUE) / n_fft
-
-  lifter <- numeric(n_fft)
-  lifter[1] <- 1
-  cidx <- min(cutoff, n_fft %/% 2)
-  if (cidx > 1) lifter[2:cidx] <- 2
-  if (cidx < n_fft %/% 2) lifter[cidx + 1] <- 1
-
-  cep_min <- cepstrum * lifter
+  jumps <- round(diff(ph) / (2 * pi))
+  ph <- ph - c(0, cumsum(jumps) * 2 * pi)
+  nh <- (N + 1L) %/% 2L
+  nd <- if (N > 1L) round(ph[nh + 1L] / pi) else 0
+  k <- 0:(N - 1L)
+  ph <- ph - pi * nd * k / nh
+  cep <- Re(stats::fft(complex(real = log(abs(X) + 1e-300), imaginary = ph),
+                       inverse = TRUE) / N)
+  # symmetric low-time lifter: |q| < cutoff is the smooth part, the rest the
+  # excitation, and together they are the whole cepstrum, so H E = X.  The
+  # old lifter doubled quefrencies 1..c (the real-cepstrum minimum-phase
+  # fold), which does not split a complex cepstrum.
+  cq <- max(1L, min(as.integer(cutoff), N %/% 2L))
+  low <- as.numeric(k < cq | (N - k) < cq)
+  cep_min <- cep * low
+  cep_exc <- cep - cep_min
   H <- exp(stats::fft(cep_min))
-  h <- Re(stats::fft(H, inverse = TRUE) / n_fft)[seq_len(n)]
-
-  cep_exc <- cepstrum * (1 - lifter)
-  cep_exc[1] <- cepstrum[1] - cep_min[1]
-  E <- exp(stats::fft(cep_exc))
-  e <- Re(stats::fft(E, inverse = TRUE) / n_fft)[seq_len(n)]
-
+  lE <- stats::fft(cep_exc)
+  E <- exp(complex(real = Re(lE), imaginary = Im(lE) + pi * nd * k / nh))
+  h <- Re(stats::fft(H, inverse = TRUE) / N)[seq_len(n)]
+  e <- Re(stats::fft(E, inverse = TRUE) / N)[seq_len(n)]
   list(
     name = "homomorphic_deconvolve",
     filtered = h,
     fs = 0,
     n_samples = length(h),
-    extra = list(excitation = e, cutoff = cutoff, n_fft = n_fft)
+    extra = list(excitation = e, cutoff = cutoff, n_fft = N, delay = nd,
+                 cepstrum = cep)
   )
 }
 
