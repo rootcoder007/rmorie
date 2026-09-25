@@ -390,20 +390,28 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' @param how One of \code{"identity"}, \code{"log"}, \code{"rank"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-.morie_k05_gtime <- function(times, e_times, how) {
+.morie_k05_gtime <- function(times, t_all, e_all, how) {
+  # g(t) at the event times as survival::cox.zph computes it: "km" is
+  # 1 - S(t-) from the Kaplan-Meier estimate over ALL subjects, censored
+  # ones included, with tied events taken together; "rank" ranks all
+  # follow-up times with ties averaged.  The risk sets used to be built
+  # from the event times alone, stepping once per tied duplicate.
   if (how == "identity") return(times)
   if (how == "log") return(log(times))
-  if (how == "rank") return(as.numeric(rank(times, ties.method = "first")))
-  surv <- 1
-  out <- numeric(length(times))
-  for (j in seq_along(times)) {
-    tt <- times[j]
-    out[j] <- 1 - surv
-    nr <- sum(e_times >= tt)
-    dd <- sum(e_times == tt)
-    if (nr > 0) surv <- surv * (1 - dd / nr)
+  if (how == "rank") {
+    rk <- rank(t_all, ties.method = "average")
+    return(vapply(times, function(v) rk[match(v, t_all)], numeric(1)))
   }
-  out
+  uniq <- sort(unique(t_all))
+  surv <- 1
+  before <- numeric(length(uniq))
+  for (k in seq_along(uniq)) {
+    before[k] <- surv
+    nr <- sum(t_all >= uniq[k])
+    dd <- sum(t_all == uniq[k] & e_all == 1)
+    if (nr > 0 && dd > 0) surv <- surv * (1 - dd / nr)
+  }
+  1 - before[match(times, uniq)]
 }
 
 #' Scaled Schoenfeld residuals and the Grambsch-Therneau PH test
@@ -459,13 +467,23 @@ morie_scaled_schoenfeld <- function(time, event, X, transform = "km") {
   sc <- .morie_k05_schoenfeld(t, e, X, beta)
   d <- length(sc$times)
   if (d < 3L) stop("need at least 3 events.", call. = FALSE)
-  g <- .morie_k05_gtime(sc$times, t[e == 1], transform)
+  g <- .morie_k05_gtime(sc$times, t, e, transform)
   gc <- g - mean(g)
   scaled <- lapply(seq_len(d), function(j) as.numeric(beta + d * (Vb %*% sc$res[[j]])))
   # vapply gives a vector when p == 1, so re-shape before summing rows
   U <- rowSums(matrix(vapply(seq_len(d), function(j) gc[j] * sc$res[[j]], numeric(p)), nrow = p))
-  VU <- matrix(0, p, p)
-  for (j in seq_len(d)) VU <- VU + gc[j]^2 * sc$var[[j]]
+  # beta-hat is estimated, so the theta-score's variance is the efficient
+  # one A - C I^-1 C' (what survival::cox.zph version 3 reports); A alone
+  # treats beta as known and understates the statistic
+  A <- matrix(0, p, p)
+  C <- matrix(0, p, p)
+  Iinf <- matrix(0, p, p)
+  for (j in seq_len(d)) {
+    A <- A + gc[j]^2 * sc$var[[j]]
+    C <- C + gc[j] * sc$var[[j]]
+    Iinf <- Iinf + sc$var[[j]]
+  }
+  VU <- A - C %*% solve(Iinf, t(C))
   stat <- vapply(seq_len(p), function(k)
     if (VU[k, k] > 0) U[k]^2 / VU[k, k] else NaN, numeric(1))
   gs <- tryCatch(as.numeric(crossprod(U, solve(VU, U))), error = function(...) NaN)
