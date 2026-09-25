@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Symmetrically normalised graph convolution layer
+#' Graph convolution layer before the renormalisation trick
 #'
-#' Kipf and Welling's layer BEFORE the renormalisation trick: the
-#' adjacency carries no self-loop, so an isolated node receives nothing.
-#' Isolated nodes have zero degree and their normalising factor is taken
-#' to be zero rather than infinite.
+#' Kipf and Welling's equation (7), the first-order layer with the single
+#' parameter of equation (6), before equation (8) renormalises it. The
+#' operator I + D^\{-1/2\} A D^\{-1/2\} has eigenvalues in [0, 2].
+#' Isolated nodes have zero degree; their normalising factor is taken to
+#' be zero rather than infinite, so they keep only their own features.
 #'
-#' Formula: H' = relu(D^\{-1/2\} A D^\{-1/2\} X W), D = diag(rowSums(A)).
+#' Formula: H' = relu((I + D^\{-1/2\} A D^\{-1/2\}) X W), D = diag(rowSums(A)).
 #'
 #' @param G Square adjacency matrix.
 #' @param X Node feature matrix, one row per node.
@@ -14,7 +15,7 @@
 #' @return List with \code{estimate} (mean output activation),
 #'   \code{H}, \code{preactivation}, \code{n}, \code{method}.
 #' @references Kipf and Welling (2017), Semi-supervised classification
-#'   with graph convolutional networks, ICLR 2017, eq. (2).
+#'   with graph convolutional networks, ICLR 2017, eq. (7).
 #'   arXiv:1609.02907
 #' @export
 #' @examples
@@ -34,10 +35,10 @@ Gcnemd <- function(G, X, W) {
   if (nrow(Wm) != ncol(H)) stop("gcn: W must have one row per input feature")
   d <- rowSums(M)
   s <- ifelse(d <= 0, 0, d^(-0.5))
-  An <- (s %o% s) * M
+  An <- diag(n) + (s %o% s) * M     # the identity term of eq. (7)
   Z <- (An %*% H) %*% Wm
   Hout <- matrix(vapply(as.numeric(Z), .s03relu, 0), nrow(Z), ncol(Z))
   .t1_result(estimate = mean(as.numeric(Hout)), H = Hout,
              preactivation = Z, n = n,
-             method = "H' = relu(D^{-1/2} A D^{-1/2} X W), Kipf & Welling (2017) eq. (2)")
+             method = "H' = relu((I + D^{-1/2} A D^{-1/2}) X W), Kipf & Welling (2017) eq. (7)")
 }

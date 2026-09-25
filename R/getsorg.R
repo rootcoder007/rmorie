@@ -33,6 +33,8 @@ Getisordg <- function(x, W) {
   n <- length(x)
   W <- matrix(as.numeric(as.matrix(W)), nrow = n)
   if (nrow(W) != n || ncol(W) != n) stop("W must be n x n with n = length(x)")
+  # the randomisation variance carries a factor 1 / (n - 3)
+  if (n < 4L) stop("Getis-Ord G needs at least 4 observations")
   if (any(x < 0)) stop("Getis-Ord G is undefined for negative x")
   diag(W) <- 0
   numer <- sum(W * outer(x, x))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Gcnemd.R
 \name{Gcnemd}
 \alias{Gcnemd}
-\title{Symmetrically normalised graph convolution layer}
+\title{Graph convolution layer before the renormalisation trick}
 \usage{
 Gcnemd(G, X, W)
 }
@@ -18,13 +18,14 @@ List with \code{estimate} (mean output activation),
 \code{H}, \code{preactivation}, \code{n}, \code{method}.
 }
 \description{
-Kipf and Welling's layer BEFORE the renormalisation trick: the
-adjacency carries no self-loop, so an isolated node receives nothing.
-Isolated nodes have zero degree and their normalising factor is taken
-to be zero rather than infinite.
+Kipf and Welling's equation (7), the first-order layer with the single
+parameter of equation (6), before equation (8) renormalises it. The
+operator I + D^\{-1/2\} A D^\{-1/2\} has eigenvalues in [0, 2].
+Isolated nodes have zero degree; their normalising factor is taken to
+be zero rather than infinite, so they keep only their own features.
 }
 \details{
-Formula: H' = relu(D^\{-1/2\} A D^\{-1/2\} X W), D = diag(rowSums(A)).
+Formula: H' = relu((I + D^\{-1/2\} A D^\{-1/2\}) X W), D = diag(rowSums(A)).
 }
 \examples{
 set.seed(1)
@@ -35,6 +36,6 @@ Gcnemd(G, X, W)
 }
 \references{
 Kipf and Welling (2017), Semi-supervised classification
-with graph convolutional networks, ICLR 2017, eq. (2).
+with graph convolutional networks, ICLR 2017, eq. (7).
 arXiv:1609.02907
 }
