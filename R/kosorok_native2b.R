@@ -101,7 +101,9 @@ morie_cox_score_process <- function(beta, z, time, event, t_grid = NULL) {
   n <- nrow(Z)
   p <- ncol(Z)
   w <- exp(as.numeric(Z %*% b))
-  et <- sort(tv[ev == 1])
+  # distinct event times: each step adds every event at its time, so a
+  # repeated time counted tied events twice
+  et <- sort(unique(tv[ev == 1]))
   if (length(et) == 0L) {
     stop("no events: the score process is identically zero.", call. = FALSE)
   }
