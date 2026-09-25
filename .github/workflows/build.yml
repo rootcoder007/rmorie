@@ -199,21 +199,33 @@ jobs:
     steps:
       - name: Push empty commit to registry repo
         env:
+          # A deploy key scoped to the registry repository alone. The
+          # fine-grained PAT is kept as a fallback only: it can read the
+          # registry but was never granted write on it, which is what
+          # made this job fail with 403.
+          R_UNIVERSE_DEPLOY_KEY: ${{ secrets.R_UNIVERSE_DEPLOY_KEY }}
           R_UNIVERSE_TRIGGER_PAT: ${{ secrets.R_UNIVERSE_TRIGGER_PAT }}
         run: |
-          if [ -z "$R_UNIVERSE_TRIGGER_PAT" ]; then
-            echo "::warning::R_UNIVERSE_TRIGGER_PAT not set; skipping r-universe sync."
+          tmp=$(mktemp -d)
+          if [ -n "$R_UNIVERSE_DEPLOY_KEY" ]; then
+            keyfile=$(mktemp)
+            printf '%s\n' "$R_UNIVERSE_DEPLOY_KEY" > "$keyfile"
+            chmod 600 "$keyfile"
+            export GIT_SSH_COMMAND="ssh -i $keyfile -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+            remote="git@github.com:rootcoder007/rootcoder007.r-universe.dev.git"
+          elif [ -n "$R_UNIVERSE_TRIGGER_PAT" ]; then
+            remote="https://x-access-token:${R_UNIVERSE_TRIGGER_PAT}@github.com/rootcoder007/rootcoder007.r-universe.dev"
+          else
+            echo "::warning::no r-universe credential set; skipping sync."
             exit 0
           fi
-          tmp=$(mktemp -d)
-          git clone --depth=1 \
-            "https://x-access-token:${R_UNIVERSE_TRIGGER_PAT}@github.com/rootcoder007/rootcoder007.r-universe.dev" \
-            "$tmp"
+          git clone --depth=1 "$remote" "$tmp"
           cd "$tmp"
           git config user.email "noreply@anthropic.com"
           git config user.name "rmorie CI"
           git commit --allow-empty -m "sync: rmorie ${{ github.sha }}"
           git push
+          rm -f "${keyfile:-}"
 
   summary:
     name: summary
