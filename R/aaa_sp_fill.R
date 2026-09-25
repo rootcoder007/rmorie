@@ -715,6 +715,11 @@ MoranRes <- function(residuals, w, x = NULL) {
     }
     P <- diag(n) - .morie_spx_matmul(.morie_spx_matmul(X, inv), t(X))
   }
+  # ehat = M e. The residuals were used as given, so a raw attribute
+  # passed with `x` (as documented) was never regressed on x and Ires
+  # came out several times too large; M is idempotent, so projecting
+  # residuals that are already OLS residuals changes nothing.
+  e <- .morie_spx_matvec(P, e)
   ee <- .morie_fsum(e * e)
   if (ee <= 0) stop("the residuals are all zero; Ires is undefined")
   ewe <- .morie_fsum(as.numeric(W) * as.numeric(outer(e, e)))
@@ -2004,7 +2009,8 @@ SpatialPca <- function(x, w, naxes = 2L) {
   # MULTISPATI: diagonalise H = (1/n) X' ((W + W')/2) X on the centred,
   # unit-variance X, so an axis is scored by SPATIAL covariance, not
   # variance.  Eigenvalues may be NEGATIVE -- that is a local-contrast
-  # axis, which ordinary PCA cannot express -- and are returned signed.
+  # axis, which ordinary PCA cannot express -- and are returned signed,
+  # ordered from the most positive down as ade4::multispati orders them.
   # W is symmetrised first: a row-standardised W is ASYMMETRIC and a
   # symmetric eigensolver would read one triangle only.  Dray, Said &
   # Debias (2008).  NOT in Schabenberger & Gotway.
@@ -2030,7 +2036,16 @@ SpatialPca <- function(x, w, naxes = 2L) {
   sym <- 0.5 * (W + t(W))
   H <- .morie_spx_matmul(t(Z), .morie_spx_matmul(sym, Z)) / n
   H <- 0.5 * (H + t(H))
-  te <- .morie_spx_topeigs(H, naxes)
+  # All p eigenpairs ranked algebraically. Power iteration ranks by
+  # |lambda|, which put strong local-contrast axes ahead of the positive
+  # spatial structure MULTISPATI's leading axes describe.
+  eg <- eigen(H, symmetric = TRUE)
+  te <- list(
+    values = eg$values[seq_len(naxes)],
+    vectors = lapply(seq_len(naxes), function(a) {
+      .morie_spx_fixsign(eg$vectors[, a])
+    })
+  )
   scores <- lapply(seq_len(naxes), function(a) {
     vapply(seq_len(n), function(i) {
       .morie_fsum(Z[i, ] * te$vectors[[a]])
