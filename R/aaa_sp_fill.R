@@ -1366,13 +1366,18 @@ LisaClust <- function(x, w, alpha = 0.05) {
     varl <- v * (s2 - s1 * s1 / (n - 1)) * (n - 1) / (n - 2)
     nb <- sum(W[i, ] != 0)
     lagm[i] <- if (nb > 0) li / nb else 0
-    if (varl <= 0) {
+    if (varl <= 0 || d[i] == 0) {
+      # with z_i at the mean, I(s_i) is identically zero under
+      # conditional randomization, so it has no z-score
       zs[i] <- NaN
       ps[i] <- 1
       labels[i] <- "NS"
       next
     }
-    zi <- (li - mb * s1) / sqrt(varl)
+    # I(s_i) is the lag times the fixed factor n d_i / ss, so its z-score
+    # is the lag's z-score times sign(d_i); the lag's own z has the wrong
+    # sign at every site below the mean
+    zi <- sign(d[i]) * (li - mb * s1) / sqrt(varl)
     pv <- .morie_spx_p2(zi)
     zs[i] <- zi
     ps[i] <- pv
