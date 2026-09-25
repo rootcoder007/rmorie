@@ -24,6 +24,6 @@ A list with \code{beta}, \code{shrinkage}, \code{n}, \code{sigma2}, \code{n_snp}
 Continuous-shrinkage polygenic effects (Ge et al. 2019)
 }
 \examples{
-rmorie:::Csshrink(beta_hat = 5L, D = 5L, psi = 5L, n = 5L)
+rmorie:::Csshrink(beta_hat = 0.2, D = 1, psi = 0.25, n = 1000)$beta  # 0.2 / (1 + 4)
 }
 \keyword{internal}

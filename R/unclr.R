@@ -871,7 +871,7 @@ Mitest <- function(theta, U) {
 #' @param sigma2 Argument `sigma2`; see Usage.
 #' @return A list with `beta`, `shrinkage`, `n`, `sigma2`, `n_snp`.
 #' @examples
-#' rmorie:::Csshrink(beta_hat = 5L, D = 5L, psi = 5L, n = 5L)
+#' rmorie:::Csshrink(beta_hat = 0.2, D = 1, psi = 0.25, n = 1000)$beta  # 0.2 / (1 + 4)
 #' @keywords internal
 Csshrink <- function(beta_hat, D, psi, n, sigma2 = 1) {
   bh <- as.numeric(beta_hat)
@@ -882,7 +882,9 @@ Csshrink <- function(beta_hat, D, psi, n, sigma2 = 1) {
     stop("beta_hat, D and psi must be conformable")
   if (any(ps <= 0)) stop("psi entries must be positive")
   nn <- as.numeric(n)
-  A <- Dm + diag(1 / ps / nn, p)
+  # Ge et al. (2019): the posterior mean is (D + Psi^-1)^-1 beta_hat;
+  # n and sigma2 cancel from it (PRS-CS sampler: ld_blk + diag(1/psi))
+  A <- Dm + diag(1 / ps, p)
   post <- as.numeric(solve(A, bh))
   list(beta = post, shrinkage = ifelse(bh != 0, post / bh, NaN),
        n = nn, sigma2 = as.numeric(sigma2), n_snp = p)
