@@ -1220,7 +1220,10 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
   scores <- sort(pmax(cl - cy, cy - ch))
   n <- length(scores)
   k <- ceiling((n + 1) * (1 - alpha))
-  qhat <- scores[max(1L, min(as.integer(k), n))]
+  # Romano et al. (2019): when ceiling((n+1)(1-alpha)) exceeds n the
+  # quantile is +Inf (an unbounded interval); clamping to the largest
+  # score silently under-covered
+  qhat <- if (k <= n) scores[as.integer(k)] else Inf
   lo <- .morie_jo_vec(lo, "lo")
   hi <- .morie_jo_vec(hi, "hi")
   if (length(lo) != length(hi)) {
