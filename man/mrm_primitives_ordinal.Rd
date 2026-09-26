@@ -17,10 +17,8 @@ This R port is the \strong{frequentist} analogue: for each cutpoint
 \eqn{k = 1, \ldots, K-1}{k = 1, ..., K-1} a separate binary logit is fit to the
 indicator \eqn{1\{Y \le k\}}{1\{Y <= k\}}, so the coefficient vector
 \eqn{\beta_k}{beta_k} is unconstrained across thresholds.  When
-\code{MASS} is available we delegate to \code{\link[MASS]{polr}}
-for the proportional-odds (PO) baseline; otherwise the PO baseline
-is fit by a stacked-IRLS approximation matching the Python
-implementation.  The threshold-specific fits always run via
+proportional odds is tested by Brant's (1990) Wald test on those
+fits.  The threshold-specific fits run via
 \code{\link[stats]{glm}} with \code{family = binomial("logit")}.
 
 Standard threshold (proportional-odds, K levels, p covariates):

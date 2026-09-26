@@ -30,8 +30,7 @@ and the outcome is a factor, \code{levels()} is used; otherwise
 \code{sort(unique())} (rarely what you want -- pass this).}
 
 \item{fit_proportional_odds_first}{Logical; if \code{TRUE} (default)
-the proportional-odds baseline is fit and an LR test against the
-threshold-specific model is reported.}
+run Brant's test of proportional odds.}
 
 \item{max_iter, tol}{IRLS / GLM control passed to \code{\link[stats]{glm.fit}}.}
 }
@@ -41,14 +40,15 @@ An object of class \eqn{c("mrm_threshold_specific_ordinal",
 \code{threshold_labels}, \code{covariate_names},
 \code{coefficients} (a (K-1) x p matrix), \code{cutpoints},
 \code{log_likelihood}, \code{n_obs}, and (if requested)
-\code{proportional_odds_lr_stat}, \code{proportional_odds_lr_df},
-\code{proportional_odds_p}.
+\code{proportional_odds_stat} (Brant's Wald chi-square),
+\code{proportional_odds_df}, \code{proportional_odds_p}.
 }
 \description{
 For each cumulative cutpoint \eqn{k = 1, \ldots, K-1}{k = 1, ..., K-1}, fits an
 independent logistic regression of \eqn{1\{Y \le k\}}{1\{Y <= k\}} on the
-covariates.  Optionally fits the proportional-odds baseline and
-returns the likelihood-ratio test of PO vs. threshold-specific.
+covariates.  Optionally tests proportional odds by Brant's (1990)
+Wald test that the slopes agree across the K - 1 fits, with their
+joint covariance.
 }
 \examples{
 set.seed(1)
