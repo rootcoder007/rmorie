@@ -151,3 +151,19 @@ test_that("morie_sensitivity_rosenbaum returns data frame with expected columns"
   expect_true(all(c("gamma", "p_lower", "p_upper") %in% names(result)))
   expect_true(all(result$gamma == c(1.0, 1.5, 2.0)))
 })
+
+test_that("propensity scores are the glm logit with factor dummies; AIPW matches lm", {
+  n <- 40
+  i <- 0:(n - 1)
+  x <- round(sin(1.7 * i) * 1.3, 3)
+  g <- c("north", "south", "west")[(i * 7) %% 3 + 1]
+  t <- as.integer((sin(2.3 * i + 0.4) + 0.6 * x + 0.5 * (g == "west")) > 0.1)
+  y <- round(1 + 0.5 * t + x + (g == "west") + 0.4 * cos(3.1 * i), 3)
+  d <- data.frame(t, y, x, g)
+  ps <- morie_estimate_propensity_scores(d, "t", c("x", "g"), trim = c(0, 1))
+  expect_equal(unname(ps), unname(fitted(stats::glm(t ~ x + g, family = stats::binomial(), data = d))),
+               tolerance = 1e-10)
+  a <- morie_estimate_aipw(d, "t", "y", c("x", "g"))
+  expect_equal(a$ate, 0.5726329578661663, tolerance = 1e-10)
+  expect_equal(a$se, 0.091279793606902818, tolerance = 1e-10)
+})

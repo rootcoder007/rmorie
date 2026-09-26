@@ -138,13 +138,20 @@ NULL
 #' @return The value of \code{cbind}.
 #' @export
 .mor_ps_design <- function(data, covariates) {
+  # numeric covariates as they are; others as treatment-coded dummies over
+  # their sorted levels (the first is the reference), as model.matrix --
+  # an integer code would impose an order a nominal covariate lacks
   cols <- lapply(covariates, function(cn) {
     v <- data[[cn]]
-    if (is.numeric(v)) return(as.numeric(v))
-    lv <- sort(unique(as.character(v)))
-    as.numeric(match(as.character(v), lv) - 1L)
+    if (is.numeric(v)) return(matrix(as.numeric(v), ncol = 1L))
+    ch <- as.character(v)
+    lv <- sort(unique(ch))
+    if (length(lv) < 2L) return(matrix(numeric(0), nrow = length(ch), ncol = 0L))
+    vapply(lv[-1L], function(l) as.numeric(ch == l), numeric(length(ch)))
   })
-  cbind(1, do.call(cbind, cols))
+  X <- cbind(1, do.call(cbind, cols))
+  dimnames(X) <- NULL
+  X
 }
 
 #' .mor_ps_standardize
@@ -214,6 +221,16 @@ NULL
 #' res <- .mor_ps_irls_beta(X = X, y = y)
 #' res
 .mor_ps_irls_beta <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
+  # aliased columns (those qr() pivots out) get a zero coefficient, as
+  # glm's NA, so collinear covariates do not make the fit singular
+  full_p <- ncol(X)
+  keep <- if (lam == 0) {
+    q <- qr(X, tol = 1e-7)
+    sort(q$pivot[seq_len(q$rank)])
+  } else {
+    seq_len(full_p)
+  }
+  X <- X[, keep, drop = FALSE]
   n <- nrow(X)
   p <- ncol(X)
   beta <- numeric(p)
@@ -230,7 +247,9 @@ NULL
     beta <- new
     if (delta < tol) break
   }
-  beta
+  out <- numeric(full_p)
+  out[keep] <- beta
+  out
 }
 
 
@@ -779,8 +798,11 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
     eta <- pmin(pmax(as.numeric(Xpred %*% beta), -30), 30)
     return(1 / (1 + exp(-eta)))
   }
-  beta <- as.numeric(solve(crossprod(Xs), crossprod(Xs, ys)))
-  as.numeric(Xpred %*% beta)
+  q <- qr(Xs, tol = 1e-7)
+  keep <- sort(q$pivot[seq_len(q$rank)])
+  Xk <- Xs[, keep, drop = FALSE]
+  beta <- as.numeric(solve(crossprod(Xk), crossprod(Xk, ys)))
+  as.numeric(Xpred[, keep, drop = FALSE] %*% beta)
 }
 
 
