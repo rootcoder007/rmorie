@@ -184,7 +184,7 @@ nnlsq <- function(A, b, max_iter = NULL) {
     }
   }
   k <- which.min(f)
-  list(par = sim[k, ], value = f[k])
+  list(par = unname(sim[k, ]), value = unname(f[k]))
 }
 
 #' Nonparametric (Shapiro-Botha) semivariogram
