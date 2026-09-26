@@ -1383,7 +1383,7 @@ File,Line,Status,Version,Context
 ./R/statistics.R,1100,STALE_OR_DEP,4.7.1,"# Upper tail percentage points heading Table 4.7.1."
 ./R/statistics.R,1103,STALE_OR_DEP,4.7.1,"# Table 4.7.1 rows actually used here: the two composite-hypothesis cases."
 ./R/statistics.R,1137,STALE_OR_DEP,4.7.1,"#' Inference}; 5th edn. CRC Press. Section 4.7 and Table 4.7.1."
-./R/statistics.R,1461,STALE_OR_DEP,0.9.6,"#' Internal Shapiro-Wilk and Jarque-Bera helpers were removed in v0.9.6;"
+./R/statistics.R,1519,STALE_OR_DEP,0.9.6,"#' Internal Shapiro-Wilk and Jarque-Bera helpers were removed in v0.9.6;"
 ./R/stratm.R,23,STALE_OR_DEP,1.2.4,"#'   reference implementation in the CRAN package samplingbook 1.2.4;"
 ./R/strtfd.R,21,STALE_OR_DEP,1.2.4,"#'   CRAN package samplingbook 1.2.4; whose stratasamp uses exactly these"
 ./R/survival_more.R,128,STALE_OR_DEP,4.5.4,"#' (4.5.4)."
