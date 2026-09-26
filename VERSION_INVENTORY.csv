@@ -1268,8 +1268,6 @@ File,Line,Status,Version,Context
 ./R/sdpwts_native.R,199,STALE_OR_DEP,11.3.1,"# 11.3.1) with the analytic barrier gradient -tr(F^-1 F_i) and Hessian"
 ./R/secaead_native.R,35,STALE_OR_DEP,2.8.2,"# 2.6; 2.8; 2.8.2."
 ./R/selct.R,13,STALE_OR_DEP,4.5.1,"#' doi:10.1007/978-3-030-89010-0.  Chapter 4; Sect. 4.5.1; Eq. (4.1) p. 129 (MSE); Eq."
-./R/sensitivity.R,668,STALE_OR_DEP,0.9.5.6,"# and the tighter upper bound is the SMALLER one. v0.9.5.6+ uses"
-./R/sensitivity.R,669,STALE_OR_DEP,0.9.5.6,"# the strict-Manski max/min combination; pre-v0.9.5.6 took the"
 ./R/sgcar.R,86,STALE_OR_DEP,6.2.2.2,"#' @references Schabenberger & Gotway (2005); Sec 6.2.2.2; eqs"
 ./R/sglm.R,42,STALE_OR_DEP,0.3.0,"stop(sglm: family=; family;  needs PQL/Laplace; tracker for v0.3.0)"
 ./R/sgnpw.R,3,STALE_OR_DEP,5.4.4,"#' Power function of the two-sided sign test (Gibbons Ch 5.4.4)"

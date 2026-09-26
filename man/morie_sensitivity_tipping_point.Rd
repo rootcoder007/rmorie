@@ -2,40 +2,36 @@
 % Please edit documentation in R/sensitivity.R
 \name{morie_sensitivity_tipping_point}
 \alias{morie_sensitivity_tipping_point}
-\title{Tipping-point sensitivity to a single unmeasured confounder (tipr)}
+\title{Tipping point for a single unmeasured confounder (native tipr)}
 \usage{
 morie_sensitivity_tipping_point(estimate, smd = NULL, r2 = NULL, ...)
 }
 \arguments{
-\item{estimate}{Observed treatment effect on the coefficient scale.}
+\item{estimate}{Observed ratio (e.g. risk ratio).}
 
-\item{smd}{Hypothesised standardised mean difference of the
-unmeasured confounder between treatment groups.}
+\item{smd}{Standardised mean difference of the unmeasured confounder
+between exposure groups.}
 
-\item{r2}{Hypothesised partial R-squared of the unmeasured
-confounder with the outcome.  Forwarded as the \code{r_squared}
-tipr argument.}
+\item{r2}{Unsupported (the partial-R2 pathway is
+\code{\link{omitted_variable_bias}}); must be \code{NULL}.}
 
-\item{...}{Additional arguments forwarded to \code{tipr::tip}
-(e.g. \code{outcome_type}, \code{confidence}).}
+\item{...}{Unused.}
 }
 \value{
-A list of class \code{morie_sensitivity_tipping_point}
-with the tipped point estimate and the raw \pkg{tipr} object.
+A list of class \code{morie_sensitivity_tipping_point} with
+\code{tipped_estimate} (1) and \code{confounder_outcome_effect}.
 }
 \description{
-Thin interface to \code{tipr::tip}: returns the minimum value of
-the standardised mean difference (\code{smd}) or partial R-squared
-(\code{R2}) of an unmeasured confounder that would tip the lower
-(or upper) bound of the confidence interval back to the null.
-Pairs with \code{\link{tipping_point_analysis}}, which targets
-\emph{missing-data} sensitivity rather than unmeasured-confounder
-sensitivity.
+Native \code{tipr::tip}: an unmeasured confounder whose standardised
+mean difference between exposure groups is \code{smd} tips an
+observed ratio \eqn{b} (use the CI bound nearest the null) to 1 when
+its effect on the outcome is \eqn{b^{1/smd}} (Lin, Psaty & Kronmal
+1998).  Pairs with \code{\link{tipping_point_analysis}}, which
+targets \emph{missing-data} sensitivity.  Mirrors
+\code{tipping_point_smd} in the Python arm.
 }
 \examples{
-if (requireNamespace("tipr", quietly = TRUE)) {
-  str(morie_sensitivity_tipping_point(0.5, smd = 0.3), max.level = 1)
-}
+str(morie_sensitivity_tipping_point(1.8, smd = 0.5), max.level = 1)
 }
 \references{
 D'Agostino McGowan, L. (2022). tipr: An R package for

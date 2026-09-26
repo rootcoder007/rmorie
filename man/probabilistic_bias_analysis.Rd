@@ -28,8 +28,11 @@ probabilistic_bias_analysis(
 Named list with bias-adjusted distribution summaries.
 }
 \description{
-Draws bias parameters from prior distributions and returns the
-distribution of bias-adjusted estimates.  Cross-references
+Draws bias parameters from prior distributions and the estimate from
+its sampling distribution, and removes Schlesselman's
+binary-confounder bias \eqn{\log[(1 + (RR_{UD}-1)p_1) / (1 + (RR_{UD}-1)p_0)]}
+with \eqn{p_0} the drawn prevalence among the unexposed and
+\eqn{p_1 = \min(RR_{EU} p_0, 1)}.  Cross-references
 \pkg{episensr} (\code{episensr::probsens}) for the canonical
 multi-bias version with separate selection-bias and
 misclassification-bias models; use \pkg{episensr} directly when

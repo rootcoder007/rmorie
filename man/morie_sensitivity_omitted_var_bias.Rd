@@ -2,7 +2,7 @@
 % Please edit documentation in R/sensitivity.R
 \name{morie_sensitivity_omitted_var_bias}
 \alias{morie_sensitivity_omitted_var_bias}
-\title{Omitted-variable bias on a fitted model (sensemakr extender)}
+\title{Omitted-variable bias on a fitted model (native sensemakr)}
 \usage{
 morie_sensitivity_omitted_var_bias(
   model,
@@ -16,11 +16,11 @@ morie_sensitivity_omitted_var_bias(
 )
 }
 \arguments{
-\item{model}{A fitted regression model (\code{lm} or compatible).}
+\item{model}{A fitted \code{lm}.}
 
-\item{treatment}{Name of the treatment variable (coefficient).}
+\item{treatment}{Name of the treatment coefficient.}
 
-\item{benchmark_covariates}{Optional character vector of covariate
+\item{benchmark_covariates}{Optional character vector of coefficient
 names whose strengths bound the unmeasured-confounder strength.}
 
 \item{kd}{Multipliers on the benchmark covariate strength.
@@ -33,33 +33,32 @@ strength.  Default equal to \code{kd}.}
 
 \item{alpha}{Significance level.  Default 0.05.}
 
-\item{...}{Additional arguments forwarded to
-\code{sensemakr::sensemakr}.}
+\item{...}{Unused.}
 }
 \value{
 A list of class \code{morie_sensitivity_omitted_var_bias}
-with the robustness values, partial R-squared of treatment,
-benchmark bounds, and the full sensemakr object as \code{raw}.
+with \code{rv_q}, \code{rv_qa}, \code{partial_r2_treatment} and
+\code{benchmark_bounds} (the columns of sensemakr's bounds table).
 }
 \description{
-Thin interface to \code{sensemakr::sensemakr}: returns the full
-Cinelli-Hazlett robustness-value object including benchmark
-bounds, adjusted t-statistics, and the data needed to draw
-contour plots.  Pairs with \code{\link{omitted_variable_bias}},
-which is the closed-form version that takes \code{estimate} +
-\code{se} + degrees of freedom directly (useful when you don't
-have an \code{lm} object handy).
+Native \code{sensemakr::sensemakr} for a fitted linear model:
+robustness values, the partial R-squared of the treatment, and
+benchmark bounds for confounders \code{kd} / \code{ky} times as
+strong as each benchmark covariate (its partial R-squared with the
+outcome from \code{model}, with the treatment from the regression of
+the treatment on the other regressors).  Pairs with
+\code{\link{omitted_variable_bias}}, the closed form from
+\code{estimate}, \code{se} and degrees of freedom.
 }
 \examples{
-if (requireNamespace("sensemakr", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(d = rnorm(100), x1 = rnorm(100))
-  df$y <- 0.5 * df$d + 0.3 * df$x1 + rnorm(100)
-  fit <- stats::lm(y ~ d + x1, data = df)
-  res <- morie_sensitivity_omitted_var_bias(fit, "d",
-                                            benchmark_covariates = "x1")
-  class(res)
-}
+set.seed(1)
+df <- data.frame(d = rnorm(100), x1 = rnorm(100))
+df$y <- 0.5 * df$d + 0.3 * df$x1 + rnorm(100)
+fit <- stats::lm(y ~ d + x1, data = df)
+res <- morie_sensitivity_omitted_var_bias(fit, "d",
+                                          benchmark_covariates = "x1",
+                                          kd = 1)
+res$rv_q
 }
 \references{
 Cinelli, C., & Hazlett, C. (2020). Making sense of

@@ -25,8 +25,11 @@ Named list.
 }
 \description{
 Under no assumptions about selection, the ATE is only partially
-identified. Returns a named list with \code{lower_bound}, \code{upper_bound},
-\code{point_estimate}, \code{width}.
+identified (Manski 1990): with the outcome in \eqn{[a, b]},
+\eqn{E[Y_1] \in [p \bar y_1 + a(1-p), p \bar y_1 + b(1-p)]} and
+\eqn{E[Y_0] \in [(1-p) \bar y_0 + a p, (1-p) \bar y_0 + b p]}, so the
+bounds always have width \eqn{b - a}.  Returns a named list with
+\code{lower_bound}, \code{upper_bound}, \code{point_estimate}, \code{width}.
 }
 \examples{
 set.seed(1)

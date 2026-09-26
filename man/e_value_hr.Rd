@@ -4,18 +4,24 @@
 \alias{e_value_hr}
 \title{E-value for a hazard ratio}
 \usage{
-e_value_hr(hr, ci_lower = NULL, ci_upper = NULL)
+e_value_hr(hr, ci_lower = NULL, ci_upper = NULL, rare = FALSE)
 }
 \arguments{
 \item{hr}{Hazard ratio.}
 
 \item{ci_lower, ci_upper}{Optional 95\% CI of HR.}
+
+\item{rare}{Logical; outcome rare (below 15\%) at the end of
+follow-up.  Default \code{FALSE}.}
 }
 \value{
 A \code{morie_evalue} named-list.
 }
 \description{
-Uses the HR-to-RR approximation from VanderWeele (2017).
+For a common outcome the HR is converted with VanderWeele's (2017)
+approximation \eqn{RR = (1 - 0.5^{\sqrt{HR}}) / (1 - 0.5^{\sqrt{1/HR}})};
+for a rare outcome the HR approximates the RR, as
+\code{EValue::evalues.HR}.
 }
 \examples{
 res <- e_value_hr(2.0, ci_lower = 1.5, ci_upper = 2.5)

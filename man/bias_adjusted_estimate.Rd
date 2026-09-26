@@ -4,11 +4,17 @@
 \alias{bias_adjusted_estimate}
 \title{Bias-adjusted treatment effect (Ding & VanderWeele 2016)}
 \usage{
-bias_adjusted_estimate(estimate, se, rr_ud, rr_eu, prevalence_confounder = 0.5)
+bias_adjusted_estimate(
+  estimate,
+  se,
+  rr_ud,
+  rr_eu,
+  prevalence_confounder = NULL
+)
 }
 \arguments{
 \item{estimate}{Observed treatment effect on the
-log-RR / coefficient scale.}
+log-RR scale.}
 
 \item{se}{Standard error.}
 
@@ -16,14 +22,22 @@ log-RR / coefficient scale.}
 
 \item{rr_eu}{RR linking treatment to confounder.}
 
-\item{prevalence_confounder}{Confounder prevalence. Default 0.5.}
+\item{prevalence_confounder}{Optional confounder prevalence among
+the unexposed.}
 }
 \value{
-Named list with \code{adjusted_estimate}, \code{bias},
+Named list with \code{adjusted_estimate}, \code{bias} (log scale),
 \code{adjusted_ci_lower}, \code{adjusted_ci_upper}, \code{original_estimate}.
 }
 \description{
-Bias-adjusted treatment effect (Ding & VanderWeele 2016)
+Without \code{prevalence_confounder} the adjustment is the Ding &
+VanderWeele (2016) bounding factor
+\eqn{B = RR_{UD} RR_{EU} / (RR_{UD} + RR_{EU} - 1)}, the largest bias
+any confounder with those strengths can produce, applied toward the
+null.  With the prevalence \eqn{p_0} of a binary confounder among the
+unexposed, \code{rr_eu} is its prevalence ratio
+(\eqn{p_1 = RR_{EU} p_0}) and the bias is Schlesselman's (1978) exact
+factor \eqn{(1 + (RR_{UD}-1) p_1) / (1 + (RR_{UD}-1) p_0)}.
 }
 \examples{
 res <- bias_adjusted_estimate(0.5, 0.1, rr_ud = 2, rr_eu = 2)

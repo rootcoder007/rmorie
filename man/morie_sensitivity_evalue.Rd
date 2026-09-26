@@ -2,7 +2,7 @@
 % Please edit documentation in R/sensitivity.R
 \name{morie_sensitivity_evalue}
 \alias{morie_sensitivity_evalue}
-\title{E-values for the EValue dispatch family (extender)}
+\title{Internal helper: Morie Sens Need}
 \usage{
 morie_sensitivity_evalue(
   estimate,
@@ -37,31 +37,20 @@ for OLS / MD, 1 for ratio scales).}
 \item{ci_lower, ci_upper}{Optional 95\% CI on the same scale as
 \code{estimate}.}
 
-\item{...}{Additional arguments forwarded to the underlying
-\code{EValue::evalues.*} function.}
+\item{...}{Unused.}
 }
 \value{
 A list of class \code{morie_sensitivity_evalue} with
 \code{estimate}, \code{e_value_point}, \code{e_value_ci},
-\code{type}, \code{method}, and \code{raw} (the full EValue
-matrix).
+\code{type}, \code{method}, and \code{raw} (the point and CI
+E-values).
 }
 \description{
-Thin interface to the \pkg{EValue} dispatch family
-(\code{evalues.OLS}, \code{evalues.RR}, \code{evalues.OR},
-\code{evalues.HR}, \code{evalues.MD}), exposed under the
-\code{morie_sensitivity_*} namespace so MRM / paper callers can
-reach the full \pkg{EValue} surface without loading \pkg{EValue}
-directly.  Pairs with \code{\link{e_value_rr}} /
-\code{\link{e_value_or}} / \code{\link{e_value_hr}} /
-\code{\link{e_value_d}}, which are the typed convenience
-wrappers around the same backend.
+Internal helper: Morie Sens Need
 }
 \examples{
-if (requireNamespace("tipr", quietly = TRUE)) {
-  str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
-                               ci_upper = 2.7), max.level = 1)
-}
+str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
+                             ci_upper = 2.7), max.level = 1)
 }
 \references{
 VanderWeele, T. J., & Ding, P. (2017). Sensitivity

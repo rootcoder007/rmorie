@@ -2,7 +2,7 @@
 % Please edit documentation in R/sensitivity.R
 \name{morie_sensitivity_konfound}
 \alias{morie_sensitivity_konfound}
-\title{Konfound robustness for a coefficient (konfound extender)}
+\title{Konfound robustness for a coefficient (native konfound)}
 \usage{
 morie_sensitivity_konfound(
   estimate,
@@ -25,27 +25,25 @@ morie_sensitivity_konfound(
 
 \item{alpha}{Significance level.  Default 0.05.}
 
-\item{...}{Additional arguments forwarded to
-\code{konfound::pkonfound}.}
+\item{...}{Unused.}
 }
 \value{
 A list of class \code{morie_sensitivity_konfound} with
-the percent-bias-to-invalidate, the impact-threshold-of-a-
-confounding-variable (ITCV), and the raw konfound object.
+\code{percent_bias_to_invalidate}, \code{rir},
+\code{impact_threshold_confounder} and \code{beta_threshold}.
 }
 \description{
-Thin interface to \code{konfound::pkonfound}: how many cases would
-need to be replaced with average-treatment-effect cases (or how
-large would an omitted-variable correlation have to be) to invalidate
-the inference?  Pairs with
-\code{\link{morie_sensitivity_omitted_var_bias}} (which uses the
-Cinelli-Hazlett partial-R-squared framing instead of the
-Frank et al. percent-bias-to-invalidate framing).
+Native \code{konfound::pkonfound} (two tails, null 0): the threshold
+is \eqn{t^* se} with \eqn{t^*} on \eqn{n - n_{cov} - 2} df; the
+percent bias to invalidate is \eqn{100 (1 - t^* se / \hat\beta)} (to
+sustain when not significant) and RIR the corresponding number of
+cases to replace; the impact threshold of a confounding variable is
+\eqn{(r - r^*) / (1 \pm |r^*|)} with \eqn{r = t / \sqrt{t^2 + df}}.
+Pairs with \code{\link{morie_sensitivity_omitted_var_bias}}.  Mirrors
+\code{konfound} in the Python arm.
 }
 \examples{
-\dontshow{if (requireNamespace("konfound", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
-\dontshow{\}) # examplesIf}
 }
 \references{
 Frank, K. A., Maroulis, S. J., Duong, M. Q., &

@@ -33,10 +33,14 @@ A \code{morie_tipping_point} named-list.
 }
 \description{
 How much would unobserved outcomes need to differ from observed
-ones for the treatment effect to become non-significant?
-Phase 1.g cross-references \pkg{tipr} for the unmeasured-confounder
-family of tipping-point calculations
-(see also \code{\link{morie_sensitivity_tipping_point}}).
+ones for the treatment effect to become non-significant?  The
+tipping point is the smallest shift \eqn{\delta} of the estimate that
+makes the two-sided 5\\% test non-significant,
+\eqn{\delta^* = \hat\tau - \mathrm{sign}(\hat\tau) z_{0.975} se} (0 when
+the estimate is already non-significant); the grid reports adjusted
+estimates and p-values over \code{delta_range}.  For the
+unmeasured-confounder tipping point see
+\code{\link{morie_sensitivity_tipping_point}}.
 }
 \examples{
 str(tipping_point_analysis(0.5, 0.15, n_treated = 100, n_control = 100),

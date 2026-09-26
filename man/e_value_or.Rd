@@ -11,13 +11,17 @@ e_value_or(odds_ratio, ci_lower = NULL, ci_upper = NULL, prevalence = NULL)
 
 \item{ci_lower, ci_upper}{Optional 95\% CI.}
 
-\item{prevalence}{Outcome prevalence (optional).}
+\item{prevalence}{Outcome prevalence (optional); 0.15 or more selects
+the common-outcome conversion.}
 }
 \value{
 A \code{morie_evalue} named-list.
 }
 \description{
-Uses Zhang & Yu (1998) OR-to-RR correction when \code{prevalence >= 0.15}.
+For a rare outcome (\code{prevalence} below 0.15 or not given) the OR
+approximates the RR; for a common outcome the OR is converted with
+\eqn{RR \approx \sqrt{OR}} (VanderWeele & Ding 2017), as
+\code{EValue::evalues.OR(rare = FALSE)}.
 }
 \examples{
 res <- e_value_or(2.0)

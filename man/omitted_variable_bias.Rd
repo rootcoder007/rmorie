@@ -12,7 +12,9 @@ omitted_variable_bias(
   partial_r2_treatment,
   q = 1,
   alpha = 0.05,
-  benchmark_covariates = NULL
+  benchmark_covariates = NULL,
+  kd = 1,
+  ky = kd
 )
 }
 \arguments{
@@ -31,19 +33,38 @@ explained away. Default 1.}
 
 \item{alpha}{Significance level. Default 0.05.}
 
-\item{benchmark_covariates}{Named list mapping covariate name ->
-partial R^2.}
+\item{benchmark_covariates}{Named list mapping covariate name to
+\code{c(r2_dxj_x, r2_yxj_dx)}: its partial R^2 with the treatment
+(given the other covariates) and with the outcome (given treatment
+and the other covariates).  A single number is used for both.}
+
+\item{kd, ky}{Strength multipliers of the confounder relative to a
+benchmark (\code{ky} defaults to \code{kd}).}
 }
 \value{
-A \code{morie_ovb} named-list.
+A \code{morie_ovb} named-list; \code{benchmark_bounds} maps each
+covariate to a one-row data frame with \code{r2dz.x},
+\code{r2yz.dx}, \code{adjusted_estimate}, \code{adjusted_se},
+\code{adjusted_t}, \code{adjusted_lower_CI}, \code{adjusted_upper_CI}.
 }
 \description{
-Closed-form Cinelli-Hazlett robustness-value implementation in
-base R.  For the full \pkg{sensemakr} treatment (benchmark plots,
-adjusted t-statistics, contour plots) on a fitted \code{lm}
-object, use \code{\link{morie_sensitivity_omitted_var_bias}}.
+Closed-form Cinelli-Hazlett (2020) sensitivity from the estimate,
+its standard error and the residual degrees of freedom.  Robustness
+values as \code{sensemakr::robustness_value}: with
+\eqn{f_q = q |t| / \sqrt{dof}},
+\eqn{RV_q = (\sqrt{f_q^4 + 4 f_q^2} - f_q^2) / 2}, and
+\eqn{RV_{q,\alpha}} the same in \eqn{f_q - f^*},
+\eqn{f^* = |t^*_{\alpha, dof-1}| / \sqrt{dof - 1}} (the extreme
+robustness value when \eqn{f_q > 1/f^*}).  Benchmark bounds follow
+\code{sensemakr::ovb_bounds}.  For a fitted \code{lm} see
+\code{\link{morie_sensitivity_omitted_var_bias}}.
 }
 \examples{
 str(omitted_variable_bias(0.5, 0.15, dof = 150, r2_yd_x = 0.1,
                           partial_r2_treatment = 0.05), max.level = 1)
+}
+\references{
+Cinelli, C., & Hazlett, C. (2020). Making sense of
+sensitivity: extending omitted variable bias.  \emph{Journal of
+the Royal Statistical Society B}, 82(1), 39--67.
 }
