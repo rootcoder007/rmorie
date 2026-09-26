@@ -64,3 +64,22 @@ test_that("mrm_assumptions_check returns a multi-check rich-result", {
   }
   expect_true(is.list(out) || is.data.frame(out))
 })
+
+test_that("balance threshold is honoured and overlap uses the glm propensity", {
+  i <- 1:120
+  df <- data.frame(x1 = sin(i), x2 = cos(1.3 * i))
+  df$d <- as.integer(0.8 * df$x1 - 0.5 * df$x2 + 0.6 * sin(2.7 * i) > 0)
+  df$y <- 1 + 0.7 * df$d + df$x1 + 0.4 * cos(3.3 * i)
+  # |SMD| = 159.33% (x1) and 85.99% (x2)
+  expect_equal(mrm_check_balancing(df, "d", c("x1", "x2"),
+                                   threshold_pct = 100)$n_imbalanced, 1L)
+  expect_equal(mrm_check_balancing(df, "d", c("x1", "x2"),
+                                   threshold_pct = 200)$n_imbalanced, 0L)
+  ov <- mrm_check_overlap(df, "d", c("x1", "x2"))
+  e <- stats::glm(d ~ x1 + x2, data = df, family = stats::binomial())$fitted.values
+  expect_equal(ov$common_support_lower,
+               round(max(min(e[df$d == 1]), min(e[df$d == 0])), 4))
+  me <- mrm_median_causal_effect(df, "d", "y", c("x1", "x2"))
+  expect_equal(me$n_matched, 57L)
+  expect_equal(me$median_treatment_effect, 2.0311)
+})

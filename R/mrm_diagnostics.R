@@ -122,6 +122,9 @@ mrm_standardised_difference <- function(data, treatment_col, covariates) {
 mrm_check_balancing <- function(data, treatment_col, covariates,
                                 threshold_pct = 10) {
   tbl <- mrm_standardised_difference(data, treatment_col, covariates)
+  # flag against the caller's threshold (the table itself flags at 10%)
+  tbl$imbalanced <- ifelse(is.na(tbl$smd_pct), NA,
+                           abs(tbl$smd_pct) > threshold_pct)
   n_imb <- sum(tbl$imbalanced, na.rm = TRUE)
   overall <- n_imb == 0L
   list(
