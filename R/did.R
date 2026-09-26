@@ -1579,7 +1579,9 @@ morie_did_fuzzy <- function(data, outcome, assignment, takeup, post,
   y <- as.numeric(df[[outcome]])
   zp <- z * p
   dp <- d * p
-  exog <- cbind(z, p, d)
+  # Wald-DiD: controls are assignment and period only; take-up is the
+  # endogenous regressor and cannot also be a control
+  exog <- cbind(z, p)
   if (length(covariates)) {
     Xc <- as.matrix(df[, covariates, drop = FALSE])
     storage.mode(Xc) <- "double"
@@ -1592,8 +1594,14 @@ morie_did_fuzzy <- function(data, outcome, assignment, takeup, post,
   dp_hat <- as.numeric(X_first %*% beta_first)
   X_second <- cbind(X_exog, dp_hat)
   cluster_ids <- if (!is.null(cluster)) df[[cluster]] else NULL
-  fit <- .morie_did_ols_robust_se(X_second, y, cluster_ids = cluster_ids)
   tau_idx <- ncol(X_second)
+  tau0 <- .morie_did_ols_robust_se(X_second, y)$beta[tau_idx]
+  # 2SLS residuals use the actual D*Post: y - X beta = (y - tau (dp - dp_hat))
+  # - Xhat beta, and dp - dp_hat is orthogonal to Xhat, so refitting on the
+  # adjusted outcome returns the same beta with the 2SLS residuals (the
+  # sandwich of ivreg: projected regressors, structural residuals)
+  y_adj <- y - tau0 * (dp - dp_hat)
+  fit <- .morie_did_ols_robust_se(X_second, y_adj, cluster_ids = cluster_ids)
   est <- fit$beta[tau_idx]
   se_est <- fit$se[tau_idx]
   # First-stage F

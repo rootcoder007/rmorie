@@ -577,3 +577,25 @@ test_that("wild cluster bootstrap equals fwildclusterboot::boottest", {
   expect_equal(r$p_value, 0.1640625, tolerance = 1e-12)
   expect_equal(unname(r$t_stat), 1.54025438940341, tolerance = 1e-10)
 })
+
+test_that("fuzzy DiD is the Wald-DiD 2SLS of ivreg with sandwich SEs", {
+  # reference: ivreg(y ~ z + post + dp | z + post + zp) with
+  # vcovHC(type = "HC1"); with x and vcovCL(cluster = ~cl, type = "HC1")
+  n <- 400
+  i <- 1:n
+  df <- data.frame(cl = rep(1:40, each = 10),
+                   z = as.integer((i %% 40) < 20),
+                   post = as.integer(i %% 2 == 0))
+  df$d <- as.integer(df$post == 1 & ((df$z == 1 & sin(1.7 * i) > -0.4) |
+                                       (df$z == 0 & sin(1.7 * i) > 0.8)))
+  df$x <- cos(0.9 * i)
+  df$y <- 0.2 + 0.3 * df$z + 0.4 * df$post + 1.5 * df$d + 0.5 * df$x +
+    0.8 * sin(2.3 * i)
+  r1 <- morie_did_fuzzy(df, "y", "z", "d", "post")
+  expect_equal(unname(r1$estimate), 1.48586165523135, tolerance = 1e-10)
+  expect_equal(unname(r1$std_error), 0.304579519027194, tolerance = 1e-10)
+  r2 <- morie_did_fuzzy(df, "y", "z", "d", "post", covariates = "x",
+                        cluster = "cl")
+  expect_equal(unname(r2$estimate), 1.49639162449551, tolerance = 1e-10)
+  expect_equal(unname(r2$std_error), 0.148095523165333, tolerance = 1e-10)
+})
