@@ -18,7 +18,8 @@ random_effects_meta(
 
 \item{confidence}{Confidence level. Default 0.95.}
 
-\item{method}{Tau^2 estimator. Only \code{"DL"} implemented.}
+\item{method}{Tau^2 estimator: \code{"DL"} (DerSimonian-Laird), \code{"PM"}
+(Paule-Mandel) or \code{"REML"}.}
 }
 \value{
 A \code{morie_effect_size} with tau^2, I^2, Q, prediction
