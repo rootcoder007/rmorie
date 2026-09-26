@@ -9,7 +9,7 @@
 #' Signs follow scipy.signal.windows.dpss: symmetric tapers sum
 #' positive and antisymmetric tapers start with a positive lobe.
 #' The concentration ratio lambda_k = v' S v is the fraction of the
-#' taper's energy inside [-W, W].
+#' taper's energy inside \eqn{[-W, W]}.
 #'
 #' @param M Integer taper length.
 #' @param NW Time-bandwidth product.

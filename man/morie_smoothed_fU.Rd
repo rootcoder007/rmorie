@@ -18,7 +18,7 @@ morie_smoothed_fU(y, x, beta, nu_U = NULL, grid = NULL, kernel = "fourfold")
 \item{grid}{evaluation points.}
 
 \item{kernel}{\code{"fourfold"} (default; the book's characteristic
-function, assumption PHU7) or \code{"flattop"} (indicator of \link{-1, 1}:
+function, assumption PHU7) or \code{"flattop"} (indicator of \eqn{[-1, 1]}:
 outside PHU7, higher-order bias, 2-3 times smaller errors in
 simulation). Each has its own default bandwidths.}
 }

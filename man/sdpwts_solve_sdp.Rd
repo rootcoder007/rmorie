@@ -34,7 +34,8 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-sdpwts_solve_sdp(c = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8),
-  x0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+# min x s.t. [[x, 1], [1, x]] >= 0: the optimum is x = 1
+sdpwts_solve_sdp(c = 1, F0 = matrix(c(0, 1, 1, 0), 2), Fs = list(diag(2)),
+  x0 = 2)$x
 }
 \keyword{internal}

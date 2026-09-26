@@ -29,7 +29,7 @@ Ch. 8); the k-th taper belongs to the k-th largest eigenvalue.
 Signs follow scipy.signal.windows.dpss: symmetric tapers sum
 positive and antisymmetric tapers start with a positive lobe.
 The concentration ratio lambda_k = v' S v is the fraction of the
-taper's energy inside \link{-W, W}.
+taper's energy inside \eqn{[-W, W]}.
 }
 \examples{
 w <- morie_dpss(64, 3, Kmax = 4, return_ratios = TRUE)

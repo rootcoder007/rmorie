@@ -21,6 +21,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-sdpwts_is_psd(M = 5L)
+sdpwts_is_psd(M = matrix(c(2, 1, 1, 2), 2))$psd
 }
 \keyword{internal}

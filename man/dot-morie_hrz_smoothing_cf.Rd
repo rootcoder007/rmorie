@@ -10,7 +10,7 @@
 \item{u}{Numeric; passed to \code{abs}.}
 
 \item{kernel}{\code{"fourfold"} (the book's characteristic function,
-default) or \code{"flattop"} (the indicator of \link{-1, 1}).}
+default) or \code{"flattop"} (the indicator of \eqn{[-1, 1]}).}
 }
 \value{
 The value of \code{ifelse}.

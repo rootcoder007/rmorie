@@ -40,7 +40,7 @@
 #'
 #' @param u Numeric; passed to \code{abs}.
 #' @param kernel \code{"fourfold"} (the book's characteristic function,
-#'   default) or \code{"flattop"} (the indicator of [-1, 1]).
+#'   default) or \code{"flattop"} (the indicator of \eqn{[-1, 1]}).
 #' @return The value of \code{ifelse}.
 #' @export
 #' @examples
@@ -239,7 +239,7 @@
 #' @param nu_U,nu_eps smoothing bandwidths; sigma_eps / sqrt(log n) for f_U and 0.5 sigma_eps N^(-1/5) for f_eps when NULL, sigma_eps = sd(eta) / sqrt(2).
 #' @param grid_u,grid_z evaluation points.
 #' @param kernel \code{"fourfold"} (default; the book's characteristic
-#'   function, assumption PHU7) or \code{"flattop"} (indicator of [-1, 1]:
+#'   function, assumption PHU7) or \code{"flattop"} (indicator of \eqn{[-1, 1]}:
 #'   outside PHU7, higher-order bias, 2-3 times smaller errors in
 #'   simulation). Each has its own default bandwidths.
 #' @return list: grid_u, f_U, grid_z, f_eps, psi_eps_from_root,
@@ -315,7 +315,7 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #' @param nu_U smoothing bandwidth; sigma_eps / sqrt(log n) when NULL, sigma_eps = sd(eta) / sqrt(2).
 #' @param grid evaluation points.
 #' @param kernel \code{"fourfold"} (default; the book's characteristic
-#'   function, assumption PHU7) or \code{"flattop"} (indicator of [-1, 1]:
+#'   function, assumption PHU7) or \code{"flattop"} (indicator of \eqn{[-1, 1]}:
 #'   outside PHU7, higher-order bias, 2-3 times smaller errors in
 #'   simulation). Each has its own default bandwidths.
 #' @return list: grid, f_U, nu_U, cutoff, regularisation_required,
@@ -373,7 +373,7 @@ morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL,
 #' @param nu_U,nu_eps the two bandwidths; sigma_eps / sqrt(log n) for f_U and 0.5 sigma_eps N^(-1/5) for f_eps when NULL, sigma_eps = sd(eta) / sqrt(2).
 #' @param grid_u,grid_z evaluation points.
 #' @param kernel \code{"fourfold"} (default; the book's characteristic
-#'   function, assumption PHU7) or \code{"flattop"} (indicator of [-1, 1]:
+#'   function, assumption PHU7) or \code{"flattop"} (indicator of \eqn{[-1, 1]}:
 #'   outside PHU7, higher-order bias, 2-3 times smaller errors in
 #'   simulation). Each has its own default bandwidths.
 #' @return list: grid_u, f_U, grid_z, f_eps, nu_U, nu_eps,

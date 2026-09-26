@@ -34,7 +34,7 @@
 #' @param x Observed sample.
 #' @param mu0,lambda0,a0,b0 Normal-Gamma prior hyperparameters.
 #' @param max_iter Maximum coordinate sweeps.
-#' @param tol Stop when E[tau] moves by less than this.
+#' @param tol Stop when E(tau) moves by less than this.
 #' @return List with \code{mu_n}, \code{lambda_n}, \code{a_n}, \code{b_n},
 #'   \code{e_tau}, \code{e_mu}, \code{var_mu}, \code{elbo},
 #'   \code{elbo_path}, \code{elbo_monotone}, \code{iterations},

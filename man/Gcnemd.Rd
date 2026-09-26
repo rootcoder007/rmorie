@@ -20,7 +20,7 @@ List with \code{estimate} (mean output activation),
 \description{
 Kipf and Welling's equation (7), the first-order layer with the single
 parameter of equation (6), before equation (8) renormalises it. The
-operator I + D^\{-1/2\} A D^\{-1/2\} has eigenvalues in \link{0, 2}.
+operator I + D^\{-1/2\} A D^\{-1/2\} has eigenvalues in \eqn{[0, 2]}.
 Isolated nodes have zero degree; their normalising factor is taken to
 be zero rather than infinite, so they keep only their own features.
 }

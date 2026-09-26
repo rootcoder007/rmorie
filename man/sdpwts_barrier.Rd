@@ -22,6 +22,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-sdpwts_barrier(x = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8))
+sdpwts_barrier(x = 2, F0 = matrix(c(0, 1, 1, 0), 2), Fs = list(diag(2)))$value
 }
 \keyword{internal}
