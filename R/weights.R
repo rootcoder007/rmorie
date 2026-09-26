@@ -570,14 +570,10 @@ morie_weights_jackknife <- function(weights, strata = NULL,
   w <- as.numeric(weights)
   n <- length(w)
   if (jk_type == "JK1") {
-    rep <- matrix(w, nrow = n, ncol = n)
-    for (i in seq_len(n)) {
-      rep[i, i] <- 0
-      rem <- w
-      rem[i] <- 0
-      tot <- sum(rem)
-      if (tot > 0) rep[, i] <- rem * (sum(w) / tot)
-    }
+    ## delete-1 (Wolter 2007, ch. 4; survey::as.svrepdesign type JK1):
+    ## replicate i drops unit i and scales the rest by n / (n - 1)
+    rep <- matrix(w * n / (n - 1), nrow = n, ncol = n)
+    diag(rep) <- 0
     return(rep)
   }
   if (is.null(strata))

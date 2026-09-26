@@ -433,3 +433,15 @@ test_that("round four: greg calibration reports its iteration count", {
   expect_true(res$iterations >= 1 && res$iterations <= 5)
   expect_equal(as.numeric(t(X) %*% res$weights), c(60, 5), tolerance = 1e-6)
 })
+
+test_that("morie_weights_jackknife matches survey::as.svrepdesign replicate weights", {
+  ## JK1: survivors scaled by n / (n - 1); JKn: survivors in the stratum
+  ## scaled by n_h / (n_h - 1), other strata unchanged
+  jk1 <- morie_weights_jackknife(1:4, jk_type = "JK1")
+  ref1 <- matrix(rep(1:4 * 4 / 3, 4), 4, 4)
+  diag(ref1) <- 0
+  expect_equal(unname(jk1), ref1, tolerance = 1e-14)
+  jkn <- morie_weights_jackknife(1:4, strata = c(1, 1, 2, 2), jk_type = "JKn")
+  refn <- matrix(c(0, 4, 3, 4, 2, 0, 3, 4, 1, 2, 0, 8, 1, 2, 6, 0), 4, 4)
+  expect_equal(unname(unclass(jkn)[, ]), refn)
+})
