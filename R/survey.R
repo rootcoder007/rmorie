@@ -151,7 +151,8 @@ morie_survey_hajek_mean <- function(y, weights) {
   sw <- sum(w)
   m <- sum(w * y) / sw
   res <- y - m
-  var_h <- sum(w^2 * res^2) / sw^2
+  # with the n/(n - 1) of the with-replacement variance, as survey::svymean
+  var_h <- length(y) / (length(y) - 1) * sum(w^2 * res^2) / sw^2
   se <- sqrt(max(0, var_h))
   zc <- qnorm(0.975)
   list(mean = m, se = se,
@@ -209,7 +210,8 @@ morie_survey_ratio <- function(y, x, weights, X_population_total) {
   r <- y_ht / x_ht
   total <- r * X_population_total
   res <- y - r * x
-  var_est <- sum(w^2 * res^2) / x_ht^2 * X_population_total^2
+  # with the n/(n - 1) of the with-replacement variance, as survey::svyratio
+  var_est <- length(y) / (length(y) - 1) * sum(w^2 * res^2) / x_ht^2 * X_population_total^2
   se <- sqrt(max(0, var_est))
   zc <- qnorm(0.975)
   list(ratio = r, total_estimate = total, se = se,
@@ -275,33 +277,24 @@ morie_survey_calibrate <- function(df, aux_vars, population_totals,
     if (!v %in% names(population_totals))
       stop(sprintf("population_totals missing '%s'.", v), call. = FALSE)
   }
-  n <- nrow(df)
-  w <- rep(1, n)
+  # Raking (Deville and Sarndal 1992): w_i = exp(x_i' lambda) from unit
+  # starting weights, lambda solving sum_i w_i x_i = T by Newton, as
+  # survey::calibrate(calfun = "raking") with no intercept
+  X <- as.matrix(as.data.frame(lapply(aux_vars, function(v) as.numeric(df[[v]]))))
+  target <- vapply(aux_vars, function(v) as.numeric(population_totals[[v]]), numeric(1))
+  lam <- numeric(length(aux_vars))
   converged <- FALSE
   for (i in seq_len(max_iter)) {
-    max_dev <- 0
-    for (v in aux_vars) {
-      x <- as.numeric(df[[v]])
-      # `target` was originally written `T` (legacy TRUE alias).
-      # 3MMM.32's T_and_F_symbol_linter auto-fix rewrote it to
-      # literal TRUE, which is illegal as an LHS; renamed to a
-      # descriptive identifier on 2026-05-25.
-      target <- as.numeric(population_totals[[v]])
-      cur <- sum(w * x)
-      if (cur == 0) {
-        warning(sprintf("Weighted total of '%s' is zero at iter %d.", v, i))
-        next
-      }
-      f <- target / cur
-      w <- w * f
-      max_dev <- max(max_dev, abs(f - 1))
+    w <- as.numeric(exp(X %*% lam))
+    Fv <- as.numeric(crossprod(X, w)) - target
+    if (max(abs(Fv) / pmax(abs(target), 1)) < tol) {
+      converged <- TRUE
+      break
     }
-    if (max_dev < tol) { converged <- TRUE
-    break }
+    lam <- lam - solve(crossprod(X, X * w), Fv)
   }
   if (!converged)
-    warning(sprintf("Raking did not converge in %d iters (max_dev=%.2e).",
-                    max_iter, max_dev))
+    warning(sprintf("Raking did not converge in %d iterations.", max_iter))
   w
 }
 
@@ -332,7 +325,8 @@ morie_survey_subpop <- function(df, domain_col, domain_value,
   N_d <- sum(w * dom)
   y_bar <- sum(w * dom * y) / N_d
   z <- dom * (y - y_bar)
-  var_d <- sum(w^2 * z^2) / N_d^2
+  # n/(n - 1) over the FULL sample, as survey::svymean on subset(design, .)
+  var_d <- length(y) / (length(y) - 1) * sum(w^2 * z^2) / N_d^2
   se <- sqrt(max(0, var_d))
   zc <- qnorm(0.975)
   list(mean = y_bar, se = se,
@@ -367,7 +361,7 @@ morie_survey_glm <- function(design, formula,
                   gaussian = stats::gaussian(),
                   binomial = stats::binomial(),
                   poisson  = stats::poisson(),
-                  gamma    = stats::Gamma(),
+                  gamma    = stats::Gamma(link = "log"),
                   negativebinomial = .morie_negbin_family(1))
     return(.morie_svyglm_native(formula, data = design$data,
                                 weights = design$weights, family = fam))
@@ -379,7 +373,7 @@ morie_survey_glm <- function(design, formula,
                   gaussian = stats::gaussian(),
                   binomial = stats::binomial(),
                   poisson  = stats::poisson(),
-                  gamma    = stats::Gamma(),
+                  gamma    = stats::Gamma(link = "log"),
                   negativebinomial = .morie_negbin_family(1))
   } else {
     fam <- family

@@ -228,3 +228,21 @@ test_that("morie_survey_complex_glm rejects non-positive weights", {
   expect_error(morie_survey_complex_glm(df, y ~ x, weight_col = "w"),
                regexp = "> 0")
 })
+
+test_that("survey estimators match the survey package", {
+  y <- c(5.1, 6.3, 4.8, 7.2, 5.9, 6.6, 5.4, 6.0, 5.5, 6.8, 4.2, 5.0)
+  x <- c(2.1, 2.9, 2.0, 3.3, 2.6, 3.0, 2.4, 2.7, 2.5, 3.1, 1.9, 2.2)
+  w <- c(10, 12, 8, 15, 9, 11, 14, 10, 13, 9, 12, 16)
+  pi <- c(0.1, 0.08, 0.12, 0.07, 0.11, 0.09, 0.07, 0.1, 0.08, 0.11, 0.09, 0.06)
+  d <- data.frame(y, x, w, dom = c(1, 0, 1, 1, 0, 0, 1, 0, 1, 1, 0, 1),
+                  x2 = c(1, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0))
+  # svymean, svyratio (SE x 70), svymean on subset(dom == 1), svytotal under
+  # poisson_sampling(pi); calibrate(calfun = "raking")
+  expect_equal(morie_survey_hajek_mean(y, w)$se, 0.2735903604313098, tolerance = 1e-13)
+  expect_equal(morie_survey_ratio(y, x, w, 70)$se, 1.3338586248673094, tolerance = 1e-13)
+  expect_equal(morie_survey_subpop(d, "dom", 1, "y", "w")$se, 0.35636988931716962, tolerance = 1e-13)
+  expect_equal(morie_survey_ht_total(y, pi)$se, 227.5546234351398, tolerance = 1e-13)
+  cw <- morie_survey_calibrate(d, c("x", "x2"), list(x = 40, x2 = 7.5), tol = 1e-13)
+  expect_equal(cw[c(1, 4, 12)], c(1.2170070612763382, 1.4083631497992353, 1.2564438996747997), tolerance = 1e-11)
+  expect_equal(sum(cw * x), 40, tolerance = 1e-12)
+})

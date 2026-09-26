@@ -1141,6 +1141,32 @@ dagostino_pearson <- function(x) {
   expon = c(1.959, 1.591, 1.321, 1.062, 0.916)
 )
 
+#' Lilliefors normal-null p-value
+#'
+#' Dallal and Wilkinson (1986) below 0.1, Stephens' (1974) modified-statistic
+#' polynomials above, as nortest::lillie.test.
+#' @noRd
+.lillie_p_norm <- function(k, n) {
+  if (n <= 100) {
+    kd <- k
+    nd <- n
+  } else {
+    kd <- k * (n / 100)^0.49
+    nd <- 100
+  }
+  p <- exp(-7.01256 * kd^2 * (nd + 2.78019) + 2.99587 * kd * sqrt(nd + 2.78019) -
+    0.122119 + 0.974598 / sqrt(nd) + 1.67997 / nd)
+  if (p > 0.1) {
+    kk <- (sqrt(n) - 0.01 + 0.85 / sqrt(n)) * k
+    p <- if (kk <= 0.302) 1
+         else if (kk <= 0.5) 2.76773 - 19.828315 * kk + 80.709644 * kk^2 - 138.55152 * kk^3 + 81.218052 * kk^4
+         else if (kk <= 0.9) -4.901232 + 40.662806 * kk - 97.490286 * kk^2 + 94.029866 * kk^3 - 32.355711 * kk^4
+         else if (kk <= 1.31) 6.198765 - 19.558097 * kk + 23.186922 * kk^2 - 12.234627 * kk^3 + 2.423045 * kk^4
+         else 0
+  }
+  p
+}
+
 #' Anderson-Darling goodness-of-fit test
 #'
 #' Native implementation for the two composite null hypotheses that have
@@ -1178,32 +1204,6 @@ dagostino_pearson <- function(x) {
 #' res$test_statistic
 #' anderson_darling(rexp(60), dist = "expon")$p_value
 #' @export
-#' Lilliefors normal-null p-value
-#'
-#' Dallal and Wilkinson (1986) below 0.1, Stephens' (1974) modified-statistic
-#' polynomials above, as nortest::lillie.test.
-#' @noRd
-.lillie_p_norm <- function(k, n) {
-  if (n <= 100) {
-    kd <- k
-    nd <- n
-  } else {
-    kd <- k * (n / 100)^0.49
-    nd <- 100
-  }
-  p <- exp(-7.01256 * kd^2 * (nd + 2.78019) + 2.99587 * kd * sqrt(nd + 2.78019) -
-    0.122119 + 0.974598 / sqrt(nd) + 1.67997 / nd)
-  if (p > 0.1) {
-    kk <- (sqrt(n) - 0.01 + 0.85 / sqrt(n)) * k
-    p <- if (kk <= 0.302) 1
-         else if (kk <= 0.5) 2.76773 - 19.828315 * kk + 80.709644 * kk^2 - 138.55152 * kk^3 + 81.218052 * kk^4
-         else if (kk <= 0.9) -4.901232 + 40.662806 * kk - 97.490286 * kk^2 + 94.029866 * kk^3 - 32.355711 * kk^4
-         else if (kk <= 1.31) 6.198765 - 19.558097 * kk + 23.186922 * kk^2 - 12.234627 * kk^3 + 2.423045 * kk^4
-         else 0
-  }
-  p
-}
-
 anderson_darling <- function(x, dist = c("norm", "expon")) {
   x <- .stat_validate(x)
   dist <- match.arg(dist)
