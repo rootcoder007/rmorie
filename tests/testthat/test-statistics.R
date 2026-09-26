@@ -465,16 +465,14 @@ test_that("Anderson-Darling applies the case-3 normal modification", {
 test_that("goodness-of-fit tests reject a badly misfit sample", {
   set.seed(4)
   heavy <- rexp(200)                      # not normal
-  # Both statistics land beyond the largest tabulated critical value, so the
-  # p-value is clamped at the table floor (0.001 for Lilliefors, 0.01 for
-  # Anderson-Darling) and flagged. Asserting a strictly smaller p-value would
-  # be asserting something the tables cannot express.
+  # the normal-null p-values are nortest's formulas, not table clamps
   li <- lilliefors_test(heavy, dist = "norm")
-  expect_equal(li$p_value, 0.001)
-  expect_identical(li$extra$p_bounded, "lower")
   ad <- anderson_darling(heavy, dist = "norm")
-  expect_equal(ad$p_value, 0.01)
-  expect_identical(ad$extra$p_bounded, "lower")
+  expect_lt(li$p_value, 0.001)
+  expect_lt(ad$p_value, 0.001)
+  # nortest::lillie.test(heavy) and nortest::ad.test(heavy)
+  expect_equal(li$p_value, 2.6374830957275606e-17, tolerance = 1e-10)
+  expect_equal(ad$p_value, 3.7e-24)
   # ...and do not reject when the fit is right.
   set.seed(5)
   expect_gt(lilliefors_test(rnorm(200), dist = "norm")$p_value, 0.05)
@@ -485,4 +483,42 @@ test_that("degenerate and invalid inputs error rather than return nonsense", {
   expect_error(anderson_darling(rep(1, 20), dist = "norm"), "zero variance")
   expect_error(lilliefors_test(rep(1, 20), dist = "norm"), "zero variance")
   expect_error(anderson_darling(c(-1, 2, 3), dist = "expon"), "non-negative")
+})
+
+test_that("statistics battery matches base R, nortest, irr and psych", {
+  x <- c(5.1, 6.3, 4.8, 7.2, 5.9, 6.6, 5.4, 6.0, 5.5, 6.8)
+  y <- c(4.2, 5.0, 3.9, 5.8, 4.4, 4.9, 5.3, 4.1, 4.6, 5.2)
+  z <- c(6.1, 5.2, 6.9, 7.4, 6.0, 5.8, 7.1, 6.6, 6.2, 6.4)
+  # cor.test(method = "spearman") exact (AS 89) p; wilcox.test exact p
+  expect_equal(spearman_correlation(x, z)$p_value, 0.86475352880452594, tolerance = 1e-12)
+  mw <- mann_whitney_u(x, y)
+  expect_equal(mw$p_value, 0.0015046872632011952, tolerance = 1e-12)
+  expect_equal(mw$effect_size, 2 * 90 / 100 - 1)
+  # binom.test(5, 18): the statistic is the discordant count b
+  mc <- mcnemar_test(rbind(c(12, 5), c(13, 9)), exact = TRUE)
+  expect_equal(mc$test_statistic, 5)
+  expect_equal(mc$p_value, 0.096252441406250014, tolerance = 1e-12)
+  # nortest::ad.test and lillie.test p-values
+  expect_equal(anderson_darling(x)$p_value, 0.96933659577224474, tolerance = 1e-12)
+  lf <- lilliefors_test(x)
+  expect_equal(lf$test_statistic, 0.1239910911322597, tolerance = 1e-12)
+  expect_equal(lf$p_value, 0.93376194173627036, tolerance = 1e-12)
+  # D'Agostino (1990) K^2 from its moment formulas (the n-denominator
+  # variance), as scipy.stats.normaltest
+  expect_equal(dagostino_pearson(c(x, y))$test_statistic, 0.745242299228, tolerance = 1e-10)
+  # irr::kappa2 z and p; psych::cohen.kappa interval
+  r1 <- c(1, 2, 3, 1, 2, 3, 1, 1, 2, 3, 3, 2)
+  r2 <- c(1, 2, 3, 2, 2, 3, 1, 1, 3, 3, 2, 2)
+  kp <- cohens_kappa(r1, r2)
+  expect_equal(kp$estimate, 0.625, tolerance = 1e-14)
+  expect_equal(kp$test_statistic, 3.09426373877638, tolerance = 1e-12)
+  expect_equal(kp$p_value, 0.00197302008751898, tolerance = 1e-10)
+  expect_equal(kp$ci_lower, 0.2568693, tolerance = 1e-6)
+  # fisher.test estimate and interval, solved to machine precision
+  fe <- fisher_exact_test(rbind(c(12, 5), c(3, 9)))
+  expect_equal(fe$estimate, 6.654201, tolerance = 1e-4)
+  expect_equal(fe$ci_lower, 1.076137, tolerance = 1e-4)
+  expect_equal(fe$extra$sample_odds_ratio, 7.2)
+  expect_equal(chi2_independence(rbind(c(12, 5, 7), c(3, 9, 6), c(8, 4, 10)))$test_statistic,
+               8.3659786268481913, tolerance = 1e-12)
 })

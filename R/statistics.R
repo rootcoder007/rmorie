@@ -539,13 +539,13 @@ mcnemar_test <- function(contingency_table, exact = FALSE) {
   n <- sum(tab)
   if (exact) {
     if ((b + c) > 0) {
-      p <- stats::binom.test(min(b, c), b + c, 0.5)$p.value
-      chi2 <- b + c
+      p <- stats::binom.test(b, b + c, 0.5)$p.value
+      chi2 <- b  # binom.test(b, b + c): successes among discordant pairs
     } else { p <- 1
     chi2 <- 0 }
   } else {
     chi2 <- if ((b + c) > 0) (abs(b - c) - 1)^2 / (b + c) else 0
-    p <- if ((b + c) > 0) 1 - stats::pchisq(chi2, 1) else 1
+    p <- if ((b + c) > 0) stats::pchisq(chi2, 1, lower.tail = FALSE) else 1
   }
   .stat_result(
     method = paste0("McNemar's test", if (exact) " (exact)" else ""),
@@ -789,7 +789,7 @@ mann_whitney_u <- function(x, y, alternative = "two.sided") {
   u <- unname(wt$statistic)
   nx <- length(x)
   ny <- length(y)
-  r_rb <- if (nx * ny > 0) 1 - 2 * u / (nx * ny) else 0
+  r_rb <- if (nx * ny > 0) 2 * u / (nx * ny) - 1 else 0
   .stat_result(
     method = "Mann-Whitney U test",
     test_statistic = u, p_value = wt$p.value,
@@ -974,7 +974,8 @@ dagostino_pearson <- function(x) {
   if (n < 8L)
     return(.stat_result("D'Agostino-Pearson test", NA, NA, df = 2, n = n))
   # Skewness Z (D'Agostino 1970)
-  g1 <- mean((x - mean(x))^3) / (sd(x))^3
+  m2 <- mean((x - mean(x))^2)
+  g1 <- mean((x - mean(x))^3) / m2^1.5
   Y <- g1 * sqrt((n + 1) * (n + 3) / (6 * (n - 2)))
   beta2 <- 3 * (n^2 + 27 * n - 70) * (n + 1) * (n + 3) /
     ((n - 2) * (n + 5) * (n + 7) * (n + 9))
@@ -983,7 +984,7 @@ dagostino_pearson <- function(x) {
   alpha <- sqrt(2 / (W2 - 1))
   Z1 <- delta * log(Y / alpha + sqrt((Y / alpha)^2 + 1))
   # Kurtosis Z
-  g2 <- mean((x - mean(x))^4) / (sd(x))^4 - 3
+  g2 <- mean((x - mean(x))^4) / m2^2 - 3
   E_g2 <- -6 / (n + 1)
   var_g2 <- 24 * n * (n - 2) * (n - 3) / ((n + 1)^2 * (n + 3) * (n + 5))
   x_g2 <- (g2 - E_g2) / sqrt(var_g2)
@@ -991,11 +992,10 @@ dagostino_pearson <- function(x) {
     sqrt(6 * (n + 3) * (n + 5) / (n * (n - 2) * (n - 3)))
   A <- 6 + 8 / sqrt_b1_g2 *
     (2 / sqrt_b1_g2 + sqrt(1 + 4 / sqrt_b1_g2^2))
-  Z2 <- ((1 - 2 / (9 * A)) -
-           ((1 - 2 / A) / (1 + x_g2 * sqrt(2 / (A - 4))))^(1 / 3)) /
-    sqrt(2 / (9 * A))
+  tt <- (1 - 2 / A) / (1 + x_g2 * sqrt(2 / (A - 4)))
+  Z2 <- ((1 - 2 / (9 * A)) - sign(tt) * abs(tt)^(1 / 3)) / sqrt(2 / (9 * A))
   K2 <- Z1^2 + Z2^2
-  p <- 1 - stats::pchisq(K2, df = 2)
+  p <- stats::pchisq(K2, df = 2, lower.tail = FALSE)
   .stat_result(
     method = "D'Agostino-Pearson test",
     test_statistic = K2, p_value = p, df = 2, n = n
@@ -1145,6 +1145,32 @@ dagostino_pearson <- function(x) {
 #' res$test_statistic
 #' anderson_darling(rexp(60), dist = "expon")$p_value
 #' @export
+#' Lilliefors normal-null p-value
+#'
+#' Dallal and Wilkinson (1986) below 0.1, Stephens' (1974) modified-statistic
+#' polynomials above, as nortest::lillie.test.
+#' @noRd
+.lillie_p_norm <- function(k, n) {
+  if (n <= 100) {
+    kd <- k
+    nd <- n
+  } else {
+    kd <- k * (n / 100)^0.49
+    nd <- 100
+  }
+  p <- exp(-7.01256 * kd^2 * (nd + 2.78019) + 2.99587 * kd * sqrt(nd + 2.78019) -
+    0.122119 + 0.974598 / sqrt(nd) + 1.67997 / nd)
+  if (p > 0.1) {
+    kk <- (sqrt(n) - 0.01 + 0.85 / sqrt(n)) * k
+    p <- if (kk <= 0.302) 1
+         else if (kk <= 0.5) 2.76773 - 19.828315 * kk + 80.709644 * kk^2 - 138.55152 * kk^3 + 81.218052 * kk^4
+         else if (kk <= 0.9) -4.901232 + 40.662806 * kk - 97.490286 * kk^2 + 94.029866 * kk^3 - 32.355711 * kk^4
+         else if (kk <= 1.31) 6.198765 - 19.558097 * kk + 23.186922 * kk^2 - 12.234627 * kk^3 + 2.423045 * kk^4
+         else 0
+  }
+  p
+}
+
 anderson_darling <- function(x, dist = c("norm", "expon")) {
   x <- .stat_validate(x)
   dist <- match.arg(dist)
@@ -1172,7 +1198,18 @@ anderson_darling <- function(x, dist = c("norm", "expon")) {
   i <- seq_len(n)
   a2 <- -n - mean((2 * i - 1) * (lf + lsf))
   astar <- a2 * mult
-  pr <- .gof_p_from_crit(astar, .GOF_AD_CRIT[[dist]], .GOF_AD_ALPHA)
+  pr <- if (dist == "norm") {
+    # D'Agostino and Stephens (1986, Table 4.9), as nortest::ad.test
+    aa <- astar
+    list(p = if (aa < 0.2) 1 - exp(-13.436 + 101.14 * aa - 223.73 * aa^2)
+             else if (aa < 0.34) 1 - exp(-8.318 + 42.796 * aa - 59.938 * aa^2)
+             else if (aa < 0.6) exp(0.9177 - 4.279 * aa - 1.38 * aa^2)
+             else if (aa < 10) exp(1.2937 - 5.709 * aa + 0.0186 * aa^2)
+             else 3.7e-24,
+         bounded = NULL)
+  } else {
+    .gof_p_from_crit(astar, .GOF_AD_CRIT[[dist]], .GOF_AD_ALPHA)
+  }
   .stat_result(
     method = sprintf("Anderson-Darling test (%s)", dist),
     test_statistic = astar, p_value = pr$p, n = n,
@@ -1236,7 +1273,11 @@ lilliefors_test <- function(x, dist = c("norm", "expon")) {
   # Both one-sided gaps: the EDF jumps at each order statistic, so the
   # supremum is attained just before or just at an observation.
   d <- max(pmax(i / n - f, f - (i - 1) / n))
-  pr <- .gof_p_from_crit(d, .gof_lillie_crit(n, dist), .GOF_LILLIE_ALPHA)
+  pr <- if (dist == "norm") {
+    list(p = .lillie_p_norm(d, n), bounded = NULL)
+  } else {
+    .gof_p_from_crit(d, .gof_lillie_crit(n, dist), .GOF_LILLIE_ALPHA)
+  }
   .stat_result(
     method = sprintf("Lilliefors test (%s)", dist),
     test_statistic = d, p_value = pr$p, n = n,
@@ -1335,11 +1376,18 @@ fisher_exact_test <- function(contingency_table, alternative = "two.sided") {
   if (!all(dim(tab) == c(2, 2)))
     stop("Fisher exact test requires a 2x2 table.")
   ft <- stats::fisher.test(tab, alternative = alternative)
-  or_val <- unname(ft$estimate)
+  # conditional MLE and exact interval solved to machine precision
+  # (fisher.test stops its uniroot about 1e-4 short): two-sided 95%, or
+  # the one-sided bound as the matching limit of the two-sided 90%
+  cond <- .morie_fisher_conditional(tab, if (alternative == "two.sided") 0.95 else 0.90)
+  or_val <- cond[1]
+  ci <- switch(alternative, greater = c(cond[2], Inf), less = c(0, cond[3]), cond[2:3])
   .stat_result(
     method = "Fisher's exact test",
     test_statistic = or_val, p_value = ft$p.value,
-    estimate = or_val, n = as.integer(sum(tab))
+    ci_lower = ci[1], ci_upper = ci[2],
+    estimate = or_val, n = as.integer(sum(tab)),
+    extra = list(sample_odds_ratio = tab[1, 1] * tab[2, 2] / (tab[1, 2] * tab[2, 1]))
   )
 }
 
@@ -1377,10 +1425,20 @@ cohens_kappa <- function(rater1, rater2, confidence = 0.95) {
   cs <- colSums(mat) / n
   p_e <- sum(rs * cs)
   kap <- if ((1 - p_e) > 0) (p_o - p_e) / (1 - p_e) else 0
-  se <- if ((1 - p_e) > 0 && n > 0) sqrt(p_e / (n * (1 - p_e)^2)) else 0
+  # Fleiss, Cohen and Everitt (1969): the null variance for the z test
+  # (as irr::kappa2) and the non-null variance for the interval (as
+  # psych::cohen.kappa)
+  P <- mat / n
+  den <- n * (1 - p_e)^2
+  v0 <- if (den > 0) (p_e + p_e^2 - sum(rs * cs * (rs + cs))) / den else 0
+  off <- P * outer(cs, rs, "+")^2
+  diag(off) <- 0
+  v1 <- if (den > 0) (sum(diag(P) * (1 - (rs + cs) * (1 - kap))^2) +
+    (1 - kap)^2 * sum(off) - (kap - p_e * (1 - kap))^2) / den else 0
+  se <- sqrt(max(v1, 0))
   zcrit <- stats::qnorm((1 + confidence) / 2)
-  z_stat <- if (se > 0) kap / se else 0
-  p_val <- if (se > 0) 2 * stats::pnorm(-abs(z_stat)) else 1
+  z_stat <- if (v0 > 0) kap / sqrt(v0) else 0
+  p_val <- if (v0 > 0) 2 * stats::pnorm(-abs(z_stat)) else 1
   .stat_result(
     method = "Cohen's kappa",
     test_statistic = z_stat, p_value = p_val,
