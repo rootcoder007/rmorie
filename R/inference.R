@@ -128,6 +128,74 @@ morie_chi_square_test <- function(observed, expected = NULL) {
   )
 }
 
+
+#' Conditional MLE and exact interval of a 2x2 odds ratio
+#'
+#' The noncentral hypergeometric machinery of \code{stats::fisher.test}
+#' (Cornfield 1956), solved by bisection to machine precision (fisher.test
+#' stops its \code{uniroot} near 1e-4).
+#' @param tab 2x2 integer table.
+#' @param conf_level Confidence level.
+#' @return numeric \code{c(estimate, lower, upper)}.
+#' @keywords internal
+#' @noRd
+.morie_fisher_conditional <- function(tab, conf_level = 0.95) {
+  tab <- round(as.matrix(tab))
+  x <- tab[1, 1]
+  m <- sum(tab[, 1])
+  n <- sum(tab[, 2])
+  k <- sum(tab[1, ])
+  lo <- max(0, k - n)
+  hi <- min(k, m)
+  s <- lo:hi
+  ld <- stats::dhyper(s, m, n, k, log = TRUE)
+  dn <- function(p) {
+    d <- ld + log(p) * s
+    d <- exp(d - max(d))
+    d / sum(d)
+  }
+  mn <- function(p) if (p == 0) lo else if (is.infinite(p)) hi else sum(s * dn(p))
+  pn <- function(q, p, upper = FALSE) {
+    if (upper) sum(dn(p)[s >= q]) else sum(dn(p)[s <= q])
+  }
+  bis <- function(f, a, b) {
+    fa <- f(a)
+    for (i in seq_len(300)) {
+      mid <- (a + b) / 2
+      fm <- f(mid)
+      if ((fm > 0) == (fa > 0)) {
+        a <- mid
+        fa <- fm
+      } else {
+        b <- mid
+      }
+      if (b - a <= 1e-16) break
+    }
+    (a + b) / 2
+  }
+  eps <- .Machine$double.eps
+  mle <- if (x == lo) 0 else if (x == hi) Inf else {
+    mu <- mn(1)
+    if (mu > x) bis(function(t) mn(t) - x, 0, 1)
+    else if (mu < x) 1 / bis(function(t) mn(1 / t) - x, eps, 1)
+    else 1
+  }
+  alpha <- (1 - conf_level) / 2
+  up <- if (x == hi) Inf else {
+    p <- pn(x, 1)
+    if (p < alpha) bis(function(t) pn(x, t) - alpha, 0, 1)
+    else if (p > alpha) 1 / bis(function(t) pn(x, 1 / t) - alpha, eps, 1)
+    else 1
+  }
+  low <- if (x == lo) 0 else {
+    p <- pn(x, 1, TRUE)
+    if (p > alpha) bis(function(t) pn(x, t, TRUE) - alpha, 0, 1)
+    else if (p < alpha) 1 / bis(function(t) pn(x, 1 / t, TRUE) - alpha, eps, 1)
+    else 1
+  }
+  c(mle, low, up)
+}
+
 #' Fisher's exact test for 2x2 tables
 #'
 #' @param table_2x2 A 2x2 matrix or data frame of counts.
@@ -141,9 +209,13 @@ morie_fisher_exact_test <- function(table_2x2,
                               alternative = c("two.sided", "greater", "less")) {
   alternative <- match.arg(alternative)
   result <- stats::fisher.test(as.matrix(table_2x2), alternative = alternative)
+  ## estimate and two-sided interval from the tight conditional solver
+  ## (fisher.test's own stop about 1e-4 short); one-sided alternatives keep
+  ## fisher.test's interval
+  cond <- .morie_fisher_conditional(table_2x2, 0.95)
   list(
-    odds_ratio = as.numeric(result$estimate),
-    ci = as.numeric(result$conf.int),
+    odds_ratio = cond[1],
+    ci = if (alternative == "two.sided") cond[2:3] else as.numeric(result$conf.int),
     p_value = result$p.value
   )
 }
@@ -328,6 +400,9 @@ morie_proportion_ci <- function(successes, n, alpha = 0.05,
 #'
 #' @param table_2x2 A 2x2 matrix: rows are treatment, columns are outcome.
 #' @param alpha Significance level; sets the width of the interval,
+#' @param method "exact" (default): the exact conditional interval of
+#'   fisher.test, solved to machine precision; "woolf": the log-scale Wald
+#'   interval with a half added to every cell when one is empty.
 #'   which is Woolf's on the log scale (Haldane-Anscombe corrected when
 #'   a cell is empty).
 #' @return Named list: `odds_ratio` (the sample odds ratio), `ci_lower`,
@@ -336,7 +411,8 @@ morie_proportion_ci <- function(successes, n, alpha = 0.05,
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
 #' @export
-morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05) {
+morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05, method = c("exact", "woolf")) {
+  method <- match.arg(method)
   m <- as.matrix(table_2x2)
   if (!identical(dim(m), c(2L, 2L))) {
     stop("table_2x2 must be 2 by 2; got ",
@@ -375,10 +451,15 @@ morie_odds_ratio_ci <- function(table_2x2, alpha = 0.05) {
   se_log_or <- sqrt(1 / aa + 1 / bb + 1 / ccc + 1 / dd)
   z <- stats::qnorm(1 - alpha / 2)
   result <- stats::fisher.test(round(m))
+  ci <- if (method == "exact") {
+    .morie_fisher_conditional(m, 1 - alpha)[2:3]
+  } else {
+    exp(log_or + c(-1, 1) * z * se_log_or)
+  }
   list(
     odds_ratio = as.numeric(or_point),
-    ci_lower = exp(log_or - z * se_log_or),
-    ci_upper = exp(log_or + z * se_log_or),
+    ci_lower = ci[1],
+    ci_upper = ci[2],
     p_value = result$p.value
   )
 }
@@ -493,7 +574,11 @@ morie_omega_squared <- function(f_stat, df_between, df_within, n) {
 #' morie_spearman_rho(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_spearman_rho <- function(x, y) {
-  result <- stats::cor.test(x, y, method = "spearman", exact = FALSE)
+  ## cor.test's own default: the exact / Edgeworth (AS 89) p-value for
+  ## untied data with n < 1290, the t approximation otherwise
+  ok <- stats::complete.cases(x, y)
+  exact <- sum(ok) < 1290 && !anyDuplicated(x[ok]) && !anyDuplicated(y[ok])
+  result <- stats::cor.test(x, y, method = "spearman", exact = exact)
   list(rho = as.numeric(result$estimate), p_value = result$p.value)
 }
 

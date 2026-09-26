@@ -137,3 +137,22 @@ test_that("morie_sample_size_logistic matches Hsieh et al. (1998) as in powerMed
   or <- (0.35 / 0.65) / (0.2 / 0.8)
   expect_identical(morie_sample_size_logistic(0.2, or = or), 276L)
 })
+
+test_that("Fisher conditional estimate and exact interval solve their equations (parity with morie Python)", {
+  tab <- matrix(c(12, 7, 5, 14), 2)
+  f <- morie_fisher_exact_test(tab)
+  expect_equal(f$odds_ratio, 4.586730434376707, tolerance = 1e-12)
+  expect_equal(f$ci, c(1.0063298166860712, 24.26448292328222), tolerance = 1e-12)
+  o <- morie_odds_ratio_ci(tab)
+  expect_equal(c(o$ci_lower, o$ci_upper), c(1.0063298166860712, 24.26448292328222), tolerance = 1e-12)
+  w <- morie_odds_ratio_ci(tab, method = "woolf")
+  expect_equal(c(w$ci_lower, w$ci_upper), exp(log(4.8) + c(-1, 1) * stats::qnorm(0.975) *
+                                                 sqrt(1 / 12 + 1 / 5 + 1 / 7 + 1 / 14)), tolerance = 1e-14)
+})
+
+test_that("morie_spearman_rho uses the exact p-value for untied data, as cor.test", {
+  x <- c(3, 1, 4, 1.5, 5, 9, 2.6, 6)
+  y <- c(2, 7, 1, 8, 2.8, 1.8, 2.9, 4.5)
+  expect_equal(morie_spearman_rho(x, y)$p_value, stats::cor.test(x, y, method = "spearman")$p.value,
+               tolerance = 1e-14)
+})
