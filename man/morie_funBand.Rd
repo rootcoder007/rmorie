@@ -45,7 +45,10 @@ morie_functional_band(
 \item{log_lambda_range}{See Usage.}
 }
 \value{
-A list with \code{estimate}, \code{fitted}, \code{lower}, \code{upper}, \code{half_width}, \code{residuals}, \code{diag_A}, \code{posterior_variance}, \code{sigma2}, \code{sigma}, \code{lambda}, \code{gcv}, \code{edf_signal}, \code{edf_error}, \code{rss}, \code{multiplier}, \code{quantile}, \code{coverage}, \code{alpha}, \code{n}, \code{x}, \code{method}, \code{note}.
+A list with \code{estimate}, \code{fitted}, \code{lower}, \code{upper}, \code{half_width},
+\code{residuals}, \code{diag_A}, \code{posterior_variance}, \code{sigma2}, \code{sigma},
+\code{lambda}, \code{gcv}, \code{edf_signal}, \code{edf_error}, \code{rss}, \code{multiplier},
+\code{quantile}, \code{coverage}, \code{alpha}, \code{n}, \code{x}, \code{method}, \code{note}.
 }
 \description{
 Smoothing-spline fit with Wahba's Bayesian confidence intervals

@@ -23,27 +23,84 @@
 # identified.
 
 # psi_zeta: a bounded real characteristic function supported on
-# [-1, 1] -- the book's example is the fourfold convolution of the
-# uniform density with itself, whose characteristic function is
-# sinc^4. Compact support in tau is the point: it stops the integrand
-# being evaluated where the denominator has died.
+# [-1, 1] -- the book's example (Sec. 5.1.3, assumption PHU7) is the
+# fourfold convolution of the U[-1/4, 1/4] density with itself, a cubic
+# B-spline on [-1, 1] whose Fourier transform is sinc^4 >= 0.  Divided by
+# its value 4/3 at the origin it is a characteristic function with
+# psi_zeta(0) = 1.  Compact support in tau is the point: it stops the
+# integrand being evaluated where the denominator has died.
 #' Psi_zeta: a bounded real characteristic function supported on
 #'
 #' \[-1, 1\] -- the book's example is the fourfold convolution of the
-#' uniform density with itself, whose characteristic function is sinc^4.
-#' Compact support in tau is the point: it stops the integrand being
-#' evaluated where the denominator has died.
+#' U\[-1/4, 1/4\] density with itself, a cubic B-spline on \[-1, 1\]
+#' whose Fourier transform is sinc^4.  It is divided by its value 4/3 at
+#' the origin so that psi_zeta(0) = 1.  Compact support in tau is the
+#' point: it stops the integrand being evaluated where the denominator
+#' has died.
 #'
 #' @param u Numeric; passed to \code{abs}.
+#' @param kernel \code{"fourfold"} (the book's characteristic function,
+#'   default) or \code{"flattop"} (the indicator of [-1, 1]).
 #' @return The value of \code{ifelse}.
 #' @export
 #' @examples
-#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' x <- c(-1, -0.5, 0, 0.25, 0.5, 1)
 #' res <- .morie_hrz_smoothing_cf(u = x)
 #' res
-.morie_hrz_smoothing_cf <- function(u) {
-  s <- ifelse(u == 0, 1, (sin(u / 4) / (u / 4))^4)
-  ifelse(abs(u) <= 1, s, 0)
+.morie_hrz_smoothing_cf <- function(u, kernel = "fourfold") {
+  .morie_hrz_check_kernel(kernel)
+  if (kernel == "flattop") return(ifelse(abs(u) <= 1, 1, 0))
+  x <- 2 * pmin(abs(u), 1) + 2
+  ih <- (x^3 - 4 * (x - 1)^3 + 6 * (x - 2)^3 - 4 * pmax(x - 3, 0)^3) / 6
+  ifelse(abs(u) < 1, 1.5 * ih, 0)
+}
+
+#' Default bandwidths for the panel deconvolution estimators
+#'
+#' sigma_eps is estimated as sd(eta) / sqrt(2). f_U divides by
+#' |psi_eta|^(1/2), so its cut-off follows the noise-amplification
+#' criterion, nu_U = sigma_eps / sqrt(log n); f_eps needs no division and
+#' uses the Silverman rate, nu_eps = 0.5 sigma_eps N^(-1/5), N the number
+#' of differences. The psi_zeta kernel has variance 12 nu^2, hence both
+#' are far smaller than (log n)^(-1/2).
+#'
+#' @param eta Numeric vector of within-unit differences.
+#' @param n Number of individuals.
+#' @return Named numeric vector \code{c(nu_U, nu_eps)}.
+#' @keywords internal
+#' @noRd
+.morie_hrz_check_kernel <- function(kernel) {
+  if (!(is.character(kernel) && length(kernel) == 1L &&
+          kernel %in% c("fourfold", "flattop"))) {
+    stop("kernel must be one of 'fourfold', 'flattop'.", call. = FALSE)
+  }
+  kernel
+}
+
+.morie_hrz_default_bandwidths <- function(eta, n, kernel = "fourfold", W = NULL) {
+  N <- length(eta)
+  if (N < 2L) stop("need at least two differences to set a bandwidth", call. = FALSE)
+  sig <- stats::sd(eta) / sqrt(2)
+  if (!(sig > 0)) stop("the differenced errors have zero spread", call. = FALSE)
+  if (.morie_hrz_check_kernel(kernel) == "fourfold") {
+    return(c(nu_U = sig / sqrt(log(n)), nu_eps = 0.5 * sig * N^-0.2))
+  }
+  # flat-top: f_eps cut-off from the noise amplification of the square
+  # root, nu = sigma_eps / sqrt(log n); f_U cut-off where |psi_nW| first
+  # reaches its sampling noise floor 2 / sqrt(N_W)
+  if (is.null(W)) stop("the flat-top f_U bandwidth needs the W residuals", call. = FALSE)
+  NW <- length(W)
+  floor_ <- 2 / sqrt(NW)
+  step <- 0.02 / stats::sd(W)
+  tt <- 1500 * step
+  for (k in 1:1500) {
+    t <- k * step
+    if (Mod(complex(real = mean(cos(t * W)), imaginary = mean(sin(t * W)))) < floor_) {
+      tt <- t
+      break
+    }
+  }
+  c(nu_U = 1 / tt, nu_eps = sig / sqrt(log(n)))
 }
 
 #' .morie_hrz_panel_residuals
@@ -121,10 +178,11 @@
 #' @param nu_U Numeric; combined arithmetically in the body.
 #' @param nu_eps Numeric; combined arithmetically in the body.
 #' @param n_tau Passed to \code{seq}. Defaults to \code{2001L}.
+#' @param kernel \code{"fourfold"} or \code{"flattop"} psi_zeta.
 #' @return A list with \code{f_U}, \code{f_eps}.
 #' @export
 .morie_hrz_deconvolve_pair <- function(w, eta, grid_u, grid_z, nu_U, nu_eps,
-                                       n_tau = 2001L) {
+                                       n_tau = 2001L, kernel = "fourfold") {
   if (nu_U <= 0 || nu_eps <= 0) {
     stop(sprintf("bandwidths must be positive, got (%g, %g).", nu_U, nu_eps),
       call. = FALSE
@@ -136,7 +194,7 @@
   }
   tau_e <- seq(-1 / nu_eps, 1 / nu_eps, length.out = n_tau)
   psi_eta_e <- rowMeans(exp(1i * outer(tau_e, eta)))
-  integ_e <- sqrt(Mod(psi_eta_e)) * .morie_hrz_smoothing_cf(nu_eps * tau_e)
+  integ_e <- sqrt(Mod(psi_eta_e)) * .morie_hrz_smoothing_cf(nu_eps * tau_e, kernel)
   f_eps <- vapply(grid_z, function(z) {
     Re(trapz(tau_e, integ_e * exp(-1i * tau_e * z))) / (2 * pi)
   }, numeric(1))
@@ -145,7 +203,7 @@
   psi_w_u <- rowMeans(exp(1i * outer(tau_u, w)))
   psi_eta_u <- rowMeans(exp(1i * outer(tau_u, eta)))
   root <- sqrt(Mod(psi_eta_u))
-  weight <- .morie_hrz_smoothing_cf(nu_U * tau_u)
+  weight <- .morie_hrz_smoothing_cf(nu_U * tau_u, kernel)
   integ_u <- ifelse(weight > 0, psi_w_u * weight / pmax(root, 1e-300), 0)
   f_u <- vapply(grid_u, function(u) {
     Re(trapz(tau_u, integ_u * exp(-1i * tau_u * u))) / (2 * pi)
@@ -178,9 +236,12 @@
 #' @param y numeric matrix (n, T) of responses.
 #' @param x numeric array (n, T, d) or matrix (n*T, d).
 #' @param beta root-n consistent coefficients.
-#' @param nu_U,nu_eps smoothing bandwidths; \code{(log n)^(-1/2)}
-#'   when NULL.
+#' @param nu_U,nu_eps smoothing bandwidths; sigma_eps / sqrt(log n) for f_U and 0.5 sigma_eps N^(-1/5) for f_eps when NULL, sigma_eps = sd(eta) / sqrt(2).
 #' @param grid_u,grid_z evaluation points.
+#' @param kernel \code{"fourfold"} (default; the book's characteristic
+#'   function, assumption PHU7) or \code{"flattop"} (indicator of [-1, 1]:
+#'   outside PHU7, higher-order bias, 2-3 times smaller errors in
+#'   simulation). Each has its own default bandwidths.
 #' @return list: grid_u, f_U, grid_z, f_eps, psi_eps_from_root,
 #'   symmetry_required, nu_U, nu_eps, fastest_possible_rate,
 #'   asymptotics_in, n, T, d, method.
@@ -195,14 +256,16 @@
 #' morie_panel_deconvolution(y, x, c(1, -0.5))$symmetry_required
 #' @export
 morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
-                                      grid_u = NULL, grid_z = NULL) {
+                                      grid_u = NULL, grid_z = NULL,
+                                      kernel = "fourfold") {
+  .morie_hrz_check_kernel(kernel)
   r <- .morie_hrz_panel_residuals(y, x, beta)
   if (r$n < 10L) {
     stop(sprintf("need at least 10 individuals, got %d.", r$n), call. = FALSE)
   }
-  default <- log(r$n)^-0.5
-  nu1 <- if (is.null(nu_U)) default else as.numeric(nu_U)
-  nu2 <- if (is.null(nu_eps)) default else as.numeric(nu_eps)
+  bw <- .morie_hrz_default_bandwidths(r$eta, r$n, kernel, r$W)
+  nu1 <- if (is.null(nu_U)) bw[["nu_U"]] else as.numeric(nu_U)
+  nu2 <- if (is.null(nu_eps)) bw[["nu_eps"]] else as.numeric(nu_eps)
   gu <- if (is.null(grid_u)) {
     seq(stats::quantile(r$W, 0.05), stats::quantile(r$W, 0.95),
       length.out = 61L
@@ -217,8 +280,9 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
   } else {
     as.numeric(grid_z)
   }
-  d <- .morie_hrz_deconvolve_pair(r$W, r$eta, gu, gz, nu1, nu2)
+  d <- .morie_hrz_deconvolve_pair(r$W, r$eta, gu, gz, nu1, nu2, kernel = kernel)
   list(
+    kernel = kernel,
     grid_u = gu, f_U = d$f_U, grid_z = gz, f_eps = d$f_eps,
     psi_eps_from_root = TRUE, symmetry_required = TRUE,
     nu_U = nu1, nu_eps = nu2,
@@ -248,8 +312,12 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #' @param y numeric matrix (n, T) of responses.
 #' @param x numeric array (n, T, d) or matrix (n*T, d).
 #' @param beta root-n consistent coefficients.
-#' @param nu_U smoothing bandwidth; \code{(log n)^(-1/2)} when NULL.
+#' @param nu_U smoothing bandwidth; sigma_eps / sqrt(log n) when NULL, sigma_eps = sd(eta) / sqrt(2).
 #' @param grid evaluation points.
+#' @param kernel \code{"fourfold"} (default; the book's characteristic
+#'   function, assumption PHU7) or \code{"flattop"} (indicator of [-1, 1]:
+#'   outside PHU7, higher-order bias, 2-3 times smaller errors in
+#'   simulation). Each has its own default bandwidths.
 #' @return list: grid, f_U, nu_U, cutoff, regularisation_required,
 #'   n, T, method.
 #' @references Horowitz, Sec. 5.2.1, eq. (5.26).
@@ -260,12 +328,14 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #' x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
 #' morie_smoothed_fU(matrix(rnorm(n * tt), n, tt), x, c(1, -0.5))$cutoff
 #' @export
-morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL) {
+morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL,
+                              kernel = "fourfold") {
+  .morie_hrz_check_kernel(kernel)
   r <- .morie_hrz_panel_residuals(y, x, beta)
   if (r$n < 10L) {
     stop(sprintf("need at least 10 individuals, got %d.", r$n), call. = FALSE)
   }
-  nu1 <- if (is.null(nu_U)) log(r$n)^-0.5 else as.numeric(nu_U)
+  nu1 <- if (is.null(nu_U)) .morie_hrz_default_bandwidths(r$eta, r$n, kernel, r$W)[["nu_U"]] else as.numeric(nu_U)
   if (nu1 <= 0) {
     stop(sprintf("nu_U must be positive, got %g.", nu1),
       call. = FALSE
@@ -278,8 +348,9 @@ morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL) {
   } else {
     as.numeric(grid)
   }
-  d <- .morie_hrz_deconvolve_pair(r$W, r$eta, g, g[1L], nu1, nu1)
+  d <- .morie_hrz_deconvolve_pair(r$W, r$eta, g, g[1L], nu1, nu1, kernel = kernel)
   list(
+    kernel = kernel,
     grid = g, f_U = d$f_U, nu_U = nu1, cutoff = 1 / nu1,
     regularisation_required = TRUE, n = r$n, T = r$T,
     method = "(5.26): psi_zeta compactly supported, so the ratio is never formed past the cut-off"
@@ -299,8 +370,12 @@ morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL) {
 #' @param y numeric matrix (n, T) of responses.
 #' @param x numeric array (n, T, d) or matrix (n*T, d).
 #' @param beta root-n consistent coefficients.
-#' @param nu_U,nu_eps the two bandwidths.
+#' @param nu_U,nu_eps the two bandwidths; sigma_eps / sqrt(log n) for f_U and 0.5 sigma_eps N^(-1/5) for f_eps when NULL, sigma_eps = sd(eta) / sqrt(2).
 #' @param grid_u,grid_z evaluation points.
+#' @param kernel \code{"fourfold"} (default; the book's characteristic
+#'   function, assumption PHU7) or \code{"flattop"} (indicator of [-1, 1]:
+#'   outside PHU7, higher-order bias, 2-3 times smaller errors in
+#'   simulation). Each has its own default bandwidths.
 #' @return list: grid_u, f_U, grid_z, f_eps, nu_U, nu_eps,
 #'   f_eps_requires_division, f_U_requires_division,
 #'   bandwidths_independent, n, T, method.
@@ -315,14 +390,16 @@ morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL) {
 #' morie_panel_densities(y, x, c(1, -0.5))$f_U_requires_division
 #' @export
 morie_panel_densities <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
-                                  grid_u = NULL, grid_z = NULL) {
+                                  grid_u = NULL, grid_z = NULL,
+                                  kernel = "fourfold") {
+  .morie_hrz_check_kernel(kernel)
   r <- .morie_hrz_panel_residuals(y, x, beta)
   if (r$n < 10L) {
     stop(sprintf("need at least 10 individuals, got %d.", r$n), call. = FALSE)
   }
-  default <- log(r$n)^-0.5
-  nu1 <- if (is.null(nu_U)) default else as.numeric(nu_U)
-  nu2 <- if (is.null(nu_eps)) default else as.numeric(nu_eps)
+  bw <- .morie_hrz_default_bandwidths(r$eta, r$n, kernel, r$W)
+  nu1 <- if (is.null(nu_U)) bw[["nu_U"]] else as.numeric(nu_U)
+  nu2 <- if (is.null(nu_eps)) bw[["nu_eps"]] else as.numeric(nu_eps)
   gu <- if (is.null(grid_u)) {
     seq(stats::quantile(r$W, 0.05), stats::quantile(r$W, 0.95),
       length.out = 61L
@@ -337,8 +414,9 @@ morie_panel_densities <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
   } else {
     as.numeric(grid_z)
   }
-  d <- .morie_hrz_deconvolve_pair(r$W, r$eta, gu, gz, nu1, nu2)
+  d <- .morie_hrz_deconvolve_pair(r$W, r$eta, gu, gz, nu1, nu2, kernel = kernel)
   list(
+    kernel = kernel,
     grid_u = gu, f_U = d$f_U, grid_z = gz, f_eps = d$f_eps,
     nu_U = nu1, nu_eps = nu2,
     f_eps_requires_division = FALSE, f_U_requires_division = TRUE,

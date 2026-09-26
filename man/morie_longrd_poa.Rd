@@ -17,7 +17,15 @@ morie_longrd_poa(reads, match = 1, mismatch = -1, gap = -2, sort_reads = TRUE)
 The consensus sequence.
 }
 \description{
-The first read is the seed. Each later read is aligned to the current consensus and every aligned column votes; the consensus is recomputed as the column-wise majority, which for a partial order graph built this way IS the heaviest path, because every node's weight is the number of reads passing through it. Progressive construction depends on the order the reads arrive. That is a property of the method and not an accident, so the reads are sorted first by default -- which does not make the answer order-INDEPENDENT, it makes it a function of the SET rather than of the sequence, and those are different guarantees.
+The first read is the seed. Each later read is aligned to the current
+consensus and every aligned column votes; the consensus is recomputed as the
+column-wise majority, which for a partial order graph built this way IS the
+heaviest path, because every node's weight is the number of reads passing
+through it. Progressive construction depends on the order the reads arrive.
+That is a property of the method and not an accident, so the reads are sorted
+first by default -- which does not make the answer order-INDEPENDENT, it makes
+it a function of the SET rather than of the sequence, and those are different
+guarantees.
 }
 \details{
 The first read is the seed. Each later read is aligned to the current

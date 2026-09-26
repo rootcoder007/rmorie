@@ -17,8 +17,9 @@ morie_ingest_statcan_cansim(
 
 \item{language}{One of \code{"eng"} or \code{"fra"}.}
 
-\item{refresh}{If \code{TRUE}, force \pkg{cansim} to re-download
-rather than using its on-disk cache.}
+\item{refresh}{Carried for interface compatibility: the native WDS
+fetch keeps no on-disk cache, so every call re-downloads and the
+argument has no effect.}
 
 \item{...}{Further arguments forwarded to
 \code{\link[cansim]{get_cansim}}.}

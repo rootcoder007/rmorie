@@ -4,22 +4,27 @@
 \alias{.morie_hrz_smoothing_cf}
 \title{Psi_zeta: a bounded real characteristic function supported on}
 \usage{
-.morie_hrz_smoothing_cf(u)
+.morie_hrz_smoothing_cf(u, kernel = "fourfold")
 }
 \arguments{
 \item{u}{Numeric; passed to \code{abs}.}
+
+\item{kernel}{\code{"fourfold"} (the book's characteristic function,
+default) or \code{"flattop"} (the indicator of \link{-1, 1}).}
 }
 \value{
 The value of \code{ifelse}.
 }
 \description{
 [-1, 1] -- the book's example is the fourfold convolution of the
-uniform density with itself, whose characteristic function is sinc^4.
-Compact support in tau is the point: it stops the integrand being
-evaluated where the denominator has died.
+U[-1/4, 1/4] density with itself, a cubic B-spline on [-1, 1]
+whose Fourier transform is sinc^4.  It is divided by its value 4/3 at
+the origin so that psi_zeta(0) = 1.  Compact support in tau is the
+point: it stops the integrand being evaluated where the denominator
+has died.
 }
 \examples{
-x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+x <- c(-1, -0.5, 0, 0.25, 0.5, 1)
 res <- .morie_hrz_smoothing_cf(u = x)
 res
 }

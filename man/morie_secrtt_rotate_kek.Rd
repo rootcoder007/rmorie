@@ -28,8 +28,8 @@ morie_secrtt_rotate_kek(
 }
 \value{
 List with \code{wrapped} (==\code{estimate}), \code{n},
-\code{records_reencrypted}, \code{kek_id}, \code{method},
-\code{note}.
+\code{records_reencrypted}, \code{kek_id}, \code{audit_log},
+\code{method}, \code{note}.
 }
 \description{
 The cheap rotation, and the reason the envelope exists.

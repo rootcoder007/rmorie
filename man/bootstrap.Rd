@@ -55,6 +55,5 @@ if (requireNamespace("boot", quietly = TRUE)) {
 }
 \seealso{
 \code{boot::boot}, \code{boot::boot.ci},
-\code{\link[=morie_boot_run]{morie_boot_run()}},
-  \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
+\code{\link[=morie_boot_run]{morie_boot_run()}}, \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
 }

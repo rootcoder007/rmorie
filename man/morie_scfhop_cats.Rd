@@ -17,7 +17,15 @@ morie_scfhop_cats(smiles, maxdist = 9L, scaling = "type")
 A numeric vector.
 }
 \description{
-Laid out pair-major, distance-minor, so entry \code{p * (maxdist + 1) + d} is the count of pairs of the p-th type combination exactly d bonds apart. Distance zero is an atom with itself, which is how an atom carrying two types registers at all. Scaling routes, all three defensible and all giving different answers, so the choice is the caller's. \code{type} divides each entry by the number of atoms carrying the two types, which is Schneider's scaling and stops a large molecule dominating simply by being large. \code{count} divides by the total pairs counted. \code{none} leaves raw counts, which is what you want if you intend to compare absolute frequencies.
+Laid out pair-major, distance-minor, so entry \code{p * (maxdist + 1) + d} is the
+count of pairs of the p-th type combination exactly d bonds apart. Distance
+zero is an atom with itself, which is how an atom carrying two types registers
+at all. Scaling routes, all three defensible and all giving different answers,
+so the choice is the caller's. \code{type} divides each entry by the number of
+atoms carrying the two types, which is Schneider's scaling and stops a large
+molecule dominating simply by being large. \code{count} divides by the total pairs
+counted. \code{none} leaves raw counts, which is what you want if you intend to
+compare absolute frequencies.
 }
 \details{
 Laid out pair-major, distance-minor, so entry

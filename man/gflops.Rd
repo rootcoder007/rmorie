@@ -19,7 +19,7 @@ gflops(tokens, depth, width, mlp_ratio = 4)
 list with gflops, tokens, depth, width, attention_share, note.
 }
 \description{
-attention: 4*T*d^2 + 2*T^2*d. mlp: 2*mlp_ratio*T*d^2. Per block
+attention: 4*T*d^2 + 2*T^2*d. mlp: 2*mlp_ratio*T*d^2. Per block,
 scaled by depth L, in Gflops, counting a multiply-add as one operation
 as Peebles and Xie (2023) do.
 }

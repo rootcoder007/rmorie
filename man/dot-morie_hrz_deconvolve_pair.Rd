@@ -4,7 +4,16 @@
 \alias{.morie_hrz_deconvolve_pair}
 \title{.morie_hrz_deconvolve_pair}
 \usage{
-.morie_hrz_deconvolve_pair(w, eta, grid_u, grid_z, nu_U, nu_eps, n_tau = 2001L)
+.morie_hrz_deconvolve_pair(
+  w,
+  eta,
+  grid_u,
+  grid_z,
+  nu_U,
+  nu_eps,
+  n_tau = 2001L,
+  kernel = "fourfold"
+)
 }
 \arguments{
 \item{w}{Passed to \code{outer}.}
@@ -20,6 +29,8 @@
 \item{nu_eps}{Numeric; combined arithmetically in the body.}
 
 \item{n_tau}{Passed to \code{seq}. Defaults to \code{2001L}.}
+
+\item{kernel}{\code{"fourfold"} or \code{"flattop"} psi_zeta.}
 }
 \value{
 A list with \code{f_U}, \code{f_eps}.

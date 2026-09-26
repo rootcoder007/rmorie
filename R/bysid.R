@@ -42,7 +42,9 @@ bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,
   Mc[is.na(Mc)] <- 0
   sv <- tryCatch(svd(Mc, nu = 1L, nv = 0L), error = function(e) NULL)
   x_cur <- if (!is.null(sv)) sv$u[, 1] * sv$d[1] else stats::rnorm(n)
-  x_cur <- (x_cur - mean(x_cur)) / (stats::sd(x_cur) + 1e-12)
+  psd <- function(v) sqrt(mean((v - mean(v))^2))
+  x_cur <- (x_cur - mean(x_cur)) / (psd(x_cur) + 1e-12)
+  x_ref <- x_cur
   a_cur <- rep(1, m)
   b_cur <- rep(0, m)
   step_x <- 0.4
@@ -93,6 +95,20 @@ bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,
     acc_b <- acc_b + sum(take)
 
     ll_x <- row_ll(x_cur, a_cur, b_cur)
+    ## identify inside the chain: a_j (x_i - b_j) is unchanged by
+    ## x -> (x - mu) / sd with a -> a sd, b -> (b - mu) / sd, and by the
+    ## reflection; pinning location, scale and sign (against the SVD
+    ## start) each sweep stops the chain drifting and flipping
+    mu_x <- mean(x_cur)
+    sd_x <- psd(x_cur) + 1e-12
+    x_cur <- (x_cur - mu_x) / sd_x
+    a_cur <- a_cur * sd_x
+    b_cur <- (b_cur - mu_x) / sd_x
+    if (sum(x_cur * x_ref) < 0) {
+      x_cur <- -x_cur
+      a_cur <- -a_cur
+      b_cur <- -b_cur
+    }
 
     if (t <= burn) {
       ## Robbins-Monro tuning towards the 0.44 optimum for scalar moves.
@@ -100,7 +116,7 @@ bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,
       step_ab <- min(max(step_ab * exp((0.5 * (acc_a + acc_b) / (t * m) - 0.44) * 0.5), 1e-3), 5)
     }
     if (t > burn) {
-      xs <- (x_cur - mean(x_cur)) / (stats::sd(x_cur) + 1e-12)
+      xs <- (x_cur - mean(x_cur)) / (psd(x_cur) + 1e-12)
       samples[[length(samples) + 1L]] <- xs
       a_samples[[length(a_samples) + 1L]] <- a_cur
       b_samples[[length(b_samples) + 1L]] <- b_cur

@@ -32,7 +32,9 @@ columns.}
 
 \item{n}{Number of synthetic rows to return.}
 
-\item{steps}{Training iterations.}
+\item{steps}{Training iterations in the Python CTGAN; the native
+debiaser resamples rows rather than training a generator, so this is
+carried for interface parity and has no effect.}
 
 \item{seed}{Sampling/training seed.}
 }

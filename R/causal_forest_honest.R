@@ -81,6 +81,11 @@
       lsp <- split_rows[lm_]
       rsp <- split_rows[!lm_]
       if (length(lsp) < 2L * min_leaf || length(rsp) < 2L * min_leaf) next
+      # Wager and Athey (2018): every leaf holds at least min_leaf units of
+      # EACH arm, so both child effects are estimable
+      ltr <- sum(d[lsp] == 1)
+      rtr <- sum(d[rsp] == 1)
+      if (min(ltr, length(lsp) - ltr, rtr, length(rsp) - rtr) < min_leaf) next
       tl <- .morie_cf_tau(y[lsp], d[lsp])
       tr_ <- .morie_cf_tau(y[rsp], d[rsp])
       if (is.na(tl) || is.na(tr_)) next

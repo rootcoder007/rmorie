@@ -4,7 +4,7 @@
 \alias{morie_smoothed_fU}
 \title{Smoothed deconvolution estimator of f_U}
 \usage{
-morie_smoothed_fU(y, x, beta, nu_U = NULL, grid = NULL)
+morie_smoothed_fU(y, x, beta, nu_U = NULL, grid = NULL, kernel = "fourfold")
 }
 \arguments{
 \item{y}{numeric matrix (n, T) of responses.}
@@ -13,9 +13,14 @@ morie_smoothed_fU(y, x, beta, nu_U = NULL, grid = NULL)
 
 \item{beta}{root-n consistent coefficients.}
 
-\item{nu_U}{smoothing bandwidth; \code{(log n)^(-1/2)} when NULL.}
+\item{nu_U}{smoothing bandwidth; sigma_eps / sqrt(log n) when NULL, sigma_eps = sd(eta) / sqrt(2).}
 
 \item{grid}{evaluation points.}
+
+\item{kernel}{\code{"fourfold"} (default; the book's characteristic
+function, assumption PHU7) or \code{"flattop"} (indicator of \link{-1, 1}:
+outside PHU7, higher-order bias, 2-3 times smaller errors in
+simulation). Each has its own default bandwidths.}
 }
 \value{
 list: grid, f_U, nu_U, cutoff, regularisation_required,

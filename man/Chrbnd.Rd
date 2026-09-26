@@ -17,7 +17,8 @@ Chrbnd(y, X = NULL, instrument = NULL, alpha = 0.05, gamma = NULL, beta = 0.1)
 
 \item{gamma}{Precision level of the contact set, or NULL.}
 
-\item{beta}{Retained for the contact-set width.}
+\item{beta}{Level of the preliminary contact-set step: when \code{gamma} is
+not given it is \code{1 - beta / log(V + 1)} (Chernozhukov, Lee & Rosen).}
 }
 \value{
 List with \code{estimate}, \code{bound}, \code{naive_min},

@@ -47,7 +47,7 @@ List with \code{estimate}, \code{W}, \code{H}, \code{k},
 \description{
 Mirrors morie.fn.bprMF.learn_bpr step for step, draw for draw.
 \code{regularizer_sign="paper"} reproduces the printed Figure 4
-update, whose \code{+lambda*Theta} term diverges; the default
+update, whose \code{+lambda&#42;Theta} term diverges; the default
 \code{"correct"} is the sign that actually ascends BPR-Opt.
 }
 \examples{

@@ -1387,10 +1387,11 @@ QrsDetect <- function(x, fs = 200) {
   ig <- chain$ig
   wint <- chain$w
   n <- length(ig)
-  # cumulative group delay: 5 samples (eq 4.8 at 200 Hz), 16 for the allpass
-  # branch of eq 4.13, 2 for the derivative, half the integrator window.
-  delay <- as.integer(round(5 * fs / 200)) + as.integer(round(16 * fs / 200)) +
-    2L + wint %/% 2L
+  # cumulative group delay: 5 samples (eq 4.8), 16 for the allpass branch of
+  # eq 4.13, 2 for the derivative, half the integrator window.  The filter
+  # coefficients are fixed integers, so their delays are fixed in samples at
+  # any fs; only the 150 ms integrator window scales with fs.
+  delay <- 23L + wint %/% 2L
   refrac <- max(1L, as.integer(round(0.200 * fs)))
 
   idx <- 1:(n - 2L)

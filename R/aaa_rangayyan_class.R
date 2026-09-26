@@ -2231,51 +2231,16 @@ LooCv <- function(X, y, classifier = NULL) {
 #' @return A list with \code{a}, \code{b}, \code{it}.
 #' @export
 .morie_rg_smo <- function(K, ys, Cv, maxiter, tol) {
-  # shared SMO-style coordinate ascent on pairs, which respects the
-  # equality constraint sum a_i y_i = 0 that single-coordinate updates
-  # cannot
+  # SMO on the maximal violating pair (Fan, Chen & Lin 2005; smo() in
+  # svmopt_native.R, checked against sklearn).  The former loop paired
+  # i with (i + it) mod n -- for two points always i itself, so it never
+  # moved -- and stopped after one pass without a change even when the
+  # KKT conditions failed.
   n <- length(ys)
-  a <- numeric(n)
-  b <- 0
-  it <- 0L
-  for (it in seq_len(as.integer(maxiter))) {
-    changed <- 0L
-    for (i in seq_len(n)) {
-      fi <- sum(a * ys * K[, i]) + b
-      Ei <- fi - ys[i]
-      if ((ys[i] * Ei < -tol && a[i] < Cv) ||
-        (ys[i] * Ei > tol && a[i] > 0)) {
-        j <- (i + it) %% n + 1L
-        if (j == i) next
-        Ej <- sum(a * ys * K[, j]) + b - ys[j]
-        ai <- a[i]
-        aj <- a[j]
-        if (ys[i] != ys[j]) {
-          L <- max(0, aj - ai)
-          H <- min(Cv, Cv + aj - ai)
-        } else {
-          L <- max(0, ai + aj - Cv)
-          H <- min(Cv, ai + aj)
-        }
-        if (H - L < 1e-12) next
-        eta <- 2 * K[i, j] - K[i, i] - K[j, j]
-        if (eta >= -1e-12) next
-        anj <- min(H, max(L, aj - ys[j] * (Ei - Ej) / eta))
-        if (abs(anj - aj) < 1e-12) next
-        ani <- ai + ys[i] * ys[j] * (aj - anj)
-        b1 <- b - Ei - ys[i] * (ani - ai) * K[i, i] -
-          ys[j] * (anj - aj) * K[i, j]
-        b2 <- b - Ej - ys[i] * (ani - ai) * K[i, j] -
-          ys[j] * (anj - aj) * K[j, j]
-        b <- if (ani > 0 && ani < Cv) b1 else if (anj > 0 && anj < Cv) b2 else 0.5 * (b1 + b2)
-        a[i] <- ani
-        a[j] <- anj
-        changed <- changed + 1L
-      }
-    }
-    if (changed == 0L) break
-  }
-  list(a = a, b = b, it = it)
+  sol <- smo(as.numeric(ys), K, C = Cv, tol = tol,
+             max_iter = as.integer(maxiter) * max(n, 1L))
+  list(a = as.numeric(sol$alpha), b = as.numeric(sol$b),
+       it = as.integer(sol$iterations), converged = isTRUE(sol$converged))
 }
 
 #' Section 10.4.5.  Only the patterns with a_i > 0 -- the SUPPORT
@@ -2329,7 +2294,7 @@ Svm <- function(X, y, C = 1, maxiter = 2000, tol = 1e-6) {
     w = w, b = r$b, alpha = r$a, support_vectors = sv - 1L,
     n_support = length(sv), margin = if (nw > 0) 2 / nw else Inf,
     C = Cv, iterations = r$it,
-    converged = r$it < as.integer(maxiter),
+    converged = r$converged,
     training_accuracy = mean(pred == ys),
     boundary_set_by_the_support_vectors_only = TRUE,
     large_c_contorts_around_outliers = TRUE,
@@ -2407,7 +2372,7 @@ SvmKern <- function(X, y, query = NULL, kernel = "rbf", gamma = NULL,
     alpha = r$a, b = r$b, support_vectors = sv - 1L,
     n_support = length(sv), kernel = kernel, gamma = g, C = Cv,
     iterations = r$it,
-    converged = r$it < as.integer(maxiter),
+    converged = r$converged,
     training_accuracy = mean(pred == ys),
     no_weight_vector_in_the_original_space = kernel != "linear",
     model_grows_with_the_training_set = TRUE,

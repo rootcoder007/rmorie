@@ -11,7 +11,8 @@ morie_panel_deconvolution(
   nu_U = NULL,
   nu_eps = NULL,
   grid_u = NULL,
-  grid_z = NULL
+  grid_z = NULL,
+  kernel = "fourfold"
 )
 }
 \arguments{
@@ -21,10 +22,14 @@ morie_panel_deconvolution(
 
 \item{beta}{root-n consistent coefficients.}
 
-\item{nu_U, nu_eps}{smoothing bandwidths; \code{(log n)^(-1/2)}
-when NULL.}
+\item{nu_U, nu_eps}{smoothing bandwidths; sigma_eps / sqrt(log n) for f_U and 0.5 sigma_eps N^(-1/5) for f_eps when NULL, sigma_eps = sd(eta) / sqrt(2).}
 
 \item{grid_u, grid_z}{evaluation points.}
+
+\item{kernel}{\code{"fourfold"} (default; the book's characteristic
+function, assumption PHU7) or \code{"flattop"} (indicator of \link{-1, 1}:
+outside PHU7, higher-order bias, 2-3 times smaller errors in
+simulation). Each has its own default bandwidths.}
 }
 \value{
 list: grid_u, f_U, grid_z, f_eps, psi_eps_from_root,

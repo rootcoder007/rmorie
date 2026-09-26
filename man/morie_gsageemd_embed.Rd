@@ -27,7 +27,15 @@ List with estimate, embeddings, depth, aggregator,
 per_batch_bound, method, note.
 }
 \description{
-GraphSAGE: embeddings for nodes the model has never seen. Inductive Representation Learning on Large Graphs, NeurIPS 2017 (arXiv:1706.02216) -- Algorithm 1, the three aggregators and Supervised Classification with Graph Convolutional Networks, ICLR 2017 (arXiv:1609.02907) -- the transductive convolution that GraphSAGE extends. Native implementation mirroring Python morie.fn.gsageemd exactly: the same mean, max_pool and lstm_order aggregators, the same fixed-size neighbour sampling with replacement when the budget exceeds the neighbourhood, the same L2 normalisation after each layer, and the same unsupervised graph-based loss.
+GraphSAGE: embeddings for nodes the model has never seen. Inductive
+Representation Learning on Large Graphs, NeurIPS 2017 (arXiv:1706.02216) --
+Algorithm 1, the three aggregators and Supervised Classification with Graph
+Convolutional Networks, ICLR 2017 (arXiv:1609.02907) -- the transductive
+convolution that GraphSAGE extends. Native implementation mirroring Python
+morie.fn.gsageemd exactly: the same mean, max_pool and lstm_order aggregators,
+the same fixed-size neighbour sampling with replacement when the budget
+exceeds the neighbourhood, the same L2 normalisation after each layer, and the
+same unsupervised graph-based loss.
 }
 \examples{
 set.seed(1)

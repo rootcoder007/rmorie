@@ -42,7 +42,12 @@ List with \code{tag}, \code{tag_hex}, \code{variant},
 \code{data_independent_first_half}, \code{method}, \code{note}.
 }
 \description{
-Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A., Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302, Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0 over every parameter, the same block init from H_0, the same J_1/J_2 reference indices and the same G (rows then columns) under BLAKE2b.
+Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A.,
+Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions
+for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302,
+Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0
+over every parameter, the same block init from H_0, the same J_1/J_2 reference
+indices and the same G (rows then columns) under BLAKE2b.
 }
 \details{
 Computes the tag and returns the parameters it was computed under,

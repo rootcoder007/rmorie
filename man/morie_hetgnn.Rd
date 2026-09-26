@@ -50,7 +50,7 @@ source it follows.
 set.seed(1)
 d <- 3; hid <- 4; sem <- 2
 W_node <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
-a_vec <- rnorm(hid, 0, 0.3)
+a_vec <- rnorm(2 * hid, 0, 0.3)
 H <- matrix(rnorm(9), 3, 3)
 edges <- list(`1` = c("3"), `2` = c("3"), `3` = c("1", "2"))
 types <- list(`1` = "movie", `2` = "movie", `3` = "actor")

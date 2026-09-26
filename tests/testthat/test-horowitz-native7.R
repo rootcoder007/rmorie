@@ -38,9 +38,9 @@ hrz7_fixture <- function() {
 test_that("morie_panel_deconvolution matches morie.fn.hrzpanel", {
   f <- hrz7_fixture()
   o <- morie_panel_deconvolution(f$y, f$x, f$beta)
-  expect_equal(o$f_U[31], 0.3582692222898366, tolerance = 1e-9)
-  expect_equal(o$f_eps[31], 0.5762129499125729, tolerance = 1e-9)
-  expect_equal(o$nu_U, 0.4570313390305189, tolerance = 1e-12)
+  expect_equal(o$f_U[31], 0.3034434321148975, tolerance = 1e-9)
+  expect_equal(o$f_eps[31], 0.8109604905098274, tolerance = 1e-9)
+  expect_equal(o$nu_U, 0.2228344963135749, tolerance = 1e-12)
   expect_equal(o$grid_u[1], -1.9008189495152203, tolerance = 1e-10)
   expect_equal(o$grid_z[61], 1.098132405583493, tolerance = 1e-10)
   expect_true(o$symmetry_required)
@@ -62,7 +62,7 @@ test_that("the differenced residual removes the individual effect", {
 test_that("morie_smoothed_fU matches morie.fn.hrzfnu", {
   f <- hrz7_fixture()
   o <- morie_smoothed_fU(f$y, f$x, f$beta, nu_U = 0.5)
-  expect_equal(o$f_U[31], 0.3609557223923062, tolerance = 1e-9)
+  expect_equal(o$f_U[31], 0.2071944471052147, tolerance = 1e-9)
   expect_equal(o$cutoff, 2)
   expect_equal(o$grid[1], -1.9008189495152203, tolerance = 1e-10)
   expect_true(o$regularisation_required)
@@ -72,8 +72,8 @@ test_that("morie_smoothed_fU matches morie.fn.hrzfnu", {
 test_that("the two density estimators carry separate bandwidths", {
   f <- hrz7_fixture()
   o <- morie_panel_densities(f$y, f$x, f$beta, nu_U = 0.4, nu_eps = 0.9)
-  expect_equal(o$f_U[31], 0.3461918188617971, tolerance = 1e-9)
-  expect_equal(o$f_eps[31], 0.3326421404115544, tolerance = 1e-9)
+  expect_equal(o$f_U[31], 0.2408222693701460, tolerance = 1e-9)
+  expect_equal(o$f_eps[31], 0.1310368055583092, tolerance = 1e-9)
   # only f_U divides by |psi_eta|^{1/2}
   expect_true(o$f_U_requires_division)
   expect_false(o$f_eps_requires_division)

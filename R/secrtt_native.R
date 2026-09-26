@@ -46,7 +46,7 @@ morie_secrtt_generate_dek <- function(master_seed, record_id,
 #' @param kek_id KEK identifier.
 #' @param aad Raw additional authenticated data.
 #' @return List with \code{wrapped}, \code{tag}, \code{nonce},
-#'   \code{kek_id}, \code{wrapped_hex}, \code{note}.
+#'   \code{kek_id}, \code{aad}, \code{wrapped_hex}, \code{note}.
 #' @export
 #' @examples
 #' if (morie_crypto_sodium_available()) {
@@ -65,7 +65,7 @@ morie_secrtt_wrap_dek <- function(dek, kek, nonce, kek_id = "kek-1",
   bound <- c(as.raw(aad), charToRaw(as.character(kek_id)))
   r <- morie_secaead_aead_encrypt(kek, nonce, d, bound)
   list(wrapped = r$ciphertext, tag = r$tag, nonce = as.raw(nonce),
-       kek_id = kek_id, wrapped_hex = r$ciphertext_hex,
+       kek_id = kek_id, aad = as.raw(aad), wrapped_hex = r$ciphertext_hex,
        note = "the KEK id is authenticated, so a wrapped DEK cannot be replayed under a different KEK")
 }
 
@@ -79,7 +79,9 @@ morie_secrtt_wrap_dek <- function(dek, kek, nonce, kek_id = "kek-1",
 #'   \code{kek_id}, optional \code{aad}.
 #' @param kek Raw KEK.
 #' @param audit_log Optional list to append to.
-#' @return List with \code{dek}, \code{kek_id}, \code{audited}.
+#' @return List with \code{dek}, \code{kek_id}, \code{audited} and
+#'   \code{audit_log}, the log extended by this call (R does not modify
+#'   its argument in place).
 #' @export
 #' @examples
 #' if (morie_crypto_sodium_available()) {
@@ -103,8 +105,10 @@ morie_secrtt_unwrap_dek <- function(wrapped, kek, audit_log = NULL) {
   }
   if (!isTRUE(r$valid))
     stop("secrtt: the wrapped DEK failed authentication -- wrong KEK, or it was tampered with")
+  # R copies its arguments, so the extended log is returned rather than
+  # modified in place
   list(dek = r$plaintext, kek_id = wrapped$kek_id,
-       audited = !is.null(audit_log))
+       audited = !is.null(audit_log), audit_log = audit_log)
 }
 
 #' Encrypt a record under its own DEK
@@ -172,8 +176,8 @@ morie_secrtt_open_record <- function(sealed, dek) {
 #' @param new_kek_id New KEK identifier.
 #' @param audit_log Optional audit list.
 #' @return List with \code{wrapped} (==\code{estimate}), \code{n},
-#'   \code{records_reencrypted}, \code{kek_id}, \code{method},
-#'   \code{note}.
+#'   \code{records_reencrypted}, \code{kek_id}, \code{audit_log},
+#'   \code{method}, \code{note}.
 #' @export
 #' @examples
 #' if (morie_crypto_sodium_available()) {
@@ -197,12 +201,14 @@ morie_secrtt_rotate_kek <- function(wrapped_deks, old_kek, new_kek,
   out <- list()
   for (i in seq_along(wrapped_deks)) {
     w <- wrapped_deks[[i]]
-    dek <- morie_secrtt_unwrap_dek(w, old_kek, audit_log)$dek
-    out[[i]] <- morie_secrtt_wrap_dek(dek, new_kek,
+    u <- morie_secrtt_unwrap_dek(w, old_kek, audit_log)
+    audit_log <- u$audit_log
+    out[[i]] <- morie_secrtt_wrap_dek(u$dek, new_kek,
                                         as.raw(new_nonces[[i]]),
-                                        new_kek_id)
+                                        new_kek_id, w$aad %||% raw())
   }
   list(estimate = out, wrapped = out, n = length(out),
+       audit_log = audit_log,
        records_reencrypted = 0L, kek_id = new_kek_id,
        method = "envelope KEK rotation; NIST SP 800-57 Part 1 Rev. 5",
        note = "one small re-wrap per record and zero record ciphertext rewritten")

@@ -1730,11 +1730,18 @@ EegBands <- function(x, fs, bands = NULL) {
     stop("need at least eight samples to estimate a spectrum")
   }
   nyq <- fs / 2
+  # (include f1, include f2): Section 1.2.6 gives delta [0.5, 4),
+  # theta [4, 8), alpha [8, 13], beta (13, ...], gamma 30-80; user
+  # bands are [f1, f2), closed at f2 when f2 is the Nyquist frequency
+  closure <- list()
   if (is.null(bands)) {
     bands <- list(
       delta = c(0.5, 4), theta = c(4, 8), alpha = c(8, 13),
       beta = c(13, nyq), gamma = c(30, min(80, nyq))
     )
+    closure <- list(delta = c(TRUE, FALSE), theta = c(TRUE, FALSE),
+                    alpha = c(TRUE, TRUE), beta = c(FALSE, TRUE),
+                    gamma = c(TRUE, TRUE))
   }
   if (!is.list(bands) || !length(bands)) {
     stop("bands must be a non-empty list of (f1, f2) pairs")
@@ -1759,7 +1766,10 @@ EegBands <- function(x, fs, bands = NULL) {
     if (f1 < 0 || f2 <= f1) {
       stop("band ", nm, " must satisfy 0 <= f1 < f2")
     }
-    p <- .morie_fsum(psd[freqs >= f1 & freqs <= f2])
+    cl <- if (!is.null(closure[[nm]])) closure[[nm]] else c(TRUE, f2 >= nyq)
+    lo_ok <- if (cl[1L]) freqs >= f1 else freqs > f1
+    hi_ok <- if (cl[2L]) freqs <= f2 else freqs < f2
+    p <- .morie_fsum(psd[lo_ok & hi_ok])
     power[[nm]] <- p
     frac[[nm]] <- if (total > 0) p / total else 0
   }

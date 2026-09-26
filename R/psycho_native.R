@@ -190,6 +190,47 @@
   as.numeric(log(P) %*% yv + log(1 - P) %*% (1 - yv))
 }
 
+#' 3PL score (and Warm's weighted score)
+#'
+#' d/dtheta of the 3PL log-likelihood, plus I'(theta) / (2 I(theta))
+#' when \code{weighted}; P' = a (1 - c) s (1 - s), P'' = a (1 - 2 s) P'.
+#'
+#' @param t Scalar theta.
+#' @param yv Binary responses.
+#' @param it Item list with \code{a}, \code{b}, \code{c}.
+#' @param weighted Logical; add Warm's term.
+#' @return Scalar score.
+#' @keywords internal
+#' @noRd
+.psy_score <- function(t, yv, it, weighted = FALSE) {
+  s <- 1 / (1 + exp(-it$a * (t - it$b)))
+  P <- pmin(pmax(it$c + (1 - it$c) * s, 1e-12), 1 - 1e-12)
+  pq <- P * (1 - P)
+  d1 <- it$a * (1 - it$c) * s * (1 - s)
+  d2 <- it$a * (1 - 2 * s) * d1
+  sc <- sum((yv - P) * d1 / pq)
+  if (weighted) {
+    inf <- sum(d1^2 / pq)
+    dinf <- sum(2 * d1 * d2 / pq - d1^3 * (1 - 2 * P) / pq^2)
+    if (inf > 0) sc <- sc + dinf / (2 * inf)
+  }
+  sc
+}
+
+#' Root of a score bracketed by [left, right], or NULL without a sign change
+#' @noRd
+.psy_score_root <- function(f, left, right) {
+  fl <- f(left)
+  fr <- f(right)
+  if (!(fl > 0 && fr < 0)) return(NULL)
+  for (k in 1:200) {
+    mid <- 0.5 * (left + right)
+    if (mid == left || mid == right) break
+    if (f(mid) > 0) left <- mid else right <- mid
+  }
+  0.5 * (left + right)
+}
+
 #' .psy_info
 #'
 #' A step of the psycho_native implementation. Called by \code{morie_psy_map_theta},
@@ -461,9 +502,12 @@ morie_psy_mle_theta <- function(y, a = NULL, b = NULL, c = NULL,
   right <- grid[min(i + 1L, length(grid))]
   opt <- stats::optimize(negll, c(left, right), tol = 1e-10)
   th <- opt$minimum
+  # polish on the score equation
+  r <- .psy_score_root(function(t) .psy_score(t, yv, it), left, right)
+  if (!is.null(r)) th <- r
   info <- .psy_info(th, it)
   list(theta = th, se = if (info > 0) 1 / sqrt(info) else Inf,
-       finite = TRUE, information = info, loglik = -opt$objective,
+       finite = TRUE, information = info, loglik = .psy_ll(th, yv, it),
        n_local_maxima = length(interior),
        multimodality_note = paste("the 3PL likelihood can be multimodal when",
                                   "guessing is present, so a dense scan",
@@ -636,14 +680,18 @@ morie_psy_wle_theta <- function(y, a = NULL, b = NULL, c = NULL,
   info <- .psy_info(grid, it)
   obj <- .psy_ll(grid, yv, it) + 0.5 * log(pmax(info, 1e-300))
   i <- which.max(obj)
-  th <- grid[i]
-  if (i > 1L && i < length(grid)) {
-    den <- obj[i - 1L] - 2 * obj[i] + obj[i + 1L]
-    if (den != 0) {
-      th <- grid[i] - 0.5 * (grid[2L] - grid[1L]) *
-        (obj[i + 1L] - obj[i - 1L]) / den
-    }
+  # the grid brackets the global mode; optimize() then locates it to
+  # 1e-10 on log L + (1/2) log I (Warm 1989)
+  left <- grid[max(i - 1L, 1L)]
+  right <- grid[min(i + 1L, length(grid))]
+  negobj <- function(t) {
+    -(.psy_ll(t, yv, it) + 0.5 * log(max(.psy_info(t, it), 1e-300)))
   }
+  th <- stats::optimize(negobj, c(left, right), tol = 1e-10)$minimum
+  # polish on Warm's estimating equation
+  r <- .psy_score_root(function(t) .psy_score(t, yv, it, weighted = TRUE),
+                       left, right)
+  if (!is.null(r)) th <- r
   info_t <- .psy_info(th, it)
   ml_theta <- NULL
   ml <- morie_psy_mle_theta(y, a = it$a, b = it$b, c = it$c, bounds = bounds)

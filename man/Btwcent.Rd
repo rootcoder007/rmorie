@@ -9,7 +9,8 @@ Btwcent(A, normalise = FALSE)
 \arguments{
 \item{A}{See Usage.}
 
-\item{normalise}{See Usage.}
+\item{normalise}{When \code{TRUE}, \code{betweenness} is divided by
+\code{(n - 1)(n - 2) / 2}; the raw counts stay in \code{raw}.}
 }
 \value{
 List with \code{betweenness}, \code{normalised}, \code{n}.

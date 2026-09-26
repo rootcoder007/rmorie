@@ -15,7 +15,9 @@ morie_secrtt_unwrap_dek(wrapped, kek, audit_log = NULL)
 \item{audit_log}{Optional list to append to.}
 }
 \value{
-List with \code{dek}, \code{kek_id}, \code{audited}.
+List with \code{dek}, \code{kek_id}, \code{audited} and
+\code{audit_log}, the log extended by this call (R does not modify
+its argument in place).
 }
 \description{
 The envelope bounds offline compromise; an attacker who can call

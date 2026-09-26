@@ -11,7 +11,8 @@ morie_arsau_available_datasets(year = NULL, language = "en", data_dir = NULL)
 
 \item{language}{"en" or "fr".}
 
-\item{data_dir}{Optional explicit ARSAU root.}
+\item{data_dir}{Optional explicit ARSAU root; when given, each entry
+reports whether its CSV is present there (\code{cached}).}
 }
 \value{
 An object of class \code{"morie_arsau_result"}.

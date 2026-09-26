@@ -2,30 +2,30 @@
 % Please edit documentation in R/sdpwts_native.R
 \name{.sdpwts_centre}
 \alias{.sdpwts_centre}
-\title{Private: centring by gradient descent with a feasibility-aware}
+\title{Private: Newton centring for the barrier method}
 \usage{
-.sdpwts_centre(x0, c_vec, F0, Fs, t, iters = 200, tol = 1e-12, h = 1e-06)
+.sdpwts_centre(x0, c_vec, F0, Fs, t, iters = 200, tol = 1e-14)
 }
 \arguments{
-\item{x0}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x0}{Strictly feasible starting point.}
 
-\item{c_vec}{Passed to \code{.sdpwts_objective}.}
+\item{c_vec}{Objective vector.}
 
-\item{F0}{Passed to \code{.sdpwts_objective}.}
+\item{F0}{Constant matrix of the LMI.}
 
-\item{Fs}{Passed to \code{.sdpwts_objective}.}
+\item{Fs}{List of coefficient matrices of the LMI.}
 
-\item{t}{Passed to \code{.sdpwts_objective}.}
+\item{t}{Barrier parameter.}
 
-\item{iters}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.}
+\item{iters}{Maximum Newton iterations.}
 
-\item{tol}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.}
-
-\item{h}{Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.}
+\item{tol}{Stopping level for half the squared Newton decrement.}
 }
 \value{
 A list with \code{x}, \code{value}, \code{iterations}.
 }
 \description{
-backtracking line search
+A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
+Minimises t * c'x - log det F(x) by Newton's method with the analytic
+gradient and Hessian of the log-determinant barrier.
 }

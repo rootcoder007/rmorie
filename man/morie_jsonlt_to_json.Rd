@@ -29,7 +29,11 @@ morie_jsonlt_to_json(
 
 \item{pretty}{FALSE, TRUE, or an indent width.}
 
-\item{...}{toJSON options: dataframe (rows, columns, values), matrix (rowmajor, columnmajor), Date (ISO8601, epoch), POSIXt (string, ISO8601, epoch, mongo), factor (string, integer), complex (string, list), raw (base64, hex, int, mongo), null (list, null), na (NULL, null, string), auto_unbox, digits, force.}
+\item{...}{toJSON options: dataframe (rows, columns, values), matrix
+(rowmajor, columnmajor), Date (ISO8601, epoch), POSIXt (string,
+ISO8601, epoch, mongo), factor (string, integer), complex (string,
+list), raw (base64, hex, int, mongo), null (list, null), na (NULL,
+null, string), auto_unbox, digits, force.}
 }
 \value{
 a length-one character vector of class \code{json}.

@@ -31,7 +31,7 @@ source it follows.
 set.seed(1)
 d <- 3; hid <- 4
 W <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
-a_vec <- rnorm(hid, 0, 0.3)
+a_vec <- rnorm(2 * hid, 0, 0.3)
 H <- list(`1` = rnorm(d), `2` = rnorm(d), `3` = rnorm(d))
 r <- node_attention(H[["1"]], c("2", "3"), H, a_vec, W)
 c(length(r$embedding), length(r$alpha))

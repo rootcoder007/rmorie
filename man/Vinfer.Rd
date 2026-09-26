@@ -27,7 +27,7 @@ Vinfer(
 
 \item{max_iter}{Maximum coordinate sweeps.}
 
-\item{tol}{Stop when E\link[boot:tau]{tau} moves by less than this.}
+\item{tol}{Stop when E\link{tau} moves by less than this.}
 }
 \value{
 List with \code{mu_n}, \code{lambda_n}, \code{a_n}, \code{b_n},

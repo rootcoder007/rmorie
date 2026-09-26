@@ -195,55 +195,52 @@ sdpwts_central_path_gap <- function(t, m) {
   as.numeric(t) * sum(as.numeric(c_vec) * as.numeric(x)) + b$value
 }
 
-# Private: centring by gradient descent with a feasibility-aware
-# backtracking line search
-#' Private: centring by gradient descent with a feasibility-aware
+# Private: centring by Newton's method (Boyd and Vandenberghe Sec.
+# 11.3.1) with the analytic barrier gradient -tr(F^-1 F_i) and Hessian
+# tr(F^-1 F_i F^-1 F_j), so the iterate reaches the central point to
+# working precision, which the m / t gap bound requires.  Once the Newton
+# decrement is below 1/4 the full step is taken (it stays in the Dikin
+# ellipsoid): at large t the Armijo comparison is below float resolution.
+#' Private: Newton centring for the barrier method
 #'
-#' backtracking line search
+#' A step of the sdpwts_native implementation. Called by \code{sdpwts_solve_sdp}.
+#' Minimises t * c'x - log det F(x) by Newton's method with the analytic
+#' gradient and Hessian of the log-determinant barrier.
 #'
-#' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
-#' @param c_vec Passed to \code{.sdpwts_objective}.
-#' @param F0 Passed to \code{.sdpwts_objective}.
-#' @param Fs Passed to \code{.sdpwts_objective}.
-#' @param t Passed to \code{.sdpwts_objective}.
-#' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
-#' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
-#' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
+#' @param x0 Strictly feasible starting point.
+#' @param c_vec Objective vector.
+#' @param F0 Constant matrix of the LMI.
+#' @param Fs List of coefficient matrices of the LMI.
+#' @param t Barrier parameter.
+#' @param iters Maximum Newton iterations.
+#' @param tol Stopping level for half the squared Newton decrement.
 #' @return A list with \code{x}, \code{value}, \code{iterations}.
 #' @export
-.sdpwts_centre <- function(x0, c_vec, F0, Fs, t, iters = 200,
-                           tol = 1e-12, h = 1e-6) {
+.sdpwts_centre <- function(x0, c_vec, F0, Fs, t, iters = 200, tol = 1e-14) {
   x <- as.numeric(x0)
+  cc <- as.numeric(c_vec)
   n <- length(x)
-  f <- .sdpwts_objective(x, c_vec, F0, Fs, t)
+  f <- .sdpwts_objective(x, cc, F0, Fs, t)
   if (!is.finite(f)) {
     stop("sdpwts: the starting point is not strictly feasible, ",
          "so the barrier is infinite there")
   }
   it <- 0
   for (it in seq_len(as.integer(iters))) {
-    g <- numeric(n)
-    for (i in seq_len(n)) {
-      up <- x
-      up[i] <- up[i] + h
-      dn <- x
-      dn[i] <- dn[i] - h
-      fu <- .sdpwts_objective(up, c_vec, F0, Fs, t)
-      fd <- .sdpwts_objective(dn, c_vec, F0, Fs, t)
-      if (!is.finite(fu) || !is.finite(fd)) {
-        g[i] <- 0
-      } else {
-        g[i] <- (fu - fd) / (2 * h)
-      }
-    }
-    gn <- sqrt(sum(g * g))
-    if (gn < as.numeric(tol)) break
+    Finv <- solve(sdpwts_lmi(x, F0, Fs))
+    P <- lapply(Fs, function(Fi) Finv %*% as.matrix(Fi))
+    g <- as.numeric(t) * cc - vapply(P, function(Pi) sum(diag(Pi)), numeric(1))
+    H <- matrix(0, n, n)
+    for (i in seq_len(n)) for (j in seq_len(n)) H[i, j] <- sum(P[[i]] * t(P[[j]]))
+    dx <- solve(H, -g)
+    dec2 <- -sum(g * dx)
+    if (dec2 / 2 <= tol) break
     step <- 1.0
     moved <- FALSE
-    for (j in seq_len(80)) {
-      cand <- x - step * g
-      fc <- .sdpwts_objective(cand, c_vec, F0, Fs, t)
-      if (is.finite(fc) && fc < f - 1e-14) {
+    for (k in seq_len(80)) {
+      cand <- x + step * dx
+      fc <- .sdpwts_objective(cand, cc, F0, Fs, t)
+      if (is.finite(fc) && ((dec2 < 0.25 && step == 1) || fc <= f - 0.01 * step * dec2)) {
         x <- cand
         f <- fc
         moved <- TRUE

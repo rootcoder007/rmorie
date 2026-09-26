@@ -15,7 +15,12 @@ morie_secarg_compress(X, Y)
 Integer vector of 128 64-bit words.
 }
 \description{
-Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A., Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302, Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0 over every parameter, the same block init from H_0, the same J_1/J_2 reference indices and the same G (rows then columns) under BLAKE2b.
+Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A.,
+Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions
+for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302,
+Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0
+over every parameter, the same block init from H_0, the same J_1/J_2 reference
+indices and the same G (rows then columns) under BLAKE2b.
 }
 \details{
 Applies the BLAKE2b permutation to rows then columns of the 1024-byte

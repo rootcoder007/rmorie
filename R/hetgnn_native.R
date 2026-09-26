@@ -73,7 +73,7 @@ metapath_neighbours <- function(edges, types, metapath) {
 #' set.seed(1)
 #' d <- 3; hid <- 4
 #' W <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
-#' a_vec <- rnorm(hid, 0, 0.3)
+#' a_vec <- rnorm(2 * hid, 0, 0.3)
 #' H <- list(`1` = rnorm(d), `2` = rnorm(d), `3` = rnorm(d))
 #' r <- node_attention(H[["1"]], c("2", "3"), H, a_vec, W)
 #' c(length(r$embedding), length(r$alpha))
@@ -88,7 +88,7 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
   for (tt in seq_along(neighbours)) {
     j <- neighbours[tt]
     hj <- proj(H[[j]])
-    z <- hi + hj
+    z <- c(hi, hj)  # eq. (3): [W h_i || W h_j], a concatenation
     s <- sum(a_vec * z)
     sc[tt] <- if (s >= 0) s else slope * s
   }
@@ -105,6 +105,8 @@ node_attention <- function(h_i, neighbours, H, a_vec, W, slope = 0.2) {
     }
     z[a] <- acc
   }
+  # eq. (4): z_i = sigma(sum_j alpha_ij h'_j), sigma the ELU of GAT/HAN
+  z <- ifelse(z > 0, z, expm1(z))
   list(embedding = z, alpha = al, neighbours = neighbours)
 }
 
@@ -174,7 +176,7 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 #' set.seed(1)
 #' d <- 3; hid <- 4; sem <- 2
 #' W_node <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
-#' a_vec <- rnorm(hid, 0, 0.3)
+#' a_vec <- rnorm(2 * hid, 0, 0.3)
 #' H <- matrix(rnorm(9), 3, 3)
 #' edges <- list(`1` = c("3"), `2` = c("3"), `3` = c("1", "2"))
 #' types <- list(`1` = "movie", `2` = "movie", `3` = "actor")
@@ -193,36 +195,38 @@ han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
     feats <- lapply(H, as.numeric)
   }
   if (is.null(names(feats))) names(feats) <- as.character(seq_along(feats))
+  # every meta-path must start at the same target type: V in eq. (7) is
+  # the set of target nodes, and only they get an embedding
+  heads <- unique(vapply(metapaths, function(mp) as.character(mp)[1L], ""))
+  if (length(heads) != 1L) {
+    stop("hetgnn: all meta-paths must start at the same target node type")
+  }
+  target <- which(vapply(names(feats), function(v)
+    !is.null(types[[v]]) && identical(types[[v]], heads), logical(1)))
+  if (length(target) == 0L) {
+    stop("hetgnn: no node has the meta-paths' start type")
+  }
   per <- list()
   for (name in names(metapaths)) {
     mp <- metapaths[[name]]
     nb <- metapath_neighbours(edges, types, mp)$neighbours
-    Z <- vector("list", length(feats))
-    for (i in seq_along(feats)) {
-      n <- nb[[as.character(i)]]
-      if (length(n) == 0L) {
-        Z[[i]] <- rep(0.0, nrow(W_node))
-        next
-      }
-      Z[[i]] <- node_attention(feats[[i]], n, feats, a_vec,
-                               W_node, slope)$embedding
-    }
-    per[[name]] <- Z
+    # N_i includes i itself (Wang et al. 2019, Sec. 4.1)
+    per[[name]] <- lapply(target, function(i) {
+      key <- names(feats)[i]
+      n <- sort(union(if (is.null(nb[[key]])) character(0) else nb[[key]], key))
+      node_attention(feats[[i]], n, feats, a_vec, W_node, slope)$embedding
+    })
   }
   sem <- semantic_attention(per, W_sem, b_sem, q_sem)
   names_v <- sem$metapaths
   d <- length(per[[names_v[1L]]][[1L]])
   final <- matrix(0.0, length(feats), d)
-  for (i in seq_along(feats)) {
-    for (a in 1:d) {
-      acc <- 0.0
-      for (nm in names_v) {
-        acc <- acc + sem$beta[[nm]] * per[[nm]][[i]][a]
-      }
-      final[i, a] <- acc
+  for (r in seq_along(target)) {
+    for (nm in names_v) {
+      final[target[r], ] <- final[target[r], ] + sem$beta[[nm]] * per[[nm]][[r]]
     }
   }
-  list(estimate = final, embeddings = final,
+  list(estimate = final, embeddings = final, target_nodes = target,
        semantic_weights = sem$beta,
        per_metapath = per,
        method = paste("hierarchical attention on a heterogeneous graph; Wang et al. (2019)"),
@@ -254,7 +258,7 @@ heterogeneous_gnn <- han_forward
 #' set.seed(1)
 #' d <- 3; hid <- 4; sem <- 2
 #' W_node <- matrix(rnorm(hid * d, 0, 0.3), hid, d)
-#' a_vec <- rnorm(hid, 0, 0.3)
+#' a_vec <- rnorm(2 * hid, 0, 0.3)
 #' H <- matrix(rnorm(9), 3, 3)
 #' edges <- list(`1` = c("3"), `2` = c("3"), `3` = c("1", "2"))
 #' types <- list(`1` = "movie", `2` = "movie", `3` = "actor")

@@ -19,7 +19,8 @@ morie_matching_abadie_imbens_se(
 
 \item{match_pairs}{Data frame of matched indices.}
 
-\item{n_matches}{Number of matches per treated unit (carried for parity).}
+\item{n_matches}{Number of matches per treated unit, M in the
+Abadie-Imbens variance (the control reuse count enters as K_M / M).}
 }
 \value{
 Scalar numeric Abadie-Imbens SE.

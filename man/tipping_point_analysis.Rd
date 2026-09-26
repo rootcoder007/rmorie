@@ -25,7 +25,8 @@ tipping_point_analysis(
 \item{delta_range}{Numeric vector of bias parameters (default
 \verb{seq(-3|est|, 3|est|, length.out = 101)}).}
 
-\item{outcome_type}{\code{"continuous"} or \code{"binary"} (advisory only).}
+\item{outcome_type}{\code{"continuous"} or \code{"binary"}; for a binary outcome
+the default delta grid is capped at the unit interval.}
 }
 \value{
 A \code{morie_tipping_point} named-list.

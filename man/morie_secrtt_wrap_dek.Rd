@@ -19,7 +19,7 @@ morie_secrtt_wrap_dek(dek, kek, nonce, kek_id = "kek-1", aad = raw())
 }
 \value{
 List with \code{wrapped}, \code{tag}, \code{nonce},
-\code{kek_id}, \code{wrapped_hex}, \code{note}.
+\code{kek_id}, \code{aad}, \code{wrapped_hex}, \code{note}.
 }
 \description{
 The KEK id is bound into the AAD, so a wrapped DEK cannot be

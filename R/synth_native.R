@@ -342,13 +342,31 @@ print.morie_synth <- function(x, ...) {
                   idx[N_co - N_tr + seq_len(N_tr)]), , drop = FALSE]
         .morie_sdid_native(Yp, N_co - N_tr, T_pre)$estimate
       }, numeric(1))
-      se <- stats::sd(placebo_effects)
+      # Algorithm 4: V = (1/B) sum (tau_b - mean tau)^2
+      se <- sqrt((reps - 1) / reps) * stats::sd(placebo_effects)
     }
   } else if (identical(method, "jackknife")) {
-    if (N_tr >= 2L) {
+    # Algorithm 3: leave one unit out with the weights held FIXED at
+    # their full-sample values (omega renormalised over the remaining
+    # controls), as in synthdid::jackknife_se
+    omega <- fit$unit_weights
+    lambda <- fit$time_weights
+    T_post <- ncol(Y) - T_pre
+    if (N_tr >= 2L && sum(omega > 0) > 1L) {
+      eff <- as.numeric(Y[, T_pre + seq_len(T_post), drop = FALSE] %*%
+                          rep(1 / T_post, T_post) -
+                          Y[, seq_len(T_pre), drop = FALSE] %*% lambda)
       jk <- vapply(seq_len(N), function(i) {
-        Ni <- if (i <= N_co) N_co - 1L else N_co
-        .morie_sdid_native(Y[-i, , drop = FALSE], Ni, T_pre)$estimate
+        w <- omega
+        tr <- N_co + seq_len(N_tr)
+        if (i <= N_co) {
+          w[i] <- 0
+          w <- if (sum(w) > 0) w / sum(w) else
+            replace(rep(1 / (N_co - 1), N_co), i, 0)
+        } else {
+          tr <- setdiff(tr, i)
+        }
+        mean(eff[tr]) - sum(w * eff[seq_len(N_co)])
       }, numeric(1))
       se <- sqrt((N - 1) / N * sum((jk - mean(jk))^2))
     }
@@ -356,15 +374,21 @@ print.morie_synth <- function(x, ...) {
     .rmorie_local_seed(seed)
     boot <- rep(NA_real_, n_boot)
     for (b in seq_len(n_boot)) {
-      co_idx <- sample(seq_len(N_co), N_co, replace = TRUE)
-      tr_idx <- N_co + sample(seq_len(N_tr), N_tr, replace = TRUE)
+      # Algorithm 2: resample N units; redraw if a group is missing
+      repeat {
+        idx <- sample(seq_len(N), N, replace = TRUE)
+        co_idx <- idx[idx <= N_co]
+        tr_idx <- idx[idx > N_co]
+        if (length(co_idx) >= 2L && length(tr_idx) >= 1L) break
+      }
       boot[b] <- tryCatch(
         .morie_sdid_native(Y[c(co_idx, tr_idx), , drop = FALSE],
-                           N_co, T_pre)$estimate,
+                           length(co_idx), T_pre)$estimate,
         error = function(e) NA_real_)
     }
     boot <- boot[is.finite(boot)]
-    if (length(boot) > 1L) se <- stats::sd(boot)
+    if (length(boot) > 1L)
+      se <- sqrt((length(boot) - 1) / length(boot)) * stats::sd(boot)
     placebo_effects <- boot
   }
   c(fit, list(se = se, placebo_effects = placebo_effects,

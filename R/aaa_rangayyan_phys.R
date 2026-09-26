@@ -1989,7 +1989,10 @@ CadSpec <- function(x, fs, bands = NULL) {
   power <- sp$power
   mom <- .bsapsdmom(freqs, power)
   if (is.null(bands)) {
-    bands <- list(c(0, 100), c(100, 300), c(300, 600), c(600, fs / 2))
+    # low/mid/high partition cut at the Nyquist frequency
+    edges <- c(c(0, 100, 300, 600)[c(0, 100, 300, 600) < fs / 2], fs / 2)
+    bands <- lapply(seq_len(length(edges) - 1L),
+                    function(i) c(edges[i], edges[i + 1L]))
   }
   frac <- list()
   for (bd in bands) {
@@ -1997,7 +2000,7 @@ CadSpec <- function(x, fs, bands = NULL) {
     hi <- as.numeric(bd[2L])
     if (hi <= lo) stop("each band must have hi > lo (Hz)")
     frac[[length(frac) + 1L]] <-
-      c(lo, hi, .bsabandpow(freqs, power, lo, hi) / mom$total_power)
+      c(lo, hi, .bsabandpow(freqs, power, lo, if (hi < fs / 2) hi else Inf) / mom$total_power)
   }
   pk <- .bsapeaks(freqs, power, count = 1L)
   fdom <- if (length(pk$freqs)) pk$freqs[1L] else freqs[which.max(power)]

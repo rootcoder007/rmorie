@@ -55,7 +55,15 @@ A named list with \code{estimate}, \code{reward}, \code{g},
 \code{gamma}, \code{state_only}, \code{method}.
 }
 \description{
-Fits the AIRL discriminator (Fu, Luo & Levine 2018, eq. 4) on expert and policy transitions and reads off the recovered reward \verb{log D - log(1 - D)} for each policy transition (line 6 of Algorithm 1). The discriminator \code{D = exp(f) / (exp(f) + pi)} with \verb{f = g(s) + gamma h(s') - h(s)} separates expert (\code{D -> 1}) from policy (\code{D -> 0}) data. \code{state_only = TRUE} (the default, Theorem C.1) parameterises \code{g} on the state alone so the recovered \verb{g*} is the ground truth reward up to a constant. \code{state_only = FALSE} uses the \code{g(s, a)} of eq. 4 as written, which fits at least as well but recovers the advantage rather than a transferable reward. AIRL has no random draws: the result is fully determined by the inputs, so no RNG is consulted and \code{set.seed()} is neither needed nor called.
+Fits the AIRL discriminator (Fu, Luo & Levine 2018, eq. 4) on expert and
+policy transitions and reads off the recovered reward \verb{log D - log(1 - D)} for
+each policy transition (line 6 of Algorithm 1). The discriminator \code{D = exp(f) / (exp(f) + pi)} with \verb{f = g(s) + gamma h(s') - h(s)} separates expert (\code{D -> 1}) from policy (\code{D -> 0}) data. \code{state_only = TRUE} (the default, Theorem
+C.1) parameterises \code{g} on the state alone so the recovered \verb{g*} is the ground
+truth reward up to a constant. \code{state_only = FALSE} uses the \code{g(s, a)} of eq.
+4 as written, which fits at least as well but recovers the advantage rather
+than a transferable reward. AIRL has no random draws: the result is fully
+determined by the inputs, so no RNG is consulted and \code{set.seed()} is neither
+needed nor called.
 }
 \details{
 Fits the AIRL discriminator (Fu, Luo & Levine 2018, eq. 4) on

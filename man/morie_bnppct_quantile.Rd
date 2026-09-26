@@ -24,7 +24,16 @@ components.}
 The quantile.
 }
 \description{
-Bisection rather than Newton: the CDF is monotone but its derivative is a mixture of narrow normals, and a Newton step off a flat stretch between two well-separated components lands anywhere. The bracket is taken from the COMPONENTS, not from the data. A slice sampler instantiates components from the prior to cover the slice, and an inverse-gamma prior draw can be enormous; such a component leaves the CDF far short of one anywhere near the data, so a data-width bracket fails to contain the root. That is not a numerical nuisance -- it is the model saying this draw of F has a very heavy tail -- so the bracket follows the components and is then widened until it genuinely brackets.
+Bisection rather than Newton: the CDF is monotone but its derivative is a
+mixture of narrow normals, and a Newton step off a flat stretch between two
+well-separated components lands anywhere. The bracket is taken from the
+COMPONENTS, not from the data. A slice sampler instantiates components from
+the prior to cover the slice, and an inverse-gamma prior draw can be enormous;
+such a component leaves the CDF far short of one anywhere near the data, so a
+data-width bracket fails to contain the root. That is not a numerical nuisance
+-- it is the model saying this draw of F has a very heavy tail -- so the
+bracket follows the components and is then widened until it genuinely
+brackets.
 }
 \details{
 Bisection rather than Newton: the CDF is monotone but its derivative
