@@ -342,7 +342,7 @@ mrm_otis_seg_duration_km <- function(
 #' @param alert_cols Character vector of alert column names
 #'   (default the three b01 alert columns).
 #' @return A data.frame with one row per pair, columns `alert_a`,
-#'   `alert_b`, `n`, `chi2`, `df`, `p_value`, `morie_cramers_v`.
+#'   `alert_b`, `n`, `chi2`, `df`, `p_value`, `cramers_v`.
 #' @export
 #' @examples
 #' if (FALSE) {
@@ -370,7 +370,7 @@ mrm_otis_mortification_cooccurrence <- function(
       chi2 = round(as.numeric(chi$statistic), 2),
       df = as.integer(chi$parameter),
       p_value = signif(chi$p.value, 3),
-      morie_cramers_v = round(.cramer_v(tbl), 4)
+      cramers_v = round(.cramer_v(tbl), 4)
     )
   })
   do.call(rbind, rows)
@@ -396,7 +396,7 @@ mrm_otis_mortification_cooccurrence <- function(
 #' @param region_recent_col Column name of the most-recent region
 #'   (default `"Region_MostRecentPlacement"`).
 #' @return A list with named elements `table` (the contingency matrix),
-#'   `chi2`, `df`, `p_value`, `morie_cramers_v`, `diagonal_share`,
+#'   `chi2`, `df`, `p_value`, `cramers_v`, `diagonal_share`,
 #'   `off_diagonal_share`.
 #' @export
 #' @examples
@@ -420,7 +420,7 @@ mrm_otis_region_locality <- function(
     chi2 = round(as.numeric(chi$statistic), 2),
     df = as.integer(chi$parameter),
     p_value = signif(chi$p.value, 3),
-    morie_cramers_v = round(.cramer_v(tbl), 4),
+    cramers_v = round(.cramer_v(tbl), 4),
     diagonal_share = round(diag_sum / total, 4),
     off_diagonal_share = round(1 - diag_sum / total, 4)
   )

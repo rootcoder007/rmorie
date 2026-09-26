@@ -53,13 +53,13 @@ test_that("morie_contingency_coefficient computes C and Cramer's V", {
   res <- morie_contingency_coefficient(tbl)
   expect_true(is.list(res))
   expect_true(all(c(
-    "statistic", "morie_cramers_v", "chi2", "p_value", "df",
+    "statistic", "cramers_v", "chi2", "p_value", "df",
     "max_C", "n", "method"
   ) %in% names(res)))
   expect_gte(res$statistic, 0)
   expect_lte(res$statistic, 1)
-  expect_gte(res$morie_cramers_v, 0)
-  expect_lte(res$morie_cramers_v, 1)
+  expect_gte(res$cramers_v, 0)
+  expect_lte(res$cramers_v, 1)
   expect_gte(res$chi2, 0)
   expect_gte(res$p_value, 0)
   expect_lte(res$p_value, 1)

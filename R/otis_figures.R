@@ -93,7 +93,7 @@ morie_otis_figures <- function(out_dir,
       lab <- paste(sub("_Alert", "", co$alert_a),
                    sub("_Alert", "", co$alert_b), sep = " x ")
       graphics::par(mar = c(8, 4, 2.5, 1))
-      graphics::barplot(co$morie_cramers_v, names.arg = lab, las = 2,
+      graphics::barplot(co$cramers_v, names.arg = lab, las = 2,
                         col = "#3584e4", ylab = "Cramer's V",
                         main = "Alert co-occurrence (mortification view)")
     })

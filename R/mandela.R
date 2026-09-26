@@ -105,11 +105,20 @@ mrm_classify_mandela <- function(
   # Broader: also count high-alert (ac >= 2) placements
   if (broader_rc) {
     stopifnot(all(alert_cols %in% names(data)))
+    # an alert is "Yes" (any case) or a positive number; comparing the
+    # b01 "Yes"/"No" strings with > 0 made every alert true
+    alert_yes <- function(x) {
+      if (is.numeric(x) || is.logical(x)) {
+        !is.na(x) & x > 0
+      } else {
+        tolower(trimws(as.character(x))) %in% "yes"
+      }
+    }
     alerts_count <- rowSums(
-      vapply(alert_cols, function(c) as.integer(data[[c]] > 0), integer(nrow(data)))
+      vapply(alert_cols, function(c) as.integer(alert_yes(data[[c]])), integer(nrow(data)))
     )
-    broader_row <- strict_row | (alerts_count >= 2L & !is.na(dur) &
-      dur > threshold_days)
+    # alert-complexity >= 2 counts regardless of duration, as documented
+    broader_row <- strict_row | alerts_count >= 2L
   } else {
     broader_row <- strict_row
   }

@@ -6,7 +6,7 @@
 #' maximum attainable C = sqrt((min(r,c)-1)/min(r,c)).
 #'
 #' @param x A 2-D contingency table of counts.
-#' @return Named list: statistic (C), morie_cramers_v, chi2, p_value, df,
+#' @return Named list: statistic (C), cramers_v, chi2, p_value, df,
 #'   max_C, n.
 #' @importFrom stats chisq.test
 #' @examples
@@ -17,7 +17,7 @@ morie_contingency_coefficient <- function(x) {
   X <- as.matrix(x)
   if (length(dim(X)) != 2L || length(X) == 0L) {
     return(list(
-      statistic = NA_real_, morie_cramers_v = NA_real_,
+      statistic = NA_real_, cramers_v = NA_real_,
       chi2 = NA_real_, p_value = NA_real_, df = NA_integer_,
       max_C = NA_real_, n = 0L,
       method = "Pearson contingency coefficient"
@@ -34,7 +34,7 @@ morie_contingency_coefficient <- function(x) {
   max_C <- if (mn > 1) sqrt((mn - 1) / mn) else NA_real_
   list(
     statistic = C,
-    morie_cramers_v = V,
+    cramers_v = V,
     chi2 = chi2,
     p_value = as.numeric(ct$p.value),
     df = as.integer(ct$parameter),

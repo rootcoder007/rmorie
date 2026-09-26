@@ -17,7 +17,7 @@ mrm_otis_mortification_cooccurrence(
 }
 \value{
 A data.frame with one row per pair, columns \code{alert_a},
-\code{alert_b}, \code{n}, \code{chi2}, \code{df}, \code{p_value}, \code{morie_cramers_v}.
+\code{alert_b}, \code{n}, \code{chi2}, \code{df}, \code{p_value}, \code{cramers_v}.
 }
 \description{
 Computes the pairwise Cramer's V (and chi-square test) for every

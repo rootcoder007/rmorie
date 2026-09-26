@@ -14,10 +14,8 @@
 #' \eqn{k = 1, \ldots, K-1}{k = 1, ..., K-1} a separate binary logit is fit to the
 #' indicator \eqn{1\{Y \le k\}}{1\{Y <= k\}}, so the coefficient vector
 #' \eqn{\beta_k}{beta_k} is unconstrained across thresholds.  When
-#' \code{MASS} is available we delegate to \code{\link[MASS]{polr}}
-#' for the proportional-odds (PO) baseline; otherwise the PO baseline
-#' is fit by a stacked-IRLS approximation matching the Python
-#' implementation.  The threshold-specific fits always run via
+#' proportional odds is tested by Brant's (1990) Wald test on those
+#' fits.  The threshold-specific fits run via
 #' \code{\link[stats]{glm}} with \code{family = binomial("logit")}.
 #'
 #' Standard threshold (proportional-odds, K levels, p covariates):
@@ -50,31 +48,49 @@ NULL
 }
 
 
-#' Internal helper: Tso Fit Po Stacked
+#' Internal helper: Brant (1990) test of proportional odds
+#'
+#' Wald test that the slopes of the K - 1 cumulative binary logits
+#' 1{Y <= k} are equal, with the cross-threshold covariance
+#' Cov(b_k, b_l) = (X'W_k X)^-1 X'W_kl X (X'W_l X)^-1, W_kl = pi_k (1 - pi_l)
+#' for k < l (pi = P(Y <= k)).  brant::brant copies each off-diagonal block
+#' to its mirror without transposing; here Cov(b_l, b_k) = Cov(b_k, b_l)'.
 #' @noRd
-.tso_fit_po_stacked <- function(X, y, K, max_iter, tol) {
-  # Fallback proportional-odds fit (no MASS): stack the K-1 cutpoint
-  # binary problems and constrain beta to be shared while letting
-  # cutpoint intercepts differ.  Mirrors _logit_fit_no_intercept().
-  n <- nrow(X)
+.mrm_brant_test <- function(X, y, K) {
+  X <- as.matrix(X)
   p <- ncol(X)
-  X_stack <- do.call(rbind, replicate(K - 1L, X, simplify = FALSE))
-  y_stack <- unlist(lapply(seq_len(K - 1L) - 1L,
-                           function(k) as.integer(y <= k)))
-  D <- matrix(0, n * (K - 1L), K - 1L)
-  for (k in seq_len(K - 1L)) {
-    D[((k - 1L) * n + 1L):(k * n), k] <- 1.0
+  Xi <- cbind(1, X)
+  J <- K - 1L
+  fits <- lapply(seq_len(J) - 1L, function(k) {
+    f <- suppressWarnings(stats::glm.fit(Xi, as.numeric(y <= k),
+                                         family = stats::binomial()))
+    list(beta = unname(f$coefficients), pi = f$fitted.values)
+  })
+  inv <- lapply(fits, function(f) solve(crossprod(Xi * (f$pi * (1 - f$pi)), Xi)))
+  V <- matrix(0, J * (p + 1L), J * (p + 1L))
+  for (k in seq_len(J)) {
+    for (l in k:J) {
+      blk <- inv[[k]] %*% crossprod(Xi * (fits[[k]]$pi * (1 - fits[[l]]$pi)), Xi) %*%
+        inv[[l]]
+      ik <- (k - 1L) * (p + 1L) + seq_len(p + 1L)
+      il <- (l - 1L) * (p + 1L) + seq_len(p + 1L)
+      V[ik, il] <- blk
+      V[il, ik] <- t(blk)
+    }
   }
-  Xpo <- cbind(D, X_stack)
-  fit <- stats::glm.fit(
-    Xpo, y_stack, family = stats::binomial("logit"),
-    control = list(maxit = max_iter, epsilon = tol),
-    intercept = FALSE
-  )
-  list(
-    intercepts = unname(fit$coefficients[seq_len(K - 1L)]),
-    beta = unname(fit$coefficients[(K - 1L + 1L):(K - 1L + p)])
-  )
+  keep <- unlist(lapply(seq_len(J), function(k) (k - 1L) * (p + 1L) + 1L + seq_len(p)))
+  bs <- unlist(lapply(fits, function(f) f$beta[-1L]))
+  D <- do.call(rbind, lapply(seq_len(J)[-1L], function(k) {
+    m <- matrix(0, p, J * p)
+    m[, seq_len(p)] <- diag(p)
+    m[, (k - 1L) * p + seq_len(p)] <- -diag(p)
+    m
+  }))
+  Db <- D %*% bs
+  stat <- as.numeric(crossprod(Db, solve(D %*% V[keep, keep] %*% t(D), Db)))
+  df <- (K - 2L) * p
+  list(stat = stat, df = as.integer(df),
+       p = stats::pchisq(stat, df, lower.tail = FALSE))
 }
 
 
@@ -82,8 +98,9 @@ NULL
 #'
 #' For each cumulative cutpoint \eqn{k = 1, \ldots, K-1}{k = 1, ..., K-1}, fits an
 #' independent logistic regression of \eqn{1\{Y \le k\}}{1\{Y <= k\}} on the
-#' covariates.  Optionally fits the proportional-odds baseline and
-#' returns the likelihood-ratio test of PO vs. threshold-specific.
+#' covariates.  Optionally tests proportional odds by Brant's (1990)
+#' Wald test that the slopes agree across the K - 1 fits, with their
+#' joint covariance.
 #'
 #' @param data data.frame, one row per unit.
 #' @param outcome_col Character; name of the ordinal outcome column.
@@ -96,16 +113,15 @@ NULL
 #'   and the outcome is a factor, \code{levels()} is used; otherwise
 #'   \code{sort(unique())} (rarely what you want -- pass this).
 #' @param fit_proportional_odds_first Logical; if \code{TRUE} (default)
-#'   the proportional-odds baseline is fit and an LR test against the
-#'   threshold-specific model is reported.
+#'   run Brant's test of proportional odds.
 #' @param max_iter,tol IRLS / GLM control passed to \code{\link[stats]{glm.fit}}.
 #' @return An object of class \eqn{c("mrm_threshold_specific_ordinal",
 #'   "morie_mrm_result", "list")} with elements
 #'   \code{threshold_labels}, \code{covariate_names},
 #'   \code{coefficients} (a (K-1) x p matrix), \code{cutpoints},
 #'   \code{log_likelihood}, \code{n_obs}, and (if requested)
-#'   \code{proportional_odds_lr_stat}, \code{proportional_odds_lr_df},
-#'   \code{proportional_odds_p}.
+#'   \code{proportional_odds_stat} (Brant's Wald chi-square),
+#'   \code{proportional_odds_df}, \code{proportional_odds_p}.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -220,46 +236,16 @@ mrm_threshold_specific_ordinal <- function(
     cutpoints        = cutpoints,
     log_likelihood   = total_ll,
     n_obs            = n,
-    proportional_odds_lr_stat = NA_real_,
-    proportional_odds_lr_df   = NA_integer_,
-    proportional_odds_p       = NA_real_
+    proportional_odds_stat = NA_real_,
+    proportional_odds_df   = NA_integer_,
+    proportional_odds_p    = NA_real_
   )
 
   if (isTRUE(fit_proportional_odds_first)) {
-    ll_po <- NA_real_
-    used_polr <- FALSE
-    {
-      ord_y <- factor(ordinal_levels[y + 1L],
-                      levels = ordinal_levels, ordered = TRUE)
-      dd <- cbind(data.frame(.y = ord_y),
-                  as.data.frame(X, stringsAsFactors = FALSE))
-      f  <- stats::as.formula(
-        paste(".y ~", paste(covariate_cols, collapse = " + "))
-      )
-      po_fit <- try(morie_polr(f, data = dd, method = "logistic"),
-                    silent = TRUE)
-      if (!inherits(po_fit, "try-error")) {
-        ll_po       <- as.numeric(stats::logLik(po_fit))
-        used_polr   <- TRUE
-      }
-    }
-    if (!used_polr) {
-      po <- .tso_fit_po_stacked(X, y, K, max_iter, tol)
-      ll_po <- 0.0
-      for (k in seq_len(K - 1L) - 1L) {
-        eta_k <- po$intercepts[k + 1L] + as.vector(X %*% po$beta)
-        ll_po <- ll_po + .tso_logit_ll(eta_k, as.integer(y <= k))
-      }
-    }
-    lr   <- 2.0 * (total_ll - ll_po)
-    df_l <- (K - 2L) * p
-    out$proportional_odds_lr_stat <- as.numeric(lr)
-    out$proportional_odds_lr_df   <- as.integer(df_l)
-    out$proportional_odds_p       <-
-      if (df_l > 0L && is.finite(lr) && lr > 0)
-        stats::pchisq(lr, df = df_l, lower.tail = FALSE)
-      else
-        1.0
+    bt <- .mrm_brant_test(X, y, K)
+    out$proportional_odds_stat <- bt$stat
+    out$proportional_odds_df   <- bt$df
+    out$proportional_odds_p    <- bt$p
   }
 
   decision <-
@@ -270,9 +256,9 @@ mrm_threshold_specific_ordinal <- function(
             K, p, n),
     if (is.finite(out$proportional_odds_p))
       sprintf("\
-  Proportional-odds LR test: chi2=%.3f on df=%d, p=%.4f (%s at alpha=0.05).",
-              out$proportional_odds_lr_stat,
-              out$proportional_odds_lr_df,
+  Brant proportional-odds test: chi2=%.3f on df=%d, p=%.4f (%s at alpha=0.05).",
+              out$proportional_odds_stat,
+              out$proportional_odds_df,
               out$proportional_odds_p, decision)
     else ""
   )

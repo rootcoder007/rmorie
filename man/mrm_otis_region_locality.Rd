@@ -21,7 +21,7 @@ mrm_otis_region_locality(
 }
 \value{
 A list with named elements \code{table} (the contingency matrix),
-\code{chi2}, \code{df}, \code{p_value}, \code{morie_cramers_v}, \code{diagonal_share},
+\code{chi2}, \code{df}, \code{p_value}, \code{cramers_v}, \code{diagonal_share},
 \code{off_diagonal_share}.
 }
 \description{

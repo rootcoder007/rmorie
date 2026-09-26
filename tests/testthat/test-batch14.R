@@ -486,9 +486,9 @@ test_that("mrm_otis_mortification_cooccurrence() reports pairwise Cramer's V", {
   expect_equal(nrow(res), 3L)
   expect_named(res, c(
     "alert_a", "alert_b", "n", "chi2", "df",
-    "p_value", "morie_cramers_v"
+    "p_value", "cramers_v"
   ))
-  fin <- res$morie_cramers_v[is.finite(res$morie_cramers_v)]
+  fin <- res$cramers_v[is.finite(res$cramers_v)]
   expect_true(all(fin >= 0 & fin <= 1))
   expect_true(all(res$n > 0))
 })
@@ -507,7 +507,7 @@ test_that("mrm_otis_region_locality() reports the contingency summary", {
   res <- mrm_otis_region_locality(b01)
   expect_type(res, "list")
   expect_named(res, c(
-    "table", "chi2", "df", "p_value", "morie_cramers_v",
+    "table", "chi2", "df", "p_value", "cramers_v",
     "diagonal_share", "off_diagonal_share"
   ))
   expect_true(is.table(res$table))

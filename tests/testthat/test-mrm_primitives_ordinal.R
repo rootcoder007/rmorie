@@ -28,7 +28,7 @@ set.seed(2026L)
           log_likelihood = 0,
           covariate_names = character(0),
           threshold_labels = c("a_vs_b", "b_vs_c"),
-          proportional_odds_lr_stat = NA_real_
+          proportional_odds_stat = NA_real_
         ), class = c("mrm_threshold_specific_ordinal",
                       "morie_mrm_result", "list"))
       } else {
@@ -88,7 +88,7 @@ test_that("mrm_threshold_specific_ordinal fit_proportional_odds_first=FALSE", {
     fit_proportional_odds_first = FALSE
   )
   expect_s3_class(res, "mrm_threshold_specific_ordinal")
-  expect_true(is.na(res$proportional_odds_lr_stat))
+  expect_true(is.na(res$proportional_odds_stat))
 })
 
 test_that("mrm_threshold_specific_ordinal errors on K<3 levels", {
@@ -153,4 +153,23 @@ test_that("mrm_threshold_specific_ordinal with character outcome no levels arg d
     # no ordinal_levels -> falls back to sort(unique(...))
   )
   expect_s3_class(res, "mrm_threshold_specific_ordinal")
+})
+
+test_that("proportional odds is Brant's Wald test with a symmetric covariance", {
+  i <- 1:500
+  x1 <- sin(i * 1.3)
+  x2 <- cos(i * 0.7)
+  lat <- 0.8 * x1 - 0.5 * x2 + 0.9 * sin(i * 2.9) + 0.4 * x1 * (sin(i * 5.1) > 0)
+  y <- as.integer(cut(lat, c(-Inf, -0.6, 0, 0.7, Inf))) - 1L
+  d <- data.frame(y = c("a", "b", "c", "d")[y + 1], x1, x2)
+  r <- mrm_threshold_specific_ordinal(d, "y", c("x1", "x2"),
+                                      ordinal_levels = c("a", "b", "c", "d"))
+  # brant::brant(polr(y ~ x1 + x2)) reports 3.61332812 because it copies each
+  # off-diagonal covariance block untransposed; with Cov(b_l, b_k) =
+  # Cov(b_k, b_l)' the omnibus Wald statistic is 3.6205578140454
+  expect_equal(r$proportional_odds_stat, 3.6205578140454, tolerance = 1e-10)
+  expect_equal(r$proportional_odds_df, 4L)
+  expect_equal(r$proportional_odds_p,
+               stats::pchisq(3.6205578140454, 4, lower.tail = FALSE),
+               tolerance = 1e-10)
 })

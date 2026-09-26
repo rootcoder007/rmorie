@@ -47,3 +47,19 @@ test_that("mrm_classify_mandela threshold_days=0 catches every non-zero day", {
                                denominator = "row")
   expect_true(is.list(out) || is.data.frame(out) || is.numeric(out))
 })
+
+test_that("broader restrictive confinement adds 2+ alerts regardless of duration", {
+  d <- data.frame(
+    UniqueIndividual_ID = c("a", "b", "c", "d"), EndFiscalYear = 2024,
+    NumberConsecutiveDays_Segregation = c(20, 3, 3, 3),
+    MentalHealth_Alert = c("No", "Yes", "Yes", "No"),
+    SuicideRisk_Alert = c("No", "Yes", "No", "No"),
+    SuicideWatch_Alert = c("No", "No", "No", "No"),
+    stringsAsFactors = FALSE
+  )
+  r <- mrm_classify_mandela(d, denominator = "row", broader_rc = TRUE)
+  # strict: only the 20-day placement; broader adds b (two "Yes" alerts);
+  # c has one alert, d none -- "No" strings are not alerts
+  expect_equal(r$n_mandela[1], 1L)
+  expect_equal(r$n_broader_rc[1], 2L)
+})

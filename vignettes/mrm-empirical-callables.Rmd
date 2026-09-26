@@ -99,7 +99,7 @@ region in the full b01.
 # morie_fetch_tps(...) if needed.)
 res <- mrm_otis_region_locality(b01)
 print(res$table)
-cat("diagonal share:", res$diagonal_share, "  V:", res$morie_cramers_v, "\n")
+cat("diagonal share:", res$diagonal_share, "  V:", res$cramers_v, "\n")
 ```
 
 ## Mandela classification

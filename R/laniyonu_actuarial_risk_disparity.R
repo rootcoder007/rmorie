@@ -176,41 +176,14 @@ NULL
       pofits[[k]] <- fit
     }
     # Proportional-odds LR test: pooled (PO) vs threshold-specific
-    yk_long <- unlist(lapply(thresholds, function(k) as.integer(y_int > k)))
-    thresh_long <- factor(rep(thresh_labels, each = length(y_int)))
-    X_pool_long <- do.call(rbind, replicate(length(thresholds), X,
-                                              simplify = FALSE))
-    df_pool <- data.frame(.y = yk_long, .thresh = thresh_long,
-                          X_pool_long, check.names = FALSE)
-    pofit <- tryCatch(
-      suppressWarnings(stats::glm(
-        as.formula(paste(".y ~ .thresh +",
-                          paste0("`", cov_cols, "`", collapse = " + "))),
-        data = df_pool, family = stats::binomial()
-      )),
-      error = function(e) NULL
-    )
-    tsfit <- tryCatch(
-      suppressWarnings(stats::glm(
-        as.formula(paste(".y ~ .thresh *",
-                          paste0("(`", paste(cov_cols, collapse = "` + `"),
-                                  "`)"))),
-        data = df_pool, family = stats::binomial()
-      )),
-      error = function(e) NULL
-    )
-    lr_stat <- NA_real_
-    lr_df <- NA_integer_
-    lr_p <- NA_real_
-    if (!is.null(pofit) && !is.null(tsfit)) {
-      lr_stat <- 2 * (as.numeric(stats::logLik(tsfit))
-                       - as.numeric(stats::logLik(pofit)))
-      lr_df <- tsfit$df.null - tsfit$df.residual -
-        (pofit$df.null - pofit$df.residual)
-      if (is.finite(lr_stat) && lr_df > 0L) {
-        lr_p <- stats::pchisq(lr_stat, lr_df, lower.tail = FALSE)
-      }
-    }
+    # proportional odds: Brant's (1990) Wald test on the threshold fits
+    # (the stacked-glm LR treated the K - 1 copies of each row as
+    # independent observations)
+    bt <- tryCatch(.mrm_brant_test(X, y_int - 1L, length(ordinal_levels)),
+                   error = function(e) NULL)
+    lr_stat <- if (is.null(bt)) NA_real_ else bt$stat
+    lr_df <- if (is.null(bt)) NA_integer_ else bt$df
+    lr_p <- if (is.null(bt)) NA_real_ else bt$p
     list(
       stratum = stratum_label,
       thresh_labels = thresh_labels,
@@ -295,10 +268,10 @@ NULL
     lines <- "No stratum/race combination showed |beta_low->med| / |beta_med->high| >= 1.5."
   }
   po_text <- if (is.finite(worst_p)) {
-    sprintf("Proportional-odds LR test (worst stratum): chi2=%.3f on %d df, p=%.4g.",
+    sprintf("Brant proportional-odds test (worst stratum): chi2=%.3f on %d df, p=%.4g.",
             worst_stat, worst_df_v, worst_p)
   } else {
-    "Proportional-odds LR test not computable."
+    "Brant proportional-odds test not computable."
   }
   caveat <- paste(
     "CAVEAT: this reports OUTPUT disparity, not predictive-validity",
@@ -318,8 +291,8 @@ NULL
     gender_col = gender_col,
     ordinal_result = results,
     per_threshold_logodds = per_thresh,
-    proportional_odds_lr_stat = worst_stat,
-    proportional_odds_lr_df = worst_df_v,
+    proportional_odds_stat = worst_stat,
+    proportional_odds_df = worst_df_v,
     proportional_odds_p = worst_p
   )
 }
