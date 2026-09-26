@@ -381,3 +381,76 @@ morie_fastxt <- function(corpus, dim = 50, n_min = 3, n_max = 6,
   fasttext(corpus, dim, n_min, n_max, window, epochs, lr, negative,
            min_count, boundary, whole_word, hash_buckets, seed)
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .subwords
+#'
+#' A step of the fastxt_native implementation. Called by \code{.word_vector}, \code{fasttext}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param word Coerced to character by the body, with \code{as.character}.
+#' @param n_min Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
+#' @param n_max Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6L}.
+#' @param boundary A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param whole_word A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @return The value of \code{grams}, as built in the body.
+#' @export
+.subwords <- function(word, n_min = 3L, n_max = 6L, boundary = TRUE,
+                      whole_word = TRUE) {
+  lo <- as.integer(n_min)
+  hi <- as.integer(n_max)
+  if (lo < 1L) stop(sprintf("subwords: n_min must be at least 1, got %s", format(n_min)))
+  if (hi < lo) stop(sprintf("subwords: n_max (%s) is below n_min (%s)", format(n_max), format(n_min)))
+  w <- as.character(word)
+  padded <- if (isTRUE(boundary)) paste0("<", w, ">") else w
+  grams <- character(0)
+  seen <- character(0)
+  for (n in lo:hi) {
+    for (i in 1:(nchar(padded) - n + 1L)) {
+      g <- substr(padded, i, i + n - 1L)
+      if (!(g %in% seen)) {
+        seen <- c(seen, g)
+        grams <- c(grams, g)
+      }
+    }
+  }
+  if (isTRUE(whole_word)) {
+    special <- if (isTRUE(boundary)) paste0("<", w, ">") else w
+    if (!(special %in% seen)) grams <- c(grams, special)
+  }
+  grams
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .word_vector
+#'
+#' A step of the fastxt_native implementation. Called by \code{fasttext}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param word Passed to \code{.subwords}.
+#' @param Z A matrix; indexed by row and column.
+#' @param gram_index Passed to \code{.gram_slot}.
+#' @param n_min Passed to \code{.subwords}. Defaults to \code{3L}.
+#' @param n_max Passed to \code{.subwords}. Defaults to \code{6L}.
+#' @param boundary Passed to \code{.subwords}. Defaults to \code{TRUE}.
+#' @param whole_word Passed to \code{.subwords}. Defaults to \code{TRUE}.
+#' @param hash_buckets Passed to \code{.gram_slot}.
+#' @return A list with \code{v}, \code{hit}.
+#' @export
+.word_vector <- function(word, Z, gram_index, n_min = 3L, n_max = 6L,
+                         boundary = TRUE, whole_word = TRUE,
+                         hash_buckets = NULL) {
+  dim_ <- ncol(Z)
+  if (is.null(dim_)) dim_ <- 0L
+  v <- rep(0, dim_)
+  hit <- 0L
+  for (g in .subwords(word, n_min, n_max, boundary, whole_word)) {
+    idx <- .gram_slot(g, gram_index, hash_buckets)
+    if (is.null(idx)) next
+    hit <- hit + 1L
+    for (t in seq_len(dim_)) v[t] <- v[t] + Z[idx, t]
+  }
+  list(v = v, hit = hit)
+}

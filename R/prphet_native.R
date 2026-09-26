@@ -310,3 +310,193 @@ morie_prphet_predict <- function(fit, t.new, seasonalities = NULL,
 
 # house entry point: the package exports one morie_<module>
 morie_prphet <- morie_prphet_piecewise_trend
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Cosine and sine Fourier pairs, exactly periodic with \code{period}
+#'
+#' @param t Numeric vector of times.
+#' @param period Positive period.
+#' @param order Integer, number of harmonics.
+#' @return A list of rows, each \code{2 * order} long.
+#' @export
+fourier_terms <- function(t, period, order) {
+  if (period <= 0)
+    stop(sprintf("prphet: period must be positive, got %r", period))
+  order <- as.integer(order)
+  if (order < 1L)
+    stop(sprintf("prphet: order must be at least 1, got %d", order))
+  rows <- list()
+  for (tv in t) {
+    row <- numeric(0)
+    for (n in seq_len(order)) {
+      ang <- 2.0 * pi * n * tv / period
+      row <- c(row, cos(ang), sin(ang))
+    }
+    rows[[length(rows) + 1L]] <- row
+  }
+  rows
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' One indicator per holiday, optionally widened by a window
+#'
+#' @param t Numeric vector of times.
+#' @param holidays Named list of dates per holiday.
+#' @param lower Integer, days before the holiday to flag.
+#' @param upper Integer, days after the holiday to flag.
+#' @return A list with \code{matrix} (list of rows) and \code{names}
+#'   (sorted holiday names).
+#' @export
+holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
+  names_ <- sort(names(holidays))
+  rows <- list()
+  for (tv in t) {
+    row <- numeric(0)
+    for (nm in names_) {
+      hit <- 0.0
+      for (d in holidays[[nm]]) {
+        if (d - lower <= tv && tv <= d + upper) {
+          hit <- 1.0
+          break
+        }
+      }
+      row <- c(row, hit)
+    }
+    rows[[length(rows) + 1L]] <- row
+  }
+  list(matrix = rows, names = names_)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Evaluate the piecewise-linear trend (Eq. 4 of Taylor & Letham 2018)
+#'
+#' The offsets carry \code{gamma_j = -s_j delta_j} so the segments join
+#' by construction.
+#'
+#' @param t Numeric vector of times.
+#' @param k_rate Initial rate.
+#' @param m_off Initial offset.
+#' @param deltas Numeric vector of rate adjustments, one per changepoint.
+#' @param cps Numeric vector of changepoints.
+#' @return Numeric vector of trend values.
+#' @export
+piecewise_trend <- function(t, k_rate, m_off, deltas, cps) {
+  out <- numeric(length(t))
+  for (i in seq_along(t)) {
+    tv <- t[i]
+    a <- ifelse(tv >= cps, 1.0, 0.0)
+    rate <- k_rate + sum(a * deltas)
+    off <- m_off + sum(a * (-cps * deltas))
+    out[i] <- rate * tv + off
+  }
+  out
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Stack trend, seasonality and holiday columns into one design
+#'
+#' @param t Numeric vector of times.
+#' @param cps Numeric vector of changepoints.
+#' @param seasonalities Optional list of \code{c(name, period, order)}.
+#' @param holidays Optional named list of dates per holiday.
+#' @param holiday_window \code{c(lower, upper)} window around each date.
+#' @return A list with \code{X} (list of rows), \code{cols}, \code{hn}.
+#' @export
+prophet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
+                           holiday_window = c(0, 0)) {
+  tm <- trend_matrix(t, cps)
+  cols <- c("k", "m", paste0("delta_", seq_along(cps) - 1L))
+  blocks <- list(tm)
+  seas <- seasonalities
+  if (!is.null(seas)) {
+    for (s in seas) {
+      blocks[[length(blocks) + 1L]] <-
+        fourier_terms(t, s[[2L]], s[[3L]])
+      for (n in seq_len(as.integer(s[[3L]]))) {
+        cols <- c(cols, paste0(s[[1L]], "_cos", n),
+                  paste0(s[[1L]], "_sin", n))
+      }
+    }
+  }
+  hn <- character(0)
+  if (!is.null(holidays)) {
+    hm <- holiday_matrix(t, holidays, holiday_window[1L],
+                         holiday_window[2L])
+    blocks[[length(blocks) + 1L]] <- hm$matrix
+    hn <- hm$names
+    cols <- c(cols, paste0("holiday_", hn))
+  }
+  X <- lapply(seq_along(t), function(i)
+    unlist(lapply(blocks, function(b) b[[i]])))
+  list(X = X, cols = cols, hn = hn)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Forecast at new times, reusing the fitted coefficients
+#'
+#' @param fit A fit object as returned by \code{\link{morie_prphet_fit}}.
+#' @param t_new Numeric vector of new times.
+#' @param seasonalities Same as for the fit.
+#' @param holidays Same as for the fit.
+#' @param holiday_window Same as for the fit.
+#' @return Numeric vector of forecasts.
+#' @export
+prophet_predict <- function(fit, t_new, seasonalities = NULL,
+                            holidays = NULL, holiday_window = c(0, 0)) {
+  tn <- as.numeric(t_new)
+  ds <- prophet_design(tn, fit$changepoints, seasonalities, holidays,
+                       holiday_window)
+  if (!identical(ds$cols, fit$columns))
+    stop("prphet: the prediction design does not match the fitted one; ",
+         "pass the same seasonalities and holidays")
+  X <- ds$X
+  beta <- fit$beta
+  vapply(seq_along(tn), function(i)
+    sum(X[[i]] * beta), numeric(1))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' prphet cheatsheet
+#'
+#' One-paragraph summary of the method and the traps in using it.
+#' @return A character string.
+#' @examples
+#' prphet_cheatsheet()
+#' @export
+prphet_cheatsheet <- function() {
+  paste0("prphet: y = g(t) + s(t) + h(t) + eps. Trend g = (k + ",
+         "a(t)'delta)t + (m + a(t)'gamma) with gamma_j = -s_j ",
+         "delta_j -- that is what JOINS the segments; without it the ",
+         "curve jumps at every changepoint and least squares hides ",
+         "it in the residual. s(t) is a Fourier series, exactly ",
+         "periodic. Holidays need their own indicators because they ",
+         "move. Penalise the deltas ONLY.")
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Design columns for k, m and each delta_j
+#'
+#' The delta column is \code{a_j(t)(t - s_j)}, which already carries
+#' the \code{-s_j delta_j} offset -- so continuity holds by construction.
+#'
+#' @param t Numeric vector of times.
+#' @param cps Numeric vector of changepoints.
+#' @return A list of rows, each a numeric vector.
+#' @export
+trend_matrix <- function(t, cps) {
+  rows <- list()
+  for (tv in t) {
+    row <- c(tv, 1.0)
+    for (s in cps) row <- c(row, if (tv >= s) tv - s else 0.0)
+    rows[[length(rows) + 1L]] <- row
+  }
+  rows
+}
+
+# -- restored: pre-sync definition (prophet) --
+#' @noRd
+prophet <- morie_prphet_fit
+
+# -- restored: pre-sync definition (prophetfit) --
+#' @noRd
+prophetfit <- morie_prphet_fit

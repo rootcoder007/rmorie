@@ -1588,3 +1588,118 @@ auto_test <- function(x, y = NULL, paired = FALSE, confidence = 0.95) {
   }
   mann_whitney_u(x, y)
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Fleiss' kappa for multiple raters
+#' @param ratings_matrix Matrix; rows = subjects, cols = categories,
+#'   cells = number of raters assigning subject i to category j.
+#' @return A \code{morie_test_result} (subclass of \code{morie_rich_result})
+#'   with the z statistic, two-sided p-value, kappa as both
+#'   \code{effect_size} and \code{estimate}, n (number of subjects), and
+#'   \code{extra} list carrying \code{n_raters} and \code{n_categories}.
+#' @examples
+#' set.seed(1)
+#' mat <- matrix(0, nrow = 20, ncol = 3)
+#' for (i in seq_len(20)) {
+#'   pick <- sample.int(3, 5, replace = TRUE)
+#'   for (k in pick) mat[i, k] <- mat[i, k] + 1
+#' }
+#' res <- fleiss_kappa(mat)
+#' res$test_statistic
+#' @export
+fleiss_kappa <- function(ratings_matrix) {
+  tab <- as.matrix(ratings_matrix)
+  n <- nrow(tab)
+  k <- ncol(tab)
+  N_raters <- sum(tab[1, ])
+  p_j <- colSums(tab) / (n * N_raters)
+  P_i <- (rowSums(tab^2) - N_raters) / (N_raters * (N_raters - 1))
+  P_bar <- mean(P_i)
+  P_e <- sum(p_j^2)
+  kap <- if ((1 - P_e) > 0) (P_bar - P_e) / (1 - P_e) else 0
+  se_num <- 2 / (n * N_raters * (N_raters - 1))
+  se_term <- sum(p_j * (1 - p_j))^2
+  denom <- (1 - P_e)^2
+  se <- if (denom > 0) sqrt(se_num * (se_term / denom)) else 0
+  z <- if (se > 0) kap / se else 0
+  p_val <- 2 * stats::pnorm(-abs(z))
+  .stat_result(
+    method = "Fleiss' kappa",
+    test_statistic = z, p_value = p_val,
+    effect_size = kap, estimate = kap, n = n,
+    extra = list(n_raters = N_raters, n_categories = k)
+  )
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Jarque-Bera test for normality
+#' @param x Numeric vector.
+#' @return A \code{morie_test_result} (subclass of \code{morie_rich_result})
+#'   with the Jarque-Bera JB statistic, p-value, df = 2, and sample size n.
+#' @examples
+#' set.seed(1)
+#' res <- jarque_bera(rnorm(100))
+#' res$p_value
+#' @export
+jarque_bera <- function(x) {
+  x <- .stat_validate(x)
+  n <- length(x)
+  m <- mean(x)
+  s <- sd(x)
+  if (s == 0)
+    return(.stat_result("Jarque-Bera test", 0, 1, df = 2, n = n))
+  skew <- mean((x - m)^3) / s^3
+  kurt <- mean((x - m)^4) / s^4 - 3
+  jb <- n / 6 * (skew^2 + kurt^2 / 4)
+  p <- 1 - stats::pchisq(jb, df = 2)
+  .stat_result(
+    method = "Jarque-Bera test",
+    test_statistic = jb, p_value = p, df = 2, n = n
+  )
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Kruskal-Wallis H-test
+#' @param ... Two or more numeric vectors.
+#' @return A \code{morie_test_result} (subclass of \code{morie_rich_result})
+#'   with the H statistic, p-value, df, and eta-squared effect size.
+#' @examples
+#' set.seed(1)
+#' res <- kruskal_wallis(rnorm(20), rnorm(20, mean = 1), rnorm(20, mean = 2))
+#' res$df
+#' @export
+kruskal_wallis <- function(...) {
+  groups <- list(...)
+  cleaned <- lapply(groups, .stat_validate)
+  vals <- unlist(cleaned)
+  grp <- factor(rep(seq_along(cleaned), lengths(cleaned)))
+  kt <- stats::kruskal.test(vals, grp)
+  k <- length(cleaned)
+  n_total <- length(vals)
+  h_stat <- unname(kt$statistic)
+  eta2_h <- if ((n_total - k) > 0) (h_stat - k + 1) / (n_total - k) else 0
+  .stat_result(
+    method = "Kruskal-Wallis H-test",
+    test_statistic = h_stat, p_value = kt$p.value,
+    df = k - 1, effect_size = max(eta2_h, 0), n = n_total
+  )
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Shapiro-Wilk test for normality
+#' @param x Numeric vector (n <= 5000).
+#' @return A \code{morie_test_result} (subclass of \code{morie_rich_result})
+#'   with the Shapiro-Wilk W statistic, p-value, and sample size n.
+#' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' shapiro_wilk(V)
+shapiro_wilk <- function(x) {
+  x <- .stat_validate(x)
+  sw <- stats::shapiro.test(x)
+  .stat_result(
+    method = "Shapiro-Wilk test",
+    test_statistic = unname(sw$statistic),
+    p_value = sw$p.value, n = length(x)
+  )
+}

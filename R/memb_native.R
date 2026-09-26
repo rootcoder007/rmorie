@@ -583,3 +583,19 @@ morie_memb <- function(op, ...) {
     stop("memb: unknown op ", shQuote(op))
   )
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .memb_rng
+#'
+#' A step of the memb_native implementation. Called by \code{synthesize},
+#' \code{synthesize_marginals}, \code{synthesize_noisy}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param seed Passed to \code{.ghc_rng}.
+#' @return The value of \code{.ghc_rng}.
+#' @export
+#' @examples
+#' res <- .memb_rng(seed = 1L)
+#' res
+.memb_rng <- function(seed) .ghc_rng(seed)

@@ -396,3 +396,239 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 
 # house entry point: the package exports one morie_<module>
 morie_sechsh <- morie_sechsh_chain_entry
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Build a complete chain from a list of entries
+#' @param entries See Usage.
+#' @param key See Usage.
+#' @param genesis See Usage.
+#' @export
+build_chain <- function(entries, key = NULL, genesis = .GENESIS) {
+  prev <- .sechsh_as_bytes(genesis)
+  hashes <- list()
+  for (e in entries) {
+    prev <- chain_entry(prev, e, key)$hash
+    hashes[[length(hashes) + 1L]] <- prev
+  }
+  list(hashes = hashes,
+       head = if (length(hashes) > 0L) prev else .sechsh_as_bytes(genesis),
+       n = length(hashes),
+       head_hex = .sechsh_hexlify(if (length(hashes) > 0L) prev
+                           else .sechsh_as_bytes(genesis)),
+       keyed = !is.null(key))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' One step of the hash chain
+#' @param previous_hash See Usage.
+#' @param entry See Usage.
+#' @param key See Usage.
+#' @export
+chain_entry <- function(previous_hash, entry, key = NULL) {
+  p <- .sechsh_as_bytes(previous_hash)
+  e <- .sechsh_as_bytes(entry)
+  if (is.null(key)) {
+    return(list(hash = .rmorie_sha256_impl(c(p, e)), keyed = FALSE))
+  }
+  list(hash = .rmorie_hmac_sha256_impl(key, c(p, e)), keyed = TRUE,
+       note = paste("forward rewriting now needs the KEY as well ",
+                    "as write access"))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .constant_time_equal
+#'
+#' A step of the sechsh_native implementation. Called by \code{verify_chain},
+#' \code{verify_inclusion}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
+#' @return A logical value.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .constant_time_equal(a = A, b = b)
+#' res
+.constant_time_equal <- function(a, b) {
+  if (length(a) != length(b)) return(FALSE)
+  v <- as.integer(bitwXor(as.integer(a), as.integer(b)))
+  v <- sum(v)
+  v == 0L
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .sechsh_as_bytes
+#'
+#' A step of the sechsh_native implementation. Called by \code{build_chain},
+#' \code{chain_entry}, \code{verify_chain} and 1 others in the module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
+#' @return Nothing; this branch always raises.
+#' @export
+.sechsh_as_bytes <- function(x) {
+  if (is.raw(x)) return(x)
+  if (is.character(x)) return(charToRaw(paste(x, collapse = "")))
+  if (is.null(x)) return(raw(0))
+  stop("expected raw, character or NULL")
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .sechsh_hexlify
+#'
+#' A step of the sechsh_native implementation. Called by \code{build_chain},
+#' \code{verify_inclusion}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param bs Coerced to integer by the body, with \code{as.integer}.
+#' @return A character value.
+#' @export
+.sechsh_hexlify <- function(bs) {
+  paste(format(as.hexmode(as.integer(bs)), width = 2,
+               upper.case = TRUE), collapse = "")
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Build an inclusion proof (audit path) for the given leaf
+#' @param leaves See Usage.
+#' @param index See Usage.
+#' @export
+inclusion_proof <- function(leaves, index) {
+  L <- lapply(leaves, .sechsh_as_bytes)
+  m <- as.integer(index)
+  if (m < 0L || m >= length(L)) {
+    stop("sechsh: index ", m, " is outside a log of ",
+         length(L))
+  }
+  path <- list()
+  lo <- 0L
+  hi <- length(L)
+  while (hi - lo > 1L) {
+    k <- 1L
+    while (k * 2L < hi - lo) k <- k * 2L
+    if (m - lo < k) {
+      path[[length(path) + 1L]] <- merkle_root(L[(lo + k + 1L):hi])
+      hi <- lo + k
+    } else {
+      path[[length(path) + 1L]] <- merkle_root(L[(lo + 1L):(lo + k)])
+      lo <- lo + k
+    }
+  }
+  list(path = path,
+       path_hex = lapply(path, .sechsh_hexlify),
+       length = length(path), index = m, size = length(L),
+       note = paste("log2(n) hashes prove membership against a ",
+                    "trusted head"))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' RFC 6962 Merkle Tree Hash
+#' @param leaves See Usage.
+#' @export
+merkle_root <- function(leaves) {
+  L <- lapply(leaves, .sechsh_as_bytes)
+  if (length(L) == 0L) return(.rmorie_sha256_impl(raw(0)))
+  if (length(L) == 1L) return(.rmorie_sha256_impl(c(.LEAF, L[[1L]])))
+  k <- 1L
+  while (k * 2L < length(L)) k <- k * 2L
+  c1 <- do.call(merkle_root, list(L[seq_len(k)]))
+  c2 <- do.call(merkle_root, list(L[(k + 1L):length(L)]))
+  .rmorie_sha256_impl(c(.NODE, c1, c2))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Verify a chain, returning the FIRST bad index (not just a boolean)
+#' @param entries See Usage.
+#' @param hashes See Usage.
+#' @param key See Usage.
+#' @param genesis See Usage.
+#' @export
+verify_chain <- function(entries, hashes, key = NULL,
+                         genesis = .GENESIS) {
+  if (length(entries) != length(hashes)) {
+    stop("sechsh: ", length(entries), " entries but ",
+         length(hashes), " hashes -- an entry or a hash has been ",
+         "dropped")
+  }
+  prev <- .sechsh_as_bytes(genesis)
+  first_bad <- NULL
+  for (i in seq_along(entries)) {
+    want <- chain_entry(prev, entries[[i]], key)$hash
+    if (!.constant_time_equal(want, hashes[[i]])) {
+      if (is.null(first_bad)) first_bad <- i - 1L
+    }
+    prev <- .sechsh_as_bytes(hashes[[i]])
+  }
+  list(estimate = is.null(first_bad), intact = is.null(first_bad),
+       first_bad = first_bad,
+       verified_through = if (is.null(first_bad))
+         length(entries) else first_bad,
+       n = length(entries),
+       method = "hash-chained audit log; Schneier & Kelsey (1999)",
+       note = paste("tamper-EVIDENT, not tamper-proof: an attacker ",
+                    "who can rewrite the whole tail recomputes every ",
+                    "later hash, which is what keying and external ",
+                    "anchoring are for"))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Recompute the root from a leaf and an audit path
+#' @param leaf See Usage.
+#' @param index See Usage.
+#' @param size See Usage.
+#' @param path See Usage.
+#' @param root See Usage.
+#' @export
+verify_inclusion <- function(leaf, index, size, path, root) {
+  m <- as.integer(index)
+  n <- as.integer(size)
+  if (m < 0L || m >= n) {
+    stop("sechsh: index ", m, " is outside a log of ", n)
+  }
+  node <- .rmorie_sha256_impl(c(.LEAF, .sechsh_as_bytes(leaf)))
+  # The Python collects the descent top-down, then folds bottom-up.
+  lo <- 0L
+  hi <- n
+  steps <- list()
+  used <- 0L
+  p <- as.list(path)
+  while (hi - lo > 1L) {
+    if (used >= length(p)) {
+      stop("sechsh: the audit path is too short for a log of ", n)
+    }
+    k <- 1L
+    while (k * 2L < hi - lo) k <- k * 2L
+    sib <- .sechsh_as_bytes(p[[used + 1L]])
+    used <- used + 1L
+    if (m - lo < k) {
+      steps[[length(steps) + 1L]] <- list(sib = sib, on_right = TRUE)
+      hi <- lo + k
+    } else {
+      steps[[length(steps) + 1L]] <- list(sib = sib, on_right = FALSE)
+      lo <- lo + k
+    }
+  }
+  for (j in rev(seq_along(steps))) {
+    st <- steps[[j]]
+    if (st$on_right) {
+      node <- .rmorie_sha256_impl(c(.NODE, node, st$sib))
+    } else {
+      node <- .rmorie_sha256_impl(c(.NODE, st$sib, node))
+    }
+  }
+  list(root = node, root_hex = .sechsh_hexlify(node),
+       valid = .constant_time_equal(node, root),
+       path_used = used)
+}
+
+# -- restored: morie-only objects kept through the rmorie sync --
+.GENESIS <- raw(32)
+
+.LEAF <- as.raw(0x00)
+
+.NODE <- as.raw(0x01)

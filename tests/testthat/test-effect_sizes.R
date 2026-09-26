@@ -194,3 +194,94 @@ test_that("round four: random_effects_meta honours method", {
                  isTRUE(all.equal(dl$extra$tau_squared, reml$extra$tau_squared)))
   expect_error(random_effects_meta(est, se, method = "HS"), "method")
 })
+
+test_that("random_effects_meta PM and REML match metafor::rma", {
+  # metafor::rma(y, sei = s, method = m, control = list(tol = 1e-15,
+  # threshold = 1e-15)); PM is also checked through its defining equation
+  y <- c(0.20, 0.35, 0.15, 0.62, -0.05, 0.41)
+  s <- c(0.08, 0.10, 0.07, 0.15, 0.12, 0.09)
+  qg <- function(t) {
+    w <- 1 / (s^2 + t)
+    sum(w * (y - sum(w * y) / sum(w))^2)
+  }
+  pm <- random_effects_meta(y, s, method = "PM")$extra$tau_squared
+  expect_equal(pm, 0.037823443092707444, tolerance = 1e-12)
+  expect_equal(qg(pm), length(y) - 1, tolerance = 1e-12)
+  expect_equal(random_effects_meta(y, s, method = "REML")$extra$tau_squared,
+               0.0322950288465516, tolerance = 1e-12)
+  expect_equal(random_effects_meta(y, s, method = "DL")$extra$tau_squared,
+               0.0249786151186425, tolerance = 1e-12)
+  # homogeneous studies: every estimator truncates at zero
+  expect_equal(random_effects_meta(c(0.1, 0.12, 0.11), c(0.2, 0.25, 0.3),
+                                   method = "PM")$extra$tau_squared, 0)
+  expect_error(random_effects_meta(y, s, method = "SJ"), "method must be")
+})
+
+test_that("round four: cramers_v carries a noncentral chi-square interval", {
+  r <- cramers_v(matrix(c(10, 30, 20, 15), 2))
+  expect_true(is.finite(r$ci_lower) && is.finite(r$ci_upper))
+  expect_true(r$ci_lower <= r$estimate && r$estimate <= r$ci_upper)
+  expect_equal(r$extra$confidence, 0.95)
+})
+
+test_that("hedges_g uses the exact J; cohens_d SE is Hedges-Olkin; CLES counts ties", {
+  # effectsize::hedges_g / cohens_d and metafor::escalc("SMD") on these data
+  x <- c(5.1, 6.3, 4.8, 7.2, 5.9, 6.6, 5.4)
+  y <- c(4.2, 5.0, 3.9, 5.8, 4.4, 4.9, 5.3, 4.1, 4.6)
+  d <- cohens_d(x, y)
+  expect_equal(d$estimate, 1.6559198522887781, tolerance = 1e-12)
+  expect_equal(d$se, sqrt(16 / 63 + d$estimate^2 / 32), tolerance = 1e-14)
+  m <- 14
+  J <- exp(lgamma(m / 2) - 0.5 * log(m / 2) - lgamma((m - 1) / 2))
+  g <- hedges_g(x, y)
+  expect_equal(g$estimate, 1.5653207170841281, tolerance = 1e-12)
+  expect_equal(g$extra$correction_factor, J, tolerance = 1e-14)
+  # pairs: x > y in 5 of 9, ties in 2, counted as 1/2 each
+  cl <- cles(c(1, 2, 3), c(2, 2, 0))
+  expect_equal(cl$estimate, (5 + 0.5 * 2) / 9)
+})
+
+test_that("zero cells get the metafor 1/2 correction; NNT interval spans infinity", {
+  # metafor::escalc("OR"/"RR"/"IRR") values
+  o <- odds_ratio(7, 0, 4, 10)
+  expect_equal(o$estimate, (7.5 * 10.5) / (0.5 * 4.5), tolerance = 1e-14)
+  expect_equal(o$se, sqrt(1 / 7.5 + 1 / 0.5 + 1 / 4.5 + 1 / 10.5), tolerance = 1e-14)
+  expect_equal(o$ci_lower, exp(log(35) - qnorm(0.975) * 1.565501086168148), tolerance = 1e-12)
+  expect_equal(odds_ratio(12, 5, 3, 9)$se, 0.85309892613798188, tolerance = 1e-12)
+  expect_equal(risk_ratio(7, 0, 4, 10)$estimate, 3.125, tolerance = 1e-14)
+  expect_equal(risk_ratio(7, 0, 4, 10)$se, 0.40483192671637058, tolerance = 1e-12)
+  expect_equal(rate_ratio(0, 120, 6, 150)$estimate, 0.096153846153846145, tolerance = 1e-12)
+  expect_equal(rate_ratio(0, 120, 6, 150)$se, 1.4675987714106855, tolerance = 1e-12)
+  rd <- risk_difference(5, 5, 4, 6)
+  nn <- number_needed_to_treat(5, 5, 4, 6)
+  expect_true(rd$ci_lower < 0 && rd$ci_upper > 0)
+  expect_equal(nn$ci_lower, 1 / rd$ci_upper, tolerance = 1e-14)
+  expect_equal(nn$ci_upper, Inf)
+  expect_true(nn$extra$ci_spans_zero)
+})
+
+test_that("r_squared interval handles an r interval spanning zero", {
+  x <- c(1, 2, 3, 4, 5, 6)
+  y <- c(2, 1, 4, 3, 6, 2)
+  r <- r_effect_size(x, y)
+  r2 <- r_squared(x, y)
+  expect_true(r$ci_lower < 0 && r$ci_upper > 0)
+  expect_equal(r2$ci_lower, 0)
+  expect_equal(r2$ci_upper, max(r$ci_lower^2, r$ci_upper^2))
+})
+
+test_that("rank-biserial is positive when x exceeds y; adjusted V is Bergsma's", {
+  # effectsize::rank_biserial and effectsize::cramers_v(adjust = TRUE)
+  x <- c(5.1, 6.3, 4.8, 7.2, 5.9, 6.6, 5.4)
+  y <- c(4.2, 5.0, 3.9, 5.8, 4.4, 4.9, 5.3, 4.1, 4.6)
+  expect_equal(rank_biserial_correlation(x, y)$estimate, 0.7777777777777778, tolerance = 1e-14)
+  expect_equal(rank_biserial_correlation(x, y)$estimate, cliffs_delta(x, y)$estimate, tolerance = 1e-14)
+  tb <- matrix(c(12, 5, 7, 3, 9, 6, 8, 4, 10), 3)
+  cv <- cramers_v(tb)
+  expect_equal(cv$estimate, 0.2556545, tolerance = 1e-6)
+  expect_equal(cv$extra$bias_corrected_v, 0.1863203, tolerance = 1e-6)
+  n <- sum(tb)
+  chi2 <- n * 2 * cv$estimate^2
+  expect_equal(cv$extra$bias_corrected_v,
+               sqrt((chi2 / n - 4 / (n - 1)) / (3 - 4 / (n - 1) - 1)), tolerance = 1e-14)
+})

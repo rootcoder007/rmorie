@@ -386,3 +386,129 @@ conservative_q_learning <- offlrl
 }
 
 morie_offlrl <- offlrl
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' offlrl_as_dist
+#'
+#' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param d Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param S See Usage.
+#' @param A See Usage.
+#' @param name Passed to \code{stop}.
+#' @return A list with \code{matrix}, \code{lookup}.
+#' @export
+offlrl_as_dist <- function(d, S, A, name) {
+  if (is.null(d)) return(NULL)
+  out <- list()
+  for (s in S) {
+    for (a in A) {
+      if (is.function(d)) {
+        out[[paste0(s, "|", a)]] <- as.numeric(d(s, a))
+      } else {
+        out[[paste0(s, "|", a)]] <- as.numeric(d[[paste0(s, "|", a)]])
+      }
+    }
+  }
+  for (s in S) {
+    tot <- 0
+    for (a in A) tot <- tot + out[[paste0(s, "|", a)]]
+    if (abs(tot - 1) > 1e-6)
+      stop("offlrl: ", name, "(.|", deparse(s), ") sums to ", tot,
+           ", not 1")
+  }
+  list(matrix = out, lookup = function(s, a) {
+    out[[paste0(s, "|", a)]]
+  })
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' offlrl_cheatsheet
+#'
+#' A step of the offlrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
+offlrl_cheatsheet <- function() {
+  paste("offlrl: CQL (Kumar 2020). Fitted Q plus alpha*(push DOWN ",
+        "E_mu[Q] - push UP E_pi_beta[Q]) so the Q-function LOWER ",
+        "BOUNDS the truth and OOD actions stop being over-estimated. ",
+        "variant='H' is eq. 4's logsumexp (rho=Unif); 'rho' uses ",
+        "pi^{k-1}; 'mu' is eq. 2 directly. Thm 3.2 bounds the ",
+        "EXPECTED value under pi, not pointwise. alpha=0 is plain ",
+        "fitted Q.")
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' offlrl_logsumexp
+#'
+#' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param v Numeric; passed to \code{max}.
+#' @return A numeric value.
+#' @export
+offlrl_logsumexp <- function(v) {
+  m <- max(v)
+  m + log(sum(exp(v - m)))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' offlrl_lookup
+#'
+#' A step of the offlrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param mat A vector; indexed elementwise.
+#' @param s Passed to \code{paste0}.
+#' @param a Passed to \code{paste0}.
+#' @return The value of \code{[[}.
+#' @export
+offlrl_lookup <- function(mat, s, a) {
+  mat[[paste0(s, "|", a)]]
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' offlrl_safe_max_key
+#'
+#' A step of the offlrl_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param qmap A vector; indexed elementwise.
+#' @param s Passed to \code{paste0}.
+#' @param A A vector; indexed elementwise.
+#' @return The value of \code{best_a}, as built in the body.
+#' @export
+offlrl_safe_max_key <- function(qmap, s, A) {
+  best_v <- -Inf
+  best_a <- A[1]
+  for (a in A) {
+    v <- qmap[[paste0(s, "|", a)]]
+    if (v > best_v) { best_v <- v
+    best_a <- a }
+  }
+  best_a
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' offlrl_softmax
+#'
+#' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param v Numeric; passed to \code{max}.
+#' @return A numeric value.
+#' @export
+offlrl_softmax <- function(v) {
+  m <- max(v)
+  e <- exp(v - m)
+  e / sum(e)
+}

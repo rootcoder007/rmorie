@@ -356,3 +356,7 @@ causscd <- function(Y, treated, t_post, zeta = NULL) {
 morie_causscd <- function(Y, treated, t_post, zeta = NULL) {
   causscd(Y, treated, t_post, zeta)
 }
+
+# -- restored: pre-sync definition (causal_synthetic_did) --
+#' @noRd
+causal_synthetic_did <- unit_weights

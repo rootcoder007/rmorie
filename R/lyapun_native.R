@@ -536,3 +536,54 @@ morie_lyapun <- function(op, ...) {
     stop("lyapun: unknown op ", shQuote(op))
   )
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .as_series
+#'
+#' A step of the lyapun_native implementation. Called by \code{.lyapun_embed},
+#' \code{autocorrelation_lag}, \code{divergence_curve} and 1 others in the module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
+.as_series <- function(y) {
+  out <- as.numeric(y)
+  if (length(out) < 10L)
+    stop(sprintf("lyapun: need at least 10 observations, got %d", length(out)))
+  if (any(!is.finite(out)))
+    stop("lyapun: the series contains a non-finite value")
+  out
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .lyapun_embed
+#'
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param m A count; the body uses it as \code{seq_len(...)}.
+#' @param tau Numeric; combined arithmetically in the body.
+#' @return The value of \code{out}, as built in the body.
+#' @export
+.lyapun_embed <- function(y, m, tau) {
+  y <- .as_series(y)
+  m <- as.integer(m)
+  tau <- as.integer(tau)
+  if (m < 1L) stop("lyapun: the embedding dimension must be >= 1")
+  if (tau < 1L) stop("lyapun: the reconstruction delay must be >= 1")
+  n_pts <- length(y) - (m - 1L) * tau
+  if (n_pts < 3L)
+    stop(sprintf("lyapun: m = %d and J = %d leave only %d reconstructed points",
+                 m, tau, n_pts))
+  out <- vector("list", n_pts)
+  for (j in seq_len(n_pts)) {
+    row <- numeric(m)
+    for (k in seq_len(m)) row[k] <- y[j + (k - 1L) * tau]
+    out[[j]] <- row
+  }
+  out
+}

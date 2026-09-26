@@ -283,3 +283,193 @@ skipgram_pairs <- function(walks, window = 2) {
 }
 
 morie_node2v <- generate_walks
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' node2v_alpha_pq
+#'
+#' A step of the node2v_native implementation. Called by \code{node2v_transition_probabilities}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param d_tx Coerced to integer by the body, with \code{as.integer}.
+#' @param p Coerced to numeric by the body, with \code{as.numeric}.
+#' @param q Coerced to numeric by the body, with \code{as.numeric}.
+#' @return Nothing; this branch always raises.
+#' @export
+node2v_alpha_pq <- function(d_tx, p, q) {
+  d <- as.integer(d_tx)
+  pp <- as.numeric(p)
+  qq <- as.numeric(q)
+  if (!is.finite(pp) || pp <= 0 || !is.finite(qq) || qq <= 0)
+    stop("node2v: p and q must be positive")
+  if (d == 0L) return(1 / pp)
+  if (d == 1L) return(1)
+  if (d == 2L) return(1 / qq)
+  stop("node2v: d_tx must be 0, 1 or 2 for a second-order walk, got ",
+       d)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' node2v_cheatsheet
+#'
+#' A step of the node2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
+node2v_cheatsheet <- function() {
+  paste("node2v: graph as document, walk as sentence, skip-gram on ",
+        "top. The point is that NO sampling strategy wins everywhere: ",
+        "BFS gives a low-variance local structural view, DFS a ",
+        "macroscopic community view, and real networks mix both. A ",
+        "SECOND-ORDER walk interpolates -- having come from t, the ",
+        "bias to x is 1/p if returning, 1 if x neighbours t, 1/q ",
+        "otherwise. Large q stays local, small q roams. A first-order ",
+        "walk cannot express this.")
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' node2v_dist
+#'
+#' A step of the node2v_native implementation. Called by \code{node2v_transition_probabilities}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param adj A vector; indexed elementwise.
+#' @param t Coerced to character by the body, with \code{as.character}.
+#' @param x Passed to \code{==}.
+#' @return A numeric value.
+#' @export
+node2v_dist <- function(adj, t, x) {
+  if (isTRUE(t == x)) return(0L)
+  nb_t <- adj[[as.character(t)]]
+  if (is.null(nb_t)) nb_t <- adj[[t]]
+  if (!is.null(nb_t) && x %in% nb_t) return(1L)
+  2L
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' node2v_skipgram_pairs
+#'
+#' A step of the node2v_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param walks See Usage.
+#' @param window Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @return The value of \code{pairs}, as built in the body.
+#' @export
+node2v_skipgram_pairs <- function(walks, window = 2) {
+  w <- as.integer(window)
+  if (w < 1L)
+    stop("node2v: the window must be at least 1")
+  pairs <- list()
+  for (path in walks) {
+    n <- length(path)
+    for (i in seq_len(n)) {
+      lo <- max(1L, i - w)
+      hi <- min(n, i + w)
+      for (j in lo:hi) {
+        if (j != i) pairs[[length(pairs) + 1L]] <- c(path[i], path[j])
+      }
+    }
+  }
+  pairs
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' node2v_transition_probabilities
+#'
+#' A step of the node2v_native implementation. Called by \code{node2v_walk}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param adj A vector; indexed elementwise.
+#' @param t Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param v Coerced to character by the body, with \code{as.character}.
+#' @param p Passed to \code{node2v_alpha_pq}.
+#' @param q Passed to \code{node2v_alpha_pq}.
+#' @param weights Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @return A list with \code{nodes}, \code{probabilities}, \code{unnormalized}, \code{Z}.
+#' @export
+node2v_transition_probabilities <- function(adj, t, v, p, q,
+                                            weights = NULL) {
+  v_key <- v
+  nb <- adj[[v_key]]
+  if (is.null(nb)) nb <- adj[[as.character(v)]]
+  if (is.null(nb)) nb <- character(0)
+  nb <- sort(unique(nb))
+  if (length(nb) == 0L)
+    stop("node2v: node ", deparse(v), " has no neighbours")
+  pi <- numeric(length(nb))
+  for (i in seq_along(nb)) {
+    x <- nb[i]
+    w <- 1
+    if (!is.null(weights)) {
+      key <- paste0(as.character(v), "\r", as.character(x))
+      wkey1 <- paste0(as.character(v), "|", as.character(x))
+      if (!is.null(weights[[key]])) w <- as.numeric(weights[[key]])
+      else if (!is.null(weights[[wkey1]])) w <- as.numeric(weights[[wkey1]])
+      else if (!is.null(weights[[paste0(as.character(v), ",", as.character(x))]]))
+        w <- as.numeric(weights[[paste0(as.character(v), ",", as.character(x))]])
+    }
+    if (is.null(t)) {
+      a <- 1
+    } else {
+      a <- node2v_alpha_pq(node2v_dist(adj, t, x), p, q)
+    }
+    pi[i] <- a * w
+  }
+  Z <- sum(pi)
+  list(nodes = nb,
+       probabilities = pi / Z,
+       unnormalized = pi, Z = Z)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' node2v_walk
+#'
+#' A step of the node2v_native implementation. Called by \code{morie_node2v}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param adj Passed to \code{node2v_transition_probabilities}.
+#' @param start Passed to \code{c}.
+#' @param length Coerced to integer by the body, with \code{as.integer}.
+#' @param p Passed to \code{node2v_transition_probabilities}. Defaults to \code{1}.
+#' @param q Passed to \code{node2v_transition_probabilities}. Defaults to \code{1}.
+#' @param rng Optional; may be \code{NULL}. Passed to \code{.ghc_unif}.
+#' @param weights Passed to \code{node2v_transition_probabilities}.
+#' @return The value of \code{path}, as built in the body.
+#' @export
+node2v_walk <- function(adj, start, length, p = 1, q = 1, rng = NULL,
+                        weights = NULL) {
+  if (is.null(rng)) {
+    rng <- .ghc_rng(0)
+    own <- TRUE
+  } else {
+    own <- FALSE
+  }
+  path <- c(start)
+  prev <- NULL
+  for (step in seq_len(as.integer(length) - 1L)) {
+    tp <- node2v_transition_probabilities(adj, prev, path[length(path)],
+                                          p, q, weights)
+    u <- .ghc_unif(rng, 1L)
+    acc <- 0
+    nxt <- tp$nodes[length(tp$nodes)]
+    for (i in seq_along(tp$nodes)) {
+      acc <- acc + tp$probabilities[i]
+      if (u <= acc) { nxt <- tp$nodes[i]
+      break }
+    }
+    prev <- path[length(path)]
+    path <- c(path, nxt)
+  }
+  path
+}
+
+# -- restored: pre-sync definition (node2v_generate_walks) --
+#' @noRd
+node2v_generate_walks <- morie_node2v

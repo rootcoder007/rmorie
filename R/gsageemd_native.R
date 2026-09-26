@@ -239,3 +239,112 @@ graphsage <- morie_gsageemd_embed
 
 # house entry point: the package exports one morie_<module>
 morie_gsageemd <- morie_gsageemd_embed
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .gsage_norm
+#'
+#' A step of the gsageemd_native implementation. Called by \code{morie_gsageemd_layer}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param v Numeric; combined arithmetically in the body.
+#' @return One of two values, depending on the branch taken.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gsage_norm(v = x)
+#' res
+.gsage_norm <- function(v) {
+  n <- sqrt(sum(v * v))
+  if (n <= .GSAGE_EPS) v else v / n
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' One GraphSAGE layer
+#'
+#' Algorithm 1 of Hamilton et al. 2017 for a single depth: aggregate
+#' the neighbourhood, concatenate with the node's own previous
+#' representation, linear transform with ReLU, optionally L2-normalise.
+#'
+#' @param H Node feature matrix (n x d).
+#' @param adj Adjacency list keyed by node id.
+#' @param W Linear transform (n_out x (d + d_neigh)).
+#' @param how Aggregator.
+#' @param sizes Optional fixed sample size per node.
+#' @param rng Generator environment.
+#' @param normalize L2-normalise the output.
+#' @return Matrix of new node representations.
+#' @references Hamilton, W. L. et al. (2017).
+#' @export
+morie_gsageemd_layer <- function(H, adj, W, how = "mean", sizes = NULL,
+                                 rng = NULL, normalize = TRUE) {
+  n <- nrow(H)
+  out <- matrix(0.0, nrow = n, ncol = nrow(W))
+  for (v in seq_len(n) - 1L) {
+    if (is.null(sizes)) {
+      nb <- sort(as.integer(adj[[as.character(v)]]))
+    } else {
+      nb <- morie_gsageemd_sample(adj, v, sizes, rng)
+    }
+    if (length(nb) == 0L)
+      stop(paste0("gsageemd: node ", v, " has no neighbours"))
+    agg <- morie_gsageemd_aggregate(lapply(nb + 1L, function(u) H[u, ]),
+                                    how = how, W = W)
+    cat <- c(H[v + 1L, ], agg)
+    if (ncol(W) != length(cat))
+      stop(paste0("gsageemd: W expects ", ncol(W), " inputs but the ",
+                  "concatenation is ", length(cat)))
+    z <- pmax(0.0, as.numeric(W %*% cat))
+    out[v + 1L, ] <- if (normalize) .gsage_norm(z) else z
+  }
+  out
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Unsupervised graph-based loss
+#'
+#' Sec. 3.2 of Hamilton et al. 2017: nearby nodes agree, sampled
+#' negatives disagree.
+#'
+#' @param z_u Anchor embedding.
+#' @param z_v Positive (neighbour) embedding.
+#' @param z_negatives List of negative embeddings.
+#' @return Scalar loss.
+#' @references Hamilton, W. L. et al. (2017).
+#' @export
+morie_gsageemd_loss <- function(z_u, z_v, z_negatives) {
+  dot <- function(a, b) sum(a * b)
+  pos <- log(max(1.0 / (1.0 + exp(-dot(z_u, z_v))), .GSAGE_EPS))
+  neg <- sum(vapply(z_negatives, function(zn)
+    log(max(1.0 / (1.0 + exp(dot(z_u, zn))), .GSAGE_EPS)),
+    numeric(1)))
+  -(pos + neg)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Fixed-size neighbour sample
+#'
+#' Samples with replacement when the neighbourhood is smaller than the
+#' budget; the budget is what bounds the per-batch cost regardless of
+#' node degree.
+#'
+#' @param adj Adjacency list keyed by node.
+#' @param v Node whose neighbours are sampled.
+#' @param size Sample size.
+#' @param rng Generator environment (shared with the Python arm).
+#' @return Integer vector of neighbour ids.
+#' @references Hamilton, W. L. et al. (2017).
+#' @export
+morie_gsageemd_sample <- function(adj, v, size, rng) {
+  nb <- sort(as.integer(adj[[as.character(v)]]))
+  if (length(nb) == 0L)
+    stop(paste0("gsageemd: node ", v, " has no neighbours"))
+  s <- as.integer(size)
+  if (s < 1L) stop("gsageemd: the sample size must be at least 1")
+  vapply(seq_len(s), function(.)
+    nb[(floor(.ghc_unif(rng, 1L) * length(nb)) %% length(nb)) + 1L],
+    integer(1))
+}
+
+# -- restored: morie-only objects kept through the rmorie sync --
+.GSAGE_EPS <- 1e-12

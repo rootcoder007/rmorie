@@ -777,3 +777,43 @@ morie_cramers_v <- function(contingency_table) {
   k <- min(nrow(m), ncol(m))
   sqrt(chi2 / (n * (k - 1)))
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Eta-squared from F-statistic
+#'
+#' @param f_stat F statistic.
+#' @param df_between Degrees of freedom (numerator).
+#' @param df_within Degrees of freedom (denominator).
+#' @return Numeric eta-squared.
+#' @examples
+#' # See the package vignettes for usage examples:
+#' #   vignette(package = "rmorie")
+#' @export
+morie_eta_squared <- function(f_stat, df_between, df_within) {
+  ss_between <- f_stat * df_between
+  ss_total <- ss_between + df_within
+  ss_between / ss_total
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Hedges' g (bias-corrected Cohen's d)
+#'
+#' @inheritParams morie_cohens_d
+#' @return Numeric Hedges' g.
+#' @examples
+#' # See the package vignettes for usage examples:
+#' #   vignette(package = "rmorie")
+#' @export
+morie_hedges_g <- function(x1, x2) {
+  d <- morie_cohens_d(x1, x2, pooled = TRUE)
+  n1 <- sum(!is.na(x1))
+  n2 <- sum(!is.na(x2))
+  m <- n1 + n2 - 2  # degrees of freedom
+  if (m <= 0) return(d)
+  # Exact gamma-based small-sample correction (Hedges 1981):
+  # J(m) = Gamma(m/2) / (sqrt(m/2) * Gamma((m-1)/2))
+  # Matches Python inference.py:hedges_g; the older 1 - 3/(4m-1)
+  # approximation diverged from this at small m.
+  log_J <- lgamma(m / 2) - 0.5 * log(m / 2) - lgamma((m - 1) / 2)
+  d * exp(log_J)
+}

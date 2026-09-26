@@ -347,3 +347,184 @@ field_aware_fm <- function(rows, labels, fields, n_features, n_fields,
   fit_ffm(rows, labels, fields, n_features, n_fields, k_dim, eta,
           lam, epochs, seed)
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .ffmFM_phi
+#'
+#' A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x See Usage.
+#' @param fields A vector; indexed elementwise.
+#' @param W A vector; indexed elementwise.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
+.ffmFM_phi <- function(x, fields, W) {
+  nz <- list()
+  for (kv in x) {
+    j <- as.integer(kv[[1L]])
+    v <- as.numeric(kv[[2L]])
+    if (v != 0) nz[[length(nz) + 1L]] <- list(j = j, v = v)
+  }
+  tot <- 0
+  na <- length(nz)
+  for (a in seq_len(na)) {
+    # seq_len guard: the colon counts DOWN when a is the last
+    # non-zero and reads nz[[na + 1]]
+    for (b in seq_len(na - a) + a) {
+      j1 <- nz[[a]]$j
+      v1 <- nz[[a]]$v
+      j2 <- nz[[b]]$j
+      v2 <- nz[[b]]$v
+      f1 <- as.integer(fields[j1 + 1L])
+      f2 <- as.integer(fields[j2 + 1L])
+      w1 <- W[[j1 + 1L]][[f2 + 1L]]
+      w2 <- W[[j2 + 1L]][[f1 + 1L]]
+      kk <- length(w1)
+      s <- 0
+      for (d in seq_len(kk)) s <- s + w1[d] * w2[d]
+      tot <- tot + s * v1 * v2
+    }
+  }
+  tot
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .fit_ffm
+#'
+#' A step of the ffmFM_native implementation. Called by \code{morie_ffmFM}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param rows A vector; its length is taken and its elements indexed.
+#' @param labels A vector; its length is taken and its elements indexed.
+#' @param fields A vector; indexed elementwise.
+#' @param n_features Coerced to integer by the body, with \code{as.integer}.
+#' @param n_fields Coerced to integer by the body, with \code{as.integer}.
+#' @param k_dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
+#' @param eta Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
+#' @param lam Numeric; combined arithmetically in the body. Defaults to \code{2e-05}.
+#' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
+#' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
+#' @return A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss},
+#' \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
+#' @export
+.fit_ffm <- function(rows, labels, fields, n_features, n_fields,
+                     k_dim = 4L, eta = 0.1, lam = 2e-5, epochs = 10L,
+                     seed = 0L) {
+  n <- as.integer(n_features)
+  F_ <- as.integer(n_fields)
+  kk <- as.integer(k_dim)
+  if (n < 1L || F_ < 1L || kk < 1L) {
+    stop("ffmFM: n_features, n_fields and k must all be at least 1")
+  }
+  if (length(rows) != length(labels)) {
+    stop(sprintf("ffmFM: %d rows but %d labels", length(rows), length(labels)))
+  }
+  rng <- .ghc_rng(as.integer(seed))
+  scale <- 1 / sqrt(kk)
+  W <- vector("list", n)
+  G <- vector("list", n)
+  raw <- .ghc_unif(rng, n * F_ * kk) * scale
+  for (j in seq_len(n)) {
+    Wj <- vector("list", F_)
+    Gj <- vector("list", F_)
+    for (f in seq_len(F_)) {
+      lo <- ((j - 1L) * F_ + (f - 1L)) * kk
+      Wj[[f]] <- raw[(lo + 1L):(lo + kk)]
+      Gj[[f]] <- rep(1, kk)
+    }
+    W[[j]] <- Wj
+    G[[j]] <- Gj
+  }
+  hist <- numeric(0)
+  for (ep in seq_len(as.integer(epochs))) {
+    tot <- 0
+    for (r in seq_along(rows)) {
+      y <- as.numeric(labels[[r]])
+      p <- .ffmFM_phi(rows[[r]], fields, W)
+      tot <- tot + .logistic_loss(y, p)
+      yp <- y * p
+      g0 <- -y / (1 + exp(min(700, yp)))
+      nz <- list()
+      for (kv in rows[[r]]) {
+        j <- as.integer(kv[[1L]])
+        v <- as.numeric(kv[[2L]])
+        if (v != 0) nz[[length(nz) + 1L]] <- list(j = j, v = v)
+      }
+      na <- length(nz)
+      for (a in seq_len(na)) {
+        # seq_len guard: the colon counts DOWN when a is the last
+    # non-zero and reads nz[[na + 1]]
+    for (b in seq_len(na - a) + a) {
+          j1 <- nz[[a]]$j + 1L
+          v1 <- nz[[a]]$v
+          j2 <- nz[[b]]$j + 1L
+          v2 <- nz[[b]]$v
+          f1 <- as.integer(fields[j1]) + 1L
+          f2 <- as.integer(fields[j2]) + 1L
+          for (d in seq_len(kk)) {
+            g1 <- lam * W[[j1]][[f2]][d] + g0 * W[[j2]][[f1]][d] * v1 * v2
+            g2 <- lam * W[[j2]][[f1]][d] + g0 * W[[j1]][[f2]][d] * v1 * v2
+            G[[j1]][[f2]][d] <- G[[j1]][[f2]][d] + g1 * g1
+            G[[j2]][[f1]][d] <- G[[j2]][[f1]][d] + g2 * g2
+            W[[j1]][[f2]][d] <- W[[j1]][[f2]][d] - eta / sqrt(G[[j1]][[f2]][d]) * g1
+            W[[j2]][[f1]][d] <- W[[j2]][[f1]][d] - eta / sqrt(G[[j2]][[f1]][d]) * g2
+          }
+        }
+      }
+    }
+    hist <- c(hist, tot / length(rows))
+  }
+  list(
+    estimate = W, W = W, loss_history = hist, final_loss = hist[length(hist)],
+    k = kk, n_parameters = .n_parameters(n, F_, kk),
+    n_parameters_fm = .n_parameters(n, F_, kk, "fm"),
+    method = "FFM with AdaGrad; Juan, Zhuang, Chin & Lin (2016) eqs. (8)-(9)",
+    caveat = "FFM overfits readily -- the paper stops early on a validation set"
+  )
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .logistic_loss
+#'
+#' A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param y Coerced to numeric by the body, with \code{as.numeric}.
+#' @param phi_val Coerced to numeric by the body, with \code{as.numeric}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+.logistic_loss <- function(y, phi_val) {
+  yv <- as.numeric(y)
+  if (!(yv == -1 || yv == 1)) {
+    stop(sprintf("ffmFM: the label must be -1 or 1, got %s", format(y)))
+  }
+  z <- -yv * as.numeric(phi_val)
+  if (z < 700) log(1 + exp(z)) else z
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .n_parameters
+#'
+#' A step of the ffmFM_native implementation. Called by \code{.fit_ffm}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param n_features Coerced to integer by the body, with \code{as.integer}.
+#' @param n_fields Coerced to integer by the body, with \code{as.integer}.
+#' @param k_dim Coerced to integer by the body, with \code{as.integer}.
+#' @param model One of \code{"ffm"}, \code{"fm"}. Defaults to \code{"ffm"}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+.n_parameters <- function(n_features, n_fields, k_dim, model = "ffm") {
+  n <- as.integer(n_features)
+  f <- as.integer(n_fields)
+  kk <- as.integer(k_dim)
+  if (!(model %in% c("ffm", "fm"))) {
+    stop(sprintf("ffmFM: model must be ffm or fm, got %s", sQuote(model)))
+  }
+  if (model == "ffm") n * f * kk else n * kk
+}

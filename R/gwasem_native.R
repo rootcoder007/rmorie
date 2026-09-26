@@ -533,3 +533,30 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
                      "EMMA); per_marker_reml=TRUE restores the exact model"),
        method = "EMMAX variance component association (Kang et al. 2010)")
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' IBS relatedness matrix
+#'
+#' \eqn{\hat S_{ik} = 1 - \frac{1}{2M}\sum_j |g_{ij} - g_{kj}|}.
+#'
+#' @param genotypes n x m minor-allele-count matrix.
+#' @return n x n symmetric numeric matrix.
+#' @references Kang, H. M. et al. (2010).
+#' @export
+morie_gwasem_kinship_ibs <- function(genotypes) {
+  G <- apply(genotypes, c(1L, 2L), as.numeric)
+  n <- nrow(G)
+  m <- ncol(G)
+  if (n == 0L || m == 0L)
+    stop("gwasem: genotypes must be a non-empty individual x marker matrix")
+  S <- matrix(0.0, nrow = n, ncol = n)
+  for (i in seq_len(n) - 1L) {
+    for (k in i:n - 1L) {
+      d <- sum(abs(G[i + 1L, ] - G[k + 1L, ]))
+      v <- 1.0 - d / (2.0 * m)
+      S[i + 1L, k + 1L] <- v
+      S[k + 1L, i + 1L] <- v
+    }
+  }
+  S
+}

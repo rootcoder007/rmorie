@@ -214,3 +214,112 @@ morie_prtcl_kalman_filter_1d <- function(y, a, q, c, r, m0 = 0, p0 = 1) {
 
 # house entry point: the package exports one morie_<module>
 morie_prtcl <- morie_prtcl_effective_sample_size
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Effective sample size
+#'
+#' \code{(sum w)^2 / sum w^2}: how many particles are really
+#' contributing.
+#'
+#' @param weights Numeric vector of positive weights.
+#' @return Numeric scalar.
+#' @export
+effective_sample_size <- function(weights) {
+  s1 <- sum(weights)
+  s2 <- sum(weights^2)
+  if (s2 <= 0) return(0)
+  s1 * s1 / s2
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Kalman filter for the scalar linear-Gaussian state-space model
+#'
+#' \code{x_n = a x_{n-1} + N(0, q)}, \code{y_n = c x_n + N(0, r)},
+#' starting at \code{(m0, p0)}. Provided so the particle filter can
+#' be checked against the exact answer.
+#'
+#' @param y Numeric vector of observations.
+#' @param a Process coefficient.
+#' @param q Process variance.
+#' @param c Measurement coefficient.
+#' @param r Measurement variance.
+#' @param m0 Initial state mean.
+#' @param p0 Initial state variance.
+#' @return A list with \code{filtered_mean} and \code{loglik}.
+#' @export
+kalman_filter_1d <- function(y, a, q, c, r, m0 = 0.0, p0 = 1.0) {
+  m <- as.numeric(m0)
+  p <- as.numeric(p0)
+  means <- numeric(length(y))
+  ll <- 0.0
+  for (i in seq_along(y)) {
+    m <- a * m
+    p <- a * a * p + q
+    s <- c * c * p + r
+    v <- y[i] - c * m
+    ll <- ll - 0.5 * (log(2 * pi * s) + v * v / s)
+    gain <- p * c / s
+    m <- m + gain * v
+    p <- (1.0 - gain * c) * p
+    means[i] <- m
+  }
+  list(filtered_mean = means, loglik = ll)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' prtcl cheatsheet
+#'
+#' One-paragraph summary of the method and the traps in using it.
+#' @return A character string.
+#' @examples
+#' prtcl_cheatsheet()
+#' @export
+prtcl_cheatsheet <- function() {
+  paste0("prtcl: propagate, weight by the measurement density, ",
+         "resample (pomp Alg. 1). Mean weight per step gives an ",
+         "UNBIASED likelihood -- so its LOG is biased DOWNWARD by ",
+         "Jensen, and comparing models at different particle counts ",
+         "compares the counts. Systematic resampling (Alg. 2) gives ",
+         "each particle a count within 1 of J*w_j deterministically. ",
+         "Watch ESS: a degenerate filter still returns numbers.")
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Systematic resampling
+#'
+#' One uniform, J evenly spaced points through the cumulative weights;
+#' the count particle j receives differs from \code{J * w_j} by less
+#' than one, deterministically.
+#'
+#' @param weights Numeric vector of positive weights.
+#' @param u Optional fixed offset in \code{[0, 1)}; if \code{NULL} one
+#'   uniform is drawn from the shared generator.
+#' @return Integer vector of indices.
+#' @export
+systematic_resample <- function(weights, u = NULL) {
+  J <- length(weights)
+  tot <- sum(weights)
+  if (tot <= 0)
+    stop("prtcl: all particle weights are zero; the filter has lost ",
+         "the signal")
+  w <- as.numeric(weights) / tot
+  if (is.null(u)) u <- .ghc_unif(.ghc_rng(0L), 1L)
+  if (u < 0 || u >= 1)
+    stop(sprintf("prtcl: the offset must lie in [0, 1), got %r", u))
+  idx <- integer(J)
+  cum_ <- w[1L]
+  j <- 1L
+  for (m in seq_len(J)) {
+    pos <- (m - 1L + u) / J
+    while (pos > cum_ && j < J) {
+      j <- j + 1L
+      cum_ <- cum_ + w[j]
+    }
+    idx[m] <- j
+  }
+  idx
+}
+
+# -- restored: pre-sync definition (particlefilter) --
+#' @noRd
+particlefilter <- morie_prtcl_particle_filter

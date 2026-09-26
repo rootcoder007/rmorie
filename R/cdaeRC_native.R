@@ -353,3 +353,32 @@ morie_cdaeRC <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
   fit_cdae(pos, n_users, n_items, k_dim, q, alpha, lam, iters, n_neg,
            seed, activation, init_scale)
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' morie_cdaeRC_decode
+#'
+#' A step of the cdaeRC_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param z A vector; its length is taken and its elements indexed.
+#' @param Wp A matrix; indexed by row and column.
+#' @param bp A vector; its length is taken and its elements indexed.
+#' @param items Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
+morie_cdaeRC_decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
+  idx <- if (is.null(items)) seq_along(bp) else as.integer(items)
+  out <- numeric(length(idx))
+  names(out) <- as.character(idx)
+  for (j in seq_along(idx)) {
+    i <- idx[j]
+    s <- bp[i]
+    for (f in seq_along(z))
+      s <- s + Wp[i, f] * z[f]
+    out[j] <- .cdae_act(activation, s)
+  }
+  out
+}

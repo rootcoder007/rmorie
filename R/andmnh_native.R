@@ -679,3 +679,68 @@ print.andmnh <- function(x, ...) {
 
 # house entry point: the package exports one morie_<module>
 morie_andmnh <- andrews_monahan_hac
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .morie_svd
+#'
+#' A step of the andmnh_native implementation. Called by \code{prewhiten_var},
+#' \code{singular_value_adjust}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param a A matrix; passed to \code{nrow}.
+#' @return A list with \code{u}, \code{s}, \code{vt}.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_svd(a = A)
+#' res
+.morie_svd <- function(a) {
+  a <- as.matrix(a)
+  m <- nrow(a)
+  n <- ncol(a)
+  k <- min(m, n)
+  AtA <- crossprod(a)
+  ev <- eigen(AtA, symmetric = TRUE)
+  s <- sqrt(pmax(ev$values, 0))
+  # sort descending
+  ord <- order(s, decreasing = TRUE)[seq_len(k)]
+  s <- s[ord]
+  V <- ev$vectors[, ord, drop = FALSE]
+  # U = A V S^{-1}
+  invs <- ifelse(s > 0, 1 / s, 0)
+  U <- if (m >= n) a %*% (V * rep(invs, each = n)) else matrix(0, m, k)
+  list(u = U, s = s, vt = t(V))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' SVD cap on the prewhitening matrix
+#' @param a See Usage.
+#' @param cap See Usage.
+#' @export
+singular_value_adjust <- function(a, cap = .EIGENVALUE_CAP) {
+  cap <- as.numeric(cap)
+  if (!(cap > 0 && cap < 1)) {
+    stop("andmnh: cap must lie strictly between 0 and 1")
+  }
+  s <- .morie_svd(as.matrix(a))
+  s2 <- pmin(s$s, cap)
+  s$u %*% diag(s2, nrow = length(s2)) %*% s$vt
+}
+
+# -- restored: morie-only objects kept through the rmorie sync --
+.EIGENVALUE_CAP <- 0.97
+
+.MORIE_KERNELS <- list(
+  bartlett = bartlett_kernel,
+  parzen = parzen_kernel,
+  qs = quadratic_spectral_kernel,
+  "tukey-hanning" = tukey_hanning_kernel
+)
+
+.MORIE_KERNEL_CONSTANTS <- list(
+  bartlett = c(1, 1.0, 2 / 3, 1),
+  parzen = c(2, 6.0, 0.539285, 1),
+  qs = c(2, 1.421223, 1.0, 0),
+  "tukey-hanning" = c(2, pi^2 / 4, 0.75, 1)
+)

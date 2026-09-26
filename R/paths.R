@@ -82,3 +82,40 @@ morie_paths <- function(project_root = NULL) {
     docs_dir = file.path(root, "docs")
   )
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Find a project root directory
+#'
+#' Searches upward from `start` for a directory containing the current
+#' Sphinx/package-root markers, while still tolerating legacy Quarto-era
+#' markers in older checkouts.
+#'
+#' @param start Starting directory.
+#' @param max_up Maximum number of parent traversals.
+#' @return Absolute path to the detected project root.
+#' @examples
+#' tryCatch(morie_find_project_root(),
+#'   error = function(e) message("not inside a morie project tree")
+#' )
+#' @export
+morie_find_project_root <- function(start = getwd(), max_up = 10L) {
+  current <- normalizePath(start, winslash = "/", mustWork = FALSE)
+
+  for (i in seq_len(max_up)) {
+    has_pyproject <- file.exists(file.path(current, "pyproject.toml"))
+    has_libexec <- dir.exists(file.path(current, "libexec", "config"))
+    has_sphinx <- dir.exists(file.path(current, "docs", "source"))
+    if (has_pyproject && (has_libexec || has_sphinx)) {
+      return(current)
+    }
+
+    parent <- dirname(current)
+    if (identical(parent, current)) break
+    current <- parent
+  }
+
+  stop(
+    "Unable to detect project root. Provide `project_root` explicitly.",
+    call. = FALSE
+  )
+}

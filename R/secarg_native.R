@@ -417,3 +417,113 @@ morie_secarg_parameter_advice <- function(profile = "first") {
 
 # house entry point: the package exports one morie_<module>
 morie_secarg <- morie_secarg_argon2
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' G function\'s 8-word permutation on a 16-word vector
+#'
+#' A step of the secarg_native implementation. Called by \code{.P_step}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param v A vector; indexed elementwise.
+#' @param a See Usage.
+#' @param b See Usage.
+#' @param c See Usage.
+#' @param d See Usage.
+#' @return The value of \code{v}, as built in the body.
+#' @export
+.gb <- function(v, a, b, c, d) {
+  va <- v[a]
+  vb <- v[b]
+  vc <- v[c]
+  vd <- v[d]
+  # mult (low-32) * 2 * (high-32) emulated by bitwAnd + bitwShiftR pieces
+  va_l <- bitwAnd(va, .MASK32)
+  va_h <- bitwShiftR(va, 32)
+  vb_l <- bitwAnd(vb, .MASK32)
+  vb_h <- bitwShiftR(vb, 32)
+  vc_l <- bitwAnd(vc, .MASK32)
+  vc_h <- bitwShiftR(vc, 32)
+  vd_l <- bitwAnd(vd, .MASK32)
+  vd_h <- bitwShiftR(vd, 32)
+
+  # 64-bit product
+  mul6464 <- function(x, y) {
+    a_lo <- bitwAnd(x, .MASK32)
+    a_hi <- bitwShiftR(x, 32)
+    b_lo <- bitwAnd(y, .MASK32)
+    b_hi <- bitwShiftR(y, 32)
+    p1 <- bitwShiftL(a_lo * b_lo, 0)
+    p2 <- bitwShiftL(a_lo * b_hi, 32)
+    p3 <- bitwShiftL(a_hi * b_lo, 32)
+    p4 <- bitwShiftL(a_hi * b_hi, 64)
+    bitwAnd(p1 + p2 + p3 + p4, .MASK64)
+  }
+
+  # v[a] = v[a] + v[b] + 2*low32(v[a])*low32(v[b])  (mod 2^64)
+  v[a] <- bitwAnd(va + vb + 2L * va_l * vb_l, .MASK64)
+  # v[d] = ROR32(v[d] xor v[a])  ==  ((v[d]^v[a])>>32)|((v[d]^v[a])<<32) & M64
+  t <- bitwXor(v[d], v[a])
+  v[d] <- bitwAnd(bitwOr(bitwShiftR(t, 32),
+                         bitwAnd(bitwShiftL(t, 32), .MASK64)),
+                  .MASK64)
+  # v[c] = v[c] + v[d] + 2*low32(v[c])*low32(v[d])
+  vc <- v[c]
+  vd <- v[d]
+  v[c] <- bitwAnd(vc + vd + 2L * bitwAnd(vc, .MASK32) * bitwAnd(vd, .MASK32),
+                  .MASK64)
+  # v[b] = ROR24(v[b] xor v[c])
+  vb <- v[b]
+  vc <- v[c]
+  x <- bitwXor(vb, vc)
+  v[b] <- bitwAnd(bitwOr(bitwShiftR(x, 24),
+                         bitwAnd(bitwShiftL(x, 40), .MASK64)),
+                  .MASK64)
+  # v[a] = v[a] + v[b] + 2*low32(v[a])*low32(v[b])
+  va <- v[a]
+  vb <- v[b]
+  v[a] <- bitwAnd(va + vb + 2L * bitwAnd(va, .MASK32) * bitwAnd(vb, .MASK32),
+                  .MASK64)
+  # v[d] = ROR16(v[d] xor v[a])
+  vd <- v[d]
+  va <- v[a]
+  x <- bitwXor(vd, va)
+  v[d] <- bitwAnd(bitwOr(bitwShiftR(x, 16),
+                         bitwAnd(bitwShiftL(x, 48), .MASK64)),
+                  .MASK64)
+  # v[c] = v[c] + v[d] + 2*low32(v[c])*low32(v[d])
+  vc <- v[c]
+  vd <- v[d]
+  v[c] <- bitwAnd(vc + vd + 2L * bitwAnd(vc, .MASK32) * bitwAnd(vd, .MASK32),
+                  .MASK64)
+  # v[b] = ROR63(v[b] xor v[c])
+  vb <- v[b]
+  vc <- v[c]
+  x <- bitwXor(vb, vc)
+  v[b] <- bitwAnd(bitwOr(bitwShiftR(x, 63),
+                         bitwAnd(bitwShiftL(x, 1), .MASK64)),
+                  .MASK64)
+  v
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .P_step
+#'
+#' A step of the secarg_native implementation. Called by \code{morie_secarg_compress}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param v Passed to \code{.gb}.
+#' @return The value of \code{v}, as built in the body.
+#' @export
+.P_step <- function(v) {
+  v <- .gb(v, 1L, 5L, 9L, 13L)
+  v <- .gb(v, 2L, 6L, 10L, 14L)
+  v <- .gb(v, 3L, 7L, 11L, 15L)
+  v <- .gb(v, 4L, 8L, 12L, 16L)
+  v <- .gb(v, 1L, 6L, 11L, 16L)
+  v <- .gb(v, 2L, 7L, 12L, 13L)
+  v <- .gb(v, 3L, 8L, 9L, 14L)
+  v <- .gb(v, 4L, 5L, 10L, 15L)
+  v
+}

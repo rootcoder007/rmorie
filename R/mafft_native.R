@@ -1539,3 +1539,440 @@ morie_mafft <- function(op, ...) {
     stop("mafft: unknown op ", shQuote(op))
   )
 }
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_anchors_from
+#'
+#' A step of the mafft_native implementation. Called by \code{iterative_refine},
+#' \code{progressive_align}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param chain A matrix; indexed by row and column.
+#' @return The value of \code{mapply}.
+#' @export
+mafft_anchors_from <- function(chain) {
+  if (!is.matrix(chain) || nrow(chain) == 0L) {
+    return(list())
+  }
+  mapply(seq_len(nrow(chain)), seq_len(nrow(chain)), FUN = function(i, j) {
+    s <- chain[i, ]
+    if (s[1] >= 0 && s[2] >= 0) {
+      c(s[1] + (s[3] %/% 2), s[2] + (s[3] %/% 2))
+    } else {
+      NULL
+    }
+  }, SIMPLIFY = FALSE)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_clean
+#'
+#' A step of the mafft_native implementation. Called by \code{mafft_alignment}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param seqs Passed to \code{unlist}.
+#' @param seq_type Optional; may be \code{NULL}. One of \code{"aa"}, \code{"nt"}.
+#' @return A list with \code{seqs}, \code{seq_type}.
+#' @export
+mafft_clean <- function(seqs, seq_type = NULL) {
+  out <- as.character(toupper(unlist(seqs)))
+  if (any(nchar(out) == 0L)) {
+    stop("mafft: an empty sequence was given")
+  }
+  if (is.null(seq_type)) {
+    letters <- unique(unlist(strsplit(paste(out, collapse = ""), "")))
+    letters <- setdiff(letters, c("-", "."))
+    seq_type <- if (length(letters) > 0 &&
+      all(letters %in% c(.MAFFT_NT, "U", "N"))) {
+      "nt"
+    } else {
+      "aa"
+    }
+  }
+  if (!(seq_type %in% c("aa", "nt"))) {
+    stop("mafft: seq_type must be 'aa' or 'nt'")
+  }
+  list(seqs = out, seq_type = seq_type)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_default_raw
+#'
+#' A step of the mafft_native implementation. Called by \code{normalized_similarity_matrix}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param seq_type Compared against \code{"nt"}.
+#' @param which Compared against \code{"grantham"}. Defaults to \code{"jtt200"}.
+#' @return A list with \code{M}, \code{f}.
+#' @export
+mafft_default_raw <- function(seq_type, which = "jtt200") {
+  if (seq_type == "nt") {
+    M <- list()
+    for (a in strsplit(.MAFFT_NT, "")[[1]]) {
+      for (b in strsplit(.MAFFT_NT, "")[[1]]) {
+        M[[paste0(a, "_", b)]] <- if (a == b) 1.0 else -1.0
+      }
+    }
+    return(list(M = M, f = NULL))
+  }
+  if (which == "grantham") {
+    M <- list()
+    aa_letters <- strsplit(.MAFFT_AA, "")[[1]]
+    for (a in aa_letters) {
+      for (b in aa_letters) {
+        M[[paste0(a, "_", b)]] <- -((.MAFFT_VHAT[[a]] - .MAFFT_VHAT[[b]])^2 +
+          (.MAFFT_PHAT[[a]] - .MAFFT_PHAT[[b]])^2)
+      }
+    }
+    return(list(M = M, f = NULL))
+  }
+  j <- jtt_matrix(200)
+  list(M = j$matrix, f = j$freqs)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_degap
+#'
+#' A step of the mafft_native implementation. Called by \code{iterative_refine}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param group A vector; its length is taken and its elements indexed.
+#' @return A vector, from \code{vapply}.
+#' @export
+mafft_degap <- function(group) {
+  if (length(group) == 0L) {
+    return(group)
+  }
+  L <- nchar(group[1])
+  keep <- c()
+  for (i in 1:L) {
+    col <- substr(group, i, i)
+    if (any(col != "-")) keep <- c(keep, i)
+  }
+  vapply(group, function(s) {
+    if (length(keep) == 0L) {
+      ""
+    } else {
+      paste(substr(
+        rep(s, length(keep)),
+        keep, keep
+      ), collapse = "")
+    }
+  }, character(1))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_gap_profiles
+#'
+#' A step of the mafft_native implementation. Called by \code{mafft_nw}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param group A vector; its length is taken and its elements indexed.
+#' @param weights A vector; indexed elementwise.
+#' @return A list with \code{gs}, \code{ge}.
+#' @export
+mafft_gap_profiles <- function(group, weights) {
+  L <- nchar(group[1])
+  gs <- rep(0.0, L + 1L)
+  ge <- rep(0.0, L + 1L)
+  for (idx in seq_along(group)) {
+    s <- group[idx]
+    w <- weights[idx]
+    z <- vapply(
+      strsplit(s, "")[[1]], function(ch) if (ch == "-") 1.0 else 0.0,
+      numeric(1)
+    )
+    a <- 1.0 - z
+    for (x in 1:L) {
+      nxt <- if (x < L) z[x + 1L] else 0.0
+      gs[x] <- gs[x] + w * a[x] * nxt
+      prv <- if (x > 1L) z[x - 1L] else 0.0
+      ge[x] <- ge[x] + w * prv * a[x]
+    }
+  }
+  list(gs = gs, ge = ge)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_jtt_exchangeability
+#'
+#' A step of the mafft_native implementation. Called by \code{jtt_matrix}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @return A list with \code{S}, \code{f}.
+#' @export
+mafft_jtt_exchangeability <- function() {
+  f <- .MAFFT_JTT_FREQ
+  S <- matrix(0, 20, 20)
+  k <- 1L
+  for (i in 2:20) {
+    for (j in 1:(i - 1L)) {
+      n <- .MAFFT_JTT_COUNTS[k]
+      k <- k + 1L
+      v <- n / (400.0 * f[i] * f[j])
+      S[i, j] <- v
+      S[j, i] <- v
+    }
+  }
+  list(S = S, f = f)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_lookup
+#'
+#' A step of the mafft_native implementation. Called by \code{mafft_site_score},
+#' \code{normalized_similarity_matrix}, \code{wsp_score}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param M A vector; indexed elementwise.
+#' @param a Passed to \code{paste0}.
+#' @param b Passed to \code{paste0}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+mafft_lookup <- function(M, a, b) {
+  v <- M[[paste0(a, "_", b)]]
+  if (is.null(v)) 0.0 else as.numeric(v)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_nw
+#'
+#' A step of the mafft_native implementation. Called by \code{group_align}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param g1 A vector; its length is taken and its elements indexed.
+#' @param g2 A vector; its length is taken and its elements indexed.
+#' @param M Passed to \code{mafft_site_score}.
+#' @param w1 Passed to \code{mafft_gap_profiles}.
+#' @param w2 Passed to \code{mafft_gap_profiles}.
+#' @param s_op Numeric; combined arithmetically in the body.
+#' @return A list with \code{out1}, \code{out2}.
+#' @export
+mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
+  n <- nchar(g1[1])
+  m <- nchar(g2[1])
+  if (n == 0) {
+    return(list(
+      out1 = rep(strrep("-", m), length(g1)),
+      out2 = as.list(g2)
+    ))
+  }
+  if (m == 0) {
+    return(list(
+      out1 = as.list(g1),
+      out2 = rep(strrep("-", n), length(g2))
+    ))
+  }
+  gp1 <- mafft_gap_profiles(g1, w1)
+  gp2 <- mafft_gap_profiles(g2, w2)
+  gs1 <- gp1$gs
+  ge1 <- gp1$ge
+  gs2 <- gp2$gs
+  ge2 <- gp2$ge
+  neg <- -Inf
+  P <- matrix(neg, n + 1L, m + 1L)
+  back <- vector("list", (n + 1L) * (m + 1L))
+  dim(back) <- c(n + 1L, m + 1L)
+  P[1, 1] <- 0.0
+  for (i in 2:(n + 1L)) {
+    P[i, 1] <- -s_op * (1.0 - (gs1[1] + ge1[i - 1L]) / 2.0)
+    back[[i, 1]] <- list(kind = "I", pi = 0L, pj = 0L)
+  }
+  for (j in 2:(m + 1L)) {
+    P[1, j] <- -s_op * (1.0 - (gs2[1] + ge2[j - 1L]) / 2.0)
+    back[[1, j]] <- list(kind = "D", pi = 0L, pj = 0L)
+  }
+  for (i in 2:(n + 1L)) {
+    for (j in 2:(m + 1L)) {
+      h <- mafft_site_score(M, g1, g2, w1, w2, i - 1L, j - 1L)
+      # backpointers hold the PREDECESSOR in the 0-based frame the
+      # traceback walks (it adds one to re-enter matrix indexing): M
+      # stored the current cell and the traceback spun forever
+      best <- list(v = P[i - 1L, j - 1L], kind = "M", pi = i - 2L, pj = j - 2L)
+      for (x in 0:(i - 1L)) {
+        if (is.infinite(P[x + 1L, j - 1L + 1L])) next
+        pen <- s_op * (1.0 - (gs1[x + 1L] + ge1[i]) / 2.0)
+        v <- P[x + 1L, j] - pen
+        if (v > best$v) {
+          best <- list(v = v, kind = "I", pi = x, pj = j - 2L)
+        }
+      }
+      for (y in 0:(j - 1L)) {
+        if (is.infinite(P[i, y + 1L])) next
+        pen <- s_op * (1.0 - (gs2[y + 1L] + ge2[j]) / 2.0)
+        v <- P[i, y + 1L] - pen
+        if (v > best$v) {
+          best <- list(v = v, kind = "D", pi = i - 2L, pj = y)
+        }
+      }
+      P[i, j] <- h + best$v
+      back[[i, j]] <- list(kind = best$kind, pi = best$pi, pj = best$pj)
+    }
+  }
+  cols <- list()
+  i <- n + 1L
+  j <- m + 1L
+  while (i > 1L && j > 1L) {
+    b <- back[[i, j]]
+    cols[[length(cols) + 1L]] <- c(i - 1L, j - 1L)
+    if (b$kind == "I") {
+      if (i - 2L >= b$pi) for (t in (i - 2L):(b$pi)) cols[[length(cols) + 1L]] <- c(t, NA)
+    } else if (b$kind == "D") {
+      if (j - 2L >= b$pj) for (t in (j - 2L):(b$pj)) cols[[length(cols) + 1L]] <- c(NA, t)
+    }
+    i <- b$pi + 1L
+    j <- b$pj + 1L
+  }
+  # guard the tails: the colon ASCENDS from 0 when i or j is already 1
+  if (i > 1L) for (t in (i - 1L):1) cols[[length(cols) + 1L]] <- c(t, NA)
+  if (j > 1L) for (t in (j - 1L):1) cols[[length(cols) + 1L]] <- c(NA, t)
+  cols <- rev(cols)
+  out1 <- vapply(g1, function(s) {
+    paste(vapply(cols, function(c) {
+      if (is.na(c[1])) "-" else substr(s, c[1], c[1])
+    }, character(1)), collapse = "")
+  }, character(1))
+  out2 <- vapply(g2, function(s) {
+    paste(vapply(cols, function(c) {
+      if (is.na(c[2])) "-" else substr(s, c[2], c[2])
+    }, character(1)), collapse = "")
+  }, character(1))
+  list(out1 = as.list(out1), out2 = as.list(out2))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_peaks
+#'
+#' A step of the mafft_native implementation. Called by \code{find_homologous_segments}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param lags A vector; indexed elementwise.
+#' @param c Numeric; passed to \code{order}.
+#' @param n_peaks Coerced to integer by the body, with \code{as.integer}.
+#' @return The value of \code{[}.
+#' @export
+mafft_peaks <- function(lags, c, n_peaks) {
+  ord <- order(c, decreasing = TRUE)
+  lags[ord[seq_len(as.integer(n_peaks))]]
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_site_score
+#'
+#' A step of the mafft_native implementation. Called by \code{find_homologous_segments},
+#' \code{mafft_nw}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param M Passed to \code{mafft_lookup}.
+#' @param ga A vector; its length is taken and its elements indexed.
+#' @param gb A vector; its length is taken and its elements indexed.
+#' @param wa A vector; indexed elementwise.
+#' @param wb A vector; indexed elementwise.
+#' @param i Character; passed to \code{substr}.
+#' @param j Character; passed to \code{substr}.
+#' @return The value of \code{tot}, as built in the body.
+#' @export
+mafft_site_score <- function(M, ga, gb, wa, wb, i, j) {
+  tot <- 0.0
+  for (idx_a in seq_along(ga)) {
+    a <- substr(ga[idx_a], i, i)
+    if (a == "-") next
+    for (idx_b in seq_along(gb)) {
+      b <- substr(gb[idx_b], j, j)
+      if (b == "-") next
+      tot <- tot + wa[idx_a] * wb[idx_b] * mafft_lookup(M, a, b)
+    }
+  }
+  tot
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_weights
+#'
+#' A step of the mafft_native implementation. Called by \code{iterative_refine},
+#' \code{progressive_align}, \code{wsp_score}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param k A count; the body uses it as \code{rep(...)}.
+#' @return The value of \code{rep}.
+#' @export
+mafft_weights <- function(k) rep(1.0 / k, k)
+
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_xcorr_direct
+#'
+#' A step of the mafft_native implementation. Called by \code{correlation}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param a A vector; its length is taken and its elements indexed.
+#' @param b A vector; its length is taken and its elements indexed.
+#' @param size A count; the body uses it as \code{rep(...)}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
+mafft_xcorr_direct <- function(a, b, size) {
+  out <- rep(0.0, size)
+  n <- length(a)
+  m <- length(b)
+  for (k in 0:(size - 1L)) {
+    tot <- 0.0
+    for (i in 0:(n - 1L)) {
+      j <- (i + k) %% size
+      if (j < m) tot <- tot + a[i + 1L] * b[j + 1L]
+    }
+    out[k + 1L] <- tot
+  }
+  out
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' mafft_xcorr_fft
+#'
+#' A step of the mafft_native implementation. Called by \code{correlation}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param a A vector; its length is taken.
+#' @param b A vector; its length is taken.
+#' @return A list with \code{c}, \code{size}.
+#' @export
+mafft_xcorr_fft <- function(a, b) {
+  n <- length(a)
+  m <- length(b)
+  size <- 1L
+  while (size < n + m) size <- size * 2L
+  fa <- fft(c(as.numeric(a), rep(0, size - n)))
+  fb <- fft(c(as.numeric(b), rep(0, size - m)))
+  back <- fft(fa * Conj(fb), inverse = TRUE) / size
+  list(c = Re(back), size = size)
+}
+
+# -- restored: pre-sync definition (GRANTHAM_POLARITY) --
+#' @noRd
+GRANTHAM_POLARITY <- list(
+  A = 8.1, R = 10.5, N = 11.6, D = 13.0, C = 5.5,
+  Q = 10.5, E = 12.3, G = 9.0, H = 10.4, I = 5.2,
+  L = 4.9, K = 11.3, M = 5.7, F = 5.2, P = 8.0,
+  S = 9.2, T = 8.6, W = 5.4, Y = 6.2, V = 5.9
+)
+
+# -- restored: pre-sync definition (GRANTHAM_VOLUME) --
+#' @noRd
+GRANTHAM_VOLUME <- list(
+  A = 31.0, R = 124.0, N = 56.0, D = 54.0, C = 55.0,
+  Q = 85.0, E = 83.0, G = 3.0, H = 96.0, I = 111.0,
+  L = 111.0, K = 119.0, M = 105.0, F = 132.0, P = 32.5,
+  S = 32.0, T = 61.0, W = 170.0, Y = 136.0, V = 84.0
+)

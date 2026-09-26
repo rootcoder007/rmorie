@@ -374,3 +374,22 @@ morie_smoopt <- list(error_cache = error_cache,
                        sequential_minimal_optimization,
                      smo_solver = smo_solver,
                      smosolver = smosolver)
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Vectorise the (n, n) gram matrix K into a column-stored numeric
+#'
+#' matrix if it isn\'t already.
+#'
+#' @param K A vector; its length is taken and its elements indexed.
+#' @return The value of \code{M}, as built in the body.
+#' @export
+#' @examples
+#' res <- .smoopt_K(K = 3L)
+#' res
+.smoopt_K <- function(K) {
+  if (is.matrix(K)) return(K)
+  n <- length(K)
+  M <- matrix(0, n, n)
+  for (i in seq_len(n)) for (j in seq_len(n)) M[i, j] <- K[[i]][[j]]
+  M
+}

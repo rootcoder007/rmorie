@@ -204,3 +204,126 @@ gru4rec <- session_parallel_batches
 
 # house entry point: the package exports one morie_<module>
 morie_gru4r <- session_parallel_batches
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Numerically stable sigmoid: below -700 it is effectively 0
+#'
+#' A step of the gru4r_native implementation. Called by \code{morie_gru4r_bpr},
+#' \code{morie_gru4r_gru}, \code{morie_gru4r_top1}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return The value of \code{ifelse}.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gru4r_sigmoid(x = x)
+#' res
+.gru4r_sigmoid <- function(x) {
+  # Numerically stable sigmoid: below -700 it is effectively 0.
+  ifelse(x > -700, 1 / (1 + exp(-x)), 0)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' BPR ranking loss
+#'
+#' \eqn{-1/N_S \\sum_j \\log\\sigma(r_i - r_j)}, with the
+#' log floored at 1e-12 for numerical stability.
+#'
+#' @param r_target Score of the target item.
+#' @param r_negatives Numeric vector of negative-item scores.
+#' @return Scalar loss.
+#' @export
+morie_gru4r_bpr <- function(r_target, r_negatives) {
+  neg <- as.numeric(r_negatives)
+  if (length(neg) == 0L) stop("gru4r: at least one negative is needed")
+  rt <- as.numeric(r_target)
+  s <- .gru4r_sigmoid(rt - neg)
+  -sum(log(pmax(s, 1e-12))) / length(neg)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' One GRU update (single layer)
+#'
+#' Update gate, reset gate, candidate, and the convex combination
+#' \code{(1 - z) h + z hh} that defines a GRU.
+#'
+#' @param x Input vector (length d).
+#' @param h Hidden state (length n).
+#' @param Wz,Uz Update-gate linear maps.
+#' @param Wr,Ur Reset-gate linear maps.
+#' @param Wh,Uh Candidate-h linear maps.
+#' @return New hidden state.
+#' @export
+morie_gru4r_gru <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
+  x <- as.numeric(x)
+  h <- as.numeric(h)
+  Wz <- as.matrix(Wz)
+  Uz <- as.matrix(Uz)
+  Wr <- as.matrix(Wr)
+  Ur <- as.matrix(Ur)
+  Wh <- as.matrix(Wh)
+  Uh <- as.matrix(Uh)
+  n <- length(h)
+  lin <- function(W, U, xv, hv) as.numeric(W %*% xv + U %*% hv)
+  z <- .gru4r_sigmoid(lin(Wz, Uz, x, h))
+  r <- .gru4r_sigmoid(lin(Wr, Ur, x, h))
+  hh <- tanh(lin(Wh, Uh, x, r * h))
+  (1 - z) * h + z * hh
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Mean reciprocal rank at k
+#'
+#' 1 / position of the target within the top k, or 0 if absent.
+#'
+#' @param ranked Ordered integer vector of recommended item ids.
+#' @param target Target item id.
+#' @param kk Cutoff.
+#' @return Scalar.
+#' @export
+morie_gru4r_mrr <- function(ranked, target, kk = 20) {
+  top <- as.integer(ranked)[seq_len(min(as.integer(kk),
+                                        length(ranked)))]
+  t <- as.integer(target)
+  if (t %in% top) 1.0 / (which(top == t)[1L]) else 0.0
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Recall at k
+#'
+#' 1 if the target is in the top \code{k} ranked items, else 0.
+#'
+#' @param ranked Ordered integer vector of recommended item ids.
+#' @param target Target item id.
+#' @param kk Cutoff.
+#' @return 0 or 1.
+#' @export
+morie_gru4r_recall <- function(ranked, target, kk = 20) {
+  top <- as.integer(ranked)[seq_len(min(as.integer(kk),
+                                        length(ranked)))]
+  if (as.integer(target) %in% top) 1.0 else 0.0
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' TOP1 ranking loss
+#'
+#' The smoothed relative rank
+#' \eqn{\\sigma(r_j - r_i)} plus, when \code{regularize=TRUE}, the
+#' load-bearing \eqn{\\sigma(r_j^2)} term that stops scores from
+#' running away.
+#'
+#' @param r_target Score of the target item.
+#' @param r_negatives Numeric vector of negative-item scores.
+#' @param regularize Include the sigma(r_j^2) regulariser.
+#' @return Scalar loss.
+#' @export
+morie_gru4r_top1 <- function(r_target, r_negatives, regularize = TRUE) {
+  neg <- as.numeric(r_negatives)
+  if (length(neg) == 0L) stop("gru4r: at least one negative is needed")
+  rt <- as.numeric(r_target)
+  rank <- sum(.gru4r_sigmoid(neg - rt)) / length(neg)
+  if (!regularize) return(rank)
+  rank + sum(.gru4r_sigmoid(neg * neg)) / length(neg)
+}

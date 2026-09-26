@@ -811,3 +811,21 @@ bayesian_optimization <- bayopt
 
 # house entry point: the package exports one morie_<module>
 morie_bayopt <- bayopt
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .bayopt_erfc
+#'
+#' A step of the bayopt_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bayopt_erfc(x = x)
+#' res
+.bayopt_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
+
+.bayopt_KERNELS <- c("matern52", "se")

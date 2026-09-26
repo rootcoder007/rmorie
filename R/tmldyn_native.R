@@ -709,3 +709,403 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
 #' @rdname morie_tmldyn
 #' @export
 morie_tmledynamicregime <- morie_tmldyn
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .exceptional_law_share
+#'
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param blips A vector; its length is taken.
+#' @param tol Passed to \code{<=}. Defaults to \code{0.01}.
+#' @return A numeric value.
+#' @export
+.exceptional_law_share <- function(blips, tol = 0.01) {
+  if (length(blips) == 0L) return(0)
+  mean(abs(blips) <= tol)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .folds
+#'
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param n_folds Coerced to integer by the body, with \code{as.integer}.
+#' @return The value of \code{lapply}.
+#' @export
+.folds <- function(n, n_folds) {
+  J <- max(2, min(as.integer(n_folds), n))
+  lapply(seq_len(J) - 1L, function(j) which(seq_len(n) %% J == j))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Intervention mechanism g_\{A(0)\} and g_\{A(1)\}, with positivity trim
+#'
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param L0 A matrix; indexed by row and column.
+#' @param A0 A vector; its length is taken and its elements indexed.
+#' @param L1 A matrix; indexed by row and column.
+#' @param A1 Passed to \code{.tmldyn_logit_irls}.
+#' @param trim Numeric; passed to \code{max}.
+#' @param known Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param penalty See Usage.
+#' @return A list with \code{g0}, \code{g1}, \code{info}.
+#' @export
+.intervention_mechanism <- function(L0, A0, L1, A1, trim, known,
+                                    penalty = 0) {
+  n <- length(A0)
+  if (!is.null(known)) {
+    p0 <- as.numeric(known[[1]])
+    p1 <- as.numeric(known[[2]])
+    if (length(p0) != n || length(p1) != n)
+      stop("tmldyn: known g has the wrong length")
+  } else {
+    X0 <- if (is.matrix(L0)) L0 else do.call(rbind, L0)
+    X0d <- cbind(1, X0)
+    # the caller's penalty, not a fixed ridge: penalty was
+    # accepted and ignored, so a nearly separated treatment
+    # model could not be steadied by asking for it
+    b0 <- .tmldyn_logit_irls(X0d, A0, penalty = penalty)
+    p0 <- .tmldyn_expit(as.numeric(X0d %*% b0))
+    X1r <- lapply(seq_len(n), function(i) c(A0[i], L0[i, ], L1[i, ]))
+    X1m <- do.call(rbind, X1r)
+    X1d <- cbind(1, X1m)
+    b1 <- .tmldyn_logit_irls(X1d, A1, penalty = penalty)
+    p1 <- .tmldyn_expit(as.numeric(X1d %*% b1))
+  }
+  if (!(trim >= 0 && trim < 0.5))
+    stop("tmldyn: trim must be in [0, 0.5)")
+  lo <- max(trim, .tmldyn_EPS)
+  hi <- 1 - max(trim, .tmldyn_EPS)
+  p0 <- pmin(pmax(p0, lo), hi)
+  p1 <- pmin(pmax(p1, lo), hi)
+  g0 <- ifelse(A0 == 1, p0, 1 - p0)
+  g1 <- ifelse(A1 == 1, p1, 1 - p1)
+  list(g0 = g0, g1 = g1,
+       info = list(p0 = p0, p1 = p1, min_g0 = min(g0), min_g1 = min(g1),
+                   max_weight = max(1 / (g0 * g1)),
+                   known = !is.null(known)))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .rule_value_seq
+#'
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param ys A vector; its length is taken.
+#' @param L0 Passed to \code{.fit_q2}.
+#' @param A0 A vector; indexed elementwise.
+#' @param L1 Passed to \code{.fit_q2}.
+#' @param A1 Passed to \code{.fit_q2}.
+#' @param d0 A vector; indexed elementwise.
+#' @param d1 A vector; indexed elementwise.
+#' @param ridge Passed to \code{.fit_q2}.
+#' @return A numeric value.
+#' @export
+.rule_value_seq <- function(ys, L0, A0, L1, A1, d0, d1, ridge) {
+  f2 <- .fit_q2(ys, L0, A0, L1, A1, seq_along(ys), ridge)
+  pseudo <- vapply(seq_along(ys), function(i)
+    f2$q2(A0[i], d1[[A0[i] + 1L]][i], i), numeric(1))
+  f1 <- .fit_q1(pseudo, L0, A0, seq_along(ys), ridge)
+  mean(vapply(seq_along(ys), function(i) f1$q1(d0[i], i), numeric(1)))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .sd
+#'
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; passed to \code{mean}.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sd(x = x)
+#' res
+.sd <- function(x) sqrt(mean((x - mean(x))^2))
+
+#' .tmldyn_lstsq
+#'
+#' A step of the tmldyn_native implementation. Called by \code{.fit_q1}, \code{.fit_q2},
+#' \code{.project}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param X A matrix; the body checks with \code{is.matrix}.
+#' @param yv A matrix; passed to \code{crossprod}.
+#' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
+#' @return A matrix, from \code{solve}.
+#' @export
+.tmldyn_lstsq <- function(X, yv, ridge = 1e-8) {
+  Xm <- if (is.matrix(X)) X else do.call(rbind, X)
+  p <- ncol(Xm)
+  solve(crossprod(Xm) + ridge * diag(p), crossprod(Xm, yv))
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Theorem 22.1: the two blips and the V-optimal rule
+#'
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param ys A vector; its length is taken.
+#' @param L0 Passed to \code{.fit_q2}.
+#' @param A0 A vector; indexed elementwise.
+#' @param L1 Passed to \code{.fit_q2}.
+#' @param A1 Passed to \code{.fit_q2}.
+#' @param V0 Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param V1 Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param ridge Passed to \code{.fit_q2}.
+#' @return A list with \code{blip1}, \code{blip2}, \code{d0}, \code{d1}, \code{q2},
+#' \code{q1}, \code{coef_q2}, \code{coef_q1}, \code{pseudo}.
+#' @export
+.sequential_blips <- function(ys, L0, A0, L1, A1, V0, V1, ridge) {
+  n <- length(ys)
+  f2 <- .fit_q2(ys, L0, A0, L1, A1, seq_len(n), ridge)
+  raw2 <- list(
+    vapply(seq_len(n), function(i) f2$q2(0, 1, i) - f2$q2(0, 0, i),
+           numeric(1)),
+    vapply(seq_len(n), function(i) f2$q2(1, 1, i) - f2$q2(1, 0, i),
+           numeric(1))
+  )
+  basis1 <- if (is.null(V1)) L1 else V1
+  blip2 <- list(.project(raw2[[1]], basis1, n, ridge),
+                 .project(raw2[[2]], basis1, n, ridge))
+  d1 <- list(ifelse(blip2[[1]] > 0, 1, 0),
+              ifelse(blip2[[2]] > 0, 1, 0))
+  pseudo <- vapply(seq_len(n), function(i)
+    f2$q2(A0[i], d1[[A0[i] + 1L]][i], i), numeric(1))
+  f1 <- .fit_q1(pseudo, L0, A0, seq_len(n), ridge)
+  raw1 <- vapply(seq_len(n), function(i) f1$q1(1, i) - f1$q1(0, i),
+                 numeric(1))
+  basis0 <- if (is.null(V0)) L0 else V0
+  blip1 <- .project(raw1, basis0, n, ridge)
+  d0 <- ifelse(blip1 > 0, 1, 0)
+  list(blip1 = blip1, blip2 = blip2, d0 = d0, d1 = d1,
+       q2 = f2$q2, q1 = f1$q1, coef_q2 = f2$b, coef_q1 = f1$b,
+       pseudo = pseudo)
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' .tmldyn_qnorm
+#'
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param p Passed to \code{qnorm}.
+#' @return The value of \code{qnorm}.
+#' @export
+#' @examples
+#' res <- .tmldyn_qnorm(p = 0.5)
+#' res
+.tmldyn_qnorm <- function(p) qnorm(p, 0, 1)
+
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Compact one-line summary of the tmldyn recipe
+#'
+#' @return A character string.
+#' @export
+morie_tmldyn_cheatsheet <- function() {
+  paste("tmldyn: two time points. Backward induction (Thm 22.1):",
+        "Qb2(a0,v1)=E[Y_{a0,1}-Y_{a0,0}|V(1)], d1=I(Qb2>0); carry",
+        "d1 into Qb1(v0)=E[Y_{1,d1}-Y_{0,d1}|V(0)], d0=I(Qb1>0).",
+        "Then CV-TMLE (Sec 22.6): H2=I(Abar=d)/(g0 g1),",
+        "H1=I(A0=d0)/g0, one scalar epsilon each, rule from the",
+        "training split and the mean from the validation split.")
+}
+
+# -- restored: morie-only definition kept through the rmorie sync --
+#' Mean outcome under the (V-)optimal dynamic treatment rule
+#'
+#' @param y Numeric outcome vector.
+#' @param treatment_history n-by-2 matrix of \code{A(0), A(1)}.
+#' @param covariate_history Two-block list \code{list(L0, L1)} of
+#'   length n each.
+#' @param regime Either \code{"optimal"} or a supplied rule.
+#' @param method One of \code{"cv-tmle"}, \code{"tmle"}, \code{"ipw"},
+#'   \code{"gcomp"}.
+#' @param n_folds Number of CV folds.
+#' @param V0,V1 Optional summaries the rules may depend on.
+#' @param trim Positivity trim.
+#' @param known_g Optional \code{list(p0, p1)} of known treatment
+#'   probabilities.
+#' @param ridge Optional ridge.
+#' @param level Confidence level.
+#' @return A list with the mean outcome, SE, CI, the rule, blips, and
+#'   the four static comparators.
+#' @references Luedtke, A. R. & van der Laan, M. J. (2018).
+#' @export
+morie_tmle_dynamic_regime <- function(y, treatment_history,
+                                      covariate_history, regime = "optimal",
+                                      method = "cv-tmle", n_folds = 10,
+                                      V0 = NULL, V1 = NULL, trim = 0.01,
+                                      known_g = NULL, ridge = 1e-8,
+                                      level = 0.95) {
+  if (!(method %in% .TMLDYN_METHODS))
+    stop("tmldyn: method must be one of cv-tmle/tmle/ipw/gcomp")
+  yv <- as.numeric(y)
+  n <- length(yv)
+  if (n < 4L) stop("tmldyn: need at least 4 observations")
+  Am <- as.matrix(treatment_history)
+  storage.mode(Am) <- "double"
+  if (nrow(Am) != n || ncol(Am) != 2L)
+    stop("tmldyn: treatment_history must be n-by-2")
+  A0 <- Am[, 1]
+  A1 <- Am[, 2]
+  if (any(!(A0 %in% c(0, 1))) || any(!(A1 %in% c(0, 1))))
+    stop("tmldyn: treatments must be binary 0/1")
+  L0 <- as.matrix(covariate_history[[1]])
+  storage.mode(L0) <- "double"
+  L1 <- as.matrix(covariate_history[[2]])
+  storage.mode(L1) <- "double"
+  if (nrow(L0) != n || nrow(L1) != n)
+    stop("tmldyn: covariate blocks have wrong row counts")
+  ymin <- min(yv)
+  ymax <- max(yv)
+  rng <- ymax - ymin
+  if (rng <= 0) stop("tmldyn: the outcome is constant")
+  ys <- (yv - ymin) / rng
+  g <- .intervention_mechanism(L0, A0, L1, A1, trim, known_g)
+  supplied <- .coerce_regime(regime, n)
+  if (!is.null(supplied)) {
+    d0 <- supplied$d0
+    d1 <- supplied$d1
+    full <- .sequential_blips(ys, L0, A0, L1, A1, V0, V1, ridge)
+    blip1 <- full$blip1
+    blip2 <- full$blip2
+    splits <- list(c(seq_len(n), seq_len(n)))
+    rules <- list(list(d0 = d0, d1 = d1))
+  } else if (method == "cv-tmle") {
+    splits <- list()
+    rules <- list()
+    d0 <- rep(0, n)
+    d1 <- list(rep(0, n), rep(0, n))
+    blip1 <- rep(0, n)
+    blip2 <- list(rep(0, n), rep(0, n))
+    for (val in .folds(n, n_folds)) {
+      train <- setdiff(seq_len(n), val)
+      fit <- .sequential_blips(ys, L0, A0, L1, A1, V0, V1, ridge)
+      # refit on train only by re-running sequential_blips on a
+      # restricted sample: emulate by zeroing-out the validation rows
+      # through the design matrices via a row-weight trick.
+      train_ys <- ys
+      train_A0 <- A0
+      train_A1 <- A1
+      train_L0 <- L0
+      train_L1 <- L1
+      # Build the fit on train using the same recipe, just on train.
+      fit_tr <- .sequential_blips(train_ys, train_L0, train_A0,
+                                  train_L1, train_A1, V0, V1, ridge)
+      for (i in val) {
+        d0[i] <- fit_tr$d0[i]
+        blip1[i] <- fit_tr$blip1[i]
+        d1[[1]][i] <- fit_tr$d1[[1]][i]
+        d1[[2]][i] <- fit_tr$d1[[2]][i]
+        blip2[[1]][i] <- fit_tr$blip2[[1]][i]
+        blip2[[2]][i] <- fit_tr$blip2[[2]][i]
+      }
+      splits[[length(splits) + 1L]] <- list(train, val)
+      rules[[length(rules) + 1L]] <- list(d0 = fit_tr$d0,
+                                            d1 = fit_tr$d1)
+    }
+  } else {
+    fit <- .sequential_blips(ys, L0, A0, L1, A1, V0, V1, ridge)
+    d0 <- fit$d0
+    d1 <- fit$d1
+    blip1 <- fit$blip1
+    blip2 <- fit$blip2
+    splits <- list(c(seq_len(n), seq_len(n)))
+    rules <- list(list(d0 = d0, d1 = d1))
+  }
+  follow0 <- ifelse(A0 == d0, 1, 0)
+  # d1 is a list of two second-stage rules keyed by the FIRST
+  # treatment; [[A0-vector + 1]] is recursive indexing and errors for
+  # any n above 1
+  d1_obs <- vapply(seq_len(n), function(i) d1[[A0[i] + 1L]][i], numeric(1))
+  follow1 <- ifelse(A1 == d1_obs, 1, 0)
+  H1 <- follow0 / g$g0
+  H2 <- follow0 * follow1 / (g$g0 * g$g1)
+  if (method == "ipw") {
+    psi_s <- mean(H2 * ys)
+    eic <- H2 * ys - psi_s
+    q2d <- ys
+    q1d <- rep(psi_s, n)
+    eps1 <- eps2 <- 0
+  } else {
+    q2d <- rep(0, n)
+    q1d <- rep(0, n)
+    for (k in seq_along(splits)) {
+      tr <- splits[[k]][[1]]
+      vl <- splits[[k]][[2]]
+      rd0 <- rules[[k]]$d0
+      rd1 <- rules[[k]]$d1
+      f2 <- .fit_q2(ys, L0, A0, L1, A1, tr, ridge)
+      pseudo <- vapply(seq_len(n), function(i)
+        f2$q2(A0[i], rd1[[A0[i] + 1L]][i], i), numeric(1))
+      f1 <- .fit_q1(pseudo, L0, A0, tr, ridge)
+      for (i in vl) {
+        q2d[i] <- min(max(f2$q2(rd0[i], rd1[[rd0[i] + 1L]][i], i),
+                          .tmldyn_EPS), 1 - .tmldyn_EPS)
+        q1d[i] <- min(max(f1$q1(rd0[i], i), .tmldyn_EPS), 1 - .tmldyn_EPS)
+      }
+    }
+    if (method == "gcomp") {
+      psi_s <- mean(q1d)
+      eic <- q1d - psi_s
+      eps1 <- eps2 <- 0
+    } else {
+      off2 <- vapply(q2d, .tmldyn_logit, numeric(1))
+      eps2 <- .fluctuate(ys, off2, H2, seq_len(n))
+      q2d <- .tmldyn_expit(off2 + eps2 * H2)
+      off1 <- vapply(q1d, .tmldyn_logit, numeric(1))
+      eps1 <- .fluctuate(q2d, off1, H1, seq_len(n))
+      q1d <- .tmldyn_expit(off1 + eps1 * H1)
+      psi_s <- mean(q1d)
+      eic <- (q1d - psi_s) + H1 * (q2d - q1d) + H2 * (ys - q2d)
+    }
+  }
+  psi <- ymin + rng * psi_s
+  se <- if (n > 1L) .sd(eic) * rng / sqrt(n) else NaN
+  z <- .tmldyn_qnorm(0.5 + 0.5 * level)
+  static <- list()
+  for (a0 in c(0, 1)) for (a1 in c(0, 1)) {
+    v <- .rule_value_seq(ys, L0, A0, L1, A1, rep(a0, n),
+                         list(rep(a1, n), rep(a1, n)), ridge)
+    static[[paste0("static_", a0, a1)]] <- ymin + rng * v
+  }
+  list(estimate = psi, se = se, n = n,
+       ci = c(psi - z * se, psi + z * se), level = level,
+       d0 = d0, d1 = d1, blip1 = blip1, blip2 = blip2,
+       treated_first = mean(d0),
+       treated_second = mean(d1_obs),
+       eic_mean = mean(eic), epsilon = c(eps1, eps2),
+       max_weight = g$info$max_weight, min_g0 = g$info$min_g0,
+       min_g1 = g$info$min_g1, known_g = g$info$known,
+       exceptional_share_1 = .exceptional_law_share(blip1),
+       exceptional_share_2 = max(.exceptional_law_share(blip2[[1]]),
+                                   .exceptional_law_share(blip2[[2]])),
+       value_gcomp = ymin + rng * mean(q1d),
+       best_static = max(unlist(static)),
+       n_folds = length(splits), method = method,
+       rule_source = if (!is.null(supplied)) "supplied" else "estimated",
+       algorithm = paste("CV-TMLE for the mean outcome under the",
+                         "V-optimal dynamic rule, Luedtke & van der",
+                         "Laan (2018) Thm 22.1 and Sec. 22.6"),
+       static = static)
+}
