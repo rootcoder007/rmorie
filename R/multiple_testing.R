@@ -993,6 +993,36 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
 # Utilities
 # ---------------------------------------------------------------------------
 
+#' Natural cubic smoothing spline with fixed effective df
+#'
+#' Green and Silverman (1994, sec. 2.3): g = (I + a K)^-1 y with
+#' K = Q R^-1 Q', a solved so that the trace equals df.
+#' @noRd
+.mt_smoothing_spline_df <- function(x, y, df) {
+  n <- length(x)
+  h <- diff(x)
+  Q <- matrix(0, n, n - 2)
+  R <- matrix(0, n - 2, n - 2)
+  for (j in 2:(n - 1)) {
+    k <- j - 1
+    Q[j - 1, k] <- 1 / h[j - 1]
+    Q[j, k] <- -1 / h[j - 1] - 1 / h[j]
+    Q[j + 1, k] <- 1 / h[j]
+    R[k, k] <- (h[j - 1] + h[j]) / 3
+    if (k < n - 2) R[k, k + 1] <- R[k + 1, k] <- h[j] / 6
+  }
+  K <- Q %*% solve(R, t(Q))
+  sm <- function(a) solve(diag(n) + a * K)
+  lo <- -30
+  hi <- 30
+  for (it in 1:200) {
+    mid <- (lo + hi) / 2
+    if (sum(diag(sm(exp(mid)))) > df) lo <- mid else hi <- mid
+  }
+  as.numeric(sm(exp((lo + hi) / 2)) %*% y)
+}
+
+
 #' Estimate the proportion of true null hypotheses (pi0)
 #'
 #' Delegates to \code{qvalue::pi0est} (Bioconductor) when installed
@@ -1015,52 +1045,31 @@ estimate_pi0 <- function(p_values,
   method <- match.arg(method)
   p <- .mt_check_p(p_values)
   m <- length(p)
-  lambdas <- seq(0.05, 0.90, by = 0.05)
+  lambdas <- seq(0.05, 0.95, by = 0.05)  # qvalue's default grid
+  pi0_lam <- vapply(lambdas, function(lam) sum(p >= lam) / (m * (1 - lam)), numeric(1))
 
   if (method == "storey") {
-    if (.mt_have_qvalue()) {
-      out <- tryCatch(
-        qvalue::pi0est(p, lambda = lambdas, pi0.method = "smoother"),
-        error = function(e) NULL
-      )
-      if (!is.null(out) && is.finite(out$pi0)) {
-        return(min(as.numeric(out$pi0), 1.0))
-      }
-    }
-    estimates <- vapply(lambdas, function(lam) {
-      sum(p > lam) / (m * (1 - lam))
-    }, numeric(1))
-    return(min(min(estimates), 1.0))
+    # Storey and Tibshirani (2003): a cubic smoothing spline with 3 df
+    # through pi0(lambda), read at the largest lambda (qvalue's
+    # pi0.method = "smoother")
+    fit <- .mt_smoothing_spline_df(lambdas, pi0_lam, 3)
+    if (fit[length(fit)] <= 0)
+      stop("estimated pi0 <= 0 (the smoother extrapolated below zero); use method = \"bootstrap\"", call. = FALSE)
+    return(min(fit[length(fit)], 1.0))
   }
 
   if (method == "bootstrap") {
-    if (.mt_have_qvalue()) {
-      out <- tryCatch(
-        qvalue::pi0est(p, lambda = lambdas, pi0.method = "bootstrap"),
-        error = function(e) NULL
-      )
-      if (!is.null(out) && is.finite(out$pi0)) {
-        return(min(as.numeric(out$pi0), 1.0))
-      }
-    }
-    pi0_hat <- vapply(lambdas, function(lam) {
-      sum(p > lam) / (m * (1 - lam))
-    }, numeric(1))
-    min_pi0 <- stats::quantile(pi0_hat, 0.10, names = FALSE)
-    mse <- numeric(length(lambdas))
-    for (b in seq_len(100L)) {
-      p_boot <- sample(p, size = m, replace = TRUE)
-      pi0_boot <- vapply(lambdas, function(lam) {
-        sum(p_boot > lam) / (m * (1 - lam))
-      }, numeric(1))
-      mse <- mse + (pi0_boot - min_pi0) ^ 2
-    }
-    mse <- mse / 100
-    return(min(pi0_hat[which.min(mse)], 1.0))
+    # Storey, Taylor and Siegmund (2004): the lambda minimising the
+    # closed-form MSE against the 10% quantile of pi0(lambda)
+    min_pi0 <- stats::quantile(pi0_lam, 0.10, names = FALSE)
+    W <- vapply(lambdas, function(lam) sum(p >= lam), numeric(1))
+    mse <- (W / (m^2 * (1 - lambdas)^2)) * (1 - W / m) + (pi0_lam - min_pi0)^2
+    return(min(pi0_lam[mse == min(mse)], 1.0))
   }
 
-  # two_step
-  bh_res <- benjamini_hochberg(p, alpha = 0.05)
+  # two_step: Benjamini, Krieger and Yekutieli (2006), stage-one BH at
+  # q/(1 + q)
+  bh_res <- benjamini_hochberg(p, alpha = 0.05 / 1.05)
   r <- bh_res$n_rejected
   if (r == 0L) {
     return(1.0)

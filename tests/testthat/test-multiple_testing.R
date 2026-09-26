@@ -315,3 +315,20 @@ test_that("permutation_fdr rejects ncol(null) mismatch", {
   bad_null <- matrix(runif(30), 10, 3)
   expect_error(permutation_fdr(c(0.1, 0.2), bad_null))
 })
+
+test_that("estimate_pi0 follows qvalue::pi0est", {
+  p <- (1:60 - 0.5) / 60
+  p <- sort(c(p[seq(1, 60, 2)], p[1:30]^3))
+  # qvalue::pi0est(p, pi0.method = "bootstrap"); the smoother is the exact
+  # df = 3 natural spline, which smooth.spline matches to its df tolerance
+  expect_equal(estimate_pi0(p, "bootstrap"), 0.49019607843137253, tolerance = 1e-14)
+  expect_equal(estimate_pi0(p, "storey"), 0.4275865919952116, tolerance = 2e-5)
+  lam <- seq(0.05, 0.95, 0.05)
+  pl <- vapply(lam, function(l) sum(p >= l) / (60 * (1 - l)), numeric(1))
+  fit <- stats::smooth.spline(lam, pl, df = 3)
+  expect_equal(estimate_pi0(p, "storey"), predict(fit, x = 0.95)$y, tolerance = 2e-5)
+  # Benjamini-Krieger-Yekutieli stage one at q / (1 + q)
+  r <- sum(p.adjust(p, "BH") <= 0.05 / 1.05)
+  expect_equal(estimate_pi0(p, "two_step"), (60 - r) / 60)
+  expect_error(estimate_pi0(c(0.001, 0.01, 0.02, 0.3, 0.5), "storey"), "pi0 <= 0")
+})
