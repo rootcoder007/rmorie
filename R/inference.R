@@ -363,15 +363,17 @@ morie_levene_test <- function(...) {
 #' @param successes Number of successes.
 #' @param n Total observations.
 #' @param alpha Significance level (default 0.05 -> 95% CI).
-#' @param method `"wilson"` (default), `"exact"` (Clopper-Pearson),
-#'   or `"wald"`.
+#' @param method `"wilson"` (default), `"exact"` or `"clopper-pearson"`
+#'   (Clopper-Pearson), `"agresti-coull"`, or `"wald"`.
 #' @return Named list: `p_hat`, `ci_lower`, `ci_upper`.
 #' @export
 #' @examples
 #' morie_proportion_ci(35, 100)
 morie_proportion_ci <- function(successes, n, alpha = 0.05,
-                          method = c("wilson", "exact", "wald")) {
+                          method = c("wilson", "exact", "wald", "agresti-coull",
+                                     "clopper-pearson")) {
   method <- match.arg(method)
+  if (method == "clopper-pearson") method <- "exact"
   p <- successes / n
   z <- stats::qnorm(1 - alpha / 2)
 
@@ -388,6 +390,11 @@ morie_proportion_ci <- function(successes, n, alpha = 0.05,
     hi <- if (successes == n)  1
           else stats::qbeta(1 - alpha / 2, successes + 1, n - successes)
     ci <- c(lo, hi)
+  } else if (method == "agresti-coull") {
+    nt <- n + z^2
+    pt <- (successes + z^2 / 2) / nt
+    margin <- z * sqrt(pt * (1 - pt) / nt)
+    ci <- c(pt - margin, pt + margin)
   } else {
     margin <- z * sqrt(p * (1 - p) / n)
     ci <- c(p - margin, p + margin)
