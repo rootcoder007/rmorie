@@ -463,7 +463,8 @@ mrm_period_days <- function(from, to) {
     stop("`from` and `to` must be dates or date strings, not numbers",
          call. = FALSE)
   }
-  from <- as.Date(from); to <- as.Date(to)
+  from <- as.Date(from)
+  to <- as.Date(to)
   if (length(from) != 1L || length(to) != 1L)
     stop("`from` and `to` must each be a single date", call. = FALSE)
   if (is.na(from) || is.na(to))
