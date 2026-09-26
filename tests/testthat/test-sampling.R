@@ -148,3 +148,18 @@ test_that("morie_calibration_weights match population marginals after raking", {
   expect_lt(abs(sum(w[df_c$gender == "M"]) - 50), 1)
   expect_lt(abs(sum(w[df_c$gender == "F"]) - 50), 1)
 })
+
+test_that("PPS without replacement has inclusion probabilities n x / sum(x)", {
+  sizes <- c(50, 30, 20, 10, 10, 5, 5, 400)
+  df <- data.frame(id = 0:7, sz = sizes)
+  pik <- rmorie:::.morie_inclusion_probabilities(sizes, 3)
+  # the 400 unit is a certainty; the other two draws share 3 - 1 = 2
+  expect_equal(pik[8], 1)
+  expect_equal(pik[1:7], 2 * sizes[1:7] / sum(sizes[1:7]), tolerance = 1e-15)
+  for (s in 1:25) {
+    o <- morie_pps_sample(df, "sz", 3, seed = s)
+    expect_equal(nrow(o), 3L)
+    expect_true(7 %in% o$id)
+    expect_equal(o$.weight, 1 / pik[o$id + 1], tolerance = 1e-15)
+  }
+})

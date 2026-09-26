@@ -163,22 +163,50 @@ morie_pps_sample <- function(df, size_col, n, seed = 42L,
          ". Wrap a vector with data.frame(x = your_vector) first.",
          call. = FALSE)
   }
-  # Python sampling.py:pps_sample uses replace=False (PPS-WoR via
-  # Madow systematic-like). Default switched to FALSE 2026-05-22 to
-  # match. Pass replace=TRUE for legacy Hansen-Hurwitz with-replacement.
   .rmorie_local_seed(seed)
   sizes <- as.numeric(df[[size_col]])
   if (any(sizes <= 0, na.rm = TRUE)) stop("size_col must be positive.")
-  probs <- sizes / sum(sizes, na.rm = TRUE)
-  if (!replace && n > nrow(df)) {
+  if (replace) {
+    # Hansen-Hurwitz with replacement: n independent draws, weight 1/(n p_i)
+    probs <- sizes / sum(sizes)
+    idx <- sample.int(nrow(df), size = n, replace = TRUE, prob = probs)
+    out <- df[idx, , drop = FALSE]
+    out$.weight <- 1 / (n * probs[idx])
+    return(out)
+  }
+  if (n > nrow(df)) {
     stop("PPS without replacement requires n <= nrow(df).", call. = FALSE)
   }
-  idx <- sample.int(nrow(df), size = n, replace = replace, prob = probs)
+  # pi_i = n x_i / sum(x) with certainty units, as
+  # sampling::inclusionprobabilities; drawn by randomised systematic pi-ps
+  # (Hartley and Rao 1962), so unit i is in the sample with probability pi_i
+  pik <- .morie_inclusion_probabilities(sizes, n)
+  ord <- sample.int(length(sizes))
+  u <- stats::runif(1)
+  cum <- cumsum(pik[ord])
+  lo <- c(0, cum[-length(cum)])
+  hit <- floor(cum - u) > floor(lo - u)
+  idx <- ord[hit]
   out <- df[idx, , drop = FALSE]
-  # Design weight: 1 / (n * pi_i). Under HH-WR this is unbiased; under
-  # WoR it is approximate but commonly used.
-  out$.weight <- 1 / (n * probs[idx])
+  out$.weight <- 1 / pik[idx]
   out
+}
+
+#' Inclusion probabilities proportional to size with certainty units
+#'
+#' @noRd
+.morie_inclusion_probabilities <- function(sizes, n) {
+  cert <- rep(FALSE, length(sizes))
+  repeat {
+    k <- n - sum(cert)
+    pik <- k * sizes / sum(sizes[!cert])
+    new <- !cert & pik >= 1
+    if (!any(new)) {
+      pik[cert] <- 1
+      return(pik)
+    }
+    cert <- cert | new
+  }
 }
 
 
