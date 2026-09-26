@@ -432,3 +432,40 @@ test_that("round four: abadie-imbens se uses the match count", {
   se2 <- morie_matching_abadie_imbens_se(df, "y", "d", pairs, n_matches = 2L)
   expect_true(se2 <= se1)
 })
+
+test_that("balance diagnostics equal cobalt::bal.tab (pooled SD, weighted V ratio and KS)", {
+  n <- 60
+  i <- 0:(n - 1)
+  x1 <- round(sin(1.1 * i) * 2 + 0.3 * i / 10, 3)
+  x2 <- round(cos(0.7 * i) + 0.5 * sin(2.9 * i), 3)
+  t <- as.integer(sin(1.9 * i + 0.3) + 0.5 * x1 > 0.2)
+  w <- round(1 + 0.5 * abs(sin(0.9 * i)) + 0.3 * t, 3)
+  d <- data.frame(t, x1, x2, w)
+  r <- morie_matching_balance(d, "t", c("x1", "x2"), weights = "w")$balance_table
+  expect_equal(r$smd, c(1.67876185466111, 0.274662902480088), tolerance = 1e-12)
+  expect_equal(r$variance_ratio, c(1.48872009615744, 1.06429541438012), tolerance = 1e-12)
+  expect_equal(r$ks_stat, c(0.638985722883579, 0.202341881639128), tolerance = 1e-12)
+  u <- morie_matching_balance(d, "t", c("x1", "x2"))$balance_table
+  expect_equal(u$smd, c(1.70640717405192, 0.333769817807865), tolerance = 1e-12)
+})
+
+test_that("Abadie-Imbens SE equals Matching::Match(estimand = 'ATT', sample = TRUE)", {
+  n <- 60
+  i <- 0:(n - 1)
+  x1 <- sin(1.1 * i) * 2 + 0.3 * i / 10
+  x2 <- cos(0.7 * i) + 0.5 * sin(2.9 * i)
+  t <- as.integer(sin(1.9 * i + 0.3) + 0.5 * x1 > 0.2)
+  y <- 1 + 2 * t + x1 + 0.5 * x2 + 0.7 * sin(4.3 * i)
+  d <- data.frame(y, t, x1, x2)
+  rownames(d) <- as.character(i)
+  # nearest control with replacement on inverse-variance scaled covariates
+  X <- cbind(x1, x2)
+  sc <- 1 / apply(X, 2, stats::var)
+  tr <- which(t == 1)
+  co <- which(t == 0)
+  ctrl <- vapply(tr, function(k) co[which.min(colSums(sc * (t(X[co, ]) - X[k, ])^2))], integer(1))
+  p <- data.frame(treated_idx = as.character(tr - 1), control_idx = as.character(ctrl - 1))
+  # Match(y, t, X, estimand = "ATT", M = 1, sample = TRUE, Weight = 1, Var.calc = 1)$se
+  expect_equal(morie_matching_abadie_imbens_se(d, "y", "t", p, covariates = c("x1", "x2")),
+               0.256974848359553, tolerance = 1e-12)
+})

@@ -597,7 +597,7 @@ File,Line,Status,Version,Context
 ./R/bprop.R,109,STALE_OR_DEP,10.8.1,"method = delta/psi recursion of Chapter 10 Sect. 10.8.1 steps 9-12; eqs. (10.12)-(10.17))"
 ./R/bsmed_native.R,35,STALE_OR_DEP,7.4.422,"#'   Psychological Methods 7(4); 422-445; doi:10.1037/1082-989X.7.4.422."
 ./R/btsmth.R,5,STALE_OR_DEP,74.3.469,"#' to smooth?; Biometrika 74(3); 469-479; doi:10.1093/biomet/74.3.469"
-./R/causal.R,1600,STALE_OR_DEP,1.4.0,"#'   Observational Studies. R package version 1.4.0."
+./R/causal.R,1622,STALE_OR_DEP,1.4.0,"#'   Observational Studies. R package version 1.4.0."
 ./R/causal_native.R,100,STALE_OR_DEP,3.3.2,"#' @references Pearl J (2009). \emph{Causality}; 2nd edn; Thm 3.3.2."
 ./R/causal_native.R,149,STALE_OR_DEP,3.3.2,"method = Back-door adjustment (Pearl 2009; Thm 3.3.2); discrete"
 ./R/causal_native.R,292,STALE_OR_DEP,3.3.1,"#' @references Pearl J (2009). \emph{Causality}; 2nd edn; Def. 3.3.1."

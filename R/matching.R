@@ -871,30 +871,44 @@ morie_matching_balance <- function(data, treatment, covariates,
   t_mask <- df[[treatment]] == 1
   c_mask <- df[[treatment]] == 0
   recs <- list()
+  wvar <- function(x, w) {
+    # cobalt's weighted variance: sum(w) / (sum(w)^2 - sum(w^2)) *
+    # sum(w (x - m)^2), the sample variance when all weights are 1
+    m <- sum(w * x) / sum(w)
+    sum(w) / (sum(w)^2 - sum(w^2)) * sum(w * (x - m)^2)
+  }
+  wks <- function(a, wa, b, wb) {
+    # largest gap between the two weighted empirical CDFs
+    pts <- sort(unique(c(a, b)))
+    fa <- vapply(pts, function(v) sum(wa[a <= v]), numeric(1)) / sum(wa)
+    fb <- vapply(pts, function(v) sum(wb[b <= v]), numeric(1)) / sum(wb)
+    max(abs(fa - fb))
+  }
+  weighted <- !is.null(weights) && weights %in% colnames(df)
   for (cov in covariates) {
     t_vals <- as.numeric(df[t_mask, cov])
     c_vals <- as.numeric(df[c_mask, cov])
-    if (!is.null(weights) && weights %in% colnames(df)) {
-      w_t <- as.numeric(df[t_mask, weights])
-      w_c <- as.numeric(df[c_mask, weights])
-      mean_t <- stats::weighted.mean(t_vals, w_t)
-      mean_c <- stats::weighted.mean(c_vals, w_c)
-      var_t <- stats::weighted.mean((t_vals - mean_t)^2, w_t)
-      var_c <- stats::weighted.mean((c_vals - mean_c)^2, w_c)
-    } else {
-      mean_t <- mean(t_vals)
-      mean_c <- mean(c_vals)
-      var_t <- if (length(t_vals) > 1L) stats::var(t_vals) else 0
-      var_c <- if (length(c_vals) > 1L) stats::var(c_vals) else 0
-    }
-    pooled_sd <- sqrt((var_t + var_c) / 2)
+    w_t <- if (weighted) as.numeric(df[t_mask, weights]) else rep(1, length(t_vals))
+    w_c <- if (weighted) as.numeric(df[c_mask, weights]) else rep(1, length(c_vals))
+    mean_t <- sum(w_t * t_vals) / sum(w_t)
+    mean_c <- sum(w_c * c_vals) / sum(w_c)
+    # the SMD scale is the UNADJUSTED pooled SD, fixed before matching
+    # (cobalt s.d.denom = "pooled"; Stuart 2010)
+    s_t <- if (length(t_vals) > 1L) stats::var(t_vals) else 0
+    s_c <- if (length(c_vals) > 1L) stats::var(c_vals) else 0
+    pooled_sd <- sqrt((s_t + s_c) / 2)
     smd <- if (pooled_sd > 0) (mean_t - mean_c) / pooled_sd else 0
+    var_t <- if (length(t_vals) > 1L) wvar(t_vals, w_t) else 0
+    var_c <- if (length(c_vals) > 1L) wvar(c_vals, w_c) else 0
     var_ratio <- if (var_c > 0) var_t / var_c else NA_real_
-    ks <- tryCatch(stats::ks.test(t_vals, c_vals),
-                   error = function(e) list(statistic = NA_real_,
-                                            p.value = NA_real_),
-                   warning = function(w)
-                     suppressWarnings(stats::ks.test(t_vals, c_vals)))
+    # KS on the weighted distributions; its p-value is only defined for the
+    # unweighted two-sample test
+    ks <- if (weighted) {
+      list(statistic = wks(t_vals, w_t, c_vals, w_c), p.value = NA_real_)
+    } else {
+      tryCatch(suppressWarnings(stats::ks.test(t_vals, c_vals)),
+               error = function(e) list(statistic = NA_real_, p.value = NA_real_))
+    }
     recs[[length(recs) + 1L]] <- data.frame(
       covariate       = cov,
       mean_treated    = mean_t,
@@ -1182,14 +1196,21 @@ morie_matching_atc_matched <- function(data, outcome, treatment,
 
 #' Abadie-Imbens standard error for matching estimators
 #'
-#' Computes the conditional-variance Abadie-Imbens SE accounting for the
-#' fact that matching introduces correlation across matched observations.
+#' The Abadie-Imbens (2006) standard error of the matching ATT (sample
+#' ATT), as \code{Matching::Match(estimand = "ATT", sample = TRUE)}:
+#' \eqn{V = N_1^{-2} \sum_i (W_i + (1 - W_i) K_M(i) / M)^2 \sigma^2(X_i, W_i)},
+#' with \eqn{\sigma^2(X_i, W_i) = (Y_i - Y_{l(i)})^2 / 2} and \eqn{l(i)} the
+#' nearest unit of the same treatment arm on the covariates scaled by their
+#' inverse variances. Without \code{covariates} the conditional variance is
+#' approximated by half the squared outcome difference of each matched pair.
 #'
 #' @param data Data frame.
 #' @param outcome,treatment Column names.
 #' @param match_pairs Data frame of matched indices.
 #' @param n_matches Number of matches per treated unit, M in the
 #'   Abadie-Imbens variance (the control reuse count enters as K_M / M).
+#' @param covariates Optional matching covariates, for the within-arm
+#'   variance estimate.
 #' @return Scalar numeric Abadie-Imbens SE.
 #' @references Abadie, A., & Imbens, G. W. (2006). Large sample properties
 #'   of matching estimators for average treatment effects.
@@ -1206,50 +1227,37 @@ morie_matching_atc_matched <- function(data, outcome, treatment,
 #' }
 #' @export
 morie_matching_abadie_imbens_se <- function(data, outcome, treatment,
-                                            match_pairs, n_matches = 1L) {
-  df <- .morie_matching_drop_na(data, c(outcome, treatment))
+                                            match_pairs, n_matches = 1L,
+                                            covariates = NULL) {
+  df <- .morie_matching_drop_na(data, c(outcome, treatment, covariates))
   n <- nrow(df)
   y <- as.numeric(df[[outcome]])
-  idx_to_pos <- setNames(seq_len(n), rownames(df))
+  w <- as.integer(df[[treatment]])
+  pos <- setNames(seq_len(n), rownames(df))
   K <- numeric(n)
-  for (k in seq_len(nrow(match_pairs))) {
-    c_id <- match_pairs$control_idx[k]
-    if (c_id %in% names(idx_to_pos)) {
-      pos <- idx_to_pos[[c_id]]
-      K[pos] <- K[pos] + 1
-    }
+  for (c_id in as.character(match_pairs$control_idx)) {
+    if (c_id %in% names(pos)) K[pos[[c_id]]] <- K[pos[[c_id]]] + 1
   }
   sigma2 <- numeric(n)
-  for (k in seq_len(nrow(match_pairs))) {
-    t_id <- match_pairs$treated_idx[k]
-    c_id <- match_pairs$control_idx[k]
-    if (t_id %in% names(idx_to_pos) && c_id %in% names(idx_to_pos)) {
-      tp <- idx_to_pos[[t_id]]
-      cp <- idx_to_pos[[c_id]]
-      diff2 <- (y[tp] - y[cp])^2 / 2
-      sigma2[tp] <- diff2
-      sigma2[cp] <- diff2
+  if (length(covariates)) {
+    X <- as.matrix(df[, covariates, drop = FALSE])
+    sc <- 1 / apply(X, 2, stats::var)
+    for (i in seq_len(n)) {
+      same <- which(w == w[i] & seq_len(n) != i)
+      if (!length(same)) next
+      dd <- colSums(sc * (t(X[same, , drop = FALSE]) - X[i, ])^2)
+      sigma2[i] <- 0.5 * (y[i] - y[same[which.min(dd)]])^2
     }
+  } else {
+    tp <- pos[as.character(match_pairs$treated_idx)]
+    cp <- pos[as.character(match_pairs$control_idx)]
+    ok <- !is.na(tp) & !is.na(cp)
+    d2 <- 0.5 * (y[tp[ok]] - y[cp[ok]])^2
+    sigma2[tp[ok]] <- d2
+    sigma2[cp[ok]] <- d2
   }
-  # Abadie-Imbens (2006) eq 14 for ATT:
-  #   V_ATT = (1/N_t^2) * [ sum_{i: D=1} sigma^2(X_i, 1)
-  #                       + sum_{j: D=0} K_j^2 * sigma^2(X_j, 0) ]
-  t_vec <- as.integer(df[[treatment]])
-  if (as.integer(n_matches) == 1L &&
-      .morie_matching_have_cpp("morie_matching_abadie_imbens_kernel_cpp")) {
-    V <- morie_matching_abadie_imbens_kernel_cpp(
-      y, t_vec,
-      as.integer(seq_len(n)[match(match_pairs$treated_idx,
-                                   rownames(df))]),
-      as.integer(seq_len(n)[match(match_pairs$control_idx,
-                                   rownames(df))]))
-    return(sqrt(max(V, 0)))
-  }
-  is_t <- t_vec == 1L
-  n_treated <- max(sum(is_t), 1L)
-  # K_M(i) / M matches per treated unit (Abadie & Imbens 2006)
-  V <- (sum(sigma2[is_t]) + sum(((K[!is_t] / as.integer(n_matches))^2) * sigma2[!is_t])) /
-    n_treated^2
+  n1 <- sum(w)
+  V <- sum((w + (1 - w) * K / as.integer(n_matches))^2 * sigma2) / n1^2
   sqrt(max(V, 0))
 }
 

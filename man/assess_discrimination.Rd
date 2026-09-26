@@ -10,7 +10,8 @@ assess_discrimination(
   y_pred_ref = NULL,
   n_bootstrap = 1000L,
   confidence = 0.95,
-  random_state = 42L
+  random_state = 42L,
+  ci_method = c("delong", "bootstrap")
 )
 }
 \arguments{
@@ -25,6 +26,10 @@ assess_discrimination(
 \item{confidence}{Confidence level.}
 
 \item{random_state}{Seed.}
+
+\item{ci_method}{"delong" (default): AUC +/- z SE with the DeLong,
+DeLong and Clarke-Pearson (1988) variance, as pROC::ci.auc;
+"bootstrap": percentile bootstrap.}
 }
 \value{
 An object of class \code{"class_name"}.
