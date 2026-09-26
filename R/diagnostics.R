@@ -172,11 +172,10 @@ compute_residuals <- function(y, y_hat, X, model_type = "linear") {
   mse <- sum(raw^2) / max(n - p, 1)
   std_res <- raw / sqrt(max(mse, 1e-10) * (1 - h))
 
-  student_res <- numeric(n)
-  for (i in seq_len(n)) {
-    mse_i <- sum(raw[-i]^2) / max(n - p - 1, 1)
-    student_res[i] <- raw[i] / sqrt(max(mse_i * (1 - h[i]), 1e-10))
-  }
+  # s_(i)^2 = ((n - p) s^2 - e_i^2 / (1 - h_i)) / (n - p - 1), the
+  # deleted-case variance (Belsley, Kuh and Welsch 1980), as rstudent
+  s2_del <- (sum(raw^2) - raw^2 / (1 - h)) / max(n - p - 1, 1)
+  student_res <- raw / sqrt(s2_del * (1 - h))
 
   deviance_res <- NULL
   pearson_res <- NULL
@@ -286,15 +285,13 @@ compute_influence <- function(y, X, y_hat = NULL) {
   h <- pmin(pmax(diag(H), 0), 1 - 1e-10)
   mse <- sum(residuals^2) / max(n - p, 1)
 
-  cooks_d <- (residuals^2 * h) / (p * mse * (1 - h)^2 + 1e-10)
+  cooks_d <- (residuals^2 * h) / (p * mse * (1 - h)^2)
 
-  mse_i <- numeric(n)
-  for (i in seq_len(n)) {
-    mse_i[i] <- sum(residuals[-i]^2) / max(n - p - 1, 1)
-  }
-
-  dffits <- residuals * sqrt(h / ((1 - h) * mse_i + 1e-10)) /
-    sqrt(max(mse, 1e-10))
+  # deleted-case variance and externally studentized residuals
+  # (Belsley, Kuh and Welsch 1980), as influence.measures
+  mse_i <- (sum(residuals^2) - residuals^2 / (1 - h)) / max(n - p - 1, 1)
+  t_ext <- residuals / sqrt(mse_i * (1 - h))
+  dffits <- t_ext * sqrt(h / (1 - h))
 
   dfbetas <- matrix(NA_real_, nrow = n, ncol = p)
   for (i in seq_len(n)) {
@@ -308,13 +305,7 @@ compute_influence <- function(y, X, y_hat = NULL) {
     dfbetas[i, ] <- (beta - beta_i) / pmax(se_beta, 1e-10)
   }
 
-  covratio <- numeric(n)
-  for (i in seq_len(n)) {
-    s2_i <- mse_i[i]
-    t_i <- residuals[i] / sqrt(max(s2_i * (1 - h[i]), 1e-10))
-    covratio[i] <- 1 /
-      ((((n - p - 1 + t_i^2) / (n - p))^p) * (1 - h[i]) + 1e-10)
-  }
+  covratio <- 1 / ((((n - p - 1 + t_ext^2) / (n - p))^p) * (1 - h))
 
   leverage_threshold <- 2 * p / n
   cooksd_threshold <- 4 / n
