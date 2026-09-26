@@ -2,7 +2,7 @@
 % Please edit documentation in R/effect_sizes.R
 \name{rank_biserial_correlation}
 \alias{rank_biserial_correlation}
-\title{Rank-biserial correlation (matched rank version)}
+\title{Rank-biserial correlation for two independent samples}
 \usage{
 rank_biserial_correlation(x, y, confidence = 0.95)
 }
@@ -15,7 +15,8 @@ rank_biserial_correlation(x, y, confidence = 0.95)
 A \code{morie_effect_size}.
 }
 \description{
-Rank-biserial correlation (matched rank version)
+Glass (1965): r = 2U/(n1 n2) - 1 with U the Mann-Whitney count for x,
+positive when x tends to exceed y (equal to Cliff's delta).
 }
 \examples{
 set.seed(1)
