@@ -710,6 +710,19 @@ morie_iv_hausman <- function(data, outcome, endogenous, instruments,
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
+#' Durbin-Wu-Hausman test of endogeneity
+#' @inheritParams morie_iv_params
+#' @return A named list with elements \code{statistic}, \code{p_value}, \code{name}.
+#' @examples
+#' set.seed(1)
+#' n <- 500
+#' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
+#' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
+#' df <- data.frame(y, d, z)
+#' out <- morie_iv_durbin_wu_hausman(df, "y", "d", "z")
+#' out$name
+#' @export
 morie_iv_durbin_wu_hausman <- function(data, outcome, endogenous, instruments,
                                        exogenous = NULL) {
   # Wu-Hausman F: first-stage residuals added to the structural equation,

@@ -9,7 +9,8 @@ morie_matching_abadie_imbens_se(
   outcome,
   treatment,
   match_pairs,
-  n_matches = 1L
+  n_matches = 1L,
+  covariates = NULL
 )
 }
 \arguments{
@@ -21,13 +22,21 @@ morie_matching_abadie_imbens_se(
 
 \item{n_matches}{Number of matches per treated unit, M in the
 Abadie-Imbens variance (the control reuse count enters as K_M / M).}
+
+\item{covariates}{Optional matching covariates, for the within-arm
+variance estimate.}
 }
 \value{
 Scalar numeric Abadie-Imbens SE.
 }
 \description{
-Computes the conditional-variance Abadie-Imbens SE accounting for the
-fact that matching introduces correlation across matched observations.
+The Abadie-Imbens (2006) standard error of the matching ATT (sample
+ATT), as \code{Matching::Match(estimand = "ATT", sample = TRUE)}:
+\eqn{V = N_1^{-2} \sum_i (W_i + (1 - W_i) K_M(i) / M)^2 \sigma^2(X_i, W_i)},
+with \eqn{\sigma^2(X_i, W_i) = (Y_i - Y_{l(i)})^2 / 2} and \eqn{l(i)} the
+nearest unit of the same treatment arm on the covariates scaled by their
+inverse variances. Without \code{covariates} the conditional variance is
+approximated by half the squared outcome difference of each matched pair.
 }
 \examples{
 if (requireNamespace("sensitivitymv", quietly = TRUE)) {
