@@ -52,7 +52,9 @@ test_that("robust correlations match WRS", {
                0.99472921719372798, tolerance = 1e-12)
   w <- morie_winsorized_correlation(XS, YS)
   expect_equal(w$cor, 0.99358336180582918, tolerance = 1e-12)
-  expect_equal(w$p_value, 1.5572661047569269e-05, tolerance = 1e-12)
+  # upper tail by pt(lower.tail = FALSE); WRS wincor's 2 * (1 - pt()) gives
+  # 1.5572661047569269e-05, off by 3e-12 relative from cancellation
+  expect_equal(w$p_value, 1.557266104761915e-05, tolerance = 1e-12)
   expect_equal(w$df, length(XS) - 2 * floor(0.2 * length(XS)) - 2)
 })
 
@@ -120,7 +122,9 @@ test_that("one-way designs match WRS t1way and bdm", {
   expect_equal(b$statistic, 23.697620429483464, tolerance = 1e-12)
   expect_equal(b$df1, 1.897247238547096, tolerance = 1e-12)
   expect_equal(b$df2, 20.458636528369407, tolerance = 1e-12)
-  expect_equal(b$p_value, 5.980227713253683e-06, tolerance = 1e-12)
+  # upper tail by pf(lower.tail = FALSE); WRS bdm's 1 - pf() gives
+  # 5.980227713253683e-06, off by 5e-12 relative from cancellation
+  expect_equal(b$p_value, 5.9802277132840305e-06, tolerance = 1e-12)
   expect_equal(b$q_hat, c(0.24, 0.4466666667, 0.82), tolerance = 1e-9)
 })
 

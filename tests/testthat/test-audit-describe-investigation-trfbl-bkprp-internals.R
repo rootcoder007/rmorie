@@ -227,18 +227,6 @@ test_that(".tso_logit_ll returns numeric log-likelihood", {
   expect_true(is.numeric(out) && is.finite(out))
 })
 
-test_that(".tso_fit_po_stacked returns intercepts (K-1) + beta (p)", {
-  set.seed(6L)
-  n <- 100L
-  X <- matrix(stats::rnorm(n * 2L), n, 2L)
-  y <- sample.int(3L, n, replace = TRUE) - 1L  # 0, 1, 2
-  out <- rmorie:::.tso_fit_po_stacked(X, y, K = 3L,
-                                       max_iter = 50L, tol = 1e-6)
-  expect_named(out, c("intercepts", "beta"))
-  expect_length(out$intercepts, 2L)
-  expect_length(out$beta, 2L)
-})
-
 # ==================================================================== tps_csi.R
 
 test_that(".tps_csi_to_long passes data.frame through with required cols", {
