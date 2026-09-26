@@ -270,3 +270,24 @@ test_that("round four: rdd_sharp runs a cluster bootstrap when asked", {
   expect_equal(clus$estimate, plain$estimate)
   expect_true(is.finite(clus$std_error) && clus$std_error > 0)
 })
+
+test_that("sharp, fuzzy and kink RD equal rdrobust (vce = 'nn', h = 0.5)", {
+  n <- 400
+  i <- 0:(n - 1)
+  x <- sin(1.37 * i) * 1.2 + 0.4 * cos(0.21 * i)
+  tr <- as.integer(x >= 0)
+  fz <- as.integer((x >= 0 & (i %% 5 != 0)) | (x < 0 & i %% 7 == 0))
+  d <- data.frame(x,
+                  y = 1 + 0.8 * x + 0.3 * x^2 + 1.2 * tr + 0.4 * sin(3.1 * i),
+                  yf = 1 + 0.8 * x + 2 * fz + 0.4 * sin(3.1 * i),
+                  yk = 1 + 0.8 * x + 1.5 * pmax(x, 0) + 0.4 * sin(3.1 * i), fz)
+  s <- morie_rdd_sharp(d, "y", "x", bandwidth = 0.5)
+  expect_equal(c(s$estimate, s$std_error), c(1.31895764244, 0.0843098682739), tolerance = 1e-10)
+  f <- morie_rdd_fuzzy(d, "yf", "x", "fz", bandwidth = 0.5)
+  expect_equal(c(f$estimate, f$std_error), c(2.30166428120295, 0.275553805228321), tolerance = 1e-12)
+  k <- morie_rdd_kink(d, "yk", "x", bandwidth = 0.5)
+  expect_equal(c(k$estimate, k$std_error), c(4.65174038836, 1.39440321497), tolerance = 1e-10)
+  # fuzzy bias correction and robust SE: rdrobust(fuzzy = fz, h = 0.5, b = 0.5)
+  cc <- morie_causrddc(d$yf, d$x, treatment = d$fz, h = 0.5, b = 0.5)
+  expect_equal(c(cc$bias_corrected, cc$se_robust), c(2.45321344528486, 0.40614527539738), tolerance = 1e-12)
+})

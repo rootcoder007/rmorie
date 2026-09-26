@@ -481,9 +481,13 @@ morie_causrddc <- function(y, x, treatment = NULL, cutoff = 0.0, nu = 0, p = 1, 
       stop("causrddc: the first-stage jump is zero, so the fuzzy estimand is not identified")
     }
     tau <- tauY / tauT
-    tau_bc <- tauYbc / tauTbc
-    w_conv <- (wY - tau * resT$w_conv) / tauT
-    w_bc <- (wYbc - tau_bc * resT$w_bc) / tauTbc
+    # one linearisation at the conventional estimates, s = (1/tau_T,
+    # -tau_Y/tau_T^2), for the bias correction and both variances, as
+    # rdrobust: tau_bc = tau - s'(bias_Y, bias_T). The local-polynomial
+    # weights depend on x alone, so s'(w y, w t) = w (y - tau t) / tau_T
+    tau_bc <- tau - ((tauY - tauYbc) / tauT - tauY * (tauT - tauTbc) / tauT^2)
+    w_conv <- wY / tauT
+    w_bc <- wYbc / tauT
     resid_source <- y - tau * t
   }
 

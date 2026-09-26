@@ -191,9 +191,11 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
   XtWX <- crossprod(X, W %*% X)
   XtWy <- crossprod(X, W %*% y[use])
   beta <- as.numeric(solve(XtWX, XtWy))
-  resid <- y[use] - X %*% beta
-  s2 <- sum(w[use] * resid^2) / sum(w[use])
-  vcov_ <- s2 * solve(XtWX)
+  resid <- as.numeric(y[use] - X %*% beta)
+  # HC0 sandwich (X'WX)^-1 X'W diag(e^2) W X (X'WX)^-1, rdrobust's
+  # vce = "hc0"
+  A <- solve(XtWX)
+  vcov_ <- A %*% crossprod(X * (w[use] * resid), X * (w[use] * resid)) %*% A
   list(beta = beta, se = sqrt(diag(vcov_)), n = sum(use),
        fit_value = beta[1])
 }
@@ -521,13 +523,19 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
   if (is.null(bandwidth))
     bandwidth <- .morie_rdd_ik_native(data[[running]], data[[outcome]],
                                       cutoff, kernel)$bandwidth
+  # the fuzzy RD ratio and its linearised standard error with the
+  # covariance of the reduced form and the first stage, as
+  # rdrobust(fuzzy = ...) (vce = "nn")
   num <- morie_rdd_sharp(data, outcome, running, cutoff, bandwidth,
                          p, kernel, alpha = alpha)
   den <- morie_rdd_sharp(data, treatment, running, cutoff, bandwidth,
                          p, kernel, alpha = alpha)
-  est <- num$estimate / den$estimate
-  se  <- sqrt((num$std_error / den$estimate)^2 +
-              (num$estimate * den$std_error / den$estimate^2)^2)
+  fz <- morie_causrddc(as.numeric(data[[outcome]]), as.numeric(data[[running]]),
+                       treatment = as.numeric(data[[treatment]]), cutoff = cutoff,
+                       p = p, h = bandwidth, b = bandwidth, kernel = kernel,
+                       alpha = alpha)
+  est <- fz$estimate
+  se <- fz$se_conventional
   .morie_rdd_result(est, se, num$n_obs,
                     method = "fuzzy RDD (rmorie native Wald ratio)",
                     alpha = alpha,
