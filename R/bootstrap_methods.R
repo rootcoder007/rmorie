@@ -291,6 +291,10 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
       morie_boot_ci(bo, conf = ci_level, type = type_key)[[type_key]],
       error = function(e) c(NA_real_, NA_real_)
     )
+    if (ci_method == "bca" && !anyNA(ci_pair)) {
+      L <- .morie_empinf_reg(bo)
+      acc <- sum(L^3) / (6 * sum(L^2)^1.5)
+    }
     if (anyNA(ci_pair)) {
       # Fallback for tiny n_boot where BCa influence is undefined.
       alpha <- 1 - ci_level
@@ -308,117 +312,74 @@ bootstrap <- function(data, statistic, n_boot = 2000L, ci_level = 0.95,
     ))
   }
 
-  # Inline fallback: full original implementation (stratified, cluster,
-  # plain, studentized; BCa via `.bca_interval`).
-  boot_stats <- numeric(n_boot)
-
-  if (!is.null(cluster)) {
-    cluster <- as.vector(cluster)
-    uniq <- unique(cluster)
-    nc <- length(uniq)
-    for (b in seq_len(n_boot)) {
-      samp <- sample(uniq, size = nc, replace = TRUE)
-      idx <- unlist(lapply(samp, function(c) which(cluster == c)))
-      boot_stats[b] <- as.numeric(statistic(.idx(data, idx)))
-    }
+  # Inline path: cluster resampling and studentized intervals, with the
+  # same boot.ci interval rules (norm.inter order statistics)
+  groups <- if (!is.null(cluster)) {
+    cl <- as.vector(cluster)
+    lapply(unique(cl), function(c) which(cl == c))
   } else if (!is.null(stratify)) {
-    stratify <- as.vector(stratify)
-    strata <- unique(stratify)
-    for (b in seq_len(n_boot)) {
-      idx <- unlist(lapply(strata, function(s) {
-        s_idx <- which(stratify == s)
-        sample(s_idx, size = length(s_idx), replace = TRUE)
-      }))
-      boot_stats[b] <- as.numeric(statistic(.idx(data, idx)))
-    }
+    st <- as.vector(stratify)
+    lapply(unique(st), function(s) which(st == s))
   } else {
-    for (b in seq_len(n_boot)) {
-      idx <- sample.int(n, size = n, replace = TRUE)
-      boot_stats[b] <- as.numeric(statistic(.idx(data, idx)))
-    }
+    NULL
   }
-
-  se <- stats::sd(boot_stats)
-  bias <- mean(boot_stats) - original
-  alpha <- 1 - ci_level
-  acc <- 0
-
-  if (ci_method == "percentile") {
-    ci_lo <- .pct(boot_stats, 100 * alpha / 2)
-    ci_hi <- .pct(boot_stats, 100 * (1 - alpha / 2))
-  } else if (ci_method == "normal") {
-    z <- stats::qnorm(1 - alpha / 2)
-    ci_lo <- original - bias - z * se
-    ci_hi <- original - bias + z * se
-  } else if (ci_method == "basic") {
-    p_lo <- .pct(boot_stats, 100 * (1 - alpha / 2))
-    p_hi <- .pct(boot_stats, 100 * alpha / 2)
-    ci_lo <- 2 * original - p_lo
-    ci_hi <- 2 * original - p_hi
-  } else if (ci_method == "bca") {
-    bca <- .bca_interval(data, statistic, boot_stats, original, ci_level)
-    ci_lo <- bca$ci_lo
-    ci_hi <- bca$ci_hi
-    acc <- bca$acc
+  draw <- if (!is.null(cluster)) {
+    function() unlist(groups[sample.int(length(groups), length(groups), replace = TRUE)])
+  } else if (!is.null(stratify)) {
+    function() unlist(lapply(groups, function(g) g[sample.int(length(g), length(g), replace = TRUE)]))
   } else {
-    # studentized
-    boot_ses <- numeric(n_boot)
-    for (b in seq_len(n_boot)) {
-      idx <- sample.int(n, size = n, replace = TRUE)
-      boot_data <- .idx(data, idx)
-      m <- .nrow_like(boot_data)
-      inner <- numeric(50L)
-      for (ib in seq_len(50L)) {
-        inner_idx <- sample.int(m, size = m, replace = TRUE)
-        inner[ib] <- as.numeric(statistic(.idx(boot_data, inner_idx)))
-      }
+    function() sample.int(n, size = n, replace = TRUE)
+  }
+  boot_stats <- numeric(n_boot)
+  boot_ses <- numeric(n_boot)
+  for (b in seq_len(n_boot)) {
+    idx <- draw()
+    bd <- .idx(data, idx)
+    boot_stats[b] <- as.numeric(statistic(bd))
+    if (ci_method == "studentized") {
+      # SE of each replicate from a second-level bootstrap of that replicate,
+      # so t* = (theta* - theta) / se* pairs like with like
+      m <- length(idx)
+      inner <- vapply(seq_len(50L), function(ib)
+        as.numeric(statistic(.idx(bd, sample.int(m, size = m, replace = TRUE)))), numeric(1))
       boot_ses[b] <- stats::sd(inner)
     }
-    t_stats <- (boot_stats - original) / pmax(boot_ses, 1e-10)
-    t_lo <- .pct(t_stats, 100 * (1 - alpha / 2))
-    t_hi <- .pct(t_stats, 100 * alpha / 2)
-    ci_lo <- original - t_lo * se
-    ci_hi <- original - t_hi * se
+  }
+  fin <- boot_stats[is.finite(boot_stats)]
+  se <- stats::sd(fin)
+  bias <- mean(fin) - original
+  alpha <- 1 - ci_level
+  acc <- 0
+  if (ci_method == "percentile") {
+    ci <- .morie_norm_inter(fin, c(alpha / 2, 1 - alpha / 2))
+  } else if (ci_method == "normal") {
+    z <- stats::qnorm(1 - alpha / 2)
+    ci <- c(original - bias - z * se, original - bias + z * se)
+  } else if (ci_method == "basic") {
+    ci <- 2 * original - .morie_norm_inter(fin, c(1 - alpha / 2, alpha / 2))
+  } else if (ci_method == "bca") {
+    w <- stats::qnorm(mean(fin < original))
+    if (!is.finite(w)) stop("estimated BCa bias correction is infinite", call. = FALSE)
+    # jackknife influence, deleting one cluster (or observation) at a time
+    grp <- if (!is.null(cluster)) groups else as.list(seq_len(n))
+    jack <- vapply(grp, function(g) as.numeric(statistic(.idx(data, -g))), numeric(1))
+    L <- (length(grp) - 1) * (mean(jack) - jack)
+    acc <- sum(L^3) / (6 * sum(L^2)^1.5)
+    za <- stats::qnorm(c(alpha / 2, 1 - alpha / 2))
+    ci <- .morie_norm_inter(fin, stats::pnorm(w + (w + za) / (1 - acc * (w + za))))
+  } else {
+    ok <- is.finite(boot_stats) & boot_ses > 0
+    zt <- (boot_stats[ok] - original) / boot_ses[ok]
+    ci <- original - se * .morie_norm_inter(zt, c(1 - alpha / 2, alpha / 2))
   }
 
   .new_bootstrap_result(
     estimate = original, se = se,
-    ci_lower = ci_lo, ci_upper = ci_hi, bias = bias,
+    ci_lower = ci[1L], ci_upper = ci[2L], bias = bias,
     n_boot = n_boot, method = "nonparametric", ci_method = ci_method,
     boot_distribution = boot_stats, original_estimate = original,
     acceleration = acc
   )
-}
-
-# BCa (bias-corrected and accelerated) percentile interval (inline
-# fallback). `boot::boot.ci(type = "bca")` is the canonical CRAN
-# equivalent and is used by `bootstrap()` when \pkg{boot} is installed.
-#' Internal helper: Bca Interval
-#' @noRd
-.bca_interval <- function(data, statistic, boot_stats, original, ci_level) {
-  n <- .nrow_like(data)
-  alpha <- 1 - ci_level
-
-  z0 <- stats::qnorm(mean(boot_stats < original))
-
-  jack <- numeric(n)
-  for (i in seq_len(n)) {
-    jack[i] <- as.numeric(statistic(.idx(data, -i)))
-  }
-  jm <- mean(jack)
-  num <- sum((jm - jack)^3)
-  den <- 6 * (sum((jm - jack)^2))^1.5
-  a <- num / max(den, 1e-10)
-
-  z_lo <- stats::qnorm(alpha / 2)
-  z_hi <- stats::qnorm(1 - alpha / 2)
-
-  a1 <- stats::pnorm(z0 + (z0 + z_lo) / max(1 - a * (z0 + z_lo), 0.01))
-  a2 <- stats::pnorm(z0 + (z0 + z_hi) / max(1 - a * (z0 + z_hi), 0.01))
-
-  ci_lo <- .pct(boot_stats, 100 * min(max(a1, 0.001), 0.999))
-  ci_hi <- .pct(boot_stats, 100 * min(max(a2, 0.001), 0.999))
-  list(ci_lo = ci_lo, ci_hi = ci_hi, acc = as.numeric(a))
 }
 
 # ---------------------------------------------------------------------------

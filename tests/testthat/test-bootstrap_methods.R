@@ -276,3 +276,27 @@ test_that("extender functions error informatively when pkg missing", {
   expect_true(is.function(morie_rsample_bootstraps))
   expect_true(is.function(morie_simpleboot_two))
 })
+
+test_that("bootstrap follows boot::boot.ci and reports the BCa acceleration", {
+  # set.seed(42); boot::boot(x, function(d, i) mean(d[i]^2), R = 999) and
+  # boot::boot.ci(conf = 0.95, type = c("perc", "bca"))
+  x <- c(5.1, 6.3, 4.8, 7.2, 5.9, 6.6, 5.4, 6.0, 5.5, 6.8, 4.2, 5.0, 3.9, 5.8, 4.4)
+  r <- bootstrap(x, function(d) mean(d^2), n_boot = 999, ci_method = "bca", seed = 42)
+  expect_equal(c(r$ci_lower, r$ci_upper), c(26.30495097318034, 36.940325712363453), tolerance = 1e-12)
+  # boot::empinf(type = "reg") acceleration; the statistic is linear in the
+  # resampling frequencies, so the regression recovers it exactly
+  L <- x^2 - mean(x^2)
+  expect_equal(r$acceleration, sum(L^3) / (6 * sum(L^2)^1.5), tolerance = 1e-10)
+  p <- bootstrap(x, function(d) mean(d^2), n_boot = 999, ci_method = "percentile", seed = 42)
+  expect_equal(c(p$ci_lower, p$ci_upper), c(25.968666666666667, 36.794666666666664), tolerance = 1e-12)
+  # studentized: t* uses the SE of its own replicate; the interval brackets
+  # the estimate for this well-behaved statistic
+  s <- bootstrap(x, mean, n_boot = 199, ci_method = "studentized", seed = 3)
+  expect_true(s$ci_lower < mean(x) && mean(x) < s$ci_upper)
+  # cluster BCa uses a delete-one-cluster jackknife for the acceleration
+  cl <- rep(1:5, each = 3)
+  cb <- bootstrap(x, mean, n_boot = 299, ci_method = "bca", seed = 5, cluster = cl)
+  jack <- vapply(1:5, function(g) mean(x[cl != g]), numeric(1))
+  Lc <- 4 * (mean(jack) - jack)
+  expect_equal(cb$acceleration, sum(Lc^3) / (6 * sum(Lc^2)^1.5), tolerance = 1e-12)
+})
