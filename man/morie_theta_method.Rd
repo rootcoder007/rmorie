@@ -4,31 +4,37 @@
 \alias{morie_theta_method}
 \title{Theta method}
 \usage{
-morie_theta_method(y, horizon = 1, theta = 2)
+morie_theta_method(y, horizon = 1, theta = 2, alpha = NULL, level0 = NULL)
 }
 \arguments{
-\item{y}{series.}
+\item{y}{series, at least 3 observations.}
 
 \item{horizon}{steps ahead.}
 
-\item{theta}{theta parameter.}
+\item{theta}{theta, at least 1.}
+
+\item{alpha}{optional smoothing weight in (0, 1]; estimated when NULL.}
+
+\item{level0}{optional initial SES level; SSE-optimal when NULL.}
 }
 \value{
-list with \code{forecast}, \code{drift}, \code{alpha},
-\code{linear_slope}, \code{theta_line}, \code{level}.
+list with \code{forecast}, \code{ses_forecast}, \code{drift},
+\code{alpha}, \code{level0}, \code{level}, \code{sse},
+\code{linear_slope}, \code{theta_line_0}, \code{theta_line}.
 }
 \description{
-Decomposes the series into theta-lines, smooths, and recombines.
-}
-\details{
-The result is worth stating plainly because it is what makes the
-method usable: for theta = 2 the whole procedure is EXACTLY simple
-exponential smoothing with a drift of half the fitted linear slope
-(Hyndman & Billah 2003). The M3 competition winner is two lines of
-arithmetic on top of SES, not a black box.
+Theta method forecasts (Assimakopoulos & Nikolopoulos 2000) in the
+Hyndman-Billah form: combining the extrapolated regression line
+(weight 1 - 1/theta) with exponential smoothing is exactly SES of the
+data plus a damped drift,
+\deqn{\hat y_{n+h} = \ell_n + (1 - 1/\theta) b_0 [h - 1 + (1 - (1-\alpha)^n)/\alpha],}
+with \eqn{b_0} the least-squares slope on t = 0, ..., n - 1. theta = 2 is
+the classical method (forecast::thetaf); theta = 1 is SES. alpha and the
+initial level are estimated by minimum SSE, the Gaussian MLE of
+ets(A,N,N).
 }
 \examples{
-round(morie_theta_method(c(1, 3, 2, 5, 4, 7, 6, 9), horizon = 2)$drift, 3)
+morie_theta_method(c(1, 2, 4, 5), horizon = 2, alpha = 1)$forecast
 }
 \references{
 Assimakopoulos, V. and Nikolopoulos, K. (2000). The theta

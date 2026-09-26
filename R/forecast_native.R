@@ -455,52 +455,104 @@ morie_joseph_croston_intermittent <- function(y, alpha = 0.1,
 }
 
 
+#' SES with a given smoothing weight (ets A,N,N form)
+#'
+#' One-step forecasts are l_{t-1} with l_t = l_{t-1} + alpha (y_t - l_{t-1}).
+#' Without \code{level0} the initial level minimises the SSE, in closed
+#' form: each error is a_t - b_t l_0 with b_t = (1 - alpha)^(t - 1).
+#'
+#' @param y numeric series.
+#' @param alpha smoothing weight in (0, 1].
+#' @param level0 optional initial level.
+#' @return list with \code{sse}, \code{level0}, \code{level}.
+#' @keywords internal
+#' @noRd
+.morie_ses_alpha <- function(y, alpha, level0 = NULL) {
+  n <- length(y)
+  a <- numeric(n)
+  lev <- 0
+  for (t in seq_len(n)) {
+    a[t] <- y[t] - lev
+    lev <- lev + alpha * a[t]
+  }
+  b <- (1 - alpha)^(0:(n - 1))
+  if (is.null(level0)) level0 <- sum(b * a) / sum(b * b)
+  err <- a - b * level0
+  list(sse = sum(err^2), level0 = level0, level = lev + (1 - alpha)^n * level0)
+}
+
+#' alpha minimising the SSE profiled over the initial level
+#'
+#' A 400-point scan of ets's bounds [1e-4, 0.9999], then golden-section
+#' refinement of the best bracket.
+#'
+#' @param y numeric series.
+#' @return the smoothing weight.
+#' @keywords internal
+#' @noRd
+.morie_ses_fit_alpha <- function(y) {
+  grid <- seq(1e-4, 0.9999, length.out = 400L)
+  sse <- vapply(grid, function(g) .morie_ses_alpha(y, g)$sse, numeric(1))
+  k <- which.min(sse)
+  lo <- grid[max(k - 1L, 1L)]
+  hi <- grid[min(k + 1L, 400L)]
+  opt <- stats::optimize(function(g) .morie_ses_alpha(y, g)$sse,
+                         c(lo, hi), tol = 1e-12)
+  if (opt$objective < sse[k]) opt$minimum else grid[k]
+}
+
 #' Theta method
 #'
-#' Decomposes the series into theta-lines, smooths, and recombines.
+#' Theta method forecasts (Assimakopoulos & Nikolopoulos 2000) in the
+#' Hyndman-Billah form: combining the extrapolated regression line
+#' (weight 1 - 1/theta) with exponential smoothing is exactly SES of the
+#' data plus a damped drift,
+#' \deqn{\hat y_{n+h} = \ell_n + (1 - 1/\theta) b_0 [h - 1 + (1 - (1-\alpha)^n)/\alpha],}
+#' with \eqn{b_0} the least-squares slope on t = 0, ..., n - 1. theta = 2 is
+#' the classical method (forecast::thetaf); theta = 1 is SES. alpha and the
+#' initial level are estimated by minimum SSE, the Gaussian MLE of
+#' ets(A,N,N).
 #'
-#' The result is worth stating plainly because it is what makes the
-#' method usable: for theta = 2 the whole procedure is EXACTLY simple
-#' exponential smoothing with a drift of half the fitted linear slope
-#' (Hyndman & Billah 2003). The M3 competition winner is two lines of
-#' arithmetic on top of SES, not a black box.
-#'
-#' @param y series.
+#' @param y series, at least 3 observations.
 #' @param horizon steps ahead.
-#' @param theta theta parameter.
-#' @return list with \code{forecast}, \code{drift}, \code{alpha},
-#'   \code{linear_slope}, \code{theta_line}, \code{level}.
+#' @param theta theta, at least 1.
+#' @param alpha optional smoothing weight in (0, 1]; estimated when NULL.
+#' @param level0 optional initial SES level; SSE-optimal when NULL.
+#' @return list with \code{forecast}, \code{ses_forecast}, \code{drift},
+#'   \code{alpha}, \code{level0}, \code{level}, \code{sse},
+#'   \code{linear_slope}, \code{theta_line_0}, \code{theta_line}.
 #' @references Assimakopoulos, V. and Nikolopoulos, K. (2000). The theta
 #'   model. \emph{IJF}, 16(4), 521-530. Hyndman, R. J. and Billah, B.
 #'   (2003). Unmasking the Theta method. \emph{IJF}, 19(2), 287-290.
 #' @examples
-#' round(morie_theta_method(c(1, 3, 2, 5, 4, 7, 6, 9), horizon = 2)$drift, 3)
+#' morie_theta_method(c(1, 2, 4, 5), horizon = 2, alpha = 1)$forecast
 #' @export
-morie_theta_method <- function(y, horizon = 1, theta = 2) {
+morie_theta_method <- function(y, horizon = 1, theta = 2, alpha = NULL,
+                               level0 = NULL) {
   y <- as.numeric(y)
   n <- length(y)
   if (n < 3L) stop("need at least 3 observations", call. = FALSE)
   horizon <- as.integer(horizon)
   if (horizon < 1L) stop("horizon must be at least 1", call. = FALSE)
-  t <- seq_len(n)
-  A <- cbind(1, t)
-  coef <- as.vector(qr.solve(A, y))
-  slope <- coef[2L]
-  line0 <- as.vector(A %*% coef)
+  if (theta < 1) stop("theta must be at least 1", call. = FALSE)
+  if (!is.null(alpha) && !(alpha > 0 && alpha <= 1)) {
+    stop("alpha must lie in (0, 1]", call. = FALSE)
+  }
+  t <- 0:(n - 1)
+  b0 <- sum((t - mean(t)) * (y - mean(y))) / sum((t - mean(t))^2)
+  line0 <- mean(y) + b0 * (t - mean(t))
   line_theta <- theta * y + (1 - theta) * line0
-  grid <- seq(0.05, 1, length.out = 60L)
-  sses <- vapply(grid, function(a) {
-    sum((line_theta - .morie_ses_run(a, line_theta)$fitted)^2)
-  }, numeric(1))
-  alpha <- grid[which.min(sses)]
-  level <- .morie_ses_run(alpha, line_theta)$level
-  drift <- slope / 2
+  if (is.null(alpha)) alpha <- .morie_ses_fit_alpha(y)
+  s <- .morie_ses_alpha(y, alpha, level0)
+  drift <- (1 - 1 / theta) * b0
+  damp <- (1 - (1 - alpha)^n) / alpha
   steps <- seq_len(horizon)
   list(
-    forecast = level + drift * steps, drift = drift, alpha = alpha,
-    linear_slope = slope, theta_line_0 = line0, theta_line = line_theta,
-    level = level, horizon = horizon, theta = theta,
-    method = "theta_method"
+    forecast = s$level + drift * (steps - 1 + damp),
+    ses_forecast = rep(s$level, horizon), drift = drift, alpha = alpha,
+    level0 = s$level0, level = s$level, sse = s$sse, linear_slope = b0,
+    theta_line_0 = line0, theta_line = line_theta, horizon = horizon,
+    theta = theta, method = "theta_method"
   )
 }
 

@@ -26,7 +26,7 @@ morie_wnominate(votes, x, z_yea, z_nay, beta = 15, w = NULL)
 \item{w}{Optional dimension salience weights (length p; default 1).}
 }
 \value{
-Named list with \code{loglik}, \code{GMP}, \code{n_correct}, \code{n_total},
+Named list with \code{loglik}, \code{GMP}, \code{correct_classification}, \code{n_correct}, \code{n_total},
 \code{method}.
 }
 \description{

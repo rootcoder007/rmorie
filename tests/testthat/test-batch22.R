@@ -347,10 +347,12 @@ test_that("wnom computes the NOMINATE log-likelihood and GMP", {
   )
   r <- wnom(votes, x, z_yea, z_nay)
   expect_type(r, "list")
-  expect_named(r, c("loglik", "GMP", "n_correct", "n_total", "method"))
+  expect_named(r, c("loglik", "GMP", "correct_classification", "n_correct", "n_total", "method"))
   expect_true(is.finite(r$loglik))
   expect_true(r$loglik <= 0)
-  expect_true(r$GMP >= 0 && r$GMP <= 1)
+  ## GMP is the geometric mean probability, not the classification rate
+  expect_equal(r$GMP, exp(r$loglik / r$n_total), tolerance = 1e-12)
+  expect_equal(r$correct_classification, r$n_correct / r$n_total)
   expect_equal(r$n_total, n_leg * n_votes)
   expect_identical(r$method, "morie_wnominate_estimate")
 })
@@ -577,4 +579,26 @@ test_that("morie_xgboost_objective errors when no boosting backend is installed"
     )
   }
   expect_true(TRUE)
+})
+
+test_that("wnom matches the first-principles W-NOMINATE likelihood (same fixture as morie)", {
+  V <- matrix(c(1, 0, 1, 0, 1, NA, 1, 1, 0), 3, byrow = TRUE)
+  X <- matrix(c(-0.6, 0.2, 0.5, -0.1, 0.1, 0.4), 3, byrow = TRUE)
+  ZY <- matrix(c(-0.5, 0.0, 0.4, 0.3, 0.0, -0.4), 3, byrow = TRUE)
+  ZN <- matrix(c(0.5, 0.1, -0.4, -0.3, 0.2, 0.6), 3, byrow = TRUE)
+  w <- c(1, 0.5)
+  ll <- 0
+  n <- 0
+  for (i in 1:3) for (j in 1:3) {
+    if (is.na(V[i, j])) next
+    u <- 15 * (exp(-sum((w * (X[i, ] - ZY[j, ]))^2) / 2) -
+               exp(-sum((w * (X[i, ] - ZN[j, ]))^2) / 2))
+    p <- pnorm(u)
+    ll <- ll + log(if (V[i, j] == 1) p else 1 - p)
+    n <- n + 1
+  }
+  r <- wnom(V, X, ZY, ZN, beta = 15, w = w)
+  expect_equal(r$loglik, ll, tolerance = 1e-9)
+  expect_equal(r$GMP, exp(ll / n), tolerance = 1e-12)
+  expect_equal(r$n_total, 8)
 })

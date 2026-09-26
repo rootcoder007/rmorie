@@ -14,7 +14,7 @@
 #' @param z_nay Nay outcome locations (n_votes by p).
 #' @param beta Signal-to-noise (default 15).
 #' @param w Optional dimension salience weights (length p; default 1).
-#' @return Named list with `loglik`, `GMP`, `n_correct`, `n_total`,
+#' @return Named list with `loglik`, `GMP`, `correct_classification`, `n_correct`, `n_total`,
 #'   `method`.
 #' @examples
 #' # See the package vignettes for usage examples:
@@ -37,20 +37,21 @@ wnom <- function(votes, x, z_yea, z_nay, beta = 15, w = NULL) {
     dy <- dy + (w[k] * dxy)^2
     dn <- dn + (w[k] * dxn)^2
   }
-  U_y <- beta * exp(-0.5 * dy)
-  U_n <- beta * exp(-0.5 * dn)
-  P <- stats::pnorm(U_y - U_n)
-  P <- pmin(pmax(P, 1e-10), 1 - 1e-10)
+  U <- beta * (exp(-0.5 * dy) - exp(-0.5 * dn))
   mask <- !is.na(V)
-  ll <- sum(ifelse(mask & V == 1, log(P), 0)) +
-    sum(ifelse(mask & V == 0, log(1 - P), 0))
-  pred <- (P > 0.5) * 1L
-  n_correct <- sum(mask & (pred == V))
+  ## log Phi(U) and log Phi(-U) directly: no clipping, no 1 - P cancellation
+  ll <- sum(stats::pnorm(U[mask & V == 1], log.p = TRUE)) +
+    sum(stats::pnorm(-U[mask & V == 0], log.p = TRUE))
+  n_correct <- sum(mask & ((U > 0) == (V == 1)))
   n_total <- sum(mask)
-  GMP <- if (n_total > 0L) n_correct / n_total else 0
+  ## GMP is the geometric mean probability exp(loglik / N) (Poole 2005,
+  ## ch. 4), not the classification rate
+  GMP <- if (n_total > 0L) exp(ll / n_total) else NA_real_
   list(
-    loglik = ll, GMP = GMP, n_correct = n_correct,
-    n_total = n_total, method = "morie_wnominate_estimate"
+    loglik = ll, GMP = GMP,
+    correct_classification = if (n_total > 0L) n_correct / n_total else NA_real_,
+    n_correct = n_correct, n_total = n_total,
+    method = "morie_wnominate_estimate"
   )
 }
 
