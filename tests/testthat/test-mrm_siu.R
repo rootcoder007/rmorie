@@ -72,3 +72,25 @@ test_that("mrm_siu_case_to_decision_km errors cleanly on missing incident col", 
   )
   expect_true(inherits(out, "error") || is.list(out))
 })
+
+test_that("case-to-decision summaries are Kaplan-Meier with open cases censored", {
+  # reference: survival::survfit(Surv(gap, !open) ~ 1): quantile() and
+  # summary(rmean = "common")
+  d <- data.frame(
+    police_service = rep(c("A", "B"), each = 5),
+    date_of_incident_iso = format(as.Date("2020-01-01") + c(0, 10, 20, 30, 40, 5, 15, 25, 35, 45)),
+    date_of_director_decision_iso = c(format(as.Date("2020-01-01") + c(3, 15, 28, 55, NA, 10, 30, 30, NA, 60)))
+  )
+  r <- mrm_siu_case_to_decision_km(d, min_n = 1L)
+  inc <- as.Date(d$date_of_incident_iso)
+  dec <- as.Date(d$date_of_director_decision_iso)
+  open <- is.na(dec)
+  gap <- as.numeric(ifelse(open, max(dec, na.rm = TRUE) - inc, dec - inc))
+  km <- .mrm_km_summary(gap, !open)
+  expect_equal(r$pooled$median_days, km$quantiles[2])
+  expect_equal(r$pooled$n_censored, 2L)
+  # survfit on these gaps: quartiles 5, 11.5, 25; rmean 13.1
+  expect_equal(c(r$pooled$p25_days, r$pooled$median_days, r$pooled$p75_days),
+               c(5, 11.5, 25))
+  expect_equal(r$pooled$mean_days, 13.1)
+})

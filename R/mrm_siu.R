@@ -31,6 +31,35 @@ NULL
 
 #' Internal helper: Parse Iso
 #' @noRd
+# Kaplan-Meier summary as survival::survfit: quantiles by
+# quantile.survfit's rule (first time the cumulative incidence reaches p,
+# the midpoint when the curve sits exactly on 1 - p) and the restricted
+# mean survival to the last follow-up time (print.survfit's rmean).
+.mrm_km_summary <- function(time, event, probs = c(0.25, 0.5, 0.75)) {
+  ut <- sort(unique(time))
+  n_risk <- vapply(ut, function(u) sum(time >= u), numeric(1))
+  n_ev <- vapply(ut, function(u) sum(time == u & event), numeric(1))
+  surv <- cumprod(1 - n_ev / n_risk)
+  x <- c(min(0, ut), ut)
+  y <- c(0, 1 - surv)
+  xmax <- x[length(x)]
+  keep <- !duplicated(y)
+  x <- x[keep]
+  y <- y[keep]
+  tol <- sqrt(.Machine$double.eps)
+  q <- vapply(probs, function(p) {
+    if (max(y) < p) return(NA_real_)
+    i1 <- which(y + tol >= p)[1]
+    i2 <- which(y - tol >= p)[1]
+    if (abs(p - y[length(y)]) < tol) return((x[i1] + xmax) / 2)
+    (x[i1] + x[i2]) / 2
+  }, numeric(1))
+  # restricted mean: area under S from 0 to the last time
+  s_left <- c(1, surv[-length(surv)])
+  rmean <- sum(s_left * diff(c(0, ut)))
+  list(quantiles = q, rmean = rmean)
+}
+
 .parse_iso <- function(x) suppressWarnings(as.Date(x, format = "%Y-%m-%d"))
 
 
@@ -42,9 +71,12 @@ NULL
 #'
 #' Computes the gap (in days) between the incident date and the
 #' Director's decision date for every SIU case, dropping rows where
-#' either date is missing. Reports per-stratum median + IQR + n.
-#' Cases without a decision date as of the snapshot are right-censored
-#' if `censor_open_cases = TRUE` (default).
+#' either date is missing. Cases without a decision date as of the
+#' snapshot are right-censored if `censor_open_cases = TRUE` (default),
+#' and the per-stratum median, quartiles and mean are Kaplan-Meier
+#' estimates as \code{survival::survfit}: quantiles by
+#' \code{quantile.survfit}'s rule and the restricted mean to the last
+#' follow-up time.
 #'
 #' This is the substantive "time-to-outcome" analysis the MA-thesis
 #' "210-day TTR" claim should have been; it operates on real per-case
@@ -64,8 +96,8 @@ NULL
 #' @param min_n Minimum cases per service to retain in the per-service
 #'   summary (default `5L`).
 #' @return A list with elements:
-#'   * `pooled`: a single-row data.frame with the pooled median,
-#'     mean, IQR, n, n_censored.
+#'   * `pooled`: a single-row data.frame with the pooled KM median,
+#'     restricted mean, quartiles, n, n_censored.
 #'   * `by_service`: per-service data.frame with the same columns.
 #' @export
 #' @examples
@@ -115,14 +147,16 @@ mrm_siu_case_to_decision_km <- function(
         max_days = NA_real_
       ))
     }
+    # Kaplan-Meier with the open cases censored, as survival::survfit
+    km <- .mrm_km_summary(gap_v, !cens_v)
     data.frame(
       stratum = label,
       n = length(gap_v),
       n_censored = sum(cens_v),
-      median_days = stats::median(gap_v),
-      mean_days = round(mean(gap_v), 2),
-      p25_days = stats::quantile(gap_v, 0.25, names = FALSE),
-      p75_days = stats::quantile(gap_v, 0.75, names = FALSE),
+      median_days = km$quantiles[2],
+      mean_days = round(km$rmean, 2),
+      p25_days = km$quantiles[1],
+      p75_days = km$quantiles[3],
       max_days = max(gap_v)
     )
   }
