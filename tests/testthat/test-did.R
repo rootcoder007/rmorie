@@ -599,3 +599,22 @@ test_that("fuzzy DiD is the Wald-DiD 2SLS of ivreg with sandwich SEs", {
   expect_equal(unname(r2$estimate), 1.49639162449551, tolerance = 1e-10)
   expect_equal(unname(r2$std_error), 0.148095523165333, tolerance = 1e-10)
 })
+
+test_that("DID_M counts joiners and leavers (de Chaisemartin & D'Haultfoeuille 2020)", {
+  df <- expand.grid(r = 1:3, g = 1:30, t = 1:5)
+  df$d <- with(df, ifelse(g <= 10, as.integer(t >= 3),
+                   ifelse(g <= 18, as.integer(t <= 3),
+                   ifelse(g <= 24, 1L, 0L))))
+  df$y <- with(df, sin(0.9 * g) + 0.15 * t + 0.8 * d + 0.3 * cos(1.7 * g * t + r))
+  r <- morie_did_chaisemartin_dhaultfoeuille(df, "y", "d", "g", "t",
+                                             n_bootstrap = 0L)
+  # AER eq. 3 from cell means: joiners g 1-10 at t = 3 against stable-0
+  # g 25-30; leavers g 11-18 at t = 4 against stable-1 g 1-10 and 19-24
+  ym <- tapply(df$y, list(df$g, df$t), mean)
+  dy <- function(gs, t) mean(ym[gs, t] - ym[gs, t - 1])
+  did_plus <- dy(1:10, 3) - dy(25:30, 3)
+  did_minus <- dy(c(1:10, 19:24), 4) - dy(11:18, 4)
+  expect_equal(unname(r$estimate), (30 * did_plus + 24 * did_minus) / 54,
+               tolerance = 1e-12)
+  expect_equal(unname(r$estimate), 0.879860090735746, tolerance = 1e-10)
+})
