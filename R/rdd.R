@@ -536,6 +536,8 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
 
 #' CCT bias-corrected, robust-SE RDD inference
 #' @inheritParams morie_rdd_params
+#' @param vce Residual variance: "nn" (nearest neighbour, the rdrobust
+#'   default) or "hc" (plug-in residuals of the local fits).
 #' @return A numeric value.
 #' @examples
 #' set.seed(44)
@@ -547,21 +549,29 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
 #' @export
 morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
                                      bandwidth = NULL, rho = 1, p = 1,
-                                     kernel = "triangular", alpha = 0.05) {
+                                     kernel = "triangular", alpha = 0.05,
+                                     vce = "nn") {
   x <- data[[running]]
   y <- data[[outcome]]
+  ok <- is.finite(x) & is.finite(y)
+  x <- x[ok]
+  y <- y[ok]
   if (is.null(bandwidth))
     bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
-  # CCT with b = h/rho: when rho = 1 the bias-corrected point estimate
-  # equals the order-(p+1) local fit at h, and the robust variance is
-  # that fit's NN variance (Calonico-Cattaneo-Titiunik 2014, Remark 7).
+  # CCT (2014, Theorem 1) with pilot b = h/rho: the bias estimate carries
+  # the kernel constant, and the robust variance is that of the
+  # bias-corrected linear smoother (matches rdrobust to ~1e-14).
   b <- bandwidth / rho
-  fit_q <- .morie_rdd_jump_native(x, y, cutoff, b, p + 1L, kernel)
-  .morie_rdd_result(fit_q$estimate, fit_q$se, fit_q$n,
+  fit <- morie_causrddc(y, x, cutoff = cutoff, p = p, h = bandwidth, b = b,
+                        kernel = kernel, alpha = alpha, vce = vce)
+  .morie_rdd_result(fit$bias_corrected, fit$se_robust,
+                    fit$n_left + fit$n_right,
                     method = "CCT bias-corrected RDD (rmorie native)",
                     alpha = alpha,
-                    details = list(fit = fit_q, h = bandwidth, b = b,
-                                   rho = rho))
+                    details = list(fit = fit, h = bandwidth, b = b,
+                                   rho = rho,
+                                   tau_conventional = fit$estimate,
+                                   se_conventional = fit$se_conventional))
 }
 
 

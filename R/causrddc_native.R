@@ -184,39 +184,49 @@
 #' @param y A vector; indexed elementwise.
 #' @param J Numeric; combined arithmetically in the body.
 #' @param side_of Passed to \code{>}.
+#' @param window Neighbours are drawn from units with \code{abs(x) <= window}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-.causrddc_nn_sigma2 <- function(x, y, J, side_of) {
+.causrddc_nn_sigma2 <- function(x, y, J, side_of, window = Inf) {
+  ## Neighbours come from the estimation sample |x| <= max(h, b), and ties
+  ## follow rdrobust: units sharing x are matched together, and an
+  ## equal-distance step takes both sides (so a unit can get more than J).
   n <- length(x)
   out <- rep(0.0, n)
-  idx_pos <- which(side_of > 0)
-  idx_neg <- which(side_of <= 0)
-  for (group in list(idx_pos, idx_neg)) {
-    if (length(group) < J + 1) next
-    order_idx <- group[order(x[group])]
-    L <- length(order_idx)
-    for (i in group) {
-      t <- match(i, order_idx) - 1
-      cand <- integer(0)
-      lo <- t - 1
-      hi <- t + 1
-      while (length(cand) < J && (lo >= 0 || hi < L)) {
-        if (lo < 0) {
-          cand <- c(cand, order_idx[hi + 1])
-          hi <- hi + 1
-        } else if (hi >= L) {
-          cand <- c(cand, order_idx[lo + 1])
-          lo <- lo - 1
-        } else if (abs(x[order_idx[lo + 1]] - x[i]) <= abs(x[order_idx[hi + 1]] - x[i])) {
-          cand <- c(cand, order_idx[lo + 1])
-          lo <- lo - 1
+  inw <- abs(x) <= window
+  for (group in list(which(side_of > 0 & inw), which(side_of <= 0 & inw))) {
+    m <- length(group)
+    if (m < J + 1) next
+    ord <- group[order(x[group])]
+    xs <- x[ord]
+    ys <- y[ord]
+    runs <- rle(xs)
+    dups <- rep(runs$lengths, runs$lengths)
+    dupsid <- sequence(runs$lengths)
+    for (t in seq_len(m)) {
+      rpos <- dups[t] - dupsid[t]
+      lpos <- dupsid[t] - 1
+      while (lpos + rpos < min(J, m - 1)) {
+        if (t - lpos - 1 <= 0) {
+          rpos <- rpos + dups[t + rpos + 1]
+        } else if (t + rpos + 1 > m) {
+          lpos <- lpos + dups[t - lpos - 1]
         } else {
-          cand <- c(cand, order_idx[hi + 1])
-          hi <- hi + 1
+          dl <- xs[t] - xs[t - lpos - 1]
+          dr <- xs[t + rpos + 1] - xs[t]
+          if (dl > dr) {
+            rpos <- rpos + dups[t + rpos + 1]
+          } else if (dl < dr) {
+            lpos <- lpos + dups[t - lpos - 1]
+          } else {
+            rpos <- rpos + dups[t + rpos + 1]
+            lpos <- lpos + dups[t - lpos - 1]
+          }
         }
       }
-      mean_y <- mean(y[cand])
-      out[i] <- (length(cand) / (length(cand) + 1.0)) * (y[i] - mean_y) ^ 2
+      ji <- lpos + rpos
+      mean_y <- (sum(ys[(t - lpos):(t + rpos)]) - ys[t]) / ji
+      out[ord[t]] <- (ji / (ji + 1.0)) * (ys[t] - mean_y)^2
     }
   }
   out
@@ -479,19 +489,23 @@ morie_causrddc <- function(y, x, treatment = NULL, cutoff = 0.0, nu = 0, p = 1, 
 
   side_of <- ifelse(x >= 0.0, 1, -1)
   if (vce == "nn") {
-    sig2 <- .causrddc_nn_sigma2(x, resid_source, as.integer(J), side_of)
+    sig2 <- .causrddc_nn_sigma2(x, resid_source, as.integer(J), side_of, max(h, b))
+    sig2_b <- sig2
   } else {
+    ## conventional: residuals of the order-p fit at h; robust: of the
+    ## order-q fit at b, which covers every unit the bias weights touch
     sig2 <- .causrddc_hc_sigma2(x, resid_source, h, p, kernel)
+    sig2_b <- .causrddc_hc_sigma2(x, resid_source, b, q, kernel)
   }
 
   v_conv <- sum(w_conv^2 * sig2)
-  v_rbc <- sum(w_bc^2 * sig2)
+  v_rbc <- sum(w_bc^2 * sig2_b)
   z <- qnorm(1.0 - alpha / 2.0)
   se_c <- sqrt(max(v_conv, 0.0))
   se_r <- sqrt(max(v_rbc, 0.0))
   inside <- which(abs(x) <= h)
 
-  pvalue_robust <- if (se_r > 0) 2.0 * (1.0 - pnorm(abs(tau_bc) / se_r)) else NA_real_
+  pvalue_robust <- if (se_r > 0) 2.0 * pnorm(abs(tau_bc) / se_r, lower.tail = FALSE) else NA_real_
 
   list(
     estimate = tau,

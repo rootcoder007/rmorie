@@ -74,3 +74,21 @@ test_that("native McCrary: null density passes, manipulated fails", {
   expect_lt(bad$p_value, 0.01)
   expect_gt(bad$theta, 0)
 })
+
+test_that("morie_rdd_bias_corrected matches rdrobust (h = 0.4, b = 0.6)", {
+  ## reference: rdrobust(y, x, c = 0, p = 1, h = 0.4, b = 0.6,
+  ## kernel = "triangular", vce = ...): conventional coef, bias-corrected
+  ## coef, conventional se, robust se
+  n <- 400
+  x <- -1 + 2 * ((0:(n - 1)) + 0.5) / n
+  y <- 0.4 + 0.8 * x - 0.5 * x^2 + 1.2 * (x >= 0) + 0.3 * sin(37 * (0:(n - 1)))
+  ref <- list(nn = c(1.1790443482497563, 1.17295736747749, 0.04424662248950165, 0.05462407381752308),
+              hc = c(1.1790443482497563, 1.17295736747749, 0.07352579785169784, 0.08837320267727357))
+  for (v in names(ref)) {
+    r <- morie_rdd_bias_corrected(data.frame(x = x, y = y), "y", "x",
+                                  bandwidth = 0.4, rho = 0.4 / 0.6, vce = v)
+    got <- c(r$details$tau_conventional, r$estimate,
+             r$details$se_conventional, r$std_error)
+    expect_equal(got, ref[[v]], tolerance = 1e-9)
+  }
+})

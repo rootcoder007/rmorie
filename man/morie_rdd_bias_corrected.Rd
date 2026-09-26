@@ -13,7 +13,8 @@ morie_rdd_bias_corrected(
   rho = 1,
   p = 1,
   kernel = "triangular",
-  alpha = 0.05
+  alpha = 0.05,
+  vce = "nn"
 )
 }
 \arguments{
@@ -42,6 +43,9 @@ linear). 2 picks up quadratic curvature for bias correction.}
 \code{"uniform"}, or \code{"gaussian"}.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
+
+\item{vce}{Residual variance: "nn" (nearest neighbour, the rdrobust
+default) or "hc" (plug-in residuals of the local fits).}
 }
 \value{
 A numeric value.

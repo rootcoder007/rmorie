@@ -4,7 +4,7 @@
 \alias{.causrddc_nn_sigma2}
 \title{.causrddc_nn_sigma2}
 \usage{
-.causrddc_nn_sigma2(x, y, J, side_of)
+.causrddc_nn_sigma2(x, y, J, side_of, window = Inf)
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}
@@ -14,6 +14,8 @@
 \item{J}{Numeric; combined arithmetically in the body.}
 
 \item{side_of}{Passed to \code{>}.}
+
+\item{window}{Neighbours are drawn from units with \code{abs(x) <= window}.}
 }
 \value{
 The value of \code{out}, as built in the body.
