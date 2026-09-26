@@ -326,7 +326,8 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
   # own phenotypic variance v, s2g = h v and s2e = (1 - h) v, rg held at
   # its estimate (equal GENETIC VARIANCES is a different hypothesis)
   th_of <- function(hv) {
-    vm_ <- exp(hv[2]); vf_ <- exp(hv[3])
+    vm_ <- exp(hv[2])
+    vf_ <- exp(hv[3])
     c(hv[1] * vm_, hv[1] * vf_, theta[3], (1 - hv[1]) * vm_,
       (1 - hv[1]) * vf_)
   }
