@@ -1,0 +1,111 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Cross-validation tier on main: tests/cross checks every native engine
+# against its reference package (MatchIt, DoubleML, grf, rdrobust, did,
+# survey, ...) and tests/property the invariants. The references are
+# Suggests-only and never used by the package itself, so R CMD check does
+# not install them and tests/testthat never sees this tier; this job
+# installs exactly the packages the tier names and fails on any failure.
+name: cross-validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  cross-and-property:
+    runs-on: ubuntu-latest
+    container: rocker/r-ver:4.5.1
+    timeout-minutes: 120
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Static guard -- every morie_* call must be defined
+        run: Rscript scripts/audit/check_r_undefined.R .
+      - name: System libraries + toolchain
+        run: apt-get update -qq && apt-get install -y --no-install-recommends build-essential libcurl4-openssl-dev libssl-dev libxml2-dev libgdal-dev libgeos-dev libproj-dev libudunits2-dev cmake
+      - name: Point every R process at a live P3M stream
+        # rocker images bake a DATED P3M snapshot into Rprofile.site, and
+        # P3M prunes old dates -- 2025-10-30 started returning 404 and
+        # failed this job for a reason unrelated to the package. Derive
+        # the codename from the image itself rather than assuming it, and
+        # pin to `latest` so it cannot rot again.
+        run: |
+          . /etc/os-release
+          CODENAME="${VERSION_CODENAME:-noble}"
+          RHOME=$(R RHOME)
+          echo "container: $ID $VERSION_ID ($CODENAME)"
+          printf 'options(repos = c(P3M = "https://packagemanager.posit.co/cran/__linux__/%s/latest", CRAN = "https://cloud.r-project.org", runiverse = "https://rootcoder007.r-universe.dev"))\n' "$CODENAME" >> "$RHOME/etc/Rprofile.site"
+          Rscript -e 'cat("repos now:\n"); print(getOption("repos"))'
+        shell: bash
+      - name: Install hard dependencies + tooling
+        run: |
+          options(HTTPUserAgent = sprintf(
+            "R/%s R (%s)", getRversion(),
+            paste(getRversion(), R.version["platform"],
+                  R.version["arch"], R.version["os"])))
+          # Set in Rprofile.site by the step above, with the codename
+          # taken from the running image. Re-declaring it here is how the
+          # wrong distro got in.
+          repos <- getOption("repos")
+          pkgs <- c("here", "Rcpp", "RcppArmadillo", "rmoriebricklayer", "rmoriedata",
+                    "testthat", "pkgload")
+          for (attempt in 1:4) {
+            missing <- setdiff(pkgs, rownames(installed.packages()))
+            if (length(missing) == 0) break
+            # one bad download from r-universe or P3M must not fail the job
+            try(install.packages(missing, repos = repos, Ncpus = 2))
+            if (attempt < 4) Sys.sleep(30 * attempt)
+          }
+          # r-universe unreachable: build the two in-house packages from GitHub
+          gh <- c(rmoriebricklayer = "https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                  rmoriedata = "https://github.com/rootcoder007/rmoriedata/archive/refs/heads/main.tar.gz")
+          for (p in intersect(names(gh), setdiff(pkgs, rownames(installed.packages())))) {
+            tf <- tempfile(fileext = ".tar.gz")
+            got <- tryCatch({ download.file(gh[[p]], tf, mode = "wb", quiet = TRUE); TRUE },
+                            error = function(e) FALSE)
+            if (got) try(install.packages(tf, repos = NULL, type = "source"))
+          }
+          # rmoriebricklayer 0.5.1 carries the corrected mean kernel; until CRAN
+          # and r-universe serve it, build it from GitHub main when the repos
+          # handed us an older build.
+          if (utils::packageVersion("rmoriebricklayer") < "0.5.1") {
+            tf <- tempfile(fileext = ".tar.gz")
+            download.file("https://github.com/rootcoder007/rmorie-bricklayer/archive/refs/heads/main.tar.gz",
+                          tf, mode = "wb", quiet = TRUE)
+            install.packages(tf, repos = NULL, type = "source")
+          }
+          missing <- setdiff(pkgs, rownames(installed.packages()))
+          if (length(missing) > 0) stop("failed to install: ",
+                                        paste(missing, collapse = ", "))
+        shell: Rscript {0}
+      - name: Install the reference packages the tier names
+        run: |
+          fs <- c(Sys.glob("tests/cross/*.R"), Sys.glob("tests/property/*.R"))
+          src <- unlist(lapply(fs, readLines, warn = FALSE))
+          refs <- unique(regmatches(src, regexpr("(?<=skip_if_not_installed\\(\")[A-Za-z0-9.]+", src, perl = TRUE)))
+          for (attempt in 1:3) {
+            missing <- setdiff(refs, rownames(installed.packages()))
+            if (length(missing) == 0) break
+            try(install.packages(missing, Ncpus = 4))
+          }
+          missing <- setdiff(refs, rownames(installed.packages()))
+          if (length(missing)) message("not installable here (their tests skip): ", paste(missing, collapse = ", "))
+        shell: Rscript {0}
+      - name: Cross + property tiers
+        run: |
+          pkgload::load_all(quiet = TRUE)
+          bad <- 0L
+          for (f in c(Sys.glob("tests/cross/*.R"), Sys.glob("tests/property/*.R"))) {
+            d <- as.data.frame(testthat::test_file(f, reporter = "summary"))
+            bad <- bad + sum(d$failed) + sum(d$error)
+          }
+          if (bad > 0) stop(bad, " cross/property failures")
+        shell: Rscript {0}
