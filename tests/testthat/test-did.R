@@ -442,3 +442,26 @@ test_that("morie_did_diagnostics returns sample sizes and outcome stats", {
   expect_s3_class(res$outcome_stats, "data.frame")
   expect_true(!is.null(res$covariate_balance))
 })
+
+test_that("TWFE and the event study equal fixest (balanced and unbalanced panels)", {
+  d <- expand.grid(time = 1:8, unit = 1:40)
+  d$g <- ifelse(d$unit <= 12, 4, ifelse(d$unit <= 24, 6, 0))
+  d$D <- as.integer(d$g > 0 & d$time >= d$g)
+  d$x <- round(sin(1.3 * d$unit) + 0.2 * d$time, 4)
+  d$y <- round(0.5 * d$unit / 10 + 0.3 * d$time + 1.5 * d$D + 0.4 * d$D * (d$time - d$g) * (d$g > 0) +
+                 0.3 * sin(2.7 * d$unit * d$time) + 0.2 * d$x, 5)
+  d$tt <- ifelse(d$g > 0, d$g, NA)
+  u <- d[!(d$unit %in% c(3, 17, 30) & d$time %in% c(2, 5)), ]
+  # feols(y ~ D | unit + time, cluster = ~unit)
+  r <- morie_did_panel_fe(d, "y", "D", "unit", "time", cluster = "unit")
+  expect_equal(c(r$estimate, r$std_error), c(1.88383260684, 0.0758991745971), tolerance = 1e-10)
+  r <- morie_did_panel_fe(u, "y", "D", "unit", "time", cluster = "unit")
+  expect_equal(c(r$estimate, r$std_error), c(1.8824137808, 0.0767819050896), tolerance = 1e-10)
+  # feols(y ~ i(rel binned to [-4, 4], ref = c(-1, never)) | unit + time) and wald(pre)
+  es <- morie_did_event_study(u, "y", "unit", "time", "tt", cluster = "unit")
+  cf <- es$coefficients
+  i <- match(c(-4, 0, 4), cf$relative_time)
+  expect_equal(cf$estimate[i], c(-0.0579744164321, 1.43679248031, 3.07422506574), tolerance = 1e-10)
+  expect_equal(cf$std_error[i], c(0.0940534922065, 0.0899078370266, 0.0939645477063), tolerance = 1e-10)
+  expect_equal(c(es$pre_trend_f_stat, es$pre_trend_p_value), c(0.216136594631, 0.884611828383), tolerance = 1e-9)
+})

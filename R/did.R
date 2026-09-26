@@ -637,10 +637,15 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
   pre <- coef_df[coef_df$relative_time < 0 &
     coef_df$relative_time != reference_period, ]
   if (nrow(pre) > 0) {
-    pre_se <- pmax(pre$std_error, 1e-10)
-    chi2 <- sum((pre$estimate / pre_se)^2)
-    f_stat <- chi2 / nrow(pre)
-    f_p <- stats::pchisq(chi2, df = nrow(pre), lower.tail = FALSE)
+    # joint Wald test with the full cluster covariance, as fixest::wald:
+    # F = b' V^-1 b / q on (q, G - 1) degrees of freedom
+    Vk <- fit$vcov[keep, keep, drop = FALSE]
+    ip <- which(rel_k < 0 & rel_k != reference_period)
+    bp <- as.numeric(est_k)[ip]
+    q_ <- length(ip)
+    f_stat <- as.numeric(t(bp) %*% solve(Vk[ip, ip, drop = FALSE], bp)) / q_
+    G <- length(unique(df[[cluster_var]]))
+    f_p <- stats::pf(f_stat, q_, G - 1, lower.tail = FALSE)
   } else {
     f_stat <- NA_real_
     f_p <- NA_real_
