@@ -291,3 +291,31 @@ test_that("sharp, fuzzy and kink RD equal rdrobust (vce = 'nn', h = 0.5)", {
   cc <- morie_causrddc(d$yf, d$x, treatment = d$fz, h = 0.5, b = 0.5)
   expect_equal(c(cc$bias_corrected, cc$se_robust), c(2.45321344528486, 0.40614527539738), tolerance = 1e-12)
 })
+
+test_that("default bandwidths are rdrobust's mserd and results equal rdrobust()", {
+  n <- 400
+  i <- 0:(n - 1)
+  x <- sin(1.37 * i) * 1.2 + 0.4 * cos(0.21 * i)
+  tr <- as.integer(x >= 0)
+  fz <- as.integer((x >= 0 & (i %% 5 != 0)) | (x < 0 & i %% 7 == 0))
+  d <- data.frame(x,
+                  y = 1 + 0.8 * x + 0.3 * x^2 + 1.2 * tr + 0.4 * sin(3.1 * i),
+                  yf = 1 + 0.8 * x + 2 * fz + 0.4 * sin(3.1 * i),
+                  yk = 1 + 0.8 * x + 1.5 * pmax(x, 0) + 0.4 * sin(3.1 * i), fz)
+  # rdrobust::rdbwselect(y, x) / (fuzzy = fz) / (deriv = 1, p = 2): h, b
+  bw <- morie_rd_mserd_bandwidth(d$y, d$x)
+  expect_equal(c(bw$h, bw$b), c(0.584477848907144, 0.93283333886784), tolerance = 1e-10)
+  bw <- morie_rd_mserd_bandwidth(d$yf, d$x, treatment = d$fz)
+  expect_equal(c(bw$h, bw$b), c(0.479323994236654, 0.824084209003945), tolerance = 1e-10)
+  bw <- morie_rd_mserd_bandwidth(d$yk, d$x, p = 2, deriv = 1)
+  expect_equal(c(bw$h, bw$b), c(0.635424623301575, 0.965984594756331), tolerance = 1e-9)
+  # rdrobust(y, x), rdrobust(yf, x, fuzzy = fz), rdrobust(yk, x, deriv = 1, p = 2)
+  s <- morie_rdd_sharp(d, "y", "x")
+  expect_equal(c(s$estimate, s$std_error), c(1.29449761957, 0.0787346761035), tolerance = 1e-9)
+  f <- morie_rdd_fuzzy(d, "yf", "x", "fz")
+  expect_equal(c(f$estimate, f$std_error), c(2.31807950054, 0.29104188413), tolerance = 1e-9)
+  k <- morie_rdd_kink(d, "yk", "x")
+  expect_equal(c(k$estimate, k$std_error), c(4.41013383404, 0.999751323253), tolerance = 1e-8)
+  bc <- morie_rdd_bias_corrected(d, "y", "x")
+  expect_equal(c(bc$estimate, bc$std_error), c(1.31362793469, 0.0921089745395), tolerance = 1e-9)
+})

@@ -47,14 +47,17 @@ NULL
 #' @param cutoff Numeric scalar; the threshold on `running`. Default
 #'   `0` (the canonical normalisation).
 #' @param bandwidth Numeric; the local-polynomial bandwidth on each
-#'   side of the cutoff. `NULL` invokes the data-driven CCT selector.
+#'   side of the cutoff. `NULL` invokes the MSE-optimal selector of
+#'   rdrobust (`morie_rd_mserd_bandwidth`).
 #' @param p Integer; local-polynomial order (default 1 for local-
 #'   linear). 2 picks up quadratic curvature for bias correction.
 #' @param kernel One of `"triangular"` (default), `"epanechnikov"`,
 #'   `"uniform"`, or `"gaussian"`.
 #' @param alpha Significance level (default `0.05`).
-#' @param rho Bandwidth ratio for bias correction (Calonico, Cattaneo
-#'   & Titiunik 2014); default `1` (same bandwidth).
+#' @param rho Bandwidth ratio h/b for bias correction (Calonico, Cattaneo
+#'   & Titiunik 2014). `NULL` (default): b is the MSE-optimal bias
+#'   bandwidth when no bandwidth is given and b = h when one is, as
+#'   rdrobust.
 #' @param donut Numeric; symmetric window around the cutoff to drop
 #'   in a donut-RDD robustness check (default `0`).
 #' @param window Numeric; half-width of the local randomisation
@@ -342,25 +345,24 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
   list(beta = beta, V = V)
 }
 
-#' Calonico-Cattaneo-Titiunik MSE-optimal bandwidth
+#' MSE-optimal RD bandwidth (Calonico, Cattaneo and Farrell 2020)
 #'
-#' The IK bandwidth is used as the pilot; the curvature difference
-#' across the cutoff gives the squared bias and the two one-sided
-#' intercept variances give the variance, and the MSE-optimal rule
-#' balances them. The polynomial order \code{p} enters everywhere --
-#' the curvature is read off the order \code{p + 1} fit and the rate is
-#' \eqn{n^{-1/(2p+3)}} -- which is why the previous implementation,
-#' delegating to IK and discarding \code{p}, could not answer for any
-#' order but the one IK assumes.
+#' The common MSE-optimal bandwidths of \code{rdrobust::rdbwselect(bwselect
+#' = "mserd")}: \code{h} for the order-p estimate of the deriv-th derivative
+#' jump (fuzzy with \code{treatment}) and, in \code{details}, \code{b_mse}
+#' for its bias correction and the CER-optimal \code{h_cer =
+#' h N^(-p/((3+p)(3+2p)))}.
 #'
 #' @param x,y The running variable and the outcome.
 #' @param cutoff The threshold.
 #' @param kernel One of \code{"triangular"}, \code{"epanechnikov"},
-#'   \code{"uniform"}, \code{"gaussian"}.
+#'   \code{"uniform"}.
 #' @param p Polynomial order for the local fit.
+#' @param deriv Derivative of the regression function (1 for a kink).
+#' @param treatment Optional treatment received, for fuzzy designs.
+#' @param vce \code{"nn"} (default) or \code{"hc0"}-\code{"hc3"}.
 #' @return A named list with \code{bandwidth}, \code{method} and
-#'   \code{details} carrying \code{h_mse}, \code{h_cer},
-#'   \code{bias_sq} and \code{variance}.
+#'   \code{details} carrying \code{h_mse}, \code{b_mse} and \code{h_cer}.
 #' @export
 #' @examples
 #' set.seed(1)
@@ -369,48 +371,15 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
 #' bw <- morie_rdd_bandwidth_cct(x, y)
 #' bw$bandwidth
 morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
-                                    kernel = "triangular", p = 1) {
-  x <- as.numeric(x)
-  y <- as.numeric(y)
+                                    kernel = "triangular", p = 1,
+                                    deriv = 0, treatment = NULL, vce = "nn") {
+  bw <- morie_rd_mserd_bandwidth(y, x, cutoff = cutoff, p = p, deriv = deriv,
+                                 kernel = kernel, vce = vce,
+                                 treatment = treatment)
   n <- length(x)
-  p <- as.integer(p)
-  ik <- .morie_rdd_ik_native(x, y, cutoff, kernel)
-  h_pilot <- ik$bandwidth
-
-  left <- x < cutoff
-  right <- x >= cutoff
-
-  curvature <- function(xs, ys, h) {
-    if (length(xs) < p + 3L) return(0)
-    b <- .morie_rdd_local_poly(xs, ys, cutoff, h, p = p + 1L,
-                               kernel = kernel)$beta
-    if (length(b) > p + 1L) (p + 1) * b[p + 2L] else 0
-  }
-  var_side <- function(xs, ys, h) {
-    if (length(xs) < p + 2L)
-      return(if (length(ys)) sum((ys - mean(ys))^2) / length(ys) else 1)
-    .morie_rdd_local_poly(xs, ys, cutoff, h, p = p, kernel = kernel)$V[1, 1]
-  }
-
-  b_left  <- curvature(x[left], y[left], h_pilot)
-  b_right <- curvature(x[right], y[right], h_pilot)
-  bias_sq <- (b_right - b_left)^2
-  variance <- var_side(x[left], y[left], h_pilot) +
-    var_side(x[right], y[right], h_pilot)
-
-  h_mse <- if (bias_sq > 0) {
-    (variance / (2 * (p + 1) * bias_sq))^(1 / (2 * p + 3)) *
-      n^(-1 / (2 * p + 3))
-  } else {
-    h_pilot
-  }
-  x_range <- max(x) - min(x)
-  h_mse <- min(max(h_mse, x_range * 0.01), x_range * 0.5)
-  h_cer <- h_mse * n^(-p / (3 * (2 * p + 3)))
-
-  .morie_rdd_bw_result(h_mse, "CCT",
-                       list(h_mse = h_mse, h_cer = h_cer,
-                            bias_sq = bias_sq, variance = variance))
+  h_cer <- bw$h * n^(-(p / ((3 + p) * (3 + 2 * p))))
+  .morie_rdd_bw_result(bw$h, "CCF mserd",
+                       list(h_mse = bw$h, b_mse = bw$b, h_cer = h_cer))
 }
 
 
@@ -474,10 +443,23 @@ morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
     storage.mode(Xc) <- "double"
     y <- as.numeric(stats::lm.fit(cbind(1, Xc), y)$residuals) + mean(y)
   }
-  if (is.null(bandwidth))
-    bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
+  b_nn <- bandwidth
+  if (is.null(bandwidth)) {
+    bw <- morie_rd_mserd_bandwidth(y, x, cutoff = cutoff, p = p,
+                                   kernel = kernel)
+    bandwidth <- bw$h
+    b_nn <- bw$b
+  }
   fit <- .morie_rdd_jump_native(x, y, cutoff, bandwidth, p, kernel)
   se_use <- fit$se
+  if (kernel %in% c("triangular", "epanechnikov", "uniform")) {
+    # the conventional estimate and SE of rdrobust (vce = "nn"), from the
+    # same engine as morie_rdd_bias_corrected
+    cc <- morie_causrddc(y, x, cutoff = cutoff, p = p, h = bandwidth,
+                         b = b_nn, kernel = kernel)
+    fit$estimate <- cc$estimate
+    se_use <- cc$se_conventional
+  }
   if (!is.null(cluster) && cluster %in% names(data)) {
     # cluster-robust inference by a cluster bootstrap of the jump
     cl <- as.character(data[[cluster]])
@@ -520,9 +502,14 @@ morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
 morie_rdd_fuzzy <- function(data, outcome, running, treatment,
                             cutoff = 0, bandwidth = NULL, p = 1,
                             kernel = "triangular", alpha = 0.05) {
-  if (is.null(bandwidth))
-    bandwidth <- .morie_rdd_ik_native(data[[running]], data[[outcome]],
-                                      cutoff, kernel)$bandwidth
+  b_nn <- bandwidth
+  if (is.null(bandwidth)) {
+    bw <- morie_rd_mserd_bandwidth(data[[outcome]], data[[running]],
+                                   cutoff = cutoff, p = p, kernel = kernel,
+                                   treatment = data[[treatment]])
+    bandwidth <- bw$h
+    b_nn <- bw$b
+  }
   # the fuzzy RD ratio and its linearised standard error with the
   # covariance of the reduced form and the first stage, as
   # rdrobust(fuzzy = ...) (vce = "nn")
@@ -532,7 +519,7 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
                          p, kernel, alpha = alpha)
   fz <- morie_causrddc(as.numeric(data[[outcome]]), as.numeric(data[[running]]),
                        treatment = as.numeric(data[[treatment]]), cutoff = cutoff,
-                       p = p, h = bandwidth, b = bandwidth, kernel = kernel,
+                       p = p, h = bandwidth, b = b_nn, kernel = kernel,
                        alpha = alpha)
   est <- fz$estimate
   se <- fz$se_conventional
@@ -556,7 +543,7 @@ morie_rdd_fuzzy <- function(data, outcome, running, treatment,
 #' bc$estimate
 #' @export
 morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
-                                     bandwidth = NULL, rho = 1, p = 1,
+                                     bandwidth = NULL, rho = NULL, p = 1,
                                      kernel = "triangular", alpha = 0.05,
                                      vce = "nn") {
   x <- data[[running]]
@@ -564,12 +551,20 @@ morie_rdd_bias_corrected <- function(data, outcome, running, cutoff = 0,
   ok <- is.finite(x) & is.finite(y)
   x <- x[ok]
   y <- y[ok]
-  if (is.null(bandwidth))
-    bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
+  if (is.null(bandwidth)) {
+    bw <- morie_rd_mserd_bandwidth(y, x, cutoff = cutoff, p = p,
+                                   kernel = kernel, vce = if (vce == "hc") "hc0" else vce)
+    bandwidth <- bw$h
+    b_default <- bw$b
+  } else {
+    b_default <- bandwidth
+  }
   # CCT (2014, Theorem 1) with pilot b = h/rho: the bias estimate carries
   # the kernel constant, and the robust variance is that of the
   # bias-corrected linear smoother (matches rdrobust to ~1e-14).
-  b <- bandwidth / rho
+  # rdrobust: b is MSE-optimal when no bandwidth is given, b = h when only
+  # h is; an explicit rho sets b = h / rho
+  b <- if (is.null(rho)) b_default else bandwidth / rho
   fit <- morie_causrddc(y, x, cutoff = cutoff, p = p, h = bandwidth, b = b,
                         kernel = kernel, alpha = alpha, vce = vce)
   .morie_rdd_result(fit$bias_corrected, fit$se_robust,
@@ -842,12 +837,23 @@ morie_rdd_kink <- function(data, outcome, running, cutoff = 0,
                            alpha = 0.05) {
   x <- data[[running]]
   y <- data[[outcome]]
-  if (is.null(bandwidth))
-    bandwidth <- .morie_rdd_ik_native(x, y, cutoff, kernel)$bandwidth
+  b_nn <- bandwidth
+  if (is.null(bandwidth)) {
+    bw <- morie_rd_mserd_bandwidth(y, x, cutoff = cutoff, p = 2, deriv = 1,
+                                   kernel = kernel)
+    bandwidth <- bw$h
+    b_nn <- bw$b
+  }
   # Slope discontinuity: local-quadratic one-sided fits, first
   # derivative jump (deriv = 1) with NN-robust variance.
   fit <- .morie_rdd_jump_native(x, y, cutoff, bandwidth, p = 2L,
                                 kernel = kernel, deriv = 1L)
+  if (kernel %in% c("triangular", "epanechnikov", "uniform")) {
+    cc <- morie_causrddc(y, x, cutoff = cutoff, nu = 1, p = 2, h = bandwidth,
+                         b = b_nn, kernel = kernel)
+    fit$estimate <- cc$estimate
+    fit$se <- cc$se_conventional
+  }
   .morie_rdd_result(fit$estimate, fit$se, fit$n,
                     method = "kink RDD (rmorie native deriv=1)",
                     alpha = alpha,

@@ -566,3 +566,147 @@ morie_causrddc_cheatsheet <- function() {
     " Sharp, kink (nu=1) and fuzzy all from one code path."
   )
 }
+
+#' rdrobust's MSE-optimal constants on one side of the cutoff
+#'
+#' rdrobust:::rdrobust_bw: the variance constant V, bias constant B,
+#' regularisation R and rate for an order-o fit of the nu-th derivative
+#' (x already centred at the cutoff).
+#' @noRd
+.causrddc_bw_part <- function(X, Y, Tt, o, nu, o_B, h_V, h_B, scale, kernel,
+                              vce, nnmatch) {
+  kw <- function(h) {
+    u <- X / h
+    w <- if (kernel %in% c("epanechnikov", "epa")) 0.75 * (1 - u^2) * (abs(u) <= 1)
+         else if (kernel %in% c("uniform", "uni")) 0.5 * (abs(u) <= 1)
+         else (1 - abs(u)) * (abs(u) <= 1)
+    w / h
+  }
+  fit <- function(h, order) {
+    w <- kw(h)
+    ind <- which(w > 0)
+    R <- outer(X[ind], 0:order, `^`)
+    list(ind = ind, R = R, W = w[ind], invG = solve(crossprod(R * w[ind], R)))
+  }
+  coef_ <- function(f, v) as.numeric(f$invG %*% crossprod(f$R * f$W, v[f$ind]))
+  resid2 <- function(f, comp, order) {
+    if (vce == "nn") {
+      return(.causrddc_nn_sigma2(X[f$ind], comp[f$ind], nnmatch, rep(1, length(f$ind))))
+    }
+    e <- comp[f$ind] - as.numeric(f$R %*% coef_(f, comp))
+    n_ <- length(f$ind)
+    k_ <- order + 1
+    hii <- f$W * rowSums((f$R %*% f$invG) * f$R)
+    fac <- switch(vce, hc0 = 1, hc1 = n_ / (n_ - k_),
+                  hc2 = 1 / pmax(1 - hii, 1e-8), hc3 = 1 / pmax(1 - hii, 1e-8)^2)
+    fac * e^2
+  }
+  sandwich <- function(f, r2, j) {
+    RW <- f$R * f$W
+    M <- crossprod(RW * r2, RW)
+    as.numeric(f$invG[j, ] %*% M %*% f$invG[j, ])
+  }
+  fV <- fit(h_V, o)
+  s_vec <- 1
+  comp <- Y
+  if (!is.null(Tt)) {
+    bY <- coef_(fV, Y)
+    bT <- coef_(fV, Tt)
+    tY <- factorial(nu) * bY[nu + 1]
+    tT <- factorial(nu) * bT[nu + 1]
+    s_vec <- c(1 / tT, -tY / tT^2)
+    comp <- s_vec[1] * Y + s_vec[2] * Tt
+  }
+  V_V <- sandwich(fV, resid2(fV, comp, o), nu + 1)
+  v <- crossprod(fV$R * fV$W, (X[fV$ind] / h_V)^(o + 1))
+  BConst <- h_V^nu * as.numeric(fV$invG %*% v)[nu + 1]
+  fB <- fit(h_B, o_B)
+  bcomp <- coef_(fB, comp)
+  BWreg <- 0
+  if (scale > 0) {
+    V_B <- sandwich(fB, resid2(fB, comp, o_B), o + 2)
+    BWreg <- 3 * BConst^2 * V_B
+  }
+  list(V = (2 * nu + 1) * h_V^(2 * nu + 1) * V_V,
+       B = sqrt(2 * (o + 1 - nu)) * BConst * bcomp[o + 2],
+       R = scale * (2 * (o + 1 - nu)) * BWreg,
+       rate = 1 / (2 * o + 3))
+}
+
+#' MSE-optimal RD bandwidths (rdrobust's mserd)
+#'
+#' The common MSE-optimal bandwidths of Calonico, Cattaneo and Farrell
+#' (2020), as \code{rdrobust::rdbwselect(bwselect = "mserd")} with its
+#' defaults (stdvars = FALSE, masspoints = "adjust", bwrestrict = TRUE):
+#' \code{h} for the order-p estimate of the deriv-th derivative jump (fuzzy
+#' with \code{treatment}) and \code{b} for its bias correction.
+#'
+#' @param y Outcome.
+#' @param x Running variable.
+#' @param cutoff Cutoff.
+#' @param p Polynomial order.
+#' @param deriv Derivative (1 for a kink).
+#' @param q Order of the bias fit, default p + 1.
+#' @param kernel "triangular", "epanechnikov" or "uniform".
+#' @param vce "nn" (default) or "hc0"-"hc3".
+#' @param nnmatch Nearest neighbours for vce = "nn".
+#' @param treatment Treatment received, for fuzzy designs.
+#' @param scaleregul Regularisation scale.
+#' @return list(h, b).
+#' @references Calonico, S., Cattaneo, M. D. and Farrell, M. H. (2020).
+#'   Optimal bandwidth choice for robust bias-corrected inference in
+#'   regression discontinuity designs. Econometrics Journal 23, 192-210.
+#' @examples
+#' x <- sin(1.37 * 0:199); y <- 1 + x + (x >= 0) + 0.3 * cos(3.1 * 0:199)
+#' morie_rd_mserd_bandwidth(y, x)
+#' @export
+morie_rd_mserd_bandwidth <- function(y, x, cutoff = 0, p = 1, deriv = 0,
+                                     q = NULL, kernel = "triangular",
+                                     vce = "nn", nnmatch = 3,
+                                     treatment = NULL, scaleregul = 1) {
+  if (is.null(q)) q <- p + 1
+  o <- order(x)
+  xs <- as.numeric(x)[o] - cutoff
+  ys <- as.numeric(y)[o]
+  ts <- if (is.null(treatment)) NULL else as.numeric(treatment)[o]
+  n <- length(xs)
+  x_iq <- stats::quantile(xs, 0.75, type = 2, names = FALSE) -
+    stats::quantile(xs, 0.25, type = 2, names = FALSE)
+  BWp <- min(stats::sd(xs), x_iq / 1.349)
+  C_c <- if (kernel %in% c("epanechnikov", "epa")) 2.34
+         else if (kernel %in% c("uniform", "uni")) 1.843 else 2.576
+  L <- xs < 0
+  Xl <- xs[L]
+  Xr <- xs[!L]
+  Yl <- ys[L]
+  Yr <- ys[!L]
+  Tl <- if (is.null(ts)) NULL else ts[L]
+  Tr <- if (is.null(ts)) NULL else ts[!L]
+  if (!is.null(ts) && (stats::var(Tl) == 0 || stats::var(Tr) == 0)) Tl <- Tr <- NULL
+  M_l <- length(unique(Xl))
+  M_r <- length(unique(Xr))
+  c_bw <- C_c * BWp * (M_l + M_r)^(-1 / 5)
+  bw_max <- max(abs(min(xs)), abs(max(xs)))
+  c_bw <- min(c_bw, bw_max)
+  bw_min <- NULL
+  if (1 - M_l / length(Xl) >= 0.2 || 1 - M_r / length(Xr) >= 0.2) {
+    ul <- sort(unique(Xl), decreasing = TRUE)
+    ur <- sort(unique(Xr))
+    bw_min <- max(abs(ul[min(10, M_l)]) + 1e-8, abs(ur[min(10, M_r)]) + 1e-8)
+    c_bw <- max(c_bw, bw_min)
+  }
+  both <- function(o_, nu, o_B, hb_l, hb_r, scale) {
+    list(.causrddc_bw_part(Xl, Yl, Tl, o_, nu, o_B, c_bw, hb_l, scale, kernel, vce, nnmatch),
+         .causrddc_bw_part(Xr, Yr, Tr, o_, nu, o_B, c_bw, hb_r, scale, kernel, vce, nnmatch))
+  }
+  d <- both(q + 1, q + 1, q + 2, abs(min(xs)), abs(max(xs)), 0)
+  d_bw <- min(((d[[1]]$V + d[[2]]$V) / (d[[2]]$B - d[[1]]$B)^2)^d[[1]]$rate, bw_max)
+  if (!is.null(bw_min)) d_bw <- max(d_bw, bw_min)
+  bb <- both(q, p + 1, q + 1, d_bw, d_bw, scaleregul)
+  b_bw <- min(((bb[[1]]$V + bb[[2]]$V) / ((bb[[2]]$B - bb[[1]]$B)^2 +
+    scaleregul * (bb[[2]]$R + bb[[1]]$R)))^bb[[1]]$rate, bw_max)
+  hh <- both(p, deriv, q, b_bw, b_bw, scaleregul)
+  h_bw <- min(((hh[[1]]$V + hh[[2]]$V) / ((hh[[2]]$B - hh[[1]]$B)^2 +
+    scaleregul * (hh[[2]]$R + hh[[1]]$R)))^hh[[1]]$rate, bw_max)
+  list(h = as.numeric(h_bw), b = as.numeric(b_bw))
+}
