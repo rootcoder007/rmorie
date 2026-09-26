@@ -562,3 +562,18 @@ test_that("Bacon decomposition equals bacondecomp::bacon", {
   ), tolerance = 1e-10)
   expect_equal(r$overall_estimate, 0.576487105060352, tolerance = 1e-10)
 })
+
+test_that("wild cluster bootstrap equals fwildclusterboot::boottest", {
+  # reference: boottest(lm(y ~ d + post + dp), param = "dp", clustid = "cl",
+  #   B = 9999, type = "rademacher") -- full enumeration of 2^10 draws
+  df <- expand.grid(k = 1:8, cl = 1:10)
+  df$d <- as.integer(df$cl <= 5)
+  df$post <- as.integer(df$k > 4)
+  df$y <- 0.3 * df$d + 0.2 * df$post + 0.25 * df$d * df$post +
+    0.5 * sin(1.9 * df$cl) + 0.7 * cos(1.3 * df$cl * df$k)
+  r <- morie_did_wild_cluster_bootstrap(df, "y", "d", "post", "cl",
+                                        n_bootstrap = 1024L)
+  expect_true(r$details$full_enumeration)
+  expect_equal(r$p_value, 0.1640625, tolerance = 1e-12)
+  expect_equal(unname(r$t_stat), 1.54025438940341, tolerance = 1e-10)
+})

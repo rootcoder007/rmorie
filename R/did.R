@@ -1449,9 +1449,16 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
     -sqrt(1.5), -sqrt(1.0), -sqrt(0.5),
     sqrt(0.5), sqrt(1.0), sqrt(1.5)
   )
-  boot_t <- numeric(n_bootstrap)
-  for (i in seq_len(n_bootstrap)) {
-    w <- if (identical(weight_type, "webb")) {
+  # Rademacher weights are enumerated in full when 2^G <= B, as
+  # fwildclusterboot::boottest and Stata's boottest do
+  enum <- !identical(weight_type, "webb") && 2^G <= n_bootstrap
+  W_all <- if (enum) as.matrix(expand.grid(rep(list(c(-1, 1)), G))) else NULL
+  n_draw <- if (enum) nrow(W_all) else n_bootstrap
+  boot_t <- numeric(n_draw)
+  for (i in seq_len(n_draw)) {
+    w <- if (enum) {
+      W_all[i, ]
+    } else if (identical(weight_type, "webb")) {
       sample(webb_vals, G, replace = TRUE)
     } else {
       sample(c(-1, 1), G, replace = TRUE)
@@ -1464,7 +1471,9 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
     bfit <- .morie_did_ols_robust_se(X, y_star, cluster_ids = cluster_ids)
     boot_t[i] <- if (bfit$se[tau_idx] > 0) bfit$beta[tau_idx] / bfit$se[tau_idx] else 0
   }
-  boot_p <- mean(abs(boot_t) >= abs(t_full))
+  # symmetric p-value, strict inequality (boottest); the draws w = +-1
+  # reproduce t itself and must not count
+  boot_p <- mean(abs(boot_t) > abs(t_full) * (1 + 1e-10))
   est <- full$beta[tau_idx]
   se_est <- full$se[tau_idx]
   ci <- .morie_did_make_ci(est, se_est, alpha)
@@ -1475,8 +1484,8 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
     n_treated = sum(d == 1), n_control = sum(d == 0),
     method = "wild_cluster_bootstrap (base-R)",
     details = list(
-      n_clusters = G, n_bootstrap = n_bootstrap,
-      weight_type = weight_type
+      n_clusters = G, n_bootstrap = n_draw,
+      weight_type = weight_type, full_enumeration = enum
     )
   )
 }
