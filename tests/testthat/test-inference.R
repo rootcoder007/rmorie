@@ -123,3 +123,17 @@ test_that("morie_sample_size_logistic returns positive integer", {
   expect_type(n, "integer")
   expect_gt(n, 0)
 })
+
+test_that("morie_sample_size_logistic matches Hsieh et al. (1998) as in powerMediation", {
+  ## powerMediation::SSizeLogisticBin(p1, p2, B, alpha, power) and
+  ## SSizeLogisticCon(p1, OR, alpha, power)
+  expect_identical(morie_sample_size_logistic(0.2, p1 = 0.35), 276L)
+  expect_identical(morie_sample_size_logistic(0.1, p1 = 0.18, power = 0.9, B = 0.3), 915L)
+  expect_identical(morie_sample_size_logistic(0.4, p1 = 0.3, alpha = 0.01, B = 0.6), 1097L)
+  expect_identical(morie_sample_size_logistic(0.2, or = 1.5, covariate = "continuous"), 299L)
+  expect_identical(morie_sample_size_logistic(0.35, or = 0.7, power = 0.9,
+                                              covariate = "continuous"), 364L)
+  ## an odds ratio is converted to the same p1
+  or <- (0.35 / 0.65) / (0.2 / 0.8)
+  expect_identical(morie_sample_size_logistic(0.2, or = or), 276L)
+})

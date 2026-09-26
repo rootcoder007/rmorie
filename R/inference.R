@@ -584,34 +584,66 @@ morie_power_prop_test <- function(n = NULL, p1 = NULL, p2 = NULL,
   )
 }
 
-#' Sample size for logistic regression detecting a target odds ratio
+#' Sample size for logistic regression (Hsieh, Bloch and Larsen 1998)
 #'
-#' Uses the formula from Hsieh et al. (1998):
-#' \deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) [\log(OR)]^2}}{n =
-#' frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) [log(OR)]^2}}
+#' Binary covariate (their eq. 1): with event rates \eqn{P_0} at X = 0 and
+#' \eqn{P_1} at X = 1, a fraction \eqn{B} of the sample at X = 1 and
+#' \eqn{\bar P = (1-B)P_0 + BP_1},
+#' \deqn{n = \frac{[z_{1-\alpha/2}\sqrt{\bar P(1-\bar P)/B} + z_{1-\beta}
+#'   \sqrt{P_0(1-P_0) + P_1(1-P_1)(1-B)/B}]^2}{(P_0 - P_1)^2 (1-B)}.}{n =
+#'   [z_a sqrt(Pbar(1-Pbar)/B) + z_b sqrt(P0(1-P0) + P1(1-P1)(1-B)/B)]^2 /
+#'   ((P0-P1)^2 (1-B)).}
+#' Continuous normal covariate (their eq. 2):
+#' \eqn{n = (z_{1-\alpha/2} + z_{1-\beta})^2 / (P_0(1-P_0)\log(OR)^2)}, with
+#' \eqn{P_0} the event rate at the covariate mean and OR per standard
+#' deviation.
 #'
-#' @param p0 Prevalence under control.
-#' @param or Target odds ratio.
+#' @param p0 Event rate at X = 0 (binary) or at the covariate mean
+#'   (continuous).
+#' @param or Odds ratio for X = 1 vs 0 (binary) or per standard deviation
+#'   (continuous). Ignored for a binary covariate when \code{p1} is given.
 #' @param alpha Significance level.
 #' @param power Desired power.
-#' @param two_sided Logical.
-#' @return Integer sample size.
+#' @param two_sided Logical; one-sided uses \eqn{z_{1-\alpha}}.
+#' @param B Fraction of the sample with X = 1 (binary covariate).
+#' @param covariate \code{"binary"} or \code{"continuous"}.
+#' @param p1 Optional event rate at X = 1 (binary covariate).
+#' @return Integer total sample size, rounded up.
 #' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' morie_sample_size_logistic(0.2, p1 = 0.35)                # 276
+#' morie_sample_size_logistic(0.2, or = 1.5, covariate = "continuous")  # 299
 #' @export
 #' @references
 #'   Hsieh FY, Bloch DA, Larsen MD (1998). A simple method of sample size
 #'   calculation for linear and logistic regression.
-#'   *Statistics in Medicine*, 17(14):1623-1634.
-morie_sample_size_logistic <- function(p0, or, alpha = 0.05, power = 0.80,
-                                 two_sided = TRUE) {
-  p1 <- (or * p0) / (1 - p0 + or * p0)
+#'   \emph{Statistics in Medicine}, 17(14):1623-1634. Reference
+#'   implementation: powerMediation::SSizeLogisticBin, SSizeLogisticCon.
+morie_sample_size_logistic <- function(p0, or = NULL, alpha = 0.05, power = 0.80,
+                                       two_sided = TRUE, B = 0.5,
+                                       covariate = c("binary", "continuous"),
+                                       p1 = NULL) {
+  covariate <- match.arg(covariate)
+  if (!(p0 > 0 && p0 < 1)) stop("p0 must be in (0, 1)", call. = FALSE)
   z_a <- stats::qnorm(if (two_sided) 1 - alpha / 2 else 1 - alpha)
   z_b <- stats::qnorm(power)
-  p_bar <- (p0 + p1) / 2
-  n <- as.integer(ceiling((z_a + z_b)^2 / (p_bar * (1 - p_bar) * (log(or))^2)))
-  n
+  if (covariate == "continuous") {
+    if (is.null(or) || or <= 0 || or == 1) {
+      stop("continuous covariate: or > 0 and != 1 is required", call. = FALSE)
+    }
+    return(as.integer(ceiling((z_a + z_b)^2 / (p0 * (1 - p0) * log(or)^2))))
+  }
+  if (is.null(p1)) {
+    if (is.null(or) || or <= 0) stop("give p1 or a positive or", call. = FALSE)
+    p1 <- (or * p0) / (1 - p0 + or * p0)
+  }
+  if (!(p1 > 0 && p1 < 1) || p1 == p0) {
+    stop("p1 must be in (0, 1) and differ from p0", call. = FALSE)
+  }
+  if (!(B > 0 && B < 1)) stop("B must be in (0, 1)", call. = FALSE)
+  p_bar <- (1 - B) * p0 + B * p1
+  num <- (z_a * sqrt(p_bar * (1 - p_bar) / B) +
+            z_b * sqrt(p0 * (1 - p0) + p1 * (1 - p1) * (1 - B) / B))^2
+  as.integer(ceiling(num / ((p0 - p1)^2 * (1 - B))))
 }
 
 #' Cohen's d effect size

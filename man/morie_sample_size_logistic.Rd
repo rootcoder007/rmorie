@@ -2,35 +2,61 @@
 % Please edit documentation in R/inference.R
 \name{morie_sample_size_logistic}
 \alias{morie_sample_size_logistic}
-\title{Sample size for logistic regression detecting a target odds ratio}
+\title{Sample size for logistic regression (Hsieh, Bloch and Larsen 1998)}
 \usage{
-morie_sample_size_logistic(p0, or, alpha = 0.05, power = 0.8, two_sided = TRUE)
+morie_sample_size_logistic(
+  p0,
+  or = NULL,
+  alpha = 0.05,
+  power = 0.8,
+  two_sided = TRUE,
+  B = 0.5,
+  covariate = c("binary", "continuous"),
+  p1 = NULL
+)
 }
 \arguments{
-\item{p0}{Prevalence under control.}
+\item{p0}{Event rate at X = 0 (binary) or at the covariate mean
+(continuous).}
 
-\item{or}{Target odds ratio.}
+\item{or}{Odds ratio for X = 1 vs 0 (binary) or per standard deviation
+(continuous). Ignored for a binary covariate when \code{p1} is given.}
 
 \item{alpha}{Significance level.}
 
 \item{power}{Desired power.}
 
-\item{two_sided}{Logical.}
+\item{two_sided}{Logical; one-sided uses \eqn{z_{1-\alpha}}.}
+
+\item{B}{Fraction of the sample with X = 1 (binary covariate).}
+
+\item{covariate}{\code{"binary"} or \code{"continuous"}.}
+
+\item{p1}{Optional event rate at X = 1 (binary covariate).}
 }
 \value{
-Integer sample size.
+Integer total sample size, rounded up.
 }
 \description{
-Uses the formula from Hsieh et al. (1998):
-\deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) [\log(OR)]^2}}{n =
-frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) [log(OR)]^2}}
+Binary covariate (their eq. 1): with event rates \eqn{P_0} at X = 0 and
+\eqn{P_1} at X = 1, a fraction \eqn{B} of the sample at X = 1 and
+\eqn{\bar P = (1-B)P_0 + BP_1},
+\deqn{n = \frac{[z_{1-\alpha/2}\sqrt{\bar P(1-\bar P)/B} + z_{1-\beta}
+  \sqrt{P_0(1-P_0) + P_1(1-P_1)(1-B)/B}]^2}{(P_0 - P_1)^2 (1-B)}.}{n =
+  [z_a sqrt(Pbar(1-Pbar)/B) + z_b sqrt(P0(1-P0) + P1(1-P1)(1-B)/B)]^2 /
+  ((P0-P1)^2 (1-B)).}
+Continuous normal covariate (their eq. 2):
+\eqn{n = (z_{1-\alpha/2} + z_{1-\beta})^2 / (P_0(1-P_0)\log(OR)^2)}, with
+\eqn{P_0} the event rate at the covariate mean and OR per standard
+deviation.
 }
 \examples{
-# See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
+morie_sample_size_logistic(0.2, p1 = 0.35)                # 276
+morie_sample_size_logistic(0.2, or = 1.5, covariate = "continuous")  # 299
 }
 \references{
 Hsieh FY, Bloch DA, Larsen MD (1998). A simple method of sample size
 calculation for linear and logistic regression.
-\emph{Statistics in Medicine}, 17(14):1623-1634.
+\emph{Statistics in Medicine}, 17(14):1623-1634. Reference
+implementation: powerMediation::SSizeLogisticBin, SSizeLogisticCon.
 }
