@@ -321,6 +321,8 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
   p_lower <- numeric(length(gamma_range))
 
   if (method == "wilcoxon") {
+    # zero differences carry no sign information (Wilcoxon's rule)
+    diffs <- diffs[diffs != 0]
     ranks <- rank(abs(diffs))
     signs <- sign(diffs)
     t_obs <- sum(ranks[signs > 0])
@@ -329,20 +331,20 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
       p_treat   <- gamma / (1 + gamma)
       exp_u     <- sum(ranks * p_treat)
       var_u     <- sum(ranks^2 * p_treat * (1 - p_treat))
-      p_upper[i] <- 1 - stats::pnorm(
-        (t_obs - exp_u) / sqrt(max(var_u, 1e-10)))
+      p_upper[i] <- stats::pnorm(
+        (t_obs - exp_u) / sqrt(max(var_u, 1e-10)), lower.tail = FALSE)
       p_treat_l <- 1 / (1 + gamma)
       exp_l     <- sum(ranks * p_treat_l)
       var_l     <- sum(ranks^2 * p_treat_l * (1 - p_treat_l))
-      p_lower[i] <- 1 - stats::pnorm(
-        (t_obs - exp_l) / sqrt(max(var_l, 1e-10)))
+      p_lower[i] <- stats::pnorm(
+        (t_obs - exp_l) / sqrt(max(var_l, 1e-10)), lower.tail = FALSE)
     }
   } else if (method == "sign") {
     n_pos <- sum(diffs > 0)
     for (i in seq_along(gamma_range)) {
       gamma <- gamma_range[i]
-      p_upper[i] <- 1 - stats::pbinom(n_pos - 1L, n, gamma / (1 + gamma))
-      p_lower[i] <- 1 - stats::pbinom(n_pos - 1L, n, 1 / (1 + gamma))
+      p_upper[i] <- stats::pbinom(n_pos - 1L, n, gamma / (1 + gamma), lower.tail = FALSE)
+      p_lower[i] <- stats::pbinom(n_pos - 1L, n, 1 / (1 + gamma), lower.tail = FALSE)
     }
   } else if (method == "mcnemar") {
     b  <- sum(t_vec == 1 & c_vec == 0)
@@ -350,10 +352,10 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
     n_disc <- b + cc
     for (i in seq_along(gamma_range)) {
       gamma <- gamma_range[i]
-      p_upper[i] <- 1 - stats::pbinom(b - 1L, n_disc,
-                                         gamma / (1 + gamma))
-      p_lower[i] <- 1 - stats::pbinom(b - 1L, n_disc,
-                                         1 / (1 + gamma))
+      p_upper[i] <- stats::pbinom(b - 1L, n_disc,
+                                     gamma / (1 + gamma), lower.tail = FALSE)
+      p_lower[i] <- stats::pbinom(b - 1L, n_disc,
+                                     1 / (1 + gamma), lower.tail = FALSE)
     }
   } else {
     stop("Unknown method: ", method)

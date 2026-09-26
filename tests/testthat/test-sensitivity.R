@@ -368,3 +368,15 @@ test_that("morie_sensitivity_konfound errors when konfound missing", {
     regexp = "konfound"
   )
 })
+
+test_that("rosenbaum_bounds at Gamma = 1 is the signed-rank p-value, zero pairs dropped", {
+  tt <- 0.4 + 0.5 * sin(3 * (0:59) + 1)
+  cc <- rep(0, 60)
+  tt[5] <- 0
+  b <- rosenbaum_bounds(tt, cc, c(1, 2))
+  d <- tt[tt != cc]
+  rk <- rank(abs(d))
+  z <- (sum(rk[d > 0]) - sum(rk) / 2) / sqrt(sum(rk^2) / 4)
+  expect_equal(b$p_upper[1], stats::pnorm(z, lower.tail = FALSE), tolerance = 1e-12)
+  expect_gte(b$p_upper[2], b$p_upper[1])
+})

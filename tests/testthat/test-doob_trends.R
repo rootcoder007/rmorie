@@ -84,3 +84,15 @@ test_that("analyze_doob_full_affidavit assembles 3 sections", {
   expect_true(length(res$tables) >= 1L)
   expect_true(grepl("Affidavit", res$title))
 })
+
+test_that("Pettitt U runs over t = 1..n-1 (U_1 included, no empty U_n)", {
+  ## U_t = sum_{i <= t < j} sign(x_i - x_j); for four 1s then five 5s the
+  ## maximum |U| is at t = 4 (0-based index 3): 4 * 5 = 20
+  r <- pettitt_changepoint(c(1, 1, 1, 1, 5, 5, 5, 5, 5))
+  expect_identical(r$change_point_index, 3L)
+  expect_equal(r$U_max, 20)
+  expect_equal(r$p_value, 2 * exp(-6 * 400 / (9^3 + 9^2)), tolerance = 1e-12)
+  ## a change after the first observation is found (the old loop never saw U_1)
+  r2 <- pettitt_changepoint(c(9, 1, 1, 1, 1, 1))
+  expect_identical(r2$change_point_index, 0L)
+})

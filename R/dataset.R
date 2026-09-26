@@ -420,6 +420,8 @@ morie_dataset_profile_summary_table <- function(profile) {
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
+  # a UTF-8 byte-order mark would stay glued to the first column name
+  if (toupper(encoding) %in% c("UTF-8", "UTF8")) encoding <- "UTF-8-BOM"
   if (!file.exists(path)) {
     stop(sprintf("Dataset file not found: %s", path))
   }

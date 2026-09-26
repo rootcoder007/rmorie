@@ -165,7 +165,8 @@ morie_datasets_arsau_uof_main_records <- function(year = "2024",
     }
     return(utils::read.csv(path,
       stringsAsFactors = FALSE,
-      check.names = FALSE
+      check.names = FALSE,
+      fileEncoding = "UTF-8-BOM"
     ))
   }
   if (is.null(resource_id)) {
@@ -284,7 +285,8 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
     }
     df <- utils::read.csv(path,
       stringsAsFactors = FALSE,
-      check.names = FALSE
+      check.names = FALSE,
+      fileEncoding = "UTF-8-BOM"
     )
     if (!is.null(year) && "OCC_YEAR" %in% names(df)) {
       df <- df[df$OCC_YEAR == as.integer(year), , drop = FALSE]
@@ -378,7 +380,8 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
     }
     return(utils::read.csv(path,
       stringsAsFactors = FALSE,
-      check.names = FALSE
+      check.names = FALSE,
+      fileEncoding = "UTF-8-BOM"
     ))
   }
   if (is.null(resource_id)) {
@@ -1427,7 +1430,8 @@ morie_datasets_ontario_ckan_by_key <- function(dataset_key,
     }
     return(utils::read.csv(path,
       stringsAsFactors = FALSE,
-      check.names = FALSE
+      check.names = FALSE,
+      fileEncoding = "UTF-8-BOM"
     ))
   }
   if (is.null(resource_id)) resource_id <- entry$resource_id

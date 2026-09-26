@@ -370,17 +370,11 @@ pettitt_changepoint <- function(series) {
     ))
   }
   U <- numeric(n)
-  # Mann-Whitney U-like statistic accumulated up to each split-point.
-  # At t=n-1, the b slice is arr[(n+1):n] which is reversed/oob in R
-  # (Python's slice arr[t+1:] returns empty). Guard against this.
+  # U_t for t = 1..n-1 (Pettitt 1979): the first t observations against
+  # the remaining n - t; U[t] holds U_t (the old loop skipped U_1 and
+  # computed an empty U_n)
   for (t in seq_len(n - 1)) {
-    a <- arr[seq_len(t + 1)]
-    if (t + 2 > n) {
-      U[t + 1] <- 0
-      next
-    }
-    b <- arr[(t + 2):n]
-    U[t + 1] <- sum(sign(outer(a, b, "-")))
+    U[t] <- sum(sign(outer(arr[seq_len(t)], arr[(t + 1):n], "-")))
   }
   abs_U <- abs(U)
   # Python's argmax returns the FIRST max; R's which.max does the same.
