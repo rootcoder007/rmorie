@@ -372,8 +372,28 @@ two_way_anova <- function(data, outcome, factor_a, factor_b) {
   data[[factor_b]] <- factor(data[[factor_b]])
   fml <- stats::as.formula(
     sprintf("%s ~ %s * %s", outcome, factor_a, factor_b))
-  fit <- stats::aov(fml, data = data)
-  tab <- as.data.frame(stats::anova(fit))
+  # type II sums of squares (car::Anova): each main effect adjusted for
+  # the other, the interaction for both, from nested least-squares fits
+  rss <- function(f) {
+    m <- stats::lm(f, data = data)
+    c(sum(stats::residuals(m)^2), m$rank)
+  }
+  y <- outcome
+  r_a <- rss(stats::as.formula(sprintf("%s ~ %s", y, factor_a)))
+  r_b <- rss(stats::as.formula(sprintf("%s ~ %s", y, factor_b)))
+  r_ab <- rss(stats::as.formula(sprintf("%s ~ %s + %s", y, factor_a, factor_b)))
+  r_full <- rss(fml)
+  df_res <- nrow(data) - r_full[2]
+  ms_res <- r_full[1] / df_res
+  na <- nlevels(data[[factor_a]]) - 1
+  nb <- nlevels(data[[factor_b]]) - 1
+  ss <- c(r_b[1] - r_ab[1], r_a[1] - r_ab[1], r_ab[1] - r_full[1], r_full[1])
+  dfs <- c(na, nb, r_full[2] - 1 - na - nb, df_res)
+  fv <- c((ss[1:3] / dfs[1:3]) / ms_res, NA)
+  tab <- data.frame(Df = dfs, `Sum Sq` = ss, `Mean Sq` = ss / dfs, `F value` = fv,
+                    `Pr(>F)` = c(stats::pf(fv[1:3], dfs[1:3], df_res, lower.tail = FALSE), NA),
+                    check.names = FALSE,
+                    row.names = c(factor_a, factor_b, sprintf("%s:%s", factor_a, factor_b), "Residuals"))
   interaction_key <- sprintf("%s:%s", factor_a, factor_b)
   f_int <- if (interaction_key %in% rownames(tab)) tab[interaction_key, "F value"] else NA_real_
   p_int <- if (interaction_key %in% rownames(tab)) tab[interaction_key, "Pr(>F)"] else NA_real_
@@ -424,13 +444,21 @@ repeated_measures_anova <- function(data, outcome, subject, within) {
   ms_cond <- if (df_cond > 0) ss_cond / df_cond else 0
   ms_error <- if (df_error > 0) ss_error / df_error else 0
   f_stat <- if (ms_error > 0) ms_cond / ms_error else 0
-  p <- 1 - stats::pf(f_stat, df_cond, df_error)
+  p_unc <- stats::pf(f_stat, df_cond, df_error, lower.tail = FALSE)
+  # Greenhouse-Geisser epsilon from the double-centred covariance of the
+  # conditions: (tr S)^2 / ((k - 1) sum S_ij^2), bounded below by 1/(k-1)
+  S <- stats::cov(mat)
+  D <- S - outer(rowMeans(S), rep(1, k)) - outer(rep(1, k), colMeans(S)) + mean(S)
+  eps <- if (sum(D^2) > 0) sum(diag(D))^2 / ((k - 1) * sum(D^2)) else 1
+  eps <- min(1, max(eps, 1 / (k - 1)))
+  p <- stats::pf(f_stat, eps * df_cond, eps * df_error, lower.tail = FALSE)
   eta2 <- if ((ss_cond + ss_error) > 0) ss_cond / (ss_cond + ss_error) else 0
   .stat_result(
     method = "Repeated-measures ANOVA",
     test_statistic = f_stat, p_value = p,
     df = df_cond, effect_size = eta2, n = n,
-    extra = list(df_error = df_error, ss_cond = ss_cond, ss_error = ss_error)
+    extra = list(df_error = df_error, ss_cond = ss_cond, ss_error = ss_error,
+                 epsilon_gg = eps, p_uncorrected = p_unc)
   )
 }
 
@@ -577,7 +605,7 @@ cochrans_q <- function(...) {
   num <- (k - 1) * (k * sum(cs^2) - T_tot^2)
   denom <- k * T_tot - sum(rs^2)
   q <- if (denom > 0) num / denom else 0
-  p <- 1 - stats::pchisq(q, k - 1)
+  p <- stats::pchisq(q, k - 1, lower.tail = FALSE)
   .stat_result(
     method = "Cochran's Q test",
     test_statistic = q, p_value = p, df = k - 1, n = n
@@ -722,15 +750,17 @@ partial_correlation <- function(x, y, covariates, confidence = 0.95) {
   Z <- Z[seq_len(n), , drop = FALSE]
   res_x <- stats::residuals(stats::lm.fit(cbind(1, Z), x))
   res_y <- stats::residuals(stats::lm.fit(cbind(1, Z), y))
-  ct <- stats::cor.test(res_x, res_y)
-  r <- unname(ct$estimate)
+  r <- stats::cor(res_x, res_y)
+  # t test on n - 2 - p df and Fisher z with n - 3 - p, as ppcor::pcor.test
   df_val <- n - 2 - ncol(Z)
+  t_stat <- r * sqrt(df_val / (1 - r^2))
+  p_val <- if (df_val > 0) 2 * stats::pt(-abs(t_stat), df_val) else NA_real_
   z <- atanh(r)
-  se <- if (df_val > 0) 1 / sqrt(df_val) else Inf
+  se <- if (df_val > 1) 1 / sqrt(df_val - 1) else Inf
   zcrit <- stats::qnorm((1 + confidence) / 2)
   .stat_result(
     method = "Partial correlation",
-    test_statistic = r, p_value = ct$p.value, df = df_val,
+    test_statistic = r, p_value = p_val, df = df_val,
     ci_lower = tanh(z - zcrit * se),
     ci_upper = tanh(z + zcrit * se),
     effect_size = r^2, estimate = r, n = n
@@ -756,11 +786,14 @@ semi_partial_correlation <- function(x, y, covariates) {
   y <- y[seq_len(n)]
   Z <- Z[seq_len(n), , drop = FALSE]
   res_x <- stats::residuals(stats::lm.fit(cbind(1, Z), x))
-  ct <- stats::cor.test(res_x, y)
-  r <- unname(ct$estimate)
+  r <- stats::cor(res_x, y)
+  # t test on n - 2 - p df, as ppcor::spcor.test
+  df_val <- n - 2 - ncol(Z)
+  t_stat <- r * sqrt(df_val / (1 - r^2))
+  p_val <- if (df_val > 0) 2 * stats::pt(-abs(t_stat), df_val) else NA_real_
   .stat_result(
     method = "Semi-partial correlation",
-    test_statistic = r, p_value = ct$p.value,
+    test_statistic = r, p_value = p_val, df = df_val,
     effect_size = r^2, estimate = r, n = n
   )
 }
@@ -1496,16 +1529,43 @@ intraclass_correlation <- function(data, targets, raters, ratings,
     "ICC3"  = (ms_rows - ms_error) / (ms_rows + (k - 1) * ms_error),
     "ICC3k" = if (ms_rows > 0) (ms_rows - ms_error) / ms_rows else 0,
     stop(sprintf("Unknown ICC type: %s", icc_type)))
-  f_stat <- if (ms_error > 0) ms_rows / ms_error else 0
+  # F tests and intervals of Shrout and Fleiss (1979) / McGraw and Wong
+  # (1996), as psych::ICC (95%)
   df1 <- n - 1
-  df2 <- (n - 1) * (k - 1)
-  p_val <- 1 - stats::pf(f_stat, df1, df2)
+  if (icc_type %in% c("ICC1", "ICC1k")) {
+    df2 <- n * (k - 1)
+    f_stat <- if (ms_within > 0) ms_rows / ms_within else 0
+  } else {
+    df2 <- (n - 1) * (k - 1)
+    f_stat <- if (ms_error > 0) ms_rows / ms_error else 0
+  }
+  if (icc_type %in% c("ICC2", "ICC2k")) {
+    i2 <- (ms_rows - ms_error) /
+      (ms_rows + (k - 1) * ms_error + k * (ms_cols - ms_error) / n)
+    fj <- ms_cols / ms_error
+    v <- (k - 1) * (n - 1) * (k * i2 * fj + n * (1 + (k - 1) * i2) - k * i2)^2 /
+      ((n - 1) * k^2 * i2^2 * fj^2 + (n * (1 + (k - 1) * i2) - k * i2)^2)
+    f3u <- stats::qf(0.975, n - 1, v)
+    f3l <- stats::qf(0.975, v, n - 1)
+    ci <- c(n * (ms_rows - f3u * ms_error) /
+              (f3u * (k * ms_cols + (k * n - k - n) * ms_error) + n * ms_rows),
+            n * (f3l * ms_rows - ms_error) /
+              (k * ms_cols + (k * n - k - n) * ms_error + n * f3l * ms_rows))
+    if (icc_type == "ICC2k") ci <- ci * k / (1 + ci * (k - 1))
+  } else {
+    fl <- f_stat / stats::qf(0.975, df1, df2)
+    fu <- f_stat * stats::qf(0.975, df2, df1)
+    ci <- if (icc_type %in% c("ICC1", "ICC3"))
+      c((fl - 1) / (fl + k - 1), (fu - 1) / (fu + k - 1)) else c(1 - 1 / fl, 1 - 1 / fu)
+  }
+  p_val <- stats::pf(f_stat, df1, df2, lower.tail = FALSE)
   .stat_result(
     method = sprintf("Intraclass correlation (%s)", icc_type),
     test_statistic = f_stat, p_value = p_val, df = df1,
+    ci_lower = ci[1], ci_upper = ci[2],
     effect_size = icc, estimate = icc, n = n,
     extra = list(icc_type = icc_type, n_raters = k,
-                 ms_rows = ms_rows, ms_error = ms_error)
+                 ms_rows = ms_rows, ms_error = ms_error, df2 = df2)
   )
 }
 
@@ -1675,10 +1735,11 @@ fleiss_kappa <- function(ratings_matrix) {
   P_bar <- mean(P_i)
   P_e <- sum(p_j^2)
   kap <- if ((1 - P_e) > 0) (P_bar - P_e) / (1 - P_e) else 0
-  se_num <- 2 / (n * N_raters * (N_raters - 1))
-  se_term <- sum(p_j * (1 - p_j))^2
-  denom <- (1 - P_e)^2
-  se <- if (denom > 0) sqrt(se_num * (se_term / denom)) else 0
+  # null SE (Fleiss, Levin and Paik 2003, eq. 18.15), as irr::kappam.fleiss
+  pq <- p_j * (1 - p_j)
+  inner <- sum(pq)^2 - sum(pq * (1 - 2 * p_j))
+  se <- if (sum(pq) > 0 && inner > 0)
+    sqrt(2) / (sum(pq) * sqrt(n * N_raters * (N_raters - 1))) * sqrt(inner) else 0
   z <- if (se > 0) kap / se else 0
   p_val <- 2 * stats::pnorm(-abs(z))
   .stat_result(

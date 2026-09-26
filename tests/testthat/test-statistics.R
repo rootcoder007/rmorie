@@ -522,3 +522,52 @@ test_that("statistics battery matches base R, nortest, irr and psych", {
   expect_equal(chi2_independence(rbind(c(12, 5, 7), c(3, 9, 6), c(8, 4, 10)))$test_statistic,
                8.3659786268481913, tolerance = 1e-12)
 })
+
+test_that("ICC, repeated-measures, Fleiss, partial and two-way ANOVA match psych, car, irr, ppcor", {
+  Y <- rbind(c(9, 2, 5, 8), c(6, 1, 3, 2), c(8, 4, 6, 8), c(7, 1, 2, 6), c(10, 5, 6, 9), c(6, 2, 4, 7))
+  long <- data.frame(t = rep(0:5, each = 4), r = rep(0:3, 6), v = as.vector(t(Y)))
+  # psych::ICC(Y, lmer = FALSE)
+  ty <- c("ICC1", "ICC2", "ICC3", "ICC1k", "ICC2k", "ICC3k")
+  icc <- c(0.16574176840547522, 0.28976377952755894, 0.71484071484071465,
+           0.44279713367926826, 0.62005054759898892, 0.90931554237706935)
+  lo <- c(-0.1329323248747511, 0.018786513374711964, 0.34246476503392492,
+          -0.8844421552381212, 0.071136815302503181, 0.67567471381630428)
+  hi <- c(0.72256006232812087, 0.76108436964895265, 0.94585825995535944,
+          0.9124154203407755, 0.92723204016772187, 0.98589167816906231)
+  for (i in 1:6) {
+    r <- intraclass_correlation(long, "t", "r", "v", ty[i])
+    expect_equal(r$estimate, icc[i], tolerance = 1e-12)
+    expect_equal(r$ci_lower, lo[i], tolerance = 1e-10)
+    expect_equal(r$ci_upper, hi[i], tolerance = 1e-10)
+  }
+  expect_equal(intraclass_correlation(long, "t", "r", "v", "ICC1")$test_statistic, 1.7946784922394667, tolerance = 1e-12)
+  # car::Anova(idata, idesign) univariate test with the GG correction
+  rm <- repeated_measures_anova(long, "v", "t", "r")
+  expect_equal(rm$test_statistic, 31.86648501362399, tolerance = 1e-12)
+  expect_equal(rm$extra$epsilon_gg, 0.68172454459409559, tolerance = 1e-12)
+  expect_equal(rm$p_value, 3.8455263546962374e-05, tolerance = 1e-10)
+  # irr::kappam.fleiss
+  fm <- rbind(c(0, 0, 0, 0, 14), c(0, 2, 6, 4, 2), c(0, 0, 3, 5, 6), c(0, 3, 9, 2, 0),
+              c(2, 2, 8, 1, 1), c(7, 7, 0, 0, 0), c(3, 2, 6, 3, 0), c(2, 5, 3, 2, 2),
+              c(6, 5, 2, 1, 0), c(0, 2, 2, 3, 7))
+  fk <- fleiss_kappa(fm)
+  expect_equal(fk$estimate, 0.20993070442195522, tolerance = 1e-12)
+  expect_equal(fk$test_statistic, 12.374291059190464, tolerance = 1e-12)
+  # ppcor::pcor.test; the semi-partial residualises x, tested on n - 2 - p df
+  x <- c(5.1, 6.3, 4.8, 7.2, 5.9, 6.6, 5.4, 6.0, 5.5, 6.8)
+  y <- c(4.2, 5.0, 3.9, 5.8, 4.4, 4.9, 5.3, 4.1, 4.6, 5.2)
+  z <- cbind(c(6.1, 5.2, 6.9, 7.4, 6.0, 5.8, 7.1, 6.6, 6.2, 6.4),
+             c(1.0, 3.0, 2.0, 5.0, 4.0, 2.5, 3.5, 1.5, 4.5, 3.2))
+  pc <- partial_correlation(x, y, z)
+  expect_equal(pc$estimate, 0.67284450504527471, tolerance = 1e-12)
+  expect_equal(pc$p_value, 0.067465424202641774, tolerance = 1e-10)
+  sp <- semi_partial_correlation(x, y, z)
+  r <- cor(stats::residuals(lm(x ~ z)), y)
+  expect_equal(sp$estimate, r, tolerance = 1e-12)
+  expect_equal(sp$p_value, 2 * pt(-abs(r * sqrt(6 / (1 - r^2))), 6), tolerance = 1e-12)
+  # car::Anova(lm(y ~ a * b), type = 2)
+  d2 <- data.frame(y = c(x, y, z[, 1]), a = c(rep("p", 13), rep("q", 17)), b = rep(c("u", "v", "w"), 10))
+  tw <- two_way_anova(d2, "y", "a", "b")$extra$anova_table
+  expect_equal(tw[["Sum Sq"]], c(0.18116438356164366, 0.18021868220417758, 0.57866894977168926, 25.92916666666666), tolerance = 1e-12)
+  expect_equal(tw[["Pr(>F)"]][1:3], c(0.68580884107275075, 0.92024387320657997, 0.76731111013819064), tolerance = 1e-10)
+})
