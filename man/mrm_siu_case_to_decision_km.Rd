@@ -36,17 +36,20 @@ summary (default \code{5L}).}
 \value{
 A list with elements:
 \itemize{
-\item \code{pooled}: a single-row data.frame with the pooled median,
-mean, IQR, n, n_censored.
+\item \code{pooled}: a single-row data.frame with the pooled KM median,
+restricted mean, quartiles, n, n_censored.
 \item \code{by_service}: per-service data.frame with the same columns.
 }
 }
 \description{
 Computes the gap (in days) between the incident date and the
 Director's decision date for every SIU case, dropping rows where
-either date is missing. Reports per-stratum median + IQR + n.
-Cases without a decision date as of the snapshot are right-censored
-if \code{censor_open_cases = TRUE} (default).
+either date is missing. Cases without a decision date as of the
+snapshot are right-censored if \code{censor_open_cases = TRUE} (default),
+and the per-stratum median, quartiles and mean are Kaplan-Meier
+estimates as \code{survival::survfit}: quantiles by
+\code{quantile.survfit}'s rule and the restricted mean to the last
+follow-up time.
 }
 \details{
 This is the substantive "time-to-outcome" analysis the MA-thesis

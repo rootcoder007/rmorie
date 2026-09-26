@@ -25,7 +25,8 @@ mrm_tps_polygon_moran_per_year(
 }
 \value{
 data.frame with columns \code{year}, \code{n_events},
-\code{moran_I}, \code{global_p_value}.
+\code{moran_I}, \code{global_p_value} (one-sided permutation test of
+positive autocorrelation, as \code{spdep::moran.mc}).
 }
 \description{
 Convenience wrapper that loops \code{mrm_tps_lisa} over a vector

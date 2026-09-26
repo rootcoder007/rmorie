@@ -100,7 +100,8 @@ mrm_tps_levy_scaling <- function(
     ))
   }
   step <- .haversine_km(lat[-n], lon[-n], lat[-1], lon[-1])
-  tail <- step[step >= min_step_km]
+  # Clauset, Shalizi & Newman (2009) MLE on the tail x >= x_min
+  tail <- step[step >= max(min_step_km, x_min)]
   alpha <- if (length(tail) >= 2L) 1 + length(tail) / sum(log(tail / x_min)) else NA_real_
   list(
     n_events = n,
@@ -195,9 +196,21 @@ mrm_tps_moran_clustering <- function(
   num <- 2 * num # rook is symmetric
   W_sum <- 2 * W_sum
   morans_I <- (N / W_sum) * num / sum(z^2)
-  # Approximate z-score under randomisation H0 (E[I] = -1/(N-1))
+  # moments under randomisation, as spdep::moran.test: rook binary
+  # weights give S1 = 2 S0 and S2 = sum_i (2 d_i)^2 with d_i the number
+  # of rook neighbours of cell i
   EI <- -1 / (N - 1)
-  varI <- 2 / (N - 1)^2
+  S0 <- W_sum
+  S1 <- 2 * S0
+  g <- grid_resolution
+  d_i <- outer(seq_len(g), seq_len(g), function(i, j) {
+    (i > 1) + (i < g) + (j > 1) + (j < g)
+  })
+  S2 <- sum((2 * d_i)^2)
+  b2 <- N * sum(z^4) / sum(z^2)^2
+  varI <- (N * ((N^2 - 3 * N + 3) * S1 - N * S2 + 3 * S0^2) -
+    b2 * ((N^2 - N) * S1 - 2 * N * S2 + 6 * S0^2)) /
+    ((N - 1) * (N - 2) * (N - 3) * S0^2) - EI^2
   morans_z <- (morans_I - EI) / sqrt(varI)
 
   # --- DBSCAN ---

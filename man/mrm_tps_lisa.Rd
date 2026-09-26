@@ -29,7 +29,11 @@ mrm_tps_lisa(
 \item{k}{k-NN spatial-weights neighbourhood (default 6).}
 
 \item{n_permutations}{MC permutations (default 999, the
-spatial-statistics convention).}
+spatial-statistics convention).  Local p-values use conditional
+randomization (Anselin 1995): \eqn{z_i} stays fixed and its
+neighbours are drawn from the other \eqn{n - 1} values; the folded
+pseudo p-value is \eqn{(\min(\#\ge, \#\le) + 1) / (R + 1)}, as GeoDa
+and \code{spdep::localmoran_perm}.}
 
 \item{seed}{RNG seed.}
 }

@@ -33,17 +33,17 @@ mrm_tps_kulldorff_scan(
 
 \item{n_permutations}{Monte-Carlo permutations.}
 
-\item{n_top_clusters}{Integer; number of top clusters to return.
-Accepted for Python signature parity. The current implementation
-returns a single primary cluster (the secondary-cluster loop in
-\code{morie.mrm_kulldorff.py} \code{break}s out pending a proper
-mask-and-rescan rewrite); values >1 are reserved for that
-future TRUE multi-cluster mode.}
+\item{n_top_clusters}{Integer; maximum number of clusters to return,
+by descending LRT with no centre within the radius of a
+higher-LRT cluster.  Each p-value compares its LRT with the
+permutation null of the maximum LRT (SaTScan's rule).}
 
 \item{seed}{Random seed.}
 }
 \value{
-A one-row data.frame describing the top cluster, with
+A data.frame with one row per cluster (expected count
+\eqn{n_{space} n_{time} / n}, the space-time permutation
+expectation), with
 columns \code{center_lat}, \code{center_lon}, \code{radius_km},
 \code{t_start}, \code{t_end}, \code{n_observed}, \code{n_expected},
 \code{relative_risk}, \code{log_lrt}, \code{p_value}.
