@@ -706,6 +706,9 @@ assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
 #' @param n_bootstrap Bootstrap reps for AUC CI.
 #' @param confidence Confidence level.
 #' @param random_state Seed.
+#' @param ci_method "delong" (default): AUC +/- z SE with the DeLong,
+#'   DeLong and Clarke-Pearson (1988) variance, as pROC::ci.auc;
+#'   "bootstrap": percentile bootstrap.
 #' @return An object of class \code{"class_name"}.
 #' @examples
 #' set.seed(1)
@@ -718,20 +721,36 @@ assess_calibration <- function(y_true, y_pred, n_groups = 10L) {
 assess_discrimination <- function(y_true, y_pred, y_pred_ref = NULL,
                                    n_bootstrap = 1000L,
                                    confidence = 0.95,
-                                   random_state = 42L) {
+                                   random_state = 42L,
+                                   ci_method = c("delong", "bootstrap")) {
+  ci_method <- match.arg(ci_method)
   y_true <- as.integer(y_true)
   y_pred <- as.numeric(y_pred)
   auroc <- .val_auc(y_true, y_pred)
-  .rmorie_local_seed(random_state)
-  boots <- numeric(0)
-  for (.i in seq_len(n_bootstrap)) {
-    idx <- sample.int(length(y_true), length(y_true), replace = TRUE)
-    if (length(unique(y_true[idx])) < 2L) next
-    boots <- c(boots, .val_auc(y_true[idx], y_pred[idx]))
-  }
   alpha <- (1 - confidence) / 2
-  ci_lo <- stats::quantile(boots, alpha, names = FALSE, na.rm = TRUE)
-  ci_hi <- stats::quantile(boots, 1 - alpha, names = FALSE, na.rm = TRUE)
+  if (ci_method == "delong") {
+    # DeLong, DeLong and Clarke-Pearson (1988) variance from the structural
+    # components; AUC +/- z SE clipped to [0, 1], as pROC::ci.auc
+    pos <- y_pred[y_true == 1L]
+    neg <- y_pred[y_true == 0L]
+    psi <- outer(pos, neg, function(a, b) (a > b) + 0.5 * (a == b))
+    v10 <- rowMeans(psi)
+    v01 <- colMeans(psi)
+    se <- sqrt(stats::var(v10) / length(pos) + stats::var(v01) / length(neg))
+    z <- stats::qnorm(1 - alpha)
+    ci_lo <- max(0, auroc - z * se)
+    ci_hi <- min(1, auroc + z * se)
+  } else {
+    .rmorie_local_seed(random_state)
+    boots <- numeric(0)
+    for (.i in seq_len(n_bootstrap)) {
+      idx <- sample.int(length(y_true), length(y_true), replace = TRUE)
+      if (length(unique(y_true[idx])) < 2L) next
+      boots <- c(boots, .val_auc(y_true[idx], y_pred[idx]))
+    }
+    ci_lo <- stats::quantile(boots, alpha, names = FALSE, na.rm = TRUE)
+    ci_hi <- stats::quantile(boots, 1 - alpha, names = FALSE, na.rm = TRUE)
+  }
   somers <- 2 * (auroc - 0.5)
   ev <- y_true == 1L
   disc_slope <- mean(y_pred[ev]) - mean(y_pred[!ev])

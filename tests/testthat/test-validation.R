@@ -407,3 +407,13 @@ test_that("create_reproducibility_manifest returns expected fields", {
     expect_true(!is.null(mf[[k]]))
   }
 })
+test_that("the AUC interval is DeLong's, as pROC::ci.auc", {
+  y <- c(1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1)
+  p <- c(0.8, 0.3, 0.6, 0.9, 0.4, 0.2, 0.55, 0.6, 0.7, 0.1, 0.35, 0.45, 0.8, 0.5, 0.65,
+         0.25, 0.3, 0.15, 0.75, 0.4)
+  r <- assess_discrimination(y, p)
+  expect_equal(r$auroc, 0.94, tolerance = 1e-14)
+  expect_equal(r$auroc_ci_lower, 0.84577665807570845, tolerance = 1e-12)
+  expect_equal(r$auroc_ci_upper, 1)
+  expect_true(is.finite(assess_discrimination(y, p, ci_method = "bootstrap", n_bootstrap = 50L)$auroc_ci_lower))
+})
