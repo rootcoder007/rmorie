@@ -164,9 +164,6 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
 #' Internal helper: Morie Rdd Have Rdrobust
 #' @noRd
 .morie_rdd_have_rdrobust  <- function() requireNamespace("rdrobust",  quietly = TRUE)
-#' Internal helper: Morie Rdd Have Rddensity
-#' @noRd
-.morie_rdd_have_rddensity <- function() requireNamespace("rddensity", quietly = TRUE)
 
 
 # ---------------------------------------------------------------------------
@@ -615,15 +612,142 @@ morie_rdd_mccrary <- function(x, cutoff = 0, n_bins = 50,
 morie_rdd_cattaneo_density <- function(x, cutoff = 0, p = 2,
                                        kernel = "triangular",
                                        bandwidth = NULL) {
-  if (.morie_rdd_have_rddensity()) {
-    fit <- rddensity::rddensity(x, c = cutoff, p = p, kernel = kernel,
-                                h = bandwidth)
-    return(list(statistic = fit$test$t_jk,
-                p_value   = fit$test$p_jk,
-                name = "Cattaneo-Jansson-Ma (rddensity extender)",
-                details = list(fit = fit)))
+  q <- p + 1
+  xs <- sort(as.numeric(x)) - cutoff
+  N <- length(xs)
+  ec <- .cjm_ecdf(xs)
+  if (is.null(bandwidth)) {
+    hh <- .cjm_bandwidth(xs, ec$Y, ec$mass, p, kernel)
+  } else {
+    hh <- c(bandwidth, bandwidth)
   }
-  morie_rdd_mccrary(x, cutoff, bandwidth = bandwidth)
+  idx <- which(xs >= -hh[1] & xs <= hh[2])
+  fv <- .cjm_fv(ec$Y[idx], xs[idx], N, hh[1], hh[2], q, 1, kernel, ec$mass)
+  t_jk <- fv$hat[3] / sqrt(fv$jk[3])
+  list(statistic = t_jk,
+       p_value = 2 * stats::pnorm(-abs(t_jk)),
+       name = "Cattaneo-Jansson-Ma (rmorie native)",
+       details = list(f_left = fv$hat[1], f_right = fv$hat[2],
+                      h_left = hh[1], h_right = hh[2], q = q))
+}
+
+#' Empirical CDF at sorted points, ties at their last member (rddensity)
+#' @noRd
+.cjm_ecdf <- function(xs) {
+  N <- length(xs)
+  Y <- (0:(N - 1)) / (N - 1)
+  last <- rev(!duplicated(rev(xs)))
+  mass <- anyDuplicated(xs) > 0
+  if (mass) {
+    li <- cumsum(last)
+    pos <- which(last)
+    Y <- Y[pos[match(xs, xs[pos])]]
+  }
+  list(Y = Y, mass = mass)
+}
+
+#' rddensity:::rddensity_fV, unrestricted fit with jackknife variance
+#' @noRd
+.cjm_fv <- function(Yh, Xh, N, hl, hr, p, s_der, kernel, mass) {
+  Nh <- length(Xh)
+  kc <- 2 * p + 2
+  hv <- ifelse(Xh < 0, hl, hr)
+  u <- Xh / hv
+  W <- switch(kernel, uniform = 1 / (2 * hv),
+              epanechnikov = 0.75 * (1 - u^2) / hv, (1 - abs(u)) / hv)
+  Xp <- matrix(0, Nh, kc)
+  Hp <- numeric(kc)
+  for (j in seq_len(kc)) {
+    if (j %% 2) {
+      Xp[Xh < 0, j] <- (Xh[Xh < 0] / hl)^((j - 1) / 2)
+      Hp[j] <- hl^((j - 1) / 2)
+    } else {
+      Xp[Xh >= 0, j] <- (Xh[Xh >= 0] / hr)^((j - 2) / 2)
+      Hp[j] <- hr^((j - 2) / 2)
+    }
+  }
+  XpW <- Xp * W
+  Sinv <- solve(crossprod(XpW, Xp))
+  beta <- as.numeric(Sinv %*% crossprod(XpW, Yh)) / Hp
+  L <- matrix(0, Nh, kc)
+  for (jj in seq_len(kc)) {
+    L[, jj] <- (cumsum(c(0, XpW[Nh:1, jj])) / (N - 1))[Nh:1]
+  }
+  if (mass) {
+    first <- match(Xh, Xh)
+    L <- L[first, , drop = FALSE]
+  }
+  V <- (Sinv %*% crossprod(L) %*% Sinv) / outer(Hp, Hp)
+  list(hat = c(beta[3], beta[4], beta[4] - beta[3], beta[4] + beta[3]),
+       jk = c(V[3, 3], V[4, 4], V[3, 3] + V[4, 4] - 2 * V[3, 4],
+              V[3, 3] + V[4, 4] + 2 * V[3, 4]),
+       s = c(beta[2 * s_der + 1], beta[2 * s_der + 2]))
+}
+
+#' rddensity's default bandwidths (rdbwdensity, "comb" rule)
+#' @noRd
+.cjm_bandwidth <- function(xs, Y, mass, p, kernel) {
+  N <- length(xs)
+  Nl <- sum(xs < 0)
+  Nr <- N - Nl
+  z <- mean(xs) / stats::sd(xs)
+  herm <- function(z, k) {
+    if (k == 0) return(1)
+    h0 <- 1
+    h1 <- z
+    if (k > 1) for (n_ in 1:(k - 1)) {
+      h2 <- z * h1 - n_ * h0
+      h0 <- h1
+      h1 <- h2
+    }
+    h1
+  }
+  Cb <- c(25884.4444444942, 3430865.45512362, 845007948.042626, 330631733667.038,
+          187774809656037, 145729502641999264, 1.4601350297445e+20)
+  Cc <- c(4.80000000000002, 548.571428571555, 100800.000000204, 29558225.4581006,
+          12896196859.6126, 7890871468221.61, 6467911284037581)
+  fhatb <- 1 / (herm(z, p + 2)^2 * stats::dnorm(z))
+  fhatc <- 1 / (herm(z, p)^2 * stats::dnorm(z))
+  sdx <- stats::sd(xs)
+  bn <- ((2 * p + 1) / 4 * fhatb * Cb[p] / N)^(1 / (2 * p + 5)) * sdx
+  cn <- (1 / (2 * p) * fhatc * Cc[p] / N)^(1 / (2 * p + 1)) * sdx
+  uq <- sort(unique(xs))
+  absl <- sort(abs(xs[xs < 0]))
+  rr <- xs[xs >= 0]
+  absl_u <- sort(abs(uq[uq < 0]))
+  rr_u <- uq[uq >= 0]
+  maxabs <- max(abs(uq[1]), abs(uq[length(uq)]))
+  bn <- min(bn, maxabs)
+  cn <- min(cn, maxabs)
+  kb <- 20 + p + 2 + 1
+  kc <- 20 + p + 1
+  bn <- max(bn, absl[min(kb, Nl)], rr[min(kb, Nr)], absl_u[min(kb, length(absl_u))], rr_u[min(kb, length(rr_u))])
+  cn <- max(cn, absl[min(kc, Nl)], rr[min(kc, Nr)], absl_u[min(kc, length(absl_u))], rr_u[min(kc, length(rr_u))])
+  ib <- which(abs(xs) <= bn)
+  ic <- which(abs(xs) <= cn)
+  fb <- .cjm_fv(Y[ib], xs[ib], N, bn, bn, p + 2, p + 1, kernel, mass)
+  fc <- .cjm_fv(Y[ic], xs[ic], N, cn, cn, p, 1, kernel, mass)
+  vv <- N * cn * fc$jk
+  mom <- function(m) switch(kernel, uniform = 0.5 / (m + 1),
+                            epanechnikov = 0.75 * (1 / (m + 1) - 1 / (m + 3)),
+                            1 / (m + 1) - 1 / (m + 2))
+  Sm <- outer(0:p, 0:p, function(i, j) mom(i + j))
+  Cm <- vapply(0:p, function(i) mom(i + p + 1), numeric(1))
+  sc <- solve(Sm, Cm)[2]
+  bl <- fb$s[1] * sc * (-1)^p
+  br <- fb$s[2] * sc
+  b2 <- c(bl^2, br^2, (br - bl)^2, (br + bl)^2)
+  hn <- ifelse(vv >= 0 & b2 > 0, (1 / (2 * p) * vv / b2 / N)^(1 / (2 * p + 1)), 0)
+  hn[1] <- min(hn[1], abs(uq[1]))
+  hn[2] <- min(hn[2], uq[length(uq)])
+  hn[3] <- min(hn[3], maxabs)
+  hn[4] <- min(hn[4], maxabs)
+  k <- 20 + p + 1
+  for (mins in list(c(absl[min(Nl, k)], rr[min(Nr, k)]),
+                    c(absl_u[min(length(absl_u), k)], rr_u[min(length(rr_u), k)]))) {
+    hn <- c(max(hn[1], mins[1]), max(hn[2], mins[2]), max(hn[3], mins), max(hn[4], mins))
+  }
+  c(stats::median(c(hn[1], hn[3], hn[4])), stats::median(c(hn[2], hn[3], hn[4])))
 }
 
 

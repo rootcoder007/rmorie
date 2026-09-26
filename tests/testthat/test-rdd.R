@@ -319,3 +319,18 @@ test_that("default bandwidths are rdrobust's mserd and results equal rdrobust()"
   bc <- morie_rdd_bias_corrected(d, "y", "x")
   expect_equal(c(bc$estimate, bc$std_error), c(1.31362793469, 0.0921089745395), tolerance = 1e-9)
 })
+
+test_that("the density test equals rddensity (t_jk and its bandwidths)", {
+  i <- 0:399
+  x <- sin(1.37 * i) * 1.2 + 0.4 * cos(0.21 * i)
+  # rddensity::rddensity(x, c = 0, h = 0.5); rddensity(x); rddensity(x, p = 1)
+  expect_equal(morie_rdd_cattaneo_density(x, bandwidth = 0.5)$statistic, -0.424998995462388, tolerance = 1e-10)
+  r <- morie_rdd_cattaneo_density(x)
+  expect_equal(c(r$statistic, r$details$h_left, r$details$h_right),
+               c(-0.328188049213095, 0.566842258247533, 0.536752772079201), tolerance = 1e-9)
+  r <- morie_rdd_cattaneo_density(x, p = 1)
+  expect_equal(c(r$statistic, r$details$h_left), c(0.829783793810616, 0.240307416380212), tolerance = 1e-9)
+  # mass points: rddensity(round(x, 1)) and rddensity(round(x, 1), h = 0.6)
+  expect_equal(morie_rdd_cattaneo_density(round(x, 1))$statistic, 0.317121592199131, tolerance = 1e-9)
+  expect_equal(morie_rdd_cattaneo_density(round(x, 1), bandwidth = 0.6)$statistic, -0.746116220795682, tolerance = 1e-9)
+})
