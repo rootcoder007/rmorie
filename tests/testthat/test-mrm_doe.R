@@ -94,3 +94,13 @@ test_that("mrm_fractional_factorial runs on a 2^(k-p) design", {
   }
   expect_type(out, "list")
 })
+
+test_that("mrm_rcbd equals anova(lm()) on an unbalanced layout", {
+  d <- expand.grid(block = paste0("b", 1:5), trt = paste0("t", 1:4))
+  d$y <- sin(1:20 * 1.3) + as.integer(d$trt) * 0.4 + as.integer(d$block) * 0.2
+  d <- d[-3, ]
+  r <- mrm_rcbd(d, "y", "trt", "block")
+  p <- r$anova[[grep("^Pr|p_value", names(r$anova), value = TRUE)[1]]]
+  expect_equal(p[1:2], c(2.7041850005459e-06, 1.90660263699952e-05),
+               tolerance = 1e-10)
+})
