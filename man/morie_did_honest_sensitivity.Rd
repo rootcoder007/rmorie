@@ -26,21 +26,26 @@ to bound (default \code{0}, the onset period).}
 }
 \value{
 A data frame with columns \code{m_bar}, \code{estimate},
-\code{ci_lower}, \code{ci_upper}, \code{covers_zero}, plus a
-\code{breakdown_m_bar} attribute (the smallest evaluated
-\eqn{\bar M}{M-bar} whose interval covers zero).
+\code{id_lower}, \code{id_upper}, \code{ci_lower},
+\code{ci_upper}, \code{covers_zero}, plus \code{breakdown_m_bar}
+(the smallest evaluated \eqn{\bar M}{M-bar} whose interval covers
+zero) and \code{max_pre_deviation} (the largest consecutive
+pre-period change) attributes.
 }
 \description{
-Conservative Rambachan-Roth (2023) relative-magnitudes bounds on an
-event-study coefficient: the post-treatment bias from a
-parallel-trends violation is bounded by
-\eqn{\bar M}{M-bar} times the largest observed pre-treatment
-deviation, and the confidence interval is widened by that bound.
-\eqn{\bar M = 0}{M-bar = 0} reproduces the conventional CI;
-\eqn{\bar M = 1}{M-bar = 1} allows post-treatment violations as
-large as the worst pre-trend. This is the conservative (fixed-bias)
-version of the relative-magnitudes parameterization, anchored on
-the estimated pre-period coefficients.
+Rambachan-Roth (2023) relative-magnitudes sensitivity for an
+event-study coefficient. Under \eqn{\Delta^{RM}(\bar M)}{Delta-RM(M-bar)}
+every post-period change in the trend violation is at most
+\eqn{\bar M}{M-bar} times the largest change between consecutive
+pre-periods (the reference period counts as zero), so the violation
+at the target lies within \eqn{k \bar M m}{k M-bar m} of the last
+pre-period, \eqn{k} steps later. \code{id_lower} / \code{id_upper}
+are that identified set evaluated at the estimated coefficients
+(equal to HonestDiD's \code{.compute_IDset_DeltaRM}); the interval
+widens it by \eqn{z}{z} standard errors of the target coefficient, a
+plug-in band that treats the pre-period changes as known (it is not
+HonestDiD's conditional / hybrid ARP interval).
+\eqn{\bar M = 0}{M-bar = 0} reproduces the conventional CI.
 }
 \examples{
 if (requireNamespace("cobalt", quietly = TRUE)) {

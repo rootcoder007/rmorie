@@ -29,7 +29,11 @@ A data frame with \code{group}, \code{estimate},
 Mirrors the canonical aggregation schemes (overall ATT, by-cohort,
 by-calendar-time, by-event-time) and produces a tidy
 \code{data.frame} consumed by the rmorie / MRM downstream
-pipelines.
+pipelines. When \code{gt_results} is the unmodified output of
+\code{\link{morie_did_group_time_att}}, the aggregation uses its
+influence functions and reproduces \code{did::aggte} (simple, group,
+dynamic and calendar types), including the estimated-weight term;
+otherwise cells are combined as independent estimates.
 }
 \examples{
 gt <- data.frame(

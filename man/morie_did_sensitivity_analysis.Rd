@@ -42,12 +42,12 @@ A data frame with columns \code{delta}, \code{ci_lower},
 For each \eqn{\delta}{delta}, computes a bias-adjusted confidence
 set under the bound
 \eqn{|\mathrm{bias}| \le \delta \hat\sigma}{|bias| <= delta hatsigma}
-(Rambachan & Roth, 2023, conservative version).
+-- a fixed-bias band in the spirit of Rambachan & Roth (2023); a
+2x2 design has no pre-periods to calibrate their sets.
 }
 \details{
-For a relative-magnitudes bound anchored on observed event-study
-pre-trends (Rambachan & Roth's \eqn{\bar M}{M-bar}
-parameterization, conservative version) see
+For their relative-magnitudes set
+\eqn{\Delta^{RM}(\bar M)}{Delta-RM(M-bar)} on an event study see
 \code{\link{morie_did_honest_sensitivity}}.
 }
 \examples{
