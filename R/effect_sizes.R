@@ -876,7 +876,7 @@ fixed_effects_meta <- function(estimates, standard_errors,
   z <- qnorm((1 + confidence) / 2)
   q <- sum(w * (theta - pooled)^2)
   k <- length(theta)
-  p_q <- if (k > 1) 1 - pchisq(q, k - 1) else 1
+  p_q <- if (k > 1) pchisq(q, k - 1, lower.tail = FALSE) else 1
   effect_size_result("Fixed-effects meta-analysis", pooled,
     pooled - z * pooled_se, pooled + z * pooled_se,
     pooled_se, k,
@@ -942,7 +942,7 @@ random_effects_meta <- function(estimates, standard_errors,
     extra = list(
       tau_squared = tau2, tau = sqrt(tau2),
       I_squared = i2, Q = Q,
-      Q_p_value = if (k > 1) 1 - pchisq(Q, k - 1) else 1,
+      Q_p_value = if (k > 1) pchisq(Q, k - 1, lower.tail = FALSE) else 1,
       prediction_interval_lower = pooled - t_crit * pred_se,
       prediction_interval_upper = pooled + t_crit * pred_se
     )

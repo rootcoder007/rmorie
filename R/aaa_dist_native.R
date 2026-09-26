@@ -509,9 +509,15 @@ Dgamma <- function(x, shape, rate = 1, log = FALSE) {
 #' @keywords internal
 Pgamma <- function(q, shape, rate = 1, lower_tail = TRUE) {
   p <- vapply(q, function(v) {
-    if (v <= 0) 0 else .morie_gammainc_p(shape, rate * v)
+    if (v <= 0) {
+      if (lower_tail) 0 else 1
+    } else if (lower_tail) {
+      .morie_gammainc_p(shape, rate * v)
+    } else {
+      .morie_gammainc_q(shape, rate * v)
+    }
   }, numeric(1))
-  if (lower_tail) p else 1 - p
+  p
 }
 
 #' Qgamma

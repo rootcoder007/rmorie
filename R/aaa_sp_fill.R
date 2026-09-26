@@ -350,7 +350,7 @@
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .morie_spx_p2(z = y)
 #' res
-.morie_spx_p2 <- function(z) 2 * (1 - pnorm(abs(z)))
+.morie_spx_p2 <- function(z) 2 * pnorm(abs(z), lower.tail = FALSE)
 
 #' .morie_spx_chkw
 #'

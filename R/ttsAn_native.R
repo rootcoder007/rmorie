@@ -54,22 +54,10 @@
 #' @examples
 #' morie_t_quantile(p = 0.5, v = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_t_quantile <- function(p, v) {
+  ## R's qt is the reference; the old bisection inverted 1 - p and lost
+  ## every digit of a small p
   if (!(p > 0 && p < 1)) stop("p in (0,1) required")
-  if (p == 0.5) return(0)
-  neg <- p < 0.5
-  pp <- if (neg) 1 - p else p
-  lo <- 0
-  hi <- 1
-  while (.mor_tts_t_cdf(hi, v) < pp) {
-    hi <- hi * 2
-    if (hi > 1e300) break
-  }
-  for (it in seq_len(200L)) {
-    mid <- 0.5 * (lo + hi)
-    if (.mor_tts_t_cdf(mid, v) < pp) lo <- mid else hi <- mid
-  }
-  q <- 0.5 * (lo + hi)
-  if (neg) -q else q
+  stats::qt(p, v)
 }
 
 #' .mor_tts_median

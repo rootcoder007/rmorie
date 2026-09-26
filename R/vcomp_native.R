@@ -36,23 +36,10 @@
 #' @return A numeric value.
 #' @export
 .vcomp_f_ppf <- function(p, d1, d2, iters = 300) {
-  # monotone bisection on the CDF (same convention as the R arm)
+  ## R's qf is the reference (the bisection lost digits near p = 1)
   if (p <= 0.0) return(0.0)
   if (p >= 1.0) return(Inf)
-  lo <- 0.0
-  hi <- 1.0
-  while (.vcomp_f_cdf(hi, d1, d2) < p && hi < 1e12) {
-    hi <- hi * 2.0
-  }
-  for (i in seq_len(iters)) {
-    mid <- 0.5 * (lo + hi)
-    if (.vcomp_f_cdf(mid, d1, d2) < p) {
-      lo <- mid
-    } else {
-      hi <- mid
-    }
-  }
-  return(0.5 * (lo + hi))
+  stats::qf(p, d1, d2)
 }
 
 #' morie_vcomp

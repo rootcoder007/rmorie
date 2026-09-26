@@ -373,8 +373,11 @@
   if (z == 0) {
     return(0.5)
   }
-  p <- .w3_gammp(0.5, 0.5 * z * z)
-  if (z > 0) 0.5 * (1 + p) else 0.5 * (1 - p)
+  if (z > 0) {
+    return(0.5 * (1 + .w3_gammp(0.5, 0.5 * z * z)))
+  }
+  ## the lower tail as 0.5 Q(1/2, z^2/2): 0.5 (1 - P) cancels to 0
+  0.5 * .w3_gammq(0.5, 0.5 * z * z)
 }
 
 #' .w3_npdf

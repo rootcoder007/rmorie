@@ -48,7 +48,7 @@ morie_btcalib <- function(x, alpha = 0.05, B = 1000, seed = 0) {
     if (sb <= 0) sb <- 1e-300
     t_ <- sqn * (mb - that) / sb
     tstars[b] <- abs(t_)
-    betas[b] <- 1 - pnorm(abs(t_))
+    betas[b] <- pnorm(abs(t_), lower.tail = FALSE)
   }
   sb_ <- sort(betas)
   idx <- max(min(ceiling(2 * a * B), B), 1)

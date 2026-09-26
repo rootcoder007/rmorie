@@ -447,7 +447,7 @@ decoupling_test <- function(crime_series, imprisonment_series,
     p <- 0
   } else {
     z <- 0.5 * log((1 + r_pearson) / (1 - r_pearson))
-    p <- 2 * (1 - pnorm(abs(z) * sqrt(n - 3)))
+    p <- 2 * pnorm(abs(z) * sqrt(n - 3), lower.tail = FALSE)
   }
   pcp_crime <- pettitt_changepoint(crime)
   pcp_imp <- pettitt_changepoint(imp)

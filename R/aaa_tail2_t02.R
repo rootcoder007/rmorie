@@ -61,7 +61,7 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
   se <- sqrt(1 / aa + 1 / bb + 1 / cc + 1 / dd)
   zq <- qnorm(0.5 + 0.5 * conf_level)
   z <- log_or / se
-  p <- 2 * (1 - pnorm(abs(z)))
+  p <- 2 * pnorm(abs(z), lower.tail = FALSE)
   list(
     estimate = est, log_estimate = log_or, se_log = se,
     ci_lower = exp(log_or - zq * se), ci_upper = exp(log_or + zq * se),
@@ -538,7 +538,7 @@ GrubbsT <- function(x, alpha = 0.05, opposite = FALSE) {
   } else {
     s <- (g * g * n * (2 - n)) / den
     if (s < 0) s <- 0
-    p <- n * (1 - pt(sqrt(s), n - 2))
+    p <- n * pt(sqrt(s), n - 2, lower.tail = FALSE)
     if (p > 1) p <- 1
     if (p < 0) p <- 0
   }

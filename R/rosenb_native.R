@@ -45,7 +45,7 @@
   sd_m <- sqrt(pm * (1 - pm) * sq2)
   z_up <- if (sd_p > 0) (W - mu_p) / sd_p else NaN
   z_lo <- if (sd_m > 0) (W - mu_m) / sd_m else NaN
-  list(p_upper = 1 - pnorm(z_up), p_lower = 1 - pnorm(z_lo), W = W,
+  list(p_upper = pnorm(z_up, lower.tail = FALSE), p_lower = pnorm(z_lo, lower.tail = FALSE), W = W,
        mu_plus = mu_p, sigma_plus = sd_p, z_upper = z_up, n_pairs = n,
        Gamma = G)
 }
