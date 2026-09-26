@@ -23,15 +23,15 @@ morie_did_test_parallel_trends(
 
 \item{time}{Time column (integer-valued).}
 
-\item{unit}{Optional unit identifier (currently unused; reserved).}
+\item{unit}{Optional unit identifier; the default cluster.}
 
 \item{cluster}{Cluster variable for robust SE.}
 
 \item{pre_periods}{Optional explicit list of pre-treatment times.}
 }
 \value{
-A list with \code{coefficients}, \code{joint_chi2} (and
-its alias \code{joint_f_stat}), \code{joint_df},
+A list with \code{coefficients}, \code{joint_f_stat} (the Wald
+F with the full covariance), \code{joint_chi2} (\code{q F}), \code{joint_df},
 \code{joint_p_value}, \code{parallel_trends_plausible}.
 }
 \description{

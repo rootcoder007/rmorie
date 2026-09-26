@@ -27,7 +27,8 @@ linear). 2 picks up quadratic curvature for bias correction.}
 \code{"uniform"}, or \code{"gaussian"}.}
 
 \item{bandwidth}{Numeric; the local-polynomial bandwidth on each
-side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+side of the cutoff. \code{NULL} invokes the MSE-optimal selector of
+rdrobust (\code{morie_rd_mserd_bandwidth}).}
 }
 \value{
 A named \code{list} (see Details).

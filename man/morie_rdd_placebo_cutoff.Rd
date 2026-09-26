@@ -32,7 +32,8 @@ robustness re-runs the analysis at \code{placebo_cutoffs}).}
 \item{placebo_cutoffs}{Numeric vector of false cutoffs to test.}
 
 \item{bandwidth}{Numeric; the local-polynomial bandwidth on each
-side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+side of the cutoff. \code{NULL} invokes the MSE-optimal selector of
+rdrobust (\code{morie_rd_mserd_bandwidth}).}
 
 \item{p}{Integer; local-polynomial order (default 1 for local-
 linear). 2 picks up quadratic curvature for bias correction.}

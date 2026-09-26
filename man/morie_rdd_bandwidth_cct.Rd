@@ -2,9 +2,18 @@
 % Please edit documentation in R/rdd.R
 \name{morie_rdd_bandwidth_cct}
 \alias{morie_rdd_bandwidth_cct}
-\title{Calonico-Cattaneo-Titiunik MSE-optimal bandwidth}
+\title{MSE-optimal RD bandwidth (Calonico, Cattaneo and Farrell 2020)}
 \usage{
-morie_rdd_bandwidth_cct(x, y, cutoff = 0, kernel = "triangular", p = 1)
+morie_rdd_bandwidth_cct(
+  x,
+  y,
+  cutoff = 0,
+  kernel = "triangular",
+  p = 1,
+  deriv = 0,
+  treatment = NULL,
+  vce = "nn"
+)
 }
 \arguments{
 \item{x, y}{The running variable and the outcome.}
@@ -12,24 +21,26 @@ morie_rdd_bandwidth_cct(x, y, cutoff = 0, kernel = "triangular", p = 1)
 \item{cutoff}{The threshold.}
 
 \item{kernel}{One of \code{"triangular"}, \code{"epanechnikov"},
-\code{"uniform"}, \code{"gaussian"}.}
+\code{"uniform"}.}
 
 \item{p}{Polynomial order for the local fit.}
+
+\item{deriv}{Derivative of the regression function (1 for a kink).}
+
+\item{treatment}{Optional treatment received, for fuzzy designs.}
+
+\item{vce}{\code{"nn"} (default) or \code{"hc0"}-\code{"hc3"}.}
 }
 \value{
 A named list with \code{bandwidth}, \code{method} and
-\code{details} carrying \code{h_mse}, \code{h_cer},
-\code{bias_sq} and \code{variance}.
+\code{details} carrying \code{h_mse}, \code{b_mse} and \code{h_cer}.
 }
 \description{
-The IK bandwidth is used as the pilot; the curvature difference
-across the cutoff gives the squared bias and the two one-sided
-intercept variances give the variance, and the MSE-optimal rule
-balances them. The polynomial order \code{p} enters everywhere --
-the curvature is read off the order \code{p + 1} fit and the rate is
-\eqn{n^{-1/(2p+3)}} -- which is why the previous implementation,
-delegating to IK and discarding \code{p}, could not answer for any
-order but the one IK assumes.
+The common MSE-optimal bandwidths of \code{rdrobust::rdbwselect(bwselect
+= "mserd")}: \code{h} for the order-p estimate of the deriv-th derivative
+jump (fuzzy with \code{treatment}) and, in \code{details}, \code{b_mse}
+for its bias correction and the CER-optimal \code{h_cer =
+h N^(-p/((3+p)(3+2p)))}.
 }
 \examples{
 set.seed(1)

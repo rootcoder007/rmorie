@@ -18,7 +18,8 @@ bandwidth selectors + density tests that don't take a
 and binned-plot reductions.}
 
 \item{bandwidth}{Numeric; the local-polynomial bandwidth on each
-side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+side of the cutoff. \code{NULL} invokes the MSE-optimal selector of
+rdrobust (\code{morie_rd_mserd_bandwidth}).}
 }
 \value{
 A named \code{list} (see Details).

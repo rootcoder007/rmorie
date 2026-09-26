@@ -26,7 +26,8 @@ variable (fuzzy designs).}
 \code{0} (the canonical normalisation).}
 
 \item{bandwidth}{Numeric; the local-polynomial bandwidth on each
-side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+side of the cutoff. \code{NULL} invokes the MSE-optimal selector of
+rdrobust (\code{morie_rd_mserd_bandwidth}).}
 
 \item{p}{Integer; local-polynomial order (default 1 for local-
 linear). 2 picks up quadratic curvature for bias correction.}
@@ -36,8 +37,10 @@ linear). 2 picks up quadratic curvature for bias correction.}
 
 \item{alpha}{Significance level (default \code{0.05}).}
 
-\item{rho}{Bandwidth ratio for bias correction (Calonico, Cattaneo
-& Titiunik 2014); default \code{1} (same bandwidth).}
+\item{rho}{Bandwidth ratio h/b for bias correction (Calonico, Cattaneo
+& Titiunik 2014). \code{NULL} (default): b is the MSE-optimal bias
+bandwidth when no bandwidth is given and b = h when one is, as
+rdrobust.}
 
 \item{donut}{Numeric; symmetric window around the cutoff to drop
 in a donut-RDD robustness check (default \code{0}).}

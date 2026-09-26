@@ -28,7 +28,8 @@ at the cutoff is checked.}
 \code{0} (the canonical normalisation).}
 
 \item{bandwidth}{Numeric; the local-polynomial bandwidth on each
-side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+side of the cutoff. \code{NULL} invokes the MSE-optimal selector of
+rdrobust (\code{morie_rd_mserd_bandwidth}).}
 
 \item{kernel}{One of \code{"triangular"} (default), \code{"epanechnikov"},
 \code{"uniform"}, or \code{"gaussian"}.}

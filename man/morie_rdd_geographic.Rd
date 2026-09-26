@@ -29,7 +29,8 @@ distance to the geographic boundary in \code{data}.}
 (e.g. \code{"left"}/\code{"right"}).}
 
 \item{bandwidth}{Numeric; the local-polynomial bandwidth on each
-side of the cutoff. \code{NULL} invokes the data-driven CCT selector.}
+side of the cutoff. \code{NULL} invokes the MSE-optimal selector of
+rdrobust (\code{morie_rd_mserd_bandwidth}).}
 
 \item{p}{Integer; local-polynomial order (default 1 for local-
 linear). 2 picks up quadratic curvature for bias correction.}
