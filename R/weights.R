@@ -270,15 +270,49 @@ morie_weights_calibrate_to_totals <- function(weights, df, totals,
                                               ...) {
   method <- match.arg(method)
   if (method == "raking") {
-    margins <- lapply(names(totals), function(col) {
-      uvals <- unique(df[[col]])
-      counts <- table(df[[col]])
-      props <- counts / sum(counts)
-      tgts <- as.numeric(totals[[col]]) * as.numeric(props[as.character(uvals)])
-      setNames(tgts, as.character(uvals))
-    })
-    names(margins) <- names(totals)
-    return(morie_weights_rake(weights, df, margins, ...))
+    # Raking (Deville and Sarndal 1992): w_i* = w_i exp(x_i' lambda) with
+    # sum_i w_i* x_i = T, solved by Newton, as survey::calibrate(calfun =
+    # "raking"). A named vector total gives one indicator column per
+    # category (its population count); a scalar gives the column itself. On
+    # category margins alone this is the IPF solution.
+    dots <- list(...)
+    max_iter <- if (!is.null(dots$max_iterations)) dots$max_iterations else 100L
+    tol <- if (!is.null(dots$tolerance)) dots$tolerance else 1e-10
+    cols <- list()
+    tgt <- numeric(0)
+    for (col in names(totals)) {
+      tv <- totals[[col]]
+      if (length(tv) > 1L || !is.null(names(tv))) {
+        for (cat in names(tv)) {
+          cols[[length(cols) + 1L]] <- as.numeric(as.character(df[[col]]) == cat)
+          tgt <- c(tgt, as.numeric(tv[[cat]]))
+        }
+      } else {
+        # a scalar total on a non-numeric column is the population size:
+        # an all-ones column
+        v <- df[[col]]
+        cols[[length(cols) + 1L]] <- if (is.numeric(v)) as.numeric(v) else rep(1, length(v))
+        tgt <- c(tgt, as.numeric(tv))
+      }
+    }
+    X <- do.call(cbind, cols)
+    w0 <- as.numeric(weights)
+    lam <- numeric(ncol(X))
+    converged <- FALSE
+    it <- 0L
+    for (it in seq_len(max_iter)) {
+      w <- w0 * exp(as.numeric(X %*% lam))
+      Fv <- as.numeric(crossprod(X, w)) - tgt
+      max_adj <- max(abs(Fv) / pmax(abs(tgt), 1))
+      if (max_adj < tol) {
+        converged <- TRUE
+        break
+      }
+      lam <- lam - solve(crossprod(X, X * w), Fv)
+    }
+    return(list(weights = w, converged = converged, iterations = it,
+                max_adjustment = max_adj,
+                diagnostics = morie_weights_diagnostics(w)))
   }
   Xm <- as.matrix(df[, names(totals), drop = FALSE])
   pop_tot <- as.numeric(unlist(totals))

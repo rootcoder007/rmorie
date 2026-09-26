@@ -445,3 +445,17 @@ test_that("morie_weights_jackknife matches survey::as.svrepdesign replicate weig
   refn <- matrix(c(0, 4, 3, 4, 2, 0, 3, 4, 1, 2, 0, 8, 1, 2, 6, 0), 4, 4)
   expect_equal(unname(unclass(jkn)[, ]), refn)
 })
+
+test_that("calibrate_to_totals raking equals survey::calibrate(calfun = 'raking')", {
+  n <- 30
+  i <- 0:(n - 1)
+  g <- c("m", "f")[i %% 2 + 1]
+  x <- round(1 + abs(sin(1.3 * i)) * 3, 3)
+  w0 <- round(1 + 0.5 * cos(0.8 * i)^2, 3)
+  d <- data.frame(g, x)
+  r <- morie_weights_calibrate_to_totals(w0, d, list(g = c(m = 55, f = 60), x = 300))
+  expect_true(r$converged)
+  expect_equal(r$weights[c(1, 2, 30)], c(6.48488579431871, 3.06061865432032, 5.15253922836655), tolerance = 1e-12)
+  expect_equal(sum(r$weights * x), 300, tolerance = 1e-12)
+  expect_equal(sum(r$weights[g == "m"]), 55, tolerance = 1e-12)
+})
