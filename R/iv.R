@@ -558,14 +558,15 @@ morie_iv_anderson_rubin <- function(data, outcome, endogenous, instruments,
   k_ins <- length(instruments)
   df_resid <- stats::df.residual(f_full)
   F_stat <- ((ssr_red - ssr_full) / k_ins) / (ssr_full / df_resid)
-  chi2_stat <- k_ins * F_stat   # asymptotic chi-square form
-  pval <- stats::pchisq(chi2_stat, df = k_ins, lower.tail = FALSE)
-  list(statistic = unname(chi2_stat),
-       F_statistic = unname(F_stat),
+  # the exact F form (Anderson and Rubin 1949), as the Python arm; the
+  # asymptotic chi-square k F is kept alongside
+  pval <- stats::pf(F_stat, k_ins, df_resid, lower.tail = FALSE)
+  list(statistic = unname(F_stat),
+       chi2_statistic = unname(k_ins * F_stat),
        p_value = unname(pval),
        name = "Anderson-Rubin", df = k_ins,
        df_resid = df_resid, beta0 = beta0, alpha = alpha,
-       critical_value = stats::qchisq(1 - alpha, df = k_ins),
+       critical_value = stats::qf(1 - alpha, k_ins, df_resid),
        reject_at_alpha = isTRUE(unname(pval) < alpha))
 }
 
@@ -686,44 +687,50 @@ morie_iv_hansen_j <- function(data, outcome, endogenous, instruments,
 #' @export
 morie_iv_hausman <- function(data, outcome, endogenous, instruments,
                              exogenous = NULL) {
-  rhs_full <- paste(c(endogenous, exogenous), collapse = " + ")
-  f_ols    <- stats::as.formula(paste(outcome, "~", rhs_full))
-  ols      <- stats::lm(f_ols, data = data)
-  iv       <- morie_iv_tsls(data, outcome, endogenous, instruments, exogenous)
-  diff     <- iv$coefficients[names(stats::coef(ols))] - stats::coef(ols)
-  v_iv     <- iv$details$vcov %||% diag(iv$std_errors^2)
-  v_ols    <- stats::vcov(ols)
-  v_diff   <- v_iv - v_ols
-  v_diff   <- 0.5 * (v_diff + t(v_diff))
-  stat     <- as.numeric(t(diff) %*% .morie_ginv(v_diff) %*% diff)
+  # Durbin's form (Stata's sigmamore): both variances on the OLS sigma^2,
+  # the endogenous block of (X'P_Z X)^-1 - (X'X)^-1, df = number of
+  # endogenous regressors
+  d <- .morie_iv_design(data, outcome, endogenous, instruments, exogenous)
+  X <- d$X
+  Z <- d$Z
+  y <- d$y
+  n <- length(y)
+  b_ols <- solve(crossprod(X), crossprod(X, y))
+  s2 <- sum((y - X %*% b_ols)^2) / (n - ncol(X))
+  PZX <- Z %*% solve(crossprod(Z), crossprod(Z, X))
+  b_iv <- solve(crossprod(PZX, X), crossprod(PZX, y))
+  idx <- which(colnames(X) %in% endogenous)
+  Vd <- s2 * (solve(crossprod(PZX, X)) - solve(crossprod(X)))[idx, idx, drop = FALSE]
+  dv <- (b_iv - b_ols)[idx]
+  stat <- as.numeric(t(dv) %*% .morie_ginv(Vd) %*% dv)
   list(statistic = stat,
-       p_value   = stats::pchisq(stat, df = length(diff),
-                                 lower.tail = FALSE),
-       name = "Hausman")
+       p_value   = stats::pchisq(stat, df = length(idx), lower.tail = FALSE),
+       name = "Hausman", df = length(idx))
 }
 
 `%||%` <- function(a, b) if (is.null(a)) b else a
 
-#' Durbin-Wu-Hausman test of endogeneity
-#' @inheritParams morie_iv_params
-#' @return A named list with elements \code{statistic}, \code{p_value}, \code{name}.
-#' @examples
-#' set.seed(1)
-#' n <- 500
-#' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
-#' d <- rbinom(n, 1, plogis(0.8 * z + 0.3 * u))
-#' y <- 0.5 * d + 0.4 * u + rnorm(n, sd = 0.5)
-#' df <- data.frame(y, d, z)
-#' out <- morie_iv_durbin_wu_hausman(df, "y", "d", "z")
-#' out$name
-#' @export
 morie_iv_durbin_wu_hausman <- function(data, outcome, endogenous, instruments,
                                        exogenous = NULL) {
-  # Stage-1 residual augmentation form (equivalent to control function)
-  res <- morie_iv_hausman(data, outcome, endogenous, instruments, exogenous)
-  res$name <- "Durbin-Wu-Hausman"
-  res
+  # Wu-Hausman F: first-stage residuals added to the structural equation,
+  # tested jointly (as ivreg's diagnostics and Stata's estat endogenous)
+  d <- .morie_iv_design(data, outcome, endogenous, instruments, exogenous)
+  X <- d$X
+  Z <- d$Z
+  y <- d$y
+  n <- length(y)
+  Dm <- X[, colnames(X) %in% endogenous, drop = FALSE]
+  Vh <- Dm - Z %*% solve(crossprod(Z), crossprod(Z, Dm))
+  Xa <- cbind(X, Vh)
+  ssr_u <- sum((y - Xa %*% solve(crossprod(Xa), crossprod(Xa, y)))^2)
+  ssr_r <- sum((y - X %*% solve(crossprod(X), crossprod(X, y)))^2)
+  q <- ncol(Vh)
+  df2 <- n - ncol(Xa)
+  f <- ((ssr_r - ssr_u) / q) / (ssr_u / df2)
+  list(statistic = f, p_value = stats::pf(f, q, df2, lower.tail = FALSE),
+       name = "Durbin-Wu-Hausman", df1 = q, df2 = df2)
 }
+
 
 
 # ---------------------------------------------------------------------------

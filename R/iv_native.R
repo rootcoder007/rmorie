@@ -135,13 +135,13 @@
   S2_inv <- tryCatch(solve(S2), error = function(e) .morie_ginv(S2))
   A2 <- XtZ %*% S2_inv %*% t(XtZ)
   V <- n * tryCatch(solve(A2), error = function(e) .morie_ginv(A2))
-  se <- sqrt(pmax(diag(V), 0)) / sqrt(n) * sqrt(n)  # V already scaled
-  se <- sqrt(pmax(diag(V), 0)) / sqrt(n)
+  se <- sqrt(pmax(diag(V), 0))
   names(se) <- colnames(X)
+  # Hansen's J: the minimised criterion, with the weight the estimate used
   gbar <- as.numeric(crossprod(Z, resid)) / n
-  J <- n * as.numeric(t(gbar) %*% S2_inv %*% gbar)
+  J <- n * as.numeric(t(gbar) %*% S_inv %*% gbar)
   df_J <- ncol(Z) - ncol(X)
-  list(beta = beta, se = se, vcov = V / n, residuals = resid,
+  list(beta = beta, se = se, vcov = V, residuals = resid,
        J = J, J_df = df_J,
        J_p = if (df_J > 0) stats::pchisq(J, df_J, lower.tail = FALSE)
              else NA_real_,
@@ -164,18 +164,51 @@
     S_inv <- tryCatch(solve(S), error = function(err) .morie_ginv(S))
     n * as.numeric(t(g) %*% S_inv %*% g)
   }
-  opt <- stats::optim(two$beta, obj, method = "BFGS",
-                      control = list(maxit = max_iter, reltol = tol))
-  beta <- opt$par
+  # Newton steps on central-difference derivatives with backtracking,
+  # from the two-step start (the Python arm's cue_gmm step for step)
+  Q <- function(b) obj(b) / n
+  beta <- as.numeric(two$beta)
+  k <- length(beta)
+  converged <- FALSE
+  for (it in seq_len(max_iter)) {
+    h <- 1e-5 * pmax(1, abs(beta))
+    f0 <- Q(beta)
+    grad <- numeric(k)
+    hess <- matrix(0, k, k)
+    for (a in seq_len(k)) {
+      ea <- replace(numeric(k), a, h[a])
+      fp <- Q(beta + ea)
+      fm <- Q(beta - ea)
+      grad[a] <- (fp - fm) / (2 * h[a])
+      hess[a, a] <- (fp - 2 * f0 + fm) / h[a]^2
+      for (b in seq_len(a - 1L)) {
+        eb <- replace(numeric(k), b, h[b])
+        hess[a, b] <- hess[b, a] <- (Q(beta + ea + eb) - Q(beta + ea - eb) -
+          Q(beta - ea + eb) + Q(beta - ea - eb)) / (4 * h[a] * h[b])
+      }
+    }
+    step <- tryCatch(solve(hess, grad), error = function(err) grad)
+    if (sum(step * grad) <= 0) step <- grad
+    t <- 1
+    while (t > 1e-10 && Q(beta - t * step) > f0) t <- t / 2
+    new <- beta - t * step
+    done <- max(abs(new - beta)) < tol
+    beta <- new
+    if (done) {
+      converged <- TRUE
+      break
+    }
+  }
   names(beta) <- colnames(X)
   e <- as.numeric(y - X %*% beta)
   S <- crossprod(Z, e^2 * Z) / n
   S_inv <- tryCatch(solve(S), error = function(err) .morie_ginv(S))
   XtZ <- crossprod(X, Z)
   A <- XtZ %*% S_inv %*% t(XtZ)
-  V <- tryCatch(solve(A), error = function(err) .morie_ginv(A))
+  V <- n * tryCatch(solve(A), error = function(err) .morie_ginv(A))
   se <- sqrt(pmax(diag(V), 0))
   names(se) <- colnames(X)
+  opt <- list(value = obj(beta), convergence = if (converged) 0L else 1L)
   list(beta = beta, se = se, vcov = V, residuals = e,
        J = opt$value, converged = opt$convergence == 0, n = n)
 }

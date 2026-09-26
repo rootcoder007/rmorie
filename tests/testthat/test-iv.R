@@ -275,6 +275,36 @@ test_that("round four: anderson-rubin reports the decision at alpha", {
   df <- data.frame(y = y, d = d, z = z)
   res <- morie_iv_anderson_rubin(df, "y", "d", "z", alpha = 0.10)
   expect_equal(res$alpha, 0.10)
-  expect_equal(res$critical_value, stats::qchisq(0.90, df = 1))
+  expect_equal(res$critical_value, stats::qf(0.90, 1, res$df_resid))
   expect_equal(res$reject_at_alpha, res$p_value < 0.10)
+})
+
+test_that("IV estimators and tests match ivreg, sandwich and linearmodels", {
+  n <- 80
+  i <- 0:(n - 1)
+  z1 <- sin(1.3 * i) + 0.3 * cos(0.7 * i)
+  z2 <- cos(2.1 * i + 0.5)
+  w <- sin(0.37 * i + 1.0)
+  u <- 0.6 * sin(3.7 * i + 0.2)
+  v <- 0.5 * u + 0.4 * cos(5.3 * i)
+  d <- 0.8 * z1 + 0.6 * z2 + 0.3 * w + v
+  y <- 1.0 + 1.5 * d + 0.7 * w + u + 0.2 * sin(7.1 * i) * z1
+  D <- data.frame(y, d, z1, z2, w)
+  # sandwich::vcovHC(ivreg(y ~ d + w | z1 + z2 + w), "HC1")
+  expect_equal(unname(morie_iv_tsls(D, "y", "d", c("z1", "z2"), "w", robust = TRUE)$std_errors),
+               c(0.0505459824547257, 0.0667536171757581, 0.0725244634555991), tolerance = 1e-10)
+  # linearmodels IVGMM / IVGMMCUE (robust)
+  g <- morie_iv_gmm(D, "y", "d", c("z1", "z2"), "w")
+  expect_equal(unname(g$coefficients), c(1.01651581791, 1.44250806159, 0.706747364412), tolerance = 1e-10)
+  expect_equal(unname(g$std_errors), c(0.0488046582694, 0.065789704909, 0.0712173125091), tolerance = 1e-4)
+  expect_equal(morie_iv_hansen_j(D, "y", "d", c("z1", "z2"), "w")$statistic, 1.01179918825, tolerance = 1e-9)
+  cu <- morie_iv_cue_gmm(D, "y", "d", c("z1", "z2"), "w")
+  expect_equal(unname(cu$coefficients), c(1.01790404736, 1.43913637976, 0.708076314862), tolerance = 1e-7)
+  expect_equal(unname(cu$std_errors), c(0.0488667178074, 0.0659360392028, 0.0713319811849), tolerance = 1e-7)
+  # summary(ivreg, diagnostics = TRUE) Wu-Hausman; Durbin-form Hausman; AR F
+  expect_equal(morie_iv_durbin_wu_hausman(D, "y", "d", c("z1", "z2"), "w")$statistic, 37.6708096, tolerance = 1e-8)
+  expect_equal(morie_iv_hausman(D, "y", "d", c("z1", "z2"), "w")$statistic, 25.5180054657815, tolerance = 1e-10)
+  a <- stats::anova(stats::lm(y ~ w), stats::lm(y ~ z1 + z2 + w))
+  expect_equal(morie_iv_anderson_rubin(D, "y", "d", c("z1", "z2"), "w", beta0 = 0)$statistic,
+               a[2, "F"], tolerance = 1e-12)
 })
