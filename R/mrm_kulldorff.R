@@ -67,14 +67,14 @@ NULL
 #' @param window_years Time-cylinder length in years.
 #' @param n_centers Number of random candidate centres sub-sampled.
 #' @param n_permutations Monte-Carlo permutations.
-#' @param n_top_clusters Integer; number of top clusters to return.
-#'   Accepted for Python signature parity. The current implementation
-#'   returns a single primary cluster (the secondary-cluster loop in
-#'   `morie.mrm_kulldorff.py` `break`s out pending a proper
-#'   mask-and-rescan rewrite); values >1 are reserved for that
-#'   future TRUE multi-cluster mode.
+#' @param n_top_clusters Integer; maximum number of clusters to return,
+#'   by descending LRT with no centre within the radius of a
+#'   higher-LRT cluster.  Each p-value compares its LRT with the
+#'   permutation null of the maximum LRT (SaTScan's rule).
 #' @param seed Random seed.
-#' @return A one-row data.frame describing the top cluster, with
+#' @return A data.frame with one row per cluster (expected count
+#'   \eqn{n_{space} n_{time} / n}, the space-time permutation
+#'   expectation), with
 #'   columns \code{center_lat}, \code{center_lon}, \code{radius_km},
 #'   \code{t_start}, \code{t_end}, \code{n_observed}, \code{n_expected},
 #'   \code{relative_risk}, \code{log_lrt}, \code{p_value}.
@@ -96,11 +96,6 @@ mrm_tps_kulldorff_scan <- function(
   n_top_clusters = 1L,
   seed = 42L
 ) {
-  # n_top_clusters accepted for Python signature parity.  Python's
-  # mrm_kulldorff.py:188-198 currently `break`s out of the secondary-
-  # cluster loop, so both ports return a single primary cluster as of
-  # 2026-05-22.  Promoting this to TRUE multi-cluster requires masking
-  # out events in the primary cluster and rescanning -- a separate task.
   if (!is.numeric(n_top_clusters) || n_top_clusters < 1L) {
     stop("n_top_clusters must be a positive integer.", call. = FALSE)
   }
@@ -129,8 +124,10 @@ mrm_tps_kulldorff_scan <- function(
   window_days <- round(window_years * 365.25)
   starts <- seq(min(t), max(t) - window_days, length.out = max(2L, (max(t) - min(t)) %/% window_days))
 
-  scan_one <- function(t_obs) {
-    best <- list(lrt = 0, ci = -1L, ri = -1L, ti = -1L, n_in = 0L, n_space = 0L)
+  cands <- list()
+  scan_one <- function(t_obs, keep = FALSE) {
+    best <- list(lrt = 0, ci = -1L, ri = -1L, ti = -1L, n_in = 0L,
+                 n_space = 0L, n_time = 0L)
     for (ci in center_idx) {
       d_km <- .haversine_km_mat(lat[ci], lon[ci], lat, lon)
       for (ri in seq_along(radii_km)) {
@@ -146,43 +143,54 @@ mrm_tps_kulldorff_scan <- function(
           if (n_in_cyl < 5L) next
           n_exp <- n_space * sum(in_time) / n
           lrt <- .poisson_lrt(n_in_cyl, n_space, n_exp, n)
-          if (lrt > best$lrt) {
-            best <- list(
-              lrt = lrt, ci = ci, ri = ri, ti = ti,
-              n_in = n_in_cyl, n_space = n_space
-            )
-          }
+          cand <- list(
+            lrt = lrt, ci = ci, ri = ri, ti = ti,
+            n_in = n_in_cyl, n_space = n_space, n_time = sum(in_time)
+          )
+          # every cylinder with a positive LRT, for secondary clusters
+          if (keep && lrt > 0) cands[[length(cands) + 1L]] <<- cand
+          if (lrt > best$lrt) best <- cand
         }
       }
     }
     best
   }
 
-  obs <- scan_one(t)
+  obs <- scan_one(t, keep = TRUE)
   null <- numeric(n_permutations)
   for (k in seq_len(n_permutations)) null[k] <- scan_one(sample(t))$lrt
-  p_value <- (sum(null >= obs$lrt) + 1) / (n_permutations + 1)
-
   if (obs$ci < 0) {
     return(data.frame())
   }
 
-  r <- radii_km[obs$ri]
-  t_start <- as.Date(obs$ti, origin = "1970-01-01")
-  t_end <- as.Date(obs$ti + window_days, origin = "1970-01-01")
-  n_exp <- obs$n_space * window_days / max(1L, max(t) - min(t))
-  rr <- obs$n_in / n_exp
-
-  data.frame(
-    center_lat = lat[obs$ci],
-    center_lon = lon[obs$ci],
-    radius_km = r,
-    t_start = t_start,
-    t_end = t_end,
-    n_observed = obs$n_in,
-    n_expected = round(n_exp, 2),
-    relative_risk = round(rr, 3),
-    log_lrt = round(obs$lrt, 2),
-    p_value = round(p_value, 4)
-  )
+  # secondary clusters: descending LRT, no centre within the radius of a
+  # higher-LRT cluster
+  cands <- cands[order(-vapply(cands, `[[`, numeric(1), "lrt"))]
+  chosen <- list()
+  for (cd in cands) {
+    if (length(chosen) >= n_top_clusters) break
+    ok <- all(vapply(chosen, function(ch) {
+      .haversine_km_mat(lat[ch$ci], lon[ch$ci], lat[cd$ci], lon[cd$ci]) >
+        radii_km[ch$ri]
+    }, logical(1)))
+    if (ok) chosen[[length(chosen) + 1L]] <- cd
+  }
+  do.call(rbind, lapply(chosen, function(cl) {
+    # space-time permutation expectation (Kulldorff et al. 2005), the
+    # same mu the scan maximised: n_space * n_time / n
+    n_exp <- cl$n_space * cl$n_time / n
+    data.frame(
+      center_lat = lat[cl$ci],
+      center_lon = lon[cl$ci],
+      radius_km = radii_km[cl$ri],
+      t_start = as.Date(cl$ti, origin = "1970-01-01"),
+      t_end = as.Date(cl$ti + window_days, origin = "1970-01-01"),
+      n_observed = cl$n_in,
+      n_expected = round(n_exp, 2),
+      relative_risk = round(cl$n_in / n_exp, 3),
+      log_lrt = round(cl$lrt, 2),
+      # every cluster is judged against the null of the maximum LRT
+      p_value = round((sum(null >= cl$lrt) + 1) / (n_permutations + 1), 4)
+    )
+  }))
 }

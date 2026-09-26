@@ -64,7 +64,11 @@ NULL
 #' @param id_col Optional polygon-ID column (passed through to output).
 #' @param k k-NN spatial-weights neighbourhood (default 6).
 #' @param n_permutations MC permutations (default 999, the
-#'   spatial-statistics convention).
+#'   spatial-statistics convention).  Local p-values use conditional
+#'   randomization (Anselin 1995): \eqn{z_i} stays fixed and its
+#'   neighbours are drawn from the other \eqn{n - 1} values; the folded
+#'   pseudo p-value is \eqn{(\min(\#\ge, \#\le) + 1) / (R + 1)}, as GeoDa
+#'   and \code{spdep::localmoran_perm}.
 #' @param seed RNG seed.
 #' @return A list with elements \code{n_polygons}, \code{global_moran_I},
 #'   \code{permutations}, \code{knn_k}, \code{table} (per-polygon
@@ -99,7 +103,9 @@ mrm_tps_lisa <- function(
   lon <- d[[lon_col]]
   x <- as.numeric(d[[count_col]])
   W <- .knn_weights_lisa(lat, lon, k)
-  z <- (x - mean(x)) / stats::sd(x)
+  # population sd, so I_i = z_i * lag_i is spdep::localmoran's
+  # (x_i - xbar) / m2 * sum_j w_ij (x_j - xbar) with m2 = sum((x - xbar)^2) / n
+  z <- (x - mean(x)) / sqrt(mean((x - mean(x))^2))
   lag <- as.vector(W %*% z)
   I_local <- z * lag
   I_global <- sum(I_local) / sum(z^2)
@@ -110,17 +116,21 @@ mrm_tps_lisa <- function(
   quad[(z <= 0) & (lag > 0)] <- "LH"
   quad[(z <= 0) & (lag <= 0)] <- "LL"
 
-  p_local <- numeric(n)
-  for (i in seq_len(n_permutations)) {
-    zp <- sample(z)
-    lp <- as.vector(W %*% zp)
-    p_local <- p_local + as.integer(abs(zp * lp) >= abs(I_local))
-  }
-  # Note: classic permutation test uses |z*lag_z permuted|, not
-  # |z_perm*W%*%z_perm|. Both are common; align to the convention used
-  # by GeoDa / spdep::moran.mc(): permute z and recompute z*W%*%z, then
-  # compare local statistic across permutations.
-  p_local <- (p_local + 1) / (n_permutations + 1)
+  # conditional randomization (Anselin 1995; GeoDa, spdep::localmoran_perm):
+  # z_i stays at i and its neighbours are drawn from the other n - 1
+  # values; folded pseudo p = (min(#>=, #<=) + 1) / (R + 1)
+  p_local <- vapply(seq_len(n), function(i) {
+    nb <- which(W[i, ] != 0)
+    w <- W[i, nb]
+    others <- z[-i]
+    Ip <- vapply(seq_len(n_permutations), function(b) {
+      z[i] * sum(w * others[sample.int(n - 1L, length(nb))])
+    }, numeric(1))
+    # ties (the observed neighbour set, repeated values) count both ways
+    tol <- 1e-10 * max(1, abs(I_local[i]))
+    (min(sum(Ip >= I_local[i] - tol), sum(Ip <= I_local[i] + tol)) + 1) /
+      (n_permutations + 1)
+  }, numeric(1))
 
   tbl <- data.frame(
     id = if (!is.null(id_col)) d[[id_col]] else seq_len(n),
@@ -165,7 +175,8 @@ mrm_tps_lisa <- function(
 #' @param lat_col,lon_col,k,n_permutations,seed as in
 #'   \code{mrm_tps_lisa}.
 #' @return data.frame with columns \code{year}, \code{n_events},
-#'   \code{moran_I}, \code{global_p_value}.
+#'   \code{moran_I}, \code{global_p_value} (one-sided permutation test of
+#'   positive autocorrelation, as \code{spdep::moran.mc}).
 #' @examples
 #' # 4 x 4 polygon grid with two yearly count columns.
 #' set.seed(2026)
@@ -204,27 +215,25 @@ mrm_tps_polygon_moran_per_year <- function(
     # Global p-value via permutation of the z-surface (mirrors
     # mrm_lisa.py:204-219 -- was missing in the R port; added 2026-05-22).
     .rmorie_local_seed(seed)
-    x <- as.numeric(data[[c]])
-    x <- x[!is.na(x)]
-    zsd <- stats::sd(x)
+    # the polygons mrm_tps_lisa used: count and centroid all present
+    keep <- stats::complete.cases(data[, c(c, lat_col, lon_col)])
+    x <- as.numeric(data[[c]][keep])
+    zsd <- sqrt(mean((x - mean(x))^2))
     if (length(x) < 2L || !is.finite(zsd) || zsd == 0) {
       p_global <- NA_real_
     } else {
       z <- (x - mean(x)) / zsd
-      lat <- as.numeric(data[[lat_col]])
-      lon <- as.numeric(data[[lon_col]])
-      keep <- !is.na(lat) & !is.na(lon)
-      lat <- lat[keep]
-      lon <- lon[keep]
-      W <- .knn_weights_lisa(lat, lon, k)
-      I_obs <- res$global_moran_I
-      gt <- 0L
+      W <- .knn_weights_lisa(as.numeric(data[[lat_col]][keep]),
+                             as.numeric(data[[lon_col]][keep]), k)
+      I_obs <- sum(z * (W %*% z)) / sum(z * z)
+      # one-sided test of positive autocorrelation, as spdep::moran.mc
+      # (E[I] = -1/(n-1), so |I| >= |I_obs| is not a two-sided test)
+      ge <- 0L
       for (b in seq_len(n_permutations)) {
         zp <- sample(z)
-        I_perm <- sum(zp * (W %*% zp)) / sum(zp * zp)
-        if (abs(I_perm) >= abs(I_obs)) gt <- gt + 1L
+        if (sum(zp * (W %*% zp)) / sum(zp * zp) >= I_obs) ge <- ge + 1L
       }
-      p_global <- round((gt + 1L) / (n_permutations + 1L), 4)
+      p_global <- round((ge + 1L) / (n_permutations + 1L), 4)
     }
     rows[[length(rows) + 1L]] <- data.frame(
       year = yr,
