@@ -44,7 +44,7 @@ morie_tmlcountoutcome(
 
 \item{Q1}{Optional potential-outcome regression under treatment, on the
 outcome's own scale (the rate scale when \code{offset} is given); it is
-mapped to \link{0, 1} with the outcome's bounds.}
+mapped to \eqn{[0, 1]} with the outcome's bounds.}
 
 \item{Q0}{Optional potential-outcome regression under control, on the
 same scale as \code{Q1}.}
