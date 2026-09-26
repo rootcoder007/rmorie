@@ -1595,33 +1595,3 @@ morie_fauzi_lemma_3_1 <- function(x, p, h = NULL, q_true = NULL) {
   }
   invisible(NULL)
 }
-
-
-# an optional curve, when supplied, must sit on the same grid as t
-.fz_check_optional <- function(v, name, n) {
-  if (is.null(v)) return(invisible(NULL))
-  if (length(v) != n) {
-    stop(sprintf("%s has %d entries for %d.", name, length(v), n), call. = FALSE)
-  }
-  invisible(NULL)
-}
-
-
-# an optional curve, when supplied, must sit on the same grid as t
-.fz_check_optional <- function(v, name, n) {
-  if (is.null(v)) return(invisible(NULL))
-  if (length(v) != n) {
-    stop(sprintf("%s has %d entries for %d.", name, length(v), n), call. = FALSE)
-  }
-  invisible(NULL)
-}
-
-
-# an optional curve, when supplied, must sit on the same grid as t
-.fz_check_optional <- function(v, name, n) {
-  if (is.null(v)) return(invisible(NULL))
-  if (length(v) != n) {
-    stop(sprintf("%s has %d entries for %d.", name, length(v), n), call. = FALSE)
-  }
-  invisible(NULL)
-}
