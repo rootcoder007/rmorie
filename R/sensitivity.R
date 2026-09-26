@@ -416,7 +416,7 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
   delta_range <- as.numeric(delta_range)
   adjusted_estimates <- estimate - delta_range
   adjusted_z <- adjusted_estimates / se
-  adjusted_p <- 2 * (1 - stats::pnorm(abs(adjusted_z)))
+  adjusted_p <- 2 * (stats::pnorm(abs(adjusted_z), lower.tail = FALSE))
 
   significant <- adjusted_p <= 0.05
   tipping_point <- if (all(significant)) {
@@ -795,7 +795,7 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
   ci_lo <- estimate - 1.96 * se
   ci_hi <- estimate + 1.96 * se
   z <- estimate / se
-  p <- 2 * (1 - stats::pnorm(abs(z)))
+  p <- 2 * (stats::pnorm(abs(z), lower.tail = FALSE))
   rows <- list(
     list(metric = "estimate", value = estimate),
     list(metric = "se",        value = se),

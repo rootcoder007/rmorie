@@ -38,7 +38,7 @@ morie_percentile_modified_rank <- function(x, y, q = 0.25) {
   stat_t <- sum(a[1:m])
   Var_T <- (m * n / (N * (N - 1))) * sum(a^2)
   z <- stat_t / sqrt(Var_T)
-  p <- 2 * (1 - stats::pnorm(abs(z)))
+  p <- 2 * (stats::pnorm(abs(z), lower.tail = FALSE))
   list(
     statistic = stat_t,
     p_value = p,

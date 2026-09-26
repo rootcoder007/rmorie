@@ -37,7 +37,7 @@ mrm_oneprop_test <- function(x, n, p0, alpha = 0.05) {
   p_hat <- x / n
   se_null <- sqrt(p0 * (1 - p0) / n)
   z <- if (se_null > 0) (p_hat - p0) / se_null else NA_real_
-  p_wald <- 2 * (1 - stats::pnorm(abs(z)))
+  p_wald <- 2 * (stats::pnorm(abs(z), lower.tail = FALSE))
   bt <- stats::binom.test(x, n, p = p0)
   p_exact <- bt$p.value
   se <- if (p_hat > 0 && p_hat < 1) sqrt(p_hat * (1 - p_hat) / n) else 0
@@ -97,7 +97,7 @@ mrm_twoprop_test <- function(x1, n1, x2, n2, alpha = 0.05) {
   }
   se <- sqrt(p1 * (1 - p1) / n1 + p2 * (1 - p2) / n2)
   z_w <- if (se > 0) (p1 - p2) / se else NA_real_
-  p_wald <- 2 * (1 - stats::pnorm(abs(z_w)))
+  p_wald <- 2 * (stats::pnorm(abs(z_w), lower.tail = FALSE))
   z_a <- stats::qnorm(1 - alpha / 2)
   diff <- p1 - p2
   list(

@@ -98,7 +98,7 @@ Splrtest <- function(x, y, fitted = NULL, h = NULL, degree = 1L,
   support <- max(xv) - min(xv)
   df <- rk * ck * support / hh
   statv <- rk * lam
-  pval <- if (df > 0) 1 - stats::pchisq(statv, df) else NaN
+  pval <- if (df > 0) stats::pchisq(statv, df, lower.tail = FALSE) else NaN
   list(statistic = statv, p_value = min(max(pval, 0), 1), n = n,
        method = "Fan, Zhang and Zhang (2001) eq. (4.1) GLR / Wilks",
        lambdan = lam, rk = rk, ck = ck, df = df, rss0 = rss0, rss1 = rss1,

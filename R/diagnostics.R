@@ -212,7 +212,7 @@ compute_residuals <- function(y, y_hat, X, model_type = "linear") {
     stat <- n * (skew^2 / 6 + kurt^2 / 24)
     normality <- list(
       statistic = as.numeric(stat),
-      p_value = 1 - stats::pchisq(stat, df = 2)
+      p_value = stats::pchisq(stat, df = 2, lower.tail = FALSE)
     )
   }
 
@@ -228,7 +228,7 @@ compute_residuals <- function(y, y_hat, X, model_type = "linear") {
       stat <- n * ss_reg / max(ss_tot, 1e-10)
       list(
         statistic = as.numeric(stat),
-        p_value = 1 - stats::pchisq(stat, df = max(p - 1, 1))
+        p_value = stats::pchisq(stat, df = max(p - 1, 1), lower.tail = FALSE)
       )
     },
     silent = TRUE
@@ -581,7 +581,7 @@ link_test <- function(y, X, model_type = "linear") {
       XtX_inv <- .safe_solve(crossprod(X_link))
       se <- sqrt(pmax(diag(mse * XtX_inv), 0))
       t_stat <- beta_link[3] / max(se[3], 1e-10)
-      p_val <- 2 * (1 - stats::pt(abs(t_stat), df = n - 3))
+      p_val <- 2 * (stats::pt(abs(t_stat), df = n - 3, lower.tail = FALSE))
       list(stat = as.numeric(t_stat), p = as.numeric(p_val))
     },
     error = function(e) list(stat = NA_real_, p = NA_real_)

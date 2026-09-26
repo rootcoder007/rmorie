@@ -305,7 +305,7 @@ mrm_causal_design <- function(
     estimate = round(tau, 6), se = round(se, 6),
     ci_lower = round(tau - z * se, 6),
     ci_upper = round(tau + z * se, 6),
-    p_value = 2 * (1 - stats::pnorm(abs(tau / se))),
+    p_value = 2 * (stats::pnorm(abs(tau / se), lower.tail = FALSE)),
     n = n, n_treated = as.integer(n_t),
     interpretation = sprintf(
       "%s ATE = %.4f (SE %.4f); 95%% CI [%.4f, %.4f]",

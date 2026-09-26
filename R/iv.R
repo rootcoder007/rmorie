@@ -468,7 +468,7 @@ morie_iv_cragg_donald <- function(data, endogenous, instruments,
   df1 <- k_ins
   df2 <- nrow(data) - k_ins - k_exo - 1L
   p_val <- if (is.finite(f_stat) && df1 > 0L && df2 > 0L)
-              1 - stats::pf(f_stat, df1, df2)
+              stats::pf(f_stat, df1, df2, lower.tail = FALSE)
            else NA_real_
   list(statistic = f_stat,
        p_value   = p_val,

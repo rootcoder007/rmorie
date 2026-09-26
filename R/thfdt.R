@@ -34,7 +34,7 @@ morie_terry_hoeffding_test <- function(x, y) {
   sum_a2 <- sum(a^2)
   Var_T <- (m * n / (N * (N - 1))) * sum_a2
   z <- stat_t / sqrt(Var_T)
-  p <- 2 * (1 - stats::pnorm(abs(z)))
+  p <- 2 * (stats::pnorm(abs(z), lower.tail = FALSE))
   list(
     statistic = stat_t,
     p_value = p,

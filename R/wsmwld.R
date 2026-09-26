@@ -25,7 +25,7 @@ Waldstat <- function(theta_hat, se, theta0 = 0, level = 0.95) {
   theta_hat <- as.numeric(theta_hat)
   theta0 <- as.numeric(theta0)
   W <- (theta_hat - theta0) / se
-  p <- 2 * (1 - stats::pnorm(abs(W)))
+  p <- 2 * (stats::pnorm(abs(W), lower.tail = FALSE))
   z <- stats::qnorm((1 + level) / 2)
   .t1_result(statistic = W, p_value = p, estimate = theta_hat, se = se,
              ci_lower = theta_hat - z * se, ci_upper = theta_hat + z * se,

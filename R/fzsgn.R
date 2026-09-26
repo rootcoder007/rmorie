@@ -28,8 +28,8 @@ fzsgn <- function(x, theta0 = 0, h = NULL, alternative = "two-sided") {
   S_n <- sum(stats::pnorm((x - theta0) / h))
   z <- (S_n - n / 2) / sqrt(n / 4)
   p <- switch(alternative,
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
-    "greater"   = 1 - stats::pnorm(z),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
+    "greater"   = stats::pnorm(z, lower.tail = FALSE),
     "less"      = stats::pnorm(z),
     stop("alternative must be two-sided/greater/less")
   )

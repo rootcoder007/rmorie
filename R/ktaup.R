@@ -41,7 +41,7 @@ morie_kendall_tau_partial <- function(x, y, z) {
   }
   tau_p <- (tau_xy - tau_xz * tau_yz) / denom
   z_stat <- tau_p * sqrt(9 * n * (n - 1) / (2 * (2 * n + 5)))
-  p <- 2 * (1 - stats::pnorm(abs(z_stat)))
+  p <- 2 * (stats::pnorm(abs(z_stat), lower.tail = FALSE))
   list(
     statistic = tau_p,
     p_value = p,

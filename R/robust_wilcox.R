@@ -204,7 +204,7 @@ morie_welch_test <- function(x, y) {
   tstat <- (mean(a) - mean(b)) / se
   df <- (q1 + q2)^2 / (q1^2 / (n1 - 1) + q2^2 / (n2 - 1))
   list(estimate = mean(a) - mean(b), statistic = tstat, df = df, se = se,
-       p_value = 2 * (1 - stats::pt(abs(tstat), df)))
+       p_value = 2 * (stats::pt(abs(tstat), df, lower.tail = FALSE)))
 }
 
 #' @rdname morie_welch_test
@@ -225,7 +225,7 @@ morie_yuen_test <- function(x, y, tr = 0.2) {
   tstat <- (t1 - t2) / se
   df <- (d1 + d2)^2 / (d1^2 / (h1 - 1) + d2^2 / (h2 - 1))
   list(estimate = t1 - t2, statistic = tstat, df = df, se = se,
-       p_value = 2 * (1 - stats::pt(abs(tstat), df)))
+       p_value = 2 * (stats::pt(abs(tstat), df, lower.tail = FALSE)))
 }
 
 #' @rdname morie_welch_test
@@ -249,7 +249,7 @@ morie_yuen_paired <- function(x, y, tr = 0.2, alpha = 0.05) {
   crit <- stats::qt(1 - alpha / 2, df)
   list(estimate = dif, ci = c(dif - crit * se, dif + crit * se),
        statistic = tstat, se = se, df = df,
-       p_value = 2 * (1 - stats::pt(abs(tstat), df)), degenerate = FALSE)
+       p_value = 2 * (stats::pt(abs(tstat), df, lower.tail = FALSE)), degenerate = FALSE)
 }
 
 #' Inference for a single trimmed mean
@@ -285,7 +285,7 @@ morie_trimmed_mean_ci <- function(x, tr = 0.2, alpha = 0.05,
   tstat <- (est - null_value) / se
   list(estimate = est, ci = c(est - crit * se, est + crit * se),
        statistic = tstat, se = se, df = df, n = n,
-       p_value = 2 * (1 - stats::pt(abs(tstat), df)))
+       p_value = 2 * (stats::pt(abs(tstat), df, lower.tail = FALSE)))
 }
 
 #' Robust measures of location
@@ -382,7 +382,7 @@ morie_percentage_bend_correlation <- function(x, y, beta = 0.2) {
   r <- sum(a * b) / sqrt(sum(a^2) * sum(b^2))
   tstat <- r * sqrt((n - 2) / (1 - r^2))
   list(cor = r, statistic = tstat, n = n,
-       p_value = 2 * (1 - stats::pt(abs(tstat), n - 2)))
+       p_value = 2 * (stats::pt(abs(tstat), n - 2, lower.tail = FALSE)))
 }
 
 #' @param tr amount of Winsorizing, per tail (default 0.2)
@@ -397,7 +397,7 @@ morie_winsorized_correlation <- function(x, y, tr = 0.2) {
   df <- n - 2 * g - 2
   tstat <- r * sqrt((n - 2) / (1 - r^2))
   list(cor = r, cov = stats::var(a, b), statistic = tstat, df = df, n = n,
-       p_value = 2 * (1 - stats::pt(abs(tstat), df)))
+       p_value = 2 * (stats::pt(abs(tstat), df, lower.tail = FALSE)))
 }
 
 #' Rank-based comparisons of two groups
@@ -469,7 +469,7 @@ morie_brunner_munzel <- function(x, y, alpha = 0.05) {
   list(statistic = stat, df = df, p_hat = phat, delta = 1 - 2 * phat,
        se = se, n1 = n1, n2 = n2, separated = FALSE,
        ci_lower = phat - t_a * se / N, ci_upper = phat + t_a * se / N, alpha = alpha,
-       p_value = 2 * (1 - stats::pt(abs(stat), df)))
+       p_value = 2 * (stats::pt(abs(stat), df, lower.tail = FALSE)))
 }
 
 #' Heteroscedastic one-way designs
@@ -508,7 +508,7 @@ morie_trimmed_mean_anova <- function(groups, tr = 0.2) {
   nu2 <- 1 / (3 * tail / (J^2 - 1))
   list(statistic = test, df1 = J - 1, df2 = nu2,
        trimmed_means = xbar,
-       p_value = 1 - stats::pf(test, J - 1, nu2))
+       p_value = stats::pf(test, J - 1, nu2, lower.tail = FALSE))
 }
 
 #' @rdname morie_trimmed_mean_anova
@@ -542,7 +542,7 @@ morie_brunner_dette_munk <- function(groups) {
   lam <- diag(1 / (nvec - 1), J, J)
   nu2 <- trVN^2 / sum(diag(VN %*% VN %*% lam))
   list(statistic = F, df1 = nu1, df2 = nu2, q_hat = phat, n = nvec,
-       p_value = 1 - stats::pf(F, nu1, nu2))
+       p_value = stats::pf(F, nu1, nu2, lower.tail = FALSE))
 }
 
 #' Robust effect size, median error and Winsorized regression

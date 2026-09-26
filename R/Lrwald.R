@@ -39,7 +39,7 @@ Lrwald <- function(beta, se, level = 0.95, alpha = 0.05) {
   if (!(alpha > 0 && alpha < 1)) stop("alpha must be strictly between 0 and 1")
   z <- stats::qnorm(0.5 + level / 2)
   stat <- beta / se
-  pval <- 2 * (1 - stats::pnorm(abs(stat)))
+  pval <- 2 * (stats::pnorm(abs(stat), lower.tail = FALSE))
   list(
     beta = beta, se = se, z = stat, pvalue = pval,
     ci_low = beta - z * se, ci_high = beta + z * se,

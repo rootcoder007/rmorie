@@ -29,7 +29,7 @@ fzmrb <- function(x, t = NULL, h = NULL) {
   y <- log(x)
   if (is.null(h)) h <- .morie_kdfe_h(y)
   s <- log(t)
-  S_y <- mean(1 - stats::pnorm((s - y) / h))
+  S_y <- mean(stats::pnorm((s - y) / h, lower.tail = FALSE))
   if (S_y <= 0) {
     return(list(
       estimate = NA_real_, S_hat = S_y, n = n, t = t,

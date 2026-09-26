@@ -277,7 +277,7 @@ rate_test <- function(scores, priority, weight = "autoc", reps = 500,
   v <- sum((draws - m) ^ 2) / (length(draws) - 1L)
   se <- sqrt(max(v, 0.0) / 2.0)
   z <- if (se > .SLVGRF_EPS) theta / se else 0.0
-  p <- 2.0 * (1.0 - pnorm(abs(z)))
+  p <- 2.0 * (pnorm(abs(z), lower.tail = FALSE))
   list(estimate = theta, se = se, z = z, p_value = p,
        weight = weight, reps = as.integer(reps), n = n,
        null = paste0("the priority score is independent of the ",

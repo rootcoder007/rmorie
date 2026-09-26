@@ -43,7 +43,7 @@ morie_ordered_alternatives_test <- function(groups) {
   E_J <- (N^2 - sum(ns^2)) / 4
   Var_J <- (N^2 * (2 * N + 3) - sum(ns^2 * (2 * ns + 3))) / 72
   z <- (J - E_J) / sqrt(Var_J)
-  p <- 2 * (1 - stats::pnorm(abs(z)))
+  p <- 2 * (stats::pnorm(abs(z), lower.tail = FALSE))
   list(
     statistic = J,
     p_value = p,

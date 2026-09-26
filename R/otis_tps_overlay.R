@@ -156,7 +156,7 @@ morie_otis_tps_yoy_correlation <- function(otis_b01, tps_datasets) {
       n <- length(common)
       p <- if (is.finite(r) && n > 3L && abs(r) < 1) {
         z <- 0.5 * log((1 + r) / (1 - r))
-        2 * (1 - stats::pnorm(abs(z) * sqrt(n - 3)))
+        2 * (stats::pnorm(abs(z) * sqrt(n - 3), lower.tail = FALSE))
       } else NA_real_
       yrs <- as.integer(common)
       c(cat, n, round(r, 4), signif(p, 3),

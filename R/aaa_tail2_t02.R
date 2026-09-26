@@ -552,7 +552,7 @@ GrubbsT <- function(x, alpha = 0.05, opposite = FALSE) {
     method = paste(
       "Grubbs (1969) single-outlier test,",
       "outliers::grubbs.test type 10;",
-      "p = n (1 - pt(t, n-2)), one-sided"
+      "p = n (pt(t, n-2, lower.tail = FALSE)), one-sided"
     )
   )
 }

@@ -45,8 +45,8 @@ fzwlc <- function(x, theta0 = 0, h = NULL, alternative = "two-sided") {
   var <- n_eff * (n_eff + 1) * (2 * n_eff + 1) / 6
   z <- W_n / sqrt(var)
   p <- switch(alternative,
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
-    "greater"   = 1 - stats::pnorm(z),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
+    "greater"   = stats::pnorm(z, lower.tail = FALSE),
     "less"      = stats::pnorm(z),
     stop("alternative must be two-sided/greater/less")
   )

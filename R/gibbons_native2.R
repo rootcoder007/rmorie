@@ -417,8 +417,8 @@ Signz <- function(k, n, alternative = "two-sided", correct = TRUE) {
   }
   z <- d / sd
   pv <- switch(alternative,
-    "greater" = 1 - stats::pnorm(z), "less" = stats::pnorm(z),
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
+    "greater" = stats::pnorm(z, lower.tail = FALSE), "less" = stats::pnorm(z),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
     stop("alternative must be two-sided, greater or less.", call. = FALSE))
   list(z = z, p_value = min(1, pv), statistic = k, n = n, mean = mean,
        var = n / 4, alternative = alternative)
@@ -636,7 +636,7 @@ Wsr <- function(x, m0 = 0) {
   mean <- n * (n + 1) / 4
   var <- n * (n + 1) * (2 * n + 1) / 24 - corr / 48
   z <- if (var > 0) (tplus - mean) / sqrt(var) else NaN
-  pv <- if (var > 0) 2 * (1 - stats::pnorm(abs(z))) else NaN
+  pv <- if (var > 0) 2 * (stats::pnorm(abs(z), lower.tail = FALSE)) else NaN
   list(statistic = tplus, tminus = n * (n + 1) / 2 - tplus, n = n,
        nzero = nzero, mean = mean, var = var, z = z, p_value = min(1, pv))
 }
@@ -699,8 +699,8 @@ Wsrz <- function(tplus, n, alternative = "two-sided", correct = FALSE) {
   }
   z <- d / sqrt(var)
   pv <- switch(alternative,
-    "greater" = 1 - stats::pnorm(z), "less" = stats::pnorm(z),
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
+    "greater" = stats::pnorm(z, lower.tail = FALSE), "less" = stats::pnorm(z),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
     stop("alternative must be two-sided, greater or less.", call. = FALSE))
   list(z = z, p_value = min(1, pv), mean = mean, var = var,
        statistic = tplus, n = n, alternative = alternative)
@@ -833,7 +833,7 @@ Wsrsym <- function(x, centre = 0) {
   mean <- n * (n + 1) / 4
   var <- n * (n + 1) * (2 * n + 1) / 24
   z <- (tplus - mean) / sqrt(var)
-  list(statistic = tplus, z = z, p_value = 2 * (1 - stats::pnorm(abs(z))),
+  list(statistic = tplus, z = z, p_value = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
        mean = mean, var = var,
        skewdir = if (tplus > mean) 1L else if (tplus < mean) -1L else 0L,
        n = n)
@@ -890,7 +890,7 @@ Runsz <- function(r, n1, n2, correct = FALSE) {
   }
   z <- d / sd
   list(z = z, z_exact = de / sqrt(ve),
-       p_value = 2 * (1 - stats::pnorm(abs(z))), mean = mean, var = sd^2,
+       p_value = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)), mean = mean, var = sd^2,
        mean_exact = me, var_exact = ve, lam = lam, n = n)
 }
 
@@ -915,7 +915,7 @@ Runsudvar <- function(n, r = NULL, alpha = 0.05) {
     r <- as.numeric(r)
     zl <- (r + 0.5 - mean) / sd
     zr <- (r - 0.5 - mean) / sd
-    pv <- min(1, 2 * min(stats::pnorm(zl), 1 - stats::pnorm(zr)))
+    pv <- min(1, 2 * min(stats::pnorm(zl), stats::pnorm(zr, lower.tail = FALSE)))
   }
   list(mean = mean, var = var, sd = sd, z_left = zl, z_right = zr,
        p_value = pv, zcrit = stats::qnorm(1 - as.numeric(alpha) / 2), n = n)
@@ -954,8 +954,8 @@ Rvntest <- function(x, alternative = "two-sided") {
   var <- 4 * (n - 2) * (5 * n^2 - 2 * n - 9) / (5 * n * (n + 1) * (n - 1)^2)
   z <- (rvn - 2) / sqrt(var)
   pv <- switch(alternative,
-    "less" = stats::pnorm(z), "greater" = 1 - stats::pnorm(z),
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
+    "less" = stats::pnorm(z), "greater" = stats::pnorm(z, lower.tail = FALSE),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
     stop("alternative must be two-sided, less or greater.", call. = FALSE))
   list(statistic = rvn, nm = nm, denom = den, z = z, p_value = min(1, pv),
        mean = 2, var = var, n = n)
@@ -2108,7 +2108,7 @@ Mwu <- function(x, y) {
   var <- m * n * (m + n + 1) / 12
   z <- (u - mean) / sqrt(var)
   list(statistic = u, p_value = min(1, 2 * min(lower, upper)), z = z,
-       p_normal = 2 * (1 - stats::pnorm(abs(z))), mean = mean, var = var,
+       p_normal = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)), mean = mean, var = var,
        m = m, n = n)
 }
 
@@ -2190,7 +2190,7 @@ Wrs <- function(x, y) {
   var <- m * n * (nn + 1) / 12
   z <- (w - mean) / sqrt(var)
   list(statistic = w, p_value = min(1, 2 * min(lower, upper)), z = z,
-       p_normal = 2 * (1 - stats::pnorm(abs(z))), mean = mean, var = var,
+       p_normal = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)), mean = mean, var = var,
        wmin = wmin, wmax = wmax, m = m, n = n)
 }
 
@@ -2246,8 +2246,8 @@ Wrsz <- function(w, m, n, alternative = "two-sided", correct = FALSE,
   if (correct) { if (d > 0) d <- d - 0.5 else if (d < 0) d <- d + 0.5 }
   z <- d / sqrt(var)
   pv <- switch(alternative,
-    "greater" = 1 - stats::pnorm(z), "less" = stats::pnorm(z),
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
+    "greater" = stats::pnorm(z, lower.tail = FALSE), "less" = stats::pnorm(z),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
     stop("alternative must be two-sided, greater or less.", call. = FALSE))
   list(z = z, p_value = min(1, pv), mean = mean, var = var,
        var_uncorrected = v0, m = m, n = n)
@@ -2289,7 +2289,7 @@ Normscores <- function(x, y, nodes = 4001) {
   stat <- sum(scores[tag == 0L])
   var <- m * n * sum(scores^2) / (nn * (nn - 1))
   z <- stat / sqrt(var)
-  list(statistic = stat, z = z, p_value = 2 * (1 - stats::pnorm(abs(z))),
+  list(statistic = stat, z = z, p_value = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
        mean = 0, var = var, scores = scores, m = m, n = n)
 }
 
@@ -2318,7 +2318,7 @@ Vdw <- function(x, y) {
   mean <- m * abar
   var <- m * n * ss / (nn * (nn - 1))
   z <- (stat - mean) / sqrt(var)
-  list(statistic = stat, z = z, p_value = 2 * (1 - stats::pnorm(abs(z))),
+  list(statistic = stat, z = z, p_value = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
        mean = mean, var = var, scores = scores, m = m, n = n)
 }
 
@@ -2364,7 +2364,7 @@ Pctrankloc <- function(x, y, s = 0.5, r = NULL) {
   stat <- tupper - blower
   zz <- if (var > 0) (stat - mean) / sqrt(var) else NaN
   list(statistic = stat, tupper = tupper, blower = blower, var = var,
-       var_book = vb, z = zz, p_value = 2 * (1 - stats::pnorm(abs(zz))),
+       var_book = vb, z = zz, p_value = 2 * (stats::pnorm(abs(zz), lower.tail = FALSE)),
        S = S, R = R, m = m, n = n)
 }
 
@@ -2510,7 +2510,7 @@ Moodscale <- function(x, y) {
   vg <- .gbLrMoments(a, m, n)$var
   zz <- if (var > 0) (stat - mean) / sqrt(var) else NaN
   list(statistic = stat, mean = mean, var = var, var_general = vg, z = zz,
-       p_value = 2 * (1 - stats::pnorm(abs(zz))), m = m, n = n)
+       p_value = 2 * (stats::pnorm(abs(zz), lower.tail = FALSE)), m = m, n = n)
 }
 
 #' Mood null moments -- eqs. (9.2.2)-(9.2.3), pp. 315-316
@@ -2551,7 +2551,7 @@ Ansbrad <- function(x, y) {
   mv <- .gbLrMoments(a, m, n)
   zz <- if (mv$var > 0) (stat - mv$mean) / sqrt(mv$var) else NaN
   list(statistic = stat, mean = mv$mean, var = mv$var, z = zz,
-       p_value = 2 * (1 - stats::pnorm(abs(zz))), scores = a, m = m, n = n)
+       p_value = 2 * (stats::pnorm(abs(zz), lower.tail = FALSE)), scores = a, m = m, n = n)
 }
 
 #' Siegel-Tukey scale test -- Sec. 9.4, p. 320
@@ -2606,7 +2606,7 @@ Sgltukey <- function(x, y) {
   mv <- .gbLrMoments(a, m, n)
   zz <- if (mv$var > 0) (stat - mv$mean) / sqrt(mv$var) else NaN
   list(statistic = stat, mean = mv$mean, var = mv$var, z = zz,
-       p_value = 2 * (1 - stats::pnorm(abs(zz))), scores = a,
+       p_value = 2 * (stats::pnorm(abs(zz), lower.tail = FALSE)), scores = a,
        dropped = dropped, m = m, n = n)
 }
 
@@ -2631,7 +2631,7 @@ Klotzsc <- function(x, y) {
   mv <- .gbLrMoments(a, m, n)
   zz <- if (mv$var > 0) (stat - mv$mean) / sqrt(mv$var) else NaN
   list(statistic = stat, mean = mv$mean, var = mv$var, z = zz,
-       p_value = 2 * (1 - stats::pnorm(abs(zz))), scores = a, m = m, n = n)
+       p_value = 2 * (stats::pnorm(abs(zz), lower.tail = FALSE)), scores = a, m = m, n = n)
 }
 
 #' Percentile modified rank test for scale -- Sec. 9.6, p. 323
@@ -2679,7 +2679,7 @@ Pctranksc <- function(x, y, s = 0.5, r = NULL) {
   zz <- if (var > 0) (stat - mean) / sqrt(var) else NaN
   list(statistic = stat, tupper = tupper, blower = blower, mean = mean,
        var = var, mean_book = mb, var_book = vb, z = zz,
-       p_value = 2 * (1 - stats::pnorm(abs(zz))), S = S, R = R, m = m, n = n)
+       p_value = 2 * (stats::pnorm(abs(zz), lower.tail = FALSE)), S = S, R = R, m = m, n = n)
 }
 
 #' Sukhatme scale test -- eq. (9.7.1), p. 323
@@ -2706,8 +2706,8 @@ Sukhatme <- function(x, y, alternative = "two-sided") {
   var <- m * n * (nn + 7) / 48
   z <- (t - mean) / sqrt(var)
   pv <- switch(alternative,
-    "less" = stats::pnorm(z), "greater" = 1 - stats::pnorm(z),
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
+    "less" = stats::pnorm(z), "greater" = stats::pnorm(z, lower.tail = FALSE),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
     stop("alternative must be two-sided, less or greater.", call. = FALSE))
   list(statistic = t, mean = mean, var = var, z = z, p_value = min(1, pv),
        phat = t / (m * n), m = m, n = n)
@@ -3072,8 +3072,8 @@ Jtstat <- function(samples, alternative = "greater") {
   var <- (nn^2 * (2 * nn + 3) - sum(ns^2 * (2 * ns + 3))) / 72
   z <- (b - mean) / sqrt(var)
   pv <- switch(alternative,
-    "greater" = 1 - stats::pnorm(z), "less" = stats::pnorm(z),
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
+    "greater" = stats::pnorm(z, lower.tail = FALSE), "less" = stats::pnorm(z),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
     stop("alternative must be greater, less or two-sided.", call. = FALSE))
   list(statistic = b, mean = mean, var = var, z = z, p_value = min(1, pv),
        k = k, n = nn)
@@ -3213,8 +3213,8 @@ Tautrend <- function(y, alternative = "two-sided") {
   var <- 2 * (2 * n + 5) / (9 * n * (n - 1))
   z <- tau / sqrt(var)
   pv <- switch(alternative,
-    "greater" = 1 - stats::pnorm(z), "less" = stats::pnorm(z),
-    "two-sided" = 2 * (1 - stats::pnorm(abs(z))),
+    "greater" = stats::pnorm(z, lower.tail = FALSE), "less" = stats::pnorm(z),
+    "two-sided" = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)),
     stop("alternative must be two-sided, greater or less.", call. = FALSE))
   list(tau = tau, statistic = s, P = p, Q = q, z = z,
        p_value = min(1, pv), var = var, n = n)
@@ -3266,7 +3266,7 @@ Rhotest <- function(r, n, alternative = "two-sided") {
     pn <- stats::pnorm(z)
     pt <- stats::pt(t, n - 2)
   } else if (alternative == "two-sided") {
-    pn <- 2 * (1 - stats::pnorm(abs(z)))
+    pn <- 2 * (stats::pnorm(abs(z), lower.tail = FALSE))
     pt <- 2 * stats::pt(abs(t), n - 2, lower.tail = FALSE)
   } else {
     stop("alternative must be two-sided, greater or less.", call. = FALSE)
@@ -3303,7 +3303,7 @@ Normcorr <- function(x, y, rho = 0, nodes = 4001) {
   vz <- 1 / (n - 3)
   z <- (zf - mz) / sqrt(vz)
   list(statistic = rf, zf = zf, mean_zf = mz, var_zf = vz, z = z,
-       p_value = 2 * (1 - stats::pnorm(abs(z))), scores = xi, n = n)
+       p_value = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)), scores = xi, n = n)
 }
 
 #' Kendall partial tau -- Sec. 12.6, eq. (12.6.1), p. 467
@@ -3514,7 +3514,7 @@ Pagel <- function(data, weights = NULL) {
   z <- (12 * (ell - 0.5) - 3 * k * n * (n + 1)^2) /
     (n * (n + 1) * sqrt(k * (n - 1)))
   rav <- 12 * ell / (k * (n^3 - n)) - 3 * (n + 1) / (n - 1)
-  list(statistic = ell, z = z, p_value = 1 - stats::pnorm(z), rav = rav,
+  list(statistic = ell, z = z, p_value = stats::pnorm(z, lower.tail = FALSE), rav = rav,
        rank_sums = rsum, k = k, n = n)
 }
 
@@ -3588,7 +3588,7 @@ Pageasymp <- function(ell, k, n, correct = TRUE) {
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
   e <- if (correct) ell - 0.5 else ell
   z <- (12 * e - 3 * k * n * (n + 1)^2) / (n * (n + 1) * sqrt(k * (n - 1)))
-  list(z = z, p_value = 1 - stats::pnorm(z),
+  list(z = z, p_value = stats::pnorm(z, lower.tail = FALSE),
        mean = k * n * (n + 1)^2 / 4,
        var = k * n^2 * (n + 1)^2 * (n - 1) / 144,
        statistic = ell, k = k, n = n)
@@ -3973,8 +3973,8 @@ Linbylin <- function(table, scores = NULL) {
   sd <- if (var > 0) sqrt(var) else NaN
   z <- if (var > 0) (t - mean) / sd else NaN
   list(statistic = t, mean = mean, var = var, sd = sd, z = z,
-       p_value = 1 - stats::pnorm(z),
-       p_twosided = 2 * (1 - stats::pnorm(abs(z))), scores = w, n = nn)
+       p_value = stats::pnorm(z, lower.tail = FALSE),
+       p_twosided = 2 * (stats::pnorm(abs(z), lower.tail = FALSE)), scores = w, n = nn)
 }
 
 #' Odds ratio by Woolf's logit method (Woolf 1955) -- NOT from Gibbons

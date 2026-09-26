@@ -188,7 +188,7 @@ estimate_plr <- function(data, treatment, outcome, covariates,
     se       = se,
     ci_lower = ate - z * se,
     ci_upper = ate + z * se,
-    pval     = 2 * (1 - stats::pnorm(abs(ate / se))),
+    pval     = 2 * (stats::pnorm(abs(ate / se), lower.tail = FALSE)),
     n_obs    = n_obs,
     method   = "cross-fit ridge (base R fallback)"
   )

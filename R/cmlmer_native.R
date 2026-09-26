@@ -397,7 +397,7 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
     mb[j] <- bj[q]
     mse[j] <- se
     mt[j] <- tj
-    mp[j] <- if (!is.nan(tj)) 2.0 * (1.0 - pnorm(abs(tj))) else NaN
+    mp[j] <- if (!is.nan(tj)) 2.0 * (pnorm(abs(tj), lower.tail = FALSE)) else NaN
   }
 
   levels_ <- list()

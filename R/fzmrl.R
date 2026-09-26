@@ -25,7 +25,7 @@ fzmrl <- function(x, t = NULL, h = NULL) {
   }
   if (is.null(t)) t <- stats::median(x)
   if (is.null(h)) h <- .morie_kdfe_h(x)
-  S_t <- mean(1 - stats::pnorm((t - x) / h))
+  S_t <- mean(stats::pnorm((t - x) / h, lower.tail = FALSE))
   if (S_t <= 0) {
     return(list(
       estimate = NA_real_, se = NA_real_,

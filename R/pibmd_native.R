@@ -233,7 +233,7 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
   bias <- (mq - mp) / sqrt(sp2)
 
   z <- bias
-  pval <- 2.0 * min(pnorm(z), 1.0 - pnorm(z))
+  pval <- 2.0 * min(pnorm(z), pnorm(z, lower.tail = FALSE))
   if (moments_only) {
     pval_emp <- NaN
     wass <- NaN

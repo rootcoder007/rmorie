@@ -67,7 +67,7 @@ sptau <- function(x, w) {
       p <- NA_real_
     } else {
       z_sc <- (I - EI) / sqrt(var_I)
-      p <- 2 * (1 - stats::pnorm(abs(z_sc)))
+      p <- 2 * (stats::pnorm(abs(z_sc), lower.tail = FALSE))
     }
   }
   list(

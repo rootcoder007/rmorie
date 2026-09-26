@@ -130,8 +130,8 @@ NULL
   e_plus <- sum(r * p_plus)
   e_minus <- sum(r * p_minus)
   v <- sum(r^2 * p_plus * (1 - p_plus))
-  c(p_lower = 1 - stats::pnorm((t_obs - e_minus) / sqrt(v)),
-    p_upper = 1 - stats::pnorm((t_obs - e_plus) / sqrt(v)))
+  c(p_lower = stats::pnorm((t_obs - e_minus) / sqrt(v), lower.tail = FALSE),
+    p_upper = stats::pnorm((t_obs - e_plus) / sqrt(v), lower.tail = FALSE))
 }
 
 # ---------------------------------------------------------------------------

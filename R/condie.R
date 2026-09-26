@@ -33,7 +33,7 @@ condie <- function(a1, a3, b, w, sa1 = NULL, sa3 = NULL, sa1a3 = 0, sb = NULL) {
     se <- sqrt(slope^2 * sb^2 + b^2 * vslope)
   }
   z <- ifelse(!is.na(se) & se > 0, eff / se, NA_real_)
-  pv <- ifelse(!is.na(z), 2 * (1 - stats::pnorm(abs(z))), NA_real_)
+  pv <- ifelse(!is.na(z), 2 * (stats::pnorm(abs(z), lower.tail = FALSE)), NA_real_)
   if (n == 1) {
     return(list(estimate = as.numeric(eff), simple_slope = as.numeric(slope),
                 se = as.numeric(se), se_slope = as.numeric(se_slope),

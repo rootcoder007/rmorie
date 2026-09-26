@@ -42,7 +42,7 @@ Bfkdfnorm <- function(estimate, variance, null = NULL, bias = 0, level = 0.95) {
     pval <- NA_real_
   } else {
     stat <- (centre - null) / se
-    pval <- 2 * (1 - stats::pnorm(abs(stat)))
+    pval <- 2 * (stats::pnorm(abs(stat), lower.tail = FALSE))
   }
   list(statistic = stat, p_value = pval,
        lower = max(0, centre - z * se), upper = min(1, centre + z * se),

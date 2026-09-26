@@ -44,7 +44,7 @@ morie_ghosal_bernstein_von_mises <- function(x, theta0 = NULL, B = 500, seed = 0
   if (!is.null(theta0)) {
     sd_d <- sd(draws)
     wald <- (mean(draws) - theta0) / max(sd_d, 1e-12)
-    wald_p <- 2 * (1 - stats::pnorm(abs(wald)))
+    wald_p <- 2 * (stats::pnorm(abs(wald), lower.tail = FALSE))
   } else {
     wald <- NA_real_
     wald_p <- NA_real_

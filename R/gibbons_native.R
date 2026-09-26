@@ -192,7 +192,7 @@ morie_tolerance_beta <- function(n = NULL, r = 1L, s = NULL, p = 0.9,
       stop("gamma must lie in (0, 1).", call. = FALSE)
     }
     for (m in 2:100000) {
-      if (1 - stats::pbeta(p, m - 1, 2) >= gamma) {
+      if (stats::pbeta(p, m - 1, 2, lower.tail = FALSE) >= gamma) {
         return(list(
           n_required = m, gamma = gamma, p = p, r = 1L, s = m,
           coverage_dist = c(m - 1, 2),
@@ -213,7 +213,7 @@ morie_tolerance_beta <- function(n = NULL, r = 1L, s = NULL, p = 0.9,
   a <- s - r
   b <- n - s + r + 1L
   list(
-    gamma = 1 - stats::pbeta(p, a, b), coverage_dist = c(a, b),
+    gamma = stats::pbeta(p, a, b, lower.tail = FALSE), coverage_dist = c(a, b),
     r = r, s = s, p = p, n = n,
     method = "Coverage ~ Beta(s-r, n-s+r+1) (Gibbons Theorem 2.11.1)"
   )
