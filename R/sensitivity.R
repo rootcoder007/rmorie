@@ -7,33 +7,13 @@
 # either version 3 of the License, or (at your option) any later
 # version. See LICENSE for the full text.
 #
-# Phase 1.g refactor (2026-05-25): the existing sensitivity wrappers
-# (`e_value_*`, `rosenbaum_bounds`, `tipping_point_analysis`,
-# `omitted_variable_bias`, `specification_curve`,
-# `probabilistic_bias_analysis`) keep their inline math as a fallback
-# arm but now delegate to the canonical CRAN packages whenever those
-# are installed:
-#
-#   * EValue   -- `e_value_*` already delegated; unchanged.
-#   * rbounds  -- new delegation arm in `rosenbaum_bounds` for the
-#                 `wilcoxon` and `sign` paths.
-#   * tipr     -- new delegation arm in `tipping_point_analysis`.
-#   * sensemakr -- new delegation arm in `omitted_variable_bias`.
-#   * specr    -- new delegation arm in `specification_curve`.
-#   * episensr -- new delegation arm in `probabilistic_bias_analysis`.
-#
-# Four new wrapper-as-extender entry points are added with the
-# canonical `morie_sensitivity_*` prefix so MRM / paper callers can
-# reach the full surface of these CRAN packages from inside rmorie:
-#
-#   * `morie_sensitivity_evalue()`         -> EValue::evalues.OLS / .RR / .HR / .MD
-#   * `morie_sensitivity_tipping_point()`  -> tipr::tip / tip_with_continuous
-#   * `morie_sensitivity_omitted_var_bias()` -> sensemakr::sensemakr
-#   * `morie_sensitivity_konfound()`       -> konfound::pkonfound
-#
-# `manski_bounds`, `bias_adjusted_estimate`, and `sensitivity_summary`
-# remain in-house: they have no clean CRAN counterpart with the same
-# return shape.
+# Every method here is native base R, verified against the canonical
+# package: e_value_* and morie_sensitivity_evalue (EValue),
+# rosenbaum_bounds (rbounds::psens; the McNemar path is the exact
+# binomial tail P(X >= b), where rbounds::binarysens is off by one),
+# omitted_variable_bias and morie_sensitivity_omitted_var_bias
+# (sensemakr), morie_sensitivity_tipping_point (tipr::tip) and
+# morie_sensitivity_konfound (konfound::pkonfound).
 
 #' Sensitivity analysis for causal inference assumptions
 #'
@@ -44,9 +24,9 @@
 #' variable bias (Cinelli-Hazlett), Manski bounds, probabilistic
 #' (Monte-Carlo) bias analysis, and specification curve analysis.
 #'
-#' Wraps CRAN \pkg{EValue}, \pkg{tipr}, \pkg{sensemakr}, \pkg{specr},
-#' \pkg{rbounds}, \pkg{episensr}, and \pkg{konfound} when available;
-#' falls back to base-R closed-form implementations otherwise.
+#' Native implementations of the methods of \pkg{EValue},
+#' \pkg{tipr}, \pkg{sensemakr}, \pkg{rbounds} and \pkg{konfound},
+#' verified against those packages.
 #'
 #' @references
 #' Rosenbaum (2002); VanderWeele & Ding (2017); Cinelli & Hazlett
@@ -208,11 +188,15 @@ e_value_rr <- function(rr, ci_lower = NULL, ci_upper = NULL) {
 
 #' E-value for an odds ratio
 #'
-#' Uses Zhang & Yu (1998) OR-to-RR correction when `prevalence >= 0.15`.
+#' For a rare outcome (\code{prevalence} below 0.15 or not given) the OR
+#' approximates the RR; for a common outcome the OR is converted with
+#' \eqn{RR \approx \sqrt{OR}} (VanderWeele & Ding 2017), as
+#' \code{EValue::evalues.OR(rare = FALSE)}.
 #'
 #' @param odds_ratio Observed odds ratio.
 #' @param ci_lower,ci_upper Optional 95% CI.
-#' @param prevalence Outcome prevalence (optional).
+#' @param prevalence Outcome prevalence (optional); 0.15 or more selects
+#'   the common-outcome conversion.
 #' @return A `morie_evalue` named-list.
 #' @examples
 #' res <- e_value_or(2.0)
@@ -221,11 +205,9 @@ e_value_rr <- function(rr, ci_lower = NULL, ci_upper = NULL) {
 e_value_or <- function(odds_ratio, ci_lower = NULL, ci_upper = NULL,
                          prevalence = NULL) {
   if (!is.null(prevalence) && prevalence >= 0.15) {
-    rr <- odds_ratio / (1 - prevalence + prevalence * odds_ratio)
-    if (!is.null(ci_lower))
-      ci_lower <- ci_lower / (1 - prevalence + prevalence * ci_lower)
-    if (!is.null(ci_upper))
-      ci_upper <- ci_upper / (1 - prevalence + prevalence * ci_upper)
+    rr <- sqrt(odds_ratio)
+    if (!is.null(ci_lower)) ci_lower <- sqrt(ci_lower)
+    if (!is.null(ci_upper)) ci_upper <- sqrt(ci_upper)
   } else {
     rr <- odds_ratio
   }
@@ -235,31 +217,35 @@ e_value_or <- function(odds_ratio, ci_lower = NULL, ci_upper = NULL,
 
 #' E-value for a hazard ratio
 #'
-#' Uses the HR-to-RR approximation from VanderWeele (2017).
+#' For a common outcome the HR is converted with VanderWeele's (2017)
+#' approximation \eqn{RR = (1 - 0.5^{\sqrt{HR}}) / (1 - 0.5^{\sqrt{1/HR}})};
+#' for a rare outcome the HR approximates the RR, as
+#' \code{EValue::evalues.HR}.
 #'
 #' @param hr Hazard ratio.
 #' @param ci_lower,ci_upper Optional 95% CI of HR.
+#' @param rare Logical; outcome rare (below 15%) at the end of
+#'   follow-up.  Default \code{FALSE}.
 #' @return A `morie_evalue` named-list.
 #' @examples
 #' res <- e_value_hr(2.0, ci_lower = 1.5, ci_upper = 2.5)
 #' res$e_value_point
 #' @export
-e_value_hr <- function(hr, ci_lower = NULL, ci_upper = NULL) {
+e_value_hr <- function(hr, ci_lower = NULL, ci_upper = NULL, rare = FALSE) {
   hr_to_rr <- function(x) {
-    if (x == 1) 1
+    if (is.null(x) || x <= 0) return(NULL)
+    if (rare || x == 1) x
     else (1 - 0.5^sqrt(x)) / (1 - 0.5^sqrt(1 / x))
   }
-  rr <- hr_to_rr(hr)
-  rr_lo <- if (!is.null(ci_lower) && ci_lower > 0) hr_to_rr(ci_lower) else NULL
-  rr_hi <- if (!is.null(ci_upper) && ci_upper > 0) hr_to_rr(ci_upper) else NULL
-  e_value_rr(rr, rr_lo, rr_hi)
+  e_value_rr(hr_to_rr(hr), hr_to_rr(ci_lower), hr_to_rr(ci_upper))
 }
 
 
 #' E-value for a standardised mean difference (Cohen's d)
 #'
 #' Converts d to an RR scale via the VanderWeele-Ding approximation
-#' RR ~ exp(0.91 * d), then applies `e_value_rr()`.
+#' \eqn{RR \approx \exp(0.91 d)}, CI \eqn{\exp(0.91 d \pm 1.78 s)}, as
+#' \code{EValue::evalues.MD}, then applies `e_value_rr()`.
 #'
 #' @param d  Standardised mean difference.
 #' @param se Standard error of d (optional).
@@ -272,14 +258,11 @@ e_value_hr <- function(hr, ci_lower = NULL, ci_upper = NULL) {
 #' @export
 e_value_d <- function(d, se = NULL, n = NULL) {
   rr <- exp(0.91 * d)
+  if (is.null(se) && !is.null(n)) se <- sqrt(4 / n)
   rr_lo <- rr_hi <- NULL
   if (!is.null(se)) {
-    rr_lo <- exp(0.91 * (d - 1.96 * se))
-    rr_hi <- exp(0.91 * (d + 1.96 * se))
-  } else if (!is.null(n)) {
-    se_a <- sqrt(4 / n)
-    rr_lo <- exp(0.91 * (d - 1.96 * se_a))
-    rr_hi <- exp(0.91 * (d + 1.96 * se_a))
+    rr_lo <- exp(0.91 * d - 1.78 * se)
+    rr_hi <- exp(0.91 * d + 1.78 * se)
   }
   e_value_rr(rr, rr_lo, rr_hi)
 }
@@ -340,7 +323,9 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
         (t_obs - exp_l) / sqrt(max(var_l, 1e-10)), lower.tail = FALSE)
     }
   } else if (method == "sign") {
+    # zero differences carry no sign; n counts the non-zero pairs
     n_pos <- sum(diffs > 0)
+    n <- sum(diffs != 0)
     for (i in seq_along(gamma_range)) {
       gamma <- gamma_range[i]
       p_upper[i] <- stats::pbinom(n_pos - 1L, n, gamma / (1 + gamma), lower.tail = FALSE)
@@ -385,10 +370,14 @@ rosenbaum_bounds <- function(treated_outcomes, control_outcomes,
 #' Tipping-point analysis for missing-data sensitivity
 #'
 #' How much would unobserved outcomes need to differ from observed
-#' ones for the treatment effect to become non-significant?
-#' Phase 1.g cross-references \pkg{tipr} for the unmeasured-confounder
-#' family of tipping-point calculations
-#' (see also \code{\link{morie_sensitivity_tipping_point}}).
+#' ones for the treatment effect to become non-significant?  The
+#' tipping point is the smallest shift \eqn{\delta} of the estimate that
+#' makes the two-sided 5\% test non-significant,
+#' \eqn{\delta^* = \hat\tau - \mathrm{sign}(\hat\tau) z_{0.975} se} (0 when
+#' the estimate is already non-significant); the grid reports adjusted
+#' estimates and p-values over \code{delta_range}.  For the
+#' unmeasured-confounder tipping point see
+#' \code{\link{morie_sensitivity_tipping_point}}.
 #'
 #' @param estimate     Observed treatment effect.
 #' @param se           Standard error of the estimate.
@@ -415,18 +404,13 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
   }
   delta_range <- as.numeric(delta_range)
   adjusted_estimates <- estimate - delta_range
-  adjusted_z <- adjusted_estimates / se
-  adjusted_p <- 2 * (stats::pnorm(abs(adjusted_z), lower.tail = FALSE))
-
-  significant <- adjusted_p <= 0.05
-  tipping_point <- if (all(significant)) {
-    delta_range[length(delta_range)]
-  } else if (!any(significant)) {
-    delta_range[1]
+  adjusted_p <- 2 * stats::pnorm(abs(adjusted_estimates / se),
+                                 lower.tail = FALSE)
+  z <- stats::qnorm(0.975)
+  tipping_point <- if (abs(estimate) > z * se) {
+    estimate - sign(estimate) * z * se
   } else {
-    transitions <- diff(as.integer(significant))
-    cross_idx <- which(transitions != 0)
-    if (length(cross_idx)) delta_range[cross_idx[1]] else NA_real_
+    0
   }
   robust <- abs(tipping_point) > abs(estimate)
   robust_msg <- if (isTRUE(robust))
@@ -446,12 +430,59 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
 # Omitted-variable bias (Cinelli & Hazlett 2020 -- sensemakr)
 # =====================================================================
 
+# Robustness value (sensemakr::robustness_value): alpha = 1 gives RV_q.
+.morie_ovb_rv <- function(t_stat, dof, q = 1, alpha = 0.05) {
+  fq <- q * abs(t_stat / sqrt(dof))
+  f_crit <- if (alpha < 1) {
+    abs(stats::qt(alpha / 2, df = dof - 1)) / sqrt(dof - 1)
+  } else {
+    0
+  }
+  fqa <- fq - f_crit
+  if (fqa <= 0) return(0)
+  # extreme robustness value when fq > 1 / f_crit
+  if (f_crit > 0 && fq > 1 / f_crit) return((fq^2 - f_crit^2) / (1 + fq^2))
+  2 / (1 + sqrt(1 + 4 / fqa^2))
+}
+
+# Benchmark bound and adjusted estimate (sensemakr::ovb_partial_r2_bound,
+# adjusted_estimate / adjusted_se / adjusted_ci) for a confounder kd / ky
+# times as strong as a covariate with partial R2 r2dxj (with treatment)
+# and r2yxj (with outcome).
+.morie_ovb_bound <- function(estimate, se, dof, r2dxj, r2yxj, kd = 1,
+                             ky = kd, alpha = 0.05) {
+  r2dz <- kd * r2dxj / (1 - r2dxj)
+  if (any(r2dz >= 1)) {
+    stop("Implied bound on r2dz.x >= 1; use a lower kd.", call. = FALSE)
+  }
+  r2zxj <- kd * r2dxj^2 / ((1 - kd * r2dxj) * (1 - r2dxj))
+  if (any(r2zxj >= 1)) stop("Impossible kd value; use a lower kd.", call. = FALSE)
+  r2yz <- pmin(((sqrt(ky) + sqrt(r2zxj)) / sqrt(1 - r2zxj))^2 *
+                 (r2yxj / (1 - r2yxj)), 1)
+  bias <- sqrt(r2yz * r2dz / (1 - r2dz)) * se * sqrt(dof)
+  adj <- sign(estimate) * (abs(estimate) - bias)
+  adj_se <- sqrt((1 - r2yz) / (1 - r2dz)) * se * sqrt(dof / (dof - 1))
+  tc <- stats::qt(1 - alpha / 2, dof)
+  data.frame(
+    r2dz.x = r2dz, r2yz.dx = r2yz, adjusted_estimate = adj,
+    adjusted_se = adj_se, adjusted_t = adj / adj_se,
+    adjusted_lower_CI = adj - tc * adj_se,
+    adjusted_upper_CI = adj + tc * adj_se
+  )
+}
+
 #' Omitted-variable bias analysis (sensemakr framework)
 #'
-#' Closed-form Cinelli-Hazlett robustness-value implementation in
-#' base R.  For the full \pkg{sensemakr} treatment (benchmark plots,
-#' adjusted t-statistics, contour plots) on a fitted \code{lm}
-#' object, use \code{\link{morie_sensitivity_omitted_var_bias}}.
+#' Closed-form Cinelli-Hazlett (2020) sensitivity from the estimate,
+#' its standard error and the residual degrees of freedom.  Robustness
+#' values as \code{sensemakr::robustness_value}: with
+#' \eqn{f_q = q |t| / \sqrt{dof}},
+#' \eqn{RV_q = (\sqrt{f_q^4 + 4 f_q^2} - f_q^2) / 2}, and
+#' \eqn{RV_{q,\alpha}} the same in \eqn{f_q - f^*},
+#' \eqn{f^* = |t^*_{\alpha, dof-1}| / \sqrt{dof - 1}} (the extreme
+#' robustness value when \eqn{f_q > 1/f^*}).  Benchmark bounds follow
+#' \code{sensemakr::ovb_bounds}.  For a fitted \code{lm} see
+#' \code{\link{morie_sensitivity_omitted_var_bias}}.
 #'
 #' @param estimate              Treatment coefficient.
 #' @param se                    SE of the estimate.
@@ -461,9 +492,19 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
 #' @param q                     Fraction of the estimate to be
 #'   explained away. Default 1.
 #' @param alpha                 Significance level. Default 0.05.
-#' @param benchmark_covariates  Named list mapping covariate name ->
-#'   partial R^2.
-#' @return A `morie_ovb` named-list.
+#' @param benchmark_covariates  Named list mapping covariate name to
+#'   \code{c(r2_dxj_x, r2_yxj_dx)}: its partial R^2 with the treatment
+#'   (given the other covariates) and with the outcome (given treatment
+#'   and the other covariates).  A single number is used for both.
+#' @param kd,ky Strength multipliers of the confounder relative to a
+#'   benchmark (\code{ky} defaults to \code{kd}).
+#' @return A `morie_ovb` named-list; \code{benchmark_bounds} maps each
+#'   covariate to a one-row data frame with \code{r2dz.x},
+#'   \code{r2yz.dx}, \code{adjusted_estimate}, \code{adjusted_se},
+#'   \code{adjusted_t}, \code{adjusted_lower_CI}, \code{adjusted_upper_CI}.
+#' @references Cinelli, C., & Hazlett, C. (2020). Making sense of
+#'   sensitivity: extending omitted variable bias.  \emph{Journal of
+#'   the Royal Statistical Society B}, 82(1), 39--67.
 #' @examples
 #' str(omitted_variable_bias(0.5, 0.15, dof = 150, r2_yd_x = 0.1,
 #'                           partial_r2_treatment = 0.05), max.level = 1)
@@ -471,26 +512,17 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
 omitted_variable_bias <- function(estimate, se, dof, r2_yd_x,
                                      partial_r2_treatment,
                                      q = 1.0, alpha = 0.05,
-                                     benchmark_covariates = NULL) {
+                                     benchmark_covariates = NULL,
+                                     kd = 1, ky = kd) {
   t_stat <- estimate / se
-  f_stat <- t_stat^2
-  rv_q <- if (f_stat > 1)
-    0.5 * (sqrt(f_stat^2 - f_stat) - f_stat + 1) else 0
-  rv_q <- max(rv_q, 0)
-  t_crit <- stats::qt(1 - alpha / 2, dof)
-  f_crit <- t_crit^2
-  rv_qa <- if (f_stat > f_crit)
-    0.5 * (sqrt(f_stat^2 - f_crit * f_stat) - f_stat + f_crit) else 0
-  rv_qa <- max(rv_qa, 0)
-
+  rv_q <- .morie_ovb_rv(t_stat, dof, q, 1)
+  rv_qa <- .morie_ovb_rv(t_stat, dof, q, alpha)
   bounds <- list()
-  if (!is.null(benchmark_covariates)) {
-    for (name in names(benchmark_covariates)) {
-      r2b <- benchmark_covariates[[name]]
-      bias <- if (partial_r2_treatment > 0)
-        estimate * r2b / partial_r2_treatment else 0
-      bounds[[name]] <- c(estimate - bias, estimate + bias)
-    }
+  for (name in names(benchmark_covariates)) {
+    r2 <- benchmark_covariates[[name]]
+    if (length(r2) == 1L) r2 <- c(r2, r2)
+    bounds[[name]] <- .morie_ovb_bound(estimate, se, dof, r2[1], r2[2],
+                                       kd, ky, alpha)
   }
   interpretation <- sprintf(
     paste0("To explain away %.0f%% of the estimate (%.4f), an ",
@@ -635,8 +667,11 @@ specification_curve <- function(data, outcome, treatment,
 #' Manski worst-case bounds for the ATE
 #'
 #' Under no assumptions about selection, the ATE is only partially
-#' identified. Returns a named list with `lower_bound`, `upper_bound`,
-#' `point_estimate`, `width`.
+#' identified (Manski 1990): with the outcome in \eqn{[a, b]},
+#' \eqn{E[Y_1] \in [p \bar y_1 + a(1-p), p \bar y_1 + b(1-p)]} and
+#' \eqn{E[Y_0] \in [(1-p) \bar y_0 + a p, (1-p) \bar y_0 + b p]}, so the
+#' bounds always have width \eqn{b - a}.  Returns a named list with
+#' `lower_bound`, `upper_bound`, `point_estimate`, `width`.
 #'
 #' @param outcome_treated Outcomes for treated units.
 #' @param outcome_control Outcomes for control units.
@@ -659,17 +694,8 @@ manski_bounds <- function(outcome_treated, outcome_control,
   e0 <- mean(y0)
   p1 <- p_treated
   p0 <- 1 - p_treated
-  lower <- e1 * p1 + y_min * p0 - (e0 * p0 + y_max * p1)
-  upper <- e1 * p1 + y_max * p0 - (e0 * p0 + y_min * p1)
-  lower_s <- e1 - e0 - (y_max - y_min) * (1 - p1)
-  upper_s <- e1 - e0 + (y_max - y_min) *      p1
-  # When two valid lower bounds (resp. upper bounds) are available,
-  # the TIGHTER (more informative) lower bound is the LARGER one,
-  # and the tighter upper bound is the SMALLER one. v0.9.5.6+ uses
-  # the strict-Manski max/min combination; pre-v0.9.5.6 took the
-  # loosest (widest) interval which over-reported uncertainty.
-  lo <- max(lower, lower_s)
-  hi <- min(upper, upper_s)
+  lo <- e1 * p1 + y_min * p0 - (e0 * p0 + y_max * p1)
+  hi <- e1 * p1 + y_max * p0 - (e0 * p0 + y_min * p1)
   list(lower_bound = lo,
        upper_bound = hi,
        point_estimate = e1 - e0,
@@ -683,13 +709,23 @@ manski_bounds <- function(outcome_treated, outcome_control,
 
 #' Bias-adjusted treatment effect (Ding & VanderWeele 2016)
 #'
+#' Without \code{prevalence_confounder} the adjustment is the Ding &
+#' VanderWeele (2016) bounding factor
+#' \eqn{B = RR_{UD} RR_{EU} / (RR_{UD} + RR_{EU} - 1)}, the largest bias
+#' any confounder with those strengths can produce, applied toward the
+#' null.  With the prevalence \eqn{p_0} of a binary confounder among the
+#' unexposed, \code{rr_eu} is its prevalence ratio
+#' (\eqn{p_1 = RR_{EU} p_0}) and the bias is Schlesselman's (1978) exact
+#' factor \eqn{(1 + (RR_{UD}-1) p_1) / (1 + (RR_{UD}-1) p_0)}.
+#'
 #' @param estimate              Observed treatment effect on the
-#'   log-RR / coefficient scale.
+#'   log-RR scale.
 #' @param se                    Standard error.
 #' @param rr_ud                 RR linking confounder to outcome.
 #' @param rr_eu                 RR linking treatment to confounder.
-#' @param prevalence_confounder Confounder prevalence. Default 0.5.
-#' @return Named list with `adjusted_estimate`, `bias`,
+#' @param prevalence_confounder Optional confounder prevalence among
+#'   the unexposed.
+#' @return Named list with `adjusted_estimate`, `bias` (log scale),
 #'   `adjusted_ci_lower`, `adjusted_ci_upper`, `original_estimate`.
 #' @examples
 #' res <- bias_adjusted_estimate(0.5, 0.1, rr_ud = 2, rr_eu = 2)
@@ -697,14 +733,25 @@ manski_bounds <- function(outcome_treated, outcome_control,
 #' c(res$adjusted_ci_lower, res$adjusted_ci_upper)
 #' @export
 bias_adjusted_estimate <- function(estimate, se, rr_ud, rr_eu,
-                                      prevalence_confounder = 0.5) {
-  bias_factor <- (rr_ud * rr_eu - 1) / max(rr_ud + rr_eu - 1, 0.01)
-  bias <- log(bias_factor) * prevalence_confounder
+                                      prevalence_confounder = NULL) {
+  if (is.null(prevalence_confounder)) {
+    bias <- log(rr_ud * rr_eu / (rr_ud + rr_eu - 1)) *
+      (if (estimate >= 0) 1 else -1)
+  } else {
+    p0 <- prevalence_confounder
+    p1 <- rr_eu * p0
+    if (p1 < 0 || p1 > 1) {
+      stop("rr_eu * prevalence_confounder must be a probability.",
+           call. = FALSE)
+    }
+    bias <- log((1 + (rr_ud - 1) * p1) / (1 + (rr_ud - 1) * p0))
+  }
   adjusted <- estimate - bias
+  z <- stats::qnorm(0.975)
   list(adjusted_estimate = adjusted,
        bias              = bias,
-       adjusted_ci_lower = adjusted - 1.96 * se,
-       adjusted_ci_upper = adjusted + 1.96 * se,
+       adjusted_ci_lower = adjusted - z * se,
+       adjusted_ci_upper = adjusted + z * se,
        original_estimate = estimate)
 }
 
@@ -715,8 +762,11 @@ bias_adjusted_estimate <- function(estimate, se, rr_ud, rr_eu,
 
 #' Probabilistic (Monte Carlo) sensitivity analysis
 #'
-#' Draws bias parameters from prior distributions and returns the
-#' distribution of bias-adjusted estimates.  Cross-references
+#' Draws bias parameters from prior distributions and the estimate from
+#' its sampling distribution, and removes Schlesselman's
+#' binary-confounder bias \eqn{\log[(1 + (RR_{UD}-1)p_1) / (1 + (RR_{UD}-1)p_0)]}
+#' with \eqn{p_0} the drawn prevalence among the unexposed and
+#' \eqn{p_1 = \min(RR_{EU} p_0, 1)}.  Cross-references
 #' \pkg{episensr} (\code{episensr::probsens}) for the canonical
 #' multi-bias version with separate selection-bias and
 #' misclassification-bias models; use \pkg{episensr} directly when
@@ -753,9 +803,10 @@ probabilistic_bias_analysis <- function(estimate, se,
                                      bias_parms$prevalence[2]),
                        0.01), 0.99)
   estimates_with_error <- stats::rnorm(n_simulations, estimate, se)
-  bias_factors <- (rr_ud * rr_eu - 1) /
-                  pmax(rr_ud + rr_eu - 1, 0.01)
-  biases <- log(pmax(bias_factors, 0.01)) * prev
+  # Schlesselman's binary-confounder bias with p0 the prevalence among
+  # the unexposed and p1 = min(rr_eu p0, 1) (Lash, Fox & Fink 2009, ch. 8)
+  p1 <- pmin(rr_eu * prev, 1)
+  biases <- log((1 + (rr_ud - 1) * p1) / (1 + (rr_ud - 1) * prev))
   adjusted <- estimates_with_error - biases
   list(
     original_estimate = estimate,
@@ -839,28 +890,16 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
 
 #' Internal helper: Morie Sens Need
 #' @noRd
-.morie_sens_need <- function(pkg, fn) {
-  if (!requireNamespace(pkg, quietly = TRUE)) {
-    stop(sprintf(
-      "`%s()` requires the '%s' package. Install it with %s",
-      fn, pkg, sprintf("install.packages(\"%s\")", pkg)),
-      call. = FALSE)
-  }
-  invisible(TRUE)
-}
 
 
 #' E-values for the EValue dispatch family (extender)
 #'
-#' Thin interface to the \pkg{EValue} dispatch family
+#' Native E-values for the \pkg{EValue} dispatch family
 #' (\code{evalues.OLS}, \code{evalues.RR}, \code{evalues.OR},
-#' \code{evalues.HR}, \code{evalues.MD}), exposed under the
-#' \code{morie_sensitivity_*} namespace so MRM / paper callers can
-#' reach the full \pkg{EValue} surface without loading \pkg{EValue}
-#' directly.  Pairs with \code{\link{e_value_rr}} /
-#' \code{\link{e_value_or}} / \code{\link{e_value_hr}} /
-#' \code{\link{e_value_d}}, which are the typed convenience
-#' wrappers around the same backend.
+#' \code{evalues.HR}, \code{evalues.MD}); OLS and MD use the
+#' \eqn{\exp(0.91 d \pm 1.78 se)} interval.  Pairs with
+#' \code{\link{e_value_rr}} / \code{\link{e_value_or}} /
+#' \code{\link{e_value_hr}} / \code{\link{e_value_d}}.
 #'
 #' @param estimate Observed effect on the requested scale.
 #' @param se Standard error of \code{estimate} (used by \code{"OLS"}
@@ -875,20 +914,17 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
 #'   for OLS / MD, 1 for ratio scales).
 #' @param ci_lower,ci_upper Optional 95% CI on the same scale as
 #'   \code{estimate}.
-#' @param ... Additional arguments forwarded to the underlying
-#'   \code{EValue::evalues.*} function.
+#' @param ... Unused.
 #' @return A list of class \code{morie_sensitivity_evalue} with
 #'   \code{estimate}, \code{e_value_point}, \code{e_value_ci},
-#'   \code{type}, \code{method}, and \code{raw} (the full EValue
-#'   matrix).
+#'   \code{type}, \code{method}, and \code{raw} (the point and CI
+#'   E-values).
 #' @references VanderWeele, T. J., & Ding, P. (2017). Sensitivity
 #'   analysis in observational research: introducing the E-value.
 #'   \emph{Annals of Internal Medicine}, 167(4), 268--274.
 #' @examples
-#' if (requireNamespace("tipr", quietly = TRUE)) {
-#'   str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
-#'                                ci_upper = 2.7), max.level = 1)
-#' }
+#' str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
+#'                              ci_upper = 2.7), max.level = 1)
 #' @export
 morie_sensitivity_evalue <- function(estimate, se = NULL, sd = NULL,
                                      type = c("OLS", "RR", "OR",
@@ -903,9 +939,10 @@ morie_sensitivity_evalue <- function(estimate, se = NULL, sd = NULL,
   if (type %in% c("MD", "OLS")) {
     d_est <- if (identical(type, "OLS")) estimate / sd else estimate
     d_se  <- if (identical(type, "OLS")) se / sd else se
+    # EValue's CI exp(0.91 d -+ 1.78 se) on the RR scale
     ev <- morie_evalue(d_est, "MD",
-                       lo = d_est - 1.96 * d_se,
-                       hi = d_est + 1.96 * d_se, true = 0)
+                       lo = d_est - 1.78 / 0.91 * d_se,
+                       hi = d_est + 1.78 / 0.91 * d_se, true = 0)
   } else {
     ev <- morie_evalue(estimate, type, lo = ci_lower, hi = ci_upper,
                        rare = rare, true = true)
@@ -917,92 +954,74 @@ morie_sensitivity_evalue <- function(estimate, se = NULL, sd = NULL,
          e_value_point = e_point,
          e_value_ci    = e_ci,
          type          = type,
-         method        = sprintf("evalues.%s (EValue)", type),
-         raw           = raw),
+         method        = sprintf("evalues.%s (native)", type),
+         raw           = ev),
     class = c("morie_sensitivity_evalue", "list")
   )
 }
 
 
-#' Tipping-point sensitivity to a single unmeasured confounder (tipr)
+#' Tipping point for a single unmeasured confounder (native tipr)
 #'
-#' Thin interface to \code{tipr::tip}: returns the minimum value of
-#' the standardised mean difference (\code{smd}) or partial R-squared
-#' (\code{R2}) of an unmeasured confounder that would tip the lower
-#' (or upper) bound of the confidence interval back to the null.
-#' Pairs with \code{\link{tipping_point_analysis}}, which targets
-#' \emph{missing-data} sensitivity rather than unmeasured-confounder
-#' sensitivity.
+#' Native \code{tipr::tip}: an unmeasured confounder whose standardised
+#' mean difference between exposure groups is \code{smd} tips an
+#' observed ratio \eqn{b} (use the CI bound nearest the null) to 1 when
+#' its effect on the outcome is \eqn{b^{1/smd}} (Lin, Psaty & Kronmal
+#' 1998).  Pairs with \code{\link{tipping_point_analysis}}, which
+#' targets \emph{missing-data} sensitivity.  Mirrors
+#' \code{tipping_point_smd} in the Python arm.
 #'
-#' @param estimate Observed treatment effect on the coefficient scale.
-#' @param smd Hypothesised standardised mean difference of the
-#'   unmeasured confounder between treatment groups.
-#' @param r2 Hypothesised partial R-squared of the unmeasured
-#'   confounder with the outcome.  Forwarded as the \code{r_squared}
-#'   tipr argument.
-#' @param ... Additional arguments forwarded to \code{tipr::tip}
-#'   (e.g. \code{outcome_type}, \code{confidence}).
-#' @return A list of class \code{morie_sensitivity_tipping_point}
-#'   with the tipped point estimate and the raw \pkg{tipr} object.
+#' @param estimate Observed ratio (e.g. risk ratio).
+#' @param smd Standardised mean difference of the unmeasured confounder
+#'   between exposure groups.
+#' @param r2 Unsupported (the partial-R2 pathway is
+#'   \code{\link{omitted_variable_bias}}); must be \code{NULL}.
+#' @param ... Unused.
+#' @return A list of class \code{morie_sensitivity_tipping_point} with
+#'   \code{tipped_estimate} (1) and \code{confounder_outcome_effect}.
 #' @references D'Agostino McGowan, L. (2022). tipr: An R package for
 #'   sensitivity analyses for unmeasured confounders.
 #'   \emph{Journal of Open Source Software}, 7(77), 4495.
 #' @examples
-#' if (requireNamespace("tipr", quietly = TRUE)) {
-#'   str(morie_sensitivity_tipping_point(0.5, smd = 0.3), max.level = 1)
-#' }
+#' str(morie_sensitivity_tipping_point(1.8, smd = 0.5), max.level = 1)
 #' @export
 morie_sensitivity_tipping_point <- function(estimate, smd = NULL,
                                             r2 = NULL, ...) {
-  .morie_sens_need("tipr", "morie_sensitivity_tipping_point")
-  args <- list(effect_observed = estimate)
-  # tipr >= 1.0 renamed tip()'s arguments: smd ->
-  # exposure_confounder_effect; r_squared was retired (the continuous
-  # r2 pathway moved to tip_coef_with_r2()). Map both names so the
-  # wrapper works across tipr versions.
-  tip_formals <- names(formals(tipr::tip))
-  if (!is.null(smd)) {
-    args[[if ("exposure_confounder_effect" %in% tip_formals)
-            "exposure_confounder_effect" else "smd"]] <- smd
-  }
   if (!is.null(r2)) {
-    if ("r_squared" %in% tip_formals) {
-      args$r_squared <- r2
-    } else {
-      warning("installed tipr::tip() has no r_squared argument; ",
-              "`r2` ignored (use tipr::tip_coef_with_r2() directly).",
-              call. = FALSE)
-    }
+    stop("the partial-R2 pathway is omitted_variable_bias(); give `smd`.",
+         call. = FALSE)
   }
-  args <- c(args, list(...))
-  raw <- do.call(tipr::tip, args)
-  tipped <- tryCatch(as.numeric(raw$effect_adjusted),
-                     error = function(e) NA_real_)
+  if (is.null(smd)) stop("`smd` is required.", call. = FALSE)
+  cy <- estimate^(1 / smd)
   structure(
-    list(estimate         = estimate,
-         smd              = smd,
-         r2               = r2,
-         tipped_estimate  = tipped,
-         method           = "tip (tipr)",
-         raw              = raw),
+    list(estimate                  = estimate,
+         smd                       = smd,
+         r2                        = r2,
+         tipped_estimate           = 1,
+         confounder_outcome_effect = cy,
+         method                    = "tip (native)",
+         raw                       = list(effect_observed = estimate,
+                                          exposure_confounder_effect = smd,
+                                          confounder_outcome_effect = cy)),
     class = c("morie_sensitivity_tipping_point", "list")
   )
 }
 
 
-#' Omitted-variable bias on a fitted model (sensemakr extender)
+#' Omitted-variable bias on a fitted model (native sensemakr)
 #'
-#' Thin interface to \code{sensemakr::sensemakr}: returns the full
-#' Cinelli-Hazlett robustness-value object including benchmark
-#' bounds, adjusted t-statistics, and the data needed to draw
-#' contour plots.  Pairs with \code{\link{omitted_variable_bias}},
-#' which is the closed-form version that takes \code{estimate} +
-#' \code{se} + degrees of freedom directly (useful when you don't
-#' have an \code{lm} object handy).
+#' Native \code{sensemakr::sensemakr} for a fitted linear model:
+#' robustness values, the partial R-squared of the treatment, and
+#' benchmark bounds for confounders \code{kd} / \code{ky} times as
+#' strong as each benchmark covariate (its partial R-squared with the
+#' outcome from \code{model}, with the treatment from the regression of
+#' the treatment on the other regressors).  Pairs with
+#' \code{\link{omitted_variable_bias}}, the closed form from
+#' \code{estimate}, \code{se} and degrees of freedom.
 #'
-#' @param model A fitted regression model (\code{lm} or compatible).
-#' @param treatment Name of the treatment variable (coefficient).
-#' @param benchmark_covariates Optional character vector of covariate
+#' @param model A fitted \code{lm}.
+#' @param treatment Name of the treatment coefficient.
+#' @param benchmark_covariates Optional character vector of coefficient
 #'   names whose strengths bound the unmeasured-confounder strength.
 #' @param kd Multipliers on the benchmark covariate strength.
 #'   Default \code{c(1, 2, 3)}.
@@ -1010,66 +1029,80 @@ morie_sensitivity_tipping_point <- function(estimate, smd = NULL,
 #'   strength.  Default equal to \code{kd}.
 #' @param q Fraction of the estimate to be explained away.  Default 1.
 #' @param alpha Significance level.  Default 0.05.
-#' @param ... Additional arguments forwarded to
-#'   \code{sensemakr::sensemakr}.
+#' @param ... Unused.
 #' @return A list of class \code{morie_sensitivity_omitted_var_bias}
-#'   with the robustness values, partial R-squared of treatment,
-#'   benchmark bounds, and the full sensemakr object as \code{raw}.
+#'   with \code{rv_q}, \code{rv_qa}, \code{partial_r2_treatment} and
+#'   \code{benchmark_bounds} (the columns of sensemakr's bounds table).
 #' @references Cinelli, C., & Hazlett, C. (2020). Making sense of
 #'   sensitivity: extending omitted variable bias.  \emph{Journal of
 #'   the Royal Statistical Society B}, 82(1), 39--67.
 #' @examples
-#' if (requireNamespace("sensemakr", quietly = TRUE)) {
-#'   set.seed(1)
-#'   df <- data.frame(d = rnorm(100), x1 = rnorm(100))
-#'   df$y <- 0.5 * df$d + 0.3 * df$x1 + rnorm(100)
-#'   fit <- stats::lm(y ~ d + x1, data = df)
-#'   res <- morie_sensitivity_omitted_var_bias(fit, "d",
-#'                                             benchmark_covariates = "x1")
-#'   class(res)
-#' }
+#' set.seed(1)
+#' df <- data.frame(d = rnorm(100), x1 = rnorm(100))
+#' df$y <- 0.5 * df$d + 0.3 * df$x1 + rnorm(100)
+#' fit <- stats::lm(y ~ d + x1, data = df)
+#' res <- morie_sensitivity_omitted_var_bias(fit, "d",
+#'                                           benchmark_covariates = "x1",
+#'                                           kd = 1)
+#' res$rv_q
 #' @export
 morie_sensitivity_omitted_var_bias <- function(model, treatment,
                                                benchmark_covariates = NULL,
                                                kd = c(1, 2, 3), ky = NULL,
                                                q = 1.0, alpha = 0.05, ...) {
-  .morie_sens_need("sensemakr", "morie_sensitivity_omitted_var_bias")
   if (is.null(ky)) ky <- kd
-  args <- list(model = model, treatment = treatment, q = q, alpha = alpha)
-  if (!is.null(benchmark_covariates))
-    args$benchmark_covariates <- benchmark_covariates
-  args$kd <- kd
-  args$ky <- ky
-  args <- c(args, list(...))
-  raw <- do.call(sensemakr::sensemakr, args)
-  stats_summary <- tryCatch(raw$sensitivity_stats,
-                            error = function(e) NULL)
-  rv_q  <- if (!is.null(stats_summary)) as.numeric(stats_summary$rv_q) else NA_real_
-  rv_qa <- if (!is.null(stats_summary)) as.numeric(stats_summary$rv_qa) else NA_real_
-  partial_r2 <- if (!is.null(stats_summary))
-    as.numeric(stats_summary$r2yd.x) else NA_real_
-  bounds <- tryCatch(raw$bounds, error = function(e) NULL)
+  X <- stats::model.matrix(model)
+  y <- stats::model.response(stats::model.frame(model))
+  dof <- nrow(X) - ncol(X)
+  # coefficient t statistics of a least-squares fit
+  tstats <- function(M, v) {
+    fit <- stats::lm.fit(M, v)
+    df_ <- nrow(M) - ncol(M)
+    s2 <- sum(fit$residuals^2) / df_
+    XtXi <- chol2inv(chol(crossprod(M)))
+    list(t = fit$coefficients / sqrt(s2 * diag(XtXi)), df = df_)
+  }
+  ty <- tstats(X, y)
+  est <- stats::coef(model)[[treatment]]
+  t_d <- ty$t[[treatment]]
+  se <- est / t_d
+  bounds <- NULL
+  if (length(benchmark_covariates)) {
+    Xo <- X[, colnames(X) != treatment, drop = FALSE]
+    td <- tstats(Xo, X[, treatment])
+    rows <- lapply(benchmark_covariates, function(b) {
+      r2yxj <- ty$t[[b]]^2 / (ty$t[[b]]^2 + ty$df)
+      r2dxj <- td$t[[b]]^2 / (td$t[[b]]^2 + td$df)
+      out <- .morie_ovb_bound(est, se, dof, r2dxj, r2yxj, kd, ky, alpha)
+      cbind(bound_label = paste0(kd, "x ", b), out[, 1:2],
+            treatment = treatment, out[, -(1:2)],
+            stringsAsFactors = FALSE)
+    })
+    bounds <- do.call(rbind, rows)
+    rownames(bounds) <- NULL
+  }
   structure(
-    list(rv_q                 = rv_q,
-         rv_qa                = rv_qa,
-         partial_r2_treatment = partial_r2,
+    list(rv_q                 = .morie_ovb_rv(t_d, dof, q, 1),
+         rv_qa                = .morie_ovb_rv(t_d, dof, q, alpha),
+         partial_r2_treatment = t_d^2 / (t_d^2 + dof),
          benchmark_bounds     = bounds,
-         method               = "sensemakr (sensemakr)",
-         raw                  = raw),
+         method               = "sensemakr (native)",
+         raw                  = list(estimate = est, se = se, dof = dof)),
     class = c("morie_sensitivity_omitted_var_bias", "list")
   )
 }
 
 
-#' Konfound robustness for a coefficient (konfound extender)
+#' Konfound robustness for a coefficient (native konfound)
 #'
-#' Thin interface to \code{konfound::pkonfound}: how many cases would
-#' need to be replaced with average-treatment-effect cases (or how
-#' large would an omitted-variable correlation have to be) to invalidate
-#' the inference?  Pairs with
-#' \code{\link{morie_sensitivity_omitted_var_bias}} (which uses the
-#' Cinelli-Hazlett partial-R-squared framing instead of the
-#' Frank et al. percent-bias-to-invalidate framing).
+#' Native \code{konfound::pkonfound} (two tails, null 0): the threshold
+#' is \eqn{t^* se} with \eqn{t^*} on \eqn{n - n_{cov} - 2} df; the
+#' percent bias to invalidate is \eqn{100 (1 - t^* se / \hat\beta)} (to
+#' sustain when not significant) and RIR the corresponding number of
+#' cases to replace; the impact threshold of a confounding variable is
+#' \eqn{(r - r^*) / (1 \pm |r^*|)} with \eqn{r = t / \sqrt{t^2 + df}}.
+#' Pairs with \code{\link{morie_sensitivity_omitted_var_bias}}.  Mirrors
+#' \code{konfound} in the Python arm.
 #'
 #' @param estimate Treatment-coefficient estimate.
 #' @param se Standard error of \code{estimate}.
@@ -1077,51 +1110,44 @@ morie_sensitivity_omitted_var_bias <- function(model, treatment,
 #' @param n_covariates Number of covariates in the model
 #'   (excluding the intercept and the treatment).  Default 0.
 #' @param alpha Significance level.  Default 0.05.
-#' @param ... Additional arguments forwarded to
-#'   \code{konfound::pkonfound}.
+#' @param ... Unused.
 #' @return A list of class \code{morie_sensitivity_konfound} with
-#'   the percent-bias-to-invalidate, the impact-threshold-of-a-
-#'   confounding-variable (ITCV), and the raw konfound object.
+#'   \code{percent_bias_to_invalidate}, \code{rir},
+#'   \code{impact_threshold_confounder} and \code{beta_threshold}.
 #' @references Frank, K. A., Maroulis, S. J., Duong, M. Q., &
 #'   Kelcey, B. M. (2013). What would it take to change an
 #'   inference?  \emph{Educational Evaluation and Policy Analysis},
 #'   35(4), 437--460.
 #' @examples
-#' \dontshow{if (requireNamespace("konfound", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_sensitivity_konfound <- function(estimate, se, n,
                                        n_covariates = 0L,
                                        alpha = 0.05, ...) {
-  .morie_sens_need("konfound", "morie_sensitivity_konfound")
-  # konfound still calls ggplot2 idioms ggplot2 has deprecated; those
-  # lifecycle warnings are konfound's to fix, not the caller's
-  raw <- withCallingHandlers(
-    konfound::pkonfound(
-      est_eff = estimate, std_err = se,
-      n_obs = n, n_covariates = n_covariates,
-      alpha = alpha, to_return = "raw_output", ...
-    ),
-    warning = function(w) {
-      if (inherits(w, "lifecycle_warning_deprecated") ||
-          grepl("deprecated", conditionMessage(w), fixed = TRUE)) {
-        invokeRestart("muffleWarning")
-      }
-    }
-  )
-  pct_bias <- tryCatch(as.numeric(raw$percent_bias_to_change_inference),
-                       error = function(e) NA_real_)
-  itcv <- tryCatch(as.numeric(raw$itcv),
-                   error = function(e) NA_real_)
+  df <- n - n_covariates - 2
+  t_crit <- stats::qt(1 - alpha / 2, df) * (if (estimate < 0) -1 else 1)
+  thr <- t_crit * se
+  # percent bias to invalidate, or to sustain when not significant
+  pct <- if (abs(estimate) > abs(thr)) {
+    100 * (1 - thr / estimate)
+  } else {
+    100 * (1 - estimate / thr)
+  }
+  act_t <- estimate / se
+  act_r <- act_t / sqrt(act_t^2 + df)
+  crit_r <- t_crit / sqrt(t_crit^2 + df)
+  mp <- if (estimate > -abs(thr) && estimate < abs(thr)) 1 else -1
+  sgn <- sign(estimate - thr)
+  itcv <- sgn * abs(act_r - crit_r) / (1 + mp * abs(crit_r))
   structure(
-    list(estimate                       = estimate,
-         se                             = se,
-         n                              = n,
-         percent_bias_to_invalidate     = pct_bias,
-         impact_threshold_confounder    = itcv,
-         method                         = "pkonfound (konfound)",
-         raw                            = raw),
+    list(estimate                    = estimate,
+         se                          = se,
+         n                           = n,
+         percent_bias_to_invalidate  = pct,
+         rir                         = round(n * pct / 100),
+         impact_threshold_confounder = itcv,
+         beta_threshold              = thr,
+         method                      = "pkonfound (native)"),
     class = c("morie_sensitivity_konfound", "list")
   )
 }

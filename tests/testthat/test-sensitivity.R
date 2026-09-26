@@ -130,17 +130,20 @@ test_that("omitted_variable_bias returns rv_q in [0, 1]", {
   expect_lte(res$rv_qa, 1)
 })
 
-test_that("omitted_variable_bias degenerate f_stat<=1 yields rv_q=0", {
+test_that("omitted_variable_bias: a non-significant estimate has rv_qa = 0", {
   res <- omitted_variable_bias(estimate = 0.05, se = 0.1, dof = 100,
                                r2_yd_x = 0.01, partial_r2_treatment = 0.01)
-  expect_equal(res$rv_q, 0)
+  # sensemakr: fq = |t| / sqrt(dof) = 0.05, RV_q = 2 / (1 + sqrt(1 + 4 / fq^2))
+  expect_equal(res$rv_q, 2 / (1 + sqrt(1 + 4 / 0.05^2)), tolerance = 1e-12)
+  expect_equal(res$rv_qa, 0)
 })
 
 test_that("omitted_variable_bias benchmark_covariates writes bounds", {
   res <- omitted_variable_bias(0.5, 0.1, 100, 0.2, 0.1,
                                benchmark_covariates = list(z = 0.05))
   expect_true("z" %in% names(res$benchmark_bounds))
-  expect_length(res$benchmark_bounds[["z"]], 2L)
+  expect_equal(nrow(res$benchmark_bounds[["z"]]), 1L)
+  expect_true("adjusted_estimate" %in% names(res$benchmark_bounds[["z"]]))
 })
 
 # ---------------------------------------------------------------------------
@@ -265,16 +268,8 @@ test_that("sensitivity_summary appends RR / OR / HR rows when supplied", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_sensitivity_evalue dispatches OLS via EValue", {
-  skip_if_not_installed("EValue")
-  out <- tryCatch(
-    morie_sensitivity_evalue(estimate = 0.5, se = 0.1, sd = 1,
-                             type = "OLS"),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("morie_sensitivity_evalue error: %s",
-                 conditionMessage(out)))
-  }
+  out <- morie_sensitivity_evalue(estimate = 0.5, se = 0.1, sd = 1,
+                                  type = "OLS")
   expect_s3_class(out, "morie_sensitivity_evalue")
   expect_true(is.finite(as.numeric(out$e_value_point)))
   expect_equal(out$type, "OLS")
@@ -288,85 +283,52 @@ test_that("morie_sensitivity_evalue computes natively (no EValue needed)", {
 })
 
 test_that("morie_sensitivity_tipping_point dispatches tipr::tip", {
-  skip_if_not_installed("tipr")
-  out <- tryCatch(
-    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("morie_sensitivity_tipping_point error: %s",
-                 conditionMessage(out)))
-  }
+  out <- morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5)
   expect_s3_class(out, "morie_sensitivity_tipping_point")
-  expect_true(grepl("tipr", out$method))
+  expect_true(grepl("tip", out$method))
+  # tipr::tip: confounder-outcome effect b^(1 / smd)
+  expect_equal(out$confounder_outcome_effect, 0.5^(1 / 0.5))
 })
 
-test_that("morie_sensitivity_tipping_point errors when tipr missing", {
-  if (requireNamespace("tipr", quietly = TRUE)) skip(
-    "tipr is installed; cannot test missing-package error path."
-  )
-  expect_error(
-    morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5),
-    regexp = "tipr"
-  )
+test_that("morie_sensitivity_tipping_point is native (no tipr)", {
+  out <- morie_sensitivity_tipping_point(estimate = 0.5, smd = 0.5)
+  expect_s3_class(out, "morie_sensitivity_tipping_point")
+  expect_error(morie_sensitivity_tipping_point(estimate = 0.5, r2 = 0.1),
+               "omitted_variable_bias")
 })
 
 test_that("morie_sensitivity_omitted_var_bias wraps sensemakr on lm", {
-  skip_if_not_installed("sensemakr")
   set.seed(7)
   n <- 200L
   d <- rnorm(n)
   z <- rnorm(n)
   y <- 0.5 * d + 0.3 * z + rnorm(n)
   fit <- stats::lm(y ~ d + z)
-  out <- tryCatch(
-    morie_sensitivity_omitted_var_bias(fit, treatment = "d",
-                                       benchmark_covariates = "z"),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("morie_sensitivity_omitted_var_bias error: %s",
-                 conditionMessage(out)))
-  }
+  out <- morie_sensitivity_omitted_var_bias(fit, treatment = "d",
+                                            benchmark_covariates = "z")
   expect_s3_class(out, "morie_sensitivity_omitted_var_bias")
   expect_true(is.finite(as.numeric(out$rv_q)))
   expect_true(grepl("sensemakr", out$method))
 })
 
-test_that("morie_sensitivity_omitted_var_bias errors when sensemakr missing", {
-  if (requireNamespace("sensemakr", quietly = TRUE)) skip(
-    "sensemakr is installed; cannot test missing-package error path."
-  )
+test_that("morie_sensitivity_omitted_var_bias is native (no sensemakr)", {
   fit <- stats::lm(mpg ~ wt + hp, data = mtcars)
-  expect_error(
-    morie_sensitivity_omitted_var_bias(fit, treatment = "wt"),
-    regexp = "sensemakr"
-  )
+  out <- morie_sensitivity_omitted_var_bias(fit, treatment = "wt")
+  expect_s3_class(out, "morie_sensitivity_omitted_var_bias")
+  expect_null(out$benchmark_bounds)
 })
 
 test_that("morie_sensitivity_konfound dispatches pkonfound", {
-  skip_if_not_installed("konfound")
-  out <- tryCatch(
-    morie_sensitivity_konfound(estimate = 0.5, se = 0.1, n = 200L,
-                               n_covariates = 3L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("morie_sensitivity_konfound error: %s",
-                 conditionMessage(out)))
-  }
+  out <- morie_sensitivity_konfound(estimate = 0.5, se = 0.1, n = 200L,
+                                    n_covariates = 3L)
   expect_s3_class(out, "morie_sensitivity_konfound")
   expect_true(grepl("konfound", out$method))
 })
 
-test_that("morie_sensitivity_konfound errors when konfound missing", {
-  if (requireNamespace("konfound", quietly = TRUE)) skip(
-    "konfound is installed; cannot test missing-package error path."
-  )
-  expect_error(
-    morie_sensitivity_konfound(estimate = 0.5, se = 0.1, n = 200L),
-    regexp = "konfound"
-  )
+test_that("morie_sensitivity_konfound is native (no konfound)", {
+  out <- morie_sensitivity_konfound(estimate = 0.5, se = 0.1, n = 200L)
+  expect_s3_class(out, "morie_sensitivity_konfound")
+  expect_true(out$percent_bias_to_invalidate > 0)
 })
 
 test_that("rosenbaum_bounds at Gamma = 1 is the signed-rank p-value, zero pairs dropped", {
@@ -379,4 +341,104 @@ test_that("rosenbaum_bounds at Gamma = 1 is the signed-rank p-value, zero pairs 
   z <- (sum(rk[d > 0]) - sum(rk) / 2) / sqrt(sum(rk^2) / 4)
   expect_equal(b$p_upper[1], stats::pnorm(z, lower.tail = FALSE), tolerance = 1e-12)
   expect_gte(b$p_upper[2], b$p_upper[1])
+})
+
+test_that("E-values equal EValue::evalues.*", {
+  # reference: EValue evalues.OR(rare = FALSE), evalues.HR(rare = TRUE /
+  # FALSE), evalues.MD(se = 0.2), evalues.OLS(se = 0.4, sd = 3)
+  o <- e_value_or(2.5, 1.4, 4.0, prevalence = 0.3)
+  expect_equal(c(o$e_value_point, o$e_value_ci),
+               c(2.53971129469801, 1.6488166904897), tolerance = 1e-10)
+  o <- e_value_hr(1.8, 1.2, 2.6, rare = TRUE)
+  expect_equal(c(o$e_value_point, o$e_value_ci),
+               c(3, 1.68989794855664), tolerance = 1e-10)
+  o <- e_value_hr(1.8, 1.2, 2.6)
+  expect_equal(c(o$e_value_point, o$e_value_ci),
+               c(2.36714327129528, 1.52553091757873), tolerance = 1e-10)
+  o <- e_value_d(0.5, se = 0.2)
+  expect_equal(c(o$e_value_point, o$e_value_ci),
+               c(2.52914198186127, 1.44302956344269), tolerance = 1e-10)
+  o <- morie_sensitivity_evalue(1.2, se = 0.4, sd = 3, type = "OLS")
+  expect_equal(c(o$e_value_point, o$e_value_ci),
+               c(2.23397067263333, 1.52654088731104), tolerance = 1e-10)
+})
+
+test_that("omitted-variable bias equals sensemakr", {
+  # reference: sensemakr(lm(y ~ d + x1 + x2), "d",
+  #   benchmark_covariates = "x2", kd = 1:2)
+  i <- 1:200
+  dd <- data.frame(x1 = sin(i), x2 = cos(1.7 * i))
+  dd$d <- 0.5 * dd$x1 + 0.6 * sin(3.1 * i)
+  dd$y <- 0.4 * dd$d + 0.8 * dd$x1 + 0.3 * dd$x2 + 0.5 * cos(2.3 * i)
+  m <- stats::lm(y ~ d + x1 + x2, dd)
+  w <- morie_sensitivity_omitted_var_bias(m, "d", benchmark_covariates = "x2",
+                                          kd = 1:2)
+  expect_equal(c(w$rv_q, w$rv_qa, w$partial_r2_treatment),
+               c(0.392125514801805, 0.302160713916727, 0.201884150359101),
+               tolerance = 1e-10)
+  b <- w$benchmark_bounds
+  expect_equal(b$bound_label, c("1x x2", "2x x2"))
+  expect_equal(b$r2yz.dx, c(0.360605510962075, 0.721211021924157),
+               tolerance = 1e-10)
+  expect_equal(b$adjusted_estimate, c(0.407276404370285, 0.407147837764754),
+               tolerance = 1e-10)
+  expect_equal(b$adjusted_lower_CI, c(0.315799103054239, 0.346743696480369),
+               tolerance = 1e-10)
+  expect_equal(b$adjusted_upper_CI, c(0.498753705686331, 0.46755197904914),
+               tolerance = 1e-10)
+  # closed form on the same inputs, and the extreme robustness value
+  ov <- omitted_variable_bias(0.407404970966835, 0.0578602283905763, 196,
+                              0.2, 0.2, benchmark_covariates =
+                                list(x2 = c(6.9856611516024e-08,
+                                            0.265033083453015)))
+  expect_equal(c(ov$rv_q, ov$rv_qa),
+               c(0.392125514801805, 0.302160713916727), tolerance = 1e-10)
+  expect_equal(ov$benchmark_bounds$x2$adjusted_se, 0.0463847620602711,
+               tolerance = 1e-10)
+  ox <- omitted_variable_bias(40, 1, 30, 0, 0)
+  expect_equal(c(ox$rv_qa, ox$rv_q), c(0.9789403653761, 0.981921804436961),
+               tolerance = 1e-10)
+})
+
+test_that("konfound and tip equal konfound::pkonfound and tipr::tip", {
+  k1 <- morie_sensitivity_konfound(0.4, 0.1, 150, 3)
+  expect_equal(c(k1$percent_bias_to_invalidate, k1$rir,
+                 k1$impact_threshold_confounder, k1$beta_threshold),
+               c(50.5885109341772, 76, 0.182899388060936, 0.197645956263291),
+               tolerance = 1e-10)
+  k2 <- morie_sensitivity_konfound(-0.12, 0.1, 150, 3)
+  expect_equal(c(k2$percent_bias_to_invalidate, k2$rir,
+                 k2$impact_threshold_confounder, k2$beta_threshold),
+               c(39.2853755934456, 59, 0.0540508223426875,
+                 -0.197645956263291), tolerance = 1e-10)
+  expect_equal(
+    morie_sensitivity_tipping_point(1.8, smd = 0.5)$confounder_outcome_effect,
+    3.24, tolerance = 1e-12)
+})
+
+test_that("McNemar Rosenbaum bound is the exact binomial tail; Manski width is b - a", {
+  tt <- c(rep(1, 30), rep(0, 12), rep(1, 5))
+  cc <- c(rep(0, 30), rep(1, 12), rep(1, 5))
+  rb <- rosenbaum_bounds(tt, cc, gamma_range = c(1, 2), method = "mcnemar")
+  expect_equal(rb$p_upper[1],
+               stats::binom.test(30, 42, alternative = "greater")$p.value,
+               tolerance = 1e-12)
+  expect_equal(rb$p_upper[2],
+               stats::pbinom(29, 42, 2 / 3, lower.tail = FALSE),
+               tolerance = 1e-12)
+  # sign test counts the non-zero pairs only
+  rs <- rosenbaum_bounds(c(1, 2, 3, 3, 5), c(0, 0, 3, 3, 1),
+                         gamma_range = 1, method = "sign")
+  expect_equal(rs$p_upper, stats::pbinom(2, 3, 0.5, lower.tail = FALSE))
+  mb <- manski_bounds(c(0.2, 0.9, 0.7), c(0.1, 0.4), p_treated = 0.6)
+  expect_equal(mb$width, 1)
+  expect_equal(mb$lower_bound, 0.6 * 0.6 + 0 - (0.25 * 0.4 + 0.6))
+  # Ding-VanderWeele bounding factor and Schlesselman's exact bias
+  ba <- bias_adjusted_estimate(0.5, 0.1, rr_ud = 2, rr_eu = 3)
+  expect_equal(ba$bias, log(2 * 3 / (2 + 3 - 1)))
+  ba2 <- bias_adjusted_estimate(0.5, 0.1, rr_ud = 2, rr_eu = 2,
+                                prevalence_confounder = 0.2)
+  expect_equal(ba2$bias, log((1 + 0.4) / (1 + 0.2)))
+  tp <- tipping_point_analysis(0.5, 0.15, 100, 100)
+  expect_equal(tp$tipping_point, 0.5 - stats::qnorm(0.975) * 0.15)
 })
