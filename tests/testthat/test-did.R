@@ -618,3 +618,29 @@ test_that("DID_M counts joiners and leavers (de Chaisemartin & D'Haultfoeuille 2
                tolerance = 1e-12)
   expect_equal(unname(r$estimate), 0.879860090735746, tolerance = 1e-10)
 })
+
+test_that("honest sensitivity identified set equals HonestDiD Delta-RM", {
+  # reference: HonestDiD:::.compute_IDset_DeltaRM(Mbar, c(pre, post), l_vec)
+  df <- expand.grid(unit = 1:60, time = 1:9)
+  df$treat_time <- ifelse(df$unit <= 30, 6, Inf)
+  df$d <- as.integer(df$time >= df$treat_time)
+  df$y <- 0.4 * df$time + 1.2 * df$d + 0.05 * (df$unit <= 30) * df$time +
+    0.6 * sin(1.3 * df$unit * df$time) + 0.3 * cos(0.7 * df$unit)
+  es <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
+                              leads = 4L, lags = 3L)
+  o0 <- morie_did_honest_sensitivity(es, m_bar_range = c(0.5, 1, 2))
+  expect_equal(o0$id_lower,
+               c(1.23094239561005, 1.18959317035158, 1.10689471983464),
+               tolerance = 1e-10)
+  expect_equal(o0$id_upper,
+               c(1.313640846127, 1.35499007138547, 1.43768852190242),
+               tolerance = 1e-10)
+  o2 <- morie_did_honest_sensitivity(es, m_bar_range = c(0.5, 1, 2),
+                                     target_time = 2L)
+  expect_equal(o2$id_lower,
+               c(1.19519004303279, 1.07114236725737, 0.823047015706535),
+               tolerance = 1e-10)
+  expect_equal(o2$id_upper,
+               c(1.44328539458363, 1.56733307035904, 1.81542842190988),
+               tolerance = 1e-10)
+})

@@ -1939,11 +1939,11 @@ morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
 #' For each \eqn{\delta}{delta}, computes a bias-adjusted confidence
 #' set under the bound
 #' \eqn{|\mathrm{bias}| \le \delta \hat\sigma}{|bias| <= delta hatsigma}
-#' (Rambachan & Roth, 2023, conservative version).
+#' -- a fixed-bias band in the spirit of Rambachan & Roth (2023); a
+#' 2x2 design has no pre-periods to calibrate their sets.
 #'
-#' For a relative-magnitudes bound anchored on observed event-study
-#' pre-trends (Rambachan & Roth's \eqn{\bar M}{M-bar}
-#' parameterization, conservative version) see
+#' For their relative-magnitudes set
+#' \eqn{\Delta^{RM}(\bar M)}{Delta-RM(M-bar)} on an event study see
 #' \code{\link{morie_did_honest_sensitivity}}.
 #'
 #' @inheritParams morie_did_2x2
@@ -1989,16 +1989,19 @@ morie_did_sensitivity_analysis <- function(data, outcome, treatment, post,
 
 #' Honest (relative-magnitudes) sensitivity for event-study estimates
 #'
-#' Conservative Rambachan-Roth (2023) relative-magnitudes bounds on an
-#' event-study coefficient: the post-treatment bias from a
-#' parallel-trends violation is bounded by
-#' \eqn{\bar M}{M-bar} times the largest observed pre-treatment
-#' deviation, and the confidence interval is widened by that bound.
-#' \eqn{\bar M = 0}{M-bar = 0} reproduces the conventional CI;
-#' \eqn{\bar M = 1}{M-bar = 1} allows post-treatment violations as
-#' large as the worst pre-trend. This is the conservative (fixed-bias)
-#' version of the relative-magnitudes parameterization, anchored on
-#' the estimated pre-period coefficients.
+#' Rambachan-Roth (2023) relative-magnitudes sensitivity for an
+#' event-study coefficient. Under \eqn{\Delta^{RM}(\bar M)}{Delta-RM(M-bar)}
+#' every post-period change in the trend violation is at most
+#' \eqn{\bar M}{M-bar} times the largest change between consecutive
+#' pre-periods (the reference period counts as zero), so the violation
+#' at the target lies within \eqn{k \bar M m}{k M-bar m} of the last
+#' pre-period, \eqn{k} steps later. \code{id_lower} / \code{id_upper}
+#' are that identified set evaluated at the estimated coefficients
+#' (equal to HonestDiD's \code{.compute_IDset_DeltaRM}); the interval
+#' widens it by \eqn{z}{z} standard errors of the target coefficient, a
+#' plug-in band that treats the pre-period changes as known (it is not
+#' HonestDiD's conditional / hybrid ARP interval).
+#' \eqn{\bar M = 0}{M-bar = 0} reproduces the conventional CI.
 #'
 #' @param event_study The result of \code{\link{morie_did_event_study}}
 #'   (or any list with a \code{coefficients} data frame containing
@@ -2009,9 +2012,11 @@ morie_did_sensitivity_analysis <- function(data, outcome, treatment, post,
 #'   to bound (default \code{0}, the onset period).
 #' @param alpha Significance level.
 #' @return A data frame with columns \code{m_bar}, \code{estimate},
-#'   \code{ci_lower}, \code{ci_upper}, \code{covers_zero}, plus a
-#'   \code{breakdown_m_bar} attribute (the smallest evaluated
-#'   \eqn{\bar M}{M-bar} whose interval covers zero).
+#'   \code{id_lower}, \code{id_upper}, \code{ci_lower},
+#'   \code{ci_upper}, \code{covers_zero}, plus \code{breakdown_m_bar}
+#'   (the smallest evaluated \eqn{\bar M}{M-bar} whose interval covers
+#'   zero) and \code{max_pre_deviation} (the largest consecutive
+#'   pre-period change) attributes.
 #' @references Rambachan, A., & Roth, J. (2023). A more credible
 #'   approach to parallel trends. \emph{Review of Economic Studies},
 #'   90(5), 2555--2591.
@@ -2052,15 +2057,34 @@ morie_did_honest_sensitivity <- function(event_study,
       call. = FALSE
     )
   }
-  pre <- cf[cf$relative_time < 0 & cf$std_error > 0, , drop = FALSE]
-  max_pre <- if (nrow(pre)) max(abs(pre$estimate)) else 0
+  # Delta^RM(M-bar) (Rambachan & Roth 2023, section 2.4.2): each
+  # post-period change |delta_{t+1} - delta_t| is at most M-bar times
+  # the largest pre-period change, with delta = 0 at the reference
+  # period. The pre sequence is the pre-period coefficients plus the
+  # reference period's zero; the target lies `steps` changes after it.
+  ref <- if (is.null(event_study$reference_period)) -1L else event_study$reference_period
+  pre <- cf[cf$relative_time < 0 & cf$relative_time != ref,
+            c("relative_time", "estimate"), drop = FALSE]
+  pre <- rbind(pre, data.frame(relative_time = ref, estimate = 0))
+  pre <- pre[order(pre$relative_time), , drop = FALSE]
+  if (target_time <= max(pre$relative_time)) {
+    stop("`target_time` must be a post-treatment relative time.",
+      call. = FALSE
+    )
+  }
+  max_pre <- if (nrow(pre) > 1L) max(abs(diff(pre$estimate))) else 0
+  steps <- target_time - max(pre$relative_time)
+  anchor <- pre$estimate[nrow(pre)]
   z <- stats::qnorm(1 - alpha / 2)
   rows <- lapply(m_bar_range, function(m_bar) {
-    bias <- m_bar * max_pre
-    lo <- row$estimate - bias - z * row$std_error
-    hi <- row$estimate + bias + z * row$std_error
+    half <- steps * m_bar * max_pre
+    id_lo <- row$estimate - anchor - half
+    id_hi <- row$estimate - anchor + half
+    lo <- id_lo - z * row$std_error
+    hi <- id_hi + z * row$std_error
     data.frame(
       m_bar = m_bar, estimate = row$estimate,
+      id_lower = id_lo, id_upper = id_hi,
       ci_lower = lo, ci_upper = hi,
       covers_zero = lo <= 0 & 0 <= hi
     )
