@@ -31,6 +31,15 @@
       u <- h / rng
       ifelse(h <= rng, 1 - 1.5 * u + 0.5 * u^3, 0)
     },
+    tent = {
+      # Sec 4.3.3, p. 146: the spherical-family member valid in R^1.
+      ifelse(h <= rng, 1 - h / rng, 0)
+    },
+    circular = {
+      # Sec 4.3.3, p. 146: the spherical-family member valid in R^2.
+      u <- pmin(h / rng, 1)
+      ifelse(h <= rng, 2 / pi * (acos(u) - u * sqrt(1 - u^2)), 0)
+    },
     stop("unknown model: ", model)
   )
 }

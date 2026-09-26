@@ -158,3 +158,17 @@ test_that("input validation", {
   expect_error(spkfun(matrix(runif(40), 20, 2), region = c(0, 0, 0, 5)),
                "positive area")
 })
+
+test_that("circular and tent models equal gstat Cir and Lin (Sec 4.3.3, p. 146)", {
+  h <- c(0, 0.3, 1, 1.7, 2.5, 3, 4)
+  # gstat::variogramLine(vgm(psill = 2, "Cir" / "Lin", range = 3, nugget = 0.5), dist_vector = h)
+  expect_equal(spcirc(h, 0.5, 2, 3)$gamma,
+               c(0, 0.75422285686090684, 1.33283437683622985, 1.86154890899851444,
+                 2.34079003836406629, 2.5, 2.5), tolerance = 1e-12)
+  expect_equal(sptent(h, 0.5, 2, 3)$gamma,
+               c(0, 0.69999999999999996, 1.16666666666666652, 1.63333333333333330,
+                 2.16666666666666696, 2.5, 2.5), tolerance = 1e-12)
+  u <- c(0.2, 0.9, 1.6) / 2
+  expect_equal(spcirc(u * 2, 0, 1, 2)$gamma,
+               1 - 2 / pi * (acos(u) - u * sqrt(1 - u^2)), tolerance = 1e-15)
+})
