@@ -494,7 +494,109 @@
   z_a <- stats::qnorm(1 - alpha / 2)
   res$ci_lower <- res$att - z_a * res$se
   res$ci_upper <- res$att + z_a * res$se
-  list(results = res, IF = IF_mat, n = n_ids, alpha = alpha)
+  list(
+    results = res, IF = IF_mat, n = n_ids, alpha = alpha,
+    # per-unit cohort (0 = never treated) in IF row order, for aggregation
+    G = g_all[match(as.character(ids), as.character(df[[unit]]))],
+    biters = as.integer(biters), seed = seed
+  )
+}
+
+# ---------------------------------------------------------------------------
+# Aggregation of ATT(g,t) (did::aggte)
+# ---------------------------------------------------------------------------
+
+#' Internal helper: aggregate ATT(g,t) with influence functions
+#'
+#' Reproduces did::aggte: cohort-share weights P(G = g), the estimated-
+#' weight influence-function term, and SE sqrt(mean(IF^2) / n) (or the
+#' multiplier bootstrap when the ATT(g,t) fit used one).
+#'
+#' @srrstats {G1.0} Callaway & Sant'Anna (2021), Journal of
+#'   Econometrics 225(2) 200-230, section 3.
+#' @noRd
+.morie_did_aggte_native <- function(fit, type = "simple") {
+  r <- fit$results
+  grp <- r$group
+  tt <- r$t
+  att <- r$att
+  IF <- fit$IF
+  G <- fit$G
+  n <- fit$n
+  glist <- sort(unique(grp))
+  pgg <- vapply(glist, function(g) mean(G == g), numeric(1))
+  pg <- pgg[match(grp, glist)]
+  se_of <- function(inf) {
+    se <- if (fit$biters > 0L) {
+      .morie_did_mboot(inf, biters = fit$biters, seed = fit$seed)$se
+    } else {
+      sqrt(mean(inf^2) / n)
+    }
+    if (!is.finite(se) || se <= sqrt(.Machine$double.eps) * 10) NA_real_ else se
+  }
+  # IF of the estimated weights pg[k] / sum(pg[keep])
+  wif <- function(keep, pgv, gv) {
+    s <- sum(pgv[keep])
+    centered <- vapply(keep, function(k) (G == gv[k]) - pgv[k], numeric(n))
+    centered <- matrix(centered, nrow = n)
+    centered / s - rowSums(centered) %o% (pgv[keep] / s^2)
+  }
+  agg_if <- function(a, inf, keep, w, wf = NULL) {
+    out <- inf[, keep, drop = FALSE] %*% w
+    if (!is.null(wf)) out <- out + wf %*% a[keep]
+    as.numeric(out)
+  }
+  one <- function(keep, wf = TRUE) {
+    w <- pg[keep] / sum(pg[keep])
+    inf <- agg_if(att, IF, keep, w, if (wf) wif(keep, pg, grp))
+    list(est = sum(w * att[keep]), inf = inf, se = se_of(inf))
+  }
+  if (identical(type, "simple")) {
+    s <- one(which(grp <= tt))
+    return(list(overall = s$est, overall_se = s$se, egt = NULL))
+  }
+  if (identical(type, "group")) {
+    parts <- lapply(glist, function(g) one(which(grp == g & g <= tt), wf = FALSE))
+    est_g <- vapply(parts, `[[`, numeric(1), "est")
+    inf_g <- vapply(parts, `[[`, numeric(n), "inf")
+    inf_g <- matrix(inf_g, nrow = n)
+    k <- seq_along(glist)
+    inf <- agg_if(est_g, inf_g, k, pgg / sum(pgg), wif(k, pgg, glist))
+    return(list(
+      overall = sum(est_g * pgg) / sum(pgg), overall_se = se_of(inf),
+      egt = glist, att_egt = est_g,
+      se_egt = vapply(parts, `[[`, numeric(1), "se")
+    ))
+  }
+  if (identical(type, "dynamic")) {
+    e <- tt - grp
+    eseq <- sort(unique(e))
+    parts <- lapply(eseq, function(ee) one(which(e == ee)))
+    est_e <- vapply(parts, `[[`, numeric(1), "est")
+    inf_e <- matrix(vapply(parts, `[[`, numeric(n), "inf"), nrow = n)
+    k <- which(eseq >= 0)
+    inf <- agg_if(est_e, inf_e, k, rep(1 / length(k), length(k)))
+    return(list(
+      overall = mean(est_e[k]), overall_se = se_of(inf),
+      egt = eseq, att_egt = est_e,
+      se_egt = vapply(parts, `[[`, numeric(1), "se")
+    ))
+  }
+  if (identical(type, "calendar")) {
+    tl <- sort(unique(tt[tt >= min(grp)]))
+    tl <- tl[vapply(tl, function(t1) any(tt == t1 & grp <= tt), logical(1))]
+    parts <- lapply(tl, function(t1) one(which(tt == t1 & grp <= tt)))
+    est_t <- vapply(parts, `[[`, numeric(1), "est")
+    inf_t <- matrix(vapply(parts, `[[`, numeric(n), "inf"), nrow = n)
+    k <- seq_along(tl)
+    inf <- agg_if(est_t, inf_t, k, rep(1 / length(k), length(k)))
+    return(list(
+      overall = mean(est_t), overall_se = se_of(inf),
+      egt = tl, att_egt = est_t,
+      se_egt = vapply(parts, `[[`, numeric(1), "se")
+    ))
+  }
+  stop("Unknown aggregation type: ", type)
 }
 
 # ---------------------------------------------------------------------------

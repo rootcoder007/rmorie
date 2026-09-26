@@ -932,7 +932,11 @@ morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
 #' Mirrors the canonical aggregation schemes (overall ATT, by-cohort,
 #' by-calendar-time, by-event-time) and produces a tidy
 #' \code{data.frame} consumed by the rmorie / MRM downstream
-#' pipelines.
+#' pipelines. When \code{gt_results} is the unmodified output of
+#' \code{\link{morie_did_group_time_att}}, the aggregation uses its
+#' influence functions and reproduces \code{did::aggte} (simple, group,
+#' dynamic and calendar types), including the estimated-weight term;
+#' otherwise cells are combined as independent estimates.
 #'
 #' @param gt_results Output of \code{\link{morie_did_group_time_att}}.
 #' @param aggregation One of \code{"overall"} (default), \code{"cohort"},
@@ -956,6 +960,28 @@ morie_did_aggregate_gt_att <- function(gt_results,
                                        cohort_col = "cohort",
                                        att_col = "att",
                                        se_col = "std_error") {
+  fit <- attr(gt_results, "fit")
+  if (!is.null(fit) && !is.null(fit$G) &&
+    nrow(gt_results) == nrow(fit$results)) {
+    # influence-function aggregation, as did::aggte
+    type <- switch(aggregation,
+      overall = "simple", cohort = "group",
+      calendar_time = "calendar", event_time = "dynamic",
+      stop("Unknown aggregation: ", aggregation)
+    )
+    a <- .morie_did_aggte_native(fit, type)
+    z <- stats::qnorm(1 - fit$alpha / 2)
+    mk <- function(g, est, se) {
+      data.frame(
+        group = g, estimate = est, std_error = se,
+        ci_lower = est - z * se, ci_upper = est + z * se
+      )
+    }
+    if (identical(type, "simple")) {
+      return(mk("overall", a$overall, a$overall_se))
+    }
+    return(mk(a$egt, a$att_egt, a$se_egt))
+  }
   df <- gt_results
   df[["morie_rel_time"]] <- df[[time_col]] - df[[cohort_col]]
   # Cells with t < g are PRE-treatment. They are the parallel-trends

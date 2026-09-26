@@ -496,3 +496,43 @@ test_that("parallel-trends joint Wald equals fixest::wald", {
   expect_equal(r2$joint_f_stat, 0.188423585724467, tolerance = 1e-10)
   expect_equal(r2$joint_p_value, 0.904089344068759, tolerance = 1e-10)
 })
+
+test_that("group-time ATT aggregation equals did::aggte", {
+  # reference: did::att_gt(xformla = ~x, bstrap = FALSE) then
+  # did::aggte(type = "simple" / "group" / "dynamic", bstrap = FALSE)
+  df <- expand.grid(id = 1:60, t = 1:6)
+  gid <- c(rep(3, 15), rep(4, 15), rep(5, 12), rep(0, 18))
+  df$G <- gid[df$id]
+  df$x <- cos(1.3 * df$id)
+  df$y <- sin(0.7 * df$id) + 0.2 * df$t + 0.4 * df$x * df$t / 3 +
+    ifelse(df$G > 0 & df$t >= df$G, 0.5 + 0.1 * (df$t - df$G), 0) +
+    0.3 * cos(2.1 * df$id * df$t)
+  df$Gi <- ifelse(df$G == 0, Inf, df$G)
+  gt <- morie_did_group_time_att(df, "y", "id", "t", "Gi",
+                                 covariates = "x", n_bootstrap = 0L)
+  ov <- morie_did_aggregate_gt_att(gt, aggregation = "overall")
+  expect_equal(ov$estimate, 0.680720069727177, tolerance = 1e-10)
+  expect_equal(ov$std_error, 0.0307827144376915, tolerance = 1e-10)
+  co <- morie_did_aggregate_gt_att(gt, aggregation = "cohort")
+  expect_equal(co$estimate,
+               c(0.760138449710617, 0.603668526906854, 0.626645762556686),
+               tolerance = 1e-10)
+  expect_equal(co$std_error,
+               c(0.0529726630687719, 0.0315205359155238, 0.105803645031071),
+               tolerance = 1e-10)
+  gt2 <- morie_did_group_time_att(df, "y", "id", "t", "Gi",
+                                  covariates = "x",
+                                  method = "outcome_regression",
+                                  control_group = "not_yet_treated",
+                                  n_bootstrap = 0L)
+  ev <- morie_did_aggregate_gt_att(gt2, aggregation = "event_time")
+  expect_equal(ev$group, -3:3)
+  expect_equal(ev$estimate, c(0.00065953484673939, 0.00725994205258019,
+                              0.00687541685809847, 0.50096180806059,
+                              0.614759267545716, 0.788858787835507,
+                              1.13359903056218), tolerance = 1e-10)
+  expect_equal(ev$std_error, c(0.0403357734533585, 0.0370813522917365,
+                               0.0357685577536678, 0.051117871440564,
+                               0.0396760732308281, 0.0278547541602288,
+                               0.0758576178078758), tolerance = 1e-10)
+})
