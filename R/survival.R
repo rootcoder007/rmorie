@@ -276,15 +276,20 @@ morie_cox_partial_loglik <- function(time, event, X, beta,
 morie_concordance_index <- function(time, event, predicted_risk) {
   n <- length(time)
   conc <- disc <- tied <- 0
+  ## Harrell pairs, as survival::concordance: i and j are comparable when
+  ## the earlier time is an event, or when the times tie with an event and
+  ## a censoring (the censored unit was still at risk). Two events at the
+  ## same time are a time tie and are not scored; tied risks count 1/2.
   for (i in seq_len(n - 1)) for (j in (i + 1):n) {
-    if (time[i] < time[j] && event[i] == 1) { lo <- i
-    hi <- j }
-    else if (time[j] < time[i] && event[j] == 1) { lo <- j
-    hi <- i }
-    else if (time[i] == time[j] && event[i] == 1 && event[j] == 1) {
-      if (predicted_risk[i] != predicted_risk[j]) tied <- tied + 1
+    if (event[i] == 1 && (time[i] < time[j] || (time[i] == time[j] && event[j] == 0))) {
+      lo <- i
+      hi <- j
+    } else if (event[j] == 1 && (time[j] < time[i] || (time[j] == time[i] && event[i] == 0))) {
+      lo <- j
+      hi <- i
+    } else {
       next
-    } else next
+    }
     if (predicted_risk[lo] > predicted_risk[hi]) conc <- conc + 1
     else if (predicted_risk[lo] < predicted_risk[hi]) disc <- disc + 1
     else tied <- tied + 1
