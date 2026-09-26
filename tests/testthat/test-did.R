@@ -536,3 +536,29 @@ test_that("group-time ATT aggregation equals did::aggte", {
                                0.0396760732308281, 0.0278547541602288,
                                0.0758576178078758), tolerance = 1e-10)
 })
+
+test_that("Bacon decomposition equals bacondecomp::bacon", {
+  # reference: bacondecomp::bacon(y ~ D, id_var = "id", time_var = "t")
+  df <- expand.grid(id = 1:60, t = 1:6)
+  gid <- c(rep(3, 15), rep(4, 15), rep(5, 12), rep(0, 18))
+  df$G <- gid[df$id]
+  df$x <- cos(1.3 * df$id)
+  df$y <- sin(0.7 * df$id) + 0.2 * df$t + 0.4 * df$x * df$t / 3 +
+    ifelse(df$G > 0 & df$t >= df$G, 0.5 + 0.1 * (df$t - df$G), 0) +
+    0.3 * cos(2.1 * df$id * df$t)
+  df$D <- as.integer(df$G > 0 & df$t >= df$G)
+  r <- morie_did_bacon_decomposition(df, "y", "D", "id", "t")
+  cp <- r$components
+  cp <- cp[order(cp$treated, as.numeric(cp$untreated)), ]
+  expect_equal(cp$estimate, c(
+    0.523568287270677, 0.616746934635197, 0.752103993303805,
+    0.388211962376151, 0.524521848065035, 0.642924957220009,
+    0.243329389807110, 0.319243244825162, 0.542736084292959
+  ), tolerance = 1e-10)
+  expect_equal(cp$weight, c(
+    0.0459981600735971, 0.0735970561177553, 0.2207911683532659,
+    0.0689972401103956, 0.0551977920883165, 0.2483900643974241,
+    0.0735970561177553, 0.0367985280588776, 0.1766329346826127
+  ), tolerance = 1e-10)
+  expect_equal(r$overall_estimate, 0.576487105060352, tolerance = 1e-10)
+})
