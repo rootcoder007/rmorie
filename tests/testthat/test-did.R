@@ -465,3 +465,34 @@ test_that("TWFE and the event study equal fixest (balanced and unbalanced panels
   expect_equal(cf$std_error[i], c(0.0940534922065, 0.0899078370266, 0.0939645477063), tolerance = 1e-10)
   expect_equal(c(es$pre_trend_f_stat, es$pre_trend_p_value), c(0.216136594631, 0.884611828383), tolerance = 1e-9)
 })
+
+test_that("synthetic DiD equals synthdid (estimate, jackknife, bootstrap and placebo SEs)", {
+  d <- expand.grid(time = 1:8, unit = 1:40)
+  d$g <- ifelse(d$unit <= 12, 4, ifelse(d$unit <= 24, 6, 0))
+  d$D <- as.integer(d$g > 0 & d$time >= d$g)
+  d$x <- round(sin(1.3 * d$unit) + 0.2 * d$time, 4)
+  d$y <- round(0.5 * d$unit / 10 + 0.3 * d$time + 1.5 * d$D + 0.4 * d$D * (d$time - d$g) * (d$g > 0) +
+                 0.3 * sin(2.7 * d$unit * d$time) + 0.2 * d$x, 5)
+  b <- d[d$g %in% c(0, 4), ]
+  b$W <- as.integer(b$g == 4 & b$time >= 4)
+  # synthdid_estimate(Y, N0, T0) and vcov(method = "jackknife")
+  r <- morie_did_synthdid_estimate(b, "unit", "time", "W", "y", vcov_method = "jackknife")
+  expect_equal(c(r$att, r$std_error), c(2.27183974304, 0.0699340890602), tolerance = 1e-10)
+  expect_equal(r$raw$time_weights, c(0.314692, 0.321395, 0.363913), tolerance = 1e-5)
+})
+
+test_that("parallel-trends joint Wald equals fixest::wald", {
+  # reference: feols(y ~ g * factor(t), cluster = ~id) then wald(keep = "^g:tf")
+  G <- 30
+  df <- expand.grid(id = 1:G, t = 1:6)
+  df$g <- as.numeric(df$id <= 12)
+  df$y <- 0.3 * df$g + 0.1 * df$t + sin(1.7 * df$id) +
+    0.05 * df$g * df$t + 0.8 * cos(0.9 * df$id * df$t)
+  r1 <- morie_did_test_parallel_trends(df, "y", "g", "t", unit = "id",
+                                       pre_periods = 1:4)
+  expect_equal(r1$joint_f_stat, 0.942822618248327, tolerance = 1e-10)
+  expect_equal(r1$joint_p_value, 0.432733321843015, tolerance = 1e-10)
+  r2 <- morie_did_test_parallel_trends(df, "y", "g", "t", pre_periods = 1:4)
+  expect_equal(r2$joint_f_stat, 0.188423585724467, tolerance = 1e-10)
+  expect_equal(r2$joint_p_value, 0.904089344068759, tolerance = 1e-10)
+})

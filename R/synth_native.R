@@ -286,39 +286,84 @@ print.morie_synth <- function(x, ...) {
 #' @srrstats {G1.0} Arkhangelsky, Athey, Hirshberg, Imbens & Wager
 #'   (2021), American Economic Review 111(12) 4088-4118.
 #' @noRd
+.morie_sdid_fw <- function(Ymat, zeta, lambda0, min_decrease, max_iter) {
+  # synthdid:::sc.weight.fw with intercept: Frank-Wolfe with exact line
+  # search on the simplex, stopping when the objective decrease falls
+  # below min_decrease^2
+  T0 <- ncol(Ymat) - 1L
+  N0 <- nrow(Ymat)
+  lam <- if (is.null(lambda0)) rep(1 / T0, T0) else lambda0
+  Y <- sweep(Ymat, 2L, colMeans(Ymat))
+  A <- Y[, seq_len(T0), drop = FALSE]
+  b <- Y[, T0 + 1L]
+  eta <- N0 * zeta^2
+  vals <- numeric(0)
+  t <- 0L
+  while (t < max_iter && (t < 2L || vals[t - 1L] - vals[t] > min_decrease^2)) {
+    t <- t + 1L
+    Ax <- as.numeric(A %*% lam)
+    hg <- as.numeric(crossprod(A, Ax - b)) + eta * lam
+    i <- which.min(hg)
+    dx <- -lam
+    dx[i] <- 1 - lam[i]
+    if (any(dx != 0)) {
+      derr <- A[, i] - Ax
+      step <- -sum(hg * dx) / (sum(derr^2) + eta * sum(dx^2))
+      lam <- lam + min(1, max(0, step)) * dx
+    }
+    err <- as.numeric(Y %*% c(lam, -1))
+    vals[t] <- zeta^2 * sum(lam^2) + sum(err^2) / N0
+  }
+  lam
+}
+
+.morie_sdid_sparsify <- function(v) {
+  v[v <= max(v) / 4] <- 0
+  v / sum(v)
+}
+
+.morie_sdid_core <- function(Y, N0, T0, opts, omega = NULL, lambda = NULL,
+                             update_omega = TRUE, update_lambda = TRUE) {
+  # synthdid::synthdid_estimate without covariates
+  N1 <- nrow(Y) - N0
+  T1 <- ncol(Y) - T0
+  Yc <- rbind(cbind(Y[seq_len(N0), seq_len(T0), drop = FALSE],
+                    rowMeans(Y[seq_len(N0), T0 + seq_len(T1), drop = FALSE])),
+              c(colMeans(Y[N0 + seq_len(N1), seq_len(T0), drop = FALSE]),
+                mean(Y[N0 + seq_len(N1), T0 + seq_len(T1)])))
+  if (update_lambda) {
+    l1 <- .morie_sdid_fw(Yc[seq_len(N0), , drop = FALSE], opts$zeta_lambda, lambda,
+                         opts$min_decrease, 100L)
+    lambda <- .morie_sdid_fw(Yc[seq_len(N0), , drop = FALSE], opts$zeta_lambda,
+                             .morie_sdid_sparsify(l1), opts$min_decrease, 10000L)
+  }
+  if (update_omega) {
+    Yo <- t(Yc[, seq_len(T0), drop = FALSE])
+    o1 <- .morie_sdid_fw(Yo, opts$zeta_omega, omega, opts$min_decrease, 100L)
+    omega <- .morie_sdid_fw(Yo, opts$zeta_omega, .morie_sdid_sparsify(o1),
+                            opts$min_decrease, 10000L)
+  }
+  tau <- as.numeric(t(c(-omega, rep(1 / N1, N1))) %*% Y %*% c(-lambda, rep(1 / T1, T1)))
+  list(estimate = tau, unit_weights = omega, time_weights = lambda)
+}
+
+.morie_sdid_opts <- function(Y, N_co, T_pre) {
+  N1 <- nrow(Y) - N_co
+  T1 <- ncol(Y) - T_pre
+  D1 <- t(apply(Y[seq_len(N_co), seq_len(T_pre), drop = FALSE], 1, diff))
+  noise <- stats::sd(as.numeric(D1))
+  list(zeta_omega = ((N1 * T1)^(1 / 4)) * noise, zeta_lambda = 1e-6 * noise,
+       min_decrease = 1e-5 * noise, noise = noise)
+}
+
 .morie_sdid_native <- function(Y, N_co, T_pre) {
-  N <- nrow(Y)
-  T_all <- ncol(Y)
-  N_tr <- N - N_co
-  T_post <- T_all - T_pre
-  Y_co <- Y[seq_len(N_co), , drop = FALSE]
-  Y_tr <- Y[N_co + seq_len(N_tr), , drop = FALSE]
-  # Regularization zeta (paper eq. for the unit weights): based on the
-  # sd of first differences of control pre-period outcomes.
-  D1 <- Y_co[, 2:T_pre, drop = FALSE] - Y_co[, 1:(T_pre - 1), drop = FALSE]
-  sig <- stats::sd(as.numeric(D1))
-  zeta <- (N_tr * T_post)^(1 / 4) * sig
-  # --- Unit weights (omega): intercept + simplex LS with ridge ---
-  # min over (a, w in simplex) sum_t<pre (mean(Y_tr[,t]) - a - w'Y_co[,t])^2
-  #   + zeta^2 * T_pre * ||w||^2
-  target_u <- colMeans(Y_tr[, seq_len(T_pre), drop = FALSE])
-  A_u <- t(Y_co[, seq_len(T_pre), drop = FALSE])
-  # Absorb the intercept by centering target and columns.
-  A_uc <- sweep(A_u, 2L, colMeans(A_u))
-  b_uc <- target_u - mean(target_u)
-  omega <- .morie_simplex_ls(A_uc, b_uc, zeta2 = zeta^2 * T_pre)
-  # --- Time weights (lambda): intercept + simplex LS, no ridge ---
-  target_t <- rowMeans(Y_co[, T_pre + seq_len(T_post), drop = FALSE])
-  A_t <- Y_co[, seq_len(T_pre), drop = FALSE]
-  A_tc <- sweep(A_t, 2L, colMeans(A_t))
-  b_tc <- target_t - mean(target_t)
-  lambda <- .morie_simplex_ls(A_tc, b_tc)
-  # --- Weighted DiD ---
-  w_unit <- c(-omega, rep(1 / N_tr, N_tr))
-  w_time <- c(-lambda, rep(1 / T_post, T_post))
-  tau <- as.numeric(t(w_unit) %*% Y %*% w_time)
-  list(estimate = tau, unit_weights = omega, time_weights = lambda,
-       zeta = zeta, N_tr = N_tr, T_pre = T_pre)
+  # Arkhangelsky, Athey, Hirshberg, Imbens and Wager (2021), computed as
+  # synthdid::synthdid_estimate: Frank-Wolfe weights with a sparsify pass,
+  # zeta_omega = (N1 T1)^(1/4) sigma, zeta_lambda = 1e-6 sigma, sigma the
+  # sd of the controls' pre-period first differences
+  opts <- .morie_sdid_opts(Y, N_co, T_pre)
+  fit <- .morie_sdid_core(Y, N_co, T_pre, opts)
+  c(fit, list(zeta = opts$zeta_omega, N_tr = nrow(Y) - N_co, T_pre = T_pre, opts = opts))
 }
 
 #' Internal helper: SDID with placebo / jackknife / bootstrap variance
@@ -326,70 +371,55 @@ print.morie_synth <- function(x, ...) {
 .morie_sdid_inference <- function(Y, N_co, T_pre,
                                   method = "placebo",
                                   n_boot = 200L, seed = 42L) {
+  # standard errors as synthdid::vcov: the jackknife holds the weights
+  # fixed (omega renormalised over the kept controls); the bootstrap and
+  # the placebo re-solve them from the renormalised full-sample weights
+  # with the full-sample zeta and stopping rule
   fit <- .morie_sdid_native(Y, N_co, T_pre)
+  opts <- fit$opts
   N <- nrow(Y)
   N_tr <- N - N_co
+  norm1 <- function(v) if (sum(v) > 0) v / sum(v) else rep(1 / length(v), length(v))
   se <- NA_real_
   placebo_effects <- NULL
   if (identical(method, "placebo")) {
-    # Assign N_tr placebo-treated units among the controls.
-    if (N_co > N_tr + 1L) {
+    if (N_co > N_tr) {
       .rmorie_local_seed(seed)
-      reps <- min(n_boot, 200L)
-      placebo_effects <- vapply(seq_len(reps), function(b) {
-        idx <- sample(N_co)
-        Yp <- Y[c(idx[seq_len(N_co - N_tr)],
-                  idx[N_co - N_tr + seq_len(N_tr)]), , drop = FALSE]
-        .morie_sdid_native(Yp, N_co - N_tr, T_pre)$estimate
+      placebo_effects <- vapply(seq_len(n_boot), function(b) {
+        ind <- sample(seq_len(N_co))
+        n0 <- length(ind) - N_tr
+        .morie_sdid_core(Y[ind, , drop = FALSE], n0, T_pre, opts,
+                         omega = norm1(fit$unit_weights[ind[seq_len(n0)]]),
+                         lambda = fit$time_weights)$estimate
       }, numeric(1))
-      # Algorithm 4: V = (1/B) sum (tau_b - mean tau)^2
-      se <- sqrt((reps - 1) / reps) * stats::sd(placebo_effects)
+      se <- sqrt((n_boot - 1) / n_boot) * stats::sd(placebo_effects)
     }
   } else if (identical(method, "jackknife")) {
-    # Algorithm 3: leave one unit out with the weights held FIXED at
-    # their full-sample values (omega renormalised over the remaining
-    # controls), as in synthdid::jackknife_se
-    omega <- fit$unit_weights
-    lambda <- fit$time_weights
-    T_post <- ncol(Y) - T_pre
-    if (N_tr >= 2L && sum(omega > 0) > 1L) {
-      eff <- as.numeric(Y[, T_pre + seq_len(T_post), drop = FALSE] %*%
-                          rep(1 / T_post, T_post) -
-                          Y[, seq_len(T_pre), drop = FALSE] %*% lambda)
+    if (N_co < N - 1L && sum(fit$unit_weights != 0) > 1L) {
       jk <- vapply(seq_len(N), function(i) {
-        w <- omega
-        tr <- N_co + seq_len(N_tr)
-        if (i <= N_co) {
-          w[i] <- 0
-          w <- if (sum(w) > 0) w / sum(w) else
-            replace(rep(1 / (N_co - 1), N_co), i, 0)
-        } else {
-          tr <- setdiff(tr, i)
-        }
-        mean(eff[tr]) - sum(w * eff[seq_len(N_co)])
+        ind <- setdiff(seq_len(N), i)
+        n0 <- sum(ind <= N_co)
+        .morie_sdid_core(Y[ind, , drop = FALSE], n0, T_pre, opts,
+                         omega = norm1(fit$unit_weights[ind[ind <= N_co]]),
+                         lambda = fit$time_weights,
+                         update_omega = FALSE, update_lambda = FALSE)$estimate
       }, numeric(1))
       se <- sqrt((N - 1) / N * sum((jk - mean(jk))^2))
     }
   } else if (identical(method, "bootstrap")) {
-    .rmorie_local_seed(seed)
-    boot <- rep(NA_real_, n_boot)
-    for (b in seq_len(n_boot)) {
-      # Algorithm 2: resample N units; redraw if a group is missing
-      repeat {
-        idx <- sample(seq_len(N), N, replace = TRUE)
-        co_idx <- idx[idx <= N_co]
-        tr_idx <- idx[idx > N_co]
-        if (length(co_idx) >= 2L && length(tr_idx) >= 1L) break
+    if (N_co < N - 1L) {
+      .rmorie_local_seed(seed)
+      boot <- numeric(0)
+      while (length(boot) < n_boot) {
+        ind <- sort(sample(seq_len(N), replace = TRUE))
+        if (all(ind <= N_co) || all(ind > N_co)) next
+        boot <- c(boot, .morie_sdid_core(Y[ind, , drop = FALSE], sum(ind <= N_co), T_pre, opts,
+                                         omega = norm1(fit$unit_weights[ind[ind <= N_co]]),
+                                         lambda = fit$time_weights)$estimate)
       }
-      boot[b] <- tryCatch(
-        .morie_sdid_native(Y[c(co_idx, tr_idx), , drop = FALSE],
-                           length(co_idx), T_pre)$estimate,
-        error = function(e) NA_real_)
+      se <- sqrt((n_boot - 1) / n_boot) * stats::sd(boot)
+      placebo_effects <- boot
     }
-    boot <- boot[is.finite(boot)]
-    if (length(boot) > 1L)
-      se <- sqrt((length(boot) - 1) / length(boot)) * stats::sd(boot)
-    placebo_effects <- boot
   }
   c(fit, list(se = se, placebo_effects = placebo_effects,
               inference = method))

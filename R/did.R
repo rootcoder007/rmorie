@@ -674,11 +674,11 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
 #' @param outcome Outcome column name.
 #' @param treatment Binary treatment-group indicator.
 #' @param time Time column (integer-valued).
-#' @param unit Optional unit identifier (currently unused; reserved).
+#' @param unit Optional unit identifier; the default cluster.
 #' @param cluster Cluster variable for robust SE.
 #' @param pre_periods Optional explicit list of pre-treatment times.
-#' @return A list with \code{coefficients}, \code{joint_chi2} (and
-#'   its alias \code{joint_f_stat}), \code{joint_df},
+#' @return A list with \code{coefficients}, \code{joint_f_stat} (the Wald
+#'   F with the full covariance), \code{joint_chi2} (\code{q F}), \code{joint_df},
 #'   \code{joint_p_value}, \code{parallel_trends_plausible}.
 #' @examples
 #' set.seed(1)
@@ -723,7 +723,9 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
   )
   interact_cols <- d_vals * time_dummies
   X <- .morie_did_add_intercept(cbind(d_vals, time_dummies, interact_cols))
-  cluster_ids <- if (!is.null(cluster)) df_pre[[cluster]] else NULL
+  # cluster by the named column, else by the panel unit when given
+  cl_col <- if (!is.null(cluster)) cluster else unit
+  cluster_ids <- if (!is.null(cl_col)) df_pre[[cl_col]] else NULL
   fit <- .morie_did_ols_robust_se(X, y_vals, cluster_ids = cluster_ids)
   # Interaction coefficients start after: intercept (1) + d (1) + time dummies
   start_idx <- 1L + 1L + length(test_periods)
@@ -739,15 +741,19 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
     )
   })
   coef_df <- do.call(rbind, coefs)
-  ib <- fit$beta[(start_idx + 1):(start_idx + length(test_periods))]
-  is_ <- pmax(fit$se[(start_idx + 1):(start_idx + length(test_periods))], 1e-10)
-  chi2 <- sum((ib / is_)^2)
-  joint_p <- stats::pchisq(chi2, df = length(test_periods), lower.tail = FALSE)
+  # joint Wald test with the full robust covariance, as fixest::wald:
+  # F = b' V^-1 b / q on (q, G - 1) df when clustered, (q, n - k) otherwise
+  ii <- (start_idx + 1):(start_idx + length(test_periods))
+  ib <- fit$beta[ii]
+  q_ <- length(ii)
+  f_joint <- as.numeric(t(ib) %*% solve(fit$vcov[ii, ii, drop = FALSE], ib)) / q_
+  df2 <- if (!is.null(cluster_ids)) length(unique(cluster_ids)) - 1 else nrow(X) - ncol(X)
+  joint_p <- stats::pf(f_joint, q_, df2, lower.tail = FALSE)
   list(
     coefficients              = coef_df,
-    joint_chi2                = chi2,
-    joint_df                  = length(test_periods),
-    joint_f_stat              = chi2,
+    joint_chi2                = q_ * f_joint,
+    joint_df                  = q_,
+    joint_f_stat              = f_joint,
     joint_p_value             = joint_p,
     parallel_trends_plausible = joint_p > 0.05
   )
