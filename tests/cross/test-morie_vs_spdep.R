@@ -42,3 +42,47 @@ test_that("SpatialWeights equals spdep neighbour graphs and nb2mat styles", {
     }
   }
 })
+
+test_that("local Geary, correlogram, k-colour join counts, bivariate LISA and Moran scatter match spdep", {
+  skip_if_not_installed("spdep")
+  nr <- 6
+  nc <- 7
+  n <- nr * nc
+  nb <- spdep::cell2nb(nr, nc, type = "rook")
+  A <- spdep::nb2mat(nb, style = "B")
+  lw <- spdep::nb2listw(nb, style = "W")
+  W <- A / rowSums(A)
+  u <- .morie_random_uniform(3 * n, seed = 7, stream = 0)
+  x <- u[1:n] * 10 + (0:(n - 1)) %% nc
+  y <- u[n + 1:n] * 5 + (0:(n - 1)) %/% nc
+  lab <- c("a", "b", "c", "d")[floor(u[2 * n + 1:n] * 4) + 1]
+  expect_equal(LocalGeary(x, W)$local_values, as.numeric(spdep::localC(x, lw)), tolerance = 1e-12)
+  expect_equal(LocalGeary(cbind(x, y), W)$local_values, as.numeric(spdep::localC(list(x, y), lw)),
+               tolerance = 1e-12)
+  for (m in c("I", "C", "corr")) for (st in c("W", "B")) for (rnd in c(TRUE, FALSE)) {
+    r <- SpatialCorrelogram(A, x, order = 4, method = m, style = st, randomisation = rnd)
+    s <- spdep::sp.correlogram(nb, x, order = 4, method = m, style = st, randomisation = rnd)
+    if (m == "corr") {
+      expect_equal(r$estimate, unname(s$res), tolerance = 1e-12)
+    } else {
+      expect_equal(cbind(r$estimate, r$expectation, r$variance), unname(s$res), tolerance = 1e-12)
+    }
+  }
+  for (lst in list(lw, spdep::nb2listw(nb, style = "B"))) {
+    jc <- spdep::joincount.multi(factor(lab), lst)
+    ours <- JoinCountMulti(lab, spdep::listw2mat(lst))
+    expect_equal(ours$rows, rownames(jc))
+    expect_equal(cbind(ours$joincount, ours$expected, ours$variance), unname(unclass(jc)[, 1:3]),
+                 tolerance = 1e-12)
+  }
+  bv <- LocalMoranBivariate(x, y, W, nsim = 99)
+  ref <- spdep::localmoran_bv(x, y, lw, nsim = 99)
+  expect_equal(bv$local_values, unname(ref[, 1]), tolerance = 1e-12)
+  expect_equal(bv$quadrant, as.character(attr(ref, "quadr")$mean))
+  mp <- spdep::moran.plot(x, lw, plot = FALSE)
+  ms <- MoranScatter(x, W)
+  expect_equal(cbind(ms$wx, ms$dfb_1, ms$dfb_x, ms$dffit, ms$cov_r, ms$cook_d, ms$hat),
+               unname(as.matrix(mp[, c("wx", "dfb.1_", "dfb.x", "dffit", "cov.r", "cook.d", "hat")])),
+               tolerance = 1e-12)
+  expect_identical(ms$is_inf, mp$is_inf)
+})

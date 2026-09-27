@@ -38,3 +38,33 @@ test_that("SpatialTwoStageLS equals spatialreg::stsls", {
   expect_lt(max(abs(r$coefficients - stats::coef(f))), 1e-9)
   expect_lt(max(abs(r$se - sqrt(diag(f$var)))), 1e-9)
 })
+
+test_that("GMErrorSAR and GS2SLSSAC match spatialreg GMerrorsar and gstsls", {
+  skip_if_not_installed("spatialreg")
+  skip_if_not_installed("spdep")
+  nb <- spdep::cell2nb(6, 7, type = "rook")
+  lw <- spdep::nb2listw(nb, style = "W")
+  W <- spdep::listw2mat(lw)
+  n <- nrow(W)
+  z <- .morie_normal_quantile(.morie_random_uniform(3 * n, seed = 11, stream = 0))
+  X <- cbind(1, z[1:n], z[n + 1:n])
+  e <- z[2 * n + 1:n]
+  y <- as.vector(1 + 2 * X[, 2] - X[, 3] + e + 0.5 * W %*% e)
+  df <- data.frame(y = y, x1 = X[, 2], x2 = X[, 3])
+  ctl <- list(rel.tol = 1e-14, x.tol = 1e-14)
+  g <- suppressWarnings(spatialreg::GMerrorsar(y ~ x1 + x2, df, lw, control = ctl))
+  ours <- GMErrorSAR(y, X, W)
+  expect_equal(ours$lambda, unname(g$lambda), tolerance = 1e-7)
+  expect_equal(ours$coefficients, unname(g$coefficients), tolerance = 1e-7)
+  expect_equal(ours$se, unname(g$rest.se), tolerance = 1e-7)
+  expect_equal(ours$s2, g$s2, tolerance = 1e-7)
+  expect_equal(GMErrorSAR(y, X, W, lambda_se_method = "spatialreg")$lambda_se, as.numeric(g$lambda.se),
+               tolerance = 1e-6)
+  for (rb in c(FALSE, TRUE)) {
+    s <- suppressWarnings(spatialreg::gstsls(y ~ x1 + x2, df, lw, robust = rb, control = ctl))
+    o <- GS2SLSSAC(y, X, W, robust = if (rb) "HC0" else NULL)
+    expect_equal(o$lambda, unname(s$lambda), tolerance = 1e-7)
+    expect_equal(o$coefficients, unname(s$coefficients), tolerance = 1e-7)
+    expect_equal(o$se, unname(s$rest.se), tolerance = 1e-7)
+  }
+})
