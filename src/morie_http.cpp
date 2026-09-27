@@ -250,7 +250,7 @@ std::string curl_version() {
 // Rcpp surface -- exposed to R as .morie_http_get and .morie_http_curl_version
 // ---------------------------------------------------------------------------
 
-//' Synchronous HTTP(S) GET via the shared libcurl backend (C++).
+//' Synchronous HTTP(S) GET via the shared libcurl backend (C++)
 //'
 //' Phase-3VV promoted helper. Returns the response body as a length-1
 //' character vector. On any libcurl-level failure returns the empty
@@ -278,7 +278,7 @@ std::string morie_http_get_(std::string url,
                            user_agent, follow_redirects);
 }
 
-//' Binary-safe HTTP(S) GET via libcurl.
+//' Binary-safe HTTP(S) GET via libcurl
 //'
 //' Phase-3XX get_bytes wrapper. Returns the response body as an R
 //' raw vector (no NUL truncation), suitable for shapefiles, FGDB
@@ -310,7 +310,7 @@ Rcpp::RawVector morie_http_get_bytes_(std::string url,
   return out;
 }
 
-//' Synchronous HTTP(S) POST via the shared libcurl backend (C++).
+//' Synchronous HTTP(S) POST via the shared libcurl backend (C++)
 //'
 //' Phase-3YY helper. Body is sent verbatim; for JSON payloads call
 //' `jsonlite::toJSON(...)` before passing in. Default content_type
@@ -341,7 +341,7 @@ std::string morie_http_post_(std::string url,
                             hdrs, user_agent, follow_redirects);
 }
 
-//' Status-aware HTTP(S) GET via the libcurl backend (C++).
+//' Status-aware HTTP(S) GET via the libcurl backend (C++)
 //'
 //' Phase-3ZZ helper for callers that need HTTP status-code
 //' inspection (401/403/4xx error handling). Returns a length-2
@@ -372,7 +372,7 @@ Rcpp::List morie_http_get_with_status_(std::string url,
     Rcpp::Named("status_code") = static_cast<int>(r.status_code));
 }
 
-//' Status-aware HTTP(S) POST via the libcurl backend (C++).
+//' Status-aware HTTP(S) POST via the libcurl backend (C++)
 //'
 //' Phase-3ZZ helper. Same status-code-return contract as
 //' .morie_http_get_with_status, but for POST bodies.
@@ -400,7 +400,7 @@ Rcpp::List morie_http_post_with_status_(std::string url,
     Rcpp::Named("status_code") = static_cast<int>(r.status_code));
 }
 
-//' libcurl version string the morie C++ backend was built against.
+//' libcurl version string the morie C++ backend was built against
 //' @return Length-1 character vector.
 //' @keywords internal
 // [[Rcpp::export(.morie_http_curl_version)]]

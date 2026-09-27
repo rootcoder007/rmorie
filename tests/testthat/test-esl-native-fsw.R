@@ -7,6 +7,7 @@ esl16_data <- function() {
 test_that("the LAR lasso modification reproduces lars(type = 'lasso') including a drop", {
   d <- esl16_data()
   a <- morie_esl_least_angle_reg(d$X, d$y, method = "lasso")
+  skip_if_not_installed("lars")
   l <- lars::lars(d$X, d$y, type = "lasso", normalize = TRUE)
   expect_equal(a$coef_path, unname(coef(l)), tolerance = 1e-10)
   expect_equal(a$dropped, 1L)
@@ -26,6 +27,7 @@ test_that("forward stagewise takes eps steps on the most correlated variable and
     r <- r - (f$path[k + 1, j] - f$path[k, j]) * xs[, j]
   }
   expect_equal(morie_esl_forward_stagewise(d$X, -d$y, eps = 0.001, max_steps = 2000)$path, -f$path, tolerance = 1e-12)
+  skip_if_not_installed("lars")
   l <- lars::lars(d$X, d$y, type = "forward.stagewise", normalize = TRUE)
   ref <- coef(l, s = f$l1_norm, mode = "norm")
   expect_lt(max(abs(f$path[2001, ] - ref * sqrt(colSums(scale(d$X, scale = FALSE)^2)))), 0.01)

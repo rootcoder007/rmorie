@@ -16,7 +16,7 @@ GlmStdRes(y, X, family = c("binomial", "poisson"), trials = NULL)
 \item{trials}{Binomial trials.}
 }
 \value{
-list(fitted, pearson, standardized, hat, beta).
+list(fitted, pearson, standardized, hat, beta, deviance, pearson_chisq, df).
 }
 \description{
 Pearson and standardized Pearson residuals for binomial and Poisson GLMs

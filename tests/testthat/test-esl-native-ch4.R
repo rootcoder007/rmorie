@@ -11,6 +11,7 @@ test_that("LDA and QDA discriminants equal the formulas and MASS predictions", {
   expect_equal(as.numeric(t(a$discriminants)), c(-1.1710168903230160, -0.85303945435103545, -2.2368809300709271,
                                                  -1.6901568327291563, 1.10915113996086401, 2.2635147568254093),
                tolerance = 1e-12)
+  skip_if_not_installed("MASS")
   expect_equal(a$prediction, as.numeric(as.character(predict(MASS::lda(d$X, g), d$Q)$class)))
   b <- morie_esl_qda(d$X, g, d$Q)
   expect_equal(as.numeric(t(b$discriminants)), c(-0.90784632592712999, -0.20829140007268876, -2.10592636219517715,

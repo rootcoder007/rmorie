@@ -47,8 +47,9 @@
   list(name = "gamma", lo = 30.0, hi = 80.0)
 )
 
-#' Resolve the DMT_Imaging dataset root, honouring
-#' \env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
+#' Resolve the DMT_Imaging dataset root
+#'
+#' Honours \env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
 #' Parity with Python ``DATASET_ROOT`` / ``_require_root``.
 #' @keywords internal
 #' @return A character scalar: the resolved DMT-data root directory.

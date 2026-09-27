@@ -24,7 +24,9 @@ list(beta, loglik, iterations, converged).
 Group testing regression by Xie's EM algorithm
 }
 \examples{
-GtRegEM(c(1, 0, 1, 0), c(0, 0, 1, 1, 2, 2, 3, 3), cbind(1, c(0.5, 1, 0, 0.2, 2, 0.1, -1, -0.5)))$beta
+xs <- ((7 * (0:39)) \%\% 13) / 4 - 1.5
+z <- c(1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0)
+GtRegEM(z, (0:39) \%/\% 2, cbind(1, xs), se = 0.95, sp = 0.95)$beta
 }
 \references{
 Bilder, C. R. & Loughin, T. M. (2025). Analysis of Categorical

@@ -2,9 +2,7 @@
 % Please edit documentation in R/entheo_dmt.R
 \name{.morie_entheo_dmt_root}
 \alias{.morie_entheo_dmt_root}
-\title{Resolve the DMT_Imaging dataset root, honouring
-\env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
-Parity with Python \code{DATASET_ROOT} / \verb{_require_root}.}
+\title{Resolve the DMT_Imaging dataset root}
 \usage{
 .morie_entheo_dmt_root()
 }
@@ -12,8 +10,7 @@ Parity with Python \code{DATASET_ROOT} / \verb{_require_root}.}
 A character scalar: the resolved DMT-data root directory.
 }
 \description{
-Resolve the DMT_Imaging dataset root, honouring
-\env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
+Honours \env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
 Parity with Python \code{DATASET_ROOT} / \verb{_require_root}.
 }
 \examples{

@@ -89,7 +89,9 @@ GtPrev <- function(x, m, n, ci = c("CP", "Wald", "score"), alpha = 0.05, b_range
 #' @references Bilder, C. R. & Loughin, T. M. (2025). Analysis of Categorical
 #'   Data with R, 2nd ed. Eqs (6.32)-(6.33).
 #' @examples
-#' GtRegEM(c(1, 0, 1, 0), c(0, 0, 1, 1, 2, 2, 3, 3), cbind(1, c(0.5, 1, 0, 0.2, 2, 0.1, -1, -0.5)))$beta
+#' xs <- ((7 * (0:39)) %% 13) / 4 - 1.5
+#' z <- c(1, 0, 0, 1, 1, 0, 1, 0, 0, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0)
+#' GtRegEM(z, (0:39) %/% 2, cbind(1, xs), se = 0.95, sp = 0.95)$beta
 #' @export
 GtRegEM <- function(z, group, X, se = 1, sp = 1, max_iter = 1000, tol = 1e-10) {
   X <- as.matrix(X)

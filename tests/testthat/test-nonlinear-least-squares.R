@@ -12,7 +12,7 @@ test_that("nlsgn reaches the nls optimum of a * b^x", {
   x <- 1:5
   y <- c(3, 7, 12, 26, 51)
   r <- nlsgn(function(x, t) t[1] * t[2]^x, x, y, c(1, 1))
-  m <- nls(y ~ a * b^x, start = list(a = 1, b = 1), control = nls.control(tol = 1e-9))
+  m <- nls(y ~ a * b^x, start = list(a = 1.5, b = 2), control = nls.control(tol = 1e-9))
   expect_equal(r$coefficients, unname(coef(m)), tolerance = 1e-6)
   expect_lte(r$rss, deviance(m) * (1 + 1e-13))
   expect_equal(r$se, unname(summary(m)$coefficients[, 2]), tolerance = 1e-5)
