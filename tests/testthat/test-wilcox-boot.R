@@ -1,0 +1,18 @@
+test_that("Wilcox bootstrap and rank methods match the Python arm", {
+  x <- c(2.1, 3.4, 1.9, 5.6, 4.4, 3.3, 2.8, 6.1, 3.9, 4.2, 2.2, 5.0, 40)
+  y <- c(3.3, 4.1, 2.7, 6.8, 5.9, 4.4, 3.6, 7.2, 4.8, 5.3, 3.1, 6.6, 4.0, 9.5, 5.5)
+  z <- c(5.1, 6.3, 4.8, 7.7, 6.9, 5.5, 6.1, 8.4, 5.9, 7.0, 4.6)
+  expect_equal(ComVar2(x, y, seed = 3)$ci, c(-3.786153846153847, 261.3064102564102), tolerance = 1e-12)
+  r <- LinconBT(list(x, y, z), seed = 5)
+  expect_equal(r$crit, 2.7815908479889098, tolerance = 1e-12)
+  expect_equal(r$crit, r$tmax[round(0.95 * 599)])
+  X <- rbind(c(9, 7, 12), c(1, 10, 4), c(8, 2, 1), c(5, 6, 9), c(3, 3, 7), c(6, 8, 8), c(2, 9, 5))
+  ch <- unname(friedman.test(X)$statistic)
+  expect_equal(FriedF(X)$statistic, 6 * ch / (14 - ch), tolerance = 1e-12)
+  P <- rbind(c(1, 2), c(2, 3), c(3, 5), c(4, 4), c(5, 6), c(6, 7), c(7, 8), c(20, -5), c(3, 3), c(4, 6))
+  expect_equal(OutMah(P)$outliers, 7)
+  expect_equal(PBCI(1:1000)$ci, c(26, 975))
+  xs <- 1:30
+  ys <- as.numeric((xs * 7) %% 10 < xs / 3)
+  expect_equal(LogRSM(xs, ys, pts = c(5, 25))$phat, c(0.13471408906394922, 0.6322286246964182), tolerance = 1e-12)
+})
