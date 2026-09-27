@@ -262,7 +262,7 @@ CopulaDens <- function(u, v, family = c("gaussian", "t", "clayton", "gumbel", "f
       a <- qt(u, df)
       b <- qt(v, df)
       q <- (a^2 - 2 * theta * a * b + b^2) / (1 - theta^2)
-      exp(lgamma((df + 2) / 2) - lgamma(df / 2) - log(df * pi) - 0.5 * log(1 - theta^2) - (df + 2) / 2 * log1p(q / df)) / (dt(a, df) * dt(b, df))
+      exp(lgamma((df + 2) / 2) - lgamma(df / 2) - log(df * pi) - 0.5 * log(1 - theta^2) - (df + 2) / 2 * log1p(q / df)) / (stats::dt(a, df) * stats::dt(b, df))
     },
     clayton = (1 + theta) * (u * v)^(-theta - 1) * (u^-theta + v^-theta - 1)^(-2 - 1 / theta),
     gumbel = {

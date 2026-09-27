@@ -53,6 +53,8 @@ morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
   cholesky <- function(MM) {
     nn <- nrow(MM)
     L <- matrix(0, nn, nn)
+    big <- max(abs(diag(MM)))
+    flo <- 1e-13 * (if (big > 0) big else 1)
     for (i in seq_len(nn)) {
       for (j in seq_len(i)) {
         s_ <- MM[i, j]
@@ -62,8 +64,7 @@ morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
           }
         }
         if (i == j) {
-          if (s_ <= 1e-14) s_ <- 1e-14
-          L[i, i] <- sqrt(s_)
+          L[i, i] <- sqrt(if (s_ > flo) s_ else flo)
         } else {
           L[i, j] <- s_ / L[j, j]
         }
