@@ -12,12 +12,15 @@ test_that("Ripk, RipG and the Strauss MPLE agree with spatstat", {
   expect_lt(max(abs(k$k * 80 / 79 - K$iso)), 1e-9)
   expect_lt(max(abs(k$k_trans * 80 / 79 - K$trans)), 1e-9)
   expect_lt(max(abs(k$k_border - K$border)), 1e-9)
-  G <- as.data.frame(spatstat.explore::Gest(X, r = r, correction = "rs"))[at, ]
+  # Gest bins the distances onto its r grid; a 1e-6 grid keeps the bins below
+  # the gaps between the distances and 0.05, 0.1, 0.2 (a 1e-4 grid does not)
+  rg <- seq(0, 0.2, by = 1e-6)
+  G <- as.data.frame(spatstat.explore::Gest(X, r = rg, correction = "rs"))[c(50001, 100001, 200001), ]
   expect_lt(max(abs(RipG(P, c(0, 2, 0, 1), r[at])$g_border - G$rs)), 1e-9)
   g <- expand.grid(a = 0:11, b = 0:11)
   D <- spatstat.geom::ppp((g$a + 0.5) * 2 / 12, (g$b + 0.5) / 12, window = W)
   Q <- spatstat.geom::quadscheme(X, D, method = "grid", ntile = c(12, 12))
-  fit <- spatstat.model::ppm(Q ~ 1, spatstat.model::Strauss(0.1), correction = "none")
+  fit <- spatstat.model::ppm(Q, trend = ~1, interaction = spatstat.model::Strauss(0.1), correction = "none")
   s <- morie_strmkr_strauss_process(P, 0.1, window = c(0, 2, 0, 1), nx = 12, ny = 12)
   expect_lt(max(abs(c(s$beta, s$gamma) - exp(stats::coef(fit)))), 1e-7)
 })
@@ -44,7 +47,7 @@ test_that("PoissonProcessFit equals ppm on the same quadrature", {
   g <- expand.grid(a = 0:11, b = 0:11)
   D <- spatstat.geom::ppp((g$a + 0.5) * 2 / 12, (g$b + 0.5) / 12, window = W)
   Q <- spatstat.geom::quadscheme(X, D, method = "grid", ntile = c(12, 12))
-  fit <- spatstat.model::ppm(Q ~ x + y)
+  fit <- spatstat.model::ppm(Q, trend = ~x + y)
   r <- PoissonProcessFit(P, c(0, 2, 0, 1), degree = 1)
   expect_lt(max(abs(r$theta - stats::coef(fit))), 1e-8)
   expect_lt(max(abs(r$se - sqrt(diag(stats::vcov(fit))))), 1e-8)
@@ -77,7 +80,7 @@ test_that("GibbsPseudolikelihood equals ppm on the same quadrature", {
     list(spatstat.model::Softcore(0.5), list("softcore", kappa = 0.5))
   )
   for (f in fits) {
-    ref <- spatstat.model::ppm(Q ~ 1, f[[1]], correction = "none")
+    ref <- spatstat.model::ppm(Q, trend = ~1, interaction = f[[1]], correction = "none")
     m <- do.call(GibbsPseudolikelihood, c(list(P, c(0, 2, 0, 1)), f[[2]]))
     expect_lt(max(abs(m$theta - stats::coef(ref))), 1e-7)
   }
