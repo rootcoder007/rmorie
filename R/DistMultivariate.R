@@ -239,15 +239,17 @@ KentDens <- function(x, kappa, beta, g1 = c(0, 0, 1), g2 = c(1, 0, 0), g3 = c(0,
 #' Bivariate copula densities
 #'
 #' @param u,v Points in (0, 1).
-#' @param family "gaussian", "t", "clayton", "gumbel", "frank" or "joe".
+#' @param family "gaussian", "t", "clayton", "gumbel", "frank", "joe" or "bb1"
+#'   (Joe 2014, sec 4.17; delta = 1 is Clayton, theta to 0 is Gumbel(delta)).
 #' @param theta Copula parameter.
 #' @param df Degrees of freedom for the t copula.
+#' @param delta Second BB1 parameter, delta >= 1.
 #' @return list(density, logdensity).
 #' @references Joe, H. (2014). Dependence Modeling with Copulas, ch. 4.
 #' @examples
 #' CopulaDens(0.3, 0.7, "frank", 3)$density
 #' @export
-CopulaDens <- function(u, v, family = c("gaussian", "t", "clayton", "gumbel", "frank", "joe"), theta = 0.5, df = 4) {
+CopulaDens <- function(u, v, family = c("gaussian", "t", "clayton", "gumbel", "frank", "joe", "bb1"), theta = 0.5, df = 4, delta = 1.5) {
   family <- match.arg(family)
   if (!(u > 0 && u < 1 && v > 0 && v < 1)) stop("u and v must be in (0, 1)", call. = FALSE)
   d <- switch(family,
@@ -279,6 +281,18 @@ CopulaDens <- function(u, v, family = c("gaussian", "t", "clayton", "gumbel", "f
       vb <- 1 - v
       s <- ub^theta + vb^theta - (ub * vb)^theta
       s^(1 / theta - 2) * ub^(theta - 1) * vb^(theta - 1) * (theta - 1 + s)
+    },
+    bb1 = {
+      if (!(theta > 0 && delta >= 1)) stop("need theta > 0 and delta >= 1", call. = FALSE)
+      a <- u^-theta - 1
+      b <- v^-theta - 1
+      s <- a^delta + b^delta
+      w <- s^(1 / delta)
+      xu <- delta * a^(delta - 1) * theta * u^(-theta - 1)
+      yv <- delta * b^(delta - 1) * theta * v^(-theta - 1)
+      h1 <- -(1 + w)^(-1 / theta - 1) / theta
+      h2 <- (1 / theta) * (1 / theta + 1) * (1 + w)^(-1 / theta - 2)
+      xu * yv * (h2 * (w / (delta * s))^2 + h1 * (1 / delta) * (1 / delta - 1) * w / s^2)
     })
   list(density = d, logdensity = log(d))
 }
