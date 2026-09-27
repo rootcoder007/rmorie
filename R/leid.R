@@ -26,9 +26,9 @@
 #' @seealso \code{\link{Leidenclus}}
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' Leid(V, M)
+#' M <- matrix(0, 6, 6)
+#' M[cbind(c(1, 1, 2, 3, 4, 4, 5), c(2, 3, 3, 4, 5, 6, 6))] <- 1
+#' Leid(NULL, M + t(M))$labels
 Leid <- function(y, A, resolution = 1, quality = "modularity",
                  max_iter = 20) {
   Leidenclus(A, resolution, quality, max_iter)
