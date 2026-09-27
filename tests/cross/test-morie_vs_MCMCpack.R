@@ -14,9 +14,18 @@ test_that("morie_spatial_voting_cjr_irt samples the MCMCpack::MCMCirt1d posterio
                            T0 = 1, AB0 = 1, store.item = TRUE, verbose = 0)
   ref <- as.matrix(m)
   ref <- ref[, c(grep("^theta", colnames(ref)), grep("^alpha", colnames(ref)), grep("^beta", colnames(ref)))]
-  our <- cbind(f$ideal_point_chain[, , 1], f$alpha_chain, f$beta_chain[, , 1])
+  # location and scale of the latent axis are pinned only by the N(0, 1)
+  # prior and mix slowly, so compare the invariant functionals per draw:
+  # standardised ideal points, alpha - beta * mean(theta), beta * sd(theta)
+  inv <- function(th, a, b) {
+    m <- rowMeans(th)
+    s <- apply(th, 1, stats::sd)
+    cbind((th - m) / s, a - b * m, b * s)
+  }
+  our <- inv(f$ideal_point_chain[, , 1], f$alpha_chain, f$beta_chain[, , 1])
+  ref <- inv(ref[, 1:40], ref[, 41:55], ref[, 56:70])
   tse <- function(ch) apply(ch, 2, stats::sd) / sqrt(coda::effectiveSize(coda::mcmc(ch)))
   z <- (colMeans(our) - colMeans(ref)) / sqrt(tse(our)^2 + tse(ref)^2)
   expect_lt(max(abs(z)), 4)
-  expect_lt(mean(abs(z) > 2), 0.15)
+  expect_lt(mean(z^2), 2)
 })
