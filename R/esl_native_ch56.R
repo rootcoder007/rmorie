@@ -192,7 +192,9 @@ kernel_ridge_regression <- function(X, y, kernel = "gaussian", lam = 1, x_eval =
 #' @param y 0/1 response.
 #' @param Omega Penalty matrix.
 #' @param lambda Penalty, >= 0.
-#' @param max_iter,tol Newton controls.
+#' @param max_iter,tol Newton controls (convergence on the linear predictor N
+#'   theta, identified even when theta is not, or on a relative change below
+#'   1e-14 in the penalised log-likelihood for an ill-conditioned basis).
 #' @return Named list: theta, prob, loglik, penalized_loglik, df, iterations,
 #'   converged.
 #' @references Hastie, Tibshirani & Friedman (2009), sec. 5.6.
@@ -213,18 +215,25 @@ morie_esl_penalized_logistic <- function(N, y, Omega, lambda, max_iter = 100, to
   th <- numeric(m)
   converged <- FALSE
   it <- 0L
+  pll <- function(t) {
+    e <- drop(N %*% t)
+    sum(y * e - log1p(exp(e))) - 0.5 * lambda * drop(t(t) %*% Omega %*% t)
+  }
+  obj <- pll(th)
   for (it in seq_len(max_iter)) {
     eta <- drop(N %*% th)
     p <- 1 / (1 + exp(-eta))
     w <- p * (1 - p)
     z <- eta + (y - p) / w
     new <- unname(drop(solve(crossprod(N, w * N) + lambda * Omega, crossprod(N, w * z))))
-    step <- max(abs(new - th))
+    step <- max(abs(N %*% (new - th)))
     th <- new
-    if (step < tol) {
+    nobj <- pll(th)
+    if (step < tol || (it >= 3 && abs(nobj - obj) <= 1e-14 * (1 + abs(nobj)))) {
       converged <- TRUE
       break
     }
+    obj <- nobj
   }
   eta <- drop(N %*% th)
   p <- 1 / (1 + exp(-eta))

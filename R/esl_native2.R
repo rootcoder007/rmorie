@@ -11,8 +11,10 @@
 
 #' .morie_kernel_matrix
 #'
-#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
-#' \code{morie_esl_svm_kernel}.
+#' SMO with the maximal-violating-pair working set (Keerthi et al. 2001, as
+#' libsvm); stops when the KKT violation is below tol. Deterministic:
+#' max_passes and seed are kept for compatibility and unused. Called by
+#' \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -56,8 +58,10 @@
 
 #' .morie_smo
 #'
-#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
-#' \code{morie_esl_svm_kernel}.
+#' SMO with the maximal-violating-pair working set (Keerthi et al. 2001, as
+#' libsvm); stops when the KKT violation is below tol. Deterministic:
+#' max_passes and seed are kept for compatibility and unused. Called by
+#' \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -66,8 +70,9 @@
 #' @param C Numeric; passed to \code{min}. Defaults to \code{1}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @param max_passes Passed to \code{<}. Defaults to \code{50L}.
-#' @param max_iter Passed to \code{<}. Defaults to \code{10000L}.
-#' @param seed Passed to \code{set.seed}. Defaults to \code{0L}.
+#' @param max_iter Iteration limit. Defaults to \code{100000L}.
+#' @param seed Unused; kept for compatibility. Defaults to \code{0L}.
+#' @param p Linear term of the dual (default all -1, the classifier).
 #' @return A list with \code{alpha}, \code{b}, \code{n_iter}, \code{converged}.
 #' @export
 #' @examples
@@ -76,52 +81,52 @@
 #' res <- .morie_smo(K = A, y = b)
 #' res
 .morie_smo <- function(K, y, C = 1, tol = 1e-3, max_passes = 50L,
-                       max_iter = 10000L, seed = 0L) {
+                       max_iter = 100000L, seed = 0L, p = NULL) {
   y <- as.numeric(y)
   n <- length(y)
   alpha <- numeric(n)
-  b <- 0
-  .rmorie_local_seed(seed)
-  passes <- 0L
+  G <- if (is.null(p)) rep(-1, n) else as.numeric(p)
   it <- 0L
-  while (passes < max_passes && it < max_iter) {
-    changed <- 0L
-    for (i in seq_len(n)) {
-      it <- it + 1L
-      Ei <- sum(K[i, ] * alpha * y) + b - y[i]
-      if ((y[i] * Ei < -tol && alpha[i] < C) || (y[i] * Ei > tol && alpha[i] > 0)) {
-        j <- sample.int(n - 1L, 1L)
-        if (j >= i) j <- j + 1L
-        Ej <- sum(K[j, ] * alpha * y) + b - y[j]
-        ai_old <- alpha[i]
-        aj_old <- alpha[j]
-        if (y[i] != y[j]) {
-          L <- max(0, aj_old - ai_old)
-          Hi <- min(C, C + aj_old - ai_old)
-        } else {
-          L <- max(0, ai_old + aj_old - C)
-          Hi <- min(C, ai_old + aj_old)
-        }
-        if (L >= Hi) next
-        eta <- 2 * K[i, j] - K[i, i] - K[j, j]
-        if (eta >= 0) next
-        alpha[j] <- min(max(aj_old - y[j] * (Ei - Ej) / eta, L), Hi)
-        if (abs(alpha[j] - aj_old) < 1e-12) {
-          alpha[j] <- aj_old
-          next
-        }
-        alpha[i] <- ai_old + y[i] * y[j] * (aj_old - alpha[j])
-        b1 <- b - Ei - y[i] * (alpha[i] - ai_old) * K[i, i] -
-          y[j] * (alpha[j] - aj_old) * K[i, j]
-        b2 <- b - Ej - y[i] * (alpha[i] - ai_old) * K[i, j] -
-          y[j] * (alpha[j] - aj_old) * K[j, j]
-        b <- if (alpha[i] > 0 && alpha[i] < C) b1 else if (alpha[j] > 0 && alpha[j] < C) b2 else (b1 + b2) / 2
-        changed <- changed + 1L
-      }
+  converged <- FALSE
+  while (it < max_iter) {
+    it <- it + 1L
+    v <- -y * G
+    up <- (y > 0 & alpha < C) | (y < 0 & alpha > 0)
+    low <- (y > 0 & alpha > 0) | (y < 0 & alpha < C)
+    if (!any(up) || !any(low)) {
+      converged <- TRUE
+      break
     }
-    passes <- if (changed == 0L) passes + 1L else 0L
+    i <- which(up)[which.max(v[up])]
+    j <- which(low)[which.min(v[low])]
+    if (v[i] - v[j] < tol) {
+      converged <- TRUE
+      break
+    }
+    a <- K[i, i] + K[j, j] - 2 * K[i, j]
+    if (a <= 0) a <- 1e-12
+    t <- (v[i] - v[j]) / a
+    lo <- if (y[i] > 0) -alpha[i] else alpha[i] - C
+    hi <- if (y[i] > 0) C - alpha[i] else alpha[i]
+    lo <- max(lo, if (y[j] > 0) alpha[j] - C else -alpha[j])
+    hi <- min(hi, if (y[j] > 0) alpha[j] else C - alpha[j])
+    t <- min(max(t, lo), hi)
+    di <- y[i] * t
+    dj <- -y[j] * t
+    alpha[i] <- min(max(alpha[i] + di, 0), C)
+    alpha[j] <- min(max(alpha[j] + dj, 0), C)
+    G <- G + y * (y[i] * K[, i] * di + y[j] * K[, j] * dj)
   }
-  list(alpha = alpha, b = b, n_iter = it, converged = passes >= max_passes)
+  v <- -y * G
+  free <- alpha > 0 & alpha < C
+  b <- if (any(free)) {
+    mean(v[free])
+  } else {
+    ub <- v[(y > 0 & alpha < C) | (y < 0 & alpha > 0)]
+    lb <- v[(y > 0 & alpha > 0) | (y < 0 & alpha < C)]
+    if (length(ub) && length(lb)) (min(ub) + max(lb)) / 2 else 0
+  }
+  list(alpha = alpha, b = b, n_iter = it, converged = converged)
 }
 
 #' Kernel support vector machine
