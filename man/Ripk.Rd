@@ -17,7 +17,8 @@ morie_ripley_k_function(points, window, r)
 \item{r}{Distances at which to evaluate K.}
 }
 \value{
-Named list: r, k, k_border, l, csr, lambda_hat, area, n, method.
+Named list: r, k, k_border, k_trans, l, csr, lambda_hat, area, n,
+method.
 }
 \description{
 \code{lambda K(h)} is the expected number of further events within
@@ -33,6 +34,14 @@ numerator indicator as \code{d_j > h}; that is a misprint -- the
 reduced sample conditions on the \emph{centre} event being at least
 \code{h} from the boundary, so \code{d_i > h} is used here, which is
 the standard and unbiased form.
+
+Translation correction (Ohser and Stoyan 1981) weights each pair by
+\code{|W| / ((w - |dx|)(h - |dy|))} in a w-by-h rectangle:
+\code{Khat_t(h) = area / n^2 sum_i sum_{j != i} e_ij I(h_ij <= h)}.
+The isotropic and translation estimators use \code{lambdahat^2 =
+n^2 / area^2} (Ripley 1976); \code{spatstat.explore::Kest} uses
+\code{n (n - 1) / area^2}, so its values are these times
+\code{n / (n - 1)}. The border estimator equals \code{Kest}'s.
 
 Under complete spatial randomness \code{K(h) = pi h^2}; the Besag
 transform \code{L(h) = sqrt(K(h)/pi)} is returned alongside.
