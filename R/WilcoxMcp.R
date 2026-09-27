@@ -87,7 +87,7 @@ ScheffeCI <- function(groups, contrast, alpha = 0.05) {
 
 #' Johansen test of a linear hypothesis about trimmed means
 #'
-#' Q = Xbar'C'(CVC')^{-1}C Xbar with V = diag of Yuen squared standard errors and
+#' Q = Xbar'C'(CVC')^(-1)C Xbar with V = diag of Yuen squared standard errors and
 #' Johansen's adjusted chi-squared critical value.
 #'
 #' @param groups List of numeric vectors.

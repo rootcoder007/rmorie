@@ -19,7 +19,7 @@ JohanQ(groups, C, tr = 0.2, alpha = 0.05)
 list(statistic, crit, reject, p_value, A).
 }
 \description{
-Q = Xbar'C'(CVC')^{-1}C Xbar with V = diag of Yuen squared standard errors and
+Q = Xbar'C'(CVC')^(-1)C Xbar with V = diag of Yuen squared standard errors and
 Johansen's adjusted chi-squared critical value.
 }
 \examples{
