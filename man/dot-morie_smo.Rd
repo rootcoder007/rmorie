@@ -10,8 +10,9 @@
   C = 1,
   tol = 0.001,
   max_passes = 50L,
-  max_iter = 10000L,
-  seed = 0L
+  max_iter = 100000L,
+  seed = 0L,
+  p = NULL
 )
 }
 \arguments{
@@ -25,16 +26,20 @@
 
 \item{max_passes}{Passed to \code{<}. Defaults to \code{50L}.}
 
-\item{max_iter}{Passed to \code{<}. Defaults to \code{10000L}.}
+\item{max_iter}{Iteration limit. Defaults to \code{100000L}.}
 
-\item{seed}{Passed to \code{set.seed}. Defaults to \code{0L}.}
+\item{seed}{Unused; kept for compatibility. Defaults to \code{0L}.}
+
+\item{p}{Linear term of the dual (default all -1, the classifier).}
 }
 \value{
 A list with \code{alpha}, \code{b}, \code{n_iter}, \code{converged}.
 }
 \description{
-A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
-\code{morie_esl_svm_kernel}.
+SMO with the maximal-violating-pair working set (Keerthi et al. 2001, as
+libsvm); stops when the KKT violation is below tol. Deterministic:
+max_passes and seed are kept for compatibility and unused. Called by
+\code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
 See the file header for the source the module follows.
 source it follows.
 }

@@ -4,7 +4,13 @@
 \alias{morie_esl_least_angle_reg}
 \title{Least angle regression}
 \usage{
-morie_esl_least_angle_reg(X, y, max_steps = NULL, standardize = TRUE)
+morie_esl_least_angle_reg(
+  X,
+  y,
+  max_steps = NULL,
+  standardize = TRUE,
+  method = c("lar", "lasso")
+)
 }
 \arguments{
 \item{X}{Predictors, n by p.}
@@ -16,6 +22,10 @@ morie_esl_least_angle_reg(X, y, max_steps = NULL, standardize = TRUE)
 \item{standardize}{Scale columns to unit norm first. Correlations are not
 comparable across differently-scaled predictors, so turning this off makes
 the entry order depend on the units.}
+
+\item{method}{"lar", or "lasso" for the lasso modification (ESL Alg.
+3.2a): a coefficient reaching zero leaves the active set, giving the
+piecewise-linear lasso path as lars(type = "lasso").}
 }
 \value{
 List with \code{coef_path} (in original units), \code{coef}, \code{intercept},

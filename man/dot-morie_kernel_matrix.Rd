@@ -31,8 +31,10 @@ Defaults to \code{"rbf"}.}
 Nothing; this branch always raises.
 }
 \description{
-A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
-\code{morie_esl_svm_kernel}.
+SMO with the maximal-violating-pair working set (Keerthi et al. 2001, as
+libsvm); stops when the KKT violation is below tol. Deterministic:
+max_passes and seed are kept for compatibility and unused. Called by
+\code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
 See the file header for the source the module follows.
 source it follows.
 }
