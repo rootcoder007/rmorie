@@ -1199,46 +1199,116 @@ morie_spatial_voting_bayesian_unfolding <- function(D, n_dims = 2L,
                          burn_in = burn_in)
 }
 
-#' Clinton-Jackman-Rivers Bayesian IRT (stub)
-#' @param votes Binary roll-call matrix.
+#' Clinton-Jackman-Rivers Bayesian IRT by Gibbs sampling
+#'
+#' \eqn{P(y_{ij} = 1) = \Phi(\beta_j^\top x_i - \alpha_j)} with priors
+#' \eqn{x_i \sim N(0, I)} and \eqn{(\alpha_j, \beta_j) \sim N(0, v I)}.
+#' Each sweep draws the latent utilities from their truncated normals
+#' (Albert and Chib 1993), then every \eqn{(\alpha_j, \beta_j)} and every
+#' \eqn{x_i} from its Gaussian full conditional, as in
+#' \code{MCMCpack::MCMCirt1d} and \code{pscl::ideal}. All draws are
+#' inverse-CDF transforms of Philox uniforms (sweep t uses stream t), so the
+#' R and Python arms give the same chain.
+#'
+#' @param votes Roll-call matrix of 1, 0 and NA (missing).
 #' @param n_dims Ideal-point dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
-#' @return List: `ideal_points`, `ideal_sd`, `discrimination`,
-#'   `difficulty`, `engine`.
+#' @param n_samples Retained sweeps.
+#' @param burn_in Discarded sweeps.
+#' @param beta_prior_var Prior variance \eqn{v} of the bill parameters.
+#' @param start Optional starting ideal points; default the
+#'   \code{morie_spatial_voting_em_irt} posterior mode.
+#' @param seed Philox key.
+#' @param keep_chains Return the draws as well as the summaries.
+#' @return List: `ideal_point_mean`, `ideal_point_sd`, `alpha_mean`,
+#'   `beta_mean`, `n_samples` and, when kept, `ideal_point_chain`,
+#'   `alpha_chain`, `beta_chain`.
 #' @references Clinton J, Jackman S & Rivers D (2004). The statistical
 #'   analysis of roll call data. \emph{American Political Science
 #'   Review}, 98(2), 355-370.
+#'
+#'   Albert J H & Chib S (1993). Bayesian analysis of binary and
+#'   polychotomous response data. \emph{Journal of the American
+#'   Statistical Association}, 88(422), 669-679.
 #' @examples
-#' if (requireNamespace("pscl", quietly = TRUE)) {
-#'   set.seed(1)
-#'   votes <- matrix(rbinom(200, 1, 0.5), 20, 10)
-#'   fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
-#'                                       burn_in = 50L)
-#'   head(fit$ideal_points)
-#' }
+#' votes <- rbind(c(1, 1, 0, 0), c(1, 1, 1, 0), c(0, 1, 1, 1), c(0, 0, 1, 1), c(1, 0, 0, 0))
+#' fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 50L, burn_in = 10L)
+#' round(fit$ideal_point_mean, 3)
 #' @export
 morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
                                          n_samples = 1000L,
-                                         burn_in = 200L) {
-  # pscl::ideal is the canonical R implementation of the
-  # Clinton-Jackman-Rivers (2004) Bayesian IRT sampler.
-  if (requireNamespace("pscl", quietly = TRUE)) {
-    # `notInLegis` defaults to 9 in pscl::rollcall; overriding with NA
-    # collides with `missing = NA` ("codes are not unique").
-    rc <- pscl::rollcall(as.matrix(votes), yea = 1L, nay = 0L)
-    fit <- pscl::ideal(rc, d = as.integer(n_dims),
-                      maxiter = as.integer(n_samples + burn_in),
-                      thin = max(1L, as.integer(n_samples %/% 100L)),
-                      burnin = as.integer(burn_in), verbose = FALSE)
-    return(list(
-      ideal_points = unname(as.matrix(fit$xbar)),
-      n_dims = n_dims, n_samples = n_samples,
-      engine = "pscl::ideal (Clinton-Jackman-Rivers Bayesian IRT)"
-    ))
+                                         burn_in = 200L,
+                                         beta_prior_var = 25,
+                                         start = NULL,
+                                         seed = 0,
+                                         keep_chains = TRUE) {
+  Y <- as.matrix(votes)
+  N <- nrow(Y)
+  J <- ncol(Y)
+  D <- as.integer(n_dims)
+  obs <- !is.na(Y)
+  x <- if (is.null(start)) morie_spatial_voting_em_irt(Y, n_dims = D)$ideal_points else matrix(as.numeric(start), N, D)
+  alpha <- numeric(J)
+  beta <- matrix(0, J, D)
+  S <- as.integer(n_samples)
+  xs <- array(0, c(S, N, D))
+  as_ <- matrix(0, S, J)
+  bs <- array(0, c(S, J, D))
+  for (t in 0:(burn_in + S - 1L)) {
+    u <- .morie_random_uniform(N * J + J * (D + 1L) + N * D, seed = seed, stream = t)
+    M <- x %*% t(beta) - matrix(alpha, N, J, byrow = TRUE)
+    v <- matrix(u[seq_len(N * J)], N, J, byrow = TRUE)
+    yea <- !is.na(Y) & Y == 1
+    s <- ifelse(yea, M, -M)
+    far <- obs & s < -30
+    p <- ifelse(obs, v * stats::pnorm(s), v)
+    p[far] <- 0.5
+    q <- matrix(.morie_normal_quantile(p), N, J)
+    if (any(far)) q[far] <- .cjr_log_tail_quantile(log(v[far]) + .cjr_log_phi_far(s[far]))
+    ys <- M + ifelse(yea, -q, q)
+    xt <- cbind(-1, x)
+    V <- solve(diag(1 / beta_prior_var, D + 1L) + crossprod(xt))
+    L <- t(chol(V))
+    zab <- matrix(.morie_normal_quantile(u[N * J + seq_len(J * (D + 1L))]), J, D + 1L, byrow = TRUE)
+    ab <- t(V %*% crossprod(xt, ys)) + zab %*% t(L)
+    alpha <- ab[, 1]
+    beta <- ab[, -1, drop = FALSE]
+    W <- solve(diag(1, D) + crossprod(beta))
+    K <- t(chol(W))
+    zx <- matrix(.morie_normal_quantile(u[N * J + J * (D + 1L) + seq_len(N * D)]), N, D, byrow = TRUE)
+    x <- t(W %*% t((ys + matrix(alpha, N, J, byrow = TRUE)) %*% beta)) + zx %*% t(K)
+    if (t >= burn_in) {
+      s <- t - burn_in + 1L
+      xs[s, , ] <- x
+      as_[s, ] <- alpha
+      bs[s, , ] <- beta
+    }
   }
-  .morie_sv_bayes_cjr(votes, n_samples = n_samples,
-                      burn_in = burn_in)
+  xm <- apply(xs, c(2, 3), mean)
+  out <- list(
+    ideal_point_mean = matrix(xm, N, D),
+    ideal_point_sd = matrix(if (S > 1L) apply(xs, c(2, 3), stats::sd) else 0, N, D),
+    alpha_mean = colMeans(as_),
+    beta_mean = matrix(apply(bs, c(2, 3), mean), J, D),
+    n_samples = S
+  )
+  if (keep_chains) {
+    out$ideal_point_chain <- xs
+    out$alpha_chain <- as_
+    out$beta_chain <- bs
+  }
+  out
+}
+
+# log Phi(m) for m < -30 from the Mills-ratio series; pnorm itself underflows
+.cjr_log_phi_far <- function(m) {
+  w <- 1 / (m * m)
+  -0.5 * m * m - log(-m) - 0.5 * log(2 * pi) + log(1 - w + 3 * w * w - 15 * w^3 + 105 * w^4)
+}
+
+# AS 241 far-tail branch (r > 5) evaluated from log p
+.cjr_log_tail_quantile <- function(logp) {
+  rr <- sqrt(-logp) - 5
+  -(.morie_as241_poly(.MORIE_AS241_E, rr) / .morie_as241_poly(.MORIE_AS241_F, rr))
 }
 
 #' Bayesian IRT likelihood (deterministic part of CJR machinery)
@@ -1995,15 +2065,27 @@ morie_spatial_voting_dynamic_irt <- function(votes, time_periods,
 
 #' EM algorithm for binary IRT
 #'
-#' Imai, Lo & Olmsted (2016) closed-form EM updates for binary IRT,
-#' suitable for very large vote matrices where MCMC is infeasible.
+#' Imai, Lo & Olmsted (2016) EM for the binary probit IRT model
+#' \eqn{y^*_{ij} = \alpha_j + \beta_j^\top x_i + e_{ij}}, yea when
+#' \eqn{y^*_{ij} > 0}, with priors \eqn{x_i \sim N(\mu_x, s^2_x I)} and
+#' \eqn{(\alpha_j, \beta_j) \sim N(\mu_b, s^2_b I)}. The E-step replaces
+#' \eqn{y^*} by its truncated-normal mean (untruncated when missing); the
+#' M-step is the pair of ridge regressions of \code{emIRT::binIRT} with
+#' \code{asEM = TRUE}. The fixed point is the posterior mode.
 #'
-#' @param votes Legislator-by-vote binary matrix.
+#' @param votes Legislator-by-vote matrix of 1 (yea), 0 (nay), NA (missing).
 #' @param n_dims Latent dimensions.
 #' @param max_iter Maximum EM iterations.
-#' @param tol Convergence tolerance on ideal-point change.
-#' @return List with `ideal_points`, `discrimination`, `difficulty`,
-#'   `log_lik`, `iterations`.
+#' @param tol Convergence threshold.
+#' @param x_prior Prior mean and variance of the ideal points.
+#' @param beta_prior Prior mean and variance of the intercepts and slopes.
+#' @param start Optional list of starting alpha, beta and x; default alpha
+#'   = beta = 0 and x from 50 steps of orthogonal iteration on the
+#'   cross-product of the column-centred +1/-1 votes.
+#' @param conv \code{"cor"} (1 minus the smallest old/new correlation per
+#'   column) or \code{"abs"} (largest absolute change).
+#' @return List with `ideal_points`, `discrimination`, `difficulty` (the
+#'   intercepts), `log_lik`, `iterations`, `converged`.
 #' @references
 #'   Imai, K., Lo, J., and Olmsted, J. (2016). "Fast Estimation of Ideal
 #'   Points with Massive Data." *APSR*, 110(4), 631-656.
@@ -2014,70 +2096,87 @@ morie_spatial_voting_dynamic_irt <- function(votes, time_periods,
 #' @export
 morie_spatial_voting_em_irt <- function(votes,
                                         n_dims   = 1L,
-                                        max_iter = 100L,
-                                        tol      = 1e-6) {
-  votes <- as.matrix(votes)
-  n_leg <- nrow(votes)
-  n_votes <- ncol(votes)
-  mask <- !is.na(votes)
-  .rmorie_local_seed(42L)
-  theta <- matrix(stats::rnorm(n_leg * n_dims) * 0.5, n_leg, n_dims)
-  a     <- matrix(stats::rnorm(n_votes * n_dims) * 0.5, n_votes, n_dims)
-  d     <- numeric(n_votes)
-  iter <- 0L
-  use_cpp_theta <- .sv_have_cpp("morie_spatial_emirt_theta_update_cpp")
-  for (iter in seq_len(max_iter)) {
-    theta_old <- theta
-    if (use_cpp_theta) {
-      theta <- morie_spatial_emirt_theta_update_cpp(theta, a, d, votes)
-    } else {
-      for (i in seq_len(n_leg)) {
-        valid <- mask[i, ]
-        if (sum(valid) == 0L) next
-        y_i <- votes[i, valid]
-        a_i <- a[valid, , drop = FALSE]
-        d_i <- d[valid]
-        eta <- pmin(pmax(as.numeric(a_i %*% theta[i, ]) + d_i, -20), 20)
-        p <- 1 / (1 + exp(-eta))
-        residual <- y_i - p
-        w <- p * (1 - p) + 1e-10
-        H <- crossprod(a_i, a_i * w) + diag(n_dims)
-        g <- crossprod(a_i, residual)
-        theta[i, ] <- theta[i, ] + as.numeric(solve(H, g))
-      }
-    }
-    for (j in seq_len(n_votes)) {
-      valid <- mask[, j]
-      if (sum(valid) == 0L) next
-      y_j <- votes[valid, j]
-      theta_j <- theta[valid, , drop = FALSE]
-      eta <- pmin(pmax(as.numeric(theta_j %*% a[j, ]) + d[j], -20), 20)
-      p <- 1 / (1 + exp(-eta))
-      residual <- y_j - p
-      w <- p * (1 - p) + 1e-10
-      X_aug <- cbind(theta_j, 1)
-      H <- crossprod(X_aug, X_aug * w) + diag(ncol(X_aug)) * 0.01
-      g <- crossprod(X_aug, residual)
-      delta <- as.numeric(solve(H, g))
-      a[j, ] <- a[j, ] + delta[seq_len(n_dims)]
-      d[j]   <- d[j]   + delta[n_dims + 1L]
-    }
-    change <- sqrt(sum((theta - theta_old) ^ 2)) /
-              (sqrt(sum(theta_old ^ 2)) + 1e-12)
-    if (change < tol) break
+                                        max_iter = 500L,
+                                        tol      = 1e-6,
+                                        x_prior = c(0, 1),
+                                        beta_prior = c(0, 25),
+                                        start = NULL,
+                                        conv = c("cor", "abs")) {
+  conv <- match.arg(conv)
+  Y <- as.matrix(votes)
+  N <- nrow(Y)
+  J <- ncol(Y)
+  D <- as.integer(n_dims)
+  obs <- !is.na(Y)
+  if (is.null(start)) {
+    a <- numeric(J)
+    b <- matrix(0, J, D)
+    x <- .em_irt_start(Y, obs, D)
+  } else {
+    a <- as.numeric(start[[1]])
+    b <- matrix(as.numeric(start[[2]]), J, D)
+    x <- matrix(as.numeric(start[[3]]), N, D)
   }
-  ll <- 0
-  for (j in seq_len(n_votes)) {
-    valid <- mask[, j]
-    if (sum(valid) == 0L) next
-    eta <- pmin(pmax(as.numeric(theta[valid, , drop = FALSE] %*% a[j, ]) +
-                     d[j], -20), 20)
-    p <- pmin(pmax(1 / (1 + exp(-eta)), 1e-10), 1 - 1e-10)
-    y_j <- votes[valid, j]
-    ll <- ll + sum(y_j * log(p) + (1 - y_j) * log(1 - p))
+  it <- 0L
+  converged <- FALSE
+  while (it < max_iter) {
+    it <- it + 1L
+    M <- matrix(a, N, J, byrow = TRUE) + x %*% t(b)
+    ys <- ifelse(!obs, M, ifelse(!is.na(Y) & Y == 1,
+                                 M + stats::dnorm(M) / stats::pnorm(M),
+                                 M - stats::dnorm(M) / stats::pnorm(-M)))
+    x2 <- cbind(1, x)
+    B <- solve(diag(1 / beta_prior[2], D + 1L) + crossprod(x2))
+    ab <- t(B %*% (beta_prior[1] / beta_prior[2] + crossprod(x2, ys)))
+    a_new <- ab[, 1]
+    b_new <- ab[, -1, drop = FALSE]
+    eba <- as.numeric(crossprod(b_new, a_new))
+    A <- solve(diag(1 / x_prior[2], D) + crossprod(b_new))
+    x_new <- t(A %*% (x_prior[1] / x_prior[2] + t(ys %*% b_new) - eba))
+    if (it > 1L) {
+      dev <- max(.em_dev(x, x_new, conv), .em_dev(cbind(a), cbind(a_new), conv),
+                 .em_dev(b, b_new, conv))
+      converged <- dev < tol
+    }
+    a <- a_new
+    b <- b_new
+    x <- x_new
+    if (converged) break
   }
-  list(ideal_points = theta, discrimination = a,
-       difficulty = d, log_lik = ll, iterations = iter)
+  M <- matrix(a, N, J, byrow = TRUE) + x %*% t(b)
+  ll <- sum(stats::pnorm(ifelse(Y == 1, M, -M), log.p = TRUE)[obs])
+  list(ideal_points = x, discrimination = b, difficulty = a, log_lik = ll,
+       iterations = it, converged = converged)
+}
+
+.em_dev <- function(old, new, conv) {
+  if (conv == "abs") return(max(abs(old - new)))
+  worst <- 0
+  for (d in seq_len(ncol(old))) {
+    u <- old[, d] - mean(old[, d])
+    v <- new[, d] - mean(new[, d])
+    su <- sum(u^2)
+    sv <- sum(v^2)
+    worst <- max(worst, if (su > 0 && sv > 0) 1 - sum(u * v) / sqrt(su * sv) else 1)
+  }
+  worst
+}
+
+.em_irt_start <- function(Y, obs, D) {
+  N <- nrow(Y)
+  Z <- ifelse(obs, ifelse(Y == 1, 1, -1), 0)
+  Z <- sweep(Z, 2, colMeans(Z))
+  S <- tcrossprod(Z)
+  V <- outer(seq_len(N), seq_len(D), function(i, d) as.numeric(i)^d)
+  for (step in 1:50) {
+    V <- S %*% V
+    for (d in seq_len(D)) {
+      for (e in seq_len(d - 1L)) V[, d] <- V[, d] - sum(V[, d] * V[, e]) * V[, e]
+      nrm <- sqrt(sum(V[, d]^2))
+      V[, d] <- if (nrm > 0) V[, d] / nrm else 0
+    }
+  }
+  V * sqrt(N)
 }
 
 # ===========================================================================
