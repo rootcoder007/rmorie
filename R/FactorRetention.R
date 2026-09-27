@@ -60,12 +60,12 @@
 
 #' Maximum likelihood factor analysis
 #'
-#' Minimises factanal's objective over uniquenesses in [0.005, 1] by bounded Newton
+#' Minimises factanal's objective over uniquenesses between 0.005 and 1 by projected BFGS
 #' steps; returns unrotated loadings, uniquenesses, Bartlett's chi-square, AIC and BIC.
 #'
 #' @param X Data matrix.
 #' @param n_factors Number of factors (default: Kaiser count).
-#' @param max_iter Newton iterations.
+#' @param max_iter BFGS iterations.
 #' @param tol Gradient tolerance.
 #' @param scale Analyse correlations (TRUE) or covariances.
 #' @return list(loadings, communalities, uniqueness, variance_explained, objective,

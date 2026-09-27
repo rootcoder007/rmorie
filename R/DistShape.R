@@ -75,7 +75,7 @@ GHSecant <- function(x = NULL, t = 0, loc = 0, scale = 1, p = NULL, n = 0, seed 
 #' Density exp(x' A x) / c(A) for unit vectors x (surface measure), p = 2 or 3.
 #' With eigenvalues l1 >= l2 (>= l3) of the symmetric A, p = 2 has
 #' c(A) = 2 pi exp((l1 + l2)/2) I0((l1 - l2)/2); p = 3 integrates the azimuth
-#' analytically, c(A) = 2 pi int_{-1}^{1} exp(l3 z^2 + (l1 + l2)(1 - z^2)/2)
+#' analytically, c(A) = 2 pi times the integral over z in (-1, 1) of exp(l3 z^2 + (l1 + l2)(1 - z^2)/2)
 #' I0((l1 - l2)(1 - z^2)/2) dz, by composite Gauss-Legendre.
 #'
 #' @param x A unit vector or a matrix of unit vectors in rows.

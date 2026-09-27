@@ -30,8 +30,9 @@
 #                   slow, and is offered for exactly that reason -- it
 #                   is the one with the guarantee.
 #
-# Determinism: proposals and acceptances come from the shared RNG, so a
-# given seed reproduces the whole trajectory in both language arms.
+# Determinism: proposal k uses normals (k - 1) n + 1 .. k n of Philox stream 0
+# and the Metropolis test uses uniform k of stream 1, exactly as the Python
+# arm, so a given seed reproduces the whole trajectory in both arms.
 
 .sa_opt_schedules <- c("geometric", "linear", "logarithmic")
 
@@ -81,7 +82,7 @@
 #' \code{as.numeric}.
 #' @param upper Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
-#' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
+#' @param seed Philox seed (normals on stream 0, acceptance uniforms on stream 1). Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 #' @keywords internal
@@ -120,7 +121,8 @@ morie_sa_opt <- function(fun, x0, step = 1.0, T0 = 1.0, n_iter = 1000,
   lo <- if (is.null(lower)) NULL else as.numeric(lower)
   hi <- if (is.null(upper)) NULL else as.numeric(upper)
 
-  rng <- .ghc_rng(seed)
+  Z <- .morie_random_normal(n_iter * n, seed = seed, stream = 0)
+  U <- .morie_random_uniform(n_iter, seed = seed, stream = 1)
   f <- as.numeric(fun(x))
   best_x <- x
   best_f <- f
@@ -134,9 +136,7 @@ morie_sa_opt <- function(fun, x0, step = 1.0, T0 = 1.0, n_iter = 1000,
     T <- .sa_opt_temperature(sched, T0, k, n_iter, alpha)
     temps[k] <- T
 
-    u_gauss <- .ghc_unif(rng, n)
-    gauss <- qnorm(u_gauss)
-    prop <- x + as.numeric(step) * gauss
+    prop <- x + as.numeric(step) * Z[(k - 1L) * n + seq_len(n)]
 
     if (!is.null(lo)) prop <- pmax(prop, lo)
     if (!is.null(hi)) prop <- pmin(prop, hi)
@@ -150,8 +150,7 @@ morie_sa_opt <- function(fun, x0, step = 1.0, T0 = 1.0, n_iter = 1000,
     } else if (T <= 0.0) {
       accept <- FALSE
     } else {
-      u_accept <- .ghc_unif(rng, 1L)
-      if (u_accept < exp(-dE / T)) {
+      if (U[k] < exp(-dE / T)) {
         accept <- TRUE
         n_up <- n_up + 1L
       }
