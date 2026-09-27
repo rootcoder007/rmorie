@@ -1,11 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-.esl9_spline_smooth <- function(x, r, lambda, w) {
+.esl9_spline_smooth <- function(x, r, lambda, w, full = FALSE) {
   u <- sort(unique(x))
   gi <- match(x, u)
   m <- length(u)
   W <- as.numeric(tapply(w, gi, sum))
   ybar <- as.numeric(tapply(w * r, gi, sum)) / W
-  if (m < 3 || lambda == 0) return(ybar[gi])
+  if (m < 3 || lambda == 0) {
+    if (full) return(list(fit = ybar[gi], u = u, f = ybar, gamma = numeric(m)))
+    return(ybar[gi])
+  }
   h <- diff(u)
   Q <- matrix(0, m, m - 2)
   R <- matrix(0, m - 2, m - 2)
@@ -17,7 +20,9 @@
     if (j < m - 1) R[j - 1, j] <- R[j, j - 1] <- h[j] / 6
   }
   gam <- solve(R + lambda * crossprod(Q, Q / W), crossprod(Q, ybar))
-  (ybar - lambda * drop(Q %*% gam) / W)[gi]
+  fu <- ybar - lambda * drop(Q %*% gam) / W
+  if (full) return(list(fit = fu[gi], u = u, f = fu, gamma = c(0, drop(gam), 0)))
+  fu[gi]
 }
 
 .esl9_linear_smooth <- function(x, r, w) {
