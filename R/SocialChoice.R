@@ -190,7 +190,7 @@ AgendaSetterEquilibrium <- function(setter, median, status_quo, options = NULL) 
 #' Voting power indices
 #'
 #' Banzhaf (absolute and normalised), Shapley-Shubik, Deegan-Packel, Johnston and
-#' Holler (public good) indices of the weighted game [q; w] by exact enumeration,
+#' Holler (public good) indices of the weighted game with quota q and weights w by exact enumeration,
 #' with the minimal winning coalitions.
 #'
 #' @param weights Player weights (at most 20).
