@@ -85,3 +85,34 @@ test_that("GibbsPseudolikelihood equals ppm on the same quadrature", {
     expect_lt(max(abs(m$theta - stats::coef(ref))), 1e-7)
   }
 })
+
+test_that("BandwidthDiggle, MarkCorrelation and MarkVariogram equal bw.diggle, markcorr and markvario", {
+  skip_if_not_installed("spatstat.explore")
+  u <- .morie_random_uniform(210, seed = 8, stream = 0)
+  P <- cbind(2 * u[1:70], u[71:140])
+  mk <- 1 + 3 * u[141:210] + P[, 1]
+  X <- spatstat.geom::ppp(P[, 1], P[, 2], window = spatstat.geom::owin(c(0, 2), c(0, 1)), marks = mk)
+  expect_equal(BandwidthDiggle(P, c(0, 2, 0, 1))$sigma, as.numeric(spatstat.explore::bw.diggle(X)), tolerance = 1e-12)
+  mc <- as.data.frame(spatstat.explore::markcorr(X))
+  mv <- as.data.frame(spatstat.explore::markvario(X))
+  for (cr in c("iso", "trans")) {
+    k <- MarkCorrelation(P, mk, c(0, 2, 0, 1), correction = cr)$k
+    g <- MarkVariogram(P, mk, c(0, 2, 0, 1), correction = cr)$gamma
+    ok <- !is.nan(k)
+    expect_gt(sum(ok), 400)
+    expect_equal(k[ok], mc[[cr]][ok], tolerance = 1e-10)
+    expect_equal(g[ok], mv[[cr]][ok], tolerance = 1e-10)
+  }
+})
+
+test_that("CSRGlobalTest statistics equal dclf.test and mad.test with use.theo", {
+  skip_if_not_installed("spatstat.explore")
+  u <- .morie_random_uniform(80, seed = 3, stream = 0)
+  P <- cbind(2 * u[1:40], u[41:80])
+  X <- spatstat.geom::ppp(P[, 1], P[, 2], window = spatstat.geom::owin(c(0, 2), c(0, 1)))
+  d <- spatstat.explore::dclf.test(X, spatstat.explore::Lest, use.theo = TRUE, nsim = 3, verbose = FALSE)
+  m <- spatstat.explore::mad.test(X, spatstat.explore::Lest, use.theo = TRUE, nsim = 3, verbose = FALSE)
+  expect_equal(CSRGlobalTest(P, c(0, 2, 0, 1), nsim = 1)$statistic, unname(unlist(d$statistic)[1]), tolerance = 1e-12)
+  expect_equal(CSRGlobalTest(P, c(0, 2, 0, 1), nsim = 1, statistic = "mad")$statistic, unname(unlist(m$statistic)[1]),
+               tolerance = 1e-12)
+})

@@ -12,3 +12,16 @@ test_that("SpaceTimeK equals splancs::stkhat", {
   expect_lt(max(abs(r$ks - ref$ks)), 1e-8)
   expect_lt(max(abs(r$kt - ref$kt)), 1e-8)
 })
+
+test_that("SpaceTimeInteractionTest statistic equals splancs::stmctest t0", {
+  skip_if_not_installed("splancs")
+  U <- .morie_random_uniform(200, seed = 34, stream = 0)
+  P <- cbind(2 * U[1:60], U[61:120])
+  tt <- 10 * U[121:180]
+  s <- c(0.05, 0.1, 0.2, 0.3)
+  tm <- c(0.5, 1, 2, 3)
+  ref <- splancs::stmctest(P, tt, rbind(c(0, 0), c(2, 0), c(2, 1), c(0, 1)), c(0, 10), s, tm, nsim = 1, quiet = TRUE)
+  ours <- SpaceTimeInteractionTest(P, tt, s, tm, c(0, 2, 0, 1), c(0, 10), nsim = 1)
+  # splancs uses pi = 3.141592654 in its edge weights
+  expect_equal(ours$statistic, ref$t0, tolerance = 1e-8)
+})

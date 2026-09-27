@@ -1,0 +1,10 @@
+test_that("CSRGlobalTest statistics and documented value", {
+  P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+  r <- CSRGlobalTest(P, c(0, 1, 0, 1), nsim = 19, statistic = "mad")
+  expect_equal(round(r$statistic, 6), 0.206055)
+  expect_equal(r$p_value, 0.05)
+  expect_equal(r$statistic, max(abs(r$L - r$r)), tolerance = 1e-15)
+  d <- CSRGlobalTest(P, c(0, 1, 0, 1), nsim = 3)
+  expect_equal(d$statistic, 0.25 * mean((d$L - d$r)^2), tolerance = 1e-15)
+  expect_identical(CSRGlobalTest(P, c(0, 1, 0, 1), nsim = 3)$simulated, d$simulated)
+})
