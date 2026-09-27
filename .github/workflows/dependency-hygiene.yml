@@ -74,7 +74,7 @@ jobs:
             | grep -v "^R/RcppExports.R" \
             | grep -v "^R/extenders_" \
             | grep -vE "^R/(matching|effects|survey|weights|otis_causal)\.R:" \
-            | grep -vE "^R/[a-z_0-9]+\.R:[0-9]+:\s*#" || true)
+            | grep -vE "^R/[A-Za-z_0-9]+\.R:[0-9]+:\s*#" || true)
           if [ -n "$bad" ]; then
             echo "Forbidden package calls in production R/:"
             echo "$bad"
