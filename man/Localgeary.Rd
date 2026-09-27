@@ -7,25 +7,34 @@
 Localgeary(x, W, scale = TRUE)
 }
 \arguments{
-\item{x}{See Usage.}
+\item{x}{Values at the n locations: a vector, or an n x k matrix.}
 
-\item{W}{See Usage.}
+\item{W}{Spatial weights matrix.}
 
-\item{scale}{See Usage.}
+\item{scale}{Standardise each variable (sample standard deviation) first.}
 }
 \value{
-List with \code{local}, \code{global_c}, \code{z}, \code{n}.
+List with \code{local}, \code{global_c}, \code{z} (a matrix when
+k > 1), \code{n}, \code{n_variables}, \code{method}.
 }
 \description{
-Formula: c_i = sum_j w_ij (z_i - z_j)^2 with z the standardised x
+\eqn{c_i = \sum_j w_{ij} (z_i - z_j)^2} with z the standardised x
+(Anselin 1995), as \code{spdep::localC}. With several variables (x a
+matrix, one variable per column) this is the multivariate local Geary of
+Anselin (2019), \eqn{c_i = (1/k) \sum_v \sum_j w_{ij} (z_{iv} - z_{jv})^2},
+as \code{spdep::localC} on a list of variables.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Localgeary(V, V)
+W <- matrix(0, 4, 4); W[cbind(1:3, 2:4)] <- 1; W <- W + t(W)
+Localgeary(c(1, 2, 4, 8), W)$local
+Localgeary(cbind(c(1, 2, 4, 8), c(3, 1, 2, 5)), W)$local
 }
 \references{
-Anselin (2019), A Local Indicator of Multivariate Spatial Association:
-Extending Geary's c, Geographical Analysis 51:133-150. Paywalled; the univariate form
-c_i = sum_j w_ij (x_i - x_j)^2 and the standardise-first convention are as documented
-by spdep::localC, the reference implementation.
+Anselin, L. (1995). Local indicators of spatial association
+\itemize{
+\item LISA. Geographical Analysis 27, 93-115.
+}
+
+Anselin, L. (2019). A local indicator of multivariate spatial
+association: extending Geary's c. Geographical Analysis 51, 133-150.
 }
