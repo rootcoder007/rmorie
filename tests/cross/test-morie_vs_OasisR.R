@@ -21,18 +21,18 @@ test_that("segregation indices match OasisR", {
   x <- J$x
   c1 <- J$c
   diag(c1) <- 1
-  tol <- 5e-5
-  expect_equal(DissimilarityIndex(x, J$c)$D, OasisR::DIDuncan(x), tolerance = tol)
-  expect_equal(DissimilarityIndex(x, J$c)$IS, OasisR::ISDuncan(x), tolerance = tol)
-  expect_equal(DissimilarityIndex(x, J$c)$D_morrill, OasisR::DIMorrill(x, c = J$c), tolerance = tol)
-  expect_equal(ExposureIndex(x)$xPy, OasisR::xPy(x), tolerance = tol)
-  expect_equal(IsolationIndex(x)$eta2, OasisR::Eta2(x), tolerance = tol)
-  expect_equal(SpatialConcentration(x, J$area)$ACO, OasisR::ACO(x, a = J$area), tolerance = tol)
-  expect_equal(SpatialConcentration(x, J$area)$RCO, OasisR::RCO(x, a = J$area), tolerance = tol)
-  expect_equal(ClusteringIndex(x, contiguity = J$c)$ACL, OasisR::ACL(x, c = c1), tolerance = tol)
-  expect_equal(ClusteringIndex(x, distance = J$d)$SP, OasisR::SP(x, d = J$d), tolerance = tol)
-  expect_equal(CentralizationIndex(x, J$dc, J$area)$ACE, OasisR::ACE(x, a = J$area, dc = J$dc), tolerance = tol)
-  expect_equal(CentralizationIndex(x, J$dc)$RCE, OasisR::RCE(x, dc = J$dc), tolerance = tol)
-  expect_equal(SegregationEvenness(x)$H, OasisR::HTheil(x), tolerance = tol)
-  expect_equal(SegregationEvenness(x)$gini, OasisR::Gini(x), tolerance = tol)
+  near <- function(a, b) expect_lt(max(abs(as.numeric(unlist(a)) - as.numeric(unlist(b)))), 5e-5)  # OasisR rounds to 4 decimals
+  near(DissimilarityIndex(x, J$c)$D, OasisR::DIDuncan(x))
+  near(DissimilarityIndex(x, J$c)$IS, OasisR::ISDuncan(x))
+  near(DissimilarityIndex(x, J$c)$D_morrill, OasisR::DIMorrill(x, c = J$c))
+  near(ExposureIndex(x)$xPy, OasisR::xPy(x))
+  near(IsolationIndex(x)$eta2, OasisR::Eta2(x))
+  near(SpatialConcentration(x, J$area)$ACO, OasisR::ACO(x, a = J$area))
+  near(SpatialConcentration(x, J$area)$RCO, OasisR::RCO(x, a = J$area))
+  near(ClusteringIndex(x, contiguity = J$c)$ACL, OasisR::ACL(x, c = c1))
+  near(ClusteringIndex(x, distance = J$d)$SP, OasisR::SP(x, d = J$d))
+  near(CentralizationIndex(x, J$dc, J$area)$ACE, OasisR::ACE(x, a = J$area, dc = J$dc))
+  near(CentralizationIndex(x, J$dc)$RCE, OasisR::RCE(x, dc = J$dc))
+  near(SegregationEvenness(x)$H, OasisR::HTheil(x))
+  near(SegregationEvenness(x)$gini, OasisR::Gini(x))
 })

@@ -1,0 +1,31 @@
+test_that("MajorityTournament, Yolk and AmendmentAgenda match the Python arm", {
+  U <- .morie_random_uniform(4000, seed = 5, stream = 0)
+  res <- lapply(0:3, function(t) {
+    nv <- 7 + 2 * (t %% 3)
+    na <- 5 + t %% 3
+    V <- matrix(U[40 * t + seq_len(2 * nv)], ncol = 2, byrow = TRUE)
+    A <- matrix(U[2000 + 20 * t + seq_len(2 * na)], ncol = 2, byrow = TRUE)
+    MajorityTournament(V, A)
+  })
+  expect_identical(vapply(res, function(r) r$banks[1] - 1L, 0L), c(2L, 1L, 6L, 0L))
+  expect_identical(vapply(res, function(r) r$cyclic, TRUE), c(FALSE, TRUE, FALSE, FALSE))
+  r <- MajorityTournament(c(0, 0.1, 3), c(0, 1, 4))
+  expect_identical(c(r$condorcet_winner, r$condorcet_loser), c(1L, 3L))
+  expect_equal(r$borda, c(4, 3, 2))
+  U8 <- .morie_random_uniform(4000, seed = 8, stream = 0)
+  expect_equal(Yolk(matrix(U8[1:14], ncol = 2, byrow = TRUE))$radius, 0.041686079839, tolerance = 1e-9)
+  expect_true(Yolk(rbind(c(0, 0), c(1, 1), c(-1, -1), c(2, -1), c(-2, 1)))$core)
+  a <- AmendmentAgenda(matrix(U8[1000 + 1:14], ncol = 2, byrow = TRUE), matrix(U8[2500 + 1:10], ncol = 2, byrow = TRUE))
+  expect_identical(c(a$sincere, a$sophisticated), c(5L, 5L))
+  expect_identical(AgendaSetterEquilibrium(10, 4, 1)$outcome, 7)
+  expect_identical(AgendaSetterEquilibrium(10, 4, 1, options = c(2, 6.5, 8))$outcome, 6.5)
+})
+
+test_that("PowerIndices and ShapleyOwen match the Python arm", {
+  r <- PowerIndices(c(4, 3, 2, 1), 6)
+  expect_equal(r$shapley_shubik, c(10, 6, 6, 2) / 24, tolerance = 1e-15)
+  expect_equal(r$deegan_packel, c(1 / 3, 5 / 18, 5 / 18, 1 / 9), tolerance = 1e-15)
+  expect_identical(lapply(r$minimal_winning, as.integer), list(c(1L, 2L), c(1L, 3L), c(2L, 3L, 4L)))
+  U <- .morie_random_uniform(20, seed = 2, stream = 0)
+  expect_equal(ShapleyOwen(matrix(U[1:14], ncol = 2, byrow = TRUE))$value, c(0.41817123012214535, 0.017865522589242545, 0.1144579964385179, 0.09310196562273196, 0.12604113663873961, 0.19171587628288123, 0.0386462723057414), tolerance = 1e-12)
+})
