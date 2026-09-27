@@ -1,0 +1,13 @@
+test_that("Morin batch: Var(s^2), geometric mean, model inversion, joint density", {
+  g <- as.matrix(expand.grid(1:6, 1:6, 1:6))
+  s2 <- apply(g, 1, var)
+  v <- mean((s2 - mean(s2))^2)
+  expect_equal(SampVarVar(1:6, rep(1 / 6, 6), 3)$var_s2, v, tolerance = 1e-12)
+  expect_equal(SampVarVar(1:6, rep(1 / 6, 6), 2)$var_s2, 1673 / 144, tolerance = 1e-12)
+  expect_equal(GeomExp(1 / 6)$series, 6, tolerance = 1e-12)
+  b <- LinModelInv(7.5, sqrt(7.5^2 + 10.6^2), 7.5 / sqrt(7.5^2 + 10.6^2))
+  expect_equal(c(b$m, b$sigma_z), c(1, 10.6), tolerance = 1e-12)
+  r <- BvnModel(0.3, -1.2, 0.8, 1.3, 0.6)
+  expect_equal(r$density, dnorm(0.3, 0, 1.3) * dnorm(-1.2 - 0.8 * 0.3, 0, 0.6), tolerance = 1e-14)
+  expect_equal(r$density, r$density_r, tolerance = 1e-13)
+})
