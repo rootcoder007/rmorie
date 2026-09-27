@@ -22,8 +22,9 @@
 #'   autoregressive model with autoregressive disturbances. Journal of Real
 #'   Estate Finance and Economics 17, 99-121.
 #' @examples
-#' W <- matrix(0, 5, 5); W[cbind(1:5, c(2:5, 1))] <- .5; W[cbind(1:5, c(5, 1:4))] <- .5
-#' SpatialTwoStageLS(c(1, 2.2, 1.4, 3.1, .9), cbind(1, c(.1, .6, .2, .9, .3)), W)$coefficients
+#' W <- 1 * (abs(outer(1:6, 1:6, "-")) == 1)
+#' W <- W / rowSums(W)
+#' SpatialTwoStageLS(c(1, 2.2, 1.4, 3.1, .9, 2), cbind(1, c(.1, .6, .2, .9, .3, .5)), W)$coefficients
 #' @export
 SpatialTwoStageLS <- function(y, X, W, w2x = TRUE, robust = NULL, sig2n_k = TRUE) {
   y <- as.numeric(y)
