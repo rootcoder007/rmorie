@@ -1,0 +1,13 @@
+test_that("Bilder GLM helpers match glm, rstandard and poisson.test", {
+  dist <- c(20, 25, 30, 35, 40, 45, 50, 55, 60, 65)
+  succ <- c(19, 18, 17, 15, 12, 10, 8, 5, 3, 1)
+  r <- GlmProfCI(succ, cbind(1, dist), 1, trials = rep(20, 10))
+  expect_equal(r$ci, c(-0.149231637058244, -0.0869796115891111), tolerance = 1e-9)
+  m <- glm(cbind(succ, 20 - succ) ~ dist, family = binomial, control = glm.control(epsilon = 1e-14, maxit = 100))
+  expect_equal(unname(GlmStdRes(succ, cbind(1, dist), trials = rep(20, 10))$standardized), unname(rstandard(m, type = "pearson")), tolerance = 1e-8)
+  expect_equal(PoisExactCI(7, 3)$ci, as.numeric(poisson.test(7, 3)$conf.int), tolerance = 1e-12)
+  expect_equal(OrInt(0.5, 0.1, 2, 0.01, 0.001, -0.002, c = 2)$odds_ratio, exp(1.4), tolerance = 1e-12)
+  q <- InvPredCI(-4, 2, 0.25, 0.04, -0.09)
+  expect_equal(abs(-4 + 2 * q$ci) / sqrt(0.25 + q$ci^2 * 0.04 - 0.18 * q$ci), rep(qnorm(0.975), 2), tolerance = 1e-10)
+  expect_equal(RoganGladen(30, 200, 0.9, 0.95)$estimate, 0.1 / 0.85, tolerance = 1e-12)
+})
