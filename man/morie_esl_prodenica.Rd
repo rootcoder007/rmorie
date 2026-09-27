@@ -32,7 +32,7 @@ negentropy_path, iterations, converged.
 ESL Algorithm 14.3 (eqs 14.89-14.96): symmetric whitening, then alternate
 (a) for each source a penalised Poisson fit of the log tilt g on a binned
 grid (14.93-14.94, cubic smoothing spline by IRLS) and (b) the fixed-point
-step a_j <- E\link{z g'(a_j'z)} - E\link{g''(a_j'z)} a_j followed by symmetric
+step a_j <- E(z g'(a_j'z)) - E(g''(a_j'z)) a_j followed by symmetric
 orthogonalisation.
 }
 \examples{

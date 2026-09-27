@@ -52,7 +52,7 @@ GeomExp <- function(p, terms = 2000) {
 #' m = r sigma_y / sigma_x and sigma_z = sigma_y sqrt(1 - r^2).
 #'
 #' @param sigma_x,sigma_y Standard deviations, > 0.
-#' @param r Correlation in [-1, 1].
+#' @param r Correlation between -1 and 1.
 #' @return list(m, sigma_z).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eqs (6.16)-(6.18), (6.35).

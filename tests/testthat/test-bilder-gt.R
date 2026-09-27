@@ -4,7 +4,8 @@ test_that("group testing and SPMI match binGroup2, MRCV and the Python arm", {
   expect_equal(unname(d$overall["PPPV"]), 0.94974347204575, tolerance = 1e-12)
   r <- GtPrev(3, 7, 24, ci = "score")
   expect_equal(r$ci, c(0.00632494931890608, 0.0516362362808093), tolerance = 1e-12)
-  expect_equal(c(r$eb1, r$eb2), c(0.0188574984247741, 0.0185957956040668), tolerance = 1e-12)
+  # optimize() locates b-hat only to its tol (eps^0.25), so the EB estimates vary across platforms near 1e-10
+  expect_equal(c(r$eb1, r$eb2), c(0.0188574984247741, 0.0185957956040668), tolerance = 1e-8)
   xs <- 12345
   u <- function() { xs <<- (xs * 16807) %% 2147483647; xs / 2147483647 }
   x <- y <- numeric(150)

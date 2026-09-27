@@ -9,7 +9,7 @@ LinModelInv(sigma_x, sigma_y, r)
 \arguments{
 \item{sigma_x, sigma_y}{Standard deviations, > 0.}
 
-\item{r}{Correlation in \link{-1, 1}.}
+\item{r}{Correlation between -1 and 1.}
 }
 \value{
 list(m, sigma_z).

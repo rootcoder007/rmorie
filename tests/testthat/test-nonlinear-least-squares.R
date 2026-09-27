@@ -8,14 +8,22 @@ test_that("nlsgn solves the book's quadratic exactly", {
   expect_equal(r$se, unname(summary(lm(y ~ x + I(x^2)))$coefficients[, 2]), tolerance = 1e-7)
 })
 
-test_that("nlsgn reaches the nls optimum of a * b^x", {
+test_that("nlsgn reaches the least-squares optimum of a * b^x", {
   x <- 1:5
   y <- c(3, 7, 12, 26, 51)
   r <- nlsgn(function(x, t) t[1] * t[2]^x, x, y, c(1, 1))
-  m <- nls(y ~ a * b^x, start = list(a = 1.5, b = 2), control = nls.control(tol = 1e-9))
-  expect_equal(r$coefficients, unname(coef(m)), tolerance = 1e-6)
-  expect_lte(r$rss, deviance(m) * (1 + 1e-13))
-  expect_equal(r$se, unname(summary(m)$coefficients[, 2]), tolerance = 1e-5)
+  a <- r$coefficients[1]
+  b <- r$coefficients[2]
+  e <- y - a * b^x
+  J <- cbind(b^x, a * x * b^(x - 1))
+  # first-order conditions: the RSS gradient -2 J'e vanishes at the optimum
+  expect_lt(max(abs(crossprod(J, e))), 1e-8)
+  rss <- sum(e^2)
+  for (d in list(c(1e-4, 0), c(-1e-4, 0), c(0, 1e-5), c(0, -1e-5))) {
+    expect_gt(sum((y - (a + d[1]) * (b + d[2])^x)^2), rss)
+  }
+  expect_equal(r$rss, rss, tolerance = 1e-12)
+  expect_equal(r$se, sqrt(diag(rss / 3 * solve(crossprod(J)))), tolerance = 1e-6)
 })
 
 test_that("nlsgn halves steps from a poor start", {
