@@ -1,0 +1,22 @@
+test_that("multivariate and copula densities match references and the Python arm", {
+  S <- rbind(c(2, 0.6, 0.3), c(0.6, 1.5, -0.4), c(0.3, -0.4, 1.2))
+  X <- rbind(c(0.1, -0.3, 0.8), c(1.2, 0.4, -0.5))
+  m <- c(0.2, -0.1, 0.3)
+  expect_equal(MvNormDens(X, m, S)$logpdf, c(-3.3469468664241, -3.887799338203), tolerance = 1e-12)
+  expect_equal(MvtDens(X, m, S, 4.5)$logpdf, c(-3.27529904307804, -4.04661280778315), tolerance = 1e-12)
+  expect_equal(MvSkewNorm(X, m, S, c(2, -1, 0.5))$logpdf, c(-3.1667219621051, -3.49686708996871), tolerance = 1e-12)
+  expect_equal(unname(MvNormDens(NULL, m, S, n = 2, seed = 3)$random[1, ]), c(1.4765976693785927, -1.0853826822845107, 1.3957114540412003), tolerance = 1e-12)
+  expect_equal(vapply(c(-0.6, 0.35, 0.95), function(r) BvNormDist(0.7, -0.2, 0.1, 0.3, 1.2, 0.8, r)$cdf, numeric(1)),
+               c(0.104268667247688, 0.222352028950142, 0.265979615194317), tolerance = 1e-12)
+  expect_equal(BvNormDist(0, 0, rho = 0.5)$cdf, 1 / 3, tolerance = 1e-14)
+  expect_equal(c(BvPois(3, 5, 1.2, 2.3, 0.7)$pmf, BvPois(0, 2, 1.2, 2.3, 0.7)$pmf), c(0.0223363190339444, 0.0396633006901635), tolerance = 1e-12)
+  W <- rbind(c(1.5, 0.2, 0.1), c(0.2, 2.2, -0.3), c(0.1, -0.3, 0.9))
+  expect_equal(c(WishartDens(W, 5.5, S)$logpdf, WishartDens(W, 5.5, S, TRUE)$logpdf), c(-11.5067626985679, -11.7980046163884), tolerance = 1e-12)
+  expect_equal(LkjCorr(diag(3), 1)$log_normalizer, log(pi^2 / 2), tolerance = 1e-14)
+  expect_equal(VmfDens(c(0, 0.6, 0.8), c(0, 0.6, 0.8), 4.2)$logpdf, log(4.2 / (4 * pi * sinh(4.2))) + 4.2, tolerance = 1e-14)
+  expect_equal(KentDens(c(0, 0.6, 0.8), 5, 1.5)$logpdf, -1.8637559207936132, tolerance = 1e-12)
+  cp <- vapply(list(c("gaussian", 0.5), c("t", 0.5), c("clayton", 2), c("gumbel", 1.7), c("frank", 3), c("joe", 2.2)),
+               function(a) CopulaDens(0.3, 0.7, a[1], as.numeric(a[2]))$density, numeric(1))
+  expect_equal(cp, c(0.877081937646637, 0.831762144547868, 0.629289451001217, 0.78102664711419, 0.769537139850275, 0.772869856582706), tolerance = 1e-12)
+  expect_equal(MultinomialDist(c(2, 3, 0, 1), probs = c(0.1, 0.4, 0.2, 0.3))$pmf, dmultinom(c(2, 3, 0, 1), prob = c(0.1, 0.4, 0.2, 0.3)), tolerance = 1e-14)
+})
