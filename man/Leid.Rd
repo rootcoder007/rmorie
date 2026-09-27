@@ -37,9 +37,9 @@ Formula: local move, refinement, then aggregation, repeated -- Traag,
 Waltman and van Eck (2019).
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Leid(V, M)
+M <- matrix(0, 6, 6)
+M[cbind(c(1, 1, 2, 3, 4, 4, 5), c(2, 3, 3, 4, 5, 6, 6))] <- 1
+Leid(NULL, M + t(M))$labels
 }
 \references{
 Traag, V. A., Waltman, L. and van Eck, N. J. (2019).
