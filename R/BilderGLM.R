@@ -73,7 +73,7 @@ GlmProfCI <- function(y, X, j, family = c("binomial", "poisson"), trials = NULL,
 #' @param X Design matrix.
 #' @param family "binomial" or "poisson".
 #' @param trials Binomial trials.
-#' @return list(fitted, pearson, standardized, hat, beta).
+#' @return list(fitted, pearson, standardized, hat, beta, deviance, pearson_chisq, df).
 #' @references Bilder, C. R. & Loughin, T. M. (2025). Analysis of Categorical
 #'   Data with R, 2nd ed. Sec 5.2.1.
 #' @examples
@@ -88,7 +88,10 @@ GlmStdRes <- function(y, X, family = c("binomial", "poisson"), trials = NULL) {
   inv <- solve(crossprod(X, v * X))
   h <- v * rowSums((X %*% inv) * X)
   e <- (y - f$mu) / sqrt(v)
-  list(fitted = f$mu, pearson = e, standardized = e / sqrt(1 - h), hat = h, beta = f$beta)
+  xlogx <- function(a, b) ifelse(a > 0, a * log(a / b), 0)
+  dev <- if (family == "binomial") 2 * sum(xlogx(y, f$mu) + xlogx(trials - y, trials - f$mu)) else 2 * sum(xlogx(y, f$mu) - (y - f$mu))
+  list(fitted = f$mu, pearson = e, standardized = e / sqrt(1 - h), hat = h, beta = f$beta,
+       deviance = dev, pearson_chisq = sum(e^2), df = length(y) - ncol(X))
 }
 
 #' Odds ratio with an interaction term
