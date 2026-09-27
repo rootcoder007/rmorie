@@ -56,8 +56,8 @@ test_that("local Geary, correlogram, k-colour join counts, bivariate LISA and Mo
   x <- u[1:n] * 10 + (0:(n - 1)) %% nc
   y <- u[n + 1:n] * 5 + (0:(n - 1)) %/% nc
   lab <- c("a", "b", "c", "d")[floor(u[2 * n + 1:n] * 4) + 1]
-  expect_equal(LocalGeary(x, W)$local_values, as.numeric(spdep::localC(x, lw)), tolerance = 1e-12)
-  expect_equal(LocalGeary(cbind(x, y), W)$local_values, as.numeric(spdep::localC(list(x, y), lw)),
+  expect_equal(Localgeary(x, W)$local, as.numeric(spdep::localC(x, lw)), tolerance = 1e-12)
+  expect_equal(Localgeary(cbind(x, y), W)$local, as.numeric(spdep::localC(list(x, y), lw)),
                tolerance = 1e-12)
   for (m in c("I", "C", "corr")) for (st in c("W", "B")) for (rnd in c(TRUE, FALSE)) {
     r <- SpatialCorrelogram(A, x, order = 4, method = m, style = st, randomisation = rnd)

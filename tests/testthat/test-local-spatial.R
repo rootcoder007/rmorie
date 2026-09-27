@@ -1,24 +1,18 @@
 path_w <- function(n) 1 * (abs(outer(seq_len(n), seq_len(n), "-")) == 1)
 zsc <- function(v) (v - mean(v)) / stats::sd(v)
 
-test_that("LocalGeary follows the formula and the documented values", {
+test_that("Localgeary follows the formula; its multivariate form is the mean", {
   x <- c(1, 2, 4, 8)
   W <- path_w(4)
   z <- zsc(x)
-  want <- rowSums(W * outer(z, z, "-")^2)
-  got <- LocalGeary(x, W)$local_values
-  expect_equal(got, want, tolerance = 1e-12)
+  got <- Localgeary(x, W)$local
+  expect_equal(got, rowSums(W * outer(z, z, "-")^2), tolerance = 1e-12)
   expect_equal(round(got, 6), c(0.104348, 0.521739, 2.086957, 1.669565))
-  expect_equal(got[1], 3 / 28.75, tolerance = 1e-12)
-})
-
-test_that("multivariate LocalGeary is the mean of the univariate ones", {
-  x <- c(1, 2, 4, 8, 3)
-  y <- c(5, 1, 2, 2.5, 9)
-  W <- path_w(5)
-  m <- LocalGeary(cbind(x, y), W)$local_values
-  expect_equal(m, (LocalGeary(x, W)$local_values + LocalGeary(y, W)$local_values) / 2, tolerance = 1e-12)
-  expect_error(LocalGeary(c(1, 1, 1), path_w(3)))
+  x5 <- c(1, 2, 4, 8, 3)
+  y5 <- c(5, 1, 2, 2.5, 9)
+  m <- Localgeary(cbind(x5, y5), path_w(5))$local
+  expect_equal(m, (Localgeary(x5, path_w(5))$local + Localgeary(y5, path_w(5))$local) / 2, tolerance = 1e-12)
+  expect_error(Localgeary(c(1, 1, 1), path_w(3)))
 })
 
 test_that("SpatialCorrelogram lag 1 is Moran's I", {
