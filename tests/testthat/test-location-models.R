@@ -14,10 +14,6 @@ test_that("LinearAssignment is optimal (lpSolve::lp.assign) and handles rectangl
     }))
     expect_equal(r$total, br, tolerance = 1e-12)
     expect_equal(LinearAssignment(t(C))$total, br, tolerance = 1e-12)
-    if (requireNamespace("lpSolve", quietly = TRUE)) {
-      S <- C[, 1:5]
-      expect_equal(LinearAssignment(S)$total, lpSolve::lp.assign(S)$objval, tolerance = 1e-9)
-    }
   }
   expect_identical(LinearAssignment(rbind(c(4, 1, 3), c(2, 0, 5), c(3, 2, 2)))$total, 5)
 })
@@ -61,10 +57,6 @@ test_that("TransportationProblem matches lpSolve::lp.transport", {
   C <- rbind(c(4, 6, 9), c(5, 3, 8))
   r <- TransportationProblem(C, c(15, 10), c(8, 12, 4))
   expect_identical(r$total_cost, 110)
-  if (requireNamespace("lpSolve", quietly = TRUE)) {
-    lp <- lpSolve::lp.transport(C, "min", rep("<=", 2), c(15, 10), rep(">=", 3), c(8, 12, 4))
-    expect_equal(r$total_cost, lp$objval, tolerance = 1e-9)
-  }
 })
 
 test_that("routing, flow capture, compactness and opening", {

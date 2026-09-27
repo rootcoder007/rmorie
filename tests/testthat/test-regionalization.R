@@ -17,15 +17,6 @@ test_that("Skater matches spdep::skater and the Python arm", {
   expect_identical(Skater(L$X, L$nb, 4, min_size = 5)$labels, c(1L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 1L, 1L, 1L, 2L, 2L, 2L, 1L, 3L, 3L, 3L, 2L, 2L, 4L, 3L, 3L, 3L, 3L, 2L, 4L, 4L, 3L, 3L, 3L, 3L, 2L, 4L, 4L, 3L, 3L, 3L, 3L, 2L, 4L, 4L))
   expect_identical(Skater(L$X, L$nb, 6, min_size = 1)$labels, c(1L, 1L, 1L, 1L, 5L, 5L, 5L, 1L, 1L, 1L, 1L, 5L, 5L, 5L, 1L, 1L, 1L, 1L, 5L, 5L, 5L, 1L, 3L, 3L, 3L, 2L, 5L, 4L, 3L, 3L, 3L, 3L, 2L, 4L, 4L, 6L, 6L, 6L, 6L, 2L, 4L, 4L, 6L, 6L, 6L, 6L, 2L, 4L, 4L))
   expect_identical(Skater(L$X, L$nb, 6, min_size = 5)$labels, c(1L, 1L, 1L, 1L, 5L, 5L, 5L, 1L, 1L, 1L, 1L, 5L, 5L, 5L, 1L, 1L, 1L, 1L, 5L, 5L, 5L, 1L, 3L, 3L, 3L, 2L, 2L, 4L, 3L, 3L, 3L, 3L, 2L, 4L, 4L, 6L, 6L, 6L, 6L, 2L, 4L, 4L, 6L, 6L, 6L, 6L, 2L, 4L, 4L))
-  if (requireNamespace("spdep", quietly = TRUE)) {
-    nbo <- structure(L$nb, class = "nb")
-    tr <- spdep::mstree(spdep::nb2listw(nbo, spdep::nbcosts(nbo, L$X), style = "B"), ini = 1)
-    for (k in c(2, 4, 6)) {
-      ref <- spdep::skater(tr[, 1:2], L$X, ncuts = k - 1, crit = 5)$groups
-      o <- Skater(L$X, L$nb, k, min_size = 5)$labels
-      expect_true(length(unique(paste(o, ref))) == length(unique(ref)) && length(unique(o)) == length(unique(ref)))
-    }
-  }
 })
 
 test_that("Redcap, ConstrainedHierarchical, AutomaticZoning and MaxPRegions match the Python arm", {

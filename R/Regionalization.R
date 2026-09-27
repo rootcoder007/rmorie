@@ -47,7 +47,7 @@
 #' current subtrees, the edge whose removal most reduces the within-group
 #' dissimilarity, in decreasing order until both parts respect \code{min_size} and
 #' \code{min_weight}. The dissimilarity is the sum of Euclidean distances to the group
-#' mean as in \code{spdep::skater}, or the sum of squared deviations when
+#' mean as in the skater function of spdep, or the sum of squared deviations when
 #' \code{squared = TRUE}.
 #'
 #' @param X Attribute matrix (units in rows).

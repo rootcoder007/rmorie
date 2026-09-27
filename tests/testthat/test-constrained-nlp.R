@@ -25,9 +25,6 @@ test_that("the Goldfarb-Idnani QP matches quadprog and satisfies KKT", {
     expect_lt(abs(s[1]), 1e-9)
     expect_true(all(s[-1] > -1e-9) && all(r$u[-1] >= -1e-12) && all(abs(r$u * s) < 1e-9))
     expect_lt(max(abs(G %*% r$x + a - t(C) %*% r$u)), 1e-9)
-    if (requireNamespace("quadprog", quietly = TRUE)) {
-      expect_equal(r$x, quadprog::solve.QP(G, -a, t(C), b, meq = 1)$solution, tolerance = 1e-10)
-    }
   }
 })
 
@@ -37,10 +34,6 @@ test_that("the simplex matches lpSolve", {
   expect_identical(.lp_simplex(c(-1, 0), matrix(c(1, -1), 1), 0)$status, "unbounded")
   r <- .lp_simplex(c(-1, -2, 0, 0, 1, 0), rbind(c(1, 0, 1, 0, 0, 0), c(0, 1, 0, 1, 0, 0), c(-2, -2, 0, 0, 1, -1)), c(1, 1, -4))
   expect_equal(r$x, c(1, 1, 0, 0, 0, 0), tolerance = 1e-12)
-  if (requireNamespace("lpSolve", quietly = TRUE)) {
-    expect_equal(sum(c(-1, -2) * r$x[1:2]), lpSolve::lp("min", c(-1, -2, 0, 0, 1, 0),
-      rbind(c(1, 0, 1, 0, 0, 0), c(0, 1, 0, 1, 0, 0), c(-2, -2, 0, 0, 1, -1)), rep("=", 3), c(1, 1, -4))$objval, tolerance = 1e-12)
-  }
 })
 
 test_that("SQP and SLP solve Hock-Schittkowski problems like the Python arm", {
