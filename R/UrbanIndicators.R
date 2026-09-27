@@ -188,11 +188,11 @@ SprawlEntropy <- function(built, area = NULL) {
 
 #' Impervious-surface indices
 #'
-#' NDBI, MNDWI and, with a thermal band rescaled to [0, 1], NDISI (Xu 2010);
+#' NDBI, MNDWI and, with a thermal band rescaled to the unit interval, NDISI (Xu 2010);
 #' pixels above \code{threshold} (NDISI, else NDBI) are mapped impervious.
 #'
 #' @param green,nir,swir1 Reflectance vectors.
-#' @param tir Optional thermal band in [0, 1].
+#' @param tir Optional thermal band rescaled to the unit interval.
 #' @param threshold Classification threshold.
 #' @return list(ndbi, mndwi, ndisi, impervious, impervious_share).
 #' @references Xu, H. (2010). Analysis of impervious surface and its impact on
