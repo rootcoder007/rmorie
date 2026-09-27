@@ -182,7 +182,11 @@ NelderMead <- function(f, x0, step = NULL, xtol = 1e-10, ftol = 1e-10, max_iter 
       break
     }
     it <- it + 1
-    cen <- colSums(simp[1:n, , drop = FALSE]) / n
+    cen <- vapply(seq_len(n), function(j) {
+      s <- 0
+      for (i in seq_len(n)) s <- s + simp[i, j]
+      s / n
+    }, 0)
     w <- simp[n + 1, ]
     xr <- 2 * cen - w
     fr <- as.numeric(f(xr))
