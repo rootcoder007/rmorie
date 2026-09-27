@@ -1273,7 +1273,9 @@ morie_esl_backprop <- function(X, y, weights, task = "regression") {
   if (task == "regression") {
     Y <- matrix(as.numeric(yr), n, K)
     delta <- 2 * (T - Y) / n
-    loss <- mean((T - Y)^2)
+    # sum of squares over the K outputs (ESL eq 11.9), averaged over the n
+    # observations: the loss whose gradient is delta = 2 (T - Y) / n
+    loss <- sum((T - Y)^2) / n
   } else if (task == "classification") {
     Y <- matrix(0, n, K)
     Y[cbind(seq_len(n), as.integer(yr))] <- 1
