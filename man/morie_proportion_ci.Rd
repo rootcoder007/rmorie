@@ -8,7 +8,7 @@ morie_proportion_ci(
   successes,
   n,
   alpha = 0.05,
-  method = c("wilson", "exact", "wald")
+  method = c("wilson", "exact", "wald", "agresti-coull", "clopper-pearson")
 )
 }
 \arguments{
@@ -18,8 +18,8 @@ morie_proportion_ci(
 
 \item{alpha}{Significance level (default 0.05 -> 95\% CI).}
 
-\item{method}{\code{"wilson"} (default), \code{"exact"} (Clopper-Pearson),
-or \code{"wald"}.}
+\item{method}{\code{"wilson"} (default), \code{"exact"} or \code{"clopper-pearson"}
+(Clopper-Pearson), \code{"agresti-coull"}, or \code{"wald"}.}
 }
 \value{
 Named list: \code{p_hat}, \code{ci_lower}, \code{ci_upper}.

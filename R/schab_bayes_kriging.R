@@ -4,8 +4,8 @@
 #' Schabenberger & Gotway (2005) eqs (6.94)-(6.98), after Kitanidis (1986) and
 #' Le & Zidek (1992): with Z ~ G(X beta, sigma2 V), V known, and (beta,
 #' sigma2) ~ NIG(a, d, m, Q), Z(s0) | Z is multivariate t with mean X0 m* +
-#' V0z V^-1 (Z - X m*) and variance a* / (nu - 2) {V00 - V0z V^-1 Vz0 + (X0 -
-#' V0z V^-1 X) Q* (X0 - V0z V^-1 X)'}, where Q* = (Q^-1 + X' V^-1 X)^-1, m* =
+#' V0z V^-1 (Z - X m*) and variance a* / (nu - 2) times (V00 - V0z V^-1 Vz0 + (X0 -
+#' V0z V^-1 X) Q* (X0 - V0z V^-1 X)'), where Q* = (Q^-1 + X' V^-1 X)^-1, m* =
 #' Q* (Q^-1 m + X' V^-1 Z), a* = a + m' Q^-1 m + Z' V^-1 Z - m*' Q*^-1 m*, and
 #' nu = n + d (n + d - p for the flat prior, Qinv = NULL, whose mean is the
 #' universal kriging predictor). The printed nu* of (6.98) weights beta_gls - m

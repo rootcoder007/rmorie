@@ -11,8 +11,8 @@
 #'
 #' Kenward & Roger (1997), as written in Schabenberger & Gotway (2005) eqs
 #' (6.53)-(6.54): with Phi = (X' Sigma^-1 X)^-1 at the REML estimate and
-#' Sigma_i the derivatives of Sigma, Phi_A = Phi + 2 Phi {sum_ij W_ij (Q_ij -
-#' P_i Phi P_j - R_ij / 4)} Phi, W twice the inverse REML expected
+#' Sigma_i the derivatives of Sigma, Phi_A = Phi + 2 Phi S Phi with S = sum_ij W_ij (Q_ij -
+#' P_i Phi P_j - R_ij / 4), W twice the inverse REML expected
 #' information, and F* = lambda (L beta - l0)' (L Phi_A L')^-1 (L beta - l0) /
 #' q on q and m degrees of freedom (lambda and m as in pbkrtest). The R_ij
 #' second-derivative terms vanish when Sigma is linear in theta, which is the
