@@ -4,39 +4,55 @@
 \alias{Leidenclus}
 \title{Leiden community detection}
 \usage{
-Leidenclus(graph, resolution = 1, quality = "modularity", max_iter = 20)
+Leidenclus(
+  graph,
+  resolution = 1,
+  quality = "modularity",
+  max_iter = 20,
+  theta = 0.01,
+  seed = 0
+)
 }
 \arguments{
-\item{graph}{weighted adjacency matrix.}
+\item{graph}{Symmetric non-negative weighted adjacency matrix.}
 
-\item{resolution}{the resolution parameter gamma.}
+\item{resolution}{The resolution parameter gamma.}
 
-\item{quality}{"modularity" (the CPM variant shares the same optimiser).}
+\item{quality}{"modularity" or "cpm".}
 
-\item{max_iter}{local-moving sweep cap.}
+\item{max_iter}{Leiden iterations; stops once an iteration changes nothing.}
+
+\item{theta}{Randomness of the refinement merge.}
+
+\item{seed}{Philox seed.}
 }
 \value{
 list: labels, estimate, quality, n_communities, connected,
 passes, n, method.
 }
 \description{
-Traag, Waltman and van Eck (2019), From Louvain to Leiden: guaranteeing
-well-connected communities, Scientific Reports 9, 5233
-(arXiv:1810.08473 -- FETCHED).  Three phases: local moving of nodes,
-refinement of the partition, and aggregation of the refined partition.
-The middle one is the paper's whole point -- Louvain "may yield
-arbitrarily badly connected communities", up to disconnected ones, and
-refinement rules that out.  Quality is modularity (Newman and Girvan
-2004) or the constant Potts model of the paper's eq. (2).
+Traag, Waltman and van Eck (2019), Algorithm A.2: fast local moving
+(queue-based, random visiting order), refinement inside each community
+(well-connected singletons join well-connected sub-communities with
+probability proportional to exp(dH / theta)) and aggregation of the refined
+partition, repeated until every community is one aggregate node. Quality is
+modularity (node weight = strength, r = gamma / 2m) or the constant Potts
+model of the paper's eq. (2) (node weight 1, r = gamma); moving v into D
+gains k_vD - r w_v W_D.
 }
 \details{
-Determinism: the paper's randomised merge is replaced by index-order
-visiting with a strict-improvement rule, so no generator is consulted.
-The connectivity guarantee is enforced directly: every community is
-split into its connected components before aggregation.
+Randomness: the visiting orders and refinement draws come from the morie
+Philox stream (a new stream per phase, same order as the Python arm), so
+runs agree exactly across arms.
 }
 \examples{
-A <- matrix(c(0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0), 4, 4)
-Leidenclus(A)$labels
+A <- matrix(0, 6, 6)
+A[cbind(c(1, 1, 2, 3, 4, 4, 5), c(2, 3, 3, 4, 5, 6, 6))] <- 1
+Leidenclus(A + t(A))$labels
+}
+\references{
+Traag, V. A., Waltman, L. and van Eck, N. J. (2019). From Louvain
+to Leiden: guaranteeing well-connected communities. Scientific Reports 9,
+5233.
 }
 \keyword{internal}

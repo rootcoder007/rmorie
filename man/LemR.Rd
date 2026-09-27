@@ -5,45 +5,44 @@
 \alias{leiden_grph}
 \title{Leiden refined community detection}
 \usage{
-LemR(A, resolution = 1, quality = "modularity", max_iter = 20L)
+LemR(A, resolution = 1, quality = "modularity", max_iter = 20L, seed = 0)
 
-leiden_grph(A, resolution = 1, quality = "modularity", max_iter = 20L)
+leiden_grph(
+  A,
+  resolution = 1,
+  quality = "modularity",
+  max_iter = 20L,
+  seed = 0
+)
 }
 \arguments{
-\item{A}{Weighted adjacency matrix.}
+\item{A}{Symmetric non-negative weighted adjacency matrix.}
 
 \item{resolution}{Resolution parameter gamma.}
 
-\item{quality}{Quality function; "modularity" is implemented.}
+\item{quality}{"modularity" or "cpm".}
 
-\item{max_iter}{Local-moving passes.}
+\item{max_iter}{Leiden iterations.}
+
+\item{seed}{Philox seed.}
 }
 \value{
 List with labels (0-based, matching the Python arm),
-estimate, quality, n_communities, connected, passes, n.
+estimate, quality, n_communities, connected, passes, n, method.
 }
 \description{
-Deterministic Leiden-style optimisation mirroring the Python
-morie.fn.scleid engine exactly: greedy local moving of nodes in index
-order (a node moves only on a strict quality improvement), then the
-refinement guarantee applied directly -- every community is split
-into its connected components before the result is returned, which
-is the property the Leiden refinement phase exists to provide
-(Louvain may yield arbitrarily badly connected communities).
-}
-\details{
-Quality is generalized modularity with resolution gamma
-(quality = "modularity"): \eqn{Q = (1/2m)\sum_{ij}(A_{ij} - \gamma k_i k_j/2m)\delta(c_i,c_j)}.
+Alias of \code{\link{Leidenclus}}, the Leiden algorithm of Traag, Waltman
+and van Eck (2019, Algorithm A.2): fast local moving, refinement of each
+community into well-connected sub-communities, and aggregation, repeated.
 }
 \examples{
 blocks <- matrix(0, 6, 6)
 blocks[1:3, 1:3] <- 1; blocks[4:6, 4:6] <- 1; diag(blocks) <- 0
 blocks[3, 4] <- blocks[4, 3] <- 1
-LemR(blocks)
+LemR(blocks)$labels
 }
 \references{
 Traag, V. A., Waltman, L. and van Eck, N. J. (2019).
 From Louvain to Leiden: guaranteeing well-connected communities.
-Scientific Reports, 9, 5233, arXiv:1810.08473. Archived:
-fetched-wave3/traag-2019-louvain-to-leiden.pdf.
+Scientific Reports, 9, 5233, arXiv:1810.08473.
 }

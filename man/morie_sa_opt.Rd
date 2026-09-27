@@ -39,7 +39,7 @@ to \code{"geometric"}.}
 \item{upper}{Optional; may be \code{NULL}. Coerced to numeric by the body, with
 \code{as.numeric}.}
 
-\item{seed}{Passed to \code{.ghc_rng}. Defaults to \code{0}.}
+\item{seed}{Philox seed (normals on stream 0, acceptance uniforms on stream 1). Defaults to \code{0}.}
 }
 \value{
 The value of \code{result}, as built in the body.

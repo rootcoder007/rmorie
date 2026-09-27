@@ -4,7 +4,7 @@
 \alias{Diffevol}
 \title{Differential evolution}
 \usage{
-Diffevol(f, population, F = 0.8, CR = 0.9, generations = 20)
+Diffevol(f, population, F = 0.8, CR = 0.9, generations = 20, seed = 0)
 }
 \arguments{
 \item{f}{the objective.}
@@ -16,6 +16,8 @@ Diffevol(f, population, F = 0.8, CR = 0.9, generations = 20)
 \item{CR}{the crossover probability.}
 
 \item{generations}{number of generations.}
+
+\item{seed}{Philox seed.}
 }
 \value{
 list: estimate, x, population, fvals, evals, method.
@@ -31,12 +33,12 @@ crossover including the forced index, and the greedy selection are
 quoted in their standard published form.
 }
 \details{
-Determinism: the donor indices are a fixed offset rotation of the
-population index and the crossover uses van der Corput points, so every
-structural feature of DE is preserved and the run reproduces exactly.
+Randomness: donors (three uniforms, drawn without replacement from the
+population minus i), j_rand and the crossover draws come from the morie
+Philox stream in the same order as the Python arm, so runs agree exactly.
 }
 \examples{
 Diffevol(function(v) sum(v^2), matrix(c(1, 1, -1, 2, 0.5, -0.5, 2, 0), 4, 2,
-         byrow = TRUE), 0.8, 0.9, 5)$estimate
+         byrow = TRUE), 0.8, 0.9, 50)$estimate
 }
 \keyword{internal}
