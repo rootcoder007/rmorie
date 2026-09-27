@@ -1,0 +1,15 @@
+test_that("curds and whey equals the cancor-based formula", {
+  i <- 1:50
+  X <- cbind(sin(i), cos(2 * i), log(i) / 3, ((7 * i) %% 11) / 11)
+  Y <- cbind(X[, 1] + 0.5 * X[, 2] + 0.3 * cos(9 * i), X[, 2] - X[, 3] + 0.4 * sin(7 * i), 0.2 * X[, 4] + 0.5 * cos(5 * i))
+  r <- morie_esl_curds_whey(X, Y)
+  cc <- cancor(X, Y)
+  lam <- cc$cor^2 / (cc$cor^2 + (4 / 50) * (1 - cc$cor^2))
+  S <- cc$ycoef[, 1:3] %*% diag(lam) %*% solve(cc$ycoef[, 1:3])
+  Xc <- scale(X, scale = FALSE)
+  Yc <- scale(Y, scale = FALSE)
+  expect_equal(r$canonical_correlations, cc$cor, tolerance = 1e-12)
+  expect_equal(r$coefficients, unname(solve(crossprod(Xc), crossprod(Xc, Yc)) %*% S), tolerance = 1e-10)
+  h <- morie_esl_curds_whey(X, Y, lambda = 2)
+  expect_equal(h$fitted[1, ], c(0.568551217461193303, -0.574153022003884184, 0.071178066550125443), tolerance = 1e-12)
+})
