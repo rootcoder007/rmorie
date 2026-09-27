@@ -7,7 +7,7 @@
 plackt(u, v, psi)
 }
 \arguments{
-\item{u, v}{Marginal distribution values in \link{0, 1}, equal length.}
+\item{u, v}{Marginal distribution values between 0 and 1 inclusive, equal length.}
 
 \item{psi}{Association parameter, positive.}
 }

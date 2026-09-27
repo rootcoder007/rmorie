@@ -35,8 +35,8 @@ theta_u, d, b and, when fitting, q.
 \description{
 Schabenberger & Gotway (2005) eqs (4.48)-(4.51): C(theta, h) = sigma2
 integral_0^b Omega_d(h w) F(theta, dw) with F the U(theta_l, theta_u) cdf
-on \link{0, b}, zero below and one above (4.49); atoms at 0 and b are included
-when the kernel extends past \link{0, b}. Evaluate with \code{sill}, \code{theta_l},
+on the closed interval from 0 to b, zero below and one above (4.49); atoms at 0 and b are included
+when the kernel extends past that interval. Evaluate with \code{sill}, \code{theta_l},
 \code{theta_u}, or fit to \code{gamma_hat} by the OLS criterion (4.51) with sigma2
 profiled out and Nelder-Mead over (sqrt(theta_l), log(theta_u - theta_l)).
 The fit keeps theta_l >= 0: below zero only theta_u and sigma2 theta_u /

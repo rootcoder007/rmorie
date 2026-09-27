@@ -36,14 +36,14 @@
 #' Schabenberger & Gotway (2005) eqs (4.30)-(4.32): minimise (gamma_hat -
 #' gamma(h, theta))' R(theta)^-1 (gamma_hat - gamma(h, theta)) for the
 #' Matheron estimator, with R(theta) exact for Gaussian data from
-#' Cov[T_ij^2, T_kl^2] = 2 (gamma(s_i - s_l) + gamma(s_j - s_k) - gamma(s_i -
+#' Cov(T_ij^2, T_kl^2) = 2 (gamma(s_i - s_l) + gamma(s_j - s_k) - gamma(s_i -
 #' s_k) - gamma(s_j - s_l))^2 (Cressie 1993, eq 2.6.10; the printed (4.32)
 #' has gamma(h_ij) for the first term). R is re-evaluated at each new
 #' estimate until the estimates settle; Nelder-Mead on the log scale.
 #'
 #' @param coords Two-column matrix of site coordinates.
 #' @param z Numeric responses.
-#' @param breaks Lag-class boundaries; class m is (breaks[m], breaks[m + 1]].
+#' @param breaks Lag-class boundaries; class m holds the lags h with breaks_m < h <= breaks_(m + 1).
 #' @param model "exponential", "gaussian", "spherical", "wave", "tent" or
 #'   "circular".
 #' @param nugget Estimate a nugget (else zero).
@@ -100,7 +100,7 @@ spglsv <- function(coords, z, breaks, model = "exponential", nugget = TRUE, star
 #' Expected Matheron semivariogram under a linear drift
 #'
 #' Schabenberger & Gotway (2005) eq (5.35), after Cressie (1993, p. 165):
-#' under Z(s) = X(s) beta + e(s), E[(Z(s_i) - Z(s_j))^2] = 2 gamma(s_i - s_j) +
+#' under Z(s) = X(s) beta + e(s), E((Z(s_i) - Z(s_j))^2) = 2 gamma(s_i - s_j) +
 #' (sum_k beta_k (x_k(s_i) - x_k(s_j)))^2, so each lag class of the classical
 #' estimator averages the semivariogram and a squared drift contrast.
 #'

@@ -17,7 +17,7 @@ Named list: mean, cov, corr, shape, scale, stationary.
 \description{
 Schabenberger & Gotway (2005) Problem 2.3: Z(s_i) = X_0 + X_i with
 independent X_i ~ Gamma(alpha_i, beta) (mean alpha_i beta). Then
-Cov\link{Z(s_i), Z(s_j)} = alpha_0 beta^2 for i != j, Var\link{Z(s_i)} =
+Cov(Z(s_i), Z(s_j)) = alpha_0 beta^2 for i != j, Var(Z(s_i)) =
 (alpha_0 + alpha_i) beta^2, Z(s_i) ~ Gamma(alpha_0 + alpha_i, beta), and the
 field is second-order stationary exactly when alpha_1 = ... = alpha_n.
 }

@@ -23,7 +23,7 @@ The model of Schabenberger & Gotway (2005) Example 1.1, Y_ijk = mu + tau_i
 \itemize{
 \item e_ij + eps_ijk, with fixed groups, random units nested in groups and
 sub-sampling errors. Two sub-samples of one unit share e_ij, so their
-covariance is Var\link{e_ij}. The components are the ANOVA estimators of the
+covariance is Var(e_ij). The components are the ANOVA estimators of the
 balanced nested analysis of variance, sigma2_error = MS_E and
 sigma2_unit = (MS_U(G) - MS_E) / n, which are the REML estimates when
 positive.

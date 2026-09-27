@@ -48,7 +48,8 @@ sandwich B^-1 M B^-1. The fit starts from the independence GLM.
 }
 \examples{
 x <- sin(1:20)
-morie_gee_regression(x + rep(c(0.2, -0.1, 0.3, 0), 5), x, rep(1:5, each = 4))$coefficients
+y <- x + rep(c(0.2, -0.1, 0.3, 0), 5) + 0.3 * cos(7 * (1:20))
+morie_gee_regression(y, x, rep(1:5, each = 4))$coefficients
 }
 \references{
 Liang, K.-Y. & Zeger, S. L. (1986). Biometrika 73, 13-22.

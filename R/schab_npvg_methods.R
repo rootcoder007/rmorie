@@ -4,12 +4,12 @@
 #' Schabenberger & Gotway (2005, p. 294), after Zeger (1988): with a latent
 #' stationary Z1 (mean 1, covariance sigma2 rho1(h)) and counts with
 #' conditional mean and variance mu(s) Z1(s), the marginal variance is
-#' mu + sigma2 mu^2 and Corr[Z2(s), Z2(s + h)] = rho1 / sqrt((1 + 1 / (sigma2
+#' mu + sigma2 mu^2 and Corr(Z2(s), Z2(s + h)) = rho1 / sqrt((1 + 1 / (sigma2
 #' mu(s))) (1 + 1 / (sigma2 mu(s + h)))); with sigma2 = mu = 1 it is rho1 / 2.
 #'
 #' @param mean_s,mean_sh Marginal means mu(s) and mu(s + h), positive.
 #' @param sigma2 Latent variance, positive.
-#' @param rho1 Latent correlation in [-1, 1].
+#' @param rho1 Latent correlation, -1 <= rho1 <= 1.
 #' @return Named list: mean_s, mean_sh, var_s, var_sh, cov, corr.
 #' @references Zeger, S. L. (1988). Biometrika 75, 621-629. Schabenberger &
 #'   Gotway (2005), p. 294.
@@ -240,8 +240,8 @@ spnpsv <- function(h, nodes, weights = NULL, d = 2, gamma_hat = NULL, npairs = N
 #'
 #' Schabenberger & Gotway (2005) eqs (4.48)-(4.51): C(theta, h) = sigma2
 #' integral_0^b Omega_d(h w) F(theta, dw) with F the U(theta_l, theta_u) cdf
-#' on [0, b], zero below and one above (4.49); atoms at 0 and b are included
-#' when the kernel extends past [0, b]. Evaluate with `sill`, `theta_l`,
+#' on the closed interval from 0 to b, zero below and one above (4.49); atoms at 0 and b are included
+#' when the kernel extends past that interval. Evaluate with `sill`, `theta_l`,
 #' `theta_u`, or fit to `gamma_hat` by the OLS criterion (4.51) with sigma2
 #' profiled out and Nelder-Mead over (sqrt(theta_l), log(theta_u - theta_l)).
 #' The fit keeps theta_l >= 0: below zero only theta_u and sigma2 theta_u /

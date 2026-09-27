@@ -25,7 +25,8 @@
 #'   S. & Yan, J. (2006). JSS 15(2).
 #' @examples
 #' x <- sin(1:20)
-#' morie_gee_regression(x + rep(c(0.2, -0.1, 0.3, 0), 5), x, rep(1:5, each = 4))$coefficients
+#' y <- x + rep(c(0.2, -0.1, 0.3, 0), 5) + 0.3 * cos(7 * (1:20))
+#' morie_gee_regression(y, x, rep(1:5, each = 4))$coefficients
 #' @export
 morie_gee_regression <- function(y, X, clusters, family = "gaussian",
                                  corr_structure = "exchangeable", add_intercept = TRUE,
@@ -122,6 +123,13 @@ morie_gee_regression <- function(y, X, clusters, family = "gaussian",
     mm <- matrix(0, k, k)
     for (g in groups) {
       m <- length(g)
+      if (m > 1 && corr_structure != "independence") {
+        lo <- if (corr_structure == "exchangeable") -1 / (m - 1) else -1
+        if (alpha <= lo + 1e-10 || alpha >= 1 - 1e-10) {
+          lim <- paste0(format(lo, digits = 6), ", 1")
+          stop(sprintf("working correlation is singular: alpha = %.6g is outside (%s); the data put the moment estimate on the boundary, use corr_structure = \"independence\"", alpha, lim), call. = FALSE)
+        }
+      }
       rr <- if (corr_structure == "exchangeable") {
         matrix(alpha, m, m) + diag(1 - alpha, m)
       } else if (corr_structure == "ar1") {

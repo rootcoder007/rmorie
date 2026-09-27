@@ -51,3 +51,12 @@ test_that("morie_proportion_ci offers agresti-coull and the clopper-pearson alia
   expect_equal(c(r$ci_lower, r$ci_upper), pt + c(-1, 1) * z * sqrt(pt * (1 - pt) / nt), tolerance = 1e-14)
   expect_equal(morie_proportion_ci(7, 25, method = "clopper-pearson"), morie_proportion_ci(7, 25, method = "exact"))
 })
+
+test_that("morie_gee_regression stops on a singular working correlation", {
+  x <- sin(1:20)
+  # every cluster has the same residual pattern: exchangeable alpha = -1/(m - 1) exactly, as geepack
+  expect_error(morie_gee_regression(x + rep(c(0.2, -0.1, 0.3, 0), 5), x, rep(1:5, each = 4)),
+               "working correlation is singular")
+  y <- x + rep(c(0.2, -0.1, 0.3, 0), 5) + 0.3 * cos(7 * (1:20))
+  expect_equal(morie_gee_regression(y, x, rep(1:5, each = 4))$alpha, -0.21085606432035597, tolerance = 1e-8)
+})

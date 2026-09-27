@@ -37,7 +37,7 @@ csinv <- function(k, a, b) {
 #' The model of Schabenberger & Gotway (2005) Example 1.1, Y_ijk = mu + tau_i
 #' + e_ij + eps_ijk, with fixed groups, random units nested in groups and
 #' sub-sampling errors. Two sub-samples of one unit share e_ij, so their
-#' covariance is Var[e_ij]. The components are the ANOVA estimators of the
+#' covariance is Var(e_ij). The components are the ANOVA estimators of the
 #' balanced nested analysis of variance, sigma2_error = MS_E and
 #' sigma2_unit = (MS_U(G) - MS_E) / n, which are the REML estimates when
 #' positive.
@@ -91,7 +91,7 @@ nestvc <- function(y, group, unit) {
 #'
 #' f(z1, z2) = c / (2 pi) (c^2 + z1^2 + z2^2)^(-3/2), the bivariate t with one
 #' degree of freedom and scale c^2 I (Mardia 1970, p. 86). Both marginals are
-#' Cauchy, yet E[Z2 | Z1] does not exist (Schabenberger & Gotway 2005, p. 293).
+#' Cauchy, yet E(Z2 | Z1) does not exist (Schabenberger & Gotway 2005, p. 293).
 #'
 #' @param z1,z2 Numeric evaluation points of equal length.
 #' @param c Scale, positive.
@@ -116,7 +116,7 @@ bvcchy <- function(z1, z2, c = 1) {
 #' ((psi - 1)(1 + psi) - 2 psi log(psi)) / (1 - psi)^2 (Schabenberger & Gotway
 #' 2005, p. 293, whose denominator for psi misprints (F1 - F12)^2).
 #'
-#' @param u,v Marginal distribution values in [0, 1], equal length.
+#' @param u,v Marginal distribution values between 0 and 1 inclusive, equal length.
 #' @param psi Association parameter, positive.
 #' @return Named list: F12, rho, psi.
 #' @references Plackett, R. L. (1965). JASA 60, 516-522. Mardia, K. V.
@@ -142,7 +142,7 @@ plackt <- function(u, v, psi) {
 
 #' Lower bound on the equicorrelation of exchangeable binary data
 #'
-#' For n exchangeable binary variables with mean mu, rho = (E[S(S - 1)] /
+#' For n exchangeable binary variables with mean mu, rho = (E(S(S - 1)) /
 #' (n (n - 1)) - mu^2) / (mu (1 - mu)) with S their sum, so the smallest rho
 #' puts all the mass of S on the two integers either side of n mu
 #' (Gilliland & Schabenberger 2001; Schabenberger & Gotway 2005, p. 356). The
@@ -179,7 +179,7 @@ rhobin <- function(mu, n) {
 #'
 #' Schabenberger & Gotway (2005) Problem 2.3: Z(s_i) = X_0 + X_i with
 #' independent X_i ~ Gamma(alpha_i, beta) (mean alpha_i beta). Then
-#' Cov[Z(s_i), Z(s_j)] = alpha_0 beta^2 for i != j, Var[Z(s_i)] =
+#' Cov(Z(s_i), Z(s_j)) = alpha_0 beta^2 for i != j, Var(Z(s_i)) =
 #' (alpha_0 + alpha_i) beta^2, Z(s_i) ~ Gamma(alpha_0 + alpha_i, beta), and the
 #' field is second-order stationary exactly when alpha_1 = ... = alpha_n.
 #'

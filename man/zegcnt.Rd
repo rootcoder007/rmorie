@@ -11,7 +11,7 @@ zegcnt(mean_s, mean_sh, sigma2, rho1)
 
 \item{sigma2}{Latent variance, positive.}
 
-\item{rho1}{Latent correlation in \link{-1, 1}.}
+\item{rho1}{Latent correlation, -1 <= rho1 <= 1.}
 }
 \value{
 Named list: mean_s, mean_sh, var_s, var_sh, cov, corr.
@@ -20,7 +20,7 @@ Named list: mean_s, mean_sh, var_s, var_sh, cov, corr.
 Schabenberger & Gotway (2005, p. 294), after Zeger (1988): with a latent
 stationary Z1 (mean 1, covariance sigma2 rho1(h)) and counts with
 conditional mean and variance mu(s) Z1(s), the marginal variance is
-mu + sigma2 mu^2 and Corr\link{Z2(s), Z2(s + h)} = rho1 / sqrt((1 + 1 / (sigma2
+mu + sigma2 mu^2 and Corr(Z2(s), Z2(s + h)) = rho1 / sqrt((1 + 1 / (sigma2
 mu(s))) (1 + 1 / (sigma2 mu(s + h)))); with sigma2 = mu = 1 it is rho1 / 2.
 }
 \examples{

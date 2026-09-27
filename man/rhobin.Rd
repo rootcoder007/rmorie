@@ -15,7 +15,7 @@ rhobin(mu, n)
 Named list: rho_lower, rho_min_any, support, probabilities, mu, n.
 }
 \description{
-For n exchangeable binary variables with mean mu, rho = (E\link{S(S - 1)} /
+For n exchangeable binary variables with mean mu, rho = (E(S(S - 1)) /
 (n (n - 1)) - mu^2) / (mu (1 - mu)) with S their sum, so the smallest rho
 puts all the mass of S on the two integers either side of n mu
 (Gilliland & Schabenberger 2001; Schabenberger & Gotway 2005, p. 356). The

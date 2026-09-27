@@ -17,7 +17,7 @@ Named list: density, c.
 \description{
 f(z1, z2) = c / (2 pi) (c^2 + z1^2 + z2^2)^(-3/2), the bivariate t with one
 degree of freedom and scale c^2 I (Mardia 1970, p. 86). Both marginals are
-Cauchy, yet E\link{Z2 | Z1} does not exist (Schabenberger & Gotway 2005, p. 293).
+Cauchy, yet E(Z2 | Z1) does not exist (Schabenberger & Gotway 2005, p. 293).
 }
 \examples{
 bvcchy(c(0, 0.5), c(0, -1.2), 1.5)

@@ -20,7 +20,7 @@ spglsv(
 
 \item{z}{Numeric responses.}
 
-\item{breaks}{Lag-class boundaries; class m is (breaks\link{m}, breaks\link{m + 1}].}
+\item{breaks}{Lag-class boundaries; class m holds the lags h with breaks_m < h <= breaks_(m + 1).}
 
 \item{model}{"exponential", "gaussian", "spherical", "wave", "tent" or
 "circular".}
@@ -42,7 +42,7 @@ R, criterion, iterations, model.
 Schabenberger & Gotway (2005) eqs (4.30)-(4.32): minimise (gamma_hat -
 gamma(h, theta))' R(theta)^-1 (gamma_hat - gamma(h, theta)) for the
 Matheron estimator, with R(theta) exact for Gaussian data from
-Cov\link{T_ij^2, T_kl^2} = 2 (gamma(s_i - s_l) + gamma(s_j - s_k) - gamma(s_i -
+Cov(T_ij^2, T_kl^2) = 2 (gamma(s_i - s_l) + gamma(s_j - s_k) - gamma(s_i -
 s_k) - gamma(s_j - s_l))^2 (Cressie 1993, eq 2.6.10; the printed (4.32)
 has gamma(h_ij) for the first term). R is re-evaluated at each new
 estimate until the estimates settle; Nelder-Mead on the log scale.

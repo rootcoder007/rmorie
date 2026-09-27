@@ -999,6 +999,7 @@ File,Line,Status,Version,Context
 ./R/hcoreg.R,183,STALE_OR_DEP,3.6.9,"#' Equation (3.6.9) p. 48"
 ./R/hcoreg.R,200,STALE_OR_DEP,3.6.9,"# digits to cancellation; and (3.6.9) is a ratio of two such differences;"
 ./R/hedderich7e33.R,5,STALE_OR_DEP,7.2.8,"#' Applied Statistics: Methods Using R; section 7.2.8; equation (7.33);"
+./R/hedderich_methods_4.R,225,STALE_OR_DEP,8.5.5,"#' Sachs & Reynarowych 2023; sec. 8.5.5; eq 8.100); with G^2; Pearson X^2"
 ./R/hexgrd_native.R,30,STALE_OR_DEP,1.28.6,"#'   CRAN hexbin 1.28.6. Archived:"
 ./R/hexgrd_native.R,31,STALE_OR_DEP,1.28.6,"#'   fetched-wave3/carr-hexbin_1.28.6-cran-source.tar.gz."
 ./R/horowitz_native3.R,137,STALE_OR_DEP,5.1.1,"#' @references Horowitz; Ch. 5; Sec. 5.1.1-5.1.2."

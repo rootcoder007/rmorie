@@ -24,7 +24,7 @@ Named list: lags, npairs, expected, semivariogram_part, drift_part.
 }
 \description{
 Schabenberger & Gotway (2005) eq (5.35), after Cressie (1993, p. 165):
-under Z(s) = X(s) beta + e(s), E\link{(Z(s_i) - Z(s_j))^2} = 2 gamma(s_i - s_j) +
+under Z(s) = X(s) beta + e(s), E((Z(s_i) - Z(s_j))^2) = 2 gamma(s_i - s_j) +
 (sum_k beta_k (x_k(s_i) - x_k(s_j)))^2, so each lag class of the classical
 estimator averages the semivariogram and a squared drift contrast.
 }
