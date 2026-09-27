@@ -272,6 +272,9 @@ morie_esl_svc <- function(X, y, C = 1, newdata = NULL, tol = 1e-3,
 #' @param standardize Scale columns to unit norm first. Correlations are not
 #'   comparable across differently-scaled predictors, so turning this off makes
 #'   the entry order depend on the units.
+#' @param method "lar", or "lasso" for the lasso modification (ESL Alg.
+#'   3.2a): a coefficient reaching zero leaves the active set, giving the
+#'   piecewise-linear lasso path as lars(type = "lasso").
 #' @return List with `coef_path` (in original units), `coef`, `intercept`,
 #'   `active` (1-based entry order), `correlations`, `r_squared`.
 #' @references Efron, B., Hastie, T., Johnstone, I., & Tibshirani, R. (2004).
@@ -283,7 +286,8 @@ morie_esl_svc <- function(X, y, C = 1, newdata = NULL, tol = 1e-3,
 #' morie_esl_least_angle_reg(X, y)$active[1:2]
 #' @export
 morie_esl_least_angle_reg <- function(X, y, max_steps = NULL,
-                                      standardize = TRUE) {
+                                      standardize = TRUE, method = c("lar", "lasso")) {
+  method <- match.arg(method)
   X <- as.matrix(X)
   y <- as.numeric(y)
   n <- nrow(X)
@@ -293,7 +297,7 @@ morie_esl_least_angle_reg <- function(X, y, max_steps = NULL,
       call. = FALSE
     )
   }
-  cap <- min(p, n - 1L)
+  cap <- if (method == "lar") min(p, n - 1L) else 8L * min(p, n - 1L)
   max_steps <- if (is.null(max_steps)) cap else as.integer(max_steps)
   if (max_steps < 1L || max_steps > cap) {
     stop(sprintf("max_steps must be between 1 and %d", cap), call. = FALSE)
@@ -311,14 +315,17 @@ morie_esl_least_angle_reg <- function(X, y, max_steps = NULL,
   active <- integer(0)
   path <- list(beta)
   cors <- list(as.numeric(crossprod(Xs, yc)))
+  dropped <- integer(0)
+  just_dropped <- 0L
 
   for (step in seq_len(max_steps)) {
     cc <- as.numeric(crossprod(Xs, yc - mu))
     Cmax <- max(abs(cc))
     if (Cmax < 1e-12) break
     for (j in which(abs(abs(cc) - Cmax) < 1e-10)) {
-      if (!(j %in% active)) active <- c(active, j)
+      if (!(j %in% active) && j != just_dropped) active <- c(active, j)
     }
+    just_dropped <- 0L
     A <- active
     s <- sign(cc[A])
     XA <- sweep(Xs[, A, drop = FALSE], 2L, s, "*")
@@ -341,8 +348,25 @@ morie_esl_least_angle_reg <- function(X, y, max_steps = NULL,
       cand <- cand[is.finite(cand) & cand > 1e-12]
       gamma <- if (length(cand)) min(cand) else Cmax / AA
     }
+    drop <- NULL
+    if (method == "lasso") {
+      d <- w * s
+      gt <- ifelse(d != 0, -beta[A] / d, Inf)
+      ok <- gt > 1e-12
+      if (any(ok) && min(gt[ok]) < gamma) {
+        k <- which(ok & gt == min(gt[ok]))[1]
+        gamma <- gt[k]
+        drop <- A[k]
+      }
+    }
     mu <- mu + gamma * u
     beta[A] <- beta[A] + gamma * w * s
+    if (!is.null(drop)) {
+      beta[drop] <- 0
+      active <- setdiff(active, drop)
+      dropped <- c(dropped, drop)
+      just_dropped <- drop
+    }
     path[[length(path) + 1L]] <- beta
     cors[[length(cors) + 1L]] <- as.numeric(crossprod(Xs, yc - mu))
   }
@@ -355,7 +379,8 @@ morie_esl_least_angle_reg <- function(X, y, max_steps = NULL,
     intercept = ybar - sum(xbar * last), active = active,
     correlations = do.call(rbind, cors), fitted = fitted,
     r_squared = if (ss_tot > 0) 1 - sum((y - fitted)^2) / ss_tot else NA_real_,
-    n_steps = nrow(coef) - 1L, method = "esl_least_angle_reg"
+    n_steps = nrow(coef) - 1L, dropped = dropped,
+    method = if (method == "lar") "esl_least_angle_reg" else "esl_least_angle_reg (lasso modification)"
   )
 }
 
