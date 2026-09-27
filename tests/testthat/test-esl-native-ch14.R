@@ -23,5 +23,7 @@ test_that("KL NMF never increases the divergence and reaches a stationary point"
   expect_true(all(diff(r$divergence_path) <= 1e-12))
   Rm <- X / (r$W %*% r$H)
   expect_lt(max(abs(crossprod(r$W, Rm) - crossprod(r$W, matrix(1, 8, 6)))), 1e-4)
+  expect_lt(max(abs(Rm %*% t(r$H) - matrix(1, 8, 6) %*% t(r$H))), 1e-4)
+  expect_equal(sum(r$W %*% r$H), sum(X), tolerance = 1e-8)
   expect_equal(r$loglik + sum(X - ifelse(X > 0, X * log(X), 0)), -r$kl_divergence, tolerance = 1e-10)
 })
