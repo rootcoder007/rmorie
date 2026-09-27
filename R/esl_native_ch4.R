@@ -148,13 +148,13 @@ morie_esl_indicator_regression <- function(X, g, query = NULL) {
   e / rowSums(e)
 }
 
-.esl4_mnl_info <- function(Z, P, K) {
+.esl4_mnl_info <- function(Z, P, K, wt) {
   q <- ncol(Z)
   npar <- (K - 1) * q
   H <- matrix(0, npar, npar)
   for (k in seq_len(K - 1)) {
     for (l in seq_len(K - 1)) {
-      w <- P[, k] * ((k == l) - P[, l])
+      w <- wt * P[, k] * ((k == l) - P[, l])
       H[(k - 1) * q + seq_len(q), (l - 1) * q + seq_len(q)] <- crossprod(Z, Z * w)
     }
   }
@@ -171,6 +171,8 @@ morie_esl_indicator_regression <- function(X, g, query = NULL) {
 #' @param g Class labels.
 #' @param query Points for prob (default X).
 #' @param max_iter,tol Newton controls.
+#' @param weights Optional non-negative case weights (the local fit of ESL
+#'   eq 6.19).
 #' @return Named list: coefficients and se ((K - 1) by (p + 1)), loglik,
 #'   classes, baseline, prob, iterations, converged.
 #' @references Hastie, Tibshirani & Friedman (2009), sec. 4.4.
@@ -179,7 +181,7 @@ morie_esl_indicator_regression <- function(X, g, query = NULL) {
 #' X <- cbind(sin(i), cos(3 * i))
 #' morie_esl_multinomial_logit(X, (i * 7) %% 3)$coefficients
 #' @export
-morie_esl_multinomial_logit <- function(X, g, query = NULL, max_iter = 100, tol = 1e-10) {
+morie_esl_multinomial_logit <- function(X, g, query = NULL, max_iter = 100, tol = 1e-10, weights = NULL) {
   X <- as.matrix(X)
   cl <- .esl4_classes(g)
   K <- length(cl)
@@ -187,17 +189,20 @@ morie_esl_multinomial_logit <- function(X, g, query = NULL, max_iter = 100, tol 
   q <- ncol(Z)
   yi <- match(g, cl)
   Yk <- outer(yi, seq_len(K - 1), "==") * 1
+  wt <- if (is.null(weights)) rep(1, nrow(Z)) else as.numeric(weights)
+  if (length(wt) != nrow(Z) || any(wt < 0)) stop("weights must be N non-negative values", call. = FALSE)
   beta <- numeric((K - 1) * q)
   llf <- function(b) {
     P <- .esl4_mnl_probs(Z, b, K)
-    list(ll = sum(log(P[cbind(seq_along(yi), yi)])), P = P)
+    pos <- wt > 0
+    list(ll = sum(wt[pos] * log(P[cbind(seq_along(yi), yi)][pos])), P = P)
   }
   cur <- llf(beta)
   converged <- FALSE
   it <- 0L
   for (it in seq_len(max_iter)) {
-    grad <- as.numeric(crossprod(Z, Yk - cur$P[, seq_len(K - 1), drop = FALSE]))
-    step <- solve(.esl4_mnl_info(Z, cur$P, K), grad)
+    grad <- as.numeric(crossprod(Z, wt * (Yk - cur$P[, seq_len(K - 1), drop = FALSE])))
+    step <- solve(.esl4_mnl_info(Z, cur$P, K, wt), grad)
     fac <- 1
     while (fac >= 1 / 1024) {
       cand <- llf(beta + fac * step)
@@ -213,7 +218,7 @@ morie_esl_multinomial_logit <- function(X, g, query = NULL, max_iter = 100, tol 
       break
     }
   }
-  V <- solve(.esl4_mnl_info(Z, cur$P, K))
+  V <- solve(.esl4_mnl_info(Z, cur$P, K, wt))
   Qz <- if (is.null(query)) Z else cbind(1, rbind(query))
   list(coefficients = t(matrix(beta, q, K - 1)), se = t(matrix(sqrt(diag(V)), q, K - 1)), loglik = cur$ll,
        classes = cl, baseline = cl[K], prob = .esl4_mnl_probs(Qz, beta, K), iterations = it, converged = converged)
