@@ -2,42 +2,63 @@
 % Please edit documentation in R/spatial_voting.R
 \name{morie_spatial_voting_cjr_irt}
 \alias{morie_spatial_voting_cjr_irt}
-\title{Clinton-Jackman-Rivers Bayesian IRT (stub)}
+\title{Clinton-Jackman-Rivers Bayesian IRT by Gibbs sampling}
 \usage{
 morie_spatial_voting_cjr_irt(
   votes,
   n_dims = 1L,
   n_samples = 1000L,
-  burn_in = 200L
+  burn_in = 200L,
+  beta_prior_var = 25,
+  start = NULL,
+  seed = 0,
+  keep_chains = TRUE
 )
 }
 \arguments{
-\item{votes}{Binary roll-call matrix.}
+\item{votes}{Roll-call matrix of 1, 0 and NA (missing).}
 
 \item{n_dims}{Ideal-point dimensions.}
 
-\item{n_samples}{MCMC samples.}
+\item{n_samples}{Retained sweeps.}
 
-\item{burn_in}{Burn-in length.}
+\item{burn_in}{Discarded sweeps.}
+
+\item{beta_prior_var}{Prior variance \eqn{v} of the bill parameters.}
+
+\item{start}{Optional starting ideal points; default the
+\code{morie_spatial_voting_em_irt} posterior mode.}
+
+\item{seed}{Philox key.}
+
+\item{keep_chains}{Return the draws as well as the summaries.}
 }
 \value{
-List: \code{ideal_points}, \code{ideal_sd}, \code{discrimination},
-\code{difficulty}, \code{engine}.
+List: \code{ideal_point_mean}, \code{ideal_point_sd}, \code{alpha_mean},
+\code{beta_mean}, \code{n_samples} and, when kept, \code{ideal_point_chain},
+\code{alpha_chain}, \code{beta_chain}.
 }
 \description{
-Clinton-Jackman-Rivers Bayesian IRT (stub)
+\eqn{P(y_{ij} = 1) = \Phi(\beta_j^\top x_i - \alpha_j)} with priors
+\eqn{x_i \sim N(0, I)} and \eqn{(\alpha_j, \beta_j) \sim N(0, v I)}.
+Each sweep draws the latent utilities from their truncated normals
+(Albert and Chib 1993), then every \eqn{(\alpha_j, \beta_j)} and every
+\eqn{x_i} from its Gaussian full conditional, as in
+\code{MCMCpack::MCMCirt1d} and \code{pscl::ideal}. All draws are
+inverse-CDF transforms of Philox uniforms (sweep t uses stream t), so the
+R and Python arms give the same chain.
 }
 \examples{
-if (requireNamespace("pscl", quietly = TRUE)) {
-  set.seed(1)
-  votes <- matrix(rbinom(200, 1, 0.5), 20, 10)
-  fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
-                                      burn_in = 50L)
-  head(fit$ideal_points)
-}
+votes <- rbind(c(1, 1, 0, 0), c(1, 1, 1, 0), c(0, 1, 1, 1), c(0, 0, 1, 1), c(1, 0, 0, 0))
+fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 50L, burn_in = 10L)
+round(fit$ideal_point_mean, 3)
 }
 \references{
 Clinton J, Jackman S & Rivers D (2004). The statistical
 analysis of roll call data. \emph{American Political Science
 Review}, 98(2), 355-370.
+
+Albert J H & Chib S (1993). Bayesian analysis of binary and
+polychotomous response data. \emph{Journal of the American
+Statistical Association}, 88(422), 669-679.
 }

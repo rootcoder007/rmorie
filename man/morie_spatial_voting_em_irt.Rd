@@ -4,24 +4,49 @@
 \alias{morie_spatial_voting_em_irt}
 \title{EM algorithm for binary IRT}
 \usage{
-morie_spatial_voting_em_irt(votes, n_dims = 1L, max_iter = 100L, tol = 1e-06)
+morie_spatial_voting_em_irt(
+  votes,
+  n_dims = 1L,
+  max_iter = 500L,
+  tol = 1e-06,
+  x_prior = c(0, 1),
+  beta_prior = c(0, 25),
+  start = NULL,
+  conv = c("cor", "abs")
+)
 }
 \arguments{
-\item{votes}{Legislator-by-vote binary matrix.}
+\item{votes}{Legislator-by-vote matrix of 1 (yea), 0 (nay), NA (missing).}
 
 \item{n_dims}{Latent dimensions.}
 
 \item{max_iter}{Maximum EM iterations.}
 
-\item{tol}{Convergence tolerance on ideal-point change.}
+\item{tol}{Convergence threshold.}
+
+\item{x_prior}{Prior mean and variance of the ideal points.}
+
+\item{beta_prior}{Prior mean and variance of the intercepts and slopes.}
+
+\item{start}{Optional list of starting alpha, beta and x; default alpha
+= beta = 0 and x from 50 steps of orthogonal iteration on the
+cross-product of the column-centred +1/-1 votes.}
+
+\item{conv}{\code{"cor"} (1 minus the smallest old/new correlation per
+column) or \code{"abs"} (largest absolute change).}
 }
 \value{
-List with \code{ideal_points}, \code{discrimination}, \code{difficulty},
-\code{log_lik}, \code{iterations}.
+List with \code{ideal_points}, \code{discrimination}, \code{difficulty} (the
+intercepts), \code{log_lik}, \code{iterations}, \code{converged}.
 }
 \description{
-Imai, Lo & Olmsted (2016) closed-form EM updates for binary IRT,
-suitable for very large vote matrices where MCMC is infeasible.
+Imai, Lo & Olmsted (2016) EM for the binary probit IRT model
+\eqn{y^*_{ij} = \alpha_j + \beta_j^\top x_i + e_{ij}}, yea when
+\eqn{y^*_{ij} > 0}, with priors \eqn{x_i \sim N(\mu_x, s^2_x I)} and
+\eqn{(\alpha_j, \beta_j) \sim N(\mu_b, s^2_b I)}. The E-step replaces
+\eqn{y^*} by its truncated-normal mean (untruncated when missing); the
+M-step is the pair of ridge regressions of \code{emIRT::binIRT} with
+\code{asEM = TRUE}. The fixed point is the posterior mode.
 }
 \examples{
 set.seed(1)
