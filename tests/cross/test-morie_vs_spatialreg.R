@@ -68,3 +68,28 @@ test_that("GMErrorSAR and GS2SLSSAC match spatialreg GMerrorsar and gstsls", {
     expect_equal(o$se, unname(s$rest.se), tolerance = 1e-7)
   }
 })
+
+test_that("MoranEigenvectorFilter matches spatialreg::SpatialFiltering", {
+  skip_if_not_installed("spatialreg")
+  skip_if_not_installed("spdep")
+  n <- 40
+  u <- .morie_random_uniform(4 * n, seed = 5, stream = 0)
+  pts <- cbind(u[1:n], u[n + 1:n])
+  D <- as.matrix(stats::dist(pts))
+  A <- matrix(0, n, n)
+  for (i in 1:n) A[i, order(D[i, ])[2:5]] <- 1
+  A <- 1 * ((A + t(A)) > 0)
+  x <- u[2 * n + 1:n]
+  y <- 2 + x + 3 * (pts[, 1] - 0.5)^2 + 2 * pts[, 2] + 0.3 * u[3 * n + 1:n]
+  nb <- spdep::mat2listw(A, style = "B")$neighbours
+  for (a in list(NULL, 0.2)) {
+    # SpatialFiltering cat()s a note when it stops on an inversion
+    s <- spatialreg::SpatialFiltering(y ~ x, data = data.frame(y, x), nb = nb, alpha = a)
+    r <- MoranEigenvectorFilter(y, cbind(1, x), A, alpha = a)
+    expect_equal(r$selection$evec, unname(s$selection[, "SelEvec"]))
+    expect_equal(r$selection$moran, unname(s$selection[, "MinMi"]), tolerance = 1e-10)
+    expect_equal(r$selection$z, unname(s$selection[, "ZMinMi"]), tolerance = 1e-10)
+    expect_equal(r$selection$r2, unname(s$selection[, "R2"]), tolerance = 1e-10)
+    expect_equal(r$fitted, unname(stats::fitted(stats::lm(y ~ x + stats::fitted(s)))), tolerance = 1e-10)
+  }
+})

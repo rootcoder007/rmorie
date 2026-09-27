@@ -86,3 +86,41 @@ test_that("local Geary, correlogram, k-colour join counts, bivariate LISA and Mo
                tolerance = 1e-12)
   expect_identical(ms$is_inf, mp$is_inf)
 })
+
+test_that("PolygonContiguity, RhoBounds, ErrorOperator, cardinality and diffnb match spdep and spatialreg", {
+  skip_if_not_installed("spdep")
+  skip_if_not_installed("sf")
+  skip_if_not_installed("spatialreg")
+  u <- .morie_random_uniform(2 * 6 * 7, seed = 3, stream = 0)
+  V <- array(0, c(6, 7, 2))
+  k <- 1
+  for (i in 0:5) for (j in 0:6) {
+    V[i + 1, j + 1, ] <- c(j + 0.3 * (u[k] - 0.5), i + 0.3 * (u[k + 1] - 0.5))
+    k <- k + 2
+  }
+  polys <- list()
+  for (i in 1:5) for (j in 1:6) {
+    polys[[length(polys) + 1]] <- rbind(V[i, j, ], V[i, j + 1, ], V[i + 1, j + 1, ], V[i + 1, j, ], V[i, j, ])
+  }
+  g <- sf::st_sfc(lapply(polys, function(p) sf::st_polygon(list(p))))
+  for (q in c(TRUE, FALSE)) {
+    nb <- spdep::poly2nb(g, queen = q)
+    expect_equal(PolygonContiguity(polys, queen = q), unname(spdep::nb2mat(nb, style = "B")), ignore_attr = TRUE)
+  }
+  nbr <- spdep::poly2nb(g, queen = FALSE)
+  lw <- spdep::nb2listw(nbr, style = "W")
+  W <- spdep::listw2mat(lw)
+  e <- Re(spatialreg::eigenw(lw))
+  b <- RhoBounds(W)
+  expect_equal(c(b$lower, b$upper), c(1 / min(e), 1 / max(e)), tolerance = 1e-12)
+  expect_equal(ErrorOperator(W, 0.4), unname(as.matrix(spatialreg::invIrW(lw, 0.4))), tolerance = 1e-12,
+               ignore_attr = TRUE)
+  expect_equal(NeighbourCardinality(W)$cardinality, spdep::card(nbr))
+  nbq <- spdep::poly2nb(g, queen = TRUE)
+  d <- CompareNeighbours(spdep::nb2mat(nbq, style = "B"), W)$difference
+  ref <- lapply(spdep::diffnb(nbq, nbr), function(v) as.integer(v[v > 0]))
+  expect_equal(d, ref)
+  grp <- rep(1:3, length.out = 30)
+  blk <- spdep::nb2mat(spdep::nb2blocknb(NULL, as.character(grp)), style = "B", zero.policy = TRUE)
+  expect_equal(BlockWeights(grp), unname(blk), ignore_attr = TRUE)
+})
