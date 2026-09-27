@@ -54,13 +54,22 @@
 #' \code{h} from the boundary, so \code{d_i > h} is used here, which is
 #' the standard and unbiased form.
 #'
+#' Translation correction (Ohser and Stoyan 1981) weights each pair by
+#' \code{|W| / ((w - |dx|)(h - |dy|))} in a w-by-h rectangle:
+#' \code{Khat_t(h) = area / n^2 sum_i sum_{j != i} e_ij I(h_ij <= h)}.
+#' The isotropic and translation estimators use \code{lambdahat^2 =
+#' n^2 / area^2} (Ripley 1976); \code{spatstat.explore::Kest} uses
+#' \code{n (n - 1) / area^2}, so its values are these times
+#' \code{n / (n - 1)}. The border estimator equals \code{Kest}'s.
+#'
 #' Under complete spatial randomness \code{K(h) = pi h^2}; the Besag
 #' transform \code{L(h) = sqrt(K(h)/pi)} is returned alongside.
 #'
 #' @param points Event coordinates, an n-by-2 matrix, all inside window.
 #' @param window Rectangle \code{c(xmin, xmax, ymin, ymax)}.
 #' @param r Distances at which to evaluate K.
-#' @return Named list: r, k, k_border, l, csr, lambda_hat, area, n, method.
+#' @return Named list: r, k, k_border, k_trans, l, csr, lambda_hat, area, n,
+#'   method.
 #' @references Ripley, B. D. (1976). The second-order analysis of
 #'   stationary point processes. Journal of Applied Probability 13(2),
 #'   255-266. \doi{10.2307/3212829}.
@@ -96,30 +105,38 @@ Ripk <- function(points, window, r) {
 
   d <- matrix(0, n, n)
   wt <- matrix(1, n, n)
+  tw <- matrix(1, n, n)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       if (i == j) next
       dij <- sqrt((px[i] - px[j])^2 + (py[i] - py[j])^2)
       d[i, j] <- dij
       wt[i, j] <- .ripk_weight(px[i], py[i], dij, x0, x1, y0, y1)
+      tw[i, j] <- area / ((x1 - x0 - abs(px[i] - px[j])) * (y1 - y0 - abs(py[i] - py[j])))
     }
   }
 
   nr <- length(rs)
   kiso <- numeric(nr)
   kbor <- numeric(nr)
+  ktr <- numeric(nr)
   lv <- numeric(nr)
   csr <- numeric(nr)
   for (t in seq_len(nr)) {
     h <- rs[t]
     acc <- 0
+    acc_t <- 0
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
-        if (i != j && d[i, j] <= h) acc <- acc + 1 / wt[i, j]
+        if (i != j && d[i, j] <= h) {
+          acc <- acc + 1 / wt[i, j]
+          acc_t <- acc_t + tw[i, j]
+        }
       }
     }
     kh <- area * acc / (n * n)
     kiso[t] <- kh
+    ktr[t] <- area * acc_t / (n * n)
     lv[t] <- if (kh > 0) sqrt(kh / pi) else 0
     csr[t] <- pi * h * h
     m <- 0L
@@ -136,7 +153,7 @@ Ripk <- function(points, window, r) {
   }
 
   list(
-    r = rs, k = kiso, k_border = kbor, l = lv, csr = csr,
+    r = rs, k = kiso, k_border = kbor, k_trans = ktr, l = lv, csr = csr,
     lambda_hat = lam, area = area, n = n,
     method = "Ripley's K function (isotropic + border correction)"
   )

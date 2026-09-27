@@ -1,0 +1,10 @@
+test_that("PoissonProcessFit matches ppm values and the Python arm", {
+  U <- .morie_random_uniform(120, seed = 21, stream = 0)
+  P <- cbind(2 * U[seq(1, 119, 2)], U[seq(2, 120, 2)])
+  expect_lt(abs(exp(PoissonProcessFit(P, c(0, 2, 0, 1), degree = 0)$theta) - 30), 1e-12)
+  r <- PoissonProcessFit(P, c(0, 2, 0, 1), degree = 1, simulate = 3, seed = 3)
+  expect_lt(max(abs(r$theta - c(3.51859174463, -0.114096826248, -0.011132311411))), 1e-9)
+  expect_lt(max(abs(r$se - c(0.3362050495, 0.223953776, 0.4474899548))), 1e-9)
+  expect_lt(abs(r$expected_count - 60), 1e-9)
+  expect_identical(vapply(r$simulated, nrow, 0L), c(68L, 54L, 62L))
+})

@@ -1,0 +1,12 @@
+test_that("VoronoiCells matches deldir tiles and the Python arm", {
+  U <- .morie_random_uniform(120, seed = 21, stream = 0)
+  P <- cbind(2 * U[seq(1, 119, 2)], U[seq(2, 120, 2)])
+  r <- VoronoiCells(P, c(0, 2, 0, 1))
+  expect_lt(max(abs(r$areas[1:5] - c(0.040615682817, 0.06288264359, 0.064367398718, 0.025502522808, 0.038516530999))), 1e-12)
+  expect_lt(abs(sum(r$areas) - 2), 1e-13)
+  expect_identical(r$neighbours[[1]], c(12L, 23L, 24L, 56L))
+  expect_identical(nrow(r$edges), 147L)
+  expect_lt(abs(r$entropy - 1.7469656003642566), 1e-12)
+  t <- VoronoiCells(rbind(c(1, 0.3), c(0.6, 0.2), c(1.4, 0.4), c(1, 1)), rbind(c(0, 0), c(2, 0), c(1, 1.5)))
+  expect_lt(max(abs(t$areas[c(1, 2)] - c(0.27625, 0.3803125))), 1e-14)
+})

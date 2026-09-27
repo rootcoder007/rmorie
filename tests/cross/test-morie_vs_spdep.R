@@ -25,3 +25,20 @@ test_that("Skater reproduces spdep::skater", {
     }
   }
 })
+
+test_that("SpatialWeights equals spdep neighbour graphs and nb2mat styles", {
+  skip_if_not_installed("spdep")
+  U <- .morie_random_uniform(160, seed = 54, stream = 0)
+  P <- cbind(U[1:60], U[61:120])
+  nbs <- list(knn = spdep::knn2nb(spdep::knearneigh(P, 5)), distance = suppressWarnings(spdep::dnearneigh(P, 0, 0.22)),
+              gabriel = spdep::graph2nb(spdep::gabrielneigh(P), sym = TRUE),
+              relative = spdep::graph2nb(spdep::relativeneigh(P), sym = TRUE))
+  args <- list(knn = list(k = 5), distance = list(threshold = 0.22), gabriel = list(), relative = list())
+  for (nm in names(nbs)) {
+    for (st in c("B", "W", "C", "U", "S", "minmax")) {
+      R <- spdep::nb2mat(nbs[[nm]], style = st, zero.policy = TRUE)
+      M <- do.call(SpatialWeights, c(list(P, nm), args[[nm]], list(style = st)))$W
+      expect_lt(max(abs(unname(R) - M)), 1e-12)
+    }
+  }
+})
