@@ -1,0 +1,11 @@
+test_that("spatial bootstrap and movement recompute", {
+  u <- .morie_random_uniform(200, seed = 41, stream = 0)
+  G <- matrix(u[1:36], 6, byrow = TRUE) + 0.3 * (0:5)
+  expect_equal(BlockBootstrapGrid(G, 6, nboot = 3)$replicates, rep(mean(G), 3), tolerance = 1e-12)
+  expect_equal(ToroidalShiftTest(G, G)$n_shifts, 35L)
+  expect_equal(StationaryBootstrap(0:19, 0.2, nboot = 3)$estimate, 9.5)
+  expect_equal(CrwMsd(1, kappa = 2)[2], 1)
+  expect_equal(SitePercolation(4, 5, 1)$n_clusters, 1L)
+  bb <- BrownianBridgeUd(rbind(c(0, 0), c(4, 0), c(4, 4)), c(0, 2, 4), 0:4, 0:4, 0.7, 0.2)
+  expect_equal(sum(bb$ud), 1, tolerance = 1e-12)
+})
