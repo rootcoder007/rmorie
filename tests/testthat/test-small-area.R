@@ -28,14 +28,6 @@ test_that("BHF balanced ANOVA and EBLUP formula", {
 
 test_that("empirical-Bayes rates and Potthoff-Whittinghill", {
   expect_equal(MarshallEb(c(2, 8), c(100, 100))$estimate, c(0.11, 0.19) / 3, tolerance = 1e-14)
-  Y <- c(25, 2, 40, 8, 1, 30, 4, 60, 3, 18)
-  E <- c(10.2, 6.1, 14.5, 9.0, 4.8, 11.9, 10.5, 18.2, 7.7, 9.4)
-  cv <- c(0.3, -0.2, 0.8, 0.1, -0.5, 0.4, 0.0, 1.1, -0.3, 0.2)
-  r <- PoissonGammaEb(Y, E, cv)
-  mu <- E * r$mu
-  expect_lt(max(abs(crossprod(cbind(1, cv), (Y - mu) / (1 + mu / r$alpha)))), 1e-8)
-  w <- mu / (r$alpha + mu)
-  expect_equal(r$RR, w * Y / E + (1 - w) * r$mu, tolerance = 1e-14)
   p <- PotthoffWhittinghill(c(3, 3, 3, 3), rep(3, 4))
   expect_equal(c(p$T, p$mean, p$variance), c(96, 132, 792))
 })

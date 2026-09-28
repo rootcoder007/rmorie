@@ -42,7 +42,7 @@ test_that("BhfEblup equals sae::eblupBHF (lmer) and nlme::lme", {
   expect_equal(r$beta, unname(nlme::fixef(fit)), tolerance = 1e-6)
 })
 
-test_that("MarshallEb, PoissonGammaEb and PotthoffWhittinghill equal spdep, SpatialEpi and DCluster", {
+test_that("MarshallEb and PotthoffWhittinghill equal spdep and DCluster", {
   n <- c(3, 10, 4, 25, 7, 1)
   x <- c(800, 1500, 1000, 3000, 1200, 400)
   skip_if_not_installed("spdep")
@@ -50,16 +50,6 @@ test_that("MarshallEb, PoissonGammaEb and PotthoffWhittinghill equal spdep, Spat
     ref <- spdep::EBest(n, x, family = fam)
     expect_equal(MarshallEb(n, x, fam)$estimate, ref$estmm, tolerance = 1e-14)
   }
-  skip_if_not_installed("SpatialEpi")
-  Y <- c(25, 2, 40, 8, 1, 30, 4, 60, 3, 18)
-  E <- c(10.2, 6.1, 14.5, 9.0, 4.8, 11.9, 10.5, 18.2, 7.7, 9.4)
-  cv <- c(0.3, -0.2, 0.8, 0.1, -0.5, 0.4, 0.0, 1.1, -0.3, 0.2)
-  ref <- SpatialEpi::eBayes(Y, E, cv)
-  r <- PoissonGammaEb(Y, E, cv)
-  expect_equal(r$alpha, ref$alpha, tolerance = 1e-6)
-  expect_equal(r$beta, unname(ref$beta), tolerance = 1e-6)
-  expect_equal(r$RR, ref$RR, tolerance = 1e-7)
-  expect_equal(r$RRmed, ref$RRmed, tolerance = 1e-7)
   skip_if_not_installed("DCluster")
   ex <- sum(n) * x / sum(x)
   ref <- DCluster::pottwhitt.stat(data.frame(Observed = n, Expected = ex))

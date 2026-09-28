@@ -183,10 +183,8 @@ BhfEblup <- function(y, X, area, xbar_pop, areas = NULL, popsize = NULL, method 
 #' Empirical-Bayes disease rates and the Potthoff-Whittinghill test
 #'
 #' \code{MarshallEb}: Marshall's global method-of-moments empirical-Bayes
-#' rates (Poisson or binomial), as \code{spdep::EBest}. \code{PoissonGammaEb}:
-#' Clayton-Kaldor Poisson-gamma relative risks, the negative binomial fitted
-#' by maximum likelihood (IRLS for \eqn{\beta} alternating with Newton for
-#' \eqn{\alpha}), posterior means and medians, as \code{SpatialEpi::eBayes}.
+#' rates (Poisson or binomial), as \code{spdep::EBest} (Poisson-gamma
+#' empirical Bayes is \code{PoissonGammaEb}).
 #' \code{PotthoffWhittinghill}: \eqn{T = E_+ \sum O_i (O_i - 1) / E_i} with
 #' asymptotic mean \eqn{O_+ (O_+ - 1)} and variance
 #' \eqn{2 (k - 1) O_+ (O_+ - 1)}, as \code{DCluster::pottwhitt.stat}.
@@ -194,23 +192,15 @@ BhfEblup <- function(y, X, area, xbar_pop, areas = NULL, popsize = NULL, method 
 #'
 #' @param cases,population Case counts and populations at risk.
 #' @param family \code{"poisson"} or \code{"binomial"}.
-#' @param y,E Observed and expected counts.
-#' @param X Optional covariate matrix (intercept added).
-#' @param tol,maxit Relative parameter tolerance and iteration limit.
 #' @param observed,expected Observed and expected counts.
 #' @return List.
 #' @references Marshall, R. J. (1991). Mapping disease and mortality rates
 #'   using empirical Bayes estimators. Applied Statistics 40, 283-294.
 #'
-#'   Clayton, D. and Kaldor, J. (1987). Empirical Bayes estimates of
-#'   age-standardized relative risks for use in disease mapping. Biometrics
-#'   43, 671-681.
-#'
 #'   Potthoff, R. F. and Whittinghill, M. (1966). Testing for homogeneity:
 #'   II. The Poisson distribution. Biometrika 53, 183-190.
 #' @examples
 #' MarshallEb(c(2, 8), c(100, 100))$estimate
-#' PoissonGammaEb(c(2, 3, 10, 1, 7, 4), c(3, 4, 5, 2.5, 4.5, 4))$RR
 #' PotthoffWhittinghill(c(3, 3, 3, 3), rep(3, 4))$T
 #' @export
 MarshallEb <- function(cases, population, family = "poisson") {
@@ -234,67 +224,6 @@ MarshallEb <- function(cases, population, family = "poisson") {
     stop("family must be poisson or binomial", call. = FALSE)
   }
   list(raw = raw, estimate = est, a = a, b = b)
-}
-
-#' @rdname MarshallEb
-#' @export
-PoissonGammaEb <- function(y, E, X = NULL, tol = 1e-12, maxit = 1000L) {
-  y <- as.numeric(y)
-  E <- as.numeric(E)
-  n <- length(y)
-  Xm <- cbind(1, if (is.null(X)) NULL else as.matrix(X))
-  p <- ncol(Xm)
-  off <- log(E)
-  loglik <- function(beta, th) {
-    mu <- as.vector(exp(Xm %*% beta + off))
-    sum(ifelse(mu > 0, lgamma(th + y) - lgamma(th) - lgamma(y + 1) + th * log(th) + y * log(mu) -
-                 (th + y) * log(th + mu), 0))
-  }
-  irls <- function(beta, th) {
-    for (i in 1:100) {
-      eta <- as.vector(Xm %*% beta + off)
-      mu <- exp(eta)
-      w <- mu / (1 + mu / th)
-      z <- eta - off + (y - mu) / mu
-      nb <- as.vector(solve(crossprod(Xm, w * Xm), crossprod(Xm, w * z)))
-      done <- max(abs(nb - beta)) < 1e-14 * (1 + max(abs(beta)))
-      beta <- nb
-      if (done) break
-    }
-    beta
-  }
-  theta_ml <- function(mu, th) {
-    for (i in 1:100) {
-      sc <- sum(digamma(th + y) - digamma(th) + log(th) + 1 - log(th + mu) - (y + th) / (mu + th))
-      inf <- sum(-trigamma(th + y) + trigamma(th) - 1 / th + 2 / (mu + th) - (y + th) / (mu + th)^2)
-      step <- sc / inf
-      nt <- th + step
-      while (nt <= 0) {
-        step <- step / 2
-        nt <- th + step
-      }
-      if (abs(nt - th) < 1e-14 * th) return(nt)
-      th <- nt
-    }
-    th
-  }
-  beta <- c(log(sum(y) / sum(E)), rep(0, p - 1))
-  mu <- exp(beta[1] + off)
-  th <- n / sum((y / mu - 1)^2)
-  it <- 0L
-  for (it in seq_len(maxit)) {
-    b_old <- beta
-    th_old <- th
-    beta <- irls(beta, th)
-    th <- theta_ml(as.vector(exp(Xm %*% beta + off)), th)
-    if (abs(th - th_old) <= tol * th && max(abs(beta - b_old)) <= tol * (1 + max(abs(beta)))) break
-  }
-  ll <- loglik(beta, th)
-  muhat <- as.vector(exp(Xm %*% beta))
-  wgt <- E * muhat / (th + E * muhat)
-  smr <- y / E
-  list(RR = wgt * smr + (1 - wgt) * muhat, RRmed = stats::qgamma(0.5, th + y, (th + E * muhat) / muhat),
-       beta = beta, alpha = th, SMR = smr, mu = muhat, loglik = ll, iterations = it)
 }
 
 #' @rdname MarshallEb
