@@ -1,0 +1,18 @@
+test_that("support-change and nonstationary kriging recompute", {
+  m <- list(model = "Exp", psill = 1.2, range = 1.3)
+  sup <- list()
+  for (x in 0:2) for (y in 0:2) sup[[length(sup) + 1]] <- rbind(c(x + 0.25, y + 0.25), c(x + 0.25, y + 0.75), c(x + 0.75, y + 0.25), c(x + 0.75, y + 0.75))
+  vals <- 1 + 0.3 * (0:8)
+  r <- AreaToPointKriging(vals, sup, sup[[5]], m)
+  expect_equal(mean(r$prediction), vals[5], tolerance = 1e-9)
+  u <- .morie_random_uniform(60, seed = 8, stream = 0)
+  P <- matrix(4 * u[1:40], 20, 2)
+  z <- sin(P[, 1]) + cos(P[, 2]) + 0.3 * u[41:60]
+  Q <- rbind(c(1, 1))
+  a <- NonstationaryKriging(z, P, Q, rep(1.3, 20), 1.3, 1.2, nugget = 0.1)
+  b <- Krige(z, P, Q, list(model = "Exp", psill = 1.2, range = 1.3, nugget = 0.1))
+  expect_equal(c(a$prediction, a$variance), c(b$prediction, b$variance), tolerance = 1e-10)
+  ev <- EmpiricalVariogramBins(z, P)
+  f <- FitVariogramWls(ev)
+  expect_equal(f$sse, sum(ev$np / ev$dist^2 * (ev$gamma - f$nugget - f$psill * (1 - exp(-ev$dist / f$range)))^2), tolerance = 1e-10)
+})
