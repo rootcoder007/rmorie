@@ -1,0 +1,18 @@
+test_that("kriging approximations reduce to exact kriging", {
+  u <- .morie_random_uniform(60, seed = 8, stream = 0)
+  P <- matrix(4 * u[1:40], 20, 2, byrow = TRUE)
+  z <- P[, 1] - 0.5 * P[, 2] + u[41:60]
+  m <- list(model = "Exp", psill = 1.2, range = 1.3, nugget = 0.15)
+  C <- KrigingCovariance(as.matrix(dist(P)), m)
+  exact <- -0.5 * 20 * log(2 * pi) - 0.5 * as.numeric(determinant(C)$modulus) - 0.5 * sum((z - 1) * solve(C, z - 1))
+  expect_equal(VecchiaLoglik(z, P, m, 19, mean = 1)$loglik, exact, tolerance = 1e-9)
+  Q <- rbind(c(1, 1))
+  ref <- Krige(z, P, Q, m, beta = 0.7)
+  expect_equal(NngpPredict(z, P, Q, m, 20, mean = 0.7)$prediction, ref$prediction, tolerance = 1e-10)
+  expect_equal(TaperedKriging(z, P, Q, m, 1e9, mean = 0.7)$prediction, ref$prediction, tolerance = 1e-8)
+  sig <- list(model = "Exp", psill = 1.2, range = 1.3)
+  d <- SparseGpKrige(z, P, Q, sig, P, noise = 0.15, method = "fitc", mean = 1)
+  k <- KrigingCovariance(sqrt(colSums((t(P) - Q[1, ])^2)), sig)
+  Kn <- KrigingCovariance(as.matrix(dist(P)), sig) + diag(0.15, 20)
+  expect_equal(d$prediction, 1 + sum(k * solve(Kn, z - 1)), tolerance = 1e-9)
+})
