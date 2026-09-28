@@ -9,7 +9,7 @@
 #' 1, 2, ... in \code{weights} (order 0 is the identity).
 #' \code{StLag}: \code{W^(order) z}. \code{StAcf}: space-time
 #' autocorrelation \code{rho_l0(s) = gamma_l0(s) / sqrt(gamma_ll(0) gamma_00(0))}
-#' with \code{gamma_lh(s) = (1 / (N (T - s))) sum_t (W^l z_t)' (W^h z_(t+s))},
+#' with \code{gamma_lh(s) = (1 / (N (T - s))) sum_t t(W^l z_t) (W^h z_(t+s))},
 #' returned as \code{acf[s + 1, l + 1]}. \code{StPacf}: space-time partial
 #' autocorrelation from the space-time Yule-Walker equations, one system per
 #' time order \code{k}, reported as \code{pacf[k, l + 1]}. \code{StarFit}:
