@@ -22,8 +22,9 @@ morie_isotonic_regression(x, y, weights = NULL, increasing = TRUE)
 list: x_sorted, fitted, residuals, sse, r2, n, method.
 }
 \description{
-Returns the non-decreasing (or non-increasing) least-squares fit using
-the pool-adjacent-violators algorithm via stats::isoreg.
+Returns the non-decreasing (or non-increasing) weighted least-squares fit
+by the pool-adjacent-violators algorithm (each pooled block at its
+weighted mean; equal to stats::isoreg for unit weights).
 }
 \examples{
 x <- 0:9
