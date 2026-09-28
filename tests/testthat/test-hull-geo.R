@@ -11,4 +11,6 @@ test_that("hull metrics, Delaunay and alpha shapes", {
   big <- AlphaShape(P, 1e6)
   expect_equal(big$area, HullMetrics(P)$hull_area, tolerance = 1e-12)
   expect_lt(AlphaShape(P, 0.12)$area, big$area)
+  q <- TriangleQuality(rbind(c(0, 0), c(2, 0), c(0, 1)), matrix(1:3, 1))
+  expect_equal(c(q$quality, q$edge_ratio), c(4 * sqrt(3) / 10, sqrt(5)), tolerance = 1e-15)
 })

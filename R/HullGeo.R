@@ -32,7 +32,9 @@
 #' calipers), its orientation, the FRAGSTATS fractal dimension
 #' \eqn{2 \ln(P/4) / \ln A} and the isoperimetric roundness
 #' \eqn{4 \pi A / P^2} of hull and polygon. \code{Delaunay}: Bowyer-Watson
-#' triangulation (general position assumed). \code{AlphaShape}: Delaunay
+#' triangulation (general position assumed). \code{TriangleQuality}:
+#' \eqn{4\sqrt{3} A / (a^2 + b^2 + c^2)} per triangle (1 equilateral), areas and
+#' longest-to-shortest edge ratios (Field 2000). \code{AlphaShape}: Delaunay
 #' triangles with circumradius at most \code{radius}, their area, boundary
 #' edges and perimeter (Edelsbrunner, Kirkpatrick and Seidel 1983).
 #' Identical to the Python arm \code{morie.fn.hullgeo}; indices are 1-based
@@ -40,6 +42,7 @@
 #'
 #' @param points,polygon Two-column coordinates (polygon vertices in order).
 #' @param radius Alpha radius.
+#' @param triangles Triangle index matrix (default the Delaunay triangulation).
 #' @return Matrix (\code{ConvexHull}, \code{Delaunay}) or list.
 #' @references Andrew, A. M. (1979). Another efficient algorithm for convex
 #'   hulls in two dimensions. Information Processing Letters 9, 216-219.
@@ -51,6 +54,9 @@
 #'   Edelsbrunner, H., Kirkpatrick, D. G. and Seidel, R. (1983). On the shape
 #'   of a set of points in the plane. IEEE Transactions on Information Theory
 #'   29, 551-559.
+#'
+#'   Field, D. A. (2000). Qualitative measures for initial meshes.
+#'   International Journal for Numerical Methods in Engineering 47, 887-906.
 #' @examples
 #' HullMetrics(rbind(c(0, 0), c(4, 0), c(4, 1), c(0, 1)))$elongation
 #' Delaunay(rbind(c(0, 0), c(2, 0), c(0, 2), c(2.2, 2.1)))
@@ -136,6 +142,23 @@ Delaunay <- function(points) {
   }
   tris <- tris[apply(tris, 1, max) <= n, , drop = FALSE]
   unname(tris[order(tris[, 1], tris[, 2], tris[, 3]), , drop = FALSE])
+}
+
+#' @rdname ConvexHull
+#' @export
+TriangleQuality <- function(points, triangles = NULL) {
+  P <- as.matrix(points) * 1
+  Tr <- if (is.null(triangles)) Delaunay(P) else as.matrix(triangles)
+  out <- t(vapply(seq_len(nrow(Tr)), function(k) {
+    a <- P[Tr[k, 1], ]
+    b <- P[Tr[k, 2], ]
+    c <- P[Tr[k, 3], ]
+    e <- c(sqrt(sum((a - b)^2)), sqrt(sum((b - c)^2)), sqrt(sum((a - c)^2)))
+    A <- abs(.hg_area(rbind(a, b, c)))
+    c(4 * sqrt(3) * A / sum(e^2), A, max(e) / min(e))
+  }, numeric(3)))
+  list(triangles = Tr, quality = out[, 1], area = out[, 2], edge_ratio = out[, 3], min_quality = min(out[, 1]),
+       mean_quality = mean(out[, 1]))
 }
 
 #' @rdname ConvexHull
