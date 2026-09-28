@@ -31,3 +31,11 @@ test_that("nlsgn halves steps from a poor start", {
   expect_true(r$converged)
   expect_lte(r$rss, 1.225082272330410893 * (1 + 1e-13))
 })
+
+test_that("nlsgn converges at the rounding floor instead of stopping", {
+  # tol = 0 never passes the relative-offset test, as on arm64 where the
+  # decrease stays one ulp above zero; the fit must still converge
+  r <- nlsgn(function(x, t) t[1] * t[2]^x, 1:5, c(3, 7, 12, 26, 51), c(1, 0.5), tol = 0)
+  expect_true(r$converged)
+  expect_lte(r$rss, 1.225082272330410893 * (1 + 1e-13))
+})

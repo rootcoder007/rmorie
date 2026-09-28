@@ -63,9 +63,17 @@ nlsgn <- function(model, x, y, start, tol = 1e-8, max_iter = 200) {
       }
       fac <- fac / 2
       if (fac < 1 / 1024) {
+        # the predicted Gauss-Newton decrease is below the rounding error of
+        # rss itself (arm64 FMA stops just short of the tol test), so no step
+        # can lower it: theta is the minimiser
+        if (rss - rperp <= 4 * n * .Machine$double.eps * rss) {
+          converged <- TRUE
+          break
+        }
         stop("step factor reduced below 1/1024 without reducing the residual sum of squares", call. = FALSE)
       }
     }
+    if (converged) break
   }
   J <- .nlsgn_jacobian(model, x, theta)
   s2 <- rss / (n - p)

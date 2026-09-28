@@ -87,7 +87,7 @@
 #' @param nodes Two-column matrix of (row, col) cells.
 #' @param directions 4 or 8 neighbours.
 #' @param start,end Cells \code{c(row, col)}.
-#' @param corridor_slack Corridor tolerance (default 10\% of the least cost).
+#' @param corridor_slack Corridor tolerance (default 10 percent of the least cost).
 #' @param suitability Habitat suitability in the unit interval.
 #' @param c Transform shape.
 #' @param indices List of suitability index variables.
