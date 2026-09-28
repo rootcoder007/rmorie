@@ -1,0 +1,14 @@
+u <- .morie_random_uniform(80, seed = 17, stream = 0)
+P <- cbind(u[1:40], u[41:80])
+
+test_that("hull metrics, Delaunay and alpha shapes", {
+  r <- HullMetrics(rbind(c(0, 0), c(4, 0), c(4, 1), c(0, 1)))
+  expect_equal(c(r$solidity, r$elongation, r$roundness), c(1, 0.75, 4 * pi * 4 / 100), tolerance = 1e-15)
+  L <- HullMetrics(rbind(c(0, 0), c(2, 0), c(2, 1), c(1, 1), c(1, 2), c(0, 2)))
+  expect_equal(L$solidity, 3 / 3.5, tolerance = 1e-15)
+  Tr <- Delaunay(P)
+  expect_equal(nrow(Tr), 2 * 40 - 2 - nrow(ConvexHull(P)))
+  big <- AlphaShape(P, 1e6)
+  expect_equal(big$area, HullMetrics(P)$hull_area, tolerance = 1e-12)
+  expect_lt(AlphaShape(P, 0.12)$area, big$area)
+})
