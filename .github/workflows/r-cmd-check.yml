@@ -121,7 +121,7 @@ jobs:
         if: runner.os == 'Linux'
         run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
 
-      - uses: r-lib/actions/setup-pandoc@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
+      - uses: r-lib/actions/setup-pandoc@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
 
       - uses: r-lib/actions/setup-r@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
         with:
