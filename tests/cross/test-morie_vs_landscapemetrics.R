@@ -26,3 +26,20 @@ test_that("LandscapeFragmentation matches landscapemetrics class metrics", {
   expect_equal(f$splitting, s$value[s$class == 1], tolerance = 1e-6)
   expect_equal(f$division, d$value[d$class == 1], tolerance = 1e-9)
 })
+
+test_that("LandscapeMetrics and ClassMetrics equal landscapemetrics::calculate_lsm", {
+  skip_if_not_installed("landscapemetrics")
+  skip_if_not_installed("terra")
+  u <- .morie_random_uniform(80, seed = 13, stream = 0)
+  m <- matrix(floor(u * 3) + 1, 8, 10)
+  m[3, 4] <- NA
+  r <- terra::rast(m, extent = terra::ext(0, 10, 0, 8))
+  lm <- c("contag", "iji", "ai", "lsi", "ed", "shdi", "pd", "lpi")
+  ref <- suppressWarnings(as.data.frame(landscapemetrics::calculate_lsm(r, what = paste0("lsm_l_", lm), directions = 8)))
+  ours <- LandscapeMetrics(m, 1, 8)
+  for (mt in lm) expect_equal(ours[[mt]], ref$value[ref$metric == mt], tolerance = 1e-12, info = mt)
+  cm <- c("cohesion", "ai", "lsi", "iji", "enn_mn", "shape_mn")
+  ref <- suppressWarnings(as.data.frame(landscapemetrics::calculate_lsm(r, what = paste0("lsm_c_", cm), directions = 8)))
+  ours <- ClassMetrics(m, 1, 8)
+  for (mt in cm) expect_equal(ours[[mt]], ref$value[ref$metric == mt], tolerance = 1e-12, info = mt)
+})

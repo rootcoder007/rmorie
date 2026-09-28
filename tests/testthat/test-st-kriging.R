@@ -1,0 +1,21 @@
+test_that("STCovariance models and STKriging interpolation", {
+  sep <- list(type = "separable", sill = 2, space = list(model = "Exp", range = 1), time = list(model = "Gau", range = 2))
+  expect_equal(STCovariance(1, 1, sep), 2 * exp(-1) * exp(-0.25), tolerance = 1e-15)
+  met <- list(type = "metric", stAni = 2, joint = list(model = "Exp", range = 1, nugget = 0.3))
+  expect_equal(STCovariance(c(3, 0), c(2, 0), met), c(exp(-5), 1.3), tolerance = 1e-15)
+  m <- list(type = "separable", sill = 1, space = list(model = "Exp", range = 1), time = list(model = "Exp", range = 2))
+  P <- rbind(c(0, 0), c(1, 0), c(0, 1))
+  r <- STKriging(c(1, 2, 1.5), P, c(0, 0, 1), P, c(0, 0, 1), m)
+  expect_equal(r$prediction, c(1, 2, 1.5), tolerance = 1e-12)
+  expect_lt(max(abs(r$variance)), 1e-12)
+})
+
+test_that("STVariogram zero bin and counts, STKrigingCV residuals", {
+  v <- STVariogram(rbind(c(1, 2, 4), c(2, 2.5, 3)), cbind(0:2, 0), 0:1, tlags = 0:1, boundaries = c(0, 1.5, 3))
+  expect_equal(v$np, c(0, 4, 2, 3, 4, 2))
+  expect_equal(v$gamma[4], 0.5 * (1 + 0.25 + 1) / 3, tolerance = 1e-15)
+  m <- list(type = "metric", stAni = 1, joint = list(model = "Exp", psill = 1, range = 1))
+  z <- c(1, 2, 1.5, 1.2)
+  cv <- STKrigingCV(z, rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1)), c(0, 0, 1, 1), m)
+  expect_equal(cv$residuals, z - cv$prediction, tolerance = 1e-15)
+})
