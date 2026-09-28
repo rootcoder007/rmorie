@@ -1,0 +1,10 @@
+test_that("spatial simulation recomputes", {
+  P <- rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1), c(0.5, 0.5), c(2, 1), c(1.5, 2), c(0.2, 1.7))
+  expect_equal(MovingLeastSquares(P, 1 + 2 * P[, 1] - P[, 2], rbind(c(0.3, 0.7)), 0.7)$prediction, 0.9, tolerance = 1e-12)
+  r <- DeformationFieldSimulate(rbind(c(0, 0), c(1, 0)), rbind(c(0, 0), c(2, 0)), list(model = "Exp", psill = 1, range = 1))
+  expect_equal(r$covariance[1, 2], exp(-2), tolerance = 1e-15)
+  a <- AnnealingSimulation(5, 4, as.numeric(0:19 %% 6), list(model = "Exp", psill = 1, range = 2), rbind(c(1, 0)), n_iter = 100)
+  expect_equal(sort(as.vector(a$grid)), sort(as.numeric(0:19 %% 6)))
+  d <- DlaAggregate(40, seed = 2)
+  expect_identical(nrow(d$sites), 41L)
+})
