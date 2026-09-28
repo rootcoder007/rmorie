@@ -69,15 +69,25 @@ test_that("PartialMantel equals vegan::mantel.partial; CircuitResistance equals 
   L <- matrix(0, n, n)
   ix <- function(i, j) (i - 1) * 5 + j
   for (i in 1:4) for (j in 1:5) for (d in list(c(0, 1), c(1, 0), c(1, 1), c(1, -1))) {
-    x <- i + d[1]; y <- j + d[2]
+    x <- i + d[1]
+    y <- j + d[2]
     if (x <= 4 && y >= 1 && y <= 5) {
       w <- 1 / ((if (all(d != 0)) sqrt(2) else 1) * (R[i, j] + R[x, y]) / 2)
-      a <- ix(i, j); b <- ix(x, y)
-      L[a, a] <- L[a, a] + w; L[b, b] <- L[b, b] + w; L[a, b] <- L[a, b] - w; L[b, a] <- L[b, a] - w
+      a <- ix(i, j)
+      b <- ix(x, y)
+      L[a, a] <- L[a, a] + w
+      L[b, b] <- L[b, b] + w
+      L[a, b] <- L[a, b] - w
+      L[b, a] <- L[b, a] - w
     }
   }
   Lp <- MASS::ginv(L)
-  e <- function(a, b) { v <- numeric(n); v[a] <- 1; v[b] <- -1; v }
+  e <- function(a, b) {
+    v <- numeric(n)
+    v[a] <- 1
+    v[b] <- -1
+    v
+  }
   expect_equal(cr$resistance[1, 2], drop(t(e(ix(1, 1), ix(4, 5))) %*% Lp %*% e(ix(1, 1), ix(4, 5))), tolerance = 1e-10)
   expect_equal(cr$resistance[2, 3], drop(t(e(ix(4, 5), ix(2, 3))) %*% Lp %*% e(ix(4, 5), ix(2, 3))), tolerance = 1e-10)
 })
