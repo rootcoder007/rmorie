@@ -1,0 +1,8 @@
+#!/usr/bin/env Rscript
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# siu command-line front end (the same commands as the C++ `siu` binary):
+#   Rscript "$(Rscript -e 'cat(system.file("scripts", "siu", package = "rmorie"))')" audit parsed.json report.txt \
+#     --api openai --base http://localhost:8080 --readers my-model --mode 2
+# See ?rmorie::morie_siu_cli for every command and option.
+pkg <- if (requireNamespace("rmorie", quietly = TRUE)) "rmorie" else "morie"
+quit(status = getExportedValue(pkg, "morie_siu_cli")(commandArgs(trailingOnly = TRUE)), save = "no")

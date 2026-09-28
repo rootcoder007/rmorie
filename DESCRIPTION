@@ -45,6 +45,7 @@ Description: Self-contained multi-domain scientific computing toolkit for
   none of these require an account or API (application programming
   interface) key.
 License: AGPL (>= 3)
+Copyright: See file inst/COPYRIGHTS for the bundled nlohmann/json header (MIT).
 LazyData: true
 Encoding: UTF-8
 ByteCompile: no

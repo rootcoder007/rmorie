@@ -106,3 +106,4 @@
 ^inst/extdata/samples/tps_assault_sample\.csv$
 ^inst/extdata/tps_dictionary\.json$
 ^inst/extdata/uof_dictionary\.json$
+^tools/siu-cli/build$

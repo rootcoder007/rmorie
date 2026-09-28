@@ -386,6 +386,54 @@ morie_tree_predict_cpp <- function(tree, X) {
     .Call(`_rmorie_morie_tree_predict_cpp`, tree, X)
 }
 
+.siu_core_html_to_text <- function(html) {
+    .Call(`_rmorie_siu_core_html_to_text`, html)
+}
+
+.siu_core_parse_html <- function(html) {
+    .Call(`_rmorie_siu_core_parse_html`, html)
+}
+
+.siu_core_to_iso_date <- function(human) {
+    .Call(`_rmorie_siu_core_to_iso_date`, human)
+}
+
+.siu_core_strip_boilerplate <- function(text) {
+    .Call(`_rmorie_siu_core_strip_boilerplate`, text)
+}
+
+.siu_core_resolve_so <- function(text) {
+    .Call(`_rmorie_siu_core_resolve_so`, text)
+}
+
+.siu_core_schema <- function() {
+    .Call(`_rmorie_siu_core_schema`)
+}
+
+.siu_core_get <- function(url, timeout_s) {
+    .Call(`_rmorie_siu_core_get`, url, timeout_s)
+}
+
+.siu_core_backend <- function(api, base, key) {
+    .Call(`_rmorie_siu_core_backend`, api, base, key)
+}
+
+.siu_core_models <- function(api, base, key) {
+    .Call(`_rmorie_siu_core_models`, api, base, key)
+}
+
+.siu_core_chat <- function(api, base, key, model, prompt, timeout_s, temperature) {
+    .Call(`_rmorie_siu_core_chat`, api, base, key, model, prompt, timeout_s, temperature)
+}
+
+.siu_core_default_model <- function(api, base, key) {
+    .Call(`_rmorie_siu_core_default_model`, api, base, key)
+}
+
+.siu_core_panel <- function(report_text, parsed_json, mode, readers, auditors, num_readers, num_auditors, reader_concurrency, auditor_sequential, reader_granularity, auditor_granularity, health_check, api, base, key, timeout_s, temperature, chat_fn) {
+    .Call(`_rmorie_siu_core_panel`, report_text, parsed_json, mode, readers, auditors, num_readers, num_auditors, reader_concurrency, auditor_sequential, reader_granularity, auditor_granularity, health_check, api, base, key, timeout_s, temperature, chat_fn)
+}
+
 #' Fetch a single URL over HTTP(S) via libcurl
 #'
 #' Internal building block of the SIU parser. Returns the response

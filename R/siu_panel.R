@@ -5,8 +5,9 @@
 # N readers each read the FULL report and answer every schema field with a
 # supporting quote; after ALL readers finish (hard barrier) the auditor(s)
 # read the report plus the readers' answers and issue the final value.
-# Models come from the user's own Ollama server (OLLAMA_HOST / OLLAMA_MODEL,
-# else auto-discovered) -- nothing is hardcoded.
+# Models come from ANY backend the user points at (see morie_llm_backend()):
+# an Ollama server, any OpenAI-compatible server, or the user's own R
+# function -- nothing is hardcoded.
 
 #' Run the Mixture-of-Agents reading panel on SIU reports
 #'
@@ -35,7 +36,7 @@
 #' skimming once and hallucinating 60 answers.
 #'
 #' @param html Report HTML (character), or a file path, or a drid (numeric)
-#'   fetched via the bricklayer engine.
+#'   fetched via the bricklayer engine (or rmorie's native fetch).
 #' @param mode Panel mode 1-4 (see above). Default 4.
 #' @param readers Optional character vector of reader model names.
 #' @param auditors Optional character vector of auditor model names
@@ -43,11 +44,21 @@
 #' @param reader_concurrency Max readers running at once (default 3).
 #' @param granularity `"all_fields"` (one pass per reader) or `"per_field"`
 #'   (one focused read per schema field). Applies to readers and auditors.
-#' @param host Ollama server; default `Sys.getenv("OLLAMA_HOST")`.
+#' @param host Server URL (kept for compatibility; the same as `base`);
+#'   default `Sys.getenv("OLLAMA_HOST")`.
 #' @param timeout Per-call timeout in seconds (default 300).
+#' @param api `"ollama"` or `"openai"` (any OpenAI-compatible server:
+#'   llama.cpp, vLLM, LM Studio, LocalAI, TGI, OpenRouter ...); empty uses
+#'   `MORIE_LLM_API`, else `"ollama"`. See [morie_llm_backend()].
+#' @param base Server URL; empty falls back to the environment
+#'   (`MORIE_LLM_BASE`, `OLLAMA_HOST`, `OPENAI_BASE_URL`, `LLM_API_BASE_URL`).
+#' @param key Bearer token; empty falls back to `MORIE_LLM_KEY` or the
+#'   provider's key variable.
+#' @param chat Optional `function(model, prompt)` returning the reply text --
+#'   your own model, used instead of a server.
 #' @return A list: `fields` (named character vector, the auditor's final
 #'   values), `readers` (each reader's raw answers), `audit_chain` (each
-#'   auditor's verdicts), `models` (who served).
+#'   auditor's verdicts), `models` (who served, and the backend).
 #' @examples
 #' \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
 #' # Runs when a local Ollama server is reachable (free default).
@@ -62,51 +73,45 @@ morie_siu_panel <- function(html,
                             reader_concurrency = 3L,
                             granularity = c("all_fields", "per_field"),
                             host = Sys.getenv("OLLAMA_HOST"),
-                            timeout = 300) {
+                            timeout = 300,
+                            api = "",
+                            base = host,
+                            key = "",
+                            chat = NULL) {
   granularity <- match.arg(granularity)
   stopifnot(mode %in% 1:4)
 
   # -- resolve the report text ------------------------------------------
   if (is.numeric(html)) {
     drid <- as.integer(html)
-    if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
-      stop("fetching by drid needs rmoriebricklayer (the fetch engine)")
+    if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
+      dest <- tempfile(fileext = ".html")
+      on.exit(unlink(dest), add = TRUE)
+      rmoriebricklayer::bricklayer_fetch_siu(drid, dest)
+      html <- paste(readLines(dest, warn = FALSE, encoding = "UTF-8"),
+                    collapse = "\n")
+    } else {
+      html <- morie_siu_fetch_report(drid)
     }
-    dest <- tempfile(fileext = ".html")
-    on.exit(unlink(dest), add = TRUE)
-    rmoriebricklayer::bricklayer_fetch_siu(drid, dest)
-    html <- paste(readLines(dest, warn = FALSE, encoding = "UTF-8"),
-                  collapse = "\n")
   } else if (length(html) == 1L && !grepl("<", html, fixed = TRUE) &&
              file.exists(html)) {
     html <- paste(readLines(html, warn = FALSE, encoding = "UTF-8"),
                   collapse = "\n")
   }
-  text <- if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
-    rmoriebricklayer::bricklayer_siu_text(html)
-  } else {
-    .siu_html_to_text(html)
-  }
+  text <- morie_siu_html_to_text(html)
+  schema <- morie_siu_schema()
 
-  schema <- if (requireNamespace("rmoriebricklayer", quietly = TRUE)) {
-    rmoriebricklayer::bricklayer_siu_schema()
-  } else {
-    stop("morie_siu_panel() needs rmoriebricklayer for the field schema")
+  # -- models: any backend (Ollama, OpenAI-compatible, or chat=) ---------
+  if (!is.null(chat)) stopifnot(is.function(chat))
+  be <- .siu_backend_args(api, base, key)
+  available <- if (is.null(chat)) .siu_core_models(be$api, be$base, be$key) else character(0)
+  env_model <- Sys.getenv("MORIE_LLM_MODEL", unset = Sys.getenv("OLLAMA_MODEL"))
+  default_model <- if (nzchar(env_model)) env_model else if (length(available)) available[[1L]] else "custom"
+  if (is.null(chat) && !length(available) && is.null(readers)) {
+    b <- morie_llm_backend(be$api, be$base, be$key)
+    stop("no models at ", b$base, " [", b$api, "]: start a server, set MORIE_LLM_BASE / ",
+         "OLLAMA_HOST / OPENAI_BASE_URL, pass `readers`, or supply `chat`", call. = FALSE)
   }
-
-  # -- models ------------------------------------------------------------
-  if (!nzchar(host)) {
-    stop("no Ollama server: set OLLAMA_HOST (local, tailnet, or a ",
-         "Cloudflare-tunnelled endpoint)")
-  }
-  # The llm layer reads OLLAMA_HOST from the environment; honour an
-  # explicit host= for this call only.
-  old_host <- Sys.getenv("OLLAMA_HOST")
-  Sys.setenv(OLLAMA_HOST = host)
-  on.exit(Sys.setenv(OLLAMA_HOST = old_host), add = TRUE)
-  available <- morie_llm_ollama_models()$name
-  if (!length(available)) stop("Ollama at ", host, " serves no models")
-  default_model <- Sys.getenv("OLLAMA_MODEL", unset = available[[1L]])
   n_readers <- c(1L, 1L, 2L, 3L)[mode]
   n_auditors <- c(0L, 1L, 1L, 1L)[mode]
   if (is.null(readers)) {
@@ -117,8 +122,8 @@ morie_siu_panel <- function(html,
   }
 
   ask <- function(model, prompt) {
-    morie_llm_ask(prompt, model = model, provider = "ollama",
-                  timeout = timeout)
+    if (!is.null(chat)) return(as.character(chat(model, prompt)))
+    .siu_core_chat(be$api, be$base, be$key, model, prompt, timeout, 0)
   }
 
   field_block <- function(f) {
@@ -196,7 +201,8 @@ morie_siu_panel <- function(html,
   }, schema$name)
 
   list(fields = fields, readers = reader_out, audit_chain = audit_chain,
-       models = list(readers = readers, auditors = auditors, host = host))
+       models = list(readers = readers, auditors = auditors,
+                     backend = if (is.null(chat)) morie_llm_backend(be$api, be$base, be$key) else "custom"))
 }
 
 # Pull {"field": {"value": ...}} JSON out of a model reply (or a per-field

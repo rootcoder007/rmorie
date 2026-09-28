@@ -219,11 +219,10 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
   # fields from the full 16-field schema parse; the conservative regex
   # passes below only top up whatever it could not state. Older bricklayer
   # (or none) falls straight through to the pure-R path.
-  if (requireNamespace("rmoriebricklayer", quietly = TRUE) &&
-      exists("bricklayer_parse_siu",
-             envir = asNamespace("rmoriebricklayer"))) {
-    bf <- tryCatch(rmoriebricklayer::bricklayer_parse_siu(html),
-                   error = function(e) NULL)
+  # Falls back to rmorie's native copy of the same core when bricklayer is
+  # absent or older.
+  {
+    bf <- tryCatch(morie_siu_parse_report(html), error = function(e) NULL)
     if (!is.null(bf)) {
       take <- function(k) if (!is.na(bf[k]) && nzchar(bf[[k]])) bf[[k]] else ""
       rec$police_service   <- take("police_service")
@@ -557,27 +556,39 @@ morie_siu_fetch_dataframe <- function(...) {
 #' six-field regex parse used by \code{morie_siu_fetch_cases()}, which
 #' itself now routes through the same compiled parser when available.
 #'
+#' The parser runs in \pkg{rmoriebricklayer} when available
+#' (\code{engine = "auto"}), else in rmorie's native copy of the same C++
+#' core; \code{morie_siu_parse_reports()} parses many reports into a data
+#' frame (one row per report).
+#'
 #' @param html A length-1 character vector of raw report HTML, or the
 #'   path to a saved report file.
+#' @param htmls Character vector (or list) of report HTML or file paths.
+#' @param engine \code{"auto"}, \code{"bricklayer"} or \code{"native"}.
 #' @return A named character vector: the 16 schema fields plus
-#'   \code{_language}.
+#'   \code{_language} (a data frame for \code{morie_siu_parse_reports()}).
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriebricklayer", quietly = TRUE) && exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer"))) withAutoprint(\{ # examplesIf}
 #' f <- morie_siu_parse_report(system.file("extdata",
-#'   "siu_synthetic_report.html", package = "rmoriebricklayer"))
+#'   "siu_synthetic_report.html", package = environmentName(environment(morie_siu_parse_report))))
 #' f[["number_of_subject_officers"]]
-#' \dontshow{\}) # examplesIf}
 #' @export
-morie_siu_parse_report <- function(html) {
-  if (!requireNamespace("rmoriebricklayer", quietly = TRUE) ||
-      !exists("bricklayer_parse_siu",
-              envir = asNamespace("rmoriebricklayer"))) {
-    stop("morie_siu_parse_report() needs rmoriebricklayer >= 0.3.5 ",
-         "(the compiled SIU parser). Install/update it with:\n",
-         "  install.packages(\"rmoriebricklayer\", ",
-         "repos = \"https://rootcoder007.r-universe.dev\")")
+morie_siu_parse_report <- function(html, engine = "auto") {
+  stopifnot(is.character(html), length(html) == 1L, !is.na(html))
+  if (.siu_use_bricklayer(engine, "bricklayer_parse_siu")) return(rmoriebricklayer::bricklayer_parse_siu(html))
+  if (!grepl("<", html, fixed = TRUE) && file.exists(html)) {
+    html <- paste(readLines(html, warn = FALSE, encoding = "UTF-8"), collapse = "\n")
   }
-  rmoriebricklayer::bricklayer_parse_siu(html)
+  .siu_core_parse_html(html)
+}
+
+#' @rdname morie_siu_parse_report
+#' @export
+morie_siu_parse_reports <- function(htmls, engine = "auto") {
+  rows <- lapply(htmls, function(h) morie_siu_parse_report(h[[1L]], engine = engine))
+  cols <- unique(unlist(lapply(rows, names)))
+  out <- lapply(cols, function(cn) vapply(rows, function(r) if (cn %in% names(r)) r[[cn]] else NA_character_, ""))
+  names(out) <- cols
+  as.data.frame(out, stringsAsFactors = FALSE, check.names = FALSE)
 }
 
 #' SIU director's-reports corpus: reviewed data first, fetch only what's new
@@ -647,6 +658,9 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
       }
       return(NULL)
     }
+    # No bricklayer: rmorie's native libcurl fetch of the same page.
+    html <- tryCatch(morie_siu_fetch_report(id), error = function(e) NULL)
+    if (!is.null(html)) return(html)
     url <- sprintf(
       "https://www.siu.on.ca/en/directors_report_details.php?drid=%d", id)
     tryCatch(.siu_fetch_http_get(url), error = function(e) NULL)
@@ -710,12 +724,15 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' panel-reviewed corpus (\pkg{rmoriedata}) returns its VERIFIED count --
 #' nothing re-derives an established answer. Only a report outside the
 #' corpus falls through to the deterministic rule set compiled in
-#' \pkg{rmoriebricklayer} (the foundation layer), whose rules were proven
+#' \pkg{rmoriebricklayer} (the foundation layer; rmorie's native copy of the
+#' same core when bricklayer is absent), whose rules were proven
 #' zero-wrong against all 2,182 reviewed reports; where even the rules
 #' cannot answer, the reading panel ([morie_siu_panel()]) decides.
 #'
 #' @param text Plain report text (needed only for unreviewed reports).
 #' @param drid Report id; supply whenever known.
+#' @param engine \code{"auto"}, \code{"bricklayer"} or \code{"native"} for
+#'   the rule-based step.
 #' @return A list with `count` (integer, `NA` only when both corpus and
 #'   rules are silent -- run the panel) and `reason`.
 #' @examples
@@ -723,7 +740,7 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' morie_siu_resolve_so(drid = 5038)
 #' \dontshow{\}) # examplesIf}
 #' @export
-morie_siu_resolve_so <- function(text = NULL, drid = NULL) {
+morie_siu_resolve_so <- function(text = NULL, drid = NULL, engine = "auto") {
   if (!is.null(drid) && requireNamespace("rmoriedata", quietly = TRUE)) {
     corpus <- tryCatch(rmoriedata::load_siu_reports(),
                        error = function(e) NULL)
@@ -740,10 +757,10 @@ morie_siu_resolve_so <- function(text = NULL, drid = NULL) {
   }
   if (is.null(text)) {
     stop("report not in the reviewed corpus; supply `text` for the ",
-         "rule-based resolution (rmoriebricklayer)")
+         "rule-based resolution")
   }
-  if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
-    stop("rule-based resolution needs rmoriebricklayer")
+  if (.siu_use_bricklayer(engine, "bricklayer_siu_resolve_so")) {
+    return(rmoriebricklayer::bricklayer_siu_resolve_so(text))
   }
-  rmoriebricklayer::bricklayer_siu_resolve_so(text)
+  .siu_core_resolve_so(text)
 }

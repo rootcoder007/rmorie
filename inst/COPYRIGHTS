@@ -1,0 +1,6 @@
+This package bundles third-party code:
+
+src/siu/nlohmann/json.hpp
+  JSON for Modern C++, version 3.11.3
+  Copyright (c) 2013-2022 Niels Lohmann <https://nlohmann.me>
+  MIT License; the full licence text is in src/siu/nlohmann/LICENSE.MIT

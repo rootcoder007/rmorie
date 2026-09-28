@@ -1065,6 +1065,167 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// siu_core_html_to_text
+std::string siu_core_html_to_text(const std::string& html);
+RcppExport SEXP _rmorie_siu_core_html_to_text(SEXP htmlSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type html(htmlSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_html_to_text(html));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_parse_html
+Rcpp::CharacterVector siu_core_parse_html(const std::string& html);
+RcppExport SEXP _rmorie_siu_core_parse_html(SEXP htmlSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type html(htmlSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_parse_html(html));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_to_iso_date
+std::string siu_core_to_iso_date(const std::string& human);
+RcppExport SEXP _rmorie_siu_core_to_iso_date(SEXP humanSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type human(humanSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_to_iso_date(human));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_strip_boilerplate
+std::string siu_core_strip_boilerplate(const std::string& text);
+RcppExport SEXP _rmorie_siu_core_strip_boilerplate(SEXP textSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type text(textSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_strip_boilerplate(text));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_resolve_so
+Rcpp::List siu_core_resolve_so(const std::string& text);
+RcppExport SEXP _rmorie_siu_core_resolve_so(SEXP textSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type text(textSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_resolve_so(text));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_schema
+Rcpp::DataFrame siu_core_schema();
+RcppExport SEXP _rmorie_siu_core_schema() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(siu_core_schema());
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_get
+std::string siu_core_get(const std::string& url, double timeout_s);
+RcppExport SEXP _rmorie_siu_core_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type url(urlSEXP);
+    Rcpp::traits::input_parameter< double >::type timeout_s(timeout_sSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_get(url, timeout_s));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_backend
+Rcpp::List siu_core_backend(const std::string& api, const std::string& base, const std::string& key);
+RcppExport SEXP _rmorie_siu_core_backend(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type api(apiSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type key(keySEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_backend(api, base, key));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_models
+Rcpp::CharacterVector siu_core_models(const std::string& api, const std::string& base, const std::string& key);
+RcppExport SEXP _rmorie_siu_core_models(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type api(apiSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type key(keySEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_models(api, base, key));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_chat
+std::string siu_core_chat(const std::string& api, const std::string& base, const std::string& key, const std::string& model, const std::string& prompt, double timeout_s, double temperature);
+RcppExport SEXP _rmorie_siu_core_chat(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP, SEXP modelSEXP, SEXP promptSEXP, SEXP timeout_sSEXP, SEXP temperatureSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type api(apiSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type key(keySEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type model(modelSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type prompt(promptSEXP);
+    Rcpp::traits::input_parameter< double >::type timeout_s(timeout_sSEXP);
+    Rcpp::traits::input_parameter< double >::type temperature(temperatureSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_chat(api, base, key, model, prompt, timeout_s, temperature));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_default_model
+std::string siu_core_default_model(const std::string& api, const std::string& base, const std::string& key);
+RcppExport SEXP _rmorie_siu_core_default_model(SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type api(apiSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type key(keySEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_default_model(api, base, key));
+    return rcpp_result_gen;
+END_RCPP
+}
+// siu_core_panel
+std::string siu_core_panel(const std::string& report_text, const std::string& parsed_json, int mode, std::vector<std::string> readers, std::vector<std::string> auditors, int num_readers, int num_auditors, int reader_concurrency, bool auditor_sequential, const std::string& reader_granularity, const std::string& auditor_granularity, bool health_check, const std::string& api, const std::string& base, const std::string& key, double timeout_s, double temperature, SEXP chat_fn);
+RcppExport SEXP _rmorie_siu_core_panel(SEXP report_textSEXP, SEXP parsed_jsonSEXP, SEXP modeSEXP, SEXP readersSEXP, SEXP auditorsSEXP, SEXP num_readersSEXP, SEXP num_auditorsSEXP, SEXP reader_concurrencySEXP, SEXP auditor_sequentialSEXP, SEXP reader_granularitySEXP, SEXP auditor_granularitySEXP, SEXP health_checkSEXP, SEXP apiSEXP, SEXP baseSEXP, SEXP keySEXP, SEXP timeout_sSEXP, SEXP temperatureSEXP, SEXP chat_fnSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const std::string& >::type report_text(report_textSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type parsed_json(parsed_jsonSEXP);
+    Rcpp::traits::input_parameter< int >::type mode(modeSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type readers(readersSEXP);
+    Rcpp::traits::input_parameter< std::vector<std::string> >::type auditors(auditorsSEXP);
+    Rcpp::traits::input_parameter< int >::type num_readers(num_readersSEXP);
+    Rcpp::traits::input_parameter< int >::type num_auditors(num_auditorsSEXP);
+    Rcpp::traits::input_parameter< int >::type reader_concurrency(reader_concurrencySEXP);
+    Rcpp::traits::input_parameter< bool >::type auditor_sequential(auditor_sequentialSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type reader_granularity(reader_granularitySEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type auditor_granularity(auditor_granularitySEXP);
+    Rcpp::traits::input_parameter< bool >::type health_check(health_checkSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type api(apiSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type base(baseSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type key(keySEXP);
+    Rcpp::traits::input_parameter< double >::type timeout_s(timeout_sSEXP);
+    Rcpp::traits::input_parameter< double >::type temperature(temperatureSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type chat_fn(chat_fnSEXP);
+    rcpp_result_gen = Rcpp::wrap(siu_core_panel(report_text, parsed_json, mode, readers, auditors, num_readers, num_auditors, reader_concurrency, auditor_sequential, reader_granularity, auditor_granularity, health_check, api, base, key, timeout_s, temperature, chat_fn));
+    return rcpp_result_gen;
+END_RCPP
+}
 // siu_http_get
 std::string siu_http_get(std::string url, int timeout_s);
 RcppExport SEXP _rmorie_siu_http_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
@@ -1223,6 +1384,18 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_svm_decision_cpp", (DL_FUNC) &_rmorie_morie_svm_decision_cpp, 8},
     {"_rmorie_morie_tree_fit_cpp", (DL_FUNC) &_rmorie_morie_tree_fit_cpp, 9},
     {"_rmorie_morie_tree_predict_cpp", (DL_FUNC) &_rmorie_morie_tree_predict_cpp, 2},
+    {"_rmorie_siu_core_html_to_text", (DL_FUNC) &_rmorie_siu_core_html_to_text, 1},
+    {"_rmorie_siu_core_parse_html", (DL_FUNC) &_rmorie_siu_core_parse_html, 1},
+    {"_rmorie_siu_core_to_iso_date", (DL_FUNC) &_rmorie_siu_core_to_iso_date, 1},
+    {"_rmorie_siu_core_strip_boilerplate", (DL_FUNC) &_rmorie_siu_core_strip_boilerplate, 1},
+    {"_rmorie_siu_core_resolve_so", (DL_FUNC) &_rmorie_siu_core_resolve_so, 1},
+    {"_rmorie_siu_core_schema", (DL_FUNC) &_rmorie_siu_core_schema, 0},
+    {"_rmorie_siu_core_get", (DL_FUNC) &_rmorie_siu_core_get, 2},
+    {"_rmorie_siu_core_backend", (DL_FUNC) &_rmorie_siu_core_backend, 3},
+    {"_rmorie_siu_core_models", (DL_FUNC) &_rmorie_siu_core_models, 3},
+    {"_rmorie_siu_core_chat", (DL_FUNC) &_rmorie_siu_core_chat, 7},
+    {"_rmorie_siu_core_default_model", (DL_FUNC) &_rmorie_siu_core_default_model, 3},
+    {"_rmorie_siu_core_panel", (DL_FUNC) &_rmorie_siu_core_panel, 18},
     {"_rmorie_siu_http_get", (DL_FUNC) &_rmorie_siu_http_get, 2},
     {"_rmorie_siu_curl_version", (DL_FUNC) &_rmorie_siu_curl_version, 0},
     {"_rmorie_siu_http_get_many", (DL_FUNC) &_rmorie_siu_http_get_many, 5},
