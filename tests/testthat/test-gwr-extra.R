@@ -1,0 +1,16 @@
+u <- .morie_random_uniform(150, seed = 13, stream = 0)
+P <- cbind(10 * u[1:30], 10 * u[31:60])
+X <- cbind(1, u[61:90], u[91:120])
+y <- as.vector(1 + (1 + 0.2 * P[, 1]) * X[, 2] - 2 * X[, 3] + 0.2 * u[121:150])
+
+test_that("GWR extras recompute", {
+  r <- GwrPredict(y, X, P, X[1:5, ], P[1:5, ], 4)
+  expect_equal(r$prediction, GWRBasic(y, X, P, 4)$fitted[1:5], tolerance = 1e-10)
+  f <- GwrFTests(y, X, P, 4)
+  expect_equal(f$F4, f$rss_gwr / f$rss_ols, tolerance = 1e-15)
+  s <- GwSummary(cbind(X[, 2], y), P, 1e7, kernel = "gaussian")
+  expect_equal(s$mean[[1]][1], mean(X[, 2]), tolerance = 1e-9)
+  expect_equal(s$cov[[1]], cov(X[, 2], y), tolerance = 1e-8)
+  cl <- GwrCollinearity(X, P, 1e6, kernel = "gaussian")
+  expect_true(all(cl$local_cn >= 1))
+})
