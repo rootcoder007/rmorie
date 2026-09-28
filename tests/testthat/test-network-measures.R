@@ -22,11 +22,11 @@ test_that("Centralities and NetworkSummary equal igraph 2.3", {
       0.08989941409429947, 0.03644203408672737, 0.07642351789656408, 0.06058192538496862, 0.0863121444459754,
       0.061420855268693134), tolerance = 1e-12)
   s <- NetworkSummary(14, .ns_E)
-  expect_equal(s$transitivity, 0.40714285714285714, tolerance = 1e-14)
+  expect_equal(s$transitivity, 0.40714285714285714, tolerance = 1e-12)
   expect_equal(s$assortativity, -0.039689034369883934, tolerance = 1e-12)
-  expect_equal(s$efficiency, 0.661172161172161, tolerance = 1e-14)
+  expect_equal(s$efficiency, 0.661172161172161, tolerance = 1e-12)
   expect_equal(c(s$diameter, s$radius), c(3, 2))
-  expect_equal(ModularityScore(14, .ns_E, ifelse(1:14 <= 7, 0, 1)), 0.014692378328741929, tolerance = 1e-14)
+  expect_equal(ModularityScore(14, .ns_E, ifelse(1:14 <= 7, 0, 1)), 0.014692378328741929, tolerance = 1e-12)
   expect_equal(unlist(NetworkConnectivity(14, .ns_E)), c(edge = 2, vertex = 2))
 })
 

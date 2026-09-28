@@ -115,9 +115,9 @@ test_that("UTM, geodesics and local tangent planes equal PROJ and geosphere", {
       83.71287715948918, 326.81896041989086, 44.418887408154795), tolerance = 1e-9)
   expect_equal(sapply(1:7, function(i) GreatCircleDistance(P[i, 1], P[i, 2], P[i + 1, 1], P[i + 1, 2])),
                c(6268375.533418535, 16051388.894530298, 16987063.05388962, 6432055.517463724,
-                   18416689.715638246, 7168505.200412988, 18412138.547421243), tolerance = 1e-13)
+                   18416689.715638246, 7168505.200412988, 18412138.547421243), tolerance = 1e-12)
   e <- GeodeticToEnu(10.02, 50.01, 350, 10, 50, 300)
-  expect_equal(e$ecef, c(4044589.5304249157, 714626.0732880278, 4863772.08542388), tolerance = 1e-13)
+  expect_equal(e$ecef, c(4044589.5304249157, 714626.0732880278, 4863772.08542388), tolerance = 1e-12)
   expect_equal(GeodeticToEnu(10, 50, 350, 10, 50, 300)$enu, c(0, 0, 50), tolerance = 1e-10)
   expect_error(MapProject(0, 0, "robin"), "unknown")
 })

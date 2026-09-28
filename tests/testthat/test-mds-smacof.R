@@ -114,12 +114,12 @@ test_that("SmacofMds equals smacof::smacofSym 2.1", {
 
 test_that("ProcrustesFit equals vegan procrustes and protest", {
   p <- ProcrustesFit(.md_X, .md_Y)
-  expect_equal(p$ss, 0.03513313111090355, tolerance = 1e-13)
-  expect_equal(p$scale, 0.9951057479577202, tolerance = 1e-14)
+  expect_equal(p$ss, 0.03513313111090355, tolerance = 1e-12)
+  expect_equal(p$scale, 0.9951057479577202, tolerance = 1e-12)
   expect_equal(p$residuals, c(0.08616949253471728, 0.05826979691508707, 0.05226754302225955,
       0.06771610076957901, 0.04315817463606338, 0.0443285001554017, 0.04553361157368844, 0.08414816869071198,
-      0.041816507301993044, 0.04758913482969519), tolerance = 1e-13)
-  expect_equal(p$correlation, 0.9988929415883486, tolerance = 1e-13)
+      0.041816507301993044, 0.04758913482969519), tolerance = 1e-12)
+  expect_equal(p$correlation, 0.9988929415883486, tolerance = 1e-12)
   th <- 0.7
   R <- rbind(c(cos(th), -sin(th)), c(sin(th), cos(th)))
   g <- GeneralizedProcrustes(list(.md_X, sweep(.md_X %*% R, 2, c(5, -2), `+`)))

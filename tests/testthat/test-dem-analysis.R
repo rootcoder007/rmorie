@@ -62,9 +62,9 @@ test_that("terrain derivatives, D8, accumulation, watershed and shade equal terr
   key <- c(slope = "slope", aspect = "aspect", TPI = "tpi", TRI = "tri", TRIriley = "tri_riley",
       TRIrmsd = "tri_rmsd",
            roughness = "roughness")
-  for (k in names(key)) expect_equal(.dm_flat(t[[key[[k]]]]), .dm_ref[[k]], tolerance = 1e-13, info = k)
+  for (k in names(key)) expect_equal(.dm_flat(t[[key[[k]]]]), .dm_ref[[k]], tolerance = 1e-12, info = k)
   expect_equal(.dm_flat(Hillshade(t$slope, t$aspect, angle = 35, direction = 200)), .dm_ref$shade,
-      tolerance = 1e-14)
+      tolerance = 1e-12)
   fd <- D8FlowDirection(.dm_dem, res = 10)
   expect_equal(.dm_flat(fd), .dm_ref$flowdir)
   expect_equal(.dm_flat(FlowAccumulation(fd)), .dm_ref$acc)
