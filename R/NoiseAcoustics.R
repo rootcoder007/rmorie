@@ -106,6 +106,7 @@ AircraftDnl <- function(sel_day, sel_night = numeric(0)) {
 #' @param band Octave midband frequency (63 to 8000).
 #' @param sources,receivers Two-column coordinate matrices.
 #' @param min_distance Minimum distance.
+#' @param levels Levels to classify into bands.
 #' @param breaks Band limits.
 #' @param population Optional counts.
 #' @return Numeric or list.

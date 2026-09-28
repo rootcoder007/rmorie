@@ -1,22 +1,4 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Isotonic regression via PAVA (Barlow et al. 1972)
-#'
-#' Returns the non-decreasing (or non-increasing) weighted least-squares fit
-#' by the pool-adjacent-violators algorithm (each pooled block at its
-#' weighted mean; equal to stats::isoreg for unit weights).
-#'
-#' @param x numeric predictor.
-#' @param y numeric outcome.
-#' @param weights optional non-negative weights.
-#' @param increasing logical (default TRUE).
-#' @return list: x_sorted, fitted, residuals, sse, r2, n, method.
-#' @keywords internal
-#' @examples
-#' x <- 0:9
-#' y <- c(1, 3, 2, 5, 4, 6, 7, 8, 7, 10)
-#' res <- isotn(x, y)
-#' res$fitted
-#' @export
 .isotn_pava <- function(y, w) {
   v <- numeric(0)
   wt <- numeric(0)
@@ -40,6 +22,24 @@
   rep(v, sz)
 }
 
+#' Isotonic regression via PAVA (Barlow et al. 1972)
+#'
+#' Returns the non-decreasing (or non-increasing) weighted least-squares fit
+#' by the pool-adjacent-violators algorithm (each pooled block at its
+#' weighted mean; equal to stats::isoreg for unit weights).
+#'
+#' @param x numeric predictor.
+#' @param y numeric outcome.
+#' @param weights optional non-negative weights.
+#' @param increasing logical (default TRUE).
+#' @return list: x_sorted, fitted, residuals, sse, r2, n, method.
+#' @keywords internal
+#' @examples
+#' x <- 0:9
+#' y <- c(1, 3, 2, 5, 4, 6, 7, 8, 7, 10)
+#' res <- isotn(x, y)
+#' res$fitted
+#' @export
 isotn <- function(x, y, weights = NULL, increasing = TRUE) {
   x <- as.numeric(x)
   y <- as.numeric(y)
