@@ -1,4 +1,4 @@
-.gwr_kernel <- function(d, b, kernel) {
+.gwrb_kernel <- function(d, b, kernel) {
   switch(kernel,
     gaussian = exp(d^2 / (-2 * b^2)),
     exponential = exp(-d / b),
@@ -31,7 +31,7 @@ GWRKernelWeights <- function(dists, bw, kernel = "bisquare", adaptive = FALSE) {
   } else {
     bw
   }
-  .gwr_kernel(d, b, kernel)
+  .gwrb_kernel(d, b, kernel)
 }
 
 #' Geographically weighted regression with its diagnostics
