@@ -1,0 +1,11 @@
+test_that("resampling clustering recovers separated groups", {
+  u <- .morie_random_uniform(60, seed = 13, stream = 0)
+  X <- cbind(c(u[1:15], u[16:30] + 6), c(u[31:45], u[46:60] + 6))
+  truth <- rep(1:2, each = 15)
+  r <- ConsensusClustering(X, 2, n_resamples = 20)
+  expect_identical(r$cluster, truth)
+  expect_equal(r$cluster_consensus, c(1, 1), tolerance = 1e-12)
+  expect_identical(EvidenceAccumulation(X, n_runs = 20, k_range = c(2, 5))$cluster, truth)
+  s <- ClusterStability(X, 2, n_boot = 10)
+  expect_equal(s$mean_jaccard, vapply(s$jaccard, mean, 0), tolerance = 1e-12)
+})
