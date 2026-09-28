@@ -1,0 +1,10 @@
+test_that("PossibilisticFcm reaches the ppclust::pfcm fixed point", {
+  skip_if_not_installed("ppclust")
+  u <- .morie_random_uniform(120, seed = 5, stream = 0)
+  X <- cbind(c(u[1:30] * 2, u[31:60] * 2 + 1.5), c(u[61:90] * 2, u[91:120] * 2 + 1))
+  V0 <- rbind(c(0.5, 0.5), c(2.5, 2.5))
+  ours <- PossibilisticFcm(X, V0)
+  ref <- ppclust::pfcm(X, centers = V0, a = 1, b = 1, m = 2, eta = 2, K = 1)
+  o <- order(ref$v[, 1])
+  expect_equal(unname(ours$centers[order(ours$centers[, 1]), ]), unname(ref$v[o, ]), tolerance = 1e-4)
+})
