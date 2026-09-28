@@ -1,0 +1,11 @@
+test_that("drug-likeness filters on their boundaries", {
+  expect_equal(LipinskiRuleOfFive(500, 5, 5, 10)$violations, 0)
+  expect_true(LipinskiRuleOfFive(500.1, 5, 5, 10)$passes)
+  expect_false(LipinskiRuleOfFive(501, 5.1, 5, 10)$passes)
+  expect_true(VeberRules(10, psa = 140)$passes)
+  expect_false(VeberRules(9, hbond_total = 13)$passes)
+  expect_false(EganEgg(131.7, 2)$passes)
+  r <- OralBioavailabilityRules(480, 5.5, 3, 8, 12, 150)
+  expect_equal(c(r$lipinski, r$veber, r$egan), c(TRUE, FALSE, FALSE))
+  expect_error(VeberRules(5), "psa")
+})
