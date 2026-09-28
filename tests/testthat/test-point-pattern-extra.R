@@ -1,0 +1,17 @@
+u <- .morie_random_uniform(120, seed = 23, stream = 0)
+P <- cbind(u[1:40], u[41:80])
+mk <- ifelse(u[81:120] < 0.5, "a", "b")
+
+test_that("point-pattern extras recompute", {
+  r <- KnnDistances(P, 3)
+  D <- as.matrix(dist(P))
+  expect_equal(r$distance, unname(apply(D, 1, function(d) sort(d)[4])), tolerance = 1e-15)
+  q <- QuadratTest(P, c(0, 1, 0, 1), 3, 2)
+  expect_equal(q$statistic, sum((q$counts - 40 / 6)^2 / (40 / 6)), tolerance = 1e-12)
+  cnt <- c(3, 0, 5, 1, 1, 9, 0, 2)
+  expect_equal(MorisitaIndex(cnt)$imor, 8 * (sum(cnt^2) - 21) / (21^2 - 21), tolerance = 1e-15)
+  s <- SegregationTest(P, mk, 0.1, nsim = 9, seed = 3)
+  expect_equal(s$p_value, (1 + sum(s$simulated >= s$statistic)) / 10)
+  expect_equal(PottsGibbs(3, 3, 2, 50, sweeps = 5, init = matrix(0, 3, 3))$like_pairs[5], 12L)
+  expect_equal(exp(PottsExact(1, 2, 2, 0)$log_z), 4, tolerance = 1e-12)
+})
