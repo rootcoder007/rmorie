@@ -1,0 +1,15 @@
+test_that("electoral systems recompute", {
+  expect_identical(ProportionalSeats(c(100000, 80000, 30000, 20000), 8)$seats, c(4L, 3L, 1L, 0L))
+  v <- c(47000, 16000, 15800, 12000, 6100, 3100)
+  expect_identical(ProportionalSeats(v, 10, "hare")$seats, c(5L, 2L, 1L, 1L, 1L, 0L))
+  expect_identical(ProportionalSeats(v, 10, "droop")$seats, c(5L, 2L, 2L, 1L, 0L, 0L))
+  u <- .morie_random_uniform(60, seed = 6, stream = 0)
+  vl <- 0.3 + 0.4 * u[1:20]
+  P <- ifelse(vl > 0.5, 1, -1)
+  I <- ifelse(u[21:40] > 0.3, P, 0)
+  vv <- 0.1 + 0.8 * vl + 0.01 * P + 0.03 * I + 0.05 * (u[41:60] - 0.5)
+  r <- GelmanKingIncumbency(vv, vl, P, I)
+  fit <- coef(summary(lm(vv ~ vl + P + I)))
+  expect_equal(r$coefficients, unname(fit[, 1]), tolerance = 1e-10)
+  expect_equal(r$se, unname(fit[, 2]), tolerance = 1e-10)
+})
