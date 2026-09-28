@@ -1,0 +1,16 @@
+test_that("Bayesian SAR samplers: building blocks and reproducibility", {
+  x <- .sb_tnorm(0.3, 1.2, 0, Inf, 0.37)
+  expect_equal((stats::pnorm((x - 0.3) / 1.2) - stats::pnorm(-0.25)) / (1 - stats::pnorm(-0.25)), 1 - 0.37,
+               tolerance = 1e-9)
+  W <- rbind(c(0, 1, 0, 0, 0), c(0.5, 0, 0.5, 0, 0), c(0, 0.5, 0, 0.5, 0), c(0, 0, 0.5, 0, 0.5), c(0, 0, 0, 1, 0))
+  g <- c(-0.8, 0.35, 0.9)
+  expect_equal(.sb_logdet_grid(W, g), vapply(g, function(r) log(det(diag(5) - r * W)), numeric(1)), tolerance = 1e-12)
+  expect_equal(.sb_draw_rho(c(-0.5, 0, 0.5), c(0, 0, 0), log(c(1, 2, 1)), 0, 0, 0, 0, 0.5), 0)
+  X <- cbind(1, c(1.2, 0.4, -0.3, -0.9, 0.1))
+  a <- SarProbitGibbs(c(1, 1, 0, 0, 1), X, W, ndraw = 30, burn_in = 5, seed = 4)
+  b <- SarProbitGibbs(c(1, 1, 0, 0, 1), X, W, ndraw = 30, burn_in = 5, seed = 4)
+  expect_identical(a$rho_draws, b$rho_draws)
+  o <- SarOrderedProbitGibbs(c(3, 2, 1, 1, 2), X, W, ndraw = 30, burn_in = 5, seed = 1)
+  expect_equal(o$cutpoints[1], 0)
+  expect_error(SarProbitGibbs(c(1, 0, 1, 0, 1), X, W, method = "gibbs"), "method")
+})
