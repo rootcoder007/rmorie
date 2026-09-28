@@ -22,7 +22,8 @@ test_that("TspTour exact optimum is no longer than TSP's best heuristic tour", {
   pts <- rbind(c(0, 0), c(3, 1), c(6, 0), c(7, 4), c(4, 6), c(1, 5), c(2, 2.5), c(5, 3), c(3.5, 4))
   D <- as.matrix(stats::dist(pts))
   ex <- TspTour(D)
-  ref <- TSP::solve_TSP(TSP::TSP(D), method = "two_opt", start = 1L)
+  set.seed(1)  # two_opt improves a random initial tour
+  ref <- TSP::solve_TSP(TSP::TSP(D), method = "two_opt")
   expect_lte(ex$length, TSP::tour_length(ref) + 1e-12)
   expect_equal(ex$length, TSP::tour_length(TSP::TOUR(ex$tour, tsp = TSP::TSP(D))))
 })

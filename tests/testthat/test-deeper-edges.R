@@ -114,15 +114,14 @@ test_that("morie_did_event_study with custom reference period runs", {
   skip_heavy()
   df <- make_did_panel(n_units = 30L, n_periods = 6L,
                         tau = 0.5, seed = 8L)
-  out <- tryCatch(
-    morie_did_event_study(df, "y", "unit", "time", "treat_time",
-                            reference_period = -1L),
-    error = function(e) e)
-  if (inherits(out, "error")) {
-    skip(sprintf("event_study reference error: %s",
-                 conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.data.frame(out))
+  out <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
+                               reference_period = -1L)
+  cf <- out$coefficients
+  expect_equal(cf$estimate[cf$relative_time == -1], 0)
+  # never-treated units sit in the reference period, not a -leads bin
+  expect_false(any(is.na(out$details$fit$beta)))
+  expect_equal(sort(cf$relative_time), c(-3, -2, -1, 0, 1, 2))
+  expect_true(is.finite(out$pre_trend_f_stat))
 })
 
 test_that("morie_did_bacon_decomposition handles a balanced 2-group panel", {

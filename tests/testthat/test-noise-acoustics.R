@@ -13,7 +13,7 @@ test_that("level statistics and day-evening-night indicators", {
 
 test_that("ISO 9613 propagation terms", {
   f <- 1000 * 10^(0.3 * (-4:3))
-  expect_equal(1000 * AtmosphericAbsorption(f), c(0.1, 0.3, 1.1, 2.8, 5.0, 9.0, 22.9, 76.6), tolerance = 0.05, scale = 1)
+  expect_lte(max(abs(1000 * AtmosphericAbsorption(f) - c(0.1, 0.3, 1.1, 2.8, 5.0, 9.0, 22.9, 76.6))), 0.05)
   d <- AttenuationDistance(100, 40, alpha = 0.01)
   expect_equal(PointSourceLevel(100, d, alpha = 0.01), 40, tolerance = 1e-9)
   expect_equal(round(unlist(GroundAttenuation(200, 2, 2)), 6), c(A_gr = 4.43, D_omega = 3.009432))

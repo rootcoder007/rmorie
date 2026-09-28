@@ -90,8 +90,11 @@
   se <- rep(NA_real_, ncol(Xd))
   se[keep] <- sqrt(pmax(diag(V), 0))
   names(beta) <- names(se) <- colnames(Xd)
+  # vcov is indexed like beta: aliased columns get NA rows and columns
+  Vfull <- matrix(NA_real_, ncol(Xd), ncol(Xd), dimnames = list(colnames(Xd), colnames(Xd)))
+  Vfull[keep, keep] <- V
   list(
-    beta = beta, se = se, vcov = V, keep = keep, residuals = resid,
+    beta = beta, se = se, vcov = Vfull, keep = keep, residuals = resid,
     n = n, n_clusters = G, df_t = G - 1L,
     n_units = n_unit, n_periods = n_time
   )

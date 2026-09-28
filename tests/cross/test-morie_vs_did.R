@@ -82,6 +82,30 @@ test_that("native event study reproduces fixest::feols + i()", {
   expect_equal(m$std_error, m$se, tolerance = 1e-10)
 })
 
+test_that("event study with never-treated units and truncation equals fixest::feols", {
+  skip_if_not_installed("fixest")
+  set.seed(8)
+  n_u <- 30L
+  n_t <- 6L
+  d <- expand.grid(time = seq_len(n_t), unit = seq_len(n_u))
+  g <- rep(c(Inf, 4, 5), length.out = n_u)
+  d$treat_time <- g[d$unit]
+  d$y <- rnorm(n_u)[d$unit] + 0.1 * d$time + 0.5 * (d$time >= d$treat_time) + rnorm(nrow(d))
+  mine <- morie_did_event_study(d, "y", "unit", "time", "treat_time",
+                                reference_period = -1L, leads = 2L, lags = 1L)
+  rt <- d$time - d$treat_time
+  rt <- pmin(pmax(rt, -2), 1)
+  rt[!is.finite(d$time - d$treat_time)] <- -1
+  d$rt <- rt
+  m <- fixest::feols(y ~ i(rt, ref = -1) | unit + time, d, cluster = ~unit)
+  b <- mine$details$fit$beta
+  expect_false(any(is.na(b)))
+  expect_equal(unname(b), unname(stats::coef(m)), tolerance = 1e-10)
+  expect_equal(as.numeric(mine$details$fit$se), as.numeric(fixest::se(m)), tolerance = 1e-10)
+  w <- fixest::wald(m, keep = "::-2", print = FALSE)
+  expect_equal(mine$pre_trend_f_stat, w$stat, tolerance = 1e-10)
+})
+
 test_that("native ATT(g,t) reproduces did::att_gt (att + analytic se)", {
   skip_if_not_installed("did")
   for (cg in c("nevertreated", "notyettreated")) {

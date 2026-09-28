@@ -584,8 +584,10 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
   g_num[g_num == 0] <- Inf
   rel_time <- as.numeric(df[[time]]) - g_num
   # Truncate to [-leads, lags] so dummies outside the window are absorbed.
+  # never-treated units (rel_time -Inf) join the reference period; truncating
+  # first would turn -Inf into the finite -leads bin
   rel_time_trunc <- pmin(pmax(rel_time, -leads), lags)
-  rel_time_trunc[!is.finite(rel_time_trunc)] <- reference_period
+  rel_time_trunc[!is.finite(rel_time)] <- reference_period
   df[["morie_rel_time"]] <- rel_time_trunc
   cluster_var <- if (!is.null(cluster)) cluster else unit
   # Relative-time dummies, reference period dropped
