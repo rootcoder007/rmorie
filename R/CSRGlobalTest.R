@@ -30,7 +30,7 @@
 #' \code{mad.test} with \code{Lest} and \code{use.theo = TRUE}. The null
 #' distribution comes from \code{nsim} binomial patterns drawn from Philox
 #' stream s of \code{seed} (identical to the Python arm); p-value
-#' (1 + #{T_sim >= T_obs}) / (nsim + 1).
+#' (1 + number of simulated T >= observed T) / (nsim + 1).
 #'
 #' @param points Two-column matrix of coordinates.
 #' @param window c(xmin, xmax, ymin, ymax).

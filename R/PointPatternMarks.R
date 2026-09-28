@@ -172,7 +172,7 @@ MarkVariogram <- function(points, marks, window, r = NULL, rmax = NULL, correcti
 #' discrepancy is the largest (\code{"mad"}) or integrated squared
 #' (\code{"dclf"}) deviation of \eqn{k_{mm}} from 1 over rmin <= r <= rmax (the integral
 #' is (rmax - rmin) times the mean squared deviation, as spatstat);
-#' p-value (1 + #{T_sim >= T_obs}) / (nsim + 1). Permutations are
+#' p-value (1 + number of simulated T >= observed T) / (nsim + 1). Permutations are
 #' Fisher-Yates shuffles from Philox stream s of \code{seed}, identical to
 #' the Python arm.
 #'

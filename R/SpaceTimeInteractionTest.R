@@ -5,7 +5,7 @@
 #' expectation when space and time are independent; its null distribution
 #' comes from permuting the event times over the fixed locations, as
 #' \code{splancs::stmctest} (Diggle et al. 1995). p-value
-#' (1 + #{T_sim >= T_obs}) / (nsim + 1). Permutations are Fisher-Yates
+#' (1 + number of simulated T >= observed T) / (nsim + 1). Permutations are Fisher-Yates
 #' shuffles from Philox stream k of \code{seed}, identical to the Python
 #' arm (splancs uses \code{sample}). Pairs count at distance <= s and <= t in
 #' every bin; splancs drops pairs exactly at the largest s or t, so the two
