@@ -1,0 +1,11 @@
+test_that("routing recomputes", {
+  E <- rbind(c(0, 1, 2), c(1, 2, 1.5), c(2, 3, 2.2), c(3, 0, 1.1), c(0, 2, 2.9), c(1, 4, 0.7), c(4, 5, 1.3), c(5, 2, 0.4), c(3, 5, 3.1))
+  r <- ChinesePostman(6, E)
+  expect_equal(r$length, sum(E[, 3]) + r$added_length, tolerance = 1e-12)
+  expect_equal(r$circuit[1], r$circuit[length(r$circuit)])
+  P <- rbind(c(0, 0), c(3, 0), c(3, 4))
+  s <- StochasticRouteCost(c(1, 2), P, list(c("1" = 0.5, "3" = 0.5), c("1" = 0.5, "3" = 0.5)), 4)
+  expect_equal(s$expected_length, 14.5, tolerance = 1e-12)
+  pd <- PickupDeliveryInsertion(rbind(c(0, 0), c(1, 0), c(2, 0), c(1, 1), c(2, 1)), rbind(c(1, 2, 1), c(3, 4, 1)), 2)
+  expect_true(all(vapply(pd$routes, function(r) match(1, r) < match(2, r), TRUE)))
+})
