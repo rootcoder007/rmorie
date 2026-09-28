@@ -124,3 +124,24 @@ test_that("PolygonContiguity, RhoBounds, ErrorOperator, cardinality and diffnb m
   blk <- spdep::nb2mat(spdep::nb2blocknb(NULL, as.character(grp)), style = "B", zero.policy = TRUE)
   expect_equal(BlockWeights(grp), unname(blk), ignore_attr = TRUE)
 })
+
+test_that("LMSpatialTests equals lm.RStests and LocalGetisOrd equals localG", {
+  skip_if_not_installed("spdep")
+  nb <- spdep::cell2nb(6, 7, type = "rook")
+  lw <- spdep::nb2listw(nb, style = "W")
+  W <- spdep::listw2mat(lw)
+  n <- nrow(W)
+  u <- .morie_random_uniform(3 * n, seed = 13, stream = 0)
+  X <- cbind(1, u[1:n], u[n + 1:n])
+  y <- as.vector(1 + 2 * X[, 2] - X[, 3] + W %*% u[2 * n + 1:n] + u[2 * n + 1:n])
+  ref <- suppressWarnings(spdep::lm.RStests(stats::lm(y ~ X - 1), lw, test = "all"))
+  ours <- LMSpatialTests(y, X, W)
+  # spdep solves by QR, morie by the normal equations
+  for (k in names(ours)) expect_equal(ours[[k]]$statistic, unname(ref[[k]]$statistic), tolerance = 1e-10)
+  B <- spdep::nb2mat(nb, style = "B")
+  x <- u[1:n] + 0.1
+  expect_equal(LocalGetisOrd(x, B, star = FALSE)$z, as.numeric(spdep::localG(x, spdep::nb2listw(nb, style = "B"))),
+               tolerance = 1e-12)
+  expect_equal(LocalGetisOrd(x, B + diag(n))$z,
+               as.numeric(spdep::localG(x, spdep::nb2listw(spdep::include.self(nb), style = "B"))), tolerance = 1e-12)
+})
