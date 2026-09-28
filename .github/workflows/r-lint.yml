@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: r-lib/actions/setup-r@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
+      - uses: r-lib/actions/setup-r@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         with:
           r-version: 'release'
           use-public-rspm: true
@@ -73,7 +73,7 @@ jobs:
             printf 'http://archive.ubuntu.com/ubuntu/\tpriority:1\nhttp://azure.archive.ubuntu.com/ubuntu/\tpriority:2\n' | sudo tee /etc/apt/apt-mirrors.txt >/dev/null
           fi
           sudo apt-get update -qq 2>/dev/null || sudo apt-get update -qq || true
-      - uses: r-lib/actions/setup-r-dependencies@8efa4208c1e4a4837731d3c22011c7550205df2f # v2
+      - uses: r-lib/actions/setup-r-dependencies@f9a764fea8d5c63df6ef9a5c7795bf7deb5d7e05 # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         with:
