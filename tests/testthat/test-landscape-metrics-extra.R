@@ -1,0 +1,28 @@
+L <- matrix(c(1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1), 4, byrow = TRUE)
+
+test_that("PatchStructure hand values", {
+  r <- PatchStructure(L)
+  expect_equal(r$contig[3], ((2 + 8 + 3) / 3 - 1) / 12, tolerance = 1e-15)
+  expect_equal(r$circle[2], 1 - 1 / (pi * 0.5), tolerance = 1e-15)
+  expect_equal(r$circle[3], 1 - 3 / (pi * 2), tolerance = 1e-12)
+  expect_equal(round(r$core * 1e4, 9), c(3, 0, 0))
+  expect_equal(round(PatchStructure(L, consider_boundary = TRUE)$core * 1e4, 9), c(9, 0, 0))
+  expect_equal(r$frac[2], 1)
+  expect_error(PatchStructure(L, circle_method = "bad"))
+})
+
+test_that("ClassStructure, ProximityMetrics and LandscapeInformation", {
+  c <- ClassStructure(L)
+  p <- PatchStructure(L)
+  expect_equal(c$gyrate_am[2], 0.25 * p$gyrate[2] + 0.75 * p$gyrate[3], tolerance = 1e-15)
+  expect_true(is.nan(c$pafrac[1]))
+  G <- matrix(c(1, 0, 1, 0, 0, 0, 1, 0, 0), 3, byrow = TRUE)
+  r <- ProximityMetrics(G, 2, directions = 4)
+  expect_equal(r$prox, c(0, 0.5, 0.25, 0.25))
+  expect_equal(r$connect[2], 200 / 3)
+  s <- ProximityMetrics(G, 2, directions = 4, similarity = matrix(c(1, 0.5, 0.5, 1), 2))
+  expect_equal(s$simi[2], 0.5 * 6 + 0.5)
+  chk <- outer(1:6, 1:6, function(i, j) (i + j) %% 2)
+  I <- LandscapeInformation(chk)
+  expect_equal(c(I$ent, I$condent, I$mutinf), c(1, 0, 1), tolerance = 1e-15)
+})
