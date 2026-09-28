@@ -318,7 +318,8 @@ NelderMead <- function(f, x0, step = NULL, xtol = 1e-10, ftol = 1e-10, max_iter 
     WZ <- cm$W[Z, , drop = FALSE]
     v <- as.vector(cm$M %*% crossprod(WZ, r))
     N <- diag(ncol(WZ)) - cm$M %*% crossprod(WZ) / theta
-    v <- solve(N, v)
+    v <- tryCatch(solve(N, v), error = function(e) NULL)
+    if (is.null(v)) return(xc)
     du <- -r / theta - as.vector(WZ %*% v) / theta^2
   }
   alpha <- 1
@@ -379,7 +380,13 @@ LbfgsbMinimize <- function(f, x0, grad = NULL, lower = NULL, upper = NULL, m = 1
   conv <- pgn(x, g) <= pgtol
   if (conv) msg <- "projected gradient below pgtol"
   while (!conv && it < max_iter) {
-    cm <- .lb_compact(S, Y, theta)
+    cm <- tryCatch(.lb_compact(S, Y, theta), error = function(e) "singular")
+    if (identical(cm, "singular")) {
+      S <- list()
+      Y <- list()
+      theta <- 1
+      next
+    }
     cp <- .lb_cauchy(x, g, lo, hi, theta, cm)
     xb <- .lb_subspace(x, g, cp$xc, cp$c, lo, hi, theta, cm)
     d <- xb - x
