@@ -2,17 +2,24 @@
 % Please edit documentation in R/siu_fetch.R
 \name{morie_siu_parse_report}
 \alias{morie_siu_parse_report}
+\alias{morie_siu_parse_reports}
 \title{Parse one SIU director's report into the full 16-field schema}
 \usage{
-morie_siu_parse_report(html)
+morie_siu_parse_report(html, engine = "auto")
+
+morie_siu_parse_reports(htmls, engine = "auto")
 }
 \arguments{
 \item{html}{A length-1 character vector of raw report HTML, or the
 path to a saved report file.}
+
+\item{engine}{\code{"auto"}, \code{"bricklayer"} or \code{"native"}.}
+
+\item{htmls}{Character vector (or list) of report HTML or file paths.}
 }
 \value{
 A named character vector: the 16 schema fields plus
-\code{_language}.
+\code{_language} (a data frame for \code{morie_siu_parse_reports()}).
 }
 \description{
 Delegates to the compiled parser in the ecosystem's C/C++ foundation
@@ -23,10 +30,14 @@ deterministically and offline. This supersedes the conservative
 six-field regex parse used by \code{morie_siu_fetch_cases()}, which
 itself now routes through the same compiled parser when available.
 }
+\details{
+The parser runs in \pkg{rmoriebricklayer} when available
+(\code{engine = "auto"}), else in rmorie's native copy of the same C++
+core; \code{morie_siu_parse_reports()} parses many reports into a data
+frame (one row per report).
+}
 \examples{
-\dontshow{if (requireNamespace("rmoriebricklayer", quietly = TRUE) && exists("bricklayer_parse_siu", envir = asNamespace("rmoriebricklayer"))) withAutoprint(\{ # examplesIf}
 f <- morie_siu_parse_report(system.file("extdata",
-  "siu_synthetic_report.html", package = "rmoriebricklayer"))
+  "siu_synthetic_report.html", package = environmentName(environment(morie_siu_parse_report))))
 f[["number_of_subject_officers"]]
-\dontshow{\}) # examplesIf}
 }

@@ -4,12 +4,15 @@
 \alias{morie_siu_resolve_so}
 \title{Resolve a subject-official count: verified corpus first, rules second}
 \usage{
-morie_siu_resolve_so(text = NULL, drid = NULL)
+morie_siu_resolve_so(text = NULL, drid = NULL, engine = "auto")
 }
 \arguments{
 \item{text}{Plain report text (needed only for unreviewed reports).}
 
 \item{drid}{Report id; supply whenever known.}
+
+\item{engine}{\code{"auto"}, \code{"bricklayer"} or \code{"native"} for
+the rule-based step.}
 }
 \value{
 A list with \code{count} (integer, \code{NA} only when both corpus and
@@ -20,7 +23,8 @@ The correct order for the ecosystem: a report already in the
 panel-reviewed corpus (\pkg{rmoriedata}) returns its VERIFIED count --
 nothing re-derives an established answer. Only a report outside the
 corpus falls through to the deterministic rule set compiled in
-\pkg{rmoriebricklayer} (the foundation layer), whose rules were proven
+\pkg{rmoriebricklayer} (the foundation layer; rmorie's native copy of the
+same core when bricklayer is absent), whose rules were proven
 zero-wrong against all 2,182 reviewed reports; where even the rules
 cannot answer, the reading panel (\code{\link[=morie_siu_panel]{morie_siu_panel()}}) decides.
 }

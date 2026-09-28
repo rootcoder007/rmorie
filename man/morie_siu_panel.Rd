@@ -12,12 +12,16 @@ morie_siu_panel(
   reader_concurrency = 3L,
   granularity = c("all_fields", "per_field"),
   host = Sys.getenv("OLLAMA_HOST"),
-  timeout = 300
+  timeout = 300,
+  api = "",
+  base = host,
+  key = "",
+  chat = NULL
 )
 }
 \arguments{
 \item{html}{Report HTML (character), or a file path, or a drid (numeric)
-fetched via the bricklayer engine.}
+fetched via the bricklayer engine (or rmorie's native fetch).}
 
 \item{mode}{Panel mode 1-4 (see above). Default 4.}
 
@@ -31,14 +35,28 @@ fetched via the bricklayer engine.}
 \item{granularity}{\code{"all_fields"} (one pass per reader) or \code{"per_field"}
 (one focused read per schema field). Applies to readers and auditors.}
 
-\item{host}{Ollama server; default \code{Sys.getenv("OLLAMA_HOST")}.}
+\item{host}{Server URL (kept for compatibility; the same as \code{base});
+default \code{Sys.getenv("OLLAMA_HOST")}.}
 
 \item{timeout}{Per-call timeout in seconds (default 300).}
+
+\item{api}{\code{"ollama"} or \code{"openai"} (any OpenAI-compatible server:
+llama.cpp, vLLM, LM Studio, LocalAI, TGI, OpenRouter ...); empty uses
+\code{MORIE_LLM_API}, else \code{"ollama"}. See \code{\link[=morie_llm_backend]{morie_llm_backend()}}.}
+
+\item{base}{Server URL; empty falls back to the environment
+(\code{MORIE_LLM_BASE}, \code{OLLAMA_HOST}, \code{OPENAI_BASE_URL}, \code{LLM_API_BASE_URL}).}
+
+\item{key}{Bearer token; empty falls back to \code{MORIE_LLM_KEY} or the
+provider's key variable.}
+
+\item{chat}{Optional \verb{function(model, prompt)} returning the reply text --
+your own model, used instead of a server.}
 }
 \value{
 A list: \code{fields} (named character vector, the auditor's final
 values), \code{readers} (each reader's raw answers), \code{audit_chain} (each
-auditor's verdicts), \code{models} (who served).
+auditor's verdicts), \code{models} (who served, and the backend).
 }
 \description{
 The model tier of the SIU mining pipeline, for reports that are not yet
