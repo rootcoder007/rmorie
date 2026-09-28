@@ -1,0 +1,12 @@
+test_that("staffing models", {
+  expect_equal(round(ErlangC(3, 2), 6), 0.444444)
+  expect_equal(StaffingRequirement(c(1, 4), 1, level = 0.2)$units, c(3, 7))
+  p <- PatrolCarRequirement(2, 0.5, area = 16, response_speed = 20, target_response = 0.1)
+  expect_equal(c(p$queue, p$response, p$units), c(3, 2, 3))
+  s <- ShiftSchedule(c(2, 2, 3, 5, 5, 4), 3)
+  expect_equal(c(s$total, s$coverage), c(7, 2, 2, 3, 5, 5, 4))
+  expect_equal(round(ReliefFactor(151), 4), 1.7056)
+  w <- WorkloadStaffing(c(30, 10), c(45, 90), units_per_call = c(1, 2), relief = 1.7)
+  expect_equal(c(w$obligated_hours, w$on_duty), c(52.5, 13.125))
+  expect_error(ShiftSchedule(1:2, 3), "shift_length")
+})

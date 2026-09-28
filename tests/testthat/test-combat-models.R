@@ -1,0 +1,20 @@
+test_that("Lanchester models", {
+  o <- LanchesterSquareOutcome(100, 60, 0.01, 0.01)
+  expect_equal(c(o$survivors, round(o$duration, 6)), c(80, 69.314718))
+  s <- LanchesterSimulate(50, 80, 0.02, 0.05, t_end = 500, dt = 0.005)
+  expect_equal(s$ended_by, "x annihilated")
+  expect_equal(tail(s$y, 1), LanchesterSquareOutcome(50, 80, 0.02, 0.05)$survivors, tolerance = 1e-6)
+  lg <- LanchesterSimulate(100, 50, 0.1, 0.2, law = "logarithmic", t_end = 2, dt = 0.01)
+  expect_equal(tail(lg$x, 1), 100 * exp(-0.2), tolerance = 1e-9)
+  f <- LanchesterFit(c(100, 94, 88.36), c(60, 50, 40.6))
+  expect_equal(c(round(f$a, 6), f$b), c(0.105818, 0.1))
+  expect_error(LanchesterSimulate(1, 1, 1, 1, law = "bogus"), "law must be")
+})
+
+test_that("salvo and Blotto", {
+  s <- SalvoExchange(10, 8, alpha = 2, beta = 2, a1 = 2, b1 = 2, a3 = 1, b3 = 1)
+  expect_equal(c(s$A, s$B), c(10, 7, 8, 2))
+  expect_equal(BlottoPayoff(c(3, 3, 0), c(2, 2, 2))$payoff, 1)
+  br <- BlottoBestResponse(c(2, 2, 2), 6)
+  expect_equal(br$allocation, c(0, 3, 3))
+})

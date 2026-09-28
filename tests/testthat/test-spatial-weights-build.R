@@ -1,0 +1,15 @@
+P <- rbind(c(0, 0), c(1, 0), c(2.5, 0), c(0, 1.2), c(5, 5))
+
+test_that("weights constructions", {
+  q <- GridContiguity(3, 3)
+  expect_equal(c(sum(q[5, ]), sum(q[1, ])), c(8, 3))
+  expect_equal(GridContiguity(3, 3, "rook")[1, ], c(0, 1, 0, 1, 0, 0, 0, 0, 0))
+  expect_true(all(rowSums(GridContiguity(3, 3, "rook", torus = TRUE)) == 4))
+  expect_equal(DistanceBandWeights(P, 1.25, d1 = 1)[1, ], c(0, 0, 0, 1, 0))
+  expect_equal(KnnWeights(P, 2)[5, ], c(0, 0, 1, 1, 0))
+  expect_equal(round(KernelWeights(rbind(c(0, 0), c(1, 0), c(3, 0)), 2)[1, ], 6), c(1, 0.5625, 0))
+  expect_equal(SymmetrizeWeights(rbind(c(0, 2), c(0, 0)), "average"), rbind(c(0, 1), c(1, 0)))
+  cc <- WeightsComponents(DistanceBandWeights(P, 1.6))
+  expect_equal(c(cc$n_components, cc$component), c(2, 1, 1, 1, 1, 2))
+  expect_error(GridContiguity(2, 2, "bishop"), "queen or rook")
+})

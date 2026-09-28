@@ -1,0 +1,16 @@
+P3 <- rbind(c(0, 0, 0), c(1, 0.2, 0), c(0.3, 1.1, 0.5), c(1.4, 1.2, 0.9), c(0.5, 0.4, 1.6), c(2, 0.1, 1.1))
+Z <- c(1, 2.5, 1.8, 3.9, 2.2, 4.4)
+
+test_that("variogram extras", {
+  expect_equal(SampleVariogramNd(c(1, 2, 4), rbind(c(0, 0, 0), c(1, 0, 0), c(2, 0, 0)), c(0, 1.5, 2.5))$gamma, c(1.25, 4.5))
+  expect_equal(AnisotropicLag(c(1, 0, 0), ratio1 = 0.5), 2)
+  expect_equal(AnisotropicLag(c(1, 2, 2), 33, 20, 10), 3)
+  jk <- VariogramJackknife(c(1, 2, 4, 3), matrix(0:3), c(0, 1.5))
+  expect_equal(round(c(jk$gamma, jk$se), 6), c(1, 0.649519))
+  expect_equal(VariogramCloudBox(c(1, 2, 4, 3), matrix(0:3), c(0, 1.5))$median, 0.5)
+  fr <- VariogramFractal(c(1, 2, 4, 8), 3 * c(1, 2, 4, 8)^1.4, dim = 2)
+  expect_equal(c(fr$hurst, fr$fractal_dimension), c(0.7, 2.3))
+  expect_equal(WindowedSemivariance(c(0, 1, 0, 1, 5, 0), 1, window = 4, step = 2)$gamma, matrix(c(0.5, 7)))
+  env <- VariogramEnvelope(Z, P3, c(0, 1.2, 2.5), nsim = 39, seed = 3)
+  expect_true(all(env$lower <= env$upper))
+})
