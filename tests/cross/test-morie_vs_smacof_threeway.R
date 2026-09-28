@@ -1,0 +1,47 @@
+D1 <- rbind(c(0, 3, 4, 6, 5), c(3, 0, 5, 4, 2), c(4, 5, 0, 3, 6), c(6, 4, 3, 0, 4), c(5, 2, 6, 4, 0))
+D2 <- rbind(c(0, 2, 5, 6, 4), c(2, 0, 4, 5, 3), c(5, 4, 0, 2, 6), c(6, 5, 2, 0, 5), c(4, 3, 6, 5, 0))
+D3 <- rbind(c(0, 4, 3, 5, 6), c(4, 0, 6, 3, 2), c(3, 6, 0, 4, 5), c(5, 3, 4, 0, 3), c(6, 2, 5, 3, 0))
+
+test_that("SmacofIndDiff equals smacof::smacofIndDiff", {
+  skip_if_not_installed("smacof")
+  for (cc in c("indscal", "idioscal", "identity")) {
+    ref <- smacof::smacofIndDiff(list(D1, D2, D3), 2, constraint = cc)
+    r <- SmacofIndDiff(list(D1, D2, D3), 2, constraint = cc)
+    expect_equal(r$stress, ref$stress, tolerance = 1e-12)
+    expect_equal(r$niter, ref$niter)
+    expect_equal(r$sps, unname(ref$sps), tolerance = 1e-12)
+    expect_equal(r$spp, unname(ref$spp), tolerance = 1e-12)
+    expect_equal(lapply(r$cweights, abs), lapply(ref$cweights, function(m) abs(unname(m))), tolerance = 1e-10)
+    expect_equal(lapply(r$confdist, as.vector), lapply(ref$confdist, as.vector), tolerance = 1e-10)
+  }
+})
+
+test_that("MdsJackknife and MdsBootstrap (smacof method) equal jackmds and bootmds", {
+  skip_if_not_installed("smacof")
+  j <- smacof::jackmds(smacof::smacofSym(D1, 2))
+  r <- MdsJackknife(D1, method = "smacof")
+  expect_equal(c(r$stab, r$cross, r$disp, r$loss), c(j$stab, j$cross, j$disp, j$loss), tolerance = 1e-10)
+  expect_equal(r$niter, j$niter)
+  set.seed(11)
+  X <- matrix(rnorm(40 * 6), 40, 6) + rep(c(0, 1, 0, 2, 1, 0), each = 40) * rnorm(40)
+  set.seed(5)
+  idx <- lapply(1:20, function(i) sample(1:40, size = 40, replace = TRUE))
+  fit <- smacof::smacofSym(smacof::sim2diss(cor(X)), 2)
+  set.seed(5)
+  ref <- smacof::bootmds(fit, X, nrep = 20)
+  b <- MdsBootstrap(X, 2, method = "smacof", resamples = idx)
+  expect_equal(b$stressvec, ref$stressvec, tolerance = 1e-10)
+  expect_equal(b$bootci, unname(ref$bootci), tolerance = 1e-10)
+  expect_equal(b$stab, ref$stab, tolerance = 1e-10)
+  expect_equal(b$cov, unname(lapply(ref$cov, unname)), tolerance = 1e-8)
+})
+
+test_that("ProcrustesOblique equals GPArotation::targetQ", {
+  skip_if_not_installed("GPArotation")
+  A <- rbind(c(0.8, 0.1), c(0.7, 0.2), c(0.2, 0.9), c(0.1, 0.7), c(0.5, 0.5), c(0.3, 0.6))
+  B <- rbind(c(1, 0), c(1, 0), c(0, 1), c(0, 1), c(0.5, 0.5), c(NA, 1))
+  ref <- GPArotation::targetQ(A, Target = B, eps = 1e-12, maxit = 100000)
+  r <- ProcrustesOblique(A, B, eps = 1e-12)
+  expect_equal(r$loadings, unclass(unname(ref$loadings))[, 1:2], tolerance = 1e-9, ignore_attr = TRUE)
+  expect_equal(r$Phi, unname(ref$Phi), tolerance = 1e-9)
+})
