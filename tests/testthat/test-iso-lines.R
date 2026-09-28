@@ -1,0 +1,12 @@
+test_that("IsoLines on analytic surfaces", {
+  xs <- c(0, 1, 2, 3)
+  ys <- c(0, 0.5, 1)
+  z <- outer(xs, ys, function(a, b) a + 2 * b)
+  r <- IsoLines(xs, ys, z, c(1.5, 2.2))
+  expect_length(r$lines, 2)
+  expect_equal(r$length[2], sqrt(5))
+  expect_equal(round(IsoLines(0:2, 0:2, rbind(c(0, 0, 0), c(0, 2, 0), c(0, 0, 0)), 1)$length, 6), 2.828427)
+  sad <- IsoLines(0:1, 0:1, rbind(c(1, 0), c(0, 1)), 0.4)
+  expect_equal(sad$length, 2 * sqrt(2) * 0.4)
+  expect_error(IsoLines(0:1, 0:2, matrix(0, 2, 2), 1), "length")
+})

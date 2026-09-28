@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Isotonic regression via PAVA (Barlow et al. 1972)
 #'
-#' Returns the non-decreasing (or non-increasing) least-squares fit using
-#' the pool-adjacent-violators algorithm via stats::isoreg.
+#' Returns the non-decreasing (or non-increasing) weighted least-squares fit
+#' by the pool-adjacent-violators algorithm (each pooled block at its
+#' weighted mean; equal to stats::isoreg for unit weights).
 #'
 #' @param x numeric predictor.
 #' @param y numeric outcome.
@@ -16,6 +17,29 @@
 #' res <- isotn(x, y)
 #' res$fitted
 #' @export
+.isotn_pava <- function(y, w) {
+  v <- numeric(0)
+  wt <- numeric(0)
+  sz <- integer(0)
+  for (i in seq_along(y)) {
+    v <- c(v, y[i])
+    wt <- c(wt, w[i])
+    sz <- c(sz, 1L)
+    k <- length(v)
+    while (k > 1 && v[k - 1] > v[k]) {
+      tw <- wt[k - 1] + wt[k]
+      v[k - 1] <- (v[k - 1] * wt[k - 1] + v[k] * wt[k]) / tw
+      wt[k - 1] <- tw
+      sz[k - 1] <- sz[k - 1] + sz[k]
+      v <- v[-k]
+      wt <- wt[-k]
+      sz <- sz[-k]
+      k <- k - 1
+    }
+  }
+  rep(v, sz)
+}
+
 isotn <- function(x, y, weights = NULL, increasing = TRUE) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -28,13 +52,8 @@ isotn <- function(x, y, weights = NULL, increasing = TRUE) {
   xs <- x[ord]
   ys <- y[ord]
   ws <- weights[ord]
-  if (increasing) {
-    fit <- stats::isoreg(xs, ys)
-    fitted <- fit$yf
-  } else {
-    fit <- stats::isoreg(xs, -ys)
-    fitted <- -fit$yf
-  }
+  fitted <- .isotn_pava(if (increasing) ys else -ys, ws)
+  if (!increasing) fitted <- -fitted
   resid <- ys - fitted
   sse <- sum(ws * resid^2)
   sst <- sum(ws * (ys - stats::weighted.mean(ys, ws))^2)

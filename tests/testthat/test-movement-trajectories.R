@@ -1,0 +1,23 @@
+test_that("trajectory measures by hand", {
+  m <- TrajectoryMetrics(rbind(c(0, 0), c(3, 0), c(3, 4), c(0, 4)))
+  expect_equal(m$steps, c(3, 4, 3))
+  expect_equal(m$turning, c(pi / 2, pi / 2))
+  expect_equal(m$straightness, 0.4)
+  expect_equal(TrajectoryMetrics(rbind(c(0, 0), c(1, 0), c(1, -1)))$turning, -pi / 2)
+  expect_equal(MeanSquaredDisplacement(rbind(c(0, 0), c(1, 1), c(2, 2)), 1), 2)
+  f <- FirstPassageTime(cbind(0:4, 0), c(0, 2, 4, 6, 8), 1.5)
+  expect_equal(f[3], 6)
+  expect_true(all(is.nan(f[-3])))
+})
+
+test_that("walk models, OD matrices and parity values", {
+  w <- SimulateWalk(4000, "correlated", rho = 0.6, seed = 5)
+  m <- TrajectoryMetrics(w$track)
+  cbar <- mean(cos(m$turning))
+  expect_lt(abs(cbar - 0.6), 0.03)
+  lv <- SimulateWalk(20000, "levy", mu = 2.5, seed = 6)
+  expect_lt(abs(mean(log(lv$steps)) - 1 / 1.5), 0.02)
+  od <- OdMatrix(c("a", "a", "b", "c"), c("b", "b", "a", "a"), weights = c(1, 2, 3, 4))
+  expect_equal(od$matrix, rbind(c(0, 3, 0), c(3, 0, 0), c(4, 0, 0)))
+  expect_error(SimulateWalk(3, "brownian"), "kind")
+})

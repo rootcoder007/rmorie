@@ -1,0 +1,12 @@
+test_that("CircularSummary and VonmisesMle equal circular", {
+  skip_if_not_installed("circular")
+  u <- .morie_random_uniform(60, seed = 79, stream = 0)
+  th <- (2 + 2 * (u[1:40] - 0.5)) %% (2 * pi)
+  x <- circular::circular(th)
+  s <- CircularSummary(th)
+  expect_equal(s$rbar, circular::rho.circular(x), tolerance = 1e-14)
+  expect_equal(s$rayleigh_p, circular::rayleigh.test(x)$p.value, tolerance = 1e-12)
+  m <- suppressWarnings(circular::mle.vonmises(x))
+  expect_equal(VonmisesMle(th)$kappa, m$kappa, tolerance = 1e-13)
+  expect_equal(VonmisesMle(th)$se_kappa, m$se.kappa, tolerance = 1e-12)
+})

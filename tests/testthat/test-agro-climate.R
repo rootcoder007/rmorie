@@ -1,0 +1,13 @@
+test_that("agroclimatic indicators", {
+  expect_equal(GrowingDegreeDays(c(25, 32, 12), c(11, 20, 4), base = 10, upper = 30)$daily, c(8, 15, 1))
+  ch <- ChillAccumulation(c(-1, 2, 5, 8, 10, 14, 17, 20))
+  expect_equal(c(ch$chill_hours, ch$utah_units), c(2, 1.5))
+  expect_equal(round(LaiFromSavi(c(0.05, 0.4, 0.7)), 6), c(0, 0.780485, 6))
+  r <- RainfallAdequacy(c(30, 10), c(40, 50), kc = c(0.5, 1))
+  expect_equal(c(r$ratio, r$deficit), c(40 / 70, 0, 40))
+  expect_equal(GrowingSeasonLength(c(rep(0, 100), rep(10, 150), rep(0, 115))), 150)
+  expect_equal(GrowingSeasonLength(c(rep(0, 50), rep(9, 50), rep(0, 10), rep(9, 255))), 315)
+  expect_equal(GrowingSeasonLength(rep(0, 365)), 0)
+  cs <- ColdSpellDuration(c(1, 1, 1, 1, 1, 1, 1, 9, 1, 1, 9), 5)
+  expect_equal(c(cs$csdi, cs$spells), c(7, 1))
+})
