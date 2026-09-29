@@ -168,7 +168,8 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
                                            seed = 0) {
   m <- length(positions)
   n <- length(genotypes)
-  e <- .ghc_rng(seed)
+  # the reference arm's generator (survrsf._Rng), so draws match it
+  e <- .survrsf_rng(seed)
   post <- morie_mqtmpl_hmm_genotype_probabilities(genotypes, positions,
                                                    error_rate)
   out <- list()
@@ -176,15 +177,15 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
     draw <- list()
     for (i in seq_len(n)) {
       states <- integer(m)
-      states[m] <- if (.ghc_unif(e, 1L) < post[[i]][m, 2]) 1L else 0L
+      states[m] <- if (e$next_() < post[[i]][m, 2]) 1L else 0L
       for (j in (m - 1L):1) {
         r <- .ghc_haldane(as.numeric(positions[j + 1L]) -
                           as.numeric(positions[j]))
-        w <- c(post[[i]][j, 1] * (1 - r) +
-               post[[i]][j, 2] * r,
-               post[[i]][j, 1] * r +
-               post[[i]][j, 2] * (1 - r))
-        states[j] <- if (.ghc_unif(e, 1L) < w[2] / sum(w)) 1L else 0L
+        # backward sampling CONDITIONS on the state just drawn at j + 1:
+        # stay with 1 - r, switch with r
+        w <- c(post[[i]][j, 1] * (if (states[j + 1L] == 0L) 1 - r else r),
+               post[[i]][j, 2] * (if (states[j + 1L] == 1L) 1 - r else r))
+        states[j] <- if (e$next_() < w[2] / sum(w)) 1L else 0L
       }
       row <- numeric(length(grid))
       for (gi in seq_along(grid)) {
@@ -196,7 +197,8 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
         d2 <- max(as.numeric(positions[j + 1L]) - gpos, 0)
         pr <- .ghc_geno_prob(states[j], states[j + 1L],
                              .ghc_haldane(d1), .ghc_haldane(d2))
-        row[gi] <- if (.ghc_unif(e, 1L) < pr[2]) 1 else 0
+        # .ghc_geno_prob returns c(P(q = 1), P(q = 0))
+        row[gi] <- if (e$next_() < pr[1]) 1 else 0
       }
       draw[[length(draw) + 1L]] <- row
     }
@@ -290,7 +292,8 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
   a <- my - b * mg
   rss1 <- sum((y - (a + b * g))^2)
   rss1 <- max(rss1, 1e-300)
-  list(lod = 0.5 * (n - 2) * log(rss0 / rss1) * .GHC_MQTMPL_LOG10E)
+  # (n / 2) log10(RSS0 / RSS1), as the reference single_marker
+  list(lod = 0.5 * n * log(rss0 / rss1) * .GHC_MQTMPL_LOG10E)
 }
 
 #' @keywords internal
@@ -429,7 +432,7 @@ morie_mqtmpl_scanone <- function(y, markers, positions,
                 " individuals"))
   if (method == "imp")
     return(.ghc_mqtmpl_scan_imp(y, markers, positions, step,
-                                if (length(covariates) > 0L) 64L else 64L,
+                                mqtmpl_kw_n_imp(covariates),
                                 error_rate, 0))
   if (method == "mr") {
     out_pos <- c()
@@ -460,7 +463,7 @@ morie_mqtmpl_scanone <- function(y, markers, positions,
   list(estimate = res$peak_lod, peak_lod = res$peak_lod,
        peak_position = res$peak_position,
        position = res$position, lod = res$lod,
-       method_used = "em", n_covariates = ncol(cof),
+       method_used = "em", n_covariates = length(covariates),
        error_rate = as.numeric(error_rate),
        method = paste0("EM genome scan; Lander & Botstein (1989) via ",
                        "Broman et al. (2003)"))
@@ -492,12 +495,21 @@ morie_mqtmpl_permutation_threshold <- function(y, markers, positions,
   a <- as.numeric(alpha)
   if (a <= 0 || a >= 1)
     stop("mqtmpl: alpha must lie in (0, 1)")
-  e <- .ghc_rng(seed)
+  # seeded Fisher-Yates on the reference generator; sample.int drew from
+  # the session RNG and ignored `seed`
+  e <- .survrsf_rng(seed)
   maxima <- numeric(as.integer(n_perm))
   ys <- as.numeric(y)
   for (k in seq_len(as.integer(n_perm))) {
-    perm <- sample.int(length(ys))
-    perm_ys <- ys[perm]
+    perm_ys <- ys
+    if (length(ys) > 1L) {
+      for (i in (length(ys) - 1L):1L) {
+        j <- e$randint(i + 1L)
+        tmp <- perm_ys[i + 1L]
+        perm_ys[i + 1L] <- perm_ys[j + 1L]
+        perm_ys[j + 1L] <- tmp
+      }
+    }
     sc <- morie_mqtmpl_scanone(perm_ys, markers, positions, method, step)
     maxima[k] <- sc$peak_lod
   }
@@ -886,22 +898,8 @@ mqtmpl_method_status <- function(method = NULL) {
 mqtmpl_permutation_threshold <- function(y, markers, positions, n_perm = 100,
                                          alpha = 0.05, method = "em",
                                          step = 0.05, seed = 0, ...) {
-  a <- as.numeric(alpha)
-  if (!(a > 0 && a < 1)) stop("mqtmpl: alpha must lie in (0, 1)")
-  .rmorie_local_seed(seed)
-  maxima <- c()
-  ys <- as.numeric(y)
-  for (k in seq_len(as.integer(n_perm))) {
-    perm <- sample(ys, length(ys))
-    maxima <- c(maxima, mqtmpl_scanone(perm, markers, positions, method, step)$peak_lod)
-  }
-  maxima <- sort(maxima)
-  idx <- min(length(maxima) - 1L,
-             max(0L, as.integer(ceiling((1 - a) * length(maxima))) - 1L))
-  list(estimate = maxima[idx + 1L], threshold = maxima[idx + 1L],
-       alpha = a, n_perm = as.integer(n_perm), null_maxima = maxima,
-       median_null = maxima[length(maxima) %/% 2L + 1L],
-       method = "permutation threshold; Churchill & Doerge (1994) via Broman et al. (2003)")
+  morie_mqtmpl_permutation_threshold(y, markers, positions, n_perm, alpha,
+                                     method, step, seed)
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
@@ -921,42 +919,10 @@ mqtmpl_permutation_threshold <- function(y, markers, positions, n_perm = 100,
 #' @export
 mqtmpl_sample_genotypes <- function(genotypes, positions, grid, n_imp = 16,
                                     error_rate = 0, seed = 0) {
-  m <- length(positions)
-  n <- length(genotypes)
-  .rmorie_local_seed(seed)
-  post <- mqtmpl_hmm_genotype_probabilities(genotypes, positions, error_rate)
-  out <- list()
-  for (imp in seq_len(as.integer(n_imp))) {
-    draw <- list()
-    for (i in seq_len(n)) {
-      states <- integer(m)
-      states[m] <- if (runif(1) < post[[i]][m, 2L]) 1L else 0L
-      for (j in seq.int(m - 1L, 1L)) {
-        r <- mqtmpl_haldane(positions[j + 1L] - positions[j])
-        w <- c(post[[i]][j, 1L] * (1 - r + r * (states[j + 1L] == 0L)),
-               post[[i]][j, 2L] * (1 - r + r * (states[j + 1L] == 1L)))
-        tot <- sum(w)
-        states[j] <- if (runif(1) < w[2L] / tot) 1L else 0L
-      }
-      row <- numeric(length(grid))
-      for (gi in seq_along(grid)) {
-        g <- grid[gi]
-        js <- which(positions <= g + 1e-12)
-        j <- max(js)
-        if (j == m) { row[gi] <- states[j]
-        next }
-        d1 <- max(g - positions[j], 0)
-        d2 <- max(positions[j + 1L] - g, 0)
-        pr <- mqtmpl_genotype_probabilities(states[j], states[j + 1L],
-                                            mqtmpl_haldane(d1),
-                                            mqtmpl_haldane(d2))
-        row[gi] <- if (runif(1) < pr[2L]) 1 else 0
-      }
-      draw[[i]] <- row
-    }
-    out[[length(out) + 1L]] <- draw
-  }
-  out
+  # one sampler: the copy kept here did not condition on the state drawn
+  # at the next marker and drew a pseudomarker 1 with P(q = 0)
+  morie_mqtmpl_sample_genotypes(genotypes, positions, grid, n_imp,
+                                error_rate, seed)
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
@@ -1086,42 +1052,8 @@ mqtmpl_scan_imp <- function(y, markers, positions, step, n_imp,
 #' @export
 mqtmpl_scanone <- function(y, markers, positions, method = "em", step = 0.02,
                            covariates = list(), error_rate = 0) {
-  mqtmpl_check_method(method)
-  n <- length(y)
-  if (any(sapply(markers, length) != n)) {
-    stop(sprintf("mqtmpl: every marker must be typed on all %d individuals", n))
-  }
-  if (method == "imp") {
-    return(mqtmpl_scan_imp(y, markers, positions, step,
-                           mqtmpl_kw_n_imp(covariates), error_rate, 0))
-  }
-  if (method == "mr") {
-    out_pos <- c()
-    out_lod <- c()
-    for (j in seq_along(markers)) {
-      typed <- which(!sapply(markers[[j]], is.null))
-      if (length(typed) < 3L) next
-      sm <- mqtmpl_single_marker(y[typed], unlist(markers[[j]])[typed])
-      out_pos <- c(out_pos, positions[j])
-      out_lod <- c(out_lod, sm$lod)
-    }
-    if (length(out_lod) == 0L) {
-      stop("mqtmpl: no marker has enough typed individuals")
-    }
-    k <- which.max(out_lod)
-    return(list(estimate = out_lod[k], peak_lod = out_lod[k],
-                peak_position = out_pos[k], position = out_pos,
-                lod = out_lod, method_used = "mr",
-                note = "marker regression reports LOD at markers only, and drops individuals not typed there",
-                method = "marker regression scan; Broman et al. (2003)"))
-  }
-  # em
-  res <- mqtmpl_scan_cim(y, markers, positions, covariates, 0, step)
-  list(estimate = res$peak_lod, peak_lod = res$peak_lod,
-       peak_position = res$peak_position, position = res$position,
-       lod = res$lod, method_used = "em", n_covariates = length(covariates),
-       error_rate = as.numeric(error_rate),
-       method = "EM genome scan; Lander & Botstein (1989) via Broman et al. (2003)")
+  morie_mqtmpl_scanone(y, markers, positions, method, step, covariates,
+                       error_rate)
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
@@ -1150,7 +1082,8 @@ mqtmpl_single_marker <- function(y, g) {
   rss <- max(rss, 1e-300)
   rss0 <- sum((y - my)^2)
   rss0 <- max(rss0, 1e-300)
-  lod <- 0.5 * (n * log(rss0) - n * log(rss) - log(n)) * mqtmpl_LOG10E
+  # (n / 2) log10(RSS0 / RSS1), the reference single_marker LOD
+  lod <- 0.5 * n * (log(rss0) - log(rss)) * mqtmpl_LOG10E
   list(lod = lod, rss = rss, rss0 = rss0)
 }
 
