@@ -205,7 +205,9 @@ morie_smfd <- function(x, y, nseg = 10L, degree = 3L, lam = 1.0,
   rss    <- sum(resid * resid)
   Ainv   <- solve(A)
   BAinv  <- B %*% Ainv
-  hat    <- rowSums(BAinv * B)            # diag(B A^{-1} B')
+  # the smoother is H = B A^{-1} B' W, so its diagonal carries the
+  # weights; without them a weighted fit reported the unweighted trace
+  hat    <- rowSums(BAinv * B) * w        # diag(B A^{-1} B' W)
   ed     <- sum(hat)
   sigma2 <- rss / max(n - ed, 1e-9)
   list(estimate = ed,
