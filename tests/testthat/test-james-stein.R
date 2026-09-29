@@ -1,0 +1,13 @@
+test_that("james_stein uses p - 3 for the grand mean and p - 2 for a fixed target", {
+  x <- c(10, -5, 3, 0.1, -2, 4.4)
+  p <- length(x)
+  ss <- sum((x - mean(x))^2)
+  c0 <- max(0, 1 - (p - 3) * 2.5 / ss)
+  r <- james_stein(x, sigma2 = 2.5)
+  expect_equal(r$value, c0, tolerance = 1e-13)
+  expect_equal(r$js_estimates, mean(x) + c0 * (x - mean(x)), tolerance = 1e-13)
+  f <- james_stein(x, target = 1)
+  expect_equal(f$value, max(0, 1 - (p - 2) / sum((x - 1)^2)), tolerance = 1e-13)
+  expect_equal(james_stein(c(0.6, 0.4, -0.5, 0.3), target = 0)$value, 0)
+  expect_error(james_stein(c(1, 2)), "requires >= 3")
+})

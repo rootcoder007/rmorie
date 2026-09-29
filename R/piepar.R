@@ -15,7 +15,9 @@
 #' @param intervention_dist Exposure values defining the intervened
 #'   distribution.
 #' @return List with \code{estimate}, \code{observed}, \code{intervened},
-#'   \code{se}, \code{n}.
+#'   \code{se}, \code{n}. With an intercept the PIE equals
+#'   \eqn{b_1 (\bar x^* - \bar x)} and \code{se} is
+#'   \eqn{|\bar x^* - \bar x|} times the OLS standard error of \eqn{b_1}.
 #' @references Westreich, D. (2014). Epidemiology 25:437-440.
 #' @export
 #' @examples
@@ -36,7 +38,9 @@ Piepar <- function(y, X, intervention_dist) {
   }
   interv <- tot / length(xs)
   obs <- sum(yv) / n
-  se <- if (n > 1) sqrt(sum((fit$resid - mean(fit$resid))^2) / (n - 1) / n) else NaN
+  p <- ncol(W)
+  dx <- sum(xs) / length(xs) - sum(W[, 2]) / n
+  se <- if (n > p) abs(dx) * sqrt(sum(fit$resid^2) / (n - p) * fit$xtxinv[2, 2]) else NaN
   .t1_result(estimate = interv - obs, observed = obs, intervened = interv,
              se = se, n = n, method = "Population intervention effect")
 }

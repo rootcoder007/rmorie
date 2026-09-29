@@ -1,0 +1,13 @@
+test_that("chernozhukov_rosen_bounds precision-corrects each cell before the minimum", {
+  y <- c(3, 3.5, 2.8, 1, 1.6, 1.2, 1.4, 5, 4.1, 4.6)
+  cell <- c(0, 0, 0, 1, 1, 1, 1, 2, 2, 2)
+  m <- tapply(y, cell, mean)
+  s <- tapply(y, cell, function(v) sd(v) / sqrt(length(v)))
+  kg <- qnorm((1 - 0.1 / log(10))^(1 / 3))
+  contact <- which(m <= min(m + kg * s) + 2 * kg * s)
+  ka <- qnorm(0.95^(1 / length(contact)))
+  r <- Chrbnd(y, instrument = cell)
+  expect_equal(r$contact_set, unname(contact) - 1L)
+  expect_equal(r$bound, unname(min(m[contact] + ka * s[contact])), tolerance = 1e-12)
+  expect_gte(r$hmu_estimate, r$naive_min)
+})

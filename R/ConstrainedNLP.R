@@ -318,7 +318,7 @@ SequentialLinearProgramming <- function(f, x0, grad = NULL, eq = list(), ineq = 
         it <- it + 1
         next
       }
-      conv <- pred <= tol * max(1, abs(phi))
+      conv <- pred <= tol * max(1, abs(phi)) && viol(cc) <= tol
       break
     }
     xn <- x + p

@@ -51,3 +51,14 @@ test_that("SQP and SLP solve Hock-Schittkowski problems like the Python arm", {
   r <- SequentialLinearProgramming(h$f, c(1, 5, 5, 1), eq = h$eq, ineq = h$ineq)
   expect_equal(r$fun, 17.0140173, tolerance = 1e-7)
 })
+
+test_that("SLP reports an unbounded l1 penalty instead of claiming convergence", {
+  ineq <- list(function(z) 4 - z[1] - z[2], function(z) 3 - z[1], function(z) z[1], function(z) z[2])
+  f <- function(z) -z[1] - 2 * z[2]
+  ok <- SequentialLinearProgramming(f, c(1, 1), ineq = ineq, mu = 10)
+  expect_true(ok$converged)
+  expect_equal(ok$x, c(0, 4), tolerance = 1e-7)
+  bad <- SequentialLinearProgramming(f, c(1, 1), ineq = ineq, mu = 1)
+  expect_gt(bad$violation, 1)
+  expect_false(bad$converged)
+})

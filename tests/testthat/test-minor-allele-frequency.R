@@ -1,0 +1,13 @@
+test_that("maf_calculation is min(p, 1 - p) per locus", {
+  G <- rbind(c(0, 2, 1), c(1, 2, 1), c(2, 1, 0), c(0, 2, 1), c(1, 0, 2))
+  r <- maf_calculation(G)
+  p <- colSums(G) / (2 * nrow(G))
+  expect_equal(r$p, p, tolerance = 1e-15)
+  expect_equal(r$maf, pmin(p, 1 - p), tolerance = 1e-15)
+  expect_equal(r$estimate, mean(pmin(p, 1 - p)), tolerance = 1e-15)
+  C <- rbind(c(-1, 1), c(0, NA), c(1, 1), c(-1, 0))
+  rc <- maf_calculation(C, coding = "-101")
+  expect_equal(rc$p, c(3 / 8, 5 / 6), tolerance = 1e-15)
+  expect_equal(rc$n_genotyped, c(4, 3))
+  expect_error(maf_calculation(rbind(c(0, 3))), "not a valid")
+})

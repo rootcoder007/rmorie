@@ -1,0 +1,17 @@
+test_that("subscale AVE and composite reliability use the ML one-factor loadings", {
+  f <- c(0.3, -1.2, 0.8, 1.5, -0.4, 0.1, -2.0, 1.1, 0.6, -0.9, 0.0, 1.9)
+  e1 <- c(0.5, 0.1, -0.7, 0.2, 0.9, -0.3, 0.4, -0.6, 0.2, 0.8, -1.1, 0.3)
+  e2 <- c(-0.2, 0.6, 0.3, -0.9, 0.1, 0.7, -0.5, 0.4, -0.8, 0.2, 0.9, -0.1)
+  e3 <- c(0.9, -0.4, 0.2, 0.3, -0.6, -0.2, 0.8, 0.1, 0.5, -0.7, 0.3, 0.6)
+  X <- cbind(f + e1, 0.8 * f + e2, f + 2 * e3)
+  R <- cor(X)
+  lam <- sqrt(c(R[1, 2] * R[1, 3] / R[2, 3], R[1, 2] * R[2, 3] / R[1, 3], R[1, 3] * R[2, 3] / R[1, 2]))
+  a <- subscale_ea_ave(X)
+  expect_equal(a$loadings, lam, tolerance = 1e-9)
+  expect_equal(a$estimate, mean(lam^2), tolerance = 1e-9)
+  expect_equal(subscale_ua_composite_rel(X)$estimate, sum(lam)^2 / (sum(lam)^2 + sum(1 - lam^2)), tolerance = 1e-9)
+  df <- data.frame(ER1 = X[, 1], ER2 = X[, 2], ER3 = X[, 3], ER4 = X[, 1] + X[, 2], ER5 = X[, 3] - X[, 2])
+  df$ER1[2] <- NA
+  expect_equal(subscale_er_ave(df)$n, 11)
+  expect_identical(subscale_ee_composite_rel(X)$measure, "composite_reliability_EE")
+})
