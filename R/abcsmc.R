@@ -50,7 +50,9 @@ Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
     tries <- 0L
     i <- 0L
     while (length(newth) < N && tries < 20L * N) {
-      src <- theta[(i %% N) + 1L, ]
+      # cycle over the CURRENT population: a round that fills fewer than
+      # N particles leaves nrow(theta) < N and theta[N, ] out of bounds
+      src <- theta[(i %% nrow(theta)) + 1L, ]
       cand <- numeric(d)
       for (a in seq_len(d)) {
         off <- (.s03vdc(tries * d + (a - 1L), 1L + a) - 0.5) * 2 *
@@ -65,7 +67,7 @@ Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
       i <- i + 1L
       if (dist <= eps) {
         den <- 0
-        for (j in seq_len(N)) {
+        for (j in seq_len(nrow(theta))) {
           q <- 1
           for (a in seq_len(d)) {
             h <- as.numeric(kernel_sd) * (pr[[a]][2] - pr[[a]][1])
