@@ -11,7 +11,9 @@
 #' Formula: G_mu(alpha) = Phi(Phi^\{-1\}(1 - alpha) - mu);
 #'   delta(eps) = Phi(-eps/mu + mu/2) - exp(eps) Phi(-eps/mu - mu/2).
 #'
-#' @param mech Placeholder for the mechanism description; unused.
+#' @param mech Optional \code{c(sensitivity, sigma)} of a Gaussian mechanism
+#'   (l2 sensitivity, noise sd), which is (sensitivity / sigma)-GDP; used
+#'   when \code{mu} is NULL.
 #' @param mu Non-negative GDP parameter.
 #' @param alpha Type I error rates at which to evaluate the trade-off.
 #' @param epsilon Epsilon at which the (eps, delta) conversion is given.
@@ -22,8 +24,14 @@
 #'   JRSS B 84(1):3-37, Corollary 2.13. \doi{10.1111/rssb.12454}
 #' @export
 #' @examples
-#' Gdpf(mech = c(1, 2, 3, 4, 5, 6, 7, 8), mu = 5L)
-Gdpf <- function(mech, mu, alpha = NULL, epsilon = 1) {
+#' Gdpf(mu = 1.3, alpha = c(0.05, 0.5))$trade_off
+#' Gdpf(mech = c(1, 2))$mu
+Gdpf <- function(mech = NULL, mu = NULL, alpha = NULL, epsilon = 1) {
+  if (is.null(mu)) {
+    if (is.null(mech)) stop("gaussian_dp: give mu or mech = c(sensitivity, sigma)")
+    if (mech[1] < 0 || mech[2] <= 0) stop("gaussian_dp: need sensitivity >= 0 and sigma > 0")
+    mu <- mech[1] / mech[2]
+  }
   m <- as.numeric(mu)
   if (m < 0) stop("gaussian_dp: mu must be non-negative")
   a <- if (is.null(alpha)) c(0.05, 0.1, 0.25, 0.5, 0.75, 0.9) else .s03vec(alpha)
