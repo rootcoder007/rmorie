@@ -321,7 +321,7 @@ morie_prphet <- morie_prphet_piecewise_trend
 #' @export
 fourier_terms <- function(t, period, order) {
   if (period <= 0)
-    stop(sprintf("prphet: period must be positive, got %r", period))
+    stop(sprintf("prphet: period must be positive, got %s", format(period)))
   order <- as.integer(order)
   if (order < 1L)
     stop(sprintf("prphet: order must be at least 1, got %d", order))
