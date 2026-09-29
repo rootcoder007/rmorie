@@ -1,0 +1,31 @@
+test_that("counting and events recompute", {
+  expect_equal(permutations_count(6)$permutations, 720)
+  expect_equal(partial_permutations(8, 3)$partial_permutations, 8 * 7 * 6)
+  e <- binomial_expansion(1.5, -0.4, 6)
+  expect_equal(e$terms, choose(6, 0:6) * 1.5^(6:0) * (-0.4)^(0:6))
+  expect_equal(e$sum, 1.1^6, tolerance = 1e-12)
+  expect_equal(hockey_stick(12, 5)$sum, choose(12, 5))
+  expect_true(classify_events(0.5, 0.4, 0.2)$independent)
+  expect_true(classify_events(0.3, 0.5, 0)$exclusive)
+  expect_equal(conditional_from_joint(0.12, 0.3)$p_b_given_a, 0.4)
+  expect_equal(conditional_subset(0.1, 0.4)$p_b_given_a, 0.25)
+})
+
+test_that("distributions recompute", {
+  expect_equal(bernoulli_variance(0.3)$variance, 0.21)
+  expect_equal(binomial_variance(10, 0.3)$variance, 2.1)
+  expect_equal(binomial_pmf_vector(9, 0.37)$pmf, stats::dbinom(0:9, 9, 0.37), tolerance = 1e-14)
+  expect_equal(hypergeometric_pmf(2, 20, 7, 5)$probability, stats::dhyper(2, 7, 13, 5), tolerance = 1e-14)
+  expect_equal(poisson_small_interval(3, 0.001)$exact, stats::dpois(1, 0.003), tolerance = 1e-14)
+  expect_equal(poisson_zero_series(1.5, 20)$partial_sums[20], exp(-1.5), tolerance = 1e-12)
+  expect_equal(poisson_binomial_peak_ratio(1000, 0.3)$ratio, stats::dpois(300, 300) / stats::dbinom(300, 1000, 0.3),
+               tolerance = 1e-10)
+  x <- seq(0, 2, by = 0.1)
+  expect_equal(density_expectation(x, 3 * x^2 / 8)$expectation,
+               sum(diff(x) * (x[-1] * 3 * x[-1]^2 / 8 + x[-21] * 3 * x[-21]^2 / 8) / 2), tolerance = 1e-14)
+  expect_equal(gaussian_approx_2n(3, 50)$PG, exp(-9 / 50) / sqrt(50 * pi))
+  expect_equal(gaussian_approx_n(3, 100)$PG, stats::dnorm(3, sd = 5), tolerance = 1e-14)
+  expect_equal(gaussian_approx_biased(4, 100, 0.3)$PG, stats::dnorm(4, sd = sqrt(21)), tolerance = 1e-14)
+  expect_equal(gaussian_sum_density(1, 3, 4)$density, stats::dnorm(1, sd = 5), tolerance = 1e-14)
+  expect_equal(poisson_mean_rate(2.5, 4)$expected_events, 10)
+})
