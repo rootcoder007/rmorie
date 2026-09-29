@@ -200,8 +200,10 @@ graphormer_attention <- function(H, WQ, WK, WV, bias, edge_bias = NULL) {
   X <- as.matrix(H)
   storage.mode(X) <- "double"
   n <- nrow(X)
-  dk <- ncol(WQ)
   WQ <- as.matrix(WQ)
+  # q = WQ %*% x, so the key dimension is nrow(WQ) (len(WQ) in the
+  # reference arm); ncol(WQ) is the input width
+  dk <- nrow(WQ)
   storage.mode(WQ) <- "double"
   WK <- as.matrix(WK)
   storage.mode(WK) <- "double"
@@ -229,7 +231,8 @@ graphormer_attention <- function(H, WQ, WK, WV, bias, edge_bias = NULL) {
     w <- e / z
     weights[i, ] <- w
     Vproj <- WV %*% t(X)
-    out[i, ] <- as.numeric(w %*% Vproj)
+    # sum_j w_ij (WV x_j): the weights act on the columns of Vproj
+    out[i, ] <- as.numeric(Vproj %*% w)
   }
   list(estimate = out, output = out, weights = weights,
        method = "Graphormer attention with centrality, spatial and edge encodings; Ying et al. (2021)",
@@ -270,8 +273,12 @@ morie_grphmr_centrality <- function(adj, n, z_in, z_out = NULL,
     deg_out[v + 1L] <- length(nbrs)
   }
   for (w in seq_len(N) - 1L) {
-    src <- which(vapply(seq_len(N), function(v) w %in% adj[[v]], logical(1)))
-    deg_in[w + 1L] <- length(src) - 1L
+    # in-degree: the other nodes listing w (subtracting one for an
+    # assumed self-entry gave -1 on a plain directed graph)
+    src <- which(vapply(seq_len(N) - 1L, function(v) {
+      v != w && w %in% adj[[v + 1L]]
+    }, logical(1)))
+    deg_in[w + 1L] <- length(src)
   }
   if (!directed) {
     deg_in <- vapply(seq_len(N) - 1L, function(v)
@@ -315,7 +322,8 @@ morie_grphmr_edge <- function(paths, edge_features, w_table) {
     next }
     acc <- 0.0
     for (step in seq_along(path)) {
-      e <- path[step]
+      # [[ ]]: path[step] is a one-element list, whose e[2] is NULL
+      e <- path[[step]]
       ek <- paste0(e[1], ",", e[2])
       rk <- paste0(e[2], ",", e[1])
       f <- if (!is.null(edge_features[[ek]])) edge_features[[ek]]
