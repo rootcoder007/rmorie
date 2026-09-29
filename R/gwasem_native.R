@@ -317,7 +317,7 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
   x <- df2 / (df2 + df1 * f)
   a <- 0.5 * df2
   b <- 0.5 * df1
-  log_beta <- lbeta(a, b) + a * log(x) + b * log(1 - x)
+  log_beta <- -lbeta(a, b) + a * log(x) + b * log(1 - x)
   cf <- function(a, b, x) {
     qab <- a + b
     qap <- a + 1
@@ -365,7 +365,7 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
 #' res <- .gwasem_norm_sf(z = y)
 #' res
-.gwasem_norm_sf <- function(z) pnorm(abs(z), lower.tail = FALSE)
+.gwasem_norm_sf <- function(z) 2 * pnorm(abs(z), lower.tail = FALSE)
 
 #' Genomic-control inflation factor
 #'
@@ -462,7 +462,7 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
     }
     if (per_marker_reml) {
       Xfull <- cbind(base, col)
-      vcj <- morie_gwasem_reml(yv, K, covariates, ml)
+      vcj <- morie_gwasem_reml(yv, K, cbind(covariates, col), ml)
       dj <- vcj$delta
       ev <- vcj$evals
       rot <- as.matrix(t(vcj$evecs) %*% Xfull)
