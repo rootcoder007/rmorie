@@ -1,0 +1,12 @@
+test_that("fragmentation classes on a hand-built map", {
+  expect_equal(DissectionIndex(pi * 9, 6 * pi), 1, tolerance = 1e-15)
+  g <- rbind(c(1, 1, 1, 1, 0), c(1, 1, 1, 1, 0), c(1, 1, 0, 1, 0), c(1, 1, 1, 1, 0), c(0, 0, 0, 0, 0))
+  r <- ForestFragmentation(g)
+  expect_equal(r$classes[1, 1], "interior")
+  expect_equal(r$pf[2, 2], 8 / 9, tolerance = 1e-15)
+  expect_equal(r$pff[2, 2], 10 / 12, tolerance = 1e-15)
+  expect_equal(r$classes[2, 2], "perforated")
+  expect_equal(r$classes[2, 4], "transitional")
+  expect_equal(ForestFragmentation(rbind(matrix(1, 3, 3), matrix(0, 2, 3)))$classes[3, 2], "edge")
+  expect_true(is.na(r$classes[3, 3]))
+})
