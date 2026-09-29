@@ -94,7 +94,9 @@ InverseDistanceWeights <- function(coords, power = 1, d2 = NULL, row_standardize
   diag(W) <- 0
   if (row_standardize) {
     s <- rowSums(W)
-    W <- ifelse(s > 0, W / s, 0)
+    # ifelse() takes its shape from the length-n test, so it returned the
+    # first n entries of W / s as a bare vector; divide row-wise instead
+    W <- W / ifelse(s > 0, s, 1)
   }
   W
 }
