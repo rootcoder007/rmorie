@@ -12,6 +12,8 @@
 
 test_that("morie_desc_cramers_v wraps DescTools::CramerV", {
   skip_if_not_installed("DescTools")
+  # DescTools compiled code crashes the R session on windows aarch64 R-release (r-universe); devel and other platforms run it
+  skip_if(.Platform$OS.type == "windows" && grepl("aarch64|arm64", R.version$arch), "DescTools crashes R on windows aarch64 R-release")
   set.seed(1L)
   x <- sample(letters[1:3], 60L, replace = TRUE)
   y <- sample(letters[1:3], 60L, replace = TRUE)
@@ -23,6 +25,8 @@ test_that("morie_desc_cramers_v wraps DescTools::CramerV", {
 
 test_that("morie_desc_kappa wraps DescTools::CohenKappa / KappaM", {
   skip_if_not_installed("DescTools")
+  # DescTools compiled code crashes the R session on windows aarch64 R-release (r-universe); devel and other platforms run it
+  skip_if(.Platform$OS.type == "windows" && grepl("aarch64|arm64", R.version$arch), "DescTools crashes R on windows aarch64 R-release")
   set.seed(2L)
   r1 <- sample(1:3, 40L, replace = TRUE)
   r2 <- sample(1:3, 40L, replace = TRUE)
@@ -34,6 +38,8 @@ test_that("morie_desc_kappa wraps DescTools::CohenKappa / KappaM", {
 
 test_that("morie_desc_winsorize wraps DescTools::Winsorize", {
   skip_if_not_installed("DescTools")
+  # DescTools compiled code crashes the R session on windows aarch64 R-release (r-universe); devel and other platforms run it
+  skip_if(.Platform$OS.type == "windows" && grepl("aarch64|arm64", R.version$arch), "DescTools crashes R on windows aarch64 R-release")
   x <- c(1:9, 100)
   out <- morie_desc_winsorize(x, probs = c(0.1, 0.9))
   expect_identical(out$method, "DescTools::Winsorize")
@@ -43,6 +49,8 @@ test_that("morie_desc_winsorize wraps DescTools::Winsorize", {
 
 test_that("morie_desc_gini wraps DescTools::Gini", {
   skip_if_not_installed("DescTools")
+  # DescTools compiled code crashes the R session on windows aarch64 R-release (r-universe); devel and other platforms run it
+  skip_if(.Platform$OS.type == "windows" && grepl("aarch64|arm64", R.version$arch), "DescTools crashes R on windows aarch64 R-release")
   out <- morie_desc_gini(c(1, 2, 3, 4, 5))
   expect_identical(out$method, "DescTools::Gini")
   expect_true(is.numeric(out$raw))
@@ -50,6 +58,8 @@ test_that("morie_desc_gini wraps DescTools::Gini", {
 
 test_that("morie_desc_atkinson wraps DescTools::Atkinson", {
   skip_if_not_installed("DescTools")
+  # DescTools compiled code crashes the R session on windows aarch64 R-release (r-universe); devel and other platforms run it
+  skip_if(.Platform$OS.type == "windows" && grepl("aarch64|arm64", R.version$arch), "DescTools crashes R on windows aarch64 R-release")
   out <- morie_desc_atkinson(c(1, 2, 3, 4, 5), parameter = 0.5)
   expect_identical(out$method, "DescTools::Atkinson")
   expect_true(is.numeric(out$raw))
