@@ -1,123 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Contour operations on a gridded field. Identical to the Python arm morie.fn.contours.
 
-#' Contours: marching-squares isolines, isobands, clipping, band quantities, labels, smoothing
-#'
-#' \code{z[i, j]} is the value at \code{(xs[j], ys[i])}. \code{Isolines}:
-#' marching squares with linear interpolation along cell edges, saddle cells
-#' resolved by the centre value, segments chained into polylines (one list per
-#' level). \code{ContourFill}: isobands between consecutive levels; each cell
-#' is split into two triangles (the field is linear on a triangle) and each
-#' triangle is clipped to \code{levels[k] <= z < levels[k + 1]}; areas are exact
-#' for the piecewise-linear interpolant. \code{ContourBands}: the isobands with
-#' a grey shade per band. \code{ContourClip}: polyline pieces inside a convex
-#' counter-clockwise polygon (Sutherland and Hodgman 1974). \code{ContourQuantity}:
-#' area and integral of the field where \code{lower <= z < upper} (each clipped
-#' polygon is fanned into triangles; the integral of a linear field over a
-#' triangle is its area times the mean of the three vertex values).
-#' \code{ContourLabels}: label at the midpoint of the straightest run of each
-#' polyline (smallest neighbouring turning angles, ties to the longest segment)
-#' with the text angle along it. \code{ContourSmooth}: uniform B-spline through
-#' the vertices as control points (de Boor recurrence; clamped knots for open
-#' curves, wrapped control points for closed ones).
-#'
-#' @param z Numeric matrix of field values.
-#' @param xs,ys Grid coordinates of the columns and rows of \code{z}.
-#' @param levels Contour levels (band edges for the fill functions).
-#' @param shades Optional shade per band (default grey levels 0.9 to 0.2).
-#' @param lines List of polylines, each a two-column matrix of vertices.
-#' @param polygon Convex clip polygon, two-column matrix, counter-clockwise.
-#' @param lower,upper Band limits for \code{ContourQuantity}.
-#' @param min_length Polylines shorter than this get no label.
-#' @param line One polyline (two-column matrix) to smooth.
-#' @param degree B-spline degree.
-#' @param samples Number of evaluation points.
-#' @param closed Treat the polyline as closed.
-#' @return A list; see each function.
-#' @references Lorensen, W. E. and Cline, H. E. (1987). Marching cubes.
-#'   Computer Graphics 21, 163-169.
-#'
-#'   Sutherland, I. E. and Hodgman, G. W. (1974). Reentrant polygon clipping.
-#'   Communications of the ACM 17, 32-42.
-#'
-#'   de Boor, C. (1978). A Practical Guide to Splines. Springer.
-#' @examples
-#' z <- rbind(c(0, 1), c(1, 2))
-#' ContourFill(z, c(0, 1), c(0, 1), c(0, 1, 2.5))$areas
-#' Isolines(rbind(c(0, 0, 0), c(0, 2, 0), c(0, 0, 0)), 0:2, 0:2, 1)$lines[[1]]
-#' @export
-Isolines <- function(z, xs, ys, levels) {
-  z <- unname(as.matrix(z)) * 1
-  out <- vector("list", length(levels))
-  for (li in seq_along(levels)) {
-    segs <- list()
-    for (i in seq_len(length(ys) - 1)) for (j in seq_len(length(xs) - 1)) {
-      segs <- c(segs, .ct_cell_segments(z, xs, ys, i, j, levels[li]))
-    }
-    out[[li]] <- .ct_join(segs)
-  }
-  list(lines = out, levels = as.numeric(levels))
-}
-
-.ct_interp <- function(pa, va, pb, vb, level) {
-  t <- if (vb == va) 0.5 else (level - va) / (vb - va)
-  pa + t * (pb - pa)
-}
-
-.ct_cell_segments <- function(z, xs, ys, i, j, level) {
-  cvals <- c(z[i, j], z[i, j + 1], z[i + 1, j + 1], z[i + 1, j])
-  p <- rbind(c(xs[j], ys[i]), c(xs[j + 1], ys[i]), c(xs[j + 1], ys[i + 1]), c(xs[j], ys[i + 1]))
-  above <- cvals >= level
-  if (all(above) || !any(above)) return(list())
-  edges <- list()
-  ek <- integer(0)
-  for (k in 1:4) {
-    b <- if (k == 4) 1 else k + 1
-    if (above[k] != above[b]) {
-      edges[[length(edges) + 1]] <- .ct_interp(p[k, ], cvals[k], p[b, ], cvals[b], level)
-      ek <- c(ek, k)
-    }
-  }
-  if (length(edges) == 2) return(list(rbind(edges[[1]], edges[[2]])))
-  centre <- sum(cvals) / 4
-  e <- edges[order(ek)]
-  if ((centre >= level) == above[1]) list(rbind(e[[1]], e[[4]]), rbind(e[[2]], e[[3]])) else list(rbind(e[[1]], e[[2]]), rbind(e[[3]], e[[4]]))
-}
-
-.ct_join <- function(segs, tol = 1e-12) {
-  lines <- list()
-  same <- function(a, b) abs(a[1] - b[1]) <= tol && abs(a[2] - b[2]) <= tol
-  while (length(segs)) {
-    s <- segs[[length(segs)]]
-    segs[[length(segs)]] <- NULL
-    line <- s
-    grown <- TRUE
-    while (grown) {
-      grown <- FALSE
-      for (k in seq_along(segs)) {
-        cc <- segs[[k]][1, ]
-        d <- segs[[k]][2, ]
-        if (same(cc, line[nrow(line), ])) {
-          line <- rbind(line, d)
-        } else if (same(d, line[nrow(line), ])) {
-          line <- rbind(line, cc)
-        } else if (same(d, line[1, ])) {
-          line <- rbind(cc, line)
-        } else if (same(cc, line[1, ])) {
-          line <- rbind(d, line)
-        } else {
-          next
-        }
-        segs[[k]] <- NULL
-        grown <- TRUE
-        break
-      }
-    }
-    lines[[length(lines) + 1]] <- unname(line)
-  }
-  lines
-}
-
 .ct_clip_band <- function(pts, lo, hi) {
   # pts: matrix with columns x, y, value; Sutherland-Hodgman to lo <= value < hi
   clip <- function(points, keep, edge) {
@@ -160,7 +43,45 @@ Isolines <- function(z, xs, ys, levels) {
   polys
 }
 
-#' @rdname Isolines
+#' Contours: isobands, clipping, band quantities, labels, smoothing
+#'
+#' \code{z[i, j]} is the value at \code{(xs[j], ys[i])}; the contour lines
+#' themselves come from \code{IsoLines}. \code{ContourFill}: isobands between consecutive levels; each cell
+#' is split into two triangles (the field is linear on a triangle) and each
+#' triangle is clipped to \code{levels[k] <= z < levels[k + 1]}; areas are exact
+#' for the piecewise-linear interpolant. \code{ContourBands}: the isobands with
+#' a grey shade per band. \code{ContourClip}: polyline pieces inside a convex
+#' counter-clockwise polygon (Sutherland and Hodgman 1974). \code{ContourQuantity}:
+#' area and integral of the field where \code{lower <= z < upper} (each clipped
+#' polygon is fanned into triangles; the integral of a linear field over a
+#' triangle is its area times the mean of the three vertex values).
+#' \code{ContourLabels}: label at the midpoint of the straightest run of each
+#' polyline (smallest neighbouring turning angles, ties to the longest segment)
+#' with the text angle along it. \code{ContourSmooth}: uniform B-spline through
+#' the vertices as control points (de Boor recurrence; clamped knots for open
+#' curves, wrapped control points for closed ones).
+#'
+#' @param z Numeric matrix of field values.
+#' @param xs,ys Grid coordinates of the columns and rows of \code{z}.
+#' @param levels Contour levels (band edges for the fill functions).
+#' @param shades Optional shade per band (default grey levels 0.9 to 0.2).
+#' @param lines List of polylines, each a two-column matrix of vertices.
+#' @param polygon Convex clip polygon, two-column matrix, counter-clockwise.
+#' @param lower,upper Band limits for \code{ContourQuantity}.
+#' @param min_length Polylines shorter than this get no label.
+#' @param line One polyline (two-column matrix) to smooth.
+#' @param degree B-spline degree.
+#' @param samples Number of evaluation points.
+#' @param closed Treat the polyline as closed.
+#' @return A list; see each function.
+#' @references Sutherland, I. E. and Hodgman, G. W. (1974). Reentrant polygon clipping.
+#'   Communications of the ACM 17, 32-42.
+#'
+#'   de Boor, C. (1978). A Practical Guide to Splines. Springer.
+#' @examples
+#' z <- rbind(c(0, 1), c(1, 2))
+#' ContourFill(z, c(0, 1), c(0, 1), c(0, 1, 2.5))$areas
+#' ContourQuantity(z, c(0, 1), c(0, 1), 0, 3)$integral
 #' @export
 ContourFill <- function(z, xs, ys, levels) {
   z <- unname(as.matrix(z)) * 1
@@ -174,7 +95,7 @@ ContourFill <- function(z, xs, ys, levels) {
   list(bands = bands, areas = areas, levels = as.numeric(levels))
 }
 
-#' @rdname Isolines
+#' @rdname ContourFill
 #' @export
 ContourBands <- function(z, xs, ys, levels, shades = NULL) {
   f <- ContourFill(z, xs, ys, levels)
@@ -219,7 +140,7 @@ ContourBands <- function(z, xs, ys, levels, shades = NULL) {
   pieces
 }
 
-#' @rdname Isolines
+#' @rdname ContourFill
 #' @export
 ContourClip <- function(lines, polygon) {
   poly <- unname(as.matrix(polygon)) * 1
@@ -228,7 +149,7 @@ ContourClip <- function(lines, polygon) {
   list(lines = out, n_pieces = length(out))
 }
 
-#' @rdname Isolines
+#' @rdname ContourFill
 #' @export
 ContourQuantity <- function(z, xs, ys, lower, upper) {
   z <- unname(as.matrix(z)) * 1
@@ -246,7 +167,7 @@ ContourQuantity <- function(z, xs, ys, lower, upper) {
   list(area = area, integral = integral, mean = if (area > 0) integral / area else NA_real_)
 }
 
-#' @rdname Isolines
+#' @rdname ContourFill
 #' @export
 ContourLabels <- function(lines, min_length = 0) {
   pos <- NULL
@@ -279,7 +200,7 @@ ContourLabels <- function(lines, min_length = 0) {
   list(positions = unname(pos), angles = ang)
 }
 
-#' @rdname Isolines
+#' @rdname ContourFill
 #' @export
 ContourSmooth <- function(line, degree = 3, samples = 50, closed = FALSE) {
   P <- unname(as.matrix(line)) * 1

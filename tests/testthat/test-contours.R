@@ -1,26 +1,8 @@
-# Tests for Contours: isolines, isobands, clipping, band quantities, labels, smoothing.
+# Tests for Contours: isobands, clipping, band quantities, labels, smoothing.
 
 XS <- c(0, 1, 2)
 YS <- c(0, 1, 2)
 LINEAR <- outer(YS, XS, function(y, x) x + 2 * y)  # z[i, j] = xs[j] + 2 ys[i]
-
-test_that("Isolines of a peak give one closed loop through the edge midpoints", {
-  r <- Isolines(rbind(c(0, 0, 0), c(0, 2, 0), c(0, 0, 0)), XS, YS, 1)
-  expect_length(r$lines[[1]], 1)
-  line <- r$lines[[1]][[1]]
-  expect_equal(line[1, ], line[nrow(line), ])
-  pts <- unique(round(line, 12))
-  expect_equal(nrow(pts), 4)
-  expect_true(all(apply(pts, 1, function(p) any(p[1] == c(0.5, 1, 1.5, 1) & p[2] == c(1, 0.5, 1, 1.5)))))
-})
-
-test_that("Isolines of a linear field lie on the exact line", {
-  r <- Isolines(LINEAR, XS, YS, c(2, 3))
-  for (li in 1:2) {
-    expect_gt(length(r$lines[[li]]), 0)
-    for (line in r$lines[[li]]) expect_equal(line[, 1] + 2 * line[, 2], rep(c(2, 3)[li], nrow(line)), tolerance = 1e-12)
-  }
-})
 
 test_that("ContourFill areas are exact for a linear field", {
   r <- ContourFill(LINEAR, XS, YS, c(0, 1, 2, 6.5))
