@@ -127,7 +127,9 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
     W <- p * (1 - p)
     W <- pmax(W, 1e-12)
     z <- eta + (y - p) / W
-    XtW <- t(X) * W
+    # t(X) * W recycled W down the m rows of t(X), scrambling the
+    # weights; weight the ROWS of X instead
+    XtW <- t(X * W)
     A <- XtW %*% X + diag(ridge + penalty, m, m)
     b_new <- tryCatch(as.numeric(solve(A, XtW %*% z)),
                       error = function(e) b)
@@ -317,10 +319,13 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
     tn <- 0.5 * (1 + sqrt(1 + 4 * tk * tk))
     mom <- (tk - 1) / tn
     z <- nxt + mom * (nxt - a)
-    shift <- max(abs(nxt - a))
     a <- nxt
     tk <- tn
-    if (shift < tol) break
+    # stop on the projected-gradient map at a, not on |a_k - a_{k-1}|:
+    # with momentum the projection can land on the same vertex twice
+    # while a is still off the optimum
+    gm <- a - .flxipt_project_simplex(a - step * (as.numeric(G %*% a) - c))
+    if (max(abs(gm)) < tol) break
   }
 
   best_vertex <- which.min(diag(G) - 2 * c)
@@ -434,7 +439,8 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
   risks <- cv_risk(yv, Z, loss)
   best <- which.min(risks)
   if (meta == "discrete") {
-    weights <- if (seq_along(lib) == best) 1 else 0
+    # a length-J condition in if() errors in R >= 4.2
+    weights <- as.numeric(seq_along(lib) == best)
   } else if (meta == "nnls") {
     weights <- .flxipt_nnls_simplex(Z, yv)
   } else {
