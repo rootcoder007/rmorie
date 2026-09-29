@@ -98,9 +98,15 @@
       grad[k] <- 2.0 * s + 2.0 * penalty * w[k]
     }
     if (is.null(step)) {
-      gnorm <- sqrt(sum(grad * grad))
-      if (gnorm == 0) gnorm <- 1.0
-      step <- 1.0 / gnorm
+      # 1/L for the profiled objective: the Hessian in w is
+      # 2 (Cc'Cc + penalty I) with Cc the time-centred columns. The old
+      # 1/||grad_0|| step overshot and left the iterate cycling between
+      # vertices of the simplex, far from the optimum.
+      Cc <- vapply(cols, function(v) v - sum(v) / L, numeric(L))
+      Cc <- matrix(Cc, nrow = L)
+      lip <- 2.0 * (max(eigen(crossprod(Cc), symmetric = TRUE,
+                              only.values = TRUE)$values) + penalty)
+      step <- if (lip > 0) 1.0 / lip else 1.0
     }
     cand <- w - step * grad
     cand <- .causscd_project_simplex(cand)
