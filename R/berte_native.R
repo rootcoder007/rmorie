@@ -20,21 +20,8 @@
 #' gelu(V)
 #' @keywords internal
 gelu <- function(x) {
-  # GELU exact using erf; avoid pnorm dependency for portability
   x <- as.numeric(x)
-  0.5 * x * (1 + sapply(x, function(v) {
-    # erf approximation (Abramowitz & Stegun 7.1.26)
-    sign_v <- sign(v)
-    av <- abs(v)
-    t_ <- 1 / (1 + 0.3275911 * av)
-    a1 <-  0.254829592
-    a2 <- -0.284496736
-    a3 <-  1.421413741
-    a4 <- -1.453152027
-    a5 <-  1.061405429
-    y <- 1 - (((((a5 * t_ + a4) * t_) + a3) * t_ + a2) * t_ + a1) * t_ * exp(-av * av)
-    sign_v * y
-  }))
+  x * stats::pnorm(x)
 }
 
 #' layer_norm
