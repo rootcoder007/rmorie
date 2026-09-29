@@ -889,6 +889,10 @@ morie_survrsf_c_index <- function(times, events, predicted) {
       if (ti == tj && !(ei || ej)) {
         next
       }
+      # a case with no (out-of-bag) prediction cannot be ordered
+      if (is.na(predicted[i]) || is.na(predicted[j])) {
+        next
+      }
       permissible <- permissible + 1.0
       if (ti != tj) {
         if (ti < tj) {
