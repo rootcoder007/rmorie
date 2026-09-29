@@ -172,21 +172,23 @@ morie_mpfn_is_permutation_invariant <- function(H, adj, edge_features,
   base <- morie_mpfn_readout(morie_mpfn_message_passing(H, adj,
                                                           edge_features, T),
                               how)
-  n <- length(H)
+  # 0-based labels throughout, as in morie_mpfn_message_passing: node
+  # i is renamed perm[i + 1], so new row perm[i + 1] + 1 holds old row i
+  Hm <- as.matrix(H)
+  n <- nrow(Hm)
   inv <- integer(n)
   for (i in seq_len(n)) inv[perm[i] + 1L] <- i
-  Hp <- H[inv + 1L]
+  Hp <- Hm[inv, , drop = FALSE]
   adjp <- list()
   for (v in seq_along(adj)) {
     vv <- as.integer(names(adj)[v])
-    adjp[[as.character(perm[vv + 1L] + 1L)]] <-
-      sort(perm[adj[[v]] + 1L] + 1L)
+    adjp[[as.character(perm[vv + 1L])]] <- sort(perm[adj[[v]] + 1L])
   }
   efp <- list()
   for (nm in names(edge_features)) {
     ij <- as.integer(strsplit(nm, "_")[[1]])
-    efp[[paste0(perm[ij[1] + 1L] + 1L, "_",
-                perm[ij[2] + 1L] + 1L)]] <- edge_features[[nm]]
+    efp[[paste0(perm[ij[1] + 1L], "_", perm[ij[2] + 1L])]] <-
+      edge_features[[nm]]
   }
   other <- morie_mpfn_readout(morie_mpfn_message_passing(Hp, adjp, efp, T),
                               how)
@@ -243,18 +245,16 @@ mpfn_is_permutation_invariant <- function(H, adj, edge_features, perm, T = 3,
   inv <- integer(n)
   for (i in seq_len(n)) inv[perm[i]] <- i
   Hp <- lapply(seq_len(n), function(i) H[[inv[i]]])
+  # 1-based labels throughout, as in mpfn_message_passing: node i is
+  # renamed perm[i]
   adjp <- list()
-  for (v in seq_along(adj)) {
-    key <- as.character(v - 1L)
-    if (!is.null(adj[[key]])) {
-      adjp[[as.character(perm[v - 1L])]] <- sort(sapply(adj[[key]], function(w) perm[w + 1L] - 1L))
-    }
+  for (key in names(adj)) {
+    adjp[[as.character(perm[as.integer(key)])]] <- sort(perm[adj[[key]]])
   }
   efp <- list()
   for (k in seq_along(edge_features)) {
-    a <- as.integer(strsplit(names(edge_features)[k], ",")[[1]][1])
-    b <- as.integer(strsplit(names(edge_features)[k], ",")[[1]][2])
-    efp[[paste(perm[a + 1L] - 1L, perm[b + 1L] - 1L, sep = ",")]] <- edge_features[[k]]
+    ab <- as.integer(strsplit(names(edge_features)[k], ",")[[1]])
+    efp[[paste(perm[ab[1]], perm[ab[2]], sep = ",")]] <- edge_features[[k]]
   }
   other <- mpfn_readout(mpfn_message_passing(Hp, adjp, efp, T), how)
   dev <- max(abs(base - other))
