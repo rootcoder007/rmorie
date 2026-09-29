@@ -1,72 +1,65 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Chernozhukov-Lee-Rosen intersection bounds
+#' Chernozhukov-Lee-Rosen intersection bounds with independent cells
 #'
-#' Formula: theta = inf_v m(v); precision-corrected critical values
+#' The target is the minimum over cells of the conditional means. Each
+#' cell is precision-corrected before the minimum is taken,
+#' \eqn{\hat\theta(p) = \min_{v \in \hat V} (m_v + k_{\hat V}(p) s_v)}, where
+#' for independent cells \eqn{k_S(p) = \Phi^{-1}(p^{1/|S|})} is the
+#' p-quantile of the maximum of \eqn{|S|} independent standard normals and the
+#' contact set keeps the cells with
+#' \eqn{m_v \le \min_u (m_u + k_V(\gamma_n) s_u) + 2 k_V(\gamma_n) s_v},
+#' \eqn{\gamma_n = 1 - 0.1/\log n}. Identical to the Python arm
+#' \code{morie.fn.chrbnd.chernozhukov_rosen_bounds}. (This function used to
+#' subtract a multiple of the standard error, the wrong direction.)
 #'
-#' An upper bound valid for every cell v of the instrument is valid at
-#' their MINIMUM, but plugging in the sample minimum is biased downward
-#' because the noisiest cell wins.  The half-median-unbiased estimator
-#' keeps only the cells within precision of the minimum -- the estimated
-#' contact set -- and takes the minimum over that set of m_v - k se_v.
-#' With one cell it reduces to the ordinary one-sided interval, and with
-#' zero sampling noise to the plain minimum.
-#'
-#' @param y Outcome.
-#' @param X Ignored; kept for the stub signature.
-#' @param instrument Cell label per observation, or NULL.
-#' @param alpha One-sided level of the reported bound.
-#' @param gamma Precision level of the contact set, or NULL.
-#' @param beta Level of the preliminary contact-set step: when `gamma` is
-#'   not given it is `1 - beta / log(V + 1)` (Chernozhukov, Lee & Rosen).
-#' @return List with \code{estimate}, \code{bound}, \code{naive_min},
-#'   \code{cells}, \code{means}, \code{ses}, \code{contact_set},
-#'   \code{k_alpha}, \code{n_cells}, \code{n}, \code{method}.
-#' @references Chernozhukov, Lee & Rosen (2013), Intersection Bounds,
-#'   Econometrica 81(2):667-737.
-#' @export
+#' @param y Numeric outcome.
+#' @param X Ignored (signature parity).
+#' @param instrument Cell label per observation; \code{NULL} is one cell.
+#' @param alpha One-sided level of the upper confidence bound.
+#' @param gamma Contact-set level; default \eqn{1 - 0.1/\log n}.
+#' @param beta Unused (signature parity).
+#' @return A list with \code{estimate} and \code{bound} (the one-sided upper
+#'   confidence bound), \code{hmu_estimate} (half-median-unbiased),
+#'   \code{naive_min}, \code{cells}, \code{means}, \code{ses},
+#'   \code{contact_set} (zero-based), \code{k_alpha}, \code{k_gamma},
+#'   \code{n_cells}, \code{n} and \code{method}.
+#' @references Chernozhukov, V., Lee, S. and Rosen, A. M. (2013). Intersection
+#'   bounds: estimation and inference. Econometrica 81, 667-737.
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' Chrbnd(V)
+#' Chrbnd(c(3, 3.5, 2.8, 1, 1.6, 1.2, 5, 4.1),
+#'   instrument = c(0, 0, 0, 1, 1, 1, 2, 2))$bound
+#' @export
 Chrbnd <- function(y, X = NULL, instrument = NULL, alpha = 0.05,
                    gamma = NULL, beta = 0.1) {
-  yv <- .s03vec(y)
+  yv <- as.numeric(y)
   n <- length(yv)
-  if (n == 0L) stop("empty input: y has no observations")
-  if (!(alpha > 0 && alpha < 1))
-    stop("alpha must lie strictly in (0, 1)")
-  ids <- if (is.null(instrument)) rep(0L, n) else instrument
+  if (n == 0) stop("empty input: y has no observations")
+  if (!(alpha > 0 && alpha < 1)) stop("alpha must lie strictly in (0, 1)")
+  ids <- if (is.null(instrument)) rep(0, n) else instrument
   if (length(ids) != n) stop("y and instrument must have the same length")
   keys <- unique(ids)
   V <- length(keys)
-  means <- numeric(V)
-  ses <- numeric(V)
-  sizes <- numeric(V)
-  for (q in seq_len(V)) {
-    vals <- yv[ids == keys[q]]
-    m <- length(vals)
-    if (m < 2L) stop("every instrument cell needs two observations")
-    mu <- sum(vals) / m
-    sd <- 0
-    for (v in vals) sd <- sd + (v - mu)^2
-    sd <- sqrt(sd / (m - 1))
-    means[q] <- mu
-    ses[q] <- sd / sqrt(m)
-    sizes[q] <- m
+  means <- ses <- sizes <- numeric(V)
+  for (j in seq_len(V)) {
+    v <- yv[ids == keys[j]]
+    m <- length(v)
+    if (m < 2) stop("every instrument cell needs two observations")
+    means[j] <- sum(v) / m
+    ses[j] <- sqrt(sum((v - means[j])^2) / (m - 1)) / sqrt(m)
+    sizes[j] <- m
   }
-  if (!(beta > 0 && beta < 1)) stop("beta must lie strictly in (0, 1)")
-  if (is.null(gamma)) gamma <- if (V > 1L) 1 - beta / log(V + 1) else 1 - beta
-  if (!(gamma > 0 && gamma < 1))
-    stop("gamma must lie strictly in (0, 1)")
-  k_gamma <- .s03qnorm(gamma)
-  naive <- min(means)
-  thr <- min(means + 2 * k_gamma * ses)
-  contact <- which(means - 2 * k_gamma * ses <= thr)
-  if (!length(contact)) contact <- which.min(means)
-  k_alpha <- .s03qnorm(1 - alpha / length(contact))
-  bound <- min(means[contact] - k_alpha * ses[contact])
-  .t1_result(estimate = bound, bound = bound, naive_min = naive,
-             cells = sizes, means = means, ses = ses,
-             contact_set = contact - 1L, k_alpha = k_alpha, n_cells = V,
-             n = n, method = "Chernozhukov-Lee-Rosen intersection bounds")
+  if (is.null(gamma)) gamma <- if (n > 1) 1 - 0.1 / log(n) else 0.9
+  if (!(gamma > 0 && gamma < 1)) stop("gamma must lie strictly in (0, 1)")
+  kmax <- function(p, m) stats::qnorm(p^(1 / m))
+  kg <- kmax(gamma, V)
+  thr <- min(means + kg * ses)
+  contact <- which(means <= thr + 2 * kg * ses)
+  ka <- kmax(1 - alpha, length(contact))
+  kh <- kmax(0.5, length(contact))
+  bound <- min(means[contact] + ka * ses[contact])
+  list(estimate = bound, bound = bound, hmu_estimate = min(means[contact] + kh * ses[contact]),
+       naive_min = min(means), cells = sizes, means = means, ses = ses,
+       contact_set = contact - 1L, k_alpha = ka, k_gamma = kg, n_cells = V, n = n,
+       method = "Chernozhukov-Lee-Rosen intersection bounds, independent cells")
 }
