@@ -128,7 +128,9 @@ jobs:
         # If covr still dies, the next step dumps every .Rout.fail
         # under /tmp so the actual testthat output is recoverable.
         run: |
-          Rscript -e 'cov <- covr::package_coverage(type = c("tests", "examples"), quiet = FALSE); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
+          # covr installs into tempdir() and R removes it at exit, so the
+          # testthat.Rout.fail is printed from inside the session on error.
+          Rscript -e 'dump_fail <- function(e) { for (f in list.files(tempdir(), "Rout[.]fail$", recursive = TRUE, full.names = TRUE)) { cat("\n===== ", f, " =====\n", sep = ""); cat(tail(readLines(f, warn = FALSE), 300), sep = "\n") }; stop(e) }; cov <- tryCatch(covr::package_coverage(type = c("tests", "examples"), quiet = FALSE), error = dump_fail); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
 
       - name: Dump testthat.Rout.fail on failure
         if: failure()
