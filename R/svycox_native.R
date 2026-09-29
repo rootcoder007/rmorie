@@ -187,7 +187,7 @@
         if (E[i] == 0L) {
             next
         }
-        risk <- ord[i_ord:n]
+        risk <- ord[T[ord] >= T[i]]
         s0 <- sum(r[risk])
         if (s0 <= 0) {
             next
