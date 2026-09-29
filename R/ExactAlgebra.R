@@ -300,7 +300,7 @@ GaloisGroup <- function(poly) {
 }
 
 .sy_prec <- c("+" = 1, "-" = 1, "*" = 2, "/" = 2, "^" = 4, neg = 3)
-.sy_funcs <- c("sin", "cos", "tan", "exp", "log", "sqrt", "abs")
+.sy_funcs <- c("sin", "cos", "tan", "exp", "log", "sqrt", "abs", "asin", "acos", "atan", "sinh", "cosh")
 
 .sy_tokenize <- function(s) {
   ch <- strsplit(s, "")[[1]]
@@ -340,7 +340,8 @@ GaloisGroup <- function(poly) {
 
 .sy_call <- function(f, x) {
   v <- suppressWarnings(switch(f, sin = sin(x), cos = cos(x), tan = tan(x), exp = exp(x), log = if (x == 0) NaN else log(x),
-                               sqrt = sqrt(x), abs = abs(x)))
+                               sqrt = sqrt(x), abs = abs(x), asin = asin(x), acos = acos(x), atan = atan(x),
+                               sinh = sinh(x), cosh = cosh(x)))
   if (is.infinite(v) && f != "exp") NaN else v
 }
 
