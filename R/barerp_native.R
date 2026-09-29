@@ -394,8 +394,11 @@ hess.Fun <- function(self, x) {
   p <- nrow(aeq)
   big <- matrix(0.0, n + p, n + p)
   big[seq_len(n), seq_len(n)] <- hmat
-  big[seq_len(n) + n, seq_len(n)] <- aeq
-  big[seq_len(n), seq_len(n) + n] <- aeq
+  # the p equality rows sit below H and their transpose to its right;
+  # indexing them by n (not p) overran the matrix unless p == n, and the
+  # caller's tryCatch turned that into a silent stop at x0
+  big[n + seq_len(p), seq_len(n)] <- aeq
+  big[seq_len(n), n + seq_len(p)] <- t(aeq)
   rhs <- c(-grad, rep(0.0, p))
   sol <- solve(big, rhs)
   sol[seq_len(n)]
@@ -645,7 +648,10 @@ barrier_method <- function(f0, constraints, x0,
     stop(paste0("barerp: x0 is not strictly feasible; use ",
                 "phase1() to find a starting point"))
   if (!is.null(aeq) && length(aeq) > 0L) {
-    aeq <- apply(as.matrix(aeq), 2, as.numeric)
+    # as.matrix + storage.mode, not apply(): apply() drops a one-row
+    # matrix to a vector and nrow() is then NULL
+    aeq <- as.matrix(aeq)
+    storage.mode(aeq) <- "double"
     if (!is.null(beq)) {
       for (r in seq_len(nrow(aeq))) {
         lhs <- sum(aeq[r, ] * x)
@@ -738,7 +744,8 @@ barrier_lp <- function(c, A_ub, b_ub, A_eq = NULL, b_eq = NULL,
                        x0 = NULL, ...) {
   c <- as.numeric(c)
   n <- length(c)
-  rows <- apply(as.matrix(A_ub), 2, as.numeric)
+  rows <- as.matrix(A_ub)
+  storage.mode(rows) <- "double"
   b <- as.numeric(b_ub)
   if (nrow(rows) != length(b))
     stop(sprintf("barerp: A_ub has %d rows but b_ub has %d",
