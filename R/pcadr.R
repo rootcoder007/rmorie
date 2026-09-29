@@ -28,13 +28,13 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Pcadim(V)
 Pcadim <- function(X, k = NULL) {
-  out <- morie_pca(X, k = k)
   Xm <- .t1_mat(X)
   n <- nrow(Xm)
   p <- ncol(Xm)
   kk <- if (is.null(k)) p else as.integer(k)
   if (kk < 1L || kk > p)
     stop("k must lie between 1 and the number of columns of X")
+  out <- morie_pca(X, k = k)
   W <- out$loadings
   PC <- out$scores
   for (j in seq_len(p)) {
