@@ -1823,8 +1823,12 @@ history_match <- function(sim, obs, prior_ppf, n_waves = 3L, n_design = 32L,
                          logical(1))
       ruled <- sum(!keep_idx)
       rows <- rows[keep_idx]
-      if (length(rows) == 0L) rows <- rows[seq_len(min(length(rows),
-                                                      as.integer(n_design)))]
+      # every candidate ruled out: fall back to the first n_design
+      # candidates, as the reference arm does, rather than an empty wave
+      if (length(rows) == 0L) {
+        rows <- lapply(seq_len(min(nrow(cand), as.integer(n_design))),
+                       function(i) as.numeric(cand[i, ]))
+      }
     } else {
       ruled <- 0L
     }
