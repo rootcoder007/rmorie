@@ -306,8 +306,9 @@ morie_rouge_n <- function(candidate, reference, n = 1, beta = 1.0) {
     match <- 0L
     if (length(cc) > 0L) {
       for (g in names(cc)) {
-        rc_count <- rc[[g]]
-        if (is.na(rc_count)) rc_count <- 0L
+        # [[ on a table stops with "subscript out of bounds" for a name
+        # it lacks, so an n-gram absent from the reference crashed
+        rc_count <- if (g %in% names(rc)) rc[[g]] else 0L
         match <- match + min(cc[[g]], rc_count)
       }
     }
