@@ -1,0 +1,41 @@
+test_that("E-value and bounding factor recompute", {
+  expect_equal(causal_e_value(2)$evalue, 2 + sqrt(2))
+  expect_equal(causal_e_value(0.5)$evalue, 2 + sqrt(2))
+  e <- 1.6 + sqrt(1.6 * 0.6)
+  expect_equal(unmeasured_conf_bias(e, e)$bias_factor, 1.6, tolerance = 1e-12)
+  expect_equal(unmeasured_conf_bias(2.5, 1.8, 1.6)$rr_bound, 1.6 / (2.5 * 1.8 / 3.3))
+})
+
+test_that("mediation recomputes", {
+  k <- 0:13
+  X <- sin(k)
+  M <- 0.5 * X + 0.3 * cos(2 * k)
+  Y <- 0.4 * X + 0.8 * M + 0.2 * sin(3 * k)
+  r <- causal_mediation_baron_kenny(X, M, Y)
+  expect_equal(r$indirect, unname(coef(lm(M ~ X))[2] * coef(lm(Y ~ X + M))[3]), tolerance = 1e-12)
+  C <- cos(0.9 * k)
+  expect_equal(mediation_analysis(Y, X, M, X = C)$c_prime, unname(coef(lm(Y ~ X + M + C))[2]), tolerance = 1e-12)
+  x <- c(0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0)
+  m <- c(0, 0, 1, 0, 1, 1, 0, 1, 0, 1, 1, 1)
+  y <- c(0.5, 1, 1.5, 0.7, 2, 2.2, 1.1, 2.5, 0.9, 2.4, 1.9, 1.2)
+  e <- function(a, b) mean(y[x == a & m == b])
+  p <- function(b, a) mean(m[x == a] == b)
+  mf <- mediation_formula(x, m, y, x1 = 1, x0 = 0)
+  expect_equal(mf$nde, sum(vapply(0:1, function(b) (e(1, b) - e(0, b)) * p(b, 0), 0)))
+  yb <- c(0, 1, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1)
+  fd <- function(t) sum(vapply(0:1, function(zv) mean(m[x == t] == zv) *
+    sum(vapply(0:1, function(xv) mean(yb[x == xv & m == zv]) * mean(x == xv), 0)), 0))
+  expect_equal(unname(frontdoor_adjustment(x, m, yb)$distribution[["1"]]["1"]), fd(1))
+  expect_equal(unname(front_door(yb, x, m)$distribution[["0"]]["1"]), fd(0))
+})
+
+test_that("front-door criterion on textbook graphs", {
+  expect_true(frontdoor_criterion(list(U = c("X", "Y"), X = "Z", Z = "Y"), "X", "Y", "Z")$satisfied)
+  expect_false(frontdoor_criterion(list(X = c("Z", "Y"), Z = "Y"), "X", "Y", "Z")$cond1)
+  r <- frontdoor_criterion(list(U = c("X", "Z"), X = "Z", Z = "Y"), "X", "Y", "Z")
+  expect_true(r$cond1)
+  expect_false(r$cond2)
+  r <- frontdoor_criterion(list(V = c("Z", "Y"), X = "Z", Z = "Y"), "X", "Y", "Z")
+  expect_true(r$cond2)
+  expect_false(r$cond3)
+})
