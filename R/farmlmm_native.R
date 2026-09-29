@@ -121,12 +121,15 @@
   y <- .to_vec(y)
   w <- as.numeric(w)
   if (nrow(X) != length(y)) stop("wls: length mismatch")
+  # _s03core.wls fits an intercept (design() prepends a column of ones)
+  # and adds its last argument to the diagonal as a ridge
   sw <- sqrt(w)
-  Xw <- X * sw
+  Xw <- cbind(1, X) * sw
   yw <- y * sw
   xtx <- crossprod(Xw, Xw)
+  diag(xtx) <- diag(xtx) + rcond
   xty <- crossprod(Xw, yw)
-  co <- qr.solve(xtx, xty, tol = rcond)
+  co <- solve(xtx, xty)
   list(coef = as.numeric(co))
 }
 
@@ -237,7 +240,7 @@
     sxx <- sum((xj - xm) ^ 2)
     se <- if (sxx > .farmlmm_EPS) sqrt(s2 / sxx) else Inf
     t <- if (se > 0) co[2L] / se else 0
-    pv[j] <- 2 * (1 - .norm_cdf(abs(t)))
+    pv[j] <- 2 * .norm_cdf(-abs(t))
     betas[j] <- co[2L]
   }
   list(p = pv, beta = betas, covariates = as.integer(covariates),
@@ -303,7 +306,8 @@
   converged <- FALSE
   fem <- NULL
   for (it in seq_len(as.integer(max_iter))) {
-    fem <- .fixed_effect_scan(yv, M, sel - 1L)
+    # sel is already 0-based, the convention .fixed_effect_scan takes
+    fem <- .fixed_effect_scan(yv, M, sel)
     new <- sort(which(fem$p < thr) - 1L)
     hist[[length(hist) + 1L]] <- new
     if (identical(new, sel)) {
