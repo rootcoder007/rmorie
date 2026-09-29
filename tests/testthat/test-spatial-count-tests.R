@@ -1,0 +1,36 @@
+test_that("Scdisp is the Cameron-Trivedi regression test", {
+  y <- c(0, 3, 1, 9, 0, 6, 2, 1, 4, 12)
+  x <- c(0.1, 0.4, 0.5, 0.9, 0.3, 0.7, 0.2, 0.8, 0.6, 1)
+  mu <- fitted(glm(y ~ x, family = poisson, control = glm.control(epsilon = 1e-14)))
+  a <- ((y - mu)^2 - y) / mu
+  z <- mean(a) / (sd(a) / sqrt(10))
+  r <- Scdisp(y, cbind(1, x))
+  expect_equal(r$statistic, unname(z), tolerance = 1e-8)
+  expect_equal(r$p_value, unname(pnorm(z, lower.tail = FALSE)), tolerance = 1e-9)
+  f <- lm(a ~ 0 + mu)
+  expect_equal(Scdisp(y, cbind(1, x), 2)$statistic, unname(coef(summary(f))[1, 3]), tolerance = 1e-8)
+})
+
+test_that("Scnblrt uses the boundary mixture", {
+  expect_equal(Scnblrt(-40, -42.3)$p_value, 0.5 * pchisq(4.6, 1, lower.tail = FALSE), tolerance = 1e-13)
+  expect_equal(Scnblrt(-43, -42)$statistic, 0)
+})
+
+test_that("Scpboot and Scpflx wrap SarPoisson", {
+  W <- rbind(c(0, 1, 0, 0, 0), c(0.5, 0, 0.5, 0, 0), c(0, 0.5, 0, 0.5, 0), c(0, 0, 0.5, 0, 0.5), c(0, 0, 0, 1, 0))
+  X <- cbind(1, c(0.1, 0.4, 0.5, 0.9, 0.3))
+  y <- c(1, 3, 4, 7, 2)
+  f <- SarPoisson(y, X, W)
+  u <- .morie_random_uniform(3 * 5, seed = 2)
+  dr <- vapply(1:3, function(b) SarPoisson(qpois(u[(b - 1) * 5 + 1:5], f$fitted), X, W)$rho, numeric(1))
+  r <- Scpboot(y, X, W, B = 3, seed = 2)
+  expect_equal(r$draws, dr, tolerance = 1e-6)
+  W3 <- rbind(c(0, 1, 0), c(0.5, 0, 0.5), c(0, 1, 0))
+  xx <- c(0.1, 0.5, 0.3, 0.4, 0.9, 0.2, 0.6, 0.8, 0.7)
+  yy <- c(1, 4, 2, 2, 6, 1, 3, 7, 4)
+  ids <- rep(c("a", "b", "c"), 3)
+  g <- SarPoisson(yy, cbind(xx, outer(ids, c("a", "b", "c"), "==") * 1), kronecker(diag(3), W3))
+  p <- Scpflx(yy, matrix(xx), W3, ids)
+  expect_equal(p$statistic, g$rho, tolerance = 1e-6)
+  expect_equal(unname(p$unit_effects), g$coefficients[2:4], tolerance = 1e-6)
+})
