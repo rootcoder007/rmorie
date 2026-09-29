@@ -312,7 +312,8 @@ morie_yolovx_simota_assign <- function(costs, ious, top_q = 10, max_k = NULL) {
       function(p) owner[[as.character(p)]] == g,
       assign_[[g]]
     ))
-    final[[as.character(g - 1L)]] <- kept
+    # 0-based prediction indices, like the ground-truth keys and Python
+    final[[as.character(g - 1L)]] <- as.integer(kept) - 1L
     n_pos <- n_pos + length(kept)
   }
   # contested = predictions claimed by more than one ground truth
