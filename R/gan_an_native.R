@@ -351,7 +351,9 @@ score_separation <- function(normal_scores, anomalous_scores) {
   hits <- 0
   for (x in a) {
     for (y in b) {
-      if (y > x) hits <- hits + 1
+      # Mann-Whitney AUC: a tie counts one half, so identical score
+      # populations give 0.5 as the note below says, not 0
+      if (y > x) hits <- hits + 1 else if (y == x) hits <- hits + 0.5
     }
   }
   auc <- hits / (length(a) * length(b))

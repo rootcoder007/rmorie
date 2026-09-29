@@ -296,7 +296,8 @@ Dpll <- function(cnf) {
     if (any(c == 0L)) stop("0 is not a literal")
     c
   })
-  allv <- sort(unique(abs(unlist(clauses))))
+  # as.integer: an empty CNF (trivially satisfiable) unlists to NULL
+  allv <- sort(unique(abs(as.integer(unlist(clauses)))))
   nvars <- if (length(allv)) max(allv) else 0L
   st <- new.env()
   st$decisions <- 0L

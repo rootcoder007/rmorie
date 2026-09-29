@@ -334,7 +334,17 @@ morie_forwsr_forward_search <- function(X, y, start = NULL,
     cfac <- morie_forwsr_consistency_factor(length(cur), n)
     if (length(outside) > 0L && f$sigma > 0) {
       sig <- f$sigma / sqrt(cfac)
-      mdr <- if (sig > 0) min(abs(f$residuals[outside + 1L])) / sig else NA_real_
+      # Atkinson & Riani (2000, eq. 2.14): the deletion residual of a
+      # unit outside the subset carries its leverage,
+      # e_i / (s sqrt(1 + x_i' (X_S' X_S)^{-1} x_i))
+      Xs <- pr$M[cur + 1L, , drop = FALSE]
+      Xo <- pr$M[outside + 1L, , drop = FALSE]
+      h <- rowSums((Xo %*% solve(crossprod(Xs))) * Xo)
+      mdr <- if (sig > 0) {
+        min(abs(f$residuals[outside + 1L]) / sqrt(1 + h)) / sig
+      } else {
+        NA_real_
+      }
     } else {
       mdr <- NA_real_
     }

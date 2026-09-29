@@ -504,7 +504,10 @@ step_function_loglik <- function(y, s, h, L) {
     if (v < 0 || v > as.numeric(L))
       stop(sprintf("bayrjmcmc: point %g lies outside [0, %g]", v, as.numeric(L)))
     j <- 1L
-    while (j + 1 < length(edges) - 1L && v >= edges[j + 1]) j <- j + 1L
+    # 1-based: interval j is [edges[j], edges[j + 1]) for j in 1..k+1;
+    # the 0-based Python bound j + 1 < len(edges) - 1 stopped one short
+    # and piled every point past the last step into interval k
+    while (j < length(edges) - 1L && v >= edges[j + 1]) j <- j + 1L
     counts[j] <- counts[j] + 1L
   }
   out <- 0

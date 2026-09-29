@@ -1918,17 +1918,28 @@ morie_geron_symd_to_string <- function(t) {
   if (k == "var") {
     return(t[[2]])
   }
+  # parenthesise every child the parser would otherwise re-associate, so
+  # parse(to_string(t)) returns t: unary minus binds tighter than * and /
+  # but looser than ^, and every binary operator but ^ is left-associative
+  wrap <- function(x, kinds) {
+    txt <- morie_geron_symd_to_string(x)
+    if (x[[1]] %in% kinds) paste0("(", txt, ")") else txt
+  }
   if (k == "neg") {
-    return(paste0("-", morie_geron_symd_to_string(t[[2]])))
+    return(paste0("-", wrap(t[[2]], c("+", "-", "*", "/"))))
   }
   if (k == "call") {
     return(paste0(t[[2]], "(", morie_geron_symd_to_string(t[[3]]), ")"))
   }
-  left <- morie_geron_symd_to_string(t[[2]])
-  right <- morie_geron_symd_to_string(t[[3]])
-  if (k %in% c("*", "/", "^")) {
-    if (t[[2]][[1]] %in% c("+", "-")) left <- paste0("(", left, ")")
-    if (t[[3]][[1]] %in% c("+", "-", "*", "/")) right <- paste0("(", right, ")")
+  if (k %in% c("+", "-")) {
+    left <- morie_geron_symd_to_string(t[[2]])
+    right <- wrap(t[[3]], c("+", "-"))
+  } else if (k %in% c("*", "/")) {
+    left <- wrap(t[[2]], c("+", "-"))
+    right <- wrap(t[[3]], c("+", "-", "*", "/"))
+  } else {
+    left <- wrap(t[[2]], c("+", "-", "*", "/", "^", "neg"))
+    right <- wrap(t[[3]], c("+", "-", "*", "/"))
   }
   paste(left, k, right)
 }

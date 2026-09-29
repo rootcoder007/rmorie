@@ -106,7 +106,9 @@ lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
     stop(sprintf("lsa: k must lie in 1..%d, got %d", full, kk))
   Tk <- T0[, seq_len(kk), drop = FALSE]
   Sk <- S[seq_len(kk)]
-  Dk <- t(Dt[, seq_len(kk), drop = FALSE])
+  # rows of Dt are the right singular vectors; D keeps one row per
+  # document and one column per retained factor
+  Dk <- t(Dt[seq_len(kk), , drop = FALSE])
   list(estimate = Tk, T = Tk, S = Sk, D = Dk,
        k = kk, full_rank = full, weighting = how,
        method = "truncated SVD of the term-document matrix; Deerwester et al. (1990)",

@@ -238,8 +238,22 @@ copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
       scale[l] <- s
     }
   }
+  # F is only the FILTERED probability P(template | sites 1..l); the
+  # copying posterior needs the backward pass too (forward-backward)
+  Bk <- matrix(1, nrow = L, ncol = K)
+  if (L >= 2L) {
+    for (l in (L - 1L):1L) {
+      e <- vapply(seq_len(K), function(kk) emit(kk, l + 1L), numeric(1)) *
+        Bk[l + 1L, ]
+      Bk[l, ] <- (1.0 - r_) * e + r_ * sum(e) / K
+      Bk[l, ] <- Bk[l, ] / sum(Bk[l, ])
+    }
+  }
+  P <- F * Bk
+  P <- P / rowSums(P)
   list(
-    posterior = F,
+    posterior = P,
+    forward = F,
     n_templates = K,
     n_sites = L,
     log_likelihood = sum(log(pmax(scale, .impfun_eps)))

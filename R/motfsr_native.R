@@ -46,7 +46,7 @@
   starts <- list()
   for (i in seq_along(coded)) {
     row <- coded[[i]]
-    for (j in seq_len(length(row) - w + 1L) - 1L)
+    for (j in seq_len(max(0L, length(row) - w + 1L)) - 1L)
       starts[[length(starts) + 1L]] <- c(i, j)
   }
   if (length(starts) == 0L)
@@ -57,8 +57,10 @@
 #' @keywords internal
 #' @noRd
 .ghc_mot_mu <- function(coded, L) {
+  # tabulate, not c[row + 1] <- c[row + 1] + 1: an indexed assignment
+  # counts a repeated letter once per sequence
   c <- rep(0, L)
-  for (row in coded) c[row + 1L] <- c[row + 1L] + 1
+  for (row in coded) c <- c + tabulate(row + 1L, nbins = L)
   c / sum(c)
 }
 
@@ -119,7 +121,8 @@
       if (run > worst) { worst <- run
       wi <- i
       wj <- 0L }
-      for (j in 2:(m - w + 1L)) {
+      # range(1, m - w + 1) is empty when the row is exactly w long
+      if (m > w) for (j in 2:(m - w + 1L)) {
         run <- run + row[j + w - 1L] - row[j - 1L]
         if (run > worst) { worst <- run
         wi <- i
@@ -483,7 +486,9 @@ morie_motfsr <- function(sequences, w, alphabet = NULL, n_motifs = 1,
           f <- 1
           lo_ <- max(0L, j - w)
           hi_ <- min(j, length(z[[i]]))
-          for (k in (lo_ + 1L):hi_) f <- f * (1 - z[[i]][k])
+          # range(lo, hi) is empty for a sequence shorter than w; the
+          # colon counted down to index 0 and erased with NA
+          if (hi_ > lo_) for (k in (lo_ + 1L):hi_) f <- f * (1 - z[[i]][k])
           erasing[[i]][j] <- erasing[[i]][j] * f
         }
       }
@@ -841,7 +846,7 @@ motfsr_normalise_windows <- function(z, w, max_sweeps = 100) {
       if (run > worst) { worst <- run
       wi <- i
       wj <- 0L }
-      for (j in seq.int(2L, m - w + 1L)) {
+      if (m > w) for (j in seq.int(2L, m - w + 1L)) {
         run <- run + row[j + w - 1L] - row[j - 1L]
         if (run > worst) { worst <- run
         wi <- i
@@ -1025,7 +1030,7 @@ motfsr_run <- function(sequences, w, alphabet = NULL, n_motifs = 1,
           f <- 1
           lo_ <- max(1L, j_ - w + 1L)
           hi_ <- min(j_, length(z[[i]]))
-          for (k in lo_:hi_) f <- f * (1 - z[[i]][k])
+          if (hi_ >= lo_) for (k in lo_:hi_) f <- f * (1 - z[[i]][k])
           erasing[[i]][j_] <- erasing[[i]][j_] * f
         }
       }

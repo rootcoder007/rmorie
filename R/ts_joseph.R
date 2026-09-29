@@ -574,7 +574,9 @@ morie_calfeat <- function(dates) {
     mlen <- .morie_jo_mlen[m] + if (m == 2L && .morie_jo_leap(y)) 1 else 0
     if (d < 1L || d > mlen) stop("day is out of range for that month.", call. = FALSE)
     dn <- .morie_jo_daynum(y, m, d)
-    dow <- (dn + 4) %% 7
+    # Monday = 0 (pandas dayofweek, so dow >= 5 is Saturday/Sunday);
+    # 1970-01-01 was a Thursday
+    dow <- (dn + 3) %% 7
     doy <- dn - .morie_jo_daynum(y, 1L, 1L) + 1
     rows[[i]] <- list(year = y, month = m, day = d, dow = dow, doy = doy,
                       quarter = (m - 1L) %/% 3L + 1L,

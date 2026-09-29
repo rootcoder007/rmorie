@@ -182,7 +182,8 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
   dp <- matrix(.benRea_NEG, L, n)
   bk <- matrix(-1L, L, n)
   for (j in 1:n) if (ok0[j]) dp[1, j] <- em[1, j]
-  for (t in 2:L) {
+  # seq_len guards: 2:L and L:2 count the wrong way for a one-token input
+  for (t in seq_len(L - 1L) + 1L) {
     for (j in 1:n) {
       best <- .benRea_NEG
       arg <- -1L
@@ -201,7 +202,7 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
   end <- which.max(dp[L, ])
   if (dp[L, end] == .benRea_NEG) stop("benRea: no valid path exists")
   path_idx <- end
-  for (t in L:2) {
+  for (t in rev(seq_len(L - 1L) + 1L)) {
     path_idx <- c(bk[t, path_idx[1]], path_idx)
   }
   list(path = labels[path_idx], score = dp[L, end])
@@ -312,9 +313,10 @@ ner_decode <- function(emissions, types, decoder = "viterbi",
     score <- vd$score
   } else {
     path <- greedy_decode(emissions, labels)
-    score <- sum(vapply(seq_along(path), function(t) {
-      emissions[[t]][match(path[t], labels)]
-    }, numeric(1)))
+    # score from the emission MATRIX; emissions[[t]] is a single cell of
+    # a matrix, not row t
+    em <- as.matrix(emissions)
+    score <- sum(em[cbind(seq_along(path), match(path, labels))])
   }
   spans <- extract_spans(path)
   out <- list(estimate = path, path = path, score = score, spans = spans,

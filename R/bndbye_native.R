@@ -46,7 +46,8 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
   hi <- as.numeric(theta_set$upper)
   if (hi < lo) stop("bndbye: the identified set is empty")
   if (hi - lo <= .bndbye_GHC_EPS) return(list(grid = lo, density = 1))
-  g <- lo + (hi - lo) * seq_len(as.integer(n_grid) - 1L) /
+  # n_grid points from lo to hi inclusive; seq_len(n - 1) dropped lo
+  g <- lo + (hi - lo) * (seq_len(as.integer(n_grid)) - 1L) /
                 (as.integer(n_grid) - 1L)
   list(grid = g, density = rep(1 / (hi - lo), length(g)))
 }

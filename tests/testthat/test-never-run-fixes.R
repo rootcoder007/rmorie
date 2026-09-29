@@ -26,12 +26,17 @@ test_that("rjmcmc: the uniform stream advances and births are accepted from k = 
   expect_length(unique(c(u(), u(), u(), u())), 4L)
   set.seed(2)
   y <- sort(c(runif(30, 0, .4), runif(60, .4, 1)))
-  r <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
+  # a Gamma(2, 0.02) height prior sits on the data scale (about 90 events
+  # on [0, 1]); the default beta = 200 shrinks every height towards 0.005,
+  # and under the corrected likelihood the posterior then keeps k = 0
+  r <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L,
+                          alpha = 2, beta = 0.02)
   # a clear step in intensity must pull mass off k = 0
   expect_gt(r$k_mean, 0.5)
   expect_lt(r$k_posterior[1], 0.5)
   # deterministic for a seed
-  r2 <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
+  r2 <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L,
+                           alpha = 2, beta = 0.02)
   expect_identical(r$k_posterior, r2$k_posterior)
 })
 

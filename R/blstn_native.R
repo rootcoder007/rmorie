@@ -218,9 +218,9 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
                         letter_probs = NULL, pvalues = TRUE) {
   q <- as.character(query)
   if (!nzchar(q)) stop("blstn: query must be non-empty")
-  if (is.character(subjects)) subs <- list(subjects) else {
-    subs <- lapply(subjects, as.character)
-  }
+  # a character vector is one subject per element; list(subjects) made a
+  # two-subject vector a single malformed subject
+  subs <- lapply(as.list(subjects), as.character)
   if (length(subs) == 0L) stop("blstn: subjects must be non-empty")
   w <- as.integer(w)
   if (w < 1L) stop("blstn: w must be >= 1")
@@ -603,13 +603,9 @@ morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
   c <- as.integer(c)
   if (c < 1L) stop("blstn: c must be >= 1")
   y <- K * as.numeric(m) * as.numeric(n) * exp(-lam * as.numeric(score))
-  tail <- 0
-  term <- 1
-  for (i in 0:(c - 1L)) {
-    if (i > 0L) term <- term * y / i
-    tail <- tail + term
-  }
-  p <- 1 - exp(-y) * tail
+  # P(Poisson(y) >= c), taken as an upper tail: 1 - exp(-y) * sum(...)
+  # cancels to 0 for the small y of a significant hit
+  p <- if (c == 1L) -expm1(-y) else stats::ppois(c - 1L, y, lower.tail = FALSE)
   min(max(p, 0), 1)
 }
 

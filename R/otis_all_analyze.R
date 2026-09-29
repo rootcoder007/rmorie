@@ -124,12 +124,10 @@ NULL
   ok <- !is.na(v)
   if (!any(ok)) return(NULL)
   agg <- if (aggfunc == "max") max else sum
-  pivot <- stats::xtabs(
-    stats::as.formula(sprintf("v ~ %s + %s", row, col)),
-    data = data.frame(df[ok, c(row, col)], v = v[ok]),
-    addNA = FALSE
-  )
-  m <- as.matrix(pivot)
+  # Python pivot_table(aggfunc=, fill_value=0): empty cells are 0, and
+  # aggfunc applies per cell (xtabs could only sum).
+  m <- tapply(v[ok], list(df[[row]][ok], df[[col]][ok]), agg)
+  m[is.na(m)] <- 0
   totals <- rowSums(m)
   ord <- order(-totals)[seq_len(min(top_rows, nrow(m)))]
   m <- m[ord, , drop = FALSE]

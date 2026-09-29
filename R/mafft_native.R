@@ -253,7 +253,8 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
   for (k in seq_len(size) - 1L) {
     tot <- 0.0
     for (i in seq_len(n)) {
-      j <- (i + k) %% size
+      # 0-based n + k, as in eq (2): the 1-based i shifted every lag by one
+      j <- (i - 1L + k) %% size
       if (j < m) tot <- tot + a[i] * b[j + 1L]
     }
     out[k + 1L] <- tot
@@ -680,19 +681,23 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
       # current cell and the traceback spun on it forever
       best_v <- P[i - 1L, j - 1L]
       best_b <- list(kind = "M", pi = i - 2L, pj = j - 2L)
-      for (x in 0L:(i - 1L)) {
-        if (is.infinite(P[x + 1L, j])) next
+      # a gap run in one group ends at the diagonal predecessor: from
+      # (x, j - 1) or (i - 1, y) in the reference frame, i.e. R rows x + 1
+      # and i - 1 of COLUMN j - 1 / ROW i - 1 (reading column j and row i
+      # scored the run against the cell being filled)
+      for (x in 0L:(i - 2L)) {
+        if (is.infinite(P[x + 1L, j - 1L])) next
         pen <- s_op * (1.0 - (gs1[x + 1L] + ge1[i - 1L]) / 2.0)
-        v <- P[x + 1L, j] - pen
+        v <- P[x + 1L, j - 1L] - pen
         if (v > best_v) {
           best_v <- v
           best_b <- list(kind = "I", pi = x, pj = j - 2L)
         }
       }
-      for (y in 0L:(j - 1L)) {
-        if (is.infinite(P[i, y + 1L])) next
+      for (y in 0L:(j - 2L)) {
+        if (is.infinite(P[i - 1L, y + 1L])) next
         pen <- s_op * (1.0 - (gs2[y + 1L] + ge2[j - 1L]) / 2.0)
-        v <- P[i, y + 1L] - pen
+        v <- P[i - 1L, y + 1L] - pen
         if (v > best_v) {
           best_v <- v
           best_b <- list(kind = "D", pi = i - 2L, pj = y)
@@ -1609,28 +1614,10 @@ mafft_clean <- function(seqs, seq_type = NULL) {
 #' @return A list with \code{M}, \code{f}.
 #' @export
 mafft_default_raw <- function(seq_type, which = "jtt200") {
-  if (seq_type == "nt") {
-    M <- list()
-    for (a in strsplit(.MAFFT_NT, "")[[1]]) {
-      for (b in strsplit(.MAFFT_NT, "")[[1]]) {
-        M[[paste0(a, "_", b)]] <- if (a == b) 1.0 else -1.0
-      }
-    }
-    return(list(M = M, f = NULL))
-  }
-  if (which == "grantham") {
-    M <- list()
-    aa_letters <- strsplit(.MAFFT_AA, "")[[1]]
-    for (a in aa_letters) {
-      for (b in aa_letters) {
-        M[[paste0(a, "_", b)]] <- -((.MAFFT_VHAT[[a]] - .MAFFT_VHAT[[b]])^2 +
-          (.MAFFT_PHAT[[a]] - .MAFFT_PHAT[[b]])^2)
-      }
-    }
-    return(list(M = M, f = NULL))
-  }
-  j <- jtt_matrix(200)
-  list(M = j$matrix, f = j$freqs)
+  # the module's own raw matrix: "a|b" keys, the whole alphabet (the
+  # strsplit of an already-split alphabet kept only its first letter)
+  r <- .mafft_default_raw_matrix(seq_type, which)
+  list(M = r$M, f = r$freqs)
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
@@ -1643,27 +1630,7 @@ mafft_default_raw <- function(seq_type, which = "jtt200") {
 #' @param group A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
 #' @export
-mafft_degap <- function(group) {
-  if (length(group) == 0L) {
-    return(group)
-  }
-  L <- nchar(group[1])
-  keep <- c()
-  for (i in 1:L) {
-    col <- substr(group, i, i)
-    if (any(col != "-")) keep <- c(keep, i)
-  }
-  vapply(group, function(s) {
-    if (length(keep) == 0L) {
-      ""
-    } else {
-      paste(substr(
-        rep(s, length(keep)),
-        keep, keep
-      ), collapse = "")
-    }
-  }, character(1))
-}
+mafft_degap <- function(group) .mafft_degap(group)
 
 # -- restored: morie-only definition kept through the rmorie sync --
 #' mafft_gap_profiles
@@ -1676,27 +1643,7 @@ mafft_degap <- function(group) {
 #' @param weights A vector; indexed elementwise.
 #' @return A list with \code{gs}, \code{ge}.
 #' @export
-mafft_gap_profiles <- function(group, weights) {
-  L <- nchar(group[1])
-  gs <- rep(0.0, L + 1L)
-  ge <- rep(0.0, L + 1L)
-  for (idx in seq_along(group)) {
-    s <- group[idx]
-    w <- weights[idx]
-    z <- vapply(
-      strsplit(s, "")[[1]], function(ch) if (ch == "-") 1.0 else 0.0,
-      numeric(1)
-    )
-    a <- 1.0 - z
-    for (x in 1:L) {
-      nxt <- if (x < L) z[x + 1L] else 0.0
-      gs[x] <- gs[x] + w * a[x] * nxt
-      prv <- if (x > 1L) z[x - 1L] else 0.0
-      ge[x] <- ge[x] + w * prv * a[x]
-    }
-  }
-  list(gs = gs, ge = ge)
-}
+mafft_gap_profiles <- function(group, weights) .mafft_gap_profiles(group, weights)
 
 # -- restored: morie-only definition kept through the rmorie sync --
 #' mafft_jtt_exchangeability
@@ -1737,8 +1684,8 @@ mafft_jtt_exchangeability <- function() {
 #' @return One of two values, depending on the branch taken.
 #' @export
 mafft_lookup <- function(M, a, b) {
-  v <- M[[paste0(a, "_", b)]]
-  if (is.null(v)) 0.0 else as.numeric(v)
+  # "a|b" is the key every matrix in this module carries
+  as.numeric(.mafft_get(M, a, b))
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
@@ -1757,95 +1704,11 @@ mafft_lookup <- function(M, a, b) {
 #' @return A list with \code{out1}, \code{out2}.
 #' @export
 mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
-  n <- nchar(g1[1])
-  m <- nchar(g2[1])
-  if (n == 0) {
-    return(list(
-      out1 = rep(strrep("-", m), length(g1)),
-      out2 = as.list(g2)
-    ))
-  }
-  if (m == 0) {
-    return(list(
-      out1 = as.list(g1),
-      out2 = rep(strrep("-", n), length(g2))
-    ))
-  }
-  gp1 <- mafft_gap_profiles(g1, w1)
-  gp2 <- mafft_gap_profiles(g2, w2)
-  gs1 <- gp1$gs
-  ge1 <- gp1$ge
-  gs2 <- gp2$gs
-  ge2 <- gp2$ge
-  neg <- -Inf
-  P <- matrix(neg, n + 1L, m + 1L)
-  back <- vector("list", (n + 1L) * (m + 1L))
-  dim(back) <- c(n + 1L, m + 1L)
-  P[1, 1] <- 0.0
-  for (i in 2:(n + 1L)) {
-    P[i, 1] <- -s_op * (1.0 - (gs1[1] + ge1[i - 1L]) / 2.0)
-    back[[i, 1]] <- list(kind = "I", pi = 0L, pj = 0L)
-  }
-  for (j in 2:(m + 1L)) {
-    P[1, j] <- -s_op * (1.0 - (gs2[1] + ge2[j - 1L]) / 2.0)
-    back[[1, j]] <- list(kind = "D", pi = 0L, pj = 0L)
-  }
-  for (i in 2:(n + 1L)) {
-    for (j in 2:(m + 1L)) {
-      h <- mafft_site_score(M, g1, g2, w1, w2, i - 1L, j - 1L)
-      # backpointers hold the PREDECESSOR in the 0-based frame the
-      # traceback walks (it adds one to re-enter matrix indexing): M
-      # stored the current cell and the traceback spun forever
-      best <- list(v = P[i - 1L, j - 1L], kind = "M", pi = i - 2L, pj = j - 2L)
-      for (x in 0:(i - 1L)) {
-        if (is.infinite(P[x + 1L, j - 1L + 1L])) next
-        pen <- s_op * (1.0 - (gs1[x + 1L] + ge1[i]) / 2.0)
-        v <- P[x + 1L, j] - pen
-        if (v > best$v) {
-          best <- list(v = v, kind = "I", pi = x, pj = j - 2L)
-        }
-      }
-      for (y in 0:(j - 1L)) {
-        if (is.infinite(P[i, y + 1L])) next
-        pen <- s_op * (1.0 - (gs2[y + 1L] + ge2[j]) / 2.0)
-        v <- P[i, y + 1L] - pen
-        if (v > best$v) {
-          best <- list(v = v, kind = "D", pi = i - 2L, pj = y)
-        }
-      }
-      P[i, j] <- h + best$v
-      back[[i, j]] <- list(kind = best$kind, pi = best$pi, pj = best$pj)
-    }
-  }
-  cols <- list()
-  i <- n + 1L
-  j <- m + 1L
-  while (i > 1L && j > 1L) {
-    b <- back[[i, j]]
-    cols[[length(cols) + 1L]] <- c(i - 1L, j - 1L)
-    if (b$kind == "I") {
-      if (i - 2L >= b$pi) for (t in (i - 2L):(b$pi)) cols[[length(cols) + 1L]] <- c(t, NA)
-    } else if (b$kind == "D") {
-      if (j - 2L >= b$pj) for (t in (j - 2L):(b$pj)) cols[[length(cols) + 1L]] <- c(NA, t)
-    }
-    i <- b$pi + 1L
-    j <- b$pj + 1L
-  }
-  # guard the tails: the colon ASCENDS from 0 when i or j is already 1
-  if (i > 1L) for (t in (i - 1L):1) cols[[length(cols) + 1L]] <- c(t, NA)
-  if (j > 1L) for (t in (j - 1L):1) cols[[length(cols) + 1L]] <- c(NA, t)
-  cols <- rev(cols)
-  out1 <- vapply(g1, function(s) {
-    paste(vapply(cols, function(c) {
-      if (is.na(c[1])) "-" else substr(s, c[1], c[1])
-    }, character(1)), collapse = "")
-  }, character(1))
-  out2 <- vapply(g2, function(s) {
-    paste(vapply(cols, function(c) {
-      if (is.na(c[2])) "-" else substr(s, c[2], c[2])
-    }, character(1)), collapse = "")
-  }, character(1))
-  list(out1 = as.list(out1), out2 = as.list(out2))
+  # the module's recursion: the copy kept here read ge[i] where the
+  # paper's g_end is taken at the previous column, and looked scores up
+  # under keys no matrix of this module carries
+  r <- .mafft_nw(g1, g2, M, w1, w2, s_op)
+  list(out1 = as.list(r$out1), out2 = as.list(r$out2))
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
@@ -1860,10 +1723,7 @@ mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
 #' @param n_peaks Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{[}.
 #' @export
-mafft_peaks <- function(lags, c, n_peaks) {
-  ord <- order(c, decreasing = TRUE)
-  lags[ord[seq_len(as.integer(n_peaks))]]
-}
+mafft_peaks <- function(lags, c, n_peaks) .mafft_peaks(lags, c, n_peaks)
 
 # -- restored: morie-only definition kept through the rmorie sync --
 #' mafft_site_score
@@ -1883,17 +1743,7 @@ mafft_peaks <- function(lags, c, n_peaks) {
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 mafft_site_score <- function(M, ga, gb, wa, wb, i, j) {
-  tot <- 0.0
-  for (idx_a in seq_along(ga)) {
-    a <- substr(ga[idx_a], i, i)
-    if (a == "-") next
-    for (idx_b in seq_along(gb)) {
-      b <- substr(gb[idx_b], j, j)
-      if (b == "-") next
-      tot <- tot + wa[idx_a] * wb[idx_b] * mafft_lookup(M, a, b)
-    }
-  }
-  tot
+  .mafft_site_score(M, ga, gb, wa, wb, i, j)
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
@@ -1955,7 +1805,8 @@ mafft_xcorr_fft <- function(a, b) {
   while (size < n + m) size <- size * 2L
   fa <- fft(c(as.numeric(a), rep(0, size - n)))
   fb <- fft(c(as.numeric(b), rep(0, size - m)))
-  back <- fft(fa * Conj(fb), inverse = TRUE) / size
+  # sum_n a(n) b(n + k), as mafft_xcorr_direct and eq (2): conj(A) B
+  back <- fft(Conj(fa) * fb, inverse = TRUE) / size
   list(c = Re(back), size = size)
 }
 

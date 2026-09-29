@@ -1253,7 +1253,11 @@ Ops.morie_gr_dual <- function(e1, e2) {
     },
     "^" = {
       p <- b$value
-      morie_gr_dual(a$value^p, p * a$value^(p - 1) * a$deriv)
+      d <- p * a$value^(p - 1) * a$deriv
+      # a dual exponent contributes a^p log(a) p'; dropping it made
+      # x^x differentiate as if the exponent were constant
+      if (b$deriv != 0) d <- d + a$value^p * log(a$value) * b$deriv
+      morie_gr_dual(a$value^p, d)
     },
     stop("unsupported operator ", .Generic, call. = FALSE)
   )

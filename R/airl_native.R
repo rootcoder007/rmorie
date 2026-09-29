@@ -393,141 +393,20 @@ airl <- function(expert_states, expert_actions, expert_next,
                  expert_log_policy, policy_states, policy_actions,
                  policy_next, policy_log_policy, gamma = 0.99,
                  state_only = TRUE, lr = 0.1, epochs = 500L, l2 = 0) {
-  Eprep <- .airl_prep(expert_states, expert_actions, expert_next,
-                      expert_log_policy, "expert")
-  Pprep <- .airl_prep(policy_states, policy_actions, policy_next,
-                      policy_log_policy, "policy")
-  nE <- length(Eprep$S)
-  nP <- length(Pprep$S)
-  Es <- lapply(seq_len(nE), function(k) list(S = Eprep$S[[k]],
-                                             A = Eprep$A[[k]],
-                                             S1 = Eprep$S1[[k]],
-                                             LP = Eprep$LP[k]))
-  Ps <- lapply(seq_len(nP), function(k) list(S = Pprep$S[[k]],
-                                             A = Pprep$A[[k]],
-                                             S1 = Pprep$S1[[k]],
-                                             LP = Pprep$LP[k]))
-  all_states <- unique(c(lapply(Es, function(t) t$S),
-                         lapply(Es, function(t) t$S1),
-                         lapply(Ps, function(t) t$S),
-                         lapply(Ps, function(t) t$S1)))
-  if (state_only) {
-    gkeys <- all_states
-  } else {
-    gkeys <- unique(c(lapply(Es, function(t) list(t$S, t$A)),
-                      lapply(Ps, function(t) list(t$S, t$A))))
-  }
-  gi <- new.env(hash = TRUE, parent = emptyenv())
-  for (i in seq_along(gkeys)) assign(deparse(gkeys[[i]], control = "useSource"),
-                                     i, envir = gi)
-  hi <- new.env(hash = TRUE, parent = emptyenv())
-  for (i in seq_along(all_states)) assign(deparse(all_states[[i]],
-                                                  control = "useSource"),
-                                          i, envir = hi)
-  ng <- length(gkeys)
-  nh <- length(all_states)
-  g <- rep(0, ng)
-  h <- rep(0, nh)
-  gamma <- as.numeric(gamma)
-  lr <- as.numeric(lr)
-  l2 <- as.numeric(l2)
-
-  gkey_of <- function(t) if (state_only) t$S else list(t$S, t$A)
-  gi_idx <- function(k)
-    get(deparse(k, control = "useSource"), envir = gi, inherits = FALSE)
-  hi_idx <- function(k)
-    get(deparse(k, control = "useSource"), envir = hi, inherits = FALSE)
-  f_of <- function(t) g[gi_idx(gkey_of(t))] + gamma * h[hi_idx(t$S1)] -
-    h[hi_idx(t$S)]
-  d_of <- function(t) {
-    z <- f_of(t) - t$LP
-    if (z >= 0) 1 / (1 + exp(-z)) else { ez <- exp(z)
-    ez / (1 + ez) }
-  }
-
-  # Compress to unique transitions: identical rows contribute identical
-  # gradients, so the fit is unchanged and the cost stays bounded.
-  Ec <- list()
-  Pc <- list()
-  Ecount <- new.env(hash = TRUE, parent = emptyenv())
-  for (t in Es) {
-    key <- paste0(deparse(t$S, control = "useSource"), "|",
-                  deparse(t$A, control = "useSource"), "|",
-                  deparse(t$S1, control = "useSource"), "|", t$LP)
-    assign(key, (get(key, envir = Ecount, inherits = FALSE) %||% 0) + 1,
-           envir = Ecount)
-  }
-  Ekeys <- ls(Ecount)
-  for (k in Ekeys) {
-    parts <- strsplit(k, "|", fixed = TRUE)[[1]]
-    Ec[[length(Ec) + 1L]] <- list(t = list(S = .airl_key_from_str(parts[1]),
-                                           A = .airl_key_from_str(parts[2]),
-                                           S1 = .airl_key_from_str(parts[3]),
-                                           LP = as.numeric(parts[4])),
-                                  w = get(k, envir = Ecount) / nE)
-  }
-  Pcount <- new.env(hash = TRUE, parent = emptyenv())
-  for (t in Ps) {
-    key <- paste0(deparse(t$S, control = "useSource"), "|",
-                  deparse(t$A, control = "useSource"), "|",
-                  deparse(t$S1, control = "useSource"), "|", t$LP)
-    assign(key, (get(key, envir = Pcount, inherits = FALSE) %||% 0) + 1,
-           envir = Pcount)
-  }
-  Pkeys <- ls(Pcount)
-  for (k in Pkeys) {
-    parts <- strsplit(k, "|", fixed = TRUE)[[1]]
-    Pc[[length(Pc) + 1L]] <- list(t = list(S = .airl_key_from_str(parts[1]),
-                                           A = .airl_key_from_str(parts[2]),
-                                           S1 = .airl_key_from_str(parts[3]),
-                                           LP = as.numeric(parts[4])),
-                                  w = get(k, envir = Pcount) / nP)
-  }
-
-  for (ep in seq_len(max(1L, as.integer(epochs)))) {
-    dg <- rep(0, ng)
-    dh <- rep(0, nh)
-    for (row in Ec) {
-      t <- row$t
-      wgt <- row$w
-      c <- (1 - d_of(t)) * wgt
-      dg[gi_idx(gkey_of(t))] <- dg[gi_idx(gkey_of(t))] + c
-      dh[hi_idx(t$S1)] <- dh[hi_idx(t$S1)] + c * gamma
-      dh[hi_idx(t$S)] <- dh[hi_idx(t$S)] - c
-    }
-    for (row in Pc) {
-      t <- row$t
-      wgt <- row$w
-      c <- -d_of(t) * wgt
-      dg[gi_idx(gkey_of(t))] <- dg[gi_idx(gkey_of(t))] + c
-      dh[hi_idx(t$S1)] <- dh[hi_idx(t$S1)] + c * gamma
-      dh[hi_idx(t$S)] <- dh[hi_idx(t$S)] - c
-    }
-    g <- g + lr * (dg - l2 * g)
-    h <- h + lr * (dh - l2 * h)
-  }
-
-  de <- vapply(Es, function(t) d_of(t), numeric(1))
-  dp <- vapply(Ps, function(t) d_of(t), numeric(1))
-  # line 6: r = log D - log(1 - D), equivalent to f - log pi.
-  reward <- .airl_log(dp) - .airl_log(1 - dp)
-  ll <- mean(.airl_log(de)) + mean(.airl_log(1 - dp))
-  acc <- (sum(de > 0.5) + sum(dp <= 0.5)) / (length(de) + length(dp))
-
-  g_map <- list()
-  for (k in gkeys) g_map[[length(g_map) + 1L]] <-
-    setNames(list(g[gi_idx(k)]), deparse(k, control = "useSource"))
-  h_map <- list()
-  for (k in all_states) h_map[[length(h_map) + 1L]] <-
-    setNames(list(h[hi_idx(k)]), deparse(k, control = "useSource"))
-
-  list(estimate = reward, reward = reward, g = g_map, h = h_map,
-       f_policy = vapply(Ps, f_of, numeric(1)),
-       f_expert = vapply(Es, f_of, numeric(1)),
-       D_policy = dp, D_expert = de, accuracy = as.numeric(acc),
-       log_likelihood = as.numeric(ll), gamma = gamma,
-       state_only = as.logical(state_only),
-       method = "AIRL (Fu, Luo & Levine 2018, eq. 4 + Alg. 1)")
+  # The restored copy counted duplicate transitions with get() on a
+  # missing key (an error, not NULL) and parsed vector states back from
+  # deparse() text, so it never ran; it now shares morie_airl's trainer
+  # and reports g and h as one-entry named lists, as before.
+  r <- morie_airl(expert_states, expert_actions, expert_next,
+                  expert_log_policy, policy_states, policy_actions,
+                  policy_next, policy_log_policy, gamma = gamma,
+                  state_only = state_only, lr = lr, epochs = epochs,
+                  l2 = l2)
+  as_map <- function(v) lapply(seq_along(v), function(i)
+    stats::setNames(list(unname(v[i])), names(v)[i]))
+  r$g <- as_map(r$g)
+  r$h <- as_map(r$h)
+  r
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --

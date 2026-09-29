@@ -112,7 +112,8 @@ morie_dimNet_spherical_harmonic_basis <- function(angle, n_basis = 4L) {
   out <- numeric(n)
   if (n >= 1L) out[1] <- 1
   if (n >= 2L) out[2] <- x
-  for (l in 3:n)
+  # seq, not 3:n, which counts down (and indexes out[0]) for n < 3
+  for (l in seq_len(max(n - 2L, 0L)) + 2L)
     out[l] <- ((2 * l - 3) * x * out[l - 1] - (l - 2) * out[l - 2]) / (l - 1)
   out
 }
@@ -156,7 +157,11 @@ morie_dimNet_directional_message_pass <- function(messages, adj, R,
       ang <- morie_dimNet_angle_between(pos[as.integer(kk), ],
                                         pos[as.integer(j), ],
                                         pos[as.integer(i), ])
-      contrib <- as.numeric(interact(messages[[k]],
+      # DimeNet updates m_ji from the INCOMING messages m_kj
+      m_kj <- messages[[paste0(kk, "->", j)]]
+      if (is.null(m_kj))
+        stop(sprintf("dimNet: no message %s->%s for the triplet", kk, j))
+      contrib <- as.numeric(interact(m_kj,
                                      morie_dimNet_bessel_basis(d, cutoff,
                                                                 n_rbf),
                                      morie_dimNet_spherical_harmonic_basis(ang,

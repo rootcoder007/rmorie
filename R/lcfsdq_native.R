@@ -156,7 +156,9 @@ morie_lcfsdq_clark_evans <- function(dists, n, area, perimeter,
   lam <- n / area
   obs <- .w3_csum(dists) / length(dists)
   exp_d <- 0.5 / sqrt(lam)
-  var_d <- (4 - pi) / (4 * pi * lam * n)
+  # the SE is that of a mean over length(dists) distances; with the
+  # buffer correction that is fewer than the n points that set lambda
+  var_d <- (4 - pi) / (4 * pi * lam * length(dists))
   if (edge == "donnelly") {
     exp_d <- 0.5 * sqrt(area / n) + (0.0514 + 0.041 / sqrt(n)) * perimeter / n
     var_d <- 0.0703 * area / (n * n) +
