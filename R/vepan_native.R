@@ -164,8 +164,9 @@ morie_vepan_PICK_ORDER <- c(
 #' @keywords internal
 morie_vepan_consequence_rank <- function(term) {
   # Severity rank of an SO term; 1 is worst. Unknown terms sort last.
-  r <- morie_vepan_CONSEQUENCE_RANK[[term]]
-  if (is.null(r)) length(.vepan_TERMS) + 1L else r
+  # [[ on a named vector stops for an absent name; unknown terms sort last
+  if (!(term %in% names(morie_vepan_CONSEQUENCE_RANK))) return(length(.vepan_TERMS) + 1L)
+  morie_vepan_CONSEQUENCE_RANK[[term]]
 }
 
 #' HIGH/MODERATE/LOW/MODIFIER for an SO term
@@ -182,8 +183,8 @@ morie_vepan_consequence_rank <- function(term) {
 #' @keywords internal
 morie_vepan_consequence_impact <- function(term) {
   # HIGH/MODERATE/LOW/MODIFIER for an SO term.
-  i <- morie_vepan_CONSEQUENCE_IMPACT[[term]]
-  if (is.null(i)) "MODIFIER" else i
+  if (!(term %in% names(morie_vepan_CONSEQUENCE_IMPACT))) return("MODIFIER")
+  morie_vepan_CONSEQUENCE_IMPACT[[term]]
 }
 
 #' The lowest-ranked (worst) term
@@ -565,7 +566,10 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 .vepan_apply <- function(cds, v, coding, gpos, strand) {
   # The coding sequence after the variant, and where it changed
   # (0-based offset). Returns list(alt_cds, off) or list(NULL, NULL).
-  pos_map <- stats::setNames(coding, as.character(gpos[coding + 1L]))
+  # genomic position -> CDS offset (Python: enumerate(coding)); mapping
+  # to the cDNA index shifted every codon by the 5' UTR length
+  pos_map <- stats::setNames(seq_along(coding) - 1L,
+                             as.character(gpos[coding + 1L]))
   aff <- .vepan_affected(v)
   lo <- aff[1L]
   hi <- aff[2L]

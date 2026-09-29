@@ -23,8 +23,9 @@ FAIL <- NA_integer_
 #' @param fn Accepted by the signature and not used anywhere in the body.
 #' @return The value of \code{fn}.
 #' @export
+# every combinator counts its own step, as in Python; the probe only
+# dispatches (counting here too double-counted every sub-expression)
 .probe <- function(text, pos, ctx, fn) {
-  ctx$steps <- ctx$steps + 1L
   fn(text, pos, ctx)
 }
 
@@ -218,7 +219,10 @@ morie_prsPEG_not_ <- function(e) {
 #' @export
 #' @keywords internal
 morie_prsPEG_parse <- function(expr, text, full = TRUE) {
-  ctx <- list(steps = 0L, memo = NULL)
+  # an environment, so the step count survives the nested calls (a list
+  # is copied on modify and the count stayed 0)
+  ctx <- new.env(parent = emptyenv())
+  ctx$steps <- 0L
   end <- expr(as.character(text), 0L, ctx)
   ok <- !is.na(end) && (!full || end == nchar(text))
   list(estimate = ok, matched = ok, end = end,
@@ -243,7 +247,9 @@ morie_prsPEG_parse <- function(expr, text, full = TRUE) {
 #' @keywords internal
 morie_prsPEG_packrat_parse <- function(expr, text, full = TRUE) {
   memo <- new.env(parent = emptyenv())
-  ctx <- list(steps = 0L, memo = memo)
+  ctx <- new.env(parent = emptyenv())
+  ctx$steps <- 0L
+  ctx$memo <- memo
   eid <- "0"
   attr(expr, "eid") <- eid
 

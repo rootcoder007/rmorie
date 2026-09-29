@@ -149,7 +149,9 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
       Q <- do.call(rbind, lapply(query, as.numeric))
       out <- matrix(0, nrow(Q), length(classes))
       for (r in seq_len(nrow(Q))) {
-        d <- rowSums((t(rows) - Q[r, ])^2)
+        # t(rows) is d x n, so the squared distance to each training
+        # row is a column sum (rowSums summed per feature instead)
+        d <- colSums((t(rows) - Q[r, ])^2)
         ord <- order(d)
         votes <- rep(smoothing, length(classes))
         for (i in ord[seq_len(k)]) {
@@ -191,6 +193,7 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
 #' @keywords internal
 attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
   rows <- list()
+  model_predict <- .memb_as_rows(model_predict)
   lab <- c()
   cls <- c()
   if (length(in_X) > 0L) {
@@ -251,6 +254,7 @@ synthesize <- function(target_predict, c, n_features, feature_values = NULL,
   k_max <- if (is.null(k_max)) n_features else as.integer(k_max)
   if (k_max < k_min) stop("memb: k_max must be at least k_min")
   e <- .ghc_rng(as.numeric(seed))
+  target_predict <- .memb_as_rows(target_predict)
   vals <- if (is.null(feature_values)) lapply(seq_len(n_features), function(j) c(0.0, 1.0)) else feature_values
   if (length(vals) != n_features)
     stop("memb: feature_values must have one entry per feature")
@@ -492,6 +496,7 @@ memb <- function(target_predict, shadow_data, eval_in, eval_out,
   eval_y <- c(eval_in[[2L]], eval_out[[2L]])
   truth <- c(rep(1L, length(eval_in[[1L]])),
              rep(0L, length(eval_out[[1L]])))
+  target_predict <- .memb_as_rows(target_predict)
   outputs <- if (length(eval_X) > 0L) target_predict(eval_X) else list()
   scores <- numeric(length(outputs))
   preds <- integer(length(outputs))
@@ -505,7 +510,7 @@ memb <- function(target_predict, shadow_data, eval_in, eval_out,
       next
     }
     feat <- if (isTRUE(sort_features)) .memb_sorted_features(vec) else vec
-    pr <- as.numeric(model(list(feat))[[1L]])
+    pr <- as.numeric(.memb_as_rows(model)(list(feat))[[1L]])
     member <- if (length(pr) > 1L) pr[2L] else pr[1L]
     scores[i] <- member
     preds[i] <- as.integer(member >= threshold)
@@ -599,3 +604,15 @@ morie_memb <- function(op, ...) {
 #' res <- .memb_rng(seed = 1L)
 #' res
 .memb_rng <- function(seed) .ghc_rng(seed)
+
+# The trainers' predictors return one probability row per query as a
+# matrix; the attack code indexes one output vector per query with
+# [[i]], which on a matrix picks a single cell. Wrap a predictor so
+# that it always returns a list of per-query vectors.
+.memb_as_rows <- function(f) {
+  force(f)
+  function(q) {
+    p <- f(q)
+    if (is.matrix(p)) lapply(seq_len(nrow(p)), function(i) p[i, ]) else p
+  }
+}
