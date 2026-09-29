@@ -28,7 +28,8 @@
 #'   n^(-1/(k+4)) inside a block of width k.
 #' @param hg Numeric bandwidth for the regression of Y on the fitted
 #'   indices; default n^(-1/(M+4)).
-#' @param ngrid Unused placeholder; G is returned at the sample indices.
+#' @param ngrid With a single index and ngrid >= 2, G is also evaluated on
+#'   ngrid equally spaced points spanning the index (grid, ggrid); 0 skips it.
 #' @return Named list with estimate, beta0, indices, ghat, resid, rss,
 #'   betaexp, gexp, M, n, method.
 #' @keywords internal
@@ -91,9 +92,18 @@ Multindex <- function(x, y, blocks, x0 = NULL, h = NULL, hg = NULL,
   den[den <= 1e-300] <- 1e-300
   ghat <- as.numeric(W %*% resid) / den
   r <- resid - ghat
+  grid <- ggrid <- NULL
+  if (ngrid != 0) {
+    if (M != 1L || ngrid < 2) stop("ngrid needs a single index (M = 1) and at least 2 points.", call. = FALSE)
+    grid <- min(idx[, 1]) + (max(idx[, 1]) - min(idx[, 1])) * (seq_len(ngrid) - 1) / (ngrid - 1)
+    ggrid <- vapply(grid, function(g) {
+      w <- gk((g - idx[, 1]) / hgv)
+      sum(w * resid) / max(sum(w), 1e-300)
+    }, 0)
+  }
   list(estimate = betas, beta0 = beta0, indices = idx, ghat = ghat,
        resid = r, rss = sum(r * r), betaexp = 0.5, gexp = 2 / (4 + M),
-       M = as.integer(M), n = n,
+       M = as.integer(M), n = n, grid = grid, ggrid = ggrid,
        method = "Horowitz (2009) eq. (2.5), average-derivative indices")
 }
 
