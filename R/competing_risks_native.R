@@ -269,11 +269,25 @@ morie_fine_gray_subdistribution_hazard <- function(time, cause, X,
   Xm <- as.matrix(X)
   storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
-  bh <- .morie_cox_baseline(t, e, Xm, fit$beta,
-    offset = log(pmax(fit$weights, 1e-12))
-  )
-  base_cif <- 1 - exp(-bh$cumhazard)
+  # Breslow increments over the subdistribution risk set: subjects still
+  # at risk count fully, subjects who failed from a competing cause keep
+  # the weight G(u) / G(T_i), exactly as in the estimating equation
+  km <- .morie_km_estimate(t, as.numeric(d == 0))
+  Gfun <- function(u) {
+    if (length(km$times) == 0L) return(rep(1, length(u)))
+    pos <- findInterval(u, km$times)
+    ifelse(pos >= 1L, km$survival[pmin(pmax(pos, 1L), length(km$survival))], 1)
+  }
+  competing <- d != 0 & d != of_cause
+  Gi <- pmax(Gfun(t), 1e-8)
   lin <- exp(pmax(pmin(as.vector(Xm %*% fit$beta), 500), -500))
+  ut <- unique(sort(t[e == 1]))
+  dH <- vapply(ut, function(u) {
+    w <- ifelse(t >= u, 1, ifelse(competing, Gfun(u) / Gi, 0))
+    sum(t == u & e == 1) / sum(w * lin)
+  }, numeric(1))
+  bh <- list(times = ut, cumhazard = cumsum(dH))
+  base_cif <- 1 - exp(-bh$cumhazard)
   cif <- 1 - exp(-outer(lin, bh$cumhazard))
   list(
     beta = fit$beta, se = fit$se, p_value = fit$p_value,
