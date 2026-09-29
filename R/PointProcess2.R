@@ -20,10 +20,7 @@
 #' @param n_steps Birth-death steps.
 #' @param grid Union-area lattice size.
 #' @param seed Philox seed.
-#' @param kappa,mu,sigma Thomas parent intensity, mean offspring and dispersion.
-#' @param expand Window dilation in units of sigma.
 #' @param nx,ny Grid size.
-#' @param sigma2,scale LGCP variance and exponential scale.
 #' @param points Point coordinates (rows; x, y, t for space-time).
 #' @param at Evaluation locations.
 #' @param h0 Pilot bandwidth.
@@ -111,52 +108,6 @@ AreaInteractionSimulate <- function(beta, eta, r, window, n_steps, grid = 100, s
     cc <- cc + p
   }
   k
-}
-
-#' @rdname AreaInteractionSimulate
-#' @export
-ThomasSimulate <- function(kappa, mu, sigma, window, seed = 0, expand = 4) {
-  e <- expand * sigma
-  a <- c(window[1] - e, window[2] + e, window[3] - e, window[4] + e)
-  npar <- .pp2_poisson(kappa * (a[2] - a[1]) * (a[4] - a[3]), .morie_random_uniform(1, seed = seed, stream = 0))
-  pu <- .morie_random_uniform(2 * npar + 1, seed = seed, stream = 0)
-  parents <- cbind(a[1] + pu[2 * seq_len(npar)] * (a[2] - a[1]), a[3] + pu[2 * seq_len(npar) + 1] * (a[4] - a[3]))
-  pts <- matrix(0, 0, 2)
-  for (k in seq_len(npar) - 1) {
-    m <- .pp2_poisson(mu, .morie_random_uniform(1, seed = seed, stream = 2 * k + 1))
-    if (m == 0) next
-    z <- .morie_random_normal(2 * m, seed = seed, stream = 2 * k + 2)
-    ox <- parents[k + 1, 1] + sigma * z[2 * seq_len(m) - 1]
-    oy <- parents[k + 1, 2] + sigma * z[2 * seq_len(m)]
-    keep <- ox >= window[1] & ox <= window[2] & oy >= window[3] & oy <= window[4]
-    pts <- rbind(pts, cbind(ox[keep], oy[keep]))
-  }
-  list(points = pts, parents = parents, n_parents = npar)
-}
-
-#' @rdname AreaInteractionSimulate
-#' @export
-ThomasK <- function(r, kappa, sigma) pi * r^2 + (1 - exp(-r^2 / (4 * sigma^2))) / kappa
-
-#' @rdname AreaInteractionSimulate
-#' @export
-LgcpSimulateGrid <- function(nx, ny, window, mu, sigma2, scale, seed = 0) {
-  dx <- (window[2] - window[1]) / nx
-  dy <- (window[4] - window[3]) / ny
-  g <- expand.grid(i = 0:(nx - 1), j = 0:(ny - 1))
-  cen <- cbind(window[1] + (g$i + 0.5) * dx, window[3] + (g$j + 0.5) * dy)
-  n <- nrow(cen)
-  C <- sigma2 * exp(-as.matrix(stats::dist(cen)) / scale)
-  L <- matrix(0, n, n)
-  for (i in seq_len(n)) for (j in seq_len(i)) {
-    s <- C[i, j] - sum(L[i, seq_len(j - 1)] * L[j, seq_len(j - 1)])
-    L[i, j] <- if (i == j) sqrt(s) else s / L[j, j]
-  }
-  Z <- as.numeric(L %*% .morie_random_normal(n, seed = seed, stream = 0))
-  lam <- exp(mu + Z)
-  u <- .morie_random_uniform(n, seed = seed, stream = 1)
-  counts <- vapply(seq_len(n), function(i) .pp2_poisson(lam[i] * dx * dy, u[i]), 0)
-  list(field = Z, intensity = lam, counts = counts, centres = cen)
 }
 
 #' @rdname AreaInteractionSimulate

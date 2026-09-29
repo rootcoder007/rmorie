@@ -44,10 +44,6 @@
 #' @param nx,ny Grid size.
 #' @param template List of c(di, dj) offsets.
 #' @param conditioning Data frame or matrix with columns i, j, value (0-based), or NULL.
-#' @param values Values to place on the grid.
-#' @param lags Integer lags.
-#' @param target Target semivariogram values.
-#' @param n_iter,t0,cooling,every Annealing iterations, start temperature, cooling factor and period.
 #' @return A list.
 #' @references Deutsch, C. V. and Journel, A. G. (1998). GSLIB, 2nd ed.
 #'   Liu, Y. and Journel, A. G. (2009). Computers and Geosciences 35, 527-547.
@@ -380,64 +376,4 @@ SnesimSimulate <- function(training, nx, ny, template, conditioning = NULL, seed
     grid[j + 1, i + 1] <- cats[pick]
   }
   list(grid = grid, categories = cats)
-}
-
-#' @rdname SgsBlockSimulate
-#' @export
-AnnealingSimulate <- function(values, nx, ny, lags, target, n_iter = 5000, t0 = 1, cooling = 0.9, every = 100, seed = 0) {
-  n <- nx * ny
-  perm <- .gs2_perm(n, seed, 0)
-  g <- matrix(0, ny, nx)
-  for (idx in 0:(n - 1)) g[idx %/% nx + 1, idx %% nx + 1] <- values[perm[idx + 1] + 1]
-  L <- length(lags)
-  npair <- ny * (nx - lags) + nx * (ny - lags)
-  sums <- function() vapply(lags, function(h) {
-    s <- 0
-    if (h < nx) s <- s + sum((g[, seq_len(nx - h)] - g[, h + seq_len(nx - h)])^2)
-    if (h < ny) s <- s + sum((g[seq_len(ny - h), ] - g[h + seq_len(ny - h), ])^2)
-    s
-  }, 0)
-  objective <- function(s) sum(((s / (2 * npair)) - target)^2 / target^2)
-  contrib <- function(i, j) vapply(lags, function(h) {
-    c <- 0
-    for (d in list(c(h, 0), c(-h, 0), c(0, h), c(0, -h))) {
-      ii <- i + d[1]
-      jj <- j + d[2]
-      if (ii >= 0 && ii < nx && jj >= 0 && jj < ny) c <- c + (g[j + 1, i + 1] - g[jj + 1, ii + 1])^2
-    }
-    c
-  }, 0)
-  S <- sums()
-  O <- objective(S)
-  Tp <- t0
-  acc <- 0
-  for (s in seq_len(n_iter) - 1) {
-    u <- .morie_random_uniform(3, seed = seed, stream = s + 1)
-    p1 <- min(floor(u[1] * n), n - 1)
-    p2 <- min(floor(u[2] * n), n - 1)
-    if (p1 != p2) {
-      i1 <- p1 %% nx
-      j1 <- p1 %/% nx
-      i2 <- p2 %% nx
-      j2 <- p2 %/% nx
-      before <- contrib(i1, j1) + contrib(i2, j2)
-      tmp <- g[j1 + 1, i1 + 1]
-      g[j1 + 1, i1 + 1] <- g[j2 + 1, i2 + 1]
-      g[j2 + 1, i2 + 1] <- tmp
-      after <- contrib(i1, j1) + contrib(i2, j2)
-      Sn <- S + after - before
-      On <- objective(Sn)
-      if (On <= O || u[3] < exp(-(On - O) / Tp)) {
-        S <- Sn
-        O <- On
-        acc <- acc + 1
-      } else {
-        tmp <- g[j1 + 1, i1 + 1]
-        g[j1 + 1, i1 + 1] <- g[j2 + 1, i2 + 1]
-        g[j2 + 1, i2 + 1] <- tmp
-      }
-    }
-    if ((s + 1) %% every == 0) Tp <- Tp * cooling
-  }
-  list(grid = g, objective = O, accepted = acc, variogram = S / (2 * npair))
 }

@@ -28,9 +28,6 @@
 #' @param conditioning Matrix of zero-based (row, column, value) hard data.
 #' @param categorical Categorical (mismatch) or continuous distance.
 #' @param seed Philox seed.
-#' @param radius Template half-width.
-#' @param max_nodes Template size.
-#' @param min_replicates Minimum number of matching training patterns.
 #' @return A list with the simulated grid.
 #' @references Mariethoz, G., Renard, P. and Straubhaar, J. (2010). The
 #'   direct sampling method to perform multiple-point geostatistical
@@ -91,53 +88,4 @@ DirectSampling <- function(ti, nx, ny, n_neighbors = 12, threshold = 0.05, max_f
     informed <- rbind(informed, c(i, j))
   }
   list(grid = sg, path = path - 1)
-}
-
-#' @rdname DirectSampling
-#' @export
-Snesim <- function(ti, nx, ny, radius = 2, max_nodes = 12, min_replicates = 5, conditioning = NULL, seed = 0) {
-  Tm <- as.matrix(ti)
-  tr <- nrow(Tm)
-  tc <- ncol(Tm)
-  cats <- sort(unique(as.vector(Tm)))
-  marg <- vapply(cats, function(cc) mean(Tm == cc), 0)
-  g <- expand.grid(dj = -radius:radius, di = -radius:radius)
-  g <- g[!(g$di == 0 & g$dj == 0), ]
-  g <- g[order(g$di^2 + g$dj^2, g$di, g$dj), ][seq_len(min(max_nodes, nrow(g))), ]
-  tmpl <- cbind(g$di, g$dj)
-  sg <- .mp_setup(nx, ny, conditioning)
-  ntot <- nx * ny
-  u <- .morie_random_uniform(2 * ntot + 1, seed = seed)
-  path <- .mp_path(sg, u)
-  for (step in seq_len(nrow(path))) {
-    i <- path[step, 1]
-    j <- path[step, 2]
-    rr <- i + tmpl[, 1]
-    cc <- j + tmpl[, 2]
-    ok <- rr >= 1 & rr <= ny & cc >= 1 & cc <= nx
-    ok[ok] <- !is.na(sg[cbind(rr[ok], cc[ok])])
-    ev <- cbind(tmpl[ok, , drop = FALSE], sg[cbind(rr[ok], cc[ok])])
-    repeat {
-      cnt <- numeric(length(cats))
-      for (a in seq_len(tr)) {
-        for (b in seq_len(tc)) {
-          if (nrow(ev)) {
-            ra <- a + ev[, 1]
-            cb <- b + ev[, 2]
-            if (any(ra < 1 | ra > tr | cb < 1 | cb > tc)) next
-            if (any(Tm[cbind(ra, cb)] != ev[, 3])) next
-          }
-          k <- match(Tm[a, b], cats)
-          cnt[k] <- cnt[k] + 1
-        }
-      }
-      if (sum(cnt) >= min_replicates || nrow(ev) == 0) break
-      ev <- ev[-nrow(ev), , drop = FALSE]
-    }
-    prob <- if (sum(cnt) > 0) cnt / sum(cnt) else marg
-    x <- u[ntot + step]
-    k <- which(x < cumsum(prob))
-    sg[i, j] <- cats[if (length(k)) k[1] else length(cats)]
-  }
-  list(grid = sg, categories = cats, template = tmpl)
 }

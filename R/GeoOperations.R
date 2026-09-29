@@ -13,7 +13,6 @@
 #' @param ring Two-column matrix of a ring.
 #' @param x,y Grid coordinates (ascending).
 #' @param z Matrix of values, rows following y.
-#' @param levels Band limits.
 #' @param path Two-column matrix of polyline vertices.
 #' @param step Sampling step.
 #' @param breaks Band distance breaks.
@@ -203,35 +202,6 @@ PolygonArea <- function(ring) {
     }
   }
   list(P = unname(out), v = ov)
-}
-
-#' @rdname PolygonBoolean
-#' @export
-FilledContourBands <- function(x, y, z, levels) {
-  z <- as.matrix(z)
-  nb <- length(levels) - 1
-  areas <- numeric(nb)
-  polys <- vector("list", nb)
-  for (j in seq_len(length(y) - 1)) {
-    for (i in seq_len(length(x) - 1)) {
-      P <- rbind(c(x[i], y[j]), c(x[i + 1], y[j]), c(x[i + 1], y[j + 1]), c(x[i], y[j + 1]))
-      V <- c(z[j, i], z[j, i + 1], z[j + 1, i + 1], z[j + 1, i])
-      for (tri in list(c(1, 2, 3), c(1, 3, 4))) {
-        for (k in seq_len(nb)) {
-          a <- .go_cliplin(P[tri, , drop = FALSE], V[tri], levels[k], TRUE)
-          if (nrow(a$P) < 3) next
-          b <- .go_cliplin(a$P, a$v, levels[k + 1], FALSE)
-          if (nrow(b$P) < 3) next
-          ar <- abs(PolygonArea(b$P))
-          if (ar > 0) {
-            areas[k] <- areas[k] + ar
-            polys[[k]][[length(polys[[k]]) + 1]] <- b$P
-          }
-        }
-      }
-    }
-  }
-  list(areas = areas, polygons = polys, levels = levels)
 }
 
 .go_bilin <- function(x, y, z, px, py) {

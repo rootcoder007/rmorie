@@ -1,9 +1,3 @@
-test_that("AceIndex and BudykoOlr", {
-  expect_equal(AceIndex(c(30, 40, 65, 90, 70, 34, 120.5)), 1e-4 * sum(c(40, 65, 90, 70, 120.5)^2), tolerance = 1e-12)
-  r <- BudykoOlr(12.5, albedo = 0.31)
-  expect_equal(r$equilibrium_temperature, (0.69 * 1361 / 4 - 203.3) / 2.09, tolerance = 1e-12)
-})
-
 test_that("PrewhitenedMannKendall pw recomputes", {
   x <- c(1.0, 2.1, 2.9, 4.2, 5.1, 5.8, 7.2, 8.1, 7.9, 9.4)
   r <- PrewhitenedMannKendall(x, "pw")

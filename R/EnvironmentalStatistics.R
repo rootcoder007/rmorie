@@ -1,5 +1,6 @@
 #' Climate and agreement statistics
 #'
+
 #' \code{AceIndex}: accumulated cyclone energy. \code{BudykoOlr}: linearised
 #' outgoing longwave radiation and energy-balance equilibrium.
 #' \code{PrewhitenedMannKendall}: Mann-Kendall test after prewhitening
@@ -9,8 +10,6 @@
 #' breakdown point of an estimator. Identical to the Python arm
 #' \code{morie.fn.envstats}.
 #'
-#' @param vmax Six-hourly maximum winds (knots).
-#' @param threshold Tropical-storm threshold.
 #' @param T Temperature (degrees C).
 #' @param A,B OLR intercept and slope.
 #' @param S0 Solar constant.
@@ -41,16 +40,6 @@
 #' FleissKappa(rbind(c(3, 0), c(0, 3), c(2, 1), c(3, 0)))$kappa
 #' EmpiricalBreakdownPoint(median, 1:9)$breakdown_point
 #' @export
-AceIndex <- function(vmax, threshold = 35) 1e-4 * .es_ss(vmax[vmax >= threshold]^2)
-
-.es_ss <- function(v) {
-  s <- 0
-  for (a in v) s <- s + a
-  s
-}
-
-#' @rdname AceIndex
-#' @export
 BudykoOlr <- function(T, A = 203.3, B = 2.09, S0 = 1361, albedo = 0.3) {
   list(olr = A + B * T, equilibrium_temperature = ((1 - albedo) * S0 / 4 - A) / B, sensitivity = 1 / B)
 }
@@ -67,7 +56,7 @@ BudykoOlr <- function(T, A = 203.3, B = 2.09, S0 = 1361, albedo = 0.3) {
   .es_ss(d[-length(d)] * d[-1]) / .es_ss(d * d)
 }
 
-#' @rdname AceIndex
+#' @rdname BudykoOlr
 #' @export
 PrewhitenedMannKendall <- function(x, method = "tfpw") {
   n <- length(x)
@@ -94,7 +83,7 @@ PrewhitenedMannKendall <- function(x, method = "tfpw") {
        sen_slope = .es_sen(y), old_sen_slope = old, r1 = r1)
 }
 
-#' @rdname AceIndex
+#' @rdname BudykoOlr
 #' @export
 FleissKappa <- function(counts) {
   Tt <- as.matrix(counts) + 0
@@ -112,7 +101,7 @@ FleissKappa <- function(counts) {
   list(kappa = kappa, se = se, z = z, p_value = 2 * stats::pnorm(-abs(z)))
 }
 
-#' @rdname AceIndex
+#' @rdname BudykoOlr
 #' @export
 EmpiricalBreakdownPoint <- function(estimator, x, magnitude = 1e12, tol = 1e6) {
   x <- as.numeric(x)
@@ -127,4 +116,10 @@ EmpiricalBreakdownPoint <- function(estimator, x, magnitude = 1e12, tol = 1e6) {
     if (abs(estimator(z) - base) > tol * scale) return(list(m = m, breakdown_point = m / n))
   }
   list(m = n + 1, breakdown_point = 1)
+}
+
+.es_ss <- function(v) {
+  s <- 0
+  for (a in v) s <- s + a
+  s
 }
