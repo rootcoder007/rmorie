@@ -25,13 +25,18 @@ n_strata, method.
 }
 \description{
 Within-stratum means averaged with population (or proportional)
-weights W_h, with stratified-sampling variance
-var(y_bar_st) = sum_h W_h^2 s_h^2 / n_h.
+weights W_h, with the stratified simple random sampling variance
+var(y_bar_st) = sum_h W_h^2 (1 - n_h / N_h) s_h^2 / n_h
+(finite population correction taken as 1 without population sizes), as
+\code{survey::svymean} with strata and fpc.
 Python parity: \code{morie.fn.strat.stratified_mean}.
 }
 \examples{
 set.seed(1)
 df <- data.frame(y = rnorm(100), stratum = rep(c("a", "b"), each = 50))
 morie_stratified_sampling(df, y = "y", strata = "stratum")
+}
+\references{
+Cochran, W. G. (1977). Sampling Techniques, 3rd edn. Wiley.
 }
 \keyword{internal}

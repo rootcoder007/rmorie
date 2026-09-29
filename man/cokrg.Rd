@@ -3,7 +3,7 @@
 \name{cokrg}
 \alias{cokrg}
 \alias{morie_cokrg}
-\title{Simple morie_cokriging for co-located bivariate spatial prediction}
+\title{Cokriging of a primary variable from co-located primary and secondary data}
 \usage{
 cokrg(
   x,
@@ -16,7 +16,8 @@ cokrg(
   range_s = 1,
   cross_sill = 0.5,
   cross_range = 1,
-  nugget = 0
+  nugget = 0,
+  means = c(0, 0)
 )
 
 morie_cokrg(
@@ -30,7 +31,8 @@ morie_cokrg(
   range_s = 1,
   cross_sill = 0.5,
   cross_range = 1,
-  nugget = 0
+  nugget = 0,
+  means = c(0, 0)
 )
 }
 \arguments{
@@ -49,21 +51,30 @@ morie_cokrg(
 \item{cross_sill, cross_range}{Cross-covariance parameters.}
 
 \item{nugget}{Nugget.}
+
+\item{means}{Known means c(m1, m2) for simple cokriging; NULL for ordinary
+cokriging.}
 }
 \value{
 Named list: estimate, se, n, method.
 }
 \description{
-\deqn{\hat Z_1(s_0) = \lambda^\top Z_1 + \mu^\top Z_2}{hat Z_1(s_0) = lambda^top Z_1 +
-mu^top Z_2}, system
-\deqn{[C_{pp} \; C_{ps}; C_{ps}^\top \; C_{ss}] [\lambda; \mu] = [c_{0p};
-c_{0s}]}{[C_pp C_ps; C_ps^top C_ss] [lambda; mu] = [c_0p; c_0s]}.
+Exponential direct covariances (sill minus nugget, plus the nugget at
+distance zero) and an exponential cross-covariance, written as a sum of
+coregionalization structures and solved by \code{\link{LmcCokriging}}:
+simple cokriging with known \code{means} (default zero means, the former
+behaviour) or ordinary cokriging with \code{means = NULL}. Python parity:
+\code{morie.fn.cokrg.cokriging}.
 }
 \examples{
 set.seed(1)
 cokrg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2), target = rnorm(50))
 }
 \references{
-Schabenberger & Gotway (2005), Ch 4.
+Wackernagel, H. (2003). Multivariate Geostatistics, 3rd edn.
+Springer, ch. 24-25.
+
+Schabenberger, O. and Gotway, C. A. (2005). Statistical Methods for
+Spatial Data Analysis. Chapman and Hall/CRC.
 }
 \keyword{internal}

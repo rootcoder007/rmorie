@@ -2,7 +2,6 @@
 % Please edit documentation in R/MultiplePointSimulation.R
 \name{DirectSampling}
 \alias{DirectSampling}
-\alias{Snesim}
 \title{Multiple-point simulation from a training image}
 \usage{
 DirectSampling(
@@ -14,17 +13,6 @@ DirectSampling(
   max_fraction = 0.5,
   conditioning = NULL,
   categorical = TRUE,
-  seed = 0
-)
-
-Snesim(
-  ti,
-  nx,
-  ny,
-  radius = 2,
-  max_nodes = 12,
-  min_replicates = 5,
-  conditioning = NULL,
   seed = 0
 )
 }
@@ -44,12 +32,6 @@ Snesim(
 \item{categorical}{Categorical (mismatch) or continuous distance.}
 
 \item{seed}{Philox seed.}
-
-\item{radius}{Template half-width.}
-
-\item{max_nodes}{Template size.}
-
-\item{min_replicates}{Minimum number of matching training patterns.}
 }
 \value{
 A list with the simulated grid.

@@ -2,33 +2,10 @@
 % Please edit documentation in R/VehicleRoutingExtra.R
 \name{SavingsRoutes}
 \alias{SavingsRoutes}
-\alias{VrptwInsertion}
-\alias{MultiDepotVrp}
-\alias{PickupDeliveryRoutes}
-\alias{PeriodicVrp}
 \alias{TripGeneration}
 \title{Vehicle routing extensions and trip generation}
 \usage{
 SavingsRoutes(D, customers, demand, capacity, depot = 0)
-
-VrptwInsertion(
-  D,
-  demand,
-  capacity,
-  ready,
-  due,
-  service,
-  mu = 1,
-  lam = 1,
-  alpha1 = 1,
-  depot = 0
-)
-
-MultiDepotVrp(D, depots, demand, capacity)
-
-PickupDeliveryRoutes(D, pairs, load, capacity, depot = 0)
-
-PeriodicVrp(D, demand, capacity, frequency, patterns, depot = 0)
 
 TripGeneration(households, rates)
 }
@@ -42,20 +19,6 @@ TripGeneration(households, rates)
 \item{capacity}{Vehicle capacity.}
 
 \item{depot}{Depot index (zero-based).}
-
-\item{ready, due, service}{Time windows and service times by location.}
-
-\item{mu, lam, alpha1}{Solomon I1 parameters.}
-
-\item{depots}{Depot indices.}
-
-\item{pairs}{List of c(pickup, delivery) pairs.}
-
-\item{load}{Load of each request.}
-
-\item{frequency}{Visit frequency by location.}
-
-\item{patterns}{Named list: for each frequency, a list of day vectors.}
 
 \item{households}{Zones by classes matrix.}
 

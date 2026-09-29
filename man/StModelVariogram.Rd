@@ -54,8 +54,12 @@ Numeric or list.
 variograms in the parametrisation of \code{gstat::vgmST} (marginals are
 lists \code{psill}, \code{model} (Exp, Gau, Sph, Lin), \code{range},
 \code{nugget}). \code{StCovarianceFamily}: Gneiting (2002), Cressie-Huang (1999),
-Iaco-Cesare (De Iaco, Myers and Posa 2002), periodic and separable
-exponential covariances. \code{StLinearCombination}: nonnegative
+Iaco-Cesare (De Iaco, Myers and Posa 2002), periodic, separable
+exponential and Porcu (Porcu, Gregori and Mateu 2006, quasi-arithmetic
+mean: \code{(0.5 (1 + (h/scale_s)^power_s)^sep + 0.5 (1 +
+(|u|/scale_t)^power_t)^sep)^(-1/sep)}; at \code{sep = 0} the continuous
+limit, the separable geometric mean, or with \code{method = "GeoModels"}
+the package's squared product) covariances. \code{StLinearCombination}: nonnegative
 combinations. Identical to the Python arm \code{morie.fn.stcovar}.
 }
 \examples{
@@ -73,4 +77,7 @@ spatio-temporal stationary covariance functions. JASA 94, 1330-1340.
 
 Graeler, B., Pebesma, E. and Heuvelink, G. (2016). Spatio-temporal
 interpolation using gstat. The R Journal 8, 204-218.
+
+Porcu, E., Gregori, P. and Mateu, J. (2006). Nonseparable stationary
+anisotropic space-time covariance functions. SERRA 21, 113-122.
 }
