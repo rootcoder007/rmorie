@@ -202,9 +202,12 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
     stop("bigtm: m and n must each sum to 1")
   a <- as.numeric(alpha)
   b <- as.numeric(beta)
-  u <- .lcg_uniform(seed, length(D))
-  z <- lapply(seq_along(D), function(i) rep((as.integer(u[i] * Tn) %% Tn),
-                                            length(D[[i]])))
+  # one seeded stream for the initial topics AND the Gibbs draws, as the
+  # Python arm does; the sweeps used to call runif(), so a fixed seed
+  # did not fix the chain
+  e <- .ghc_rng(as.numeric(seed))
+  z <- lapply(D, function(doc)
+    as.integer(.ghc_unif(e, length(doc)) * Tn) %% Tn)
   cts <- .counts(D, Tn, Vn, z)
   N_ijk <- cts$N_ijk
   N_jk <- cts$N_jk
@@ -234,7 +237,7 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
           p[kk] <- w * (N_kd[[d]][kk] + a * nn[kk])
         }
         s <- sum(p)
-        u2 <- runif(1) * s
+        u2 <- .ghc_unif(e, 1L) * s
         new_k <- Tn
         c_ <- 0
         for (kk in 1:Tn) {
