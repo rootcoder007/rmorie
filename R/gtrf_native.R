@@ -27,8 +27,9 @@
 #' @return Square Laplacian matrix.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' laplacian(V, V)
+#' adj <- list("0" = list("1" = 1, "2" = 1), "1" = list("0" = 1, "3" = 1),
+#'             "2" = list("0" = 1, "3" = 1), "3" = list("1" = 1, "2" = 1))
+#' laplacian(adj, 4)
 #' @keywords internal
 laplacian <- function(adj, n, normalized = TRUE) {
   N <- as.integer(n)
@@ -65,8 +66,9 @@ laplacian <- function(adj, n, normalized = TRUE) {
 #' @return List with encoding, eigenvalues, caveat.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' laplacian_positional_encoding(V, V)
+#' adj <- list("0" = list("1" = 1, "2" = 1), "1" = list("0" = 1, "3" = 1),
+#'             "2" = list("0" = 1, "3" = 1), "3" = list("1" = 1, "2" = 1))
+#' laplacian_positional_encoding(adj, 4, dim = 1L)
 #' @keywords internal
 laplacian_positional_encoding <- function(adj, n, dim = 2L,
                                            normalized = TRUE) {

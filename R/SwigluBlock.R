@@ -13,6 +13,7 @@
 #'   arXiv:2002.05202.
 #' @examples
 #' swiglu(rbind(c(1, -2)))$value
+#' @rdname SwigluBlock
 #' @export
 swiglu <- function(x, W1 = NULL, W2 = NULL, W3 = NULL) {
   if (is.null(W1) != is.null(W3)) stop("provide both W1 and W3 or neither")

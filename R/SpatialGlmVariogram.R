@@ -34,6 +34,7 @@
 #' xy <- rbind(c(0, 0), c(1, 0.2), c(2.1, 0), c(0.1, 1), c(1.2, 1.1), c(2, 0.9))
 #' Sgcrh(c(1, 2.4, 1.3, 3.1, 1.9, 2.2), xy, lags = 3, cutoff = 2)$gamma
 #' Sgrwn(rbind(c(0, 2, 2), c(1, 0, 0), c(0, 0, 0)))$W_normalized
+#' @rdname SpatialGlmVariogram
 #' @export
 Sglm <- function(x, y, coords, family = "gaussian", model = "Exp") {
   X <- as.matrix(x)
@@ -56,7 +57,7 @@ Sglm <- function(x, y, coords, family = "gaussian", model = "Exp") {
   list(estimate = g$beta, se = NULL, sigma2 = g$sigma2, phi = g$range, tau2 = 0, loglik = g$loglik, n = n)
 }
 
-#' @rdname Sglm
+#' @rdname SpatialGlmVariogram
 #' @export
 Sgcrh <- function(data, coords, lags = 15, cutoff = NULL, method = "cressie") {
   if (!method %in% c("cressie", "gstat")) stop("method must be 'cressie' or 'gstat'")
@@ -77,14 +78,14 @@ Sgcrh <- function(data, coords, lags = 15, cutoff = NULL, method = "cressie") {
        dist = vapply(keep, function(j) sum(d[pr][k == j]) / N[j], 0), cutoff = cutoff, width = w)
 }
 
-#' @rdname Sglm
+#' @rdname SpatialGlmVariogram
 #' @export
 Sglss <- function(predicted, observed) {
   l <- (as.numeric(observed) - as.numeric(predicted))^2
   list(statistic = mean(l), losses = l, total_loss = sum(l))
 }
 
-#' @rdname Sglm
+#' @rdname SpatialGlmVariogram
 #' @export
 Sgrwn <- function(W) {
   W <- as.matrix(W)

@@ -1,4 +1,4 @@
-.mrn_prob <- function(p, nm) {
+.mrns_prob <- function(p, nm) {
   if (any(!is.finite(p)) || any(p < 0 | p > 1)) stop(nm, " must be in [0, 1]")
   invisible(p)
 }
@@ -47,7 +47,7 @@
 #' StarsAndBars(3, 4)$count
 #' @export
 AtLeastOneOfIid <- function(p, k = 3) {
-  .mrn_prob(p, "p")
+  .mrns_prob(p, "p")
   j <- seq_len(k)
   total <- sum((-1)^(j + 1) * choose(k, j) * p^j)
   list(p = p, k = k, p_at_least_one = total)
@@ -64,8 +64,8 @@ AtMostTwoSuitsProbability <- function(n_suits = 4, n_ranks = 13, hand = 5) {
 #' @rdname AtLeastOneOfIid
 #' @export
 BayesGeneral <- function(priors, likelihoods) {
-  .mrn_prob(priors, "priors")
-  .mrn_prob(likelihoods, "likelihoods")
+  .mrns_prob(priors, "priors")
+  .mrns_prob(likelihoods, "likelihoods")
   if (length(priors) != length(likelihoods)) stop("priors and likelihoods must have the same length")
   if (abs(sum(priors) - 1) > 1e-9) stop("priors must sum to 1")
   pz <- sum(priors * likelihoods)
@@ -76,7 +76,7 @@ BayesGeneral <- function(priors, likelihoods) {
 #' @rdname AtLeastOneOfIid
 #' @export
 BayesSimple <- function(p_z_given_a, p_a, p_z) {
-  .mrn_prob(c(p_z_given_a, p_a, p_z), "probabilities")
+  .mrns_prob(c(p_z_given_a, p_a, p_z), "probabilities")
   if (p_z == 0) stop("P(Z) must be positive")
   list(posterior = p_z_given_a * p_a / p_z)
 }
@@ -84,7 +84,7 @@ BayesSimple <- function(p_z_given_a, p_a, p_z) {
 #' @rdname AtLeastOneOfIid
 #' @export
 ChainRule <- function(p_a, p_b_given_a, p_b, p_a_given_b) {
-  .mrn_prob(c(p_a, p_b_given_a, p_b, p_a_given_b), "probabilities")
+  .mrns_prob(c(p_a, p_b_given_a, p_b, p_a_given_b), "probabilities")
   list(via_a = p_a * p_b_given_a, via_b = p_b * p_a_given_b, p_and = p_a * p_b_given_a)
 }
 
@@ -139,7 +139,7 @@ MorinFactorial <- function(n) {
 #' @rdname AtLeastOneOfIid
 #' @export
 InclusionExclusion3 <- function(p_a, p_b, p_c, p_ab, p_ac, p_bc, p_abc) {
-  .mrn_prob(c(p_a, p_b, p_c, p_ab, p_ac, p_bc, p_abc), "probabilities")
+  .mrns_prob(c(p_a, p_b, p_c, p_ab, p_ac, p_bc, p_abc), "probabilities")
   list(p_or = p_a + p_b + p_c - p_ab - p_ac - p_bc + p_abc)
 }
 
@@ -191,7 +191,7 @@ PredictionImprovement <- function(r) {
 #' @rdname AtLeastOneOfIid
 #' @export
 ProbOrExclusive <- function(ps) {
-  .mrn_prob(ps, "ps")
+  .mrns_prob(ps, "ps")
   s <- sum(ps)
   if (s > 1 + 1e-12) stop("exclusive probabilities sum past 1; events not exclusive")
   list(ps = ps, p_or = min(s, 1))
@@ -200,7 +200,7 @@ ProbOrExclusive <- function(ps) {
 #' @rdname AtLeastOneOfIid
 #' @export
 ProbOrGeneral <- function(p_a, p_b, p_ab) {
-  .mrn_prob(c(p_a, p_b, p_ab), "probabilities")
+  .mrns_prob(c(p_a, p_b, p_ab), "probabilities")
   if (p_ab > min(p_a, p_b) + 1e-12) stop("P(A and B) cannot exceed min(P(A), P(B))")
   list(p_a = p_a, p_b = p_b, p_ab = p_ab, p_or = p_a + p_b - p_ab)
 }
@@ -215,7 +215,7 @@ RegressionToMeanFactor <- function(r, y1) {
 #' @rdname AtLeastOneOfIid
 #' @export
 SdBernoulli <- function(p) {
-  .mrn_prob(p, "p")
+  .mrns_prob(p, "p")
   list(p = p, sd = sqrt(p * (1 - p)))
 }
 

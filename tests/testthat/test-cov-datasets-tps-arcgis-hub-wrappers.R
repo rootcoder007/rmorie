@@ -28,7 +28,7 @@ tps_wrapper_suffixes <- c(
 
 test_that("every wrapper forwards its arguments to the hub dispatcher", {
   seen <- NULL
-  local_mocked_bindings(
+  local_mocked_bindings(.package = environmentName(topenv(environment())), 
     morie_datasets_tps_arcgis_hub_by_id = function(hub_id, format = "json",
                                                    where = "1=1",
                                                    max_features = NULL,
@@ -84,7 +84,7 @@ test_that("each hub_id is the catalog entry whose title slugifies to the name", 
     gsub("_+", "_", gsub("^_+|_+$", "", s))
   }
   seen <- NULL
-  local_mocked_bindings(
+  local_mocked_bindings(.package = environmentName(topenv(environment())), 
     morie_datasets_tps_arcgis_hub_by_id = function(hub_id, ...) {
       seen <<- hub_id
       NULL
