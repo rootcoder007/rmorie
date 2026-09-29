@@ -32,8 +32,10 @@ Evhrid <- function(x, y, lam) {
   for (i in seq_along(xs)) {
     a <- xs[i]
     b <- ys[i]
-    V[i] <- a * .s03pnorm(lam + log(b / a) / (2 * lam)) +
-      b * .s03pnorm(lam + log(a / b) / (2 * lam))
+    # each coordinate's own term carries log(own / other): V(a, 0) = a
+    # recovers the exp(-a) margin (the swapped ratios gave V(a, 0) = 0)
+    V[i] <- a * .s03pnorm(lam + log(a / b) / (2 * lam)) +
+      b * .s03pnorm(lam + log(b / a) / (2 * lam))
     FF[i] <- exp(-V[i])
   }
   .t1_result(F = FF, estimate = FF[1], V = V, A_half = .s03pnorm(lam),

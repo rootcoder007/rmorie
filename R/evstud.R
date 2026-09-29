@@ -53,8 +53,9 @@ Evstud <- function(y, D, unit, time, cohort, max_lead = NULL, max_lag = NULL,
   if (U < 2L || Tn < 2L) stop("need at least two units and two periods")
   ui <- match(unit, us) - 1L
   ti <- match(time, ts) - 1L
-  ev <- ifelse(is.na(coh) | is.infinite(coh), NA_integer_,
-               as.integer(round(time - coh)))
+  ev <- rep(NA_integer_, n)
+  fin <- !(is.na(coh) | is.infinite(coh))
+  ev[fin] <- as.integer(round(time[fin] - coh[fin]))
   seen <- sort(unique(ev[!is.na(ev)]))
   if (!is.null(max_lead)) seen <- seen[seen >= -as.integer(max_lead)]
   if (!is.null(max_lag)) seen <- seen[seen <= as.integer(max_lag)]
