@@ -136,7 +136,10 @@ morie_mtdrl <- function(tasks, agent, episode_length = 100,
   L <- as.integer(episode_length)
   if (L < 1L) stop("mtdrl: episode_length must be >= 1")
   for (m in c("reset", "act", "observe"))
-    if (!m %in% names(agent))
+    # names() of a reference-class object lists only its fields, so the
+    # package's own TabularHistoryAgent was rejected; look the method up
+    if (!is.function(tryCatch(do.call("$", list(agent, m)),
+                              error = function(e) NULL)))
       stop(paste0("mtdrl: agent must provide ", m, "()"))
   e <- .ghc_rng(seed)
   total <- 0
