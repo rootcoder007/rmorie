@@ -1,15 +1,15 @@
-.cs_symbols <- strsplit(paste(
+.cf_symbols <- strsplit(paste(
   "H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr",
   "Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb",
   "Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn",
   "Fr Ra Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr Rf"
 ), " ")[[1]]
-.cs_Z <- stats::setNames(seq_along(.cs_symbols), .cs_symbols)
-.cs_aromsym <- c(c = 6, n = 7, o = 8, s = 16, p = 15, b = 5, se = 34, as = 33)
-.cs_val <- list("1" = 1, "5" = 3, "6" = 4, "7" = 3, "8" = 2, "9" = 1, "14" = 4, "15" = c(3, 5), "16" = c(2, 4, 6),
+.cf_Z <- stats::setNames(seq_along(.cf_symbols), .cf_symbols)
+.cf_aromsym <- c(c = 6, n = 7, o = 8, s = 16, p = 15, b = 5, se = 34, as = 33)
+.cf_val <- list("1" = 1, "5" = 3, "6" = 4, "7" = 3, "8" = 2, "9" = 1, "14" = 4, "15" = c(3, 5), "16" = c(2, 4, 6),
                 "17" = 1, "35" = 1, "53" = 1)
 
-.cs_bridges <- function(n, B) {
+.cf_bridges <- function(n, B) {
   vapply(seq_len(nrow(B)), function(k) {
     adj <- vector("list", n)
     for (j in seq_len(nrow(B))) {
@@ -33,7 +33,7 @@
   }, TRUE)
 }
 
-.cs_rings <- function(n, B, ringb) {
+.cf_rings <- function(n, B, ringb) {
   nb <- nrow(B)
   adj <- vector("list", n)
   for (k in seq_len(nb)) {
@@ -97,7 +97,7 @@
   rings
 }
 
-.cs_hcount <- function(z, arom, chg, hexp, B) {
+.cf_hcount <- function(z, arom, chg, hexp, B) {
   n <- length(z)
   used <- numeric(n)
   for (k in seq_len(nrow(B))) {
@@ -107,7 +107,7 @@
   }
   vapply(seq_len(n), function(i) {
     if (hexp[i] >= 0) return(as.numeric(hexp[i]))
-    vals <- if (z[i] %in% c(5, 6, 7, 8, 15, 16)) .cs_val[[as.character(z[i] - chg[i])]] else if (chg[i] == 0) .cs_val[[as.character(z[i])]] else NULL
+    vals <- if (z[i] %in% c(5, 6, 7, 8, 15, 16)) .cf_val[[as.character(z[i] - chg[i])]] else if (chg[i] == 0) .cf_val[[as.character(z[i])]] else NULL
     if (is.null(vals)) return(0)
     tot <- used[i] + (if (arom[i] && !(z[i] %in% c(8, 16))) 1 else 0)
     for (v in vals) if (v >= tot) return(v - tot)
@@ -115,9 +115,9 @@
   }, 0)
 }
 
-.cs_more_en <- c(7, 8, 9, 15, 16, 17, 33, 34, 35, 51, 52, 53)
+.cf_more_en <- c(7, 8, 9, 15, 16, 17, 33, 34, 35, 51, 52, 53)
 
-.cs_electrons <- function(i, z, chg, nbr, ringb, hs) {
+.cf_electrons <- function(i, z, chg, nbr, ringb, hs) {
   nb <- nbr[[i]]
   dbl <- nb[nb[, 3] == 2, , drop = FALSE]
   deg <- nrow(nb) + hs[i]
@@ -125,7 +125,7 @@
   if (nrow(dbl)) {
     if (ringb[dbl[1, 2]]) return(1)
     if (z[i] != 6) return(NA)
-    return(if (z[dbl[1, 1]] %in% .cs_more_en) 0 else 1)
+    return(if (z[dbl[1, 1]] %in% .cf_more_en) 0 else 1)
   }
   if (z[i] == 6) return(if (chg[i] == -1) 2 else if (chg[i] == 1) 0 else NA)
   if (z[i] == 7) return(if ((chg[i] == 0 && deg == 3) || chg[i] == -1) 2 else NA)
@@ -134,7 +134,7 @@
   NA
 }
 
-.cs_kekulize <- function(n, z, arom, chg, hs, B, ringb) {
+.cf_kekulize <- function(n, z, arom, chg, hs, B, ringb) {
   nb <- nrow(B)
   order <- B[, 3]
   cand <- vapply(seq_len(nb), function(k) arom[B[k, 1]] && arom[B[k, 2]] && ringb[k] && B[k, 3] %in% c(1, 4), TRUE)
@@ -146,7 +146,7 @@
   }
   need <- vapply(seq_len(n), function(i) {
     if (!arom[i]) return(FALSE)
-    vals <- if (z[i] %in% c(5, 6, 7, 8, 15, 16)) .cs_val[[as.character(z[i] - chg[i])]] else .cs_val[[as.character(z[i])]]
+    vals <- if (z[i] %in% c(5, 6, 7, 8, 15, 16)) .cf_val[[as.character(z[i] - chg[i])]] else .cf_val[[as.character(z[i])]]
     length(vals) > 0 && !(cur[i] %in% vals) && ((cur[i] + 1) %in% vals)
   }, TRUE)
   adj <- lapply(seq_len(n), function(i) matrix(0, 0, 2))
@@ -192,15 +192,15 @@
   order
 }
 
-.cs_molecule_core <- function(el, arom0, chg0, hexp, B, explicit_h = FALSE) {
+.cf_molecule_core <- function(el, arom0, chg0, hexp, B, explicit_h = FALSE) {
   n <- length(el)
-  z <- unname(.cs_Z[el])
+  z <- unname(.cf_Z[el])
   arom <- arom0 == 1
   chg <- as.numeric(chg0)
-  hs <- .cs_hcount(z, arom, chg, hexp, B)
-  ringb <- if (nrow(B)) .cs_bridges(n, B) else logical(0)
-  rs <- .cs_rings(n, B, ringb)
-  order <- .cs_kekulize(n, z, arom, chg, hs, B, ringb)
+  hs <- .cf_hcount(z, arom, chg, hexp, B)
+  ringb <- if (nrow(B)) .cf_bridges(n, B) else logical(0)
+  rs <- .cf_rings(n, B, ringb)
+  order <- .cf_kekulize(n, z, arom, chg, hs, B, ringb)
   kek <- order  # valences follow the Kekule form, as RDKit's
   arom <- rep(FALSE, n)
   nbr <- lapply(seq_len(n), function(i) {
@@ -208,7 +208,7 @@
     if (!length(ks)) return(matrix(0, 0, 3))
     cbind(ifelse(B[ks, 1] == i, B[ks, 2], B[ks, 1]), ks, order[ks])
   })
-  ec <- vapply(seq_len(n), function(i) .cs_electrons(i, z, chg, nbr, ringb, hs), 0)
+  ec <- vapply(seq_len(n), function(i) .cf_electrons(i, z, chg, nbr, ringb, hs), 0)
   nr <- length(rs)
   if (nr) {
     fused <- lapply(seq_len(nr), function(a) which(vapply(seq_len(nr), function(b) b != a && length(intersect(rs[[a]]$edges, rs[[b]]$edges)) > 0, TRUE)))
@@ -281,10 +281,10 @@
 }
 
 # ---------------------------------------------------------------- SMARTS parsing
-.cs_env <- new.env()
-.cs_env$next_id <- 0
+.cf_env <- new.env()
+.cf_env$next_id <- 0
 
-.cs_match_close <- function(ch, i, op, cl) {
+.cf_match_close <- function(ch, i, op, cl) {
   depth <- 0
   for (j in i:length(ch)) {
     if (ch[j] == op) depth <- depth + 1
@@ -296,7 +296,7 @@
   stop("unbalanced SMARTS")
 }
 
-.cs_bracket_end <- function(ch, i) {
+.cf_bracket_end <- function(ch, i) {
   depth <- 0
   for (j in i:length(ch)) {
     if (ch[j] %in% c("[", "(")) depth <- depth + 1
@@ -308,38 +308,38 @@
   stop("unclosed bracket atom")
 }
 
-.cs_num <- function(ch, i) {
+.cf_num <- function(ch, i) {
   j <- i
   while (j <= length(ch) && grepl("^[0-9]$", ch[j])) j <- j + 1
   list(v = if (j > i) as.numeric(paste(ch[i:(j - 1)], collapse = "")) else NULL, j = j)
 }
 
-.cs_atom_prim <- function(ch, i, first) {
+.cf_atom_prim <- function(ch, i, first) {
   c0 <- ch[i]
   nx <- if (i + 1 <= length(ch)) ch[i + 1] else ""
-  if (grepl("^[A-Z]$", c0) && grepl("^[a-z]$", nx) && paste0(c0, nx) %in% names(.cs_Z)) {
-    return(list(node = list(t = "elem", z = .cs_Z[[paste0(c0, nx)]], ar = FALSE), j = i + 2))
+  if (grepl("^[A-Z]$", c0) && grepl("^[a-z]$", nx) && paste0(c0, nx) %in% names(.cf_Z)) {
+    return(list(node = list(t = "elem", z = .cf_Z[[paste0(c0, nx)]], ar = FALSE), j = i + 2))
   }
   if (c0 == "h") {
-    r <- .cs_num(ch, i + 1)
+    r <- .cf_num(ch, i + 1)
     return(list(node = list(t = "himp", v = r$v), j = r$j))
   }
   if (c0 == "$") {
-    j <- .cs_match_close(ch, i + 1, "(", ")")
-    return(list(node = list(t = "rec", q = .cs_parse(paste(ch[(i + 2):(j - 1)], collapse = ""))), j = j + 1))
+    j <- .cf_match_close(ch, i + 1, "(", ")")
+    return(list(node = list(t = "rec", q = .cf_parse(paste(ch[(i + 2):(j - 1)], collapse = ""))), j = j + 1))
   }
   if (c0 == "*") return(list(node = list(t = "true"), j = i + 1))
   if (c0 == "#") {
-    r <- .cs_num(ch, i + 1)
+    r <- .cf_num(ch, i + 1)
     return(list(node = list(t = "z", v = r$v), j = r$j))
   }
   if (grepl("^[0-9]$", c0)) {
-    r <- .cs_num(ch, i)
+    r <- .cf_num(ch, i)
     return(list(node = list(t = "iso", v = r$v), j = r$j))
   }
   if (c0 %in% c("+", "-")) {
     sg <- if (c0 == "+") 1 else -1
-    r <- .cs_num(ch, i + 1)
+    r <- .cf_num(ch, i + 1)
     if (!is.null(r$v)) return(list(node = list(t = "chg", v = sg * r$v), j = r$j))
     q <- sg
     j <- r$j
@@ -358,7 +358,7 @@
     return(list(node = list(t = "elem", z = 1, ar = FALSE), j = i + 1))
   }
   if (c0 %in% c("H", "D", "X", "v", "R", "r", "x")) {
-    r <- .cs_num(ch, i + 1)
+    r <- .cf_num(ch, i + 1)
     v <- r$v
     node <- switch(c0,
       H = list(t = "h", v = if (is.null(v)) 1 else v),
@@ -375,19 +375,19 @@
   if (c0 == "A") return(list(node = list(t = "aliph"), j = i + 1))
   if (grepl("^[a-z]$", c0)) {
     two <- paste0(c0, nx)
-    if (nchar(two) == 2 && two %in% names(.cs_aromsym)) return(list(node = list(t = "elem", z = .cs_aromsym[[two]], ar = TRUE), j = i + 2))
-    if (c0 %in% names(.cs_aromsym)) return(list(node = list(t = "elem", z = .cs_aromsym[[c0]], ar = TRUE), j = i + 1))
+    if (nchar(two) == 2 && two %in% names(.cf_aromsym)) return(list(node = list(t = "elem", z = .cf_aromsym[[two]], ar = TRUE), j = i + 2))
+    if (c0 %in% names(.cf_aromsym)) return(list(node = list(t = "elem", z = .cf_aromsym[[c0]], ar = TRUE), j = i + 1))
     stop("unknown SMARTS primitive ", c0)
   }
   if (grepl("^[A-Z]$", c0)) {
     two <- paste0(c0, nx)
-    if (grepl("^[a-z]$", nx) && two %in% names(.cs_Z)) return(list(node = list(t = "elem", z = .cs_Z[[two]], ar = FALSE), j = i + 2))
-    if (c0 %in% names(.cs_Z)) return(list(node = list(t = "elem", z = .cs_Z[[c0]], ar = FALSE), j = i + 1))
+    if (grepl("^[a-z]$", nx) && two %in% names(.cf_Z)) return(list(node = list(t = "elem", z = .cf_Z[[two]], ar = FALSE), j = i + 2))
+    if (c0 %in% names(.cf_Z)) return(list(node = list(t = "elem", z = .cf_Z[[c0]], ar = FALSE), j = i + 1))
   }
   stop("unknown SMARTS primitive ", c0)
 }
 
-.cs_bond_prim <- function(ch, i, first) {
+.cf_bond_prim <- function(ch, i, first) {
   c0 <- ch[i]
   node <- switch(c0,
     "-" = , "/" = , "\\" = list(t = "single"),
@@ -401,7 +401,7 @@
   list(node = node, j = i + 1)
 }
 
-.cs_logic <- function(s, prim) {
+.cf_logic <- function(s, prim) {
   ch <- strsplit(s, "")[[1]]
   st <- new.env()
   st$pos <- 1
@@ -441,10 +441,10 @@
   out
 }
 
-.cs_default_bond <- list(t = "or", x = list(list(t = "single"), list(t = "aromatic")))
-.cs_bond_chars <- c("-", "=", "#", ":", "~", "@", "!", "/", "\\", ",", ";", "&")
+.cf_default_bond <- list(t = "or", x = list(list(t = "single"), list(t = "aromatic")))
+.cf_bond_chars <- c("-", "=", "#", ":", "~", "@", "!", "/", "\\", ",", ";", "&")
 
-.cs_parse <- function(sm) {
+.cf_parse <- function(sm) {
   ch <- strsplit(sm, "")[[1]]
   atoms <- list()
   bonds <- list()
@@ -466,10 +466,10 @@
     } else if (c0 == ".") {
       prev <- 0
       i <- i + 1
-    } else if (c0 %in% .cs_bond_chars) {
+    } else if (c0 %in% .cf_bond_chars) {
       j <- i
-      while (j <= length(ch) && ch[j] %in% .cs_bond_chars) j <- j + 1
-      pend <- .cs_logic(paste(ch[i:(j - 1)], collapse = ""), .cs_bond_prim)
+      while (j <= length(ch) && ch[j] %in% .cf_bond_chars) j <- j + 1
+      pend <- .cf_logic(paste(ch[i:(j - 1)], collapse = ""), .cf_bond_prim)
       i <- j
     } else if (grepl("^[0-9]$", c0) || c0 == "%") {
       if (c0 == "%") {
@@ -481,7 +481,7 @@
       }
       if (!is.null(rings[[lab]])) {
         rb <- rings[[lab]]
-        bp <- if (!is.null(pend)) pend else if (!is.null(rb$bp)) rb$bp else .cs_default_bond
+        bp <- if (!is.null(pend)) pend else if (!is.null(rb$bp)) rb$bp else .cf_default_bond
         bonds[[length(bonds) + 1]] <- list(a = rb$a, b = prev, bp = bp)
         rings[[lab]] <- NULL
       } else {
@@ -490,19 +490,19 @@
       pend <- NULL
     } else {
       if (c0 == "[") {
-        j <- .cs_bracket_end(ch, i)
-        pred <- .cs_logic(paste(ch[(i + 1):(j - 1)], collapse = ""), .cs_atom_prim)
+        j <- .cf_bracket_end(ch, i)
+        pred <- .cf_logic(paste(ch[(i + 1):(j - 1)], collapse = ""), .cf_atom_prim)
         i <- j + 1
       } else {
         two <- if (i + 1 <= length(ch)) paste0(c0, ch[i + 1]) else ""
         if (two %in% c("Cl", "Br")) {
-          pred <- list(t = "elem", z = .cs_Z[[two]], ar = FALSE)
+          pred <- list(t = "elem", z = .cf_Z[[two]], ar = FALSE)
           i <- i + 2
         } else if (c0 %in% c("B", "C", "N", "O", "S", "P", "F", "I")) {
-          pred <- list(t = "elem", z = .cs_Z[[c0]], ar = FALSE)
+          pred <- list(t = "elem", z = .cf_Z[[c0]], ar = FALSE)
           i <- i + 1
         } else if (c0 %in% c("c", "n", "o", "s", "p", "b")) {
-          pred <- list(t = "elem", z = .cs_aromsym[[c0]], ar = TRUE)
+          pred <- list(t = "elem", z = .cf_aromsym[[c0]], ar = TRUE)
           i <- i + 1
         } else if (c0 == "*") {
           pred <- list(t = "true")
@@ -520,7 +520,7 @@
       atoms[[length(atoms) + 1]] <- pred
       cur <- length(atoms)
       if (prev > 0) {
-        bonds[[length(bonds) + 1]] <- list(a = prev, b = cur, bp = if (!is.null(pend)) pend else .cs_default_bond)
+        bonds[[length(bonds) + 1]] <- list(a = prev, b = cur, bp = if (!is.null(pend)) pend else .cf_default_bond)
       } else {
         starts <- c(starts, cur)
       }
@@ -529,21 +529,21 @@
     }
   }
   if (length(rings) || length(stack)) stop("unclosed ring or branch in SMARTS")
-  .cs_env$next_id <- .cs_env$next_id + 1
-  list(atoms = atoms, bonds = bonds, starts = starts, id = .cs_env$next_id)
+  .cf_env$next_id <- .cf_env$next_id + 1
+  list(atoms = atoms, bonds = bonds, starts = starts, id = .cf_env$next_id)
 }
 
-.cs_is_h <- function(p) identical(p, list(t = "z", v = 1)) || identical(p, list(t = "elem", z = 1, ar = FALSE))
+.cf_is_h <- function(p) identical(p, list(t = "z", v = 1)) || identical(p, list(t = "elem", z = 1, ar = FALSE))
 
-.cs_merge_pred <- function(p) {
-  if (p$t == "rec") return(list(t = "rec", q = .cs_merge_hs(p$q)))
-  if (p$t %in% c("and", "or")) return(list(t = p$t, x = lapply(p$x, .cs_merge_pred)))
-  if (p$t == "not") return(list(t = "not", x = .cs_merge_pred(p$x)))
+.cf_merge_pred <- function(p) {
+  if (p$t == "rec") return(list(t = "rec", q = .cf_merge_hs(p$q)))
+  if (p$t %in% c("and", "or")) return(list(t = p$t, x = lapply(p$x, .cf_merge_pred)))
+  if (p$t == "not") return(list(t = "not", x = .cf_merge_pred(p$x)))
   p
 }
 
-.cs_merge_hs <- function(q) {
-  atoms <- lapply(q$atoms, .cs_merge_pred)
+.cf_merge_hs <- function(q) {
+  atoms <- lapply(q$atoms, .cf_merge_pred)
   na <- length(atoms)
   deg <- numeric(na)
   for (b in q$bonds) {
@@ -556,36 +556,36 @@
     for (pr in list(c(b$a, b$b), c(b$b, b$a))) {
       h <- pr[1]
       o <- pr[2]
-      if (.cs_is_h(atoms[[h]]) && deg[h] == 1 && !.cs_is_h(atoms[[o]]) &&
-          (identical(b$bp, .cs_default_bond) || identical(b$bp, list(t = "single")))) {
+      if (.cf_is_h(atoms[[h]]) && deg[h] == 1 && !.cf_is_h(atoms[[o]]) &&
+          (identical(b$bp, .cf_default_bond) || identical(b$bp, list(t = "single")))) {
         drop <- c(drop, h)
         add[o] <- add[o] + 1
       }
     }
   }
-  .cs_env$next_id <- .cs_env$next_id + 1
-  if (!length(drop)) return(list(atoms = atoms, bonds = q$bonds, starts = q$starts, id = .cs_env$next_id))
+  .cf_env$next_id <- .cf_env$next_id + 1
+  if (!length(drop)) return(list(atoms = atoms, bonds = q$bonds, starts = q$starts, id = .cf_env$next_id))
   keep <- setdiff(seq_len(na), drop)
   idx <- match(seq_len(na), keep)
   new_atoms <- lapply(keep, function(i) if (add[i] > 0) list(t = "and", x = list(atoms[[i]], list(t = "hge", v = add[i]))) else atoms[[i]])
   new_bonds <- list()
   for (b in q$bonds) if (!(b$a %in% drop) && !(b$b %in% drop)) new_bonds[[length(new_bonds) + 1]] <- list(a = idx[b$a], b = idx[b$b], bp = b$bp)
   st <- idx[q$starts]
-  list(atoms = new_atoms, bonds = new_bonds, starts = sort(unique(c(st[!is.na(st)], 1))), id = .cs_env$next_id)
+  list(atoms = new_atoms, bonds = new_bonds, starts = sort(unique(c(st[!is.na(st)], 1))), id = .cf_env$next_id)
 }
 
 # ---------------------------------------------------------------- matching
-.cs_atom_ok <- function(p, m, i, cache) {
+.cf_atom_ok <- function(p, m, i, cache) {
   switch(p$t,
     and = {
-      for (x in p$x) if (!.cs_atom_ok(x, m, i, cache)) return(FALSE)
+      for (x in p$x) if (!.cf_atom_ok(x, m, i, cache)) return(FALSE)
       TRUE
     },
     or = {
-      for (x in p$x) if (.cs_atom_ok(x, m, i, cache)) return(TRUE)
+      for (x in p$x) if (.cf_atom_ok(x, m, i, cache)) return(TRUE)
       FALSE
     },
-    not = !.cs_atom_ok(p$x, m, i, cache),
+    not = !.cf_atom_ok(p$x, m, i, cache),
     true = TRUE,
     elem = m$z[i] == p$z && m$arom[i] == p$ar,
     z = m$z[i] == p$v,
@@ -606,24 +606,24 @@
     xge = m$rbcount[i] >= 1,
     rec = {
       key <- paste(p$q$id, i)
-      if (is.null(cache[[key]])) cache[[key]] <- .cs_embed(p$q, m, i, cache)
+      if (is.null(cache[[key]])) cache[[key]] <- .cf_embed(p$q, m, i, cache)
       cache[[key]]
     },
     stop("unknown predicate ", p$t)
   )
 }
 
-.cs_bond_ok <- function(p, m, k) {
+.cf_bond_ok <- function(p, m, k) {
   switch(p$t,
     and = {
-      for (x in p$x) if (!.cs_bond_ok(x, m, k)) return(FALSE)
+      for (x in p$x) if (!.cf_bond_ok(x, m, k)) return(FALSE)
       TRUE
     },
     or = {
-      for (x in p$x) if (.cs_bond_ok(x, m, k)) return(TRUE)
+      for (x in p$x) if (.cf_bond_ok(x, m, k)) return(TRUE)
       FALSE
     },
-    not = !.cs_bond_ok(p$x, m, k),
+    not = !.cf_bond_ok(p$x, m, k),
     true = TRUE,
     single = m$order[k] == 1,
     double = m$order[k] == 2,
@@ -634,7 +634,7 @@
   )
 }
 
-.cs_embed <- function(q, m, anchor, cache) {
+.cf_embed <- function(q, m, anchor, cache) {
   na <- length(q$atoms)
   qn <- vector("list", na)
   for (b in q$bonds) {
@@ -649,12 +649,12 @@
   st$mp <- rep(0, na)
   ok_at <- function(v, i) {
     if (i %in% st$mp[seq_len(v - 1)]) return(FALSE)
-    if (!.cs_atom_ok(q$atoms[[v]], m, i, cache)) return(FALSE)
+    if (!.cf_atom_ok(q$atoms[[v]], m, i, cache)) return(FALSE)
     for (e in qn[[v]]) {
       if (e$u < v && st$mp[e$u] > 0) {
         nb <- m$nbr[[i]]
         r <- which(nb[, 1] == st$mp[e$u])
-        if (!length(r) || !.cs_bond_ok(e$bp, m, nb[r[1], 2])) return(FALSE)
+        if (!length(r) || !.cf_bond_ok(e$bp, m, nb[r[1], 2])) return(FALSE)
       }
     }
     TRUE
@@ -678,7 +678,7 @@
 }
 
 # (type, SMARTS, logP, MR): the RDKit Crippen.cpp table (Wildman and Crippen 1999), in its matching order
-.cs_crippen <- data.frame(
+.cf_crippen <- data.frame(
   type = c("C1", "C1", "C1", "C2", "C2", "C3", "C3", "C4", "C4", "C5",
            "C6", "C6", "C6", "C6", "C7", "C8", "C9", "C10", "C11", "C12",
            "C13", "C14", "C15", "C16", "C17", "C18", "C19", "C20", "C21", "C22",
@@ -843,12 +843,12 @@
   st$out <- list()
   ok_at <- function(v, i) {
     if (i %in% st$mp[seq_len(v - 1)]) return(FALSE)
-    if (!.cs_atom_ok(q$atoms[[v]], m, i, cache)) return(FALSE)
+    if (!.cf_atom_ok(q$atoms[[v]], m, i, cache)) return(FALSE)
     for (e in qn[[v]]) {
       if (e$u < v && st$mp[e$u] > 0) {
         nb <- m$nbr[[i]]
         r <- which(nb[, 1] == st$mp[e$u])
-        if (!length(r) || !.cs_bond_ok(e$bp, m, nb[r[1], 2])) return(FALSE)
+        if (!length(r) || !.cf_bond_ok(e$bp, m, nb[r[1], 2])) return(FALSE)
       }
     }
     TRUE
@@ -901,7 +901,7 @@
         zfix[[as.character(length(iso))]] <- as.numeric(.cf_two_arom[[two]][1])
         rest <- paste0(.cf_two_arom[[two]][2], substring(rest, 3))
       } else if (nchar(rest) > 1 && grepl("^[A-Z][a-z]", rest) && !(two %in% c("Cl", "Br"))) {
-        zfix[[as.character(length(iso))]] <- .cs_Z[[two]]
+        zfix[[as.character(length(iso))]] <- .cf_Z[[two]]
         rest <- paste0("C", substring(rest, 3))
       }
       sym <- if (substr(rest, 1, 2) %in% c("Cl", "Br")) 2 else 1
@@ -935,8 +935,8 @@
   n <- length(p$el)
   B <- if (length(p$bonds)) do.call(rbind, p$bonds) + 0 else matrix(0, 0, 3)
   if (nrow(B)) B[, 1:2] <- B[, 1:2] + 1
-  hs0 <- .cs_hcount(unname(.cs_Z[p$el]), p$arom == 1, as.numeric(p$chg), p$hexp, B)
-  m <- .cs_molecule_core(p$el, p$arom, p$chg, p$hexp, B, explicit_h)
+  hs0 <- .cf_hcount(unname(.cf_Z[p$el]), p$arom == 1, as.numeric(p$chg), p$hexp, B)
+  m <- .cf_molecule_core(p$el, p$arom, p$chg, p$hexp, B, explicit_h)
   for (a in names(pt$zfix)) m$z[as.integer(a)] <- pt$zfix[[a]]
   m$iso <- c(pt$iso, rep(0, m$n - n))
   m$himp <- c(ifelse(pt$brk, 0, hs0), rep(0, m$n - n))
@@ -947,7 +947,7 @@
 
 .cf_count <- function(m, q, cache) length(.cf_all_matches(q, m, cache))
 
-.cf_has <- function(m, q, cache) .cs_embed(q, m, NULL, cache)
+.cf_has <- function(m, q, cache) .cf_embed(q, m, NULL, cache)
 
 .cf_frags <- function(m) {
   n <- m$heavy
@@ -1829,14 +1829,14 @@
 #' SaScore("c1ccccc1")$complexity
 #' @export
 MaccsFingerprint <- function(smiles) {
-  if (is.null(.cs_env$maccs)) .cs_env$maccs <- lapply(.cf_maccs$smarts, .cs_parse)
+  if (is.null(.cf_env$maccs)) .cf_env$maccs <- lapply(.cf_maccs$smarts, .cf_parse)
   m <- .cf_molecule(smiles)
   cache <- new.env()
   bits <- numeric(167)
-  for (r in seq_along(.cs_env$maccs)) {
+  for (r in seq_along(.cf_env$maccs)) {
     key <- .cf_maccs$key[r]
     cnt <- .cf_maccs$count[r]
-    q <- .cs_env$maccs[[r]]
+    q <- .cf_env$maccs[[r]]
     hit <- if (cnt == 0) .cf_has(m, q, cache) else .cf_count(m, q, cache) > cnt
     bits[key] <- if (hit) 1 else 0
   }
@@ -1869,8 +1869,8 @@ MaccsFingerprint <- function(smiles) {
 
 .cf_q <- function(sm) {
   key <- paste0("q", sm)
-  if (is.null(.cs_env[[key]])) .cs_env[[key]] <- .cs_parse(sm)
-  .cs_env[[key]]
+  if (is.null(.cf_env[[key]])) .cf_env[[key]] <- .cf_parse(sm)
+  .cf_env[[key]]
 }
 
 .cf_tpsa <- function(m) {
@@ -1949,14 +1949,14 @@ MaccsFingerprint <- function(smiles) {
 }
 
 .cf_crippen_logp <- function(smiles) {
-  if (is.null(.cs_env$crippen)) .cs_env$crippen <- lapply(.cs_crippen$smarts, .cs_parse)
+  if (is.null(.cf_env$crippen)) .cf_env$crippen <- lapply(.cf_crippen$smarts, .cf_parse)
   m <- .cf_molecule(smiles, explicit_h = TRUE)
   cache <- new.env()
   lp <- 0
   for (i in seq_len(m$n)) {
-    for (k in seq_along(.cs_env$crippen)) {
-      if (.cs_embed(.cs_env$crippen[[k]], m, i, cache)) {
-        lp <- lp + .cs_crippen$logp[k]
+    for (k in seq_along(.cf_env$crippen)) {
+      if (.cf_embed(.cf_env$crippen[[k]], m, i, cache)) {
+        lp <- lp + .cf_crippen$logp[k]
         break
       }
     }
@@ -1985,14 +1985,14 @@ ReosFilter <- function(smiles, rule_sets = "Inpharmatica", mw = c(0, 500), logp 
   bad <- setdiff(rule_sets, .cf_rule_sets)
   if (length(bad)) stop("unknown rule set: ", paste(bad, collapse = ", "))
   rows <- which(.cf_alerts$rule_set %in% rule_sets)
-  if (is.null(.cs_env$alerts)) .cs_env$alerts <- new.env()
+  if (is.null(.cf_env$alerts)) .cf_env$alerts <- new.env()
   m <- .cf_molecule(smiles)
   cache <- new.env()
   alerts <- list()
   for (r in rows) {
     key <- paste0("a", r)
-    if (is.null(.cs_env$alerts[[key]])) .cs_env$alerts[[key]] <- .cs_parse(.cf_alerts$smarts[r])
-    if (.cf_has(m, .cs_env$alerts[[key]], cache)) {
+    if (is.null(.cf_env$alerts[[key]])) .cf_env$alerts[[key]] <- .cf_parse(.cf_alerts$smarts[r])
+    if (.cf_has(m, .cf_env$alerts[[key]], cache)) {
       alerts[[length(alerts) + 1]] <- c(.cf_alerts$rule_set[r], .cf_alerts$description[r])
     }
   }
