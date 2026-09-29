@@ -1,0 +1,66 @@
+# Coverage tests for R/frgrow_native.R: binding free energy, ligand and
+# group efficiency by both routes, the derived metrics and the
+# fragment-growing ranking.
+
+fg_R <- 0.0019872041
+
+test_that("free energy, ligand efficiency and group efficiency", {
+  expect_equal(morie_frgrow_dg(1e-6), fg_R * 298.15 * log(1e-6), tolerance = 1e-12)
+  expect_equal(morie_frgrow_dg(1e-6, 310), fg_R * 310 * log(1e-6), tolerance = 1e-12)
+  expect_equal(morie_frgrow_le(1e-6, 20), -fg_R * 298.15 * log(1e-6) / 20, tolerance = 1e-12)
+  expect_equal(morie_frgrow_le(1e-6, 20, "shortcut"), 1.37 * 6 / 20, tolerance = 1e-12)
+  expect_equal(morie_frgrow_ge(1e-3, 10, 1e-6, 16), -fg_R * 298.15 * log(1e-3) / 6, tolerance = 1e-12)
+  expect_equal(morie_frgrow_ge(1e-3, 10, 1e-6, 16, "shortcut"), 1.37 * 3 / 6, tolerance = 1e-12)
+  expect_error(morie_frgrow_dg(0), "positive")
+  expect_error(morie_frgrow_dg(1e-6, 0), "temperature")
+  expect_error(morie_frgrow_le(1e-6, 0), "heavy-atom")
+  expect_error(morie_frgrow_le(1e-6, 5, "exact"), "route must be one of")
+  expect_error(morie_frgrow_ge(1e-3, 10, 1e-4, 10), "must add heavy atoms")
+})
+
+test_that("derived metrics: LLE, LELP, BEI, SEI", {
+  m <- morie_frgrow_metrics(1e-7, 25, logp = 2.5, mw = 350, psa = 70)
+  expect_equal(m$pkd, 7)
+  expect_equal(m$lle, 7 - 2.5)
+  expect_equal(m$lelp, 2.5 / m$le)
+  expect_equal(m$bei, 7 / 0.35, tolerance = 1e-12)
+  expect_equal(m$sei, 7 / 0.7, tolerance = 1e-12)
+  b <- morie_frgrow_metrics(1e-7, 25)
+  expect_true(all(c("lle", "lelp", "bei", "sei") %in% names(b)))
+  expect_null(b$lle)
+  expect_null(b$sei)
+  expect_null(morie_frgrow_metrics(1, 25, logp = 1)$lelp)
+  expect_error(morie_frgrow_metrics(1e-7, 25, mw = 0), "molecular weight")
+  expect_error(morie_frgrow_metrics(1e-7, 25, psa = -1), "polar surface")
+})
+
+test_that("fragment growing ranks analogues by group efficiency", {
+  frag <- list(1e-3, 10, 1, 150, 40, "frag")
+  lib <- list(list(1e-5, 14, 2, 210, 55, "a"), list(1e-4, 12), list(1e-7, 20, 3, 300, 80, "c"))
+  r <- morie_frgrow(frag, lib)
+  pl <- morie_frgrow_le(1e-3, 10)
+  ge <- c(morie_frgrow_ge(1e-3, 10, 1e-5, 14), morie_frgrow_ge(1e-3, 10, 1e-4, 12), morie_frgrow_ge(1e-3, 10, 1e-7, 20))
+  expect_equal(r$parent_le, pl)
+  expect_equal(r$group_efficiency, ge)
+  expect_equal(r$d_hac, c(4, 2, 10))
+  expect_equal(r$le, c(morie_frgrow_le(1e-5, 14), morie_frgrow_le(1e-4, 12), morie_frgrow_le(1e-7, 20)))
+  # on the RT route the blended efficiency is exactly the grown compound's LE
+  expect_equal(r$le_from_blend, r$le, tolerance = 1e-12)
+  expect_equal(r$ranking, order(-ge) - 1L)
+  expect_equal(r$improved, which(ge > pl) - 1L)
+  expect_equal(r$n_improved, length(r$improved))
+  expect_equal(r$best, r$ranking[1])
+  expect_equal(r$estimate, max(ge))
+  expect_equal(r$name, c("a", "", "c"))
+  expect_equal(r$lle, c(5 - 2, NaN, 7 - 3))
+  expect_equal(r$parent_lle, 3 - 1)
+  expect_equal(r$parent_sei, 3 / 0.4, tolerance = 1e-12)
+  s <- morie_frgrow(frag, lib, route = "shortcut")
+  expect_equal(s$group_efficiency, 1.37 * c(2 / 4, 1 / 2, 4 / 10), tolerance = 1e-12)
+  e <- morie_frgrow(list(1e-3, 10), list())
+  expect_equal(e$n, 0L)
+  expect_equal(e$best, -1L)
+  expect_true(is.nan(e$estimate))
+  expect_null(e$parent_lle)
+  expect_match(morie_frgrow_cheatsheet(), "GE on the added atoms")
+})

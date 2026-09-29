@@ -9,6 +9,17 @@
 ## kernel's copy and not another's.
 ## ---------------------------------------------------------------------------
 
+# Squared Euclidean distances from the coordinate differences. The
+# expansion |a|^2 + |b|^2 - 2 a.b cancels catastrophically once the data
+# sit far from the origin, so it is not used for any distance here.
+.morie_esl_sqdist <- function(A, B = A) {
+  A <- as.matrix(A)
+  B <- as.matrix(B)
+  d2 <- matrix(0, nrow(A), nrow(B))
+  for (k in seq_len(ncol(A))) d2 <- d2 + outer(A[, k], B[, k], "-")^2
+  d2
+}
+
 #' .morie_kernel_matrix
 #'
 #' SMO with the maximal-violating-pair working set (Keerthi et al. 2001, as
@@ -46,8 +57,7 @@
   }
   if (kernel == "rbf") {
     if (is.null(gamma)) gamma <- 1 / ncol(X)
-    d2 <- outer(rowSums(X^2), rowSums(Z^2), "+") - 2 * tcrossprod(X, Z)
-    return(exp(-gamma * pmax(d2, 0)))
+    return(exp(-gamma * .morie_esl_sqdist(X, Z)))
   }
   if (kernel == "sigmoid") {
     if (is.null(gamma)) gamma <- 1 / ncol(X)
@@ -551,8 +561,7 @@ morie_esl_thin_plate_spline <- function(X, y, lambda_ = 1, newdata = NULL) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .morie_tps_kernel <- function(A, B) {
-  d2 <- outer(rowSums(A^2), rowSums(B^2), "+") - 2 * tcrossprod(A, B)
-  d2 <- pmax(d2, 0)
+  d2 <- .morie_esl_sqdist(A, B)
   out <- 0.5 * d2 * log(d2)
   out[d2 <= 0] <- 0
   out
@@ -705,7 +714,7 @@ morie_esl_isomap <- function(X, k = 2, neighbors = 5) {
   if (neighbors < 1L || neighbors >= n) {
     stop(sprintf("neighbors must be between 1 and %d", n - 1L), call. = FALSE)
   }
-  D <- sqrt(pmax(outer(rowSums(X^2), rowSums(X^2), "+") - 2 * tcrossprod(X), 0))
+  D <- sqrt(.morie_esl_sqdist(X))
   G <- matrix(Inf, n, n)
   diag(G) <- 0
   for (i in seq_len(n)) {
@@ -728,8 +737,7 @@ morie_esl_isomap <- function(X, k = 2, neighbors = 5) {
   ev <- eigen((B + t(B)) / 2, symmetric = TRUE)
   pos <- pmax(ev$values[seq_len(k)], 0)
   emb <- sweep(ev$vectors[, seq_len(k), drop = FALSE], 2L, sqrt(pos), "*")
-  Dg <- sqrt(pmax(outer(rowSums(emb^2), rowSums(emb^2), "+") -
-    2 * tcrossprod(emb), 0))
+  Dg <- sqrt(.morie_esl_sqdist(emb))
   iu <- upper.tri(G)
   list(
     embedding = emb, eigenvalues = ev$values, geodesic = G,
@@ -809,7 +817,7 @@ morie_esl_lle <- function(X, k = 2, neighbors = 5, reg = 1e-3) {
       call. = FALSE
     )
   }
-  D <- outer(rowSums(X^2), rowSums(X^2), "+") - 2 * tcrossprod(X)
+  D <- .morie_esl_sqdist(X)
   W <- matrix(0, n, n)
   err <- 0
   for (i in seq_len(n)) {
@@ -900,7 +908,7 @@ morie_esl_self_organize <- function(X, grid = c(5L, 5L), eta = 0.5,
       M <- M + lr * h * sweep(-M, 2L, X[i, ], "+")
     }
   }
-  d2 <- outer(rowSums(X^2), rowSums(M^2), "+") - 2 * tcrossprod(X, M)
+  d2 <- .morie_esl_sqdist(X, M)
   ordm <- t(apply(d2, 1L, order))
   assign <- ordm[, 1L]
   qe <- mean(sqrt(pmax(d2[cbind(seq_len(n), assign)], 0)))
@@ -986,7 +994,7 @@ morie_esl_prototype_lvq <- function(X, y, n_prototypes = 2, eta = 0.1,
   }
   nearest <- function(A) {
     mc[apply(
-      outer(rowSums(A^2), rowSums(M^2), "+") - 2 * tcrossprod(A, M), 1L, which.min
+      .morie_esl_sqdist(A, M), 1L, which.min
     )]
   }
   list(
@@ -1048,8 +1056,7 @@ morie_esl_partial_dependence <- function(model, X, S, grid = NULL,
   } else {
     G <- matrix(as.numeric(grid), ncol = length(S))
   }
-  Dxx <- sqrt(pmax(outer(rowSums(X^2), rowSums(X^2), "+") -
-    2 * tcrossprod(X), 0))
+  Dxx <- sqrt(.morie_esl_sqdist(X))
   diag(Dxx) <- Inf
   ref_nn <- stats::median(apply(Dxx, 1L, min))
 
@@ -1059,8 +1066,7 @@ morie_esl_partial_dependence <- function(model, X, S, grid = NULL,
     Z <- X
     Z[, S] <- matrix(G[t, ], n, length(S), byrow = TRUE)
     pd[t] <- mean(as.numeric(model(Z)))
-    dz <- sqrt(pmax(outer(rowSums(Z^2), rowSums(X^2), "+") -
-      2 * tcrossprod(Z, X), 0))
+    dz <- sqrt(.morie_esl_sqdist(Z, X))
     warn[t] <- stats::median(apply(dz, 1L, min)) > 2 * ref_nn
   }
   list(

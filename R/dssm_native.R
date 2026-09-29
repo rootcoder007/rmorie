@@ -171,7 +171,7 @@ morie_dssm_word_hash <- function(words, n = 3L, vocabulary = NULL) {
   vec <- rep(0.0, length(keys))
   unseen <- 0L
   for (g in names(grams)) {
-    j <- idx[[g]]
+    j <- unname(idx[g])
     if (!is.na(j)) {
       vec[j] <- vec[j] + grams[[g]]
     } else {

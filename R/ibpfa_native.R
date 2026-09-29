@@ -122,7 +122,7 @@ left_ordered_form <- function(Z) {
   for (kk in 1:K) {
     h <- 0L
     for (i in 1:n) {
-      h <- bitwShiftL(h, 1L) | as.integer(M[i, kk])
+      h <- bitwOr(bitwShiftL(h, 1L), as.integer(M[i, kk]))
     }
     hist[kk, 1L] <- h
     hist[kk, 2L] <- kk

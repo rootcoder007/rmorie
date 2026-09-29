@@ -289,12 +289,8 @@ fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   res <- y - fit
   dof <- max(n - ncol(X) - 1, 1)
   s2 <- sum(w * res^2) / dof
-  ses <- numeric(ncol(X))
-  for (a in seq_len(ncol(X))) {
-    xm <- sum(w * X[, a]) / sum(w)
-    sxx <- sum(w * (X[, a] - xm)^2)
-    ses[a] <- if (sxx > .bhltmsm_EPS) sqrt(s2 / sxx) else Inf
-  }
+  X1 <- cbind(1, X)
+  ses <- sqrt(s2 * pmax(diag(solve(crossprod(X1 * w, X1)))[-1], 0))
   names <- as.character(states)[seq_len(ncol(X))]
   list(estimate = co[-1], intercept = co[1],
        coefficients = setNames(as.list(co[-1]), names),

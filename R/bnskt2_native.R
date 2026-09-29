@@ -19,7 +19,7 @@
 #' @return A list with \code{coef}.
 #' @export
 .bnskt2_wls <- function(rows, ys, w) {
-  X <- do.call(rbind, rows)
+  X <- cbind(1, do.call(rbind, rows))
   y <- as.numeric(ys)
   w <- sqrt(pmax(as.numeric(w), 0.0))
   Xw <- X * w
@@ -65,7 +65,7 @@
     stop(sprintf("bnskt2: too few observations on the %s of the kink within the bandwidth (%d for order %d)",
                  side, length(rows), order))
   fit <- .bnskt2_wls(rows, ys, ws)
-  list(slope = fit$coef[1L], coef = fit$coef, n = length(rows))
+  list(slope = fit$coef[2L], coef = fit$coef, n = length(rows))
 }
 
 #' local_polynomial_slope

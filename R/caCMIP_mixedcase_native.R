@@ -68,7 +68,7 @@ caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
   }
   d <- vapply(mods, function(mm) .ca_rms(mm, ob), numeric(1))
   s <- matrix(0, m_count, m_count)
-  for (i in 1:(m_count - 1L)) {
+  for (i in seq_len(m_count - 1L)) {
     for (j in (i + 1L):m_count) {
       v <- .ca_rms(mods[[i]], mods[[j]])
       s[i, j] <- v

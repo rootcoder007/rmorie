@@ -59,7 +59,7 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
   dk <- nrow(WQ)
   if (dk <= 0) stop("blip2v: empty projection")
   proj <- function(W, x) as.numeric(W %*% x)
-  out <- matrix(0, nrow(Q), ncol(WV))
+  out <- matrix(0, nrow(Q), nrow(WV))
   weights <- matrix(0, nrow(Q), nrow(F))
   for (i in seq_len(nrow(Q))) {
     qq <- proj(WQ, Q[i, ])
@@ -73,7 +73,7 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
     z <- sum(e)
     w <- e / z
     weights[i, ] <- w
-    Vs <- t(apply(F, 1, function(f) proj(WV, f)))
+    Vs <- F %*% t(WV)
     out[i, ] <- as.numeric(t(w) %*% Vs)
   }
   list(output = out, weights = weights,

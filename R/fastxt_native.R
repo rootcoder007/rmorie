@@ -116,7 +116,7 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @export
 .gram_slot <- function(g, gram_index, hash_buckets) {
   if (!is.null(hash_buckets))
-    return(.fnv1a(g) %% as.integer(hash_buckets))
+    return(as.integer(.fnv1a(g) %% as.integer(hash_buckets)))
   gi <- gram_index[[g]]
   if (is.null(gi)) NULL else gi
 }
@@ -131,13 +131,16 @@ word_vector <- function(word, Z, gram_index, n_min = 3, n_max = 6,
 #' @return The value of \code{as.integer}.
 #' @export
 .fnv1a <- function(s) {
-  s <- charToRaw(as.character(s))
+  # 32-bit FNV-1a in exact double arithmetic: the xor touches only the low
+  # byte, and 16777619 = 2^24 + 403 keeps every product below 2^53
+  b <- as.integer(charToRaw(as.character(s)))
   h <- 2166136261
-  for (i in seq_along(s)) {
-    h <- bitwXor(h, as.integer(s[i]))
-    h <- bitwAnd(h * 16777619, 4294967295)
+  for (x in b) {
+    lo <- h %% 256
+    h <- h - lo + bitwXor(as.integer(lo), x)
+    h <- (h * 403 + (h %% 256) * 16777216) %% 4294967296
   }
-  as.integer(h)
+  h
 }
 
 #' .as_docs

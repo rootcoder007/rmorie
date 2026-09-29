@@ -321,9 +321,14 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
   res <- z - fit
   dof <- max(n - ncol(X), 1)
   s2 <- sum(res * res) / dof
+  # the membership coefficient's variance is s2 times the [2, 2] entry
+  # of (X'X)^-1; s2 / sxx equals that only when the covariates are
+  # orthogonal to membership, and conditioning on a correlated set is
+  # exactly when they are not
   sm <- sum(s) / n
   sxx <- sum((s - sm)^2)
-  se <- if (sxx > .genemt_EPS) sqrt(s2 / sxx) else Inf
+  v22 <- tryCatch(solve(crossprod(X))[2L, 2L], error = function(e) Inf)
+  se <- if (sxx > .genemt_EPS && is.finite(v22)) sqrt(s2 * v22) else Inf
   t_stat <- if (se > 0) co[2] / se else 0.0
   list(estimate = co[2], beta = co[2], se = se, t = t_stat,
        p = 1.0 - .genemt_norm_cdf(t_stat),

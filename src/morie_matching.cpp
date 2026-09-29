@@ -41,30 +41,28 @@ arma::mat morie_matching_mahalanobis_pairs_cpp(const arma::mat& X_t,
         }
         return D;
     }
-    arma::mat W_t = X_t * L;
-    arma::mat W_c = X_c * L;
-    arma::vec st = arma::sum(W_t % W_t, 1);
-    arma::vec sc = arma::sum(W_c % W_c, 1);
-    arma::mat cross = W_t * W_c.t();
-    arma::mat D2 = -2.0 * cross;
-    D2.each_col() += st;
-    D2.each_row() += sc.t();
-    D2.transform([](double v) { return v < 0.0 ? 0.0 : v; });
-    return arma::sqrt(D2);
+    // Difference first, then transform: expanding |a|^2 + |b|^2 - 2 a.b
+    // cancels catastrophically once the covariates sit far from the
+    // origin (at an offset of 1e9 every distance came back 0).
+    arma::mat D(n_t, n_c, arma::fill::none);
+    for (arma::uword i = 0; i < n_t; ++i) {
+        arma::mat Wd = (X_c.each_row() - X_t.row(i)) * L;
+        D.row(i) = arma::sqrt(arma::sum(Wd % Wd, 1)).t();
+    }
+    return D;
 }
 
 // [[Rcpp::export]]
 arma::mat morie_matching_euclidean_pairs_cpp(const arma::mat& X_t,
                                              const arma::mat& X_c) {
     if (X_t.n_cols != X_c.n_cols) Rcpp::stop("X_t and X_c must have the same number of columns");
-    arma::vec st = arma::sum(X_t % X_t, 1);
-    arma::vec sc = arma::sum(X_c % X_c, 1);
-    arma::mat cross = X_t * X_c.t();
-    arma::mat D2 = -2.0 * cross;
-    D2.each_col() += st;
-    D2.each_row() += sc.t();
-    D2.transform([](double v) { return v < 0.0 ? 0.0 : v; });
-    return arma::sqrt(D2);
+    // Direct differences, not the norm expansion (see the Mahalanobis form).
+    arma::mat D(X_t.n_rows, X_c.n_rows, arma::fill::none);
+    for (arma::uword i = 0; i < X_t.n_rows; ++i) {
+        arma::mat diffs = X_c.each_row() - X_t.row(i);
+        D.row(i) = arma::sqrt(arma::sum(diffs % diffs, 1)).t();
+    }
+    return D;
 }
 
 // [[Rcpp::export]]

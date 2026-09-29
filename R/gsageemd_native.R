@@ -289,7 +289,7 @@ morie_gsageemd_layer <- function(H, adj, W, how = "mean", sizes = NULL,
     if (length(nb) == 0L)
       stop(paste0("gsageemd: node ", v, " has no neighbours"))
     agg <- morie_gsageemd_aggregate(lapply(nb + 1L, function(u) H[u, ]),
-                                    how = how, W = W)
+                                    how = how)
     cat <- c(H[v + 1L, ], agg)
     if (ncol(W) != length(cat))
       stop(paste0("gsageemd: W expects ", ncol(W), " inputs but the ",

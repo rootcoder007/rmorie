@@ -475,7 +475,6 @@ mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
   mask <- mistr_sliding_window_mask(L, window)
   proj <- function(row, Wm) as.numeric(crossprod(row, Wm))
   h <- t(sapply(seq_len(L), function(t) mistr_rms_norm(Xm[t, ], norm1)))
-  if (is.null(norm1)) h <- Xm
   Q <- t(sapply(seq_len(L), function(t) proj(h[t, ], Wq)))
   K <- t(sapply(seq_len(L), function(t) proj(h[t, ], Wk)))
   V <- t(sapply(seq_len(L), function(t) proj(h[t, ], Wv)))

@@ -75,7 +75,7 @@ laplacian_positional_encoding <- function(adj, n, dim = 2L,
   vals <- ee$values
   vecs <- ee$vectors
   order <- order(vals)
-  take <- order[seq_len(as.integer(dim) + 1L)[-1L]]
+  take <- order[-1L][seq_len(min(as.integer(dim), length(order) - 1L))]
   if (length(take) < as.integer(dim))
     stop(paste0("gtrf: the graph has only ", length(take),
                 " non-trivial eigenvectors, ", as.integer(dim),
@@ -167,7 +167,7 @@ morie_gtrf_sparse_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
   storage.mode(WQ) <- "double"
   storage.mode(WK) <- "double"
   storage.mode(WV) <- "double"
-  dk <- ncol(WQ)
+  dk <- nrow(WQ)
   Q <- H %*% t(WQ)
   K <- H %*% t(WK)
   V <- H %*% t(WV)
@@ -178,8 +178,7 @@ morie_gtrf_sparse_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
     if (length(nk) == 0L)
       stop(paste0("gtrf: node ", i, " has no neighbours"))
     nk1 <- nk + 1L
-    sc <- as.numeric((Q[i + 1L, , drop = FALSE] %*% K[nk1, , drop = FALSE]) /
-                        sqrt(dk))
+    sc <- as.numeric(K[nk1, , drop = FALSE] %*% Q[i + 1L, ]) / sqrt(dk)
     if (!is.null(edge_bias)) {
       for (kk in seq_along(nk)) {
         key <- paste0("(", i, ", ", nk[kk], ")")
@@ -267,7 +266,7 @@ morie_gtrf <- graph_transformer_layer
 #' @export
 morie_gtrf_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
   rows <- apply(H, c(1L, 2L), as.numeric)
-  dk <- ncol(WQ)
+  dk <- nrow(WQ)
   project <- function(W, x) as.numeric(W %*% x)
   n <- nrow(rows)
   out <- matrix(0.0, nrow = n, ncol = nrow(WV))
@@ -361,7 +360,7 @@ morie_gtrf_lap_pe <- function(adj, n, dim = 2L, normalized = TRUE) {
   vals <- ev$values
   vecs <- ev$vectors
   order <- order(vals)
-  take <- order[seq_len(as.integer(dim) + 1L)[-1L]]
+  take <- order[-1L][seq_len(min(as.integer(dim), length(order) - 1L))]
   if (length(take) < as.integer(dim))
     stop(paste0("gtrf: the graph has only ", length(take),
                 " non-trivial eigenvectors, ", as.integer(dim),

@@ -1,0 +1,52 @@
+# Coverage tests for R/blip2v_native.R (Li et al. 2023): learned query
+# tokens, Q-Former cross-attention, the trainable fraction, the stage-one
+# max-over-queries similarity and the LLM projection.
+
+test_that("query tokens are seeded uniform draws", {
+  q <- query_tokens(3, 4, seed = 7, scale = 0.1)
+  u <- withr::with_seed(7, runif(12))
+  expect_equal(q, matrix((u - 0.5) * 0.2, 3, 4), tolerance = 1e-12)
+  expect_equal(query_tokens(3, 4, seed = 7, scale = 0.1), q)
+  expect_error(query_tokens(0, 4), "must be positive")
+})
+
+test_that("Q-Former cross-attention from queries to image patches", {
+  Q <- rbind(c(0.2, -0.1, 0.4), c(0.5, 0.3, -0.2))
+  Fm <- rbind(c(1, 0, 0.5, 0.2), c(-0.3, 0.8, 0.1, 0), c(0.4, 0.4, -0.6, 1), c(0, -1, 0.3, 0.5), c(0.9, 0.2, 0.2, -0.4))
+  WQ <- matrix(sin(1:6), 2, 3)
+  WK <- matrix(cos(1:8), 2, 4)
+  WV <- matrix(sin(1:12 / 3), 3, 4)
+  r <- qformer_attend(Q, Fm, WQ, WK, WV)
+  S <- (Q %*% t(WQ)) %*% t(Fm %*% t(WK)) / sqrt(2)
+  A <- exp(S) / rowSums(exp(S))
+  expect_equal(r$weights, A, tolerance = 1e-12)
+  expect_equal(r$output, A %*% (Fm %*% t(WV)), tolerance = 1e-12)
+  expect_equal(r$compression, 2.5)
+  expect_identical(blip2, qformer_attend)
+  expect_identical(blip2_qformer, qformer_attend)
+  expect_identical(blip2qformer, qformer_attend)
+  expect_identical(morie_blip2v, qformer_attend)
+  expect_error(qformer_attend(Q, Fm, matrix(0, 0, 3), WK, WV), "empty projection")
+})
+
+test_that("trainable fraction, stage-one similarity and the projection", {
+  t <- trainable_fraction(1.88e8, 1e9, 7e9)
+  expect_equal(t$fraction, 1.88e8 / (1.88e8 + 8e9))
+  expect_equal(t$frozen_fraction, 1 - t$fraction)
+  expect_error(trainable_fraction(0, 0, 0), "must be positive")
+  Qo <- rbind(c(1, 0, 0), c(0.6, 0.8, 0), c(0, 0, 2))
+  s <- stage_one_objectives(Qo, c(0.5, 1, 0), temperature = 0.1)
+  cs <- as.numeric(Qo %*% c(0.5, 1, 0)) / (sqrt(rowSums(Qo^2)) * sqrt(1.25))
+  expect_equal(s$per_query_similarity, cs, tolerance = 1e-12)
+  expect_equal(s$image_text_similarity, max(cs))
+  expect_equal(s$best_query, 2L)
+  expect_equal(s$logit, max(cs) / 0.1)
+  expect_error(stage_one_objectives(Qo, c(0, 0, 0)), "zero embedding")
+  expect_error(stage_one_objectives(Qo, 1:3, temperature = 0), "temperature must be positive")
+  W <- matrix(1:6 / 10, 2, 3)
+  p <- project_to_llm(Qo, W, c(1, -1))
+  expect_equal(p$soft_prompt, Qo %*% t(W) + rep(c(1, -1), each = 3), tolerance = 1e-12)
+  expect_equal(project_to_llm(Qo, W)$estimate, Qo %*% t(W))
+  expect_equal(c(p$n_tokens, p$dim), c(3L, 2L))
+  expect_error(project_to_llm(Qo, W[, 1:2]), "expects 2 inputs but the query output is 3")
+})

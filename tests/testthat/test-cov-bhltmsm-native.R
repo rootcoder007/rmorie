@@ -1,0 +1,76 @@
+# Coverage tests for R/bhltmsm_native.R (Robins, Hernan and Brumback
+# 2000): cumulative episodes, IPT weights with stabilisation and
+# truncation, weight diagnostics, the confounding check and the weighted
+# MSM fit against lm.
+
+test_that("cumulative episode counts by state", {
+  h <- list(c("none", "outpatient", "outpatient"), c(2, 2, 0), c("screening", "none", "residential"))
+  r <- cumulative_episodes(h)
+  expect_equal(r$cumulative, rbind(c(1, 2, 0, 0), c(1, 0, 2, 0), c(1, 0, 1, 1)))
+  expect_equal(r$periods, c(3, 3, 3))
+  expect_equal(cumulative_episodes(list(c("a", "b", "a")), states = c("a", "b"))$cumulative, matrix(c(2, 1), 1))
+  expect_error(cumulative_episodes(list("detox")), "unknown treatment state detox")
+})
+
+test_that("inverse probability of treatment weights", {
+  h <- list(1:3, 1:3, 1:2, 1:2, 1)
+  P <- list(c(0.5, 0.8, 0.9), c(0.2, 0.5, 0.4), c(0.7, 0.6), c(0.9, 0.95), 0.3)
+  M <- list(c(0.6, 0.7, 0.8), c(0.3, 0.6, 0.5), c(0.6, 0.6), c(0.8, 0.9), 0.4)
+  r <- treatment_weights(h, P, marginal = M)
+  expect_equal(r$raw, vapply(1:5, function(i) prod(M[[i]]) / prod(P[[i]]), 0), tolerance = 1e-12)
+  u <- treatment_weights(h, P, stabilise = FALSE)
+  expect_equal(u$weights, vapply(P, function(p) 1 / prod(p), 0), tolerance = 1e-12)
+  t <- treatment_weights(h, P, stabilise = FALSE, truncate = 0.2)
+  q <- quantile(u$raw, c(0.2, 0.8), type = 7, names = FALSE)
+  expect_equal(t$weights, pmin(pmax(u$raw, q[1]), q[2]), tolerance = 1e-12)
+  expect_equal(t$n_truncated, sum(u$raw < q[1] | u$raw > q[2]))
+  expect_equal(.quantile7(5, 0.3), 5)
+  expect_true(is.na(.quantile7(numeric(0), 0.3)))
+  expect_error(treatment_weights(h[1], list(0.5)), "3 periods but 1 propensities")
+  expect_error(treatment_weights(h[5], list(0)), "positivity fails")
+  expect_error(treatment_weights(h[5], P[5]), "need the marginal")
+  expect_error(treatment_weights(h[5], P[5], marginal = list(c(1, 1))), "different number of periods")
+})
+
+test_that("weight diagnostics and the treatment-confounder feedback check", {
+  w <- c(0.5, 1.2, 0.9, 3, 0.8)
+  d <- weight_diagnostics(w)
+  expect_equal(d$effective_n, sum(w)^2 / sum(w^2))
+  expect_equal(d$efficiency, d$effective_n / 5)
+  expect_false(d$mean_near_one)
+  expect_error(weight_diagnostics(1), "at least 2")
+  L <- cbind(c(1, 2, 3, 4, 5, 6), c(2, 1, 4, 3, 6, 5))
+  A <- cbind(c(0, 0, 1, 1, 1, 0), c(0, 1, 1, 1, 1, 1))
+  y <- c(3, 1, 4, 1, 5, 9)
+  cc <- confounding_check(L, A, y)
+  expect_equal(cc$treatment_affects_covariate, cor(A[, 1], L[, 2]), tolerance = 1e-12)
+  expect_equal(cc$covariate_predicts_treatment, cor(L[, 1], A[, 2]), tolerance = 1e-12)
+  expect_equal(cc$is_treatment_confounder_feedback, abs(cor(A[, 1], L[, 2])) > 0.1 && abs(cor(L[, 1], A[, 2])) > 0.1)
+  expect_equal(cc$covariate_predicts_outcome, cor(L[, 2], y), tolerance = 1e-12)
+  expect_equal(.corr_r(c(1, 1, 1), 1:3), 0)
+  expect_error(.corr_r(1:3, 1:2), "length mismatch")
+  expect_null(confounding_check(L, A)$covariate_predicts_outcome)
+  expect_error(confounding_check(L[1:5, ], A), "5 covariate histories but 6")
+  expect_error(confounding_check(L[, 1, drop = FALSE], A[, 1, drop = FALSE]), "at least 2 periods")
+})
+
+test_that("the weighted MSM equals weighted lm, standard errors included", {
+  X <- rbind(c(1, 2, 0, 0), c(1, 0, 2, 0), c(1, 0, 1, 1), c(3, 0, 0, 0), c(0, 1, 1, 1), c(2, 1, 0, 0), c(0, 2, 0, 1), c(1, 1, 1, 0))
+  X <- X[, 2:4]
+  y <- c(5.1, 3.2, 4.4, 6.8, 2.9, 5.5, 3.1, 4.2)
+  w <- c(1.2, 0.8, 1, 1.5, 0.9, 1.1, 0.7, 1.3)
+  f <- fit_msm(y, X, w, states = c("outpatient", "residential", "screening"))
+  g <- summary(lm(y ~ X, weights = w))$coefficients
+  expect_equal(f$intercept, g[1, 1], tolerance = 1e-10)
+  expect_equal(unlist(f$coefficients), setNames(g[-1, 1], c("outpatient", "residential", "screening")), tolerance = 1e-10)
+  expect_equal(unname(unlist(f$se)), unname(g[-1, 2]), tolerance = 1e-10)
+  expect_equal(f$effective_n, sum(w)^2 / sum(w^2))
+  u <- fit_msm(y, X)
+  expect_false(u$weighted)
+  expect_equal(u$estimate, unname(coef(lm(y ~ X))[-1]), tolerance = 1e-10)
+  expect_identical(morie_bhltmsm, fit_msm)
+  expect_identical(behavioral_health_msm, fit_msm)
+  expect_error(fit_msm(y[-1], X), "7 outcomes but 8")
+  expect_error(fit_msm(y, X, w[-1]), "7 weights for 8")
+  expect_error(fit_msm(y, X, -w), "negative")
+})

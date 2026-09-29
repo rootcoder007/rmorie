@@ -764,7 +764,8 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
       x_new <- got$x
       a_val <- got$acq
     } else {
-      cand <- t(sapply(seq_len(as.integer(n_candidates)), function(i) draw()))
+      cand <- matrix(unlist(lapply(seq_len(as.integer(n_candidates)), function(i) draw())),
+                     ncol = d, byrow = TRUE)
       post <- gp_posterior(
         X, Y, cand, kernel, amplitude, length_scale,
         noise

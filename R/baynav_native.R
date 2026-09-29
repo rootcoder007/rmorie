@@ -212,7 +212,7 @@ transform_to_real <- function(value, support = "positive", eps = 1e-10) {
   if (identical(support, "unit")) {
     if (!(v > 0.0 && v < 1.0))
       stop(paste0("baynav: a unit parameter must lie in (0,1), got ",
-                  "format(v)"))
+                  format(v)))
     z <- log(v / (1.0 - v))
     return(list(real = z,
                 log_jacobian = -log(v) - log(1.0 - v),
@@ -221,7 +221,7 @@ transform_to_real <- function(value, support = "positive", eps = 1e-10) {
   if (identical(support, "real"))
     return(list(real = v, log_jacobian = 0.0, inverse = v))
   stop(paste0("baynav: support must be positive, unit or real, got ",
-              "format(support)"))
+              format(support)))
 }
 
 #' Monte Carlo ELBO

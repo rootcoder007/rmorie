@@ -213,7 +213,10 @@ morie_avalon_parse <- function(smiles) {
         a <- open_ring[[lab]][1]
         o <- open_ring[[lab]][2]
         open_ring[[lab]] <- NULL
-        oo <- if (order != 0L) order else if (o != 0L) o else 1L
+        # an unmarked closure between two aromatic atoms is aromatic,
+        # exactly as an unmarked chain bond is
+        oo <- if (order != 0L) order else if (o != 0L) o else
+          if (arom[a + 1L] == 1L && arom[prev + 1L] == 1L) 4L else 1L
         bonds[[length(bonds) + 1L]] <- c(a, prev, oo)
         closures <- c(closures, length(bonds))
       } else {

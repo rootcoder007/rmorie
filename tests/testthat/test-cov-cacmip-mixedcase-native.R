@@ -1,0 +1,41 @@
+# Coverage tests for R/caCMIP_mixedcase_native.R (Knutti et al. 2017):
+# performance-and-independence model weights and the weighted ensemble.
+
+cm_models <- list(c(1, 2, 3, 4), c(1.1, 2.1, 2.9, 4.2), c(3, 1, 4, 2), c(1.2, 1.9, 3.1, 3.8))
+cm_obs <- c(1, 2, 3, 4.1)
+
+test_that("Knutti weights: performance numerator over independence denominator", {
+  r <- caCMIP(cm_models, cm_obs, sigma_d = 0.5, sigma_s = 0.3)
+  rms <- function(a, b) sqrt(mean((a - b)^2))
+  d <- vapply(cm_models, rms, 0, cm_obs)
+  S <- outer(1:4, 1:4, Vectorize(function(i, j) rms(cm_models[[i]], cm_models[[j]])))
+  w <- exp(-d^2 / 0.25) / (1 + vapply(1:4, function(i) sum(exp(-S[i, -i]^2 / 0.09)), 0))
+  w <- w / sum(w)
+  expect_equal(r$d, d, tolerance = 1e-12)
+  expect_equal(r$weights, w, tolerance = 1e-12)
+  expect_equal(r$estimate, sum(w * vapply(cm_models, mean, 0)), tolerance = 1e-12)
+  expect_equal(r$effective_n, 1 / sum(w^2), tolerance = 1e-12)
+  expect_equal(r$unweighted_mean, mean(vapply(cm_models, mean, 0)))
+  p <- caCMIP(cm_models, cm_obs, 0.5, 0.3, projections = c(2, 3, 4, 5))
+  expect_equal(p$estimate, sum(w * 2:5), tolerance = 1e-12)
+  one <- caCMIP(cm_models[1], cm_obs, 0.5, 0.3)
+  expect_equal(one$weights, 1)
+  expect_equal(one$estimate, 2.5)
+  expect_identical(morie_caCMIP, caCMIP)
+  expect_identical(morie_cacmip, caCMIP)
+  expect_match(caCMIP_cheatsheet(), "Knutti")
+  expect_error(caCMIP(list(), cm_obs, 1, 1), "at least one model")
+  expect_error(caCMIP(list(1:3), cm_obs, 1, 1), "match obs length")
+  expect_error(caCMIP(cm_models, cm_obs, 0, 1), "must be positive")
+  expect_error(caCMIP(cm_models, cm_obs, 1, 1, projections = 1:2), "one value per model")
+  expect_error(caCMIP(list(cm_obs + 1e6), cm_obs, 1e-3, 1), "all weights vanished")
+})
+
+test_that("weighted ensemble mean", {
+  e <- cmip_ensemble(c(2, 4, 9), c(1, 2, 1))
+  expect_equal(e$estimate, (2 + 8 + 9) / 4)
+  expect_equal(e$n, 3L)
+  expect_identical(cmipensemble, cmip_ensemble)
+  expect_error(cmip_ensemble(1:3, 1:2), "equal length")
+  expect_error(cmip_ensemble(1:2, c(0, 0)), "positive value")
+})

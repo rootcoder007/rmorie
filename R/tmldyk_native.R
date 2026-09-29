@@ -265,7 +265,7 @@ morie_tmlediffkernel <- morie_tmldyk
 #' res <- .tmldyk_logit(p = 0.5)
 #' res
 .tmldyk_logit <- function(p) {
-  q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
+  q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
 }
 
