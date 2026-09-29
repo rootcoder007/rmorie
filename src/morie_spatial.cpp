@@ -194,8 +194,11 @@ Rcpp::List morie_spatial_smacof_step_cpp(arma::mat X, const arma::mat& D,
     const arma::uword n = X.n_rows;
     W.diag().zeros();
 
+    // V is the weight Laplacian sum_ij w_ij (e_i - e_j)(e_i - e_j)', i.e.
+    // diag(row sums) minus W; its diagonal alone is not the Guttman
+    // transform and scales a unit-weight solution by n / (n - 1).
     arma::vec v_diag = arma::sum(W, 1);
-    arma::mat V = arma::diagmat(v_diag);
+    arma::mat V = arma::diagmat(v_diag) - W;
     arma::mat V_inv = arma::pinv(V);
 
     arma::mat dX(n, n, arma::fill::zeros);
