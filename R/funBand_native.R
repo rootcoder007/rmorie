@@ -200,7 +200,7 @@ morie_funBand <- function(Y, alpha = 0.05, x = NULL, lam = NULL,
   rss <- sum(resid ^ 2)
   tr_a <- sum(diag(A))
   edf_err <- n - tr_a
-  if (edf_err <= 1e-8 * n) {  # exact interpolation: n - tr(A) is rounding noise, not degrees of freedom
+  if (lam_used <= 0 || edf_err <= 0) {  # lambda = 0 interpolates exactly; n - tr(A) is then rounding noise
     stop(paste0("funBand: the fit has no residual degrees of freedom; ",
                 "lambda is too small for these data"))
   }
