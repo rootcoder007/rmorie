@@ -44,7 +44,8 @@ morie_sentence_effect_bounds <- function(y, z, weights = NULL, contrast = NULL) 
   if (length(weights) != n || any(weights < 0) || sum(weights) <= 0) stop("weights must be non-negative with positive total", call. = FALSE)
   w <- weights / sum(weights)
   z <- as.character(z)
-  trt <- if (is.null(contrast)) lv[2] else { if (!contrast %in% lv) stop("contrast must be one of the sentence values", call. = FALSE); as.character(contrast) }
+  trt <- if (is.null(contrast)) lv[2] else { if (!contrast %in% lv) stop("contrast must be one of the sentence values", call. = FALSE)
+  as.character(contrast) }
   ctl <- setdiff(lv, trt)
   joint <- c(sum(w[z == ctl] * y[z == ctl]), sum(w[z == trt] * y[z == trt]))
   pz <- c(sum(w[z == ctl]), sum(w[z == trt]))
@@ -83,7 +84,8 @@ morie_sentence_effect_bounds <- function(y, z, weights = NULL, contrast = NULL) 
 morie_contaminated_bounds <- function(q, p) {
   if (length(p) != 1L || is.na(p) || p < 0 || p >= 1) stop("p must be a single number in [0, 1)", call. = FALSE)
   if (any(is.na(q)) || any(q < 0 | q > 1)) stop("q must lie in [0, 1]", call. = FALSE)
-  lower <- pmax(0, (q - p) / (1 - p)); upper <- pmin(1, q / (1 - p))
+  lower <- pmax(0, (q - p) / (1 - p))
+  upper <- pmin(1, q / (1 - p))
   out <- data.frame(q = q, lower = lower, upper = upper, width = p / (1 - p),
                     informative = (p < q) | (p < 1 - q))
   attr(out, "theorems") <- c("Research.P11.clean_bounds", "Research.P11.clean_lower_attained",
@@ -121,7 +123,8 @@ morie_sentence_effect_mtr <- function(y, z, weights = NULL, contrast = NULL,
                                       direction = c("non-decreasing", "non-increasing")) {
   direction <- match.arg(direction)
   b <- morie_sentence_effect_bounds(y, z, weights, contrast)
-  trt <- b$levels[["treatment"]]; ctl <- b$levels[["comparison"]]
+  trt <- b$levels[["treatment"]]
+  ctl <- b$levels[["comparison"]]
   # P(y=1, z=trt) + P(y=0, z=ctl)
   up <- unname(b$joint[trt] + (b$pz[ctl] - b$joint[ctl]))
   bounds <- if (direction == "non-decreasing") c(lower = 0, upper = up) else {

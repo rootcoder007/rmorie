@@ -195,14 +195,16 @@ morie_dark_figure_three_list <- function(counts, candidate_missing = NULL) {
   need <- c("100", "010", "001", "110", "101", "011", "111")
   counts <- unlist(counts)
   if (is.null(names(counts)) || !all(need %in% names(counts))) stop("counts must be named by the seven cells 100, 010, 001, 110, 101, 011, 111", call. = FALSE)
-  m <- as.numeric(counts[need]); names(m) <- need
+  m <- as.numeric(counts[need])
+  names(m) <- need
   if (anyNA(m) || any(m <= 0)) stop("all seven observed cells must be positive", call. = FALSE)
   observed <- sum(m)
   m000 <- m["111"] * m["100"] * m["010"] * m["001"] / (m["110"] * m["101"] * m["011"])
   on <- function(cell, k) substr(cell, k, k) == "1"
   pairs <- list(c(1, 2), c(1, 3), c(2, 3))
   pairwise <- do.call(rbind, lapply(pairs, function(pr) {
-    n1 <- sum(m[on(need, pr[1])]); n2 <- sum(m[on(need, pr[2])])
+    n1 <- sum(m[on(need, pr[1])])
+    n2 <- sum(m[on(need, pr[2])])
     mm <- sum(m[on(need, pr[1]) & on(need, pr[2])])
     data.frame(lists = paste(pr, collapse = "-"), n1 = n1, n2 = n2, m = mm,
                floor = n1 + n2 - mm, petersen = n1 * n2 / mm,
@@ -250,7 +252,8 @@ morie_dark_figure_three_list <- function(counts, candidate_missing = NULL) {
 morie_dark_figure_hierarchy <- function(offences_per_incident) {
   k <- as.integer(offences_per_incident)
   if (length(k) == 0L || anyNA(k) || any(k < 1L)) stop("every incident must carry at least one offence", call. = FALSE)
-  N <- length(k); tot <- sum(k)
+  N <- length(k)
+  tot <- sum(k)
   list(incidents = N, offences = tot, ratio = tot / N, mean_extra = mean(k - 1),
        bounds = c(lower = N, upper = max(k) * N),
        theorems = c("Research.P1.offence_count_bounds", "Research.P1.offence_count_eq",

@@ -39,8 +39,10 @@ morie_ecological_decompose <- function(x, y, group) {
   if (length(y) != n || length(group) != n) stop("x, y and group must have equal length", call. = FALSE)
   if (n < 2) stop("need at least two individuals", call. = FALSE)
   group <- as.character(group)
-  bx <- stats::ave(x, group); by_ <- stats::ave(y, group)
-  wx <- x - bx; wy <- y - by_
+  bx <- stats::ave(x, group)
+  by_ <- stats::ave(y, group)
+  wx <- x - bx
+  wy <- y - by_
   pcov <- function(a, b) sum(a * b) / n - mean(a) * mean(b)
   cv <- c(individual = pcov(x, y), between = pcov(bx, by_), within = pcov(wx, wy))
   vx <- c(individual = pcov(x, x), between = pcov(bx, bx), within = pcov(wx, wx))

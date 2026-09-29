@@ -263,7 +263,10 @@ morie_relative_risk_from_or <- function(odds_ratio, base_rate = NULL, exposed_sh
 morie_deterrence_response <- function(x, benefit, sanction, p) {
   n <- length(x)
   if (length(benefit) != n || length(sanction) != n) stop("x, benefit and sanction must have equal length", call. = FALSE)
-  o <- order(x); x <- x[o]; benefit <- benefit[o]; sanction <- sanction[o]
+  o <- order(x)
+  x <- x[o]
+  benefit <- benefit[o]
+  sanction <- sanction[o]
   if (any(diff(sanction) <= 0)) stop("sanction must be strictly increasing in x", call. = FALSE)
   if (any(p < 0)) stop("p must be non-negative", call. = FALSE)
   res <- do.call(rbind, lapply(p, function(pp) {
@@ -304,10 +307,12 @@ morie_deterrence_response <- function(x, benefit, sanction, p) {
 morie_interracial_rates <- function(offences, population) {
   parts <- strsplit(names(offences), "_on_", fixed = TRUE)
   if (any(lengths(parts) != 2L)) stop("offence names must be of the form offender_on_victim", call. = FALSE)
-  off <- vapply(parts, `[`, "", 1L); vic <- vapply(parts, `[`, "", 2L)
+  off <- vapply(parts, `[`, "", 1L)
+  vic <- vapply(parts, `[`, "", 2L)
   if (!all(c(off, vic) %in% names(population))) stop("every group in offences must appear in population", call. = FALSE)
   if (any(population <= 0)) stop("populations must be positive", call. = FALSE)
-  N <- sum(population); p <- population / N
+  N <- sum(population)
+  p <- population / N
   pair <- p[off] * p[vic] * N
   k_hat <- sum(offences) / sum(pair)                    # pooled pair-exposure rate
   data.frame(offender = off, victim = vic, count = as.numeric(offences),
@@ -317,7 +322,8 @@ morie_interracial_rates <- function(offences, population) {
              ratio_to_null = as.numeric((offences / pair) / k_hat),
              row.names = NULL) |>
     (\(d) { attr(d, "theorems") <- c("Research.P2.rate_per_offender_group", "Research.P2.null_slope_positive",
-                                      "Research.P2.dyad_ratio", "Research.P2.pair_exposure_rate_constant"); d })()
+                                      "Research.P2.dyad_ratio", "Research.P2.pair_exposure_rate_constant")
+                                      d })()
 }
 
 
@@ -343,9 +349,11 @@ morie_interracial_rates <- function(offences, population) {
 #' morie_probability_of_necessity(p_treated = 0.6, p_control = 0.4)
 #' @export
 morie_probability_of_necessity <- function(p_treated, p_control) {
-  a <- p_treated; b <- p_control
+  a <- p_treated
+  b <- p_control
   if (any(c(a, b) < 0 | c(a, b) > 1) || length(a) != 1L || length(b) != 1L) stop("probabilities must be single numbers in [0, 1]", call. = FALSE)
-  lo <- max(0, a - b); hi <- min(a, 1 - b)
+  lo <- max(0, a - b)
+  hi <- min(a, 1 - b)
   list(necessary_share_bounds = c(lower = lo, upper = hi),
        pn_bounds = if (a > 0) c(lower = lo / a, upper = hi / a) else c(lower = NA_real_, upper = NA_real_),
        pn_monotone = if (a > 0) (a - b) / a else NA_real_,

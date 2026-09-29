@@ -172,8 +172,10 @@ test_that("conditioning on arrest gives odds ratio pi_bg between independent fac
   }
   # simulation of the mechanism
   n <- 400000; A <- rbinom(n, 1, 0.3); E <- rbinom(n, 1, 0.2); U <- rbinom(n, 1, 0.1); Y <- pmax(A, E, U)
-  tab <- table(A[Y == 1], E[Y == 1]); or_hat <- (tab[2, 2] * tab[1, 1]) / (tab[2, 1] * tab[1, 2])
+  tab <- table(A[Y == 1], E[Y == 1]) * 1.0  # doubles: the integer products overflow at n = 4e5
+  or_hat <- (tab[2, 2] * tab[1, 1]) / (tab[2, 1] * tab[1, 2])
   expect_equal(unname(or_hat), 0.1, tolerance = 0.08)
-  tab0 <- table(A, E); expect_equal(unname((tab0[2, 2] * tab0[1, 1]) / (tab0[2, 1] * tab0[1, 2])), 1, tolerance = 0.05)
+  tab0 <- table(A, E) * 1.0
+  expect_equal(unname((tab0[2, 2] * tab0[1, 1]) / (tab0[2, 1] * tab0[1, 2])), 1, tolerance = 0.05)
   expect_error(morie_collider_arrest(1, 0.5, 0.5), "in \\(0, 1\\)")
 })
