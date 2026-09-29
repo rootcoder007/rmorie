@@ -14974,11 +14974,13 @@ class output_vector_adapter : public output_adapter_protocol<CharType>
 
 #ifndef JSON_NO_IO
 /// output adapter for output streams
-template<typename CharType>
+// Traits is deduced from the stream so that std::char_traits<std::uint8_t>
+// (deprecated in libc++ 20 / Xcode 26) is never named for the binary adapters.
+template<typename CharType, typename Traits>
 class output_stream_adapter : public output_adapter_protocol<CharType>
 {
   public:
-    explicit output_stream_adapter(std::basic_ostream<CharType>& s) noexcept
+    explicit output_stream_adapter(std::basic_ostream<CharType, Traits>& s) noexcept
         : stream(s)
     {}
 
@@ -14994,12 +14996,36 @@ class output_stream_adapter : public output_adapter_protocol<CharType>
     }
 
   private:
-    std::basic_ostream<CharType>& stream;
+    std::basic_ostream<CharType, Traits>& stream;
 };
 #endif  // JSON_NO_IO
 
+/// std::basic_string<CharType> only exists for character types whose
+/// std::char_traits is not deprecated; other CharTypes get an inert tag so
+/// that output_adapter<std::uint8_t> never names std::char_traits<std::uint8_t>.
+template<typename CharType>
+struct output_string_none {};
+
+template<typename CharType>
+struct output_string_default
+{
+    using type = output_string_none<CharType>;
+};
+template<>
+struct output_string_default<char>
+{
+    using type = std::string;
+};
+template<>
+struct output_string_default<wchar_t>
+{
+    using type = std::wstring;
+};
+template<typename CharType>
+using output_string_default_t = typename output_string_default<CharType>::type;
+
 /// output adapter for basic_string
-template<typename CharType, typename StringType = std::basic_string<CharType>>
+template<typename CharType, typename StringType = output_string_default_t<CharType>>
 class output_string_adapter : public output_adapter_protocol<CharType>
 {
   public:
@@ -15022,7 +15048,7 @@ class output_string_adapter : public output_adapter_protocol<CharType>
     StringType& str;
 };
 
-template<typename CharType, typename StringType = std::basic_string<CharType>>
+template<typename CharType, typename StringType = output_string_default_t<CharType>>
 class output_adapter
 {
   public:
@@ -15031,8 +15057,9 @@ class output_adapter
         : oa(std::make_shared<output_vector_adapter<CharType, AllocatorType>>(vec)) {}
 
 #ifndef JSON_NO_IO
-    output_adapter(std::basic_ostream<CharType>& s)
-        : oa(std::make_shared<output_stream_adapter<CharType>>(s)) {}
+    template<typename Traits>
+    output_adapter(std::basic_ostream<CharType, Traits>& s)
+        : oa(std::make_shared<output_stream_adapter<CharType, Traits>>(s)) {}
 #endif  // JSON_NO_IO
 
     output_adapter(StringType& s)
