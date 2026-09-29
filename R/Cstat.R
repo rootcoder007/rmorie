@@ -92,16 +92,17 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
   for (t_j in sort(unique(t_s[e_s == 1]))) {
     n_r <- sum(t_s >= t_j)
     n_e <- sum(t_s == t_j & e_s == 1)
+    S_c <- S_c * (if (n_r > 0) 1 - n_e / n_r else 1)
     km_c_times <- c(km_c_times, t_j)
     km_c_vals <- c(km_c_vals, S_c)
-    S_c <- S_c * (if (n_r > 0) 1 - n_e / n_r else 1)
   }
   tau <- if (sum(event) > 0) .s03quantile7(time[event == 1], 0.75) else max(time)
+  # G(t-), the censoring survivor just before t: every censoring jump
+  # strictly before t counts. (The table used to hold the value BEFORE each
+  # jump and was read one jump late, dropping the latest factor.)
   get_km_c <- function(t) {
-    if (length(km_c_times) == 0L) return(1)
-    idx <- sum(km_c_times <= t) - 1L
-    idx <- max(idx, 0L)
-    km_c_vals[min(idx, length(km_c_vals) - 1L) + 1L]
+    idx <- sum(km_c_times < t)
+    if (idx == 0L) 1 else km_c_vals[idx]
   }
   num <- 0
   denom <- 0
