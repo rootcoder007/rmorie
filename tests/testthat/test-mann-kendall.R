@@ -1,0 +1,17 @@
+test_that("MannKendall recomputes S, tie-corrected variance and z", {
+  x <- c(1.2, 0.8, 1.9, 2.4, 2.1, 3.3, 3, 4.1, 2.4, 3.3, 3.3)
+  n <- length(x)
+  s <- sum(sign(outer(x, x, "-"))[lower.tri(diag(n))])
+  tt <- c(2, 3)
+  v <- (n * (n - 1) * (2 * n + 5) - sum(tt * (tt - 1) * (2 * tt + 5))) / 18
+  r <- MannKendall(x)
+  expect_equal(r$S, s)
+  expect_equal(r$varS, v, tolerance = 1e-15)
+  expect_equal(r$statistic, (abs(s) - 1) / sqrt(v), tolerance = 1e-15)
+  expect_equal(MannKendall(x, continuity = FALSE)$statistic, s / sqrt(v), tolerance = 1e-15)
+  expect_equal(r$p_value, 2 * stats::pnorm(-r$statistic), tolerance = 1e-14)
+  expect_error(MannKendall(1:2))
+  # Python arm morie.fn.mannK.mann_kendall on the same series (15 significant digits)
+  expect_equal(r$statistic, 2.6851404451125478, tolerance = 1e-14)
+  expect_equal(r$tau, 0.66084804804319086, tolerance = 1e-14)
+})
