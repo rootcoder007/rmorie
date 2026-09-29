@@ -207,7 +207,8 @@ morie_esl_basis_fit_se <- function(H, y, Hnew = NULL, level = 0.95, divisor = c(
 #' @references Hastie, Tibshirani & Friedman (2009), sec. 8.2.1.
 #' @examples
 #' x <- (1:30) / 10
-#' morie_esl_parametric_bootstrap(cbind(1, x, x^2), sin(x), rbind(c(1, 1, 1)), B = 100, seed = 1)$boot_se
+#' morie_esl_parametric_bootstrap(cbind(1, x, x^2), sin(x), rbind(c(1, 1, 1)), B = 100,
+#'   seed = 1)$boot_se
 #' @export
 morie_esl_parametric_bootstrap <- function(H, y, Hnew = NULL, B = 200, level = 0.95, seed = NULL) {
   base <- morie_esl_basis_fit_se(H, y, Hnew)

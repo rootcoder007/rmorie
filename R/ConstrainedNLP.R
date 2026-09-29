@@ -159,7 +159,8 @@
 #'   stable dual method for solving strictly convex quadratic programs.
 #'   Mathematical Programming 27, 1-33.
 #' @examples
-#' SequentialQuadraticProgramming(function(x) sum(x^2), c(2, 0), eq = list(function(x) x[1] + x[2] - 1))$x
+#' SequentialQuadraticProgramming(function(x) sum(x^2), c(2, 0),
+#'   eq = list(function(x) x[1] + x[2] - 1))$x
 #' @export
 SequentialQuadraticProgramming <- function(f, x0, grad = NULL, eq = list(), ineq = list(), eq_jac = NULL, ineq_jac = NULL,
                                            tol = 1e-8, max_iter = 200) {

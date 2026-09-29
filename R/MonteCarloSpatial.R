@@ -74,7 +74,8 @@
 #'   Carlo: can we trust the third significant figure? Statistical Science 23,
 #'   250-260.
 #' @examples
-#' McIntegrate(function(x, y) x + y, bounds = rbind(c(0, 1), c(0, 1)), n = 2000, method = "lhs")$integral
+#' McIntegrate(function(x, y) x + y, bounds = rbind(c(0, 1), c(0, 1)), n = 2000,
+#'   method = "lhs")$integral
 #' McConvergence(c(1, 3, 2, 4), batches = 2)$batch_se
 #' @export
 McIntegrate <- function(f, bounds = NULL, polygon = NULL, n = 10000, seed = 1, method = "plain") {

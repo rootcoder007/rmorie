@@ -277,7 +277,8 @@ Skater <- function(X, adjacency, k, min_size = 1, weights = NULL, min_weight = N
 #'   agglomerative clustering and partitioning (REDCAP). International Journal of
 #'   Geographical Information Science 22, 801-823.
 #' @examples
-#' Redcap(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5), 2)$labels
+#' Redcap(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5),
+#'   2)$labels
 #' @export
 Redcap <- function(X, adjacency, k, linkage = c("complete", "single", "average", "ward"), order = c("full", "first"),
                    min_size = 1, weights = NULL, min_weight = NULL) {
@@ -407,7 +408,8 @@ ConstrainedHierarchical <- function(X, adjacency, k, linkage = c("ward", "single
 #'   aggregation problems in region-building, partitioning and spatial modelling.
 #'   Transactions of the Institute of British Geographers 2, 459-472.
 #' @examples
-#' AutomaticZoning(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5), 2)$labels
+#' AutomaticZoning(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4,
+#'   6), 5), 2)$labels
 #' @export
 AutomaticZoning <- function(X, adjacency, k, objective = c("ssd", "balance"), weights = NULL, init = NULL, seed = 0, max_iter = 1000) {
   objective <- match.arg(objective)
@@ -464,7 +466,8 @@ AutomaticZoning <- function(X, adjacency, k, objective = c("ssd", "balance"), we
 #' @references Duque, J. C., Anselin, L. and Rey, S. J. (2012). The
 #'   max-p-regions problem. Journal of Regional Science 52, 397-419.
 #' @examples
-#' MaxPRegions(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5), rep(1, 6), 3)$p
+#' MaxPRegions(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6),
+#'   5), rep(1, 6), 3)$p
 #' @export
 MaxPRegions <- function(X, adjacency, weights, threshold, n_construct = 50, seed = 0, local = TRUE, max_iter = 1000) {
   X <- as.matrix(X)

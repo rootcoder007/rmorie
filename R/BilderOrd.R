@@ -22,7 +22,7 @@ PolrFit <- function(y, X, max_iter = 200, tol = 1e-12) {
   k <- J - 1
   p <- ncol(X)
   cum <- vapply(seq_len(k) - 1, function(j) mean(y <= j), numeric(1))
-  par <- c(qlogis(cum), rep(0, p))
+  par <- c(stats::qlogis(cum), rep(0, p))
   cuts <- function(par) {
     eta <- drop(X %*% par[k + seq_len(p)])
     th <- c(-Inf, par[seq_len(k)], Inf)

@@ -69,7 +69,8 @@ PivotedCholesky <- function(A, tol = 1e-12, max_rank = NULL) {
 #'   Rue, H. and Held, L. (2005). Gaussian Markov Random Fields. Chapman and
 #'   Hall/CRC.
 #' @examples
-#' CholeskySim(rbind(c(0, 0), c(1, 0)), list(model = "Exp", psill = 1, range = 1), seed = 3)$simulations
+#' CholeskySim(rbind(c(0, 0), c(1, 0)), list(model = "Exp", psill = 1, range = 1),
+#'   seed = 3)$simulations
 #' @export
 CholeskySim <- function(coords, model, nsim = 1L, seed = 1L, mean = 0, z = NULL, data_coords = NULL,
                         method = "cholesky", tol = 1e-12) {

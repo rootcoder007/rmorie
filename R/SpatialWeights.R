@@ -44,7 +44,8 @@
 #'   coding scheme for spatial link matrices. Environment and Planning A 31,
 #'   165-180.
 #' @examples
-#' SpatialWeights(rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1), c(0.5, 0.5)), "gabriel", style = "B")$neighbours
+#' SpatialWeights(rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1), c(0.5, 0.5)), "gabriel",
+#'   style = "B")$neighbours
 #' @export
 SpatialWeights <- function(coords, method = "knn", k = 5L, threshold = NULL, row_standardize = TRUE, style = NULL,
                            d_min = 0, alpha = 1, bandwidth = NULL, kernel = "gaussian") {

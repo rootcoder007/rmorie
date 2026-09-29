@@ -49,7 +49,7 @@ GHSecant <- function(x = NULL, t = 0, loc = 0, scale = 1, p = NULL, n = 0, seed 
   }
   qf <- function(u) {
     y <- if (t == 0) {
-      qlogis(u)
+      stats::qlogis(u)
     } else if (t < 0) {
       log(-sin(t) / tan(t * (u - 1)) - cos(t))
     } else {

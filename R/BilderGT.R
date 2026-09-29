@@ -61,7 +61,7 @@ GtPrev <- function(x, m, n, ci = c("CP", "Wald", "score"), alpha = 0.05, b_range
   est <- tr(th)
   z <- qnorm(1 - alpha / 2)
   interval <- switch(ci,
-    CP = tr(c(if (x == 0) 0 else qbeta(alpha / 2, x, n - x + 1), if (x == n) 1 else qbeta(1 - alpha / 2, x + 1, n - x))),
+    CP = tr(c(if (x == 0) 0 else stats::qbeta(alpha / 2, x, n - x + 1), if (x == n) 1 else stats::qbeta(1 - alpha / 2, x + 1, n - x))),
     score = {
       cen <- (x + z^2 / 2) / (n + z^2)
       half <- z * sqrt(x * (n - x) / n + z^2 / 4) / (n + z^2)

@@ -24,7 +24,8 @@
 #'   (1982). A computationally efficient quadrature procedure for the one-factor
 #'   multinomial probit model. Econometrica 50, 761-764.
 #' @examples
-#' PanelBinaryChoice(c(0, 1, 1, 0, 0, 1), matrix(c(0, 1, 2, 0.5, 0.2, 1.5)), c(1, 1, 1, 2, 2, 2))$n_units
+#' PanelBinaryChoice(c(0, 1, 1, 0, 0, 1), matrix(c(0, 1, 2, 0.5, 0.2, 1.5)), c(1, 1, 1, 2, 2,
+#'   2))$n_units
 #' @export
 PanelBinaryChoice <- function(y, X, group, model = c("fe_logit", "re_logit", "re_probit"), n_quad = 30) {
   model <- match.arg(model)
@@ -34,7 +35,7 @@ PanelBinaryChoice <- function(y, X, group, model = c("fe_logit", "re_logit", "re
   units <- split(seq_along(Y), group)
   if (model == "fe_logit") {
     keep <- Filter(function(idx) sum(Y[idx]) > 0 && sum(Y[idx]) < length(idx), units)
-    nll <- function(b) {
+    nll_fe <- function(b) {
       tot <- 0
       for (idx in keep) {
         eta <- as.vector(Xm[idx, , drop = FALSE] %*% b)
@@ -54,7 +55,7 @@ PanelBinaryChoice <- function(y, X, group, model = c("fe_logit", "re_logit", "re
   } else {
     gh <- .gh_rule(n_quad)
     Fc <- if (model == "re_logit") stats::plogis else stats::pnorm
-    nll <- function(th) {
+    nll_re <- function(th) {
       b0 <- th[1]
       b <- th[2:(k + 1)]
       s <- exp(th[k + 2])
@@ -73,6 +74,7 @@ PanelBinaryChoice <- function(y, X, group, model = c("fe_logit", "re_logit", "re
     start <- numeric(k + 2)
     n_units <- length(units)
   }
+  nll <- if (model == "fe_logit") nll_fe else nll_re
   r <- BfgsMinimize(nll, start, gtol = 1e-8, max_iter = 500)
   th <- r$x
   p <- length(th)

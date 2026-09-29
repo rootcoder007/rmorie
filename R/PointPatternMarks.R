@@ -40,7 +40,8 @@
 #'   Diggle, P. J. (1985). A kernel method for smoothing point process data.
 #'   Applied Statistics 34, 138-147.
 #' @examples
-#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+#'   .95, .85))
 #' BandwidthDiggle(P, c(0, 1, 0, 1))[c("sigma", "at_boundary")]
 #' @export
 BandwidthDiggle <- function(points, window, nr = 512L, hmax = NULL) {
@@ -134,7 +135,8 @@ BandwidthDiggle <- function(points, window, nr = 512L, hmax = NULL) {
 #' @references Stoyan, D. and Stoyan, H. (1994). Fractals, Random Shapes and
 #'   Point Fields. Wiley, Chichester.
 #' @examples
-#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+#'   .95, .85))
 #' MarkCorrelation(P, c(1, 2, 1.5, 3, .5, 2.5, 1, 2, .8, 1.2), c(0, 1, 0, 1))$k[257]
 #' @export
 MarkCorrelation <- function(points, marks, window, r = NULL, rmax = NULL, correction = "iso", normalise = TRUE) {
@@ -155,7 +157,8 @@ MarkCorrelation <- function(points, marks, window, r = NULL, rmax = NULL, correc
 #' @inheritParams MarkCorrelation
 #' @return List with \code{r}, \code{gamma}, \code{bw}, \code{theo}.
 #' @examples
-#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+#'   .95, .85))
 #' MarkVariogram(P, c(1, 2, 1.5, 3, .5, 2.5, 1, 2, .8, 1.2), c(0, 1, 0, 1))$gamma[257]
 #' @export
 MarkVariogram <- function(points, marks, window, r = NULL, rmax = NULL, correction = "iso") {
@@ -190,7 +193,8 @@ MarkVariogram <- function(points, marks, window, r = NULL, rmax = NULL, correcti
 #'   Diggle, P. J. (2003). Statistical Analysis of Spatial Point Patterns,
 #'   2nd edn. Arnold, London.
 #' @examples
-#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+#' P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+#'   .95, .85))
 #' MarkDependenceTest(P, c(1, 2, 1.5, 3, .5, 2.5, 1, 2, .8, 1.2), c(0, 1, 0, 1), nsim = 19)$p_value
 #' @export
 MarkDependenceTest <- function(points, marks, window, nsim = 99L, seed = 1L, statistic = "mad", rmin = 0,

@@ -137,7 +137,8 @@ DunnIndex <- function(D, clusters) {
 #'   agglomerative clustering method: which algorithms implement Ward's
 #'   criterion? Journal of Classification 31, 274-295.
 #' @examples
-#' h <- HierarchicalClustering(rbind(c(0, 1, 5, 6), c(1, 0, 4, 5), c(5, 4, 0, 1), c(6, 5, 1, 0)), "single")
+#' h <- HierarchicalClustering(rbind(c(0, 1, 5, 6), c(1, 0, 4, 5), c(5, 4, 0, 1), c(6, 5, 1,
+#'   0)), "single")
 #' CutTree(h$merge, 2)
 #' @export
 HierarchicalClustering <- function(D, method = "complete") {

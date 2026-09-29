@@ -129,7 +129,7 @@ OrInt <- function(b2, b3, x1, var2, var3, cov23, c = 1, alpha = 0.05) {
 #' @export
 InvPredCI <- function(b0, b1, var0, var1, cov01, pi = 0.5, alpha = 0.05) {
   if (pi <= 0 || pi >= 1 || b1 == 0) stop("need 0 < pi < 1 and b1 != 0", call. = FALSE)
-  L <- qlogis(pi)
+  L <- stats::qlogis(pi)
   z2 <- qnorm(1 - alpha / 2)^2
   a <- b1^2 - z2 * var1
   b <- 2 * b1 * (b0 - L) - 2 * z2 * cov01

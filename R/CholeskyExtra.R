@@ -163,9 +163,9 @@ SimulationSensitivity <- function(coords, model, ranges = NULL, sills = NULL, se
   n <- nrow(P)
   e <- .morie_random_normal(n, seed = seed, stream = 0)
   params <- if (!is.null(ranges)) {
-    lapply(ranges, function(r) modifyList(model, list(range = r)))
+    lapply(ranges, function(r) utils::modifyList(model, list(range = r)))
   } else if (!is.null(sills)) {
-    lapply(sills, function(s) modifyList(model, list(psill = s)))
+    lapply(sills, function(s) utils::modifyList(model, list(psill = s)))
   } else {
     stop("give ranges or sills", call. = FALSE)
   }

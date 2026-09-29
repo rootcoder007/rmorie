@@ -146,7 +146,8 @@ morie_esl_precision_regression <- function(Theta) {
 #' @references Hastie, Tibshirani & Friedman (2009), sec. 17.4.1.
 #' @examples
 #' t <- 1:200
-#' Xb <- cbind(as.integer(sin(t) > 0), as.integer(sin(t) + cos(3 * t) > 0.2), as.integer(cos(2 * t) > 0))
+#' Xb <- cbind(as.integer(sin(t) > 0), as.integer(sin(t) + cos(3 * t) > 0.2),
+#'   as.integer(cos(2 * t) > 0))
 #' morie_esl_ising_fit(Xb, rbind(c(1, 2), c(2, 3)))$edges
 #' @export
 morie_esl_ising_fit <- function(X, edges, max_iter = 100, tol = 1e-12) {

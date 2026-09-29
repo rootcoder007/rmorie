@@ -205,10 +205,12 @@ morie_llm_chat <- function(prompt, model = NULL, api = "", base = "", key = "", 
 #' @examples
 #' fake <- function(model, prompt) {
 #'   if (startsWith(prompt, "Reply with")) return("OK")
-#'   if (grepl("You are the AUDITOR", prompt, fixed = TRUE)) return('{"police_service": "Barrie Police Service"}')
+#'   if (grepl("You are the AUDITOR", prompt,
+#'   fixed = TRUE)) return('{"police_service": "Barrie Police Service"}')
 #'   '{"police_service": {"value": "Barrie", "quote": "Barrie", "confidence": "high"}}'
 #' }
-#' morie_siu_audit_panel("The Barrie Police Service ...", mode = 2, readers = "r1", chat = fake)$fields
+#' morie_siu_audit_panel("The Barrie Police Service ...", mode = 2, readers = "r1",
+#'   chat = fake)$fields
 #' @export
 morie_siu_audit_panel <- function(report_text, parsed = NULL, mode = 4L, readers = NULL, auditors = NULL,
                                   num_readers = 0L, num_auditors = 0L, reader_concurrency = 0L,

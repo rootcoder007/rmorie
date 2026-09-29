@@ -368,7 +368,7 @@ Nakagami <- function(x = NULL, shape = NULL, scale = 1.0, p = NULL, n = 0, seed 
   if (!(shape >= 0.5 && scale > 0)) stop("invalid parameters: need shape >= 0.5 && scale > 0", call. = FALSE)
   pdf <- function(v) ifelse(v <= 0, 0, exp(log(2) + shape * log(shape) - lgamma(shape) - shape * log(scale) + (2 * shape - 1) * log(pmax(v, 1e-300)) - shape * v^2 / scale))
   cdf <- function(v) ifelse(v <= 0, 0, pgamma(shape * v^2 / scale, shape))
-  qf <- function(u) sqrt(scale * qgamma(u, shape) / shape)
+  qf <- function(u) sqrt(scale * stats::qgamma(u, shape) / shape)
   res <- list()
   if (!is.null(x)) {
     dens <- pdf(x)

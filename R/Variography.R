@@ -160,7 +160,8 @@ VgmSpectralDensity <- function(omega, model, d = 2) {
 #'   Myers, D. E. (1991). Pseudo-cross variograms, positive-definiteness, and
 #'   cokriging. Mathematical Geology 23, 805-816.
 #' @examples
-#' SampleVariogram(c(1, 2, 4, 3), rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1)), boundaries = c(0, 1.2, 1.5))
+#' SampleVariogram(c(1, 2, 4, 3), rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1)), boundaries = c(0,
+#'   1.2, 1.5))
 #' @export
 SampleVariogram <- function(z, coords, cutoff = NULL, width = NULL, boundaries = NULL, alpha = NULL, tol_hor = NULL,
                             estimator = "classical", covariogram = FALSE, cloud = FALSE, z2 = NULL,
