@@ -107,7 +107,9 @@
 #' @return A list with \code{G}, \code{ts}, \code{order}.
 #' @export
 .causdidwd_cohorts <- function(first_treated, period) {
-  ts <- sort(unique(as.character(period)))
+  ts <- unique(as.character(period))
+  tn <- suppressWarnings(as.numeric(ts))
+  ts <- if (anyNA(tn)) sort(ts) else ts[order(tn)]
   ord <- setNames(seq_along(ts) - 1L, ts)
   n <- length(first_treated)
   G <- character(n)
@@ -442,6 +444,7 @@ morie_imputation <- function(Y, unit, period, first_treated, X = NULL) {
     att              = att,
     n_cells          = length(att),
     n_untreated_used = length(untreated_idx),
+    periods          = ts,
     coef             = beta,
     method           = "two-step imputation on untreated observations; Wooldridge (2025) Sec. 4",
     identical_to     = "etwfe, by Sec. 5"
@@ -494,14 +497,22 @@ morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
     return(list(estimate = est, weights = w, scheme = "simple"))
   }
 
-  keys <- names(att)
+  split_keys <- strsplit(names(att), "\r", fixed = TRUE)
+  gk <- vapply(split_keys, function(x) x[1L], character(1))
+  tk <- vapply(split_keys, function(x) x[2L], character(1))
   if (scheme == "cohort") {
-    split_keys <- strsplit(keys, "\r", fixed = TRUE)
-    group_keys <- vapply(split_keys, function(x) x[2L], character(1))
+    group_keys <- gk
+    unique_groups <- unique(gk)
   } else {
-    group_keys <- keys
+    per <- if (!is.null(result$periods)) {
+      as.character(result$periods)
+    } else {
+      .causdidwd_cohorts(as.list(gk), c(gk, tk))$ts
+    }
+    e <- match(tk, per) - match(gk, per)
+    group_keys <- as.character(e)
+    unique_groups <- as.character(sort(unique(e)))
   }
-  unique_groups <- unique(group_keys)
   prof <- vapply(unique_groups,
                  function(g) mean(att[group_keys == g]),
                  numeric(1))
