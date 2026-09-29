@@ -389,23 +389,10 @@ ocrwit_normalise_bbox <- function(box, width, height, scale = 1000) {
 #' @return A vector, from \code{sort}.
 #' @export
 ocrwit_patch_of_box <- function(box, width, height, patch_grid = 14) {
-  g <- as.integer(patch_grid)
-  bb <- ocrwit_normalise_bbox(box, width, height, g)
-  x0 <- bb[1]
-  y0 <- bb[2]
-  x1 <- bb[3]
-  y1 <- bb[4]
-  r0 <- min(y0, g - 1L)
-  r1 <- min(max(y1, y0 + 1L), g)
-  c0 <- min(x0, g - 1L)
-  c1 <- min(max(x1, x0 + 1L), g)
-  out <- c()
-  for (r in r0:(r1 - 1L)) {
-    for (c in c0:(c1 - 1L)) {
-      out <- c(out, r * g + c)
-    }
-  }
-  sort(unique(out))
+  # the restored copy rounded the corners onto the patch grid, which
+  # moved a word in the right half of a patch into the next one; the
+  # Python patch_of_box (and the R one above) take floor/ceil spans
+  patch_of_box(box, width, height, patch_grid)
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
