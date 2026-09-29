@@ -38,15 +38,6 @@
 #' @param n_folds Cross-fitting folds.
 #' @param random_state Philox seed of the fold assignment.
 #' @param A,H Treatment-initiation indicators and covariate, n by T matrices (or vectors).
-#' @param time,event Follow-up times and failure indicators.
-#' @param treatment_history Treatment given (one value per subject).
-#' @param covariate_history Confounders of the treatment model (vector or matrix).
-#' @param treat_times List of on-treatment intervals per subject (each a two-column matrix or a
-#'   list of \code{c(start, stop)}); default: the whole follow-up when treated.
-#' @param level Confidence level of the score-test interval.
-#' @param psi_range,n_grid Scan range and number of grid points.
-#' @param tol Bisection tolerance.
-#' @param ridge Numerical ridge of the treatment-model solves.
 #' @return A named list (the Python result's fields). \code{Prsmtd} reports 1-based periods and rows.
 #' @references Hernan, M. A. and Robins, J. M. (2020). Causal Inference: What If. Chapman & Hall/CRC.
 #'
