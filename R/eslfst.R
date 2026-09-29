@@ -27,7 +27,9 @@ Fnested <- function(model0, model1, X, y) {
   s1 <- sort(unique(as.integer(model1)))
   if (!all(s0 %in% s1)) stop("model0 must be nested inside model1")
   rss <- function(cols) {
-    D <- cbind(1, if (length(cols)) X[, cols, drop = FALSE] else NULL)
+    # rep(1, n): cbind(1, NULL) is a 1 x 1 matrix, which broke the
+    # intercept-only reduced model
+    D <- cbind(rep(1, n), if (length(cols)) X[, cols, drop = FALSE] else NULL)
     b <- qr.solve(D, y)
     r <- y - D %*% b
     sum(r * r)
