@@ -213,7 +213,9 @@ ks_critical_value <- function(m, instruments, form = "sum",
         sd <- max(wm0$sd[j], .bnskmt_EPS)
         xi  <- sqrt(n) * wm0$mean[j] / sd
         centred <- sqrt(n) * (wm$mean[j] - wm0$mean[j]) / sd
-        centred + if (xi <= kap) 0.0 else 1e6
+        # GMS slackens inequality moments only; an equality moment
+        # always binds (Andrews & Soares 2010, eq. 4.2)
+        centred + if (j > length(wm0$mean) - n_equality || xi <= kap) 0.0 else 1e6
       })
       s <- S_function(std, form = form, n_equality = n_equality)
       if (s > best) best <- s
