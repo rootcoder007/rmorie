@@ -307,7 +307,10 @@ sasimi_distance <- function(fp_a, fp_b, coefficient = "tanimoto") {
 #' @keywords internal
 sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
   f <- .sasimi_coef(coefficient)
-  F <- lapply(fps, sasimi_fingerprint)
+  # validate each print, but pass the raw input to f: a normalised
+  # index vector inside {0, 1} would be re-read as a 0/1 bit vector
+  lapply(fps, sasimi_fingerprint)
+  F <- fps
   if (length(F) < 2L) {
     stop("sasimi: need at least two fingerprints")
   }
@@ -345,14 +348,14 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
     stop("sasimi: k must be at least 1")
   }
   f <- .sasimi_coef(coefficient)
-  q <- sasimi_fingerprint(query)
+  sasimi_fingerprint(query)
   n <- length(fps)
   if (n == 0L) {
     return(list())
   }
   scores <- numeric(n)
   for (i in seq_len(n)) {
-    scores[i] <- f(q, sasimi_fingerprint(fps[[i]]))
+    scores[i] <- f(query, fps[[i]])
   }
   ord <- order(-scores, seq_len(n) - 1L)
   kk <- min(as.integer(k), n)
