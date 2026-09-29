@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Spatial panel data models (Elhorst 2014).
-# Identical to the Python arm morie.fn.sppanel.
+# Identical to the Python arm morie.fn.sppaneldyn.
 
 #' Spatial panel models: fixed-effects lag, error and Durbin, random-effects lag, dynamic spatial ARX
 #'
