@@ -64,8 +64,11 @@ morie_abod <- function(X, k = NULL) {
       next
     }
     G <- V %*% t(V)
-    w <- 1 / outer(nrm2, nrm2)
-    vals <- G * w
+    # Kriegel et al. (2008) Def. 3: the angle term divides by
+    # |AB|^2 |AC|^2, but the variance WEIGHT is 1 / (|AB| |AC|)
+    q <- outer(nrm2, nrm2)
+    vals <- G / q
+    w <- 1 / sqrt(q)
     iu <- which(upper.tri(w), arr.ind = TRUE)
     vv <- vals[iu]
     ww <- w[iu]
