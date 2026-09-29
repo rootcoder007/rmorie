@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Simple morie_cokriging for co-located bivariate spatial prediction
+#' Cokriging of a primary variable from co-located primary and secondary data
 #'
-#' \deqn{\hat Z_1(s_0) = \lambda^\top Z_1 + \mu^\top Z_2}{hat Z_1(s_0) = lambda^top Z_1 +
-#' mu^top Z_2}, system
-#' \deqn{[C_{pp} \; C_{ps}; C_{ps}^\top \; C_{ss}] [\lambda; \mu] = [c_{0p};
-#' c_{0s}]}{[C_pp C_ps; C_ps^top C_ss] [lambda; mu] = [c_0p; c_0s]}.
+#' Exponential direct covariances (sill minus nugget, plus the nugget at
+#' distance zero) and an exponential cross-covariance, written as a sum of
+#' coregionalization structures and solved by \code{\link{LmcCokriging}}:
+#' simple cokriging with known \code{means} (default zero means, the former
+#' behaviour) or ordinary cokriging with \code{means = NULL}. Python parity:
+#' \code{morie.fn.cokrg.cokriging}.
 #'
 #' @param x Primary variable (n,).
 #' @param y Secondary variable (n,).
@@ -14,8 +16,14 @@
 #' @param sill_s,range_s Secondary auto-covariance parameters.
 #' @param cross_sill,cross_range Cross-covariance parameters.
 #' @param nugget Nugget.
+#' @param means Known means c(m1, m2) for simple cokriging; NULL for ordinary
+#'   cokriging.
 #' @return Named list: estimate, se, n, method.
-#' @references Schabenberger & Gotway (2005), Ch 4.
+#' @references Wackernagel, H. (2003). Multivariate Geostatistics, 3rd edn.
+#'   Springer, ch. 24-25.
+#'
+#'   Schabenberger, O. and Gotway, C. A. (2005). Statistical Methods for
+#'   Spatial Data Analysis. Chapman and Hall/CRC.
 #' @examples
 #' set.seed(1)
 #' cokrg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2), target = rnorm(50))
@@ -24,7 +32,7 @@ cokrg <- function(x, y, coords, target,
                   sill_p = 1, range_p = 1,
                   sill_s = 1, range_s = 1,
                   cross_sill = 0.5, cross_range = 1,
-                  nugget = 0) {
+                  nugget = 0, means = c(0, 0)) {
   x <- as.numeric(x)
   y <- as.numeric(y)
   n <- length(x)
@@ -44,32 +52,20 @@ cokrg <- function(x, y, coords, target,
     stop("x, y, and coords must have matching n")
   }
   if (ncol(target) != ncol(coords)) stop("target/coords dim mismatch")
-  D <- as.matrix(stats::dist(coords))
-  cov_exp <- function(D_, c0, c1, a) c1 * exp(-D_ / a) + ifelse(D_ == 0, c0, 0)
-  Cpp <- cov_exp(D, nugget, sill_p - nugget, range_p)
-  Css <- cov_exp(D, nugget, sill_s - nugget, range_s)
-  Cps <- cross_sill * exp(-D / cross_range)
-  C <- rbind(cbind(Cpp, Cps), cbind(t(Cps), Css))
-  z <- c(x, y)
-  var0 <- sill_p
+  lmc <- list(
+    list(model = "Nug", B = diag(nugget, 2)),
+    list(model = "Exp", range = range_p, B = matrix(c(sill_p - nugget, 0, 0, 0), 2)),
+    list(model = "Exp", range = range_s, B = matrix(c(0, 0, 0, sill_s - nugget), 2)),
+    list(model = "Exp", range = cross_range, B = matrix(c(0, cross_sill, cross_sill, 0), 2))
+  )
+  r <- LmcCokriging(c(x, y), rbind(coords, coords), rep(0:1, each = n), target, lmc, target = 0L, means = means)
   m <- nrow(target)
-  ests <- numeric(m)
-  ses <- numeric(m)
-  for (k in seq_len(m)) {
-    d0 <- sqrt(colSums((t(coords) - target[k, ])^2))
-    c0p <- cov_exp(d0, nugget, sill_p - nugget, range_p)
-    c0s <- cross_sill * exp(-d0 / cross_range)
-    c_vec <- c(c0p, c0s)
-    w <- tryCatch(solve(C, c_vec),
-      error = function(e) qr.solve(C, c_vec)
-    )
-    ests[k] <- sum(w * z)
-    ses[k] <- sqrt(max(var0 - sum(w * c_vec), 0))
-  }
+  ses <- sqrt(pmax(r$variance, 0))
   list(
-    estimate = if (m == 1) ests[1] else ests,
+    estimate = if (m == 1) r$prediction[1] else r$prediction,
     se = if (m == 1) ses[1] else ses, n = n,
-    method = "Simple morie_cokriging (linear coregionalization, exp. cov)"
+    method = paste(if (is.null(means)) "Ordinary" else "Simple",
+                   "cokriging (exponential direct and cross covariances)")
   )
 }
 
