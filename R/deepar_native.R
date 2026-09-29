@@ -256,7 +256,7 @@ morie_deepar_sample <- function(fit, z_history, horizon, n_samples = 200L,
       if (fit$likelihood == "negative-binomial") {
         draw <- .sample_neg_bin(mu_s * nu, alpha, e) / nu
       } else {
-        draw <- mu_s + (alpha / nu) * .ghc_norm(e, 1L)
+        draw <- mu_s + alpha * .ghc_norm(e, 1L)
       }
       st <- c(st, draw)
       path[h] <- draw * nu
