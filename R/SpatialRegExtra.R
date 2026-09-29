@@ -8,7 +8,7 @@
 #' P-value \code{(1 + #(I_sim >= I)) / (nsim + 1)} over Fisher-Yates
 #' permutations on Philox stream \code{k} (as spdep::moran.mc).
 #' \code{SpautolmFit}: SAR or CAR error model with case weights by profile
-#' likelihood, \code{M = (I - lambda W)' D_w (I - lambda W)} (SAR) or
+#' likelihood, \code{M = t(I - lambda W) D_w (I - lambda W)} (SAR) or
 #' \code{(I - lambda W) D_w} (CAR), as spatialreg::spautolm.
 #' \code{S2slsLag}: spatial two-stage least squares with instruments
 #' \code{1, X, WX, W^2 X} (and \code{W^3 X} and regressors \code{WX} for the
