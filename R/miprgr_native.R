@@ -9,9 +9,8 @@
 #
 # Native implementation mirroring Python morie.fn.miprgr exactly:
 # the same Dakin (1965) Fig. 2 marked list, the same bound test, and
-# the same two solvers (simplex default; interior routed to
-# .ghc_mipinterior, a Mehrotra-style primal-dual interior point method
-# implemented below so the R arm is self-contained).
+# the same two solvers (simplex default; interior routed to solve_lp,
+# the package's Mehrotra predictor-corrector in mehtad_native.R).
 
 .GHC_MIP_EPS <- 1e-7
 
@@ -65,11 +64,11 @@
   }
   pivot <- function(pr, pc) {
     pv <- Tmat[pr, pc]
-    Tmat[pr, ] <- Tmat[pr, ] / pv
+    Tmat[pr, ] <<- Tmat[pr, ] / pv
     for (i in seq_len(m)) {
       if (i != pr && abs(Tmat[i, pc]) > 0) {
         f <- Tmat[i, pc]
-        Tmat[i, ] <- Tmat[i, ] - f * Tmat[pr, ]
+        Tmat[i, ] <<- Tmat[i, ] - f * Tmat[pr, ]
       }
     }
     basis[[pr]] <<- pc
@@ -108,11 +107,11 @@
       return(list(feasible = FALSE, x = NULL, value = NULL))
     infeas <- 0
     for (i in seq_len(m))
-      if (basis[[i]] >= n + m) infeas <- infeas + Tmat[i, width + 1]
+      if (basis[[i]] > n + m) infeas <- infeas + Tmat[i, width + 1]
     if (infeas > 1e-7)
       return(list(feasible = FALSE, x = NULL, value = NULL))
     for (i in seq_len(m)) {
-      if (basis[[i]] >= n + m) {
+      if (basis[[i]] > n + m) {
         moved <- FALSE
         for (j in seq_len(n + m)) {
           if (abs(Tmat[i, j]) > tol) { pivot(i, j)
@@ -156,31 +155,6 @@
   }
   cc <- c(as.numeric(c), rep(0, m))
   list(M = full, rhs = rhs, c = cc)
-}
-
-#' @keywords internal
-#' @noRd
-.ghc_mipinterior <- function(M, rhs, c, tol = 1e-10, max_iter = 200) {
-  m <- length(M)
-  n <- length(M[[1]])
-  X <- matrix(0, m, n)
-  for (i in seq_len(m)) X[i, ] <- as.numeric(M[[i]])
-  rb <- as.numeric(rhs)
-  rc <- as.numeric(c)
-  x <- rep(1, n)
-  for (it in seq_len(as.integer(max_iter))) {
-    Ax <- as.numeric(X %*% x)
-    rd <- rc - as.numeric(t(X) %*% (rb - Ax))
-    if (max(abs(rd)) < tol) break
-    Ad <- as.numeric(X %*% rd)
-    alpha <- min(1, min(rb[Ad > 0] / Ad[Ad > 0], Inf))
-    x <- x + alpha * rd
-  }
-  Ax <- as.numeric(X %*% x)
-  if (max(rb - Ax) < -tol)
-    return(list(converged = FALSE, x = rep(0, n))
-    )
-  list(converged = TRUE, x = x[seq_len(length(c) - m)])
 }
 
 #' LP relaxation at one node
@@ -239,16 +213,18 @@ morie_miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
     stop("miprgr: solver must be simplex or interior, got ", solver)
   std <- .ghc_standard_form(A, b, c, bounds, nn)
   obj <- if (maximise) -std$c else std$c
-  r <- tryCatch(.ghc_mipinterior(std$M, std$rhs, obj, tol = 1e-10,
-                                 max_iter = 200),
-                error = function(e)
-                  list(converged = FALSE, x = rep(0, nn)))
-  if (!r$converged)
+  r <- tryCatch(solve_lp(do.call(rbind, std$M), std$rhs, obj, tol = 1e-10,
+                         max_iter = 200),
+                error = function(e) NULL)
+  if (is.null(r))
     return(list(feasible = FALSE, x = NULL, value = NULL,
                 note = paste0("the relaxation is infeasible, so ",
                               "every integer point below this node ",
                               "is too")))
-  x <- pmax(0, r$x)
+  if (!r$converged)
+    return(list(feasible = FALSE, x = NULL, value = NULL,
+                note = "no interior optimum found"))
+  x <- pmax(0, r$x[seq_len(nn)])
   for (i in seq_along(A)) {
     lhs <- sum(as.numeric(A[[i]]) * x)
     if (lhs > as.numeric(b[i]) + 1e-6)
@@ -335,7 +311,7 @@ morie_miprgr_enumerate_integer <- function(A, b, c, integer_vars,
   n <- length(c)
   best <- if (maximise) -Inf else Inf
   best_x <- NULL
-  stack <- list(list())
+  stack <- list(numeric(0))
   while (length(stack) > 0) {
     pre <- stack[[length(stack)]]
     stack[[length(stack)]] <- NULL
@@ -384,7 +360,7 @@ morie_miprgr_branch_and_bound <- function(A, b, c, integer_vars,
                                           solver = "simplex") {
   n <- length(c)
   I <- sort(unique(as.integer(integer_vars)))
-  if (any(I < 0 | I >= n))
+  if (any(I < 1L | I > n))
     stop("miprgr: an integer index is outside the variable set")
   better <- if (maximise)
     function(a, bb) a > bb + .GHC_MIP_EPS
@@ -763,14 +739,15 @@ miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
   T2 <- matrix(0, nrow = m, ncol = width2 + 1L)
   for (i in seq_len(m)) {
     T2[i, seq_len(n)] <- rows[[i]]
-    T2[i, n + i] <- 1
+    # a negated (>=) row keeps its slack with the opposite sign
+    T2[i, n + i] <- if (b[i] < 0) -1 else 1
     T2[i, width2 + 1L] <- rhs[i]
   }
-  basis2 <- as.integer(n + seq_len(m))
+  basis2 <- as.integer(n + seq_len(m)) - 1L # 0-based column indices
   if (na > 0L) {
     for (a in seq_along(need_art)) {
       T2[need_art[a], n + m + a] <- 1
-      basis2[need_art[a]] <- n + m + a
+      basis2[need_art[a]] <- n + m + a - 1L # basis2 is 0-based
     }
   }
 
@@ -785,11 +762,11 @@ miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
 
   pivot <- function(pr, pc) {
     pv <- T2[pr, pc]
-    T2[pr, ] <- T2[pr, ] / pv
+    T2[pr, ] <<- T2[pr, ] / pv
     for (i in seq_len(m)) {
       if (i != pr && T2[i, pc] != 0) {
         f <- T2[i, pc]
-        T2[i, ] <- T2[i, ] - f * T2[pr, ]
+        T2[i, ] <<- T2[i, ] - f * T2[pr, ]
       }
     }
     basis2[pr] <<- pc - 1L
