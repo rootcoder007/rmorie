@@ -85,7 +85,11 @@ morie_metsem_kmers <- function(seq, k) {
   out <- list()
   inc <- list()
   nodes <- character(0)
-  for (km in sort(names(edges), method = "radix")) {
+  # an empty edge list has NULL names, and sort(NULL) stops with
+  # "argument 1 is not a vector" -- a read shorter than k left nothing
+  km_all <- names(edges)
+  if (is.null(km_all)) km_all <- character(0)
+  for (km in sort(km_all, method = "radix")) {
     a <- substr(km, 1L, k - 1L)
     b <- substr(km, 2L, k)
     nodes <- c(nodes, a, b)
@@ -227,7 +231,9 @@ morie_metsem_unitigs <- function(g) {
       }
     }
   }
-  for (km in sort(names(g$edges), method = "radix")) {
+  km_all <- names(g$edges)
+  if (is.null(km_all)) km_all <- character(0)
+  for (km in sort(km_all, method = "radix")) {
     if (km %in% seen) next
     p <- .metsem_walk(g, km)
     seen <- c(seen, p)
