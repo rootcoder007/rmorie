@@ -24,7 +24,8 @@ ali <- function(u, v, theta = 0) {
   th <- as.numeric(theta)
   d <- 1 - th * (1 - uu) * (1 - vv)
   cdf <- uu * vv / d
-  dens <- (1 - th + 2 * th * uu * vv / d - th * (1 - uu) * (1 - vv) / d) / (d * d)
+  # mixed partial d2C / du dv of C = uv / d
+  dens <- (1 + th * ((1 + uu) * (1 + vv) - 3) + th * th * (1 - uu) * (1 - vv)) / (d * d * d)
   tau <- if (th == 0) 0 else if (th >= 1) 1 / 3 else
     (3 * th - 2) / (3 * th) - 2 * (1 - th)^2 * log(1 - th) / (3 * th^2)
   list(estimate = mean(cdf), cdf = cdf, density = dens,

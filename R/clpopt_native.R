@@ -162,7 +162,9 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
   T
 }
 
-# Internal: pivot to optimality. Mirrors clpopt._run.
+# Internal: pivot to optimality. Mirrors clpopt._run, which pivots the
+# tableau and basis in place; R copies on modify, so the pivoted tableau
+# and basis are returned with the status and the callers take them back.
 #' Internal: pivot to optimality. Mirrors clpopt._run
 #'
 #' A step of the clpopt_native implementation. Called by \code{simplex}.
@@ -184,7 +186,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
     cand <- cols[vapply(cols, function(j) {
       !(as.character(j) %in% blocked) && T[m + 1L, j + 1L] < -.clpopt_eps
     }, logical(1))]
-    if (length(cand) == 0L) return("optimal")
+    if (length(cand) == 0L) return(list(st = "optimal", T = T, basis = basis))
     if (rule == "bland") {
       j <- min(cand)
     } else {
@@ -193,7 +195,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
       j <- cand[ord[1L]]
     }
     eligible <- which(T[seq_len(m), j + 1L] > .clpopt_eps)
-    if (length(eligible) == 0L) return("unbounded")
+    if (length(eligible) == 0L) return(list(st = "unbounded", T = T, basis = basis))
     ratios <- T[eligible, ncol(T)] / T[eligible, j + 1L]
     best <- order(ratios, basis[eligible], eligible)[1L]
     row <- eligible[best]
@@ -201,10 +203,10 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
     basis[row] <- j
     key <- paste(sort(basis), collapse = ",")
     if (exists(key, envir = seen_set, inherits = FALSE))
-      return("cycling")
+      return(list(st = "cycling", T = T, basis = basis))
     assign(key, TRUE, envir = seen_set)
   }
-  "iteration_limit"
+  list(st = "iteration_limit", T = T, basis = basis)
 }
 
 # Internal: report a successful solution. Mirrors clpopt._report.
@@ -239,7 +241,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
     abs(T[i, ncol(T)]) < .clpopt_eps, logical(1))]
   in_basis <- basis[seq_len(m)]
   alt <- seq_len(n)[vapply(seq_len(n), function(j) {
-    !(j - 1L %in% in_basis) && abs(T[m + 1L, j]) < .clpopt_eps
+    !((j - 1L) %in% in_basis) && abs(T[m + 1L, j]) < .clpopt_eps
   }, logical(1))]
   list(
     estimate = unname(x), status = "optimal", x = unname(x),
@@ -368,7 +370,10 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
     }
     T <- rbind(T, obj2)
     blocked <- as.character(seq(n, total - 1L))
-    st <- .clpopt_run(T, basis, seq_len(n) - 1L, rule, blocked, max_iter)
+    run <- .clpopt_run(T, basis, seq_len(n) - 1L, rule, blocked, max_iter)
+    st <- run$st
+    T <- run$T
+    basis <- run$basis
     if (st %in% c("cycling", "iteration_limit"))
       return(.clpopt_fail(st, rule, "phase 2"))
     if (st == "unbounded")
@@ -387,7 +392,10 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
   for (i in seq_len(m))
     obj[n + i] <- 0.0
   T <- rbind(T, obj)
-  st <- .clpopt_run(T, basis, seq_len(n) - 1L, rule, character(0), max_iter)
+  run <- .clpopt_run(T, basis, seq_len(n) - 1L, rule, character(0), max_iter)
+  st <- run$st
+  T <- run$T
+  basis <- run$basis
   if (st %in% c("cycling", "iteration_limit"))
     return(.clpopt_fail(st, rule, "phase 1"))
   if (-T[m + 1L, ncol(T)] > 1e-7)
@@ -422,7 +430,10 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
   }
   T[m + 1L, ] <- obj2
   blocked <- as.character(seq(n, total - 1L))
-  st <- .clpopt_run(T, basis, seq_len(n) - 1L, rule, blocked, max_iter)
+  run <- .clpopt_run(T, basis, seq_len(n) - 1L, rule, blocked, max_iter)
+  st <- run$st
+  T <- run$T
+  basis <- run$basis
   if (st %in% c("cycling", "iteration_limit"))
     return(.clpopt_fail(st, rule, "phase 2"))
   if (st == "unbounded")

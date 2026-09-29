@@ -12,6 +12,13 @@
 
 .fmFM_EPS <- 1e-12
 
+# V may be a list of per-feature factor vectors or an n x k matrix (fit_fm
+# keeps a matrix); V[[i]] on a matrix is a single element, so rows are
+# taken explicitly.
+.fmFM_rows <- function(V) {
+  if (is.matrix(V)) lapply(seq_len(nrow(V)), function(i) V[i, ]) else V
+}
+
 # --- eq. (1) as written -- the O(kn^2) double sum -------------------
 #' Eq. (1) as written -- the O(kn^2) double sum -------------------
 #'
@@ -30,6 +37,7 @@
 #'   w = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 #' @keywords internal
 predict_naive <- function(x, w0, w, V) {
+  V <- .fmFM_rows(V)
   xs <- as.numeric(x)
   n <- length(xs)
   s <- as.numeric(w0) + sum(w * xs)
@@ -59,6 +67,7 @@ predict_naive <- function(x, w0, w, V) {
 #' @return The value of \code{s}, as built in the body.
 #' @export
 .fmFM_predict <- function(x, w0, w, V) {
+  V <- .fmFM_rows(V)
   xs <- as.numeric(x)
   n <- length(xs)
   kk <- length(V[[1]])
@@ -92,6 +101,7 @@ predict_naive <- function(x, w0, w, V) {
 #' gradient(x = c(1, 0, 1, 0, 0, 0), V, f = 1, i = 1)
 #' @keywords internal
 gradient <- function(x, V, f, i) {
+  V <- .fmFM_rows(V)
   xs <- as.numeric(x)
   a <- sum(vapply(seq_along(xs), function(j) V[[j]][f] * xs[j],
                   numeric(1)))

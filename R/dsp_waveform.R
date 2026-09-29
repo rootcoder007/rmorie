@@ -595,8 +595,13 @@ morie_dsp_complex_demodulation <- function(x, fc, fs = 1) {
   cutoff <- min(fc * 0.5, nyq * 0.9) / nyq
   if (cutoff <= 0 || cutoff >= 1) cutoff <- 0.1
   ba <- .morie_dsp_butter(4, cutoff, type = "low")
-  envelope <- as.numeric(.morie_dsp_filtfilt(ba$b, ba$a, Mod(analytic)))
-  phase <- .unwrap(Arg(analytic))
+  # demodulation low-passes the complex product itself; the modulus and
+  # argument are taken afterwards. Filtering
+  # Mod() first only smooths the rectified signal and leaves the carrier.
+  zr <- as.numeric(.morie_dsp_filtfilt(ba$b, ba$a, Re(analytic)))
+  zi <- as.numeric(.morie_dsp_filtfilt(ba$b, ba$a, Im(analytic)))
+  envelope <- 2 * sqrt(zr * zr + zi * zi)
+  phase <- .unwrap(atan2(zi, zr))
   list(envelope = envelope, phase = phase)
 }
 
@@ -622,7 +627,10 @@ morie_dsp_min_phase <- function(x) {
   n <- length(cep)
   win <- numeric(n)
   win[1L] <- 1
-  if (n >= 4L) win[2:(n %/% 2L)] <- 2
+  # double quefrencies 1 .. ceiling(n/2) - 1; for odd n that includes
+  # (n - 1)/2, which n %/% 2 alone would drop
+  h <- (n + 1L) %/% 2L
+  if (h >= 2L) win[2:h] <- 2
   if (n %% 2L == 0L) win[n %/% 2L + 1L] <- 1
   min_cep <- cep * win
   min_spec <- exp(stats::fft(min_cep))

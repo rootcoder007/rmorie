@@ -47,14 +47,14 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 .flow_an_quantile7 <- function(sorted_x, q) {
+  # type 7, as _s03core.quantile7: h = (n - 1) q on 0-based order
+  # statistics (q (n + 1) is type 6)
   n <- length(sorted_x)
-  pos <- q * (n + 1L)
-  lo <- floor(pos)
-  hi <- ceiling(pos)
-  if (lo < 1L) lo <- 1L
-  if (hi > n) hi <- n
-  if (lo == hi) sorted_x[lo] else
-    sorted_x[lo] + (pos - lo) * (sorted_x[hi] - sorted_x[lo])
+  if (n == 1L) return(sorted_x[1L])
+  h <- (n - 1) * q
+  lo <- floor(h)
+  hi <- min(lo + 1, n - 1)
+  sorted_x[lo + 1] + (h - lo) * (sorted_x[hi + 1] - sorted_x[lo + 1])
 }
 
 #' .alternating_masks

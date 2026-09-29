@@ -420,8 +420,10 @@ morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
   V <- sv$v
   kk_actual <- min(kk, length(S))
   if (kk_actual > 0L) {
-    approx <- (U[, seq_len(kk_actual), drop = FALSE] *
-               S[seq_len(kk_actual)]) %*%
+    # scale COLUMN t of U by S[t]; U * S recycled S down the rows and
+    # scaled row i by S[i], which is wrong for any rank above 1
+    approx <- sweep(U[, seq_len(kk_actual), drop = FALSE], 2L,
+                    S[seq_len(kk_actual)], "*") %*%
               t(V[, seq_len(kk_actual), drop = FALSE])
   } else {
     approx <- matrix(0.0, nrow = nu, ncol = ni)

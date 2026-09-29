@@ -56,10 +56,5 @@ Drdidblock <- function(y, D, unit = NULL, time = NULL, X = NULL,
        ci_lo = .s03quantile7(boot, a / 2), ci_hi = .s03quantile7(boot, 1 - a / 2),
        boot = boot, n_clusters = G, n = n, B = as.integer(B),
        n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
-       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
-       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
-       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
-       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
-       n_periods = if (is.null(time)) NA_integer_ else length(unique(time)),
        method = "DR-DiD with a deterministic cluster-block multiplier bootstrap")
 }
