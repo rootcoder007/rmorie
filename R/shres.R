@@ -62,7 +62,9 @@ Schoenres <- function(time, event, X, beta = NULL) {
   scaled <- list()
   for (r in res) {
     s <- .s03ridgesolve(Vm, r, 1e-10)
-    scaled[[length(scaled) + 1L]] <- if (d) s / d + b else b
+    # s = (V / d)^-1 r = d V^-1 r is already the Grambsch-Therneau scaling;
+    # dividing it by d again returned V^-1 r + beta (d times too small)
+    scaled[[length(scaled) + 1L]] <- if (d) s + b else b
   }
   rho <- numeric(p)
   for (a in seq_len(p)) {
