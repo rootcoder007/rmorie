@@ -155,7 +155,7 @@ morie_rfppos_dihedral <- function(a, b, c, d) {
   n1 <- .rfppos_cross(b1, b2)
   n3 <- .rfppos_cross(b2, b3)
   x <- .w3_dot(n1, n3)
-  y <- .w3_dot(.rfppos_cross(n1, n3), u) * -1
+  y <- .w3_dot(.rfppos_cross(n1, n3), u)
   atan2(y, x) * 180 / pi
 }
 
