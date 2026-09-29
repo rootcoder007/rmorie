@@ -78,44 +78,11 @@
 #' topological_torsions(elements, bonds)
 #' @keywords internal
 topological_torsions <- function(elements, bonds, common_types = NULL) {
-  els <- as.character(elements)
-  n <- length(els)
-  if (n == 0L) stop("toptor: the molecule has no heavy atoms")
-  keep <- if (is.null(common_types)) .COMMON_TYPES else as.character(common_types)
-  types <- ifelse(els %in% keep, els, "Y")
-  adj <- .neighbours(n, bonds)
-  npi <- .pi_electrons(n, bonds)
-  degree <- vapply(seq_len(n), function(i) length(adj[[i]]), integer(1))
-  out <- list()
-  for (a in seq_len(n) - 1L) {
-    for (b in adj[[a + 1L]] + 1L) {
-      for (c in adj[[b]]) {
-        if (c == a + 1L) next
-        for (d in adj[[c + 1L]] + 1L) {
-          if (d == b || d == a + 1L) next
-          path <- c(a + 1L, b, c, d)
-          code <- lapply(seq_along(path), function(k) {
-            p <- path[k]
-            c(npi[p],
-              types[p],
-              degree[p] - if (k %in% c(1L, 4L)) 1L else 2L)
-          })
-          rev_code <- code[4:1]
-          code_s <- do.call(paste, c(lapply(code, paste, collapse = ":"),
-                                     sep = "|"))
-          rev_s <- do.call(paste, c(lapply(rev_code, paste, collapse = ":"),
-                                    sep = "|"))
-          canon <- if (code_s <= rev_s) code else rev_code
-          if (a + 1L > d) next
-          key <- paste0(sapply(canon, function(tr) paste(tr, collapse = ":")),
-                        collapse = "|")
-          out[[key]] <- if (is.null(out[[key]])) 1L
-                        else out[[key]] + 1L
-        }
-      }
-    }
-  }
-  out
+  # the copy that lived here mixed 0- and 1-based atom indices in the
+  # path walk (c compared against a + 1, path coded atom c - 1), so
+  # every torsion read the wrong middle atom; the 0-based walker below
+  # matches Python toptor.topological_torsions
+  morie_topological_torsions(elements, bonds, common_types)
 }
 
 #' The paper's similarity score S = 2 D / (d_i + d_j)
@@ -400,7 +367,8 @@ morie_trend_vector <- function(torsion_sets, activities,
   build <- function(order) {
     mn <- sum(a) / n
     w <- a[order + 1L] - mn
-    as.numeric((w %*% S) / n)
+    # S is descriptors x structures, so T = S w / N
+    as.numeric(matrix(S, nrow = length(keys)) %*% w) / n
   }
   real <- build(seq_len(n) - 1L)
   length_ <- sqrt(sum(real * real))

@@ -288,8 +288,8 @@ efficacy_test_and_release <- function(t_Q, t_T, t_R, false_negative,
        else generation_time
   p <- as.numeric(false_negative)
   if (p < 0 || p > 1)
-    stop(sprintf("qrntcq: the false-negative probability must ",
-                 "lie in [0, 1], got %r", false_negative))
+    stop(sprintf(paste0("qrntcq: the false-negative probability must ",
+                        "lie in [0, 1], got %g"), p))
   if (as.numeric(t_T) < as.numeric(t_Q))
     stop("qrntcq: the test cannot precede the start of quarantine")
   if (as.numeric(t_R) < as.numeric(t_T))
@@ -430,11 +430,11 @@ quarantine_efficacy <- function(t_Q, t_R, generation_time = NULL,
   q <- as.numeric(t_Q)
   r <- as.numeric(t_R)
   if (r < q)
-    stop(sprintf("qrntcq: release at %g precedes quarantine ",
-                 "start at %g", r, q))
+    stop(sprintf("qrntcq: release at %g precedes quarantine start at %g",
+                 r, q))
   if (q < as.numeric(t_E))
-    stop(sprintf("qrntcq: quarantine cannot start before ",
-                 "exposure (t_Q %g < t_E %g)", q, as.numeric(t_E)))
+    stop(sprintf("qrntcq: quarantine cannot start before exposure (t_Q %g < t_E %g)",
+                 q, as.numeric(t_E)))
   remaining <- .mass(ts, ys, q, ts[length(ts)])
   if (remaining <= .qrntcq_EPS) {
     return(list(efficacy = 0.0, remaining_mass = remaining,

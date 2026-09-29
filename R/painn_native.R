@@ -281,17 +281,13 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   base_s <- as.numeric(base$s)
   other_s <- as.numeric(other$s)
   se <- max(abs(base_s - other_s))
-  base_v <- as.numeric(base$v)
-  other_v <- as.numeric(other$v)
-  want <- matrix(0.0, d, F)
-  for (a in seq_len(d)) {
-    for (f in seq_len(F)) {
-      acc <- 0.0
-      for (b in seq_len(d)) acc <- acc + Qm[a, b] * base_v[(b - 1L) * F + f]
-      want[a, f] <- acc
-    }
-  }
-  ve <- max(abs(other_v - as.numeric(want)))
+  # keep the d x F shape: flattening indexed column-major while the
+  # rotation was written row-major, so the error was wrong (and mixed
+  # up components) whenever d != F
+  base_v <- .painn_mat(base$v)
+  other_v <- .painn_mat(other$v)
+  want <- Qm %*% base_v
+  ve <- max(abs(other_v - want))
   list(
     scalar_error = se,
     vector_error = ve,

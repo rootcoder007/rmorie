@@ -193,9 +193,15 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #' @export
 .twoT_get_items <- function(hits, t) {
   if (is.null(hits)) return(integer(0))
-  if (!is.null(hits[[t + 1L]])) return(hits[[t + 1L]])
-  k <- as.character(t)
-  if (!is.null(hits[[k]])) return(hits[[k]])
+  # a named list is the step -> items map (Python's dict); look the
+  # step up by name. Positional lookup came first before, so a named
+  # map returned its first entry for step 0 and indexing past the end
+  # of the list stopped with "subscript out of bounds".
+  if (!is.null(names(hits))) {
+    v <- hits[[as.character(t)]]
+    return(if (is.null(v)) integer(0) else v)
+  }
+  if (t + 1L <= length(hits) && !is.null(hits[[t + 1L]])) return(hits[[t + 1L]])
   integer(0)
 }
 

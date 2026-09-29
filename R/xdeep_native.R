@@ -82,7 +82,10 @@
 #' res <- .xdeep_to_mat(M = X)
 #' res
 .xdeep_to_mat <- function(M) {
-  m <- as.matrix(M)
+  # a CIN layer returns its feature maps as a list of vectors; the next
+  # layer receives that list, which as.matrix() cannot coerce, so every
+  # CIN deeper than one layer crashed
+  m <- if (is.list(M)) do.call(rbind, lapply(M, as.numeric)) else as.matrix(M)
   storage.mode(m) <- "double"
   m
 }

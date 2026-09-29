@@ -58,7 +58,10 @@ teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
     labels <- integer(length(out))
     for (i in seq_along(out)) {
       v <- out[[i]]
-      if (is.list(v) || (length(v) > 1L && !is.null(names(v)))) {
+      # any vector of length > 1 is a probability vector (Python treats
+      # every list/tuple so); requiring names sent unnamed probability
+      # vectors through as.integer() and voted for class 0
+      if (is.list(v) || length(v) > 1L) {
         vv <- as.numeric(v)
         labels[i] <- which.max(vv) - 1L
       } else {

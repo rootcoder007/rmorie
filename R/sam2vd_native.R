@@ -277,7 +277,9 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
     # mem is a list of equal-length numeric vectors; build a matrix
     # so that mem_mat %*% w yields the context vector directly.
     mem_mat <- do.call(rbind, mem)
-    ctx <- as.numeric(mem_mat %*% w)
+    # mem_mat is n_memories x d, so the context is t(mem_mat) w; the
+    # untransposed product was non-conformable unless n_memories == d
+    ctx <- as.numeric(crossprod(mem_mat, w))
     out <- out + ctx
   }
 

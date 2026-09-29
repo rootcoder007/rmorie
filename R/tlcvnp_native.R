@@ -172,7 +172,9 @@ select_bandwidth <- function(X, x0, bandwidths,
   chosen <- length(hs) - 1L
   for (i in seq_along(hs)) {
     ok <- TRUE
-    for (j in (i + 1L):length(hs)) {
+    # seq_len: (i + 1):length counted DOWN for the last bandwidth and
+    # read fits[[length + 1]] (a single bandwidth always crashed)
+    for (j in seq_len(length(hs) - i) + i) {
       if (abs(fits[[i]]$psi_h - fits[[j]]$psi_h) >
           as.numeric(C) * (fits[[i]]$se + fits[[j]]$se)) {
         ok <- FALSE

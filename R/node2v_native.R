@@ -151,8 +151,14 @@ transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
 #' @keywords internal
 walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
                  weights = NULL) {
+  .node2v_walk_rng(adj, start, length, p, q, .ghc_rng(as.numeric(seed)),
+                   weights)
+}
+
+# one walk drawing from a caller-owned stream, so that generate_walks
+# can share a single stream across walks as Python does
+.node2v_walk_rng <- function(adj, start, length, p, q, e, weights) {
   len <- as.integer(length)
-  e <- .ghc_rng(as.numeric(seed))
   path <- as.character(start)
   prev <- NULL
   if (len > 1L) {
@@ -200,14 +206,14 @@ generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,
                            q = 1.0, seed = 0, weights = NULL) {
   nw <- as.integer(num_walks)
   len <- as.integer(length)
-  rng_seed <- as.numeric(seed)
+  rng <- .ghc_rng(as.numeric(seed))
   adj_names <- sort(names(adj))
   out <- vector("list", nw * length(adj_names))
   idx <- 0L
   for (j in seq_len(nw)) {
     for (v in adj_names) {
       idx <- idx + 1L
-      out[[idx]] <- walk(adj, v, len, p, q, rng_seed, weights)
+      out[[idx]] <- .node2v_walk_rng(adj, v, len, p, q, rng, weights)
     }
   }
   list(

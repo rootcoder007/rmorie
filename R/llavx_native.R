@@ -116,8 +116,11 @@ project_patches <- function(patch_features, W, b = NULL) {
   } else {
     bvec <- as.numeric(b)
   }
-  out <- tcrossprod(Wmat, do.call(rbind, Fmat))
-  out <- sweep(out, 1L, bvec, "+")
+  # one projected token PER PATCH (Python returns a row per patch); the
+  # d_out x n_patches product was returned by row, i.e. transposed, so
+  # the sequence carried one token per output dimension instead
+  out <- do.call(rbind, Fmat) %*% t(Wmat)
+  out <- sweep(out, 2L, bvec, "+")
   lapply(seq_len(nrow(out)), function(i) out[i, ])
 }
 

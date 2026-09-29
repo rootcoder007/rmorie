@@ -130,7 +130,11 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
   blocks <- list()
   start <- 1L
   for (i in seq_len(n)) {
-    boundary <- (i == n) || ((i > 1) && (chrom[i] != chrom[i - 1])) || ((i - start + 1) >= b)
+    # close the block at marker i when the NEXT marker changes
+    # chromosome (comparing with the previous marker ended the block one
+    # marker late, putting the first marker of each new chromosome in
+    # the old chromosome's block)
+    boundary <- (i == n) || (chrom[i + 1L] != chrom[i]) || ((i - start + 1) >= b)
     if (boundary) {
       blocks[[length(blocks) + 1]] <- list(
         # Python reports a half-open block [start, stop): start is 0-based,
@@ -215,7 +219,11 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
   meta <- list()
 
   for (b in blocks) {
-    idx <- seq_len(b$size) + b$start - 1
+    # b$start is 0-based (make_blocks reports Python's half-open
+    # [start, stop)), so the block's columns are start + 1 .. start + size;
+    # subtracting one more selected column 0 (dropped) and shifted every
+    # later block left by one marker
+    idx <- b$start + seq_len(b$size)
     Xb <- G[, idx, drop = FALSE]
 
     for (lam in .regmlm_lambda_grid(b$size, n, n_ridge)) {

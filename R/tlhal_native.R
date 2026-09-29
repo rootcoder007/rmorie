@@ -108,9 +108,12 @@ indicator_basis <- function(X, knots = NULL, max_order = 2L) {
     subsets <- c(subsets, lapply(seq_len(d), function(a)
       lapply(seq_len(d - a) + a, function(b) c(a, b))))
   if (max_order >= 3L)
-    subsets <- c(subsets, lapply(seq_len(d), function(a)
+    # flatten one level here: the final unlist(recursive = FALSE) only
+    # removes one, and the triples sit two deep (max_order = 3 crashed)
+    subsets <- c(subsets, unlist(lapply(seq_len(d), function(a)
       lapply(seq_len(d - a) + a, function(b)
-        lapply(seq_len(d - b) + b, function(c) c(a, b, c)))))
+        lapply(seq_len(d - b) + b, function(c) c(a, b, c)))),
+      recursive = FALSE))
   subsets <- unlist(subsets, recursive = FALSE)
   cols <- list()
   for (S in subsets) {

@@ -120,6 +120,11 @@
   b <- as.numeric(suppressWarnings(
     coef(glm(y[rows] ~ X - 1, family = binomial()))
   ))
+  # glm reports NA for aliased design columns (sparse exposure x
+  # covariate cells within a fold); zero is the same fit with the column
+  # dropped, whereas NA made every prediction NA and the level search
+  # return nothing
+  b[is.na(b)] <- 0
   q_fn <- function(a, i) {
     r <- design_row(a, i)
     .tmldta_expit(sum(r * b))
@@ -152,6 +157,7 @@
         family = binomial()
       ))
     ))
+    b[is.na(b)] <- 0
     .tmldta_expit(as.numeric(X %*% b))
   }
   pH <- cat_fit(ifelse(A == aH, 1, 0))
@@ -879,8 +885,10 @@ morie_tmle_data_adaptive <- function(y, D, X, candidate_strata = NULL,
   }
   ys <- pmin(pmax((yv - lo) / rng, 0), 1)
   all_rows <- seq_len(n)
+  # one empty covariate vector per row (the extra list() wrapper made a
+  # single element, so every row past the first was out of bounds)
   Wl <- if (ncol(Wm) == 0L) {
-    list(rep(list(numeric(0)), n))
+    rep(list(numeric(0)), n)
   } else {
     lapply(seq_len(n), function(i) Wm[i, ])
   }

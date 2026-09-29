@@ -145,15 +145,19 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
   md <- morie_randIE_mediator_distribution(av, mv, cv, laplace = laplace)
   strata <- md$strata
   levels.v <- md$levels
-  pc <- vapply(strata, function(s)
-    sum(cv == s) / n, numeric(1))
+  pc <- unname(vapply(strata, function(s)
+    sum(cv == s) / n, numeric(1)))
   ybar <- list()
   cnt <- list()
   for (i in seq_len(n)) {
     key <- paste0(av[i], "\r", mv[i], "\r", cv[i])
     ybar[[key]] <- if (is.null(ybar[[key]])) 0 else ybar[[key]]
     ybar[[key]] <- ybar[[key]] + y[i]
-    cnt[[key]] <- if (is.null(cnt[[key]])) 0 else cnt[[key]] + 1
+    # count this observation too: starting the counter at 0 and only
+    # incrementing it afterwards left every cell one short, so a cell
+    # with a single observation divided by zero (Inf) and every other
+    # cell mean was inflated
+    cnt[[key]] <- if (is.null(cnt[[key]])) 1 else cnt[[key]] + 1
   }
   for (k in names(ybar)) ybar[[k]] <- ybar[[k]] / cnt[[k]]
   total <- 0
@@ -165,7 +169,9 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
     if (is.null(pm)) { missing[[length(missing) + 1L]] <- list("mediator", a.star, s)
     next }
     for (lv in levels.v) {
-      w <- pm[lv == md$levels]
+      # unname: the level name leaked into every accumulated total, so
+      # the returned estimate carried a stray name
+      w <- unname(pm[lv == md$levels])
       if (is.na(w) || w <= 0) next
       key <- paste0(a, "\r", lv, "\r", s)
       if (is.null(ybar[[key]])) {
@@ -189,9 +195,9 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
       pkey.star <- paste0(a.star, "\r", cv[i])
       pkey.obs <- paste0(a, "\r", cv[i])
       p.star <- if (is.null(md$p[[pkey.star]])) 0
-        else md$p[[pkey.star]][mv[i] == md$levels]
+        else unname(md$p[[pkey.star]][mv[i] == md$levels])
       p.obs <- if (is.null(md$p[[pkey.obs]])) 0
-        else md$p[[pkey.obs]][mv[i] == md$levels]
+        else unname(md$p[[pkey.obs]][mv[i] == md$levels])
       if (is.na(p.obs) || p.obs <= .randIE_EPS) next
       w <- if (is.na(p.star)) 0 else p.star / p.obs
       num <- num + w * y[i]
