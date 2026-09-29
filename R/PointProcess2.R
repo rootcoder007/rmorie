@@ -44,7 +44,6 @@
 #'   P. J. et al. (1995). Statistical Methods in Medical Research 4, 124-136.
 #'   van Lieshout, M. N. M. (2011). Statistica Neerlandica 65, 183-201.
 #' @examples
-#' ThomasK(c(0, 0.1), 10, 0.05)
 #' @export
 AreaInteractionSimulate <- function(beta, eta, r, window, n_steps, grid = 100, seed = 0) {
   x0 <- window[1]

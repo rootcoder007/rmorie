@@ -36,7 +36,6 @@
 #'   Donoho, D. L. and Huber, P. J. (1983). The notion of breakdown point. A
 #'   Festschrift for Erich L. Lehmann, 157-184.
 #' @examples
-#' AceIndex(c(30, 40, 65, 90, 70, 34))
 #' FleissKappa(rbind(c(3, 0), c(0, 3), c(2, 1), c(3, 0)))$kappa
 #' EmpiricalBreakdownPoint(median, 1:9)$breakdown_point
 #' @export

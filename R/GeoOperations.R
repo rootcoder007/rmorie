@@ -28,7 +28,6 @@
 #' A <- rbind(c(0, 0), c(4, 0), c(4, 3), c(0, 3))
 #' B <- rbind(c(2, 1), c(6, 2), c(5, 5))
 #' PolygonBoolean(A, B, "union")$area
-#' FilledContourBands(c(0, 1), c(0, 1), rbind(c(0, 1), c(1, 2)), c(0, 1, 2))$areas
 #' @export
 PolygonBoolean <- function(subject, clip, op = "intersection") {
   S <- as.matrix(subject) + 0
