@@ -358,10 +358,10 @@ momento_mask_patches <- function(patches, mask_idx, fill = 0) {
     stop("momento: every patch was masked, leaving no context to reconstruct from")
   }
   masked <- lapply(seq_len(n), function(i) {
-    if (i %in% idx) rep(fill, length(patches[[i]])) else as.numeric(patches[[i]])
+    if (i %in% (idx + 1L)) rep(fill, length(patches[[i]])) else as.numeric(patches[[i]])
   })
   list(masked = masked,
-       mask = seq_len(n) %in% idx,
+       mask = seq_len(n) %in% (idx + 1L),
        mask_idx = idx,
        mask_rate = length(idx) / n,
        n_patches = n)
@@ -387,7 +387,7 @@ momento_reconstruction_curve <- function(patches, reconstructor, rates, seed = 0
   out <- list()
   for (r in rates) {
     m <- max(1L, min(n - 1L, as.integer(round(r * n))))
-    idx <- sample.int(n, m)
+    idx <- sample.int(n, m) - 1L
     mk <- momento_mask_patches(P, idx)
     rec <- reconstructor(mk$masked, mk$mask)
     L <- momento_masked_loss(P, rec, mk$mask)
