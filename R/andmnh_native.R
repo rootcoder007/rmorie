@@ -418,8 +418,10 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
   fits <- list()
   for (a in 1:p) {
     fit <- ar1_fit(rows[, a])
-    rho <- fit["rho"]
-    s2 <- fit["sigma2"]
+    # unname: the named element otherwise labels alpha (and the
+    # bandwidth built from it) "rho"
+    rho <- unname(fit["rho"])
+    s2 <- unname(fit["sigma2"])
     fits[[a]] <- list(rho = unname(rho), sigma2 = unname(s2))
     if (w[a] == 0) next
     s4 <- s2^2
