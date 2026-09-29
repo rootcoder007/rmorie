@@ -836,14 +836,15 @@ test_that("fzhok computes an order-4 kernel density estimate", {
   expect_equal(res$n, 2000L)
 })
 
-test_that("fzhok uses default t/h and rejects non-4 orders", {
+test_that("fzhok uses default t/h and rejects odd orders", {
   skip_heavy()
   set.seed(91)
   x <- stats::rnorm(100)
   res <- fzhok(x)
   expect_true(is.finite(res$h))
   expect_true(is.finite(res$t))
-  expect_error(fzhok(x, order = 2L))
+  expect_error(fzhok(x, order = 3L))
+  expect_equal(fzhok(x, t = 0, h = 0.5, order = 2L)$estimate, mean(stats::dnorm(-x / 0.5)) / 0.5)
 })
 
 test_that("fzhok handles too-few obs", {
