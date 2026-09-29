@@ -184,7 +184,7 @@ poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
       eps <- if (m == 1L) {
         integer(0)
       } else {
-        bits <- intToBits(idx)[seq_len(m - 1L)]
+        bits <- rev(intToBits(idx)[seq_len(m - 1L)]) # most significant first, as bin().zfill()
         as.integer(bits)
       }
       k <- paste0("(", paste(eps, collapse = ","), ")")
@@ -262,7 +262,7 @@ poltrx_eps_from_key <- function(key) {
   if (key == "()") {
     return(integer(0))
   }
-  as.integer(strsplit(sub("^\\(|\\)$", "", key), ",")[[1]])
+  as.integer(strsplit(gsub("^\\(|\\)$", "", key), ",")[[1]])
 }
 
 #' Set probability in a finite Polya tree
@@ -328,7 +328,7 @@ poltrx_tree_density <- function(tree, level = NULL, lo = 0.0, hi = 1.0) {
   dens <- numeric(n)
   edges <- vector("list", n)
   for (idx in seq_len(n) - 1L) {
-    bits <- intToBits(idx)[seq_len(M)]
+    bits <- rev(intToBits(idx)[seq_len(M)]) # most significant first, as bin().zfill()
     eps <- as.integer(bits)
     pk <- paste0("(", paste(eps, collapse = ","), ")")
     p <- poltrx_set_probability(eps, tree)$probability
