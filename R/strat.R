@@ -2,8 +2,10 @@
 #' Stratified mean estimator (Cochran 1977, Sampling Techniques, Ch. 5)
 #'
 #' Within-stratum means averaged with population (or proportional)
-#' weights W_h, with stratified-sampling variance
-#'    var(y_bar_st) = sum_h W_h^2 s_h^2 / n_h.
+#' weights W_h, with the stratified simple random sampling variance
+#'    var(y_bar_st) = sum_h W_h^2 (1 - n_h / N_h) s_h^2 / n_h
+#' (finite population correction taken as 1 without population sizes), as
+#' \code{survey::svymean} with strata and fpc.
 #' Python parity: \code{morie.fn.strat.stratified_mean}.
 #'
 #' @param data data.frame containing outcome and stratum columns.
@@ -13,6 +15,7 @@
 #'   If NULL, proportional weights W_h = n_h/sum(n_h) are used.
 #' @return list: estimate, se, ci_lower, ci_upper, weights, strata_means,
 #'   n_strata, method.
+#' @references Cochran, W. G. (1977). Sampling Techniques, 3rd edn. Wiley.
 #' @examples
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(100), stratum = rep(c("a", "b"), each = 50))
@@ -28,15 +31,14 @@ strat <- function(data, y = "y", strata = "stratum", pop_sizes = NULL) {
   s2_h <- vapply(strata_names, function(s) stats::var(yv[sv == s]), numeric(1))
   if (is.null(pop_sizes)) {
     W_h <- n_h / sum(n_h)
+    fpc <- rep(1, length(n_h))
   } else {
-    N <- sum(pop_sizes)
-    W_h <- vapply(
-      strata_names, function(s) pop_sizes[[as.character(s)]] / N,
-      numeric(1)
-    )
+    N_h <- vapply(strata_names, function(s) as.numeric(pop_sizes[[as.character(s)]]), numeric(1))
+    W_h <- N_h / sum(N_h)
+    fpc <- 1 - n_h / N_h
   }
   est <- sum(W_h * yb_h)
-  var_st <- sum(W_h^2 * s2_h / n_h)
+  var_st <- sum(W_h^2 * fpc * s2_h / n_h)
   se <- sqrt(var_st)
   z <- stats::qnorm(0.975)
   names(W_h) <- as.character(strata_names)
@@ -49,12 +51,6 @@ strat <- function(data, y = "y", strata = "stratum", pop_sizes = NULL) {
     method = "Stratified mean (Cochran 1977)"
   )
 }
-
-# CANONICAL TEST
-# df <- data.frame(y = c(1,2,3,10,11,12), stratum = c("a","a","a","b","b","b"))
-# r <- strat(df, "y", "stratum")
-# # equal n per stratum, equal weights -> estimate = (mean_a + mean_b)/2 = (2+11)/2 = 6.5
-# stopifnot(abs(r$estimate - 6.5) < 1e-9)
 
 #' @rdname strat
 #' @keywords internal

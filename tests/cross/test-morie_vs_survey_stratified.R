@@ -1,0 +1,18 @@
+test_that("strat reproduces survey::svymean with strata (with and without fpc)", {
+  skip_if_not_installed("survey")
+  u <- .morie_random_uniform(90, seed = 12)
+  st <- rep(c("north", "south", "east"), times = c(25, 35, 30))
+  y <- stats::qnorm(u) * c(north = 2, south = 1, east = 3)[st] + c(north = 10, south = 4, east = 7)[st]
+  Nh <- c(north = 400, south = 150, east = 900)
+  df <- data.frame(y = y, stratum = st, fpc = unname(Nh[st]))
+  des <- survey::svydesign(ids = ~1, strata = ~stratum, fpc = ~fpc, data = df)
+  m <- survey::svymean(~y, des)
+  r <- strat(df, "y", "stratum", pop_sizes = Nh)
+  expect_equal(r$estimate, unname(coef(m)), tolerance = 1e-12)
+  expect_equal(r$se, as.numeric(survey::SE(m)), tolerance = 1e-12)
+  des0 <- suppressWarnings(survey::svydesign(ids = ~1, strata = ~stratum, data = df))
+  m0 <- survey::svymean(~y, des0)
+  r0 <- strat(df, "y", "stratum")
+  expect_equal(r0$estimate, unname(coef(m0)), tolerance = 1e-12)
+  expect_equal(r0$se, as.numeric(survey::SE(m0)), tolerance = 1e-12)
+})
