@@ -175,7 +175,9 @@ morie_rapaf_rate_ratios_from_logit <- function(case_counts,
   if (is.null(X)) X <- matrix(numeric(0), nrow = 0, ncol = ncol(D))
   if (ncol(X) == 0L) X <- matrix(0.0, nrow = nrow(X), ncol = 1L)
   beta <- .rapaf_logit_irls(X, y, ridge = ridge, obs_weights = w)
-  lin <- as.numeric(D %*% beta)
+  # the IRLS prepends an intercept, so beta has one more entry than D has
+  # columns; D %*% beta was non-conformable for every design
+  lin <- as.numeric(cbind(1, D) %*% beta)
   list(rate_ratios = exp(lin - lin[1L]), coef = beta,
        note = "odds ratios; equal to rate ratios only under the rare-disease approximation")
 }
