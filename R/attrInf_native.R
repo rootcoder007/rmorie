@@ -382,7 +382,6 @@ confusion_error <- function(C, labels = NULL) {
   if (length(labels) != nr)
     stop("attrInf: one label per confusion-matrix row")
 
-  label_keys <- vapply(labels, .attrInf_py_str, character(1))
   norm <- matrix(0, nrow = nr, ncol = nr)
   for (i in seq_len(nr)) {
     tot <- sum(rows[[i]])
@@ -391,10 +390,14 @@ confusion_error <- function(C, labels = NULL) {
   }
 
   err <- function(y, yp) {
-    yk <- .attrInf_py_str(y)
-    ypk <- .attrInf_py_str(yp)
-    iy <- match(yk, label_keys)
-    iyp <- match(ypk, label_keys)
+    # match by value, as Python's dict lookup does (0 == 0.0): string
+    # keys made the default integer labels miss every double label
+    find <- function(v) {
+      for (i in seq_along(labels)) if (.attrInf_eq(labels[[i]], v)) return(i)
+      NA_integer_
+    }
+    iy <- find(y)
+    iyp <- find(yp)
     if (is.na(iy) || is.na(iyp))
       stop("attrInf: unknown label in the error model")
     norm[iy, iyp]
