@@ -90,6 +90,17 @@ Btnpqr <- function(X, y, tau = 0.5, B = 200, alpha = 0.05, seed = 1) {
     b <- nb
     if (d < tol) break
   }
+  # IRLS with the eps floor stalls near, not on, the LP optimum (a loss gap
+  # of order 1e-5); an optimal quantile-regression fit interpolates p
+  # observations (Koenker 2005, sec. 2.2), so snap to the basis through the
+  # p smallest residuals whenever that does not increase the check loss.
+  r <- yy - as.numeric(Xm %*% b)
+  bas <- order(abs(r))[seq_len(p)]
+  vb <- tryCatch(solve(Xm[bas, , drop = FALSE], yy[bas]), error = function(e) NULL)
+  if (!is.null(vb) && all(is.finite(vb)) &&
+      .btnpqr_loss(Xm, yy, vb, tau) <= .btnpqr_loss(Xm, yy, b, tau)) {
+    b <- as.numeric(vb)
+  }
   b
 }
 
