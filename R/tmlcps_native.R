@@ -144,7 +144,7 @@ pseudo_outcome <- function(y, A, X, ridge = 1e-8) {
     Zy <- cbind(1, av, Xm,
                 do.call(cbind, lapply(seq_len(p), function(q) av * Xm[, q])))
   } else {
-    Zy <- matrix(1, nrow = n, ncol = 1)
+    Zy <- cbind(1, av)
   }
   by <- as.numeric(solve(crossprod(Zy) + ridge * diag(ncol(Zy)),
                           crossprod(Zy, yv)))

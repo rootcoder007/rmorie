@@ -36,9 +36,9 @@ Taxass <- function(kmer_taxa, parent) {
   hits <- as.integer(kmer_taxa)
   pn <- as.integer(unlist(parent))
   names(pn) <- names(unlist(parent))
+  in_map <- function(t) as.character(t) %in% names(pn)
   par_of <- function(t) {
-    v <- pn[[as.character(t)]]
-    if (is.null(v)) t else v
+    if (in_map(t)) pn[[as.character(t)]] else t
   }
   path_to_root <- function(t) {
     path <- t
@@ -50,15 +50,14 @@ Taxass <- function(kmer_taxa, parent) {
   }
   for (k in seq_along(pn)) {
     v <- pn[[k]]
-    if (v != as.integer(names(pn)[k]) &&
-        is.null(pn[[as.character(v)]])) {
+    if (v != as.integer(names(pn)[k]) && !in_map(v)) {
       stop(sprintf("parent map is missing taxon %d", v), call. = FALSE)
     }
   }
   weights <- new.env(hash = TRUE)
   for (t in hits) {
     if (t == 0L) next
-    if (is.null(pn[[as.character(t)]])) {
+    if (!in_map(t)) {
       stop(sprintf("hit taxon %d not in parent map", t), call. = FALSE)
     }
     key <- as.character(t)

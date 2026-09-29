@@ -89,11 +89,12 @@ smcopt <- function(objective, initial, n_particles = 200, n_steps = 30,
     phi * v
   }
 
-  fit <- morie_smcsam$smcsam(log_gamma, initial,
-                             n_particles = n_particles,
-                             ladder = ladder, kernel = kernel,
-                             ess_threshold = ess_threshold,
-                             scheme = scheme, seed = seed)
+  # morie_smcsam is the sampler function itself, not a list
+  fit <- smcsam(log_gamma, initial,
+                n_particles = n_particles,
+                ladder = ladder, kernel = kernel,
+                ess_threshold = ess_threshold,
+                scheme = scheme, seed = seed)
   if (is.null(best_x))
     stop("smcopt: the objective was never evaluated")
   list(estimate = best_x,

@@ -108,6 +108,7 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
   for (it in seq_len(as.integer(max_iter))) {
     Kx <- as.numeric(K(xbar))
     y_input <- y + sigma * Kx
+    y_old <- y
     y <- as.numeric(prox_f_star(y_input, sigma))
 
     Kty <- as.numeric(Kt(y))
@@ -116,7 +117,11 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
 
     xbar <- x_new + theta * (x_new - x)
 
-    step <- sqrt(sum((x_new - x)^2))
+    # Stop on the primal AND dual steps: the primal iterate can repeat
+    # exactly for one step while y is still moving (b = (1, 1.6),
+    # lam = 0.5 in tv_denoise_1d stalled at iteration 6, 0.011 from the
+    # optimum, and reported convergence).
+    step <- sqrt(sum((x_new - x)^2) + sum((y - y_old)^2))
     x <- x_new
 
     if (step <= tol) {

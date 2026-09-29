@@ -189,7 +189,10 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
     for (m in seq_len(as.integer(n_moves))) {
       prop <- cur + as.numeric(scale) * .ghc_norm(rng, length(cur))
       lq <- log_target(prop)
-      if (is.finite(lq) && log(runif(1, 0, 1)) < (lq - lp)) {
+      # the acceptance uniform comes from the seeded stream, drawn every
+      # move as in the Python arm; runif() made the chain ignore `seed`
+      u <- .ghc_unif(rng, 1L)
+      if (is.finite(lq) && log(max(u, 1e-300)) < (lq - lp)) {
         cur <- prop
         lp <- lq
         acc <- acc + 1L

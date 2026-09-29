@@ -1,0 +1,293 @@
+# Coverage for spbayr .. spmenv exports. Every expectation is recomputed in
+# the test body.
+
+test_that("spbayr builds the Leroux, ICAR and space-time structures", {
+  A <- rbind(c(0, 1, 0, 0), c(1, 0, 1, 1), c(0, 1, 0, 1), c(0, 1, 1, 0))
+  y <- c(3, 5, 2, 7)
+  e <- c(2.5, 4, 3, 5)
+  R <- diag(rowSums(A)) - A
+  r <- spbayr(y, e, A, rho = 0.3)
+  expect_equal(r$smr, y / e, tolerance = 1e-12)
+  expect_equal(r$precision, 0.3 * R + 0.7 * diag(4), tolerance = 1e-12)
+  expect_equal(r$rank_deficiency_spatial, 0L)
+  ic <- spbayr(y, e, A, spatial_prior = "icar")
+  expect_equal(ic$precision, R)
+  expect_equal(ic$rank_deficiency_spatial, 1L)
+  ex <- spbayr(y, e, A, spatial_prior = "exchangeable")
+  expect_equal(ex$precision, diag(4))
+  st <- spbayr(y, e, A, spatial_prior = "icar", n_time = 4, temporal_prior = "rw2", interaction = "IV")
+  D2 <- rbind(c(1, -2, 1, 0), c(0, 1, -2, 1))
+  Rt <- crossprod(D2)
+  expect_equal(st$temporal_structure, Rt, tolerance = 1e-12)
+  expect_equal(st$rank_deficiency_temporal, 2L)
+  M <- kronecker(R, Rt)
+  expect_equal(st$interaction_structure, M, tolerance = 1e-12)
+  # rank(R x Rt) = rank(R) * rank(Rt) = 3 * 2
+  expect_equal(st$interaction_rank, 6L)
+  expect_equal(st$n_constraints, 16L - 6L)
+  expect_equal(max(abs(st$constraint_matrix %*% M)), 0, tolerance = 1e-10)
+  expect_equal(st$constraint_matrix %*% t(st$constraint_matrix), diag(10), tolerance = 1e-10)
+  t1 <- spbayr(y, e, A, n_time = 3, temporal_prior = "rw1", interaction = "I")
+  expect_equal(t1$n_constraints, 0L)
+  expect_error(spbayr(y, e, A, spatial_prior = "bym"), "must be")
+  expect_error(spbayr(y, e, A, temporal_prior = "rw1"), "n_time")
+})
+
+test_that("spbym reaches the stationary point of the BYM log posterior", {
+  A <- rbind(c(0, 1, 1, 0, 0), c(1, 0, 1, 0, 0), c(1, 1, 0, 1, 0), c(0, 0, 1, 0, 1), c(0, 0, 0, 1, 0))
+  y <- c(4, 9, 2, 6, 11)
+  e <- c(5, 6, 4, 5, 8)
+  r <- spbym(y, e, A, kappa = 0.8, lam = 0.5)
+  R <- diag(rowSums(A)) - A
+  w <- e * exp(r$u + r$v)
+  expect_true(r$converged)
+  expect_equal(as.numeric(y - w - R %*% r$u / 0.8), rep(0, 5), tolerance = 1e-9)
+  expect_equal(y - w - r$v / 0.5, rep(0, 5), tolerance = 1e-9)
+  expect_equal(r$fitted, w, tolerance = 1e-12)
+  expect_equal(r$fitted_total, sum(y), tolerance = 1e-9)
+  expect_equal(r$smr, y / e, tolerance = 1e-12)
+  expect_equal(r$n_neighbours, rowSums(A))
+  ed <- which(upper.tri(A) & A > 0, arr.ind = TRUE)
+  expect_equal(r$median_log_prior, -5 * log(0.8) - sum(abs(r$u[ed[, 1]] - r$u[ed[, 2]])) / 0.8, tolerance = 1e-12)
+  expect_null(r$warning)
+  short <- spbym(y, e, A, kappa = 0.8, lam = 0.5, max_iter = 1)
+  expect_match(short$warning, "Newton did not converge")
+  expect_error(spbym(y, e, A, kappa = -1, lam = 1), "positive")
+})
+
+test_that("spconv convolves a Gaussian kernel into a Gaussian covariance", {
+  h <- c(0, 0.5, 1.3)
+  r <- spconv(function(u) exp(-u^2), h = h, sigma2_x = 2, half_width = 8)
+  # int exp(-u^2) exp(-(u+h)^2) du = sqrt(pi / 2) exp(-h^2 / 2); the
+  # trapezoid rule is spectrally accurate on this smooth integrand
+  expect_equal(r$covariance, 2 * sqrt(pi / 2) * exp(-h^2 / 2), tolerance = 1e-10)
+  expect_equal(r$correlation, exp(-h^2 / 2), tolerance = 1e-10)
+  expect_equal(r$variance, 2 * sqrt(pi / 2), tolerance = 1e-10)
+  b <- spconv(h = c(0, 0.25))
+  # the default box kernel gives a triangle; the grid resolves the corner to
+  # one step (10 / 40000)
+  expect_equal(b$covariance, c(1, 0.75), tolerance = 1e-3)
+  expect_error(spconv(1), "must be a function")
+  expect_error(spconv(sigma2_x = 0), "> 0")
+})
+
+test_that("spglmk is universal kriging on the pseudo-data with a linearised return", {
+  P <- cbind(c(0, 1, 0.3, 1.4), c(0, 0.2, 1, 0.9))
+  S <- exp(-as.matrix(stats::dist(P)))
+  s0 <- exp(-sqrt(colSums((t(P) - c(0.5, 0.5))^2)))
+  X <- cbind(1, c(0.2, -0.4, 0.9, 0.1))
+  nu <- c(0.3, -0.1, 0.8, 0.4)
+  x0 <- c(1, 0.3)
+  r <- spglmk(nu, S, s0, X, x0, mu0 = 1.4)
+  Si <- solve(S)
+  b <- solve(t(X) %*% Si %*% X, t(X) %*% Si %*% nu)
+  nu0 <- sum(x0 * b) + sum(s0 * (Si %*% (nu - X %*% b)))
+  m <- x0 - t(X) %*% Si %*% s0
+  v0 <- 1 - sum(s0 * (Si %*% s0)) + sum(m * solve(t(X) %*% Si %*% X, m))
+  expect_equal(r$beta, as.numeric(b), tolerance = 1e-10)
+  expect_equal(r$pseudo_scale_prediction, nu0, tolerance = 1e-10)
+  expect_equal(r$pseudo_scale_mspe, v0, tolerance = 1e-10)
+  expect_equal(r$prediction, 1.4 + (nu0 - log(1.4)) * 1.4, tolerance = 1e-10)
+  expect_equal(r$mspe, 1.4^2 * v0, tolerance = 1e-10)
+  expect_equal(r$inverse_link_prediction, exp(nu0), tolerance = 1e-10)
+  lg <- spglmk(nu, S, s0, X, x0, mu0 = 0.4, link_kind = "logit", beta = c(0.1, 0.2))
+  nu0b <- 0.1 + 0.06 + sum(s0 * (Si %*% (nu - X %*% c(0.1, 0.2))))
+  expect_equal(lg$prediction, 0.4 + (nu0b - stats::qlogis(0.4)) * 0.24, tolerance = 1e-10)
+  expect_error(spglmk(nu[-1], S, s0, X, x0, 1), "agree on n")
+  expect_error(spglmk(nu, S, s0, X, 1, 1), "one entry per column")
+})
+
+test_that("spglmm gives conditional and lognormal marginal moments", {
+  X <- cbind(1, c(0.5, -0.2, 1.1))
+  beta <- c(0.3, 0.7)
+  S <- c(0.2, -0.4, 0.1)
+  rho <- rbind(c(1, 0.5, 0.2), c(0.5, 1, 0.4), c(0.2, 0.4, 1))
+  r <- spglmm(X, beta, S, sigma2 = 1.5, correlation = rho)
+  eta <- as.numeric(X %*% beta)
+  mu <- exp(eta + S)
+  s2 <- mean((S - mean(S))^2)
+  m <- exp(eta)
+  expect_equal(r$conditional_mean, mu, tolerance = 1e-12)
+  expect_equal(r$conditional_variance, 1.5 * mu, tolerance = 1e-12)
+  expect_equal(r$naive_marginal_mean, m, tolerance = 1e-12)
+  expect_equal(r$sigma2_S, s2, tolerance = 1e-12)
+  expect_equal(r$marginal_mean, m * exp(s2 / 2), tolerance = 1e-12)
+  expect_equal(r$marginal_variance, 1.5 * m * exp(s2 / 2) + m^2 * exp(s2) * (exp(s2) - 1), tolerance = 1e-12)
+  expect_equal(r$marginal_covariance, outer(m, m) * exp(s2) * (exp(s2 * rho) - 1), tolerance = 1e-12)
+  b <- spglmm(X, beta, S, family = "binomial")
+  mb <- stats::plogis(eta + S)
+  expect_equal(b$conditional_variance, mb * (1 - mb), tolerance = 1e-12)
+  expect_null(b$marginal_mean)
+  expect_error(spglmm(X, beta, S, family = "gamma"), "unknown family")
+})
+
+test_that("spgls is generalised least squares with OLS sandwich errors", {
+  x <- cbind(1, c(0.3, 1.2, -0.5, 2.0, 0.8))
+  y <- c(1.1, 2.5, 0.2, 3.9, 1.7)
+  S <- 0.6^abs(outer(1:5, 1:5, "-"))
+  r <- spgls(x, y, S)
+  Si <- solve(S)
+  V <- solve(t(x) %*% Si %*% x)
+  b <- V %*% t(x) %*% Si %*% y
+  expect_equal(r$beta, as.numeric(b), tolerance = 1e-10)
+  expect_equal(r$se, sqrt(diag(V)), tolerance = 1e-10)
+  f <- stats::lm(y ~ x[, 2])
+  expect_equal(r$beta_ols, unname(stats::coef(f)), tolerance = 1e-10)
+  expect_equal(r$se_ols_naive, unname(sqrt(diag(stats::vcov(f)))), tolerance = 1e-10)
+  B <- solve(crossprod(x))
+  expect_equal(r$se_ols_correct, sqrt(diag(B %*% t(x) %*% S %*% x %*% B)), tolerance = 1e-10)
+  expect_equal(spgls(x, y)$beta, r$beta_ols, tolerance = 1e-10)
+  expect_error(spgls(x, y, diag(4)), "must be 5 by 5")
+  expect_error(spgls(x, y[-1]), "same number of rows")
+})
+
+test_that("spgwr fits a weighted regression at every location", {
+  P <- cbind(c(0, 1, 2, 0.5, 1.5, 2.5), c(0, 0.5, 0, 1.2, 1, 1.4))
+  x <- cbind(1, c(0.2, 1.1, -0.3, 0.9, 1.6, 0.4))
+  y <- c(1.0, 2.2, 0.1, 1.9, 3.3, 1.2)
+  for (kern in c("gaussian", "bisquare")) {
+    r <- spgwr(x, y, P, bandwidth = 1.8, kernel = kern)
+    D <- as.matrix(stats::dist(P))
+    for (i in 1:6) {
+      w <- if (kern == "gaussian") exp(-0.5 * (D[i, ] / 1.8)^2) else pmax(1 - (D[i, ] / 1.8)^2, 0)^2 * (D[i, ] <= 1.8)
+      f <- stats::lm.wfit(x, y, w)
+      expect_equal(r$estimate[i, ], unname(f$coefficients), tolerance = 1e-10)
+      s2 <- sum(w * f$residuals^2) / max(sum(w) - 2, 1)
+      expect_equal(r$se[i, ], sqrt(diag(s2 * solve(t(x) %*% (w * x)))), tolerance = 1e-10)
+    }
+  }
+  D <- as.matrix(stats::dist(P))
+  expect_equal(spgwr(x, y, P)$bandwidth, stats::median(D[D > 0]))
+})
+
+test_that("spgwrb picks the adaptive bandwidth minimising the CV score", {
+  P <- cbind(c(0, 1, 2, 0.5, 1.5, 2.5, 0.2, 1.8), c(0, 0.5, 0, 1.2, 1, 1.4, 2.0, 2.2))
+  x <- cbind(1, c(0.2, 1.1, -0.3, 0.9, 1.6, 0.4, 1.0, -0.8))
+  y <- c(1.0, 2.2, 0.1, 1.9, 3.3, 1.2, 2.4, -0.5)
+  D <- as.matrix(stats::dist(P))
+  wts <- function(i, k) {
+    h <- sort(D[i, ])[k] * 1.0000001
+    ifelse(D[i, ] / h < 1, (1 - (D[i, ] / h)^2)^2, 0)
+  }
+  cv <- function(k) {
+    sum(vapply(1:8, function(i) {
+      w <- wts(i, k)
+      w[i] <- 0
+      y[i] - sum(x[i, ] * stats::lm.wfit(x, y, w)$coefficients)
+    }, 0)^2)
+  }
+  grid <- 5:8
+  sc <- vapply(grid, cv, 0)
+  r <- spgwrb(x, y, P, kernel = "bisquare", adaptive = TRUE, bounds = c(5, 8))
+  expect_equal(r$optimal_bandwidth, grid[which.min(sc)])
+  expect_equal(r$score, min(sc), tolerance = 1e-10)
+  expect_equal(r$cv, min(sc), tolerance = 1e-10)
+  k <- r$optimal_bandwidth
+  Sm <- t(vapply(1:8, function(i) {
+    w <- wts(i, k)
+    as.numeric(x[i, ] %*% solve(t(x) %*% (w * x), t(w * x)))
+  }, numeric(8)))
+  res <- y - Sm %*% y
+  trS <- sum(diag(Sm))
+  expect_equal(r$tr_S, trS, tolerance = 1e-10)
+  expect_equal(r$tr_STS, sum(Sm^2), tolerance = 1e-10)
+  expect_equal(r$rss, sum(res^2), tolerance = 1e-10)
+  s2 <- sum(res^2) / 8
+  expect_equal(r$aicc, 8 * log(s2) + 8 * log(2 * pi) + 8 * (8 + trS) / (8 - 2 - trS), tolerance = 1e-10)
+  expect_equal(r$aic, 8 * log(s2) + 8 * log(2 * pi) + 8 + trS, tolerance = 1e-10)
+  expect_equal(r$sigma2_gwr, sum(res^2) / (8 - 2 * trS + sum(Sm^2)), tolerance = 1e-10)
+  g <- spgwrb(x, y, P, criterion = "aicc", bounds = c(1, 4), tol = 1e-6)
+  expect_gte(g$optimal_bandwidth, 1)
+  expect_lte(g$optimal_bandwidth, 4)
+  expect_equal(g$score, g$aicc, tolerance = 1e-10)
+})
+
+test_that("spgwrk evaluates GWR kernels", {
+  d <- c(0, 0.5, 1.2, 2.5)
+  g <- spgwrk(d, 1.5)
+  expect_equal(g$weights, exp(-0.5 * (d / 1.5)^2), tolerance = 1e-12)
+  expect_equal(g$n_nonzero, 4L)
+  expect_false(g$truncated)
+  gn <- spgwrk(d, 1.5, normalized = TRUE)
+  expect_equal(gn$weights, stats::dnorm(d, sd = 1.5), tolerance = 1e-12)
+  b <- spgwrk(d, 1.5, "bisquare")
+  expect_equal(b$weights, ifelse(d < 1.5, (1 - (d / 1.5)^2)^2, 0), tolerance = 1e-12)
+  expect_equal(b$n_nonzero, 3L)
+  tc <- spgwrk(d, 1.5, "tricube")
+  expect_equal(tc$weights, ifelse(d < 1.5, (1 - (d / 1.5)^3)^3, 0), tolerance = 1e-12)
+  a <- spgwrk(d, 3, "boxcar", adaptive = TRUE)
+  expect_equal(a$bandwidth, 1.2 * 1.0000001, tolerance = 1e-12)
+  expect_equal(a$weights, c(1, 1, 1, 0))
+  expect_error(spgwrk(d, 1, "bisquare", normalized = TRUE), "Gaussian kernel only")
+  expect_error(spgwrk(d, 1, "cosine"), "unknown kernel")
+  expect_error(spgwrk(d, 0), "positive finite")
+})
+
+test_that("spicar gives the intrinsic CAR precision", {
+  W <- rbind(c(0, 1, 1, 0, 0), c(1, 0, 0, 0, 0), c(1, 0, 0, 0, 0), c(0, 0, 0, 0, 1), c(0, 0, 0, 1, 0))
+  r <- spicar(W, tau2 = 2)
+  expect_equal(r$Q, (diag(rowSums(W)) - W) / 2, tolerance = 1e-12)
+  expect_equal(r$n_components, 2L)
+  expect_true(r$is_improper)
+  expect_equal(r$conditional_variances, 2 / rowSums(W), tolerance = 1e-12)
+  iso <- spicar(matrix(0, 2, 2))
+  expect_equal(iso$conditional_variances, c(Inf, Inf))
+  expect_error(spicar(W, 0), "> 0")
+  expect_error(spicar(W[, -1]), "square")
+})
+
+test_that("spkcrs combines cross-K functions with Ripley edge weights", {
+  skip_if_not_installed("spatstat.geom")
+  skip_if_not_installed("spatstat.explore")
+  p1 <- cbind(c(0.1, 0.4, 0.8, 0.55, 0.3), c(0.2, 0.7, 0.5, 0.1, 0.9))
+  p2 <- cbind(c(0.25, 0.6, 0.9, 0.05), c(0.35, 0.8, 0.15, 0.6))
+  reg <- c(0, 0, 1, 1)
+  r <- c(0.1, 0.2, 0.3)
+  k <- spkcrs(p1, p2, r = r, region = reg)
+  win <- spatstat.geom::owin(c(0, 1), c(0, 1))
+  crossk <- function(a, b) {
+    d <- sqrt(outer(a[, 1], b[, 1], "-")^2 + outer(a[, 2], b[, 2], "-")^2)
+    X <- spatstat.geom::ppp(a[, 1], a[, 2], window = win)
+    e <- spatstat.explore::edge.Ripley(X, d)
+    vapply(r, function(h) sum(e[d <= h]) / (nrow(a) * nrow(b)), 0)
+  }
+  k12 <- crossk(p1, p2)
+  k21 <- crossk(p2, p1)
+  expect_equal(k$K_12, k12, tolerance = 1e-10)
+  expect_equal(k$K_21, k21, tolerance = 1e-10)
+  expect_equal(k$estimate, (4 * k12 + 5 * k21) / 9, tolerance = 1e-10)
+  expect_equal(k$L_star, sqrt(pmax(k$estimate, 0) / pi), tolerance = 1e-12)
+  nn <- spkcrs(p1, p2, r = r, region = reg, correction = "none", hypothesis = "random_labelling", lambda1 = 5)
+  d12 <- sqrt(outer(p1[, 1], p2[, 1], "-")^2 + outer(p1[, 2], p2[, 2], "-")^2)
+  expect_equal(nn$K_12, vapply(r, function(h) sum(d12 <= h) / 20, 0), tolerance = 1e-12)
+  kb <- function(p, h) {
+    d <- as.matrix(stats::dist(p))
+    diag(d) <- Inf
+    b <- pmin(p[, 1], 1 - p[, 1], p[, 2], 1 - p[, 2])
+    keep <- b > h
+    if (!any(keep)) return(NA_real_)
+    sum(d[keep, , drop = FALSE] <= h) / sum(keep) / nrow(p)
+  }
+  expect_equal(nn$D, vapply(r, function(h) kb(p1, h) - kb(p2, h), 0), tolerance = 1e-12)
+  expect_equal(nn$lambda_1_supplied, 5)
+  expect_error(spkcrs(p1, p2, r = r, hypothesis = "other"), "hypothesis")
+  expect_error(spkcrs(p1[0, , drop = FALSE], p2), "at least one event")
+})
+
+test_that("spmenv matches spdep's Moran moments", {
+  skip_if_not_installed("spdep")
+  W <- rbind(c(0, 1, 1, 0, 0, 0), c(1, 0, 1, 1, 0, 0), c(1, 1, 0, 0, 1, 0),
+             c(0, 1, 0, 0, 1, 1), c(0, 0, 1, 1, 0, 1), c(0, 0, 0, 1, 1, 0))
+  z <- c(2.1, 3.4, 1.8, 4.0, 3.1, 5.2)
+  m <- spmenv(z, W)
+  lw <- spdep::mat2listw(W, style = "B")
+  tr <- spdep::moran.test(z, lw, randomisation = TRUE)
+  tn <- spdep::moran.test(z, lw, randomisation = FALSE)
+  expect_equal(m$I, unname(tr$estimate[1]), tolerance = 1e-12)
+  expect_equal(m$expectation, unname(tr$estimate[2]), tolerance = 1e-12)
+  expect_equal(m$variance_randomization, unname(tr$estimate[3]), tolerance = 1e-12)
+  expect_equal(m$variance_normal, unname(tn$estimate[3]), tolerance = 1e-12)
+  expect_equal(m$geary_c, unname(spdep::geary.test(z, lw)$estimate[1]), tolerance = 1e-12)
+  expect_equal(unname(unlist(m$moments)), c(m$I, m$expectation, m$variance_normal, m$variance_randomization))
+  expect_error(spmenv(z[1:3], W[1:3, 1:3]), "at least 4")
+})

@@ -78,7 +78,10 @@
   msa <- ssa / dfa
   mse <- sse / dfe
 
-  c_factor <- N - sum(ns * ns) / N
+  # n0 = (N - sum n_i^2 / N) / (a - 1), Searle et al. (1992) eq. (21); the
+  # (a - 1) was missing, so balanced closed-form sigma2_a came out (a - 1)
+  # times too small (Python ranova has it right)
+  c_factor <- (N - sum(ns * ns) / N) / (a - 1)
   sigma2_a_raw <- (msa - mse) / c_factor
   sigma2_a <- max(sigma2_a_raw, 0)
 

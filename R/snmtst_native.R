@@ -109,11 +109,15 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
     slope <- pre[length(pre)] - pre[length(pre) - 1L]
     lin <- vapply(seq_len(Tp), function(t)
       base + slope * t, numeric(1))
+    # t is the 1-based post period, so max |e_t| = M t (t + 1) / 2; the
+    # Python arm's (t + 1)(t + 2) / 2 is the same with a 0-based t
     dev <- vapply(seq_len(Tp), function(t)
-      Mv * (t + 1L) * (t + 2L) / 2.0, numeric(1))
+      Mv * t * (t + 1L) / 2.0, numeric(1))
     c_coef <- vapply(seq_len(Tp), function(j) {
       ts <- seq.int(j - 1L, Tp - 1L)
-      sum(lv[ts + 1L] * (ts - (j - 1L) + 2L))
+      # ts is 0-based and j 1-based: the weight on r_j is ts - j + 2
+      # (1 at ts = j - 1); ts - (j - 1) + 2 doubled the one-step bound
+      sum(lv[ts + 1L] * (ts - j + 2L))
     }, numeric(1))
     point <- sum(lv * (post - lin))
     if (is.null(grid)) {
