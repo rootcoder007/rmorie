@@ -2,46 +2,47 @@
 % Please edit documentation in R/chrbnd.R
 \name{Chrbnd}
 \alias{Chrbnd}
-\title{Chernozhukov-Lee-Rosen intersection bounds}
+\title{Chernozhukov-Lee-Rosen intersection bounds with independent cells}
 \usage{
 Chrbnd(y, X = NULL, instrument = NULL, alpha = 0.05, gamma = NULL, beta = 0.1)
 }
 \arguments{
-\item{y}{Outcome.}
+\item{y}{Numeric outcome.}
 
-\item{X}{Ignored; kept for the stub signature.}
+\item{X}{Ignored (signature parity).}
 
-\item{instrument}{Cell label per observation, or NULL.}
+\item{instrument}{Cell label per observation; \code{NULL} is one cell.}
 
-\item{alpha}{One-sided level of the reported bound.}
+\item{alpha}{One-sided level of the upper confidence bound.}
 
-\item{gamma}{Precision level of the contact set, or NULL.}
+\item{gamma}{Contact-set level; default \eqn{1 - 0.1/\log n}.}
 
-\item{beta}{Level of the preliminary contact-set step: when \code{gamma} is
-not given it is \code{1 - beta / log(V + 1)} (Chernozhukov, Lee & Rosen).}
+\item{beta}{Unused (signature parity).}
 }
 \value{
-List with \code{estimate}, \code{bound}, \code{naive_min},
-\code{cells}, \code{means}, \code{ses}, \code{contact_set},
-\code{k_alpha}, \code{n_cells}, \code{n}, \code{method}.
+A list with \code{estimate} and \code{bound} (the one-sided upper
+confidence bound), \code{hmu_estimate} (half-median-unbiased),
+\code{naive_min}, \code{cells}, \code{means}, \code{ses},
+\code{contact_set} (zero-based), \code{k_alpha}, \code{k_gamma},
+\code{n_cells}, \code{n} and \code{method}.
 }
 \description{
-Formula: theta = inf_v m(v); precision-corrected critical values
-}
-\details{
-An upper bound valid for every cell v of the instrument is valid at
-their MINIMUM, but plugging in the sample minimum is biased downward
-because the noisiest cell wins.  The half-median-unbiased estimator
-keeps only the cells within precision of the minimum -- the estimated
-contact set -- and takes the minimum over that set of m_v - k se_v.
-With one cell it reduces to the ordinary one-sided interval, and with
-zero sampling noise to the plain minimum.
+The target is the minimum over cells of the conditional means. Each
+cell is precision-corrected before the minimum is taken,
+\eqn{\hat\theta(p) = \min_{v \in \hat V} (m_v + k_{\hat V}(p) s_v)}, where
+for independent cells \eqn{k_S(p) = \Phi^{-1}(p^{1/|S|})} is the
+p-quantile of the maximum of \eqn{|S|} independent standard normals and the
+contact set keeps the cells with
+\eqn{m_v \le \min_u (m_u + k_V(\gamma_n) s_u) + 2 k_V(\gamma_n) s_v},
+\eqn{\gamma_n = 1 - 0.1/\log n}. Identical to the Python arm
+\code{morie.fn.chrbnd.chernozhukov_rosen_bounds}. (This function used to
+subtract a multiple of the standard error, the wrong direction.)
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Chrbnd(V)
+Chrbnd(c(3, 3.5, 2.8, 1, 1.6, 1.2, 5, 4.1),
+  instrument = c(0, 0, 0, 1, 1, 1, 2, 2))$bound
 }
 \references{
-Chernozhukov, Lee & Rosen (2013), Intersection Bounds,
-Econometrica 81(2):667-737.
+Chernozhukov, V., Lee, S. and Rosen, A. M. (2013). Intersection
+bounds: estimation and inference. Econometrica 81, 667-737.
 }

@@ -4,10 +4,12 @@
 \alias{Gdpf}
 \title{Gaussian differential privacy: the trade-off function}
 \usage{
-Gdpf(mech, mu, alpha = NULL, epsilon = 1)
+Gdpf(mech = NULL, mu = NULL, alpha = NULL, epsilon = 1)
 }
 \arguments{
-\item{mech}{Placeholder for the mechanism description; unused.}
+\item{mech}{Optional \code{c(sensitivity, sigma)} of a Gaussian mechanism
+(l2 sensitivity, noise sd), which is (sensitivity / sigma)-GDP; used
+when \code{mu} is NULL.}
 
 \item{mu}{Non-negative GDP parameter.}
 
@@ -33,7 +35,8 @@ Formula: G_mu(alpha) = Phi(Phi^\{-1\}(1 - alpha) - mu);
 delta(eps) = Phi(-eps/mu + mu/2) - exp(eps) Phi(-eps/mu - mu/2).
 }
 \examples{
-Gdpf(mech = c(1, 2, 3, 4, 5, 6, 7, 8), mu = 5L)
+Gdpf(mu = 1.3, alpha = c(0.05, 0.5))$trade_off
+Gdpf(mech = c(1, 2))$mu
 }
 \references{
 Dong, Roth and Su (2022), Gaussian differential privacy,

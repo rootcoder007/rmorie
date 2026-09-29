@@ -4,22 +4,31 @@
 \alias{Dpbayes}
 \title{Differentially private release of a posterior sample}
 \usage{
-Dpbayes(y, posterior_sample = NULL, epsilon = 1, B = 1, sensitivity = NULL)
+Dpbayes(
+  y,
+  posterior_sample = NULL,
+  epsilon = 1,
+  B = 1,
+  sensitivity = NULL,
+  seed = 0
+)
 }
 \arguments{
-\item{y}{the data.}
+\item{y}{the data (only its length is used, for the Laplace comparison).}
 
-\item{posterior_sample}{posterior draws of the quantity to release.}
+\item{posterior_sample}{draws from the tempered posterior (required).}
 
 \item{epsilon}{the privacy budget.}
 
 \item{B}{the log-likelihood-ratio bound.}
 
 \item{sensitivity}{L1 sensitivity for the Laplace comparison.}
+
+\item{seed}{Philox seed choosing the released draw.}
 }
 \value{
-list: estimate, released, posterior_sd, tempered_sd, temperature,
-eps_free, laplace_scale, n, method.
+list: estimate, released, draw_index (zero-based), posterior_mean,
+posterior_sd, temperature, eps_free, laplace_scale, n, method.
 }
 \description{
 Wang, Fienberg and Smola (2015), Privacy for free: posterior sampling
@@ -34,6 +43,12 @@ and the tempering are quoted in their standard published form.  The
 privacy is not bought with added noise: it comes from the posterior's
 own randomness.  The Laplace mechanism (Dwork et al. 2006) scale is
 returned for comparison.
+}
+\details{
+The function releases ONE draw, chosen on the Philox stream, from the
+supplied sample of the tempered posterior (it used to release the
+posterior mean, which carries no guarantee). Identical to the Python arm
+\code{morie.fn.bayesm.dp_bayesian_mechanism}.
 }
 \examples{
 Dpbayes(c(1, 2, 3), c(1.9, 2.0, 2.1), 1, 1)$temperature

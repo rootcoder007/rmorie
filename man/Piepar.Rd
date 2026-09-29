@@ -16,7 +16,9 @@ distribution.}
 }
 \value{
 List with \code{estimate}, \code{observed}, \code{intervened},
-\code{se}, \code{n}.
+\code{se}, \code{n}. With an intercept the PIE equals
+\eqn{b_1 (\bar x^* - \bar x)} and \code{se} is
+\eqn{|\bar x^* - \bar x|} times the OLS standard error of \eqn{b_1}.
 }
 \description{
 A total effect compares everyone exposed with everyone unexposed, a

@@ -16,13 +16,14 @@ morie_fauzi_higher_order_kernel(x, t = NULL, h = NULL, order = 4L)
 
 \item{h}{Bandwidth; default = Silverman.}
 
-\item{order}{Kernel order (only 4 supported).}
+\item{order}{Even kernel order (2 is the Gaussian, 4 the Wand-Jones K_4).}
 }
 \value{
 Named list with estimate, h, t, order, mu_r, R_K, n, method.
 }
 \description{
-KDE with order-4 Wand-Jones (1995, eq 2.8) kernel
+KDE with the Gaussian-based kernel of even order 2r,
+phi(u) sum_(j<r) (-1)^j He_2j(u) / (2^j j!), e.g. the order-4 Wand-Jones (1995, eq 2.8) kernel
 \eqn{K_4(u) = (1/2)(3-u^2)\phi(u)}{K_4(u) = (1/2)(3-u^2)phi(u)}.  Bias reduces from O(h^2)
 to O(h^4).  Note: K_4 takes negative values so f_hat may be < 0.
 }

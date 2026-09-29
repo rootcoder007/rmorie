@@ -33,7 +33,8 @@ n^(-1/(k+4)) inside a block of width k.}
 \item{hg}{Numeric bandwidth for the regression of Y on the fitted
 indices; default n^(-1/(M+4)).}
 
-\item{ngrid}{Unused placeholder; G is returned at the sample indices.}
+\item{ngrid}{With a single index and ngrid >= 2, G is also evaluated on
+ngrid equally spaced points spanning the index (grid, ggrid); 0 skips it.}
 }
 \value{
 Named list with estimate, beta0, indices, ghat, resid, rss,
