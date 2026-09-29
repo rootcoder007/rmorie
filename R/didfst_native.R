@@ -248,10 +248,12 @@ morie_didfst_group_time_att <- function(Y, first_treated,
   G <- vector("list", n)
   for (i in seq_len(n)) {
     v <- first_treated[[i]]
-    if (is.null(v)) { G[[i]] <- NULL
+    # G[i] <- list(NULL) keeps the slot: G[[i]] <- NULL DELETES element
+    # i, shifting every later unit onto the wrong row of Y
+    if (is.null(v)) { G[i] <- list(NULL)
     next }
     f <- as.numeric(v)
-    if (is.na(f) || is.infinite(f)) { G[[i]] <- NULL
+    if (is.na(f) || is.infinite(f)) { G[i] <- list(NULL)
     next }
     g <- as.integer(f)
     if (!(g >= 2L && g <= T))
