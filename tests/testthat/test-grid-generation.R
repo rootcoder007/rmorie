@@ -1,0 +1,20 @@
+test_that("grids and sampling designs have their defining geometry", {
+  g <- RegularGrid(c(1, 2, 4.5, 3.9), 0.5)
+  expect_equal(nrow(g), 28)
+  expect_equal(g[1, ], c(1.25, 2.25))
+  tg <- TriangularGrid(c(0, 0, 4, 3), 1.2)
+  e <- apply(tg$triangles, 1, function(r) {
+    v <- tg$vertices[r + 1, ]
+    as.vector(dist(v))
+  })
+  expect_equal(range(e), c(1.2, 1.2), tolerance = 1e-12)
+  B <- cbind((0:3) / 3, 0.2 * (0:3) / 3)
+  Tp <- cbind((0:3) / 3, 1 + 0.5 * (0:3) / 3)
+  L <- cbind(0, (0:2) / 2)
+  R <- cbind(1, 0.2 + (0:2) / 2 * 1.3)
+  cg <- TransfiniteGrid(B, Tp, L, R)
+  expect_equal(cg[1, , ], B, tolerance = 1e-14)
+  expect_equal(cg[, 4, ], R, tolerance = 1e-14)
+  rot <- SpaceTimeSample(50, 6, 4, "rotating", rotation = 3, seed = 1)
+  expect_equal(length(intersect(rot[[1]], rot[[2]])), 4)
+})
