@@ -462,7 +462,7 @@ chronos_quantile_bins <- function(samples, n_bins = 4096L) {
     stop(sprintf("chronos: %d samples cannot define %d quantile bins",
                  length(v), B))
   }
-  centers <- v[pmin(length(v), as.integer((seq_len(B) - 0.5) * length(v) / B))]
+  centers <- v[pmin(length(v), floor((seq_len(B) - 0.5) * length(v) / B)) + 1L]
   centers <- sort(unique(centers))
   if (length(centers) < 2L) {
     stop("chronos: the samples are too concentrated to form bins")
@@ -555,7 +555,7 @@ chronos_uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
   B <- as.integer(n_bins)
   if (B < 2L) stop(sprintf("chronos: need at least 2 bins, got %d", B))
   if (as.numeric(hi) <= as.numeric(lo)) stop("chronos: hi must exceed lo")
-  centers <- as.numeric(lo) + (as.numeric(hi) - as.numeric(lo)) * seq_len(B) - 1L / (B - 1L)
+  centers <- as.numeric(lo) + (as.numeric(hi) - as.numeric(lo)) * (seq_len(B) - 1L) / (B - 1L)
   edges <- 0.5 * (centers[seq_len(B - 1L)] + centers[seq.int(2L, B)])
   list(centers = centers, edges = edges, n_bins = B, scheme = "uniform",
        range = c(centers[1L], centers[B]))
