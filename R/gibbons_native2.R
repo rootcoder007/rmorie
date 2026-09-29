@@ -1074,7 +1074,9 @@ Exactsize <- function(pmf, alpha = 0.05, upper = TRUE) {
   sizes <- if (upper) rev(cumsum(rev(p))) else cumsum(p)
   best <- NaN
   cut <- -1L
-  rng <- if (upper) rev(seq_len(k)) else seq_len(k)
+  # the exact size is the LARGEST attainable size not above alpha: scan from
+  # the widest rejection region inward (upper tail: small cut points first)
+  rng <- if (upper) seq_len(k) else rev(seq_len(k))
   for (i in rng) {
     if (sizes[i] <= alpha) { best <- sizes[i]
     cut <- as.integer(i - 1L)
