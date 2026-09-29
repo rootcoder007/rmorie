@@ -43,7 +43,7 @@
 #'   of the Moran I test statistic with applications. Journal of Econometrics
 #'   104, 219-257.
 #' @examples
-#' X <- cbind(1, c(2, -1, 0.5, 1.5, 0.3, -0.4))
+#' X <- cbind(1, c(2, -1, 0.1, 1.5, 0.6, -0.4))
 #' BinaryGlm(c(1, 0, 1, 1, 0, 0), X)$coefficients
 #' @export
 BinaryGlm <- function(y, X, link = "logit", tol = 1e-12, maxit = 100) {
@@ -54,6 +54,7 @@ BinaryGlm <- function(y, X, link = "logit", tol = 1e-12, maxit = 100) {
     eta <- as.vector(X %*% beta)
     mu <- pmin(pmax(.sd_cdf(eta, link), 1e-15), 1 - 1e-15)
     d <- .sd_pdf(eta, link)
+    if (any(d <= 0) || !all(is.finite(d))) stop("BinaryGlm: perfect separation, the likelihood has no maximum", call. = FALSE)
     w <- d^2 / (mu * (1 - mu))
     z <- eta + (y - mu) / d
     beta <- as.vector(solve(crossprod(X * w, X), crossprod(X * w, z)))
