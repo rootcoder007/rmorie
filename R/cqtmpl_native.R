@@ -149,22 +149,12 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
     if (length(cc) != n)
       stop(sprintf("cqtmpl: every cofactor must have %d entries", n))
   }
-  # Genotype probabilities: under F2 with a test genotype taking
-  # values 0 (AA) or 1 (Aa) the conditional distribution given the
-  # flanking marker indicators l and r is
-  #   p(0) = (1 - r_l)(1 - r_r)
-  #   p(1) = r_l + r_r - 2 r_l r_r
-  #   p(2) = r_l r_r
-  # normalising away p(2). The Python arm uses a likelihood
-  # f(0) and f(1) only, so the third value of the test genotype
-  # is folded into the 0-or-1 marginal.
-  G <- lapply(seq_len(n), function(i) {
-    p0 <- (1 - r_left) * (1 - r_right)
-    p1 <- r_left + r_right - 2 * r_left * r_right
-    p2 <- r_left * r_right
-    s <- p0 + p1
-    c(p0 / s, p1 / s)
-  })
+  # QTL genotype probabilities given each individual's flanking markers
+  # (backcross coding, no interference), exactly as the Python arm's
+  # rqtmpl.genotype_probabilities; the marker values must enter here,
+  # or every individual gets the same mixing weights.
+  G <- lapply(seq_len(n), function(i)
+    morie_genotype_probabilities(left[i], right[i], r_left, r_right))
   my <- mean(y)
   beta <- c(my, 0.1 * (max(y) - min(y) + 1e-12), rep(0, length(cof)))
   s2 <- mean((y - my) ^ 2)
