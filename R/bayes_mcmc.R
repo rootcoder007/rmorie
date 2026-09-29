@@ -399,8 +399,15 @@ morie_bayes_geweke <- function(chains) {
   z <- vapply(seq_len(ncol(post)), function(j) {
     xa <- post[a, j]
     xb <- post[b, j]
+    # Geweke (1992) scales each segment mean by the spectral density at
+    # frequency 0 (AR estimate, as coda::spectrum0.ar), not by var/n,
+    # which ignores autocorrelation and inflates z for any MCMC chain
+    s0 <- function(x) {
+      fit <- stats::ar(x, aic = TRUE)
+      fit$var.pred / (1 - sum(fit$ar))^2
+    }
     (mean(xa) - mean(xb)) /
-      sqrt(stats::var(xa) / length(xa) + stats::var(xb) / length(xb))
+      sqrt(s0(xa) / length(xa) + s0(xb) / length(xb))
   }, numeric(1))
   stats::setNames(z, colnames(post))
 }
