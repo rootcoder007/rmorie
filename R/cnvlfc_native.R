@@ -190,9 +190,11 @@
         est <- 0
         for (j in seq_len(k)) {
             b <- cand[ord[j]]
-            est <- est + w[j] * X[idx[b]]
+            # idx is 0-based (it is reported as the time index); +1 to
+            # read the same time point as the manifold row
+            est <- est + w[j] * X[idx[b] + 1L]
         }
-        obs  <- c(obs,  X[idx[a]])
+        obs  <- c(obs,  X[idx[a] + 1L])
         pred <- c(pred, est)
     }
     if (length(obs) < 3L) {
