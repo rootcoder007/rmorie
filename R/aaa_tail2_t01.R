@@ -342,7 +342,9 @@ RtSi <- function(incidence, serial_interval, window = 7L,
   b_post <- numeric(0)
   r_mean <- numeric(0)
   r_std <- numeric(0)
-  for (endi in seq(tau, Tn - 1L)) { # 0-based window end
+  # 0-based window ends tau..Tn-1; seq() would count DOWN when
+  # tau == Tn and index past the series
+  for (endi in seq_len(max(Tn - tau, 0L)) + tau - 1L) {
     starti <- endi - tau + 1L
     a <- a_prior + sum(inc[(starti + 1L):(endi + 1L)])
     b <- 1 / (1 / b_prior + sum(lam[(starti + 1L):(endi + 1L)]))
