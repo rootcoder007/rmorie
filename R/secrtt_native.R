@@ -409,7 +409,10 @@ rotate_kek <- function(wrapped_deks, old_kek, new_kek, new_nonces,
   for (i in seq_along(wrapped_deks)) {
     w <- wrapped_deks[[i]]
     dek <- unwrap_dek(w, old_kek, audit_log)$dek
-    out[[i]] <- wrap_dek(dek, new_kek, new_nonces[[i]], new_kek_id)
+    # carry the record's AAD across: re-wrapping without it made every
+    # rotated DEK fail authentication on the next unwrap
+    out[[i]] <- wrap_dek(dek, new_kek, new_nonces[[i]], new_kek_id,
+                         .secrtt_as_bytes(w$aad %||% raw(0)))
   }
   list(estimate = out, wrapped = out, n = length(out),
        records_reencrypted = 0, kek_id = new_kek_id,
@@ -492,9 +495,11 @@ wrap_dek <- function(dek, kek, nonce, kek_id = "kek-1",
   }
   bound <- c(.secrtt_as_bytes(aad), .secrtt_as_bytes(kek_id))
   r <- .secrtt_aead_encrypt(kek, nonce, d, bound)
+  # the AAD travels with the wrap, as in morie_secrtt_wrap_dek; without it
+  # unwrap_dek authenticated against an empty AAD and always failed
   list(wrapped = r$ciphertext, tag = r$tag,
        nonce = .secrtt_as_bytes(nonce), kek_id = kek_id,
-       wrapped_hex = r$ciphertext_hex,
+       aad = .secrtt_as_bytes(aad), wrapped_hex = r$ciphertext_hex,
        note = paste("the KEK id is authenticated, so a wrapped DEK ",
                     "cannot be replayed under a different KEK"))
 }
