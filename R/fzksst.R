@@ -36,7 +36,7 @@ Ksstat <- function(x, cdf) {
   dminus <- max(fv - (seq_len(n) - 1) / n)
   stat <- max(dplus, dminus)
   pval <- if (n <= 40L) {
-    1 - .morie_fauzi_ksone(stat, n)
+    1 - .morie_fauzi_kolm2x(stat, n)
   } else {
     lam <- (sqrt(n) + 0.12 + 0.11 / sqrt(n)) * stat
     k <- seq_len(100L)
@@ -44,6 +44,35 @@ Ksstat <- function(x, cdf) {
   }
   list(statistic = stat, dplus = dplus, dminus = dminus, p_value = pval, n = n,
        method = "Kolmogorov-Smirnov statistic against a specified F")
+}
+
+# Exact two-sided Kolmogorov distribution P(D_n < d) by the Marsaglia,
+# Tsang and Wang (2003, J. Stat. Softw. 8(18)) matrix power; the one-sided
+# Birnbaum-Tingey sum it replaces gave P(D_n^+ < d), not the two-sided law.
+.morie_fauzi_kolm2x <- function(d, n) {
+  if (d <= 0) return(0)
+  if (d >= 1) return(1)
+  k <- floor(n * d) + 1
+  m <- 2 * k - 1
+  h <- k - n * d
+  hm <- outer(seq_len(m), seq_len(m), function(i, j) as.numeric(i - j + 1 >= 0))
+  hm[, 1] <- hm[, 1] - h^seq_len(m)
+  hm[m, ] <- hm[m, ] - h^(m:1)
+  if (2 * h - 1 > 0) hm[m, 1] <- hm[m, 1] + (2 * h - 1)^m
+  for (i in seq_len(m)) {
+    for (j in seq_len(m)) {
+      if (i - j + 1 > 0) hm[i, j] <- hm[i, j] / factorial(i - j + 1)
+    }
+  }
+  q <- diag(m)
+  lsc <- 0
+  for (step in seq_len(n)) {
+    q <- q %*% hm
+    mx <- max(abs(q))
+    q <- q / mx
+    lsc <- lsc + log(mx)
+  }
+  min(1, max(0, exp(log(q[k, k]) + lsc + lfactorial(n) - n * log(n))))
 }
 
 # CANONICAL TEST
