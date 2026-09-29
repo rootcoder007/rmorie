@@ -54,7 +54,9 @@ Drdidsplit <- function(y, D, X = NULL, K = 5, y0 = NULL) {
       m <- 0
       for (j in seq_along(gam)) { e <- e + Z[i, j] * gam[j]
       m <- m + Z[i, j] * b0[j] }
-      p <- .s03sigmoid(e)
+      # clamp as .s03drdid does: a fold whose covariate separates D drives
+      # the logit to p = 1 and (1 - p) = 0 would turn the weights into NaN
+      p <- min(max(.s03sigmoid(e), 1e-12), 1 - 1e-12)
       pis[i] <- p
       mus[i] <- m
       s1 <- s1 + d[i]
