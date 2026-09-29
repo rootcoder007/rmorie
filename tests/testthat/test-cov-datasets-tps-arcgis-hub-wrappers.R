@@ -27,6 +27,8 @@ tps_wrapper_suffixes <- c(
 )
 
 test_that("every wrapper forwards its arguments to the hub dispatcher", {
+  # local_mocked_bindings() cannot rebind the covr-instrumented namespace
+  testthat::skip_on_covr()
   seen <- NULL
   local_mocked_bindings(.package = if (isNamespaceLoaded("rmorie")) "rmorie" else "morie", 
     morie_datasets_tps_arcgis_hub_by_id = function(hub_id, format = "json",
@@ -72,6 +74,8 @@ test_that("every wrapper forwards its arguments to the hub dispatcher", {
 })
 
 test_that("each hub_id is the catalog entry whose title slugifies to the name", {
+  # local_mocked_bindings() cannot rebind the covr-instrumented namespace
+  testthat::skip_on_covr()
   skip_if_not_installed("rmoriedata")
   cat <- suppressWarnings(morie_datasets_tps_arcgis_hub_layers(offline = TRUE))
   skip_if(nrow(cat) == 0L, "catalog fixture not bundled")

@@ -2,6 +2,8 @@
 # instead of failing; DBI remains the opt-in SQL path.
 
 test_that("a SQL cache request without DBI falls back to the file backend with a message", {
+  # local_mocked_bindings() cannot rebind the covr-instrumented namespace
+  testthat::skip_on_covr()
   df <- data.frame(a = 1:3, b = c("x", "y", "z"))
   withr::local_envvar(MORIE_CACHE_BACKEND = "")
   testthat::local_mocked_bindings(.package = if (isNamespaceLoaded("rmorie")) "rmorie" else "morie", .morie_dbi_available = function() FALSE)
