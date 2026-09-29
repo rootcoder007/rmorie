@@ -87,6 +87,8 @@ test_that("DESeq2 pipeline: Wald statistics, BH adjustment and shrinkage", {
   expect_equal(nb$estimate, nb$lfc_mle, tolerance = 1e-12)
   expect_equal(nb$estimate[5], mle$beta[2], tolerance = 1e-10)
   expect_identical(deseq2_de, deseq2)
+  expect_identical(deseq2_differential, deseq2)
+  expect_identical(differential_expression, deseq2)
   expect_error(deseq2(K, rep("a", 6)), "only one group")
   expect_error(deseq2(K, des, contrast = c(1, 0, 0)), "one entry per coefficient")
 })

@@ -51,6 +51,8 @@ test_that("greedy calibrated re-ranking maximises the MMR objective step by step
   rw <- calibrated_rerank(s, cb_P, pt, N = 3, rank_weights = c(1, 0.5, 0.25))
   expect_equal(rw$q, genre_distribution(rw$ranking, cb_P, c(1, 0.5, 0.25)), tolerance = 1e-12)
   expect_identical(calibrated_rec, calibrated_rerank)
+  expect_identical(calibratedrec, calibrated_rerank)
+  expect_identical(calibratedrecommendations, calibrated_rerank)
   expect_error(calibrated_rerank(s, cb_P, pt, metric = "js"), "metric must be")
   expect_error(calibrated_rerank(s, cb_P, pt, lam = 2), "lambda")
   expect_error(calibrated_rerank(s[-1], cb_P, pt), "6 genre rows for 5 scores")
