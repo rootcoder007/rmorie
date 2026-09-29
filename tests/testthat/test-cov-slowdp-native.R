@@ -54,5 +54,5 @@ test_that("the truncated DP renormalises the kept sticks and draws atoms", {
   expect_equal(raw$weights, stick_breaking(1.5, 5, seed = 7)$weights, tolerance = 1e-15)
   expect_equal(raw$atoms, 0:4)
   expect_equal(dp_truncation(1.5, 5, seed = 7)$weights, truncated_dp(1.5, 5, seed = 7)$weights)
-  expect_identical(morie_slowdp$truncation_error, truncation_error)
+  expect_same_function(morie_slowdp$truncation_error, truncation_error)
 })

@@ -73,7 +73,7 @@ test_that("integrate_marginals mixes the conditionals by normalised weights", {
   expect_identical(inla, integrate_marginals)
   expect_identical(inla_spatial, integrate_marginals)
   expect_identical(inlaspatial, integrate_marginals)
-  expect_identical(morie_inlasm$laplace_marginal, laplace_marginal)
+  expect_same_function(morie_inlasm$laplace_marginal, laplace_marginal)
   expect_match(morie_inlasm$cheatsheet(), "LAPLACE")
   expect_error(integrate_marginals(M, lw[1:2], xs), "3 conditional marginals but 2 weights")
   expect_error(integrate_marginals(M, lw, xs[-1]), "does not match the grid")

@@ -68,7 +68,7 @@ test_that("self-distillation cross-entropy with a sharpened teacher", {
   expect_equal(self_distillation_loss(s, t, patch_level = TRUE)$level, "patch")
   expect_identical(dinov2, self_distillation_loss)
   expect_identical(dinov2_repr, self_distillation_loss)
-  expect_identical(morie_dnvtwo$koleo, koleo)
+  expect_same_function(morie_dnvtwo$koleo, koleo)
   expect_match(morie_dnvtwo$cheatsheet(), "KoLeo")
   expect_error(self_distillation_loss(s, t[-1]), "differ in width")
   expect_error(self_distillation_loss(s, t, temperature_t = 0), "temperatures must be positive")

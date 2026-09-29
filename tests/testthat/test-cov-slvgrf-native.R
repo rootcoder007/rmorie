@@ -61,5 +61,5 @@ test_that("the half-sample bootstrap replays and scales the variance by 1/2", {
   expect_equal(r$z, qini_coefficient(sg_g, sg_s) / se, tolerance = 1e-13)
   expect_equal(r$p_value, 2 * stats::pnorm(-abs(r$z)), tolerance = 1e-14)
   expect_error(rate_test(sg_g[1:6], sg_s[1:6]), "at least 8 units")
-  expect_identical(morie_slvgrf$rate, rate)
+  expect_same_function(morie_slvgrf$rate, rate)
 })

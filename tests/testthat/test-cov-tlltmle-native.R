@@ -74,6 +74,6 @@ test_that("the IC standard error is sd / sqrt(n); the bundle exposes every step"
   v <- c(0.3, -1.2, 0.8, 0.1, 2)
   expect_equal(tlltmle_influence_curve_se(v), stats::sd(v) / sqrt(5), tolerance = 1e-15)
   expect_error(tlltmle_influence_curve_se(1), "at least 2")
-  expect_identical(morie_tlltmle$ltmle, tlltmle_ltmle)
+  expect_same_function(morie_tlltmle$ltmle, tlltmle_ltmle)
   expect_match(tlltmle_cheatsheet(), "DOUBLE ROBUST", fixed = TRUE)
 })
