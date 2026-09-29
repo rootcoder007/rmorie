@@ -26,8 +26,10 @@ nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
   # Python arm and nbeats_seasonality_basis. sapply() alone returns the
   # transpose, which left the two bases in this file disagreeing and
   # made the seasonality block non-conformable.
-  t(sapply(seq_len(degree + 1L) - 1L,
-           function(p) ((offset + t_seq) / sc)^p))
+  # outer() keeps the P x L shape even when L = 1, where t(sapply())
+  # collapsed to 1 x P and a one-step trend forecast was non-conformable
+  outer(seq_len(degree + 1L) - 1L, t_seq,
+        function(p, tt) ((offset + tt) / sc)^p)
 }
 
 #' nbeats_seasonality_basis
