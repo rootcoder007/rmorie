@@ -2201,7 +2201,10 @@ MuapModel <- function(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3,
   thr <- 0.05 * pk
   on <- ts[abs(wave) >= thr]
   dur <- if (length(on) > 1L) on[length(on)] - on[1L] else 0
-  cross <- sum((wave[-length(wave)] < 0) != (wave[-1L] < 0))
+  # count sign changes between non-zero samples: the tails truncated to
+  # exactly 0 beyond 8 widths are not a phase
+  sg <- sign(wave[wave != 0])
+  cross <- sum(sg[-1L] != sg[-length(sg)])
   list(
     t_ms = ts, muap_uV = wave,
     peak_to_peak_uV = max(wave) - min(wave),
