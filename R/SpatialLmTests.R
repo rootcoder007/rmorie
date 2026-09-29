@@ -1,18 +1,18 @@
-.lmt_design <- function(X, n) {
+.lmt_design <- function(X, n, intercept = TRUE) {
   X <- unname(as.matrix(X)) * 1
   if (nrow(X) != n) X <- matrix(X, n)
   const <- which(apply(X, 2, function(v) length(unique(v)) == 1 && v[1] != 0))
-  if (length(const) == 0) {
+  if (length(const) == 0 && intercept) {
     X <- cbind(1, X)
     const <- 1L
   }
   list(X = X, const = const)
 }
 
-.lmt_core <- function(y, X, W) {
+.lmt_core <- function(y, X, W, intercept = TRUE) {
   y <- as.numeric(y)
   n <- length(y)
-  d <- .lmt_design(X, n)
+  d <- .lmt_design(X, n, intercept)
   X <- d$X
   W <- unname(as.matrix(W)) * 1
   k <- ncol(X)
