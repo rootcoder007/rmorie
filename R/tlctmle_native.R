@@ -282,9 +282,9 @@ ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
   e_rng <- .ghc_rng(as.numeric(seed))
   idx <- seq_len(n)
   for (i in n:2) {
-    j <- as.integer(.ghc_unif(e_rng, 1L) * (i + 1)) %% (i + 1)
-    if (j == 0L) j <- 1L
-    if (j == i) j <- i - 1L
+    # Fisher-Yates on 1-based positions: j uniform on 1..i (the old
+    # draw on 0..i remapped 0 -> 1 and i -> i - 1, a biased shuffle)
+    j <- as.integer(.ghc_unif(e_rng, 1L) * i) %% i + 1L
     tmp <- idx[i]
     idx[i] <- idx[j]
     idx[j] <- tmp

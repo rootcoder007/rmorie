@@ -49,7 +49,10 @@ morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
   # the LTMLE-with-clustering entry point
   if (is.list(Q_seq) && !is.null(Y) && !is.null(cluster)) {
     r <- tlltmle_ltmle(Q_seq, H_seq, Y)
-    q <- r$Q_star[[length(r$Q_star)]]
+    # Q_star is ordered by time, so [[1]] is the time-0 targeted fit whose
+    # mean IS psi; the last element is the time T-1 fit, and q - psi taken
+    # from it is not even centred when there is more than one time point
+    q <- r$Q_star[[1L]]
     psi <- r$psi
     if (is.null(ic))
       ic <- as.numeric(q) - psi
@@ -191,7 +194,9 @@ g_formula_sequential <- function(Q_seq) {
   if (length(Q_seq) == 0L)
     stop("tlclust: the sequence is empty")
   cur <- as.numeric(Q_seq[[length(Q_seq)]])
-  for (t in (length(Q_seq) - 1L):1L) {
+  # rev(seq_len()) so a single regression runs no step; the old
+  # (length - 1):1 counted 0:1 for one regression and indexed Q_seq[[0]]
+  for (t in rev(seq_len(length(Q_seq) - 1L))) {
     nxt <- as.numeric(Q_seq[[t]])
     if (length(nxt) != length(cur))
       stop(sprintf("tlclust: the regressions differ in length at time %d",

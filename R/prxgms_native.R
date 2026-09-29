@@ -266,7 +266,7 @@ prxgms <- morie_prxgms
   n <- length(x)
   L <- as.numeric(L)
   if (L <= 0)
-    stop(sprintf("prox_gradient: L must be positive, got %r", L))
+    stop(sprintf("prox_gradient: L must be positive, got %s", format(L)))
   y <- x
   t <- 1.0
   prev <- x

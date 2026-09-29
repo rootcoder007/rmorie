@@ -185,7 +185,7 @@ morie_quantize_with_codebook <- function(x, codebook) {
     v <- xv[i]
     best <- 1L
     bd <- abs(v - cb[1L])
-    for (k in 2:length(cb)) {
+    for (k in seq_along(cb)[-1L]) { # 2:length(cb) ran k = 2, 1 on one code
       d <- abs(v - cb[k])
       if (d < bd) { bd <- d
       best <- k }

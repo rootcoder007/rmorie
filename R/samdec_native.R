@@ -159,34 +159,27 @@ two_way_block <- function(prompt_tokens, image_tokens) {
 #' upsample(V)
 #' @keywords internal
 upsample <- function(grid, factor = 2) {
-  G <- .samdec_mat(grid)
+  # Nearest-neighbour upsampling: output cell (i, j) copies input cell
+  # (i %/% f, j %/% f), as in the Python arm. A matrix is a grid of
+  # scalars; a list of rows is a grid whose cells may be vectors (the
+  # image-embedding case decode_mask needs). The old body tiled the
+  # matrix (rep.int) instead of repeating each cell, and ran every list
+  # through .samdec_mat first, which rejects lists, so decode_mask
+  # always failed.
   f <- as.integer(factor)
   if (f < 1L) {
     stop("samdec: the upsampling factor must be >= 1")
   }
-  H <- nrow(G)
-  W <- ncol(G)
-  d <- 1L # unused; we return a list of rows
-  # We need to handle that G may be a list of rows (each row a vector)
-  # but in the Python arm grid is [[float, ...], ...] so each row is a
-  # list. Here we accept a matrix where columns are the per-pixel
-  # vectors, OR a list of numeric vectors. We return a matrix where
-  # each row is an upsampled pixel vector.
   if (is.list(grid) && !is.matrix(grid)) {
-    Grows <- lapply(grid, function(r) as.numeric(r))
-    d <- length(Grows[[1]])
-    out <- vector("list", H * f)
-    for (i in seq_len(H * f)) {
-      src <- Grows[[(i - 1L) %/% f + 1L]]
-      out[[i]] <- rep(src, each = f)
-    }
-    out
-  } else {
-    # matrix: rows are spatial locations, columns are channels
-    out <- G[rep.int(seq_len(H), f), , drop = FALSE]
-    out <- out[, rep.int(seq_len(W), f), drop = FALSE]
-    out
+    H <- length(grid)
+    return(lapply(seq_len(H * f), function(i) {
+      row <- grid[[(i - 1L) %/% f + 1L]]
+      if (is.atomic(row)) return(rep(as.numeric(row), each = f))
+      lapply(seq_len(length(row) * f), function(j) row[[(j - 1L) %/% f + 1L]])
+    }))
   }
+  G <- .samdec_mat(grid)
+  G[rep(seq_len(nrow(G)), each = f), rep(seq_len(ncol(G)), each = f), drop = FALSE]
 }
 
 #' dynamic_mask_head
@@ -240,7 +233,8 @@ dynamic_mask_head <- function(output_token, image_grid_vectors,
         "-wide but the spatial vectors are ", d
       )
     }
-    logits <- matrix(as.numeric(G %*% w), nrow = sqrt(nrow(G)))
+    # rows of G are the pixels of a square grid in row-major order
+    logits <- matrix(as.numeric(G %*% w), nrow = sqrt(nrow(G)), byrow = TRUE)
   }
   clamp <- pmin(60, pmax(-60, as.numeric(logits)))
   prob <- 1.0 / (1.0 + exp(-clamp))

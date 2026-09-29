@@ -117,7 +117,8 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
                                  variant = "argon2id",
                                  secret = raw(), associated = raw(),
                                  version = .VERSION) {
-  y <- .TYPES[[as.character(variant)]]
+  # [[ on an unknown name errors before the check below could run
+  y <- if (as.character(variant) %in% names(.TYPES)) .TYPES[[as.character(variant)]] else NULL
   if (is.null(y))
     stop("secarg: variant must be one of argon2d, argon2i, argon2id")
   P <- as.raw(password)
@@ -219,21 +220,86 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 #' @export
 #' @keywords internal
 morie_secarg_compress <- function(X, Y) {
-  R <- mapply(bitwXor, as.numeric(X), as.numeric(Y), SIMPLIFY = TRUE)
+  # G(X, Y) of RFC 9106 Sec. 3.5: R = X xor Y, the permutation P on the
+  # eight rows and then on the eight column pairs, xor R back. Words are
+  # carried as four 16-bit limbs, because R has no 64-bit integer and a
+  # double holds only 53 bits: the old body used bitwShiftL(1, 64) (NA)
+  # as its mask and <<- into an unbound `v`, so it never returned.
+  # X and Y are 1024-byte raw blocks (the result is raw) or 128 numeric
+  # words (exact only below 2^53; the result is numeric).
+  as_limbs <- function(b) {
+    if (is.raw(b)) {
+      if (length(b) != 1024L) stop("secarg: a raw block must be 1024 bytes")
+      m <- matrix(as.integer(b), nrow = 8L)
+      return(cbind(m[1, ] + 256 * m[2, ], m[3, ] + 256 * m[4, ],
+                   m[5, ] + 256 * m[6, ], m[7, ] + 256 * m[8, ]))
+    }
+    w <- as.numeric(b)
+    if (length(w) != 128L) stop("secarg: a block is 128 words")
+    if (any(w < 0 | w >= 2^53 | w != floor(w)))
+      stop("secarg: numeric words must be integers in [0, 2^53); pass raw blocks for full 64-bit words")
+    cbind(w %% 65536, (w %/% 65536) %% 65536, (w %/% 2^32) %% 65536,
+          w %/% 2^48)
+  }
+  norm <- function(s) {
+    for (k in 1:3) {
+      cy <- s[k] %/% 65536
+      s[k] <- s[k] - cy * 65536
+      s[k + 1L] <- s[k + 1L] + cy
+    }
+    s[4] <- s[4] %% 65536
+    s
+  }
+  mul32 <- function(x, y) norm(c(x[1] * y[1], x[1] * y[2] + x[2] * y[1], x[2] * y[2], 0))
+  fbla <- function(x, y) {                 # x + y + 2 lo32(x) lo32(y)
+    m <- mul32(x, y)
+    norm(x + y + 2 * m)
+  }
+  rotr <- function(x, n) {
+    bits <- as.vector(vapply(x, function(l) as.integer(intToBits(as.integer(l)))[1:16],
+                             integer(16)))
+    colSums(matrix(bits[((0:63 + n) %% 64) + 1L], 16L) * 2^(0:15))
+  }
+  gb <- function(V, a, b, c, d) {
+    V[a, ] <- fbla(V[a, ], V[b, ])
+    V[d, ] <- rotr(bitwXor(V[d, ], V[a, ]), 32)
+    V[c, ] <- fbla(V[c, ], V[d, ])
+    V[b, ] <- rotr(bitwXor(V[b, ], V[c, ]), 24)
+    V[a, ] <- fbla(V[a, ], V[b, ])
+    V[d, ] <- rotr(bitwXor(V[d, ], V[a, ]), 16)
+    V[c, ] <- fbla(V[c, ], V[d, ])
+    V[b, ] <- rotr(bitwXor(V[b, ], V[c, ]), 63)
+    V
+  }
+  perm <- function(V) {
+    V <- gb(V, 1, 5, 9, 13)
+    V <- gb(V, 2, 6, 10, 14)
+    V <- gb(V, 3, 7, 11, 15)
+    V <- gb(V, 4, 8, 12, 16)
+    V <- gb(V, 1, 6, 11, 16)
+    V <- gb(V, 2, 7, 12, 13)
+    V <- gb(V, 3, 8, 9, 14)
+    gb(V, 4, 5, 10, 15)
+  }
+  # doubles, not the integers bitwXor returns: limb products reach 2^32
+  R <- matrix(as.numeric(bitwXor(as_limbs(X), as_limbs(Y))), 128L, 4L)
   Q <- R
   for (i in 0:7) {
-    row <- Q[16L * i + 1:16]
-    .P_mut(row)
-    Q[16L * i + 1:16] <- row
+    rows <- 16L * i + 1:16
+    Q[rows, ] <- perm(Q[rows, , drop = FALSE])
   }
   for (j in 0:7) {
-    idx <- c(sapply(0:7, function(i)
-      c(16L * i + 2L * j + 1L, 16L * i + 2L * j + 2L)))
-    col <- Q[idx]
-    .P_mut(col)
-    Q[idx] <- col
+    idx <- as.vector(rbind(16L * (0:7) + 2L * j + 1L, 16L * (0:7) + 2L * j + 2L))
+    Q[idx, ] <- perm(Q[idx, , drop = FALSE])
   }
-  mapply(bitwXor, Q, R, SIMPLIFY = TRUE)
+  out <- matrix(bitwXor(Q, R), 128L, 4L)
+  if (is.raw(X)) {
+    return(as.raw(as.vector(rbind(out[, 1] %% 256, out[, 1] %/% 256,
+                                  out[, 2] %% 256, out[, 2] %/% 256,
+                                  out[, 3] %% 256, out[, 3] %/% 256,
+                                  out[, 4] %% 256, out[, 4] %/% 256))))
+  }
+  out[, 1] + 65536 * out[, 2] + 2^32 * out[, 3] + 2^48 * out[, 4]
 }
 
 #' .to_words
