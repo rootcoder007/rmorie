@@ -380,7 +380,7 @@
 #' \code{X = P W' + J c' + E} one dimension at a time by alternating least
 #' squares (starting values from sign-corrected row means, column signs from
 #' the pairwise-complete correlation matrix), refined with all dimensions
-#' jointly, and the fitted \code{P W'} is re-expressed by its singular value
+#' jointly, and the fitted \code{P t(W)} is re-expressed by its singular value
 #' decomposition. Stimulus coordinates are the unit right singular vectors;
 #' respondent weights are \code{U sqrt(s)} with intercepts \code{c}. In two
 #' dimensions the solution is rotated so its first axis matches the

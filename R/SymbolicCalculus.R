@@ -1130,7 +1130,7 @@
 #' all for a higher degree with symbolic entries (Abel-Ruffini).
 #'
 #' \code{OdeSymbolic}: classification and closed-form solution of
-#' \code{y' = f(x, y)} (or of a differential form \code{M dx + N dy = 0}):
+#' \code{dy/dx = f(x, y)} (or of a differential form \code{M dx + N dy = 0}):
 #' linear by the integrating factor \code{exp(-int p dx)}, Bernoulli through
 #' \code{v = y^(1-n)}, separable as the implicit \code{int dy/h = int g dx +
 #' C}, exact through the potential \code{int M dx + int (N - d/dy int M dx)
@@ -1187,7 +1187,7 @@
 #' SymbolicLimit("sin(x)/x", "x", 0)$limit
 #' SymbolicLimit("x*exp(-x)", "x", "inf")$limit
 #' MatrixSymbolic(list(c("a", "b"), c("c", "d")))$determinant
-#' OdeSymbolic("y' = 2*x*y")$solution
+#' OdeSymbolic("dy/dx = 2*x*y")$solution
 #' RischIntegration("(x^2 + 1)/(x^3 - x)")$integral
 #' @export
 RischIntegration <- function(expr, x = "x") {

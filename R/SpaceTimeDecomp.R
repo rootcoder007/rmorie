@@ -8,7 +8,7 @@
 #' from the HOSVD start, unit-norm columns with weights, ordered by weight,
 #' largest entry of each A and B column positive. \code{TuckerHooi}: HOSVD
 #' followed by higher-order orthogonal iteration. \code{MatrixFactorizationAls}:
-#' ridge-regularised \code{X ~ U V'} over observed entries (NA missing) by
+#' ridge-regularised \code{X ~ U t(V)} over observed entries (NA missing) by
 #' alternating ridge regressions. \code{HaarDwt} and \code{HaarMra}: Haar
 #' pyramid algorithm with \code{W_t = (V_(2t+1) - V_(2t)) / sqrt(2)} and the
 #' additive multiresolution analysis (as the wavelets package).

@@ -4,7 +4,7 @@
 
 #' Spatial survival and SPDE fields: Weibull gamma-frailty model and SPDE (Matern) GMRF precision
 #'
-#' \code{WeibullFrailtyFit}: hazard \code{lambda rho t^(rho - 1) exp(x'beta)}
+#' \code{WeibullFrailtyFit}: hazard \code{lambda rho t^(rho - 1) exp(t(x) beta)}
 #' with right censoring (likelihood \code{h^delta S}), and with
 #' \code{cluster} a mean-one gamma frailty of variance \code{theta} integrated
 #' out within clusters; L-BFGS on the log parameters with the analytic score,
