@@ -404,7 +404,7 @@ jobs:
         run: |
           export DEBIAN_FRONTEND=noninteractive
           apt-get update -qq
-          apt-get install -y -qq build-essential libcurl4-openssl-dev libssl-dev libxml2-dev
+          apt-get install -y -qq build-essential libcurl4-openssl-dev libssl-dev libxml2-dev pandoc devscripts
       - name: Install hard dependencies + rcmdcheck
         run: |
           options(HTTPUserAgent = sprintf(
