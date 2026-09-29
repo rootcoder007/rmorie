@@ -376,67 +376,10 @@ escape_whitespace <- function(text, add_prefix = TRUE) {
 #' @param add_prefix See Usage.
 #' @export
 train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
-  V <- as.integer(vocab_size)
-  if (V < 1L) stop("sentpc: vocab_size must be at least 1")
-  words <- list()
-  for (line in corpus) {
-    for (w in .units(.escape_whitespace(line, add_prefix))) {
-      key <- w
-      if (is.null(words[[key]])) words[[key]] <- 0L
-      words[[key]] <- words[[key]] + 1L
-    }
-  }
-  if (length(words) == 0L) {
-    stop("sentpc: the corpus produced no tokens")
-  }
-  alphabet <- sort(unique(unlist(strsplit(unlist(names(words)), ""))))
-  merges <- list()
-  vocab <- alphabet
-  while (length(vocab) < V) {
-    pairs <- list()
-    for (key in names(words)) {
-      w <- strsplit(key, "")[[1]]
-      f <- words[[key]]
-      if (length(w) < 2L) next
-      for (i in seq_len(length(w) - 1L)) {
-        pk <- paste0(w[i], "|", w[i + 1L])
-        if (is.null(pairs[[pk]])) pairs[[pk]] <- 0L
-        pairs[[pk]] <- pairs[[pk]] + f
-      }
-    }
-    if (length(pairs) == 0L) break
-    cnts <- unlist(pairs)
-    best_key <- names(which.max(cnts))
-    best <- strsplit(best_key, "|", fixed = TRUE)[[1]]
-    merges[[length(merges) + 1L]] <- best
-    new_token <- paste0(best[1L], best[2L])
-    vocab <- c(vocab, new_token)
-    nw <- list()
-    for (key in names(words)) {
-      w <- strsplit(key, "")[[1]]
-      f <- words[[key]]
-      out <- character(0)
-      i <- 1L
-      while (i <= length(w)) {
-        if (i < length(w) && w[i] == best[1L] && w[i + 1L] == best[2L]) {
-          out <- c(out, paste0(w[i], w[i + 1L]))
-          i <- i + 2L
-        } else {
-          out <- c(out, w[i])
-          i <- i + 1L
-        }
-      }
-      nk <- paste0(out, collapse = "")
-      if (is.null(nw[[nk]])) nw[[nk]] <- 0L
-      nw[[nk]] <- nw[[nk]] + f
-    }
-    words <- nw
-  }
-  list(merges = merges, vocab = sort(vocab),
-       vocab_size = length(vocab), requested = V,
-       algorithm = "bpe",
-       note = paste("greedy and deterministic -- the merge list fixes ",
-                    "every later segmentation"))
+  # the string-keyed version re-split every merged word into single
+  # characters, so no merge ever stuck; the token-vector trainer is
+  # the one that matches Python sentpc.train_bpe
+  morie_sentpc_train_bpe(corpus, vocab_size, add_prefix)
 }
 
 # -- restored: morie-only definition kept through the rmorie sync --
