@@ -141,20 +141,25 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
   parts <- vector("list", J)
   for (j in seq_len(J)) parts[[j]] <- init(e)
   ll <- 0
+  # normalised log-weights carried between steps (sum of exp = 1); the
+  # old body dropped them whenever the ESS rule skipped a resample, so
+  # with resample.threshold < 1 the likelihood and the filtered means
+  # were computed as if the previous weights had been uniform
+  lwprev <- rep(-log(J), J)
   means <- numeric(N)
   esss <- numeric(N)
   resampled <- logical(N)
   for (n in seq_len(N)) {
     for (j in seq_len(J)) parts[[j]] <- step(parts[[j]], n - 1L, e)
-    lw <- vapply(seq_len(J), function(j) loglik(parts[[j]], obs[n], n - 1L),
-                 numeric(1))
+    lw <- lwprev + vapply(seq_len(J), function(j) loglik(parts[[j]], obs[n], n - 1L),
+                          numeric(1))
     mx <- max(lw)
     if (mx == -Inf)
       stop(paste0("prtcl: every particle has zero likelihood at observation ",
                   n - 1L))
     w <- exp(lw - mx)
     tot <- sum(w)
-    ll <- ll + mx + log(tot / J)
+    ll <- ll + mx + log(tot)
     ess <- morie_prtcl_effective_sample_size(w)
     esss[n] <- ess
     means[n] <- sum(vapply(seq_len(J), function(j) w[j] * .scalar(parts[[j]]),
@@ -163,8 +168,12 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
       idx <- if (systematic) morie_prtcl_systematic_resample(w, e = e)
              else .multinomial(w, e)
       parts <- parts[idx]
+      lwprev <- rep(-log(J), J)
       resampled[n] <- TRUE
-    } else resampled[n] <- FALSE
+    } else {
+      lwprev <- log(w / tot)
+      resampled[n] <- FALSE
+    }
   }
   list(estimate = means, filtered.mean = means, loglik = ll,
        ess = esss, min.ess = min(esss), resampled = resampled,
@@ -305,7 +314,7 @@ systematic_resample <- function(weights, u = NULL) {
   w <- as.numeric(weights) / tot
   if (is.null(u)) u <- .ghc_unif(.ghc_rng(0L), 1L)
   if (u < 0 || u >= 1)
-    stop(sprintf("prtcl: the offset must lie in [0, 1), got %r", u))
+    stop(sprintf("prtcl: the offset must lie in [0, 1), got %s", format(u)))
   idx <- integer(J)
   cum_ <- w[1L]
   j <- 1L
