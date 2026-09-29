@@ -29,11 +29,6 @@
 #' risk set, and initiators (in decreasing propensity) take the nearest unused
 #' not-yet-treated control.
 #'
-#' \code{Snmcox}: g-estimation of the rank-preserving structural nested failure
-#' time model. With \eqn{U(\psi) = \int_0^T e^{\psi A(u)} du} the estimate
-#' solves \eqn{\sum (A - \hat E(A \mid L))(U - \bar U) = 0} over the events, by a
-#' grid scan and bisection; the interval inverts the standardised score test.
-#'
 #' @param data A data frame (or list of columns).
 #' @param outcome,treatment,instrument Column names.
 #' @param weights_col Column of analytic weights.
@@ -77,8 +72,6 @@
 #' iv <- list(z = c(0, 0, 0, 0, 1, 1, 1, 1), t = c(0, 0, 1, 0, 1, 1, 0, 1),
 #'            y = c(1, 1.4, 3.1, 0.8, 3.3, 2.9, 1.2, 3.6))
 #' Late(iv, "t", "y", "z")$late
-#' Snmcox(c(2, 3.1, 1.2, 4.5, 2.7, 0.9, 3.8, 1.9, 5.2, 2.2), rep(1, 10),
-#'        c(1, 1, 0, 1, 0, 0, 1, 0, 1, 0), c(0.4, 1.2, -0.3, 0.8, 0.1, -1, 0.9, 0.2, 1.5, -0.4))$estimate
 #' @export
 Ate <- function(data, outcome, treatment, weights_col) {
   y <- as.numeric(data[[outcome]])
