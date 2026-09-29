@@ -15,3 +15,18 @@ test_that("space-time variograms and covariances match their formulas", {
   expect_error(StModelVariogram(1, 1, "bogus"), "model must be")
   expect_error(StCovarianceFamily(1, 1, "bogus"), "unknown")
 })
+
+test_that("the Porcu quasi-arithmetic family matches its formula", {
+  a1 <- 1 + (1.7 / 2)^1.5
+  a2 <- 1 + (2.5 / 3)^0.8
+  got <- StCovarianceFamily(1.7, -2.5, "porcu", sigma2 = 2, sep = 0.4, power_s = 1.5, power_t = 0.8, scale_s = 2,
+                            scale_t = 3)
+  expect_equal(got, 2 * (0.5 * a1^0.4 + 0.5 * a2^0.4)^(-1 / 0.4), tolerance = 1e-14)
+  expect_equal(StCovarianceFamily(1.7, 2.5, "porcu", sep = 0, power_s = 1.5, power_t = 0.8, scale_s = 2, scale_t = 3),
+               1 / sqrt(a1 * a2), tolerance = 1e-15)
+  expect_equal(StCovarianceFamily(1.7, 2.5, "porcu", sep = 1e-7, power_s = 1.5, power_t = 0.8, scale_s = 2,
+                                  scale_t = 3), 1 / sqrt(a1 * a2), tolerance = 1e-9)
+  expect_equal(StCovarianceFamily(1.7, 2.5, "porcu", sep = 0, method = "GeoModels", power_s = 1.5, power_t = 0.8,
+                                  scale_s = 2, scale_t = 3), 1 / (a1 * a2), tolerance = 1e-15)
+  expect_error(StCovarianceFamily(1, 1, "porcu", power_s = 2.5, power_t = 1, scale_s = 1, scale_t = 1), "porcu needs")
+})

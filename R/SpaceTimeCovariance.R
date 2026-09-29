@@ -14,8 +14,12 @@
 #' variograms in the parametrisation of \code{gstat::vgmST} (marginals are
 #' lists \code{psill}, \code{model} (Exp, Gau, Sph, Lin), \code{range},
 #' \code{nugget}). \code{StCovarianceFamily}: Gneiting (2002), Cressie-Huang (1999),
-#' Iaco-Cesare (De Iaco, Myers and Posa 2002), periodic and separable
-#' exponential covariances. \code{StLinearCombination}: nonnegative
+#' Iaco-Cesare (De Iaco, Myers and Posa 2002), periodic, separable
+#' exponential and Porcu (Porcu, Gregori and Mateu 2006, quasi-arithmetic
+#' mean: \code{(0.5 (1 + (h/scale_s)^power_s)^sep + 0.5 (1 +
+#' (|u|/scale_t)^power_t)^sep)^(-1/sep)}; at \code{sep = 0} the continuous
+#' limit, the separable geometric mean, or with \code{method = "GeoModels"}
+#' the package's squared product) covariances. \code{StLinearCombination}: nonnegative
 #' combinations. Identical to the Python arm \code{morie.fn.stcovar}.
 #'
 #' @param h Spatial distances.
@@ -39,6 +43,9 @@
 #'
 #'   Graeler, B., Pebesma, E. and Heuvelink, G. (2016). Spatio-temporal
 #'   interpolation using gstat. The R Journal 8, 204-218.
+#'
+#'   Porcu, E., Gregori, P. and Mateu, J. (2006). Nonseparable stationary
+#'   anisotropic space-time covariance functions. SERRA 21, 113-122.
 #' @examples
 #' s <- list(psill = 2, model = "Exp", range = 100)
 #' tm <- list(psill = 3, model = "Sph", range = 5)
@@ -80,6 +87,21 @@ StCovarianceFamily <- function(h, u, family, ...) {
     iaco_cesare = s2 * (1 + (h / p$a)^p$alpha + (abs(u) / p$b)^p$beta)^(-p$delta),
     periodic = s2 * exp(-h / p$range) * exp(-abs(u) / (if (is.null(p$tau)) Inf else p$tau)) * cos(2 * pi * u / p$period),
     separable_exp = s2 * exp(-h / p$range_s - abs(u) / p$range_t),
+    porcu = {
+      d <- if (is.null(p$sep)) 0.5 else p$sep
+      if (!(p$power_s > 0 && p$power_s <= 2 && p$power_t > 0 && p$power_t <= 2 && p$scale_s > 0 && p$scale_t > 0 &&
+              d >= 0 && d <= 1)) {
+        stop("porcu needs power_s, power_t in (0, 2], scale_s, scale_t > 0 and sep in [0, 1]")
+      }
+      a1 <- 1 + (h / p$scale_s)^p$power_s
+      a2 <- 1 + (abs(u) / p$scale_t)^p$power_t
+      # the sep -> 0 limit is the geometric mean; GeoModels/CompRandFld return 1 / (a1 a2) at sep = 0 exactly
+      if (d == 0) {
+        if (identical(p$method, "GeoModels")) s2 / (a1 * a2) else s2 / sqrt(a1 * a2)
+      } else {
+        s2 * (0.5 * a1^d + 0.5 * a2^d)^(-1 / d)
+      }
+    },
     stop("unknown covariance family")
   )
 }
