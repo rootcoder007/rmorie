@@ -1,0 +1,61 @@
+# Coverage tests for R/cdaeRC_native.R (Wu et al. 2016): corruption,
+# the user-node encoder and decoder, the four losses, the seeded
+# initialisation, training and top-k recommendation.
+
+cd_pos <- list(c(0, 2), c(1, 3), c(0, 1, 4), c(2, 4))
+
+test_that("dropout corruption, encoder and decoder", {
+  e <- .ghc_rng(4)
+  y <- c(1, 0, 1, 1, 0)
+  yt <- corrupt(y, 0.4, e)
+  u <- .ghc_unif(.ghc_rng(4), 5)
+  expect_equal(yt, ifelse(u < 0.4, 0, y / 0.6))
+  expect_equal(corrupt(y, 0, .ghc_rng(1)), y)
+  expect_error(corrupt(y, 1, e), "q must lie in \\[0,1\\)")
+  W <- list(c(0.1, -0.2), c(0.3, 0.1), c(-0.4, 0.2))
+  z <- encode(c(1, 0, 2), W, c(0.05, -0.05), c(0.1, 0.2))
+  expect_equal(z, plogis(c(0.1, 0.2) + c(0.05, -0.05) + W[[1]] + 2 * W[[3]]), tolerance = 1e-12)
+  expect_equal(encode(c(1, 0, 2), W, c(0, 0), c(0, 0), "identity"), W[[1]] + 2 * W[[3]])
+  Wp <- list(c(1, 2), c(-1, 0.5), c(0.3, 0.3))
+  expect_equal(decode(z, Wp, c(0, 0.1, -0.1)), plogis(c(sum(Wp[[1]] * z), 0.1 + sum(Wp[[2]] * z), -0.1 + sum(Wp[[3]] * z))), tolerance = 1e-12)
+  expect_equal(decode(z, Wp, c(0, 0.1, -0.1), items = 2, activation = "tanh"), tanh(0.1 + sum(Wp[[2]] * z)))
+  M <- do.call(rbind, Wp)
+  dd <- morie_cdaeRC_decode(z, M, c(0, 0.1, -0.1), items = c(3, 1))
+  expect_equal(unname(dd), decode(z, Wp, c(0, 0.1, -0.1), items = c(3, 1)), tolerance = 1e-12)
+  expect_equal(names(dd), c("3", "1"))
+  expect_error(encode(1, list(0.1), 0, 0, "relu"), "activation must be one of")
+})
+
+test_that("the four losses", {
+  expect_equal(loss(1, 0.3), 0.5 * 0.49)
+  expect_equal(loss(-1, 0.3, "log"), log1p(exp(0.3)))
+  expect_equal(loss(1, -800, "log"), 800)
+  expect_equal(loss(1, 0.3, "hinge"), 0.7)
+  expect_equal(loss(-1, -2, "hinge"), 0)
+  expect_equal(loss(1, 0.4, "cross_entropy"), -log(plogis(0.4)), tolerance = 1e-12)
+  expect_equal(loss(0, 0.4, "cross_entropy"), -log(1 - plogis(0.4)), tolerance = 1e-12)
+  expect_error(loss(0, 1, "log"), "needs y = -1")
+  expect_error(loss(1, 1, "l1"), "loss must be one of")
+})
+
+test_that("seeded initialisation, training and recommendation", {
+  z0 <- fit_cdae(cd_pos, 4, 5, k_dim = 2, iters = 0, seed = 6, init_scale = 0.2)
+  u <- (.ghc_unif(.ghc_rng(6), 38) - 0.5) * 0.4
+  expect_equal(unlist(z0$W), u[1:10], tolerance = 1e-12)
+  expect_equal(unlist(z0$W_prime), u[11:20], tolerance = 1e-12)
+  expect_equal(unlist(z0$V), u[21:28], tolerance = 1e-12)
+  expect_true(is.nan(z0$final_loss))
+  f <- fit_cdae(cd_pos, 4, 5, k_dim = 3, iters = 40, alpha = 0.3, n_neg = 2, seed = 1)
+  expect_length(f$loss_history, 40L)
+  expect_lt(f$final_loss, f$loss_history[1])
+  expect_equal(morie_cdaeRC(cd_pos, 4, 5, k_dim = 3, iters = 3, seed = 2), fit_cdae(cd_pos, 4, 5, k_dim = 3, iters = 3, seed = 2))
+  named <- fit_cdae(setNames(cd_pos, 0:3), 4, 5, k_dim = 3, iters = 3, seed = 2)
+  expect_equal(named$W, fit_cdae(cd_pos, 4, 5, k_dim = 3, iters = 3, seed = 2)$W)
+  r <- recommend(f, cd_pos, 1, 5, top_k = 2)
+  z <- encode(c(0, 1, 0, 1, 0), f$W, f$V[[2]], f$b)
+  sc <- decode(z, f$W_prime, f$b_prime)
+  expect_equal(r$n_scored, 3L)
+  expect_equal(vapply(r$ranking, `[`, 0, 1), c(0, 2, 4)[order(-sc[c(1, 3, 5)])][1:2])
+  expect_equal(vapply(r$ranking, `[`, 0, 2), sort(sc[c(1, 3, 5)], decreasing = TRUE)[1:2], tolerance = 1e-12)
+  expect_error(fit_cdae(cd_pos, 4, 1), "at least 1 user, 2 items")
+})
