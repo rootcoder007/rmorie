@@ -59,7 +59,9 @@ morie_tldapar <- function(n, V = 10L, seed = 0L,
     return(cv_tmle(fold_estimates, fold_ics, n))
   if (mode == "reuse")
     return(naive_reuse(reuse_fn, n, seed))
-  variable_importance(NULL, NULL, screen, effect, V = V, seed = seed)
+  # variable_importance reads only the row count from X
+  variable_importance(matrix(0, as.integer(n), 1L), NULL, screen, effect,
+                      V = V, seed = seed)
 }
 
 #' split_sample
@@ -85,9 +87,10 @@ split_sample <- function(n, V = 10L, seed = 0L) {
   e_rng <- .ghc_rng(as.numeric(seed))
   idx <- seq_len(n)
   for (i in n:2) {
-    j <- as.integer(.ghc_unif(e_rng, 1L) * (i + 1)) %% (i + 1)
-    if (j == 0L) j <- 1L
-    if (j == i) j <- i - 1L
+    # Fisher-Yates on 1-based positions: j uniform on 1..i. The old
+    # draw took j on 0..i and then moved 0 to 1 and i to i - 1, so no
+    # element could stay put and position 1 was drawn twice as often.
+    j <- as.integer(.ghc_unif(e_rng, 1L) * i) %% i + 1L
     tmp <- idx[i]
     idx[i] <- idx[j]
     idx[j] <- tmp
