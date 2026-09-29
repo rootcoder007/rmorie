@@ -44,7 +44,8 @@ deviations; \code{"balance"} minimises the squared deviations of zone weight
 totals from their mean (redistricting).
 }
 \examples{
-AutomaticZoning(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5), 2)$labels
+AutomaticZoning(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4,
+  6), 5), 2)$labels
 }
 \references{
 Openshaw, S. (1977). A geographical solution to scale and

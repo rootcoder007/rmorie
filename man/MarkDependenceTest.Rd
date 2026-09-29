@@ -51,7 +51,8 @@ Fisher-Yates shuffles from Philox stream s of \code{seed}, identical to
 the Python arm.
 }
 \examples{
-P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+  .95, .85))
 MarkDependenceTest(P, c(1, 2, 1.5, 3, .5, 2.5, 1, 2, .8, 1.2), c(0, 1, 0, 1), nsim = 19)$p_value
 }
 \references{

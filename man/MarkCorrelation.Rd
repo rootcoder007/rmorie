@@ -42,7 +42,8 @@ translation edge weights. Where the smoothed pair density is below 1e-6 of
 its maximum the ratio is undefined and returned as NaN.
 }
 \examples{
-P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+  .95, .85))
 MarkCorrelation(P, c(1, 2, 1.5, 3, .5, 2.5, 1, 2, .8, 1.2), c(0, 1, 0, 1))$k[257]
 }
 \references{

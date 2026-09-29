@@ -44,7 +44,8 @@ sum of squared deviations. Single, complete and Ward linkage use squared Euclide
 distances and average linkage Euclidean distances (the GeoDa convention).
 }
 \examples{
-Redcap(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5), 2)$labels
+Redcap(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5),
+  2)$labels
 }
 \references{
 Guo, D. (2008). Regionalization with dynamically constrained

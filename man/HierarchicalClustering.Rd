@@ -28,7 +28,8 @@ and Williams 1967; Murtagh and Legendre 2014); merge matrix and heights as
 as \code{cutree}.
 }
 \examples{
-h <- HierarchicalClustering(rbind(c(0, 1, 5, 6), c(1, 0, 4, 5), c(5, 4, 0, 1), c(6, 5, 1, 0)), "single")
+h <- HierarchicalClustering(rbind(c(0, 1, 5, 6), c(1, 0, 4, 5), c(5, 4, 0, 1), c(6, 5, 1,
+  0)), "single")
 CutTree(h$merge, 2)
 }
 \references{

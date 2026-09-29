@@ -147,7 +147,8 @@ neighbour indices are 1-based here.
 \examples{
 m <- list(type = "metric", stAni = 1, joint = list(model = "Exp", psill = 1, range = 1))
 P <- rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1))
-StBlockKriging(c(1, 2, 1.5, 1.2), P, c(0, 0, 1, 1), rbind(c(0.5, 0.5)), 0.5, m, block = 1, duration = 1)$variance
+StBlockKriging(c(1, 2, 1.5, 1.2), P, c(0, 0, 1, 1), rbind(c(0.5, 0.5)), 0.5, m, block = 1,
+  duration = 1)$variance
 StSmoothness(m)$space
 }
 \references{

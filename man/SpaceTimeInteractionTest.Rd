@@ -49,9 +49,11 @@ every bin; splancs drops pairs exactly at the largest s or t, so the two
 differ only when a pair distance ties a top grid value.
 }
 \examples{
-P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+  .95, .85))
 tm <- c(1, 7, 2, 5, 3, 4.5, 6, 9, 8, 8.5)
-SpaceTimeInteractionTest(P, tm, c(.2, .4), c(2.3, 4.3), c(0, 1, 0, 1), c(0, 10), nsim = 19)$p_value
+SpaceTimeInteractionTest(P, tm, c(.2, .4), c(2.3, 4.3), c(0, 1, 0, 1), c(0, 10),
+  nsim = 19)$p_value
 }
 \references{
 Diggle, P. J., Chetwynd, A. G., Haggkvist, R. and Morris,

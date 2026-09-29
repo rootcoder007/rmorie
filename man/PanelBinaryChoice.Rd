@@ -34,7 +34,8 @@ Gauss-Hermite quadrature; maximised by BFGS with standard errors from the
 numerical Hessian.
 }
 \examples{
-PanelBinaryChoice(c(0, 1, 1, 0, 0, 1), matrix(c(0, 1, 2, 0.5, 0.2, 1.5)), c(1, 1, 1, 2, 2, 2))$n_units
+PanelBinaryChoice(c(0, 1, 1, 0, 0, 1), matrix(c(0, 1, 2, 0.5, 0.2, 1.5)), c(1, 1, 1, 2, 2,
+  2))$n_units
 }
 \references{
 Chamberlain, G. (1980). Analysis of covariance with qualitative

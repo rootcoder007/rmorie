@@ -31,7 +31,8 @@ min(shortside/4, sqrt(1000/(pi lambda))) (or 4 hmax), J as the
 left-point Stieltjes sum, M for r up to rmax/2, and the grid minimiser.
 }
 \examples{
-P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+  .95, .85))
 BandwidthDiggle(P, c(0, 1, 0, 1))[c("sigma", "at_boundary")]
 }
 \references{

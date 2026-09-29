@@ -44,7 +44,8 @@ decreased by halving backtracking; B follows Powell's damped BFGS update on
 the Lagrangian gradient L = f - lambda'c.
 }
 \examples{
-SequentialQuadraticProgramming(function(x) sum(x^2), c(2, 0), eq = list(function(x) x[1] + x[2] - 1))$x
+SequentialQuadraticProgramming(function(x) sum(x^2), c(2, 0),
+  eq = list(function(x) x[1] + x[2] - 1))$x
 }
 \references{
 Nocedal, J. and Wright, S. J. (2006). Numerical Optimization,

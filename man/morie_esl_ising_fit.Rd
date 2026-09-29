@@ -24,7 +24,8 @@ same fit as the Poisson log-linear model of the 2^p table (eq 17.45).
 }
 \examples{
 t <- 1:200
-Xb <- cbind(as.integer(sin(t) > 0), as.integer(sin(t) + cos(3 * t) > 0.2), as.integer(cos(2 * t) > 0))
+Xb <- cbind(as.integer(sin(t) > 0), as.integer(sin(t) + cos(3 * t) > 0.2),
+  as.integer(cos(2 * t) > 0))
 morie_esl_ising_fit(Xb, rbind(c(1, 2), c(2, 3)))$edges
 }
 \references{

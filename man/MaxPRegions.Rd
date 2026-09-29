@@ -43,7 +43,8 @@ keeping the largest p and then the smallest SSD; an AZP local search that keeps
 every donor above the threshold then lowers the SSD.
 }
 \examples{
-MaxPRegions(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6), 5), rep(1, 6), 3)$p
+MaxPRegions(matrix(c(0, 0.1, 0.2, 5, 5.1, 5.2)), list(2, c(1, 3), c(2, 4), c(3, 5), c(4, 6),
+  5), rep(1, 6), 3)$p
 }
 \references{
 Duque, J. C., Anselin, L. and Rey, S. J. (2012). The

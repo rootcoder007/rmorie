@@ -29,6 +29,7 @@ List with \code{r}, \code{gamma}, \code{bw}, \code{theo}.
 normalisation; under independent marks it equals the mark variance.
 }
 \examples{
-P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+  .95, .85))
 MarkVariogram(P, c(1, 2, 1.5, 3, .5, 2.5, 1, 2, .8, 1.2), c(0, 1, 0, 1))$gamma[257]
 }

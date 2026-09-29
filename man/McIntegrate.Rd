@@ -76,7 +76,8 @@ running mean band and batch-means standard error. Identical to the Python
 arm \code{morie.fn.mcspatial}.
 }
 \examples{
-McIntegrate(function(x, y) x + y, bounds = rbind(c(0, 1), c(0, 1)), n = 2000, method = "lhs")$integral
+McIntegrate(function(x, y) x + y, bounds = rbind(c(0, 1), c(0, 1)), n = 2000,
+  method = "lhs")$integral
 McConvergence(c(1, 3, 2, 4), batches = 2)$batch_se
 }
 \references{

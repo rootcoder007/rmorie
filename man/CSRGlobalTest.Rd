@@ -46,7 +46,8 @@ stream s of \code{seed} (identical to the Python arm); p-value
 (1 + number of simulated T >= observed T) / (nsim + 1).
 }
 \examples{
-P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9, .95, .85))
+P <- cbind(c(.1, .4, .35, .8, .7, .55, .2, .9, .15, .6), c(.2, .8, .3, .6, .15, .5, .65, .9,
+  .95, .85))
 CSRGlobalTest(P, c(0, 1, 0, 1), nsim = 19, statistic = "mad")$p_value
 }
 \references{

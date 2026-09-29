@@ -60,7 +60,8 @@ neighbour lists, islands, connected components, sparsity and the
 constants S0, S1, S2.
 }
 \examples{
-SpatialWeights(rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1), c(0.5, 0.5)), "gabriel", style = "B")$neighbours
+SpatialWeights(rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1), c(0.5, 0.5)), "gabriel",
+  style = "B")$neighbours
 }
 \references{
 Anselin L (1988). Spatial Econometrics: Methods and Models.

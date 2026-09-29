@@ -35,7 +35,8 @@ bands (ESL eq 8.6); uses the session RNG unless seed is given.
 }
 \examples{
 x <- (1:30) / 10
-morie_esl_parametric_bootstrap(cbind(1, x, x^2), sin(x), rbind(c(1, 1, 1)), B = 100, seed = 1)$boot_se
+morie_esl_parametric_bootstrap(cbind(1, x, x^2), sin(x), rbind(c(1, 1, 1)), B = 100,
+  seed = 1)$boot_se
 }
 \references{
 Hastie, Tibshirani & Friedman (2009), sec. 8.2.1.

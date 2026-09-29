@@ -49,7 +49,8 @@ kriging mean and error covariance, pivoted factor). \code{method}:
 identical to the Python arm \code{morie.fn.zschl.chol_sim}.
 }
 \examples{
-CholeskySim(rbind(c(0, 0), c(1, 0)), list(model = "Exp", psill = 1, range = 1), seed = 3)$simulations
+CholeskySim(rbind(c(0, 0), c(1, 0)), list(model = "Exp", psill = 1, range = 1),
+  seed = 3)$simulations
 }
 \references{
 Davis, M. W. (1987). Production of conditional simulations

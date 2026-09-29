@@ -53,7 +53,8 @@ variogram of \code{z <= threshold}; directions \code{alpha} (degrees
 clockwise from north) with tolerance \code{tol_hor}; \code{cloud}.
 }
 \examples{
-SampleVariogram(c(1, 2, 4, 3), rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1)), boundaries = c(0, 1.2, 1.5))
+SampleVariogram(c(1, 2, 4, 3), rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1)), boundaries = c(0,
+  1.2, 1.5))
 }
 \references{
 Cressie, N. and Hawkins, D. M. (1980). Robust estimation of
