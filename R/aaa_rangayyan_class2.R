@@ -2848,7 +2848,9 @@ BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
     xh <- vapply(seq_len(L), function(i) {
       .morie_fsum(A[i, ] * xh) + .morie_fsum(Kmat[i, ] * z)
     }, numeric(1))
-    KC <- .morie_bx_mm(Kmat, Cm)
+    # eq (8.98) subtracts a(n, n+1) K(n) C(n) phi: the inverse transition
+    # cancels the a(n+1, n) inside the gain, leaving phi C^T S^-1 C phi
+    KC <- .morie_bx_mm(.morie_bx_mm(PCt, Kg), Cm)
     Pf <- matrix(0, L, L)
     for (i in seq_len(L)) {
       for (j in seq_len(L)) {
