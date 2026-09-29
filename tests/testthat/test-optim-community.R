@@ -39,11 +39,12 @@ test_that("Diffevol and morie_sa_opt run on Philox and match the Python arm", {
 })
 
 test_that("morie_sa_opt follows the Python arm on the same platform arithmetic", {
-  # the Metropolis accept test amplifies last-bit (FMA) differences, so the exact path is not pinned on macOS
+  # the Metropolis accept test amplifies last-bit (FMA) differences, so the exact
+  # path is pinned only on x86_64 arithmetic (macOS and Windows arm64 diverge)
   s <- morie_sa_opt(rosen, c(-1.2, 1), step = 0.1, n_iter = 2000, seed = 3)
   expect_equal(s$fun, rosen(s$x), tolerance = 1e-12)
   expect_lte(s$fun, min(s$trace) + 1e-15)
-  skip_on_os("mac")
+  skip_if(!grepl("x86_64|amd64", R.version$arch), "exact SA path pinned on x86_64 only")
   s <- morie_sa_opt(rosen, c(-1.2, 1), step = 0.1, n_iter = 2000, seed = 3)
   expect_equal(s$fun, 3.890860177211241e-05, tolerance = 1e-12)
   expect_equal(s$x, c(0.9942293634111342, 0.9887288467288058), tolerance = 1e-12)
