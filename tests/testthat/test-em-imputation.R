@@ -1,0 +1,21 @@
+test_that("em_imputation reaches Anderson's closed-form MLE for a monotone pattern", {
+  y1 <- c(1, 2, 3.5, 4, 5.5, 6, 2.5, 4.5)
+  y2 <- c(2.1, 2.9, 4.2, 5.1, 6.8, NA, NA, NA)
+  cc <- 1:5
+  m1 <- mean(y1)
+  s11 <- mean((y1 - m1)^2)
+  a1 <- mean(y1[cc])
+  a2 <- mean(y2[cc])
+  c11 <- mean((y1[cc] - a1)^2)
+  c12 <- mean((y1[cc] - a1) * (y2[cc] - a2))
+  c22 <- mean((y2[cc] - a2)^2)
+  b <- c12 / c11
+  r <- em_imputation(cbind(y1, y2), max_iter = 5000, tol = 1e-13)
+  expect_equal(r$mean, c(m1, a2 + b * (m1 - a1)), tolerance = 1e-9, ignore_attr = TRUE)
+  expect_equal(r$cov[1, 2], b * s11, tolerance = 1e-8)
+  expect_equal(r$cov[2, 2], c22 + b^2 * (s11 - c11), tolerance = 1e-8)
+  expect_equal(r$n_missing, 3L)
+  full <- cbind(y1[cc], y2[cc])
+  rf <- em_imputation(full)
+  expect_equal(rf$cov, crossprod(sweep(full, 2, colMeans(full))) / 5, tolerance = 1e-12, ignore_attr = TRUE)
+})
