@@ -1,0 +1,17 @@
+test_that("interpolation extras: splines, barriers and potentials", {
+  x <- c(0, 0.5, 1.7, 2, 3.1)
+  y <- c(-1, 0.2, 0.9, 2.5)
+  z <- outer(y, x, function(b, a) sin(a) + cos(2 * b))
+  xo <- c(0.3, 2.6, -0.5)
+  yo <- c(-0.4, 2.1, 0)
+  ref <- vapply(seq_along(xo), function(k) {
+    col <- vapply(seq_along(y), function(j) stats::splinefun(x, z[j, ], method = "natural")(xo[k]), 0)
+    stats::splinefun(y, col, method = "natural")(yo[k])
+  }, 0)
+  expect_equal(BicubicSpline(x, y, z, xo, yo), ref, tolerance = 1e-13)
+  short <- list(rbind(c(1, -1), c(1, 1)))
+  pth <- BarrierIdw(rbind(c(0, 0), c(2, 0)), c(0, 10), rbind(c(0.5, 0)), short, power = 1, method = "path")
+  d1 <- sqrt(0.25 + 1) + sqrt(2)
+  expect_equal(pth, (10 / d1) / (1 / 0.5 + 1 / d1), tolerance = 1e-13)
+  expect_equal(StewartPotential(rbind(c(0, 0), c(1, 0), c(0, 2)), c(10, 20, 5), 2, 0.5)[1], 40 + 20 + 1.25)
+})
