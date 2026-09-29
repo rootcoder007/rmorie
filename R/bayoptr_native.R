@@ -79,9 +79,11 @@
 #' @noRd
 .gp_posterior <- function(X, y, Xnew, amplitude = 1, length_scale = 1,
                           noise = 1e-8) {
+  # coordinate-wise differences, not |a|^2 + |b|^2 - 2 a.b, which cancels
   pd <- function(A, B) {
-    sqrt(pmax(outer(rowSums(A^2), rowSums(B^2), "+") -
-                2 * A %*% t(B), 0))
+    sqrt(Reduce(`+`, lapply(seq_len(ncol(A)), function(j) {
+      outer(A[, j], B[, j], "-")^2
+    })))
   }
   Dxx <- pd(X, X)
   Dxs <- pd(X, Xnew)
@@ -91,9 +93,11 @@
   Kxs <- .matern52(Dxs, amplitude, length_scale)
   Kss <- .matern52(Dss, amplitude, length_scale)
   L <- chol(Kxx)
-  alpha <- solve(t(L), solve(L, y))
+  # chol() returns the upper factor R with K = R'R, so K^{-1} b is
+  # R^{-1} (R')^{-1} b; the reversed order solved a different system
+  alpha <- backsolve(L, forwardsolve(t(L), y))
   mu <- as.numeric(crossprod(Kxs, alpha))
-  V <- solve(t(L), solve(L, Kxs))
+  V <- backsolve(L, forwardsolve(t(L), Kxs))
   sd <- sqrt(pmax(0, diag(Kss) - colSums(Kxs * V)))
   list(mu = mu, sd = sd)
 }
@@ -106,8 +110,9 @@
   out <- numeric(length(mu))
   ok <- sd > 0
   if (any(ok)) {
-    z <- (mu[ok] - f_best - xi) / sd[ok]
-    out[ok] <- (mu[ok] - f_best - xi) * pnorm(z) + sd[ok] * dnorm(z)
+    # minimisation (Snoek et al. 2012 eq. 2): improvement is f_best - mu
+    z <- (f_best - xi - mu[ok]) / sd[ok]
+    out[ok] <- sd[ok] * (z * pnorm(z) + dnorm(z))
   }
   out
 }
@@ -120,7 +125,7 @@
   out <- numeric(length(mu))
   ok <- sd > 0
   if (any(ok)) {
-    z <- (mu[ok] - f_best - xi) / sd[ok]
+    z <- (f_best - xi - mu[ok]) / sd[ok]
     out[ok] <- pnorm(z)
   }
   out
@@ -142,7 +147,8 @@
   switch(acq,
          ei  = .expected_improvement(mu, sd, f_best, xi),
          pi  = .probability_of_improvement(mu, sd, f_best, xi),
-         lcb = .lower_confidence_bound(mu, sd, kappa),
+         # the loop maximises, so the bound to be minimised is negated
+         lcb = -.lower_confidence_bound(mu, sd, kappa),
          stop("bayoptr: unknown acquisition rule '", acq, "'"))
 }
 
@@ -153,9 +159,10 @@
 #' @noRd
 .draw_unif <- function(e, bounds, n) {
   nn <- as.integer(n)
-  vapply(bounds,
-         function(b) .ghc_unif(e, nn, b[1], b[2]),
-         numeric(nn))
+  # matrix() keeps the n x d shape when n = 1 (vapply drops it to a vector)
+  matrix(vapply(bounds,
+                function(b) .ghc_unif(e, nn, b[1], b[2]),
+                numeric(nn)), nrow = nn)
 }
 
 #' Underlying optimiser (the Python arm's _bayopt)
