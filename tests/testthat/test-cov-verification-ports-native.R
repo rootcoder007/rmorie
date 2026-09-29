@@ -13,7 +13,9 @@ test_that("the smoothing spline interpolates at lambda = 0 and becomes the LS li
   # the penalty's null space is the linear functions: any lambda leaves a
   # straight line untouched, and the degrees of freedom fall towards 2
   lin <- 2 + 3 * x
-  expect_equal(morie_esl_smoothing_spline(x, lin, 10)$estimate, lin, tolerance = 1e-10)
+  # exact in arithmetic; the banded solve at lambda = 10 differs at 1e-10 between
+  # OpenBLAS and Apple Accelerate, so the tolerance is 1e-8
+  expect_equal(morie_esl_smoothing_spline(x, lin, 10)$estimate, lin, tolerance = 1e-8)
   dfs <- vapply(c(0.01, 1, 100, 1e4), function(l) morie_esl_smoothing_spline(x, y, l)$effective_df, 1)
   expect_true(all(diff(dfs) < 0) && all(dfs > 2 - 1e-6))
   mid <- morie_esl_smoothing_spline(x, y, 0.5)
