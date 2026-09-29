@@ -28,13 +28,16 @@
 #' Icc3(c(1, 2, 3, 4, 5, 6), c(1, 1, 2, 2, 3, 3), c(1, 2, 1, 2, 1, 2))$estimate
 #' @export
 Icc3 <- function(y, subject, rater) {
-  b <- .icc_balanced(y, subject, "icc_two_way_mixed")
-  n <- b$n
-  k <- b$k
   rs <- .s03vec(rater)
-  if (length(rs) != n * k) {
+  if (length(rs) != length(.s03vec(y))) {
     stop("icc_two_way_mixed: rater must have one entry per rating")
   }
+  # Fill each subject's row in rater order, so column j is the same rater
+  # for every subject whatever order the ratings arrive in.
+  o <- order(rs)
+  b <- .icc_balanced(.s03vec(y)[o], .s03vec(subject)[o], "icc_two_way_mixed")
+  n <- b$n
+  k <- b$k
   if (length(unique(rs)) != k) {
     stop("icc_two_way_mixed: the number of raters must match the ratings per subject")
   }

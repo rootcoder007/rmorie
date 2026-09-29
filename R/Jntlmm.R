@@ -165,7 +165,7 @@ Jntlmm <- function(long_y, time, event, X, Z, cluster) {
     beta <- beta + step
     if (max(abs(step)) < 1e-12) break
   }
-  inv <- vapply(seq_len(p), function(j) .s03ridgesolve(H, as.numeric(seq_len(p) == j), 1e-10), numeric(p))
+  inv <- matrix(vapply(seq_len(p), function(j) .s03ridgesolve(H, as.numeric(seq_len(p) == j), 1e-10), numeric(p)), p, p)
   se <- vapply(seq_len(p), function(j) if (inv[j, j] > 0) sqrt(inv[j, j]) else NaN, 0)
   list(beta = beta, se = se, ll = ll)
 }

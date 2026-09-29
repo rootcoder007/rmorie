@@ -552,7 +552,7 @@ morie_llm_list_freeapi_models <- function() {
   seen <- character(0)
   if (nzchar(json_dir) && dir.exists(json_dir) &&
       requireNamespace("jsonlite", quietly = TRUE)) {
-    for (jf in sort(list.files(json_dir, pattern = "\\\\.json$",
+    for (jf in sort(list.files(json_dir, pattern = "\\.json$",
                                full.names = TRUE))) {
       data <- tryCatch(.morie_from_json(jf, simplifyVector = FALSE),
                        error = function(e) NULL)

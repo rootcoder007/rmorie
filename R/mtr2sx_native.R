@@ -155,12 +155,13 @@ morie_mtr2sx <- function(beta_x, se_x, beta_y, se_y,
   # --- per-variant delta-method variances ----------------------------
   var <- sy * sy / (bx * bx)
   if (weights == "second_order") {
-    v2 <- by * by * sx * sx / (bx ^ 4) -
+    # the check is on the total variance, as in the Python arm: the
+    # second-order increment alone is negative whenever theta * ratio > 0
+    var <- var + by * by * sx * sx / (bx ^ 4) -
       2 * theta * by * sy * sx / (bx ^ 3)
-    if (any(v2 <= 0))
+    if (any(var <= 0))
       stop(sprintf("mtr2sx: the second-order variance for variant %d is non-positive; check theta",
-                   which(v2 <= 0)[1L]))
-    var <- var + v2
+                   which(var <= 0)[1L]))
   }
 
   # --- Cochran Q and DerSimonian-Laird tau^2 ------------------------

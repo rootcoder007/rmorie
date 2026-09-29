@@ -681,7 +681,9 @@ NULL
   for (i in jj) {
     a <- theta[i]
     kk <- sum(log1p(-a * x)) / N
-    lt[i] <- if (kk < 0 && a != 0) N * (log(-a / kk) - kk - 1) else -1e300
+    # the profile likelihood is defined whenever theta and k have opposite
+    # signs; negative-theta grid points (heavy tails, k > 0) are valid too
+    lt[i] <- if (a != 0 && kk != 0 && -a / kk > 0) N * (log(-a / kk) - kk - 1) else -1e300
   }
   w <- exp(lt - max(lt))
   th <- if (sum(w) > 0) sum(theta * w) / sum(w) else 0

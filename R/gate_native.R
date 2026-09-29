@@ -64,7 +64,7 @@ morie_gate <- function(data, treatment, outcome, covariates, group_col,
                        propensity_col = NULL, trim = c(0.01, 0.99),
                        trim_type = "value", ps_model = "mle",
                        ridge_lambda = 1, outcome_fit = "separate") {
-  required_cols <- unique(c(treatment, outcome, group_col, covariates))
+  required_cols <- unique(c(treatment, outcome, group_col, covariates, propensity_col))
   frame <- data[required_cols]
   frame <- frame[stats::complete.cases(frame), , drop = FALSE]
   groups <- sort(unique(frame[[group_col]]))
