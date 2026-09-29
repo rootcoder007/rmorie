@@ -45,7 +45,7 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
         inside <- TRUE
         for (j in seq_len(d)) {
           u <- (Xm[i, j] - lo[j]) / span[j]
-          hi_ <- if (idx[j] == cells - 1L) 1.0 + 1e-12 else 1.0
+          hi_ <- (idx[j] + 1) / cells + if (idx[j] == cells - 1L) 1e-12 else 0
           if (!(idx[j] / cells <= u && u < hi_)) { inside <- FALSE
           break }
         }
@@ -119,7 +119,7 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
   v <- as.numeric(std_moments)
   J <- length(v)
   ineq <- v[seq_len(J - as.integer(n_equality))]
-  eq <- if (J - as.integer(n_equality) > 0L) v[(J - as.integer(n_equality) + 1L):J] else numeric(0)
+  eq <- if (as.integer(n_equality) > 0L) v[(J - as.integer(n_equality) + 1L):J] else numeric(0)
   neg <- pmin(ineq, 0)
   s <- if (form == "sum") sum(neg^2)
        else if (form == "max") max(c(neg^2, 0))
