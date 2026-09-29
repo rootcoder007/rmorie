@@ -460,8 +460,11 @@ Basexp <- function(t, beta_coef, kind = "fourier", period = NULL) {
     # the basis is periodic on [0, 1]; rescale t to that unit period
     tt <- tt / as.numeric(period)
   }
+  # after the rescale the Fourier period is 1; without a period the basis
+  # period is the span of t, as in morie_fda_basis
+  per <- if (!is.null(period) && identical(kind, "fourier")) 1 else NULL
   list(
-    beta_t = morie_fda_beta_function(tt, coefs, length(coefs), kind),
+    beta_t = as.numeric(morie_fda_basis(tt, length(coefs), kind, period = per) %*% coefs),
     t = as.numeric(t), n_basis = length(coefs)
   )
 }
