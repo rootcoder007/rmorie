@@ -1,0 +1,121 @@
+# Coverage tests for R/aaa_tail2_t03.R: Cohen's d / Hedges' g, the
+# Cramer-Rao bound, the Breslow Cox partial likelihood (survival), the
+# quadratic penalty method, forward-backward splitting and entropic OT.
+
+test_that("Cohen's d and Hedges' g", {
+  r <- CohensD(5.2, 4.1, 1.3, 1.6, 12, 15)
+  sp <- sqrt((11 * 1.3^2 + 14 * 1.6^2) / 25)
+  d <- 1.1 / sp
+  j <- gamma(12.5) / (sqrt(12.5) * gamma(12))
+  expect_equal(r$s_pooled, sp, tolerance = 1e-12)
+  expect_equal(r$d, d, tolerance = 1e-12)
+  expect_equal(r$var_d, 1 / 12 + 1 / 15 + d^2 / 54, tolerance = 1e-12)
+  expect_equal(r$j, j, tolerance = 1e-12)
+  expect_equal(r$j_approx, 1 - 3 / 99)
+  expect_equal(r$hedges_g, j * d, tolerance = 1e-12)
+  expect_equal(r$se_g, sqrt(1 / 12 + 1 / 15 + (j * d)^2 / 54), tolerance = 1e-12)
+  expect_error(CohensD(1, 2, 1, 1, 1, 5), "at least 2")
+  expect_error(CohensD(1, 2, -1, 1, 3, 5), "non-negative")
+  expect_error(CohensD(1, 2, 0, 0, 3, 5), "pooled standard deviation is zero")
+})
+
+test_that("Cramer-Rao bound is the inverse Fisher information", {
+  I <- rbind(c(4, 1, 0.5), c(1, 3, 0.2), c(0.5, 0.2, 2))
+  r <- CramerRao(I, var_estimate = c(0.4, 0.4, 0.6))
+  expect_equal(r$bound, solve(I), tolerance = 1e-12)
+  expect_equal(r$se, sqrt(diag(solve(I))), tolerance = 1e-12)
+  expect_equal(r$efficiency, diag(solve(I)) / c(0.4, 0.4, 0.6), tolerance = 1e-12)
+  expect_true(r$attained)
+  expect_false(CramerRao(I, diag(solve(I)) / 2)$attained)
+  v <- CramerRao(c(2, 8))
+  expect_equal(v$variance, c(0.5, 0.125))
+  expect_null(v$efficiency)
+  expect_error(CramerRao(matrix(1, 2, 3)), "square")
+  expect_error(CramerRao(numeric(0)), "empty")
+  expect_error(CramerRao(rbind(c(1, 0.5), c(0.4, 1))), "symmetric")
+  expect_error(CramerRao(c(1, 0)), "non-positive diagonal")
+  expect_error(CramerRao(rbind(c(1, 2), c(2, 1))), "inverse information has a non-positive")
+  expect_error(CramerRao(I, 1:2), "one entry per parameter")
+})
+
+test_that("Cox partial likelihood with Breslow ties matches survival", {
+  skip_if_not_installed("survival")
+  tm <- c(5, 3, 8, 3, 10, 6, 2, 8, 7, 4, 9, 1)
+  ev <- c(1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1)
+  X <- cbind(c(0.5, -1, 1.2, 0.3, -0.4, 2, -1.5, 0.8, 0, 1, -0.7, 0.2), c(1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 1))
+  f <- CoxPL(tm, ev, X)
+  cf <- survival::coxph(survival::Surv(tm, ev) ~ X, ties = "breslow", control = survival::coxph.control(eps = 1e-10, iter.max = 50))
+  expect_equal(f$coefficients, unname(coef(cf)), tolerance = 1e-8)
+  expect_equal(f$loglik, cf$loglik[2], tolerance = 1e-10)
+  expect_equal(f$vcov, unname(vcov(cf)), tolerance = 1e-8)
+  expect_equal(f$n_event, 9L)
+  expect_true(f$converged)
+  b <- c(0.3, -0.2)
+  e <- CoxPL(tm, ev, X, beta = b)
+  c0 <- survival::coxph(survival::Surv(tm, ev) ~ X, ties = "breslow", init = b, control = survival::coxph.control(iter.max = 0))
+  expect_equal(e$loglik, c0$loglik[1], tolerance = 1e-10)
+  expect_equal(e$iterations, 0L)
+  expect_match(e$method, "evaluated at beta")
+  expect_error(CoxPL(tm, rep(0, 12), X), "no events")
+  expect_error(CoxPL(tm, ev[-1], X), "same length")
+  expect_error(CoxPL(tm, ev, X, beta = 1), "one entry per column")
+})
+
+test_that("quadratic penalty method tracks the penalised minimiser", {
+  f <- function(x) (x - 2)^2
+  r <- PenaltyMin(f, list(function(x) x - 1), 0, mu = 1, n_outer = 4)
+  mu <- 1000
+  # minimiser of (x-2)^2 + mu (x-1)^2 is (2 + mu)/(1 + mu); finite-difference
+  # gradient descent stops within 1e-6 of it
+  expect_equal(r$x, (2 + mu) / (1 + mu), tolerance = 1e-6)
+  expect_equal(r$mu, mu)
+  expect_equal(r$penalty, (r$x - 1)^2, tolerance = 1e-12)
+  expect_equal(r$q, f(r$x) + mu * r$penalty, tolerance = 1e-12)
+  expect_equal(r$max_violation, r$x - 1)
+  free <- PenaltyMin(f, list(), 0, mu = 1, n_outer = 1)
+  expect_equal(free$x, 2, tolerance = 1e-6)
+  expect_equal(free$max_violation, 0)
+  expect_error(PenaltyMin(f, list(), 0, mu = 0), "mu must be positive")
+  expect_error(PenaltyMin(f, list(), 0, mu = 1, growth = 1), "growth must exceed 1")
+})
+
+test_that("forward-backward splitting solves the lasso prox problem", {
+  cc <- c(3, -0.4, -2, 0.1)
+  lam <- 0.5
+  soft <- function(v, t) sign(v) * pmax(abs(v) - lam * t, 0)
+  r <- ProxGrad(function(x) 0.5 * sum((x - cc)^2) + lam * sum(abs(x)), function(x) x - cc, soft, rep(0, 4), lr = 0.5, n_iter = 100)
+  ref <- sign(cc) * pmax(abs(cc) - lam, 0)
+  expect_equal(r$x, ref, tolerance = 1e-12)
+  expect_equal(r$objective, 0.5 * sum((ref - cc)^2) + lam * sum(abs(ref)), tolerance = 1e-12)
+  rr <- ProxGrad(function(x) 0, function(x) x - cc, soft, rep(0, 4), lr = 0.5, n_iter = 200, relaxation = 1.4)
+  expect_equal(rr$x, ref, tolerance = 1e-9)
+  expect_error(ProxGrad(identity, identity, soft, 0, lr = 0), "lr must be positive")
+  expect_error(ProxGrad(identity, identity, soft, 0, lr = 1, relaxation = 1.5), "relaxation")
+  expect_error(ProxGrad(identity, function(x) c(x, x), soft, 0, lr = 1), "grad_f returned")
+  expect_error(ProxGrad(identity, identity, function(y, t) c(y, y), 0, lr = 1), "prox_g returned")
+})
+
+test_that("entropic OT domain adaptation by Sinkhorn scaling", {
+  Xs <- rbind(c(0, 0), c(1, 0.5), c(0.3, 1))
+  Xt <- rbind(c(2, 1), c(2.5, 0), c(1.5, 1.8), c(3, 2))
+  r <- OtAdapt(Xs, Xt, epsilon = 1, n_iter = 500)
+  C <- outer(1:3, 1:4, Vectorize(function(i, j) sum((Xs[i, ] - Xt[j, ])^2)))
+  K <- exp(-C)
+  u <- rep(1, 3)
+  v <- rep(1, 4)
+  for (k in 1:500) {
+    u <- (1 / 3) / as.numeric(K %*% v)
+    v <- (1 / 4) / as.numeric(t(K) %*% u)
+  }
+  P <- u * K * rep(v, each = 3)
+  expect_equal(r$cost, C, tolerance = 1e-12)
+  expect_equal(r$gamma, P, tolerance = 1e-12)
+  expect_equal(r$Xs_adapted, (P %*% Xt) / rowSums(P), tolerance = 1e-12)
+  expect_equal(r$transport_cost, sum(P * C), tolerance = 1e-12)
+  expect_lt(r$row_error, 1e-12)
+  expect_lt(r$col_error, 1e-12)
+  expect_error(OtAdapt(Xs[0, , drop = FALSE], Xt, 1), "non-empty")
+  expect_error(OtAdapt(Xs, Xt[, 1, drop = FALSE], 1), "same dimension")
+  expect_error(OtAdapt(Xs, Xt, 0), "epsilon must be positive")
+  expect_error(OtAdapt(Xs, Xt * 100, 1e-3), "underflowed")
+})
