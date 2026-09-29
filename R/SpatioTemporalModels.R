@@ -13,7 +13,7 @@
 #' with its smallest eigenvalue. \code{ProcessConvolutionCovariance}: Higdon
 #' process-convolution covariance with location-specific Gaussian kernels.
 #' \code{ArmaAcf}: theoretical ARMA autocorrelation function. Identical to the
-#' Python arm \code{morie.fn.stmodels}.
+#' Python arm \code{morie.fn.stblocks}.
 #'
 #' @param scale Scale matrix.
 #' @param df Degrees of freedom.

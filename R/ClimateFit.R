@@ -12,7 +12,7 @@
 #'
 #' \code{NaoStationIndex}: station-based NAO index (Hurrell 1995).
 #' \code{Co2CurveFit}: polynomial trend plus annual harmonics (Thoning et al.
-#' 1989). Identical to the Python arm \code{morie.fn.climidx}.
+#' 1989). Identical to the Python arm \code{morie.fn.climfit}.
 #'
 #' @param slp_south,slp_north Sea-level pressure series.
 #' @param months Optional calendar month of each value.
