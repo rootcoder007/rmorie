@@ -89,7 +89,7 @@ morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
 #' @noRd
 .tail <- function(B, m) {
   if (m <= 0L) return(-0.5 * B[1])
-  -0.5 * B[1] - sum(B[seq_len(m) + 1L - 1L])
+  -0.5 * B[1] - sum(B[seq_len(m - 1L) + 1L])
 }
 
 #' Extract the band by one of three routes
@@ -138,10 +138,10 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
       s <- w[1] * v[t]
       if (pp >= 2L)
         for (j in 2:pp) s <- s + w[j] * (v[t + j - 1L] + v[t - j + 1L])
-      s <- s + end * (v[t + pp - 1L] + v[t - pp - 1L + 1L])
+      s <- s + end * (v[t + pp] + v[t - pp])
       out[t] <- s
     }
-    wts <- c(end, w[seq.int(pp - 1L, 2L)], w[1], w[seq.int(2L, pp)], end)
+    wts <- c(end, rev(w[-1L]), w[1], w[-1L], end)
     return(list(estimate = out, cycle = out, method = "symmetric",
                 p = pp, weights = wts, weight_sum = sum(wts),
                 n_missing = 2L * pp, drift_removed = 0.0,
@@ -177,9 +177,9 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
     w <- numeric(T)
     w[t] <- w[t] + if (f >= 1L && b >= 1L) B[1] else 0.5 * B[1]
     if (f >= 1L)
-      for (j in 1:(f - 1L)) w[t + j] <- w[t + j] + B[j + 1L]
+      for (j in seq_len(f - 1L)) w[t + j] <- w[t + j] + B[j + 1L]
     if (b >= 1L)
-      for (j in 1:(b - 1L)) w[t - j] <- w[t - j] + B[j + 1L]
+      for (j in seq_len(b - 1L)) w[t - j] <- w[t - j] + B[j + 1L]
     if (f >= 1L) w[T] <- w[T] + .tail(B, f)
     if (b >= 1L) w[1] <- w[1] + .tail(B, b)
     out[t] <- sum(w * v)
