@@ -540,15 +540,20 @@ morie_baysmplr_ess <- function(chain, max_lag = 200L) {
     for (lag in seq_len(top))
       rho[lag] <- .w3_csum(dev[seq_len(n - lag)] * dev[(lag + 1L):n]) /
         (n * var)
+    # Geyer (1992): Gamma_k = rho_2k + rho_2k+1 counted from rho_0 = 1,
+    # tau = -1 + 2 * (sum of the initial positive Gammas); pairing from
+    # lag 1 instead stops at once on an antithetic chain
+    r <- c(1, rho)
     total <- 0
     k <- 1L
-    while (k + 1L <= length(rho)) {
-      pair <- rho[k] + rho[k + 1L]
+    while (k + 1L <= length(r)) {
+      pair <- r[k] + r[k + 1L]
       if (pair <= 0) break
       total <- total + pair
       k <- k + 2L
     }
-    if (1 + 2 * total > 0) n / (1 + 2 * total) else as.numeric(n)
+    tau <- -1 + 2 * total
+    if (tau > 0) n / tau else as.numeric(n)
   }, numeric(1))
 }
 
