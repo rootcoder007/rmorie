@@ -280,8 +280,9 @@ morie_ensure_extras <- function(pkgs, ask = interactive(), repos = NULL) {
 
   if (!isTRUE(ask) || !interactive()) {
     stop(sprintf(
-      "morie requires package%s %s. Install with:\n  morie_install_extras(c(%s))",
-      if (length(miss) == 1L) "" else "s",
+      "%s requires package%s %s. Install with:
+  morie_install_extras(c(%s))",
+      utils::packageName(), if (length(miss) == 1L) "" else "s",
       paste(sQuote(miss), collapse = ", "),
       paste0("\"", miss, "\"", collapse = ", ")
     ), call. = FALSE)

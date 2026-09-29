@@ -22,6 +22,27 @@
 #     host = "localhost", dbname = "morie", user = "...")
 #   morie_load_dataset("ocp21", con = con)
 
+# Internal: SQL backend when DBI and a driver are installed, else the file
+# backend with a message. The cache never fails for want of an optional
+# package; DBI stays the opt-in path for SQL and server backends.
+.morie_dbi_available <- function() {
+  requireNamespace("DBI", quietly = TRUE) &&
+    (requireNamespace("RSQLite", quietly = TRUE) || requireNamespace("duckdb", quietly = TRUE))
+}
+
+.morie_sql_or_fallback <- function(db_path = NULL) {
+  if (.morie_dbi_available()) {
+    con <- if (is.null(db_path)) morie_db_connect() else morie_db_connect(db_path)
+    return(list(type = "dbi", con = con, close = TRUE))
+  }
+  message("cache: DBI with RSQLite or duckdb is not installed; using the file backend ",
+          "(morie_install_extras(c('DBI', 'RSQLite')) enables SQL caches)")
+  if (requireNamespace("nanoparquet", quietly = TRUE)) {
+    return(list(type = "parquet", dir = .morie_cache_fs_dir(), close = FALSE))
+  }
+  list(type = "rds", dir = .morie_cache_fs_dir(), close = FALSE)
+}
+
 # Internal: resolve a DBI connection. Accepts a pre-opened connection
 # (used as-is, caller owns disconnection) OR a SQLite path string (we
 # open + own + close). The default path is the per-user cache.
@@ -40,7 +61,7 @@
   }
   # Explicit db_path -> the user wants a SQL (SQLite/DuckDB) file backend.
   if (!is.null(db_path) && nzchar(db_path)) {
-    return(list(type = "dbi", con = morie_db_connect(db_path), close = TRUE))
+    return(.morie_sql_or_fallback(db_path))
   }
   # Explicit backend choice via env: rds | parquet | duckdb | sqlite.
   be <- Sys.getenv("MORIE_CACHE_BACKEND", "")
@@ -51,14 +72,14 @@
     return(list(type = "parquet", dir = .morie_cache_fs_dir(), close = FALSE))
   }
   if (be %in% c("duckdb", "sqlite")) {
-    return(list(type = "dbi", con = morie_db_connect(), close = TRUE))
+    return(.morie_sql_or_fallback())
   }
   # Back-compat: honour MORIE_CACHE_DB or an existing cache DB file -> SQL.
   cache_dir <- file.path(tempdir(), "morie")
   if (nzchar(Sys.getenv("MORIE_CACHE_DB", "")) ||
     file.exists(file.path(cache_dir, "morie.duckdb")) ||
     file.exists(file.path(cache_dir, "morie.db"))) {
-    return(list(type = "dbi", con = morie_db_connect(), close = TRUE))
+    return(.morie_sql_or_fallback())
   }
   # Default: zero/light-compile file backend. Parquet (cross-language) when
   # nanoparquet is available; else base-R RDS. DuckDB/SQLite stay opt-in (see
