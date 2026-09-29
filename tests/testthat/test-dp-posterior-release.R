@@ -1,0 +1,10 @@
+test_that("dp_bayesian_mechanism releases one Philox-chosen draw", {
+  post <- c(0.3, -1.2, 0.8, 1.5, -0.4, 0.1, 2.0, 1.1)
+  r <- dp_bayesian_mechanism(rep(1, 20), post, epsilon = 0.5, B = 2, seed = 11)
+  j <- floor(.morie_random_uniform(1, seed = 11, stream = 0) * 8)
+  expect_equal(r$draw_index, j)
+  expect_equal(r$released, post[j + 1])
+  expect_equal(r$temperature, 8)
+  expect_equal(r$laplace_scale, 0.1)
+  expect_error(dp_bayesian_mechanism(c(1, 2)), "posterior_sample is required")
+})
