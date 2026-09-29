@@ -369,8 +369,20 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
       for (i in seq_along(tgt)) {
         err <- err + (pred_ds[i] - tgt[i])^2
       }
+      # backpropagate through the downsampler (Ho et al. 2022 Sec. 4):
+      # grad_i = -w 2 sum_k (D(x)_k - y_k) dD_k/dx_i, with the Jacobian
+      # taken by central differences (exact up to rounding for the
+      # linear downsamplers used for super-resolution); the zero
+      # gradient returned before made the guidance a no-op
+      res <- pred_ds - tgt
       for (i in seq_along(grad[[ti]])) {
-        grad[[ti]][i] <- 0.0
+        h <- 1e-6 * max(1, abs(pred[i]))
+        up <- pred
+        dn <- pred
+        up[i] <- up[i] + h
+        dn[i] <- dn[i] - h
+        jac <- (.vidgen_vec(downsample(up)) - .vidgen_vec(downsample(dn))) / (2 * h)
+        grad[[ti]][i] <- -w * 2.0 * sum(res * jac)
       }
       next
     }
