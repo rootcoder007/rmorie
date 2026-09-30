@@ -479,7 +479,7 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
 # stores it with mode 0600 in $XDG_CONFIG_HOME/morie/credentials.json -- the
 # same file the Python package reads, so one login serves both.
 
-DEFAULT_HOSTED_BASE_URL <- "https://llm.rmorie.com/v1"
+DEFAULT_HOSTED_BASE_URL <- "https://llm.rmorie.com"
 DEFAULT_HOSTED_AUTH_URL <- "https://llm.rmorie.com/auth"
 DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
 
@@ -564,7 +564,7 @@ morie_llm_probe_hosted <- function(timeout = 2) {
     return(FALSE)
   }
   out <- tryCatch({
-    req <- httr2::request(paste0(base, "/models"))
+    req <- httr2::request(paste0(base, "/v1/models"))
     req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
     req <- httr2::req_timeout(req, timeout)
     httr2::resp_status(httr2::req_perform(req)) < 400
