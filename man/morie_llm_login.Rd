@@ -8,7 +8,9 @@ morie_llm_login(
   open_browser = interactive(),
   poll_max_seconds = 600,
   email = NULL,
-  code = NULL
+  code = NULL,
+  token = NULL,
+  to_email = FALSE
 )
 }
 \arguments{
@@ -20,6 +22,12 @@ morie_llm_login(
 of GitHub; the code is read from the console (or from \code{code}).}
 
 \item{code}{The emailed code, when not read interactively.}
+
+\item{token}{A key obtained elsewhere (the website, or one the gateway
+emailed); stored directly, no sign-in round trip.}
+
+\item{to_email}{With \code{email}: have the gateway email the key instead of
+returning it. Nothing is stored; paste it later with \code{token}.}
 }
 \value{
 The key, invisibly.
