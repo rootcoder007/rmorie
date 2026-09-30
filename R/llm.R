@@ -191,7 +191,8 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 }
 
 #' Detect the active LLM provider
-#' @return Character scalar provider key: ollama / gemini / api / openai / local.
+#' @return Character scalar provider key: ollama / hosted / gemini / api / openai / local.
+#' The hosted tier (llm.rmorie.com) answers only after \code{morie_llm_login()}.
 #' @examples
 #' old <- options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_detect_provider()
@@ -199,6 +200,7 @@ morie_llm_probe_ollama <- function(timeout = 2) {
 #' @export
 morie_llm_detect_provider <- function() {
   if (morie_llm_probe_ollama())                                 return("ollama")
+  if (morie_llm_probe_hosted())                                 return("hosted")
   if (!is.null(.morie_llm_gemini_key()))                        return("gemini")
   if (!is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key()))
                                                                 return("api")
@@ -349,7 +351,12 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
   if (provider == "ollama") {
     add(.morie_llm_ollama_base(), model %||% .morie_llm_ollama_default_model(), NULL)
   }
-  if (provider %in% c("ollama", "gemini") && !is.null(.morie_llm_gemini_key())) {
+  if (provider %in% c("ollama", "hosted") && !is.null(.morie_llm_hosted_base()) &&
+      !is.null(.morie_llm_hosted_key())) {
+    add(.morie_llm_hosted_base(), model %||% .morie_llm_hosted_model(),
+        .morie_llm_hosted_key())
+  }
+  if (provider %in% c("ollama", "hosted", "gemini") && !is.null(.morie_llm_gemini_key())) {
     add(GEMINI_BASE_URL, model %||% .morie_llm_gemini_model(),
         .morie_llm_gemini_key())
   }
@@ -461,4 +468,178 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
     if (!is.null(out) && nzchar(out)) return(out)
   }
   .morie_llm_local_fallback(fallback_prompt())
+}
+
+# ---- The hosted MORIE inference tier (llm.rmorie.com) -----------------------
+#
+# An authenticated, rate-limited OpenAI-compatible endpoint run by the
+# project. It sits second in the provider chain, after a local Ollama and
+# before any cloud API key, and only speaks once the user has logged in:
+# morie_llm_login() runs the GitHub device flow, receives a per-user key and
+# stores it with mode 0600 in $XDG_CONFIG_HOME/morie/credentials.json -- the
+# same file the Python package reads, so one login serves both.
+
+DEFAULT_HOSTED_BASE_URL <- "https://llm.rmorie.com/v1"
+DEFAULT_HOSTED_AUTH_URL <- "https://llm.rmorie.com/auth"
+DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
+
+#' Internal helper: the hosted endpoint, or NULL when disabled by an empty override
+#' @noRd
+.morie_llm_hosted_base <- function() {
+  if (nzchar(Sys.getenv("MORIE_HOSTED_BASE_URL", unset = "")) ||
+      "MORIE_HOSTED_BASE_URL" %in% names(Sys.getenv())) {
+    v <- sub("/+$", "", trimws(Sys.getenv("MORIE_HOSTED_BASE_URL")))
+    return(if (nzchar(v)) v else NULL)
+  }
+  DEFAULT_HOSTED_BASE_URL
+}
+
+#' Internal helper: the sign-in service of the hosted tier
+#' @noRd
+.morie_llm_hosted_auth <- function() {
+  sub("/+$", "", .morie_llm_env("MORIE_HOSTED_AUTH_URL", DEFAULT_HOSTED_AUTH_URL))
+}
+
+#' Internal helper: the hosted model name
+#' @noRd
+.morie_llm_hosted_model <- function() .morie_llm_env("MORIE_HOSTED_MODEL", DEFAULT_HOSTED_MODEL)
+
+#' Internal helper: the credentials file shared with the Python package
+#' @noRd
+.morie_llm_credentials_path <- function() {
+  base <- trimws(Sys.getenv("XDG_CONFIG_HOME", unset = ""))
+  if (!nzchar(base)) base <- file.path(path.expand("~"), ".config")
+  file.path(base, "morie", "credentials.json")
+}
+
+#' Internal helper: read the credentials file (a named list, empty when absent)
+#' @noRd
+.morie_llm_read_credentials <- function() {
+  p <- .morie_llm_credentials_path()
+  if (!file.exists(p)) return(list())
+  out <- tryCatch(.morie_from_json(paste(readLines(p, warn = FALSE), collapse = "\n"),
+                                   simplifyVector = TRUE),
+                  error = function(e) NULL)
+  if (is.list(out)) out else list()
+}
+
+#' Internal helper: write the credentials file with owner-only permissions
+#' @noRd
+.morie_llm_write_credentials <- function(data) {
+  p <- .morie_llm_credentials_path()
+  dir.create(dirname(p), recursive = TRUE, showWarnings = FALSE)
+  tmp <- paste0(p, ".tmp")
+  writeLines(.morie_to_json(data, auto_unbox = TRUE, pretty = TRUE), tmp)
+  Sys.chmod(tmp, mode = "0600")
+  file.rename(tmp, p)
+  invisible(p)
+}
+
+#' Internal helper: the user's hosted key -- MORIE_HOSTED_KEY, else the stored credential
+#' @noRd
+.morie_llm_hosted_key <- function() {
+  v <- .morie_llm_env("MORIE_HOSTED_KEY")
+  if (nzchar(v)) return(v)
+  k <- .morie_llm_read_credentials()$hosted_key
+  if (is.character(k) && length(k) == 1L && nzchar(trimws(k))) trimws(k) else NULL
+}
+
+#' Probe the hosted MORIE tier
+#'
+#' TRUE when the user is logged in and llm.rmorie.com accepts the key. The
+#' answer is cached for the session, and no request is made without a key.
+#' @param timeout Probe timeout in seconds.
+#' @return Logical scalar.
+#' @examples
+#' morie_llm_probe_hosted()
+#' @export
+morie_llm_probe_hosted <- function(timeout = 2) {
+  cache <- .morie_llm_cache$hosted_cached
+  if (!is.null(cache)) return(cache)
+  base <- .morie_llm_hosted_base()
+  key <- .morie_llm_hosted_key()
+  if (is.null(base) || is.null(key) || !requireNamespace("httr2", quietly = TRUE) ||
+      .morie_llm_no_net()) {
+    .morie_llm_cache$hosted_cached <- FALSE
+    return(FALSE)
+  }
+  out <- tryCatch({
+    req <- httr2::request(paste0(base, "/models"))
+    req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
+    req <- httr2::req_timeout(req, timeout)
+    httr2::resp_status(httr2::req_perform(req)) < 400
+  }, error = function(e) FALSE)
+  .morie_llm_cache$hosted_cached <- out
+  out
+}
+
+#' Sign in to the hosted MORIE LLM tier
+#'
+#' Runs the GitHub device flow against the sign-in service of
+#' llm.rmorie.com: a short code and a URL are printed (and the browser
+#' opened when possible); once the sign-in is approved the service mints a
+#' per-user, rate-limited key, which is stored with mode 0600 in
+#' \code{$XDG_CONFIG_HOME/morie/credentials.json} and used by both the R
+#' and the Python package. Nothing is sent to the tier before that.
+#' @param open_browser Open the verification URL in the browser.
+#' @param poll_max_seconds Give up after this many seconds.
+#' @return The key, invisibly.
+#' @examples
+#' \dontrun{
+#' morie_llm_login()
+#' }
+#' @export
+morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600) {
+  if (!requireNamespace("httr2", quietly = TRUE))
+    stop("morie_llm_login() needs the httr2 package")
+  auth <- .morie_llm_hosted_auth()
+  start <- httr2::req_perform(httr2::req_method(httr2::request(paste0(auth, "/device/code")), "POST"))
+  info <- httr2::resp_body_json(start)
+  message(sprintf("Sign in at %s and enter the code: %s", info$verification_uri, info$user_code))
+  if (isTRUE(open_browser)) try(utils::browseURL(info$verification_uri), silent = TRUE)
+  interval <- as.numeric(info$interval %||% 5)
+  deadline <- Sys.time() + poll_max_seconds
+  while (Sys.time() < deadline) {
+    Sys.sleep(interval)
+    req <- httr2::req_body_json(httr2::request(paste0(auth, "/device/token")),
+                                list(device_code = info$device_code))
+    resp <- httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))
+    st <- httr2::resp_status(resp)
+    if (st == 200L) {
+      body <- httr2::resp_body_json(resp)
+      if (!is.null(body$api_key)) {
+        data <- .morie_llm_read_credentials()
+        data$hosted_key <- body$api_key
+        data$hosted_user <- body$user %||% ""
+        data$hosted_base_url <- .morie_llm_hosted_base()
+        p <- .morie_llm_write_credentials(data)
+        .morie_llm_cache$hosted_cached <- NULL
+        message(sprintf("Logged in as %s; key stored in %s", body$user %||% "user", p))
+        return(invisible(body$api_key))
+      }
+    } else if (st == 428L) {
+      interval <- as.numeric(tryCatch(httr2::resp_body_json(resp)$interval, error = function(e) NULL) %||% interval)
+    } else {
+      stop(sprintf("the sign-in service answered %d", st))
+    }
+  }
+  stop("the sign-in was not completed in time; run morie_llm_login() again")
+}
+
+#' Forget the hosted MORIE LLM key
+#' @return TRUE (invisibly) when a key was removed.
+#' @examples
+#' \dontrun{
+#' morie_llm_logout()
+#' }
+#' @export
+morie_llm_logout <- function() {
+  data <- .morie_llm_read_credentials()
+  had <- !is.null(data$hosted_key)
+  data$hosted_key <- NULL
+  data$hosted_user <- NULL
+  if (length(data)) .morie_llm_write_credentials(data) else unlink(.morie_llm_credentials_path())
+  .morie_llm_cache$hosted_cached <- NULL
+  message(if (had) "Hosted key removed." else "No hosted key was stored.")
+  invisible(had)
 }
