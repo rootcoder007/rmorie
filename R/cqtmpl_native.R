@@ -131,8 +131,8 @@
 #' @export
 #' @examples
 #' set.seed(1)
-#' r <- morie_cqtmpl(y = rnorm(10), left = rnorm(10), right = rnorm(10), r_left = rnorm(10),
-#'   r_right = rnorm(10))
+#' r <- morie_cqtmpl(y = rnorm(10), left = rbinom(10, 1, 0.5), right = rbinom(10, 1, 0.5),
+#'                   r_left = 0.1, r_right = 0.2)
 #' TRUE
 #' @keywords internal
 morie_cqtmpl <- function(y, left, right, r_left, r_right,
@@ -144,6 +144,9 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
   n <- length(y)
   if (!(n == length(left) && n == length(right)))
     stop("cqtmpl: y and the flanking markers must have the same length")
+  if (length(r_left) != 1L || length(r_right) != 1L)
+    stop("cqtmpl: r_left and r_right are the recombination fractions between the QTL and ",
+         "its two flanking markers, one number each")
   cof <- lapply(cofactors, as.numeric)
   for (cc in cof) {
     if (length(cc) != n)
