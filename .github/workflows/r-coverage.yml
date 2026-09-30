@@ -21,8 +21,14 @@ permissions:
 
 jobs:
   coverage:
-    name: covr + codecov
+    name: covr + codecov (${{ matrix.type }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        # tests and examples each get a full runner: together they
+        # exhausted one (the examples pass died mid-way on 2026-09-29).
+        type: [tests, examples]
 
     env:
       # covr runs the tests, so the full suite must be enabled here or
@@ -130,7 +136,7 @@ jobs:
         run: |
           # covr installs into tempdir() and R removes it at exit, so the
           # testthat.Rout.fail is printed from inside the session on error.
-          Rscript -e 'dump_fail <- function(e) { for (f in list.files(tempdir(), "Rout[.]fail$", recursive = TRUE, full.names = TRUE)) { cat("\n===== ", f, " =====\n", sep = ""); cat(tail(readLines(f, warn = FALSE), 300), sep = "\n") }; stop(e) }; cov <- tryCatch(covr::package_coverage(type = "tests", quiet = FALSE, clean = FALSE), error = dump_fail); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
+          Rscript -e 'dump_fail <- function(e) { for (f in list.files(tempdir(), "Rout[.]fail$", recursive = TRUE, full.names = TRUE)) { cat("\n===== ", f, " =====\n", sep = ""); cat(tail(readLines(f, warn = FALSE), 300), sep = "\n") }; stop(e) }; cov <- tryCatch(covr::package_coverage(type = "${{ matrix.type }}", quiet = FALSE, clean = FALSE), error = dump_fail); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
 
       - name: Dump testthat.Rout.fail on failure
         if: failure()
@@ -153,7 +159,7 @@ jobs:
         if: failure()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: rmorie-covr-rout-fail
+          name: rmorie-covr-rout-fail-${{ matrix.type }}
           path: /tmp/**/*.Rout.fail
           if-no-files-found: ignore
           retention-days: 7
@@ -164,7 +170,7 @@ jobs:
         uses: codecov/codecov-action@v7
         with:
           files: coverage.xml
-          flags: r-tests
+          flags: r-${{ matrix.type }}
           fail_ci_if_error: false
           slug: rootcoder007/rmorie
         continue-on-error: true
