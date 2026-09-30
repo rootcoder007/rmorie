@@ -5,11 +5,10 @@ set.seed(1)
 
 .clean_llm_env <- function() {
   for (v in c("OLLAMA_BASE_URL", "GEMINI_API_KEY", "OPENAI_API_KEY",
-              "LLM_API_BASE_URL", "LLM_API_KEY", "GEMINI_MODEL", "moriefam")) {
+              "LLM_API_BASE_URL", "LLM_API_KEY", "GEMINI_MODEL")) {
     Sys.unsetenv(v)
   }
   options(morie.llm.ollama_cached = NULL)
-  options(morie.llm.freeapi_cached = NULL)
 }
 
 test_that("env helper returns trimmed value or default", {
@@ -50,9 +49,7 @@ test_that("detect_provider returns 'local' with no providers configured", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL)
-  options(morie.llm.freeapi_cached = NULL) })
+  on.exit(options(morie.llm.ollama_cached = NULL))
   expect_equal(morie_llm_detect_provider(), "local")
 })
 
@@ -60,11 +57,9 @@ test_that("detect_provider picks gemini when key set", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
   Sys.setenv(GEMINI_API_KEY = "k")
   on.exit({
     options(morie.llm.ollama_cached = NULL)
-    options(morie.llm.freeapi_cached = NULL)
     Sys.unsetenv("GEMINI_API_KEY")
   })
   expect_equal(morie_llm_detect_provider(), "gemini")
@@ -99,9 +94,7 @@ test_that("ask returns local-fallback when provider=local", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL)
-  options(morie.llm.freeapi_cached = NULL) })
+  on.exit(options(morie.llm.ollama_cached = NULL))
   out <- morie_llm_ask("question?")
   expect_type(out, "character")
   expect_match(out, "local")
@@ -111,9 +104,7 @@ test_that("agent_available reflects detect_provider", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL)
-  options(morie.llm.freeapi_cached = NULL) })
+  on.exit(options(morie.llm.ollama_cached = NULL))
   expect_false(morie_llm_agent_available())
 })
 
@@ -147,9 +138,7 @@ test_that("ask_multi falls back to local with no providers", {
   set.seed(1)
   .clean_llm_env()
   options(morie.llm.ollama_cached = FALSE)
-  options(morie.llm.freeapi_cached = FALSE)
-  on.exit({ options(morie.llm.ollama_cached = NULL)
-  options(morie.llm.freeapi_cached = NULL) })
+  on.exit(options(morie.llm.ollama_cached = NULL))
   msgs <- list(list(role = "user", content = "hello"))
   out <- morie_llm_ask_multi(msgs)
   expect_type(out, "character")
