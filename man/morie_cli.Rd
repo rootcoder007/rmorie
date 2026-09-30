@@ -24,7 +24,10 @@ in to the hosted LLM tier with GitHub (device flow) or an emailed code;
 for it when KEY is omitted)}
 \item{\code{logout}}{forget the hosted key}
 \item{\code{doctor}}{report the LLM providers reachable from this machine}
-\item{\code{ask PROMPT...}}{send a prompt to the active provider and print the reply}
+\item{\code{models}}{list the models you can ask: the hosted tier's for your
+key (default marked), then the local Ollama server's}
+\item{\code{ask [--model NAME] PROMPT...}}{send a prompt to the active provider
+(or the named model) and print the reply}
 \item{\code{analyze SUBJECT [JSON]}}{run an analysis subject through \code{cli_main()}}
 \item{\code{version}}{print the package version}
 \item{\code{help}}{this list}
