@@ -4,12 +4,22 @@
 \alias{morie_llm_login}
 \title{Sign in to the hosted MORIE LLM tier}
 \usage{
-morie_llm_login(open_browser = interactive(), poll_max_seconds = 600)
+morie_llm_login(
+  open_browser = interactive(),
+  poll_max_seconds = 600,
+  email = NULL,
+  code = NULL
+)
 }
 \arguments{
 \item{open_browser}{Open the verification URL in the browser.}
 
 \item{poll_max_seconds}{Give up after this many seconds.}
+
+\item{email}{Sign in with a one-time code emailed to this address instead
+of GitHub; the code is read from the console (or from \code{code}).}
+
+\item{code}{The emailed code, when not read interactively.}
 }
 \value{
 The key, invisibly.
@@ -25,5 +35,6 @@ and the Python package. Nothing is sent to the tier before that.
 \examples{
 \dontrun{
 morie_llm_login()
+morie_llm_login(email = "you@example.com")
 }
 }
