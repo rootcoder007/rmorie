@@ -59,13 +59,19 @@ Hrzboxc <- function(x, y, a_lo = -2, a_hi = 2, ngrid = 81L, refine = 60L,
   fit <- function(a) {
     Ty <- bc(yv, a)
     b <- .s03lstsq(XX, Ty, 1e-12)
+    # xb is kept and reused by crit() so that a residual and the threshold
+    # it is compared with share one rounding of x'b: at u = max(y) the
+    # comparison is an exact tie by construction, and a second summation
+    # order could break it either way (it did, on Accelerate).
+    xb <- numeric(n)
     uh <- numeric(n)
     for (i in seq_len(n)) {
-      r <- Ty[i]
-      for (k in seq_len(p)) r <- r - XX[i, k] * b[k]
-      uh[i] <- r
+      s <- 0
+      for (k in seq_len(p)) s <- s + XX[i, k] * b[k]
+      xb[i] <- s
+      uh[i] <- Ty[i] - s
     }
-    list(Ty = Ty, b = b, uh = uh)
+    list(Ty = Ty, b = b, uh = uh, xb = xb)
   }
   crit <- function(a) {
     fi <- fit(a)
@@ -76,9 +82,7 @@ Hrzboxc <- function(x, y, a_lo = -2, a_hi = 2, ngrid = 81L, refine = 60L,
       u <- ug[k]
       tu <- bc(u, a)
       for (i in seq_len(n)) {
-        xb <- 0
-        for (j in seq_len(p)) xb <- xb + XX[i, j] * b[j]
-        z <- tu - xb
+        z <- tu - fi$xb[i]
         lo <- 0L
         hi <- n
         while (lo < hi) {

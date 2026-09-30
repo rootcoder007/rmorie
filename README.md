@@ -129,7 +129,7 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
-## What's in v1.3.2
+## What's in v1.3.3
 
 - **5,000+ exported functions, every one tested** — 5,189 `morie_*` entry
   points (13,655 exports in all), each with a test that recomputes its

@@ -22,7 +22,7 @@ test_that("morie_svdd solves the SVDD dual to its KKT conditions", {
     bnd <- r$boundary_ + 1
     R2 <- if (length(bnd)) mean(d2[bnd]) else max(d2[r$support_ + 1])
     expect_equal(r$R2, max(0, R2), tolerance = 1e-12)
-    expect_equal(r$predict(X), d2 - r$R2 <= 0)
+    expect_equal(r$predict(X), d2 - r$R2 <= 1e-8)  # boundary vectors are members
   }
   lin <- morie_svdd(X, nu = 0.5, kernel = "linear")
   expect_equal(lin$C, 1 / 3.5)

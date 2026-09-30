@@ -174,6 +174,7 @@ test_that("the hosted model falls back to what the gateway lists for this key", 
   testthat::skip_on_covr()
   testthat::skip_if_not_installed("httr2")
   .hosted_sandbox()
+  withr::local_options(morie.llm.allow_net_probe = TRUE)  # R CMD check sets _R_CHECK_PACKAGE_NAME_, which parks the probe
   .morie_llm_write_credentials(list(hosted_key = "sk-abc"))
   listed <- '{"data":[{"id":"gemma4:31b-cloud"},{"id":"minimax-m3:cloud"}]}'
   testthat::local_mocked_bindings(

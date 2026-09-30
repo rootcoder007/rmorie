@@ -298,8 +298,11 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
   }
 
   predict <- function(Z) {
+    # a boundary support vector sits on the sphere up to the KKT tolerance,
+    # so membership is decided with the same slack n_out uses; a strict
+    # <= 0 made those points flip with the platform's rounding
     v <- decision(Z)
-    v <= 0.0
+    v <= 1e-8
   }
 
   n_out <- sum(d2 > R2 + 1e-8)

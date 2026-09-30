@@ -1,3 +1,14 @@
+# rmorie 1.3.3 - 2026-09-30
+
+## Release hygiene
+
+* The research vignette now attaches the package; it had only ever been
+  rendered in a session that already had rmorie loaded, so
+  `R CMD check` could not build it. The hosted-model fallback test
+  allows its (mocked) probe under `R CMD check`, which parks network
+  probes by default. 1.3.2 was tagged before its check finished and was
+  never submitted to CRAN; 1.3.3 is that release with the two fixes.
+
 # rmorie 1.3.2 - 2026-09-30
 
 ## Hosted LLM tier
