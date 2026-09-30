@@ -45,11 +45,16 @@ base URL and returns the raw result list (\code{count},
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
-res <- morie_ingest_ckan_package_search(
-  "https://open.canada.ca/data",
-  query = "corrections"
+# a live portal: the example reports, rather than fails, when it is away
+res <- tryCatch(
+  morie_ingest_ckan_package_search("https://open.canada.ca/data",
+                                   query = "corrections"),
+  error = function(e) {
+    message("open.canada.ca not reachable: ", conditionMessage(e))
+    NULL
+  }
 )
-length(res$results)
+if (!is.null(res)) length(res$results)
 }
 \dontshow{\}) # examplesIf}
 }
