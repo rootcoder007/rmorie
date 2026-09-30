@@ -1,3 +1,12 @@
+# rmorie (development version)
+
+## Security
+
+* The OllamaFreeAPI provider tier was removed for security reasons: it sent
+  prompts to anonymous volunteer Ollama servers found through a public
+  registry. The provider chain is now Ollama, Gemini, an OpenAI-compatible
+  endpoint, OpenAI, then the local fallback.
+
 # rmorie 1.3.2 - 2026-09-21
 
 ## Parameters that were accepted and not read

@@ -1,18 +1,26 @@
-# Coverage for the LLM model list and probe cache, LMC covariances, the
+# Coverage for LLM provider detection order, LMC covariances, the
 # log-normal frailty Cox model, local-shift sensitivity, local DP,
 # local polynomial regression, Huber Proposal 2, LOWESS, odds ratios,
 # PSIS weights and PPS sampling; recomputed with base R, MASS and stats.
 
-test_that("morie_llm_list_freeapi_models falls back offline and morie_llm_probe_freeapi honours its cache", {
-  m <- morie_llm_list_freeapi_models()
-  expect_true(all(c("model", "family", "size", "label", "alias") %in% names(m)))
-  expect_true(nrow(m) >= 1)
-  expect_false(any(duplicated(m$alias)))
-  old <- options(morie.llm.freeapi_cached = TRUE)
-  on.exit(options(old), add = TRUE)
-  expect_true(morie_llm_probe_freeapi())
-  options(morie.llm.freeapi_cached = FALSE)
-  expect_false(morie_llm_probe_freeapi())
+test_that("morie_llm_detect_provider walks ollama, gemini, api, openai, local in order", {
+  testthat::skip_on_covr()
+  pkg <- if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"
+  ollama_up <- FALSE
+  local_mocked_bindings(morie_llm_probe_ollama = function(...) ollama_up, .package = pkg)
+  vars <- c(gem = "GEMINI_API_KEY", base = "LLM_API_BASE_URL", key = "LLM_API_KEY", oai = "OPENAI_API_KEY")
+  grid <- expand.grid(ollama = c(FALSE, TRUE), gem = c(FALSE, TRUE), base = c(FALSE, TRUE),
+                      key = c(FALSE, TRUE), oai = c(FALSE, TRUE))
+  for (i in seq_len(nrow(grid))) {
+    g <- grid[i, ]
+    ollama_up <- g$ollama
+    set <- vapply(names(vars), function(v) if (g[[v]]) "x" else "", "")
+    withr::local_envvar(stats::setNames(set, vars))
+    expected <- if (g$ollama) "ollama" else if (g$gem) "gemini" else if (g$base && g$key) "api" else
+      if (g$oai) "openai" else "local"
+    expect_identical(morie_llm_detect_provider(), expected)
+    expect_identical(morie_llm_agent_available(), expected != "local")
+  }
 })
 
 test_that("LmcCovariance sums B_s rho_s(h)", {

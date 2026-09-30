@@ -40,9 +40,6 @@ if (!nzchar(Sys.getenv("_R_CHECK_PACKAGE_NAME_"))) {
 
 # Deterministic ollama probing across the whole suite: force the cached
 # result FALSE so no provider-detection test ever hits the network.
-# (The OllamaFreeAPI provider was removed 2026-07 -- the community registry
-# was chronically down, 1/59 hosts live, and its parallel probe hung R CMD
-# check examples on CI runners.)
 options(morie.llm.ollama_cached = FALSE)
 
 # Heavy-test gate.
