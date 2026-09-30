@@ -590,6 +590,32 @@ morie_llm_probe_hosted <- function(timeout = 2) {
   wanted
 }
 
+#' Models offered by the hosted MORIE LLM tier
+#'
+#' Asks the gateway (\code{GET /v1/models}) which models the stored key may
+#' use. The first call probes the tier; later calls reuse the cached answer
+#' unless \code{refresh = TRUE}.
+#'
+#' @param refresh Logical; ask the gateway again instead of using the cache.
+#' @return A character vector of model names, empty when not logged in or the
+#'   gateway is unreachable, with attribute \code{"default"}: the model
+#'   \code{morie_llm_ask()} uses when none is named.
+#' @examples
+#' \donttest{
+#' m <- morie_llm_hosted_models()
+#' attr(m, "default")
+#' }
+#' @export
+morie_llm_hosted_models <- function(refresh = FALSE) {
+  if (isTRUE(refresh)) {
+    .morie_llm_cache$hosted_cached <- NULL
+    .morie_llm_cache$hosted_models <- NULL
+  }
+  if (!morie_llm_probe_hosted()) return(structure(character(), default = NULL))
+  ids <- .morie_llm_cache$hosted_models %||% character()
+  structure(ids, default = .morie_llm_hosted_model_available())
+}
+
 #' Sign in to the hosted MORIE LLM tier
 #'
 #' Runs the GitHub device flow against the sign-in service of

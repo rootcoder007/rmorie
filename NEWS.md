@@ -1,5 +1,13 @@
 # rmorie 1.3.4 - 2026-09-30
 
+## See what you can ask
+
+* `morie_llm_hosted_models()` returns the models the hosted tier offers
+  your key, with the default `morie_llm_ask()` would use as an attribute.
+* `rmorie models` prints that list (default marked) and the local Ollama
+  server's models; `rmorie doctor` names them on its hosted line; `rmorie
+  ask --model NAME PROMPT` picks one for a single call.
+
 ## SIU manifest and README
 
 * `morie_siu_index(lang = "en")` and `lang = "fr"` returned an error: the

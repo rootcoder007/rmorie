@@ -16,7 +16,10 @@
 #'     for it when KEY is omitted)}
 #'   \item{\code{logout}}{forget the hosted key}
 #'   \item{\code{doctor}}{report the LLM providers reachable from this machine}
-#'   \item{\code{ask PROMPT...}}{send a prompt to the active provider and print the reply}
+#'   \item{\code{models}}{list the models you can ask: the hosted tier's for your
+#'     key (default marked), then the local Ollama server's}
+#'   \item{\code{ask [--model NAME] PROMPT...}}{send a prompt to the active provider
+#'     (or the named model) and print the reply}
 #'   \item{\code{analyze SUBJECT [JSON]}}{run an analysis subject through \code{cli_main()}}
 #'   \item{\code{version}}{print the package version}
 #'   \item{\code{help}}{this list}
@@ -62,18 +65,46 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
             .morie_llm_ollama_base()),
           c("Hosted LLM", if (is.null(.morie_llm_hosted_key())) "not logged in -- rmorie login"
                           else if (morie_llm_probe_hosted()) "logged in, gateway answering"
-                          else "logged in, gateway not reachable", .morie_llm_hosted_base() %||% "disabled"),
+                          else "logged in, gateway not reachable",
+            if (!is.null(.morie_llm_hosted_key()) && morie_llm_probe_hosted()) {
+              hm <- morie_llm_hosted_models()
+              sprintf("%s  models: %s (default %s)", .morie_llm_hosted_base(),
+                      paste(hm, collapse = ", "), attr(hm, "default") %||% "")
+            } else .morie_llm_hosted_base() %||% "disabled"),
           c("Gemini key", if (is.null(.morie_llm_gemini_key())) "absent" else "set", ""),
           c("OpenAI-compatible API", if (is.null(.morie_llm_api_base())) "absent" else "set", .morie_llm_api_base() %||% ""),
           c("OpenAI key", if (is.null(.morie_llm_openai_key())) "absent" else "set", ""))
         for (r in rows) out(sprintf("  %-24s %-32s %s\n", r[[1L]], r[[2L]], r[[3L]]))
         out(sprintf("  active provider: %s\n", morie_llm_detect_provider()))
       },
-      ask = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) {
-          out("usage: rmorie ask PROMPT...\n")
+      models = {
+        if (is.null(.morie_llm_hosted_key())) {
+          out("Hosted LLM: not logged in -- rmorie login\n")
         } else {
-          out(paste0(morie_llm_ask(paste(rest, collapse = " ")), "\n"))
+          hm <- morie_llm_hosted_models()
+          if (!length(hm)) {
+            out(sprintf("Hosted LLM (%s): logged in, gateway not reachable (or the key was replaced by a newer sign-in: run rmorie login again)\n", .morie_llm_hosted_base() %||% "disabled"))
+          } else {
+            out(sprintf("Hosted LLM (%s); default marked *:\n", .morie_llm_hosted_base()))
+            for (m in hm) out(sprintf("  %s %s\n", if (identical(m, attr(hm, "default"))) "*" else " ", m))
+          }
+        }
+        if (morie_llm_probe_ollama()) {
+          lm <- morie_llm_ollama_models()$name
+          out(sprintf("Local Ollama (%s): %s\n", .morie_llm_ollama_base(),
+                      if (length(lm)) paste(lm, collapse = ", ") else "running, no models pulled"))
+        } else {
+          out(sprintf("Local Ollama: not reachable at %s\n", .morie_llm_ollama_base()))
+        }
+        out("Pick one per call with `rmorie ask --model NAME ...`, or set MORIE_HOSTED_MODEL / MORIE_OLLAMA_MODEL.\n")
+      },
+      ask = {
+        mdl <- flag("--model")
+        if (!is.null(mdl)) rest <- rest[-(match("--model", rest) + 0:1)]
+        if (!length(rest) || identical(rest[[1L]], "--help")) {
+          out("usage: rmorie ask [--model NAME] PROMPT...\n")
+        } else {
+          out(paste0(morie_llm_ask(paste(rest, collapse = " "), model = mdl), "\n"))
         }
       },
       analyze = {
@@ -91,7 +122,8 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  login --token [KEY]                                    store a key you already have\n",
         "  logout                                                 forget the hosted key\n",
         "  doctor                                                 LLM providers reachable from here\n",
-        "  ask PROMPT...                                          ask the active provider\n",
+        "  models                                                 models you can ask (hosted + local)\n",
+        "  ask [--model NAME] PROMPT...                           ask the active provider\n",
         "  analyze SUBJECT [JSON]                                 run an analysis subject\n",
         "  version                                                package version\n")),
       stop(sprintf("unknown verb '%s' (try: rmorie help)", verb), call. = FALSE))
