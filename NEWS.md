@@ -8,6 +8,16 @@
   server's models; `rmorie doctor` names them on its hosted line; `rmorie
   ask --model NAME PROMPT` picks one for a single call.
 
+## Bayesian optimisation
+
+* `morie_bayoptr()` could stop with "non-finite value supplied by optim":
+  far from any improvement the expected-improvement closed form rounds to
+  a subnormal of either sign and optim's L-BFGS-B line search choked on
+  it. EI and PI are now exactly zero below the double minimum, and a
+  polish that fails leaves the unpolished candidate in the race instead
+  of ending the run. The documented example returns the same optimum as
+  the Python arm.
+
 ## SIU manifest and README
 
 * `morie_siu_index(lang = "en")` and `lang = "fr"` returned an error: the

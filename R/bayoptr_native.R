@@ -114,6 +114,10 @@
     z <- (f_best - xi - mu[ok]) / sd[ok]
     out[ok] <- sd[ok] * (z * pnorm(z) + dnorm(z))
   }
+  # EI is non-negative; far from any improvement the closed form rounds to
+  # a subnormal of either sign (e.g. -4e-314), and optim's L-BFGS-B line
+  # search turns such values into a non-finite step. Exact zero there.
+  out[!is.finite(out) | out < .Machine$double.xmin] <- 0
   out
 }
 
@@ -128,6 +132,7 @@
     z <- (f_best - xi - mu[ok]) / sd[ok]
     out[ok] <- pnorm(z)
   }
+  out[!is.finite(out) | out < .Machine$double.xmin] <- 0  # as for EI
   out
 }
 
@@ -215,8 +220,12 @@
                             amplitude, length_scale, noise)
         -.acquire(gp$mu, gp$sd, fbest_so_far, acq, kappa, xi)
       }
-      opt <- optim(C[k, ], neg_acq_one, method = "L-BFGS-B",
-                   lower = lo, upper = hi)
+      # a numerical hiccup in one polish must not end the whole run:
+      # the unpolished candidate still competes with its own score
+      opt <- tryCatch(optim(C[k, ], neg_acq_one, method = "L-BFGS-B",
+                            lower = lo, upper = hi),
+                      error = function(e) list(par = C[k, ],
+                                               value = neg_acq_one(C[k, ])))
       cand_x[k, ] <- opt$par
       cand_v[k] <- -opt$value
     }
