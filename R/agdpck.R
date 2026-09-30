@@ -35,7 +35,9 @@ Replaypack <- function(replay_buffer, path = NULL) {
   text <- paste(parts, collapse = "\n")
   written <- FALSE
   if (!is.null(path)) {
-    writeLines(text, path, sep = "")
+    con <- file(path, "wb")  # binary: the bytes on disk must equal the digested text on every platform
+    on.exit(close(con), add = TRUE)
+    writeLines(text, con, sep = "")
     written <- TRUE
   }
   list(

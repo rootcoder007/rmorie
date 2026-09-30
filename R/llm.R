@@ -483,13 +483,14 @@ DEFAULT_HOSTED_BASE_URL <- "https://llm.rmorie.com"
 DEFAULT_HOSTED_AUTH_URL <- "https://llm.rmorie.com/auth"
 DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
 
-#' Internal helper: the hosted endpoint, or NULL when disabled by an empty override
+#' Internal helper: the hosted endpoint, or NULL when disabled by an override
+#' of "" (POSIX) or "off" (any platform; Windows cannot hold an empty variable)
 #' @noRd
 .morie_llm_hosted_base <- function() {
   if (nzchar(Sys.getenv("MORIE_HOSTED_BASE_URL", unset = "")) ||
       "MORIE_HOSTED_BASE_URL" %in% names(Sys.getenv())) {
     v <- sub("/+$", "", trimws(Sys.getenv("MORIE_HOSTED_BASE_URL")))
-    return(if (nzchar(v)) v else NULL)
+    return(if (nzchar(v) && !tolower(v) %in% c("off", "none", "disabled")) v else NULL)
   }
   DEFAULT_HOSTED_BASE_URL
 }

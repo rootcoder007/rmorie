@@ -18,7 +18,7 @@ test_that("credentials are written owner-only into the shared XDG file", {
   dir <- .hosted_sandbox()
   p <- .morie_llm_write_credentials(list(hosted_key = "sk-test"))
   expect_equal(p, file.path(dir, "morie", "credentials.json"))
-  expect_equal(as.character(file.info(p)$mode), "600")
+  if (.Platform$OS.type != "windows") expect_equal(as.character(file.info(p)$mode), "600")
   expect_equal(.morie_llm_hosted_key(), "sk-test")
   expect_true(suppressMessages(morie_llm_logout()))
   expect_null(.morie_llm_hosted_key())
@@ -30,9 +30,13 @@ test_that("the environment key overrides the file and an empty base URL disables
   .morie_llm_write_credentials(list(hosted_key = "file-key"))
   withr::local_envvar(MORIE_HOSTED_KEY = "env-key")
   expect_equal(.morie_llm_hosted_key(), "env-key")
-  withr::local_envvar(MORIE_HOSTED_BASE_URL = "")
+  withr::local_envvar(MORIE_HOSTED_BASE_URL = "off")
   expect_null(.morie_llm_hosted_base())
   expect_false(morie_llm_probe_hosted())
+  if (.Platform$OS.type != "windows") {  # Windows drops a variable set to ""
+    withr::local_envvar(MORIE_HOSTED_BASE_URL = "")
+    expect_null(.morie_llm_hosted_base())
+  }
 })
 
 test_that("the probe never runs without a key and sends the bearer key when it does", {
