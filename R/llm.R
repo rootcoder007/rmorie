@@ -176,10 +176,10 @@ if (nzchar(v)) v else NULL }
 #' }
 #' @export
 morie_llm_probe_ollama <- function(timeout = 2) {
+  cache <- .morie_llm_cache$ollama_cached
+  if (!is.null(cache)) return(cache)  # a cached answer needs no HTTP client
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)
   if (.morie_llm_no_net()) return(FALSE)
-  cache <- .morie_llm_cache$ollama_cached
-  if (!is.null(cache)) return(cache)
   out <- tryCatch({
     req <- httr2::request(paste0(.morie_llm_ollama_base(), "/api/tags"))
     req <- httr2::req_timeout(req, timeout)
