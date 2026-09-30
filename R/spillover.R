@@ -270,7 +270,11 @@ morie_spillover_ht_variance <- function(y_pot, pi, pij, form = c("ht", "syg", "b
 #' Draws \code{n_draws} assignments of \code{n_treated} treated places out
 #' of \code{n} and returns, per place, the share of draws in which it sat
 #' at each exposure level of \code{\link{morie_spillover_exposure}}. Exact
-#' enumeration is used when it is small enough.
+#' enumeration is used when it is small enough. Monte Carlo draws come from
+#' the Philox stream: draw \code{k} treats the \code{n_treated} places with
+#' the smallest of the uniforms \code{(k - 1) n + 1, ..., k n} of
+#' \code{.morie_random_uniform(n * n_draws, seed, stream = 0)}, so the R and
+#' Python arms return identical probabilities for the same seed.
 #'
 #' @param n Number of places.
 #' @param edges Adjacency as in \code{\link{morie_spillover_exposure}}.
@@ -281,6 +285,7 @@ morie_spillover_ht_variance <- function(y_pot, pi, pij, form = c("ht", "syg", "b
 #' @param joint Also return the joint probabilities
 #'   \eqn{\pi_{ij}(\ell) = P(E_i = \ell, E_j = \ell)} needed for the variance
 #'   in \code{\link{morie_spillover_ht}}.
+#' @param seed Philox seed for the Monte Carlo branch (non-negative).
 #' @return An \code{n} by 3 matrix of exposure probabilities (columns
 #'   \code{"0"}, \code{"1"}, \code{"2"}); with \code{joint = TRUE} a list
 #'   with \code{marginal} (that matrix) and \code{joint} (an \code{n} by
@@ -289,7 +294,7 @@ morie_spillover_ht_variance <- function(y_pot, pi, pij, form = c("ht", "syg", "b
 #' morie_spillover_exposure_probs(n = 6, edges = cbind(1:5, 2:6), n_treated = 2)
 #' @export
 morie_spillover_exposure_probs <- function(n, edges, n_treated, n_draws = 5000L, exact_max = 20000,
-                                           joint = FALSE) {
+                                           joint = FALSE, seed = 0) {
   if (n_treated < 1 || n_treated >= n) stop("n_treated must lie in 1..n-1", call. = FALSE)
   counts <- matrix(0, n, 3L, dimnames = list(NULL, c("0", "1", "2")))
   jcounts <- if (joint) array(0, c(n, n, 3L), dimnames = list(NULL, NULL, c("0", "1", "2"))) else NULL
@@ -306,7 +311,12 @@ morie_spillover_exposure_probs <- function(n, edges, n_treated, n_draws = 5000L,
     for (k in seq_len(ncol(cmb))) tally(cmb[, k])
     m <- ncol(cmb)
   } else {
-    for (k in seq_len(n_draws)) tally(sample.int(n, n_treated))
+    if (!is.numeric(seed) || length(seed) != 1L || is.na(seed) || seed < 0) {
+      stop("seed must be a single non-negative number", call. = FALSE)
+    }
+    n_draws <- as.integer(n_draws)
+    u <- .morie_random_uniform(n * n_draws, seed = seed, stream = 0)
+    for (k in seq_len(n_draws)) tally(order(u[(k - 1L) * n + seq_len(n)])[seq_len(n_treated)])
     m <- n_draws
   }
   if (joint) list(marginal = counts / m, joint = jcounts / m) else counts / m

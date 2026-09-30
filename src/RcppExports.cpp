@@ -558,8 +558,8 @@ BEGIN_RCPP
 END_RCPP
 }
 // morie_feedback_urn_cpp
-List morie_feedback_urn_cpp(double lamA, double lamB, double cA0, double cB0, int n_steps, int update, double rho);
-RcppExport SEXP _rmorie_morie_feedback_urn_cpp(SEXP lamASEXP, SEXP lamBSEXP, SEXP cA0SEXP, SEXP cB0SEXP, SEXP n_stepsSEXP, SEXP updateSEXP, SEXP rhoSEXP) {
+List morie_feedback_urn_cpp(double lamA, double lamB, double cA0, double cB0, int n_steps, int update, double rho, NumericVector u);
+RcppExport SEXP _rmorie_morie_feedback_urn_cpp(SEXP lamASEXP, SEXP lamBSEXP, SEXP cA0SEXP, SEXP cB0SEXP, SEXP n_stepsSEXP, SEXP updateSEXP, SEXP rhoSEXP, SEXP uSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -570,7 +570,8 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< int >::type n_steps(n_stepsSEXP);
     Rcpp::traits::input_parameter< int >::type update(updateSEXP);
     Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
-    rcpp_result_gen = Rcpp::wrap(morie_feedback_urn_cpp(lamA, lamB, cA0, cB0, n_steps, update, rho));
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_feedback_urn_cpp(lamA, lamB, cA0, cB0, n_steps, update, rho, u));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1379,7 +1380,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_hawkes_ll_weibull_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_weibull_const_cpp, 6},
     {"_rmorie_morie_hawkes_ll_lomax_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_lomax_const_cpp, 6},
     {"_rmorie_morie_hawkes_ll_gamma_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_gamma_const_cpp, 6},
-    {"_rmorie_morie_feedback_urn_cpp", (DL_FUNC) &_rmorie_morie_feedback_urn_cpp, 7},
+    {"_rmorie_morie_feedback_urn_cpp", (DL_FUNC) &_rmorie_morie_feedback_urn_cpp, 8},
     {"_rmorie_morie_hawkes_kernel_density_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_density_cpp, 3},
     {"_rmorie_morie_hawkes_kernel_cdf_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_cdf_cpp, 3},
     {"_rmorie_morie_hawkes_pair_excitation_sum_cpp", (DL_FUNC) &_rmorie_morie_hawkes_pair_excitation_sum_cpp, 4},

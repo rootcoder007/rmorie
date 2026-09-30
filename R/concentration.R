@@ -164,55 +164,10 @@ morie_concentration_distinct_growth <- function(place) {
   distinct <- cumsum(!duplicated(place))
   expect_fun <- function(M, n) M * sum(1 / (M + 0:(n - 1)))
   K <- distinct[n]
-  M_hat <- if (K >= n) Inf else if (K <= 1) 0 else stats::uniroot(function(M) expect_fun(M, n) - K, c(1e-8, 1e8))$root
-  expected <- if (is.finite(M_hat) && M_hat > 0) M_hat * cumsum(1 / (M_hat + 0:(n - 1))) else rep(NA_real_, n)
-  idx <- seq_len(n)
-  lower <- if (is.finite(M_hat) && M_hat > 0) M_hat * log((M_hat + idx) / M_hat) else rep(NA_real_, n)
-  upper <- if (is.finite(M_hat) && M_hat > 0) 1 + M_hat * log((M_hat + idx - 1) / M_hat) else rep(NA_real_, n)
-  half <- idx[idx >= n / 2]
-  slope <- if (length(half) > 2 && all(distinct[half] > 0)) unname(stats::coef(stats::lm(log(distinct[half]) ~ log(half)))[2]) else NA_real_
-  list(n = n, distinct = distinct, M_hat = M_hat, expected = expected, lower = lower, upper = upper,
-       loglog_slope = slope,
-       theorems = c("Research.P7.log_le_S", "Research.P7.S_le_log", "Research.P7.expectedDistinct_bounds"))
-}
-
-
-#' Growth of the number of distinct places under preferential allocation
-#'
-#' Under Polya (Dirichlet-process) allocation with concentration \eqn{M}, the
-#' \eqn{i}-th event lands on a new place with probability \eqn{M/(M+i-1)}, so
-#' the expected number of distinct places after \eqn{n} events is
-#' \eqn{M\sum_{i<n} 1/(M+i)}, squeezed between \eqn{M\log((M+n)/M)} and
-#' \eqn{1 + M\log((M+n-1)/M)} (\code{Research.P7.expectedDistinct_bounds}):
-#' logarithmic growth. A series of repeat victimisations whose count of
-#' distinct addresses grows polynomially is not a concentration-only
-#' (Polya) process. The function reports the observed growth curve, the
-#' concentration that matches the final count, the proved envelope for that
-#' concentration, and a log-log slope of the observed curve as the
-#' discriminating diagnostic.
-#'
-#' @param place Vector of place identifiers in event order.
-#' @return A list with \code{n}, \code{distinct} (observed count after each
-#'   event), \code{M_hat} (concentration matching the final count),
-#'   \code{expected} (Polya expectation curve at \code{M_hat}), \code{lower},
-#'   \code{upper} (the proved envelope), \code{loglog_slope} (slope of
-#'   log distinct on log n over the second half of the series; near 0 for
-#'   logarithmic growth, near a positive constant for a power law) and
-#'   \code{theorems}.
-#' @examples
-#' set.seed(1)
-#' place <- integer(500); k <- 0
-#' for (i in seq_along(place)) { if (runif(1) < 5 / (5 + i - 1)) { k <- k + 1; place[i] <- k } else place[i] <- place[sample(i - 1, 1)] }
-#' g <- morie_concentration_distinct_growth(place)
-#' c(M_hat = g$M_hat, slope = g$loglog_slope)
-#' @export
-morie_concentration_distinct_growth <- function(place) {
-  n <- length(place)
-  if (n < 2) stop("need at least two events", call. = FALSE)
-  distinct <- cumsum(!duplicated(place))
-  expect_fun <- function(M, n) M * sum(1 / (M + 0:(n - 1)))
-  K <- distinct[n]
-  M_hat <- if (K >= n) Inf else if (K <= 1) 0 else stats::uniroot(function(M) expect_fun(M, n) - K, c(1e-8, 1e8))$root
+  # the root to machine precision, so the R and Python arms agree to rounding
+  M_hat <- if (K >= n) Inf else if (K <= 1) 0 else {
+    stats::uniroot(function(M) expect_fun(M, n) - K, c(1e-8, 1e8), tol = .Machine$double.eps)$root
+  }
   expected <- if (is.finite(M_hat) && M_hat > 0) M_hat * cumsum(1 / (M_hat + 0:(n - 1))) else rep(NA_real_, n)
   idx <- seq_len(n)
   lower <- if (is.finite(M_hat) && M_hat > 0) M_hat * log((M_hat + idx) / M_hat) else rep(NA_real_, n)

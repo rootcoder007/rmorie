@@ -228,7 +228,10 @@ morie_feedback_loop_urn_law <- function(n_steps) {
 #'
 #' @inheritParams morie_feedback_loop_meanfield
 #' @param n_sims Number of independent runs.
-#' @param seed Optional seed (\code{set.seed} is called when given).
+#' @param seed Philox seed (non-negative integer). Run \code{i} draws its
+#'   uniforms from stream \code{i - 1} of \code{.morie_random_uniform}, three
+#'   per step when \code{rho > 0} and two otherwise, so the R and Python arms
+#'   produce identical paths for the same seed.
 #' @return A list with \code{share_a} (an \code{n_sims} by
 #'   \code{n_steps + 1} matrix of share paths), \code{final} (the final
 #'   shares) and \code{limit} (the proved mean-field limit).
@@ -239,7 +242,7 @@ morie_feedback_loop_urn_law <- function(n_steps) {
 #' @export
 morie_feedback_loop_sim <- function(lam_a, lam_b, c_a0, c_b0, n_steps = 1000L,
                                     update = c("naive", "corrected"), rho = 0,
-                                    n_sims = 100L, seed = NULL) {
+                                    n_sims = 100L, seed = 0) {
   update <- match.arg(update)
   .morie_feedback_check(lam_a, lam_b, c_a0, c_b0, rho)
   if (!(lam_a <= 1 && lam_b <= 1)) {
@@ -249,11 +252,15 @@ morie_feedback_loop_sim <- function(lam_a, lam_b, c_a0, c_b0, n_steps = 1000L,
   n_steps <- as.integer(n_steps)
   n_sims <- as.integer(n_sims)
   if (is.na(n_sims) || n_sims < 1L) stop("n_sims must be a positive integer", call. = FALSE)
-  if (!is.null(seed)) set.seed(seed)
+  if (!is.numeric(seed) || length(seed) != 1L || is.na(seed) || seed < 0) {
+    stop("seed must be a single non-negative number", call. = FALSE)
+  }
+  k <- if (rho > 0) 3L else 2L
   paths <- matrix(NA_real_, nrow = n_sims, ncol = n_steps + 1L)
   for (i in seq_len(n_sims)) {
+    u <- .morie_random_uniform(k * n_steps, seed = seed, stream = i - 1L)
     r <- .morie_feedback_urn_cpp(lam_a, lam_b, c_a0, c_b0, n_steps,
-                                 if (update == "corrected") 1L else 0L, rho)
+                                 if (update == "corrected") 1L else 0L, rho, u)
     paths[i, ] <- r$share
   }
   list(
