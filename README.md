@@ -129,46 +129,34 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
-## What's in v1.1.4
+## What's in v1.3.2
 
-- **All 25 native-specialization modules complete** — see *Why
-  rmorie?* above; the package's statistics run with zero runtime
-  dependencies on other statistical packages.
-- **Over 2,000 exported `morie_*` R functions** — every public callable is now
-  prefixed to avoid name collisions with other CRAN packages
-  (`morie_chi_square_test`, `morie_kmeans_clustering`,
-  `morie_decision_tree_split`, etc.). The companion `morie.fn` Python
-  library mirrors these for cross-language parity. Two deliberate
-  exceptions keep their unprefixed names to match the MRM papers and
-  the Python implementation exactly: `mrm_otis_mandela_spectrum()` and
-  `mrm_classify_mandela()`.
-- **SIU subsystem** — a full pipeline for the Ontario Special
-  Investigations Unit director's-report corpus (English + French,
-  2005-present). See *SIU pipeline* below.
-- **Free-first AI helpers** — local Ollama by default
-  (`gemma3:4b`, `translategemma:latest`), with optional Gemini, Claude,
-  or Vertex AI fallback. No paid API key is required for the default
-  workflow.
-- **Polite-by-default HTTP fetcher** — token-bucket throttling at 4
-  req/s, exponential backoff on 429/5xx, on-disk page cache.
-- **Built-in datasets** — 41 datasets accessible through the shared
-  SQLite store (`morie_datasets.db`), plus the SIU manifest (4,743
-  drids, 2,218 unique cases, language-classified).
-- **CPADS contract helpers** and IPW / eBAC workflow functions.
-- **Outputs-manifest tooling** — read, validate, audit, and build
-  `outputs_manifest.csv` tables for reproducible research projects.
-- **Synthetic data generators** for development and CI.
-- **C/C++ computational backend** — Hawkes self-exciting point process
-  likelihood (Markovian + non-Markovian), HTML-to-text state machine,
-  SIU parser. See `src/`.
-- **Causal-taphonomy suite** — Bayesian hierarchical preservation model
-  (cmdstanr / brms / rstanarm HMC backends), absorbing-DTMC decay chains,
-  forensic likelihood ratios, pXRF compositional transforms, and USGS
-  NGDB / MorphoSource open-data ingest.
-- **Canadian legal data** — `morie_ingest_a2aj_*()` for the A2AJ corpus
-  of court decisions, statutes and regulations (REST API and per-court
-  Parquet files, citation network edges) and `morie_ingest_canlii_*()`
-  for the courts A2AJ does not carry, through CanLII's API.
+- **5,000+ exported functions, every one tested** — 5,189 `morie_*` entry
+  points (13,655 exports in all), each with a test that recomputes its
+  value, and the same names in the Python package `morie`, checked against
+  each other in CI.
+- **Native causal-inference engines** — matching, double machine learning,
+  causal forests, meta-learners, design-based GLM and the `morie_dag*`
+  toolkit, cross-validated against MatchIt, DoubleML, grf and dagitty.
+- **Hosted LLM tier** — `morie_llm_ask()` uses a local Ollama first and
+  falls back to <https://llm.rmorie.com>; sign in with
+  `morie_llm_login()` (GitHub or an emailed code). Gemini, an
+  OpenAI-compatible endpoint and OpenAI keys are honoured after that; a
+  keyword fallback needs no network.
+- **Command line inside the package** — `install_cli()` puts `rmorie` on
+  your PATH: `rmorie login`, `rmorie doctor`, `rmorie ask`, `rmorie analyze`.
+- **Criminology research program** — the open-problems ledger under
+  `research/`, implemented as package functions with Lean 4 proofs of the
+  identification results.
+- **SIU subsystem** — the Ontario Special Investigations Unit
+  director's-report corpus (English + French, 2005-present). See *SIU
+  pipeline* below.
+- **Built-in datasets** through `rmoriedata` (CRAN), fetched with
+  provenance by `rmoriebricklayer` (CRAN).
+- **CPADS contract helpers**, IPW / eBAC workflows, outputs-manifest
+  tooling, synthetic data generators, a C/C++ backend for the Hawkes
+  likelihoods and the SIU parser, the causal-taphonomy suite, and the
+  A2AJ / CanLII Canadian legal-data ingest.
 - **`agent()`** — call the rmorie CLI agent from R (with
   `agent_available()` to probe for the binary).
 

@@ -1,13 +1,214 @@
-# rmorie (development version)
+# rmorie 1.3.2 - 2026-09-30
+
+## Hosted LLM tier
+
+* `morie_llm_ask()` falls back to the MORIE hosted tier at
+  `https://llm.rmorie.com` when no local Ollama answers. Sign in once with
+  `morie_llm_login()` (GitHub device flow), `morie_llm_login(email = )`
+  (a 6-digit code sent to the address), `morie_llm_login(email = ,
+  to_email = TRUE)` (the key itself mailed to the verified inbox) or
+  `morie_llm_login(token = )` (a key obtained elsewhere, probed once).
+  `morie_llm_logout()` forgets it. The key lives owner-only in
+  `$XDG_CONFIG_HOME/morie/credentials.json`, shared with the Python
+  package; `MORIE_HOSTED_KEY`, `MORIE_HOSTED_BASE_URL` (`"off"` disables
+  the tier; an empty value also does on POSIX) and `MORIE_HOSTED_MODEL`
+  override it. When the gateway no longer lists the requested model the
+  first model it does list is used, so a model retired upstream cannot
+  turn every request into an error. `morie_llm_probe_hosted()` reports
+  the tier; the probes consult their cache before touching the network.
+
+## Command line inside the package
+
+* `morie_cli()` dispatches `login`, `logout`, `doctor`, `ask`, `analyze`,
+  `version` and `help`; `inst/bin/rmorie` is the launcher and
+  `install_cli()` links it onto your PATH (an `rmorie.cmd` wrapper on
+  Windows). `rmorie login --email you@example.com --to-email` and
+  `rmorie login --token` mirror the R functions above.
+
+## Policing, public safety and search
+
+* Police operations research: the hypercube queueing model
+  (`HypercubeQueue()`) and the square-root law of patrol travel distance
+  (`SquareRootLaw()`).
+* Search theory for search and rescue: lateral range curves, probability
+  of detection under the inverse-cube and other sweep models, and the
+  optimal circular search (`LateralRange()`, `SearchPod()`,
+  `OptimalCircularSearch()`).
+* Calls-for-service staffing: Erlang C, staffing requirements at a target
+  service level, shift schedules, relief factors and the Wilson-Weiss
+  obligated-time model (`ErlangC()`, `StaffingRequirement()`,
+  `ShiftSchedule()`, `ReliefFactor()`).
+* CrimeStat journey-to-crime, the circle hypothesis, risk terrain
+  modelling, the Crime Severity Index, combat models, Massey-Denton
+  segregation indices and 2SFCA / Gaussian accessibility.
+* The native SIU core with the model-agnostic reading panel and the `siu`
+  CLI; SIU case-to-decision summaries are Kaplan-Meier; the Lakner
+  stock/flow measures in the MRM.
+
+## Spatial statistics
+
+* Weights and lattice autocorrelation: contiguity, regime and block
+  weights, lag and error operators, rho bounds, Geary's C, Getis-Ord G and
+  local G*, local and bivariate Moran, Lee's L, join counts, Moran
+  eigenvector filtering, correlograms, permutation tests and
+  semivariograms (the earlier placeholder versions of these families were
+  replaced by the real methods).
+* Spatial regression: SAR, SEM, SDM, SAC and SLX diagnostic front ends
+  (Jacobians, LM and Rao score tests, impacts, bootstraps), spatial Durbin
+  ML, S2SLS, GS2SLS and KP-HET, the spatial J-test, spatial quantile
+  regression, spatial probit and logit by GHK simulated ML, spatial-lag
+  Poisson, NB, ZIP and ZINB with impacts and overdispersion tests,
+  fixed- and random-effects spatial panels with a dynamic ARX, Bayesian
+  SAR samplers, GWR, multiscale GWR with corrected inference, GTWR and
+  Gaussian hidden Markov models.
+* Kriging and simulation: Bayesian, area-to-point, nonstationary, GA,
+  empirical Bayesian, probability, filtered and indicator kriging;
+  cokriging through the linear model of coregionalisation in any
+  dimension; Vecchia, NNGP, tapered, sparse-GP and fixed-rank kriging;
+  space-time variograms, kriging and cokriging including the Porcu
+  quasi-arithmetic and diffusion covariances; sequential Gaussian and
+  indicator simulation, turning bands, LU/Cholesky, spectral and
+  circulant-embedding fields, p-field, SNESIM, FILTERSIM and direct
+  sampling; nested covariance model selection.
+* Point processes: log-Gaussian Cox, Thomas and area-interaction
+  processes, Berman-Turner fits, Abramson intensity, space-time K, L, G
+  and J functions, mark correlation and variogram tests, Ripley's
+  translation correction, Voronoi residuals, STARMA space-time models
+  with forecasts and portmanteau tests, space-time G*, tensor and wavelet
+  decompositions.
+* Spatial machine learning and epidemiology: spatial cross-validation,
+  penalised, quantile, forest, boosting, SVM and stacked spatial
+  learners; GCN, SGC and GAT layers; FPCA and persistence landscapes;
+  spatial GLMMs by Laplace; BYM2, Leroux, CUSUM, prospective scan,
+  ecological regression, wombling, kernel relative risk, spatial SIR,
+  frailty and cure models; Fay-Herriot and BHF small-area EBLUPs.
+* Geometry, grids and sampling: SKATER, REDCAP, AZP and max-p
+  regionalisation, Delaunay and 3-D Voronoi, alpha shapes, natural
+  neighbour interpolation, marching-squares contours and bands, polygon
+  overlay, projections and datum transformations, square, hexagonal and
+  Coons grids, random, hexagonal, adaptive-cluster and declustered
+  sampling designs, spatial block and stationary bootstraps.
+
+## Political science
+
+* R arms for the fifteen spatial voting models; roll-call cohesion and
+  party influence; logistic and EM ideal points (`emIRT::binIRT`) and a
+  Philox Gibbs sampler for the CJR model; the W-NOMINATE fit and the
+  BLACKBOXT transpose scaling; majority tournaments (Condorcet, top cycle,
+  uncovered set, Banks set, Copeland, Borda), the exact yolk, agenda
+  setting, power indices, nucleolus and kernel; party competition
+  (Hotelling-Downs, valence, entry, bargaining, committees, PUNE),
+  voter utility and vote probability models, polarisation measures,
+  optimal cutting lines, the Gelman-King incumbency advantage, seat
+  allocation, issue salience and panel binary choice.
+
+## Optimisation and operations research
+
+* BFGS, L-BFGS-B (Byrd, Lu, Nocedal and Zhu), Nelder-Mead, sequential
+  quadratic and linear programming, and twelve population metaheuristics
+  on Philox streams; linear assignment, TSP, p-median, p-centre, maximal
+  and set covering, facility location, transportation, Clarke-Wright and
+  time-window, multi-depot, pickup-delivery, periodic and
+  stochastic-demand routing, the Chinese postman, constrained quadratic
+  utility maximisation and the VCG mechanism.
+
+## Statistics from the bookshelf
+
+* Hastie, Tibshirani and Friedman: ridge, lasso, LAR and forward
+  stagewise, PCR, regression trees, gradient and K-class boosting,
+  AdaBoost, additive models, MARS, projection pursuit, hierarchical
+  mixtures of experts, flexible and mixture discriminant analysis, curds
+  and whey, supervised principal components, archetypes, principal
+  curves, product-density ICA, graphical models and the Ising MLE, with
+  the model-assessment chapters.
+* Wilcox robust methods, the Bilder categorical-data book (complete),
+  Hedderich, the Morin probability results, MacKay's coding results,
+  Rangayyan's physiological signal processing, Schabenberger-Gotway,
+  Wasserman, Gibbons, twenty-three closed-form distribution families,
+  the power-analysis modules rebuilt on exact power functions,
+  acceptance sampling, Bonett-Wright sample sizes, Kenward-Roger,
+  parametric AFT models, RMST and weighted log-rank tests, panel
+  diagnostics (Pesaran CD, Wooldridge, Baltagi-Li, Conley HAC), the
+  serial-correlation linear mixed model, robust LDA, Rosenbaum
+  amplification and design sensitivity, the truncated-product and submax
+  tests.
+
+## Causal inference against the reference packages
+
+* Matching balance equals cobalt and the Abadie-Imbens SE equals
+  Matching; sensitivity analysis equals EValue, sensemakr, konfound and
+  tipr; TWFE and event-study DiD equal fixest; staggered DiD aggregation
+  is `did::aggte`; synthetic DiD is synthdid's estimator; fuzzy DiD is
+  the Wald-DiD 2SLS; the wild cluster bootstrap follows boottest; RD
+  bandwidths, bias correction and the density test equal rdrobust and
+  rddensity; IV standard errors, GMM, Anderson-Rubin and IV probit match
+  ivreg; honest sensitivity is the Rambachan-Roth set; the Kitagawa
+  instrument-validity test and the CLR precision correction are real.
+
+## Other estimators verified against R
+
+* GEE, ICC, repeated-measures and unbalanced two-way ANOVA, Lin's CCC,
+  Dunnett, Fleiss and partial correlations, survey estimators and the
+  design-based GLM, JK1 and JKn replicate weights, raking calibration,
+  `boot::boot.ci` intervals, DeLong's AUC interval, `cox.zph`,
+  concordance tie rules, Hommel and q-value pi0, influence measures, PPS
+  sampling, SMO support-vector machines, Little's MCAR test and Rubin
+  pooling, and upper-tail p-values taken from `lower.tail = FALSE`
+  throughout.
+
+## Clustering, networks and symbolic computation
+
+* Affinity propagation, CLARANS, CURE, DIANA, CHAMELEON, DENCLUE, FLAME,
+  growing neural gas and consensus clustering; Leiden rewritten to Traag
+  et al. (2019), Girvan-Newman, Infomap, walktrap and label propagation;
+  a CDCL SAT solver, DPLL(T) and linear-chain CRFs; symbolic regression
+  with a Pareto front, symbolic calculus and the Risch algorithm, Jordan
+  form and Galois groups.
+
+## Environmental, earth and life sciences
+
+* Climate indices and atmospheric dispersion, hydrology, forestry,
+  FRAGSTATS landscape metrics, soil processes, the marine module,
+  multispectral imaging, Berkeley Earth averaging, species distribution
+  and home range, wildlife ecology and animal movement; SMILES and SMARTS
+  chemistry with drug-likeness and PAINS filters, DSSP, MUSCLE alignment,
+  read assembly and disorder prediction.
+
+## Criminology research program
+
+* The open-problems ledger (`research/LEDGER.md`: the dark figure of
+  crime, contagion and branching ratios of self-exciting crime processes,
+  ecological correlation, the recording map behind downgrade-and-caution
+  rises, sentencing bounds under contamination, concentration, fairness
+  and deterrence) is implemented as `morie_*` functions with
+  Philox-seeded simulations that the Python arm replays exactly, and the
+  identification results are machine-checked in Lean 4 under
+  `research/lean/` (176 theorems), next to the MRP proofs of the VSR
+  paper (38 theorems).
+
+## Tests behind every export
+
+* Every one of the 5,031 documented exports has a test that recomputes
+  its value in the test body; placeholder implementations that returned
+  fabricated numbers were replaced with the real methods, family by
+  family, and the few that remain raise an error naming the missing
+  method. The coverage job runs the tests and the examples on separate
+  runners.
+
+## Windows
+
+* `Replaypack()` writes its canonical text through a binary connection so
+  the bytes on disk equal the digested text on every platform. The
+  hosted-tier off switch works on Windows (`"off"`), where an empty
+  environment variable is dropped.
 
 ## Security
 
-* The OllamaFreeAPI provider tier was removed for security reasons: it sent
-  prompts to anonymous volunteer Ollama servers found through a public
-  registry. The provider chain is now Ollama, Gemini, an OpenAI-compatible
-  endpoint, OpenAI, then the local fallback.
-
-# rmorie 1.3.2 - 2026-09-21
+* The OllamaFreeAPI provider tier was removed: it sent prompts to anonymous
+  volunteer Ollama servers found through a public registry. Its place in the
+  chain is taken by the hosted tier above, which is authenticated and
+  rate-limited, and the chain is now Ollama, hosted, Gemini, an
+  OpenAI-compatible endpoint, OpenAI, then the local fallback.
 
 ## Parameters that were accepted and not read
 

@@ -1,13 +1,41 @@
-# azmproofs
+# Vsrproofs
 
-## GitHub configuration
+Lean 4 proofs of the identification theory used in
 
-To set up your new GitHub repository, follow these steps:
+> *Alert Complexity and Placement Volatility in Ontario Restrictive
+> Confinement Data* (OTIS A01-RCDD, 2023-2025)
 
-* Under your repository name, click **Settings**.
-* In the **Actions** section of the sidebar, click "General".
-* Check the box **Allow GitHub Actions to create and approve pull requests**.
-* Click the **Pages** section of the settings sidebar.
-* In the **Source** dropdown menu, select "GitHub Actions".
+the MRP (major research paper) whose estimators the `rmorie` MRM
+functions implement. The paper itself is not here; only its mathematics.
 
-After following the steps above, you can remove this section from the README file.
+`Vsrproofs.lean` holds 38 theorems and lemmas in namespace `VSR`, over a
+finite population with known weights:
+
+- the adjustment formula (`adjustment`) and inverse-probability weighting (`ipw`);
+- double robustness of the augmented estimator (`aipw_propensity_correct`,
+  `aipw_outcome_correct`);
+- exact-matching covariate balance (`matching_balance`, `matching_card`);
+- the log-link incidence-rate-ratio identity (`irr_log_link`) and
+  negative-binomial overdispersion (`nb_var_gt_poisson`);
+- the Lakner stock/flow identity and a sign-divergence witness instantiated
+  at the paper's published counts (`lakner_identity`,
+  `lakner_sign_divergence`);
+- the confounding-factor bound (`confounding_factor`, `confounding_factor_otis`);
+- Manski's worst-case bound (`manski_upper`);
+- counterexamples showing what fails when positivity or ignorability does
+  not hold (`counterexample_*`).
+
+What is not proved, and cannot be: that positivity and conditional mean
+ignorability hold of the OTIS data. Lean checks the implication, never the
+antecedent.
+
+## Building
+
+Lean `v4.34.0` with Mathlib (pinned in `lakefile.toml`):
+
+```sh
+lake build
+lake env lean Audit.lean    # prints the axioms of every theorem
+```
+
+The criminology open-problems proofs live in the parent project `..`.
