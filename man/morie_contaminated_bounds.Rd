@@ -13,7 +13,7 @@ morie_contaminated_bounds(q, p)
 }
 \value{
 A data frame with \code{q}, \code{lower}, \code{upper}, \code{width}
-(before clipping to \link{0, 1}), \code{informative} and attribute \code{"theorems"}.
+(before clipping to [0, 1]), \code{informative} and attribute \code{"theorems"}.
 }
 \description{
 A recorded distribution is a mixture of the clean distribution of
@@ -22,8 +22,8 @@ records, wrong addresses) in a known share \code{p}. For any event the
 clean probability lies in
 \eqn{[\max(0, (q-p)/(1-p)),\; \min(1, q/(1-p))]} with \eqn{q} the
 recorded probability; both ends are attained, the width is
-\eqn{p/(1-p)}, and the interval is informative only when
-\eqn{p < \min(q, 1-q)} (\code{Research.P11.clean_bounds},
+\eqn{p/(1-p)}, and the interval is narrower than the unit interval exactly when
+\eqn{p < q} or \eqn{p < 1-q} (\code{Research.P11.clean_bounds},
 \code{clean_lower_attained}, \code{clean_upper_attained},
 \code{clean_width}, \code{clean_informative}; Manski sec. 5.2).
 }

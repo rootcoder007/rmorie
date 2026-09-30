@@ -29,7 +29,7 @@ probability scale with interval half-widths near one half no pair has an
 identified order (\code{identified_scores_le}). Given point estimates and
 their half-widths, the function reports which pairs are identified and the
 share of pairs that are not (the Baldus proportionality-review situation
-in Weisburd & Britt ch. 1, where most intervals covered nearly all of \link{0, 1}).
+in Weisburd & Britt ch. 1, where most intervals covered nearly all of [0, 1]).
 }
 \examples{
 morie_ranking_resolution(c(0.2, 0.35, 0.8), half_width = c(0.1, 0.1, 0.05))

@@ -9,7 +9,7 @@ morie_collider_arrest(a, e, pi_bg)
 \arguments{
 \item{a, e}{Prevalences of the two risk factors in (0, 1).}
 
-\item{pi_bg}{Prevalence of the background cause of arrest in \link{0, 1}.}
+\item{pi_bg}{Prevalence of the background cause of arrest in [0, 1].}
 }
 \value{
 A list with \code{population_or} (1), \code{arrestee_or}

@@ -10,7 +10,8 @@ morie_spillover_exposure_probs(
   n_treated,
   n_draws = 5000L,
   exact_max = 20000,
-  joint = FALSE
+  joint = FALSE,
+  seed = 0
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ is at most this.}
 \item{joint}{Also return the joint probabilities
 \eqn{\pi_{ij}(\ell) = P(E_i = \ell, E_j = \ell)} needed for the variance
 in \code{\link{morie_spillover_ht}}.}
+
+\item{seed}{Philox seed for the Monte Carlo branch (non-negative).}
 }
 \value{
 An \code{n} by 3 matrix of exposure probabilities (columns
@@ -39,7 +42,11 @@ with \code{marginal} (that matrix) and \code{joint} (an \code{n} by
 Draws \code{n_draws} assignments of \code{n_treated} treated places out
 of \code{n} and returns, per place, the share of draws in which it sat
 at each exposure level of \code{\link{morie_spillover_exposure}}. Exact
-enumeration is used when it is small enough.
+enumeration is used when it is small enough. Monte Carlo draws come from
+the Philox stream: draw \code{k} treats the \code{n_treated} places with
+the smallest of the uniforms \code{(k - 1) n + 1, ..., k n} of
+\code{.morie_random_uniform(n * n_draws, seed, stream = 0)}, so the R and
+Python arms return identical probabilities for the same seed.
 }
 \examples{
 morie_spillover_exposure_probs(n = 6, edges = cbind(1:5, 2:6), n_treated = 2)

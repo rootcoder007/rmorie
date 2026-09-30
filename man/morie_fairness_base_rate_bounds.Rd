@@ -7,7 +7,7 @@
 morie_fairness_base_rate_bounds(p_obs, alpha_max, beta_max)
 }
 \arguments{
-\item{p_obs}{Recorded (proxy) base rate, one or more values in \link{0, 1}.}
+\item{p_obs}{Recorded (proxy) base rate, one or more values in [0, 1].}
 
 \item{alpha_max}{Largest credible false-positive noise rate.}
 
@@ -16,7 +16,7 @@ morie_fairness_base_rate_bounds(p_obs, alpha_max, beta_max)
 }
 \value{
 A data frame with \code{p_obs}, \code{lower}, \code{upper}
-(clamped to \link{0, 1}) and \code{width}.
+(clamped to [0, 1]) and \code{width}.
 }
 \description{
 Rearrest is a proxy for reoffending. With false-positive noise

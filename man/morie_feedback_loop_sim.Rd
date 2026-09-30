@@ -13,7 +13,7 @@ morie_feedback_loop_sim(
   update = c("naive", "corrected"),
   rho = 0,
   n_sims = 100L,
-  seed = NULL
+  seed = 0
 )
 }
 \arguments{
@@ -37,7 +37,10 @@ but strictly above the true-rate proportion unless \code{rho = 1}.}
 
 \item{n_sims}{Number of independent runs.}
 
-\item{seed}{Optional seed (\code{set.seed} is called when given).}
+\item{seed}{Philox seed (non-negative integer). Run \code{i} draws its
+uniforms from stream \code{i - 1} of \code{.morie_random_uniform}, three
+per step when \code{rho > 0} and two otherwise, so the R and Python arms
+produce identical paths for the same seed.}
 }
 \value{
 A list with \code{share_a} (an \code{n_sims} by

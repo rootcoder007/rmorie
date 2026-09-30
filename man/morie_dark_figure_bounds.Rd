@@ -7,9 +7,9 @@
 morie_dark_figure_bounds(v_obs, r, alpha_max, beta_max)
 }
 \arguments{
-\item{v_obs}{Survey victimisation rate(s) in \link{0, 1}.}
+\item{v_obs}{Survey victimisation rate(s) in [0, 1].}
 
-\item{r}{Recorded rate(s) in \link{0, 1}, same length as \code{v_obs} or length 1.}
+\item{r}{Recorded rate(s) in [0, 1], same length as \code{v_obs} or length 1.}
 
 \item{alpha_max}{Largest credible over-reporting rate.}
 

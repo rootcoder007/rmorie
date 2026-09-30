@@ -7,7 +7,7 @@
 morie_fairness_true_rate(p_obs, alpha, beta)
 }
 \arguments{
-\item{p_obs}{Recorded (proxy) base rate, one or more values in \link{0, 1}.}
+\item{p_obs}{Recorded (proxy) base rate, one or more values in [0, 1].}
 
 \item{alpha, beta}{Known noise rates with \code{alpha + beta < 1}.}
 }
