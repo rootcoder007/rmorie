@@ -375,7 +375,7 @@ morie_probability_of_necessity <- function(p_treated, p_control) {
 #' Fine Point 8.2).
 #'
 #' @param a,e Prevalences of the two risk factors in (0, 1).
-#' @param pi_bg Prevalence of the background cause of arrest in [0, 1].
+#' @param pi_bg Prevalence of the background cause of arrest in \[0, 1\].
 #' @return A list with \code{population_or} (1), \code{arrestee_or}
 #'   (\code{pi_bg}), \code{arrestee_log_or}, the four joint cells among
 #'   arrestees and \code{theorems}.

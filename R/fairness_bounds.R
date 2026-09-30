@@ -82,12 +82,12 @@ morie_fairness_implied_fpr <- function(p, ppv, fnr) {
 #' \code{lower_bound_attained}, \code{upper_bound_attained}), so no
 #' narrower interval follows from the boxes alone.
 #'
-#' @param p_obs Recorded (proxy) base rate, one or more values in [0, 1].
+#' @param p_obs Recorded (proxy) base rate, one or more values in \[0, 1\].
 #' @param alpha_max Largest credible false-positive noise rate.
 #' @param beta_max Largest credible false-negative noise rate;
 #'   \code{alpha_max + beta_max} must be below 1.
 #' @return A data frame with \code{p_obs}, \code{lower}, \code{upper}
-#'   (clamped to [0, 1]) and \code{width}.
+#'   (clamped to \[0, 1\]) and \code{width}.
 #' @examples
 #' morie_fairness_base_rate_bounds(c(0.35, 0.55), alpha_max = 0.10, beta_max = 0.20)
 #' # can two groups' true base rates still be ordered? only if the boxes do not overlap
@@ -225,7 +225,7 @@ morie_logit_rescale <- function(beta, omitted_var, error_var = pi^2 / 3) {
 #' identified order (\code{identified_scores_le}). Given point estimates and
 #' their half-widths, the function reports which pairs are identified and the
 #' share of pairs that are not (the Baldus proportionality-review situation
-#' in Weisburd & Britt ch. 1, where most intervals covered nearly all of [0, 1]).
+#' in Weisburd & Britt ch. 1, where most intervals covered nearly all of \[0, 1\]).
 #'
 #' @param estimate Estimated scores (probabilities).
 #' @param half_width Half-width of the interval around each estimate (one

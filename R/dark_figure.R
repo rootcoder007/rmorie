@@ -82,8 +82,8 @@ morie_dark_figure_two_source <- function(n1, n2, m, kappa = 1, chapman = FALSE) 
 #' Both ends of the survey part are attained, so nothing narrower follows
 #' from the boxes alone.
 #'
-#' @param v_obs Survey victimisation rate(s) in [0, 1].
-#' @param r Recorded rate(s) in [0, 1], same length as \code{v_obs} or length 1.
+#' @param v_obs Survey victimisation rate(s) in \[0, 1\].
+#' @param r Recorded rate(s) in \[0, 1\], same length as \code{v_obs} or length 1.
 #' @param alpha_max Largest credible over-reporting rate.
 #' @param beta_max Largest credible under-reporting rate;
 #'   \code{alpha_max + beta_max} must be below 1.

@@ -77,7 +77,7 @@ morie_sentence_effect_bounds <- function(y, z, weights = NULL, contrast = NULL) 
 #' @param q Recorded probability (or vector of them) of the event.
 #' @param p Known contamination share in [0, 1).
 #' @return A data frame with \code{q}, \code{lower}, \code{upper}, \code{width}
-#'   (before clipping to [0, 1]), \code{informative} and attribute \code{"theorems"}.
+#'   (before clipping to \[0, 1\]), \code{informative} and attribute \code{"theorems"}.
 #' @examples
 #' morie_contaminated_bounds(q = c(0.05, 0.3, 0.6), p = 0.1)
 #' @export
