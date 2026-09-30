@@ -55,30 +55,36 @@
   if (!is.null(user_agent) && nzchar(user_agent)) {
     headers <- c(headers, paste0("User-Agent: ", user_agent))
   }
-  if (!is.null(user_agent) && nzchar(user_agent)) {
-    headers <- c(headers, paste0("User-Agent: ", user_agent))
+  fetch <- function() {
+    body <- tryCatch(
+      .morie_dataset_http_text(url,
+                                query = params,
+                                headers = headers,
+                                timeout_s = as.integer(timeout)),
+      error = function(e) {
+        stop("morie CKAN ", action, " request failed: ",
+          conditionMessage(e),
+          call. = FALSE
+        )
+      }
+    )
+    tryCatch(
+      .morie_from_json(body, simplifyVector = FALSE),
+      error = function(e) {
+        stop("morie CKAN ", action, ": response was not JSON: ",
+          conditionMessage(e),
+          call. = FALSE
+        )
+      }
+    )
   }
-  body <- tryCatch(
-    .morie_dataset_http_text(url,
-                              query = params,
-                              headers = headers,
-                              timeout_s = as.integer(timeout)),
-    error = function(e) {
-      stop("morie CKAN ", action, " request failed: ",
-        conditionMessage(e),
-        call. = FALSE
-      )
-    }
-  )
-  payload <- tryCatch(
-    .morie_from_json(body, simplifyVector = FALSE),
-    error = function(e) {
-      stop("morie CKAN ", action, ": response was not JSON: ",
-        conditionMessage(e),
-        call. = FALSE
-      )
-    }
-  )
+  # open portals sit behind a web application firewall that now and then
+  # answers one request with an HTML page; one retry after a pause turns
+  # that transient into a normal call instead of a failure
+  payload <- tryCatch(fetch(), error = function(e) {
+    Sys.sleep(2)
+    fetch()
+  })
   if (!isTRUE(payload$success)) {
     stop("morie CKAN ", action, " failed: ",
       paste(utils::capture.output(str(payload$error)), collapse = " "),
@@ -172,11 +178,16 @@
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
-#' res <- morie_ingest_ckan_package_search(
-#'   "https://open.canada.ca/data",
-#'   query = "corrections"
+#' # a live portal: the example reports, rather than fails, when it is away
+#' res <- tryCatch(
+#'   morie_ingest_ckan_package_search("https://open.canada.ca/data",
+#'                                    query = "corrections"),
+#'   error = function(e) {
+#'     message("open.canada.ca not reachable: ", conditionMessage(e))
+#'     NULL
+#'   }
 #' )
-#' length(res$results)
+#' if (!is.null(res)) length(res$results)
 #' }
 #' \dontshow{\}) # examplesIf}
 #' @export
