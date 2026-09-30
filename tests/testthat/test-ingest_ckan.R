@@ -160,7 +160,7 @@ test_that("read_path reads csv via readr when installed", {
 
 test_that("a CKAN call retries once when the portal answers with a non-JSON page", {
   calls <- 0L
-  testthat::local_mocked_bindings(
+  testthat::local_mocked_bindings(.package = "rmorie",
     .morie_dataset_http_text = function(url, query = NULL, headers = NULL, timeout_s = 30L) {
       calls <<- calls + 1L
       if (calls == 1L) "<html><head><title>Request Rejected</title></head></html>"
@@ -172,7 +172,7 @@ test_that("a CKAN call retries once when the portal answers with a non-JSON page
   expect_equal(res$count, 1)
   # the second failure is the caller's to see
   calls <- 0L
-  testthat::local_mocked_bindings(
+  testthat::local_mocked_bindings(.package = "rmorie",
     .morie_dataset_http_text = function(...) { calls <<- calls + 1L; "<html>nope</html>" }
   )
   expect_error(morie_ingest_ckan_package_search("https://open.canada.ca/data", query = "x"),
