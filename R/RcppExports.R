@@ -173,6 +173,10 @@ morie_hawkes_ll_gamma_const_cpp <- function(t, T_horizon, a0, eta, alpha, beta) 
     .Call(`_rmorie_morie_hawkes_ll_gamma_const_cpp`, t, T_horizon, a0, eta, alpha, beta)
 }
 
+.morie_feedback_urn_cpp <- function(lamA, lamB, cA0, cB0, n_steps, update, rho, u) {
+    .Call(`_rmorie_morie_feedback_urn_cpp`, lamA, lamB, cA0, cB0, n_steps, update, rho, u)
+}
+
 morie_hawkes_kernel_density_cpp <- function(u, kind, psi) {
     .Call(`_rmorie_morie_hawkes_kernel_density_cpp`, u, kind, psi)
 }
@@ -354,6 +358,10 @@ morie_spatial_classical_mds_cpp <- function(D, n_dims) {
 
 morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega) {
     .Call(`_rmorie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
+}
+
+.morie_spillover_exposure_cpp <- function(treated, from, to) {
+    .Call(`_rmorie_morie_spillover_exposure_cpp`, treated, from, to)
 }
 
 #' Binary C-SVC via SMO (compiled)

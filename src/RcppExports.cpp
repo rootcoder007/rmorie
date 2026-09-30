@@ -557,6 +557,24 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_feedback_urn_cpp
+List morie_feedback_urn_cpp(double lamA, double lamB, double cA0, double cB0, int n_steps, int update, double rho, NumericVector u);
+RcppExport SEXP _rmorie_morie_feedback_urn_cpp(SEXP lamASEXP, SEXP lamBSEXP, SEXP cA0SEXP, SEXP cB0SEXP, SEXP n_stepsSEXP, SEXP updateSEXP, SEXP rhoSEXP, SEXP uSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type lamA(lamASEXP);
+    Rcpp::traits::input_parameter< double >::type lamB(lamBSEXP);
+    Rcpp::traits::input_parameter< double >::type cA0(cA0SEXP);
+    Rcpp::traits::input_parameter< double >::type cB0(cB0SEXP);
+    Rcpp::traits::input_parameter< int >::type n_steps(n_stepsSEXP);
+    Rcpp::traits::input_parameter< int >::type update(updateSEXP);
+    Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type u(uSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_feedback_urn_cpp(lamA, lamB, cA0, cB0, n_steps, update, rho, u));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_hawkes_kernel_density_cpp
 NumericVector morie_hawkes_kernel_density_cpp(NumericVector u, std::string kind, NumericVector psi);
 RcppExport SEXP _rmorie_morie_hawkes_kernel_density_cpp(SEXP uSEXP, SEXP kindSEXP, SEXP psiSEXP) {
@@ -977,6 +995,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_spillover_exposure_cpp
+List morie_spillover_exposure_cpp(IntegerVector treated, IntegerVector from, IntegerVector to);
+RcppExport SEXP _rmorie_morie_spillover_exposure_cpp(SEXP treatedSEXP, SEXP fromSEXP, SEXP toSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type treated(treatedSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type from(fromSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type to(toSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_spillover_exposure_cpp(treated, from, to));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_svc_train_cpp
 List morie_svc_train_cpp(NumericMatrix X, NumericVector y, double C, int kernel_type, double gamma, double coef0, double degree, double tol, int max_iter);
 RcppExport SEXP _rmorie_morie_svc_train_cpp(SEXP XSEXP, SEXP ySEXP, SEXP CSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP, SEXP tolSEXP, SEXP max_iterSEXP) {
@@ -1349,6 +1380,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_hawkes_ll_weibull_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_weibull_const_cpp, 6},
     {"_rmorie_morie_hawkes_ll_lomax_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_lomax_const_cpp, 6},
     {"_rmorie_morie_hawkes_ll_gamma_const_cpp", (DL_FUNC) &_rmorie_morie_hawkes_ll_gamma_const_cpp, 6},
+    {"_rmorie_morie_feedback_urn_cpp", (DL_FUNC) &_rmorie_morie_feedback_urn_cpp, 8},
     {"_rmorie_morie_hawkes_kernel_density_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_density_cpp, 3},
     {"_rmorie_morie_hawkes_kernel_cdf_cpp", (DL_FUNC) &_rmorie_morie_hawkes_kernel_cdf_cpp, 3},
     {"_rmorie_morie_hawkes_pair_excitation_sum_cpp", (DL_FUNC) &_rmorie_morie_hawkes_pair_excitation_sum_cpp, 4},
@@ -1379,6 +1411,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},
     {"_rmorie_morie_spatial_classical_mds_cpp", (DL_FUNC) &_rmorie_morie_spatial_classical_mds_cpp, 2},
     {"_rmorie_morie_spatial_wordfish_omega_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_wordfish_omega_update_cpp, 5},
+    {"_rmorie_morie_spillover_exposure_cpp", (DL_FUNC) &_rmorie_morie_spillover_exposure_cpp, 3},
     {"_rmorie_morie_svc_train_cpp", (DL_FUNC) &_rmorie_morie_svc_train_cpp, 9},
     {"_rmorie_morie_svr_train_cpp", (DL_FUNC) &_rmorie_morie_svr_train_cpp, 10},
     {"_rmorie_morie_svm_decision_cpp", (DL_FUNC) &_rmorie_morie_svm_decision_cpp, 8},
