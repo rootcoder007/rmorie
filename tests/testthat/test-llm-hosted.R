@@ -111,3 +111,27 @@ test_that("the device flow polls until a key arrives and stores it", {
   expect_equal(n, 3L)
   expect_true(file.exists(file.path(dir, "morie", "credentials.json")))
 })
+
+test_that("the email sign-in requests a code and exchanges it for a key", {
+  testthat::skip_on_covr()
+  testthat::skip_if_not_installed("httr2")
+  dir <- .hosted_sandbox()
+  seen <- list()
+  fake_perform <- function(req, ...) {
+    seen[[length(seen) + 1L]] <<- list(url = req$url, body = req$body$data)
+    if (grepl("/email/code$", req$url)) {
+      return(httr2::response(status_code = 200L, headers = list(`content-type` = "application/json"),
+                             body = charToRaw('{"sent":true,"expires_in":600}')))
+    }
+    httr2::response(status_code = 200L, headers = list(`content-type` = "application/json"),
+                    body = charToRaw('{"api_key":"sk-mail","user":"mail:abc"}'))
+  }
+  testthat::local_mocked_bindings(req_perform = fake_perform, .package = "httr2")
+  key <- suppressMessages(morie_llm_login(email = " vee@example.com", code = "123456"))
+  expect_equal(key, "sk-mail")
+  expect_length(seen, 1L)  # a supplied code skips the request step
+  expect_equal(seen[[1]]$body$email, "vee@example.com")
+  expect_equal(seen[[1]]$body$code, "123456")
+  expect_equal(.morie_llm_read_credentials()$hosted_key, "sk-mail")
+  expect_error(morie_llm_login(email = "nope"), "email address")
+})
