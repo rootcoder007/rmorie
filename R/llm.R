@@ -586,6 +586,10 @@ morie_llm_probe_hosted <- function(timeout = 2) {
 #' @param email Sign in with a one-time code emailed to this address instead
 #'   of GitHub; the code is read from the console (or from \code{code}).
 #' @param code The emailed code, when not read interactively.
+#' @param token A key obtained elsewhere (the website, or one the gateway
+#'   emailed); stored directly, no sign-in round trip.
+#' @param to_email With \code{email}: have the gateway email the key instead of
+#'   returning it. Nothing is stored; paste it later with \code{token}.
 #' @return The key, invisibly.
 #' @examples
 #' \dontrun{
@@ -594,11 +598,12 @@ morie_llm_probe_hosted <- function(timeout = 2) {
 #' }
 #' @export
 morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600,
-                            email = NULL, code = NULL) {
+                            email = NULL, code = NULL, token = NULL, to_email = FALSE) {
+  if (!is.null(token)) return(.morie_llm_store_token(token))
   if (!requireNamespace("httr2", quietly = TRUE))
     stop("morie_llm_login() needs the httr2 package")
   auth <- .morie_llm_hosted_auth()
-  if (!is.null(email)) return(.morie_llm_login_email(auth, email, code))
+  if (!is.null(email)) return(.morie_llm_login_email(auth, email, code, to_email))
   start <- httr2::req_perform(httr2::req_method(httr2::request(paste0(auth, "/device/code")), "POST"))
   info <- httr2::resp_body_json(start)
   message(sprintf("Sign in at %s and enter the code: %s", info$verification_uri, info$user_code))
@@ -634,7 +639,23 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
 
 #' Internal helper: email sign-in (code request, then verification)
 #' @noRd
-.morie_llm_login_email <- function(auth, email, code = NULL) {
+.morie_llm_store_token <- function(token) {
+  token <- trimws(as.character(token))
+  if (!length(token) || !nzchar(token)) stop("an empty token cannot be stored")
+  data <- .morie_llm_read_credentials()
+  data$hosted_key <- token
+  data$hosted_base_url <- .morie_llm_hosted_base()
+  p <- .morie_llm_write_credentials(data)
+  .morie_llm_cache$hosted_cached <- NULL
+  if (isTRUE(morie_llm_probe_hosted())) {
+    message(sprintf("Token stored in %s; the gateway accepts it.", p))
+  } else {
+    message(sprintf("Token stored in %s, but the gateway did not accept it (check the key).", p))
+  }
+  invisible(token)
+}
+
+.morie_llm_login_email <- function(auth, email, code = NULL, to_email = FALSE) {
   email <- trimws(email)
   if (!grepl("@", email, fixed = TRUE)) stop("an email address is required")
   perform <- function(path, body) {
@@ -650,12 +671,19 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
     message(sprintf("A 6-digit code was sent to %s (valid for 10 minutes).", email))
     code <- trimws(readline("Enter the code: "))
   }
-  resp <- perform("/email/verify", list(email = email, code = trimws(code)))
+  payload <- list(email = email, code = trimws(code))
+  if (isTRUE(to_email)) payload$deliver <- "email"
+  resp <- perform("/email/verify", payload)
   if (httr2::resp_status(resp) != 200L) {
     err <- tryCatch(httr2::resp_body_json(resp)$error, error = function(e) NULL)
     stop(err %||% sprintf("the sign-in service answered %d", httr2::resp_status(resp)))
   }
   body <- httr2::resp_body_json(resp)
+  if (isTRUE(to_email)) {
+    if (!isTRUE(body$sent)) stop("the sign-in service did not confirm the email")
+    message(sprintf("Your key was emailed to %s. Store it with morie_llm_login(token = ) or: rmorie login --token", email))
+    return(invisible(""))
+  }
   data <- .morie_llm_read_credentials()
   data$hosted_key <- body$api_key
   data$hosted_user <- body$user %||% ""

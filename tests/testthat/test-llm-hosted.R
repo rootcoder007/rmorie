@@ -135,3 +135,28 @@ test_that("the email sign-in requests a code and exchanges it for a key", {
   expect_equal(.morie_llm_read_credentials()$hosted_key, "sk-mail")
   expect_error(morie_llm_login(email = "nope"), "email address")
 })
+
+test_that("a pasted token is stored and probed, and the mailed-key path stores nothing", {
+  testthat::skip_on_covr()
+  testthat::skip_if_not_installed("httr2")
+  .hosted_sandbox()
+  testthat::local_mocked_bindings(.package = .pkg, morie_llm_probe_hosted = function(...) TRUE)
+  expect_message(tok <- morie_llm_login(token = "  sk-pasted "), "accepts it")
+  expect_equal(tok, "sk-pasted")
+  expect_equal(.morie_llm_hosted_key(), "sk-pasted")
+  expect_error(morie_llm_login(token = " "), "empty token")
+  suppressMessages(morie_llm_logout())
+  seen <- list()
+  testthat::local_mocked_bindings(
+    .package = "httr2",
+    req_perform = function(req, ...) {
+      seen[[length(seen) + 1L]] <<- req$body$data
+      httr2::response(status_code = 200L, headers = list(`content-type` = "application/json"),
+                      body = charToRaw('{"sent":true,"user":"mail:abc"}'))
+    })
+  expect_message(out <- morie_llm_login(email = "vee@example.com", code = "123456", to_email = TRUE),
+                 "rmorie login --token")
+  expect_equal(out, "")
+  expect_equal(seen[[1]]$deliver, "email")
+  expect_null(.morie_llm_hosted_key())
+})

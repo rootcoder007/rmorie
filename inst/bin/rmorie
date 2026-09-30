@@ -1,0 +1,4 @@
+#!/bin/sh
+# rmorie command-line launcher (installed by rmorie::install_cli()).
+# Runs morie_cli() from whichever arm of the package is installed.
+exec Rscript --vanilla -e 'suppressPackageStartupMessages({ p <- if (requireNamespace("rmorie", quietly = TRUE)) "rmorie" else "morie"; q <- getNamespace(p)$morie_cli(); quit(status = as.integer(q)) })' --args "$@"
