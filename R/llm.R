@@ -353,7 +353,7 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
   }
   if (provider %in% c("ollama", "hosted") && !is.null(.morie_llm_hosted_base()) &&
       !is.null(.morie_llm_hosted_key())) {
-    add(.morie_llm_hosted_base(), model %||% .morie_llm_hosted_model(),
+    add(.morie_llm_hosted_base(), model %||% .morie_llm_hosted_model_available(),
         .morie_llm_hosted_key())
   }
   if (provider %in% c("ollama", "hosted", "gemini") && !is.null(.morie_llm_gemini_key())) {
@@ -568,10 +568,30 @@ morie_llm_probe_hosted <- function(timeout = 2) {
     req <- httr2::request(paste0(base, "/v1/models"))
     req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
     req <- httr2::req_timeout(req, timeout)
-    httr2::resp_status(httr2::req_perform(req)) < 400
+    resp <- httr2::req_perform(req)
+    ok <- httr2::resp_status(resp) < 400
+    if (ok) {
+      ids <- tryCatch(vapply(httr2::resp_body_json(resp)$data, function(m) as.character(m$id %||% ""), ""),
+                      error = function(e) character())
+      ids <- ids[nzchar(ids)]
+      .morie_llm_cache$hosted_models <- if (length(ids)) ids else NULL
+    }
+    ok
   }, error = function(e) FALSE)
   .morie_llm_cache$hosted_cached <- out
   out
+}
+
+#' Internal helper: the configured hosted model, or the gateway's first model
+#' when the configured one is not offered (cloud models get retired upstream;
+#' a stale default must not turn every request into a 400)
+#' @noRd
+.morie_llm_hosted_model_available <- function() {
+  wanted <- .morie_llm_hosted_model()
+  morie_llm_probe_hosted()
+  listed <- .morie_llm_cache$hosted_models
+  if (length(listed) && !wanted %in% listed) return(listed[[1L]])
+  wanted
 }
 
 #' Sign in to the hosted MORIE LLM tier
@@ -626,6 +646,7 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
         data$hosted_base_url <- .morie_llm_hosted_base()
         p <- .morie_llm_write_credentials(data)
         .morie_llm_cache$hosted_cached <- NULL
+        .morie_llm_cache$hosted_models <- NULL
         message(sprintf("Logged in as %s; key stored in %s", body$user %||% "user", p))
         return(invisible(body$api_key))
       }
@@ -648,6 +669,7 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
   data$hosted_base_url <- .morie_llm_hosted_base()
   p <- .morie_llm_write_credentials(data)
   .morie_llm_cache$hosted_cached <- NULL
+  .morie_llm_cache$hosted_models <- NULL
   if (isTRUE(morie_llm_probe_hosted())) {
     message(sprintf("Token stored in %s; the gateway accepts it.", p))
   } else {
@@ -691,6 +713,7 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
   data$hosted_base_url <- .morie_llm_hosted_base()
   p <- .morie_llm_write_credentials(data)
   .morie_llm_cache$hosted_cached <- NULL
+  .morie_llm_cache$hosted_models <- NULL
   message(sprintf("Logged in; key stored in %s", p))
   invisible(body$api_key)
 }
@@ -709,6 +732,7 @@ morie_llm_logout <- function() {
   data$hosted_user <- NULL
   if (length(data)) .morie_llm_write_credentials(data) else unlink(.morie_llm_credentials_path())
   .morie_llm_cache$hosted_cached <- NULL
+  .morie_llm_cache$hosted_models <- NULL
   message(if (had) "Hosted key removed." else "No hosted key was stored.")
   invisible(had)
 }

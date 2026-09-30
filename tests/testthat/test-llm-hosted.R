@@ -9,8 +9,13 @@
                         GEMINI_API_KEY = NA, LLM_API_BASE_URL = NA, LLM_API_KEY = NA,
                         OPENAI_API_KEY = NA), .local_envir = env)
   .morie_llm_cache$hosted_cached <- NULL
+  .morie_llm_cache$hosted_models <- NULL
   .morie_llm_cache$ollama_cached <- FALSE
-  withr::defer({ .morie_llm_cache$hosted_cached <- NULL; .morie_llm_cache$ollama_cached <- NULL }, envir = env)
+  withr::defer({
+    .morie_llm_cache$hosted_cached <- NULL
+    .morie_llm_cache$hosted_models <- NULL
+    .morie_llm_cache$ollama_cached <- NULL
+  }, envir = env)
   dir
 }
 
@@ -163,4 +168,27 @@ test_that("a pasted token is stored and probed, and the mailed-key path stores n
   expect_equal(out, "")
   expect_equal(seen[[1]]$deliver, "email")
   expect_null(.morie_llm_hosted_key())
+})
+
+test_that("the hosted model falls back to what the gateway lists for this key", {
+  testthat::skip_on_covr()
+  testthat::skip_if_not_installed("httr2")
+  .hosted_sandbox()
+  .morie_llm_write_credentials(list(hosted_key = "sk-abc"))
+  listed <- '{"data":[{"id":"gemma4:31b-cloud"},{"id":"minimax-m3:cloud"}]}'
+  testthat::local_mocked_bindings(
+    .package = "httr2",
+    req_perform = function(req, ...) httr2::response(status_code = 200L,
+                                                     headers = list(`content-type` = "application/json"),
+                                                     body = charToRaw(listed)))
+  withr::local_envvar(MORIE_HOSTED_MODEL = "qwen3.5:397b-cloud")  # retired upstream
+  expect_equal(.morie_llm_hosted_model(), "qwen3.5:397b-cloud")
+  expect_equal(.morie_llm_hosted_model_available(), "gemma4:31b-cloud")
+  withr::local_envvar(MORIE_HOSTED_MODEL = "minimax-m3:cloud")
+  expect_equal(.morie_llm_hosted_model_available(), "minimax-m3:cloud")
+  .morie_llm_cache$hosted_cached <- NULL
+  .morie_llm_cache$hosted_models <- NULL
+  testthat::local_mocked_bindings(.package = "httr2", req_perform = function(req, ...) stop("down"))
+  withr::local_envvar(MORIE_HOSTED_MODEL = "anything:cloud")
+  expect_equal(.morie_llm_hosted_model_available(), "anything:cloud")  # no list known: keep the name
 })
