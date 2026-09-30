@@ -296,21 +296,17 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' @noRd
 .morie_llm_local_fallback <- function(prompt) {
   paste0(
-    "MORIE is running in local-only mode (no LLM provider detected).\
-\
-",
-    "Available capabilities without an LLM:\
-",
-    "  - morie list-modules        List analysis modules\
-",
-    "  - morie run-module <name>   Run a specific module\
-",
-    "  - morie pipeline --all -y   Run the full analysis pipeline\
-\
-",
-    "Enable an LLM by setting one of GEMINI_API_KEY, ",
-    "LLM_API_BASE_URL + LLM_API_KEY, or OPENAI_API_KEY, ",
-    "or by running a local Ollama instance."
+    "MORIE is running in local-only mode (no LLM provider detected).\n\n",
+    "The analyses do not need a model: morie_run_pipeline(), ",
+    "morie_run_morie_module() and every morie_* estimator work as they are. ",
+    "To get answers from a model, enable one of these (tried in this order):\n",
+    "  1. a local Ollama: curl -fsSL https://ollama.com/install.sh | sh\n",
+    "  2. the hosted MORIE tier at https://llm.rmorie.com: ",
+    "morie_llm_login() in R, or `rmorie login` from the shell after ",
+    "install_cli()\n",
+    "  3. your own key: GEMINI_API_KEY, LLM_API_BASE_URL + LLM_API_KEY, ",
+    "or OPENAI_API_KEY\n",
+    "morie_llm_detect_provider() reports what is reachable from here."
   )
 }
 

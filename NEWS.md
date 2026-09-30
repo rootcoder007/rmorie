@@ -1,4 +1,23 @@
-# rmorie 1.3.3 - 2026-09-30
+# rmorie 1.3.4 - 2026-09-30
+
+## SIU manifest and README
+
+* `morie_siu_index(lang = "en")` and `lang = "fr"` returned an error: the
+  shipped `siu_drid_manifest.csv.gz` carried the column as `X_language`
+  (written through `check.names = TRUE` in an earlier build) while the
+  code reads `_language`. The shipped file is regenerated with the
+  rmoriedata header and the reader normalises the old name; the manifest
+  holds 2,532 English and 2,217 French reports.
+* The README's SIU examples define `df` (`morie_siu_reports()`, the
+  reviewed corpus from rmoriedata) before using it, quote the real
+  language counts, and say what the outputs-manifest example expects.
+* `morie_siu_audit_columns()` drops blank and `NA` case numbers before
+  auditing: 628 of the 5,157 reviewed reports carry no parsed case number,
+  so sampling the corpus used to spend audit calls on empty strings.
+* `morie_llm_ask()` without a reachable model now explains how to enable
+  one, including the hosted tier (`morie_llm_login()`, `rmorie login`),
+  instead of listing Python commands.
+
 
 ## Release hygiene
 

@@ -696,6 +696,32 @@ test_that("morie_siu_audit_columns errors when no cases succeed", {
   )
 })
 
+test_that("morie_siu_audit_columns drops blank and NA case numbers first", {
+  # the reviewed corpus has rows whose case number was never parsed; the
+  # README samples from it, so blanks must not become audit attempts
+  expect_error(
+    morie_siu_audit_columns(c("", NA, "  "), model = "gemini", progress = FALSE),
+    "must be non-empty"
+  )
+  d <- tempfile("siu-")
+  dir.create(d, recursive = TRUE)
+  msgs <- character()
+  withr::with_envvar(
+    c(GOOGLE_API_KEY = "", OLLAMA_HOST = ""),
+    try(withCallingHandlers(
+      morie_siu_audit_columns(c("", "99-XXX-999", NA, "99-XXX-999"),
+        model = "gemini", cache_dir = d, progress = TRUE
+      ),
+      message = function(m) {
+        msgs <<- c(msgs, conditionMessage(m))
+        invokeRestart("muffleMessage")
+      }
+    ), silent = TRUE)
+  )
+  expect_true(any(grepl("auditing 99-XXX-999 [1/1]", msgs, fixed = TRUE)))
+  expect_false(any(grepl("auditing  [", msgs, fixed = TRUE)))
+})
+
 test_that(".siu_llm_call chain failover surfaces all provider errors", {
   # NB: OLLAMA_HOST defaults to localhost:11434 when unset, so to
   # force a failure on the ollama provider here we have to either

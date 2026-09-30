@@ -532,13 +532,17 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
   if (!nzchar(p) || !file.exists(p)) {
     return(NULL)
   }
-  tryCatch(
+  m <- tryCatch(
     utils::read.csv(gzfile(p),
       colClasses = "character",
       check.names = FALSE
     ),
     error = function(e) NULL
   )
+  if (is.null(m)) return(NULL)
+  # an older build wrote the column through check.names = TRUE
+  names(m)[names(m) == "X_language"] <- "_language"
+  m
 }
 
 # Internal: read the shipped canonical override table if present.
@@ -2546,6 +2550,8 @@ morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
                                     max_examples_per_field = 5L,
                                     progress = TRUE) {
   case_numbers <- as.character(case_numbers)
+  # the reviewed corpus carries rows whose case number was never parsed
+  case_numbers <- unique(case_numbers[!is.na(case_numbers) & nzchar(trimws(case_numbers))])
   if (!length(case_numbers)) {
     stop("`case_numbers` must be non-empty.", call. = FALSE)
   }

@@ -37,7 +37,7 @@ in the package-level help (`?rmorie`).
 - **Website**: <https://rmorie.com> — the MORIE family (rmorie, morie, rmoriebricklayer, rmoriedata) in one place.
 - **Hosted LLM tier**: <https://llm.rmorie.com> — the fallback model behind `morie_llm_ask()` when there is no local Ollama. Sign in with `morie_llm_login()` (GitHub) or `morie_llm_login(email = "you@example.com")`, or from the shell after `install_cli()`: `rmorie login`.
 
-> With over 11,000 exported functions, the full reference is large — use the
+> With over 13,000 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function
 > index. This README covers install + the most common workflows only.
 
@@ -129,7 +129,7 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
-## What's in v1.3.3
+## What's in v1.3.4
 
 - **5,000+ exported functions, every one tested** — 5,189 `morie_*` entry
   points (13,655 exports in all), each with a test that recomputes its
@@ -170,10 +170,12 @@ prove, on every CI run, that the native engines match them.
 
 ## Install
 
-From local source:
+From a clone of this repository:
 
 ```r
-install.packages("r-package/morie", repos = NULL, type = "source")
+install.packages(".", repos = NULL, type = "source")   # from the repository root
+# or, without cloning:
+# remotes::install_github("rootcoder007/rmorie")
 ```
 
 From r-universe (development snapshot):
@@ -194,8 +196,10 @@ install.packages(
 )
 ```
 
-The assistant bridge supports a local fallback through the Python
-package when no live OpenAI / Anthropic credentials are configured.
+The assistant (`morie_llm_ask()`) tries a local Ollama, then the hosted
+MORIE tier at <https://llm.rmorie.com> once you have signed in with
+`morie_llm_login()`, then any Gemini or OpenAI-compatible key in the
+environment, and finally a keyword fallback that needs no network.
 
 ### Optional packages (the R equivalent of `pip install pkg[extra]`)
 
@@ -230,6 +234,7 @@ Common families: ML (`randomForest`, `glmnet`, `xgboost`/`gbm`,
 ```r
 library(rmorie)
 
+# a project that keeps data/manifest/outputs_manifest.csv (morie_build_outputs_manifest() writes one)
 manifest <- morie_read_outputs_manifest(project_root = "/path/to/project")
 audit    <- morie_audit_public_outputs(project_root = "/path/to/project",
                                        manifest     = manifest)
@@ -362,15 +367,18 @@ Environment knobs: `OLLAMA_HOST` (defaults to `http://localhost:11434`),
 ### Format-validity sweep
 
 ```r
-sane <- morie_siu_sanity_check(df)
-sum(!sane$ok)  # rows with format issues (regex / ISO date / Yes-No / chrome leak)
+df   <- morie_siu_reports()        # the reviewed corpus, from rmoriedata (CRAN)
+sane <- morie_siu_sanity_check(df)  # one row per report with a format issue
+nrow(sane)                          # regex / ISO date / Yes-No / chrome leak
+head(sane$issues, 3)
 ```
 
 ### Aggregate accuracy
 
 ```r
 # How accurate is each column across a sample of cases?
-morie_siu_audit_columns(case_numbers = sample(df$case_number, 50))
+df <- morie_siu_reports()
+morie_siu_audit_columns(case_numbers = sample(df$case_number[nzchar(df$case_number)], 50))
 ```
 
 ### Canonical override system
@@ -394,7 +402,7 @@ per cell, by case number.
 
 ```r
 manifest <- morie_siu_index()
-table(manifest$`_language`)  # en=2531, fr=2212, unknown=0
+table(manifest$`_language`)  # en=2532, fr=2217, other=0
 ```
 
 ## Continuous integration
