@@ -46,8 +46,8 @@ mapping, to machine precision.
 }
 \examples{
 set.seed(1)
-r <- morie_cqtmpl(y = rnorm(10), left = rnorm(10), right = rnorm(10), r_left = rnorm(10),
-  r_right = rnorm(10))
+r <- morie_cqtmpl(y = rnorm(10), left = rbinom(10, 1, 0.5), right = rbinom(10, 1, 0.5),
+                  r_left = 0.1, r_right = 0.2)
 TRUE
 }
 \references{
