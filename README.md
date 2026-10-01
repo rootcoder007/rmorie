@@ -129,6 +129,13 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
+## What's in v1.3.5
+
+CRAN follow-ups (example widths and costs, `research/` out of the tarball)
+and a test harness that runs in one process under covr and on Windows, with
+a time budget on R-universe's slow Intel mac runner. No change to any
+function.
+
 ## What's in v1.3.4
 
 - **5,000+ exported functions, every one tested** — 5,189 `morie_*` entry

@@ -23,8 +23,7 @@ via the \code{sf} package on \code{the_geom} (not included to keep morie
 lightweight).
 }
 \examples{
-\dontshow{if (nzchar(system.file("extdata", "nyc_boundaries_catalog.csv", package = "rmorie")) ||
-  requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (morie_has("nyc_boundaries_catalog.csv")) withAutoprint(\{ # examplesIf}
 morie_datasets_nyc_boundaries_catalog()
 \dontshow{\}) # examplesIf}
 }

@@ -125,7 +125,12 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  models                                                 models you can ask (hosted + local)\n",
         "  ask [--model NAME] PROMPT...                           ask the active provider\n",
         "  analyze SUBJECT [JSON]                                 run an analysis subject\n",
-        "  version                                                package version\n")),
+        "  version                                                package version\n",
+        "  help | -h | --help                                     this list; VERB --help for one verb\n\n",
+        "Install or update:  install.packages(\"rmorie\", repos = c(\"https://rootcoder007.r-universe.dev\", ",
+        "\"https://cloud.r-project.org\"))\n",
+        "Launcher on PATH:   Rscript -e 'rmorie::install_cli()'\n",
+        "Python side:        pip install morie   (then: morie r-install)\n")),
       stop(sprintf("unknown verb '%s' (try: rmorie help)", verb), call. = FALSE))
   }, error = function(e) {
     out(paste0("rmorie: ", conditionMessage(e), "\n"))

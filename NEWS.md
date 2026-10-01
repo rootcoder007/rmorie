@@ -1,3 +1,20 @@
+# rmorie 1.3.5 - 2026-10-01
+
+## CRAN follow-ups
+
+* No example line renders wider than 100 characters; the
+  `morie_load_dataset()` example reads the built-in copy first, and the
+  Hawkes examples fit 400 and 500 events. `research/` stays in the repository
+  and out of the tarball.
+
+## Continuous integration
+
+* The command-line tests run under covr. testthat runs in one process under
+  covr and on Windows, where a parallel worker died with an access
+  violation. On R-universe's R-oldrel macOS x86_64 runner the test files run
+  inside a 10-minute budget (`MORIE_TEST_BUDGET_SECONDS`) so the check fits
+  its 60-minute cap; every other platform runs the whole suite.
+
 # rmorie 1.3.4 - 2026-09-30
 
 ## See what you can ask
