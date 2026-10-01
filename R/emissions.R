@@ -114,16 +114,19 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 }
 
 .emissions_cpu_tdp <- function(brand = .emissions_cpu_brand()) {
+  # The model name decides; the host being Apple Silicon only matters when
+  # the name is empty or unrecognised (an Apple runner must still map
+  # "Intel Xeon Gold" to 150 W).
   b <- tolower(brand)
-  if (grepl("m4|m3", b)) return(12)
-  if (grepl("m2", b)) return(15)
-  if (grepl("m1", b)) return(10)
-  if (.emissions_is_apple_silicon()) return(12)
+  if (grepl("apple m[34]|\\bm[34]\\b", b)) return(12)
+  if (grepl("apple m2|\\bm2\\b", b)) return(15)
+  if (grepl("apple m1|\\bm1\\b", b)) return(10)
   if (grepl("i9", b)) return(125)
   if (grepl("i7|i5", b)) return(65)
   if (grepl("ryzen 9", b)) return(105)
   if (grepl("ryzen 7", b)) return(65)
   if (grepl("xeon", b)) return(150)
+  if (.emissions_is_apple_silicon() && (!nzchar(b) || grepl("apple", b))) return(12)
   85
 }
 

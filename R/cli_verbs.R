@@ -164,12 +164,13 @@
 .cli_run_modules <- function(rest, flag, has, out, pipeline = FALSE) {
   mods <- flag("--modules")
   if (pipeline && !has("--all") && is.null(mods)) {
-    out("usage: rmorie pipeline (--all | --modules a,b,...) [--cpads FILE] [--output-dir DIR] [--no-carbon]\n")
+    out("usage: rmorie pipeline (--all | --modules a,b,...) [--cpads FILE | --dataset KEY] [--output-dir DIR] [--no-carbon]\n")
     return(0L)
   }
   selected <- if (is.null(mods)) morie_module_names() else trimws(strsplit(mods, ",")[[1L]])
   od <- flag("--output-dir")
   cp <- flag("--cpads") %||% flag("--cpads-csv")
+  if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
   run <- function() {
     if (is.null(cp)) morie_run_morie_modules(selected, output_dir = od)
     else morie_run_morie_modules(selected, cpads_csv = cp, output_dir = od)
@@ -222,7 +223,7 @@
     t0 <- proc.time()[["elapsed"]]
     r <- tryCatch({
       v <- fn()
-      if (identical(v, "skip")) list(ok = NA, detail = "skipped: not available in this build")
+      if (identical(v, "skip")) list(ok = NA, detail = "skipped: not available here (no CPADS CSV / liboqs)")
       else list(ok = isTRUE(v), detail = "")
     }, error = function(e) list(ok = FALSE, detail = conditionMessage(e)))
     results[[length(results) + 1L]] <<- list(name = name, ok = r$ok, detail = r$detail,
@@ -254,11 +255,14 @@
     r <- morie_emissions_track(sum(sqrt(1:1e4)), output_dir = d, country_iso_code = "CAN")
     file.exists(file.path(d, "emissions.csv")) && r$emissions_kg > 0
   })
+  has_cpads <- file.exists(tryCatch(.cpads_default_csv(), error = function(e) ""))
   check("module run: power-design", function() {
+    if (!has_cpads) return("skip")
     r <- morie_run_morie_module("power-design", output_dir = tempfile())
     is.list(r) && length(r) > 0L
   })
   check("inspector + verify on a module table", function() {
+    if (!has_cpads) return("skip")
     d <- tempfile()
     morie_run_morie_module("power-design", output_dir = d)
     f <- list.files(d, pattern = "\\.csv$", full.names = TRUE, recursive = TRUE)[1L]
@@ -292,7 +296,9 @@
          "`rmorie doctor` reports which language-model routes answer from this machine; `rmorie selftest` exercises the subsystems.",
          c("doctor")),
     list("Run a real analysis on the bundled synthetic dataset",
-         sprintf("The `power-design` module computes how many participants you need to detect a given effect. Output lands in %s. You will see a synthetic-data note: the bundled CPADS frame is a toy file; add `--cpads /path/to/real.csv` when you have the PUMF.", file.path(out_root, "power-design")),
+         sprintf(paste0("The `power-design` module computes how many participants you need to detect a given effect. ",
+                        "Output lands in %s. You will see a synthetic-data note: the bundled CPADS frame is a toy file; ",
+                        "add `--cpads /path/to/real.csv` when you have the PUMF."), file.path(out_root, "power-design")),
          c("run-module", "power-design", "--output-dir", file.path(out_root, "power-design"))),
     list("What did we just produce?",
          "The table that answers \"how many participants do I need?\" is power_two_proportion_gender.csv. `rmorie explain` says how to read any output file.",
@@ -629,7 +635,9 @@
 .cli_verify_pollution <- function(rest, flag, has, out) {
   pol <- flag("--pollutant")
   if (is.null(pol)) {
-    out("usage: rmorie verify-pollution --pollutant no2|pm25 [--demo | --exposure-csv FILE | --exposure-mean X --exposure-prevalence P] [--outcome NAME] [--reference 5.8] [--baseline-rate 500] [--population 1000000] [--region R] [--years Y] [--json]\n")
+    out(paste0("usage: rmorie verify-pollution --pollutant no2|pm25 [--demo | --exposure-csv FILE | ",
+               "--exposure-mean X --exposure-prevalence P] [--outcome NAME] [--reference 5.8] [--baseline-rate 500] ",
+               "[--population 1000000] [--region R] [--years Y] [--json]\n"))
     return(2L)
   }
   r <- morie_verify_pollution(

@@ -628,7 +628,7 @@ morie_load_cpads <- function(db_path = NULL, use_ckan = TRUE, con = NULL) {
 morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
                              db_path = NULL, resource_id = NULL,
                              con = NULL) {
-  ckan_base <- "https://open.canada.ca/data/en/api/3/action/datastore_search"
+  ckan_base <- getOption("morie.ckan_base", "https://open.canada.ca/data/en/api/3/action/datastore_search")
 
   resource_ids <- list(
     cpads = "d2639429-c304-45a6-90b3-770562f4d46d",
@@ -667,15 +667,27 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
   cap <- as.integer(min(limit, .Machine$integer.max))
   page <- min(cap, 32000L)
   message("Fetching from CKAN datastore: resource_id=", rid)
+  # a 40 MB PUMF page from open.canada.ca takes longer than R's 60 s default
+  old_timeout <- options(timeout = max(getOption("timeout", 60), 600))
+  on.exit(options(old_timeout), add = TRUE)
   pages <- list()
   fetched <- 0L
   total <- NA_real_
+  fallback <- FALSE
   repeat {
     api_url <- sprintf(
       "%s?resource_id=%s&limit=%d&offset=%d",
       ckan_base, rid, page, fetched
     )
-    raw <- readLines(url(api_url), warn = FALSE)
+    raw <- tryCatch(suppressWarnings(readLines(url(api_url), warn = FALSE)), error = function(e) e)
+    if (inherits(raw, "error")) {
+      if (fetched > 0L) stop("CKAN datastore failed after ", fetched, " rows: ", conditionMessage(raw), call. = FALSE)
+      # the datastore API is down or slow: the resource file is the route,
+      # live or from its Wayback Machine snapshot (the Python arm does the same)
+      message("CKAN datastore unreachable (", conditionMessage(raw), "); reading the resource file instead")
+      fallback <- TRUE
+      break
+    }
     payload <- .morie_from_json(paste(raw, collapse = ""))
     recs <- payload$result$records
     if (is.null(recs) || NROW(recs) == 0L) break
@@ -698,6 +710,9 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
     do.call(rbind, pages)
   }
 
+  if (fallback || is.null(records) || NROW(records) == 0L) {
+    records <- .morie_ckan_resource_file(rid, dataset_key, ckan_base)
+  }
   if (is.null(records) || NROW(records) == 0L) {
     stop("CKAN returned 0 records for ", dataset_key, call. = FALSE)
   }
@@ -789,12 +804,19 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @export
 morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
+  # the bootstrap-weight files are 600 MB: R's 60 s default timeout truncated
+  # them mid-download (2026-10-01); every route below inherits this
+  old_timeout <- options(timeout = max(getOption("timeout", 60), 3600))
+  on.exit(options(old_timeout), add = TRUE)
   matched <- .fuzzy_match_key(key)
   if (is.null(matched)) {
+    # A curated table at data.rmorie.com (db/table), opened by the MORIE key.
+    if (.morie_data_is_key(key)) {
+      return(morie_load_hosted_dataset(key, db_path = db_path, refresh = refresh))
+    }
     # Unified OPEN-data front door: if `key` is a included data slug (open data
     # shipped in rmoriedata), load it from there so newcomers have one reliable
-    # entry point. NOTE: paid/curated data is NOT reachable here -- it is
-    # site-gated behind sign-up and never served by this open loader.
+    # entry point.
     if (requireNamespace("rmoriedata", quietly = TRUE)) {
       slugs <- tryCatch(rmoriedata::morie_data_catalog()$slug,
         error = function(e) character()
@@ -808,7 +830,8 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       "  - morie_dataset_catalog()           remote/CKAN dataset KEYS (e.g. 'ocp21')\n",
       "  - rmoriedata::morie_data_catalog()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
       "  - morie_datasets_*()                dedicated fetchers ",
-      "(e.g. morie_datasets_chicago_iucr_codes())",
+      "(e.g. morie_datasets_chicago_iucr_codes())\n",
+      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login)",
       call. = FALSE
     )
   }
@@ -932,7 +955,24 @@ morie_list_datasets <- function(db_path = NULL, con = NULL) {
 
   catalog$cached <- catalog$table_name %in% names(cached_tables)
   catalog$rows <- as.integer(cached_tables[catalog$table_name])
-  catalog[, c("key", "name", "source", "survey", "year", "type", "cached", "rows")]
+  out <- catalog[, c("key", "name", "source", "survey", "year", "type", "cached", "rows")]
+  # the curated tables at data.rmorie.com: fetched when a key is stored (cached a day), else the last copy
+  m <- if (!is.null(.morie_llm_hosted_key())) {
+    tryCatch(morie_hosted_manifest(), error = function(e) .morie_data_cached_manifest())
+  } else {
+    .morie_data_cached_manifest()
+  }
+  hub <- .morie_data_entries(m)
+  if (nrow(hub)) {
+    hub_rows <- data.frame(key = hub$key, name = hub$name, source = "data.rmorie.com", survey = hub$source,
+                           year = "", type = "hosted", cached = hub$table_name %in% names(cached_tables),
+                           rows = ifelse(hub$table_name %in% names(cached_tables),
+                                         as.integer(cached_tables[hub$table_name]), hub$rows),
+                           stringsAsFactors = FALSE)
+    out <- rbind(out, hub_rows)
+  }
+  rownames(out) <- NULL
+  out
 }
 
 #' Get metadata for a single dataset
@@ -1046,4 +1086,41 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
     }
   }
   invisible(NULL)
+}
+
+#' Internal helper: the download URL of a CKAN resource (resource_show)
+#' @noRd
+.morie_ckan_resource_url <- function(rid, ckan_base) {
+  base <- sub("/datastore_search$", "", ckan_base)
+  meta <- tryCatch(
+    .morie_from_json(paste(suppressWarnings(readLines(url(paste0(base, "/resource_show?id=", rid)), warn = FALSE)), collapse = "")),
+    error = function(e) NULL)
+  u <- meta$result$url
+  if (is.character(u) && length(u) == 1L && nzchar(u)) u else NULL
+}
+
+#' Internal helper: a CKAN resource read as a file, live or from the Wayback Machine
+#'
+#' The datastore API is not archived; the resource file (a CSV or a zip of
+#' CSVs) is, so when the API is down this is the route. `morie_download()`
+#' tries the live URL first and the closest Internet Archive snapshot second.
+#' @noRd
+.morie_ckan_resource_file <- function(rid, dataset_key, ckan_base) {
+  src <- .morie_ckan_resource_url(rid, ckan_base)
+  if (is.null(src)) {
+    stop("CKAN returned 0 records for ", dataset_key, " and resource ", rid, " has no file URL", call. = FALSE)
+  }
+  dest <- file.path(tempdir(), paste0("ckan-", rid, "-", basename(src)))
+  if (!file.exists(dest)) {
+    message("Downloading ", src, " (live, then the Wayback Machine snapshot if the portal is down)")
+    morie_download(src, dest, attempt_wayback = TRUE)
+  }
+  path <- dest
+  if (grepl("\\.zip$", dest, ignore.case = TRUE)) {
+    files <- utils::unzip(dest, exdir = tempfile("ckan-zip"))
+    csvs <- files[grepl("\\.csv$", files, ignore.case = TRUE)]
+    if (!length(csvs)) stop(basename(dest), " for ", dataset_key, " holds no CSV", call. = FALSE)
+    path <- csvs[[1L]]
+  }
+  utils::read.csv(path, stringsAsFactors = FALSE)
 }

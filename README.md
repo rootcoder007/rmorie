@@ -129,6 +129,11 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
+## What's in v1.3.9
+
+Hotfix: module runs fall back to rmoriedata's synthetic CPADS PUMF, the
+first-paper template ships, sources are ASCII-only.
+
 ## What's in v1.3.8
 
 Every verb of the Python command line now has an R twin (`rmorie selftest`,

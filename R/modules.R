@@ -72,8 +72,44 @@ morie_list_morie_modules <- function() {
       return(p)
     }
   }
+  # The real PUMF already pulled into the dataset store (morie_load_dataset("ocp21")).
+  cached <- .cpads_cached_real_csv()
+  if (!is.null(cached)) return(cached)
+  # The synthetic CPADS PUMF that rmoriedata ships (the Python package
+  # bundles the same frame as morie/data/cpads_synthetic.csv): the default
+  # wherever the real PUMF is neither checked out nor cached, such as a CI runner.
+  if (requireNamespace("rmoriedata", quietly = TRUE)) {
+    synthetic <- system.file("extdata", "cpads_pumf_synthetic.csv", package = "rmoriedata")
+    if (nzchar(synthetic) && file.exists(synthetic)) return(synthetic)
+  }
   # Fallback: first candidate (will be resolved by .resolve_cpads_csv).
   candidates[1L]
+}
+
+#' Internal helper: the real CPADS PUMF from the dataset store, as a CSV path
+#'
+#' Only a cached copy is used here (no network): the default path lookup must
+#' not start a 39 MB download behind the user's back. `morie_load_dataset("ocp21")`
+#' or `rmorie run-module NAME --dataset ocp21` pulls it on purpose.
+#' @noRd
+.cpads_cached_real_csv <- function() {
+  tbl <- tryCatch(morie_cache_list(), error = function(e) NULL)
+  if (is.null(tbl) || !"ocp21" %in% tbl$table) return(NULL)
+  f <- file.path(tempdir(), "cpads-2021-2022-pumf2.cached.csv")
+  if (!file.exists(f)) {
+    df <- tryCatch(morie_load_dataset("ocp21"), error = function(e) NULL)
+    if (!is.null(df)) utils::write.csv(df, f, row.names = FALSE)
+  }
+  if (file.exists(f)) f else NULL
+}
+
+#' Internal helper: a dataset-store key written out as a CSV path
+#' @noRd
+.cpads_dataset_csv <- function(key) {
+  df <- morie_load_dataset(key)
+  f <- file.path(tempdir(), paste0("dataset-", gsub("[^A-Za-z0-9_.-]", "_", key), ".csv"))
+  utils::write.csv(df, f, row.names = FALSE)
+  f
 }
 
 #' Internal helper: Resolve Cpads Csv
@@ -162,6 +198,11 @@ morie_canonicalize_cpads_data <- function(data) {
 #' @export
 morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
   cpads_csv <- .resolve_cpads_csv(cpads_csv)
+  if (grepl("cpads_pumf_synthetic", basename(cpads_csv), fixed = TRUE)) {
+    message("CPADS: using the 1,200-row synthetic frame from rmoriedata; results are not analyses of the real survey. ",
+            "Get the real PUMF once with `rmorie pull ocp21` (R: morie_load_dataset(\"ocp21\")); it is cached and used ",
+            "by default from then on. Any other dataset: `rmorie list-datasets`, then `--dataset KEY`.")
+  }
   morie_canonicalize_cpads_data(utils::read.csv(cpads_csv, stringsAsFactors = FALSE))
 }
 

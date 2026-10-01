@@ -194,6 +194,24 @@ test_that("run-modules and pipeline run through the module runner", {
     })
   r <- .capture("run-modules", "--modules", "power-design,descriptive-statistics")
   expect_equal(r$status, 0L)
+  seen <- NULL
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_load_dataset = function(key, ...) data.frame(k = key),
+    morie_run_morie_module = function(module_name, cpads_csv = NULL, output_dir = NULL, ...) {
+      seen <<- cpads_csv
+      list(a = 1)
+    })
+  expect_equal(.capture("run-module", "power-design", "--dataset", "ocp21")$status, 0L)
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_list_datasets = function(...) data.frame(key = c("ocp21", "bad1")),
+    morie_load_dataset = function(key, ...) if (key == "bad1") stop("offline") else data.frame(k = key))
+  od <- withr::local_tempdir()
+  a <- .capture("pull", "--all", "--out", od)
+  expect_equal(a$status, 0L)
+  expect_true(file.exists(file.path(od, "ocp21.csv")))
+  expect_match(a$text, "bad1 +FAILED: offline")
+  expect_match(seen, "dataset-ocp21\\.csv$")
+  expect_equal(utils::read.csv(seen)$k, "ocp21")
   expect_match(r$text, "Completed modules: power-design, descriptive-statistics")
   expect_match(.capture("pipeline")$text, "usage: rmorie pipeline")
   withr::local_envvar(MORIE_EMISSIONS_OFFLINE = "1")
@@ -324,5 +342,50 @@ test_that("selftest runs every subsystem", {
   r <- .capture("selftest")
   expect_match(r$text, "module registry")
   expect_match(r$text, "emissions tracker")
+  expect_match(r$text, "All tests passed")
   expect_equal(r$status, 0L, info = r$text)
+})
+
+test_that("data.rmorie.com tables: key handling, manifest cache, download cached in the store, pull", {
+  withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(), MORIE_HOSTED_KEY = NA,
+                      R_USER_CACHE_DIR = withr::local_tempdir(), MORIE_DATA_URL = "https://data.example.test")
+  expect_error(morie_hosted_manifest(), "rmorie login")
+  withr::local_envvar(MORIE_HOSTED_KEY = "sk-good")
+  calls <- character()
+  manifest <- '{"generated_utc":"2026-10-01T00:00:00Z","datasets":[{"db":"chicago_crime","table":"incidents","key":"chicago_crime/incidents","rows":3,"columns":["id","type"],"bytes_gz":10,"sha256":"x","source":"bigquery-public-data.chicago_crime.crime","meta":{"description":"Chicago Police incidents"}}]}'
+  testthat::local_mocked_bindings(.package = .pkg,
+    .morie_data_get = function(path, dest, timeout = 600) {
+      calls <<- c(calls, path)
+      if (path == "/manifest.json") writeLines(manifest, dest)
+      else if (path == "/chicago_crime/incidents.csv.gz") {
+        con <- gzfile(dest, "w")
+        writeLines(c("id,type", "1,THEFT", "2,BATTERY", "3,THEFT"), con)
+        close(con)
+      } else stop("404")
+      invisible(dest)
+    })
+  m <- morie_hosted_manifest()
+  expect_equal(m$datasets[[1]]$key, "chicago_crime/incidents")
+  morie_hosted_manifest()
+  expect_equal(sum(calls == "/manifest.json"), 1L)
+  d <- morie_hosted_datasets()
+  expect_equal(d$key, "chicago_crime/incidents")
+  expect_equal(d$name, "Chicago Police incidents")
+  db <- file.path(withr::local_tempdir(), "cache.sqlite")
+  df <- morie_load_dataset("chicago_crime/incidents", db_path = db)
+  expect_equal(names(df), c("id", "type"))
+  expect_equal(nrow(df), 3L)
+  morie_load_dataset("chicago_crime/incidents", db_path = db)
+  expect_equal(sum(calls == "/chicago_crime/incidents.csv.gz"), 1L)
+  l <- morie_list_datasets(db_path = db)
+  row <- l[l$key == "chicago_crime/incidents", ]
+  expect_equal(nrow(row), 1L)
+  expect_true(row$cached)
+  expect_equal(row$rows, 3L)
+  expect_true("ocp21" %in% l$key)
+  expect_error(morie_load_dataset("no-such-dataset"), "data.rmorie.com")
+  out <- withr::local_tempfile(fileext = ".csv")
+  r <- .capture("pull", "chicago_crime/incidents", "--out", out)
+  expect_equal(r$status, 0L)
+  expect_equal(nrow(utils::read.csv(out)), 3L)
 })

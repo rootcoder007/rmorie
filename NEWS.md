@@ -1,3 +1,15 @@
+# rmorie 1.3.9 - 2026-10-01
+
+* `morie_hosted_manifest()`, `morie_hosted_datasets()`,
+  `morie_load_hosted_dataset()`: the curated tables at data.rmorie.com,
+  opened by the stored MORIE key; `morie_load_dataset()`, `morie_list_datasets()`
+  and `rmorie pull` accept their `db/table` keys. `rmorie pull --all`
+  downloads the whole catalog; `--dataset KEY` on `run-module`,
+  `run-modules` and `pipeline`.
+* `.cpads_default_csv()` falls back to rmoriedata's synthetic CPADS PUMF when
+  the real one is not checked out; `selftest` skips only when neither exists; the
+  first-paper template ships; ASCII-only sources; lint-clean lines.
+
 # rmorie 1.3.8 - 2026-10-01
 
 ## Command line: every Python verb has an R twin

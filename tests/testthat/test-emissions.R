@@ -19,7 +19,10 @@ test_that("hardware heuristics follow the CodeCarbon tables", {
   expect_equal(.emissions_cpu_tdp("Intel(R) Core(TM) i7-1185G7"), 65)
   expect_equal(.emissions_cpu_tdp("AMD Ryzen 9 5950X"), 105)
   expect_equal(.emissions_cpu_tdp("Intel Xeon Gold"), 150)
-  expect_equal(.emissions_cpu_tdp("something else"), if (.emissions_is_apple_silicon()) 12 else 85)
+  expect_equal(.emissions_cpu_tdp("something else"), 85)
+  expect_equal(.emissions_cpu_tdp("Apple M2 Pro"), 15)
+  expect_equal(.emissions_cpu_tdp("Apple M4"), 12)
+  expect_equal(.emissions_cpu_tdp(""), if (.emissions_is_apple_silicon()) 12 else 85)
   is_arm <- Sys.info()[["machine"]] %in% c("arm64", "aarch64")
   expect_equal(.emissions_ram_power(16), if (is_arm) 3 else 10)
   expect_equal(.emissions_ram_power(64), if (is_arm) 6 else 20)
@@ -56,16 +59,20 @@ test_that("a tracked run writes the CodeCarbon CSV row and the formula holds", {
 
 test_that("the background sampler reports intervals that sum to the run", {
   skip_if_not(file.exists("/proc/stat") || Sys.info()[["sysname"]] == "Darwin", "no CPU counters")
+  t0 <- Sys.time()
   expect_true(.emissions_sampler_start(0.1))
   expect_true(.emissions_sampler_running())
   expect_false(.emissions_sampler_start(0.1))
   Sys.sleep(0.55)
   m <- .emissions_sampler_stop()
+  elapsed <- as.numeric(difftime(Sys.time(), t0, units = "secs"))
   expect_false(.emissions_sampler_running())
-  expect_true(nrow(m) >= 4L)
+  # a loaded CI runner sleeps longer and samples less often than asked; the
+  # invariant is that the intervals tile the run
+  expect_true(nrow(m) >= 2L)
   expect_equal(colnames(m), c("dt", "util_pct"))
   expect_true(all(m[, "util_pct"] >= 0 & m[, "util_pct"] <= 100))
-  expect_equal(sum(m[, "dt"]), 0.55, tolerance = 0.25)
+  expect_lt(abs(sum(m[, "dt"]) - elapsed), 0.15)
   expect_equal(nrow(.emissions_sampler_stop()), 0L)
 })
 

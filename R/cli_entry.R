@@ -130,10 +130,11 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       },
       `run-module` = {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
-          out("usage: rmorie run-module NAME [--output-dir DIR] [--cpads FILE]   (names: rmorie list-modules)\n")
+          out("usage: rmorie run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   (names: rmorie list-modules; keys: rmorie list-datasets)\n")
         } else {
           od <- flag("--output-dir")
           cp <- flag("--cpads")
+          if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
           res <- if (is.null(cp)) morie_run_morie_module(rest[[1L]], output_dir = od)
                  else morie_run_morie_module(rest[[1L]], cpads_csv = cp, output_dir = od)
           out(sprintf("Completed module: %s\n", rest[[1L]]))
@@ -147,7 +148,20 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       },
       pull = {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
-          out("usage: rmorie pull KEY [--out FILE.csv]   (keys: rmorie list-datasets)\n")
+          out("usage: rmorie pull KEY [--out FILE.csv] | pull --all [--out DIR]   (keys: rmorie list-datasets)\n")
+        } else if (identical(rest[[1L]], "--all")) {
+          d <- morie_list_datasets()
+          od <- flag("--out") %||% "datasets"
+          dir.create(od, recursive = TRUE, showWarnings = FALSE)
+          for (k in d$key) {
+            r <- tryCatch(morie_load_dataset(k), error = function(e) e)
+            if (inherits(r, "error")) {
+              out(sprintf("  %-12s FAILED: %s\n", k, conditionMessage(r)))
+            } else {
+              utils::write.csv(r, file.path(od, paste0(k, ".csv")), row.names = FALSE)
+              out(sprintf("  %-12s %s rows -> %s\n", k, format(nrow(r), big.mark = ","), file.path(od, paste0(k, ".csv"))))
+            }
+          }
         } else {
           dest <- flag("--out") %||% paste0(gsub("[^A-Za-z0-9_.-]", "_", rest[[1L]]), ".csv")
           df <- morie_load_dataset(rest[[1L]])
@@ -215,7 +229,9 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  rmorie run-module power-design --output-dir out/\n\n",
         "PULL DATA\n",
         "  rmorie list-datasets\n",
-        "  rmorie pull ocp21 --out cpads.csv\n\n",
+        "  rmorie pull ocp21 --out cpads.csv            # the real CPADS PUMF; cached, then the modules use it\n",
+        "  rmorie pull --all --out datasets/            # every dataset the catalog knows\n",
+        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (after rmorie login)\n\n",
         "ASK A MODEL\n",
         "  rmorie login                                 # hosted tier, free: GitHub or email sign-in\n",
         "  rmorie models                                # what you can ask, default marked *\n",
@@ -253,9 +269,9 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  ask [--model NAME] PROMPT...                           ask the active provider\n",
         "  analyze SUBJECT [JSON]                                 run an analysis subject\n",
         "  list-modules                                           the CPADS analysis modules\n",
-        "  run-module NAME [--output-dir DIR] [--cpads FILE]      run one module, write its tables\n",
+        "  run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   run one module (--dataset ocp21 = the real PUMF)\n",
         "  list-datasets                                          built-in dataset keys and cache state\n",
-        "  pull KEY [--out FILE.csv]                              load a dataset by key, write it as CSV\n",
+        "  pull KEY [--out FILE.csv] | pull --all [--out DIR]     download a dataset (or every one) as CSV; cached for the modules\n",
         "  cheatsheet                                             one-page reference\n",
         "  provider set --base-url URL --key KEY [--model NAME]   attach your own model endpoint\n",
         "  provider show | unset                                  ... see it, or detach it\n",

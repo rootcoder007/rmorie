@@ -178,7 +178,7 @@ morie_envhealth_burden <- function(exposure_mean, exposure_prevalence, baseline_
     exposure_mean = as.numeric(exposure_mean),
     reference_conc = crf$reference_conc,
     pollutant = pollutant,
-    citation = paste0(crf$citation, "; Rothman et al. (2008) §5"),
+    citation = paste0(crf$citation, "; Rothman et al. (2008) \u00a75"),
     extra = list(rr = crf$rr, log_rr = crf$log_rr, outcome = outcome)
   ), class = "morie_envhealth_burden")
 }

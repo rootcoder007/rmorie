@@ -201,6 +201,10 @@ morie_download <- function(url, target_path, attempt_wayback = NULL) {
       call. = FALSE
     )
   }
+  # a 600 MB bootstrap-weight file takes longer than R's 60 s default timeout,
+  # which truncated downloads mid-way (2026-10-01, cu23bt at 415 of 612 MB)
+  old <- options(timeout = max(getOption("timeout", 60), 3600))
+  on.exit(options(old), add = TRUE)
   rmoriebricklayer::friendly_download(url, target_path,
     attempt_wayback = attempt_wayback
   )
