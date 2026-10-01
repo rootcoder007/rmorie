@@ -21,6 +21,21 @@
 #'   \item{\code{ask [--model NAME] PROMPT...}}{send a prompt to the active provider
 #'     (or the named model) and print the reply}
 #'   \item{\code{analyze SUBJECT [JSON]}}{run an analysis subject through \code{cli_main()}}
+#'   \item{\code{explain FILENAME}, \code{inspect PATH}, \code{verify PATH}}{read,
+#'     browse and validate module output tables}
+#'   \item{\code{profile-dataset PATH}, \code{sample PATH --n N}}{profile a
+#'     CSV, draw a sample from it}
+#'   \item{\code{run-modules}, \code{pipeline}}{run several modules; the
+#'     pipeline tracks compute emissions and seals them in a capsule}
+#'   \item{\code{emissions}, \code{verify-pollution}}{measure this machine's
+#'     compute emissions; run the pollution-to-health pipeline}
+#'   \item{\code{percy}, \code{agent}, \code{chat}}{talk to Perseus through the
+#'     provider chain}
+#'   \item{\code{selftest}, \code{tutorial}, \code{generate-template},
+#'     \code{update}}{smoke test, walkthrough, first-paper scaffold, update check}
+#'   \item{\code{crypto}, \code{ingest}, \code{download-bootstrap},
+#'     \code{exec}, \code{edit}, \code{percysuits}}{file encryption, open-data
+#'     feeds, bootstrap weights, evaluate R code, edit a file, pull models}
 #'   \item{\code{version}}{print the package version}
 #'   \item{\code{help}}{this list}
 #' }
@@ -154,6 +169,42 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           out("usage: rmorie provider set --base-url URL --key KEY [--model NAME] | show | unset\n")
         }
       },
+      explain = {
+        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie explain FILENAME\n")
+        else out(paste0(explain_file(rest[[1L]]), "\n"))
+      },
+      inspect = {
+        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie inspect PATH [--module NAME]\n")
+        else status <- .cli_inspect(rest, flag, out)
+      },
+      verify = {
+        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie verify PATH [--module NAME]\n")
+        else status <- .cli_verify(rest, flag, out)
+      },
+      `profile-dataset` = status <- .cli_profile_dataset(rest, flag, has, out),
+      sample = status <- .cli_sample(rest, flag, has, out),
+      `run-modules` = status <- .cli_run_modules(rest, flag, has, out),
+      pipeline = status <- .cli_run_modules(rest, flag, has, out, pipeline = TRUE),
+      percy = ,
+      perseus = ,
+      agent = status <- .cli_percy(rest, flag, out, verb),
+      chat = status <- .cli_chat(rest, flag, out),
+      selftest = status <- .cli_selftest(out),
+      tutorial = status <- .cli_tutorial(has, out),
+      `generate-template` = status <- .cli_generate_template(flag, out),
+      update = status <- .cli_update(has, out),
+      crypto = status <- .cli_crypto(rest, flag, out),
+      ingest = status <- .cli_ingest(rest, flag, has, out),
+      `download-bootstrap` = status <- .cli_download_bootstrap(flag, out),
+      exec = status <- .cli_exec(rest, flag, out),
+      edit = status <- .cli_edit(rest, out),
+      percysuits = status <- .cli_percysuits(flag, has, out),
+      `verify-pollution` = status <- .cli_verify_pollution(rest, flag, has, out),
+      emissions = status <- .cli_emissions(flag, has, out),
+      `verify-earth-engine` = {
+        out("verify-earth-engine needs the Google Earth Engine Python client; run it from the Python package:  pip install morie && morie verify-earth-engine\n")
+        status <- 2L
+      },
       cheatsheet = out(paste0(
         "rmorie cheat sheet\n==================\n\n",
         "INSTALL\n",
@@ -173,6 +224,14 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  rmorie doctor                                # which routes answer from this machine\n",
         "  rmorie provider set --base-url URL --key KEY [--model NAME]\n",
         "                                               # attach your own OpenAI-compatible endpoint\n\n",
+        "OUTPUTS AND DATA\n",
+        "  rmorie explain power_two_proportion_gender.csv\n",
+        "  rmorie inspect out/   |   rmorie verify out/\n",
+        "  rmorie profile-dataset data.csv --suggest   |   rmorie sample data.csv --n 100\n\n",
+        "COMPUTE EMISSIONS AND POLLUTION\n",
+        "  rmorie pipeline --all --output-dir out/     # CO2 of the run + signed capsule in out/emissions/\n",
+        "  rmorie emissions --seconds 5                # measure this machine; morie_emissions_verify() checks the capsule\n",
+        "  rmorie verify-pollution --pollutant no2 --demo\n\n",
         "PYTHON SIDE\n",
         "  pip install morie   then   morie cheatsheet\n")),
       analyze = {
@@ -200,6 +259,28 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  cheatsheet                                             one-page reference\n",
         "  provider set --base-url URL --key KEY [--model NAME]   attach your own model endpoint\n",
         "  provider show | unset                                  ... see it, or detach it\n",
+        "  explain FILENAME                                       what an output table contains, how to read it\n",
+        "  inspect PATH [--module NAME]                           schema, rows and preview of output CSVs\n",
+        "  verify PATH [--module NAME]                            validate statistical outputs (exit 1 on failure)\n",
+        "  profile-dataset PATH [--treatment C] [--outcome C] [--suggest]   variable types, roles, analysis plan\n",
+        "  sample PATH --n N [--method srs|stratified|cluster|pps] [--output F]   draw a sample\n",
+        "  run-modules [--modules a,b] [--cpads FILE] [--output-dir DIR]   run several modules\n",
+        "  pipeline (--all | --modules a,b) [--output-dir DIR] [--no-carbon]   run modules, track CO2, seal a capsule\n",
+        "  emissions [--seconds N] [--output-dir DIR] [--no-capsule]   measure this machine's compute emissions\n",
+        "  verify-pollution --pollutant no2|pm25 (--demo | --exposure-csv F | --exposure-mean X ...)   pollution -> health pipeline\n",
+        "  percy | agent [--model NAME] [--context TEXT] QUESTION   talk to Perseus (same fallback chain as ask)\n",
+        "  chat [--model NAME]                                    interactive conversation\n",
+        "  selftest                                               smoke test of the subsystems\n",
+        "  tutorial [--dry-run]                                   first-time walkthrough\n",
+        "  generate-template [--module NAME] [--out FILE]         methods + results scaffold for a first paper\n",
+        "  update [--yes]                                         check for a newer release, optionally install\n",
+        "  crypto keygen|encrypt|decrypt ...                      post-quantum file encryption (ML-KEM-768 + ChaCha20)\n",
+        "  ingest ckan|tps|siu|a2aj ...                           pull open-data feeds\n",
+        "  download-bootstrap [--survey all|csads_2021|...]       cache the survey bootstrap-weight files\n",
+        "  exec 'R CODE' | --file F                               evaluate R code\n",
+        "  edit FILE                                              open a file in your editor\n",
+        "  percysuits [--dry-run]                                 pull the Perseus model set into Ollama\n",
+        "  verify-earth-engine                                    (Python side only)\n",
         "  version                                                package version\n",
         "  help | -h | --help                                     this list; VERB --help for one verb\n\n",
         "Install or update:  install.packages(\"rmorie\", repos = c(\"https://rootcoder007.r-universe.dev\", ",

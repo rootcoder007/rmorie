@@ -149,3 +149,180 @@ test_that("provider set/show/unset store an endpoint the chain reads", {
   expect_match(.capture("provider", "bogus")$text, "usage: rmorie provider")
   expect_equal(.capture("provider", "set", "--key", "x")$status, 1L)
 })
+
+
+test_that("output verbs: explain, inspect and verify", {
+  expect_match(.capture("explain", "power_two_proportion_gender.csv")$text, "effect_size")
+  d <- withr::local_tempdir()
+  f <- file.path(d, "t.csv")
+  utils::write.csv(data.frame(statistic = c(1.5, 2), p_value = c(0.05, 0.01)), f, row.names = FALSE)
+  r <- .capture("inspect", f)
+  expect_equal(r$status, 0L)
+  expect_match(r$text, "rows: 2")
+  expect_equal(.capture("inspect", file.path(d, "nope.csv"))$status, 1L)
+  expect_match(.capture("inspect", d)$text, "t.csv")
+  v <- .capture("verify", f)
+  expect_true(v$status %in% c(0L, 1L))
+  expect_match(v$text, "PASS|FAIL")
+})
+
+test_that("profile-dataset and sample work on a CSV", {
+  d <- withr::local_tempdir()
+  f <- file.path(d, "d.csv")
+  set.seed(1)
+  utils::write.csv(data.frame(treated = rep(0:1, 50), y = rnorm(100), g = rep(c("a", "b"), each = 50)),
+                   f, row.names = FALSE)
+  p <- .capture("profile-dataset", f, "--treatment", "treated", "--outcome", "y", "--suggest")
+  expect_equal(p$status, 0L)
+  expect_match(p$text, "Dataset Profile")
+  expect_match(p$text, "Suggested Analysis Plan")
+  expect_equal(.capture("profile-dataset")$status, 2L)
+  s <- .capture("sample", f, "--n", "7", "--output", file.path(d, "s.csv"))
+  expect_equal(s$status, 0L)
+  expect_equal(nrow(utils::read.csv(file.path(d, "s.csv"))), 7L)
+  expect_match(.capture("sample", f, "--n", "3", "--method", "stratified")$text, "strata-col")
+  st <- .capture("sample", f, "--n", "2", "--method", "stratified", "--strata-col", "g")
+  expect_match(st$text, "Sampled 4 rows")
+})
+
+test_that("run-modules and pipeline run through the module runner", {
+  calls <- list()
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_run_morie_modules = function(modules, ...) {
+      calls[[length(calls) + 1L]] <<- modules
+      stats::setNames(lapply(modules, function(m) list(a = 1)), modules)
+    })
+  r <- .capture("run-modules", "--modules", "power-design,descriptive-statistics")
+  expect_equal(r$status, 0L)
+  expect_match(r$text, "Completed modules: power-design, descriptive-statistics")
+  expect_match(.capture("pipeline")$text, "usage: rmorie pipeline")
+  withr::local_envvar(MORIE_EMISSIONS_OFFLINE = "1")
+  d <- withr::local_tempdir()
+  p <- .capture("pipeline", "--modules", "power-design", "--output-dir", d)
+  expect_equal(p$status, 0L)
+  expect_match(p$text, "Pipeline CO2 emissions")
+  expect_true(file.exists(file.path(d, "emissions", "emissions.csv")))
+  expect_true(file.exists(file.path(d, "emissions", "emissions_manifest.json")))
+})
+
+test_that("percy, agent and chat go through morie_llm_ask", {
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_llm_ask = function(prompt, context = NULL, model = NULL, ...) paste0("[", model %||% "default", "] ", prompt),
+    morie_llm_detect_provider = function() "hosted")
+  expect_match(.capture("percy", "what", "is", "a", "PAF")$text, "\\[default\\] what is a PAF")
+  expect_match(.capture("agent", "--model", "m1", "hi")$text, "\\[m1\\] hi")
+  expect_match(.capture("percy", "--context", "ctx", "q")$text, "Context:\nctx")
+  expect_equal(.capture("percy")$status, 2L)
+  answers <- c("what is a PAF", "/quit")
+  testthat::local_mocked_bindings(.package = .pkg,
+    .cli_readline = function(prompt) {
+      a <- answers[[1L]]
+      answers <<- answers[-1L]
+      a
+    })
+  r <- .capture("chat")
+  expect_match(r$text, "percy> \\[default\\] what is a PAF")
+  expect_equal(r$status, 0L)
+  expect_match(r$text, "Bye!")
+})
+
+test_that("tutorial --dry-run, generate-template, exec and verify-earth-engine", {
+  t <- .capture("tutorial", "--dry-run")
+  expect_equal(t$status, 0L)
+  expect_match(t$text, "STEP 3")
+  expect_match(t$text, "rmorie run-module power-design")
+  d <- withr::local_tempdir()
+  g <- .capture("generate-template", "--module", "hawkes", "--out", file.path(d, "p.md"))
+  expect_equal(g$status, 0L)
+  expect_match(paste(readLines(file.path(d, "p.md")), collapse = "\n"), "hawkes")
+  e <- .capture("exec", "1 + 41")
+  expect_equal(e$status, 0L)
+  expect_match(e$text, "42")
+  expect_equal(.capture("exec")$status, 2L)
+  expect_equal(.capture("verify-earth-engine")$status, 2L)
+})
+
+test_that("crypto keygen/encrypt/decrypt round-trip through files and the keystore", {
+  skip_if_not(isTRUE(tryCatch(morie_crypto_liboqs_available(), error = function(e) FALSE)) &&
+                isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE)),
+              "ML-KEM needs liboqs and ChaCha20 needs libsodium")
+  expect_equal(.capture("crypto")$status, 2L)
+  d <- withr::local_tempdir()
+  withr::local_envvar(HOME = d, MORIE_KEYSTORE_PASSWORD = "pw-test")
+  k <- .capture("crypto", "keygen", "--name", "alice", "--output", file.path(d, "keys"))
+  expect_equal(k$status, 0L)
+  expect_true(file.exists(file.path(d, "keys", "alice.moriepk")))
+  f <- file.path(d, "secret.txt")
+  writeLines("hello capsule", f)
+  e <- .capture("crypto", "encrypt", f, "--recipient", file.path(d, "keys", "alice.moriepk"))
+  expect_equal(e$status, 0L)
+  expect_true(file.exists(paste0(f, ".morieenc")))
+  expect_equal(.capture("crypto", "encrypt", file.path(d, "missing"), "--recipient", "x")$status, 1L)
+  kk <- .capture("crypto", "keygen", "--name", "bob")
+  expect_equal(kk$status, 0L)
+  g <- file.path(d, "s2.txt")
+  writeLines("second", g)
+  expect_equal(.capture("crypto", "encrypt", g, "--recipient", "bob")$status, 0L)
+  unlink(g)
+  expect_equal(.capture("crypto", "decrypt", paste0(g, ".morieenc"), "--key", "bob")$status, 0L)
+  expect_equal(readLines(g), "second")
+})
+
+test_that("ingest dispatches to the portal functions", {
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_ingest_tps_layers = function() data.frame(name = "mci", url = "u"),
+    morie_ingest_ckan_search_packages = function(portal, query, rows = 50L, ...) data.frame(portal = portal, q = query, rows = rows),
+    morie_ingest_a2aj_coverage = function(doc_type = "cases", ...) data.frame(doc_type = doc_type))
+  expect_match(.capture("ingest", "tps", "--list")$text, "mci")
+  r <- .capture("ingest", "ckan", "--portal", "https://p", "--search", "crime", "--rows", "3")
+  expect_match(r$text, "crime")
+  expect_match(.capture("ingest", "a2aj", "coverage", "--doc-type", "laws")$text, "laws")
+  expect_equal(.capture("ingest", "nope")$status, 2L)
+  expect_equal(.capture("ingest", "ckan")$status, 2L)
+})
+
+test_that("download-bootstrap, percysuits and update report honestly", {
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_load_dataset = function(key, ...) data.frame(w = seq_len(3)))
+  r <- .capture("download-bootstrap", "--survey", "csads_2021")
+  expect_equal(r$status, 0L)
+  expect_match(r$text, "OK: 3 rows cached")
+  expect_equal(.capture("download-bootstrap", "--survey", "zzz_1999")$status, 1L)
+  testthat::local_mocked_bindings(.package = .pkg, morie_llm_probe_ollama = function(...) FALSE)
+  expect_equal(.capture("percysuits")$status, 1L)
+  testthat::local_mocked_bindings(.package = .pkg,
+    .cli_latest_version = function(pkg) list(version = "99.0.0", source = "test"))
+  u <- .capture("update")
+  expect_equal(u$status, 0L)
+  expect_match(u$text, "Latest:    99.0.0")
+  expect_match(u$text, "Update with")
+})
+
+test_that("verify-pollution and emissions verbs", {
+  r <- .capture("verify-pollution", "--pollutant", "no2", "--demo")
+  expect_equal(r$status, 0L)
+  expect_match(r$text, "STATUS: ok")
+  expect_match(r$text, "source:   Atkinson")
+  f <- .capture("verify-pollution", "--pollutant", "pm25", "--exposure-mean", "3", "--exposure-prevalence", "0.5")
+  expect_equal(f$status, 1L)
+  expect_match(f$text, "assumption_failure")
+  j <- .capture("verify-pollution", "--pollutant", "no2", "--exposure-mean", "25", "--exposure-prevalence", "0.9", "--json")
+  expect_equal(j$status, 0L)
+  expect_match(j$text, "\"paf\"")
+  expect_equal(.capture("verify-pollution")$status, 2L)
+  withr::local_envvar(MORIE_EMISSIONS_OFFLINE = "1")
+  d <- withr::local_tempdir()
+  e <- .capture("emissions", "--seconds", "0.3", "--output-dir", d, "--country", "CAN")
+  expect_equal(e$status, 0L)
+  expect_match(e$text, "kg CO2eq")
+  expect_match(e$text, "Capsule:")
+  expect_true(file.exists(file.path(d, "emissions.csv")))
+})
+
+test_that("selftest runs every subsystem", {
+  withr::local_envvar(MORIE_EMISSIONS_OFFLINE = "1")
+  r <- .capture("selftest")
+  expect_match(r$text, "module registry")
+  expect_match(r$text, "emissions tracker")
+  expect_equal(r$status, 0L, info = r$text)
+})

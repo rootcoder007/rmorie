@@ -129,6 +129,13 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
+## What's in v1.3.8
+
+Every verb of the Python command line now has an R twin (`rmorie selftest`,
+`pipeline`, `emissions`, `verify-pollution`, `crypto`, `ingest`, ...). The
+pollution-health module and a compute-emissions tracker with a C++ background
+sampler and signed bricklayer capsules are native R.
+
 ## What's in v1.3.7
 
 The command line gains `list-modules`, `run-module`, `list-datasets`, `pull`,

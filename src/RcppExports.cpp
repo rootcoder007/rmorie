@@ -444,6 +444,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// emissions_sampler_start
+bool emissions_sampler_start(double interval);
+RcppExport SEXP _rmorie_emissions_sampler_start(SEXP intervalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type interval(intervalSEXP);
+    rcpp_result_gen = Rcpp::wrap(emissions_sampler_start(interval));
+    return rcpp_result_gen;
+END_RCPP
+}
+// emissions_sampler_stop
+Rcpp::NumericMatrix emissions_sampler_stop();
+RcppExport SEXP _rmorie_emissions_sampler_stop() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(emissions_sampler_stop());
+    return rcpp_result_gen;
+END_RCPP
+}
+// emissions_sampler_running
+bool emissions_sampler_running();
+RcppExport SEXP _rmorie_emissions_sampler_running() {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    rcpp_result_gen = Rcpp::wrap(emissions_sampler_running());
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_normal_pdf_cpp
 NumericVector morie_normal_pdf_cpp(NumericVector x, double mean, double sd);
 RcppExport SEXP _rmorie_morie_normal_pdf_cpp(SEXP xSEXP, SEXP meanSEXP, SEXP sdSEXP) {
@@ -1372,6 +1403,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_dsp_rls_cpp", (DL_FUNC) &_rmorie_morie_dsp_rls_cpp, 5},
     {"_rmorie_morie_dsp_cross_correlation_cpp", (DL_FUNC) &_rmorie_morie_dsp_cross_correlation_cpp, 3},
     {"_rmorie_morie_dsp_median_filter_cpp", (DL_FUNC) &_rmorie_morie_dsp_median_filter_cpp, 2},
+    {"_rmorie_emissions_sampler_start", (DL_FUNC) &_rmorie_emissions_sampler_start, 1},
+    {"_rmorie_emissions_sampler_stop", (DL_FUNC) &_rmorie_emissions_sampler_stop, 0},
+    {"_rmorie_emissions_sampler_running", (DL_FUNC) &_rmorie_emissions_sampler_running, 0},
     {"_rmorie_morie_normal_pdf_cpp", (DL_FUNC) &_rmorie_morie_normal_pdf_cpp, 3},
     {"_rmorie_morie_mean_cpp", (DL_FUNC) &_rmorie_morie_mean_cpp, 2},
     {"_rmorie_morie_var_cpp", (DL_FUNC) &_rmorie_morie_var_cpp, 3},

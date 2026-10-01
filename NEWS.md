@@ -1,3 +1,31 @@
+# rmorie 1.3.8 - 2026-10-01
+
+## Command line: every Python verb has an R twin
+
+* `explain`, `inspect`, `verify`, `profile-dataset`, `sample`, `run-modules`,
+  `pipeline`, `emissions`, `verify-pollution`, `percy` / `agent`, `chat`,
+  `selftest`, `tutorial`, `generate-template`, `update`, `crypto`, `ingest`,
+  `download-bootstrap`, `exec`, `edit`, `percysuits`. `verify-earth-engine`
+  says it lives on the Python side.
+
+## Pollution -> health
+
+* `morie_envhealth_crf_pm25()` / `_no2()`, `morie_envhealth_attributable_fraction()`,
+  `morie_envhealth_mortality_displaced()`, `morie_envhealth_burden()`,
+  `morie_envhealth_sensitivity()`, `morie_envhealth_equity()`,
+  `morie_envhealth_burden_by_fsa()` and `morie_verify_pollution()`: the
+  Python `morie.envhealth` module, formula for formula, with the citations.
+
+## Compute emissions with provenance
+
+* `morie_emissions_start()` / `_stop()` / `_track()`: the CodeCarbon method
+  (TDP x utilisation + RAM, IEA grid intensity via
+  `morie_emissions_carbon_intensity()`), a C++ background thread sampling the
+  kernel's CPU counters, the same `emissions.csv` layout as the Python
+  package, and a bricklayer capsule per run (`emissions_manifest.json` plus a
+  signed `capsule_bundle.json`) that `morie_emissions_verify()` checks.
+  `rmorie pipeline` tracks and seals its runs.
+
 # rmorie 1.3.7 - 2026-10-01
 
 ## Command line

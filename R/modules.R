@@ -185,26 +185,6 @@ morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
   outputs
 }
 
-#' Run one implemented MORIE module against CPADS data
-#'
-#' @param module_name Module name.
-#' @param cpads_csv Path to the CPADS CSV.
-#' @param output_dir Optional directory for CSV outputs.
-#' @return Named list of data-frame outputs.
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
-#' # Dispatch one MORIE module against the canonical CPADS CSV. The CSV
-#' # ships with a morie project tree, or is fetched via the CKAN endpoint
-#' # (morie_load_dataset("ocp21")). Wrapped in tryCatch so the example
-#' # documents usage even when the CSV is not checked out locally.
-#' tryCatch(
-#'   morie_run_morie_module("descriptive-statistics"),
-#'   error = function(e) message(conditionMessage(e))
-#' )
-#' }
-#' \dontshow{\}) # examplesIf}
-#' @export
 #' Names of the CPADS analysis modules
 #'
 #' The modules \code{\link{morie_run_morie_module}} accepts, in pipeline order.
@@ -238,6 +218,26 @@ morie_module_names <- function() {
     "mapq-psychometrics")
 }
 
+#' Run one implemented MORIE module against CPADS data
+#'
+#' @param module_name Module name.
+#' @param cpads_csv Path to the CPADS CSV.
+#' @param output_dir Optional directory for CSV outputs.
+#' @return Named list of data-frame outputs.
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Dispatch one MORIE module against the canonical CPADS CSV. The CSV
+#' # ships with a morie project tree, or is fetched via the CKAN endpoint
+#' # (morie_load_dataset("ocp21")). Wrapped in tryCatch so the example
+#' # documents usage even when the CSV is not checked out locally.
+#' tryCatch(
+#'   morie_run_morie_module("descriptive-statistics"),
+#'   error = function(e) message(conditionMessage(e))
+#' )
+#' }
+#' \dontshow{\}) # examplesIf}
+#' @export
 morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv(), output_dir = NULL) {
   data <- morie_load_cpads_data(cpads_csv)
 

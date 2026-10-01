@@ -29,6 +29,21 @@ key (default marked), then the local Ollama server's}
 \item{\code{ask [--model NAME] PROMPT...}}{send a prompt to the active provider
 (or the named model) and print the reply}
 \item{\code{analyze SUBJECT [JSON]}}{run an analysis subject through \code{cli_main()}}
+\item{\code{explain FILENAME}, \code{inspect PATH}, \code{verify PATH}}{read,
+browse and validate module output tables}
+\item{\code{profile-dataset PATH}, \code{sample PATH --n N}}{profile a
+CSV, draw a sample from it}
+\item{\code{run-modules}, \code{pipeline}}{run several modules; the
+pipeline tracks compute emissions and seals them in a capsule}
+\item{\code{emissions}, \code{verify-pollution}}{measure this machine's
+compute emissions; run the pollution-to-health pipeline}
+\item{\code{percy}, \code{agent}, \code{chat}}{talk to Perseus through the
+provider chain}
+\item{\code{selftest}, \code{tutorial}, \code{generate-template},
+\code{update}}{smoke test, walkthrough, first-paper scaffold, update check}
+\item{\code{crypto}, \code{ingest}, \code{download-bootstrap},
+\code{exec}, \code{edit}, \code{percysuits}}{file encryption, open-data
+feeds, bootstrap weights, evaluate R code, edit a file, pull models}
 \item{\code{version}}{print the package version}
 \item{\code{help}}{this list}
 }
