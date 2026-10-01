@@ -37,7 +37,8 @@
 #'   X. (1996). A density-based algorithm for discovering clusters in large
 #'   spatial databases with noise. KDD-96, 226-231.
 #' @examples
-#' spatial_dbscan(rbind(c(0, 0), c(0, 1), c(1, 0), c(9, 9), c(9, 8), c(8, 9), c(5, 5)), eps = 1.5, min_pts = 3)$cluster
+#' spatial_dbscan(rbind(c(0, 0), c(0, 1), c(1, 0), c(9, 9), c(9, 8), c(8, 9), c(5, 5)),
+#'                eps = 1.5, min_pts = 3)$cluster
 #' @export
 marginal_structural_model <- function(y, treatment_history, covariate_history) {
   y <- as.numeric(y)

@@ -38,7 +38,8 @@ Brumback 2000).  \code{spatial_dbscan} returns DBSCAN clusters of point
 locations (\code{DbscanClusters}; Ester et al. 1996).
 }
 \examples{
-spatial_dbscan(rbind(c(0, 0), c(0, 1), c(1, 0), c(9, 9), c(9, 8), c(8, 9), c(5, 5)), eps = 1.5, min_pts = 3)$cluster
+spatial_dbscan(rbind(c(0, 0), c(0, 1), c(1, 0), c(9, 9), c(9, 8), c(8, 9), c(5, 5)),
+               eps = 1.5, min_pts = 3)$cluster
 }
 \references{
 Robins, J. M., Hernan, M. A. and Brumback, B. (2000).

@@ -33,5 +33,6 @@ under the mixture reading, and the zero-share gap.
 \examples{
 set.seed(1)
 x <- rpois(2000, rgamma(2000, shape = 2, rate = 5))   # heterogeneous places
-unlist(morie_concentration_dispersion(x)[c("dispersion_index", "implied_intensity_sd", "zero_share_gap")])
+unlist(morie_concentration_dispersion(x)[
+  c("dispersion_index", "implied_intensity_sd", "zero_share_gap")])
 }

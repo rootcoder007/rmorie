@@ -34,7 +34,14 @@ discriminating diagnostic.
 \examples{
 set.seed(1)
 place <- integer(500); k <- 0
-for (i in seq_along(place)) { if (runif(1) < 5 / (5 + i - 1)) { k <- k + 1; place[i] <- k } else place[i] <- place[sample(i - 1, 1)] }
+for (i in seq_along(place)) {
+  if (runif(1) < 5 / (5 + i - 1)) {
+    k <- k + 1
+    place[i] <- k
+  } else {
+    place[i] <- place[sample(i - 1, 1)]
+  }
+}
 g <- morie_concentration_distinct_growth(place)
 c(M_hat = g$M_hat, slope = g$loglog_slope)
 }

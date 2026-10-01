@@ -169,7 +169,8 @@
 #'   callers create it lazily only when they actually persist to disk.
 #' @seealso \code{\link{morie_cache_clear}}
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Persistent cache root (does not write anything to disk):
 #' morie_cache_dir()
 #' # Per-subsystem persistent path:
@@ -206,7 +207,8 @@ morie_cache_dir <- function(subdir = NULL) {
 #' @return Invisibly, the number of files removed.
 #' @seealso \code{\link{morie_cache_dir}}
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # Non-interactive: skip the confirmation prompt.
 #' morie_cache_clear("siu", confirm = FALSE)
@@ -239,7 +241,8 @@ morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
 #'
 #' @return File path string.
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_builtin_db()
 #' \dontshow{\}) # examplesIf}
 #' @export
@@ -283,7 +286,8 @@ morie_builtin_db <- function() {
 #'   directory.
 #' @return A DBI connection object.
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
 #' if (requireNamespace("duckdb", quietly = TRUE) &&
@@ -366,7 +370,8 @@ morie_db_connect <- function(db_path = NULL) {
 #' @return Number of rows written (invisible).
 #' @examples
 #' set.seed(1)
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(
@@ -409,7 +414,8 @@ morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame, or \code{NULL} if the table does not exist.
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(
@@ -451,7 +457,8 @@ morie_cache_load <- function(table_name, db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with columns \code{table} and \code{rows}.
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' db <- tempfile(fileext = ".db")
 #' morie_cache_store(data.frame(x = 1:3), "demo", db_path = db)
@@ -516,7 +523,8 @@ morie_cache_list <- function(db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return Number of rows cached (invisible).
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # The SQLite backend needs the optional 'RSQLite' package.
 #' if (requireNamespace("RSQLite", quietly = TRUE)) {
 #'   tdir <- tempfile("morie-cache-")
@@ -554,7 +562,8 @@ morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with canonical CPADS columns.
 #' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE) &&
+#'   requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' # Local-first and offline: use_ckan = FALSE consults the bundled copy
 #' # and the local cache only, and errors when neither is present.
 #' cpads <- try(morie_load_cpads(use_ckan = FALSE), silent = TRUE)
@@ -772,7 +781,8 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @return A data.frame.
 #' @seealso \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' # CPADS 2021-2022 ships in the built-in database, so this is a local
 #' # read; try() so a missing optional backend does not fail the check
@@ -916,7 +926,8 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
 #' @return A data.frame with columns: key, name, source, survey, year, type,
 #'   cached (logical), rows (integer or NA).
 #' @examples
-#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+#'   requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_list_datasets()
 #' \dontshow{\}) # examplesIf}
 #' @export

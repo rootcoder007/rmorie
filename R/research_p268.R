@@ -258,7 +258,9 @@ morie_relative_risk_from_or <- function(odds_ratio, base_rate = NULL, exposed_sh
 #'   largest optimal level), \code{value}; attribute \code{"theorems"}. The
 #'   \code{x_opt} column is non-increasing in \code{p}.
 #' @examples
-#' x <- 0:10; morie_deterrence_response(x, benefit = sqrt(x) * 3 - (x %% 3 == 0), sanction = x^1.5, p = c(0.1, 0.3, 0.5, 1))
+#' x <- 0:10
+#' morie_deterrence_response(x, benefit = sqrt(x) * 3 - (x %% 3 == 0),
+#'                           sanction = x^1.5, p = c(0.1, 0.3, 0.5, 1))
 #' @export
 morie_deterrence_response <- function(x, benefit, sanction, p) {
   n <- length(x)

@@ -30,7 +30,8 @@
 #'   Nielsen, M. A. and Chuang, I. L. (2010). Quantum Computation and
 #'   Quantum Information. Cambridge University Press.
 #' @examples
-#' f <- list(atoms = list(list("x", "y", -1), list("y", "z", -1), list("z", "x", -1), list("z", "x", 5)),
+#' f <- list(atoms = list(list("x", "y", -1), list("y", "z", -1),
+#'                        list("z", "x", -1), list("z", "x", 5)),
 #'           clauses = list(1, 2, c(3, 4)))
 #' SmtSolver(f)$solution
 #' ShorFactoring(15, seed = 2)$factors

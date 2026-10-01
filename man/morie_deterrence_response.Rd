@@ -33,5 +33,7 @@ smoothness of the response, not its direction. What remains open in P8 is
 separating certainty from severity in data, not the sign.
 }
 \examples{
-x <- 0:10; morie_deterrence_response(x, benefit = sqrt(x) * 3 - (x \%\% 3 == 0), sanction = x^1.5, p = c(0.1, 0.3, 0.5, 1))
+x <- 0:10
+morie_deterrence_response(x, benefit = sqrt(x) * 3 - (x \%\% 3 == 0),
+                          sanction = x^1.5, p = c(0.1, 0.3, 0.5, 1))
 }

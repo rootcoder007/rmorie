@@ -36,7 +36,8 @@ A \code{data.frame}.
 Requires the \code{bigrquery} package and Application Default Credentials.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) && requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (nzchar(Sys.getenv("GCP_PROJECT")) &&
+  requireNamespace("bigrquery", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Runs when the caller has bigrquery + a GCP_PROJECT billing project.
 # Keyless alternatives: the bundled samples in 'rmoriedata' and the
 # morie_datasets_*() open-data fetchers (Socrata / CKAN, no account).

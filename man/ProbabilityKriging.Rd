@@ -28,7 +28,8 @@ given as c(nugget, sill, range). Identical to the Python arm
 }
 \examples{
 P <- rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1))
-ProbabilityKriging(P, c(1, 3, 2, 4), rbind(c(0.5, 0.5)), 2.5, c(0, 0.25, 1), c(0, 0.08, 1), c(0, 0.1, 1))$estimate
+ProbabilityKriging(P, c(1, 3, 2, 4), rbind(c(0.5, 0.5)), 2.5,
+                   c(0, 0.25, 1), c(0, 0.08, 1), c(0, 0.1, 1))$estimate
 }
 \references{
 Sullivan, J. (1984). Conditional recovery estimation through

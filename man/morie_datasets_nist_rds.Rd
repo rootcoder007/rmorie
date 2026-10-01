@@ -27,7 +27,8 @@ A \code{data.frame} with the NIST RDS catalog schema.
 NIST Reference Datasets (RDS) catalog metadata
 }
 \examples{
-\dontshow{if (nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) ||
+  requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nist_rds(offline = TRUE)
 head(df)
 \dontshow{\}) # examplesIf}

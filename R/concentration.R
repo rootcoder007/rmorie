@@ -107,7 +107,8 @@ morie_concentration_decompose <- function(x) {
 #' @examples
 #' set.seed(1)
 #' x <- rpois(2000, rgamma(2000, shape = 2, rate = 5))   # heterogeneous places
-#' unlist(morie_concentration_dispersion(x)[c("dispersion_index", "implied_intensity_sd", "zero_share_gap")])
+#' unlist(morie_concentration_dispersion(x)[
+#'   c("dispersion_index", "implied_intensity_sd", "zero_share_gap")])
 #' @export
 morie_concentration_dispersion <- function(x) {
   if (!is.numeric(x) || anyNA(x) || any(x < 0) || sum(x) <= 0 || length(x) < 2L) {
@@ -154,7 +155,14 @@ morie_concentration_dispersion <- function(x) {
 #' @examples
 #' set.seed(1)
 #' place <- integer(500); k <- 0
-#' for (i in seq_along(place)) { if (runif(1) < 5 / (5 + i - 1)) { k <- k + 1; place[i] <- k } else place[i] <- place[sample(i - 1, 1)] }
+#' for (i in seq_along(place)) {
+#'   if (runif(1) < 5 / (5 + i - 1)) {
+#'     k <- k + 1
+#'     place[i] <- k
+#'   } else {
+#'     place[i] <- place[sample(i - 1, 1)]
+#'   }
+#' }
 #' g <- morie_concentration_distinct_growth(place)
 #' c(M_hat = g$M_hat, slope = g$loglog_slope)
 #' @export

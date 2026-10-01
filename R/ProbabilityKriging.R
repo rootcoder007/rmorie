@@ -21,7 +21,8 @@
 #'   Oxford University Press.
 #' @examples
 #' P <- rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1))
-#' ProbabilityKriging(P, c(1, 3, 2, 4), rbind(c(0.5, 0.5)), 2.5, c(0, 0.25, 1), c(0, 0.08, 1), c(0, 0.1, 1))$estimate
+#' ProbabilityKriging(P, c(1, 3, 2, 4), rbind(c(0.5, 0.5)), 2.5,
+#'                    c(0, 0.25, 1), c(0, 0.08, 1), c(0, 0.1, 1))$estimate
 #' @export
 ProbabilityKriging <- function(coords, values, targets, threshold, cov_i, cov_u, cov_iu) {
   P <- as.matrix(coords)

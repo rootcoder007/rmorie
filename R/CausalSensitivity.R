@@ -24,7 +24,8 @@
 #' @examples
 #' Evalu(2, ci_lower = 1.3, ci_upper = 3.1)$evalue_ci
 #' Evaltw(0.5, 0.3, 0.8)$evalue
-#' Jntmed(0:7, c(0.3, 1.1, 1.6, 3.4, 3.9, 5.2, 6.4, 6.8), c(1, 1.9, 3.1, 4.4, 4.8, 6.9, 7.2, 8.1))$p_value
+#' Jntmed(0:7, c(0.3, 1.1, 1.6, 3.4, 3.9, 5.2, 6.4, 6.8),
+#'        c(1, 1.9, 3.1, 4.4, 4.8, 6.9, 7.2, 8.1))$p_value
 #' @export
 Evalu <- function(RR, ci_lower = NULL, ci_upper = NULL, rare_outcome = TRUE) {
   rr <- as.numeric(RR)

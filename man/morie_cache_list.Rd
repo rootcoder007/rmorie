@@ -18,7 +18,8 @@ A data.frame with columns \code{table} and \code{rows}.
 List all tables in the MORIE cache
 }
 \examples{
-\dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("DBI", quietly = TRUE) &&
+  requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 db <- tempfile(fileext = ".db")
 morie_cache_store(data.frame(x = 1:3), "demo", db_path = db)

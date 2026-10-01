@@ -27,7 +27,7 @@ suitable for dashboard surfaces.
 }
 \examples{
 \donttest{
-  df <- morie_tps_load_tps_dataset("Assault", nrows = 2000)
+  df <- morie_tps_load_tps_dataset("Assault", nrows = 500)
   rr <- morie_tps_hawkes_markovian_vs_nonmarkovian(df,
                                                     ds_name = "Assault")
 }

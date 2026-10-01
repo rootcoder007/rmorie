@@ -178,7 +178,8 @@ morie_spillover_effects <- function(y, exposure, stratum, weights = NULL) {
 #' pr <- morie_spillover_exposure_probs(n = 20, edges, n_treated = 6, n_draws = 2000, joint = TRUE)
 #' trt <- sample(20, 6); exposure <- morie_spillover_exposure(seq_len(20) %in% trt, edges)$exposure
 #' y <- 5 - 1.5 * (exposure == 2) - 0.5 * (exposure == 1)
-#' morie_spillover_ht(y, exposure, pr$marginal, pr$joint)[c("spillover", "direct", "total_effect", "se")]
+#' morie_spillover_ht(y, exposure, pr$marginal,
+#'                    pr$joint)[c("spillover", "direct", "total_effect", "se")]
 #' @export
 morie_spillover_ht <- function(y, exposure, probs, joint = NULL) {
   n <- length(y)
