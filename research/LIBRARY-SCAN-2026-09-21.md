@@ -1,13 +1,5 @@
 # Library scan, 2026-09-21: candidate problems from the criminology, statistics and mathematics shelves
 
-Three readers went through the WD library (`/run/media/rootcoder/WD_BLACK/library/pdf`, 655 PDFs),
-the full-text corpus index (`~/work/ledger/wave3/corpus_index`, 730 PDFs) and `~/work/corpus/papers`
-on l14, looking for claims that can be stated as a theorem, a counterexample target, or an
-empirical test on data we hold (Toronto Police Service open data, Ontario OTIS, StatCan
-CSUS/CPADS/PSDP, NYC complaint CSV, FBI CDE). Page numbers are the printed pages of each source
-unless marked PDF. Every item is a candidate, not a result: nothing below is proved until it has a
-file under `research/lean/` and a row in `research/README.md`.
-
 Each item: **title** (source) — problem — PROVE/DISPROVE — EMPIRICAL — EXTENDS.
 
 ## A. Criminology shelf (Weisburd & Britt; Eterno, Verma & Silverman; Kikuchi; D'Orsogna & Perc; Stolzenberg et al.; TPS reports; corpus papers)
@@ -178,5 +170,3 @@ C24. **Cyclic dominance in the criminal–citizen–inspector game has no stable
 8. B1 + B2 + B4 + B25 — Manski bounds as a P11 "sentencing effects as intervals" with the inference layer.
 9. A1 + A2 + A5 — logit separation, LDA, KHB rescaling; a P12 on "what a coefficient means".
 10. C8 + A16, B20 — reaction-diffusion threshold and the Bartlett non-identification; the spatial P13.
-
-Empirical work is gated on data access already recorded in memory (TPS open data, OTIS extract in AZM_FINAL, StatCan PUMF guides in `~/work/corpus/userguides`).
