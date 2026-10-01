@@ -27,7 +27,11 @@ if (!slow_runner) {
   files <- sort(list.files("testthat", "^test-.*\\.[rR]$"))
   names <- sub("^test-(.*)\\.[rR]$", "\\1", files)
   chunks <- split(seq_along(files), ceiling(seq_along(files) / 20))
-  t0 <- Sys.time(); ran <- character(); failed <- 0L; n <- 0L; last <- 0
+  t0 <- Sys.time()
+  ran <- character()
+  failed <- 0L
+  n <- 0L
+  last <- 0
   for (idx in chunks) {
     elapsed <- as.numeric(difftime(Sys.time(), t0, units = "secs"))
     if (elapsed + last > budget) break
@@ -37,7 +41,8 @@ if (!slow_runner) {
       package = "rmorie", load_package = "installed",
       reporter = testthat::ListReporter$new(), stop_on_failure = FALSE))
     last <- as.numeric(difftime(Sys.time(), t1, units = "secs"))
-    ran <- c(ran, files[idx]); n <- n + nrow(res)
+    ran <- c(ran, files[idx])
+    n <- n + nrow(res)
     failed <- failed + sum(res$failed) + sum(res$error)
   }
   left <- setdiff(files, ran)
