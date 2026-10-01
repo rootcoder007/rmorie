@@ -772,13 +772,13 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @return A data.frame.
 #' @seealso \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}
 #' @examples
-#' \donttest{
 #' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
-#' # CPADS 2021-2022 (default DuckDB cache); try() so a transient
-#' # upstream outage does not fail the check
+#' # CPADS 2021-2022 ships in the built-in database, so this is a local
+#' # read; try() so a missing optional backend does not fail the check
 #' df <- try(morie_load_dataset("ocp21"))
-#' df <- try(morie_load_dataset("ocp21", refresh = TRUE)) # force re-fetch
+#' # re-fetch from the portal to pick up an upstream revision (network):
+#' # df <- morie_load_dataset("ocp21", refresh = TRUE)
 #'
 #' # PostgreSQL cache (run a server first):
 #' # con <- DBI::dbConnect(RPostgres::Postgres(),
@@ -786,7 +786,6 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' # df <- morie_load_dataset("ocp21", con = con)
 #' }
 #' \dontshow{\}) # examplesIf}
-#' }
 #' @export
 morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {

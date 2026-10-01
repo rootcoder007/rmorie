@@ -22,7 +22,6 @@ test_that("version, help and unknown verbs behave", {
 })
 
 test_that("login forwards the flags to morie_llm_login and logout forgets the key", {
-  testthat::skip_on_covr()
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir())
   seen <- NULL
   testthat::local_mocked_bindings(
@@ -51,7 +50,6 @@ test_that("login forwards the flags to morie_llm_login and logout forgets the ke
 })
 
 test_that("doctor lists the providers and ask relays the reply", {
-  testthat::skip_on_covr()
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(), GEMINI_API_KEY = NA,
                       LLM_API_BASE_URL = NA, LLM_API_KEY = NA, OPENAI_API_KEY = NA)
   .morie_llm_cache$ollama_cached <- FALSE
@@ -69,7 +67,6 @@ test_that("doctor lists the providers and ask relays the reply", {
 })
 
 test_that("models lists the hosted and local models and ask --model names one", {
-  testthat::skip_on_covr()
   withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir())
   .morie_llm_cache$ollama_cached <- FALSE
   .morie_llm_cache$hosted_cached <- NULL

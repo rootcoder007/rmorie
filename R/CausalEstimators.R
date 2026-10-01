@@ -58,7 +58,11 @@
 #'   Robins, J. M. (1992). Estimation of the time-dependent accelerated failure time model in the
 #'   presence of confounding factors. Biometrika 79(2), 321-334.
 #' @examples
-#' d <- data.frame(y = c(1, 2.2, 1.7, 3.1, 2.8, 3.9), t = c(0, 0, 0, 1, 1, 1), w = c(1.2, 2, 1.5, 1.1, 3, 1.4))
+#' d <- data.frame(
+#'   y = c(1, 2.2, 1.7, 3.1, 2.8, 3.9),
+#'   t = c(0, 0, 0, 1, 1, 1),
+#'   w = c(1.2, 2, 1.5, 1.1, 3, 1.4)
+#' )
 #' Ate(d, "y", "t", "w")
 #' iv <- list(z = c(0, 0, 0, 0, 1, 1, 1, 1), t = c(0, 0, 1, 0, 1, 1, 0, 1),
 #'            y = c(1, 1.4, 3.1, 0.8, 3.3, 2.9, 1.2, 3.6))
