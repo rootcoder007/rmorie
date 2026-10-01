@@ -205,6 +205,39 @@ morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
 #' }
 #' \dontshow{\}) # examplesIf}
 #' @export
+#' Names of the CPADS analysis modules
+#'
+#' The modules \code{\link{morie_run_morie_module}} accepts, in pipeline order.
+#' @return A character vector.
+#' @examples
+#' morie_module_names()
+#' @export
+morie_module_names <- function() {
+  c("data-wrangling",
+    "descriptive-statistics",
+    "distribution-tests",
+    "frequentist-inference",
+    "bayesian-inference",
+    "power-design",
+    "logistic-models",
+    "model-comparison",
+    "regression-models",
+    "propensity-scores",
+    "causal-estimators",
+    "treatment-effects",
+    "dag-specification",
+    "meta-synthesis",
+    "ebac-core",
+    "ebac-selection-adjustment-ipw",
+    "ebac-integrations",
+    "ebac-gender-smote-sensitivity",
+    "figures",
+    "tables",
+    "final-report",
+    "otis-analysis",
+    "mapq-psychometrics")
+}
+
 morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv(), output_dir = NULL) {
   data <- morie_load_cpads_data(cpads_csv)
 

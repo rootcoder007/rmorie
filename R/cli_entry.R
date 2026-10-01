@@ -83,11 +83,14 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         } else {
           hm <- morie_llm_hosted_models()
           if (!length(hm)) {
-            out(sprintf("Hosted LLM (%s): logged in, gateway not reachable (or the key was replaced by a newer sign-in: run rmorie login again)\n", .morie_llm_hosted_base() %||% "disabled"))
+            out(sprintf("Hosted LLM (%s): logged in, but the gateway did not accept the key or did not answer; run rmorie login again, or rmorie doctor\n", .morie_llm_hosted_base() %||% "disabled"))
           } else {
             out(sprintf("Hosted LLM (%s); default marked *:\n", .morie_llm_hosted_base()))
             for (m in hm) out(sprintf("  %s %s\n", if (identical(m, attr(hm, "default"))) "*" else " ", m))
           }
+        }
+        if (!is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key())) {
+          out(sprintf("Your endpoint (%s): model %s\n", .morie_llm_api_base(), .morie_llm_api_model()))
         }
         if (morie_llm_probe_ollama()) {
           lm <- morie_llm_ollama_models()$name
@@ -96,7 +99,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         } else {
           out(sprintf("Local Ollama: not reachable at %s\n", .morie_llm_ollama_base()))
         }
-        out("Pick one per call with `rmorie ask --model NAME ...`, or set MORIE_HOSTED_MODEL / MORIE_OLLAMA_MODEL.\n")
+        out("Pick one per call with `rmorie ask --model NAME ...`, or set MORIE_HOSTED_MODEL / MORIE_OLLAMA_MODEL; attach your own endpoint with `rmorie provider set`.\n")
       },
       ask = {
         mdl <- flag("--model")
@@ -107,6 +110,71 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           out(paste0(morie_llm_ask(paste(rest, collapse = " "), model = mdl), "\n"))
         }
       },
+      `list-modules` = {
+        for (m in morie_module_names()) out(paste0("  ", m, "\n"))
+      },
+      `run-module` = {
+        if (!length(rest) || identical(rest[[1L]], "--help")) {
+          out("usage: rmorie run-module NAME [--output-dir DIR] [--cpads FILE]   (names: rmorie list-modules)\n")
+        } else {
+          od <- flag("--output-dir")
+          cp <- flag("--cpads")
+          res <- if (is.null(cp)) morie_run_morie_module(rest[[1L]], output_dir = od)
+                 else morie_run_morie_module(rest[[1L]], cpads_csv = cp, output_dir = od)
+          out(sprintf("Completed module: %s\n", rest[[1L]]))
+          if (is.list(res) && length(names(res))) out(sprintf("Generated tables: %s\n", paste(names(res), collapse = ", ")))
+        }
+      },
+      `list-datasets` = {
+        d <- morie_list_datasets()
+        out(paste0(utils::capture.output(print(d, row.names = FALSE)), collapse = "\n"))
+        out("\n")
+      },
+      pull = {
+        if (!length(rest) || identical(rest[[1L]], "--help")) {
+          out("usage: rmorie pull KEY [--out FILE.csv]   (keys: rmorie list-datasets)\n")
+        } else {
+          dest <- flag("--out") %||% paste0(gsub("[^A-Za-z0-9_.-]", "_", rest[[1L]]), ".csv")
+          df <- morie_load_dataset(rest[[1L]])
+          utils::write.csv(df, dest, row.names = FALSE)
+          out(sprintf("wrote %s  (%d rows, %d cols)\n", dest, nrow(df), ncol(df)))
+        }
+      },
+      provider = {
+        sub <- if (length(rest)) rest[[1L]] else "show"
+        if (identical(sub, "set")) {
+          morie_llm_provider_set(flag("--base-url") %||% stop("provider set needs --base-url", call. = FALSE),
+                                 flag("--key") %||% stop("provider set needs --key", call. = FALSE),
+                                 model = flag("--model"))
+        } else if (identical(sub, "unset")) {
+          morie_llm_provider_unset()
+        } else if (identical(sub, "show")) {
+          morie_llm_provider_show()
+        } else {
+          out("usage: rmorie provider set --base-url URL --key KEY [--model NAME] | show | unset\n")
+        }
+      },
+      cheatsheet = out(paste0(
+        "rmorie cheat sheet\n==================\n\n",
+        "INSTALL\n",
+        "  install.packages(\"rmorie\", repos = c(\"https://rootcoder007.r-universe.dev\", \"https://cloud.r-project.org\"))\n",
+        "  Rscript -e 'rmorie::install_cli()'          # the rmorie launcher on PATH\n\n",
+        "RUN AN ANALYSIS\n",
+        "  rmorie list-modules\n",
+        "  rmorie run-module power-design --output-dir out/\n\n",
+        "PULL DATA\n",
+        "  rmorie list-datasets\n",
+        "  rmorie pull ocp21 --out cpads.csv\n\n",
+        "ASK A MODEL\n",
+        "  rmorie login                                 # hosted tier, free: GitHub or email sign-in\n",
+        "  rmorie models                                # what you can ask, default marked *\n",
+        "  rmorie ask \"which module fits a treatment-control design?\"\n",
+        "  rmorie ask --model NAME \"...\"\n",
+        "  rmorie doctor                                # which routes answer from this machine\n",
+        "  rmorie provider set --base-url URL --key KEY [--model NAME]\n",
+        "                                               # attach your own OpenAI-compatible endpoint\n\n",
+        "PYTHON SIDE\n",
+        "  pip install morie   then   morie cheatsheet\n")),
       analyze = {
         if (!length(rest)) stop("usage: rmorie analyze SUBJECT [JSON]", call. = FALSE)
         res <- cli_main(rest[[1L]], if (length(rest) > 1L) rest[[2L]] else "{}")
@@ -125,6 +193,13 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  models                                                 models you can ask (hosted + local)\n",
         "  ask [--model NAME] PROMPT...                           ask the active provider\n",
         "  analyze SUBJECT [JSON]                                 run an analysis subject\n",
+        "  list-modules                                           the CPADS analysis modules\n",
+        "  run-module NAME [--output-dir DIR] [--cpads FILE]      run one module, write its tables\n",
+        "  list-datasets                                          built-in dataset keys and cache state\n",
+        "  pull KEY [--out FILE.csv]                              load a dataset by key, write it as CSV\n",
+        "  cheatsheet                                             one-page reference\n",
+        "  provider set --base-url URL --key KEY [--model NAME]   attach your own model endpoint\n",
+        "  provider show | unset                                  ... see it, or detach it\n",
         "  version                                                package version\n",
         "  help | -h | --help                                     this list; VERB --help for one verb\n\n",
         "Install or update:  install.packages(\"rmorie\", repos = c(\"https://rootcoder007.r-universe.dev\", ",

@@ -129,6 +129,12 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
+## What's in v1.3.7
+
+The command line gains `list-modules`, `run-module`, `list-datasets`, `pull`,
+`cheatsheet` and `provider` (attach your own OpenAI-compatible model endpoint,
+shared with the Python package).
+
 ## What's in v1.3.6
 
 Version lockstep with the Python package's 1.3.6 hotfix; no change to the R

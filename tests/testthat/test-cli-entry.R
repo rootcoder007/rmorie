@@ -109,3 +109,43 @@ test_that("the launcher ships and install_cli links it", {
     expect_match(paste(readLines(target), collapse = "\n"), "morie_cli", fixed = TRUE)
   }
 })
+
+test_that("list-modules, cheatsheet, pull and run-module verbs work", {
+  expect_match(.capture("list-modules")$text, "power-design")
+  expect_equal(length(morie_module_names()), 23L)
+  cs <- .capture("cheatsheet")
+  expect_equal(cs$status, 0L)
+  expect_match(cs$text, "rmorie login")
+  expect_match(cs$text, "run-module power-design")
+  expect_match(.capture("pull")$text, "usage: rmorie pull KEY")
+  expect_match(.capture("run-module")$text, "usage: rmorie run-module NAME")
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_load_dataset = function(key, ...) data.frame(k = key, n = 1:3))
+  dest <- tempfile(fileext = ".csv")
+  p <- .capture("pull", "ocp21", "--out", dest)
+  expect_equal(p$status, 0L)
+  expect_match(p$text, "3 rows, 2 cols")
+  expect_equal(nrow(utils::read.csv(dest)), 3L)
+  testthat::local_mocked_bindings(.package = .pkg,
+    morie_run_morie_module = function(module_name, cpads_csv, output_dir = NULL) list(a = 1, b = 2))
+  r <- .capture("run-module", "power-design", "--output-dir", tempdir())
+  expect_equal(r$status, 0L)
+  expect_match(r$text, "Generated tables: a, b")
+})
+
+test_that("provider set/show/unset store an endpoint the chain reads", {
+  withr::local_envvar(XDG_CONFIG_HOME = withr::local_tempdir(),
+                      LLM_API_BASE_URL = NA, LLM_API_KEY = NA, MORIE_API_MODEL = NA)
+  expect_null(.morie_llm_api_base())
+  r <- .capture("provider", "set", "--base-url", "https://api.example.org/v1/", "--key", "sk-test-1234567", "--model", "demo-model")
+  expect_equal(r$status, 0L)
+  expect_equal(.morie_llm_api_base(), "https://api.example.org/v1")
+  expect_equal(.morie_llm_api_key(), "sk-test-1234567")
+  expect_equal(.morie_llm_api_model(), "demo-model")
+  expect_true(file.exists(.morie_llm_credentials_path()))
+  expect_equal(.capture("provider", "show")$status, 0L)
+  expect_equal(.capture("provider", "unset")$status, 0L)
+  expect_null(.morie_llm_api_base())
+  expect_match(.capture("provider", "bogus")$text, "usage: rmorie provider")
+  expect_equal(.capture("provider", "set", "--key", "x")$status, 1L)
+})

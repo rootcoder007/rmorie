@@ -1,3 +1,20 @@
+# rmorie 1.3.7 - 2026-10-01
+
+## Command line
+
+* New verbs: `list-modules`, `run-module NAME [--output-dir DIR] [--cpads
+  FILE]`, `list-datasets`, `pull KEY [--out FILE.csv]`, `cheatsheet`, and
+  `provider set --base-url URL --key KEY [--model NAME] | show | unset`.
+  `morie_module_names()` lists the CPADS modules.
+
+## Your own model
+
+* `morie_llm_provider_set()`, `morie_llm_provider_show()` and
+  `morie_llm_provider_unset()` attach any OpenAI-compatible endpoint; the
+  setting lives in the credentials file shared with the Python package and the
+  provider chain and `models` use it. `LLM_API_BASE_URL`, `LLM_API_KEY` and
+  `MORIE_API_MODEL` take precedence.
+
 # rmorie 1.3.6 - 2026-10-01
 
 * Version lockstep with the Python package's 1.3.6 hotfix. No change to the R

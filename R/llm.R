@@ -141,12 +141,32 @@ if (nzchar(v)) v else NULL }
 if (nzchar(v)) v else NULL }
 #' Internal helper: Morie Llm Api Base
 #' @noRd
-.morie_llm_api_base    <- function() { v <- .morie_llm_env("LLM_API_BASE_URL")
-if (nzchar(v)) sub("/+$", "", v) else NULL }
+.morie_llm_api_base    <- function() {
+  v <- .morie_llm_env("LLM_API_BASE_URL")
+  if (!nzchar(v)) v <- .morie_llm_stored_provider("api_base_url")
+  if (nzchar(v)) sub("/+$", "", v) else NULL
+}
 #' Internal helper: Morie Llm Api Key
 #' @noRd
-.morie_llm_api_key     <- function() { v <- .morie_llm_env("LLM_API_KEY")
-if (nzchar(v)) v else NULL }
+.morie_llm_api_key     <- function() {
+  v <- .morie_llm_env("LLM_API_KEY")
+  if (!nzchar(v)) v <- .morie_llm_stored_provider("api_key")
+  if (nzchar(v)) v else NULL
+}
+#' Internal helper: the model for the attached endpoint
+#' @noRd
+.morie_llm_api_model   <- function() {
+  v <- .morie_llm_env("MORIE_API_MODEL")
+  if (!nzchar(v)) v <- .morie_llm_stored_provider("api_model")
+  if (nzchar(v)) v else DEFAULT_API_MODEL
+}
+#' Internal helper: one field of the endpoint attached with `provider set`
+#' @noRd
+.morie_llm_stored_provider <- function(field) {
+  d <- tryCatch(.morie_llm_read_credentials(), error = function(e) list())
+  v <- d[[field]]
+  if (is.character(v) && length(v) == 1L && !is.na(v)) trimws(v) else ""
+}
 #' Internal helper: Morie Llm Gemini Model
 #' @noRd
 .morie_llm_gemini_model <- function() .morie_llm_env("GEMINI_MODEL", DEFAULT_GEMINI_MODEL)
@@ -357,7 +377,7 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
         .morie_llm_gemini_key())
   }
   if (!is.null(.morie_llm_api_base()) && !is.null(.morie_llm_api_key())) {
-    add(.morie_llm_api_base(), model %||% DEFAULT_API_MODEL,
+    add(.morie_llm_api_base(), model %||% .morie_llm_api_model(),
         .morie_llm_api_key())
   }
   if (!is.null(.morie_llm_openai_key())) {
@@ -448,7 +468,7 @@ morie_llm_ask_multi <- function(messages, providers = NULL,
       api    = if (!is.null(.morie_llm_api_base()) &&
                    !is.null(.morie_llm_api_key()))
                  list(base = .morie_llm_api_base(),
-                      mdl = model %||% DEFAULT_API_MODEL,
+                      mdl = model %||% .morie_llm_api_model(),
                       key = .morie_llm_api_key()),
       openai = if (!is.null(.morie_llm_openai_key()))
                  list(base = OPENAI_BASE_URL,
@@ -756,5 +776,68 @@ morie_llm_logout <- function() {
   .morie_llm_cache$hosted_cached <- NULL
   .morie_llm_cache$hosted_models <- NULL
   message(if (had) "Hosted key removed." else "No hosted key was stored.")
+  invisible(had)
+}
+
+#' Attach your own model endpoint
+#'
+#' Stores an OpenAI-compatible endpoint (chat completions at
+#' \code{BASE_URL/chat/completions}) in the credentials file, where both this
+#' package and the Python package read it: OpenAI, Anthropic's compatibility
+#' endpoint (\code{https://api.anthropic.com/v1}), OpenRouter, Mistral, Groq, a
+#' local LM Studio / vLLM / llama.cpp server, and so on. The environment
+#' variables \code{LLM_API_BASE_URL}, \code{LLM_API_KEY} and
+#' \code{MORIE_API_MODEL} take precedence when set.
+#'
+#' @param base_url The endpoint, e.g. \code{"https://api.openai.com/v1"}.
+#' @param key The API key for it.
+#' @param model Optional model name to ask by default.
+#' @return \code{morie_llm_provider_set()} and \code{morie_llm_provider_show()}
+#'   return the stored fields invisibly; \code{morie_llm_provider_unset()}
+#'   returns \code{TRUE} when something was detached.
+#' @examples
+#' \dontrun{
+#' morie_llm_provider_set("https://api.openai.com/v1", "sk-...", model = "gpt-4o-mini")
+#' morie_llm_provider_show()
+#' morie_llm_provider_unset()
+#' }
+#' @export
+morie_llm_provider_set <- function(base_url, key, model = NULL) {
+  base_url <- sub("/+$", "", trimws(base_url))
+  if (!grepl("^https?://", base_url)) stop("base_url must start with http:// or https://", call. = FALSE)
+  if (!nzchar(trimws(key))) stop("the key is empty", call. = FALSE)
+  d <- .morie_llm_read_credentials()
+  d$api_base_url <- base_url
+  d$api_key <- trimws(key)
+  if (!is.null(model) && nzchar(trimws(model))) d$api_model <- trimws(model) else d$api_model <- NULL
+  .morie_llm_write_credentials(d)
+  message("Endpoint attached: ", base_url, if (!is.null(d$api_model)) paste0(" (model ", d$api_model, ")") else "")
+  invisible(d[c("api_base_url", "api_key", "api_model")])
+}
+
+#' @rdname morie_llm_provider_set
+#' @export
+morie_llm_provider_show <- function() {
+  d <- .morie_llm_read_credentials()
+  if (is.null(d$api_base_url)) {
+    message("No endpoint attached. Attach one with morie_llm_provider_set(base_url, key) or: rmorie provider set --base-url URL --key KEY")
+  } else {
+    k <- as.character(d$api_key %||% "")
+    message("Endpoint: ", d$api_base_url, "\nModel:    ", d$api_model %||% "server default",
+            "\nKey:      ", substr(k, 1, 4), "...", substr(k, nchar(k) - 2, nchar(k)), " (", nchar(k), " chars)")
+  }
+  invisible(d[c("api_base_url", "api_key", "api_model")])
+}
+
+#' @rdname morie_llm_provider_set
+#' @export
+morie_llm_provider_unset <- function() {
+  d <- .morie_llm_read_credentials()
+  had <- any(c("api_base_url", "api_key", "api_model") %in% names(d))
+  d$api_base_url <- NULL
+  d$api_key <- NULL
+  d$api_model <- NULL
+  .morie_llm_write_credentials(d)
+  message(if (had) "Endpoint detached." else "No endpoint was attached.")
   invisible(had)
 }
