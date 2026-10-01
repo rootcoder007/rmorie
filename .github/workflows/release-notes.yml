@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Publish the GitHub release for a version tag, with the notes taken from the
+# release-notes file (the section whose heading carries the tag's version).
+# Idempotent: a release that already exists for the tag is left alone.
+name: release-notes
+
+on:
+  push:
+    tags: ["v*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Release notes for this tag
+        env:
+          NOTES_FILE: NEWS.md
+          TITLE_PREFIX: rmorie
+        run: |
+          v="${GITHUB_REF_NAME#v}"
+          # the section starting at the heading that names this version, up to the next heading of the same level
+          awk -v v="$v" '
+            /^#+ / { if (on) exit; if (index($0, v)) { on = 1; next } }
+            on { print }
+          ' "$NOTES_FILE" > notes.md
+          if [ ! -s notes.md ]; then
+            echo "no section for $v in $NOTES_FILE" >&2
+            printf 'Release %s.\n' "$v" > notes.md
+          fi
+          echo "VERSION=$v" >> "$GITHUB_ENV"
+      - name: Create the release if it does not exist
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TITLE_PREFIX: rmorie
+        run: |
+          if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "release $GITHUB_REF_NAME already exists; nothing to do"
+          else
+            gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
+              --title "$TITLE_PREFIX $VERSION" --notes-file notes.md --latest
+          fi
