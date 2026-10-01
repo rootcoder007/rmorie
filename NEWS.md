@@ -1,3 +1,8 @@
+# rmorie 1.3.6 - 2026-10-01
+
+* Version lockstep with the Python package's 1.3.6 hotfix. No change to the R
+  package.
+
 # rmorie 1.3.5 - 2026-10-01
 
 ## CRAN follow-ups
