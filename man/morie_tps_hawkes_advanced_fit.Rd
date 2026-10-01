@@ -52,7 +52,7 @@ Uniform(0, 1).
 }
 \examples{
 \donttest{
-  df <- morie_tps_load_tps_dataset("Assault", nrows = 4000)
+  df <- morie_tps_load_tps_dataset("Assault", nrows = 400)
   rr <- morie_tps_hawkes_advanced_fit(df, kernel = "gamma",
                                         baseline = "sinusoidal",
                                         ds_name = "Assault")
