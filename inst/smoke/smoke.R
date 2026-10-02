@@ -157,7 +157,7 @@ case("verify-earth-engine", function() {
 })
 case("launcher", function() {
   # exactly what inst/bin/rmorie does, with the tree loaded in place of the installed package
-  tree_arg <- if (nzchar(tree)) sprintf("pkgload::load_all(%s, quiet = TRUE)", shQuote(tree)) else "library(rmorie)"
+  tree_arg <- if (nzchar(tree)) sprintf("pkgload::load_all(%s, quiet = TRUE)", shQuote(tree)) else sprintf("library(%s)", pkg)
   r <- suppressWarnings(system2("Rscript", c("--vanilla", "-e",
     shQuote(sprintf("suppressMessages(%s); q <- morie_cli(); quit(status = as.integer(q))", tree_arg)),
     "--args", "version"), stdout = TRUE, stderr = TRUE))
@@ -175,7 +175,7 @@ case("verb-help", function() {
 })
 case("launcher", function() {
   # exactly what inst/bin/rmorie does, with the tree loaded in place of the installed package
-  tree_arg <- if (nzchar(tree)) sprintf("pkgload::load_all(%s, quiet = TRUE)", shQuote(tree)) else "library(rmorie)"
+  tree_arg <- if (nzchar(tree)) sprintf("pkgload::load_all(%s, quiet = TRUE)", shQuote(tree)) else sprintf("library(%s)", pkg)
   r <- suppressWarnings(system2("Rscript", c("--vanilla", "-e",
     shQuote(sprintf("suppressMessages(%s); q <- morie_cli(); quit(status = as.integer(q))", tree_arg)),
     "--args", "version"), stdout = TRUE, stderr = TRUE))

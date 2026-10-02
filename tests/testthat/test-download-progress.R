@@ -42,3 +42,38 @@ test_that(".morie_fmt_bytes and the line renderer", {
                        unit = "rows")
   expect_match(rows, " 78%  32,000 rows / 40,931 rows", fixed = TRUE)
 })
+
+test_that(".morie_dl starts a dropped transfer again, and gives up after the last attempt", {
+  src <- tempfile(fileext = ".bin")
+  writeBin(as.raw(1:200), src)
+  dest <- tempfile()
+  calls <- 0L
+  real_url <- base::url
+  testthat::local_mocked_bindings(
+    url = function(description, ...) {
+      calls <<- calls + 1L
+      if (calls == 1L) stop("connection reset by peer")
+      real_url(description, ...)
+    },
+    .package = "base"
+  )
+  testthat::local_mocked_bindings(Sys.sleep = function(time) NULL, .package = "base")
+  msgs <- capture.output(
+    .morie_dl(paste0("file://", src), dest, label = "again", quiet = FALSE, tty = FALSE),
+    type = "message"
+  )
+  expect_identical(calls, 2L)
+  expect_identical(readBin(dest, "raw", 400), as.raw(1:200))
+  expect_true(any(grepl("retrying, attempt 2 of 3", msgs, fixed = TRUE)))
+
+  calls <- 0L
+  testthat::with_mocked_bindings(
+    url = function(...) {
+      calls <<- calls + 1L
+      stop("host is down")
+    },
+    .package = "base",
+    expect_error(.morie_dl("https://example.invalid/x", dest, quiet = TRUE, attempts = 2L), "host is down")
+  )
+  expect_identical(calls, 2L)
+})

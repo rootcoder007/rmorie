@@ -39,8 +39,29 @@
 }
 
 .morie_dl <- function(url, dest, headers = NULL, label = basename(dest),
-                      size = NULL, timeout = 3600, quiet = NULL, tty = NULL) {
+                      size = NULL, timeout = 3600, quiet = NULL, tty = NULL,
+                      attempts = 3L) {
+  # a transfer that drops part-way is started again (base R's url() does not
+  # expose the status, so a Range resume could silently append a duplicate body)
   if (is.null(quiet)) quiet <- .morie_dl_quiet()
+  for (attempt in seq_len(attempts)) {
+    res <- tryCatch(
+      .morie_dl_once(url, dest, headers, label, size, timeout, quiet, tty),
+      error = function(e) e
+    )
+    if (!inherits(res, "error")) return(res)
+    if (attempt == attempts) stop(res)
+    if (!quiet) {
+      cat(sprintf("%s: the transfer dropped (%s); retrying, attempt %d of %d\n",
+                  label, conditionMessage(res), attempt + 1L, attempts),
+          file = stderr())
+    }
+    unlink(dest)
+    Sys.sleep(attempt)
+  }
+}
+
+.morie_dl_once <- function(url, dest, headers, label, size, timeout, quiet, tty) {
   size <- suppressWarnings(as.numeric(if (is.null(size)) NA else size[[1L]]))
   if (!is.finite(size) || size <= 0) size <- NA_real_
   old <- options(timeout = max(getOption("timeout", 60), timeout))

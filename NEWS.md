@@ -1,5 +1,9 @@
 # rmorie 1.3.9 - 2026-10-01
 
+* Downloads that drop part-way (a reset connection, a server that closes early)
+  are started again, up to three attempts, with the reason on screen; a short
+  body no longer passes as a complete file.
+
 * Command line, from a hostile QA pass: the launcher works under R 4.6 (which
   keeps `--args` in `commandArgs()`); `rmorie pull` keeps what it fetches under
   the user cache directory, so later `run-module`, `pipeline` and `selftest`
