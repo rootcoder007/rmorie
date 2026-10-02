@@ -365,7 +365,7 @@ morie_envhealth_cheatsheet <- function() {
   list(
     row("exposure > reference", exposure_mean > reference,
         sprintf("mean %s vs ref %s -- CRF is monotonic only when exposure exceeds the counterfactual floor.",
-                format(exposure_mean, digits = 15), format(reference))),
+                format(exposure_mean, digits = 10), format(reference))),
     row("prevalence in [0,1]", exposure_prevalence >= 0 && exposure_prevalence <= 1,
         sprintf("exposure_prevalence=%s", format(exposure_prevalence))),
     row("baseline_rate non-negative", baseline_rate >= 0,

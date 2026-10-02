@@ -848,6 +848,9 @@ morie_llm_provider_unset <- function() {
 .morie_llm_probe_token <- function(token) {
   base <- .morie_llm_hosted_base()
   if (is.null(base) || !nzchar(base)) return(FALSE)
+  if (!requireNamespace("httr2", quietly = TRUE)) {
+    stop("the hosted tier needs the httr2 package: install.packages(\"httr2\")", call. = FALSE)
+  }
   res <- tryCatch({
     req <- httr2::request(paste0(sub("/+$", "", base), "/v1/models"))
     req <- httr2::req_headers(req, Authorization = paste("Bearer", trimws(token)))

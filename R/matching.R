@@ -314,10 +314,10 @@ morie_matching_common_support <- function(data, treatment,
 #'   (forwarded as \code{ratio}).
 #' @param caliper Maximum logit-propensity distance for a valid match,
 #'   expressed in SD units of the logit (or \code{NULL} for no caliper).
-#' @param replace If \code{TRUE}, controls may be re-used. \code{NULL} (the
-#'   default) re-uses controls only when there are fewer controls than
-#'   treated units, where 1:1 matching without replacement would leave
-#'   treated units unmatched and bias the ATT. \code{NULL} (the
+#' @param replace If \code{TRUE}, controls may be re-used. The default
+#'   \code{FALSE} matches MatchIt; with fewer controls than treated units it
+#'   leaves treated units unmatched (a warning says so) and the ATT then
+#'   describes the matchable subset: pass \code{TRUE} in that case. \code{NULL} (the
 #'   default) re-uses controls only when there are fewer controls than
 #'   treated units, where 1:1 matching without replacement would leave
 #'   treated units unmatched and bias the ATT. \code{NULL} (the
@@ -343,15 +343,15 @@ morie_matching_common_support <- function(data, treatment,
 morie_matching_nearest_neighbor <- function(data, treatment, covariates,
                                             n_neighbors = 1L,
                                             caliper = NULL,
-                                            replace = NULL,
+                                            replace = FALSE,
                                             ps = NULL,
                                             alpha = 0.05) {
-  if (is.null(replace)) {
-    tr <- as.numeric(data[[treatment]])
-    replace <- sum(tr == 1, na.rm = TRUE) * n_neighbors > sum(tr == 0, na.rm = TRUE)
-    if (replace) {
-      message("Fewer controls than treated units: matching with replacement (replace = TRUE)")
-    }
+  tr <- as.numeric(data[[treatment]])
+  if (!isTRUE(replace) && sum(tr == 1, na.rm = TRUE) * n_neighbors > sum(tr == 0, na.rm = TRUE)) {
+    # MatchIt's default too, so the cross-validation holds; but the user must know the estimand shifts
+    warning("Fewer controls than treated units: 1:1 matching without replacement leaves treated ",
+            "units unmatched and the ATT is estimated on the matchable subset only; pass ",
+            "replace = TRUE to re-use controls.", call. = FALSE)
   }
   .morie_match_nearest_native(
     data, treatment, covariates,
@@ -432,10 +432,10 @@ morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
 #' @param covariates Character vector of continuous covariates.
 #' @param n_neighbors Number of matches per treated unit.
 #' @param caliper Maximum Mahalanobis distance for a valid match.
-#' @param replace If \code{TRUE}, controls may be re-used. \code{NULL} (the
-#'   default) re-uses controls only when there are fewer controls than
-#'   treated units, where 1:1 matching without replacement would leave
-#'   treated units unmatched and bias the ATT. \code{NULL} (the
+#' @param replace If \code{TRUE}, controls may be re-used. The default
+#'   \code{FALSE} matches MatchIt; with fewer controls than treated units it
+#'   leaves treated units unmatched (a warning says so) and the ATT then
+#'   describes the matchable subset: pass \code{TRUE} in that case. \code{NULL} (the
 #'   default) re-uses controls only when there are fewer controls than
 #'   treated units, where 1:1 matching without replacement would leave
 #'   treated units unmatched and bias the ATT. \code{NULL} (the

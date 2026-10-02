@@ -216,8 +216,13 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         }
       },
       explain = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie explain FILENAME\n")
-        else out(paste0(explain_file(rest[[1L]]), "\n"))
+        if (!length(rest) || identical(rest[[1L]], "--help")) {
+          out("usage: rmorie explain FILENAME\n")
+        } else {
+          txt <- explain_file(rest[[1L]])
+          out(paste0(txt, "\n"))
+          if (grepl("^No registered explanation", txt)) status <- 1L  # an unknown table is not a success
+        }
       },
       inspect = {
         if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie inspect PATH [--module NAME]\n")
@@ -338,7 +343,12 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "Python side:        pip install morie   (then: morie r-install)\n")),
       stop(sprintf("unknown verb '%s' (try: rmorie help)", verb), call. = FALSE))
   }, error = function(e) {
-    out(paste0("rmorie: ", conditionMessage(e), "\n"))
+    msg <- conditionMessage(e)
+    if (grepl("cannot open (the connection|file)|[Pp]ermission denied", msg)) {
+      # a write that the file system refused: say where, in words
+      msg <- paste0("cannot write in ", getwd(), " (permission denied, or the path does not exist): ", msg)
+    }
+    out(paste0("rmorie ", verb, ": ", msg, "\n"))
     status <<- 1L
   })
   invisible(status)

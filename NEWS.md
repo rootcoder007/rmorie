@@ -14,7 +14,8 @@
   documented choice; Cramer's V uses the uncorrected statistic);
   `morie_linear_regression_ols()` treats a constant column you supply as the
   intercept and keeps standard errors aligned; `morie_matching_nearest_neighbor()`
-  matches with replacement when controls are scarce (the ATT was biased);
+  warns that 1:1 matching without replacement estimates the ATT on the
+  matchable subset when controls are scarce (pass `replace = TRUE`);
   `morie_estimate_aipw()` defaults to `outcome_model = "auto"` (logistic for a
   binary outcome) in both arms; the `causal-estimators` module reports
   influence-function and bootstrap standard errors instead of values about
@@ -36,7 +37,8 @@
   documented choice; Cramer's V uses the uncorrected statistic);
   `morie_linear_regression_ols()` treats a constant column you supply as the
   intercept and keeps standard errors aligned; `morie_matching_nearest_neighbor()`
-  matches with replacement when controls are scarce (the ATT was biased);
+  warns that 1:1 matching without replacement estimates the ATT on the
+  matchable subset when controls are scarce (pass `replace = TRUE`);
   `morie_estimate_aipw()` defaults to `outcome_model = "auto"` (logistic for a
   binary outcome) in both arms; the `causal-estimators` module reports
   influence-function and bootstrap standard errors instead of values about

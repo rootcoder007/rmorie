@@ -1051,15 +1051,15 @@
     stringsAsFactors = FALSE
   )
   empty_smote <- data.frame(
-    model = character(),
-    term = character(),
-    log_odds = numeric(),
-    se = numeric(),
-    or = numeric(),
-    or_lower95 = numeric(),
-    or_upper95 = numeric(),
-    p_value = numeric(),
-    significant = character(),
+    model = "not computed",
+    term = NA_character_,
+    log_odds = NA_real_,
+    se = NA_real_,
+    or = NA_real_,
+    or_lower95 = NA_real_,
+    or_upper95 = NA_real_,
+    p_value = NA_real_,
+    significant = "SMOTE resampling is not part of the R workflow; see the status file",
     stringsAsFactors = FALSE
   )
   list(

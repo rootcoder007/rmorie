@@ -160,6 +160,10 @@
         out("Error: --strata-col is required for stratified sampling\n")
         return(1L)
       }
+      if (!col %in% names(df)) {
+        out(sprintf("column '%s' is not in %s (columns: %s)\n", col, path, paste(head(names(df), 12), collapse = ", ")))
+        return(1L)
+      }
       morie_stratified_sample(df, col, n, proportional = has("--proportional"), seed = seed)
     },
     cluster = {
@@ -211,7 +215,7 @@
     edir <- file.path(od %||% file.path("data", "manifest", "outputs"), "emissions")
     r <- morie_emissions_track(run(), project_name = "morie-pipeline", output_dir = edir)
     res <- r$value
-    out(sprintf("Pipeline CO2 emissions: %.6f kg CO2eq  (%s)\n", r$emissions_kg, file.path(edir, "emissions.csv")))
+    out(sprintf("Pipeline CO2 emissions: %s kg CO2eq  (%s)\n", format(signif(r$emissions_kg, 3)), file.path(edir, "emissions.csv")))
     if (!is.null(r$capsule)) out(sprintf("Capsule: %s%s\n", r$capsule$manifest, if (isTRUE(r$capsule$signed)) " (signed)" else ""))
   } else {
     res <- run()
@@ -714,7 +718,10 @@
   keep <- hit
   for (i in which(hit)) {  # continuation lines are indented deeper and follow the verb's line
     j <- i + 1L
-    while (j <= length(lines) && grepl("^        ", lines[j])) { keep[j] <- TRUE; j <- j + 1L }
+    while (j <= length(lines) && grepl("^        ", lines[j])) {
+      keep[j] <- TRUE
+      j <- j + 1L
+    }
   }
   if (!any(keep)) {
     out(sprintf("rmorie %s: no help entry (rmorie help lists every verb)\n", verb))
