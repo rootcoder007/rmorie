@@ -1,10 +1,23 @@
+# rmorie 1.4.0 - unreleased
+
+* Research: four new problems join the Lean-backed programme, each with its R function and
+  tests. `morie_meta_random_effects()` and `morie_meta_dl_bias()` (pooling evaluations:
+  the DerSimonian-Laird truncation is biased upward under homogeneity and the random-effects
+  variance is never below the fixed-effect one, `Research.P13`); `morie_logit_separation()`
+  (complete or quasi-complete separation makes the logistic likelihood climb without a
+  maximiser, the Baldus proportionality-review logit, `Research.P5`);
+  `morie_bounds_confidence()` (Imbens-Manski intervals for partially identified sentencing
+  effects, `Research.P11`); `morie_cheeger_bound()` (the conductance of a hot-spot set
+  bounds the spectral gap of the street graph, `Research.P3`). The Python package carries
+  every research function at parity.
+
 # rmorie 1.3.9 - 2026-10-01
 
 * The `causal-estimators` module runs again on the synthetic CPADS frame: its
   AIPW line now lines the propensity rows up with the outcome rows by name
   instead of predicting from a frame without the label covariates.
 
-* The hosted tier lists Cloudflare Workers AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf) beside the
+* The hosted tier lists additional AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf) beside the
   ollama.com ones, and falls back to them when a cloud model is rate
   limited; `rmorie ask --model gpt-oss-120b:cf` picks one.
 

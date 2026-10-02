@@ -54,6 +54,10 @@ signed off.
 | P12 ecological | `Research.P12.within_orth`, `cov_decomp`, `var_decomp`, `var_nonneg`, `ecological_ge` | `morie_ecological_decompose()` |
 | P11 sentencing bounds | `Research.P11.clean_bounds`, `clean_lower_attained`, `clean_upper_attained`, `clean_width`, `clean_informative` | `morie_contaminated_bounds()` |
 | P11 sentencing bounds | `Research.P11.Pop.mtr_lower`, `mtr_upper`, `mtr_upper_attained` | `morie_sentence_effect_mtr()` |
+| P3 interference | `Research.P3.testVec_orth`, `testVec_dnorm`, `testVec_dirichlet`, `rayleigh_testVec`, `rayleigh_le_two_conductance`, `lambda2_le_rayleigh_testVec`, `cheeger_easy` | `morie_cheeger_bound()` |
+| P5 fairness | `Research.P5.ll1_strictMono`, `ll1_neg`, `loglik_lt_shift`, `loglik_lt_shift_quasi`, `no_mle`, `no_mle_quasi`, `loglik_neg`, `loglik_tendsto_zero` | `morie_logit_separation()` |
+| P11 sentencing bounds | `Research.P11.region_coverage_le`, `coverage_strictMono_c`, `im_cutoff_antitone`, `im_cutoff_between`, `two_sided_overcovers` | `morie_bounds_confidence()` |
+| P13 pooling | `Research.P13.truncation_bias`, `pos_part_ge`, `pos_part_pos`, `dl_biased_under_homogeneity`, `tauDL_nonneg`, `tauDL_eq_zero_iff`, `re_var_ge`, `re_var_eq_iff` | `morie_meta_random_effects()`, `morie_meta_dl_bias()` |
 
 C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),
 `src/morie_spillover.cpp` (treated-neighbour counts on a place network).
@@ -70,5 +74,5 @@ assumption holds in Toronto, Ontario, or anywhere else.
 
 ```
 cd ~/work/researchproofs && lake build && lake env lean Audit.lean
-cd ~/work/rmorie-research && Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268")'
+cd ~/work/rmorie-research && Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268|meta-pooling|logit-separation|bounds-confidence|cheeger")'
 ```

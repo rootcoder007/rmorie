@@ -181,6 +181,16 @@ spillover.
   general, so `morie_spillover_ht_variance(form = "both")` reports the
   condition; the path-graph test shows the two forms differing when it
   fails (library scan B7).
+- Progress 2026-10-02 (Cheeger, library scan C14): `Research.P3` in P3Cheeger.lean:
+  the two-valued test vector of a hot-spot set S is degree-orthogonal to constants
+  (`testVec_orth`), with D-norm 1/vol S + 1/vol S^c (`testVec_dnorm`) and Dirichlet
+  form cut(S)(1/vol S + 1/vol S^c)^2 (`testVec_dirichlet`), so its Rayleigh
+  quotient is cut(S)(1/vol S + 1/vol S^c) (`rayleigh_testVec`) <= 2 h(S)
+  (`rayleigh_le_two_conductance`); with lambda_2 defined variationally,
+  lambda_2 <= 2 h(S) for every non-trivial S (`cheeger_easy`). The hard direction
+  lambda_2 >= h^2/2 is not proved. R: `morie_cheeger_bound()` (conductance, test
+  Rayleigh quotient, lambda_2 of the normalised Laplacian, exhaustive h_G on
+  small graphs); the test rebuilds every identity on random weighted graphs.
 
 ## P4. Predictive policing feedback: when does the loop run away?
 
@@ -293,6 +303,19 @@ biased is open.
   types and no period-2 effect, the arm that depletes the high-risk type
   less in period 1 shows a period-2 hazard ratio above one (Hernan &
   Robins Fine Point 17.2; library scan B15). R: `morie_hazard_selection()`.
+- Progress 2026-10-02 (separation, library scan A1): `Research.P5` in P5Separation.lean:
+  with labels as signs the logistic log-likelihood is a sum of strictly
+  increasing, negative terms (`ll1_strictMono`, `ll1_neg`); a completely
+  separating direction d makes loglik(b + t d) > loglik(b) for every b and t > 0
+  (`loglik_lt_shift`), quasi-complete separation likewise
+  (`loglik_lt_shift_quasi`), so no maximum-likelihood estimate exists
+  (`no_mle`, `no_mle_quasi`); the likelihood is bounded by 0 (`loglik_neg`) and
+  tends to 0 along d (`loglik_tendsto_zero`). The Baldus proportionality-review
+  logit that "would not converge" (Weisburd & Britt ch. 1) is this geometry, not
+  a specification problem. Albert-Anderson's converse (overlap => a finite MLE)
+  is not proved. R: `morie_logit_separation()` (exact linear programme through
+  lpSolve, glm heuristic otherwise; reports the direction, the margins and the
+  log-likelihood climbing along the direction).
 
 ## P6. The age-crime curve: invariant law or mixture artefact?
 
@@ -527,7 +550,16 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   B4). R: `morie_sentence_effect_mtr()`.
 - Open: monotone treatment selection (Manski sec. 9.3), Imbens-Manski confidence sets (B25); application to OTIS/CPADS
   custody-vs-community sentences and reconviction.
-
+- Progress 2026-10-02 (Imbens-Manski, library scan B25): `Research.P11` in P11Coverage.lean:
+  on a finite probability space P[H subset of C] <= P[theta in C] whenever theta
+  in H (`region_coverage_le`); for a strictly increasing CDF the coverage
+  F(c + Delta) - F(-c) is strictly increasing in c (`coverage_strictMono_c`), the
+  cutoff solving it is non-increasing in Delta (`im_cutoff_antitone`), lies
+  below the two-sided quantile with F(-c) <= alpha (`im_cutoff_between`), and the
+  two-sided quantile over-covers any region of positive width
+  (`two_sided_overcovers`). Existence of the cutoff is left to root finding. R:
+  `morie_bounds_confidence()`; the test checks the equation, the ordering of the
+  three cutoffs, monotonicity in Delta and the over-coverage on random bounds.
 
 ## P12. Ecological inference: when group-level correlations say anything about people
 
@@ -546,3 +578,29 @@ group-level correlation can differ in size and sign from the individual one.
 - Open: Duncan-Davis bounds for the individual proportion from group
   marginals (Manski sec. 5.1; library scan B22), and an application with
   PSDP/CPADS individual records against TPS neighbourhood aggregates.
+
+## P13. Pooling evaluations: when random effects say more than the sites did
+
+Hot-spots policing and other place-based evaluations are pooled across sites or
+studies (Weisburd & Britt ch. 11). The DerSimonian-Laird random-effects model
+estimates the between-site variance by a truncation, and a reader is told that
+"with homogeneity the random-effects result collapses to the fixed-effect one".
+
+- Estimand: the pooled effect and the between-site variance tau^2; what the
+  truncation does to both in a finite sample.
+- Progress 2026-10-02 (library scan A11): `Research.P13` (P13Meta.lean). On a
+  finite probability space E[max(X,0)] = E[X] + E[max(-X,0)] >= E[X]
+  (`truncation_bias`, `pos_part_ge`), and E[max(X,0)] > 0 as soon as one
+  outcome of positive probability has X > 0 (`pos_part_pos`): under homogeneity
+  E[Q] = k - 1 gives E[X] = 0 for X = (Q - (k-1))/c while Q > k - 1 keeps
+  positive probability, so E[tau2_DL] > 0 (`dl_biased_under_homogeneity`).
+  tau2_DL >= 0 and = 0 iff Q <= k - 1 (`tauDL_nonneg`, `tauDL_eq_zero_iff`).
+  For every tau^2 >= 0 the random-effects variance 1/sum 1/(v_i + tau^2) is at
+  least the fixed-effect variance 1/sum 1/v_i, with equality iff tau^2 = 0
+  (`re_var_ge`, `re_var_eq_iff`): the two methods coincide in a finite sample
+  only when the estimate happens to be truncated. R:
+  `morie_meta_random_effects()` (FE and DL-RE with the truncation flag and the
+  variance ratio) and `morie_meta_dl_bias()` (the size of the bias under
+  homogeneity by simulation on the shared Philox stream).
+- Open: REML and Hartung-Knapp-Sidik-Jonkman intervals; the chapter's hot-spots
+  effects as the worked example.

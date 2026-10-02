@@ -34,3 +34,7 @@ import Researchproofs.P8Comparative
 import Researchproofs.P2Interracial
 import Researchproofs.P8Necessity
 import Researchproofs.P2Collider
+import Researchproofs.P13Meta
+import Researchproofs.P5Separation
+import Researchproofs.P3Cheeger
+import Researchproofs.P11Coverage
