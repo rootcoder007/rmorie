@@ -285,7 +285,8 @@ morie_llm_request_completion <- function(base_url, model, messages,
     stop("morie_llm_request_completion requires httr2 and jsonlite.")
   }
   url <- paste0(base_url, "/v1/chat/completions")
-  payload <- list(model = model, messages = messages, stream = FALSE)
+  # reasoning models spend tokens thinking first: without room the answer is an empty content
+  payload <- list(model = model, messages = messages, stream = FALSE, max_tokens = 4096L)
   if (grepl("localhost|127\\.0\\.0\\.1", base_url)) {
     payload$max_tokens <- 4096L
     timeout <- max(timeout, 300)
