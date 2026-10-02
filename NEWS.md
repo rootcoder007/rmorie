@@ -1,5 +1,9 @@
 # rmorie 1.3.9 - 2026-10-01
 
+* The `causal-estimators` module runs again on the synthetic CPADS frame: its
+  AIPW line now lines the propensity rows up with the outcome rows by name
+  instead of predicting from a frame without the label covariates.
+
 * The hosted tier lists Cloudflare Workers AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf) beside the
   ollama.com ones, and falls back to them when a cloud model is rate
   limited; `rmorie ask --model gpt-oss-120b:cf` picks one.

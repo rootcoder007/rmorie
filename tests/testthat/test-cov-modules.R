@@ -88,9 +88,11 @@ make_raw_cpads <- function(n = 900L, seed = 202L) {
 
 .cov_run <- function(expr) {
   res <- tryCatch(suppressWarnings(expr), error = function(e) e)
-  testthat::expect_true(inherits(res, "error") || is.list(res) ||
-    is.data.frame(res) || is.numeric(res) ||
-    is.null(res))
+  # an error is a failure here: a runner that accepted errors hid a broken
+  # causal-estimators module for a whole release
+  testthat::expect_false(inherits(res, "error"),
+    info = if (inherits(res, "error")) conditionMessage(res) else "")
+  testthat::expect_true(is.list(res) || is.data.frame(res) || is.numeric(res) || is.null(res))
   res
 }
 

@@ -736,11 +736,18 @@
   ps <- prop_out$analysis_frame$ps
   y <- prop_out$analysis_frame$heavy_drinking_30d
   a <- prop_out$analysis_frame$cannabis_any_use
-  # everything for the AIPW line comes from the propensity module's analysis frame, so y, a, ps and
-  # the outcome predictions line up row by row
+  # The propensity frame is built from the numeric covariates and this module's frame from the
+  # labels, so the two keep different rows and the propensity frame has no label columns to predict
+  # from. Line the rows up by name (both frames keep the data's row names) and take the outcome
+  # predictions already made on this module's frame, so y, a, ps and mu match row by row.
   af <- prop_out$analysis_frame
-  mu1a <- stats::predict(out_model, newdata = transform(af, cannabis_any_use = 1), type = "response")
-  mu0a <- stats::predict(out_model, newdata = transform(af, cannabis_any_use = 0), type = "response")
+  at <- match(rownames(af), rownames(frame))
+  ok <- !is.na(at)
+  y <- y[ok]
+  a <- a[ok]
+  ps <- ps[ok]
+  mu1a <- unname(mu1[at[ok]])
+  mu0a <- unname(mu0[at[ok]])
   infl <- mu1a - mu0a + a * (y - mu1a) / ps - (1 - a) * (y - mu0a) / (1 - ps)
   aipw <- mean(infl)
   se_aipw <- stats::sd(infl) / sqrt(length(infl))  # influence-function standard error
