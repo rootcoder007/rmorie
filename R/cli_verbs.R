@@ -201,7 +201,7 @@
   mods <- flag("--modules")
   if (pipeline && !has("--all") && is.null(mods)) {
     out("usage: rmorie pipeline (--all | --modules a,b,...) [--cpads FILE | --dataset KEY] [--output-dir DIR] [--no-carbon]\n")
-    return(0L)
+    return(2L)
   }
   selected <- if (is.null(mods)) morie_module_names() else trimws(strsplit(mods, ",")[[1L]])
   od <- flag("--output-dir")

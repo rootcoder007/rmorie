@@ -22,7 +22,8 @@ tml_fluct <- function(Y, off, H) {
 }
 
 tml_linear <- function(y, D, W, gbound = 0.025) {
-  g <- stats::fitted(stats::glm(D ~ 0 + W, family = stats::binomial(), control = list(epsilon = 1e-14, maxit = 100)))
+  # the toy design separates a few points; the g-model is truncated at gbound for exactly that
+  g <- stats::fitted(suppressWarnings(stats::glm(D ~ 0 + W, family = stats::binomial(), control = list(epsilon = 1e-14, maxit = 100))))
   g <- pmin(pmax(g, gbound), 1 - gbound)
   qb <- stats::coef(stats::lm(y ~ 0 + D + W))
   Q1 <- as.numeric(cbind(1, W) %*% qb)

@@ -11,7 +11,8 @@ tml4_data <- function() {
 }
 
 tml4_glm <- function(f) {
-  stats::fitted(stats::glm(f, family = stats::binomial(), control = list(epsilon = 1e-14, maxit = 100)))
+  # the toy design separates a few points; the g-model is truncated at gbound for exactly that
+  stats::fitted(suppressWarnings(stats::glm(f, family = stats::binomial(), control = list(epsilon = 1e-14, maxit = 100))))
 }
 
 tml4_linear <- function(y, D, W) {

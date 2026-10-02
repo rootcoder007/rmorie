@@ -320,8 +320,11 @@ morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv()
 #' @param output_dir Optional directory for CSV outputs.
 #' @return Named list of module outputs.
 #' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' \donttest{
+#' out <- morie_run_morie_modules(c("descriptive-statistics", "power-design"),
+#'                                output_dir = tempfile("modules-"))
+#' names(out)
+#' }
 #' @export
 morie_run_morie_modules <- function(
   modules = morie_list_morie_modules()$name,

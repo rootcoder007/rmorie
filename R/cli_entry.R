@@ -162,6 +162,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       `run-module` = {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   (names: rmorie list-modules; keys: rmorie list-datasets)\n")
+          if (length(rest)) status <- 0L else status <- 2L
         } else {
           od <- flag("--output-dir") %||% file.path("morie-output", rest[[1L]])
           cp <- flag("--cpads")
@@ -213,6 +214,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           morie_llm_provider_show()
         } else {
           out("usage: rmorie provider set --base-url URL --key KEY [--model NAME] | show | unset\n")
+          status <- 2L
         }
       },
       explain = {

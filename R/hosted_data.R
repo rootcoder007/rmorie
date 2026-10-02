@@ -69,10 +69,12 @@
 #'   a data frame with \code{key}, \code{name}, \code{rows}, \code{source};
 #'   \code{morie_load_hosted_dataset()}: the table as a data frame.
 #' @examples
-#' \dontrun{
-#' morie_llm_login()
-#' head(morie_hosted_datasets())
-#' df <- morie_load_hosted_dataset("chicago_crime/incidents")
+#' \donttest{
+#' # with a stored MORIE key (rmorie login); without one this stops with that advice
+#' try({
+#'   head(morie_hosted_datasets())
+#'   df <- morie_load_hosted_dataset("fec_cm_2020/fec_cm_2020")
+#' })
 #' }
 #' @export
 morie_hosted_manifest <- function(refresh = FALSE) {

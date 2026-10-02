@@ -493,7 +493,3 @@ fit_tight <- morie_bayes_lm(y ~ x, d, prior_sd = 0.5)
 ```
 
 See the **bayesian-priors** vignette for applied guidance.
-
-## Smoke suite
-
-Every release is gated on a clean-user smoke suite that installs the built package into an empty home directory on Linux, macOS and Windows and runs every command for real, with live downloads and assertions, no mocks (`Rscript inst/smoke/smoke.R`; `.github/workflows/smoke.yml`). A verb without a smoke case fails the suite.

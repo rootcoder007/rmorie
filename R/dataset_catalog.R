@@ -105,14 +105,14 @@ morie_dataset_catalog <- function() {
       source = "oc", survey = "csus", year = "2019-2020",
       format = "csv", type = "pumf", large_file = FALSE,
       local_path = "data/datasets/oc/CSUS/2019-2020/CADS201920pumf.csv",
-      table_name = "cu20mf", ckan_resource_id = "", download_url = "https://www150.statcan.gc.ca/n1/pub/13-25-0005/2021001/CSV.zip", zip_member = "CADS201920pumf.csv"
+      table_name = "cu20mf", ckan_resource_id = "", download_url = "https://www150.statcan.gc.ca/n1/pub/13-25-0005/2021001/CSV.zip", zip_member = "CADS.csv"
     ),
     list(
       key = "cu20bt", name = "CSUS 2019-2020 Bootstrap",
       source = "oc", survey = "csus", year = "2019-2020",
       format = "csv", type = "bootstrap", large_file = TRUE,
       local_path = "data/datasets/oc/CSUS/2019-2020/CADS201920bsw.csv",
-      table_name = "cu20bt", ckan_resource_id = "", download_url = "https://www150.statcan.gc.ca/n1/pub/13-25-0005/2021001/CSV.zip", zip_member = "CADS201920bsw.csv"
+      table_name = "cu20bt", ckan_resource_id = "", download_url = "https://www150.statcan.gc.ca/n1/pub/13-25-0005/2021001/CSV.zip", zip_member = "CADS_bsw.csv"
     ),
     list(
       key = "cu23mf", name = "CSUS 2023 PUMF",

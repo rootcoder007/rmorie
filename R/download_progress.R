@@ -39,13 +39,13 @@
 }
 
 .morie_dl <- function(url, dest, headers = NULL, label = basename(dest),
-                      size = NULL, timeout = 3600, quiet = NULL) {
+                      size = NULL, timeout = 3600, quiet = NULL, tty = NULL) {
   if (is.null(quiet)) quiet <- .morie_dl_quiet()
   size <- suppressWarnings(as.numeric(if (is.null(size)) NA else size[[1L]]))
   if (!is.finite(size) || size <= 0) size <- NA_real_
   old <- options(timeout = max(getOption("timeout", 60), timeout))
   on.exit(options(old), add = TRUE)
-  tty <- isatty(stderr())
+  if (is.null(tty)) tty <- isatty(stderr())
   if (is.null(headers)) {
     con <- url(url, open = "rb")
   } else {
@@ -73,7 +73,8 @@
     if (quiet) next
     if (tty) {
       now <- proc.time()[["elapsed"]]
-      if (now - last < 0.1) next
+      # the first chunk draws at once, then ten frames a second
+      if (spin > 0L && now - last < 0.1) next
       last <- now
       spin <- spin + 1L
       line <- .morie_dl_line(label, got, size, t0, spin)

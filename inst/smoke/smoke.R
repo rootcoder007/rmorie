@@ -34,6 +34,12 @@ run <- function(...) {
   LAST$text <- paste(buf, collapse = "")
   list(status = st, text = LAST$text)
 }
+# the hosted tier answers 429 when every runner of every package asks at once on the shared key: wait and ask once more
+run_llm <- function(...) {
+  r <- run(...)
+  if (r$status != 0 && grepl("429", r$text, fixed = TRUE)) { Sys.sleep(45); r <- run(...) }
+  r
+}
 results <- list()
 check <- function(cond, what) if (!isTRUE(cond)) stop(what, call. = FALSE)
 case <- function(verb, fn) results[[length(results) + 1L]] <<- list(verb = verb, fn = fn)
@@ -54,10 +60,10 @@ case("provider", function() {
   check(grepl("Your endpoint", run("models")$text), "models does not list the endpoint")
   check(run("provider", "unset")$status == 0, "provider unset")
 })
-case("ask", function() { r <- run("ask", "What does the power-design module compute?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text) })
-case("percy", function() { r <- run("percy", "Which module compares two groups?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text) })
-case("perseus", function() { r <- run("perseus", "hello"); check(r$status == 0, r$text) })
-case("agent", function() { r <- run("agent", "hello"); check(r$status == 0, r$text) })
+case("ask", function() { r <- run_llm("ask", "What does the power-design module compute?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text) })
+case("percy", function() { r <- run_llm("percy", "Which module compares two groups?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text) })
+case("perseus", function() { r <- run_llm("perseus", "hello"); check(r$status == 0, r$text) })
+case("agent", function() { r <- run_llm("agent", "hello"); check(r$status == 0, r$text) })
 case("chat", function() {
   con <- textConnection("/quit"); on.exit(close(con))
   testthat::local_mocked_bindings(.cli_readline = function(prompt) "/quit", .package = pkg)

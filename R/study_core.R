@@ -529,7 +529,6 @@
     c("heavy_drinking_30d", "cannabis_any_use", "age_group_label", "gender_label", "province_region_label", "mental_health_label", "physical_health_label", "weight")
   )
   base_formula <- heavy_drinking_30d ~ cannabis_any_use + age_group_label + gender_label + province_region_label + mental_health_label + physical_health_label
-  fit <- stats::glm(base_formula, data = frame, family = stats::binomial(), weights = weight)
   fit_int <- stats::glm(update(base_formula, . ~ . + cannabis_any_use:gender_label), data = frame, family = stats::quasibinomial(), weights = weight)
   fit <- stats::glm(base_formula, data = frame, family = stats::quasibinomial(), weights = weight)
   interaction_anova <- stats::anova(fit, fit_int, test = "Chisq")
@@ -589,7 +588,9 @@
     list("Model 3", "+ Cannabis + Physical Health", heavy_drinking_30d ~ age_group_label + gender_label + province_region_label + mental_health_label + cannabis_any_use + physical_health_label),
     list("Model 4", "+ Cannabis x Gender interaction", heavy_drinking_30d ~ age_group_label + gender_label + province_region_label + mental_health_label + cannabis_any_use + physical_health_label + cannabis_any_use:gender_label)
   )
-  fits <- lapply(formulas, function(item) stats::glm(item[[3]], data = frame, family = stats::binomial(), weights = weight))
+  # binomial (for AIC) on survey-weighted counts: R warns about non-integer successes on every fit,
+  # which is expected here (the weights are design weights), so the warning is folded into the table note
+  fits <- lapply(formulas, function(item) suppressWarnings(stats::glm(item[[3]], data = frame, family = stats::binomial(), weights = weight)))
   null_dev <- fits[[1]]$deviance
   summary_tbl <- do.call(rbind, lapply(seq_along(fits), function(i) {
     fit <- fits[[i]]

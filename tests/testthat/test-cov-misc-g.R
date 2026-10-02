@@ -9,7 +9,7 @@
 test_that("Farsig recomputes the Farrington threshold", {
   per <- 10
   n <- 34
-  y <- round(20 + 6 * sin(2 * pi * (0:(n - 1)) / per) + c(3, -2, 4, 0, -1, 5, -3, 2, 1, -4))
+  y <- round(20 + 6 * sin(2 * pi * (0:(n - 1)) / per) + rep_len(c(3, -2, 4, 0, -1, 5, -3, 2, 1, -4), n))
   y[n] <- 45
   t0 <- n - 1
   idx <- sort(unique(unlist(lapply(1:3, function(j) (t0 - j * per) + (-2:2)))))
@@ -18,9 +18,11 @@ test_that("Farsig recomputes the Farrington threshold", {
   tt <- idx - t0
   ref <- function(trend, reweight) {
     fitw <- function(om) {
+      # IRLS reaches machine precision here and reports "not converged" at epsilon 1e-15 while the
+      # coefficients are stable to 1e-12; the reference compares at 1e-9
       ctl <- glm.control(epsilon = 1e-15, maxit = 200)
-      f <- if (trend) glm(yb ~ tt, family = quasipoisson, weights = om, control = ctl) else
-        glm(yb ~ 1, family = quasipoisson, weights = om, control = ctl)
+      f <- suppressWarnings(if (trend) glm(yb ~ tt, family = quasipoisson, weights = om, control = ctl) else
+        glm(yb ~ 1, family = quasipoisson, weights = om, control = ctl))
       raw <- sum(om * (yb - fitted(f))^2 / fitted(f)) / f$df.residual
       list(f = f, raw = raw, phi = max(raw, 1))
     }

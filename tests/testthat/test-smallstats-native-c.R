@@ -112,12 +112,16 @@ test_that("StatCan WDS client parses a mocked full-table response", {
     },
     .package = "base"
   )
+  # the table zip goes through the package's own download routine (.morie_dl); mock it there
   testthat::local_mocked_bindings(
-    download.file = function(url, destfile, ...) {
+    .morie_dl = function(url, dest, ...) {
       expect_match(url, "35100026-eng\\.zip")
-      file.create(destfile)
-      0L
+      file.create(dest)
+      invisible(dest)
     },
+    .package = if (isNamespaceLoaded("rmorie")) "rmorie" else "morie"
+  )
+  testthat::local_mocked_bindings(
     unzip = function(zipfile, exdir, ...) c(fixture_csv, meta_csv),
     .package = "utils"
   )

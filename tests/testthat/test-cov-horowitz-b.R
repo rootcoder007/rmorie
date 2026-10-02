@@ -80,7 +80,7 @@ test_that("Hrzph is Cox's partial likelihood with the exp(-x b) sign convention"
   ev <- rbinom(n, 1, 0.8)
   r <- Hrzph(t, X, event = ev)
   f <- survival::coxph(survival::Surv(t, ev) ~ X, ties = "breslow",
-                       control = survival::coxph.control(eps = 1e-14, iter.max = 100))
+                       control = survival::coxph.control(eps = 1e-14, toler.chol = 1e-16, iter.max = 100))
   expect_equal(r$beta_hat, -unname(coef(f)), tolerance = 1e-8)
   expect_equal(r$se, unname(sqrt(diag(vcov(f)))), tolerance = 1e-7)
   et <- sort(t[ev == 1])

@@ -952,7 +952,8 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
 
   stop("Dataset '", matched, "' not found locally, in cache, via CKAN, ",
     "via a direct download URL, or via an ArcGIS layer.\n",
-    "Run: Rscript data-raw/ingest_datasets.R --only ", matched,
+    "Health Infobase and the other own-file keys are not downloadable: place the file at ",
+    "$MORIE_DATA_DIR/", entry$local_path, " (rmorie list-datasets shows every path) for ", matched,
     call. = FALSE
   )
 }
@@ -1053,8 +1054,8 @@ morie_userguide <- function(name = NULL) {
 #' @return Invisibly, the number of CSV files successfully downloaded.
 #' @examples
 #' \donttest{
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' # the CSADS 2021 bootstrap weights (376 MB), cached for later survey work
+#' morie_download_bootstrap(survey = "csads_2021")
 #' }
 #' @export
 morie_download_bootstrap <- function(survey = "all", limit = 32000L,

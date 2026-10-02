@@ -56,7 +56,8 @@ test_that("morie_gate runs AIPW inside each group and skips constant-treatment g
   df2 <- rbind(df, data.frame(x = 0, g = "c", t = 1, y = 1, ps = 0.5))
   expect_warning(r2 <- morie_gate(df2, "t", "y", "x", "g", propensity_col = "ps"), "no variation")
   expect_equal(r2$group, c("a", "b"))
-  expect_equal(nrow(morie_gate(df2[df2$g == "c", ], "t", "y", "x", "g")), 0L)
+  expect_warning(r3 <- morie_gate(df2[df2$g == "c", ], "t", "y", "x", "g"), "no variation")
+  expect_equal(nrow(r3), 0L)
 })
 
 test_that("Gblupeq and Gblupr reproduce the Cholesky identity and Henderson's equations", {

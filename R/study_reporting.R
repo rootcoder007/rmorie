@@ -619,7 +619,8 @@
     "20212022-cpads-pumf-user-guide.pdf"
   ))
   audit_tbl <- data.frame(
-    check_name = c("outputs_present", "user_guide_reference_present", "cpads_required_variables_present"),
+    check_name = c("outputs_present (run `rmorie run-modules --output-dir DIR` first, then final-report into the same DIR)",
+                   "user_guide_reference_present", "cpads_required_variables_present"),
     value = c(length(output_files), user_guide_present, all(morie_cpads_contract()$required_variables %in% names(data))),
     pass = c(length(output_files) > 0, user_guide_present, all(morie_cpads_contract()$required_variables %in% names(data))),
     stringsAsFactors = FALSE

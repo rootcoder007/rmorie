@@ -24,6 +24,9 @@ Named list of module outputs.
 Run multiple implemented MORIE modules
 }
 \examples{
-# See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
+\donttest{
+out <- morie_run_morie_modules(c("descriptive-statistics", "power-design"),
+                               output_dir = tempfile("modules-"))
+names(out)
+}
 }

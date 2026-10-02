@@ -84,7 +84,7 @@ test_that("Ghosalcoxbvm matches survival::coxph", {
   ev <- c(1, 1, 1, 0, 1, 1, 0, 1, 1, 1)
   r <- Ghosalcoxbvm(X, time = tm, event = ev)
   cf <- survival::coxph(survival::Surv(tm, ev) ~ X, ties = "breslow",
-                        control = survival::coxph.control(eps = 1e-14, iter.max = 100))
+                        control = survival::coxph.control(eps = 1e-14, toler.chol = 1e-16, iter.max = 100))
   expect_equal(r$beta, unname(coef(cf)), tolerance = 1e-8)
   expect_equal(r$se, unname(sqrt(diag(vcov(cf)))), tolerance = 1e-8)
   expect_equal(r$posterior_normal, dnorm(r$beta_grid, r$beta[1], r$se[1]), tolerance = 1e-12)

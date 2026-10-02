@@ -10,7 +10,7 @@ morie_matching_nearest_neighbor(
   covariates,
   n_neighbors = 1L,
   caliper = NULL,
-  replace = NULL,
+  replace = FALSE,
   ps = NULL,
   alpha = 0.05
 )
@@ -28,10 +28,10 @@ morie_matching_nearest_neighbor(
 \item{caliper}{Maximum logit-propensity distance for a valid match,
 expressed in SD units of the logit (or \code{NULL} for no caliper).}
 
-\item{replace}{If \code{TRUE}, controls may be re-used. \code{NULL} (the
-default) re-uses controls only when there are fewer controls than
-treated units, where 1:1 matching without replacement would leave
-treated units unmatched and bias the ATT. \code{NULL} (the
+\item{replace}{If \code{TRUE}, controls may be re-used. The default
+\code{FALSE} matches MatchIt; with fewer controls than treated units it
+leaves treated units unmatched (a warning says so) and the ATT then
+describes the matchable subset: pass \code{TRUE} in that case. \code{NULL} (the
 default) re-uses controls only when there are fewer controls than
 treated units, where 1:1 matching without replacement would leave
 treated units unmatched and bias the ATT. \code{NULL} (the

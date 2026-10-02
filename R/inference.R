@@ -783,7 +783,8 @@ morie_cohens_d <- function(x1, x2, pooled = TRUE) {
 #' @export
 morie_cramers_v <- function(contingency_table) {
   m <- as.matrix(contingency_table)
-  result <- stats::chisq.test(m, correct = FALSE)
+  # the statistic alone enters V; the small-expected-count warning concerns the p-value
+  result <- suppressWarnings(stats::chisq.test(m, correct = FALSE))
   chi2 <- as.numeric(result$statistic)
   n <- sum(m)
   k <- min(nrow(m), ncol(m))

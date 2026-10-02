@@ -30,7 +30,7 @@ package. Data is cached in the user cache database for future use.
 }
 \examples{
 \donttest{
-# See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
+# the CSADS 2021 bootstrap weights (376 MB), cached for later survey work
+morie_download_bootstrap(survey = "csads_2021")
 }
 }
