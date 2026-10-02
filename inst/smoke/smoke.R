@@ -53,7 +53,12 @@ case("list-datasets", function() {
 case("cheatsheet", function() { r <- run("cheatsheet"); check(r$status == 0 && grepl("provider set", r$text), r$text) })
 case("explain", function() { r <- run("explain", "power_two_proportion_gender.csv"); check(r$status == 0 && grepl("effect_size", r$text), r$text) })
 case("doctor", function() { r <- run("doctor"); check(r$status == 0 && nzchar(r$text), r$text) })
-case("models", function() { r <- run("models"); check(r$status == 0, r$text); if (!nzchar(key)) check(grepl("login", r$text, ignore.case = TRUE), "no key: models must point at login") })
+case("models", function() {
+  r <- run("models"); check(r$status == 0, r$text)
+  if (!nzchar(key)) check(grepl("login", r$text, ignore.case = TRUE), "no key: models must point at login")
+  # the gateway serves Cloudflare Workers AI models beside the ollama.com ones
+  if (nzchar(key)) check(grepl(":cf", r$text, fixed = TRUE), paste("no Workers AI model listed:", r$text))
+})
 case("provider", function() {
   check(run("provider", "set", "--base-url", "https://api.example.org/v1/", "--key", "sk-smoke-1234567", "--model", "demo")$status == 0, "provider set")
   r <- run("provider", "show"); check(grepl("api.example.org/v1", r$text) && !grepl("sk-smoke-1234567", r$text), r$text)
@@ -61,6 +66,10 @@ case("provider", function() {
   check(run("provider", "unset")$status == 0, "provider unset")
 })
 case("ask", function() { r <- run_llm("ask", "What does the power-design module compute?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text) })
+case("ask-workers-ai", function() {
+  r <- run_llm("ask", "--model", "gpt-oss-120b:cf", "Reply with the single word pong.")
+  if (nzchar(key)) check(r$status == 0 && nzchar(trimws(r$text)), r$text) else check(r$status != 0, "no key: ask must not claim an answer")
+})
 case("percy", function() { r <- run_llm("percy", "Which module compares two groups?"); check(r$status == 0 && nzchar(trimws(r$text)), r$text) })
 case("perseus", function() { r <- run_llm("perseus", "hello"); check(r$status == 0, r$text) })
 case("agent", function() { r <- run_llm("agent", "hello"); check(r$status == 0, r$text) })
