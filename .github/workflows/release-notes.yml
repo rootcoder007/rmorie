@@ -2,7 +2,8 @@
 #
 # Publish the GitHub release for a version tag, with the notes taken from the
 # release-notes file (the section whose heading carries the tag's version).
-# Idempotent: a release that already exists for the tag is left alone.
+# A release that already exists for the tag is updated (title and notes), so a moved tag
+# keeps one release. Notes are unwrapped: one bullet per line.
 name: release-notes
 
 on:
@@ -23,23 +24,51 @@ jobs:
           TITLE_PREFIX: rmorie
         run: |
           v="${GITHUB_REF_NAME#v}"
-          # the section starting at the heading that names this version, up to the next heading of the same level
-          awk -v v="$v" '
-            /^#+ / { if (on) exit; if (index($0, v)) { on = 1; next } }
-            on { print }
-          ' "$NOTES_FILE" > notes.md
+          # The section whose heading names this version, up to the next heading of the
+          # same level. Hard-wrapped lines are joined: GitHub renders a line break at every
+          # wrap, so a body pasted verbatim reads as one line every few words.
+          python3 - "$NOTES_FILE" "$v" > notes.md <<'PY'
+          import re, sys, pathlib
+          path, v = sys.argv[1], sys.argv[2]
+          text = pathlib.Path(path).read_text(encoding="utf-8").splitlines()
+          start = next((i for i, l in enumerate(text) if re.match(r"^#+ ", l) and v in l), None)
+          if start is None:
+              sys.exit(0)
+          lvl = len(re.match(r"^#+", text[start]).group(0))
+          end = next((i for i in range(start + 1, len(text)) if re.match(r"^#{1,%d} " % lvl, text[i])), len(text))
+          out, cur = [], None
+          for line in text[start + 1:end]:
+              if re.match(r"^\s*[*-] ", line):
+                  if cur: out.append(cur)
+                  cur = re.sub(r"^\s*[*-] ", "* ", line.rstrip())
+              elif line.strip() == "":
+                  if cur: out.append(cur); cur = None
+                  if out and out[-1] != "": out.append("")
+              elif re.match(r"^#+ ", line):
+                  if cur: out.append(cur); cur = None
+                  out.append("**" + re.sub(r"^#+ ", "", line.strip()) + "**")
+              elif cur is not None:
+                  cur += " " + line.strip()
+              else:
+                  out.append(line.strip())
+          if cur: out.append(cur)
+          while out and out[-1] == "": out.pop()
+          print("\n".join(out))
+          PY
           if [ ! -s notes.md ]; then
             echo "no section for $v in $NOTES_FILE" >&2
             printf 'Release %s.\n' "$v" > notes.md
           fi
           echo "VERSION=$v" >> "$GITHUB_ENV"
-      - name: Create the release if it does not exist
+      - name: Create or update the release
         env:
           GH_TOKEN: ${{ github.token }}
           TITLE_PREFIX: rmorie
         run: |
           if gh release view "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
-            echo "release $GITHUB_REF_NAME already exists; nothing to do"
+            # the tag was moved: the release follows it, with the notes rebuilt from the file
+            gh release edit "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
+              --title "$TITLE_PREFIX $VERSION" --notes-file notes.md --draft=false --latest
           else
             gh release create "$GITHUB_REF_NAME" --repo "$GITHUB_REPOSITORY" \
               --title "$TITLE_PREFIX $VERSION" --notes-file notes.md --latest
