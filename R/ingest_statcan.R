@@ -362,7 +362,7 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
   }
   tmp_zip <- tempfile(fileext = ".zip")
   on.exit(unlink(tmp_zip), add = TRUE)
-  utils::download.file(zip_url, tmp_zip, mode = "wb", quiet = TRUE)
+  .morie_dl(zip_url, tmp_zip, label = paste0("StatCan table ", pid))
   exdir <- tempfile("statcan_wds_")
   on.exit(unlink(exdir, recursive = TRUE), add = TRUE)
   files <- utils::unzip(tmp_zip, exdir = exdir)

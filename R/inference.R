@@ -98,17 +98,22 @@ morie_paired_t_test <- function(x1, x2,
 #'
 #' @param observed Observed counts (matrix for independence, vector for GOF).
 #' @param expected Expected counts for GOF (optional; uniform if NULL).
+#' @param correct Apply Yates' continuity correction to a 2 x 2 table
+#'   (\code{TRUE}, the \code{stats::chisq.test} default). \code{FALSE}
+#'   gives the plain Pearson statistic. Cramer's V always uses the
+#'   uncorrected statistic.
 #' @return Named list: `chi_sq`, `df`, `p_value`, `cramers_v`.
 #' @examples
-#' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' tab <- matrix(c(30, 10, 15, 25), 2)
+#' morie_chi_square_test(tab)$chi_sq                   # Yates-corrected, as chisq.test()
+#' morie_chi_square_test(tab, correct = FALSE)$chi_sq  # Pearson: 11.43
 #' @export
-morie_chi_square_test <- function(observed, expected = NULL) {
+morie_chi_square_test <- function(observed, expected = NULL, correct = TRUE) {
   if (is.matrix(observed) || is.data.frame(observed)) {
     m <- as.matrix(observed)
-    result <- stats::chisq.test(m)
-    # Cramer's V, inlined (was morie_cramers_v).
-    chi2 <- as.numeric(result$statistic)
+    result <- stats::chisq.test(m, correct = correct)
+    # Cramer's V from the uncorrected (Pearson) statistic
+    chi2 <- as.numeric(suppressWarnings(stats::chisq.test(m, correct = FALSE))$statistic)
     n_tot <- sum(m)
     k <- min(nrow(m), ncol(m))
     v <- sqrt(chi2 / (n_tot * (k - 1)))

@@ -17,17 +17,27 @@
 
 #' Internal helper: GET a path from data.rmorie.com with the stored key
 #' @noRd
-.morie_data_get <- function(path, dest, timeout = 600) {
+.morie_data_get <- function(path, dest, timeout = 600, size = NULL) {
   key <- .morie_llm_hosted_key()
   if (is.null(key)) {
     stop("data.rmorie.com needs your MORIE key: run `rmorie login` (R: morie_llm_login()) once.", call. = FALSE)
   }
-  old <- options(timeout = max(timeout, getOption("timeout", 60)))
-  on.exit(options(old), add = TRUE)
+  label <- sub("^/", "", path)
+  if (is.null(size) && grepl("\\.csv\\.gz$", path)) {
+    # the manifest knows the compressed size: a percent bar instead of a spinner
+    label <- sub("\\.csv\\.gz$", "", label)
+    m <- tryCatch(morie_hosted_manifest(), error = function(e) NULL)
+    for (d in m$datasets %||% list()) {
+      if (identical(d$key, label)) {
+        size <- d$bytes_gz
+        break
+      }
+    }
+  }
   rc <- tryCatch(
-    utils::download.file(paste0(.morie_data_url(), path), dest, mode = "wb", quiet = TRUE,
-                         headers = c(Authorization = paste("Bearer", key),
-                                     "User-Agent" = "rmorie/1 (+https://rmorie.com)")),
+    .morie_dl(paste0(.morie_data_url(), path), dest, label = label, size = size, timeout = timeout,
+              headers = c(Authorization = paste("Bearer", key),
+                          "User-Agent" = "rmorie/1 (+https://rmorie.com)")),
     error = function(e) e, warning = function(w) w)
   if (inherits(rc, "condition")) {
     msg <- conditionMessage(rc)

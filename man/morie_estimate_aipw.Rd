@@ -10,7 +10,7 @@ morie_estimate_aipw(
   outcome,
   covariates,
   propensity_col = NULL,
-  outcome_model = c("linear", "logistic"),
+  outcome_model = c("auto", "linear", "logistic"),
   trim = c(0.01, 0.99),
   trim_type = "value",
   ps_model = "mle",
@@ -29,7 +29,7 @@ morie_estimate_aipw(
 
 \item{propensity_col}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or
+\item{outcome_model}{Family for the outcome model: \code{"auto"} (logistic for a 0/1 outcome, linear otherwise), \code{"linear"} or
 \code{"logistic"}.}
 
 \item{trim}{Passed to \code{.mor_trim_ps}. Defaults to \code{c(0.01, 0.99)}.}
@@ -61,6 +61,7 @@ nuisance learners) is the canonical CRAN counterpart.
 \examples{
 set.seed(1)
 df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
-morie_estimate_aipw(df, "t", "y", "x", outcome_model = "linear")
+df$y <- 2 * df$t + df$x + rnorm(60)
+morie_estimate_aipw(df, "t", "y", "x")   # outcome_model = "auto" picks linear here
 }
 \keyword{internal}

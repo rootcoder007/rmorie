@@ -47,10 +47,22 @@
 #' morie_cli(c("ask", "--help"))
 #' @export
 morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
+  old_progress <- options(morie.progress = TRUE)  # a person is watching: downloads draw their bar
+  on.exit(options(old_progress), add = TRUE)
   args <- as.character(args)
+  if (length(args) && identical(args[[1L]], "--args")) args <- args[-1L]  # R >= 4.6 keeps the separator
+  if (!nzchar(Sys.getenv("MORIE_CACHE_DB", ""))) {
+    # The command line is an explicit user action: what `rmorie pull` fetches is kept
+    # under the user cache directory so later runs (modules, pipeline, selftest) use it.
+    Sys.setenv(MORIE_CACHE_DB = .morie_cli_cache_db())
+    on.exit(Sys.unsetenv("MORIE_CACHE_DB"), add = TRUE)
+  }
   verb <- if (length(args)) args[[1L]] else "help"
   rest <- args[-1L]
   pkg <- utils::packageName()
+  if (!verb %in% c("help", "--help", "-h") && any(rest %in% c("--help", "-h"))) {
+    return(.cli_verb_help(verb, out))  # `VERB --help` describes the verb; it never runs it
+  }
   flag <- function(name) {
     i <- match(name, rest)
     if (is.na(i)) return(NULL)
@@ -65,7 +77,12 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         if (has("--token")) {
           tok <- if (match("--token", rest) < length(rest)) rest[[match("--token", rest) + 1L]] else ""
           if (!nzchar(tok)) tok <- trimws(readline("Paste your MORIE key: "))
-          morie_llm_login(token = tok)
+          if (!isTRUE(.morie_llm_probe_token(tok))) {
+            out("the gateway did not accept that key; nothing stored (rmorie login mints one)\n")
+            status <- 1L
+          } else {
+            morie_llm_login(token = tok)
+          }
         } else {
           key <- morie_llm_login(open_browser = !has("--no-browser") && interactive(),
                                  email = flag("--email"), code = flag("--code"),
@@ -80,6 +97,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
             .morie_llm_ollama_base()),
           c("Hosted LLM", if (is.null(.morie_llm_hosted_key())) "not logged in -- rmorie login"
                           else if (morie_llm_probe_hosted()) "logged in, gateway answering"
+                          else if (.morie_llm_hosted_rejected()) "key rejected by the gateway -- rmorie login again"
                           else "logged in, gateway not reachable",
             if (!is.null(.morie_llm_hosted_key()) && morie_llm_probe_hosted()) {
               hm <- morie_llm_hosted_models()
@@ -122,7 +140,20 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie ask [--model NAME] PROMPT...\n")
         } else {
-          out(paste0(morie_llm_ask(paste(rest, collapse = " "), model = mdl), "\n"))
+          provider <- morie_llm_detect_provider()
+          if (identical(provider, "local")) {
+            out(paste0(.morie_llm_local_fallback(paste(rest, collapse = " ")), "\n"))
+            out("no LLM backend was reachable; this is the local fallback text (rmorie login, or start Ollama)\n")
+            status <- 1L
+          } else {
+            ans <- morie_llm_ask(paste(rest, collapse = " "), model = mdl, provider = provider)
+            out(paste0(ans, "\n"))
+            if (identical(ans, .morie_llm_local_fallback(paste(rest, collapse = " ")))) {
+              out(if (!is.null(mdl)) sprintf("no provider answered for model '%s' (rmorie models lists the names)\n", mdl)
+                  else "the providers were reachable but none answered; this is the local fallback text\n")
+              status <- 1L
+            }
+          }
         }
       },
       `list-modules` = {
@@ -132,13 +163,14 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   (names: rmorie list-modules; keys: rmorie list-datasets)\n")
         } else {
-          od <- flag("--output-dir")
+          od <- flag("--output-dir") %||% file.path("morie-output", rest[[1L]])
           cp <- flag("--cpads")
           if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
           res <- if (is.null(cp)) morie_run_morie_module(rest[[1L]], output_dir = od)
                  else morie_run_morie_module(rest[[1L]], cpads_csv = cp, output_dir = od)
           out(sprintf("Completed module: %s\n", rest[[1L]]))
           if (is.list(res) && length(names(res))) out(sprintf("Generated tables: %s\n", paste(names(res), collapse = ", ")))
+          out(sprintf("Written to %s (%d files)\n", od, length(list.files(od))))
         }
       },
       `list-datasets` = {
@@ -254,6 +286,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         if (!length(rest)) stop("usage: rmorie analyze SUBJECT [JSON]", call. = FALSE)
         res <- cli_main(rest[[1L]], if (length(rest) > 1L) rest[[2L]] else "{}")
         if (is.character(res)) out(paste0(res, "\n"))
+        if (is.character(res) && grepl("\"status\"\\s*:\\s*\"error\"", res)) status <- 1L
       },
       version = out(sprintf("%s %s\n", pkg, as.character(utils::packageVersion(pkg)))),
       help = ,

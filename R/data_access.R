@@ -92,7 +92,7 @@
   tmp <- tempfile(fileext = if (nzchar(ext)) paste0(".", ext) else "")
   ok <- tryCatch(
     {
-      utils::download.file(url, tmp, mode = "wb", quiet = TRUE)
+      .morie_dl(url, tmp, label = basename(sub("\\?.*$", "", url)))
       TRUE
     },
     error = function(e) FALSE
@@ -106,7 +106,7 @@
         call. = FALSE
       )
     }
-    utils::download.file(wb, tmp, mode = "wb", quiet = TRUE)
+    .morie_dl(wb, tmp, label = paste0(basename(sub("\\?.*$", "", url)), " (Wayback)"))
   }
   tmp
 }
@@ -246,7 +246,7 @@
 #'   extract (matched by basename, then by substring).
 #' @param simplify For \code{json}/\code{xml}/\code{html}, whether to
 #'   simplify into a data.frame where possible (default \code{TRUE}).
-#' @param ... Passed to the underlying reader (e.g. \code{\link{read.csv}}
+#' @param ... Passed to the underlying reader (e.g. \code{\link[utils]{read.csv}}
 #'   arguments, or \code{\link{morie_fetch_arcgis}} arguments).
 #' @return A data.frame for tabular formats; a list or document object
 #'   for non-tabular \code{json}/\code{xml}/\code{html}.

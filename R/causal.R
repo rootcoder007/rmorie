@@ -820,7 +820,7 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' nuisance learners) is the canonical CRAN counterpart.
 #'
 #' @inheritParams morie_estimate_ate
-#' @param outcome_model Family for the outcome model: `"linear"` or
+#' @param outcome_model Family for the outcome model: `"auto"` (logistic for a 0/1 outcome, linear otherwise), `"linear"` or
 #'   `"logistic"`.
 #' @param data A vector; indexed elementwise.
 #' @param treatment Passed to \code{morie_estimate_propensity_scores}.
@@ -836,20 +836,33 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' @examples
 #' set.seed(1)
 #' df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
-#' morie_estimate_aipw(df, "t", "y", "x", outcome_model = "linear")
+#' df$y <- 2 * df$t + df$x + rnorm(60)
+#' morie_estimate_aipw(df, "t", "y", "x")   # outcome_model = "auto" picks linear here
 #' @export
 #' @keywords internal
 morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
-                                outcome_model = c("linear", "logistic"),
+                                outcome_model = c("auto", "linear", "logistic"),
                                 trim = c(0.01, 0.99),
                                 trim_type = "value",
                                 ps_model = "mle",
                                 ridge_lambda = 1,
                                 outcome_fit = "separate") {
   outcome_model <- match.arg(outcome_model)
+  if (identical(outcome_model, "auto")) {
+    # binary outcome: logistic; anything else: linear (the Python arm makes the same choice)
+    yv <- as.numeric(data[[outcome]])
+    outcome_model <- if (all(yv[!is.na(yv)] %in% c(0, 1))) "logistic" else "linear"
+  }
+  for (col in c(treatment, outcome, covariates)) {
+    if (!col %in% names(data)) stop(sprintf("column '%s' is not in the data", col), call. = FALSE)
+    if (anyNA(data[[col]])) stop(sprintf("column '%s' has missing values; drop or impute them first", col), call. = FALSE)
+  }
+  if (nrow(data) < 4L) stop("at least 4 rows are needed", call. = FALSE)
   t <- as.numeric(data[[treatment]])
   y <- as.numeric(data[[outcome]])
+  if (!all(t %in% c(0, 1))) stop("treatment must be coded 0/1", call. = FALSE)
+  if (length(unique(t)) < 2L) stop("both treated and control units are needed", call. = FALSE)
   ps <- if (!is.null(propensity_col)) {
     .mor_trim_ps(data[[propensity_col]], trim, trim_type)
   } else {
@@ -1214,6 +1227,18 @@ morie_estimate_late <- function(data, treatment, outcome, instrument,
 #' @examples
 #' morie_e_value(rr = 3.9, rr_lower = 2.4)
 morie_e_value <- function(rr, rr_lower = NULL) {
+  if (!is.numeric(rr) || length(rr) != 1L || is.na(rr) || rr <= 0) {
+    stop("rr must be a single positive risk ratio", call. = FALSE)
+  }
+  if (!is.null(rr_lower) && (!is.numeric(rr_lower) || is.na(rr_lower) || rr_lower <= 0)) {
+    stop("rr_lower must be a positive risk ratio", call. = FALSE)
+  }
+  if (!is.numeric(rr) || length(rr) != 1L || is.na(rr) || rr <= 0) {
+    stop("rr must be a single positive risk ratio", call. = FALSE)
+  }
+  if (!is.null(rr_lower) && (!is.numeric(rr_lower) || is.na(rr_lower) || rr_lower <= 0)) {
+    stop("rr_lower must be a positive risk ratio", call. = FALSE)
+  }
   # Module 26: the Ding-VanderWeele closed form is exact; a CI bound
   # whose interval covers 1 has E-value 1 (no confounding needed).
   compute_e <- function(r) {

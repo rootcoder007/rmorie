@@ -12,6 +12,8 @@
 # atomic vectors" on its own defaults and could not run at all.
 
 # state-major nested lists, the shapes this module takes
+skip_on_runiverse()  # the slowest files stay inside the r-universe build cap
+
 mdp <- function() {
   S <- 4L; A <- 2L
   list(

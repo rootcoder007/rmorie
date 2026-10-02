@@ -1,3 +1,5 @@
+skip_on_runiverse()  # the slowest files stay inside the r-universe build cap
+
 panel_data <- function() {
   U <- .morie_random_uniform(2000, seed = 6, stream = 0)
   Z <- .morie_random_normal(2000, seed = 6, stream = 1)

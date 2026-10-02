@@ -183,6 +183,8 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #' @param attempt_wayback Logical or \code{NULL}; whether to fall back to the
 #'   Wayback snapshot when the live fetch fails (passed through to bricklayer;
 #'   \code{NULL} uses the bricklayer default).
+#' @param label,size Shown by the progress bar: a short name for the file and its
+#'   expected size in bytes when known (a percent bar instead of a spinner).
 #' @return The downloaded path, per \code{rmoriebricklayer::friendly_download()}.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_wayback_url}}
 #' @examples
@@ -195,7 +197,8 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #' )
 #' }
 #' @export
-morie_download <- function(url, target_path, attempt_wayback = NULL) {
+morie_download <- function(url, target_path, attempt_wayback = NULL,
+                           label = basename(target_path), size = NULL) {
   if (!requireNamespace("rmoriebricklayer", quietly = TRUE)) {
     stop("rmoriebricklayer is required for morie_download(); run morie_bricklayer().",
       call. = FALSE
@@ -205,6 +208,11 @@ morie_download <- function(url, target_path, attempt_wayback = NULL) {
   # which truncated downloads mid-way (2026-10-01, cu23bt at 415 of 612 MB)
   old <- options(timeout = max(getOption("timeout", 60), 3600))
   on.exit(options(old), add = TRUE)
+  # the package's own transfer first (live bar, or silent under options(morie.quiet = TRUE));
+  # on any failure the bricklayer route explains and tries the Wayback Machine
+  ok <- tryCatch({ .morie_dl(url, target_path, label = label, size = size); TRUE },
+                 error = function(e) FALSE, warning = function(w) FALSE)
+  if (ok) return(invisible(target_path))
   rmoriebricklayer::friendly_download(url, target_path,
     attempt_wayback = attempt_wayback
   )

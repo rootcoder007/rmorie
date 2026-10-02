@@ -32,7 +32,7 @@ resolves to \code{ocp21}.
 \examples{
 \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 \donttest{
-# CPADS 2021-2022 ships in the built-in database, so this is a local
+# CPADS 2021-2022: downloaded once from open.canada.ca (39 MB), then a local
 # read; try() so a missing optional backend does not fail the check
 df <- try(morie_load_dataset("ocp21"))
 # re-fetch from the portal to pick up an upstream revision (network):

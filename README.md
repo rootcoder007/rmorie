@@ -364,14 +364,14 @@ nrow(df)
 
 ```r
 # Inspect parser row + raw HTML + cleaned text side-by-side.
-morie_siu_audit_case("16-OFI-019")
+morie_siu_audit_case("17-OVI-201")
 
 # Per-field "does the HTML actually support this value?" check.
-morie_siu_anomaly_check("16-OFI-019")
+morie_siu_anomaly_check("17-OVI-201")
 
 # Diff parser output against an external table.
 morie_siu_compare(
-  case_number = "16-OFI-019",
+  case_number = "17-OVI-201",
   external    = my_other_table,
   field_map   = c(officer_count = "n_officers")
 )
@@ -381,10 +381,10 @@ morie_siu_compare(
 
 ```r
 # Default: local Ollama with gemma3:4b. No API key required.
-morie_siu_llm_extract("16-OFI-019")
+morie_siu_llm_extract("17-OVI-201")
 
 # Failover chain: try local first, fall back to Gemini only on error.
-morie_siu_llm_extract("16-OFI-019", model = c("ollama", "gemini"))
+morie_siu_llm_extract("17-OVI-201", model = c("ollama", "gemini"))
 
 # French to English translation via translategemma.
 morie_siu_translate(text = "L'enquete a ete close...", target_lang = "en")
@@ -493,3 +493,7 @@ fit_tight <- morie_bayes_lm(y ~ x, d, prior_sd = 0.5)
 ```
 
 See the **bayesian-priors** vignette for applied guidance.
+
+## Smoke suite
+
+Every release is gated on a clean-user smoke suite that installs the built package into an empty home directory on Linux, macOS and Windows and runs every command for real, with live downloads and assertions, no mocks (`Rscript inst/smoke/smoke.R`; `.github/workflows/smoke.yml`). A verb without a smoke case fails the suite.

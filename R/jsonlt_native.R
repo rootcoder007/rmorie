@@ -315,7 +315,7 @@ morie_jsonlt_base64url_dec <- function(input) {
     return(.jsonlt_as(y, o, collapse = FALSE, na = na, oldna = oldna,
                       auto_unbox = auto_unbox, indent = indent))
   }
-  if (inherits(x, "json")) {
+  if (inherits(x, c("morie_json", "json"))) {
     if (isTRUE(o$json_verbatim)) return(as.character(x))
     return(.jsonlt_as(as.character(x), o, collapse, na, oldna, auto_unbox, indent))
   }
@@ -630,7 +630,7 @@ morie_jsonlt_to_json <- function(x, dataframe = c("rows", "columns", "values"),
             hms = if (is.null(dots$hms)) "string" else match.arg(dots$hms, c("string", "secs")))
   na <- if (!missing(na)) match.arg(na) else NULL
   ans <- .jsonlt_as(x, o, na = na, oldna = NULL, auto_unbox = o$auto_unbox, indent = o$indent)
-  class(ans) <- "json"
+  class(ans) <- "morie_json"
   ans
 }
 
@@ -665,7 +665,7 @@ morie_jsonlt_unbox <- function(x) {
 
 #' @param x See Usage.
 #' @export
-print.json <- function(x, ...) {
+print.morie_json <- function(x, ...) {
   cat(x, "\n")
   invisible(x)
 }
@@ -1300,7 +1300,7 @@ morie_jsonlt_validate <- function(txt) {
   # that mark: without it the result compares unequal to the same
   # text under a non-UTF-8 locale even though the bytes agree.
   Encoding(res) <- "UTF-8"
-  structure(res, class = "json")
+  structure(res, class = "morie_json")
 }
 
 #' Indent JSON text (jsonlite's prettify)

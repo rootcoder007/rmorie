@@ -49,3 +49,9 @@ skip_if_no_network <- function(host = "8.8.8.8", port = 53, timeout = 2) {
   }
   invisible(df)
 }
+
+# r-universe builds every target under a hard time cap; the slowest files skip
+# there (MY_UNIVERSE is set only in those builds). CI and CRAN run everything.
+skip_on_runiverse <- function() {
+  testthat::skip_if(nzchar(Sys.getenv("MY_UNIVERSE")), "r-universe build budget")
+}

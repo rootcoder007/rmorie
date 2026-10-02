@@ -4,7 +4,13 @@
 \alias{morie_download}
 \title{Download a file with an automatic Wayback fallback (via rmoriebricklayer)}
 \usage{
-morie_download(url, target_path, attempt_wayback = NULL)
+morie_download(
+  url,
+  target_path,
+  attempt_wayback = NULL,
+  label = basename(target_path),
+  size = NULL
+)
 }
 \arguments{
 \item{url}{Live source URL.}
@@ -14,6 +20,9 @@ morie_download(url, target_path, attempt_wayback = NULL)
 \item{attempt_wayback}{Logical or \code{NULL}; whether to fall back to the
 Wayback snapshot when the live fetch fails (passed through to bricklayer;
 \code{NULL} uses the bricklayer default).}
+
+\item{label, size}{Shown by the progress bar: a short name for the file and its
+expected size in bytes when known (a percent bar instead of a spinner).}
 }
 \value{
 The downloaded path, per \code{rmoriebricklayer::friendly_download()}.

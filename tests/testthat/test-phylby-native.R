@@ -8,6 +8,8 @@
 # recomputed from the returned samples.
 
 # A and B identical, C and D identical: the true split is {A,B} | {C,D}.
+skip_on_runiverse()  # the slowest files stay inside the r-universe build cap
+
 ALN_AB <- list(
   A = "AAAACCCCGGGGTTTTAAAACCCC",
   B = "AAAACCCCGGGGTTTTAAAACCCC",

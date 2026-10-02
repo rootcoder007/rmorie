@@ -841,3 +841,31 @@ morie_llm_provider_unset <- function() {
   message(if (had) "Endpoint detached." else "No endpoint was attached.")
   invisible(had)
 }
+
+
+# Does the gateway accept this key? (asked before a key is stored)
+.morie_llm_probe_token <- function(token) {
+  base <- .morie_llm_hosted_base()
+  if (is.null(base) || !nzchar(base)) return(FALSE)
+  res <- tryCatch({
+    req <- httr2::request(paste0(sub("/+$", "", base), "/v1/models"))
+    req <- httr2::req_headers(req, Authorization = paste("Bearer", trimws(token)))
+    req <- httr2::req_timeout(req, 20)
+    httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))
+  }, error = function(e) NULL)
+  !is.null(res) && httr2::resp_status(res) < 300
+}
+
+# The stored key reaches the gateway but the gateway refuses it (401/403), as opposed to no gateway.
+.morie_llm_hosted_rejected <- function() {
+  key <- .morie_llm_hosted_key()
+  base <- .morie_llm_hosted_base()
+  if (is.null(key) || is.null(base) || !nzchar(base)) return(FALSE)
+  res <- tryCatch({
+    req <- httr2::request(paste0(sub("/+$", "", base), "/v1/models"))
+    req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
+    req <- httr2::req_timeout(req, 20)
+    httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))
+  }, error = function(e) NULL)
+  !is.null(res) && httr2::resp_status(res) %in% c(401L, 403L)
+}

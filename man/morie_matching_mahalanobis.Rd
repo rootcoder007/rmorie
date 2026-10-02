@@ -25,7 +25,16 @@ morie_matching_mahalanobis(
 
 \item{caliper}{Maximum Mahalanobis distance for a valid match.}
 
-\item{replace}{If \code{TRUE}, controls may be re-used.}
+\item{replace}{If \code{TRUE}, controls may be re-used. \code{NULL} (the
+default) re-uses controls only when there are fewer controls than
+treated units, where 1:1 matching without replacement would leave
+treated units unmatched and bias the ATT. \code{NULL} (the
+default) re-uses controls only when there are fewer controls than
+treated units, where 1:1 matching without replacement would leave
+treated units unmatched and bias the ATT. \code{NULL} (the
+default) re-uses controls only when there are fewer controls than
+treated units, where 1:1 matching without replacement would leave
+treated units unmatched and bias the ATT.}
 
 \item{exact}{Optional character vector of variables to match exactly
 prior to distance matching.}

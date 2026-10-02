@@ -735,13 +735,29 @@
   ps <- prop_out$analysis_frame$ps
   y <- prop_out$analysis_frame$heavy_drinking_30d
   a <- prop_out$analysis_frame$cannabis_any_use
-  mu1a <- stats::predict(out_model, newdata = transform(frame, cannabis_any_use = 1), type = "response")
-  mu0a <- stats::predict(out_model, newdata = transform(frame, cannabis_any_use = 0), type = "response")
-  aipw <- mean(mu1a - mu0a + a * (y - mu1a) / ps - (1 - a) * (y - mu0a) / (1 - ps))
+  # everything for the AIPW line comes from the propensity module's analysis frame, so y, a, ps and
+  # the outcome predictions line up row by row
+  af <- prop_out$analysis_frame
+  mu1a <- stats::predict(out_model, newdata = transform(af, cannabis_any_use = 1), type = "response")
+  mu0a <- stats::predict(out_model, newdata = transform(af, cannabis_any_use = 0), type = "response")
+  infl <- mu1a - mu0a + a * (y - mu1a) / ps - (1 - a) * (y - mu0a) / (1 - ps)
+  aipw <- mean(infl)
+  se_aipw <- stats::sd(infl) / sqrt(length(infl))  # influence-function standard error
+  # outcome regression: the uncertainty is in the fitted model, not in the spread of mu1 - mu0;
+  # a weighted bootstrap of the fit gives it (60 refits)
+  set.seed(20261001L)
+  boot_or <- vapply(seq_len(60L), function(b) {
+    idx <- sample.int(nrow(frame), replace = TRUE)
+    fb <- suppressWarnings(stats::glm(stats::formula(out_model), data = frame[idx, , drop = FALSE],
+                                      family = stats::quasibinomial(), weights = weight))
+    stats::weighted.mean(stats::predict(fb, newdata = counter1, type = "response") -
+                           stats::predict(fb, newdata = counter0, type = "response"), frame$weight)
+  }, 1)
+  se_or <- stats::sd(boot_or)
   methods <- data.frame(
     method = c("IPW", "Outcome regression", "AIPW"),
     ate = c(ate_ipw, ate_or, aipw),
-    se = c(se_ipw, stats::sd(mu1 - mu0) / sqrt(nrow(frame)), stats::sd(mu1a - mu0a) / sqrt(nrow(frame))),
+    se = c(se_ipw, se_or, se_aipw),
     stringsAsFactors = FALSE
   )
   methods$ci_lower <- methods$ate - 1.96 * methods$se

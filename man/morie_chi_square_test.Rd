@@ -4,12 +4,17 @@
 \alias{morie_chi_square_test}
 \title{Chi-square test of independence or goodness-of-fit}
 \usage{
-morie_chi_square_test(observed, expected = NULL)
+morie_chi_square_test(observed, expected = NULL, correct = TRUE)
 }
 \arguments{
 \item{observed}{Observed counts (matrix for independence, vector for GOF).}
 
 \item{expected}{Expected counts for GOF (optional; uniform if NULL).}
+
+\item{correct}{Apply Yates' continuity correction to a 2 x 2 table
+(\code{TRUE}, the \code{stats::chisq.test} default). \code{FALSE}
+gives the plain Pearson statistic. Cramer's V always uses the
+uncorrected statistic.}
 }
 \value{
 Named list: \code{chi_sq}, \code{df}, \code{p_value}, \code{cramers_v}.
@@ -18,6 +23,7 @@ Named list: \code{chi_sq}, \code{df}, \code{p_value}, \code{cramers_v}.
 Chi-square test of independence or goodness-of-fit
 }
 \examples{
-# See the package vignettes for usage examples:
-#   vignette(package = "rmorie")
+tab <- matrix(c(30, 10, 15, 25), 2)
+morie_chi_square_test(tab)$chi_sq                   # Yates-corrected, as chisq.test()
+morie_chi_square_test(tab, correct = FALSE)$chi_sq  # Pearson: 11.43
 }

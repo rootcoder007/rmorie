@@ -7,8 +7,10 @@ test_that("the resource-file fallback downloads through morie_download and reads
   withr::local_tempdir()
   calls <- list()
   testthat::local_mocked_bindings(.package = .pkg,
-    .morie_ckan_resource_url = function(rid, ckan_base) if (rid == "none") NULL else paste0("https://x.ca/", rid, ".csv"),
-    morie_download = function(url, target_path, attempt_wayback = NULL) {
+    .morie_ckan_resource_meta = function(rid, ckan_base) {
+      list(url = if (rid == "none") NULL else paste0("https://x.ca/", rid, ".csv"), size = 42)
+    },
+    morie_download = function(url, target_path, attempt_wayback = NULL, label = NULL, size = NULL) {
       calls[[length(calls) + 1L]] <<- list(url = url, wayback = attempt_wayback)
       writeLines(c("a,b", "1,2", "3,4"), target_path)
       invisible(target_path)

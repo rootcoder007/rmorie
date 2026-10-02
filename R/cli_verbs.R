@@ -81,11 +81,27 @@
   }
   ok <- TRUE
   for (f in files) {
-    rep <- morie_verify_statistical_output(f)
+    rep <- if (grepl("\\.json$", f, ignore.case = TRUE)) morie_verify_statistical_output(f) else .cli_verify_csv(f)
     out(.cli_verify_text(rep))
     if (!isTRUE(rep$passed)) ok <- FALSE
   }
   if (ok) 0L else 1L
+}
+
+# A module table verified as a CSV: parses, has rows and columns, no column that is entirely NA,
+# no infinite numbers, the header is unique. Shaped like morie_verify_statistical_output()'s report.
+.cli_verify_csv <- function(path) {
+  checks <- list()
+  df <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE), error = function(e) NULL)
+  checks$csv_parses <- !is.null(df)
+  if (is.null(df)) return(list(path = path, passed = FALSE, checks = checks))
+  checks$has_rows <- nrow(df) > 0L
+  checks$has_columns <- ncol(df) > 0L
+  checks$unique_header <- !anyDuplicated(names(df))
+  num <- vapply(df, is.numeric, TRUE)
+  checks$no_infinite <- !any(vapply(df[num], function(col) any(is.infinite(col)), TRUE))
+  checks$no_empty_column <- nrow(df) == 0L || !any(vapply(df, function(col) all(is.na(col)), TRUE))
+  list(path = path, passed = all(unlist(checks)), checks = checks, rows = nrow(df), cols = ncol(df))
 }
 
 .cli_profile_dataset <- function(rest, flag, has, out) {
@@ -93,6 +109,10 @@
   if (is.null(path)) {
     out("usage: rmorie profile-dataset PATH [--treatment COL] [--outcome COL] [--weights COL] [--suggest]\n")
     return(2L)
+  }
+  if (!file.exists(path)) {
+    out(sprintf("File not found: %s\n", path))
+    return(1L)
   }
   df <- utils::read.csv(path, stringsAsFactors = FALSE)
   profile <- morie_dataset_profile(df, hint_treatment = flag("--treatment"),
@@ -116,10 +136,22 @@
     out("usage: rmorie sample PATH --n N [--method srs|stratified|cluster|pps] [--strata-col COL] [--cluster-col COL] [--size-col COL] [--proportional] [--seed 42] [--output FILE]\n")
     return(2L)
   }
+  if (!grepl("^[0-9]+$", n) || as.integer(n) < 1L) {
+    out(sprintf("--n must be a whole number of rows, not '%s'\n", n))
+    return(2L)
+  }
   n <- as.integer(n)
   seed <- as.integer(flag("--seed") %||% "42")
   method <- flag("--method") %||% "srs"
+  if (!file.exists(path)) {
+    out(sprintf("File not found: %s\n", path))
+    return(1L)
+  }
   df <- utils::read.csv(path, stringsAsFactors = FALSE)
+  if (n > nrow(df) && method == "srs") {
+    out(sprintf("--n %d exceeds the %d rows in %s\n", n, nrow(df), path))
+    return(1L)
+  }
   s <- switch(method,
     srs = morie_simple_random_sample(df, n, seed = seed),
     stratified = {
@@ -394,7 +426,7 @@
 .cli_crypto <- function(rest, flag, out) {
   sub <- if (length(rest)) rest[[1L]] else ""
   usage <- paste0("usage: rmorie crypto keygen [--name NAME] [--output DIR]\n",
-                  "       rmorie crypto encrypt FILE --recipient PKFILE|KEYNAME\n",
+                  "       rmorie crypto encrypt FILE --to PKFILE|KEYNAME\n",
                   "       rmorie crypto decrypt FILE --key KEYNAME\n",
                   "Keys live in ~/.morie/keys/keystore.json (password: prompt or MORIE_KEYSTORE_PASSWORD).\n")
   if (identical(sub, "keygen")) {
@@ -422,7 +454,7 @@
   }
   if (identical(sub, "encrypt")) {
     f <- if (length(rest) > 1L) rest[[2L]] else NULL
-    rcpt <- flag("--recipient")
+    rcpt <- flag("--to") %||% flag("--recipient")
     if (is.null(f) || is.null(rcpt)) {
       out(usage)
       return(2L)
@@ -590,16 +622,18 @@
     return(2L)
   }
   f <- rest[[1L]]
-  if (!file.exists(f)) file.create(f)
   if (interactive()) {
+    if (!file.exists(f)) file.create(f)
     utils::file.edit(f)
     return(0L)
   }
-  ed <- Sys.getenv("VISUAL", Sys.getenv("EDITOR", ""))
+  ed <- Sys.getenv("VISUAL", "")
+  if (!nzchar(ed)) ed <- Sys.getenv("EDITOR", "")
   if (!nzchar(ed)) {
     out(sprintf("No editor: set EDITOR, or open %s in RStudio / VS Code.\n", f))
     return(1L)
   }
+  if (!file.exists(f)) file.create(f)
   system2(ed, shQuote(f))
   0L
 }
@@ -668,4 +702,39 @@
   e <- morie_emissions_stop(t)
   out(.emissions_text(e))
   0L
+}
+
+
+# `rmorie VERB --help`: the lines of the help text that describe the verb, never the verb itself.
+.cli_verb_help <- function(verb, out) {
+  txt <- character()
+  morie_cli("help", out = function(s) txt <<- c(txt, s))
+  lines <- strsplit(paste(txt, collapse = ""), "\n", fixed = TRUE)[[1L]]
+  hit <- grepl(paste0("^  ", verb, "( |$)"), lines)
+  keep <- hit
+  for (i in which(hit)) {  # continuation lines are indented deeper and follow the verb's line
+    j <- i + 1L
+    while (j <= length(lines) && grepl("^        ", lines[j])) { keep[j] <- TRUE; j <- j + 1L }
+  }
+  if (!any(keep)) {
+    out(sprintf("rmorie %s: no help entry (rmorie help lists every verb)\n", verb))
+    return(2L)
+  }
+  # "usage: rmorie VERB ARGS   what it does", one line per form of the verb
+  shown <- vapply(lines[keep], function(l) {
+    l <- trimws(l)
+    if (startsWith(l, verb)) paste0("usage: rmorie ", gsub("\\s{2,}", "   ", l)) else paste0("       ", gsub("\\s{2,}", "   ", l))
+  }, "")
+  out(paste0(paste(shown, collapse = "\n"), "\n"))
+  0L
+}
+
+# Where the command line keeps what it pulls: the user cache directory (an existing store is reused).
+.morie_cli_cache_db <- function() {
+  root <- morie_cache_dir()
+  duck <- file.path(root, "morie.duckdb")
+  lite <- file.path(root, "morie.db")
+  if (file.exists(duck)) return(duck)
+  if (file.exists(lite)) return(lite)
+  if (requireNamespace("duckdb", quietly = TRUE)) duck else lite
 }

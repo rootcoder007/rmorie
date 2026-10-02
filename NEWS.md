@@ -1,5 +1,55 @@
 # rmorie 1.3.9 - 2026-10-01
 
+* Command line, from a hostile QA pass: the launcher works under R 4.6 (which
+  keeps `--args` in `commandArgs()`); `rmorie pull` keeps what it fetches under
+  the user cache directory, so later `run-module`, `pipeline` and `selftest`
+  runs use the real PUMF; `run-module` without `--output-dir` writes under
+  `morie-output/NAME`; `VERB --help` describes the verb instead of running it;
+  `verify` checks CSV tables; `ask` exits 1 when no provider answered and names
+  a model nobody serves; `login --token` refuses a key the gateway rejects;
+  `doctor` distinguishes a rejected key from an unreachable gateway;
+  `analyze` exits 1 on an error payload; `sample --n` and missing files are
+  reported in words; `edit` no longer creates a file when there is no editor.
+* Statistics: `morie_chi_square_test()` gains `correct =` (Yates is now a
+  documented choice; Cramer's V uses the uncorrected statistic);
+  `morie_linear_regression_ols()` treats a constant column you supply as the
+  intercept and keeps standard errors aligned; `morie_matching_nearest_neighbor()`
+  matches with replacement when controls are scarce (the ATT was biased);
+  `morie_estimate_aipw()` defaults to `outcome_model = "auto"` (logistic for a
+  binary outcome) in both arms; the `causal-estimators` module reports
+  influence-function and bootstrap standard errors instead of values about
+  165 times too small; AIPW, Kaplan-Meier and the E-value refuse missing or
+  invalid input in words. The package's JSON class is `morie_json`, so loading
+  jsonlite no longer prints an S3 override notice.
+
+* Command line, from a hostile QA pass: the launcher works under R 4.6 (which
+  keeps `--args` in `commandArgs()`); `rmorie pull` keeps what it fetches under
+  the user cache directory, so later `run-module`, `pipeline` and `selftest`
+  runs use the real PUMF; `run-module` without `--output-dir` writes under
+  `morie-output/NAME`; `VERB --help` describes the verb instead of running it;
+  `verify` checks CSV tables; `ask` exits 1 when no provider answered and names
+  a model nobody serves; `login --token` refuses a key the gateway rejects;
+  `doctor` distinguishes a rejected key from an unreachable gateway;
+  `analyze` exits 1 on an error payload; `sample --n` and missing files are
+  reported in words; `edit` no longer creates a file when there is no editor.
+* Statistics: `morie_chi_square_test()` gains `correct =` (Yates is now a
+  documented choice; Cramer's V uses the uncorrected statistic);
+  `morie_linear_regression_ols()` treats a constant column you supply as the
+  intercept and keeps standard errors aligned; `morie_matching_nearest_neighbor()`
+  matches with replacement when controls are scarce (the ATT was biased);
+  `morie_estimate_aipw()` defaults to `outcome_model = "auto"` (logistic for a
+  binary outcome) in both arms; the `causal-estimators` module reports
+  influence-function and bootstrap standard errors instead of values about
+  165 times too small; AIPW, Kaplan-Meier and the E-value refuse missing or
+  invalid input in words. The package's JSON class is `morie_json`, so loading
+  jsonlite no longer prints an S3 override notice.
+
+* Every download draws a live progress bar (percent, size, rate) on a
+  terminal and prints milestone lines in a log: the catalog files, bootstrap
+  weights, StatCan tables, Wayback copies and the curated tables at
+  data.rmorie.com. `options(morie.quiet = TRUE)` silences it; the command line
+  turns it on, R sessions show it when interactive.
+
 * `morie_hosted_manifest()`, `morie_hosted_datasets()`,
   `morie_load_hosted_dataset()`: the curated tables at data.rmorie.com,
   opened by the stored MORIE key; `morie_load_dataset()`, `morie_list_datasets()`

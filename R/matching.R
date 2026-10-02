@@ -314,7 +314,16 @@ morie_matching_common_support <- function(data, treatment,
 #'   (forwarded as \code{ratio}).
 #' @param caliper Maximum logit-propensity distance for a valid match,
 #'   expressed in SD units of the logit (or \code{NULL} for no caliper).
-#' @param replace If \code{TRUE}, controls may be re-used.
+#' @param replace If \code{TRUE}, controls may be re-used. \code{NULL} (the
+#'   default) re-uses controls only when there are fewer controls than
+#'   treated units, where 1:1 matching without replacement would leave
+#'   treated units unmatched and bias the ATT. \code{NULL} (the
+#'   default) re-uses controls only when there are fewer controls than
+#'   treated units, where 1:1 matching without replacement would leave
+#'   treated units unmatched and bias the ATT. \code{NULL} (the
+#'   default) re-uses controls only when there are fewer controls than
+#'   treated units, where 1:1 matching without replacement would leave
+#'   treated units unmatched and bias the ATT.
 #' @param ps Optional propensity scores. When supplied they REPLACE
 #'   the fitted model: matching is done on the score you pass, aligned
 #'   to the rows that survive the NA drop -- by name when the vector is
@@ -334,9 +343,16 @@ morie_matching_common_support <- function(data, treatment,
 morie_matching_nearest_neighbor <- function(data, treatment, covariates,
                                             n_neighbors = 1L,
                                             caliper = NULL,
-                                            replace = FALSE,
+                                            replace = NULL,
                                             ps = NULL,
                                             alpha = 0.05) {
+  if (is.null(replace)) {
+    tr <- as.numeric(data[[treatment]])
+    replace <- sum(tr == 1, na.rm = TRUE) * n_neighbors > sum(tr == 0, na.rm = TRUE)
+    if (replace) {
+      message("Fewer controls than treated units: matching with replacement (replace = TRUE)")
+    }
+  }
   .morie_match_nearest_native(
     data, treatment, covariates,
     n_neighbors = n_neighbors,
@@ -416,7 +432,16 @@ morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
 #' @param covariates Character vector of continuous covariates.
 #' @param n_neighbors Number of matches per treated unit.
 #' @param caliper Maximum Mahalanobis distance for a valid match.
-#' @param replace If \code{TRUE}, controls may be re-used.
+#' @param replace If \code{TRUE}, controls may be re-used. \code{NULL} (the
+#'   default) re-uses controls only when there are fewer controls than
+#'   treated units, where 1:1 matching without replacement would leave
+#'   treated units unmatched and bias the ATT. \code{NULL} (the
+#'   default) re-uses controls only when there are fewer controls than
+#'   treated units, where 1:1 matching without replacement would leave
+#'   treated units unmatched and bias the ATT. \code{NULL} (the
+#'   default) re-uses controls only when there are fewer controls than
+#'   treated units, where 1:1 matching without replacement would leave
+#'   treated units unmatched and bias the ATT.
 #' @param exact Optional character vector of variables to match exactly
 #'   prior to distance matching.
 #' @return A list of class \code{morie_match_result}.

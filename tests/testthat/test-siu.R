@@ -5,6 +5,8 @@
 # the libcurl transport and the end-to-end run are network-gated.
 
 # A synthetic director's-report page with the real section skeleton.
+skip_on_runiverse()  # the slowest files stay inside the r-universe build cap
+
 .fake_siu_report <- function() {
   paste0(
     "<html><body>",

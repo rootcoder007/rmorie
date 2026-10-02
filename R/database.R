@@ -666,52 +666,77 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
   # through with `offset` until the whole resource (or `limit`) is read.
   cap <- as.integer(min(limit, .Machine$integer.max))
   page <- min(cap, 32000L)
-  message("Fetching from CKAN datastore: resource_id=", rid)
+  message("Fetching ", dataset_key, " from CKAN (resource ", rid, ")")
   # a 40 MB PUMF page from open.canada.ca takes longer than R's 60 s default
-  old_timeout <- options(timeout = max(getOption("timeout", 60), 600))
+  # 120 s per page: a slow datastore falls through to the resource file (39 MB
+  # in seconds) instead of waiting ten minutes a page, as the Python arm does
+  old_timeout <- options(timeout = 120)
   on.exit(options(old_timeout), add = TRUE)
-  pages <- list()
-  fetched <- 0L
-  total <- NA_real_
-  fallback <- FALSE
-  repeat {
-    api_url <- sprintf(
-      "%s?resource_id=%s&limit=%d&offset=%d",
-      ckan_base, rid, page, fetched
-    )
-    raw <- tryCatch(suppressWarnings(readLines(url(api_url), warn = FALSE)), error = function(e) e)
-    if (inherits(raw, "error")) {
-      if (fetched > 0L) stop("CKAN datastore failed after ", fetched, " rows: ", conditionMessage(raw), call. = FALSE)
-      # the datastore API is down or slow: the resource file is the route,
-      # live or from its Wayback Machine snapshot (the Python arm does the same)
-      message("CKAN datastore unreachable (", conditionMessage(raw), "); reading the resource file instead")
-      fallback <- TRUE
-      break
-    }
-    payload <- .morie_from_json(paste(raw, collapse = ""))
-    recs <- payload$result$records
-    if (is.null(recs) || NROW(recs) == 0L) break
-    pages[[length(pages) + 1L]] <- recs
-    fetched <- fetched + NROW(recs)
-    if (is.na(total)) {
-      total <- if (!is.null(payload$result$total)) {
-        as.numeric(payload$result$total)
-      } else {
-        fetched
+  # The resource file first: one download with a live progress bar (the 39 MB
+  # CPADS zip in seconds) instead of paging 32,000-record JSON pages through
+  # R's parser (minutes a page). The datastore API is the route for a row
+  # limit, and the fallback when the resource has no file URL.
+  records <- NULL
+  if (!is.finite(limit)) {
+    records <- tryCatch(.morie_ckan_resource_file(rid, dataset_key, ckan_base),
+      error = function(e) {
+        message("Resource file route failed (", conditionMessage(e), "); paging the datastore instead")
+        NULL
+      })
+    if (!is.null(records) && NROW(records) == 0L) records <- NULL
+  }
+  if (is.null(records)) {
+    pages <- list()
+    fetched <- 0L
+    total <- NA_real_
+    fallback <- FALSE
+    show <- !.morie_dl_quiet()
+    tty <- isatty(stderr())
+    t0 <- proc.time()[["elapsed"]]
+    repeat {
+      api_url <- sprintf(
+        "%s?resource_id=%s&limit=%d&offset=%d",
+        ckan_base, rid, page, fetched
+      )
+      raw <- tryCatch(suppressWarnings(readLines(url(api_url), warn = FALSE)), error = function(e) e)
+      if (inherits(raw, "error")) {
+        if (fetched > 0L) stop("CKAN datastore failed after ", fetched, " rows: ", conditionMessage(raw), call. = FALSE)
+        # the datastore API is down or slow: the resource file is the route,
+        # live or from its Wayback Machine snapshot (the Python arm does the same)
+        message("CKAN datastore unreachable (", conditionMessage(raw), "); reading the resource file instead")
+        fallback <- TRUE
+        break
       }
+      payload <- .morie_from_json(paste(raw, collapse = ""))
+      recs <- payload$result$records
+      if (is.null(recs) || NROW(recs) == 0L) break
+      pages[[length(pages) + 1L]] <- recs
+      fetched <- fetched + NROW(recs)
+      if (is.na(total)) {
+        total <- if (!is.null(payload$result$total)) {
+          as.numeric(payload$result$total)
+        } else {
+          fetched
+        }
+      }
+      if (show) {
+        line <- .morie_dl_line(paste0(dataset_key, " (CKAN datastore)"), fetched, total, t0, 0L, unit = "rows")
+        if (tty) cat("\r", line, sep = "", file = stderr()) else cat("  ", line, "\n", sep = "", file = stderr())
+      }
+      if (fetched >= total || fetched >= cap) break
     }
-    if (fetched >= total || fetched >= cap) break
-  }
-  records <- if (length(pages) == 0L) {
-    NULL
-  } else if (length(pages) == 1L) {
-    pages[[1L]]
-  } else {
-    do.call(rbind, pages)
-  }
+    if (show && tty && fetched > 0L) cat("\n", file = stderr())
+    records <- if (length(pages) == 0L) {
+      NULL
+    } else if (length(pages) == 1L) {
+      pages[[1L]]
+    } else {
+      do.call(rbind, pages)
+    }
 
-  if (fallback || is.null(records) || NROW(records) == 0L) {
-    records <- .morie_ckan_resource_file(rid, dataset_key, ckan_base)
+    if (fallback || is.null(records) || NROW(records) == 0L) {
+      records <- .morie_ckan_resource_file(rid, dataset_key, ckan_base)
+    }
   }
   if (is.null(records) || NROW(records) == 0L) {
     stop("CKAN returned 0 records for ", dataset_key, call. = FALSE)
@@ -789,7 +814,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @examples
 #' \dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 #' \donttest{
-#' # CPADS 2021-2022 ships in the built-in database, so this is a local
+#' # CPADS 2021-2022: downloaded once from open.canada.ca (39 MB), then a local
 #' # read; try() so a missing optional backend does not fail the check
 #' df <- try(morie_load_dataset("ocp21"))
 #' # re-fetch from the portal to pick up an upstream revision (network):
@@ -892,7 +917,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   # 4. CKAN datastore -- resolved directly from the catalog resource id,
   #    matching the Python load_dataset() design (no built-in DB needed).
   if (has("ckan_resource_id")) {
-    message("Fetching ", matched, " from the CKAN datastore ...")
+    message("Fetching ", matched, " from CKAN ...")
     data <- morie_fetch_ckan(
       dataset_key = matched,
       resource_id = entry$ckan_resource_id,
@@ -1091,12 +1116,20 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
 #' Internal helper: the download URL of a CKAN resource (resource_show)
 #' @noRd
 .morie_ckan_resource_url <- function(rid, ckan_base) {
+  .morie_ckan_resource_meta(rid, ckan_base)$url
+}
+
+#' Internal helper: a CKAN resource's file URL and size (bytes), from resource_show
+#' @noRd
+.morie_ckan_resource_meta <- function(rid, ckan_base) {
   base <- sub("/datastore_search$", "", ckan_base)
   meta <- tryCatch(
     .morie_from_json(paste(suppressWarnings(readLines(url(paste0(base, "/resource_show?id=", rid)), warn = FALSE)), collapse = "")),
     error = function(e) NULL)
   u <- meta$result$url
-  if (is.character(u) && length(u) == 1L && nzchar(u)) u else NULL
+  size <- suppressWarnings(as.numeric(meta$result$size %||% NA))
+  list(url = if (is.character(u) && length(u) == 1L && nzchar(u)) u else NULL,
+       size = if (length(size) == 1L && is.finite(size) && size > 0) size else NULL)
 }
 
 #' Internal helper: a CKAN resource read as a file, live or from the Wayback Machine
@@ -1106,14 +1139,15 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
 #' tries the live URL first and the closest Internet Archive snapshot second.
 #' @noRd
 .morie_ckan_resource_file <- function(rid, dataset_key, ckan_base) {
-  src <- .morie_ckan_resource_url(rid, ckan_base)
+  meta <- .morie_ckan_resource_meta(rid, ckan_base)
+  src <- meta$url
   if (is.null(src)) {
     stop("CKAN returned 0 records for ", dataset_key, " and resource ", rid, " has no file URL", call. = FALSE)
   }
   dest <- file.path(tempdir(), paste0("ckan-", rid, "-", basename(src)))
   if (!file.exists(dest)) {
     message("Downloading ", src, " (live, then the Wayback Machine snapshot if the portal is down)")
-    morie_download(src, dest, attempt_wayback = TRUE)
+    morie_download(src, dest, attempt_wayback = TRUE, label = dataset_key, size = meta$size)
   }
   path <- dest
   if (grepl("\\.zip$", dest, ignore.case = TRUE)) {

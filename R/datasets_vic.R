@@ -346,7 +346,7 @@ morie_datasets_vic_table <- function(key, table = 1, cache_dir = NULL,
       }
       return(data.frame())
     }
-    utils::download.file(hit$url[1], dest, mode = "wb", quiet = TRUE)
+    .morie_dl(hit$url[1], dest)
   }
   sheet <- if (is.numeric(table)) sprintf("Table %02d", as.integer(table))
            else as.character(table)

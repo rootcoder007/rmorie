@@ -9,6 +9,8 @@
 # check the density is a density, that the masks encode the autoregressive
 # order, and that training moves the likelihood.
 
+skip_on_runiverse()  # the slowest files stay inside the r-universe build cap
+
 test_that("the MADE masks follow the degree rule", {
   # 54 seconds of the suite on a fast machine, and r-universe's
   # macOS x86_64 builder is about 1.8 times slower: these seven files

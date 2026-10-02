@@ -12,6 +12,8 @@
 # A deterministic MDP: states A,B and actions L,R.
 #   (A,L) -> A r=0    (A,R) -> B r=1
 #   (B,L) -> A r=0    (B,R) -> B r=2
+skip_on_runiverse()  # the slowest files stay inside the r-universe build cap
+
 SS <- c("A", "B")
 AA <- c("L", "R")
 GAM <- 0.9

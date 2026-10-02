@@ -19,12 +19,22 @@ morie_linear_regression_ols <- function(x, y) {
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)
   x <- as.matrix(x)
   y <- as.numeric(y)
+  if (nrow(x) != length(y)) stop("x and y must have the same number of rows", call. = FALSE)
+  if (anyNA(x) || anyNA(y)) stop("x and y must not contain missing values", call. = FALSE)
+  constant <- vapply(seq_len(ncol(x)), function(j) length(unique(x[, j])) == 1L, TRUE)
+  p <- ncol(x) + !any(constant)
+  if (nrow(x) <= p) {
+    stop(sprintf("at least %d rows are needed to fit %d coefficients", p + 1L, p), call. = FALSE)
+  }
   df <- as.data.frame(x)
   df$.y <- y
-  fit <- stats::lm(.y ~ ., data = df)
+  # a constant column supplied by the caller already is the intercept: fit without adding one
+  fit <- if (any(constant)) stats::lm(.y ~ . + 0, data = df) else stats::lm(.y ~ ., data = df)
   s <- summary(fit)
-  est <- unname(stats::coef(fit))
-  se <- unname(s$coefficients[, "Std. Error"])
+  cf <- stats::coef(fit)
+  est <- unname(cf)
+  se <- rep(NA_real_, length(cf))
+  se[match(rownames(s$coefficients), names(cf))] <- s$coefficients[, "Std. Error"]
   list(
     estimate = est,
     se       = se,

@@ -21,7 +21,7 @@ morie_estimate_g_computation(
 
 \item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
 
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or
+\item{outcome_model}{Family for the outcome model: \code{"auto"} (logistic for a 0/1 outcome, linear otherwise), \code{"linear"} or
 \code{"logistic"}.}
 }
 \value{

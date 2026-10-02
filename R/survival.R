@@ -26,6 +26,7 @@
 morie_kaplan_meier <- function(time, event, alpha = 0.05) {
   if (length(time) != length(event))
     stop("time and event must have the same length")
+  if (anyNA(time) || anyNA(event)) stop("time and event must not contain missing values")
   if (!all(event %in% c(0, 1))) stop("event must be 0 or 1")
   ut <- sort(unique(time[event == 1]))
   z <- stats::qnorm(1 - alpha / 2)
