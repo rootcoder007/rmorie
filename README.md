@@ -35,7 +35,7 @@ in the package-level help (`?rmorie`).
   <https://rootcoder007.github.io/rmorie/>
 - **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
 - **Website**: <https://rmorie.com> — the MORIE family (rmorie, morie, rmoriebricklayer, rmoriedata) in one place.
-- **Hosted LLM tier**: <https://llm.rmorie.com> — the fallback model behind `morie_llm_ask()` when there is no local Ollama. Sign in with `morie_llm_login()` (GitHub) or `morie_llm_login(email = "you@example.com")`, or from the shell after `install_cli()`: `rmorie login`. The tier serves ollama.com cloud models and Cloudflare Workers AI models (gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf); when a cloud model is rate limited or down the gateway answers from Workers AI, so `morie_llm_models()` is the list to trust.
+- **Hosted LLM tier**: <https://llm.rmorie.com> — the fallback model behind `morie_llm_ask()` when there is no local Ollama. Sign in with `morie_llm_login()` (GitHub) or `morie_llm_login(email = "you@example.com")`, or from the shell after `install_cli()`: `rmorie login`. The tier serves ollama.com cloud models and Cloudflare Workers AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf); when a cloud model is rate limited or down the gateway answers from Workers AI, so `morie_llm_models()` is the list to trust.
 
 > With over 13,000 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function

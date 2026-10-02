@@ -1,6 +1,6 @@
 # rmorie 1.3.9 - 2026-10-01
 
-* The hosted tier lists Cloudflare Workers AI models (gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf) beside the
+* The hosted tier lists Cloudflare Workers AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf) beside the
   ollama.com ones, and falls back to them when a cloud model is rate
   limited; `rmorie ask --model gpt-oss-120b:cf` picks one.
 
