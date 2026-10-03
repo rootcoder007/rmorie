@@ -50,3 +50,51 @@ morie_contagion_branching <- function(n, mu = 1, generations = 10L) {
                  "Research.P10.endogeneity_share")
   )
 }
+
+#' Extinction probability of a near-repeat chain
+#'
+#' With offspring probabilities \code{p[1], p[2], ...} for 0, 1, 2, ... triggered
+#' events, the chain started by one event dies out with probability equal to the
+#' smallest fixed point of the generating function \eqn{f(s) = \sum_k p_k s^k} in
+#' \eqn{[0, 1]}, reached as the limit of \eqn{s_0 = 0}, \eqn{s_{n+1} = f(s_n)}
+#' (\code{Research.P10.iter_tendsto}, \code{extinction_fixed},
+#' \code{extinction_le_fixed}). When the mean offspring \eqn{m = \sum_k k p_k}
+#' is below one the only fixed point is one and extinction is certain
+#' (\code{subcritical_extinction_one}); above one a fixed point below one
+#' exists and extinction has probability strictly less than one
+#' (\code{supercritical_extinction_lt_one}). The branching ratio of
+#' \code{\link{morie_contagion_branching}} is this \eqn{m}; the function gives
+#' the probability that any particular chain ends, which the ratio alone does not.
+#' @param p Offspring probabilities for 0, 1, 2, ... children; non-negative,
+#'   summing to one.
+#' @param tol Stop iterating when consecutive iterates differ by less than this.
+#' @param max_iter Iteration cap.
+#' @return A list with \code{mean_offspring}, \code{regime} (\code{"subcritical"},
+#'   \code{"critical"} or \code{"supercritical"}), \code{extinction} (the smallest
+#'   fixed point), \code{iterates} (the monotone sequence), \code{survival}
+#'   (\code{1 - extinction}), \code{fixed_point_check} (\eqn{f(q) - q}) and
+#'   \code{theorems}.
+#' @examples
+#' morie_contagion_extinction(c(0.3, 0.3, 0.4))   # mean 1.1: survives with positive probability
+#' morie_contagion_extinction(c(0.5, 0.3, 0.2))   # mean 0.7: dies out
+#' @export
+morie_contagion_extinction <- function(p, tol = 1e-14, max_iter = 100000L) {
+  if (!is.numeric(p) || length(p) == 0L || anyNA(p) || any(p < 0) || abs(sum(p) - 1) > 1e-10) stop("p must be non-negative probabilities summing to one", call. = FALSE)
+  k <- seq_along(p) - 1
+  f <- function(s) sum(p * s^k)
+  m <- sum(k * p)
+  s <- 0
+  iterates <- numeric(0)
+  for (i in seq_len(max_iter)) {
+    s_new <- f(s)
+    iterates <- c(iterates, s_new)
+    if (abs(s_new - s) < tol) { s <- s_new; break }
+    s <- s_new
+  }
+  regime <- if (m < 1) "subcritical" else if (m > 1) "supercritical" else "critical"
+  list(mean_offspring = m, regime = regime, extinction = s, survival = 1 - s,
+       iterates = iterates, fixed_point_check = f(s) - s,
+       theorems = c("Research.P10.iter_mono", "Research.P10.iter_tendsto", "Research.P10.extinction_fixed",
+                    "Research.P10.extinction_le_fixed", "Research.P10.subcritical_extinction_one",
+                    "Research.P10.supercritical_extinction_lt_one"))
+}

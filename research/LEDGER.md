@@ -522,11 +522,21 @@ cluster size, the stationary rate and the share of "contagious" events.
   `stationary_rate` (mu/(1-n)), `cluster_size_diverges_of_ge_one`,
   `endogeneity_share` (= n). R: `morie_contagion_branching()`; the test
   simulates Poisson-offspring trees and recovers 1/(1-n).
-- Open: extinction probability as the smallest fixed point of the PGF
+- Open: (extinction done 2026-10-02, below)
   (needs convexity of the PGF; GS Theorem 5.4.5), the Bartlett
   non-identification of contagion vs heterogeneity from the K-function
   (library scan B20), and an application to TPS break-and-enter with
   constant vs KDE background (A17).
+- Progress 2026-10-02 (extinction): `Research.P10` in P10Extinction.lean: the generating
+  function of a finite offspring law is monotone on [0,1] with f(1) = 1 (`pgf_mono`,
+  `pgf_one`); the iterates from 0 are monotone, bounded by every fixed point, and converge
+  to a fixed point that lies below every fixed point in [0,1] (`iter_mono`,
+  `iter_le_fixed`, `iter_tendsto`, `extinction_fixed`, `extinction_le_fixed`): the
+  extinction probability. 1 - f(s) <= m(1-s) gives certain extinction when the mean
+  offspring m < 1 (`one_sub_pgf_le`, `subcritical_extinction_one`); 1 - f(s) >= (1-s) f'(s)
+  and continuity of f' give a fixed point below one when m > 1
+  (`one_sub_pgf_ge`, `supercritical_extinction_lt_one`). R: `morie_contagion_extinction()`;
+  Python `contagion_extinction()`.
 
 
 ## P11. Sentencing effects as intervals: what observational data can say before assumptions

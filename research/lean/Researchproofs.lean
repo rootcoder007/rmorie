@@ -38,3 +38,6 @@ import Researchproofs.P13Meta
 import Researchproofs.P5Separation
 import Researchproofs.P3Cheeger
 import Researchproofs.P11Coverage
+import Researchproofs.P12Bounds
+import Researchproofs.P11Selection
+import Researchproofs.P10Extinction
