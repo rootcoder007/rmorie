@@ -1109,7 +1109,9 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
     pr <- tryCatch(makers[[label]](df), error = function(e) e)
     if (inherits(pr, "error")) {
       # a pair whose columns the frame lacks is skipped, not fatal (the bundled frame has no segregation days)
-      warning(sprintf("%s: %s -- skipped", label, conditionMessage(pr)), call. = FALSE)
+      why <- conditionMessage(pr)
+      if (grepl("undefined columns selected", why, fixed = TRUE)) why <- "the frame lacks the columns this pair needs"
+      warning(sprintf("%s: %s -- skipped", label, why), call. = FALSE)
       next
     }
     pairs[[label]] <- pr
@@ -1163,6 +1165,10 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
           stringsAsFactors = FALSE)
       }
     }
+  }
+  if (!length(rows)) {
+    message("morie_otis_causal_grid: no treatment-outcome pair could be built from this frame (columns missing or a degenerate treatment); returning an empty table")
+    return(data.frame())
   }
   do.call(rbind, rows)
 }

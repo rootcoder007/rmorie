@@ -305,8 +305,14 @@ morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv()
     "figures" = .run_figures_module_internal(data, output_dir = output_dir),
     "tables" = .run_tables_module_internal(data, output_dir = output_dir),
     "final-report" = .run_final_report_module_internal(data, output_dir = output_dir),
-    "otis-analysis" = .run_otis_analysis_module_internal(),
-    "mapq-psychometrics" = .run_mapq_psychometrics_module_internal(),
+    "otis-analysis" = {
+      message("otis-analysis: runs on the bundled synthetic OTIS frame; the numbers demonstrate the pipeline, they are not findings")
+      .run_otis_analysis_module_internal()
+    },
+    "mapq-psychometrics" = {
+      message("mapq-psychometrics: runs on the deterministic synthetic MAPQII panel (n = 400) with a planted factor structure; the numbers demonstrate the pipeline, they are not findings")
+      .run_mapq_psychometrics_module_internal()
+    },
     stop("Unknown module: ", module_name, call. = FALSE)
   )
 

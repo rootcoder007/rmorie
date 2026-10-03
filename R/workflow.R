@@ -142,6 +142,9 @@ morie_run_pipeline <- function(
   verbose = TRUE
 ) {
   script_map <- validate_workflow_map(script_map)
+  if (!is.null(project_root) && !dir.exists(project_root)) {
+    stop("`project_root` does not exist: ", project_root, call. = FALSE)
+  }
   if (is.null(steps)) {
     steps <- names(script_map)
   }

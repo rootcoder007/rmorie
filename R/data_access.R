@@ -74,7 +74,7 @@
       error = function(e2) NULL
     )
     if (is.null(wb)) {
-      stop("Read failed and no Wayback snapshot is available for: ", url,
+      stop("Read failed for ", url, " (", conditionMessage(e), "), and the Wayback Machine has no snapshot of it or could not be reached",
         call. = FALSE
       )
     }

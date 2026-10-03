@@ -1013,6 +1013,18 @@ morie_siu_audit_case <- function(case_number,
 # linear single-pass approach (no std::regex backtracking risk).
 #' Internal helper: Siu Html To Text
 #' @noRd
+.siu_decode_numeric_entities <- function(h) {
+  m <- gregexpr("&#(x[0-9a-fA-F]+|[0-9]+);", h, perl = TRUE)
+  regmatches(h, m) <- lapply(regmatches(h, m), function(hits) {
+    vapply(hits, function(e) {
+      body <- sub("^&#(.*);$", "\\1", e)
+      code <- if (startsWith(tolower(body), "x")) strtoi(substring(body, 2L), 16L) else as.integer(body)
+      if (is.na(code) || code <= 0L) "" else intToUtf8(code)
+    }, character(1L), USE.NAMES = FALSE)
+  })
+  h
+}
+
 .siu_html_to_text <- function(h) {
   if (!nzchar(h)) {
     return("")
@@ -1027,14 +1039,15 @@ morie_siu_audit_case <- function(case_number,
     "&apos;" = "'", "&#39;" = "'", "&nbsp;" = " ",
     "&rsquo;" = "'", "&lsquo;" = "'", "&ldquo;" = "\"",
     "&rdquo;" = "\"", "&ndash;" = "-", "&mdash;" = "-",
-    "&hellip;" = "..."
+    "&hellip;" = "...", "&eacute;" = "\u00e9", "&egrave;" = "\u00e8", "&ecirc;" = "\u00ea",
+    "&agrave;" = "\u00e0", "&acirc;" = "\u00e2", "&ccedil;" = "\u00e7", "&icirc;" = "\u00ee",
+    "&ocirc;" = "\u00f4", "&ucirc;" = "\u00fb", "&ugrave;" = "\u00f9", "&euml;" = "\u00eb",
+    "&iuml;" = "\u00ef", "&uuml;" = "\u00fc", "&ouml;" = "\u00f6", "&auml;" = "\u00e4",
+    "&copy;" = "\u00a9", "&reg;" = "\u00ae"
   )
   for (k in names(ents)) h <- gsub(k, ents[[k]], h, fixed = TRUE)
-  # Numeric entities (decimal + hex).
-  h <- gsub("&#([0-9]+);", "\\1",
-    h,
-    perl = TRUE
-  ) # leaves digits; cheap fallback
+  # Numeric entities (decimal and hex) become their character: &#039; is an apostrophe
+  h <- .siu_decode_numeric_entities(h)
   h <- gsub("\\s+", " ", h, perl = TRUE)
   trimws(h)
 }
@@ -2144,9 +2157,12 @@ morie_siu_sanity_check <- function(df) {
     bad <- nzchar(v) & !grepl("^[0-9]+$", v)
     ifelse(bad, paste0(col, ":not-int"), "")
   }
-  check_yn <- function(v, col) {
-    # the reviewed corpus writes these as yes/no, true/false or y/n in any case; a sentence is the issue
-    bad <- nzchar(v) & !tolower(trimws(v)) %in% c("yes", "no", "true", "false", "y", "n")
+  check_yn <- function(v, col, free_text = FALSE) {
+    # the reviewed corpus writes these as yes/no, true/false, y/n or "no charges"; the director's
+    # finding (free_text) may be the reasoning itself, so there only a short stray token is an issue
+    tok <- tolower(trimws(v))
+    ok <- tok %in% c("yes", "no", "true", "false", "y", "n", "na") | grepl("^(no |)charges( recommended| laid)?$", tok)
+    bad <- nzchar(v) & !ok & (!free_text | nchar(tok) <= 20L)
     ifelse(bad, paste0(col, ":not-Yes/No"), "")
   }
   check_gender <- function(v) {
@@ -2156,9 +2172,9 @@ morie_siu_sanity_check <- function(df) {
     ifelse(bad, "sex_gender_affected:bad-value", "")
   }
   check_officer_count <- function(v) {
-    # Should be "N SO" or "N SO M WO" or "N WO"
+    # "N SO", "N SO M WO", "N WO", or the reviewed corpus's bare count (or NA)
     bad <- nzchar(v) &
-      !grepl("^[0-9]+ (SO|WO)( [0-9]+ WO)?$", v)
+      !grepl("^[0-9]+ (SO|WO)( [0-9]+ WO)?$|^[0-9]+$|^NA$", v)
     ifelse(bad, "number_of_officers_involved:bad-format", "")
   }
   check_nonempty <- function(v, col) {
@@ -2210,7 +2226,8 @@ morie_siu_sanity_check <- function(df) {
     check_yn(df$charges_recommended, "charges_recommended"),
     check_yn(
       df$directors_decision_reasonable,
-      "directors_decision_reasonable"
+      "directors_decision_reasonable",
+      free_text = TRUE
     ),
     check_gender(df$sex_gender_affected),
     check_nonempty(df$police_service, "police_service"),

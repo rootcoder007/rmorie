@@ -20,8 +20,8 @@ The R-side entry to the morie "bricklayer": from an R session it reports
 which family members are present and offers to install the ones that are
 missing. You are already in R with \pkg{rmorie}, so this focuses on the
 Python side (\code{morie} via \command{pip}) and on verifying the shared
-C/C++ numeric core. The proprietary \code{rmorie-cli} is never
-auto-installed -- only pointed to.
+C/C++ numeric core, and on the \code{rmorie} launcher that
+\code{\link{install_cli}} puts on your PATH.
 }
 \details{
 The whole family is built on one shared C/C++ core (\code{libmorie} ->

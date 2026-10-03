@@ -148,3 +148,110 @@ test_that("edit refuses a terminal editor when stdin is not a terminal", {
   expect_equal(r$status, 1L)
   expect_match(r$text, "terminal editor")
 })
+
+
+# ---- round 3: the rmorie agent's remaining findings
+
+test_that("verify fails impossible p-values and reversed intervals", {
+  d <- withr::local_tempdir()
+  f <- file.path(d, "bad.csv")
+  utils::write.csv(data.frame(p_value = c(1.5, -0.1, 0.2), ci_lower = c(1, 2, 3), ci_upper = c(2, 1, 4)), f, row.names = FALSE)
+  r <- .cli_verify_csv(f)
+  expect_false(r$passed)
+  expect_false(r$checks$p_values_in_unit_interval)
+  expect_false(r$checks$ci_bounds_ordered)
+  g <- file.path(d, "good.csv")
+  utils::write.csv(data.frame(p_value = c(0.5, 0.01), ci_lower = c(1, 2), ci_upper = c(2, 3)), g, row.names = FALSE)
+  expect_true(.cli_verify_csv(g)$passed)
+})
+
+test_that("--module selects the module's own tables and rejects an unknown module", {
+  d <- withr::local_tempdir()
+  dir.create(file.path(d, "power-design"))
+  for (f in c("power-design/power_summary.csv", "descriptive_statistics_summary.csv", "ebac_final_weighted_descriptives.csv", "otis_descriptives.csv")) {
+    utils::write.csv(data.frame(a = 1), file.path(d, f), row.names = FALSE)
+  }
+  expect_equal(basename(.cli_csv_files(d, "descriptive-statistics")), "descriptive_statistics_summary.csv")
+  expect_equal(basename(.cli_csv_files(d, "power-design")), "power_summary.csv")
+  # no ebac_core table here: the first word "ebac_" is the fallback prefix, never a substring (otis_descriptives stays out)
+  expect_equal(basename(.cli_csv_files(d, "ebac-core")), "ebac_final_weighted_descriptives.csv")
+  r <- .cap("verify", d, "--module", "nosuch")
+  expect_equal(r$status, 1L)
+  expect_match(r$text, "unknown module: nosuch")
+})
+
+test_that("a stratum shorter than its allocation carries weight 1 under --per-stratum", {
+  s <- morie_stratified_sample(data.frame(g = rep(c("W", "E"), c(5, 50)), x = 1:55), "g", 6)
+  expect_equal(unique(s$.weight[s$g == "W"]), 1)
+  expect_equal(unique(s$.weight[s$g == "E"]), 50 / 6)
+})
+
+test_that("run-modules rejects an unknown module before loading data, and sample --seed must be a number", {
+  r <- .cap("run-modules", "--modules", "power-design,ghost")
+  expect_equal(r$status, 1L)
+  expect_match(r$text, "Unknown module: ghost")
+  d <- withr::local_tempdir()
+  f <- file.path(d, "t.csv")
+  utils::write.csv(data.frame(x = 1:10), f, row.names = FALSE)
+  r <- .cap("sample", f, "--n", "2", "--seed", "abc")
+  expect_equal(r$status, 2L)
+  expect_match(r$text, "--seed must be an integer")
+})
+
+test_that("morie_run_pipeline() refuses a project_root that does not exist", {
+  expect_error(morie_run_pipeline(project_root = file.path(tempdir(), "no-such-project")), "does not exist")
+})
+
+test_that("the family status reports the rmorie launcher, never a separate rmorie-cli", {
+  skip_on_os("windows")
+  d <- withr::local_tempdir()
+  suppressMessages(install_cli(dir = d))
+  withr::local_envvar(PATH = paste(d, Sys.getenv("PATH"), sep = .Platform$path.sep))
+  txt <- paste(utils::capture.output(b <- morie_bricklayer(check = TRUE)), collapse = "\n")
+  expect_true(isTRUE(b[["rmorie_launcher"]]))
+  expect_false(grepl("rmorie-cli|proprietary", txt))
+  expect_match(txt, "rmorie launcher")
+})
+
+test_that("SIU sanity checks accept the reviewed corpus's bare counts and reasoning text", {
+  df <- data.frame(
+    case_number = c("17-OVI-201", "18-OCI-001"),
+    number_of_officers_involved = c("1", "2 SO 1 WO"),
+    directors_decision_reasonable = c("On the evidence before me, I find reasonable grounds to believe the force was justified.", "no"),
+    charges_recommended = c("no charges", "maybe"),
+    sex_gender_affected = c("male", "female"),
+    narrative_summary = c(strrep("x", 120), strrep("y", 120)),
+    stringsAsFactors = FALSE
+  )
+  r <- morie_siu_sanity_check(df)
+  expect_false(grepl("number_of_officers_involved", r$issues[r$case_number == "17-OVI-201"]))
+  expect_false(grepl("directors_decision_reasonable", r$issues[r$case_number == "17-OVI-201"]))
+  expect_false(grepl("charges_recommended", r$issues[r$case_number == "17-OVI-201"]))
+  expect_match(r$issues[r$case_number == "18-OCI-001"], "charges_recommended:not-Yes/No")
+  expect_false(any(grepl("police_service", r$issues)))
+})
+
+test_that("HTML entities in SIU text become characters", {
+  expect_equal(.siu_html_to_text("Director&#039;s &eacute;t&#x00e9; <b>x</b>"), "Director's été x")
+})
+
+test_that("emissions --country names an unknown code and the OTIS grid says when nothing can be built", {
+  r <- .cap("emissions", "--seconds", "0.2", "--country", "zz", "--no-capsule", "--output-dir", tempfile("em"))
+  expect_match(r$text, "--country ZZ: not an ISO-3 code")
+  expect_false(grepl("\\(NA\\)", r$text))
+  expect_message(g <- suppressWarnings(morie_otis_causal_grid(data.frame(a = 1:3))), "no treatment-outcome pair")
+  expect_equal(nrow(g), 0L)
+})
+
+
+test_that("hyphenated catalog keys resolve as written, emissions refuses a day-long run, templates read as a sentence", {
+  expect_equal(.fuzzy_match_key("naps-co-on-2023"), "naps-co-on-2023")
+  expect_equal(.fuzzy_match_key("NAPS-CO-ON-2023"), "naps-co-on-2023")
+  expect_equal(.fuzzy_match_key("ocp21"), "ocp21")
+  expect_equal(.cap("emissions", "--seconds", "1e9")$status, 2L)
+  d <- withr::local_tempdir()
+  expect_equal(.cap("generate-template", "power-design", "--out", file.path(d, "p.md"))$status, 0L)
+  txt <- paste(readLines(file.path(d, "p.md")), collapse = "\n")
+  expect_match(txt, "which provides [a-z]")
+  expect_match(txt, "rmorie generate-template")
+})

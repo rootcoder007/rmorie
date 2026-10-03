@@ -345,8 +345,8 @@ entries were read and cross-audited by a multi-agent review panel
 (every subject-official count verified; the mechanical resolver
 scores zero wrong against it). `morie_siu_reports()` returns that
 corpus verbatim and only ever fetches/parses reports newer than it;
-`morie_siu_resolve_so()` answers from the verified corpus first and
-falls back to the compiled rule engine; `morie_siu_panel()` runs the
+`morie_siu_resolve_so(report_text)` resolves the subject-official count
+from a report's text, the verified corpus first, then the compiled rule engine; `morie_siu_panel()` runs the
 same Mixture-of-Agents reading panel on new reports through any
 Ollama-compatible endpoint you point it at (your models, your host —
 no hardcoded default).

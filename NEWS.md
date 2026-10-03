@@ -56,6 +56,23 @@
   downloads show their progress; the synthetic-CPADS notice is given once per session; the launcher
   written by `install_cli()` pins its library with `.libPaths()` so an `R_LIBS` in `~/.Renviron` cannot
   replace it; the liboqs message is one sentence; a login instruction always names the email route.
+  Round three from the same agent: `verify` fails p-values outside [0, 1] and reversed confidence intervals;
+  `--module` selects the module's own tables (directory or name prefix) and an unknown module is refused;
+  a stratum shorter than its allocation carries weight 1 under `--per-stratum`; `run-modules`/`pipeline`
+  reject an unknown module before loading data; `run-module` fails when a module wrote nothing and says
+  what the artifact modules collect; `otis-analysis` and `mapq-psychometrics` say they run on synthetic
+  frames; `morie_run_pipeline()` refuses a missing `project_root`; `morie_bricklayer(check = TRUE)` no
+  longer mistakes the R launcher for the rmorie-cli binary; `morie_siu_sanity_check()` accepts the
+  reviewed corpus's bare officer counts and reasoning text; HTML entities in SIU text are decoded
+  (`&#039;`, accented names); `emissions --country` names an unknown code; the OTIS causal grid returns an
+  empty table with a message; the fallback cause names a rejected `GEMINI_API_KEY`; a failed read says
+  why and what the Wayback Machine said; `pull --out` names a file it cannot write; `sample --seed`
+  must be a number; the `morie_write_audit_markdown()` example runs; hyphenated catalog keys (the NAPS
+  keys) resolve as written; `emissions --seconds` tops out at a day; the first-paper template reads as a
+  sentence and names the rmorie command; `verify-pollution` defaults the counterfactual to 10 for NO2 and
+  5.8 for PM2.5; the `morie_cluster()` examples label their cases (the UL1.2 warning stays, by the
+  standard); `morie_bricklayer()` and `agent()` no longer speak of a separate, proprietary rmorie-cli:
+  the command line is this package's launcher (`install_cli()`).
 
 * Fixes from the 1.3.9 stress test (every one with a test in `test-stress-1_4_0.R`): `rmorie verify`
   no longer fails a table whose text column is blank throughout; `inspect`/`verify --module`
@@ -79,7 +96,7 @@
   true/false and lower-case gender values; the SIU LLM chain reads `GEMINI_API_KEY` and knows the
   hosted tier; the README SIU calls match the functions; the crypto message names rmorie and
   `SystemRequirements` lists liboqs. The 116 example topics that emitted R warnings now run clean
-  (corrected examples, and informational notes demoted from warnings to messages).
+  (corrected examples, and informational notes demoted from warnings to messages; `morie_cluster()` keeps its UL1.2 warning for unlabelled cases, by the standard).
 
 * Datasets: the fourteen Health Infobase tables (CPADS, CSADS, CSUS) download from
   the portal and fall back to the copy at data.rmorie.com (`hib/...` keys); the three

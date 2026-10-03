@@ -180,7 +180,13 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
                  else morie_run_morie_module(rest[[1L]], cpads_csv = cp, output_dir = od)
           out(sprintf("Completed module: %s\n", rest[[1L]]))
           if (is.list(res) && length(names(res))) out(sprintf("Generated tables: %s\n", paste(names(res), collapse = ", ")))
-          out(sprintf("Written to %s (%d files)\n", od, length(list.files(od))))
+          n_files <- length(list.files(od, recursive = TRUE))
+          out(sprintf("Written to %s (%d files)\n", od, n_files))
+          if (n_files == 0L) {
+            out(sprintf("%s wrote nothing%s\n", rest[[1L]],
+                        if (rest[[1L]] %in% c("figures", "tables", "meta-synthesis", "final-report")) ": it collects the figures and tables a project checkout wrote (data/manifest/outputs); run the analysis modules into that tree first" else ""))
+            status <- 1L
+          }
         }
       },
       `list-datasets` = status <- .cli_list_datasets(out),
@@ -206,8 +212,15 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         } else {
           dest <- flag("--out") %||% paste0(gsub("[^A-Za-z0-9_.-]", "_", rest[[1L]]), ".csv")
           df <- morie_load_dataset(rest[[1L]])
-          utils::write.csv(df, dest, row.names = FALSE)
-          out(sprintf("wrote %s  (%d rows, %d cols)\n", dest, nrow(df), ncol(df)))
+          dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+          wrote <- tryCatch({
+            suppressWarnings(utils::write.csv(df, dest, row.names = FALSE))
+            TRUE
+          }, error = function(e) {
+            out(sprintf("cannot write %s: %s\n", dest, conditionMessage(e)))
+            FALSE
+          })
+          if (wrote) out(sprintf("wrote %s  (%d rows, %d cols)\n", dest, nrow(df), ncol(df))) else status <- 1L
         }
       },
       provider = {
@@ -342,7 +355,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  chat [--model NAME]                                    interactive conversation\n",
         "  selftest                                               smoke test of the subsystems\n",
         "  tutorial [--dry-run]                                   first-time walkthrough\n",
-        "  generate-template [--module NAME] [--out FILE]         methods + results scaffold for a first paper\n",
+        "  generate-template [MODULE | --module NAME] [--out FILE] [--force]   methods + results scaffold for a first paper\n",
         "  update [--yes]                                         check for a newer release, optionally install\n",
         "  crypto keygen|encrypt|decrypt ...                      post-quantum file encryption (ML-KEM-768 + ChaCha20)\n",
         "  ingest ckan|tps|siu|a2aj ...                           pull open-data feeds\n",

@@ -209,9 +209,14 @@ test_that("run-modules and pipeline run through the module runner", {
     morie_load_dataset = function(key, ...) data.frame(k = key),
     morie_run_morie_module = function(module_name, cpads_csv = NULL, output_dir = NULL, ...) {
       seen <<- cpads_csv
+      if (!is.null(output_dir)) {  # a module that writes nothing is reported as a failure by the verb
+        dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+        utils::write.csv(data.frame(a = 1), file.path(output_dir, "a.csv"), row.names = FALSE)
+      }
       list(a = 1)
     })
-  expect_equal(.capture("run-module", "power-design", "--dataset", "ocp21")$status, 0L)
+  od <- withr::local_tempdir()
+  expect_equal(.capture("run-module", "power-design", "--dataset", "ocp21", "--output-dir", od)$status, 0L)
   testthat::local_mocked_bindings(.package = .pkg,
     morie_list_datasets = function(...) data.frame(key = c("ocp21", "bad1")),
     morie_load_dataset = function(key, ...) if (key == "bad1") stop("offline") else data.frame(k = key))

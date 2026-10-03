@@ -17,7 +17,7 @@ Invisibly, the analysis result (a list). As a side effect, prints
 that result to \code{stdout} as JSON.
 }
 \description{
-Single R-side dispatcher for the proprietary \code{rmorie-cli} binary's
+Single R-side dispatcher for the \code{rmorie} command line's
 \code{rmorie analyze <subject>} verb. The CLI shells out with
 \code{Rscript -e 'rmorie::cli_main("<subject>", "<json>")'} and forwards
 the parsed command-line flags as one JSON object; this function loads the

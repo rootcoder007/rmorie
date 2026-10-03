@@ -28,8 +28,12 @@
     # match on letters and digits only, the whole name or its first word, in the path or the file name
     norm <- function(x) gsub("[^a-z0-9]", "", tolower(x))
     key <- norm(module)
-    stem <- norm(sub("[-_].*$", "", module))
-    hit <- grepl(key, norm(files), fixed = TRUE) | (nzchar(stem) & grepl(stem, norm(basename(files)), fixed = TRUE))
+    stem <- tolower(sub("[-_].*$", "", module))
+    # a table belongs to the module when it sits in the module's own output directory or its name
+    # starts with the module's name (ebac_core_*, descriptive_statistics_*); only when no table does
+    # is the module's first word tried as a prefix (power-design writes power_*), never a substring
+    hit <- grepl(paste0("/", module, "/"), files, fixed = TRUE) | startsWith(norm(basename(files)), key)
+    if (!any(hit) && nzchar(stem)) hit <- startsWith(tolower(basename(files)), paste0(stem, "_"))
     if (any(hit)) {
       files <- files[hit]
     } else if (!is.null(out)) {
@@ -112,6 +116,10 @@
     out("usage: rmorie inspect PATH [--module NAME]   (a CSV, or a directory of module outputs)\n")
     return(2L)
   }
+  if (!is.null(flag("--module")) && !flag("--module") %in% morie_module_names()) {
+    out(sprintf("unknown module: %s (names: rmorie list-modules)\n", flag("--module")))
+    return(1L)
+  }
   target <- rest[[1L]]
   if (dir.exists(target)) {
     files <- .cli_csv_files(target, flag("--module"), out)
@@ -134,6 +142,10 @@
   if (!length(rest)) {
     out("usage: rmorie verify PATH [--module NAME]   (a CSV, or a directory of module outputs)\n")
     return(2L)
+  }
+  if (!is.null(flag("--module")) && !flag("--module") %in% morie_module_names()) {
+    out(sprintf("unknown module: %s (names: rmorie list-modules)\n", flag("--module")))
+    return(1L)
   }
   target <- rest[[1L]]
   files <- if (dir.exists(target)) .cli_csv_files(target, flag("--module"), out) else if (file.exists(target)) target else character()
@@ -168,6 +180,14 @@
                   error = function(e) NULL)
   checks$no_empty_column <- nrow(df) == 0L || is.null(raw) ||
     !any(vapply(raw, function(col) all(is.na(col) | col == "NA"), TRUE))
+  # statistical sanity: a p-value lives in [0, 1]; a confidence interval's lower bound is below its upper
+  pcols <- names(df)[grepl("^(p|p_value|pvalue|p\\.value|p_adj|p_adjusted|pval)$", tolower(names(df))) & num]
+  checks$p_values_in_unit_interval <- !length(pcols) ||
+    all(vapply(df[pcols], function(col) all(is.na(col) | (col >= 0 & col <= 1)), TRUE))
+  lo <- names(df)[tolower(names(df)) %in% c("ci_lower", "ci_low", "lower", "conf_low", "conf.low") & num]
+  hi <- names(df)[tolower(names(df)) %in% c("ci_upper", "ci_high", "upper", "conf_high", "conf.high") & num]
+  checks$ci_bounds_ordered <- !(length(lo) == 1L && length(hi) == 1L) ||
+    all(is.na(df[[lo]]) | is.na(df[[hi]]) | df[[lo]] <= df[[hi]])
   list(path = path, passed = all(unlist(checks)), checks = checks, rows = nrow(df), cols = ncol(df))
 }
 
@@ -208,7 +228,11 @@
     return(2L)
   }
   n <- as.integer(n)
-  seed <- as.integer(flag("--seed") %||% "42")
+  seed <- suppressWarnings(as.integer(flag("--seed") %||% "42"))
+  if (is.na(seed) || !is.finite(seed)) {
+    out(sprintf("--seed must be an integer, not '%s'\n", flag("--seed")))
+    return(2L)
+  }
   method <- flag("--method") %||% "srs"
   if (!file.exists(path)) {
     out(sprintf("File not found: %s\n", path))
@@ -276,6 +300,11 @@
     return(2L)
   }
   selected <- if (is.null(mods)) morie_module_names() else trimws(strsplit(mods, ",")[[1L]])
+  unknown <- setdiff(selected, morie_module_names())
+  if (length(unknown)) {
+    out(sprintf("Unknown module%s: %s (rmorie list-modules names them)\n", if (length(unknown) > 1L) "s" else "", paste(unknown, collapse = ", ")))
+    return(1L)
+  }
   od <- flag("--output-dir")
   cp <- flag("--cpads") %||% flag("--cpads-csv")
   if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
@@ -322,6 +351,9 @@
   }
   if (!is.null(.morie_llm_hosted_key()) && isTRUE(tryCatch(.morie_llm_hosted_rejected(), error = function(e) FALSE))) {
     return(sprintf("your hosted key was rejected by %s -- run `rmorie login` again\n", .morie_llm_hosted_base()))
+  }
+  if (nzchar(Sys.getenv("GEMINI_API_KEY")) || nzchar(Sys.getenv("GOOGLE_API_KEY"))) {
+    return("your GEMINI_API_KEY (or GOOGLE_API_KEY) did not get an answer from Gemini (rejected key, quota or network); check it, or unset it to use the other providers\n")
   }
   if (!is.null(model)) return(sprintf("no provider answered for model '%s' (rmorie models lists the names)\n", model))
   "no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email, or start Ollama)\n"
@@ -483,7 +515,9 @@
     mods <- morie_list_morie_modules()
     desc <- mods$description[match(module, mods$name)]
     if (length(desc) == 1L && !is.na(desc) && nzchar(desc)) {
-      txt <- gsub("[REPLACE_WITH_MODULE_DESCRIPTION]", sub("[.]$", "", desc), txt, fixed = TRUE)
+      desc <- sub("[.]$", "", desc)
+      desc <- paste0(tolower(substr(desc, 1L, 1L)), substring(desc, 2L))  # it follows "which provides"
+      txt <- gsub("[REPLACE_WITH_MODULE_DESCRIPTION]", desc, txt, fixed = TRUE)
     }
   }
   dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
@@ -823,7 +857,7 @@
     years = flag("--years"), demo = has("--demo"), exposure_csv = flag("--exposure-csv"),
     exposure_mean = as.numeric(flag("--exposure-mean") %||% "0"),
     exposure_prevalence = as.numeric(flag("--exposure-prevalence") %||% "0"),
-    reference = as.numeric(flag("--reference") %||% "5.8"),
+    reference = as.numeric(flag("--reference") %||% (if (identical(tolower(flag("--pollutant") %||% ""), "no2")) "10" else "5.8")),
     baseline_rate = as.numeric(flag("--baseline-rate") %||% "500"),
     population = as.numeric(flag("--population") %||% "1000000"))
   if (has("--json")) {
@@ -835,15 +869,24 @@
 }
 
 .cli_emissions <- function(flag, has, out) {
+  country <- toupper(flag("--country") %||% "")
+  if (nzchar(country) && is.null(.emissions_energy_mix()[[country]])) {
+    out(sprintf("--country %s: not an ISO-3 code in the energy-mix table; the world average will be used\n", country))
+    country <- ""
+  }
   secs <- suppressWarnings(as.numeric(flag("--seconds") %||% "3"))
   if (length(secs) != 1L || is.na(secs) || !is.finite(secs) || secs <= 0) {
     out(sprintf("--seconds must be a positive number, not '%s'\n", flag("--seconds")))
     return(2L)
   }
+  if (secs > 86400) {
+    out(sprintf("--seconds must be at most 86400 (a day), not '%s'\n", flag("--seconds")))
+    return(2L)
+  }
   od <- flag("--output-dir") %||% "emissions"
   t <- morie_emissions_start(project_name = "morie-emissions-check", output_dir = od,
                              capsule = !has("--no-capsule"),
-                             country_iso_code = flag("--country") %||% "")
+                             country_iso_code = country)
   on.exit(if (!is.null(t$sampler) && isTRUE(t$sampler)) tryCatch(.emissions_sampler_stop(), error = function(e) NULL), add = TRUE)
   t0 <- Sys.time()
   x <- 0

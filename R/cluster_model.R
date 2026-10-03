@@ -67,9 +67,12 @@ NULL
 #' @return A `morie_cluster` object (or `morie_cluster_spec` if
 #'   `nofit = TRUE`) whose cluster labels are ordered by decreasing size.
 #' @examples
-#' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' # with vs without scaling changes which columns drive the clusters; cases are labelled
+#' # (an input without row names draws the UL1.2 warning and gets positional labels)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))
+#' morie_cluster(x, k = 3)
+#' morie_cluster(x, k = 3, scale = TRUE)
 #' @export
 morie_cluster <- function(x, k = 2L, scale = FALSE,
                           na_action = c("omit", "fail"),
@@ -273,7 +276,9 @@ print.morie_cluster_spec <- function(x, ...) {
 #' @param ... Passed to [morie_cluster()].
 #' @return A named list of `morie_cluster` objects.
 #' @examples
-#' morie_cluster_batch(list(a = iris[1:4], b = iris[1:4]), k = 3)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))
+#' morie_cluster_batch(list(a = x, b = x), k = 3)
 #' @export
 morie_cluster_batch <- function(datasets, k = 2L, ...) {
   stopifnot(is.list(datasets))

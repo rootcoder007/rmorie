@@ -767,8 +767,12 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @noRd
 .fuzzy_match_key <- function(key) {
   catalog <- morie_dataset_catalog()
+  # Exact match on the key as written (the NAPS keys carry hyphens), then with - read as _.
+  idx <- which(catalog$key == tolower(key))
+  if (length(idx) == 1L) {
+    return(catalog$key[idx])
+  }
   key_lower <- tolower(gsub("-", "_", key))
-  # Exact match on new short keys.
   idx <- which(catalog$key == key_lower)
   if (length(idx) == 1L) {
     return(catalog$key[idx])

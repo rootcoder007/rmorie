@@ -92,12 +92,13 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
     }
   }
 
+  drawn <- pmin(alloc, strata_sizes[names(alloc)])  # a stratum shorter than its allocation gives every row
   rows <- unlist(mapply(function(idx, m) {
     sample(idx, size = min(m, length(idx)), replace = FALSE)
   }, strata, alloc, SIMPLIFY = FALSE))
 
   out <- df[rows, , drop = FALSE]
-  weights <- strata_sizes[df[[strata_col]][rows]] / alloc[df[[strata_col]][rows]]
+  weights <- strata_sizes[df[[strata_col]][rows]] / drawn[df[[strata_col]][rows]]
   out$.weight <- as.numeric(weights)
   out
 }
