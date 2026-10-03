@@ -38,6 +38,25 @@
   regression-to-the-mean fall, `Research.P19Shrinkage`). The Lean audit now covers 264
   theorems in 58 files, 0 sorry, standard axioms only.
 
+* The pollution concentration-response coefficients match their sources (both arms): NO2 all-cause
+  mortality RR 1.02 per 10 micrograms per cubic metre (Huangfu and Atkinson 2020, the WHO 2021 review)
+  instead of 1.04, and PM2.5 all-cause mortality log-linear at RR 1.08 per 10 (Chen and Hoek 2020,
+  WHO 2021) instead of an IER triple with no source; the Burnett IER stays for IHD and stroke, so
+  `verify-pollution` burdens are smaller than 1.3.x reported.
+
+* Fixes from the 1.4.0 fresh-user test agents (tests in `test-agent-round-1_4_0.R`): the dataset
+  catalog carries the 24 NAPS air-quality keys and the CCHS 2022 PUMF, so both arms list the same 71
+  keys (`morie_fetch_naps()` fetches ECCC's hourly files; a zip with no member named yields its first
+  CSV); `rmorie list-datasets` prints a route for every key and the footer; `rmorie pull`,
+  `inspect` and `verify` without a path exit 2; `exec` sees the package's functions; `edit` refuses a
+  terminal editor when stdin is not a terminal; `generate-template` takes the module as a positional
+  argument, fills the module description, rejects an unknown module and never overwrites without
+  `--force`; `emissions --seconds Inf` is refused; `verify-pollution` validates its numeric flags, uses
+  one reference concentration throughout and counts avoided deaths over the exposed share; the ArcGIS
+  downloads show their progress; the synthetic-CPADS notice is given once per session; the launcher
+  written by `install_cli()` pins its library with `.libPaths()` so an `R_LIBS` in `~/.Renviron` cannot
+  replace it; the liboqs message is one sentence; a login instruction always names the email route.
+
 * Fixes from the 1.3.9 stress test (every one with a test in `test-stress-1_4_0.R`): `rmorie verify`
   no longer fails a table whose text column is blank throughout; `inspect`/`verify --module`
   match the hyphenated module name against the tables it wrote; `verify-pollution` refuses

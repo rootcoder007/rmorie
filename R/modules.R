@@ -198,7 +198,8 @@ morie_canonicalize_cpads_data <- function(data) {
 #' @export
 morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
   cpads_csv <- .resolve_cpads_csv(cpads_csv)
-  if (grepl("cpads_pumf_synthetic", basename(cpads_csv), fixed = TRUE)) {
+  if (grepl("cpads_pumf_synthetic", basename(cpads_csv), fixed = TRUE) && !isTRUE(getOption("morie.cpads_synthetic_noticed"))) {
+    options(morie.cpads_synthetic_noticed = TRUE)  # once per session: every module load would repeat it otherwise
     message("CPADS: using the 1,200-row synthetic frame from rmoriedata; results are not analyses of the real survey. ",
             "Get the real PUMF once with `rmorie pull ocp21` (R: morie_load_dataset(\"ocp21\")); it is cached and used ",
             "by default from then on. Any other dataset: `rmorie list-datasets`, then `--dataset KEY`.")

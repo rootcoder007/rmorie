@@ -70,7 +70,7 @@ test_that("REML tau2 maximises the restricted log-likelihood on a grid and is ze
   expect_equal(r$tau2_method, "REML")
   grid <- seq(0, 0.2, by = 1e-4)
   expect_gte(ll(r$tau2, est, v), max(vapply(grid, ll, numeric(1), y = est, v = v)) - 1e-9)
-  expect_equal(r$tau2, 0.00290803591431826, tolerance = 1e-9)
+  expect_equal(r$tau2, 0.00290803591431826, tolerance = 1e-6)  # a line search on a flat profile: platforms differ at 1e-7
   hom <- morie_meta_hksj(c(0.10, 0.11, 0.09, 0.10), c(0.05, 0.05, 0.05, 0.05), tau2 = "REML")
   expect_equal(hom$tau2, 0)
 })

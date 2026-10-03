@@ -349,7 +349,7 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
   tr <- as.numeric(data[[treatment]])
   if (!isTRUE(replace) && sum(tr == 1, na.rm = TRUE) * n_neighbors > sum(tr == 0, na.rm = TRUE)) {
     # MatchIt's default too, so the cross-validation holds; but the user must know the estimand shifts
-    warning("Fewer controls than treated units: 1:1 matching without replacement leaves treated ",
+    warning("Fewer control units than treated: 1:1 matching without replacement leaves treated ",
             "units unmatched and the ATT is estimated on the matchable subset only; pass ",
             "replace = TRUE to re-use controls.", call. = FALSE)
   }

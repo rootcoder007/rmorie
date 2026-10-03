@@ -196,7 +196,7 @@ test_that("install_cli() writes a launcher that pins the library it was installe
   lines <- readLines(p)
   lib <- normalizePath(dirname(system.file(package = .pkg)), winslash = "/")
   expect_true(any(grepl(lib, lines, fixed = TRUE)))
-  expect_true(any(grepl("^R_LIBS=", lines)))
+  expect_true(any(grepl(".libPaths(c(", lines, fixed = TRUE)))  # pinned inside R: ~/.Renviron cannot undo it
   expect_false(any(grepl("--vanilla", lines)))
   expect_true(any(grepl(paste0(.pkg, "::morie_cli()"), lines, fixed = TRUE)))
 })

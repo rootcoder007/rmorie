@@ -400,7 +400,7 @@ morie_siu_compare(
 # Default: local Ollama with gemma3:4b. No API key required.
 morie_siu_llm_extract("17-OVI-201")
 
-# Failover chain: local first, then the hosted MORIE tier (after `rmorie login`), then Gemini.
+# Failover chain: local first, then the hosted MORIE tier (after `rmorie login`, GitHub or --email), then Gemini.
 morie_siu_llm_extract("17-OVI-201", model = c("ollama", "hosted", "gemini"))
 
 # French to English translation of the cached reports (field by field, via the local model).

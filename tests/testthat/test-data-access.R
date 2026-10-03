@@ -80,8 +80,8 @@ test_that("morie_fetch extracts a member from a zip over file://", {
     zip_member = basename(csv)
   )
   expect_equal(nrow(z), 4L)
-  # A zip fetch with no member named is an error.
-  expect_error(morie_fetch(paste0("file://", zp), format = "zip"))
+  # A zip fetch with no member named takes the archive's first CSV (a StatCan product zip).
+  expect_equal(nrow(morie_fetch(paste0("file://", zp), format = "zip")), 4L)
 })
 
 test_that("TPS catalog entries carry verified ArcGIS layer URLs", {

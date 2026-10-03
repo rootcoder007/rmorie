@@ -89,7 +89,7 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
       rn <- as.character(case_labels)
     } # UL3.2
     else {
-      message("input has no row names; using positional labels")
+      warning("input has no row names; using positional labels", call. = FALSE)
       rn <- as.character(seq_len(nrow(xm))) # UL1.2
     }
   }

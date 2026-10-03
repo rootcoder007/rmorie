@@ -80,8 +80,7 @@ Rcpp::List morie_crypto_mlkem768_keygen() {
   return Rcpp::List::create(Rcpp::Named("pk") = pk,
                               Rcpp::Named("sk") = sk);
 #else
-  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install the liboqs headers (liboqs-devel / liboqs-dev / brew install liboqs) and reinstall "
-             "liboqs-dev / brew install liboqs and rebuild morie.");
+  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install the liboqs headers (liboqs-devel / liboqs-dev / brew install liboqs) and reinstall rmorie.");
   return R_NilValue;
 #endif
 }

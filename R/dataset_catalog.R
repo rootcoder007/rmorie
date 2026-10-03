@@ -365,11 +365,18 @@ morie_dataset_catalog <- function() {
     ),
     # -- SIU public case-level data (used by mrm_siu_*) --
     list(
-      key = "siu", name = "Ontario SIU: case-level investigations (2014-present)",
-      source = "vsr", survey = "siu", year = "2014-present",
+      key = "siu", name = "SIU director's reports (reviewed corpus, rmoriedata)",
+      source = "rmoriedata", survey = "siu", year = "2005-2026",
       format = "csv", type = "oversight", large_file = FALSE,
-      local_path = "data/datasets/vsr/SIU.csv",
-      table_name = "siu", ckan_resource_id = ""
+      local_path = "data/datasets/siu/siu_directors_reports.csv",
+      table_name = "siu", ckan_resource_id = "", rmoriedata = "siu_directors_reports"
+    ),
+    list(
+      key = "siumanifest", name = "SIU drid manifest (rmoriedata)",
+      source = "rmoriedata", survey = "siu", year = "2005-2026",
+      format = "csv", type = "oversight", large_file = FALSE,
+      local_path = "data/datasets/siu/siu_drid_manifest.csv",
+      table_name = "siumanifest", ckan_resource_id = "", rmoriedata = "siu_drid_manifest"
     ),
     # -- TPS per-category public crime events (used by mrm_tps_*) --
     list(
@@ -411,6 +418,7 @@ morie_dataset_catalog <- function() {
       )
     )
   )
+  entries <- c(entries, .naps_catalog_entries(), .statcan_catalog_entries())
   # Tolerate entries that omit optional columns (download_url,
   # zip_member): fill any missing column with "" before binding.
   all_cols <- unique(unlist(lapply(entries, names)))

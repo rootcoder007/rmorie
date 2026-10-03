@@ -20,12 +20,18 @@
 
 #' Concentration-response functions for PM2.5 and NO2
 #'
-#' \code{morie_envhealth_crf_pm25()} is the Integrated Exposure-Response
-#' curve of Burnett et al. (2014, Eq. 1),
-#' \deqn{RR(z) = 1 + \alpha (1 - e^{-\gamma (z - z_{cf})^{\delta}})}
-#' for \eqn{z > z_{cf}} and 1 otherwise, with the GBD 2013 adult parameter
-#' triples. \code{morie_envhealth_crf_no2()} is the log-linear function of
-#' Atkinson et al. (2018) and WHO (2021),
+#' \code{morie_envhealth_crf_pm25()} is log-linear for all-cause mortality with
+#' the pooled cohort estimate of the WHO 2021 guideline review (Chen and Hoek
+#' 2020: RR 1.08, 95\% CI 1.06-1.09, per 10 micrograms per cubic metre),
+#' \deqn{RR(z) = \exp(\ln(1.08) (z - z_{cf}) / 10)}
+#' for \eqn{z > z_{cf}} and 1 otherwise; for the cause-specific outcomes (IHD,
+#' stroke) it is the Integrated Exposure-Response curve of Burnett et al.
+#' (2014, Eq. 1),
+#' \deqn{RR(z) = 1 + \alpha (1 - e^{-\gamma (z - z_{cf})^{\delta}}),}
+#' with the GBD 2013 triples; the IER was fit per cause and has no all-cause
+#' form. \code{morie_envhealth_crf_no2()} is the log-linear function of the
+#' WHO 2021 review (Huangfu and Atkinson 2020: RR 1.02, 95\% CI 1.01-1.04, per
+#' 10 micrograms per cubic metre for all-cause mortality),
 #' \deqn{RR(z) = \exp(\beta (z - z_{cf}) / 10).}
 #'
 #' @param exposure Ambient concentration in micrograms per cubic metre
@@ -40,38 +46,48 @@
 #' @return A list of class \code{morie_envhealth_crf} with \code{rr},
 #'   \code{log_rr}, \code{reference_conc}, \code{exposure_conc},
 #'   \code{pollutant}, \code{citation} and \code{extra}.
-#' @references Burnett, R. T. et al. (2014). Environmental Health
-#'   Perspectives, 122(4), 397-403. Atkinson, R. W. et al. (2018).
-#'   Environmental Research, 161, 101-113. WHO (2021). Global Air Quality
-#'   Guidelines.
+#' @references Chen, J. and Hoek, G. (2020). Environment International, 143,
+#'   105974. Huangfu, P. and Atkinson, R. (2020). Environment International,
+#'   144, 105998. Burnett, R. T. et al. (2014). Environmental Health
+#'   Perspectives, 122(4), 397-403. WHO (2021). Global Air Quality Guidelines.
 #' @examples
 #' morie_envhealth_crf_pm25(12)$rr
 #' morie_envhealth_crf_no2(25, outcome = "respiratory")$rr
 #' @export
 morie_envhealth_crf_pm25 <- function(exposure, outcome = "all_cause_mortality",
                                      reference_conc = 5.8) {
-  ier <- list(all_cause_mortality = c(1.2, 0.34, 0.72),
-              ihd = c(1.91, 0.14, 0.49),
+  # all-cause: RR 1.08 (95% CI 1.06-1.09) per 10 ug/m3, Chen and Hoek (2020), the WHO 2021 review
+  loglinear <- c(all_cause_mortality = log(1.08))
+  # GBD 2013 cause-specific IER triples (Burnett et al. 2014)
+  ier <- list(ihd = c(1.91, 0.14, 0.49),
               stroke = c(1.46, 0.13, 0.61))
-  if (!outcome %in% names(ier)) {
+  if (!outcome %in% c(names(loglinear), names(ier))) {
     stop(sprintf("Unknown outcome '%s'. Available: %s", outcome,
-                 paste(names(ier), collapse = ", ")), call. = FALSE)
+                 paste(c(names(loglinear), names(ier)), collapse = ", ")), call. = FALSE)
   }
-  p <- ier[[outcome]]
   z <- as.numeric(exposure)
   scalar <- length(z) == 1L
   excess <- pmax(z - reference_conc, 0)
+  if (outcome %in% names(loglinear)) {
+    beta <- loglinear[[outcome]]
+    log_rr <- beta * excess / 10
+    return(.envhealth_crf(exp(log_rr), log_rr, z, scalar, reference_conc, "PM2.5",
+                          "Chen & Hoek (2020) Environ Int 143:105974; WHO (2021) Global AQ Guidelines",
+                          list(beta_per_10 = beta, form = "log-linear", outcome = outcome)))
+  }
+  p <- ier[[outcome]]
   rr <- 1 + p[1L] * (1 - exp(-p[2L] * excess^p[3L]))
   .envhealth_crf(rr, log(rr), z, scalar, reference_conc, "PM2.5",
                  "Burnett et al. (2014) EHP 122(4):397-403",
-                 list(alpha = p[1L], gamma = p[2L], delta = p[3L], outcome = outcome))
+                 list(alpha = p[1L], gamma = p[2L], delta = p[3L], form = "IER", outcome = outcome))
 }
 
 #' @rdname morie_envhealth_crf_pm25
 #' @export
 morie_envhealth_crf_no2 <- function(exposure, outcome = "all_cause_mortality",
                                     reference_conc = 10, beta_per_10 = NULL) {
-  betas <- c(all_cause_mortality = 0.039, respiratory = 0.029, childhood_asthma = 0.039)
+  # all-cause: RR 1.02 (95% CI 1.01-1.04) per 10 ug/m3, Huangfu and Atkinson (2020), the WHO 2021 review
+  betas <- c(all_cause_mortality = log(1.02), respiratory = 0.029, childhood_asthma = 0.039)
   if (is.null(beta_per_10)) {
     if (!outcome %in% names(betas)) {
       stop(sprintf("Unknown outcome '%s'. Available: %s or pass beta_per_10 explicitly.",
@@ -85,7 +101,7 @@ morie_envhealth_crf_no2 <- function(exposure, outcome = "all_cause_mortality",
   scalar <- length(z) == 1L
   log_rr <- beta * pmax(z - reference_conc, 0) / 10
   .envhealth_crf(exp(log_rr), log_rr, z, scalar, reference_conc, "NO2",
-                 "Atkinson et al. (2018); WHO (2021) Global AQ Guidelines",
+                 "Huangfu & Atkinson (2020) Environ Int 144:105998; WHO (2021) Global AQ Guidelines",
                  list(beta_per_10 = beta, outcome = outcome))
 }
 
@@ -372,7 +388,7 @@ morie_envhealth_cheatsheet <- function() {
         sprintf("baseline_rate=%s per 100k per year", format(baseline_rate))),
     row("population positive", population > 0, sprintf("population=%s", format(population))),
     row("pollutant supported by envhealth CRF", tolower(pollutant) %in% c("no2", "pm25"),
-        "Current CRFs: NO2 (log-linear), PM2.5 (Burnett IER). Other pollutants reject.")
+        "Current CRFs: NO2 (log-linear), PM2.5 (log-linear all-cause; Burnett IER for IHD and stroke). Other pollutants reject.")
   )
 }
 
@@ -453,10 +469,13 @@ morie_verify_pollution <- function(pollutant, outcome = "all_cause_mortality",
   baseline_per_person <- baseline_rate / 1e5
   exposure_delta <- max(0, exposure_mean - reference)
   beta_per_unit <- log(crf$rr) / max(exposure_delta, 1e-9)
-  displaced <- morie_envhealth_mortality_displaced(exposure_delta, population,
+  # the deaths displaced by removing the excess exposure are counted over the exposed share of the
+  # population, and the burden uses the same reference concentration as the RR printed above it
+  displaced <- morie_envhealth_mortality_displaced(exposure_delta, population * exposure_prevalence,
                                                    baseline_per_person, beta_per_unit)
   burden <- morie_envhealth_burden(exposure_mean, exposure_prevalence, baseline_per_person,
-                                   population, pollutant = if (pollutant == "pm25") "PM2.5" else "NO2")
+                                   population, pollutant = if (pollutant == "pm25") "PM2.5" else "NO2",
+                                   reference_conc = reference)
   equity <- if (!is.null(equity_df) && "income" %in% names(equity_df)) {
     morie_envhealth_equity(equity_df, "exposure", "income")
   }

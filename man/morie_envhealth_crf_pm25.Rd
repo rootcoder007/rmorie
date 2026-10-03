@@ -41,12 +41,18 @@ A list of class \code{morie_envhealth_crf} with \code{rr},
 \code{pollutant}, \code{citation} and \code{extra}.
 }
 \description{
-\code{morie_envhealth_crf_pm25()} is the Integrated Exposure-Response
-curve of Burnett et al. (2014, Eq. 1),
-\deqn{RR(z) = 1 + \alpha (1 - e^{-\gamma (z - z_{cf})^{\delta}})}
-for \eqn{z > z_{cf}} and 1 otherwise, with the GBD 2013 adult parameter
-triples. \code{morie_envhealth_crf_no2()} is the log-linear function of
-Atkinson et al. (2018) and WHO (2021),
+\code{morie_envhealth_crf_pm25()} is log-linear for all-cause mortality with
+the pooled cohort estimate of the WHO 2021 guideline review (Chen and Hoek
+2020: RR 1.08, 95\\% CI 1.06-1.09, per 10 micrograms per cubic metre),
+\deqn{RR(z) = \exp(\ln(1.08) (z - z_{cf}) / 10)}
+for \eqn{z > z_{cf}} and 1 otherwise; for the cause-specific outcomes (IHD,
+stroke) it is the Integrated Exposure-Response curve of Burnett et al.
+(2014, Eq. 1),
+\deqn{RR(z) = 1 + \alpha (1 - e^{-\gamma (z - z_{cf})^{\delta}}),}
+with the GBD 2013 triples; the IER was fit per cause and has no all-cause
+form. \code{morie_envhealth_crf_no2()} is the log-linear function of the
+WHO 2021 review (Huangfu and Atkinson 2020: RR 1.02, 95\\% CI 1.01-1.04, per
+10 micrograms per cubic metre for all-cause mortality),
 \deqn{RR(z) = \exp(\beta (z - z_{cf}) / 10).}
 }
 \examples{
@@ -54,8 +60,8 @@ morie_envhealth_crf_pm25(12)$rr
 morie_envhealth_crf_no2(25, outcome = "respiratory")$rr
 }
 \references{
-Burnett, R. T. et al. (2014). Environmental Health
-Perspectives, 122(4), 397-403. Atkinson, R. W. et al. (2018).
-Environmental Research, 161, 101-113. WHO (2021). Global Air Quality
-Guidelines.
+Chen, J. and Hoek, G. (2020). Environment International, 143,
+105974. Huangfu, P. and Atkinson, R. (2020). Environment International,
+144, 105998. Burnett, R. T. et al. (2014). Environmental Health
+Perspectives, 122(4), 397-403. WHO (2021). Global Air Quality Guidelines.
 }

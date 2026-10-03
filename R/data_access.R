@@ -281,23 +281,24 @@ morie_fetch <- function(url,
   if (format == "auto") format <- .morie_detect_format(full_url)
 
   if (format == "zip") {
-    if (!nzchar(zip_member)) {
-      stop("A 'zip_member' is required to extract from a .zip resource.",
-        call. = FALSE
-      )
-    }
     zpath <- .morie_download(full_url, ext = "zip")
     on.exit(unlink(zpath), add = TRUE)
     exdir <- tempfile("morie-unzip-")
     dir.create(exdir)
     on.exit(unlink(exdir, recursive = TRUE), add = TRUE)
     members <- utils::unzip(zpath, list = TRUE)$Name
-    hit <- members[basename(members) == zip_member]
-    if (length(hit) == 0L) {
-      hit <- members[grepl(zip_member, members, fixed = TRUE)]
-    }
-    if (length(hit) == 0L) {
-      stop("zip member '", zip_member, "' not found in ", url, call. = FALSE)
+    if (!nzchar(zip_member)) {
+      # no member named: the archive's first CSV (a StatCan product zip holds one table plus codebooks)
+      hit <- members[grepl("[.]csv$", members, ignore.case = TRUE)]
+      if (length(hit) == 0L) stop("no CSV member in ", url, "; pass 'zip_member'", call. = FALSE)
+    } else {
+      hit <- members[basename(members) == zip_member]
+      if (length(hit) == 0L) {
+        hit <- members[grepl(zip_member, members, fixed = TRUE)]
+      }
+      if (length(hit) == 0L) {
+        stop("zip member '", zip_member, "' not found in ", url, call. = FALSE)
+      }
     }
     utils::unzip(zpath, files = hit[1L], exdir = exdir, junkpaths = TRUE)
     inner <- file.path(exdir, basename(hit[1L]))
@@ -450,9 +451,18 @@ morie_fetch_arcgis <- function(layer_url, where = "1=1", out_fields = "*",
   offset <- 0L
   fetched <- 0L
   pages <- list()
+  quiet <- .morie_dl_quiet()
+  t0 <- proc.time()[["elapsed"]]
+  total <- if (!quiet) tryCatch({
+    cnt <- .morie_from_json(.morie_read_text(.morie_url_with_params(query_url, c(list(where = where, returnCountOnly = "true", f = "json"), params))), simplifyVector = TRUE)
+    as.numeric(cnt$count)
+  }, error = function(e) NA_real_) else NA_real_
   repeat {
     this_page <- min(page_size, max_records - fetched)
     if (this_page <= 0L) break
+    if (!quiet) {
+      cat(sprintf("\r%s", .morie_dl_line(basename(layer_url), fetched, if (is.finite(total)) min(total, max_records) else NA, t0, length(pages), unit = "rows")), file = stderr())
+    }
     p <- c(list(
       where = where, outFields = out_fields,
       returnGeometry = "false", f = "json",
@@ -485,6 +495,9 @@ morie_fetch_arcgis <- function(layer_url, where = "1=1", out_fields = "*",
       break
     }
     offset <- offset + NROW(attrs)
+  }
+  if (!quiet) {
+    cat(sprintf("\r%s\n", .morie_dl_line(basename(layer_url), fetched, if (is.finite(total)) min(total, max_records) else NA, t0, length(pages), unit = "rows")), file = stderr())
   }
   if (length(pages) == 0L) {
     return(data.frame())

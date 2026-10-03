@@ -330,7 +330,7 @@ test_that("verify-pollution and emissions verbs", {
   r <- .capture("verify-pollution", "--pollutant", "no2", "--demo")
   expect_equal(r$status, 0L)
   expect_match(r$text, "STATUS: ok")
-  expect_match(r$text, "source:   Atkinson")
+  expect_match(r$text, "source:   Huangfu & Atkinson")
   f <- .capture("verify-pollution", "--pollutant", "pm25", "--exposure-mean", "3", "--exposure-prevalence", "0.5")
   expect_equal(f$status, 1L)
   expect_match(f$text, "assumption_failure")

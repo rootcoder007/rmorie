@@ -102,7 +102,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         rows <- list(
           c("Ollama (local)", if (morie_llm_probe_ollama()) "reachable" else "not reachable",
             .morie_llm_ollama_base()),
-          c("Hosted LLM", if (is.null(.morie_llm_hosted_key())) "not logged in -- rmorie login"
+          c("Hosted LLM", if (is.null(.morie_llm_hosted_key())) "not logged in -- rmorie login (GitHub) or rmorie login --email you@example.com"
                           else if (morie_llm_probe_hosted()) "logged in, gateway answering"
                           else if (.morie_llm_hosted_rejected()) "key rejected by the gateway -- rmorie login again"
                           else "logged in, gateway not reachable",
@@ -119,7 +119,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       },
       models = {
         if (is.null(.morie_llm_hosted_key())) {
-          out("Hosted LLM: not logged in -- rmorie login\n")
+          out("Hosted LLM: not logged in -- rmorie login (GitHub) or rmorie login --email you@example.com\n")
         } else {
           hm <- morie_llm_hosted_models()
           if (!length(hm)) {
@@ -183,13 +183,12 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           out(sprintf("Written to %s (%d files)\n", od, length(list.files(od))))
         }
       },
-      `list-datasets` = {
-        d <- morie_list_datasets()
-        out(paste0(utils::capture.output(print(d, row.names = FALSE)), collapse = "\n"))
-        out("\n")
-      },
+      `list-datasets` = status <- .cli_list_datasets(out),
       pull = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) {
+        if (!length(rest)) {
+          out("usage: rmorie pull KEY [--out FILE.csv] | pull --all [--out DIR]   (keys: rmorie list-datasets)\n")
+          status <- 2L
+        } else if (identical(rest[[1L]], "--help")) {
           out("usage: rmorie pull KEY [--out FILE.csv] | pull --all [--out DIR]   (keys: rmorie list-datasets)\n")
         } else if (identical(rest[[1L]], "--all")) {
           d <- morie_list_datasets()
@@ -237,11 +236,11 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         }
       },
       inspect = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie inspect PATH [--module NAME]\n")
+        if (identical(rest[1L], "--help")) out("usage: rmorie inspect PATH [--module NAME]\n")
         else status <- .cli_inspect(rest, flag, out)
       },
       verify = {
-        if (!length(rest) || identical(rest[[1L]], "--help")) out("usage: rmorie verify PATH [--module NAME]\n")
+        if (identical(rest[1L], "--help")) out("usage: rmorie verify PATH [--module NAME]\n")
         else status <- .cli_verify(rest, flag, out)
       },
       `profile-dataset` = status <- .cli_profile_dataset(rest, flag, has, out),
@@ -254,7 +253,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       chat = status <- .cli_chat(rest, flag, out),
       selftest = status <- .cli_selftest(out),
       tutorial = status <- .cli_tutorial(has, out),
-      `generate-template` = status <- .cli_generate_template(flag, out),
+      `generate-template` = status <- .cli_generate_template(rest, flag, has, out),
       update = status <- .cli_update(has, out),
       crypto = status <- .cli_crypto(rest, flag, out),
       ingest = status <- .cli_ingest(rest, flag, has, out),
@@ -280,7 +279,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  rmorie list-datasets\n",
         "  rmorie pull ocp21 --out cpads.csv            # the real CPADS PUMF; cached, then the modules use it\n",
         "  rmorie pull --all --out datasets/            # every dataset the catalog knows\n",
-        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (after rmorie login)\n\n",
+        "  rmorie pull chicago_crime/incidents          # curated tables at data.rmorie.com (after rmorie login, GitHub or --email)\n\n",
         "ASK A MODEL\n",
         "  rmorie login                                 # hosted tier, free: GitHub or email sign-in\n",
         "  rmorie models                                # what you can ask, default marked *\n",
@@ -390,23 +389,22 @@ install_cli <- function(dir = file.path(path.expand("~"), ".local", "bin"), name
   if (!nzchar(src)) stop("the launcher is missing from this installation")
   dir.create(dir, recursive = TRUE, showWarnings = FALSE)
   # the launcher pins the library this copy of the package lives in, so the shell runs the same
-  # rmorie as the R session that installed it, whatever R_LIBS the shell has; ~/.Renviron is honoured
+  # rmorie as the R session that installed it, whatever R_LIBS the shell or ~/.Renviron sets: the
+  # pin is applied inside R with .libPaths(), after Rscript has read every environment file
   lib <- normalizePath(dirname(system.file(package = utils::packageName())), winslash = "/")
   pkg <- utils::packageName()
   if (.Platform$OS.type == "windows") {
     target <- file.path(dir, paste0(name, ".cmd"))
-    writeLines(sprintf(paste0("@echo off\r\nset \"R_LIBS=%s;%%R_LIBS%%\"\r\n",
-                              "Rscript --no-save --no-restore -e \"q <- %s::morie_cli(); quit(status = as.integer(q))\" %%*"),
-                       gsub("/", "\\\\", lib, fixed = TRUE), pkg), target)
+    writeLines(sprintf(paste0("@echo off\r\n",
+                              "Rscript --no-save --no-restore -e \".libPaths(c('%s', .libPaths())); q <- %s::morie_cli(); quit(status = as.integer(q))\" %%*"),
+                       lib, pkg), target)
   } else {
     target <- file.path(dir, name)
     if (file.exists(target) || !is.na(Sys.readlink(target))) unlink(target)
     writeLines(c("#!/bin/sh",
                  sprintf("# rmorie command-line launcher (written by %s::install_cli()); runs the package installed in", pkg),
-                 sprintf("# %s", lib),
-                 sprintf("R_LIBS=\"%s${R_LIBS:+:$R_LIBS}\"", lib),
-                 "export R_LIBS",
-                 sprintf("exec Rscript --no-save --no-restore -e 'suppressPackageStartupMessages({ q <- %s::morie_cli(); quit(status = as.integer(q)) })' \"$@\"", pkg)),
+                 sprintf("# %s (pinned with .libPaths() inside R, so R_LIBS in the shell or ~/.Renviron cannot replace it)", lib),
+                 sprintf("exec Rscript --no-save --no-restore -e 'suppressPackageStartupMessages({ .libPaths(c(\"%s\", .libPaths())); q <- %s::morie_cli(); quit(status = as.integer(q)) })' \"$@\"", lib, pkg)),
                target)
     Sys.chmod(target, "0755")
   }

@@ -1521,15 +1521,6 @@ morie_siu_compare <- function(case_number, external,
 #' @noRd
 .siu_llm_call_one <- function(model, prompt,
                               timeout_s = .siu_llm_default_timeout()) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop("LLM helpers require the 'httr2' package: ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
-  }
   providers <- .siu_llm_providers()
   if (!model %in% names(providers)) {
     stop("Unknown LLM model: '", model, "'. Available: ",
@@ -1547,7 +1538,7 @@ morie_siu_compare <- function(case_number, external,
   } else if (p$env_required == "MORIE_HOSTED_KEY_OR_LOGIN") {
     env_val <- .morie_llm_hosted_key() %||% ""
     if (!nzchar(env_val)) {
-      stop("not logged in to the hosted MORIE tier; run morie_llm_login() (or `rmorie login`) first, ",
+      stop("not logged in to the hosted MORIE tier; run morie_llm_login() or morie_llm_login(email = \"you@example.com\") (shell: `rmorie login [--email ...]`) first, ",
            "or use model = \"ollama\" with a local Ollama daemon.", call. = FALSE)
     }
   } else {
@@ -1561,6 +1552,15 @@ morie_siu_compare <- function(case_number, external,
         call. = FALSE
       )
     }
+  }
+  if (!requireNamespace("httr2", quietly = TRUE)) {
+    stop("LLM helpers require the 'httr2' package: ",
+      "install.packages('httr2')",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("jsonlite", quietly = TRUE)) {
+    stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
   }
   env <- setNames(list(env_val), p$env_required)
   req_spec <- p$build(env, prompt)

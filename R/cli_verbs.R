@@ -65,7 +65,53 @@
   paste0(paste(lines, collapse = "\n"), "\n")
 }
 
+# where a catalog entry comes from, in the words `morie list-datasets` uses
+.cli_dataset_route <- function(e) {
+  has <- function(col) col %in% names(e) && !is.na(e[[col]]) && nzchar(e[[col]])
+  if (has("rmoriedata")) return("rmoriedata (CRAN)")
+  if (has("arcgis_url")) return("Toronto Police ArcGIS")
+  if (identical(e$source, "statcan")) return("Statistics Canada")
+  if (has("fetcher")) return(if (identical(e$source, "naps")) "ECCC NAPS" else e$fetcher)
+  if (has("download_url")) {
+    host <- sub("^https?://([^/]+).*$", "\\1", e$download_url)
+    return(paste0(host, if (has("hosted_key")) " (or data.rmorie.com)" else ""))
+  }
+  if (has("hosted_key")) return("data.rmorie.com (your MORIE key)")
+  if (has("hosted_file")) return("data.rmorie.com file (an R object: rmorie loads it, morie saves it)")
+  if (has("ckan_resource_id")) return(if (identical(e$source, "otis")) "data.ontario.ca" else "open.canada.ca")
+  paste0("own file: ", e$local_path)
+}
+
+.cli_list_datasets <- function(out) {
+  d <- morie_list_datasets()
+  cat_df <- morie_dataset_catalog()
+  route <- vapply(seq_len(nrow(d)), function(i) {
+    if (identical(d$type[i], "hosted")) return("data.rmorie.com (your MORIE key)")
+    .cli_dataset_route(cat_df[cat_df$key == d$key[i], , drop = FALSE][1L, ])
+  }, character(1L))
+  shown <- ifelse(d$cached & !is.na(d$rows), format(d$rows, big.mark = ",", trim = TRUE), "not cached")
+  out(paste0(sprintf("%-20s %-12s %10s  %s", d$key, d$type, shown, route), collapse = "\n"))
+  out("\n")
+  n_hub <- sum(d$type == "hosted")
+  n_cat <- nrow(d) - n_hub
+  n_own <- sum(startsWith(route, "own file"))
+  out(strrep("-", 96L))
+  out("\n")
+  out(sprintf("%d keys: %d download from their portal, rmoriedata or data.rmorie.com on first use; %d %s your own research file%s, placed under $MORIE_DATA_DIR/datasets/ with the path%s shown.\n",
+              n_cat, n_cat - n_own, n_own, if (n_own == 1L) "is" else "are", if (n_own == 1L) "" else "s", if (n_own == 1L) "" else "s"))
+  if (n_hub) {
+    out(sprintf("%d curated tables at data.rmorie.com (db/table keys), opened by your MORIE key: rmorie pull KEY\n", n_hub))
+  } else {
+    out("Curated tables at data.rmorie.com appear here after `rmorie login` (GitHub) or `rmorie login --email you@example.com` (they need the MORIE key).\n")
+  }
+  0L
+}
+
 .cli_inspect <- function(rest, flag, out) {
+  if (!length(rest)) {
+    out("usage: rmorie inspect PATH [--module NAME]   (a CSV, or a directory of module outputs)\n")
+    return(2L)
+  }
   target <- rest[[1L]]
   if (dir.exists(target)) {
     files <- .cli_csv_files(target, flag("--module"), out)
@@ -85,6 +131,10 @@
 }
 
 .cli_verify <- function(rest, flag, out) {
+  if (!length(rest)) {
+    out("usage: rmorie verify PATH [--module NAME]   (a CSV, or a directory of module outputs)\n")
+    return(2L)
+  }
   target <- rest[[1L]]
   files <- if (dir.exists(target)) .cli_csv_files(target, flag("--module"), out) else if (file.exists(target)) target else character()
   if (!length(files)) {
@@ -274,7 +324,7 @@
     return(sprintf("your hosted key was rejected by %s -- run `rmorie login` again\n", .morie_llm_hosted_base()))
   }
   if (!is.null(model)) return(sprintf("no provider answered for model '%s' (rmorie models lists the names)\n", model))
-  "no LLM backend answered; this is the local fallback text (rmorie login, or start Ollama)\n"
+  "no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email, or start Ollama)\n"
 }
 
 .cli_chat <- function(rest, flag, out) {
@@ -385,7 +435,7 @@
          c("list-datasets")),
     list("What to do next",
          paste0("  Run any module:        rmorie run-module NAME\n  Pull a dataset:        rmorie pull KEY\n",
-                "  Ask for help:          rmorie ask \"...\"   (rmorie login first for the hosted tier)\n",
+                "  Ask for help:          rmorie ask \"...\"   (rmorie login, GitHub or --email, first)\n",
                 "  One-page reference:    rmorie cheatsheet\n  Issues:                https://github.com/rootcoder007/rmorie/issues\n\nWelcome aboard."),
          NULL))
   for (i in seq_along(steps)) {
@@ -410,12 +460,32 @@
   0L
 }
 
-.cli_generate_template <- function(flag, out) {
-  module <- flag("--module") %||% "power-design"
+.cli_generate_template <- function(rest, flag, has, out) {
+  positional <- rest[!startsWith(rest, "--") & !rest %in% c(flag("--module"), flag("--out"))]
+  module <- flag("--module") %||% (if (length(positional)) positional[[1L]] else "power-design")
   dest <- flag("--out") %||% "first-paper.md"
+  key <- gsub("-", "_", module, fixed = TRUE)
+  ns_exports <- getNamespaceExports(asNamespace(utils::packageName()))
+  known_module <- module %in% morie_module_names()
+  known_family <- any(startsWith(ns_exports, paste0("morie_", key)))
+  if (!known_module && !known_family) {
+    out(sprintf("unknown module: %s (a pipeline module from `rmorie list-modules`, or a method family such as hawkes or dml)\n", module))
+    return(1L)
+  }
+  if (file.exists(dest) && !has("--force")) {
+    out(sprintf("%s already exists; pass --out NAME to write elsewhere or --force to replace it\n", dest))
+    return(1L)
+  }
   src <- system.file("templates", "first-paper.md", package = utils::packageName())
   if (!nzchar(src)) stop("the first-paper template is missing from this installation", call. = FALSE)
   txt <- gsub("[MODULE_NAME]", module, paste(readLines(src, warn = FALSE), collapse = "\n"), fixed = TRUE)
+  if (known_module) {
+    mods <- morie_list_morie_modules()
+    desc <- mods$description[match(module, mods$name)]
+    if (length(desc) == 1L && !is.na(desc) && nzchar(desc)) {
+      txt <- gsub("[REPLACE_WITH_MODULE_DESCRIPTION]", sub("[.]$", "", desc), txt, fixed = TRUE)
+    }
+  }
   dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
   writeLines(txt, dest)
   out(sprintf("wrote %s  (%s chars)\n", dest, format(nchar(txt), big.mark = ",")))
@@ -666,7 +736,7 @@
     out("usage: rmorie exec 'R CODE' | rmorie exec --file script.R\n")
     return(2L)
   }
-  env <- new.env(parent = globalenv())
+  env <- new.env(parent = asNamespace(utils::packageName()))  # the package's functions are in scope, as in rmorie exec
   printed <- utils::capture.output(res <- withVisible(eval(parse(text = code), envir = env)))
   if (length(printed)) out(paste0(paste(printed, collapse = "\n"), "\n"))
   if (res$visible) out(paste0(paste(utils::capture.output(print(res$value)), collapse = "\n"), "\n"))
@@ -688,6 +758,11 @@
   if (!nzchar(ed)) ed <- Sys.getenv("EDITOR", "")
   if (!nzchar(ed)) {
     out(sprintf("No editor: set EDITOR, or open %s in RStudio / VS Code.\n", f))
+    return(1L)
+  }
+  ed_bin <- basename(strsplit(trimws(ed), "[[:space:]]+")[[1L]][1L])
+  if (!isatty(stdin()) && ed_bin %in% c("nano", "vi", "vim", "nvim", "emacs", "pico", "ed", "micro", "joe", "ne")) {
+    out(sprintf("%s is a terminal editor and stdin is not a terminal here; run `rmorie edit %s` from a shell, or set EDITOR to a graphical editor\n", ed_bin, f))
     return(1L)
   }
   if (!file.exists(f)) file.create(f)
@@ -736,6 +811,13 @@
     out("--exposure-mean and --exposure-prevalence go together (the share of the population at that mean exposure)\n")
     return(2L)
   }
+  for (nm in c("--exposure-mean", "--exposure-prevalence", "--reference", "--baseline-rate", "--population")) {
+    v <- flag(nm)
+    if (!is.null(v) && (is.na(suppressWarnings(as.numeric(v))) || !is.finite(as.numeric(v)))) {
+      out(sprintf("%s must be a number, not '%s'\n", nm, v))
+      return(2L)
+    }
+  }
   r <- morie_verify_pollution(
     pol, outcome = flag("--outcome") %||% "all_cause_mortality", region = flag("--region"),
     years = flag("--years"), demo = has("--demo"), exposure_csv = flag("--exposure-csv"),
@@ -754,7 +836,7 @@
 
 .cli_emissions <- function(flag, has, out) {
   secs <- suppressWarnings(as.numeric(flag("--seconds") %||% "3"))
-  if (length(secs) != 1L || is.na(secs) || secs <= 0) {
+  if (length(secs) != 1L || is.na(secs) || !is.finite(secs) || secs <= 0) {
     out(sprintf("--seconds must be a positive number, not '%s'\n", flag("--seconds")))
     return(2L)
   }

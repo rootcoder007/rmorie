@@ -860,7 +860,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       "  - rmoriedata::morie_data_catalog()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
       "  - morie_datasets_*()                dedicated fetchers ",
       "(e.g. morie_datasets_chicago_iucr_codes())\n",
-      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login)",
+      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login, GitHub or --email)",
       call. = FALSE
     )
   }
@@ -868,7 +868,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   entry <- catalog[catalog$key == matched, ]
   has <- function(col) col %in% names(entry) && nzchar(entry[[col]])
   has_remote <- has("ckan_resource_id") || has("download_url") ||
-    has("arcgis_url")
+    has("arcgis_url") || has("fetcher") || has("rmoriedata")
 
   if (!refresh) {
     # 1. Built-in database (ships with package).
@@ -939,7 +939,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   hosted_copy <- function(why) {
     if (is.null(.morie_llm_hosted_key())) {
       stop(matched, ": ", why, "; the data.rmorie.com copy (", entry$hosted_key,
-           ") opens with your MORIE key: run `rmorie login` once.", call. = FALSE)
+           ") opens with your MORIE key: run `rmorie login` (GitHub) or `rmorie login --email you@example.com` once.", call. = FALSE)
     }
     data <- morie_load_hosted_dataset(entry$hosted_key, db_path = db_path, refresh = refresh)
     morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
@@ -956,6 +956,25 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       db_path = db_path,
       con = con
     )
+    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    return(data)
+  }
+
+  # 4a. A table shipped by rmoriedata on CRAN (the reviewed SIU corpus and its manifest).
+  if (has("rmoriedata")) {
+    if (!requireNamespace("rmoriedata", quietly = TRUE)) {
+      stop(matched, " ships in the rmoriedata package: install.packages(\"rmoriedata\")", call. = FALSE)
+    }
+    data <- as.data.frame(rmoriedata::morie_data_load(entry$rmoriedata))
+    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    return(data)
+  }
+
+  # 4b. A fetcher in this package (the NAPS hourly files), with its catalogued arguments.
+  if (has("fetcher")) {
+    message("Fetching ", matched, " via ", entry$fetcher, "() ...")
+    fetcher <- get(entry$fetcher, envir = asNamespace(utils::packageName()))
+    data <- do.call(fetcher, .morie_parse_fetcher_args(if (has("fetcher_args")) entry$fetcher_args else ""))
     morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
     return(data)
   }
