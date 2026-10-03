@@ -18,6 +18,12 @@ list with \code{total}, \code{hier}, \code{alpha}, \code{nf}, \code{expvar}.
 Native principal-axis approximation of McDonald's omega
 (total + hierarchical).
 }
+\details{
+Loadings come from principal-axis factoring (communalities iterated on the
+reduced correlation matrix); \code{hier} takes the first unrotated factor as the general
+factor, so with \code{nf = 1} it equals \code{total} up to the model fit, and with \code{nf > 1} it is
+an approximation to the Schmid-Leiman general-factor omega.
+}
 \examples{
 if (requireNamespace("psych", quietly = TRUE)) {
   set.seed(1)

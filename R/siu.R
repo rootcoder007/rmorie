@@ -1029,6 +1029,10 @@ morie_siu_audit_case <- function(case_number,
   if (!nzchar(h)) {
     return("")
   }
+  # Page bytes read in a C or Latin-1 session are not marked UTF-8; mixing them with the UTF-8
+  # entity replacements below then fails ("input string 1 is invalid UTF-8"). Mark valid UTF-8
+  # as such and read anything else as Latin-1.
+  h <- if (validUTF8(h)) `Encoding<-`(h, "UTF-8") else iconv(h, "latin1", "UTF-8", sub = "")
   # Drop <script>...</script> and <style>...</style> chunks first.
   h <- gsub("(?is)<script\\b[^>]*>.*?</script>", " ", h, perl = TRUE)
   h <- gsub("(?is)<style\\b[^>]*>.*?</style>", " ", h, perl = TRUE)
@@ -1634,6 +1638,7 @@ morie_siu_compare <- function(case_number, external,
   }
   stop("All LLM providers failed:\n  ",
     paste(errs, collapse = "\n  "),
+    "\n", .cli_llm_fallback_cause(model[[1L]]),
     call. = FALSE
   )
 }

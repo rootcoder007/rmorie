@@ -255,3 +255,166 @@ test_that("hyphenated catalog keys resolve as written, emissions refuses a day-l
   expect_match(txt, "which provides [a-z]")
   expect_match(txt, "rmorie generate-template")
 })
+
+test_that("round 4: a small stratified total names the strata it leaves empty", {
+  df <- data.frame(region = rep(c("N", "S", "E", "W"), c(50L, 30L, 15L, 5L)), x = seq_len(100L))
+  expect_message(s <- morie_stratified_sample(df, "region", 3L, proportional = TRUE, seed = 1L),
+                 "leaves E, W with no rows")
+  expect_equal(sort(unique(s$region)), c("N", "S"))
+  expect_silent(morie_stratified_sample(df, "region", 2L, seed = 1L))
+})
+
+test_that("round 4: both spellings of a NAPS key resolve and analyze reports a subject whose analyses all failed", {
+  expect_equal(.fuzzy_match_key("naps_co_on_2023"), "naps-co-on-2023")
+  expect_equal(.fuzzy_match_key("naps-co-on-2023"), "naps-co-on-2023")
+  failed <- list(a = list(title = "x (failed)", warnings = "boom"),
+                 b = list(title = "y", summary_lines = list(), tables = list(), payload = list(), warnings = "missing column(s): z"))
+  expect_true(.cli_analyze_all_failed(failed))
+  expect_true(.cli_analyze_all_failed(.morie_to_json(failed, auto_unbox = TRUE)))
+  ok <- list(a = list(title = "x", tables = list(data.frame(n = 1))))
+  expect_false(.cli_analyze_all_failed(ok))
+  expect_false(.cli_analyze_all_failed(list(subject = "tps", status = "not_available")))
+})
+
+test_that("round 4: the fallback cause names the requested model", {
+  withr::local_envvar(GEMINI_API_KEY = "", GOOGLE_API_KEY = "")
+  local_mocked_bindings(.morie_llm_api_base = function() NULL, .morie_llm_hosted_key = function() NULL)
+  expect_match(.cli_llm_fallback_cause("nosuchmodel"), "no provider answered for model 'nosuchmodel'")
+  # a stale hosted key is still named, after the model
+  local_mocked_bindings(.morie_llm_hosted_key = function() "k", .morie_llm_hosted_rejected = function() TRUE)
+  expect_match(.cli_llm_fallback_cause("nosuchmodel"), "model 'nosuchmodel': your hosted key was rejected")
+  # asking Gemini with a Gemini key set points at that key, whatever else is configured
+  withr::local_envvar(GEMINI_API_KEY = "AIzaFAKE")
+  expect_match(.cli_llm_fallback_cause("gemini"), "model 'gemini': your GEMINI_API_KEY")
+})
+
+test_that("round 4: omega hierarchical is below one on a two-factor scale", {
+  set.seed(4)
+  n <- 400L
+  g <- rnorm(n)
+  s1 <- rnorm(n)
+  s2 <- rnorm(n)
+  X <- cbind(sapply(1:4, function(j) 0.5 * g + 0.6 * s1 + rnorm(n, sd = 0.6)),
+             sapply(1:4, function(j) 0.5 * g + 0.6 * s2 + rnorm(n, sd = 0.6)))
+  o1 <- morie_psymet_omega(X, nf = 1)
+  expect_equal(o1$hier, o1$total, tolerance = 0.01)  # one factor: general factor = the factor, up to model fit
+  o2 <- morie_psymet_omega(X, nf = 2)
+  expect_lt(o2$hier, 0.7)                         # the group factors carry real variance
+  expect_lt(o2$hier, o2$total)
+  # Schmid-Leiman by hand: promax, g loadings sqrt(phi_12) per factor, project the items
+  R <- cor(X)
+  L <- .morie_paf(R, 2L)
+  pm <- stats::promax(L, m = 4)
+  P <- unclass(pm$loadings)
+  Phi <- solve(crossprod(pm$rotmat))
+  s <- sign(colSums(P))
+  P <- sweep(P, 2L, s, "*")
+  g <- drop(P %*% rep(sqrt((Phi * outer(s, s))[1L, 2L]), 2L))
+  expect_equal(o2$hier, sum(g)^2 / sum(R), tolerance = 1e-12)
+})
+
+test_that("round 4: verify reports a declared placeholder table and a header-only table instead of failing them", {
+  d <- withr::local_tempdir()
+  utils::write.csv(data.frame(model = "not computed", or = NA, p_value = NA,
+                              significant = "SMOTE resampling is not part of the R workflow"),
+                   file.path(d, "smote_or.csv"), row.names = FALSE)
+  writeLines("\"estimand\",\"estimate\",\"se\"", file.path(d, "dml.csv"))
+  rp <- .cli_verify_csv(file.path(d, "smote_or.csv"))
+  expect_true(rp$passed)
+  expect_match(.cli_verify_text(rp), "placeholder row")
+  rh <- .cli_verify_csv(file.path(d, "dml.csv"))
+  expect_true(rh$passed)
+  expect_match(.cli_verify_text(rh), "header only")
+  utils::write.csv(data.frame(a = 1:2, b = NA), file.path(d, "bad.csv"), row.names = FALSE)
+  expect_false(.cli_verify_csv(file.path(d, "bad.csv"))$passed)
+})
+
+test_that("round 4: the OTIS grid names the columns a pair lacks", {
+  df <- data.frame(UniqueIndividual_ID = 1:6, EndFiscalYear = 2023L, Gender = "M", Age_Category = "A",
+                   Region_AtTimeOfPlacement = "R", Region_MostRecentPlacement = "R",
+                   MentalHealth_Alert = c(0, 1, 0, 1, 0, 1), SuicideRisk_Alert = c(0, 0, 1, 1, 0, 1))
+  w <- character()
+  withCallingHandlers(suppressMessages(tryCatch(morie_otis_causal_grid(df), error = function(e) NULL)),
+                      warning = function(x) {
+                        w <<- c(w, conditionMessage(x))
+                        invokeRestart("muffleWarning")
+                      })
+  expect_true(any(grepl("\\(b\\).*lacks SuicideWatch_Alert, Number_Of_Placements", w)))
+  expect_true(any(grepl("\\(c\\).*NumberConsecutiveDays_Segregation", w)))
+})
+
+test_that("round 4: the two-proportion power table applies the design effect of the weights", {
+  set.seed(11)
+  n <- 300L
+  d <- data.frame(gender = sample(1:2, n, TRUE), heavy_drinking_30d = rbinom(n, 1, 0.3),
+                  weight = runif(n, 0.5, 3), alcohol_past12m = 1L, ebac_legal = rbinom(n, 1, 0.2),
+                  ebac_tot = runif(n), age_group = 1L, province_region = 1L, mental_health = 1L,
+                  physical_health = 1L, cannabis_any_use = rbinom(n, 1, 0.4))
+  tabs <- suppressWarnings(suppressMessages(.run_power_design_module_extended(d)))
+  pt <- tabs$power_two_proportion_gender
+  r <- pt[pt$power_scope == "heavy_drinking_30d", ][1L, ]
+  lab <- .cpads_labeled_data(d)
+  w <- lab$weight[lab$gender_label %in% c(r$group1, r$group2)]
+  deff <- length(w) * sum(w^2) / sum(w)^2
+  se <- sqrt(1 / r$n1 + 1 / r$n2)
+  z <- stats::qnorm(0.975)
+  expect_equal(r$n_eq_eff, r$n_eq * deff, tolerance = 1e-12)
+  expect_equal(r$power_srs, stats::pnorm(abs(r$h) / se - z), tolerance = 1e-12)
+  expect_equal(r$power_deff, stats::pnorm(abs(r$h) / (se * sqrt(deff)) - z), tolerance = 1e-12)
+  expect_gt(deff, 1)
+})
+
+test_that("round 4: REML tau2 is the converged optimum (metafor agrees once its threshold is tight)", {
+  skip_if_not_installed("metafor")
+  est <- c(-0.25, -0.10, -0.40, 0.05, -0.30)
+  v <- c(0.010, 0.020, 0.015, 0.030, 0.012)
+  ref <- metafor::rma(est, v, method = "REML", control = list(threshold = 1e-12, maxiter = 1000))$tau2
+  expect_equal(morie_meta_hksj(est, v, tau2 = "REML")$tau2, ref, tolerance = 1e-6)
+})
+
+test_that("round 4: resolve_so takes a case number in place of the report text", {
+  skip_if_not_installed("rmoriedata")
+  r <- morie_siu_resolve_so("17-OVI-201")
+  expect_equal(r$count, 1L)
+  expect_match(r$reason, "case 17-OVI-201, drid 46")
+  expect_error(morie_siu_resolve_so("99-ZZZ-999"), "is a case number")
+})
+
+test_that("round 4: SIU page text decodes in a C locale (unmarked UTF-8 and Latin-1 bytes)", {
+  u <- rawToChar(as.raw(c(0x3c, 0x70, 0x3e, 0x51, 0x75, 0xc3, 0xa9, 0x62, 0x65, 0x63, 0x20, 0x26, 0x65, 0x61, 0x63,
+                          0x75, 0x74, 0x65, 0x3b, 0x74, 0x26, 0x65, 0x61, 0x63, 0x75, 0x74, 0x65, 0x3b, 0x3c, 0x2f, 0x70, 0x3e)))
+  l1 <- rawToChar(as.raw(c(0x51, 0x75, 0xe9, 0x62, 0x65, 0x63, 0x20, 0x26, 0x61, 0x6d, 0x70, 0x3b)))
+  out <- withr::with_locale(c(LC_CTYPE = "C"), c(.siu_html_to_text(u), .siu_html_to_text(l1)))
+  expect_equal(out, c("Qu\u00e9bec \u00e9t\u00e9", "Qu\u00e9bec &"))
+})
+
+
+test_that("round 4: the native SIU parser reads ordinal dates and the force that notified the SIU", {
+  html <- paste0(
+    "<html><body><h2>The Investigation</h2><h3>Notification of the SIU</h3>",
+    "<p>At approximately 11:46 a.m. on August 3rd, 2017, the Guelph Police Service ( GPS ) notified the SIU ",
+    "of the injury.</p><p>Under the Police Services Act, the Director decides. The Ontario Police Services Board ",
+    "and the Police Services Act are named again here: Police Services Act.</p>",
+    "<h2>Incident Narrative</h2><p>The GPS reported that at 10:30 a.m., on August 3rd, 2017, three masked men ",
+    "attempted to rob a bank.</p></body></html>")
+  f <- morie_siu_parse_report(html, engine = "native")
+  expect_equal(f[["police_service"]], "Guelph Police Service")
+  expect_equal(f[["date_siu_notified_iso"]], "2017-08-03")
+})
+
+test_that("round 4: only the expected design-weight warning is muffled in weighted binomial fits", {
+  d <- data.frame(y = c(0, 1, 0, 1, 1, 0, 1, 0), x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1.5, 2.2, 0.7, 1.1, 3.3, 0.9, 1.4, 2.6))
+  expect_silent(.glm_design_weighted(stats::glm(y ~ x, data = d, family = stats::binomial(), weights = w)))
+  sep <- data.frame(y = c(0, 0, 0, 1, 1, 1), x = 1:6, w = 1.5)
+  expect_warning(.glm_design_weighted(stats::glm(y ~ x, data = sep, family = stats::binomial(), weights = w)),
+                 "fitted probabilities")
+})
+
+test_that("round 4: the cause names the model first, then the real cause, and a Gemini model points at the Gemini key", {
+  withr::local_envvar(GEMINI_API_KEY = "", GOOGLE_API_KEY = "")
+  local_mocked_bindings(.morie_llm_api_base = function() NULL, .morie_llm_hosted_key = function() "k",
+                        .morie_llm_hosted_rejected = function() TRUE)
+  expect_match(.cli_llm_fallback_cause("nosuchmodel"), "model 'nosuchmodel': your hosted key was rejected")
+  withr::local_envvar(GEMINI_API_KEY = "AIzaFAKE")
+  expect_match(.cli_llm_fallback_cause("gemini"), "model 'gemini': your GEMINI_API_KEY")
+})

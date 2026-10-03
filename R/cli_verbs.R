@@ -61,7 +61,8 @@
 }
 
 .cli_verify_text <- function(rep) {
-  lines <- c(sprintf("%s: %s", rep$path, if (isTRUE(rep$passed)) "PASS" else "FAIL"))
+  lines <- c(sprintf("%s: %s%s", rep$path, if (isTRUE(rep$passed)) "PASS" else "FAIL",
+                     if (!is.null(rep$note)) paste0("  (", rep$note, ")") else ""))
   for (k in names(rep$checks)) {
     v <- rep$checks[[k]]
     lines <- c(lines, sprintf("  [%s] %s", if (isTRUE(v)) "ok" else "x", k))
@@ -169,7 +170,6 @@
   df <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE), error = function(e) NULL)
   checks$csv_parses <- !is.null(df)
   if (is.null(df)) return(list(path = path, passed = FALSE, checks = checks))
-  checks$has_rows <- nrow(df) > 0L
   checks$has_columns <- ncol(df) > 0L
   checks$unique_header <- !anyDuplicated(names(df))
   num <- vapply(df, is.numeric, TRUE)
@@ -178,8 +178,13 @@
   # only a column whose every cell is the NA token is
   raw <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE, colClasses = "character"),
                   error = function(e) NULL)
-  checks$no_empty_column <- nrow(df) == 0L || is.null(raw) ||
-    !any(vapply(raw, function(col) all(is.na(col) | col == "NA"), TRUE))
+  na_col <- function(col) all(is.na(col) | col == "NA")
+  # a one-row table whose text says what was not computed ("not computed", "deferred") with NA numbers is a
+  # declared placeholder, written by a module that skipped an optional step on purpose; a header-only table is empty
+  placeholder <- nrow(df) == 1L && !is.null(raw) && any(vapply(raw, na_col, TRUE)) &&
+    any(vapply(raw, function(col) !na_col(col) && grepl("not computed|deferred|not part of|not run|not available", col[[1L]], ignore.case = TRUE), TRUE))
+  checks$no_empty_column <- nrow(df) == 0L || is.null(raw) || placeholder ||
+    !any(vapply(raw, na_col, TRUE))
   # statistical sanity: a p-value lives in [0, 1]; a confidence interval's lower bound is below its upper
   pcols <- names(df)[grepl("^(p|p_value|pvalue|p\\.value|p_adj|p_adjusted|pval)$", tolower(names(df))) & num]
   checks$p_values_in_unit_interval <- !length(pcols) ||
@@ -188,7 +193,9 @@
   hi <- names(df)[tolower(names(df)) %in% c("ci_upper", "ci_high", "upper", "conf_high", "conf.high") & num]
   checks$ci_bounds_ordered <- !(length(lo) == 1L && length(hi) == 1L) ||
     all(is.na(df[[lo]]) | is.na(df[[hi]]) | df[[lo]] <= df[[hi]])
-  list(path = path, passed = all(unlist(checks)), checks = checks, rows = nrow(df), cols = ncol(df))
+  list(path = path, passed = all(unlist(checks)), checks = checks, rows = nrow(df), cols = ncol(df),
+       note = if (isTRUE(placeholder)) "placeholder row: this table was declared not computed" else
+         if (nrow(df) == 0L) "header only: the module wrote no rows here" else NULL)
 }
 
 .cli_profile_dataset <- function(rest, flag, has, out) {
@@ -337,25 +344,45 @@
   ans <- morie_llm_ask(morie_build_prompt(paste(rest, collapse = " "), context = ctx), model = mdl)
   out(paste0(ans, "\n"))
   if (isTRUE(attr(ans, "fallback"))) {
-    out(.cli_llm_fallback_cause())
+    out(.cli_llm_fallback_cause(mdl))
     return(1L)
   }
   0L
 }
 
+# TRUE when every analysis a subject ran came back empty or failed (tables, payload and summary all empty,
+# or a title marked "(failed)"): `rmorie analyze` then exits 1 instead of reporting success.
+.cli_analyze_all_failed <- function(res) {
+  if (is.character(res)) {
+    res <- tryCatch(.morie_from_json(res, simplifyVector = FALSE), error = function(e) NULL)
+  }
+  if (!is.list(res) || !length(res)) return(FALSE)
+  if (!is.null(res$status)) return(identical(res$status, "error"))
+  failed <- vapply(res, function(x) {
+    if (!is.list(x)) return(FALSE)
+    grepl("(failed)", x$title %||% "", fixed = TRUE) ||
+      (!length(x$tables %||% list()) && !length(x$payload %||% list()) && !length(x$summary_lines %||% list()))
+  }, TRUE)
+  length(failed) > 0L && all(failed)
+}
+
 # One line naming why no model answered, for `ask`, `percy` and friends.
 .cli_llm_fallback_cause <- function(model = NULL) {
+  gemini_key <- nzchar(Sys.getenv("GEMINI_API_KEY")) || nzchar(Sys.getenv("GOOGLE_API_KEY"))
+  gemini_line <- paste0("your GEMINI_API_KEY (or GOOGLE_API_KEY) did not get an answer from Gemini ",
+                        "(rejected key, quota or network); check it, or unset it to use the other providers\n")
+  # a model the caller named leads the line; a Gemini model with a Gemini key set points at that key
+  lead <- if (!is.null(model) && nzchar(model)) sprintf("no provider answered for model '%s': ", model) else ""
+  if (nzchar(lead) && gemini_key && grepl("gemini", model, ignore.case = TRUE)) return(paste0(lead, gemini_line))
   base <- .morie_llm_api_base()
   if (!is.null(base) && !isTRUE(tryCatch(.morie_llm_probe_api(), error = function(e) FALSE))) {
-    return(sprintf("could not connect to your endpoint %s (rmorie provider show / unset)\n", base))
+    return(paste0(lead, sprintf("could not connect to your endpoint %s (rmorie provider show / unset)\n", base)))
   }
   if (!is.null(.morie_llm_hosted_key()) && isTRUE(tryCatch(.morie_llm_hosted_rejected(), error = function(e) FALSE))) {
-    return(sprintf("your hosted key was rejected by %s -- run `rmorie login` again\n", .morie_llm_hosted_base()))
+    return(paste0(lead, sprintf("your hosted key was rejected by %s -- run `rmorie login` again\n", .morie_llm_hosted_base())))
   }
-  if (nzchar(Sys.getenv("GEMINI_API_KEY")) || nzchar(Sys.getenv("GOOGLE_API_KEY"))) {
-    return("your GEMINI_API_KEY (or GOOGLE_API_KEY) did not get an answer from Gemini (rejected key, quota or network); check it, or unset it to use the other providers\n")
-  }
-  if (!is.null(model)) return(sprintf("no provider answered for model '%s' (rmorie models lists the names)\n", model))
+  if (gemini_key) return(paste0(lead, gemini_line))
+  if (nzchar(lead)) return(paste0(lead, "rmorie models lists the names\n"))
   "no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email, or start Ollama)\n"
 }
 
@@ -871,7 +898,7 @@
 .cli_emissions <- function(flag, has, out) {
   country <- toupper(flag("--country") %||% "")
   if (nzchar(country) && is.null(.emissions_energy_mix()[[country]])) {
-    out(sprintf("--country %s: not an ISO-3 code in the energy-mix table; the world average will be used\n", country))
+    out(sprintf("--country %s: not an ISO-3 code in the energy-mix table; ignoring it and detecting the location instead (the world average applies only when detection fails; MORIE_COUNTRY_ISO overrides)\n", country))
     country <- ""
   }
   secs <- suppressWarnings(as.numeric(flag("--seconds") %||% "3"))

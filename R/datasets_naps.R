@@ -49,7 +49,7 @@ morie_fetch_naps <- function(year, pollutant = "no2", province = NULL, timeout =
   .morie_dl(url, dest, headers = c("User-Agent" = "Mozilla/5.0 (compatible; morie/1; +https://rmorie.com)"),
             label = basename(path), timeout = timeout)
   text <- readLines(dest, warn = FALSE, encoding = "UTF-8")
-  if (length(text)) text[1L] <- sub("^﻿", "", text[1L])
+  if (length(text)) text[1L] <- sub("^\ufeff", "", text[1L])
   out <- .morie_parse_naps_hourly(text, pollutant)
   if (!nrow(out)) stop(sprintf("NAPS has no %s hourly file for %s", toupper(pollutant), year), call. = FALSE)
   if (!is.null(province) && nzchar(province) && toupper(province) != "CA") {

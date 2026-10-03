@@ -93,6 +93,12 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
   }
 
   drawn <- pmin(alloc, strata_sizes[names(alloc)])  # a stratum shorter than its allocation gives every row
+  empty <- names(drawn)[drawn == 0L & strata_sizes[names(drawn)] > 0L]
+  if (length(empty)) {
+    message(sprintf(
+      "stratified sample: %d row%s over %d strata leaves %s with no rows (the allocation rounds small strata to zero); raise the total or allocate per stratum",
+      sum(drawn), if (sum(drawn) == 1L) "" else "s", length(strata), paste(empty, collapse = ", ")))
+  }
   rows <- unlist(mapply(function(idx, m) {
     sample(idx, size = min(m, length(idx)), replace = FALSE)
   }, strata, alloc, SIMPLIFY = FALSE))

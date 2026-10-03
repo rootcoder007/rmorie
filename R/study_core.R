@@ -61,6 +61,16 @@
   list(p = p, se = se, ci = ci)
 }
 
+
+# A binomial glm with survey design weights: R warns "non-integer #successes" on every fit, which is
+# expected for design weights (the point estimates are the weighted pseudo-likelihood ones). Only that
+# warning is muffled; any other warning from the fit (separation, fitted probabilities 0 or 1) still shows.
+.glm_design_weighted <- function(fit) {
+  withCallingHandlers(fit, warning = function(w) {
+    if (grepl("non-integer #successes", conditionMessage(w), fixed = TRUE)) invokeRestart("muffleWarning")
+  })
+}
+
 #' Internal helper: Weighted Binary Estimate
 #' @noRd
 .weighted_binary_estimate <- function(x, w) {
@@ -606,7 +616,7 @@
     )
   }))
   full_coefs <- .or_table(fits[[4]], model = NULL, lower_se_name = FALSE)
-  interaction_cmp <- stats::anova(fits[[4]], fits[[5]], test = "Chisq")
+  interaction_cmp <- suppressWarnings(stats::anova(fits[[4]], fits[[5]], test = "Chisq"))
   interaction_tbl <- data.frame(
     model_base = "Model 3",
     model_interaction = "Model 4",
@@ -618,7 +628,7 @@
     interaction_p_value = interaction_cmp$`Pr(>Chi)`[2],
     stringsAsFactors = FALSE
   )
-  drop_tbl <- stats::drop1(fits[[4]], test = "Chisq")
+  drop_tbl <- suppressWarnings(stats::drop1(fits[[4]], test = "Chisq"))  # refits each reduced model: same expected warning
   drop_tbl <- drop_tbl[setdiff(rownames(drop_tbl), "<none>"), , drop = FALSE]
   wald_tbl <- data.frame(
     predictor = rownames(drop_tbl),
@@ -958,20 +968,20 @@
   demog <- c("age_group_label", "gender_label", "province_region_label",
              "mental_health_label", "physical_health_label")
   eligible$.ebac_missing <- is.na(eligible$ebac_tot)
-  miss_fit <- stats::glm(
+  miss_fit <- .glm_design_weighted(stats::glm(
     .robust_formula(".ebac_missing", c("cannabis_any_use", demog), eligible),
     data = eligible,
     family = stats::binomial(),
     weights = weight
-  )
-  miss_fit_eligible <- stats::glm(
+  ))
+  miss_fit_eligible <- .glm_design_weighted(stats::glm(
     .robust_formula(".ebac_missing",
                     c("cannabis_any_use", "age_group_label", "gender_label"),
                     eligible),
     data = eligible,
     family = stats::binomial(),
     weights = weight
-  )
+  ))
   logit_primary <- stats::glm(
     .robust_formula("ebac_legal", c("cannabis_any_use", demog), observed),
     data = observed,

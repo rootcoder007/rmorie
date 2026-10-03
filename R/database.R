@@ -777,6 +777,11 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
   if (length(idx) == 1L) {
     return(catalog$key[idx])
   }
+  key_hyphen <- tolower(gsub("_", "-", key))  # naps_co_on_2023 -> naps-co-on-2023
+  idx <- which(catalog$key == key_hyphen)
+  if (length(idx) == 1L) {
+    return(catalog$key[idx])
+  }
   # Backward-compat: resolve old long keys to new short keys.
   if (key_lower %in% names(.OLD_TO_SHORT)) {
     short <- .OLD_TO_SHORT[[key_lower]]

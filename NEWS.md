@@ -1,5 +1,25 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* Fresh-user test, fourth pass. `morie_psymet_omega()` now factors by principal axes and
+  takes `hier` from the Schmid-Leiman transformation (promax-rotated factors, one general
+  factor from their correlations), so a multi-factor scale no longer reports omega
+  hierarchical near 1; it agrees with `psych::omega(fm = "pa", rotate = "Promax")` to 1e-3.
+  The two-proportion power table applies Kish's design effect of the weights (`n_eq_eff`,
+  `power_deff`) instead of placeholders, and `power_srs` uses the observed group sizes.
+  `rmorie verify` reports a declared placeholder table and a header-only table as such;
+  `rmorie analyze` exits 1 when every analysis of the subject failed; a small stratified total
+  names the strata it leaves empty; `ask --model` names the model no provider answered for, and
+  the SIU extraction chain ends with the same cause line; connection warnings no longer leak
+  before a download error; `login` says it is still waiting; `run-module` prints no completion
+  line when nothing was written; the OTIS grid names the columns a pair lacks; both spellings
+  of a NAPS key resolve; `emissions --country` with an unknown code says the location is
+  detected; `morie_siu_resolve_so()` accepts a case number. The REML heterogeneity estimate is
+  the converged optimum (metafor's default stopping threshold leaves it 0.3% off). The native SIU
+  parser reads ordinal dates ("August 3rd, 2017") and French months, and names the police service from
+  the sentence that notified the SIU (17-OVI-201 now reads Guelph Police Service, 2017-08-03); SIU page
+  text decodes in a C locale; ebac-core and ebac-integrations no longer print the expected design-weight
+  glm warning (other glm warnings still show); the causal-effects table drops an always-empty column.
+
 * Research: four new problems join the Lean-backed programme, each with its R function and
   tests. `morie_meta_random_effects()` and `morie_meta_dl_bias()` (pooling evaluations:
   the DerSimonian-Laird truncation is biased upward under homogeneity and the random-effects

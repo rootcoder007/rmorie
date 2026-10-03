@@ -67,7 +67,9 @@
   read_one <- function(u) {
     con <- base::url(u)
     on.exit(close(con), add = TRUE)
-    paste(readLines(con, warn = FALSE), collapse = "\n")
+    # url() warns ("cannot open URL", "InternetOpenUrl failed") before it errors; the error carries the cause
+    withCallingHandlers(paste(readLines(con, warn = FALSE), collapse = "\n"),
+                        warning = function(w) invokeRestart("muffleWarning"))
   }
   tryCatch(read_one(url), error = function(e) {
     wb <- tryCatch(rmoriebricklayer::wayback_snapshot_url(url),

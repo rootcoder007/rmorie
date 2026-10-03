@@ -150,7 +150,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           provider <- morie_llm_detect_provider()
           if (identical(provider, "local")) {
             out(paste0(.morie_llm_local_fallback(paste(rest, collapse = " ")), "\n"))
-            out(.cli_llm_fallback_cause())
+            out(.cli_llm_fallback_cause(mdl))
             status <- 1L
           } else {
             ans <- morie_llm_ask(paste(rest, collapse = " "), model = mdl, provider = provider)
@@ -178,10 +178,12 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
           res <- if (is.null(cp)) morie_run_morie_module(rest[[1L]], output_dir = od)
                  else morie_run_morie_module(rest[[1L]], cpads_csv = cp, output_dir = od)
-          out(sprintf("Completed module: %s\n", rest[[1L]]))
-          if (is.list(res) && length(names(res))) out(sprintf("Generated tables: %s\n", paste(names(res), collapse = ", ")))
           n_files <- length(list.files(od, recursive = TRUE))
-          out(sprintf("Written to %s (%d files)\n", od, n_files))
+          if (n_files > 0L) {
+            out(sprintf("Completed module: %s\n", rest[[1L]]))
+            if (is.list(res) && length(names(res))) out(sprintf("Generated tables: %s\n", paste(names(res), collapse = ", ")))
+            out(sprintf("Written to %s (%d files)\n", od, n_files))
+          }
           if (n_files == 0L) {
             out(sprintf("%s wrote nothing%s\n", rest[[1L]],
                         if (rest[[1L]] %in% c("figures", "tables", "meta-synthesis", "final-report")) ": it collects the figures and tables a project checkout wrote (data/manifest/outputs); run the analysis modules into that tree first" else ""))
@@ -211,7 +213,12 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           }
         } else {
           dest <- flag("--out") %||% paste0(gsub("[^A-Za-z0-9_.-]", "_", rest[[1L]]), ".csv")
-          df <- morie_load_dataset(rest[[1L]])
+          df <- withCallingHandlers(morie_load_dataset(rest[[1L]]), warning = function(w) {
+            # connection-layer warnings (url(), download.file) precede an error that already names the cause
+            if (grepl("cannot open|URL|InternetOpenUrl|download|connection|proxy", conditionMessage(w), ignore.case = TRUE)) {
+              invokeRestart("muffleWarning")
+            }
+          })
           dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
           wrote <- tryCatch({
             suppressWarnings(utils::write.csv(df, dest, row.names = FALSE))
@@ -320,6 +327,10 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           if (is.character(res)) out(paste0(res, "\n"))
           if ((is.list(res) && identical(res$status, "error")) ||
               (is.character(res) && grepl("\"status\"\\s*:\\s*\"error\"", res))) status <- 1L
+          if (status == 0L && .cli_analyze_all_failed(res)) {
+            out("every analysis in this subject failed (each entry's warnings field says why)\n")
+            status <- 1L
+          }
         }
       },
       version = out(sprintf("%s %s\n", pkg, as.character(utils::packageVersion(pkg)))),

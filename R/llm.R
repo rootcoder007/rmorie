@@ -317,8 +317,14 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' @noRd
 .morie_llm_local_fallback <- function(prompt) {
   # the attribute lets a script tell this text from an answer: isTRUE(attr(x, "fallback"))
+  base <- tryCatch(.morie_llm_api_base(), error = function(e) NULL)
+  head <- if (!is.null(base) && nzchar(base)) {
+    sprintf("MORIE is running in local-only mode (your endpoint %s did not answer).\n\n", base)
+  } else {
+    "MORIE is running in local-only mode (no LLM provider detected).\n\n"
+  }
   structure(paste0(
-    "MORIE is running in local-only mode (no LLM provider detected).\n\n",
+    head,
     "The analyses do not need a model: morie_run_pipeline(), ",
     "morie_run_morie_module() and every morie_* estimator work as they are. ",
     "To get answers from a model, enable one of these (tried in this order):\n",
@@ -689,8 +695,13 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
   if (isTRUE(open_browser)) try(utils::browseURL(info$verification_uri), silent = TRUE)
   interval <- as.numeric(info$interval %||% 5)
   deadline <- Sys.time() + poll_max_seconds
+  waited <- 0
   while (Sys.time() < deadline) {
     Sys.sleep(interval)
+    waited <- waited + interval
+    if (waited %% 30 < interval) {
+      message(sprintf("still waiting for the sign-in to be approved (%ds elapsed; Ctrl-C stops)", as.integer(waited)))
+    }
     req <- httr2::req_body_json(httr2::request(paste0(auth, "/device/token")),
                                 list(device_code = info$device_code))
     resp <- httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))

@@ -1104,13 +1104,25 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
     "(b) HighAlertComplexity -> AnyReadmission" = morie_otis_make_pair_b,
     "(c) RegionalVolatility -> SegregationDays" = morie_otis_make_pair_c
   )
+  needed <- list(
+    "(a) MentalHealth -> SuicideRisk" = c("UniqueIndividual_ID", "EndFiscalYear", "Gender", "Age_Category",
+      "Region_AtTimeOfPlacement", "Region_MostRecentPlacement", "MentalHealth_Alert", "SuicideRisk_Alert"),
+    "(b) HighAlertComplexity -> AnyReadmission" = c("UniqueIndividual_ID", "EndFiscalYear", "Gender", "Age_Category",
+      "Region_AtTimeOfPlacement", "Region_MostRecentPlacement", "MentalHealth_Alert", "SuicideRisk_Alert",
+      "SuicideWatch_Alert", "Number_Of_Placements"),
+    "(c) RegionalVolatility -> SegregationDays" = c("UniqueIndividual_ID", "EndFiscalYear", "Gender", "Age_Category",
+      "Region_AtTimeOfPlacement", "Region_MostRecentPlacement", "MentalHealth_Alert", "NumberConsecutiveDays_Segregation")
+  )
   pairs <- list()
   for (label in names(makers)) {
     pr <- tryCatch(makers[[label]](df), error = function(e) e)
     if (inherits(pr, "error")) {
       # a pair whose columns the frame lacks is skipped, not fatal (the bundled frame has no segregation days)
       why <- conditionMessage(pr)
-      if (grepl("undefined columns selected", why, fixed = TRUE)) why <- "the frame lacks the columns this pair needs"
+      if (grepl("undefined columns selected", why, fixed = TRUE)) {
+        lacking <- setdiff(needed[[label]], names(df))
+        why <- sprintf("the frame lacks %s", if (length(lacking)) paste(lacking, collapse = ", ") else "the columns this pair needs")
+      }
       warning(sprintf("%s: %s -- skipped", label, why), call. = FALSE)
       next
     }
