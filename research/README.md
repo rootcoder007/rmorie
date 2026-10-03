@@ -62,6 +62,7 @@ signed off.
 | P11 sentencing bounds | `Research.P11.Pop.mts_mean_b_le`, `mts_mean_a_ge`, `mts_ate_le_naive`, `mtr_mts_bounds` | `morie_sentence_effect_mts()` |
 | P10 contagion | `Research.P10.iter_mono`, `iter_tendsto`, `extinction_fixed`, `extinction_le_fixed`, `subcritical_extinction_one`, `supercritical_extinction_lt_one` | `morie_contagion_extinction()` |
 | P14 judge leniency | `Research.P14.itt_decomposition`, `first_stage_decomposition`, `late_identification`, `wald_with_defiers`, `defiers_can_flip` | `morie_judge_iv_population()`, `morie_judge_iv()` |
+| P15 disparity decomposition | `Research.P15.twofold_B`, `twofold_A`, `threefold`, `reference_dependence`, `explained_eq_iff`, `attribution_shift` | `morie_disparity_decomposition()` |
 
 C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),
 `src/morie_spillover.cpp` (treated-neighbour counts on a place network).
@@ -78,5 +79,5 @@ assumption holds in Toronto, Ontario, or anywhere else.
 
 ```
 cd ~/work/researchproofs && lake build && lake env lean Audit.lean
-cd ~/work/rmorie-research && Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268|meta-pooling|logit-separation|bounds-confidence|cheeger|ecological-bounds|sentence-mts|contagion-extinction|judge-iv")'
+cd ~/work/rmorie-research && Rscript -e 'testthat::test_dir("tests/testthat", filter = "feedback-loop|fairness-bounds|dark-figure|spillover|concentration|research-p268|meta-pooling|logit-separation|bounds-confidence|cheeger|ecological-bounds|sentence-mts|contagion-extinction|judge-iv|disparity-decomposition")'
 ```

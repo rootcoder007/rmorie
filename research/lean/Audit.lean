@@ -182,3 +182,9 @@ open Research.P4
 #print axioms Research.P14.late_identification
 #print axioms Research.P14.wald_with_defiers
 #print axioms Research.P14.defiers_can_flip
+#print axioms Research.P15.twofold_B
+#print axioms Research.P15.twofold_A
+#print axioms Research.P15.threefold
+#print axioms Research.P15.reference_dependence
+#print axioms Research.P15.explained_eq_iff
+#print axioms Research.P15.attribution_shift

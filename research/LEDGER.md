@@ -651,3 +651,24 @@ check.
 - Open: the many-judge case (leniency as a continuous instrument, Frandsen,
   Lefgren & Leslie 2023 on monotonicity tests); an application to OTIS custody
   decisions by presiding judge.
+
+## P15. Sentencing disparity: what the "unexplained" part of a decomposition is
+
+Gaps in sentences between groups are routinely split into a part "explained by
+legal factors" and an "unexplained" remainder read as disparity or discrimination
+(Oaxaca 1973; Blinder 1973; the sentencing literature since Mustard 2001).
+
+- Estimand: the gap in mean outcomes and its exact algebraic split, under a
+  stated reference group and a stated coding of the covariates.
+- Progress 2026-10-02: `Research.P15` (P15Decomposition.lean). With group means
+  and least-squares coefficients (each fit through its means), the gap splits
+  exactly as explained-at-B's-prices plus unexplained-at-A's-means (`twofold_B`),
+  the mirror (`twofold_A`), and endowments + coefficients + interaction
+  (`threefold`); the two explained parts differ by exactly the interaction
+  (`reference_dependence`, `explained_eq_iff`); recentring a covariate keeps the
+  unexplained total but moves c (beta_A - beta_B)_j between the intercept's and
+  that covariate's attribution lines (`attribution_shift`). R:
+  `morie_disparity_decomposition()` (both references, the interaction, the
+  per-variable shift); Python `disparity_decomposition()`.
+- Open: the reweighting (DiNardo-Fortin-Lemieux) and distributional versions;
+  an application to OTIS sentence lengths by offence score.

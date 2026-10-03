@@ -42,3 +42,4 @@ import Researchproofs.P12Bounds
 import Researchproofs.P11Selection
 import Researchproofs.P10Extinction
 import Researchproofs.P14Instrument
+import Researchproofs.P15Decomposition
