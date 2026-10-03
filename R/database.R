@@ -914,6 +914,34 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     return(data)
   }
 
+  # 3b. Research files that are not tables (R environments) kept at
+  #     data.rmorie.com: fetched into the data directory and opened here.
+  if (has("hosted_file")) {
+    dest <- file.path(.morie_data_root(), entry$local_path)
+    if (!file.exists(dest)) {
+      dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+      .morie_data_get(paste0("/files/", entry$hosted_file), dest)
+    }
+    ext <- tolower(tools::file_ext(dest))
+    if (ext == "rds") return(readRDS(dest))
+    e <- new.env(parent = emptyenv())
+    load(dest, envir = e)
+    message("Loaded ", matched, " as an environment with ", length(ls(e)), " objects (", dest, ")")
+    return(e)
+  }
+
+  # 3c. The data.rmorie.com copy of a table whose portal file is absent or
+  #     fails to download (Health Infobase tables, ...).
+  hosted_copy <- function(why) {
+    if (is.null(.morie_llm_hosted_key())) {
+      stop(matched, ": ", why, "; the data.rmorie.com copy (", entry$hosted_key,
+           ") opens with your MORIE key: run `rmorie login` once.", call. = FALSE)
+    }
+    data <- morie_load_hosted_dataset(entry$hosted_key, db_path = db_path, refresh = refresh)
+    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    data
+  }
+
   # 4. CKAN datastore -- resolved directly from the catalog resource id,
   #    matching the Python load_dataset() design (no built-in DB needed).
   if (has("ckan_resource_id")) {
@@ -934,12 +962,22 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     message("Downloading ", matched, " from ", entry$download_url, " ...")
     zm <- if ("zip_member" %in% names(entry)) entry$zip_member else ""
     is_zip <- grepl("\\.zip$", entry$download_url, ignore.case = TRUE)
-    data <- morie_fetch(entry$download_url,
-      format = if (is_zip) "zip" else "auto",
-      zip_member = zm
+    data <- tryCatch(
+      morie_fetch(entry$download_url, format = if (is_zip) "zip" else "auto", zip_member = zm),
+      error = function(e) e
     )
+    if (inherits(data, "error")) {
+      if (has("hosted_key")) {
+        message("Portal download failed (", conditionMessage(data), "); using the data.rmorie.com copy")
+        return(hosted_copy(paste0("the portal download failed (", conditionMessage(data), ")")))
+      }
+      stop(data)
+    }
     morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
     return(data)
+  }
+  if (has("hosted_key")) {
+    return(hosted_copy("no portal file is catalogued"))
   }
 
   # 6. ArcGIS FeatureServer / MapServer layer (e.g. TPS crime open data).
@@ -952,7 +990,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
 
   stop("Dataset '", matched, "' not found locally, in cache, via CKAN, ",
     "via a direct download URL, or via an ArcGIS layer.\n",
-    "Health Infobase and the other own-file keys are not downloadable: place the file at ",
+    "This key names one of your own research files: place it at ",
     "$MORIE_DATA_DIR/", entry$local_path, " (rmorie list-datasets shows every path) for ", matched,
     call. = FALSE
   )
@@ -1158,4 +1196,12 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
     path <- csvs[[1L]]
   }
   utils::read.csv(path, stringsAsFactors = FALSE)
+}
+
+#' Internal: the data directory ($MORIE_DATA_DIR, else the per-user data dir)
+#' @noRd
+.morie_data_root <- function() {
+  env <- Sys.getenv("MORIE_DATA_DIR", "")
+  if (nzchar(env)) return(path.expand(env))
+  tools::R_user_dir("morie", which = "data")
 }

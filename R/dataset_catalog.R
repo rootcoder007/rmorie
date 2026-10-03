@@ -134,98 +134,112 @@ morie_dataset_catalog <- function() {
       source = "hib", survey = "cpads", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CPADS/CPADS.csv",
-      table_name = "hibp", ckan_resource_id = ""
+      table_name = "hibp", ckan_resource_id = "",
+      hosted_key = "hib/cpads_cpads"
     ),
     list(
       key = "hibsa", name = "CSADS Provinces",
       source = "hib", survey = "csads", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSADS/provinces.csv",
-      table_name = "hibsa", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csads/downloadable/CSADS-data.zip", zip_member = "provinces.csv"
+      table_name = "hibsa", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csads/downloadable/CSADS-data.zip", zip_member = "provinces.csv",
+      hosted_key = "hib/csads_provinces"
     ),
     list(
       key = "hibsb", name = "CSADS Trends",
       source = "hib", survey = "csads", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSADS/trends.csv",
-      table_name = "hibsb", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csads/downloadable/CSADS-data.zip", zip_member = "trends.csv"
+      table_name = "hibsb", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csads/downloadable/CSADS-data.zip", zip_member = "trends.csv",
+      hosted_key = "hib/csads_trends"
     ),
     list(
       key = "hibua", name = "CSUS Alcohol",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Alcohol.csv",
-      table_name = "hibua", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Alcohol.csv"
+      table_name = "hibua", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Alcohol.csv",
+      hosted_key = "hib/csus_alcohol"
     ),
     list(
       key = "hibub", name = "CSUS Cannabis",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Cannabis.csv",
-      table_name = "hibub", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Cannabis.csv"
+      table_name = "hibub", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Cannabis.csv",
+      hosted_key = "hib/csus_cannabis"
     ),
     list(
       key = "hibuc", name = "CSUS Smoking & Vaping",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Cigarette smoking and vaping.csv",
-      table_name = "hibuc", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Cigarette smoking and vaping.csv"
+      table_name = "hibuc", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Cigarette smoking and vaping.csv",
+      hosted_key = "hib/csus_cigarette_smoking_and_vaping"
     ),
     list(
       key = "hibud", name = "CSUS Illegal Substances",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Illegal substances.csv",
-      table_name = "hibud", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Illegal substances.csv"
+      table_name = "hibud", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Illegal substances.csv",
+      hosted_key = "hib/csus_illegal_substances"
     ),
     list(
       key = "hibue", name = "CSUS Opioids",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Opioids.csv",
-      table_name = "hibue", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Opioids.csv"
+      table_name = "hibue", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Opioids.csv",
+      hosted_key = "hib/csus_opioids"
     ),
     list(
       key = "hibuf", name = "CSUS OTC Products",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Over the counter products.csv",
-      table_name = "hibuf", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Over the counter products.csv"
+      table_name = "hibuf", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Over the counter products.csv",
+      hosted_key = "hib/csus_over_the_counter_products"
     ),
     list(
       key = "hibug", name = "CSUS Polysubstance",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Polysubstance.csv",
-      table_name = "hibug", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Polysubstance.csv"
+      table_name = "hibug", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Polysubstance.csv",
+      hosted_key = "hib/csus_polysubstance"
     ),
     list(
       key = "hibuh", name = "CSUS Sedatives",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Sedatives.csv",
-      table_name = "hibuh", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Sedatives.csv"
+      table_name = "hibuh", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Sedatives.csv",
+      hosted_key = "hib/csus_sedatives"
     ),
     list(
       key = "hibui", name = "CSUS Stimulants",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Stimulants.csv",
-      table_name = "hibui", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Stimulants.csv"
+      table_name = "hibui", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Stimulants.csv",
+      hosted_key = "hib/csus_stimulants"
     ),
     list(
       key = "hibuj", name = "CSUS Substance Use Harms",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Substance use harms.csv",
-      table_name = "hibuj", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Substance use harms.csv"
+      table_name = "hibuj", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Substance use harms.csv",
+      hosted_key = "hib/csus_substance_use_harms"
     ),
     list(
       key = "hibuk", name = "CSUS Treatment",
       source = "hib", survey = "csus", year = "",
       format = "csv", type = "aggregate", large_file = FALSE,
       local_path = "data/datasets/hib/CSUS/Treatment.csv",
-      table_name = "hibuk", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Treatment.csv"
+      table_name = "hibuk", ckan_resource_id = "", download_url = "https://health-infobase.canada.ca/src/data/csus/CADS_data.zip", zip_member = "Treatment.csv",
+      hosted_key = "hib/csus_treatment"
     ),
     # -- CIHI (cihi) indicator library --
     list(
@@ -288,21 +302,32 @@ morie_dataset_catalog <- function() {
       source = "vsr", survey = "otis", year = "2023-2025",
       format = "rdata", type = "correctional", large_file = FALSE,
       local_path = "data/cache/correctional_stats_report_environment1b.RData",
-      table_name = "otis", ckan_resource_id = ""
+      table_name = "otis", ckan_resource_id = "",
+      hosted_file = "otis/correctional_stats_report_environment1b.RData"
     ),
     list(
       key = "otisexp", name = "OTIS Expanded (1.9M placement records)",
       source = "vsr", survey = "otis", year = "2023-2025",
       format = "rds", type = "correctional", large_file = TRUE,
       local_path = "data/cache/dt_expanded.rds",
-      table_name = "otisexp", ckan_resource_id = ""
+      table_name = "otisexp", ckan_resource_id = "",
+      hosted_file = "otis/dt_expanded.rds"
     ),
     list(
       key = "otisfin", name = "OTIS Complete Analysis Environment",
       source = "vsr", survey = "otis", year = "2023-2025",
       format = "rdata", type = "correctional", large_file = TRUE,
       local_path = "data/cache/finne_env.RData",
-      table_name = "otisfin", ckan_resource_id = ""
+      table_name = "otisfin", ckan_resource_id = "",
+      hosted_file = "otis/finne_env.RData"
+    ),
+    list(
+      key = "otisloc", name = "OTIS: Ontario's adult provincial correctional institutions (locations)",
+      source = "otis", survey = "otis", year = "",
+      format = "csv", type = "correctional", large_file = FALSE,
+      local_path = "data/datasets/otis/institutional_locations_en.csv",
+      table_name = "otisloc", ckan_resource_id = "",
+      download_url = "https://data.ontario.ca/dataset/3ca4505b-091c-4b04-89e8-c316ffaa0d9e/resource/97d82317-539c-479d-9479-4dd9b7e9e08c/download/institutional_locations_en.csv"
     ),
     # -- OTIS public release per-table CSVs (used by mrm_otis_*) --
     # CKAN IDs from data.ontario.ca/dataset/data-on-inmates-in-ontario
