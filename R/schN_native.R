@@ -73,8 +73,7 @@
 #' @return A numeric value.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' gaussian_expansion(V)
+#' gaussian_expansion(r = 2.5, n_gaussians = 5)
 #' @keywords internal
 gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
                                 gamma = NULL) {

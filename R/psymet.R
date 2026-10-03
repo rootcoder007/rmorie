@@ -92,6 +92,12 @@ morie_psymet_alpha <- function(data, ci = 0.95) {
 #'
 #' @param data Numeric matrix / data.frame of items.
 #' @param nf Number of factors (default 1).
+#' @details Loadings come from principal-axis factoring (communalities iterated on the
+#'   reduced correlation matrix). `hier` is the general-factor omega of the Schmid-Leiman
+#'   transformation: the `nf` factors are promax-rotated, their correlations are factored for
+#'   one general factor (with two factors both load the square root of their correlation),
+#'   and the items are projected onto it. With `nf = 1` the single factor is the general
+#'   factor, so `hier` equals `total`: a one-factor model cannot separate them.
 #' @return list with `total`, `hier`, `alpha`, `nf`, `expvar`.
 #' @examples
 #' if (requireNamespace("psych", quietly = TRUE)) {
@@ -105,19 +111,14 @@ morie_psymet_alpha <- function(data, ci = 0.95) {
 #' @export
 morie_psymet_omega <- function(data, nf = 1) {
   X <- .as_item_matrix(data)
-  # Native principal-axis approximation (module 18; validated against
-  # psych::omega in tests/cross/).
   R <- cor(X)
-  eig <- eigen(R, symmetric = TRUE)
-  evals <- eig$values
-  evecs <- eig$vectors
-  loads <- evecs[, seq_len(nf), drop = FALSE] *
-    matrix(sqrt(pmax(evals[seq_len(nf)], 0)), nrow = nrow(evecs),
-           ncol = nf, byrow = TRUE)
+  loads <- .morie_paf(R, nf)
+  evals <- eigen(R, symmetric = TRUE)$values
   comm <- rowSums(loads^2)
   uniq <- 1 - comm
   omg_t <- 1 - sum(uniq) / sum(R)
-  omg_h <- (sum(loads[, 1]))^2 / sum(R)
+  g <- .morie_schmid_leiman_g(loads)
+  omg_h <- sum(g)^2 / sum(R)
   a <- morie_psymet_alpha(X)$raw
   list(
     total = max(0, min(1, omg_t)),
@@ -126,6 +127,45 @@ morie_psymet_omega <- function(data, nf = 1) {
     nf = nf,
     expvar = sum(evals[seq_len(nf)]) / sum(evals)
   )
+}
+
+# Principal-axis factoring (module 18): communalities iterated on the diagonal of the reduced
+# correlation matrix from a squared-multiple-correlation start; the first factor loads positively.
+.morie_paf <- function(R, nf, max_iter = 200L, tol = 1e-6) {
+  k <- ncol(R)
+  h2 <- tryCatch(1 - 1 / diag(solve(R)), error = function(e) rep(0.5, k))
+  h2 <- pmin(pmax(h2, 0.05), 0.995)
+  loads <- matrix(0, k, nf)
+  for (iter in seq_len(max_iter)) {
+    Rr <- R
+    diag(Rr) <- h2
+    eig <- eigen(Rr, symmetric = TRUE)
+    loads <- eig$vectors[, seq_len(nf), drop = FALSE] *
+      matrix(sqrt(pmax(eig$values[seq_len(nf)], 0)), nrow = k, ncol = nf, byrow = TRUE)
+    new_h2 <- pmin(rowSums(loads^2), 0.995)
+    converged <- max(abs(new_h2 - h2)) < tol
+    h2 <- new_h2
+    if (converged) break
+  }
+  if (sum(loads[, 1]) < 0) loads[, 1] <- -loads[, 1]
+  loads
+}
+
+# General-factor loadings by the Schmid-Leiman transformation: promax-rotate the factors,
+# factor their correlation matrix for one general factor (two factors: both load sqrt(phi_12),
+# the identification psych uses), and project the items onto it. One factor is its own g.
+.morie_schmid_leiman_g <- function(loads) {
+  nf <- ncol(loads)
+  if (nf < 2L) return(loads[, 1])
+  pm <- stats::promax(loads, m = 4)
+  P <- unclass(pm$loadings)
+  Phi <- solve(crossprod(pm$rotmat))
+  s <- sign(colSums(P))
+  s[s == 0] <- 1
+  P <- sweep(P, 2L, s, "*")
+  Phi <- Phi * outer(s, s)
+  gam <- if (nf == 2L) rep(sqrt(max(Phi[1L, 2L], 0)), 2L) else drop(.morie_paf(Phi, 1L))
+  drop(P %*% gam)
 }
 
 #' Corrected item-total correlations

@@ -20,8 +20,7 @@
 #'   section 4.1 (orthogonalized JL transform).
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' Tqrot(V)
+#' Tqrot(d = 4L, seed = 1)
 Tqrot <- function(d, seed = 1) {
   d <- as.integer(d)
   g <- .t1_lcg(seed)

@@ -25,6 +25,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-EchoSig(h = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L)
+EchoSig(h = c(1, 0.5, 0.25), a = 0.6, n_0 = 5L)
 }
 \keyword{internal}

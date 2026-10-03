@@ -3507,7 +3507,7 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 #' @return A list with \code{x}, \code{n}, \code{a}, \code{n_0}, \code{method}.
 #' @export
 #' @examples
-#' EchoImp(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, n = 5L)
+#' EchoImp(a = 0.5, n_0 = 5L, n = 0:15)
 #' @keywords internal
 EchoImp <- function(a, n_0, n) {
   a <- as.numeric(a)
@@ -3544,7 +3544,7 @@ EchoImp <- function(a, n_0, n) {
 #' \code{echo_visible}, \code{method}.
 #' @export
 #' @examples
-#' EchoSig(h = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L)
+#' EchoSig(h = c(1, 0.5, 0.25), a = 0.6, n_0 = 5L)
 #' @keywords internal
 EchoSig <- function(h, a, n_0, n = NULL) {
   hh <- as.numeric(h)

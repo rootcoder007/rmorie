@@ -40,8 +40,9 @@ variable-ratio nearest-neighbour matching natively.
 \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 set.seed(1)
-df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.25),
                  x1 = rnorm(200), x2 = rnorm(200))
+# an average of two controls per treated unit needs twice as many controls as treated
 morie_matching_variable_ratio(df, "d", c("x1", "x2"),
                               min_ratio = 1, max_ratio = 3)
 }

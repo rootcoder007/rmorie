@@ -338,7 +338,8 @@ morie_db_connect <- function(db_path = NULL) {
         call. = FALSE
       )
     }
-    return(DBI::dbConnect(duckdb::duckdb(), dbdir = db_path))
+    # duckdb prints an 8-line note about its extension directory on first connect; a listing verb is not the place
+    return(suppressMessages(DBI::dbConnect(duckdb::duckdb(), dbdir = db_path)))
   }
   # SQLite fallback path.
   if (!requireNamespace("RSQLite", quietly = TRUE)) {
@@ -766,9 +767,18 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @noRd
 .fuzzy_match_key <- function(key) {
   catalog <- morie_dataset_catalog()
+  # Exact match on the key as written (the NAPS keys carry hyphens), then with - read as _.
+  idx <- which(catalog$key == tolower(key))
+  if (length(idx) == 1L) {
+    return(catalog$key[idx])
+  }
   key_lower <- tolower(gsub("-", "_", key))
-  # Exact match on new short keys.
   idx <- which(catalog$key == key_lower)
+  if (length(idx) == 1L) {
+    return(catalog$key[idx])
+  }
+  key_hyphen <- tolower(gsub("_", "-", key))  # naps_co_on_2023 -> naps-co-on-2023
+  idx <- which(catalog$key == key_hyphen)
   if (length(idx) == 1L) {
     return(catalog$key[idx])
   }
@@ -829,6 +839,9 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @export
 morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
+  if (!is.character(key) || length(key) != 1L || is.na(key) || !nzchar(key)) {
+    stop("key must be a single dataset key (rmorie list-datasets / morie_list_datasets())", call. = FALSE)
+  }
   # the bootstrap-weight files are 600 MB: R's 60 s default timeout truncated
   # them mid-download (2026-10-01); every route below inherits this
   old_timeout <- options(timeout = max(getOption("timeout", 60), 3600))
@@ -856,7 +869,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
       "  - rmoriedata::morie_data_catalog()  bundled data SLUGS (e.g. 'chicago_iucr_codes')\n",
       "  - morie_datasets_*()                dedicated fetchers ",
       "(e.g. morie_datasets_chicago_iucr_codes())\n",
-      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login)",
+      "  - morie_hosted_datasets()           curated db/table keys at data.rmorie.com (after rmorie login, GitHub or --email)",
       call. = FALSE
     )
   }
@@ -864,7 +877,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   entry <- catalog[catalog$key == matched, ]
   has <- function(col) col %in% names(entry) && nzchar(entry[[col]])
   has_remote <- has("ckan_resource_id") || has("download_url") ||
-    has("arcgis_url")
+    has("arcgis_url") || has("fetcher") || has("rmoriedata")
 
   if (!refresh) {
     # 1. Built-in database (ships with package).
@@ -914,6 +927,34 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     return(data)
   }
 
+  # 3b. Research files that are not tables (R environments) kept at
+  #     data.rmorie.com: fetched into the data directory and opened here.
+  if (has("hosted_file")) {
+    dest <- file.path(.morie_data_root(), entry$local_path)
+    if (!file.exists(dest)) {
+      dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
+      .morie_data_get(paste0("/files/", entry$hosted_file), dest)
+    }
+    ext <- tolower(tools::file_ext(dest))
+    if (ext == "rds") return(readRDS(dest))
+    e <- new.env(parent = emptyenv())
+    load(dest, envir = e)
+    message("Loaded ", matched, " as an environment with ", length(ls(e)), " objects (", dest, ")")
+    return(e)
+  }
+
+  # 3c. The data.rmorie.com copy of a table whose portal file is absent or
+  #     fails to download (Health Infobase tables, ...).
+  hosted_copy <- function(why) {
+    if (is.null(.morie_llm_hosted_key())) {
+      stop(matched, ": ", why, "; the data.rmorie.com copy (", entry$hosted_key,
+           ") opens with your MORIE key: run `rmorie login` (GitHub) or `rmorie login --email you@example.com` once.", call. = FALSE)
+    }
+    data <- morie_load_hosted_dataset(entry$hosted_key, db_path = db_path, refresh = refresh)
+    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    data
+  }
+
   # 4. CKAN datastore -- resolved directly from the catalog resource id,
   #    matching the Python load_dataset() design (no built-in DB needed).
   if (has("ckan_resource_id")) {
@@ -928,18 +969,47 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     return(data)
   }
 
+  # 4a. A table shipped by rmoriedata on CRAN (the reviewed SIU corpus and its manifest).
+  if (has("rmoriedata")) {
+    if (!requireNamespace("rmoriedata", quietly = TRUE)) {
+      stop(matched, " ships in the rmoriedata package: install.packages(\"rmoriedata\")", call. = FALSE)
+    }
+    data <- as.data.frame(rmoriedata::morie_data_load(entry$rmoriedata))
+    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    return(data)
+  }
+
+  # 4b. A fetcher in this package (the NAPS hourly files), with its catalogued arguments.
+  if (has("fetcher")) {
+    message("Fetching ", matched, " via ", entry$fetcher, "() ...")
+    fetcher <- get(entry$fetcher, envir = asNamespace(utils::packageName()))
+    data <- do.call(fetcher, .morie_parse_fetcher_args(if (has("fetcher_args")) entry$fetcher_args else ""))
+    morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
+    return(data)
+  }
+
   # 5. Direct download URL -- open-data files not exposed through the CKAN
   #    datastore (direct CSV/XLSX, or a file included inside a .zip archive).
   if (has("download_url")) {
     message("Downloading ", matched, " from ", entry$download_url, " ...")
     zm <- if ("zip_member" %in% names(entry)) entry$zip_member else ""
     is_zip <- grepl("\\.zip$", entry$download_url, ignore.case = TRUE)
-    data <- morie_fetch(entry$download_url,
-      format = if (is_zip) "zip" else "auto",
-      zip_member = zm
+    data <- tryCatch(
+      morie_fetch(entry$download_url, format = if (is_zip) "zip" else "auto", zip_member = zm),
+      error = function(e) e
     )
+    if (inherits(data, "error")) {
+      if (has("hosted_key")) {
+        message("Portal download failed (", conditionMessage(data), "); using the data.rmorie.com copy")
+        return(hosted_copy(paste0("the portal download failed (", conditionMessage(data), ")")))
+      }
+      stop(data)
+    }
     morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
     return(data)
+  }
+  if (has("hosted_key")) {
+    return(hosted_copy("no portal file is catalogued"))
   }
 
   # 6. ArcGIS FeatureServer / MapServer layer (e.g. TPS crime open data).
@@ -952,7 +1022,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
 
   stop("Dataset '", matched, "' not found locally, in cache, via CKAN, ",
     "via a direct download URL, or via an ArcGIS layer.\n",
-    "Health Infobase and the other own-file keys are not downloadable: place the file at ",
+    "This key names one of your own research files: place it at ",
     "$MORIE_DATA_DIR/", entry$local_path, " (rmorie list-datasets shows every path) for ", matched,
     call. = FALSE
   )
@@ -1158,4 +1228,12 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
     path <- csvs[[1L]]
   }
   utils::read.csv(path, stringsAsFactors = FALSE)
+}
+
+#' Internal: the data directory ($MORIE_DATA_DIR, else the per-user data dir)
+#' @noRd
+.morie_data_root <- function() {
+  env <- Sys.getenv("MORIE_DATA_DIR", "")
+  if (nzchar(env)) return(path.expand(env))
+  tools::R_user_dir("morie", which = "data")
 }

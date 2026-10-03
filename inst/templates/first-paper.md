@@ -33,7 +33,7 @@ Analyses were conducted in `morie` v0.5.0 [@Ruhela2026MoriePy; @Ruhela2026MorieR
 
 ### Statistical analysis
 
-We applied the [MODULE_NAME] module of morie, which [REPLACE_WITH_MODULE_DESCRIPTION].
+We applied the [MODULE_NAME] module of morie, which provides [REPLACE_WITH_MODULE_DESCRIPTION].
 
 [For specific modules, copy-paste one of these methods sentences and tailor it:]
 
@@ -100,7 +100,7 @@ Reproducibility: outputs are reproducible by running `morie run-module [MODULE] 
 
 ```bash
 # Get a fresh copy to fill in:
-morie generate-template --module power-design --out my-paper.md
+rmorie generate-template power-design --out my-paper.md
 
 # Then open it in any editor — Markdown means no special software needed.
 ```

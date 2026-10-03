@@ -79,6 +79,13 @@ struct Sampler {
   std::chrono::steady_clock::time_point last_time;
   double interval = 1.0;
 
+  // the static instance is destroyed at process exit: a thread still running there would make
+  // std::thread's destructor call std::terminate (seen as a core dump after an R-level error)
+  ~Sampler() {
+    stop.store(true);
+    if (thread.joinable()) thread.join();
+  }
+
   void sample_once() {
     const auto now = std::chrono::steady_clock::now();
     const double dt = std::chrono::duration<double>(now - last_time).count();

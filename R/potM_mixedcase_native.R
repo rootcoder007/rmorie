@@ -149,9 +149,9 @@
 #' \code{converged}, \code{method}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' morie_potM(V, M)
+#' set.seed(1)
+#' y <- rexp(300)
+#' morie_potM(y, u = 1.5)
 #' @keywords internal
 morie_potM <- function(y, u, return_periods = c(10.0, 100.0)) {
   yv <- as.numeric(y)

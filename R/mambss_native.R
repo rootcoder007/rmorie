@@ -236,8 +236,7 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
 #' @return A list with \code{h}, \code{g}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' gated_rnn_equivalent(V, V)
+#' gated_rnn_equivalent(x = c(1, 2, 3, 4), w = 0.5, b = 0)
 #' @keywords internal
 gated_rnn_equivalent <- function(x, w, b = 0.0) {
   h <- 0.0

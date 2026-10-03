@@ -25,7 +25,7 @@ A list with \code{features}, \code{powers}, \code{names}, \code{n_output_feature
 Polynomial feature expansion up to a given total degree (Geron Ch 4, hmplf)
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_geron_polynomial_features_hm(V, V)
+X <- cbind(c(1, 2, 3), c(0.5, -1, 2))
+morie_geron_polynomial_features_hm(X, degree = 2)$names
 }
 \keyword{internal}

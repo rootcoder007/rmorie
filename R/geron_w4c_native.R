@@ -1602,8 +1602,8 @@ morie_geron_peephole_lstm <- function(x_t, h_prev, c_prev, weights) {
 #' @return A list with `features`, `powers`, `names`, `n_output_features`, `degree`, `estimate`, `n`, `method`.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_polynomial_features_hm(V, V)
+#' X <- cbind(c(1, 2, 3), c(0.5, -1, 2))
+#' morie_geron_polynomial_features_hm(X, degree = 2)$names
 #' @keywords internal
 morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, interaction_only = FALSE) {
   A <- .morie_gr_mat(X, "X")

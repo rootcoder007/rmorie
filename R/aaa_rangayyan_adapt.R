@@ -929,8 +929,8 @@ LmsZhang <- function(mu, order, r, alpha = 0.02, power_prev = NULL) {
 #' @examples
 #' sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
 #'     pi * cycles * (0:(n - 1))/n + phase)
-#' n <- 400
-#' v <- sine_a(256, 3)
+#' n <- 256
+#' v <- sine_a(n, 3)
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' LmsFilt(primary = ref, reference = ref)
@@ -1200,8 +1200,8 @@ RlsApriori <- function(x, rvec, w_prev) {
 #' @examples
 #' sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
 #'     pi * cycles * (0:(n - 1))/n + phase)
-#' n <- 400
-#' v <- sine_a(256, 3)
+#' n <- 256
+#' v <- sine_a(n, 3)
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' RlsFilt(primary = ref, reference = ref)
@@ -1367,8 +1367,8 @@ RlsLattice <- function(x, order = 4, lam = 0.98, delta = 0.01) {
 #' @examples
 #' sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
 #'     pi * cycles * (0:(n - 1))/n + phase)
-#' n <- 400
-#' v <- sine_a(256, 3)
+#' n <- 256
+#' v <- sine_a(n, 3)
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' RlsMonitor(x = ref)
@@ -1731,8 +1731,8 @@ Acfseg <- function(test, reference, lags = NULL, thp = 1, thf = 1) {
 #' @examples
 #' sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
 #'     pi * cycles * (0:(n - 1))/n + phase)
-#' n <- 400
-#' v <- sine_a(256, 3)
+#' n <- 256
+#' v <- sine_a(n, 3)
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' PcgSeg(x = ref, fs = n)
@@ -1902,8 +1902,8 @@ PsdAcf <- function(x) {
 #' @examples
 #' sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
 #'     pi * cycles * (0:(n - 1))/n + phase)
-#' n <- 400
-#' v <- sine_a(256, 3)
+#' n <- 256
+#' v <- sine_a(n, 3)
 #' ref <- sine_a(n, 61)
 #' Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' @keywords internal
@@ -1960,8 +1960,8 @@ Anc <- function(primary, reference, order = 8, mu = 0.01,
 #' @examples
 #' sine_a <- function(n, cycles, amp = 1, phase = 0) amp * sin(2 *
 #'     pi * cycles * (0:(n - 1))/n + phase)
-#' n <- 400
-#' v <- sine_a(256, 3)
+#' n <- 256
+#' v <- sine_a(n, 3)
 #' ref <- sine_a(n, 61)
 #' FetalEcg(v + 0.8 * ref, ref, order = 4, mu = 0.005)
 #' @keywords internal

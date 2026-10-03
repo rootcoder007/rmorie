@@ -20,7 +20,6 @@ integer type, so both arms of the package compute the same number
 instead of a number that rounds the same way.
 }
 \examples{
-S <- c("a", "b", "c")
-morie_avalon_fnv(S)
+morie_avalon_fnv("feature:a")
 }
 \keyword{internal}

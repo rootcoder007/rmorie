@@ -6,6 +6,8 @@ on:
     branches: [main]
     tags: ["v*.*.*"]
   workflow_dispatch:
+permissions:
+  contents: read
 jobs:
   smoke:
     runs-on: ${{ matrix.os }}

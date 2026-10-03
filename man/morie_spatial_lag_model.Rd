@@ -30,5 +30,12 @@ Ordinary least squares on the lag model is inconsistent, which is
 why the lag version exists at all.
 }
 \examples{
-morie_spatial_lag_model(y = 5L, X = 5L, W = 5L)
+set.seed(1)
+n <- 25
+W <- matrix(0, n, n)
+for (i in 2:n) W[i, i - 1] <- W[i - 1, i] <- 1   # a chain of neighbours
+W <- W / rowSums(W)
+x <- rnorm(n)
+y <- 0.4 * as.numeric(solve(diag(n) - 0.4 * W, x + rnorm(n))) + 1
+morie_spatial_lag_model(y, X = x, W = W)$rho
 }

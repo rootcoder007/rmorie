@@ -35,7 +35,8 @@ reference group via the chosen binary matching method.
 \examples{
 \donttest{
 set.seed(1)
-df <- data.frame(treat3 = sample(0:2, 200, TRUE),
+# the reference level (the largest) must hold at least as many units as each other level
+df <- data.frame(treat3 = sample(rep(0:2, c(90, 55, 55))),
                  x1 = rnorm(200), x2 = rnorm(200))
 morie_matching_multi_treatment(df, "treat3", c("x1", "x2"))
 }

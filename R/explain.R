@@ -275,7 +275,7 @@ explain_file <- function(filename) {
     "\
 \
 If you think this file should be explained, file an issue at ",
-    "https://github.com/rootcoder007/morie/issues."
+    "https://github.com/rootcoder007/rmorie/issues."
   )
 }
 
@@ -337,7 +337,7 @@ If you think this file should be explained, file an issue at ",
     "",
     "Refs",
     "  Docs:     https://rootcoder007.github.io/morie/",
-    "  Issues:   https://github.com/rootcoder007/morie/issues",
+    "  Issues:   https://github.com/rootcoder007/rmorie/issues",
     "  PyPI:     https://pypi.org/project/morie/",
     "  R:        https://rootcoder007.r-universe.dev/morie",
     sep = "\

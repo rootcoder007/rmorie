@@ -6,8 +6,8 @@
 #' which family members are present and offers to install the ones that are
 #' missing. You are already in R with \pkg{rmorie}, so this focuses on the
 #' Python side (\code{morie} via \command{pip}) and on verifying the shared
-#' C/C++ numeric core. The proprietary \code{rmorie-cli} is never
-#' auto-installed -- only pointed to.
+#' C/C++ numeric core, and on the \code{rmorie} launcher that
+#' \code{\link{install_cli}} puts on your PATH.
 #'
 #' The whole family is built on one shared C/C++ core (\code{libmorie} ->
 #' \code{morie._core} in Python; \pkg{rmoriebricklayer}'s compiled kernels in
@@ -28,7 +28,6 @@
 morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   RUNIV <- "https://rootcoder007.r-universe.dev"
   CRAN <- "https://cloud.r-project.org"
-  CLI_URL <- "https://github.com/rootcoder007/rmorie-cli"
 
   find_python <- function() {
     for (p in c("python3", "python")) {
@@ -56,7 +55,7 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
     "import importlib.util,sys; sys.exit(0 if importlib.util.find_spec('morie._core') else 1)"
   )
 
-  have_cli <- nzchar(Sys.which("rmorie"))
+  have_cli <- nzchar(Sys.which("rmorie"))  # the launcher install_cli() writes (the command line ships in rmorie)
   have_rdata <- requireNamespace("rmoriedata", quietly = TRUE)
   have_rbrick <- requireNamespace("rmoriebricklayer", quietly = TRUE)
   r_backend_ok <- isTRUE(tryCatch(morie_fast_available(), error = function(e) FALSE))
@@ -71,7 +70,7 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
   mark(TRUE, "rmorie           (R / this session)")
   mark(have_rdata, "rmoriedata       (R)")
   mark(have_rbrick, "rmoriebricklayer (R / shared C core)")
-  mark(have_cli, "rmorie-cli       (proprietary -- not auto-installed)")
+  mark(have_cli, "rmorie launcher  (rmorie on PATH; Rscript -e 'rmorie::install_cli()')")
   mark(tc_ok, "C/C++ toolchain  (cc + c++ -- REQUIRED for the compiled core)")
   if (have_py_morie && !py_backend_ok) {
     cat("  !! morie (Python) is installed but morie._core (C++ backend) is NOT active -- degraded.\n")
@@ -89,14 +88,14 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
 
   present <- c(
     morie = have_py_morie, rmorie = TRUE, rmoriedata = have_rdata,
-    rmoriebricklayer = have_rbrick, `rmorie-cli` = have_cli
+    rmoriebricklayer = have_rbrick, rmorie_launcher = have_cli
   )
   if (isTRUE(check)) {
     return(invisible(present))
   }
 
   if (!have_cli) {
-    cat("note: rmorie-cli is proprietary (Receipt-of-Custody); obtain it at", CLI_URL, "\n")
+    cat("note: the rmorie command line is in this package; put its launcher on PATH with Rscript -e 'rmorie::install_cli()'\n")
   }
 
   if (have_py_morie) {

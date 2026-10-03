@@ -35,7 +35,14 @@ morie_logdet_I_minus <- function(rho, W) {
 #'   `loglik` and `residuals`
 #' @export
 #' @examples
-#' morie_spatial_lag_model(y = 5L, X = 5L, W = 5L)
+#' set.seed(1)
+#' n <- 25
+#' W <- matrix(0, n, n)
+#' for (i in 2:n) W[i, i - 1] <- W[i - 1, i] <- 1   # a chain of neighbours
+#' W <- W / rowSums(W)
+#' x <- rnorm(n)
+#' y <- 0.4 * as.numeric(solve(diag(n) - 0.4 * W, x + rnorm(n))) + 1
+#' morie_spatial_lag_model(y, X = x, W = W)$rho
 morie_spatial_lag_model <- function(y, X, W, add_intercept = TRUE) {
   X <- as.matrix(X)
   W <- as.matrix(W)

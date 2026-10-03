@@ -1013,10 +1013,26 @@ morie_siu_audit_case <- function(case_number,
 # linear single-pass approach (no std::regex backtracking risk).
 #' Internal helper: Siu Html To Text
 #' @noRd
+.siu_decode_numeric_entities <- function(h) {
+  m <- gregexpr("&#(x[0-9a-fA-F]+|[0-9]+);", h, perl = TRUE)
+  regmatches(h, m) <- lapply(regmatches(h, m), function(hits) {
+    vapply(hits, function(e) {
+      body <- sub("^&#(.*);$", "\\1", e)
+      code <- if (startsWith(tolower(body), "x")) strtoi(substring(body, 2L), 16L) else as.integer(body)
+      if (is.na(code) || code <= 0L) "" else intToUtf8(code)
+    }, character(1L), USE.NAMES = FALSE)
+  })
+  h
+}
+
 .siu_html_to_text <- function(h) {
   if (!nzchar(h)) {
     return("")
   }
+  # Page bytes read in a C or Latin-1 session are not marked UTF-8; mixing them with the UTF-8
+  # entity replacements below then fails ("input string 1 is invalid UTF-8"). Mark valid UTF-8
+  # as such and read anything else as Latin-1.
+  h <- if (validUTF8(h)) `Encoding<-`(h, "UTF-8") else iconv(h, "latin1", "UTF-8", sub = "")
   # Drop <script>...</script> and <style>...</style> chunks first.
   h <- gsub("(?is)<script\\b[^>]*>.*?</script>", " ", h, perl = TRUE)
   h <- gsub("(?is)<style\\b[^>]*>.*?</style>", " ", h, perl = TRUE)
@@ -1027,14 +1043,15 @@ morie_siu_audit_case <- function(case_number,
     "&apos;" = "'", "&#39;" = "'", "&nbsp;" = " ",
     "&rsquo;" = "'", "&lsquo;" = "'", "&ldquo;" = "\"",
     "&rdquo;" = "\"", "&ndash;" = "-", "&mdash;" = "-",
-    "&hellip;" = "..."
+    "&hellip;" = "...", "&eacute;" = "\u00e9", "&egrave;" = "\u00e8", "&ecirc;" = "\u00ea",
+    "&agrave;" = "\u00e0", "&acirc;" = "\u00e2", "&ccedil;" = "\u00e7", "&icirc;" = "\u00ee",
+    "&ocirc;" = "\u00f4", "&ucirc;" = "\u00fb", "&ugrave;" = "\u00f9", "&euml;" = "\u00eb",
+    "&iuml;" = "\u00ef", "&uuml;" = "\u00fc", "&ouml;" = "\u00f6", "&auml;" = "\u00e4",
+    "&copy;" = "\u00a9", "&reg;" = "\u00ae"
   )
   for (k in names(ents)) h <- gsub(k, ents[[k]], h, fixed = TRUE)
-  # Numeric entities (decimal + hex).
-  h <- gsub("&#([0-9]+);", "\\1",
-    h,
-    perl = TRUE
-  ) # leaves digits; cheap fallback
+  # Numeric entities (decimal and hex) become their character: &#039; is an apostrophe
+  h <- .siu_decode_numeric_entities(h)
   h <- gsub("\\s+", " ", h, perl = TRUE)
   trimws(h)
 }
@@ -1206,7 +1223,8 @@ morie_siu_compare <- function(case_number, external,
 #
 # Providers are configured via env vars so secrets never appear in
 # the package or in chat:
-#   GOOGLE_API_KEY     -> Gemini (default; cheapest)
+#   GEMINI_API_KEY (or GOOGLE_API_KEY) -> Gemini
+#   the stored hosted key (morie_llm_login) -> llm.rmorie.com ("hosted")
 #   ANTHROPIC_API_KEY  -> Claude
 # Both functions hard-fail with a clear message if the relevant env
 # var is missing.
@@ -1447,6 +1465,28 @@ morie_siu_compare <- function(case_number, external,
         x
       }
     ),
+    hosted = list(
+      # the hosted MORIE tier (llm.rmorie.com), with the key morie_llm_login() stored
+      env_required = "MORIE_HOSTED_KEY_OR_LOGIN",
+      build = function(env, prompt) {
+        base <- sub("/+$", "", .morie_llm_hosted_base())
+        list(
+          url = paste0(base, "/v1/chat/completions"),
+          headers = list("authorization" = paste("Bearer", env[["MORIE_HOSTED_KEY_OR_LOGIN"]]),
+                         "content-type" = "application/json"),
+          body = list(
+            model = Sys.getenv("MORIE_HOSTED_MODEL", unset = attr(morie_llm_hosted_models(), "default") %||% "default"),
+            temperature = 0,
+            messages = list(list(role = "user", content = prompt))
+          )
+        )
+      },
+      extract = function(resp) {
+        x <- resp$choices[[1L]]$message$content
+        if (is.null(x)) stop("the hosted tier returned empty text", call. = FALSE)
+        x
+      }
+    ),
     openai_compatible = list(
       # ANY OpenAI-compatible endpoint: Groq, Together, Mistral,
       # DeepSeek, xAI, LM Studio, vLLM, llama.cpp server, ...
@@ -1498,15 +1538,6 @@ morie_siu_compare <- function(case_number, external,
 #' @noRd
 .siu_llm_call_one <- function(model, prompt,
                               timeout_s = .siu_llm_default_timeout()) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop("LLM helpers require the 'httr2' package: ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
-  }
   providers <- .siu_llm_providers()
   if (!model %in% names(providers)) {
     stop("Unknown LLM model: '", model, "'. Available: ",
@@ -1521,15 +1552,32 @@ morie_siu_compare <- function(case_number, external,
   if (p$env_required == "OLLAMA_HOST_OR_DEFAULT") {
     env_val <- Sys.getenv("OLLAMA_HOST", unset = "")
     if (!nzchar(env_val)) env_val <- "http://localhost:11434"
+  } else if (p$env_required == "MORIE_HOSTED_KEY_OR_LOGIN") {
+    env_val <- .morie_llm_hosted_key() %||% ""
+    if (!nzchar(env_val)) {
+      stop("not logged in to the hosted MORIE tier; run morie_llm_login() or morie_llm_login(email = \"you@example.com\") (shell: `rmorie login [--email ...]`) first, ",
+           "or use model = \"ollama\" with a local Ollama daemon.", call. = FALSE)
+    }
   } else {
     env_val <- Sys.getenv(p$env_required, unset = "")
+    if (!nzchar(env_val) && p$env_required == "GOOGLE_API_KEY") env_val <- Sys.getenv("GEMINI_API_KEY", unset = "")
     if (!nzchar(env_val)) {
-      stop("Env var '", p$env_required, "' is not set; cannot call ",
+      stop("Env var '", if (p$env_required == "GOOGLE_API_KEY") "GEMINI_API_KEY' (or 'GOOGLE_API_KEY" else p$env_required,
+        "' is not set; cannot call ",
         model, ". Set it, or use model = \"ollama\" with a local ",
         "Ollama daemon for a free zero-config alternative.",
         call. = FALSE
       )
     }
+  }
+  if (!requireNamespace("httr2", quietly = TRUE)) {
+    stop("LLM helpers require the 'httr2' package: ",
+      "install.packages('httr2')",
+      call. = FALSE
+    )
+  }
+  if (!requireNamespace("jsonlite", quietly = TRUE)) {
+    stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
   }
   env <- setNames(list(env_val), p$env_required)
   req_spec <- p$build(env, prompt)
@@ -1590,6 +1638,7 @@ morie_siu_compare <- function(case_number, external,
   }
   stop("All LLM providers failed:\n  ",
     paste(errs, collapse = "\n  "),
+    "\n", .cli_llm_fallback_cause(model[[1L]]),
     call. = FALSE
   )
 }
@@ -1743,7 +1792,8 @@ morie_siu_compare <- function(case_number, external,
 #' Credentials are read from environment variables only -- never
 #' hard-coded, never passed as function arguments -- so secrets do
 #' not leak into call traces, logs, or scripts. Set
-#' \code{GOOGLE_API_KEY} for Gemini, \code{ANTHROPIC_API_KEY} for
+#' \code{GEMINI_API_KEY} (or \code{GOOGLE_API_KEY}) for Gemini, the key stored by
+#' \code{\link{morie_llm_login}} for \code{"hosted"}, \code{ANTHROPIC_API_KEY} for
 #' Claude, or \code{OLLAMA_HOST} (e.g.
 #' \code{"http://localhost:11434"} or an OpenAI-compatible base URL) plus
 #' optionally \code{OLLAMA_MODEL} (else the first model the server serves) for
@@ -1784,7 +1834,7 @@ morie_siu_compare <- function(case_number, external,
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_llm_extract <- function(case_number,
-                                  model = c("ollama", "gemini"),
+                                  model = c("ollama", "hosted", "gemini"),
                                   cache_dir = file.path(tempdir(), "morie", "siu"),
                                   max_html_chars = 80000L,
                                   mock_response_text = NULL) {
@@ -2112,18 +2162,24 @@ morie_siu_sanity_check <- function(df) {
     bad <- nzchar(v) & !grepl("^[0-9]+$", v)
     ifelse(bad, paste0(col, ":not-int"), "")
   }
-  check_yn <- function(v, col) {
-    bad <- nzchar(v) & !v %in% c("Yes", "No")
+  check_yn <- function(v, col, free_text = FALSE) {
+    # the reviewed corpus writes these as yes/no, true/false, y/n or "no charges"; the director's
+    # finding (free_text) may be the reasoning itself, so there only a short stray token is an issue
+    tok <- tolower(trimws(v))
+    ok <- tok %in% c("yes", "no", "true", "false", "y", "n", "na") | grepl("^(no |)charges( recommended| laid)?$", tok)
+    bad <- nzchar(v) & !ok & (!free_text | nchar(tok) <= 20L)
     ifelse(bad, paste0(col, ":not-Yes/No"), "")
   }
   check_gender <- function(v) {
-    bad <- nzchar(v) & !v %in% c("Male", "Female", "Non-binary")
+    # any case, and compound values ("female (Complainant #1) and male (Complainant #2)") are fine
+    bad <- nzchar(v) & !grepl("male|female|man|woman|boy|girl|non-?binary|trans|homme|femme|gar\u00e7on|fille",
+                              v, ignore.case = TRUE)
     ifelse(bad, "sex_gender_affected:bad-value", "")
   }
   check_officer_count <- function(v) {
-    # Should be "N SO" or "N SO M WO" or "N WO"
+    # "N SO", "N SO M WO", "N WO", or the reviewed corpus's bare count (or NA)
     bad <- nzchar(v) &
-      !grepl("^[0-9]+ (SO|WO)( [0-9]+ WO)?$", v)
+      !grepl("^[0-9]+ (SO|WO)( [0-9]+ WO)?$|^[0-9]+$|^NA$", v)
     ifelse(bad, "number_of_officers_involved:bad-format", "")
   }
   check_nonempty <- function(v, col) {
@@ -2175,14 +2231,14 @@ morie_siu_sanity_check <- function(df) {
     check_yn(df$charges_recommended, "charges_recommended"),
     check_yn(
       df$directors_decision_reasonable,
-      "directors_decision_reasonable"
+      "directors_decision_reasonable",
+      free_text = TRUE
     ),
     check_gender(df$sex_gender_affected),
     check_nonempty(df$police_service, "police_service"),
     check_nonempty(df$narrative_summary, "narrative_summary"),
     check_short(df$narrative_summary, "narrative_summary", 100L),
     check_chrome(df$narrative_summary, "narrative_summary"),
-    check_chrome(df$supplemental_materials, "supplemental_materials"),
     check_chrome(
       df$mental_health_or_race_indications,
       "mental_health_or_race_indications"
@@ -2544,7 +2600,7 @@ morie_siu_translate_fr_to_en <- function(
 #' attr(audit, "examples")[[audit$field[1L]]]
 #' \dontshow{\}) # examplesIf}
 #' @export
-morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
+morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "hosted", "gemini"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
                                     max_examples_per_field = 5L,

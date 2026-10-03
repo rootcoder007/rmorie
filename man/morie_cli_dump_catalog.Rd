@@ -2,7 +2,7 @@
 % Please edit documentation in R/cli_unified_catalog.R
 \name{morie_cli_dump_catalog}
 \alias{morie_cli_dump_catalog}
-\title{Emit a unified catalog CSV for the rmorie-cli binary}
+\title{Emit a unified catalog CSV for the rmorie command line}
 \usage{
 morie_cli_dump_catalog(out_path = NULL)
 }

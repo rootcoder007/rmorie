@@ -155,7 +155,12 @@
       other <- gsum[j, ]
       h <- 2 * asin(sqrt(ref$p)) - 2 * asin(sqrt(other$p))
       required_n <- .binary_power_required_n(ref$p, other$p)
-      achieved_power <- stats::pnorm(sqrt((ref$n + other$n) / 4) * abs(h) - stats::qnorm(1 - 0.05 / 2))
+      # power of the observed n1, n2: Phi(|h| / sqrt(1/n1 + 1/n2) - z); the design-effect columns use
+      # Kish's deff = n sum(w^2) / (sum w)^2 over the two groups' weights
+      se_unit <- sqrt(1 / ref$n + 1 / other$n)
+      achieved_power <- stats::pnorm(abs(h) / se_unit - stats::qnorm(1 - 0.05 / 2))
+      w_pair <- endpoint_df$weight[endpoint_df$gender_label %in% c(ref$gender, other$gender)]
+      deff <- length(w_pair) * sum(w_pair^2) / sum(w_pair)^2
       pair_rows[[length(pair_rows) + 1L]] <- data.frame(
         group1 = ref$gender,
         group2 = other$gender,
@@ -166,8 +171,8 @@
         n2 = other$n,
         n_eq = required_n,
         power_srs = achieved_power,
-        n_eq_eff = required_n,
-        power_deff = achieved_power * 0.9,
+        n_eq_eff = required_n * deff,
+        power_deff = stats::pnorm(abs(h) / (se_unit * sqrt(deff)) - stats::qnorm(1 - 0.05 / 2)),
         analysis_mode = "observational",
         power_scope = endpoint_name,
         stringsAsFactors = FALSE
@@ -457,7 +462,6 @@
     ci_lower95 = treat$treatment_effects_summary$ci_lower,
     ci_upper95 = treat$treatment_effects_summary$ci_upper,
     n = sum(!is.na(data$ebac_tot)),
-    n_boot_valid = NA_real_,
     stringsAsFactors = FALSE
   )
   final_cate <- within(treat$cate_subgroup_estimates, {
@@ -593,6 +597,9 @@
   coverage$exists <- ifelse(is.na(coverage$output), TRUE, coverage$output %in% output_files)
   shapes <- list()
   csvs <- list.files(output_dir, recursive = TRUE, pattern = "\\.csv$", full.names = TRUE)
+  if (!length(csvs)) {
+    message(sprintf("final-report found no module outputs under %s; point --output-dir at the directory the other modules wrote into (their tables are what this report audits)", output_dir))
+  }
   for (path in csvs) {
     tbl <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE), error = function(e) NULL)
     if (is.null(tbl)) next

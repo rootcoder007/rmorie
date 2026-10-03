@@ -44,7 +44,10 @@ A \code{morie_cluster} object (or \code{morie_cluster_spec} if
 k-means clustering with a full model-object contract
 }
 \examples{
-# with vs without scaling changes which columns drive the clusters
-morie_cluster(iris[1:4], k = 3)
-morie_cluster(iris[1:4], k = 3, scale = TRUE)
+# with vs without scaling changes which columns drive the clusters; cases are labelled
+# (an input without row names draws the UL1.2 warning and gets positional labels)
+x <- iris[1:4]
+rownames(x) <- paste0("s", seq_len(nrow(x)))
+morie_cluster(x, k = 3)
+morie_cluster(x, k = 3, scale = TRUE)
 }

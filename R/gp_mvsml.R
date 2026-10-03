@@ -294,9 +294,8 @@ morie_brier <- function(probs, y_true, halved = FALSE) {
 #' @param y_true Argument `y_true`; see Usage.
 #' @return A numeric value.
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' S <- c("a", "b", "c")
-#' rmorie:::morie_mll(V, S)
+#' probs <- rbind(c(0.7, 0.2, 0.1), c(0.2, 0.5, 0.3), c(0.1, 0.1, 0.8))
+#' rmorie:::morie_mll(probs, y_true = c(0L, 1L, 2L))
 #' @keywords internal
 morie_mll <- function(probs, y_true) {
   P <- as.matrix(probs)

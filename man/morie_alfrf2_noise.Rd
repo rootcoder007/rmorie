@@ -22,6 +22,8 @@ this is the structure itself, which is what makes the motif exact at
 the end of the reverse walk.
 }
 \examples{
-morie_alfrf2_noise(x0 = c(1, 2, 3, 4, 5, 6, 7, 8), abar_t = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
+x0 <- matrix(c(0, 1, 2, 0, 0, 1), nrow = 3)
+eps <- matrix(c(0.1, -0.2, 0.3, 0.2, -0.1, 0), nrow = 3)
+morie_alfrf2_noise(x0, abar_t = 0.9, eps = eps)
 }
 \keyword{internal}

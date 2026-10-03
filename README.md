@@ -35,7 +35,7 @@ in the package-level help (`?rmorie`).
   <https://rootcoder007.github.io/rmorie/>
 - **r-universe project page**: <https://rootcoder007.r-universe.dev/rmorie>
 - **Website**: <https://rmorie.com> — the MORIE family (rmorie, morie, rmoriebricklayer, rmoriedata) in one place.
-- **Hosted LLM tier**: <https://llm.rmorie.com> — the fallback model behind `morie_llm_ask()` when there is no local Ollama. Sign in with `morie_llm_login()` (GitHub) or `morie_llm_login(email = "you@example.com")`, or from the shell after `install_cli()`: `rmorie login`. The tier serves ollama.com cloud models and Cloudflare Workers AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf); when a cloud model is rate limited or down the gateway answers from Workers AI, so `morie_llm_models()` is the list to trust.
+- **Hosted LLM tier**: <https://llm.rmorie.com> — the fallback model behind `morie_llm_ask()` when there is no local Ollama. Sign in with `morie_llm_login()` (GitHub) or `morie_llm_login(email = "you@example.com")`, or from the shell after `install_cli()`: `rmorie login`. The tier serves ollama.com cloud models and additional AI models (kimi-k2.6:cf, kimi-k2.7-code:cf, deepseek-v4-pro:cf, deepseek-v4-flash:cf, glm-5.2:cf, glm-5.3:cf, glm-5.3-flash:cf, gpt-oss-120b:cf, gpt-oss-20b:cf, llama-4-scout:cf, qwen3.8-27b:cf, nemotron-3-120b:cf and gemma-4-26b:cf); when a cloud model is rate limited or down the gateway answers from one of the additional models, so `morie_llm_models()` is the list to trust.
 
 > With over 13,000 exported functions, the full reference is large — use the
 > manual or the package site above rather than scrolling the function
@@ -129,66 +129,53 @@ rmorie is not a wrapper. At runtime it does not call:
 Those packages appear in `Suggests` solely so `tests/cross/` can
 prove, on every CI run, that the native engines match them.
 
-## What's in v1.3.9
+## What's new in 1.4.0
 
-Hotfix: module runs fall back to rmoriedata's synthetic CPADS PUMF, the
-first-paper template ships, sources are ASCII-only.
+Everything since 1.3.4, in one place; [NEWS.md](NEWS.md) has the release-by-release detail.
 
-## What's in v1.3.8
-
-Every verb of the Python command line now has an R twin (`rmorie selftest`,
-`pipeline`, `emissions`, `verify-pollution`, `crypto`, `ingest`, ...). The
-pollution-health module and a compute-emissions tracker with a C++ background
-sampler and signed bricklayer capsules are native R.
-
-## What's in v1.3.7
-
-The command line gains `list-modules`, `run-module`, `list-datasets`, `pull`,
-`cheatsheet` and `provider` (attach your own OpenAI-compatible model endpoint,
-shared with the Python package).
-
-## What's in v1.3.6
-
-Version lockstep with the Python package's 1.3.6 hotfix; no change to the R
-package.
-
-## What's in v1.3.5
-
-CRAN follow-ups (example widths and costs, `research/` out of the tarball)
-and a test harness that runs in one process under covr and on Windows, with
-a time budget on R-universe's slow Intel mac runner. No change to any
-function.
-
-## What's in v1.3.4
-
-- **5,000+ exported functions, every one tested** — 5,189 `morie_*` entry
-  points (13,655 exports in all), each with a test that recomputes its
-  value, and the same names in the Python package `morie`, checked against
-  each other in CI.
-- **Native causal-inference engines** — matching, double machine learning,
+- **5,000+ exported functions, every one tested**: 5,189 `morie_*` entry
+  points (13,655 exports in all), each with a test that recomputes its value,
+  and the same names in the Python package `morie`, checked against each other
+  in CI.
+- **Criminology research programme**: the open-problems ledger under
+  `research/`, implemented as package functions with Lean 4 proofs of the
+  identification results (264 theorems, 0 sorry): DerSimonian-Laird pooling,
+  separation in a logistic fit, Imbens-Manski intervals for partially
+  identified sentencing effects, the Cheeger bound on a hot-spot boundary,
+  Duncan-Davis bounds, monotone treatment selection, near-repeat extinction,
+  judge-leniency designs, the Oaxaca-Blinder decomposition, Little's law on a
+  docket and the incapacitation identity. The Python package carries every
+  research function at parity.
+- **Native causal-inference engines**: matching, double machine learning,
   causal forests, meta-learners, design-based GLM and the `morie_dag*`
   toolkit, cross-validated against MatchIt, DoubleML, grf and dagitty.
-- **Hosted LLM tier** — `morie_llm_ask()` uses a local Ollama first and
-  falls back to <https://llm.rmorie.com>; sign in with
-  `morie_llm_login()` (GitHub or an emailed code). Gemini, an
-  OpenAI-compatible endpoint and OpenAI keys are honoured after that; a
-  keyword fallback needs no network.
-- **Command line inside the package** — `install_cli()` puts `rmorie` on
-  your PATH: `rmorie login`, `rmorie doctor`, `rmorie ask`, `rmorie analyze`.
-- **Criminology research program** — the open-problems ledger under
-  `research/`, implemented as package functions with Lean 4 proofs of the
-  identification results.
-- **SIU subsystem** — the Ontario Special Investigations Unit
-  director's-report corpus (English + French, 2005-present). See *SIU
-  pipeline* below.
-- **Built-in datasets** through `rmoriedata` (CRAN), fetched with
-  provenance by `rmoriebricklayer` (CRAN).
-- **CPADS contract helpers**, IPW / eBAC workflows, outputs-manifest
+- **Ask a model**: a local Ollama first, then the hosted tier at
+  <https://llm.rmorie.com> (one key from a GitHub sign-in or an emailed code),
+  then Gemini, your own OpenAI-compatible endpoint or OpenAI; a keyword
+  fallback needs no network. See *Ask a model and sign in* below.
+- **The full command line in R**: `install_cli()` puts `rmorie` on your PATH,
+  with every verb of the Python command line: `login`, `doctor`, `models`,
+  `ask`, `analyze`, `list-modules`, `run-module`, `list-datasets`, `pull`,
+  `provider`, `cheatsheet`, `selftest`, `pipeline`, `emissions`,
+  `verify-pollution`, `crypto`, `ingest`. It runs under R 4.6.
+- **Data**: the curated tables at <https://data.rmorie.com> (160 databases, the
+  Health Infobase tables and the OTIS research environments) open with the
+  same key; built-in datasets come through `rmoriedata` (CRAN), fetched with
+  provenance by `rmoriebricklayer` (CRAN); module runs fall back to
+  rmoriedata's synthetic CPADS PUMF.
+- **Pollution and compute emissions**: the pollution-health module and a
+  compute-emissions tracker with a C++ background sampler and signed
+  bricklayer capsules are native R.
+- **SIU subsystem**: the Ontario Special Investigations Unit director's-report
+  corpus (English + French, 2005-present). See *SIU pipeline* below.
+- **Also**: CPADS contract helpers, IPW / eBAC workflows, outputs-manifest
   tooling, synthetic data generators, a C/C++ backend for the Hawkes
-  likelihoods and the SIU parser, the causal-taphonomy suite, and the
-  A2AJ / CanLII Canadian legal-data ingest.
-- **`agent()`** — call the rmorie CLI agent from R (with
-  `agent_available()` to probe for the binary).
+  likelihoods and the SIU parser, the causal-taphonomy suite, the A2AJ /
+  CanLII Canadian legal-data ingest, and `agent()` to call the rmorie CLI
+  agent from R (`agent_available()` probes for it).
+- **Quality**: every finding of the fresh-user test rounds is fixed with a
+  test, every example runs without warnings, and the test harness runs in one process under covr and
+  on Windows.
 
 ## Scientific guardrail
 
@@ -258,6 +245,39 @@ Common families: ML (`randomForest`, `glmnet`, `xgboost`/`gbm`,
 `ranger`, `caret`, `pROC`, `Rtsne`, `e1071`, `dbscan`), DSP
 (`signal`, `pracma`, `wavelets`), causal (`DoubleML`, `mlr3`,
 `mlr3learners`, `ivreg`, `fixest`), storage (`RSQLite`, `duckdb`).
+
+## Ask a model and sign in
+
+`morie_llm_ask()` tries a local [Ollama](https://ollama.com) first, then the
+hosted MORIE tier, then Gemini (`GEMINI_API_KEY`) or your own endpoint. One
+key covers the hosted models and the curated tables at data.rmorie.com, and
+the Python package `morie` reads the same key.
+
+```r
+morie_llm_login()                                  # with a GitHub account
+morie_llm_login(email = "you@example.com")         # no GitHub account: a code is emailed to you
+morie_llm_login(email = "you@example.com", code = "123456")   # the same, code passed
+morie_llm_login(token = "sk-...")                  # a key you already have
+morie_llm_hosted_models()                          # the hosted models on your key
+morie_llm_ask("Which design fits a pre/post comparison with a control group?")
+morie_llm_ask("Explain an E-value of 2.1", model = "gpt-oss-120b:cf")
+morie_llm_provider_set("https://api.openai.com/v1", key = "sk-...", model = "gpt-4o-mini")  # your own endpoint
+morie_hosted_datasets()                            # curated db/table keys
+df <- morie_load_hosted_dataset("chicago_crime/incidents")
+morie_llm_logout()
+```
+
+From the shell, after `install_cli()`:
+
+```sh
+rmorie login                                  # GitHub
+rmorie login --email you@example.com          # no GitHub account: type the emailed code at the prompt
+rmorie login --no-browser                     # server / SSH: prints a link + code to open on any device
+rmorie login --token                          # paste a key you already have
+rmorie models
+rmorie ask --model gpt-oss-120b:cf "What does the power-design module compute?"
+rmorie doctor                                 # which providers answer from this machine
+```
 
 ## Outputs-manifest example
 
@@ -330,8 +350,8 @@ entries were read and cross-audited by a multi-agent review panel
 (every subject-official count verified; the mechanical resolver
 scores zero wrong against it). `morie_siu_reports()` returns that
 corpus verbatim and only ever fetches/parses reports newer than it;
-`morie_siu_resolve_so()` answers from the verified corpus first and
-falls back to the compiled rule engine; `morie_siu_panel()` runs the
+`morie_siu_resolve_so(report_text)` resolves the subject-official count
+from a report's text, the verified corpus first, then the compiled rule engine; `morie_siu_panel()` runs the
 same Mixture-of-Agents reading panel on new reports through any
 Ollama-compatible endpoint you point it at (your models, your host —
 no hardcoded default).
@@ -370,10 +390,12 @@ morie_siu_audit_case("17-OVI-201")
 morie_siu_anomaly_check("17-OVI-201")
 
 # Diff parser output against an external table.
+# field_map maps the external table's columns to parser fields; external_case_col names its case column
 morie_siu_compare(
-  case_number = "17-OVI-201",
-  external    = my_other_table,
-  field_map   = c(officer_count = "n_officers")
+  case_number       = "17-OVI-201",
+  external          = my_other_table,          # e.g. data.frame(case_number = "17-OVI-201", n_officers = 2L)
+  field_map         = list(n_officers = "number_of_officers_involved"),
+  external_case_col = "case_number"
 )
 ```
 
@@ -383,24 +405,24 @@ morie_siu_compare(
 # Default: local Ollama with gemma3:4b. No API key required.
 morie_siu_llm_extract("17-OVI-201")
 
-# Failover chain: try local first, fall back to Gemini only on error.
-morie_siu_llm_extract("17-OVI-201", model = c("ollama", "gemini"))
+# Failover chain: local first, then the hosted MORIE tier (after `rmorie login`, GitHub or --email), then Gemini.
+morie_siu_llm_extract("17-OVI-201", model = c("ollama", "hosted", "gemini"))
 
-# French to English translation via translategemma.
-morie_siu_translate(text = "L'enquete a ete close...", target_lang = "en")
+# French to English translation of the cached reports (field by field, via the local model).
+morie_siu_translate(target_lang = "en", case_numbers = "26-OCI-168")
 ```
 
-Supported providers: `ollama` (default), `gemini`, `claude`, `vertex`.
-Environment knobs: `OLLAMA_HOST` (defaults to `http://localhost:11434`),
-`OLLAMA_MODEL` (defaults to `gemma3:4b`), `OLLAMA_KEEP_ALIVE` (`30m`).
+Supported providers: `ollama` (default), `hosted` (llm.rmorie.com), `gemini`, `claude`, `vertex`,
+`openai`, `openai_compatible`. Environment knobs: `OLLAMA_HOST` (defaults to `http://localhost:11434`),
+`OLLAMA_MODEL` (defaults to `gemma3:4b`), `OLLAMA_KEEP_ALIVE` (`30m`), `GEMINI_API_KEY`.
 
 ### Format-validity sweep
 
 ```r
 df   <- morie_siu_reports()        # the reviewed corpus, from rmoriedata (CRAN)
-sane <- morie_siu_sanity_check(df)  # one row per report with a format issue
-nrow(sane)                          # regex / ISO date / Yes-No / chrome leak
-head(sane$issues, 3)
+sane <- morie_siu_sanity_check(df)  # one row per report, with its format issues (if any)
+table(sane$issues_count > 0)        # regex / ISO date / yes-no / chrome leak; older reports leave many fields blank
+head(sane$issues[sane$issues_count > 0], 3)
 ```
 
 ### Aggregate accuracy
@@ -419,9 +441,9 @@ corrections covering 10 spot-checked cases). Users can add their own:
 
 ```r
 morie_siu_record_correction(
-  case_number = "20-OFD-082",
-  field       = "officer_count",
-  value       = 3L
+  case_number    = "20-OFD-082",
+  field          = "number_of_officers_involved",
+  verified_value = "3 SO"
 )
 ```
 

@@ -30,7 +30,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-morie_prtcl_kalman_filter_1d(y = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8),
-  q = 0.5, c = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_prtcl_kalman_filter_1d(y = c(1, 2, 3, 4, 5, 6, 7, 8), a = 0.9, q = 0.5, c = 1, r = 0.25)
 }
 \keyword{internal}

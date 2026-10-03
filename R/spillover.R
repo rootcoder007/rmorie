@@ -185,7 +185,8 @@ morie_spillover_ht <- function(y, exposure, probs, joint = NULL) {
   n <- length(y)
   probs <- as.matrix(probs)
   if (length(exposure) != n || nrow(probs) != n || ncol(probs) != 3L) {
-    stop("y, exposure and probs (n x 3) must describe the same places", call. = FALSE)
+    stop(sprintf("y, exposure and probs (n x 3) must describe the same places: y has %d, exposure %d, probs %d x %d",
+                 n, length(exposure), nrow(probs), ncol(probs)), call. = FALSE)
   }
   if (any(probs <= 0)) stop("every exposure probability must be positive (positivity)", call. = FALSE)
   if (!all(exposure %in% 0:2)) stop("exposure must take values 0, 1, 2", call. = FALSE)

@@ -24,6 +24,7 @@ periods reconstitute the aggregate exactly; a profile that did not
 sum to one would silently change the total.
 }
 \examples{
-disaggregate(aggregate_value = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+disaggregate(aggregate_value = 100, m = 4L)
+disaggregate(100, m = 4L, profile = c(1, 2, 3, 4))
 }
 \keyword{internal}

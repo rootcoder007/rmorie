@@ -99,9 +99,8 @@
 #' @return list(bias2, variance, noise, total, mse, residual, b, n)
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' morie_bvdecomp(M, S)
+#' preds <- rbind(c(1, 2, 3), c(1.5, 2.5, 2.5))   # two bootstrap models, three test points
+#' morie_bvdecomp(preds, truth = c(1, 2, 3), noisevar = 0.1)
 morie_bvdecomp <- function(preds, truth, noisevar = 0) {
   p <- as.matrix(preds)
   storage.mode(p) <- "double"

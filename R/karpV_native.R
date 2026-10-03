@@ -266,8 +266,10 @@ morie_karpV_evaluate <- function(node, env) {
 #' @return the depth, a leaf counting as 1.
 #' @export
 #' @examples
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' morie_karpV_depth(D)
+#' # (x + 1) * x as an expression tree: internal nodes hold fn and args, leaves hold term
+#' tree <- list(fn = "*", args = list(list(fn = "+", args = list(list(term = "x"), list(term = 1))),
+#'                                    list(term = "x")))
+#' morie_karpV_depth(tree)
 #' @keywords internal
 morie_karpV_depth <- function(node) {
   if (.karpv_is_term(node)) return(1L)

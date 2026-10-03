@@ -99,8 +99,9 @@ morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
 #'   point estimation. \emph{Political Analysis} 18(2), 151-171.
 #' @export
 #' @examples
-#' morie_heteroskedastic_scales(votes = c("a", "b", "c"), ideal_points = c("a", "b", "c"),
-#'   alpha = 0.5, beta = 0.5)
+#' votes <- rbind(c(1, 1, 0), c(0, 1, 1), c(1, 0, 0), c(0, 0, 1))   # four legislators, three roll calls
+#' morie_heteroskedastic_scales(votes, ideal_points = c(-1, 0.5, -0.5, 1),
+#'   alpha = c(0, 0.2, -0.1), beta = c(1, 0.8, 1.2))
 morie_heteroskedastic_scales <- function(votes, ideal_points, alpha, beta) {
   V <- as.matrix(votes)
   storage.mode(V) <- "double"

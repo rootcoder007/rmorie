@@ -729,7 +729,8 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' zero-wrong against all 2,182 reviewed reports; where even the rules
 #' cannot answer, the reading panel ([morie_siu_panel()]) decides.
 #'
-#' @param text Plain report text (needed only for unreviewed reports).
+#' @param text Plain report text (needed only for unreviewed reports). A case number such as
+#'   \code{"17-OVI-201"} here is looked up in the reviewed corpus by case.
 #' @param drid Report id; supply whenever known.
 #' @param engine \code{"auto"}, \code{"bricklayer"} or \code{"native"} for
 #'   the rule-based step.
@@ -741,6 +742,23 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_resolve_so <- function(text = NULL, drid = NULL, engine = "auto") {
+  # a case number ("17-OVI-201") passed where the report text goes is looked up in the corpus by case
+  case_no <- if (is.character(text) && length(text) == 1L && grepl("^\\d{2}-[A-Z]{2,5}-\\d{3,4}$", text)) text else NULL
+  if (!is.null(case_no) && is.null(drid)) {
+    corpus <- if (requireNamespace("rmoriedata", quietly = TRUE)) {
+      tryCatch(rmoriedata::load_siu_reports(), error = function(e) NULL)
+    }
+    hits <- if (!is.null(corpus)) corpus[corpus$case_number == case_no, , drop = FALSE] else NULL
+    n <- if (!is.null(hits)) suppressWarnings(as.integer(hits$number_of_subject_officials)) else integer()
+    if (any(!is.na(n))) {
+      return(list(count = n[!is.na(n)][[1L]],
+                  reason = sprintf("panel-reviewed corpus (verified), case %s, drid %s",
+                                   case_no, hits$drid[!is.na(n)][[1L]])))
+    }
+    stop(sprintf("`text` is the report text; '%s' is a case number%s. Pass drid = <report id> or the report text.",
+                 case_no, if (is.null(corpus)) " and the reviewed corpus (rmoriedata) is not installed" else
+                   " with no verified count in the reviewed corpus"), call. = FALSE)
+  }
   if (!is.null(drid) && requireNamespace("rmoriedata", quietly = TRUE)) {
     corpus <- tryCatch(rmoriedata::load_siu_reports(),
                        error = function(e) NULL)

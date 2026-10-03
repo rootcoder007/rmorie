@@ -24,8 +24,7 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-predict_next(V, M)
+E <- rbind(c(1, 0), c(0, 1), c(0.7, 0.7))   # three item embeddings
+predict_next(state = c(0.9, 0.2), item_embeddings = E, top_k = 2)
 }
 \keyword{internal}

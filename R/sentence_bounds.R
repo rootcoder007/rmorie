@@ -135,3 +135,58 @@ morie_sentence_effect_mtr <- function(y, z, weights = NULL, contrast = NULL,
        naive_difference = b$naive_difference,
        theorems = c("Research.P11.Pop.mtr_lower", "Research.P11.Pop.mtr_upper", "Research.P11.Pop.mtr_upper_attained"))
 }
+# SPDX-License-Identifier: AGPL-3.0-or-later
+#
+# Research P11: monotone treatment selection (research/lean/P11Selection.lean; Manski & Pepper 2000).
+#
+#   Research.P11.Pop.mts_mean_b_le      E[y(b)] <= E[y | z = b]
+#   Research.P11.Pop.mts_mean_a_ge      E[y(a)] >= E[y | z = a]
+#   Research.P11.Pop.mts_ate_le_naive   E[y(b)] - E[y(a)] <= observed difference: the naive comparison overstates
+#   Research.P11.Pop.mtr_mts_bounds     with MTR as well, the contrast lies in [0, observed difference]
+
+#' Monotone-treatment-selection bounds for a sentencing contrast
+#'
+#' Monotone treatment selection (Manski & Pepper 2000) says that the people
+#' who received the harsher sentence are, under every sentence, at least as
+#' likely to show the outcome as the people who received the lighter one:
+#' the judge selected on risk in the direction of severity. Then the observed
+#' mean of the harsher group is an upper bound on \eqn{E[y(b)]}, the observed
+#' mean of the lighter group a lower bound on \eqn{E[y(a)]}
+#' (\code{Research.P11.Pop.mts_mean_b_le}, \code{mts_mean_a_ge}), and the
+#' naive difference of observed means overstates the effect of the harsher
+#' sentence (\code{mts_ate_le_naive}). MTS alone gives no sign. Adding monotone
+#' treatment response (\code{\link{morie_sentence_effect_mtr}}) gives the
+#' interval \eqn{[0, \text{naive difference}]} (\code{mtr_mts_bounds}): the
+#' assumption-free interval of width one, cut down to the observed gap by two
+#' named monotonicity assumptions, each stated where it enters.
+#' @inheritParams morie_sentence_effect_bounds
+#' @return A list with \code{levels}, \code{observed_means}, \code{pz},
+#'   \code{mean_b_bounds}, \code{mean_a_bounds} (under MTS alone),
+#'   \code{ate_bounds_mts} (MTS alone: lower end from the worst case, upper end
+#'   the naive difference), \code{ate_bounds_mtr_mts} (both assumptions),
+#'   \code{naive_difference} and \code{theorems}.
+#' @examples
+#' set.seed(1)
+#' z <- sample(c("community", "custody"), 500, replace = TRUE)
+#' y <- rbinom(500, 1, ifelse(z == "custody", 0.55, 0.35))
+#' morie_sentence_effect_mts(y, z)[c("ate_bounds_mts", "ate_bounds_mtr_mts")]
+#' @export
+morie_sentence_effect_mts <- function(y, z, weights = NULL, contrast = NULL) {
+  b <- morie_sentence_effect_bounds(y, z, weights, contrast)
+  trt <- b$levels[["treatment"]]
+  ctl <- b$levels[["comparison"]]
+  m_b <- unname(b$joint[trt] / b$pz[trt])
+  m_a <- unname(b$joint[ctl] / b$pz[ctl])
+  pzb <- unname(b$pz[trt])
+  pza <- unname(b$pz[ctl])
+  mean_b <- c(lower = pzb * m_b, upper = m_b)
+  mean_a <- c(lower = m_a, upper = pza * m_a + pzb)
+  naive <- m_b - m_a
+  list(levels = b$levels, observed_means = c(comparison = m_a, treatment = m_b), pz = b$pz,
+       mean_b_bounds = mean_b, mean_a_bounds = mean_a,
+       ate_bounds_mts = c(lower = unname(mean_b["lower"] - mean_a["upper"]), upper = naive),
+       ate_bounds_mtr_mts = c(lower = 0, upper = max(0, naive)),
+       naive_difference = naive,
+       theorems = c("Research.P11.Pop.mts_mean_b_le", "Research.P11.Pop.mts_mean_a_ge",
+                    "Research.P11.Pop.mts_ate_le_naive", "Research.P11.Pop.mtr_mts_bounds"))
+}

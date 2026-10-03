@@ -11,7 +11,7 @@
   con <- file("stdin")
   on.exit(close(con))
   l <- tryCatch(readLines(con, n = 1L, warn = FALSE), error = function(e) character())
-  if (!length(l)) return("q")
+  if (!length(l)) return(NA_character_)  # stdin closed: the caller says so instead of guessing
   trimws(l[[1L]])
 }
 
@@ -21,10 +21,26 @@
   rest[-(i + if (with_value) 0:1 else 0)]
 }
 
-.cli_csv_files <- function(target, module = NULL) {
-  files <- list.files(target, pattern = "\\.csv$", full.names = TRUE, recursive = TRUE)
-  if (!is.null(module)) files <- files[grepl(module, files, fixed = TRUE)]
-  sort(files)
+.cli_csv_files <- function(target, module = NULL, out = NULL) {
+  files <- sort(list.files(target, pattern = "\\.csv$", full.names = TRUE, recursive = TRUE))
+  if (!is.null(module) && length(files)) {
+    # module names are hyphenated ("power-design"); the tables they write are not ("power_summary.csv"):
+    # match on letters and digits only, the whole name or its first word, in the path or the file name
+    norm <- function(x) gsub("[^a-z0-9]", "", tolower(x))
+    key <- norm(module)
+    stem <- tolower(sub("[-_].*$", "", module))
+    # a table belongs to the module when it sits in the module's own output directory or its name
+    # starts with the module's name (ebac_core_*, descriptive_statistics_*); only when no table does
+    # is the module's first word tried as a prefix (power-design writes power_*), never a substring
+    hit <- grepl(paste0("/", module, "/"), files, fixed = TRUE) | startsWith(norm(basename(files)), key)
+    if (!any(hit) && nzchar(stem)) hit <- startsWith(tolower(basename(files)), paste0(stem, "_"))
+    if (any(hit)) {
+      files <- files[hit]
+    } else if (!is.null(out)) {
+      out(sprintf("no table in %s names the module %s; using all %d tables\n", target, module, length(files)))
+    }
+  }
+  files
 }
 
 .cli_inspect_text <- function(r) {
@@ -45,7 +61,8 @@
 }
 
 .cli_verify_text <- function(rep) {
-  lines <- c(sprintf("%s: %s", rep$path, if (isTRUE(rep$passed)) "PASS" else "FAIL"))
+  lines <- c(sprintf("%s: %s%s", rep$path, if (isTRUE(rep$passed)) "PASS" else "FAIL",
+                     if (!is.null(rep$note)) paste0("  (", rep$note, ")") else ""))
   for (k in names(rep$checks)) {
     v <- rep$checks[[k]]
     lines <- c(lines, sprintf("  [%s] %s", if (isTRUE(v)) "ok" else "x", k))
@@ -53,10 +70,60 @@
   paste0(paste(lines, collapse = "\n"), "\n")
 }
 
+# where a catalog entry comes from, in the words `morie list-datasets` uses
+.cli_dataset_route <- function(e) {
+  has <- function(col) col %in% names(e) && !is.na(e[[col]]) && nzchar(e[[col]])
+  if (has("rmoriedata")) return("rmoriedata (CRAN)")
+  if (has("arcgis_url")) return("Toronto Police ArcGIS")
+  if (identical(e$source, "statcan")) return("Statistics Canada")
+  if (has("fetcher")) return(if (identical(e$source, "naps")) "ECCC NAPS" else e$fetcher)
+  if (has("download_url")) {
+    host <- sub("^https?://([^/]+).*$", "\\1", e$download_url)
+    return(paste0(host, if (has("hosted_key")) " (or data.rmorie.com)" else ""))
+  }
+  if (has("hosted_key")) return("data.rmorie.com (your MORIE key)")
+  if (has("hosted_file")) return("data.rmorie.com file (an R object: rmorie loads it, morie saves it)")
+  if (has("ckan_resource_id")) return(if (identical(e$source, "otis")) "data.ontario.ca" else "open.canada.ca")
+  paste0("own file: ", e$local_path)
+}
+
+.cli_list_datasets <- function(out) {
+  d <- morie_list_datasets()
+  cat_df <- morie_dataset_catalog()
+  route <- vapply(seq_len(nrow(d)), function(i) {
+    if (identical(d$type[i], "hosted")) return("data.rmorie.com (your MORIE key)")
+    .cli_dataset_route(cat_df[cat_df$key == d$key[i], , drop = FALSE][1L, ])
+  }, character(1L))
+  shown <- ifelse(d$cached & !is.na(d$rows), format(d$rows, big.mark = ",", trim = TRUE), "not cached")
+  out(paste0(sprintf("%-20s %-12s %10s  %s", d$key, d$type, shown, route), collapse = "\n"))
+  out("\n")
+  n_hub <- sum(d$type == "hosted")
+  n_cat <- nrow(d) - n_hub
+  n_own <- sum(startsWith(route, "own file"))
+  out(strrep("-", 96L))
+  out("\n")
+  out(sprintf("%d keys: %d download from their portal, rmoriedata or data.rmorie.com on first use; %d %s your own research file%s, placed under $MORIE_DATA_DIR/datasets/ with the path%s shown.\n",
+              n_cat, n_cat - n_own, n_own, if (n_own == 1L) "is" else "are", if (n_own == 1L) "" else "s", if (n_own == 1L) "" else "s"))
+  if (n_hub) {
+    out(sprintf("%d curated tables at data.rmorie.com (db/table keys), opened by your MORIE key: rmorie pull KEY\n", n_hub))
+  } else {
+    out("Curated tables at data.rmorie.com appear here after `rmorie login` (GitHub) or `rmorie login --email you@example.com` (they need the MORIE key).\n")
+  }
+  0L
+}
+
 .cli_inspect <- function(rest, flag, out) {
+  if (!length(rest)) {
+    out("usage: rmorie inspect PATH [--module NAME]   (a CSV, or a directory of module outputs)\n")
+    return(2L)
+  }
+  if (!is.null(flag("--module")) && !flag("--module") %in% morie_module_names()) {
+    out(sprintf("unknown module: %s (names: rmorie list-modules)\n", flag("--module")))
+    return(1L)
+  }
   target <- rest[[1L]]
   if (dir.exists(target)) {
-    files <- .cli_csv_files(target, flag("--module"))
+    files <- .cli_csv_files(target, flag("--module"), out)
     if (!length(files)) {
       out(sprintf("No CSV files found in %s\n", target))
       return(1L)
@@ -73,8 +140,16 @@
 }
 
 .cli_verify <- function(rest, flag, out) {
+  if (!length(rest)) {
+    out("usage: rmorie verify PATH [--module NAME]   (a CSV, or a directory of module outputs)\n")
+    return(2L)
+  }
+  if (!is.null(flag("--module")) && !flag("--module") %in% morie_module_names()) {
+    out(sprintf("unknown module: %s (names: rmorie list-modules)\n", flag("--module")))
+    return(1L)
+  }
   target <- rest[[1L]]
-  files <- if (dir.exists(target)) .cli_csv_files(target, flag("--module")) else if (file.exists(target)) target else character()
+  files <- if (dir.exists(target)) .cli_csv_files(target, flag("--module"), out) else if (file.exists(target)) target else character()
   if (!length(files)) {
     out(sprintf("%s\n", if (dir.exists(target)) paste("No CSV files found in", target) else paste("Path not found:", target)))
     return(1L)
@@ -95,13 +170,32 @@
   df <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE), error = function(e) NULL)
   checks$csv_parses <- !is.null(df)
   if (is.null(df)) return(list(path = path, passed = FALSE, checks = checks))
-  checks$has_rows <- nrow(df) > 0L
   checks$has_columns <- ncol(df) > 0L
   checks$unique_header <- !anyDuplicated(names(df))
   num <- vapply(df, is.numeric, TRUE)
   checks$no_infinite <- !any(vapply(df[num], function(col) any(is.infinite(col)), TRUE))
-  checks$no_empty_column <- nrow(df) == 0L || !any(vapply(df, function(col) all(is.na(col)), TRUE))
-  list(path = path, passed = all(unlist(checks)), checks = checks, rows = nrow(df), cols = ncol(df))
+  # a column of blank cells (a text field with nothing to say, e.g. missing_formula_inputs) is not empty;
+  # only a column whose every cell is the NA token is
+  raw <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE, colClasses = "character"),
+                  error = function(e) NULL)
+  na_col <- function(col) all(is.na(col) | col == "NA")
+  # a one-row table whose text says what was not computed ("not computed", "deferred") with NA numbers is a
+  # declared placeholder, written by a module that skipped an optional step on purpose; a header-only table is empty
+  placeholder <- nrow(df) == 1L && !is.null(raw) && any(vapply(raw, na_col, TRUE)) &&
+    any(vapply(raw, function(col) !na_col(col) && grepl("not computed|deferred|not part of|not run|not available", col[[1L]], ignore.case = TRUE), TRUE))
+  checks$no_empty_column <- nrow(df) == 0L || is.null(raw) || placeholder ||
+    !any(vapply(raw, na_col, TRUE))
+  # statistical sanity: a p-value lives in [0, 1]; a confidence interval's lower bound is below its upper
+  pcols <- names(df)[grepl("^(p|p_value|pvalue|p\\.value|p_adj|p_adjusted|pval)$", tolower(names(df))) & num]
+  checks$p_values_in_unit_interval <- !length(pcols) ||
+    all(vapply(df[pcols], function(col) all(is.na(col) | (col >= 0 & col <= 1)), TRUE))
+  lo <- names(df)[tolower(names(df)) %in% c("ci_lower", "ci_low", "lower", "conf_low", "conf.low") & num]
+  hi <- names(df)[tolower(names(df)) %in% c("ci_upper", "ci_high", "upper", "conf_high", "conf.high") & num]
+  checks$ci_bounds_ordered <- !(length(lo) == 1L && length(hi) == 1L) ||
+    all(is.na(df[[lo]]) | is.na(df[[hi]]) | df[[lo]] <= df[[hi]])
+  list(path = path, passed = all(unlist(checks)), checks = checks, rows = nrow(df), cols = ncol(df),
+       note = if (isTRUE(placeholder)) "placeholder row: this table was declared not computed" else
+         if (nrow(df) == 0L) "header only: the module wrote no rows here" else NULL)
 }
 
 .cli_profile_dataset <- function(rest, flag, has, out) {
@@ -133,7 +227,7 @@
   path <- flag("--csv") %||% (if (length(rest) && !startsWith(rest[[1L]], "--")) rest[[1L]] else NULL)
   n <- flag("--n")
   if (is.null(path) || is.null(n)) {
-    out("usage: rmorie sample PATH --n N [--method srs|stratified|cluster|pps] [--strata-col COL] [--cluster-col COL] [--size-col COL] [--proportional] [--seed 42] [--output FILE]\n")
+    out("usage: rmorie sample PATH --n N [--method srs|stratified|cluster|pps] [--strata-col COL [--per-stratum]] [--cluster-col COL] [--size-col COL] [--seed 42] [--output FILE] [--no-weight]\n")
     return(2L)
   }
   if (!grepl("^[0-9]+$", n) || as.integer(n) < 1L) {
@@ -141,14 +235,18 @@
     return(2L)
   }
   n <- as.integer(n)
-  seed <- as.integer(flag("--seed") %||% "42")
+  seed <- suppressWarnings(as.integer(flag("--seed") %||% "42"))
+  if (is.na(seed) || !is.finite(seed)) {
+    out(sprintf("--seed must be an integer, not '%s'\n", flag("--seed")))
+    return(2L)
+  }
   method <- flag("--method") %||% "srs"
   if (!file.exists(path)) {
     out(sprintf("File not found: %s\n", path))
     return(1L)
   }
   df <- utils::read.csv(path, stringsAsFactors = FALSE)
-  if (n > nrow(df) && method == "srs") {
+  if (n > nrow(df) && method %in% c("srs", "stratified")) {
     out(sprintf("--n %d exceeds the %d rows in %s\n", n, nrow(df), path))
     return(1L)
   }
@@ -164,7 +262,10 @@
         out(sprintf("column '%s' is not in %s (columns: %s)\n", col, path, paste(head(names(df), 12), collapse = ", ")))
         return(1L)
       }
-      morie_stratified_sample(df, col, n, proportional = has("--proportional"), seed = seed)
+      # --n is the total sample size, allocated across the strata in proportion to their sizes;
+      # --per-stratum draws --n rows from every stratum instead
+      if (has("--per-stratum")) morie_stratified_sample(df, col, n, proportional = FALSE, seed = seed)
+      else morie_stratified_sample(df, col, n, proportional = TRUE, seed = seed)
     },
     cluster = {
       col <- flag("--cluster-col")
@@ -186,7 +287,9 @@
       out(sprintf("Unknown method: %s\n", method))
       return(1L)
     })
-  out(sprintf("Sampled %d rows using %s\n", nrow(s), method))
+  if (has("--no-weight")) s$.weight <- NULL
+  out(sprintf("Sampled %d rows using %s%s\n", nrow(s), method,
+              if (".weight" %in% names(s)) " (the .weight column holds each row's design weight; --no-weight drops it)" else ""))
   dest <- flag("--output")
   if (!is.null(dest)) {
     utils::write.csv(s, dest, row.names = FALSE)
@@ -204,6 +307,11 @@
     return(2L)
   }
   selected <- if (is.null(mods)) morie_module_names() else trimws(strsplit(mods, ",")[[1L]])
+  unknown <- setdiff(selected, morie_module_names())
+  if (length(unknown)) {
+    out(sprintf("Unknown module%s: %s (rmorie list-modules names them)\n", if (length(unknown) > 1L) "s" else "", paste(unknown, collapse = ", ")))
+    return(1L)
+  }
   od <- flag("--output-dir")
   cp <- flag("--cpads") %||% flag("--cpads-csv")
   if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
@@ -233,8 +341,49 @@
     out(sprintf("usage: rmorie %s [--model NAME] [--context TEXT] QUESTION...\n", verb))
     return(2L)
   }
-  out(paste0(morie_llm_ask(morie_build_prompt(paste(rest, collapse = " "), context = ctx), model = mdl), "\n"))
+  ans <- morie_llm_ask(morie_build_prompt(paste(rest, collapse = " "), context = ctx), model = mdl)
+  out(paste0(ans, "\n"))
+  if (isTRUE(attr(ans, "fallback"))) {
+    out(.cli_llm_fallback_cause(mdl))
+    return(1L)
+  }
   0L
+}
+
+# TRUE when every analysis a subject ran came back empty or failed (tables, payload and summary all empty,
+# or a title marked "(failed)"): `rmorie analyze` then exits 1 instead of reporting success.
+.cli_analyze_all_failed <- function(res) {
+  if (is.character(res)) {
+    res <- tryCatch(.morie_from_json(res, simplifyVector = FALSE), error = function(e) NULL)
+  }
+  if (!is.list(res) || !length(res)) return(FALSE)
+  if (!is.null(res$status)) return(identical(res$status, "error"))
+  failed <- vapply(res, function(x) {
+    if (!is.list(x)) return(FALSE)
+    grepl("(failed)", x$title %||% "", fixed = TRUE) ||
+      (!length(x$tables %||% list()) && !length(x$payload %||% list()) && !length(x$summary_lines %||% list()))
+  }, TRUE)
+  length(failed) > 0L && all(failed)
+}
+
+# One line naming why no model answered, for `ask`, `percy` and friends.
+.cli_llm_fallback_cause <- function(model = NULL) {
+  gemini_key <- nzchar(Sys.getenv("GEMINI_API_KEY")) || nzchar(Sys.getenv("GOOGLE_API_KEY"))
+  gemini_line <- paste0("your GEMINI_API_KEY (or GOOGLE_API_KEY) did not get an answer from Gemini ",
+                        "(rejected key, quota or network); check it, or unset it to use the other providers\n")
+  # a model the caller named leads the line; a Gemini model with a Gemini key set points at that key
+  lead <- if (!is.null(model) && nzchar(model)) sprintf("no provider answered for model '%s': ", model) else ""
+  if (nzchar(lead) && gemini_key && grepl("gemini", model, ignore.case = TRUE)) return(paste0(lead, gemini_line))
+  base <- .morie_llm_api_base()
+  if (!is.null(base) && !isTRUE(tryCatch(.morie_llm_probe_api(), error = function(e) FALSE))) {
+    return(paste0(lead, sprintf("could not connect to your endpoint %s (rmorie provider show / unset)\n", base)))
+  }
+  if (!is.null(.morie_llm_hosted_key()) && isTRUE(tryCatch(.morie_llm_hosted_rejected(), error = function(e) FALSE))) {
+    return(paste0(lead, sprintf("your hosted key was rejected by %s -- run `rmorie login` again\n", .morie_llm_hosted_base())))
+  }
+  if (gemini_key) return(paste0(lead, gemini_line))
+  if (nzchar(lead)) return(paste0(lead, "rmorie models lists the names\n"))
+  "no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email, or start Ollama)\n"
 }
 
 .cli_chat <- function(rest, flag, out) {
@@ -243,7 +392,7 @@
   history <- character()
   repeat {
     q <- .cli_readline("you> ")
-    if (!nzchar(q) || q %in% c("/quit", "/exit", "/q", "q", "quit", "exit")) break
+    if (is.na(q) || !nzchar(q) || q %in% c("/quit", "/exit", "/q", "q", "quit", "exit")) break
     ctx <- if (length(history)) paste(utils::tail(history, 6L), collapse = "\n") else NULL
     a <- morie_llm_ask(q, context = ctx, model = mdl)
     history <- c(history, paste0("User: ", q), paste0("Assistant: ", a))
@@ -259,7 +408,8 @@
     t0 <- proc.time()[["elapsed"]]
     r <- tryCatch({
       v <- fn()
-      if (identical(v, "skip")) list(ok = NA, detail = "skipped: not available here (no CPADS CSV / liboqs)")
+      if (identical(v, "skip")) list(ok = NA, detail = "skipped: not available here")
+      else if (is.character(v) && length(v) == 2L && identical(v[[1L]], "skip")) list(ok = NA, detail = paste0("skipped: ", v[[2L]]))
       else list(ok = isTRUE(v), detail = "")
     }, error = function(e) list(ok = FALSE, detail = conditionMessage(e)))
     results[[length(results) + 1L]] <<- list(name = name, ok = r$ok, detail = r$detail,
@@ -277,7 +427,7 @@
   check("sampling: SRS", function() nrow(morie_simple_random_sample(data.frame(x = 1:50), 5L)) == 5L)
   check("crypto: hybrid round trip", function() {
     if (!isTRUE(tryCatch(morie_crypto_liboqs_available(), error = function(e) FALSE)) ||
-        !isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) return("skip")
+        !isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) return(c("skip", "rmorie was built without liboqs/libsodium"))
     k <- morie_crypto_hybrid_keygen()
     ct <- morie_crypto_hybrid_encrypt(charToRaw("selftest"), k$pk)
     identical(rawToChar(morie_crypto_hybrid_decrypt(ct, k$sk)), "selftest")
@@ -293,7 +443,7 @@
   })
   has_cpads <- file.exists(tryCatch(.cpads_default_csv(), error = function(e) ""))
   check("module run: power-design", function() {
-    if (!has_cpads) return("skip")
+    if (!has_cpads) return(c("skip", "no CPADS CSV (rmorie pull ocp21)"))
     r <- morie_run_morie_module("power-design", output_dir = tempfile())
     is.list(r) && length(r) > 0L
   })
@@ -344,7 +494,7 @@
          c("list-datasets")),
     list("What to do next",
          paste0("  Run any module:        rmorie run-module NAME\n  Pull a dataset:        rmorie pull KEY\n",
-                "  Ask for help:          rmorie ask \"...\"   (rmorie login first for the hosted tier)\n",
+                "  Ask for help:          rmorie ask \"...\"   (rmorie login, GitHub or --email, first)\n",
                 "  One-page reference:    rmorie cheatsheet\n  Issues:                https://github.com/rootcoder007/rmorie/issues\n\nWelcome aboard."),
          NULL))
   for (i in seq_along(steps)) {
@@ -357,6 +507,10 @@
       next
     }
     ans <- tolower(.cli_readline("[Enter] continue / [s] skip / [q] quit: "))
+    if (is.na(ans)) {
+      out("\nthe tutorial needs an interactive terminal (stdin is closed); `rmorie tutorial --dry-run` prints every command instead\n")
+      return(2L)
+    }
     if (ans == "q") return(0L)
     if (ans == "s") next
     out(sprintf("  $ %s\n\n", cmd))
@@ -365,12 +519,34 @@
   0L
 }
 
-.cli_generate_template <- function(flag, out) {
-  module <- flag("--module") %||% "power-design"
+.cli_generate_template <- function(rest, flag, has, out) {
+  positional <- rest[!startsWith(rest, "--") & !rest %in% c(flag("--module"), flag("--out"))]
+  module <- flag("--module") %||% (if (length(positional)) positional[[1L]] else "power-design")
   dest <- flag("--out") %||% "first-paper.md"
+  key <- gsub("-", "_", module, fixed = TRUE)
+  ns_exports <- getNamespaceExports(asNamespace(utils::packageName()))
+  known_module <- module %in% morie_module_names()
+  known_family <- any(startsWith(ns_exports, paste0("morie_", key)))
+  if (!known_module && !known_family) {
+    out(sprintf("unknown module: %s (a pipeline module from `rmorie list-modules`, or a method family such as hawkes or dml)\n", module))
+    return(1L)
+  }
+  if (file.exists(dest) && !has("--force")) {
+    out(sprintf("%s already exists; pass --out NAME to write elsewhere or --force to replace it\n", dest))
+    return(1L)
+  }
   src <- system.file("templates", "first-paper.md", package = utils::packageName())
   if (!nzchar(src)) stop("the first-paper template is missing from this installation", call. = FALSE)
   txt <- gsub("[MODULE_NAME]", module, paste(readLines(src, warn = FALSE), collapse = "\n"), fixed = TRUE)
+  if (known_module) {
+    mods <- morie_list_morie_modules()
+    desc <- mods$description[match(module, mods$name)]
+    if (length(desc) == 1L && !is.na(desc) && nzchar(desc)) {
+      desc <- sub("[.]$", "", desc)
+      desc <- paste0(tolower(substr(desc, 1L, 1L)), substring(desc, 2L))  # it follows "which provides"
+      txt <- gsub("[REPLACE_WITH_MODULE_DESCRIPTION]", desc, txt, fixed = TRUE)
+    }
+  }
   dir.create(dirname(dest), recursive = TRUE, showWarnings = FALSE)
   writeLines(txt, dest)
   out(sprintf("wrote %s  (%s chars)\n", dest, format(nchar(txt), big.mark = ",")))
@@ -586,9 +762,16 @@
 }
 
 .cli_download_bootstrap <- function(flag, out) {
-  survey <- flag("--survey") %||% "all"
   cat_ <- morie_dataset_catalog()
   boot <- cat_[cat_$type == "bootstrap", , drop = FALSE]
+  survey <- flag("--survey")
+  if (is.null(survey)) {
+    # hundreds of MB per file: never start without being told which one
+    out(paste0("usage: rmorie download-bootstrap --survey KEY|all\n",
+               "  The bootstrap-weight files are large (hundreds of MB each) and are cached under the morie cache directory.\n",
+               "  Keys: ", paste(boot$key, collapse = ", "), "\n"))
+    return(2L)
+  }
   if (!identical(survey, "all")) {
     boot <- boot[grepl(sub("_.*$", "", survey), boot$survey, fixed = TRUE) &
                    grepl(sub("^[a-z]+_", "", survey), boot$year, fixed = TRUE), , drop = FALSE]
@@ -614,8 +797,9 @@
     out("usage: rmorie exec 'R CODE' | rmorie exec --file script.R\n")
     return(2L)
   }
-  env <- new.env(parent = globalenv())
-  res <- withVisible(eval(parse(text = code), envir = env))
+  env <- new.env(parent = asNamespace(utils::packageName()))  # the package's functions are in scope, as in rmorie exec
+  printed <- utils::capture.output(res <- withVisible(eval(parse(text = code), envir = env)))
+  if (length(printed)) out(paste0(paste(printed, collapse = "\n"), "\n"))
   if (res$visible) out(paste0(paste(utils::capture.output(print(res$value)), collapse = "\n"), "\n"))
   0L
 }
@@ -635,6 +819,11 @@
   if (!nzchar(ed)) ed <- Sys.getenv("EDITOR", "")
   if (!nzchar(ed)) {
     out(sprintf("No editor: set EDITOR, or open %s in RStudio / VS Code.\n", f))
+    return(1L)
+  }
+  ed_bin <- basename(strsplit(trimws(ed), "[[:space:]]+")[[1L]][1L])
+  if (!isatty(stdin()) && ed_bin %in% c("nano", "vi", "vim", "nvim", "emacs", "pico", "ed", "micro", "joe", "ne")) {
+    out(sprintf("%s is a terminal editor and stdin is not a terminal here; run `rmorie edit %s` from a shell, or set EDITOR to a graphical editor\n", ed_bin, f))
     return(1L)
   }
   if (!file.exists(f)) file.create(f)
@@ -678,12 +867,24 @@
                "[--population 1000000] [--region R] [--years Y] [--json]\n"))
     return(2L)
   }
+  if (!has("--demo") && is.null(flag("--exposure-csv")) &&
+      xor(is.null(flag("--exposure-mean")), is.null(flag("--exposure-prevalence")))) {
+    out("--exposure-mean and --exposure-prevalence go together (the share of the population at that mean exposure)\n")
+    return(2L)
+  }
+  for (nm in c("--exposure-mean", "--exposure-prevalence", "--reference", "--baseline-rate", "--population")) {
+    v <- flag(nm)
+    if (!is.null(v) && (is.na(suppressWarnings(as.numeric(v))) || !is.finite(as.numeric(v)))) {
+      out(sprintf("%s must be a number, not '%s'\n", nm, v))
+      return(2L)
+    }
+  }
   r <- morie_verify_pollution(
     pol, outcome = flag("--outcome") %||% "all_cause_mortality", region = flag("--region"),
     years = flag("--years"), demo = has("--demo"), exposure_csv = flag("--exposure-csv"),
     exposure_mean = as.numeric(flag("--exposure-mean") %||% "0"),
     exposure_prevalence = as.numeric(flag("--exposure-prevalence") %||% "0"),
-    reference = as.numeric(flag("--reference") %||% "5.8"),
+    reference = as.numeric(flag("--reference") %||% (if (identical(tolower(flag("--pollutant") %||% ""), "no2")) "10" else "5.8")),
     baseline_rate = as.numeric(flag("--baseline-rate") %||% "500"),
     population = as.numeric(flag("--population") %||% "1000000"))
   if (has("--json")) {
@@ -695,15 +896,30 @@
 }
 
 .cli_emissions <- function(flag, has, out) {
-  secs <- as.numeric(flag("--seconds") %||% "3")
+  country <- toupper(flag("--country") %||% "")
+  if (nzchar(country) && is.null(.emissions_energy_mix()[[country]])) {
+    out(sprintf("--country %s: not an ISO-3 code in the energy-mix table; ignoring it and detecting the location instead (the world average applies only when detection fails; MORIE_COUNTRY_ISO overrides)\n", country))
+    country <- ""
+  }
+  secs <- suppressWarnings(as.numeric(flag("--seconds") %||% "3"))
+  if (length(secs) != 1L || is.na(secs) || !is.finite(secs) || secs <= 0) {
+    out(sprintf("--seconds must be a positive number, not '%s'\n", flag("--seconds")))
+    return(2L)
+  }
+  if (secs > 86400) {
+    out(sprintf("--seconds must be at most 86400 (a day), not '%s'\n", flag("--seconds")))
+    return(2L)
+  }
   od <- flag("--output-dir") %||% "emissions"
   t <- morie_emissions_start(project_name = "morie-emissions-check", output_dir = od,
                              capsule = !has("--no-capsule"),
-                             country_iso_code = flag("--country") %||% "")
+                             country_iso_code = country)
+  on.exit(if (!is.null(t$sampler) && isTRUE(t$sampler)) tryCatch(.emissions_sampler_stop(), error = function(e) NULL), add = TRUE)
   t0 <- Sys.time()
   x <- 0
   while (as.numeric(difftime(Sys.time(), t0, units = "secs")) < secs) x <- x + sum(sqrt(seq_len(20000)))
   e <- morie_emissions_stop(t)
+  t$sampler <- FALSE
   out(.emissions_text(e))
   0L
 }
@@ -714,6 +930,8 @@
   txt <- character()
   morie_cli("help", out = function(s) txt <<- c(txt, s))
   lines <- strsplit(paste(txt, collapse = ""), "\n", fixed = TRUE)[[1L]]
+  aliases <- c(agent = "percy", perseus = "percy")
+  if (verb %in% names(aliases)) verb <- aliases[[verb]]
   hit <- grepl(paste0("^  ", verb, "( |$)"), lines)
   keep <- hit
   for (i in which(hit)) {  # continuation lines are indented deeper and follow the verb's line

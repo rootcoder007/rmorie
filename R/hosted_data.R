@@ -20,7 +20,7 @@
 .morie_data_get <- function(path, dest, timeout = 600, size = NULL) {
   key <- .morie_llm_hosted_key()
   if (is.null(key)) {
-    stop("data.rmorie.com needs your MORIE key: run `rmorie login` (R: morie_llm_login()) once.", call. = FALSE)
+    stop("data.rmorie.com needs your MORIE key: run `rmorie login` (GitHub) or `rmorie login --email you@example.com` once (R: morie_llm_login(), or morie_llm_login(email = \"you@example.com\")).", call. = FALSE)
   }
   label <- sub("^/", "", path)
   if (is.null(size) && grepl("\\.csv\\.gz$", path)) {
@@ -51,7 +51,7 @@
 
 #' Curated datasets at data.rmorie.com
 #'
-#' The MORIE project keeps 160 databases materialised from Google BigQuery
+#' The MORIE project keeps 160 databases materialised from Google BigQuery public datasets, plus the Health Infobase tables and the OTIS research files,
 #' public datasets (Chicago crime, EPA air quality, US census, FEC, FDA,
 #' NOAA, NHTSA, Hacker News, Ethereum, World Bank, ...) and serves their
 #' tables from the edge. They open with the key \code{\link{morie_llm_login}}

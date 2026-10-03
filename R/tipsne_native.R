@@ -522,9 +522,11 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 #'   each control-arm delta, and whether the result tipped at all.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' morie_tipsne(V, M)
+#' set.seed(1)
+#' y <- rnorm(40, mean = rep(c(0, 0.6), 20))
+#' y[c(3, 8, 15, 22)] <- NA
+#' r <- morie_tipsne(y, D = rep(0:1, 20), delta_treat = c(0, -0.5, -1), mi = "deterministic")
+#' r$tipped
 #' @keywords internal
 morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
                          delta_treat = NULL, delta_control = NULL,

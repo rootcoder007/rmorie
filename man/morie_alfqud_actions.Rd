@@ -21,6 +21,6 @@ location with itself is dropped -- its flag is always zero, so it can
 only waste an instruction.
 }
 \examples{
-morie_alfqud_actions(n_mem = c(1, 2, 3, 4, 5, 6, 7, 8), n_reg = 5L)
+length(morie_alfqud_actions(n_mem = 2L, n_reg = 1L))
 }
 \keyword{internal}

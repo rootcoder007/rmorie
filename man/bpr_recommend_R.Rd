@@ -29,6 +29,8 @@ List with \code{ranking} (list of \code{list(i=, s=)} up to
 Mirrors morie.fn.bprMF.recommend.
 }
 \examples{
-bpr_recommend_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, u = 5L, n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
+W <- list(c(0.5, 0.1), c(-0.2, 0.4))                 # two users' factors
+H <- list(c(0.3, 0.3), c(-0.1, 0.8), c(0.6, -0.2))   # three items' factors
+bpr_recommend_R(W, H, u = 0L, n_items = 3L, top_k = 2L)
 }
 \keyword{internal}

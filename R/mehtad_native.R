@@ -98,8 +98,8 @@
 #' \code{dual_norm}, \code{note}.
 #' @export
 #' @examples
-#' mehtad_residuals(A = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, c = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' mehtad_residuals(A = matrix(c(1, 1, 1, 2), 2), b = c(3, 4), c = c(1, 2),
+#'   x = c(1, 1), y = c(0.5, 0.5), s = c(0.2, 0.3))
 #' @keywords internal
 mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)

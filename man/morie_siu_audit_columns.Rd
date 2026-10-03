@@ -6,7 +6,7 @@
 \usage{
 morie_siu_audit_columns(
   case_numbers,
-  model = c("ollama", "gemini"),
+  model = c("ollama", "hosted", "gemini"),
   cache_dir = file.path(tempdir(), "morie", "siu"),
   max_html_chars = 80000L,
   max_examples_per_field = 5L,

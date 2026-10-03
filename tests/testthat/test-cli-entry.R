@@ -190,7 +190,9 @@ test_that("profile-dataset and sample work on a CSV", {
   expect_equal(nrow(utils::read.csv(file.path(d, "s.csv"))), 7L)
   expect_match(.capture("sample", f, "--n", "3", "--method", "stratified")$text, "strata-col")
   st <- .capture("sample", f, "--n", "2", "--method", "stratified", "--strata-col", "g")
-  expect_match(st$text, "Sampled 4 rows")
+  expect_match(st$text, "Sampled 2 rows")   # --n is the total; the strata share it
+  each <- .capture("sample", f, "--n", "2", "--method", "stratified", "--strata-col", "g", "--per-stratum")
+  expect_match(each$text, "Sampled 4 rows")
 })
 
 test_that("run-modules and pipeline run through the module runner", {
@@ -207,9 +209,14 @@ test_that("run-modules and pipeline run through the module runner", {
     morie_load_dataset = function(key, ...) data.frame(k = key),
     morie_run_morie_module = function(module_name, cpads_csv = NULL, output_dir = NULL, ...) {
       seen <<- cpads_csv
+      if (!is.null(output_dir)) {  # a module that writes nothing is reported as a failure by the verb
+        dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
+        utils::write.csv(data.frame(a = 1), file.path(output_dir, "a.csv"), row.names = FALSE)
+      }
       list(a = 1)
     })
-  expect_equal(.capture("run-module", "power-design", "--dataset", "ocp21")$status, 0L)
+  od <- withr::local_tempdir()
+  expect_equal(.capture("run-module", "power-design", "--dataset", "ocp21", "--output-dir", od)$status, 0L)
   testthat::local_mocked_bindings(.package = .pkg,
     morie_list_datasets = function(...) data.frame(key = c("ocp21", "bad1")),
     morie_load_dataset = function(key, ...) if (key == "bad1") stop("offline") else data.frame(k = key))
@@ -328,7 +335,7 @@ test_that("verify-pollution and emissions verbs", {
   r <- .capture("verify-pollution", "--pollutant", "no2", "--demo")
   expect_equal(r$status, 0L)
   expect_match(r$text, "STATUS: ok")
-  expect_match(r$text, "source:   Atkinson")
+  expect_match(r$text, "source:   Huangfu & Atkinson")
   f <- .capture("verify-pollution", "--pollutant", "pm25", "--exposure-mean", "3", "--exposure-prevalence", "0.5")
   expect_equal(f$status, 1L)
   expect_match(f$text, "assumption_failure")

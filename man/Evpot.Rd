@@ -28,9 +28,9 @@ its likelihood is higher.  The modified scale sigma - xi u is
 reported: it is invariant to the threshold when the GPD model holds.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Evpot(V, M)
+set.seed(1)
+x <- rexp(200)
+Evpot(x, u = 1)
 }
 \references{
 Davison & Smith (1990), JRSS B 52(3):393-442;

@@ -431,9 +431,9 @@ Otfreeen <- function(T, C, a, b, f, g, epsilon) {
 #' @references Peyre & Cuturi (2019), eq. (4.19).
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' Otbarmap(M, S)
+#' Tm <- matrix(c(0.4, 0.1, 0.1, 0.4), 2)   # a 2 x 2 coupling
+#' Y <- matrix(c(0, 1, 0, 1), 2)              # two destination points in the plane
+#' Otbarmap(Tm, Y)
 Otbarmap <- function(T, Y) {
   Tm <- .b2mat(T)
   B <- .b2mat(Y)

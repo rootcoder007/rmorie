@@ -99,8 +99,7 @@ morie_mistr_rope_angles <- function(d, base = 10000) {
 #' @return The rotated vector.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_mistr_apply_rope(V, V)
+#' morie_mistr_apply_rope(x = c(1, 0, 0.5, -0.5), pos = 3)
 #' @keywords internal
 morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
   x <- as.numeric(x)
@@ -130,7 +129,7 @@ morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
 #' @return An L x L logical matrix.
 #' @export
 #' @examples
-#' morie_mistr_sliding_window_mask(L = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+#' morie_mistr_sliding_window_mask(L = 6L, window = 3L)
 #' @keywords internal
 morie_mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
   if (window < 1L)

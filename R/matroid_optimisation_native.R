@@ -52,8 +52,7 @@
 #' @return A character value.
 #' @export
 #' @examples
-#' txt <- c('alpha', 'beta', 'gamma', 'delta')
-#' res <- .morie_key(s = txt)
+#' res <- .morie_key(s = c(3L, 1L, 2L))
 #' res
 .morie_key <- function(s) paste(sort(as.integer(s)), collapse = ",")
 

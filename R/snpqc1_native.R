@@ -72,10 +72,8 @@
 #' @return A list with \code{per_snp}, \code{per_ind}.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_call_rates(S)
-#' }
+#' G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))   # three individuals, four SNPs (0/1/2 copies)
+#' morie_snpqc1_call_rates(G)
 #' @keywords internal
 morie_snpqc1_call_rates <- function(genotypes) {
   # Per-SNP and per-individual call rates.
@@ -97,10 +95,8 @@ morie_snpqc1_call_rates <- function(genotypes) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_maf(S)
-#' }
+#' G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))
+#' morie_snpqc1_maf(G)
 #' @keywords internal
 morie_snpqc1_maf <- function(genotypes) {
   # Minor allele frequency per SNP, over non-missing calls.
@@ -237,10 +233,8 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #' @return The value of \code{out}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_heterozygosity(S)
-#' }
+#' G <- rbind(c(0, 1, 2, NA), c(1, 1, 0, 2), c(2, NA, 1, 0))
+#' morie_snpqc1_heterozygosity(G)
 #' @keywords internal
 morie_snpqc1_heterozygosity <- function(genotypes) {
   # Per-individual heterozygosity rate over non-missing calls.
@@ -272,10 +266,8 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #' @return The value of \code{res}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_sex_check(S)
-#' }
+#' X <- rbind(c(0, 2, 0, 2, 0), c(1, 1, 0, 1, 2), c(2, 0, 2, 2, 0))   # X-chromosome genotypes
+#' morie_snpqc1_sex_check(X, reported_sex = c(1L, 2L, 1L))
 #' @keywords internal
 morie_snpqc1_sex_check <- function(x_genotypes, reported_sex = NULL,
                                    male_min = 0.8, female_max = 0.2) {
@@ -568,10 +560,8 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
 #' @return The value of \code{keep}, as built in the body.
 #' @export
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   S <- c("a", "b", "c")
-#'   morie_snpqc1_ld_prune(S)
-#' }
+#' G <- rbind(c(0, 0, 2, 1), c(1, 1, 0, 2), c(2, 2, 1, 0), c(0, 0, 1, 1))
+#' morie_snpqc1_ld_prune(G, window = 4, step = 1, r2 = 0.5)
 #' @keywords internal
 morie_snpqc1_ld_prune <- function(genotypes, window = 50, step = 5, r2 = 0.2) {
   # Window-based pruning: drop one of any pair with r^2 above the

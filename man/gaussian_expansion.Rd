@@ -27,7 +27,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-gaussian_expansion(V)
+gaussian_expansion(r = 2.5, n_gaussians = 5)
 }
 \keyword{internal}

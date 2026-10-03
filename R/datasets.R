@@ -47,14 +47,15 @@
       kind, name
     ))
   }
-  warning(sprintf(
+  # offline = TRUE was asked for: say what the frame is, as a message rather than a warning
+  message(sprintf(
     paste0(
       "morie_datasets_%s(offline=TRUE): using the bundled synthetic %s frame. ",
       "This is a toy dataset with the documented schema but random data; ",
       "do not interpret outputs as findings about the real population."
     ),
     kind, kind
-  ), call. = FALSE)
+  ))
   utils::read.csv(path, stringsAsFactors = FALSE)
 }
 

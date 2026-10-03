@@ -20,7 +20,6 @@ See the file header for the source the module follows.
 it follows.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_unclr_alr_inv(V, V)
+morie_unclr_alr_inv(z = c(0.5, -0.2), total = 100)
 }
 \keyword{internal}

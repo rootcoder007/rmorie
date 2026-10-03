@@ -24,7 +24,7 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_twoT_streaming_frequency(V, V)
+hits <- list(c(1L, 2L), c(2L), c(2L, 3L))   # the items seen at each of three steps
+morie_twoT_streaming_frequency(hits, n_steps = 3L, alpha = 0.1)
 }
 \keyword{internal}

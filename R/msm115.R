@@ -17,7 +17,7 @@
 #'   Springer, eq. (7.10) p.227. DOI 10.1007/978-3-030-89010-0.
 #' @export
 #' @examples
-#' Msm115(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+#' Msm115(X = matrix(c(1, 2, 3, 4, 5, 6, 7, 8), nrow = 4), y = c(0L, 1L, 2L, 1L), beta0 = c(0.1, -0.2), beta = matrix(0.5, 2, 2))
 Msm115 <- function(X, y, beta0, beta, lam = 1, baseline_last = TRUE) {
   f <- .gppenmnloglik(X, y, beta0, beta, lam, penalty = "lasso",
                       baseline_last = baseline_last)

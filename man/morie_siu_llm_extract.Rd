@@ -6,7 +6,7 @@
 \usage{
 morie_siu_llm_extract(
   case_number,
-  model = c("ollama", "gemini"),
+  model = c("ollama", "hosted", "gemini"),
   cache_dir = file.path(tempdir(), "morie", "siu"),
   max_html_chars = 80000L,
   mock_response_text = NULL
@@ -58,7 +58,8 @@ the saved report.
 Credentials are read from environment variables only -- never
 hard-coded, never passed as function arguments -- so secrets do
 not leak into call traces, logs, or scripts. Set
-\code{GOOGLE_API_KEY} for Gemini, \code{ANTHROPIC_API_KEY} for
+\code{GEMINI_API_KEY} (or \code{GOOGLE_API_KEY}) for Gemini, the key stored by
+\code{\link{morie_llm_login}} for \code{"hosted"}, \code{ANTHROPIC_API_KEY} for
 Claude, or \code{OLLAMA_HOST} (e.g.
 \code{"http://localhost:11434"} or an OpenAI-compatible base URL) plus
 optionally \code{OLLAMA_MODEL} (else the first model the server serves) for

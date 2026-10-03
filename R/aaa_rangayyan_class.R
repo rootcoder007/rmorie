@@ -1409,9 +1409,7 @@ Mahal <- function(x, mu, C) {
 #' \code{regions_are_convex}, \code{decision_surfaces_are_hyperplanes}, \code{method}.
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' LinDisc(S, M)
+#' LinDisc(x = c(1, 2), weights = rbind(c(1, 0), c(0, 1), c(-1, 1)), w0 = c(0, 0, 0.5))
 #' @keywords internal
 LinDisc <- function(x, weights, w0 = NULL) {
   # Section 10.4.1: d_i(x) = w_i^T x + w_i0, assign to the largest.  The

@@ -154,9 +154,8 @@
 #' @return A list with \code{video}, \code{frames}, \code{note}.
 #' @export
 #' @examples
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' S <- c("a", "b", "c")
-#' morie_vidgen_space_only_conv(D, S)
+#' video <- list(matrix(1:9, 3), matrix(9:1, 3))   # two 3 x 3 frames
+#' morie_vidgen_space_only_conv(video, kernel = matrix(1 / 4, 2, 2))$frames
 #' @keywords internal
 morie_vidgen_space_only_conv <- function(video, kernel) {
   V <- lapply(video, .vidgen_mat)

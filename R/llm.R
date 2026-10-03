@@ -316,19 +316,26 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' Internal helper: Morie Llm Local Fallback
 #' @noRd
 .morie_llm_local_fallback <- function(prompt) {
-  paste0(
-    "MORIE is running in local-only mode (no LLM provider detected).\n\n",
+  # the attribute lets a script tell this text from an answer: isTRUE(attr(x, "fallback"))
+  base <- tryCatch(.morie_llm_api_base(), error = function(e) NULL)
+  head <- if (!is.null(base) && nzchar(base)) {
+    sprintf("MORIE is running in local-only mode (your endpoint %s did not answer).\n\n", base)
+  } else {
+    "MORIE is running in local-only mode (no LLM provider detected).\n\n"
+  }
+  structure(paste0(
+    head,
     "The analyses do not need a model: morie_run_pipeline(), ",
     "morie_run_morie_module() and every morie_* estimator work as they are. ",
     "To get answers from a model, enable one of these (tried in this order):\n",
     "  1. a local Ollama: curl -fsSL https://ollama.com/install.sh | sh\n",
     "  2. the hosted MORIE tier at https://llm.rmorie.com: ",
-    "morie_llm_login() in R, or `rmorie login` from the shell after ",
-    "install_cli()\n",
+    "morie_llm_login() in R (GitHub; email = \"you@example.com\" for a code by email), ",
+    "or `rmorie login` / `rmorie login --email you@example.com` from the shell after install_cli()\n",
     "  3. your own key: GEMINI_API_KEY, LLM_API_BASE_URL + LLM_API_KEY, ",
     "or OPENAI_API_KEY\n",
     "morie_llm_detect_provider() reports what is reachable from here."
-  )
+  ), fallback = TRUE)
 }
 
 #' Send a prompt to the best available LLM provider
@@ -562,6 +569,20 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
   if (is.character(k) && length(k) == 1L && nzchar(trimws(k))) trimws(k) else NULL
 }
 
+#' Internal helper: does the user's own OpenAI-compatible endpoint answer?
+#' @noRd
+.morie_llm_probe_api <- function(timeout = 2) {
+  base <- .morie_llm_api_base()
+  if (is.null(base) || !requireNamespace("httr2", quietly = TRUE) || .morie_llm_no_net()) return(FALSE)
+  tryCatch({
+    req <- httr2::request(paste0(sub("/+$", "", base), "/models"))
+    key <- .morie_llm_api_key()
+    if (!is.null(key) && nzchar(key)) req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
+    req <- httr2::req_timeout(req, timeout)
+    httr2::resp_status(httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))) < 500
+  }, error = function(e) FALSE)
+}
+
 #' Probe the hosted MORIE tier
 #'
 #' TRUE when the user is logged in and llm.rmorie.com accepts the key. The
@@ -674,8 +695,13 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
   if (isTRUE(open_browser)) try(utils::browseURL(info$verification_uri), silent = TRUE)
   interval <- as.numeric(info$interval %||% 5)
   deadline <- Sys.time() + poll_max_seconds
+  waited <- 0
   while (Sys.time() < deadline) {
     Sys.sleep(interval)
+    waited <- waited + interval
+    if (waited %% 30 < interval) {
+      message(sprintf("still waiting for the sign-in to be approved (%ds elapsed; Ctrl-C stops)", as.integer(waited)))
+    }
     req <- httr2::req_body_json(httr2::request(paste0(auth, "/device/token")),
                                 list(device_code = info$device_code))
     resp <- httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))

@@ -210,7 +210,8 @@ morie_install_extras <- function(which = "missing",
 #' Internal helper: Morie Pkg Installed
 #' @noRd
 .morie_pkg_installed <- function(pkg) {
-  isTRUE(requireNamespace(pkg, quietly = TRUE))
+  # a library lookup, not a load: requireNamespace() on 178 packages takes 20 s and prints their S3 notes
+  nzchar(system.file(package = pkg))
 }
 
 
@@ -273,7 +274,8 @@ morie_install_extras <- function(which = "missing",
 #' @export
 morie_ensure_extras <- function(pkgs, ask = interactive(), repos = NULL) {
   stopifnot(is.character(pkgs), length(pkgs) >= 1L)
-  miss <- pkgs[!vapply(pkgs, .morie_pkg_installed, logical(1L))]
+  # about to be loaded anyway, so ask requireNamespace(): an installed but broken package counts as missing
+  miss <- pkgs[!vapply(pkgs, function(p) isTRUE(requireNamespace(p, quietly = TRUE)), logical(1L))]
   if (length(miss) == 0L) {
     return(invisible(TRUE))
   }

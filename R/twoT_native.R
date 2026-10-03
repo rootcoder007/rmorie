@@ -218,8 +218,8 @@ morie_twoT_corrected_logits <- function(scores, probabilities,
 #' @return A list with \code{B}, \code{probability}, \code{n_items}, \code{note}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_twoT_streaming_frequency(V, V)
+#' hits <- list(c(1L, 2L), c(2L), c(2L, 3L))   # the items seen at each of three steps
+#' morie_twoT_streaming_frequency(hits, n_steps = 3L, alpha = 0.1)
 #' @keywords internal
 morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
                                           init = NULL) {
