@@ -188,3 +188,8 @@ open Research.P4
 #print axioms Research.P15.reference_dependence
 #print axioms Research.P15.explained_eq_iff
 #print axioms Research.P15.attribution_shift
+#print axioms Research.P16.indicator_integral
+#print axioms Research.P16.occupancy_integral
+#print axioms Research.P16.little
+#print axioms Research.P16.little_backlog
+#print axioms Research.P16.little_target

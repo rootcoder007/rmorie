@@ -672,3 +672,21 @@ legal factors" and an "unexplained" remainder read as disparity or discriminatio
   per-variable shift); Python `disparity_decomposition()`.
 - Open: the reweighting (DiNardo-Fortin-Lemieux) and distributional versions;
   an application to OTIS sentence lengths by offence score.
+
+## P16. Court backlog: what a disposition-time statistic already says
+
+Courts report mean time to disposition and filings per year; backlog is argued
+about as if it were a third number.
+
+- Estimand: the time-average number of pending cases over a window.
+- Progress 2026-10-02: `Research.P16` (P16Backlog.lean). On a finite docket inside
+  [0, T] the integral of the pending count is the sum of the case durations
+  (`occupancy_integral`, a Lebesgue integral of indicator sums), so the time-average
+  load equals the filing rate times the mean disposition time (`little`); a reported
+  mean disposition time and filing rate determine the backlog (`little_backlog`),
+  and a backlog target fixes the mean disposition time that achieves it
+  (`little_target`). No probability model. R: `morie_court_backlog()` (reports the
+  censored cases, whose exclusion truncates the mean: a P1-type dark figure);
+  Python `court_backlog()`.
+- Open: the censoring bias of the disposed-cases mean as a bound problem; an
+  application to Ontario Court of Justice disposition statistics.
