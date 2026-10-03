@@ -47,7 +47,8 @@ morie_judge_iv_population <- function(d0, d1, y0, y1, weights = NULL) {
   eff <- y1 - y0
   shares <- vapply(c("complier", "defier", "always", "never"), function(t) sum(w[type == t]), numeric(1))
   effects <- vapply(c("complier", "defier", "always", "never"), function(t) if (shares[[t]] > 0) sum(w[type == t] * eff[type == t]) / shares[[t]] else NA_real_, numeric(1))
-  yz1 <- ifelse(d1 == 1, y1, y0); yz0 <- ifelse(d0 == 1, y1, y0)
+  yz1 <- ifelse(d1 == 1, y1, y0)
+  yz0 <- ifelse(d0 == 1, y1, y0)
   itt <- sum(w * yz1) - sum(w * yz0)
   fs <- sum(w * d1) - sum(w * d0)
   list(shares = shares, effects = effects, itt = itt, first_stage = fs,
@@ -96,7 +97,8 @@ morie_judge_iv <- function(z, d, y, weights = NULL, defier_share = c(0, 0.05, 0.
   fs <- m(d, z == 1) - m(d, z == 0)
   itt <- m(y, z == 1) - m(y, z == 0)
   wald <- if (fs != 0) itt / fs else NA_real_
-  always <- m(d, z == 0); never <- 1 - m(d, z == 1)
+  always <- m(d, z == 0)
+  never <- 1 - m(d, z == 1)
   shares <- c(complier = 1 - always - never, always = always, never = never)
   grid <- expand.grid(defier_share = defier_share, defier_effect = defier_effect)
   grid$complier_share <- shares[["complier"]] + grid$defier_share
@@ -105,4 +107,78 @@ morie_judge_iv <- function(z, d, y, weights = NULL, defier_share = c(0, 0.05, 0.
                                          NA_real_)
   list(first_stage = fs, itt = itt, wald = wald, shares_if_monotone = shares, sensitivity = grid,
        theorems = c("Research.P14.late_identification", "Research.P14.wald_with_defiers", "Research.P14.first_stage_decomposition"))
+}
+
+#   Research.P14Slope.propensity_mono         nested judges: P_j <= P_k
+#   Research.P14Slope.outcome_diff            Y_k - Y_j = effect summed over the marginal compliers
+#   Research.P14Slope.slope_bound             |Y_k - Y_j| <= (hi - lo)(P_k - P_j)
+#   Research.P14Slope.violation_refutes_monotonicity   a steeper pair is not nested
+
+#' The many-judge slope test of monotonicity
+#'
+#' With judges randomly assigned, each judge's detention rate \eqn{P_j} and
+#' mean outcome \eqn{Y_j} estimate population quantities under that judge.
+#' When judge \eqn{k} detains everyone judge \eqn{j} detains (the many-judge
+#' form of monotonicity), \eqn{Y_k - Y_j} is the treatment effect summed over
+#' the marginal compliers (\code{Research.P14Slope.outcome_diff}), so the
+#' pair's Wald ratio is their average effect, and with outcomes in
+#' \eqn{[lo, hi]} the mean outcome cannot move faster than the detention
+#' rate times the range: \eqn{|Y_k - Y_j| \le (hi - lo)(P_k - P_j)}
+#' (\code{slope_bound}). A pair that violates the bound is not nested
+#' (\code{violation_refutes_monotonicity}); that is the test of Frandsen,
+#' Lefgren and Leslie (2023).
+#' @param judge Judge identifier per case.
+#' @param d Detention or treatment indicator (0/1) per case.
+#' @param y Outcome per case.
+#' @param weights Optional non-negative case weights.
+#' @param lo,hi Bounds of the outcome; default its observed range.
+#' @return A list with \code{judges} (a data frame ordered by propensity:
+#'   \code{judge}, \code{n}, \code{propensity}, \code{outcome}),
+#'   \code{pairs} (\code{j}, \code{k}, \code{dP}, \code{dY}, \code{bound},
+#'   \code{violation}, \code{late}), \code{violations},
+#'   \code{monotone_consistent} and \code{theorems}.
+#' @examples
+#' judge <- rep(c("A", "B", "C"), each = 6)
+#' d <- c(0, 0, 0, 1, 1, 0,  0, 1, 1, 1, 0, 1,  1, 1, 1, 1, 1, 0)
+#' y <- c(1, 0, 0, 1, 0, 0,  0, 1, 1, 0, 0, 1,  1, 1, 1, 1, 0, 1)
+#' s <- morie_judge_slope_test(judge, d, y)
+#' s$judges
+#' s$pairs
+#' @export
+morie_judge_slope_test <- function(judge, d, y, weights = NULL, lo = min(y), hi = max(y)) {
+  n <- length(judge)
+  if (length(d) != n || length(y) != n) stop("judge, d and y must have equal length", call. = FALSE)
+  if (anyNA(judge) || anyNA(d) || anyNA(y)) stop("no missing values allowed", call. = FALSE)
+  if (!all(d %in% c(0, 1))) stop("d must be 0/1", call. = FALSE)
+  if (any(y < lo) || any(y > hi)) stop("y must lie in [lo, hi]", call. = FALSE)
+  w <- if (is.null(weights)) rep(1, n) else weights
+  if (length(w) != n || anyNA(w) || any(w < 0)) stop("weights must be non-negative", call. = FALSE)
+  ids <- unique(as.character(judge))
+  judge <- as.character(judge)
+  P <- vapply(ids, function(j) { s <- judge == j
+  sum(w[s] * d[s]) / sum(w[s]) }, numeric(1))
+  Y <- vapply(ids, function(j) { s <- judge == j
+  sum(w[s] * y[s]) / sum(w[s]) }, numeric(1))
+  cnt <- vapply(ids, function(j) sum(judge == j), numeric(1))
+  if (any(!is.finite(P))) stop("every judge needs positive total weight", call. = FALSE)
+  o <- order(P)
+  judges <- data.frame(judge = ids[o], n = cnt[o], propensity = P[o], outcome = Y[o], stringsAsFactors = FALSE, row.names = NULL)
+  J <- length(ids)
+  pairs <- NULL
+  if (J >= 2L) {
+    idx <- utils::combn(J, 2)
+    j <- idx[1, ]
+    k <- idx[2, ]
+    dP <- judges$propensity[k] - judges$propensity[j]
+    dY <- judges$outcome[k] - judges$outcome[j]
+    bound <- (hi - lo) * dP
+    pairs <- data.frame(j = judges$judge[j], k = judges$judge[k], dP = dP, dY = dY, bound = bound,
+                        violation = abs(dY) > bound + 1e-12,
+                        late = ifelse(dP > 0, dY / dP, NA_real_), stringsAsFactors = FALSE)
+  }
+  viol <- if (is.null(pairs)) 0L else sum(pairs$violation)
+  list(judges = judges, pairs = pairs, violations = viol, monotone_consistent = viol == 0L,
+       lo = lo, hi = hi,
+       theorems = c("Research.P14Slope.propensity_mono", "Research.P14Slope.outcome_diff",
+                    "Research.P14Slope.slope_bound", "Research.P14Slope.violation_refutes_monotonicity"))
 }

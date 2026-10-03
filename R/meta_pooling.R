@@ -116,3 +116,107 @@ morie_meta_dl_bias <- function(variances, n_draws = 2000L, seed = 0) {
        theorems = c("Research.P13.truncation_bias", "Research.P13.pos_part_pos",
                     "Research.P13.dl_biased_under_homogeneity"))
 }
+
+#   Research.P13HKSJ.hksj_wider_iff        HKSJ variance >= Wald variance  iff  q >= 1
+#   Research.P13HKSJ.Q_eq_zero_iff         q = 0  iff  every study equals the pooled value
+#   Research.P13HKSJ.hksj_equal_weights    equal weights: HKSJ variance = s^2 / k (the one-sample t variance)
+
+#' Hartung-Knapp-Sidik-Jonkman interval with DerSimonian-Laird or REML heterogeneity
+#'
+#' Pools \code{k} site estimates and replaces the Wald variance of the pooled
+#' estimate, \eqn{1/\sum w}, by \eqn{q/\sum w} with
+#' \eqn{q = \sum w (y - \hat\mu)^2 / (k - 1)}, using \eqn{t_{k-1}} quantiles
+#' (Hartung and Knapp 2001; Sidik and Jonkman 2002). The interval is at least
+#' as wide as the Wald interval exactly when \eqn{q \ge 1}
+#' (\code{Research.P13HKSJ.hksj_wider_iff}); \eqn{q = 0} only when every
+#' site equals the pooled value, where the interval collapses to a point
+#' (\code{Q_eq_zero_iff}); and with equal weights the HKSJ variance is the
+#' one-sample \eqn{t} variance \eqn{s^2/k} of the unweighted effects, so the
+#' method is then the ordinary \eqn{t} interval (\code{hksj_equal_weights}).
+#' The between-site variance is DerSimonian-Laird by default or restricted
+#' maximum likelihood, maximised by golden-section search on
+#' \eqn{[0, \tau^2_{max}]} (the same search as the Python arm).
+#' @param estimates Site estimates, one per site.
+#' @param variances Their sampling variances, positive.
+#' @param tau2 \code{"DL"} or \code{"REML"}.
+#' @param level Confidence level.
+#' @return A list with \code{k}, \code{tau2}, \code{tau2_method},
+#'   \code{estimate}, \code{Q} (the weighted residual sum of squares at the
+#'   random-effects weights), \code{q} (\eqn{Q/(k-1)}), \code{hksj} and
+#'   \code{wald} (each with \code{variance}, \code{se}, \code{ci};
+#'   \code{hksj} also \code{df}), \code{wider_than_wald} (\eqn{q \ge 1}),
+#'   \code{degenerate} (\eqn{q = 0}), \code{equal_weights},
+#'   \code{t_variance} (\eqn{s^2/k}), \code{weights} and \code{theorems}.
+#' @examples
+#' est <- c(-0.25, -0.10, -0.40, 0.05, -0.30)
+#' v <- c(0.010, 0.020, 0.015, 0.030, 0.012)
+#' h <- morie_meta_hksj(est, v)
+#' c(tau2 = h$tau2, q = h$q, hksj_se = h$hksj$se, wald_se = h$wald$se, wider = h$wider_than_wald)
+#' r <- morie_meta_hksj(est, v, tau2 = "REML")
+#' c(tau2 = r$tau2, q = r$q)
+#' @export
+morie_meta_hksj <- function(estimates, variances, tau2 = c("DL", "REML"), level = 0.95) {
+  tau2 <- match.arg(tau2)
+  k <- length(estimates)
+  if (length(variances) != k) stop("estimates and variances must have equal length", call. = FALSE)
+  if (k < 2L) stop("need at least two sites", call. = FALSE)
+  if (anyNA(estimates) || anyNA(variances) || any(variances <= 0)) stop("variances must be positive and nothing missing", call. = FALSE)
+  if (level <= 0 || level >= 1) stop("level must lie in (0, 1)", call. = FALSE)
+  t2 <- if (tau2 == "DL") morie_meta_random_effects(estimates, variances, level)$tau2 else .morie_reml_tau2(estimates, variances)
+  w <- 1 / (variances + t2)
+  mu <- sum(w * estimates) / sum(w)
+  Q <- sum(w * (estimates - mu)^2)
+  q <- Q / (k - 1)
+  var_h <- q / sum(w)
+  var_w <- 1 / sum(w)
+  tq <- stats::qt(1 - (1 - level) / 2, df = k - 1)
+  z <- stats::qnorm(1 - (1 - level) / 2)
+  equal <- all(abs(variances - variances[1]) <= 1e-12 * max(1, abs(variances[1])))
+  list(
+    k = k, tau2 = t2, tau2_method = tau2, estimate = mu, Q = Q, q = q,
+    hksj = list(variance = var_h, se = sqrt(var_h), df = k - 1,
+                ci = c(lower = mu - tq * sqrt(var_h), upper = mu + tq * sqrt(var_h))),
+    wald = list(variance = var_w, se = sqrt(var_w),
+                ci = c(lower = mu - z * sqrt(var_w), upper = mu + z * sqrt(var_w))),
+    wider_than_wald = q >= 1,
+    degenerate = Q == 0,
+    equal_weights = equal,
+    t_variance = stats::var(estimates) / k,
+    weights = w / sum(w),
+    theorems = c("Research.P13HKSJ.hksj_wider_iff", "Research.P13HKSJ.Q_eq_zero_iff", "Research.P13HKSJ.hksj_equal_weights")
+  )
+}
+
+# REML between-site variance by golden-section search; identical to the Python arm.
+.morie_reml_tau2 <- function(y, v, tol = 1e-12) {
+  ll <- function(t) {
+    w <- 1 / (v + t)
+    mu <- sum(w * y) / sum(w)
+    -0.5 * sum(log(v + t)) - 0.5 * log(sum(w)) - 0.5 * sum(w * (y - mu)^2)
+  }
+  gr <- (sqrt(5) - 1) / 2
+  a <- 0
+  b <- max(v) + 10 * (max(y) - min(y))^2
+  c <- b - gr * (b - a)
+  d <- a + gr * (b - a)
+  fc <- ll(c)
+  fd <- ll(d)
+  for (it in seq_len(300L)) {
+    if (b - a < tol) break
+    if (fc > fd) {
+      b <- d
+      d <- c
+      fd <- fc
+      c <- b - gr * (b - a)
+      fc <- ll(c)
+    } else {
+      a <- c
+      c <- d
+      fc <- fd
+      d <- a + gr * (b - a)
+      fd <- ll(d)
+    }
+  }
+  t <- (a + b) / 2
+  if (ll(0) >= ll(t)) 0 else t
+}

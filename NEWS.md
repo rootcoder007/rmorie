@@ -25,6 +25,19 @@
   `Research.P18`), and regression to the mean at selected hot spots
   (`morie_regression_to_mean()`, `Research.P19`).
 
+* Research: seven continuations close the ledger's open items, each with a Lean theorem,
+  an R function and tests, at parity with Python: `morie_two_point_bound()` (Le Cam's
+  two-point lower bound for the dark figure, `Research.P1LeCam`), `morie_meta_hksj()`
+  (the Hartung-Knapp-Sidik-Jonkman interval with DerSimonian-Laird or REML heterogeneity,
+  `Research.P13HKSJ`), `morie_judge_slope_test()` (the many-judge slope test of
+  monotonicity, `Research.P14Slope`), `morie_dfl_reweight()` (DiNardo-Fortin-Lemieux
+  reweighting, `Research.P15Reweight`), `morie_backlog_censoring()` (the disposed-cases
+  mean as a bound, `Research.P16Censoring`), `morie_incapacitation_career()` (desistance and
+  replacement, `Research.P17Replacement`) and `morie_hotspot_shrinkage()` with
+  `morie_shrinkage_loss()` (empirical-Bayes shrinkage and the size of the
+  regression-to-the-mean fall, `Research.P19Shrinkage`). The Lean audit now covers 264
+  theorems in 58 files, 0 sorry, standard axioms only.
+
 * Datasets: the fourteen Health Infobase tables (CPADS, CSADS, CSUS) download from
   the portal and fall back to the copy at data.rmorie.com (`hib/...` keys); the three
   OTIS research environments are fetched from data.rmorie.com as R objects

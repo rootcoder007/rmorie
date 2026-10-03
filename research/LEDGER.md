@@ -67,6 +67,13 @@ assumptions the dark figure is an interval, not a point.
   co-offence multiplicity (library scan A13). R:
   `morie_dark_figure_hierarchy()`; empirical target: FBI CDE SRS-to-NIBRS
   transition years by agency.
+- Progress 2026-10-02 (Le Cam, library scan C10): `Research.P1LeCam` (P1LeCam.lean). On a
+  finite space, sum min(p, q) = 1 - TV (`sum_min`, `tv_nonneg`, `tv_le_one`) and for every
+  estimator E_p|T - theta_p| + E_q|T - theta_q| >= |theta_p - theta_q| (1 - TV)
+  (`two_point`), so the worse risk is at least |theta_p - theta_q| (1 - TV)/2 (`minimax`):
+  two recording mechanisms close in total variation but with true rates delta apart leave
+  every estimator a worst-case error of delta (1 - TV)/2. R: `morie_two_point_bound()`;
+  Python `two_point_bound()`.
 
 ## P2. Selection in police-recorded data: the record is the treatment
 
@@ -625,8 +632,13 @@ estimates the between-site variance by a truncation, and a reader is told that
   `morie_meta_random_effects()` (FE and DL-RE with the truncation flag and the
   variance ratio) and `morie_meta_dl_bias()` (the size of the bias under
   homogeneity by simulation on the shared Philox stream).
-- Open: REML and Hartung-Knapp-Sidik-Jonkman intervals; the chapter's hot-spots
-  effects as the worked example.
+- Progress 2026-10-02 (HKSJ): `Research.P13HKSJ` (P13HKSJ.lean). The HKSJ variance
+  q/sum w exceeds the Wald variance exactly when q >= 1 (`hksj_wider_iff`), q = 0 only
+  when every site equals the pooled value (`Q_eq_zero_iff`), and with equal weights the
+  HKSJ variance is the one-sample t variance s^2/k (`hksj_equal_weights`). R:
+  `morie_meta_hksj()` (DerSimonian-Laird or REML by golden-section search); Python
+  `meta_hksj()`.
+- Open: the chapter's hot-spots effects as the worked example.
 
 ## P14. Judge-leniency designs: what the instrument identifies
 
@@ -648,9 +660,13 @@ check.
   R: `morie_judge_iv_population()` (exact decomposition on a specified population),
   `morie_judge_iv()` (observed data: Wald, type shares under monotonicity, defier
   sensitivity); Python `judge_iv_population()`, `judge_iv()`.
-- Open: the many-judge case (leniency as a continuous instrument, Frandsen,
-  Lefgren & Leslie 2023 on monotonicity tests); an application to OTIS custody
-  decisions by presiding judge.
+- Progress 2026-10-02 (many judges): `Research.P14Slope` (P14Slope.lean). With judges
+  nested (k detains everyone j detains) the detention rate is monotone
+  (`propensity_mono`), the outcome difference is the effect over the marginal compliers
+  (`outcome_diff`), and |Y_k - Y_j| <= (hi - lo)(P_k - P_j) (`slope_bound`); a steeper
+  pair is not nested (`violation_refutes_monotonicity`), the Frandsen-Lefgren-Leslie test.
+  R: `morie_judge_slope_test()`; Python `judge_slope_test()`.
+- Open: an application to OTIS custody decisions by presiding judge.
 
 ## P15. Sentencing disparity: what the "unexplained" part of a decomposition is
 
@@ -670,8 +686,14 @@ legal factors" and an "unexplained" remainder read as disparity or discriminatio
   that covariate's attribution lines (`attribution_shift`). R:
   `morie_disparity_decomposition()` (both references, the interaction, the
   per-variable shift); Python `disparity_decomposition()`.
-- Open: the reweighting (DiNardo-Fortin-Lemieux) and distributional versions;
-  an application to OTIS sentence lengths by offence score.
+- Progress 2026-10-02 (DFL): `Research.P15Reweight` (P15Reweight.lean). Reweighting
+  group 0 by psi(x) = m_1(x)/m_0(x) reproduces group 1's covariate distribution exactly
+  under common support (`reweighting_matches`, `reweighted_mass`); with group-0 outcomes a
+  function of x the reweighted mean is group 1's composition at group 0's structure
+  (`counterfactual_outcome`), and the gap splits into structure plus composition
+  (`decomposition`). R: `morie_dfl_reweight()`; Python `dfl_reweight()`.
+- Open: the distributional (recentered-influence-function) versions; an application to
+  OTIS sentence lengths by offence score.
 
 ## P16. Court backlog: what a disposition-time statistic already says
 
@@ -688,8 +710,13 @@ about as if it were a third number.
   (`little_target`). No probability model. R: `morie_court_backlog()` (reports the
   censored cases, whose exclusion truncates the mean: a P1-type dark figure);
   Python `court_backlog()`.
-- Open: the censoring bias of the disposed-cases mean as a bound problem; an
-  application to Ontario Court of Justice disposition statistics.
+- Progress 2026-10-02 (censoring): `Research.P16Censoring` (P16Censoring.lean). The true
+  cohort mean is at least (sum t + sum a)/(n + m) (`true_mean_ge`); the lower bound minus the
+  disposed mean is m/(n+m)(abar - tbar) (`lower_bound_sub`, `bias_lower`), so the published
+  mean understates the truth whenever the pending cases are older on average
+  (`disposed_understates`); no upper bound exists without a cap (`no_upper_bound`). R:
+  `morie_backlog_censoring()`; Python `backlog_censoring()`.
+- Open: an application to Ontario Court of Justice disposition statistics.
 
 ## P17. Incapacitation: what a sentence year buys
 
@@ -709,8 +736,15 @@ Shinnar 1973; Blumstein, Cohen & Nagin 1978) is a steady-state identity.
   `marginal_prevention_pos`); a uniform sentence removes the larger share from the
   higher-rate group (`high_rate_more_prevented`). R: `morie_incapacitation()`; Python
   `incapacitation()`.
-- Open: replacement (markets for crime), career desistance (lambda not constant), and
-  an application to OTIS custody lengths with Ontario reconviction rates.
+- Progress 2026-10-02 (replacement, desistance): `Research.P17Replacement`
+  (P17Replacement.lean). Replacement scales the prevented share by 1 - r, monotonically to
+  zero (`replaced_le`, `replaced_antitone`, `replaced_full`); under a non-increasing rate
+  path the crimes prevented by S periods from career age t0 lie between S lam(t0 + S) and
+  S lam(t0) (`prevented_ge_const`, `prevented_le_const`), fall when the sentence is served
+  later (`later_sentence_prevents_less`), and the entry-rate constant-lambda estimate is
+  an upper bound under both corrections (`prevented_net_le`). R:
+  `morie_incapacitation_career()`; Python `incapacitation_career()`.
+- Open: an application to OTIS custody lengths with Ontario reconviction rates.
 
 ## P18. Selective labels: evaluating a release rule from the released alone
 
@@ -746,5 +780,11 @@ the selected set for exactly this reason (Sherman & Weisburd 1995).
   `morie_regression_to_mean()` reports the observed, mirror and symmetrised change
   (the statistic on the data plus its swapped copy, which the theorem makes
   non-positive); Python `regression_to_mean()`.
-- Open: the size of the fall under a stated noise law; shrinkage (empirical Bayes)
-  selection of hot spots.
+- Progress 2026-10-02 (shrinkage): `Research.P19Shrinkage` (P19Shrinkage.lean). Under
+  the finite noise law (sum w e = 0, sum w theta e = 0) the loss of the shrinkage
+  estimator (1 - B) y + B ybar is (1 - B)^2 S_e + B^2 S_theta (`loss_eq`), minimised at
+  B* = S_e/(S_e + S_theta) (`loss_min`, `bstar_mem`) where it never exceeds the raw loss
+  (`loss_bstar_eq`, `loss_bstar_le_raw`); the predicted fall of a place is B (y - ybar)
+  (`predicted_fall`), the size the sign theorem left open. R: `morie_hotspot_shrinkage()`,
+  `morie_shrinkage_loss()`; Python `hotspot_shrinkage()`, `shrinkage_loss()`.
+- Open: the sampling error of B* itself (S_theta is estimated from the same counts).

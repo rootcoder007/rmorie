@@ -47,3 +47,10 @@ import Researchproofs.P16Backlog
 import Researchproofs.P17Incapacitation
 import Researchproofs.P18Selective
 import Researchproofs.P19Regression
+import Researchproofs.P1LeCam
+import Researchproofs.P13HKSJ
+import Researchproofs.P14Slope
+import Researchproofs.P15Reweight
+import Researchproofs.P16Censoring
+import Researchproofs.P17Replacement
+import Researchproofs.P19Shrinkage

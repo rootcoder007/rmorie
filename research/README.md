@@ -22,6 +22,7 @@ signed off.
 | P1 dark figure | `Research.P1.conclusion_holds_below_breakdown`, `conclusion_fails_above_breakdown` | `morie_dark_figure_breakdown()` |
 | P1 dark figure | `Research.P1.petersen_ge_floor`, `chapman_ge_floor`, `three_list_saturated_fits`, `missing_cell_unconstrained` | `morie_dark_figure_three_list()` |
 | P1 dark figure | `Research.P1.offence_count_bounds`, `offence_count_eq`, `category_not_identified` | `morie_dark_figure_hierarchy()` |
+| P1 dark figure | `Research.P1LeCam.sum_min`, `tv_le_one`, `two_point`, `minimax` | `morie_two_point_bound()` |
 | P2 selection | `Research.P2.rate_bounds`, `rate_lower_attained`, `rate_upper_attained`, `disparity_bounds`, `disparity_sign_identified` | `morie_disparity_exposure_bounds()` |
 | P2 selection | `Research.P2.offset_shift`, `disparity_ratio_shift`, `benchmark_product`, `benchmark_not_additive` | `morie_disparity_benchmark()` |
 | P2 selection | `Research.P2.or_eq_rr_mul`, `rr_between`, `or_overstates` | `morie_relative_risk_from_or()` |
@@ -58,15 +59,21 @@ signed off.
 | P5 fairness | `Research.P5.ll1_strictMono`, `ll1_neg`, `loglik_lt_shift`, `loglik_lt_shift_quasi`, `no_mle`, `no_mle_quasi`, `loglik_neg`, `loglik_tendsto_zero` | `morie_logit_separation()` |
 | P11 sentencing bounds | `Research.P11.region_coverage_le`, `coverage_strictMono_c`, `im_cutoff_antitone`, `im_cutoff_between`, `two_sided_overcovers` | `morie_bounds_confidence()` |
 | P13 pooling | `Research.P13.truncation_bias`, `pos_part_ge`, `pos_part_pos`, `dl_biased_under_homogeneity`, `tauDL_nonneg`, `tauDL_eq_zero_iff`, `re_var_ge`, `re_var_eq_iff` | `morie_meta_random_effects()`, `morie_meta_dl_bias()` |
+| P13 pooling | `Research.P13HKSJ.hksj_wider_iff`, `Q_eq_zero_iff`, `hksj_equal_weights` | `morie_meta_hksj()` |
 | P12 ecological | `Research.P12.pq_ge`, `dd_bounds`, `Cells.ends_attained`, `dd_complement`, `dd_aggregate_bounds` | `morie_ecological_bounds()` |
 | P11 sentencing bounds | `Research.P11.Pop.mts_mean_b_le`, `mts_mean_a_ge`, `mts_ate_le_naive`, `mtr_mts_bounds` | `morie_sentence_effect_mts()` |
 | P10 contagion | `Research.P10.iter_mono`, `iter_tendsto`, `extinction_fixed`, `extinction_le_fixed`, `subcritical_extinction_one`, `supercritical_extinction_lt_one` | `morie_contagion_extinction()` |
 | P14 judge leniency | `Research.P14.itt_decomposition`, `first_stage_decomposition`, `late_identification`, `wald_with_defiers`, `defiers_can_flip` | `morie_judge_iv_population()`, `morie_judge_iv()` |
+| P14 judge leniency | `Research.P14Slope.propensity_mono`, `outcome_diff`, `slope_bound`, `violation_refutes_monotonicity` | `morie_judge_slope_test()` |
 | P15 disparity decomposition | `Research.P15.twofold_B`, `twofold_A`, `threefold`, `reference_dependence`, `explained_eq_iff`, `attribution_shift` | `morie_disparity_decomposition()` |
+| P15 disparity decomposition | `Research.P15Reweight.reweighting_matches`, `reweighted_mass`, `counterfactual_outcome`, `decomposition` | `morie_dfl_reweight()` |
 | P16 court backlog | `Research.P16.occupancy_integral`, `little`, `little_backlog`, `little_target` | `morie_court_backlog()` |
+| P16 court backlog | `Research.P16Censoring.true_mean_ge`, `lower_bound_sub`, `bias_lower`, `disposed_understates`, `no_upper_bound` | `morie_backlog_censoring()` |
 | P17 incapacitation | `Research.P17.steady_state_rate`, `cycle_rate`, `prevented_share_lt_one`, `rate_antitone_in_S`, `rate_antitone_in_q`, `marginal_prevention_eq`, `high_rate_more_prevented` | `morie_incapacitation()` |
+| P17 incapacitation | `Research.P17Replacement.replaced_antitone`, `prevented_le_const`, `prevented_ge_const`, `later_sentence_prevents_less`, `prevented_net_le` | `morie_incapacitation_career()` |
 | P18 selective labels | `Research.P18.observed_rate_is_conditional`, `nested_rate_identified`, `unobserved_bounds`, `unobserved_width`, `unobserved_ends_attained` | `morie_selective_labels()` |
 | P19 regression to the mean | `Research.P19.exchange_mass`, `exchange_cross`, `indicator_bound`, `selected_change_nonpos`, `low_selected_change_nonneg` | `morie_regression_to_mean()` |
+| P19 regression to the mean | `Research.P19Shrinkage.loss_eq`, `loss_min`, `loss_bstar_eq`, `loss_bstar_le_raw`, `bstar_mem`, `predicted_fall` | `morie_hotspot_shrinkage()`, `morie_shrinkage_loss()` |
 
 C++ kernels: `src/morie_feedback_loop.cpp` (two-region urn),
 `src/morie_spillover.cpp` (treated-neighbour counts on a place network).
