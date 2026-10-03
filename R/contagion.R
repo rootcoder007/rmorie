@@ -88,7 +88,10 @@ morie_contagion_extinction <- function(p, tol = 1e-14, max_iter = 100000L) {
   for (i in seq_len(max_iter)) {
     s_new <- f(s)
     iterates <- c(iterates, s_new)
-    if (abs(s_new - s) < tol) { s <- s_new; break }
+    if (abs(s_new - s) < tol) {
+      s <- s_new
+      break
+    }
     s <- s_new
   }
   regime <- if (m < 1) "subcritical" else if (m > 1) "supercritical" else "critical"

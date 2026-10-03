@@ -563,15 +563,6 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
   if (is.character(k) && length(k) == 1L && nzchar(trimws(k))) trimws(k) else NULL
 }
 
-#' Probe the hosted MORIE tier
-#'
-#' TRUE when the user is logged in and llm.rmorie.com accepts the key. The
-#' answer is cached for the session, and no request is made without a key.
-#' @param timeout Probe timeout in seconds.
-#' @return Logical scalar.
-#' @examples
-#' morie_llm_probe_hosted()
-#' @export
 #' Internal helper: does the user's own OpenAI-compatible endpoint answer?
 #' @noRd
 .morie_llm_probe_api <- function(timeout = 2) {
@@ -586,6 +577,15 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
   }, error = function(e) FALSE)
 }
 
+#' Probe the hosted MORIE tier
+#'
+#' TRUE when the user is logged in and llm.rmorie.com accepts the key. The
+#' answer is cached for the session, and no request is made without a key.
+#' @param timeout Probe timeout in seconds.
+#' @return Logical scalar.
+#' @examples
+#' morie_llm_probe_hosted()
+#' @export
 morie_llm_probe_hosted <- function(timeout = 2) {
   cache <- .morie_llm_cache$hosted_cached
   if (!is.null(cache)) return(cache)

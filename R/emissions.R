@@ -252,7 +252,7 @@ morie_emissions_start <- function(project_name = "morie", output_dir = NULL,
   t <- new.env(parent = emptyenv())
   t$project_name <- project_name
   # nothing is written unless an output_dir is given: a measurement is a value, not a side effect
-  t$output_dir <- output_dir %||% "." 
+  t$output_dir <- output_dir %||% "."
   t$output_file <- output_file
   t$pue <- pue
   t$wue <- wue

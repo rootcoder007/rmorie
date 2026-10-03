@@ -139,7 +139,10 @@ treatment selection, the extinction probability of a near-repeat chain, judge-le
 designs, the Oaxaca-Blinder decomposition, Little's law on a docket and the
 incapacitation identity. The Health Infobase tables and the OTIS research
 environments are served from data.rmorie.com. The Python package carries every
-research function at parity.
+research function at parity. Seven continuations close the Lean ledger (264
+theorems, 0 sorry), the 36 findings from the 1.3.9 stress test are fixed with
+tests, the 116 example topics that emitted warnings run clean and the launcher
+works on R 4.6.
 
 ## What's in v1.3.9
 

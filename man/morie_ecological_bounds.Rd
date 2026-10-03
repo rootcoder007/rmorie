@@ -9,7 +9,7 @@ morie_ecological_bounds(p, q, weights = NULL)
 \arguments{
 \item{p}{Trait share per neighbourhood, in (0, 1).}
 
-\item{q}{Outcome share per neighbourhood, in \link{0, 1}.}
+\item{q}{Outcome share per neighbourhood, in [0, 1].}
 
 \item{weights}{Population per neighbourhood (positive); equal by default.}
 }

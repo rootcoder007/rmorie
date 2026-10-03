@@ -41,7 +41,8 @@
 #' @export
 morie_selective_labels <- function(y, released, rule_released, weights = NULL) {
   n <- length(y)
-  released <- as.logical(released); rule_released <- as.logical(rule_released)
+  released <- as.logical(released)
+  rule_released <- as.logical(rule_released)
   if (length(released) != n || length(rule_released) != n) stop("y, released and rule_released must have equal length", call. = FALSE)
   if (anyNA(released) || anyNA(rule_released)) stop("released and rule_released must not contain NA", call. = FALSE)
   if (!all(y[released] %in% c(0, 1))) stop("y must be 0/1 on the released", call. = FALSE)
@@ -49,13 +50,16 @@ morie_selective_labels <- function(y, released, rule_released, weights = NULL) {
   if (length(weights) != n || any(weights < 0)) stop("weights must be non-negative", call. = FALSE)
   w <- weights
   wy <- ifelse(released, w * y, 0)
-  mass_R <- sum(w[released]); mass_M <- sum(w[rule_released])
+  mass_R <- sum(w[released])
+  mass_M <- sum(w[rule_released])
   if (mass_R <= 0 || mass_M <= 0) stop("both the released set and the rule's set must have positive mass", call. = FALSE)
   obs_rate <- sum(wy[released]) / mass_R
   inter <- released & rule_released
-  fails_inter <- sum(wy[inter]); mass_unobs <- sum(w[rule_released & !released])
+  fails_inter <- sum(wy[inter])
+  mass_unobs <- sum(w[rule_released & !released])
   identified <- mass_unobs == 0
-  lower <- fails_inter / mass_M; upper <- (fails_inter + mass_unobs) / mass_M
+  lower <- fails_inter / mass_M
+  upper <- (fails_inter + mass_unobs) / mass_M
   list(observed_rate = obs_rate, rule_share_unobserved = mass_unobs / mass_M, identified = identified,
        rule_rate = if (identified) lower else NA_real_,
        bounds = c(lower = lower, upper = upper), width = upper - lower,

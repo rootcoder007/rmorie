@@ -22,7 +22,7 @@
 #' single number for \eqn{r} is choosing a point inside these intervals by
 #' assumption, not by data.
 #' @param p Trait share per neighbourhood, in (0, 1).
-#' @param q Outcome share per neighbourhood, in [0, 1].
+#' @param q Outcome share per neighbourhood, in \[0, 1\].
 #' @param weights Population per neighbourhood (positive); equal by default.
 #' @return A list with \code{neighbourhoods} (a data frame with \code{p},
 #'   \code{q}, \code{lower}, \code{upper}, \code{width}, \code{point_identified},
