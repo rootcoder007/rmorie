@@ -627,3 +627,27 @@ estimates the between-site variance by a truncation, and a reader is told that
   homogeneity by simulation on the shared Philox stream).
 - Open: REML and Hartung-Knapp-Sidik-Jonkman intervals; the chapter's hot-spots
   effects as the worked example.
+
+## P14. Judge-leniency designs: what the instrument identifies
+
+Pretrial detention, incarceration and sentence length are studied with the
+leniency of a randomly assigned judge as an instrument (Kling 2006; Dobbie,
+Goldin & Yang 2018; Aizer & Doyle 2015). The headline number is a Wald ratio;
+what it estimates depends on an assumption about judges that the data cannot
+check.
+
+- Estimand: the mean effect of detention among the defendants whose detention
+  the judge assignment changed (compliers), not the population effect.
+- Progress 2026-10-02: `Research.P14` (P14Instrument.lean). On a finite weighted
+  population with potential treatments d(z) and outcomes y(d): the intention-to-treat
+  contrast equals the compliers' effect mass minus the defiers' (`itt_decomposition`),
+  the first stage equals P(c) - P(d) (`first_stage_decomposition`); with no defiers
+  and P(c) > 0 the Wald ratio is the compliers' mean effect (`late_identification`);
+  with defiers it is (P(c) tau_c - P(d) tau_d)/(P(c) - P(d)) (`wald_with_defiers`), and
+  a two-person witness has every effect positive and Wald = -5 (`defiers_can_flip`).
+  R: `morie_judge_iv_population()` (exact decomposition on a specified population),
+  `morie_judge_iv()` (observed data: Wald, type shares under monotonicity, defier
+  sensitivity); Python `judge_iv_population()`, `judge_iv()`.
+- Open: the many-judge case (leniency as a continuous instrument, Frandsen,
+  Lefgren & Leslie 2023 on monotonicity tests); an application to OTIS custody
+  decisions by presiding judge.

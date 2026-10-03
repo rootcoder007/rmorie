@@ -177,3 +177,8 @@ open Research.P4
 #print axioms Research.P10.subcritical_extinction_one
 #print axioms Research.P10.one_sub_pgf_ge
 #print axioms Research.P10.supercritical_extinction_lt_one
+#print axioms Research.P14.itt_decomposition
+#print axioms Research.P14.first_stage_decomposition
+#print axioms Research.P14.late_identification
+#print axioms Research.P14.wald_with_defiers
+#print axioms Research.P14.defiers_can_flip
