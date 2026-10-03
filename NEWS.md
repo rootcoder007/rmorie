@@ -22,7 +22,8 @@
   Little's law on a court docket (`morie_court_backlog()`, `Research.P16`) and the
   incapacitation identity with its marginal year (`morie_incapacitation()`,
   `Research.P17`), and selective labels for release rules (`morie_selective_labels()`,
-  `Research.P18`).
+  `Research.P18`), and regression to the mean at selected hot spots
+  (`morie_regression_to_mean()`, `Research.P19`).
 
 * Datasets: the fourteen Health Infobase tables (CPADS, CSADS, CSUS) download from
   the portal and fall back to the copy at data.rmorie.com (`hib/...` keys); the three

@@ -729,3 +729,22 @@ some judge released (Lakkaraju et al. 2017; Kleinberg et al. 2018).
   R: `morie_selective_labels()`; Python `selective_labels()`.
 - Open: the many-judge contraction with leniency quantiles; an application to
   Ontario bail outcomes once a released-cohort file is public.
+
+## P19. Regression to the mean at selected hot spots
+
+Crime falls at the places chosen for being high even with no intervention
+(Galton 1886; Campbell & Stanley 1963); the hot-spots trials randomise within
+the selected set for exactly this reason (Sherman & Weisburd 1995).
+
+- Estimand: the change in the second period on the places selected on the first.
+- Progress 2026-10-02: `Research.P19` (P19Regression.lean). On a finite weighted
+  population whose two periods are exchangeable (a weight-preserving bijection swaps
+  them), the selected mass and the cross term reindex (`exchange_mass`,
+  `exchange_cross`), x1 (1{x1>c} - 1{x2>c}) >= c (1{x1>c} - 1{x2>c}) pointwise
+  (`indicator_bound`), hence sum_{x1>c} w (x2 - x1) <= 0 (`selected_change_nonpos`)
+  and the mirror for low-selected places (`low_selected_change_nonneg`). R:
+  `morie_regression_to_mean()` reports the observed, mirror and symmetrised change
+  (the statistic on the data plus its swapped copy, which the theorem makes
+  non-positive); Python `regression_to_mean()`.
+- Open: the size of the fall under a stated noise law; shrinkage (empirical Bayes)
+  selection of hot spots.

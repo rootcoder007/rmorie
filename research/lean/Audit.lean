@@ -209,3 +209,9 @@ open Research.P4
 #print axioms Research.P18.unobserved_bounds
 #print axioms Research.P18.unobserved_width
 #print axioms Research.P18.unobserved_ends_attained
+#print axioms Research.P19.reindex
+#print axioms Research.P19.exchange_mass
+#print axioms Research.P19.exchange_cross
+#print axioms Research.P19.indicator_bound
+#print axioms Research.P19.selected_change_nonpos
+#print axioms Research.P19.low_selected_change_nonneg
