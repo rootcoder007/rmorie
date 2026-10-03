@@ -72,8 +72,11 @@
 #'   Independently checked against spgwr's published NY8 output.
 #' @export
 #' @examples
-#' spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' set.seed(1)
+#' coords <- cbind(runif(30), runif(30))
+#' x <- cbind(1, rnorm(30))
+#' y <- as.numeric(x %*% c(1, 2)) + coords[, 1] + rnorm(30, sd = 0.3)
+#' spgwrb(x, y, coords, criterion = "aicc")$optimal_bandwidth
 spgwrb <- function(x, y, coords, kernel = "gaussian", criterion = "cv",
                    adaptive = FALSE, bounds = NULL, tol = 1e-4) {
   x <- as.matrix(x)

@@ -115,14 +115,14 @@
   fmt <- tolower(fmt)
   if (fmt %in% c("csv")) {
     if (requireNamespace("readr", quietly = TRUE)) {
-      df <- readr::read_csv(path, show_col_types = FALSE, progress = FALSE)
+      df <- readr::read_csv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf)
       return(as.data.frame(df))
     }
     return(utils::read.csv(path, stringsAsFactors = FALSE))
   }
   if (fmt %in% c("tsv", "tab")) {
     if (requireNamespace("readr", quietly = TRUE)) {
-      df <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE)
+      df <- readr::read_tsv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf)
       return(as.data.frame(df))
     }
     return(utils::read.delim(path, sep = "\t", stringsAsFactors = FALSE))
@@ -152,7 +152,7 @@
   # Unknown extension: most open-data resources are CSV with bad MIME
   # types, so try CSV as a last resort (matches Python behaviour).
   if (requireNamespace("readr", quietly = TRUE)) {
-    df <- readr::read_csv(path, show_col_types = FALSE, progress = FALSE)
+    df <- readr::read_csv(path, show_col_types = FALSE, progress = FALSE, guess_max = Inf)
     return(as.data.frame(df))
   }
   utils::read.csv(path, stringsAsFactors = FALSE)

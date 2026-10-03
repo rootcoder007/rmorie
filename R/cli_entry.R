@@ -84,10 +84,15 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
             morie_llm_login(token = tok)
           }
         } else {
+          if (has("--to-email") && is.null(flag("--email"))) {
+            out("--to-email needs --email ADDRESS (the key is emailed to that address)\n")
+            status <- 2L
+          } else {
           key <- morie_llm_login(open_browser = !has("--no-browser") && interactive(),
                                  email = flag("--email"), code = flag("--code"),
                                  to_email = has("--to-email"))
           if (nzchar(key)) out(sprintf("Logged in to %s\n", .morie_llm_hosted_base()))
+          }
         }
       },
       logout = { morie_llm_logout() },
@@ -143,14 +148,13 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           provider <- morie_llm_detect_provider()
           if (identical(provider, "local")) {
             out(paste0(.morie_llm_local_fallback(paste(rest, collapse = " ")), "\n"))
-            out("no LLM backend was reachable; this is the local fallback text (rmorie login, or start Ollama)\n")
+            out(.cli_llm_fallback_cause())
             status <- 1L
           } else {
             ans <- morie_llm_ask(paste(rest, collapse = " "), model = mdl, provider = provider)
             out(paste0(ans, "\n"))
-            if (identical(ans, .morie_llm_local_fallback(paste(rest, collapse = " ")))) {
-              out(if (!is.null(mdl)) sprintf("no provider answered for model '%s' (rmorie models lists the names)\n", mdl)
-                  else "the providers were reachable but none answered; this is the local fallback text\n")
+            if (isTRUE(attr(ans, "fallback"))) {
+              out(.cli_llm_fallback_cause(mdl))
               status <- 1L
             }
           }
@@ -163,6 +167,9 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie run-module NAME [--output-dir DIR] [--cpads FILE | --dataset KEY]   (names: rmorie list-modules; keys: rmorie list-datasets)\n")
           if (length(rest)) status <- 0L else status <- 2L
+        } else if (!rest[[1L]] %in% morie_module_names()) {
+          out(sprintf("Unknown module: %s (rmorie list-modules names them)\n", rest[[1L]]))
+          status <- 1L
         } else {
           od <- flag("--output-dir") %||% file.path("morie-output", rest[[1L]])
           cp <- flag("--cpads")
@@ -220,6 +227,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
       explain = {
         if (!length(rest) || identical(rest[[1L]], "--help")) {
           out("usage: rmorie explain FILENAME\n")
+          if (!length(rest)) status <- 2L
         } else {
           txt <- explain_file(rest[[1L]])
           out(paste0(txt, "\n"))
@@ -290,10 +298,15 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "PYTHON SIDE\n",
         "  pip install morie   then   morie cheatsheet\n")),
       analyze = {
-        if (!length(rest)) stop("usage: rmorie analyze SUBJECT [JSON]", call. = FALSE)
-        res <- cli_main(rest[[1L]], if (length(rest) > 1L) rest[[2L]] else "{}")
-        if (is.character(res)) out(paste0(res, "\n"))
-        if (is.character(res) && grepl("\"status\"\\s*:\\s*\"error\"", res)) status <- 1L
+        if (!length(rest)) {
+          out("usage: rmorie analyze SUBJECT [JSON]   (subjects: otis, siu, tps, nypd, cpd)\n")
+          status <- 2L
+        } else {
+          res <- cli_main(rest[[1L]], if (length(rest) > 1L) rest[[2L]] else "{}")
+          if (is.character(res)) out(paste0(res, "\n"))
+          if ((is.list(res) && identical(res$status, "error")) ||
+              (is.character(res) && grepl("\"status\"\\s*:\\s*\"error\"", res))) status <- 1L
+        }
       },
       version = out(sprintf("%s %s\n", pkg, as.character(utils::packageVersion(pkg)))),
       help = ,
@@ -319,7 +332,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  inspect PATH [--module NAME]                           schema, rows and preview of output CSVs\n",
         "  verify PATH [--module NAME]                            validate statistical outputs (exit 1 on failure)\n",
         "  profile-dataset PATH [--treatment C] [--outcome C] [--suggest]   variable types, roles, analysis plan\n",
-        "  sample PATH --n N [--method srs|stratified|cluster|pps] [--output F]   draw a sample\n",
+        "  sample PATH --n N [--method srs|stratified|cluster|pps] [--output F]   draw N rows (stratified: N in total, --per-stratum for N each; .weight = design weight)\n",
         "  run-modules [--modules a,b] [--cpads FILE] [--output-dir DIR]   run several modules\n",
         "  pipeline (--all | --modules a,b) [--output-dir DIR] [--no-carbon]   run modules, track CO2, seal a capsule\n",
         "  emissions [--seconds N] [--output-dir DIR] [--no-capsule]   measure this machine's compute emissions\n",
@@ -332,7 +345,7 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
         "  update [--yes]                                         check for a newer release, optionally install\n",
         "  crypto keygen|encrypt|decrypt ...                      post-quantum file encryption (ML-KEM-768 + ChaCha20)\n",
         "  ingest ckan|tps|siu|a2aj ...                           pull open-data feeds\n",
-        "  download-bootstrap [--survey all|csads_2021|...]       cache the survey bootstrap-weight files\n",
+        "  download-bootstrap --survey KEY|all                    cache the survey bootstrap-weight files (hundreds of MB each)\n",
         "  exec 'R CODE' | --file F                               evaluate R code\n",
         "  edit FILE                                              open a file in your editor\n",
         "  percysuits [--dry-run]                                 pull the Perseus model set into Ollama\n",
@@ -374,19 +387,26 @@ install_cli <- function(dir = file.path(path.expand("~"), ".local", "bin"), name
   src <- system.file("bin", "rmorie", package = utils::packageName())
   if (!nzchar(src)) stop("the launcher is missing from this installation")
   dir.create(dir, recursive = TRUE, showWarnings = FALSE)
+  # the launcher pins the library this copy of the package lives in, so the shell runs the same
+  # rmorie as the R session that installed it, whatever R_LIBS the shell has; ~/.Renviron is honoured
+  lib <- normalizePath(dirname(system.file(package = utils::packageName())), winslash = "/")
+  pkg <- utils::packageName()
   if (.Platform$OS.type == "windows") {
     target <- file.path(dir, paste0(name, ".cmd"))
-    writeLines(sprintf("@echo off\r\nRscript --vanilla -e \"%s::morie_cli()\" --args %%*",
-                       utils::packageName()), target)
+    writeLines(sprintf(paste0("@echo off\r\nset \"R_LIBS=%s;%%R_LIBS%%\"\r\n",
+                              "Rscript --no-save --no-restore -e \"q <- %s::morie_cli(); quit(status = as.integer(q))\" --args %%*"),
+                       gsub("/", "\\\\", lib, fixed = TRUE), pkg), target)
   } else {
     target <- file.path(dir, name)
     if (file.exists(target) || !is.na(Sys.readlink(target))) unlink(target)
-    ok <- file.symlink(src, target)
-    if (!isTRUE(ok)) {
-      file.copy(src, target, overwrite = TRUE)
-      Sys.chmod(target, "0755")
-    }
-    Sys.chmod(src, "0755")
+    writeLines(c("#!/bin/sh",
+                 sprintf("# rmorie command-line launcher (written by %s::install_cli()); runs the package installed in", pkg),
+                 sprintf("# %s", lib),
+                 sprintf("R_LIBS=\"%s${R_LIBS:+:$R_LIBS}\"", lib),
+                 "export R_LIBS",
+                 sprintf("exec Rscript --no-save --no-restore -e 'suppressPackageStartupMessages({ q <- %s::morie_cli(); quit(status = as.integer(q)) })' --args \"$@\"", pkg)),
+               target)
+    Sys.chmod(target, "0755")
   }
   on_path <- dir %in% strsplit(Sys.getenv("PATH"), .Platform$path.sep)[[1L]]
   message(sprintf("Installed %s%s", target,

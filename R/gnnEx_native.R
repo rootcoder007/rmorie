@@ -92,8 +92,8 @@
 #' @return A list with \code{nodes}, \code{edges}, \code{hops}, \code{size}.
 #' @export
 #' @examples
-#' gnnEx_computation_graph(adj = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   L = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' adj <- list("1" = c(2L, 3L), "2" = c(1L, 4L), "3" = 1L, "4" = 2L)
+#' gnnEx_computation_graph(adj, v = 1L, L = 2L)
 #' @keywords internal
 gnnEx_computation_graph <- function(adj, v, L) {
   # The L-hop neighbourhood -- everything the prediction could depend on.

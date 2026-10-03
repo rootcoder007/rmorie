@@ -759,9 +759,8 @@ morie_burkov_repetition_penalty <- function(logits, prev_tokens,
 #' @return A list with `logits`, `estimate`, `vocab_size`, `hidden_size`, `n`, `method`.
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' morie_burkov_weight_tying(S, M)
+#' E <- matrix(c(1, 0, 2, 0, 1, 1), nrow = 3)   # three tokens, two hidden dimensions
+#' morie_burkov_weight_tying(h_last = c(0.5, -1), E = E)
 #' @keywords internal
 morie_burkov_weight_tying <- function(h_last, E) {
   h <- as.numeric(h_last)

@@ -30,8 +30,7 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-second_choice(i1 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), alpha = 0.5,
-  y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8),
-  rng = c(1, 2, 3, 4, 5, 6, 7, 8))
+second_choice(i1 = 1L, alpha = c(0.5, 0.2, 0, 0.8), y = c(1, -1, 1, -1),
+  E = c(0.3, -0.6, 0.1, 0.9), C = 1, rng = list(uniform = function() 0.5))
 }
 \keyword{internal}

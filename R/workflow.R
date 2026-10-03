@@ -142,6 +142,14 @@ morie_run_pipeline <- function(
   verbose = TRUE
 ) {
   script_map <- validate_workflow_map(script_map)
+  if (is.null(project_root)) {
+    root <- tryCatch(morie_paths(NULL)$project_root, error = function(e) NULL)
+    if (is.null(root) || !any(file.exists(file.path(root, script_map)))) {
+      stop("no workflow scripts found: pass `project_root` (a checkout holding ", script_map[[1L]],
+           ") or a `script_map` of your own scripts; the module pipeline itself is morie_run_pipeline_modules() / ",
+           "`rmorie pipeline`", call. = FALSE)
+    }
+  }
 
   if (is.null(steps)) {
     steps <- names(script_map)

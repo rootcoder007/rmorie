@@ -111,8 +111,7 @@ morie_gh_dp_posterior <- function(G0_A, alpha, n_in_A, n) {
 #'   Cambridge University Press.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_gh_dp_ndistinct(V, V)
+#' morie_gh_dp_ndistinct(n = 50, alpha = 2)
 morie_gh_dp_ndistinct <- function(n, alpha) {
   i <- seq_len(n)
   list(
@@ -190,8 +189,8 @@ morie_gh_dp_median_cdf <- function(G_x, alpha, n_grid = 4000L) {
 #'   Cambridge University Press.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_gh_ewens_log(V, V)
+#' # a partition of n = 8 with three singletons, one pair and one triple
+#' morie_gh_ewens_log(multiplicities = c(3, 1, 1), alpha = 2)
 morie_gh_ewens_log <- function(multiplicities, alpha) {
   m <- as.numeric(multiplicities)
   n <- sum(seq_along(m) * m)
@@ -219,7 +218,7 @@ morie_gh_ewens_log <- function(multiplicities, alpha) {
 #'   Cambridge University Press.
 #' @export
 #' @examples
-#' morie_gh_py_eppf_log(sizes = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L, theta = 0.5)
+#' morie_gh_py_eppf_log(sizes = c(3, 2, 1), d = 0.25, theta = 1)
 morie_gh_py_eppf_log <- function(sizes, d, theta) {
   n <- sum(sizes)
   k <- length(sizes)
@@ -486,8 +485,7 @@ morie_gh_ncrm_laplace <- function(f, m, u) {
 #'   Cambridge University Press.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_gh_ibp_expected_dishes(V, V)
+#' morie_gh_ibp_expected_dishes(n = 10, alpha = 3)
 morie_gh_ibp_expected_dishes <- function(n, alpha) {
   alpha * sum(1 / seq_len(n))
 }

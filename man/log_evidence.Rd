@@ -32,7 +32,8 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-log_evidence(docs = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8),
-  z = c(1, 2, 3, 4, 5, 6, 7, 8))
+docs <- list(c(0L, 1L, 2L, 1L), c(2L, 2L, 0L, 1L))   # word ids of two documents
+z <- list(c(0L, 0L, 1L, 1L), c(1L, 0L, 0L, 1L))      # topic of each word
+log_evidence(docs, T = 2L, V = 3L, z = z)
 }
 \keyword{internal}

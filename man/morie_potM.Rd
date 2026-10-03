@@ -25,8 +25,8 @@ See the file header for the source the module follows.
 for the source it follows.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-morie_potM(V, M)
+set.seed(1)
+y <- rexp(300)
+morie_potM(y, u = 1.5)
 }
 \keyword{internal}

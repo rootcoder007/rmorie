@@ -2535,8 +2535,8 @@ morie_geron_encoder_params <- function(d_model, d_ff, n_layers) {
 #'   n_layers, estimate, n, method.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_transformer(V)
+#' X <- matrix(c(1, 0, 0.5, 0.2, 1, 0, 0.3, 0.7), nrow = 4)   # four positions, two dimensions
+#' morie_geron_transformer(X, n_heads = 2, n_layers = 1)$total_params
 morie_geron_transformer <- function(X, n_heads = 2, d_model = NULL, n_layers = 2, d_ff = NULL,
                                     seed = 0, mask = NULL) {
   Xa <- as.matrix(X)
@@ -4913,8 +4913,7 @@ morie_geron_tsne <- function(X, n_components = 2, perplexity = 5.0, seed = 0, n_
 #' @return list(a, b, sse).
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_fit_ab(V)
+#' morie_geron_fit_ab(min_dist = 0.1, spread = 1)
 morie_geron_fit_ab <- function(min_dist, spread = 1.0) {
   d <- seq(0.0, 3.0 * spread, length.out = 300)
   target <- ifelse(d <= min_dist, 1.0, exp(-(d - min_dist) / spread))

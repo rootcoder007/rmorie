@@ -811,8 +811,13 @@ concentrated_loglik <- function(y, resid, omega) {
   best_f <- Inf
   for (st in .starts(spec)) {
     res <- tryCatch(
-      optim(st, negll, method = "Nelder-Mead",
-            control = list(maxit = as.integer(maxiter))),
+      if (length(st) == 1L) {
+        optim(st, negll, method = "Brent", lower = lo[1L], upper = hi[1L],
+              control = list(maxit = as.integer(maxiter)))
+      } else {
+        optim(st, negll, method = "Nelder-Mead",
+              control = list(maxit = as.integer(maxiter)))
+      },
       error = function(e) list(par = st))
     xr <- as.numeric(res$par)
     fr <- negll(xr)

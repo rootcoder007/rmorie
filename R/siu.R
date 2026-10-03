@@ -1206,7 +1206,8 @@ morie_siu_compare <- function(case_number, external,
 #
 # Providers are configured via env vars so secrets never appear in
 # the package or in chat:
-#   GOOGLE_API_KEY     -> Gemini (default; cheapest)
+#   GEMINI_API_KEY (or GOOGLE_API_KEY) -> Gemini
+#   the stored hosted key (morie_llm_login) -> llm.rmorie.com ("hosted")
 #   ANTHROPIC_API_KEY  -> Claude
 # Both functions hard-fail with a clear message if the relevant env
 # var is missing.
@@ -1447,6 +1448,28 @@ morie_siu_compare <- function(case_number, external,
         x
       }
     ),
+    hosted = list(
+      # the hosted MORIE tier (llm.rmorie.com), with the key morie_llm_login() stored
+      env_required = "MORIE_HOSTED_KEY_OR_LOGIN",
+      build = function(env, prompt) {
+        base <- sub("/+$", "", .morie_llm_hosted_base())
+        list(
+          url = paste0(base, "/v1/chat/completions"),
+          headers = list("authorization" = paste("Bearer", env[["MORIE_HOSTED_KEY_OR_LOGIN"]]),
+                         "content-type" = "application/json"),
+          body = list(
+            model = Sys.getenv("MORIE_HOSTED_MODEL", unset = attr(morie_llm_hosted_models(), "default") %||% "default"),
+            temperature = 0,
+            messages = list(list(role = "user", content = prompt))
+          )
+        )
+      },
+      extract = function(resp) {
+        x <- resp$choices[[1L]]$message$content
+        if (is.null(x)) stop("the hosted tier returned empty text", call. = FALSE)
+        x
+      }
+    ),
     openai_compatible = list(
       # ANY OpenAI-compatible endpoint: Groq, Together, Mistral,
       # DeepSeek, xAI, LM Studio, vLLM, llama.cpp server, ...
@@ -1521,10 +1544,18 @@ morie_siu_compare <- function(case_number, external,
   if (p$env_required == "OLLAMA_HOST_OR_DEFAULT") {
     env_val <- Sys.getenv("OLLAMA_HOST", unset = "")
     if (!nzchar(env_val)) env_val <- "http://localhost:11434"
+  } else if (p$env_required == "MORIE_HOSTED_KEY_OR_LOGIN") {
+    env_val <- .morie_llm_hosted_key() %||% ""
+    if (!nzchar(env_val)) {
+      stop("not logged in to the hosted MORIE tier; run morie_llm_login() (or `rmorie login`) first, ",
+           "or use model = \"ollama\" with a local Ollama daemon.", call. = FALSE)
+    }
   } else {
     env_val <- Sys.getenv(p$env_required, unset = "")
+    if (!nzchar(env_val) && p$env_required == "GOOGLE_API_KEY") env_val <- Sys.getenv("GEMINI_API_KEY", unset = "")
     if (!nzchar(env_val)) {
-      stop("Env var '", p$env_required, "' is not set; cannot call ",
+      stop("Env var '", if (p$env_required == "GOOGLE_API_KEY") "GEMINI_API_KEY' (or 'GOOGLE_API_KEY" else p$env_required,
+        "' is not set; cannot call ",
         model, ". Set it, or use model = \"ollama\" with a local ",
         "Ollama daemon for a free zero-config alternative.",
         call. = FALSE
@@ -1743,7 +1774,8 @@ morie_siu_compare <- function(case_number, external,
 #' Credentials are read from environment variables only -- never
 #' hard-coded, never passed as function arguments -- so secrets do
 #' not leak into call traces, logs, or scripts. Set
-#' \code{GOOGLE_API_KEY} for Gemini, \code{ANTHROPIC_API_KEY} for
+#' \code{GEMINI_API_KEY} (or \code{GOOGLE_API_KEY}) for Gemini, the key stored by
+#' \code{\link{morie_llm_login}} for \code{"hosted"}, \code{ANTHROPIC_API_KEY} for
 #' Claude, or \code{OLLAMA_HOST} (e.g.
 #' \code{"http://localhost:11434"} or an OpenAI-compatible base URL) plus
 #' optionally \code{OLLAMA_MODEL} (else the first model the server serves) for
@@ -1784,7 +1816,7 @@ morie_siu_compare <- function(case_number, external,
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_llm_extract <- function(case_number,
-                                  model = c("ollama", "gemini"),
+                                  model = c("ollama", "hosted", "gemini"),
                                   cache_dir = file.path(tempdir(), "morie", "siu"),
                                   max_html_chars = 80000L,
                                   mock_response_text = NULL) {
@@ -2113,11 +2145,14 @@ morie_siu_sanity_check <- function(df) {
     ifelse(bad, paste0(col, ":not-int"), "")
   }
   check_yn <- function(v, col) {
-    bad <- nzchar(v) & !v %in% c("Yes", "No")
+    # the reviewed corpus writes these as yes/no, true/false or y/n in any case; a sentence is the issue
+    bad <- nzchar(v) & !tolower(trimws(v)) %in% c("yes", "no", "true", "false", "y", "n")
     ifelse(bad, paste0(col, ":not-Yes/No"), "")
   }
   check_gender <- function(v) {
-    bad <- nzchar(v) & !v %in% c("Male", "Female", "Non-binary")
+    # any case, and compound values ("female (Complainant #1) and male (Complainant #2)") are fine
+    bad <- nzchar(v) & !grepl("male|female|man|woman|boy|girl|non-?binary|trans|homme|femme|gar\u00e7on|fille",
+                              v, ignore.case = TRUE)
     ifelse(bad, "sex_gender_affected:bad-value", "")
   }
   check_officer_count <- function(v) {
@@ -2182,7 +2217,6 @@ morie_siu_sanity_check <- function(df) {
     check_nonempty(df$narrative_summary, "narrative_summary"),
     check_short(df$narrative_summary, "narrative_summary", 100L),
     check_chrome(df$narrative_summary, "narrative_summary"),
-    check_chrome(df$supplemental_materials, "supplemental_materials"),
     check_chrome(
       df$mental_health_or_race_indications,
       "mental_health_or_race_indications"
@@ -2544,7 +2578,7 @@ morie_siu_translate_fr_to_en <- function(
 #' attr(audit, "examples")[[audit$field[1L]]]
 #' \dontshow{\}) # examplesIf}
 #' @export
-morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
+morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "hosted", "gemini"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),
                                     max_html_chars = 80000L,
                                     max_examples_per_field = 5L,

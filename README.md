@@ -382,10 +382,12 @@ morie_siu_audit_case("17-OVI-201")
 morie_siu_anomaly_check("17-OVI-201")
 
 # Diff parser output against an external table.
+# field_map maps the external table's columns to parser fields; external_case_col names its case column
 morie_siu_compare(
-  case_number = "17-OVI-201",
-  external    = my_other_table,
-  field_map   = c(officer_count = "n_officers")
+  case_number       = "17-OVI-201",
+  external          = my_other_table,          # e.g. data.frame(case_number = "17-OVI-201", n_officers = 2L)
+  field_map         = list(n_officers = "number_of_officers_involved"),
+  external_case_col = "case_number"
 )
 ```
 
@@ -395,24 +397,24 @@ morie_siu_compare(
 # Default: local Ollama with gemma3:4b. No API key required.
 morie_siu_llm_extract("17-OVI-201")
 
-# Failover chain: try local first, fall back to Gemini only on error.
-morie_siu_llm_extract("17-OVI-201", model = c("ollama", "gemini"))
+# Failover chain: local first, then the hosted MORIE tier (after `rmorie login`), then Gemini.
+morie_siu_llm_extract("17-OVI-201", model = c("ollama", "hosted", "gemini"))
 
-# French to English translation via translategemma.
-morie_siu_translate(text = "L'enquete a ete close...", target_lang = "en")
+# French to English translation of the cached reports (field by field, via the local model).
+morie_siu_translate(target_lang = "en", case_numbers = "26-OCI-168")
 ```
 
-Supported providers: `ollama` (default), `gemini`, `claude`, `vertex`.
-Environment knobs: `OLLAMA_HOST` (defaults to `http://localhost:11434`),
-`OLLAMA_MODEL` (defaults to `gemma3:4b`), `OLLAMA_KEEP_ALIVE` (`30m`).
+Supported providers: `ollama` (default), `hosted` (llm.rmorie.com), `gemini`, `claude`, `vertex`,
+`openai`, `openai_compatible`. Environment knobs: `OLLAMA_HOST` (defaults to `http://localhost:11434`),
+`OLLAMA_MODEL` (defaults to `gemma3:4b`), `OLLAMA_KEEP_ALIVE` (`30m`), `GEMINI_API_KEY`.
 
 ### Format-validity sweep
 
 ```r
 df   <- morie_siu_reports()        # the reviewed corpus, from rmoriedata (CRAN)
-sane <- morie_siu_sanity_check(df)  # one row per report with a format issue
-nrow(sane)                          # regex / ISO date / Yes-No / chrome leak
-head(sane$issues, 3)
+sane <- morie_siu_sanity_check(df)  # one row per report, with its format issues (if any)
+table(sane$issues_count > 0)        # regex / ISO date / yes-no / chrome leak; older reports leave many fields blank
+head(sane$issues[sane$issues_count > 0], 3)
 ```
 
 ### Aggregate accuracy
@@ -431,9 +433,9 @@ corrections covering 10 spot-checked cases). Users can add their own:
 
 ```r
 morie_siu_record_correction(
-  case_number = "20-OFD-082",
-  field       = "officer_count",
-  value       = 3L
+  case_number    = "20-OFD-082",
+  field          = "number_of_officers_involved",
+  verified_value = "3 SO"
 )
 ```
 

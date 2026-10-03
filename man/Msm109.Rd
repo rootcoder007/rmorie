@@ -28,7 +28,7 @@ the quadratic-regularized multinomial likelihood, which removes the need for
 the identifiability constraint on the slopes. Intercepts are never penalized.
 }
 \examples{
-Msm109(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+Msm109(X = matrix(c(1, 2, 3, 4, 5, 6, 7, 8), nrow = 4), y = c(0L, 1L, 2L, 1L), beta0 = c(0.1, -0.2), beta = matrix(0.5, 2, 2))
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

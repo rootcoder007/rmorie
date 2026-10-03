@@ -24,6 +24,7 @@ See the file header for the source the module follows.
 it follows.
 }
 \examples{
-morie_unclr_lr_impute(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, n_iter = c(1, 2, 3, 4, 5, 6, 7, 8))
+X <- rbind(c(60, 30, 10), c(70, 2, 28), c(50, 45, 5))   # compositions; parts under their limit are censored
+morie_unclr_lr_impute(X, dl = c(5, 5, 5), n_iter = 5L)$X
 }
 \keyword{internal}

@@ -29,8 +29,7 @@ same Q. A LAPACK-versus-LINPACK QR would not.
 Formula: \code{A ~ N(0,1)^{d x d}}, \code{Q, R = QR(A)}, return Q.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Tqrot(V)
+Tqrot(d = 4L, seed = 1)
 }
 \references{
 Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,

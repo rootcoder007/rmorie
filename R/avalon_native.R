@@ -127,8 +127,7 @@
 #' @return A number below two to the thirty-second.
 #' @export
 #' @examples
-#' S <- c("a", "b", "c")
-#' morie_avalon_fnv(S)
+#' morie_avalon_fnv("feature:a")
 #' @keywords internal
 morie_avalon_fnv <- function(s, seed = 2166136261) {
   h <- seed

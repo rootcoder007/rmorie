@@ -210,7 +210,8 @@ morie_install_extras <- function(which = "missing",
 #' Internal helper: Morie Pkg Installed
 #' @noRd
 .morie_pkg_installed <- function(pkg) {
-  isTRUE(requireNamespace(pkg, quietly = TRUE))
+  # a library lookup, not a load: requireNamespace() on 178 packages takes 20 s and prints their S3 notes
+  nzchar(system.file(package = pkg))
 }
 
 

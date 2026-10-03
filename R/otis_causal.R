@@ -1029,6 +1029,12 @@ morie_otis_make_pair_c <- function(df) {
               "Region_MostRecentPlacement",
               "MentalHealth_Alert",
               "NumberConsecutiveDays_Segregation")
+  miss <- setdiff(needed, names(df))
+  if (length(miss)) {
+    stop("pair (c) needs the column(s) ", paste(miss, collapse = ", "),
+         "; the bundled morie_otis_load() frame carries no segregation data, so pass the full OTIS extract",
+         call. = FALSE)
+  }
   base <- df[, needed, drop = FALSE]
   base <- base[stats::complete.cases(base), , drop = FALSE]
   base$T_c <- as.integer(base$Region_AtTimeOfPlacement !=
@@ -1093,11 +1099,21 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
     }
     df <- morie_otis_load()
   }
-  pairs <- list(
-    "(a) MentalHealth -> SuicideRisk" = morie_otis_make_pair_a(df),
-    "(b) HighAlertComplexity -> AnyReadmission" = morie_otis_make_pair_b(df),
-    "(c) RegionalVolatility -> SegregationDays" = morie_otis_make_pair_c(df)
+  makers <- list(
+    "(a) MentalHealth -> SuicideRisk" = morie_otis_make_pair_a,
+    "(b) HighAlertComplexity -> AnyReadmission" = morie_otis_make_pair_b,
+    "(c) RegionalVolatility -> SegregationDays" = morie_otis_make_pair_c
   )
+  pairs <- list()
+  for (label in names(makers)) {
+    pr <- tryCatch(makers[[label]](df), error = function(e) e)
+    if (inherits(pr, "error")) {
+      # a pair whose columns the frame lacks is skipped, not fatal (the bundled frame has no segregation days)
+      warning(sprintf("%s: %s -- skipped", label, conditionMessage(pr)), call. = FALSE)
+      next
+    }
+    pairs[[label]] <- pr
+  }
   rows <- list()
   for (label in names(pairs)) {
     pr <- pairs[[label]]

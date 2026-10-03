@@ -517,7 +517,9 @@ bpr_learn_bpr_R <- function(pos, n_users, n_items, k_dim = 8L,
 #'   \code{top_k}) and \code{n_scored}.
 #' @export
 #' @examples
-#' bpr_recommend_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, u = 5L, n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' W <- list(c(0.5, 0.1), c(-0.2, 0.4))                 # two users' factors
+#' H <- list(c(0.3, 0.3), c(-0.1, 0.8), c(0.6, -0.2))   # three items' factors
+#' bpr_recommend_R(W, H, u = 0L, n_items = 3L, top_k = 2L)
 #' @keywords internal
 bpr_recommend_R <- function(W, H, u, n_items, top_k = 5L,
                             exclude = integer(0))

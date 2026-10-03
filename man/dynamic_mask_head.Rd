@@ -22,8 +22,7 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-S <- c("a", "b", "c")
-dynamic_mask_head(S, M)
+grid <- matrix(c(1, 0, 0, 1, 1, 1), nrow = 3)   # three grid cells, two channels
+dynamic_mask_head(output_token = c(0.5, -0.2), image_grid_vectors = grid)
 }
 \keyword{internal}

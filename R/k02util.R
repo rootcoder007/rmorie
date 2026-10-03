@@ -92,8 +92,7 @@ k02mm <- function(y, v, tau0) {
 #' @return The value of \code{stats::qnorm}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' k02z(V)
+#' k02z(c(0.025, 0.5, 0.975))
 #' @keywords internal
 k02z <- function(p) stats::qnorm(p)
 #' k02tq
@@ -107,8 +106,7 @@ k02z <- function(p) stats::qnorm(p)
 #' @return The value of \code{stats::qt}.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' k02tq(V, V)
+#' k02tq(p = c(0.9, 0.975), df = 10)
 #' @keywords internal
 k02tq <- function(p, df) stats::qt(p, df)
 #' k02p2z

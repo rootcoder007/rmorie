@@ -80,7 +80,7 @@ Rcpp::List morie_crypto_mlkem768_keygen() {
   return Rcpp::List::create(Rcpp::Named("pk") = pk,
                               Rcpp::Named("sk") = sk);
 #else
-  Rcpp::stop("morie was built without liboqs; reinstall with "
+  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install the liboqs headers (liboqs-devel / liboqs-dev / brew install liboqs) and reinstall "
              "liboqs-dev / brew install liboqs and rebuild morie.");
   return R_NilValue;
 #endif
@@ -110,7 +110,7 @@ Rcpp::List morie_crypto_mlkem768_encaps(SEXP pk_sxp) {
   return Rcpp::List::create(Rcpp::Named("ct") = ct,
                               Rcpp::Named("shared_secret") = ss);
 #else
-  Rcpp::stop("morie was built without liboqs");
+  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install liboqs-devel / liboqs-dev / brew install liboqs and reinstall");
   return R_NilValue;
 #endif
 }
@@ -141,7 +141,7 @@ SEXP morie_crypto_mlkem768_decaps(SEXP sk_sxp, SEXP ct_sxp) {
   OQS_KEM_free(kem);
   return ss;
 #else
-  Rcpp::stop("morie was built without liboqs");
+  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install liboqs-devel / liboqs-dev / brew install liboqs and reinstall");
   return R_NilValue;
 #endif
 }
@@ -172,7 +172,7 @@ Rcpp::List morie_crypto_mldsa65_keygen() {
   return Rcpp::List::create(Rcpp::Named("pk") = pk,
                               Rcpp::Named("sk") = sk);
 #else
-  Rcpp::stop("morie was built without liboqs");
+  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install liboqs-devel / liboqs-dev / brew install liboqs and reinstall");
   return R_NilValue;
 #endif
 }
@@ -208,7 +208,7 @@ SEXP morie_crypto_mldsa65_sign(SEXP sk_sxp, SEXP message_sxp) {
   std::memcpy(&out[0], sigbuf.data(), sig_len);
   return out;
 #else
-  Rcpp::stop("morie was built without liboqs");
+  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install liboqs-devel / liboqs-dev / brew install liboqs and reinstall");
   return R_NilValue;
 #endif
 }
@@ -238,7 +238,7 @@ bool morie_crypto_mldsa65_verify(SEXP pk_sxp, SEXP message_sxp,
   OQS_SIG_free(sig);
   return rc == OQS_SUCCESS;
 #else
-  Rcpp::stop("morie was built without liboqs");
+  Rcpp::stop("rmorie was built without liboqs (ML-KEM); install liboqs-devel / liboqs-dev / brew install liboqs and reinstall");
   return false;
 #endif
 }

@@ -210,7 +210,7 @@ morie_alfqud_correctness <- function(program, inputs, targets, n_reg) {
 #' @return A list of instructions.
 #' @export
 #' @examples
-#' morie_alfqud_actions(n_mem = c(1, 2, 3, 4, 5, 6, 7, 8), n_reg = 5L)
+#' length(morie_alfqud_actions(n_mem = 2L, n_reg = 1L))
 #' @keywords internal
 morie_alfqud_actions <- function(n_mem, n_reg) {
   locs <- list()

@@ -32,9 +32,9 @@ uses -- the same expression, so there is no separate code path to get
 wrong.
 }
 \examples{
-set.seed(1)
-r <- morie_snpest_predictive(x = rnorm(10), n = 8L, s = rnorm(10), ss = rnorm(10),
-  m0 = rnorm(10), kappa0 = rnorm(10), a0 = rnorm(10), b0 = rnorm(10))
-TRUE
+# a cluster of 8 members with sum 16 and sum of squares 36
+morie_snpest_predictive(x = 2.5, n = 8L, s = 16, ss = 36, m0 = 0, kappa0 = 1, a0 = 2, b0 = 1)
+# n = 0 gives the prior predictive
+morie_snpest_predictive(x = 2.5, n = 0L, s = 0, ss = 0, m0 = 0, kappa0 = 1, a0 = 2, b0 = 1)
 }
 \keyword{internal}

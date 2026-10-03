@@ -22,8 +22,8 @@ blocks of size \code{i} and the sample size \eqn{n = \sum_i i m_i} is
 recovered from the multiplicities.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_ewens_log(V, V)
+# a partition of n = 8 with three singletons, one pair and one triple
+morie_gh_ewens_log(multiplicities = c(3, 1, 1), alpha = 2)
 }
 \references{
 Ghosal, S. and van der Vaart, A. (2017).

@@ -27,8 +27,7 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-morie_prphet_piecewise_trend(t = c(1, 2, 3, 4, 5, 6, 7, 8), k.rate = c(1, 2, 3, 4, 5, 6, 7, 8),
-  m.off = c(1, 2, 3, 4, 5, 6, 7, 8), deltas = c(1, 2, 3, 4, 5, 6, 7, 8),
-  cps = c(1, 2, 3, 4, 5, 6, 7, 8))
+# growth rate 1 with offset 0, bending by -0.5 at t = 3 and +0.25 at t = 6
+morie_prphet_piecewise_trend(t = 1:8, k.rate = 1, m.off = 0, deltas = c(-0.5, 0.25), cps = c(3, 6))
 }
 \keyword{internal}

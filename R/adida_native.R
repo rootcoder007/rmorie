@@ -91,7 +91,8 @@ aggregate_buckets <- function(y, m, overlapping = FALSE) {
 #' @return Numeric vector of length \code{m}.
 #' @export
 #' @examples
-#' disaggregate(aggregate_value = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+#' disaggregate(aggregate_value = 100, m = 4L)
+#' disaggregate(100, m = 4L, profile = c(1, 2, 3, 4))
 #' @keywords internal
 disaggregate <- function(aggregate_value, m, profile = NULL) {
   mm <- as.integer(m)

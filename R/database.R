@@ -338,7 +338,8 @@ morie_db_connect <- function(db_path = NULL) {
         call. = FALSE
       )
     }
-    return(DBI::dbConnect(duckdb::duckdb(), dbdir = db_path))
+    # duckdb prints an 8-line note about its extension directory on first connect; a listing verb is not the place
+    return(suppressMessages(DBI::dbConnect(duckdb::duckdb(), dbdir = db_path)))
   }
   # SQLite fallback path.
   if (!requireNamespace("RSQLite", quietly = TRUE)) {
@@ -829,6 +830,9 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @export
 morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
+  if (!is.character(key) || length(key) != 1L || is.na(key) || !nzchar(key)) {
+    stop("key must be a single dataset key (rmorie list-datasets / morie_list_datasets())", call. = FALSE)
+  }
   # the bootstrap-weight files are 600 MB: R's 60 s default timeout truncated
   # them mid-download (2026-10-01); every route below inherits this
   old_timeout <- options(timeout = max(getOption("timeout", 60), 3600))

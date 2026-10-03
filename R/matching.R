@@ -723,8 +723,9 @@ morie_matching_genetic <- function(data, treatment, covariates,
 #' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
 #' set.seed(1)
-#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.25),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
+#' # an average of two controls per treated unit needs twice as many controls as treated
 #' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
 #'                               min_ratio = 1, max_ratio = 3)
 #' }
@@ -819,7 +820,7 @@ morie_matching_cardinality <- function(data, treatment, covariates,
   # Track repeated MatchIt warnings across calipers; collapse to a
   # single summary at the end so we don't emit one per caliper.
   n_few_ctrl_warn <- 0L
-  ctrl_warn_pattern <- "Fewer control units than treated"
+  ctrl_warn_pattern <- "Fewer control units than treated|Fewer controls than treated units"
   call_nn <- function(...) {
     withCallingHandlers(
       morie_matching_nearest_neighbor(...),
@@ -1417,12 +1418,12 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
                                          seed = 42L, alpha = 0.05) {
   .rmorie_local_seed(seed)
   df <- .morie_matching_drop_na(data, c(outcome, treatment, covariates))
-  # Fold the per-match "Fewer control units than treated" warning (from
+  # Fold the per-match "fewer controls than treated" warnings (from
   # the full-data match and from every bootstrap resample) into one
   # summary at the end.
   n_few_ctrl_warn <- 0L
   data_few_ctrl <- FALSE
-  ctrl_warn_pattern <- "Fewer control units than treated"
+  ctrl_warn_pattern <- "Fewer control units than treated|Fewer controls than treated units"
   mr <- withCallingHandlers(
     morie_matching_nearest_neighbor(df, treatment, covariates,
                                     n_neighbors = 1L, ps = ps),
@@ -1518,7 +1519,8 @@ morie_matching_doubly_robust <- function(data, outcome, treatment, covariates,
 #' @examples
 #' \donttest{
 #' set.seed(1)
-#' df <- data.frame(treat3 = sample(0:2, 200, TRUE),
+#' # the reference level (the largest) must hold at least as many units as each other level
+#' df <- data.frame(treat3 = sample(rep(0:2, c(90, 55, 55))),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_multi_treatment(df, "treat3", c("x1", "x2"))
 #' }
@@ -1538,7 +1540,10 @@ morie_matching_multi_treatment <- function(data, treatment, covariates,
   }
   results <- list()
   for (lvl in levels) {
-    if (identical(lvl, reference_group)) next
+    # the reference level comes back from table() as a string: compare values, not types
+    # (an integer treatment column against a numeric reference never matched, so the
+    # reference group was matched against itself with no controls)
+    if (as.character(lvl) == as.character(reference_group)) next
     df_b <- df[df[[treatment]] %in% c(lvl, reference_group), , drop = FALSE]
     df_b[["._treat_binary"]] <- as.integer(df_b[[treatment]] == lvl)
     mr <- if (method == "mahalanobis") {

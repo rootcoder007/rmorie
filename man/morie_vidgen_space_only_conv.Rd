@@ -20,8 +20,7 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-S <- c("a", "b", "c")
-morie_vidgen_space_only_conv(D, S)
+video <- list(matrix(1:9, 3), matrix(9:1, 3))   # two 3 x 3 frames
+morie_vidgen_space_only_conv(video, kernel = matrix(1 / 4, 2, 2))$frames
 }
 \keyword{internal}

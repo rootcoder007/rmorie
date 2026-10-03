@@ -22,6 +22,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-EchoImp(a = c(1, 2, 3, 4, 5, 6, 7, 8), n_0 = 5L, n = 5L)
+EchoImp(a = 0.5, n_0 = 5L, n = 0:15)
 }
 \keyword{internal}

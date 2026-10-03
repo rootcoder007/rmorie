@@ -190,7 +190,9 @@ test_that("profile-dataset and sample work on a CSV", {
   expect_equal(nrow(utils::read.csv(file.path(d, "s.csv"))), 7L)
   expect_match(.capture("sample", f, "--n", "3", "--method", "stratified")$text, "strata-col")
   st <- .capture("sample", f, "--n", "2", "--method", "stratified", "--strata-col", "g")
-  expect_match(st$text, "Sampled 4 rows")
+  expect_match(st$text, "Sampled 2 rows")   # --n is the total; the strata share it
+  each <- .capture("sample", f, "--n", "2", "--method", "stratified", "--strata-col", "g", "--per-stratum")
+  expect_match(each$text, "Sampled 4 rows")
 })
 
 test_that("run-modules and pipeline run through the module runner", {

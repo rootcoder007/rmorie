@@ -20,6 +20,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-res <- .stahdo_combn(n = 3L, p = 0.5)
+res <- .stahdo_combn(n = 4L, p = 2L)
 res
 }

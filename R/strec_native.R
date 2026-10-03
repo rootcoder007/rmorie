@@ -186,9 +186,8 @@ strec_session_average <- function(embeddings) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 #' @examples
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' S <- c("a", "b", "c")
-#' strec_mlp_cell(S, M)
+#' W <- matrix(c(1, 0, 0.5, -1, 0.2, 0.3), nrow = 2)   # two outputs from three inputs
+#' strec_mlp_cell(m = c(1, 0.5, -0.5), W = W)
 #' @keywords internal
 strec_mlp_cell <- function(m, W, b = NULL, activation = "tanh") {
   v <- as.numeric(m)

@@ -198,8 +198,7 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
 #' @return A list with \code{means}, \code{loglik}.
 #' @export
 #' @examples
-#' morie_prtcl_kalman_filter_1d(y = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   q = 0.5, c = c(1, 2, 3, 4, 5, 6, 7, 8), r = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_prtcl_kalman_filter_1d(y = c(1, 2, 3, 4, 5, 6, 7, 8), a = 0.9, q = 0.5, c = 1, r = 0.25)
 #' @keywords internal
 morie_prtcl_kalman_filter_1d <- function(y, a, q, c, r, m0 = 0, p0 = 1) {
   m <- as.numeric(m0)

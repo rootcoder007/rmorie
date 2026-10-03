@@ -316,7 +316,8 @@ morie_llm_request_completion <- function(base_url, model, messages,
 #' Internal helper: Morie Llm Local Fallback
 #' @noRd
 .morie_llm_local_fallback <- function(prompt) {
-  paste0(
+  # the attribute lets a script tell this text from an answer: isTRUE(attr(x, "fallback"))
+  structure(paste0(
     "MORIE is running in local-only mode (no LLM provider detected).\n\n",
     "The analyses do not need a model: morie_run_pipeline(), ",
     "morie_run_morie_module() and every morie_* estimator work as they are. ",
@@ -328,7 +329,7 @@ morie_llm_request_completion <- function(base_url, model, messages,
     "  3. your own key: GEMINI_API_KEY, LLM_API_BASE_URL + LLM_API_KEY, ",
     "or OPENAI_API_KEY\n",
     "morie_llm_detect_provider() reports what is reachable from here."
-  )
+  ), fallback = TRUE)
 }
 
 #' Send a prompt to the best available LLM provider
@@ -571,6 +572,20 @@ DEFAULT_HOSTED_MODEL    <- "minimax-m3:cloud"
 #' @examples
 #' morie_llm_probe_hosted()
 #' @export
+#' Internal helper: does the user's own OpenAI-compatible endpoint answer?
+#' @noRd
+.morie_llm_probe_api <- function(timeout = 2) {
+  base <- .morie_llm_api_base()
+  if (is.null(base) || !requireNamespace("httr2", quietly = TRUE) || .morie_llm_no_net()) return(FALSE)
+  tryCatch({
+    req <- httr2::request(paste0(sub("/+$", "", base), "/models"))
+    key <- .morie_llm_api_key()
+    if (!is.null(key) && nzchar(key)) req <- httr2::req_headers(req, Authorization = paste("Bearer", key))
+    req <- httr2::req_timeout(req, timeout)
+    httr2::resp_status(httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))) < 500
+  }, error = function(e) FALSE)
+}
+
 morie_llm_probe_hosted <- function(timeout = 2) {
   cache <- .morie_llm_cache$hosted_cached
   if (!is.null(cache)) return(cache)

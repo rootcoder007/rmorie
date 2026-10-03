@@ -34,8 +34,9 @@ A list with invariant, max_deviation, readout.
 Check permutation invariance of a graph-level prediction
 }
 \examples{
-morie_mpfn_is_permutation_invariant(H = 0.5,
-  adj = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
-  edge_features = c(1, 2, 3, 4, 5, 6, 7, 8), perm = c(1, 2, 3, 4, 5, 6, 7, 8))
+H <- matrix(c(1, 2, 3, 0.5, -1, 2), 3, 2)              # three nodes, two features
+adj <- list("0" = c(2L, 1L), "1" = 0L, "2" = 0L)        # 0-based adjacency
+edge_features <- list("0_1" = 2, "2_0" = 0.5)
+morie_mpfn_is_permutation_invariant(H, adj, edge_features, perm = c(2L, 0L, 1L), T = 2L)
 }
 \keyword{internal}

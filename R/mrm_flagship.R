@@ -305,8 +305,14 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
 #' @param ... Ignored; accepted for S3 consistency.
 #' @return The value of `invisible`.
 #' @examples
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' rmorie:::print.morie_mrm_effect(D)
+#' set.seed(92)
+#' n <- 200
+#' x1 <- rnorm(n); x2 <- rnorm(n)
+#' t <- rbinom(n, 1, plogis(0.5 * x1))
+#' y <- 0.8 * t + x1 + 0.5 * x2 + rnorm(n)
+#' df <- data.frame(y = y, t = t, x1 = x1, x2 = x2)
+#' eff <- morie_mrm_estimate_causal_effect(df, "t", "y", c("x1", "x2"), methods = c("ate", "aipw"))
+#' print(eff)
 #' @export
 #' @keywords internal
 print.morie_mrm_effect <- function(x, ...) {

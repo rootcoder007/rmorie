@@ -65,7 +65,8 @@ Imports:
   rmoriebricklayer (>= 0.4.8),
   rmoriedata (>= 0.3.2)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
-SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
+SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb);
+    optional liboqs (ML-KEM post-quantum crypto): liboqs-devel (rpm), liboqs-dev (deb) or brew install liboqs
 Suggests:
     AER,
     AIPW,

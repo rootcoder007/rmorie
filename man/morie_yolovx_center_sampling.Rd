@@ -27,7 +27,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-morie_yolovx_center_sampling(box = c(1, 2, 3, 4, 5, 6, 7, 8),
-  grid_w = c(1, 2, 3, 4, 5, 6, 7, 8), grid_h = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_yolovx_center_sampling(box = c(1, 1, 5, 4), grid_w = 8L, grid_h = 6L)$n_candidates
 }
 \keyword{internal}

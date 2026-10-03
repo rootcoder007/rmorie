@@ -170,8 +170,7 @@
 #' @return The value of \code{lib}, as built in the body.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_tmlcic_default_library(V)
+#' length(morie_tmlcic_default_library(p = 3L))
 #' @keywords internal
 morie_tmlcic_default_library <- function(p, interactions = TRUE) {
   # The chapter's example library: the unadjusted model, one main term

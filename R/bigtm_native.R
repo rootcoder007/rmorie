@@ -348,8 +348,9 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 #' @return The value of \code{.log_evidence}.
 #' @export
 #' @examples
-#' log_evidence(docs = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8),
-#'   z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' docs <- list(c(0L, 1L, 2L, 1L), c(2L, 2L, 0L, 1L))   # word ids of two documents
+#' z <- list(c(0L, 0L, 1L, 1L), c(1L, 0L, 0L, 1L))      # topic of each word
+#' log_evidence(docs, T = 2L, V = 3L, z = z)
 #' @keywords internal
 log_evidence <- function(docs, T, V, z, alpha = 0.5, beta = 0.5,
                          m = NULL, n = NULL) {

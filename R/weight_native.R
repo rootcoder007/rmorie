@@ -43,8 +43,9 @@
 #' @param ... Ignored; accepted for S3 consistency.
 #' @return The value of `invisible`.
 #' @examples
-#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' rmorie:::print.morie_weight(D)
+#' w <- structure(list(method = "ps", estimand = "ATE", n = 3L, ess = 2.6, weights = c(1, 2, 0.5)),
+#'                class = "morie_weight")
+#' print(w)
 #' @export
 #' @keywords internal
 print.morie_weight <- function(x, ...) {

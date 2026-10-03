@@ -20,6 +20,6 @@ An L x L logical matrix.
 Sliding-window attention mask
 }
 \examples{
-morie_mistr_sliding_window_mask(L = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
+morie_mistr_sliding_window_mask(L = 6L, window = 3L)
 }
 \keyword{internal}

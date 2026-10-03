@@ -125,7 +125,7 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @return The value of \code{result}, as built in the body.
 #' @export
 #' @examples
-#' res <- .stahdo_combn(n = 3L, p = 0.5)
+#' res <- .stahdo_combn(n = 4L, p = 2L)
 #' res
 .stahdo_combn <- function(n, p) {
   if (p == 0L) return(list(integer(0L)))

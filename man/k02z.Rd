@@ -19,7 +19,6 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-k02z(V)
+k02z(c(0.025, 0.5, 0.975))
 }
 \keyword{internal}

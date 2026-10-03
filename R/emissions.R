@@ -217,7 +217,8 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' were sealed, not who sealed them; pass your own
 #' \code{rmoriebricklayer::fips_keygen()} key to bind the run to you.
 #' @param project_name Label written to the CSV and the manifest.
-#' @param output_dir Where \code{emissions.csv} and the capsule go.
+#' @param output_dir Where \code{emissions.csv} and the capsule go. \code{NULL}
+#'   (the default) writes nothing: the measurement is returned in R only.
 #' @param output_file CSV file name.
 #' @param pue,wue Power and water usage effectiveness multipliers.
 #' @param country_iso_code,region Location overrides.
@@ -243,14 +244,15 @@ morie_emissions_carbon_intensity <- function(country_iso = "", region = "") {
 #' list.files(dir)
 #' unlink(dir, recursive = TRUE)
 #' @export
-morie_emissions_start <- function(project_name = "morie", output_dir = ".",
+morie_emissions_start <- function(project_name = "morie", output_dir = NULL,
                                   output_file = "emissions.csv", pue = 1, wue = 0,
                                   country_iso_code = "", region = "",
-                                  save_to_file = TRUE, capsule = TRUE, key = NULL,
+                                  save_to_file = !is.null(output_dir), capsule = !is.null(output_dir), key = NULL,
                                   measure_power_secs = 1) {
   t <- new.env(parent = emptyenv())
   t$project_name <- project_name
-  t$output_dir <- output_dir
+  # nothing is written unless an output_dir is given: a measurement is a value, not a side effect
+  t$output_dir <- output_dir %||% "." 
   t$output_file <- output_file
   t$pue <- pue
   t$wue <- wue

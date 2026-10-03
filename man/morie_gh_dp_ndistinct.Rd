@@ -22,8 +22,7 @@ For \code{n} draws from a Dirichlet process with precision
 (\alpha + i - 1)^2}.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_dp_ndistinct(V, V)
+morie_gh_dp_ndistinct(n = 50, alpha = 2)
 }
 \references{
 Ghosal, S. and van der Vaart, A. (2017).

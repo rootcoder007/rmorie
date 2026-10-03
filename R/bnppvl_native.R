@@ -212,8 +212,7 @@ morie_bnppvl_draw <- function(e, m, c = 2.5, schedule = "cubic",
 #' @return The log prior density.
 #' @export
 #' @examples
-#' set.seed(1)
-#' r <- morie_bnppvl_log_prior(q = matrix(rnorm(20), 5, 4), m = matrix(rnorm(20), 5, 4)); TRUE
+#' morie_bnppvl_log_prior(q = seq(0, 1, length.out = 9), m = 3L)
 #' @keywords internal
 morie_bnppvl_log_prior <- function(q, m, c = 2.5, schedule = "cubic",
                                    centring = "uniform", nullq = NULL) {

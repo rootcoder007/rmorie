@@ -70,9 +70,9 @@
 #'   Grimshaw (1993), Technometrics 35(2):185-191.
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-#' Evpot(V, M)
+#' set.seed(1)
+#' x <- rexp(200)
+#' Evpot(x, u = 1)
 Evpot <- function(x, u) {
   x <- .s03vec(x)
   n <- length(x)
