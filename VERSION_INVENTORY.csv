@@ -2677,6 +2677,8 @@ File,Line,Status,Version,Context
 ./tests/testthat/test-mhatf-det-seed.R,3,STALE_OR_DEP,0.4.0,"# Verifies that the `deterministic_seed` argument added in morie v0.4.0:"
 ./tests/testthat/test-mrm-stockflow.R,3,STALE_OR_DEP,0.4.8,"# These need rmoriebricklayer (>= 0.4.8); where adp(); alos() and"
 ./tests/testthat/test-mrm-stockflow.R,9,STALE_OR_DEP,0.4.8,"testthat::skip_if_not_installed(rmoriebricklayer; 0.4.8)"
+./tests/testthat/test-patch-coverage-1_4_0.R,1,CURRENT,1.4.0,"# The 1.4.0 branches codecov/patch reported without a test: error messages; usage lines and fallbacks."
+./tests/testthat/test-patch-coverage-1_4_0.R,275,STALE_OR_DEP,127.0.0.1,".morie_llm_api_base = function() http://127.0.0.1:9/v1;"
 ./tests/testthat/test-prsll-native.R,5,STALE_OR_DEP,4.4.2,"# section 4.4.2. Its FIRST sets; FOLLOW sets and predictive parsing"
 ./tests/testthat/test-rangayyan-stat.R,38,STALE_OR_DEP,5.6.3,"test_that(TurnsCount implements Willison's rule (Section 5.6.3); {"
 ./tests/testthat/test-rfens-det-seed.R,3,STALE_OR_DEP,0.4.0,"# Verifies the `deterministic_seed` argument added in morie v0.4.0:"
