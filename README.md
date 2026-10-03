@@ -190,6 +190,8 @@ function.
   keyword fallback needs no network.
 - **Command line inside the package** — `install_cli()` puts `rmorie` on
   your PATH: `rmorie login`, `rmorie doctor`, `rmorie ask`, `rmorie analyze`.
+  On a server, over SSH or with no browser, `rmorie login --no-browser`
+  prints a link and a code: open it on any phone or laptop.
 - **Criminology research program** — the open-problems ledger under
   `research/`, implemented as package functions with Lean 4 proofs of the
   identification results.
