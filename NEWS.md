@@ -11,6 +11,26 @@
   bounds the spectral gap of the street graph, `Research.P3`). The Python package carries
   every research function at parity.
 
+* Research: seven more problems join the Lean-backed programme, each with its R
+  function and tests: Duncan-Davis bounds (`morie_ecological_bounds()`,
+  `Research.P12`), monotone treatment selection (`morie_sentence_effect_mts()`,
+  `Research.P11`), the extinction probability of a near-repeat chain
+  (`morie_contagion_extinction()`, `Research.P10`), judge-leniency designs and what the
+  Wald ratio identifies (`morie_judge_iv()`, `morie_judge_iv_population()`,
+  `Research.P14`), the Oaxaca-Blinder decomposition of a sentencing gap with both
+  references and the interaction (`morie_disparity_decomposition()`, `Research.P15`),
+  Little's law on a court docket (`morie_court_backlog()`, `Research.P16`) and the
+  incapacitation identity with its marginal year (`morie_incapacitation()`,
+  `Research.P17`), and selective labels for release rules (`morie_selective_labels()`,
+  `Research.P18`).
+
+* Datasets: the fourteen Health Infobase tables (CPADS, CSADS, CSUS) download from
+  the portal and fall back to the copy at data.rmorie.com (`hib/...` keys); the three
+  OTIS research environments are fetched from data.rmorie.com as R objects
+  (`morie_load_dataset("otisfin")` returns the environment); the Ontario correctional
+  institution locations join the catalog as `otisloc`. The message for a missing
+  own file now says what it means.
+
 # rmorie 1.3.9 - 2026-10-01
 
 * The `causal-estimators` module runs again on the synthetic CPADS frame: its

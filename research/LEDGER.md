@@ -711,3 +711,21 @@ Shinnar 1973; Blumstein, Cohen & Nagin 1978) is a steady-state identity.
   `incapacitation()`.
 - Open: replacement (markets for crime), career desistance (lambda not constant), and
   an application to OTIS custody lengths with Ontario reconviction rates.
+
+## P18. Selective labels: evaluating a release rule from the released alone
+
+Bail and pretrial-detention algorithms are judged against judges, but a
+failure (a missed court date, a new arrest) is observed only for defendants
+some judge released (Lakkaraju et al. 2017; Kleinberg et al. 2018).
+
+- Estimand: the failure rate of the set a proposed rule would release.
+- Progress 2026-10-02: `Research.P18` (P18Selective.lean). The reported rate is
+  the rate among the released (`observed_rate_is_conditional`); a rule's set
+  inside a more lenient judge's release set is scored exactly from that judge's
+  outcomes, the contraction argument (`nested_rate_identified`); otherwise the
+  rule's rate lies in [fails(M & R)/w(M), (fails(M & R) + w(M \ R))/w(M)]
+  (`unobserved_bounds`), an interval whose width is the unobserved share
+  (`unobserved_width`) with both ends attained (`unobserved_ends_attained`).
+  R: `morie_selective_labels()`; Python `selective_labels()`.
+- Open: the many-judge contraction with leniency quantiles; an application to
+  Ontario bail outcomes once a released-cohort file is public.

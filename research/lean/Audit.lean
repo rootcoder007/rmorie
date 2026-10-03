@@ -203,3 +203,9 @@ open Research.P4
 #print axioms Research.P17.marginal_prevention_eq
 #print axioms Research.P17.marginal_prevention_pos
 #print axioms Research.P17.high_rate_more_prevented
+#print axioms Research.P18.observed_rate_is_conditional
+#print axioms Research.P18.nested_rate_identified
+#print axioms Research.P18.fails_split
+#print axioms Research.P18.unobserved_bounds
+#print axioms Research.P18.unobserved_width
+#print axioms Research.P18.unobserved_ends_attained

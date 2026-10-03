@@ -134,8 +134,12 @@ prove, on every CI run, that the native engines match them.
 The Lean-backed research programme grows by four problems, each with its R
 function and tests: pooling evaluations (DerSimonian-Laird), separation in a
 logistic fit, Imbens-Manski intervals for partially identified sentencing
-effects, and the Cheeger bound on a hot-spot boundary. The Python package now
-carries every research function at parity.
+effects, the Cheeger bound on a hot-spot boundary, Duncan-Davis bounds, monotone
+treatment selection, the extinction probability of a near-repeat chain, judge-leniency
+designs, the Oaxaca-Blinder decomposition, Little's law on a docket and the
+incapacitation identity. The Health Infobase tables and the OTIS research
+environments are served from data.rmorie.com. The Python package carries every
+research function at parity.
 
 ## What's in v1.3.9
 
