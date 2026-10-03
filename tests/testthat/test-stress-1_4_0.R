@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Fixes for the 1.3.9 stress-test findings (2026-10-02): each test is one finding.
 
-.pkg <- "rmorie"
+.pkg <- utils::packageName(environment(morie_cli))   # "rmorie", or "morie" in the morie r-package
 .cap <- function(...) {
   txt <- character()
   status <- morie_cli(c(...), out = function(s) txt <<- c(txt, s))
@@ -198,7 +198,7 @@ test_that("install_cli() writes a launcher that pins the library it was installe
   expect_true(any(grepl(lib, lines, fixed = TRUE)))
   expect_true(any(grepl("^R_LIBS=", lines)))
   expect_false(any(grepl("--vanilla", lines)))
-  expect_true(any(grepl("rmorie::morie_cli()", lines, fixed = TRUE)))
+  expect_true(any(grepl(paste0(.pkg, "::morie_cli()"), lines, fixed = TRUE)))
 })
 
 test_that("morie_siu_sanity_check() accepts the corpus's yes/no, true/false and lower-case gender values", {
@@ -263,4 +263,12 @@ test_that("multi-treatment matching skips the reference level whatever the colum
   dfc <- df
   dfc$treat3 <- as.character(df$treat3)
   expect_equal(names(morie_matching_multi_treatment(dfc, "treat3", c("x1", "x2"))), c("1", "2"))
+})
+
+test_that("the launcher passes no explicit --args and morie_cli() tolerates one", {
+  lines <- readLines(system.file("bin", "rmorie", package = .pkg))
+  expect_false(any(grepl("--args", lines[!grepl("^#", lines)], fixed = TRUE)))
+  txt <- character()
+  expect_equal(morie_cli(c("--args", "version"), out = function(s) txt <<- c(txt, s)), 0L)
+  expect_match(paste(txt, collapse = ""), .pkg)
 })

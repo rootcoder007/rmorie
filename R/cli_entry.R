@@ -57,6 +57,8 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
     Sys.setenv(MORIE_CACHE_DB = .morie_cli_cache_db())
     on.exit(Sys.unsetenv("MORIE_CACHE_DB"), add = TRUE)
   }
+  # launchers of older versions passed an explicit --args separator, which R >= 4.6 keeps
+  if (length(args) && identical(args[[1L]], "--args")) args <- args[-1L]
   verb <- if (length(args)) args[[1L]] else "help"
   rest <- args[-1L]
   pkg <- utils::packageName()
@@ -394,7 +396,7 @@ install_cli <- function(dir = file.path(path.expand("~"), ".local", "bin"), name
   if (.Platform$OS.type == "windows") {
     target <- file.path(dir, paste0(name, ".cmd"))
     writeLines(sprintf(paste0("@echo off\r\nset \"R_LIBS=%s;%%R_LIBS%%\"\r\n",
-                              "Rscript --no-save --no-restore -e \"q <- %s::morie_cli(); quit(status = as.integer(q))\" --args %%*"),
+                              "Rscript --no-save --no-restore -e \"q <- %s::morie_cli(); quit(status = as.integer(q))\" %%*"),
                        gsub("/", "\\\\", lib, fixed = TRUE), pkg), target)
   } else {
     target <- file.path(dir, name)
@@ -404,7 +406,7 @@ install_cli <- function(dir = file.path(path.expand("~"), ".local", "bin"), name
                  sprintf("# %s", lib),
                  sprintf("R_LIBS=\"%s${R_LIBS:+:$R_LIBS}\"", lib),
                  "export R_LIBS",
-                 sprintf("exec Rscript --no-save --no-restore -e 'suppressPackageStartupMessages({ q <- %s::morie_cli(); quit(status = as.integer(q)) })' --args \"$@\"", pkg)),
+                 sprintf("exec Rscript --no-save --no-restore -e 'suppressPackageStartupMessages({ q <- %s::morie_cli(); quit(status = as.integer(q)) })' \"$@\"", pkg)),
                target)
     Sys.chmod(target, "0755")
   }
