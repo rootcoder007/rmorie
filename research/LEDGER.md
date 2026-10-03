@@ -548,7 +548,7 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   (P11Monotone.lean): monotone treatment response gives the contrast the
   sign and the sharp interval [0, P(y=1,z=b) + P(y=0,z=a)] (library scan
   B4). R: `morie_sentence_effect_mtr()`.
-- Open: monotone treatment selection (Manski sec. 9.3), Imbens-Manski confidence sets (B25); application to OTIS/CPADS
+- Open: application to OTIS/CPADS
   custody-vs-community sentences and reconviction.
 - Progress 2026-10-02 (Imbens-Manski, library scan B25): `Research.P11` in P11Coverage.lean:
   on a finite probability space P[H subset of C] <= P[theta in C] whenever theta
@@ -560,6 +560,12 @@ Decision, sec. 7.2; Manski & Nagin 1998 on Utah juvenile sentencing).
   (`two_sided_overcovers`). Existence of the cutoff is left to root finding. R:
   `morie_bounds_confidence()`; the test checks the equation, the ordering of the
   three cutoffs, monotonicity in Delta and the over-coverage on random bounds.
+- Progress 2026-10-02 (MTS, Manski & Pepper 2000): `Research.P11.Pop` in P11Selection.lean:
+  under monotone treatment selection E[y(b)] <= E[y | z=b] (`mts_mean_b_le`) and
+  E[y(a)] >= E[y | z=a] (`mts_mean_a_ge`), so the naive difference of observed means
+  overstates the effect (`mts_ate_le_naive`); with MTR as well the contrast lies in
+  [0, naive difference] (`mtr_mts_bounds`). R: `morie_sentence_effect_mts()`; Python
+  `sentence_effect_mts()`.
 
 ## P12. Ecological inference: when group-level correlations say anything about people
 
@@ -575,9 +581,16 @@ group-level correlation can differ in size and sign from the individual one.
   `morie_ecological_decompose()`; the test builds an exactly-orthogonal
   within part and reproduces Robinson's four-person sign reversal
   (individual +0.6, ecological -1).
-- Open: Duncan-Davis bounds for the individual proportion from group
-  marginals (Manski sec. 5.1; library scan B22), and an application with
+- Open: an application with
   PSDP/CPADS individual records against TPS neighbourhood aggregates.
+- Progress 2026-10-02 (Duncan-Davis, library scan B22): `Research.P12` in P12Bounds.lean:
+  on a finite weighted population the joint mass satisfies p + q - 1 <= pq <= min(p, q)
+  (`pq_ge`, `pq_le_p`, `pq_le_q`), so P(y | x) lies in [max(0,(p+q-1)/p), min(1, q/p)]
+  (`dd_bounds`) with both ends attained by admissible joint tables (`Cells.ends_attained`);
+  the complement rate is pinned by q = p r + (1-p) r' (`dd_complement`); the aggregate rate
+  is the m_g p_g-weighted mean, so its bounds are the weighted means of the neighbourhood
+  bounds (`dd_aggregate_bounds`). R: `morie_ecological_bounds()`; Python
+  `ecological_bounds()`.
 
 ## P13. Pooling evaluations: when random effects say more than the sites did
 
