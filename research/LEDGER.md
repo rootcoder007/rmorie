@@ -690,3 +690,24 @@ about as if it were a third number.
   Python `court_backlog()`.
 - Open: the censoring bias of the disposed-cases mean as a bound problem; an
   application to Ontario Court of Justice disposition statistics.
+
+## P17. Incapacitation: what a sentence year buys
+
+The incapacitation estimate behind every "lock them up" argument (Avi-Itzhak &
+Shinnar 1973; Blumstein, Cohen & Nagin 1978) is a steady-state identity.
+
+- Estimand: the long-run crime rate of an offender who offends at rate lambda while
+  free and serves S after each conviction (probability q per crime), and its gradient.
+- Progress 2026-10-02: `Research.P17` (P17Incapacitation.lean): lambda f/(f + S) at the
+  mean free time f = 1/(lambda q) equals lambda/(1 + lambda q S) (`steady_state_rate`), and
+  the realised rate on any N cycles with proportional crime counts is the same
+  expression at the sample mean free time (`cycle_rate`); the prevented share
+  lambda q S/(1 + lambda q S) is 1 - rate/lambda and strictly below one
+  (`prevented_share_eq`, `prevented_share_lt_one`); the rate is antitone in S and in q
+  (`rate_antitone_in_S`, `rate_antitone_in_q`); one more year prevents
+  lambda^2 q/((1+lambda q S)(1+lambda q(S+1))) > 0 crimes a year (`marginal_prevention_eq`,
+  `marginal_prevention_pos`); a uniform sentence removes the larger share from the
+  higher-rate group (`high_rate_more_prevented`). R: `morie_incapacitation()`; Python
+  `incapacitation()`.
+- Open: replacement (markets for crime), career desistance (lambda not constant), and
+  an application to OTIS custody lengths with Ontario reconviction rates.

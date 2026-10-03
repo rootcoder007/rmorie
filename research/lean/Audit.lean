@@ -193,3 +193,13 @@ open Research.P4
 #print axioms Research.P16.little
 #print axioms Research.P16.little_backlog
 #print axioms Research.P16.little_target
+#print axioms Research.P17.steady_state_rate
+#print axioms Research.P17.cycle_rate
+#print axioms Research.P17.rate_le_lam
+#print axioms Research.P17.prevented_share_eq
+#print axioms Research.P17.prevented_share_lt_one
+#print axioms Research.P17.rate_antitone_in_S
+#print axioms Research.P17.rate_antitone_in_q
+#print axioms Research.P17.marginal_prevention_eq
+#print axioms Research.P17.marginal_prevention_pos
+#print axioms Research.P17.high_rate_more_prevented
