@@ -91,6 +91,61 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_scrypt_romix
+Rcpp::RawVector morie_scrypt_romix(Rcpp::RawVector B, int N, int r, int p);
+RcppExport SEXP _rmorie_morie_scrypt_romix(SEXP BSEXP, SEXP NSEXP, SEXP rSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type B(BSEXP);
+    Rcpp::traits::input_parameter< int >::type N(NSEXP);
+    Rcpp::traits::input_parameter< int >::type r(rSEXP);
+    Rcpp::traits::input_parameter< int >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_scrypt_romix(B, N, r, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_aead_seal
+Rcpp::RawVector morie_aead_seal(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector pt, Rcpp::RawVector aad);
+RcppExport SEXP _rmorie_morie_aead_seal(SEXP keySEXP, SEXP nonceSEXP, SEXP ptSEXP, SEXP aadSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type nonce(nonceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type pt(ptSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type aad(aadSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_aead_seal(key, nonce, pt, aad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_aead_open
+SEXP morie_aead_open(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector ct_with_tag, Rcpp::RawVector aad);
+RcppExport SEXP _rmorie_morie_aead_open(SEXP keySEXP, SEXP nonceSEXP, SEXP ct_with_tagSEXP, SEXP aadSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type nonce(nonceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type ct_with_tag(ct_with_tagSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type aad(aadSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_aead_open(key, nonce, ct_with_tag, aad));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_ks_secretbox_open
+SEXP morie_ks_secretbox_open(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector box);
+RcppExport SEXP _rmorie_morie_ks_secretbox_open(SEXP keySEXP, SEXP nonceSEXP, SEXP boxSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type nonce(nonceSEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type box(boxSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_ks_secretbox_open(key, nonce, box));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_crypto_liboqs_available
 bool morie_crypto_liboqs_available();
 RcppExport SEXP _rmorie_morie_crypto_liboqs_available() {
@@ -827,21 +882,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// morie_match_greedy_1d_cpp
-IntegerMatrix morie_match_greedy_1d_cpp(NumericVector treated_val, NumericVector control_val, int ratio, double caliper_width, bool replace);
-RcppExport SEXP _rmorie_morie_match_greedy_1d_cpp(SEXP treated_valSEXP, SEXP control_valSEXP, SEXP ratioSEXP, SEXP caliper_widthSEXP, SEXP replaceSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericVector >::type treated_val(treated_valSEXP);
-    Rcpp::traits::input_parameter< NumericVector >::type control_val(control_valSEXP);
-    Rcpp::traits::input_parameter< int >::type ratio(ratioSEXP);
-    Rcpp::traits::input_parameter< double >::type caliper_width(caliper_widthSEXP);
-    Rcpp::traits::input_parameter< bool >::type replace(replaceSEXP);
-    rcpp_result_gen = Rcpp::wrap(morie_match_greedy_1d_cpp(treated_val, control_val, ratio, caliper_width, replace));
-    return rcpp_result_gen;
-END_RCPP
-}
 // morie_match_nn_cpp
 IntegerMatrix morie_match_nn_cpp(IntegerVector treat_, NumericVector dist_, IntegerVector ratio_, bool replace, double caliper);
 RcppExport SEXP _rmorie_morie_match_nn_cpp(SEXP treat_SEXP, SEXP dist_SEXP, SEXP ratio_SEXP, SEXP replaceSEXP, SEXP caliperSEXP) {
@@ -1400,6 +1440,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_pbkdf2_sha256_native", (DL_FUNC) &_rmorie_morie_crypto_pbkdf2_sha256_native, 4},
     {"_rmorie_morie_crypto_blake2b_native", (DL_FUNC) &_rmorie_morie_crypto_blake2b_native, 3},
     {"_rmorie_morie_crypto_argon2_native", (DL_FUNC) &_rmorie_morie_crypto_argon2_native, 9},
+    {"_rmorie_morie_scrypt_romix", (DL_FUNC) &_rmorie_morie_scrypt_romix, 4},
+    {"_rmorie_morie_aead_seal", (DL_FUNC) &_rmorie_morie_aead_seal, 4},
+    {"_rmorie_morie_aead_open", (DL_FUNC) &_rmorie_morie_aead_open, 4},
+    {"_rmorie_morie_ks_secretbox_open", (DL_FUNC) &_rmorie_morie_ks_secretbox_open, 3},
     {"_rmorie_morie_crypto_liboqs_available", (DL_FUNC) &_rmorie_morie_crypto_liboqs_available, 0},
     {"_rmorie_morie_crypto_liboqs_version", (DL_FUNC) &_rmorie_morie_crypto_liboqs_version, 0},
     {"_rmorie_morie_crypto_mlkem768_keygen", (DL_FUNC) &_rmorie_morie_crypto_mlkem768_keygen, 0},
@@ -1457,7 +1501,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_matching_cem_strata_cpp", (DL_FUNC) &_rmorie_morie_matching_cem_strata_cpp, 1},
     {"_rmorie_morie_matching_abadie_imbens_kernel_cpp", (DL_FUNC) &_rmorie_morie_matching_abadie_imbens_kernel_cpp, 4},
     {"_rmorie_morie_match_greedy_kd_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_kd_cpp, 5},
-    {"_rmorie_morie_match_greedy_1d_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_1d_cpp, 5},
     {"_rmorie_morie_match_nn_cpp", (DL_FUNC) &_rmorie_morie_match_nn_cpp, 5},
     {"_rmorie_morie_match_optimal_1d_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_1d_cpp, 2},
     {"_rmorie_morie_match_optimal_assign_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_assign_cpp, 2},

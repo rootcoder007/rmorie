@@ -319,11 +319,17 @@ test_that("ingest dispatches to the portal functions", {
 
 test_that("download-bootstrap, percysuits and update report honestly", {
   testthat::local_mocked_bindings(.package = .pkg,
-    morie_load_dataset = function(key, ...) data.frame(w = seq_len(3)))
+    morie_load_dataset = function(key, ...) data.frame(w = seq_len(3)),
+    morie_fetch_ckan = function(key, ...) data.frame(w = seq_len(3)),
+    morie_cache_store = function(...) invisible(NULL))
   r <- .capture("download-bootstrap", "--survey", "csads_2021")
   expect_equal(r$status, 0L)
-  expect_match(r$text, "OK: 3 rows cached")
-  expect_equal(.capture("download-bootstrap", "--survey", "zzz_1999")$status, 1L)
+  expect_match(r$text, "1 bootstrap file\\(s\\) cached")
+  # the key the usage line lists is accepted too (it was refused)
+  expect_equal(.capture("download-bootstrap", "--survey", "ocs22bt")$status, 0L)
+  r <- .capture("download-bootstrap", "--survey", "zzz_1999")
+  expect_equal(r$status, 1L)
+  expect_match(r$text, "Unknown survey 'zzz_1999'. Keys: ocs22bt")
   testthat::local_mocked_bindings(.package = .pkg, morie_llm_probe_ollama = function(...) FALSE)
   expect_equal(.capture("percysuits")$status, 1L)
   testthat::local_mocked_bindings(.package = .pkg,

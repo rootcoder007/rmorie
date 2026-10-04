@@ -84,6 +84,8 @@ test_that("ingest_statcan_csv requires httr2", {
     .package = "base"
 
   )
+  # httr2 is the fallback only when this build has no libcurl backend
+  testthat::local_mocked_bindings(.morie_dataset_http_backend_cpp = function() FALSE, .package = "rmorie")
   set.seed(1)
   expect_error(morie_ingest_statcan_csv("http://x/a.zip"), "httr2")
 })

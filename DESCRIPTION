@@ -199,6 +199,7 @@ Suggests:
     rdrobust,
     readr,
     readxl,
+    remotes,
     resample,
     reticulate,
     rgenoud,

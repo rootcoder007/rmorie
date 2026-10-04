@@ -155,7 +155,7 @@ morie_psymet_omega <- function(data, nf = 1) {
   vm <- stats::varimax(x, normalize = FALSE, eps = 1e-5)
   L <- unclass(vm$loadings)
   Q <- L * abs(L)^(m - 1)
-  U <- lm.fit(L, Q)$coefficients
+  U <- stats::lm.fit(L, Q)$coefficients
   U <- U %*% diag(sqrt(diag(solve(t(U) %*% U))), ncol(U))
   list(loadings = L %*% U, rotmat = vm$rotmat %*% U)
 }

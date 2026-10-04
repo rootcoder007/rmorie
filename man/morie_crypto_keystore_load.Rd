@@ -25,16 +25,12 @@ Load a key pair from the morie keystore
 }
 \examples{
 set.seed(1)
-\dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-if (morie_crypto_sodium_available()) {
-  path <- tempfile(fileext = ".keystore")
-  morie_crypto_keystore_create("pw", path = path)
-  pk <- as.raw(sample(0:255, 32, replace = TRUE))
-  sk <- as.raw(sample(0:255, 64, replace = TRUE))
-  morie_crypto_keystore_store("alice", pk = pk, sk = sk, password = "pw", path = path)
-  out <- morie_crypto_keystore_load("alice", password = "pw", path = path)
-  print(identical(out$sk, sk))
-  unlink(path)
-}
-\dontshow{\}) # examplesIf}
+path <- tempfile(fileext = ".keystore")
+morie_crypto_keystore_create("pw", path = path)
+pk <- as.raw(sample(0:255, 32, replace = TRUE))
+sk <- as.raw(sample(0:255, 64, replace = TRUE))
+morie_crypto_keystore_store("alice", pk = pk, sk = sk, password = "pw", path = path)
+out <- morie_crypto_keystore_load("alice", password = "pw", path = path)
+print(identical(out$sk, sk))
+unlink(path)
 }

@@ -10,8 +10,6 @@ set.seed(1)
 }
 
 test_that("hex<->raw roundtrip works", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_equal(length(rmorie:::.morie_hex_to_raw("")), 0L)
   r <- as.raw(c(0x00, 0x10, 0xff))
@@ -21,23 +19,17 @@ test_that("hex<->raw roundtrip works", {
 })
 
 test_that("hex_to_raw rejects bad input", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(rmorie:::.morie_hex_to_raw("abc"), "odd length")
   expect_error(rmorie:::.morie_hex_to_raw(c("aa", "bb")), "single")
 })
 
 test_that("raw_to_hex rejects non-raw", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(rmorie:::.morie_raw_to_hex("abc"), "raw")
 })
 
 test_that("resolve_path expands ~", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   out <- rmorie:::.morie_resolve_path("~/foo")
   expect_type(out, "character")
@@ -45,15 +37,11 @@ test_that("resolve_path expands ~", {
 })
 
 test_that("read_store errors on missing keystore", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(rmorie:::.morie_read_store(tempfile()), "not found")
 })
 
 test_that("create -> store -> load roundtrip recovers sk", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   path <- .tmp_keystore()
   on.exit(unlink(path, force = TRUE))
@@ -74,8 +62,6 @@ test_that("create -> store -> load roundtrip recovers sk", {
 })
 
 test_that("keystore_list returns stored key names", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   path <- .tmp_keystore()
   on.exit(unlink(path, force = TRUE))
@@ -88,8 +74,6 @@ test_that("keystore_list returns stored key names", {
 })
 
 test_that("create rejects existing keystore", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   path <- .tmp_keystore()
   on.exit(unlink(path, force = TRUE))
@@ -98,8 +82,6 @@ test_that("create rejects existing keystore", {
 })
 
 test_that("store rejects non-raw pk/sk + non-string name", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   path <- .tmp_keystore()
   on.exit(unlink(path, force = TRUE))
@@ -109,8 +91,6 @@ test_that("store rejects non-raw pk/sk + non-string name", {
 })
 
 test_that("load errors when key not present", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   path <- .tmp_keystore()
   on.exit(unlink(path, force = TRUE))
@@ -119,8 +99,6 @@ test_that("load errors when key not present", {
 })
 
 test_that("load with wrong password fails clean", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   path <- .tmp_keystore()
   on.exit(unlink(path, force = TRUE))
@@ -130,8 +108,6 @@ test_that("load with wrong password fails clean", {
 })
 
 test_that("derive_key requires raw salt + single-string password", {
-  skip_if_not_installed("sodium")
-  skip_if_not(morie_crypto_sodium_available(), "no libsodium")
   set.seed(1)
   expect_error(rmorie:::.morie_derive_key("pw", "notraw"), "raw")
   expect_error(rmorie:::.morie_derive_key(c("a", "b"), as.raw(1:4)), "single")

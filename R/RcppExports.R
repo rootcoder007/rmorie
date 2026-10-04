@@ -25,6 +25,22 @@
     .Call(`_rmorie_morie_crypto_argon2_native`, password, salt, memory, passes, parallelism, tag_length, variant, secret, associated)
 }
 
+.morie_scrypt_romix_impl <- function(B, N, r, p) {
+    .Call(`_rmorie_morie_scrypt_romix`, B, N, r, p)
+}
+
+.morie_aead_seal_impl <- function(key, nonce, pt, aad) {
+    .Call(`_rmorie_morie_aead_seal`, key, nonce, pt, aad)
+}
+
+.morie_aead_open_impl <- function(key, nonce, ct_with_tag, aad) {
+    .Call(`_rmorie_morie_aead_open`, key, nonce, ct_with_tag, aad)
+}
+
+.morie_ks_secretbox_open_impl <- function(key, nonce, box) {
+    .Call(`_rmorie_morie_ks_secretbox_open`, key, nonce, box)
+}
+
 .rmorie_liboqs_available_impl <- function() {
     .Call(`_rmorie_morie_crypto_liboqs_available`)
 }
@@ -317,10 +333,6 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
 
 .morie_match_greedy_kd_cpp <- function(treated, control, ratio, caliper_dist, replace) {
     .Call(`_rmorie_morie_match_greedy_kd_cpp`, treated, control, ratio, caliper_dist, replace)
-}
-
-.morie_match_greedy_1d_cpp <- function(treated_val, control_val, ratio, caliper_width, replace) {
-    .Call(`_rmorie_morie_match_greedy_1d_cpp`, treated_val, control_val, ratio, caliper_width, replace)
 }
 
 .morie_match_nn_cpp <- function(treat_, dist_, ratio_, replace, caliper) {

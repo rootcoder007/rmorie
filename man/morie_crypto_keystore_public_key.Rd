@@ -15,15 +15,13 @@ morie_crypto_keystore_public_key(name, path = .morie_keystore_default_path())
 Raw vector, the public key.
 }
 \description{
-Public keys are stored in the clear, so neither the password nor the
-\pkg{sodium} package is needed (encrypting to someone needs only this).
+Public keys are stored in the clear, so no password is needed
+(encrypting to someone needs only this).
 }
 \examples{
-\dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 path <- tempfile(fileext = ".keystore")
 morie_crypto_keystore_create("pw", path = path)
 morie_crypto_keystore_store("alice", pk = as.raw(1:32), sk = as.raw(1:64), password = "pw", path = path)
 identical(morie_crypto_keystore_public_key("alice", path = path), as.raw(1:32))
 unlink(path)
-\dontshow{\}) # examplesIf}
 }

@@ -12,8 +12,11 @@ morie_download_bootstrap(
 )
 }
 \arguments{
-\item{survey}{One of \code{"csads_2021"}, \code{"csads_2023"},
-\code{"csus_2019"}, \code{"csus_2023"}, or \code{"all"} (default).}
+\item{survey}{A bootstrap key of \code{\link{morie_dataset_catalog}}
+(\code{"ocs22bt"}, \code{"ocs24bt"}, \code{"cu20bt"},
+\code{"cu23bt"}), its survey-year name (\code{"csads_2021"},
+\code{"csads_2023"}, \code{"csus_2019"}, \code{"csus_2023"}), or
+\code{"all"} (default).}
 
 \item{limit}{Max records per CKAN request (default 32000).}
 
