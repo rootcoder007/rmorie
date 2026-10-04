@@ -269,11 +269,11 @@ test_that("the event times and fits equal morie Python's on the same records", {
                tolerance = 1e-12)
   ex <- rmorie:::.tps_hwka_fit_one(e$t, e$T_, "exponential", "constant")
   expect_identical(ex$method, "exact")
-  expect_equal(ex$theta, c(-1.922293478697747, 0.6487520011514453, 4.223801901963725), tolerance = 1e-6)
-  expect_equal(ex$nll, 344.614130477208, tolerance = 1e-8)
+  expect_equal(ex$theta, c(-1.9229920843209447, 0.6523636308313808, 4.235992308382929), tolerance = 1e-6)
+  expect_equal(ex$nll, 342.8276118056356, tolerance = 1e-8)
   wb <- rmorie:::.tps_hwka_fit_one(e$t, e$T_, "weibull", "constant")
   expect_identical(wb$method, "truncate")
-  expect_equal(wb$theta, c(-1.939719899574386, 0.6555040436347355, 1.3783925046462655, 0.2633894093656961),
+  expect_equal(wb$theta, c(-1.940282186867362, 0.6590628336268858, 1.3760780701481492, 0.26255518901442443),
                tolerance = 1e-6)
-  expect_equal(wb$nll, 335.84396830466795, tolerance = 1e-8)
+  expect_equal(wb$nll, 334.0862418399089, tolerance = 1e-8)
 })

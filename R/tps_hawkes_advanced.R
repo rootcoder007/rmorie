@@ -350,7 +350,7 @@ NULL
   # fit_hawkes_general calls, so both arms return the same estimate from the same events
   fit <- rmoriebricklayer::core_hawkes_fit(as.numeric(t), T_, kernel_kind, baseline_kind, method = method, eps = eps)
   t <- as.numeric(t)
-  t <- t[t >= 0 & t < T_]
+  t <- t[t >= 0 & t <= T_]
   u <- rmoriebricklayer::core_hawkes_residuals(t, T_, kernel_kind, fit$theta, baseline = baseline_kind)
   list(
     theta              = as.numeric(fit$theta),
