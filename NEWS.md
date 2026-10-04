@@ -1,5 +1,19 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* Without jsonlite, JSON is read by rmoriebricklayer's port of jsonlite's reader, so every caller
+  sees the same object either way: the Socrata by-id loaders returned `list()` on the default
+  install, because rows carrying a nested location object were left a bare list of records.
+
+* HQC (`morie_crypto_hqc_keygen()` / `_encaps()` / `_decaps()`) runs without liboqs through
+  rmoriebricklayer's native HQC-1 (v5.0.0, a 32-byte secret; liboqs builds use round 4, 64 bytes);
+  the ML-KEM and ML-DSA wrappers check key and ciphertext sizes before either backend, with the same
+  words. The post-quantum and hybrid tests run on every install, and the network-gated tests probe a
+  web host on port 443 (port 53 answered only on DNS servers, so 13 of them could never run).
+
+* `morie_granger_test()` and `morie_transfer_entropy_gaussian()` refuse a constant or perfectly
+  predictable response (an exact fit leaves round-off, not 0, in the residual sum, so the test
+  passed and returned noise), with the same values as morie's Python on every other series.
+
 * Hawkes fits in seconds instead of tens of minutes. `morie_tps_hawkes_advanced_fit()`,
   `morie_tps_compare_hawkes_kernels()` and `morie_tps_hawkes_markovian_vs_nonmarkovian()` fit
   through rmoriebricklayer's `core_hawkes_fit()` (analytic gradient, projected BFGS in C++, the
