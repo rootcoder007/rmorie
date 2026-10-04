@@ -107,3 +107,16 @@ test_that("partial tau shrinks a confounded association", {
   expect_lt(abs(out$partial_tau), 0.5 * out$tau_xy)
   expect_error(morie_partial_tau(1:2, 1:2, 1:2), "4 observations")
 })
+
+test_that("the Granger values equal morie Python's and an exact fit is refused", {
+  # morie.fn.ggrcst / morie.fn.granci on the same series (tests/fn/test_granci.py)
+  x <- sin(1:60)
+  y <- c(0, 0.8 * x[-60]) + 0.3 * cos(3 * (1:60))
+  expect_equal(morie_granger_test(x, y)$statistic, 468.7189192511459, tolerance = 1e-10)
+  te <- morie_transfer_entropy_gaussian(x, y)
+  expect_equal(te$mi, 1.1187555182902371, tolerance = 1e-10)
+  expect_equal(te$p_value, 1.4863128325739549e-30, tolerance = 1e-8)
+  # a perfectly predictable response leaves only round-off in the residual sum
+  expect_error(morie_granger_test(1:8, 1:8), "fits exactly")
+  expect_error(morie_transfer_entropy_gaussian(rep(1, 20), rep(1, 20)), "fits exactly")
+})
