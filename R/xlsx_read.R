@@ -85,7 +85,7 @@
     v[match(l, u)]
   }
   tmp <- paste0(csv, ".part")
-  out <- file(tmp, "w", encoding = "UTF-8")
+  out <- file(tmp, "wb")  # raw UTF-8 bytes: a text connection re-encodes to the locale (C gives "<U+00E9>")
   con <- unz(path, sheet, open = "rb")
   open_cons <- TRUE
   on.exit(if (open_cons) {
@@ -127,7 +127,8 @@
       rows <- sort(unique(row))
       m <- matrix("", length(rows), ncol_max)
       m[cbind(match(row[keep], rows), col[keep])] <- val[keep]
-      utils::write.table(m, out, sep = ",", row.names = FALSE, col.names = FALSE, qmethod = "double")
+      q <- matrix(paste0('"', gsub('"', '""', enc2utf8(m), fixed = TRUE), '"'), nrow(m))
+      writeLines(do.call(paste, c(asplit(q, 2L), sep = ",")), out, useBytes = TRUE)
       done <- done + length(rows)
       if (isTRUE(getOption("morie.progress"))) message(sprintf("\r%s: %s rows to CSV", basename(path), format(done, big.mark = ",")), appendLF = FALSE)
     }
@@ -139,5 +140,5 @@
   open_cons <- FALSE
   file.rename(tmp, csv)
   # rows with no cells at all (<row r="9"/>, formatting only) are not data
-  utils::read.csv(csv, stringsAsFactors = FALSE, check.names = FALSE)
+  utils::read.csv(csv, stringsAsFactors = FALSE, check.names = FALSE, encoding = "UTF-8")
 }
