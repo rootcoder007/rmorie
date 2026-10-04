@@ -85,9 +85,6 @@ morie_cli <- function(args = commandArgs(trailingOnly = TRUE), out = cat) {
           if (!nzchar(tok)) {
             out("--token needs a value: rmorie login --token KEY (or run it in a terminal to paste the key)\n")
             status <- 2L
-          } else if (!requireNamespace("httr2", quietly = TRUE)) {
-            out("the hosted tier needs the httr2 package: install.packages(\"httr2\"), then rmorie login again\n")
-            status <- 1L
           } else if (!isTRUE(.morie_llm_probe_token(tok))) {
             out("the gateway did not accept that key; nothing stored (rmorie login mints one)\n")
             status <- 1L

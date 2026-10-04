@@ -37,7 +37,9 @@
     con <- if (is.null(db_path)) morie_db_connect() else morie_db_connect(db_path)
     return(list(type = "dbi", con = con, close = TRUE))
   }
-  if (!isTRUE(.morie_cache_note$shown)) {  # once per session, not before every listing and pull
+  # once per session for the default cache (not before every listing and pull); always when a
+  # SQL file was asked for by name, since that request is not honoured as asked
+  if (!is.null(db_path) || !isTRUE(.morie_cache_note$shown)) {
     .morie_cache_note$shown <- TRUE
     message("cache: DBI with RSQLite or duckdb is not installed; using the file backend ",
             "(morie_install_extras(c('DBI', 'RSQLite')) enables SQL caches)")
@@ -1045,15 +1047,16 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     return(data)
   }
 
-  where <- file.path(.morie_data_root(), sub("^data/", "", entry$local_path))
+  where <- if (grepl("^(/|[A-Za-z]:[/\\\\]|~)", entry$local_path)) path.expand(entry$local_path) else
+    file.path(.morie_data_root(), sub("^data/", "", entry$local_path))
   if (identical(matched, "mapq")) {
     # participant-level MAPQ data are not distributed: a synthetic toy panel stands in
     message(matched, ": your file is not at ", where, "; returning the synthetic toy panel (n = 400, ",
             "planted structure) so the analyses run. Its numbers demonstrate the pipeline, they are not findings.")
     return(.morie_mapq_synth_panel())
   }
-  stop(matched, " is one of your own research files: place it at ", where,
-       " (set MORIE_DATA_DIR to use another data directory)", call. = FALSE)
+  stop(matched, " is one of your own research files, not found at ", where,
+       ": place it there (set MORIE_DATA_DIR to use another data directory)", call. = FALSE)
 }
 
 # Your own research file: the path as catalogued (relative to the working directory),

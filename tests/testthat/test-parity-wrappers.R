@@ -8,8 +8,8 @@ test_that("morie_calculate_ebac respects Widmark formula and floors at zero", {
   expect_true(ebac > 0 && ebac < 0.5)
   # 8h after 1 drink: should floor at 0
   expect_equal(morie_calculate_ebac(1, 180, 8, 0.73), 0)
-  # Zero/negative weight defends:
-  expect_equal(morie_calculate_ebac(2, 0, 1, 0.73), 0)
+  # a zero or negative weight is a data-entry error, refused (morie raises the same)
+  expect_error(morie_calculate_ebac(2, 0, 1, 0.73), "weight_lbs must be > 0")
 })
 
 test_that("morie_is_over_legal_limit returns 0/1 integers", {

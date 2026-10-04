@@ -330,7 +330,7 @@ std::string to_iso_date(const std::string& human) {
     }();
     // "January 5, 2023" / "January 5 2023" (month first) or "5 janvier 2023" / "3 ao\xc3\xbbt 2017" (day first)
     static const std::regex pat(R"(([^\s\d,.]+)\.?\s+(\d{1,2})(?:st|nd|rd|th|er|e)?,?\s+(\d{4}))");
-    static const std::regex pat_fr(R"((\d{1,2})(?:er|e|st|nd|rd|th)?\s+([^\s\d,.]+)\.?,?\s+(\d{4}))");
+    static const std::regex pat_fr(R"((\d{1,2})(?:er|e|st|nd|rd|th)?\s+(?:of\s+)?([^\s\d,.]+)\.?,?\s+(\d{4}))");
     std::smatch m;
     std::string month, day, year;
     if (std::regex_search(human, m, pat) && kMonths.count(lower(m[1].str()))) {
@@ -400,13 +400,13 @@ std::string html_to_text(const std::string& html) {
     t = std::regex_replace(t, std::regex(R"(<[^>]+>)"), " ");
     t = std::regex_replace(t, std::regex(R"(&nbsp;)"), " ");
     t = std::regex_replace(t, std::regex(R"(&amp;)"), "&");
-    t = std::regex_replace(t, std::regex(R"(&#8217;|&rsquo;)"), "'");
-    t = std::regex_replace(t, std::regex(R"(&#8216;|&lsquo;)"), "'");
-    t = std::regex_replace(t, std::regex(R"(&#8220;|&ldquo;|&#8221;|&rdquo;)"), "\"");
+    t = std::regex_replace(t, std::regex(R"(&#8217;|&rsquo;|&#x2019;)", std::regex::icase), "'");
+    t = std::regex_replace(t, std::regex(R"(&#8216;|&lsquo;|&#x2018;)", std::regex::icase), "'");
+    t = std::regex_replace(t, std::regex(R"(&#8220;|&ldquo;|&#8221;|&rdquo;|&#x201c;|&#x201d;)", std::regex::icase), "\"");
     t = std::regex_replace(t, std::regex(R"(&quot;)"), "\"");
     t = std::regex_replace(t, std::regex(R"(&#0?39;|&apos;)"), "'");
-    t = std::regex_replace(t, std::regex(R"(&#8211;|&ndash;)"), "-");
-    t = std::regex_replace(t, std::regex(R"(&#8212;|&mdash;)"), "--");
+    t = std::regex_replace(t, std::regex(R"(&#8211;|&ndash;|&#x2013;)", std::regex::icase), "-");
+    t = std::regex_replace(t, std::regex(R"(&#8212;|&mdash;|&#x2014;)", std::regex::icase), "--");
     // Angle brackets last: the markup is already gone, so a decoded "<"
     // cannot be mistaken for a tag by anything downstream.
     // accented named entities of the French pages, as UTF-8
