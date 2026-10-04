@@ -181,7 +181,8 @@ test_that("analyze siu fails when no analysis can run, names the file, and refus
   d <- withr::local_tempdir()
   wrong <- file.path(d, "wrong.csv")
   writeLines(c("a,b", "1,2"), wrong)
-  json <- utils::capture.output(r <- suppressMessages(.cap7("analyze", "siu", sprintf('{"data":"%s"}', wrong))))
+  # forward slashes: a Windows temp path's backslashes are not valid JSON escapes
+  json <- utils::capture.output(r <- suppressMessages(.cap7("analyze", "siu", sprintf('{"data":"%s"}', normalizePath(wrong, winslash = "/")))))
   expect_equal(r$status, 1L)
   expect_match(r$text, "every analysis in this subject failed")
   expect_match(paste(json, collapse = ""), "wrong.csv", fixed = TRUE)  # the per-analysis warnings name the file
