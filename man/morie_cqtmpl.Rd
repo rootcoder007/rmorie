@@ -31,7 +31,7 @@ morie_cqtmpl(
 
 \item{max_iter}{Maximum EM iterations.}
 
-\item{tol}{See Usage.}
+\item{tol}{Convergence tolerance on the log-likelihood.}
 }
 \value{
 A list with the LOD score, fitted coefficients, the

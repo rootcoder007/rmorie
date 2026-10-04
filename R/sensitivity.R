@@ -888,10 +888,6 @@ sensitivity_summary <- function(estimate, se, rr = NULL,
 # Phase 1.g wrapper-as-extender entry points
 # =====================================================================
 
-#' Internal helper: Morie Sens Need
-#' @noRd
-
-
 #' E-values for the EValue dispatch family (extender)
 #'
 #' Native E-values for the \pkg{EValue} dispatch family

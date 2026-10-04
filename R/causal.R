@@ -739,7 +739,6 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 #' Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
 #' nuisance learners) is the canonical CRAN counterpart.
 #'
-#' @inheritParams morie_estimate_ate
 #' @param outcome_model Family for the outcome model: `"auto"` (logistic for a 0/1 outcome, linear otherwise), `"linear"` or
 #'   `"logistic"`.
 #' @param data A vector; indexed elementwise.

@@ -126,8 +126,9 @@ NULL
 # `morie_did_diagnostics`) are kept verbatim -- their output shapes
 # are part of the rmorie API.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict
-#' ave sd var aggregate na.omit reshape lsfit setNames
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame
+#' @importFrom stats fitted residuals binomial as.formula sigma complete.cases quantile predict
+#' @importFrom stats ave sd var aggregate na.omit reshape lsfit setNames
 #' @importFrom utils combn head
 NULL
 
@@ -139,6 +140,7 @@ NULL
 #' @param pkg See Usage.
 #' @param fn See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
     stop(
@@ -156,6 +158,7 @@ NULL
 #' @param se See Usage.
 #' @param alpha See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_make_ci <- function(estimate, se, alpha = 0.05) {
   z <- stats::qnorm(1 - alpha / 2)
   c(estimate - z * se, estimate + z * se)
@@ -165,6 +168,7 @@ NULL
 #' @param y See Usage.
 #' @param cluster_ids See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_ols_robust_se <- function(X, y, cluster_ids = NULL) {
   # OLS with heteroskedasticity- or cluster-robust (CR1) variance.
   # Returns list(beta, se).
@@ -199,12 +203,14 @@ NULL
 
 #' @param X See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_add_intercept <- function(X) {
   cbind(`(Intercept)` = 1, X)
 }
 
 #' @param t_val See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_pvalue <- function(t_val) {
   2 * stats::pnorm(-abs(t_val))
 }
@@ -212,6 +218,7 @@ NULL
 #' @param data See Usage.
 #' @param cols See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_drop_na <- function(data, cols) {
   # Every did estimator routes through here, so validate once at the
   # shared entry: assert a data.frame with the required columns, then
@@ -231,6 +238,7 @@ NULL
 #' @param alpha See Usage.
 #' @param details See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_result <- function(estimate, std_error, n_treated, n_control,
                               method, alpha = 0.05, details = list()) {
   t_val <- if (is.finite(std_error) && std_error > 0) estimate / std_error else 0
@@ -259,6 +267,7 @@ NULL
 #' @param unit See Usage.
 #' @param time See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_within_transform <- function(df, varname, unit, time) {
   # Two-way demeaning: x - unit_mean - time_mean + grand_mean.
   v <- as.numeric(df[[varname]])
@@ -272,6 +281,7 @@ NULL
 #' @param X See Usage.
 #' @param treat See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_outcome_regression_att <- function(y, X, treat) {
   X <- as.matrix(X)
   fit <- stats::lm.fit(
@@ -289,6 +299,7 @@ NULL
 #' @param treat See Usage.
 #' @param ps See Usage.
 #' @keywords internal
+#' @noRd
 .morie_did_ipw_att <- function(y, treat, ps) {
   ps <- pmin(pmax(ps, 0.01), 0.99)
   w <- ps / (1 - ps)

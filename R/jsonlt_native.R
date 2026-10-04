@@ -665,6 +665,7 @@ morie_jsonlt_unbox <- function(x) {
 
 #' @param x See Usage.
 #' @export
+#' @noRd
 print.morie_json <- function(x, ...) {
   cat(x, "\n")
   invisible(x)

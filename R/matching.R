@@ -42,6 +42,7 @@ NULL
 #' @param data See Usage.
 #' @param cols See Usage.
 #' @keywords internal
+#' @noRd
 .morie_matching_drop_na <- function(data, cols) {
   data[stats::complete.cases(data[, cols, drop = FALSE]), , drop = FALSE]
 }
@@ -49,6 +50,7 @@ NULL
 #' @param df See Usage.
 #' @param ps See Usage.
 #' @keywords internal
+#' @noRd
 .morie_matching_distance <- function(df, ps) {
   # MatchIt reads a numeric `distance` as the propensity score itself,
   # so a supplied score needs no refit. Alignment mirrors the Python
@@ -70,6 +72,7 @@ NULL
 #' @param p See Usage.
 #' @param eps See Usage.
 #' @keywords internal
+#' @noRd
 .morie_matching_logit <- function(p, eps = 1e-6) {
   p <- pmin(pmax(p, eps), 1 - eps)
   log(p / (1 - p))
@@ -92,6 +95,7 @@ NULL
 #' @param method See Usage.
 #' @param details See Usage.
 #' @keywords internal
+#' @noRd
 .morie_matching_result <- function(matched_data, n_treated, n_matched_control,
                                    match_pairs, method,
                                    details = list()) {
@@ -1153,6 +1157,7 @@ morie_matching_balance_table <- function(data, treatment, covariates,
 
 #' @param estimand See Usage.
 #' @keywords internal
+#' @noRd
 .morie_matching_te_empty <- function(estimand) {
   out <- list(
     estimand   = estimand,
@@ -1175,6 +1180,7 @@ morie_matching_balance_table <- function(data, treatment, covariates,
 #' @param alpha See Usage.
 #' @param details See Usage.
 #' @keywords internal
+#' @noRd
 .morie_matching_te_result <- function(estimand, estimate, se, n_obs,
                                       alpha = 0.05, details = list()) {
   z <- if (se > 0) estimate / se else 0

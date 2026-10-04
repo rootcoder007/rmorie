@@ -99,6 +99,7 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
 
 #' @param root See Usage.
 #' @keywords internal
+#' @noRd
 .entheo_list_subjects <- function(root) {
   fmri_dir <- file.path(root, "fMRI")
   if (!dir.exists(fmri_dir)) {
@@ -115,6 +116,7 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
 #' @param n_chan See Usage.
 #' @param n_parcels See Usage.
 #' @keywords internal
+#' @noRd
 .entheo_synthetic_record <- function(subject_id,
                                      n_tp = 480L, n_chan = 32L,
                                      n_parcels = 100L) {
@@ -153,6 +155,7 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
 #' @param subject_id See Usage.
 #' @param root See Usage.
 #' @keywords internal
+#' @noRd
 .entheo_load_real <- function(subject_id, root) {
   if (!requireNamespace("R.matlab", quietly = TRUE)) {
     return(NULL)

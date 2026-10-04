@@ -483,7 +483,7 @@ morie_joseph_croston_intermittent <- function(y, alpha = 0.1,
 
 #' alpha minimising the SSE profiled over the initial level
 #'
-#' A 400-point scan of ets's bounds [1e-4, 0.9999], then golden-section
+#' A 400-point scan of ets's bounds \[1e-4, 0.9999\], then golden-section
 #' refinement of the best bracket.
 #'
 #' @param y numeric series.

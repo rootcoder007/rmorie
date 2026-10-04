@@ -217,7 +217,7 @@
   sc
 }
 
-#' Root of a score bracketed by [left, right], or NULL without a sign change
+#' Root of a score bracketed by \[left, right\], or NULL without a sign change
 #' @noRd
 .psy_score_root <- function(f, left, right) {
   fl <- f(left)

@@ -513,9 +513,6 @@
 # TPS -- Toronto Police Service ArcGIS
 # ---------------------------------------------------------------------------
 
-#' Default TPS ArcGIS layer registry (verified 2026-05)
-#' @keywords internal
-#' @noRd
 #' Fetch a TPS ArcGIS FeatureServer layer as a data frame.
 #' @keywords internal
 #' @noRd
