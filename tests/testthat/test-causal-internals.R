@@ -141,10 +141,6 @@ test_that(".morie_rdd_get_kernel returns a kernel function or weight vector", {
   expect_true(is.function(out) || is.list(out) || is.character(out))
 })
 
-test_that(".morie_rdd_have_* returns logical", {
-  expect_type(rmorie:::.morie_rdd_have_rdrobust(), "logical")
-})
-
 test_that(".morie_rdd_local_poly_fit fits a local polynomial near cutoff", {
   set.seed(5L)
   n <- 100L

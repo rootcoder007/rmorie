@@ -27,18 +27,23 @@ test_that("morie_causal_impact hard-errors when CausalImpact is missing", {
   )
 })
 
-test_that("morie_causal_weighting hard-errors when WeightIt is missing", {
-  with_mocked_bindings(
-    .causal_have_weightit = function() FALSE,
-    .package = "rmorie",
-    code = expect_error(
-      morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4),
-                                               x = rnorm(20)),
-                             treatment = "t",
-                             covariates = "x"),
-      regexp = "WeightIt"
-    )
-  )
+test_that("morie_causal_weighting is native for glm / cbps / ebal and names WeightIt only for the rest", {
+  set.seed(2)
+  d <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
+  testthat::local_mocked_bindings(requireNamespace = function(package, ...) package != "WeightIt",
+                                  .package = "base")
+  for (est in c("ATE", "ATT", "ATC")) {
+    r <- morie_causal_weighting(d, "t", "x", estimand = est)
+    expect_null(r$weightit)
+    expect_equal(r$weights, morie_weight_ps(d, "t", "x", estimand = est)$weights)
+    expect_equal(r$ess, sum(r$weights)^2 / sum(r$weights^2))
+  }
+  expect_equal(morie_causal_weighting(d, "t", "x", method = "cbps")$weights,
+               morie_weight_cbps(d, "t", "x")$weights)
+  expect_equal(morie_causal_weighting(d, "t", "x", method = "ebal", estimand = "ATT")$weights,
+               morie_weight_entropy(d, "t", "x")$weights)
+  expect_error(morie_causal_weighting(d, "t", "x", method = "bart"), "WeightIt")
+  expect_error(morie_causal_weighting(d, "t", "x", method = "ebal", estimand = "ATE"), "WeightIt")
 })
 
 test_that("morie_causal_robust_se computes natively (no sandwich needed)", {

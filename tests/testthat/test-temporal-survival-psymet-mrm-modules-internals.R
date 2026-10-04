@@ -39,18 +39,6 @@ test_that(".tps_temporal_monthly on empty input returns zero-row list", {
 
 # ==================================================================== psymet.R
 
-test_that(".has_psych returns logical", {
-  expect_type(rmorie:::.has_psych(), "logical")
-})
-
-test_that(".psych_or_stop errors with package name in message when absent", {
-  if (requireNamespace("psych", quietly = TRUE)) {
-    expect_silent(rmorie:::.psych_or_stop("alpha"))
-  } else {
-    expect_error(rmorie:::.psych_or_stop("alpha"), regexp = "psych")
-  }
-})
-
 test_that(".as_item_matrix coerces to double + names columns i1..iN", {
   df <- data.frame(a = 1:3, b = 4:6)
   out <- rmorie:::.as_item_matrix(df)

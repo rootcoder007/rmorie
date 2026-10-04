@@ -161,10 +161,6 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
   fn
 }
 
-#' Internal helper: Morie Rdd Have Rdrobust
-#' @noRd
-.morie_rdd_have_rdrobust  <- function() requireNamespace("rdrobust",  quietly = TRUE)
-
 
 # ---------------------------------------------------------------------------
 # Internal helpers

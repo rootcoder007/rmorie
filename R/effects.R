@@ -348,123 +348,19 @@ estimate_ate_gcomputation <- function(data, treatment, outcome,
     stop("G-computation requires at least 10 complete observations.")
   }
 
-  if (requireNamespace("stdReg", quietly = TRUE)) {
-    fml <- stats::as.formula(
-      paste0(
-        outcome, " ~ ",
-        paste(c(treatment, covariates), collapse = " + ")
-      )
-    )
-    fam <- if (outcome_model == "linear") {
-      stats::gaussian()
-    } else {
-      stats::binomial()
-    }
-    mod <- stats::glm(fml, data = df, family = fam)
-    fitobj <- stdReg::stdGlm(
-      fit = mod, data = df, X = treatment,
-      x = c(0, 1)
-    )
-    sm <- summary(fitobj,
-      contrast = "difference",
-      reference = 0, CI.level = 0.95
-    )
-    est <- sm$est.table
-    return(list(
-      ate           = as.numeric(est[2, "Estimate"]),
-      se            = as.numeric(est[2, "Std. Error"]),
-      ci_lower      = as.numeric(est[2, "lower 0.95"]),
-      ci_upper      = as.numeric(est[2, "upper 0.95"]),
-      n_obs         = n_obs,
-      outcome_model = outcome_model,
-      method        = "stdReg::stdGlm"
-    ))
-  }
-
-  feature_cols <- c(treatment, covariates)
-  fit_and_predict_ate <- function(boot_df) {
-    means <- colMeans(boot_df[, feature_cols, drop = FALSE])
-    sds <- apply(boot_df[, feature_cols, drop = FALSE], 2, stats::sd)
-    sds[sds == 0] <- 1
-    xs <- sweep(sweep(
-      boot_df[, feature_cols, drop = FALSE], 2,
-      means, "-"
-    ), 2, sds, "/")
-    df_fit <- as.data.frame(xs)
-    df_fit[[outcome]] <- boot_df[[outcome]]
-    if (outcome_model == "linear") {
-      mod <- stats::lm(stats::as.formula(paste0(outcome, " ~ .")),
-        data = df_fit
-      )
-    } else {
-      mod <- stats::glm(stats::as.formula(paste0(outcome, " ~ .")),
-        data = df_fit, family = stats::binomial()
-      )
-    }
-    x_t1 <- boot_df[, feature_cols, drop = FALSE]
-    x_t1[[treatment]] <- 1
-    x_t0 <- boot_df[, feature_cols, drop = FALSE]
-    x_t0[[treatment]] <- 0
-    x_t1_s <- as.data.frame(sweep(
-      sweep(x_t1, 2, means, "-"),
-      2, sds, "/"
-    ))
-    x_t0_s <- as.data.frame(sweep(
-      sweep(x_t0, 2, means, "-"),
-      2, sds, "/"
-    ))
-    if (outcome_model == "linear") {
-      y1_hat <- stats::predict(mod, newdata = x_t1_s)
-      y0_hat <- stats::predict(mod, newdata = x_t0_s)
-    } else {
-      y1_hat <- stats::predict(mod,
-        newdata = x_t1_s,
-        type = "response"
-      )
-      y0_hat <- stats::predict(mod,
-        newdata = x_t0_s,
-        type = "response"
-      )
-    }
-    mean(y1_hat - y0_hat)
-  }
-
-  ate <- fit_and_predict_ate(df)
-  .rmorie_local_seed(42)
-  boot_ates <- rep(NA_real_, 500L)
-  for (b in seq_len(500L)) {
-    idx <- sample.int(n_obs, n_obs, replace = TRUE)
-    boot_ates[b] <- tryCatch(
-      fit_and_predict_ate(df[idx, , drop = FALSE]),
-      error = function(e) NA_real_
-    )
-  }
-  boot_ates <- boot_ates[is.finite(boot_ates)]
-  if (length(boot_ates) < 50L) {
-    warning("Fewer than 50 successful bootstrap iterations; ",
-      "SE may be unreliable.",
-      call. = FALSE
-    )
-  }
-  se <- if (length(boot_ates) > 1L) stats::sd(boot_ates) else NA_real_
-  ci_lo <- if (length(boot_ates)) {
-    as.numeric(stats::quantile(boot_ates, 0.025))
-  } else {
-    NA_real_
-  }
-  ci_hi <- if (length(boot_ates)) {
-    as.numeric(stats::quantile(boot_ates, 0.975))
-  } else {
-    NA_real_
-  }
+  fml <- stats::as.formula(paste0(outcome, " ~ ", paste(c(treatment, covariates), collapse = " + ")))
+  fam <- if (outcome_model == "linear") stats::gaussian() else stats::binomial()
+  mod <- stats::glm(fml, data = df, family = fam)
+  g <- .morie_gformula_std(mod, df, treatment)
+  z <- stats::qnorm(0.975)
   list(
-    ate           = ate,
-    se            = se,
-    ci_lower      = ci_lo,
-    ci_upper      = ci_hi,
+    ate           = g$ate,
+    se            = g$se,
+    ci_lower      = g$ate - z * g$se,
+    ci_upper      = g$ate + z * g$se,
     n_obs         = n_obs,
     outcome_model = outcome_model,
-    method        = "inline bootstrap (stdReg not installed)"
+    method        = "g-formula, sandwich SE (stdReg's estimator, native)"
   )
 }
 

@@ -484,19 +484,6 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
   n_treated <- sum(d)
   p_treat <- mean(d)
 
-  # ---- Prefer DoubleML::DoubleMLIRM when the stack is installed -----
-  use_doubleml <- requireNamespace("DoubleML", quietly = TRUE) &&
-    requireNamespace("mlr3", quietly = TRUE) &&
-    requireNamespace("mlr3learners", quietly = TRUE)
-
-  if (use_doubleml && is.null(cluster_cols)) {
-    # Defer to the package-internal IRM helper from causal.R, which
-    # already handles the DoubleML branch + the cross-fit ridge
-    # fallback. ATTE / ATC are not exposed by that helper, so we still
-    # need to run the manual cross-fit below to compute them; the
-    # DoubleML call is therefore informational here.
-  }
-
   # ---- Cross-fit nuisance models ------------------------------------
   .rmorie_local_seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = n))

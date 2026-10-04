@@ -114,63 +114,6 @@ NULL
   out
 }
 
-#' @noRd
-.morie_matching_have_cpp <- function(name) {
-  exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
-}
-
-#' @param fn See Usage.
-#' @keywords internal
-.morie_matching_need_matchit <- function(fn) {
-  if (!.morie_matching_have("MatchIt")) {
-    stop(sprintf(
-      "`%s()` requires the 'MatchIt' package. Install it with %s",
-      fn, "install.packages(\"MatchIt\")"), call. = FALSE)
-  }
-  invisible(TRUE)
-}
-
-#' @param mi See Usage.
-#' @param df See Usage.
-#' @param treatment See Usage.
-#' @param method_label See Usage.
-#' @param details See Usage.
-#' @keywords internal
-.morie_matching_matchit_to_result <- function(mi, df, treatment, method_label,
-                                              details = list()) {
-  md <- MatchIt::match.data(mi)
-  pairs_df <- .morie_matching_empty_pairs()
-  mm <- mi$match.matrix
-  if (!is.null(mm) && nrow(mm) > 0L) {
-    treated_rn <- rownames(mm)
-    recs <- list()
-    for (i in seq_len(nrow(mm))) {
-      t_id <- treated_rn[i]
-      for (j in seq_len(ncol(mm))) {
-        c_id <- mm[i, j]
-        if (is.na(c_id) || identical(as.character(c_id), "")) next
-        recs[[length(recs) + 1L]] <- data.frame(
-          treated_idx = t_id,
-          control_idx = as.character(c_id),
-          distance    = NA_real_,
-          stringsAsFactors = FALSE
-        )
-      }
-    }
-    if (length(recs) > 0L) pairs_df <- do.call(rbind, recs)
-  }
-  n_treated <- sum(md[[treatment]] == 1)
-  n_control <- sum(md[[treatment]] == 0)
-  .morie_matching_result(
-    matched_data       = md,
-    n_treated          = n_treated,
-    n_matched_control  = n_control,
-    match_pairs        = pairs_df,
-    method             = method_label,
-    details            = c(list(matchit = mi), details)
-  )
-}
-
 
 # ---------------------------------------------------------------------------
 # Propensity score estimation

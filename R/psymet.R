@@ -10,21 +10,6 @@
 #   McDonald (1999). Test Theory: A Unified Treatment.
 #   Revelle (2024). psych R package.
 
-#' Internal helper: Has Psych
-#' @noRd
-.has_psych <- function() requireNamespace("psych", quietly = TRUE)
-
-#' Internal helper: Psych Or Stop
-#' @noRd
-.psych_or_stop <- function(fn) {
-  if (!.has_psych()) {
-    stop(sprintf(
-      "morie_psymet_%s requires the 'psych' package. Install with: install.packages('psych')",
-      fn
-    ), call. = FALSE)
-  }
-}
-
 #' Internal helper: As Item Matrix
 #' @noRd
 .as_item_matrix <- function(data) {

@@ -73,17 +73,6 @@ test_that(".morie_did_ols_robust_se with cluster_ids returns clustered SE", {
   expect_true(is.numeric(out) || is.list(out))
 })
 
-test_that(".morie_did_have_* helpers return a logical", {
-  expect_type(rmorie:::.morie_did_have_fixest(), "logical")
-  expect_type(rmorie:::.morie_did_have_did(),    "logical")
-  expect_type(rmorie:::.morie_did_have_bacondecomp(), "logical")
-  expect_type(rmorie:::.morie_did_have_coresynth(), "logical")
-  if (exists(".morie_did_have_fwildboot", envir = asNamespace("rmorie"), inherits = FALSE)) {
-    expect_type(rmorie:::.morie_did_have_fwildboot(), "logical")
-  }
-  expect_type(rmorie:::.morie_did_have_sandwich(), "logical")
-})
-
 test_that(".morie_did_outcome_regression_att returns ATT on synthetic data", {
   set.seed(3L)
   n <- 80L
@@ -160,7 +149,3 @@ test_that(".morie_matching_empty_pairs returns the empty-pairs sentinel", {
   expect_type(out, "list")
 })
 
-test_that(".morie_matching_have_cpp returns logical for cpp fn names", {
-  expect_type(rmorie:::.morie_matching_have_cpp("morie_matching_nearest_neighbor"),
-              "logical")
-})

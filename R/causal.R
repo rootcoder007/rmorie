@@ -49,64 +49,10 @@ NULL
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Internal helper: Causal Have Weightit
-#' @noRd
-.causal_have_weightit     <- function() {
-  requireNamespace("WeightIt",     quietly = TRUE)
-}
-#' Internal helper: Causal Have Aipw
-#' @noRd
-.causal_have_aipw         <- function() {
-  requireNamespace("AIPW",         quietly = TRUE)
-}
-#' Internal helper: Causal Have Stdreg
-#' @noRd
-.causal_have_stdreg       <- function() {
-  requireNamespace("stdReg",       quietly = TRUE)
-}
-#' Internal helper: Causal Have Doubleml
-#' @noRd
-.causal_have_doubleml     <- function() {
-  requireNamespace("DoubleML",     quietly = TRUE) &&
-    requireNamespace("mlr3",         quietly = TRUE) &&
-    requireNamespace("mlr3learners", quietly = TRUE) &&
-    requireNamespace("ranger",       quietly = TRUE)
-}
-#' Internal helper: Causal Have Evalue
-#' @noRd
-.causal_have_evalue       <- function() {
-  requireNamespace("EValue",       quietly = TRUE)
-}
-#' Internal helper: Causal Have Rbounds
-#' @noRd
-.causal_have_rbounds      <- function() {
-  requireNamespace("rbounds",      quietly = TRUE)
-}
-#' Internal helper: Causal Have Sensitivitymv
-#' @noRd
-.causal_have_sensitivitymv <- function() {
-  requireNamespace("sensitivitymv", quietly = TRUE)
-}
 #' Internal helper: Causal Have Causalimpact
 #' @noRd
 .causal_have_causalimpact <- function() {
   requireNamespace("CausalImpact", quietly = TRUE)
-}
-#' Internal helper: Causal Have Aer
-#' @noRd
-.causal_have_aer          <- function() {
-  requireNamespace("AER",          quietly = TRUE)
-}
-#' Internal helper: Causal Have Grf
-#' @noRd
-.causal_have_grf          <- function() {
-  requireNamespace("grf",          quietly = TRUE)
-}
-#' Internal helper: Causal Have Ivreg
-#' @noRd
-.causal_have_ivreg        <- function() {
-  requireNamespace("ivreg",        quietly = TRUE) ||
-    requireNamespace("AER",          quietly = TRUE)
 }
 
 # Internal helper: Fit Propensity
@@ -1331,6 +1277,44 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 # G-computation (outcome regression ATE)
 # ---------------------------------------------------------------------------
 
+#' Internal: the standardised (g-formula) ATE of a fitted GLM and its sandwich SE
+#'
+#' The M-estimation sandwich of stdReg::stdGlm (Sjolander 2016), computed
+#' natively: the GLM score equations stacked with the two standardisation
+#' equations, V = I^-1 J I^-T / n, and the ATE's SE by the delta method. The
+#' plain sd(mu1 - mu0) / sqrt(n) ignores the outcome model's own uncertainty
+#' and understates it. Cross-validated against stdReg in tests/cross.
+#' @noRd
+.morie_gformula_std <- function(fit, data, treatment) {
+  X <- stats::model.matrix(fit)
+  n <- nrow(X)
+  w <- fit$prior.weights
+  dat <- data[match(rownames(X), rownames(data)), , drop = FALSE]
+  mu_eta <- fit$family$mu.eta
+  pred <- matrix(NA_real_, n, 2L)
+  si_beta <- matrix(NA_real_, 2L, ncol(X))
+  for (i in 1:2) {
+    dx <- dat
+    dx[[treatment]] <- i - 1
+    pred[, i] <- as.numeric(stats::predict(fit, newdata = dx, type = "response"))
+    deta <- mu_eta(as.numeric(stats::predict(fit, newdata = dx)))
+    Xx <- stats::model.matrix(stats::terms(fit), data = dx)
+    si_beta[i, ] <- colMeans(w * deta * Xx)
+  }
+  est <- colSums(w * pred) / sum(w)
+  scores <- cbind(w * (pred - matrix(est, n, 2L, byrow = TRUE)),
+                  w * X * as.numeric(stats::residuals(fit, type = "response")))
+  J <- stats::var(scores)
+  I <- rbind(cbind(-diag(2L) * mean(w), si_beta),
+             cbind(matrix(0, ncol(X), 2L), -solve(summary(fit)$cov.unscaled) / n))
+  Ii <- solve(I)
+  V <- (Ii %*% J %*% t(Ii) / n)[1:2, 1:2]
+  ate <- est[2L] - est[1L]
+  se <- sqrt(V[1L, 1L] + V[2L, 2L] - 2 * V[1L, 2L])
+  list(ate = ate, se = se)
+}
+
+
 #' G-computation (outcome regression) ATE estimator
 #'
 #' Estimates the ATE by:
@@ -1367,36 +1351,9 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
   )
   fit <- stats::glm(formula, data = data, family = fam)
 
-  # Standardisation (g-formula) with the M-estimation sandwich of stdReg::stdGlm
-  # (Sjolander 2016), computed natively: the GLM score equations stacked with
-  # the two standardisation equations, V = I^-1 J I^-T / n, and the ATE's SE by
-  # the delta method. (The plain sd(mu1 - mu0) / sqrt(n) ignores the outcome
-  # model's own uncertainty and understates it.)
-  X <- stats::model.matrix(fit)
-  n <- nrow(X)
-  w <- fit$prior.weights
-  dat <- data[match(rownames(X), rownames(data)), , drop = FALSE]
-  mu_eta <- fit$family$mu.eta
-  pred <- matrix(NA_real_, n, 2L)
-  si_beta <- matrix(NA_real_, 2L, ncol(X))
-  for (i in 1:2) {
-    dx <- dat
-    dx[[treatment]] <- i - 1
-    pred[, i] <- as.numeric(stats::predict(fit, newdata = dx, type = "response"))
-    deta <- mu_eta(as.numeric(stats::predict(fit, newdata = dx)))
-    Xx <- stats::model.matrix(stats::terms(fit), data = dx)
-    si_beta[i, ] <- colMeans(w * deta * Xx)
-  }
-  est <- colSums(w * pred) / sum(w)
-  scores <- cbind(w * (pred - matrix(est, n, 2L, byrow = TRUE)),
-                  w * X * as.numeric(stats::residuals(fit, type = "response")))
-  J <- stats::var(scores)
-  I <- rbind(cbind(-diag(2L) * mean(w), si_beta),
-             cbind(matrix(0, ncol(X), 2L), -solve(summary(fit)$cov.unscaled) / n))
-  Ii <- solve(I)
-  V <- (Ii %*% J %*% t(Ii) / n)[1:2, 1:2]
-  ate <- est[2L] - est[1L]
-  se <- sqrt(V[1L, 1L] + V[2L, 2L] - 2 * V[1L, 2L])
+  g <- .morie_gformula_std(fit, data, treatment)
+  ate <- g$ate
+  se <- g$se
   ci <- .wald_ci(ate, se)
   list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
 }
@@ -1657,29 +1614,28 @@ morie_causal_weighting <- function(data, treatment, covariates,
                                    method = "glm",
                                    estimand = c("ATE", "ATT", "ATC"),
                                    ...) {
-  if (!.causal_have_weightit()) {
-    stop(
-      "morie_causal_weighting requires the 'WeightIt' package. ",
-      "Install with install.packages('WeightIt').",
-      call. = FALSE
-    )
-  }
   estimand <- match.arg(estimand)
-  formula <- stats::as.formula(
-    paste(treatment, "~", paste(covariates, collapse = " + "))
+  native <- switch(method,
+    glm = , ps = morie_weight_ps(data, treatment, covariates, estimand = estimand),
+    cbps = morie_weight_cbps(data, treatment, covariates, estimand = estimand),
+    ebal = , entropy = if (estimand == "ATT") morie_weight_entropy(data, treatment, covariates) else NULL,
+    NULL
   )
-  w <- WeightIt::weightit(formula, data = data, method = method,
-                          estimand = estimand, ...)
+  if (!is.null(native)) {
+    wt <- native$weights
+    return(list(weights = wt, propensity_scores = native$propensity, method = method,
+                estimand = estimand, ess = sum(wt)^2 / sum(wt^2), weightit = NULL))
+  }
+  # a method this package has no engine for: WeightIt's, explicitly
+  if (!requireNamespace("WeightIt", quietly = TRUE)) {
+    stop(sprintf("method = \"%s\" (estimand %s) is WeightIt's; install.packages(\"WeightIt\"), ", method, estimand),
+         "or use a native method: \"glm\", \"cbps\", or \"ebal\" for the ATT", call. = FALSE)
+  }
+  formula <- stats::as.formula(paste(treatment, "~", paste(covariates, collapse = " + ")))
+  w <- WeightIt::weightit(formula, data = data, method = method, estimand = estimand, ...)
   wt <- as.numeric(w$weights)
-  ess <- (sum(wt)^2) / sum(wt^2)
-  list(
-    weights = wt,
-    propensity_scores = if (!is.null(w$ps)) as.numeric(w$ps) else NULL,
-    method = method,
-    estimand = estimand,
-    ess = ess,
-    weightit = w
-  )
+  list(weights = wt, propensity_scores = if (!is.null(w$ps)) as.numeric(w$ps) else NULL,
+       method = method, estimand = estimand, ess = sum(wt)^2 / sum(wt^2), weightit = w)
 }
 
 

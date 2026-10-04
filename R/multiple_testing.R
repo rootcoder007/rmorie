@@ -74,15 +74,6 @@ NULL
 #' Internal helper: Mt Have Qvalue
 #' @noRd
 .mt_have_qvalue       <- function() requireNamespace("qvalue",       quietly = TRUE)
-#' Internal helper: Mt Have Harmonicmeanp
-#' @noRd
-.mt_have_harmonicmeanp <- function() requireNamespace("harmonicmeanp", quietly = TRUE)
-#' Internal helper: Mt Have Gmcp
-#' @noRd
-.mt_have_gmcp         <- function() requireNamespace("gMCP",         quietly = TRUE)
-#' Internal helper: Mt Have Mutoss
-#' @noRd
-.mt_have_mutoss       <- function() requireNamespace("mutoss",       quietly = TRUE)
 
 #' Internal helper: Mt Result
 #' @noRd
