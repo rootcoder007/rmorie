@@ -7,9 +7,11 @@
 morie_tps_compare_hawkes_kernels(
   df,
   ds_name = "?",
-  max_n = 4000L,
+  max_n = NULL,
   baselines = .TPS_HAWKES_BASELINES,
-  kernels = .TPS_HAWKES_KERNELS
+  kernels = .TPS_HAWKES_KERNELS,
+  method = "auto",
+  eps = 1e-09
 )
 }
 \arguments{
@@ -17,11 +19,15 @@ morie_tps_compare_hawkes_kernels(
 
 \item{ds_name}{Dataset name used in titles.}
 
-\item{max_n}{Maximum events to fit.}
+\item{max_n}{Maximum events to fit; \code{NULL} (the default) keeps every event.}
 
 \item{baselines}{Baseline kinds to sweep over.}
 
 \item{kernels}{Kernel kinds to sweep over.}
+
+\item{method}{Likelihood route, as in \code{\link{morie_tps_hawkes_advanced_fit}}.}
+
+\item{eps}{Error level of \code{"soe"} and \code{"truncate"}.}
 }
 \value{
 A \code{morie_rich_result} with a per-combination summary

@@ -4,14 +4,24 @@
 \alias{morie_tps_hawkes_markovian_vs_nonmarkovian}
 \title{Focused 2x2 Markovian vs non-Markovian Hawkes comparison}
 \usage{
-morie_tps_hawkes_markovian_vs_nonmarkovian(df, ds_name = "?", max_n = 4000L)
+morie_tps_hawkes_markovian_vs_nonmarkovian(
+  df,
+  ds_name = "?",
+  max_n = NULL,
+  method = "auto",
+  eps = 1e-09
+)
 }
 \arguments{
 \item{df}{Data frame with \code{OCC_DATE} or \code{REPORT_DATE}.}
 
 \item{ds_name}{Dataset name used in titles.}
 
-\item{max_n}{Maximum events to fit.}
+\item{max_n}{Maximum events to fit; \code{NULL} (the default) keeps every event.}
+
+\item{method}{Likelihood route, as in \code{\link{morie_tps_hawkes_advanced_fit}}.}
+
+\item{eps}{Error level of \code{"soe"} and \code{"truncate"}.}
 }
 \value{
 A \code{morie_rich_result} from

@@ -344,68 +344,33 @@ NULL
 
 #' Internal helper: Tps Hwka Fit One
 #' @noRd
-.tps_hwka_fit_one <- function(t, T_, kernel_kind, baseline_kind) {
+.tps_hwka_fit_one <- function(t, T_, kernel_kind, baseline_kind, method = "auto", eps = 1e-9) {
+  # the shared C++ fit (rmoriebricklayer::core_hawkes_fit: analytic gradient, projected BFGS, the
+  # exact / sum-of-exponentials / truncated / EM / INAR routes) -- the routine morie's Python
+  # fit_hawkes_general calls, so both arms return the same estimate from the same events
+  fit <- rmoriebricklayer::core_hawkes_fit(as.numeric(t), T_, kernel_kind, baseline_kind, method = method, eps = eps)
   t <- as.numeric(t)
   t <- t[t >= 0 & t < T_]
-  n <- length(t)
-  if (n < 50L) {
-    stop(sprintf("too few events (%d) for non-stationary fit", n))
-  }
-  mean_dt <- if (n > 1L) mean(diff(t)) else 1
-  x0 <- .tps_hwka_x0(kernel_kind, baseline_kind, n, T_, mean_dt)
-
-  nb <- .tps_hwka_n_baseline_params(baseline_kind)
-  lower <- c(-15, rep(-5, nb - 1L), 1e-3)
-  upper <- c(15, rep(5, nb - 1L), 0.99)
-  if (identical(kernel_kind, "exponential")) {
-    lower <- c(lower, 0.1)
-    upper <- c(upper, 25)
-  } else if (identical(kernel_kind, "weibull")) {
-    lower <- c(lower, 0.1, 1e-3)
-    upper <- c(upper, 15, 100)
-  } else if (identical(kernel_kind, "gamma")) {
-    lower <- c(lower, 0.1, 0.05)
-    upper <- c(upper, 15, 25)
-  } else if (identical(kernel_kind, "lomax")) {
-    lower <- c(lower, 1.05, 1e-3)
-    upper <- c(upper, 30, 100)
-  }
-  res <- stats::optim(par = x0,
-                       fn  = .tps_hwka_neg_loglik_general,
-                       t = t, T_ = T_,
-                       kernel_kind = kernel_kind,
-                       baseline_kind = baseline_kind,
-                       method = "L-BFGS-B",
-                       lower = lower, upper = upper,
-                       control = list(maxit = 1000L,
-                                       factr = 1e7))
-  theta <- res$par
-  nll <- as.numeric(res$value)
-  parts <- .tps_hwka_split_theta(theta, kernel_kind, baseline_kind)
-  k <- length(theta)
-  aic <- 2 * k + 2 * nll
-  bic <- k * log(n) + 2 * nll
-
-  u <- .tps_hwka_time_rescaling(theta, t, T_,
-                                  kernel_kind, baseline_kind)
-  ks <- stats::ks.test(u, "punif")
+  u <- rmoriebricklayer::core_hawkes_residuals(t, T_, kernel_kind, fit$theta, baseline = baseline_kind)
   list(
-    theta              = as.numeric(theta),
-    baseline_params    = as.numeric(parts$a),
-    branching_ratio    = as.numeric(parts$eta),
-    kernel_params      = as.numeric(parts$psi),
-    nll                = nll,
-    aic                = aic,
-    bic                = bic,
-    n                  = n,
+    theta              = as.numeric(fit$theta),
+    baseline_params    = as.numeric(fit$baseline_params),
+    branching_ratio    = as.numeric(fit$branching_ratio),
+    kernel_params      = as.numeric(fit$kernel_params),
+    nll                = fit$nll,
+    aic                = fit$aic,
+    bic                = fit$bic,
+    n                  = fit$n,
     T_days             = as.numeric(T_),
-    k_params           = as.integer(k),
-    ks_stat            = as.numeric(ks$statistic),
-    ks_pvalue          = as.numeric(ks$p.value),
+    k_params           = as.integer(fit$k_params),
+    ks_stat            = as.numeric(fit$ks_stat),
+    ks_pvalue          = as.numeric(fit$ks_pvalue),
     rescaled_uniforms  = utils::head(u, 1000L),
     kernel_kind        = kernel_kind,
     baseline_kind      = baseline_kind,
-    converged          = isTRUE(res$convergence == 0L)
+    method             = fit$method,
+    eps                = fit$eps,
+    converged          = isTRUE(fit$converged)
   )
 }
 
@@ -416,23 +381,39 @@ NULL
 
 #' Internal helper: Tps Hwka Events To Days
 #' @noRd
-.tps_hwka_events_to_days <- function(df, max_n) {
-  date_col <- intersect(c("OCC_DATE", "REPORT_DATE"), colnames(df))[1]
-  if (is.na(date_col)) {
-    stop("NotYetPorted: no OCC_DATE or REPORT_DATE column found")
+.tps_hwka_events_to_days <- function(df, max_n = NULL, min_year = 2014L) {
+  # as morie's Python _events_to_days / _date_series, step for step, so both arms fit the same
+  # vector: local dates from OCC_YEAR / OCC_MONTH / OCC_DAY when present (the ArcGIS feed turns
+  # OCC_DATE into UTC, moving late-evening events to the next day), else OCC_DATE / REPORT_DATE
+  # (epoch milliseconds or text); years before min_year dropped; an optional subsample of the
+  # max_n events with the smallest splitmix keys (seed 43); a stable sort; the splitmix64
+  # within-day jitter (seed 42) -- rmoriebricklayer::core_uniforms, the same numbers as Python's
+  dt <- NULL
+  if (all(c("OCC_YEAR", "OCC_MONTH", "OCC_DAY") %in% colnames(df))) {
+    mon <- as.character(df$OCC_MONTH)
+    mnum <- suppressWarnings(as.integer(mon))
+    by_name <- match(tolower(trimws(mon)), tolower(month.name))
+    by_abb <- match(tolower(substr(trimws(mon), 1L, 3L)), tolower(month.abb))
+    mnum <- ifelse(is.na(mnum), ifelse(is.na(by_name), by_abb, by_name), mnum)
+    d <- suppressWarnings(as.POSIXct(sprintf("%04d-%02d-%02d", as.integer(df$OCC_YEAR), mnum,
+                                             as.integer(df$OCC_DAY)), tz = "UTC", format = "%Y-%m-%d"))
+    d <- d[!is.na(d)]
+    if (length(d)) dt <- d
   }
-  dt <- .morie_tps_parse_datetime(df[[date_col]])
-  dt <- dt[!is.na(dt)]
-  if (length(dt) > max_n) {
-    .rmorie_local_seed(42L)
-    dt <- sort(sample(dt, max_n))
+  if (is.null(dt)) {
+    date_col <- intersect(c("OCC_DATE", "REPORT_DATE"), colnames(df))[1]
+    if (is.na(date_col)) stop("no OCC_DATE or REPORT_DATE column found", call. = FALSE)
+    x <- df[[date_col]]
+    dt <- if (is.numeric(x)) as.POSIXct(x / 1000, origin = "1970-01-01", tz = "UTC") else .morie_tps_parse_datetime(x)
+    dt <- dt[!is.na(dt)]
   }
-  t0 <- min(dt)
-  t <- as.numeric(difftime(dt, t0, units = "days"))
-  .rmorie_local_seed(42L)
-  # Uniform(0,1) jitter to break daily ties (sub-day resolution is
-  # not observed in TPS data, so jitter preserves event-day order).
-  t <- t + stats::runif(length(t))
+  if (!is.null(min_year)) dt <- dt[as.integer(format(dt, "%Y", tz = "UTC")) >= min_year]
+  if (!is.null(max_n) && is.finite(max_n) && length(dt) > max_n) {
+    keys <- rmoriebricklayer::core_uniforms(length(dt), 43)
+    dt <- dt[sort(order(keys)[seq_len(max_n)])]
+  }
+  dt <- dt[order(as.numeric(dt), method = "radix")]
+  t <- as.numeric(difftime(dt, dt[[1]], units = "days")) + rmoriebricklayer::core_uniforms(length(dt), 42)
   t <- sort(t)
   list(t = t, T_ = as.numeric(t[length(t)]))
 }
@@ -449,11 +430,16 @@ NULL
 #' (exponential, gamma, Weibull, Lomax) and two baselines (constant,
 #' sinusoidal) of Kwan-Chen-Dunsmuir (2024).
 #'
-#' If the optional packages \pkg{hawkes} or \pkg{emhawkes} are
-#' available the (exponential, constant) special case can delegate
-#' to their compiled likelihood routines; the non-Markovian kernels
-#' always use the base-R O(n^2) negative log-likelihood with
-#' L-BFGS-B optimisation under explicit box constraints.
+#' The fit is rmoriebricklayer's \code{core_hawkes_fit()} (the C++ routine morie's Python
+#' \code{fit_hawkes_general} calls): maximum likelihood with the analytic gradient by projected
+#' BFGS under box constraints, from the default start and from the exponential fit. \code{method}
+#' chooses how the likelihood is evaluated: \code{"exact"} (Ozaki's O(n) recursion for the
+#' exponential kernel; for Weibull and gamma the double sum stops where the kernel underflows to
+#' 0), \code{"soe"} (Lomax, and gamma with shape < 1, as a sum of exponentials with relative error
+#' \code{eps}), \code{"truncate"} (kernel tail mass below \code{eps} left out), \code{"em"} (the
+#' EM algorithm) or \code{"inar"} (Kirchner's INAR estimator, constant baseline); \code{"auto"} is
+#' \code{"exact"} for the exponential kernel, \code{"truncate"} for Weibull and \code{"soe"} for
+#' Lomax and gamma.
 #'
 #' Goodness-of-fit is reported via time-rescaling residuals (Brown
 #' \emph{et al.} 2002) and a Kolmogorov-Smirnov test against
@@ -466,8 +452,12 @@ NULL
 #' @param baseline Baseline kind: \code{"constant"} or
 #'   \code{"sinusoidal"}.
 #' @param ds_name Dataset name used in titles and warnings.
-#' @param max_n Maximum number of events to retain (for tractable
-#'   O(n^2) MLE on the non-Markovian path).
+#' @param max_n Maximum number of events to retain; \code{NULL} (the default) keeps every event.
+#'   A subsample thins the process (and its clustering), so it is for quick looks only; it is
+#'   the same subsample as morie's Python (splitmix64 keys).
+#' @param method Likelihood route: \code{"auto"}, \code{"exact"}, \code{"soe"},
+#'   \code{"truncate"}, \code{"em"} or \code{"inar"} (see Details).
+#' @param eps Error level of \code{"soe"} and \code{"truncate"}.
 #'
 #' @return A \code{morie_rich_result} with branching ratio,
 #'   stationarity verdict, kernel and baseline parameters,
@@ -492,7 +482,9 @@ morie_tps_hawkes_advanced_fit <- function(df,
                                             kernel = "gamma",
                                             baseline = "sinusoidal",
                                             ds_name = "?",
-                                            max_n = 5000L) {
+                                            max_n = NULL,
+                                            method = "auto",
+                                            eps = 1e-9) {
   if (!(kernel %in% .TPS_HAWKES_KERNELS)) {
     stop(sprintf("unknown kernel: %s", kernel))
   }
@@ -515,7 +507,7 @@ morie_tps_hawkes_advanced_fit <- function(df,
 
   fit <- tryCatch(
     .tps_hwka_fit_one(t, T_, kernel_kind = kernel,
-                       baseline_kind = baseline),
+                       baseline_kind = baseline, method = method, eps = eps),
     error = function(e) {
       list(error = conditionMessage(e))
     })
@@ -577,9 +569,11 @@ morie_tps_hawkes_advanced_fit <- function(df,
 #'
 #' @param df Data frame with \code{OCC_DATE} or \code{REPORT_DATE}.
 #' @param ds_name Dataset name used in titles.
-#' @param max_n Maximum events to fit.
+#' @param max_n Maximum events to fit; \code{NULL} (the default) keeps every event.
 #' @param baselines Baseline kinds to sweep over.
 #' @param kernels Kernel kinds to sweep over.
+#' @param method Likelihood route, as in \code{\link{morie_tps_hawkes_advanced_fit}}.
+#' @param eps Error level of \code{"soe"} and \code{"truncate"}.
 #'
 #' @return A \code{morie_rich_result} with a per-combination summary
 #'   table, the best (lowest-AIC) combination, and the AIC gap
@@ -602,9 +596,11 @@ morie_tps_hawkes_advanced_fit <- function(df,
 #' @export
 morie_tps_compare_hawkes_kernels <- function(df,
                                                ds_name = "?",
-                                               max_n = 4000L,
+                                               max_n = NULL,
                                                baselines = .TPS_HAWKES_BASELINES,
-                                               kernels = .TPS_HAWKES_KERNELS) {
+                                               kernels = .TPS_HAWKES_KERNELS,
+                                               method = "auto",
+                                               eps = 1e-9) {
   if (!any(c("OCC_DATE", "REPORT_DATE") %in% colnames(df))) {
     return(.tps_hwka_result(
       title = sprintf("Hawkes comparison -- %s", ds_name),
@@ -621,7 +617,7 @@ morie_tps_compare_hawkes_kernels <- function(df,
   rows <- list()
   for (k in kernels) {
     for (b in baselines) {
-      fit <- tryCatch(.tps_hwka_fit_one(t, T_, k, b),
+      fit <- tryCatch(.tps_hwka_fit_one(t, T_, k, b, method = method, eps = eps),
                        error = function(e)
                          list(error = conditionMessage(e)))
       row <- if (!is.null(fit$error)) {
@@ -692,7 +688,9 @@ morie_tps_compare_hawkes_kernels <- function(df,
 #'
 #' @param df Data frame with \code{OCC_DATE} or \code{REPORT_DATE}.
 #' @param ds_name Dataset name used in titles.
-#' @param max_n Maximum events to fit.
+#' @param max_n Maximum events to fit; \code{NULL} (the default) keeps every event.
+#' @param method Likelihood route, as in \code{\link{morie_tps_hawkes_advanced_fit}}.
+#' @param eps Error level of \code{"soe"} and \code{"truncate"}.
 #'
 #' @return A \code{morie_rich_result} from
 #'   \code{morie_tps_compare_hawkes_kernels} restricted to the 2x2
@@ -710,9 +708,11 @@ morie_tps_compare_hawkes_kernels <- function(df,
 #' @export
 morie_tps_hawkes_markovian_vs_nonmarkovian <- function(df,
                                                          ds_name = "?",
-                                                         max_n = 4000L) {
+                                                         max_n = NULL,
+                                                         method = "auto",
+                                                         eps = 1e-9) {
   morie_tps_compare_hawkes_kernels(
     df, ds_name = ds_name, max_n = max_n,
     kernels = c("exponential", "gamma"),
-    baselines = c("constant", "sinusoidal"))
+    baselines = c("constant", "sinusoidal"), method = method, eps = eps)
 }

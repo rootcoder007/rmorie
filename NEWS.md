@@ -1,5 +1,17 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* Hawkes fits in seconds instead of tens of minutes. `morie_tps_hawkes_advanced_fit()`,
+  `morie_tps_compare_hawkes_kernels()` and `morie_tps_hawkes_markovian_vs_nonmarkovian()` fit
+  through rmoriebricklayer's `core_hawkes_fit()` (analytic gradient, projected BFGS in C++, the
+  routine morie's Python calls) and take a `method`: `"exact"` (Ozaki's O(n) recursion for the
+  exponential kernel), `"soe"` (Lomax, and gamma with shape < 1, as sums of exponentials with
+  relative error `eps`; Beylkin & Monzon 2010), `"truncate"` (kernel tail mass below `eps` left
+  out), `"em"` (Veen & Schoenberg 2008) and `"inar"` (Kirchner 2017); `"auto"` is exact for the
+  exponential kernel, truncate for Weibull and soe for Lomax and gamma. The reported `nll` is always
+  the exact likelihood, so AIC compares across routes. They fit every event by default (`max_n =
+  NULL`; a requested subsample is deterministic), prepare the event times as morie does, and the KS
+  p-value is exact up to n = 10,000, so the two arms return the same estimate on the same data.
+
 * Native engines everywhere a result could depend on what is installed. Survey designs are native
   (`morie_survey_design()` takes strata, clusters, `nest` and a finite-population correction; the
   mean and GLM standard errors are the Taylor linearisation of `survey::svyrecvar`, equal to
