@@ -106,6 +106,10 @@ TurningBandsSpherical <- function(coords, sill = 1, range_ = 1, n_bands = 100L, 
 #' @rdname TurningBandsSpherical
 #' @export
 DlaAggregate <- function(n_particles, seed = 1) {
+  if (!is.numeric(n_particles) || length(n_particles) != 1L || is.na(n_particles) ||
+      n_particles < 0 || n_particles != round(n_particles)) {
+    stop("`n_particles` must be one whole number >= 0", call. = FALSE)
+  }
   key <- function(x, y) paste(x, y)
   occ <- new.env()
   assign(key(0, 0), TRUE, envir = occ)

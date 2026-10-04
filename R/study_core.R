@@ -401,6 +401,9 @@
         cohens_h = h,
         abs_h = abs(h),
         magnitude = ifelse(abs(h) < 0.2, "small", ifelse(abs(h) < 0.5, "medium", "large")),
+        # the same two weighted proportions on the other two standard scales for a binary outcome
+        risk_difference = p1 - p2,
+        odds_ratio = if (all(c(p1, p2) > 0 & c(p1, p2) < 1)) (p1 / (1 - p1)) / (p2 / (1 - p2)) else NA_real_,
         stringsAsFactors = FALSE
       )
     }
@@ -460,10 +463,19 @@
       stringsAsFactors = FALSE
     )
   }
+  tests <- do.call(rbind, test_rows)
+  if (!is.null(tests) && nrow(tests)) {
+    # the corrections run over the whole family of tests in this table, not one row at a time
+    tests$p_bonferroni <- stats::p.adjust(tests$p_value, method = "bonferroni")
+    tests$p_fdr_bh <- stats::p.adjust(tests$p_value, method = "BH")
+    tests$sig_nominal <- tests$p_value < 0.05
+    tests$sig_bonf <- tests$p_bonferroni < 0.05
+    tests$sig_fdr <- tests$p_fdr_bh < 0.05
+  }
   list(
     frequentist_heavy_drinking_prevalence_ci = do.call(rbind, prevalence_rows),
     frequentist_effect_sizes = do.call(rbind, effect_rows),
-    frequentist_hypothesis_tests = do.call(rbind, test_rows)
+    frequentist_hypothesis_tests = tests
   )
 }
 

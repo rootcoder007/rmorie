@@ -72,7 +72,20 @@
 #' LerouxPrecision(rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0)), 0.5, 2)
 #' @export
 BayesOutbreak <- function(observed, freq = 52, b = 0, w = 6, act_y = TRUE, alpha = 0.05, time_points = NULL) {
+  if (!is.numeric(observed) || !length(observed)) {
+    stop("`observed` must be a numeric vector of counts", call. = FALSE)
+  }
+  for (a in c("freq", "b", "w")) {
+    v <- get(a)
+    if (!is.numeric(v) || length(v) != 1L || is.na(v) || v < 0 || v != round(v)) {
+      stop("`", a, "` must be one whole number >= 0", call. = FALSE)
+    }
+  }
   x <- observed
+  if (is.null(time_points) && length(x) < b * freq + w + 1) {
+    stop("`observed` has ", length(x), " values; the reference window needs at least ",
+         b * freq + w + 1, call. = FALSE)
+  }
   tps <- if (is.null(time_points)) (b * freq + w + 1):length(x) else time_points
   ub <- numeric(length(tps))
   al <- logical(length(tps))
@@ -83,6 +96,7 @@ BayesOutbreak <- function(observed, freq = 52, b = 0, w = 6, act_y = TRUE, alpha
     for (i in seq_len(b)) base <- c(base, x[(t - i * freq - w):(t - i * freq + w)])
     s <- sum(base, na.rm = TRUE)
     n <- sum(!is.na(base))
+    if (n == 0) stop("no observed counts in the reference window before time ", t, call. = FALSE)
     ub[q] <- .es_qnbinom(1 - alpha, s + 0.5, n / (n + 1))
     al[q] <- x[t] > ub[q]
   }

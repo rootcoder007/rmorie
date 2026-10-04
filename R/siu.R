@@ -801,6 +801,13 @@ morie_siu_refresh_manifest <- function(
   # max(live-discovery + margin, 6000) -- the live max currently sits
   # around drid ~5100, and 6000 gives headroom for ~one year of new
   # reports at the SIU's historical publish cadence.
+  # checked before any request: a bad path would otherwise only fail after the 25-minute crawl
+  if (!is.null(out_path) && (!is.character(out_path) || length(out_path) != 1L ||
+      is.na(out_path) || !nzchar(out_path) || !grepl("[.]csv[.]gz$", out_path) ||
+      !dir.exists(dirname(out_path)))) {
+    stop("`out_path` must be NULL or one .csv.gz file path in an existing directory",
+         call. = FALSE)
+  }
   if (is.null(max_drid)) max_drid <- max(.siu_discover_max_drid(), 6000L)
   min_drid <- as.integer(min_drid)
   max_drid <- as.integer(max_drid)

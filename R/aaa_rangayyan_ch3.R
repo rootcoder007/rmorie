@@ -337,6 +337,10 @@ DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   # p -> 0, so zero-density points contribute nothing.  This is a density
   # inside the log, so unlike eq (3.11) the result may be negative.
   term <- function(p) if (p <= 0) 0 else -p * log(p) / log(2)
+  if (is.null(x) && !is.function(pdf)) {
+    # check first: a non-function `pdf` would make pdf(v) find grDevices::pdf and open a file
+    stop("give either a grid (x=) or a callable pdf", call. = FALSE)
+  }
   if (!is.null(x)) {
     xs <- as.numeric(x)
     ps <- if (is.function(pdf)) {

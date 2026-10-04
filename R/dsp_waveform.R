@@ -516,6 +516,12 @@ morie_dsp_katz_fd <- function(x, n_scales = 10L) {
 #' morie_dsp_ruler_fd(x, n_rulers = 6L)
 #' @export
 morie_dsp_ruler_fd <- function(x, n_rulers = 10L) {
+  if (!is.numeric(x) || length(x) < 4L || anyNA(x)) {
+    stop("`x` must be a numeric vector of at least 4 values with no NA", call. = FALSE)
+  }
+  if (!is.numeric(n_rulers) || length(n_rulers) != 1L || is.na(n_rulers) || n_rulers < 2) {
+    stop("`n_rulers` must be one number >= 2", call. = FALSE)
+  }
   n <- length(x)
   rulers <- unique(pmin(pmax(
     as.integer(10^seq(0, log10(n / 2), length.out = n_rulers)),

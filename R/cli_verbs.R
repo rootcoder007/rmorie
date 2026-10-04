@@ -36,6 +36,12 @@
     # starts with the module's name (ebac_core_*, descriptive_statistics_*); only when no table does
     # is the module's first word tried as a prefix (power-design writes power_*), never a substring
     known <- .morie_module_outputs[[module]]
+    if (!is.null(known) && !any(grepl("\\.csv$", known, ignore.case = TRUE))) {
+      # figures, tables, final-report: their outputs are figures / HTML, not tables
+      kinds <- unique(tolower(tools::file_ext(known)))
+      return(structure(character(), note = sprintf("%s writes no tables (its outputs are %s files); nothing to check",
+                                                   module, paste(kinds[nzchar(kinds)], collapse = "/")), rc = 0L))
+    }
     hit <- if (!is.null(known)) {
       # a module morie knows: exactly the tables it writes
       basename(files) %in% basename(known) | grepl(paste0("/", module, "/"), files, fixed = TRUE) |
@@ -46,8 +52,10 @@
     if (is.null(known) && !any(hit) && nzchar(stem)) hit <- startsWith(tolower(basename(files)), paste0(stem, "_"))
     if (any(hit)) {
       files <- files[hit]
-    } else if (!is.null(out)) {
-      out(sprintf("no table in %s names the module %s; using all %d tables\n", target, module, length(files)))
+    } else {
+      # never every table in the tree under another module's name
+      return(structure(character(), note = sprintf("no table of %s in %s (run it: rmorie run-module %s)",
+                                                   module, target, module), rc = 1L))
     }
   }
   files
@@ -142,8 +150,8 @@
   if (dir.exists(target)) {
     files <- .cli_csv_files(target, flag("--module"), out)
     if (!length(files)) {
-      out(sprintf("No CSV files found in %s\n", target))
-      return(1L)
+      out(sprintf("%s\n", attr(files, "note") %||% paste("No CSV files found in", target)))
+      return(attr(files, "rc") %||% 1L)
     }
     for (f in files) out(paste0(.cli_inspect_text(morie_inspect_output(f)), "\n"))
     return(0L)
@@ -168,8 +176,9 @@
   target <- rest[[1L]]
   files <- if (dir.exists(target)) .cli_csv_files(target, flag("--module"), out) else if (file.exists(target)) target else character()
   if (!length(files)) {
-    out(sprintf("%s\n", if (dir.exists(target)) paste("No CSV files found in", target) else paste("Path not found:", target)))
-    return(1L)
+    out(sprintf("%s\n", attr(files, "note") %||%
+                  (if (dir.exists(target)) paste("No CSV files found in", target) else paste("Path not found:", target))))
+    return(attr(files, "rc") %||% 1L)
   }
   failed <- 0L
   for (f in files) {

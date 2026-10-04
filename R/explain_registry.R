@@ -65,22 +65,24 @@
     ),
     "data_wrangling_log.csv" = "Step-by-step log of what the data-wrangling module did to your input\n(renames, coercions, dropped rows).  Useful for the methods section.",
     "binomial_summaries.csv" = paste0(
-      "Unweighted binomial summaries (e.g. heavy_drinking_30d prevalence): plain\nsample proportions with Wilson intervals, no survey weights applied. Compare",
-      "\nagainst binomial_summaries_survey_weighted to see how much the design\nweights shift the estimates."
+      "Unweighted binomial summaries (e.g. heavy_drinking_30d prevalence): plain\nsample proportions with 95% Wald intervals (ci_low_wald, ci_high_wald;\np +/-",
+      " 1.96 sqrt(p(1-p)/n), clipped to [0, 1]), no survey weights applied. Compare\nagainst binomial_summaries_survey_weighted to see how much the design\nwei",
+      "ghts shift the estimates."
     ),
     "binomial_summaries_survey_weighted.csv" = "Survey-weighted binomial summaries WITH the CPADS weighting variable\napplied.  These are the prevalence estimates you'd report in a paper.",
     "probability_estimates.csv" = "Joint and conditional probability estimates across the survey design.\nRead column by column; row labels indicate the conditioning event.",
     "frequentist_heavy_drinking_prevalence_ci.csv" = paste0(
-      "Frequentist (Wilson / Clopper-Pearson) confidence intervals for the\nprevalence of heavy drinking.  Each row is one subgroup; columns are\nestimate, ci_",
-      "lower, ci_upper."
+      "Survey-weighted prevalence of heavy drinking with 95% Wald intervals on the\nKish effective sample size (n_eff = (sum w)^2 / sum w^2).  Each row is one",
+      "\nsubgroup: prev, se, ci_lower, ci_upper, n_unweighted_nonmissing."
     ),
     "frequentist_effect_sizes.csv" = paste0(
-      "Cohen's-d / odds-ratio / risk-difference effect sizes for the primary\ncontrasts of the analysis.  Read alongside p-values from\nfrequentist_hypothesis_",
-      "tests.csv."
+      "Effect sizes for each pair of subgroups' weighted heavy-drinking prevalence\n(p1, p2) on three scales: Cohen's h = 2 asin(sqrt(p1)) - 2 asin(sqrt(p2))\n",
+      "(|h| < 0.2 small, < 0.5 medium, otherwise large), risk_difference = p1 - p2,\nand odds_ratio = [p1/(1-p1)] / [p2/(1-p2)].  Read alongside p-values from",
+      "\nfrequentist_hypothesis_tests.csv."
     ),
     "frequentist_hypothesis_tests.csv" = paste0(
-      "Per-contrast p-values and test statistics.  CAUTION: these are\nNOT corrected for multiple comparisons by default \u2014 apply\nBonferroni / Benjamini-Hochbe",
-      "rg yourself if your design demands it."
+      "Per-contrast test statistics and p-values.  p_value is unadjusted;\np_bonferroni and p_fdr_bh adjust it across all the tests in this table\n(Bonferroni;",
+      " Benjamini-Hochberg), and sig_nominal / sig_bonf / sig_fdr flag\np < 0.05 on each scale."
     )
   )
 }

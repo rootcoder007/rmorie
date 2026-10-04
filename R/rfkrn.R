@@ -118,6 +118,9 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
 #' res <- .rfkprimes(k = 3L)
 #' res
 .rfkprimes <- function(k) {
+  if (!is.numeric(k) || length(k) != 1L || is.na(k) || k < 0) {
+    stop("`k` must be one number >= 0", call. = FALSE)
+  }
   out <- integer(0)
   c <- 2L
   while (length(out) < k) {

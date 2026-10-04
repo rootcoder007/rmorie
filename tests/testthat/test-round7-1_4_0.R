@@ -301,3 +301,78 @@ test_that("an ArcGIS layer reads one row per feature with either JSON reader", {
   }
   expect_equal(length(.morie_arcgis_feature_list(jsonlite::fromJSON(page)$features)), 3L)
 })
+
+
+test_that("the hypothesis-test table adjusts p-values across the whole family of tests", {
+  out <- suppressWarnings(.run_frequentist_module_internal(make_canonical_cpads()))
+  tab <- out$frequentist_hypothesis_tests
+  p <- tab$p_value
+  m <- sum(!is.na(p))
+  expect_equal(m, 2L)
+  expect_equal(tab$p_bonferroni, pmin(1, p * m))  # Bonferroni: every p times the family size
+  o <- order(p)
+  bh <- numeric(m)
+  bh[o] <- rev(cummin(rev(pmin(1, p[o] * m / seq_len(m)))))  # BH step-up, written out
+  expect_equal(tab$p_fdr_bh, bh)
+  expect_equal(tab$sig_bonf, tab$p_bonferroni < 0.05)
+  expect_equal(tab$sig_fdr, tab$p_fdr_bh < 0.05)
+})
+
+
+test_that("the effect-size table reports Cohen's h, the risk difference and the odds ratio", {
+  es <- suppressWarnings(.run_frequentist_module_internal(make_canonical_cpads()))$frequentist_effect_sizes
+  expect_true(all(c("cohens_h", "risk_difference", "odds_ratio") %in% names(es)))
+  expect_equal(es$cohens_h, 2 * asin(sqrt(es$p1)) - 2 * asin(sqrt(es$p2)))
+  expect_equal(es$risk_difference, es$p1 - es$p2)
+  expect_equal(es$odds_ratio, (es$p1 / (1 - es$p1)) / (es$p2 / (1 - es$p2)))
+})
+
+
+test_that("verify and inspect of a module that writes no tables check nothing", {
+  d <- withr::local_tempdir()
+  utils::write.csv(data.frame(a = 1, b = 2), file.path(d, "power_summary.csv"), row.names = FALSE)
+  for (verb in c("verify", "inspect")) {
+    r <- .cap7(verb, d, "--module", "figures")
+    expect_equal(r$status, 0L)
+    expect_match(r$text, "figures writes no tables")
+    r <- .cap7(verb, d, "--module", "descriptive-statistics")
+    expect_equal(r$status, 1L)
+    expect_match(r$text, "no table of descriptive-statistics")
+  }
+})
+
+test_that("bad input to the six hanging functions stops at once with a worded error", {
+  expect_error(BayesOutbreak(NULL), "`observed` must be a numeric vector")
+  expect_error(BayesOutbreak(NA), "`observed` must be a numeric vector")
+  expect_error(BayesOutbreak(c(1, 2, 3)), "the reference window needs at least 7")
+  expect_error(BayesOutbreak(rep(NA_real_, 8)), "no observed counts")
+  expect_error(DlaAggregate("abc"), "`n_particles` must be one whole number")
+  expect_error(morie_dsp_ruler_fd(NA), "at least 4 values")
+  expect_error(.bt_primes("abc"), "`m` must be one number")
+  expect_error(.rfkprimes("abc"), "`k` must be one number")
+  # valid calls keep their values
+  expect_identical(.bt_primes(5), c(2L, 3L, 5L, 7L, 11L))
+  expect_identical(.rfkprimes(3L), c(2L, 3L, 5L))
+  expect_true(is.logical(BayesOutbreak(c(3, 5, 2, 4, 6, 3, 4, 12), w = 6, time_points = 8)$alarm))
+})
+
+test_that("DiffEnt with no grid and no callable pdf never opens a pdf device file", {
+  d <- tempfile("diffent"); dir.create(d); old <- setwd(d); on.exit(setwd(old), add = TRUE)
+  for (bad in list(NA, NULL, "abc", data.frame())) {
+    expect_error(DiffEnt(bad), "give either a grid")
+  }
+  expect_length(list.files(d, all.files = TRUE, no.. = TRUE), 0L)
+  xg <- seq(-6, 6, by = 0.01)
+  h <- DiffEnt(x = xg, p = dnorm(xg))$entropy
+  expect_equal(h, 0.5 * log2(2 * pi * exp(1)), tolerance = 1e-6)
+})
+
+test_that("morie_siu_refresh_manifest rejects a bad out_path before any request", {
+  testthat::local_mocked_bindings(
+    .siu_discover_max_drid = function(...) stop("network touched"),
+    .siu_http_get_many_with_status = function(...) stop("network touched")
+  )
+  for (bad in list(NA, "abc", data.frame(), 1, file.path(tempfile(), "x.csv.gz"))) {
+    expect_error(morie_siu_refresh_manifest(bad), "`out_path` must be NULL or one .csv.gz")
+  }
+})
