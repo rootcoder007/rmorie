@@ -2,8 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_complex_glm}
 \alias{morie_survey_complex_glm}
-\title{Complex-survey GLM constructor (single-shot wrapper that builds a design
-and fits a \code{svyglm} in one call). Cluster-robust SEs via the design}
+\title{Complex-survey GLM in one call}
 \usage{
 morie_survey_complex_glm(
   df,
@@ -11,7 +10,8 @@ morie_survey_complex_glm(
   weight_col,
   family = "gaussian",
   cluster_col = NULL,
-  strata_col = NULL
+  strata_col = NULL,
+  nest = FALSE
 )
 }
 \arguments{
@@ -32,18 +32,22 @@ in \code{df}.}
 
 \item{strata_col}{Character; column name of the stratum identifier
 in \code{df}.}
+
+\item{nest}{If TRUE, cluster IDs are only unique within a stratum (see \code{\link[=morie_survey_design]{morie_survey_design()}}).}
 }
 \value{
-A \code{svyglm} object (survey-weighted GLM fit).
+A list: \code{coefficients} (a matrix of estimates, design-based standard errors,
+t values and p-values on the design degrees of freedom: PSUs minus strata minus the
+coefficients beyond the intercept), \code{confint}, \code{vcov} (the sandwich
+\eqn{A^{-1} B A^{-1}} with \eqn{B} the Taylor-linearisation variance of the score totals)
+and \code{fit} (the weighted \code{glm} giving the estimates).
 }
 \description{
-Complex-survey GLM constructor (single-shot wrapper that builds a design
-and fits a \code{svyglm} in one call). Cluster-robust SEs via the design
+Builds the design with \code{\link[=morie_survey_design]{morie_survey_design()}} and fits \code{\link[=morie_survey_glm]{morie_survey_glm()}}:
+cluster-robust, stratified design-based standard errors.
 }
 \examples{
-\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(y = rnorm(40), x = rnorm(40), w = runif(40, 0.5, 2))
 str(morie_survey_complex_glm(df, y ~ x, "w"), max.level = 1)
-\dontshow{\}) # examplesIf}
 }

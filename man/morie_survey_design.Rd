@@ -16,29 +16,32 @@ morie_survey_design(
 \arguments{
 \item{data}{data.frame.}
 
-\item{weights_col}{Column name of analytic/probability weights.}
+\item{weights_col}{Column name of the sampling weights (inverse inclusion probabilities).}
 
 \item{strata_col}{Optional strata column.}
 
 \item{cluster_col}{Optional PSU/cluster column.}
 
-\item{fpc_col}{Optional finite-population-correction column.}
+\item{fpc_col}{Optional finite-population-correction column: the population size of the
+stratum (number of PSUs when clustered), or the sampling fraction when every value is <= 1.}
 
-\item{nest}{If TRUE, treat cluster IDs as nested within strata.}
+\item{nest}{If TRUE, cluster IDs are only unique within a stratum; if FALSE (the default)
+a cluster ID that appears in two strata is an error, as in \code{survey::svydesign}.}
 }
 \value{
-An object of class \code{"morie_survey_design_fallback"}.
+An object of class \code{"morie_survey_design"}: a list with the data, the
+weights, and per-row stratum, PSU, PSU count of the stratum and population size.
 }
 \description{
-Returns a \code{survey::svydesign} object when \code{survey} is installed; otherwise
-returns a lightweight list with the same fields the morie helpers consume.
+A one-stage design: sampling weights, optional strata, optional primary sampling units
+(clusters) and an optional finite-population correction. Everything here is native; the
+variance of the estimators built on it is the Taylor linearisation of \code{survey::svyrecvar}.
 }
 \examples{
-\dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 set.seed(1)
 df <- data.frame(y = rnorm(40), w = runif(40, 0.5, 2),
-                 s = rep(c("a", "b"), 20))
-d <- morie_survey_design(df, "w", strata_col = "s")
+                 s = rep(c("a", "b"), 20), psu = rep(1:10, each = 4))
+d <- morie_survey_design(df, "w", strata_col = "s", cluster_col = "psu", nest = TRUE)
 class(d)
-\dontshow{\}) # examplesIf}
+morie_survey_mean(d, "y")
 }

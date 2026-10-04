@@ -7,8 +7,8 @@
 \item{df}{A \code{data.frame} holding the (unit-level) sample data plus
 any weight/strata/cluster/domain columns referenced by name.}
 
-\item{design}{A \code{survey::svydesign} object (when interfacing with
-the \code{survey} package directly).}
+\item{design}{A design from \code{\link[=morie_survey_design]{morie_survey_design()}}. A \code{survey::svydesign}
+object is accepted too and read into the same native form (one-stage designs).}
 
 \item{y}{Numeric vector of outcome values aligned with the sample.}
 
@@ -58,6 +58,8 @@ regression / GLM.}
 
 \item{family}{A \code{family} object (e.g. \code{stats::binomial()}) passed
 to the survey-weighted GLM.}
+
+\item{nest}{If TRUE, cluster IDs are only unique within a stratum (see \code{\link[=morie_survey_design]{morie_survey_design()}}).}
 
 \item{max_iter}{Iteration cap for the iterative calibration loop.}
 
