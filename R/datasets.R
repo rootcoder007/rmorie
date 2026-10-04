@@ -1488,7 +1488,7 @@ morie_datasets_ckan_search <- function(portal, query, rows = 50L) {
 #' \donttest{
 #' res <- try(morie_datasets_ckan_package(
 #'   "https://open.canada.ca/data",
-#'   "public-safety-canada-grants-and-contributions"
+#'   "a0877b5b-07d0-4e44-b55d-743966eff37d" # CESG payments: two 3 kB tables
 #' ))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' }

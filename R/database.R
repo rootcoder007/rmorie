@@ -1207,8 +1207,11 @@ morie_userguide <- function(name = NULL) {
 #' Downloads large bootstrap weight CSVs that are too big to ship with the
 #' package. Data is cached in the user cache database for future use.
 #'
-#' @param survey One of \code{"csads_2021"}, \code{"csads_2023"},
-#'   \code{"csus_2019"}, \code{"csus_2023"}, or \code{"all"} (default).
+#' @param survey A bootstrap key of \code{\link{morie_dataset_catalog}}
+#'   (\code{"ocs22bt"}, \code{"ocs24bt"}, \code{"cu20bt"},
+#'   \code{"cu23bt"}), its survey-year name (\code{"csads_2021"},
+#'   \code{"csads_2023"}, \code{"csus_2019"}, \code{"csus_2023"}), or
+#'   \code{"all"} (default).
 #' @param limit Max records per CKAN request (default 32000).
 #' @param db_path Optional path to a SQLite/DuckDB file (default backend).
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
@@ -1221,21 +1224,7 @@ morie_userguide <- function(name = NULL) {
 #' @export
 morie_download_bootstrap <- function(survey = "all", limit = 32000L,
                                      db_path = NULL, con = NULL) {
-  # Current short catalog keys (see morie_dataset_catalog()); the older
-  # oc_<survey>_<year>_bootstrap long keys are no longer in the catalog.
-  bootstrap_keys <- list(
-    csads_2021 = "ocs22bt",
-    csads_2023 = "ocs24bt",
-    csus_2019  = "cu20bt",
-    csus_2023  = "cu23bt"
-  )
-  if (survey == "all") {
-    targets <- unlist(bootstrap_keys, use.names = FALSE)
-  } else {
-    targets <- bootstrap_keys[[survey]]
-    if (is.null(targets)) stop("Unknown survey: ", survey, call. = FALSE)
-  }
-
+  targets <- .morie_bootstrap_targets(survey)
   catalog <- morie_dataset_catalog()
   n_ok <- 0L
   failed <- character()
@@ -1260,7 +1249,8 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
     message("Downloading ", key, " (", entry$name, ") ...")
     r <- tryCatch(
       if (nzchar(entry$ckan_resource_id)) {
-        data <- morie_fetch_ckan(key, limit = limit, db_path = db_path, con = con)
+        data <- morie_fetch_ckan(key, limit = limit, db_path = db_path, con = con,
+                                 resource_id = entry$ckan_resource_id)
         morie_cache_store(data, entry$table_name, db_path = db_path, con = con)
         data
       } else {
@@ -1280,6 +1270,23 @@ morie_download_bootstrap <- function(survey = "all", limit = 32000L,
     stop("no bootstrap file could be downloaded:\n  ", paste(failed, collapse = "\n  "), call. = FALSE)
   }
   invisible(n_ok)
+}
+
+#' Internal helper: the catalogue keys a download-bootstrap request names
+#'
+#' A bootstrap key itself, its survey-year name, or "all"; shared by
+#' morie_download_bootstrap() and `rmorie download-bootstrap`.
+#' @noRd
+.morie_bootstrap_targets <- function(survey) {
+  aliases <- c(csads_2021 = "ocs22bt", csads_2023 = "ocs24bt", csus_2019 = "cu20bt", csus_2023 = "cu23bt")
+  if (!is.character(survey) || length(survey) != 1L || is.na(survey)) {
+    stop("`survey` must be one string: a bootstrap key, its survey-year name, or \"all\"", call. = FALSE)
+  }
+  if (identical(survey, "all")) return(unname(aliases))
+  if (survey %in% aliases) return(survey)
+  if (survey %in% names(aliases)) return(unname(aliases[[survey]]))
+  stop(sprintf("Unknown survey '%s'. Keys: %s (or %s, or all)", survey,
+               paste(aliases, collapse = ", "), paste(names(aliases), collapse = ", ")), call. = FALSE)
 }
 
 #' Internal helper: the download URL of a CKAN resource (resource_show)

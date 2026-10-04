@@ -863,31 +863,21 @@
 }
 
 .cli_download_bootstrap <- function(flag, out) {
-  cat_ <- morie_dataset_catalog()
-  boot <- cat_[cat_$type == "bootstrap", , drop = FALSE]
   survey <- flag("--survey")
   if (is.null(survey)) {
     # hundreds of MB per file: never start without being told which one
     out(paste0("usage: rmorie download-bootstrap --survey KEY|all\n",
                "  The bootstrap-weight files are large (hundreds of MB each) and are cached under the morie cache directory.\n",
-               "  Keys: ", paste(boot$key, collapse = ", "), "\n"))
+               "  Keys: ocs22bt, ocs24bt, cu20bt, cu23bt (or csads_2021, csads_2023, csus_2019, csus_2023)\n"))
     return(2L)
   }
-  if (!identical(survey, "all")) {
-    boot <- boot[grepl(sub("_.*$", "", survey), boot$survey, fixed = TRUE) &
-                   grepl(sub("^[a-z]+_", "", survey), boot$year, fixed = TRUE), , drop = FALSE]
-  }
-  if (!nrow(boot)) {
-    out(sprintf("No bootstrap files match '%s'. Keys: %s\n", survey,
-                paste(cat_$key[cat_$type == "bootstrap"], collapse = ", ")))
+  # the R function's own route and key resolution, so the verb and the function cannot disagree
+  r <- tryCatch(morie_download_bootstrap(survey), error = function(e) e)
+  if (inherits(r, "error")) {
+    out(sprintf("%s\n", conditionMessage(r)))
     return(1L)
   }
-  for (i in seq_len(nrow(boot))) {
-    out(sprintf("  Downloading %s (%s)...\n", boot$key[i], boot$name[i]))
-    r <- tryCatch(morie_load_dataset(boot$key[i]), error = function(e) e)
-    if (inherits(r, "error")) out(sprintf("    ERROR: %s\n", conditionMessage(r)))
-    else out(sprintf("    OK: %s rows cached\n", format(nrow(r), big.mark = ",")))
-  }
+  out(sprintf("%d bootstrap file(s) cached\n", r))
   0L
 }
 
