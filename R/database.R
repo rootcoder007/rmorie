@@ -1048,9 +1048,10 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
   # 5. Direct download URL -- open-data files not exposed through the CKAN
   #    datastore (direct CSV/XLSX, or a file included inside a .zip archive).
   if (has("download_url")) {
-    if (grepl("\\.xlsx?($|\\?)", entry$download_url, ignore.case = TRUE) && !requireNamespace("readxl", quietly = TRUE)) {
-      # before the download, not after it (cihidt is 93 MB)
-      stop(matched, " is an Excel workbook: install.packages(\"readxl\") to read it", call. = FALSE)
+    # .xlsx is read by the package's own reader; only the binary .xls format (BIFF) needs readxl,
+    # and that is said before the download, not after it
+    if (grepl("\\.xls($|\\?)", entry$download_url, ignore.case = TRUE) && !requireNamespace("readxl", quietly = TRUE)) {
+      stop(matched, " is a binary .xls workbook: install.packages(\"readxl\") to read it", call. = FALSE)
     }
     message("Downloading ", matched, " from ", entry$download_url, " ...")
     zm <- if ("zip_member" %in% names(entry)) entry$zip_member else ""

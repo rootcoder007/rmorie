@@ -12,8 +12,11 @@
   placeholder <- grepl("^\\.\\.\\.[0-9]+$", nm) | !nzchar(trimws(nm))
   if (mean(placeholder[-1L]) < 0.5) return(df)  # the sheet's own header row was read as names
   cell_set <- function(v) !is.na(v) & nzchar(trimws(as.character(v)))
-  need <- max(2L, ceiling(0.8 * ncol(df)))
   head_rows <- df[seq_len(min(nrow(df), 20L)), , drop = FALSE]
+  # the share is of the columns the table uses: a stray note far to the right widens the
+  # sheet (cihi820b: a 5-column table on a 13-column tab) without being part of it
+  used <- vapply(head_rows, function(v) any(cell_set(v)), logical(1))
+  need <- max(2L, ceiling(0.8 * sum(used)))
   filled <- Reduce(`+`, lapply(head_rows, function(v) as.integer(cell_set(v))))
   hdr <- which(filled >= need)[1L]
   if (is.na(hdr)) return(df)
@@ -29,6 +32,11 @@
     body <- body[seq_len(cut - 1L), , drop = FALSE]
   }
   unnamed <- is.na(new) | !nzchar(new)
+  # an unnamed column with nothing in it is not part of the table
+  keep <- !unnamed | vapply(body, function(v) any(cell_set(v)), logical(1))
+  body <- body[, keep, drop = FALSE]
+  new <- new[keep]
+  unnamed <- unnamed[keep]
   new[unnamed] <- paste0("...", which(unnamed))
   names(body) <- make.unique(new)
   rownames(body) <- NULL

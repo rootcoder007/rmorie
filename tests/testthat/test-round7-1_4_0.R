@@ -376,3 +376,46 @@ test_that("morie_siu_refresh_manifest rejects a bad out_path before any request"
     expect_error(morie_siu_refresh_manifest(bad), "`out_path` must be NULL or one .csv.gz")
   }
 })
+
+test_that("a CIHI table with a stray note far to the right still gets its header row", {
+  # cihi820b: the title is read as the names, a 5-column table sits on a 13-column tab
+  raw <- data.frame(matrix(NA_character_, nrow = 5, ncol = 13), stringsAsFactors = FALSE)
+  names(raw) <- c("Table 2 Hospital Stays for Harm Caused by Substance Use", paste0("...", 2:13))
+  raw[1, 1:5] <- c("Jurisdiction", "Age group", "Number of hospital stays", "Population", "Crude rate")
+  raw[2, 1:5] <- c("Canada", "10-24", "20620", "7294787", "282.67")
+  raw[3, 2:5] <- c("25-44", "83649", "11949839", "700.00")
+  raw[5, 9] <- "Note: a footnote placed far to the right, after a blank line"
+  expect_message(out <- .morie_xlsx_promote_header(raw), "left out")
+  expect_identical(names(out), c("Jurisdiction", "Age group", "Number of hospital stays",
+                                 "Population", "Crude rate"))
+  expect_identical(nrow(out), 2L)
+  expect_identical(out[["Number of hospital stays"]], c(20620L, 83649L))
+  # a sheet already headed by its own names is left as it is
+  ok <- data.frame(a = 1:2, b = 3:4)
+  expect_identical(.morie_xlsx_promote_header(ok), ok)
+})
+
+test_that("only a binary .xls workbook asks for readxl; .xlsx goes to the package's reader", {
+  cat_df <- function(url) {
+    data.frame(key = "xlsgate", name = "x", table_name = "xlsgate", ckan_resource_id = "",
+               download_url = url, stringsAsFactors = FALSE)
+  }
+  fetched <- NULL
+  testthat::local_mocked_bindings(
+    .fuzzy_match_key = function(key) "xlsgate",
+    morie_fetch = function(url, ...) {
+      fetched <<- url
+      data.frame(v = 1:3)
+    },
+    morie_cache_store = function(...) invisible(TRUE)
+  )
+  testthat::local_mocked_bindings(requireNamespace = function(package, ...) package != "readxl",
+                                  .package = "base")
+  testthat::local_mocked_bindings(morie_dataset_catalog = function(...) cat_df("https://x.example/t.xls"))
+  expect_error(.morie_load_dataset_raw("xlsgate", refresh = TRUE), "binary .xls workbook")
+  expect_null(fetched)
+  testthat::local_mocked_bindings(morie_dataset_catalog = function(...) cat_df("https://x.example/t.xlsx"))
+  got <- suppressMessages(.morie_load_dataset_raw("xlsgate", refresh = TRUE))
+  expect_identical(fetched, "https://x.example/t.xlsx")
+  expect_identical(got, data.frame(v = 1:3))
+})
