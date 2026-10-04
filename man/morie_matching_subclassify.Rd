@@ -19,28 +19,30 @@ morie_matching_subclassify(
 
 \item{covariates}{Character vector of covariates.}
 
-\item{ps}{Optional pre-computed propensity scores (ignored; retained
-for back-compat).}
+\item{ps}{Optional propensity scores (as for \code{\link[=morie_matching_full]{morie_matching_full()}}).}
 
 \item{n_strata}{Number of quantile-based strata (default 5).}
 }
 \value{
-A list with components \code{data_with_strata} (the matched
-data augmented with \code{._stratum} and \code{._ps} columns) and
-\code{stratum_effects} (per-stratum sample sizes and PS ranges).
+A list with components \code{data_with_strata} (the data with
+\code{distance}, \code{weights}, \code{subclass}, \code{._ps} and
+\code{._stratum} columns) and \code{stratum_effects} (per-stratum sample
+sizes and propensity-score ranges).
 }
 \description{
-Thin wrapper around \code{MatchIt::matchit(method = "subclass")} that
-reports within-stratum sample sizes and PS ranges, preserving the
-rmorie return shape (\code{data_with_strata} + \code{stratum_effects}).
+Native propensity-score subclassification with the rules of
+\code{MatchIt::matchit(method = "subclass", estimand = "ATT")}: the cut points are
+quantiles of the treated units' scores, every unit falls in the subclass of
+its score, and a subclass left without a treated or a control unit takes the
+nearest unit of that group from the closest subclass that can spare one
+("scooting", MatchIt's \code{min.n = 1}). Weights are 1 for treated units and the
+treated/control ratio of the subclass for controls, each group rescaled to
+its size. Cross-validated against MatchIt in \code{tests/cross}. No MatchIt at
+runtime.
 }
 \examples{
-\donttest{
-if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint({
 set.seed(1)
 df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
                  x1 = rnorm(200), x2 = rnorm(200))
-morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
-})
-}
+morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)$stratum_effects
 }

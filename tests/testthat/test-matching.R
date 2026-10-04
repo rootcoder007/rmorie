@@ -469,3 +469,99 @@ test_that("Abadie-Imbens SE equals Matching::Match(estimand = 'ATT', sample = TR
   expect_equal(morie_matching_abadie_imbens_se(d, "y", "t", p, covariates = c("x1", "x2")),
                0.256974848359553, tolerance = 1e-12)
 })
+
+# ---- native full matching / subclassification / variable ratio / g-formula (no MatchIt) ----
+
+test_that("full matching is a minimum-weight edge cover (brute force on small graphs)", {
+  for (seed in 1:6) {
+    set.seed(seed)
+    nt <- sample(2:3, 1)
+    nc <- sample(2:4, 1)
+    p <- c(runif(nt, 0.2, 0.8), runif(nc, 0.1, 0.9))
+    tr <- c(rep(1L, nt), rep(0L, nc))
+    fm <- rmorie:::.morie_full_match(p, tr)
+    D <- abs(outer(p[tr == 1], p[tr == 0], "-"))
+    edges <- as.matrix(expand.grid(t = seq_len(nt), c = seq_len(nc)))
+    best <- Inf
+    for (m in seq_len(2^nrow(edges) - 1)) {
+      use <- bitwAnd(m, 2^(seq_len(nrow(edges)) - 1)) > 0
+      e <- edges[use, , drop = FALSE]
+      if (all(seq_len(nt) %in% e[, 1]) && all(seq_len(nc) %in% e[, 2])) best <- min(best, sum(D[e]))
+    }
+    got <- sum(abs(p[fm$edges[, 1]] - p[fm$edges[, 2]]))
+    expect_equal(got, best, tolerance = 1e-12)
+    # every set holds one treated or one control (a star)
+    for (s in unique(fm$subclass)) {
+      g <- fm$subclass == s
+      expect_true(sum(tr[g] == 1) == 1L || sum(tr[g] == 0) == 1L)
+    }
+  }
+  # exact ties: redundant zero-length edges are dropped, the sets stay stars
+  fm <- rmorie:::.morie_full_match(c(0.5, 0.5, 0.5, 0.5), c(1L, 1L, 0L, 0L))
+  for (s in unique(fm$subclass)) {
+    g <- fm$subclass == s
+    expect_true(sum(c(1, 1, 0, 0)[g] == 1) == 1L || sum(c(1, 1, 0, 0)[g] == 0) == 1L)
+  }
+})
+
+test_that("subclass and match-matrix weights follow MatchIt's rules", {
+  w <- rmorie:::.morie_subclass_weights(c(1, 1, 1, 2, 2, 2, NA), c(1, 0, 0, 1, 1, 0, 0))
+  # controls: set 1 -> 1/2 each, set 2 -> 2/1; rescaled so the 3 controls sum to 3
+  expect_equal(w[c(1, 4, 5)], c(1, 1, 1))
+  expect_equal(w[c(2, 3, 6)], c(0.5, 0.5, 2) * 3 / 3)
+  expect_identical(w[7], 0)
+  mm <- matrix(c(3L, 5L, NA, 4L, NA, NA), 3, 2)
+  idx_t <- c(1L, 2L, 6L)
+  w2 <- rmorie:::.morie_mm_weights(mm, 6, idx_t, c(1, 1, 0, 0, 0, 1))
+  expect_equal(w2[c(1, 2, 6)], c(1, 1, 0))
+  expect_equal(w2[3:5], c(0.5, 0.5, 1) * 3 / 2)
+  expect_identical(rmorie:::.morie_mm_subclass(mm, 6, idx_t), c(1L, 2L, 1L, 1L, 2L, NA))
+})
+
+test_that("scooting gives every subclass a treated and a control unit", {
+  sub <- c(1L, 1L, 2L, 2L, 3L, 3L, 3L)
+  tr <- c(1L, 0L, 1L, 1L, 1L, 0L, 0L)  # subclass 2 has no control
+  x <- c(0.1, 0.2, 0.4, 0.5, 0.7, 0.75, 0.8)
+  out <- rmorie:::.morie_subclass_scoot(sub, tr, x)
+  expect_true(all(table(tr, out) >= 1))
+  expect_identical(out[6], 2L)  # the nearest control from the subclass to the right
+  expect_identical(rmorie:::.morie_subclass_scoot(c(1L, 1L), c(1L, 0L), c(1, 2)), c(1L, 1L))
+  expect_error(rmorie:::.morie_subclass_scoot(c(1L, 2L, 2L), c(1L, 1L, 0L), c(1, 2, 3)), "not enough units")
+})
+
+test_that("the nearest-neighbour kernel: rounds, caliper, replacement, refusals", {
+  tr <- c(1L, 1L, 0L, 0L, 0L, 0L)
+  d <- c(0.50, 0.40, 0.48, 0.47, 0.10, 0.90)
+  mm <- rmorie:::.morie_match_nn_cpp(tr, d, c(2L, 2L), FALSE, NA_real_)
+  # round 1: the higher-scoring treated unit (0.50) takes 0.48, then 0.40 takes 0.47;
+  # round 2: 0.50 takes the next nearest left (0.10 vs 0.90 -> 0.90 is 0.40 away, 0.10 0.40 away)
+  expect_identical(mm[1, 1], 3L)
+  expect_identical(mm[2, 1], 4L)
+  expect_true(all(!is.na(mm)))
+  # a caliper that admits only the two close controls
+  mm2 <- rmorie:::.morie_match_nn_cpp(tr, d, c(2L, 2L), FALSE, 0.15)
+  expect_identical(sort(stats::na.omit(as.vector(mm2))), c(3L, 4L))
+  # with replacement both treated units may take the same nearest control
+  mm3 <- rmorie:::.morie_match_nn_cpp(tr, d, c(1L, 1L), TRUE, NA_real_)
+  expect_identical(as.vector(mm3), c(3L, 4L))
+  expect_error(rmorie:::.morie_match_nn_cpp(c(1L, 2L), c(0, 1), 1L, FALSE, NA_real_), "0/1")
+  expect_error(rmorie:::.morie_match_nn_cpp(c(1L, 0L), c(NA, 1), 1L, FALSE, NA_real_), "finite")
+  expect_error(rmorie:::.morie_match_nn_cpp(c(1L, 0L), c(0, 1), c(1L, 1L), FALSE, NA_real_), "one entry")
+  expect_error(rmorie:::.morie_match_nn_cpp(c(1L, 0L), c(0, 1), 0L, FALSE, NA_real_), "positive")
+  expect_identical(dim(rmorie:::.morie_match_nn_cpp(c(0L, 0L), c(0, 1), integer(), FALSE, NA_real_)), c(0L, 1L))
+})
+
+test_that("assignment solver and argument checks of the new matchers", {
+  expect_identical(rmorie:::.morie_lsap_cpp(matrix(c(4, 1, 3, 2, 0, 5, 3, 2, 2), 3)), c(2L, 1L, 3L))
+  expect_error(rmorie:::.morie_lsap_cpp(matrix(1, 2, 1)), "ncol >= nrow")
+  expect_error(rmorie:::.morie_lsap_cpp(matrix(c(1, NA), 1)), "finite")
+  df <- data.frame(d = c(1, 1, 1), x = c(1, 2, 3))
+  expect_error(morie_matching_full(df, "d", "x"), "both treated and control")
+  expect_error(morie_matching_subclassify(df, "d", "x"), "both treated and control")
+  expect_error(morie_matching_variable_ratio(df, "d", "x"), "both treated and control")
+  df2 <- data.frame(d = rep(0:1, 10), x = rnorm(20))
+  expect_error(morie_matching_subclassify(df2, "d", "x", n_strata = 0), "n_strata")
+  expect_error(morie_matching_variable_ratio(df2, "d", "x", min_ratio = 3, max_ratio = 2), "must not exceed")
+  expect_error(morie_matching_variable_ratio(df2, "d", "x", min_ratio = "a"), "min_ratio")
+  expect_error(morie_matching_variable_ratio(df2, "d", "x", caliper = -1), "caliper")
+})

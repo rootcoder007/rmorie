@@ -54,11 +54,9 @@ and \eqn{w_i = T_i/\hat{e}(X_i) + (1-T_i)/(1-\hat{e}(X_i))}{w_i = T_i/e_hat(X_i)
 (1-T_i)/(1-e_hat(X_i))}.
 }
 \details{
-When \pkg{WeightIt} is installed the propensity step delegates to
-\code{WeightIt::weightit()}; otherwise the inline logistic
-regression is used. The Hajek difference and influence-function SE
-below are evaluated inline either way so the result list shape and
-the closed-form variance preserved.
+The propensity scores come from the native logistic regression of
+\code{morie_estimate_propensity_scores()}; the Hajek difference and its
+influence-function SE are computed in closed form.
 }
 \examples{
 set.seed(1)

@@ -34,15 +34,20 @@ Estimates the ATE by:
 mu_hat_0(X_i)bigr]}
 }
 \details{
-Delegates the standardisation step to \code{stdReg::stdGlm()} when
-\pkg{stdReg} is installed; otherwise computes the contrast inline
-from a single \code{stats::glm()} fit with treatment-flipped
-counterfactual datasets.
+The outcome model is one \code{stats::glm()} fit; its predictions with
+the treatment set to 1 and to 0 are averaged over the sample. The SE is
+the M-estimation sandwich of \code{stdReg::stdGlm()} (Sjolander 2016):
+the GLM score equations stacked with the two standardisation equations,
+so the outcome model's own uncertainty is included. Computed natively;
+cross-validated against stdReg in \code{tests/cross}.
 }
 \examples{
-if (requireNamespace("stdReg", quietly = TRUE)) {
-  set.seed(1)
-  df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-  morie_estimate_g_computation(df, "t", "y", "x")
+set.seed(1)
+df <- data.frame(t = rbinom(200, 1, 0.4), x = rnorm(200))
+df$y <- 1 + 0.5 * df$t + df$x + rnorm(200)
+morie_estimate_g_computation(df, "t", "y", "x")
 }
+\references{
+Sjolander, A. (2016). Regression standardization with the R
+package stdReg. \emph{European Journal of Epidemiology}, 31(6), 563--574.
 }

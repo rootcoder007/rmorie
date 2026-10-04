@@ -51,10 +51,9 @@ Combines IPW and outcome regression corrections. Consistent if
 is correctly specified.
 }
 \details{
-The propensity step delegates to \pkg{WeightIt} when installed
-(via \code{morie_estimate_propensity_scores}). The outcome
-regression and the doubly-robust influence-function score are
-evaluated inline to preserve the closed-form SE used downstream.
+The propensity scores come from \code{morie_estimate_propensity_scores()}
+(native logistic regression); the outcome regression and the
+doubly-robust influence-function score are closed form.
 Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
 nuisance learners) is the canonical CRAN counterpart.
 }

@@ -31,13 +31,11 @@ imbalance of the stratification is reported in
 \code{details$l1_before}. No MatchIt/cem at runtime.
 }
 \examples{
-if (requireNamespace("MatchIt", quietly = TRUE)) {
-  \donttest{
-  set.seed(1)
-  df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-                   x1 = rnorm(200), x2 = rnorm(200))
-  morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
-  }
+\donttest{
+set.seed(1)
+df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                 x1 = rnorm(200), x2 = rnorm(200))
+morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
 }
 }
 \references{

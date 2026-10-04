@@ -2,20 +2,13 @@
 #
 # Matching methods for causal inference in observational studies.
 #
-# Phase 1.b refactor (2026-05-25): the hand-written base-R fallbacks
-# have been removed. Every method-style entry point now delegates
-# directly to the canonical CRAN package:
-#
-#   * MatchIt      -- nearest / exact / cem / mahalanobis / optimal /
-#                     full / subclass / genetic / variable-ratio
-#                     (the full standard suite).
-#   * cobalt       -- covariate-balance diagnostics (bal.tab, love.plot).
-#   * WeightIt     -- entropy balancing (method = "ebal").
-#   * Matching     -- genetic matching back end consumed by MatchIt.
-#   * designmatch  -- cardinality / mixed-integer-programming matching
-#                     (documented as a recommended alternative; the
-#                     `morie_matching_cardinality()` wrapper keeps its
-#                     iterative-caliper heuristic over MatchIt).
+# Every matcher here is native (R + C++): nearest neighbour and variable
+# ratio (MatchIt's matcher, pair-identical), exact, CEM, Mahalanobis,
+# optimal pair, optimal full matching (a minimum-weight edge cover),
+# subclassification (MatchIt's rules), genetic and cardinality matching,
+# and entropy balancing. MatchIt, optmatch, Matching, WeightIt, ebal and
+# designmatch are used only by tests/cross, which checks the results
+# against them.
 #
 # Carceral-domain helpers (treatment-effect estimators on matched
 # samples, Abadie-Imbens SE, Rosenbaum bounds, doubly-robust ATT,
@@ -239,7 +232,7 @@ morie_matching_common_support <- function(data, treatment,
 
 
 # ---------------------------------------------------------------------------
-# Method-style entry points -- thin MatchIt / WeightIt / Matching wrappers
+# Method-style entry points (native engines)
 # ---------------------------------------------------------------------------
 
 #' Nearest-neighbour propensity-score matching
@@ -360,13 +353,11 @@ morie_matching_exact <- function(data, treatment, exact_vars) {
 #'   without balance checking: Coarsened exact matching.
 #'   \emph{Political Analysis}, 20(1), 1--24.
 #' @examples
-#' if (requireNamespace("MatchIt", quietly = TRUE)) {
-#'   \donttest{
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-#'                    x1 = rnorm(200), x2 = rnorm(200))
-#'   morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
-#'   }
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
 #' }
 #' @export
 morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
@@ -375,7 +366,9 @@ morie_matching_cem <- function(data, treatment, covariates, n_bins = 5L) {
 
 #' Mahalanobis distance matching
 #'
-#' Thin wrapper around \code{MatchIt::matchit(distance = "mahalanobis")}.
+#' Native nearest-neighbour matching on the Mahalanobis distance of the
+#' covariates (cross-validated against \code{MatchIt::matchit(distance =
+#' "mahalanobis")}).
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
@@ -434,13 +427,11 @@ morie_matching_mahalanobis <- function(data, treatment, covariates,
 #'   for back-compat).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' if (requireNamespace("MatchIt", quietly = TRUE)) {
-#'   \donttest{
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-#'                    x1 = rnorm(200), x2 = rnorm(200))
-#'   morie_matching_optimal_pair(df, "d", c("x1", "x2"))
-#'   }
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_optimal_pair(df, "d", c("x1", "x2"))
 #' }
 #' @export
 morie_matching_optimal_pair <- function(data, treatment, covariates,
@@ -702,8 +693,8 @@ morie_matching_subclassify <- function(data, treatment, covariates,
 
 #' Entropy balancing weights (Hainmueller, 2012)
 #'
-#' Thin wrapper around \code{WeightIt::weightit(method = "ebal")} (or
-#' \code{ebal::ebalance} if \pkg{WeightIt} is unavailable).  Computes
+#' Native entropy balancing (cross-validated against
+#' \code{WeightIt::weightit(method = "ebal")} and \code{ebal::ebalance}):
 #' weights for the control group so that the weighted moments of the
 #' covariates match those of the treated group.
 #'
@@ -778,14 +769,12 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
 #'   estimating causal effects.  \emph{Review of Economics and
 #'   Statistics}, 95(3), 932--945.
 #' @examples
-#' if (requireNamespace("MatchIt", quietly = TRUE)) {
-#'   \donttest{
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-#'                    x1 = rnorm(200), x2 = rnorm(200))
-#'   morie_matching_genetic(df, "d", c("x1", "x2"),
-#'                          pop_size = 50, n_generations = 20)
-#'   }
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_genetic(df, "d", c("x1", "x2"),
+#'                        pop_size = 50, n_generations = 20)
 #' }
 #' @export
 morie_matching_genetic <- function(data, treatment, covariates,
@@ -1268,15 +1257,13 @@ morie_matching_att_matched <- function(data, outcome, treatment,
 #' @param alpha Significance level for confidence intervals.
 #' @return A list of class \code{morie_te_result}.
 #' @examples
-#' if (requireNamespace("MatchIt", quietly = TRUE)) {
-#'   \donttest{
-#'   set.seed(1)
-#'   df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-#'                    x1 = rnorm(200), x2 = rnorm(200))
-#'   m <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
-#'   morie_matching_ate_matched(m$matched_data, "y", "d", c("x1", "x2"),
-#'                              weights = "weights")
-#'   }
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' m <- morie_matching_cem(df, "d", c("x1", "x2"), n_bins = 5)
+#' morie_matching_ate_matched(m$matched_data, "y", "d", c("x1", "x2"),
+#'                            weights = "weights")
 #' }
 #' @export
 morie_matching_ate_matched <- function(data, outcome, treatment, covariates,

@@ -16,10 +16,8 @@ of estimators are exposed:
 \item AIPW = augmented-IPW doubly-robust ATE (Robins, Rotnitzky &
 Zhao 1994), with cross-fitted nuisance models.
 \item IRM-DML = Interactive Regression Model double machine
-learning (Chernozhukov et al. 2018), wrapping
-\pkg{DoubleML} when available and falling back to the
-cross-fitted ridge + logistic propensity estimator in
-\code{causal.R}.
+learning (Chernozhukov et al. 2018), a native cross-fit with
+a logistic propensity and per-arm OLS outcome regressions.
 }
 
 Plus the canonical OTIS cell-frame builders:

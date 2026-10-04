@@ -2,7 +2,7 @@
 % Please edit documentation in R/effects.R
 \name{estimate_ate_gcomputation}
 \alias{estimate_ate_gcomputation}
-\title{G-computation ATE with bootstrap SE}
+\title{G-computation ATE with its sandwich SE}
 \usage{
 estimate_ate_gcomputation(
   data,
@@ -28,24 +28,23 @@ Named list with \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper},
 \code{n_obs}, \code{outcome_model}.
 }
 \description{
-Thin wrapper over \code{stdReg::stdGlm()} (Sjolander's
-regression-standardisation back end) when \pkg{stdReg} is
-installed. Without \pkg{stdReg}, falls back to an inline outcome-
-regression + bootstrap implementation (500 resamples, seed 42)
-that mirrors the legacy rmorie behaviour.
+Regression standardisation: one GLM for the outcome, its predictions
+with the treatment set to 1 and to 0 averaged over the sample, and the
+M-estimation sandwich SE of \code{stdReg::stdGlm()} (Sjolander 2016),
+computed natively (the same estimate and SE as
+\code{\link{morie_estimate_g_computation}}, cross-validated against
+stdReg). The 95\\% interval is the estimate +/- 1.96 SE.
 }
 \examples{
-if (requireNamespace("stdReg", quietly = TRUE)) {
-  set.seed(1)
-  n <- 300
-  X <- matrix(rnorm(n * 3), n, 3)
-  tr <- rbinom(n, 1, plogis(X[, 1]))
-  y <- 2.5 * tr + drop(X \%*\% c(1, 0.5, -0.7)) + rnorm(n)
-  d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
-  res <- estimate_ate_gcomputation(d,
-    treatment = "d", outcome = "y",
-    covariates = c("x1", "x2", "x3")
-  )
-  res$ate
-}
+set.seed(1)
+n <- 300
+X <- matrix(rnorm(n * 3), n, 3)
+tr <- rbinom(n, 1, plogis(X[, 1]))
+y <- 2.5 * tr + drop(X \%*\% c(1, 0.5, -0.7)) + rnorm(n)
+d <- data.frame(y = y, d = tr, x1 = X[, 1], x2 = X[, 2], x3 = X[, 3])
+res <- estimate_ate_gcomputation(d,
+  treatment = "d", outcome = "y",
+  covariates = c("x1", "x2", "x3")
+)
+res$ate
 }

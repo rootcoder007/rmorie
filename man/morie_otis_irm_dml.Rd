@@ -38,7 +38,7 @@ character vector for two-way clustering.}
 \item{match_first}{Logical; if \code{TRUE}, pre-match the sample
 with 1:1 NN PSM before fitting (default FALSE).}
 
-\item{match_caliper_sd}{Caliper width (default 0.2 * SD of logit-e).}
+\item{match_caliper_sd}{Caliper width in SDs of the propensity score (default 0.2).}
 }
 \value{
 Named list with \code{ate}, \code{ate_se}, \code{ate_pval},
@@ -49,13 +49,11 @@ Named list with \code{ate}, \code{ate_se}, \code{ate_pval},
 }
 \description{
 Computes the doubly-robust ATE / ATTE / ATC via the Chernozhukov et
-al. (2018) IRM score with cross-fitted nuisance models. Delegates
-to \pkg{DoubleML}'s \code{DoubleMLIRM} when the package (with
-\pkg{mlr3} + \pkg{mlr3learners}) is installed; otherwise falls back
-to a self-contained cross-fit using \code{.otis_logit_fit} for the
-propensity and OLS for the per-arm outcome regressions (mirroring
-the python module's \code{ml_outcome="ols", ml_propensity="logit"}
-branch).
+al. (2018) IRM score with cross-fitted nuisance models: a native
+cross-fit with \code{.otis_logit_fit} for the propensity and OLS for
+the per-arm outcome regressions (the python module's
+\code{ml_outcome="ols", ml_propensity="logit"} branch). The result does
+not depend on which optional packages are installed.
 }
 \details{
 Cluster-robust SE: pass \code{cluster_cols} as the name (one-way)
@@ -63,24 +61,23 @@ or character vector (multi-way Cameron-Gelbach-Miller 2011, up to
 2-way). \code{cluster_cols = NULL} gives the heteroskedasticity-
 consistent SE.
 
-Optional \code{match_first = TRUE} runs 1:1 nearest-neighbour
-propensity-score matching on \code{logit(e(X))} with caliper
-\code{match_caliper_sd * SD(logit(e))} first, then fits IRM-DML on
-the matched subset. Mirrors the MatchIt-then-DML pipeline of
-OTIS-RC/notez1a.qmd.
+Optional \code{match_first = TRUE} first runs 1:1 nearest-neighbour
+matching without replacement on the propensity score \eqn{e(X)}, with
+caliper \code{match_caliper_sd * SD(e)} and treated units taken in
+decreasing score -- MatchIt's matcher, which this package implements
+natively -- then fits IRM-DML on the matched subset (the MatchIt-then-DML
+pipeline of OTIS-RC/notez1a.qmd).
 }
 \examples{
-if (requireNamespace("DoubleML", quietly = TRUE) && requireNamespace("MatchIt", quietly = TRUE)) {
-  set.seed(1)
-  n <- 300L
-  x <- rnorm(n)
-  d <- rbinom(n, 1, plogis(0.4 * x))
-  y <- 0.5 * d + x + rnorm(n)
-  df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
-                                                        replace = TRUE))
-  morie_otis_irm_dml(df, treatment = "d", outcome = "y",
-                     covariates = "x", n_folds = 3L)
-}
+set.seed(1)
+n <- 300L
+x <- rnorm(n)
+d <- rbinom(n, 1, plogis(0.4 * x))
+y <- 0.5 * d + x + rnorm(n)
+df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
+                                                      replace = TRUE))
+morie_otis_irm_dml(df, treatment = "d", outcome = "y",
+                   covariates = "x", n_folds = 3L)
 }
 \references{
 Chernozhukov, V. et al. (2018). \emph{Econometrics Journal} 21(1),

@@ -26,9 +26,9 @@ Treated units receive weight 1; controls receive
 \eqn{w_i = \hat{e}(X_i)/(1-\hat{e}(X_i))}{w_i = e_hat(X_i)/(1-e_hat(X_i))}.
 }
 \details{
-Propensity-score estimation delegates to \pkg{WeightIt} when
-installed (via \code{morie_estimate_propensity_scores}); the
-weighted-difference and influence-function SE run inline.
+The propensity scores come from \code{morie_estimate_propensity_scores()}
+(native logistic regression); the weighted difference and its
+influence-function SE are closed form.
 }
 \examples{
 set.seed(2)

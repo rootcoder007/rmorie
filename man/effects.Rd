@@ -10,15 +10,13 @@ Two function families live here:
 \strong{Treatment-effect estimators (legacy)}
 \itemize{
 \item \code{estimate_ate()} -- IPW-weighted OLS ATE.
-\item \code{estimate_plr()} -- Partially Linear Regression via
-\pkg{DoubleML}; falls back to base R cross-fit ridge.
-\item \code{estimate_pliv()} -- Partially Linear IV (LATE) via
-\pkg{DoubleML}; falls back to 2SLS.
-\item \code{estimate_ate_gcomputation()} -- G-computation ATE.
-Thin wrapper over \code{stdReg::stdGlm()} when installed; falls
-back to inline bootstrap standardisation otherwise.
-\item \code{sensitivity_rosenbaum()} -- Rosenbaum bounds. Thin
-wrapper over \code{rbounds::psens()} when installed; otherwise
+\item \code{estimate_plr()} -- Partially Linear Regression, native
+cross-fit (cross-validated against \pkg{DoubleML}).
+\item \code{estimate_pliv()} -- Partially Linear IV (LATE), native
+(cross-validated against \pkg{DoubleML}).
+\item \code{estimate_ate_gcomputation()} -- G-computation ATE with
+stdReg's sandwich SE, native.
+\item \code{sensitivity_rosenbaum()} -- Rosenbaum bounds, native
 normal-approximation Wilcoxon signed-rank bounds.
 \item \code{e_value()} -- VanderWeele-Ding E-value. Thin wrapper
 native VanderWeele-Ding continuous-scale E-value (module 26).

@@ -9,42 +9,21 @@ T-learner, and 2SLS. All estimators require propensity scores that
 can be supplied or estimated internally via logistic regression.
 }
 \details{
-The Phase 1.h rewrite thin-wraps each estimator over the canonical
-CRAN causal-inference packages while preserving the inline
-implementation as a fallback (dual-arm pattern):
-\itemize{
-\item \code{morie_estimate_propensity_scores()} -> \pkg{WeightIt}
-(\code{WeightIt::weightit(method = "glm")}) when installed.
-\item \code{morie_estimate_ate/att/atc()} -> \pkg{WeightIt} weights with
-the inline Hajek / influence-function estimator preserved.
-\item \code{morie_estimate_aipw()} -> \pkg{AIPW} when installed, else
-the inline doubly-robust estimator.
-\item \code{morie_estimate_dr_forest()} -> \pkg{grf} causal forest with
-doubly-robust (AIPW) averaging; honest random-forest nuisances.
-\item \code{morie_estimate_g_computation()} -> \pkg{stdReg}
-(\code{stdReg::stdGlm}) when installed, else inline G-formula.
-\item \code{morie_estimate_late()} -> native Wald / 2SLS k-class
-engine (module 17).
-\item \code{morie_estimate_double_ml() / morie_estimate_irm()} ->
-\pkg{DoubleML} when installed, else inline cross-fit ridge
-(unchanged from prior release).
-\item \code{morie_e_value()} -> \pkg{EValue} when installed, else
-inline closed-form E-value.
-\item \code{morie_sensitivity_rosenbaum()} -> \pkg{rbounds} /
-\pkg{sensitivitymv} when installed, else inline sign-score bounds.
-}
+Every estimator here is native and gives the same result whatever is
+installed: propensity scores (logistic regression), the IPW
+ATE/ATT/ATC with Hajek weights and influence-function SEs, AIPW, the
+doubly-robust forest, the g-formula with stdReg's sandwich SE, LATE
+(Wald / 2SLS k-class), double machine learning (PLR / IRM cross-fit),
+E-values and Rosenbaum bounds, and HC0-HC5 / cluster / HAC robust
+variances (\code{morie_causal_robust_se()}). The reference packages
+(WeightIt, AIPW, grf, stdReg, DoubleML, EValue, rbounds, sandwich) are
+used only by the cross-validation tests.
 
-Phase 1.h also adds four new \emph{extender} functions exposing
-value-add from CRAN packages that previously had no MORIE entry
-point:
-\itemize{
-\item \code{morie_causal_impact()} -> \pkg{CausalImpact}
-(Bayesian structural time-series intervention analysis).
-\item \code{morie_causal_weighting()} -> \pkg{WeightIt}
-(full \code{weightit()} interface with method = glm / cbps /
-ebal / ps / energy / optweight).
-\item \code{morie_causal_robust_se()} -> \pkg{sandwich}
-(HC0-HC5 / cluster / HAC robust variance matrices).
-}
+Two functions reach an optional package by design, and say so:
+\code{morie_causal_impact()} is a named pass-through to
+\pkg{CausalImpact} (Bayesian structural time series), and
+\code{morie_causal_weighting()} uses \pkg{WeightIt} only for a weighting
+method this package has no engine for (glm, cbps and ATT entropy
+balancing are native).
 }
 \keyword{internal}

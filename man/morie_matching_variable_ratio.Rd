@@ -23,28 +23,36 @@ morie_matching_variable_ratio(
 
 \item{min_ratio, max_ratio}{Match-count bounds per treated unit.}
 
-\item{caliper}{Caliper on the propensity score (in SD units).}
+\item{caliper}{Caliper on the propensity score, in standard deviations of
+the score (\code{NULL} for none).}
 
-\item{ps}{Optional pre-computed propensity scores (ignored; retained
-for back-compat).}
+\item{ps}{Optional propensity scores (as for \code{\link[=morie_matching_full]{morie_matching_full()}}).}
 }
 \value{
-A list of class \code{morie_match_result}.
+A list of class \code{morie_match_result}; \code{matched_data} holds the
+matched rows with \code{distance}, \code{weights} and \code{subclass} columns.
 }
 \description{
-Thin wrapper around \eqn{MatchIt::matchit(method = "nearest",
-ratio = max_ratio, min.controls = min_ratio)} which supports
-variable-ratio nearest-neighbour matching natively.
+Native variable-ratio ("extremal") nearest-neighbour matching (Ming &
+Rosenbaum 2000), with the rules of \code{MatchIt::matchit(method = "nearest", ratio = r, min.controls = min_ratio, max.controls = max_ratio)}: treated
+units with the most typical scores receive \code{max_ratio} controls and the rest
+\code{min_ratio} (one in between takes the remainder), so that about \code{r} controls
+per treated unit are used in all, where \code{r} is midway between the bounds.
+Matching is greedy without replacement on the propensity score (probability
+scale) within \code{caliper} standard deviations of it. Returns MatchIt's
+weights and subclasses; cross-validated against MatchIt in \code{tests/cross}.
+No MatchIt at runtime.
 }
 \examples{
-\donttest{
-if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint({
 set.seed(1)
 df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.25),
                  x1 = rnorm(200), x2 = rnorm(200))
-# an average of two controls per treated unit needs twice as many controls as treated
-morie_matching_variable_ratio(df, "d", c("x1", "x2"),
-                              min_ratio = 1, max_ratio = 3)
-})
+vr <- morie_matching_variable_ratio(df, "d", c("x1", "x2"),
+                                    min_ratio = 1, max_ratio = 3)
+table(table(vr$match_pairs$treated_idx))  # controls per treated unit
 }
+\references{
+Ming, K. and Rosenbaum, P. R. (2000). Substantial gains in bias
+reduction from matching with a variable number of controls.
+\emph{Biometrics}, 56(1), 118--124.
 }

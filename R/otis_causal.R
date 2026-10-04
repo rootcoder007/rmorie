@@ -12,10 +12,8 @@
 #'   \item AIPW = augmented-IPW doubly-robust ATE (Robins, Rotnitzky &
 #'         Zhao 1994), with cross-fitted nuisance models.
 #'   \item IRM-DML = Interactive Regression Model double machine
-#'         learning (Chernozhukov et al. 2018), wrapping
-#'         \pkg{DoubleML} when available and falling back to the
-#'         cross-fitted ridge + logistic propensity estimator in
-#'         \code{causal.R}.
+#'         learning (Chernozhukov et al. 2018), a native cross-fit with
+#'         a logistic propensity and per-arm OLS outcome regressions.
 #' }
 #'
 #' Plus the canonical OTIS cell-frame builders:
@@ -391,24 +389,23 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
 #' Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC)
 #'
 #' Computes the doubly-robust ATE / ATTE / ATC via the Chernozhukov et
-#' al. (2018) IRM score with cross-fitted nuisance models. Delegates
-#' to \pkg{DoubleML}'s \code{DoubleMLIRM} when the package (with
-#' \pkg{mlr3} + \pkg{mlr3learners}) is installed; otherwise falls back
-#' to a self-contained cross-fit using \code{.otis_logit_fit} for the
-#' propensity and OLS for the per-arm outcome regressions (mirroring
-#' the python module's \code{ml_outcome="ols", ml_propensity="logit"}
-#' branch).
+#' al. (2018) IRM score with cross-fitted nuisance models: a native
+#' cross-fit with \code{.otis_logit_fit} for the propensity and OLS for
+#' the per-arm outcome regressions (the python module's
+#' \code{ml_outcome="ols", ml_propensity="logit"} branch). The result does
+#' not depend on which optional packages are installed.
 #'
 #' Cluster-robust SE: pass \code{cluster_cols} as the name (one-way)
 #' or character vector (multi-way Cameron-Gelbach-Miller 2011, up to
 #' 2-way). \code{cluster_cols = NULL} gives the heteroskedasticity-
 #' consistent SE.
 #'
-#' Optional \code{match_first = TRUE} runs 1:1 nearest-neighbour
-#' propensity-score matching on \code{logit(e(X))} with caliper
-#' \code{match_caliper_sd * SD(logit(e))} first, then fits IRM-DML on
-#' the matched subset. Mirrors the MatchIt-then-DML pipeline of
-#' OTIS-RC/notez1a.qmd.
+#' Optional \code{match_first = TRUE} first runs 1:1 nearest-neighbour
+#' matching without replacement on the propensity score \eqn{e(X)}, with
+#' caliper \code{match_caliper_sd * SD(e)} and treated units taken in
+#' decreasing score -- MatchIt's matcher, which this package implements
+#' natively -- then fits IRM-DML on the matched subset (the MatchIt-then-DML
+#' pipeline of OTIS-RC/notez1a.qmd).
 #'
 #' @param df A data frame.
 #' @param treatment Binary treatment column name.
@@ -421,7 +418,7 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
 #' @param eps Propensity clip bound (default 0.02).
 #' @param match_first Logical; if \code{TRUE}, pre-match the sample
 #'   with 1:1 NN PSM before fitting (default FALSE).
-#' @param match_caliper_sd Caliper width (default 0.2 * SD of logit-e).
+#' @param match_caliper_sd Caliper width in SDs of the propensity score (default 0.2).
 #' @return Named list with \code{ate}, \code{ate_se}, \code{ate_pval},
 #'   \code{ate_ci95}, \code{atte}, \code{atte_se}, \code{atte_pval},
 #'   \code{atte_ci95}, \code{atc}, \code{atc_se}, \code{atc_pval},
@@ -434,17 +431,15 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
 #'   29(2), 238-249.
 #' @export
 #' @examples
-#' if (requireNamespace("DoubleML", quietly = TRUE) && requireNamespace("MatchIt", quietly = TRUE)) {
-#'   set.seed(1)
-#'   n <- 300L
-#'   x <- rnorm(n)
-#'   d <- rbinom(n, 1, plogis(0.4 * x))
-#'   y <- 0.5 * d + x + rnorm(n)
-#'   df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
-#'                                                         replace = TRUE))
-#'   morie_otis_irm_dml(df, treatment = "d", outcome = "y",
-#'                      covariates = "x", n_folds = 3L)
-#' }
+#' set.seed(1)
+#' n <- 300L
+#' x <- rnorm(n)
+#' d <- rbinom(n, 1, plogis(0.4 * x))
+#' y <- 0.5 * d + x + rnorm(n)
+#' df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
+#'                                                       replace = TRUE))
+#' morie_otis_irm_dml(df, treatment = "d", outcome = "y",
+#'                    covariates = "x", n_folds = 3L)
 morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
                                cluster_cols = NULL,
                                n_folds = 3L, seed = 123L,
@@ -718,8 +713,7 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
 #'   \code{covariates} = c("Gender", "Age_Category", "EndFiscalYear").
 #' @export
 #' @examples
-#' if (requireNamespace("DoubleML", quietly = TRUE) &&
-#'   requireNamespace("MatchIt", quietly = TRUE) && requireNamespace("readr", quietly = TRUE)) {
+#' if (requireNamespace("readr", quietly = TRUE)) {
 #'   \donttest{
 #'   df <- morie_otis_load()
 #'     pair <- morie_otis_make_pair_alert_to_volatility_ruhela(df)
