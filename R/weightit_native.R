@@ -32,10 +32,19 @@
     stats::make.link(link)
   )
   lk$d2mu <- switch(link,
-    logit = function(eta) { m <- stats::plogis(eta); m * (1 - m) * (1 - 2 * m) },
+    logit = function(eta) {
+      m <- stats::plogis(eta)
+      m * (1 - m) * (1 - 2 * m)
+    },
     probit = function(eta) -eta * stats::dnorm(eta),
-    cloglog = function(eta) { d <- exp(eta - exp(eta)); d * (1 - exp(eta)) },
-    loglog = function(eta) { d <- exp(-eta - exp(-eta)); d * (exp(-eta) - 1) },
+    cloglog = function(eta) {
+      d <- exp(eta - exp(eta))
+      d * (1 - exp(eta))
+    },
+    loglog = function(eta) {
+      d <- exp(-eta - exp(-eta))
+      d * (exp(-eta) - 1)
+    },
     cauchit = function(eta) -2 * eta / (pi * (1 + eta^2)^2),
     identity = function(eta) 0 * eta,
     log = function(eta) exp(eta),
