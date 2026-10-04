@@ -465,6 +465,22 @@
   httr2::resp_body_json(resp, simplifyVector = TRUE)
 }
 
+#' Internal helper: ArcGIS features as a list of list(attributes, geometry) records
+#'
+#' jsonlite simplifies the features array into a data frame with a nested `attributes` frame; the
+#' package's own JSON reader leaves it a list of records. Every reader takes this one shape.
+#' @noRd
+.morie_arcgis_feature_list <- function(feats) {
+  if (is.null(feats) || NROW(feats) == 0L) return(list())
+  if (!is.data.frame(feats)) return(feats)
+  at <- if (is.data.frame(feats$attributes)) feats$attributes else feats
+  ge <- if (is.data.frame(feats$geometry)) feats$geometry else NULL
+  lapply(seq_len(nrow(at)), function(i) {
+    list(attributes = as.list(at[i, , drop = FALSE]),
+         geometry = if (!is.null(ge)) as.list(ge[i, , drop = FALSE]))
+  })
+}
+
 #' Convert a list-of-records / data.frame response into a clean data.frame
 #' @keywords internal
 #' @noRd
@@ -516,8 +532,8 @@
     query$resultRecordCount <- as.integer(max_features)
   }
   body <- .morie_dataset_http_json(paste0(layer_url, "/query"), query = query)
-  features <- body$features
-  if (is.null(features) || length(features) == 0L) {
+  features <- .morie_arcgis_feature_list(body$features)
+  if (length(features) == 0L) {
     return(data.frame())
   }
   attrs <- lapply(features, function(f) f$attributes)

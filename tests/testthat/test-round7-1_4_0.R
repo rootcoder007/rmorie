@@ -281,3 +281,23 @@ test_that("the ARSAU dictionary reads without readxl", {
   expect_equal(d$type, c("integer", "character"))
   expect_error(morie_arsau_read_xlsx_dictionary(f, sheet = 3), "sheet 3 is not in")
 })
+
+
+test_that("an ArcGIS layer reads one row per feature with either JSON reader", {
+  pkg <- utils::packageName(environment(morie_cli))
+  page <- paste0('{"features":[{"attributes":{"OBJECTID":1,"EVENT":"a"}},',
+                 '{"attributes":{"OBJECTID":2,"EVENT":"b"}},{"attributes":{"OBJECTID":3,"EVENT":null}}],',
+                 '"exceededTransferLimit":false}')
+  local_mocked_bindings(.morie_read_text = function(url) if (grepl("returnCountOnly", url)) '{"count":3}' else page,
+                        .package = pkg)
+  withr::local_options(morie.quiet = TRUE)
+  a <- suppressMessages(morie_fetch_arcgis("https://x.test/arcgis/rest/services/H/FeatureServer/0"))
+  local_mocked_bindings(requireNamespace = function(package, ...) package != "jsonlite", .package = "base")
+  b <- suppressMessages(morie_fetch_arcgis("https://x.test/arcgis/rest/services/H/FeatureServer/0"))
+  for (d in list(a, b)) {
+    expect_equal(dim(d), c(3L, 2L))
+    expect_equal(d$OBJECTID, c(1, 2, 3))
+    expect_equal(d$EVENT, c("a", "b", NA))
+  }
+  expect_equal(length(.morie_arcgis_feature_list(jsonlite::fromJSON(page)$features)), 3L)
+})

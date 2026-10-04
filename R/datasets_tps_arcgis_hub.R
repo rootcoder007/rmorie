@@ -277,8 +277,8 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
       query$resultRecordCount <- as.integer(max_features)
     }
     body <- .morie_dataset_http_json(layer_url, query = query)
-    feats <- body$features
-    if (is.null(feats) || length(feats) == 0L) {
+    feats <- .morie_arcgis_feature_list(body$features)
+    if (length(feats) == 0L) {
       return(data.frame())
     }
     attrs <- lapply(feats, function(f) f$attributes)
@@ -505,8 +505,8 @@ morie_datasets_arcgis_item_by_id <- function(item_id,
       query$resultRecordCount <- as.integer(max_features)
     }
     body <- .morie_dataset_http_json(layer_url, query = query)
-    feats <- body$features
-    if (is.null(feats) || length(feats) == 0L) {
+    feats <- .morie_arcgis_feature_list(body$features)
+    if (length(feats) == 0L) {
       return(data.frame())
     }
     return(.morie_dataset_records_to_df(lapply(feats, function(f) f$attributes)))

@@ -485,16 +485,10 @@ morie_fetch_arcgis <- function(layer_url, where = "1=1", out_fields = "*",
         call. = FALSE
       )
     }
-    feats <- payload$features
-    attrs <- if (is.null(feats) || NROW(feats) == 0L) {
-      NULL
-    } else if (is.data.frame(feats) && !is.null(feats$attributes)) {
-      feats$attributes
-    } else {
-      feats
-    }
-    if (is.null(attrs) || NROW(attrs) == 0L) break
-    attrs <- as.data.frame(attrs, stringsAsFactors = FALSE)
+    feats <- .morie_arcgis_feature_list(payload$features)
+    if (length(feats) == 0L) break
+    # one row per feature, whichever JSON reader parsed the page
+    attrs <- .morie_dataset_records_to_df(lapply(feats, function(f) f$attributes %||% f))
     pages[[length(pages) + 1L]] <- attrs
     fetched <- fetched + NROW(attrs)
     if (!isTRUE(payload$exceededTransferLimit) || fetched >= max_records) {
