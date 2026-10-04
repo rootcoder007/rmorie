@@ -3,7 +3,10 @@
 * Fresh-user test, fourth pass. `morie_psymet_omega()` now factors by principal axes and
   takes `hier` from the Schmid-Leiman transformation (promax-rotated factors, one general
   factor from their correlations), so a multi-factor scale no longer reports omega
-  hierarchical near 1; it agrees with `psych::omega(fm = "pa", rotate = "Promax")` to 1e-3.
+  hierarchical near 1. Items that load negatively on the general factor are reverse-keyed and
+  scored the other way round first, as `psych::omega()` does (a message names them); on the
+  `psych::bfi` items and `psych::sim.hierarchical()` data it agrees with
+  `psych::omega(fm = "pa", rotate = "Promax")` within 0.01 (the rotations differ in detail).
   The two-proportion power table applies Kish's design effect of the weights (`n_eq_eff`,
   `power_deff`) instead of placeholders, and `power_srs` uses the observed group sizes.
   `rmorie verify` reports a declared placeholder table and a header-only table as such;

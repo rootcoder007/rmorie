@@ -434,7 +434,19 @@ morie_verify_pollution <- function(pollutant, outcome = "all_cause_mortality",
   } else if (!is.null(exposure_csv)) {
     if (!file.exists(exposure_csv)) return(fail(sprintf("exposure CSV not found: %s", exposure_csv)))
     df <- utils::read.csv(exposure_csv, stringsAsFactors = FALSE)
-    if (!"exposure" %in% names(df)) return(fail("CSV missing 'exposure' column."))
+    if (!"exposure" %in% names(df) && "value" %in% names(df)) {
+      # a NAPS pull (rmorie pull naps-...): hourly `value` in `unit`; NO2 is reported in ppb
+      vals <- suppressWarnings(as.numeric(df$value))
+      units <- if ("unit" %in% names(df)) unique(tolower(trimws(stats::na.omit(df$unit)))) else character()
+      if (pollutant == "no2" && any(units %in% c("ppb", "ppbv"))) {
+        vals <- vals * 1.88  # ug/m3 per ppb of NO2 at 25 C and 1 atm (WHO 2021 conversion)
+        message("note: NO2 in ppb converted to ug/m3 (x 1.88)")
+      } else if (length(setdiff(units, c("ug/m3", "\u00b5g/m3", "\u00b5g/m\u00b3", "ug/m\u00b3")))) {
+        return(fail(sprintf("exposure unit %s is not ug/m3 for %s", paste(sort(units), collapse = ", "), pollutant)))
+      }
+      df$exposure <- vals
+    }
+    if (!"exposure" %in% names(df)) return(fail("CSV missing 'exposure' column (ug/m3); a NAPS pull's 'value' column also works."))
     exposure_mean <- mean(df$exposure, na.rm = TRUE)
     exposure_prevalence <- mean(df$exposure > reference, na.rm = TRUE)
     if ("income" %in% names(df)) equity_df <- df
@@ -475,6 +487,7 @@ morie_verify_pollution <- function(pollutant, outcome = "all_cause_mortality",
                                                    baseline_per_person, beta_per_unit)
   burden <- morie_envhealth_burden(exposure_mean, exposure_prevalence, baseline_per_person,
                                    population, pollutant = if (pollutant == "pm25") "PM2.5" else "NO2",
+                                   outcome = outcome,  # the same outcome as the CRF above (IHD/stroke were burdened as all-cause)
                                    reference_conc = reference)
   equity <- if (!is.null(equity_df) && "income" %in% names(equity_df)) {
     morie_envhealth_equity(equity_df, "exposure", "income")

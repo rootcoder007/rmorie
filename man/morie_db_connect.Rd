@@ -41,8 +41,8 @@ morie_load_dataset("ocp21", con = con)
 }
 }
 \examples{
-\dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 \donttest{
+if (morie_has("sql")) withAutoprint({
 # DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
 if (requireNamespace("duckdb", quietly = TRUE) &&
   requireNamespace("DBI", quietly = TRUE)) {
@@ -52,6 +52,6 @@ if (requireNamespace("duckdb", quietly = TRUE) &&
   DBI::dbDisconnect(con)
   file.remove(tmp)
 }
+})
 }
-\dontshow{\}) # examplesIf}
 }

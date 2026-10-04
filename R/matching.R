@@ -353,13 +353,20 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
             "units unmatched and the ATT is estimated on the matchable subset only; pass ",
             "replace = TRUE to re-use controls.", call. = FALSE)
   }
-  .morie_match_nearest_native(
-    data, treatment, covariates,
-    n_neighbors = n_neighbors,
-    caliper = caliper,
-    replace = replace,
-    alpha = alpha,
-    ps = ps
+  warned <- !isTRUE(replace) && sum(tr == 1, na.rm = TRUE) * n_neighbors > sum(tr == 0, na.rm = TRUE)
+  withCallingHandlers(
+    .morie_match_nearest_native(
+      data, treatment, covariates,
+      n_neighbors = n_neighbors,
+      caliper = caliper,
+      replace = replace,
+      alpha = alpha,
+      ps = ps
+    ),
+    warning = function(w) {
+      # the same condition in the native layer's words: said once, above
+      if (warned && startsWith(conditionMessage(w), "Fewer control units than treated units")) invokeRestart("muffleWarning")
+    }
   )
 }
 
@@ -515,14 +522,14 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
 #' @references Hansen, B. B. (2004). Full matching in an observational
 #'   study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
 #' @examples
-#' \dontshow{if (morie_has("MatchIt", "optmatch")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("MatchIt", "optmatch")) withAutoprint({
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_full(df, "d", c("x1", "x2"))
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_full <- function(data, treatment, covariates,
                                 ps = NULL, n_subclasses = 10L) {
@@ -559,14 +566,14 @@ morie_matching_full <- function(data, treatment, covariates,
 #'   data augmented with \code{._stratum} and \code{._ps} columns) and
 #'   \code{stratum_effects} (per-stratum sample sizes and PS ranges).
 #' @examples
-#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint({
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_subclassify <- function(data, treatment, covariates,
                                        ps = NULL, n_strata = 5L) {
@@ -720,16 +727,16 @@ morie_matching_genetic <- function(data, treatment, covariates,
 #'   for back-compat).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
-#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint({
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.25),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' # an average of two controls per treated unit needs twice as many controls as treated
 #' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
 #'                               min_ratio = 1, max_ratio = 3)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_variable_ratio <- function(data, treatment, covariates,
                                           min_ratio = 1L,
@@ -1530,6 +1537,14 @@ morie_matching_multi_treatment <- function(data, treatment, covariates,
                                            method = "nearest_neighbor") {
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
   levels <- sort(unique(df[[treatment]]))
+  # a continuous column (often the outcome passed by mistake) would be matched value by value
+  if (length(levels) > 10L) {
+    stop(sprintf("treatment '%s' has %d distinct values; a multi-valued treatment needs a few levels (at most 10)",
+                 treatment, length(levels)), call. = FALSE)
+  }
+  if (length(levels) < 2L) {
+    stop(sprintf("treatment '%s' has %d level; matching needs at least two", treatment, length(levels)), call. = FALSE)
+  }
   if (is.null(reference_group)) {
     tab <- table(df[[treatment]])
     reference_group <- names(tab)[which.max(tab)]

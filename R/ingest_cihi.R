@@ -82,13 +82,13 @@ morie_datasets_cihi_data_tables <- function() {
 #' @param ... forwarded to readxl::read_excel.
 #' @return base R data.frame.
 #' @examples
-#' \dontshow{if (morie_has("httr2", "readxl")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("httr2", "readxl")) withAutoprint({
 #' # Any table from the catalogue, e.g. the injury/trauma ED table:
 #' u <- morie_datasets_cihi_data_tables()$url[1]
 #' df <- morie_ingest_cihi_xlsx(u)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
                                    user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)",

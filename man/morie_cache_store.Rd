@@ -25,8 +25,8 @@ Writes (or replaces) a table in the shared SQLite cache.
 }
 \examples{
 set.seed(1)
-\dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 \donttest{
+if (morie_has("sql")) withAutoprint({
 db <- tempfile(fileext = ".db")
 morie_cache_store(
   data = data.frame(x = rnorm(50), y = rnorm(50)),
@@ -34,6 +34,6 @@ morie_cache_store(
   db_path = db
 )
 file.remove(db)
+})
 }
-\dontshow{\}) # examplesIf}
 }

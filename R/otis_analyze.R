@@ -63,6 +63,20 @@ NULL
 #' }
 #' @export
 morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
+  .otis_load_raw(csv_path, use_readr)
+}
+
+#' Internal helper: snake_case column names (EndFiscalYear -> end_fiscal_year,
+#' UniqueIndividual_ID -> unique_individual_id), the schema the OTIS analyses read
+#' @noRd
+.otis_snake_names <- function(df) {
+  n <- gsub("([a-z0-9])([A-Z])", "\\1_\\2", names(df))
+  names(df) <- gsub("_+", "_", tolower(gsub("[^A-Za-z0-9]+", "_", n)))
+  df
+}
+
+#' @noRd
+.otis_load_raw <- function(csv_path = NULL, use_readr = FALSE) {
   if (!is.null(csv_path)) {
     if (!file.exists(csv_path)) {
       stop(sprintf(paste0("OTIS dataset not found at %s. Pass an ",
@@ -109,7 +123,7 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
 #' CRAN-safe: with \code{out_dir = NULL} (default) no files are written.
 #'
 #' @param df OTIS data.frame.
-#' @param year Integer fiscal year.
+#' @param year Integer fiscal year; \code{NULL} (default) takes the latest year in \code{df}.
 #' @param sex Optional gender filter passed to
 #'   \code{morie_otis_rplace}.
 #' @param out_dir Optional output directory. When non-NULL the
@@ -123,10 +137,15 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
 #'   }
 #' }
 #' @export
-morie_otis_all_analyses <- function(df, year,
+morie_otis_all_analyses <- function(df, year = NULL,
                                      sex = NULL,
                                      out_dir = NULL) {
   stopifnot(is.data.frame(df))
+  df <- .otis_snake_names(df)
+  if (is.null(year)) {
+    # the latest fiscal year in the data
+    year <- suppressWarnings(max(as.integer(sub("^.*?([0-9]{4})$", "\\1", as.character(df$end_fiscal_year))), na.rm = TRUE))
+  }
   fns <- list(
     rplace = function() morie_otis_rplace(df, year = year, sex = sex),
     astcmb = function() morie_otis_astcmb(df),

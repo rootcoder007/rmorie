@@ -30,6 +30,10 @@
 #' }
 #' @export
 morie_crypto_slhdsa_keygen <- function() {
+  if (.morie_pqc_native()) {
+    k <- rmoriebricklayer::fips_keygen("SLH-DSA-SHA2-128s")
+    return(list(pk = .morie_pqc_h2r(k$public), sk = .morie_pqc_h2r(k$secret)))
+  }
   .Call(`_rmorie_morie_crypto_slhdsa128s_keygen`)
 }
 
@@ -51,6 +55,11 @@ morie_crypto_slhdsa_keygen <- function() {
 morie_crypto_slhdsa_sign <- function(sk, message) {
   stopifnot(is.raw(sk))
   if (is.character(message)) message <- charToRaw(message)
+  if (.morie_pqc_native()) {
+    # FIPS 205 sk = SK.seed || SK.prf || PK.seed || PK.root: the public half is its last 32 bytes
+    key <- rmoriebricklayer::fips_key("SLH-DSA-SHA2-128s", public = utils::tail(sk, 32L), secret = sk)
+    return(.morie_pqc_h2r(rmoriebricklayer::capsule_sign(message, key)$signature))
+  }
   .Call(`_rmorie_morie_crypto_slhdsa128s_sign`, sk, message)
 }
 
@@ -74,6 +83,13 @@ morie_crypto_slhdsa_sign <- function(sk, message) {
 morie_crypto_slhdsa_verify <- function(pk, message, signature) {
   stopifnot(is.raw(pk), is.raw(signature))
   if (is.character(message)) message <- charToRaw(message)
+  if (.morie_pqc_native()) {
+    key <- tryCatch(rmoriebricklayer::fips_key("SLH-DSA-SHA2-128s", public = pk), error = function(e) NULL)
+    if (is.null(key)) return(FALSE)
+    sig <- structure(list(scheme = "SLH-DSA-SHA2-128s", signature = .morie_pqc_r2h(signature), prehash = "none"),
+                     class = c("bricklayer_signature", "list"))
+    return(isTRUE(rmoriebricklayer::capsule_verify(message, sig, key)))
+  }
   .Call(`_rmorie_morie_crypto_slhdsa128s_verify`, pk, message, signature)
 }
 
@@ -282,8 +298,7 @@ morie_crypto_pqc_inventory <- function() {
       "Lamport 1979", "NIST round-4 (2025)"
     ),
     available = c(
-      oqs, oqs,
-      has_alg(morie_crypto_slhdsa_keygen),
+      TRUE, TRUE, TRUE,  # liboqs, or rmoriebricklayer's own FIPS 203/204/205 code without it
       !inherits(tryCatch(morie_crypto_random_bytes(1L),
         error = function(e) e
       ), "error"),

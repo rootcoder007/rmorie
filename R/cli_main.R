@@ -64,7 +64,10 @@ cli_main <- function(subject, json = "{}") {
   result <- tryCatch(
     switch(subject,
       otis = {
-        df <- morie_otis_load()
+        if (is.null(opts$data)) {
+          message("analyze otis: the bundled data.ontario.ca A01 slice; the full table: rmorie pull otisa01 --out FILE, then '{\"data\":\"FILE\"}'")
+        }
+        df <- morie_otis_load(opts$data)
         do.call(
           morie_otis_all_analyses,
           keep(morie_otis_all_analyses, c(list(df = df), opts))
@@ -74,9 +77,15 @@ cli_main <- function(subject, json = "{}") {
         do.call(morie_siu_all_analyses, keep(morie_siu_all_analyses, opts))
       },
       nypd = {
+        if (is.null(opts$arrests_df) && is.null(opts$complaint_df)) {
+          message("analyze nypd: a 5-record built-in sample, not NYPD data; pass your own frames from R (morie_nypd_all_analyses(arrests_df = ...))")
+        }
         do.call(morie_nypd_all_analyses, keep(morie_nypd_all_analyses, opts))
       },
       cpd = {
+        if (is.null(opts$crime_df) && is.null(opts$arrests_df)) {
+          message("analyze cpd: a 5-record built-in sample, not CPD data; pass your own frames from R (morie_cpd_all_analyses(crime_df = ...))")
+        }
         do.call(morie_cpd_all_analyses, keep(morie_cpd_all_analyses, opts))
       },
       tps = not_wired(

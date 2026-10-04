@@ -63,6 +63,10 @@ morie_crypto_liboqs_version <- function() {
 #' }
 #' @export
 morie_crypto_mlkem768_keygen <- function() {
+  if (.morie_pqc_native()) {
+    k <- rmoriebricklayer::kem_keygen(768L)
+    return(list(pk = .morie_pqc_h2r(k$public), sk = .morie_pqc_h2r(k$secret)))
+  }
   .Call(`_rmorie_morie_crypto_mlkem768_keygen`)
 }
 
@@ -86,6 +90,11 @@ morie_crypto_mlkem768_keygen <- function() {
 #' @export
 morie_crypto_mlkem768_encaps <- function(pk) {
   stopifnot(is.raw(pk))
+  if (.morie_pqc_native()) {
+    key <- structure(list(public = .morie_pqc_r2h(pk), level = 768L), class = c("bricklayer_kem_public_key", "list"))
+    cap <- rmoriebricklayer::kem_encapsulate(key)
+    return(list(ct = .morie_pqc_h2r(cap$ciphertext), shared_secret = .morie_pqc_h2r(cap$shared)))
+  }
   .Call(`_rmorie_morie_crypto_mlkem768_encaps`, pk)
 }
 
@@ -109,6 +118,10 @@ morie_crypto_mlkem768_encaps <- function(pk) {
 #' @export
 morie_crypto_mlkem768_decaps <- function(sk, ct) {
   stopifnot(is.raw(sk), is.raw(ct))
+  if (.morie_pqc_native()) {
+    key <- structure(list(public = "", secret = .morie_pqc_r2h(sk), level = 768L), class = c("bricklayer_kem_key", "list"))
+    return(.morie_pqc_h2r(rmoriebricklayer::kem_decapsulate(key, ct)))
+  }
   .Call(`_rmorie_morie_crypto_mlkem768_decaps`, sk, ct)
 }
 
@@ -132,6 +145,10 @@ morie_crypto_mlkem768_decaps <- function(sk, ct) {
 #' }
 #' @export
 morie_crypto_mldsa65_keygen <- function() {
+  if (.morie_pqc_native()) {
+    k <- rmoriebricklayer::fips_keygen("ML-DSA-65")
+    return(list(pk = .morie_pqc_h2r(k$public), sk = .morie_pqc_h2r(k$secret)))
+  }
   .Call(`_rmorie_morie_crypto_mldsa65_keygen`)
 }
 
@@ -155,6 +172,12 @@ morie_crypto_mldsa65_keygen <- function() {
 #' @export
 morie_crypto_mldsa65_sign <- function(sk, message) {
   stopifnot(is.raw(sk), is.raw(message))
+  if (.morie_pqc_native()) {
+    # hedged ML-DSA.Sign (FIPS 204, empty context) needs only the secret key; the public half of the
+    # key object is a placeholder of the right length that signing never reads
+    key <- rmoriebricklayer::fips_key("ML-DSA-65", public = raw(1952L), secret = sk)
+    return(.morie_pqc_h2r(rmoriebricklayer::capsule_sign(message, key)$signature))
+  }
   .Call(`_rmorie_morie_crypto_mldsa65_sign`, sk, message)
 }
 
@@ -177,5 +200,29 @@ morie_crypto_mldsa65_sign <- function(sk, message) {
 #' @export
 morie_crypto_mldsa65_verify <- function(pk, message, signature) {
   stopifnot(is.raw(pk), is.raw(message), is.raw(signature))
+  if (.morie_pqc_native()) {
+    key <- tryCatch(rmoriebricklayer::fips_key("ML-DSA-65", public = pk), error = function(e) NULL)
+    if (is.null(key)) return(FALSE)
+    sig <- structure(list(scheme = "ML-DSA-65", signature = .morie_pqc_r2h(signature), prehash = "none"),
+                     class = c("bricklayer_signature", "list"))
+    return(isTRUE(rmoriebricklayer::capsule_verify(message, sig, key)))
+  }
   .Call(`_rmorie_morie_crypto_mldsa65_verify`, pk, message, signature)
 }
+
+#' Internal helper: ML-KEM / ML-DSA through rmoriebricklayer when rmorie was built without liboqs
+#'
+#' rmoriebricklayer carries its own FIPS 203 / FIPS 204 code (no system library), with the same
+#' key, ciphertext and signature sizes as liboqs, so the API above works on every install.
+#' @noRd
+.morie_pqc_native <- function() !isTRUE(tryCatch(morie_crypto_liboqs_available(), error = function(e) FALSE))
+
+#' @noRd
+.morie_pqc_h2r <- function(h) {
+  h <- as.character(h)
+  if (!nzchar(h)) return(raw(0))
+  as.raw(strtoi(substring(h, seq(1L, nchar(h), 2L), seq(2L, nchar(h), 2L)), 16L))
+}
+
+#' @noRd
+.morie_pqc_r2h <- function(r) paste(format(as.raw(r)), collapse = "")

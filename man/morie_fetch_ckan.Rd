@@ -9,7 +9,8 @@ morie_fetch_ckan(
   limit = Inf,
   db_path = NULL,
   resource_id = NULL,
-  con = NULL
+  con = NULL,
+  portal = NULL
 )
 }
 \arguments{
@@ -27,6 +28,9 @@ directly, so any catalogued dataset can be fetched without a built-in
 database; \code{dataset_key} then only labels the cache table.}
 
 \item{con}{Optional pre-opened DBI connection (overrides \code{db_path}).}
+
+\item{portal}{Optional CKAN portal base URL (e.g. \code{"https://data.ontario.ca"}); the
+default is open.canada.ca. The catalog gives it for resources on another portal.}
 }
 \value{
 A data.frame.

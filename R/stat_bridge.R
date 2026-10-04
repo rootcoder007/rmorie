@@ -216,14 +216,14 @@ stat_bridge_fn_search <- function(query, max_results = 20L) {
 #'   of them.
 #' @return A data.frame with columns \code{name}, \code{ok}, \code{message}.
 #' @examples
-#' \dontshow{if (nzchar(Sys.getenv("MORIE_RUN_FULL_SMOKE"))) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (nzchar(Sys.getenv("MORIE_RUN_FULL_SMOKE"))) withAutoprint({
 #' # Invokes EVERY registered command handler -- some fetch live data over the
 #' # network -- so this is a smoke test, not a quick example. Opt in with
 #' # MORIE_RUN_FULL_SMOKE=1.
 #' str(stat_bridge_verify(), max.level = 1)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 stat_bridge_verify <- function(execute = FALSE) {
   reg <- .morie_stat_commands$registry

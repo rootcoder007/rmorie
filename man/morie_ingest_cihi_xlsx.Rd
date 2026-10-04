@@ -38,11 +38,11 @@ base R data.frame.
 Download a CIHI indicator .xlsx data table
 }
 \examples{
-\dontshow{if (morie_has("httr2", "readxl")) withAutoprint(\{ # examplesIf}
 \donttest{
+if (morie_has("httr2", "readxl")) withAutoprint({
 # Any table from the catalogue, e.g. the injury/trauma ED table:
 u <- morie_datasets_cihi_data_tables()$url[1]
 df <- morie_ingest_cihi_xlsx(u)
+})
 }
-\dontshow{\}) # examplesIf}
 }

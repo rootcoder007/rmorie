@@ -45,21 +45,71 @@ NULL
 #' Internal helper: Siu An Load
 #' @noRd
 .siu_an_load <- function(x = NULL) {
-  if (is.data.frame(x)) {
-    return(x)
+  df <- if (is.data.frame(x)) {
+    x
+  } else if (is.null(x)) {
+    morie_siu_reports(update = FALSE)  # the reviewed corpus the package ships (offline)
+  } else {
+    p <- as.character(x)
+    if (!file.exists(p)) {
+      stop("SIU dataset not found at '", p, "'. Without a path the shipped corpus is used ",
+           "(rmorie analyze siu); a file comes from `rmorie pull siu --out FILE`, then {\"data\":\"FILE\"}.",
+           call. = FALSE)
+    }
+    utils::read.csv(p, stringsAsFactors = FALSE)
   }
-  default_csv <- file.path(
-    tempdir(), "morie", "siu", "SIU_by_case.csv"
-  )
-  p <- if (is.null(x)) default_csv else as.character(x)
-  if (!file.exists(p)) {
-    stop(
-      "SIU dataset not found at '", p, "'. Run morie_fetch_siu() ",
-      "first, or pass the CSV path explicitly.",
-      call. = FALSE
-    )
+  .siu_an_clean(df)
+}
+
+#' Internal helper: the affected person's sex in a few categories
+#'
+#' The corpus spells it many ways (man, boy, "male (Complainant #2)") and a few cells hold page
+#' text cut at the wrong place; those are "unknown", and several people in one cell are "multiple".
+#' @noRd
+.siu_an_sex <- function(x) {
+  s <- tolower(trimws(as.character(x)))
+  s[is.na(s)] <- ""
+  male <- grepl("\\b(male|man|boy|he|masculin)\\b", s, perl = TRUE) & !grepl("female", s, fixed = TRUE)
+  female <- grepl("\\b(female|woman|girl|she|f\u00e9minin)\\b", s, perl = TRUE)
+  both <- (grepl("female", s, fixed = TRUE) & grepl("\\bmale\\b", s, perl = TRUE)) | grepl(",| and ", s, perl = TRUE)
+  out <- ifelse(grepl("trans", s, fixed = TRUE), "transgender", ifelse(male, "male", ifelse(female, "female", "unknown")))
+  out[both & nchar(s) <= 60] <- "multiple persons"
+  out[nchar(s) > 60] <- "unknown"  # page text, not an answer
+  out
+}
+
+#' Internal helper: one spelling per police service, real dates and plausible ages only
+#' @noRd
+.siu_an_clean <- function(df) {
+  # one row per case: the corpus holds the English and the French copy of a report, and index
+  # rows with no case number; counting those as cases doubled every table
+  if ("case_number" %in% names(df)) {
+    cn <- trimws(as.character(df$case_number))
+    lang_col <- intersect(c("_language", "X_language", "language"), names(df))[1L]
+    lang <- if (!is.na(lang_col)) as.character(df[[lang_col]]) else rep("", nrow(df))
+    keep <- !is.na(cn) & nzchar(cn)
+    df <- df[keep, , drop = FALSE]
+    cn <- cn[keep]
+    lang <- lang[keep]
+    o <- order(cn, lang != "en")  # the English copy first within a case
+    df <- df[o, , drop = FALSE][!duplicated(cn[o]), , drop = FALSE]
+    rownames(df) <- NULL
   }
-  utils::read.csv(p, stringsAsFactors = FALSE)
+  if ("police_service" %in% names(df)) {
+    # "Ontario Provincial Police (OPP)" and "Ontario Provincial Police" are one service
+    df$police_service <- trimws(sub("\\s*\\([A-Z]{2,6}\\)$", "", as.character(df$police_service)))
+  }
+  if ("date_of_incident_iso" %in% names(df)) {
+    d <- as.character(df$date_of_incident_iso)
+    d[is.na(d)] <- ""
+    bad <- nzchar(d) & !grepl("^[0-9]{4}-[0-9]{2}-[0-9]{2}$", d)
+    if (any(bad)) d[bad] <- morie_siu_to_iso_date(d[bad])  # "July 18, 2021" stored in an _iso column
+    yr <- suppressWarnings(as.integer(substr(d, 1L, 4L)))
+    # the SIU was created in 1990: an earlier incident year is a parse of something else
+    d[!is.na(yr) & (yr < 1990L | yr > as.integer(format(Sys.Date(), "%Y")))] <- ""
+    df$date_of_incident_iso <- d
+  }
+  df
 }
 
 
@@ -93,19 +143,27 @@ NULL
 # ---------------------------------------------------------------------------
 #' Internal helper: Siu An Truthy
 #' @noRd
-.siu_an_truthy <- function(v) {
-  if (is.logical(v)) return(sum(v %in% TRUE, na.rm = TRUE))
+.siu_an_truthy <- function(v) sum(.siu_an_charge_flag(v) %in% TRUE)
+
+#' Internal helper: charges_recommended as TRUE / FALSE / NA
+#'
+#' The corpus holds booleans and the Director's own words ("no criminal charges warranted",
+#' "No Charges to Issue"); both count.
+#' @noRd
+.siu_an_charge_flag <- function(v) {
+  if (is.logical(v)) return(v)
   s <- tolower(trimws(as.character(v)))
-  sum(s %in% c("true", "yes", "1", "t"), na.rm = TRUE)
+  s[is.na(s)] <- ""
+  out <- rep(NA, length(s))
+  out[s %in% c("true", "yes", "1", "t")] <- TRUE
+  out[s %in% c("false", "no", "0", "f", "none") |
+        (nzchar(s) & grepl("^(no|not|none|there are no)\\b|not warranted|no (grounds|basis|criminal|charges)", s, perl = TRUE))] <- FALSE
+  out
 }
 
 #' Internal helper: Siu An Falsy
 #' @noRd
-.siu_an_falsy <- function(v) {
-  if (is.logical(v)) return(sum(v %in% FALSE, na.rm = TRUE))
-  s <- tolower(trimws(as.character(v)))
-  sum(s %in% c("false", "no", "0", "f"), na.rm = TRUE)
-}
+.siu_an_falsy <- function(v) sum(.siu_an_charge_flag(v) %in% FALSE)
 
 
 #' SIU cases by police service
@@ -356,13 +414,7 @@ morie_siu_case_counts <- function(data = NULL) {
 #' @export
 morie_siu_demographics <- function(data = NULL) {
   df <- .siu_an_load(data)
-  sex_col <- if ("sex_gender_affected" %in% names(df)) {
-    ifelse(is.na(df$sex_gender_affected) |
-             df$sex_gender_affected == "",
-           "unknown", as.character(df$sex_gender_affected))
-  } else {
-    rep("unknown", nrow(df))
-  }
+  sex_col <- .siu_an_sex(if ("sex_gender_affected" %in% names(df)) df$sex_gender_affected else rep(NA, nrow(df)))
   sex_tab <- sort(table(sex_col), decreasing = TRUE)
   sex_rows <- lapply(names(sex_tab), function(k) {
     list(k, as.integer(sex_tab[[k]]),
@@ -375,6 +427,9 @@ morie_siu_demographics <- function(data = NULL) {
     numeric(0)
   }
   age <- age[!is.na(age)]
+  # an "age" of 1985 is a birth year: ages outside 0-110 are left out and counted
+  n_implausible <- sum(age < 0 | age > 110)
+  age <- age[age >= 0 & age <= 110]
 
   mean_age <- if (length(age)) mean(age) else NA_real_
   med_age  <- if (length(age)) stats::median(age) else NA_real_
@@ -391,7 +446,8 @@ morie_siu_demographics <- function(data = NULL) {
       list("Cases with parseable age", length(age)),
       list("Mean age", mean_age),
       list("Median age", med_age),
-      list("Age range", age_rng)
+      list("Age range", age_rng),
+      list("Ages outside 0-110 (left out)", n_implausible)
     ),
     tables = list(list(
       title   = "By sex/gender:",
@@ -492,7 +548,8 @@ morie_siu_mental_health_race_indicators <- function(data = NULL) {
   a <- suppressWarnings(as.Date(a_iso))
   b <- suppressWarnings(as.Date(b_iso))
   d <- as.numeric(b - a)
-  d <- d[!is.na(d) & is.finite(d)]
+  # a later step dated before an earlier one is a recording error: left out
+  d <- d[!is.na(d) & is.finite(d) & d >= 0]
   if (length(d) == 0L) {
     return(list(label, "n/a", "n/a", "n/a", "n/a", "n/a"))
   }

@@ -3,10 +3,13 @@
 #' Compute the continuous estimated Blood Alcohol Concentration using the
 #' standard Widmark formula. Mirrors the Python `morie.calculate_ebac()`.
 #'
-#' The Widmark formula is:
-#' \deqn{eBAC = (drinks \times 5.14) / (weight\_lbs \times r) - 0.015 \times hours}{eBAC
-#' = (drinks x 5.14) / (weight\_lbs x r) - 0.015 x hours}
-#' where \eqn{r} is the gender constant (0.73 for men, 0.66 for women).
+#' The Widmark formula in US units (Matthews and Miller 1979) is:
+#' \deqn{eBAC = (A \times 5.14) / (weight\_lbs \times r) - 0.015 \times hours}{eBAC
+#' = (A x 5.14) / (weight\_lbs x r) - 0.015 x hours}
+#' where \eqn{A} is the alcohol in fluid ounces of ethanol (a 14 g standard
+#' drink is 0.6 fl oz, so \eqn{A = 0.6 \times drinks}) and \eqn{r} is the
+#' gender constant (0.73 for men, 0.66 for women). Counting each drink as one
+#' ounce overstated eBAC by a factor of 1/0.6.
 #' Returned values are clipped at zero.
 #'
 #' @param drinks Number of standard drinks consumed (1 drink = 14 g alcohol).
@@ -19,10 +22,14 @@
 #' @examples
 #' morie_calculate_ebac(drinks = 4, weight_lbs = 180, hours = 2, gender_constant = 0.73)
 morie_calculate_ebac <- function(drinks, weight_lbs, hours, gender_constant) {
-  if (weight_lbs <= 0) {
-    return(0.0)
+  # a data-entry error must not read as a sober respondent (a negative result clamps to 0 below)
+  if (!isTRUE(weight_lbs > 0)) stop(sprintf("weight_lbs must be > 0, not %s", format(weight_lbs)), call. = FALSE)
+  if (isTRUE(drinks < 0) || isTRUE(hours < 0)) {
+    stop(sprintf("drinks and hours cannot be negative (drinks = %s, hours = %s)", format(drinks), format(hours)), call. = FALSE)
   }
-  ebac <- (drinks * 5.14) / (weight_lbs * gender_constant) - (0.015 * hours)
+  if (!isTRUE(gender_constant > 0)) stop(sprintf("gender_constant must be > 0, not %s", format(gender_constant)), call. = FALSE)
+  ounces <- drinks * 0.6  # a 14 g standard drink is 0.6 fl oz of ethanol (NIAAA)
+  ebac <- (ounces * 5.14) / (weight_lbs * gender_constant) - (0.015 * hours)
   max(0.0, ebac)
 }
 

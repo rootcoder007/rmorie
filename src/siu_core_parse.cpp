@@ -38,9 +38,12 @@ std::string section_text(const std::string& text, const std::string& header,
     const std::regex hpat("(^|\n)[ \t]*" +
                           std::regex_replace(header, std::regex(R"([\^\$\.\|\?\*\+\(\)\[\]\{\}\\])"), R"(\$&)") +
                           "[ \t]*\n");
-    std::smatch m;
-    if (!std::regex_search(text, m, hpat)) return "";
-    const size_t start = m.position(0) + m.length(0);
+    // The LAST heading line: report pages open with a table of contents that repeats every
+    // section title on its own line, and slicing from there gave each section the TOC text.
+    size_t start = std::string::npos;
+    for (auto it = std::sregex_iterator(text.begin(), text.end(), hpat); it != std::sregex_iterator(); ++it)
+        start = static_cast<size_t>(it->position(0) + it->length(0));
+    if (start == std::string::npos) return "";
     size_t end = text.size();
     for (const auto& em : ends) {
         const std::regex epat("(^|\n)[ \t]*" +
@@ -315,17 +318,19 @@ std::string to_iso_date(const std::string& human) {
         "january", "february", "march", "april", "may", "june", "july", "august",
         "september", "october", "november", "december",
         "janvier", "f\xc3\xa9vrier", "fevrier", "mars", "avril", "mai", "juin", "juillet",
-        "ao\xc3\xbbt", "aout", "septembre", "octobre", "novembre", "d\xc3\xa9" "cembre", "decembre"};
+        "ao\xc3\xbbt", "aout", "septembre", "octobre", "novembre", "d\xc3\xa9" "cembre", "decembre",
+        "jan", "feb", "mar", "apr", "jun", "jul", "aug", "sep", "sept", "oct", "nov", "dec"};
     static const int kNums[] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
-                                1, 2, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 12};
+                                1, 2, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 12,
+                                1, 2, 3, 4, 6, 7, 8, 9, 9, 10, 11, 12};
     static const std::map<std::string, int> kMonths = [] {
         std::map<std::string, int> m;
         for (size_t i = 0; i < sizeof(kNums) / sizeof(kNums[0]); ++i) m[kNames[i]] = kNums[i];
         return m;
     }();
     // "January 5, 2023" / "January 5 2023" (month first) or "5 janvier 2023" / "3 ao\xc3\xbbt 2017" (day first)
-    static const std::regex pat(R"(([^\s\d,]+)\s+(\d{1,2})(?:st|nd|rd|th|er|e)?,?\s+(\d{4}))");
-    static const std::regex pat_fr(R"((\d{1,2})(?:er|e)?\s+([^\s\d,]+)\s+(\d{4}))");
+    static const std::regex pat(R"(([^\s\d,.]+)\.?\s+(\d{1,2})(?:st|nd|rd|th|er|e)?,?\s+(\d{4}))");
+    static const std::regex pat_fr(R"((\d{1,2})(?:er|e|st|nd|rd|th)?\s+([^\s\d,.]+)\.?,?\s+(\d{4}))");
     std::smatch m;
     std::string month, day, year;
     if (std::regex_search(human, m, pat) && kMonths.count(lower(m[1].str()))) {
@@ -339,9 +344,45 @@ std::string to_iso_date(const std::string& human) {
     }
     const auto it = kMonths.find(lower(month));
     if (it == kMonths.end()) return "";
+    // "February 30, 2019" is not a date
+    const int y = std::stoi(year), mo = it->second, d = std::stoi(day);
+    static const int kDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    const bool leap = (y % 4 == 0 && y % 100 != 0) || y % 400 == 0;
+    if (d < 1 || d > kDays[mo - 1] + (mo == 2 && leap ? 1 : 0)) return "";
     char buf[16];
     std::snprintf(buf, sizeof buf, "%s-%02d-%02d", year.c_str(), it->second, std::stoi(day));
     return buf;
+}
+
+// "&#233;" / "&#xE9;" -> the character as UTF-8 (any code point the named list misses)
+static std::string decode_numeric_entities(const std::string& s) {
+    static const std::regex ent(R"(&#(x[0-9A-Fa-f]+|[0-9]+);)");
+    std::string out;
+    std::size_t last = 0;
+    for (auto it = std::sregex_iterator(s.begin(), s.end(), ent); it != std::sregex_iterator(); ++it) {
+        const std::string g = (*it)[1].str();
+        const unsigned long cp = g[0] == 'x' ? std::stoul(g.substr(1), nullptr, 16) : std::stoul(g);
+        out.append(s, last, static_cast<std::size_t>(it->position(0)) - last);
+        last = static_cast<std::size_t>(it->position(0) + it->length(0));
+        if (cp == 0 || cp > 0x10FFFF) continue;
+        if (cp < 0x80) {
+            out += static_cast<char>(cp);
+        } else if (cp < 0x800) {
+            out += static_cast<char>(0xC0 | (cp >> 6));
+            out += static_cast<char>(0x80 | (cp & 0x3F));
+        } else if (cp < 0x10000) {
+            out += static_cast<char>(0xE0 | (cp >> 12));
+            out += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+            out += static_cast<char>(0x80 | (cp & 0x3F));
+        } else {
+            out += static_cast<char>(0xF0 | (cp >> 18));
+            out += static_cast<char>(0x80 | ((cp >> 12) & 0x3F));
+            out += static_cast<char>(0x80 | ((cp >> 6) & 0x3F));
+            out += static_cast<char>(0x80 | (cp & 0x3F));
+        }
+    }
+    out.append(s, last, std::string::npos);
+    return out;
 }
 
 std::string html_to_text(const std::string& html) {
@@ -368,6 +409,16 @@ std::string html_to_text(const std::string& html) {
     t = std::regex_replace(t, std::regex(R"(&#8212;|&mdash;)"), "--");
     // Angle brackets last: the markup is already gone, so a decoded "<"
     // cannot be mistaken for a tag by anything downstream.
+    // accented named entities of the French pages, as UTF-8
+    static const std::array<std::pair<const char*, const char*>, 18> kNamed = {{
+        {"&eacute;", "\xc3\xa9"}, {"&egrave;", "\xc3\xa8"}, {"&ecirc;", "\xc3\xaa"}, {"&euml;", "\xc3\xab"},
+        {"&agrave;", "\xc3\xa0"}, {"&acirc;", "\xc3\xa2"}, {"&ccedil;", "\xc3\xa7"}, {"&icirc;", "\xc3\xae"},
+        {"&iuml;", "\xc3\xaf"}, {"&ocirc;", "\xc3\xb4"}, {"&ouml;", "\xc3\xb6"}, {"&ucirc;", "\xc3\xbb"},
+        {"&ugrave;", "\xc3\xb9"}, {"&uuml;", "\xc3\xbc"}, {"&auml;", "\xc3\xa4"}, {"&copy;", "\xc2\xa9"},
+        {"&reg;", "\xc2\xae"}, {"&Eacute;", "\xc3\x89"}}};
+    for (const auto& [ent, ch] : kNamed) t = std::regex_replace(t, std::regex(ent), ch);
+    t = std::regex_replace(t, std::regex(R"(&hellip;|&#8230;)"), "...");
+    t = decode_numeric_entities(t);
     t = std::regex_replace(t, std::regex(R"(&lt;)"), "<");
     t = std::regex_replace(t, std::regex(R"(&gt;)"), ">");
     // collapse spaces but keep newlines (section slicing needs them)

@@ -11,10 +11,11 @@
 test_that("inspect/verify --module matches the hyphenated module name against the tables it wrote", {
   d <- withr::local_tempdir()
   utils::write.csv(data.frame(a = 1:2, b = c("x", "")), file.path(d, "power_summary.csv"), row.names = FALSE)
-  utils::write.csv(data.frame(a = 1:2), file.path(d, "ebac_core.csv"), row.names = FALSE)
+  utils::write.csv(data.frame(a = 1:2), file.path(d, "ebac_data_quality_checks.csv"), row.names = FALSE)
   expect_equal(basename(.cli_csv_files(d, "power-design")), "power_summary.csv")
   expect_equal(basename(.cli_csv_files(d, "power_design")), "power_summary.csv")
-  expect_equal(basename(.cli_csv_files(d, "ebac-core")), "ebac_core.csv")
+  # a module morie knows selects exactly the tables it writes (its list in module_outputs.R)
+  expect_equal(basename(.cli_csv_files(d, "ebac-core")), "ebac_data_quality_checks.csv")
   msgs <- character()
   all_files <- .cli_csv_files(d, "logistic-models", out = function(s) msgs <<- c(msgs, s))
   expect_length(all_files, 2L)
@@ -22,7 +23,7 @@ test_that("inspect/verify --module matches the hyphenated module name against th
   r <- .cap("inspect", d, "--module", "power-design")
   expect_equal(r$status, 0L)
   expect_match(r$text, "power_summary.csv")
-  expect_false(grepl("ebac_core", r$text))
+  expect_false(grepl("ebac_data_quality", r$text))
   expect_equal(.cap("verify", d, "--module", "power-design")$status, 0L)
 })
 
@@ -238,7 +239,7 @@ test_that("the SIU LLM chain reads GEMINI_API_KEY and knows the hosted tier", {
 test_that("selftest names the reason for a skip", {
   skip_if_not(exists(".cli_selftest"))
   src <- deparse(body(.cli_selftest))
-  expect_true(any(grepl("rmorie was built without liboqs/libsodium", src, fixed = TRUE)))
+  expect_true(any(grepl("rmorie was built without libsodium", src, fixed = TRUE)))
   expect_true(any(grepl("no CPADS CSV", src, fixed = TRUE)))
 })
 

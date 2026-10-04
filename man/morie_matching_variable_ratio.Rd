@@ -37,14 +37,14 @@ ratio = max_ratio, min.controls = min_ratio)} which supports
 variable-ratio nearest-neighbour matching natively.
 }
 \examples{
-\dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
+if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint({
 set.seed(1)
 df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.25),
                  x1 = rnorm(200), x2 = rnorm(200))
 # an average of two controls per treated unit needs twice as many controls as treated
 morie_matching_variable_ratio(df, "d", c("x1", "x2"),
                               min_ratio = 1, max_ratio = 3)
+})
 }
-\dontshow{\}) # examplesIf}
 }

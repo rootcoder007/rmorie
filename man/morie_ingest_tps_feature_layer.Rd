@@ -45,8 +45,8 @@ pages through transparently using \code{resultOffset} and the
 \code{exceededTransferLimit} flag, emitting one data.frame.
 }
 \examples{
-\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
+if (requireNamespace("httr2", quietly = TRUE)) withAutoprint({
 df <- morie_ingest_tps_feature_layer(
   morie_ingest_tps_layers()$url[
     morie_ingest_tps_layers()$name == "major-crime"
@@ -55,6 +55,6 @@ df <- morie_ingest_tps_feature_layer(
   max_features = 5000L
 )
 nrow(df)
+})
 }
-\dontshow{\}) # examplesIf}
 }

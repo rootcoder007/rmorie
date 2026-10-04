@@ -32,8 +32,15 @@
     # a table belongs to the module when it sits in the module's own output directory or its name
     # starts with the module's name (ebac_core_*, descriptive_statistics_*); only when no table does
     # is the module's first word tried as a prefix (power-design writes power_*), never a substring
-    hit <- grepl(paste0("/", module, "/"), files, fixed = TRUE) | startsWith(norm(basename(files)), key)
-    if (!any(hit) && nzchar(stem)) hit <- startsWith(tolower(basename(files)), paste0(stem, "_"))
+    known <- .morie_module_outputs[[module]]
+    hit <- if (!is.null(known)) {
+      # a module morie knows: exactly the tables it writes
+      basename(files) %in% basename(known) | grepl(paste0("/", module, "/"), files, fixed = TRUE) |
+        startsWith(norm(basename(files)), key)
+    } else {
+      grepl(paste0("/", module, "/"), files, fixed = TRUE) | startsWith(norm(basename(files)), key)
+    }
+    if (is.null(known) && !any(hit) && nzchar(stem)) hit <- startsWith(tolower(basename(files)), paste0(stem, "_"))
     if (any(hit)) {
       files <- files[hit]
     } else if (!is.null(out)) {
@@ -95,7 +102,14 @@
     .cli_dataset_route(cat_df[cat_df$key == d$key[i], , drop = FALSE][1L, ])
   }, character(1L))
   shown <- ifelse(d$cached & !is.na(d$rows), format(d$rows, big.mark = ",", trim = TRUE), "not cached")
-  out(paste0(sprintf("%-20s %-12s %10s  %s", d$key, d$type, shown, route), collapse = "\n"))
+  own <- startsWith(route, "own file")
+  for (i in which(own & !d$cached)) {  # read in place, never cached: say whether the file is there
+    lp <- cat_df$local_path[cat_df$key == d$key[i]][1L]
+    shown[i] <- if (!is.null(.morie_own_file_path(lp))) "present" else if (identical(d$key[i], "mapq")) "synthetic" else "not found"
+  }
+  kw <- max(20L, max(nchar(d$key)))  # long db/table keys ran into the type column
+  out(sprintf(paste0("%-", kw, "s %-12s %10s  %s\n"), "Key", "Type", "Rows", "Route"))
+  out(paste0(sprintf(paste0("%-", kw, "s %-12s %10s  %s"), d$key, d$type, shown, route), collapse = "\n"))
   out("\n")
   n_hub <- sum(d$type == "hosted")
   n_cat <- nrow(d) - n_hub
@@ -107,7 +121,7 @@
   if (n_hub) {
     out(sprintf("%d curated tables at data.rmorie.com (db/table keys), opened by your MORIE key: rmorie pull KEY\n", n_hub))
   } else {
-    out("Curated tables at data.rmorie.com appear here after `rmorie login` (GitHub) or `rmorie login --email you@example.com` (they need the MORIE key).\n")
+    out(paste0("Curated tables at data.rmorie.com appear here after `rmorie login` (GitHub) or `rmorie login --email you@example.com` (they need the MORIE key)", .morie_httr2_note(), ".\n"))
   }
   0L
 }
@@ -154,35 +168,40 @@
     out(sprintf("%s\n", if (dir.exists(target)) paste("No CSV files found in", target) else paste("Path not found:", target)))
     return(1L)
   }
-  ok <- TRUE
+  failed <- 0L
   for (f in files) {
     rep <- if (grepl("\\.json$", f, ignore.case = TRUE)) morie_verify_statistical_output(f) else .cli_verify_csv(f)
     out(.cli_verify_text(rep))
-    if (!isTRUE(rep$passed)) ok <- FALSE
+    if (!isTRUE(rep$passed)) failed <- failed + 1L
   }
-  if (ok) 0L else 1L
+  if (length(files) > 1L) out(sprintf("\n%d tables: %d PASS, %d FAIL\n", length(files), length(files) - failed, failed))
+  if (failed) 1L else 0L
 }
 
 # A module table verified as a CSV: parses, has rows and columns, no column that is entirely NA,
 # no infinite numbers, the header is unique. Shaped like morie_verify_statistical_output()'s report.
 .cli_verify_csv <- function(path) {
   checks <- list()
-  df <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE), error = function(e) NULL)
-  checks$csv_parses <- !is.null(df)
-  if (is.null(df)) return(list(path = path, passed = FALSE, checks = checks))
+  # read.csv's warnings (an unterminated quote, a missing final newline) are judged below, not printed
+  read <- function(...) tryCatch(suppressWarnings(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE, ...)),
+                                 error = function(e) NULL)
+  df <- read()
+  lines <- tryCatch(sum(nzchar(trimws(readLines(path, warn = FALSE)))), error = function(e) 0L)
+  # a header with no rows although the file has more lines: a quote that never closes swallowed them
+  checks$csv_parses <- !is.null(df) && !(nrow(df) == 0L && lines > 1L)
+  if (!checks$csv_parses) return(list(path = path, passed = FALSE, checks = checks))
   checks$has_columns <- ncol(df) > 0L
   checks$unique_header <- !anyDuplicated(names(df))
   num <- vapply(df, is.numeric, TRUE)
   checks$no_infinite <- !any(vapply(df[num], function(col) any(is.infinite(col)), TRUE))
   # a column of blank cells (a text field with nothing to say, e.g. missing_formula_inputs) is not empty;
   # only a column whose every cell is the NA token is
-  raw <- tryCatch(utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE, colClasses = "character"),
-                  error = function(e) NULL)
+  raw <- read(colClasses = "character")
   na_col <- function(col) all(is.na(col) | col == "NA")
   # a one-row table whose text says what was not computed ("not computed", "deferred") with NA numbers is a
   # declared placeholder, written by a module that skipped an optional step on purpose; a header-only table is empty
   placeholder <- nrow(df) == 1L && !is.null(raw) && any(vapply(raw, na_col, TRUE)) &&
-    any(vapply(raw, function(col) !na_col(col) && grepl("not computed|deferred|not part of|not run|not available", col[[1L]], ignore.case = TRUE), TRUE))
+    any(vapply(raw, function(col) !na_col(col) && grepl("not computed|deferred|not part of|not run|not.available|not installed|skipped", col[[1L]], ignore.case = TRUE), TRUE))
   checks$no_empty_column <- nrow(df) == 0L || is.null(raw) || placeholder ||
     !any(vapply(raw, na_col, TRUE))
   # statistical sanity: a p-value lives in [0, 1]; a confidence interval's lower bound is below its upper
@@ -193,6 +212,9 @@
   hi <- names(df)[tolower(names(df)) %in% c("ci_upper", "ci_high", "upper", "conf_high", "conf.high") & num]
   checks$ci_bounds_ordered <- !(length(lo) == 1L && length(hi) == 1L) ||
     all(is.na(df[[lo]]) | is.na(df[[hi]]) | df[[lo]] <= df[[hi]])
+  # a standard error is never negative
+  secols <- names(df)[tolower(names(df)) %in% c("se", "std_error", "std.error", "stderr", "std_err", "standard_error") & num]
+  checks$se_nonnegative <- all(vapply(df[secols], function(col) all(is.na(col) | col >= 0), TRUE))
   list(path = path, passed = all(unlist(checks)), checks = checks, rows = nrow(df), cols = ncol(df),
        note = if (isTRUE(placeholder)) "placeholder row: this table was declared not computed" else
          if (nrow(df) == 0L) "header only: the module wrote no rows here" else NULL)
@@ -208,7 +230,14 @@
     out(sprintf("File not found: %s\n", path))
     return(1L)
   }
-  df <- utils::read.csv(path, stringsAsFactors = FALSE)
+  df <- utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
+  for (h in c("--treatment", "--outcome", "--weights")) {
+    col <- flag(h)
+    if (!is.null(col) && !col %in% names(df)) {
+      out(sprintf("%s %s: not a column of %s (columns: %s)\n", h, col, path, paste(names(df), collapse = ", ")))
+      return(2L)
+    }
+  }
   profile <- morie_dataset_profile(df, hint_treatment = flag("--treatment"),
                                    hint_outcome = flag("--outcome"), hint_weights = flag("--weights"))
   out(paste0(paste(morie_dataset_profile_summary_table(profile), collapse = "\n"), "\n"))
@@ -245,48 +274,39 @@
     out(sprintf("File not found: %s\n", path))
     return(1L)
   }
-  df <- utils::read.csv(path, stringsAsFactors = FALSE)
-  if (n > nrow(df) && method %in% c("srs", "stratified")) {
-    out(sprintf("--n %d exceeds the %d rows in %s\n", n, nrow(df), path))
+  methods <- c("srs", "stratified", "cluster", "pps")
+  if (!method %in% methods) {
+    out(sprintf("unknown --method '%s' (methods: %s)\n", method, paste(methods, collapse = ", ")))
+    return(2L)
+  }
+  df <- utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
+  # every usage problem is named in words and exits 2, before anything is drawn
+  need <- c(stratified = "--strata-col", cluster = "--cluster-col", pps = "--size-col")[method]
+  col <- if (!is.na(need)) flag(need) else NULL
+  if (!is.na(need) && is.null(col)) {
+    out(sprintf("--method %s needs %s COL\n", method, need))
+    return(2L)
+  }
+  if (!is.null(col) && !col %in% names(df)) {
+    out(sprintf("column '%s' is not in %s (columns: %s)\n", col, path, paste(head(names(df), 12), collapse = ", ")))
+    return(2L)
+  }
+  if (n > nrow(df) && method %in% c("srs", "stratified", "pps")) {
+    out(sprintf("--n %d exceeds the %d rows in %s%s\n", n, nrow(df), path,
+                if (method == "pps") " (PPS draws without replacement)" else ""))
+    return(1L)
+  }
+  if (method == "cluster" && n > length(unique(df[[col]]))) {
+    out(sprintf("--n %d clusters asked for; %s has %d clusters\n", n, col, length(unique(df[[col]]))))
     return(1L)
   }
   s <- switch(method,
     srs = morie_simple_random_sample(df, n, seed = seed),
-    stratified = {
-      col <- flag("--strata-col")
-      if (is.null(col)) {
-        out("Error: --strata-col is required for stratified sampling\n")
-        return(1L)
-      }
-      if (!col %in% names(df)) {
-        out(sprintf("column '%s' is not in %s (columns: %s)\n", col, path, paste(head(names(df), 12), collapse = ", ")))
-        return(1L)
-      }
-      # --n is the total sample size, allocated across the strata in proportion to their sizes;
-      # --per-stratum draws --n rows from every stratum instead
-      if (has("--per-stratum")) morie_stratified_sample(df, col, n, proportional = FALSE, seed = seed)
-      else morie_stratified_sample(df, col, n, proportional = TRUE, seed = seed)
-    },
-    cluster = {
-      col <- flag("--cluster-col")
-      if (is.null(col)) {
-        out("Error: --cluster-col is required for cluster sampling\n")
-        return(1L)
-      }
-      morie_cluster_sample(df, col, n, seed = seed)
-    },
-    pps = {
-      col <- flag("--size-col")
-      if (is.null(col)) {
-        out("Error: --size-col is required for PPS sampling\n")
-        return(1L)
-      }
-      morie_pps_sample(df, col, n, seed = seed)
-    },
-    {
-      out(sprintf("Unknown method: %s\n", method))
-      return(1L)
-    })
+    # --n is the total sample size, allocated across the strata in proportion to their sizes;
+    # --per-stratum draws --n rows from every stratum instead
+    stratified = morie_stratified_sample(df, col, n, proportional = !has("--per-stratum"), seed = seed),
+    cluster = morie_cluster_sample(df, col, n, seed = seed),
+    pps = morie_pps_sample(df, col, n, seed = seed))
   if (has("--no-weight")) s$.weight <- NULL
   out(sprintf("Sampled %d rows using %s%s\n", nrow(s), method,
               if (".weight" %in% names(s)) " (the .weight column holds each row's design weight; --no-weight drops it)" else ""))
@@ -313,8 +333,14 @@
     return(1L)
   }
   od <- flag("--output-dir")
+  if (is.null(od)) {
+    # without a directory the module tables were computed and thrown away
+    od <- "morie-output"
+    out(sprintf("writing the module tables under %s/ (choose with --output-dir)\n", od))
+  }
   cp <- flag("--cpads") %||% flag("--cpads-csv")
   if (is.null(cp) && !is.null(flag("--dataset"))) cp <- .cpads_dataset_csv(flag("--dataset"))
+  before <- .cli_file_stamps(od)
   run <- function() {
     if (is.null(cp)) morie_run_morie_modules(selected, output_dir = od)
     else morie_run_morie_modules(selected, cpads_csv = cp, output_dir = od)
@@ -328,8 +354,29 @@
   } else {
     res <- run()
   }
-  out(sprintf("Completed modules: %s\n", paste(names(res), collapse = ", ")))
-  0L
+  empty <- vapply(res, function(x) !length(x), logical(1L))
+  if (any(!empty)) out(sprintf("Completed modules: %s\n", paste(names(res)[!empty], collapse = ", ")))
+  n_new <- .cli_files_written(od, before)
+  out(sprintf(paste0("Written to %s/ (%d new file%s; the modules of one run share this directory so figures, tables ",
+                     "and final-report can read the others' tables; run-module NAME alone uses morie-output/NAME/)\n"),
+              od, n_new, if (n_new == 1L) "" else "s"))
+  if (any(empty)) {
+    out(sprintf("Wrote nothing: %s (figures, tables and meta-synthesis collect what a project checkout wrote)\n",
+                paste(names(res)[empty], collapse = ", ")))
+  }
+  if (all(empty)) 1L else 0L
+}
+
+# modification times of the files under `dir` (named by path), to tell what a run wrote
+.cli_file_stamps <- function(dir) {
+  f <- list.files(dir, recursive = TRUE, full.names = TRUE)
+  stats::setNames(as.numeric(file.mtime(f)), f)
+}
+
+# files under `dir` that are new or changed since `before` (.cli_file_stamps)
+.cli_files_written <- function(dir, before) {
+  now <- .cli_file_stamps(dir)
+  sum(!names(now) %in% names(before) | now > before[names(now)], na.rm = TRUE)  # NA for a new file: counted by the first test
 }
 
 .cli_percy <- function(rest, flag, out, verb) {
@@ -361,6 +408,7 @@
   failed <- vapply(res, function(x) {
     if (!is.list(x)) return(FALSE)
     grepl("(failed)", x$title %||% "", fixed = TRUE) ||
+      any(grepl("^missing column", unlist(x$warnings %||% character()))) ||
       (!length(x$tables %||% list()) && !length(x$payload %||% list()) && !length(x$summary_lines %||% list()))
   }, TRUE)
   length(failed) > 0L && all(failed)
@@ -383,7 +431,7 @@
   }
   if (gemini_key) return(paste0(lead, gemini_line))
   if (nzchar(lead)) return(paste0(lead, "rmorie models lists the names\n"))
-  "no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email, or start Ollama)\n"
+  paste0("no LLM backend answered; this is the local fallback text (rmorie login with GitHub or --email", .morie_httr2_note(), ", or start Ollama)\n")
 }
 
 .cli_chat <- function(rest, flag, out) {
@@ -426,8 +474,10 @@
   })
   check("sampling: SRS", function() nrow(morie_simple_random_sample(data.frame(x = 1:50), 5L)) == 5L)
   check("crypto: hybrid round trip", function() {
-    if (!isTRUE(tryCatch(morie_crypto_liboqs_available(), error = function(e) FALSE)) ||
-        !isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) return(c("skip", "rmorie was built without liboqs/libsodium"))
+    # ML-KEM runs without liboqs (rmoriebricklayer's FIPS 203 code); the symmetric layer needs libsodium
+    if (!isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) {
+      return(c("skip", "rmorie was built without libsodium (ChaCha20-Poly1305): install libsodium-devel / libsodium-dev and reinstall"))
+    }
     k <- morie_crypto_hybrid_keygen()
     ct <- morie_crypto_hybrid_encrypt(charToRaw("selftest"), k$pk)
     identical(rawToChar(morie_crypto_hybrid_decrypt(ct, k$sk)), "selftest")
@@ -644,7 +694,7 @@
       return(1L)
     }
     pk <- if (file.exists(rcpt)) readBin(rcpt, "raw", file.info(rcpt)$size) else {
-      morie_crypto_keystore_load(rcpt, .cli_keystore_password(), path = .cli_keystore_path())$pk
+      morie_crypto_keystore_public_key(rcpt, path = .cli_keystore_path())  # no password: public keys are in the clear
     }
     ct <- morie_crypto_hybrid_encrypt(readBin(f, "raw", file.info(f)$size), pk)
     dest <- paste0(f, ".morieenc")
@@ -733,6 +783,11 @@
     od <- flag("--out") %||% "siu-out"
     dir.create(od, recursive = TRUE, showWarnings = FALSE)
     html <- morie_siu_fetch_report(flag("--report-id"))
+    # an unknown id still answers 200 with the empty report template ("Case Number: " and nothing after)
+    if (!grepl("\\b[0-9]{2}-[A-Z]{3,4}-[0-9]{3}\\b", paste(as.character(html), collapse = "\n"))) {
+      out(sprintf("no SIU report with id %s (the site returned its empty template); ids: rmorie ingest siu --list\n", flag("--report-id")))
+      return(1L)
+    }
     f <- file.path(od, paste0(flag("--report-id"), ".html"))
     writeLines(as.character(html), f)
     out(sprintf("wrote %s\n", f))
@@ -751,9 +806,17 @@
     }
     if (identical(action, "fetch") && length(rest) > 2L) {
       r <- morie_ingest_a2aj_fetch(rest[[3L]], doc_type = dt)
+      if (is.null(r)) {
+        out(sprintf("no %s found for '%s' (a2aj search QUERY finds citations)\n", if (dt == "laws") "law" else "decision", rest[[3L]]))
+        return(1L)
+      }
       out(paste0(paste(utils::capture.output(utils::str(r, max.level = 1L)), collapse = "\n"), "\n"))
       return(0L)
     }
+    out(usage)
+    return(2L)
+  }
+  if (!nzchar(portal)) {
     out(usage)
     return(2L)
   }
@@ -792,6 +855,10 @@
 
 .cli_exec <- function(rest, flag, out) {
   f <- flag("--file")
+  if (!is.null(f) && !file.exists(f)) {
+    out(sprintf("%s: no such file\n", f))
+    return(1L)
+  }
   code <- if (!is.null(f)) paste(readLines(f, warn = FALSE), collapse = "\n") else paste(rest[!rest %in% c("--file", f)], collapse = " ")
   if (!nzchar(trimws(code))) {
     out("usage: rmorie exec 'R CODE' | rmorie exec --file script.R\n")
@@ -863,7 +930,7 @@
   pol <- flag("--pollutant")
   if (is.null(pol)) {
     out(paste0("usage: rmorie verify-pollution --pollutant no2|pm25 [--demo | --exposure-csv FILE | ",
-               "--exposure-mean X --exposure-prevalence P] [--outcome NAME] [--reference 5.8] [--baseline-rate 500] ",
+               "--exposure-mean X --exposure-prevalence P] [--outcome NAME] [--reference X (default 10 for no2, 5.8 for pm25)] [--baseline-rate 500] ",
                "[--population 1000000] [--region R] [--years Y] [--json]\n"))
     return(2L)
   }
@@ -897,8 +964,11 @@
 
 .cli_emissions <- function(flag, has, out) {
   country <- toupper(flag("--country") %||% "")
+  if (nchar(country) == 2L) country <- .emissions_iso2_to_iso3(country) %||% country  # FR -> FRA
   if (nzchar(country) && is.null(.emissions_energy_mix()[[country]])) {
-    out(sprintf("--country %s: not an ISO-3 code in the energy-mix table; ignoring it and detecting the location instead (the world average applies only when detection fails; MORIE_COUNTRY_ISO overrides)\n", country))
+    out(sprintf(paste0("--country %s: not a country code in the energy-mix table (ISO-3 such as CAN, FRA, USA; ",
+                       "ISO-2 FR also works); ignoring it and detecting the location instead (the world average ",
+                       "applies only when detection fails; MORIE_COUNTRY_ISO overrides)\n"), flag("--country")))
     country <- ""
   }
   secs <- suppressWarnings(as.numeric(flag("--seconds") %||% "3"))
@@ -911,6 +981,11 @@
     return(2L)
   }
   od <- flag("--output-dir") %||% "emissions"
+  dir.create(od, recursive = TRUE, showWarnings = FALSE)
+  if (!dir.exists(od) || file.access(od, 2L) != 0L) {
+    out(sprintf("cannot write to %s (permission denied, or the path cannot be created)\n", od))
+    return(1L)
+  }
   t <- morie_emissions_start(project_name = "morie-emissions-check", output_dir = od,
                              capsule = !has("--no-capsule"),
                              country_iso_code = country)
@@ -927,6 +1002,13 @@
 
 # `rmorie VERB --help`: the lines of the help text that describe the verb, never the verb itself.
 .cli_verb_help <- function(verb, out) {
+  if (verb %in% c("crypto", "sample", "verify-pollution", "ingest")) {
+    # their bare call prints the full usage (every flag); the help summary line had less
+    full <- character()
+    morie_cli(verb, out = function(s) full <<- c(full, s))
+    out(paste(full, collapse = ""))
+    return(0L)
+  }
   txt <- character()
   morie_cli("help", out = function(s) txt <<- c(txt, s))
   lines <- strsplit(paste(txt, collapse = ""), "\n", fixed = TRUE)[[1L]]

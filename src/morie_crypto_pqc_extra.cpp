@@ -47,8 +47,9 @@ OQS_KEM* new_hqc128() {
 #endif
 
 #define MORIE_NO_OQS_STOP                                              \
-  Rcpp::stop("morie was built without liboqs; reinstall with "        \
-             "liboqs-dev / brew install liboqs and rebuild morie.");   \
+  Rcpp::stop("HQC needs liboqs, which this build of rmorie did not "  \
+             "find (configure says why); install liboqs-devel / "      \
+             "liboqs-dev / brew install liboqs and reinstall.");       \
   return R_NilValue;
 
 // ---------------------------------------------------------------------

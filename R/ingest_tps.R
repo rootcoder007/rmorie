@@ -176,8 +176,8 @@ morie_ingest_tps_layers <- function() {
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examples
-#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("httr2", quietly = TRUE)) withAutoprint({
 #' df <- morie_ingest_tps_feature_layer(
 #'   morie_ingest_tps_layers()$url[
 #'     morie_ingest_tps_layers()$name == "major-crime"
@@ -186,8 +186,8 @@ morie_ingest_tps_layers <- function() {
 #'   max_features = 5000L
 #' )
 #' nrow(df)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_tps_feature_layer <- function(
     layer_url,

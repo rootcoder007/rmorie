@@ -10,7 +10,8 @@ morie_fetch_arcgis(
   out_fields = "*",
   params = NULL,
   page_size = 2000L,
-  max_records = Inf
+  max_records = Inf,
+  label = NULL
 )
 }
 \arguments{
@@ -27,6 +28,8 @@ or \code{/MapServer/<n>}.}
 
 \item{max_records}{Cap on the total number of records (default
 \code{Inf} -- fetch the whole layer).}
+
+\item{label}{Name shown on the progress bar (default: the service name in \code{layer_url}).}
 }
 \value{
 A data.frame of feature attributes (geometry is dropped).

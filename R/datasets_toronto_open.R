@@ -170,15 +170,15 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
 #' @param limit Page size (max 32000 per CKAN; sane default 100).
 #' @return A `data.frame` of records.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
 #' df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],
 #'   limit = 5L
 #' ))
 #' if (!inherits(df, "try-error")) head(df)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_toronto_open_ckan_resource <- function(resource_id,
                                                       limit = 100L) {

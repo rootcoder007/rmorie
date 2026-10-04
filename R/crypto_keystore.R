@@ -27,9 +27,10 @@
 
 #' Internal helper: Morie Keystore Require
 #' @noRd
-.morie_keystore_require <- function() {
-  if (!requireNamespace("sodium", quietly = TRUE)) {
-    stop("morie_crypto requires sodium; install.packages('sodium')",
+.morie_keystore_require <- function(sodium = TRUE) {
+  if (sodium && !requireNamespace("sodium", quietly = TRUE)) {
+    stop("the key store seals secret keys with the R package sodium: install.packages(\"sodium\") ",
+         "(encrypting to a public key, and the post-quantum layer, need nothing extra)",
       call. = FALSE
     )
   }
@@ -94,7 +95,7 @@
 #' Internal helper: Morie Read Store
 #' @noRd
 .morie_read_store <- function(path) {
-  .morie_keystore_require()
+  .morie_keystore_require(sodium = FALSE)  # public keys are stored in the clear
   p <- .morie_resolve_path(path)
   if (!file.exists(p)) {
     stop(sprintf("Keystore not found: %s", p), call. = FALSE)
@@ -187,6 +188,33 @@ morie_crypto_keystore_store <- function(name, pk, sk, password,
   )
   .morie_write_store(store, path)
   invisible(NULL)
+}
+
+#' Public key of a key pair in the morie keystore
+#'
+#' Public keys are stored in the clear, so neither the password nor the
+#' \pkg{sodium} package is needed (encrypting to someone needs only this).
+#' @param name Identifier.
+#' @param path Keystore path.
+#' @return Raw vector, the public key.
+#' @examples
+#' \dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' path <- tempfile(fileext = ".keystore")
+#' morie_crypto_keystore_create("pw", path = path)
+#' morie_crypto_keystore_store("alice", pk = as.raw(1:32), sk = as.raw(1:64), password = "pw", path = path)
+#' identical(morie_crypto_keystore_public_key("alice", path = path), as.raw(1:32))
+#' unlink(path)
+#' \dontshow{\}) # examplesIf}
+#' @export
+morie_crypto_keystore_public_key <- function(name, path = .morie_keystore_default_path()) {
+  if (!is.character(name) || length(name) != 1L) {
+    stop("name must be a single character string", call. = FALSE)
+  }
+  store <- .morie_read_store(path)
+  if (is.null(store$keys) || is.null(store$keys[[name]])) {
+    stop(sprintf("Key '%s' not found in keystore", name), call. = FALSE)
+  }
+  .morie_hex_to_raw(store$keys[[name]]$pk)
 }
 
 #' Load a key pair from the morie keystore

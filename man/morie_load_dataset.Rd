@@ -30,8 +30,8 @@ error. Supports fuzzy matching: \code{morie_load_dataset("cpads_2021")}
 resolves to \code{ocp21}.
 }
 \examples{
-\dontshow{if (morie_has("sql")) withAutoprint(\{ # examplesIf}
 \donttest{
+if (morie_has("sql")) withAutoprint({
 # CPADS 2021-2022: downloaded once from open.canada.ca (39 MB), then a local
 # read; try() so a missing optional backend does not fail the check
 df <- try(morie_load_dataset("ocp21"))
@@ -42,8 +42,8 @@ df <- try(morie_load_dataset("ocp21"))
 # con <- DBI::dbConnect(RPostgres::Postgres(),
 #   host = "localhost", dbname = "morie", user = "...")
 # df <- morie_load_dataset("ocp21", con = con)
+})
 }
-\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}

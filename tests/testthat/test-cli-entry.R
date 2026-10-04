@@ -37,7 +37,7 @@ test_that("login forwards the flags to morie_llm_login and logout forgets the ke
   expect_equal(seen$code, "123456")
   expect_false(seen$open_browser)
   expect_match(r$text, "Logged in to https://llm.rmorie.com")
-  expect_equal(.capture("login", "--email")$status, 1L)
+  expect_equal(.capture("login", "--email")$status, 2L)  # a flag without its value is a usage error
   r2 <- .capture("login", "--email", "vee@example.com", "--code", "1", "--to-email")
   expect_equal(r2$status, 0L)
   expect_true(seen$to_email)
@@ -135,8 +135,11 @@ test_that("list-modules, cheatsheet, pull and run-module verbs work", {
   expect_match(p$text, "3 rows, 2 cols")
   expect_equal(nrow(utils::read.csv(dest)), 3L)
   testthat::local_mocked_bindings(.package = .pkg,
-    morie_run_morie_module = function(module_name, cpads_csv, output_dir = NULL) list(a = 1, b = 2))
-  r <- .capture("run-module", "power-design", "--output-dir", tempdir())
+    morie_run_morie_module = function(module_name, cpads_csv, output_dir = NULL) {
+      utils::write.csv(data.frame(x = 1), file.path(output_dir, "a.csv"), row.names = FALSE)  # it wrote a table
+      list(a = 1, b = 2)
+    })
+  r <- .capture("run-module", "power-design", "--output-dir", withr::local_tempdir())
   expect_equal(r$status, 0L)
   expect_match(r$text, "Generated tables: a, b")
 })
@@ -155,12 +158,12 @@ test_that("provider set/show/unset store an endpoint the chain reads", {
   expect_equal(.capture("provider", "unset")$status, 0L)
   expect_null(.morie_llm_api_base())
   expect_match(.capture("provider", "bogus")$text, "usage: rmorie provider")
-  expect_equal(.capture("provider", "set", "--key", "x")$status, 1L)
+  expect_equal(.capture("provider", "set", "--key", "x")$status, 2L)  # --base-url missing: usage
 })
 
 
 test_that("output verbs: explain, inspect and verify", {
-  expect_match(.capture("explain", "power_two_proportion_gender.csv")$text, "effect_size")
+  expect_match(.capture("explain", "power_two_proportion_gender.csv")$text, "group1, group2")
   d <- withr::local_tempdir()
   f <- file.path(d, "t.csv")
   utils::write.csv(data.frame(statistic = c(1.5, 2), p_value = c(0.05, 0.01)), f, row.names = FALSE)

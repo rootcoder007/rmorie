@@ -229,9 +229,11 @@ morie_dataset_column_profile <- function(series, name,
     name = name,
     ordinal_threshold = ordinal_threshold
   )
-  role <- morie_dataset_detect_role(series, name)
   non_null <- series[!is.na(series)]
   n_unique <- length(unique(non_null))
+  # a column with no values, or one value, carries no information for a model
+  role <- morie_dataset_detect_role(series, name)
+  if (!length(non_null)) role <- "empty" else if (n_unique <= 1L && !identical(role, "weight")) role <- "constant"
   missing_pct <- 100 * mean(is.na(series))
   list(
     name = name,
@@ -288,6 +290,12 @@ morie_dataset_profile <- function(df,
     ))
   }
 
+  for (h in list(c("treatment", hint_treatment %||% ""), c("outcome", hint_outcome %||% ""), c("weights", hint_weights %||% ""))) {
+    if (nzchar(h[[2L]]) && !h[[2L]] %in% colnames(df)) {
+      stop(sprintf("%s column '%s' is not in the data (columns: %s)", h[[1L]], h[[2L]],
+                   paste(colnames(df), collapse = ", ")), call. = FALSE)
+    }
+  }
   columns <- list()
   treatment_candidates <- list()
   outcome_candidates <- list()
@@ -322,6 +330,10 @@ morie_dataset_profile <- function(df,
   suggested_treatment <- hint_treatment %||% pick_best(treatment_candidates)
   suggested_outcome <- hint_outcome %||% pick_best(outcome_candidates)
   suggested_weights <- hint_weights %||% (if (length(weight_candidates)) weight_candidates[[1L]] else NULL)
+  # the columns the user named take those roles in the table
+  for (r in list(c("treatment", hint_treatment %||% ""), c("outcome", hint_outcome %||% ""), c("weight", hint_weights %||% ""))) {
+    if (nzchar(r[[2L]])) columns[[r[[2L]]]]$suggested_role <- r[[1L]]
+  }
 
   structure(
     list(
@@ -522,6 +534,19 @@ morie_dataset_suggest_plan <- function(profile) {
     treatment_cp <- profile$columns[[treatment]]
     outcome_cp <- profile$columns[[outcome]]
 
+    if (!is.null(treatment_cp) && !isTRUE(treatment_cp$is_binary) && treatment_cp$n_unique > 2L) {
+      numeric_outcome <- !is.null(outcome_cp) && outcome_cp$level %in% c("interval", "ratio")
+      push(list(
+        analysis = "group_comparison",
+        rationale = sprintf(
+          "Compare '%s' across the %d levels of '%s' (%s).",
+          outcome, treatment_cp$n_unique, treatment,
+          if (numeric_outcome) "ANOVA, or Kruskal-Wallis when skewed" else "chi-square test of independence"
+        ),
+        required_vars = list(treatment = treatment, outcome = outcome)
+      ))
+    }
+
     if (!is.null(treatment_cp) && isTRUE(treatment_cp$is_binary) && length(covariates) > 0L) {
       push(list(
         analysis = "propensity_scores",
@@ -597,6 +622,14 @@ morie_dataset_suggest_plan <- function(profile) {
         )
       ))
     }
+  }
+
+  if (is.null(treatment) && !is.null(outcome) && length(covariates) > 0L) {
+    push(list(
+      analysis = "outcome_model",
+      rationale = sprintf("Model '%s' on the covariates (a regression matched to its level).", outcome),
+      required_vars = list(outcome = outcome, covariates = covariates)
+    ))
   }
 
   if (!is.null(weights)) {

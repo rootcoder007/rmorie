@@ -43,8 +43,8 @@ base URL and returns the raw result list (\code{count},
 \code{\link{morie_ingest_ckan_search_packages}}.
 }
 \examples{
-\dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
+if (requireNamespace("httr2", quietly = TRUE)) withAutoprint({
 # a live portal: the example reports, rather than fails, when it is away
 res <- tryCatch(
   morie_ingest_ckan_package_search("https://open.canada.ca/data",
@@ -55,6 +55,6 @@ res <- tryCatch(
   }
 )
 if (!is.null(res)) length(res$results)
+})
 }
-\dontshow{\}) # examplesIf}
 }

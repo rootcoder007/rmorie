@@ -112,14 +112,16 @@ morie_install_extras <- function(which = "missing",
   ))
   if (length(needs)) {
     message("Packages to install:")
-    message(paste("   ", needs, collapse = "\n"))
+    message(paste(strwrap(paste(needs, collapse = ", "), width = 76, indent = 4, exdent = 4), collapse = "\n"))
   }
 
   syslibs <- .morie_check_system_libs()
   message("\nSystem libraries:")
   for (nm in names(syslibs)) {
     message(sprintf("  %-10s %s", nm,
-                    if (syslibs[[nm]]) "OK" else "MISSING (see ?morie_install_extras)"))
+                    if (syslibs[[nm]]) "OK"
+                    else if (nm == "liboqs") "not linked (ML-KEM / ML-DSA / SLH-DSA use rmoriebricklayer's built-in code; only HQC needs liboqs)"
+                    else "MISSING (see ?morie_install_extras)"))
   }
   if (!syslibs[["libcurl"]] || !syslibs[["libsodium"]]) {
     message(
@@ -137,6 +139,12 @@ morie_install_extras <- function(which = "missing",
                           system_libs = syslibs)))
   }
 
+  if (isTRUE(ask) && !interactive()) {
+    # nobody can answer the question: say so instead of reading an empty line as "no"
+    message("\nNot installing: there is no terminal to ask on (ask = FALSE installs without asking).")
+    return(invisible(list(installed = character(0), already_present = already,
+                          failed = character(0), system_libs = syslibs)))
+  }
   if (isTRUE(ask)) {
     ans <- readline(sprintf(
       "\nInstall %d package%s now? [y/N] ",

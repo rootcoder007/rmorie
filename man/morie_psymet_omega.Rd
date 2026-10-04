@@ -20,9 +20,13 @@ Native principal-axis approximation of McDonald's omega
 }
 \details{
 Loadings come from principal-axis factoring (communalities iterated on the
-reduced correlation matrix); \code{hier} takes the first unrotated factor as the general
-factor, so with \code{nf = 1} it equals \code{total} up to the model fit, and with \code{nf > 1} it is
-an approximation to the Schmid-Leiman general-factor omega.
+reduced correlation matrix). \code{hier} is the general-factor omega of the Schmid-Leiman
+transformation: the \code{nf} factors are promax-rotated, their correlations are factored for
+one general factor (with two factors both load the square root of their correlation),
+and the items are projected onto it. With \code{nf = 1} the single factor is the general
+factor, so \code{hier} equals \code{total}: a one-factor model cannot separate them.
+Items that load negatively on the general factor are reverse-keyed: they are scored the
+other way round first, as \code{psych::omega()} does, and a message names them.
 }
 \examples{
 if (requireNamespace("psych", quietly = TRUE)) {

@@ -23,10 +23,13 @@ Compute the continuous estimated Blood Alcohol Concentration using the
 standard Widmark formula. Mirrors the Python \code{morie.calculate_ebac()}.
 }
 \details{
-The Widmark formula is:
-\deqn{eBAC = (drinks \times 5.14) / (weight\_lbs \times r) - 0.015 \times hours}{eBAC
-= (drinks x 5.14) / (weight\_lbs x r) - 0.015 x hours}
-where \eqn{r} is the gender constant (0.73 for men, 0.66 for women).
+The Widmark formula in US units (Matthews and Miller 1979) is:
+\deqn{eBAC = (A \times 5.14) / (weight\_lbs \times r) - 0.015 \times hours}{eBAC
+= (A x 5.14) / (weight\_lbs x r) - 0.015 x hours}
+where \eqn{A} is the alcohol in fluid ounces of ethanol (a 14 g standard
+drink is 0.6 fl oz, so \eqn{A = 0.6 \times drinks}) and \eqn{r} is the
+gender constant (0.73 for men, 0.66 for women). Counting each drink as one
+ounce overstated eBAC by a factor of 1/0.6.
 Returned values are clipped at zero.
 }
 \examples{

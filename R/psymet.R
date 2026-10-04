@@ -98,6 +98,8 @@ morie_psymet_alpha <- function(data, ci = 0.95) {
 #'   one general factor (with two factors both load the square root of their correlation),
 #'   and the items are projected onto it. With `nf = 1` the single factor is the general
 #'   factor, so `hier` equals `total`: a one-factor model cannot separate them.
+#'   Items that load negatively on the general factor are reverse-keyed: they are scored the
+#'   other way round first, as `psych::omega()` does, and a message names them.
 #' @return list with `total`, `hier`, `alpha`, `nf`, `expvar`.
 #' @examples
 #' if (requireNamespace("psych", quietly = TRUE)) {
@@ -113,11 +115,23 @@ morie_psymet_omega <- function(data, nf = 1) {
   X <- .as_item_matrix(data)
   R <- cor(X)
   loads <- .morie_paf(R, nf)
+  g <- .morie_schmid_leiman_g(loads)
+  # items loading negatively on the general factor are reverse-keyed: score them the other way
+  # round first (psych::omega's flip = TRUE), or the sums below cancel and omega collapses
+  key <- ifelse(g < 0, -1, 1)
+  if (any(key < 0)) {
+    message("morie_psymet_omega: reverse-keyed item(s) scored the other way round: ",
+            paste(colnames(X)[key < 0] %||% which(key < 0), collapse = ", "))
+    # flip the signs, as psych does, rather than refit: the solution is the same one, keyed
+    X <- sweep(X, 2L, key, "*")
+    R <- R * outer(key, key)
+    loads <- loads * key
+    g <- g * key
+  }
   evals <- eigen(R, symmetric = TRUE)$values
   comm <- rowSums(loads^2)
   uniq <- 1 - comm
   omg_t <- 1 - sum(uniq) / sum(R)
-  g <- .morie_schmid_leiman_g(loads)
   omg_h <- sum(g)^2 / sum(R)
   a <- morie_psymet_alpha(X)$raw
   list(

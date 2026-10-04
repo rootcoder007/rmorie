@@ -593,14 +593,12 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
     )
   }
   shipped <- read_one(shipped_path)
-  user <- if (!is.null(user_cache_dir)) {
-    read_one(file.path(
-      path.expand(user_cache_dir),
-      "canonical_overrides.csv"
-    ))
-  } else {
-    NULL
-  }
+  # corrections recorded with morie_siu_record_correction() persist in the user data directory;
+  # a cache_dir's own file (older recordings) is read after them
+  user <- rbind(
+    read_one(file.path(.siu_corrections_dir(), "canonical_overrides.csv")),
+    if (!is.null(user_cache_dir)) read_one(file.path(path.expand(user_cache_dir), "canonical_overrides.csv"))
+  )
   if (is.null(shipped) && is.null(user)) {
     return(NULL)
   }
@@ -608,13 +606,15 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
     shipped[, c("case_number", "field", "verified_value"), drop = FALSE],
     user[, c("case_number", "field", "verified_value"), drop = FALSE]
   )
-  # User overrides win on conflict: rev() so most-recent insertions
-  # land at the top of unique().
-  out <- out[!duplicated(rev(out)[, c("case_number", "field")]), ,
-    drop = FALSE
-  ]
+  # User overrides win on conflict: the LAST row of each (case, field) is kept (rev() on a
+  # data frame reverses its columns, not its rows, so the shipped value used to win)
+  out <- out[!duplicated(out[, c("case_number", "field")], fromLast = TRUE), , drop = FALSE]
   out
 }
+
+#' Internal helper: where recorded SIU corrections persist (the user data directory, not tempdir())
+#' @noRd
+.siu_corrections_dir <- function() file.path(tools::R_user_dir("morie", which = "data"), "siu")
 
 # Internal: apply a canonical-overrides table to a parsed SIU data
 # frame. Each row of `overrides` is (case_number, field, verified_value);
@@ -642,10 +642,11 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 
 #' Record a verified correction to the SIU parser's output
 #'
-#' Saves a (case_number, field, verified_value) tuple to a local
-#' overrides CSV at \code{<cache_dir>/canonical_overrides.csv}. Every
-#' subsequent \code{morie_fetch_siu()} on that \code{cache_dir} will
-#' overlay these corrections onto the regex-parsed output. The shipped
+#' Saves a (case_number, field, verified_value) tuple to an overrides CSV,
+#' \code{canonical_overrides.csv}, in the user data directory
+#' (\code{tools::R_user_dir("morie", "data")}, sub-directory \code{siu}), so
+#' it outlives the R session. Every later \code{morie_fetch_siu()} overlays
+#' these corrections onto the regex-parsed output. The shipped
 #' \code{inst/extdata/siu_canonical_overrides.csv.gz} carries
 #' maintainer-confirmed corrections; this function lets users add
 #' their own without touching the package source.
@@ -661,7 +662,8 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 #'   cached HTML (see \code{morie_siu_audit_case()}).
 #' @param note Optional one-line note describing the basis for the
 #'   correction (HTML excerpt, LLM verdict, etc.).
-#' @param cache_dir Directory holding the harvester's SIU.csv.
+#' @param cache_dir Directory for the overrides CSV (default: the user data
+#'   directory, which persists between sessions).
 #' @return Invisibly, the path to the updated overrides CSV.
 #' @examples
 #' \donttest{
@@ -680,13 +682,16 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 #' @export
 morie_siu_record_correction <- function(case_number, field,
                                         verified_value, note = "",
-                                        cache_dir = file.path(tempdir(), "morie", "siu")) {
+                                        cache_dir = .siu_corrections_dir()) {
   stopifnot(
     is.character(case_number), length(case_number) == 1L,
     is.character(field), length(field) == 1L,
-    is.character(verified_value), length(verified_value) == 1L,
-    field %in% .siu_field_list()
+    is.character(verified_value), length(verified_value) == 1L
   )
+  if (!field %in% .siu_field_list()) {
+    stop(sprintf("'%s' is not an SIU field; the fields are: %s", field,
+                 paste(.siu_field_list(), collapse = ", ")), call. = FALSE)
+  }
   cache_dir <- path.expand(cache_dir)
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   path <- file.path(cache_dir, "canonical_overrides.csv")
@@ -912,8 +917,8 @@ morie_siu_refresh_manifest <- function(
 #'   \code{report_html}, \code{news_html}, \code{report_text}
 #'   (HTML-stripped plain text of the report) and \code{news_text}.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' a <- morie_siu_audit_case(
@@ -921,8 +926,8 @@ morie_siu_refresh_manifest <- function(
 #'   cache_dir = file.path(tempdir(), "morie", "siu")
 #' )
 #' cat(substr(a$report_text, 1, 1000), "\n")
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_audit_case <- function(case_number,
                                  cache_dir = file.path(tempdir(), "morie", "siu"),
@@ -1096,8 +1101,8 @@ morie_siu_audit_case <- function(case_number,
 #'   parser and external disagree, the \code{html_excerpt} is the
 #'   tie-breaker.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' # Caller supplies their own external table; nothing about the
@@ -1110,8 +1115,8 @@ morie_siu_audit_case <- function(case_number,
 #'   external_case_col = "case_id"
 #' )
 #' subset(cmp, !agree)
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_compare <- function(case_number, external,
                               field_map = NULL,
@@ -1562,8 +1567,8 @@ morie_siu_compare <- function(case_number, external,
     env_val <- Sys.getenv(p$env_required, unset = "")
     if (!nzchar(env_val) && p$env_required == "GOOGLE_API_KEY") env_val <- Sys.getenv("GEMINI_API_KEY", unset = "")
     if (!nzchar(env_val)) {
-      stop("Env var '", if (p$env_required == "GOOGLE_API_KEY") "GEMINI_API_KEY' (or 'GOOGLE_API_KEY" else p$env_required,
-        "' is not set; cannot call ",
+      stop("Env var ", if (p$env_required == "GOOGLE_API_KEY") "'GEMINI_API_KEY' (or 'GOOGLE_API_KEY')" else paste0("'", p$env_required, "'"),
+        " is not set; cannot call ",
         model, ". Set it, or use model = \"ollama\" with a local ",
         "Ollama daemon for a free zero-config alternative.",
         call. = FALSE
@@ -1638,7 +1643,7 @@ morie_siu_compare <- function(case_number, external,
   }
   stop("All LLM providers failed:\n  ",
     paste(errs, collapse = "\n  "),
-    "\n", .cli_llm_fallback_cause(model[[1L]]),
+    "\nno provider in the chain (", paste(model, collapse = ", "), ") answered; the lines above say why for each",
     call. = FALSE
   )
 }
@@ -1955,14 +1960,14 @@ morie_siu_llm_extract <- function(case_number,
 #'   \code{"agree"} / \code{"disagree"} / \code{"unclear"}), and
 #'   \code{reason} (a short sentence pointing to the report passage).
 #' @examples
-#' \dontshow{if (morie_has("ollama", "rmoriedata")) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (morie_has("ollama", "rmoriedata")) withAutoprint({
 #' # Local Ollama is the default provider (free, no key); the report
 #' # HTML is fetched live, so try() keeps offline checks graceful.
 #' a <- try(morie_siu_anomaly_check("17-OVI-201", model = "ollama"))
 #' if (!inherits(a, "try-error")) subset(a, verdict == "disagree")
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_anomaly_check <- function(case_number,
                                     model = c("ollama",
@@ -2583,7 +2588,8 @@ morie_siu_translate_fr_to_en <- function(
 #' @param progress Logical; print a per-case progress line.
 #' @return A data frame with columns \code{field}, \code{n_audited},
 #'   \code{n_agree}, \code{n_disagree}, \code{n_unclear},
-#'   \code{agree_rate}. Sorted ascending by \code{agree_rate} so the
+#'   \code{agree_rate} (agreements over judged verdicts; \code{NA} when every
+#'   verdict was unclear). Sorted ascending by \code{agree_rate} so the
 #'   most-broken fields land at the top. The \code{"examples"}
 #'   attribute holds nested data frames of flagged cases per field.
 #' @examples
@@ -2678,9 +2684,13 @@ morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "hosted", 
     n_unclear = vapply(per_field, function(x) x$unclear, integer(1)),
     stringsAsFactors = FALSE
   )
-  out$agree_rate <- ifelse(out$n_audited > 0L,
-    out$n_agree / out$n_audited, NA_real_
-  )
+  # judged = agree + disagree: an "unclear" verdict (no model reachable, or no answer) is not a
+  # disagreement, and with nothing judged the rate is unknown, not 0
+  judged <- out$n_agree + out$n_disagree
+  out$agree_rate <- ifelse(judged > 0L, out$n_agree / judged, NA_real_)
+  if (nrow(out) && all(judged == 0L)) {
+    message("siu audit: no field was judged (every verdict 'unclear'): is a model reachable? (rmorie doctor)")
+  }
   out <- out[order(out$agree_rate, out$field), , drop = FALSE]
   rownames(out) <- NULL
   attr(out, "examples") <- setNames(

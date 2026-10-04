@@ -463,7 +463,7 @@ test_that("morie_calculate_ebac returns a non-negative scalar", {
   expect_true(is.finite(v))
 })
 
-test_that("morie_calculate_ebac clips at zero and guards bad weight", {
+test_that("morie_calculate_ebac clips at zero and refuses an impossible weight", {
   skip_heavy()
   expect_equal(
     morie_calculate_ebac(
@@ -472,19 +472,19 @@ test_that("morie_calculate_ebac clips at zero and guards bad weight", {
     ),
     0
   )
-  expect_equal(
+  expect_error(
     morie_calculate_ebac(
       drinks = 4, weight_lbs = 0, hours = 1,
       gender_constant = 0.73
     ),
-    0
+    "weight_lbs must be > 0"
   )
-  expect_equal(
+  expect_error(
     morie_calculate_ebac(
       drinks = 4, weight_lbs = -10, hours = 1,
       gender_constant = 0.73
     ),
-    0
+    "weight_lbs must be > 0"
   )
 })
 

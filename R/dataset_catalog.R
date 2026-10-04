@@ -337,7 +337,8 @@ morie_dataset_catalog <- function() {
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/a01_restrictive_confinement_detailed_dataset.csv",
       table_name = "otisa01",
-      ckan_resource_id = "5a0c5804-a055-4031-9743-73f556e43bb4"
+      ckan_resource_id = "5a0c5804-a055-4031-9743-73f556e43bb4",
+      ckan_portal = "https://data.ontario.ca"
     ),
     list(
       key = "otisb01", name = "OTIS b01: Segregation - Detailed Dataset",
@@ -345,7 +346,8 @@ morie_dataset_catalog <- function() {
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/b01_segregation_detailed_dataset.csv",
       table_name = "otisb01",
-      ckan_resource_id = "406e6d90-d568-4553-8ca7-bc9f90e133b9"
+      ckan_resource_id = "406e6d90-d568-4553-8ca7-bc9f90e133b9",
+      ckan_portal = "https://data.ontario.ca"
     ),
     list(
       key = "otisb09", name = "OTIS b09: Individuals in Segregation - Number of Placements",
@@ -353,7 +355,8 @@ morie_dataset_catalog <- function() {
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/b09_individuals_in_segregation_number_of_times_in_segregation.csv",
       table_name = "otisb09",
-      ckan_resource_id = "df24e943-d52b-43a8-a10e-a3cc906e26bb"
+      ckan_resource_id = "df24e943-d52b-43a8-a10e-a3cc906e26bb",
+      ckan_portal = "https://data.ontario.ca"
     ),
     list(
       key = "otisc11", name = "OTIS c11: Individuals in Segregation/RC by Aggregate Length",
@@ -361,7 +364,8 @@ morie_dataset_catalog <- function() {
       format = "csv", type = "correctional", large_file = FALSE,
       local_path = "data/datasets/OTIS/c11_individuals_in_segregation_and_restrictive_confinement_aggregate_lengths.csv",
       table_name = "otisc11",
-      ckan_resource_id = "9c7b74a5-53ad-4ef0-a7a6-97772cd01c55"
+      ckan_resource_id = "9c7b74a5-53ad-4ef0-a7a6-97772cd01c55",
+      ckan_portal = "https://data.ontario.ca"
     ),
     # -- SIU public case-level data (used by mrm_siu_*) --
     list(

@@ -63,14 +63,14 @@ morie_datasets_statcan_ccjs_cubes <- function() {
 #' @return A list with `status` and `object` (dimensions, members,
 #'   release info, etc.). Errors if `status != "SUCCESS"`.
 #' @examples
-#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint({
 #' # Live WDS call; try() keeps checks graceful where StatCan rejects
 #' # cloud IPs.
 #' meta <- try(morie_datasets_statcan_cube_metadata(35100177))
 #' if (!inherits(meta, "try-error")) meta$object$cubeTitleEn
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_statcan_cube_metadata <- function(product_id,
                                                  timeout_s = 60L) {

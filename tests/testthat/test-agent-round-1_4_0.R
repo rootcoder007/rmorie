@@ -173,8 +173,9 @@ test_that("--module selects the module's own tables and rejects an unknown modul
   }
   expect_equal(basename(.cli_csv_files(d, "descriptive-statistics")), "descriptive_statistics_summary.csv")
   expect_equal(basename(.cli_csv_files(d, "power-design")), "power_summary.csv")
-  # no ebac_core table here: the first word "ebac_" is the fallback prefix, never a substring (otis_descriptives stays out)
-  expect_equal(basename(.cli_csv_files(d, "ebac-core")), "ebac_final_weighted_descriptives.csv")
+  # no ebac-core table here: ebac_final_* belongs to ebac-integrations, so nothing is picked by a first-word
+  # guess (that took 50 tables of five modules) and every table is checked, with a note saying so
+  expect_length(.cli_csv_files(d, "ebac-core"), 4L)
   r <- .cap("verify", d, "--module", "nosuch")
   expect_equal(r$status, 1L)
   expect_match(r$text, "unknown module: nosuch")
@@ -237,7 +238,7 @@ test_that("HTML entities in SIU text become characters", {
 
 test_that("emissions --country names an unknown code and the OTIS grid says when nothing can be built", {
   r <- .cap("emissions", "--seconds", "0.2", "--country", "zz", "--no-capsule", "--output-dir", tempfile("em"))
-  expect_match(r$text, "--country ZZ: not an ISO-3 code")
+  expect_match(r$text, "--country zz: not a country code in the energy-mix table")
   expect_false(grepl("\\(NA\\)", r$text))
   expect_message(g <- suppressWarnings(morie_otis_causal_grid(data.frame(a = 1:3))), "no treatment-outcome pair")
   expect_equal(nrow(g), 0L)

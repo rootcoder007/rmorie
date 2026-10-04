@@ -37,6 +37,9 @@
   X <- stats::model.matrix(fit)
   mu <- stats::fitted(fit)
   y <- fit$y
+  # the weights of the rows the fit kept: rows with a missing covariate leave the model
+  # frame, and the full-length vector recycled over the shorter one (wrong standard errors)
+  w <- as.numeric(stats::weights(fit, type = "prior"))
   n <- nrow(X)
   p <- ncol(X)
   # working score contributions u_i = w_i (y_i - mu_i) x_i for the
@@ -46,10 +49,14 @@
   eta_mu <- fit$family$mu.eta(stats::predict(fit, type = "link"))
   r_work <- (y - mu) / vmu * eta_mu
   U <- X * (w * r_work)
+  # a row the fit dropped (a missing value) stays in the sample with a zero score, as in
+  # survey::svyglm's domain convention: n in the n/(n-1) factor counts every sampled row
+  n_all <- max(n, NROW(data))
+  if (n_all > n) U <- rbind(U, matrix(0, n_all - n, p))
   # bread: inverse expected information of the weighted fit
   B <- chol2inv(chol(crossprod(X, X * (w * eta_mu^2 / vmu))))
   Uc <- sweep(U, 2L, colMeans(U))
-  meat <- crossprod(Uc) * n / (n - 1)
+  meat <- crossprod(Uc) * n_all / (n_all - 1)
   V <- B %*% meat %*% B
   se <- sqrt(diag(V))
   cf <- stats::coef(fit)

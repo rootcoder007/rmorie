@@ -52,8 +52,10 @@
     if (!inherits(res, "error")) return(res)
     if (attempt == attempts) stop(res)
     if (!quiet) {
-      cat(sprintf("%s: the transfer dropped (%s); retrying, attempt %d of %d\n",
-                  label, conditionMessage(res), attempt + 1L, attempts),
+      # nothing arrived: the server was never reached; some bytes arrived: the transfer dropped
+      what <- if (!file.exists(dest) || isTRUE(file.size(dest) == 0)) "could not reach the server" else "the transfer dropped"
+      cat(sprintf("%s: %s (%s); retrying, attempt %d of %d\n",
+                  label, what, conditionMessage(res), attempt + 1L, attempts),
           file = stderr())
     }
     unlink(dest)

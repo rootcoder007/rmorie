@@ -313,12 +313,20 @@ morie_llm_request_completion <- function(base_url, model, messages,
   if (is.null(msg)) "" else (msg$content %||% "")
 }
 
+#' Internal helper: the httr2 step a "rmorie login" hint needs on an install without it
+#' @noRd
+.morie_httr2_note <- function() {
+  if (requireNamespace("httr2", quietly = TRUE)) "" else " (first install.packages(\"httr2\"): the hosted tier needs it)"
+}
+
 #' Internal helper: Morie Llm Local Fallback
 #' @noRd
-.morie_llm_local_fallback <- function(prompt) {
+.morie_llm_local_fallback <- function(prompt, tried = FALSE) {
   # the attribute lets a script tell this text from an answer: isTRUE(attr(x, "fallback"))
   base <- tryCatch(.morie_llm_api_base(), error = function(e) NULL)
-  head <- if (!is.null(base) && nzchar(base)) {
+  head <- if (isTRUE(tried)) {
+    "No LLM provider answered this time (one is configured; the line below says why).\n\n"
+  } else if (!is.null(base) && nzchar(base)) {
     sprintf("MORIE is running in local-only mode (your endpoint %s did not answer).\n\n", base)
   } else {
     "MORIE is running in local-only mode (no LLM provider detected).\n\n"
@@ -402,7 +410,15 @@ morie_llm_ask <- function(prompt, context = NULL, model = NULL,
       error = function(e) NULL)
     if (!is.null(out) && nzchar(out)) return(out)
   }
-  .morie_llm_local_fallback(prompt)
+  # a model the hosted tier does not list is the user's to fix, said in one line
+  if (!is.null(model) && identical(provider, "hosted") && !is.null(.morie_llm_hosted_key())) {
+    listed <- tryCatch(morie_llm_hosted_models(), error = function(e) character())
+    if (length(listed) && !model %in% listed) {
+      stop(sprintf("the hosted tier has no model '%s' (rmorie models lists the %d it has)", model, length(listed)),
+           call. = FALSE)
+    }
+  }
+  .morie_llm_local_fallback(prompt, tried = TRUE)
 }
 
 #' Return TRUE when at least one live LLM provider is available
@@ -685,8 +701,11 @@ morie_llm_hosted_models <- function(refresh = FALSE) {
 morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600,
                             email = NULL, code = NULL, token = NULL, to_email = FALSE) {
   if (!is.null(token)) return(.morie_llm_store_token(token))
+  if (!is.null(email)) email <- trimws(email)
+  if (!is.null(email) && !grepl("^[^@[:space:]]+@[^@[:space:]]+\\.[^@[:space:]]+$", email))
+    stop(sprintf("'%s' is not an email address", email), call. = FALSE)
   if (!requireNamespace("httr2", quietly = TRUE))
-    stop("morie_llm_login() needs the httr2 package")
+    stop("signing in needs the httr2 package: install.packages(\"httr2\"), then sign in again", call. = FALSE)
   auth <- .morie_llm_hosted_auth()
   if (!is.null(email)) return(.morie_llm_login_email(auth, email, code, to_email))
   start <- httr2::req_perform(httr2::req_method(httr2::request(paste0(auth, "/device/code")), "POST"))
@@ -749,7 +768,7 @@ morie_llm_login <- function(open_browser = interactive(), poll_max_seconds = 600
 
 .morie_llm_login_email <- function(auth, email, code = NULL, to_email = FALSE) {
   email <- trimws(email)
-  if (!grepl("@", email, fixed = TRUE)) stop("an email address is required")
+  if (!grepl("@", email, fixed = TRUE)) stop(sprintf("'%s' is not an email address", email), call. = FALSE)
   perform <- function(path, body) {
     req <- httr2::req_body_json(httr2::request(paste0(auth, path)), body)
     httr2::req_perform(httr2::req_error(req, is_error = function(r) FALSE))

@@ -19,12 +19,12 @@ release info, etc.). Errors if \code{status != "SUCCESS"}.
 Phase 3DDD3. Wraps the \code{getCubeMetadata} POST endpoint.
 }
 \examples{
-\dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
+if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint({
 # Live WDS call; try() keeps checks graceful where StatCan rejects
 # cloud IPs.
 meta <- try(morie_datasets_statcan_cube_metadata(35100177))
 if (!inherits(meta, "try-error")) meta$object$cubeTitleEn
+})
 }
-\dontshow{\}) # examplesIf}
 }

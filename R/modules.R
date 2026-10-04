@@ -186,15 +186,15 @@ morie_canonicalize_cpads_data <- function(data) {
 #' @param cpads_csv Path to the CPADS CSV.
 #' @return Canonicalized CPADS data frame.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' # Reads and canonicalises the CPADS PUMF CSV. The default CSV lives in
 #' # a morie project tree; the CKAN-fetched PUMF works identically (see
 #' # morie_load_dataset("ocp21")). The tryCatch guard lets the example
 #' # render cleanly on machines without the CSV checked out locally.
 #' tryCatch(morie_load_cpads_data(), error = function(e) message(conditionMessage(e)))
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_load_cpads_data <- function(cpads_csv = .cpads_default_csv()) {
   cpads_csv <- .resolve_cpads_csv(cpads_csv)
@@ -267,8 +267,8 @@ morie_module_names <- function() {
 #' @param output_dir Optional directory for CSV outputs.
 #' @return Named list of data-frame outputs.
 #' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' \donttest{
+#' if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
 #' # Dispatch one MORIE module against the canonical CPADS CSV. The CSV
 #' # ships with a morie project tree, or is fetched via the CKAN endpoint
 #' # (morie_load_dataset("ocp21")). Wrapped in tryCatch so the example
@@ -277,11 +277,12 @@ morie_module_names <- function() {
 #'   morie_run_morie_module("descriptive-statistics"),
 #'   error = function(e) message(conditionMessage(e))
 #' )
+#' })
 #' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_run_morie_module <- function(module_name, cpads_csv = .cpads_default_csv(), output_dir = NULL) {
-  data <- morie_load_cpads_data(cpads_csv)
+  # the OTIS and MAPQ modules bring their own frames: CPADS is neither loaded nor announced for them
+  data <- if (module_name %in% c("otis-analysis", "mapq-psychometrics")) NULL else morie_load_cpads_data(cpads_csv)
 
   outputs <- switch(module_name,
     "data-wrangling" = .run_data_wrangling_module_internal(data, cpads_csv = cpads_csv, output_dir = output_dir),
@@ -339,7 +340,15 @@ morie_run_morie_modules <- function(
   output_dir = NULL
 ) {
   stats::setNames(
-    lapply(modules, function(m) morie_run_morie_module(m, cpads_csv = cpads_csv, output_dir = output_dir)),
+    lapply(seq_along(modules), function(i) {
+      # one line per module, so a redirected log shows a long run moving
+      t0 <- Sys.time()
+      message(sprintf("[%d/%d] %s ...", i, length(modules), modules[[i]]))
+      r <- morie_run_morie_module(modules[[i]], cpads_csv = cpads_csv, output_dir = output_dir)
+      message(sprintf("[%d/%d] %s done (%.0f s)", i, length(modules), modules[[i]],
+                      as.numeric(difftime(Sys.time(), t0, units = "secs"))))
+      r
+    }),
     modules
   )
 }
