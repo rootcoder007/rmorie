@@ -292,31 +292,41 @@ morie_fetch_json <- function(txt, simplify = TRUE) {
     is.list(e) && !is.null(names(e))
   }, logical(1))
   if (all(is_obj)) {
+    # one row per object, as jsonlite: a field holding objects in every row becomes a nested data
+    # frame, any other non-scalar field a list column (a Socrata row with a location object was
+    # left a bare list of records)
     keys <- unique(unlist(lapply(x, names)))
-    cols_ok <- TRUE
-    cols <- lapply(keys, function(k) {
+    out <- data.frame(row.names = seq_along(x))
+    for (k in keys) {
       vals <- lapply(x, function(e) {
         v <- e[[k]]
         if (is.null(v)) NA else v
       })
-      if (all(vapply(vals, function(v) {
-        is.atomic(v) && length(v) == 1L
-      }, logical(1)))) {
+      scalar <- vapply(vals, function(v) is.atomic(v) && length(v) == 1L, logical(1))
+      nested <- if (all(scalar)) NULL else .mj_simplify(vals)
+      out[[k]] <- if (all(scalar)) {
         unlist(vals, use.names = FALSE)
+      } else if (is.data.frame(nested) && nrow(nested) == length(vals)) {
+        nested
       } else {
-        cols_ok <<- FALSE
-        vals
+        I(vals)
       }
-    })
-    if (cols_ok) {
-      names(cols) <- keys
-      return(as.data.frame(cols,
-        stringsAsFactors = FALSE,
-        check.names = FALSE
-      ))
     }
+    return(out)
   }
   x
+}
+
+#' Internal helper: the rows of a simplified JSON array of objects as a list of records
+#' (nested data frames and list columns taken apart), whichever reader parsed it
+#' @noRd
+.morie_json_records <- function(x) {
+  if (!is.data.frame(x)) return(x)
+  lapply(seq_len(nrow(x)), function(i) {
+    lapply(x, function(col) {
+      if (is.data.frame(col)) .morie_json_records(col)[[i]] else if (is.list(col)) col[[i]] else col[i]
+    })
+  })
 }
 
 #' Serialize an R object to JSON natively (pure R)

@@ -118,7 +118,7 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
     "https://data.tps.ca/api/search/v1/collections/dataset/items",
     query = list(limit = 100L)
   )
-  feats <- body$features
+  feats <- .morie_json_records(body$features)
   if (is.null(feats) || length(feats) == 0L) {
     return(data.frame())
   }
