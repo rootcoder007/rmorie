@@ -380,3 +380,260 @@
   f <- .wn_density(density)
   list(w = exp(f(zn) - f(zd)), fitted = m)
 }
+
+# ---- balance terms ------------------------------------------------------------------
+
+# the covariates plus powers up to `moments` of the non-binary ones and, with
+# int, all pairwise products (centred first) -- WeightIt's moments / int;
+# exact balance depends only on the span, so raw powers do what WeightIt's
+# orthogonal polynomials do
+.wn_terms <- function(X, sw, moments = 1L, int = FALSE) {
+  if (!ncol(X)) return(X)
+  bin <- apply(X, 2L, function(v) length(unique(v)) <= 2L)
+  out <- X
+  if (moments > 1L) {
+    for (k in 2L:moments) for (j in which(!bin)) {
+      out <- cbind(out, X[, j]^k)
+    }
+  }
+  if (isTRUE(int) && ncol(X) > 1L) {
+    Xc <- sweep(X, 2L, colSums(X * sw) / sum(sw))
+    for (a in seq_len(ncol(X) - 1L)) for (b in (a + 1L):ncol(X)) {
+      out <- cbind(out, Xc[, a] * Xc[, b])
+    }
+  }
+  q <- qr(cbind(1, out), tol = 1e-7)
+  keep <- sort(q$pivot[seq_len(q$rank)])
+  out[, keep[keep > 1L] - 1L, drop = FALSE]
+}
+
+# ---- Newton on a just-identified system ------------------------------------------
+
+# solve mean(psi) = 0 given psi(B) (n x k) and its Jacobian J(B) (k x k),
+# halving the step while the norm of the mean does not fall
+.wn_newton <- function(B, psi, jac, tol = 1e-12, max_iter = 200L) {
+  g <- colMeans(psi(B))
+  for (it in seq_len(max_iter)) {
+    step <- tryCatch(solve(jac(B), g), error = function(e) NULL)
+    if (is.null(step)) break
+    s <- 1
+    repeat {
+      Bn <- B - s * step
+      gn <- colMeans(psi(Bn))
+      if (all(is.finite(gn)) && sum(gn^2) <= sum(g^2) || s < 1e-10) break
+      s <- s / 2
+    }
+    B <- Bn
+    g <- gn
+    if (max(abs(g)) < tol) break
+  }
+  list(par = B, converged = max(abs(g)) < 1e-8)
+}
+
+.wn_glm_start <- function(C, A, sw, lk) {
+  fam <- stats::quasibinomial(link = lk)
+  if (lk$name %in% c("log", "clog", "identity")) {
+    return(c(lk$linkfun(sum(sw * A) / sum(sw)), rep(0, ncol(C) - 1L)))
+  }
+  suppressWarnings(stats::glm.fit(C, A, weights = sw, mustart = 0.25 + 0.5 * A, family = fam))$coefficients
+}
+
+# ---- entropy balancing (Hainmueller 2012; WeightIt's method_ebal, exact) -----------
+
+# weights q * exp(-C z) on one group, z solving the dual so that the
+# (sampling-weighted) group means of C equal `target`; C has the intercept
+.wn_ebal_group <- function(C, sw, q, target, N) {
+  wfun <- function(z) q * exp(-as.numeric(C %*% z))
+  psi <- function(z) {
+    w <- sw * wfun(z)
+    # mean over rows of the gradient = -C'w / N + target
+    sweep(-C * w * nrow(C) / N, 2L, target, "+")
+  }
+  jac <- function(z) crossprod(C, C * (sw * wfun(z))) / N
+  # the gradient of the dual is -C'(sw w)/N + target, its Jacobian C' diag(sw w) C / N
+  fit <- .wn_newton(rep(0, ncol(C)), psi, jac)
+  if (!fit$converged) warning("entropy balancing did not reach exact balance (no weights balance these covariates exactly)", call. = FALSE)
+  wfun(fit$par)
+}
+
+.wn_ebal <- function(X, treat, sw, estimand, focal = NULL, q = NULL) {
+  q <- if (is.null(q)) rep(1, length(treat)) else q
+  C <- cbind(1, X)
+  pos <- sw > 0
+  lev <- levels(treat)
+  if (estimand == "ATE") {
+    groups <- lev
+    N <- sum(pos)
+    sw <- sw / mean(sw)
+    target <- colSums(C * sw) / sum(sw)
+  } else {
+    groups <- setdiff(lev, focal)
+    f <- treat == focal
+    N <- sum(pos & f)
+    sw <- sw / mean(sw[f])
+    target <- colSums(C[f, , drop = FALSE] * sw[f]) / sum(sw[f])
+  }
+  w <- rep(1, length(treat))
+  for (g in groups) {
+    i <- which(treat == g & pos)
+    w[i] <- .wn_ebal_group(C[i, , drop = FALSE], sw[i], q[i], target, N)
+  }
+  w
+}
+
+# continuous treatment: zero weighted correlation between the (standardised)
+# treatment and each covariate, means and the treatment's mean kept
+.wn_ebal_continuous <- function(X, a, sw, d_moments = 1L) {
+  N <- sum(sw > 0)
+  sw <- sw / mean(sw)
+  zs <- function(v) {
+    m <- sum(sw * v) / sum(sw)
+    (v - m) / sqrt(sum(sw * (v - m)^2) / sum(sw))
+  }
+  tm <- zs(a)
+  if (d_moments > 1L) tm <- cbind(tm, vapply(2L:d_moments, function(k) zs(a^k), numeric(length(a))))
+  tm <- as.matrix(tm)
+  Xs <- apply(X, 2L, zs)
+  if (!is.matrix(Xs)) Xs <- matrix(Xs, ncol = ncol(X))
+  C <- cbind(1, tm, Xs, tm[, 1L] * Xs)
+  q <- qr(C, tol = 1e-7)
+  keep <- sort(q$pivot[seq_len(q$rank)])
+  ndist <- 1L + ncol(tm) + ncol(Xs)
+  target <- c(colSums(C[, seq_len(ndist), drop = FALSE] * sw) / sum(sw), rep(0, ncol(Xs)))
+  .wn_ebal_group(C[, keep, drop = FALSE], sw, rep(1, length(a)), target[keep], N)
+}
+
+# ---- inverse probability tilting (Graham, Pinto & Egel 2012) ------------------------
+
+.wn_ipt <- function(X, t, sw, estimand, link = "logit") {
+  lk <- .wn_link(link)
+  C <- cbind(1, X)
+  n <- nrow(C)
+  B0 <- .wn_glm_start(C, t, sw, lk)
+  lp <- function(B) as.numeric(C %*% B)
+  solve_eq <- function(psi_w, jac_w) {
+    psi <- function(B) {
+      p <- lk$linkinv(lp(B))
+      sw * psi_w(p) * C
+    }
+    jac <- function(B) {
+      e <- lp(B)
+      crossprod(C, C * (sw * jac_w(lk$linkinv(e)) * lk$mu.eta(e))) / n
+    }
+    fit <- .wn_newton(B0, psi, jac)
+    if (!fit$converged) warning("inverse probability tilting did not converge", call. = FALSE)
+    lk$linkinv(lp(fit$par))
+  }
+  ps <- switch(estimand,
+    ATE = {
+      p0 <- solve_eq(function(p) (1 - t) / (1 - p) - 1, function(p) (1 - t) / (1 - p)^2)
+      p1 <- solve_eq(function(p) t / p - 1, function(p) -t / p^2)
+      ifelse(t == 1, p1, p0)
+    },
+    ATT = solve_eq(function(p) t - (1 - t) * p / (1 - p), function(p) -(1 - t) / (1 - p)^2),
+    ATC = solve_eq(function(p) t * (1 - p) / p - (1 - t), function(p) -t / p^2),
+    stop("ipt takes estimand = \"ATE\", \"ATT\" or \"ATC\"", call. = FALSE)
+  )
+  list(ps = ps, w = .wn_w_binary(ps, t, estimand))
+}
+
+# multi-category: each group tilted to the whole sample (ATE) or, pairwise,
+# to the focal group (ATT)
+.wn_ipt_multi <- function(X, treat, sw, estimand, focal = NULL, link = "logit") {
+  lk <- .wn_link(link)
+  C <- cbind(1, X)
+  w <- rep(1, length(treat))
+  groups <- if (estimand == "ATE") levels(treat) else setdiff(levels(treat), focal)
+  for (g in groups) {
+    rows <- if (estimand == "ATE") rep(TRUE, length(treat)) else treat %in% c(g, focal)
+    Cg <- C[rows, , drop = FALSE]
+    A <- if (estimand == "ATE") as.numeric(treat[rows] == g) else as.numeric(treat[rows] == focal)
+    s <- sw[rows]
+    psi_w <- if (estimand == "ATE") function(p) A / p - 1 else function(p) A - (1 - A) * p / (1 - p)
+    jac_w <- if (estimand == "ATE") function(p) -A / p^2 else function(p) -(1 - A) / (1 - p)^2
+    fit <- .wn_newton(.wn_glm_start(Cg, A, s, lk),
+      function(B) s * psi_w(lk$linkinv(as.numeric(Cg %*% B))) * Cg,
+      function(B) {
+        e <- as.numeric(Cg %*% B)
+        crossprod(Cg, Cg * (s * jac_w(lk$linkinv(e)) * lk$mu.eta(e))) / nrow(Cg)
+      })
+    if (!fit$converged) warning("inverse probability tilting did not converge", call. = FALSE)
+    p <- lk$linkinv(as.numeric(C[treat == g, , drop = FALSE] %*% fit$par))
+    w[treat == g] <- if (estimand == "ATE") 1 / p else p / (1 - p)
+  }
+  w
+}
+
+# ---- covariate balancing propensity score (Imai & Ratkovic 2014) ----------------------
+
+# just identified (WeightIt's default, over = FALSE): the balance conditions
+# solved exactly; over = TRUE adds the score equations and minimises the
+# two-step GMM criterion as WeightIt does
+.wn_cbps <- function(X, t, sw, estimand, link = "logit", over = FALSE) {
+  lk <- .wn_link(link)
+  # WeightIt's basis: the scaled left singular vectors of the covariates (the
+  # same model; the over-identified start and weight matrix are taken in it)
+  C <- if (ncol(X)) cbind(1, scale(svd(X)$u)) else matrix(1, nrow(X), 1L)
+  n <- nrow(C)
+  bal <- switch(estimand,
+    ATE = list(f = function(p) t / p - (1 - t) / (1 - p), d = function(p) -t / p^2 - (1 - t) / (1 - p)^2),
+    ATT = list(f = function(p) (t - p) / (1 - p), d = function(p) (t - 1) / (1 - p)^2),
+    ATC = list(f = function(p) (t - p) / p, d = function(p) -t / p^2),
+    ATO = list(f = function(p) t - p, d = function(p) -1 + 0 * p),
+    stop("cbps takes estimand = \"ATE\", \"ATT\", \"ATC\" or \"ATO\"", call. = FALSE)
+  )
+  psi_bal <- function(B) sw * bal$f(lk$linkinv(as.numeric(C %*% B))) * C
+  B0 <- .wn_glm_start(C, t, sw, lk)
+  fit <- .wn_newton(B0, psi_bal, function(B) {
+    e <- as.numeric(C %*% B)
+    crossprod(C, C * (sw * bal$d(lk$linkinv(e)) * lk$mu.eta(e))) / n
+  })
+  B <- fit$par
+  if (isTRUE(over)) {
+    N <- sum(sw)
+    psi <- function(B) {
+      e <- as.numeric(C %*% B)
+      p <- lk$linkinv(e)
+      cbind(sw * (t - p) * lk$mu.eta(e) / (p * (1 - p)) * C, sw * bal$f(p) * C)
+    }
+    Sigma <- function(B) {
+      e <- as.numeric(C %*% B)
+      p <- lk$linkinv(e)
+      g <- lk$mu.eta(e) / (p * (1 - p))
+      vb <- switch(estimand, ATE = 1, ATT = p, ATC = 1 - p, ATO = p * (1 - p))
+      v22 <- switch(estimand, ATE = 1 / (p * (1 - p)), ATT = p / (1 - p), ATC = (1 - p) / p, ATO = p * (1 - p))
+      S11 <- crossprod(sw * g * p * (1 - p) * C, sw * g * C)
+      S12 <- crossprod(sw * g * C, sw * vb * C)
+      S22 <- crossprod(sw * v22 * C, sw * C)
+      rbind(cbind(S11, S12), cbind(t(S12), S22)) / N
+    }
+    ginv <- function(S) {
+      e <- eigen(S, symmetric = TRUE)
+      keep <- e$values > max(e$values) * 1e-10
+      e$vectors[, keep, drop = FALSE] %*% (t(e$vectors[, keep, drop = FALSE]) / e$values[keep])
+    }
+    # the GLM start rescaled to balance best (WeightIt's alpha search) fixes the weight matrix
+    gbal <- function(B) sqrt(sum(colMeans(psi_bal(B))^2))
+    B0 <- B0 * stats::optimize(function(a) gbal(B0 * a), c(0.8, 1.1))$minimum
+    invS <- ginv(Sigma(B0))
+    obj <- function(B) {
+      g <- colMeans(psi(B))
+      sqrt(max(as.numeric(t(g) %*% invS %*% g), 0))
+    }
+    starts <- if (max(abs(B0 - B)) < 1e-6) list(B) else list(B0, B)
+    outs <- lapply(starts, function(s) stats::optim(s, obj, method = "BFGS", control = list(reltol = 1e-10, maxit = 5000L)))
+    B <- outs[[which.min(vapply(outs, function(o) o$value, numeric(1)))]]$par
+    ps <- lk$linkinv(as.numeric(C %*% B))
+    # the criterion as a function of the scores, to compare solutions found elsewhere
+    gmm <- function(p) {
+      e <- lk$linkfun(p)
+      g <- colMeans(cbind(sw * (t - p) * lk$mu.eta(e) / (p * (1 - p)) * C, sw * bal$f(p) * C))
+      sqrt(max(as.numeric(t(g) %*% invS %*% g), 0))
+    }
+    return(list(ps = ps, w = .wn_w_binary(ps, t, estimand), objective = gmm))
+  } else if (!fit$converged) {
+    warning("the covariate balancing propensity score did not converge", call. = FALSE)
+  }
+  ps <- lk$linkinv(as.numeric(C %*% B))
+  list(ps = ps, w = .wn_w_binary(ps, t, estimand))
+}
