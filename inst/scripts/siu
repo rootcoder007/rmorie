@@ -4,5 +4,15 @@
 #   Rscript "$(Rscript -e 'cat(system.file("scripts", "siu", package = "rmorie"))')" audit parsed.json report.txt \
 #     --api openai --base http://localhost:8080 --readers my-model --mode 2
 # See ?rmorie::morie_siu_cli for every command and option.
-pkg <- if (requireNamespace("rmorie", quietly = TRUE)) "rmorie" else "morie"
+# the package this script is installed in (<lib>/<pkg>/scripts/siu), from that library: run as
+# morie's R arm it is morie's, not whichever rmorie R finds first (an older one, say)
+self <- sub("^--file=", "", grep("^--file=", commandArgs(FALSE), value = TRUE)[1])
+self <- if (is.na(self)) "" else normalizePath(self, mustWork = FALSE)
+pkg <- basename(dirname(dirname(self)))
+lib <- dirname(dirname(dirname(self)))
+if (pkg %in% c("rmorie", "morie") && file.exists(file.path(lib, pkg, "DESCRIPTION"))) {
+  .libPaths(c(lib, .libPaths()))
+} else {
+  pkg <- if (requireNamespace("rmorie", quietly = TRUE)) "rmorie" else "morie"
+}
 quit(status = getExportedValue(pkg, "morie_siu_cli")(commandArgs(trailingOnly = TRUE)), save = "no")
