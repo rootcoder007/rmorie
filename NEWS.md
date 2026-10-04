@@ -24,6 +24,11 @@
   when a note widens the sheet. Two-proportion effect sizes add the risk difference and odds
   ratio beside Cohen's h, and the frequentist test table adds Bonferroni and Benjamini-Hochberg
   p-values over the family.
+  The key store no longer needs the sodium package and its files are now morie's: scrypt and
+  ChaCha20-Poly1305 are native (RFC 7914 and RFC 8439 vectors), so a store written by the Python
+  arm opens here and the other way round; entries sealed by rmorie 1.3.x still open. Without
+  libsodium, ChaCha20-Poly1305, HKDF and the random bytes run on the same native code (identical
+  output), so the hybrid ML-KEM envelope and `rmorie selftest` work on every build.
 
 * Fresh-user test, fourth pass. `morie_psymet_omega()` now factors by principal axes and
   takes `hier` from the Schmid-Leiman transformation (promax-rotated factors, one general

@@ -94,8 +94,8 @@ Packages in `Suggests` play three roles, and no others:
 3. **Integrations outside the statistical engines**: plotting
    (ggplot2), databases (DBI, RSQLite, duckdb, bigrquery), Bayesian
    back ends (brms, rstanarm, cmdstanr), deep learning (torch,
-   reticulate), spatial file formats (sf), reading binary `.xls`
-   workbooks (readxl) and the encrypted key store (sodium). A function
+   reticulate), spatial file formats (sf) and reading binary `.xls`
+   workbooks (readxl). A function
    that needs one says which, and how to install it, when it is
    missing.
 

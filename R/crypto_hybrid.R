@@ -65,17 +65,13 @@
 #' Generate an ML-KEM-768 key pair for hybrid encryption
 #'
 #' Convenience wrapper around [morie_crypto_mlkem768_keygen()] for the
-#' hybrid KEM-DEM scheme. Requires the liboqs backend
-#' ([morie_crypto_liboqs_available()]).
+#' hybrid KEM-DEM scheme: liboqs when rmorie is linked against it,
+#' rmoriebricklayer's native FIPS 203 code otherwise.
 #'
 #' @return A named list with `pk` (raw, 1184 B) and `sk` (raw, 2400 B).
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   if (morie_crypto_liboqs_available()) {
-#'     kp <- morie_crypto_hybrid_keygen()
-#'     c(pk = length(kp$pk), sk = length(kp$sk))
-#'   }
-#' }
+#' kp <- morie_crypto_hybrid_keygen()
+#' c(pk = length(kp$pk), sk = length(kp$sk))
 #' @export
 morie_crypto_hybrid_keygen <- function() {
   morie_crypto_mlkem768_keygen()
@@ -96,13 +92,9 @@ morie_crypto_hybrid_keygen <- function() {
 #'   (1184 bytes).
 #' @return Raw vector container.
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   if (morie_crypto_liboqs_available()) {
-#'     kp <- morie_crypto_hybrid_keygen()
-#'     ct <- morie_crypto_hybrid_encrypt("hello", kp$pk)
-#'     rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
-#'   }
-#' }
+#' kp <- morie_crypto_hybrid_keygen()
+#' ct <- morie_crypto_hybrid_encrypt("hello", kp$pk)
+#' rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
 #' @export
 morie_crypto_hybrid_encrypt <- function(plaintext, recipient_pk) {
   if (is.character(plaintext)) plaintext <- charToRaw(plaintext)
@@ -137,13 +129,9 @@ morie_crypto_hybrid_encrypt <- function(plaintext, recipient_pk) {
 #'   (2400 bytes).
 #' @return Raw vector of decrypted plaintext.
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   if (morie_crypto_liboqs_available()) {
-#'     kp <- morie_crypto_hybrid_keygen()
-#'     ct <- morie_crypto_hybrid_encrypt(charToRaw("secret"), kp$pk)
-#'     rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
-#'   }
-#' }
+#' kp <- morie_crypto_hybrid_keygen()
+#' ct <- morie_crypto_hybrid_encrypt(charToRaw("secret"), kp$pk)
+#' rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
 #' @export
 morie_crypto_hybrid_decrypt <- function(ciphertext, recipient_sk) {
   if (!is.raw(ciphertext) || !is.raw(recipient_sk)) {

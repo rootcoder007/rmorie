@@ -493,10 +493,7 @@
   })
   check("sampling: SRS", function() nrow(morie_simple_random_sample(data.frame(x = 1:50), 5L)) == 5L)
   check("crypto: hybrid round trip", function() {
-    # ML-KEM runs without liboqs (rmoriebricklayer's FIPS 203 code); the symmetric layer needs libsodium
-    if (!isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) {
-      return(c("skip", "rmorie was built without libsodium (ChaCha20-Poly1305): install libsodium-devel / libsodium-dev and reinstall"))
-    }
+    # ML-KEM is rmoriebricklayer's FIPS 203 code, the symmetric layer native when libsodium is absent
     k <- morie_crypto_hybrid_keygen()
     ct <- morie_crypto_hybrid_encrypt(charToRaw("selftest"), k$pk)
     identical(rawToChar(morie_crypto_hybrid_decrypt(ct, k$sk)), "selftest")
@@ -679,8 +676,6 @@
 }
 
 .cli_keystore_password <- function() {
-  # what the key store needs is said before any prompt (it asked for a password, then for sodium)
-  .morie_keystore_require(sodium = TRUE)
   pw <- Sys.getenv("MORIE_KEYSTORE_PASSWORD", "")
   if (nzchar(pw)) return(pw)
   if (.cli_stdin_closed()) {

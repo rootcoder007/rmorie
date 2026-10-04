@@ -24,25 +24,6 @@
   stats::qlogis(p)
 }
 
-# Greedy 1-D nearest-neighbour assignment.
-# treated_val / control_val: logit scores. Returns an integer matrix
-# n_treated x ratio of CONTROL indices (into control_val), NA where no
-# admissible match. Treated processed in decreasing propensity order
-# (MatchIt's m.order = "largest").
-#' Internal helper: greedy sorted-vector matcher
-#' @noRd
-.morie_match_greedy_1d <- function(treated_val, control_val,
-                                   ratio = 1L, caliper_width = Inf,
-                                   replace = FALSE) {
-  # C++ kernel (src/morie_matching_native.cpp); returns 1-based control
-  # indices into control_val, NA where no admissible match.
-  .morie_match_greedy_1d_cpp(as.numeric(treated_val),
-                             as.numeric(control_val),
-                             as.integer(ratio),
-                             as.numeric(caliper_width),
-                             isTRUE(replace))
-}
-
 # Native replacement for the MatchIt-backed nearest-neighbour wrapper.
 # Same arguments, same morie_match_result shape.
 #' Internal helper: native nearest-neighbour matching engine

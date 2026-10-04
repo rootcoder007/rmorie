@@ -885,23 +885,6 @@ NULL
 #' @rdname dot-morie_match_greedy_kd_cpp
 NULL
 
-#' .morie_match_greedy_1d_cpp
-#'
-#' A step of the RcppExports implementation. Called by \code{.morie_match_greedy_1d}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param treated_val Passed to \code{.Call}.
-#' @param control_val Passed to \code{.Call}.
-#' @param ratio Passed to \code{.Call}.
-#' @param caliper_width Passed to \code{.Call}.
-#' @param replace Passed to \code{.Call}.
-#' @return The value of \code{.Call}.
-#' @export
-#' @name .morie_match_greedy_1d_cpp
-#' @rdname dot-morie_match_greedy_1d_cpp
-NULL
-
 #' .morie_match_optimal_1d_cpp
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_match_optimal_native}.
