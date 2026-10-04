@@ -76,28 +76,18 @@ morie_siu_cache_path <- function(cache_dir = file.path(tempdir(), "morie", "siu"
 }
 
 
-# Internal: polite HTTP GET via httr2. Gated on the httr2 namespace so
-# the package's base footprint stays light.
+# Internal: polite HTTP GET through the package's libcurl backend, retried on a 5xx.
 #' Internal helper: Siu Fetch Http Get
 #' @noRd
 .siu_fetch_http_get <- function(url, timeout_s = 60L) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "morie_siu_fetch_cases() needs the 'httr2' package: ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
+  for (try in 1:3) {
+    r <- .morie_http_get_with_status(url, timeout_s = as.integer(timeout_s), user_agent = .siu_fetch_user_agent)
+    st <- as.integer(r$status_code)
+    if (st > 0L && st < 500L) break
+    if (try < 3L) Sys.sleep(2^try)
   }
-  req <- httr2::request(url)
-  req <- httr2::req_user_agent(req, .siu_fetch_user_agent)
-  req <- httr2::req_timeout(req, timeout_s)
-  req <- httr2::req_retry(
-    req,
-    max_tries = 3L,
-    is_transient = function(resp) httr2::resp_status(resp) >= 500L
-  )
-  resp <- httr2::req_perform(req)
-  httr2::resp_body_string(resp, encoding = "UTF-8")
+  if (st == 0L || st >= 400L) stop(sprintf("%s answered HTTP %d", url, st), call. = FALSE)
+  enc2utf8(paste(r$body, collapse = ""))
 }
 
 

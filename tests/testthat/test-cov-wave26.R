@@ -66,12 +66,20 @@ test_that("jsonlite-dependent entrypoints stop without jsonlite", {
   # morie_fetch_tps() parses with the native JSON codec since 1.1.7; no jsonlite guard.
   mf <- tempfile(fileext = ".json")
   writeLines("{}", mf)
-  expect_error(mrm_tps_load_hawkes_refit(mf), "jsonlite")
+  # every one of these reads JSON natively now: no jsonlite stop
+  no_jsonlite_stop <- function(expr) {
+    msg <- tryCatch({
+      force(expr)
+      ""
+    }, error = conditionMessage)
+    expect_false(grepl("jsonlite", msg), info = msg)
+  }
+  no_jsonlite_stop(mrm_tps_load_hawkes_refit(mf))
   jf <- tempfile(fileext = ".json")
   writeLines("{}", jf)
   ir <- morie_inspect_output(jf)
-  expect_true(is.list(ir)) # jsonlite-unavailable
-  expect_error(morie_verify_statistical_output(jf), "jsonlite")
+  expect_true(is.list(ir))
+  no_jsonlite_stop(morie_verify_statistical_output(jf))
 })
 
 # ---- internal helpers: Horowitz / Ghosal / time-series -------------------
@@ -172,9 +180,9 @@ test_that("morie_download_bootstrap covers the unknown-key + CKAN-error path", {
     morie_fetch_ckan = function(...) stop("simulated CKAN failure"),
     .package = "rmorie"
   )
-  expect_null(suppressMessages(
+  expect_error(suppressMessages(
     morie_download_bootstrap("csads_2021", db_path = tempfile(fileext = ".db"))
-  ))
+  ), "ocs22bt: simulated CKAN failure")
 })
 
 # ---- frns: metrics + predpol + temporal ----------------------------------

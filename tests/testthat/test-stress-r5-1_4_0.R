@@ -86,9 +86,13 @@ test_that("sample: usage errors exit 2 in words; proportional strata add up to -
 
 test_that("emissions: --country takes ISO-2, an unwritable directory is named, --country without a value is rc 2", {
   expect_equal(.cap("emissions", "--country")$status, 2L)
-  r <- .cap("emissions", "--seconds", "1", "--output-dir", "/proc/morie-no-such-dir", "--country", "FRA")
+  # a directory inside a regular file cannot be created on any OS (/proc/... is creatable on Windows)
+  blocker <- withr::local_tempfile()
+  writeLines("x", blocker)
+  bad <- file.path(blocker, "out")
+  r <- .cap("emissions", "--seconds", "1", "--output-dir", bad, "--country", "FRA")
   expect_equal(r$status, 1L)
-  expect_match(r$text, "cannot write to /proc/morie-no-such-dir")
+  expect_match(r$text, paste("cannot write to", bad), fixed = TRUE)
   expect_equal(.emissions_iso2_to_iso3("FR"), "FRA")
   expect_match(.cap("help")$text, "--country ISO3")
 })
@@ -103,6 +107,8 @@ test_that("exec, ask, provider and login: wording and exit codes", {
   r <- .cap("login", "--token")
   expect_equal(r$status, 2L)
   expect_match(r$text, "--token needs a value")
+  local_mocked_bindings(.cli_readline = function(prompt) NA_character_, .package = utils::packageName(environment(morie_cli)))
+  expect_equal(.cap("login", "--token")$status, 2L)  # stdin closed
   expect_error(morie_llm_login(email = "notanemail"), "'notanemail' is not an email address")
 })
 

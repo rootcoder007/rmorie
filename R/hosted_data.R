@@ -141,7 +141,7 @@ morie_load_hosted_dataset <- function(key, db_path = NULL, refresh = FALSE) {
   tmp <- tempfile(fileext = ".csv.gz")
   on.exit(unlink(tmp), add = TRUE)
   .morie_data_get(sprintf("/%s/%s.csv.gz", parts[[1L]], paste(parts[-1L], collapse = "/")), tmp)
-  df <- utils::read.csv(gzfile(tmp), stringsAsFactors = FALSE)
+  df <- utils::read.csv(gzfile(tmp), stringsAsFactors = FALSE, skipNul = TRUE)  # some sources carry NUL bytes
   morie_cache_store(df, table, db_path = db_path)
   df
 }

@@ -34,11 +34,6 @@
       call. = FALSE
     )
   }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("morie_crypto_keystore requires jsonlite; install.packages('jsonlite')",
-      call. = FALSE
-    )
-  }
 }
 
 #' Internal helper: Morie Resolve Path

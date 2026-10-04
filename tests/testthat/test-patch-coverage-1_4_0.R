@@ -280,19 +280,14 @@ test_that("an endpoint that refuses the connection probes as unreachable", {
 })
 
 test_that("the device sign-in polls and reports a service error", {
-  skip_if_not_installed("httr2")
   testthat::local_mocked_bindings(.morie_llm_hosted_auth = function() "https://auth.example.invalid")
-  testthat::local_mocked_bindings(
-    request = function(url) list(url = url),
-    req_method = function(req, method) req,
-    req_body_json = function(req, data, ...) req,
-    req_error = function(req, ...) req,
-    req_perform = function(req, ...) structure(list(url = req$url), class = "fake_resp"),
-    resp_body_json = function(resp, ...) {
-      list(verification_uri = "https://auth.example.invalid/device", user_code = "ABCD", device_code = "dc", interval = 0.01)
-    },
-    resp_status = function(resp) 503L,
-    .package = "httr2"
+  testthat::local_mocked_bindings(  # the device code is issued, then the token endpoint answers 503
+    .morie_llm_http = function(url, body = NULL, headers = character(), timeout = 30) {
+      if (grepl("/device/code$", url)) {
+        return(list(status = 200L, body = '{"verification_uri":"https://auth.example.invalid/device","user_code":"ABCD","device_code":"dc","interval":0.01}'))
+      }
+      list(status = 503L, body = "{}")
+    }
   )
   expect_error(suppressMessages(morie_llm_login(open_browser = FALSE, poll_max_seconds = 5)), "answered 503")
 })

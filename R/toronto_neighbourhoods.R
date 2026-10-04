@@ -86,22 +86,11 @@ NULL
 #' Internal helper: Morie To Ckan Dump Csv
 #' @noRd
 .morie_to_ckan_dump_csv <- function(resource_id, limit = 100000L) {
-  if (!requireNamespace("httr2", quietly = TRUE) ||
-      !requireNamespace("jsonlite", quietly = TRUE)) {
-    stop(paste0(
-      "Open Toronto CKAN dump fetch needs httr2 + jsonlite. ",
-      "install.packages(c('httr2', 'jsonlite'))"),
-      call. = FALSE)
-  }
   url <- sprintf(paste0(
     "https://ckan0.cf.opendata.inter.prod-toronto.ca/api/3/action/",
     "datastore_search?resource_id=%s&limit=%d"),
     resource_id, as.integer(limit))
-  req <- httr2::request(url)
-  req <- httr2::req_timeout(req, 60)
-  resp <- httr2::req_perform(req)
-  body <- .morie_from_json(httr2::resp_body_string(resp),
-                              simplifyVector = TRUE)
+  body <- .morie_from_json(.morie_dataset_http_text(url, timeout_s = 60L), simplifyVector = TRUE)
   recs <- body$result$records
   if (is.null(recs)) data.frame() else as.data.frame(recs)
 }

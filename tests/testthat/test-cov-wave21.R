@@ -49,25 +49,35 @@ test_that("morie_download_bootstrap validates survey and runs the loop", {
   .cw21_db()
   expect_error(morie_download_bootstrap("not-a-survey"), "Unknown survey")
 
-  # cu23bt has a download_url but no ckan_resource_id -> the
-  # "no CKAN resource ID" branch.
-  expect_null(suppressMessages(
+  # cu23bt has a download_url but no ckan_resource_id -> the catalogue's
+  # own download route, the one `rmorie pull` takes (mocked: no network).
+  testthat::local_mocked_bindings(
+    morie_load_dataset = function(key, ...) data.frame(z = 1:2),
+    .package = "rmorie"
+  )
+  expect_identical(suppressMessages(
     morie_download_bootstrap("csus_2023",
       db_path = tempfile(fileext = ".db")
     )
-  ))
+  ), 1L)
 
   # csads_2021 -> ocs22bt, which carries a ckan_resource_id -> the CKAN
-  # branch (morie_fetch_ckan mocked so no network is touched).
+  # branch, asked for the dataset key (it was asked for the survey name,
+  # "csads", which has no resource, and returned NULL).
+  seen <- NULL
   testthat::local_mocked_bindings(
-    morie_fetch_ckan = function(dataset_key, ...) data.frame(z = 1:3),
+    morie_fetch_ckan = function(dataset_key, ...) {
+      seen <<- dataset_key
+      data.frame(z = 1:3)
+    },
     .package = "rmorie"
   )
-  expect_null(suppressMessages(
+  expect_identical(suppressMessages(
     morie_download_bootstrap("csads_2021",
       db_path = tempfile(fileext = ".db")
     )
-  ))
+  ), 1L)
+  expect_identical(seen, "ocs22bt")
 })
 
 test_that("morie_download_bootstrap ingests a present local bootstrap file", {
@@ -81,9 +91,9 @@ test_that("morie_download_bootstrap ingests a present local bootstrap file", {
   lp <- cat$local_path[cat$key == "cu23bt"][1]
   dir.create(dirname(lp), recursive = TRUE, showWarnings = FALSE)
   utils::write.csv(data.frame(bw1 = 1:4), lp, row.names = FALSE)
-  expect_null(suppressMessages(
+  expect_identical(suppressMessages(
     morie_download_bootstrap("csus_2023",
       db_path = tempfile(fileext = ".db")
     )
-  ))
+  ), 1L)
 })

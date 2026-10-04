@@ -484,19 +484,6 @@ morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
 #' @export
 morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
                                       timeout_sec = 30L) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "morie_arsau_fetch_sidecar requires the optional 'httr2' ",
-      "package; install it with install.packages('httr2').",
-      call. = FALSE
-    )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop(
-      "morie_arsau_fetch_sidecar requires the 'jsonlite' package.",
-      call. = FALSE
-    )
-  }
   url <- morie_arsau_ckan_url(kind = kind, year = year, limit = limit)
   if (is.na(url)) {
     stop(sprintf(

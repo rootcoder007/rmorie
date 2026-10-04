@@ -82,7 +82,7 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
       stop(sprintf(paste0("OTIS dataset not found at %s. Pass an ",
                           "existing csv_path or call morie_otis_load() ",
                           "with csv_path = NULL to use the bundled ",
-                          "data.ontario.ca a01 fixture."), csv_path))
+                          "5-row synthetic A01-shaped sample."), csv_path))
     }
     if (isTRUE(use_readr) && requireNamespace("readr", quietly = TRUE)) {
       return(as.data.frame(readr::read_csv(csv_path, show_col_types = FALSE)))
@@ -98,10 +98,9 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
     return(utils::read.csv(cached, check.names = FALSE,
                             stringsAsFactors = FALSE))
   }
-  # Fall back to the included OTIS A01 fixture (real CKAN slice from
-  # data.ontario.ca; Open Government Licence -- Ontario). morie ships
-  # this so morie_otis_load() works on a fresh checkout without
-  # requiring users to download the full OTIS first.
+  # Fall back to the included A01-shaped sample: 5 SYNTHETIC rows (IDs 2022-SYNTH-...) in the
+  # column layout of the data.ontario.ca A01 table, so morie_otis_load() works on a fresh install
+  # without downloading OTIS first. Its numbers are not findings.
   morie_datasets_otis_a01(offline = TRUE)
 }
 
@@ -171,13 +170,11 @@ morie_otis_all_analyses <- function(df, year = NULL,
         writeLines(format(r),
                    con = file.path(out_dir,
                                    sprintf("otis_analysis_%s.txt", nm)))
-        if (requireNamespace("jsonlite", quietly = TRUE)) {
-          writeLines(.morie_to_json(r$payload, pretty = TRUE,
-                                       auto_unbox = TRUE, null = "null",
-                                       force = TRUE),
-                     con = file.path(out_dir,
-                                     sprintf("otis_analysis_%s.json", nm)))
-        }
+        writeLines(.morie_to_json(r$payload, pretty = TRUE,
+                                     auto_unbox = TRUE, null = "null",
+                                     force = TRUE),
+                   con = file.path(out_dir,
+                                   sprintf("otis_analysis_%s.json", nm)))
       }, error = function(e) {
         warning(sprintf("Could not write %s output: %s", nm,
                         conditionMessage(e)))

@@ -180,7 +180,7 @@ Response get_with_status(const std::string& url,
                           const std::vector<std::string>& headers,
                           const std::string& user_agent,
                           bool follow_redirects) {
-  Response out{std::string(), 0L};
+  Response out{std::string(), 0L, std::string()};
   CURL* h = curl_easy_init();
   if (h == nullptr) return out;
 
@@ -196,6 +196,7 @@ Response get_with_status(const std::string& url,
   } else {
     out.body.clear();
     out.status_code = 0L;
+    out.error = curl_easy_strerror(rc);
   }
   curl_easy_cleanup(h);
   if (hdrs != nullptr) curl_slist_free_all(hdrs);
@@ -209,7 +210,7 @@ Response post_with_status(const std::string& url,
                            const std::vector<std::string>& headers,
                            const std::string& user_agent,
                            bool follow_redirects) {
-  Response out{std::string(), 0L};
+  Response out{std::string(), 0L, std::string()};
   CURL* h = curl_easy_init();
   if (h == nullptr) return out;
 
@@ -233,6 +234,7 @@ Response post_with_status(const std::string& url,
   } else {
     out.body.clear();
     out.status_code = 0L;
+    out.error = curl_easy_strerror(rc);
   }
   curl_easy_cleanup(h);
   if (hdrs != nullptr) curl_slist_free_all(hdrs);
@@ -369,7 +371,8 @@ Rcpp::List morie_http_get_with_status_(std::string url,
     url, timeout_s, hdrs, user_agent, follow_redirects);
   return Rcpp::List::create(
     Rcpp::Named("body")        = r.body,
-    Rcpp::Named("status_code") = static_cast<int>(r.status_code));
+    Rcpp::Named("status_code") = static_cast<int>(r.status_code),
+    Rcpp::Named("error")       = r.error);
 }
 
 //' Status-aware HTTP(S) POST via the libcurl backend (C++)
@@ -397,7 +400,8 @@ Rcpp::List morie_http_post_with_status_(std::string url,
     url, body, content_type, timeout_s, hdrs, user_agent, follow_redirects);
   return Rcpp::List::create(
     Rcpp::Named("body")        = r.body,
-    Rcpp::Named("status_code") = static_cast<int>(r.status_code));
+    Rcpp::Named("status_code") = static_cast<int>(r.status_code),
+    Rcpp::Named("error")       = r.error);
 }
 
 //' libcurl version string the morie C++ backend was built against

@@ -366,11 +366,6 @@ morie_fetch <- function(url,
 #' @export
 morie_ckan_search <- function(query, portal = "open.canada.ca",
                               rows = 25L, ...) {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Package 'jsonlite' is required for morie_ckan_search().",
-      call. = FALSE
-    )
-  }
   base <- .morie_ckan_portal(portal)
   api <- paste0(base, "/api/3/action/package_search")
   url <- .morie_url_with_params(
@@ -455,11 +450,6 @@ morie_ckan_search <- function(query, portal = "open.canada.ca",
 morie_fetch_arcgis <- function(layer_url, where = "1=1", out_fields = "*",
                                params = NULL, page_size = 2000L,
                                max_records = Inf, label = NULL) {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Package 'jsonlite' is required for morie_fetch_arcgis(): install.packages(\"jsonlite\")",
-      call. = FALSE
-    )
-  }
   layer_url <- sub("/+$", "", layer_url)
   query_url <- paste0(layer_url, "/query")
   # the bar names the service, not the layer number (".../Homicides/FeatureServer/0" -> "Homicides")

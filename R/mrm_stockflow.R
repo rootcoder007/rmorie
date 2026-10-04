@@ -123,7 +123,7 @@ mrm_otis_stock_flow <- function(person_days,
                                      period = yrs, t = t,
                                      exposure = exposure, per = per)
 
-  ## ── the reconciliation ──
+  ## -- the reconciliation --
   rec <- data.frame(period = yrs, person_stratum_people = people,
                     person_stratum_days = days, stringsAsFactors = FALSE)
   if (!is.null(placements)) {

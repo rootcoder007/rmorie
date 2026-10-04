@@ -1575,25 +1575,26 @@ morie_siu_compare <- function(case_number, external,
       )
     }
   }
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop("LLM helpers require the 'httr2' package: ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("LLM helpers require the 'jsonlite' package", call. = FALSE)
-  }
   env <- setNames(list(env_val), p$env_required)
   req_spec <- p$build(env, prompt)
-  req <- httr2::request(req_spec$url)
-  if (!is.null(req_spec$headers)) {
-    req <- httr2::req_headers(req, !!!req_spec$headers)
+  hdr <- if (is.null(req_spec$headers)) character() else paste0(names(req_spec$headers), ": ", unlist(req_spec$headers))
+  resp <- .morie_http_post_with_status(req_spec$url, as.character(.morie_to_json(req_spec$body, auto_unbox = TRUE)),
+                                       "application/json", timeout_s = as.integer(timeout_s), headers = hdr)
+  if (resp$status_code == 0L) {
+    stop(sprintf("%s could not be reached (no network, or a proxy refused the connection)", model), call. = FALSE)
   }
-  req <- httr2::req_body_json(req, req_spec$body)
-  req <- httr2::req_timeout(req, timeout_s)
-  resp <- httr2::req_perform(req)
-  parsed <- httr2::resp_body_json(resp)
+  if (resp$status_code >= 400L) {
+    err <- tryCatch(.morie_from_json(resp$body, simplifyVector = FALSE)$error, error = function(e) NULL)
+    msg <- if (is.list(err)) err$message %||% "" else as.character(err %||% "")
+    if (!nzchar(paste(msg, collapse = ""))) msg <- substr(resp$body, 1L, 200L)
+    key <- if (identical(p$env_required, "GOOGLE_API_KEY")) "GEMINI_API_KEY (or GOOGLE_API_KEY)" else p$env_required
+    stop(if (resp$status_code %in% c(400L, 401L, 403L) && length(key) && nzchar(key)) {
+      sprintf("%s rejected %s (HTTP %d: %s)", model, key, resp$status_code, msg)
+    } else {
+      sprintf("%s answered HTTP %d: %s", model, resp$status_code, msg)
+    }, call. = FALSE)
+  }
+  parsed <- .morie_from_json(resp$body, simplifyVector = FALSE)
   p$extract(parsed)
 }
 

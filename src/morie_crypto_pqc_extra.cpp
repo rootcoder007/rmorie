@@ -46,11 +46,21 @@ OQS_KEM* new_hqc128() {
 }  // namespace
 #endif
 
+#ifdef MORIE_OQS_UNLOADABLE
+#define MORIE_NO_OQS_STOP                                              \
+  Rcpp::stop("HQC needs liboqs. This build found liboqs, but a program " \
+             "linked against it would not run, so it was left out: its " \
+             "directory is not on the loader path, or two copies (e.g. " \
+             "/usr/local and /usr) disagree. Remove one or fix the " \
+             "loader path, then reinstall.");                          \
+  return R_NilValue;
+#else
 #define MORIE_NO_OQS_STOP                                              \
   Rcpp::stop("HQC needs liboqs, which this build of rmorie did not "  \
              "find (configure says why); install liboqs-devel / "      \
              "liboqs-dev / brew install liboqs and reinstall.");       \
   return R_NilValue;
+#endif
 
 // ---------------------------------------------------------------------
 // SLH-DSA-SHA2-128s (hash-based signatures, FIPS 205)

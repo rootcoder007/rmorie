@@ -112,6 +112,27 @@
   )
 }
 
+#' Fail early only when this build has no HTTP client at all: the libcurl backend is
+#' compiled in, and httr2 is the fallback for a build without it.
+#' @keywords internal
+#' @noRd
+.morie_http_require <- function(what) {
+  if (.morie_dataset_http_backend_cpp() || requireNamespace("httr2", quietly = TRUE)) return(invisible(TRUE))
+  stop(sprintf("%s needs an HTTP client: this build of rmorie has no libcurl backend; install.packages(\"httr2\")", what),
+       call. = FALSE)
+}
+
+#' Stop with the host and curl's reason when a request got no HTTP response at all
+#' @keywords internal
+#' @noRd
+.morie_http_reached <- function(url, r) {
+  if (identical(as.integer(r$status_code %||% 0L), 0L)) {
+    host <- sub("^[a-z]+://([^/:?#]+).*$", "\\1", url)
+    stop(sprintf("could not reach %s (%s)", host, r$error %||% "no response"), call. = FALSE)
+  }
+  invisible(r)
+}
+
 #' GET that returns the response body as a UTF-8 character string.
 #' 3VV: routes through morie's C++ libcurl backend (.morie_http_get,
 #' src/morie_http.cpp) when available; falls back to httr2 if not.
@@ -122,10 +143,12 @@
                                      timeout_s = 60L) {
   full_url <- .morie_dataset_build_url(url, query)
   if (.morie_dataset_http_backend_cpp()) {
-    return(.morie_http_get(full_url,
+    r <- .morie_http_get_with_status(full_url,
       timeout_s = as.integer(timeout_s),
       headers = as.character(headers)
-    ))
+    )
+    .morie_http_reached(full_url, r)
+    return(r$body)
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop(
@@ -331,10 +354,15 @@
     where = asNamespace("rmorie"),
     mode = "function"
   )) {
-    return(.morie_http_get_bytes(full_url,
+    bytes <- .morie_http_get_bytes(full_url,
       timeout_s = as.integer(timeout_s),
       headers = as.character(headers)
-    ))
+    )
+    if (!length(bytes)) {  # the binary GET returns nothing at all when no response came back
+      stop(sprintf("could not reach %s (no data came back)", sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url)),
+           call. = FALSE)
+    }
+    return(bytes)
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop(

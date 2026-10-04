@@ -433,7 +433,10 @@ morie_verify_pollution <- function(pollutant, outcome = "all_cause_mortality",
     data_source <- "demo (synthetic)"
   } else if (!is.null(exposure_csv)) {
     if (!file.exists(exposure_csv)) return(fail(sprintf("exposure CSV not found: %s", exposure_csv)))
+    empty <- sprintf("%s is empty (expected a column exposure in ug/m3, or a NAPS pull's value + unit)", exposure_csv)
+    if (isTRUE(file.size(exposure_csv) == 0)) return(fail(empty))
     df <- utils::read.csv(exposure_csv, stringsAsFactors = FALSE)
+    if (!nrow(df)) return(fail(empty))
     if (!"exposure" %in% names(df) && "value" %in% names(df)) {
       # a NAPS pull (rmorie pull naps-...): hourly `value` in `unit`; NO2 is reported in ppb
       vals <- suppressWarnings(as.numeric(df$value))
@@ -461,7 +464,7 @@ morie_verify_pollution <- function(pollutant, outcome = "all_cause_mortality",
   assumptions <- .envhealth_assumptions(pollutant, exposure_mean, exposure_prevalence,
                                         baseline_rate, population, reference)
   report <- list(
-    command = "morie verify-pollution", pollutant = pollutant, outcome = outcome,
+    command = "rmorie verify-pollution", pollutant = pollutant, outcome = outcome,
     region = region, years = years, data_source = data_source,
     inputs = list(exposure_mean = exposure_mean, exposure_prevalence = exposure_prevalence,
                   baseline_rate_per_100k = baseline_rate, population = population,
@@ -505,7 +508,7 @@ morie_verify_pollution <- function(pollutant, outcome = "all_cause_mortality",
 .envhealth_report_text <- function(report) {
   bar <- strrep("=", 66)
   if (identical(report$status, "error")) return(paste0("ERROR: ", report$error, "\n"))
-  lines <- c(bar, sprintf("  morie verify-pollution -- %s -> %s", toupper(report$pollutant), report$outcome))
+  lines <- c(bar, sprintf("  %s -- %s -> %s", report$command, toupper(report$pollutant), report$outcome))
   if (!is.null(report$region)) lines <- c(lines, sprintf("  region: %s", report$region))
   if (!is.null(report$years)) lines <- c(lines, sprintf("  years:  %s", report$years))
   inp <- report$inputs

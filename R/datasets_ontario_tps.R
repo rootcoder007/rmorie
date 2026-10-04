@@ -58,13 +58,6 @@
 #' Internal helper: Morie Ontario Ckan Dump Csv
 #' @noRd
 .morie_ontario_ckan_dump_csv <- function(resource_id, limit = 200000L) {
-  if (!requireNamespace("httr2", quietly = TRUE) ||
-    !requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("Ontario CKAN dump fetch needs httr2 + jsonlite. ",
-      "install.packages(c('httr2', 'jsonlite'))",
-      call. = FALSE
-    )
-  }
   url <- sprintf(
     "%s/datastore/dump/%s?format=json&limit=%d",
     .MORIE_ONTARIO_CKAN_BASE, resource_id, as.integer(limit)

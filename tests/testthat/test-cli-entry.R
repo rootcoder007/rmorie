@@ -17,7 +17,7 @@ test_that("version, help and unknown verbs behave", {
   expect_match(h$text, "login \\[--email ADDRESS\\]")
   expect_match(.capture()$text, "usage: rmorie")
   u <- .capture("frobnicate")
-  expect_equal(u$status, 1L)
+  expect_equal(u$status, 2L)  # a usage error, like an unknown option
   expect_match(u$text, "unknown verb 'frobnicate'")
 })
 
@@ -224,7 +224,7 @@ test_that("run-modules and pipeline run through the module runner", {
     morie_list_datasets = function(...) data.frame(key = c("ocp21", "bad1")),
     morie_load_dataset = function(key, ...) if (key == "bad1") stop("offline") else data.frame(k = key))
   od <- withr::local_tempdir()
-  a <- .capture("pull", "--all", "--out", od)
+  a <- .capture("pull", "--all", "--out", od, "-y")  # off a terminal, --all needs -y
   expect_equal(a$status, 0L)
   expect_true(file.exists(file.path(od, "ocp21.csv")))
   expect_match(a$text, "bad1 +FAILED: offline")

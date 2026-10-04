@@ -95,13 +95,7 @@ morie_ingest_tps_layers <- function() {
                                       .MORIE_TPS_DEFAULT_UA,
                                     timeout =
                                       .MORIE_TPS_DEFAULT_TIMEOUT) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "Package 'httr2' is required for morie_ingest_tps_*(). ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
+  .morie_http_require("morie_ingest_tps_*()")
   params <- list(
     where = where,
     outFields = out_fields,

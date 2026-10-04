@@ -108,7 +108,7 @@ test_that("agent_available reflects detect_provider", {
   expect_false(morie_llm_agent_available())
 })
 
-test_that("request_completion errors without httr2/jsonlite", {
+test_that("request_completion needs neither httr2 nor jsonlite", {
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "httr2") || identical(package, "jsonlite")) FALSE
@@ -116,11 +116,16 @@ test_that("request_completion errors without httr2/jsonlite", {
     },
     .package = "base"
   )
-  expect_error(
-    morie_llm_request_completion("http://x", "m",
-                                 list(list(role = "user", content = "x"))),
-    "httr2"
+  sent <- NULL
+  testthat::local_mocked_bindings(
+    .morie_llm_http = function(url, body = NULL, headers = character(), timeout = 30) {
+      sent <<- .morie_from_json(body, simplifyVector = FALSE)
+      list(status = 200L, body = '{"choices":[{"message":{"content":"ok"}}]}')
+    }
   )
+  r <- morie_llm_request_completion("http://x", "m", list(list(role = "user", content = "x")))
+  expect_equal(.morie_llm_extract_text(r), "ok")
+  expect_equal(sent$model, "m")
 })
 
 test_that("request_completion fails clean off-network", {

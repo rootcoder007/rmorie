@@ -67,7 +67,7 @@ test_that("rmorie list-datasets names a route for every key and ends with the fo
   expect_equal(r$status, 0L)
   expect_match(r$text, "naps-no2-on-2023 .*ECCC NAPS")
   expect_match(r$text, "cchs22 .*Statistics Canada")
-  expect_match(r$text, "mapq .*own file: data/datasets/vsr/TKARONTOMAPQ.xlsx")
+  expect_match(r$text, "mapq .*own file: .*datasets/vsr/TKARONTOMAPQ.xlsx")  # under the data directory
   expect_match(r$text, "siumanifest .*rmoriedata \\(CRAN\\)")
   expect_match(r$text, "hibsa .*health-infobase.canada.ca \\(or data.rmorie.com\\)")
   expect_match(r$text, "71 keys: 70 download from their portal, rmoriedata or data.rmorie.com on first use; 1 is your own research file")
@@ -302,10 +302,15 @@ test_that("round 4: omega hierarchical is below one on a two-factor scale", {
   o2 <- morie_psymet_omega(X, nf = 2)
   expect_lt(o2$hier, 0.7)                         # the group factors carry real variance
   expect_lt(o2$hier, o2$total)
-  # Schmid-Leiman by hand: promax, g loadings sqrt(phi_12) per factor, project the items
+  # Schmid-Leiman by hand: promax, g loadings sqrt(phi_12) per factor, project the items.
+  # psych's Promax starts from varimax WITHOUT Kaiser normalisation (stats::promax normalises)
   R <- cor(X)
   L <- .morie_paf(R, 2L)
-  pm <- stats::promax(L, m = 4)
+  vm <- stats::varimax(L, normalize = FALSE)
+  Lv <- unclass(vm$loadings)
+  U <- stats::lm.fit(Lv, Lv * abs(Lv)^3)$coefficients
+  U <- U %*% diag(sqrt(diag(solve(crossprod(U)))))
+  pm <- list(loadings = Lv %*% U, rotmat = vm$rotmat %*% U)
   P <- unclass(pm$loadings)
   Phi <- solve(crossprod(pm$rotmat))
   s <- sign(colSums(P))

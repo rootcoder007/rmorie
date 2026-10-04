@@ -58,7 +58,15 @@ NULL
     }
     utils::read.csv(p, stringsAsFactors = FALSE)
   }
-  .siu_an_clean(df)
+  df <- .siu_an_clean(df)
+  if (is.character(x)) attr(df, "siu_source") <- as.character(x)
+  df
+}
+
+#' Internal helper: where an SIU frame came from, for error messages
+#' @noRd
+.siu_an_src <- function(df) {
+  attr(df, "siu_source") %||% "the SIU data"
 }
 
 #' Internal helper: the affected person's sex in a few categories
@@ -67,13 +75,14 @@ NULL
 #' text cut at the wrong place; those are "unknown", and several people in one cell are "multiple".
 #' @noRd
 .siu_an_sex <- function(x) {
+  # the same order as morie.siu.analyze._sex: several people, then transgender, female, male
   s <- tolower(trimws(as.character(x)))
   s[is.na(s)] <- ""
-  male <- grepl("\\b(male|man|boy|he|masculin)\\b", s, perl = TRUE) & !grepl("female", s, fixed = TRUE)
-  female <- grepl("\\b(female|woman|girl|she|f\u00e9minin)\\b", s, perl = TRUE)
-  both <- (grepl("female", s, fixed = TRUE) & grepl("\\bmale\\b", s, perl = TRUE)) | grepl(",| and ", s, perl = TRUE)
-  out <- ifelse(grepl("trans", s, fixed = TRUE), "transgender", ifelse(male, "male", ifelse(female, "female", "unknown")))
-  out[both & nchar(s) <= 60] <- "multiple persons"
+  out <- rep("unknown", length(s))
+  out[grepl("\\b(male|man|boy|he|masculin)\\b", s, perl = TRUE)] <- "male"
+  out[grepl("\\b(female|woman|girl|she|f\u00e9minin)\\b", s, perl = TRUE)] <- "female"
+  out[grepl("trans", s, fixed = TRUE)] <- "transgender"
+  out[(grepl("female", s, fixed = TRUE) & grepl("\\bmale\\b", s, perl = TRUE)) | grepl(",| and ", s, perl = TRUE)] <- "multiple persons"
   out[nchar(s) > 60] <- "unknown"  # page text, not an answer
   out
 }
@@ -189,7 +198,7 @@ NULL
 morie_siu_by_police_service <- function(data = NULL) {
   df <- .siu_an_load(data)
   if (!"police_service" %in% names(df)) {
-    stop("Column 'police_service' missing from SIU_by_case.csv.",
+    stop(sprintf("Column 'police_service' missing from %s.", .siu_an_src(df)),
          call. = FALSE)
   }
   if (!"charges_recommended" %in% names(df)) {
@@ -285,7 +294,7 @@ morie_siu_by_police_service <- function(data = NULL) {
 morie_siu_by_year <- function(data = NULL) {
   df <- .siu_an_load(data)
   if (!"date_of_incident_iso" %in% names(df)) {
-    stop("Column 'date_of_incident_iso' missing.", call. = FALSE)
+    stop(sprintf("Column 'date_of_incident_iso' missing from %s.", .siu_an_src(df)), call. = FALSE)
   }
   if (!"charges_recommended" %in% names(df)) {
     df$charges_recommended <- NA
@@ -362,6 +371,13 @@ morie_siu_case_counts <- function(data = NULL) {
     c("number_of_civilian_witnesses", "#Civilian witnesses"),
     c("number_of_officers_involved",  "#Officers involved")
   )
+  if (!any(vapply(fields, `[`, "", 1L) %in% names(df))) {
+    return(.siu_an_rich(
+      title = "SIU case-team size distribution",
+      warnings = sprintf("None of the case-team columns (%s) is in %s.",
+                         paste(vapply(fields, `[`, "", 1L), collapse = ", "), .siu_an_src(df))
+    ))
+  }
   rows <- list()
   for (f in fields) {
     col <- f[1L]
@@ -414,6 +430,12 @@ morie_siu_case_counts <- function(data = NULL) {
 #' @export
 morie_siu_demographics <- function(data = NULL) {
   df <- .siu_an_load(data)
+  if (!any(c("sex_gender_affected", "age_affected") %in% names(df))) {
+    return(.siu_an_rich(
+      title = "Affected-person demographics",
+      warnings = sprintf("Neither 'sex_gender_affected' nor 'age_affected' is in %s.", .siu_an_src(df))
+    ))
+  }
   sex_col <- .siu_an_sex(if ("sex_gender_affected" %in% names(df)) df$sex_gender_affected else rep(NA, nrow(df)))
   sex_tab <- sort(table(sex_col), decreasing = TRUE)
   sex_rows <- lapply(names(sex_tab), function(k) {
@@ -481,7 +503,7 @@ morie_siu_mental_health_race_indicators <- function(data = NULL) {
   if (!"mental_health_or_race_indications" %in% names(df)) {
     return(.siu_an_rich(
       title = "Mental-health / race indicators in SIU narratives",
-      warnings = "Column 'mental_health_or_race_indications' missing."
+      warnings = sprintf("Column 'mental_health_or_race_indications' missing from %s.", .siu_an_src(df))
     ))
   }
   sigs <- as.character(df$mental_health_or_race_indications)
@@ -590,6 +612,13 @@ morie_siu_decision_timing <- function(data = NULL) {
     "date_siu_notified_iso",
     "date_of_director_decision_iso"
   )
+  if (!any(required %in% names(df))) {
+    return(.siu_an_rich(
+      title = "SIU decision timing (days)",
+      warnings = sprintf("None of the date columns (%s) is in %s.",
+                         paste(required, collapse = ", "), .siu_an_src(df))
+    ))
+  }
   for (r in required) {
     if (!r %in% names(df)) df[[r]] <- NA_character_
   }
@@ -754,18 +783,16 @@ morie_siu_all_analyses <- function(data = NULL, out_dir = NULL) {
         writeLines(utils::capture.output(print(r)), txt_path),
         error = function(e) invisible(NULL)
       )
-      if (requireNamespace("jsonlite", quietly = TRUE)) {
-        json_path <- file.path(out_dir,
-                               paste0("siu_analysis_", nm, ".json"))
-        tryCatch(
-          writeLines(
-            .morie_to_json(r$payload, auto_unbox = TRUE,
-                             pretty = TRUE, null = "null"),
-            json_path
-          ),
-          error = function(e) invisible(NULL)
-        )
-      }
+      json_path <- file.path(out_dir,
+                             paste0("siu_analysis_", nm, ".json"))
+      tryCatch(
+        writeLines(
+          .morie_to_json(r$payload, auto_unbox = TRUE,
+                           pretty = TRUE, null = "null"),
+          json_path
+        ),
+        error = function(e) invisible(NULL)
+      )
     }
   }
   results

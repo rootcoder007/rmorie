@@ -677,7 +677,13 @@ morie_entheo_clone_dmt_imaging <- function(root = NULL,
   }
   if (dir.exists(root)) {
     if (isTRUE(overwrite)) {
-      unlink(root, recursive = TRUE, force = TRUE)
+      # only an earlier clone of DMT_Imaging is wiped: `root` can be any directory the caller names
+      cfg <- file.path(root, ".git", "config")
+      ours <- file.exists(cfg) && any(grepl("timmer500/DMT_Imaging", readLines(cfg, warn = FALSE), fixed = TRUE))
+      if (!ours) {
+        stop(sprintf("refusing to overwrite %s: it is not a clone of DMT_Imaging", root), call. = FALSE)
+      }
+      .morie_unlink_owned(root)
     } else {
       message(sprintf(
         "DMT_Imaging already present at %s; pass overwrite=TRUE to refresh.",

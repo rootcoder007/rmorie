@@ -9,22 +9,9 @@ test_that("ingest_cihi_xlsx validates url", {
   expect_error(morie_ingest_cihi_xlsx(c("a", "b")), "non-empty")
 })
 
-test_that("ingest_cihi_xlsx errors without httr2", {
-  testthat::local_mocked_bindings(
-
-    requireNamespace = function(package, ...) {
-
-      if (identical(package, "httr2")) FALSE
-
-      else TRUE
-
-    },
-
-    .package = "base"
-
-  )
-  set.seed(1)
-  expect_error(morie_ingest_cihi_xlsx("http://x/a.xlsx"), "httr2")
+test_that("ingest_cihi_xlsx says the download failed when the host is unreachable", {
+  # a refused local port, no Wayback fallback: the native client fails at once
+  expect_error(morie_ingest_cihi_xlsx("http://127.0.0.1:9/a.xlsx", wayback_url = ""), "download failed")
 })
 
 test_that("ingest_cihi_xlsx errors without readxl", {
@@ -54,22 +41,19 @@ test_that("ingest_cihi_xlsx fails clean off-network", {
   expect_null(res)
 })
 
-test_that("pick_data_sheet errors without readxl", {
+test_that("pick_data_sheet reads a workbook without readxl", {
+  skip_if_not_installed("writexl")
+  tmp <- tempfile(fileext = ".xlsx")
+  writexl::write_xlsx(list(small = data.frame(a = 1:2), big = data.frame(a = 1:10, b = 1:10, c = 1:10)), tmp)
+  on.exit(unlink(tmp), add = TRUE)
   testthat::local_mocked_bindings(
-
-    requireNamespace = function(package, ...) {
-
-      if (identical(package, "readxl")) FALSE
-
-      else TRUE
-
-    },
-
+    requireNamespace = function(package, ...) !identical(package, "readxl"),
     .package = "base"
-
   )
-  set.seed(1)
-  expect_error(rmorie:::.morie_cihi_pick_data_sheet("foo.xlsx"), "readxl")
+  out <- rmorie:::.morie_cihi_pick_data_sheet(tmp)  # the package's own reader: same choice
+  expect_identical(attr(out, "morie_cihi_sheet"), "big")
+  expect_equal(dim(out), c(10L, 3L))
+  expect_error(rmorie:::.morie_cihi_pick_data_sheet("foo.xlsx"), "no such file")
 })
 
 test_that("pick_data_sheet picks largest sheet when readxl present", {

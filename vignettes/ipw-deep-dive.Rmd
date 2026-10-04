@@ -4,7 +4,7 @@ output:
   rmarkdown::html_vignette:
     toc: true
 vignette: >
-  %\VignetteIndexEntry{IPW deep-dive}
+  %\VignetteIndexEntry{IPW deep-dive (Hajek and Horvitz--Thompson)}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

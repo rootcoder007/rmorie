@@ -62,7 +62,7 @@
                                 headers = headers,
                                 timeout_s = as.integer(timeout)),
       error = function(e) {
-        stop("morie CKAN ", action, " request failed: ",
+        stop("CKAN ", action, " request failed: ",
           conditionMessage(e),
           call. = FALSE
         )
@@ -71,7 +71,7 @@
     tryCatch(
       .morie_from_json(body, simplifyVector = FALSE),
       error = function(e) {
-        stop("morie CKAN ", action, ": response was not JSON: ",
+        stop("CKAN ", action, ": response was not JSON: ",
           conditionMessage(e),
           call. = FALSE
         )
@@ -86,7 +86,7 @@
     fetch()
   })
   if (!isTRUE(payload$success)) {
-    stop("morie CKAN ", action, " failed: ",
+    stop("CKAN ", action, " failed: ",
       paste(utils::capture.output(str(payload$error)), collapse = " "),
       call. = FALSE
     )
@@ -137,12 +137,6 @@
     return(as.data.frame(readxl::read_excel(path)))
   }
   if (fmt %in% c("json")) {
-    if (!requireNamespace("jsonlite", quietly = TRUE)) {
-      stop("Reading CKAN JSON resources requires the 'jsonlite' package. ",
-        "install.packages('jsonlite')",
-        call. = FALSE
-      )
-    }
     return(as.data.frame(.morie_from_json(path, flatten = TRUE)))
   }
   if (fmt %in% c("parquet")) {
@@ -333,12 +327,7 @@ morie_ingest_ckan_read_resource <- function(portal,
     !nzchar(url_or_id)) {
     stop("`url_or_id` must be a single non-empty string.", call. = FALSE)
   }
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop("Package 'httr2' is required for morie_ingest_ckan_read_resource(). ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
+  .morie_http_require("morie_ingest_ckan_read_resource()")
   if (grepl("^https?://", url_or_id)) {
     url <- url_or_id
     fmt <- .morie_ckan_sniff_format(url, as_format)

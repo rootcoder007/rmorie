@@ -26,22 +26,13 @@ test_that("rows_to_df binds list-of-named-lists", {
   expect_equal(nrow(out), 2L)
 })
 
-test_that("socrata_get errors without httr2", {
+test_that("socrata_get names the host it could not reach (no httr2 needed)", {
   testthat::local_mocked_bindings(
-
-    requireNamespace = function(package, ...) {
-
-      if (identical(package, "httr2")) FALSE
-
-      else TRUE
-
-    },
-
+    requireNamespace = function(package, ...) !identical(package, "httr2"),
     .package = "base"
-
   )
-  set.seed(1)
-  expect_error(rmorie:::.morie_chicago_socrata_get("http://x"), "httr2")
+  # a refused local port: the native client answers at once, no network involved
+  expect_error(rmorie:::.morie_chicago_socrata_get("http://127.0.0.1:9"), "could not reach 127.0.0.1")
 })
 
 test_that("socrata_get fails clean off-network", {

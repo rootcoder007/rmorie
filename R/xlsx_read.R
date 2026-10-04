@@ -1,4 +1,42 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
+#' Internal helper: a table whose first row is a title, its real header a few rows down
+#'
+#' CIHI sheets open with a title ("Table 1 Hospital Stays for ...") in A1 and the column names
+#' on a later row, so the reader names the columns after the title and placeholders (...2,
+#' ...3). The first row filled across most columns is the header; the table ends at the first
+#' blank row (what follows is notes, or further tables stacked on the same tab).
+#' @noRd
+.morie_xlsx_promote_header <- function(df) {
+  nm <- names(df)
+  if (ncol(df) < 2L || !nrow(df)) return(df)
+  placeholder <- grepl("^\\.\\.\\.[0-9]+$", nm) | !nzchar(trimws(nm))
+  if (mean(placeholder[-1L]) < 0.5) return(df)  # the sheet's own header row was read as names
+  cell_set <- function(v) !is.na(v) & nzchar(trimws(as.character(v)))
+  need <- max(2L, ceiling(0.8 * ncol(df)))
+  head_rows <- df[seq_len(min(nrow(df), 20L)), , drop = FALSE]
+  filled <- Reduce(`+`, lapply(head_rows, function(v) as.integer(cell_set(v))))
+  hdr <- which(filled >= need)[1L]
+  if (is.na(hdr)) return(df)
+  new <- trimws(as.character(unlist(df[hdr, ], use.names = FALSE)))
+  body <- df[-seq_len(hdr), , drop = FALSE]
+  blank <- !Reduce(`|`, lapply(body, cell_set))
+  if (any(blank)) {
+    cut <- which(blank)[1L]
+    if (any(!blank[seq.int(cut, length(blank))])) {
+      message("note: ", attr(df, "morie_sheet") %||% "the sheet",
+              ": rows after the table's first blank line (notes, or further tables on the tab) are left out")
+    }
+    body <- body[seq_len(cut - 1L), , drop = FALSE]
+  }
+  unnamed <- is.na(new) | !nzchar(new)
+  new[unnamed] <- paste0("...", which(unnamed))
+  names(body) <- make.unique(new)
+  rownames(body) <- NULL
+  body[] <- lapply(body, function(v) if (is.character(v)) utils::type.convert(trimws(v), as.is = TRUE) else v)
+  attr(body, "morie_sheet") <- attr(df, "morie_sheet")
+  .morie_xlsx_one_line_names(body)
+}
+
 #' Internal helper: the data sheet of a workbook (cover sheets skipped, the most cells wins)
 #'
 #' CIHI and other publishers put an "Instructions" or "Notes to readers" sheet first; the
@@ -6,12 +44,35 @@
 #' whole sheet in memory: the 93 MB CIHI indicator library needs more than 5 GB).
 #' @noRd
 .morie_xlsx_data_sheet <- function(path, ...) {
-  if (file.size(path) > 50e6) return(.morie_xlsx_stream(path))
+  .morie_xlsx_promote_header(.morie_xlsx_data_sheet_raw(path, ...))
+}
+
+.morie_xlsx_data_sheet_raw <- function(path, ...) {
+  if (!file.exists(path)) stop("no such file: ", path, call. = FALSE)
+  if (file.size(path) > 50e6) return(.morie_xlsx_one_line_names(.morie_xlsx_stream(path)))
+  cover <- "^(instructions?|notes?( to readers?)?|(table of )?contents|about|read ?me|cover|footnotes?|glossary|definitions|methodology)$"
   if (!requireNamespace("readxl", quietly = TRUE)) {
-    stop("Package 'readxl' is required to read xlsx data: install.packages(\"readxl\")", call. = FALSE)
+    # no readxl: the package's own reader, sheet by sheet (the cover sheets skipped, most cells wins)
+    members <- tryCatch(utils::unzip(path, list = TRUE)$Name, error = function(e) character())
+    if (!"xl/workbook.xml" %in% members) stop(basename(path), " is not an Excel workbook (.xlsx)", call. = FALSE)
+    con <- unz(path, "xl/workbook.xml")
+    wb <- paste(readLines(con, warn = FALSE, encoding = "UTF-8"), collapse = "")
+    close(con)
+    names_all <- names(.morie_xlsx_sheet_ids(wb))
+    cand <- names_all[!grepl(cover, trimws(names_all), ignore.case = TRUE)]
+    if (!length(cand)) cand <- names_all
+    best <- NULL
+    for (nm in cand) {
+      df <- tryCatch(.morie_xlsx_stream(path, nm), error = function(e) NULL)
+      if (!is.null(df) && (is.null(best) || nrow(df) * ncol(df) > nrow(best) * ncol(best))) {
+        best <- df
+        attr(best, "morie_sheet") <- nm
+      }
+    }
+    if (is.null(best)) stop("no readable sheet in ", basename(path), call. = FALSE)
+    return(.morie_xlsx_one_line_names(best))
   }
   sheets <- readxl::excel_sheets(path)
-  cover <- "^(instructions?|notes?( to readers?)?|(table of )?contents|about|read ?me|cover|footnotes?|glossary|definitions|methodology)$"
   data_sheets <- sheets[!grepl(cover, trimws(sheets), ignore.case = TRUE)]
   if (!length(data_sheets)) data_sheets <- sheets
   best <- NULL
@@ -24,7 +85,7 @@
     }
   }
   if (is.null(best)) stop("no readable sheet in ", basename(path), call. = FALSE)
-  best
+  .morie_xlsx_one_line_names(best)
 }
 
 #' Internal helper: stream the first sheet of a large workbook to CSV, then read the CSV
@@ -34,7 +95,7 @@
 #' The intermediate CSV goes to the user cache (a download sits in tempdir(), which on some
 #' systems is RAM) and is removed once read; the caller caches the table itself.
 #' @noRd
-.morie_xlsx_stream <- function(path) {
+.morie_xlsx_stream <- function(path, sheet_name = NULL) {
   dir.create(morie_cache_dir("xlsx"), recursive = TRUE, showWarnings = FALSE)
   csv <- file.path(morie_cache_dir("xlsx"), sub("\\.xlsx$", ".csv", basename(path), ignore.case = TRUE))
   on.exit(unlink(csv), add = TRUE)
@@ -63,9 +124,10 @@
     }
     x
   }
-  # the first sheet in workbook order, through the relationship map
+  # the named sheet (else the first in workbook order), through the relationship map
   wb <- rd("xl/workbook.xml")
-  rid <- sub('(?s)^.*?<sheet [^>]*?r:id="([^"]+)".*$', "\\1", wb, perl = TRUE)
+  sheets <- .morie_xlsx_sheet_ids(wb)
+  rid <- if (!is.null(sheet_name) && sheet_name %in% names(sheets)) sheets[[sheet_name]] else sheets[[1L]]
   rels <- rd("xl/_rels/workbook.xml.rels")
   target <- regmatches(rels, regexpr(sprintf('<Relationship [^>]*Id="%s"[^>]*>', rid), rels))
   target <- sub('^.*Target="([^"]+)".*$', "\\1", target)
@@ -140,5 +202,30 @@
   open_cons <- FALSE
   file.rename(tmp, csv)
   # rows with no cells at all (<row r="9"/>, formatting only) are not data
-  utils::read.csv(csv, stringsAsFactors = FALSE, check.names = FALSE, encoding = "UTF-8")
+  df <- utils::read.csv(csv, stringsAsFactors = FALSE, check.names = FALSE, encoding = "UTF-8")
+  # as readxl reads a sheet: text cells trimmed, an empty cell missing
+  for (j in which(vapply(df, is.character, logical(1)))) {
+    v <- trimws(df[[j]])
+    v[!nzchar(v)] <- NA_character_
+    df[[j]] <- v
+  }
+  df
+}
+
+# header cells wrapped inside the workbook ("Number of \nhospital stays") become one-line names
+.morie_xlsx_one_line_names <- function(df) {
+  nm <- gsub("[[:space:]]+", " ", trimws(names(df)))
+  blank <- is.na(nm) | !nzchar(nm)
+  nm[blank] <- paste0("...", which(blank))  # readxl's name for a blank header cell, whichever reader ran
+  names(df) <- nm
+  df
+}
+
+# sheet name -> relationship id, in workbook order, from xl/workbook.xml
+.morie_xlsx_sheet_ids <- function(wb) {
+  tags <- regmatches(wb, gregexpr("<sheet [^>]*>", wb, perl = TRUE))[[1L]]
+  ids <- sub('^.*r:id="([^"]+)".*$', "\\1", tags)
+  nm <- sub('^.*name="([^"]+)".*$', "\\1", tags)
+  nm <- gsub("&amp;", "&", gsub("&apos;", "'", nm, fixed = TRUE), fixed = TRUE)
+  stats::setNames(as.list(ids), nm)
 }

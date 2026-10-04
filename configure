@@ -84,7 +84,7 @@ if [ -n "${OQS_LIBS}" ]; then
     :
   else
     echo "configure: liboqs was found (${OQS_LIBS}) but a program linked against it will not run (is its directory on the loader path? two copies, e.g. /usr/local and /usr, can disagree); building without liboqs: ML-KEM and ML-DSA use rmoriebricklayer's built-in FIPS 203/204 code" >&2
-    OQS_CFLAGS=""
+    OQS_CFLAGS="-DMORIE_OQS_UNLOADABLE"
     OQS_LIBS=""
   fi
   rm -f "${RUN_SRC}" "${RUN_OUT}" 2>/dev/null

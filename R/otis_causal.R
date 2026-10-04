@@ -1180,7 +1180,10 @@ morie_otis_causal_grid <- function(df = NULL, seed = 123L) {
   }
   if (!length(rows)) {
     message("morie_otis_causal_grid: no treatment-outcome pair could be built from this frame (columns missing or a degenerate treatment); returning an empty table")
-    return(data.frame())
+    return(data.frame(pair = character(), estimator = character(), n = integer(),
+                      p_treat = numeric(), ate = numeric(), ate_se = numeric(),
+                      ate_pval = numeric(), ci95_lo = numeric(), ci95_hi = numeric(),
+                      notes = character(), stringsAsFactors = FALSE))
   }
   do.call(rbind, rows)
 }

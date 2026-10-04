@@ -860,11 +860,7 @@ morie_geron_onnx_export <- function(model, args, file = NULL) {
 #' jsonlite_toJSON_or_stub(V)
 #' @keywords internal
 jsonlite_toJSON_or_stub <- function(x) {
-  if (requireNamespace("jsonlite", quietly = TRUE)) {
-    .s03json_toJSON(x, auto_unbox = TRUE, pretty = TRUE)
-  } else {
-    paste(utils::capture.output(str(x)), collapse = "\n")
-  }
+  as.character(.morie_to_json(x, auto_unbox = TRUE, pretty = TRUE))
 }
 
 # ============================================================ hmoob

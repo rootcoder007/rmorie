@@ -38,23 +38,13 @@ test_that("features_to_rows tolerates missing attributes", {
   expect_length(out, 1L)
 })
 
-test_that("arcgis_query errors without httr2", {
-  skip_heavy()
+test_that("arcgis_query names the host it could not reach (no httr2 needed)", {
   testthat::local_mocked_bindings(
-
-    requireNamespace = function(package, ...) {
-
-      if (identical(package, "httr2")) FALSE
-
-      else TRUE
-
-    },
-
+    requireNamespace = function(package, ...) !identical(package, "httr2"),
     .package = "base"
-
   )
-  set.seed(1)
-  expect_error(rmorie:::.morie_tps_arcgis_query("http://x"), "httr2")
+  # a refused local port: the native client answers at once, no network involved
+  expect_error(rmorie:::.morie_tps_arcgis_query("http://127.0.0.1:9"), "could not reach 127.0.0.1")
 })
 
 test_that("arcgis_query fails clean off-network", {

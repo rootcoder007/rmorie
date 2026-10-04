@@ -29,6 +29,11 @@
   w <- as.numeric(weights)
   w <- w / mean(w)
   assign(".morie_w", w, envir = env)
+  # sampling weights make the binomial / Poisson "successes" non-integer: glm() warns on every fit.
+  # The quasi families give the same IRLS (same estimates, same sandwich) without that warning,
+  # which is what survey::svyglm users are told to pass.
+  if (identical(family$family, "binomial")) family <- stats::quasibinomial(link = family$link)
+  if (identical(family$family, "poisson")) family <- stats::quasipoisson(link = family$link)
   environment(formula) <- env
   fit <- eval(bquote(stats::glm(.(formula), data = .(quote(data)),
                                 weights = .morie_w,

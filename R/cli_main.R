@@ -65,7 +65,7 @@ cli_main <- function(subject, json = "{}") {
     switch(subject,
       otis = {
         if (is.null(opts$data)) {
-          message("analyze otis: the bundled data.ontario.ca A01 slice; the full table: rmorie pull otisa01 --out FILE, then '{\"data\":\"FILE\"}'")
+          message("analyze otis: a 5-row SYNTHETIC sample shaped like the data.ontario.ca A01 table (it demonstrates the pipeline; its numbers are not findings); the real table: rmorie pull otisa01 --out FILE, then '{\"data\":\"FILE\"}'")
         }
         df <- morie_otis_load(opts$data)
         do.call(

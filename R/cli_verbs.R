@@ -5,6 +5,9 @@
 # emissions. Each takes the parsed `rest`, the `flag`/`has` accessors and the
 # `out` sink of morie_cli() and returns an exit status.
 
+# no terminal to type into (Rscript < /dev/null, a pipe); a function so tests can mock it
+.cli_stdin_closed <- function() !interactive() && !isatty(stdin())
+
 .cli_readline <- function(prompt) {
   if (interactive()) return(trimws(readline(prompt)))
   cat(prompt)
@@ -91,7 +94,7 @@
   if (has("hosted_key")) return("data.rmorie.com (your MORIE key)")
   if (has("hosted_file")) return("data.rmorie.com file (an R object: rmorie loads it, morie saves it)")
   if (has("ckan_resource_id")) return(if (identical(e$source, "otis")) "data.ontario.ca" else "open.canada.ca")
-  paste0("own file: ", e$local_path)
+  paste0("own file: ", .morie_own_file_target(e$local_path))
 }
 
 .cli_list_datasets <- function(out) {
@@ -116,7 +119,7 @@
   n_own <- sum(startsWith(route, "own file"))
   out(strrep("-", 96L))
   out("\n")
-  out(sprintf("%d keys: %d download from their portal, rmoriedata or data.rmorie.com on first use; %d %s your own research file%s, placed under $MORIE_DATA_DIR/datasets/ with the path%s shown.\n",
+  out(sprintf("%d keys: %d download from their portal, rmoriedata or data.rmorie.com on first use; %d %s your own research file%s, placed at the path%s shown (MORIE_DATA_DIR moves the data directory).\n",
               n_cat, n_cat - n_own, n_own, if (n_own == 1L) "is" else "are", if (n_own == 1L) "" else "s", if (n_own == 1L) "" else "s"))
   if (n_hub) {
     out(sprintf("%d curated tables at data.rmorie.com (db/table keys), opened by your MORIE key: rmorie pull KEY\n", n_hub))
@@ -223,7 +226,7 @@
 .cli_profile_dataset <- function(rest, flag, has, out) {
   path <- flag("--csv") %||% (if (length(rest) && !startsWith(rest[[1L]], "--")) rest[[1L]] else NULL)
   if (is.null(path)) {
-    out("usage: rmorie profile-dataset PATH [--treatment COL] [--outcome COL] [--weights COL] [--suggest]\n")
+    out("usage: rmorie profile-dataset PATH|--csv PATH [--treatment COL] [--outcome COL] [--weights COL] [--suggest]\n")
     return(2L)
   }
   if (!file.exists(path)) {
@@ -256,7 +259,7 @@
   path <- flag("--csv") %||% (if (length(rest) && !startsWith(rest[[1L]], "--")) rest[[1L]] else NULL)
   n <- flag("--n")
   if (is.null(path) || is.null(n)) {
-    out("usage: rmorie sample PATH --n N [--method srs|stratified|cluster|pps] [--strata-col COL [--per-stratum]] [--cluster-col COL] [--size-col COL] [--seed 42] [--output FILE] [--no-weight]\n")
+    out("usage: rmorie sample PATH|--csv PATH --n N [--method srs|stratified|cluster|pps] [--strata-col COL [--per-stratum]] [--cluster-col COL] [--size-col COL] [--seed 42] [--output FILE] [--no-weight]\n")
     return(2L)
   }
   if (!grepl("^[0-9]+$", n) || as.integer(n) < 1L) {
@@ -389,7 +392,7 @@
     return(2L)
   }
   ans <- morie_llm_ask(morie_build_prompt(paste(rest, collapse = " "), context = ctx), model = mdl)
-  out(paste0(ans, "\n"))
+  out(paste0(trimws(ans), "\n"))
   if (isTRUE(attr(ans, "fallback"))) {
     out(.cli_llm_fallback_cause(mdl))
     return(1L)
@@ -399,6 +402,13 @@
 
 # TRUE when every analysis a subject ran came back empty or failed (tables, payload and summary all empty,
 # or a title marked "(failed)"): `rmorie analyze` then exits 1 instead of reporting success.
+# TRUE for the text of a JSON object ({} included): what `analyze SUBJECT JSON` takes
+.cli_json_object <- function(txt) {
+  if (identical(trimws(txt), "{}")) return(TRUE)
+  v <- tryCatch(.morie_from_json(txt, simplifyVector = FALSE), error = function(e) NULL)
+  is.list(v) && length(v) > 0L && !is.null(names(v)) && all(nzchar(names(v)))
+}
+
 .cli_analyze_all_failed <- function(res) {
   if (is.character(res)) {
     res <- tryCatch(.morie_from_json(res, simplifyVector = FALSE), error = function(e) NULL)
@@ -519,6 +529,11 @@
 
 .cli_tutorial <- function(has, out) {
   dry <- has("--dry-run")
+  if (!dry && .cli_stdin_closed()) {
+    # say so before the welcome and STEP 1, not after them
+    out("the tutorial needs an interactive terminal (stdin is closed); `rmorie tutorial --dry-run` prints every command instead\n")
+    return(2L)
+  }
   out_root <- file.path(path.expand("~"), sprintf("rmorie-tutorial-%s", format(Sys.Date())))
   out(sprintf(paste0(
     "\nWelcome to the rmorie tutorial.\n\nThis walks you through one full analysis from a clean install to\n",
@@ -527,7 +542,7 @@
   steps <- list(
     list("What does morie know how to do?",
          "morie ships 23 analysis modules. Each has a short description and a list of output files.",
-         c("list-modules")),
+         c("list-modules", "--outputs")),
     list("Is everything healthy?",
          "`rmorie doctor` reports which language-model routes answer from this machine; `rmorie selftest` exercises the subsystems.",
          c("doctor")),
@@ -606,12 +621,12 @@
 .cli_latest_version <- function(pkg) {
   if (identical(pkg, "rmorie")) {
     url <- "https://rootcoder007.r-universe.dev/api/packages/rmorie"
-    txt <- paste(readLines(url, warn = FALSE), collapse = "")
+    txt <- paste(suppressWarnings(readLines(url, warn = FALSE)), collapse = "")
     v <- regmatches(txt, regexpr("\"Version\"\\s*:\\s*\"[^\"]+\"", txt))
     return(list(version = sub(".*\"([^\"]+)\"$", "\\1", v), source = "r-universe"))
   }
   url <- "https://raw.githubusercontent.com/rootcoder007/morie/main/r-package/morie/DESCRIPTION"
-  l <- grep("^Version:", readLines(url, warn = FALSE), value = TRUE)
+  l <- grep("^Version:", suppressWarnings(readLines(url, warn = FALSE)), value = TRUE)
   list(version = trimws(sub("^Version:", "", l[1L])), source = "GitHub main")
 }
 
@@ -629,6 +644,7 @@
     out("You are up to date.\n")
     return(0L)
   }
+  repos <- c("https://rootcoder007.r-universe.dev", "https://cloud.r-project.org")
   cmd <- if (identical(pkg, "rmorie")) {
     "install.packages(\"rmorie\", repos = c(\"https://rootcoder007.r-universe.dev\", \"https://cloud.r-project.org\"))"
   } else {
@@ -639,7 +655,13 @@
     return(0L)
   }
   out("Installing...\n")
-  eval(parse(text = cmd))
+  # the same command as printed above, called directly (no text evaluated)
+  if (identical(pkg, "rmorie")) {
+    utils::install.packages("rmorie", repos = repos)
+  } else {
+    if (!requireNamespace("remotes", quietly = TRUE)) utils::install.packages("remotes", repos = repos[[2L]])
+    getExportedValue("remotes", "install_github")("rootcoder007/morie", subdir = "r-package/morie")
+  }
   0L
 }
 
@@ -648,8 +670,14 @@
 }
 
 .cli_keystore_password <- function() {
+  # what the key store needs is said before any prompt (it asked for a password, then for sodium)
+  .morie_keystore_require(sodium = TRUE)
   pw <- Sys.getenv("MORIE_KEYSTORE_PASSWORD", "")
   if (nzchar(pw)) return(pw)
+  if (.cli_stdin_closed()) {
+    stop("no terminal to type the keystore password into: set MORIE_KEYSTORE_PASSWORD, or use --output DIR",
+         call. = FALSE)
+  }
   .cli_readline("Keystore password: ")
 }
 
@@ -746,14 +774,20 @@
       res <- morie_ingest_ckan_fetch_package_csvs(p, flag("--package"))
       od <- flag("--out") %||% "ckan-out"
       dir.create(od, recursive = TRUE, showWarnings = FALSE)
+      failed <- 0L
       for (nm in names(res)) {
-        if (is.data.frame(res[[nm]])) {
-          f <- file.path(od, paste0(gsub("[^A-Za-z0-9_.-]", "_", nm), ".csv"))
-          utils::write.csv(res[[nm]], f, row.names = FALSE)
-          out(sprintf("wrote %s (%d rows)\n", f, nrow(res[[nm]])))
+        if (!is.data.frame(res[[nm]])) next
+        if (startsWith(nm, "_failed_")) {
+          # a resource that did not download is reported, not written out as a one-cell "data" file
+          failed <- failed + 1L
+          out(sprintf("FAILED %s: %s\n", sub("^_failed_", "", nm), res[[nm]]$error[[1L]]))
+          next
         }
+        f <- file.path(od, paste0(gsub("[^A-Za-z0-9_.-]", "_", nm), ".csv"))
+        utils::write.csv(res[[nm]], f, row.names = FALSE)
+        out(sprintf("wrote %s (%d rows)\n", f, nrow(res[[nm]])))
       }
-      return(0L)
+      return(if (failed) 1L else 0L)
     }
     out(usage)
     return(2L)
@@ -1000,9 +1034,31 @@
 }
 
 
+# The --options a verb takes, read from its own usage text (the help is what users are told).
+.cli_flag_cache <- new.env(parent = emptyenv())
+.cli_verb_flags <- function(verb) {
+  if (!is.null(.cli_flag_cache[[verb]])) return(.cli_flag_cache[[verb]])
+  txt <- character()
+  rc <- tryCatch(.cli_verb_help(verb, function(s) txt <<- c(txt, s)), error = function(e) 2L)
+  flags <- if (identical(rc, 0L)) unique(regmatches(paste(txt, collapse = " "),
+                                                    gregexpr("--[a-z][a-z0-9-]*", paste(txt, collapse = " ")))[[1L]]) else NULL
+  .cli_flag_cache[[verb]] <- flags
+  flags
+}
+
+.cli_unknown_options <- function(verb, rest) {
+  if (verb %in% c("help", "--help", "-h", "version", "--version", "-v")) return(character())
+  opts <- rest[startsWith(rest, "--")]
+  if (!length(opts)) return(character())
+  known <- .cli_verb_flags(verb)
+  if (is.null(known)) return(character())  # an unknown verb is reported as one
+  # older spellings the verbs still take: pipeline --cpads-csv, crypto encrypt --recipient
+  setdiff(opts, c(known, "--help", "--cpads-csv", "--recipient"))
+}
+
 # `rmorie VERB --help`: the lines of the help text that describe the verb, never the verb itself.
 .cli_verb_help <- function(verb, out) {
-  if (verb %in% c("crypto", "sample", "verify-pollution", "ingest")) {
+  if (verb %in% c("crypto", "sample", "verify-pollution", "ingest", "profile-dataset", "pipeline")) {
     # their bare call prints the full usage (every flag); the help summary line had less
     full <- character()
     morie_cli(verb, out = function(s) full <<- c(full, s))

@@ -65,13 +65,7 @@ morie_ingest_chicago_resources <- function() {
                                          .MORIE_CHICAGO_DEFAULT_UA,
                                        timeout =
                                          .MORIE_CHICAGO_DEFAULT_TIMEOUT) {
-  if (!requireNamespace("httr2", quietly = TRUE)) {
-    stop(
-      "Package 'httr2' is required for morie_ingest_chicago_*(). ",
-      "install.packages('httr2')",
-      call. = FALSE
-    )
-  }
+  .morie_http_require("morie_ingest_chicago_*()")
   params <- list(
     `$limit`  = as.integer(limit),
     `$offset` = as.integer(offset)

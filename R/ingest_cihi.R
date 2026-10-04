@@ -2,25 +2,11 @@
 #' Internal helper: Morie Cihi Pick Data Sheet
 #' @noRd
 .morie_cihi_pick_data_sheet <- function(path, ...) {
-  morie_ensure_extras("readxl")
-  sheets <- readxl::excel_sheets(path)
-  best_df <- NULL
-  best_cells <- -1L
-  best_name <- sheets[1L]
-  for (nm in sheets) {
-    df <- tryCatch(as.data.frame(readxl::read_excel(path, sheet = nm, ...)),
-                    error = function(e) NULL)
-    if (is.null(df)) next
-    cells <- as.integer(nrow(df)) * as.integer(ncol(df))
-    if (!is.na(cells) && cells > best_cells) {
-      best_name <- nm
-      best_df <- df
-      best_cells <- cells
-    }
-  }
-  if (is.null(best_df)) stop("No readable sheets found in CIHI workbook: ", path, call. = FALSE)
-  attr(best_df, "morie_cihi_sheet") <- best_name
-  best_df
+  # the reader `rmorie pull cihi*` uses: cover sheets skipped, the most cells wins, the
+  # title row above the header dropped, and no readxl needed
+  df <- .morie_xlsx_data_sheet(path, ...)
+  attr(df, "morie_cihi_sheet") <- attr(df, "morie_sheet")
+  df
 }
 
 #' Catalogue of CIHI open data-table workbooks
@@ -95,7 +81,7 @@ morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
                                    wayback_url = NULL, ...) {
   if (!is.character(url) || length(url) != 1L || !nzchar(url))
     stop("`url` must be a single non-empty string.", call. = FALSE)
-  morie_ensure_extras(c("httr2", "readxl"))
+  morie_ensure_extras("readxl")
   tmp <- tempfile(fileext = ".xlsx", tmpdir = tempdir())
   on.exit(if (file.exists(tmp)) unlink(tmp, force = TRUE), add = TRUE)
   # 3YY: libcurl-backed binary fetch with httr2 fallback. On failure,

@@ -316,9 +316,6 @@ morie_tps_load_tps <- function(name, format = "geojson",
          paste(c(names(morie_tps_layer_urls()), names(hub)),
                collapse = ", "))
   }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("jsonlite required for morie_tps_load_tps().")
-  }
   dir.create(cache_dir, recursive = TRUE, showWarnings = FALSE)
   out <- file.path(cache_dir, paste0("tps_hub_", name, ".csv"))
   if (file.exists(out)) {

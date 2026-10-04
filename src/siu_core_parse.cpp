@@ -9,6 +9,7 @@
 #include <algorithm>
 #include <array>
 #include <regex>
+#include <tuple>
 #include <set>
 #include <sstream>
 
@@ -428,14 +429,111 @@ std::string html_to_text(const std::string& html) {
     return t;
 }
 
+// ---- French reports: the SIU publishes every report in both languages, and the French copy
+// ---- has its own headings and phrasing ("Le 12 novembre 2022", "a communique ... a l UES")
+static const std::string kFrMonths =
+    "(?:janvier|f\xc3\xa9vrier|fevrier|mars|avril|mai|juin|juillet|ao\xc3\xbbt|aout|septembre|octobre|novembre|"
+    "d\xc3\xa9" "cembre|decembre)";
+static const std::string kFrDate = "(\\d{1,2}(?:er)?\\s+" + kFrMonths + "\\s+\\d{4})";
+static const std::string kApos = "(?:'|\xe2\x80\x99)";
+
+// the sentence that starts at `pos`: to its first ". " or the end of the line (at most 300 bytes)
+static std::string sentence_at(const std::string& s, size_t pos) {
+    size_t end = s.find('\n', pos);
+    const size_t stop = s.find(". ", pos);
+    if (stop != std::string::npos && (end == std::string::npos || stop < end)) end = stop;
+    if (end == std::string::npos || end > pos + 300) end = std::min(s.size(), pos + 300);
+    return s.substr(pos, end - pos);
+}
+
+std::string detect_police_service_fr(const std::string& text) {
+    static const std::regex notif("(Service de police[^\\n,.;()]*?|Police provinciale de l" + kApos +
+                                  "Ontario)\\s*(?:\\(\\s*[A-Z]{2,6}\\s*\\)\\s*)?(?:a|ont) (?:communiqu|avis|inform)");
+    std::smatch m;
+    if (std::regex_search(text, m, notif)) return trim(m[1].str());
+    static const std::regex pat("(Service de police(?: [a-z\xc3\xa9]+){0,2} (?:de la |de |du |des |d" + kApos +
+                                ")[A-Z\xc3][^\\s,.;()]*(?: [A-Z\xc3][^\\s,.;()]*)*|Police provinciale de l" + kApos +
+                                "Ontario)");
+    std::map<std::string, int> counts;
+    for (auto it = std::sregex_iterator(text.begin(), text.end(), pat); it != std::sregex_iterator(); ++it)
+        counts[trim((*it)[1].str())]++;
+    std::string best;
+    int bestc = 0;
+    for (const auto& [k, v] : counts) {
+        if (v > bestc || (v == bestc && k.size() > best.size())) {
+            best = k;
+            bestc = v;
+        }
+    }
+    return best;
+}
+
+// first "Le <date>" of the investigation that is not the call to the SIU or the team's dispatch
+std::string detect_incident_date_fr(const std::string& text) {
+    std::string sec = section_text(text, "L\xe2\x80\x99" "enqu\xc3\xaa" "te");
+    if (sec.empty()) sec = section_text(text, "L'enqu\xc3\xaa" "te");
+    if (sec.empty()) sec = text;
+    static const std::regex pat("\\b[Ll]e\\s+" + kFrDate);
+    static const std::regex ues("l" + kApos + "\\s*UES\\b");
+    for (auto it = std::sregex_iterator(sec.begin(), sec.end(), pat); it != std::sregex_iterator(); ++it) {
+        const std::string sent = sentence_at(sec, static_cast<size_t>(it->position(0)));
+        const size_t a = it->position(0) > 60 ? static_cast<size_t>(it->position(0)) - 60 : 0;
+        const std::string before = lower(sec.substr(a, static_cast<size_t>(it->position(0)) - a));
+        if (std::regex_search(sent, ues) || before.find("envoi de l") != std::string::npos ||
+            before.find("arriv\xc3\xa9" "e de l") != std::string::npos)
+            continue;
+        return (*it)[1].str();
+    }
+    return "";
+}
+
+// first date after the "Notification de l'UES" heading
+std::string detect_siu_notified_fr(const std::string& text) {
+    static const std::regex head("(^|\\n)Notification de l" + kApos + "\\s*UES[^\\n]*\\n");
+    size_t start = std::string::npos;
+    for (auto it = std::sregex_iterator(text.begin(), text.end(), head); it != std::sregex_iterator(); ++it)
+        start = static_cast<size_t>(it->position(0) + it->length(0));
+    if (start == std::string::npos) return "";
+    const std::string after = text.substr(start, 1500);
+    static const std::regex pat(kFrDate);
+    std::smatch m;
+    return std::regex_search(after, m, pat) ? m[1].str() : "";
+}
+
+std::string detect_decision_date_fr(const std::string& text) {
+    static const std::regex pat("Date\\s*:\\s*(?:[Ll]e\\s+)?" + kFrDate);
+    std::smatch m;
+    return std::regex_search(text, m, pat) ? m[1].str() : "";
+}
+
+std::pair<std::string, std::string> detect_age_sex_fr(const std::string& text) {
+    static const std::regex pat(
+        "\\b(femme|homme|fille|gar\xc3\xa7on|adolescente|adolescent|personne)\\s+de\\s+(\\d{1,3})\\s+ans\\b",
+        std::regex::icase);
+    std::smatch m;
+    if (!std::regex_search(text, m, pat)) return {"", ""};
+    static const std::map<std::string, std::string> kEn = {
+        {"femme", "woman"}, {"homme", "man"}, {"fille", "girl"}, {"gar\xc3\xa7on", "boy"},
+        {"adolescente", "youth"}, {"adolescent", "youth"}, {"personne", "person"}};
+    const auto it = kEn.find(lower(m[1].str()));
+    return {m[2].str(), it == kEn.end() ? lower(m[1].str()) : it->second};
+}
+
+static std::string or_else(const std::string& a, const std::string& b) { return a.empty() ? b : a; }
+
 ParsedFields parse_report_text(const std::string& text) {
     ParsedFields f;
     f["_language"] = detect_language(text);
 
-    f["police_service"] = detect_police_service(text);
-    f["date_of_incident_iso"] = to_iso_date(detect_incident_date(text));
-    f["date_siu_notified_iso"] = to_iso_date(detect_siu_notified(text));
-    f["date_of_director_decision_iso"] = to_iso_date(detect_decision_date(text));
+    const bool fr = f["_language"] == "fr";
+    f["police_service"] = fr ? or_else(detect_police_service_fr(text), detect_police_service(text))
+                             : detect_police_service(text);
+    f["date_of_incident_iso"] =
+        to_iso_date(fr ? or_else(detect_incident_date_fr(text), detect_incident_date(text)) : detect_incident_date(text));
+    f["date_siu_notified_iso"] =
+        to_iso_date(fr ? or_else(detect_siu_notified_fr(text), detect_siu_notified(text)) : detect_siu_notified(text));
+    f["date_of_director_decision_iso"] = to_iso_date(
+        fr ? or_else(detect_decision_date_fr(text), detect_decision_date(text)) : detect_decision_date(text));
 
     f["siu_investigators"] = team_count(text, "SIU Investigators");
     f["siu_forensics_investigators"] =
@@ -468,7 +566,8 @@ ParsedFields parse_report_text(const std::string& text) {
                                          "Witness Officers", "Witness Officials"});
     f["number_of_civilian_witnesses"] = count_tagged(cw, "CW");
 
-    const auto [age, sex] = detect_age_sex(text);
+    auto [age, sex] = detect_age_sex(text);
+    if (fr && age.empty()) std::tie(age, sex) = detect_age_sex_fr(text);
     f["age_affected"] = age;
     f["sex_gender_affected"] = sex;
 

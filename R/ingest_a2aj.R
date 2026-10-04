@@ -47,6 +47,7 @@
     headers = paste0("User-Agent: ", user_agent),
     timeout_s = as.integer(timeout)
   )
+  .morie_http_reached(url, res)
   if (res$status_code >= 400L) {
     stop("A2AJ ", endpoint, " -> HTTP ", res$status_code, ": ",
       substr(res$body, 1L, 200L),

@@ -34,16 +34,18 @@ test_that("morie_userguide lists the bundled userguides", {
 
 test_that("morie_download_bootstrap validates the survey argument", {
   expect_error(morie_download_bootstrap("not-a-survey"), "Unknown survey")
-  # the legacy bootstrap keys are not current catalog keys, so each
-  # target falls through the 'unknown key' branch -- still exercised.
-  res <- suppressMessages(
+  # every download failing is an error naming each key, not a NULL that looks like success
+  testthat::local_mocked_bindings(
+    morie_fetch_ckan = function(dataset_key, ...) stop("offline"),
+    morie_load_dataset = function(key, ...) stop("offline"),
+    .package = "rmorie"
+  )
+  expect_error(suppressMessages(
     morie_download_bootstrap("csus_2023", db_path = tempfile(fileext = ".db"))
-  )
-  expect_null(res)
-  res_all <- suppressMessages(
+  ), "no bootstrap file could be downloaded.*cu23bt: offline")
+  expect_error(suppressMessages(
     morie_download_bootstrap("all", db_path = tempfile(fileext = ".db"))
-  )
-  expect_null(res_all)
+  ), "ocs22bt: offline")
 })
 
 test_that("morie_list_datasets reports per-dataset cache status", {

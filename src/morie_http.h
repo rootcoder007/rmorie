@@ -85,6 +85,7 @@ std::string post(const std::string& url,
 struct Response {
   std::string body;
   long status_code;
+  std::string error;  // curl's reason when status_code is 0 (no HTTP response)
 };
 
 Response get_with_status(const std::string& url,

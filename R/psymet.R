@@ -143,36 +143,46 @@ morie_psymet_omega <- function(data, nf = 1) {
   )
 }
 
-# Principal-axis factoring (module 18): communalities iterated on the diagonal of the reduced
-# correlation matrix from a squared-multiple-correlation start; the first factor loads positively.
-.morie_paf <- function(R, nf, max_iter = 200L, tol = 1e-6) {
-  k <- ncol(R)
-  h2 <- tryCatch(1 - 1 / diag(solve(R)), error = function(e) rep(0.5, k))
-  h2 <- pmin(pmax(h2, 0.05), 0.995)
-  loads <- matrix(0, k, nf)
+# Principal-axis factoring as psych::fa(fm = "pa") runs it (module 18): squared multiple
+# correlations on the diagonal, then iterate until the total communality moves by less than
+# 0.001 (at most 50 rounds). Iterating further gives a slightly different solution than the
+# reference, which omega is checked against; the first factor loads positively.
+.morie_paf <- function(R, nf, min_err = 0.001, max_iter = 50L) {
+  r <- R
+  diag(r) <- tryCatch(1 - 1 / diag(solve(R)), error = function(e) rep(0.5, ncol(R)))
+  comm <- sum(diag(r))
   for (iter in seq_len(max_iter)) {
-    Rr <- R
-    diag(Rr) <- h2
-    eig <- eigen(Rr, symmetric = TRUE)
-    loads <- eig$vectors[, seq_len(nf), drop = FALSE] *
-      matrix(sqrt(pmax(eig$values[seq_len(nf)], 0)), nrow = k, ncol = nf, byrow = TRUE)
-    new_h2 <- pmin(rowSums(loads^2), 0.995)
-    converged <- max(abs(new_h2 - h2)) < tol
-    h2 <- new_h2
-    if (converged) break
+    eig <- eigen(r, symmetric = TRUE)
+    loads <- eig$vectors[, seq_len(nf), drop = FALSE] %*% diag(sqrt(pmax(eig$values[seq_len(nf)], 0)), nf)
+    h2 <- rowSums(loads^2)
+    diag(r) <- h2
+    err <- abs(comm - sum(h2))
+    comm <- sum(h2)
+    if (err <= min_err) break
   }
   if (sum(loads[, 1]) < 0) loads[, 1] <- -loads[, 1]
   loads
 }
 
-# General-factor loadings by the Schmid-Leiman transformation: promax-rotate the factors,
+# psych::Promax: varimax WITHOUT Kaiser normalisation (stats::promax normalises, which moved
+# omega_h by up to 0.009), then the least-squares fit to the powered target.
+.morie_promax <- function(x, m = 4) {
+  vm <- stats::varimax(x, normalize = FALSE, eps = 1e-5)
+  L <- unclass(vm$loadings)
+  Q <- L * abs(L)^(m - 1)
+  U <- lm.fit(L, Q)$coefficients
+  U <- U %*% diag(sqrt(diag(solve(t(U) %*% U))), ncol(U))
+  list(loadings = L %*% U, rotmat = vm$rotmat %*% U)
+}
+
+# General-factor loadings by the Schmid-Leiman transformation: Promax-rotate the factors,
 # factor their correlation matrix for one general factor (two factors: both load sqrt(phi_12),
 # the identification psych uses), and project the items onto it. One factor is its own g.
 .morie_schmid_leiman_g <- function(loads) {
   nf <- ncol(loads)
   if (nf < 2L) return(loads[, 1])
-  pm <- stats::promax(loads, m = 4)
-  P <- unclass(pm$loadings)
+  pm <- .morie_promax(loads, m = 4)
+  P <- pm$loadings
   Phi <- solve(crossprod(pm$rotmat))
   s <- sign(colSums(P))
   s[s == 0] <- 1

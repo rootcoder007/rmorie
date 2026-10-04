@@ -33,9 +33,6 @@ NULL
 #' }
 #' @export
 stat_bridge_registry_json <- function() {
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("jsonlite is required for registry-json output")
-  }
   reg <- .morie_stat_commands$registry
   entries <- lapply(reg, function(cmd) {
     list(

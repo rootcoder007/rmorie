@@ -46,7 +46,8 @@ test_that(".morie_parse_file errors when a reader package is absent", {
     },
     .package = "base"
   )
-  expect_error(rmorie:::.morie_parse_file(p, "xlsx", TRUE), "readxl")
+  # without readxl the package's own xlsx reader runs, and names a file that is not a workbook
+  expect_error(rmorie:::.morie_parse_file(p, "xlsx", TRUE), "not an Excel workbook")
   # Module 23: json/xml/html now fall back to the NATIVE parsers when
   # the accelerator packages are absent — they parse, not stop.
   pj <- tempfile(fileext = ".json")
@@ -105,14 +106,18 @@ test_that("morie_fetch zip member matches by substring and errors if absent", {
   ), "not found")
 })
 
-test_that("morie_ckan_search jsonlite-missing + failed + empty-resources", {
+test_that("morie_ckan_search parses natively without jsonlite", {
   testthat::local_mocked_bindings(
     requireNamespace = function(package, ...) {
       if (identical(package, "jsonlite")) FALSE else TRUE
     },
     .package = "base"
   )
-  expect_error(morie_ckan_search("x"), "jsonlite")
+  testthat::local_mocked_bindings(
+    .morie_read_text = function(url) '{"success":false}',
+    .package = "rmorie"
+  )
+  expect_error(morie_ckan_search("x"), "failed")  # the portal's own answer, read without jsonlite
 })
 
 test_that("morie_ckan_search handles failure and empty-resource datasets", {
@@ -143,7 +148,11 @@ test_that("morie_fetch_arcgis: jsonlite stop, empty, and multi-page", {
     },
     .package = "base"
   )
-  expect_error(morie_fetch_arcgis("http://x/FeatureServer/0"), "jsonlite")
+  testthat::local_mocked_bindings(
+    .morie_read_text = function(url) '{"features":[],"exceededTransferLimit":false}',
+    .package = "rmorie"
+  )
+  expect_equal(nrow(morie_fetch_arcgis("http://x/FeatureServer/0")), 0L)  # parsed natively
 })
 
 test_that("morie_fetch_arcgis paginates and handles empty layers", {

@@ -84,9 +84,12 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
     class(spec) <- c("morie_cluster_spec", "morie_rich_result", "list")
     return(spec)
   }
-  xm <- as.matrix(x[vapply(as.data.frame(x), is.numeric, logical(1))])
+  # select the numeric COLUMNS through a data frame: x[logical] on a matrix picks cells, which
+  # turned a 150 x 4 matrix into 600 one-dimensional points
+  xd <- as.data.frame(x)
+  xm <- as.matrix(xd[vapply(xd, is.numeric, logical(1))])
   storage.mode(xm) <- "double"
-  rn <- rownames(xm)
+  rn <- rownames(x)  # a data frame always has row names (automatic ones are the positions)
   if (is.null(rn)) {
     if (!is.null(case_labels)) {
       rn <- as.character(case_labels)

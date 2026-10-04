@@ -129,10 +129,6 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
                                     max_output_tokens = 2048L,
                                     timeout_s = 120,
                                     cfg = NULL) {
-  if (!requireNamespace("httr2", quietly = TRUE) ||
-      !requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("morie_vertex_ask_gemini requires httr2 and jsonlite.")
-  }
   if (is.null(cfg)) cfg <- morie_vertex_resolve_config()
   if (is.null(model)) model <- cfg$model
   token <- morie_vertex_access_token(cfg)
@@ -153,18 +149,11 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
     payload$systemInstruction <- list(parts = list(list(text = system)))
   }
 
-  req <- httr2::request(endpoint)
-  req <- httr2::req_headers(req,
-    Authorization = paste("Bearer", token),
-    `Content-Type` = "application/json")
-  req <- httr2::req_body_raw(req,
-    .morie_to_json(payload, auto_unbox = TRUE, null = "null"),
-    type = "application/json")
-  req <- httr2::req_timeout(req, timeout_s)
-  req <- httr2::req_error(req, is_error = function(resp) FALSE)
-  resp <- httr2::req_perform(req)
-  status <- httr2::resp_status(resp)
-  body <- httr2::resp_body_string(resp)
+  resp <- .morie_http_post_with_status(endpoint, as.character(.morie_to_json(payload, auto_unbox = TRUE, null = "null")),
+                                       "application/json", timeout_s = as.integer(timeout_s),
+                                       headers = paste("Authorization: Bearer", token))
+  status <- as.integer(resp$status_code)
+  body <- paste(resp$body, collapse = "")
   if (status != 200L) {
     stop(sprintf("Vertex API returned %d: %s",
                  status, substr(body, 1L, 400L)))
