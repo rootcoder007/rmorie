@@ -91,43 +91,14 @@ Rcpp::IntegerVector morie_match_optimal_1d_cpp(Rcpp::NumericVector treated_val,
   return match;
 }
 
-// [[Rcpp::export(".morie_match_optimal_assign_cpp")]]
-Rcpp::IntegerVector morie_match_optimal_assign_cpp(Rcpp::NumericMatrix treated,
-                                                   Rcpp::NumericMatrix control) {
-  const int nt = treated.nrow();
-  const int nc = control.nrow();
-  const int k = treated.ncol();
-  if (nt == 0 || nc < nt)
-    Rcpp::stop("optimal 1:1 matching needs n_control >= n_treated >= 1");
-  // std::sort with `<` on NaN is not a strict weak ordering: under the
-  // libstdc++ assertions many distributions compile with, it aborts the
-  // process instead of returning. Refuse non-finite scores up front.
-  for (int i = 0; i < treated.size(); ++i)
-    if (!R_finite(treated[i]))
-      Rcpp::stop("treated must be finite (element %d is not)", i + 1);
-  for (int j = 0; j < control.size(); ++j)
-    if (!R_finite(control[j]))
-      Rcpp::stop("control must be finite (element %d is not)", j + 1);
-  if (static_cast<double>(nt) * nc > 5e7)
-    Rcpp::stop("distance matrix too large for multivariate optimal "
-               "matching (%d x %d); use distance = \"propensity\"",
-               nt, nc);
+// Rectangular linear sum assignment, rows <= cols, minimum total cost:
+// shortest augmenting paths with dual variables (Kuhn-Munkres in the
+// Jonker-Volgenant form). Returns p[j] = 1-based row matched to column j
+// (0 when the column is left unassigned). Shared by optimal pair matching
+// (float costs, from coordinates) and full matching (double costs).
+template <typename T>
+static std::vector<int> morie_sap_rect(const std::vector<T>& cost, int nt, int nc) {
   const double inf = std::numeric_limits<double>::infinity();
-
-  // cost matrix (float to halve memory)
-  std::vector<float> cost(static_cast<size_t>(nt) * nc);
-  for (int i = 0; i < nt; ++i)
-    for (int j = 0; j < nc; ++j) {
-      double d2 = 0.0;
-      for (int c = 0; c < k; ++c) {
-        const double d = treated(i, c) - control(j, c);
-        d2 += d * d;
-      }
-      cost[static_cast<size_t>(i) * nc + j] =
-        static_cast<float>(std::sqrt(d2));
-    }
-
-  // shortest augmenting path with duals (rows = treated, cols = controls)
   std::vector<double> u(nt + 1, 0.0), v(nc + 1, 0.0);
   std::vector<int> way(nc + 1, 0), p(nc + 1, 0);  // p[j] = row matched to col j
   for (int i = 1; i <= nt; ++i) {
@@ -160,8 +131,71 @@ Rcpp::IntegerVector morie_match_optimal_assign_cpp(Rcpp::NumericMatrix treated,
     } while (j0);
   }
 
+  return p;
+}
+
+// [[Rcpp::export(".morie_match_optimal_assign_cpp")]]
+Rcpp::IntegerVector morie_match_optimal_assign_cpp(Rcpp::NumericMatrix treated,
+                                                   Rcpp::NumericMatrix control) {
+  const int nt = treated.nrow();
+  const int nc = control.nrow();
+  const int k = treated.ncol();
+  if (nt == 0 || nc < nt)
+    Rcpp::stop("optimal 1:1 matching needs n_control >= n_treated >= 1");
+  // std::sort with `<` on NaN is not a strict weak ordering: under the
+  // libstdc++ assertions many distributions compile with, it aborts the
+  // process instead of returning. Refuse non-finite scores up front.
+  for (int i = 0; i < treated.size(); ++i)
+    if (!R_finite(treated[i]))
+      Rcpp::stop("treated must be finite (element %d is not)", i + 1);
+  for (int j = 0; j < control.size(); ++j)
+    if (!R_finite(control[j]))
+      Rcpp::stop("control must be finite (element %d is not)", j + 1);
+  if (static_cast<double>(nt) * nc > 5e7)
+    Rcpp::stop("distance matrix too large for multivariate optimal "
+               "matching (%d x %d); use distance = \"propensity\"",
+               nt, nc);
+
+  // cost matrix (float to halve memory)
+  std::vector<float> cost(static_cast<size_t>(nt) * nc);
+  for (int i = 0; i < nt; ++i)
+    for (int j = 0; j < nc; ++j) {
+      double d2 = 0.0;
+      for (int c = 0; c < k; ++c) {
+        const double d = treated(i, c) - control(j, c);
+        d2 += d * d;
+      }
+      cost[static_cast<size_t>(i) * nc + j] =
+        static_cast<float>(std::sqrt(d2));
+    }
+
+  std::vector<int> p = morie_sap_rect(cost, nt, nc);
+
   Rcpp::IntegerVector match(nt, NA_INTEGER);
   for (int j = 1; j <= nc; ++j)
     if (p[j] > 0) match[p[j] - 1] = j;  // 1-based control index
   return match;
+}
+
+// [[Rcpp::export(".morie_lsap_cpp")]]
+Rcpp::IntegerVector morie_lsap_cpp(Rcpp::NumericMatrix cost) {
+  // minimum-cost assignment of every row to a distinct column (rows <= cols);
+  // returns the 1-based column of each row
+  const int nr = cost.nrow();
+  const int nc = cost.ncol();
+  if (nr == 0 || nc < nr) Rcpp::stop("assignment needs ncol >= nrow >= 1");
+  if (static_cast<double>(nr) * nc > 5e7)
+    Rcpp::stop("cost matrix too large for exact assignment (%d x %d)", nr, nc);
+  std::vector<double> c(static_cast<size_t>(nr) * nc);
+  for (int i = 0; i < nr; ++i)
+    for (int j = 0; j < nc; ++j) {
+      const double x = cost(i, j);
+      if (!R_finite(x)) Rcpp::stop("cost must be finite (row %d, column %d is not)", i + 1, j + 1);
+      c[static_cast<size_t>(i) * nc + j] = x;
+    }
+  std::vector<int> p = morie_sap_rect(c, nr, nc);
+  Rcpp::IntegerVector out(nr, NA_INTEGER);
+  for (int j = 1; j <= nc; ++j)
+    if (p[j] > 0) out[p[j] - 1] = j;
+  return out;
 }

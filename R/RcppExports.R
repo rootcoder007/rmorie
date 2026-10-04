@@ -323,12 +323,20 @@ morie_matching_abadie_imbens_kernel_cpp <- function(y, t, treated_pos, control_p
     .Call(`_rmorie_morie_match_greedy_1d_cpp`, treated_val, control_val, ratio, caliper_width, replace)
 }
 
+.morie_match_nn_cpp <- function(treat_, dist_, ratio_, replace, caliper) {
+    .Call(`_rmorie_morie_match_nn_cpp`, treat_, dist_, ratio_, replace, caliper)
+}
+
 .morie_match_optimal_1d_cpp <- function(treated_val, control_val) {
     .Call(`_rmorie_morie_match_optimal_1d_cpp`, treated_val, control_val)
 }
 
 .morie_match_optimal_assign_cpp <- function(treated, control) {
     .Call(`_rmorie_morie_match_optimal_assign_cpp`, treated, control)
+}
+
+.morie_lsap_cpp <- function(cost) {
+    .Call(`_rmorie_morie_lsap_cpp`, cost)
 }
 
 .morie_rlearner_forest_cpp <- function(X, pseudo, weight, Xpred, n_trees, max_depth, min_node, subsample, seed) {

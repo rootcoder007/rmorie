@@ -842,6 +842,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_match_nn_cpp
+IntegerMatrix morie_match_nn_cpp(IntegerVector treat_, NumericVector dist_, IntegerVector ratio_, bool replace, double caliper);
+RcppExport SEXP _rmorie_morie_match_nn_cpp(SEXP treat_SEXP, SEXP dist_SEXP, SEXP ratio_SEXP, SEXP replaceSEXP, SEXP caliperSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type treat_(treat_SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type dist_(dist_SEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type ratio_(ratio_SEXP);
+    Rcpp::traits::input_parameter< bool >::type replace(replaceSEXP);
+    Rcpp::traits::input_parameter< double >::type caliper(caliperSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_match_nn_cpp(treat_, dist_, ratio_, replace, caliper));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_match_optimal_1d_cpp
 Rcpp::IntegerVector morie_match_optimal_1d_cpp(Rcpp::NumericVector treated_val, Rcpp::NumericVector control_val);
 RcppExport SEXP _rmorie_morie_match_optimal_1d_cpp(SEXP treated_valSEXP, SEXP control_valSEXP) {
@@ -863,6 +878,17 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type treated(treatedSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type control(controlSEXP);
     rcpp_result_gen = Rcpp::wrap(morie_match_optimal_assign_cpp(treated, control));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_lsap_cpp
+Rcpp::IntegerVector morie_lsap_cpp(Rcpp::NumericMatrix cost);
+RcppExport SEXP _rmorie_morie_lsap_cpp(SEXP costSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericMatrix >::type cost(costSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_lsap_cpp(cost));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1432,8 +1458,10 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_matching_abadie_imbens_kernel_cpp", (DL_FUNC) &_rmorie_morie_matching_abadie_imbens_kernel_cpp, 4},
     {"_rmorie_morie_match_greedy_kd_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_kd_cpp, 5},
     {"_rmorie_morie_match_greedy_1d_cpp", (DL_FUNC) &_rmorie_morie_match_greedy_1d_cpp, 5},
+    {"_rmorie_morie_match_nn_cpp", (DL_FUNC) &_rmorie_morie_match_nn_cpp, 5},
     {"_rmorie_morie_match_optimal_1d_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_1d_cpp, 2},
     {"_rmorie_morie_match_optimal_assign_cpp", (DL_FUNC) &_rmorie_morie_match_optimal_assign_cpp, 2},
+    {"_rmorie_morie_lsap_cpp", (DL_FUNC) &_rmorie_morie_lsap_cpp, 1},
     {"_rmorie_morie_rlearner_forest_cpp", (DL_FUNC) &_rmorie_morie_rlearner_forest_cpp, 9},
     {"_rmorie_morie_rlm_cpp", (DL_FUNC) &_rmorie_morie_rlm_cpp, 5},
     {"_rmorie_morie_sobol_cpp", (DL_FUNC) &_rmorie_morie_sobol_cpp, 2},

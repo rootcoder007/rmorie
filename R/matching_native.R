@@ -89,27 +89,25 @@
     warning("Fewer control units than treated units; not all treated ",
             "units will get a match.", call. = FALSE)
   }
-  caliper_width <- if (is.null(caliper)) Inf else caliper * stats::sd(lp)
-  mm <- .morie_match_greedy_1d(
-    lp[idx_t], lp[idx_c],
-    ratio = as.integer(n_neighbors),
-    caliper_width = caliper_width,
-    replace = replace
-  )
+  caliper_width <- if (is.null(caliper)) NA_real_ else caliper * stats::sd(lp)
+  # MatchIt's matcher (rounds without replacement, treated by decreasing score;
+  # data order with replacement), on the logit score
+  mm <- .morie_match_nn_cpp(as.integer(tr), as.numeric(lp),
+                            rep(as.integer(n_neighbors), length(idx_t)),
+                            isTRUE(replace), caliper_width)
   rn <- rownames(df)
   if (is.null(rn)) rn <- as.character(seq_len(nrow(df)))
-  # vectorized pair assembly: expand the nt x ratio match matrix
   ti_rep <- rep(seq_len(nrow(mm)), times = ncol(mm))
-  ci_all <- as.vector(mm)
-  ok <- !is.na(ci_all)
+  cu <- as.vector(mm)
+  ok <- !is.na(cu)
   ti_ok <- ti_rep[ok]
-  ci_ok <- ci_all[ok]
+  cu_ok <- cu[ok]
   matched_t <- idx_t[unique(ti_ok)]
-  matched_c <- idx_c[ci_ok]
+  matched_c <- cu_ok
   pairs_df <- if (length(ti_ok)) data.frame(
     treated_idx = rn[idx_t[ti_ok]],
-    control_idx = rn[idx_c[ci_ok]],
-    distance    = abs(lp[idx_t[ti_ok]] - lp[idx_c[ci_ok]]),
+    control_idx = rn[cu_ok],
+    distance    = abs(lp[idx_t[ti_ok]] - lp[cu_ok]),
     stringsAsFactors = FALSE
   ) else .morie_matching_empty_pairs()
   keep <- sort(unique(c(matched_t, matched_c)))
@@ -121,7 +119,7 @@
     match_pairs       = pairs_df,
     method            = "nearest_neighbor (rmorie native)",
     details           = list(
-      engine      = "native-greedy-1d",
+      engine      = "native-nearest (MatchIt algorithm)",
       caliper     = caliper,
       replace     = replace,
       n_neighbors = n_neighbors,
@@ -129,4 +127,41 @@
       propensity_logit_sd = stats::sd(lp)
     )
   )
+}
+
+#' Internal: MatchIt's weights from a match matrix (`weights_matrixC`), rescaled
+#' as `matchit(normalize = TRUE)`: each matched treated unit 1, each of its k
+#' controls 1/k (summed over the treated units a control serves); then each
+#' group's nonzero weights scaled to sum to their number
+#' @noRd
+.morie_mm_weights <- function(mm, n, idx_t, treat) {
+  w <- numeric(n)
+  for (r in seq_len(nrow(mm))) {
+    cu <- mm[r, ]
+    cu <- cu[!is.na(cu)]
+    if (!length(cu)) next
+    w[cu] <- w[cu] + 1 / length(cu)
+    w[idx_t[r]] <- w[idx_t[r]] + 1
+  }
+  for (g in 0:1) {
+    i <- which(treat == g & w > 0)
+    if (length(i)) w[i] <- w[i] * length(i) / sum(w[i])
+  }
+  w
+}
+
+#' Internal: MatchIt's subclass of a match matrix (`mm2subclassC`): one set per
+#' treated unit with a match, numbered in row order
+#' @noRd
+.morie_mm_subclass <- function(mm, n, idx_t) {
+  sub <- rep(NA_integer_, n)
+  k <- 0L
+  for (r in seq_len(nrow(mm))) {
+    cu <- mm[r, ]
+    cu <- cu[!is.na(cu)]
+    if (!length(cu)) next
+    k <- k + 1L
+    sub[c(idx_t[r], cu)] <- k
+  }
+  sub
 }

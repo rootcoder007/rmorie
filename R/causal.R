@@ -1367,34 +1367,36 @@ morie_estimate_g_computation <- function(data, treatment, outcome,
   )
   fit <- stats::glm(formula, data = data, family = fam)
 
-  if (.causal_have_stdreg()) {
-    res <- tryCatch({
-      std <- stdReg::stdGlm(fit = fit, data = data, X = treatment,
-                            x = c(0, 1))
-      sm <- summary(std, contrast = "difference", reference = 0)
-      # sm$est.table is a matrix with rows for each x and cols
-      # Estimate / Std. Error / lower / upper.
-      tab <- sm$est.table
-      ate_idx <- which(rownames(tab) == "1")
-      ate <- as.numeric(tab[ate_idx, "Estimate"])
-      se  <- as.numeric(tab[ate_idx, "Std. Error"])
-      ci  <- .wald_ci(ate, se)
-      list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
-    }, error = function(e) NULL)
-    if (!is.null(res)) {
-      return(res)
-    }
+  # Standardisation (g-formula) with the M-estimation sandwich of stdReg::stdGlm
+  # (Sjolander 2016), computed natively: the GLM score equations stacked with
+  # the two standardisation equations, V = I^-1 J I^-T / n, and the ATE's SE by
+  # the delta method. (The plain sd(mu1 - mu0) / sqrt(n) ignores the outcome
+  # model's own uncertainty and understates it.)
+  X <- stats::model.matrix(fit)
+  n <- nrow(X)
+  w <- fit$prior.weights
+  dat <- data[match(rownames(X), rownames(data)), , drop = FALSE]
+  mu_eta <- fit$family$mu.eta
+  pred <- matrix(NA_real_, n, 2L)
+  si_beta <- matrix(NA_real_, 2L, ncol(X))
+  for (i in 1:2) {
+    dx <- dat
+    dx[[treatment]] <- i - 1
+    pred[, i] <- as.numeric(stats::predict(fit, newdata = dx, type = "response"))
+    deta <- mu_eta(as.numeric(stats::predict(fit, newdata = dx)))
+    Xx <- stats::model.matrix(stats::terms(fit), data = dx)
+    si_beta[i, ] <- colMeans(w * deta * Xx)
   }
-
-  data1 <- data
-  data1[[treatment]] <- 1
-  data0 <- data
-  data0[[treatment]] <- 0
-  mu1 <- as.numeric(stats::predict(fit, newdata = data1, type = "response"))
-  mu0 <- as.numeric(stats::predict(fit, newdata = data0, type = "response"))
-  diffs <- mu1 - mu0
-  ate <- mean(diffs)
-  se <- stats::sd(diffs) / sqrt(length(diffs))
+  est <- colSums(w * pred) / sum(w)
+  scores <- cbind(w * (pred - matrix(est, n, 2L, byrow = TRUE)),
+                  w * X * as.numeric(stats::residuals(fit, type = "response")))
+  J <- stats::var(scores)
+  I <- rbind(cbind(-diag(2L) * mean(w), si_beta),
+             cbind(matrix(0, ncol(X), 2L), -solve(summary(fit)$cov.unscaled) / n))
+  Ii <- solve(I)
+  V <- (Ii %*% J %*% t(Ii) / n)[1:2, 1:2]
+  ate <- est[2L] - est[1L]
+  se <- sqrt(V[1L, 1L] + V[2L, 2L] - 2 * V[1L, 2L])
   ci <- .wald_ci(ate, se)
   list(ate = ate, se = se, ci_lower = ci[1], ci_upper = ci[2])
 }

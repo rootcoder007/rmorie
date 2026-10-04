@@ -507,109 +507,254 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
                               distance = distance, ps = ps)
 }
 
-#' Full matching via subclassification
+#' Optimal full matching
 #'
-#' Thin wrapper around \code{MatchIt::matchit(method = "full")}, which
-#' calls \pkg{optmatch}.
+#' Native optimal full matching (Rosenbaum 1991; Hansen 2004): every unit is
+#' placed in a matched set of one treated unit and one or more controls, or one
+#' control and one or more treated units, so that the total within-set
+#' propensity-score distance is the smallest possible. It is computed exactly:
+#' an unrestricted full match is a minimum-weight edge cover of the
+#' treated-control distance graph, found here through a maximum-weight matching
+#' (a rectangular assignment problem, solved by shortest augmenting paths). The
+#' distance is the absolute difference of propensity scores from a logistic
+#' regression on `covariates` (or `ps`), and the weights are those of
+#' `MatchIt::matchit(method = "full", estimand = "ATT")`: 1 for treated units,
+#' treated/control counts of the set for controls, each group rescaled to its
+#' size. Cross-validated against MatchIt + optmatch in `tests/cross` (optmatch
+#' solves on distances rounded to a tolerance, so its total is never below this
+#' one). No MatchIt/optmatch at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores (ignored; retained
-#'   for back-compat).
-#' @param n_subclasses Carried for back-compat (ignored under MatchIt).
-#' @return A list of class \code{morie_match_result}.
-#' @references Hansen, B. B. (2004). Full matching in an observational
-#'   study of coaching for the SAT. \emph{JASA}, 99(467), 609--618.
+#' @param ps Optional propensity scores, one per row of `data` (or named by its
+#'   row names); estimated by logistic regression when `NULL`.
+#' @param n_subclasses Ignored (the number of matched sets is part of the
+#'   optimum); kept for back-compatibility.
+#' @return A list of class \code{morie_match_result}: `matched_data` (every
+#'   matched row, with `distance`, `weights` and `subclass` columns),
+#'   `match_pairs` (the treated-control links of the sets, with their
+#'   distances) and `details$total_distance`.
+#' @references Rosenbaum, P. R. (1991). A characterization of optimal designs
+#'   for observational studies. \emph{JRSS B}, 53(3), 597--610.
+#'
+#'   Hansen, B. B. (2004). Full matching in an observational study of coaching
+#'   for the SAT. \emph{JASA}, 99(467), 609--618.
 #' @examples
-#' \donttest{
-#' if (morie_has("MatchIt", "optmatch")) withAutoprint({
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
-#' morie_matching_full(df, "d", c("x1", "x2"))
-#' })
-#' }
+#' fm <- morie_matching_full(df, "d", c("x1", "x2"))
+#' fm$details$total_distance
+#' head(fm$matched_data[, c("d", "subclass", "weights")])
 #' @export
 morie_matching_full <- function(data, treatment, covariates,
                                 ps = NULL, n_subclasses = 10L) {
-  .morie_matching_need_matchit("morie_matching_full")
-  if (!.morie_matching_have("optmatch")) {
-    stop("`morie_matching_full()` requires the 'optmatch' package. ",
-         "Install it with install.packages(\"optmatch\").",
-         call. = FALSE)
-  }
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(covariates, collapse = " + ")))
-  mi <- MatchIt::matchit(f, data = df, method = "full", distance = .morie_matching_distance(df, ps))
-  .morie_matching_matchit_to_result(
-    mi, df, treatment,
-    method_label = "full_matching (MatchIt + optmatch)",
-    details = list(n_subclasses = n_subclasses)
+  tr <- as.integer(df[[treatment]] == 1)
+  if (!any(tr == 1L) || !any(tr == 0L)) {
+    stop("full matching needs both treated and control units", call. = FALSE)
+  }
+  p <- .morie_matching_ps_prob(df, treatment, covariates, ps)
+  fm <- .morie_full_match(p, tr)
+  df$distance <- p
+  df$weights <- .morie_subclass_weights(fm$subclass, tr)
+  df$subclass <- factor(fm$subclass)
+  rn <- rownames(df)
+  if (is.null(rn)) rn <- as.character(seq_len(nrow(df)))
+  pairs_df <- data.frame(treated_idx = rn[fm$edges[, 1L]], control_idx = rn[fm$edges[, 2L]],
+                         distance = abs(p[fm$edges[, 1L]] - p[fm$edges[, 2L]]),
+                         stringsAsFactors = FALSE)
+  .morie_matching_result(
+    matched_data      = df,
+    n_treated         = sum(tr),
+    n_matched_control = sum(tr == 0L),
+    match_pairs       = pairs_df,
+    method            = "full_matching (rmorie native)",
+    details           = list(engine = "native-min-edge-cover", n_subclasses = max(fm$subclass),
+                             total_distance = sum(pairs_df$distance))
   )
+}
+
+#' Internal: propensity scores as MatchIt's default `distance = "glm"` gives
+#' them (logistic regression, probability scale), or the caller's, aligned
+#' @noRd
+.morie_matching_ps_prob <- function(df, treatment, covariates, ps) {
+  d <- .morie_matching_distance(df, ps)
+  if (!identical(d, "glm")) return(as.numeric(d))
+  f <- stats::as.formula(paste(treatment, "~", paste(covariates, collapse = " + ")))
+  df[[treatment]] <- as.integer(df[[treatment]] == 1)
+  as.numeric(stats::fitted(stats::glm(f, data = df, family = stats::binomial())))
+}
+
+#' Internal: matching weights of a subclassification, ATT, rescaled as MatchIt does
+#' (1 for treated, treated/control counts of the set for controls; each
+#' group's nonzero weights scaled to sum to their number)
+#' @noRd
+.morie_subclass_weights <- function(subclass, treat) {
+  w <- numeric(length(treat))
+  ok <- !is.na(subclass)
+  f <- factor(subclass[ok])
+  t1 <- tabulate(f[treat[ok] == 1L], nlevels(f))
+  t0 <- tabulate(f[treat[ok] == 0L], nlevels(f))
+  wo <- ifelse(treat[ok] == 1L, 1, (t1 / t0)[as.integer(f)])
+  w[ok] <- wo
+  for (g in 0:1) {
+    i <- which(treat == g & w > 0)
+    if (length(i)) w[i] <- w[i] * length(i) / sum(w[i])
+  }
+  w
+}
+
+#' Internal: optimal full match as a minimum-weight edge cover
+#'
+#' With mu(v) the cheapest edge at v, the cheapest cover costs
+#' sum(mu) - max over matchings M of sum_{(u,v) in M} (mu(u) + mu(v) - d(u,v));
+#' the cover is M's positive-gain edges plus the cheapest edge of every vertex M
+#' leaves uncovered. Edges whose two ends are both covered twice are dropped
+#' (only possible on exact ties), which leaves a forest of stars: the matched
+#' sets. Returns `subclass` (per unit, 1..k by first appearance) and `edges`
+#' (treated, control) row indices.
+#' @noRd
+.morie_full_match <- function(p, treat) {
+  it <- which(treat == 1L)
+  ic <- which(treat == 0L)
+  D <- abs(outer(p[it], p[ic], "-"))
+  mt <- apply(D, 1L, min)
+  mc <- apply(D, 2L, min)
+  gain <- outer(mt, mc, "+") - D
+  gain[gain < 0] <- 0
+  flip <- nrow(gain) > ncol(gain)
+  G <- if (flip) t(gain) else gain
+  a <- .morie_lsap_cpp(-G)
+  r <- seq_along(a)
+  keep <- G[cbind(r, a)] > 0
+  e <- if (flip) cbind(a[keep], r[keep]) else cbind(r[keep], a[keep])
+  # vertices the matching leaves uncovered take their cheapest edge (first on ties)
+  cov_t <- seq_along(it) %in% e[, 1L]
+  cov_c <- seq_along(ic) %in% e[, 2L]
+  for (i in which(!cov_t)) e <- rbind(e, c(i, which.min(D[i, ])))
+  for (j in which(!cov_c)) e <- rbind(e, c(which.min(D[, j]), j))
+  e <- unique(e)
+  # drop redundant edges (both ends of degree >= 2): only zero-length ties make them
+  repeat {
+    dt <- tabulate(e[, 1L], length(it))
+    dc <- tabulate(e[, 2L], length(ic))
+    red <- which(dt[e[, 1L]] >= 2L & dc[e[, 2L]] >= 2L)
+    if (!length(red)) break
+    e <- e[-red[1L], , drop = FALSE]
+  }
+  # each star is a matched set: label by its hub's first appearance
+  dt <- tabulate(e[, 1L], length(it))
+  hub_t <- dt[e[, 1L]] >= 2L | tabulate(e[, 2L], length(ic))[e[, 2L]] == 1L
+  key <- ifelse(hub_t, paste0("t", e[, 1L]), paste0("c", e[, 2L]))
+  unit_key <- character(length(treat))
+  unit_key[it[e[, 1L]]] <- key
+  unit_key[ic[e[, 2L]]] <- key
+  sub <- match(unit_key, unique(unit_key))
+  list(subclass = sub, edges = cbind(it[e[, 1L]], ic[e[, 2L]]))
 }
 
 #' Subclassification (stratification) on the propensity score
 #'
-#' Thin wrapper around \code{MatchIt::matchit(method = "subclass")} that
-#' reports within-stratum sample sizes and PS ranges, preserving the
-#' rmorie return shape (\code{data_with_strata} + \code{stratum_effects}).
+#' Native propensity-score subclassification with the rules of
+#' `MatchIt::matchit(method = "subclass", estimand = "ATT")`: the cut points are
+#' quantiles of the treated units' scores, every unit falls in the subclass of
+#' its score, and a subclass left without a treated or a control unit takes the
+#' nearest unit of that group from the closest subclass that can spare one
+#' ("scooting", MatchIt's `min.n = 1`). Weights are 1 for treated units and the
+#' treated/control ratio of the subclass for controls, each group rescaled to
+#' its size. Cross-validated against MatchIt in `tests/cross`. No MatchIt at
+#' runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores (ignored; retained
-#'   for back-compat).
+#' @param ps Optional propensity scores (as for [morie_matching_full()]).
 #' @param n_strata Number of quantile-based strata (default 5).
-#' @return A list with components \code{data_with_strata} (the matched
-#'   data augmented with \code{._stratum} and \code{._ps} columns) and
-#'   \code{stratum_effects} (per-stratum sample sizes and PS ranges).
+#' @return A list with components \code{data_with_strata} (the data with
+#'   \code{distance}, \code{weights}, \code{subclass}, \code{._ps} and
+#'   \code{._stratum} columns) and \code{stratum_effects} (per-stratum sample
+#'   sizes and propensity-score ranges).
 #' @examples
-#' \donttest{
-#' if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint({
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
-#' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
-#' })
-#' }
+#' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)$stratum_effects
 #' @export
 morie_matching_subclassify <- function(data, treatment, covariates,
                                        ps = NULL, n_strata = 5L) {
-  .morie_matching_need_matchit("morie_matching_subclassify")
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(covariates, collapse = " + ")))
-  mi <- MatchIt::matchit(f, data = df, method = "subclass",
-                         distance = .morie_matching_distance(df, ps), subclass = as.integer(n_strata))
-  md <- MatchIt::match.data(mi)
-  if (!is.null(md$distance)) md[["._ps"]] <- as.numeric(md$distance)
-  md[["._stratum"]] <- as.integer(md$subclass)
-  recs <- list()
-  for (s in sort(unique(md[["._stratum"]]))) {
-    if (is.na(s)) next
-    grp <- md[md[["._stratum"]] == s, , drop = FALSE]
-    n_t <- sum(grp[[treatment]] == 1)
-    n_c <- sum(grp[[treatment]] == 0)
-    if (!n_t || !n_c) next
-    recs[[length(recs) + 1L]] <- data.frame(
-      stratum       = s,
-      n_treated     = n_t,
-      n_control     = n_c,
-      ps_range_low  = min(grp[["._ps"]], na.rm = TRUE),
-      ps_range_high = max(grp[["._ps"]], na.rm = TRUE),
-      stringsAsFactors = FALSE
-    )
+  if (!is.numeric(n_strata) || length(n_strata) != 1L || is.na(n_strata) || n_strata < 1) {
+    stop("`n_strata` must be one number >= 1", call. = FALSE)
   }
-  stratum_effects <- if (length(recs)) do.call(rbind, recs) else
-    data.frame(stratum = integer(0), n_treated = integer(0),
-               n_control = integer(0), ps_range_low = numeric(0),
-               ps_range_high = numeric(0))
-  list(
-    data_with_strata = md,
-    stratum_effects  = stratum_effects
-  )
+  df <- .morie_matching_drop_na(data, c(treatment, covariates))
+  tr <- as.integer(df[[treatment]] == 1)
+  if (!any(tr == 1L) || !any(tr == 0L)) {
+    stop("subclassification needs both treated and control units", call. = FALSE)
+  }
+  p <- .morie_matching_ps_prob(df, treatment, covariates, ps)
+  sprobs <- seq(0, 1, length.out = round(n_strata) + 1L)
+  qu <- stats::quantile(p[tr == 1L], probs = sprobs, na.rm = TRUE)
+  cls <- as.integer(findInterval(p, qu, all.inside = TRUE))
+  if (length(unique(cls)) < round(n_strata)) {
+    warning("due to discreteness in the propensity scores, fewer subclasses were generated than were requested",
+            call. = FALSE)
+  }
+  cls <- .morie_subclass_scoot(cls, tr, p)
+  cls <- as.integer(factor(cls))
+  md <- df
+  md$distance <- p
+  md$weights <- .morie_subclass_weights(cls, tr)
+  md$subclass <- factor(cls)
+  md[["._ps"]] <- p
+  md[["._stratum"]] <- cls
+  recs <- lapply(sort(unique(cls)), function(s) {
+    g <- cls == s
+    data.frame(stratum = s, n_treated = sum(tr[g] == 1L), n_control = sum(tr[g] == 0L),
+               ps_range_low = min(p[g]), ps_range_high = max(p[g]))
+  })
+  list(data_with_strata = md, stratum_effects = do.call(rbind, recs))
+}
+
+#' Internal: give every subclass at least one treated and one control unit
+#'
+#' MatchIt's `subclass_scoot` with `min.n = 1`: for each group in order of
+#' appearance, an empty subclass takes from the nearest subclass in the
+#' direction where the group has more to spare, and takes that subclass's unit
+#' closest in score (the last one in row order on ties, as MatchIt).
+#' @noRd
+.morie_subclass_scoot <- function(sub, treat, x) {
+  tab <- table(treat, sub)
+  if (all(tab >= 1L)) return(sub)
+  usub <- sort(unique(sub))
+  nsub <- length(usub)
+  if (any(rowSums(tab) < nsub)) {
+    stop("not enough units to fit 1 treated and control unit in each subclass", call. = FALSE)
+  }
+  s0 <- match(sub, usub) - 1L
+  for (g in unique(treat)) {
+    ind <- which(treat == g)
+    st <- tabulate(s0[ind] + 1L, nsub)
+    while (min(st) <= 0) {
+      s <- which(st == 0)[1L] - 1L
+      left <- if (s == nsub - 1L) {
+        TRUE
+      } else if (s == 0L) {
+        FALSE
+      } else {
+        o <- setdiff(which(st > 1) - 1L, s)
+        sum((st[o + 1L] - 1) / (o - s)) <= 0
+      }
+      s2 <- if (left) max(which(st[seq_len(s)] > 0)) - 1L else s + which(st[(s + 2L):nsub] > 0)[1L]
+      cand <- ind[s0[ind] == s2]
+      xs <- x[cand]
+      pick <- if (left) cand[max(which(xs == max(xs)))] else cand[max(which(xs == min(xs)))]
+      s0[pick] <- s
+      st[s + 1L] <- st[s + 1L] + 1L
+      st[s2 + 1L] <- st[s2 + 1L] - 1L
+    }
+  }
+  usub[s0 + 1L]
 }
 
 #' Entropy balancing weights (Hainmueller, 2012)
@@ -714,78 +859,109 @@ morie_matching_genetic <- function(data, treatment, covariates,
 
 #' Variable-ratio matching on propensity score
 #'
-#' Thin wrapper around \eqn{MatchIt::matchit(method = "nearest",
-#' ratio = max_ratio, min.controls = min_ratio)} which supports
-#' variable-ratio nearest-neighbour matching natively.
+#' Native variable-ratio ("extremal") nearest-neighbour matching (Ming &
+#' Rosenbaum 2000), with the rules of `MatchIt::matchit(method = "nearest",
+#' ratio = r, min.controls = min_ratio, max.controls = max_ratio)`: treated
+#' units with the most typical scores receive `max_ratio` controls and the rest
+#' `min_ratio` (one in between takes the remainder), so that about `r` controls
+#' per treated unit are used in all, where `r` is midway between the bounds.
+#' Matching is greedy without replacement on the propensity score (probability
+#' scale) within `caliper` standard deviations of it. Returns MatchIt's
+#' weights and subclasses; cross-validated against MatchIt in `tests/cross`.
+#' No MatchIt at runtime.
 #'
 #' @param data Data frame.
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param min_ratio,max_ratio Match-count bounds per treated unit.
-#' @param caliper Caliper on the propensity score (in SD units).
-#' @param ps Optional pre-computed propensity scores (ignored; retained
-#'   for back-compat).
-#' @return A list of class \code{morie_match_result}.
+#' @param caliper Caliper on the propensity score, in standard deviations of
+#'   the score (`NULL` for none).
+#' @param ps Optional propensity scores (as for [morie_matching_full()]).
+#' @return A list of class \code{morie_match_result}; `matched_data` holds the
+#'   matched rows with `distance`, `weights` and `subclass` columns.
+#' @references Ming, K. and Rosenbaum, P. R. (2000). Substantial gains in bias
+#'   reduction from matching with a variable number of controls.
+#'   \emph{Biometrics}, 56(1), 118--124.
 #' @examples
-#' \donttest{
-#' if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint({
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.25),
 #'                  x1 = rnorm(200), x2 = rnorm(200))
-#' # an average of two controls per treated unit needs twice as many controls as treated
-#' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
-#'                               min_ratio = 1, max_ratio = 3)
-#' })
-#' }
+#' vr <- morie_matching_variable_ratio(df, "d", c("x1", "x2"),
+#'                                     min_ratio = 1, max_ratio = 3)
+#' table(table(vr$match_pairs$treated_idx))  # controls per treated unit
 #' @export
 morie_matching_variable_ratio <- function(data, treatment, covariates,
                                           min_ratio = 1L,
                                           max_ratio = 5L,
                                           caliper = 0.2,
                                           ps = NULL) {
-  .morie_matching_need_matchit("morie_matching_variable_ratio")
-  df <- .morie_matching_drop_na(data, c(treatment, covariates))
-  f <- stats::as.formula(paste(treatment, "~",
-                               paste(covariates, collapse = " + ")))
+  for (a in c("min_ratio", "max_ratio")) {
+    v <- get(a)
+    if (!is.numeric(v) || length(v) != 1L || is.na(v) || v < 1) {
+      stop("`", a, "` must be one number >= 1", call. = FALSE)
+    }
+  }
   min_ratio <- as.integer(min_ratio)
   max_ratio <- as.integer(max_ratio)
-  if (max_ratio > min_ratio) {
-    # MatchIt requires min.controls <= ratio < max.controls for
-    # variable-ratio matching: `ratio` is the target AVERAGE number of
-    # controls, not the maximum.
-    target <- min(max_ratio - 1L,
-                  as.integer(ceiling((min_ratio + max_ratio) / 2)))
-    target <- max(target, min_ratio)
-    mi <- MatchIt::matchit(
-      f, data = df,
-      method       = "nearest",
-      distance     = .morie_matching_distance(df, ps),
-      ratio        = target,
-      min.controls = min_ratio,
-      max.controls = max_ratio,
-      caliper      = caliper,
-      replace      = FALSE
-    )
-  } else {
-    # Degenerate bounds (min == max): plain fixed-ratio matching.
-    mi <- MatchIt::matchit(
-      f, data = df,
-      method   = "nearest",
-      distance = .morie_matching_distance(df, ps),
-      ratio    = max_ratio,
-      caliper  = caliper,
-      replace  = FALSE
-    )
+  if (min_ratio > max_ratio) stop("`min_ratio` must not exceed `max_ratio`", call. = FALSE)
+  if (!is.null(caliper) && (!is.numeric(caliper) || length(caliper) != 1L || is.na(caliper) || caliper <= 0)) {
+    stop("`caliper` must be NULL or one positive number", call. = FALSE)
   }
-  .morie_matching_matchit_to_result(
-    mi, df, treatment,
-    method_label = "variable_ratio (MatchIt)",
-    details = list(min_ratio = min_ratio,
-                   max_ratio = max_ratio,
-                   caliper   = caliper)
+  df <- .morie_matching_drop_na(data, c(treatment, covariates))
+  tr <- as.integer(df[[treatment]] == 1)
+  if (!any(tr == 1L) || !any(tr == 0L)) {
+    stop("matching needs both treated and control units", call. = FALSE)
+  }
+  p <- .morie_matching_ps_prob(df, treatment, covariates, ps)
+  idx_t <- which(tr == 1L)
+  n1 <- length(idx_t)
+  if (max_ratio > min_ratio) {
+    # MatchIt's `ratio` is the target AVERAGE, strictly between the bounds
+    target <- max(min(max_ratio - 1L, as.integer(ceiling((min_ratio + max_ratio) / 2))), min_ratio)
+    m <- round(target * n1)
+    kmax <- floor((m - min_ratio * (n1 - 1)) / (max_ratio - min_ratio))
+    kmin <- n1 - kmax - 1
+    kmed <- m - (min_ratio * kmin + max_ratio * kmax)
+    ratio0 <- c(rep.int(min_ratio, kmin), kmed, rep.int(max_ratio, kmax))
+    while (any(ratio0 == 0)) {
+      i <- which(ratio0 == 0)[1L]
+      ratio0[i] <- 1
+      if (i == length(ratio0)) break
+      ratio0[i + 1L] <- ratio0[i + 1L] - 1
+    }
+    ratio <- rep.int(NA_integer_, n1)
+    ratio[order(p[idx_t], decreasing = mean(p[idx_t]) > mean(p[tr == 0L]))] <- ratio0
+    ratio <- as.integer(ratio)
+  } else {
+    ratio <- rep.int(max_ratio, n1)
+  }
+  cal <- if (is.null(caliper)) NA_real_ else caliper * stats::sd(p)
+  mm <- .morie_match_nn_cpp(tr, p, ratio, FALSE, cal)
+  w <- .morie_mm_weights(mm, nrow(df), idx_t, tr)
+  sub <- .morie_mm_subclass(mm, nrow(df), idx_t)
+  md <- df
+  md$distance <- p
+  md$weights <- w
+  md$subclass <- factor(sub)
+  md <- md[w > 0, , drop = FALSE]
+  rn <- rownames(df)
+  if (is.null(rn)) rn <- as.character(seq_len(nrow(df)))
+  ti <- rep(seq_len(nrow(mm)), times = ncol(mm))
+  cu <- as.vector(mm)
+  ok <- !is.na(cu)
+  pairs_df <- if (any(ok)) data.frame(treated_idx = rn[idx_t[ti[ok]]], control_idx = rn[cu[ok]],
+                                      distance = abs(p[idx_t[ti[ok]]] - p[cu[ok]]),
+                                      stringsAsFactors = FALSE) else .morie_matching_empty_pairs()
+  .morie_matching_result(
+    matched_data      = md,
+    n_treated         = sum(md[[treatment]] == 1),
+    n_matched_control = sum(md[[treatment]] != 1),
+    match_pairs       = pairs_df,
+    method            = "variable_ratio (rmorie native)",
+    details           = list(engine = "native-nearest (MatchIt algorithm)", min_ratio = min_ratio,
+                             max_ratio = max_ratio, caliper = caliper, ratio = ratio)
   )
 }
-
 
 # ---------------------------------------------------------------------------
 # Cardinality matching (rmorie-specific iterative-caliper heuristic)

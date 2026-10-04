@@ -457,67 +457,23 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
   data <- df[stats::complete.cases(df[, cols, drop = FALSE]), cols,
              drop = FALSE]
 
-  # ---- Optional MatchIt prematching (1:1 NN on logit-e, caliper SD) ----
+  # ---- Optional prematching: 1:1 nearest neighbour without replacement on the
+  # propensity score, caliper in its SD -- MatchIt's matcher (rmorie's native
+  # port), so the matched sample is the same whatever is installed ----
   if (isTRUE(match_first)) {
-    d_all <- .otis_binarise(data[[treatment]])
-    X_all <- .otis_design_matrix(data, covariates)
-    if (requireNamespace("MatchIt", quietly = TRUE)) {
-      # Use MatchIt for canonical PSM-NN with caliper-on-logit-PS.
-      # The treatment column name uses a unique syntactic name that
-      # cannot collide with any covariate (leading dot is allowed in
-      # R syntactic names, leading underscore is not).
-      tmp <- data
-      tmp[[".morie_T"]] <- as.integer(d_all)
-      rhs <- paste(covariates, collapse = " + ")
-      form <- stats::as.formula(paste(".morie_T ~", rhs))
-      m <- try(MatchIt::matchit(form, data = tmp, method = "nearest",
-                                distance = "glm", link = "logit",
-                                caliper = match_caliper_sd,
-                                std.caliper = TRUE,
-                                replace = FALSE),
-               silent = TRUE)
-      if (!inherits(m, "try-error")) {
-        kept <- as.integer(rownames(MatchIt::match.data(m)))
-        if (length(kept) == 0L) {
-          stop("match_first: MatchIt returned no matched units inside ",
-               "the caliper")
-        }
-        data <- data[kept, , drop = FALSE]
-      } else {
-        # Fall through to manual matching below
-        match_first_manual <- TRUE
-      }
-    } else {
-      match_first_manual <- TRUE
+    d_all <- as.integer(.otis_binarise(data[[treatment]]))
+    tmp <- data
+    tmp[[".morie_T"]] <- d_all
+    form <- stats::as.formula(paste(".morie_T ~", paste(covariates, collapse = " + ")))
+    ps_all <- as.numeric(stats::fitted(stats::glm(form, data = tmp, family = stats::binomial())))
+    idx_t <- which(d_all == 1L)
+    mm <- .morie_match_nn_cpp(d_all, ps_all, rep(1L, length(idx_t)), FALSE,
+                              match_caliper_sd * stats::sd(ps_all))
+    ok <- !is.na(mm[, 1L])
+    if (!any(ok)) {
+      stop("match_first: no treated unit had a control inside the caliper", call. = FALSE)
     }
-    if (exists("match_first_manual", inherits = FALSE) &&
-        isTRUE(match_first_manual)) {
-      # Manual greedy 1:1 NN on logit(e) with caliper
-      beta_m <- .otis_logit_fit(X_all, d_all)
-      e_all <- .otis_predict_ps(X_all, beta_m, eps = eps)
-      logit_e <- log(e_all / (1 - e_all))
-      sd_logit <- stats::sd(logit_e)
-      caliper <- match_caliper_sd * sd_logit
-      .rmorie_local_seed(seed + 7L)
-      treated_idx <- which(d_all == 1L)
-      control_idx <- which(d_all == 0L)
-      treated_order <- sample(treated_idx)
-      available <- rep(TRUE, length(control_idx))
-      kept <- integer()
-      for (tt in treated_order) {
-        dist <- abs(logit_e[control_idx] - logit_e[tt])
-        dist[!available] <- Inf
-        dist[dist > caliper] <- Inf
-        nearest <- which.min(dist)
-        if (!is.finite(dist[nearest])) next
-        available[nearest] <- FALSE
-        kept <- c(kept, tt, control_idx[nearest])
-      }
-      if (length(kept) == 0L) {
-        stop("match_first: no treated unit had a control inside the caliper")
-      }
-      data <- data[sort(unique(kept)), , drop = FALSE]
-    }
+    data <- data[sort(c(idx_t[ok], mm[ok, 1L])), , drop = FALSE]
   }
 
   d <- .otis_binarise(data[[treatment]])
