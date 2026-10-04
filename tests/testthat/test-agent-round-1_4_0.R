@@ -174,8 +174,11 @@ test_that("--module selects the module's own tables and rejects an unknown modul
   expect_equal(basename(.cli_csv_files(d, "descriptive-statistics")), "descriptive_statistics_summary.csv")
   expect_equal(basename(.cli_csv_files(d, "power-design")), "power_summary.csv")
   # no ebac-core table here: ebac_final_* belongs to ebac-integrations, so nothing is picked by a first-word
-  # guess (that took 50 tables of five modules) and every table is checked, with a note saying so
-  expect_length(.cli_csv_files(d, "ebac-core"), 4L)
+  # guess (that took 50 tables of five modules), and no other module's tables are checked in its name
+  expect_length(.cli_csv_files(d, "ebac-core"), 0L)
+  r <- .cap("verify", d, "--module", "ebac-core")
+  expect_equal(r$status, 1L)
+  expect_match(r$text, "no table of ebac-core in")
   r <- .cap("verify", d, "--module", "nosuch")
   expect_equal(r$status, 1L)
   expect_match(r$text, "unknown module: nosuch")

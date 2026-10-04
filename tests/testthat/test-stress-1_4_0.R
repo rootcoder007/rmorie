@@ -16,10 +16,11 @@ test_that("inspect/verify --module matches the hyphenated module name against th
   expect_equal(basename(.cli_csv_files(d, "power_design")), "power_summary.csv")
   # a module morie knows selects exactly the tables it writes (its list in module_outputs.R)
   expect_equal(basename(.cli_csv_files(d, "ebac-core")), "ebac_data_quality_checks.csv")
-  msgs <- character()
-  all_files <- .cli_csv_files(d, "logistic-models", out = function(s) msgs <<- c(msgs, s))
-  expect_length(all_files, 2L)
-  expect_match(msgs, "no table in .* names the module logistic-models")
+  # a module with no table here selects none (it took every table in the tree before)
+  none <- .cli_csv_files(d, "logistic-models")
+  expect_length(none, 0L)
+  expect_match(attr(none, "note"), "no table of logistic-models in .* \\(run it: rmorie run-module logistic-models\\)")
+  expect_equal(attr(none, "rc"), 1L)
   r <- .cap("inspect", d, "--module", "power-design")
   expect_equal(r$status, 0L)
   expect_match(r$text, "power_summary.csv")
@@ -239,7 +240,8 @@ test_that("the SIU LLM chain reads GEMINI_API_KEY and knows the hosted tier", {
 test_that("selftest names the reason for a skip", {
   skip_if_not(exists(".cli_selftest"))
   src <- deparse(body(.cli_selftest))
-  expect_true(any(grepl("rmorie was built without libsodium", src, fixed = TRUE)))
+  # the crypto check no longer skips without libsodium: the symmetric layer is native there
+  expect_false(any(grepl("rmorie was built without libsodium", src, fixed = TRUE)))
   expect_true(any(grepl("no CPADS CSV", src, fixed = TRUE)))
 })
 

@@ -62,7 +62,11 @@ test_that("the verify-pollution banner names the R command", {
 })
 
 test_that("the key store no longer asks for jsonlite (the JSON is read natively)", {
-  expect_false(any(grepl("jsonlite", deparse(.morie_keystore_require))))
+  # nor for sodium: scrypt and ChaCha20-Poly1305 are native
+  for (f in list(.morie_read_store, .morie_write_store, .morie_derive_key, morie_crypto_keystore_load)) {
+    src <- deparse(f)
+    expect_false(any(grepl("jsonlite|sodium::", src)))
+  }
 })
 
 test_that("a numeric matrix is clustered by rows, like the same data frame", {

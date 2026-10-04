@@ -276,7 +276,7 @@ SEXP morie_aead_open(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector
 }
 
 // sodium::data_encrypt's box (tag || ciphertext, XSalsa20-Poly1305); NULL on a bad tag
-// [[Rcpp::export(name = ".morie_ks_secretbox_open_impl")]]
+// [[Rcpp::export(name = ".morie_secretbox_open_impl")]]
 SEXP morie_ks_secretbox_open(Rcpp::RawVector key, Rcpp::RawVector nonce, Rcpp::RawVector box) {
   need(key, 32, "key");
   need(nonce, 24, "nonce");

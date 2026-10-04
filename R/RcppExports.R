@@ -37,7 +37,7 @@
     .Call(`_rmorie_morie_aead_open`, key, nonce, ct_with_tag, aad)
 }
 
-.morie_ks_secretbox_open_impl <- function(key, nonce, box) {
+.morie_secretbox_open_impl <- function(key, nonce, box) {
     .Call(`_rmorie_morie_ks_secretbox_open`, key, nonce, box)
 }
 
