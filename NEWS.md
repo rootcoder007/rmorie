@@ -1,5 +1,30 @@
 # rmorie 1.4.0 - 2026-10-03
 
+* Native engines everywhere a result could depend on what is installed. Survey designs are native
+  (`morie_survey_design()` takes strata, clusters, `nest` and a finite-population correction; the
+  mean and GLM standard errors are the Taylor linearisation of `survey::svyrecvar`, equal to
+  `survey` to 1e-12; a `survey::svydesign` object is read into the same form). Before, an
+  installed `survey` changed the object type and stratified or clustered designs fell back to
+  unclustered SEs. `morie_matching_full()` is exact optimal full matching (a minimum-weight edge
+  cover; its total equals optmatch's at a tight tolerance and is below it at the default one),
+  `morie_matching_subclassify()` and `morie_matching_variable_ratio()` follow MatchIt's rules with
+  identical subclasses, pairs and weights, and the OTIS `match_first` step uses the same matcher
+  whether or not MatchIt is installed (it used a random-order logit match without it).
+  `morie_estimate_g_computation()` and `estimate_ate_gcomputation()` report stdReg's sandwich SE,
+  computed natively (equal to `stdReg::stdGlm` to 1e-16); before, without stdReg the SE was
+  `sd(mu1 - mu0) / sqrt(n)` or a bootstrap, which leaves out the outcome model's uncertainty.
+  `morie_causal_weighting()` is native for "glm", "cbps" and ATT entropy balancing and uses
+  WeightIt only for other methods. Changed results: `morie_matching_nearest_neighbor()` with
+  `n_neighbors > 1` now matches in rounds as MatchIt does (every treated unit gets its first
+  control before any gets a second), pair-identical to MatchIt; it gave each treated unit all its
+  controls in turn before. Bad input: `BayesOutbreak()`, `DlaAggregate()`, `morie_dsp_ruler_fd()`
+  and two prime helpers no longer hang, `DiffEnt()` no longer opens a PDF device, and
+  `morie_siu_refresh_manifest()` checks `out_path` before its 6,000-request crawl. All six CIHI
+  workbooks read without readxl (only a binary `.xls` needs it), with the real header row even
+  when a note widens the sheet. Two-proportion effect sizes add the risk difference and odds
+  ratio beside Cohen's h, and the frequentist test table adds Bonferroni and Benjamini-Hochberg
+  p-values over the family.
+
 * Fresh-user test, fourth pass. `morie_psymet_omega()` now factors by principal axes and
   takes `hier` from the Schmid-Leiman transformation (promax-rotated factors, one general
   factor from their correlations), so a multi-factor scale no longer reports omega

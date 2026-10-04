@@ -76,17 +76,35 @@ means:
   that have corrupted published disparity analyses structurally
   impossible in an rmorie workflow.
 
-The remaining `Suggests` entries exist ONLY for the cross-validation
-tests under `tests/cross/` and as optional accelerators for the
-parsers (jsonlite/xml2/arrow fast paths with pure-R fallbacks); no
-production statistics path requires any of them.
+Packages in `Suggests` play three roles, and no others:
+
+1. **Reference implementations for `tests/cross/`.** The packages the
+   native engines replace (table below) are loaded only by the
+   cross-validation tests; an installed copy never changes a result.
+2. **Named pass-throughs, opt-in by name.** A few functions exist to
+   hand a call to another package and say so in their name and help
+   page: `morie_geostat_variogram()` / `morie_geostat_krige()` (gstat),
+   `morie_copula_*()` (copula), `morie_kernel_pca()` /
+   `morie_spectral_cluster()` (kernlab), `morie_meta_rma()` (metafor),
+   `morie_mvnorm_*()` (mvtnorm), `morie_causal_impact()` (CausalImpact),
+   and `morie_causal_weighting()` for a weighting method without a
+   native engine (WeightIt). The native counterparts are
+   `morie_spatial_variogram()`, `morie_spatial_krige()`,
+   `morie_meta_random_effects()`, `morie_weight_*()` and so on.
+3. **Integrations outside the statistical engines**: plotting
+   (ggplot2), databases (DBI, RSQLite, duckdb, bigrquery), Bayesian
+   back ends (brms, rstanarm, cmdstanr), deep learning (torch,
+   reticulate), spatial file formats (sf), reading binary `.xls`
+   workbooks (readxl) and the encrypted key store (sodium). A function
+   that needs one says which, and how to install it, when it is
+   missing.
 
 ### Cross-validation at a glance
 
 | Family | Replaces | Validation |
 |---|---|---|
-| Matching (7 methods) | MatchIt, optmatch, Matching, designmatch | pair-identical or provably better optimum |
-| IPW / design-based GLM | survey | svyglm coefficients + SEs to 1e-6 |
+| Matching (10 methods: nearest, variable ratio, exact, CEM, Mahalanobis, optimal pair, optimal full, subclass, genetic, cardinality) | MatchIt, optmatch, Matching, designmatch | pair-identical (nearest, variable ratio, subclass) or the optimum itself (optimal, full) |
+| IPW / design-based mean + GLM (strata, clusters, fpc) | survey | svymean / svyglm estimates + SEs to 1e-12 |
 | DML (PLR + IRM) | DoubleML/mlr3 | CI-overlap agreement; 40-60x faster |
 | Causal forest / meta-learners | grf | CATE agreement; 1.5-2.9x faster |
 | DAG identify/estimate/refute | dagitty, DoWhy | adjustment sets == dagitty on every graph tested |
@@ -124,10 +142,12 @@ rmorie is not a wrapper. At runtime it does not call:
 - **signal / wavelets** (DSP) — replaced by `rgfir`/`rgiir`/`rgwav` and `morie_dsp_*`
 - **hawkes** (point processes) — replaced by the native C++ Hawkes kernel family + `morie_crim_etas` / `morie_crim_hawkes_multivariate`
 - **digest / openssl** (hashing/KDF) — replaced by the native C++ SHA-2/HMAC/PBKDF2 + liboqs PQC
-- **jsonlite / xml2 / arrow as requirements** (parsing) — replaced by `morie_fetch_*` pure-R parsers (those packages remain optional fast paths only)
+- **jsonlite / xml2 / arrow / readxl as requirements** (parsing) — replaced by `morie_fetch_*` native parsers and the package's own `.xlsx` reader (those packages remain optional fast paths; readxl is needed only for the old binary `.xls` format)
 
-Those packages appear in `Suggests` solely so `tests/cross/` can
-prove, on every CI run, that the native engines match them.
+Those packages appear in `Suggests` so that `tests/cross/` can prove,
+on every CI run, that the native engines match them; the named
+pass-throughs and integrations listed above are the only other uses of
+`Suggests`.
 
 ## What's new in 1.4.0
 
