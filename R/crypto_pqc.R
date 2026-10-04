@@ -90,6 +90,8 @@ morie_crypto_mlkem768_keygen <- function() {
 #' @export
 morie_crypto_mlkem768_encaps <- function(pk) {
   stopifnot(is.raw(pk))
+  # the sizes are checked here, so both backends refuse a wrong key with the same words
+  if (length(pk) != 1184L) stop("ML-KEM-768 pk must be 1184 bytes", call. = FALSE)
   if (.morie_pqc_native()) {
     key <- structure(list(public = .morie_pqc_r2h(pk), level = 768L), class = c("bricklayer_kem_public_key", "list"))
     cap <- rmoriebricklayer::kem_encapsulate(key)
@@ -118,6 +120,9 @@ morie_crypto_mlkem768_encaps <- function(pk) {
 #' @export
 morie_crypto_mlkem768_decaps <- function(sk, ct) {
   stopifnot(is.raw(sk), is.raw(ct))
+  if (length(sk) != 2400L || length(ct) != 1088L) {
+    stop("ML-KEM-768 size mismatch: sk must be 2400 bytes and ct 1088 bytes", call. = FALSE)
+  }
   if (.morie_pqc_native()) {
     key <- structure(list(public = "", secret = .morie_pqc_r2h(sk), level = 768L), class = c("bricklayer_kem_key", "list"))
     return(.morie_pqc_h2r(rmoriebricklayer::kem_decapsulate(key, ct)))
@@ -172,6 +177,7 @@ morie_crypto_mldsa65_keygen <- function() {
 #' @export
 morie_crypto_mldsa65_sign <- function(sk, message) {
   stopifnot(is.raw(sk), is.raw(message))
+  if (length(sk) != 4032L) stop("ML-DSA-65 sk must be 4032 bytes", call. = FALSE)
   if (.morie_pqc_native()) {
     # hedged ML-DSA.Sign (FIPS 204, empty context) needs only the secret key; the public half of the
     # key object is a placeholder of the right length that signing never reads
@@ -200,6 +206,7 @@ morie_crypto_mldsa65_sign <- function(sk, message) {
 #' @export
 morie_crypto_mldsa65_verify <- function(pk, message, signature) {
   stopifnot(is.raw(pk), is.raw(message), is.raw(signature))
+  if (length(pk) != 1952L) stop("ML-DSA-65 pk must be 1952 bytes", call. = FALSE)
   if (.morie_pqc_native()) {
     key <- tryCatch(rmoriebricklayer::fips_key("ML-DSA-65", public = pk), error = function(e) NULL)
     if (is.null(key)) return(FALSE)

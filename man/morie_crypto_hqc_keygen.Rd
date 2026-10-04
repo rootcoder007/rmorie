@@ -13,16 +13,13 @@ List with \code{pk} and \code{sk} raw vectors.
 Code-based cryptography (decoding random linear codes) is the
 third PQC family; HQC is NIST's 2025 fourth-round KEM selection,
 standardized as the backup to ML-KEM precisely so that a lattice
-break does not strand deployments. Requires liboqs with HQC.
+break does not strand deployments. Uses liboqs when this build links it (HQC round 4,
+64-byte shared secret); otherwise rmoriebricklayer's native HQC-1 (HQC v5.0.0 of
+2025-08-22, 32-byte shared secret). The two are different revisions of the scheme, so a key
+made by one is not read by the other.
 }
 \examples{
-if (morie_crypto_sodium_available()) {
-  if (morie_crypto_liboqs_available()) {
-    kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-    if (!inherits(kp, "try-error")) {
-      length(kp$pk)
-      length(kp$sk)
-    }
-  }
-}
+kp <- morie_crypto_hqc_keygen()
+length(kp$pk)
+length(kp$sk)
 }

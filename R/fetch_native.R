@@ -399,19 +399,19 @@ morie_json_stringify <- function(x, auto_unbox = TRUE) {
   ser(x)
 }
 
-#' Internal shim: prefer jsonlite, fall back to the native parser
+#' Internal shim: prefer jsonlite, fall back to rmoriebricklayer's port of its reader
 #' @noRd
 .morie_from_json <- function(txt, ...) {
   if (requireNamespace("jsonlite", quietly = TRUE)) {
     return(.s03json_fromJSON(txt, ...))
   }
-  args <- list(...)
-  simplify <- !isFALSE(args$simplifyVector)
   if (length(txt) == 1L && !grepl("^[\\[{ \t\r\n\"]", txt) &&
     (file.exists(txt) || grepl("^https?://", txt))) {
     txt <- paste(readLines(txt, warn = FALSE), collapse = "\n")
   }
-  morie_fetch_json(txt, simplify = simplify)
+  # the port gives jsonlite's shapes (records -> data frames, nested objects -> nested frames), so a
+  # caller sees the same object whether or not jsonlite is installed
+  rmoriebricklayer::bricklayer_json_from_json(txt, ...)
 }
 
 #' Internal shim: prefer .s03json_toJSON, fall back to native

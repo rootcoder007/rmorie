@@ -98,40 +98,40 @@ morie_crypto_slhdsa_verify <- function(pk, message, signature) {
 #' Code-based cryptography (decoding random linear codes) is the
 #' third PQC family; HQC is NIST's 2025 fourth-round KEM selection,
 #' standardized as the backup to ML-KEM precisely so that a lattice
-#' break does not strand deployments. Requires liboqs with HQC.
+#' break does not strand deployments. Uses liboqs when this build links it (HQC round 4,
+#' 64-byte shared secret); otherwise rmoriebricklayer's native HQC-1 (HQC v5.0.0 of
+#' 2025-08-22, 32-byte shared secret). The two are different revisions of the scheme, so a key
+#' made by one is not read by the other.
 #'
 #' @return List with `pk` and `sk` raw vectors.
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   if (morie_crypto_liboqs_available()) {
-#'     kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-#'     if (!inherits(kp, "try-error")) {
-#'       length(kp$pk)
-#'       length(kp$sk)
-#'     }
-#'   }
-#' }
+#' kp <- morie_crypto_hqc_keygen()
+#' length(kp$pk)
+#' length(kp$sk)
 #' @export
 morie_crypto_hqc_keygen <- function() {
+  if (.morie_pqc_native()) {
+    k <- rmoriebricklayer::hqc_keygen(1L)
+    return(list(pk = .morie_pqc_h2r(k$public), sk = .morie_pqc_h2r(k$secret)))
+  }
   .Call(`_rmorie_morie_crypto_hqc128_keygen`)
 }
 
 #' HQC-128 encapsulation
 #' @param pk Recipient's HQC-128 public key.
-#' @return List with `ct` and `shared_secret` (raw, 64 B).
+#' @return List with `ct` and `shared_secret` (raw: 64 B with liboqs, 32 B natively).
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   if (morie_crypto_liboqs_available()) {
-#'     kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-#'     if (!inherits(kp, "try-error")) {
-#'       enc <- morie_crypto_hqc_encaps(kp$pk)
-#'       str(enc)
-#'     }
-#'   }
-#' }
+#' kp <- morie_crypto_hqc_keygen()
+#' enc <- morie_crypto_hqc_encaps(kp$pk)
+#' str(enc)
 #' @export
 morie_crypto_hqc_encaps <- function(pk) {
   stopifnot(is.raw(pk))
+  if (.morie_pqc_native()) {
+    key <- structure(list(public = .morie_pqc_r2h(pk), level = 1L), class = c("bricklayer_hqc_public_key", "list"))
+    e <- rmoriebricklayer::hqc_encapsulate(key)
+    return(list(ct = .morie_pqc_h2r(e$ciphertext), shared_secret = .morie_pqc_h2r(e$shared)))
+  }
   .Call(`_rmorie_morie_crypto_hqc128_encaps`, pk)
 }
 
@@ -140,19 +140,17 @@ morie_crypto_hqc_encaps <- function(pk) {
 #' @param ct Ciphertext from \code{\link{morie_crypto_hqc_encaps}}.
 #' @return Raw shared secret.
 #' @examples
-#' if (morie_crypto_sodium_available()) {
-#'   if (morie_crypto_liboqs_available()) {
-#'     kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-#'     if (!inherits(kp, "try-error")) {
-#'       enc <- morie_crypto_hqc_encaps(kp$pk)
-#'       ss <- morie_crypto_hqc_decaps(kp$sk, enc$ct)
-#'       print(identical(ss, enc$shared_secret))
-#'     }
-#'   }
-#' }
+#' kp <- morie_crypto_hqc_keygen()
+#' enc <- morie_crypto_hqc_encaps(kp$pk)
+#' ss <- morie_crypto_hqc_decaps(kp$sk, enc$ct)
+#' print(identical(ss, enc$shared_secret))
 #' @export
 morie_crypto_hqc_decaps <- function(sk, ct) {
   stopifnot(is.raw(sk), is.raw(ct))
+  if (.morie_pqc_native()) {
+    key <- structure(list(public = "", secret = .morie_pqc_r2h(sk), level = 1L), class = c("bricklayer_hqc_key", "list"))
+    return(.morie_pqc_h2r(rmoriebricklayer::hqc_decapsulate(key, ct)))
+  }
   .Call(`_rmorie_morie_crypto_hqc128_decaps`, sk, ct)
 }
 

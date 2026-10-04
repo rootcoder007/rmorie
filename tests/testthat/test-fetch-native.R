@@ -121,3 +121,11 @@ test_that("nested objects become nested data frames and records come back out", 
   expect_identical(recs[[1]]$p$tags, c("u", "v"))
   expect_identical(rmorie:::.morie_json_records(list(1, 2)), list(1, 2))
 })
+
+test_that("without jsonlite the reader returns what jsonlite returns", {
+  txt <- '[{"a":1,"b":"x","loc":{"lat":41.8,"type":"Point"},"t":[1,2]},{"a":2,"loc":{"lat":41.9},"t":[3]},{"a":3}]'
+  want <- jsonlite::fromJSON(txt)
+  local_mocked_bindings(requireNamespace = function(package, ...) package != "jsonlite", .package = "base")
+  expect_identical(rmorie:::.morie_from_json(txt), want)
+  expect_identical(rmorie:::.morie_from_json(txt, simplifyVector = FALSE)[[1]]$loc$type, "Point")
+})

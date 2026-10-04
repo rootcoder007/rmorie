@@ -18,7 +18,6 @@ test_that("liboqs version string is non-empty when available", {
 # ========================================== ML-KEM-768
 
 test_that("ML-KEM-768 keypair has FIPS 203 sizes", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   kp <- morie_crypto_mlkem768_keygen()
   expect_named(kp, c("pk", "sk"))
   expect_equal(length(kp$pk), 1184L)
@@ -28,7 +27,6 @@ test_that("ML-KEM-768 keypair has FIPS 203 sizes", {
 })
 
 test_that("ML-KEM-768 encaps/decaps round-trip yields identical shared secret", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   kp <- morie_crypto_mlkem768_keygen()
   e <- morie_crypto_mlkem768_encaps(kp$pk)
   expect_named(e, c("ct", "shared_secret"))
@@ -39,7 +37,6 @@ test_that("ML-KEM-768 encaps/decaps round-trip yields identical shared secret", 
 })
 
 test_that("ML-KEM-768 decaps with wrong sk fails (implicit-reject silent)", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   # ML-KEM uses Fujisaki-Okamoto implicit rejection: decaps with a
   # wrong sk returns a DIFFERENT shared secret (no error). The
   # contract is that wrong-key decap MUST NOT equal the encap secret.
@@ -53,7 +50,6 @@ test_that("ML-KEM-768 decaps with wrong sk fails (implicit-reject silent)", {
 })
 
 test_that("ML-KEM-768 enforces pk/sk/ct sizes", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   expect_error(morie_crypto_mlkem768_encaps(raw(1183)),
                 regexp = "pk must be 1184 bytes")
   expect_error(morie_crypto_mlkem768_decaps(raw(2399), raw(1088)),
@@ -63,7 +59,6 @@ test_that("ML-KEM-768 enforces pk/sk/ct sizes", {
 })
 
 test_that("Two ML-KEM-768 keygens produce different keys (CSPRNG sanity)", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   k1 <- morie_crypto_mlkem768_keygen()
   k2 <- morie_crypto_mlkem768_keygen()
   expect_false(identical(k1$pk, k2$pk))
@@ -73,7 +68,6 @@ test_that("Two ML-KEM-768 keygens produce different keys (CSPRNG sanity)", {
 # ========================================== ML-DSA-65
 
 test_that("ML-DSA-65 keypair has FIPS 204 sizes", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   kp <- morie_crypto_mldsa65_keygen()
   expect_named(kp, c("pk", "sk"))
   expect_equal(length(kp$pk), 1952L)
@@ -81,7 +75,6 @@ test_that("ML-DSA-65 keypair has FIPS 204 sizes", {
 })
 
 test_that("ML-DSA-65 sign + verify round-trip succeeds", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   kp <- morie_crypto_mldsa65_keygen()
   msg <- charToRaw("morie research-stack signed payload v1")
   sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
@@ -92,7 +85,6 @@ test_that("ML-DSA-65 sign + verify round-trip succeeds", {
 })
 
 test_that("ML-DSA-65 verify rejects modified message", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   kp <- morie_crypto_mldsa65_keygen()
   msg <- charToRaw("original")
   tampered <- charToRaw("oriGinal")
@@ -102,7 +94,6 @@ test_that("ML-DSA-65 verify rejects modified message", {
 })
 
 test_that("ML-DSA-65 verify rejects wrong pk", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   kpA <- morie_crypto_mldsa65_keygen()
   kpB <- morie_crypto_mldsa65_keygen()
   msg <- charToRaw("payload")
@@ -112,7 +103,6 @@ test_that("ML-DSA-65 verify rejects wrong pk", {
 })
 
 test_that("ML-DSA-65 verify rejects modified signature", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   kp <- morie_crypto_mldsa65_keygen()
   sig <- morie_crypto_mldsa65_sign(kp$sk, charToRaw("x"))
   bad <- sig
@@ -121,7 +111,6 @@ test_that("ML-DSA-65 verify rejects modified signature", {
 })
 
 test_that("ML-DSA-65 enforces pk/sk sizes", {
-  if (!morie_crypto_liboqs_available()) skip("no liboqs")
   expect_error(morie_crypto_mldsa65_sign(raw(4031), charToRaw("x")),
                 regexp = "sk must be 4032 bytes")
   expect_error(morie_crypto_mldsa65_verify(raw(1951), charToRaw("x"),

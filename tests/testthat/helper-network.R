@@ -3,8 +3,10 @@
 # package, which is not an rmorie runtime dependency. This helper skips
 # on a plain TCP probe instead, so network-gated tests degrade the same
 # way on machines without curl.
-skip_if_no_network <- function(host = "8.8.8.8", port = 53, timeout = 2) {
-  # hostnames are fine too: socketConnection resolves them.
+skip_if_no_network <- function(host = "8.8.8.8", port = NULL, timeout = 2) {
+  # hostnames are fine too: socketConnection resolves them. A web host is probed where it serves
+  # (443); port 53 answers only on a DNS server, so a hostname probed there always skipped
+  if (is.null(port)) port <- if (grepl("^[0-9.]+$", host)) 53L else 443L
   ok <- FALSE
   con <- tryCatch(
     suppressWarnings(
