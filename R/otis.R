@@ -49,7 +49,7 @@
 #' @examples
 #' \donttest{
 #' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_regional_placement(b01))
+#' res <- try(morie_otis_regional_placement(b01, year = max(b01$EndFiscalYear)))
 #' class(res)
 #' }
 #' \donttest{
@@ -687,7 +687,7 @@ morie_otis_otdml <- function(df,
 #' @examples
 #' \donttest{
 #' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
-#' res <- try(morie_otis_regional_placement(b01))
+#' res <- try(morie_otis_regional_placement(b01, year = max(b01$EndFiscalYear)))
 #' class(res)
 #' }
 #' @export

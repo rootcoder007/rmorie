@@ -21,17 +21,21 @@ their upstream names.
 Some ARSAU releases ship a companion \code{*.xlsx} file alongside
 the CSV that holds the column-level data dictionary (variable name
 \itemize{
-\item dtype + notes).  This helper reads the first sheet via
-\pkg{readxl} and normalises the column names to
-\code{name / type / notes}.  Requires the optional \pkg{readxl}
-dependency.
+\item dtype + notes).  This helper reads the first sheet (with
+\pkg{readxl} when installed, else the package's own reader) and
+normalises the column names to \code{name / type / notes}.
 }
 }
 \examples{
-\donttest{
-# Point at a downloaded ARSAU data-dictionary workbook:
-d <- try(morie_arsau_read_xlsx_dictionary("arsau_dictionary.xlsx"))
-}
+\dontshow{if (requireNamespace("writexl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+# a two-row dictionary workbook, as an ARSAU release ships it
+f <- tempfile(fileext = ".xlsx")
+writexl::write_xlsx(data.frame(Variable = c("year", "force_used"),
+                               `Data type` = c("integer", "character"),
+                               Notes = c("fiscal year", "type of force"),
+                               check.names = FALSE), f)
+morie_arsau_read_xlsx_dictionary(f)
+\dontshow{\}) # examplesIf}
 }
 \references{
 Ontario Ministry of the Solicitor General data

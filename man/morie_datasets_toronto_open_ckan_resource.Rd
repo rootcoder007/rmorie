@@ -21,9 +21,9 @@ endpoint for an arbitrary Toronto package resource.
 \examples{
 \donttest{
 if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint({
-cat_df <- morie_datasets_toronto_opendata_bulk_layers()
-df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],
-  limit = 5L
+# the datastore resource of the neighbourhood-crime-rates package (package_show, 2026-10)
+df <- try(morie_datasets_toronto_open_ckan_resource(
+  "d4160604-9f3e-4589-8821-9fd70fa350b3", limit = 5L
 ))
 if (!inherits(df, "try-error")) head(df)
 })

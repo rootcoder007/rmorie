@@ -233,9 +233,9 @@ morie_tps_csi_weight <- function(category, variant = c("total", "violent"),
 #' @return A data.frame with one row per year.
 #' @examples
 #' set.seed(1)
-#' counts <- data.frame(OCC_YEAR = rep(2020:2023, 2),
+#' counts <- data.frame(year = rep(2020:2023, 2),
 #'                      category = rep(c("Assault", "Robbery"), each = 4),
-#'                      n = rpois(8, 50))
+#'                      count = rpois(8, 50))
 #' res <- try(morie_tps_csi_per_year(counts))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export
@@ -309,7 +309,7 @@ morie_tps_csi_per_year <- function(counts_per_year,
 #' set.seed(1)
 #' counts <- data.frame(HOOD_158 = rep(sprintf("%03d", 1:4), 2),
 #'                      category = rep(c("Assault", "Robbery"), each = 4),
-#'                      n = rpois(8, 50))
+#'                      count = rpois(8, 50))
 #' res <- try(morie_tps_csi_per_neighbourhood(counts))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export

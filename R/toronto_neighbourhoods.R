@@ -203,7 +203,7 @@ morie_tps_resolve_hood_col <- function(df, prefer = c("158", "140"),
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cw <- morie_to_hood_crosswalk()
-#' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
+#' df <- data.frame(HOOD_158 = utils::head(cw$hood_158, 5))
 #' res <- try(morie_tps_assert_hood_version(df, expected = "158"))
 #' \dontshow{\}) # examplesIf}
 #' @export
@@ -396,7 +396,7 @@ morie_tps_add_hood_158_from_140 <- function(df, col_in = NULL,
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cw <- morie_to_hood_crosswalk()
-#' df <- data.frame(HOOD_158 = utils::head(cw$HOOD_158, 5))
+#' df <- data.frame(HOOD_158 = utils::head(cw$hood_158, 5))
 #' res <- try(morie_tps_add_hood_140_from_158(df))
 #' if (!inherits(res, "try-error")) head(res)
 #' \dontshow{\}) # examplesIf}

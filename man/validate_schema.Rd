@@ -21,7 +21,7 @@ Validate a data frame against a list of column rules
 }
 \examples{
 df <- data.frame(age = c(20, 30, -1))
-rules <- list(age = list(type = "numeric", min = 0))
+rules <- list(column_rule("age", dtype = "numeric", min_val = 0))
 res <- try(validate_schema(df, rules))
 if (!inherits(res, "try-error")) str(res, max.level = 1)
 }

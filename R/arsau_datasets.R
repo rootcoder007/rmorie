@@ -284,10 +284,9 @@ morie_arsau_sidecar_to_frame <- function(sidecar) {
 #'
 #' Some ARSAU releases ship a companion \code{*.xlsx} file alongside
 #' the CSV that holds the column-level data dictionary (variable name
-#' + dtype + notes).  This helper reads the first sheet via
-#' \pkg{readxl} and normalises the column names to
-#' \code{name / type / notes}.  Requires the optional \pkg{readxl}
-#' dependency.
+#' + dtype + notes).  This helper reads the first sheet (with
+#' \pkg{readxl} when installed, else the package's own reader) and
+#' normalises the column names to \code{name / type / notes}.
 #'
 #' @param path Path to the XLSX file.
 #' @param sheet Sheet identifier (name or 1-based integer).  Default
@@ -298,28 +297,37 @@ morie_arsau_sidecar_to_frame <- function(sidecar) {
 #' @references Ontario Ministry of the Solicitor General data
 #'   dictionaries accompanying the ARSAU CSV releases.
 #' @examples
-#' \donttest{
-#' # Point at a downloaded ARSAU data-dictionary workbook:
-#' d <- try(morie_arsau_read_xlsx_dictionary("arsau_dictionary.xlsx"))
-#' }
+#' \dontshow{if (requireNamespace("writexl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' # a two-row dictionary workbook, as an ARSAU release ships it
+#' f <- tempfile(fileext = ".xlsx")
+#' writexl::write_xlsx(data.frame(Variable = c("year", "force_used"),
+#'                                `Data type` = c("integer", "character"),
+#'                                Notes = c("fiscal year", "type of force"),
+#'                                check.names = FALSE), f)
+#' morie_arsau_read_xlsx_dictionary(f)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
-  if (!requireNamespace("readxl", quietly = TRUE)) {
-    stop(
-      "morie_arsau_read_xlsx_dictionary requires the optional ",
-      "'readxl' package; install it with install.packages('readxl').",
-      call. = FALSE
-    )
-  }
   if (!file.exists(path)) {
     stop(sprintf("XLSX data-dictionary not found at %s", path),
       call. = FALSE
     )
   }
-  df <- as.data.frame(
-    readxl::read_excel(path, sheet = sheet),
-    stringsAsFactors = FALSE
-  )
+  df <- if (requireNamespace("readxl", quietly = TRUE)) {
+    as.data.frame(readxl::read_excel(path, sheet = sheet), stringsAsFactors = FALSE)
+  } else {
+    # the package's own xlsx reader: the sheet by name or by position
+    con <- unz(path, "xl/workbook.xml")
+    wb <- paste(readLines(con, warn = FALSE, encoding = "UTF-8"), collapse = "")
+    close(con)
+    sheets <- names(.morie_xlsx_sheet_ids(wb))
+    pick <- if (is.numeric(sheet)) sheets[as.integer(sheet)] else as.character(sheet)
+    if (length(pick) != 1L || is.na(pick) || !pick %in% sheets) {
+      stop(sprintf("sheet %s is not in %s (sheets: %s)", sheet, basename(path), paste(sheets, collapse = ", ")),
+           call. = FALSE)
+    }
+    .morie_xlsx_one_line_names(.morie_xlsx_stream(path, pick))
+  }
   # Normalise column names: lower-case + strip non-alnum.
   norm <- tolower(gsub("[^a-z0-9]", "", tolower(names(df))))
   # Map the most common upstream spellings to canonical fields.

@@ -223,3 +223,61 @@ test_that("with a stored hosted key the fallback does not claim no provider is c
   expect_false(grepl("no LLM provider detected", txt, fixed = TRUE))
   expect_match(txt, "one is configured")
 })
+
+
+test_that("records with NULL and nested fields become one row each", {
+  df <- .morie_dataset_records_to_df(list(
+    list(name = "a", notes = NULL, resources = list(list(url = "u1"), list(url = "u2"))),
+    list(name = "b", extra = "x")))
+  expect_equal(nrow(df), 2L)
+  expect_equal(names(df), c("name", "notes", "resources", "extra"))
+  expect_true(is.na(df$notes[1]))
+  expect_match(df$resources[1], "u2", fixed = TRUE)
+  expect_equal(df$extra, c(NA, "x"))
+})
+
+test_that("a JSON service error is an error, not data", {
+  pkg <- utils::packageName(environment(morie_cli))
+  local_mocked_bindings(.morie_http_get_with_status = function(url, ...) {
+    list(body = '{"message":"Service unavailable","errorCode":"service-unavailable"}', status_code = 200L, error = "")
+  }, .package = pkg)
+  expect_error(.morie_dataset_http_json("https://data.example.org/resource/x.json"),
+               "data.example.org: Service unavailable \\(service-unavailable\\)")
+  local_mocked_bindings(.morie_http_get_with_status = function(url, ...) {
+    list(body = '{"message":"no such dataset"}', status_code = 404L, error = "")
+  }, .package = pkg)
+  expect_error(.morie_dataset_http_json("https://data.example.org/x"), "HTTP 404 from data.example.org: no such dataset")
+  n <- 0L
+  local_mocked_bindings(.morie_http_get_with_status = function(url, ...) {
+    n <<- n + 1L
+    if (n == 1L) list(body = "", status_code = 503L, error = "") else list(body = "[{\"a\":1}]", status_code = 200L, error = "")
+  }, .package = pkg)
+  local_mocked_bindings(Sys.sleep = function(...) NULL, .package = "base")
+  expect_equal(.morie_dataset_http_json("https://data.example.org/y")$a, 1)  # one retry after a 503
+})
+
+test_that("validate_schema takes column_rule() lists and the named shorthand, and words a bad rule", {
+  d <- data.frame(age = c(20, 30, -1))
+  a <- validate_schema(d, list(column_rule("age", dtype = "numeric", min_val = 0)))
+  b <- validate_schema(d, list(age = list(dtype = "numeric", min_val = 0)))
+  expect_false(a$passed)
+  expect_equal(a$errors, b$errors)
+  expect_error(validate_schema(d, list(list(dtype = "numeric"))), "has no column name")
+  expect_error(validate_schema(d, list(age = list(type = "numeric"))), "unused argument")
+})
+
+test_that("a missing Toronto resource id is refused in words", {
+  expect_error(morie_datasets_toronto_open_ckan_resource(character()), "one CKAN resource id")
+})
+
+test_that("the ARSAU dictionary reads without readxl", {
+  skip_if_not_installed("writexl")
+  f <- withr::local_tempfile(fileext = ".xlsx")
+  writexl::write_xlsx(data.frame(Variable = c("year", "force_used"), `Data type` = c("integer", "character"),
+                                 Notes = c("fiscal year", "type of force"), check.names = FALSE), f)
+  local_mocked_bindings(requireNamespace = function(package, ...) package != "readxl", .package = "base")
+  d <- morie_arsau_read_xlsx_dictionary(f)
+  expect_equal(d$name, c("year", "force_used"))
+  expect_equal(d$type, c("integer", "character"))
+  expect_error(morie_arsau_read_xlsx_dictionary(f, sheet = 3), "sheet 3 is not in")
+})

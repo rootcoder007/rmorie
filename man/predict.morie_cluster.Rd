@@ -20,6 +20,8 @@ Integer cluster labels for the new rows (named by row name).
 Assign new data to existing clusters without re-fitting
 }
 \examples{
-cl <- morie_cluster(iris[1:4], k = 3)
-predict(cl, iris[1:5, 1:4])
+x <- iris[1:4]
+rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+cl <- morie_cluster(x, k = 3)
+predict(cl, x[1:5, ])
 }

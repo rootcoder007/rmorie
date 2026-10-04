@@ -20,8 +20,10 @@ Summarise method for \code{morie_cluster} objects
 \examples{
 \donttest{
 # with vs without scaling changes which columns drive the clusters
-morie_cluster(iris[1:4], k = 3)
-obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+x <- iris[1:4]
+rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+morie_cluster(x, k = 3)
+obj <- morie_cluster(x, k = 3, scale = TRUE)
 summary(obj)
 }
 }

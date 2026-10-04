@@ -98,16 +98,16 @@ test_that(".morie_dataset_build_url preserves correct & ordering of multiple par
 
 # ====================================== Retrofit routes through C++ helper
 
-test_that(".morie_dataset_http_text routes through .morie_http_get when the C++ backend is available", {
+test_that(".morie_dataset_http_text routes through the libcurl backend when it is available", {
   seen <- list()
   testthat::local_mocked_bindings(
-    .morie_http_get = function(url, timeout_s = 60L,
+    .morie_http_get_with_status = function(url, timeout_s = 60L,
                                  headers = character(),
                                  user_agent = "",
                                  follow_redirects = TRUE) {
       seen <<- list(url = url, timeout_s = timeout_s,
                     headers = headers)
-      "stub-body"
+      list(body = "stub-body", status_code = 200L, error = "")
     },
     .package = "rmorie")
   out <- rmorie:::.morie_dataset_http_text(
@@ -118,15 +118,15 @@ test_that(".morie_dataset_http_text routes through .morie_http_get when the C++ 
   expect_equal(seen$timeout_s, 60L)
 })
 
-test_that(".morie_dataset_http_json routes through .morie_http_get + jsonlite::fromJSON", {
+test_that(".morie_dataset_http_json routes through the libcurl backend and parses the JSON", {
   seen <- list()
   testthat::local_mocked_bindings(
-    .morie_http_get = function(url, timeout_s = 60L,
+    .morie_http_get_with_status = function(url, timeout_s = 60L,
                                  headers = character(),
                                  user_agent = "",
                                  follow_redirects = TRUE) {
       seen <<- list(url = url)
-      '[{"a":1,"b":"two"}]'
+      list(body = '[{"a":1,"b":"two"}]', status_code = 200L, error = "")
     },
     .package = "rmorie")
   out <- rmorie:::.morie_dataset_http_json(
@@ -138,29 +138,30 @@ test_that(".morie_dataset_http_json routes through .morie_http_get + jsonlite::f
   expect_match(seen$url, "limit=1")
 })
 
-test_that(".morie_dataset_http_json raises when libcurl returns empty body", {
+test_that(".morie_dataset_http_json names the host when no response comes back", {
   testthat::local_mocked_bindings(
-    .morie_http_get = function(url, timeout_s = 60L,
+    .morie_http_get_with_status = function(url, timeout_s = 60L,
                                  headers = character(),
                                  user_agent = "",
                                  follow_redirects = TRUE) {
-      ""  # transport failure
+      list(body = "", status_code = 0L, error = "Couldn't connect to server")  # no response at all
     },
     .package = "rmorie")
+  testthat::local_mocked_bindings(Sys.sleep = function(...) NULL, .package = "base")
   expect_error(
     rmorie:::.morie_dataset_http_json("https://x.test/r.json"),
-    regexp = "libcurl returned empty body")
+    regexp = "could not reach x.test \\(Couldn't connect to server\\)")
 })
 
 test_that(".morie_dataset_http_text + json forward custom headers (e.g. X-App-Token)", {
   captured <- character()
   testthat::local_mocked_bindings(
-    .morie_http_get = function(url, timeout_s = 60L,
+    .morie_http_get_with_status = function(url, timeout_s = 60L,
                                  headers = character(),
                                  user_agent = "",
                                  follow_redirects = TRUE) {
       captured <<- headers
-      '[{"x":1}]'
+      list(body = '[{"x":1}]', status_code = 200L, error = "")
     },
     .package = "rmorie")
   rmorie:::.morie_dataset_http_json(
@@ -224,7 +225,7 @@ test_that(".morie_dataset_http_bytes forwards custom headers", {
                                        user_agent = "",
                                        follow_redirects = TRUE) {
       captured <<- headers
-      raw()
+      as.raw(1L)  # an empty download is a failed one now
     },
     .package = "rmorie")
   rmorie:::.morie_dataset_http_bytes(

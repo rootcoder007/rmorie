@@ -398,15 +398,30 @@
                                      timeout_s = 60L) {
   full_url <- .morie_dataset_build_url(url, query)
   if (.morie_dataset_http_backend_cpp()) {
-    body <- .morie_http_get(full_url,
-      timeout_s = as.integer(timeout_s),
-      headers = as.character(headers)
-    )
+    get <- function() {
+      .morie_http_get_with_status(full_url,
+        timeout_s = as.integer(timeout_s),
+        headers = as.character(headers)
+      )
+    }
+    r <- get()
+    if (identical(as.integer(r$status_code), 0L) || isTRUE(r$status_code >= 500L)) {
+      Sys.sleep(2)  # one retry: open-data portals answer 503 / drop a connection now and then
+      r <- get()
+    }
+    .morie_http_reached(full_url, r)
+    body <- r$body
+    if (isTRUE(r$status_code >= 400L)) {
+      err <- tryCatch(.morie_from_json(body, simplifyVector = FALSE), error = function(e) NULL)
+      msg <- if (is.list(err)) as.character(err$message %||% err$error$message %||% err$error %||% "")[1L] else ""
+      stop(sprintf("HTTP %d from %s%s", as.integer(r$status_code),
+                   sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url),
+                   if (length(msg) && !is.na(msg) && nzchar(msg)) paste0(": ", msg) else ""),
+           call. = FALSE)
+    }
     if (!nzchar(body)) {
-      stop(sprintf(
-        "morie HTTP fetch failed (libcurl returned empty body): %s",
-        full_url
-      ), call. = FALSE)
+      stop(sprintf("%s answered with an empty body", sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url)),
+           call. = FALSE)
     }
     # Validate the body is JSON-shaped before handing to jsonlite.
     # Upstream proxies (Envoy, nginx) return text/HTML error pages on
@@ -418,7 +433,14 @@
         full_url, substr(body, 1L, 200L)
       ), call. = FALSE)
     }
-    return(.morie_from_json(body, simplifyVector = TRUE))
+    parsed <- .morie_from_json(body, simplifyVector = TRUE)
+    if (is.list(parsed) && !is.data.frame(parsed) && !is.null(parsed$errorCode)) {
+      # Socrata reports a failure as a JSON object, not as the records asked for
+      stop(sprintf("%s: %s (%s)", sub("^[a-z]+://([^/:?#]+).*$", "\\1", full_url),
+                   as.character(parsed$message %||% "error")[1L], as.character(parsed$errorCode)[1L]),
+           call. = FALSE)
+    }
+    return(parsed)
   }
   if (!requireNamespace("httr2", quietly = TRUE)) {
     stop(
@@ -453,11 +475,22 @@
   if (is.null(records) || length(records) == 0L) {
     return(data.frame())
   }
-  do.call(rbind, lapply(records, function(r) {
-    as.data.frame(lapply(r, function(v) if (is.null(v)) NA else v),
-      stringsAsFactors = FALSE
-    )
-  }))
+  # one row per record, one column per field seen in any record: a NULL is NA, a vector is joined,
+  # a nested list (a CKAN package's resources, tags) is kept as its JSON text
+  cell <- function(v) {
+    if (is.null(v) || !length(v)) return(NA)
+    if (is.list(v)) return(.morie_to_json(v, auto_unbox = TRUE))
+    if (length(v) > 1L) return(paste(v, collapse = "; "))
+    v
+  }
+  rows <- lapply(records, function(r) lapply(r, cell))
+  cols <- unique(unlist(lapply(rows, names), use.names = FALSE))
+  out <- lapply(cols, function(cn) {
+    vals <- lapply(rows, function(r) if (is.null(r[[cn]])) NA else r[[cn]])
+    unlist(vals, use.names = FALSE)
+  })
+  names(out) <- cols
+  as.data.frame(out, stringsAsFactors = FALSE, optional = TRUE)
 }
 
 # ---------------------------------------------------------------------------

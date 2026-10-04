@@ -150,8 +150,10 @@ morie_cluster <- function(x, k = 2L, scale = FALSE,
 #' @param ... Unused.
 #' @return Integer cluster labels for the new rows (named by row name).
 #' @examples
-#' cl <- morie_cluster(iris[1:4], k = 3)
-#' predict(cl, iris[1:5, 1:4])
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' cl <- morie_cluster(x, k = 3)
+#' predict(cl, x[1:5, ])
 #' @export
 predict.morie_cluster <- function(object, newdata, ...) {
   xm <- as.matrix(newdata[, object$feature_names, drop = FALSE])
@@ -185,8 +187,10 @@ predict.morie_cluster <- function(object, newdata, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' print(obj)
 #' }
 #' @export
@@ -207,8 +211,10 @@ print.morie_cluster <- function(x, max_rows = 10L, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' summary(obj)
 #' }
 #' @export
@@ -226,8 +232,10 @@ summary.morie_cluster <- function(object, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' plot(obj)
 #' }
 #' @export
@@ -263,8 +271,10 @@ plot.morie_cluster <- function(x, ...) {
 #' @examples
 #' \donttest{
 #' # with vs without scaling changes which columns drive the clusters
-#' morie_cluster(iris[1:4], k = 3)
-#' obj <- morie_cluster(iris[1:4], k = 3, scale = TRUE)
+#' x <- iris[1:4]
+#' rownames(x) <- paste0("s", seq_len(nrow(x)))  # labelled cases, as morie_cluster() expects
+#' morie_cluster(x, k = 3)
+#' obj <- morie_cluster(x, k = 3, scale = TRUE)
 #' print(obj)
 #' }
 #' @export
