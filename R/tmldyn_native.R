@@ -27,7 +27,6 @@
 #'
 #' A step of the tmldyn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -45,7 +44,6 @@
 #' A step of the tmldyn_native implementation. Called by \code{.fluctuate},
 #' \code{intervention_mechanism}, \code{morie_tmldyn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -64,7 +62,6 @@
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param covariate_history Optional; may be \code{NULL}. Coerced to list by the body,
 #' with \code{as.list}.
@@ -91,7 +88,6 @@
 #'
 #' A step of the tmldyn_native implementation. Called by \code{sequential_blips}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param basis Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -202,7 +198,6 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn},
 #' \code{rule_value_seq}, \code{sequential_blips}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; indexed elementwise.
 #' @param L0 A matrix; indexed by row and column.
@@ -236,7 +231,6 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn},
 #' \code{rule_value_seq}, \code{sequential_blips}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pseudo A vector; indexed elementwise.
 #' @param L0 A matrix; indexed by row and column.
@@ -373,7 +367,6 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param outcome A vector; indexed elementwise.
 #' @param offset_logit A vector; indexed elementwise.
@@ -408,7 +401,6 @@ exceptional_law_share <- function(blips, tol = 0.01) {
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
@@ -464,7 +456,6 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param regime Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @param n Passed to \code{==}.
@@ -715,7 +706,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param blips A vector; its length is taken.
 #' @param tol Passed to \code{<=}. Defaults to \code{0.01}.
@@ -731,7 +721,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
@@ -747,7 +736,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L0 A matrix; indexed by row and column.
 #' @param A0 A vector; its length is taken and its elements indexed.
@@ -799,7 +787,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ys A vector; its length is taken.
 #' @param L0 Passed to \code{.fit_q2}.
@@ -824,7 +811,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{mean}.
 #' @return A numeric value.
@@ -840,7 +826,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #' A step of the tmldyn_native implementation. Called by \code{.fit_q1}, \code{.fit_q2},
 #' \code{.project}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; the body checks with \code{is.matrix}.
 #' @param yv A matrix; passed to \code{crossprod}.
@@ -858,7 +843,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ys A vector; its length is taken.
 #' @param L0 Passed to \code{.fit_q2}.
@@ -905,7 +889,6 @@ morie_tmledynamicregime <- morie_tmldyn
 #'
 #' A step of the tmldyn_native implementation. Called by \code{morie_tmle_dynamic_regime}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{qnorm}.
 #' @return The value of \code{qnorm}.

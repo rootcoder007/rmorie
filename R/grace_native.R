@@ -69,7 +69,6 @@
 #' A step of the grace_native implementation. Called by \code{.grace_generate_view},
 #' \code{morie_drop_edges}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A vector; its length is taken and its elements indexed.
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
@@ -92,7 +91,6 @@
 #' A step of the grace_native implementation. Called by \code{.grace_generate_view},
 #' \code{morie_mask_features}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
@@ -125,7 +123,6 @@
 #'
 #' A step of the grace_native implementation. Called by \code{morie_generate_view}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.grace_mask_features}.
 #' @param edges Passed to \code{.grace_drop_edges}.
@@ -144,7 +141,6 @@
 #'
 #' A step of the grace_native implementation. Called by \code{.grace_pair_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -169,7 +165,6 @@
 #' A step of the grace_native implementation. Called by \code{.grace_objective},
 #' \code{morie_pair_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param U A matrix; indexed by row and column.
 #' @param V A matrix; indexed by row and column.
@@ -204,7 +199,6 @@
 #' A step of the grace_native implementation. Called by \code{morie_grace},
 #' \code{morie_graphcontrastive}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param U A matrix; passed to \code{nrow}.
 #' @param V A matrix; passed to \code{nrow}.
@@ -247,7 +241,6 @@
 #'
 #' A step of the grace_native implementation. Called by \code{.grace_morie_cheatsheet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -270,7 +263,6 @@
 #'
 #' A step of the grace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges Passed to \code{.grace_drop_edges}.
 #' @param p Passed to \code{.grace_drop_edges}.
@@ -291,7 +283,6 @@ morie_drop_edges <- function(edges, p, rng) {
 #'
 #' A step of the grace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.grace_mask_features}.
 #' @param p Passed to \code{.grace_mask_features}.
@@ -313,7 +304,6 @@ morie_mask_features <- function(X, p, rng) {
 #'
 #' A step of the grace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.grace_generate_view}.
 #' @param edges Passed to \code{.grace_generate_view}.
@@ -338,7 +328,6 @@ morie_generate_view <- function(X, edges, p_edge, p_feature, rng) {
 #'
 #' A step of the grace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param U A matrix; passed to \code{as.matrix}.
 #' @param V A matrix; passed to \code{as.matrix}.
@@ -360,7 +349,6 @@ morie_pair_loss <- function(U, V, i, tau = 0.5, intra = TRUE) {
 #'
 #' A step of the grace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param U Passed to \code{.grace_objective}.
 #' @param V Passed to \code{.grace_objective}.
@@ -380,7 +368,6 @@ morie_grace <- function(U, V, tau = 0.5, intra = TRUE) {
 #'
 #' A step of the grace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param U Passed to \code{.grace_objective}.
 #' @param V Passed to \code{.grace_objective}.
@@ -400,7 +387,6 @@ morie_graphcontrastive <- function(U, V, tau = 0.5, intra = TRUE) {
 #'
 #' A step of the grace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.grace_cheatsheet}.
 #' @export

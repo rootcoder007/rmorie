@@ -174,7 +174,6 @@ morie_seckdf_derive_context_keys <- function(ikm, contexts, salt = NULL,
 #'
 #' A step of the seckdf_native implementation. Called by \code{morie_seckdf_hkdf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
@@ -213,7 +212,6 @@ derive_context_keys <- function(ikm, contexts, salt = NULL,
 #' A step of the seckdf_native implementation. Called by \code{derive_context_keys},
 #' \code{expand}, \code{extract} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return Nothing; this branch always raises.
@@ -230,7 +228,6 @@ derive_context_keys <- function(ikm, contexts, salt = NULL,
 #'
 #' A step of the seckdf_native implementation. Called by \code{hkdf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.

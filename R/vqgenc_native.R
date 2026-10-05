@@ -59,7 +59,6 @@
 #' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode},
 #' \code{.vqgenc_quantize}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
@@ -103,7 +102,6 @@
 #' A step of the vqgenc_native implementation. Called by \code{.vqgenc_codebook_loss},
 #' \code{.vqgenc_commitment_loss}, \code{.vqgenc_straight_through}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{nrow}.
 #' @return Nothing; this branch always raises.
@@ -138,7 +136,6 @@
 #'
 #' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vectors Passed to \code{.vqgenc_as_matrix}.
 #' @param codebook Passed to \code{.vqgenc_as_matrix}.
@@ -194,7 +191,6 @@
 #'
 #' A step of the vqgenc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param encoder_output Passed to \code{.vqgenc_as_vector}.
 #' @param quantized Passed to \code{.vqgenc_as_vector}.
@@ -222,7 +218,6 @@
 #'
 #' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param encoder_output Passed to \code{.vqgenc_as_vector}.
 #' @param quantized Passed to \code{.vqgenc_as_vector}.
@@ -249,7 +244,6 @@
 #'
 #' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param encoder_output Passed to \code{.vqgenc_as_vector}.
 #' @param quantized Passed to \code{.vqgenc_as_vector}.
@@ -283,7 +277,6 @@
 #'
 #' A step of the vqgenc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param height Coerced to integer by the body, with \code{as.integer}.
 #' @param width Coerced to integer by the body, with \code{as.integer}.
@@ -318,7 +311,6 @@
 #'
 #' A step of the vqgenc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vectors Passed to \code{.vqgenc_quantize}.
 #' @param codebook Passed to \code{.vqgenc_quantize}.
@@ -368,7 +360,6 @@
 #'
 #' A step of the vqgenc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

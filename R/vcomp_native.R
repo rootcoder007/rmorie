@@ -27,7 +27,6 @@
 #'
 #' A step of the vcomp_native implementation. Called by \code{morie_vcomp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{<=}.
 #' @param d1 Passed to \code{.vcomp_f_cdf}.
@@ -46,7 +45,6 @@
 #'
 #' A step of the vcomp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{morie_ranova}.
 #' @param group Passed to \code{morie_ranova}.
@@ -111,7 +109,6 @@ variance_components <- morie_vcomp
 #'
 #' A step of the vcomp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

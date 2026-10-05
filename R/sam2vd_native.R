@@ -67,7 +67,6 @@
 #' \code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate},
 #' \code{morie_sam2vd_push_memory}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
@@ -88,7 +87,6 @@
 #'
 #' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_recent Coerced to integer by the body, with \code{as.integer}. Defaults to \code{7}.
 #' @param m_prompted Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
@@ -118,7 +116,6 @@ morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
 #'
 #' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bank A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.
 #' @param frame_index Coerced to integer by the body, with \code{as.integer}.
@@ -172,7 +169,6 @@ morie_sam2vd_push_memory <- function(bank, frame_index, features,
 #'
 #' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param entry A list; the body reads \code{$features}, \code{$frame}, \code{$prompted} from it.
 #' @param current_frame Coerced to integer by the body, with \code{as.integer}.
@@ -216,7 +212,6 @@ morie_sam2vd_temporal_embedding <- function(entry, current_frame,
 #'
 #' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_propagate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param frame_features Passed to \code{.sam2vd_to_num}.
 #' @param bank A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.
@@ -296,7 +291,6 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
 #'
 #' A step of the sam2vd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param frames A vector; its length is taken and its elements indexed.
 #' @param encoder Accepted by the signature and not used anywhere in the body.
@@ -352,7 +346,6 @@ morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
 #'
 #' A step of the sam2vd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

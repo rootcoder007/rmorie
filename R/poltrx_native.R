@@ -250,7 +250,6 @@ poltrx_gamma <- function(e, shape) {
 #'
 #' A step of the poltrx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param key Compared against \code{"()"}.
 #' @return The value of \code{as.integer}.

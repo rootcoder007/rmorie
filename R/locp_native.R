@@ -11,7 +11,6 @@
 #'
 #' A step of the locp_native implementation. Called by \code{morie_locp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param name One of \code{"epanechnikov"}, \code{"gaussian"}, \code{"tricube"}.
 #' @param t A vector; its length is taken and its elements indexed.

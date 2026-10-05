@@ -14,7 +14,6 @@
 #'
 #' A step of the smcopt_native implementation. Called by \code{smcopt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_steps A count; the body uses it as \code{seq_len(...)}.
 #' @param phi_max Numeric; combined arithmetically in the body. Defaults to \code{50}.
@@ -50,7 +49,6 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
 #'
 #' A step of the smcopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param objective The body requires: smcopt: the objective was never evaluated.
 #' @param initial See Usage.
@@ -120,7 +118,6 @@ smcopt <- function(objective, initial, n_particles = 200, n_steps = 30,
 #'
 #' A step of the smcopt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

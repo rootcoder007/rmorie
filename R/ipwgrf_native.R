@@ -36,7 +36,6 @@
 #'
 #' A step of the ipwgrf_native implementation. Called by \code{.ipwgrf_forest_nuisances}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param V Numeric; combined arithmetically in the body.
@@ -55,7 +54,6 @@
 #'
 #' A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param W A vector; indexed elementwise.
@@ -121,7 +119,6 @@
 #'
 #' A step of the ipwgrf_native implementation. Called by \code{morie_ipwgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param W A vector; indexed elementwise.
@@ -158,7 +155,6 @@
 #'
 #' A step of the ipwgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Coerced to numeric by the body, with \code{as.numeric}.
@@ -257,7 +253,6 @@ morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
 #'
 #' A step of the ipwgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -11,7 +11,6 @@
 #'
 #' A step of the netcms_native implementation. Called by \code{.netcms_lasso}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{abs}.
 #' @param t Numeric; combined arithmetically in the body.
@@ -23,7 +22,6 @@
 #'
 #' A step of the netcms_native implementation. Called by \code{morie_netcms}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param V A matrix; indexed by row and column.
 #' @param s12 A vector; its length is taken and its elements indexed.

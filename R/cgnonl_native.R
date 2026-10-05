@@ -16,7 +16,6 @@
 #' \code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves},
 #' \code{beta_polak_ribiere} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -33,7 +32,6 @@
 #'
 #' A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g_new Passed to \code{.cgnonl_dot}.
 #' @param g_old Passed to \code{.cgnonl_dot}.
@@ -53,7 +51,6 @@ beta_fletcher_reeves <- function(g_new, g_old) {
 #'
 #' A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g_new Numeric; combined arithmetically in the body.
 #' @param g_old Numeric; combined arithmetically in the body.
@@ -76,7 +73,6 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #'
 #' A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rule One of \code{"fletcher-reeves"}, \code{"polak-ribiere"}, \code{"polak-ribiere-plus"}.
 #' @param g_new Passed to \code{beta_fletcher_reeves}.
@@ -95,7 +91,6 @@ beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #'
 #' A step of the cgnonl_native implementation. Called by \code{line_search_fr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ta Numeric; passed to \code{max}.
 #' @param fa Numeric; combined arithmetically in the body.
@@ -126,7 +121,6 @@ cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 #'
 #' A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param grad Accepted by the signature and not used anywhere in the body.
@@ -239,7 +233,6 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #'
 #' A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Accepted by the signature and not used anywhere in the body.
 #' @param p Passed to \code{.cgnonl_dot}.
@@ -259,7 +252,6 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #'
 #' A step of the cgnonl_native implementation. Called by \code{morie_cgnonl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Passed to \code{line_search_fr}.
 #' @param grad Passed to \code{line_search_fr}.
@@ -385,7 +377,6 @@ cgnonl <- nonlinear_cg
 #'
 #' A step of the cgnonl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Passed to \code{nonlinear_cg}.
 #' @param grad Passed to \code{nonlinear_cg}.
@@ -419,7 +410,6 @@ morie_cgnonl <- function(f, grad, x0, beta = "fletcher-reeves",
 #'
 #' A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g_new Passed to \code{.cgnonl_dot}.
 #' @param g_old Passed to \code{.cgnonl_dot}.
@@ -436,7 +426,6 @@ cgnonl_beta_fletcher_reeves <- function(g_new, g_old) {
 #'
 #' A step of the cgnonl_native implementation. Called by \code{.cgnonl_beta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g_new Numeric; combined arithmetically in the body.
 #' @param g_old Numeric; combined arithmetically in the body.
@@ -457,7 +446,6 @@ cgnonl_beta_polak_ribiere <- function(g_new, g_old, plus = FALSE) {
 #'
 #' A step of the cgnonl_native implementation. Called by \code{cgnonl_line_search_fr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ta Numeric; passed to \code{max}.
 #' @param fa Numeric; combined arithmetically in the body.
@@ -488,7 +476,6 @@ cgnonl_cubic_interpolate <- function(ta, fa, da, tb, fb, db) {
 #'
 #' A step of the cgnonl_native implementation. Called by \code{cgnonl_nonlinear_cg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param grad Accepted by the signature and not used anywhere in the body.
@@ -599,7 +586,6 @@ cgnonl_line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #'
 #' A step of the cgnonl_native implementation. Called by \code{morie_cgnonl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Passed to \code{cgnonl_line_search_fr}.
 #' @param grad Passed to \code{cgnonl_line_search_fr}.

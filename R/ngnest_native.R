@@ -73,7 +73,6 @@
 #'
 #' A step of the ngnest_native implementation. Called by \code{.ngnest_ensemble_members}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{list}.
 #' @export
@@ -92,7 +91,6 @@
 #'
 #' A step of the ngnest_native implementation. Called by \code{morie_ngnest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
@@ -147,7 +145,6 @@
 #'
 #' A step of the ngnest_native implementation. Called by \code{morie_ngnest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param members A vector; its length is taken and its elements indexed.
 #' @param how Compared against \code{"median"}. Defaults to \code{"median"}.
@@ -180,7 +177,6 @@
 #'
 #' A step of the ngnest_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.ngnest_ensemble_members}.
 #' @param horizon Passed to \code{.ngnest_ensemble_members}.
@@ -249,7 +245,6 @@ morie_ngnest <- function(y, horizon,
 #'
 #' A step of the ngnest_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

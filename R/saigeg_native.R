@@ -94,7 +94,6 @@
 #' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null},
 #' \code{.saigeg_logit_irls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -118,7 +117,6 @@
 #' A step of the saigeg_native implementation. Called by \code{.saigeg_normal_pvalue},
 #' \code{.saigeg_saddlepoint_pvalue}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
@@ -135,7 +133,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{.saigeg_variance_ratio}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
@@ -158,7 +155,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
 #' @param n A count; the body uses it as \code{matrix(...)}.
@@ -204,7 +200,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -238,7 +233,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param X Passed to \code{.saigeg_design}.
@@ -262,7 +256,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Coerced to numeric by the body, with \code{as.numeric}.
@@ -296,7 +289,6 @@
 #' A step of the saigeg_native implementation. Called by
 #' \code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Coerced to numeric by the body, with \code{as.numeric}.
@@ -330,7 +322,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{.saigeg_saddlepoint_pvalue}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Numeric; combined arithmetically in the body.
 #' @param G Passed to \code{.saigeg_cgf}.
@@ -366,7 +357,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Passed to \code{.saigeg_cgf}.
@@ -442,7 +432,6 @@
 #'
 #' A step of the saigeg_native implementation. Called by \code{morie_saigeg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Coerced to numeric by the body, with \code{as.numeric}.
 #' @param variance Coerced to numeric by the body, with \code{as.numeric}.
@@ -470,7 +459,6 @@
 #'
 #' A step of the saigeg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores_full Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scores_naive Coerced to numeric by the body, with \code{as.numeric}.
@@ -499,7 +487,6 @@
 #'
 #' A step of the saigeg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -524,7 +511,6 @@
 #'
 #' A step of the saigeg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Passed to \code{.saigeg_score_statistic}.

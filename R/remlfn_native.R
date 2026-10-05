@@ -11,7 +11,6 @@
 #'
 #' A step of the remlfn_native implementation. Called by \code{.remlfn_ranova}, \code{morie_remlfn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param group A vector; its length is taken and its elements indexed.
@@ -44,7 +43,6 @@
 #'
 #' A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; passed to \code{mean}.
 #' @param group Passed to \code{.remlfn_groups}.
@@ -104,7 +102,6 @@
 #'
 #' A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gs A vector; its length is taken and its elements indexed.
 #' @param ns A vector; indexed elementwise.
@@ -137,7 +134,6 @@
 #'
 #' A step of the remlfn_native implementation. Called by \code{morie_remlfn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fn Accepted by the signature and not used anywhere in the body.
 #' @param x0 A vector; its length is taken and its elements indexed.
@@ -250,7 +246,6 @@
 #'
 #' A step of the remlfn_native implementation. Called by \code{morie_vcomp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param group A vector; its length is taken.
@@ -422,7 +417,6 @@ morie_reml_variance_components <- morie_remlfn
 #'
 #' A step of the remlfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

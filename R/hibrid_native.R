@@ -72,7 +72,6 @@
 #'
 #' A step of the hibrid_native implementation. Called by \code{morie_hibrid_hibrid_prediction}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -94,7 +93,6 @@
 #'
 #' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
@@ -129,7 +127,6 @@
 #' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at},
 #' \code{morie_hibrid_hibrid_prediction}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -156,7 +153,6 @@
 #'
 #' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
@@ -168,7 +164,6 @@
 #'
 #' A step of the hibrid_native implementation. Called by \code{morie_hibrid_hibrid_prediction}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param la Numeric; combined arithmetically in the body.
 #' @param ls Numeric; combined arithmetically in the body.
@@ -203,7 +198,6 @@
 #'
 #' A step of the hibrid_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p1_geno Passed to \code{.hibrid_rows}.
@@ -377,7 +371,6 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
 #'
 #' A step of the hibrid_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

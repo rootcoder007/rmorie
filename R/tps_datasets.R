@@ -150,7 +150,6 @@ MORIE_TPS_REGISTRY <- list(
 #' \code{.morie_tps_io_category_dir}, \code{morie_tps_list_formats},
 #' \code{morie_tps_load} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param name A vector; its length is taken.
 #' @return The value of \code{[[}.

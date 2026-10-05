@@ -41,7 +41,6 @@
 #' \code{morie_snpqc1_call_rates}, \code{morie_snpqc1_heterozygosity} and 5 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{G}, \code{n}, \code{m}.
@@ -66,7 +65,6 @@
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return A list with \code{per_snp}, \code{per_ind}.
@@ -89,7 +87,6 @@ morie_snpqc1_call_rates <- function(genotypes) {
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1},
 #' \code{morie_snpqc1_sex_check}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{out}, as built in the body.
@@ -119,7 +116,6 @@ morie_snpqc1_maf <- function(genotypes) {
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pvalue}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{lgamma}.
@@ -135,7 +131,6 @@ morie_snpqc1_maf <- function(genotypes) {
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_hom_minor Coerced to integer by the body, with \code{as.integer}.
 #' @param n_het Coerced to integer by the body, with \code{as.integer}.
@@ -209,7 +204,6 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pvalue}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -227,7 +221,6 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @return The value of \code{out}, as built in the body.
@@ -256,7 +249,6 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #'
 #' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x_genotypes Passed to \code{.snpqc1_check}.
 #' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -476,7 +468,6 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
 #'
 #' A step of the snpqc1_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{morie_snpqc1_ibd_moments}.
 #' @param correction Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.
@@ -615,7 +606,6 @@ morie_snpqc1_ld_prune <- function(genotypes, window = 50, step = 5, r2 = 0.2) {
 #'
 #' A step of the snpqc1_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @param phenotype Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -884,7 +874,6 @@ morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
 #'
 #' A step of the snpqc1_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

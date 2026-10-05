@@ -46,7 +46,6 @@
 #'
 #' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
@@ -67,7 +66,6 @@
 #'
 #' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return A matrix, from \code{matrix}.
@@ -89,7 +87,6 @@
 #'
 #' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param obj Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @param allow_one A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -108,7 +105,6 @@
 #'
 #' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param q Numeric; combined arithmetically in the body.
@@ -135,7 +131,6 @@
 #'
 #' A step of the mfovsm_native implementation. Called by \code{.mfovsm_ip_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param X A matrix; passed to \code{ncol}.
@@ -180,7 +175,6 @@
 #'
 #' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ak A vector; its length is taken.
 #' @param den Optional; may be \code{NULL}. Passed to \code{dens_of}.
@@ -262,7 +256,6 @@
 #'
 #' A step of the mfovsm_native implementation. Called by \code{morie_mfovsm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y A vector; its length is taken.
@@ -304,7 +297,6 @@
 #'
 #' A step of the mfovsm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.mfovsm_vec}.
 #' @param feature Passed to \code{.mfovsm_vec}.
@@ -449,7 +441,6 @@ mfovsm <- morie_mfovsm
 #'
 #' A step of the mfovsm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

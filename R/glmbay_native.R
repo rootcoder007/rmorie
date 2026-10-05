@@ -9,7 +9,6 @@
 #'
 #' A step of the glmbay_native implementation. Called by \code{morie_glmbay_bayesian_glm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}.
 #' @return Nothing; this branch always raises.
@@ -40,7 +39,6 @@
 #'
 #' A step of the glmbay_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -136,7 +134,6 @@ morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
 #'
 #' A step of the glmbay_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

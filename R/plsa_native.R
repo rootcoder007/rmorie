@@ -73,7 +73,6 @@
 #' A step of the plsa_native implementation. Called by \code{.plsa_e_step},
 #' \code{.plsa_log_likelihood}, \code{.plsa_m_step} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{N}, \code{D}, \code{V}.
@@ -95,7 +94,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{e_step}, \code{morie_plsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param Pz A vector; its length is taken.
@@ -129,7 +127,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{m_step}, \code{morie_plsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param post A matrix; indexed by row and column.
@@ -168,7 +165,6 @@
 #' A step of the plsa_native implementation. Called by \code{.plsa_log_likelihood},
 #' \code{joint_probability}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Pz A vector; its length is taken.
 #' @param Pd_z A matrix; indexed by row and column.
@@ -192,7 +188,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{.plsa_perplexity}, \code{morie_plsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param Pz Passed to \code{.plsa_joint_probability}.
@@ -212,7 +207,6 @@
 #'
 #' A step of the plsa_native implementation. Called by \code{probabilisticlsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
@@ -297,7 +291,6 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #'
 #' A step of the plsa_native implementation. Called by \code{perplexity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_check}.
 #' @param Pz Passed to \code{.plsa_log_likelihood}.
@@ -316,7 +309,6 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -339,7 +331,6 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{morie_plsa}.
 #' @param K Passed to \code{morie_plsa}.
@@ -364,7 +355,6 @@ plsa <- probabilisticlsa
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_e_step}.
 #' @param Pz Passed to \code{.plsa_e_step}.
@@ -384,7 +374,6 @@ e_step <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_e_step(n_dw, Pz, Pd_z, Pw_z)
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_m_step}.
 #' @param post Passed to \code{.plsa_m_step}.
@@ -415,7 +404,6 @@ log_likelihood <- function(n_dw, Pz, Pd_z, Pw_z) .plsa_log_likelihood(n_dw, Pz, 
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Pz Passed to \code{.plsa_joint_probability}.
 #' @param Pd_z Passed to \code{.plsa_joint_probability}.
@@ -431,7 +419,6 @@ joint_probability <- function(Pz, Pd_z, Pw_z) .plsa_joint_probability(Pz, Pd_z, 
 #'
 #' A step of the plsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_dw Passed to \code{.plsa_perplexity}.
 #' @param Pz Passed to \code{.plsa_perplexity}.

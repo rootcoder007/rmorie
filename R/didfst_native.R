@@ -487,7 +487,6 @@ did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #' A step of the didfst_native implementation. Called by \code{group_time_att},
 #' \code{panel_differences}, \code{placebo_did}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{M}, \code{n}, \code{T}.

@@ -61,7 +61,6 @@
 #' A step of the netsts_native implementation. Called by \code{.netsts_lstm_cell},
 #' \code{morie_netsts}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -78,7 +77,6 @@
 #'
 #' A step of the netsts_native implementation. Called by \code{.netsts_standardize}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @return A numeric value.
@@ -98,7 +96,6 @@
 #'
 #' A step of the netsts_native implementation. Called by \code{morie_netsts}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -115,7 +112,6 @@
 #'
 #' A step of the netsts_native implementation. Called by \code{morie_netsts}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -137,7 +133,6 @@
 #'
 #' A step of the netsts_native implementation. Called by \code{.netsts_lstm_run}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A vector; its length is taken.
@@ -173,7 +168,6 @@
 #'
 #' A step of the netsts_native implementation. Called by \code{morie_netsts}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A vector; its length is taken and its elements indexed.
 #' @param W Passed to \code{.netsts_lstm_cell}.
@@ -205,7 +199,6 @@
 #'
 #' A step of the netsts_native implementation. Called by \code{morie_netsts}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param forget_value Coerced to numeric by the body, with \code{as.numeric}.
 #' @param steps Coerced to integer by the body, with \code{as.integer}.
@@ -222,7 +215,6 @@
 #'
 #' A step of the netsts_native implementation. Called by \code{morie_netsts}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{z}, \code{mu}, \code{sd}.
@@ -266,7 +258,6 @@
 #'
 #' A step of the netsts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.netsts_vec}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.

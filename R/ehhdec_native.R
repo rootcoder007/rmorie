@@ -20,7 +20,6 @@
 #'
 #' A step of the ehhdec_native implementation. Called by \code{morie_ehhdec}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A matrix; indexed by row and column.
 #' @param core Numeric; passed to \code{max}.

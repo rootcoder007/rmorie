@@ -29,7 +29,6 @@
 #'
 #' A step of the clrnt_native implementation. Called by \code{fu_hepatocytes}, \code{fu_microsomes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_pd Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -43,7 +42,6 @@
 #'
 #' A step of the clrnt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_pd Passed to \code{.clrnt_binding_term}.
 #' @param protein Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
@@ -63,7 +61,6 @@ fu_microsomes <- function(log_pd, protein = 1.0) {
 #'
 #' A step of the clrnt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_pd Passed to \code{.clrnt_binding_term}.
 #' @param volume_ratio Coerced to numeric by the body, with \code{as.numeric}. Defaults
@@ -85,7 +82,6 @@ fu_hepatocytes <- function(log_pd, volume_ratio = 0.005) {
 #'
 #' A step of the clrnt_native implementation. Called by \code{clrnt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cl_plasma Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_plasma Coerced to numeric by the body, with \code{as.numeric}.
@@ -117,7 +113,6 @@ blood_from_plasma <- function(cl_plasma, fu_plasma,
 #'
 #' A step of the clrnt_native implementation. Called by \code{clrnt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param clint_in_vitro Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_incubation Coerced to numeric by the body, with \code{as.numeric}.
@@ -158,7 +153,6 @@ scale_to_liver <- function(clint_in_vitro, fu_incubation,
 #'
 #' A step of the clrnt_native implementation. Called by \code{clrnt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cl_h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_blood Coerced to numeric by the body, with \code{as.numeric}.
@@ -199,7 +193,6 @@ observed_clint_u <- function(cl_h, fu_blood, species = "human",
 #'
 #' A step of the clrnt_native implementation. Called by \code{clrnt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param predicted Coerced to numeric by the body, with \code{as.numeric}.
 #' @param observed Coerced to numeric by the body, with \code{as.numeric}.
@@ -234,7 +227,6 @@ prediction_accuracy <- function(predicted, observed, fold = 2.0) {
 #'
 #' A step of the clrnt_native implementation. Called by \code{morie_clrnt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param clint_in_vitro A vector; its length is taken.
 #' @param cl_h Passed to \code{spread}.
@@ -354,7 +346,6 @@ clearance_intrinsic <- clrnt
 #'
 #' A step of the clrnt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param clint_in_vitro Passed to \code{clrnt}.
 #' @param cl_h Passed to \code{clrnt}.
@@ -398,7 +389,6 @@ morie_clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,
 #'
 #' A step of the clrnt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

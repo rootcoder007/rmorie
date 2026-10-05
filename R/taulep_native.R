@@ -10,7 +10,6 @@
 #'
 #' A step of the taulep_native implementation. Called by \code{morie_taulep}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param lam Passed to \code{<=}.

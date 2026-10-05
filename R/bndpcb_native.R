@@ -9,7 +9,6 @@
 #'
 #' A step of the bndpcb_native implementation. Called by \code{morie_bet_proof_interval}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
@@ -36,7 +35,6 @@ morie_truncated_normal_interval <- function(x, level = 0.95,
 #'
 #' A step of the bndpcb_native implementation. Called by \code{morie_bet_violation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
@@ -92,7 +90,6 @@ morie_coverage_by_region <- function(theta, level = 0.95, lower_bound = 0,
 #'
 #' A step of the bndpcb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Passed to \code{morie_coverage_by_region}.
 #' @param level Passed to \code{morie_coverage_by_region}. Defaults to \code{0.95}.
@@ -136,7 +133,6 @@ morie_bet_violation <- function(theta, level = 0.95, lower_bound = 0,
 #'
 #' A step of the bndpcb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{morie_truncated_normal_interval}.
 #' @param level Passed to \code{morie_truncated_normal_interval}. Defaults to \code{0.95}.

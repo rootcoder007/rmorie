@@ -15,7 +15,6 @@
 #'
 #' A step of the lsa_native implementation. Called by \code{lsa_decompose}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A list with \code{T}, \code{S}, \code{Dt}.
@@ -34,7 +33,6 @@
 #'
 #' A step of the lsa_native implementation. Called by \code{lsa_decompose}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{apply}.
 #' @param how One of \code{"raw"}, \code{"tfidf"}. Defaults to \code{"log_entropy"}.
@@ -81,7 +79,6 @@ term_weighting <- function(X, how = "log_entropy") {
 #'
 #' A step of the lsa_native implementation. Called by \code{morie_lsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{term_weighting}.
 #' @param k_dim Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -119,7 +116,6 @@ lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
 #'
 #' A step of the lsa_native implementation. Called by \code{Singsd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model A list; the body reads \code{$D}, \code{$S}, \code{$T} from it.
 #' @return The value of \code{out}, as built in the body.
@@ -152,7 +148,6 @@ reconstruct <- function(model) {
 #'
 #' A step of the lsa_native implementation. Called by \code{morie_lsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Coerced to numeric by the body, with \code{as.numeric}.
 #' @param model A list; the body reads \code{$S}, \code{$T} from it.
@@ -185,7 +180,6 @@ fold_in <- function(query, model) {
 #'
 #' A step of the lsa_native implementation. Called by \code{morie_lsa}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q_hat A vector; indexed elementwise.
 #' @param model A list; the body reads \code{$D}, \code{$S} from it.
@@ -230,7 +224,6 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
 #'
 #' A step of the lsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -258,7 +251,6 @@ lsa <- lsa_decompose
 #'
 #' A step of the lsa_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{lsa_decompose}.
 #' @param k_dim Passed to \code{lsa_decompose}.

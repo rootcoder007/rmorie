@@ -51,7 +51,6 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_loss},
 #' \code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dist Passed to \code{\%in\%}.
 #' @return One of two values, depending on the branch taken.
@@ -71,7 +70,6 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss},
 #' \code{morie_surxgb_ddpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{abs}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
@@ -101,7 +99,6 @@ morie_surxgb_pdf <- function(z, dist = "normal") {
 #' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss},
 #' \code{morie_surxgb_ddpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
@@ -134,7 +131,6 @@ morie_surxgb_cdf <- function(z, dist = "normal") {
 #'
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Passed to \code{morie_surxgb_pdf}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
@@ -162,7 +158,6 @@ morie_surxgb_dpdf <- function(z, dist = "normal") {
 #'
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Passed to \code{morie_surxgb_pdf}.
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
@@ -193,7 +188,6 @@ morie_surxgb_ddpdf <- function(z, dist = "normal") {
 #' A step of the surxgb_native implementation. Called by
 #' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Numeric; passed to \code{log}.
 #' @param u Numeric; combined arithmetically in the body.
@@ -215,7 +209,6 @@ morie_surxgb_ddpdf <- function(z, dist = "normal") {
 #' A step of the surxgb_native implementation. Called by
 #' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_boost}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_lower Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_upper Coerced to numeric by the body, with \code{as.numeric}.
@@ -263,7 +256,6 @@ morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma = 1.0,
 #'
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_lower Passed to \code{morie_surxgb_aft_loss}.
 #' @param y_upper Passed to \code{morie_surxgb_aft_loss}.
@@ -333,7 +325,6 @@ morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
 #'
 #' A step of the surxgb_native implementation. Called by \code{.surxgb_build}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param G Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H Numeric; combined arithmetically in the body.
@@ -355,7 +346,6 @@ morie_surxgb_leaf_weight <- function(G, H, lam = 1.0) {
 #'
 #' A step of the surxgb_native implementation. Called by \code{.surxgb_build}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param GL Numeric; combined arithmetically in the body.
 #' @param HL Numeric; combined arithmetically in the body.
@@ -379,7 +369,6 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
 #'
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param g A vector; indexed elementwise.
@@ -452,7 +441,6 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost},
 #' \code{morie_surxgb_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$cut}, \code{$leaf}, \code{$left},
 #' \code{$right}, \code{$variable}, \code{$weight} from it.
@@ -470,7 +458,6 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
 #'
 #' A step of the surxgb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y_lower A vector; its length is taken.
@@ -569,7 +556,6 @@ morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds = 50, eta = 0.1,
 #'
 #' A step of the surxgb_native implementation. Called by \code{morie_surxgb_concordance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$base_score}, \code{$eta}, \code{$trees} from it.
 #' @param X A matrix; indexed by row and column.
@@ -613,7 +599,6 @@ morie_surxgb_concordance <- function(fit, X, times, events) {
 #'
 #' A step of the surxgb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

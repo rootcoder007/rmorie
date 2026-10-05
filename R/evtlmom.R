@@ -4,7 +4,6 @@
 #'
 #' A step of the evtlmom implementation. Called by \code{Evtlmom}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param k Numeric; combined arithmetically in the body.

@@ -18,7 +18,6 @@
 #' \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration},
 #' \code{morie_qrntcq_quarantine_efficacy} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param shape Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.83}.
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.86}.
@@ -56,7 +55,6 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #'
 #' A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_quarantine_efficacy}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ts A vector; its length is taken and its elements indexed.
 #' @param ys A vector; indexed elementwise.
@@ -88,7 +86,6 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #' \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration},
 #' \code{morie_qrntcq_relative_utility}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.Q Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t.R Coerced to numeric by the body, with \code{as.numeric}.
@@ -129,7 +126,6 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.Q Passed to \code{morie_qrntcq_quarantine_efficacy}.
 #' @param t.T Carried through into a list the body builds.
@@ -170,7 +166,6 @@ morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param efficacy Coerced to numeric by the body, with \code{as.numeric}.
 #' @param days.in.quarantine Coerced to numeric by the body, with \code{as.numeric}.
@@ -189,7 +184,6 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.R.a Numeric; combined arithmetically in the body.
 #' @param t.R.b Numeric; combined arithmetically in the body.
@@ -225,7 +219,6 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
 #'
 #' A step of the qrntcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.

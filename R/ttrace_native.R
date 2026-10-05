@@ -21,7 +21,6 @@
 #'
 #' A step of the ttrace_native implementation. Called by \code{negbinom_offspring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param shape Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scale Passed to \code{.gamma_draw}.
@@ -50,7 +49,6 @@
 #'
 #' A step of the ttrace_native implementation. Called by \code{negbinom_offspring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}.
 #' @param e Passed to \code{.ghc_norm}.
@@ -78,7 +76,6 @@
 #'
 #' A step of the ttrace_native implementation. Called by \code{simulate_outbreak}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dispersion Coerced to numeric by the body, with \code{as.numeric}.
@@ -110,7 +107,6 @@ negbinom_offspring <- function(R0, dispersion, e) {
 #'
 #' A step of the ttrace_native implementation. Called by \code{simulate_outbreak}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mean Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sd Coerced to numeric by the body, with \code{as.numeric}.
@@ -137,7 +133,6 @@ serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
 #'
 #' A step of the ttrace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R0 Passed to \code{negbinom_offspring}. Defaults to \code{2.5}.
 #' @param dispersion Passed to \code{negbinom_offspring}. Defaults to \code{0.16}.
@@ -241,7 +236,6 @@ simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
 #'
 #' A step of the ttrace_native implementation. Called by \code{morie_ttrace}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reps Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
@@ -286,7 +280,6 @@ probability_of_control <- function(reps = 200, seed = 0, ...) {
 #'
 #' A step of the ttrace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param si_mean Coerced to numeric by the body, with \code{as.numeric}.
@@ -337,7 +330,6 @@ effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
 #'
 #' A step of the ttrace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -363,7 +355,6 @@ contact_tracing_yield <- probability_of_control
 #'
 #' A step of the ttrace_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param reps Passed to \code{probability_of_control}. Defaults to \code{200}.
 #' @param seed Passed to \code{probability_of_control}. Defaults to \code{0}.

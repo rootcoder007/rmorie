@@ -8,7 +8,6 @@
 #'
 #' A step of the blastp_native implementation. Called by \code{morie_blastp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; its length is taken and its elements indexed.

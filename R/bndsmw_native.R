@@ -12,7 +12,6 @@
 #'
 #' A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param n_levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
@@ -64,7 +63,6 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
 #' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic},
 #' \code{morie_gms_critical_value}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A matrix; passed to \code{as.matrix}.
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
@@ -102,7 +100,6 @@ morie_weighted_moments <- function(m, g) {
 #' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic},
 #' \code{morie_gms_critical_value}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param std_moments Coerced to numeric by the body, with \code{as.numeric}.
 #' @param form One of \code{"max"}, \code{"sum"}. Defaults to \code{"sum"}.
@@ -131,7 +128,6 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #'
 #' A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Passed to \code{morie_weighted_moments}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
@@ -177,7 +173,6 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
 #'
 #' A step of the bndsmw_native implementation. Called by \code{morie_confidence_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A matrix; passed to \code{as.matrix}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
@@ -239,7 +234,6 @@ morie_gms_critical_value <- function(m, instruments, form = "sum",
 #'
 #' A step of the bndsmw_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param moment_fn Accepted by the signature and not used anywhere in the body.
 #' @param theta_grid See Usage.

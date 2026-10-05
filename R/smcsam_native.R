@@ -23,7 +23,6 @@
 #' A step of the smcsam_native implementation. Called by \code{Drvst},
 #' \code{morie_att_weights}, \code{smcsam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights Numeric; passed to \code{sum}.
 #' @return A numeric value.
@@ -69,7 +68,6 @@ ess <- function(weights) {
 #' A step of the smcsam_native implementation. Called by \code{morie_btdbl},
 #' \code{morie_btiseq}, \code{smcsam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights Numeric; passed to \code{sum}.
 #' @param rng Passed to \code{.ghc_unif}.
@@ -137,7 +135,6 @@ resample <- function(weights, rng, scheme = "systematic") {
 #'
 #' A step of the smcsam_native implementation. Called by \code{smcsam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_steps Coerced to integer by the body, with \code{as.integer}.
 #' @param kind One of \code{"geometric"}, \code{"power"}, \code{"prior"}. Defaults to
@@ -206,7 +203,6 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 #'
 #' A step of the smcsam_native implementation. Called by \code{smcsam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scale Passed to \code{.smcsam_rwk}. Defaults to \code{1}.
 #' @param n_moves Passed to \code{.smcsam_rwk}. Defaults to \code{1L}.
@@ -223,7 +219,6 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #'
 #' A step of the smcsam_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_gamma Accepted by the signature and not used anywhere in the body.
 #' @param initial Accepted by the signature and not used anywhere in the body.
@@ -355,7 +350,6 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
 #'
 #' A step of the smcsam_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

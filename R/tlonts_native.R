@@ -66,7 +66,6 @@
 #'
 #' A step of the tlonts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param series Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Numeric; passed to \code{min}.
@@ -102,7 +101,6 @@ lag_summary <- function(series, t, lags = 2) {
 #'
 #' A step of the tlonts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nodes Coerced to integer by the body, with \code{as.integer}.
@@ -149,7 +147,6 @@ stochastic_intervention <- function(A, nodes, shift = NULL, prob = NULL) {
 #'
 #' A step of the tlonts_native implementation. Called by \code{online_tmle_series}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{variance}, \code{se}, \code{T}, \code{note}.
@@ -176,7 +173,6 @@ martingale_variance <- function(D) {
 #'
 #' A step of the tlonts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D Coerced to numeric by the body, with \code{as.numeric}.
 #' @param past Coerced to numeric by the body, with \code{as.numeric}.
@@ -211,7 +207,6 @@ martingale_check <- function(D, past, tol = 0.2) {
 #'
 #' A step of the tlonts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
@@ -278,7 +273,6 @@ online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
 #'
 #' A step of the tlonts_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

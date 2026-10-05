@@ -75,7 +75,6 @@
 #'
 #' A step of the sacrb_native implementation. Called by \code{.sacrb_tok}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -105,7 +104,6 @@
 #'
 #' A step of the sacrb_native implementation. Called by \code{.sacrb_tok}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @param lowercase A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -146,7 +144,6 @@
 #'
 #' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Passed to \code{.sacrb_tokenize_13a}.
 #' @param scheme One of \code{"13a"}, \code{"intl"}, \code{"none"}.
@@ -180,7 +177,6 @@
 #'
 #' A step of the sacrb_native implementation. Called by \code{.sacrb_modified_precision}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tokens A vector; its length is taken and its elements indexed.
 #' @param n Numeric; combined arithmetically in the body.
@@ -211,7 +207,6 @@
 #'
 #' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cand_tokens Passed to \code{.sacrb_ngram_counts}.
 #' @param refs_tokens See Usage.
@@ -256,7 +251,6 @@
 #'
 #' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
@@ -278,7 +272,6 @@
 #'
 #' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param clen Numeric; combined arithmetically in the body.
 #' @param rlens A vector; its length is taken and its elements indexed.
@@ -298,7 +291,6 @@
 #'
 #' A step of the sacrb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param candidates Coerced to character by the body, with \code{as.character}.
 #' @param references Iterated over elementwise, with \code{lapply}.
@@ -397,7 +389,6 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 #'
 #' A step of the sacrb_native implementation. Called by \code{morie_sacrb_bleu}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tokenizer Coerced to character by the body, with \code{as.character}. Defaults
 #' to \code{"13a"}.
@@ -424,7 +415,6 @@ morie_sacrb_bleu <- function(candidates, references, max_n = 4L,
 #'
 #' A step of the sacrb_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

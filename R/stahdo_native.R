@@ -31,7 +31,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_mad},
 #' \code{.stahdo_outlyingness}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -57,7 +56,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @param consistent A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -83,7 +81,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness},
 #' \code{.stahdo_stahel_donoho}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{M}, \code{n}, \code{p}.
@@ -118,7 +115,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_subsample_dirs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param p A count; the body uses it as \code{seq_len(...)}.
@@ -157,7 +153,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_subsample_dirs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows A matrix; passed to \code{nrow}.
 #' @param p Accepted by the signature and not used anywhere in the body.
@@ -219,7 +214,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; indexed by row and column.
 #' @param n Numeric; combined arithmetically in the body.
@@ -273,7 +267,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{.ghc_unif}.
 #' @param n_dirs Coerced to integer by the body, with \code{as.integer}.
@@ -298,7 +291,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_stahel_donoho}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.stahdo_prep}.
 #' @param directions Compared against \code{"subsample"}. Defaults to \code{"subsample"}.
@@ -353,7 +345,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_stahel_donoho}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Numeric; combined arithmetically in the body.
 #' @param cutoff Coerced to numeric by the body, with \code{as.numeric}.
@@ -368,7 +359,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_chi2_median}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param k Numeric; combined arithmetically in the body.
@@ -412,7 +402,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{.stahdo_stahel_donoho}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -438,7 +427,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. Called by \code{morie_stahdo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.stahdo_prep}.
 #' @param directions Passed to \code{.stahdo_outlyingness}. Defaults to \code{"subsample"}.
@@ -485,7 +473,6 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #'
 #' A step of the stahdo_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.stahdo_stahel_donoho}.
 #' @param directions Passed to \code{.stahdo_stahel_donoho}. Defaults to \code{"subsample"}.

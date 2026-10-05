@@ -47,7 +47,6 @@
 #' A step of the tdcvar_native implementation. Called by
 #' \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -65,7 +64,6 @@
 #' A step of the tdcvar_native implementation. Called by
 #' \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{M}, as built in the body.
@@ -101,7 +99,6 @@
 #'
 #' A step of the tdcvar_native implementation. Called by \code{morie_tdcvar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -131,7 +128,6 @@
 #'
 #' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -171,7 +167,6 @@
 #'
 #' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param beta A matrix; passed to \code{\%*\%}.
@@ -188,7 +183,6 @@
 #'
 #' A step of the tdcvar_native implementation. Called by \code{morie_tdcvar}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A_hist A vector; its length is taken and its elements indexed.
 #' @param L_hist A vector; indexed elementwise.
@@ -276,7 +270,6 @@
 #'
 #' A step of the tdcvar_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.tdcvar_vec}.
 #' @param A A list; the body checks with \code{is.list}.
@@ -418,7 +411,6 @@ morie_tdcvar <- function(y, A, L_t, time = NULL, contrast = "cumulative",
 #'
 #' A step of the tdcvar_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

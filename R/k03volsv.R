@@ -12,7 +12,6 @@
 #'
 #' A step of the k03volsv implementation. Called by \code{Volsv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -46,7 +45,6 @@
 #'
 #' A step of the k03volsv implementation. Called by \code{Volsv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param lo Numeric; combined arithmetically in the body.

@@ -19,7 +19,6 @@
 #'
 #' A step of the toptor_native implementation. Called by \code{topological_torsions}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_atoms A count; the body uses it as \code{seq_len(...)}.
 #' @param bonds See Usage.
@@ -44,7 +43,6 @@
 #'
 #' A step of the toptor_native implementation. Called by \code{topological_torsions}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_atoms A count; the body uses it as \code{rep(...)}.
 #' @param bonds See Usage.
@@ -108,7 +106,6 @@ torsion_similarity <- function(t1, t2) {
 #'
 #' A step of the toptor_native implementation. Called by \code{morie_toptor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param torsion_sets Iterated over elementwise, with \code{lapply}.
 #' @param activities Coerced to numeric by the body, with \code{as.numeric}.
@@ -233,7 +230,6 @@ morie_topological_torsion <- morie_toptor
 #'
 #' A step of the toptor_native implementation. Called by \code{morie_topological_torsions}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; indexed elementwise.

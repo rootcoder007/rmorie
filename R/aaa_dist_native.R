@@ -107,7 +107,6 @@
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
@@ -176,7 +175,6 @@
 #'
 #' A step of the dist_native implementation. Called by \code{.morie_betainc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -220,7 +218,6 @@
 #' A step of the dist_native implementation. Called by \code{Pbeta}, \code{Pbinom},
 #' \code{Pf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -250,7 +247,6 @@
 #' A step of the dist_native implementation. Called by \code{Qbeta}, \code{Qf},
 #' \code{Qgamma} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cdf Accepted by the signature and not used anywhere in the body.
 #' @param p Numeric; combined arithmetically in the body.
@@ -292,7 +288,6 @@
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param mean Numeric; combined arithmetically in the body. Defaults to \code{0}.
@@ -315,7 +310,6 @@ Dnorm <- function(x, mean = 0, sd = 1, log = FALSE) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Numeric; combined arithmetically in the body.
 #' @param mean Numeric; combined arithmetically in the body. Defaults to \code{0}.
@@ -343,7 +337,6 @@ Pnorm <- function(q, mean = 0, sd = 1, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Rnorm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @param mean Numeric; combined arithmetically in the body. Defaults to \code{0}.
@@ -389,7 +382,6 @@ Rnorm <- function(n, mean = 0, sd = 1, seed = 0, stream = 0) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param rate Numeric; passed to \code{log}. Defaults to \code{1}.
@@ -410,7 +402,6 @@ Dexp <- function(x, rate = 1, log = FALSE) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Numeric; combined arithmetically in the body.
 #' @param rate Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -431,7 +422,6 @@ Pexp <- function(q, rate = 1, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Rexp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @param rate Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -450,7 +440,6 @@ Qexp <- function(p, rate = 1) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{.morie_random_uniform}.
 #' @param rate Passed to \code{Qexp}. Defaults to \code{1}.
@@ -472,7 +461,6 @@ Rexp <- function(n, rate = 1, seed = 0, stream = 0) {
 #'
 #' A step of the dist_native implementation. Called by \code{Dchisq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{log}.
 #' @param shape Numeric; combined arithmetically in the body.
@@ -496,7 +484,6 @@ Dgamma <- function(x, shape, rate = 1, log = FALSE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Pchisq}, \code{Qgamma}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Iterated over elementwise, with \code{vapply}.
 #' @param shape Passed to \code{.morie_gammainc_p}.
@@ -524,7 +511,6 @@ Pgamma <- function(q, shape, rate = 1, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Qchisq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
 #' @param shape Passed to \code{Pgamma}.
@@ -548,7 +534,6 @@ Qgamma <- function(p, shape, rate = 1) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{Dgamma}.
 #' @param df Numeric; combined arithmetically in the body.
@@ -563,7 +548,6 @@ Dchisq <- function(x, df, log = FALSE) Dgamma(x, df / 2, 0.5, log)
 #'
 #' A step of the dist_native implementation. Called by \code{.rsconsistency}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Passed to \code{Pgamma}.
 #' @param df Numeric; combined arithmetically in the body.
@@ -580,7 +564,6 @@ Pchisq <- function(q, df, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. Called by \code{.rsconsistency}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{Qgamma}.
 #' @param df Numeric; combined arithmetically in the body.
@@ -598,7 +581,6 @@ Qchisq <- function(p, df) Qgamma(p, df / 2, 0.5)
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{round}.
 #' @param lambda Numeric; passed to \code{log}.
@@ -625,7 +607,6 @@ Dpois <- function(x, lambda, log = FALSE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Qpois}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Iterated over elementwise, with \code{vapply}.
 #' @param lambda Passed to \code{.morie_gammainc_p}.
@@ -648,7 +629,6 @@ Ppois <- function(q, lambda, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
 #' @param lambda Passed to \code{Ppois}.
@@ -671,7 +651,6 @@ Qpois <- function(p, lambda) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{round}.
 #' @param size Numeric; combined arithmetically in the body.
@@ -705,7 +684,6 @@ Dbinom <- function(x, size, prob, log = FALSE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Qbinom}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Iterated over elementwise, with \code{vapply}.
 #' @param size Numeric; combined arithmetically in the body.
@@ -735,7 +713,6 @@ Pbinom <- function(q, size, prob, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
 #' @param size Passed to \code{<}.
@@ -760,7 +737,6 @@ Qbinom <- function(p, size, prob) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{log}.
 #' @param shape1 Numeric; combined arithmetically in the body.
@@ -784,7 +760,6 @@ Dbeta <- function(x, shape1, shape2, log = FALSE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Qbeta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Iterated over elementwise, with \code{vapply}.
 #' @param shape1 Passed to \code{.morie_betainc}.
@@ -804,7 +779,6 @@ Pbeta <- function(q, shape1, shape2, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
 #' @param shape1 Passed to \code{Pbeta}.
@@ -829,7 +803,6 @@ Qbeta <- function(p, shape1, shape2) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param df Numeric; combined arithmetically in the body.
@@ -850,7 +823,6 @@ Dt <- function(x, df, log = FALSE) {
 #'
 #' A step of the dist_native implementation. Called by \code{Qt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Iterated over elementwise, with \code{vapply}.
 #' @param df Numeric; combined arithmetically in the body.
@@ -903,7 +875,6 @@ Qt <- function(p, df) {
 #'
 #' A step of the dist_native implementation. Called by \code{Qf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Iterated over elementwise, with \code{vapply}.
 #' @param df1 Numeric; combined arithmetically in the body.
@@ -929,7 +900,6 @@ Pf <- function(q, df1, df2, lower_tail = TRUE) {
 #'
 #' A step of the dist_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Iterated over elementwise, with \code{vapply}.
 #' @param df1 Passed to \code{Pf}.

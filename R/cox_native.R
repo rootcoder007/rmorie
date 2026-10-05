@@ -15,7 +15,6 @@
 #' \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard} and 8 others
 #' in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Coerced to numeric by the body, with \code{as.numeric}.
 #' @param event Coerced to numeric by the body, with \code{as.numeric}.
@@ -116,7 +115,6 @@
 #' \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard},
 #' \code{morie_cox_breslow_step} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e A vector; indexed elementwise.
@@ -171,7 +169,6 @@
 #' \code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e Passed to \code{==}.
@@ -200,7 +197,6 @@
 #' \code{morie_censoring_at_risk_weight}, \code{morie_competing_risks_fg},
 #' \code{morie_cox_schoenfeld_residuals}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; indexed elementwise.
 #' @param e Passed to \code{==}.
@@ -225,7 +221,6 @@
 #' A step of the cox_native implementation. Called by
 #' \code{morie_breslow_tie_correction}, \code{morie_efron_tie_correction}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e Numeric; passed to \code{sum}.

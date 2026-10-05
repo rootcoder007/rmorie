@@ -79,7 +79,6 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 #'
 #' A step of the tail2_t02 implementation. Called by \code{CttAlphaMax}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param cols A vector; its length is taken.
@@ -107,7 +106,6 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 #'
 #' A step of the tail2_t02 implementation. Called by \code{CttAlpha}, \code{CttAlphaMax}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @return The value of \code{X}, as built in the body.
@@ -196,7 +194,6 @@ CttAlphaMax <- function(X) {
 #'
 #' A step of the tail2_t02 implementation. Called by \code{QnScale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -338,7 +335,6 @@ BrayCurt <- function(x, y, close = TRUE) {
 #'
 #' A step of the tail2_t02 implementation. Called by \code{FDiverg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param key Passed to \code{switch}.
 #' @return The value of \code{switch}.
@@ -362,7 +358,6 @@ BrayCurt <- function(x, y, close = TRUE) {
 #'
 #' A step of the tail2_t02 implementation. Called by \code{FDiverg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param key Passed to \code{switch}.
 #' @return The value of \code{switch}.

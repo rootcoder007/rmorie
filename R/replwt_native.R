@@ -53,7 +53,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @param strata Optional; may be \code{NULL}. Coerced to character by the body, with
@@ -143,7 +142,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. Called by \code{.replwt_brr_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{H}, as built in the body.
@@ -165,7 +163,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d A list; the body reads \code{$psu_order}, \code{$psu_units}, \code{$weights} from it.
 #' @param values A vector; indexed elementwise.
@@ -184,7 +181,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. Called by \code{morie_replwt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d A list; the body reads \code{$n}, \code{$psu_order}, \code{$psu_units},
 #' \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
@@ -249,7 +245,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. Called by \code{morie_replwt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order},
 #' \code{$stratum_psus}, \code{$weights} from it.
@@ -314,7 +309,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. Called by \code{morie_replwt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order},
 #' \code{$stratum_psus}, \code{$weights} from it.
@@ -365,7 +359,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param estimator Accepted by the signature and not used anywhere in the body.
 #' @param d A list; the body reads \code{$weights} from it.
@@ -402,7 +395,6 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #'
 #' A step of the replwt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Passed to \code{.replwt_jackknife_weights}.
 #' @param method One of \code{"brr"}, \code{"fay"}, \code{"jk1"}, \code{"jkn"}. Defaults

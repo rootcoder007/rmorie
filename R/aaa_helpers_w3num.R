@@ -26,7 +26,6 @@
 #' A step of the helpers_w3num implementation. Called by \code{.alfrf2_centre},
 #' \code{.baysmplr_build_tree}, \code{.blinkg_corr} and 101 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v See Usage.
 #' @return A numeric value.
@@ -52,7 +51,6 @@
 #' A step of the helpers_w3num implementation. Called by \code{.baysmplr_build_tree},
 #' \code{.chemsc_angle}, \code{.hyper2_elliptical} and 21 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; indexed elementwise.
@@ -80,7 +78,6 @@
 #' A step of the helpers_w3num implementation. Called by \code{morie_snpest},
 #' \code{morie_varqc1_logpdf}, \code{morie_varqc1_mixture}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
@@ -106,7 +103,6 @@
 #' A step of the helpers_w3num implementation. Called by \code{.w3_ols},
 #' \code{morie_cypin_fit}, \code{morie_hyper2} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A matrix; indexed by row and column.
 #' @return The value of \code{lo}, as built in the body.
@@ -145,7 +141,6 @@
 #' A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol},
 #' \code{.w3_ols}, \code{morie_cypin_fit} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lo A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -178,7 +173,6 @@
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_ols}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lo A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
@@ -201,7 +195,6 @@
 #' A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan},
 #' \code{morie_blinkg_select}, \code{morie_sdcfst}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param design A matrix; indexed by row and column.
@@ -246,7 +239,6 @@
 #' A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta},
 #' \code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -272,7 +264,6 @@
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_gammp}, \code{.w3_gammq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param x Numeric; passed to \code{log}.
@@ -384,7 +375,6 @@
 #'
 #' A step of the helpers_w3num implementation. Called by \code{morie_chemsc_smooth_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -420,7 +410,6 @@
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_betainc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -467,7 +456,6 @@
 #'
 #' A step of the helpers_w3num implementation. Called by \code{.w3_t_sf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -494,7 +482,6 @@
 #'
 #' A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Numeric; combined arithmetically in the body.
 #' @param df Numeric; combined arithmetically in the body.

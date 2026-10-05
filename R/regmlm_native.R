@@ -41,7 +41,6 @@ CV_SCHEMES <- c("kfold", "loo")
 #'
 #' A step of the regmlm_native implementation. Called by \code{level0_predictors}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @param n Accepted by the signature and not used anywhere in the body.
@@ -62,7 +61,6 @@ CV_SCHEMES <- c("kfold", "loo")
 #'
 #' A step of the regmlm_native implementation. Called by \code{level1_stack}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param k A count; the body uses it as \code{seq_len(...)}.
@@ -81,7 +79,6 @@ CV_SCHEMES <- c("kfold", "loo")
 #'
 #' A step of the regmlm_native implementation. Called by \code{test_variant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A matrix; passed to \code{crossprod}.
 #' @param cols A matrix; passed to \code{\%*\%}.
@@ -101,7 +98,6 @@ CV_SCHEMES <- c("kfold", "loo")
 #'
 #' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_markers Coerced to integer by the body, with \code{as.integer}.
 #' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -156,7 +152,6 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
 #' A step of the regmlm_native implementation. Called by \code{level0_predictors},
 #' \code{level1_stack}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -194,7 +189,6 @@ ridge_fit <- function(X, y, lam) {
 #'
 #' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param G A matrix; indexed by row and column.
 #' @param y A vector; its length is taken.
@@ -253,7 +247,6 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
 #'
 #' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param preds A vector; its length is taken.
 #' @param y A vector; its length is taken and its elements indexed.
@@ -306,7 +299,6 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 #'
 #' A step of the regmlm_native implementation. Called by \code{morie_regmlm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param preds A vector; indexed elementwise.
 #' @param meta Iterated over elementwise, with \code{sapply}.
@@ -357,7 +349,6 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
 #'
 #' A step of the regmlm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A vector; its length is taken.
 #' @param y A vector; its length is taken.
@@ -414,7 +405,6 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
 #'
 #' A step of the regmlm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param G A matrix; passed to \code{nrow}.
 #' @param y A vector; its length is taken.
@@ -467,7 +457,6 @@ whole_genome_regression <- morie_regmlm
 #'
 #' A step of the regmlm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

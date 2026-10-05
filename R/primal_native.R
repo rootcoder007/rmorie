@@ -39,7 +39,6 @@
 #'
 #' A step of the primal_native implementation. Called by \code{morie_tv_denoise_1d}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param K Accepted by the signature and not used anywhere in the body.
 #' @param Kt Accepted by the signature and not used anywhere in the body.
@@ -151,7 +150,6 @@ morie_primal <- function(K, Kt, prox_f_star, prox_g, x0, y0,
 #'
 #' A step of the primal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param signal Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -218,7 +216,6 @@ morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
 #'
 #' A step of the primal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

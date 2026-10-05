@@ -24,7 +24,6 @@
 #'
 #' A step of the explor_native implementation. Called by \code{explor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @param name Passed to \code{stop}.
@@ -46,7 +45,6 @@
 #'
 #' A step of the explor_native implementation. Called by \code{explor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A matrix; passed to \code{\%*\%}.
 #' @param x Coerced to vector by the body, with \code{as.vector}.
@@ -65,7 +63,6 @@
 #'
 #' A step of the explor_native implementation. Called by \code{explor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -84,7 +81,6 @@
 #'
 #' A step of the explor_native implementation. Called by \code{morie_explor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param states Passed to \code{.mat}.
 #' @param actions Passed to \code{.mat}.
@@ -287,7 +283,6 @@ explor <- function(states, actions, next_states, n_actions = NULL,
 #'
 #' A step of the explor_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -312,7 +307,6 @@ icm <- explor
 #'
 #' A step of the explor_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param states Passed to \code{explor}.
 #' @param actions Passed to \code{explor}.

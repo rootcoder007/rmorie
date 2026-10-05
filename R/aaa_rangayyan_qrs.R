@@ -13,7 +13,6 @@
 #' A step of the rangayyan_qrs implementation. Called by \code{QrsDeriv},
 #' \code{QrsDeriv1}, \code{QrsDeriv2} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{c}.
 #' @param k A count; the body uses it as \code{rep(...)}.
@@ -86,7 +85,6 @@
 #' A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl},
 #' \code{EdrSignal}, \code{HrvFreq} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param fs Numeric; combined arithmetically in the body.
@@ -177,7 +175,6 @@
 #'
 #' A step of the rangayyan_qrs implementation. Called by \code{.morie_qrs_chain}, \code{QrsDerivOp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -202,7 +199,6 @@
 #'
 #' A step of the rangayyan_qrs implementation. Called by \code{QrsDetect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.morie_qrs_ptbp}.
 #' @param fs Numeric; combined arithmetically in the body.
@@ -221,7 +217,6 @@
 #'
 #' A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
@@ -247,7 +242,6 @@
 #' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr},
 #' \code{CPulseFeat}, \code{DicNotch} and 29 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param least Passed to \code{<}. Defaults to \code{1L}.
@@ -271,7 +265,6 @@
 #' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr},
 #' \code{CPulseFeat}, \code{DicNotch} and 20 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fs A vector; its length is taken.
 #' @return The value of \code{fs}, as built in the body.
@@ -286,7 +279,6 @@
 #'
 #' A step of the rangayyan_qrs implementation. Called by \code{MotionArt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -305,7 +297,6 @@
 #'
 #' A step of the rangayyan_qrs implementation. Called by \code{CPulseFeat}, \code{EcgFeat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -336,7 +327,6 @@
 #' A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat},
 #' \code{PpgFeat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; indexed elementwise.
 #' @param lo Numeric; combined arithmetically in the body.
@@ -868,7 +858,6 @@ EcgFeat <- function(x, qrs, fs) {
 #'
 #' A step of the rangayyan_qrs implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param qrsdur Numeric; combined arithmetically in the body.
 #' @param stdev Coerced to numeric by the body, with \code{as.numeric}.

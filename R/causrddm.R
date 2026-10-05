@@ -20,7 +20,6 @@
 #'
 #' A step of the causrddm implementation. Called by \code{Rddmanip}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mp A vector; its length is taken.
 #' @param val Passed to \code{.t4_olsfit}.

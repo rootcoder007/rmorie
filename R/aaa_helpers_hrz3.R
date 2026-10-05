@@ -46,7 +46,6 @@ NULL
 #'
 #' A step of the helpers_hrz3 implementation. Called by \code{Hrznpiv}, \code{Hrztiku}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{z}, \code{w}.
@@ -68,7 +67,6 @@ NULL
 #' A step of the helpers_hrz3 implementation. Called by \code{.hrz3_fxw_grid},
 #' \code{Hrznpiv}, \code{Hrzplrq} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.

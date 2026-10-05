@@ -8,7 +8,6 @@
 #'
 #' A step of the motiff_native implementation. Called by \code{morie_motiff}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A matrix; indexed by row and column.
 #' @param n A count; the body uses it as \code{seq_len(...)}.

@@ -14,7 +14,6 @@ NULL
 #' A step of the b1_tmle implementation. Called by \code{.b1_logit}, \code{.b1_target},
 #' \code{Comptml} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{pmax}.
 #' @param lo Passed to \code{pmax}.
@@ -28,7 +27,6 @@ NULL
 #' A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat},
 #' \code{Tmlecde}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -46,7 +44,6 @@ NULL
 #' A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat},
 #' \code{Tmlecde}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
@@ -66,7 +63,6 @@ NULL
 #' A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot},
 #' \code{Tmleor} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y A vector; its length is taken.
 #' @param A Numeric; combined arithmetically in the body.
@@ -117,7 +113,6 @@ NULL
 #' A step of the b1_tmle implementation. Called by \code{Comptml}, \code{Tmleboot},
 #' \code{Tmleor} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y A vector; its length is taken.
 #' @param A Numeric; combined arithmetically in the body.

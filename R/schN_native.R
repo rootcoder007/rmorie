@@ -24,7 +24,6 @@
 #' A step of the schN_native implementation. Called by \code{cfconv},
 #' \code{forces_from_energy}, \code{invariance_error}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
@@ -44,7 +43,6 @@
 #'
 #' A step of the schN_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
@@ -62,7 +60,6 @@
 #'
 #' A step of the schN_native implementation. Called by \code{cfconv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu_min Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
@@ -93,7 +90,6 @@ gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
 #'
 #' A step of the schN_native implementation. Called by \code{cfconv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cutoff Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
@@ -113,7 +109,6 @@ cosine_cutoff <- function(r, cutoff = 5.0) {
 #'
 #' A step of the schN_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.schn_mat}.
 #' @param R Passed to \code{.schn_mat}.
@@ -158,7 +153,6 @@ cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
 #'
 #' A step of the schN_native implementation. Called by \code{invariance_error}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param energy_fn Accepted by the signature and not used anywhere in the body.
 #' @param R Passed to \code{.schn_mat}.
@@ -195,7 +189,6 @@ forces_from_energy <- function(energy_fn, R, h = 1e-5) {
 #'
 #' A step of the schN_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param energy_fn Passed to \code{forces_from_energy}.
 #' @param R Passed to \code{.schn_mat}.
@@ -235,7 +228,6 @@ invariance_error <- function(energy_fn, R, Q, g = NULL) {
 #'
 #' A step of the schN_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

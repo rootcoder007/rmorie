@@ -29,7 +29,6 @@
 #'
 #' A step of the tlgcmp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param strata Passed to \code{g_computation}.
 #' @param outcome_means Passed to \code{g_computation}.
@@ -71,7 +70,6 @@ morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
 #'
 #' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
@@ -99,7 +97,6 @@ positivity_check <- function(g, delta = 0.01) {
 #'
 #' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param strata Coerced to list by the body, with \code{as.list}.
 #' @param outcome_means Coerced to numeric by the body, with \code{as.numeric}.
@@ -124,7 +121,6 @@ g_computation <- function(strata, outcome_means, covariate_probs) {
 #'
 #' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q_functions A vector; indexed elementwise.
 #' @param L_supports A vector; its length is taken and its elements indexed.
@@ -168,7 +164,6 @@ sequential_g_formula <- function(Q_functions, L_supports, L_probs,
 #'
 #' A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
@@ -211,7 +206,6 @@ counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
 #'
 #' A step of the tlgcmp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

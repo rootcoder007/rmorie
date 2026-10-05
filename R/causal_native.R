@@ -155,7 +155,6 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #'
 #' A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dag A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{children}, \code{parents}, \code{nodes}.
@@ -179,7 +178,6 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #' A step of the causal_native implementation. Called by \code{.bd_blocked},
 #' \code{morie_backdoor_criterion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node See Usage.
 #' @param ch A vector; indexed elementwise.
@@ -205,7 +203,6 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #'
 #' A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Carried through into a list the body builds.
 #' @param y Passed to \code{==}.
@@ -241,7 +238,6 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 #'
 #' A step of the causal_native implementation. Called by \code{morie_backdoor_criterion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @param d A vector; indexed elementwise.
@@ -696,7 +692,6 @@ morie_hsic <- function(a, b) {
 #'
 #' A step of the causal_native implementation. Called by \code{morie_anm_direction}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{outer}.
 #' @param y A matrix; passed to \code{\%*\%}.

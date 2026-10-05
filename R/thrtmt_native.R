@@ -10,7 +10,6 @@
 #'
 #' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -30,7 +29,6 @@
 #'
 #' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -54,7 +52,6 @@
 #'
 #' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows A vector; its length is taken and its elements indexed.
 #' @param n A count; the body uses it as \code{matrix(...)}.
@@ -108,7 +105,6 @@
 #'
 #' A step of the thrtmt_native implementation. Called by \code{thrtmt_blip_function}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{nrow}.
 #' @param b A matrix; passed to \code{\%*\%}.
@@ -125,7 +121,6 @@
 #'
 #' A step of the thrtmt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.thrtmt_vec}.
 #' @param A Passed to \code{.thrtmt_vec}.

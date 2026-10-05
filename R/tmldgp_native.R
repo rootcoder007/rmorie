@@ -23,7 +23,6 @@
 #'
 #' A step of the tmldgp_native implementation. Called by \code{morie_tmldgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -41,7 +40,6 @@
 #' A step of the tmldgp_native implementation. Called by \code{morie_tmldgp},
 #' \code{shrunk_targeting_unsafe}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -60,7 +58,6 @@
 #'
 #' A step of the tmldgp_native implementation. Called by \code{lasso_path}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{abs}.
 #' @param t Numeric; combined arithmetically in the body.

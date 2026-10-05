@@ -65,7 +65,6 @@
 #' A step of the tlroad_native implementation. Called by \code{.tlroad_eic_ate},
 #' \code{.tlroad_plugin}, \code{.tlroad_score_spans_eic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -82,7 +81,6 @@
 #'
 #' A step of the tlroad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data_description Coerced to character by the body, with \code{as.character}.
 #' @param model_assumptions A vector; its length is taken.
@@ -117,7 +115,6 @@
 #'
 #' A step of the tlroad_native implementation. Called by \code{.tlroad_solves_eic_equation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.tlroad_vec}.
 #' @param Y Passed to \code{.tlroad_vec}.
@@ -154,7 +151,6 @@
 #'
 #' A step of the tlroad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.tlroad_vec}.
 #' @param Y Passed to \code{.tlroad_vec}.
@@ -209,7 +205,6 @@
 #'
 #' A step of the tlroad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q1 Passed to \code{.tlroad_vec}.
 #' @param Q0 Passed to \code{.tlroad_vec}.
@@ -228,7 +223,6 @@
 #'
 #' A step of the tlroad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.tlroad_eic_ate}.
 #' @param Y Passed to \code{.tlroad_eic_ate}.
@@ -258,7 +252,6 @@
 #'
 #' A step of the tlroad_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

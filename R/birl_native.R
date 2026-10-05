@@ -10,7 +10,6 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' A step of the birl_native implementation. Called by \code{birl},
 #' \code{policy_iteration}, \code{policy_values} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A vector; its length is taken and its elements indexed.
 #' @param gamma The body requires: birl: gamma must be in [0, 1).
@@ -41,7 +40,6 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #'
 #' A step of the birl_native implementation. Called by \code{policy_values}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param b Passed to \code{cbind}.
@@ -83,7 +81,6 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #'
 #' A step of the birl_native implementation. Called by \code{policy_iteration}, \code{policy_walk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A vector; indexed elementwise.
 #' @param R A vector; its length is taken.
@@ -110,7 +107,6 @@ policy_values <- function(T, R, gamma, policy) {
 #'
 #' A step of the birl_native implementation. Called by \code{policy_iteration}, \code{policy_walk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T A vector; indexed elementwise.
 #' @param R A vector; indexed elementwise.
@@ -138,7 +134,6 @@ q_values <- function(T, R, gamma, V) {
 #'
 #' A step of the birl_native implementation. Called by \code{birl}, \code{policy_walk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Passed to \code{.mdp}.
 #' @param R A vector; its length is taken.
@@ -179,7 +174,6 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 #'
 #' A step of the birl_native implementation. Called by \code{policy_walk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; indexed by row and column.
 #' @param observations A vector; its length is taken.
@@ -207,7 +201,6 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 #' A step of the birl_native implementation. Called by \code{.abcgp.alpha_terms},
 #' \code{.abcgp.mw_sampler}, \code{abcnnt} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R A vector; its length is taken and its elements indexed.
 #' @param prior One of \code{"gaussian"}, \code{"laplacian"}, \code{"uniform"}. Defaults
@@ -244,7 +237,6 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #'
 #' A step of the birl_native implementation. Called by \code{policy_walk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{f}, as built in the body.
@@ -266,7 +258,6 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #'
 #' A step of the birl_native implementation. Called by \code{birl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Passed to \code{.mdp}.
 #' @param observations Passed to \code{.birl_log_likelihood}.
@@ -367,7 +358,6 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 #'
 #' A step of the birl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Passed to \code{.mdp}.
 #' @param observations Iterated over elementwise, with \code{lapply}.

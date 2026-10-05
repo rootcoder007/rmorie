@@ -16,7 +16,6 @@
 #' A step of the dp_native implementation. Called by \code{morie_dp_changepoint},
 #' \code{morie_dp_count}, \code{morie_dp_covariance} and 12 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
 #' @param delta Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -45,7 +44,6 @@
 #' A step of the dp_native implementation. Called by \code{morie_dp_count},
 #' \code{morie_dp_histogram}, \code{morie_dp_kmeans} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n See Usage.
 #' @param scale Numeric; combined arithmetically in the body.
@@ -64,7 +62,6 @@
 #' A step of the dp_native implementation. Called by \code{morie_dp_covariance},
 #' \code{morie_dp_gaussian_mechanism}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sensitivity Coerced to numeric by the body, with \code{as.numeric}.
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
@@ -86,7 +83,6 @@
 #' A step of the dp_native implementation. Called by \code{morie_dp_changepoint},
 #' \code{morie_dp_kmeans}, \code{morie_dp_quantile} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
@@ -108,7 +104,6 @@
 #' \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in
 #' the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{old}, as built in the body.
@@ -135,7 +130,6 @@
 #' \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in
 #' the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param old Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return One of two values, depending on the branch taken.

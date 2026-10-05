@@ -28,7 +28,6 @@
 #'
 #' A step of the ml_geron implementation. Called by \code{.morie_gr_crc32}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -63,7 +62,6 @@
 #'
 #' A step of the ml_geron implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param value See Usage.
 #' @return The value of \code{.morie_gr_xor32}.
@@ -361,7 +359,6 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #'
 #' A step of the ml_geron implementation. Called by \code{morie_trkassign}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq_ A vector; its length is taken and its elements indexed.
 #' @param k Numeric; combined arithmetically in the body.
@@ -382,7 +379,6 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #'
 #' A step of the ml_geron implementation. Called by \code{morie_trkassign}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq_ A vector; its length is taken and its elements indexed.
 #' @param k Numeric; combined arithmetically in the body.

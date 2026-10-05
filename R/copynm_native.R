@@ -109,7 +109,6 @@
 #' A step of the copynm_native implementation. Called by \code{.copynm_binary_supported},
 #' \code{copynm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w A vector; its length is taken and its elements indexed.
 #' @param e Passed to \code{.ghc_unif}.
@@ -134,7 +133,6 @@
 #'
 #' A step of the copynm_native implementation. Called by \code{copynm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @param cut A count; the body uses it as \code{seq_len(...)}.

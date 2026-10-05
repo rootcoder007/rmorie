@@ -15,7 +15,6 @@
 #'
 #' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights Numeric; passed to \code{sum}.
 #' @return A numeric value.
@@ -35,7 +34,6 @@ morie_prtcl_effective_sample_size <- function(weights) {
 #'
 #' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights A vector; its length is taken.
 #' @param u Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
@@ -74,7 +72,6 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #'
 #' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.
@@ -87,7 +84,6 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #'
 #' A step of the prtcl_native implementation. Called by \code{morie_prtcl_particle_filter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w A vector; its length is taken.
 #' @param e Passed to \code{.ghc_unif}.
@@ -111,7 +107,6 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #'
 #' A step of the prtcl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n.particles Coerced to integer by the body, with \code{as.integer}.
@@ -186,7 +181,6 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
 #'
 #' A step of the prtcl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param a Numeric; combined arithmetically in the body.

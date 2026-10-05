@@ -40,7 +40,6 @@
 #' A step of the scumap_native implementation. Called by
 #' \code{morie_scumap_fuzzy_simplicial_set}, \code{morie_scumap_umap_singlecell}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{M}, as built in the body.
@@ -68,7 +67,6 @@
 #'
 #' A step of the scumap_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -87,7 +85,6 @@
 #'
 #' A step of the scumap_native implementation. Called by \code{morie_scumap_fuzzy_simplicial_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param distances Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_neighbors Coerced to integer by the body, with \code{as.integer}.
@@ -150,7 +147,6 @@ morie_scumap_smooth_knn_dist <- function(distances, n_neighbors,
 #'
 #' A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.scumap_matrix}.
 #' @param n_neighbors Coerced to integer by the body, with \code{as.integer}. Defaults to \code{15}.
@@ -209,7 +205,6 @@ morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors = 15,
 #'
 #' A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param B A matrix; indexed by row and column.
 #' @param n_components Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
@@ -270,7 +265,6 @@ morie_scumap_spectral_layout <- function(B, n_components = 2,
 #'
 #' A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param min_dist Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param spread Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -358,7 +352,6 @@ morie_scumap_fit_ab <- function(min_dist = 0.1, spread = 1.0, n_grid = 300,
 #'
 #' A step of the scumap_native implementation. Called by \code{morie_scumap_umap_singlecell}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{>}.
 #' @param lim Numeric; combined arithmetically in the body. Defaults to \code{4}.
@@ -379,7 +372,6 @@ morie_scumap_fit_ab <- function(min_dist = 0.1, spread = 1.0, n_grid = 300,
 #'
 #' A step of the scumap_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.scumap_matrix}.
 #' @param n_neighbors Passed to \code{morie_scumap_fuzzy_simplicial_set}. Defaults to \code{15}.
@@ -541,7 +533,6 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors = 15, min_dist = 0.1,
 #'
 #' A step of the scumap_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -69,7 +69,6 @@
 #'
 #' A step of the rrblpr_native implementation. Called by \code{morie_rrblpr_rr_blup}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -93,7 +92,6 @@
 #' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at},
 #' \code{morie_rrblpr_rr_blup}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
@@ -128,7 +126,6 @@
 #' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at},
 #' \code{morie_rrblpr_rr_blup}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -155,7 +152,6 @@
 #'
 #' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; passed to \code{diag}.
 #' @return A numeric value.
@@ -167,7 +163,6 @@
 #'
 #' A step of the rrblpr_native implementation. Called by \code{morie_rrblpr_rr_blup}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param loglam Numeric; passed to \code{exp}.
 #' @param G Numeric; combined arithmetically in the body.
@@ -203,7 +198,6 @@
 #'
 #' A step of the rrblpr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param M Passed to \code{.rrblpr_rows}.
@@ -351,7 +345,6 @@ morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
 #'
 #' A step of the rrblpr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

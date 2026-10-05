@@ -61,7 +61,6 @@
 #'
 #' A step of the inlasm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_lik Accepted by the signature and not used anywhere in the body.
 #' @param log_lik_d1 Accepted by the signature and not used anywhere in the body.
@@ -119,7 +118,6 @@ gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
 #'
 #' A step of the inlasm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param third_derivative Coerced to numeric by the body, with \code{as.numeric}.
 #' @param precision Coerced to numeric by the body, with \code{as.numeric}.
@@ -145,7 +143,6 @@ skewness_correction <- function(third_derivative, precision) {
 #'
 #' A step of the inlasm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_joint Accepted by the signature and not used anywhere in the body.
 #' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
@@ -198,7 +195,6 @@ laplace_marginal <- function(log_joint, x_grid, theta) {
 #'
 #' A step of the inlasm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mode Coerced to numeric by the body, with \code{as.numeric}.
 #' @param curvature Coerced to numeric by the body, with \code{as.numeric}.
@@ -246,7 +242,6 @@ hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
 #'
 #' A step of the inlasm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param conditional_marginals Iterated over elementwise, with \code{lapply}.
 #' @param log_weights Coerced to numeric by the body, with \code{as.numeric}.
@@ -313,7 +308,6 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
 #'
 #' A step of the inlasm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -54,7 +54,6 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #'
 #' A step of the pgdsdg_native implementation. Called by \code{projected_gradient}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -71,7 +70,6 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #'
 #' A step of the pgdsdg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Optional; may be \code{NULL}. A vector; its length is taken and its
@@ -116,7 +114,6 @@ project_box <- function(x, lower = NULL, upper = NULL) {
 #'
 #' A step of the pgdsdg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{pmax}.
@@ -133,7 +130,6 @@ project_nonneg <- function(x) {
 #'
 #' A step of the pgdsdg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param radius Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
@@ -168,7 +164,6 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #'
 #' A step of the pgdsdg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param total Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
@@ -207,7 +202,6 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #'
 #' A step of the pgdsdg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param grad Accepted by the signature and not used anywhere in the body.

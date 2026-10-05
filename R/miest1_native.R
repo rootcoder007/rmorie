@@ -8,7 +8,6 @@
 #'
 #' A step of the miest1_native implementation. Called by \code{morie_miest1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.

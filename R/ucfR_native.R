@@ -63,7 +63,6 @@
 #'
 #' A step of the ucfR_native implementation. Called by \code{.ucfR_pearson}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings_a Coerced to list by the body, with \code{as.list}.
 #' @param ratings_b Coerced to list by the body, with \code{as.list}.
@@ -88,7 +87,6 @@
 #'
 #' A step of the ucfR_native implementation. Called by \code{.ucfR_pearson}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_common Coerced to integer by the body, with \code{as.integer}.
 #' @param threshold Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
@@ -105,7 +103,6 @@
 #'
 #' A step of the ucfR_native implementation. Called by \code{.ucfR_neighbours}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings_a Passed to \code{.ucfR_co_rated}.
 #' @param ratings_b Passed to \code{.ucfR_co_rated}.
@@ -145,7 +142,6 @@
 #'
 #' A step of the ucfR_native implementation. Called by \code{.ucfR_predict_rating}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param target Passed to \code{.ucfR_pearson}.
 #' @param others A vector; its length is taken and its elements indexed.
@@ -188,7 +184,6 @@
 #'
 #' A step of the ucfR_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param target Passed to \code{.ucfR_neighbours}.
 #' @param others A vector; indexed elementwise.
@@ -252,7 +247,6 @@
 #'
 #' A step of the ucfR_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

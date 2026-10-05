@@ -14,7 +14,6 @@
 #'
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param n.cp Coerced to integer by the body, with \code{as.integer}.
@@ -37,7 +36,6 @@
 #' A step of the prphet_native implementation. Called by
 #' \code{.prnFil_simulate_future_trend}, \code{morie_prphet_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param k.rate Numeric; combined arithmetically in the body.
@@ -66,7 +64,6 @@ morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
 #'
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_design}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken.
 #' @param cps A vector; its length is taken and its elements indexed.
@@ -93,7 +90,6 @@ morie_prphet_trend_matrix <- function(t, cps) {
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_design},
 #' \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param period Numeric; combined arithmetically in the body.
@@ -123,7 +119,6 @@ morie_prphet_fourier_terms <- function(t, period, order) {
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_design},
 #' \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param holidays A vector; indexed elementwise.
@@ -154,7 +149,6 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 #' A step of the prphet_native implementation. Called by \code{morie_prphet_fit},
 #' \code{morie_prphet_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{morie_prphet_trend_matrix}.
 #' @param cps A vector; its length is taken.
@@ -199,7 +193,6 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 #' A step of the prphet_native implementation. Called by \code{.prnFil_changepoint_path},
 #' \code{.prnFil_select_changepoints}, \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -287,7 +280,6 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
 #'
 #' A step of the prphet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$beta}, \code{$changepoints}, \code{$columns} from it.
 #' @param t.new Coerced to numeric by the body, with \code{as.numeric}.

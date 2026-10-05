@@ -178,7 +178,6 @@ owate_weights <- function(pscore, sigma2_treated = NULL,
 #'
 #' A step of the tmlefp_native implementation. Called by \code{morie_tmlefp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param w A vector; indexed elementwise.

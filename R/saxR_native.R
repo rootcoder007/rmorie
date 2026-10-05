@@ -37,7 +37,6 @@ morie_sax_breakpoints <- function(alphabet) {
 #'
 #' A step of the saxR_native implementation. Called by \code{morie_saxR}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z A vector; its length is taken and its elements indexed.
 #' @param w A count; the body uses it as \code{seq_len(...)}.

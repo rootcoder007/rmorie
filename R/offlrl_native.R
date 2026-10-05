@@ -19,7 +19,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -37,7 +36,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -57,7 +55,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param S See Usage.
@@ -97,7 +94,6 @@
 #'
 #' A step of the offlrl_native implementation. Called by \code{offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Passed to \code{paste0}.
 #' @param a Passed to \code{paste0}.
@@ -109,7 +105,6 @@
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dataset The body requires: offlrl: dataset must be non-empty.
 #' @param states Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
@@ -368,7 +363,6 @@ conservative_q_learning <- offlrl
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -392,7 +386,6 @@ morie_offlrl <- offlrl
 #'
 #' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param S See Usage.
@@ -429,7 +422,6 @@ offlrl_as_dist <- function(d, S, A, name) {
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -448,7 +440,6 @@ offlrl_cheatsheet <- function() {
 #'
 #' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -463,7 +454,6 @@ offlrl_logsumexp <- function(v) {
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mat A vector; indexed elementwise.
 #' @param s Passed to \code{paste0}.
@@ -479,7 +469,6 @@ offlrl_lookup <- function(mat, s, a) {
 #'
 #' A step of the offlrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param qmap A vector; indexed elementwise.
 #' @param s Passed to \code{paste0}.
@@ -502,7 +491,6 @@ offlrl_safe_max_key <- function(qmap, s, A) {
 #'
 #' A step of the offlrl_native implementation. Called by \code{morie_offlrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.

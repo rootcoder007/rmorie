@@ -55,7 +55,6 @@
 #' A step of the polkrn_native implementation. Called by
 #' \code{.polkrn_ip_weights_history}, \code{morie_polkrn}, \code{rbf_basis}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -72,7 +71,6 @@
 #'
 #' A step of the polkrn_native implementation. Called by \code{rbf_basis}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{quantile}.
 #' @param q Passed to \code{quantile}.
@@ -166,7 +164,6 @@
 #'
 #' A step of the polkrn_native implementation. Called by \code{morie_polkrn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A_hist A vector; its length is taken and its elements indexed.
 #' @param L_hist A vector; indexed elementwise.
@@ -240,7 +237,6 @@
 #'
 #' A step of the polkrn_native implementation. Called by \code{morie_polkrn}, \code{Tmlspl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A_history Iterated over elementwise, with \code{lapply}.
 #' @param how One of \code{"cumulative"}, \code{"duration"}, \code{"final"}. Defaults to
@@ -283,7 +279,6 @@ exposure_summary <- function(A_history, how = "cumulative") {
 #'
 #' A step of the polkrn_native implementation. Called by \code{morie_polkrn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.polkrn_vec}.
 #' @param n_centres Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
@@ -330,7 +325,6 @@ rbf_basis <- function(x, n_centres = 5, width = NULL) {
 #'
 #' A step of the polkrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.polkrn_vec}.
 #' @param A_history Coerced to list by the body, with \code{as.list}.
@@ -478,7 +472,6 @@ morie_polkrn <- function(y, A_history, H_history, degree = 2,
 #'
 #' A step of the polkrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

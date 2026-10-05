@@ -21,7 +21,6 @@
 #' A step of the hntfst_native implementation. Called by \code{._best_split},
 #' \code{honest_forest}, \code{honest_tree} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -36,7 +35,6 @@
 #'
 #' A step of the hntfst_native implementation. Called by \code{honest_tree}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
@@ -89,7 +87,6 @@
 #' A step of the hntfst_native implementation. Called by \code{.frfgrf_honesty_test},
 #' \code{grow_forest}, \code{honest_forest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; its length is taken and its elements indexed.
@@ -190,7 +187,6 @@ honest_tree <- function(X, y, W = NULL, kind = "double-sample",
 #' A step of the hntfst_native implementation. Called by \code{.hntfst_tree_predict},
 #' \code{forest_weights}, \code{morie_clrgrf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree See Usage.
 #' @param x A vector; indexed elementwise.
@@ -219,7 +215,6 @@ leaf_of <- function(tree, x) {
 #'
 #' A step of the hntfst_native implementation. Called by \code{honest_forest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{leaf_of}.
 #' @param x Passed to \code{leaf_of}.
@@ -233,7 +228,6 @@ leaf_of <- function(tree, x) {
 #'
 #' A step of the hntfst_native implementation. Called by \code{honest_forest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param preds A vector; its length is taken.
 #' @param in_bag A matrix; the body checks with \code{is.matrix}.
@@ -280,7 +274,6 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
 #'
 #' A step of the hntfst_native implementation. Called by \code{morie_hntfst}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -393,7 +386,6 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 #' \code{.frfgrf_forest_fit_check}, \code{.ipwgrf_forest_nuisances} and 6 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{honest_tree}.
 #' @param y A vector; its length is taken.
@@ -464,7 +456,6 @@ grow_forest <- function(X, y, W = NULL, kind = "double-sample",
 #' A step of the hntfst_native implementation. Called by \code{.center_cate},
 #' \code{.ipwgrf_forest_nuisances}, \code{.itrgrf_fit_arm} and 5 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param trees A vector; its length is taken.
 #' @param X A matrix; passed to \code{as.matrix}.
@@ -507,7 +498,6 @@ honest_random_forest <- honest_forest
 #'
 #' A step of the hntfst_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{honest_forest}.
 #' @param y Passed to \code{honest_forest}.
@@ -545,7 +535,6 @@ morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
 #'
 #' A step of the hntfst_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

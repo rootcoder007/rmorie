@@ -13,7 +13,6 @@
 #' A step of the mambss_native implementation. Called by \code{morie_geron_blip_itm_itc},
 #' \code{selective_scan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{log1p}.
@@ -32,7 +31,6 @@ softplus <- function(z) {
 #'
 #' A step of the mambss_native implementation. Called by \code{selective_ssm_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
@@ -73,7 +71,6 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
 #'
 #' A step of the mambss_native implementation. Called by \code{selective_scan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A vector; its length is taken and its elements indexed.
@@ -111,7 +108,6 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #'
 #' A step of the mambss_native implementation. Called by \code{selective_scan}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param Wm A matrix; indexed by row and column.
@@ -132,7 +128,6 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #'
 #' A step of the mambss_native implementation. Called by \code{gated_rnn_equivalent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -147,7 +142,6 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #'
 #' A step of the mambss_native implementation. Called by \code{morie_mambss}, \code{s6_layer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param A A matrix; passed to \code{as.matrix}.
@@ -228,7 +222,6 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
 #'
 #' A step of the mambss_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param w Coerced to numeric by the body, with \code{as.numeric}.
@@ -255,7 +248,6 @@ gated_rnn_equivalent <- function(x, w, b = 0.0) {
 #'
 #' A step of the mambss_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{selective_scan}.
 #' @param A Passed to \code{selective_scan}.
@@ -283,7 +275,6 @@ s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
 #'
 #' A step of the mambss_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -309,7 +300,6 @@ mambassmstep <- selective_ssm_step
 #'
 #' A step of the mambss_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{selective_scan}.
 #' @param A Passed to \code{selective_scan}.

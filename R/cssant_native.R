@@ -61,7 +61,6 @@
 #'
 #' A step of the cssant_native implementation. Called by \code{morie_boryis}, \code{morie_cssant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D Passed to \code{.mor_did_panel}.
 #' @param unit Passed to \code{.mor_did_panel}.

@@ -26,7 +26,6 @@
 #'
 #' A step of the sasRec_native implementation. Called by \code{self_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{mask}, as built in the body.
@@ -46,7 +45,6 @@ causal_mask <- function(n) {
 #'
 #' A step of the sasRec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param E See Usage.
 #' @param WQ See Usage.
@@ -97,7 +95,6 @@ self_attention <- function(E, WQ, WK, WV, mask = NULL) {
 #'
 #' A step of the sasRec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param weights See Usage.
 #' @param position Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -128,7 +125,6 @@ attention_span <- function(weights, position = NULL) {
 #'
 #' A step of the sasRec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state Coerced to numeric by the body, with \code{as.numeric}.
 #' @param item_embeddings See Usage.
@@ -161,7 +157,6 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
 #'
 #' A step of the sasRec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param d Coerced to integer by the body, with \code{as.integer}.
@@ -184,7 +179,6 @@ complexity <- function(n, d) {
 #'
 #' A step of the sasRec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

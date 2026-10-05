@@ -28,7 +28,6 @@
 #'
 #' A step of the infmer_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; its length is taken.
 #' @return The value of \code{kl}, as built in the body.
@@ -52,7 +51,6 @@
 #' A step of the infmer_native implementation. Called by \code{.infmer_select_queries},
 #' \code{morie_infmer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q A matrix; passed to \code{ncol}.
 #' @param k A matrix; passed to \code{ncol}.
@@ -76,7 +74,6 @@
 #'
 #' A step of the infmer_native implementation. Called by \code{morie_infmer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q A matrix; passed to \code{nrow}.
 #' @param k Passed to \code{.infmer_sparsity_measure}.
@@ -101,7 +98,6 @@
 #'
 #' A step of the infmer_native implementation. Called by \code{morie_infmer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q A matrix; passed to \code{ncol}.
 #' @param k A matrix; passed to \code{dim}.
@@ -129,7 +125,6 @@
 #'
 #' A step of the infmer_native implementation. Called by \code{morie_infmer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L_Q Coerced to numeric by the body, with \code{as.numeric}.
 #' @param L_K Coerced to numeric by the body, with \code{as.numeric}.
@@ -239,7 +234,6 @@ morie_infmer <- function(q, k, v, c = 5) {
 #'
 #' A step of the infmer_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

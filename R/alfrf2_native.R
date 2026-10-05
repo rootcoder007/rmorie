@@ -115,7 +115,6 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #'
 #' A step of the alfrf2_native implementation. Called by \code{morie_alfrf2_kabsch}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P A matrix; indexed by row and column.
 #' @return A list with \code{P}, \code{c}.
@@ -134,7 +133,6 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #'
 #' A step of the alfrf2_native implementation. Called by \code{morie_alfrf2_kabsch}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; indexed by row and column.
 #' @return A numeric value.
@@ -313,7 +311,6 @@ morie_alfrf2_ideal <- function(x, fixed, spacing = .alfrf2_ca_spacing,
 #'
 #' A step of the alfrf2_native implementation. Called by \code{morie_alfrf2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param route The body requires: the denoiser route is prior or ideal.
 #' @param denoiser The body requires: the denoiser route is prior or ideal.

@@ -43,7 +43,6 @@
 #'
 #' A step of the glm_native implementation. Called by \code{morie_glr_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p0 A vector; its length is taken.
 #' @param p1 A vector; its length is taken.
@@ -69,7 +68,6 @@
 #'
 #' A step of the glm_native implementation. Called by \code{morie_glr_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p0 Numeric; combined arithmetically in the body.
 #' @param p1 Numeric; combined arithmetically in the body.
@@ -91,7 +89,6 @@
 #'
 #' A step of the glm_native implementation. Called by \code{morie_glr_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p0 A vector; its length is taken.
 #' @param p1 A vector; its length is taken.
@@ -116,7 +113,6 @@
 #'
 #' A step of the glm_native implementation. Called by \code{glrtest}, \code{page_cusum}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param p0 A vector; its length is taken.
@@ -219,7 +215,6 @@ morie_glr_test <- function(x, p0, p1, threshold = NULL,
 #'
 #' A step of the glm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{morie_glr_test}.
 #' @param p0 Passed to \code{morie_glr_test}.
@@ -245,7 +240,6 @@ page_cusum <- function(x, p0, p1, threshold = NULL,
 #'
 #' A step of the glm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{morie_glr_test}.
 #' @param p0 Passed to \code{morie_glr_test}.
@@ -271,7 +265,6 @@ glrtest <- function(x, p0, p1, threshold = NULL,
 #'
 #' A step of the glm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

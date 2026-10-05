@@ -60,7 +60,6 @@
 #'
 #' A step of the warpL_native implementation. Called by \code{morie_warpL_warp_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -79,7 +78,6 @@
 #'
 #' A step of the warpL_native implementation. Called by \code{morie_warpL_alpha_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param scheme Passed to \code{identical}. Defaults to \code{"reciprocal"}.
@@ -115,7 +113,6 @@
 #' A step of the warpL_native implementation. Called by \code{.warpL_warp_loss},
 #' \code{morie_warpL_rank_weight}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rank Coerced to integer by the body, with \code{as.integer}.
 #' @param alphas A vector; its length is taken and its elements indexed.
@@ -133,7 +130,6 @@
 #' A step of the warpL_native implementation. Called by \code{.warpL_sample_violation},
 #' \code{morie_warpL_estimate_rank}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_draws Coerced to integer by the body, with \code{as.integer}.
 #' @param n_labels Coerced to integer by the body, with \code{as.integer}.
@@ -151,7 +147,6 @@
 #' A step of the warpL_native implementation. Called by
 #' \code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param score_positive Coerced to numeric by the body, with \code{as.numeric}.
 #' @param negative_scorer Accepted by the signature and not used anywhere in the body.
@@ -202,7 +197,6 @@
 #' A step of the warpL_native implementation. Called by \code{morie_warpL_warp_loss},
 #' \code{morie_warpL_warp_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param score_positive Coerced to numeric by the body, with \code{as.numeric}.
 #' @param score_negative Coerced to numeric by the body, with \code{as.numeric}.
@@ -227,7 +221,6 @@
 #'
 #' A step of the warpL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{.warpL_alpha_weights}.
 #' @param scheme Passed to \code{.warpL_alpha_weights}. Defaults to \code{"reciprocal"}.
@@ -244,7 +237,6 @@ morie_warpL_alpha_weights <- function(n, scheme = "reciprocal") {
 #'
 #' A step of the warpL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rank Passed to \code{.warpL_rank_weight}.
 #' @param alphas Passed to \code{.warpL_rank_weight}.
@@ -261,7 +253,6 @@ morie_warpL_rank_weight <- function(rank, alphas) {
 #'
 #' A step of the warpL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_draws Passed to \code{.warpL_estimate_rank}.
 #' @param n_labels Passed to \code{.warpL_estimate_rank}.
@@ -278,7 +269,6 @@ morie_warpL_estimate_rank <- function(n_draws, n_labels) {
 #'
 #' A step of the warpL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param score_positive Passed to \code{.warpL_sample_violation}.
 #' @param negative_scorer Passed to \code{.warpL_sample_violation}.
@@ -298,7 +288,6 @@ morie_warpL_sample_violation <- function(score_positive, negative_scorer, n_labe
 #'
 #' A step of the warpL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param score_positive Passed to \code{.warpL_warp_loss}.
 #' @param score_negative Passed to \code{.warpL_warp_loss}.
@@ -322,7 +311,6 @@ morie_warpL_warp_loss <- function(score_positive, score_negative, estimated_rank
 #'
 #' A step of the warpL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param positive Passed to \code{.warpL_vec}.
 #' @param negatives A vector; its length is taken and its elements indexed.
@@ -385,7 +373,6 @@ morie_warpL_warp_step <- function(positive, negatives, embed_user, rng, alphas,
 #'
 #' A step of the warpL_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

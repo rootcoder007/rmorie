@@ -14,7 +14,6 @@
 #'
 #' A step of the boot_native implementation. Called by \code{.morie_empinf_reg}, \code{morie_boot}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data A matrix; passed to \code{nrow}.
 #' @return One of two values, depending on the branch taken.
@@ -32,7 +31,6 @@
 #'
 #' A step of the boot_native implementation. Called by \code{morie_boot}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param R A count; the body uses it as \code{rep(...)}.
@@ -104,7 +102,6 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' A step of the boot_native implementation. Called by \code{.morie_empinf_reg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param boot_obj A list; the body reads \code{$index} from it.
 #' @return A matrix, from \code{t}.
@@ -120,7 +117,6 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' A step of the boot_native implementation. Called by \code{.morie_ci_bca}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param boot_obj A list; the body reads \code{$data}, \code{$strata} from it.
 #' @param t A vector; its length is taken and its elements indexed. Defaults to
@@ -190,7 +186,6 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.morie_norm_inter}.
 #' @param conf Numeric; combined arithmetically in the body.
@@ -202,7 +197,6 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t0 Numeric; combined arithmetically in the body.
 #' @param t Passed to \code{.morie_norm_inter}.
@@ -217,7 +211,6 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t0 Numeric; combined arithmetically in the body.
 #' @param t A vector; indexed elementwise.
@@ -235,7 +228,6 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' A step of the boot_native implementation. Called by \code{morie_boot_ci}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param boot_obj A list; the body reads \code{$t}, \code{$t0} from it.
 #' @param index See Usage.
@@ -301,7 +293,6 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #'
 #' A step of the boot_native implementation. Called by \code{morie_tsboot}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param n.sim Numeric; combined arithmetically in the body.
@@ -339,7 +330,6 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #'
 #' A step of the boot_native implementation. Called by \code{morie_tsboot}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; indexed elementwise.
 #' @param n Numeric; combined arithmetically in the body.

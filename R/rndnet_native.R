@@ -20,7 +20,6 @@
 #' A step of the rndnet_native implementation. Called by \code{.rndnet_predictor_new},
 #' \code{morie_rndnet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_in A count; the body uses it as \code{matrix(...)}.
 #' @param n_hidden A count; the body uses it as \code{matrix(...)}.
@@ -130,7 +129,6 @@
 #'
 #' A step of the rndnet_native implementation. Called by \code{morie_rndnet}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{e}, as built in the body.
@@ -376,7 +374,6 @@ morie_rndnet_combine_returns <- function(reward_ext, reward_int,
 #'
 #' A step of the rndnet_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -13,7 +13,6 @@
 #' A step of the optim_native implementation. Called by \code{morie_adagrad},
 #' \code{morie_adam}, \code{morie_adamw_step} and 5 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name Passed to \code{sprintf}. Defaults to \code{"g"}.
@@ -35,7 +34,6 @@
 #' A step of the optim_native implementation. Called by \code{morie_adagrad},
 #' \code{morie_adam}, \code{morie_adamw_step} and 6 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state Optional; may be \code{NULL}. A list; the body reads \code{$t} from it.
 #' @param n A count; the body uses it as \code{numeric(...)}.

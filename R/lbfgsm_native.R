@@ -32,7 +32,6 @@
 #'
 #' A step of the lbfgsm_native implementation. Called by \code{morie_lbfgsm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -92,7 +91,6 @@
 #'
 #' A step of the lbfgsm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
@@ -382,7 +380,6 @@ lbfgsm <- morie_lbfgsm
 #'
 #' A step of the lbfgsm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -29,7 +29,6 @@
 #'
 #' A step of the deseq2_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -70,7 +69,6 @@
 #' A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_mad},
 #' \code{dispersion_trend}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -90,7 +88,6 @@
 #'
 #' A step of the deseq2_native implementation. Called by \code{deseq2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -143,7 +140,6 @@ size_factors <- function(counts) {
 #'
 #' A step of the deseq2_native implementation. Called by \code{cox_reid_loglik}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param K A vector; its length is taken and its elements indexed.
 #' @param mu A vector; indexed elementwise.
@@ -169,7 +165,6 @@ size_factors <- function(counts) {
 #'
 #' A step of the deseq2_native implementation. Called by \code{cox_reid_loglik}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param mu A vector; indexed elementwise.
@@ -292,7 +287,6 @@ nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
 #'
 #' A step of the deseq2_native implementation. Called by \code{deseq2}, \code{dispersion_gene_wise}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param obj Accepted by the signature and not used anywhere in the body.
 #' @param lo Numeric; passed to \code{exp}. Defaults to \code{-15}.
@@ -438,7 +432,6 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #'
 #' A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_norm_ppf}, \code{deseq2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -453,7 +446,6 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #'
 #' A step of the deseq2_native implementation. Called by \code{deseq2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pr Passed to \code{<}.
 #' @return A numeric value.
@@ -472,7 +464,6 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #'
 #' A step of the deseq2_native implementation. Called by \code{deseq2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @param pr Numeric; combined arithmetically in the body.

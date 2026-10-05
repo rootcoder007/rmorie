@@ -105,7 +105,6 @@
 #' A step of the glides_native implementation. Called by \code{morie_glides_hbond},
 #' \code{morie_glides_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param base A vector; indexed elementwise.
 #' @param over Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -279,7 +278,6 @@ morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
 #'
 #' A step of the glides_native implementation. Called by \code{morie_glides}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.

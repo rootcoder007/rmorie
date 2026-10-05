@@ -52,7 +52,6 @@ LOG10E <- log10(exp(1))
 #'
 #' A step of the rqtmpl_native implementation. Called by \code{morie_threshold}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.

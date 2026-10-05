@@ -17,7 +17,6 @@
 #'
 #' A step of the btvol_native implementation. Called by \code{morie_bt_iid}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @param stat Accepted by the signature and not used anywhere in the body.

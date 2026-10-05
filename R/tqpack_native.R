@@ -20,7 +20,6 @@
 #'
 #' A step of the tqpack_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param indices Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @param bits Coerced to integer by the body, with \code{as.integer}.
@@ -106,7 +105,6 @@
 #'
 #' A step of the tqpack_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @param bits Coerced to integer by the body, with \code{as.integer}.
@@ -181,7 +179,6 @@
 #'
 #' A step of the tqpack_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

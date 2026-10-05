@@ -2,7 +2,6 @@
 #'
 #' A step of the manifest implementation. Called by \code{morie_build_outputs_manifest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Character; passed to \code{gsub}.
 #' @return The value of \code{gsub}.

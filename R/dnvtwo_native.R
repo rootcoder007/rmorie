@@ -35,7 +35,6 @@
 #'
 #' A step of the dnvtwo_native implementation. Called by \code{.dnvtwo_cos_raw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -56,7 +55,6 @@
 #' A step of the dnvtwo_native implementation. Called by \code{deduplicate},
 #' \code{retrieve_augment}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -79,7 +77,6 @@
 #' A step of the dnvtwo_native implementation. Called by \code{deduplicate},
 #' \code{koleo}, \code{retrieve_augment} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return The value of \code{list}.
@@ -104,7 +101,6 @@
 #'
 #' A step of the dnvtwo_native implementation. Called by \code{self_distillation_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.

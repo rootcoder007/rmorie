@@ -40,7 +40,6 @@
 #'
 #' A step of the sa_opt_native implementation. Called by \code{morie_sa_opt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param schedule One of \code{"geometric"}, \code{"linear"}.
 #' @param T0 Numeric; combined arithmetically in the body.
@@ -68,7 +67,6 @@
 #'
 #' A step of the sa_opt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
@@ -192,7 +190,6 @@ morie_sa_opt <- function(fun, x0, step = 1.0, T0 = 1.0, n_iter = 1000,
 #'
 #' A step of the sa_opt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

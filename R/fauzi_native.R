@@ -29,7 +29,6 @@
 #' \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_kde} and 1 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -66,7 +65,6 @@
 #' \code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2},
 #' \code{morie_fauzi_mrl_naive}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u See Usage.
 #' @return A numeric value.
@@ -83,7 +81,6 @@
 #' \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_boundary_free_kde},
 #' \code{morie_fauzi_cumulative_survival_1} and 6 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param x Passed to \code{diff}.
@@ -102,7 +99,6 @@
 #' \code{morie_fauzi_b2_coefficient}, \code{morie_fauzi_boundary_free_kde},
 #' \code{morie_fauzi_cumulative_survival_1} and 7 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param from Passed to \code{seq}.
 #' @param to Passed to \code{seq}.
@@ -223,7 +219,6 @@
 #' \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_conditions_c1_c6} and 7 others
 #' in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param min_n Passed to \code{<}. Defaults to \code{2L}.
@@ -250,7 +245,6 @@
 #' \code{morie_fauzi_boundary_free_kde}, \code{morie_fauzi_gamma_kde} and 5 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{h}, as built in the body.
@@ -583,7 +577,6 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
 #' A step of the fauzi_native implementation. Called by
 #' \code{morie_fauzi_cumulative_survival_1}, \code{morie_fauzi_cumulative_survival_2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.fz_check_sample}.
 #' @param t_grid Coerced to numeric by the body, with \code{as.numeric}.
@@ -712,7 +705,6 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 #' \code{morie_fauzi_b1_coefficient}, \code{morie_fauzi_b2_coefficient},
 #' \code{morie_fauzi_b3_coefficient}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param f_X Coerced to numeric by the body, with \code{as.numeric}.
@@ -745,7 +737,6 @@ morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
 #' \code{morie_fauzi_b1_coefficient}, \code{morie_fauzi_b2_coefficient},
 #' \code{morie_fauzi_b3_coefficient}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cm A list; the body reads \code{$gp}, \code{$gpp}, \code{$tr} from it.
 #' @return A list with \code{g_prime}, \code{g_double_prime}, \code{bias_order},

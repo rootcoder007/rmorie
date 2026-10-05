@@ -52,7 +52,6 @@
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_classify_pair}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$id},
 #' \code{$len1}, \code{$len2}, \code{$pos1}, \code{$pos2}, \code{$read_length},
@@ -110,7 +109,6 @@
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_insert_size_stats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -137,7 +135,6 @@
 #' A step of the sv_dl_native implementation. Called by \code{.sv_dl_size},
 #' \code{morie_sv_dl_classify_pair}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A list; the body reads \code{$len2}, \code{$pos1}, \code{$pos2} from it.
 #' @return A numeric value.
@@ -152,7 +149,6 @@
 #' A step of the sv_dl_native implementation. Called by
 #' \code{morie_sv_dl_paired_end_calls}, \code{morie_sv_dl_structural_variant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pairs Iterated over elementwise, with \code{lapply}.
 #' @param orientation Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -230,7 +226,6 @@ morie_sv_dl_insert_size_stats <- function(pairs, orientation = NULL,
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$strand1},
 #' \code{$strand2} from it.
@@ -284,7 +279,6 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation = c("+", "-"),
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_build_sv_graph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{.sv_dl_insert}.
 #' @param label A vector; indexed elementwise.
@@ -303,7 +297,6 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation = c("+", "-"),
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pairs Iterated over elementwise, with \code{lapply}.
 #' @param median Numeric; combined arithmetically in the body.
@@ -358,7 +351,6 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param edges A matrix; indexed by row and column.
@@ -458,7 +450,6 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_structural_variant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pairs Iterated over elementwise, with \code{lapply}.
 #' @param median Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.
@@ -566,7 +557,6 @@ morie_sv_dl_paired_end_calls <- function(pairs, median = NULL, sd = NULL,
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_deletion_type_reference}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Character; passed to \code{toupper}.
 #' @return A character value.
@@ -625,7 +615,6 @@ morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_refine_breakpoint}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param read Coerced to character by the body, with \code{as.character}.
 #' @param ref Coerced to character by the body, with \code{as.character}.
@@ -763,7 +752,6 @@ morie_sv_dl_split_read_consensus <- function(reads, starts = NULL) {
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_gotoh_score_vectors}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Character; passed to \code{strsplit}.
 #' @param ref Character; passed to \code{strsplit}.
@@ -816,7 +804,6 @@ morie_sv_dl_split_read_consensus <- function(reads, starts = NULL) {
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_refine_breakpoint}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param consensus Coerced to character by the body, with \code{as.character}.
 #' @param ref Coerced to character by the body, with \code{as.character}.
@@ -896,7 +883,6 @@ morie_sv_dl_optimal_split <- function(f, r) {
 #'
 #' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_structural_variant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param call A list; the body reads \code{$size}, \code{$type} from it.
 #' @param reference Passed to \code{morie_sv_dl_deletion_type_reference}.
@@ -1005,7 +991,6 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k = 7,
 #'
 #' A step of the sv_dl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pairs Passed to \code{morie_sv_dl_paired_end_calls}.
 #' @param reference Optional; may be \code{NULL}. A vector; its length is taken.
@@ -1108,7 +1093,6 @@ morie_sv_dl_structural_variant <- function(pairs, reference = NULL,
 #'
 #' A step of the sv_dl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

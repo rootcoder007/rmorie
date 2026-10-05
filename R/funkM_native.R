@@ -66,7 +66,6 @@
 #'
 #' A step of the funkM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.funkM_as_ratings}.
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
@@ -222,7 +221,6 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' A step of the funkM_native implementation. Called by \code{morie_funkM},
 #' \code{morie_funkM_imputed_svd_error}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R A list; the body reads \code{$r} from it.
 #' @return A numeric value.
@@ -241,7 +239,6 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch},
 #' \code{morie_funkM_rmse}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_user Coerced to numeric by the body, with \code{as.numeric}.
@@ -268,7 +265,6 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #'
 #' A step of the funkM_native implementation. Called by \code{morie_funkM}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R A list; the body reads \code{$i}, \code{$r}, \code{$u} from it.
 #' @param mu Passed to \code{.funkM_predict}.
@@ -337,7 +333,6 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #'
 #' A step of the funkM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.funkM_as_ratings}.
 #' @param mu Passed to \code{.funkM_predict}.
@@ -381,7 +376,6 @@ morie_funkM_rmse <- function(ratings, mu, bu, bi, P, Q) {
 #'
 #' A step of the funkM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.funkM_as_ratings}.
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
@@ -446,7 +440,6 @@ morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
 #'
 #' A step of the funkM_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

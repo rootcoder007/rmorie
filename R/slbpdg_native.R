@@ -90,7 +90,6 @@ morie_slbpdg_weights <- function(v) {
 #' A step of the slbpdg_native implementation. Called by \code{morie_slbpdg},
 #' \code{morie_slbpdg_density}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -219,7 +218,6 @@ morie_slbpdg_density <- function(x, w, mu, s2)
 #'
 #' A step of the slbpdg_native implementation. Called by \code{morie_slbpdg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param xs A vector; its length is taken and its elements indexed.
 #' @param ys A vector; indexed elementwise.

@@ -18,7 +18,6 @@
 #' A step of the bounds_native implementation. Called by
 #' \code{morie_efficiency_bound_ate}, \code{morie_text_ate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y Numeric; combined arithmetically in the body.

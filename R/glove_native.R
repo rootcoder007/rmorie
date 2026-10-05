@@ -56,7 +56,6 @@
 #'
 #' A step of the glove_native implementation. Called by \code{cooccurrence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param corpus The body requires: glove: corpus must not be None.
 #' @return The value of \code{docs}, as built in the body.
@@ -185,7 +184,6 @@ cooccurrence <- function(corpus, window = 10, harmonic = TRUE, min_count = 1) {
 #'
 #' A step of the glove_native implementation. Called by \code{morie_glove}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A list; the body reads \code{$count}, \code{$i}, \code{$j} from it.
 #' @param W A matrix; indexed by row and column.
@@ -228,7 +226,6 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #'
 #' A step of the glove_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param corpus Passed to \code{cooccurrence}.
 #' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
@@ -381,7 +378,6 @@ morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
 #'
 #' A step of the glove_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

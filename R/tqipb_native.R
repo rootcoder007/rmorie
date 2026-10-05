@@ -68,7 +68,6 @@
 #'
 #' A step of the tqipb_native implementation. Called by \code{morie_tqipb_constant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A numeric value.
 #' @export

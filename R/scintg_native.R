@@ -80,7 +80,6 @@
 #' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch},
 #' \code{.scintg_maximum_diversity_clustering}, \code{morie_scintg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{nrow}.
 #' @return The value of \code{Z}, as built in the body.
@@ -121,7 +120,6 @@
 #' A step of the scintg_native implementation. Called by \code{.scintg_kmeans_init},
 #' \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z Numeric; combined arithmetically in the body.
 #' @return The value of \code{sweep}.
@@ -140,7 +138,6 @@
 #'
 #' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param batches A vector; its length is taken.
 #' @return A list with \code{phi}, \code{names}.
@@ -163,7 +160,6 @@
 #' A step of the scintg_native implementation. Called by
 #' \code{.scintg_harmony_objective}, \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R A matrix; indexed by row and column.
 #' @param batches A vector; its length is taken.
@@ -194,7 +190,6 @@
 #' A step of the scintg_native implementation. Called by
 #' \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{t}.
 #' @param R A matrix; passed to \code{nrow}.
@@ -227,7 +222,6 @@
 #' A step of the scintg_native implementation. Called by
 #' \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Zn A matrix; indexed by row and column.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
@@ -296,7 +290,6 @@
 #'
 #' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @param B A matrix; passed to \code{ncol}.
@@ -334,7 +327,6 @@
 #'
 #' A step of the scintg_native implementation. Called by \code{morie_scintg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z Passed to \code{.scintg_matrix}.
 #' @param R A matrix; indexed by row and column.
@@ -392,7 +384,6 @@
 #'
 #' A step of the scintg_native implementation. Called by \code{morie_scintg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z Passed to \code{.scintg_matrix}.
 #' @param batches A vector; its length is taken.
@@ -493,7 +484,6 @@
 #'
 #' A step of the scintg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z Passed to \code{.scintg_matrix}.
 #' @param batches A vector; its length is taken.
@@ -585,7 +575,6 @@ singlecell_integration <- morie_scintg
 #'
 #' A step of the scintg_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

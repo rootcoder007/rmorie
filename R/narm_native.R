@@ -7,7 +7,6 @@
 #' A step of the narm_native implementation. Called by \code{narm_attention_weights},
 #' \code{narm_bilinear_scores}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -27,7 +26,6 @@ narm_softmax <- function(z) {
 #'
 #' A step of the narm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h_t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H A matrix; passed to \code{as.matrix}.
@@ -60,7 +58,6 @@ narm_attention_weights <- function(h_t, H, A1, A2, v) {
 #'
 #' A step of the narm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A matrix; passed to \code{as.matrix}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
@@ -83,7 +80,6 @@ narm_local_encoder <- function(H, alpha) {
 #'
 #' A step of the narm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h_t_global Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c_local Coerced to numeric by the body, with \code{as.numeric}.
@@ -101,7 +97,6 @@ narm_session_repr <- function(h_t_global, c_local) {
 #'
 #' A step of the narm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param embeddings A matrix; passed to \code{as.matrix}.
 #' @param B A matrix; passed to \code{ncol}.
@@ -135,7 +130,6 @@ narm_bilinear_scores <- function(embeddings, B, c_t) {
 #'
 #' A step of the narm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @param hidden Coerced to integer by the body, with \code{as.integer}.
@@ -160,7 +154,6 @@ narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
 #'
 #' A step of the narm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

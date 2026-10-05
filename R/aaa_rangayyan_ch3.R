@@ -9,7 +9,6 @@
 #' A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY},
 #' \code{DeltaDecomp} and 10 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -105,7 +104,6 @@
 #' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt},
 #' \code{PdfMean} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param pdf A function; the body checks with \code{is.function}.
@@ -146,7 +144,6 @@
 #' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt},
 #' \code{PdfMean} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mass Numeric; combined arithmetically in the body.
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-06}.
@@ -162,7 +159,6 @@
 #'
 #' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pdf Passed to \code{.morie_rg_pdfint}.
 #' @param x Passed to \code{.morie_rg_pdfint}.
@@ -252,7 +248,6 @@ PdfVar <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #'
 #' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pdf Passed to \code{.morie_rg_pdfint}.
 #' @param x Passed to \code{.morie_rg_pdfint}.
@@ -376,7 +371,6 @@ DiffEnt <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
 #'
 #' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.morie_rg_aslist}.
 #' @return A list with \code{mean}, \code{n}, \code{method}.
@@ -426,7 +420,6 @@ Srms <- function(x) {
 #'
 #' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{.morie_rg_aslist}.
 #' @param levels Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -546,7 +539,6 @@ MeanSum <- function(...) {
 #'
 #' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param observations Passed to \code{.morie_rg_aslist}.
 #' @param index Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -620,7 +612,6 @@ EnsAvg <- function(observations) {
 #'
 #' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.morie_rg_aslist}.
 #' @param y Passed to \code{.morie_rg_aslist}.

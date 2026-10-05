@@ -20,7 +20,6 @@
 #'
 #' A step of the info_mackay implementation. Called by \code{morie_linevid}, \code{morie_postgapx}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A matrix; passed to \code{dim}.
 #' @return The value of \code{%*%}.

@@ -33,7 +33,6 @@
 #'
 #' A step of the stlAn_native implementation. Called by \code{.mor_stl_loess_at}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -49,7 +48,6 @@
 #'
 #' A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param xs A vector; its length is taken and its elements indexed.
 #' @param ys A vector; indexed elementwise.
@@ -98,7 +96,6 @@
 #'
 #' A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @param k Numeric; combined arithmetically in the body.
@@ -117,7 +114,6 @@
 #'
 #' A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -132,7 +128,6 @@
 #' A step of the stlAn_native implementation. Called by \code{morie_stl_decompose},
 #' \code{morie_stlAn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.

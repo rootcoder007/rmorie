@@ -63,7 +63,6 @@
 #'
 #' A step of the impfun_native implementation. Called by \code{impute_dosage}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A matrix, from \code{matrix}.
@@ -88,7 +87,6 @@
 #'
 #' A step of the impfun_native implementation. Called by \code{concordance}, \code{info_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
@@ -106,7 +104,6 @@
 #'
 #' A step of the impfun_native implementation. Called by \code{copying_model}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @return The value of \code{list}.
@@ -127,7 +124,6 @@
 #'
 #' A step of the impfun_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param panels A vector; its length is taken and its elements indexed.
 #' @param study_snps Passed to \code{unique}.
@@ -182,7 +178,6 @@ merge_panels <- function(panels, study_snps) {
 #'
 #' A step of the impfun_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param study_hap Coerced to integer by the body, with \code{as.integer}.
 #' @param reference_haps Passed to \code{.impfun_as_int_list}.
@@ -264,7 +259,6 @@ copying_model <- function(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
 #'
 #' A step of the impfun_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param posterior Passed to \code{.impfun_as_double_matrix}.
 #' @param reference_haps Passed to \code{.impfun_as_double_matrix}.
@@ -295,7 +289,6 @@ impute_dosage <- function(posterior, reference_haps, site) {
 #'
 #' A step of the impfun_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dosages Passed to \code{.impfun_as_double_vec}.
 #' @return A list with \code{info}, \code{theta}, \code{note}.
@@ -333,7 +326,6 @@ info_score <- function(dosages) {
 #'
 #' A step of the impfun_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param imputed Passed to \code{.impfun_as_double_vec}.
 #' @param truth Passed to \code{.impfun_as_double_vec}.
@@ -364,7 +356,6 @@ concordance <- function(imputed, truth) {
 #'
 #' A step of the impfun_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

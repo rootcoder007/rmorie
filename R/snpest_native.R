@@ -134,7 +134,6 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #'
 #' A step of the snpest_native implementation. Called by \code{morie_snpest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param weights A vector; its length is taken and its elements indexed.
@@ -173,7 +172,6 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #'
 #' A step of the snpest_native implementation. Called by \code{morie_snpest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A numeric value.

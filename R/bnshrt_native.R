@@ -11,7 +11,6 @@
 #'
 #' A step of the bnshrt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{min}.
 #' @return A numeric value.
@@ -26,7 +25,6 @@
 #'
 #' A step of the bnshrt_native implementation. Called by \code{morie_in_identified_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
@@ -78,7 +76,6 @@ morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
 #'
 #' A step of the bnshrt_native implementation. Called by \code{morie_identified_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{out}, as built in the body.
@@ -115,7 +112,6 @@ morie_sequence_frequencies <- function(Y) {
 #'
 #' A step of the bnshrt_native implementation. Called by \code{morie_in_identified_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
@@ -143,7 +139,6 @@ morie_sequence_frequencies <- function(Y) {
 #'
 #' A step of the bnshrt_native implementation. Called by \code{morie_identified_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param freq A vector; indexed elementwise.
 #' @param beta Passed to \code{morie_sequence_probabilities}.
@@ -218,7 +213,6 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
 #'
 #' A step of the bnshrt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{morie_sequence_frequencies}.
 #' @param x Passed to \code{morie_in_identified_set}.

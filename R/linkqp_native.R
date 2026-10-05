@@ -10,7 +10,6 @@
 #'
 #' A step of the linkqp_native implementation. Called by \code{morie_linkqp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
 #' @param a Numeric; combined arithmetically in the body.

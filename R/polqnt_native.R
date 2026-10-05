@@ -20,7 +20,6 @@
 #'
 #' A step of the polqnt_native implementation. Called by \code{morie_polqnt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x See Usage.
 #' @return A list with \code{levels}, \code{radius}.
@@ -50,7 +49,6 @@
 #'
 #' A step of the polqnt_native implementation. Called by \code{morie_polqnt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param levels A vector; its length is taken and its elements indexed.
 #' @param radius See Usage.

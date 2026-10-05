@@ -19,7 +19,6 @@
 #'
 #' A step of the tqlld_native implementation. Called by \code{.gaussian_cells}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -34,7 +33,6 @@
 #'
 #' A step of the tqlld_native implementation. Called by \code{morie_tqlld}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bounds Passed to \code{c}.
 #' @param lo Numeric; combined arithmetically in the body.
@@ -209,7 +207,6 @@ morie_lloyd_max_codebook <- morie_tqlld
 #'
 #' A step of the tqlld_native implementation. Called by \code{morie_tqlld_lloyd_max_codebook}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bounds Passed to \code{c}.
 #' @param lo Numeric; combined arithmetically in the body.

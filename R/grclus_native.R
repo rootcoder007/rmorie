@@ -136,7 +136,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_as_graph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
@@ -155,7 +154,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{morie_grclus}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.grclus_rows_to_mat}.
 #' @return The value of \code{adj}, as built in the body.
@@ -203,7 +201,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' A step of the grclus_native implementation. Called by \code{.grclus_grow_partition},
 #' \code{.grclus_kl}, \code{morie_grclus}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param parts A vector; indexed elementwise.
@@ -223,7 +220,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{morie_grclus}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj See Usage.
 #' @return A numeric value.
@@ -238,7 +234,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{morie_grclus}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; indexed elementwise.
 #' @param vw A vector; indexed elementwise.
@@ -272,7 +267,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' A step of the grclus_native implementation. Called by \code{.grclus_grow_partition},
 #' \code{.grclus_match_vertices}, \code{.grclus_shuffled}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param lo Numeric; combined arithmetically in the body.
@@ -289,7 +283,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_match_vertices}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param seed Passed to \code{.ghc_rng}.
@@ -316,7 +309,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param scheme One of \code{"hem"}, \code{"rm"}.
@@ -360,7 +352,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param vw A vector; indexed elementwise.
@@ -415,7 +406,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' A step of the grclus_native implementation. Called by
 #' \code{.grclus_balance_bisection}, \code{.grclus_kl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param parts A vector; indexed elementwise.
@@ -441,7 +431,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param vw A vector; indexed elementwise.
@@ -517,7 +506,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken and its elements indexed.
 #' @param vw A vector; indexed elementwise.
@@ -601,7 +589,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; its length is taken.
 #' @param vw A vector; indexed elementwise.
@@ -635,7 +622,6 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #'
 #' A step of the grclus_native implementation. Called by \code{morie_grclus}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj Passed to \code{.grclus_balance_bisection}.
 #' @param vw Numeric; passed to \code{sum}.

@@ -19,7 +19,6 @@
 #'
 #' A step of the tcls_native implementation. Called by \code{morie_tcls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param labels A vector; its length is taken.
 #' @param domain A vector; its length is taken.
@@ -43,7 +42,6 @@
 #'
 #' A step of the tcls_native implementation. Called by \code{morie_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @param q Numeric; combined arithmetically in the body.
@@ -58,7 +56,6 @@
 #'
 #' A step of the tcls_native implementation. Called by \code{morie_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @param q A vector; indexed elementwise.
@@ -83,7 +80,6 @@
 #'
 #' A step of the tcls_native implementation. Called by \code{.morie_tcls_hier}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n See Usage.
 #' @param children A vector; indexed elementwise.
@@ -99,7 +95,6 @@
 #'
 #' A step of the tcls_native implementation. Called by \code{morie_emd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @param q A vector; indexed elementwise.

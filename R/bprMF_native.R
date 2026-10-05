@@ -88,7 +88,6 @@
 #' A step of the bprMF_native implementation. Called by \code{.bprMF_bpr_opt},
 #' \code{.bprMF_learn_bpr}, \code{bpr_sigmoid}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -105,7 +104,6 @@
 #' A step of the bprMF_native implementation. Called by \code{.bprMF_auc},
 #' \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A vector; indexed elementwise.
 #' @param H A vector; indexed elementwise.
@@ -121,7 +119,6 @@
 #'
 #' A step of the bprMF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pos A vector; indexed elementwise.
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
@@ -196,7 +193,6 @@
 #'
 #' A step of the bprMF_native implementation. Called by \code{.bprMF_learn_bpr}, \code{bpr_auc_R}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W Passed to \code{.bprMF_predict}.
 #' @param H Passed to \code{.bprMF_predict}.
@@ -362,7 +358,6 @@
 #'
 #' A step of the bprMF_native implementation. Called by \code{bpr_recommend_R}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W Passed to \code{.bprMF_predict}.
 #' @param H Passed to \code{.bprMF_predict}.
@@ -535,7 +530,6 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
 #'
 #' A step of the bprMF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -12,7 +12,6 @@
 #' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate},
 #' \code{derivatives}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nu A vector; its length is taken.
@@ -59,7 +58,6 @@
 #' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate},
 #' \code{endemic_equilibrium}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nu A vector; its length is taken.
@@ -89,7 +87,6 @@ basic_reproduction_numbers <- function(beta, nu, mu) {
 #'
 #' A step of the hiatus_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nu A vector; its length is taken.
@@ -118,7 +115,6 @@ endemic_equilibrium <- function(beta, nu, mu, strain = 0L) {
 #'
 #' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param S Coerced to numeric by the body, with \code{as.numeric}.
 #' @param I Coerced to numeric by the body, with \code{as.numeric}.
@@ -160,7 +156,6 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 #'
 #' A step of the hiatus_native implementation. Called by \code{morie_hiatus}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Passed to \code{._check}.
 #' @param nu Passed to \code{._check}.
@@ -270,7 +265,6 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 #'
 #' A step of the hiatus_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param width Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
@@ -303,7 +297,6 @@ hiatusmodel <- .hiatus_simulate
 #'
 #' A step of the hiatus_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Passed to \code{.hiatus_simulate}.
 #' @param nu Passed to \code{.hiatus_simulate}.
@@ -333,7 +326,6 @@ morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
 #'
 #' A step of the hiatus_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

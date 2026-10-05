@@ -14,7 +14,6 @@
 #' A step of the mdpval_native implementation. Called by \code{morie_ddqn},
 #' \code{morie_mdpval}, \code{morie_qlearn} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P Iterated over elementwise, with \code{lapply}.
 #' @param R A matrix; passed to \code{dim}.

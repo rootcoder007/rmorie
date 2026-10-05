@@ -22,7 +22,6 @@
 #'
 #' A step of the copula_native implementation. Called by \code{morie_copula_cdf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u A vector; its length is taken.
 #' @param v A vector; its length is taken.
@@ -138,7 +137,6 @@ morie_copula_cdf <- function(family, u, v, theta = NULL, nu = NULL) {
 #'
 #' A step of the copula_native implementation. Called by \code{morie_copula_cdf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param y Numeric; combined arithmetically in the body.
@@ -430,7 +428,6 @@ morie_extreme_value_copula <- function(u, v, A = "gumbel", theta = 2) {
 #'
 #' A step of the copula_native implementation. Called by \code{morie_copula_survival}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time A vector; indexed elementwise.
 #' @param event A vector; indexed elementwise.

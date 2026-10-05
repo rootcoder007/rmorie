@@ -8,7 +8,6 @@
 #' A step of the RcppExports implementation. Called by \code{.morie_wrapping_key},
 #' \code{morie_crypto_lamport_sign}, \code{morie_crypto_lamport_verify}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
@@ -23,7 +22,6 @@ NULL
 #' \code{create_reproducibility_manifest}, \code{morie_crypto_lamport_keygen} and 4
 #' others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
@@ -36,7 +34,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_hkdf_sha256}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param key Passed to \code{.Call}.
 #' @param msg Passed to \code{.Call}.
@@ -50,7 +47,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param password Passed to \code{.Call}.
 #' @param salt Passed to \code{.Call}.
@@ -67,7 +63,6 @@ NULL
 #' A step of the RcppExports implementation. Called by \code{morie_secarg_prehash},
 #' \code{morie_secarg_variable_hash}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data Passed to \code{.Call}.
 #' @param outlen Passed to \code{.Call}.
@@ -82,7 +77,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_secarg_argon2}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param password Passed to \code{.Call}.
 #' @param salt Passed to \code{.Call}.
@@ -103,7 +97,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -118,7 +111,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -133,7 +125,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -150,7 +141,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pk_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
@@ -163,7 +153,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sk_sxp Passed to \code{.Call}.
 #' @param ct_sxp Passed to \code{.Call}.
@@ -177,7 +166,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -194,7 +182,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sk_sxp Passed to \code{.Call}.
 #' @param message_sxp Passed to \code{.Call}.
@@ -208,7 +195,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pk_sxp Passed to \code{.Call}.
 #' @param message_sxp Passed to \code{.Call}.
@@ -223,7 +209,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -240,7 +225,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sk_sxp Passed to \code{.Call}.
 #' @param message_sxp Passed to \code{.Call}.
@@ -254,7 +238,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pk_sxp Passed to \code{.Call}.
 #' @param message_sxp Passed to \code{.Call}.
@@ -269,7 +252,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -286,7 +268,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pk_sxp Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
@@ -299,7 +280,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sk_sxp Passed to \code{.Call}.
 #' @param ct_sxp Passed to \code{.Call}.
@@ -313,7 +293,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -328,7 +307,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.Call}.
 #' @examples
@@ -343,7 +321,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param key_sxp Passed to \code{.Call}.
 #' @param nonce_sxp Passed to \code{.Call}.
@@ -359,7 +336,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param key_sxp Passed to \code{.Call}.
 #' @param nonce_sxp Passed to \code{.Call}.
@@ -375,7 +351,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ikm_sxp Passed to \code{.Call}.
 #' @param length_sxp Passed to \code{.Call}.
@@ -391,7 +366,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
@@ -409,7 +383,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_twfe_demean}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Passed to \code{.Call}.
 #' @param g1 Passed to \code{.Call}.
@@ -428,7 +401,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_dsp_lms}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param d Passed to \code{.Call}.
@@ -444,7 +416,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_dsp_nlms}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param d Passed to \code{.Call}.
@@ -461,7 +432,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_dsp_rls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param d Passed to \code{.Call}.
@@ -478,7 +448,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_dsp_cross_correlation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param y Passed to \code{.Call}.
@@ -493,7 +462,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_dsp_median_filter}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param kernel_size Passed to \code{.Call}.
@@ -507,7 +475,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_normal_pdf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param mean Passed to \code{.Call}.
@@ -522,7 +489,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_mean}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param shared Use the rmoriebricklayer kernel (\code{TRUE}) or the
@@ -543,7 +509,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_var}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param ddof Passed to \code{.Call}. Defaults to \code{1L}.
@@ -564,7 +529,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_cor_pearson}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.Call}.
 #' @param y Passed to \code{.Call}.
@@ -578,7 +542,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.Call}.
 #' @param T_horizon Passed to \code{.Call}.
@@ -595,7 +558,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.Call}.
 #' @param T_horizon Passed to \code{.Call}.
@@ -613,7 +575,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.Call}.
 #' @param T_horizon Passed to \code{.Call}.
@@ -631,7 +592,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.hawkes_nll_cpp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.Call}.
 #' @param T_horizon Passed to \code{.Call}.
@@ -649,7 +609,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.tps_hwka_kernel_density}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Passed to \code{.Call}.
 #' @param kind Passed to \code{.Call}.
@@ -664,7 +623,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.tps_hwka_kernel_cdf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Passed to \code{.Call}.
 #' @param kind Passed to \code{.Call}.
@@ -679,7 +637,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.tps_hwka_neg_loglik_general}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.Call}.
 #' @param eta Passed to \code{.Call}.
@@ -695,7 +652,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.tps_hwka_baseline_integral}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T_horizon Passed to \code{.Call}.
 #' @param alpha Passed to \code{.Call}.
@@ -797,7 +753,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X_t Passed to \code{.Call}.
 #' @param X_c Passed to \code{.Call}.
@@ -812,7 +767,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X_t Passed to \code{.Call}.
 #' @param X_c Passed to \code{.Call}.
@@ -826,7 +780,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D Passed to \code{.Call}.
 #' @param with_replacement Passed to \code{.Call}.
@@ -842,7 +795,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X_binned Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
@@ -855,7 +807,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_matching_abadie_imbens_se}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.Call}.
 #' @param t Passed to \code{.Call}.
@@ -872,7 +823,6 @@ NULL
 #' A step of the RcppExports implementation. Called by \code{.morie_match_genetic_eval},
 #' \code{.morie_match_genetic_native}, \code{.morie_match_mahalanobis_native}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param treated Passed to \code{.Call}.
 #' @param control Passed to \code{.Call}.
@@ -889,7 +839,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_match_optimal_native}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param treated_val Passed to \code{.Call}.
 #' @param control_val Passed to \code{.Call}.
@@ -903,7 +852,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_match_optimal_native}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param treated Passed to \code{.Call}.
 #' @param control Passed to \code{.Call}.
@@ -918,7 +866,6 @@ NULL
 #' A step of the RcppExports implementation. Called by \code{.morie_cate_dr_learner},
 #' \code{.morie_causal_forest_native}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.Call}.
 #' @param pseudo Passed to \code{.Call}.
@@ -939,7 +886,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_rlm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.Call}.
 #' @param y Passed to \code{.Call}.
@@ -956,7 +902,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_sobol}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{.Call}.
 #' @param d Passed to \code{.Call}.
@@ -973,7 +918,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_knn_index}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param coords Passed to \code{.Call}.
 #' @param k Passed to \code{.Call}.
@@ -987,7 +931,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_coord_descent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Xs Passed to \code{.Call}.
 #' @param yc Passed to \code{.Call}.
@@ -1006,7 +949,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{.morie_tsne}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P Passed to \code{.Call}.
 #' @param Y Passed to \code{.Call}.
@@ -1022,7 +964,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_dw_nominate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param votes Passed to \code{.Call}.
 #' @param X Passed to \code{.Call}.
@@ -1041,7 +982,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_em_irt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Passed to \code{.Call}.
 #' @param a Passed to \code{.Call}.
@@ -1057,7 +997,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_smacof}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Passed to \code{.Call}.
 #' @param D Passed to \code{.Call}.
@@ -1072,7 +1011,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_classical_mds}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D Passed to \code{.Call}.
 #' @param n_dims Passed to \code{.Call}.
@@ -1086,7 +1024,6 @@ NULL
 #'
 #' A step of the RcppExports implementation. Called by \code{morie_spatial_voting_wordfish}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dtm Passed to \code{.Call}.
 #' @param psi Passed to \code{.Call}.

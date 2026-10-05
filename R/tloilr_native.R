@@ -58,7 +58,6 @@
 #'
 #' A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_value}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
@@ -77,7 +76,6 @@
 #'
 #' A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_rule}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param B Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kappa Coerced to numeric by the body, with \code{as.numeric}.
@@ -109,7 +107,6 @@
 #'
 #' A step of the tloilr_native implementation. Called by \code{.tloilr_constrained_value}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param B Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kappa Passed to \code{.tloilr_resource_threshold}.
@@ -129,7 +126,6 @@
 #'
 #' A step of the tloilr_native implementation. Called by \code{morie_tloilr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
@@ -162,7 +158,6 @@
 #'
 #' A step of the tloilr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param B Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-09}.
@@ -185,7 +180,6 @@
 #'
 #' A step of the tloilr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -210,7 +204,6 @@
 #'
 #' A step of the tloilr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q1 Passed to \code{.tloilr_constrained_value}.
 #' @param Q0 Passed to \code{.tloilr_constrained_value}.

@@ -10,7 +10,6 @@
 #'
 #' A step of the blip2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_queries Coerced to integer by the body, with \code{as.integer}.
 #' @param dim Coerced to integer by the body, with \code{as.integer}.
@@ -34,7 +33,6 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
 #'
 #' A step of the blip2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param queries A matrix; passed to \code{as.matrix}.
 #' @param image_features A matrix; passed to \code{as.matrix}.
@@ -86,7 +84,6 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
 #'
 #' A step of the blip2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param qformer_params Coerced to numeric by the body, with \code{as.numeric}.
 #' @param frozen_vision_params Coerced to numeric by the body, with \code{as.numeric}.
@@ -112,7 +109,6 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
 #'
 #' A step of the blip2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query_out A matrix; passed to \code{as.matrix}.
 #' @param text_out Coerced to numeric by the body, with \code{as.numeric}.
@@ -151,7 +147,6 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
 #'
 #' A step of the blip2v_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query_out A matrix; passed to \code{as.matrix}.
 #' @param W A matrix; passed to \code{nrow}.

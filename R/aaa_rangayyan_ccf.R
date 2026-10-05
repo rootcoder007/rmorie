@@ -7,7 +7,6 @@
 #'
 #' A step of the rangayyan_ccf implementation. Called by \code{.morie_rg_H}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seg A vector; its length is taken and its elements indexed.
 #' @param p A count; the body uses it as \code{seq_len(...)}.
@@ -46,7 +45,6 @@
 #'
 #' A step of the rangayyan_ccf implementation. Called by \code{Glr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seg A vector; its length is taken.
 #' @param p Passed to \code{.morie_rg_tse}.
@@ -121,7 +119,6 @@ Glr <- function(x, m, n = NULL, order = 4) {
 #'
 #' A step of the rangayyan_ccf implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
@@ -225,7 +222,6 @@ EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
 #'
 #' A step of the rangayyan_ccf implementation. Called by \code{CorrConv}, \code{XCorrProc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -425,7 +421,6 @@ XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
 #'
 #' A step of the rangayyan_ccf implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -520,7 +515,6 @@ NccfTpl <- function(x, template) {
 #'
 #' A step of the rangayyan_ccf implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{DotProd}.
 #' @param y Passed to \code{DotProd}.
@@ -680,7 +674,6 @@ AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
 #'
 #' A step of the rangayyan_ccf implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param f1 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
@@ -780,7 +773,6 @@ CompSig <- function(g, shifts, scales = NULL, n = NULL) {
 #'
 #' A step of the rangayyan_ccf implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.

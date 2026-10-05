@@ -7,7 +7,6 @@
 #'
 #' A step of the chrF_native implementation. Called by \code{chrf_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s A vector; its length is taken.
 #' @param n Numeric; combined arithmetically in the body.
@@ -25,7 +24,6 @@
 #'
 #' A step of the chrF_native implementation. Called by \code{chrf_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ws A vector; its length is taken and its elements indexed.
 #' @param n Numeric; combined arithmetically in the body.
@@ -43,7 +41,6 @@
 #'
 #' A step of the chrF_native implementation. Called by \code{.chrf_pr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq See Usage.
 #' @return The value of \code{d}, as built in the body.
@@ -61,7 +58,6 @@
 #'
 #' A step of the chrF_native implementation. Called by \code{chrf_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hyp_grams A vector; its length is taken.
 #' @param ref_grams A vector; its length is taken.
@@ -84,7 +80,6 @@
 #'
 #' A step of the chrF_native implementation. Called by \code{morie_chrF}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hypothesis Coerced to character by the body, with \code{as.character}.
 #' @param reference A vector; its length is taken.
@@ -168,7 +163,6 @@ chrF <- chrf_score
 #'
 #' A step of the chrF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hypothesis Passed to \code{chrf_score}.
 #' @param reference Passed to \code{chrf_score}.

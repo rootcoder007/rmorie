@@ -6,7 +6,6 @@
 #'
 #' A step of the nbeats_native implementation. Called by \code{nbeats_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param length A count; the body uses it as \code{seq_len(...)}.
 #' @param degree Numeric; combined arithmetically in the body.
@@ -36,7 +35,6 @@ nbeats_trend_basis <- function(length, degree, offset = 0, scale = NULL) {
 #'
 #' A step of the nbeats_native implementation. Called by \code{nbeats_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param length A count; the body uses it as \code{seq_len(...)}.
 #' @param harmonics A count; the body uses it as \code{seq_len(...)}.
@@ -64,7 +62,6 @@ nbeats_seasonality_basis <- function(length, harmonics, offset = 0, period = NUL
 #'
 #' A step of the nbeats_native implementation. Called by \code{nbeats_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -88,7 +85,6 @@ nbeats_lstsq <- function(X, y, ridge = 1e-8) {
 #'
 #' A step of the nbeats_native implementation. Called by \code{nbeats_stack}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param window A vector; its length is taken.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
@@ -133,7 +129,6 @@ nbeats_block <- function(window, horizon, kind = "generic", degree = 2,
 #' A step of the nbeats_native implementation. Called by \code{.ngnest_nbeats_stack},
 #' \code{nbeats_forecast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param window Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
@@ -165,7 +160,6 @@ nbeats_stack <- function(window, horizon, blocks, ridge = 1e-8) {
 #'
 #' A step of the nbeats_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
@@ -204,7 +198,6 @@ nbeats_forecast <- function(y, horizon, lookback = NULL, blocks = NULL, ridge = 
 #'
 #' A step of the nbeats_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

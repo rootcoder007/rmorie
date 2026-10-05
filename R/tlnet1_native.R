@@ -65,7 +65,6 @@
 #' A step of the tlnet1_native implementation. Called by \code{friend_summary},
 #' \code{network_influence_variance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -91,7 +90,6 @@
 #' A step of the tlnet1_native implementation. Called by \code{decompose_effects},
 #' \code{policy_mean}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
@@ -117,7 +115,6 @@
 #' A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges},
 #' \code{check_network_assumption}, \code{friend_summary} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param friends A vector; indexed elementwise.
 #' @param i Passed to \code{setdiff}.
@@ -132,7 +129,6 @@
 #'
 #' A step of the tlnet1_native implementation. Called by \code{network_influence_variance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param friends A vector; its length is taken.
 #' @return The value of \code{total}, as built in the body.

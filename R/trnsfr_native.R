@@ -49,7 +49,6 @@
 #' \code{morie_trnsfr_balancing_weights}, \code{morie_trnsfr_transport_ate},
 #' \code{morie_trnsfr_transport_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param S Passed to \code{.s03vec}.
 #' @return The value of \code{s}, as built in the body.
@@ -228,7 +227,6 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge = 1e-8) {
 #'
 #' A step of the trnsfr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{.s03vec}.
 #' @param W Passed to \code{.s03vec}.
@@ -359,7 +357,6 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method = "dr", e = NULL,
 #'
 #' A step of the trnsfr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{.s03vec}.
 #' @param A Passed to \code{.s03vec}.
@@ -452,7 +449,6 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target = 0, e = NULL,
 #'
 #' A step of the trnsfr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

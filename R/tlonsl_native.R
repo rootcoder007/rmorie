@@ -45,7 +45,6 @@
 #' A step of the tlonsl_native implementation. Called by
 #' \code{morie_tlonsl_online_super_learner}, \code{morie_tlonsl_sequential_risk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param kind Compared against \code{"squared"}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -95,7 +94,6 @@ morie_tlonsl_summary_measure <- function(history, lags = 1) {
 #'
 #' A step of the tlonsl_native implementation. Called by \code{morie_tlonsl_online_super_learner}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param algorithm Accepted by the signature and not used anywhere in the body.
@@ -174,7 +172,6 @@ morie_tlonsl_update_weights <- function(cum_losses, eta = 1.0) {
 #'
 #' A step of the tlonsl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param library A vector; its length is taken and its elements indexed.
@@ -247,7 +244,6 @@ morie_tlonsl_online_super_learner <- function(y, library, loss = "squared",
 #'
 #' A step of the tlonsl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

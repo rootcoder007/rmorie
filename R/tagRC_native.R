@@ -16,7 +16,6 @@
 #'
 #' A step of the tagRC_native implementation. Called by \code{folkrank}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param triples A vector; its length is taken.
 #' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples},
@@ -69,7 +68,6 @@ tripartite_graph <- function(triples) {
 #'
 #' A step of the tagRC_native implementation. Called by \code{folkrank}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nodes Coerced to list by the body, with \code{as.list}.
 #' @param focus The body requires: tagRC: none of the focus nodes are in the graph.
@@ -108,7 +106,6 @@ preference_vector <- function(nodes, focus, weight = 0.9) {
 #'
 #' A step of the tagRC_native implementation. Called by \code{folkrank}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adjacency A vector; indexed elementwise.
 #' @param nodes Coerced to list by the body, with \code{as.list}.
@@ -190,7 +187,6 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
 #'
 #' A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param triples Passed to \code{tripartite_graph}.
 #' @param focus Passed to \code{preference_vector}.
@@ -246,7 +242,6 @@ tagawarerec <- folkrank
 #'
 #' A step of the tagRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -270,7 +265,6 @@ tagawarerec <- folkrank
 #'
 #' A step of the tagRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param triples Passed to \code{folkrank}.
 #' @param focus Passed to \code{folkrank}.
@@ -294,7 +288,6 @@ morie_tagRC <- function(triples, focus, d = 0.7, weight = 0.9,
 #'
 #' A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adjacency A vector; indexed elementwise.
 #' @param nodes Coerced to character by the body, with \code{as.character}.
@@ -369,7 +362,6 @@ tagRC_adapted_pagerank <- function(adjacency, nodes, p = NULL,
 #'
 #' A step of the tagRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -392,7 +384,6 @@ tagRC_cheatsheet <- function() {
 #'
 #' A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nodes Coerced to character by the body, with \code{as.character}.
 #' @param focus Coerced to character by the body, with \code{as.character}.
@@ -427,7 +418,6 @@ tagRC_preference_vector <- function(nodes, focus, weight = 0.9) {
 #'
 #' A step of the tagRC_native implementation. Called by \code{morie_tagRC}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param triples See Usage.
 #' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples},

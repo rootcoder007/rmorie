@@ -81,7 +81,6 @@
 #'
 #' A step of the abcnnt_native implementation. Called by \code{flow_forward}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param layer A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t},
 #' \code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa},

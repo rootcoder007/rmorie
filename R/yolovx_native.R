@@ -45,7 +45,6 @@
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param channels Coerced to integer by the body, with \code{as.integer}.
 #' @param reduced Coerced to integer by the body, with \code{as.integer}. Defaults to \code{256}.
@@ -86,7 +85,6 @@ morie_yolovx_decoupled_head <- function(channels, reduced = 256,
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cx Coerced to numeric by the body, with \code{as.numeric}.
@@ -124,7 +122,6 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride = 1.0) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ltrb Passed to \code{.s03vec}.
 #' @param cx Coerced to numeric by the body, with \code{as.numeric}.
@@ -156,7 +153,6 @@ morie_yolovx_decode_box <- function(ltrb, cx, cy, stride = 1.0) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; indexed elementwise.
 #' @param b A vector; indexed elementwise.
@@ -182,7 +178,6 @@ morie_yolovx_box_iou <- function(a, b) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param box Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grid_w Coerced to integer by the body, with \code{as.integer}.
@@ -333,7 +328,6 @@ morie_yolovx_simota_assign <- function(costs, ious, top_q = 10, max_k = NULL) {
 #'
 #' A step of the yolovx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

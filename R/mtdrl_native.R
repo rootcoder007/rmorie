@@ -193,7 +193,6 @@ morie_mtdrl_metarl <- morie_mtdrl
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_arms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param n_tasks Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
@@ -229,7 +228,6 @@ mtdrl_bandit_tasks <- function(n_arms = 2, n_tasks = 100, seed = 0,
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -251,7 +249,6 @@ mtdrl_cheatsheet <- function() {
 #'
 #' A step of the mtdrl_native implementation. Called by \code{mtdrl_run}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param history A vector; its length is taken and its elements indexed.
 #' @param n_arms Numeric; combined arithmetically in the body.
@@ -273,7 +270,6 @@ mtdrl_history_features <- function(history, n_arms) {
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tasks Iterated over elementwise, with \code{lapply}.
 #' @param agent A list; the body reads \code{$act}, \code{$observe}, \code{$reset} from it.
@@ -352,7 +348,6 @@ mtdrl_run <- function(tasks, agent, episode_length = 100, n_arms = NULL,
 #'
 #' A step of the mtdrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_arms Coerced to integer by the body, with \code{as.integer}.
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.

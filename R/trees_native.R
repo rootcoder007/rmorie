@@ -39,7 +39,6 @@
 #'
 #' A step of the trees_native implementation. Called by \code{.tree_leaf_weight}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Numeric; combined arithmetically in the body.
 #' @param alpha Numeric; combined arithmetically in the body.

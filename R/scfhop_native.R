@@ -133,7 +133,6 @@ morie_scfhop_types <- function(smiles) {
 #'
 #' A step of the scfhop_native implementation. Called by \code{morie_scfhop_cats}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{out}, as built in the body.
 #' @export

@@ -77,7 +77,6 @@
 #' \code{.tlsate_pate_influence_curve}, \code{.tlsate_sate_influence_curve},
 #' \code{.tlsate_sate_tmle} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
@@ -107,7 +106,6 @@
 #'
 #' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{pmax}.
 #' @return A numeric value.
@@ -124,7 +122,6 @@
 #'
 #' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
@@ -141,7 +138,6 @@
 #'
 #' A step of the tlsate_native implementation. Called by \code{.tlsate_variance_gap}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
@@ -159,7 +155,6 @@
 #'
 #' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
@@ -178,7 +173,6 @@
 #' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle},
 #' \code{.tlsate_variance_gap}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.tlsate_check}.
 #' @param Y Passed to \code{.tlsate_check}.
@@ -207,7 +201,6 @@
 #' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle},
 #' \code{.tlsate_variance_gap}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.tlsate_check}.
 #' @param Y Passed to \code{.tlsate_check}.
@@ -233,7 +226,6 @@
 #'
 #' A step of the tlsate_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.tlsate_check}.
 #' @param Y Passed to \code{.tlsate_check}.
@@ -263,7 +255,6 @@
 #'
 #' A step of the tlsate_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.tlsate_check}.
 #' @param Y Passed to \code{.tlsate_check}.
@@ -323,7 +314,6 @@
 #'
 #' A step of the tlsate_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pair_ids Coerced to character by the body, with \code{as.character}.
 #' @param ic Coerced to numeric by the body, with \code{as.numeric}.
@@ -360,7 +350,6 @@
 #'
 #' A step of the tlsate_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -62,7 +62,6 @@
 #' A step of the mienco_native implementation. Called by \code{.mienco_jsd_estimate},
 #' \code{.mienco_prior_matching_loss}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{ifelse}.
@@ -80,7 +79,6 @@
 #'
 #' A step of the mienco_native implementation. Called by \code{morie_mienco}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param paired Coerced to numeric by the body, with \code{as.numeric}.
 #' @param unpaired Coerced to numeric by the body, with \code{as.numeric}.
@@ -99,7 +97,6 @@
 #'
 #' A step of the mienco_native implementation. Called by \code{morie_mienco}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param paired Coerced to numeric by the body, with \code{as.numeric}.
 #' @param unpaired Coerced to numeric by the body, with \code{as.numeric}.
@@ -117,7 +114,6 @@
 #'
 #' A step of the mienco_native implementation. Called by \code{.mienco_global_objective}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param summary Passed to \code{critic}.
 #' @param patches A vector; its length is taken.
@@ -157,7 +153,6 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #'
 #' A step of the mienco_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param summary Passed to \code{morie_mienco}.
 #' @param whole Carried through into a list the body builds.
@@ -174,7 +169,6 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #'
 #' A step of the mienco_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param samples Iterated over elementwise, with \code{sapply}.
 #' @param prior_samples Iterated over elementwise, with \code{sapply}.
@@ -194,7 +188,6 @@ morie_mienco <- function(summary, patches, other_patches, critic, estimator = "j
 #'
 #' A step of the mienco_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

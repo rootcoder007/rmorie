@@ -14,7 +14,6 @@
 #'
 #' A step of the bcq_native implementation. Called by \code{morie_bcq}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dataset The body requires: bcq: dataset must be non-empty.
 #' @param states Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
@@ -239,7 +238,6 @@ batch_constrained_q <- bcq
 #'
 #' A step of the bcq_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ... Passed through.
 #' @return The value of \code{bcq}.

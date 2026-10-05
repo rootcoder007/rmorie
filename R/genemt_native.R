@@ -65,7 +65,6 @@
 #' A step of the genemt_native implementation. Called by
 #' \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
@@ -82,7 +81,6 @@
 #'
 #' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_statistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{qnorm}.
@@ -100,7 +98,6 @@
 #' A step of the genemt_native implementation. Called by
 #' \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -133,7 +130,6 @@
 #'
 #' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_statistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param G A matrix; passed to \code{as.matrix}.
 #' @param keep Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.999}.
@@ -195,7 +191,6 @@ morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
 #'
 #' A step of the genemt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Passed to \code{morie_genemt_ld_principal_components}.
@@ -243,7 +238,6 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
 #'
 #' A step of the genemt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_markers Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gene_length Coerced to numeric by the body, with \code{as.numeric}.
@@ -284,7 +278,6 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
 #'
 #' A step of the genemt_native implementation. Called by \code{morie_genemt_conditional_set_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z_scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @param membership Coerced to numeric by the body, with \code{as.numeric}.
@@ -343,7 +336,6 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
 #'
 #' A step of the genemt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z_scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @param set_a Coerced to numeric by the body, with \code{as.numeric}.
@@ -392,7 +384,6 @@ morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
 #'
 #' A step of the genemt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -8,7 +8,6 @@
 #'
 #' A step of the plcbsc_native implementation. Called by \code{.plcbsc_synthetic_control}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
@@ -35,7 +34,6 @@
 #'
 #' A step of the plcbsc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x_treated Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x_donors Iterated over elementwise, with \code{lapply}.
@@ -123,7 +121,6 @@
 #' A step of the plcbsc_native implementation. Called by \code{.plcbsc_in_time_placebo},
 #' \code{morie_plcbsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_treated Numeric; combined arithmetically in the body.
 #' @param y_donors Iterated over elementwise, with \code{lapply}.
@@ -140,7 +137,6 @@
 #' A step of the plcbsc_native implementation. Called by \code{.plcbsc_effect},
 #' \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gaps A vector; its length is taken.
 #' @return A numeric value.
@@ -154,7 +150,6 @@
 #'
 #' A step of the plcbsc_native implementation. Called by \code{morie_plcbsc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gaps A vector; its length is taken and its elements indexed.
 #' @param t0 A count; the body uses it as \code{seq_len(...)}.
@@ -179,7 +174,6 @@
 #'
 #' A step of the plcbsc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_treated Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_donors Iterated over elementwise, with \code{lapply}.
@@ -276,7 +270,6 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #'
 #' A step of the plcbsc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y_treated Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_donors Iterated over elementwise, with \code{lapply}.
@@ -313,7 +306,6 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #'
 #' A step of the plcbsc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

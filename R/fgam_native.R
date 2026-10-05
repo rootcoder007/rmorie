@@ -16,7 +16,6 @@
 #'
 #' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_t A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{w}, as built in the body.
@@ -34,7 +33,6 @@
 #'
 #' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lo A count; the body uses it as \code{rep(...)}.
 #' @param hi A count; the body uses it as \code{rep(...)}.
@@ -59,7 +57,6 @@
 #'
 #' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param kn A vector; its length is taken and its elements indexed.
@@ -92,7 +89,6 @@
 #'
 #' A step of the fgam_native implementation. Called by \code{morie_fgam_functional_gam}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @param order Numeric; combined arithmetically in the body. Defaults to \code{2L}.
@@ -121,7 +117,6 @@
 #'
 #' A step of the fgam_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
@@ -265,7 +260,6 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
 #'
 #' A step of the fgam_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

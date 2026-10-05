@@ -2,7 +2,6 @@
 #'
 #' A step of the linprm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param c Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A Iterated over elementwise, with \code{lapply}.

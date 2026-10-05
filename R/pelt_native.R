@@ -22,7 +22,6 @@
 #'
 #' A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code{morie_binseg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{cs}, \code{css}.
@@ -47,7 +46,6 @@
 #'
 #' A step of the pelt_native implementation. Called by \code{.mor_pelt_core}, \code{morie_binseg}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tab A list; the body reads \code{$cs}, \code{$css} from it.
 #' @param cost One of \code{"mean"}, \code{"meanvar"}.
@@ -73,7 +71,6 @@
 #'
 #' A step of the pelt_native implementation. Called by \code{morie_pelt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param cost Passed to \code{.mor_cp_cost}.
@@ -122,7 +119,6 @@
 #'
 #' A step of the pelt_native implementation. Called by \code{morie_binseg}, \code{morie_pelt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; indexed elementwise.
 #' @param bounds A vector; its length is taken and its elements indexed.

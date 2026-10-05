@@ -8,7 +8,6 @@
 #' A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt},
 #' \code{Bndnpr} and 6 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{unlist}.
 #' @param D Passed to \code{unlist}.
@@ -37,7 +36,6 @@
 #' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt},
 #' \code{Bndnvg} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yv A vector; its length is taken and its elements indexed.
 #' @param dv Passed to \code{==}.
@@ -57,7 +55,6 @@
 #' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndnpr},
 #' \code{Bnssel} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m_t Numeric; combined arithmetically in the body.
 #' @param p_t Numeric; combined arithmetically in the body.
@@ -73,7 +70,6 @@
 #'
 #' A step of the helpers_bnd implementation. Called by \code{Bndtfm}, \code{Bnscbo}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yv Passed to \code{.bnd_cellmeans}.
 #' @param dv Passed to \code{.bnd_cellmeans}.
@@ -92,7 +88,6 @@
 #'
 #' A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndtfm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @param p Numeric; combined arithmetically in the body.
@@ -119,7 +114,6 @@
 #'
 #' A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param moments A matrix; passed to \code{as.matrix}.
 #' @param name Passed to \code{paste0}.
@@ -141,7 +135,6 @@
 #'
 #' A step of the helpers_bnd implementation. Called by \code{Bndinf}, \code{Bnsiii}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yl A vector; its length is taken.
 #' @param yu Numeric; passed to \code{mean}.
@@ -159,7 +152,6 @@
 #'
 #' A step of the helpers_bnd implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
 #' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL},
@@ -177,7 +169,6 @@
 #'
 #' A step of the helpers_bnd implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
 #' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL},

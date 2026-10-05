@@ -267,7 +267,6 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' A step of the sentpc_native implementation. Called by \code{encode_bpe},
 #' \code{escape_whitespace}, \code{train_bpe} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @param add_prefix A flag; the body branches on it. Defaults to \code{TRUE}.
@@ -290,7 +289,6 @@ morie_sentpc <- morie_sentpc_escape_whitespace
 #' A step of the sentpc_native implementation. Called by \code{morie_sentpc_decode},
 #' \code{unescape_whitespace}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
 #' @param strip_prefix A flag; the body branches on it. Defaults to \code{TRUE}.

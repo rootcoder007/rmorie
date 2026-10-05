@@ -52,7 +52,6 @@
 #'
 #' A step of the alfqud_native implementation. Called by \code{morie_alfqud_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param st A list; the body reads \code{$mem}, \code{$reg} from it.
 #' @param loc A vector; indexed elementwise.
@@ -80,7 +79,6 @@
 #'
 #' A step of the alfqud_native implementation. Called by \code{morie_alfqud_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param st A list; the body reads \code{$mem}, \code{$reg} from it.
 #' @param loc A vector; indexed elementwise.
@@ -269,7 +267,6 @@ morie_alfqud_text <- function(program) {
 #'
 #' A step of the alfqud_native implementation. Called by \code{.alfqud_bfs}, \code{.alfqud_mcts}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param program A vector; its length is taken.
 #' @param inputs Passed to \code{morie_alfqud_correctness}.
@@ -295,7 +292,6 @@ morie_alfqud_text <- function(program) {
 #'
 #' A step of the alfqud_native implementation. Called by \code{morie_alfqud}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param inputs Passed to \code{.alfqud_score}.
 #' @param targets Passed to \code{.alfqud_score}.
@@ -337,7 +333,6 @@ morie_alfqud_text <- function(program) {
 #'
 #' A step of the alfqud_native implementation. Called by \code{morie_alfqud}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param inputs Passed to \code{.alfqud_score}.
 #' @param targets Passed to \code{.alfqud_score}.

@@ -52,7 +52,6 @@
 #'
 #' A step of the nhits_native implementation. Called by \code{morie_nhits}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -69,7 +68,6 @@
 #'
 #' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{crossprod}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -95,7 +93,6 @@
 #'
 #' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Coerced to integer by the body, with \code{as.integer}.
@@ -120,7 +117,6 @@
 #'
 #' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param ratio Coerced to numeric by the body, with \code{as.numeric}.
@@ -139,7 +135,6 @@
 #'
 #' A step of the nhits_native implementation. Called by \code{.nhits_nhits_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param knots Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
@@ -164,7 +159,6 @@
 #'
 #' A step of the nhits_native implementation. Called by \code{.nhits_nhits_stack}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param window Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
@@ -225,7 +219,6 @@
 #'
 #' A step of the nhits_native implementation. Called by \code{morie_nhits}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param window Coerced to numeric by the body, with \code{as.numeric}.
 #' @param horizon Passed to \code{.nhits_nhits_block}.
@@ -260,7 +253,6 @@
 #'
 #' A step of the nhits_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.nhits_vec}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.

@@ -28,7 +28,6 @@
 #'
 #' A step of the ttsAn_native implementation. Called by \code{morie_t_quantile}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Numeric; combined arithmetically in the body.
 #' @param v Numeric; combined arithmetically in the body.
@@ -64,7 +63,6 @@ morie_t_quantile <- function(p, v) {
 #'
 #' A step of the ttsAn_native implementation. Called by \code{.mor_tts_esd}, \code{morie_ttsAn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -84,7 +82,6 @@ morie_t_quantile <- function(p, v) {
 #'
 #' A step of the ttsAn_native implementation. Called by \code{morie_ttsAn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param res A vector; its length is taken.
 #' @param k A count; the body uses it as \code{seq_len(...)}.

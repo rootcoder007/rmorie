@@ -25,7 +25,6 @@
 #'
 #' A step of the boryis_native implementation. Called by \code{morie_impute_untreated}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param obs Numeric; passed to \code{sum}.
 #' @param n Numeric; combined arithmetically in the body.

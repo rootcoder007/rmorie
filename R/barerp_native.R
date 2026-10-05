@@ -176,7 +176,6 @@ centering_steps <- function(m, eps, t0, mu) {
 #'
 #' A step of the barerp_native implementation. Called by \code{grad.Fun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param x A vector; its length is taken and its elements indexed.
@@ -207,7 +206,6 @@ centering_steps <- function(m, eps, t0, mu) {
 #'
 #' A step of the barerp_native implementation. Called by \code{hess.Fun}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Accepted by the signature and not used anywhere in the body.
 #' @param x A vector; its length is taken and its elements indexed.
@@ -278,7 +276,6 @@ centering_steps <- function(m, eps, t0, mu) {
 #'
 #' A step of the barerp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param self A list; the body reads \code{$f} from it.
 #' @param x See Usage.
@@ -293,7 +290,6 @@ val.Fun <- function(self, x) as.numeric(self$f(x))
 #'
 #' A step of the barerp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param self A list; the body reads \code{$.g}, \code{$f} from it.
 #' @param x Passed to \code{.barerp_num_grad}.
@@ -314,7 +310,6 @@ grad.Fun <- function(self, x) {
 #'
 #' A step of the barerp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param self A list; the body reads \code{$.h}, \code{$affine}, \code{$f} from it.
 #' @param x A vector; its length is taken.
@@ -338,7 +333,6 @@ hess.Fun <- function(self, x) {
 #' A step of the barerp_native implementation. Called by \code{barrier_method},
 #' \code{central_point}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param spec A list; the body reads \code{$affine}, \code{$f}, \code{$grad}, \code{$hess} from it.
 #' @return Nothing; this branch always raises.
@@ -361,7 +355,6 @@ hess.Fun <- function(self, x) {
 #'
 #' A step of the barerp_native implementation. Called by \code{central_point}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hmat A matrix; passed to \code{solve}.
 #' @param grad A vector; its length is taken.
@@ -412,7 +405,6 @@ hess.Fun <- function(self, x) {
 #'
 #' A step of the barerp_native implementation. Called by \code{central_point}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A matrix; passed to \code{\%*\%}.
 #' @param aeq A matrix; passed to \code{t}.

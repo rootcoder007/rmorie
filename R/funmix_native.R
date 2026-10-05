@@ -11,7 +11,6 @@
 #'
 #' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -39,7 +38,6 @@
 #'
 #' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tmin A count; the body uses it as \code{rep(...)}.
 #' @param tmax A count; the body uses it as \code{rep(...)}.
@@ -60,7 +58,6 @@
 #'
 #' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param kn A vector; its length is taken and its elements indexed.
@@ -97,7 +94,6 @@
 #'
 #' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param C A matrix; passed to \code{nrow}.
 #' @param p A count; the body uses it as \code{rep(...)}.
@@ -129,7 +125,6 @@
 #'
 #' A step of the funmix_native implementation. Called by \code{morie_funmix_functional_mixture}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{chol}.
 #' @param b Passed to \code{forwardsolve}.
@@ -149,7 +144,6 @@
 #'
 #' A step of the funmix_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{.funmix_rows}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
@@ -320,7 +314,6 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
 #'
 #' A step of the funmix_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

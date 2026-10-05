@@ -296,7 +296,6 @@ morie_mistr <- morie_mistr_mistral_block
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_grouped_query_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param pos Numeric; combined arithmetically in the body.
@@ -328,7 +327,6 @@ mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
 #'
 #' A step of the mistr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param window Coerced to integer by the body, with \code{as.integer}.
 #' @param n_layers Coerced to integer by the body, with \code{as.integer}.
@@ -343,7 +341,6 @@ mistr_attention_span <- function(window, n_layers) {
 #'
 #' A step of the mistr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -363,7 +360,6 @@ mistr_cheatsheet <- function() {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param K A matrix; passed to \code{as.matrix}.
@@ -445,7 +441,6 @@ mistr_grouped_query_attention <- function(Q, K, V, n_heads, n_kv_heads,
 #'
 #' A step of the mistr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Wq Passed to \code{proj}.
@@ -496,7 +491,6 @@ mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param weight Optional; may be \code{NULL}. A vector; its length is taken.
@@ -523,7 +517,6 @@ mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_apply_rope}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Numeric; combined arithmetically in the body.
 #' @param base Numeric; combined arithmetically in the body. Defaults to \code{10000}.
@@ -541,7 +534,6 @@ mistr_rope_angles <- function(d, base = 10000) {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A count; the body uses it as \code{seq_len(...)}.
 #' @param window Passed to \code{<}.
@@ -567,7 +559,6 @@ mistr_sliding_window_mask <- function(L, window, causal = TRUE) {
 #'
 #' A step of the mistr_native implementation. Called by \code{mistr_mistral_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{crossprod}.
 #' @param W1 A matrix; passed to \code{crossprod}.

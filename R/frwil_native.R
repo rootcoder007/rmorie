@@ -57,7 +57,6 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #'
 #' A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param compounds Iterated over elementwise, with \code{lapply}.
 #' @param activity Passed to \code{unlist}.
@@ -84,7 +83,6 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #'
 #' A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param compounds Iterated over elementwise, with \code{lapply}.
 #' @param constraint Compared against \code{"reference"}. Defaults to \code{"reference"}.
@@ -150,7 +148,6 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #'
 #' A step of the frwil_native implementation. Called by \code{.frwil_free_wilson}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; indexed by row and column.
 #' @param y A vector; indexed elementwise.
@@ -219,7 +216,6 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #'
 #' A step of the frwil_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param compounds Passed to \code{.frwil_prep}.
 #' @param activity Passed to \code{.frwil_prep}.
@@ -295,7 +291,6 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #'
 #' A step of the frwil_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$coefficients}, \code{$groups},
 #' \code{$n_positions} from it.

@@ -41,7 +41,6 @@
 #'
 #' A step of the snpeff_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{.SNPEFF_CODONS}, as built in the body.
 #' @export
@@ -55,7 +54,6 @@ codon_table <- function() .SNPEFF_CODONS
 #' A step of the snpeff_native implementation. Called by \code{.vepan_coding_terms},
 #' \code{annotate_variant}, \code{snpeff}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq Coerced to character by the body, with \code{as.character}.
 #' @param to_stop A flag; the body branches on it. Defaults to \code{FALSE}.
@@ -91,7 +89,6 @@ translate <- function(seq, to_stop = FALSE) {
 #'
 #' A step of the snpeff_native implementation. Called by \code{.snpeff_pack}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param effect Passed to \code{\%in\%}.
 #' @return A character value.
@@ -107,7 +104,6 @@ translate <- function(seq, to_stop = FALSE) {
 #'
 #' A step of the snpeff_native implementation. Called by \code{annotate_variant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param effect Passed to \code{.snpeff_impact}.
 #' @param ref_codon Carried through into a list the body builds.
@@ -139,7 +135,6 @@ translate <- function(seq, to_stop = FALSE) {
 #'
 #' A step of the snpeff_native implementation. Called by \code{snpeff}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cds Coerced to character by the body, with \code{as.character}.
 #' @param pos Numeric; combined arithmetically in the body.
@@ -240,7 +235,6 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
 #'
 #' A step of the snpeff_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cds Coerced to character by the body, with \code{as.character}.
 #' @param variants A vector; its length is taken and its elements indexed.
@@ -307,7 +301,6 @@ snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
 #'
 #' A step of the snpeff_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -64,7 +64,6 @@
 #' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree},
 #' \code{trclrn_rule_value}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{unlist}.
 #' @param A Passed to \code{unlist}.
@@ -125,7 +124,6 @@
 #'
 #' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{.trclrn_check}.
 #' @param A Passed to \code{.trclrn_check}.
@@ -174,7 +172,6 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #'
 #' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; indexed elementwise.
 #' @param a A vector; indexed elementwise.
@@ -214,7 +211,6 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #'
 #' A step of the trclrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Passed to \code{.trclrn_check}.
 #' @param A Passed to \code{.trclrn_check}.
@@ -346,7 +342,6 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
 #'
 #' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nd A list; the body reads \code{$leaf}, \code{$left}, \code{$right} from it.
 #' @return A numeric value.
@@ -360,7 +355,6 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
 #'
 #' A step of the trclrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree See Usage.
 #' @param X A matrix; passed to \code{as.matrix}.
@@ -395,7 +389,6 @@ trclrn_predict_rule <- function(tree, X) {
 #'
 #' A step of the trclrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
 #' \code{$n}, \code{$right}, \code{$threshold}, \code{$treatment} from it.
@@ -423,7 +416,6 @@ trclrn_tree_rules <- function(tree, names = NULL, indent = 0) {
 #'
 #' A step of the trclrn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

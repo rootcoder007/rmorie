@@ -11,7 +11,6 @@
 #' A step of the bnskmt_native implementation. Called by \code{cvm_statistic},
 #' \code{ks_critical_value}, \code{ks_statistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param std_moments Coerced to numeric by the body, with \code{as.numeric}.
 #' @param form One of \code{"max"}, \code{"sum"}. Defaults to \code{"sum"}.
@@ -42,7 +41,6 @@ S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' A step of the bnskmt_native implementation. Called by \code{cvm_statistic},
 #' \code{ks_critical_value}, \code{ks_statistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A matrix; the body checks with \code{is.matrix}.
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
@@ -77,7 +75,6 @@ weighted_moments <- function(m, g) {
 #'
 #' A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; the body checks with \code{is.matrix}.
 #' @param n_levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
@@ -128,7 +125,6 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 #' A step of the bnskmt_native implementation. Called by \code{compare_forms},
 #' \code{ks_confidence_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Passed to \code{weighted_moments}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
@@ -170,7 +166,6 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
 #'
 #' A step of the bnskmt_native implementation. Called by \code{ks_confidence_set}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A matrix; the body checks with \code{is.matrix}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
@@ -232,7 +227,6 @@ ks_critical_value <- function(m, instruments, form = "sum",
 #'
 #' A step of the bnskmt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param moment_fn Accepted by the signature and not used anywhere in the body.
 #' @param theta_grid See Usage.
@@ -278,7 +272,6 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
 #'
 #' A step of the bnskmt_native implementation. Called by \code{compare_forms}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Passed to \code{weighted_moments}.
 #' @param instruments A list; the body reads \code{$instruments} from it.
@@ -326,7 +319,6 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
 #'
 #' A step of the bnskmt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Passed to \code{cvm_statistic}.
 #' @param instruments Passed to \code{cvm_statistic}.
@@ -355,7 +347,6 @@ compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
 #'
 #' A step of the bnskmt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

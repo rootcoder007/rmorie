@@ -77,7 +77,6 @@
 #'
 #' A step of the karpV_native implementation. Called by \code{.karpv_u32}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param k Numeric; combined arithmetically in the body.
@@ -92,7 +91,6 @@
 #'
 #' A step of the karpV_native implementation. Called by \code{.karpv_u32}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param k Numeric; combined arithmetically in the body.
@@ -108,7 +106,6 @@
 #'
 #' A step of the karpV_native implementation. Called by \code{morie_karpV}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return The value of \code{e}, as built in the body.
@@ -128,7 +125,6 @@
 #'
 #' A step of the karpV_native implementation. Called by \code{.karpv_below}, \code{.karpv_unit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e A list; the body reads \code{$s} from it.
 #' @return The value of \code{$}.
@@ -182,7 +178,6 @@
 #' A step of the karpV_native implementation. Called by \code{.karpv_copy},
 #' \code{.karpv_grow}, \code{.karpv_replace}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op Carried through into a list the body builds.
 #' @param args Carried through into a list the body builds.
@@ -194,7 +189,6 @@
 #' A step of the karpV_native implementation. Called by \code{.karpv_copy},
 #' \code{.karpv_random_terminal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param term Carried through into a list the body builds.
 #' @return A list with \code{term}.
@@ -205,7 +199,6 @@
 #' A step of the karpV_native implementation. Called by \code{.karpv_collect},
 #' \code{.karpv_copy}, \code{.karpv_pick_point} and 4 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$term} from it.
 #' @return A logical value.
@@ -219,7 +212,6 @@
 #'
 #' A step of the karpV_native implementation. Called by \code{morie_karpV_evaluate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op One of \code{"-"}, \code{"*"}, \code{"\%\%"}, \code{"+"}.
 #' @param vals A vector; indexed elementwise.
@@ -317,7 +309,6 @@ morie_karpV_to_string <- function(node) {
 #'
 #' A step of the karpV_native implementation. Called by \code{.karpv_grow}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.karpv_below}.
 #' @param terminals A vector; its length is taken and its elements indexed.
@@ -336,7 +327,6 @@ morie_karpV_to_string <- function(node) {
 #' A step of the karpV_native implementation. Called by \code{morie_karpV},
 #' \code{morie_karpV_ramped}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.karpv_random_terminal}.
 #' @param functions A vector; its length is taken and its elements indexed.
@@ -389,7 +379,6 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #'
 #' A step of the karpV_native implementation. Called by \code{.karpv_pick_point}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$args} from it.
 #' @param path Carried through into a list the body builds.
@@ -408,7 +397,6 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #'
 #' A step of the karpV_native implementation. Called by \code{morie_karpV}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.karpv_unit}.
 #' @param node Passed to \code{.karpv_collect}.
@@ -429,7 +417,6 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #'
 #' A step of the karpV_native implementation. Called by \code{morie_karpV}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$args} from it.
 #' @param path See Usage.
@@ -444,7 +431,6 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #'
 #' A step of the karpV_native implementation. Called by \code{.karpv_replace}, \code{morie_karpV}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$args}, \code{$op}, \code{$term} from it.
 #' @return The value of \code{.karpv_fnode}.
@@ -458,7 +444,6 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #'
 #' A step of the karpV_native implementation. Called by \code{morie_karpV}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$args}, \code{$op} from it.
 #' @param path A vector; its length is taken and its elements indexed.
@@ -544,7 +529,6 @@ morie_karpV_adjusted <- function(raw) if (!is.finite(raw)) 0 else 1 / (1 + raw)
 #'
 #' A step of the karpV_native implementation. Called by \code{morie_karpV}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.karpv_below}.
 #' @param adj A vector; its length is taken and its elements indexed.

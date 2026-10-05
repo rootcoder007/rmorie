@@ -9,7 +9,6 @@
 #'
 #' A step of the swinmw_native implementation. Called by \code{Swinmw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Numeric; combined arithmetically in the body.
 #' @param tab A matrix; indexed by row and column.

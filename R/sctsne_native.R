@@ -10,7 +10,6 @@
 #'
 #' A step of the sctsne_native implementation. Called by \code{morie_sctsne}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D2 A matrix; indexed by row and column.
 #' @param perp Numeric; passed to \code{log}.

@@ -18,7 +18,6 @@
 #' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm},
 #' \code{.cnvlfc_cross_map}, \code{cnvlfc_embed}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param series Coerced to numeric by the body, with \code{as.numeric}.
 #' @param E Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
@@ -59,7 +58,6 @@
 #'
 #' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_cross_map}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b Numeric; passed to \code{sum}.
@@ -86,7 +84,6 @@
 #'
 #' A step of the cnvlfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param target A matrix; indexed by row and column.
 #' @param candidates A matrix; indexed by row and column.
@@ -119,7 +116,6 @@
 #' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm},
 #' \code{cnvlfc_cross_map}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param driver Coerced to numeric by the body, with \code{as.numeric}.
 #' @param response Coerced to numeric by the body, with \code{as.numeric}.
@@ -211,7 +207,6 @@
 #'
 #' A step of the cnvlfc_native implementation. Called by \code{cnvlfc_ccm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -293,7 +288,6 @@
 #'
 #' A step of the cnvlfc_native implementation. Called by \code{cnvlfc_coupled_logistic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param rx Numeric; combined arithmetically in the body. Defaults to \code{3.8}.
@@ -340,7 +334,6 @@
 #'
 #' A step of the cnvlfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param series Passed to \code{.cnvlfc_embed}.
 #' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2}.
@@ -363,7 +356,6 @@ cnvlfc_embed <- function(series, E = 2, tau = 1) {
 #'
 #' A step of the cnvlfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param driver Passed to \code{.cnvlfc_cross_map}.
 #' @param response Passed to \code{.cnvlfc_cross_map}.
@@ -387,7 +379,6 @@ cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
 #'
 #' A step of the cnvlfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.cnvlfc_ccm}.
 #' @param y Passed to \code{.cnvlfc_ccm}.
@@ -411,7 +402,6 @@ cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
 #'
 #' A step of the cnvlfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{.cnvlfc_coupled_logistic}.
 #' @param rx Passed to \code{.cnvlfc_coupled_logistic}. Defaults to \code{3.8}.
@@ -436,7 +426,6 @@ cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
 #'
 #' A step of the cnvlfc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Carried through into a list the body builds.
 #' @param y Carried through into a list the body builds.

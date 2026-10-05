@@ -8,7 +8,6 @@
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_estimate_gumbel}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Coerced to character by the body, with \code{as.character}.
 #' @param subject Coerced to character by the body, with \code{as.character}.
@@ -63,7 +62,6 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_blstn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Coerced to character by the body, with \code{as.character}.
 #' @param subject Coerced to character by the body, with \code{as.character}.
@@ -134,7 +132,6 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_blstn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param qchars A vector; its length is taken and its elements indexed.
 #' @param schars A vector; its length is taken and its elements indexed.
@@ -184,7 +181,6 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_blast}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Coerced to character by the body, with \code{as.character}.
 #' @param subjects Character; the body checks with \code{is.character}.
@@ -322,7 +318,6 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
 #'
 #' A step of the blstn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Passed to \code{morie_blstn}.
 #' @param subjects Passed to \code{morie_blstn}.
@@ -364,7 +359,6 @@ morie_blast_nucleotide <- morie_blstn
 #' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul},
 #' \code{morie_score_distribution}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{n}, as built in the body.
@@ -385,7 +379,6 @@ lattice_check <- function(x) {
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
@@ -432,7 +425,6 @@ morie_score_distribution <- function(match = 5, mismatch = -4,
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dist A vector; indexed elementwise.
 #' @param hi Numeric; combined arithmetically in the body. Defaults to \code{20}.
@@ -470,7 +462,6 @@ lambda_star <- function(dist, hi = 20, tol = 1e-14, max_iter = 300) {
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores See Usage.
 #' @return One of two values, depending on the branch taken.
@@ -494,7 +485,6 @@ gcd_span <- function(scores) {
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_blstn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dist Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param match Passed to \code{morie_score_distribution}. Defaults to \code{5}.
@@ -582,7 +572,6 @@ morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
 #'
 #' A step of the blstn_native implementation. Called by \code{morie_blstn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param score Coerced to numeric by the body, with \code{as.numeric}.
 #' @param m Coerced to numeric by the body, with \code{as.numeric}.
@@ -613,7 +602,6 @@ morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
 #'
 #' A step of the blstn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Coerced to numeric by the body, with \code{as.numeric}.

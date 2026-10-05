@@ -31,7 +31,6 @@
 #' A step of the dmlqs_native implementation. Called by \code{.dmlqs_atom_readout},
 #' \code{.dmlqs_message_pass}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Coerced to character by the body, with \code{as.character}.
 #' @param w Coerced to character by the body, with \code{as.character}.
@@ -90,7 +89,6 @@
 #'
 #' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj Passed to \code{.dmlqs_norm_adj}.
 #' @return The value of \code{out}, as built in the body.
@@ -113,7 +111,6 @@
 #'
 #' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj Passed to \code{.dmlqs_norm_adj}.
 #' @param length Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
@@ -170,7 +167,6 @@
 #'
 #' A step of the dmlqs_native implementation. Called by \code{.dmlqs_message_pass}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param activation Coerced to character by the body, with \code{as.character}.
@@ -187,7 +183,6 @@
 #'
 #' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h0 Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param adj Passed to \code{.dmlqs_norm_adj}.
@@ -286,7 +281,6 @@
 #'
 #' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edge_states Optional; may be \code{NULL}. A vector; its length is taken and its
 #' elements indexed.
@@ -323,7 +317,6 @@
 #'
 #' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param learned Coerced to numeric by the body, with \code{as.numeric}.
 #' @param descriptors Coerced to numeric by the body, with \code{as.numeric}.
@@ -344,7 +337,6 @@
 #'
 #' A step of the dmlqs_native implementation. Called by \code{morie_dmlqs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

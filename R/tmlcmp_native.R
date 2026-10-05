@@ -65,7 +65,6 @@
 #' A step of the tmlcmp_native implementation. Called by \code{cause_specific_hazards},
 #' \code{morie_tmlcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
@@ -85,7 +84,6 @@
 #'
 #' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -108,7 +106,6 @@
 #'
 #' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A matrix; passed to \code{nrow}.
 #' @param n A count; the body uses it as \code{rep(...)}.
@@ -125,7 +122,6 @@
 #'
 #' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param des A matrix; passed to \code{nrow}.
 #' @param a Numeric; combined arithmetically in the body.
@@ -161,7 +157,6 @@
 #'
 #' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.tmlcmp_vec}.
 #' @param event_type Passed to \code{.tmlcmp_vec}.
@@ -227,7 +222,6 @@ cause_specific_hazards <- function(time, event_type, times,
 #'
 #' A step of the tmlcmp_native implementation. Called by \code{morie_tmlcmp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hazards A vector; indexed elementwise.
 #' @param times A vector; its length is taken.
@@ -277,7 +271,6 @@ cumulative_incidence <- function(hazards, times) {
 #'
 #' A step of the tmlcmp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hazards A vector; indexed elementwise.
 #' @param times A vector; its length is taken.
@@ -313,7 +306,6 @@ one_minus_km <- function(hazards, times, cause) {
 #'
 #' A step of the tmlcmp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.tmlcmp_vec}.
 #' @param event_type Passed to \code{.tmlcmp_vec}.
@@ -412,7 +404,6 @@ morie_tmlcmp <- function(time, event_type, D, X, times = NULL,
 #'
 #' A step of the tmlcmp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -8,7 +8,6 @@
 #'
 #' A step of the benRea_native implementation. Called by \code{ner_decode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param types Coerced to character by the body, with \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
@@ -33,7 +32,6 @@ bio_labels <- function(types) {
 #'
 #' A step of the benRea_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param label Compared against \code{"O"}.
 #' @return The value of \code{substr}.
@@ -47,7 +45,6 @@ bio_labels <- function(types) {
 #'
 #' A step of the benRea_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param label Compared against \code{"O"}.
 #' @return A list with \code{p}, \code{t}.
@@ -61,7 +58,6 @@ bio_labels <- function(types) {
 #'
 #' A step of the benRea_native implementation. Called by \code{viterbi_decode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param labels A vector; its length is taken and its elements indexed.
 #' @return The value of \code{T}, as built in the body.
@@ -90,7 +86,6 @@ valid_transitions <- function(labels) {
 #'
 #' A step of the benRea_native implementation. Called by \code{viterbi_decode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param labels Character; passed to \code{substr}.
 #' @return The value of \code{!=}.
@@ -107,7 +102,6 @@ start_allowed <- function(labels) {
 #'
 #' A step of the benRea_native implementation. Called by \code{ner_decode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param path See Usage.
 #' @return A logical value.
@@ -134,7 +128,6 @@ is_valid_bio <- function(path) {
 #'
 #' A step of the benRea_native implementation. Called by \code{ner_decode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param emissions A matrix; passed to \code{as.matrix}.
 #' @param labels A vector; indexed elementwise.
@@ -154,7 +147,6 @@ greedy_decode <- function(emissions, labels) {
 #'
 #' A step of the benRea_native implementation. Called by \code{ner_decode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param emissions A matrix; passed to \code{as.matrix}.
 #' @param labels A vector; its length is taken and its elements indexed.
@@ -212,7 +204,6 @@ viterbi_decode <- function(emissions, labels, transitions = NULL,
 #'
 #' A step of the benRea_native implementation. Called by \code{ner_decode}, \code{span_f1}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param path A vector; its length is taken and its elements indexed.
 #' @return The value of \code{spans}, as built in the body.
@@ -261,7 +252,6 @@ extract_spans <- function(path) {
 #'
 #' A step of the benRea_native implementation. Called by \code{ner_decode}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pred Passed to \code{extract_spans}.
 #' @param gold Passed to \code{extract_spans}.
@@ -289,7 +279,6 @@ span_f1 <- function(pred, gold) {
 #'
 #' A step of the benRea_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param emissions A matrix; passed to \code{as.matrix}.
 #' @param types Passed to \code{bio_labels}.

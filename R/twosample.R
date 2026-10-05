@@ -113,7 +113,6 @@ morie_wasserstein_test <- function(x, y, B = 999L, cdf = NULL) {
 #'
 #' A step of the twosample implementation. Called by \code{morie_mmd_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{tcrossprod}.
 #' @param kernel Passed to \code{identical}.

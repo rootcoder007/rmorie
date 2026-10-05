@@ -46,7 +46,6 @@
 #' A step of the ghosal_native implementation. Called by \code{Ghosalfrsdensity},
 #' \code{Ghosalgpdenscrt}, \code{morie_gp_density_rate} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param s Numeric; combined arithmetically in the body.
@@ -69,7 +68,6 @@
 #' A step of the ghosal_native implementation. Called by \code{.morie_gh_hellinger},
 #' \code{Ghosalfrsdensity}, \code{morie_polya_tree_density} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param xx Passed to \code{diff}.
 #' @param yy See Usage.
@@ -83,7 +81,6 @@
 #'
 #' A step of the ghosal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @param q Coerced to numeric by the body, with \code{as.numeric}.
@@ -101,7 +98,6 @@
 #' A step of the ghosal_native implementation. Called by \code{morie_polya_tree_density},
 #' \code{morie_polya_tree_mixture}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.

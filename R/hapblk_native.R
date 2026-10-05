@@ -9,7 +9,6 @@
 #'
 #' A step of the hapblk_native implementation. Called by \code{morie_hapblk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h A vector; indexed elementwise.
 #' @param grid Numeric; combined arithmetically in the body. Defaults to \code{200}.

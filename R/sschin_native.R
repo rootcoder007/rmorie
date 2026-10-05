@@ -16,7 +16,6 @@
 #' A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow},
 #' \code{.sschin_ols}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{chol}.
 #' @param b Passed to \code{forwardsolve}.
@@ -37,7 +36,6 @@
 #'
 #' A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -67,7 +65,6 @@
 #'
 #' A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e A vector; indexed elementwise.
@@ -144,7 +141,6 @@
 #'
 #' A step of the sschin_native implementation. Called by \code{morie_sschin_chained_imputation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pq Passed to \code{qnorm}.
 #' @param df Numeric; combined arithmetically in the body.
@@ -163,7 +159,6 @@
 #'
 #' A step of the sschin_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Coerced to numeric by the body, with \code{as.numeric}.
 #' @param event Coerced to numeric by the body, with \code{as.numeric}.
@@ -344,7 +339,6 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
 #'
 #' A step of the sschin_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

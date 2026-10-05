@@ -21,7 +21,6 @@
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_bicdag}, \code{morie_rlearn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A matrix; passed to \code{dim}.
 #' @return The value of \code{%*%}.
@@ -75,7 +74,6 @@
 #' A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic},
 #' \code{.morie_ml_dsep}, \code{morie_docalc} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges Coerced to character by the body, with \code{as.character}.
 #' @param extra Coerced to character by the body, with \code{as.character}. Defaults to
@@ -91,7 +89,6 @@
 #' A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic},
 #' \code{.morie_ml_dsep}, \code{morie_docalc} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
 #' @param nodes A vector; its length is taken.
@@ -113,7 +110,6 @@
 #' A step of the causal_molak implementation. Called by \code{.morie_ml_dsep},
 #' \code{morie_dseptest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
 #' @param nodes A vector; its length is taken.
@@ -135,7 +131,6 @@
 #' A step of the causal_molak implementation. Called by \code{.morie_ml_blocked},
 #' \code{morie_docalc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node See Usage.
 #' @param children A vector; indexed elementwise.
@@ -162,7 +157,6 @@
 #' A step of the causal_molak implementation. Called by \code{.morie_ml_dsep},
 #' \code{morie_dseptest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Carried through into a list the body builds.
 #' @param y Passed to \code{==}.
@@ -200,7 +194,6 @@
 #'
 #' A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param path A vector; its length is taken and its elements indexed.
 #' @param dirs A vector; indexed elementwise.
@@ -231,7 +224,6 @@
 #' A step of the causal_molak implementation. Called by \code{morie_docalc},
 #' \code{morie_dseptest}, \code{morie_faithchk} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges Passed to \code{.morie_ml_nodes}.
 #' @param x Passed to \code{.morie_ml_paths}.
@@ -256,7 +248,6 @@
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_docalc}, \code{morie_dointerv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
 #' @param targets Passed to \code{\%in\%}.
@@ -271,7 +262,6 @@
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_docalc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
 #' @param sources Passed to \code{\%in\%}.
@@ -286,7 +276,6 @@
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_mectest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A matrix; passed to \code{nrow}.
 #' @return A vector, from \code{sort}.
@@ -301,7 +290,6 @@
 #' A step of the causal_molak implementation. Called by \code{.morie_ml_colliders},
 #' \code{morie_bowarc}, \code{morie_collider} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
 #' @param a Passed to \code{==}.
@@ -317,7 +305,6 @@
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_bowarc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges Passed to \code{.morie_ml_nodes}.
 #' @return A logical value.
@@ -345,7 +332,6 @@
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_collider}, \code{morie_mectest}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges A matrix; indexed by row and column.
 #' @return A vector, from \code{sort}.
@@ -655,7 +641,6 @@ morie_faithchk <- function(dag, x, y, z = character(0), indep = TRUE) {
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_hsicstat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param sigma Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
@@ -832,7 +817,6 @@ morie_rlearn <- function(y, t, m, e, x = NULL) {
 #'
 #' A step of the causal_molak implementation. Called by \code{morie_sepset}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq_ A vector; its length is taken and its elements indexed.
 #' @param k Numeric; combined arithmetically in the body.

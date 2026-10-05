@@ -337,7 +337,6 @@ crypto_shred <- function(kek_id, wrapped_deks) {
 #' A step of the secrtt_native implementation. Called by \code{generate_dek},
 #' \code{open_record}, \code{rotate_dek} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return Nothing; this branch always raises.

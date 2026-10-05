@@ -18,7 +18,6 @@
 #'
 #' A step of the qmDS_native implementation. Called by \code{morie_qmDS}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sorted_x A vector; its length is taken and its elements indexed.
 #' @param v Numeric; combined arithmetically in the body.
@@ -46,7 +45,6 @@
 #'
 #' A step of the qmDS_native implementation. Called by \code{morie_qmDS}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sorted_x A vector; its length is taken and its elements indexed.
 #' @param p Numeric; combined arithmetically in the body.

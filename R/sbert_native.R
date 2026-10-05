@@ -25,7 +25,6 @@
 #'
 #' A step of the sbert_native implementation. Called by \code{pool}, \code{rank_by_similarity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
@@ -47,7 +46,6 @@
 #' A step of the sbert_native implementation. Called by \code{classification_features},
 #' \code{cosine_similarity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
@@ -65,7 +63,6 @@
 #'
 #' A step of the sbert_native implementation. Called by \code{morie_geron_lenet5}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param token_vectors Passed to \code{.sbert_mat}.
 #' @param mode One of \code{"cls"}, \code{"max"}. Defaults to \code{"mean"}.
@@ -103,7 +100,6 @@ pool <- function(token_vectors, mode = "mean", mask = NULL) {
 #'
 #' A step of the sbert_native implementation. Called by \code{rank_by_similarity}, \code{sts_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Passed to \code{.sbert_vec}.
 #' @param v Passed to \code{.sbert_vec}.
@@ -129,7 +125,6 @@ cosine_similarity <- function(u, v) {
 #'
 #' A step of the sbert_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Passed to \code{.sbert_vec}.
 #' @param v Passed to \code{.sbert_vec}.
@@ -155,7 +150,6 @@ classification_features <- function(u, v) {
 #'
 #' A step of the sbert_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param mode One of \code{"bi-encoder"}, \code{"cross-encoder"}. Defaults to
@@ -182,7 +176,6 @@ pair_cost <- function(n, mode = "cross-encoder") {
 #'
 #' A step of the sbert_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param query Passed to \code{cosine_similarity}.
 #' @param corpus_embeddings Passed to \code{.sbert_mat}.
@@ -210,7 +203,6 @@ rank_by_similarity <- function(query, corpus_embeddings, top_k = 5) {
 #'
 #' A step of the sbert_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pairs A vector; its length is taken and its elements indexed.
 #' @param embed Accepted by the signature and not used anywhere in the body.
@@ -245,7 +237,6 @@ sts_score <- function(pairs, embed) {
 #'
 #' A step of the sbert_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

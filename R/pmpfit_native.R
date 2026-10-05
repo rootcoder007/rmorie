@@ -220,7 +220,6 @@ morie_pmpfit_cheatsheet <- function() {
 #'
 #' A step of the pmpfit_native implementation. Called by \code{morie_pmpfit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_gamma}.
 #' @param a Passed to \code{.ghc_gamma}.
@@ -240,7 +239,6 @@ morie_pmpfit_cheatsheet <- function() {
 #'
 #' A step of the pmpfit_native implementation. Called by \code{.ghc_beta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param shape Numeric; combined arithmetically in the body.

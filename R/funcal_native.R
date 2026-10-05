@@ -58,7 +58,6 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #'
 #' A step of the funcal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
@@ -78,7 +77,6 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' A step of the funcal_native implementation. Called by \code{morie_funcal},
 #' \code{morie_funcal_seed_orthologs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h Optional; may be \code{NULL}. A list; the body reads \code{$evalue},
 #' \code{$query}, \code{$query_cov}, \code{$score}, \code{$target}, \code{$target_cov}
@@ -113,7 +111,6 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #'
 #' A step of the funcal_native implementation. Called by \code{morie_funcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hits See Usage.
 #' @param evalue The body requires: funcal: evalue must be positive and score
@@ -173,7 +170,6 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 #'
 #' A step of the funcal_native implementation. Called by \code{morie_funcal_assign_orthologs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_query_side Passed to \code{<=}.
 #' @param n_target_side Passed to \code{<=}.
@@ -189,7 +185,6 @@ morie_funcal_seed_orthologs <- function(hits, evalue = 1e-3, score = 60.0,
 #'
 #' A step of the funcal_native implementation. Called by \code{morie_funcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seeds A vector; indexed elementwise.
 #' @param groups A vector; indexed elementwise.
@@ -281,7 +276,6 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 #'
 #' A step of the funcal_native implementation. Called by \code{morie_funcal}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param assignments A vector; indexed elementwise.
 #' @param annotations A vector; indexed elementwise.
@@ -351,7 +345,6 @@ morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL
 #'
 #' A step of the funcal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param hits Passed to \code{morie_funcal_seed_orthologs}.
 #' @param groups Passed to \code{morie_funcal_assign_orthologs}.
@@ -433,7 +426,6 @@ morie_funcal_functional_annotation <- morie_funcal
 #'
 #' A step of the funcal_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

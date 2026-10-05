@@ -61,7 +61,6 @@ morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
 #'
 #' A step of the rappor_native implementation. Called by \code{morie_rappor}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param value Coerced to character by the body, with \code{as.character}.
 #' @param k Numeric; combined arithmetically in the body.

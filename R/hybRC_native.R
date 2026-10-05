@@ -74,7 +74,6 @@
 #'
 #' A step of the hybRC_native implementation. Called by \code{weighted}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
@@ -92,7 +91,6 @@
 #'
 #' A step of the hybRC_native implementation. Called by \code{feature_combination}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -117,7 +115,6 @@
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param method Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{method}, \code{order_sensitive}, \code{note}.
@@ -143,7 +140,6 @@ is_order_sensitive <- function(method) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Iterated over elementwise, with \code{lapply}.
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.hybRC_vec}.
@@ -200,7 +196,6 @@ weighted <- function(scores, weights = NULL) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Iterated over elementwise, with \code{lapply}.
 #' @param criterion Accepted by the signature and not used anywhere in the body.
@@ -240,7 +235,6 @@ switching <- function(scores, criterion, context = NULL) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param recommendations Iterated over elementwise, with \code{lapply}.
 #' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with
@@ -288,7 +282,6 @@ mixed <- function(recommendations, top_k = NULL) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param content_features Passed to \code{.hybRC_mat}.
 #' @param collaborative_features Passed to \code{.hybRC_mat}.
@@ -329,7 +322,6 @@ feature_combination <- function(content_features, collaborative_features) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param primary Coerced to list by the body, with \code{as.list}.
 #' @param secondary Coerced to list by the body, with \code{as.list}.
@@ -372,7 +364,6 @@ cascade <- function(primary, secondary, tol = 1e-9) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param base_output Passed to \code{consumer}.
 #' @param consumer Accepted by the signature and not used anywhere in the body.
@@ -397,7 +388,6 @@ feature_augmentation <- function(base_output, consumer) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model_builder Accepted by the signature and not used anywhere in the body.
 #' @param consumer Accepted by the signature and not used anywhere in the body.
@@ -428,7 +418,6 @@ meta_level <- function(model_builder, consumer, data) {
 #'
 #' A step of the hybRC_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

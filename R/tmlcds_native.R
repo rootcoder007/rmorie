@@ -22,7 +22,6 @@
 #'
 #' A step of the tmlcds_native implementation. Called by \code{tmle_cdrs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param payload See Usage.
 #' @return The value of \code{payload}, as built in the body.
@@ -36,7 +35,6 @@
 #' A step of the tmlcds_native implementation. Called by \code{.tmlcds_fluctuate},
 #' \code{.tmlcds_logit_irls}, \code{.tmlcds_propensity} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -53,7 +51,6 @@
 #'
 #' A step of the tmlcds_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -69,7 +66,6 @@
 #'
 #' A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -87,7 +83,6 @@
 #'
 #' A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
@@ -107,7 +102,6 @@
 #'
 #' A step of the tmlcds_native implementation. Called by \code{.tmlcds_propensity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cols Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param n A count; the body uses it as \code{matrix(...)}.
@@ -125,7 +119,6 @@
 #'
 #' A step of the tmlcds_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{\%*\%}.
 #' @param v A matrix; passed to \code{\%*\%}.
@@ -252,7 +245,6 @@
 #'
 #' A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param qa Numeric; passed to \code{log}.
 #' @param y A vector; its length is taken.
@@ -268,7 +260,6 @@
 #' A step of the tmlcds_native implementation. Called by \code{.tmlcds_refit_on},
 #' \code{ctmle_sequence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param d Passed to \code{.tmlcds_logit_irls}.
 #' @param cols Passed to \code{.tmlcds_design}.
@@ -581,7 +572,6 @@ tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #'
 #' A step of the tmlcds_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

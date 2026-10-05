@@ -80,7 +80,6 @@
 #'
 #' A step of the trupek_native implementation. Called by \code{.trupek_exact}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
@@ -107,7 +106,6 @@
 #' A step of the trupek_native implementation. Called by \code{.trupek_cauchy},
 #' \code{.trupek_dogleg}, \code{.trupek_exact} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{.trupek_dot}.
 #' @return A numeric value.
@@ -123,7 +121,6 @@
 #' A step of the trupek_native implementation. Called by \code{.trupek_cauchy},
 #' \code{.trupek_dogleg}, \code{.trupek_model} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A matrix; indexed by row and column.
 #' @param v Passed to \code{.trupek_dot}.
@@ -145,7 +142,6 @@
 #'
 #' A step of the trupek_native implementation. Called by \code{morie_trupek_trust_region}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Passed to \code{.trupek_dot}.
 #' @param H Passed to \code{.trupek_matvec}.
@@ -194,7 +190,6 @@
 #'
 #' A step of the trupek_native implementation. Called by \code{.trupek_dogleg}, \code{.trupek_sub}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A vector; its length is taken.
 #' @param H Passed to \code{.trupek_matvec}.
@@ -242,7 +237,6 @@
 #' A step of the trupek_native implementation. Called by \code{.trupek_dogleg},
 #' \code{.trupek_exact}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -263,7 +257,6 @@
 #'
 #' A step of the trupek_native implementation. Called by \code{.trupek_sub}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Numeric; combined arithmetically in the body.
 #' @param H Passed to \code{.trupek_chol}.
@@ -287,7 +280,6 @@
 #'
 #' A step of the trupek_native implementation. Called by \code{.trupek_sub}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A vector; its length is taken.
 #' @param H Passed to \code{.trupek_matvec}.
@@ -335,7 +327,6 @@
 #'
 #' A step of the trupek_native implementation. Called by \code{.trupek_sub}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A vector; its length is taken.
 #' @param H A matrix; indexed by row and column.
@@ -387,7 +378,6 @@
 #'
 #' A step of the trupek_native implementation. Called by \code{morie_trupek_trust_region}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Passed to \code{.trupek_cauchy}.
 #' @param H Passed to \code{.trupek_cauchy}.

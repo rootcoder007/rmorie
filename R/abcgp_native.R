@@ -32,7 +32,6 @@
 #' A step of the abcgp_native implementation. Called by
 #' \code{.abcgp.gabc_log_likelihood}, \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values A vector; indexed elementwise.
 #' @return A numeric value.
@@ -57,7 +56,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.sobol_sequence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dim A count; the body uses it as \code{seq_len(...)}.
 #' @param bits A count; the body uses it as \code{seq_len(...)}.
@@ -93,7 +91,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.design_from_prior}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @param dim A count; the body uses it as \code{seq_len(...)}.
@@ -138,7 +135,6 @@
 #' \code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler},
 #' \code{.abcgp.synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{summary}.
 #' @param summary Optional; may be \code{NULL}. Passed to \code{is.null}.
@@ -154,7 +150,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.draw_mean},
 #' \code{.abcgp.gp_fit}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A matrix; indexed by row and column.
 #' @param jitter Defaults to \code{1e-12}.
@@ -184,7 +179,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
 #' \code{.abcgp.gp_predict}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -209,7 +203,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler},
 #' \code{.abcgp.synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -231,7 +224,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
 #' \code{.abcgp.gp_predict}, \code{.abcgp.profile_nll}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -257,7 +249,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
@@ -275,7 +266,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
 #' \code{.abcgp.mle_lengthscale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nugget Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
@@ -296,7 +286,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mle_lengthscale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y Numeric; combined arithmetically in the body.
@@ -345,7 +334,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Passed to \code{.abcgp.profile_nll}.
@@ -387,7 +375,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param design A matrix; passed to \code{as.matrix}.
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
@@ -451,7 +438,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.implausible},
 #' \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol},
 #' \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel},
@@ -483,7 +469,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fit A list; the body reads \code{$values} from it.
 #' @param theta Passed to \code{.abcgp.gp_predict}.
@@ -500,7 +485,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param prior_ppf A vector; its length is taken and its elements indexed.
@@ -547,7 +531,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.history_match}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.abcgp.summarise}.
@@ -607,7 +590,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param draws Iterated over elementwise, with \code{lapply}.
 #' @param obs Passed to \code{.abcgp.summarise}.
@@ -637,7 +619,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Passed to \code{.abcgp.gabc_log_likelihood}.
 #' @param obs Passed to \code{.abcgp.gabc_log_likelihood}.
@@ -711,7 +692,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_prior Accepted by the signature and not used anywhere in the body.
 #' @param theta Passed to \code{log_prior}.
@@ -731,7 +711,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alphas A vector; its length is taken.
 #' @param tau Passed to \code{<=}.
@@ -757,7 +736,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -776,7 +754,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu A vector; its length is taken.
 #' @param cov Numeric; combined arithmetically in the body.
@@ -796,7 +773,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Passed to \code{.abcgp.mw_sampler}.
 #' @param obs Passed to \code{.abcgp.mw_sampler}.
@@ -823,7 +799,6 @@
 #'
 #' A step of the abcgp_native implementation. Called by \code{morie_abcgp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Passed to \code{.abcgp.mw_sampler}.
 #' @param obs Passed to \code{.abcgp.mw_sampler}.
@@ -857,7 +832,6 @@
 #' A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc},
 #' \code{.abcgp.synthetic_abc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.abcgp.synthetic_log_likelihood}.
@@ -1188,7 +1162,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_prior Accepted by the signature and not used anywhere in the body.
 #' @param theta Passed to \code{log_prior}.
@@ -1210,7 +1183,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gp_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param nugget Optional; may be \code{NULL}. Coerced to numeric by the body, with
 #' \code{as.numeric}.
@@ -1230,7 +1202,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
@@ -1248,7 +1219,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_draw_mean},
 #' \code{.gp_mvn_logpdf}, \code{.gp_profile_nll} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A matrix; indexed by row and column.
 #' @param jitter Defaults to \code{1e-12}.
@@ -1281,7 +1251,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_mvn_logpdf},
 #' \code{.gp_profile_nll}, \code{gp_fit} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param L A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -1308,7 +1277,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_profile_nll},
 #' \code{gp_fit}, \code{gp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -1333,7 +1301,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu A vector; its length is taken.
 #' @param cov Numeric; combined arithmetically in the body.
@@ -1354,7 +1321,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alphas A vector; its length is taken.
 #' @param tau Passed to \code{<=}.
@@ -1398,7 +1364,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
@@ -1418,7 +1383,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gp_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y Passed to \code{.gp_profile_nll}.
@@ -1459,7 +1423,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler},
 #' \code{synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -1481,7 +1444,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{gps_abc}, \code{synthetic_abc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sim Accepted by the signature and not used anywhere in the body.
 #' @param obs Passed to \code{.gp_summarise}.
@@ -1564,7 +1526,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #'
 #' A step of the abcgp_native implementation. Called by \code{.gp_mle_lengthscale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y Numeric; combined arithmetically in the body.
@@ -1608,7 +1569,6 @@ design_from_prior <- function(n, prior_ppf, dim = NULL, skip = 1L) {
 #' A step of the abcgp_native implementation. Called by \code{.gp_mw_sampler},
 #' \code{gabc_log_likelihood}, \code{synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{summary}.
 #' @param summary Optional; may be \code{NULL}. Passed to \code{is.null}.

@@ -40,7 +40,6 @@
 #'
 #' A step of the mafft_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vals A vector; its length is taken.
 #' @return A vector, from \code{c}.
@@ -67,7 +66,6 @@ names(.MAFFT_PHAT) <- .MAFFT_AA
 #'
 #' A step of the mafft_native implementation. Called by \code{mafft_alignment}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seqs See Usage.
 #' @param seq_type Optional; may be \code{NULL}. One of \code{"aa"}, \code{"nt"}.
@@ -101,7 +99,6 @@ names(.MAFFT_PHAT) <- .MAFFT_AA
 #'
 #' A step of the mafft_native implementation. Called by \code{correlation}, \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group Iterated over elementwise, with \code{vapply}.
 #' @param weights Optional; may be \code{NULL}. A vector; its length is taken and its
@@ -159,7 +156,6 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #'
 #' A step of the mafft_native implementation. Called by \code{.mafft_xcorr_fft}, \code{correlation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Numeric; combined arithmetically in the body.
 #' @param m Numeric; combined arithmetically in the body.
@@ -175,7 +171,6 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #'
 #' A step of the mafft_native implementation. Called by \code{.mafft_xcorr_fft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{fft}.
 #' @return The value of \code{fft}.
@@ -191,7 +186,6 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #'
 #' A step of the mafft_native implementation. Called by \code{.mafft_xcorr_fft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
@@ -208,7 +202,6 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #'
 #' A step of the mafft_native implementation. Called by \code{correlation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
@@ -234,7 +227,6 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #'
 #' A step of the mafft_native implementation. Called by \code{correlation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -267,7 +259,6 @@ residue_vectors <- function(group, weights = NULL, seq_type = "aa") {
 #' A step of the mafft_native implementation. Called by \code{find_homologous_segments},
 #' \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group1 Passed to \code{residue_vectors}.
 #' @param group2 Passed to \code{residue_vectors}.
@@ -316,7 +307,6 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #'
 #' A step of the mafft_native implementation. Called by \code{find_homologous_segments}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lags A vector; its length is taken and its elements indexed.
 #' @param c A vector; its length is taken.
@@ -359,7 +349,6 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #'
 #' A step of the mafft_native implementation. Called by \code{jtt_matrix}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A list with \code{S}, \code{f}.
 #' @export
@@ -386,7 +375,6 @@ correlation <- function(group1, group2, weights1 = NULL, weights2 = NULL,
 #' A step of the mafft_native implementation. Called by \code{.mafft_default_raw_matrix},
 #' \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param pam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200L}.
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{10}.
@@ -448,7 +436,6 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
 #'
 #' A step of the mafft_native implementation. Called by \code{normalized_similarity_matrix}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq_type Compared against \code{"nt"}.
 #' @param which Compared against \code{"grantham"}. Defaults to \code{"jtt200"}.
@@ -483,7 +470,6 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
 #' A step of the mafft_native implementation. Called by \code{.mafft_site_score},
 #' \code{normalized_similarity_matrix}, \code{wsp_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A vector; indexed elementwise.
 #' @param a Passed to \code{paste}.
@@ -499,7 +485,6 @@ jtt_matrix <- function(pam = 200L, scale = 10.0) {
 #'
 #' A step of the mafft_native implementation. Called by \code{mafft_alignment}, \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param raw_matrix Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param freqs Optional; may be \code{NULL}. A vector; indexed elementwise.
@@ -573,7 +558,6 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' A step of the mafft_native implementation. Called by \code{.mafft_nw},
 #' \code{find_homologous_segments}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Passed to \code{.mafft_get}.
 #' @param ga A vector; indexed elementwise.
@@ -602,7 +586,6 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #'
 #' A step of the mafft_native implementation. Called by \code{.mafft_nw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group A vector; its length is taken and its elements indexed.
 #' @param weights A vector; indexed elementwise.
@@ -631,7 +614,6 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #'
 #' A step of the mafft_native implementation. Called by \code{group_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g1 A vector; its length is taken and its elements indexed.
 #' @param g2 A vector; its length is taken and its elements indexed.
@@ -745,7 +727,6 @@ normalized_similarity_matrix <- function(raw_matrix = NULL, freqs = NULL,
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{morie_mafft}, \code{progressive_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group1 Iterated over elementwise, with \code{vapply}.
 #' @param group2 Iterated over elementwise, with \code{vapply}.
@@ -827,7 +808,6 @@ group_align <- function(group1, group2, scoring, weights1 = NULL, weights2 = NUL
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{morie_mafft}, \code{progressive_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group1 Iterated over elementwise, with \code{vapply}.
 #' @param group2 Iterated over elementwise, with \code{vapply}.
@@ -924,7 +904,6 @@ find_homologous_segments <- function(group1, group2, scoring,
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{morie_mafft}, \code{progressive_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param segments A vector; indexed elementwise.
 #' @return A vector, from \code{rev}.
@@ -968,7 +947,6 @@ arrange_segments <- function(segments) {
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{progressive_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param chain See Usage.
 #' @return The value of \code{out}, as built in the body.
@@ -988,7 +966,6 @@ arrange_segments <- function(segments) {
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{mafft_alignment}, \code{morie_mafft} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seqs A vector; its length is taken.
 #' @return The value of \code{D}, as built in the body.
@@ -1051,7 +1028,6 @@ sixtuple_distance <- function(seqs) {
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{mafft_alignment}, \code{morie_mafft} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A matrix; indexed by row and column.
 #' @return The value of \code{lapply}.
@@ -1119,7 +1095,6 @@ guide_tree <- function(D) {
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{progressive_align}, \code{wsp_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param k A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{rep}.
@@ -1133,7 +1108,6 @@ guide_tree <- function(D) {
 #'
 #' A step of the mafft_native implementation. Called by \code{mafft_alignment}, \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seqs A vector; its length is taken and its elements indexed.
 #' @param scoring Passed to \code{find_homologous_segments}.
@@ -1214,7 +1188,6 @@ progressive_align <- function(seqs, scoring, tree = NULL, seq_type = "aa",
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{mafft_alignment}, \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alignment Iterated over elementwise, with \code{vapply}.
 #' @param scoring A list; the body reads \code{$matrix} from it.
@@ -1267,7 +1240,6 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
 #'
 #' A step of the mafft_native implementation. Called by \code{iterative_refine}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
@@ -1294,7 +1266,6 @@ wsp_score <- function(alignment, scoring, s_op = 2.4, weights = NULL) {
 #'
 #' A step of the mafft_native implementation. Called by \code{mafft_alignment}, \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alignment Iterated over elementwise, with \code{vapply}.
 #' @param scoring Passed to \code{wsp_score}.
@@ -1382,7 +1353,6 @@ iterative_refine <- function(alignment, scoring, tree = NULL, s_op = 2.4,
 #'
 #' A step of the mafft_native implementation. Called by \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sequences Passed to \code{.mafft_clean}.
 #' @param method One of \code{"FFT-NS-2"}, \code{"FFT-NS-i"}, \code{"NW-NS-2"}. Defaults
@@ -1476,7 +1446,6 @@ mafftalignment <- mafft_alignment
 #'
 #' A step of the mafft_native implementation. Called by \code{morie_mafft}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -1502,7 +1471,6 @@ mafftalignment <- mafft_alignment
 #'
 #' A step of the mafft_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param op A vector; its length is taken.
 #' @param ... Passed through.
@@ -1551,7 +1519,6 @@ morie_mafft <- function(op, ...) {
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{progressive_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param chain A matrix; indexed by row and column.
 #' @return The value of \code{mapply}.
@@ -1575,7 +1542,6 @@ mafft_anchors_from <- function(chain) {
 #'
 #' A step of the mafft_native implementation. Called by \code{mafft_alignment}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seqs Passed to \code{unlist}.
 #' @param seq_type Optional; may be \code{NULL}. One of \code{"aa"}, \code{"nt"}.
@@ -1607,7 +1573,6 @@ mafft_clean <- function(seqs, seq_type = NULL) {
 #'
 #' A step of the mafft_native implementation. Called by \code{normalized_similarity_matrix}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seq_type Compared against \code{"nt"}.
 #' @param which Compared against \code{"grantham"}. Defaults to \code{"jtt200"}.
@@ -1625,7 +1590,6 @@ mafft_default_raw <- function(seq_type, which = "jtt200") {
 #'
 #' A step of the mafft_native implementation. Called by \code{iterative_refine}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group A vector; its length is taken and its elements indexed.
 #' @return A vector, from \code{vapply}.
@@ -1637,7 +1601,6 @@ mafft_degap <- function(group) .mafft_degap(group)
 #'
 #' A step of the mafft_native implementation. Called by \code{mafft_nw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param group A vector; its length is taken and its elements indexed.
 #' @param weights A vector; indexed elementwise.
@@ -1650,7 +1613,6 @@ mafft_gap_profiles <- function(group, weights) .mafft_gap_profiles(group, weight
 #'
 #' A step of the mafft_native implementation. Called by \code{jtt_matrix}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A list with \code{S}, \code{f}.
 #' @export
@@ -1676,7 +1638,6 @@ mafft_jtt_exchangeability <- function() {
 #' A step of the mafft_native implementation. Called by \code{mafft_site_score},
 #' \code{normalized_similarity_matrix}, \code{wsp_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A vector; indexed elementwise.
 #' @param a Passed to \code{paste0}.
@@ -1693,7 +1654,6 @@ mafft_lookup <- function(M, a, b) {
 #'
 #' A step of the mafft_native implementation. Called by \code{group_align}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g1 A vector; its length is taken and its elements indexed.
 #' @param g2 A vector; its length is taken and its elements indexed.
@@ -1716,7 +1676,6 @@ mafft_nw <- function(g1, g2, M, w1, w2, s_op) {
 #'
 #' A step of the mafft_native implementation. Called by \code{find_homologous_segments}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lags A vector; indexed elementwise.
 #' @param c Numeric; passed to \code{order}.
@@ -1731,7 +1690,6 @@ mafft_peaks <- function(lags, c, n_peaks) .mafft_peaks(lags, c, n_peaks)
 #' A step of the mafft_native implementation. Called by \code{find_homologous_segments},
 #' \code{mafft_nw}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Passed to \code{mafft_lookup}.
 #' @param ga A vector; its length is taken and its elements indexed.
@@ -1752,7 +1710,6 @@ mafft_site_score <- function(M, ga, gb, wa, wb, i, j) {
 #' A step of the mafft_native implementation. Called by \code{iterative_refine},
 #' \code{progressive_align}, \code{wsp_score}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param k A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{rep}.
@@ -1765,7 +1722,6 @@ mafft_weights <- function(k) rep(1.0 / k, k)
 #'
 #' A step of the mafft_native implementation. Called by \code{correlation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -1792,7 +1748,6 @@ mafft_xcorr_direct <- function(a, b, size) {
 #'
 #' A step of the mafft_native implementation. Called by \code{correlation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.

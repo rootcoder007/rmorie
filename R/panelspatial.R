@@ -114,7 +114,6 @@ morie_covariate_balance <- function(x, treat, weights = NULL, threshold = 0.1) {
 #'
 #' A step of the panelspatial implementation. Called by \code{morie_jacquez_knn}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A matrix; indexed by row and column.
 #' @param k A count; the body uses it as \code{seq_len(...)}.

@@ -247,7 +247,6 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' A step of the sechsh_native implementation. Called by \code{.kdf_hmac},
 #' \code{.sech_hmac}, \code{morie_sechsh_chain_entry} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bytes Passed to \code{as.raw}.
 #' @return The value of \code{out}, as built in the body.
@@ -341,7 +340,6 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #'
 #' A step of the sechsh_native implementation. Called by \code{morie_sechsh_chain_entry}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param key A vector; its length is taken.
 #' @param msg Passed to \code{as.raw}.
@@ -362,7 +360,6 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_chain},
 #' \code{morie_sechsh_verify_inclusion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
@@ -376,7 +373,6 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' A step of the sechsh_native implementation. Called by
 #' \code{morie_sechsh_verify_chain}, \code{morie_sechsh_verify_inclusion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -445,7 +441,6 @@ chain_entry <- function(previous_hash, entry, key = NULL) {
 #' A step of the sechsh_native implementation. Called by \code{verify_chain},
 #' \code{verify_inclusion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
@@ -469,7 +464,6 @@ chain_entry <- function(previous_hash, entry, key = NULL) {
 #' A step of the sechsh_native implementation. Called by \code{build_chain},
 #' \code{chain_entry}, \code{verify_chain} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return Nothing; this branch always raises.
@@ -487,7 +481,6 @@ chain_entry <- function(previous_hash, entry, key = NULL) {
 #' A step of the sechsh_native implementation. Called by \code{build_chain},
 #' \code{verify_inclusion}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bs Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.

@@ -35,7 +35,6 @@
 #'
 #' A step of the gnnEx_native implementation. Called by \code{gnnEx_mask_objective}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -84,7 +83,6 @@
 #'
 #' A step of the gnnEx_native implementation. Called by \code{gnnEx_explain_node}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj Passed to \code{.gnnEx_get_neighbors}.
 #' @param v Coerced to integer by the body, with \code{as.integer}.
@@ -133,7 +131,6 @@ gnnEx_computation_graph <- function(adj, v, L) {
 #'
 #' A step of the gnnEx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param probs Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -157,7 +154,6 @@ gnnEx_conditional_entropy <- function(probs) {
 #'
 #' A step of the gnnEx_native implementation. Called by \code{gnnEx_explain_node}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param predict Accepted by the signature and not used anywhere in the body.
 #' @param edges Passed to \code{predict}.
@@ -198,7 +194,6 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
 #'
 #' A step of the gnnEx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param predict Passed to \code{gnnEx_mask_objective}.
 #' @param adj Passed to \code{gnnEx_computation_graph}.
@@ -287,7 +282,6 @@ gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
 #'
 #' A step of the gnnEx_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

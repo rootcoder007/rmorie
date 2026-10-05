@@ -24,7 +24,6 @@
 #'
 #' A step of the likemc_native implementation. Called by \code{morie_likemc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.
@@ -58,7 +57,6 @@
 #'
 #' A step of the likemc_native implementation. Called by \code{morie_likemc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param observed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param expected Coerced to numeric by the body, with \code{as.numeric}.
@@ -80,7 +78,6 @@
 #'
 #' A step of the likemc_native implementation. Called by \code{morie_likemc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{log}.
 #' @param mu Numeric; combined arithmetically in the body.
@@ -97,7 +94,6 @@
 #'
 #' A step of the likemc_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param model A list; the body reads \code{$dt}, \code{$I0}, \code{$N}, \code{$S0} from it.
 #' @param data Coerced to numeric by the body, with \code{as.numeric}.

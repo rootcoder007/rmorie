@@ -35,7 +35,6 @@
 #'
 #' A step of the svdpp_native implementation. Called by \code{.svdpp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_user Coerced to numeric by the body, with \code{as.numeric}.
@@ -50,7 +49,6 @@
 #'
 #' A step of the svdpp_native implementation. Called by \code{.svdpp_predict}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rated_items Coerced to list by the body, with \code{as.list}.
 #' @param y A vector; its length is taken and its elements indexed.
@@ -93,7 +91,6 @@
 #'
 #' A step of the svdpp_native implementation. Called by \code{.svdpp_sgd_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu Passed to \code{.svdpp_baseline}.
 #' @param b_user Passed to \code{.svdpp_baseline}.
@@ -140,7 +137,6 @@
 #'
 #' A step of the svdpp_native implementation. Called by \code{.svdpp_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rating Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu Passed to \code{.svdpp_predict}.
@@ -193,7 +189,6 @@
 #'
 #' A step of the svdpp_native implementation. Called by \code{morie_svdpp}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Iterated over elementwise, with \code{lapply}.
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
@@ -287,7 +282,6 @@
 #'
 #' A step of the svdpp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.svdpp_fit}.
 #' @param n_users Passed to \code{.svdpp_fit}.
@@ -316,7 +310,6 @@ morie_svdpp <- function(ratings, n_users, n_items,
 #'
 #' A step of the svdpp_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

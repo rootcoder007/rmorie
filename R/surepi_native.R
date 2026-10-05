@@ -39,7 +39,6 @@
 #'
 #' A step of the surepi_native implementation. Called by \code{.surepi_stat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts A vector; indexed elementwise.
 #' @param t Numeric; combined arithmetically in the body.
@@ -69,7 +68,6 @@
 #'
 #' A step of the surepi_native implementation. Called by \code{surepi_ears_detect}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts A vector; its length is taken and its elements indexed.
 #' @param method See Usage.
@@ -97,7 +95,6 @@
 #'
 #' A step of the surepi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Passed to \code{surepi_ears_detect}.
 #' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{3}.
@@ -117,7 +114,6 @@ surepi_c1_mild <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 #'
 #' A step of the surepi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Passed to \code{surepi_ears_detect}.
 #' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{3}.
@@ -137,7 +133,6 @@ surepi_c2_medium <- function(counts, threshold = 3.0, sigma_floor = 1.0) {
 #'
 #' A step of the surepi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Passed to \code{surepi_ears_detect}.
 #' @param threshold Passed to \code{surepi_ears_detect}. Defaults to \code{2}.
@@ -158,7 +153,6 @@ surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
 #' A step of the surepi_native implementation. Called by \code{surepi_c1_mild},
 #' \code{surepi_c2_medium}, \code{surepi_c3_ultra}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @param method Compared against \code{"C3"}. Defaults to \code{"C2"}.
@@ -234,7 +228,6 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
 #'
 #' A step of the surepi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu0 A vector; its length is taken.
@@ -299,7 +292,6 @@ surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
 #'
 #' A step of the surepi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param current Coerced to numeric by the body, with \code{as.numeric}.
@@ -357,7 +349,6 @@ surepi_compound_smoothing <- function(values, current,
 #'
 #' A step of the surepi_native implementation. Called by \code{surepi_compound_smoothing}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param width Numeric; combined arithmetically in the body.
@@ -389,7 +380,6 @@ surepi_compound_smoothing <- function(values, current,
 #'
 #' A step of the surepi_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

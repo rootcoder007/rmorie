@@ -27,7 +27,6 @@
 #' A step of the slvgrf_native implementation. Called by \code{qini_curve},
 #' \code{rate_test}, \code{toc_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @param priority Coerced to numeric by the body, with \code{as.numeric}.
@@ -48,7 +47,6 @@
 #'
 #' A step of the slvgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Coerced to numeric by the body, with \code{as.numeric}.
@@ -94,7 +92,6 @@ aipw_scores <- function(Y, W, mu1, mu0, e) {
 #'
 #' A step of the slvgrf_native implementation. Called by \code{rate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{.slvgrf_check}.
 #' @param priority Passed to \code{.slvgrf_check}.
@@ -129,7 +126,6 @@ toc_curve <- function(scores, priority) {
 #' A step of the slvgrf_native implementation. Called by \code{autoc},
 #' \code{qini_coefficient}, \code{rate_test}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{toc_curve}.
 #' @param priority Passed to \code{toc_curve}.
@@ -158,7 +154,6 @@ rate <- function(scores, priority, weight = "autoc") {
 #'
 #' A step of the slvgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{rate}.
 #' @param priority Passed to \code{rate}.
@@ -176,7 +171,6 @@ autoc <- function(scores, priority) {
 #'
 #' A step of the slvgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{rate}.
 #' @param priority Passed to \code{rate}.
@@ -194,7 +188,6 @@ qini_coefficient <- function(scores, priority) {
 #'
 #' A step of the slvgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{.slvgrf_check}.
 #' @param priority Passed to \code{.slvgrf_check}.
@@ -241,7 +234,6 @@ qini_curve <- function(scores, priority, cost = NULL) {
 #'
 #' A step of the slvgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{.slvgrf_check}.
 #' @param priority Passed to \code{.slvgrf_check}.
@@ -291,7 +283,6 @@ rate_test <- function(scores, priority, weight = "autoc", reps = 500,
 #'
 #' A step of the slvgrf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -330,7 +321,6 @@ morie_slvgrf <- list(aipw_scores = aipw_scores,
 #' A step of the slvgrf_native implementation. Called by \code{qini_curve},
 #' \code{rate_test}, \code{toc_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param scores Passed to \code{.slvgrf_vec}.
 #' @param priority Passed to \code{.slvgrf_vec}.
@@ -355,7 +345,6 @@ morie_slvgrf <- list(aipw_scores = aipw_scores,
 #' A step of the slvgrf_native implementation. Called by \code{.check},
 #' \code{aipw_scores}, \code{qini_curve}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return A vector, from \code{as.numeric}.

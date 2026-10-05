@@ -20,7 +20,6 @@ morie_default_workflow_map <- function() {
 #' A step of the workflow implementation. Called by \code{morie_run_pipeline},
 #' \code{morie_run_workflow_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param script_map Character; the body checks with \code{is.character}.
 #' @return The value of \code{script_map}, as built in the body.

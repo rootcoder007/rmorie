@@ -38,7 +38,6 @@
 #' A step of the sdxlcd_native implementation. Called by
 #' \code{morie_sdxlcd_crop_conditioning}, \code{morie_sdxlcd_size_conditioning}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param value Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dim Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
@@ -68,7 +67,6 @@ morie_sdxlcd_fourier_embedding <- function(value, dim = 8, scale = 0.001) {
 #'
 #' A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_condition_vector}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h_original Coerced to numeric by the body, with \code{as.numeric}.
 #' @param w_original Coerced to numeric by the body, with \code{as.numeric}.
@@ -94,7 +92,6 @@ morie_sdxlcd_size_conditioning <- function(h_original, w_original, dim = 8) {
 #'
 #' A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_condition_vector}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param c_top Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param c_left Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
@@ -121,7 +118,6 @@ morie_sdxlcd_crop_conditioning <- function(c_top = 0, c_left = 0, dim = 8) {
 #'
 #' A step of the sdxlcd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param height Coerced to integer by the body, with \code{as.integer}.
 #' @param width Coerced to integer by the body, with \code{as.integer}.
@@ -150,7 +146,6 @@ morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
 #'
 #' A step of the sdxlcd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sizes A matrix; indexed by row and column.
 #' @param minimum Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{256}.
@@ -193,7 +188,6 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
 #'
 #' A step of the sdxlcd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratios See Usage.
 #' @param pixels Coerced to numeric by the body, with \code{as.numeric}. Defaults to
@@ -232,7 +226,6 @@ morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, mult
 #'
 #' A step of the sdxlcd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h_original Passed to \code{morie_sdxlcd_size_conditioning}.
 #' @param w_original Passed to \code{morie_sdxlcd_size_conditioning}.
@@ -272,7 +265,6 @@ morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_l
 #'
 #' A step of the sdxlcd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

@@ -9,7 +9,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{.phylby_splits_of}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A vector; its length is taken and its elements indexed.
 #' @param out Optional; may be \code{NULL}. Passed to \code{.phylby_tips}.
@@ -34,7 +33,6 @@
 #' \code{.phylby_clade_credibility}, \code{.phylby_topology_key},
 #' \code{morie_phylby_splits_of}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_tips}.
 #' @return The value of \code{[}.
@@ -80,7 +78,6 @@
 #' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours},
 #' \code{morie_phylby_topology_key}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_splits_of}.
 #' @return The value of \code{[}.
@@ -97,7 +94,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{.phylby_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node Passed to \code{return}.
 #' @param path A vector; its length is taken and its elements indexed.
@@ -121,7 +117,6 @@
 #' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior},
 #' \code{.phylby_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A vector; its length is taken and its elements indexed.
 #' @param path Passed to \code{c}. Defaults to \code{integer(0)}.
@@ -146,7 +141,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A vector; its length is taken and its elements indexed.
 #' @param path Passed to \code{c}. Defaults to \code{integer(0)}.
@@ -168,7 +162,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node See Usage.
 #' @param path A vector; its length is taken and its elements indexed.
@@ -188,7 +181,6 @@
 #' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior},
 #' \code{.phylby_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A vector; indexed elementwise.
 #' @param path See Usage.
@@ -206,7 +198,6 @@
 #' A step of the phylby_native implementation. Called by \code{.phylby_step},
 #' \code{morie_phylby_nni_neighbours}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_subtrees}.
 #' @return The value of \code{uniq}, as built in the body.
@@ -254,7 +245,6 @@
 #' A step of the phylby_native implementation. Called by \code{.phylby_step},
 #' \code{morie_phylby_log_posterior}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_branch_paths}.
 #' @param seqs A vector; indexed elementwise.
@@ -317,7 +307,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
@@ -340,7 +329,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby_clade_credibility}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param samples A vector; its length is taken.
 #' @return The value of \code{result}, as built in the body.
@@ -373,7 +361,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param state A list; the body reads \code{$rate}, \code{$rates}, \code{$tree} from it.
 #' @param seqs Passed to \code{.phylby_log_posterior}.
@@ -428,7 +415,6 @@
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param j Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
@@ -447,7 +433,6 @@ morie_phylby_chain_temperature <- function(j, lam = 0.2) {
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta_j Numeric; combined arithmetically in the body.
 #' @param beta_k Numeric; combined arithmetically in the body.
@@ -468,7 +453,6 @@ morie_phylby_swap_acceptance <- function(beta_j, beta_k, logp_j, logp_k) {
 #'
 #' A step of the phylby_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_splits_of}.
 #' @return The value of \code{.phylby_splits_of}.
@@ -485,7 +469,6 @@ morie_phylby_splits_of <- function(tree) {
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_topology_key}.
 #' @return The value of \code{.phylby_topology_key}.
@@ -502,7 +485,6 @@ morie_phylby_topology_key <- function(tree) {
 #'
 #' A step of the phylby_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_nni_neighbours}.
 #' @return The value of \code{.phylby_nni_neighbours}.
@@ -519,7 +501,6 @@ morie_phylby_nni_neighbours <- function(tree) {
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param tree Passed to \code{.phylby_log_posterior}.
 #' @param seqs Passed to \code{.phylby_log_posterior}.
@@ -545,7 +526,6 @@ morie_phylby_log_posterior <- function(tree, seqs, pi = NULL, rate = 1.0,
 #'
 #' A step of the phylby_native implementation. Called by \code{morie_phylby}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param samples Passed to \code{.phylby_clade_credibility}.
 #' @return The value of \code{.phylby_clade_credibility}.
@@ -562,7 +542,6 @@ morie_phylby_clade_credibility <- function(samples) {
 #'
 #' A step of the phylby_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alignment A vector; indexed elementwise.
 #' @param n_iter Numeric; combined arithmetically in the body. Defaults to \code{2000}.
@@ -729,7 +708,6 @@ morie_bayesian_phylogeny <- morie_phylby
 #'
 #' A step of the phylby_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

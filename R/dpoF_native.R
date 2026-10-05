@@ -21,7 +21,6 @@
 #'
 #' A step of the dpoF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
@@ -37,7 +36,6 @@
 #'
 #' A step of the dpoF_native implementation. Called by \code{morie_dpoF}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
@@ -55,7 +53,6 @@
 #' A step of the dpoF_native implementation. Called by \code{.dpoF_plackett_luce},
 #' \code{optimal_policy}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vals A vector; its length is taken.
 #' @return A numeric value.
@@ -75,7 +72,6 @@
 #'
 #' A step of the dpoF_native implementation. Called by \code{morie_dpoF}, \code{optimal_policy}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param name Passed to \code{sprintf}.
@@ -98,7 +94,6 @@
 #'
 #' A step of the dpoF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param logp_w Passed to \code{.dpoF_vec}.
 #' @param logp_l Passed to \code{.dpoF_vec}.
@@ -189,7 +184,6 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
 #'
 #' A step of the dpoF_native implementation. Called by \code{morie_dpoF}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param logp Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @param logp_ref Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
@@ -261,7 +255,6 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
 #'
 #' A step of the dpoF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param logp_ref Passed to \code{.dpoF_vec}.
 #' @param reward Passed to \code{.dpoF_vec}.
@@ -290,7 +283,6 @@ optimal_policy <- function(logp_ref, reward, beta) {
 #'
 #' A step of the dpoF_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

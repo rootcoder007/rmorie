@@ -11,7 +11,6 @@
 #'
 #' A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param title Carried through into a list the body builds.
 #' @param summary_lines Carried through into a list the body builds. Defaults to \code{list()}.
@@ -35,7 +34,6 @@
 #'
 #' A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param which Passed to \code{match.arg}.
 #' @return The value of \code{utils::read.csv}.

@@ -16,7 +16,6 @@
 #' \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
 #' \code{.gentmt_treatment_density} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -33,7 +32,6 @@
 #'
 #' A step of the gentmt_native implementation. Called by \code{.gentmt_treatment_density}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -67,7 +65,6 @@
 #' \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
 #' \code{morie_gentmt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -106,7 +103,6 @@
 #' \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
 #' \code{.gentmt_ip_weights}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{.gentmt_vec}.
 #' @param H A matrix; passed to \code{as.matrix}.
@@ -180,7 +176,6 @@
 #'
 #' A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Numeric; passed to \code{mean}.
 #' @param H Passed to \code{.gentmt_treatment_density}.
@@ -242,7 +237,6 @@
 #'
 #' A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.gentmt_vec}.
 #' @param A Passed to \code{.gentmt_vec}.
@@ -311,7 +305,6 @@
 #'
 #' A step of the gentmt_native implementation. Called by \code{morie_gentmt}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.gentmt_vec}.
 #' @param A Passed to \code{.gentmt_vec}.
@@ -392,7 +385,6 @@
 #'
 #' A step of the gentmt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.gentmt_vec}.
 #' @param A Passed to \code{.gentmt_vec}.
@@ -480,7 +472,6 @@ morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
 #'
 #' A step of the gentmt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

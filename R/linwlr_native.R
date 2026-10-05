@@ -14,7 +14,6 @@
 #' A step of the linwlr_native implementation. Called by \code{morie_linwlr},
 #' \code{morie_linwlr_blip}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -33,7 +32,6 @@
 #' A step of the linwlr_native implementation. Called by \code{morie_linwlr},
 #' \code{morie_linwlr_blip}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
@@ -51,7 +49,6 @@
 #'
 #' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Zsrc Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n A count; the body uses it as \code{matrix(...)}.
@@ -69,7 +66,6 @@
 #' A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls},
 #' \code{morie_linwlr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -86,7 +82,6 @@
 #'
 #' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -119,7 +114,6 @@
 #'
 #' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{ncol}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -137,7 +131,6 @@
 #'
 #' A step of the linwlr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{nrow}.
 #' @param rhs Coerced to numeric by the body, with \code{as.numeric}.
@@ -154,7 +147,6 @@
 #'
 #' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -184,7 +176,6 @@
 #'
 #' A step of the linwlr_native implementation. Called by \code{morie_linwlr}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param bread A matrix; passed to \code{nrow}.
 #' @param meat A matrix; passed to \code{\%*\%}.
@@ -210,7 +201,6 @@
 #'
 #' A step of the linwlr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{.linwlr_vec}.
 #' @param w Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
@@ -234,7 +224,6 @@ morie_linwlr_blip <- function(a, w, psi) {
 #'
 #' A step of the linwlr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Passed to \code{.linwlr_vec}.
 #' @param A Passed to \code{.linwlr_vec}.
@@ -384,7 +373,6 @@ morie_linwlr <- function(y, A, W = NULL, propensity = NULL, method = "gest",
 #'
 #' A step of the linwlr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

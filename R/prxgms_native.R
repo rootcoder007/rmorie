@@ -12,7 +12,6 @@
 #'
 #' A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; indexed elementwise.
 #' @param tau Numeric; combined arithmetically in the body.
@@ -38,7 +37,6 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #'
 #' A step of the prxgms_native implementation. Called by \code{morie_prxgms_lasso_fista}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param fun Accepted by the signature and not used anywhere in the body.
 #' @param grad Accepted by the signature and not used anywhere in the body.
@@ -112,7 +110,6 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
 #'
 #' A step of the prxgms_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{as.matrix}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.

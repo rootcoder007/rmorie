@@ -103,7 +103,6 @@
 #' A step of the tipsne_native implementation. Called by \code{.tipsne_chol},
 #' \code{.tipsne_draw_beta}, \code{.tipsne_solve_chol} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken and its elements indexed.
 #' @param b A vector; indexed elementwise.
@@ -159,7 +158,6 @@
 #' A step of the tipsne_native implementation. Called by \code{.tipsne_inv_from_chol},
 #' \code{morie_tipsne_ancova}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lo A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -186,7 +184,6 @@
 #'
 #' A step of the tipsne_native implementation. Called by \code{morie_tipsne_ancova}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lo A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
@@ -247,7 +244,6 @@ morie_tipsne_ancova <- function(y, design) {
 #' A step of the tipsne_native implementation. Called by \code{morie_tipsne},
 #' \code{morie_tipsne_impute}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param arm Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
@@ -331,7 +327,6 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #'
 #' A step of the tipsne_native implementation. Called by \code{.tipsne_betainc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -357,7 +352,6 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #'
 #' A step of the tipsne_native implementation. Called by \code{.tipsne_betainc}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -404,7 +398,6 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #'
 #' A step of the tipsne_native implementation. Called by \code{.tipsne_t_sf}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -481,7 +474,6 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 #'
 #' A step of the tipsne_native implementation. Called by \code{morie_tipsne}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.

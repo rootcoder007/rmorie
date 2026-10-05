@@ -305,7 +305,6 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 #'
 #' A step of the vqgdec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param indices Passed to \code{morie_vqgdec_decode_indices}.
 #' @param codebook Passed to \code{morie_vqgdec_decode_indices}.
@@ -348,7 +347,6 @@ morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
 #'
 #' A step of the vqgdec_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

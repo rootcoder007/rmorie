@@ -75,7 +75,6 @@ morie_metsem_kmers <- function(seq, k) {
 #' A step of the metsem_native implementation. Called by \code{.metsem_drop},
 #' \code{morie_metsem_graph}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param edges Passed to \code{names}.
 #' @param k Numeric; combined arithmetically in the body.
@@ -136,7 +135,6 @@ morie_metsem_graph <- function(reads, k) {
 #' A step of the metsem_native implementation. Called by \code{.metsem_walk},
 #' \code{morie_metsem}, \code{morie_metsem_unitigs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$out} from it.
 #' @param v Passed to \code{\%in\%}.
@@ -149,7 +147,6 @@ morie_metsem_graph <- function(reads, k) {
 #' A step of the metsem_native implementation. Called by \code{.metsem_walk},
 #' \code{morie_metsem}, \code{morie_metsem_unitigs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$inc} from it.
 #' @param v Passed to \code{\%in\%}.
@@ -162,7 +159,6 @@ morie_metsem_graph <- function(reads, k) {
 #'
 #' A step of the metsem_native implementation. Called by \code{morie_metsem_unitigs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$out} from it.
 #' @param first A vector; its length is taken.
@@ -184,7 +180,6 @@ morie_metsem_graph <- function(reads, k) {
 #'
 #' A step of the metsem_native implementation. Called by \code{morie_metsem_unitigs}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param path A vector; its length is taken and its elements indexed.
 #' @return A character value.
@@ -283,7 +278,6 @@ morie_metsem_n50 <- function(lengths) {
 #'
 #' A step of the metsem_native implementation. Called by \code{morie_metsem}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g A list; the body reads \code{$edges}, \code{$inc}, \code{$k}, \code{$nodes},
 #' \code{$out} from it.

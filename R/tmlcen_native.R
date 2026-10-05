@@ -64,7 +64,6 @@
 #' \code{morie_censoring_survival}, \code{morie_ipcw_interval} and 1 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -80,7 +79,6 @@
 #' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
 #' \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rows Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
@@ -106,7 +104,6 @@
 #'
 #' A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{ncol}.
 #' @param b A matrix; passed to \code{solve}.
@@ -123,7 +120,6 @@
 #' A step of the tmlcen_native implementation. Called by \code{.tmlcen_logit_irls},
 #' \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
@@ -155,7 +151,6 @@
 #' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
 #' \code{morie_ipcw_interval}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{nrow}.
 #' @param y Passed to \code{.tmlcen_weighted_logit}.
@@ -176,7 +171,6 @@
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; passed to \code{\%*\%}.
 #' @param b A matrix; passed to \code{\%*\%}.
@@ -188,7 +182,6 @@
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ts Numeric; passed to \code{max}.
 #' @return One of two values, depending on the branch taken.
@@ -205,7 +198,6 @@
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param payload Passed to \code{class}.
 #' @return The value of \code{payload}, as built in the body.
@@ -220,7 +212,6 @@
 #' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
 #' \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n A count; the body uses it as \code{matrix(...)}.
@@ -250,7 +241,6 @@
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @param n Accepted by the signature and not used anywhere in the body.
@@ -319,7 +309,6 @@ morie_coarsen_interval <- function(times, deltas) {
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param censored Coerced to numeric by the body, with \code{as.numeric}.
@@ -400,7 +389,6 @@ morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W Passed to \code{.tmlcen_W_mat}.
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
@@ -474,7 +462,6 @@ morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
 #'
 #' A step of the tmlcen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{morie_ipcw_interval}.
 #' @param event Passed to \code{morie_ipcw_interval}.
@@ -626,7 +613,6 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
 #'
 #' A step of the tmlcen_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

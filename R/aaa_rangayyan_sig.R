@@ -49,7 +49,6 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 #'
 #' A step of the rangayyan_sig implementation. Called by \code{BartlettPSD}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param seg A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
@@ -69,7 +68,6 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 #'
 #' A step of the rangayyan_sig implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.

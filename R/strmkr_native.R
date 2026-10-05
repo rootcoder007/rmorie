@@ -10,7 +10,6 @@
 #'
 #' A step of the strmkr_native implementation. Called by \code{morie_strmkr_strauss_process}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
@@ -37,7 +36,6 @@
 #'
 #' A step of the strmkr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param coords Passed to \code{.strmkr_rows}.
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
@@ -208,7 +206,6 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
 #'
 #' A step of the strmkr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

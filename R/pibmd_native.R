@@ -12,7 +12,6 @@
 #' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth},
 #' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A vector, from \code{c}.
@@ -34,7 +33,6 @@
 #' A step of the pibmd_native implementation. Called by
 #' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mq Numeric; combined arithmetically in the body.
 #' @param sq2 Numeric; passed to \code{max}.
@@ -54,7 +52,6 @@
 #' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth},
 #' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sorted_v A vector; its length is taken and its elements indexed.
 #' @param u Numeric; combined arithmetically in the body.
@@ -74,7 +71,6 @@
 #'
 #' A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
@@ -97,7 +93,6 @@
 #'
 #' A step of the pibmd_native implementation. Called by \code{.pibmd_kl_kde}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param sample_ A vector; its length is taken.
@@ -116,7 +111,6 @@
 #' A step of the pibmd_native implementation. Called by
 #' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q A vector; its length is taken.
 #' @param p A vector; its length is taken.
@@ -152,7 +146,6 @@
 #' A step of the pibmd_native implementation. Called by
 #' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param sorted_v A vector; its length is taken.
 #' @param x Passed to \code{<=}.
@@ -164,7 +157,6 @@
 #'
 #' A step of the pibmd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param samples Coerced to numeric by the body, with \code{as.numeric}.
 #' @param prior A list; the body reads \code{$mean}, \code{$sd} from it.
@@ -290,7 +282,6 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
 #'
 #' A step of the pibmd_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

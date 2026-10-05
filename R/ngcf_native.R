@@ -71,7 +71,6 @@
 #'
 #' A step of the ngcf_native implementation. Called by \code{ngcf_propagate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param slope Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
@@ -85,7 +84,6 @@
 #'
 #' A step of the ngcf_native implementation. Called by \code{ngcf_propagate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_u Coerced to integer by the body, with \code{as.integer}.
 #' @param n_i Coerced to integer by the body, with \code{as.integer}.
@@ -107,7 +105,6 @@ ngcf_laplacian_coefficient <- function(n_u, n_i) {
 #'
 #' A step of the ngcf_native implementation. Called by \code{ngcf_propagate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e_i Coerced to numeric by the body, with \code{as.numeric}.
 #' @param e_u Coerced to numeric by the body, with \code{as.numeric}.
@@ -144,7 +141,6 @@ ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity = TRUE) {
 #'
 #' A step of the ngcf_native implementation. Called by \code{ngcf_stack_layers}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param E A matrix; indexed by row and column.
 #' @param adjacency A vector; indexed elementwise.
@@ -196,7 +192,6 @@ ngcf_propagate <- function(E, adjacency, W1, W2, affinity = TRUE, slope = 0.2) {
 #'
 #' A step of the ngcf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param E0 A matrix; passed to \code{as.matrix}.
 #' @param adjacency Passed to \code{ngcf_propagate}.
@@ -248,7 +243,6 @@ ngcf_stack_layers <- function(E0, adjacency, Ws, affinity = TRUE, slope = 0.2) {
 #'
 #' A step of the ngcf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param final A matrix; indexed by row and column.
 #' @param u Coerced to integer by the body, with \code{as.integer}.
@@ -272,7 +266,6 @@ ngcf_score <- function(final, u, i) {
 #'
 #' A step of the ngcf_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

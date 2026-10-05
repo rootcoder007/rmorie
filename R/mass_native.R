@@ -96,7 +96,6 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 #'
 #' A step of the mass_native implementation. Called by \code{morie_kde2d}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
@@ -198,7 +197,6 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 #'
 #' A step of the mass_native implementation. Called by \code{morie_glm_nb}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param mu Numeric; combined arithmetically in the body.

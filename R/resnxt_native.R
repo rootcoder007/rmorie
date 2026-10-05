@@ -34,7 +34,6 @@
 #' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block},
 #' \code{.resnxt_grouped_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
@@ -52,7 +51,6 @@
 #' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block},
 #' \code{.resnxt_grouped_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param W A vector; its length is taken and its elements indexed.
 #' @param x Numeric; combined arithmetically in the body.
@@ -71,7 +69,6 @@
 #' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block},
 #' \code{.resnxt_grouped_block}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v Passed to \code{pmax}.
 #' @return The value of \code{pmax}.
@@ -88,7 +85,6 @@
 #'
 #' A step of the resnxt_native implementation. Called by \code{.resnxt_block_equivalence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.resnxt_vec}.
 #' @param Wins A vector; its length is taken and its elements indexed.
@@ -112,7 +108,6 @@
 #'
 #' A step of the resnxt_native implementation. Called by \code{.resnxt_block_equivalence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.resnxt_vec}.
 #' @param Wins A vector; its length is taken and its elements indexed.
@@ -136,7 +131,6 @@
 #'
 #' A step of the resnxt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Passed to \code{.resnxt_aggregated_block}.
 #' @param Wins Passed to \code{.resnxt_aggregated_block}.
@@ -166,7 +160,6 @@
 #'
 #' A step of the resnxt_native implementation. Called by \code{.resnxt_match_complexity}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param width Coerced to integer by the body, with \code{as.integer}.
 #' @param cardinality Coerced to integer by the body, with \code{as.integer}.
@@ -190,7 +183,6 @@
 #'
 #' A step of the resnxt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param width Coerced to integer by the body, with \code{as.integer}.
 #' @param cardinality Coerced to integer by the body, with \code{as.integer}.
@@ -218,7 +210,6 @@
 #'
 #' A step of the resnxt_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

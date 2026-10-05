@@ -75,7 +75,6 @@
 #' A step of the vdcal_native implementation. Called by \code{morie_vdcal},
 #' \code{morie_vdcal_fut}, \code{morie_vdcal_oie_tozer}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param par Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{p}, as built in the body.

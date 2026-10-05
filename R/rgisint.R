@@ -72,7 +72,6 @@ rgisint <- function(emg, force, fs, rest_level = 0) {
 #'
 #' A step of the rgisint implementation. Called by \code{rgemgfd}, \code{rgisint}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.

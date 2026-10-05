@@ -17,7 +17,6 @@
 #' A step of the survival_more implementation. Called by \code{.ms_baseline},
 #' \code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Coerced to numeric by the body, with \code{as.numeric}.
 #' @param event Coerced to integer by the body, with \code{as.integer}.
@@ -39,7 +38,6 @@
 #' A step of the survival_more implementation. Called by \code{Cif}, \code{Finegray},
 #' \code{Landmark} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.ms_check}.
 #' @param event Passed to \code{.ms_check}.
@@ -71,7 +69,6 @@
 #'
 #' A step of the survival_more implementation. Called by \code{Coxsnell}, \code{Martingale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param time Passed to \code{.ms_check}.
 #' @param event Passed to \code{.ms_check}.
@@ -107,7 +104,6 @@
 #'
 #' A step of the survival_more implementation. Called by \code{Coxsnell}, \code{Martingale}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ut Passed to \code{<=}.
 #' @param H A vector; indexed elementwise.
@@ -900,7 +896,6 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #'
 #' A step of the survival_more implementation. Called by \code{.ms_fit_lls}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dist One of \code{"exponential"}, \code{"loglogistic"}, \code{"lognormal"},
 #' \code{"weibull"}.
@@ -933,7 +928,6 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #'
 #' A step of the survival_more implementation. Called by \code{Aftfit}, \code{Parasurv}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param dist Compared against \code{"exponential"}.
 #' @param time Passed to \code{.ms_check}.

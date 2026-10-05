@@ -72,7 +72,6 @@
 #' A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias},
 #' \code{.timeRS_user_bias}, \code{morie_timeRS_deviation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t_user Coerced to numeric by the body, with \code{as.numeric}.
@@ -95,7 +94,6 @@
 #' A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias},
 #' \code{.timeRS_item_bias}, \code{morie_timeRS_time_bin}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param bin_days Coerced to integer by the body, with \code{as.integer}. Defaults to \code{70}.
@@ -117,7 +115,6 @@
 #' A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time},
 #' \code{morie_timeRS_user_bias}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param b_u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha_u Coerced to numeric by the body, with \code{as.numeric}.
@@ -153,7 +150,6 @@
 #' A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time},
 #' \code{morie_timeRS_item_bias}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param b_i Coerced to numeric by the body, with \code{as.numeric}.
 #' @param bins A vector; its length is taken and its elements indexed.
@@ -177,7 +173,6 @@
 #'
 #' A step of the timeRS_native implementation. Called by \code{morie_timeRS_predict_time}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_u Passed to \code{.timeRS_user_bias}.
@@ -223,7 +218,6 @@
 #' \code{morie_timeRS_fit_time_bias}, \code{morie_timeRS_timesvd} and 1 others in the
 #' module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings A matrix; indexed by row and column.
 #' @param n_users Coerced to integer by the body, with \code{as.integer}.
@@ -347,7 +341,6 @@
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.timeRS_fit_time_bias}.
 #' @param n_users Passed to \code{.timeRS_fit_time_bias}.
@@ -379,7 +372,6 @@ morie_timeRS <- function(ratings, n_users, n_items, bin_days = 70,
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.timeRS_deviation}.
 #' @param t_user Passed to \code{.timeRS_deviation}.
@@ -397,7 +389,6 @@ morie_timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{.timeRS_time_bin}.
 #' @param bin_days Passed to \code{.timeRS_time_bin}. Defaults to \code{70}.
@@ -416,7 +407,6 @@ morie_timeRS_time_bin <- function(t, bin_days = 70, n_bins = 30) {
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param b_u Passed to \code{.timeRS_user_bias}.
 #' @param alpha_u Passed to \code{.timeRS_user_bias}.
@@ -438,7 +428,6 @@ morie_timeRS_user_bias <- function(b_u, alpha_u, t, t_user, per_day = NULL,
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param b_i Passed to \code{.timeRS_item_bias}.
 #' @param bins Passed to \code{.timeRS_item_bias}.
@@ -458,7 +447,6 @@ morie_timeRS_item_bias <- function(b_i, bins, t, bin_days = 70, n_bins = 30) {
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mu Passed to \code{.timeRS_predict_time}.
 #' @param b_u Passed to \code{.timeRS_predict_time}.
@@ -496,7 +484,6 @@ morie_timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins,
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.timeRS_fit_time_bias}.
 #' @param n_users Passed to \code{.timeRS_fit_time_bias}.
@@ -529,7 +516,6 @@ morie_timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.timeRS_fit_time_bias}.
 #' @param n_users Passed to \code{.timeRS_fit_time_bias}.
@@ -561,7 +547,6 @@ morie_timeRS_timesvdpp <- function(ratings, n_users, n_items, bin_days = 70,
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ratings Passed to \code{.timeRS_fit_time_bias}.
 #' @param n_users Passed to \code{.timeRS_fit_time_bias}.
@@ -592,7 +577,6 @@ morie_timeRS_timesvd <- function(ratings, n_users, n_items, bin_days = 70,
 #'
 #' A step of the timeRS_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

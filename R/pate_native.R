@@ -24,7 +24,6 @@
 #'
 #' A step of the pate_native implementation. Called by \code{noisy_argmax}, \code{pate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param e Passed to \code{.ghc_unif}.
 #' @param gamma Numeric; combined arithmetically in the body.
@@ -39,7 +38,6 @@
 #'
 #' A step of the pate_native implementation. Called by \code{pate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param teacher_predicts Coerced to list by the body, with \code{as.list}.
 #' @param rows Passed to \code{predict}.
@@ -89,7 +87,6 @@ teacher_votes <- function(teacher_predicts, rows, n_classes = NULL) {
 #'
 #' A step of the pate_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts A vector; its length is taken and its elements indexed.
 #' @param gamma Passed to \code{.pate_lap_draw}.
@@ -121,7 +118,6 @@ noisy_argmax <- function(counts, gamma, seed = 0) {
 #'
 #' A step of the pate_native implementation. Called by \code{pate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param T Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.
@@ -147,7 +143,6 @@ epsilon_data_independent <- function(T, gamma, delta) {
 #'
 #' A step of the pate_native implementation. Called by \code{moments_accountant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counts Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gamma Numeric; combined arithmetically in the body.
@@ -177,7 +172,6 @@ lemma4_bound <- function(counts, gamma) {
 #'
 #' A step of the pate_native implementation. Called by \code{moments_accountant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.
@@ -206,7 +200,6 @@ theorem3_moment <- function(q, gamma, l) {
 #'
 #' A step of the pate_native implementation. Called by \code{pate}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param vote_counts A vector; its length is taken.
 #' @param gamma Numeric; combined arithmetically in the body.
@@ -273,7 +266,6 @@ moments_accountant <- function(vote_counts, gamma, delta,
 #'
 #' A step of the pate_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param teacher_predicts A vector; its length is taken.
 #' @param queries Coerced to list by the body, with \code{as.list}.
@@ -354,7 +346,6 @@ pate <- function(teacher_predicts, queries, gamma = 0.05,
 #'
 #' A step of the pate_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

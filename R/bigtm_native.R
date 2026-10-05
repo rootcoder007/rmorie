@@ -10,7 +10,6 @@
 #'
 #' A step of the bigtm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param N_ij Coerced to numeric by the body, with \code{as.numeric}.
 #' @param N_j Coerced to numeric by the body, with \code{as.numeric}.
@@ -45,7 +44,6 @@ dirichlet_predictive <- function(N_ij, N_j, beta, m) {
 #'
 #' A step of the bigtm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param N_ik Coerced to numeric by the body, with \code{as.numeric}.
 #' @param N_k Coerced to numeric by the body, with \code{as.numeric}.
@@ -76,7 +74,6 @@ lda_predictive <- function(N_ik, N_k, beta, m) {
 #'
 #' A step of the bigtm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param N_ijk Coerced to numeric by the body, with \code{as.numeric}.
 #' @param N_jk Coerced to numeric by the body, with \code{as.numeric}.
@@ -107,7 +104,6 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' A step of the bigtm_native implementation. Called by \code{.log_evidence},
 #' \code{gibbs_bigram_topic}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A vector; its length is taken and its elements indexed.
 #' @param Tn A count; the body uses it as \code{numeric(...)}.
@@ -162,7 +158,6 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #'
 #' A step of the bigtm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param docs Iterated over elementwise, with \code{lapply}.
 #' @param T Coerced to integer by the body, with \code{as.integer}.
@@ -292,7 +287,6 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 #'
 #' A step of the bigtm_native implementation. Called by \code{log_evidence}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param D A vector; its length is taken.
 #' @param Tn Passed to \code{.counts}.
@@ -335,7 +329,6 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 #'
 #' A step of the bigtm_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param docs Iterated over elementwise, with \code{lapply}.
 #' @param T Coerced to integer by the body, with \code{as.integer}.

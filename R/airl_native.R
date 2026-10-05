@@ -24,7 +24,6 @@
 #'
 #' A step of the airl_native implementation. Called by \code{morie_airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{max}.
 #' @return A numeric value.
@@ -39,7 +38,6 @@
 #'
 #' A step of the airl_native implementation. Called by \code{morie_soft_value_iteration}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s A vector; its length is taken.
 #' @return A character value.
@@ -64,7 +62,6 @@
 #'
 #' A step of the airl_native implementation. Called by \code{morie_airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @return A character value.
@@ -414,7 +411,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
@@ -429,7 +425,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. Called by \code{airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s Character; passed to \code{grepl}.
 #' @return One of two values, depending on the branch taken.
@@ -449,7 +444,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. Called by \code{airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; passed to \code{max}.
 #' @param floor Numeric; passed to \code{max}. Defaults to \code{1e-300}.
@@ -467,7 +461,6 @@ airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' A step of the airl_native implementation. Called by \code{airl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param S A vector; its length is taken.
 #' @param A A vector; its length is taken.

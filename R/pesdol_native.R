@@ -9,7 +9,6 @@
 #'
 #' A step of the pesdol_native implementation. Called by \code{morie_pesdol_ardl_bounds}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.
@@ -39,7 +38,6 @@
 #'
 #' A step of the pesdol_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x A matrix; passed to \code{as.matrix}.
@@ -130,7 +128,6 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
 #'
 #' A step of the pesdol_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

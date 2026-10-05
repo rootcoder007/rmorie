@@ -235,7 +235,6 @@ morie_muzero_mcts_search <- morie_muzero
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prior Numeric; combined arithmetically in the body.
 #' @param alpha Passed to \code{<=}.
@@ -258,7 +257,6 @@ muzero_add_noise <- function(prior, alpha, frac, seed) {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param path A vector; its length is taken and its elements indexed.
 #' @param value See Usage.
@@ -282,7 +280,6 @@ muzero_backup <- function(path, value, gamma, mm) {
 #'
 #' A step of the muzero_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -304,7 +301,6 @@ muzero_cheatsheet <- function() {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_add_noise}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{repeat}.
@@ -330,7 +326,6 @@ muzero_gamma_rv <- function(alpha) {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return The value of \code{env}, as built in the body.
 #' @export
@@ -354,7 +349,6 @@ muzero_MinMax <- function() {
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param prior A vector; indexed elementwise. Defaults to \code{0}.
 #' @return The value of \code{env}, as built in the body.
@@ -386,7 +380,6 @@ muzero_Node <- function(prior = 0) {
 #'
 #' A step of the muzero_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param observation Passed to \code{representation}.
 #' @param actions Coerced to list by the body, with \code{as.list}.
@@ -502,7 +495,6 @@ muzero_search <- function(observation, actions, representation, dynamics,
 #'
 #' A step of the muzero_native implementation. Called by \code{muzero_search}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node A list; the body reads \code{$children} from it.
 #' @param A_keys A vector; indexed elementwise.

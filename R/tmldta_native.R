@@ -27,7 +27,6 @@
 #'
 #' A step of the tmldta_native implementation. Called by \code{split_specific_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -45,7 +44,6 @@
 #' A step of the tmldta_native implementation. Called by \code{.fit_g}, \code{.fit_q},
 #' \code{split_specific_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -64,7 +62,6 @@
 #'
 #' A step of the tmldta_native implementation. Called by \code{morie_tmldta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param candidate_strata Optional; may be \code{NULL}. Coerced to numeric by the body,
@@ -87,7 +84,6 @@
 #' A step of the tmldta_native implementation. Called by \code{discover_levels},
 #' \code{split_specific_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param A A vector; indexed elementwise.
@@ -136,7 +132,6 @@
 #'
 #' A step of the tmldta_native implementation. Called by \code{split_specific_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A vector; its length is taken.
 #' @param W A matrix; passed to \code{ncol}.
@@ -299,7 +294,6 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
 #'
 #' A step of the tmldta_native implementation. Called by \code{morie_tmldta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
@@ -539,7 +533,6 @@ morie_tmledataadaptive <- morie_tmldta
 #'
 #' A step of the tmldta_native implementation. Called by \code{morie_tmle_data_adaptive}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ys Passed to \code{.fit_q_dta}.
 #' @param A_ Passed to \code{.fit_q_dta}.
@@ -569,7 +562,6 @@ morie_tmledataadaptive <- morie_tmldta
 #'
 #' A step of the tmldta_native implementation. Called by \code{.split_specific_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A_ A vector; its length is taken.
 #' @param W A vector; its length is taken.
@@ -617,7 +609,6 @@ morie_tmledataadaptive <- morie_tmldta
 #' A step of the tmldta_native implementation. Called by \code{.discover_levels},
 #' \code{.split_specific_tmle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ys A vector; indexed elementwise.
 #' @param A_ A vector; indexed elementwise.
@@ -660,7 +651,6 @@ morie_tmledataadaptive <- morie_tmldta
 #'
 #' A step of the tmldta_native implementation. Called by \code{morie_tmle_data_adaptive}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param n_folds Coerced to integer by the body, with \code{as.integer}.
@@ -678,7 +668,6 @@ morie_tmledataadaptive <- morie_tmldta
 #'
 #' A step of the tmldta_native implementation. Called by \code{morie_tmle_data_adaptive}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ys A vector; its length is taken and its elements indexed.
 #' @param A_ A vector; indexed elementwise.
@@ -752,7 +741,6 @@ morie_tmledataadaptive <- morie_tmldta
 #'
 #' A step of the tmldta_native implementation. Called by \code{.fit_g_dta}, \code{.fit_q_dta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; the body checks with \code{is.matrix}.
 #' @param a A vector; its length is taken.
@@ -797,7 +785,6 @@ morie_tmledataadaptive <- morie_tmldta
 #'
 #' A step of the tmldta_native implementation. Called by \code{morie_tmle_data_adaptive}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{qnorm}.
 #' @return The value of \code{qnorm}.

@@ -102,7 +102,6 @@
 #'
 #' A step of the rng_native implementation. Called by \code{.morie_random_uniform}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param counter Coerced to numeric by the body, with \code{as.numeric}.
 #' @param key A vector; indexed elementwise.
@@ -209,7 +208,6 @@
 #'
 #' A step of the rng_native implementation. Called by \code{.morie_normal_quantile}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param coef A vector; its length is taken and its elements indexed.
 #' @param x A vector; its length is taken.
@@ -227,7 +225,6 @@
 #' A step of the rng_native implementation. Called by \code{.morie_random_normal},
 #' \code{morie_anamorphosis}, \code{morie_normal_scores} and 3 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -270,7 +267,6 @@
 #' A step of the rng_native implementation. Called by
 #' \code{.morie_random_multivariate_normal}, \code{.schab_simulate_unconditional}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n Passed to \code{.morie_random_uniform}.
 #' @param seed Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
@@ -288,7 +284,6 @@
 #'
 #' A step of the rng_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param mean A vector; its length is taken.
 #' @param cov A matrix; passed to \code{dim}.

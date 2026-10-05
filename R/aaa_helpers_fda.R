@@ -17,7 +17,6 @@
 #'
 #' A step of the helpers_fda implementation. Called by \code{Scfd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param v A vector; indexed elementwise.
@@ -37,7 +36,6 @@
 #'
 #' A step of the helpers_fda implementation. Called by \code{Scfd}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
@@ -51,7 +49,6 @@
 #'
 #' A step of the helpers_fda implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param nr A count; the body uses it as \code{seq_len(...)}.

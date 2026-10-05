@@ -210,7 +210,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Optional; may be \code{NULL}. Coerced to numeric by the body, with
@@ -236,7 +235,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #' A step of the tmldyk_native implementation. Called by \code{.tmldyk_logit_irls},
 #' \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -256,7 +254,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -274,7 +271,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Z A matrix; the body checks with \code{is.matrix}.
 #' @param a A vector; its length is taken.
@@ -310,7 +306,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{morie_tmle_diff_kernel}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yv A vector; its length is taken.
 #' @param a A vector; indexed elementwise.
@@ -382,7 +377,6 @@ morie_tmlediffkernel <- morie_tmldyk
 #'
 #' A step of the tmldyk_native implementation. Called by \code{.tmle_ate_bounded}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param Xm A matrix; passed to \code{nrow}.
 #' @param yv A matrix; passed to \code{\%*\%}.

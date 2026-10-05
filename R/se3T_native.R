@@ -66,7 +66,6 @@
 #' \code{morie_se3T_check_equivariance}, \code{morie_se3T_radial_kernel},
 #' \code{morie_se3T_rotation_matrix} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
@@ -89,7 +88,6 @@
 #' \code{morie_se3T_check_equivariance}, \code{morie_se3T_invariant_features},
 #' \code{morie_se3T_se3_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
@@ -123,7 +121,6 @@
 #'
 #' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param R A matrix; indexed by row and column.
 #' @param v A vector; indexed elementwise.
@@ -143,7 +140,6 @@
 #'
 #' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param axis Passed to \code{.se3T_vec}.
 #' @param angle Coerced to numeric by the body, with \code{as.numeric}.
@@ -175,7 +171,6 @@ morie_se3T_rotation_matrix <- function(axis, angle) {
 #'
 #' A step of the se3T_native implementation. Called by \code{morie_se3T_se3_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param positions Passed to \code{.se3T_mat}.
 #' @param i See Usage.
@@ -202,7 +197,6 @@ morie_se3T_invariant_features <- function(positions, i, j) {
 #'
 #' A step of the se3T_native implementation. Called by \code{morie_se3T_se3_attention}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param distance Coerced to numeric by the body, with \code{as.numeric}.
 #' @param weights Optional; may be \code{NULL}. Passed to \code{.se3T_vec}.
@@ -231,7 +225,6 @@ morie_se3T_radial_kernel <- function(distance, weights = NULL, sigma = 1.0) {
 #'
 #' A step of the se3T_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param positions Passed to \code{.se3T_mat}.
 #' @param type0 Passed to \code{.se3T_vec}.
@@ -300,7 +293,6 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights = NULL,
 #'
 #' A step of the se3T_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param positions Passed to \code{.se3T_mat}.
 #' @param type0 Passed to \code{f}.
@@ -374,7 +366,6 @@ morie_se3T_check_equivariance <- function(positions, type0, type1, layer = NULL,
 #'
 #' A step of the se3T_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

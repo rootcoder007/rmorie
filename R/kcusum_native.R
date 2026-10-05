@@ -22,7 +22,6 @@
 #'
 #' A step of the kcusum_native implementation. Called by \code{morie_kcusum}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z A matrix; passed to \code{nrow}.
 #' @param kernel One of \code{"gaussian"}, \code{"linear"}.

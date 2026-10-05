@@ -73,7 +73,6 @@
 #'
 #' A step of the safrl_native implementation. Called by \code{morie_safrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; indexed by row and column.
 #' @param name Passed to \code{sprintf}.
@@ -112,7 +111,6 @@
 #'
 #' A step of the safrl_native implementation. Called by \code{morie_safrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param v A list; the body checks with \code{is.list}.
 #' @param name Passed to \code{sprintf}.
@@ -141,7 +139,6 @@
 #'
 #' A step of the safrl_native implementation. Called by \code{morie_safrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A vector; indexed elementwise.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -195,7 +192,6 @@
 #'
 #' A step of the safrl_native implementation. Called by \code{morie_safrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param q See Usage.
 #' @param r A vector; indexed elementwise.
@@ -272,7 +268,6 @@
 #'
 #' A step of the safrl_native implementation. Called by \code{morie_safrl}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param step A vector; indexed elementwise.
 #' @param g A vector; its length is taken and its elements indexed.
@@ -330,7 +325,6 @@
 #'
 #' A step of the safrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param g Passed to \code{.safrl_vec}.
 #' @param H Passed to \code{.safrl_mat}.
@@ -475,7 +469,6 @@ morie_safrl <- function(g, H, B = NULL, c = NULL, delta = 0.01,
 #'
 #' A step of the safrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param policy Accepted by the signature and not used anywhere in the body.
 #' @param states Coerced to list by the body, with \code{as.list}.
@@ -552,7 +545,6 @@ morie_safrl_cmdp_returns <- function(policy, states, actions, step,
 #'
 #' A step of the safrl_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param delta Numeric; combined arithmetically in the body.
 #' @param gamma Numeric; combined arithmetically in the body.

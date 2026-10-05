@@ -71,7 +71,6 @@
 #'
 #' A step of the hyper2_native implementation. Called by \code{morie_hyper2_kernel}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @param b Numeric; combined arithmetically in the body.
@@ -127,7 +126,6 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
 #' A step of the hyper2_native implementation. Called by \code{morie_hyper2},
 #' \code{morie_hyper2_logml}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param K A matrix; indexed by row and column.
 #' @param v Numeric; combined arithmetically in the body.

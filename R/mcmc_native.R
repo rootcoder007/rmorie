@@ -43,7 +43,6 @@
 #' \code{morie_effective_sample_size_bayes}, \code{morie_effective_sample_size_bulk},
 #' \code{morie_effective_sample_size_tail}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param chains A count; the body uses it as \code{matrix(...)}.
 #' @return One of two values, depending on the branch taken.
@@ -85,7 +84,6 @@
 #' A step of the mcmc_native implementation. Called by \code{.morie_split_rhat},
 #' \code{morie_effective_sample_size_bulk}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param C A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
@@ -101,7 +99,6 @@
 #'
 #' A step of the mcmc_native implementation. Called by \code{morie_effective_sample_size_bayes}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param chains A count; the body uses it as \code{matrix(...)}.
 #' @param rank_normalized A flag; the body branches on it. Defaults to \code{TRUE}.

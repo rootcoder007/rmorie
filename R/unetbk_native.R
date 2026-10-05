@@ -65,7 +65,6 @@
 #' A step of the unetbk_native implementation. Called by \code{mirror_pad},
 #' \code{separation_weight_map}, \code{skip_concat}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
@@ -86,7 +85,6 @@
 #'
 #' A step of the unetbk_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param input_size Coerced to integer by the body, with \code{as.integer}.
 #' @param depth A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4L}.
@@ -143,7 +141,6 @@ valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kern
 #'
 #' A step of the unetbk_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param image Passed to \code{.unetbk_as_matrix}.
 #' @param pad Coerced to integer by the body, with \code{as.integer}.
@@ -179,7 +176,6 @@ mirror_pad <- function(image, pad) {
 #'
 #' A step of the unetbk_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param height Coerced to integer by the body, with \code{as.integer}.
 #' @param width Coerced to integer by the body, with \code{as.integer}.
@@ -227,7 +223,6 @@ overlap_tiles <- function(height, width, tile, border) {
 #'
 #' A step of the unetbk_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param upsampled Passed to \code{.unetbk_as_matrix}.
 #' @param contracting Passed to \code{.unetbk_as_matrix}.
@@ -268,7 +263,6 @@ skip_concat <- function(upsampled, contracting) {
 #'
 #' A step of the unetbk_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param labels Passed to \code{.unetbk_as_matrix}.
 #' @param w0 Numeric; combined arithmetically in the body. Defaults to \code{10}.
@@ -322,7 +316,6 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
 #'
 #' A step of the unetbk_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

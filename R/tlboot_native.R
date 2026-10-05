@@ -26,7 +26,6 @@
 #' A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap},
 #' \code{naive_bootstrap}, \code{targeted_bootstrap}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data Coerced to list by the body, with \code{as.list}.
 #' @param estimator Accepted by the signature and not used anywhere in the body.
@@ -135,7 +134,6 @@ morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
 #'
 #' A step of the tlboot_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param data Passed to \code{morie_tlboot}.
 #' @param estimator Passed to \code{morie_tlboot}.
@@ -160,7 +158,6 @@ naive_bootstrap <- function(data, estimator, B = 200L, seed = 0L) {
 #'
 #' A step of the tlboot_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param P_star_sampler Accepted by the signature and not used anywhere in the body.
 #' @param estimator Passed to \code{morie_tlboot}.
@@ -213,7 +210,6 @@ targeted_bootstrap <- function(P_star_sampler, estimator, B = 200L,
 #'
 #' A step of the tlboot_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param ic Passed to \code{morie_tlboot}.
 #' @param B Passed to \code{morie_tlboot}. Defaults to \code{1000L}.
@@ -233,7 +229,6 @@ multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
 #'
 #' A step of the tlboot_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param replicates Coerced to numeric by the body, with \code{as.numeric}.
 #' @param target_mean Coerced to numeric by the body, with \code{as.numeric}.
@@ -269,7 +264,6 @@ moment_check <- function(replicates, target_mean, target_se,
 #'
 #' A step of the tlboot_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

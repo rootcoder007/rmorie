@@ -23,7 +23,6 @@
 #'
 #' A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_poisson_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{chol}.
 #' @param b Passed to \code{forwardsolve}.
@@ -45,7 +44,6 @@
 #'
 #' A step of the smatch_native implementation. Called by \code{morie_smatch_poisson_design}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param start Passed to \code{morie_sccsno_build_intervals}.
 #' @param end Passed to \code{morie_sccsno_build_intervals}.
@@ -76,7 +74,6 @@
 #'
 #' A step of the smatch_native implementation. Called by \code{morie_smatch_sccs_poisson_fit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cases See Usage.
 #' @param risk_periods Iterated over elementwise, with \code{lapply}.
@@ -141,7 +138,6 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
 #'
 #' A step of the smatch_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param cases Passed to \code{morie_smatch_poisson_design}.
 #' @param risk_periods Passed to \code{morie_smatch_poisson_design}.
@@ -209,7 +205,6 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #'
 #' A step of the smatch_native implementation. Called by \code{morie_smatch_sample_size}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param p Passed to \code{qnorm}.
 #' @return The value of \code{qnorm}.
@@ -223,7 +218,6 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #'
 #' A step of the smatch_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
@@ -238,7 +232,6 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #'
 #' A step of the smatch_native implementation. Called by \code{morie_smatch_power}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param log_ri Coerced to numeric by the body, with \code{as.numeric}.
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
@@ -293,7 +286,6 @@ morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power =
 #'
 #' A step of the smatch_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param n_events Coerced to numeric by the body, with \code{as.numeric}.
 #' @param log_ri Passed to \code{morie_smatch_sample_size}.
@@ -322,7 +314,6 @@ morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
 #'
 #' A step of the smatch_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param log_ri Coerced to numeric by the body, with \code{as.numeric}.
@@ -353,7 +344,6 @@ morie_smatch_relative_efficiency <- function(r, log_ri) {
 #'
 #' A step of the smatch_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

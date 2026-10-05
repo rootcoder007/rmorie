@@ -15,7 +15,6 @@
 #'
 #' A step of the sortP_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A vector; indexed elementwise.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
@@ -52,7 +51,6 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
 #'
 #' A step of the sortP_native implementation. Called by \code{order_is_graph_determined}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param features A matrix; the body checks with \code{is.matrix}.
 #' @param k_keep Coerced to integer by the body, with \code{as.integer}.
@@ -91,7 +89,6 @@ sort_pooling <- function(features, k_keep, sort_channel = -1) {
 #'
 #' A step of the sortP_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param graph_sizes Coerced to integer by the body, with \code{as.integer}.
 #' @param coverage Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.6}.
@@ -119,7 +116,6 @@ choose_k <- function(graph_sizes, coverage = 0.6) {
 #'
 #' A step of the sortP_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param features A matrix; the body checks with \code{is.matrix}.
 #' @param adj Accepted by the signature and not used anywhere in the body.
@@ -148,7 +144,6 @@ order_is_graph_determined <- function(features, adj, perm, k_keep,
 #'
 #' A step of the sortP_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

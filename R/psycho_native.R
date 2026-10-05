@@ -113,7 +113,6 @@
 #'
 #' A step of the psycho_native implementation. Called by \code{.psy_info}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Passed to \code{.psy_p3pl}.
 #' @param a Numeric; combined arithmetically in the body.
@@ -133,7 +132,6 @@
 #' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta},
 #' \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param m A count; the body uses it as \code{rep(...)}.
 #' @param a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
@@ -160,7 +158,6 @@
 #' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta},
 #' \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{yv}, as built in the body.
@@ -178,7 +175,6 @@
 #' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta},
 #' \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param grid Passed to \code{.psy_p3pl}.
 #' @param yv A matrix; passed to \code{\%*\%}.
@@ -236,7 +232,6 @@
 #' A step of the psycho_native implementation. Called by \code{morie_psy_map_theta},
 #' \code{morie_psy_mle_theta}, \code{morie_psy_wle_theta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param theta Passed to \code{.psy_p3pl}.
 #' @param it A list; the body reads \code{$a}, \code{$b}, \code{$c} from it.
@@ -253,7 +248,6 @@
 #' A step of the psycho_native implementation. Called by \code{.psy_dl},
 #' \code{morie_psy_ma_paule_mandel}, \code{morie_psy_ma_reml}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param vi Coerced to numeric by the body, with \code{as.numeric}.

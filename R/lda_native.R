@@ -74,7 +74,6 @@
 #' A step of the lda_native implementation. Called by \code{.morie_lda_elbo},
 #' \code{.morie_lda_variational_inference}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
@@ -95,7 +94,6 @@
 #'
 #' A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param doc Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha A vector; its length is taken.
@@ -166,7 +164,6 @@
 #'
 #' A step of the lda_native implementation. Called by \code{.morie_lda_variational_em}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param doc Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha A vector; its length is taken.
@@ -208,7 +205,6 @@
 #'
 #' A step of the lda_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param docs Iterated over elementwise, with \code{lapply}.
 #' @param K A count; the body uses it as \code{seq_len(...)}.
@@ -277,7 +273,6 @@
 #'
 #' A step of the lda_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param beta A matrix; passed to \code{as.matrix}.
 #' @param n_top Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
@@ -307,7 +302,6 @@
 #'
 #' A step of the lda_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export

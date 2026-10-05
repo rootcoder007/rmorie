@@ -23,7 +23,6 @@
 #' A step of the robust_native implementation. Called by \code{.rob_s_scale},
 #' \code{morie_rob_huber}, \code{morie_rob_m}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param r Numeric; combined arithmetically in the body.
 #' @return A numeric value.
@@ -36,7 +35,6 @@
 #'
 #' A step of the robust_native implementation. Called by \code{.rob_s_scale}, \code{morie_rob_tau}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @param cc Numeric; combined arithmetically in the body.
@@ -96,7 +94,6 @@
 #' A step of the robust_native implementation. Called by \code{morie_rob_huber},
 #' \code{morie_rob_m}, \code{morie_rob_mm} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
@@ -187,7 +184,6 @@
 #'
 #' A step of the robust_native implementation. Called by \code{morie_rob_mm}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param y A matrix; passed to \code{crossprod}.

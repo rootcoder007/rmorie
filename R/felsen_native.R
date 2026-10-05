@@ -8,7 +8,6 @@
 #'
 #' A step of the felsen_native implementation. Called by \code{.felsen_prune}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Numeric; combined arithmetically in the body.
 #' @param pi A count; the body uses it as \code{rep(...)}.
@@ -25,7 +24,6 @@
 #'
 #' A step of the felsen_native implementation. Called by \code{morie_felsen}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param node Character; the body checks with \code{is.character}.
 #' @param site A vector; indexed elementwise.

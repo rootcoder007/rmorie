@@ -244,7 +244,6 @@ morie_rapaf_ar_confidence_interval <- function(case_counts, rate_ratios,
 #'
 #' A step of the rapaf_native implementation. Called by \code{morie_rapaf_rate_ratios_from_logit}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; its length is taken.

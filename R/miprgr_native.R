@@ -460,7 +460,6 @@ morie_miprgr <- morie_miprgr_branch_and_bound
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A Passed to \code{miprgr_solve_relaxation}.
 #' @param b Passed to \code{miprgr_solve_relaxation}.
@@ -567,7 +566,6 @@ miprgr_branch_and_bound <- function(A, b, c, integer_vars, maximise = TRUE,
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -590,7 +588,6 @@ miprgr_cheatsheet <- function() {
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; indexed elementwise.
@@ -643,7 +640,6 @@ miprgr_enumerate_integer <- function(A, b, c, integer_vars, upper = 10,
 #'
 #' A step of the miprgr_native implementation. Called by \code{miprgr_branch_and_bound}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x A vector; indexed elementwise.
 #' @param integer_vars See Usage.
@@ -670,7 +666,6 @@ miprgr_fractional_variable <- function(x, integer_vars, tol = 1e-7) {
 #'
 #' A step of the miprgr_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A A matrix; indexed by row and column.
@@ -697,7 +692,6 @@ miprgr_round_relaxation <- function(x, A, b, integer_vars) {
 #'
 #' A step of the miprgr_native implementation. Called by \code{miprgr_solve_relaxation}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; its length is taken and its elements indexed.
@@ -843,7 +837,6 @@ miprgr_simplex <- function(A, b, c, tol = 1e-9, max_iter = 20000) {
 #'
 #' A step of the miprgr_native implementation. Called by \code{miprgr_branch_and_bound}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @param b A vector; its length is taken and its elements indexed.

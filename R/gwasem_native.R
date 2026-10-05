@@ -82,7 +82,6 @@ morie_gwasem_gower <- function(S) {
 #'
 #' A step of the gwasem_native implementation. Called by \code{morie_gwasem_reml}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{values}, \code{vectors}.
@@ -101,7 +100,6 @@ morie_gwasem_gower <- function(S) {
 #' A step of the gwasem_native implementation. Called by \code{.gwasem_loglik},
 #' \code{.gwasem_reml_delta}, \code{morie_gwasem} and 1 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{solve}.
 #' @param b A matrix; passed to \code{solve}.
@@ -120,7 +118,6 @@ morie_gwasem_gower <- function(S) {
 #'
 #' A step of the gwasem_native implementation. Called by \code{morie_gwasem}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{solve}.
 #' @return A matrix, from \code{solve}.
@@ -136,7 +133,6 @@ morie_gwasem_gower <- function(S) {
 #' A step of the gwasem_native implementation. Called by \code{.gwasem_loglik},
 #' \code{morie_gwasem_reml}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param M Passed to \code{svd}.
 #' @return A list with \code{sign}, \code{logdet}.
@@ -157,7 +153,6 @@ morie_gwasem_gower <- function(S) {
 #'
 #' A step of the gwasem_native implementation. Called by \code{.gwasem_reml_delta}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param yt A vector; its length is taken.
 #' @param Xt A matrix; indexed by row and column.
@@ -188,7 +183,6 @@ morie_gwasem_gower <- function(S) {
 #'
 #' A step of the gwasem_native implementation. Called by \code{morie_gwasem_reml}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param y A matrix; passed to \code{\%*\%}.
 #' @param X A matrix; passed to \code{ncol}.
@@ -305,7 +299,6 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #'
 #' A step of the gwasem_native implementation. Called by \code{morie_gwasem}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param f Numeric; combined arithmetically in the body.
 #' @param df1 Numeric; combined arithmetically in the body.
@@ -356,7 +349,6 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #'
 #' A step of the gwasem_native implementation. Called by \code{morie_gwasem}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param z Numeric; passed to \code{abs}.
 #' @return The value of \code{pnorm}.

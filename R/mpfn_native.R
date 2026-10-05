@@ -206,7 +206,6 @@ morie_mpfn_messagepassing <- morie_mpfn_message_passing
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
@@ -228,7 +227,6 @@ mpfn_cheatsheet <- function() {
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H A vector; its length is taken and its elements indexed.
 #' @param adj A vector; its length is taken and its elements indexed.
@@ -267,7 +265,6 @@ mpfn_is_permutation_invariant <- function(H, adj, edge_features, perm, T = 3,
 #'
 #' A step of the mpfn_native implementation. Called by \code{mpfn_message_passing}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h_v Accepted by the signature and not used anywhere in the body.
 #' @param h_w Coerced to numeric by the body, with \code{as.numeric}.
@@ -290,7 +287,6 @@ mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
 #'
 #' A step of the mpfn_native implementation. Called by \code{mpfn_is_permutation_invariant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H0 Iterated over elementwise, with \code{lapply}.
 #' @param adj A vector; indexed elementwise.
@@ -332,7 +328,6 @@ mpfn_message_passing <- function(H0, adj, edge_features, T = 3, A = NULL,
 #'
 #' A step of the mpfn_native implementation. Called by \code{mpfn_is_permutation_invariant}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Iterated over elementwise, with \code{lapply}.
 #' @param how One of \code{"gated"}, \code{"mean"}, \code{"sum"}. Defaults to \code{"sum"}.
@@ -374,7 +369,6 @@ mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL, j_fn = NULL) {
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
@@ -390,7 +384,6 @@ mpfn_sig <- function(x) {
 #'
 #' A step of the mpfn_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param h A vector; its length is taken.
 #' @param m Passed to \code{lin}.

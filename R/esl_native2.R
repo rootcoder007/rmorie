@@ -27,7 +27,6 @@
 #' max_passes and seed are kept for compatibility and unused. Called by
 #' \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param Z Optional; may be \code{NULL}. A matrix; passed to \code{ncol}.
@@ -73,7 +72,6 @@
 #' max_passes and seed are kept for compatibility and unused. Called by
 #' \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param K A matrix; indexed by row and column.
 #' @param y A vector; its length is taken and its elements indexed.
@@ -554,7 +552,6 @@ morie_esl_thin_plate_spline <- function(X, y, lambda_ = 1, newdata = NULL) {
 #'
 #' A step of the esl_native2 implementation. Called by \code{morie_esl_thin_plate_spline}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param A A matrix; passed to \code{tcrossprod}.
 #' @param B A matrix; passed to \code{tcrossprod}.
@@ -750,7 +747,6 @@ morie_esl_isomap <- function(X, k = 2, neighbors = 5) {
 #'
 #' A step of the esl_native2 implementation. Called by \code{morie_esl_isomap}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param adj A matrix; indexed by row and column.
 #' @return The value of \code{comps}, as built in the body.

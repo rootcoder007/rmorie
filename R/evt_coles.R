@@ -162,7 +162,6 @@ morie_evt_gev_mle <- function(x) {
 #' A step of the evt_coles implementation. Called by \code{morie_evt_gev_mle},
 #' \code{morie_evt_gpd_mle}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param H Passed to \code{eigen}.
 #' @return The value of \code{%*%}.

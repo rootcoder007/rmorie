@@ -49,7 +49,6 @@
 #' A step of the trmRew_native implementation. Called by \code{.trmRew_overlap},
 #' \code{.trmRew_rename}, \code{morie_trmRew_lpo_greater} and 5 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t Passed to \code{morie_unifAlg_is_var}.
 #' @return The value of \code{morie_unifAlg_is_var}.
@@ -61,7 +60,6 @@
 #' A step of the trmRew_native implementation. Called by \code{.trmRew_rename},
 #' \code{morie_trmRew_replace_at}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param symbol Carried through into a list the body builds.
 #' @param args Passed to \code{c}.
@@ -75,7 +73,6 @@
 #'
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param lhs Passed to \code{.trmRew_is_var}.
 #' @param rhs Passed to \code{morie_unifAlg_variables}.
@@ -142,7 +139,6 @@ morie_trmRew_positions <- function(t) {
 #' A step of the trmRew_native implementation. Called by \code{.trmRew_overlap},
 #' \code{morie_trmRew_rewrite_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t See Usage.
 #' @param pos See Usage.
@@ -170,7 +166,6 @@ morie_trmRew_subterm_at <- function(t, pos) {
 #' A step of the trmRew_native implementation. Called by \code{.trmRew_overlap},
 #' \code{morie_trmRew_rewrite_step}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; indexed elementwise.
 #' @param pos A vector; its length is taken and its elements indexed.
@@ -261,7 +256,6 @@ morie_trmRew_rewrite_step <- function(t, rules, strategy = "innermost") {
 #' A step of the trmRew_native implementation. Called by \code{.trmRew_interreduce},
 #' \code{morie_trmRew_complete}, \code{morie_trmRew_decides} and 2 others in the module.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t See Usage.
 #' @param rules Passed to \code{morie_trmRew_rewrite_step}.
@@ -305,7 +299,6 @@ morie_trmRew_normal_form <- function(t, rules, strategy = "innermost",
 #'
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_lpo_greater}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param precedence Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param sym Passed to \code{\%in\%}.
@@ -324,7 +317,6 @@ morie_trmRew_normal_form <- function(t, rules, strategy = "innermost",
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete},
 #' \code{morie_trmRew_is_terminating}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param s A vector; indexed elementwise.
 #' @param t A vector; indexed elementwise.
@@ -423,7 +415,6 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
 #'
 #' A step of the trmRew_native implementation. Called by \code{.trmRew_overlap}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param t A vector; indexed elementwise.
 #' @param tag Passed to \code{.trmRew_rename}.
@@ -479,7 +470,6 @@ morie_trmRew_is_terminating <- function(rules, precedence) {
 #'
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_is_locally_confluent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rules A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
@@ -509,7 +499,6 @@ morie_trmRew_critical_pairs <- function(rules) {
 #'
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_is_locally_confluent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param a Passed to \code{morie_trmRew_normal_form}.
 #' @param b Passed to \code{morie_trmRew_normal_form}.
@@ -537,7 +526,6 @@ morie_trmRew_joinable <- function(a, b, rules, max_steps = 10000) {
 #'
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_is_confluent}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rules Passed to \code{morie_trmRew_critical_pairs}.
 #' @param max_steps Passed to \code{morie_trmRew_joinable}. Defaults to \code{10000}.
@@ -571,7 +559,6 @@ morie_trmRew_is_locally_confluent <- function(rules, max_steps = 10000) {
 #'
 #' A step of the trmRew_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rules Passed to \code{morie_trmRew_is_terminating}.
 #' @param precedence Passed to \code{morie_trmRew_is_terminating}.
@@ -607,7 +594,6 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #'
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rules A vector; its length is taken.
 #' @param why Carried through into a list the body builds.
@@ -657,7 +643,6 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #'
 #' A step of the trmRew_native implementation. Called by \code{morie_trmRew_complete}.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param rules See Usage.
 #' @param precedence Accepted by the signature and not used anywhere in the body.
@@ -697,7 +682,6 @@ morie_trmRew_is_confluent <- function(rules, precedence, max_steps = 10000) {
 #'
 #' A step of the trmRew_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param equations Iterated over elementwise, with \code{lapply}.
 #' @param precedence Passed to \code{.trmRew_interreduce}.
@@ -825,7 +809,6 @@ morie_trmRew_decides <- function(s, t, rules, max_steps = 10000) {
 #'
 #' A step of the trmRew_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @param term Passed to \code{morie_trmRew_normal_form}.
 #' @param rules Passed to \code{morie_trmRew_normal_form}.
@@ -856,7 +839,6 @@ morie_trmRew_term_rewriting <- function(term, rules, strategy = "innermost",
 #'
 #' A step of the trmRew_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
-#' source it follows.
 #'
 #' @return A character value.
 #' @export
