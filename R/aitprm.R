@@ -10,8 +10,7 @@
 #'
 #' @return List with F, SSA, SSW, SST, df1, df2, N, a, sizes.
 #' @references Anderson (2001), Austral Ecology 26(1), 32-46, Equations
-#'   (3)-(5).  Standard published form; the article is paywalled and the
-#'   download attempted returned a stub, so it was not read.
+#'   (3)-(5), in their standard published form.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

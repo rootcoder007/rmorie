@@ -70,8 +70,8 @@
 #' step; recovering F_V itself would require deconvolving the known
 #' extreme-value F_U out of it, and that is NOT done here.
 #'
-#' The stub docstring this replaced made three claims that Section
-#' 6.3.4 contradicts, all checked against pages 223-225:
+#' Three claims often made about this estimator are contradicted by
+#' Section 6.3.4 (pages 223-225):
 #'
 #' * "identification via multiple spells".  The section identifies from
 #'   a SINGLE spell: "Elbers and Ridder (1982) showed that model (6.68)
@@ -87,7 +87,7 @@
 #'   with a NEGATIVE index and an exp(-v) frailty.  The published
 #'   parameterisation is the one implemented.
 #'
-#' The estimator below follows the source, not the stub.
+#' The estimator below follows that source.
 #'
 #' @param t Numeric vector of observed durations, strictly positive.
 #' @param x Numeric vector or n by d matrix of covariates.  The first

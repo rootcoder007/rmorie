@@ -4,9 +4,7 @@
 #' The distribution of exceedances over a high threshold.  The xi -> 0
 #' limit is the exponential, the mean is sigma/(1 - xi) for xi < 1 and
 #' infinite otherwise, and the quantile function inverts in closed form;
-#' all three are what the tests check.  The wave2 audit pointed this
-#' module at \code{dtgpd} as a duplicate; dtgpd is itself still an
-#' unimplemented placeholder, so there is nothing to delegate to.
+#' all three are what the tests check.
 #'
 #' Formula: F(x) = 1 - (1 + xi x/sigma)^(-1/xi), or 1 - exp(-x/sigma)
 #'   when xi = 0.

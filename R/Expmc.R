@@ -3,9 +3,8 @@
 #'
 #' Alias of \code{morie_dp_exponential_mechanism}: selects candidate r
 #' with probability proportional to
-#' \eqn{\exp(\epsilon u(D, r) / (2 \Delta u))}. The generated stub for
-#' module expmc described exactly the mechanism already shipped, so this
-#' is an alias.
+#' \eqn{\exp(\epsilon u(D, r) / (2 \Delta u))}. \code{expmc} is the same
+#' mechanism under a short name, not a second implementation.
 #'
 #' @param candidates See Usage.
 #' @param utility See Usage.

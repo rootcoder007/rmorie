@@ -121,7 +121,7 @@ morie_logistic_fit <- function(x, y, b = NULL) {
 #' Logistic-scale Wald intervals for odds ratios and probabilities
 #'
 #' Equations 2.11, 2.14 to 2.16 of Bilder & Loughin (2025); also the
-#' ordinal odds-ratio interval behind stub 3e50.
+#' ordinal odds-ratio interval.
 #'
 #' @param b1 Coefficient. @param var_b1 Its variance. @param c Unit change.
 #' @param z Critical value. @param xs Covariate vector (leading 1).

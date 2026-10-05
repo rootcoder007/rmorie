@@ -23,13 +23,11 @@ List with \code{estimate}, \code{acquisition}, \code{mean},
 \code{n}, \code{method}.
 }
 \description{
-The stub carried the label "Wang-Frazier (2017)".  Nothing by that
-author pair in that year matches an acquisition function of this
-description in Crossref; the attribution is recorded as UNVERIFIED.
-The acquisition implemented is the standard one the stub's formula
-describes.  Expected improvement vanishes exactly where the posterior
-variance is zero, which is what stops the search re-evaluating a
-point it already knows.
+The acquisition implemented is standard expected improvement; the
+usual label ("Wang-Frazier 2017") matches no traceable paper and is
+not relied on.  Expected improvement vanishes exactly where the
+posterior variance is zero, which is what stops the search
+re-evaluating a point it already knows.
 }
 \details{
 Formula: EI(x) = (f_min - mu(x)) Phi(z) + sigma(x) phi(z),

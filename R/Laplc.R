@@ -2,9 +2,8 @@
 #' Laplace mechanism (alias)
 #'
 #' Alias of \code{morie_dp_laplace_mechanism}: releases
-#' \eqn{f(D) + Lap(\Delta f / \epsilon)}. The generated stub for module
-#' laplc described exactly the mechanism already shipped, so this is an
-#' alias, not a second implementation.
+#' \eqn{f(D) + Lap(\Delta f / \epsilon)}.  \code{laplc} is the same
+#' mechanism under a short name, not a second implementation.
 #'
 #' @param y See Usage.
 #' @param sensitivity See Usage.

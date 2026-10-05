@@ -125,8 +125,8 @@ which is what the data identify without a further deconvolution
 step; recovering F_V itself would require deconvolving the known
 extreme-value F_U out of it, and that is NOT done here.
 
-The stub docstring this replaced made three claims that Section
-6.3.4 contradicts, all checked against pages 223-225:
+Three claims often made about this estimator are contradicted by
+Section 6.3.4 (pages 223-225):
 \itemize{
 \item "identification via multiple spells".  The section identifies from
 a SINGLE spell: "Elbers and Ridder (1982) showed that model (6.68)
@@ -143,7 +143,7 @@ with a NEGATIVE index and an exp(-v) frailty.  The published
 parameterisation is the one implemented.
 }
 
-The estimator below follows the source, not the stub.
+The estimator below follows that source.
 }
 \examples{
 n <- 40

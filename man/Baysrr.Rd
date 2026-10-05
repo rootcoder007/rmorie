@@ -30,11 +30,8 @@ There is therefore exactly one implementation: this function delegates.
 
 Note on the citation: Park and Casella (2008) is the Bayesian lasso, a
 Laplace prior, not the ridge; the ridge with a conjugate normal prior is the
-Lindley and Smith (1972) / Hoerl and Kennard (1970) construction.  The
-stub's attribution is repeated here only to record that it was checked and
-is wrong for the formula the stub states; the formula, not the label, is
-what has been implemented.  Recorded in ledger/wave2/DUPMAP.tsv as
-baysrr -> brreg.
+Lindley and Smith (1972) / Hoerl and Kennard (1970) construction, which is
+what is implemented.
 }
 \examples{
 Baysrr(c(1.2, 0.8, 1.5, 0.3), rbind(c(1, 0), c(0, 1), c(1, 1), c(0, 0)), 0.5)$u

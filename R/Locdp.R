@@ -1,11 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Local differential privacy via randomized response (alias)
 #'
-#' Alias of \code{Rrand}. The generated stub for module locdp described
-#' the local model of differential privacy (each user randomizes before
-#' collection, Kasiviswanathan et al. 2011); the canonical local-DP
-#' mechanism is Warner randomized response with flip probability
-#' \eqn{1/(1 + e^{\epsilon})}, already shipped as \code{Rrand}.
+#' Alias of \code{Rrand}: the local model of differential privacy (each
+#' user randomizes before collection, Kasiviswanathan et al. 2011), whose
+#' canonical mechanism is Warner randomized response with flip probability
+#' \eqn{1/(1 + e^{\epsilon})}.
 #'
 #' @param bit See Usage.
 #' @param epsilon See Usage.

@@ -11,10 +11,7 @@
 #'
 #' There is therefore exactly one implementation.  This function calls Bayhier
 #' and reports the random effects u_g themselves rather than the pooled group
-#' means; writing the arithmetic a second time would agree with the first at
-#' 1e-9 forever and be indistinguishable from correct work while doubling the
-#' surface under a second name.  Recorded in ledger/wave2/DUPMAP.tsv as
-#' baysrnd -> bayhier.
+#' means.
 #'
 #' @param y the observations.
 #' @param X accepted for interface compatibility; taken as the grouping vector

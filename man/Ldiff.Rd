@@ -22,9 +22,8 @@ The value of \code{Dpld}.
 }
 \description{
 Alias of \code{Dpld}, which implements distinct, entropy and
-recursive (c, l)-diversity of Machanavajjhala et al. (2007). The
-generated stub for module ldiff described that same check, so this is
-an alias.
+recursive (c, l)-diversity of Machanavajjhala et al. (2007);
+\code{ldiff} is the same check under a short name.
 }
 \references{
 Machanavajjhala, A., Kifer, D., Gehrke, J., and

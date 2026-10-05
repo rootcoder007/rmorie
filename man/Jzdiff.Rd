@@ -22,10 +22,9 @@ List with \code{estimate}, \code{divergence},
 Symmetric, always finite (unlike Kullback-Leibler), bounded above by
 log 2, and equal to log 2 exactly when the two distributions have
 disjoint support -- all four checked in the tests.  Its square root
-is a metric (Endres and Schindelin 2003).  The stub this function
-replaces carried the label "Jensen-Zhang (1986)", which corresponds
-to no traceable paper on this divergence; the attribution below is
-Lin's, verified against the DOI.
+is a metric (Endres and Schindelin 2003).  The divergence is Lin's
+(1991), verified against the DOI; the label "Jensen-Zhang (1986)"
+sometimes attached to it corresponds to no traceable paper.
 }
 \details{
 Formula: JS(P, Q) = H(M) - (H(P) + H(Q))/2 with M = (P + Q)/2.

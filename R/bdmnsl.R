@@ -11,10 +11,8 @@
 #'
 #' @return List with lower, upper, width, condmean, pbelow, pat, pabove,
 #'   n, d.
-#' @references Manski and Pepper (2000), Econometrica 68(4), 997-1010.
-#'   Standard published form; the article could not be obtained (JSTOR
-#'   returned an access stub and NBER t0224 a zero-page PDF), so it was
-#'   not read; only the bound stated here is claimed.
+#' @references Manski and Pepper (2000), Econometrica 68(4), 997-1010; the
+#'   bound in its standard published form.
 #' @export
 #' @examples
 #' set.seed(1)

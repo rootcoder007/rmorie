@@ -13,11 +13,8 @@
 #'
 #' Note on the citation: Park and Casella (2008) is the Bayesian lasso, a
 #' Laplace prior, not the ridge; the ridge with a conjugate normal prior is the
-#' Lindley and Smith (1972) / Hoerl and Kennard (1970) construction.  The
-#' stub's attribution is repeated here only to record that it was checked and
-#' is wrong for the formula the stub states; the formula, not the label, is
-#' what has been implemented.  Recorded in ledger/wave2/DUPMAP.tsv as
-#' baysrr -> brreg.
+#' Lindley and Smith (1972) / Hoerl and Kennard (1970) construction, which is
+#' what is implemented.
 #'
 #' @param y the n phenotypes.
 #' @param M the n-by-p marker matrix.

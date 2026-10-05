@@ -1,13 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Multi-head graph attention layer
 #'
-#' The single-head layer already exists in this package as \code{Gat};
-#' the wave2 audit flagged this module as a duplicate of it and it is
-#' one, so the attention arithmetic is NOT repeated here.  This function
-#' adds only the multi-head interface: with no weights supplied the
-#' deterministic choice W = I and a = 1 is used, every head then sees
-#' the same input, and averaging identical heads is exact -- which is
-#' what makes the \code{heads} argument checkable at all.
+#' The single-head layer is \code{Gat}; this function adds the multi-head
+#' interface on top of it and does not repeat the attention arithmetic.
+#' With no weights supplied the deterministic choice W = I and a = 1 is
+#' used, every head then sees the same input, and averaging identical
+#' heads is exact -- which is what makes the \code{heads} argument
+#' checkable at all.
 #'
 #' Formula: average over heads of Gat(A, X, I, 1).
 #'
