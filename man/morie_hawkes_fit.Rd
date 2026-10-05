@@ -22,7 +22,10 @@ morie_hawkes_fit(
 An object of class \code{morie_hawkes_fit}: a list with the
 parameter \code{estimate}, \code{loglik}, \code{aic},
 \code{branching_ratio}, \code{baseline_rate}, \code{n_events},
-\code{converged} and the \code{backend} used.
+\code{converged} and the \code{backend} used: from 50 events the fit is
+\code{rmoriebricklayer::core_hawkes_fit()} (bounded, analytic gradient), which also
+reports \code{at_bound}, the parameters on their bound, and a \code{note} when the
+kernel shape is not identified (a Lomax at its exponential limit).
 }
 \description{
 Fits a one-dimensional Hawkes process with a constant baseline to a

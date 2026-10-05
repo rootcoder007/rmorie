@@ -16,6 +16,11 @@ RichResult-style summary of the on-disk DMT_Imaging mirror.
 }
 \examples{
 \donttest{
-try(morie_entheo_dataset_overview())
+root <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", file.path(morie_cache_dir(), "DMT_Imaging"))
+if (dir.exists(root)) {
+  morie_entheo_dataset_overview()
+} else {
+  message("needs the DMT_Imaging data: git clone https://github.com/timmer500/DMT_Imaging.git ", root)
+}
 }
 }

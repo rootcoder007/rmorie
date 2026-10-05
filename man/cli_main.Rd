@@ -37,9 +37,10 @@ the \code{year} flag is forwarded.
 \item \code{"cpd"} -- Chicago Police Department; runs
 \code{\link{morie_cpd_all_analyses}} (bundled samples offline).
 }
-The \code{"tps"} subject is recognised by the CLI but needs an explicit
-dataset selection, so it returns a structured, non-crashing message
-pointing at the R API.
+The \code{"tps"} subject runs \code{\link{morie_tps_analyze_all}} on the
+datasets named in \code{\{"datasets": [...], "nrows": N\}} (as
+\code{\link{morie_tps_load}} takes them) or read from \code{\{"data": FILE\}};
+without either it returns an error status (exit code 1 from the CLI).
 }
 \examples{
 \donttest{
