@@ -36,11 +36,14 @@ test_that("PQC inventory reports all three families", {
   inv <- morie_crypto_pqc_inventory()
   expect_setequal(unique(inv$family),
                   c("lattice", "hash-based", "code-based"))
-  sodium_ok <- isTRUE(tryCatch(morie_crypto_sodium_available(),
-                               error = function(e) FALSE))
+  # Lamport needs random bytes (libsodium, or rmoriebricklayer's OS generator without it)
+  rand_ok <- !inherits(tryCatch(morie_crypto_random_bytes(1L), error = function(e) e), "error")
   expect_identical(
     inv$available[inv$primitive == "Lamport OTS (native SHA-256)"],
-    sodium_ok)
+    rand_ok)
+  # HQC is available whenever a key pair can be made (liboqs or the native HQC)
+  hqc_ok <- !inherits(tryCatch(morie_crypto_hqc_keygen(), error = function(e) e), "error")
+  expect_identical(inv$available[inv$primitive == "HQC-128"], hqc_ok)
 })
 
 test_that("SLH-DSA + HQC roundtrip when liboqs provides them", {

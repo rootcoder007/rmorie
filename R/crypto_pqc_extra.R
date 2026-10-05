@@ -300,7 +300,8 @@ morie_crypto_pqc_inventory <- function() {
       !inherits(tryCatch(morie_crypto_random_bytes(1L),
         error = function(e) e
       ), "error"),
-      has_alg(morie_crypto_hqc_keygen)
+      # liboqs or rmoriebricklayer's native HQC: available when a key pair can be made
+      !inherits(tryCatch(morie_crypto_hqc_keygen(), error = function(e) e), "error")
     ),
     stringsAsFactors = FALSE
   )
