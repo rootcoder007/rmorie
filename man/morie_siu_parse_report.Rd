@@ -39,5 +39,5 @@ frame (one row per report).
 \examples{
 f <- morie_siu_parse_report(system.file("extdata",
   "siu_synthetic_report.html", package = environmentName(environment(morie_siu_parse_report))))
-f[["number_of_subject_officers"]]
+f[["number_of_subject_officials"]]
 }

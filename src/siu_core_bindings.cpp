@@ -63,7 +63,7 @@ std::string siu_core_strip_boilerplate(const std::string& text) { return siu::st
 
 // [[Rcpp::export(.siu_core_resolve_so)]]
 Rcpp::List siu_core_resolve_so(const std::string& text) {
-    const siu::SoResolution res = siu::resolve_subject_officers(text);
+    const siu::SoResolution res = siu::resolve_subject_officials(text);
     return Rcpp::List::create(
         Rcpp::Named("count") = res.count.has_value() ? Rcpp::IntegerVector::create(*res.count)
                                                      : Rcpp::IntegerVector::create(NA_INTEGER),

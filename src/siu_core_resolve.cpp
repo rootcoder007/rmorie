@@ -57,7 +57,7 @@ std::string strip_boilerplate(const std::string& t) {
     return std::regex_replace(out, kGlossary, " ");
 }
 
-SoResolution resolve_subject_officers(const std::string& report_text) {
+SoResolution resolve_subject_officials(const std::string& report_text) {
     const std::string body = strip_boilerplate(report_text);
 
     // Ordinal scanners. "SO" is case-strict with a left word boundary and
@@ -117,10 +117,12 @@ SoResolution resolve_subject_officers(const std::string& report_text) {
     // block). A real roster always starts at #1; a lone high ordinal in the
     // narrative ("SO #7 of YRP") is another force's shorthand -- require
     // the #1 anchor before trusting the document-wide maximum.
-    static const std::regex kAnchor1(
-        R"(\bSO\s*#\s*1\b|subject offic(?:er|ial)\s*#\s*1\b)");
+    // "SO" stays case-strict (as in the ordinal scan); the spelled-out form is matched in any
+    // case -- "Subject Officer #1" never anchored and older reports went unresolved
+    static const std::regex kAnchorSo(R"(\bSO\s*#\s*1\b)");
+    static const std::regex kAnchorSpelled(R"(subject offic(?:er|ial)\s*#\s*1\b)", std::regex::icase);
     const int max_ord = max_ordinal(body);
-    if (max_ord > 0 && std::regex_search(body, kAnchor1)) {
+    if (max_ord > 0 && (std::regex_search(body, kAnchorSo) || std::regex_search(body, kAnchorSpelled))) {
         return {max_ord, "max ordinal SO #" + std::to_string(max_ord)};
     }
 

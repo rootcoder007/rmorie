@@ -9,7 +9,7 @@ test_that("native core parses the synthetic report", {
   expect_equal(f[["police_service"]], "Barrie Police Service")
   expect_equal(f[["date_of_incident_iso"]], "2023-01-05")
   expect_equal(f[["date_siu_notified_iso"]], "2023-01-06")
-  expect_equal(f[["number_of_subject_officers"]], "2")
+  expect_equal(f[["number_of_subject_officials"]], "2")
   expect_equal(nrow(morie_siu_schema(engine = "native")), 16L)
   expect_equal(sum(morie_siu_schema(engine = "native")$is_count), 5L)
   expect_equal(morie_siu_to_iso_date(c("January 5, 2023", "junk", NA), engine = "native"),
@@ -98,4 +98,16 @@ test_that("siu command line front end", {
   expect_equal(st, 0L)
   expect_message(st <- morie_siu_cli("bogus"), "usage")
   expect_equal(st, 2L)
+})
+
+test_that("SO, subject officer and subject official count the same people in both engines", {
+  # reports before the SIU Act (2019) say "subject officer", later ones "subject official"
+  for (txt in c("Subject Officer #1 declined. Subject Officer #2 was interviewed.",
+                "Subject Official #1 declined. Subject Official #2 was interviewed.",
+                "SO #1 declined. SO #2 was interviewed.")) {
+    for (engine in c("native", "bricklayer")) {
+      expect_identical(as.integer(morie_siu_resolve_so(txt, engine = engine)$count), 2L,
+                       label = paste(engine, txt))
+    }
+  }
 })

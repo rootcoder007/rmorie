@@ -10,7 +10,7 @@ test_that("morie_siu_parse_report delegates to the compiled parser", {
   fx <- system.file("extdata", "siu_synthetic_report.html",
                     package = "rmoriebricklayer")
   f <- morie_siu_parse_report(fx)
-  expect_equal(unname(f["number_of_subject_officers"]), "2")
+  expect_equal(unname(f["number_of_subject_officials"]), "2")
   expect_equal(unname(f["directors_name"]), "Joseph Martino")
   expect_length(f, 17L)  # 16 schema fields + _language
 })

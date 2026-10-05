@@ -546,7 +546,7 @@ ParsedFields parse_report_text(const std::string& text) {
     if (so.empty())
         so = section_text(text, "Subject Officials",
                           {"Incident Narrative", "Evidence", "Witness Officials"});
-    f["number_of_subject_officers"] = count_tagged(so.empty() ? text : so, "SO");
+    f["number_of_subject_officials"] = count_tagged(so.empty() ? text : so, "SO");
 
     std::string wo = section_text(text, "Witness Officers",
                                   {"Incident Narrative", "Evidence", "Subject Officers"});

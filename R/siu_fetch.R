@@ -560,7 +560,7 @@ morie_siu_fetch_dataframe <- function(...) {
 #' @examples
 #' f <- morie_siu_parse_report(system.file("extdata",
 #'   "siu_synthetic_report.html", package = environmentName(environment(morie_siu_parse_report))))
-#' f[["number_of_subject_officers"]]
+#' f[["number_of_subject_officials"]]
 #' @export
 morie_siu_parse_report <- function(html, engine = "auto") {
   stopifnot(is.character(html), length(html) == 1L, !is.na(html))
@@ -665,6 +665,9 @@ morie_siu_reports <- function(update = FALSE, max_new = 25L, quiet = FALSE) {
             siu_forensics_investigators = "siu_forensics_investigators",
             number_of_witness_officials = "number_of_witness_officials",
             number_of_civilian_witnesses = "number_of_civilian_witnesses",
+            number_of_subject_officials = "number_of_subject_officials",
+            # the name rmoriebricklayer's parser used before 0.5.5 (one quantity: "subject
+            # officer" before the SIU Act 2019, "subject official" after, "SO" for either)
             number_of_subject_officers = "number_of_subject_officials",
             age_affected = "age_affected",
             sex_gender_affected = "sex_gender_affected",

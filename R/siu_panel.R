@@ -63,7 +63,7 @@
 #' \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
 #' # Runs when a local Ollama server is reachable (free default).
 #' res <- morie_siu_panel(5161, mode = 2)
-#' res$fields["number_of_subject_officers"]
+#' res$fields["number_of_subject_officials"]
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_panel <- function(html,
@@ -181,7 +181,7 @@ morie_siu_panel <- function(html,
       " reader(s) answered every field; their raw answers follow. Read the",
       " report yourself, weigh their answers and quotes, and issue the",
       " FINAL value for every field under its canonical key",
-      " (number_of_subject_officers, never a variant spelling).",
+      " (number_of_subject_officials, never a variant spelling).",
       if (nzchar(prior)) "\nPrevious auditor verdicts:\n" else "", prior,
       "\n\nReader answers:\n",
       paste(vapply(seq_along(reader_out), function(i) {
