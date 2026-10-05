@@ -22,7 +22,7 @@ test_that("morie_hawkes_fit fits an exponential-kernel Hawkes process", {
   expect_true(fit$branching_ratio >= 0)
   expect_true(fit$baseline_rate > 0)
   expect_true(is.logical(fit$converged))
-  expect_true(fit$backend %in% c("cpp", "pure-R"))
+  expect_true(fit$backend %in% c("cpp", "pure-R", "rmoriebricklayer core"))
   expect_true(fit$loglik >= fit$loglik_poisson - 1e-4)
 })
 

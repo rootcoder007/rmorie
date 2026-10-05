@@ -207,7 +207,10 @@
 #' @return An object of class \code{morie_hawkes_fit}: a list with the
 #'   parameter \code{estimate}, \code{loglik}, \code{aic},
 #'   \code{branching_ratio}, \code{baseline_rate}, \code{n_events},
-#'   \code{converged} and the \code{backend} used.
+#'   \code{converged} and the \code{backend} used: from 50 events the fit is
+#'   \code{rmoriebricklayer::core_hawkes_fit()} (bounded, analytic gradient), which also
+#'   reports \code{at_bound}, the parameters on their bound, and a \code{note} when the
+#'   kernel shape is not identified (a Lomax at its exponential limit).
 #' @examples
 #' set.seed(1)
 #' ev <- cumsum(rexp(200, rate = 2))
@@ -231,6 +234,14 @@ morie_hawkes_fit <- function(times, end_time = NULL,
   if (end_time < times[n]) {
     stop("`end_time` must be >= the last event time")
   }
+
+  # 50 events or more: rmoriebricklayer's core_hawkes_fit, the fit morie's Python and
+  # morie_tps_hawkes_advanced_fit() run (projected BFGS on the analytic gradient, bounded
+  # parameters): seconds where Nelder-Mead on this likelihood took half a minute for 1,000
+  # Weibull or Lomax events, and a Lomax that tends to its exponential limit stops at the bound
+  # instead of running to 1e8. Its Lomax shape is the Lomax alpha; this function's is the
+  # power-law exponent, alpha + 1.
+  if (n >= 50L) return(.hawkes_fit_core(times, end_time, kernel))
 
   use_cpp <- .cpp_available()
   obj <- function(phi) {
@@ -349,4 +360,47 @@ print.morie_hawkes_fit <- function(x, ...) {
     cat("  NOTE: ", x$note, "\n", sep = "")
   }
   invisible(x)
+}
+
+# morie_hawkes_fit() through rmoriebricklayer::core_hawkes_fit(), in this function's parameter
+# names and Lomax convention.
+.hawkes_fit_core <- function(times, end_time, kernel) {
+  n <- length(times)
+  f <- suppressWarnings(rmoriebricklayer::core_hawkes_fit(times, end_time, kernel))
+  est <- as.numeric(f$theta)
+  if (kernel == "lomax") est[3] <- est[3] + 1
+  names(est) <- .hawkes_param_names(kernel)
+  loglik <- -f$nll
+  k <- length(est)
+  loglik_pois <- .hawkes_loglik_poisson(n, end_time)
+  eta <- unname(est[["eta"]])
+  degenerate <- eta < 1e-3
+  at_bound <- f$at_bound
+  note <- if (degenerate) {
+    paste("eta collapsed to ~0: data consistent with a homogeneous Poisson process;",
+          "kernel-shape parameters are NOT identified")
+  } else if (kernel == "lomax" && "alpha" %in% at_bound) {
+    paste("the Lomax shape reached its bound: the data are at the kernel's exponential",
+          "limit, so alpha and c are not identified separately (fit kernel = \"exponential\")")
+  } else if (length(at_bound)) {
+    sprintf("estimate on the parameter bound: %s", paste(at_bound, collapse = ", "))
+  }
+  structure(
+    list(
+      kernel = kernel, baseline = "constant",
+      estimate = est,
+      branching_ratio = eta,
+      baseline_rate = exp(unname(est[["a0"]])),
+      loglik = loglik, aic = 2 * k - 2 * loglik,
+      loglik_poisson = loglik_pois,
+      loglik_gain = loglik - loglik_pois,
+      self_excitation_detected = !degenerate,
+      n_events = n, end_time = end_time,
+      converged = isTRUE(f$converged) || degenerate,
+      at_bound = at_bound,
+      note = note,
+      backend = "rmoriebricklayer core"
+    ),
+    class = "morie_hawkes_fit"
+  )
 }
