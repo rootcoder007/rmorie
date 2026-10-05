@@ -2,8 +2,8 @@
   "_README": [
     "Verification ledger. A citation may only ship once it has been checked",
     "against the publisher record and recorded here with the source that",
-    "settled it. Enforced by scripts/audit/check_citations.py, which runs in",
-    "prepush_guards.sh. Adding an entry from memory instead of from a lookup",
+    "settled it. Enforced by scripts/audit/check_citations.R, which runs in",
+    "prepush_guards.sh and in CI. Adding an entry from memory instead of from a lookup",
     "defeats the entire mechanism -- the `source` field must be a DOI or a URL",
     "that was actually fetched.",
     "See memory: feedback_never_invent_citations_verify_each."
@@ -604,6 +604,16 @@
       "source": "doi:10.1007/978-0-387-92870-8",
       "verified": "2026-07-30",
       "note": "Ch.2 Single-Index 7-51; KDE is the Appendix 233-255. hrzkde had cited Ch.2 in all three trees."
+    },
+    "schneier-kelsey-1999-audit-logs": {
+      "year": 1999,
+      "volume": "2",
+      "issue": "2",
+      "pages": "159-176",
+      "container": "ACM Transactions on Information and System Security",
+      "source": "doi:10.1145/317087.317089",
+      "verified": "2026-10-05",
+      "note": "Crossref record fetched 2026-10-05; cited for the hash-chained audit log in R/sechsh_native.R."
     }
   }
 }

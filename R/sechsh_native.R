@@ -26,7 +26,9 @@
 #' @param key Optional raw key.
 #' @return List with \code{hash} and \code{keyed} (and \code{note}
 #'   when keyed).
-#' @references Schneier & Kelsey (1999).
+#' @references Schneier, B. and Kelsey, J. (1999). Secure audit logs to
+#'   support computer forensics. \emph{ACM Transactions on Information and
+#'   System Security} 2(2):159-176, \doi{10.1145/317087.317089}.
 #' @export
 #' @examples
 #' if (morie_crypto_sodium_available()) {
@@ -50,7 +52,9 @@ morie_sechsh_chain_entry <- function(previous_hash, entry, key = NULL) {
 #' @param genesis Raw 32-byte genesis (default all zeros).
 #' @return List with \code{hashes}, \code{head}, \code{n},
 #'   \code{head_hex}, \code{keyed}.
-#' @references Schneier & Kelsey (1999).
+#' @references Schneier, B. and Kelsey, J. (1999). Secure audit logs to
+#'   support computer forensics. \emph{ACM Transactions on Information and
+#'   System Security} 2(2):159-176, \doi{10.1145/317087.317089}.
 #' @export
 #' @examples
 #' if (morie_crypto_sodium_available()) {

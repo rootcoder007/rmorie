@@ -284,6 +284,10 @@ jobs:
       - name: Static guard -- every morie_* call must be defined
         run: Rscript scripts/audit/check_r_undefined.R .
 
+      # offline rules only (E1-E5); --online resolves every ledger DOI and is run by hand
+      - name: Static guard -- every citation is checkable
+        run: Rscript scripts/audit/check_citations.R .
+
       - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
         run: |
           install.packages(c("rmoriebricklayer", "rmoriedata"), repos = "https://rootcoder007.r-universe.dev")

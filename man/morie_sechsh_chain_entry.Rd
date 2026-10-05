@@ -29,6 +29,8 @@ if (morie_crypto_sodium_available()) {
 }
 }
 \references{
-Schneier & Kelsey (1999).
+Schneier, B. and Kelsey, J. (1999). Secure audit logs to
+support computer forensics. \emph{ACM Transactions on Information and
+System Security} 2(2):159-176, \doi{10.1145/317087.317089}.
 }
 \keyword{internal}
