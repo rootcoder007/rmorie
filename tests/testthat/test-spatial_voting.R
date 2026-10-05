@@ -27,7 +27,7 @@ test_that("aldrich_mckelvey returns z-scored stimuli with correct ranks", {
   expect_gt(rho, 0.9)
   # z-scored (mean ~ 0)
   expect_lt(abs(mean(res$zhat)), 1e-2)
-  expect_true(res$engine %in% c("basicspace", "fallback"))
+  expect_true(res$engine %in% c("basicspace", "native"))
 })
 
 test_that("aldrich_mckelvey basicspace branch fires when available", {

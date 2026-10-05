@@ -392,7 +392,7 @@ test_that("non-finite stimuli from basicspace fall back to the native solver", {
   set.seed(1)
   Z <- matrix(rnorm(100), 20, 5)
   fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-  expect_identical(fit$engine, "fallback")
+  expect_identical(fit$engine, "native")
   expect_true(all(is.finite(fit$zhat)))
   expect_true(all(is.finite(fit$alpha)))
 })

@@ -81,19 +81,13 @@ NULL
 #   - Slapin & Proksch (2008) "A Scaling Model for Estimating Time-Series
 #     Party Positions from Texts", AJPS 52(3)  (Wordfish).
 #
-# Where the upstream R ecosystem provides a battle-tested implementation
-# we delegate to it: `basicspace` for Aldrich-McKelvey and blackbox
-# scaling, with a pure-R numeric fallback so the package keeps working
-# when `basicspace` (or `MASS`/`mvtnorm`) is not installed.
-#
-# Heavy Bayesian MCMC paths (CJR-IRT, Bayesian MDS / unfolding, dynamic
-# IRT, alpha-NOMINATE) now run on native samplers or documented
-# deterministic approximations (see each function's engine tag)
-# stubs.  Porting a faithful Gibbs/MH sampler exceeds the in-session
-# budget; users needing those should reach for `pscl::ideal`, `MCMCpack`,
-# or `emIRT`.  The function signatures, parameter docs, and references
-# are kept in place so the API surface is stable and a future port lands
-# cleanly.
+# Aldrich-McKelvey and blackbox scaling use `basicspace` when it is
+# installed and otherwise compute the same estimators natively (closed-form
+# AM; EM low-rank blackbox).  The Bayesian estimators (Bayesian AM,
+# Bayesian MDS and unfolding, CJR, ordinal and dynamic IRT,
+# alpha-NOMINATE) run on the native samplers in
+# spatial_voting_bayes_native.R, each checked against its reference
+# implementation (see the function documentation).
 
 # ---- internal helpers ------------------------------------------------------
 
@@ -206,29 +200,75 @@ NULL
   list(alpha = alpha, beta = beta)
 }
 
+# Aldrich-McKelvey closed form: the stimulus vector minimising
+# sum_i ||X_i c_i - z||^2 over unit-length, centred z is the eigenvector of
+# sum_i (I - P_i) with the smallest eigenvalue orthogonal to the constant
+# (which every P_i reproduces).  Complete, non-constant rows only, as in
+# basicspace::aldmck.  Standardised, first stimulus on the left.
+.sv_am_stimuli <- function(Z) {
+  q <- ncol(Z)
+  if (q < 2L) {
+    stop("Aldrich-McKelvey scaling needs at least two stimuli.",
+         call. = FALSE)
+  }
+  M <- matrix(0, q, q)
+  used <- 0L
+  for (i in seq_len(nrow(Z))) {
+    z <- Z[i, ]
+    if (anyNA(z) || stats::var(z) == 0) next
+    X <- cbind(1, z)
+    M <- M + diag(q) - X %*% solve(crossprod(X), t(X))
+    used <- used + 1L
+  }
+  if (used < 1L) {
+    stop("Aldrich-McKelvey scaling needs at least one respondent who ",
+         "places every stimulus and not all at the same point.",
+         call. = FALSE)
+  }
+  C <- diag(q) - 1 / q
+  e <- eigen(C %*% M %*% C, symmetric = TRUE)
+  # the constant direction has eigenvalue 0 too; skip it
+  off <- abs(colSums(e$vectors)) > 1e-8 * sqrt(q)
+  v <- e$vectors[, which.min(ifelse(off, Inf, e$values))]
+  v <- (v - mean(v)) / stats::sd(v)
+  if (v[1L] > 0) v <- -v
+  v
+}
+
 #' Aldrich-McKelvey scaling
 #'
 #' Recovers latent stimulus positions from perceptual placement data by
 #' estimating respondent-specific intercepts \eqn{a_i} and slopes
 #' \eqn{b_i} in the model
 #' \deqn{z_{ij} = a_i + b_i \hat{z}_j + \epsilon_{ij}.}{z_ij = a_i + b_i z_hat_j + epsilon_ij.}
-#' The stimulus positions come from `basicspace::aldmck` when the
-#' `basicspace` package is installed (standardised to mean 0, sd 1);
-#' otherwise from a hand-rolled EM/least-squares fallback. The respondent
-#' intercepts and slopes are, on either path, the per-respondent least
-#' squares regression of the reported placements on those positions, so
-#' they are defined for every respondent with at least two placements
-#' (`basicspace` itself reports them only for respondents it scales
-#' against a self-placement, which this function does not take).
+#' The stimulus positions are Aldrich and McKelvey's least-squares
+#' solution: each respondent's placements are mapped onto the common
+#' scale by the best affine transformation, and \eqn{\hat z} minimises
+#' the total squared error
+#' \eqn{\sum_i \lVert X_i c_i - \hat z \rVert^2}, \eqn{X_i = [1, z_i]},
+#' subject to \eqn{\hat z^\top \hat z = 1} and \eqn{1^\top \hat z = 0}.
+#' Concentrating out \eqn{c_i} leaves
+#' \eqn{\hat z^\top \sum_i (I - P_i) \hat z} with \eqn{P_i} the
+#' projection onto the columns of \eqn{X_i}, so \eqn{\hat z} is the
+#' eigenvector of \eqn{\sum_i (I - P_i)} with the smallest eigenvalue
+#' orthogonal to the constant.  Respondents with a missing placement, or
+#' who place every stimulus at the same point, are left out, as
+#' `basicspace::aldmck` does; with `basicspace` installed it computes the
+#' stimuli, otherwise the same closed form is evaluated here (the two agree
+#' to rounding).  Positions are standardised to mean 0 and sd 1 and the
+#' first stimulus is put on the left.  The respondent intercepts and slopes
+#' are, on either path, the per-respondent least squares regression of the
+#' reported placements on those positions, so they are defined for every
+#' respondent with at least two placements (`basicspace` itself reports
+#' them only for respondents it scales against a self-placement, which
+#' this function does not take).
 #'
 #' @param Z A respondent-by-stimulus numeric matrix of perceptual
 #'   placements.  `NA` entries are treated as missing.
-#' @param n_dims Number of latent dimensions (typically 1).
-#' @param max_iter Maximum EM iterations for the fallback solver.
-#' @param tol Convergence tolerance on the stimulus configuration.
+#' @param n_dims Number of latent dimensions (must be 1).
 #' @return A list with components `zhat` (stimulus positions), `alpha`,
-#'   `beta`, `weights`, `iterations`, `converged`, and `engine`
-#'   ("basicspace" or "fallback").
+#'   `beta`, `weights`, `iterations` (`NA`, the solution is closed form),
+#'   `converged`, and `engine` ("basicspace" or "native").
 #' @references
 #'   Aldrich, J. H. and McKelvey, R. D. (1977). "A Method of Scaling with
 #'   Applications to the 1968 and 1972 Presidential Elections."
@@ -241,17 +281,15 @@ NULL
 #'   and Rosenthal, H. (2021). *Analyzing Spatial Models of Choice and
 #'   Judgment*, 2nd ed. Chapman & Hall/CRC.
 #' @examples
-#' if (requireNamespace("basicspace", quietly = TRUE)) {
-#'   set.seed(1)
-#'   Z <- matrix(rnorm(20 * 5), 20, 5)
-#'   fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-#'   fit$zhat
-#' }
+#' set.seed(1)
+#' truth <- c(-1.2, -0.4, 0.1, 0.9, 1.5)
+#' Z <- t(sapply(1:40, function(i) 4 + rnorm(1, 0, 0.3) +
+#'   runif(1, 0.6, 1.4) * truth + rnorm(5, 0, 0.3)))
+#' fit <- morie_spatial_voting_aldrich_mckelvey(Z)
+#' round(fit$zhat, 2)
+#' round((truth - mean(truth)) / sd(truth), 2)
 #' @export
-morie_spatial_voting_aldrich_mckelvey <- function(Z,
-                                                  n_dims  = 1L,
-                                                  max_iter = 100L,
-                                                  tol      = 1e-6) {
+morie_spatial_voting_aldrich_mckelvey <- function(Z, n_dims = 1L) {
   if (as.integer(n_dims) != 1L) {
     stop("morie_spatial_voting_aldrich_mckelvey: this implementation recovers a single ",
          "latent dimension; n_dims must be 1", call. = FALSE)
@@ -264,7 +302,7 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
         .sv_basicspace_shape_ok(Z)) {
     # aldmck's default treats NA cells as missing; passing `missing = NA`
     # is rejected ("must only contain integers"), which sent every call
-    # down the fallback while the docs promised basicspace
+    # down the native path while the docs promised basicspace
     out <- try(basicspace::aldmck(Z, respondent = 0, polarity = 1),
                silent = TRUE)
     if (!inherits(out, "try-error") && all(is.finite(out$stimuli))) {
@@ -284,43 +322,11 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
     }
   }
 
-  mask <- !is.na(Z)
-  zhat <- .sv_nanmean_col(Z)
-  if (stats::sd(zhat, na.rm = TRUE) > 0) {
-    zhat <- (zhat - mean(zhat, na.rm = TRUE)) /
-            stats::sd(zhat, na.rm = TRUE)
-  }
-  alpha <- numeric(n_resp)
-  beta <- numeric(n_resp)
-  iter <- 0L
-  for (iter in seq_len(max_iter)) {
-    zhat_old <- zhat
-    rp <- .sv_am_respondents(Z, mask, zhat)
-    alpha <- rp$alpha
-    beta <- rp$beta
-    for (j in seq_len(n_stim)) {
-      valid <- mask[, j]
-      if (sum(valid) < 1L) next
-      # v0.9.5.6+: Aldrich-McKelvey (1977) precision-weighted stimulus
-      # update z_j = sum_i beta_i (Z_ij - alpha_i) / sum_i beta_i^2,
-      # NOT the unweighted mean. The unweighted form biases the
-      # estimate under heterogeneous respondent reliability.
-      denom <- sum(beta[valid]^2)
-      if (denom < 1e-12) {
-        zhat[j] <- mean((Z[valid, j] - alpha[valid]) / beta[valid])
-      } else {
-        zhat[j] <- sum(beta[valid] * (Z[valid, j] - alpha[valid])) / denom
-      }
-    }
-    zhat <- zhat - mean(zhat)
-    if (stats::sd(zhat) > 0) zhat <- zhat / stats::sd(zhat)
-    if (max(abs(zhat - zhat_old)) < tol) break
-  }
-  weights <- abs(beta)
-  weights <- weights / sum(weights) * n_resp
-  list(zhat = zhat, alpha = alpha, beta = beta, weights = weights,
-       iterations = iter, converged = iter < max_iter,
-       engine = "fallback")
+  zhat <- .sv_am_stimuli(Z)
+  rp <- .sv_am_respondents(Z, !is.na(Z), zhat)
+  list(zhat = zhat, alpha = rp$alpha, beta = rp$beta,
+       weights = abs(rp$beta) / sum(abs(rp$beta)) * n_resp,
+       iterations = NA_integer_, converged = TRUE, engine = "native")
 }
 
 # ===========================================================================
@@ -330,25 +336,38 @@ morie_spatial_voting_aldrich_mckelvey <- function(Z,
 #' Blackbox / Basic Space scaling
 #'
 #' Recovers respondent ideal points from an issue-scale response matrix
-#' via SVD on the column-centred matrix.  Implements Poole's (1998)
-#' decomposition \eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}.  Delegates to
-#' `basicspace::blackbox` when available.
+#' by Poole's (1998) decomposition
+#' \eqn{X_0 = \Psi W' + J_n c' + E_0}{X_0 = Psi W' + J_n c' + E_0}, fitted
+#' by least squares over the observed cells only.  Respondents with fewer
+#' than `minscale` responses are not scaled (their rows are `NA`).
+#' `basicspace::blackbox` computes it when installed and the matrix has at
+#' least eight issues; otherwise it is computed here, by the EM low-rank
+#' fit: missing cells are filled with the current fit, the column means
+#' and the leading singular vectors of the centred matrix recomputed, and
+#' the two steps repeated until the filled cells stop moving.  With no
+#' missing cells this is one SVD; either way \eqn{\Psi = U D^{1/2}} and
+#' \eqn{W = V D^{1/2}}, the scaling `basicspace` reports, and the two
+#' paths give the same fitted values.
 #'
 #' @param X A respondent-by-issue numeric matrix of responses
 #'   (`NA` for missing).
 #' @param n_dims Number of dimensions to extract.
+#' @param minscale Minimum number of responses for a respondent to be
+#'   scaled (capped at the number of issues).
 #' @return A list with `ideal_points`, `stimuli_weights`, `eigenvalues`,
 #'   `singular_values`, `explained_variance`, `col_means`, `n_dims`, and
 #'   `engine`.
 #' @references Poole, K. T. (1998); Armstrong et al. (2021).
 #' @examples
-#' if (requireNamespace("basicspace", quietly = TRUE)) {
-#'   set.seed(1)
-#'   X <- matrix(rnorm(30 * 6), 30, 6)
-#'   morie_spatial_voting_blackbox(X, n_dims = 2)
-#' }
+#' set.seed(1)
+#' X <- matrix(rnorm(30 * 2), 30, 2) %*% matrix(rnorm(2 * 8), 2, 8) +
+#'   matrix(rnorm(240, 0, 0.3), 30, 8)
+#' X[sample(240, 10)] <- NA
+#' fit <- morie_spatial_voting_blackbox(X, n_dims = 2)
+#' fit$engine
+#' head(fit$ideal_points)
 #' @export
-morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
+morie_spatial_voting_blackbox <- function(X, n_dims = 2L, minscale = 8L) {
   X <- .sv_as_matrix(X)
   n <- nrow(X)
   p <- ncol(X)
@@ -357,8 +376,14 @@ morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
   # responses, so fewer than eight stimuli would only error anyway
   if (requireNamespace("basicspace", quietly = TRUE) &&
         .sv_basicspace_shape_ok(X, min_cols = max(8L, n_dims + 1L))) {
-    out <- try(basicspace::blackbox(X, missing = NA, dims = n_dims,
-                                    minscale = 8, verbose = FALSE),
+    # blackbox's default treats NA cells as missing; `missing = NA` is
+    # rejected ("must only contain integers") and silently sent every
+    # call to the native path
+    Xb <- X
+    if (is.null(colnames(Xb))) colnames(Xb) <- paste0("issue", seq_len(p))
+    if (is.null(rownames(Xb))) rownames(Xb) <- paste0("resp", seq_len(n))
+    out <- try(basicspace::blackbox(Xb, dims = n_dims, minscale = minscale,
+                                    verbose = FALSE),
                silent = TRUE)
     if (!inherits(out, "try-error")) {
       ip <- as.matrix(out$individuals[[n_dims]][, paste0("c", seq_len(n_dims))])
@@ -376,23 +401,39 @@ morie_spatial_voting_blackbox <- function(X, n_dims = 2L) {
     }
   }
 
-  col_means <- .sv_nanmean_col(X)
-  Xc <- sweep(X, 2, col_means, FUN = "-")
-  Xc[is.na(Xc)] <- 0
-  sv <- svd(Xc)
-  q  <- min(n_dims, length(sv$d))
-  Lambda_q <- diag(sv$d[seq_len(q)], nrow = q)
-  V_q <- sv$v[, seq_len(q), drop = FALSE]
-  U_q <- sv$u[, seq_len(q), drop = FALSE]
-  W   <- V_q %*% sqrt(Lambda_q)
-  Psi <- U_q %*% sqrt(Lambda_q)
-  total_var <- sum(sv$d ^ 2)
-  explained <- if (total_var > 0) sum(sv$d[seq_len(q)] ^ 2) / total_var else 0
+  if (p < 2L) {
+    stop("Blackbox scaling needs at least two issues (columns).",
+         call. = FALSE)
+  }
+  keep <- rowSums(!is.na(X)) >= min(as.integer(minscale), p)
+  if (sum(keep) <= n_dims) {
+    stop("Too few respondents answer at least `minscale` issues.",
+         call. = FALSE)
+  }
+  Xk <- X[keep, , drop = FALSE]
+  obs <- !is.na(Xk)
+  M <- Xk
+  M[!obs] <- .sv_nanmean_col(Xk)[col(Xk)][!obs]
+  q <- min(as.integer(n_dims), p - 1L, nrow(Xk) - 1L)
+  for (it in seq_len(5000L)) {
+    col_means <- colMeans(M)
+    sv <- svd(sweep(M, 2L, col_means), nu = q, nv = q)
+    fit <- sv$u %*% (sv$d[seq_len(q)] * t(sv$v)) +
+      rep(col_means, each = nrow(M))
+    if (all(obs)) break
+    change <- max(abs(M[!obs] - fit[!obs]))
+    M[!obs] <- fit[!obs]
+    if (change < 1e-10) break
+  }
+  d <- sv$d[seq_len(q)]
+  Psi <- matrix(NA_real_, n, q)
+  Psi[keep, ] <- sv$u %*% diag(sqrt(d), nrow = q)
+  W <- sv$v %*% diag(sqrt(d), nrow = q)
+  total_var <- sum(svd(sweep(M, 2L, col_means))$d^2)
   list(ideal_points = Psi, stimuli_weights = W,
-       eigenvalues  = sv$d[seq_len(q)] ^ 2,
-       singular_values = sv$d[seq_len(q)],
-       explained_variance = explained,
-       col_means = col_means, n_dims = q, engine = "fallback")
+       eigenvalues = d^2, singular_values = d,
+       explained_variance = if (total_var > 0) sum(d^2) / total_var else 0,
+       col_means = col_means, n_dims = q, engine = "native")
 }
 
 # ===========================================================================
