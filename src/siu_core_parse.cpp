@@ -8,6 +8,8 @@
 
 #include <algorithm>
 #include <array>
+#include <map>
+#include <vector>
 #include <regex>
 #include <tuple>
 #include <set>
@@ -519,6 +521,139 @@ std::pair<std::string, std::string> detect_age_sex_fr(const std::string& text) {
     return {m[2].str(), it == kEn.end() ? lower(m[1].str()) : it->second};
 }
 
+// ---- the subject officials' service -------------------------------------
+// police_service is the service whose officers are the subject officials. The force that notified
+// the SIU is often a different one (custody, requesting or neighbouring service), so the director's
+// analysis decides: the first service named in a sentence that names a subject official ("the SO of
+// the BPS", "un agent du SPT"), else the service the analysis names most. The case number's letter
+// (T Toronto, P OPP, I First Nations, O any other) rules out services of the wrong kind. Legacy
+// reports name the service in a "Police service:" header.
+
+static const std::string kCap = "(?:[A-Z]|\xc3[\x80-\x9d])";
+static const std::string kWord = "[^\\s,.;()]*";
+static const std::string kEnName =
+    "((?:[A-Z][A-Za-z'\\-]+[ \\t]+){1,5}(?:Police Service|Police Department|Provincial Police|Police|Constabulary))"
+    "\\b(?![ \\t]+Services?[ \\t]+(?:Act|Board))";
+static const std::string kFrName =
+    "([Ss]ervice(?: [a-z\xc3\xa9]+){0,2} de (?:la )?police(?: [a-z\xc3\xa9]+){0,2} (?:de la |de |du |des |d" + kApos +
+    ")(?:grand )?" + kCap + kWord + "(?: " + kCap + kWord + ")*" +
+    "|[Ss]ervice de police (?:Nishnawbe[- ]Aski|Anishinabek|Akwesasne|Wikwemikong|UCCM)" +
+    "|[Pp]olice r\xc3\xa9gionale (?:de |du |d" + kApos + ")" + kCap + kWord + "(?: " + kCap + kWord + ")*" +
+    "|[Pp]olice [Pp]rovinciale(?: de l" + kApos + "Ontario)?" +
+    "|[Pp]olice (?:de |d" + kApos + ")" + kCap + kWord + "(?: " + kCap + kWord + ")*)";
+
+static std::string service_kind(const std::string& n) {
+    static const std::regex fn("Nishnawbe|Anishinabek|Treaty|Trait\xc3\xa9|Akwesasne|Wikwemikong|UCCM|Lac Seul|Rama|"
+                               "Six Nations|Premi\xc3\xa8res? Nations?|First Nations?");
+    static const std::regex prov("Provin\\w*al|[Pp]rovinciale");
+    if (std::regex_search(n, fn)) return "I";
+    if (std::regex_search(n, prov)) return "P";
+    if (n.find("Toronto") != std::string::npos) return "T";
+    return "O";
+}
+
+static std::string clean_service(std::string n) {
+    static const std::regex lead("^(?:The|A|An|Of|And|On|In|By|To|With|From|That|This|Local|While|When|As)\\s+");
+    n = trim(n);
+    for (int i = 0; i < 3; ++i) n = std::regex_replace(n, lead, "");
+    return n;
+}
+
+static std::string pick_service(const std::string& sec, const std::string& text, bool fr, const std::string& letter) {
+    static const std::regex en_name(kEnName), fr_name(kFrName);
+    static const std::regex en_abbr(kEnName + "\\s*\\(\\s*([A-Z]{2,6})\\s*\\)"), fr_abbr(kFrName + "\\s*\\(\\s*([A-Z]{2,6})\\s*\\)");
+    static const std::regex not_service("\\b(?:Independent|Review|Office|Between|Involving|After|During|Following|Collision|"
+                                        "Crash|Shooting|Death|Injury|Incident|Arrest)\\b");
+    static const std::regex so_en("\\bSOs?\\b|[Ss]ubject [Oo]ffic(?:er|ial)s?"), so_fr("\\bAIs?\\b|agente?s? impliqu");
+    std::vector<std::pair<std::string, std::string>> abbr =
+        fr ? std::vector<std::pair<std::string, std::string>>{
+                 {"PPO", "Police provinciale de l'Ontario"}, {"SPT", "Service de police de Toronto"},
+                 {"PRY", "Police r\xc3\xa9gionale de York"}, {"PRP", "Police r\xc3\xa9gionale de Peel"},
+                 {"SPRP", "Service de police r\xc3\xa9gional de Peel"}, {"SPRD", "Service de police r\xc3\xa9gional de Durham"},
+                 {"SPRN", "Service de police r\xc3\xa9gional de Niagara"}, {"SPRH", "Service de police r\xc3\xa9gional de Halton"},
+                 {"SPRW", "Service de police r\xc3\xa9gional de Waterloo"}}
+           : std::vector<std::pair<std::string, std::string>>{
+                 {"OPP", "Ontario Provincial Police"}, {"TPS", "Toronto Police Service"}, {"YRP", "York Regional Police"},
+                 {"PRP", "Peel Regional Police"}, {"DRPS", "Durham Regional Police Service"},
+                 {"NRPS", "Niagara Regional Police Service"}, {"HRPS", "Halton Regional Police Service"},
+                 {"WRPS", "Waterloo Regional Police Service"}};
+    // the page's own "<name> ( ABBR )" pairs override the defaults; the first definition wins
+    std::set<std::string> seen;
+    for (auto it = std::sregex_iterator(text.begin(), text.end(), fr ? fr_abbr : en_abbr); it != std::sregex_iterator(); ++it) {
+        const std::string k = (*it)[it->size() - 1].str();
+        if (!seen.insert(k).second) continue;
+        const std::string v = clean_service((*it)[1].str());
+        bool found = false;
+        for (auto& [ak, av] : abbr)
+            if (ak == k) { av = v; found = true; }
+        if (!found) abbr.emplace_back(k, v);
+    }
+    std::vector<std::pair<size_t, std::string>> ments;
+    for (auto it = std::sregex_iterator(sec.begin(), sec.end(), fr ? fr_name : en_name); it != std::sregex_iterator(); ++it) {
+        const std::string n = clean_service((*it)[1].str());
+        if (!n.empty() && !std::regex_search(n, not_service)) ments.emplace_back(static_cast<size_t>(it->position(0)), n);
+    }
+    auto word = [](char c) { return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9') || c == '_'; };
+    for (const auto& [k, v] : abbr) {
+        if (v.empty() || std::regex_search(v, not_service)) continue;
+        for (size_t at = sec.find(k); at != std::string::npos; at = sec.find(k, at + 1))
+            if ((at == 0 || !word(sec[at - 1])) && (at + k.size() == sec.size() || !word(sec[at + k.size()])))
+                ments.emplace_back(at, v);
+    }
+    std::sort(ments.begin(), ments.end());
+    if (!letter.empty()) {
+        std::vector<std::pair<size_t, std::string>> keep;
+        for (const auto& m : ments)
+            if (service_kind(m.second) == letter) keep.push_back(m);
+        if (!keep.empty()) ments = keep;
+    }
+    if (ments.empty()) return "";
+    for (auto& m : ments)
+        if (m.second[0] >= 'a' && m.second[0] <= 'z') m.second[0] = static_cast<char>(m.second[0] - 'a' + 'A');
+    for (auto it = std::sregex_iterator(sec.begin(), sec.end(), fr ? so_fr : so_en); it != std::sregex_iterator(); ++it) {
+        const size_t pos = static_cast<size_t>(it->position(0));
+        const size_t dot = pos == 0 ? std::string::npos : sec.rfind('.', pos - 1);
+        const size_t a = dot == std::string::npos ? 0 : dot + 1;
+        const size_t b = std::min(sec.find('.', pos), sec.size());
+        for (const auto& m : ments)
+            if (m.first >= a && m.first <= b) return m.second;
+        // "... arrest by NRPS officers. The SIU named the SO ..." -- the sentence before names it
+        if (a > 0) {
+            const size_t pdot = a >= 2 ? sec.rfind('.', a - 2) : std::string::npos;
+            const size_t pa = pdot == std::string::npos ? 0 : pdot + 1;
+            for (const auto& m : ments)
+                if (m.first >= pa && m.first < a) return m.second;
+        }
+    }
+    std::map<std::string, int> counts;
+    for (const auto& m : ments) counts[m.second]++;
+    const std::pair<size_t, std::string>* best = nullptr;
+    for (const auto& m : ments)
+        if (!best || counts[m.second] > counts[best->second]) best = &m;
+    return best->second;
+}
+
+std::string detect_subject_service(const std::string& text, bool fr) {
+    static const std::regex legacy_en("Police service\\s*:\\s*(.+?)\\s+Incident date"),
+        legacy_fr("Service de police\\s*:\\s*(.+?)\\s+Date de l");
+    static const std::regex en_name(kEnName), fr_name(kFrName);
+    std::smatch m;
+    if (std::regex_search(text, m, fr ? legacy_fr : legacy_en)) {
+        const std::string h = trim(m[1].str());
+        for (auto it = std::sregex_iterator(text.begin(), text.end(), fr ? fr_name : en_name); it != std::sregex_iterator(); ++it) {
+            const std::string n = clean_service((*it)[1].str());
+            if (lower(n).find(lower(h)) != std::string::npos) return n;
+        }
+        return h;
+    }
+    static const std::regex case_no("\\b\\d\\d-([TPOI])[A-Z]{2}-\\d{3}\\b");
+    const std::string letter = std::regex_search(text, m, case_no) ? m[1].str() : "";
+    const std::string head = fr ? "analyse et d\xc3\xa9" "cision du directeur" : "analysis and director";
+    const size_t i = lower(text).rfind(head);
+    std::string r = i == std::string::npos ? "" : pick_service(text.substr(i), text, fr, letter);
+    return r.empty() ? pick_service(text, text, fr, letter) : r;
+}
+
 static std::string or_else(const std::string& a, const std::string& b) { return a.empty() ? b : a; }
 
 ParsedFields parse_report_text(const std::string& text) {
@@ -526,8 +661,9 @@ ParsedFields parse_report_text(const std::string& text) {
     f["_language"] = detect_language(text);
 
     const bool fr = f["_language"] == "fr";
-    f["police_service"] = fr ? or_else(detect_police_service_fr(text), detect_police_service(text))
-                             : detect_police_service(text);
+    f["police_service"] = or_else(detect_subject_service(text, fr),
+                                  fr ? or_else(detect_police_service_fr(text), detect_police_service(text))
+                                     : detect_police_service(text));
     f["date_of_incident_iso"] =
         to_iso_date(fr ? or_else(detect_incident_date_fr(text), detect_incident_date(text)) : detect_incident_date(text));
     f["date_siu_notified_iso"] =

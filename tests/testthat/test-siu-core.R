@@ -45,7 +45,7 @@ test_that("native and bricklayer engines agree", {
     "The SO declined an interview. WO #1 said a witness officer is not a subject official.",
     "In the SIU Director's opinion, a witness official is not a subject official.",
     "the two subject officials were interviewed",
-    "SO #1 and SO #3 were present")
+    "SO\u00a0#1 and SO\u00a0#3 were present")
   for (x in cases) {
     expect_equal(morie_siu_resolve_so(text = x, engine = "native"),
                  morie_siu_resolve_so(text = x, engine = "bricklayer"), info = x)
@@ -109,5 +109,39 @@ test_that("SO, subject officer and subject official count the same people in bot
       expect_identical(as.integer(morie_siu_resolve_so(txt, engine = engine)$count), 2L,
                        label = paste(engine, txt))
     }
+  }
+})
+
+test_that("police_service is the subject officials' service, not the notifying force, in both engines", {
+  page <- function(...) paste0("<html><body>", paste0("<p>", c(...), "</p>", collapse = ""), "</body></html>")
+  cases <- list(
+    list(page("The Lakeshore Police Service ( LPS ) notified the SIU of the injury.",
+              "Analysis and Director's Decision",
+              "The Complainant was hurt while in the custody of the LPS.",
+              "The SO of the Hillcrest Police Service was identified as the subject official."),
+         "Hillcrest Police Service"),
+    # the sentence before a subject-official sentence that names no service
+    list(page("The Lakeshore Police Service notified the SIU.", "Analysis and Director's Decision",
+              "The Complainant was arrested by Riverton Police Service officers.",
+              "The SO was identified as the subject official."),
+         "Riverton Police Service"),
+    # the case-number letter: P is the Ontario Provincial Police
+    list(page("Director's Report for Case # 21-PCI-500", "Analysis and Director's Decision",
+              "The SO of the Hillcrest Police Service assisted the OPP in the arrest."),
+         "Ontario Provincial Police"),
+    list(page("T\u00e9moins civils", "Agents impliqu\u00e9s", "Notification de l\u2019UES",
+              "La Police provinciale de l\u2019Ontario ( PPO ) a avis\u00e9 l\u2019UES de la blessure.",
+              "Analyse et d\u00e9cision du directeur",
+              "Un agent du Service de police de Rivi\u00e8reville, l\u2019AI , a \u00e9t\u00e9 d\u00e9sign\u00e9 comme agent impliqu\u00e9."),
+         "Service de police de Rivi\u00e8reville"),
+    # a legacy report's Police service header
+    list(page("File #: 10-OFD-900 Police service: Lakeshore Incident date: May 9, 2010",
+              "Notification of the SIU The Riverton Police Service notified the SIU.",
+              "Officers of the Lakeshore Police Service attended."),
+         "Lakeshore Police Service"))
+  for (cs in cases) {
+    expect_equal(morie_siu_parse_report(cs[[1]], engine = "native")[["police_service"]], cs[[2]])
+    skip_if_not(requireNamespace("rmoriebricklayer", quietly = TRUE))
+    expect_equal(morie_siu_parse_report(cs[[1]], engine = "bricklayer")[["police_service"]], cs[[2]])
   }
 })
