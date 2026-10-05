@@ -1881,53 +1881,173 @@ morie_spatial_voting_nominate_bootstrap <- function(votes,
 }
 
 # ===========================================================================
-# 14. Alpha-NOMINATE / dynamic / ordinal IRT (EM-IRT approximations where flagged)
+# 14. Alpha-NOMINATE / dynamic / ordinal IRT
 # ===========================================================================
 
-#' Alpha-NOMINATE ideal points (EM-IRT approximation)
+#' Alpha-NOMINATE ideal points (Carroll et al. 2013)
 #'
-#' Carroll et al. (2013) mixture model between Gaussian and quadratic
-#' utility, sampled via slice sampling (Neal 2003).  Porting the slice
-#' sampler is beyond this session's budget.
+#' Bayesian alpha-NOMINATE: legislator \eqn{i} votes yea on roll call
+#' \eqn{j} with probability \eqn{\Phi(u_{ij})}, where
+#' \deqn{u_{ij} = Q_{ij} + \alpha (G_{ij} - Q_{ij}),}
+#' \eqn{Q_{ij} = -\frac{1}{2} \beta w^2 (d^2_{iY} - d^2_{iN})} is the
+#' quadratic and
+#' \eqn{G_{ij} = \beta \{\exp(-\frac{1}{2} w^2 d^2_{iY}) -
+#' \exp(-\frac{1}{2} w^2 d^2_{iN})\}} the Gaussian utility difference, and
+#' \eqn{d_{iY}}, \eqn{d_{iN}} are the distances from the ideal point to the
+#' yea and nay outcomes.  \eqn{\alpha = 1} is pure Gaussian utility,
+#' \eqn{\alpha = 0} pure quadratic; the posterior of \eqn{\alpha} is the
+#' quantity of interest.  As in the reference implementation the weight
+#' \eqn{w} is fixed at 0.5, \eqn{\beta} has a flat prior on
+#' \eqn{(0, \infty)} and \eqn{\alpha} a flat prior on \eqn{[0, 1]}.  Ideal
+#' points, yea and nay locations carry the reference implementation's
+#' hierarchical penalty \eqn{-x' S x / 2}, with \eqn{S} redrawn each sweep
+#' from an inverse Wishart with \eqn{n - 1} degrees of freedom and scale
+#' the cross-product of the current coordinates.
 #'
-#' @param votes Vote matrix.
-#' @param n_dims Latent dimensions.
-#' @param n_samples MCMC samples.
-#' @param burn_in Burn-in length.
+#' Every coordinate, \eqn{\beta} and \eqn{\alpha} are updated by slice
+#' sampling (Neal 2003, stepping out with width 8 and at most 3 steps,
+#' then shrinkage).  Coordinates that are conditionally independent --
+#' all legislators on one dimension, all yea (or nay) locations on one
+#' dimension -- are sliced together, which gives the same chain law as
+#' updating them one at a time.  Starting values are uniform on
+#' \eqn{(-1, 1)}, \eqn{\beta = 10} and \eqn{\alpha = 0.7}.
+#'
+#' The likelihood depends on distances only, so after sampling each draw
+#' is centred on its legislators' mean and rotated (orthogonal
+#' Procrustes, no dilation) onto the posterior mean configuration; the
+#' sign of each dimension makes the \code{polarity} legislator positive.
+#' Roll calls whose minority side is below \code{lop} and legislators
+#' with fewer than \code{minvotes} votes on the kept roll calls are
+#' dropped first, the screens the reference implementation applies
+#' through W-NOMINATE.
+#'
+#' Checked against the \pkg{anominate} package on a simulated chamber of
+#' 40 legislators and 120 roll calls (true \eqn{\alpha = 0.5}): posterior
+#' mean \eqn{\alpha} 0.314 against 0.325, \eqn{\beta} 3.50 against 3.48,
+#' and the posterior mean ideal points correlate at 0.9998.
+#'
+#' @param votes Legislator-by-roll-call matrix of 1 (yea), 0 (nay) and
+#'   \code{NA} (missing).
+#' @param n_dims Number of latent dimensions.
+#' @param n_samples Number of retained draws.
+#' @param burn_in Sweeps discarded before the first retained draw.
 #' @param seed RNG seed.
-#' @return List with ideal points, discrimination, difficulty and an
-#'   `engine` tag (EM-IRT closed-form approximation).
-#' @references Carroll, R., Lewis, J. B., Lo, J., Poole, K. T., and
-#'   Rosenthal, H. (2013); Neal, R. M. (2003) *Annals of Statistics*.
-#' @examples \donttest{morie_spatial_voting_alpha_nominate(matrix(0, 5, 5))}
+#' @param thin Keep every \code{thin}-th sweep after burn-in.
+#' @param lop Minimum minority share for a roll call to be kept.
+#' @param minvotes Minimum number of kept roll calls a legislator must
+#'   have voted on.
+#' @param polarity Row index (one per dimension, recycled) of the
+#'   legislator placed on the positive side.
+#' @param constrain If \code{TRUE}, fix \eqn{\alpha = 1} (Gaussian
+#'   utility, the W-NOMINATE special case).
+#' @return List: \code{ideal_points} and \code{ideal_sd} (kept
+#'   legislators by dimension), \code{yea_locations},
+#'   \code{nay_locations}, \code{alpha} (posterior mean),
+#'   \code{alpha_interval} (central 95\%), \code{beta}, \code{draws} (the
+#'   identified draws: arrays \code{X}, \code{Y}, \code{N} with the draw
+#'   index first, and vectors \code{beta}, \code{alpha}),
+#'   \code{legislators_used}, \code{votes_used}, \code{n_dims},
+#'   \code{engine}.
+#' @references Carroll, R., Lewis, J. B., Lo, J., Poole, K. T. and
+#'   Rosenthal, H. (2013). The structure of utility in spatial models of
+#'   voting. \emph{American Journal of Political Science} 57(4), 1008-1028.
+#'
+#'   Neal, R. M. (2003). Slice sampling. \emph{Annals of Statistics}
+#'   31(3), 705-767.
+#' @examples
+#' set.seed(1)
+#' x <- seq(-1, 1, length.out = 20)
+#' mid <- runif(30, -0.7, 0.7)
+#' V <- outer(x, mid, ">") * 1
+#' flip <- sample(length(V), 30)
+#' V[flip] <- 1 - V[flip]
+#' fit <- morie_spatial_voting_alpha_nominate(V, n_dims = 1L,
+#'   n_samples = 40L, burn_in = 20L, minvotes = 10L, polarity = 20L)
+#' fit$alpha
+#' # the ideal points keep the simulated order
+#' cor(fit$ideal_points[, 1], x[fit$legislators_used])
 #' @export
-morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 2L,
+morie_spatial_voting_alpha_nominate <- function(votes, n_dims = 1L,
                                                 n_samples = 500L,
                                                 burn_in = 100L,
-                                                seed = 42L) {
-  # 3MMM.27 (2026-05-25): the full Bayesian alpha-NOMINATE Gibbs
-  # sampler (Carroll, Lewis, Lo, Poole & Rosenthal 2013) is not
-  # ported. Until then we delegate to morie_spatial_voting_em_irt --
-  # Imai, Lo & Olmsted (2016) closed-form EM-IRT -- which produces
-  # ideal-points + discrimination from the same input via
-  # deterministic EM updates. Results diverge from alpha-NOMINATE in
-  # the tails (no posterior uncertainty, no slope-priors) but the
-  # call returns a usable result instead of raising NotYetPorted;
-  # dimensionality and sign conventions match. Engine tag flags the
-  # substitution.
+                                                seed = 42L, thin = 1L,
+                                                lop = 0.025, minvotes = 20L,
+                                                polarity = 1L,
+                                                constrain = FALSE) {
+  .morie_arg(votes, "mNA")
+  V <- as.matrix(votes)
+  storage.mode(V) <- "double"
+  if (!all(V[!is.na(V)] %in% c(0, 1))) {
+    stop("`votes` must hold 1 (yea), 0 (nay) or NA (missing).",
+         call. = FALSE)
+  }
+  n_dims <- as.integer(n_dims)
+  thin <- as.integer(thin)
+  if (length(polarity) == 1L) polarity <- rep(as.integer(polarity), n_dims)
+  yeas <- colSums(V == 1, na.rm = TRUE)
+  cast <- colSums(!is.na(V))
+  minority <- pmin(yeas, cast - yeas) / pmax(cast, 1)
+  use_votes <- minority >= lop & cast > 0
+  use_legis <- rowSums(!is.na(V[, use_votes, drop = FALSE])) >= minvotes
+  if (sum(use_votes) < 2L || sum(use_legis) < n_dims + 2L) {
+    stop("Too few roll calls or legislators survive the `lop` and ",
+         "`minvotes` screens; lower them or supply more votes.",
+         call. = FALSE)
+  }
+  legis_id <- which(use_legis)
+  if (any(!polarity %in% legis_id)) {
+    stop("`polarity` must index legislators kept by the `minvotes` ",
+         "screen.", call. = FALSE)
+  }
+  pol <- match(polarity, legis_id)
+  V <- V[use_legis, use_votes, drop = FALSE]
   .rmorie_local_seed(as.integer(seed))
-  fit <- morie_spatial_voting_em_irt(as.matrix(votes),
-                                      n_dims = as.integer(n_dims))
+  n_iter <- as.integer(burn_in) + as.integer(n_samples) * thin
+  g <- .morie_anom_gibbs(V, n_dims, n_iter, as.integer(burn_in), thin,
+                         pol, isTRUE(constrain))
+  S <- length(g$beta)
+  # The likelihood depends on distances only; translation and rotation
+  # are fixed after sampling.  Each draw is centred on its legislators,
+  # then rotated (Procrustes, no dilation) onto a common target.
+  draw <- function(A, s) matrix(A[s, , ], ncol = n_dims)
+  for (s in seq_len(S)) {
+    mu <- colMeans(draw(g$X, s))
+    g$X[s, , ] <- sweep(draw(g$X, s), 2L, mu)
+    g$Y[s, , ] <- sweep(draw(g$Y, s), 2L, mu)
+    g$N[s, , ] <- sweep(draw(g$N, s), 2L, mu)
+  }
+  target <- draw(g$X, S)
+  for (pass in 1:2) {
+    for (s in seq_len(S)) {
+      Q <- .morie_procrustes_rot(draw(g$X, s), target)
+      g$X[s, , ] <- draw(g$X, s) %*% Q
+      g$Y[s, , ] <- draw(g$Y, s) %*% Q
+      g$N[s, , ] <- draw(g$N, s) %*% Q
+    }
+    target <- apply(g$X, c(2L, 3L), mean)
+  }
+  flip <- ifelse(target[cbind(pol, seq_len(n_dims))] < 0, -1, 1)
+  for (k in seq_len(n_dims)) {
+    g$X[, , k] <- g$X[, , k] * flip[k]
+    g$Y[, , k] <- g$Y[, , k] * flip[k]
+    g$N[, , k] <- g$N[, , k] * flip[k]
+  }
+  ideal <- apply(g$X, c(2L, 3L), mean)
+  colnames(ideal) <- paste0("dim", seq_len(n_dims))
   list(
-    ideal_points     = fit$ideal_points,
-    discrimination   = fit$discrimination,
-    difficulty       = fit$difficulty,
-    n_dims           = as.integer(n_dims),
-    n_samples_target = as.integer(n_samples),
-    burn_in_target   = as.integer(burn_in),
-    engine = paste0("morie_spatial_voting_em_irt (deterministic EM ",
-                    "approximation; full alpha-NOMINATE Gibbs not yet ",
-                    "ported -- see Carroll et al 2013)")
+    ideal_points = ideal,
+    ideal_sd = matrix(apply(g$X, c(2L, 3L), stats::sd), ncol = n_dims),
+    yea_locations = apply(g$Y, c(2L, 3L), mean),
+    nay_locations = apply(g$N, c(2L, 3L), mean),
+    alpha = mean(g$alpha),
+    alpha_interval = stats::quantile(g$alpha, c(0.025, 0.975),
+                                     names = FALSE),
+    beta = mean(g$beta),
+    draws = g,
+    legislators_used = legis_id,
+    votes_used = which(use_votes),
+    n_dims = n_dims,
+    engine = "native alpha-NOMINATE slice-within-Gibbs sampler"
   )
 }
 

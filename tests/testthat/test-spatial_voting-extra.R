@@ -181,14 +181,12 @@ test_that("morie_spatial_voting_nominate_bootstrap returns SE matrix", {
 test_that("morie_spatial_voting_alpha_nominate returns ideal-point matrix", {
   skip_heavy()
   V <- make_synthetic_vote_matrix(25L, 20L, 1L, seed = 73L)
-  out <- tryCatch(
-    morie_spatial_voting_alpha_nominate(V, n_dims = 1L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("alpha_nominate error: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_alpha_nominate(V, n_dims = 1L,
+                                             n_samples = 20L,
+                                             burn_in = 10L,
+                                             minvotes = 10L)
+  expect_true(is.matrix(out$ideal_points))
+  expect_identical(nrow(out$ideal_points), length(out$legislators_used))
 })
 
 # ----------------------------------------------------------------- Ordinal IRT

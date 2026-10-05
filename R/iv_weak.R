@@ -112,7 +112,11 @@ morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
   if (vcov == "cluster" && !length(cluster)) stop("vcov = \"cluster\" needs `cluster`", call. = FALSE)
   p <- .ivw_prepare(data, NULL, endogenous, instruments, exogenous,
                     if (vcov == "cluster") cluster)
-  n <- p$n; K <- p$K; k <- ncol(p$X); X <- p$X; Z <- p$Z
+  n <- p$n
+  K <- p$K
+  k <- ncol(p$X)
+  X <- p$X
+  Z <- p$Z
   if (K < k) stop("fewer excluded instruments than endogenous regressors", call. = FALSE)
   Qzz <- crossprod(Z) / n
   Qxx <- crossprod(X) / n
@@ -131,7 +135,8 @@ morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
   Vtheta <- Tm %*% S %*% t(Tm)
   q <- k - 1L
   sv <- svd(Theta, nu = K, nv = k)
-  u <- sv$u; v <- sv$v
+  u <- sv$u
+  v <- sv$v
   msqrt <- function(m) {
     e <- eigen(m, symmetric = TRUE)
     e$vectors %*% diag(sqrt(pmax(e$values, 0)), nrow(m)) %*% t(e$vectors)
@@ -283,7 +288,9 @@ morie_iv_montiel_olea_pflueger <- function(data, outcome, endogenous, instrument
   if (vcov == "cluster" && !length(cluster)) stop("vcov = \"cluster\" needs `cluster`", call. = FALSE)
   p <- .ivw_prepare(data, outcome, endogenous, instruments, exogenous,
                     if (vcov == "cluster") cluster)
-  n <- p$n; K <- p$K; L <- p$L
+  n <- p$n
+  K <- p$K
+  L <- p$L
   dof <- n - K - L - 1
   # orthonormal instruments, Z'Z = n I
   Q <- qr.Q(qr(p$Z)) * sqrt(n)

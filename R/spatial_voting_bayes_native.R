@@ -439,3 +439,159 @@
        beta = S_b / m, tau2 = S_t2 / m, periods = sort(unique(period)),
        n_samples = m, anchor = anchor)
 }
+
+# Alpha-NOMINATE (Carroll et al. 2013) slice-within-Gibbs sampler; see
+# morie_spatial_voting_alpha_nominate.
+
+# Vectorised slice sampler, Neal (2003) section 4 stepping-out and
+# shrinkage, run for a vector of conditionally independent coordinates at
+# once.  f maps a vector of candidates to a vector of log densities.
+.morie_slice_vec <- function(f, x0, w, m = 3L, lower = -Inf, upper = Inf) {
+  k <- length(x0)
+  y <- f(x0) - stats::rexp(k)
+  L <- x0 - w * stats::runif(k)
+  R <- L + w
+  L <- pmax(L, lower)
+  R <- pmin(R, upper)
+  J <- floor(m * stats::runif(k))
+  K <- (m - 1L) - J
+  repeat {
+    go <- J > 0 & L > lower
+    if (!any(go)) break
+    go[go] <- y[go] < f(L)[go]
+    if (!any(go)) break
+    L[go] <- pmax(L[go] - w, lower)
+    J[go] <- J[go] - 1
+  }
+  repeat {
+    go <- K > 0 & R < upper
+    if (!any(go)) break
+    go[go] <- y[go] < f(R)[go]
+    if (!any(go)) break
+    R[go] <- pmin(R[go] + w, upper)
+    K[go] <- K[go] - 1
+  }
+  x <- x0
+  todo <- rep(TRUE, k)
+  for (it in seq_len(200L)) {
+    cand <- x0
+    cand[todo] <- L[todo] + stats::runif(sum(todo)) * (R[todo] - L[todo])
+    ok <- todo & f(cand) > y
+    x[ok] <- cand[ok]
+    todo <- todo & !ok
+    if (!any(todo)) break
+    lo <- todo & cand < x0
+    hi <- todo & cand >= x0
+    L[lo] <- cand[lo]
+    R[hi] <- cand[hi]
+  }
+  x
+}
+
+# Squared distances between the rows of A (n x d) and B (m x d), n x m.
+.morie_sqdist <- function(A, B) {
+  out <- 0
+  for (k in seq_len(ncol(A))) out <- out + outer(A[, k], B[, k], "-")^2
+  out
+}
+
+# Log Pr(observed vote) cell by cell for alpha-NOMINATE, with the
+# utility weight fixed at 0.5 as in Carroll et al. (2013).  Missing
+# votes contribute zero.
+.morie_anom_ll <- function(V, dY, dN, beta, alpha) {
+  w2 <- 0.25
+  quad <- -0.5 * beta * w2 * (dY - dN)
+  nom <- beta * (exp(-0.5 * w2 * dY) - exp(-0.5 * w2 * dN))
+  u <- quad + alpha * (nom - quad)
+  ll <- stats::pnorm(ifelse(V == 1, u, -u), log.p = TRUE)
+  ll[is.na(V)] <- 0
+  ll
+}
+
+.morie_riwish <- function(v, S) {
+  solve(stats::rWishart(1L, v, solve(S))[, , 1L])
+}
+
+# Orthogonal Procrustes rotation of X onto target T.
+.morie_procrustes_rot <- function(X, T) {
+  s <- svd(crossprod(X, T))
+  s$u %*% t(s$v)
+}
+
+.morie_anom_gibbs <- function(V, n_dims, n_iter, burn_in, thin, polarity,
+                              constrain) {
+  n <- nrow(V)
+  m <- ncol(V)
+  d <- n_dims
+  X <- matrix(stats::runif(n * d, -1, 1), n, d)
+  for (k in seq_len(d)) X[polarity[k], k] <- abs(X[polarity[k], k])
+  Y <- matrix(stats::runif(m * d, -1, 1), m, d)
+  N <- matrix(stats::runif(m * d, -1, 1), m, d)
+  beta <- 10
+  alpha <- if (constrain) 1 else 0.7
+  keep <- seq.int(burn_in + thin, n_iter, by = thin)
+  S <- length(keep)
+  dX <- array(NA_real_, c(S, n, d))
+  dY <- dN <- array(NA_real_, c(S, m, d))
+  dbeta <- dalpha <- numeric(S)
+  quad <- function(Z, P) rowSums((Z %*% P) * Z)
+  s <- 0L
+  for (it in seq_len(n_iter)) {
+    Sx <- .morie_riwish(n - 1, crossprod(X))
+    Sy <- .morie_riwish(m - 1, crossprod(Y))
+    Sn <- .morie_riwish(m - 1, crossprod(N))
+    DN <- .morie_sqdist(X, N)
+    for (k in seq_len(d)) {
+      base <- .morie_sqdist(X, Y) - outer(X[, k], Y[, k], "-")^2
+      f <- function(v) {
+        Z <- Y
+        Z[, k] <- v
+        DY <- base + outer(X[, k], v, "-")^2
+        colSums(.morie_anom_ll(V, DY, DN, beta, alpha)) - quad(Z, Sy) / 2
+      }
+      Y[, k] <- .morie_slice_vec(f, Y[, k], 8)
+    }
+    DY <- .morie_sqdist(X, Y)
+    for (k in seq_len(d)) {
+      base <- .morie_sqdist(X, N) - outer(X[, k], N[, k], "-")^2
+      f <- function(v) {
+        Z <- N
+        Z[, k] <- v
+        DNc <- base + outer(X[, k], v, "-")^2
+        colSums(.morie_anom_ll(V, DY, DNc, beta, alpha)) - quad(Z, Sn) / 2
+      }
+      N[, k] <- .morie_slice_vec(f, N[, k], 8)
+    }
+    for (k in seq_len(d)) {
+      bY <- .morie_sqdist(X, Y) - outer(X[, k], Y[, k], "-")^2
+      bN <- .morie_sqdist(X, N) - outer(X[, k], N[, k], "-")^2
+      f <- function(v) {
+        Z <- X
+        Z[, k] <- v
+        DYc <- bY + outer(v, Y[, k], "-")^2
+        DNc <- bN + outer(v, N[, k], "-")^2
+        rowSums(.morie_anom_ll(V, DYc, DNc, beta, alpha)) - quad(Z, Sx) / 2
+      }
+      X[, k] <- .morie_slice_vec(f, X[, k], 8)
+    }
+    DY <- .morie_sqdist(X, Y)
+    DN <- .morie_sqdist(X, N)
+    beta <- .morie_slice_vec(function(b) {
+      vapply(b, function(bb) sum(.morie_anom_ll(V, DY, DN, bb, alpha)), 0)
+    }, beta, 8, lower = 0)
+    if (!constrain) {
+      alpha <- .morie_slice_vec(function(a) {
+        vapply(a, function(aa) sum(.morie_anom_ll(V, DY, DN, beta, aa)), 0)
+      }, alpha, 8, lower = 0, upper = 1)
+    }
+    if (it %in% keep) {
+      s <- s + 1L
+      dX[s, , ] <- X
+      dY[s, , ] <- Y
+      dN[s, , ] <- N
+      dbeta[s] <- beta
+      dalpha[s] <- alpha
+    }
+  }
+  list(X = dX, Y = dY, N = dN, beta = dbeta, alpha = dalpha)
+}
