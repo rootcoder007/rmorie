@@ -216,7 +216,7 @@ rKL <- function(protected, step = 10, normalize = TRUE) {
 #' rRD(prot, step = 10)
 #' @keywords internal
 rRD <- function(protected, step = 10, normalize = TRUE) {
-  .morie_arg(protected, "lg")
+  .morie_arg(protected, "n")
   # Normalised discounted ratio. Only meaningful when the protected
   # group is the minority -- it does not treat the two groups
   # symmetrically.

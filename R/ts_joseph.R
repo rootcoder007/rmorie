@@ -1243,10 +1243,13 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
 #' @param gamma step size
 #' @return list(alpha, final, empirical, target, gamma, n, minalpha,
 #'   maxalpha)
-#' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_aci(V)
+#' # coverage indicators of a forecaster that covers about 88% of the time
+#' set.seed(1)
+#' inside <- runif(300) > 0.12
+#' r <- morie_aci(inside, alpha = 0.1, gamma = 0.01)
+#' c(r$empirical, r$final)
+#' @export
 morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
   .morie_arg(inside, "lg")
   seqv <- as.logical(inside)

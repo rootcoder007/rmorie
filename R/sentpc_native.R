@@ -38,9 +38,11 @@ morie_sentpc_escape_whitespace <- function(text, add_prefix = TRUE) {
 #' @param text Character.
 #' @param strip_prefix Logical; remove the leading marker if present.
 #' @return Character.
-#' @export
 #' @examples
-#' morie_sentpc_unescape_whitespace(text = 5L)
+#' esc <- morie_sentpc_escape_whitespace("hello world")
+#' esc
+#' morie_sentpc_unescape_whitespace(esc)
+#' @export
 #' @keywords internal
 morie_sentpc_unescape_whitespace <- function(text,
                                               strip_prefix = TRUE) {

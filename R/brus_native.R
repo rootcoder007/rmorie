@@ -283,14 +283,17 @@ morie_model_assisted <- function(m_all = NULL, z_sample = NULL,
 #' @param n_population See Usage.
 #' @return List with s2_e, variance, g_weight, g_variance, ratio_variance,
 #'   mc_variance (as supplied).
-#' @export
 #' @examples
-#' morie_greg_variance()
+#' # variance of a GREG total from 20 sampled residuals out of N = 500
+#' set.seed(1)
+#' e <- rnorm(20)
+#' morie_greg_variance(e, n = 20, n_population = 500)$variance
+#' @export
 morie_greg_variance <- function(e = NULL, n = NA, n_population = NA,
                                 x_k = NA, xbar_true = NA, xbar_sample = NA,
                                 s2_x = NA, g = NULL, pi = NULL,
                                 ratio = FALSE) {
-  .morie_arg(e, "n")
+  if (!is.null(e)) .morie_arg(e, "n")
   out <- list()
   if (!is.null(e)) {
     ev <- as.numeric(e)

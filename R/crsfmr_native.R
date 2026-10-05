@@ -210,9 +210,13 @@ morie_crsfmr_cross_dimension_stage <- function(Z, router = NULL,
 #' @param router Optional list of router vectors.
 #' @return A list with \code{output}, \code{cross_time} and the
 #'   operation counts.
-#' @export
 #' @examples
-#' morie_crsfmr_two_stage_attention(Z = 5L)
+#' # 4 time segments of 3 series, each embedded in 2 dimensions
+#' set.seed(1)
+#' Z <- lapply(1:4, function(t) lapply(1:3, function(d) rnorm(2)))
+#' r <- morie_crsfmr_two_stage_attention(Z, n_router = 2)
+#' r$complexity
+#' @export
 #' @keywords internal
 morie_crsfmr_two_stage_attention <- function(Z, n_router = NULL,
                                              router = NULL) {

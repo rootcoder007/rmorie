@@ -2171,10 +2171,11 @@ morie_geron_t5_restore <- function(inputs, target) {
 #' @param noise_density,mean_span,seed,prefix As in the Python original.
 #' @return list with encoder_input, decoder_target, spans, restored, lossless,
 #'   n_masked, sentinels, text_to_text, estimate, n, method.
-#' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' morie_geron_t5(V)
+#' r <- morie_geron_t5("the quick brown fox jumps over the lazy dog")
+#' r$encoder_input
+#' r$lossless
+#' @export
 morie_geron_t5 <- function(src, tgt = NULL, noise_density = 0.15, mean_span = 3, seed = 0,
                            prefix = "translate:") {
   .morie_arg(src, "c")

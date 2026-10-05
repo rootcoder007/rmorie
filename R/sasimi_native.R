@@ -327,13 +327,14 @@ sasimi_similarity_matrix <- function(fps, coefficient = "tanimoto") {
 #' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @return The value of \code{result}, as built in the body.
-#' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' sasimi_nearest_neighbours(V, V)
+#' # fingerprints as on-bit indices; the query's own copy ranks first
+#' fps <- list(c(1, 4, 7, 9), c(1, 4, 8), c(2, 3), c(1, 4, 7))
+#' sasimi_nearest_neighbours(c(1, 4, 7, 9), fps, k = 2)
+#' @export
 #' @keywords internal
 sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimoto") {
-  .morie_arg(query, "c1")
+  .morie_arg(query, "n")
   if (as.integer(k) < 1L) {
     stop("sasimi: k must be at least 1")
   }

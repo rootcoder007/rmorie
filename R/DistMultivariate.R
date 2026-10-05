@@ -25,7 +25,7 @@
 #' MvNormDens(c(0, 0))$pdf
 #' @export
 MvNormDens <- function(x = NULL, mean = c(0, 0), cov = diag(2), n = 0, seed = 0) {
-  .morie_arg(x, "n")
+  if (!is.null(x)) .morie_arg(x, "n")
   d <- length(mean)
   L <- t(chol(cov))
   ld <- 2 * sum(log(diag(L)))
