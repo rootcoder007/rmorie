@@ -195,14 +195,10 @@ test_that("morie_spatial_voting_ordinal_irt runs on ordinal vote-like data", {
   skip_heavy()
   set.seed(81L)
   Y <- matrix(sample.int(4L, 20L * 15L, replace = TRUE), 20L, 15L)
-  out <- tryCatch(
-    morie_spatial_voting_ordinal_irt(Y, n_dims = 1L),
-    error = function(e) e
-  )
-  if (inherits(out, "error")) {
-    skip(sprintf("ordinal_irt error: %s", conditionMessage(out)))
-  }
-  expect_true(is.list(out) || is.matrix(out))
+  out <- morie_spatial_voting_ordinal_irt(Y, n_dims = 1L, n_samples = 30L,
+                                          burn_in = 10L)
+  expect_equal(dim(out$ideal_points), c(20L, 1L))
+  expect_length(out$cutpoints, 15L)
 })
 
 # ----------------------------------------------------------------- Dynamic IRT

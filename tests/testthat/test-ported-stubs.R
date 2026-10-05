@@ -139,6 +139,6 @@ test_that("native ordinal IRT recovers latent ideal-point ordering", {
   Y3 <- matrix(cut(eta + rnorm(480), c(-Inf, -0.5, 0.5, Inf),
                    labels = FALSE), 40, 12)
   f <- .morie_sv_bayes_ordinal(Y3, n_samples = 200L, burn_in = 100L)
-  expect_gt(abs(stats::cor(f$ideal_points, th, method = "spearman")),
+  expect_gt(abs(stats::cor(f$ideal_points[, 1], th, method = "spearman")),
             0.7)
 })

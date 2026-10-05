@@ -367,88 +367,147 @@
        engine = "native Albert-Chib Gibbs (CJR IRT)")
 }
 
-# --- Ordinal IRT (graded probit, Albert-Chib + cutpoint MH) -----------------
+# --- Ordinal IRT / factor model (Quinn 2004) ---------------------------------
+# y*_ij = lambda_j0 + lambda_j' phi_i + e_ij, e ~ N(0, 1), and
+# y_ij = c when gamma_j,c-1 < y*_ij <= gamma_j,c, with gamma_j0 = -Inf,
+# gamma_j1 = 0, gamma_jC = Inf; phi_i ~ N(0, I); lambda_j ~ N(0, I / L0)
+# (L0 = 0, the default, is the flat prior of MCMCpack::MCMCordfactanal);
+# flat prior on the free cutpoints.  Each sweep: the free cutpoints of
+# every item by the Cowles (1996) Metropolis-Hastings step with y*
+# integrated out, then y* from truncated normals, lambda_j and phi_i from
+# their Gaussian full conditionals.
 #' Internal helper: native ordinal IRT sampler
 #' @noRd
-.morie_sv_bayes_ordinal <- function(votes, n_samples = 1000L,
-                                    burn_in = 200L) {
-  Y <- as.matrix(votes)
+.morie_sv_bayes_ordinal <- function(Y, n_dims = 1L, n_samples = 1000L,
+                                    burn_in = 200L, L0 = 0) {
+  Y <- as.matrix(Y)
   n <- nrow(Y)
-  m <- ncol(Y)
-  obs <- is.finite(Y)
-  K <- max(Y[obs])
-  if (K < 2L) stop("ordinal IRT needs at least two categories.",
-                   call. = FALSE)
-  # shared cutpoints c_1 < ... < c_{K-1}; c_1 fixed at 0 for scale
-  cuts <- stats::qnorm(seq_len(K - 1L) / K)
-  cuts <- cuts - cuts[1]
-  x <- as.numeric(scale(rowMeans(Y, na.rm = TRUE)))
-  x[!is.finite(x)] <- 0
-  alpha <- rep(0, m)
-  beta <- rep(1, m)
-  keep_x <- matrix(0, n_samples, n)
-  rtnorm_ab <- function(mu, lo, hi) {
-    p_lo <- stats::pnorm(lo - mu)
-    p_hi <- stats::pnorm(hi - mu)
-    stats::qnorm(p_lo + stats::runif(length(mu)) *
-                   pmax(p_hi - p_lo, 1e-12)) + mu
+  J <- ncol(Y)
+  D <- as.integer(n_dims)
+  obs <- !is.na(Y)
+  # recode every item to 1..K_j by the order of its observed values
+  ncat <- integer(J)
+  for (j in seq_len(J)) {
+    lv <- sort(unique(Y[obs[, j], j]))
+    Y[, j] <- match(Y[, j], lv)
+    ncat[j] <- length(lv)
   }
-  bnd <- c(-Inf, cuts, Inf)
+  if (any(ncat < 2L)) {
+    stop("Every item needs at least two observed categories.",
+         call. = FALSE)
+  }
+  gam <- lapply(ncat, function(k) {
+    c(-Inf, 0, if (k > 2L) seq_len(k - 2L) * 0.5, Inf)
+  })
+  tune <- 0.05 / ncat
+  acc <- numeric(J)
+  # start from the leading principal components of the mean-filled data
+  M <- Y
+  M[!obs] <- colMeans(Y, na.rm = TRUE)[col(M)][!obs]
+  M <- M + matrix(stats::rnorm(n * J, 0, 1e-6), n, J)
+  phi <- scale(stats::prcomp(M, rank. = D)$x[, seq_len(D), drop = FALSE])
+  Lam <- matrix(0, J, D + 1L)
+  lo <- hi <- matrix(0, n, J)
+  bounds <- function() {
+    for (j in seq_len(J)) {
+      o <- obs[, j]
+      lo[o, j] <<- gam[[j]][Y[o, j]]
+      hi[o, j] <<- gam[[j]][Y[o, j] + 1L]
+    }
+  }
+  bounds()
+  ystar <- matrix(0, n, J)
+  keep_phi <- array(NA_real_, c(n_samples, n, D))
+  keep_lam <- array(NA_real_, c(n_samples, J, D + 1L))
+  gsum <- lapply(gam, function(g) 0 * g[2:(length(g) - 1L)])
   for (it in seq_len(burn_in + n_samples)) {
-    mu <- outer(x, beta) - matrix(alpha, n, m, byrow = TRUE)
-    Ystar <- matrix(0, n, m)
-    for (k in seq_len(K)) {
-      sel <- obs & Y == k
-      if (!any(sel)) next
-      Ystar[sel] <- rtnorm_ab(mu[sel], bnd[k], bnd[k + 1L])
-    }
-    for (j in seq_len(m)) {
-      i <- which(obs[, j])
-      Xr <- cbind(-1, x[i])
-      V <- solve(crossprod(Xr) + diag(0.04, 2))
-      mu_j <- V %*% crossprod(Xr, Ystar[i, j])
-      ab <- as.numeric(mu_j + t(chol(V)) %*% stats::rnorm(2))
-      alpha[j] <- ab[1]
-      beta[j] <- ab[2]
-    }
-    for (i in seq_len(n)) {
-      j <- which(obs[i, ])
-      prec <- sum(beta[j]^2) + 1
-      mu_i <- sum(beta[j] * (Ystar[i, j] + alpha[j])) / prec
-      x[i] <- stats::rnorm(1, mu_i, sqrt(1 / prec))
-    }
-    x <- as.numeric(scale(x))
-    # cutpoint MH (skip the fixed first cut)
-    if (K > 2L) {
-      for (k in 2:(K - 1L)) {
-        prop <- cuts
-        prop[k] <- stats::rnorm(1, cuts[k], 0.05)
-        if (prop[k] <= prop[k - 1L] ||
-            (k < K - 1L && prop[k] >= cuts[k + 1L])) next
-        mu_o <- outer(x, beta) - matrix(alpha, n, m, byrow = TRUE)
-        llk <- function(cts) {
-          b <- c(-Inf, cts, Inf)
-          s <- 0
-          for (kk in seq_len(K)) {
-            sel <- obs & Y == kk
-            if (!any(sel)) next
-            s <- s + sum(log(pmax(
-              stats::pnorm(b[kk + 1L] - mu_o[sel]) -
-                stats::pnorm(b[kk] - mu_o[sel]), 1e-12)))
-          }
-          s
-        }
-        if (log(stats::runif(1)) < llk(prop) - llk(cuts)) cuts <- prop
-        bnd <- c(-Inf, cuts, Inf)
+    mu <- cbind(1, phi) %*% t(Lam)
+    for (j in which(ncat > 2L)) {
+      g <- gam[[j]]
+      gp <- g
+      k <- ncat[j]
+      for (cc in 3:k) {
+        gp[cc] <- .morie_rtnorm(g[cc], tune[j], gp[cc - 1L], g[cc + 1L])
+      }
+      o <- obs[, j]
+      y <- Y[o, j]
+      m <- mu[o, j]
+      ll <- function(gg) {
+        sum(log(pmax(stats::pnorm(gg[y + 1L] - m) - stats::pnorm(gg[y] - m),
+                     1e-300)))
+      }
+      # proposal-density correction for the truncated proposals
+      cc <- 3:k
+      corr <- sum(log(stats::pnorm((g[cc + 1L] - g[cc]) / tune[j]) -
+                        stats::pnorm((gp[cc - 1L] - g[cc]) / tune[j]))) -
+        sum(log(stats::pnorm((gp[cc + 1L] - gp[cc]) / tune[j]) -
+                  stats::pnorm((g[cc - 1L] - gp[cc]) / tune[j])))
+      if (log(stats::runif(1L)) < ll(gp) - ll(g) + corr) {
+        gam[[j]] <- gp
+        acc[j] <- acc[j] + 1
       }
     }
-    if (it > burn_in) keep_x[it - burn_in, ] <- x
+    if (it <= burn_in && it %% 50L == 0L) {
+      rate <- acc / 50
+      tune <- tune * ifelse(rate < 0.2, 0.7, ifelse(rate > 0.5, 1.4, 1))
+      acc[] <- 0
+    }
+    if (it == burn_in) acc[] <- 0
+    bounds()
+    ystar[obs] <- .morie_rtnorm(mu[obs], 1, lo[obs], hi[obs])
+    Xd <- cbind(1, phi)
+    for (j in seq_len(J)) {
+      o <- obs[, j]
+      Xo <- Xd[o, , drop = FALSE]
+      V <- solve(crossprod(Xo) + diag(L0, D + 1L))
+      Lam[j, ] <- as.numeric(V %*% crossprod(Xo, ystar[o, j]) +
+                               t(chol(V)) %*% stats::rnorm(D + 1L))
+    }
+    B <- Lam[, -1L, drop = FALSE]
+    R <- ystar - matrix(Lam[, 1L], n, J, byrow = TRUE)
+    full <- rowSums(obs) == J
+    if (any(full)) {
+      W <- solve(diag(1, D) + crossprod(B))
+      phi[full, ] <- R[full, , drop = FALSE] %*% B %*% W +
+        matrix(stats::rnorm(sum(full) * D), sum(full), D) %*% chol(W)
+    }
+    for (i in which(!full)) {
+      o <- obs[i, ]
+      Bo <- B[o, , drop = FALSE]
+      W <- solve(diag(1, D) + crossprod(Bo))
+      phi[i, ] <- as.numeric(W %*% crossprod(Bo, R[i, o]) +
+                               t(chol(W)) %*% stats::rnorm(D))
+    }
+    if (it > burn_in) {
+      keep_phi[it - burn_in, , ] <- phi
+      keep_lam[it - burn_in, , ] <- Lam
+      for (j in seq_len(J)) {
+        gsum[[j]] <- gsum[[j]] + gam[[j]][2:ncat[j]]
+      }
+    }
   }
-  list(ideal_points = colMeans(keep_x),
-       ideal_sd = apply(keep_x, 2, stats::sd),
-       discrimination = beta, difficulty = alpha, cutpoints = cuts,
-       n_samples = n_samples,
-       engine = "native Albert-Chib Gibbs (ordinal probit IRT)")
+  # Reflection (and, with several factors, rotation) leaves the
+  # likelihood and the N(0, I) prior unchanged; fix it after sampling.
+  for (s in seq_len(n_samples)) {
+    P <- matrix(keep_phi[s, , ], n, D)
+    L <- matrix(keep_lam[s, , -1L], J, D)
+    if (D == 1L) {
+      Q <- matrix(if (L[1, 1] < 0) -1 else 1, 1, 1)
+    } else {
+      Q <- if (s == 1L) diag(D) else
+        .morie_procrustes_rot(P, matrix(keep_phi[1L, , ], n, D))
+    }
+    keep_phi[s, , ] <- P %*% Q
+    keep_lam[s, , -1L] <- L %*% Q
+  }
+  list(ideal_points = matrix(apply(keep_phi, c(2L, 3L), mean), n, D),
+       ideal_sd = matrix(apply(keep_phi, c(2L, 3L), stats::sd), n, D),
+       discrimination = matrix(apply(keep_lam[, , -1L, drop = FALSE],
+                                     c(2L, 3L), mean), J, D),
+       intercept = colMeans(keep_lam[, , 1L, drop = FALSE])[, 1L],
+       cutpoints = lapply(gsum, function(g) g / n_samples),
+       acceptance = acc / n_samples, n_samples = n_samples,
+       engine = "native Gibbs with Cowles cutpoint steps (Quinn 2004)")
 }
 
 # Martin and Quinn (2002) dynamic one-dimensional IRT by Gibbs sampling, the
